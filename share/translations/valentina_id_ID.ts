@@ -3052,10 +3052,6 @@ Apply settings anyway?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Each point in the path must be unique!</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Marks</source>
         <translation type="unfinished"></translation>
     </message>
@@ -3081,6 +3077,10 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Intersection</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Each point in the &lt;b&gt;custom seam allowance&lt;/b&gt; path must be unique!</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -6009,49 +6009,6 @@ Apakah anda ingin menyimpan perubahan anda?</translation>
     </message>
     <message>
         <source>Hide main path</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>QCommandLineParser</name>
-    <message>
-        <source>Displays version information.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Displays this help.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Unknown option &apos;%1&apos;.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Unknown options: %1.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Missing value after &apos;%1&apos;.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Unexpected value after &apos;%1&apos;.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>[options]</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Usage: %1</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Options:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Arguments:</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

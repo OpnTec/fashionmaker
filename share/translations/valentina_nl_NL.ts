@@ -3822,7 +3822,7 @@ Toch de instellingen aanpassen?</translation>
     </message>
     <message>
         <source>Each point in the path must be unique!</source>
-        <translation>Elk punt in het pad moet uniek zijn!</translation>
+        <translation type="vanished">Elk punt in het pad moet uniek zijn!</translation>
     </message>
     <message>
         <source>Marks</source>
@@ -3851,6 +3851,10 @@ Toch de instellingen aanpassen?</translation>
     <message>
         <source>Intersection</source>
         <translation>Kruispunt van lijnen</translation>
+    </message>
+    <message>
+        <source>Each point in the &lt;b&gt;custom seam allowance&lt;/b&gt; path must be unique!</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -7382,43 +7386,43 @@ Do you want to save your changes?</source>
     <name>QCommandLineParser</name>
     <message>
         <source>Displays version information.</source>
-        <translation>Toont versie informatie.</translation>
+        <translation type="vanished">Toont versie informatie.</translation>
     </message>
     <message>
         <source>Displays this help.</source>
-        <translation>Toont deze Help.</translation>
+        <translation type="vanished">Toont deze Help.</translation>
     </message>
     <message>
         <source>Unknown option &apos;%1&apos;.</source>
-        <translation>Onbekende optie &apos;%1&apos;.</translation>
+        <translation type="vanished">Onbekende optie &apos;%1&apos;.</translation>
     </message>
     <message>
         <source>Unknown options: %1.</source>
-        <translation>Onbekende opties: %1.</translation>
+        <translation type="vanished">Onbekende opties: %1.</translation>
     </message>
     <message>
         <source>Missing value after &apos;%1&apos;.</source>
-        <translation>Ontbrekende waarde na &apos;%1&apos;.</translation>
+        <translation type="vanished">Ontbrekende waarde na &apos;%1&apos;.</translation>
     </message>
     <message>
         <source>Unexpected value after &apos;%1&apos;.</source>
-        <translation>Onverwachte waarde na &apos;%1&apos;.</translation>
+        <translation type="vanished">Onverwachte waarde na &apos;%1&apos;.</translation>
     </message>
     <message>
         <source>[options]</source>
-        <translation>[opties]</translation>
+        <translation type="vanished">[opties]</translation>
     </message>
     <message>
         <source>Usage: %1</source>
-        <translation>Verbruik: %1</translation>
+        <translation type="vanished">Verbruik: %1</translation>
     </message>
     <message>
         <source>Options:</source>
-        <translation>Opties:</translation>
+        <translation type="vanished">Opties:</translation>
     </message>
     <message>
         <source>Arguments:</source>
-        <translation>Argumenten:</translation>
+        <translation type="vanished">Argumenten:</translation>
     </message>
 </context>
 <context>

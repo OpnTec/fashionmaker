@@ -3743,7 +3743,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Each point in the path must be unique!</source>
-        <translation>Κάθε σημείο στο μονοπάτι πρέπει να είναι μοναδικό!</translation>
+        <translation type="vanished">Κάθε σημείο στο μονοπάτι πρέπει να είναι μοναδικό!</translation>
     </message>
     <message>
         <source>Marks</source>
@@ -3772,6 +3772,10 @@ Apply settings anyway?</source>
     <message>
         <source>Intersection</source>
         <translation>Διατομή</translation>
+    </message>
+    <message>
+        <source>Each point in the &lt;b&gt;custom seam allowance&lt;/b&gt; path must be unique!</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -7189,43 +7193,31 @@ Do you want to save your changes?</source>
     <name>QCommandLineParser</name>
     <message>
         <source>Displays version information.</source>
-        <translation>Εμφάνιση πληροφοριών έκδοσης.</translation>
+        <translation type="vanished">Εμφάνιση πληροφοριών έκδοσης.</translation>
     </message>
     <message>
         <source>Displays this help.</source>
-        <translation>Εμφάνιση της βοήθειας.</translation>
+        <translation type="vanished">Εμφάνιση της βοήθειας.</translation>
     </message>
     <message>
         <source>Unknown option &apos;%1&apos;.</source>
-        <translation>Άγνωστη επιλογή &apos;%1&apos;.</translation>
+        <translation type="vanished">Άγνωστη επιλογή &apos;%1&apos;.</translation>
     </message>
     <message>
         <source>Unknown options: %1.</source>
-        <translation>Άγνωστες επιλογές: %1.</translation>
-    </message>
-    <message>
-        <source>Missing value after &apos;%1&apos;.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Unexpected value after &apos;%1&apos;.</source>
-        <translation type="unfinished"></translation>
+        <translation type="vanished">Άγνωστες επιλογές: %1.</translation>
     </message>
     <message>
         <source>[options]</source>
-        <translation>[επιλογές]</translation>
+        <translation type="vanished">[επιλογές]</translation>
     </message>
     <message>
         <source>Usage: %1</source>
-        <translation>Χρήση: %1</translation>
+        <translation type="vanished">Χρήση: %1</translation>
     </message>
     <message>
         <source>Options:</source>
-        <translation>Επιλογές:</translation>
-    </message>
-    <message>
-        <source>Arguments:</source>
-        <translation type="unfinished"></translation>
+        <translation type="vanished">Επιλογές:</translation>
     </message>
 </context>
 <context>

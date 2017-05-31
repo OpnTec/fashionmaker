@@ -3680,10 +3680,6 @@ Einstellungen trotzdem anwenden?</translation>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Each point in the path must be unique!</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Marks</source>
         <translation type="unfinished"></translation>
     </message>
@@ -3709,6 +3705,10 @@ Einstellungen trotzdem anwenden?</translation>
     </message>
     <message>
         <source>Intersection</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Each point in the &lt;b&gt;custom seam allowance&lt;/b&gt; path must be unique!</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -7206,43 +7206,43 @@ Sollen die Änderungen gespeichert werden?</translation>
     <name>QCommandLineParser</name>
     <message>
         <source>Displays version information.</source>
-        <translation>Zeigt Versionsinformationen an.</translation>
+        <translation type="vanished">Zeigt Versionsinformationen an.</translation>
     </message>
     <message>
         <source>Displays this help.</source>
-        <translation>Zeigt diese Hilfe.</translation>
+        <translation type="vanished">Zeigt diese Hilfe.</translation>
     </message>
     <message>
         <source>Unknown option &apos;%1&apos;.</source>
-        <translation>Unbekannte Option &apos;%1&apos;.</translation>
+        <translation type="vanished">Unbekannte Option &apos;%1&apos;.</translation>
     </message>
     <message>
         <source>Unknown options: %1.</source>
-        <translation>Unbekannte Optionen: &apos;%1&apos;.</translation>
+        <translation type="vanished">Unbekannte Optionen: &apos;%1&apos;.</translation>
     </message>
     <message>
         <source>Missing value after &apos;%1&apos;.</source>
-        <translation>Fehlender Wert nach &quot;%1&quot;.</translation>
+        <translation type="vanished">Fehlender Wert nach &quot;%1&quot;.</translation>
     </message>
     <message>
         <source>Unexpected value after &apos;%1&apos;.</source>
-        <translation>Unerwarteter Wert nach &quot;%1&quot;.</translation>
+        <translation type="vanished">Unerwarteter Wert nach &quot;%1&quot;.</translation>
     </message>
     <message>
         <source>[options]</source>
-        <translation>[optionen]</translation>
+        <translation type="vanished">[optionen]</translation>
     </message>
     <message>
         <source>Usage: %1</source>
-        <translation>Verwendung: %1</translation>
+        <translation type="vanished">Verwendung: %1</translation>
     </message>
     <message>
         <source>Options:</source>
-        <translation>Optionen:</translation>
+        <translation type="vanished">Optionen:</translation>
     </message>
     <message>
         <source>Arguments:</source>
-        <translation>Argumente:</translation>
+        <translation type="vanished">Argumente:</translation>
     </message>
 </context>
 <context>

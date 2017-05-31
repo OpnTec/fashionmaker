@@ -3829,10 +3829,6 @@ Apply settings anyway?</translation>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Each point in the path must be unique!</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Marks</source>
         <translation type="unfinished"></translation>
     </message>
@@ -3858,6 +3854,10 @@ Apply settings anyway?</translation>
     </message>
     <message>
         <source>Intersection</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Each point in the &lt;b&gt;custom seam allowance&lt;/b&gt; path must be unique!</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -7519,43 +7519,43 @@ Do you want to save your changes?</translation>
     <name>QCommandLineParser</name>
     <message>
         <source>Displays version information.</source>
-        <translation>Displays version information.</translation>
+        <translation type="vanished">Displays version information.</translation>
     </message>
     <message>
         <source>Displays this help.</source>
-        <translation>Displays this help.</translation>
+        <translation type="vanished">Displays this help.</translation>
     </message>
     <message>
         <source>Unknown option &apos;%1&apos;.</source>
-        <translation>Unknown option &apos;%1&apos;.</translation>
+        <translation type="vanished">Unknown option &apos;%1&apos;.</translation>
     </message>
     <message>
         <source>Unknown options: %1.</source>
-        <translation>Unknown options: %1.</translation>
+        <translation type="vanished">Unknown options: %1.</translation>
     </message>
     <message>
         <source>Missing value after &apos;%1&apos;.</source>
-        <translation>Missing value after &apos;%1&apos;.</translation>
+        <translation type="vanished">Missing value after &apos;%1&apos;.</translation>
     </message>
     <message>
         <source>Unexpected value after &apos;%1&apos;.</source>
-        <translation>Unexpected value after &apos;%1&apos;.</translation>
+        <translation type="vanished">Unexpected value after &apos;%1&apos;.</translation>
     </message>
     <message>
         <source>[options]</source>
-        <translation>[options]</translation>
+        <translation type="vanished">[options]</translation>
     </message>
     <message>
         <source>Usage: %1</source>
-        <translation>Usage: %1</translation>
+        <translation type="vanished">Usage: %1</translation>
     </message>
     <message>
         <source>Options:</source>
-        <translation>Options:</translation>
+        <translation type="vanished">Options:</translation>
     </message>
     <message>
         <source>Arguments:</source>
-        <translation>Arguments:</translation>
+        <translation type="vanished">Arguments:</translation>
     </message>
 </context>
 <context>

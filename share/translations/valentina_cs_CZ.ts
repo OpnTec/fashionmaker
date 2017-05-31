@@ -3386,10 +3386,6 @@ Apply settings anyway?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Each point in the path must be unique!</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Marks</source>
         <translation type="unfinished"></translation>
     </message>
@@ -3415,6 +3411,10 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Intersection</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Each point in the &lt;b&gt;custom seam allowance&lt;/b&gt; path must be unique!</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -6624,43 +6624,43 @@ Chcete uložit své změny?</translation>
     <name>QCommandLineParser</name>
     <message>
         <source>Displays version information.</source>
-        <translation>Zobrazit informace o verzi.</translation>
+        <translation type="vanished">Zobrazit informace o verzi.</translation>
     </message>
     <message>
         <source>Displays this help.</source>
-        <translation>Zobrazit tuto nápovědu.</translation>
+        <translation type="vanished">Zobrazit tuto nápovědu.</translation>
     </message>
     <message>
         <source>Unknown option &apos;%1&apos;.</source>
-        <translation>Neznámá volba: %1.</translation>
+        <translation type="vanished">Neznámá volba: %1.</translation>
     </message>
     <message>
         <source>Unknown options: %1.</source>
-        <translation>Neznámé volby: %1.</translation>
+        <translation type="vanished">Neznámé volby: %1.</translation>
     </message>
     <message>
         <source>Missing value after &apos;%1&apos;.</source>
-        <translation>Chybějící hodnota po &apos;%1&apos;.</translation>
+        <translation type="vanished">Chybějící hodnota po &apos;%1&apos;.</translation>
     </message>
     <message>
         <source>Unexpected value after &apos;%1&apos;.</source>
-        <translation>Neočekávaná hodnota po &apos;%1&apos;.</translation>
+        <translation type="vanished">Neočekávaná hodnota po &apos;%1&apos;.</translation>
     </message>
     <message>
         <source>[options]</source>
-        <translation>[volby]</translation>
+        <translation type="vanished">[volby]</translation>
     </message>
     <message>
         <source>Usage: %1</source>
-        <translation>Použití: %1</translation>
+        <translation type="vanished">Použití: %1</translation>
     </message>
     <message>
         <source>Options:</source>
-        <translation>Volby:</translation>
+        <translation type="vanished">Volby:</translation>
     </message>
     <message>
         <source>Arguments:</source>
-        <translation>Argumenty:</translation>
+        <translation type="vanished">Argumenty:</translation>
     </message>
 </context>
 <context>

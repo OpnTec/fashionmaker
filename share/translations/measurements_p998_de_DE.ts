@@ -3847,13 +3847,13 @@ Vertikalen Abstand von der hohen Hüfte Ebene, stärkste Stelle des  vorderen Ba
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1868"/>
         <source>rise_length_side</source>
         <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
-        <translation type="unfinished"></translation>
+        <translation>Leibhöhe_Seite</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1870"/>
         <source>Rise length, side</source>
         <comment>Full measurement name.</comment>
-        <translation type="unfinished"></translation>
+        <translation>Leibhöhe,  an der Seite gemessen</translation>
     </message>
     <message>
         <source>From Waist Side down to surface, while seated on hard surface.</source>
@@ -3882,25 +3882,30 @@ Vertikalen Abstand von der hohen Hüfte Ebene, stärkste Stelle des  vorderen Ba
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1854"/>
         <source>rise_length_b</source>
         <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
-        <translation type="unfinished"></translation>
+        <translation>Leibhöhe_h</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1856"/>
         <source>Rise length, back</source>
         <comment>Full measurement name.</comment>
-        <translation type="unfinished"></translation>
+        <translation>Leibhöhe, hinten</translation>
+    </message>
+    <message>
+        <source>Vertical distance from Waist Back to Crotch level.</source>
+        <comment>Full measurement description.</comment>
+        <translation type="vanished">Senkrechter Abstand von der Taillenrückseite zur Schritthöhe. </translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1861"/>
         <source>rise_length_f</source>
         <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
-        <translation type="unfinished"></translation>
+        <translation>Leibhöhe_v</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1863"/>
         <source>Rise length, front</source>
         <comment>Full measurement name.</comment>
-        <translation type="unfinished"></translation>
+        <translation>Leibhöhe, von vorne gemessen</translation>
     </message>
     <message>
         <source>Vertical Distance from Waist Front to Crotch level.</source>

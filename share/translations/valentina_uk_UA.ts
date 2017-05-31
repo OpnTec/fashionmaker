@@ -3822,7 +3822,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Each point in the path must be unique!</source>
-        <translation>Кожна точка в контурі повинна бути унікальною!</translation>
+        <translation type="vanished">Кожна точка в контурі повинна бути унікальною!</translation>
     </message>
     <message>
         <source>Marks</source>
@@ -3851,6 +3851,10 @@ Apply settings anyway?</source>
     <message>
         <source>Intersection</source>
         <translation>Перетин</translation>
+    </message>
+    <message>
+        <source>Each point in the &lt;b&gt;custom seam allowance&lt;/b&gt; path must be unique!</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -7382,43 +7386,43 @@ Do you want to save your changes?</source>
     <name>QCommandLineParser</name>
     <message>
         <source>Displays version information.</source>
-        <translation>Показати інформацію про версію.</translation>
+        <translation type="vanished">Показати інформацію про версію.</translation>
     </message>
     <message>
         <source>Displays this help.</source>
-        <translation>Показати цю довідку.</translation>
+        <translation type="vanished">Показати цю довідку.</translation>
     </message>
     <message>
         <source>Unknown option &apos;%1&apos;.</source>
-        <translation>Невідомий параметр &apos;%1&apos;.</translation>
+        <translation type="vanished">Невідомий параметр &apos;%1&apos;.</translation>
     </message>
     <message>
         <source>Unknown options: %1.</source>
-        <translation>Невідомі параметри: %1.</translation>
+        <translation type="vanished">Невідомі параметри: %1.</translation>
     </message>
     <message>
         <source>Missing value after &apos;%1&apos;.</source>
-        <translation>Пропущено значення після &apos;%1&apos;.</translation>
+        <translation type="vanished">Пропущено значення після &apos;%1&apos;.</translation>
     </message>
     <message>
         <source>Unexpected value after &apos;%1&apos;.</source>
-        <translation>Неочікуване значення після &apos;%1&apos;.</translation>
+        <translation type="vanished">Неочікуване значення після &apos;%1&apos;.</translation>
     </message>
     <message>
         <source>[options]</source>
-        <translation>[параметри]</translation>
+        <translation type="vanished">[параметри]</translation>
     </message>
     <message>
         <source>Usage: %1</source>
-        <translation>Використання: %1</translation>
+        <translation type="vanished">Використання: %1</translation>
     </message>
     <message>
         <source>Options:</source>
-        <translation>Параметри:</translation>
+        <translation type="vanished">Параметри:</translation>
     </message>
     <message>
         <source>Arguments:</source>
-        <translation>Аргументи:</translation>
+        <translation type="vanished">Аргументи:</translation>
     </message>
 </context>
 <context>
