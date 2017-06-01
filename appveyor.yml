@@ -41,61 +41,73 @@ shallow_clone: false                 # default is "false"
 environment:
   matrix:
   - QT5: Qt\5.8\mingw53_32
+    QT_VERSION: Qt5.8
     QMAKE_GENERATOR: "MinGW Makefiles"
     MINGW_PATH: C:\Qt\Tools\mingw530_32\bin
     PLATFORM: x86
     DEPLOY: true
   - QT5: Qt\5.8\msvc2015_64
+    QT_VERSION: Qt5.8
     QMAKE_GENERATOR: "NMake Makefiles JOM"
     VSVER: 14
     PLATFORM: x64
     DEPLOY: false
   - QT5: Qt\5.8\msvc2015
+    QT_VERSION: Qt5.8
     QMAKE_GENERATOR: "NMake Makefiles JOM"
     VSVER: 14
     PLATFORM: x86
     DEPLOY: false
   - QT5: Qt\5.7\mingw53_32
+    QT_VERSION: Qt5.7
     QMAKE_GENERATOR: "MinGW Makefiles"
     MINGW_PATH: C:\Qt\Tools\mingw530_32\bin
     PLATFORM: x86
     DEPLOY: false
   - QT5: Qt\5.7\msvc2015_64
+    QT_VERSION: Qt5.7
     QMAKE_GENERATOR: "NMake Makefiles JOM"
     VSVER: 14
     PLATFORM: x64
     DEPLOY: false
   - QT5: Qt\5.7\msvc2015
+    QT_VERSION: Qt5.7
     QMAKE_GENERATOR: "NMake Makefiles JOM"
     VSVER: 14
     PLATFORM: x86
     DEPLOY: false
   - QT5: Qt\5.6\mingw49_32
+    QT_VERSION: Qt5.6
     QMAKE_GENERATOR: "MinGW Makefiles"
     MINGW_PATH: C:\Qt\Tools\mingw492_32\bin
     PLATFORM: x86
-    DEPLOY: false
+    DEPLOY: true
   - QT5: Qt\5.6\msvc2015_64
+    QT_VERSION: Qt5.6
     QMAKE_GENERATOR: "NMake Makefiles JOM"
     VSVER: 14
     PLATFORM: x64
     DEPLOY: false
   - QT5: Qt\5.6\msvc2015
+    QT_VERSION: Qt5.6
     QMAKE_GENERATOR: "NMake Makefiles JOM"
     VSVER: 14
     PLATFORM: x86
     DEPLOY: false
   - QT5: Qt\5.5\mingw492_32
+    QT_VERSION: Qt5.5
     QMAKE_GENERATOR: "MinGW Makefiles"
     MINGW_PATH: C:\Qt\Tools\mingw492_32\bin
     PLATFORM: x86
     DEPLOY: false
   - QT5: Qt\5.4\mingw491_32
+    QT_VERSION: Qt5.4
     QMAKE_GENERATOR: "MinGW Makefiles"
     MINGW_PATH: C:\Qt\Tools\mingw491_32\bin
     PLATFORM: x86
     DEPLOY: false
   - QT5: Qt\5.3\mingw482_32
+    QT_VERSION: Qt5.3
     QMAKE_GENERATOR: "MinGW Makefiles"
     MINGW_PATH: C:\Qt\Tools\mingw482_32\bin
     PLATFORM: x86
@@ -171,7 +183,7 @@ after_test:
 
 artifacts:
   - path: build/package/valentina
-    name: valentina-win-$(APPVEYOR_REPO_COMMIT)
+    name: valentina-win-$(QT_VERSION)-$(APPVEYOR_REPO_COMMIT)
 
 deploy:
 - provider: BinTray
@@ -186,4 +198,4 @@ deploy:
   version: 0.5
   on:
     DEPLOY: true
-  artifact: valentina-win-$(APPVEYOR_REPO_COMMIT)
+  artifact: valentina-win-$(QT_VERSION)-$(APPVEYOR_REPO_COMMIT)
