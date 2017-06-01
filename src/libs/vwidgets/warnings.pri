@@ -23,6 +23,16 @@ unix {
             }
         }
 
+        gccUbsan{ # For enable run qmake with CONFIG+=gccUbsan
+            CONFIG(debug, debug|release){
+                # Debug mode
+                #gcc’s 4.9.0 Undefined Behavior Sanitizer (ubsan)
+                QMAKE_CXXFLAGS += -fsanitize=undefined
+                QMAKE_CFLAGS += -fsanitize=undefined
+                QMAKE_LFLAGS += -fsanitize=undefined
+            }
+        }
+
         # -isystem key works only for headers. In some cases it's not enough. But we can't delete this warnings and
         # want them in global list. Compromise decision delete them from local list.
         QMAKE_CXXFLAGS -= \

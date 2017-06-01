@@ -25,6 +25,16 @@ unix {
                 QMAKE_LFLAGS += -fsanitize=address
             }
         }
+
+        gccUbsan{ # For enable run qmake with CONFIG+=gccUbsan
+            CONFIG(debug, debug|release){
+                # Debug mode
+                #gcc’s 4.9.0 Undefined Behavior Sanitizer (ubsan)
+                QMAKE_CXXFLAGS += -fsanitize=undefined
+                QMAKE_CFLAGS += -fsanitize=undefined
+                QMAKE_LFLAGS += -fsanitize=undefined
+            }
+        }
     }
 
     clang*{
