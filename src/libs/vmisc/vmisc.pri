@@ -12,7 +12,6 @@ SOURCES += \
     $$PWD/commandoptions.cpp \
     $$PWD/qxtcsvmodel.cpp \
     $$PWD/vtablesearch.cpp \
-    $$PWD/abstracttest.cpp \
     $$PWD/dialogs/dialogexporttocsv.cpp
 
 win32-msvc*:SOURCES += $$PWD/stable.cpp
@@ -34,7 +33,6 @@ HEADERS += \
     $$PWD/commandoptions.h \
     $$PWD/qxtcsvmodel.h \
     $$PWD/vtablesearch.h \
-    $$PWD/abstracttest.h \
     $$PWD/diagnostic.h \
     $$PWD/dialogs/dialogexporttocsv.h
 

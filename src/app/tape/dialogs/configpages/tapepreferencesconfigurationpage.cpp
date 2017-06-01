@@ -31,6 +31,7 @@
 #include "../../mapplication.h"
 #include "../vmisc/vtapesettings.h"
 #include "../vpatterndb/variables/vmeasurement.h"
+#include "../vpatterndb/pmsystems.h"
 
 //---------------------------------------------------------------------------------------------------------------------
 TapePreferencesConfigurationPage::TapePreferencesConfigurationPage(QWidget *parent)

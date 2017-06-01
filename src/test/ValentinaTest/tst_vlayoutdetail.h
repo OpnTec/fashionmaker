@@ -29,7 +29,7 @@
 #ifndef TST_VLAYOUTDETAIL_H
 #define TST_VLAYOUTDETAIL_H
 
-#include "../vmisc/abstracttest.h"
+#include "../vtest/abstracttest.h"
 
 class TST_VLayoutDetail : public AbstractTest
 {

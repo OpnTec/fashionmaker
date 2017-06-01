@@ -28,7 +28,7 @@
 
 #include "tst_tapecommandline.h"
 #include "../vmisc/vsysexits.h"
-#include "logging.h"
+#include "../vmisc/logging.h"
 
 #include <QtTest>
 

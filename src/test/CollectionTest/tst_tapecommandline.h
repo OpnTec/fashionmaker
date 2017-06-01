@@ -29,7 +29,7 @@
 #ifndef TST_TAPECOMMANDLINE_H
 #define TST_TAPECOMMANDLINE_H
 
-#include "../vmisc/abstracttest.h"
+#include "../vtest/abstracttest.h"
 
 class TST_TapeCommandLine : public AbstractTest
 {

@@ -12,4 +12,5 @@ SUBDIRS = \
     vwidgets \
     vtools \
     vformat \
-    fervor
+    fervor \
+    vtest

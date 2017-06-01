@@ -29,7 +29,7 @@
 #ifndef TST_VALENTINACOMMANDLINE_H
 #define TST_VALENTINACOMMANDLINE_H
 
-#include "../vmisc/abstracttest.h"
+#include "../vtest/abstracttest.h"
 
 class TST_ValentinaCommandLine : public AbstractTest
 {

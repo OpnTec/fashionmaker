@@ -1,14 +1,14 @@
 /************************************************************************
  **
- **  @file   tst_vabstractcurve.h
+ **  @file   stable.cpp
  **  @author Roman Telezhynskyi <dismine(at)gmail.com>
- **  @date   15 3, 2016
+ **  @date   10 12, 2014
  **
  **  @brief
  **  @copyright
  **  This source code is part of the Valentine project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
- **  Copyright (C) 2016 Valentina project
+ **  Copyright (C) 2013-2015 Valentina project
  **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
  **
  **  Valentina is free software: you can redistribute it and/or modify
@@ -26,20 +26,5 @@
  **
  *************************************************************************/
 
-#ifndef TST_VABSTRACTCURVE_H
-#define TST_VABSTRACTCURVE_H
-
-#include "../vtest/abstracttest.h"
-
-class TST_VAbstractCurve : public AbstractTest
-{
-    Q_OBJECT
-public:
-    explicit TST_VAbstractCurve(QObject *parent = nullptr);
-
-private slots:
-    void IsPointOnCurve_data() const;
-    void IsPointOnCurve() const;
-};
-
-#endif // TST_VABSTRACTCURVE_H
+// Build the precompiled headers.
+#include "stable.h"

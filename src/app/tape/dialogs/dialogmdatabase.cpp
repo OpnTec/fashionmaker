@@ -29,6 +29,7 @@
 #include "dialogmdatabase.h"
 #include "ui_dialogmdatabase.h"
 #include "../mapplication.h"
+#include "../vpatterndb/measurements.h"
 
 #include <QKeyEvent>
 #include <QMenu>

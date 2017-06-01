@@ -30,3 +30,6 @@ INCLUDEPATH += $${PWD}/qmuparser
 
 #VPropertyExplorer library
 INCLUDEPATH += $${PWD}/vpropertyexplorer
+
+#VTools static library
+INCLUDEPATH += $${PWD}/vtest

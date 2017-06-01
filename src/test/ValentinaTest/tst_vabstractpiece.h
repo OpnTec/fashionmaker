@@ -29,7 +29,7 @@
 #ifndef TST_VABSTRACTPIECE_H
 #define TST_VABSTRACTPIECE_H
 
-#include "../vmisc/abstracttest.h"
+#include "../vtest/abstracttest.h"
 
 class VSAPoint;
 

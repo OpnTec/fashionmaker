@@ -34,6 +34,7 @@
 #include "dialogs/dialogtapepreferences.h"
 #include "dialogs/dialogexporttocsv.h"
 #include "../vpatterndb/calculator.h"
+#include "../vpatterndb/pmsystems.h"
 #include "../ifc/ifcdef.h"
 #include "../ifc/xml/vvitconverter.h"
 #include "../ifc/xml/vvstconverter.h"

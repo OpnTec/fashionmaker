@@ -29,7 +29,7 @@
 #ifndef TST_VSPLINE_H
 #define TST_VSPLINE_H
 
-#include "../vmisc/abstracttest.h"
+#include "../vtest/abstracttest.h"
 
 class VSpline;
 

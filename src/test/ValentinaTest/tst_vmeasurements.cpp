@@ -30,6 +30,7 @@
 #include "../vformat/vmeasurements.h"
 #include "../ifc/xml/vvstconverter.h"
 #include "../ifc/xml/vvitconverter.h"
+#include "../vpatterndb/pmsystems.h"
 
 #include <QtTest>
 

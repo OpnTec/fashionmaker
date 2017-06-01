@@ -1,14 +1,14 @@
 /************************************************************************
  **
- **  @file   tst_vabstractcurve.h
+ **  @file   stable.h
  **  @author Roman Telezhynskyi <dismine(at)gmail.com>
- **  @date   15 3, 2016
+ **  @date   10 12, 2014
  **
  **  @brief
  **  @copyright
  **  This source code is part of the Valentine project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
- **  Copyright (C) 2016 Valentina project
+ **  Copyright (C) 2013-2015 Valentina project
  **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
  **
  **  Valentina is free software: you can redistribute it and/or modify
@@ -26,20 +26,25 @@
  **
  *************************************************************************/
 
-#ifndef TST_VABSTRACTCURVE_H
-#define TST_VABSTRACTCURVE_H
+#ifndef STABLE_H
+#define STABLE_H
 
-#include "../vtest/abstracttest.h"
+/* I like to include this pragma too, so the build log indicates if pre-compiled headers were in use. */
+#pragma message("Compiling precompiled headers for VTest library.\n")
 
-class TST_VAbstractCurve : public AbstractTest
-{
-    Q_OBJECT
-public:
-    explicit TST_VAbstractCurve(QObject *parent = nullptr);
+/* Add C includes here */
 
-private slots:
-    void IsPointOnCurve_data() const;
-    void IsPointOnCurve() const;
-};
+#if defined __cplusplus
+/* Add C++ includes here */
 
-#endif // TST_VABSTRACTCURVE_H
+#ifdef QT_CORE_LIB
+#include <QtCore>
+#endif
+
+#ifdef QT_GUI_LIB
+#   include <QtGui>
+#endif
+
+#endif/*__cplusplus*/
+
+#endif // STABLE_H

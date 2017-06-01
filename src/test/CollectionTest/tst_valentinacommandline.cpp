@@ -28,7 +28,7 @@
 
 #include "tst_valentinacommandline.h"
 #include "../vmisc/vsysexits.h"
-#include "logging.h"
+#include "../vmisc/logging.h"
 
 #include <QtTest>
 

@@ -52,6 +52,8 @@
 #include "../vpatterndb/calculator.h"
 #include "../vpatterndb/variables/vmeasurement.h"
 #include "../vpatterndb/vcontainer.h"
+#include "../vpatterndb/measurements.h"
+#include "../vpatterndb/pmsystems.h"
 #include "../vmisc/projectversion.h"
 
 const QString VMeasurements::TagVST              = QStringLiteral("vst");

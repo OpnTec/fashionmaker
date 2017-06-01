@@ -24,7 +24,9 @@ SOURCES += \
     $$PWD/floatItemData/vpiecelabeldata.cpp \
     $$PWD/floatItemData/vpatternlabeldata.cpp \
     $$PWD/floatItemData/vgrainlinedata.cpp \
-    $$PWD/floatItemData/vabstractfloatitemdata.cpp
+    $$PWD/floatItemData/vabstractfloatitemdata.cpp \
+    $$PWD/measurements.cpp \
+    $$PWD/pmsystems.cpp
 
 win32-msvc*:SOURCES += $$PWD/stable.cpp
 
@@ -70,4 +72,6 @@ HEADERS += \
     $$PWD/floatItemData/vgrainlinedata_p.h \
     $$PWD/floatItemData/floatitemdef.h \
     $$PWD/floatItemData/vpatternlabeldata_p.h \
-    $$PWD/floatItemData/vpiecelabeldata_p.h
+    $$PWD/floatItemData/vpiecelabeldata_p.h \
+    $$PWD/measurements.h \
+    $$PWD/pmsystems.h

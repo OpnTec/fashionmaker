@@ -42,6 +42,7 @@
 
 #include "../vmisc/def.h"
 #include "../vmisc/vmath.h"
+#include "../vpatterndb/pmsystems.h"
 
 const QString settingPathsIndividualMeasurements = QStringLiteral("paths/individual_measurements");
 const QString settingPathsStandardMeasurements   = QStringLiteral("paths/standard_measurements");
@@ -367,7 +368,7 @@ void VCommonSettings::SetLocale(const QString &value)
 //---------------------------------------------------------------------------------------------------------------------
 QString VCommonSettings::GetPMSystemCode() const
 {
-    return value(settingPMSystemCode, p0_S).toString();
+    return value(settingPMSystemCode, "p998").toString();
 }
 
 //---------------------------------------------------------------------------------------------------------------------

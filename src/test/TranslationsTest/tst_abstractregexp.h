@@ -29,7 +29,7 @@
 #ifndef TST_ABSTRACTREGEXP_H
 #define TST_ABSTRACTREGEXP_H
 
-#include "../vmisc/abstracttest.h"
+#include "../vtest/abstracttest.h"
 
 #include <QPointer>
 

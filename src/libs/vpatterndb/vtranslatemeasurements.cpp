@@ -29,7 +29,7 @@
 #include "vtranslatemeasurements.h"
 
 #include "../qmuparser/qmutranslation.h"
-#include "../vmisc/def.h"
+#include "measurements.h"
 
 //---------------------------------------------------------------------------------------------------------------------
 VTranslateMeasurements::VTranslateMeasurements()
