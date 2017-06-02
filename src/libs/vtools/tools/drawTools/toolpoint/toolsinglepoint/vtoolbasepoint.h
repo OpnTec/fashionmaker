@@ -63,6 +63,9 @@ public:
     enum { Type = UserType + static_cast<int>(Tool::BasePoint)};
     virtual void ShowVisualization(bool show) Q_DECL_OVERRIDE;
     virtual void decrementReferens() Q_DECL_OVERRIDE;
+
+    QPointF GetBasePointPos() const;
+    void    SetBasePointPos(const QPointF &pos);
 public slots:
     virtual void FullUpdateFromFile() Q_DECL_OVERRIDE;
     virtual void SetFactor(qreal factor) Q_DECL_OVERRIDE;

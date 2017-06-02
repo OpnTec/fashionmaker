@@ -15,6 +15,7 @@
 - Added tooltip for tab Passmark. Explained meaning of check box "Show the second passmark on seam line". 
 - [#696] Wrong grainline position on layout.
 - [#697] Incomplete Internal Path for Waist Dart.
+- [#698] Problem typing in new axis point for new piece.
 
 # Version 0.5.0 May 9, 2017
 - [#581] User can now filter input lists by keyword in function wizard.

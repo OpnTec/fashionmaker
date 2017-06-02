@@ -863,13 +863,15 @@ void VToolOptionsPropertyBrowser::ChangeDataToolSinglePoint(VPE::VProperty *prop
     QVariant value = property->data(VPE::VProperty::DPC_Data, Qt::DisplayRole);
     const QString id = propertyToId[property];
 
+    VToolBasePoint *i = qgraphicsitem_cast<VToolBasePoint *>(currentItem);
+    SCASSERT(i != nullptr)
     switch (PropertiesList().indexOf(id))
     {
         case 0: // AttrName
             SetPointName<VToolBasePoint>(value.toString());
             break;
         case 1: // QLatin1String("position")
-            currentItem->setPos(value.toPointF());
+            i->SetBasePointPos(value.toPointF());
             break;
         default:
             qWarning()<<"Unknown property type. id = "<<id;
@@ -1906,7 +1908,7 @@ void VToolOptionsPropertyBrowser::ShowOptionsToolSinglePoint(QGraphicsItem *item
     AddPropertyObjectName(i, tr("Point label:"));
 
     VPE::VPointFProperty* itemPosition = new VPE::VPointFProperty(tr("Position:"));
-    itemPosition->setValue(i->pos());
+    itemPosition->setValue(i->GetBasePointPos());
     AddProperty(itemPosition, QLatin1String("position"));
 }
 
@@ -2408,7 +2410,7 @@ void VToolOptionsPropertyBrowser::UpdateOptionsToolSinglePoint()
 {
     VToolBasePoint *i = qgraphicsitem_cast<VToolBasePoint *>(currentItem);
     idToProperty[AttrName]->setValue(i->name());
-    idToProperty[QLatin1String("position")]->setValue(i->pos());
+    idToProperty[QLatin1String("position")]->setValue(i->GetBasePointPos());
 }
 
 //---------------------------------------------------------------------------------------------------------------------

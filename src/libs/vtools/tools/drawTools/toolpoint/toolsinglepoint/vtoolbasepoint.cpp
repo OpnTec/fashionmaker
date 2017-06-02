@@ -250,6 +250,26 @@ void VToolBasePoint::decrementReferens()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+QPointF VToolBasePoint::GetBasePointPos() const
+{
+    const QSharedPointer<VPointF> p = VAbstractTool::data.GeometricObject<VPointF>(id);
+    QPointF pos(qApp->fromPixel(p->x()), qApp->fromPixel(p->y()));
+    return pos;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VToolBasePoint::SetBasePointPos(const QPointF &pos)
+{
+    QSharedPointer<VPointF> p = VAbstractTool::data.GeometricObject<VPointF>(id);
+    p->setX(qApp->toPixel(pos.x()));
+    p->setY(qApp->toPixel(pos.y()));
+
+    QSharedPointer<VGObject> obj = qSharedPointerCast<VGObject>(p);
+
+    SaveOption(obj);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 void VToolBasePoint::DeleteTool(bool ask)
 {
     qCDebug(vTool, "Deleting base point.");
