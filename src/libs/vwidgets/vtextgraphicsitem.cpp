@@ -182,7 +182,7 @@ void VTextGraphicsItem::paint(QPainter *painter, const QStyleOptionGraphicsItem 
         }
 
         painter->setFont(fnt);
-        painter->drawText(0, iY, iW, fm.height(), tl.m_eAlign, qsText);
+        painter->drawText(0, iY, iW, fm.height(), static_cast<int>(tl.m_eAlign), qsText);
         iY += fm.height() + m_tm.GetSpacing();
     }
 
