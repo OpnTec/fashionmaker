@@ -22,7 +22,6 @@
 
 #include <QByteArray>
 #include <QFlags>
-#include <QForeachContainer>
 #include <QItemEditorFactory>
 #include <QLineEdit>
 #include <QList>
