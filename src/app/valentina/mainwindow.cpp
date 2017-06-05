@@ -4502,8 +4502,8 @@ QString MainWindow::CheckPathToMeasurements(const QString &patternPath, const QS
                     const QString filter = tr("Individual measurements") + QLatin1String(" (*.vit);;") +
                                            tr("Multisize measurements") + QLatin1String(" (*.vst)");
                     //Use standard path to individual measurements
-                    QString path = qApp->ValentinaSettings()->GetPathIndividualMeasurements();
-                    path = VCommonSettings::PrepareStandardTables(VCommonSettings::GetDefPathStandardMeasurements());
+                    const QString path = qApp->ValentinaSettings()->GetPathIndividualMeasurements();
+                    VCommonSettings::PrepareStandardTables(VCommonSettings::GetDefPathStandardMeasurements());
 
                     bool usedNotExistedDir = false;
                     QDir directory(path);
