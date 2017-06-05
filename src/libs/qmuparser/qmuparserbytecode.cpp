@@ -64,7 +64,10 @@ QmuParserByteCode::QmuParserByteCode(const QmuParserByteCode &a_ByteCode)
  */
 QmuParserByteCode& QmuParserByteCode::operator=(const QmuParserByteCode &a_ByteCode)
 {
-    Assign(a_ByteCode);
+    if (this != &a_ByteCode)
+    {
+        Assign(a_ByteCode);
+    }
     return *this;
 }
 

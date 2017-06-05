@@ -177,7 +177,7 @@ QString DialogMDataBase::ImgTag(const QString &number)
         const bool ok = renderer.load(filePath);
         if (ok)
         {
-            const QScreen *screen = QApplication::screens().at(0);
+            const QScreen *screen = QGuiApplication::screens().at(0);
             if (screen)
             {
                 const QSize defSize = renderer.defaultSize();
@@ -223,30 +223,27 @@ void DialogMDataBase::changeEvent(QEvent *event)
 //---------------------------------------------------------------------------------------------------------------------
 bool DialogMDataBase::eventFilter(QObject *target, QEvent *event)
 {
-    if (target == ui->treeWidget)
+    if (target == ui->treeWidget && event->type() == QEvent::KeyPress)
     {
-        if (event->type() == QEvent::KeyPress)
+        QKeyEvent *keyEvent = static_cast<QKeyEvent *>(event);
+        switch(keyEvent->key())
         {
-            QKeyEvent *keyEvent = static_cast<QKeyEvent *>(event);
-            switch(keyEvent->key())
+            case Qt::Key_Up:
             {
-                case Qt::Key_Up:
-                {
-                    const QModelIndex model = ui->treeWidget->indexAbove(ui->treeWidget->currentIndex());
-                    QTreeWidgetItem *item = ui->treeWidget->itemAbove(ui->treeWidget->currentItem());
-                    ShowDescription(item, model.column());
-                    break;
-                }
-                case Qt::Key_Down:
-                {
-                    const QModelIndex model = ui->treeWidget->indexBelow(ui->treeWidget->currentIndex());
-                    QTreeWidgetItem *item = ui->treeWidget->itemBelow(ui->treeWidget->currentItem());
-                    ShowDescription(item, model.column());
-                    break;
-                }
-                default:
-                    break;
+                const QModelIndex model = ui->treeWidget->indexAbove(ui->treeWidget->currentIndex());
+                QTreeWidgetItem *item = ui->treeWidget->itemAbove(ui->treeWidget->currentItem());
+                ShowDescription(item, model.column());
+                break;
             }
+            case Qt::Key_Down:
+            {
+                const QModelIndex model = ui->treeWidget->indexBelow(ui->treeWidget->currentIndex());
+                QTreeWidgetItem *item = ui->treeWidget->itemBelow(ui->treeWidget->currentItem());
+                ShowDescription(item, model.column());
+                break;
+            }
+            default:
+                break;
         }
     }
     return QDialog::eventFilter(target, event);

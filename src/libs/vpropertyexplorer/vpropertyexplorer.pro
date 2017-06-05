@@ -8,7 +8,7 @@
 include(../../../common.pri)
 
 # Library use widgets
-QT       += widgets
+QT       += core widgets
 
 # We don't need gui library.
 QT       -= gui

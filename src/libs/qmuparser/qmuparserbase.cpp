@@ -143,7 +143,10 @@ QmuParserBase::~QmuParserBase()
  */
 QmuParserBase& QmuParserBase::operator=(const QmuParserBase &a_Parser)
 {
-    Assign(a_Parser);
+    if (this != &a_Parser)
+    {
+        Assign(a_Parser);
+    }
     return *this;
 }
 

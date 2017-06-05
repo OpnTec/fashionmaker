@@ -313,13 +313,16 @@ QmuParserCallback::QmuParserCallback (const QmuParserCallback &a_Fun )
 //---------------------------------------------------------------------------------------------------------------------
 QmuParserCallback &QmuParserCallback::operator=(const QmuParserCallback &a_Fun)
 {
-    m_pFun       = a_Fun.m_pFun;
-    m_iArgc      = a_Fun.m_iArgc;
-    m_bAllowOpti = a_Fun.m_bAllowOpti;
-    m_iCode      = a_Fun.m_iCode;
-    m_iType      = a_Fun.m_iType;
-    m_iPri       = a_Fun.m_iPri;
-    m_eOprtAsct  = a_Fun.m_eOprtAsct;
+    if (this != &a_Fun)
+    {
+        m_pFun       = a_Fun.m_pFun;
+        m_iArgc      = a_Fun.m_iArgc;
+        m_bAllowOpti = a_Fun.m_bAllowOpti;
+        m_iCode      = a_Fun.m_iCode;
+        m_iType      = a_Fun.m_iType;
+        m_iPri       = a_Fun.m_iPri;
+        m_eOprtAsct  = a_Fun.m_eOprtAsct;
+    }
     return *this;
 }
 
