@@ -417,8 +417,8 @@ void TMainWindow::OpenStandard()
     const QString filter = tr("Multisize measurements") + QLatin1String(" (*.vst);;") + tr("Individual measurements") +
             QLatin1String(" (*.vit);;") + tr("All files") + QLatin1String(" (*.*)");
     //Use standard path to standard measurements
-    const QString pathTo = qApp->TapeSettings()->GetPathStandardMeasurements();
-    VCommonSettings::PrepareStandardTables(pathTo);
+    QString pathTo = qApp->TapeSettings()->GetPathStandardMeasurements();
+    pathTo = VCommonSettings::PrepareStandardTables(pathTo);
 
     Open(pathTo, filter);
 }
@@ -429,8 +429,8 @@ void TMainWindow::OpenTemplate()
     const QString filter = tr("Measurements") + QLatin1String(" (*.vst *.vit);;") + tr("All files") +
             QLatin1String(" (*.*)");
     //Use standard path to template files
-    const QString pathTo = qApp->TapeSettings()->GetPathTemplate();
-    VCommonSettings::PrepareStandardTemplates(pathTo);
+    QString pathTo = qApp->TapeSettings()->GetPathTemplate();
+    pathTo = VCommonSettings::PrepareStandardTemplates(pathTo);
     Open(pathTo, filter);
 
     if (m != nullptr)
@@ -826,7 +826,7 @@ bool TMainWindow::FileSaveAs()
         else
         {
             dir = qApp->TapeSettings()->GetPathStandardMeasurements();
-            VCommonSettings::PrepareStandardTables(dir);
+            dir = VCommonSettings::PrepareStandardTables(dir);
         }
     }
     else
@@ -1342,8 +1342,8 @@ void TMainWindow::ImportFromPattern()
 
     const QString filter(tr("Pattern files (*.val)"));
     //Use standard path to individual measurements
-    const QString pathTo = qApp->TapeSettings()->GetPathTemplate();
-    VCommonSettings::PrepareStandardTemplates(pathTo);
+    QString pathTo = qApp->TapeSettings()->GetPathTemplate();
+    pathTo = VCommonSettings::PrepareStandardTemplates(pathTo);
 
     const QString mPath = QFileDialog::getOpenFileName(this, tr("Import from a pattern"), pathTo, filter);
     if (mPath.isEmpty())

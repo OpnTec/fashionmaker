@@ -114,7 +114,7 @@ void PreferencesPathPage::EditPath()
             break;
         case 1: // standard measurements
             path = qApp->ValentinaSettings()->GetPathStandardMeasurements();
-            VCommonSettings::PrepareStandardTables(path);
+            path = VCommonSettings::PrepareStandardTables(path);
             break;
         case 2: // pattern path
             path = qApp->ValentinaSettings()->GetPathPattern();

@@ -153,6 +153,23 @@ void SymlinkCopyDirRecursive(const QString &fromDir, const QString &toDir, bool 
         SymlinkCopyDirRecursive(from, to, replaceOnConflit);
     }
 }
+
+//---------------------------------------------------------------------------------------------------------------------
+QString PrepareStandardFiles(const QString &currentPath, const QString &standardPath, const QString &defPath)
+{
+    QDir standardPathDir(standardPath);
+    QDir currentPathDir(currentPath);
+    if ((currentPath == defPath || not currentPathDir.exists()) && standardPathDir.exists())
+    {
+        const QDir localdata (defPath);
+        if (localdata.mkpath("."))
+        {
+            SymlinkCopyDirRecursive(standardPath, defPath, false);
+        }
+        return defPath;
+    }
+    return currentPath;
+}
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -218,33 +235,15 @@ QString VCommonSettings::StandardTemplatesPath()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VCommonSettings::PrepareStandardTemplates(const QString & currentPath)
+QString VCommonSettings::PrepareStandardTemplates(const QString & currentPath)
 {
-    QDir standardPath(VCommonSettings::StandardTemplatesPath());
-    const QDir localdata (VCommonSettings::GetDefPathTemplate());
-    if (currentPath == VCommonSettings::GetDefPathTemplate() && standardPath.exists())
-    {
-        if (localdata.mkpath("."))
-        {
-            SymlinkCopyDirRecursive(VCommonSettings::StandardTemplatesPath(), VCommonSettings::GetDefPathTemplate(),
-                                    false);
-        }
-    }
+    return PrepareStandardFiles(currentPath, StandardTemplatesPath(), GetDefPathTemplate());
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VCommonSettings::PrepareStandardTables(const QString &currentPath)
+QString VCommonSettings::PrepareStandardTables(const QString &currentPath)
 {
-    QDir standardPath(VCommonSettings::StandardTablesPath());
-    const QDir localdata (VCommonSettings::GetDefPathStandardMeasurements());
-    if (currentPath == VCommonSettings::GetDefPathStandardMeasurements() && standardPath.exists())
-    {
-        if (localdata.mkpath("."))
-        {
-            SymlinkCopyDirRecursive(VCommonSettings::StandardTablesPath(),
-                                    VCommonSettings::GetDefPathStandardMeasurements(), false);
-        }
-    }
+    return PrepareStandardFiles(currentPath, StandardTablesPath(), GetDefPathStandardMeasurements());
 }
 
 //---------------------------------------------------------------------------------------------------------------------

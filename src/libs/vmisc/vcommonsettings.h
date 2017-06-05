@@ -51,8 +51,8 @@ public:
     static QString StandardTablesPath();
     static QString StandardTemplatesPath();
 
-    static void PrepareStandardTemplates(const QString &currentPath);
-    static void PrepareStandardTables(const QString &currentPath);
+    static QString PrepareStandardTemplates(const QString &currentPath);
+    static QString PrepareStandardTables(const QString &currentPath);
 
     static QString GetDefPathIndividualMeasurements();
     QString GetPathIndividualMeasurements() const;

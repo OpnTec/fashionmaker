@@ -104,7 +104,7 @@ void TapePreferencesPathPage::EditPath()
             break;
         case 1: // standard measurements
             path = qApp->TapeSettings()->GetPathStandardMeasurements();
-            VCommonSettings::PrepareStandardTables(path);
+            path = VCommonSettings::PrepareStandardTables(path);
             break;
         case 2: // templates
             path = qApp->TapeSettings()->GetPathTemplate();
