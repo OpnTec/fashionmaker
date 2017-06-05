@@ -89,7 +89,7 @@ const QString VCommonSettings::unixStandardSharePath = QStringLiteral("/usr/shar
 namespace
 {
 //---------------------------------------------------------------------------------------------------------------------
-bool SymlinkCopyDirRecursive(const QString &fromDir, const QString &toDir, bool replaceOnConflit)
+void SymlinkCopyDirRecursive(const QString &fromDir, const QString &toDir, bool replaceOnConflit)
 {
     QDir dir;
     dir.setPath(fromDir);
@@ -97,16 +97,39 @@ bool SymlinkCopyDirRecursive(const QString &fromDir, const QString &toDir, bool 
     foreach (QString copyFile, dir.entryList(QDir::Files))
     {
         const QString from = fromDir + QDir::separator() + copyFile;
-        const QString to = toDir + QDir::separator() + copyFile;
+        QString to = toDir + QDir::separator() + copyFile;
+
+#ifdef Q_OS_WIN
+        {
+            // To fix issue #702 check each not symlink if it is actually broken symlink.
+            // Also trying to mimic Unix symlink. If a file eaxists do not create a symlink and remove it if exists.
+            QFile fileTo(to);
+            if (fileTo.exists())
+            {
+                if (not fileTo.rename(to + QLatin1String(".lnk")))
+                {
+                    QFile::remove(to + QLatin1String(".lnk"));
+                    fileTo.rename(to + QLatin1String(".lnk"));
+                }
+
+                QFileInfo info(to + QLatin1String(".lnk"));
+                if (info.symLinkTarget().isEmpty())
+                {
+                    fileTo.copy(to);
+                    fileTo.remove();
+                    continue; // The file already exists, skip creating shortcut
+                }
+            }
+        }
+
+        to = to + QLatin1String(".lnk");
+#endif
 
         if (QFile::exists(to))
         {
             if (replaceOnConflit)
             {
-                if (QFile::remove(to) == false)
-                {
-                    return false;
-                }
+                QFile::remove(to);
             }
             else
             {
@@ -114,10 +137,7 @@ bool SymlinkCopyDirRecursive(const QString &fromDir, const QString &toDir, bool 
             }
         }
 
-        if (QFile::link(from, to) == false)
-        {
-            return false;
-        }
+        QFile::link(from, to);
     }
 
     foreach (QString copyDir, dir.entryList(QDir::Dirs | QDir::NoDotAndDotDot))
@@ -127,16 +147,11 @@ bool SymlinkCopyDirRecursive(const QString &fromDir, const QString &toDir, bool 
 
         if (dir.mkpath(to) == false)
         {
-            return false;
+            return;
         }
 
-        if (SymlinkCopyDirRecursive(from, to, replaceOnConflit) == false)
-        {
-            return false;
-        }
+        SymlinkCopyDirRecursive(from, to, replaceOnConflit);
     }
-
-    return true;
 }
 }
 
@@ -207,7 +222,7 @@ void VCommonSettings::PrepareStandardTemplates(const QString & currentPath)
 {
     QDir standardPath(VCommonSettings::StandardTemplatesPath());
     const QDir localdata (VCommonSettings::GetDefPathTemplate());
-    if (currentPath == VCommonSettings::GetDefPathTemplate() && standardPath.exists() && not localdata.exists())
+    if (currentPath == VCommonSettings::GetDefPathTemplate() && standardPath.exists())
     {
         if (localdata.mkpath("."))
         {
@@ -222,9 +237,7 @@ void VCommonSettings::PrepareStandardTables(const QString &currentPath)
 {
     QDir standardPath(VCommonSettings::StandardTablesPath());
     const QDir localdata (VCommonSettings::GetDefPathStandardMeasurements());
-    if (currentPath == VCommonSettings::GetDefPathStandardMeasurements()
-            && standardPath.exists()
-            && not localdata.exists())
+    if (currentPath == VCommonSettings::GetDefPathStandardMeasurements() && standardPath.exists())
     {
         if (localdata.mkpath("."))
         {
