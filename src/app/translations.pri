@@ -72,7 +72,11 @@ for(_translation_name, INSTALL_TRANSLATIONS) {
 }
 
 # Make possible run program even you do not install it. Seek files in local directory.
-forceCopyToDestdir($$INSTALL_TRANSLATIONS, $$shell_path($${OUT_PWD}/$$DESTDIR/translations))
+CONFIG(release, debug|release){
+    forceCopyToDestdir($$INSTALL_TRANSLATIONS, $$shell_path($${OUT_PWD}/$$DESTDIR/translations))
+} else {
+    copyToDestdir($$INSTALL_TRANSLATIONS, $$shell_path($${OUT_PWD}/$$DESTDIR/translations))
+}
 
 macx{
     RESOURCES_DIR = "Contents/Resources"
