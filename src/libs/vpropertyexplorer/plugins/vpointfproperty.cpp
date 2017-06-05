@@ -21,7 +21,6 @@
 #include "vpointfproperty.h"
 
 #include <QFlags>
-#include <QForeachContainer>
 #include <QList>
 #include <QPointF>
 

@@ -33,7 +33,6 @@
 #include <QDomNode>
 #include <QDomNodeList>
 #include <QDomText>
-#include <QForeachContainer>
 #include <QLatin1Char>
 #include <QMessageLogger>
 #include <QScopedPointer>

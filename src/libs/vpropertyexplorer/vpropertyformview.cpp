@@ -20,7 +20,6 @@
 
 #include "vpropertyformview.h"
 
-#include <QForeachContainer>
 #include <QList>
 #include <Qt>
 

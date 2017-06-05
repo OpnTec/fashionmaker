@@ -31,7 +31,6 @@
 #include <QDomElement>
 #include <QEvent>
 #include <QFlags>
-#include <QForeachContainer>
 #include <QGraphicsScene>
 #include <QGraphicsSceneMouseEvent>
 #include <QGraphicsView>

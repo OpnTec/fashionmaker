@@ -35,7 +35,6 @@
 #include <QFile>
 #include <QFileInfo>
 #include <QFlags>
-#include <QForeachContainer>
 #include <QIODevice>
 #include <QPointF>
 #include <QProcess>

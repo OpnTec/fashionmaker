@@ -20,7 +20,6 @@
 
 #include "vserializedproperty.h"
 
-#include <QForeachContainer>
 #include <QtGlobal>
 
 #include "vproperty.h"

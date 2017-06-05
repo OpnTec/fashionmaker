@@ -21,7 +21,6 @@
 #include "vpropertyformwidget.h"
 
 #include <QEvent>
-#include <QForeachContainer>
 #include <QFormLayout>
 #include <QKeyEvent>
 #include <QLayout>

@@ -32,7 +32,6 @@
 #include <QDomNodeList>
 #include <QDomText>
 #include <QFile>
-#include <QForeachContainer>
 #include <QLatin1String>
 #include <QList>
 #include <QMap>

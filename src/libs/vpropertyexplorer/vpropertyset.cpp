@@ -21,7 +21,6 @@
 #include "vpropertyset.h"
 
 #include <stddef.h>
-#include <QForeachContainer>
 #include <QList>
 #include <QMap>
 

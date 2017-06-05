@@ -28,7 +28,6 @@
 #include <QFile>
 #include <QFileDialog>
 #include <QFileInfo>
-#include <QForeachContainer>
 #include <QHBoxLayout>
 #include <QLineEdit>
 #include <QList>

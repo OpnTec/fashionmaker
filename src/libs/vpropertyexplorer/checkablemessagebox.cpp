@@ -20,7 +20,6 @@
 #include <QAbstractButton>
 #include <QApplication>
 #include <QCheckBox>
-#include <QForeachContainer>
 #include <QHBoxLayout>
 #include <QLabel>
 #include <QLatin1String>

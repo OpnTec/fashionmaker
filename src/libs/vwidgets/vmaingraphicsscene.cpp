@@ -30,7 +30,6 @@
 
 #include <QBrush>
 #include <QEvent>
-#include <QForeachContainer>
 #include <QGraphicsItem>
 #include <QGraphicsLineItem>
 #include <QGraphicsSceneMouseEvent>

@@ -21,7 +21,6 @@
 #include "vvector3dproperty.h"
 
 #include <QFlags>
-#include <QForeachContainer>
 #include <QList>
 #include <QStringList>
 

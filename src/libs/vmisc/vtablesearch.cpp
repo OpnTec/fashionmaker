@@ -28,7 +28,6 @@
 
 #include "vtablesearch.h"
 
-#include <QForeachContainer>
 #include <QPalette>
 #include <QTableWidget>
 #include <QTableWidgetItem>
