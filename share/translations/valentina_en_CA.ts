@@ -3821,10 +3821,6 @@ Apply settings anyway?</translation>
         <translation>Passmark</translation>
     </message>
     <message>
-        <source>Each point in the path must be unique!</source>
-        <translation type="vanished">Each point in the path must be unique!</translation>
-    </message>
-    <message>
         <source>Marks</source>
         <translation>Marks</translation>
     </message>
@@ -3854,7 +3850,7 @@ Apply settings anyway?</translation>
     </message>
     <message>
         <source>Each point in the &lt;b&gt;custom seam allowance&lt;/b&gt; path must be unique!</source>
-        <translation type="unfinished"></translation>
+        <translation>Each point in the &lt;b&gt;custom seam allowance&lt;/b&gt; path must be unique!</translation>
     </message>
 </context>
 <context>

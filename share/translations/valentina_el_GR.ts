@@ -3742,10 +3742,6 @@ Apply settings anyway?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Each point in the path must be unique!</source>
-        <translation type="vanished">Κάθε σημείο στο μονοπάτι πρέπει να είναι μοναδικό!</translation>
-    </message>
-    <message>
         <source>Marks</source>
         <translation>Σημάδια</translation>
     </message>

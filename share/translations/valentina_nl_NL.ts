@@ -3821,10 +3821,6 @@ Toch de instellingen aanpassen?</translation>
         <translation>Pasmarkering</translation>
     </message>
     <message>
-        <source>Each point in the path must be unique!</source>
-        <translation type="vanished">Elk punt in het pad moet uniek zijn!</translation>
-    </message>
-    <message>
         <source>Marks</source>
         <translation>Markeringen</translation>
     </message>
