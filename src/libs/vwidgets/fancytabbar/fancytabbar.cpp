@@ -495,7 +495,8 @@ void FancyTabBar::PaintTab(QPainter *painter, int tabIndex) const
     boldFont.setBold(true);
     painter->setFont(boldFont);
     painter->setPen(selected ? QColor(255, 255, 255, 160) : QColor(0, 0, 0, 110));
-    const int textFlags = Qt::AlignCenter | (drawIcon ? Qt::AlignBottom : Qt::AlignVCenter) | Qt::TextWordWrap;
+    const int textFlags = static_cast<int>(Qt::AlignCenter | (drawIcon ? Qt::AlignBottom : Qt::AlignVCenter)
+                                           | Qt::TextWordWrap);
     if (enabled)
     {
         painter->drawText(tabTextRect, textFlags, tabText);
