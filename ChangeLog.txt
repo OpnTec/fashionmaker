@@ -18,6 +18,7 @@
 - [#698] Problem typing in new axis point for new piece.
 - [#702] Valentina produces broken shortcut (.lnk) files on Windows.
 - Changed default behaviour if path to multisize measurements or templates doesn't exist. 
+- [#703] Valentina warns about format rewriting for unsaved files.
 
 # Version 0.5.0 May 9, 2017
 - [#581] User can now filter input lists by keyword in function wizard.

@@ -3094,6 +3094,9 @@ void MainWindow::New()
 
         mouseCoordinate = new QLabel(QString("0, 0 (%1)").arg(VDomDocument::UnitsToStr(qApp->patternUnit(), true)));
         ui->toolBarOption->addWidget(mouseCoordinate);
+
+        m_curFileFormatVersion = VPatternConverter::PatternMaxVer;
+        m_curFileFormatVersionStr = VPatternConverter::PatternMaxVerStr;
     }
     else
     {

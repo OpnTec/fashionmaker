@@ -364,10 +364,14 @@ void TMainWindow::FileNew()
         if (mType == MeasurementsType::Standard)
         {
             m = new VMeasurements(mUnit, measurements.BaseSize(), measurements.BaseHeight(), data);
+            m_curFileFormatVersion = VVSTConverter::MeasurementMaxVer;
+            m_curFileFormatVersionStr = VVSTConverter::MeasurementMaxVerStr;
         }
         else
         {
             m = new VMeasurements(mUnit, data);
+            m_curFileFormatVersion = VVITConverter::MeasurementMaxVer;
+            m_curFileFormatVersionStr = VVITConverter::MeasurementMaxVerStr;
         }
 
         mIsReadOnly = m->IsReadOnly();
