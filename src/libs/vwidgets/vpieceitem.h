@@ -32,6 +32,8 @@
 #include <QtCore/qglobal.h>
 #include <QGraphicsObject>
 
+#include "../vmisc/def.h"
+
 class VPieceItem : public QGraphicsObject
 {
     Q_OBJECT
@@ -59,6 +61,9 @@ public:
 
     VPieceItem::MoveTypes GetMoveType() const;
     void                  SetMoveType(const VPieceItem::MoveTypes &moveType);
+
+    virtual int  type() const Q_DECL_OVERRIDE {return Type;}
+    enum { Type = UserType + static_cast<int>(Vis::PieceItem)};
 
 signals:
     void SignalMoved(const QPointF &ptPos);

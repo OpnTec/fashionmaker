@@ -32,6 +32,8 @@
 #include <QGraphicsPathItem>
 #include <QtGlobal>
 
+#include "../vmisc/def.h"
+
 class VCurvePathItem : public QGraphicsPathItem
 {
 public:
@@ -39,6 +41,9 @@ public:
 
     virtual void paint(QPainter *painter, const QStyleOptionGraphicsItem *option,
                        QWidget *widget = nullptr) Q_DECL_OVERRIDE;
+
+    virtual int  type() const Q_DECL_OVERRIDE {return Type;}
+    enum { Type = UserType + static_cast<int>(Vis::CurvePathItem)};
 
     void SetDirectionPath(const QPainterPath &path);
 private:

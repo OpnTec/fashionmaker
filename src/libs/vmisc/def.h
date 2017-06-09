@@ -103,7 +103,7 @@ enum class PiecePathIncludeType : unsigned char
 
 enum class PiecePathType :  unsigned char {PiecePath = 0, CustomSeamAllowance = 1, InternalPath = 2, Unknown = 3};
 
-typedef unsigned char ToolVisHolderType;
+typedef int ToolVisHolderType;
 enum class Tool : ToolVisHolderType
 {
     Arrow,
@@ -207,7 +207,13 @@ enum class Vis : ToolVisHolderType
     ToolPiece,
     ToolPiecePath,
     ToolPin,
-    PiecePins
+    PiecePins,
+    NoBrush,
+    CurvePathItem,
+    GrainlineItem,
+    PieceItem,
+    TextGraphicsItem,
+    LAST_ONE_DO_NOT_USE //add new stuffs above this, this constant must be last and never used
 };
 
 enum class VarType : char { Measurement, Increment, LineLength, CurveLength, CurveCLength, LineAngle, CurveAngle,

@@ -31,6 +31,7 @@
 
 #include "vpieceitem.h"
 #include "../vpatterndb/floatItemData/vgrainlinedata.h"
+#include "../vmisc/def.h"
 
 class VGrainlineItem : public VPieceItem
 {
@@ -43,6 +44,9 @@ public:
 
     virtual void paint(QPainter* pP, const QStyleOptionGraphicsItem* pOption, QWidget* pWidget) Q_DECL_OVERRIDE;
     void         UpdateGeometry(const QPointF& ptPos, qreal dRotation, qreal dLength, ArrowType eAT);
+
+    virtual int  type() const Q_DECL_OVERRIDE {return Type;}
+    enum { Type = UserType + static_cast<int>(Vis::GrainlineItem)};
 
     bool IsContained(const QPointF &pt, qreal dRot, qreal &dX, qreal &dY) const;
 

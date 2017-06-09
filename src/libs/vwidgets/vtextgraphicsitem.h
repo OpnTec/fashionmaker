@@ -58,6 +58,9 @@ public:
     virtual void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget) Q_DECL_OVERRIDE;
     virtual void Update() Q_DECL_OVERRIDE;
 
+    virtual int  type() const Q_DECL_OVERRIDE {return Type;}
+    enum { Type = UserType + static_cast<int>(Vis::TextGraphicsItem)};
+
     void SetFont(const QFont& fnt);
     int  GetFontSize() const;
     void AddLine(const TextLine& tl);
