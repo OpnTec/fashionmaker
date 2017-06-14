@@ -4310,6 +4310,7 @@ void MainWindow::Preferences()
     static QPointer<DialogPreferences> guard;// Prevent any second run
     if (guard.isNull())
     {
+        QGuiApplication::setOverrideCursor(QCursor(Qt::WaitCursor));
         DialogPreferences *preferences = new DialogPreferences(this);
         // QScopedPointer needs to be sure any exception will never block guard
         QScopedPointer<DialogPreferences> dlg(preferences);
@@ -4318,6 +4319,7 @@ void MainWindow::Preferences()
         connect(dlg.data(), &DialogPreferences::UpdateProperties, toolOptions,
                 &VToolOptionsPropertyBrowser::RefreshOptions);
         connect(dlg.data(), &DialogPreferences::UpdateProperties, this, &MainWindow::ToolBarStyles);
+        QGuiApplication::restoreOverrideCursor();
 
         if (guard->exec() == QDialog::Accepted)
         {

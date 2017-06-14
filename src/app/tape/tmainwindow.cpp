@@ -486,6 +486,7 @@ void TMainWindow::Preferences()
     static QPointer<DialogTapePreferences> guard;// Prevent any second run
     if (guard.isNull())
     {
+        QGuiApplication::setOverrideCursor(QCursor(Qt::WaitCursor));
         DialogTapePreferences *preferences = new DialogTapePreferences(this);
         // QScopedPointer needs to be sure any exception will never block guard
         QScopedPointer<DialogTapePreferences> dlg(preferences);
@@ -493,6 +494,7 @@ void TMainWindow::Preferences()
         // Must be first
         connect(dlg.data(), &DialogTapePreferences::UpdateProperties, this, &TMainWindow::WindowsLocale);
         connect(dlg.data(), &DialogTapePreferences::UpdateProperties, this, &TMainWindow::ToolBarStyles);
+        QGuiApplication::restoreOverrideCursor();
         dlg->exec();
     }
 }
