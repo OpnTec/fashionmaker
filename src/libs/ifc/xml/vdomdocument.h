@@ -83,10 +83,6 @@ class VDomDocument : public QDomDocument
     Q_DECLARE_TR_FUNCTIONS(VDomDocument)
 public:
     static const QString AttrId;
-    static const QString UnitMM;
-    static const QString UnitCM;
-    static const QString UnitINCH;
-    static const QString UnitPX;
     static const QString TagVersion;
     static const QString TagUnit;
 

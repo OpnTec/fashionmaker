@@ -119,6 +119,11 @@ const QString degreeSymbol = QStringLiteral("°");
 const QString trueStr = QStringLiteral("true");
 const QString falseStr = QStringLiteral("false");
 
+const QString unitMM   = QStringLiteral("mm");
+const QString unitCM   = QStringLiteral("cm");
+const QString unitINCH = QStringLiteral("inch");
+const QString unitPX   = QStringLiteral("px");
+
 //---------------------------------------------------------------------------------------------------------------------
 void SetOverrideCursor(const QString &pixmapPath, int hotX, int hotY)
 {

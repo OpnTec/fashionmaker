@@ -361,6 +361,11 @@ extern const QString strStraightforward;
 extern const QString strBisector;
 extern const QString strIntersection;
 
+extern const QString unitMM;
+extern const QString unitCM;
+extern const QString unitINCH;
+extern const QString unitPX;
+
 void SetOverrideCursor(const QString & pixmapPath, int hotX = -1, int hotY = -1);
 void SetOverrideCursor(Qt::CursorShape shape);
 void RestoreOverrideCursor(const QString & pixmapPath);

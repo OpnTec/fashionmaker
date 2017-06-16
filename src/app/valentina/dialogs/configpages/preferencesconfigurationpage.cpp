@@ -195,9 +195,9 @@ void PreferencesConfigurationPage::SetLabelComboBox(const QStringList &list)
 //---------------------------------------------------------------------------------------------------------------------
 void PreferencesConfigurationPage::InitUnits()
 {
-    ui->unitCombo->addItem(tr("Centimeters"), "cm");
-    ui->unitCombo->addItem(tr("Millimiters"), "mm");
-    ui->unitCombo->addItem(tr("Inches"), "in");
+    ui->unitCombo->addItem(tr("Centimeters"), unitCM);
+    ui->unitCombo->addItem(tr("Millimiters"), unitMM);
+    ui->unitCombo->addItem(tr("Inches"), unitINCH);
 
     // set default unit
     const qint32 indexUnit = ui->unitCombo->findData(qApp->ValentinaSettings()->GetUnit());

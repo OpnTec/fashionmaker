@@ -632,9 +632,7 @@ void MApplication::ParseCommandLine(const SocketConnection &connection, const QS
     if (not unitValue.isEmpty())
     {
 
-        const QStringList units = QStringList() << VDomDocument::UnitMM
-                                                << VDomDocument::UnitCM
-                                                << VDomDocument::UnitINCH;
+        const QStringList units = QStringList() << unitMM << unitCM << unitINCH;
         if (units.contains(unitValue))
         {
             flagUnit = true;

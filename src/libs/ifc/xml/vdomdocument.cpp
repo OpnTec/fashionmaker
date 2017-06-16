@@ -179,10 +179,6 @@ void MessageHandler::handleMessage(QtMsgType type, const QString &description, c
 Q_LOGGING_CATEGORY(vXML, "v.xml")
 
 const QString VDomDocument::AttrId     = QStringLiteral("id");
-const QString VDomDocument::UnitMM     = QStringLiteral("mm");
-const QString VDomDocument::UnitCM     = QStringLiteral("cm");
-const QString VDomDocument::UnitINCH   = QStringLiteral("inch");
-const QString VDomDocument::UnitPX     = QStringLiteral("px");
 const QString VDomDocument::TagVersion = QStringLiteral("version");
 const QString VDomDocument::TagUnit    = QStringLiteral("unit");
 
@@ -488,7 +484,7 @@ quint32 VDomDocument::GetParametrId(const QDomElement &domElement)
 //---------------------------------------------------------------------------------------------------------------------
 Unit VDomDocument::MUnit() const
 {
-    Unit unit = VDomDocument::StrToUnits(UniqueTagText(TagUnit, UnitCM));
+    Unit unit = VDomDocument::StrToUnits(UniqueTagText(TagUnit, unitCM));
 
     if (unit == Unit::Px)
     {
@@ -655,7 +651,7 @@ void VDomDocument::setXMLContent(const QString &fileName)
 //---------------------------------------------------------------------------------------------------------------------
 Unit VDomDocument::StrToUnits(const QString &unit)
 {
-    const QStringList units = QStringList() << UnitMM << UnitCM << UnitINCH << UnitPX;
+    const QStringList units = QStringList() << unitMM << unitCM << unitINCH << unitPX;
     Unit result = Unit::Cm;
     switch (units.indexOf(unit))
     {
@@ -691,17 +687,17 @@ QString VDomDocument::UnitsToStr(const Unit &unit, const bool translate)
     switch (unit)
     {
         case Unit::Mm:
-            translate ? result = QObject::tr("mm") : result = UnitMM;
+            translate ? result = QObject::tr("mm") : result = unitMM;
             break;
         case Unit::Inch:
-            translate ? result = QObject::tr("inch") : result = UnitINCH;
+            translate ? result = QObject::tr("inch") : result = unitINCH;
             break;
         case Unit::Px:
-            translate ? result = QObject::tr("px") : result = UnitPX;
+            translate ? result = QObject::tr("px") : result = unitPX;
             break;
         case Unit::Cm:
         default:
-            translate ? result = QObject::tr("cm") : result = UnitCM;
+            translate ? result = QObject::tr("cm") : result = unitCM;
             break;
     }
     return result;
