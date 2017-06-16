@@ -55,7 +55,7 @@
 const int GraphicsViewZoom::duration = 300;
 const int GraphicsViewZoom::updateInterval = 40;
 
-const qreal maxSceneSize = ((50 * 100.0) / 25.4) * PrintDPI; // 50 meters in pixels
+const qreal maxSceneSize = ((20.0 * 1000.0) / 25.4) * PrintDPI; // 20 meters in pixels
 
 //---------------------------------------------------------------------------------------------------------------------
 GraphicsViewZoom::GraphicsViewZoom(QGraphicsView* view)
@@ -88,8 +88,9 @@ void GraphicsViewZoom::gentle_zoom(double factor)
     // We need to check current scale factor because in Windows we have an error when we zoom in or zoom out to much.
     // See issue #532: Unexpected error occurs when zoom out image.
     // factor > 1 for zoomIn and factor < 1 for zoomOut.
-    if ((_view->transform().m11() < VMainGraphicsView::MaxScale() && factor > 1) ||
-        (_view->transform().m11() > VMainGraphicsView::MinScale() && factor < 1))
+    const qreal m11 = _view->transform().m11();
+
+    if ((factor > 1 && m11 <= VMainGraphicsView::MaxScale()) || (factor < 1 && m11 >= VMainGraphicsView::MinScale()))
     {
         _view->scale(factor, factor);
         if (factor < 1)
@@ -361,7 +362,7 @@ void VMainGraphicsView::ZoomIn()
 {
     // We need to check current scale factor because in Windows we have an error when we zoom in or zoom out to much.
     // See issue #532: Unexpected error occurs when zoom out image.
-    if (this->transform().m11() < MaxScale())
+    if (this->transform().m11() <= MaxScale())
     {
         scale(1.1, 1.1);
         VMainGraphicsView::NewSceneRect(this->scene(), this);
@@ -373,7 +374,7 @@ void VMainGraphicsView::ZoomOut()
 {
     // We need to check current scale factor because in Windows we have an error when we zoom in or zoom out to much.
     // See issue #532: Unexpected error occurs when zoom out image.
-    if (this->transform().m11() > MinScale())
+    if (this->transform().m11() >= MinScale())
     {
         scale(1.0/1.1, 1.0/1.1);
         VMainGraphicsView::NewSceneRect(this->scene(), this);
@@ -514,7 +515,7 @@ void VMainGraphicsView::mouseReleaseEvent(QMouseEvent *event)
 qreal VMainGraphicsView::MinScale()
 {
     const QRect screenRect = QApplication::desktop()->availableGeometry();
-    const qreal screenSize = qMax(screenRect.width(), screenRect.height());
+    const qreal screenSize = qMin(screenRect.width(), screenRect.height());
 
     return screenSize / maxSceneSize;
 }
@@ -523,7 +524,7 @@ qreal VMainGraphicsView::MinScale()
 qreal VMainGraphicsView::MaxScale()
 {
     const QRect screenRect = QApplication::desktop()->availableGeometry();
-    const qreal screenSize = qMax(screenRect.width(), screenRect.height());
+    const qreal screenSize = qMin(screenRect.width(), screenRect.height());
 
     return maxSceneSize / screenSize;
 }
