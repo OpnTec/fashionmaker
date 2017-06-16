@@ -72,6 +72,7 @@ const QString settingGeneralWindowState          = QStringLiteral("windowState")
 const QString settingGeneralToolbarsState        = QStringLiteral("toolbarsState");
 const QString settingPreferenceDialogSize        = QStringLiteral("preferenceDialogSize");
 const QString settingToolSeamAllowanceDialogSize = QStringLiteral("toolSeamAllowanceDialogSize");
+const QString settingFormulaWizardDialogSize     = QStringLiteral("formulaWizardDialogSize");
 const QString settingLatestSkippedVersion        = QStringLiteral("lastestSkippedVersion");
 const QString settingDateOfLastRemind            = QStringLiteral("dateOfLastRemind");
 const QString settingUserDefinedMaterials        = QStringLiteral("configuration/userDefinedMaterials");
@@ -569,6 +570,18 @@ QSize VCommonSettings::GetToolSeamAllowanceDialogSize() const
 void VCommonSettings::SetToolSeamAllowanceDialogSize(const QSize &sz)
 {
     setValue(settingToolSeamAllowanceDialogSize, sz);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QSize VCommonSettings::GetFormulaWizardDialogSize() const
+{
+    return value(settingFormulaWizardDialogSize, QSize(0, 0)).toSize();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VCommonSettings::SetFormulaWizardDialogSize(const QSize &sz)
+{
+    setValue(settingFormulaWizardDialogSize, sz);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

@@ -174,7 +174,6 @@ private:
 
     FancyTabBar* m_ftb;
 
-    bool   m_isInitialized;
     bool   applyAllowed;
     bool   flagGPin;
     bool   flagDPin;

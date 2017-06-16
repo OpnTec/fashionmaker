@@ -89,7 +89,6 @@ DialogSeamAllowance::DialogSeamAllowance(const VContainer *data, const quint32 &
       m_tabPins(new QWidget),
       m_tabPassmarks(new QWidget),
       m_ftb(new FancyTabBar(FancyTabBar::Left, this)),
-      m_isInitialized(false),
       applyAllowed(false),// By default disabled
       flagGPin(true),
       flagDPin(true),
@@ -432,7 +431,7 @@ void DialogSeamAllowance::showEvent(QShowEvent *event)
         return;
     }
 
-    if (m_isInitialized)
+    if (isInitialized)
     {
         return;
     }
@@ -444,20 +443,20 @@ void DialogSeamAllowance::showEvent(QShowEvent *event)
         resize(sz);
     }
 
-    m_isInitialized = true;//first show windows are held
+    isInitialized = true;//first show windows are held
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void DialogSeamAllowance::resizeEvent(QResizeEvent *event)
 {
-    Q_UNUSED(event)
     // remember the size for the next time this dialog is opened, but only
     // if widget was already initialized, which rules out the resize at
     // dialog creating, which would
-    if (m_isInitialized)
+    if (isInitialized)
     {
         qApp->Settings()->SetToolSeamAllowanceDialogSize(size());
     }
+    DialogTool::resizeEvent(event);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

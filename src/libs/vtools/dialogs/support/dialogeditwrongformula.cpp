@@ -350,14 +350,38 @@ void DialogEditWrongFormula::closeEvent(QCloseEvent *event)
 //---------------------------------------------------------------------------------------------------------------------
 void DialogEditWrongFormula::showEvent(QShowEvent *event)
 {
-    DialogTool::showEvent( event );
+    QDialog::showEvent( event );
     if ( event->spontaneous() )
     {
         return;
     }
 
-    setMaximumSize(QSize(QWIDGETSIZE_MAX, QWIDGETSIZE_MAX));
-    setMinimumSize(QSize(0, 0));
+    if (isInitialized)
+    {
+        return;
+    }
+    // do your init stuff here
+
+    const QSize sz = qApp->Settings()->GetFormulaWizardDialogSize();
+    if (not sz.isEmpty())
+    {
+        resize(sz);
+    }
+
+    isInitialized = true;//first show windows are held
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogEditWrongFormula::resizeEvent(QResizeEvent *event)
+{
+    // remember the size for the next time this dialog is opened, but only
+    // if widget was already initialized, which rules out the resize at
+    // dialog creating, which would
+    if (isInitialized)
+    {
+        qApp->Settings()->SetFormulaWizardDialogSize(size());
+    }
+    DialogTool::resizeEvent(event);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

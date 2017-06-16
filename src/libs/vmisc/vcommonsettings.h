@@ -123,6 +123,9 @@ public:
     QSize GetToolSeamAllowanceDialogSize() const;
     void  SetToolSeamAllowanceDialogSize(const QSize& sz);
 
+    QSize GetFormulaWizardDialogSize() const;
+    void  SetFormulaWizardDialogSize(const QSize& sz);
+
     int  GetLatestSkippedVersion() const;
     void SetLatestSkippedVersion(int value);
 
