@@ -140,15 +140,6 @@ void VisToolMove::paint(QPainter *painter, const QStyleOptionGraphicsItem *optio
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QRectF VisToolMove::boundingRect() const
-{
-    QRectF rect = VisOperation::boundingRect();
-    rect = rect.united(pointOrigin->boundingRect());
-    rect = rect.united(pointFinish->boundingRect());
-    return rect;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
 QString VisToolMove::Angle() const
 {
     return QString::number(line().angle());

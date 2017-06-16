@@ -128,15 +128,3 @@ void VisToolPointOfContact::paint(QPainter *painter, const QStyleOptionGraphicsI
 
     VisLine::paint(painter, option, widget);
 }
-
-//---------------------------------------------------------------------------------------------------------------------
-QRectF VisToolPointOfContact::boundingRect() const
-{
-    QRectF rect = VisLine::boundingRect();
-    rect = rect.united(point->boundingRect());
-    rect = rect.united(lineP1->boundingRect());
-    rect = rect.united(lineP2->boundingRect());
-    rect = rect.united(arc_point->boundingRect());
-    rect = rect.united(circle->boundingRect());
-    return rect;
-}

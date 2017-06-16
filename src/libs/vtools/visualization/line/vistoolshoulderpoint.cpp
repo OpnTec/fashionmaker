@@ -147,17 +147,3 @@ void VisToolShoulderPoint::paint(QPainter *painter, const QStyleOptionGraphicsIt
 
     VisLine::paint(painter, option, widget);
 }
-
-//---------------------------------------------------------------------------------------------------------------------
-QRectF VisToolShoulderPoint::boundingRect() const
-{
-    QRectF rect = VisLine::boundingRect();
-    rect = rect.united(point->boundingRect());
-    rect = rect.united(line1P1->boundingRect());
-    rect = rect.united(line1P2->boundingRect());
-    rect = rect.united(line1->boundingRect());
-    rect = rect.united(line2P2->boundingRect());
-    rect = rect.united(line2->boundingRect());
-    rect = rect.united(line3->boundingRect());
-    return rect;
-}

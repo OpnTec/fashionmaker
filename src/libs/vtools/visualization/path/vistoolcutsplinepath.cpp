@@ -105,13 +105,3 @@ void VisToolCutSplinePath::paint(QPainter *painter, const QStyleOptionGraphicsIt
 
     VisPath::paint(painter, option, widget);
 }
-
-//---------------------------------------------------------------------------------------------------------------------
-QRectF VisToolCutSplinePath::boundingRect() const
-{
-    QRectF rect = VisPath::boundingRect();
-    rect = rect.united(point->boundingRect());
-    rect = rect.united(splPath1->boundingRect());
-    rect = rect.united(splPath2->boundingRect());
-    return rect;
-}

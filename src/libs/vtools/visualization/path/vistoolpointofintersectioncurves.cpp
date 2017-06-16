@@ -118,13 +118,3 @@ void VisToolPointOfIntersectionCurves::paint(QPainter *painter, const QStyleOpti
 
     VisPath::paint(painter, option, widget);
 }
-
-//---------------------------------------------------------------------------------------------------------------------
-QRectF VisToolPointOfIntersectionCurves::boundingRect() const
-{
-    QRectF rect = VisPath::boundingRect();
-
-    rect = rect.united(point->boundingRect());
-    rect = rect.united(visCurve2->boundingRect());
-    return rect;
-}

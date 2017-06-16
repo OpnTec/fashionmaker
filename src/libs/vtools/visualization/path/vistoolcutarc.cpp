@@ -95,13 +95,3 @@ void VisToolCutArc::paint(QPainter *painter, const QStyleOptionGraphicsItem *opt
 
     VisPath::paint(painter, option, widget);
 }
-
-//---------------------------------------------------------------------------------------------------------------------
-QRectF VisToolCutArc::boundingRect() const
-{
-    QRectF rect = VisPath::boundingRect();
-    rect = rect.united(point->boundingRect());
-    rect = rect.united(arc1->boundingRect());
-    rect = rect.united(arc2->boundingRect());
-    return rect;
-}

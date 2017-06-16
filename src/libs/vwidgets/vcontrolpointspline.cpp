@@ -110,9 +110,9 @@ void VControlPointSpline::paint(QPainter *painter, const QStyleOptionGraphicsIte
 //---------------------------------------------------------------------------------------------------------------------
 QRectF VControlPointSpline::boundingRect() const
 {
-    QRectF rect = VScenePoint::boundingRect();
-    rect = rect.united(controlLine->boundingRect());
-    return rect;
+    QRectF recTool = VScenePoint::boundingRect();
+    recTool = recTool.united(childrenBoundingRect());
+    return recTool;
 }
 
 //---------------------------------------------------------------------------------------------------------------------

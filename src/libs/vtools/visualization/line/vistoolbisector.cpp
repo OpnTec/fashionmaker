@@ -91,19 +91,6 @@ void VisToolBisector::paint(QPainter *painter, const QStyleOptionGraphicsItem *o
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QRectF VisToolBisector::boundingRect() const
-{
-    QRectF rect = VisLine::boundingRect();
-    rect = rect.united(point->boundingRect());
-    rect = rect.united(line1P1->boundingRect());
-    rect = rect.united(line1P2->boundingRect());
-    rect = rect.united(line1->boundingRect());
-    rect = rect.united(line2P2->boundingRect());
-    rect = rect.united(line2->boundingRect());
-    return rect;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
 void VisToolBisector::RefreshGeometry()
 {
     if (object1Id > NULL_ID)

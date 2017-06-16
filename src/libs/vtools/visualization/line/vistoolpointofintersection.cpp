@@ -107,17 +107,6 @@ void VisToolPointOfIntersection::paint(QPainter *painter, const QStyleOptionGrap
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QRectF VisToolPointOfIntersection::boundingRect() const
-{
-    QRectF rect = VisLine::boundingRect();
-    rect = rect.united(point->boundingRect());
-    rect = rect.united(axisP1->boundingRect());
-    rect = rect.united(axisP2->boundingRect());
-    rect = rect.united(axis2->boundingRect());
-    return rect;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
 void VisToolPointOfIntersection::ShowIntersection(const QLineF &axis1, const QLineF &axis2, const QColor &color)
 {
     QPointF p;

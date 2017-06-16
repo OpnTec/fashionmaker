@@ -150,16 +150,3 @@ void VisToolCubicBezier::paint(QPainter *painter, const QStyleOptionGraphicsItem
 
     VisPath::paint(painter, option, widget);
 }
-
-//---------------------------------------------------------------------------------------------------------------------
-QRectF VisToolCubicBezier::boundingRect() const
-{
-    QRectF rect = VisPath::boundingRect();
-    rect = rect.united(point1->boundingRect());
-    rect = rect.united(point2->boundingRect());
-    rect = rect.united(point3->boundingRect());
-    rect = rect.united(point4->boundingRect());
-    rect = rect.united(helpLine1->boundingRect());
-    rect = rect.united(helpLine2->boundingRect());
-    return rect;
-}

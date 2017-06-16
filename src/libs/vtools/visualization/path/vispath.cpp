@@ -54,6 +54,14 @@ void VisPath::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, Q
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+QRectF VisPath::boundingRect() const
+{
+    QRectF recTool = VCurvePathItem::boundingRect();
+    recTool = recTool.united(childrenBoundingRect());
+    return recTool;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 void VisPath::InitPen()
 {
     QPen visPen = pen();

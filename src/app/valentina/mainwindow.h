@@ -177,6 +177,7 @@ private slots:
     void ClosedDialogPin(int result);
     void ClosedDialogInsertNode(int result);
 
+    void ZoomFitBestCurrent();
     void LoadIndividual();
     void LoadStandard();
     void UnloadMeasurements();

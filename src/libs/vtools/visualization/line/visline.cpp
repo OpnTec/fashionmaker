@@ -87,6 +87,14 @@ void VisLine::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, Q
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+QRectF VisLine::boundingRect() const
+{
+    QRectF recTool = QGraphicsLineItem::boundingRect();
+    recTool = recTool.united(childrenBoundingRect());
+    return recTool;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 QPointF VisLine::Ray(const QPointF &firstPoint, const qreal &angle) const
 {
     if (this->scene() == nullptr)

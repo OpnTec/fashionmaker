@@ -150,20 +150,6 @@ void VisToolLineIntersectAxis::paint(QPainter *painter, const QStyleOptionGraphi
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QRectF VisToolLineIntersectAxis::boundingRect() const
-{
-    QRectF rect = VisLine::boundingRect();
-    rect = rect.united(point->boundingRect());
-    rect = rect.united(lineP1->boundingRect());
-    rect = rect.united(lineP2->boundingRect());
-    rect = rect.united(basePoint->boundingRect());
-    rect = rect.united(baseLine->boundingRect());
-    rect = rect.united(axisLine->boundingRect());
-    rect = rect.united(line_intersection->boundingRect());
-    return rect;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
 void VisToolLineIntersectAxis::ShowIntersection(const QLineF &axis_line, const QLineF &base_line)
 {
     QPointF p;

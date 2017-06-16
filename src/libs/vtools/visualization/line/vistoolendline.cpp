@@ -120,11 +120,3 @@ void VisToolEndLine::paint(QPainter *painter, const QStyleOptionGraphicsItem *op
 
     VisLine::paint(painter, option, widget);
 }
-
-//---------------------------------------------------------------------------------------------------------------------
-QRectF VisToolEndLine::boundingRect() const
-{
-    QRectF rect = VisLine::boundingRect();
-    rect = rect.united(point->boundingRect());
-    return rect;
-}

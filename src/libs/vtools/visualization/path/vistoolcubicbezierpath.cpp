@@ -169,32 +169,6 @@ void VisToolCubicBezierPath::paint(QPainter *painter, const QStyleOptionGraphics
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QRectF VisToolCubicBezierPath::boundingRect() const
-{
-    QRectF rect = VisPath::boundingRect();
-
-    for (int i=0; i < mainPoints.size(); ++i)
-    {
-        rect = rect.united(mainPoints.at(i)->boundingRect());
-    }
-
-    for (int i=0; i < ctrlPoints.size(); ++i)
-    {
-        rect = rect.united(ctrlPoints.at(i)->boundingRect());
-    }
-
-    for (int i=0; i < lines.size(); ++i)
-    {
-        rect = rect.united(lines.at(i)->boundingRect());
-    }
-
-    rect = rect.united(newCurveSegment->boundingRect());
-    rect = rect.united(helpLine1->boundingRect());
-    rect = rect.united(helpLine2->boundingRect());
-    return rect;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
 QGraphicsEllipseItem *VisToolCubicBezierPath::getPoint(QVector<QGraphicsEllipseItem *> &points, quint32 i, qreal z)
 {
     if (not points.isEmpty() && static_cast<quint32>(points.size() - 1) >= i)

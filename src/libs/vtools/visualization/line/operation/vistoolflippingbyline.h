@@ -43,7 +43,6 @@ public:
     virtual void   RefreshGeometry() Q_DECL_OVERRIDE;
     virtual void   paint(QPainter *painter, const QStyleOptionGraphicsItem *option,
                          QWidget *widget = nullptr) Q_DECL_OVERRIDE;
-    virtual QRectF boundingRect() const Q_DECL_OVERRIDE;
 
     void SetFirstLinePointId(quint32 value);
     void SetSecondLinePointId(quint32 value);

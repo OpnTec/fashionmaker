@@ -55,7 +55,6 @@ public:
 
     virtual void   paint(QPainter *painter, const QStyleOptionGraphicsItem *option,
                          QWidget *widget = nullptr) Q_DECL_OVERRIDE;
-    virtual QRectF boundingRect() const Q_DECL_OVERRIDE;
 private:
     Q_DISABLE_COPY(VisToolShoulderPoint)
     quint32              lineP1Id;

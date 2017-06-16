@@ -52,8 +52,9 @@ public:
     virtual int  type() const Q_DECL_OVERRIDE {return Type;}
     enum { Type = UserType + static_cast<int>(Vis::Path)};
 
-    virtual void paint(QPainter *painter, const QStyleOptionGraphicsItem *option,
-                       QWidget *widget = nullptr) Q_DECL_OVERRIDE;
+    virtual void   paint(QPainter *painter, const QStyleOptionGraphicsItem *option,
+                         QWidget *widget = nullptr) Q_DECL_OVERRIDE;
+    virtual QRectF boundingRect() const Q_DECL_OVERRIDE;
 protected:
     virtual void InitPen() Q_DECL_OVERRIDE;
     virtual void AddOnScene() Q_DECL_OVERRIDE;

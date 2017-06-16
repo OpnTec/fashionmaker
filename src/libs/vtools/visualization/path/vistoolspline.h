@@ -67,8 +67,6 @@ public:
 
     virtual void   paint(QPainter *painter, const QStyleOptionGraphicsItem *option,
                          QWidget *widget = nullptr) Q_DECL_OVERRIDE;
-    virtual QRectF boundingRect() const Q_DECL_OVERRIDE;
-
 public slots:
     void MouseLeftPressed();
     void MouseLeftReleased();

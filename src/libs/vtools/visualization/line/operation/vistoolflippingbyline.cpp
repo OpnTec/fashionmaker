@@ -84,15 +84,6 @@ void VisToolFlippingByLine::paint(QPainter *painter, const QStyleOptionGraphicsI
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QRectF VisToolFlippingByLine::boundingRect() const
-{
-    QRectF rect = VisOperation::boundingRect();
-    rect = rect.united(point1->boundingRect());
-    rect = rect.united(point2->boundingRect());
-    return rect;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
 void VisToolFlippingByLine::SetFirstLinePointId(quint32 value)
 {
     object1Id = value;

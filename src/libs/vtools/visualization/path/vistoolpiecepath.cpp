@@ -94,20 +94,6 @@ void VisToolPiecePath::paint(QPainter *painter, const QStyleOptionGraphicsItem *
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QRectF VisToolPiecePath::boundingRect() const
-{
-    QRectF rect = VisPath::boundingRect();
-
-    for (int i=0; i < m_points.size(); ++i)
-    {
-        rect = rect.united(m_points.at(i)->boundingRect());
-    }
-
-    rect = rect.united(m_line->boundingRect());
-    return rect;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
 void VisToolPiecePath::mousePressEvent(QGraphicsSceneMouseEvent *event)
 {
     event->ignore();

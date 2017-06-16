@@ -83,17 +83,6 @@ void VisToolAlongLine::paint(QPainter *painter, const QStyleOptionGraphicsItem *
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QRectF VisToolAlongLine::boundingRect() const
-{
-    QRectF rect = VisLine::boundingRect();
-    rect = rect.united(point->boundingRect());
-    rect = rect.united(lineP1->boundingRect());
-    rect = rect.united(lineP2->boundingRect());
-    rect = rect.united(line->boundingRect());
-    return rect;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
 void VisToolAlongLine::RefreshGeometry()
 {
     if (object1Id > NULL_ID)

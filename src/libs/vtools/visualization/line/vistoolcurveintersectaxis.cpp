@@ -127,15 +127,3 @@ void VisToolCurveIntersectAxis::paint(QPainter *painter, const QStyleOptionGraph
 
     VisLine::paint(painter, option, widget);
 }
-
-//---------------------------------------------------------------------------------------------------------------------
-QRectF VisToolCurveIntersectAxis::boundingRect() const
-{
-    QRectF rect = VisLine::boundingRect();
-    rect = rect.united(point->boundingRect());
-    rect = rect.united(basePoint->boundingRect());
-    rect = rect.united(baseLine->boundingRect());
-    rect = rect.united(axisLine->boundingRect());
-    rect = rect.united(visCurve->boundingRect());
-    return rect;
-}

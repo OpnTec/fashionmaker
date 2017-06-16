@@ -105,17 +105,6 @@ void VisToolPointFromArcAndTangent::paint(QPainter *painter, const QStyleOptionG
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QRectF VisToolPointFromArcAndTangent::boundingRect() const
-{
-    QRectF rect = VisLine::boundingRect();
-    rect = rect.united(point->boundingRect());
-    rect = rect.united(tangent->boundingRect());
-    rect = rect.united(arcPath->boundingRect());
-    rect = rect.united(tangentLine2->boundingRect());
-    return rect;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
 void VisToolPointFromArcAndTangent::FindRays(const QPointF &p, const VArc *arc)
 {
     QPointF p1, p2;

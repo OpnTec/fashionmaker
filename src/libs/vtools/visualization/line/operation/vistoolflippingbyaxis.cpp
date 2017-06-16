@@ -90,11 +90,3 @@ void VisToolFlippingByAxis::paint(QPainter *painter, const QStyleOptionGraphicsI
 
     VisOperation::paint(painter, option, widget);
 }
-
-//---------------------------------------------------------------------------------------------------------------------
-QRectF VisToolFlippingByAxis::boundingRect() const
-{
-    QRectF rect = VisOperation::boundingRect();
-    rect = rect.united(point1->boundingRect());
-    return rect;
-}

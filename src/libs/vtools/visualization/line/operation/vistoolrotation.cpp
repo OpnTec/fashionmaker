@@ -203,16 +203,6 @@ void VisToolRotation::paint(QPainter *painter, const QStyleOptionGraphicsItem *o
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QRectF VisToolRotation::boundingRect() const
-{
-    QRectF rect = VisOperation::boundingRect();
-    rect = rect.united(point->boundingRect());
-    rect = rect.united(angleArc->boundingRect());
-    rect = rect.united(xAxis->boundingRect());
-    return rect;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
 void VisToolRotation::SetOriginPointId(quint32 value)
 {
     object1Id = value;

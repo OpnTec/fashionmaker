@@ -116,18 +116,6 @@ void VisToolPointFromCircleAndTangent::paint(QPainter *painter, const QStyleOpti
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QRectF VisToolPointFromCircleAndTangent::boundingRect() const
-{
-    QRectF rect = VisLine::boundingRect();
-    rect = rect.united(point->boundingRect());
-    rect = rect.united(tangent->boundingRect());
-    rect = rect.united(cCenter->boundingRect());
-    rect = rect.united(cPath->boundingRect());
-    rect = rect.united(tangent2->boundingRect());
-    return rect;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
 void VisToolPointFromCircleAndTangent::FindRays(const QPointF &p, const QPointF &center, qreal radius)
 {
     QPointF p1, p2;

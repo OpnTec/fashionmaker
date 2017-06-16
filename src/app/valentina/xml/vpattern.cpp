@@ -3794,106 +3794,50 @@ QRectF VPattern::ActiveDrawBoundingRect() const
                     Q_UNREACHABLE();
                     break;
                 case Tool::BasePoint:
-                    rec = ToolBoundingRect<VToolBasePoint>(rec, tool.getId());
+                case Tool::LineIntersect:
+                case Tool::PointOfContact:
+                case Tool::Triangle:
+                case Tool::PointOfIntersection:
+                case Tool::CutArc:
+                case Tool::CutSpline:
+                case Tool::CutSplinePath:
+                case Tool::PointOfIntersectionArcs:
+                case Tool::PointOfIntersectionCircles:
+                case Tool::PointOfIntersectionCurves:
+                case Tool::PointFromCircleAndTangent:
+                case Tool::PointFromArcAndTangent:
+                    rec = ToolBoundingRect<VToolSinglePoint>(rec, tool.getId());
                     break;
                 case Tool::EndLine:
-                    rec = ToolBoundingRect<VToolEndLine>(rec, tool.getId());
+                case Tool::AlongLine:
+                case Tool::ShoulderPoint:
+                case Tool::Normal:
+                case Tool::Bisector:
+                case Tool::Height:
+                case Tool::LineIntersectAxis:
+                case Tool::CurveIntersectAxis:
+                    rec = ToolBoundingRect<VToolLinePoint>(rec, tool.getId());
                     break;
                 case Tool::Line:
                     rec = ToolBoundingRect<VToolLine>(rec, tool.getId());
                     break;
-                case Tool::AlongLine:
-                    rec = ToolBoundingRect<VToolAlongLine>(rec, tool.getId());
-                    break;
-                case Tool::ShoulderPoint:
-                    rec = ToolBoundingRect<VToolShoulderPoint>(rec, tool.getId());
-                    break;
-                case Tool::Normal:
-                    rec = ToolBoundingRect<VToolNormal>(rec, tool.getId());
-                    break;
-                case Tool::Bisector:
-                    rec = ToolBoundingRect<VToolBisector>(rec, tool.getId());
-                    break;
-                case Tool::LineIntersect:
-                    rec = ToolBoundingRect<VToolLineIntersect>(rec, tool.getId());
-                    break;
                 case Tool::Spline:
-                    rec = ToolBoundingRect<VToolSpline>(rec, tool.getId());
-                    break;
                 case Tool::CubicBezier:
-                    rec = ToolBoundingRect<VToolCubicBezier>(rec, tool.getId());
-                    break;
                 case Tool::Arc:
-                    rec = ToolBoundingRect<VToolArc>(rec, tool.getId());
-                    break;
                 case Tool::SplinePath:
-                    rec = ToolBoundingRect<VToolSplinePath>(rec, tool.getId());
-                    break;
                 case Tool::CubicBezierPath:
-                    rec = ToolBoundingRect<VToolCubicBezierPath>(rec, tool.getId());
-                    break;
-                case Tool::PointOfContact:
-                    rec = ToolBoundingRect<VToolPointOfContact>(rec, tool.getId());
-                    break;
-                case Tool::Height:
-                    rec = ToolBoundingRect<VToolHeight>(rec, tool.getId());
-                    break;
-                case Tool::Triangle:
-                    rec = ToolBoundingRect<VToolTriangle>(rec, tool.getId());
-                    break;
-                case Tool::PointOfIntersection:
-                    rec = ToolBoundingRect<VToolPointOfIntersection>(rec, tool.getId());
-                    break;
-                case Tool::CutArc:
-                    rec = ToolBoundingRect<VToolCutArc>(rec, tool.getId());
-                    break;
-                case Tool::CutSpline:
-                    rec = ToolBoundingRect<VToolCutSpline>(rec, tool.getId());
-                    break;
-                case Tool::CutSplinePath:
-                    rec = ToolBoundingRect<VToolCutSplinePath>(rec, tool.getId());
-                    break;
                 case Tool::ArcWithLength:
-                    rec = ToolBoundingRect<VToolArcWithLength>(rec, tool.getId());
-                    break;
-                case Tool::LineIntersectAxis:
-                    rec = ToolBoundingRect<VToolLineIntersectAxis>(rec, tool.getId());
-                    break;
-                case Tool::PointOfIntersectionArcs:
-                    rec = ToolBoundingRect<VToolPointOfIntersectionArcs>(rec, tool.getId());
-                    break;
-                case Tool::PointOfIntersectionCircles:
-                    rec = ToolBoundingRect<VToolPointOfIntersectionCircles>(rec, tool.getId());
-                    break;
-                case Tool::PointOfIntersectionCurves:
-                    rec = ToolBoundingRect<VToolPointOfIntersectionCurves>(rec, tool.getId());
-                    break;
-                case Tool::CurveIntersectAxis:
-                    rec = ToolBoundingRect<VToolCurveIntersectAxis>(rec, tool.getId());
-                    break;
-                case Tool::PointFromCircleAndTangent:
-                    rec = ToolBoundingRect<VToolPointFromCircleAndTangent>(rec, tool.getId());
-                    break;
-                case Tool::PointFromArcAndTangent:
-                    rec = ToolBoundingRect<VToolPointFromArcAndTangent>(rec, tool.getId());
+                case Tool::EllipticalArc:
+                    rec = ToolBoundingRect<VAbstractSpline>(rec, tool.getId());
                     break;
                 case Tool::TrueDarts:
-                    rec = ToolBoundingRect<VToolTrueDarts>(rec, tool.getId());
+                    rec = ToolBoundingRect<VToolDoublePoint>(rec, tool.getId());
                     break;
                 case Tool::Rotation:
-                    rec = ToolBoundingRect<VToolRotation>(rec, tool.getId());
-                    break;
                 case Tool::FlippingByLine:
-                    rec = ToolBoundingRect<VToolFlippingByLine>(rec, tool.getId());
-                    break;
                 case Tool::FlippingByAxis:
-                    rec = ToolBoundingRect<VToolFlippingByAxis>(rec, tool.getId());
-                    break;
                 case Tool::Move:
-                    rec = ToolBoundingRect<VToolMove>(rec, tool.getId());
-                    break;
-                case Tool::EllipticalArc:
-                    rec = ToolBoundingRect<VToolEllipticalArc>(rec, tool.getId());
+                    rec = ToolBoundingRect<VAbstractOperation>(rec, tool.getId());
                     break;
                 //These tools are not accesseble in Draw mode, but still 'history' contains them.
                 case Tool::Piece:
@@ -3930,7 +3874,7 @@ QRectF VPattern::ToolBoundingRect(const QRectF &rec, const quint32 &id) const
         //map to scene coordinate.
         childrenRect.translate(vTool->scenePos());
 
-        recTool = recTool.united(vTool->boundingRect());
+        recTool = recTool.united(vTool->sceneBoundingRect());
         recTool = recTool.united(childrenRect);
     }
     else

@@ -137,14 +137,3 @@ void VisToolNormal::paint(QPainter *painter, const QStyleOptionGraphicsItem *opt
 
     VisLine::paint(painter, option, widget);
 }
-
-//---------------------------------------------------------------------------------------------------------------------
-QRectF VisToolNormal::boundingRect() const
-{
-    QRectF rect = VisLine::boundingRect();
-    rect = rect.united(point->boundingRect());
-    rect = rect.united(lineP1->boundingRect());
-    rect = rect.united(lineP2->boundingRect());
-    rect = rect.united(line->boundingRect());
-    return rect;
-}

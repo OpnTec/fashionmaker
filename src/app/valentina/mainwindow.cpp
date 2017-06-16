@@ -280,7 +280,7 @@ void MainWindow::AddPP(const QString &PPName)
 
     // Show best for new PP
     VMainGraphicsView::NewSceneRect(ui->view->scene(), ui->view);
-    ui->view->fitInView(doc->ActiveDrawBoundingRect(), Qt::KeepAspectRatio);
+    ZoomFitBestCurrent();
 
     ui->actionNewDraw->setEnabled(true);
     helpLabel->setText("");
@@ -1173,6 +1173,29 @@ void MainWindow::ClosedDialogInsertNode(int result)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void MainWindow::ZoomFitBestCurrent()
+{
+    const QRectF rect = doc->ActiveDrawBoundingRect();
+    if (rect.isEmpty())
+    {
+        return;
+    }
+
+    ui->view->fitInView(rect, Qt::KeepAspectRatio);
+    QTransform transform = ui->view->transform();
+
+    qreal factor = transform.m11();
+    factor = qMax(factor, ui->view->MinScale());
+    factor = qMin(factor, ui->view->MaxScale());
+
+    transform.setMatrix(factor, transform.m12(), transform.m13(), transform.m21(), factor, transform.m23(),
+                        transform.m31(), transform.m32(), transform.m33());
+    ui->view->setTransform(transform);
+
+    VMainGraphicsView::NewSceneRect(ui->view->scene(), ui->view);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 /**
  * @brief ToolCutArc handler tool cutArc.
  * @param checked true - button checked.
@@ -1855,6 +1878,11 @@ void MainWindow::ToolBarTools()
     zoomFitBestShortcuts.append(QKeySequence(Qt::ControlModifier + Qt::Key_Equal));
     ui->actionZoomFitBest->setShortcuts(zoomFitBestShortcuts);
     connect(ui->actionZoomFitBest, &QAction::triggered, ui->view, &VMainGraphicsView::ZoomFitBest);
+
+    QList<QKeySequence> zoomFitBestCurrentShortcuts;
+    zoomFitBestCurrentShortcuts.append(QKeySequence(Qt::ControlModifier + Qt::Key_M));
+    ui->actionZoomFitBestCurrent->setShortcuts(zoomFitBestCurrentShortcuts);
+    connect(ui->actionZoomFitBestCurrent, &QAction::triggered, this, &MainWindow::ZoomFitBestCurrent);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -2742,6 +2770,7 @@ void MainWindow::Clear()
     ui->actionZoomIn->setEnabled(false);
     ui->actionZoomOut->setEnabled(false);
     ui->actionZoomFitBest->setEnabled(false);
+    ui->actionZoomFitBestCurrent->setEnabled(false);
     ui->actionZoomOriginal->setEnabled(false);
     ui->actionHistory->setEnabled(false);
     ui->actionTable->setEnabled(false);
@@ -2987,6 +3016,7 @@ void MainWindow::SetEnableWidgets(bool enable)
     ui->actionLayout->setEnabled(enable);
     ui->actionTable->setEnabled(enable && drawStage);
     ui->actionZoomFitBest->setEnabled(enable);
+    ui->actionZoomFitBestCurrent->setEnabled(enable && drawStage);
     ui->actionZoomOriginal->setEnabled(enable);
     ui->actionShowCurveDetails->setEnabled(enable && drawStage);
     ui->actionLoadIndividual->setEnabled(enable && designStage);
@@ -4580,7 +4610,7 @@ void MainWindow::ChangePP(int index, bool zoomBestFit)
             ArrowTool();
             if (zoomBestFit)
             {
-                ui->view->fitInView(doc->ActiveDrawBoundingRect(), Qt::KeepAspectRatio);
+                ZoomFitBestCurrent();
             }
         }
         toolOptions->itemClicked(nullptr);//hide options for tool in previous pattern piece

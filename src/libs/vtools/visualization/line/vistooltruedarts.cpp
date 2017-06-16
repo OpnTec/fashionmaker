@@ -184,21 +184,3 @@ void VisToolTrueDarts::paint(QPainter *painter, const QStyleOptionGraphicsItem *
 
     VisLine::paint(painter, option, widget);
 }
-
-//---------------------------------------------------------------------------------------------------------------------
-QRectF VisToolTrueDarts::boundingRect() const
-{
-    QRectF rect = VisLine::boundingRect();
-    rect = rect.united(point1->boundingRect());
-    rect = rect.united(point2->boundingRect());
-    rect = rect.united(baseLineP1->boundingRect());
-    rect = rect.united(baseLineP2->boundingRect());
-    rect = rect.united(dartP1->boundingRect());
-    rect = rect.united(dartP2->boundingRect());
-    rect = rect.united(dartP3->boundingRect());
-    rect = rect.united(lineblP1P1->boundingRect());
-    rect = rect.united(lineblP2P2->boundingRect());
-    rect = rect.united(p1d2->boundingRect());
-    rect = rect.united(d2p2->boundingRect());
-    return rect;
-}

@@ -101,11 +101,3 @@ void VisToolEllipticalArc::paint(QPainter *painter, const QStyleOptionGraphicsIt
 
     VisPath::paint(painter, option, widget);
 }
-
-//---------------------------------------------------------------------------------------------------------------------
-QRectF VisToolEllipticalArc::boundingRect() const
-{
-    QRectF rect = VisPath::boundingRect();
-    rect = rect.united(arcCenter->boundingRect());
-    return rect;
-}

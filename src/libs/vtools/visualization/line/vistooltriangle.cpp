@@ -161,21 +161,6 @@ void VisToolTriangle::paint(QPainter *painter, const QStyleOptionGraphicsItem *o
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QRectF VisToolTriangle::boundingRect() const
-{
-    QRectF rect = VisLine::boundingRect();
-    rect = rect.united(point->boundingRect());
-    rect = rect.united(axisP1->boundingRect());
-    rect = rect.united(axisP2->boundingRect());
-    rect = rect.united(axis->boundingRect());
-    rect = rect.united(hypotenuseP1->boundingRect());
-    rect = rect.united(hypotenuseP2->boundingRect());
-    rect = rect.united(foot1->boundingRect());
-    rect = rect.united(foot2->boundingRect());
-    return rect;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
 void VisToolTriangle::DrawAimedAxis(QGraphicsPathItem *item, const QLineF &line, const QColor &color,
                                     Qt::PenStyle style)
 {

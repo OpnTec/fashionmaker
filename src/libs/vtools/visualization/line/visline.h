@@ -55,8 +55,9 @@ public:
     enum { Type = UserType + static_cast<int>(Vis::Line)};
     static qreal CorrectAngle(const qreal &angle);
 
-    virtual void paint(QPainter *painter, const QStyleOptionGraphicsItem *option,
-                       QWidget *widget = nullptr) Q_DECL_OVERRIDE;
+    virtual void   paint(QPainter *painter, const QStyleOptionGraphicsItem *option,
+                         QWidget *widget = nullptr) Q_DECL_OVERRIDE;
+    virtual QRectF boundingRect() const Q_DECL_OVERRIDE;
 protected:
     QPointF      Ray(const QPointF &firstPoint, const qreal &angle) const;
     QPointF      Ray(const QPointF &firstPoint) const;

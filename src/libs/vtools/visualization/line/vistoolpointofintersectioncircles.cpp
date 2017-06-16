@@ -140,15 +140,3 @@ void VisToolPointOfIntersectionCircles::paint(QPainter *painter, const QStyleOpt
 
     VisLine::paint(painter, option, widget);
 }
-
-//---------------------------------------------------------------------------------------------------------------------
-QRectF VisToolPointOfIntersectionCircles::boundingRect() const
-{
-    QRectF rect = VisLine::boundingRect();
-    rect = rect.united(point->boundingRect());
-    rect = rect.united(c1Center->boundingRect());
-    rect = rect.united(c2Center->boundingRect());
-    rect = rect.united(c1Path->boundingRect());
-    rect = rect.united(c2Path->boundingRect());
-    return rect;
-}

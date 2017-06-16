@@ -4,6 +4,7 @@
 - [#684] Proposal: Add option to only show outer edges on detail.
 - [#244] New feature: Adjust line and point thickness and label size.
 - [#637] Max scene size too small to fit all objects.
+- New feature Zoom Fit Best Current pattern piece.
 
 # Version 0.5.1
 - [#683] Tool Seam allowance's dialog is off screen on small resolutions.

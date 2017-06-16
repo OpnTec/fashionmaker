@@ -97,9 +97,9 @@ void VToolLinePoint::paint(QPainter *painter, const QStyleOptionGraphicsItem *op
 //---------------------------------------------------------------------------------------------------------------------
 QRectF VToolLinePoint::boundingRect() const
 {
-    QRectF rect = VToolSinglePoint::boundingRect();
-    rect = rect.united(mainLine->boundingRect());
-    return rect;
+    QRectF recTool = VToolSinglePoint::boundingRect();
+    recTool = recTool.united(childrenBoundingRect());
+    return recTool;
 }
 
 //---------------------------------------------------------------------------------------------------------------------

@@ -128,19 +128,6 @@ void VisToolHeight::paint(QPainter *painter, const QStyleOptionGraphicsItem *opt
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QRectF VisToolHeight::boundingRect() const
-{
-    QRectF rect = VisLine::boundingRect();
-    rect = rect.united(point->boundingRect());
-    rect = rect.united(base_point->boundingRect());
-    rect = rect.united(lineP1->boundingRect());
-    rect = rect.united(lineP2->boundingRect());
-    rect = rect.united(line->boundingRect());
-    rect = rect.united(line_intersection->boundingRect());
-    return rect;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
 void VisToolHeight::ShowIntersection(const QLineF &height_line, const QLineF &base_line)
 {
     QPointF p;

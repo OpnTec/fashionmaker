@@ -126,13 +126,3 @@ void VisToolPointOfIntersectionArcs::paint(QPainter *painter, const QStyleOption
 
     VisLine::paint(painter, option, widget);
 }
-
-//---------------------------------------------------------------------------------------------------------------------
-QRectF VisToolPointOfIntersectionArcs::boundingRect() const
-{
-    QRectF rect = VisLine::boundingRect();
-    rect = rect.united(point->boundingRect());
-    rect = rect.united(arc1Path->boundingRect());
-    rect = rect.united(arc2Path->boundingRect());
-    return rect;
-}

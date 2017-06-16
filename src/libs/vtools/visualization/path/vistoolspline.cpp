@@ -233,16 +233,6 @@ void VisToolSpline::paint(QPainter *painter, const QStyleOptionGraphicsItem *opt
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QRectF VisToolSpline::boundingRect() const
-{
-    QRectF rect = VisPath::boundingRect();
-
-    rect = rect.united(point1->boundingRect());
-    rect = rect.united(point4->boundingRect());
-    return rect;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
 void VisToolSpline::MouseLeftPressed()
 {
     if (mode == Mode::Creation)

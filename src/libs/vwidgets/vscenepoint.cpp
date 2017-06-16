@@ -100,10 +100,9 @@ void VScenePoint::RefreshPointGeometry(const VPointF &point)
 //---------------------------------------------------------------------------------------------------------------------
 QRectF VScenePoint::boundingRect() const
 {
-    QRectF rect = QGraphicsEllipseItem::boundingRect();
-    rect = rect.united(m_namePoint->boundingRect());
-    rect = rect.united(m_lineName->boundingRect());
-    return rect;
+    QRectF recTool = QGraphicsEllipseItem::boundingRect();
+    recTool = recTool.united(childrenBoundingRect());
+    return recTool;
 }
 
 //---------------------------------------------------------------------------------------------------------------------

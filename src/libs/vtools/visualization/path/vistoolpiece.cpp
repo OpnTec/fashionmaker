@@ -95,21 +95,6 @@ void VisToolPiece::paint(QPainter *painter, const QStyleOptionGraphicsItem *opti
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QRectF VisToolPiece::boundingRect() const
-{
-    QRectF rect = VisPath::boundingRect();
-
-    for (int i=0; i < m_points.size(); ++i)
-    {
-        rect = rect.united(m_points.at(i)->boundingRect());
-    }
-
-    rect = rect.united(m_line1->boundingRect());
-    rect = rect.united(m_line2->boundingRect());
-    return rect;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
 QGraphicsEllipseItem *VisToolPiece::GetPoint(quint32 i, const QColor &color)
 {
     return GetPointItem(m_points, i, color, this);
