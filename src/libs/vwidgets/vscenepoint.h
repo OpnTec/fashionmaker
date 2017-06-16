@@ -38,7 +38,7 @@ class VPointF;
 class VScenePoint: public QGraphicsEllipseItem
 {
 public:
-    VScenePoint(QGraphicsItem *parent = nullptr);
+    explicit VScenePoint(QGraphicsItem *parent = nullptr);
     ~VScenePoint() = default;
 
     virtual void   paint(QPainter *painter, const QStyleOptionGraphicsItem *option,
