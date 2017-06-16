@@ -69,8 +69,12 @@ template <class T> class QSharedPointer;
 VToolLine::VToolLine(VAbstractPattern *doc, VContainer *data, quint32 id, quint32 firstPoint, quint32 secondPoint,
                      const QString &typeLine, const QString &lineColor, const Source &typeCreation,
                      QGraphicsItem *parent)
-    :VDrawTool(doc, data, id), QGraphicsLineItem(parent), firstPoint(firstPoint), secondPoint(secondPoint),
-      lineColor(lineColor)
+    :VDrawTool(doc, data, id),
+      QGraphicsLineItem(parent),
+      firstPoint(firstPoint),
+      secondPoint(secondPoint),
+      lineColor(lineColor),
+      m_isHovered(false)
 {
     this->m_lineType = typeLine;
     //Line
@@ -80,9 +84,6 @@ VToolLine::VToolLine(VAbstractPattern *doc, VContainer *data, quint32 id, quint3
     this->setFlag(QGraphicsItem::ItemStacksBehindParent, true);
     this->setFlag(QGraphicsItem::ItemIsFocusable, true);// For keyboard input focus
     this->setAcceptHoverEvents(true);
-    this->setPen(QPen(CorrectColor(lineColor),
-                      qApp->toPixel(WidthHairLine(*VAbstractTool::data.GetPatternUnit()))/factor,
-                      LineStyleToPenStyle(typeLine)));
 
     ToolCreation(typeCreation);
 }
@@ -194,6 +195,16 @@ QString VToolLine::getTagName() const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void VToolLine::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
+{
+    const qreal width = ScaleWidth(m_isHovered ? widthMainLine : widthHairLine, SceneScale(scene()));
+
+    setPen(QPen(CorrectColor(this, lineColor), width, LineStyleToPenStyle(m_lineType)));
+
+    QGraphicsLineItem::paint(painter, option, widget);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 QString VToolLine::FirstPointName() const
 {
     return VAbstractTool::data.GetGObject(firstPoint)->name();
@@ -228,24 +239,10 @@ void VToolLine::ShowTool(quint32 id, bool enable)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-/**
- * @brief SetFactor set current scale factor of scene.
- * @param factor scene scale factor.
- */
-void VToolLine::SetFactor(qreal factor)
-{
-    VDrawTool::SetFactor(factor);
-    RefreshGeometry();
-}
-
-//---------------------------------------------------------------------------------------------------------------------
 void VToolLine::Disable(bool disable, const QString &namePP)
 {
-    enabled = !CorrectDisable(disable, namePP);
+    const bool enabled = !CorrectDisable(disable, namePP);
     this->setEnabled(enabled);
-    this->setPen(QPen(CorrectColor(lineColor),
-                      qApp->toPixel(WidthHairLine(*VAbstractTool::data.GetPatternUnit()))/factor,
-                      LineStyleToPenStyle(m_lineType)));
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -315,10 +312,8 @@ void VToolLine::RefreshDataInFile()
  */
 void VToolLine::hoverEnterEvent(QGraphicsSceneHoverEvent *event)
 {
-    Q_UNUSED(event)
-    this->setPen(QPen(CorrectColor(lineColor),
-                      qApp->toPixel(WidthMainLine(*VAbstractTool::data.GetPatternUnit()))/factor,
-                      LineStyleToPenStyle(m_lineType)));
+    m_isHovered = true;
+    QGraphicsLineItem::hoverEnterEvent(event);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -328,12 +323,10 @@ void VToolLine::hoverEnterEvent(QGraphicsSceneHoverEvent *event)
  */
 void VToolLine::hoverLeaveEvent(QGraphicsSceneHoverEvent *event)
 {
-    Q_UNUSED(event)
     if (vis.isNull())
     {
-        this->setPen(QPen(CorrectColor(lineColor),
-                          qApp->toPixel(WidthHairLine(*VAbstractTool::data.GetPatternUnit()))/factor,
-                          LineStyleToPenStyle(m_lineType)));
+        m_isHovered = false;
+        QGraphicsLineItem::hoverLeaveEvent(event);
     }
 }
 
@@ -544,5 +537,4 @@ void VToolLine::RefreshGeometry()
     const QSharedPointer<VPointF> first = VAbstractTool::data.GeometricObject<VPointF>(firstPoint);
     const QSharedPointer<VPointF> second = VAbstractTool::data.GeometricObject<VPointF>(secondPoint);
     this->setLine(QLineF(static_cast<QPointF>(*first), static_cast<QPointF>(*second)));
-    this->setPen(QPen(CorrectColor(lineColor), pen().widthF(), LineStyleToPenStyle(m_lineType)));
 }

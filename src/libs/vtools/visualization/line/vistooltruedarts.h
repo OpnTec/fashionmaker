@@ -44,7 +44,7 @@ class VisToolTrueDarts :public VisLine
     Q_OBJECT
 public:
     explicit VisToolTrueDarts(const VContainer *data, QGraphicsItem *parent = nullptr);
-    virtual ~VisToolTrueDarts() Q_DECL_EQ_DEFAULT;
+    virtual ~VisToolTrueDarts() = default;
 
     virtual void RefreshGeometry() Q_DECL_OVERRIDE;
 
@@ -55,6 +55,10 @@ public:
 
     virtual int  type() const Q_DECL_OVERRIDE {return Type;}
     enum { Type = UserType + static_cast<int>(Vis::ToolTrueDarts)};
+
+    virtual void   paint(QPainter *painter, const QStyleOptionGraphicsItem *option,
+                         QWidget *widget = nullptr) Q_DECL_OVERRIDE;
+    virtual QRectF boundingRect() const Q_DECL_OVERRIDE;
 private:
     Q_DISABLE_COPY(VisToolTrueDarts)
     quint32 baseLineP2Id;

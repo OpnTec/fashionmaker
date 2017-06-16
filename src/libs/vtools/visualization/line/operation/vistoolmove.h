@@ -50,7 +50,10 @@ public:
     explicit VisToolMove(const VContainer *data, QGraphicsItem *parent = nullptr);
     virtual ~VisToolMove();
 
-    virtual void RefreshGeometry() Q_DECL_OVERRIDE;
+    virtual void   RefreshGeometry() Q_DECL_OVERRIDE;
+    virtual void   paint(QPainter *painter, const QStyleOptionGraphicsItem *option,
+                         QWidget *widget = nullptr) Q_DECL_OVERRIDE;
+    virtual QRectF boundingRect() const Q_DECL_OVERRIDE;
 
     QString Angle() const;
     void    SetAngle(const QString &expression);

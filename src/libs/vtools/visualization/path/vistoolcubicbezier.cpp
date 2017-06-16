@@ -135,3 +135,31 @@ void VisToolCubicBezier::setObject4Id(const quint32 &value)
 {
     object4Id = value;
 }
+
+//---------------------------------------------------------------------------------------------------------------------
+void VisToolCubicBezier::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
+{
+    const qreal scale = SceneScale(scene());
+
+    ScalePoint(point1, scale);
+    ScalePoint(point2, scale);
+    ScalePoint(point3, scale);
+    ScalePoint(point4, scale);
+    ScalePenWidth(helpLine1, scale);
+    ScalePenWidth(helpLine2, scale);
+
+    VisPath::paint(painter, option, widget);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QRectF VisToolCubicBezier::boundingRect() const
+{
+    QRectF rect = VisPath::boundingRect();
+    rect = rect.united(point1->boundingRect());
+    rect = rect.united(point2->boundingRect());
+    rect = rect.united(point3->boundingRect());
+    rect = rect.united(point4->boundingRect());
+    rect = rect.united(helpLine1->boundingRect());
+    rect = rect.united(helpLine2->boundingRect());
+    return rect;
+}

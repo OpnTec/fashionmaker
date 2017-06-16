@@ -50,16 +50,16 @@ class VSimpleCurve : public VAbstractSimple, public VCurvePathItem
 {
     Q_OBJECT
 public:
-    VSimpleCurve(quint32 id, const QSharedPointer<VAbstractCurve> &curve, Unit patternUnit, qreal *factor = nullptr,
-                 QObject *parent = nullptr);
+    VSimpleCurve(quint32 id, const QSharedPointer<VAbstractCurve> &curve, QObject *parent = nullptr);
     virtual ~VSimpleCurve() Q_DECL_EQ_DEFAULT;
 
     virtual int  type() const Q_DECL_OVERRIDE {return Type;}
     enum { Type = UserType + static_cast<int>(Vis::SimpleCurve)};
 
-    void RefreshGeometry(const QSharedPointer<VAbstractCurve> &curve);
+    virtual void paint(QPainter *painter, const QStyleOptionGraphicsItem *option,
+                       QWidget *widget = nullptr) Q_DECL_OVERRIDE;
 
-    virtual void SetEnabled(bool enabled) Q_DECL_OVERRIDE;
+    void RefreshGeometry(const QSharedPointer<VAbstractCurve> &curve);
 signals:
     /**
      * @brief Choosed send id when clicked.
@@ -86,8 +86,6 @@ private:
 
     QSharedPointer<VAbstractCurve> m_curve;
     bool m_isHovered;
-
-    void ShowPath();
 };
 
 #endif // VSIMPLECURVE_H

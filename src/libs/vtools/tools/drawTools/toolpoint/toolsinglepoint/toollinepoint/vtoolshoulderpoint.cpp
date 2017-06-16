@@ -261,17 +261,6 @@ QString VToolShoulderPoint::ShoulderPointName() const
 
 //---------------------------------------------------------------------------------------------------------------------
 /**
- * @brief SetFactor set current scale factor of scene.
- * @param factor scene scale factor.
- */
-void VToolShoulderPoint::SetFactor(qreal factor)
-{
-    VDrawTool::SetFactor(factor);
-    RefreshGeometry();
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-/**
  * @brief contextMenuEvent handle context menu events.
  * @param event context menu event.
  */

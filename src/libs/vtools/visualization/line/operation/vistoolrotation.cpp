@@ -116,7 +116,7 @@ void VisToolRotation::RefreshGeometry()
         DrawLine(xAxis, QLineF(static_cast<QPointF>(*origin), Ray(static_cast<QPointF>(*origin), 0)), supportColor2,
                  Qt::DashLine);
 
-        VArc arc(*origin, ToPixel(DefPointRadius/*mm*/*2, Unit::Mm), 0, tempAngle);
+        VArc arc(*origin, defPointRadiusPixel*2, 0, tempAngle);
         DrawPath(angleArc, arc.GetPath(PathDirection::Hide), supportColor2, Qt::SolidLine, Qt::RoundCap);
 
         Visualization::toolTip = tr("Rotating angle = %1°, <b>Shift</b> - sticking angle, "
@@ -188,8 +188,29 @@ void VisToolRotation::RefreshGeometry()
         }
     }
 }
-
 QT_WARNING_POP
+
+//---------------------------------------------------------------------------------------------------------------------
+void VisToolRotation::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
+{
+    const qreal scale = SceneScale(scene());
+
+    ScalePoint(point, scale);
+    ScalePenWidth(angleArc, scale);
+    ScalePenWidth(xAxis, scale);
+
+    VisOperation::paint(painter, option, widget);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QRectF VisToolRotation::boundingRect() const
+{
+    QRectF rect = VisOperation::boundingRect();
+    rect = rect.united(point->boundingRect());
+    rect = rect.united(angleArc->boundingRect());
+    rect = rect.united(xAxis->boundingRect());
+    return rect;
+}
 
 //---------------------------------------------------------------------------------------------------------------------
 void VisToolRotation::SetOriginPointId(quint32 value)

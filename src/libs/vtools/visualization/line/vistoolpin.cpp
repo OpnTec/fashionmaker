@@ -38,7 +38,7 @@ VisToolPin::VisToolPin(const VContainer *data, QGraphicsItem *parent)
     this->mainColor = Qt::red;
     this->setZValue(2);// Show on top real tool
 
-    m_point = new VSimplePoint(NULL_ID, mainColor, *Visualization::data->GetPatternUnit(), &factor);
+    m_point = new VSimplePoint(NULL_ID, mainColor);
     m_point->SetPointHighlight(true);
     m_point->setParentItem(this);
     m_point->SetVisualizationMode(true);
@@ -62,7 +62,7 @@ void VisToolPin::RefreshGeometry()
         const QSharedPointer<VPointF> point = Visualization::data->GeometricObject<VPointF>(object1Id);
 
         m_point->SetOnlyPoint(mode == Mode::Creation);
-        m_point->RefreshGeometry(*point);
+        m_point->RefreshPointGeometry(*point);
         m_point->setVisible(true);
     }
 }

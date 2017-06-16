@@ -365,7 +365,6 @@ void VMainGraphicsView::ZoomIn()
     {
         scale(1.1, 1.1);
         VMainGraphicsView::NewSceneRect(this->scene(), this);
-        emit NewFactor(1.1);
     }
 }
 
@@ -378,7 +377,6 @@ void VMainGraphicsView::ZoomOut()
     {
         scale(1.0/1.1, 1.0/1.1);
         VMainGraphicsView::NewSceneRect(this->scene(), this);
-        emit NewFactor(1.0/1.1);
     }
 }
 
@@ -390,7 +388,6 @@ void VMainGraphicsView::ZoomOriginal()
                     trans.m33());
     this->setTransform(trans);
     VMainGraphicsView::NewSceneRect(this->scene(), this);
-    emit NewFactor(1.0);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -418,8 +415,6 @@ void VMainGraphicsView::ZoomFitBest()
     this->setTransform(transform);
 
     VMainGraphicsView::NewSceneRect(scene(), this);
-
-    emit NewFactor(factor);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

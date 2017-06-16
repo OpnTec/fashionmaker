@@ -82,17 +82,6 @@ VToolAlongLine::VToolAlongLine(VAbstractPattern *doc, VContainer *data, quint32 
 
 //---------------------------------------------------------------------------------------------------------------------
 /**
- * @brief SetFactor set current scale factor of scene.
- * @param factor scene scale factor.
- */
-void VToolAlongLine::SetFactor(qreal factor)
-{
-    VDrawTool::SetFactor(factor);
-    RefreshGeometry();
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-/**
  * @brief contextMenuEvent handle context menu events. handle context menu event.
  * @param event context menu event.
  */

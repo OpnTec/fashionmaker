@@ -63,9 +63,6 @@ public:
     VDrawTool(VAbstractPattern *doc, VContainer *data, quint32 id, QObject *parent = nullptr);
     virtual ~VDrawTool() Q_DECL_EQ_DEFAULT;
 
-    /** @brief factor scene scale factor. */
-    static qreal factor;
-
     QString      getLineType() const;
     virtual void SetTypeLine(const QString &value);
 
@@ -76,7 +73,6 @@ public slots:
     virtual void ShowTool(quint32 id, bool enable);
     virtual void ChangedActivDraw(const QString &newName);
     void         ChangedNameDraw(const QString &oldName, const QString &newName);
-    virtual void SetFactor(qreal factor);
     virtual void EnableToolMove(bool move);
     virtual void Disable(bool disable, const QString &namePP)=0;
     virtual void DetailsMode(bool mode);
@@ -91,8 +87,6 @@ protected:
     /** @brief typeLine line type. */
     QString      m_lineType;
 
-    bool         enabled;
-
     void         AddToCalculation(const QDomElement &domElement);
 
     /** @brief SaveDialog save options into file after change in dialog. */
@@ -103,7 +97,6 @@ protected:
     void         SaveOption(QSharedPointer<VGObject> &obj);
     virtual void SaveOptions(QDomElement &tag, QSharedPointer<VGObject> &obj);
 
-    QColor       CorrectColor(const QColor &color) const;
     bool         CorrectDisable(bool disable, const QString &namePP) const;
 
     void         ReadAttributes();
@@ -247,7 +240,6 @@ void VDrawTool::InitDrawToolConnections(VMainGraphicsScene *scene, T *tool)
 
     QObject::connect(tool, &T::ChoosedTool, scene, &VMainGraphicsScene::ChoosedItem);
     QObject::connect(tool, &T::ChangedToolSelection, scene, &VMainGraphicsScene::SelectedItem);
-    QObject::connect(scene, &VMainGraphicsScene::NewFactor, tool, &T::SetFactor);
     QObject::connect(scene, &VMainGraphicsScene::DisableItem, tool, &T::Disable);
     QObject::connect(scene, &VMainGraphicsScene::EnableToolMove, tool, &T::EnableToolMove);
     QObject::connect(scene, &VMainGraphicsScene::CurveDetailsMode, tool, &T::DetailsMode);

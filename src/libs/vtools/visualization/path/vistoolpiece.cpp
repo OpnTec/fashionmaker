@@ -79,9 +79,40 @@ void VisToolPiece::SetPiece(const VPiece &piece)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void VisToolPiece::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
+{
+    const qreal scale = SceneScale(scene());
+
+    for (int i=0; i < m_points.size(); ++i)
+    {
+        ScalePoint(m_points[i], scale);
+    }
+
+    ScalePenWidth(m_line1, scale);
+    ScalePenWidth(m_line2, scale);
+
+    VisPath::paint(painter, option, widget);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QRectF VisToolPiece::boundingRect() const
+{
+    QRectF rect = VisPath::boundingRect();
+
+    for (int i=0; i < m_points.size(); ++i)
+    {
+        rect = rect.united(m_points.at(i)->boundingRect());
+    }
+
+    rect = rect.united(m_line1->boundingRect());
+    rect = rect.united(m_line2->boundingRect());
+    return rect;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 QGraphicsEllipseItem *VisToolPiece::GetPoint(quint32 i, const QColor &color)
 {
-    return GetPointItem(Visualization::data, factor, m_points, i, color, this);
+    return GetPointItem(m_points, i, color, this);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

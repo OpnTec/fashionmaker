@@ -45,14 +45,18 @@ class VisToolPointOfIntersection : public VisLine
 {
     Q_OBJECT
 public:
-    explicit VisToolPointOfIntersection(const VContainer *data, QGraphicsItem *parent = 0);
-    virtual ~VisToolPointOfIntersection() Q_DECL_OVERRIDE;
+    explicit VisToolPointOfIntersection(const VContainer *data, QGraphicsItem *parent = nullptr);
+    virtual ~VisToolPointOfIntersection() = default;
 
     virtual void RefreshGeometry() Q_DECL_OVERRIDE;
 
     void         setPoint2Id(const quint32 &value);
     virtual int  type() const Q_DECL_OVERRIDE {return Type;}
     enum { Type = UserType + static_cast<int>(Vis::ToolPointOfIntersection)};
+
+    virtual void   paint(QPainter *painter, const QStyleOptionGraphicsItem *option,
+                         QWidget *widget = nullptr) Q_DECL_OVERRIDE;
+    virtual QRectF boundingRect() const Q_DECL_OVERRIDE;
 private:
     Q_DISABLE_COPY(VisToolPointOfIntersection)
     quint32              point2Id;

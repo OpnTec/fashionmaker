@@ -44,7 +44,6 @@
 #include "../ifc/exception/vexceptionbadid.h"
 #include "../ifc/xml/vabstractpattern.h"
 #include "../qmuparser/qmutokenparser.h"
-#include "../vgeometry/../ifc/ifcdef.h"
 #include "../vgeometry/vgobject.h"
 #include "../vgeometry/vpointf.h"
 #include "../vgeometry/vspline.h"
@@ -56,8 +55,12 @@
 
 //---------------------------------------------------------------------------------------------------------------------
 VAbstractSpline::VAbstractSpline(VAbstractPattern *doc, VContainer *data, quint32 id, QGraphicsItem *parent)
-    :VDrawTool(doc, data, id), QGraphicsPathItem(parent), controlPoints(QVector<VControlPointSpline *>()),
-      sceneType(SceneObject::Unknown), isHovered(false), detailsMode(false)
+    :VDrawTool(doc, data, id),
+      QGraphicsPathItem(parent),
+      controlPoints(),
+      sceneType(SceneObject::Unknown),
+      m_isHovered(false),
+      detailsMode(false)
 {
     InitDefShape();
     setAcceptHoverEvents(true);
@@ -76,7 +79,7 @@ QPainterPath VAbstractSpline::shape() const
         path.lineTo(points.at(i+1));
     }
 
-    if (isHovered || detailsMode)
+    if (m_isHovered || detailsMode)
     {
         path.addPath(curve->GetDirectionPath());
     }
@@ -111,7 +114,14 @@ QPainterPath VAbstractSpline::shape() const
 //---------------------------------------------------------------------------------------------------------------------
 void VAbstractSpline::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
 {
-    if (isHovered || detailsMode)
+    const qreal width = ScaleWidth(m_isHovered ? widthMainLine : widthHairLine, SceneScale(scene()));
+
+    const QSharedPointer<VAbstractCurve> curve = VAbstractTool::data.GeometricObject<VAbstractCurve>(id);
+    setPen(QPen(CorrectColor(this, curve->GetColor()), width, LineStyleToPenStyle(curve->GetPenStyle()), Qt::RoundCap));
+
+    RefreshCtrlPoints();
+
+    if (m_isHovered || detailsMode)
     {
         painter->save();
 
@@ -121,7 +131,6 @@ void VAbstractSpline::paint(QPainter *painter, const QStyleOptionGraphicsItem *o
         painter->setPen(arrowPen);
         painter->setBrush(brush());
 
-        const QSharedPointer<VAbstractCurve> curve = VAbstractTool::data.GeometricObject<VAbstractCurve>(id);
         painter->drawPath(curve->GetDirectionPath());
 
         painter->restore();
@@ -149,12 +158,8 @@ void VAbstractSpline::FullUpdateFromFile()
 //---------------------------------------------------------------------------------------------------------------------
 void VAbstractSpline::Disable(bool disable, const QString &namePP)
 {
-    enabled = !CorrectDisable(disable, namePP);
+    const bool enabled = !CorrectDisable(disable, namePP);
     this->setEnabled(enabled);
-    const QSharedPointer<VAbstractCurve> curve = VAbstractTool::data.GeometricObject<VAbstractCurve>(id);
-    this->setPen(QPen(CorrectColor(curve->GetColor()),
-                      qApp->toPixel(WidthHairLine(*VAbstractTool::data.GetPatternUnit()))/factor,
-                      LineStyleToPenStyle(curve->GetPenStyle()), Qt::RoundCap));
     emit setEnabledPoint(enabled);
 }
 
@@ -190,20 +195,10 @@ void VAbstractSpline::ShowTool(quint32 id, bool enable)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-/**
- * @brief SetFactor set current scale factor of scene.
- * @param factor scene scale factor.
- */
-void VAbstractSpline::SetFactor(qreal factor)
-{
-    VDrawTool::SetFactor(factor);
-    RefreshGeometry();
-}
-
-//---------------------------------------------------------------------------------------------------------------------
 void VAbstractSpline::RefreshGeometry()
 {
     InitDefShape();
+    RefreshCtrlPoints();
     SetVisualization();
 }
 
@@ -215,13 +210,7 @@ void VAbstractSpline::RefreshGeometry()
 // cppcheck-suppress unusedFunction
 void VAbstractSpline::hoverEnterEvent(QGraphicsSceneHoverEvent *event)
 {
-    Q_UNUSED(event)
-    const QSharedPointer<VAbstractCurve> curve = VAbstractTool::data.GeometricObject<VAbstractCurve>(id);
-    this->setPen(QPen(CorrectColor(curve->GetColor()),
-                      qApp->toPixel(WidthMainLine(*VAbstractTool::data.GetPatternUnit()))/factor,
-                      LineStyleToPenStyle(curve->GetPenStyle()), Qt::RoundCap));
-    this->setPath(curve->GetPath());
-    isHovered = true;
+    m_isHovered = true;
     QGraphicsPathItem::hoverEnterEvent(event);
 }
 
@@ -233,13 +222,7 @@ void VAbstractSpline::hoverEnterEvent(QGraphicsSceneHoverEvent *event)
 // cppcheck-suppress unusedFunction
 void VAbstractSpline::hoverLeaveEvent(QGraphicsSceneHoverEvent *event)
 {
-    Q_UNUSED(event)
-    const QSharedPointer<VAbstractCurve> curve = VAbstractTool::data.GeometricObject<VAbstractCurve>(id);
-    this->setPen(QPen(CorrectColor(curve->GetColor()),
-                      qApp->toPixel(WidthHairLine(*VAbstractTool::data.GetPatternUnit()))/factor,
-                      LineStyleToPenStyle(curve->GetPenStyle()), Qt::RoundCap));
-    this->setPath(curve->GetPath());
-    isHovered = false;
+    m_isHovered = false;
     QGraphicsPathItem::hoverLeaveEvent(event);
 }
 
@@ -332,6 +315,12 @@ void VAbstractSpline::SaveOptions(QDomElement &tag, QSharedPointer<VGObject> &ob
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void VAbstractSpline::RefreshCtrlPoints()
+{
+    // do nothing
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 VSpline VAbstractSpline::CorrectedSpline(const VSpline &spline, const SplinePointPosition &position,
                                          const QPointF &pos) const
 {
@@ -403,9 +392,6 @@ VSpline VAbstractSpline::CorrectedSpline(const VSpline &spline, const SplinePoin
 void VAbstractSpline::InitDefShape()
 {
     const QSharedPointer<VAbstractCurve> curve = VAbstractTool::data.GeometricObject<VAbstractCurve>(id);
-    this->setPen(QPen(CorrectColor(curve->GetColor()),
-                      qApp->toPixel(WidthHairLine(*VAbstractTool::data.GetPatternUnit()))/factor,
-                      LineStyleToPenStyle(curve->GetPenStyle())));
     this->setPath(curve->GetPath());
 }
 
@@ -415,26 +401,6 @@ void VAbstractSpline::ShowHandles(bool show)
     for (int i = 0; i < controlPoints.size(); ++i)
     {
         controlPoints.at(i)->setVisible(show);
-    }
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void VAbstractSpline::setEnabled(bool enabled)
-{
-    QGraphicsPathItem::setEnabled(enabled);
-    const QSharedPointer<VAbstractCurve> curve = VAbstractTool::data.GeometricObject<VAbstractCurve>(id);
-
-    if (enabled)
-    {
-        setPen(QPen(QColor(curve->GetColor()),
-                    qApp->toPixel(WidthHairLine(*VAbstractTool::data.GetPatternUnit()))/factor,
-                    LineStyleToPenStyle(curve->GetPenStyle())));
-    }
-    else
-    {
-        setPen(QPen(Qt::gray,
-                    qApp->toPixel(WidthHairLine(*VAbstractTool::data.GetPatternUnit()))/factor,
-                    LineStyleToPenStyle(curve->GetPenStyle())));
     }
 }
 

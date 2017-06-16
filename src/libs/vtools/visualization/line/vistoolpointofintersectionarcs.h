@@ -44,8 +44,8 @@ class VisToolPointOfIntersectionArcs : public VisLine
 {
     Q_OBJECT
 public:
-    explicit VisToolPointOfIntersectionArcs(const VContainer *data, QGraphicsItem *parent = 0);
-    virtual ~VisToolPointOfIntersectionArcs() Q_DECL_OVERRIDE;
+    explicit VisToolPointOfIntersectionArcs(const VContainer *data, QGraphicsItem *parent = nullptr);
+    virtual ~VisToolPointOfIntersectionArcs() = default;
 
     virtual void RefreshGeometry() Q_DECL_OVERRIDE;
     virtual void VisualMode(const quint32 &id) Q_DECL_OVERRIDE;
@@ -56,6 +56,10 @@ public:
 
     virtual int  type() const Q_DECL_OVERRIDE {return Type;}
     enum { Type = UserType + static_cast<int>(Vis::ToolPointOfIntersectionArcs)};
+
+    virtual void   paint(QPainter *painter, const QStyleOptionGraphicsItem *option,
+                         QWidget *widget = nullptr) Q_DECL_OVERRIDE;
+    virtual QRectF boundingRect() const Q_DECL_OVERRIDE;
 private:
     Q_DISABLE_COPY(VisToolPointOfIntersectionArcs)
     quint32              arc1Id;

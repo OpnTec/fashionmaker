@@ -60,10 +60,6 @@ VisToolLineIntersectAxis::VisToolLineIntersectAxis(const VContainer *data, QGrap
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-VisToolLineIntersectAxis::~VisToolLineIntersectAxis()
-{}
-
-//---------------------------------------------------------------------------------------------------------------------
 void VisToolLineIntersectAxis::RefreshGeometry()
 {
     if (object1Id > NULL_ID)
@@ -135,6 +131,36 @@ void VisToolLineIntersectAxis::setPoint2Id(const quint32 &value)
 void VisToolLineIntersectAxis::setAxisPointId(const quint32 &value)
 {
     axisPointId = value;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VisToolLineIntersectAxis::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
+{
+    const qreal scale = SceneScale(scene());
+
+    ScalePoint(point, scale);
+    ScalePoint(lineP1, scale);
+    ScalePoint(lineP2, scale);
+    ScalePoint(basePoint, scale);
+    ScalePenWidth(baseLine, scale);
+    ScalePenWidth(axisLine, scale);
+    ScalePenWidth(line_intersection, scale);
+
+    VisLine::paint(painter, option, widget);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QRectF VisToolLineIntersectAxis::boundingRect() const
+{
+    QRectF rect = VisLine::boundingRect();
+    rect = rect.united(point->boundingRect());
+    rect = rect.united(lineP1->boundingRect());
+    rect = rect.united(lineP2->boundingRect());
+    rect = rect.united(basePoint->boundingRect());
+    rect = rect.united(baseLine->boundingRect());
+    rect = rect.united(axisLine->boundingRect());
+    rect = rect.united(line_intersection->boundingRect());
+    return rect;
 }
 
 //---------------------------------------------------------------------------------------------------------------------

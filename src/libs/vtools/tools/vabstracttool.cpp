@@ -121,7 +121,10 @@ quint32 CreateNodeSplinePath(VContainer *data, quint32 id)
  * @param parent parent object.
  */
 VAbstractTool::VAbstractTool(VAbstractPattern *doc, VContainer *data, quint32 id, QObject *parent)
-    :VDataTool(data, parent), doc(doc), id(id), baseColor(Qt::black), vis(),
+    :VDataTool(data, parent),
+      doc(doc),
+      id(id),
+      vis(),
       selectionType(SelectionType::ByMouseRelease)
 {
     SCASSERT(doc != nullptr)
@@ -468,43 +471,6 @@ void VAbstractTool::AddNodes(VAbstractPattern *doc, QDomElement &domElement, con
 void VAbstractTool::AddNodes(VAbstractPattern *doc, QDomElement &domElement, const VPiece &piece)
 {
     AddNodes(doc, domElement, piece.GetPath());
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-/**
- * @brief RefreshLine refresh line to label on scene.
- */
-void VAbstractTool::RefreshLine(QGraphicsEllipseItem *point, VGraphicsSimpleTextItem *namePoint,
-                                QGraphicsLineItem *lineName, const qreal radius)
-{
-    SCASSERT(point != nullptr)
-    SCASSERT(namePoint != nullptr)
-    SCASSERT(lineName != nullptr)
-
-    QRectF nRec = namePoint->sceneBoundingRect();
-    nRec.translate(- point->scenePos());
-    if (point->rect().intersects(nRec) == false)
-    {
-        const QRectF nameRec = namePoint->sceneBoundingRect();
-        QPointF p1, p2;
-        VGObject::LineIntersectCircle(QPointF(), radius, QLineF(QPointF(), nameRec.center() - point->scenePos()), p1,
-                                      p2);
-        const QPointF pRec = VGObject::LineIntersectRect(nameRec, QLineF(point->scenePos(), nameRec.center()));
-        lineName->setLine(QLineF(p1, pRec - point->scenePos()));
-
-        if (QLineF(p1, pRec - point->scenePos()).length() <= ToPixel(4, Unit::Mm))
-        {
-            lineName->setVisible(false);
-        }
-        else
-        {
-            lineName->setVisible(true);
-        }
-    }
-    else
-    {
-        lineName->setVisible(false);
-    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------

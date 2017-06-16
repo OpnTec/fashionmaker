@@ -76,19 +76,14 @@ QT_WARNING_POP
  * @param parent parent object.
  */
 VToolSinglePoint::VToolSinglePoint(VAbstractPattern *doc, VContainer *data, quint32 id, QGraphicsItem *parent)
-    :VAbstractPoint(doc, data, id), QGraphicsEllipseItem(parent), radius(ToPixel(DefPointRadius/*mm*/, Unit::Mm)),
-      namePoint(nullptr), lineName(nullptr)
+    : VAbstractPoint(doc, data, id),
+      VScenePoint(parent)
 {
-    namePoint = new VGraphicsSimpleTextItem(this);
-    connect(namePoint, &VGraphicsSimpleTextItem::ShowContextMenu, this, &VToolSinglePoint::contextMenuEvent);
-    connect(namePoint, &VGraphicsSimpleTextItem::DeleteTool, this, &VToolSinglePoint::DeleteFromLabel);
-    connect(namePoint, &VGraphicsSimpleTextItem::PointChoosed, this, &VToolSinglePoint::PointChoosed);
-    connect(namePoint, &VGraphicsSimpleTextItem::PointSelected, this, &VToolSinglePoint::PointSelected);
-    connect(namePoint, &VGraphicsSimpleTextItem::NameChangePosition, this, &VToolSinglePoint::NameChangePosition);
-    lineName = new QGraphicsLineItem(this);
-    this->setBrush(QBrush(Qt::NoBrush));
-    this->setAcceptHoverEvents(true);
-    this->setFlag(QGraphicsItem::ItemIsFocusable, true);// For keyboard input focus
+    connect(m_namePoint, &VGraphicsSimpleTextItem::ShowContextMenu, this, &VToolSinglePoint::contextMenuEvent);
+    connect(m_namePoint, &VGraphicsSimpleTextItem::DeleteTool, this, &VToolSinglePoint::DeleteFromLabel);
+    connect(m_namePoint, &VGraphicsSimpleTextItem::PointChoosed, this, &VToolSinglePoint::PointChoosed);
+    connect(m_namePoint, &VGraphicsSimpleTextItem::PointSelected, this, &VToolSinglePoint::PointSelected);
+    connect(m_namePoint, &VGraphicsSimpleTextItem::NameChangePosition, this, &VToolSinglePoint::NameChangePosition);
     RefreshPointGeometry(*VAbstractTool::data.GeometricObject<VPointF>(id));
 }
 
@@ -107,8 +102,8 @@ void VToolSinglePoint::setName(const QString &name)
 //---------------------------------------------------------------------------------------------------------------------
 void VToolSinglePoint::SetEnabled(bool enabled)
 {
-    SetToolEnabled(this, baseColor, enabled);
-    SetToolEnabled(lineName, Qt::black, enabled);
+    setEnabled(enabled);
+    m_lineName->setEnabled(enabled);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -144,7 +139,7 @@ void VToolSinglePoint::UpdateNamePosition(quint32 id)
 void VToolSinglePoint::mousePressEvent(QGraphicsSceneMouseEvent *event)
 {
     // Special for not selectable item first need to call standard mousePressEvent then accept event
-    QGraphicsEllipseItem::mousePressEvent(event);
+    VScenePoint::mousePressEvent(event);
 
     // Somehow clicking on notselectable object do not clean previous selections.
     if (not (flags() & ItemIsSelectable) && scene())
@@ -166,28 +161,17 @@ void VToolSinglePoint::mousePressEvent(QGraphicsSceneMouseEvent *event)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-/**
- * @brief SetFactor set current scale factor of scene.
- * @param factor scene scale factor.
- */
-void VToolSinglePoint::SetFactor(qreal factor)
-{
-    VDrawTool::SetFactor(factor);
-    RefreshPointGeometry(*VAbstractTool::data.GeometricObject<VPointF>(id));
-}
-
-//---------------------------------------------------------------------------------------------------------------------
 void VToolSinglePoint::Disable(bool disable, const QString &namePP)
 {
-    enabled = !CorrectDisable(disable, namePP);
-    this->SetEnabled(enabled);
-    namePoint->setEnabled(enabled);
+    const bool enabled = !CorrectDisable(disable, namePP);
+    SetEnabled(enabled);
+    m_namePoint->setEnabled(enabled);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void VToolSinglePoint::EnableToolMove(bool move)
 {
-    namePoint->setFlag(QGraphicsItem::ItemIsMovable, move);
+    m_namePoint->setFlag(QGraphicsItem::ItemIsMovable, move);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -227,71 +211,7 @@ void VToolSinglePoint::mouseReleaseEvent(QGraphicsSceneMouseEvent *event)
             PointChoosed();
         }
     }
-    QGraphicsEllipseItem::mouseReleaseEvent(event);
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-/**
- * @brief hoverEnterEvent handle hover enter events.
- * @param event hover enter event.
- */
-void VToolSinglePoint::hoverEnterEvent(QGraphicsSceneHoverEvent *event)
-{
-    Q_UNUSED(event)
-    this->setPen(QPen(CorrectColor(baseColor),
-                      qApp->toPixel(WidthMainLine(*VAbstractTool::data.GetPatternUnit()))/factor));
-    QGraphicsEllipseItem::hoverEnterEvent(event);
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-/**
- * @brief hoverLeaveEvent handle hover leave events.
- * @param event hover leave event.
- */
-void VToolSinglePoint::hoverLeaveEvent(QGraphicsSceneHoverEvent *event)
-{
-    Q_UNUSED(event)
-    this->setPen(QPen(CorrectColor(baseColor),
-                      qApp->toPixel(WidthHairLine(*VAbstractTool::data.GetPatternUnit()))/factor));
-    QGraphicsEllipseItem::hoverLeaveEvent(event);
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-/**
- * @brief RefreshPointGeometry refresh point on scene.
- * @param point point.
- */
-void VToolSinglePoint::RefreshPointGeometry(const VPointF &point)
-{
-    this->setFlag(QGraphicsItem::ItemSendsGeometryChanges, false);
-    this->setPen(QPen(CorrectColor(baseColor),
-                      qApp->toPixel(WidthHairLine(*VAbstractTool::data.GetPatternUnit()))/factor));
-    QRectF rec = QRectF(0, 0, radius*2, radius*2);
-    rec.translate(-rec.center().x(), -rec.center().y());
-    this->setRect(rec);
-    this->setPos(static_cast<QPointF>(point));
-    this->setFlag(QGraphicsItem::ItemSendsGeometryChanges, true);
-    namePoint->blockSignals(true);
-    QFont font = namePoint->font();
-    font.setPointSize(static_cast<qint32>(namePoint->FontSize()/factor));
-    namePoint->setFont(font);
-    namePoint->setText(point.name());
-    namePoint->setPos(QPointF(point.mx(), point.my()));
-    namePoint->blockSignals(false);
-    RefreshLine(id);
-    this->setFlag(QGraphicsItem::ItemSendsGeometryChanges, true);
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-/**
- * @brief RefreshLine refresh line to label on scene.
- */
-void VToolSinglePoint::RefreshLine(quint32 id)
-{
-    Q_UNUSED(id)
-    VAbstractTool::RefreshLine(this, namePoint, lineName, radius);
-    lineName->setPen(QPen(CorrectColor(Qt::black),
-                          qApp->toPixel(WidthHairLine(*VAbstractTool::data.GetPatternUnit()))/factor));
+    VScenePoint::mouseReleaseEvent(event);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -305,13 +225,13 @@ QVariant VToolSinglePoint::itemChange(QGraphicsItem::GraphicsItemChange change, 
 {
     if (change == QGraphicsItem::ItemSelectedChange)
     {
-        namePoint->blockSignals(true);
-        namePoint->setSelected(value.toBool());
-        namePoint->blockSignals(false);
+        m_namePoint->blockSignals(true);
+        m_namePoint->setSelected(value.toBool());
+        m_namePoint->blockSignals(false);
         emit ChangedToolSelection(value.toBool(), id, id);
     }
 
-    return QGraphicsEllipseItem::itemChange(change, value);
+    return VScenePoint::itemChange(change, value);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -337,7 +257,7 @@ void VToolSinglePoint::keyReleaseEvent(QKeyEvent *event)
         default:
             break;
     }
-    QGraphicsEllipseItem::keyReleaseEvent ( event );
+    VScenePoint::keyReleaseEvent ( event );
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -366,10 +286,10 @@ void VToolSinglePoint::DoChangePosition(quint32 id, qreal mx, qreal my)
     point->setMx(mx);
     point->setMy(my);
     VAbstractTool::data.UpdateGObject(id, point);
-    namePoint->blockSignals(true);
-    namePoint->setPos(QPointF(mx, my));
-    namePoint->blockSignals(false);
-    RefreshLine(id);
+    m_namePoint->blockSignals(true);
+    m_namePoint->setPos(QPointF(mx, my));
+    m_namePoint->blockSignals(false);
+    RefreshLine();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -387,18 +307,18 @@ void VToolSinglePoint::AllowSelecting(bool enabled)
 //---------------------------------------------------------------------------------------------------------------------
 void VToolSinglePoint::AllowLabelHover(bool enabled)
 {
-    namePoint->setAcceptHoverEvents(enabled);
+    m_namePoint->setAcceptHoverEvents(enabled);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void VToolSinglePoint::AllowLabelSelecting(bool enabled)
 {
-    namePoint->setFlag(QGraphicsItem::ItemIsSelectable, enabled);
+    m_namePoint->setFlag(QGraphicsItem::ItemIsSelectable, enabled);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void VToolSinglePoint::ToolSelectionType(const SelectionType &type)
 {
     VAbstractTool::ToolSelectionType(type);
-    namePoint->LabelSelectionType(type);
+    m_namePoint->LabelSelectionType(type);
 }

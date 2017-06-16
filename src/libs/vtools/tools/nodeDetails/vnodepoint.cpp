@@ -71,24 +71,16 @@ const QString VNodePoint::ToolType = QStringLiteral("modeling");
  */
 VNodePoint::VNodePoint(VAbstractPattern *doc, VContainer *data, quint32 id, quint32 idPoint, const Source &typeCreation,
                        const QString &drawName, const quint32 &idTool, QObject *qoParent, QGraphicsItem *parent)
-    :VAbstractNode(doc, data, id, idPoint, drawName, idTool, qoParent), QGraphicsEllipseItem(parent), radius(0),
-      namePoint(nullptr), lineName(nullptr)
+    : VAbstractNode(doc, data, id, idPoint, drawName, idTool, qoParent),
+      VScenePoint(parent)
 {
-    radius = ToPixel(DefPointRadius/*mm*/, Unit::Mm);
-    namePoint = new VGraphicsSimpleTextItem(this);
-    connect(namePoint, &VGraphicsSimpleTextItem::PointChoosed, this, &VNodePoint::PointChoosed);
-    lineName = new QGraphicsLineItem(this);
-    connect(namePoint, &VGraphicsSimpleTextItem::NameChangePosition, this,
-            &VNodePoint::NameChangePosition);
-    connect(namePoint, &VGraphicsSimpleTextItem::ShowContextMenu,
+    connect(m_namePoint, &VGraphicsSimpleTextItem::PointChoosed, this, &VNodePoint::PointChoosed);
+    connect(m_namePoint, &VGraphicsSimpleTextItem::NameChangePosition, this, &VNodePoint::NameChangePosition);
+    connect(m_namePoint, &VGraphicsSimpleTextItem::ShowContextMenu,
             this, [this](QGraphicsSceneContextMenuEvent *event)
     {
         emit ShowContextMenu(event);
     });
-    this->setPen(QPen(Qt::black, qApp->toPixel(WidthHairLine(*VAbstractTool::data.GetPatternUnit()))));
-    this->setBrush(QBrush(Qt::NoBrush));
-    this->setFlag(QGraphicsItem::ItemIsSelectable, true);
-    this->setAcceptHoverEvents(true);
     RefreshPointGeometry(*VAbstractTool::data.GeometricObject<VPointF>(id));
     ToolCreation(typeCreation);
 }
@@ -236,28 +228,6 @@ void VNodePoint::mouseReleaseEvent(QGraphicsSceneMouseEvent *event)
 
 //---------------------------------------------------------------------------------------------------------------------
 /**
- * @brief hoverMoveEvent handle hover move events.
- * @param event hover move event.
- */
-void VNodePoint::hoverMoveEvent(QGraphicsSceneHoverEvent *event)
-{
-    Q_UNUSED(event)
-    this->setPen(QPen(currentColor, qApp->toPixel(WidthMainLine(*VAbstractTool::data.GetPatternUnit()))));
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-/**
- * @brief hoverLeaveEvent handle hover leave events.
- * @param event hover leave event.
- */
-void VNodePoint::hoverLeaveEvent(QGraphicsSceneHoverEvent *event)
-{
-    Q_UNUSED(event)
-    this->setPen(QPen(currentColor, qApp->toPixel(WidthHairLine(*VAbstractTool::data.GetPatternUnit()))));
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-/**
  * @brief NameChangePosition label change position.
  * @param pos new position.
  */
@@ -290,35 +260,6 @@ void VNodePoint::UpdateNamePosition(qreal mx, qreal my)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-/**
- * @brief RefreshPointGeometry refresh point on scene.
- * @param point point position.
- */
-void VNodePoint::RefreshPointGeometry(const VPointF &point)
-{
-    QRectF rec = QRectF(0, 0, radius*2, radius*2);
-    rec.translate(-rec.center().x(), -rec.center().y());
-    this->setRect(rec);
-    this->setPos(static_cast<QPointF>(point));
-
-    namePoint->blockSignals(true);
-    namePoint->setText(point.name());
-    namePoint->setPos(QPointF(point.mx(), point.my()));
-    namePoint->blockSignals(false);
-
-    RefreshLine();
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-/**
- * @brief RefreshLine refresh label line on scene.
- */
-void VNodePoint::RefreshLine()
-{
-    VAbstractTool::RefreshLine(this, namePoint, lineName, radius);
-}
-
-//---------------------------------------------------------------------------------------------------------------------
 void VNodePoint::ShowNode()
 {
     if (parentType != ParentType::Scene && not m_exluded)
@@ -336,7 +277,7 @@ void VNodePoint::HideNode()
 //---------------------------------------------------------------------------------------------------------------------
 void VNodePoint::EnableToolMove(bool move)
 {
-    namePoint->setFlag(QGraphicsItem::ItemIsMovable, move);
+    m_namePoint->setFlag(QGraphicsItem::ItemIsMovable, move);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -354,11 +295,11 @@ void VNodePoint::AllowSelecting(bool enabled)
 //---------------------------------------------------------------------------------------------------------------------
 void VNodePoint::AllowLabelHover(bool enabled)
 {
-    namePoint->setAcceptHoverEvents(enabled);
+    m_namePoint->setAcceptHoverEvents(enabled);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void VNodePoint::AllowLabelSelecting(bool enabled)
 {
-    namePoint->setFlag(QGraphicsItem::ItemIsSelectable, enabled);
+    m_namePoint->setFlag(QGraphicsItem::ItemIsSelectable, enabled);
 }

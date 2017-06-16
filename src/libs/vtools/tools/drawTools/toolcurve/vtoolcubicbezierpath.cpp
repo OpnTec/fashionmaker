@@ -241,10 +241,6 @@ void VToolCubicBezierPath::RefreshGeometry()
     QSharedPointer<VCubicBezierPath> splPath = VAbstractTool::data.GeometricObject<VCubicBezierPath>(id);
     setPath(splPath->GetPath());
 
-    this->setPen(QPen(CorrectColor(splPath->GetColor()),
-                      qApp->toPixel(WidthHairLine(*VAbstractTool::data.GetPatternUnit()))/factor,
-                      LineStyleToPenStyle(splPath->GetPenStyle())));
-
     SetVisualization();
 }
 

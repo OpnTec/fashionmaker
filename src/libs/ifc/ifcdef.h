@@ -63,9 +63,6 @@ static const quint32 null_id = 0;
 #    define V_NOEXCEPT_EXPR(x)
 #  endif
 
-qreal WidthMainLine(Unit patternUnit);
-qreal WidthHairLine(Unit patternUnit);
-
 extern const QString AttrType;
 extern const QString AttrMx;
 extern const QString AttrMy;

@@ -74,10 +74,6 @@ protected:
 
 
     virtual void UpdateNamePosition(quint32 id)=0;
-    virtual void RefreshLine(quint32 id)=0;
-
-    template <typename T>
-    void SetToolEnabled(T *item, const QColor &color, bool enabled);
 
     template <typename T>
     static void InitToolConnections(VMainGraphicsScene *scene, T *tool);
@@ -108,22 +104,6 @@ void VAbstractPoint::ShowToolVisualization(bool show)
     else
     {
         delete vis;
-    }
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-template <typename T>
-void VAbstractPoint::SetToolEnabled(T *item, const QColor &color, bool enabled)
-{
-    item->setEnabled(enabled);
-    if (enabled)
-    {
-        item->setPen(QPen(color,
-                          qApp->toPixel(WidthHairLine(*VAbstractTool::data.GetPatternUnit()))/factor));
-    }
-    else
-    {
-        item->setPen(QPen(Qt::gray, qApp->toPixel(WidthHairLine(*VAbstractTool::data.GetPatternUnit()))/factor));
     }
 }
 

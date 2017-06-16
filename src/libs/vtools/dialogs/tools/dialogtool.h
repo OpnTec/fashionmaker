@@ -394,7 +394,6 @@ inline void DialogTool::AddVisualization()
 
         if (not scene->items().contains(toolVis))
         {
-            connect(scene, &VMainGraphicsScene::NewFactor, toolVis, &Visualization::SetFactor);
             scene->addItem(toolVis);
         }
 

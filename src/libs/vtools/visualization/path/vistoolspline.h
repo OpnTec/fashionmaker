@@ -47,8 +47,8 @@ class VisToolSpline : public VisPath
 {
     Q_OBJECT
 public:
-    explicit VisToolSpline(const VContainer *data, QGraphicsItem *parent = 0);
-    virtual ~VisToolSpline() Q_DECL_OVERRIDE;
+    explicit VisToolSpline(const VContainer *data, QGraphicsItem *parent = nullptr);
+    virtual ~VisToolSpline();
 
     virtual void RefreshGeometry() Q_DECL_OVERRIDE;
 
@@ -64,6 +64,10 @@ public:
 
     virtual int  type() const Q_DECL_OVERRIDE {return Type;}
     enum { Type = UserType + static_cast<int>(Vis::ToolSpline)};
+
+    virtual void   paint(QPainter *painter, const QStyleOptionGraphicsItem *option,
+                         QWidget *widget = nullptr) Q_DECL_OVERRIDE;
+    virtual QRectF boundingRect() const Q_DECL_OVERRIDE;
 
 public slots:
     void MouseLeftPressed();

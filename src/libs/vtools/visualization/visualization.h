@@ -40,6 +40,7 @@
 #include "../vpatterndb/vcontainer.h"
 #include "../vwidgets/vmaingraphicsscene.h"
 #include "../vwidgets/vcurvepathitem.h"
+#include "../vwidgets/global.h"
 
 Q_DECLARE_LOGGING_CATEGORY(vVis)
 
@@ -71,11 +72,9 @@ public:
 signals:
     void         ToolTip(const QString &toolTip);
 public slots:
-    void         SetFactor(qreal factor);
     void         MousePos(const QPointF &scenePos);
 protected:
     const VContainer *data;
-    qreal            factor;
     QPointF          scenePos;
     QColor           mainColor;
     QColor           supportColor;
@@ -86,6 +85,11 @@ protected:
 
     virtual void InitPen()=0;
     virtual void AddOnScene()=0;
+
+    template <typename Item>
+    void ScalePenWidth(Item *item, qreal scale);
+
+    void ScalePoint(QGraphicsEllipseItem *item, qreal scale);
 
     QGraphicsEllipseItem *InitPoint(const QColor &color, QGraphicsItem *parent, qreal z = 0) const;
     void         DrawPoint(QGraphicsEllipseItem *point, const QPointF &pos, const QColor &color,
@@ -103,15 +107,12 @@ protected:
     template <class Item>
     Item         *InitItem(const QColor &color, QGraphicsItem *parent);
 
-    static QRectF                PointRect(qreal radius);
-    static QGraphicsEllipseItem* GetPointItem(const VContainer *data, qreal factor,
-                                              QVector<QGraphicsEllipseItem *> &points, quint32 i, const QColor &color,
+    static QGraphicsEllipseItem* GetPointItem(QVector<QGraphicsEllipseItem *> &points, quint32 i, const QColor &color,
                                               QGraphicsItem *parent);
 private:
     Q_DISABLE_COPY(Visualization)
 
-    static QGraphicsEllipseItem* InitPointItem(const VContainer *data, qreal factor, const QColor &color,
-                                               QGraphicsItem *parent, qreal z = 0);
+    static QGraphicsEllipseItem* InitPointItem(const QColor &color, QGraphicsItem *parent, qreal z = 0);
 };
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -123,7 +124,6 @@ inline void Visualization::AddItem(Item *item)
     SCASSERT(scene != nullptr)
 
     scene->addItem(item);
-    connect(scene, &VMainGraphicsScene::NewFactor, item, &Visualization::SetFactor);
     connect(scene, &VMainGraphicsScene::mouseMove, item, &Visualization::MousePos);
 }
 
@@ -132,11 +132,29 @@ template <class Item>
 inline Item *Visualization::InitItem(const QColor &color, QGraphicsItem *parent)
 {
     Item *item = new Item(parent);
-    item->setPen(QPen(color, qApp->toPixel(WidthHairLine(*data->GetPatternUnit()))/factor));
+
+    QPen visPen = item->pen();
+    visPen.setColor(color);
+
+    item->setPen(visPen);
     item->setZValue(1);
     item->setFlags(QGraphicsItem::ItemStacksBehindParent);
     item->setVisible(false);
     return item;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+template <class Item>
+void Visualization::ScalePenWidth(Item *item, qreal scale)
+{
+    SCASSERT(item != nullptr)
+
+    const qreal width = ScaleWidth(widthMainLine, scale);
+
+    QPen visPen = item->pen();
+    visPen.setWidthF(width);
+
+    item->setPen(visPen);
 }
 
 #endif // VISUALIZATION_H

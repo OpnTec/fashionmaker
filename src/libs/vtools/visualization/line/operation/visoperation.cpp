@@ -77,7 +77,7 @@ void VisOperation::VisualMode(const quint32 &pointId)
 //---------------------------------------------------------------------------------------------------------------------
 QGraphicsEllipseItem *VisOperation::GetPoint(quint32 i, const QColor &color)
 {
-    return GetPointItem(Visualization::data, factor, points, i, color, this);
+    return GetPointItem(points, i, color, this);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

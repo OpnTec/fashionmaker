@@ -68,8 +68,6 @@ public:
     virtual QString  getTagName() const Q_DECL_OVERRIDE;
     void             ShowHandles(bool show);
 
-    void setEnabled(bool enabled);
-
     QString GetLineColor() const;
     void    SetLineColor(const QString &value);
 
@@ -85,7 +83,6 @@ public slots:
     virtual void     DetailsMode(bool mode) Q_DECL_OVERRIDE;
     virtual void     AllowHover(bool enabled) Q_DECL_OVERRIDE;
     virtual void     AllowSelecting(bool enabled) Q_DECL_OVERRIDE;
-    virtual void     SetFactor(qreal factor) Q_DECL_OVERRIDE;
 signals:
     /**
      * @brief setEnabledPoint disable control points.
@@ -98,7 +95,7 @@ protected:
      */
     QVector<VControlPointSpline *>   controlPoints;
     SceneObject      sceneType;
-    bool             isHovered;
+    bool             m_isHovered;
     bool             detailsMode;
     /**
      * @brief RefreshGeometry  refresh item on scene.
@@ -113,10 +110,9 @@ protected:
     virtual void     mouseReleaseEvent ( QGraphicsSceneMouseEvent * event ) Q_DECL_OVERRIDE;
     virtual void     ReadToolAttributes(const QDomElement &domElement) Q_DECL_OVERRIDE;
     virtual void     SaveOptions(QDomElement &tag, QSharedPointer<VGObject> &obj) Q_DECL_OVERRIDE;
+    virtual void     RefreshCtrlPoints();
 
     VSpline CorrectedSpline(const VSpline &spline, const SplinePointPosition &position, const QPointF &pos) const;
-
-    void InitDefShape();
 
     template <typename T>
     void ShowToolVisualization(bool show);
@@ -135,6 +131,8 @@ protected:
 
 private:
     Q_DISABLE_COPY(VAbstractSpline)
+
+    void InitDefShape();
 };
 
 //---------------------------------------------------------------------------------------------------------------------

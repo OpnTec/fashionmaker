@@ -47,11 +47,10 @@ class VAbstractSimple : public QObject
 {
     Q_OBJECT
 public:
-    VAbstractSimple(quint32 id, Unit patternUnit, qreal *factor = nullptr, QObject *parent = nullptr);
-    virtual ~VAbstractSimple();
+    VAbstractSimple(quint32 id, QObject *parent = nullptr);
+    virtual ~VAbstractSimple() = default;
 
     virtual void ToolSelectionType(const SelectionType &type);
-    virtual void SetEnabled(bool enabled);
 
     GOType GetType() const;
     void   SetType(const GOType &value);
@@ -67,34 +66,12 @@ protected:
     /** @brief id spline id. */
     quint32 id;
 
-    /** @brief factor scale factor. */
-    qreal  *factor;
-
-    bool    enabled;
-
-    Unit    patternUnit;
-
     SelectionType selectionType;
 
     GOType  type;
 
-    QColor CorrectColor(const QColor &color) const;
-
-    template <class T>
-    void SetPen(T *item, const QColor &color, qreal width, Qt::PenStyle penStyle = Qt::SolidLine);
-
 private:
     Q_DISABLE_COPY(VAbstractSimple)
-
-    const static qreal m_defFactor;
 };
-
-//---------------------------------------------------------------------------------------------------------------------
-template <class T>
-void VAbstractSimple::SetPen(T *item, const QColor &color, qreal width, Qt::PenStyle penStyle)
-{
-    SCASSERT(item)
-    item->setPen(QPen(CorrectColor(color), ToPixel(width, patternUnit)/ *factor, penStyle, Qt::RoundCap));
-}
 
 #endif // VABSTRACTSIMPLE_H

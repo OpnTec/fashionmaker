@@ -75,9 +75,6 @@ VToolLinePoint::VToolLinePoint(VAbstractPattern *doc, VContainer *data, const qu
     QPointF point1 = static_cast<QPointF>(*data->GeometricObject<VPointF>(basePointId));
     QPointF point2 = static_cast<QPointF>(*data->GeometricObject<VPointF>(id));
     mainLine = new QGraphicsLineItem(QLineF(point1 - point2, QPointF()), this);
-    mainLine->setPen(QPen(CorrectColor(lineColor),
-                          qApp->toPixel(WidthHairLine(*VAbstractTool::data.GetPatternUnit()))/factor,
-                          LineStyleToPenStyle(typeLine)));
     mainLine->setFlag(QGraphicsItem::ItemStacksBehindParent, true);
 }
 
@@ -88,14 +85,29 @@ VToolLinePoint::~VToolLinePoint()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void VToolLinePoint::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
+{
+    const qreal width = ScaleWidth(m_isHovered ? widthMainLine : widthHairLine, SceneScale(scene()));
+
+    mainLine->setPen(QPen(CorrectColor(this, lineColor), width, LineStyleToPenStyle(m_lineType)));
+
+    VToolSinglePoint::paint(painter, option, widget);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QRectF VToolLinePoint::boundingRect() const
+{
+    QRectF rect = VToolSinglePoint::boundingRect();
+    rect = rect.united(mainLine->boundingRect());
+    return rect;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 /**
  * @brief RefreshGeometry  refresh item on scene.
  */
 void VToolLinePoint::RefreshGeometry()
 {
-    mainLine->setPen(QPen(CorrectColor(lineColor),
-                          qApp->toPixel(WidthHairLine(*VAbstractTool::data.GetPatternUnit()))/factor,
-                          LineStyleToPenStyle(m_lineType)));
     VToolSinglePoint::RefreshPointGeometry(*VDrawTool::data.GeometricObject<VPointF>(id));
     QPointF point = static_cast<QPointF>(*VDrawTool::data.GeometricObject<VPointF>(id));
     QPointF basePoint = static_cast<QPointF>(*VDrawTool::data.GeometricObject<VPointF>(basePointId));
@@ -122,24 +134,10 @@ void VToolLinePoint::SaveOptions(QDomElement &tag, QSharedPointer<VGObject> &obj
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-/**
- * @brief SetFactor set current scale factor of scene.
- * @param factor scene scale factor.
- */
-void VToolLinePoint::SetFactor(qreal factor)
-{
-    VDrawTool::SetFactor(factor);
-    RefreshGeometry();
-}
-
-//---------------------------------------------------------------------------------------------------------------------
 void VToolLinePoint::Disable(bool disable, const QString &namePP)
 {
     VToolSinglePoint::Disable(disable, namePP);
-    mainLine->setPen(QPen(CorrectColor(lineColor),
-                          qApp->toPixel(WidthHairLine(*VAbstractTool::data.GetPatternUnit()))/factor,
-                          LineStyleToPenStyle(m_lineType)));
-    mainLine->setEnabled(enabled);
+    mainLine->setEnabled(isEnabled());
 }
 
 //---------------------------------------------------------------------------------------------------------------------

@@ -43,8 +43,8 @@ class VisToolLineIntersect :public VisLine
 {
     Q_OBJECT
 public:
-    explicit VisToolLineIntersect(const VContainer *data, QGraphicsItem *parent = 0);
-    virtual ~VisToolLineIntersect() Q_DECL_OVERRIDE;
+    explicit VisToolLineIntersect(const VContainer *data, QGraphicsItem *parent = nullptr);
+    virtual ~VisToolLineIntersect() = default;
 
     virtual void RefreshGeometry() Q_DECL_OVERRIDE;
 
@@ -53,6 +53,10 @@ public:
     void         setLine2P2Id(const quint32 &value);
     virtual int  type() const Q_DECL_OVERRIDE {return Type;}
     enum { Type = UserType + static_cast<int>(Vis::ToolLineIntersect)};
+
+    virtual void   paint(QPainter *painter, const QStyleOptionGraphicsItem *option,
+                         QWidget *widget = nullptr) Q_DECL_OVERRIDE;
+    virtual QRectF boundingRect() const Q_DECL_OVERRIDE;
 private:
     Q_DISABLE_COPY(VisToolLineIntersect)
     quint32              line1P2Id;

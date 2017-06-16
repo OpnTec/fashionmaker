@@ -61,10 +61,6 @@ VisToolCurveIntersectAxis::VisToolCurveIntersectAxis(const VContainer *data, QGr
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-VisToolCurveIntersectAxis::~VisToolCurveIntersectAxis()
-{}
-
-//---------------------------------------------------------------------------------------------------------------------
 void VisToolCurveIntersectAxis::RefreshGeometry()
 {
     if (object1Id > NULL_ID)
@@ -116,4 +112,30 @@ void VisToolCurveIntersectAxis::SetAngle(const QString &expression)
 void VisToolCurveIntersectAxis::setAxisPointId(const quint32 &value)
 {
     axisPointId = value;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VisToolCurveIntersectAxis::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
+{
+    const qreal scale = SceneScale(scene());
+
+    ScalePoint(point, scale);
+    ScalePoint(basePoint, scale);
+    ScalePenWidth(baseLine, scale);
+    ScalePenWidth(axisLine, scale);
+    ScalePenWidth(visCurve, scale);
+
+    VisLine::paint(painter, option, widget);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QRectF VisToolCurveIntersectAxis::boundingRect() const
+{
+    QRectF rect = VisLine::boundingRect();
+    rect = rect.united(point->boundingRect());
+    rect = rect.united(basePoint->boundingRect());
+    rect = rect.united(baseLine->boundingRect());
+    rect = rect.united(axisLine->boundingRect());
+    rect = rect.united(visCurve->boundingRect());
+    return rect;
 }

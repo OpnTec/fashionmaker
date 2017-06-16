@@ -44,7 +44,7 @@ class VisToolShoulderPoint : public VisLine
     Q_OBJECT
 public:
     explicit VisToolShoulderPoint(const VContainer *data, QGraphicsItem *parent = nullptr);
-    virtual ~VisToolShoulderPoint() Q_DECL_EQ_DEFAULT;
+    virtual ~VisToolShoulderPoint() = default;
 
     virtual void RefreshGeometry() Q_DECL_OVERRIDE;
     void         setLineP1Id(const quint32 &value);
@@ -52,6 +52,10 @@ public:
     void         setLength(const QString &expression);
     virtual int  type() const Q_DECL_OVERRIDE {return Type;}
     enum { Type = UserType + static_cast<int>(Vis::ToolShoulderPoint)};
+
+    virtual void   paint(QPainter *painter, const QStyleOptionGraphicsItem *option,
+                         QWidget *widget = nullptr) Q_DECL_OVERRIDE;
+    virtual QRectF boundingRect() const Q_DECL_OVERRIDE;
 private:
     Q_DISABLE_COPY(VisToolShoulderPoint)
     quint32              lineP1Id;

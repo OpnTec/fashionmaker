@@ -46,8 +46,8 @@ class VisToolLine : public VisLine
 {
     Q_OBJECT
 public:
-    explicit VisToolLine(const VContainer *data, QGraphicsItem *parent = 0);
-    virtual ~VisToolLine() Q_DECL_OVERRIDE;
+    explicit VisToolLine(const VContainer *data, QGraphicsItem *parent = nullptr);
+    virtual ~VisToolLine() = default;
 
     virtual void RefreshGeometry() Q_DECL_OVERRIDE;
     void         setPoint2Id(const quint32 &value);

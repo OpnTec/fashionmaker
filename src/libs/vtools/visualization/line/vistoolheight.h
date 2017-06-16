@@ -44,8 +44,8 @@ class VisToolHeight : public VisLine
 {
     Q_OBJECT
 public:
-    explicit VisToolHeight(const VContainer *data, QGraphicsItem *parent = 0);
-    virtual ~VisToolHeight() Q_DECL_OVERRIDE;
+    explicit VisToolHeight(const VContainer *data, QGraphicsItem *parent = nullptr);
+    virtual ~VisToolHeight() = default;
 
     virtual void RefreshGeometry() Q_DECL_OVERRIDE;
 
@@ -53,6 +53,10 @@ public:
     void         setLineP2Id(const quint32 &value);
     virtual int  type() const Q_DECL_OVERRIDE {return Type;}
     enum { Type = UserType + static_cast<int>(Vis::ToolHeight)};
+
+    virtual void   paint(QPainter *painter, const QStyleOptionGraphicsItem *option,
+                         QWidget *widget = nullptr) Q_DECL_OVERRIDE;
+    virtual QRectF boundingRect() const Q_DECL_OVERRIDE;
 private:
     Q_DISABLE_COPY(VisToolHeight)
     //base point in parent class

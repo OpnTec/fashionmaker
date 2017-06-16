@@ -43,14 +43,18 @@ class VisToolAlongLine :public VisLine
 {
     Q_OBJECT
 public:
-    explicit VisToolAlongLine(const VContainer *data, QGraphicsItem *parent = 0);
-    virtual ~VisToolAlongLine() Q_DECL_OVERRIDE;
+    explicit VisToolAlongLine(const VContainer *data, QGraphicsItem *parent = nullptr);
+    virtual ~VisToolAlongLine() = default;
 
     virtual void RefreshGeometry() Q_DECL_OVERRIDE;
     void         setObject2Id(const quint32 &value);
     void         setLength(const QString &expression);
     virtual int  type() const Q_DECL_OVERRIDE {return Type;}
     enum { Type = UserType + static_cast<int>(Vis::ToolAlongLine)};
+
+    virtual void   paint(QPainter *painter, const QStyleOptionGraphicsItem *option,
+                         QWidget *widget = nullptr) Q_DECL_OVERRIDE;
+    virtual QRectF boundingRect() const Q_DECL_OVERRIDE;
 private:
     Q_DISABLE_COPY(VisToolAlongLine)
     quint32              object2Id;

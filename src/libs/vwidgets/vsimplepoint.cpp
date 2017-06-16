@@ -41,59 +41,32 @@
 #include <QRectF>
 #include <Qt>
 
-#include "../ifc/ifcdef.h"
+#include "global.h"
 #include "../vgeometry/vgobject.h"
 #include "../vgeometry/vpointf.h"
 #include "vgraphicssimpletextitem.h"
+#include "../vmisc/vabstractapplication.h"
 
 //---------------------------------------------------------------------------------------------------------------------
-VSimplePoint::VSimplePoint(quint32 id, const QColor &currentColor, Unit patternUnit, qreal *factor, QObject *parent)
-    : VAbstractSimple(id, patternUnit, factor, parent),
-      QGraphicsEllipseItem(),
-      radius(ToPixel(DefPointRadius/*mm*/, Unit::Mm)),
-      namePoint(nullptr),
-      lineName(nullptr),
-      m_onlyPoint(false),
-      m_isHighlight(false),
+VSimplePoint::VSimplePoint(quint32 id, const QColor &currentColor, QObject *parent)
+    : VAbstractSimple(id, parent),
+      VScenePoint(),
       m_visualizationMode(false),
-      currentColor(currentColor)
+      m_alwaysHovered(false)
 {
-    namePoint = new VGraphicsSimpleTextItem(this);
-    connect(namePoint, &VGraphicsSimpleTextItem::ShowContextMenu, this, &VSimplePoint::ContextMenu);
-    connect(namePoint, &VGraphicsSimpleTextItem::DeleteTool, this, &VSimplePoint::DeleteFromLabel);
-    connect(namePoint, &VGraphicsSimpleTextItem::PointChoosed, this, &VSimplePoint::PointChoosed);
-    connect(namePoint, &VGraphicsSimpleTextItem::PointSelected, this, &VSimplePoint::PointSelected);
-    connect(namePoint, &VGraphicsSimpleTextItem::NameChangePosition, this, &VSimplePoint::ChangedPosition);
-    lineName = new QGraphicsLineItem(this);
-    this->setBrush(QBrush(Qt::NoBrush));
-    SetPen(this, currentColor, m_isHighlight ? WidthMainLine(patternUnit) : WidthHairLine(patternUnit));
-    this->setAcceptHoverEvents(true);
-    this->setFlag(QGraphicsItem::ItemIsFocusable, true);// For keyboard input focus
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-VSimplePoint::~VSimplePoint()
-{}
-
-//---------------------------------------------------------------------------------------------------------------------
-void VSimplePoint::SetOnlyPoint(bool value)
-{
-    m_onlyPoint = value;
-    namePoint->setVisible(not m_onlyPoint);
-    lineName->setVisible(not m_onlyPoint);
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-bool VSimplePoint::IsOnlyPoint() const
-{
-    return m_onlyPoint;
+    m_baseColor = currentColor;
+    connect(m_namePoint, &VGraphicsSimpleTextItem::ShowContextMenu, this, &VSimplePoint::ContextMenu);
+    connect(m_namePoint, &VGraphicsSimpleTextItem::DeleteTool, this, &VSimplePoint::DeleteFromLabel);
+    connect(m_namePoint, &VGraphicsSimpleTextItem::PointChoosed, this, &VSimplePoint::PointChoosed);
+    connect(m_namePoint, &VGraphicsSimpleTextItem::PointSelected, this, &VSimplePoint::PointSelected);
+    connect(m_namePoint, &VGraphicsSimpleTextItem::NameChangePosition, this, &VSimplePoint::ChangedPosition);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void VSimplePoint::SetVisualizationMode(bool value)
 {
     m_visualizationMode = value;
-    this->setFlag(QGraphicsItem::ItemIsFocusable, not m_visualizationMode);
+    setFlag(QGraphicsItem::ItemIsFocusable, not m_visualizationMode);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -105,91 +78,40 @@ bool VSimplePoint::IsVisualizationMode() const
 //---------------------------------------------------------------------------------------------------------------------
 void VSimplePoint::SetPointHighlight(bool value)
 {
-    m_isHighlight = value;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void VSimplePoint::RefreshLine()
-{
-    QRectF nRec = namePoint->sceneBoundingRect();
-    nRec.translate(- scenePos());
-    if (this->rect().intersects(nRec) == false)
-    {
-        const QRectF nameRec = namePoint->sceneBoundingRect();
-        QPointF p1, p2;
-        VGObject::LineIntersectCircle(QPointF(), radius, QLineF(QPointF(), nameRec.center() - scenePos()), p1, p2);
-        const QPointF pRec = VGObject::LineIntersectRect(nameRec, QLineF(scenePos(), nameRec.center()));
-        lineName->setLine(QLineF(p1, pRec - scenePos()));
-        SetPen(lineName, Qt::black, WidthHairLine(patternUnit));
-
-        if (QLineF(p1, pRec - scenePos()).length() <= ToPixel(4, Unit::Mm))
-        {
-            lineName->setVisible(false);
-        }
-        else
-        {
-            lineName->setVisible(true);
-        }
-    }
-    else
-    {
-        lineName->setVisible(false);
-    }
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void VSimplePoint::RefreshGeometry(const VPointF &point)
-{
-    this->setFlag(QGraphicsItem::ItemSendsGeometryChanges, false);
-    SetPen(this, currentColor, m_isHighlight ? WidthMainLine(patternUnit) : WidthHairLine(patternUnit));
-    QRectF rec = QRectF(0, 0, radius*2, radius*2);
-    rec.translate(-rec.center().x(), -rec.center().y());
-    this->setRect(rec);
-    this->setPos(static_cast<QPointF>(point));
-    this->setFlag(QGraphicsItem::ItemSendsGeometryChanges, true);
-    namePoint->blockSignals(true);
-    QFont font = namePoint->font();
-    font.setPointSize(static_cast<qint32>(namePoint->FontSize()/ *factor));
-    namePoint->setFont(font);
-    namePoint->setText(point.name());
-    namePoint->setPos(QPointF(point.mx(), point.my()));
-    namePoint->blockSignals(false);
-    RefreshLine();
-    this->setFlag(QGraphicsItem::ItemSendsGeometryChanges, true);
+    m_alwaysHovered = value;
+    m_isHovered = value;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void VSimplePoint::SetEnabled(bool enabled)
 {
-    VAbstractSimple::SetEnabled(enabled);
-    SetPen(this, currentColor, m_isHighlight ? WidthMainLine(patternUnit) : WidthHairLine(patternUnit));
-    SetPen(lineName, Qt::black, WidthHairLine(patternUnit));
-    namePoint->setEnabled(enabled);
+    setEnabled(enabled);
+    m_namePoint->setEnabled(enabled);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void VSimplePoint::EnableToolMove(bool move)
 {
-    namePoint->setFlag(QGraphicsItem::ItemIsMovable, move);
+    m_namePoint->setFlag(QGraphicsItem::ItemIsMovable, move);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void VSimplePoint::AllowLabelHover(bool enabled)
 {
-    namePoint->setAcceptHoverEvents(enabled);
+    m_namePoint->setAcceptHoverEvents(enabled);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void VSimplePoint::AllowLabelSelecting(bool enabled)
 {
-    namePoint->setFlag(QGraphicsItem::ItemIsSelectable, enabled);
+    m_namePoint->setFlag(QGraphicsItem::ItemIsSelectable, enabled);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void VSimplePoint::ToolSelectionType(const SelectionType &type)
 {
     VAbstractSimple::ToolSelectionType(type);
-    namePoint->LabelSelectionType(type);
+    m_namePoint->LabelSelectionType(type);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -260,21 +182,24 @@ void VSimplePoint::mouseReleaseEvent(QGraphicsSceneMouseEvent *event)
                 emit Choosed(id);
             }
         }
-        QGraphicsEllipseItem::mouseReleaseEvent(event);
+        VScenePoint::mouseReleaseEvent(event);
     }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void VSimplePoint::hoverEnterEvent(QGraphicsSceneHoverEvent *event)
 {
-    SetPen(this, currentColor, WidthMainLine(patternUnit));
+    m_isHovered = true;
     QGraphicsEllipseItem::hoverEnterEvent(event);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void VSimplePoint::hoverLeaveEvent(QGraphicsSceneHoverEvent *event)
 {
-    SetPen(this, currentColor, WidthHairLine(patternUnit));
+    if (not m_alwaysHovered)
+    {
+        m_isHovered = false;
+    }
     QGraphicsEllipseItem::hoverLeaveEvent(event);
 }
 
@@ -289,7 +214,7 @@ void VSimplePoint::keyReleaseEvent(QKeyEvent *event)
         default:
             break;
     }
-    QGraphicsEllipseItem::keyReleaseEvent ( event );
+    VScenePoint::keyReleaseEvent ( event );
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -297,13 +222,13 @@ QVariant VSimplePoint::itemChange(QGraphicsItem::GraphicsItemChange change, cons
 {
     if (change == QGraphicsItem::ItemSelectedChange)
     {
-        namePoint->blockSignals(true);
-        namePoint->setSelected(value.toBool());
-        namePoint->blockSignals(false);
+        m_namePoint->blockSignals(true);
+        m_namePoint->setSelected(value.toBool());
+        m_namePoint->blockSignals(false);
         emit Selected(value.toBool(), id);
     }
 
-    return QGraphicsEllipseItem::itemChange(change, value);
+    return VScenePoint::itemChange(change, value);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

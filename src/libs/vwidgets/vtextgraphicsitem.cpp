@@ -641,6 +641,7 @@ void VTextGraphicsItem::hoverMoveEvent(QGraphicsSceneHoverEvent* pHE)
             RestoreOverrideCursor(Qt::SizeFDiagCursor);
         }
     }
+    VPieceItem::hoverMoveEvent(pHE);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -650,8 +651,8 @@ void VTextGraphicsItem::hoverMoveEvent(QGraphicsSceneHoverEvent* pHE)
  */
 void VTextGraphicsItem::hoverLeaveEvent(QGraphicsSceneHoverEvent* pHE)
 {
-    Q_UNUSED(pHE)
     RestoreOverrideCursor(Qt::SizeFDiagCursor);
+    VPieceItem::hoverLeaveEvent(pHE);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

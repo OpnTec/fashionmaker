@@ -58,10 +58,6 @@ VisToolNormal::VisToolNormal(const VContainer *data, QGraphicsItem *parent)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-VisToolNormal::~VisToolNormal()
-{}
-
-//---------------------------------------------------------------------------------------------------------------------
 void VisToolNormal::RefreshGeometry()
 {
     if (object1Id > NULL_ID)
@@ -127,4 +123,28 @@ qreal VisToolNormal::GetAngle() const
 void VisToolNormal::SetAngle(const qreal &value)
 {
     angle = value;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VisToolNormal::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
+{
+    const qreal scale = SceneScale(scene());
+
+    ScalePoint(point, scale);
+    ScalePoint(lineP1, scale);
+    ScalePoint(lineP2, scale);
+    ScalePenWidth(line, scale);
+
+    VisLine::paint(painter, option, widget);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QRectF VisToolNormal::boundingRect() const
+{
+    QRectF rect = VisLine::boundingRect();
+    rect = rect.united(point->boundingRect());
+    rect = rect.united(lineP1->boundingRect());
+    rect = rect.united(lineP2->boundingRect());
+    rect = rect.united(line->boundingRect());
+    return rect;
 }

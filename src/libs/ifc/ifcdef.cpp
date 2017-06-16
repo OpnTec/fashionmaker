@@ -43,33 +43,7 @@
 const QString CustomMSign    = QStringLiteral("@");
 const QString CustomIncrSign = QStringLiteral("#");
 
-#define DefWidth 1.2//mm
 
-//---------------------------------------------------------------------------------------------------------------------
-qreal WidthMainLine(Unit patternUnit)
-{
-    qreal _widthMainLine = DefWidth;
-    switch (patternUnit)
-    {
-        case Unit::Cm:
-            _widthMainLine = DefWidth/10.0;
-            break;
-        case Unit::Inch:
-            _widthMainLine = DefWidth/25.4;
-            break;
-        case Unit::Mm:
-        default:
-            _widthMainLine = DefWidth;
-            break;
-    }
-    return _widthMainLine;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-qreal WidthHairLine(Unit patternUnit)
-{
-    return WidthMainLine(patternUnit)/3.0;
-}
 
 const QString AttrType        = QStringLiteral("type");
 const QString AttrMx          = QStringLiteral("mx");

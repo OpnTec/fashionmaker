@@ -50,7 +50,10 @@ public:
     explicit VisToolRotation(const VContainer *data, QGraphicsItem *parent = nullptr);
     virtual ~VisToolRotation();
 
-    virtual void RefreshGeometry() Q_DECL_OVERRIDE;
+    virtual void   RefreshGeometry() Q_DECL_OVERRIDE;
+    virtual void   paint(QPainter *painter, const QStyleOptionGraphicsItem *option,
+                         QWidget *widget = nullptr) Q_DECL_OVERRIDE;
+    virtual QRectF boundingRect() const Q_DECL_OVERRIDE;
 
     void SetOriginPointId(quint32 value);
 

@@ -163,3 +163,42 @@ void VisToolTrueDarts::setD3PointId(const quint32 &value)
 {
     dartP3Id = value;
 }
+
+//---------------------------------------------------------------------------------------------------------------------
+void VisToolTrueDarts::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
+{
+    const qreal scale = SceneScale(scene());
+
+    ScalePoint(point1, scale);
+    ScalePoint(point2, scale);
+    ScalePoint(baseLineP1, scale);
+    ScalePoint(baseLineP2, scale);
+    ScalePoint(dartP1, scale);
+    ScalePoint(dartP2, scale);
+    ScalePoint(dartP3, scale);
+
+    ScalePenWidth(lineblP1P1, scale);
+    ScalePenWidth(lineblP2P2, scale);
+    ScalePenWidth(p1d2, scale);
+    ScalePenWidth(d2p2, scale);
+
+    VisLine::paint(painter, option, widget);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QRectF VisToolTrueDarts::boundingRect() const
+{
+    QRectF rect = VisLine::boundingRect();
+    rect = rect.united(point1->boundingRect());
+    rect = rect.united(point2->boundingRect());
+    rect = rect.united(baseLineP1->boundingRect());
+    rect = rect.united(baseLineP2->boundingRect());
+    rect = rect.united(dartP1->boundingRect());
+    rect = rect.united(dartP2->boundingRect());
+    rect = rect.united(dartP3->boundingRect());
+    rect = rect.united(lineblP1P1->boundingRect());
+    rect = rect.united(lineblP2P2->boundingRect());
+    rect = rect.united(p1d2->boundingRect());
+    rect = rect.united(d2p2->boundingRect());
+    return rect;
+}

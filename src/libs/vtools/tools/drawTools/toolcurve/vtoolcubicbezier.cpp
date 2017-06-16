@@ -259,9 +259,6 @@ void VToolCubicBezier::SetVisualization()
 void VToolCubicBezier::RefreshGeometry()
 {
     const QSharedPointer<VCubicBezier> spl = VAbstractTool::data.GeometricObject<VCubicBezier>(id);
-    this->setPen(QPen(CorrectColor(spl->GetColor()),
-                      qApp->toPixel(WidthHairLine(*VAbstractTool::data.GetPatternUnit()))/factor,
-                      LineStyleToPenStyle(spl->GetPenStyle())));
     this->setPath(spl->GetPath());
 
     SetVisualization();

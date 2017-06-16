@@ -31,7 +31,6 @@
 
 #include <qcompilerdetection.h>
 #include <QColor>
-#include <QGraphicsEllipseItem>
 #include <QGraphicsItem>
 #include <QMetaObject>
 #include <QObject>
@@ -42,32 +41,30 @@
 
 #include "../vmisc/def.h"
 #include "vabstractsimple.h"
+#include "../vwidgets/vscenepoint.h"
 
 class VGraphicsSimpleTextItem;
 class VPointF;
 
-class VSimplePoint : public VAbstractSimple, public QGraphicsEllipseItem
+class VSimplePoint : public VAbstractSimple, public VScenePoint
 {
     Q_OBJECT
 public:
-    VSimplePoint(quint32 id, const QColor &currentColor, Unit patternUnit, qreal *factor = nullptr,
-                 QObject *parent = nullptr);
-    virtual ~VSimplePoint() Q_DECL_OVERRIDE;
+    VSimplePoint(quint32 id, const QColor &currentColor, QObject *parent = nullptr);
+    virtual ~VSimplePoint() = default;
 
     virtual int  type() const Q_DECL_OVERRIDE {return Type;}
     enum { Type = UserType + static_cast<int>(Vis::SimplePoint)};
 
-    void SetOnlyPoint(bool value);
-    bool IsOnlyPoint() const;
+    using VScenePoint::SetOnlyPoint;
+    using VScenePoint::IsOnlyPoint;
 
     void SetVisualizationMode(bool value);
     bool IsVisualizationMode() const;
 
     void SetPointHighlight(bool value);
 
-    void RefreshLine();
-    void RefreshGeometry(const VPointF &point);
-    virtual void SetEnabled(bool enabled) Q_DECL_OVERRIDE;
+    void SetEnabled(bool enabled);
     void EnableToolMove(bool move);
     void AllowLabelHover(bool enabled);
     void AllowLabelSelecting(bool enabled);
@@ -90,8 +87,8 @@ public slots:
 protected:
     virtual void     mousePressEvent( QGraphicsSceneMouseEvent * event ) Q_DECL_OVERRIDE;
     virtual void     mouseReleaseEvent ( QGraphicsSceneMouseEvent * event ) Q_DECL_OVERRIDE;
-    virtual void     hoverEnterEvent ( QGraphicsSceneHoverEvent * event ) Q_DECL_OVERRIDE;
-    virtual void     hoverLeaveEvent ( QGraphicsSceneHoverEvent * event ) Q_DECL_OVERRIDE;
+    virtual void     hoverEnterEvent(QGraphicsSceneHoverEvent *event) Q_DECL_OVERRIDE;
+    virtual void     hoverLeaveEvent(QGraphicsSceneHoverEvent *event) Q_DECL_OVERRIDE;
     virtual void     keyReleaseEvent ( QKeyEvent * event ) Q_DECL_OVERRIDE;
     virtual QVariant itemChange ( GraphicsItemChange change, const QVariant &value ) Q_DECL_OVERRIDE;
     virtual void     contextMenuEvent ( QGraphicsSceneContextMenuEvent * event ) Q_DECL_OVERRIDE;
@@ -99,21 +96,8 @@ protected:
 private:
     Q_DISABLE_COPY(VSimplePoint)
 
-    /** @brief radius radius circle. */
-    qreal                    radius;
-
-    /** @brief namePoint point label. */
-    VGraphicsSimpleTextItem *namePoint;
-
-    /** @brief lineName line what we see if label moved too away from point. */
-    QGraphicsLineItem       *lineName;
-
-    bool m_onlyPoint;
-    bool m_isHighlight;
     bool m_visualizationMode;
-
-    /** @brief currentColor current color. */
-    QColor currentColor;
+    bool m_alwaysHovered;
 };
 
 #endif // VSIMPLEPOINT_H

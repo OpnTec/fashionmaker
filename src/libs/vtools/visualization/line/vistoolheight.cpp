@@ -57,10 +57,6 @@ VisToolHeight::VisToolHeight(const VContainer *data, QGraphicsItem *parent)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-VisToolHeight::~VisToolHeight()
-{}
-
-//---------------------------------------------------------------------------------------------------------------------
 void VisToolHeight::RefreshGeometry()
 {
     if (object1Id > NULL_ID)
@@ -114,6 +110,34 @@ void VisToolHeight::setLineP1Id(const quint32 &value)
 void VisToolHeight::setLineP2Id(const quint32 &value)
 {
     lineP2Id = value;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VisToolHeight::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
+{
+    const qreal scale = SceneScale(scene());
+
+    ScalePoint(point, scale);
+    ScalePoint(base_point, scale);
+    ScalePoint(lineP1, scale);
+    ScalePoint(lineP2, scale);
+    ScalePenWidth(line, scale);
+    ScalePenWidth(line_intersection, scale);
+
+    VisLine::paint(painter, option, widget);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QRectF VisToolHeight::boundingRect() const
+{
+    QRectF rect = VisLine::boundingRect();
+    rect = rect.united(point->boundingRect());
+    rect = rect.united(base_point->boundingRect());
+    rect = rect.united(lineP1->boundingRect());
+    rect = rect.united(lineP2->boundingRect());
+    rect = rect.united(line->boundingRect());
+    rect = rect.united(line_intersection->boundingRect());
+    return rect;
 }
 
 //---------------------------------------------------------------------------------------------------------------------

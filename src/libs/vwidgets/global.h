@@ -2,7 +2,7 @@
  **
  **  @file
  **  @author Roman Telezhynskyi <dismine(at)gmail.com>
- **  @date   31 1, 2017
+ **  @date   14 6, 2017
  **
  **  @brief
  **  @copyright
@@ -26,26 +26,29 @@
  **
  *************************************************************************/
 
-#ifndef VISTOOLPIN_H
-#define VISTOOLPIN_H
+#ifndef GLOBAL_H
+#define GLOBAL_H
 
-#include "visline.h"
+#include <QtGlobal>
 
-class VSimplePoint;
+extern const qreal defPointRadiusPixel;
+extern const qreal widthMainLine;
+extern const qreal widthHairLine;
 
-class VisToolPin : public VisLine
-{
-    Q_OBJECT
-public:
-    explicit VisToolPin(const VContainer *data, QGraphicsItem *parent = nullptr);
-    virtual ~VisToolPin();
+class QGraphicsScene;
+class QGraphicsItem;
+class QGraphicsEllipseItem;
+class QGraphicsLineItem;
+class QColor;
+class QRectF;
 
-    virtual void RefreshGeometry() Q_DECL_OVERRIDE;
-    virtual int  type() const Q_DECL_OVERRIDE {return Type;}
-    enum { Type = UserType + static_cast<int>(Vis::ToolPin)};
-private:
-    Q_DISABLE_COPY(VisToolPin)
-    QPointer<VSimplePoint> m_point;
-};
+qreal SceneScale(QGraphicsScene *scene);
 
-#endif // VISTOOLPIN_H
+QColor CorrectColor(const QGraphicsItem *item, const QColor &color);
+
+QRectF PointRect(qreal radius);
+qreal  ScaledRadius(qreal scale);
+void   ScaleCircleSize(QGraphicsEllipseItem *item, qreal scale);
+qreal  ScaleWidth(qreal width, qreal scale);
+
+#endif // GLOBAL_H

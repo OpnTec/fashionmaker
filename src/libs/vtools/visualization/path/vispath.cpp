@@ -46,10 +46,21 @@ VisPath::VisPath(const VContainer *data, QGraphicsItem *parent)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void VisPath::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
+{
+    ScalePenWidth(this, SceneScale(scene()));
+
+    VCurvePathItem::paint(painter, option, widget);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 void VisPath::InitPen()
 {
-    this->setPen(QPen(mainColor, qApp->toPixel(WidthHairLine(*Visualization::data->GetPatternUnit()))/factor,
-                      lineStyle));
+    QPen visPen = pen();
+    visPen.setColor(mainColor);
+    visPen.setStyle(lineStyle);
+
+    setPen(visPen);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -67,7 +78,7 @@ VSimplePoint *VisPath::GetPoint(QVector<VSimplePoint *> &points, quint32 i, cons
     }
     else
     {
-        VSimplePoint *point = new VSimplePoint(NULL_ID, color, *Visualization::data->GetPatternUnit(), &factor);
+        VSimplePoint *point = new VSimplePoint(NULL_ID, color);
         point->SetPointHighlight(true);
         point->setParentItem(this);
         point->SetVisualizationMode(true);

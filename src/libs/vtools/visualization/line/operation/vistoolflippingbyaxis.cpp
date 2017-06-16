@@ -39,11 +39,6 @@ VisToolFlippingByAxis::VisToolFlippingByAxis(const VContainer *data, QGraphicsIt
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-VisToolFlippingByAxis::~VisToolFlippingByAxis()
-{
-}
-
-//---------------------------------------------------------------------------------------------------------------------
 void VisToolFlippingByAxis::RefreshGeometry()
 {
     if (objects.isEmpty())
@@ -84,4 +79,22 @@ void VisToolFlippingByAxis::SetOriginPointId(quint32 value)
 void VisToolFlippingByAxis::SetAxisType(AxisType value)
 {
     m_axisType = value;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VisToolFlippingByAxis::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
+{
+    const qreal scale = SceneScale(scene());
+
+    ScalePoint(point1, scale);
+
+    VisOperation::paint(painter, option, widget);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QRectF VisToolFlippingByAxis::boundingRect() const
+{
+    QRectF rect = VisOperation::boundingRect();
+    rect = rect.united(point1->boundingRect());
+    return rect;
 }

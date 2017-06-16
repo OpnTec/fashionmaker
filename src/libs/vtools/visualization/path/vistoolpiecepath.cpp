@@ -57,7 +57,7 @@ void VisToolPiecePath::RefreshGeometry()
         {
             VSimplePoint *point = GetPoint(static_cast<quint32>(i), supportColor);
             point->SetOnlyPoint(mode == Mode::Creation);
-            point->RefreshGeometry(nodes.at(i));
+            point->RefreshPointGeometry(nodes.at(i));
             point->setVisible(true);
         }
 
@@ -76,6 +76,35 @@ void VisToolPiecePath::RefreshGeometry()
 void VisToolPiecePath::SetPath(const VPiecePath &path)
 {
     m_path = path;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VisToolPiecePath::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
+{
+    const qreal scale = SceneScale(scene());
+
+    for (int i=0; i < m_points.size(); ++i)
+    {
+        ScalePoint(m_points[i], scale);
+    }
+
+    ScalePenWidth(m_line, scale);
+
+    VisPath::paint(painter, option, widget);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QRectF VisToolPiecePath::boundingRect() const
+{
+    QRectF rect = VisPath::boundingRect();
+
+    for (int i=0; i < m_points.size(); ++i)
+    {
+        rect = rect.united(m_points.at(i)->boundingRect());
+    }
+
+    rect = rect.united(m_line->boundingRect());
+    return rect;
 }
 
 //---------------------------------------------------------------------------------------------------------------------

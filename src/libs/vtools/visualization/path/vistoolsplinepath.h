@@ -49,7 +49,7 @@ class VisToolSplinePath : public VisPath
     Q_OBJECT
 public:
     explicit VisToolSplinePath(const VContainer *data, QGraphicsItem *parent = nullptr);
-    virtual ~VisToolSplinePath() Q_DECL_OVERRIDE;
+    virtual ~VisToolSplinePath();
 
     virtual void RefreshGeometry() Q_DECL_OVERRIDE;
 
@@ -58,6 +58,10 @@ public:
 
     virtual int  type() const Q_DECL_OVERRIDE {return Type;}
     enum { Type = UserType + static_cast<int>(Vis::ToolSplinePath)};
+
+    virtual void   paint(QPainter *painter, const QStyleOptionGraphicsItem *option,
+                         QWidget *widget = nullptr) Q_DECL_OVERRIDE;
+    virtual QRectF boundingRect() const Q_DECL_OVERRIDE;
 
 signals:
     void PathChanged(const VSplinePath &path);

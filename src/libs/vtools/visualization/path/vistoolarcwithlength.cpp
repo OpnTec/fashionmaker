@@ -82,3 +82,21 @@ void VisToolArcWithLength::setLength(const QString &expression)
 {
     length = FindLength(expression, Visualization::data->PlainVariables());
 }
+
+//---------------------------------------------------------------------------------------------------------------------
+void VisToolArcWithLength::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
+{
+    const qreal scale = SceneScale(scene());
+
+    ScalePoint(arcCenter, scale);
+
+    VisPath::paint(painter, option, widget);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QRectF VisToolArcWithLength::boundingRect() const
+{
+    QRectF rect = VisPath::boundingRect();
+    rect = rect.united(arcCenter->boundingRect());
+    return rect;
+}

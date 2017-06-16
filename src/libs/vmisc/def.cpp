@@ -323,15 +323,6 @@ qreal UnitConvertor(qreal value, const Unit &from, const Unit &to)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void CheckFactor(qreal &oldFactor, const qreal &Newfactor)
-{
-    if (Newfactor <= 2 && Newfactor >= 0.5)
-    {
-        oldFactor = Newfactor;
-    }
-}
-
-//---------------------------------------------------------------------------------------------------------------------
 QStringList SupportedLocales()
 {
     const QStringList locales = QStringList() << QStringLiteral("ru_RU")

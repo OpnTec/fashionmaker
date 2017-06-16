@@ -144,19 +144,55 @@ void VisToolTriangle::setHypotenuseP2Id(const quint32 &value)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void VisToolTriangle::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
+{
+    const qreal scale = SceneScale(scene());
+
+    ScalePoint(point, scale);
+    ScalePoint(axisP1, scale);
+    ScalePoint(axisP2, scale);
+    ScalePenWidth(axis, scale);
+    ScalePoint(hypotenuseP1, scale);
+    ScalePoint(hypotenuseP2, scale);
+    ScalePenWidth(foot1, scale);
+    ScalePenWidth(foot2, scale);
+
+    VisLine::paint(painter, option, widget);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QRectF VisToolTriangle::boundingRect() const
+{
+    QRectF rect = VisLine::boundingRect();
+    rect = rect.united(point->boundingRect());
+    rect = rect.united(axisP1->boundingRect());
+    rect = rect.united(axisP2->boundingRect());
+    rect = rect.united(axis->boundingRect());
+    rect = rect.united(hypotenuseP1->boundingRect());
+    rect = rect.united(hypotenuseP2->boundingRect());
+    rect = rect.united(foot1->boundingRect());
+    rect = rect.united(foot2->boundingRect());
+    return rect;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 void VisToolTriangle::DrawAimedAxis(QGraphicsPathItem *item, const QLineF &line, const QColor &color,
                                     Qt::PenStyle style)
 {
     SCASSERT (item != nullptr)
 
-    item->setPen(QPen(color, qApp->toPixel(WidthHairLine(*Visualization::data->GetPatternUnit()))/factor, style));
+    QPen visPen = item->pen();
+    visPen.setColor(color);
+    visPen.setStyle(style);
+
+    item->setPen(visPen);
 
     QPainterPath path;
     path.moveTo(line.p1());
     path.lineTo(line.p2());
 
-    qreal arrow_step = 60/factor;
-    qreal arrow_size = 10/factor;
+    qreal arrow_step = 60;
+    qreal arrow_size = 10;
 
     if (line.length() < arrow_step)
     {

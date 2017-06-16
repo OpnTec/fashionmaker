@@ -47,10 +47,13 @@ class VisPath : public Visualization, public VCurvePathItem
     Q_OBJECT
 public:
     explicit VisPath(const VContainer *data, QGraphicsItem *parent = nullptr);
-    virtual ~VisPath() Q_DECL_EQ_DEFAULT;
+    virtual ~VisPath() = default;
 
     virtual int  type() const Q_DECL_OVERRIDE {return Type;}
     enum { Type = UserType + static_cast<int>(Vis::Path)};
+
+    virtual void paint(QPainter *painter, const QStyleOptionGraphicsItem *option,
+                       QWidget *widget = nullptr) Q_DECL_OVERRIDE;
 protected:
     virtual void InitPen() Q_DECL_OVERRIDE;
     virtual void AddOnScene() Q_DECL_OVERRIDE;

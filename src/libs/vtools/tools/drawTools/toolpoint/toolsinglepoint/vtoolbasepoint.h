@@ -68,7 +68,6 @@ public:
     void    SetBasePointPos(const QPointF &pos);
 public slots:
     virtual void FullUpdateFromFile() Q_DECL_OVERRIDE;
-    virtual void SetFactor(qreal factor) Q_DECL_OVERRIDE;
     virtual void EnableToolMove(bool move) Q_DECL_OVERRIDE;
 signals:
     /**
@@ -95,8 +94,6 @@ private:
 
     VToolBasePoint (VAbstractPattern *doc, VContainer *data, quint32 id, const Source &typeCreation,
                       const QString &namePP, QGraphicsItem * parent = nullptr );
-
-    void         SetColorLabel(const Qt::GlobalColor & color);
 };
 
 #endif // VTOOLBASEPOINT_H

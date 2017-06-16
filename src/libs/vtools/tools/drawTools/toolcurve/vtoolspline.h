@@ -86,7 +86,7 @@ protected:
     virtual void hoverEnterEvent ( QGraphicsSceneHoverEvent * event ) Q_DECL_OVERRIDE;
     virtual void hoverLeaveEvent ( QGraphicsSceneHoverEvent * event ) Q_DECL_OVERRIDE;
     virtual void SetVisualization() Q_DECL_OVERRIDE;
-    virtual void RefreshGeometry() Q_DECL_OVERRIDE;
+    virtual void RefreshCtrlPoints() Q_DECL_OVERRIDE;
 private:
     Q_DISABLE_COPY(VToolSpline)
     QPointF oldPosition;

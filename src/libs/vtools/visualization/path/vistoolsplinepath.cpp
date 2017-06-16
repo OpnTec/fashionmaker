@@ -140,6 +140,32 @@ VSplinePath VisToolSplinePath::getPath()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void VisToolSplinePath::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
+{
+    const qreal scale = SceneScale(scene());
+
+    for (int i=0; i < points.size(); ++i)
+    {
+        ScalePoint(points[i], scale);
+    }
+
+    VisPath::paint(painter, option, widget);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QRectF VisToolSplinePath::boundingRect() const
+{
+    QRectF rect = VisPath::boundingRect();
+
+    for (int i=0; i < points.size(); ++i)
+    {
+        rect = rect.united(points.at(i)->boundingRect());
+    }
+
+    return rect;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 void VisToolSplinePath::MouseLeftPressed()
 {
     if (mode == Mode::Creation)
@@ -174,23 +200,17 @@ QGraphicsEllipseItem *VisToolSplinePath::getPoint(quint32 i)
 
         if (points.size() == 1)
         {
-            auto *controlPoint1 = new VControlPointSpline(points.size(), SplinePointPosition::FirstPoint,
-                                                          *Visualization::data->GetPatternUnit(),
-                                                          this);
+            auto *controlPoint1 = new VControlPointSpline(points.size(), SplinePointPosition::FirstPoint, this);
             controlPoint1->hide();
             ctrlPoints.append(controlPoint1);
         }
         else
         {
-            auto *controlPoint1 = new VControlPointSpline(points.size()-1, SplinePointPosition::LastPoint,
-                                                          *Visualization::data->GetPatternUnit(),
-                                                          this);
+            auto *controlPoint1 = new VControlPointSpline(points.size()-1, SplinePointPosition::LastPoint, this);
             controlPoint1->hide();
             ctrlPoints.append(controlPoint1);
 
-            auto *controlPoint2 = new VControlPointSpline(points.size(), SplinePointPosition::FirstPoint,
-                                                          *Visualization::data->GetPatternUnit(),
-                                                          this);
+            auto *controlPoint2 = new VControlPointSpline(points.size(), SplinePointPosition::FirstPoint, this);
             controlPoint2->hide();
             ctrlPoints.append(controlPoint2);
         }
@@ -203,9 +223,6 @@ QGraphicsEllipseItem *VisToolSplinePath::getPoint(quint32 i)
 //---------------------------------------------------------------------------------------------------------------------
 void VisToolSplinePath::Creating(const QPointF &pSpl, int size)
 {
-    //Radius of point circle, but little bigger. Need handle with hover sizes.
-    const static qreal radius = ToPixel(DefPointRadius/*mm*/, Unit::Mm)*1.5;
-
     int lastPoint = 0;
     int preLastPoint = 0;
 
@@ -223,7 +240,8 @@ void VisToolSplinePath::Creating(const QPointF &pSpl, int size)
 
         if (not ctrlPoints[lastPoint]->isVisible())
         {
-            if (QLineF(pSpl, ctrlPoint).length() > radius)
+            //Radius of point circle, but little bigger. Need handle with hover sizes.
+            if (QLineF(pSpl, ctrlPoint).length() > defPointRadiusPixel*1.5)
             {
                 if (size == 1)
                 {

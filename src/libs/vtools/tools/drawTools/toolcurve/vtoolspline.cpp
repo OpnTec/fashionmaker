@@ -96,7 +96,7 @@ VToolSpline::VToolSpline(VAbstractPattern *doc, VContainer *data, quint32 id, co
 
     auto *controlPoint1 = new VControlPointSpline(1, SplinePointPosition::FirstPoint,
                                                   static_cast<QPointF>(spl->GetP2()),
-                                                  static_cast<QPointF>(spl->GetP1()), *data->GetPatternUnit(),
+                                                  static_cast<QPointF>(spl->GetP1()),
                                                   freeAngle1, freeLength1, this);
     connect(controlPoint1, &VControlPointSpline::ControlPointChangePosition, this,
             &VToolSpline::ControlPointChangePosition);
@@ -109,7 +109,7 @@ VToolSpline::VToolSpline(VAbstractPattern *doc, VContainer *data, quint32 id, co
 
     auto *controlPoint2 = new VControlPointSpline(1, SplinePointPosition::LastPoint,
                                                   static_cast<QPointF>(spl->GetP3()),
-                                                  static_cast<QPointF>(spl->GetP4()), *data->GetPatternUnit(),
+                                                  static_cast<QPointF>(spl->GetP4()),
                                                   freeAngle2, freeLength2, this);
     connect(controlPoint2, &VControlPointSpline::ControlPointChangePosition, this,
             &VToolSpline::ControlPointChangePosition);
@@ -533,10 +533,7 @@ bool VToolSpline::IsMovable() const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-/**
- * @brief RefreshGeometry  refresh item on scene.
- */
-void VToolSpline::RefreshGeometry()
+void VToolSpline::RefreshCtrlPoints()
 {
     // Very important to disable control points. Without it the pogram can't move the curve.
     foreach (auto *point, controlPoints)
@@ -545,11 +542,6 @@ void VToolSpline::RefreshGeometry()
     }
 
     const auto spl = VAbstractTool::data.GeometricObject<VSpline>(id);
-
-    this->setPen(QPen(CorrectColor(spl->GetColor()),
-                      qApp->toPixel(WidthHairLine(*VAbstractTool::data.GetPatternUnit()))/factor,
-                      LineStyleToPenStyle(spl->GetPenStyle())));
-    this->setPath(spl->GetPath());
 
     controlPoints[0]->blockSignals(true);
     controlPoints[1]->blockSignals(true);
@@ -576,8 +568,6 @@ void VToolSpline::RefreshGeometry()
 
     controlPoints[0]->blockSignals(false);
     controlPoints[1]->blockSignals(false);
-
-    SetVisualization();
 
     foreach (auto *point, controlPoints)
     {

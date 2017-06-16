@@ -49,10 +49,6 @@ VisToolLine::VisToolLine(const VContainer *data, QGraphicsItem *parent)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-VisToolLine::~VisToolLine()
-{}
-
-//---------------------------------------------------------------------------------------------------------------------
 void VisToolLine::RefreshGeometry()
 {
     QLineF line;
@@ -80,6 +76,10 @@ void VisToolLine::DrawLine(QGraphicsLineItem *lineItem, const QLineF &line, cons
 {
     SCASSERT (lineItem != nullptr)
 
-    lineItem->setPen(QPen(color, qApp->toPixel(WidthMainLine(*Visualization::data->GetPatternUnit()))/factor, style));
+    QPen visPen = lineItem->pen();
+    visPen.setColor(color);
+    visPen.setStyle(style);
+
+    lineItem->setPen(visPen);
     lineItem->setLine(line);
 }

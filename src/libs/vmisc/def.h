@@ -53,7 +53,6 @@ class QMarginsF;
 class VTranslateMeasurements;
 
 #define SceneSize 50000
-#define DefPointRadius 1.5//mm
 
 enum class NodeDetail : char { Contour, Modeling };
 enum class SceneObject : char { Point, Line, Spline, Arc, ElArc, SplinePath, Detail, Unknown };
@@ -373,8 +372,6 @@ double ToPixel(double val, const Unit &unit) Q_REQUIRED_RESULT;
 double FromPixel(double pix, const Unit &unit) Q_REQUIRED_RESULT;
 
 qreal UnitConvertor(qreal value, const Unit &from, const Unit &to) Q_REQUIRED_RESULT;
-
-void CheckFactor(qreal &oldFactor, const qreal &Newfactor);
 
 void InitLanguages(QComboBox *combobox);
 QStringList SupportedLocales() Q_REQUIRED_RESULT;

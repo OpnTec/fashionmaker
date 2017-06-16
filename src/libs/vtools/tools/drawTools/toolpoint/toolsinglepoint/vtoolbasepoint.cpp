@@ -83,11 +83,10 @@ VToolBasePoint::VToolBasePoint (VAbstractPattern *doc, VContainer *data, quint32
                                 const QString &namePP, QGraphicsItem * parent )
     :VToolSinglePoint(doc, data, id, parent), namePP(namePP)
 {
-    baseColor = Qt::red;
-    this->setPen(QPen(baseColor, qApp->toPixel(WidthHairLine(*VAbstractTool::data.GetPatternUnit()))/factor));
+    m_baseColor = Qt::red;
     this->setFlag(QGraphicsItem::ItemIsMovable, true);
     this->setFlag(QGraphicsItem::ItemSendsGeometryChanges, true);
-    SetColorLabel(Qt::black);
+    m_namePoint->setBrush(Qt::black);
     ToolCreation(typeCreation);
 }
 
@@ -361,17 +360,6 @@ void VToolBasePoint::mouseReleaseEvent(QGraphicsSceneMouseEvent *event)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-/**
- * @brief SetColorLabel change color for label and label line.
- * @param color new color.
- */
-void VToolBasePoint::SetColorLabel(const Qt::GlobalColor &color)
-{
-    namePoint->setBrush(color);
-    lineName->setPen(QPen(color, qApp->toPixel(WidthHairLine(*VAbstractTool::data.GetPatternUnit()))/factor));
-}
-
-//---------------------------------------------------------------------------------------------------------------------
 void VToolBasePoint::SaveOptions(QDomElement &tag, QSharedPointer<VGObject> &obj)
 {
     VToolSinglePoint::SaveOptions(tag, obj);
@@ -433,17 +421,6 @@ void VToolBasePoint::contextMenuEvent ( QGraphicsSceneContextMenuEvent * event )
 void  VToolBasePoint::FullUpdateFromFile()
 {
     RefreshPointGeometry(*VAbstractTool::data.GeometricObject<VPointF>(id));
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-/**
- * @brief SetFactor set current scale factor of scene.
- * @param factor scene scale factor.
- */
-void VToolBasePoint::SetFactor(qreal factor)
-{
-    VDrawTool::SetFactor(factor);
-    RefreshPointGeometry(*(VAbstractTool::data.GeometricObject<VPointF>(id)));
 }
 
 //---------------------------------------------------------------------------------------------------------------------

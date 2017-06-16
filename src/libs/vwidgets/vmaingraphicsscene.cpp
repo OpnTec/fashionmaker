@@ -41,7 +41,7 @@
 #include <QStringDataPtr>
 #include <Qt>
 
-#include "../ifc/ifcdef.h"
+#include "global.h"
 
 //---------------------------------------------------------------------------------------------------------------------
 /**
@@ -51,7 +51,6 @@ VMainGraphicsScene::VMainGraphicsScene(QObject *parent)
     : QGraphicsScene(parent),
       horScrollBar(0),
       verScrollBar(0),
-      scaleFactor(1),
       _transform(QTransform()),
       scenePos(QPointF()),
       origins()
@@ -64,8 +63,12 @@ VMainGraphicsScene::VMainGraphicsScene(QObject *parent)
  * @param parent parent object.
  */
 VMainGraphicsScene::VMainGraphicsScene(const QRectF & sceneRect, QObject * parent)
-    :QGraphicsScene ( sceneRect, parent ), horScrollBar(0), verScrollBar(0), scaleFactor(1), _transform(QTransform()),
-      scenePos(QPointF()), origins()
+    :QGraphicsScene ( sceneRect, parent ),
+      horScrollBar(0),
+      verScrollBar(0),
+      _transform(QTransform()),
+      scenePos(),
+      origins()
 {}
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -114,7 +117,7 @@ void VMainGraphicsScene::InitOrigins()
 {
     origins.clear();
 
-    QPen originsPen(Qt::green, ToPixel(WidthHairLine(Unit::Mm), Unit::Mm), Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin);
+    QPen originsPen(Qt::green, widthHairLine, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin);
     QBrush axisTextBrush(Qt::green);
     const qreal arrowAngle = 35.0;
     const qreal arrowLength = 12.0;
@@ -273,17 +276,6 @@ void VMainGraphicsScene::ChoosedItem(quint32 id, const SceneObject &type)
 void VMainGraphicsScene::SelectedItem(bool selected, quint32 object, quint32 tool)
 {
     emit SelectedObject(selected, object, tool);
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-/**
- * @brief SetFactor set current scale factor of scene.
- * @param factor scene scale factor. scene scale factor.
- */
-void VMainGraphicsScene::SetFactor(qreal factor)
-{
-    scaleFactor=scaleFactor*factor;
-    emit NewFactor(scaleFactor);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

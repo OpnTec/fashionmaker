@@ -39,39 +39,62 @@
 #include <Qt>
 #include <QtDebug>
 
-#include "../ifc/ifcdef.h"
+#include "global.h"
 #include "../vgeometry/vabstractcurve.h"
+#include "../vmisc/vabstractapplication.h"
 
 template <class T> class QSharedPointer;
 
 //---------------------------------------------------------------------------------------------------------------------
-VSimpleCurve::VSimpleCurve(quint32 id, const QSharedPointer<VAbstractCurve> &curve, Unit patternUnit, qreal *factor,
-                           QObject *parent)
-    : VAbstractSimple(id, patternUnit, factor, parent),
+VSimpleCurve::VSimpleCurve(quint32 id, const QSharedPointer<VAbstractCurve> &curve, QObject *parent)
+    : VAbstractSimple(id, parent),
       VCurvePathItem(),
       m_curve(curve),
       m_isHovered(false)
 {
     this->setBrush(QBrush(Qt::NoBrush));
-    SetPen(this, m_curve->GetColor(), WidthHairLine(patternUnit), LineStyleToPenStyle(m_curve->GetPenStyle()));
     this->setAcceptHoverEvents(true);
     this->setFlag(QGraphicsItem::ItemIsFocusable, true);// For keyboard input focus
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VSimpleCurve::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
+{
+    qreal width = 1;
+    if (m_isHovered)
+    {
+        width = widthMainLine;
+    }
+    else
+    {
+        width = widthHairLine;
+    }
+
+    const qreal scale = SceneScale(scene());
+    if (scale > 1)
+    {
+        width = qMax(1., width/scale);
+    }
+
+    setPen(QPen(CorrectColor(this, m_curve->GetColor()), width, LineStyleToPenStyle(m_curve->GetPenStyle())));
+
+    VCurvePathItem::paint(painter, option, widget);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void VSimpleCurve::RefreshGeometry(const QSharedPointer<VAbstractCurve> &curve)
 {
     m_curve = curve;
-    setPen(QPen(CorrectColor(m_curve->GetColor()), pen().width(), LineStyleToPenStyle(m_curve->GetPenStyle()),
-                Qt::RoundCap));
-    ShowPath();
-}
 
-//---------------------------------------------------------------------------------------------------------------------
-void VSimpleCurve::SetEnabled(bool enabled)
-{
-    VAbstractSimple::SetEnabled(enabled);
-    SetPen(this, m_curve->GetColor(), WidthHairLine(patternUnit), LineStyleToPenStyle(m_curve->GetPenStyle()));
+    if (not m_curve.isNull())
+    {
+        m_isHovered ? SetDirectionPath(m_curve->GetDirectionPath()) : SetDirectionPath(QPainterPath());
+        setPath(m_curve->GetPath());
+    }
+    else
+    {
+        qWarning() << tr("VSimpleCurve::RefreshGeometry: pointer to curve is null.");
+    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -128,8 +151,6 @@ void VSimpleCurve::mouseReleaseEvent(QGraphicsSceneMouseEvent *event)
 void VSimpleCurve::hoverEnterEvent(QGraphicsSceneHoverEvent *event)
 {
     m_isHovered = true;
-    SetPen(this, m_curve->GetColor(), WidthMainLine(patternUnit), LineStyleToPenStyle(m_curve->GetPenStyle()));
-    ShowPath();
     QGraphicsPathItem::hoverEnterEvent(event);
 }
 
@@ -137,8 +158,6 @@ void VSimpleCurve::hoverEnterEvent(QGraphicsSceneHoverEvent *event)
 void VSimpleCurve::hoverLeaveEvent(QGraphicsSceneHoverEvent *event)
 {
     m_isHovered = false;
-    SetPen(this, m_curve->GetColor(), WidthHairLine(patternUnit), LineStyleToPenStyle(m_curve->GetPenStyle()));
-    ShowPath();
     QGraphicsPathItem::hoverLeaveEvent(event);
 }
 
@@ -171,18 +190,4 @@ void VSimpleCurve::keyReleaseEvent(QKeyEvent *event)
             break;
     }
     QGraphicsPathItem::keyReleaseEvent ( event );
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void VSimpleCurve::ShowPath()
-{
-    if (not m_curve.isNull())
-    {
-        m_isHovered ? SetDirectionPath(m_curve->GetDirectionPath()) : SetDirectionPath(QPainterPath());
-        setPath(m_curve->GetPath());
-    }
-    else
-    {
-        qWarning() << tr("VSimpleCurve::RefreshGeometry: pointer to curve is null.");
-    }
 }

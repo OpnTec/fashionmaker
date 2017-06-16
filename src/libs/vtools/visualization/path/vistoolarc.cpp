@@ -82,3 +82,21 @@ void VisToolArc::setF2(const QString &expression)
 {
     f2 = FindVal(expression, Visualization::data->PlainVariables());
 }
+
+//---------------------------------------------------------------------------------------------------------------------
+void VisToolArc::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
+{
+    const qreal scale = SceneScale(scene());
+
+    ScalePoint(arcCenter, scale);
+
+    VisPath::paint(painter, option, widget);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QRectF VisToolArc::boundingRect() const
+{
+    QRectF rect = VisPath::boundingRect();
+    rect = rect.united(arcCenter->boundingRect());
+    return rect;
+}

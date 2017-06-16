@@ -48,10 +48,6 @@ VisLine::VisLine(const VContainer *data, QGraphicsItem *parent)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-VisLine::~VisLine()
-{}
-
-//---------------------------------------------------------------------------------------------------------------------
 qreal VisLine::CorrectAngle(const qreal &angle)
 {
     qreal ang = angle;
@@ -80,6 +76,14 @@ qreal VisLine::CorrectAngle(const qreal &angle)
         default: // <360
             return 0;
     }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VisLine::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
+{
+    ScalePenWidth(this, SceneScale(scene()));
+
+    QGraphicsLineItem::paint(painter, option, widget);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -138,8 +142,11 @@ QLineF VisLine::Axis(const QPointF &p1, const QPointF &p2) const
 //---------------------------------------------------------------------------------------------------------------------
 void VisLine::InitPen()
 {
-    this->setPen(QPen(mainColor, qApp->toPixel(WidthHairLine(*Visualization::data->GetPatternUnit()))/factor,
-                      lineStyle));
+    QPen visPen = pen();
+    visPen.setColor(mainColor);
+    visPen.setStyle(lineStyle);
+
+    setPen(visPen);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

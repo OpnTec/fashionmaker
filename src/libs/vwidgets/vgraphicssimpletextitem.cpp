@@ -189,7 +189,6 @@ void VGraphicsSimpleTextItem::hoverEnterEvent(QGraphicsSceneHoverEvent *event)
  */
 void VGraphicsSimpleTextItem::hoverLeaveEvent(QGraphicsSceneHoverEvent *event)
 {
-    Q_UNUSED(event)
     if (flags() & QGraphicsItem::ItemIsMovable)
     {
         //Disable cursor-arrow-openhand

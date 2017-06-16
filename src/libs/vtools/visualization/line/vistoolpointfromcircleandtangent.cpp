@@ -55,10 +55,6 @@ VisToolPointFromCircleAndTangent::VisToolPointFromCircleAndTangent(const VContai
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-VisToolPointFromCircleAndTangent::~VisToolPointFromCircleAndTangent()
-{}
-
-//---------------------------------------------------------------------------------------------------------------------
 void VisToolPointFromCircleAndTangent::RefreshGeometry()
 {
     if (object1Id > NULL_ID)// tangent point
@@ -103,6 +99,32 @@ void VisToolPointFromCircleAndTangent::setCRadius(const QString &value)
 void VisToolPointFromCircleAndTangent::setCrossPoint(const CrossCirclesPoint &value)
 {
     crossPoint = value;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VisToolPointFromCircleAndTangent::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
+{
+    const qreal scale = SceneScale(scene());
+
+    ScalePoint(point, scale);
+    ScalePoint(tangent, scale);
+    ScalePoint(cCenter, scale);
+    ScalePoint(cPath, scale);
+    ScalePenWidth(tangent2, scale);
+
+    VisLine::paint(painter, option, widget);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QRectF VisToolPointFromCircleAndTangent::boundingRect() const
+{
+    QRectF rect = VisLine::boundingRect();
+    rect = rect.united(point->boundingRect());
+    rect = rect.united(tangent->boundingRect());
+    rect = rect.united(cCenter->boundingRect());
+    rect = rect.united(cPath->boundingRect());
+    rect = rect.united(tangent2->boundingRect());
+    return rect;
 }
 
 //---------------------------------------------------------------------------------------------------------------------

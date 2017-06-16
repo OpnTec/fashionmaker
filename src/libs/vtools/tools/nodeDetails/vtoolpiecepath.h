@@ -50,6 +50,9 @@ public:
     enum { Type = UserType + static_cast<int>(Tool::PiecePath)};
     virtual QString getTagName() const Q_DECL_OVERRIDE;
 
+    virtual void paint(QPainter *painter, const QStyleOptionGraphicsItem *option,
+                       QWidget *widget = nullptr) Q_DECL_OVERRIDE;
+
     virtual void incrementReferens() Q_DECL_OVERRIDE;
     virtual void decrementReferens() Q_DECL_OVERRIDE;
 

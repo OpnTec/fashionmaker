@@ -41,11 +41,12 @@
 #include "../ifc/xml/vabstractpattern.h"
 #include "../vmisc/def.h"
 #include "vabstractnode.h"
+#include "../vwidgets/vscenepoint.h"
 
 /**
  * @brief The VNodePoint class point detail node.
  */
-class VNodePoint: public VAbstractNode, public QGraphicsEllipseItem
+class VNodePoint: public VAbstractNode, public VScenePoint
 {
     Q_OBJECT
 public:
@@ -75,24 +76,11 @@ public slots:
     void         AllowLabelHover(bool enabled);
     void         AllowLabelSelecting(bool enabled);
 protected:
-    /** @brief radius radius circle. */
-    qreal        radius;
-
-    /** @brief namePoint label name. */
-    VGraphicsSimpleTextItem *namePoint;
-
-    /** @brief lineName pointer to label line. */
-    QGraphicsLineItem       *lineName;
-
     virtual void AddToFile() Q_DECL_OVERRIDE;
     virtual void RefreshDataInFile() Q_DECL_OVERRIDE;
     virtual void mousePressEvent(QGraphicsSceneMouseEvent *event) Q_DECL_OVERRIDE;
     virtual void mouseReleaseEvent ( QGraphicsSceneMouseEvent * event ) Q_DECL_OVERRIDE;
-    virtual void hoverMoveEvent ( QGraphicsSceneHoverEvent * event ) Q_DECL_OVERRIDE;
-    virtual void hoverLeaveEvent ( QGraphicsSceneHoverEvent * event ) Q_DECL_OVERRIDE;
     virtual void UpdateNamePosition(qreal mx, qreal my);
-    virtual void RefreshPointGeometry(const VPointF &point);
-    void         RefreshLine();
     virtual void ShowNode() Q_DECL_OVERRIDE;
     virtual void HideNode() Q_DECL_OVERRIDE;
 private:

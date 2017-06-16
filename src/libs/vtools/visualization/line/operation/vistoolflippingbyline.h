@@ -38,9 +38,12 @@ class VisToolFlippingByLine : public VisOperation
     Q_OBJECT
 public:
     explicit VisToolFlippingByLine(const VContainer *data, QGraphicsItem *parent = nullptr);
-    virtual ~VisToolFlippingByLine();
+    virtual ~VisToolFlippingByLine() = default;
 
-    virtual void RefreshGeometry() Q_DECL_OVERRIDE;
+    virtual void   RefreshGeometry() Q_DECL_OVERRIDE;
+    virtual void   paint(QPainter *painter, const QStyleOptionGraphicsItem *option,
+                         QWidget *widget = nullptr) Q_DECL_OVERRIDE;
+    virtual QRectF boundingRect() const Q_DECL_OVERRIDE;
 
     void SetFirstLinePointId(quint32 value);
     void SetSecondLinePointId(quint32 value);

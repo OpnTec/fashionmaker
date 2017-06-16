@@ -56,10 +56,6 @@ VisToolEndLine::VisToolEndLine(const VContainer *data, QGraphicsItem *parent)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-VisToolEndLine::~VisToolEndLine()
-{}
-
-//---------------------------------------------------------------------------------------------------------------------
 void VisToolEndLine::RefreshGeometry()
 {
     const QSharedPointer<VPointF> first = Visualization::data->GeometricObject<VPointF>(object1Id);
@@ -113,4 +109,22 @@ QString VisToolEndLine::Length() const
 void VisToolEndLine::setLength(const QString &expression)
 {
     length = FindLength(expression, Visualization::data->PlainVariables());
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VisToolEndLine::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
+{
+    const qreal scale = SceneScale(scene());
+
+    ScalePoint(point, scale);
+
+    VisLine::paint(painter, option, widget);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QRectF VisToolEndLine::boundingRect() const
+{
+    QRectF rect = VisLine::boundingRect();
+    rect = rect.united(point->boundingRect());
+    return rect;
 }

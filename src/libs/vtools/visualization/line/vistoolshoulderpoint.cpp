@@ -131,3 +131,33 @@ void VisToolShoulderPoint::setLength(const QString &expression)
 {
     length = FindLength(expression, Visualization::data->PlainVariables());
 }
+
+//---------------------------------------------------------------------------------------------------------------------
+void VisToolShoulderPoint::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
+{
+    const qreal scale = SceneScale(scene());
+
+    ScalePoint(point, scale);
+    ScalePoint(line1P1, scale);
+    ScalePoint(line1P2, scale);
+    ScalePenWidth(line1, scale);
+    ScalePoint(line2P2, scale);
+    ScalePenWidth(line2, scale);
+    ScalePenWidth(line3, scale);
+
+    VisLine::paint(painter, option, widget);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QRectF VisToolShoulderPoint::boundingRect() const
+{
+    QRectF rect = VisLine::boundingRect();
+    rect = rect.united(point->boundingRect());
+    rect = rect.united(line1P1->boundingRect());
+    rect = rect.united(line1P2->boundingRect());
+    rect = rect.united(line1->boundingRect());
+    rect = rect.united(line2P2->boundingRect());
+    rect = rect.united(line2->boundingRect());
+    rect = rect.united(line3->boundingRect());
+    return rect;
+}

@@ -111,9 +111,6 @@ protected:
     /** @brief id object id. */
     const quint32            id;
 
-    /** @brief baseColor base color for tool. */
-    Qt::GlobalColor         baseColor;
-
     QPointer<Visualization> vis;
     SelectionType           selectionType;
 
@@ -137,9 +134,6 @@ protected:
 
     virtual void SetVisualization()=0;
     virtual void ToolCreation(const Source &typeCreation);
-
-    static void RefreshLine(QGraphicsEllipseItem *point, VGraphicsSimpleTextItem *namePoint,
-                            QGraphicsLineItem *lineName, const qreal radius);
 
     static QDomElement AddSANode(VAbstractPattern *doc, const QString &tagName, const VPieceNode &node);
     static void        AddNode(VAbstractPattern *doc, QDomElement &domElement, const VPieceNode &node);
@@ -179,7 +173,6 @@ inline void VAbstractTool::AddVisualization()
     T *visual = new T(getData());
     VMainGraphicsScene *scene = qobject_cast<VMainGraphicsScene *>(qApp->getCurrentScene());
     SCASSERT(scene != nullptr)
-    connect(scene, &VMainGraphicsScene::NewFactor, visual, &Visualization::SetFactor);
     scene->addItem(visual);
 
     connect(visual, &Visualization::ToolTip, this, &VAbstractTool::ToolTip);

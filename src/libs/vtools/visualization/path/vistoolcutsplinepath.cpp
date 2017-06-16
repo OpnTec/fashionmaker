@@ -93,3 +93,25 @@ void VisToolCutSplinePath::setLength(const QString &expression)
 {
     length = FindLength(expression, Visualization::data->PlainVariables());
 }
+
+//---------------------------------------------------------------------------------------------------------------------
+void VisToolCutSplinePath::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
+{
+    const qreal scale = SceneScale(scene());
+
+    ScalePoint(point, scale);
+    ScalePenWidth(splPath1, scale);
+    ScalePenWidth(splPath2, scale);
+
+    VisPath::paint(painter, option, widget);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QRectF VisToolCutSplinePath::boundingRect() const
+{
+    QRectF rect = VisPath::boundingRect();
+    rect = rect.united(point->boundingRect());
+    rect = rect.united(splPath1->boundingRect());
+    rect = rect.united(splPath2->boundingRect());
+    return rect;
+}

@@ -113,6 +113,25 @@ QString VToolPiecePath::getTagName() const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void VToolPiecePath::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
+{
+    qreal width = widthHairLine;
+
+    const qreal scale = SceneScale(scene());
+    if (scale > 1)
+    {
+        width = qMax(1., width/scale);
+    }
+
+    QPen toolPen = pen();
+    toolPen.setWidthF(width);
+
+    setPen(toolPen);
+
+    QGraphicsPathItem::paint(painter, option, widget);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 void VToolPiecePath::incrementReferens()
 {
     VAbstractTool::incrementReferens();

@@ -58,10 +58,6 @@ VisToolAlongLine::VisToolAlongLine(const VContainer *data, QGraphicsItem *parent
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-VisToolAlongLine::~VisToolAlongLine()
-{}
-
-//---------------------------------------------------------------------------------------------------------------------
 void VisToolAlongLine::setObject2Id(const quint32 &value)
 {
     object2Id = value;
@@ -71,6 +67,30 @@ void VisToolAlongLine::setObject2Id(const quint32 &value)
 void VisToolAlongLine::setLength(const QString &expression)
 {
     length = FindLength(expression, Visualization::data->PlainVariables());
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VisToolAlongLine::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
+{
+    const qreal scale = SceneScale(scene());
+
+    ScalePoint(point, scale);
+    ScalePoint(lineP1, scale);
+    ScalePoint(lineP2, scale);
+    ScalePenWidth(line, scale);
+
+    VisLine::paint(painter, option, widget);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QRectF VisToolAlongLine::boundingRect() const
+{
+    QRectF rect = VisLine::boundingRect();
+    rect = rect.united(point->boundingRect());
+    rect = rect.united(lineP1->boundingRect());
+    rect = rect.united(lineP2->boundingRect());
+    rect = rect.united(line->boundingRect());
+    return rect;
 }
 
 //---------------------------------------------------------------------------------------------------------------------

@@ -1,14 +1,14 @@
 /************************************************************************
  **
- **  @file   vistoolcubicbezier.h
+ **  @file
  **  @author Roman Telezhynskyi <dismine(at)gmail.com>
- **  @date   10 3, 2016
+ **  @date   14 6, 2017
  **
  **  @brief
  **  @copyright
  **  This source code is part of the Valentine project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
- **  Copyright (C) 2016 Valentina project
+ **  Copyright (C) 2017 Valentina project
  **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
  **
  **  Valentina is free software: you can redistribute it and/or modify
@@ -26,50 +26,53 @@
  **
  *************************************************************************/
 
-#ifndef VISTOOLCUBICBEZIER_H
-#define VISTOOLCUBICBEZIER_H
+#ifndef VSCENEPOINT_H
+#define VSCENEPOINT_H
 
-#include <qcompilerdetection.h>
-#include <QGraphicsItem>
-#include <QMetaObject>
-#include <QObject>
-#include <QString>
 #include <QtGlobal>
+#include <QGraphicsEllipseItem>
 
-#include "../vmisc/def.h"
-#include "vispath.h"
+class VGraphicsSimpleTextItem;
+class VPointF;
 
-class VisToolCubicBezier : public VisPath
+class VScenePoint: public QGraphicsEllipseItem
 {
-    Q_OBJECT
 public:
-    explicit VisToolCubicBezier(const VContainer *data, QGraphicsItem *parent = nullptr);
-    virtual ~VisToolCubicBezier() Q_DECL_EQ_DEFAULT;
-
-    virtual void RefreshGeometry() Q_DECL_OVERRIDE;
-
-    void         setObject2Id(const quint32 &value);
-    void         setObject3Id(const quint32 &value);
-    void         setObject4Id(const quint32 &value);
-
-    virtual int  type() const Q_DECL_OVERRIDE {return Type;}
-    enum { Type = UserType + static_cast<int>(Vis::ToolCubicBezier)};
+    VScenePoint(QGraphicsItem *parent = nullptr);
+    ~VScenePoint() = default;
 
     virtual void   paint(QPainter *painter, const QStyleOptionGraphicsItem *option,
                          QWidget *widget = nullptr) Q_DECL_OVERRIDE;
+
+    virtual void   RefreshPointGeometry(const VPointF &point);
     virtual QRectF boundingRect() const Q_DECL_OVERRIDE;
 
 protected:
-    Q_DISABLE_COPY(VisToolCubicBezier)
-    quint32              object2Id;
-    quint32              object3Id;
-    quint32              object4Id;
-    QGraphicsEllipseItem *point1;
-    QGraphicsEllipseItem *point2;
-    QGraphicsEllipseItem *point3;
-    QGraphicsEllipseItem *point4;
-    QGraphicsLineItem    *helpLine1;
-    QGraphicsLineItem    *helpLine2;
+    /** @brief namePoint point label. */
+    VGraphicsSimpleTextItem *m_namePoint;
+
+    /** @brief lineName line what we see if label moved too away from point. */
+    QGraphicsLineItem       *m_lineName;
+
+    bool m_onlyPoint;
+    bool m_isHovered;
+
+    /** @brief m_baseColor base color of point. */
+    QColor m_baseColor;
+
+    virtual void hoverEnterEvent(QGraphicsSceneHoverEvent *event) Q_DECL_OVERRIDE;
+    virtual void hoverLeaveEvent(QGraphicsSceneHoverEvent *event) Q_DECL_OVERRIDE;
+
+    void RefreshLine();
+    void ScaleLinePenWidth(QGraphicsLineItem *line, qreal scale);
+
+    void SetOnlyPoint(bool value);
+    bool IsOnlyPoint() const;
+private:
+    Q_DISABLE_COPY(VScenePoint)
+
+    void ScaleMainPenWidth(qreal scale);
+    void ScaleLabelFontSize(qreal scale) const;
 };
 
-#endif // VISTOOLCUBICBEZIER_H
+#endif // VSCENEPOINT_H

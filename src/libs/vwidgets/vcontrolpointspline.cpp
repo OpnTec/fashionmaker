@@ -43,20 +43,18 @@
 #include <QRectF>
 #include <Qt>
 
-#include "../ifc/ifcdef.h"
+#include "../vwidgets/global.h"
 #include "../vgeometry/vgobject.h"
 #include "vmaingraphicsscene.h"
 #include "vmaingraphicsview.h"
+#include "vgraphicssimpletextitem.h"
 
 //---------------------------------------------------------------------------------------------------------------------
-VControlPointSpline::VControlPointSpline(const qint32 &indexSpline, SplinePointPosition position, Unit patternUnit,
-                                         QGraphicsItem *parent)
-    :QGraphicsEllipseItem(parent),
-      radius(CircleRadius()),
+VControlPointSpline::VControlPointSpline(const qint32 &indexSpline, SplinePointPosition position, QGraphicsItem *parent)
+    : VScenePoint(parent),
       controlLine(nullptr),
       indexSpline(indexSpline),
       position(position),
-      patternUnit(patternUnit),
       freeAngle(true),
       freeLength(true)
 {
@@ -73,14 +71,12 @@ VControlPointSpline::VControlPointSpline(const qint32 &indexSpline, SplinePointP
  * @param parent parent object.
  */
 VControlPointSpline::VControlPointSpline(const qint32 &indexSpline, SplinePointPosition position,
-                                         const QPointF &controlPoint, const QPointF &splinePoint, Unit patternUnit,
-                                         bool freeAngle, bool freeLength, QGraphicsItem *parent)
-    :QGraphicsEllipseItem(parent),
-      radius(CircleRadius()),
+                                         const QPointF &controlPoint, const QPointF &splinePoint, bool freeAngle,
+                                         bool freeLength, QGraphicsItem *parent)
+    : VScenePoint(parent),
       controlLine(nullptr),
       indexSpline(indexSpline),
       position(position),
-      patternUnit(patternUnit),
       freeAngle(freeAngle),
       freeLength(freeLength)
 {
@@ -102,30 +98,46 @@ VControlPointSpline::~VControlPointSpline()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void VControlPointSpline::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
+{
+    const qreal scale = SceneScale(scene());
+
+    ScaleLinePenWidth(controlLine, scale);
+
+    VScenePoint::paint(painter, option, widget);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QRectF VControlPointSpline::boundingRect() const
+{
+    QRectF rect = VScenePoint::boundingRect();
+    rect = rect.united(controlLine->boundingRect());
+    return rect;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 /**
  * @brief hoverEnterEvent handle hover enter events.
  * @param event hover move event.
  */
 void VControlPointSpline::hoverEnterEvent(QGraphicsSceneHoverEvent *event)
 {
-    this->setPen(QPen(Qt::black, ToPixel(WidthMainLine(patternUnit), patternUnit)));
     if (freeAngle || freeLength)
     {
         SetOverrideCursor(cursorArrowOpenHand, 1, 1);
     }
-    QGraphicsEllipseItem::hoverEnterEvent(event);
+    VScenePoint::hoverEnterEvent(event);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void VControlPointSpline::hoverLeaveEvent(QGraphicsSceneHoverEvent *event)
 {
-    this->setPen(QPen(Qt::black, ToPixel(WidthHairLine(patternUnit), patternUnit)));
     if (freeAngle || freeLength)
     {
         //Disable cursor-arrow-openhand
         RestoreOverrideCursor(cursorArrowOpenHand);
     }
-    QGraphicsEllipseItem::hoverLeaveEvent(event);
+    VScenePoint::hoverLeaveEvent(event);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -211,7 +223,7 @@ QVariant VControlPointSpline::itemChange(QGraphicsItem::GraphicsItemChange chang
         default:
             break;
     }
-    return QGraphicsItem::itemChange(change, value);
+    return VScenePoint::itemChange(change, value);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -224,7 +236,7 @@ void VControlPointSpline::mousePressEvent(QGraphicsSceneMouseEvent *event)
             SetOverrideCursor(cursorArrowCloseHand, 1, 1);
         }
     }
-    QGraphicsEllipseItem::mousePressEvent(event);
+    VScenePoint::mousePressEvent(event);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -238,7 +250,7 @@ void VControlPointSpline::mouseReleaseEvent(QGraphicsSceneMouseEvent *event)
             RestoreOverrideCursor(cursorArrowCloseHand);
         }
     }
-    QGraphicsEllipseItem::mouseReleaseEvent(event);
+    VScenePoint::mouseReleaseEvent(event);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -250,15 +262,17 @@ void VControlPointSpline::contextMenuEvent(QGraphicsSceneContextMenuEvent *event
 //---------------------------------------------------------------------------------------------------------------------
 void VControlPointSpline::Init()
 {
-    auto rec = QRectF(0, 0, radius*2, radius*2);
-    rec.translate(-rec.center().x(), -rec.center().y());
-    this->setRect(rec);
-    this->setPen(QPen(Qt::black, ToPixel(WidthHairLine(patternUnit), patternUnit)));
+    m_baseColor = Qt::red;
+    SetOnlyPoint(true);
     this->setBrush(QBrush(Qt::NoBrush));
     this->setZValue(100);
 
     controlLine = new QGraphicsLineItem(this);
-    controlLine->setPen(QPen(Qt::red, ToPixel(WidthHairLine(patternUnit), patternUnit)));
+
+    QPen cPen = controlLine->pen();
+    cPen.setBrush(QBrush(Qt::red));
+
+    controlLine->setPen(cPen);
     controlLine->setFlag(QGraphicsItem::ItemStacksBehindParent, true);
 }
 
@@ -266,7 +280,8 @@ void VControlPointSpline::Init()
 void VControlPointSpline::SetCtrlLine(const QPointF &controlPoint, const QPointF &splinePoint)
 {
     QPointF p1, p2;
-    VGObject::LineIntersectCircle(QPointF(), radius, QLineF( QPointF(), splinePoint-controlPoint), p1, p2);
+    VGObject::LineIntersectCircle(QPointF(), ScaledRadius(SceneScale(scene())),
+                                  QLineF( QPointF(), splinePoint-controlPoint), p1, p2);
     controlLine->setLine(QLineF(splinePoint-controlPoint, p1));
 }
 
@@ -298,18 +313,10 @@ void VControlPointSpline::RefreshCtrlPoint(const qint32 &indexSpline, SplinePoin
  */
 void VControlPointSpline::setEnabledPoint(bool enable)
 {
-    if (enable == true)
-    {
-        this->setPen(QPen(Qt::black, ToPixel(WidthHairLine(patternUnit), patternUnit)));
-        this->setFlag(QGraphicsItem::ItemIsSelectable, true);
-        this->setFlag(QGraphicsItem::ItemIsMovable, true);
-        this->setAcceptHoverEvents(true);
-    }
-    else
-    {
-        this->setPen(QPen(Qt::gray, ToPixel(WidthHairLine(patternUnit), patternUnit)));
-        this->setFlag(QGraphicsItem::ItemIsSelectable, false);
-        this->setFlag(QGraphicsItem::ItemIsMovable, false);
-        this->setAcceptHoverEvents(false);
-    }
+    setEnabled(enable);
+    controlLine->setEnabled(enable);
+
+    setFlag(QGraphicsItem::ItemIsSelectable, enable);
+    setFlag(QGraphicsItem::ItemIsMovable, enable);
+    setAcceptHoverEvents(enable);
 }

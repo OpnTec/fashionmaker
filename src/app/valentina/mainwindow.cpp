@@ -281,7 +281,6 @@ void MainWindow::AddPP(const QString &PPName)
     // Show best for new PP
     VMainGraphicsView::NewSceneRect(ui->view->scene(), ui->view);
     ui->view->fitInView(doc->ActiveDrawBoundingRect(), Qt::KeepAspectRatio);
-    ui->view->NewFactor(ui->view->transform().m11());
 
     ui->actionNewDraw->setEnabled(true);
     helpLabel->setText("");
@@ -356,7 +355,6 @@ void MainWindow::InitScenes()
     sceneDraw->setTransform(ui->view->transform());
     sceneDetails->setTransform(ui->view->transform());
 
-    connect(ui->view, &VMainGraphicsView::NewFactor, sceneDraw, &VMainGraphicsScene::SetFactor);
     connect(ui->view, &VMainGraphicsView::MouseRelease, this, [this](){EndVisualization(true);});
     QSizePolicy policy(QSizePolicy::Expanding, QSizePolicy::Expanding);
     policy.setHorizontalStretch(12);
@@ -2261,8 +2259,6 @@ void MainWindow::ActionDraw(bool checked)
 
         currentScene = sceneDraw;
         ui->view->setScene(currentScene);
-        connect(ui->view, &VMainGraphicsView::NewFactor, sceneDraw, &VMainGraphicsScene::SetFactor,
-                Qt::UniqueConnection);
         RestoreCurrentScene();
 
         mode = Draw::Calculation;
@@ -2336,7 +2332,6 @@ void MainWindow::ActionDetails(bool checked)
         currentScene = sceneDetails;
         ui->view->itemClicked(nullptr);
         ui->view->setScene(currentScene);
-        disconnect(ui->view, &VMainGraphicsView::NewFactor, sceneDraw, &VMainGraphicsScene::SetFactor);
         RestoreCurrentScene();
 
         if (mode == Draw::Calculation)
@@ -2451,7 +2446,6 @@ void MainWindow::ActionLayout(bool checked)
         currentScene = tempSceneLayout;
         ui->view->itemClicked(nullptr);
         ui->view->setScene(currentScene);
-        disconnect(ui->view, &VMainGraphicsView::NewFactor, sceneDraw, &VMainGraphicsScene::SetFactor);
 
         if (mode == Draw::Calculation)
         {
@@ -4587,7 +4581,6 @@ void MainWindow::ChangePP(int index, bool zoomBestFit)
             if (zoomBestFit)
             {
                 ui->view->fitInView(doc->ActiveDrawBoundingRect(), Qt::KeepAspectRatio);
-                ui->view->NewFactor(ui->view->transform().m11());
             }
         }
         toolOptions->itemClicked(nullptr);//hide options for tool in previous pattern piece

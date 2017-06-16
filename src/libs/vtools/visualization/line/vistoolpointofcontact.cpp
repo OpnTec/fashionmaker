@@ -56,10 +56,6 @@ VisToolPointOfContact::VisToolPointOfContact(const VContainer *data, QGraphicsIt
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-VisToolPointOfContact::~VisToolPointOfContact()
-{}
-
-//---------------------------------------------------------------------------------------------------------------------
 void VisToolPointOfContact::RefreshGeometry()
 {
     if (object1Id > NULL_ID)
@@ -117,4 +113,30 @@ void VisToolPointOfContact::setRadiusId(const quint32 &value)
 void VisToolPointOfContact::setRadius(const QString &expression)
 {
     radius = FindLength(expression, Visualization::data->PlainVariables());
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VisToolPointOfContact::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
+{
+    const qreal scale = SceneScale(scene());
+
+    ScalePoint(point, scale);
+    ScalePoint(lineP1, scale);
+    ScalePoint(lineP2, scale);
+    ScalePoint(arc_point, scale);
+    ScalePoint(circle, scale);
+
+    VisLine::paint(painter, option, widget);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QRectF VisToolPointOfContact::boundingRect() const
+{
+    QRectF rect = VisLine::boundingRect();
+    rect = rect.united(point->boundingRect());
+    rect = rect.united(lineP1->boundingRect());
+    rect = rect.united(lineP2->boundingRect());
+    rect = rect.united(arc_point->boundingRect());
+    rect = rect.united(circle->boundingRect());
+    return rect;
 }

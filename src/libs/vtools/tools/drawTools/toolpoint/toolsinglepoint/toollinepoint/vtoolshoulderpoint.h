@@ -77,8 +77,6 @@ public:
     void    setPShoulder(const quint32 &value);
 
     virtual void   ShowVisualization(bool show) Q_DECL_OVERRIDE;
-public slots:
-    virtual void   SetFactor(qreal factor) Q_DECL_OVERRIDE;
 protected:
     virtual void   contextMenuEvent ( QGraphicsSceneContextMenuEvent * event ) Q_DECL_OVERRIDE;
     virtual void   RemoveReferens() Q_DECL_OVERRIDE;

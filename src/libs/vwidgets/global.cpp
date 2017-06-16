@@ -2,7 +2,7 @@
  **
  **  @file
  **  @author Roman Telezhynskyi <dismine(at)gmail.com>
- **  @date   14 2, 2017
+ **  @date   14 6, 2017
  **
  **  @brief
  **  @copyright
@@ -26,54 +26,81 @@
  **
  *************************************************************************/
 
-#include "vispiecepins.h"
-#include "../vwidgets/vsimplepoint.h"
-#include "../vgeometry/vpointf.h"
+#include "global.h"
+#include "../vmisc/def.h"
 
-//---------------------------------------------------------------------------------------------------------------------
-VisPiecePins::VisPiecePins(const VContainer *data, QGraphicsItem *parent)
-    : VisPath(data, parent),
-      m_points(),
-      m_pins()
+#include <QGraphicsItem>
+#include <QGraphicsScene>
+#include <QGraphicsView>
+
+const qreal defPointRadiusPixel = (2./*mm*/ / 25.4) * PrintDPI;
+const qreal widthMainLine = (1.2/*mm*/ / 25.4) * PrintDPI;
+const qreal widthHairLine = widthMainLine/3.0;
+
+qreal SceneScale(QGraphicsScene *scene)
 {
-}
+    qreal scale = 1;
 
-//---------------------------------------------------------------------------------------------------------------------
-void VisPiecePins::RefreshGeometry()
-{
-    HideAllItems();
-
-    for (int i = 0; i < m_pins.size(); ++i)
+    if (scene)
     {
-        VSimplePoint *point = GetPoint(static_cast<quint32>(i), supportColor);
-        point->SetOnlyPoint(false);
-        const QSharedPointer<VPointF> p = Visualization::data->GeometricObject<VPointF>(m_pins.at(i));
-        point->RefreshPointGeometry(*p);
-        point->setVisible(true);
-    }
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void VisPiecePins::SetPins(const QVector<quint32> &pins)
-{
-    m_pins = pins;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-VSimplePoint *VisPiecePins::GetPoint(quint32 i, const QColor &color)
-{
-    return VisPath::GetPoint(m_points, i, color);
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void VisPiecePins::HideAllItems()
-{
-    for (int i=0; i < m_points.size(); ++i)
-    {
-        if (QGraphicsEllipseItem *item = m_points.at(i))
+        const QList<QGraphicsView *> views = scene->views();
+        if (not views.isEmpty())
         {
-            item->setVisible(false);
+            scale = views.first()->transform().m11();
         }
     }
+
+    return scale;
 }
 
+//---------------------------------------------------------------------------------------------------------------------
+QColor CorrectColor(const QGraphicsItem *item, const QColor &color)
+{
+    SCASSERT(item != nullptr)
+
+    if (item->isEnabled())
+    {
+        return color;
+    }
+    else
+    {
+        return Qt::gray;
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QRectF PointRect(qreal radius)
+{
+    QRectF rec = QRectF(0, 0, radius*2, radius*2);
+    rec.translate(-rec.center().x(), -rec.center().y());
+    return rec;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+qreal ScaledRadius(qreal scale)
+{
+    qreal scaledRadius = defPointRadiusPixel;
+    if (scale > 1)
+    {
+        scaledRadius = qMax(defPointRadiusPixel/12, defPointRadiusPixel/scale);
+    }
+    return scaledRadius;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void ScaleCircleSize(QGraphicsEllipseItem *item, qreal scale)
+{
+    SCASSERT(item != nullptr)
+
+    item->setRect(PointRect(ScaledRadius(scale)));
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+qreal ScaleWidth(qreal width, qreal scale)
+{
+    if (scale > 1)
+    {
+        width = qMax(0.1, width/scale);
+    }
+    return width;
+}

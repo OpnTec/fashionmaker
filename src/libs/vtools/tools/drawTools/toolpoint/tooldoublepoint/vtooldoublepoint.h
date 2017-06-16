@@ -62,13 +62,10 @@ public:
     QString nameP2() const;
     void    setNameP2(const QString &name);
 
-    void SetEnabled(bool enabled);
-
     virtual void GroupVisibility(quint32 object, bool visible) Q_DECL_OVERRIDE;
 public slots:
     void         Label1ChangePosition(const QPointF &pos);
     void         Label2ChangePosition(const QPointF &pos);
-    virtual void SetFactor(qreal factor) Q_DECL_OVERRIDE;
     virtual void Disable(bool disable, const QString &namePP) Q_DECL_OVERRIDE;
     virtual void EnableToolMove(bool move) Q_DECL_OVERRIDE;
     void         Point1Choosed();
@@ -91,7 +88,6 @@ protected:
     quint32      p2id;
 
     virtual void UpdateNamePosition(quint32 id) Q_DECL_OVERRIDE;
-    virtual void RefreshLine(quint32 id) Q_DECL_OVERRIDE;
     virtual QVariant itemChange ( GraphicsItemChange change, const QVariant &value ) Q_DECL_OVERRIDE;
     virtual void keyReleaseEvent(QKeyEvent * event) Q_DECL_OVERRIDE;
     virtual void contextMenuEvent ( QGraphicsSceneContextMenuEvent * event ) Q_DECL_OVERRIDE;

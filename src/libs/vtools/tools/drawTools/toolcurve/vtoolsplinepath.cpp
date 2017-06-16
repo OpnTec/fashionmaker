@@ -106,7 +106,7 @@ VToolSplinePath::VToolSplinePath(VAbstractPattern *doc, VContainer *data, quint3
 
         auto *controlPoint = new VControlPointSpline(i, SplinePointPosition::FirstPoint,
                                                      static_cast<QPointF>(spl.GetP2()),
-                                                     static_cast<QPointF>(spl.GetP1()), *data->GetPatternUnit(),
+                                                     static_cast<QPointF>(spl.GetP1()),
                                                      freeAngle1, freeLength1, this);
         connect(controlPoint, &VControlPointSpline::ControlPointChangePosition, this,
                 &VToolSplinePath::ControlPointChangePosition);
@@ -118,8 +118,7 @@ VToolSplinePath::VToolSplinePath(VAbstractPattern *doc, VContainer *data, quint3
         const bool freeLength2 = qmu::QmuTokenParser::IsSingle(spl.GetC2LengthFormula());
 
         controlPoint = new VControlPointSpline(i, SplinePointPosition::LastPoint, static_cast<QPointF>(spl.GetP3()),
-                                               static_cast<QPointF>(spl.GetP4()), *data->GetPatternUnit(), freeAngle2,
-                                               freeLength2, this);
+                                               static_cast<QPointF>(spl.GetP4()), freeAngle2, freeLength2, this);
         connect(controlPoint, &VControlPointSpline::ControlPointChangePosition, this,
                 &VToolSplinePath::ControlPointChangePosition);
         connect(this, &VToolSplinePath::setEnabledPoint, controlPoint, &VControlPointSpline::setEnabledPoint);
@@ -661,10 +660,7 @@ bool VToolSplinePath::IsMovable(int index) const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-/**
- * @brief RefreshGeometry  refresh item on scene.
- */
-void VToolSplinePath::RefreshGeometry()
+void VToolSplinePath::RefreshCtrlPoints()
 {
     // Very important to disable control points. Without it the pogram can't move the curve.
     foreach (auto *point, controlPoints)
@@ -673,11 +669,6 @@ void VToolSplinePath::RefreshGeometry()
     }
 
     const auto splPath = VAbstractTool::data.GeometricObject<VSplinePath>(id);
-    this->setPath(splPath->GetPath());
-
-    this->setPen(QPen(CorrectColor(splPath->GetColor()),
-                      qApp->toPixel(WidthHairLine(*VAbstractTool::data.GetPatternUnit()))/factor,
-                      LineStyleToPenStyle(splPath->GetPenStyle())));
 
     for (qint32 i = 1; i<=splPath->CountSubSpl(); ++i)
     {
@@ -709,8 +700,6 @@ void VToolSplinePath::RefreshGeometry()
         controlPoints[j-2]->blockSignals(false);
         controlPoints[j-1]->blockSignals(false);
     }
-
-    SetVisualization();
 
     foreach (auto *point, controlPoints)
     {

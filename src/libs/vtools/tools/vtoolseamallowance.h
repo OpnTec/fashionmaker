@@ -94,6 +94,8 @@ public:
     virtual QString    getTagName() const Q_DECL_OVERRIDE;
     virtual void       ShowVisualization(bool show) Q_DECL_OVERRIDE;
     virtual void       GroupVisibility(quint32 object, bool visible) Q_DECL_OVERRIDE;
+    virtual void       paint(QPainter *painter, const QStyleOptionGraphicsItem *option,
+                             QWidget *widget) Q_DECL_OVERRIDE;
 public slots:
     virtual void FullUpdateFromFile () Q_DECL_OVERRIDE;
     void         EnableToolMove(bool move);
@@ -117,8 +119,6 @@ protected slots:
     void SaveResizeGrainline(qreal dLength);
     void SaveRotateGrainline(qreal dRot, const QPointF& ptPos);
 protected:
-    virtual void       paint(QPainter *painter, const QStyleOptionGraphicsItem *option,
-                             QWidget *widget) Q_DECL_OVERRIDE;
     virtual void       AddToFile () Q_DECL_OVERRIDE;
     virtual void       RefreshDataInFile() Q_DECL_OVERRIDE;
     virtual QVariant   itemChange ( GraphicsItemChange change, const QVariant &value ) Q_DECL_OVERRIDE;

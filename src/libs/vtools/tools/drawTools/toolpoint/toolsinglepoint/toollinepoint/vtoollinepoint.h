@@ -56,6 +56,10 @@ public:
     virtual int       type() const Q_DECL_OVERRIDE {return Type;}
     enum { Type = UserType + static_cast<int>(Tool::LinePoint)};
 
+    virtual void   paint(QPainter *painter, const QStyleOptionGraphicsItem *option,
+                         QWidget *widget = nullptr) Q_DECL_OVERRIDE;
+    virtual QRectF boundingRect() const Q_DECL_OVERRIDE;
+
     VFormula GetFormulaLength() const;
     void     SetFormulaLength(const VFormula &value);
 
@@ -71,7 +75,6 @@ public:
     void    SetLineColor(const QString &value);
 
 public slots:
-    virtual void      SetFactor(qreal factor) Q_DECL_OVERRIDE;
     virtual void      Disable(bool disable, const QString &namePP) Q_DECL_OVERRIDE;
     virtual void      FullUpdateFromFile() Q_DECL_OVERRIDE;
 protected:

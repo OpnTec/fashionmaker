@@ -47,7 +47,7 @@ class VisToolTriangle : public VisLine
     Q_OBJECT
 public:
     explicit VisToolTriangle(const VContainer *data, QGraphicsItem *parent = nullptr);
-    virtual ~VisToolTriangle() Q_DECL_EQ_DEFAULT;
+    virtual ~VisToolTriangle() = default;
 
     virtual void RefreshGeometry() Q_DECL_OVERRIDE;
 
@@ -57,6 +57,10 @@ public:
 
     virtual int  type() const Q_DECL_OVERRIDE {return Type;}
     enum { Type = UserType + static_cast<int>(Vis::ToolTriangle)};
+
+    virtual void   paint(QPainter *painter, const QStyleOptionGraphicsItem *option,
+                         QWidget *widget = nullptr) Q_DECL_OVERRIDE;
+    virtual QRectF boundingRect() const Q_DECL_OVERRIDE;
 private:
     Q_DISABLE_COPY(VisToolTriangle)
     quint32              object2Id;//axis second point

@@ -43,8 +43,8 @@ class VisToolEndLine : public VisLine
 {
     Q_OBJECT
 public:
-    explicit VisToolEndLine(const VContainer *data, QGraphicsItem *parent = 0);
-    virtual ~VisToolEndLine() Q_DECL_OVERRIDE;
+    explicit VisToolEndLine(const VContainer *data, QGraphicsItem *parent = nullptr);
+    virtual ~VisToolEndLine() = default;
 
     virtual void RefreshGeometry() Q_DECL_OVERRIDE;
 
@@ -56,6 +56,10 @@ public:
 
     virtual int  type() const Q_DECL_OVERRIDE {return Type;}
     enum { Type = UserType + static_cast<int>(Vis::ToolEndLine)};
+
+    virtual void   paint(QPainter *painter, const QStyleOptionGraphicsItem *option,
+                         QWidget *widget = nullptr) Q_DECL_OVERRIDE;
+    virtual QRectF boundingRect() const Q_DECL_OVERRIDE;
 private:
     Q_DISABLE_COPY(VisToolEndLine)
     qreal                length;

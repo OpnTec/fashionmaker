@@ -129,6 +129,26 @@ void VisToolMove::RefreshGeometry()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void VisToolMove::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
+{
+    const qreal scale = SceneScale(scene());
+
+    ScalePoint(pointOrigin, scale);
+    ScalePoint(pointFinish, scale);
+
+    VisOperation::paint(painter, option, widget);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QRectF VisToolMove::boundingRect() const
+{
+    QRectF rect = VisOperation::boundingRect();
+    rect = rect.united(pointOrigin->boundingRect());
+    rect = rect.united(pointFinish->boundingRect());
+    return rect;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 QString VisToolMove::Angle() const
 {
     return QString::number(line().angle());

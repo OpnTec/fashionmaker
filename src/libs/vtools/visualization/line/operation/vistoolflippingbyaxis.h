@@ -39,7 +39,7 @@ class VisToolFlippingByAxis : public VisOperation
     Q_OBJECT
 public:
     explicit VisToolFlippingByAxis(const VContainer *data, QGraphicsItem *parent = nullptr);
-    virtual ~VisToolFlippingByAxis();
+    virtual ~VisToolFlippingByAxis() = default;
 
     virtual void RefreshGeometry() Q_DECL_OVERRIDE;
 
@@ -48,6 +48,10 @@ public:
 
     virtual int type() const Q_DECL_OVERRIDE {return Type;}
     enum { Type = UserType + static_cast<int>(Vis::ToolFlippingByAxis)};
+
+    virtual void   paint(QPainter *painter, const QStyleOptionGraphicsItem *option,
+                         QWidget *widget = nullptr) Q_DECL_OVERRIDE;
+    virtual QRectF boundingRect() const Q_DECL_OVERRIDE;
 private:
     Q_DISABLE_COPY(VisToolFlippingByAxis)
 

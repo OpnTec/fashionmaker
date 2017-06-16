@@ -66,7 +66,6 @@ public:
 public slots:
     void          ChoosedItem(quint32 id, const SceneObject &type);
     void          SelectedItem(bool selected, quint32 object, quint32 tool);
-    void          SetFactor(qreal factor);
     void          EnableItemMove(bool move);
     void          EnableDetailsMode(bool mode);
     void          ItemsSelection(const SelectionType &type);
@@ -115,11 +114,6 @@ signals:
      */
     void          ChoosedObject(quint32 id, SceneObject type);
     void          SelectedObject(bool selected, quint32 object, quint32 tool);
-    /**
-     * @brief NewFactor send new scale factor.
-     * @param factor scene scale factor.
-     */
-    void          NewFactor(qreal factor);
     void          DisableItem(bool disable, const QString &namePP);
     void          EnableToolMove(bool move);
     void          CurveDetailsMode(bool mode);
@@ -156,9 +150,6 @@ private:
 
     /** @brief verScrollBar value vertical scroll bar. */
     qint32        verScrollBar;
-
-    /** @brief scaleFactor scale factor. */
-    qreal         scaleFactor;
 
     /** @brief _transform view transform value. */
     QTransform    _transform;

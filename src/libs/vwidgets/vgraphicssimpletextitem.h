@@ -52,7 +52,7 @@ public:
     explicit VGraphicsSimpleTextItem( const QString & text, QGraphicsItem *parent = nullptr );
     virtual ~VGraphicsSimpleTextItem() Q_DECL_OVERRIDE;
 
-    qint32       FontSize()const;
+    qint32       BaseFontSize()const;
     virtual int  type() const Q_DECL_OVERRIDE {return Type;}
     enum { Type = UserType + static_cast<int>(Vis::GraphicsSimpleTextItem)};
 
@@ -91,7 +91,7 @@ private:
  * @brief FontSize return label font size.
  * @return font size.
  */
-inline qint32 VGraphicsSimpleTextItem::FontSize() const
+inline qint32 VGraphicsSimpleTextItem::BaseFontSize() const
 {
     return fontSize;
 }

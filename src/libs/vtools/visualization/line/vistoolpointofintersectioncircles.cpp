@@ -60,10 +60,6 @@ VisToolPointOfIntersectionCircles::VisToolPointOfIntersectionCircles(const VCont
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-VisToolPointOfIntersectionCircles::~VisToolPointOfIntersectionCircles()
-{}
-
-//---------------------------------------------------------------------------------------------------------------------
 void VisToolPointOfIntersectionCircles::RefreshGeometry()
 {
     if (object1Id > NULL_ID)
@@ -128,4 +124,31 @@ void VisToolPointOfIntersectionCircles::setC2Radius(const QString &value)
 void VisToolPointOfIntersectionCircles::setCrossPoint(const CrossCirclesPoint &value)
 {
     crossPoint = value;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VisToolPointOfIntersectionCircles::paint(QPainter *painter, const QStyleOptionGraphicsItem *option,
+                                              QWidget *widget)
+{
+    const qreal scale = SceneScale(scene());
+
+    ScalePoint(point, scale);
+    ScalePoint(c1Center, scale);
+    ScalePoint(c2Center, scale);
+    ScalePoint(c1Path, scale);
+    ScalePoint(c2Path, scale);
+
+    VisLine::paint(painter, option, widget);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QRectF VisToolPointOfIntersectionCircles::boundingRect() const
+{
+    QRectF rect = VisLine::boundingRect();
+    rect = rect.united(point->boundingRect());
+    rect = rect.united(c1Center->boundingRect());
+    rect = rect.united(c2Center->boundingRect());
+    rect = rect.united(c1Path->boundingRect());
+    rect = rect.united(c2Path->boundingRect());
+    return rect;
 }

@@ -66,10 +66,6 @@ VisToolPointOfIntersectionArcs::VisToolPointOfIntersectionArcs(const VContainer 
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-VisToolPointOfIntersectionArcs::~VisToolPointOfIntersectionArcs()
-{}
-
-//---------------------------------------------------------------------------------------------------------------------
 void VisToolPointOfIntersectionArcs::RefreshGeometry()
 {
     if (arc1Id > NULL_ID)
@@ -117,4 +113,26 @@ void VisToolPointOfIntersectionArcs::setArc2Id(const quint32 &value)
 void VisToolPointOfIntersectionArcs::setCrossPoint(const CrossCirclesPoint &value)
 {
     crossPoint = value;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VisToolPointOfIntersectionArcs::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
+{
+    const qreal scale = SceneScale(scene());
+
+    ScalePoint(point, scale);
+    ScalePenWidth(arc1Path, scale);
+    ScalePenWidth(arc2Path, scale);
+
+    VisLine::paint(painter, option, widget);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QRectF VisToolPointOfIntersectionArcs::boundingRect() const
+{
+    QRectF rect = VisLine::boundingRect();
+    rect = rect.united(point->boundingRect());
+    rect = rect.united(arc1Path->boundingRect());
+    rect = rect.united(arc2Path->boundingRect());
+    return rect;
 }

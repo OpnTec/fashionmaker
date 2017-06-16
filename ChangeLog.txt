@@ -2,6 +2,7 @@
 - [#682] New feature. Export increments to Excel .csv.
 - [#681] Enhance feature: Dashed line options for curves, arcs, etc.
 - [#684] Proposal: Add option to only show outer edges on detail.
+- [#244] New feature: Adjust line and point thickness and label size.
 
 # Version 0.5.1
 - [#683] Tool Seam allowance's dialog is off screen on small resolutions.

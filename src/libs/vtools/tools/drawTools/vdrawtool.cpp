@@ -49,8 +49,6 @@
 
 template <class T> class QSharedPointer;
 
-qreal VDrawTool::factor = 1;
-
 //---------------------------------------------------------------------------------------------------------------------
 /**
  * @brief VDrawTool constructor.
@@ -61,8 +59,7 @@ qreal VDrawTool::factor = 1;
 VDrawTool::VDrawTool(VAbstractPattern *doc, VContainer *data, quint32 id, QObject *parent)
     : VInteractiveTool(doc, data, id, parent),
       nameActivDraw(doc->GetNameActivPP()),
-      m_lineType(TypeLineLine),
-      enabled(true)
+      m_lineType(TypeLineLine)
 {
     connect(this->doc, &VAbstractPattern::ChangedActivPP, this, &VDrawTool::ChangedActivDraw);
     connect(this->doc, &VAbstractPattern::ChangedNameDraw, this, &VDrawTool::ChangedNameDraw);
@@ -185,19 +182,6 @@ void VDrawTool::SaveOptions(QDomElement &tag, QSharedPointer<VGObject> &obj)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QColor VDrawTool::CorrectColor(const QColor &color) const
-{
-    if (enabled)
-    {
-        return color;
-    }
-    else
-    {
-        return Qt::gray;
-    }
-}
-
-//---------------------------------------------------------------------------------------------------------------------
 bool VDrawTool::CorrectDisable(bool disable, const QString &namePP) const
 {
     if (disable)
@@ -222,16 +206,6 @@ void VDrawTool::ReadAttributes()
     {
         qCDebug(vTool, "Can't find tool with id = %u", id);
     }
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-/**
- * @brief SetFactor set current scale factor of scene.
- * @param factor scene scale factor.
- */
-void VDrawTool::SetFactor(qreal factor)
-{
-    CheckFactor(VDrawTool::factor, factor);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

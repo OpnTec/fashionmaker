@@ -54,10 +54,6 @@ VisToolPointOfIntersection::VisToolPointOfIntersection(const VContainer *data, Q
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-VisToolPointOfIntersection::~VisToolPointOfIntersection()
-{}
-
-//---------------------------------------------------------------------------------------------------------------------
 void VisToolPointOfIntersection::RefreshGeometry()
 {
     QLineF axisL1;
@@ -95,6 +91,30 @@ void VisToolPointOfIntersection::RefreshGeometry()
 void VisToolPointOfIntersection::setPoint2Id(const quint32 &value)
 {
     point2Id = value;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VisToolPointOfIntersection::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
+{
+    const qreal scale = SceneScale(scene());
+
+    ScalePoint(point, scale);
+    ScalePoint(axisP1, scale);
+    ScalePoint(axisP2, scale);
+    ScalePenWidth(axis2, scale);
+
+    VisLine::paint(painter, option, widget);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QRectF VisToolPointOfIntersection::boundingRect() const
+{
+    QRectF rect = VisLine::boundingRect();
+    rect = rect.united(point->boundingRect());
+    rect = rect.united(axisP1->boundingRect());
+    rect = rect.united(axisP2->boundingRect());
+    rect = rect.united(axis2->boundingRect());
+    return rect;
 }
 
 //---------------------------------------------------------------------------------------------------------------------

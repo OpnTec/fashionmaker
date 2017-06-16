@@ -67,11 +67,11 @@ VisToolSpline::VisToolSpline(const VContainer *data, QGraphicsItem *parent)
     point1 = InitPoint(supportColor, this);
     point4 = InitPoint(supportColor, this); //-V656
 
-    auto *controlPoint1 = new VControlPointSpline(1, SplinePointPosition::FirstPoint, *data->GetPatternUnit(), this);
+    auto *controlPoint1 = new VControlPointSpline(1, SplinePointPosition::FirstPoint, this);
     controlPoint1->hide();
     controlPoints.append(controlPoint1);
 
-    auto *controlPoint2 = new VControlPointSpline(1, SplinePointPosition::LastPoint, *data->GetPatternUnit(), this);
+    auto *controlPoint2 = new VControlPointSpline(1, SplinePointPosition::LastPoint, this);
     controlPoint2->hide();
     controlPoints.append(controlPoint2);
 }
@@ -86,7 +86,7 @@ VisToolSpline::~VisToolSpline()
 void VisToolSpline::RefreshGeometry()
 {
     //Radius of point circle, but little bigger. Need handle with hover sizes.
-    const static qreal radius = ToPixel(DefPointRadius/*mm*/, Unit::Mm)*1.5;
+    const static qreal radius = defPointRadiusPixel*1.5;
 
     if (object1Id > NULL_ID)
     {
@@ -219,6 +219,27 @@ QPointF VisToolSpline::GetP2() const
 QPointF VisToolSpline::GetP3() const
 {
     return p3;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VisToolSpline::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
+{
+    const qreal scale = SceneScale(scene());
+
+    ScalePoint(point1, scale);
+    ScalePoint(point4, scale);
+
+    VisPath::paint(painter, option, widget);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QRectF VisToolSpline::boundingRect() const
+{
+    QRectF rect = VisPath::boundingRect();
+
+    rect = rect.united(point1->boundingRect());
+    rect = rect.united(point4->boundingRect());
+    return rect;
 }
 
 //---------------------------------------------------------------------------------------------------------------------

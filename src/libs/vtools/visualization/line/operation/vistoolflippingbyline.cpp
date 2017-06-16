@@ -41,11 +41,6 @@ VisToolFlippingByLine::VisToolFlippingByLine(const VContainer *data, QGraphicsIt
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-VisToolFlippingByLine::~VisToolFlippingByLine()
-{
-}
-
-//---------------------------------------------------------------------------------------------------------------------
 void VisToolFlippingByLine::RefreshGeometry()
 {
     if (objects.isEmpty())
@@ -75,6 +70,26 @@ void VisToolFlippingByLine::RefreshGeometry()
     }
 
     RefreshFlippedObjects(firstPoint, secondPoint);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VisToolFlippingByLine::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
+{
+    const qreal scale = SceneScale(scene());
+
+    ScalePoint(point1, scale);
+    ScalePoint(point2, scale);
+
+    VisOperation::paint(painter, option, widget);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QRectF VisToolFlippingByLine::boundingRect() const
+{
+    QRectF rect = VisOperation::boundingRect();
+    rect = rect.united(point1->boundingRect());
+    rect = rect.united(point2->boundingRect());
+    return rect;
 }
 
 //---------------------------------------------------------------------------------------------------------------------

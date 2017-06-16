@@ -62,7 +62,6 @@ VAbstractNode::VAbstractNode(VAbstractPattern *doc, VContainer *data, const quin
       parentType(ParentType::Item),
       idNode(idNode),
       idTool(idTool),
-      currentColor(Qt::black),
       m_drawName(drawName),
       m_exluded(false)
 {

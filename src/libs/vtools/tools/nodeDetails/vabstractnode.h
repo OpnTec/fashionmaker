@@ -73,9 +73,6 @@ protected:
     /** @brief idTool id tool. */
     quint32       idTool;
 
-    /** @brief currentColor current tool color. */
-    QColor        currentColor;
-
     QString       m_drawName;
 
     bool          m_exluded;

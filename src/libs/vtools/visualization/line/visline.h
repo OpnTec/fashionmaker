@@ -48,12 +48,15 @@ class VisLine: public Visualization, public QGraphicsLineItem
 {
     Q_OBJECT
 public:
-    explicit VisLine(const VContainer *data, QGraphicsItem *parent = 0);
-    virtual ~VisLine() Q_DECL_OVERRIDE;
+    explicit VisLine(const VContainer *data, QGraphicsItem *parent = nullptr);
+    virtual ~VisLine() = default;
 
     virtual int  type() const Q_DECL_OVERRIDE {return Type;}
     enum { Type = UserType + static_cast<int>(Vis::Line)};
     static qreal CorrectAngle(const qreal &angle);
+
+    virtual void paint(QPainter *painter, const QStyleOptionGraphicsItem *option,
+                       QWidget *widget = nullptr) Q_DECL_OVERRIDE;
 protected:
     QPointF      Ray(const QPointF &firstPoint, const qreal &angle) const;
     QPointF      Ray(const QPointF &firstPoint) const;

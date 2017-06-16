@@ -64,6 +64,9 @@ public:
     enum { Type = UserType + static_cast<int>(Tool::Line)};
     virtual QString  getTagName() const Q_DECL_OVERRIDE;
 
+    virtual void paint(QPainter *painter, const QStyleOptionGraphicsItem *option,
+                       QWidget *widget = nullptr) Q_DECL_OVERRIDE;
+
     QString FirstPointName() const;
     QString SecondPointName() const;
 
@@ -83,7 +86,6 @@ public:
 public slots:
     virtual void     FullUpdateFromFile() Q_DECL_OVERRIDE;
     virtual void     ShowTool(quint32 id, bool enable) Q_DECL_OVERRIDE;
-    virtual void     SetFactor(qreal factor) Q_DECL_OVERRIDE;
     virtual void     Disable(bool disable, const QString &namePP) Q_DECL_OVERRIDE;
     virtual void     AllowHover(bool enabled) Q_DECL_OVERRIDE;
     virtual void     AllowSelecting(bool enabled) Q_DECL_OVERRIDE;
@@ -111,6 +113,8 @@ private:
 
     /** @brief lineColor color of a line. */
     QString           lineColor;
+
+    bool m_isHovered;
 
     VToolLine(VAbstractPattern *doc, VContainer *data, quint32 id, quint32 firstPoint, quint32 secondPoint,
               const QString &typeLine, const QString &lineColor, const Source &typeCreation,

@@ -58,10 +58,6 @@ VisToolPointFromArcAndTangent::VisToolPointFromArcAndTangent(const VContainer *d
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-VisToolPointFromArcAndTangent::~VisToolPointFromArcAndTangent()
-{}
-
-//---------------------------------------------------------------------------------------------------------------------
 void VisToolPointFromArcAndTangent::RefreshGeometry()
 {
     if (object1Id > NULL_ID)// tangent point
@@ -93,6 +89,30 @@ void VisToolPointFromArcAndTangent::setArcId(const quint32 &value)
 void VisToolPointFromArcAndTangent::setCrossPoint(const CrossCirclesPoint &value)
 {
     crossPoint = value;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VisToolPointFromArcAndTangent::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
+{
+    const qreal scale = SceneScale(scene());
+
+    ScalePoint(point, scale);
+    ScalePoint(tangent, scale);
+    ScalePenWidth(arcPath, scale);
+    ScalePenWidth(tangentLine2, scale);
+
+    VisLine::paint(painter, option, widget);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QRectF VisToolPointFromArcAndTangent::boundingRect() const
+{
+    QRectF rect = VisLine::boundingRect();
+    rect = rect.united(point->boundingRect());
+    rect = rect.united(tangent->boundingRect());
+    rect = rect.united(arcPath->boundingRect());
+    rect = rect.united(tangentLine2->boundingRect());
+    return rect;
 }
 
 //---------------------------------------------------------------------------------------------------------------------

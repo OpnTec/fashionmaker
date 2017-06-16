@@ -788,6 +788,12 @@ void VToolSeamAllowance::SaveRotateGrainline(qreal dRot, const QPointF& ptPos)
  */
 void VToolSeamAllowance::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
 {
+    QPen toolPen = pen();
+    toolPen.setWidthF(ScaleWidth(widthHairLine, SceneScale(scene())));
+
+    setPen(toolPen);
+    m_seamAllowance->setPen(toolPen);
+
     if ((m_dataLabel->IsIdle() == false
             || m_patternInfo->IsIdle() == false
             || m_grainLine->IsIdle() == false) && not isSelected())
@@ -979,22 +985,22 @@ void VToolSeamAllowance::hoverMoveEvent(QGraphicsSceneHoverEvent *event)
 //---------------------------------------------------------------------------------------------------------------------
 void VToolSeamAllowance::hoverEnterEvent(QGraphicsSceneHoverEvent *event)
 {
-    Q_UNUSED(event);
     if (flags() & QGraphicsItem::ItemIsMovable)
     {
         SetOverrideCursor(cursorArrowOpenHand, 1, 1);
     }
+    QGraphicsPathItem::hoverEnterEvent(event);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void VToolSeamAllowance::hoverLeaveEvent(QGraphicsSceneHoverEvent *event)
 {
-    Q_UNUSED(event);
     //Disable cursor-arrow-openhand
     if (flags() & QGraphicsItem::ItemIsMovable)
     {
         RestoreOverrideCursor(cursorArrowOpenHand);
     }
+    QGraphicsPathItem::hoverLeaveEvent(event);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
