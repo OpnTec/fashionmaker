@@ -140,7 +140,8 @@ void VScenePoint::RefreshLine()
     if (not rect().intersects(nRec))
     {
         const QRectF nameRec = m_namePoint->sceneBoundingRect();
-        QPointF p1, p2;
+        QPointF p1;
+        QPointF p2;
         VGObject::LineIntersectCircle(QPointF(), ScaledRadius(SceneScale(scene())),
                                       QLineF(QPointF(), nameRec.center() - scenePos()), p1, p2);
         const QPointF pRec = VGObject::LineIntersectRect(nameRec, QLineF(scenePos(), nameRec.center()));

@@ -53,7 +53,7 @@
  * @param parent parent object.
  */
 VGraphicsSimpleTextItem::VGraphicsSimpleTextItem(QGraphicsItem * parent)
-    :QGraphicsSimpleTextItem(parent), fontSize(0), selectionType(SelectionType::ByMouseRelease)
+    :QGraphicsSimpleTextItem(parent), m_fontSize(0), selectionType(SelectionType::ByMouseRelease)
 {
     this->setFlag(QGraphicsItem::ItemIsMovable, true);
     this->setFlag(QGraphicsItem::ItemIsSelectable, true);
@@ -62,7 +62,7 @@ VGraphicsSimpleTextItem::VGraphicsSimpleTextItem(QGraphicsItem * parent)
     this->setAcceptHoverEvents(true);
     QFont font = this->font();
     font.setPointSize(font.pointSize()+20);
-    fontSize = font.pointSize();
+    m_fontSize = font.pointSize();
     this->setFont(font);
 }
 
@@ -73,7 +73,7 @@ VGraphicsSimpleTextItem::VGraphicsSimpleTextItem(QGraphicsItem * parent)
  * @param parent parent object.
  */
 VGraphicsSimpleTextItem::VGraphicsSimpleTextItem( const QString & text, QGraphicsItem * parent )
-    :QGraphicsSimpleTextItem(text, parent), fontSize(0), selectionType(SelectionType::ByMouseRelease)
+    :QGraphicsSimpleTextItem(text, parent), m_fontSize(0), selectionType(SelectionType::ByMouseRelease)
 {
     this->setFlag(QGraphicsItem::ItemIsMovable, true);
     this->setFlag(QGraphicsItem::ItemIsSelectable, true);

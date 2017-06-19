@@ -85,7 +85,7 @@ protected:
     virtual void keyReleaseEvent ( QKeyEvent * event ) Q_DECL_OVERRIDE;
 private:
     /** @brief fontSize label font size. */
-    qint32        fontSize;
+    qint32        m_fontSize;
     SelectionType selectionType;
 };
 
@@ -96,7 +96,7 @@ private:
  */
 inline qint32 VGraphicsSimpleTextItem::BaseFontSize() const
 {
-    return fontSize;
+    return m_fontSize;
 }
 
 #endif // VGRAPHICSSIMPLETEXTITEM_H

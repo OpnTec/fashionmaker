@@ -1185,8 +1185,8 @@ void MainWindow::ZoomFitBestCurrent()
     QTransform transform = ui->view->transform();
 
     qreal factor = transform.m11();
-    factor = qMax(factor, ui->view->MinScale());
-    factor = qMin(factor, ui->view->MaxScale());
+    factor = qMax(factor, VMainGraphicsView::MinScale());
+    factor = qMin(factor, VMainGraphicsView::MaxScale());
 
     transform.setMatrix(factor, transform.m12(), transform.m13(), transform.m21(), factor, transform.m23(),
                         transform.m31(), transform.m32(), transform.m33());
