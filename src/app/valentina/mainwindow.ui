@@ -48,13 +48,13 @@
        <string>Tools</string>
       </property>
       <property name="currentIndex">
-       <number>4</number>
+       <number>5</number>
       </property>
       <widget class="QWidget" name="page">
        <property name="geometry">
         <rect>
          <x>0</x>
-         <y>0</y>
+         <y>-32</y>
          <width>127</width>
          <height>358</height>
         </rect>
@@ -316,32 +316,6 @@
           </property>
          </widget>
         </item>
-        <item row="10" column="0">
-         <widget class="QToolButton" name="toolButtonTrueDarts">
-          <property name="enabled">
-           <bool>false</bool>
-          </property>
-          <property name="toolTip">
-           <string>True darts</string>
-          </property>
-          <property name="text">
-           <string notr="true">...</string>
-          </property>
-          <property name="icon">
-           <iconset resource="share/resources/toolicon.qrc">
-            <normaloff>:/toolicon/32x32/true_darts.png</normaloff>:/toolicon/32x32/true_darts.png</iconset>
-          </property>
-          <property name="iconSize">
-           <size>
-            <width>32</width>
-            <height>32</height>
-           </size>
-          </property>
-          <property name="checkable">
-           <bool>true</bool>
-          </property>
-         </widget>
-        </item>
         <item row="0" column="0">
          <widget class="QToolButton" name="toolButtonPointerPoint">
           <property name="enabled">
@@ -356,32 +330,6 @@
           <property name="icon">
            <iconset resource="../../libs/vmisc/share/resources/icon.qrc">
             <normaloff>:/icon/32x32/arrow_cursor.png</normaloff>:/icon/32x32/arrow_cursor.png</iconset>
-          </property>
-          <property name="iconSize">
-           <size>
-            <width>32</width>
-            <height>32</height>
-           </size>
-          </property>
-          <property name="checkable">
-           <bool>true</bool>
-          </property>
-         </widget>
-        </item>
-        <item row="10" column="1">
-         <widget class="QToolButton" name="toolButtonMidpoint">
-          <property name="enabled">
-           <bool>false</bool>
-          </property>
-          <property name="toolTip">
-           <string>Midpoint between two points</string>
-          </property>
-          <property name="text">
-           <string notr="true">...</string>
-          </property>
-          <property name="icon">
-           <iconset resource="share/resources/toolicon.qrc">
-            <normaloff>:/toolicon/32x32/midpoint.png</normaloff>:/toolicon/32x32/midpoint.png</iconset>
           </property>
           <property name="iconSize">
            <size>
@@ -420,6 +368,32 @@
           </property>
          </widget>
         </item>
+        <item row="10" column="0">
+         <widget class="QToolButton" name="toolButtonMidpoint">
+          <property name="enabled">
+           <bool>false</bool>
+          </property>
+          <property name="toolTip">
+           <string>Midpoint between two points</string>
+          </property>
+          <property name="text">
+           <string notr="true">...</string>
+          </property>
+          <property name="icon">
+           <iconset resource="share/resources/toolicon.qrc">
+            <normaloff>:/toolicon/32x32/midpoint.png</normaloff>:/toolicon/32x32/midpoint.png</iconset>
+          </property>
+          <property name="iconSize">
+           <size>
+            <width>32</width>
+            <height>32</height>
+           </size>
+          </property>
+          <property name="checkable">
+           <bool>true</bool>
+          </property>
+         </widget>
+        </item>
        </layout>
       </widget>
       <widget class="QWidget" name="page_2">
@@ -427,7 +401,7 @@
         <rect>
          <x>0</x>
          <y>0</y>
-         <width>140</width>
+         <width>127</width>
          <height>110</height>
         </rect>
        </property>
@@ -536,7 +510,7 @@
         <rect>
          <x>0</x>
          <y>0</y>
-         <width>140</width>
+         <width>127</width>
          <height>248</height>
         </rect>
        </property>
@@ -798,7 +772,7 @@
         <rect>
          <x>0</x>
          <y>0</y>
-         <width>140</width>
+         <width>127</width>
          <height>248</height>
         </rect>
        </property>
@@ -1305,6 +1279,32 @@
           <property name="icon">
            <iconset resource="share/resources/toolicon.qrc">
             <normaloff>:/toolicon/32x32/move.png</normaloff>:/toolicon/32x32/move.png</iconset>
+          </property>
+          <property name="iconSize">
+           <size>
+            <width>32</width>
+            <height>32</height>
+           </size>
+          </property>
+          <property name="checkable">
+           <bool>true</bool>
+          </property>
+         </widget>
+        </item>
+        <item row="3" column="1">
+         <widget class="QToolButton" name="toolButtonTrueDarts">
+          <property name="enabled">
+           <bool>false</bool>
+          </property>
+          <property name="toolTip">
+           <string>True darts</string>
+          </property>
+          <property name="text">
+           <string notr="true">...</string>
+          </property>
+          <property name="icon">
+           <iconset resource="share/resources/toolicon.qrc">
+            <normaloff>:/toolicon/32x32/true_darts.png</normaloff>:/toolicon/32x32/true_darts.png</iconset>
           </property>
           <property name="iconSize">
            <size>
