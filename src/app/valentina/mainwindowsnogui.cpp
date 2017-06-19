@@ -859,7 +859,7 @@ void MainWindowsNoGUI::SaveLayoutAs()
 
     QString fileName = QFileDialog::getSaveFileName(this, tr("Print to pdf"),
                                                     dir + QLatin1String("/") + FileName() + QLatin1String(".pdf"),
-                                                    tr("PDF file (*.pdf)"));
+                                                    tr("PDF file (*.pdf)"), nullptr, QFileDialog::DontUseNativeDialog);
     if (not fileName.isEmpty())
     {
         QFileInfo f( fileName );

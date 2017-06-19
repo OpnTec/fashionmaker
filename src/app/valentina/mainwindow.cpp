@@ -1507,7 +1507,8 @@ void MainWindow::LoadIndividual()
         usedNotExistedDir = directory.mkpath(".");
     }
 
-    const QString mPath = QFileDialog::getOpenFileName(this, tr("Open file"), path, filter);
+    const QString mPath = QFileDialog::getOpenFileName(this, tr("Open file"), path, filter, nullptr,
+                                                       QFileDialog::DontUseNativeDialog);
 
     if (not mPath.isEmpty())
     {
@@ -1544,7 +1545,8 @@ void MainWindow::LoadStandard()
     //Use standard path to standard measurements
     QString path = qApp->ValentinaSettings()->GetPathStandardMeasurements();
     path = VCommonSettings::PrepareStandardTables(path);
-    const QString mPath = QFileDialog::getOpenFileName(this, tr("Open file"), path, filter);
+    const QString mPath = QFileDialog::getOpenFileName(this, tr("Open file"), path, filter, nullptr,
+                                                       QFileDialog::DontUseNativeDialog);
 
     if (not mPath.isEmpty())
     {
@@ -2536,7 +2538,7 @@ bool MainWindow::SaveAs()
 
     QString fileName = QFileDialog::getSaveFileName(this, tr("Save as"),
                                                     dir + QLatin1String("/") + tr("pattern") + QLatin1String(".val"),
-                                                    filters);
+                                                    filters, nullptr, QFileDialog::DontUseNativeDialog);
 
     auto RemoveTempDir = [usedNotExistedDir, dir]()
     {
@@ -2727,7 +2729,8 @@ void MainWindow::Open()
         dir = QFileInfo(files.first()).absolutePath();
     }
     qCDebug(vMainWindow, "Run QFileDialog::getOpenFileName: dir = %s.", qUtf8Printable(dir));
-    const QString filePath = QFileDialog::getOpenFileName(this, tr("Open file"), dir, filter);
+    const QString filePath = QFileDialog::getOpenFileName(this, tr("Open file"), dir, filter, nullptr,
+                                                          QFileDialog::DontUseNativeDialog);
     if (filePath.isEmpty())
     {
         return;
@@ -4503,7 +4506,8 @@ QString MainWindow::CheckPathToMeasurements(const QString &patternPath, const QS
                     //Use standard path to standard measurements
                     QString path = qApp->ValentinaSettings()->GetPathStandardMeasurements();
                     path = VCommonSettings::PrepareStandardTables(path);
-                    mPath = QFileDialog::getOpenFileName(this, tr("Open file"), path, filter);
+                    mPath = QFileDialog::getOpenFileName(this, tr("Open file"), path, filter, nullptr,
+                                                         QFileDialog::DontUseNativeDialog);
                 }
                 else if (patternType == MeasurementsType::Individual)
                 {
@@ -4518,7 +4522,8 @@ QString MainWindow::CheckPathToMeasurements(const QString &patternPath, const QS
                         usedNotExistedDir = directory.mkpath(".");
                     }
 
-                    mPath = QFileDialog::getOpenFileName(this, tr("Open file"), path, filter);
+                    mPath = QFileDialog::getOpenFileName(this, tr("Open file"), path, filter, nullptr,
+                                                         QFileDialog::DontUseNativeDialog);
 
                     if (usedNotExistedDir)
                     {
@@ -4541,7 +4546,8 @@ QString MainWindow::CheckPathToMeasurements(const QString &patternPath, const QS
                         usedNotExistedDir = directory.mkpath(".");
                     }
 
-                    mPath = QFileDialog::getOpenFileName(this, tr("Open file"), path, filter);
+                    mPath = QFileDialog::getOpenFileName(this, tr("Open file"), path, filter, nullptr,
+                                                         QFileDialog::DontUseNativeDialog);
 
                     if (usedNotExistedDir)
                     {
