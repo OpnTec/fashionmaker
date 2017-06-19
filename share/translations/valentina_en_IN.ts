@@ -6903,6 +6903,14 @@ Do you want to save your changes?</translation>
         <source>You can&apos;t use Layout mode yet.</source>
         <translation>You can&apos;t use Layout mode yet.</translation>
     </message>
+    <message>
+        <source>Zoom fit best current</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>zoom fit best current pattern piece</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>MainWindowsNoGUI</name>
