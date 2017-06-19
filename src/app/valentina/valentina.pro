@@ -382,34 +382,38 @@ win32:*-g++ {
     package_printsupport.files += $$[QT_INSTALL_PLUGINS]/printsupport/windowsprintersupport.dll
     INSTALLS += package_printsupport
 
-    SCP_FOUND = false
-    exists("C:/Program Files (x86)/Inno Setup 5/iscc.exe") {
-                INNO_ISCC = "C:/Program Files (x86)/Inno Setup 5/iscc.exe"
-                SCP_FOUND = true
-        } else {
-            exists("C:/Program Files/Inno Setup 5/iscc.exe") {
-                INNO_ISCC = "C:/Program Files/Inno Setup 5/iscc.exe"
-                SCP_FOUND = true
-           }
-    }
-
-    if($$SCP_FOUND) {
-        package_inno.path = $${OUT_PWD}/../../../package
-        package_inno.files += \
-            $$PWD/../../../dist/win/inno/LICENSE_VALENTINA \
-            $$PWD/../../../dist/win/inno/valentina.iss
-        INSTALLS += package_inno
-
-        # Do the packaging
-        # First, mangle all of INSTALLS values. We depend on them.
-        unset(MANGLED_INSTALLS)
-        for(x, INSTALLS):MANGLED_INSTALLS += install_$${x}
-        build_package.path = $${OUT_PWD}/../../../package
-        build_package.commands = $$INNO_ISCC \"$${OUT_PWD}/../../../package/valentina.iss\"
-        build_package.depends = $${MANGLED_INSTALLS}
-        INSTALLS += build_package
+    noWindowsInstaller{ # For enable run qmake with CONFIG+=noWindowsInstaller
+        #do nothing
     } else {
-        message("Inno Setup was not found!")
+        SCP_FOUND = false
+        exists("C:/Program Files (x86)/Inno Setup 5/iscc.exe") {
+                    INNO_ISCC = "C:/Program Files (x86)/Inno Setup 5/iscc.exe"
+                    SCP_FOUND = true
+            } else {
+                exists("C:/Program Files/Inno Setup 5/iscc.exe") {
+                    INNO_ISCC = "C:/Program Files/Inno Setup 5/iscc.exe"
+                    SCP_FOUND = true
+               }
+        }
+
+        if($$SCP_FOUND) {
+            package_inno.path = $${OUT_PWD}/../../../package
+            package_inno.files += \
+                $$PWD/../../../dist/win/inno/LICENSE_VALENTINA \
+                $$PWD/../../../dist/win/inno/valentina.iss
+            INSTALLS += package_inno
+
+            # Do the packaging
+            # First, mangle all of INSTALLS values. We depend on them.
+            unset(MANGLED_INSTALLS)
+            for(x, INSTALLS):MANGLED_INSTALLS += install_$${x}
+            build_package.path = $${OUT_PWD}/../../../package
+            build_package.commands = $$INNO_ISCC \"$${OUT_PWD}/../../../package/valentina.iss\"
+            build_package.depends = $${MANGLED_INSTALLS}
+            INSTALLS += build_package
+        } else {
+            message("Inno Setup was not found!")
+        }
     }
 }
 
