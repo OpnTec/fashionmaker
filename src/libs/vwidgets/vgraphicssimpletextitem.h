@@ -56,6 +56,9 @@ public:
     virtual int  type() const Q_DECL_OVERRIDE {return Type;}
     enum { Type = UserType + static_cast<int>(Vis::GraphicsSimpleTextItem)};
 
+    virtual void paint(QPainter *painter, const QStyleOptionGraphicsItem *option,
+                       QWidget *widget = nullptr) Q_DECL_OVERRIDE;
+
     void setEnabled(bool enabled);
     void LabelSelectionType(const SelectionType &type);
 signals:

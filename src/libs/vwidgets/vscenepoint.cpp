@@ -72,7 +72,6 @@ void VScenePoint::paint(QPainter *painter, const QStyleOptionGraphicsItem *optio
             m_namePoint->setVisible(true);
             m_lineName->setVisible(true);
 
-            ScaleLabelFontSize(scale);
             ScaleLinePenWidth(m_lineName, scale);
 
             RefreshLine();
@@ -168,20 +167,6 @@ void VScenePoint::ScaleMainPenWidth(qreal scale)
     const qreal width = ScaleWidth(m_isHovered ? widthMainLine : widthHairLine, scale);
 
     setPen(QPen(CorrectColor(this, m_baseColor), width));
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void VScenePoint::ScaleLabelFontSize(qreal scale) const
-{
-    qreal fontSize = m_namePoint->BaseFontSize();
-    if (scale > 1)
-    {
-        fontSize = qMax(0.1, fontSize/scale);
-    }
-
-    QFont font = m_namePoint->font();
-    font.setPointSizeF(fontSize);
-    m_namePoint->setFont(font);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

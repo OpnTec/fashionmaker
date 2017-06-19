@@ -72,7 +72,6 @@ private:
     Q_DISABLE_COPY(VScenePoint)
 
     void ScaleMainPenWidth(qreal scale);
-    void ScaleLabelFontSize(qreal scale) const;
 };
 
 #endif // VSCENEPOINT_H
