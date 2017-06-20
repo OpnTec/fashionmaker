@@ -278,7 +278,7 @@ GCC_DEBUG_CXXFLAGS += \
 #    -Winline \
     -Winvalid-pch \
 #    -Wunsafe-loop-optimizations \
-    -Wlong-long \
+#    -Wlong-long \ We have been using C++11
     -Wmissing-format-attribute \
     -Wswitch-default \
     -Wuninitialized \
@@ -517,7 +517,7 @@ CLANG_DEBUG_CXXFLAGS += \
         -Wno-c++98-compat-local-type-template-args \
     -Wlogical-not-parentheses \
     -Wlogical-op-parentheses \
-    -Wlong-long \
+#    -Wlong-long \ We have been using C++11
     -Wloop-analysis \
     -Wmain \
     -Wmain-return-type \
