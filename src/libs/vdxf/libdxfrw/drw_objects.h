@@ -239,6 +239,12 @@ class DRW_LType : public DRW_TableEntry {
     SETOBJFRIENDS
 public:
     DRW_LType() { reset();}
+    DRW_LType(const UTF8STRING &name, const UTF8STRING &desc)
+    {
+        reset();
+        this->name = name;
+        this->desc = desc;
+    }
 
     void reset(){
         tType = DRW::LTYPE;

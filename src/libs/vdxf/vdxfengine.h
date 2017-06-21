@@ -42,14 +42,16 @@
 #include "../vmisc/def.h"
 #include "dxfdef.h"
 #include "dxflib/dl_dxf.h"
+#include "libdxfrw/drw_base.h"
 
 class QTextStream;
+class dx_iface;
 
 class VDxfEngine : public QPaintEngine
 {
 public:
     VDxfEngine();
-    virtual ~VDxfEngine() Q_DECL_OVERRIDE;
+    virtual ~VDxfEngine() = default;
 
     virtual bool begin(QPaintDevice *pdev) Q_DECL_OVERRIDE;
     virtual bool end() Q_DECL_OVERRIDE;
@@ -74,6 +76,9 @@ public:
     QString getFileName() const;
     void setFileName(const QString &value);
 
+    DRW::Version GetVersion() const;
+    void         SetVersion(DRW::Version version);
+
     std::string getPenStyle();
     int getPenColor();
 
@@ -85,7 +90,9 @@ private:
     QSize            size;
     double           resolution;
     QString          fileName;
+    DRW::Version     m_version;
     QMatrix          matrix;
+    QSharedPointer<dx_iface> input;
     DL_Dxf* dxf;
     DL_WriterA* dw;
     VarMeasurement varMeasurement;

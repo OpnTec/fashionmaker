@@ -25,7 +25,8 @@ SOURCES += \
     $$PWD/libdxfrw/drw_header.cpp \
     $$PWD/libdxfrw/drw_objects.cpp \
     $$PWD/libdxfrw/libdwgr.cpp \
-    $$PWD/libdxfrw/libdxfrw.cpp
+    $$PWD/libdxfrw/libdxfrw.cpp \
+    $$PWD/dxiface.cpp
 
 win32-msvc*:SOURCES += $$PWD/stable.cpp
 
@@ -71,4 +72,5 @@ HEADERS += \
     $$PWD/libdxfrw/drw_objects.h \
     $$PWD/libdxfrw/libdwgr.h \
     $$PWD/libdxfrw/libdxfrw.h \
-    $$PWD/libdxfrw/main_doc.h
+    $$PWD/libdxfrw/main_doc.h \
+    $$PWD/dxiface.h

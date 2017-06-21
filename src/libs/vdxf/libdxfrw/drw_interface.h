@@ -21,17 +21,16 @@
 
 /**
  * Abstract class (interface) for comunicate dxfReader with the application.
- * Inherit your class which takes care of the entities in the 
- * processed DXF file from this interface. 
+ * Inherit your class which takes care of the entities in the
+ * processed DXF file from this interface.
  *
  * @author Rallaz
  */
 class DRW_Interface {
 public:
-    DRW_Interface() {
-    }
-    virtual ~DRW_Interface() {
-    }
+    DRW_Interface()
+    {}
+    virtual ~DRW_Interface() = default;
 
     /** Called when header is parsed.  */
     virtual void addHeader(const DRW_Header* data) = 0;
@@ -98,16 +97,16 @@ public:
 
     /** Called for every spline */
     virtual void addSpline(const DRW_Spline* data) = 0;
-	
-	/** Called for every spline knot value */
+
+    /** Called for every spline knot value */
     virtual void addKnot(const DRW_Entity& data) = 0;
 
     /** Called for every insert. */
     virtual void addInsert(const DRW_Insert& data) = 0;
-    
+
     /** Called for every trace start */
     virtual void addTrace(const DRW_Trace& data) = 0;
-    
+
     /** Called for every 3dface start */
     virtual void add3dFace(const DRW_3Dface& data) = 0;
 
@@ -122,62 +121,62 @@ public:
     virtual void addText(const DRW_Text& data) = 0;
 
     /**
-     * Called for every aligned dimension entity. 
+     * Called for every aligned dimension entity.
      */
     virtual void addDimAlign(const DRW_DimAligned *data) = 0;
     /**
-     * Called for every linear or rotated dimension entity. 
+     * Called for every linear or rotated dimension entity.
      */
     virtual void addDimLinear(const DRW_DimLinear *data) = 0;
 
-	/**
-     * Called for every radial dimension entity. 
+    /**
+     * Called for every radial dimension entity.
      */
     virtual void addDimRadial(const DRW_DimRadial *data) = 0;
 
-	/**
-     * Called for every diametric dimension entity. 
+    /**
+     * Called for every diametric dimension entity.
      */
     virtual void addDimDiametric(const DRW_DimDiametric *data) = 0;
 
-	/**
-     * Called for every angular dimension (2 lines version) entity. 
+    /**
+     * Called for every angular dimension (2 lines version) entity.
      */
     virtual void addDimAngular(const DRW_DimAngular *data) = 0;
 
-	/**
-     * Called for every angular dimension (3 points version) entity. 
+    /**
+     * Called for every angular dimension (3 points version) entity.
      */
     virtual void addDimAngular3P(const DRW_DimAngular3p *data) = 0;
-	
+
     /**
-     * Called for every ordinate dimension entity. 
+     * Called for every ordinate dimension entity.
      */
     virtual void addDimOrdinate(const DRW_DimOrdinate *data) = 0;
-    
-    /** 
-	 * Called for every leader start. 
-	 */
+
+    /**
+     * Called for every leader start.
+     */
     virtual void addLeader(const DRW_Leader *data) = 0;
-	
-	/** 
-	 * Called for every hatch entity. 
-	 */
+
+    /**
+     * Called for every hatch entity.
+     */
     virtual void addHatch(const DRW_Hatch *data) = 0;
-	
+
     /**
      * Called for every viewport entity.
      */
     virtual void addViewport(const DRW_Viewport& data) = 0;
 
     /**
-	 * Called for every image entity. 
-	 */
+     * Called for every image entity.
+     */
     virtual void addImage(const DRW_Image *data) = 0;
 
-	/**
-	 * Called for every image definition.
-	 */
+    /**
+     * Called for every image definition.
+     */
     virtual void linkImage(const DRW_ImageDef *data) = 0;
 
     /**
