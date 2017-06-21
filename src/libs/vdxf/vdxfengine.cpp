@@ -48,11 +48,6 @@
 #include "../vmisc/def.h"
 #include "../vmisc/diagnostic.h"
 #include "../vmisc/vmath.h"
-#include "dxflib/dl_attributes.h"
-#include "dxflib/dl_codes.h"
-#include "dxflib/dl_dxf.h"
-#include "dxflib/dl_entities.h"
-#include "dxflib/dl_writer_ascii.h"
 #include "dxiface.h"
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -81,8 +76,6 @@ VDxfEngine::VDxfEngine()
       m_version(DRW::AC1014),
       matrix(),
       input(),
-      dxf(nullptr),
-      dw(nullptr),
       varMeasurement(VarMeasurement::Metric),
       varInsunits(VarInsunits::Centimeters)
 {

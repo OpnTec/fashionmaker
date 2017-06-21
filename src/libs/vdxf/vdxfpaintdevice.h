@@ -36,7 +36,6 @@
 #include <QtGlobal>
 
 #include "dxfdef.h"
-#include "dxflib/../dxfdef.h"
 
 class VDxfEngine;
 
