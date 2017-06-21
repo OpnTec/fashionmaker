@@ -38,66 +38,84 @@ void DRW_Header::parseCode(int code, dxfReader *reader){
         vars[name]=curr;
         break;
     case 1:
-        curr->addString(code, reader->getUtf8String());
+        curr->addString(reader->getUtf8String());
         if (name =="$ACADVER") {
             reader->setVersion(curr->content.s, true);
             version = reader->getVersion();
         }
+        curr->code = code;
         break;
     case 2:
-        curr->addString(code, reader->getUtf8String());
+        curr->addString(reader->getUtf8String());
+        curr->code = code;
         break;
     case 3:
-        curr->addString(code, reader->getUtf8String());
+        curr->addString(reader->getUtf8String());
         if (name =="$DWGCODEPAGE") {
             reader->setCodePage(curr->content.s);
-            curr->addString(code, reader->getCodePage());
+            curr->addString(reader->getCodePage());
         }
+        curr->code = code;
         break;
     case 6:
-        curr->addString(code, reader->getUtf8String());
+        curr->addString(reader->getUtf8String());
+        curr->code = code;
         break;
     case 7:
-        curr->addString(code, reader->getUtf8String());
+        curr->addString(reader->getUtf8String());
+        curr->code = code;
         break;
     case 8:
-        curr->addString(code, reader->getUtf8String());
+        curr->addString(reader->getUtf8String());
+        curr->code = code;
         break;
     case 10:
-        curr->addCoord(code, DRW_Coord(reader->getDouble(), 0.0, 0.0));
+        curr->addCoord();
+        curr->setCoordX(reader->getDouble());
+        curr->code = code;
         break;
     case 20:
         curr->setCoordY(reader->getDouble());
         break;
     case 30:
         curr->setCoordZ(reader->getDouble());
+        curr->code = code;
         break;
     case 40:
-        curr->addDouble(code, reader->getDouble());
+        curr->addDouble(reader->getDouble());
+        curr->code = code;
         break;
     case 50:
-        curr->addDouble(code, reader->getDouble());
+        curr->addDouble(reader->getDouble());
+        curr->code = code;
         break;
     case 62:
-        curr->addInt(code, reader->getInt32());
+        curr->addInt(reader->getInt32());
+        curr->code = code;
         break;
     case 70:
-        curr->addInt(code, reader->getInt32());
+        curr->addInt(reader->getInt32());
+        curr->code = code;
         break;
     case 280:
-        curr->addInt(code, reader->getInt32());
+        curr->addInt(reader->getInt32());
+        curr->code = code;
         break;
     case 290:
-        curr->addInt(code, reader->getInt32());
+        curr->addInt(reader->getInt32());
+        curr->code = code;
         break;
     case 370:
-        curr->addInt(code, reader->getInt32());
+        curr->addInt(reader->getInt32());
+        curr->code = code;
         break;
     case 380:
-        curr->addInt(code, reader->getInt32());
+        curr->addInt(reader->getInt32());
+        curr->code = code;
         break;
     case 390:
-        curr->addString(code, reader->getUtf8String());
+        curr->addString(reader->getUtf8String());
+        curr->code = code;
         break;
     default:
         break;
@@ -303,7 +321,7 @@ void DRW_Header::write(dxfWriter *writer, DRW::Version ver){
     if (getDouble("$DIMSCALE", &varDouble))
         writer->writeDouble(40, varDouble);
     else
-        writer->writeDouble(40, 2.5);
+        writer->writeDouble(40, 1.0);
     writer->writeString(9, "$DIMASZ");
     if (getDouble("$DIMASZ", &varDouble))
         writer->writeDouble(40, varDouble);
@@ -472,14 +490,12 @@ void DRW_Header::write(dxfWriter *writer, DRW::Version ver){
     if (getInt("$DIMSOXD", &varInt))
         writer->writeInt16(70, varInt);
     else
-    {
         writer->writeInt16(70, 0);
-        writer->writeString(9, "$DIMSAH");
-        if (getInt("$DIMSAH", &varInt))
-            writer->writeInt16(70, varInt);
-        else
-            writer->writeInt16(70, 0);
-    }
+    writer->writeString(9, "$DIMSAH");
+    if (getInt("$DIMSAH", &varInt))
+        writer->writeInt16(70, varInt);
+    else
+        writer->writeInt16(70, 0);
     writer->writeString(9, "$DIMBLK1");
     if (getStr("$DIMBLK1", &varStr))
         if (ver == DRW::AC1009)
@@ -1671,22 +1687,30 @@ void DRW_Header::write(dxfWriter *writer, DRW::Version ver){
 }
 
 void DRW_Header::addDouble(std::string key, double value, int code){
-    curr = new DRW_Variant(code, value);
+    curr = new DRW_Variant();
+    curr->addDouble( value );
+    curr->code = code;
     vars[key] =curr;
 }
 
 void DRW_Header::addInt(std::string key, int value, int code){
-    curr = new DRW_Variant(code, value);
+    curr = new DRW_Variant();
+    curr->addInt( value );
+    curr->code = code;
     vars[key] =curr;
 }
 
 void DRW_Header::addStr(std::string key, std::string value, int code){
-    curr = new DRW_Variant(code, value);
+    curr = new DRW_Variant();
+    curr->addString( value );
+    curr->code = code;
     vars[key] =curr;
 }
 
 void DRW_Header::addCoord(std::string key, DRW_Coord value, int code){
-    curr = new DRW_Variant(code, value);
+    curr = new DRW_Variant();
+    curr->addCoord( value );
+    curr->code = code;
     vars[key] =curr;
 }
 
@@ -1696,7 +1720,7 @@ bool DRW_Header::getDouble(std::string key, double *varDouble){
     it=vars.find( key);
     if (it != vars.end()) {
         DRW_Variant *var = (*it).second;
-        if (var->type() == DRW_Variant::DOUBLE) {
+        if (var->type == DRW_Variant::DOUBLE) {
             *varDouble = var->content.d;
             result = true;
         }
@@ -1712,7 +1736,7 @@ bool DRW_Header::getInt(std::string key, int *varInt){
     it=vars.find( key);
     if (it != vars.end()) {
         DRW_Variant *var = (*it).second;
-        if (var->type() == DRW_Variant::INTEGER) {
+        if (var->type == DRW_Variant::INTEGER) {
             *varInt = var->content.i;
             result = true;
         }
@@ -1728,7 +1752,7 @@ bool DRW_Header::getStr(std::string key, std::string *varStr){
     it=vars.find( key);
     if (it != vars.end()) {
         DRW_Variant *var = (*it).second;
-        if (var->type() == DRW_Variant::STRING) {
+        if (var->type == DRW_Variant::STRING) {
             *varStr = *var->content.s;
             result = true;
         }
@@ -1744,7 +1768,7 @@ bool DRW_Header::getCoord(std::string key, DRW_Coord *varCoord){
     it=vars.find( key);
     if (it != vars.end()) {
         DRW_Variant *var = (*it).second;
-        if (var->type() == DRW_Variant::COORD) {
+        if (var->type == DRW_Variant::COORD) {
             *varCoord = *var->content.v;
             result = true;
         }
@@ -2367,7 +2391,7 @@ bool DRW_Header::parseDwg(DRW::Version version, dwgBuffer *buf, dwgBuffer *hBbuf
     if (DRW_DBGGL == DRW_dbg::DEBUG){
         for (std::map<std::string,DRW_Variant*>::iterator it=vars.begin(); it!=vars.end(); ++it){
             DRW_DBG("\n"); DRW_DBG(it->first); DRW_DBG(": ");
-            switch (it->second->type()){
+            switch (it->second->type){
             case DRW_Variant::INTEGER:
                 DRW_DBG(it->second->content.i);
                 break;
@@ -2385,7 +2409,7 @@ bool DRW_Header::parseDwg(DRW::Version version, dwgBuffer *buf, dwgBuffer *hBbuf
             default:
                 break;
             }
-             DRW_DBG(" code: ");DRW_DBG(it->second->code());
+             DRW_DBG(" code: ");DRW_DBG(it->second->code);
         }
     }
 
@@ -2450,4 +2474,3 @@ bool DRW_Header::parseDwg(DRW::Version version, dwgBuffer *buf, dwgBuffer *hBbuf
 
     return result;
 }
-
