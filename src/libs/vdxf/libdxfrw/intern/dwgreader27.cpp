@@ -41,4 +41,3 @@ bool dwgReader27::readDwgClasses(){
     DRW_DBG("\ndwgReader27::readDwgClasses END\n");
     return ret;
 }
-

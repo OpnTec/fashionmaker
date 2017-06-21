@@ -88,18 +88,4 @@ private:
 
 };
 
-class DRW_ExtConverter : public DRW_Converter {
-public:
-    DRW_ExtConverter(const char *enc):DRW_Converter(NULL, 0) {
-        encoding = enc;
-    }
-    virtual std::string fromUtf8(std::string *s);
-    virtual std::string toUtf8(std::string *s);
- private:
-    const char *encoding;
-    std::string convertByiconv(const char *in_encode,
-                               const char *out_encode,
-                               const std::string *s);
-};
-
 #endif // DRW_TEXTCODEC_H

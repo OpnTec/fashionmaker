@@ -43,7 +43,7 @@ static const int DRW_magicNumEnd18[] = {
 
 class dwgReader18 : public dwgReader {
 public:
-    dwgReader18(std::ifstream *stream, dwgR *p):dwgReader(stream, p){
+    dwgReader18(std::istream *stream, dwgR *p):dwgReader(stream, p){
         objData = NULL;
     }
     virtual ~dwgReader18(){

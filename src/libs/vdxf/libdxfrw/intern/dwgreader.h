@@ -120,7 +120,7 @@ public:
 class dwgReader {
     friend class dwgR;
 public:
-    dwgReader(std::ifstream *stream, dwgR *p){
+    dwgReader(std::istream *stream, dwgR *p){
         fileBuf = new dwgBuffer(stream);
         parent = p;
         decoder.setVersion(DRW::AC1021, false);//default 2007 in utf8(no convert)

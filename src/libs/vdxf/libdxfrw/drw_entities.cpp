@@ -116,7 +116,10 @@ bool DRW_Entity::parseCode(int code, dxfReader *reader){
     case 1011:
     case 1012:
     case 1013:
-        curr = new DRW_Variant(code, DRW_Coord(reader->getDouble(), 0.0, 0.0));
+        curr = new DRW_Variant();
+        curr->addCoord();
+        curr->setCoordX(reader->getDouble());
+        curr->code = code;
         extData.push_back(curr);
         break;
     case 1020:
@@ -156,28 +159,28 @@ bool DRW_Entity::parseDxfGroups(int code, dxfReader *reader){
     int nc;
     std::string appName= reader->getString();
     if (!appName.empty() && appName.at(0)== '{'){
-        curr.addString(code, appName.substr(1, (int) appName.size()-1));
+        curr.addString(appName.substr(1, (int) appName.size()-1));
+        curr.code = code;
         ls.push_back(curr);
         while (code !=102 && appName.at(0)== '}'){
-            reader->readRec(&nc);//RLZ curr.code = code or nc?
-//            curr.code = code;
-            //RLZ code == 330 || code == 360 OR nc == 330 || nc == 360 ?
+            reader->readRec(&nc);
+            curr.code = code;
             if (code == 330 || code == 360)
-                curr.addInt(code, reader->getHandleString());//RLZ code or nc
+                curr.addInt(reader->getHandleString());
             else {
                 switch (reader->type) {
                 case dxfReader::STRING:
-                    curr.addString(code, reader->getString());//RLZ code or nc
+                    curr.addString(reader->getString());
                     break;
                 case dxfReader::INT32:
                 case dxfReader::INT64:
-                    curr.addInt(code, reader->getInt32());//RLZ code or nc
+                    curr.addInt(reader->getInt32());
                     break;
                 case dxfReader::DOUBLE:
-                    curr.addDouble(code, reader->getDouble());//RLZ code or nc
+                    curr.addDouble(reader->getDouble());
                     break;
                 case dxfReader::BOOL:
-                    curr.addInt(code, reader->getInt32());//RLZ code or nc
+                    curr.addInt(reader->getInt32());
                     break;
                 default:
                     break;
@@ -1427,6 +1430,59 @@ void DRW_MText::parseCode(int code, dxfReader *reader){
     case 44:
         interlin = reader->getDouble();
         break;
+    case 71: {
+        // Attachment point
+        Attach a = (Attach)reader->getInt32();
+
+        switch(a) {
+            case TopLeft:
+                alignV = VTop;
+                alignH = HLeft;
+                break;
+            case TopCenter:
+                alignV = VTop;
+                alignH = HCenter;
+                break;
+            case TopRight:
+                alignV = VTop;
+                alignH = HRight;
+                break;
+            case MiddleLeft:
+                alignV = VMiddle;
+                alignH = HLeft;
+                break;
+            case MiddleCenter:
+                alignV = VMiddle;
+                alignH = HCenter;
+                break;
+            case MiddleRight:
+                alignV = VMiddle;
+                alignH = HRight;
+                break;
+            case BottomLeft:
+                alignV = VBottom;
+                alignH = HLeft;
+                break;
+            case BottomCenter:
+                alignV = VBottom;
+                alignH = HCenter;
+                break;
+            case BottomRight:
+                alignV = VBottom;
+                alignH = HRight;
+                break;
+        }
+    } break;
+    case 72:
+        // To prevent redirection to DRW_Text::parseCode.
+        // This code meaning is different for MTEXT.
+        // Actually: Drawing direction
+        break;
+    case 73:
+        // To prevent redirection to DRW_Text::parseCode.
+        // This code meaning is different for MTEXT.
+        // Actually: Mtext line spacing style
+        break;
     default:
         DRW_Text::parseCode(code, reader);
         break;
@@ -1906,7 +1962,6 @@ bool DRW_Hatch::parseDwg(DRW::Version version, dwgBuffer *buf, duint32 bs){
                     spline->controllist.reserve(spline->ncontrol);
                     for (dint32 j = 0; j < spline->ncontrol;++j){
                         DRW_Coord* crd = new DRW_Coord(buf->get3BitDouble());
-                        spline->controllist.push_back(crd);
                         if(isRational)
                             crd->z =  buf->getBitDouble(); //RLZ: investigate how store weight
                         spline->controllist.push_back(crd);
@@ -2080,8 +2135,9 @@ void DRW_Spline::parseCode(int code, dxfReader *reader){
     case 40:
         knotslist.push_back(reader->getDouble());
         break;
-//    case 41:
-//        break;
+    case 41:
+        weightlist.push_back(reader->getDouble());
+        break;
     default:
         DRW_Entity::parseCode(code, reader);
         break;
@@ -2238,14 +2294,14 @@ bool DRW_Image::parseDwg(DRW::Version version, dwgBuffer *buf, duint32 bs){
     sizev = buf->getRawDouble();
     DRW_DBG("\nsize U: "); DRW_DBG(sizeu); DRW_DBG("\nsize V: "); DRW_DBG(sizev);
     duint16 displayProps = buf->getBitShort();
-    DRW_UNUSED(displayProps);//RLZ: temporary, complete API
+    (void)displayProps;
     clip = buf->getBit();
     brightness = buf->getRawChar8();
     contrast = buf->getRawChar8();
     fade = buf->getRawChar8();
     if (version > DRW::AC1021){ //2010+
         bool clipMode = buf->getBit();
-        DRW_UNUSED(clipMode);//RLZ: temporary, complete API
+        (void)clipMode;
     }
     duint16 clipType = buf->getBitShort();
     if (clipType == 1){
@@ -2357,6 +2413,10 @@ void DRW_Dimension::parseCode(int code, dxfReader *reader){
         break;
     case 41:
         linefactor = reader->getDouble();
+        break;
+    case 42:
+        actual = reader->getDouble();
+        hasActual = (actual != 0.0);
         break;
     case 53:
         rot = reader->getDouble();

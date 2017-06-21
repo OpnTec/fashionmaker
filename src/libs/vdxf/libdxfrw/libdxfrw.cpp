@@ -423,8 +423,6 @@ bool dxfRW::writeDimstyle(DRW_Dimstyle *ent){
     writer->writeDouble(46, ent->dimdle);
     writer->writeDouble(47, ent->dimtp);
     writer->writeDouble(48, ent->dimtm);
-    if ( version > DRW::AC1018 || ent->dimfxl !=0 )
-        writer->writeDouble(49, ent->dimfxl);
     writer->writeDouble(140, ent->dimtxt);
     writer->writeDouble(141, ent->dimcen);
     writer->writeDouble(142, ent->dimtsz);
@@ -489,9 +487,7 @@ bool dxfRW::writeDimstyle(DRW_Dimstyle *ent){
     if (version > DRW::AC1014) {
         writer->writeInt16(289, ent->dimatfit);
     }
-    if ( version > DRW::AC1018 && ent->dimfxlon !=0 )
-        writer->writeInt16(290, ent->dimfxlon);
-    if (version > DRW::AC1009) {
+    if (version > DRW::AC1009 && !ent->dimtxsty.empty()) {
         writer->writeUtf8String(340, ent->dimtxsty);
     }
     if (version > DRW::AC1014) {
@@ -735,7 +731,7 @@ bool dxfRW::writeLWPolyline(DRW_LWPolyline *ent){
         if (version > DRW::AC1009) {
             writer->writeString(100, "AcDbPolyline");
         }
-        ent->vertexnum = ent->vertlist.size();
+        ent->vertexnum = (int)ent->vertlist.size();
         writer->writeInt32(90, ent->vertexnum);
         writer->writeInt16(70, ent->flags);
         writer->writeDouble(43, ent->width);
@@ -763,11 +759,14 @@ bool dxfRW::writeLWPolyline(DRW_LWPolyline *ent){
 bool dxfRW::writePolyline(DRW_Polyline *ent) {
     writer->writeString(0, "POLYLINE");
     writeEntity(ent);
+    bool is3d = false;
     if (version > DRW::AC1009) {
-        if (ent->flags & 8 || ent->flags & 16)
-            writer->writeString(100, "AcDb2dPolyline");
-        else
+        if (ent->flags & 8 || ent->flags & 16) {
             writer->writeString(100, "AcDb3dPolyline");
+            is3d = true;
+        } else {
+            writer->writeString(100, "AcDb2dPolyline");
+        }
     } else
         writer->writeInt16(66, 1);
     writer->writeDouble(10, 0.0);
@@ -803,13 +802,18 @@ bool dxfRW::writePolyline(DRW_Polyline *ent) {
         writer->writeDouble(230, crd.z);
     }
 
-    int vertexnum = ent->vertlist.size();
-    for (int i = 0;  i< vertexnum; i++){
+    size_t vertexnum = ent->vertlist.size();
+    for (size_t i = 0; i < vertexnum; i++) {
         DRW_Vertex *v = ent->vertlist.at(i);
         writer->writeString(0, "VERTEX");
         writeEntity(ent);
         if (version > DRW::AC1009)
             writer->writeString(100, "AcDbVertex");
+            if(is3d) {
+                writer->writeString(100, "AcDb3dPolylineVertex");
+            } else {
+                writer->writeString(100, "AcDb2dVertex");
+            }
         if ( (v->flags & 128) && !(v->flags & 64) ) {
             writer->writeDouble(10, 0);
             writer->writeDouble(20, 0);
@@ -875,6 +879,9 @@ bool dxfRW::writeSpline(DRW_Spline *ent){
         for (int i = 0;  i< ent->nknots; i++){
             writer->writeDouble(40, ent->knotslist.at(i));
         }
+        for (int i = 0; i< (int)ent->weightlist.size(); i++) {
+            writer->writeDouble(41, ent->weightlist.at(i));
+        }
         for (int i = 0;  i< ent->ncontrol; i++){
             DRW_Coord *crd = ent->controllist.at(i);
             writer->writeDouble(10, crd->x);
@@ -901,7 +908,7 @@ bool dxfRW::writeHatch(DRW_Hatch *ent){
         writer->writeString(2, ent->name);
         writer->writeInt16(70, ent->solid);
         writer->writeInt16(71, ent->associative);
-        ent->loopsnum = ent->looplist.size();
+        ent->loopsnum = (int)ent->looplist.size();
         writer->writeInt16(91, ent->loopsnum);
         //write paths data
         for (int i = 0;  i< ent->loopsnum; i++){
@@ -1031,6 +1038,8 @@ bool dxfRW::writeDimension(DRW_Dimension *ent) {
         writer->writeDouble(210, ent->getExtrusion().x);
         writer->writeDouble(220, ent->getExtrusion().y);
         writer->writeDouble(230, ent->getExtrusion().z);
+        if ( ent->hasActualMeasurement())
+            writer->writeDouble(42, ent->getActualMeasurement());
 
         switch (ent->eType) {
         case DRW::DIMALIGNED:
@@ -1765,15 +1774,15 @@ bool dxfRW::writeObjects() {
 
 bool dxfRW::writeExtData(const std::vector<DRW_Variant*> &ed){
     for (std::vector<DRW_Variant*>::const_iterator it=ed.begin(); it!=ed.end(); ++it){
-        switch ((*it)->code()) {
+        switch ((*it)->code) {
         case 1000:
         case 1001:
         case 1002:
         case 1003:
         case 1004:
         case 1005:
-        {int cc = (*it)->code();
-            if ((*it)->type() == DRW_Variant::STRING)
+        {int cc = (*it)->code;
+            if ((*it)->type == DRW_Variant::STRING)
                 writer->writeUtf8String(cc, *(*it)->content.s);
 //            writer->writeUtf8String((*it)->code, (*it)->content.s);
             break;}
@@ -1781,25 +1790,25 @@ bool dxfRW::writeExtData(const std::vector<DRW_Variant*> &ed){
         case 1011:
         case 1012:
         case 1013:
-            if ((*it)->type() == DRW_Variant::COORD) {
-                writer->writeDouble((*it)->code(), (*it)->content.v->x);
-                writer->writeDouble((*it)->code()+10 , (*it)->content.v->y);
-                writer->writeDouble((*it)->code()+20 , (*it)->content.v->z);
+            if ((*it)->type == DRW_Variant::COORD) {
+                writer->writeDouble((*it)->code, (*it)->content.v->x);
+                writer->writeDouble((*it)->code+10 , (*it)->content.v->y);
+                writer->writeDouble((*it)->code+20 , (*it)->content.v->z);
             }
             break;
         case 1040:
         case 1041:
         case 1042:
-            if ((*it)->type() == DRW_Variant::DOUBLE)
-                writer->writeDouble((*it)->code(), (*it)->content.d);
+            if ((*it)->type == DRW_Variant::DOUBLE)
+                writer->writeDouble((*it)->code, (*it)->content.d);
             break;
         case 1070:
-            if ((*it)->type() == DRW_Variant::INTEGER)
-                writer->writeInt16((*it)->code(), (*it)->content.i);
+            if ((*it)->type == DRW_Variant::INTEGER)
+                writer->writeInt16((*it)->code, (*it)->content.i);
             break;
         case 1071:
-            if ((*it)->type() == DRW_Variant::INTEGER)
-                writer->writeInt32((*it)->code(), (*it)->content.i);
+            if ((*it)->type == DRW_Variant::INTEGER)
+                writer->writeInt32((*it)->code, (*it)->content.i);
             break;
         default:
             break;

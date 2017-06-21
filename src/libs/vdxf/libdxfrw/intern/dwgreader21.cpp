@@ -485,5 +485,3 @@ bool dwgReader21::readDwgBlocks(DRW_Interface& intfa){
 
     return false;
 }
-
-

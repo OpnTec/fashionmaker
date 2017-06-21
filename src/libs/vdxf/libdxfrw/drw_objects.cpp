@@ -50,7 +50,10 @@ void DRW_TableEntry::parseCode(int code, dxfReader *reader){
     case 1011:
     case 1012:
     case 1013:
-        curr = new DRW_Variant(code, DRW_Coord(reader->getDouble(), 0.0, 0.0));
+        curr = new DRW_Variant();
+        curr->addCoord();
+        curr->setCoordX(reader->getDouble());
+        curr->code = code;
         extData.push_back(curr);
         break;
     case 1020:
@@ -455,7 +458,7 @@ void DRW_LType::parseCode(int code, dxfReader *reader){
 /*TODO: control max length permited */
 void DRW_LType::update(){
     double d =0;
-    size = path.size();
+    size = (int)path.size();
     for (int i = 0;  i< size; i++){
         d += fabs(path.at(i));
     }
@@ -1168,7 +1171,7 @@ bool DRW_ImageDef::parseDwg(DRW::Version version, dwgBuffer *buf, duint32 bs){
     dint32 imgVersion = buf->getBitLong();
     DRW_DBG("class Version: "); DRW_DBG(imgVersion);
     DRW_Coord size = buf->get2RawDouble();
-    DRW_UNUSED(size);//RLZ: temporary, complete API
+    (void)size;
     name = sBuf->getVariableText(version, false);
     DRW_DBG("appId name: "); DRW_DBG(name.c_str()); DRW_DBG("\n");
     loaded = buf->getBit();

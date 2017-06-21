@@ -22,7 +22,7 @@
 //reader for AC1021 aka v2007, chapter 5
 class dwgReader21 : public dwgReader {
 public:
-    dwgReader21(std::ifstream *stream, dwgR *p):dwgReader(stream, p){
+    dwgReader21(std::istream *stream, dwgR *p):dwgReader(stream, p){
         objData = NULL;
         dataSize = 0;
     }

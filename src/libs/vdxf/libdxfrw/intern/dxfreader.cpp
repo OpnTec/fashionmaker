@@ -261,4 +261,3 @@ bool dxfReaderAscii::readBool() {
     } else
         return false;
 }
-

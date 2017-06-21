@@ -21,7 +21,7 @@
 
 class dwgReader15 : public dwgReader {
 public:
-    dwgReader15(std::ifstream *stream, dwgR *p):dwgReader(stream, p){ }
+    dwgReader15(std::istream *stream, dwgR *p):dwgReader(stream, p){ }
     virtual ~dwgReader15() {}
     bool readMetaData();
     bool readFileHeader();

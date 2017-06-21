@@ -592,5 +592,3 @@ bool dwgReader18::readDwgTables(DRW_Header& hdr) {
     //Do not delete objData in this point, needed in the remaining code
     return ret;
 }
-
-

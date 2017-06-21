@@ -21,7 +21,7 @@
 
 class dwgReader24 : public dwgReader18 {
 public:
-    dwgReader24(std::ifstream *stream, dwgR *p):dwgReader18(stream, p){ }
+    dwgReader24(std::istream *stream, dwgR *p):dwgReader18(stream, p){ }
     virtual ~dwgReader24(){}
     bool readFileHeader();
     bool readDwgHeader(DRW_Header& hdr);

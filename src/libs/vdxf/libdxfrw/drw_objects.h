@@ -128,25 +128,30 @@ public:
 
     void reset(){
         tType = DRW::DIMSTYLE;
-        dimasz = dimtxt = dimexe = 0.18;
-        dimexo = 0.0625;
-        dimgap = dimcen = 0.09;
-        dimtxsty = "Standard";
+        dimasz = dimtxt = dimcen = 2.5;
+        dimexe = 1.25;
+        dimexo = dimgap = 0.625;
+        dimtxsty = "";
         dimscale = dimlfac = dimtfac = dimfxl = 1.0;
-        dimdli = 0.38;
+        dimdli = 3.75;
         dimrnd = dimdle = dimtp = dimtm = dimtsz = dimtvp = 0.0;
-        dimaltf = 25.4;
-        dimtol = dimlim = dimse1 = dimse2 = dimtad = dimzin = 0;
-        dimtoh = dimtolj = 1;
-        dimalt = dimtofl = dimsah = dimtix = dimsoxd = dimfxlon = 0;
-        dimaltd = dimunit = dimaltu = dimalttd = dimlunit = 2;
+        dimaltf = 1.0 / 25.4;
+        dimtol = dimlim = dimse1 = dimse2 = 0;
+        dimtad = 1;
+        dimzin = 8;
+        dimtoh = dimtolj = 0;
+        dimalt = dimsah = dimtix = dimsoxd = dimfxlon = 0;
+        dimtofl = 1;
+        dimunit = dimaltu = dimlunit = 2;
+        dimaltd = dimalttd = 3;
         dimclrd = dimclre = dimclrt = dimjust = dimupt = 0;
-        dimazin = dimaltz = dimaltttz = dimtzin = dimfrac = 0;
+        dimtzin = 8;
+        dimazin = dimaltz = dimaltttz = dimfrac = 0;
         dimtih = dimadec = dimaunit = dimsd1 = dimsd2 = dimtmove = 0;
         dimaltrnd = 0.0;
-        dimdec = dimtdec = 4;
+        dimdec = dimtdec = 2;
         dimfit = dimatfit = 3;
-        dimdsep = '.';
+        dimdsep = ',';
         dimlwd = dimlwe = -2;
         DRW_TableEntry::reset();
     }
@@ -771,4 +776,3 @@ const unsigned char dxfColors[][3] = {
 #endif
 
 // EOF
-

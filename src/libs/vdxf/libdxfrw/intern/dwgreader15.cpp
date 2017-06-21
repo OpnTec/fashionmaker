@@ -196,4 +196,3 @@ bool dwgReader15::readDwgBlocks(DRW_Interface& intfa) {
     ret = dwgReader::readDwgBlocks(intfa, fileBuf);
     return ret;
 }
-

@@ -56,4 +56,3 @@ public: //only for read dwg
 #endif
 
 // EOF
-
