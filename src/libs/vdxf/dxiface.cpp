@@ -25,7 +25,7 @@ dx_iface::dx_iface(const std::string &file, VarMeasurement varMeasurement, VarIn
     InitHeader(varMeasurement, varInsunits);
     InitLTypes();
     InitLayers();
-    InitDimstyles();
+    //InitDimstyles();
     InitTextstyles();
 }
 
