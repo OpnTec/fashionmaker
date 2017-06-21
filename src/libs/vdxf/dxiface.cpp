@@ -25,7 +25,6 @@ dx_iface::dx_iface(const std::string &file, VarMeasurement varMeasurement, VarIn
     InitHeader(varMeasurement, varInsunits);
     InitLTypes();
     InitLayers();
-    //InitDimstyles();
     InitTextstyles();
 }
 
@@ -228,18 +227,6 @@ void dx_iface::InitLayers()
 //    mLayer.lWeight = 100;           // default width
 //    mLayer.lineType = "CONTINUOUS"; // default line style
 //    cData.lineTypes.push_back(mLayer);
-}
-
-void dx_iface::InitDimstyles()
-{
-    DRW_Dimstyle style;
-    style.dimasz = 1;
-    style.dimexe = 1;
-    style.dimexo = 1;
-    style.dimgap = 1;
-    style.dimtxt = 1;
-
-    cData.dimStyles.push_back(style);
 }
 
 void dx_iface::InitTextstyles()

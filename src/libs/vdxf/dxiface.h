@@ -93,7 +93,6 @@ public:
     void InitHeader(VarMeasurement varMeasurement, VarInsunits varInsunits);
     void InitLTypes();
     void InitLayers();
-    void InitDimstyles();
     void InitTextstyles();
 
     void AddEntity(DRW_Entity* e);
