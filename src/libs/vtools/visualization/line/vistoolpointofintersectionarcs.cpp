@@ -114,15 +114,3 @@ void VisToolPointOfIntersectionArcs::setCrossPoint(const CrossCirclesPoint &valu
 {
     crossPoint = value;
 }
-
-//---------------------------------------------------------------------------------------------------------------------
-void VisToolPointOfIntersectionArcs::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
-{
-    const qreal scale = SceneScale(scene());
-
-    ScalePoint(point, scale);
-    ScalePenWidth(arc1Path, scale);
-    ScalePenWidth(arc2Path, scale);
-
-    VisLine::paint(painter, option, widget);
-}

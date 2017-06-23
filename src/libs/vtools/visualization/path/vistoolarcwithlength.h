@@ -52,15 +52,12 @@ public:
     void         setLength(const QString &expression);
     virtual int  type() const Q_DECL_OVERRIDE {return Type;}
     enum { Type = UserType + static_cast<int>(Vis::ToolArcWithLength)};
-
-    virtual void   paint(QPainter *painter, const QStyleOptionGraphicsItem *option,
-                         QWidget *widget = nullptr) Q_DECL_OVERRIDE;
 private:
     Q_DISABLE_COPY(VisToolArcWithLength)
-    QGraphicsEllipseItem *arcCenter;
-    qreal                radius;
-    qreal                f1;
-    qreal                length;
+    VScaledEllipse *arcCenter;
+    qreal           radius;
+    qreal           f1;
+    qreal           length;
 };
 
 #endif // VISTOOLARCWITHLENGTH_H

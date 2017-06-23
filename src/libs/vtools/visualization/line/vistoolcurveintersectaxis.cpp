@@ -55,8 +55,8 @@ VisToolCurveIntersectAxis::VisToolCurveIntersectAxis(const VContainer *data, QGr
 
     visCurve = InitItem<VCurvePathItem>(Qt::darkGreen, this);
     basePoint = InitPoint(supportColor, this);
-    baseLine = InitItem<QGraphicsLineItem>(supportColor, this);
-    axisLine = InitItem<QGraphicsLineItem>(supportColor, this); //-V656
+    baseLine = InitItem<VScaledLine>(supportColor, this);
+    axisLine = InitItem<VScaledLine>(supportColor, this); //-V656
     point = InitPoint(mainColor, this);
 }
 
@@ -112,18 +112,4 @@ void VisToolCurveIntersectAxis::SetAngle(const QString &expression)
 void VisToolCurveIntersectAxis::setAxisPointId(const quint32 &value)
 {
     axisPointId = value;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void VisToolCurveIntersectAxis::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
-{
-    const qreal scale = SceneScale(scene());
-
-    ScalePoint(point, scale);
-    ScalePoint(basePoint, scale);
-    ScalePenWidth(baseLine, scale);
-    ScalePenWidth(axisLine, scale);
-    ScalePenWidth(visCurve, scale);
-
-    VisLine::paint(painter, option, widget);
 }

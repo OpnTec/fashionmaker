@@ -48,6 +48,7 @@
 #include "../../../../vabstracttool.h"
 #include "../../../vdrawtool.h"
 #include "../vtoolsinglepoint.h"
+#include "../vwidgets/scalesceneitems.h"
 
 template <class T> class QSharedPointer;
 
@@ -74,7 +75,8 @@ VToolLinePoint::VToolLinePoint(VAbstractPattern *doc, VContainer *data, const qu
     Q_ASSERT_X(basePointId != 0, Q_FUNC_INFO, "basePointId == 0"); //-V654 //-V712
     QPointF point1 = static_cast<QPointF>(*data->GeometricObject<VPointF>(basePointId));
     QPointF point2 = static_cast<QPointF>(*data->GeometricObject<VPointF>(id));
-    mainLine = new QGraphicsLineItem(QLineF(point1 - point2, QPointF()), this);
+    mainLine = new VScaledLine(QLineF(point1 - point2, QPointF()), this);
+    mainLine->SetBasicWidth(widthHairLine);
     mainLine->setFlag(QGraphicsItem::ItemStacksBehindParent, true);
 }
 
@@ -87,19 +89,13 @@ VToolLinePoint::~VToolLinePoint()
 //---------------------------------------------------------------------------------------------------------------------
 void VToolLinePoint::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
 {
-    const qreal width = ScaleWidth(m_isHovered ? widthMainLine : widthHairLine, SceneScale(scene()));
+    QPen mPen = mainLine->pen();
+    mPen.setColor(CorrectColor(this, lineColor));
+    mPen.setStyle(LineStyleToPenStyle(m_lineType));
 
-    mainLine->setPen(QPen(CorrectColor(this, lineColor), width, LineStyleToPenStyle(m_lineType)));
+    mainLine->setPen(mPen);
 
     VToolSinglePoint::paint(painter, option, widget);
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-QRectF VToolLinePoint::boundingRect() const
-{
-    QRectF recTool = VToolSinglePoint::boundingRect();
-    recTool = recTool.united(childrenBoundingRect());
-    return recTool;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -131,6 +127,20 @@ void VToolLinePoint::SaveOptions(QDomElement &tag, QSharedPointer<VGObject> &obj
 
     doc->SetAttribute(tag, AttrTypeLine, m_lineType);
     doc->SetAttribute(tag, AttrLineColor, lineColor);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VToolLinePoint::hoverEnterEvent(QGraphicsSceneHoverEvent *event)
+{
+    mainLine->SetBasicWidth(widthMainLine);
+    VToolSinglePoint::hoverEnterEvent(event);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VToolLinePoint::hoverLeaveEvent(QGraphicsSceneHoverEvent *event)
+{
+    mainLine->SetBasicWidth(widthHairLine);
+    VToolSinglePoint::hoverLeaveEvent(event);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

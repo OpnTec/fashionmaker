@@ -50,11 +50,11 @@ protected:
     QVector<quint32> objects;
     QColor           supportColor2;
 
-    QVector<QGraphicsEllipseItem *> points;
-    QVector<VCurvePathItem *>       curves;
+    QVector<VScaledEllipse *> points;
+    QVector<VCurvePathItem *> curves;
 
-    QGraphicsEllipseItem * GetPoint(quint32 i, const QColor &color);
-    VCurvePathItem       * GetCurve(quint32 i, const QColor &color);
+    VScaledEllipse *GetPoint(quint32 i, const QColor &color);
+    VCurvePathItem *GetCurve(quint32 i, const QColor &color);
 
     template <class Item>
     int AddFlippedCurve(const QPointF &firstPoint, const QPointF &secondPoint, quint32 id, int i);

@@ -52,19 +52,16 @@ public:
     void         setRadius(const QString &expression);
     virtual int  type() const Q_DECL_OVERRIDE {return Type;}
     enum { Type = UserType + static_cast<int>(Vis::ToolPointOfContact)};
-
-    virtual void   paint(QPainter *painter, const QStyleOptionGraphicsItem *option,
-                         QWidget *widget = nullptr) Q_DECL_OVERRIDE;
 private:
     Q_DISABLE_COPY(VisToolPointOfContact)
-    quint32              lineP2Id;
-    quint32              radiusId;
-    QGraphicsEllipseItem *point;
-    QGraphicsEllipseItem *lineP1;
-    QGraphicsEllipseItem *lineP2;
-    QGraphicsEllipseItem *arc_point;
-    QGraphicsEllipseItem *circle;
-    qreal                radius;
+    quint32         lineP2Id;
+    quint32         radiusId;
+    VScaledEllipse *point;
+    VScaledEllipse *lineP1;
+    VScaledEllipse *lineP2;
+    VScaledEllipse *arc_point;
+    VScaledEllipse *circle;
+    qreal           radius;
 
 };
 

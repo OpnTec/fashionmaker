@@ -107,14 +107,3 @@ void VisToolPointOfIntersectionCurves::setHCrossPoint(const HCrossCurvesPoint &v
 {
     hCrossPoint = value;
 }
-
-//---------------------------------------------------------------------------------------------------------------------
-void VisToolPointOfIntersectionCurves::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
-{
-    const qreal scale = SceneScale(scene());
-
-    ScalePoint(point, scale);
-    ScalePenWidth(visCurve2, scale);
-
-    VisPath::paint(painter, option, widget);
-}

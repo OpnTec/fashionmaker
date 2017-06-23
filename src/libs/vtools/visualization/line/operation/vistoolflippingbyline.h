@@ -41,8 +41,6 @@ public:
     virtual ~VisToolFlippingByLine() = default;
 
     virtual void   RefreshGeometry() Q_DECL_OVERRIDE;
-    virtual void   paint(QPainter *painter, const QStyleOptionGraphicsItem *option,
-                         QWidget *widget = nullptr) Q_DECL_OVERRIDE;
 
     void SetFirstLinePointId(quint32 value);
     void SetSecondLinePointId(quint32 value);
@@ -51,9 +49,9 @@ public:
     enum { Type = UserType + static_cast<int>(Vis::ToolFlippingByLine)};
 private:
     Q_DISABLE_COPY(VisToolFlippingByLine)
-    quint32               object2Id;
-    QGraphicsEllipseItem *point1;
-    QGraphicsEllipseItem *point2;
+    quint32         object2Id;
+    VScaledEllipse *point1;
+    VScaledEllipse *point2;
 };
 
 #endif // VISTOOLFLIPPINGBYLINE_H

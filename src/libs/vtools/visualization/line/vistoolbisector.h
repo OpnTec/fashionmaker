@@ -52,20 +52,17 @@ public:
     void         setLength(const QString &expression);
     virtual int  type() const Q_DECL_OVERRIDE {return Type;}
     enum { Type = UserType + static_cast<int>(Vis::ToolBisector)};
-
-    virtual void   paint(QPainter *painter, const QStyleOptionGraphicsItem *option,
-                         QWidget *widget = nullptr) Q_DECL_OVERRIDE;
 private:
     Q_DISABLE_COPY(VisToolBisector)
-    quint32              object2Id;
-    quint32              object3Id;
-    QGraphicsEllipseItem *point;
-    QGraphicsEllipseItem *line1P1;
-    QGraphicsEllipseItem *line1P2;
-    QGraphicsLineItem    *line1;
-    QGraphicsEllipseItem *line2P2;
-    QGraphicsLineItem    *line2;
-    qreal                length;
+    quint32         object2Id;
+    quint32         object3Id;
+    VScaledEllipse *point;
+    VScaledEllipse *line1P1;
+    VScaledEllipse *line1P2;
+    VScaledLine    *line1;
+    VScaledEllipse *line2P2;
+    VScaledLine    *line2;
+    qreal           length;
 };
 
 #endif // VISTOOLBISECTOR_H

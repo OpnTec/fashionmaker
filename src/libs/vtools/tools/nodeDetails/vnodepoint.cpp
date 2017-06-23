@@ -201,7 +201,7 @@ void VNodePoint::RefreshDataInFile()
 void VNodePoint::mousePressEvent(QGraphicsSceneMouseEvent *event)
 {
     // Special for not selectable item first need to call standard mousePressEvent then accept event
-    QGraphicsEllipseItem::mousePressEvent(event);
+    VScenePoint::mousePressEvent(event);
 
     // Somehow clicking on notselectable object do not clean previous selections.
     if (not (flags() & ItemIsSelectable) && scene())
@@ -223,7 +223,7 @@ void VNodePoint::mouseReleaseEvent(QGraphicsSceneMouseEvent *event)
     {
         emit ChoosedTool(id, SceneObject::Point);
     }
-    QGraphicsEllipseItem::mouseReleaseEvent(event);
+    VScenePoint::mouseReleaseEvent(event);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

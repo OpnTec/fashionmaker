@@ -55,9 +55,6 @@ public:
 
     virtual int  type() const Q_DECL_OVERRIDE {return Type;}
     enum { Type = UserType + static_cast<int>(Vis::ToolTrueDarts)};
-
-    virtual void   paint(QPainter *painter, const QStyleOptionGraphicsItem *option,
-                         QWidget *widget = nullptr) Q_DECL_OVERRIDE;
 private:
     Q_DISABLE_COPY(VisToolTrueDarts)
     quint32 baseLineP2Id;
@@ -65,18 +62,18 @@ private:
     quint32 dartP2Id;
     quint32 dartP3Id;
 
-    QGraphicsEllipseItem *point1;
-    QGraphicsEllipseItem *point2;
-    QGraphicsEllipseItem *baseLineP1;
-    QGraphicsEllipseItem *baseLineP2;
-    QGraphicsEllipseItem *dartP1;
-    QGraphicsEllipseItem *dartP2;
-    QGraphicsEllipseItem *dartP3;
+    VScaledEllipse *point1;
+    VScaledEllipse *point2;
+    VScaledEllipse *baseLineP1;
+    VScaledEllipse *baseLineP2;
+    VScaledEllipse *dartP1;
+    VScaledEllipse *dartP2;
+    VScaledEllipse *dartP3;
 
-    QGraphicsLineItem *lineblP1P1;
-    QGraphicsLineItem *lineblP2P2;
-    QGraphicsLineItem *p1d2;
-    QGraphicsLineItem *d2p2;
+    VScaledLine *lineblP1P1;
+    VScaledLine *lineblP2P2;
+    VScaledLine *p1d2;
+    VScaledLine *d2p2;
 };
 
 #endif // VISTOOLTRUEDARTS_H

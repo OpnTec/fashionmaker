@@ -75,7 +75,7 @@ void VisOperation::VisualMode(const quint32 &pointId)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QGraphicsEllipseItem *VisOperation::GetPoint(quint32 i, const QColor &color)
+VScaledEllipse *VisOperation::GetPoint(quint32 i, const QColor &color)
 {
     return GetPointItem(points, i, color, this);
 }
@@ -118,7 +118,7 @@ void VisOperation::RefreshFlippedObjects(const QPointF &firstPoint, const QPoint
                 const QSharedPointer<VPointF> p = Visualization::data->GeometricObject<VPointF>(id);
 
                 ++iPoint;
-                QGraphicsEllipseItem *point = GetPoint(static_cast<quint32>(iPoint), supportColor2);
+                VScaledEllipse *point = GetPoint(static_cast<quint32>(iPoint), supportColor2);
                 DrawPoint(point, static_cast<QPointF>(*p), supportColor2);
 
                 ++iPoint;

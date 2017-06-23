@@ -50,15 +50,12 @@ public:
     void         setLength(const QString &expression);
     virtual int  type() const Q_DECL_OVERRIDE {return Type;}
     enum { Type = UserType + static_cast<int>(Vis::ToolCutArc)};
-
-    virtual void   paint(QPainter *painter, const QStyleOptionGraphicsItem *option,
-                         QWidget *widget = nullptr) Q_DECL_OVERRIDE;
 protected:
     Q_DISABLE_COPY(VisToolCutArc)
-    QGraphicsEllipseItem *point;
-    VCurvePathItem       *arc1;
-    VCurvePathItem       *arc2;
-    qreal                length;
+    VScaledEllipse *point;
+    VCurvePathItem *arc1;
+    VCurvePathItem *arc2;
+    qreal           length;
 };
 
 #endif // VISTOOLCUTARC_H

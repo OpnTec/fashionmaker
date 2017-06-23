@@ -80,13 +80,3 @@ void VisToolFlippingByAxis::SetAxisType(AxisType value)
 {
     m_axisType = value;
 }
-
-//---------------------------------------------------------------------------------------------------------------------
-void VisToolFlippingByAxis::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
-{
-    const qreal scale = SceneScale(scene());
-
-    ScalePoint(point1, scale);
-
-    VisOperation::paint(painter, option, widget);
-}

@@ -48,15 +48,12 @@ public:
 
     virtual int type() const Q_DECL_OVERRIDE {return Type;}
     enum { Type = UserType + static_cast<int>(Vis::ToolFlippingByAxis)};
-
-    virtual void   paint(QPainter *painter, const QStyleOptionGraphicsItem *option,
-                         QWidget *widget = nullptr) Q_DECL_OVERRIDE;
 private:
     Q_DISABLE_COPY(VisToolFlippingByAxis)
 
     AxisType m_axisType;
 
-    QGraphicsEllipseItem *point1;
+    VScaledEllipse *point1;
 };
 
 #endif // VISTOOLFLIPPINGBYAXIS_H

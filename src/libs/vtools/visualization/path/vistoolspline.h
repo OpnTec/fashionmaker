@@ -64,23 +64,20 @@ public:
 
     virtual int  type() const Q_DECL_OVERRIDE {return Type;}
     enum { Type = UserType + static_cast<int>(Vis::ToolSpline)};
-
-    virtual void   paint(QPainter *painter, const QStyleOptionGraphicsItem *option,
-                         QWidget *widget = nullptr) Q_DECL_OVERRIDE;
 public slots:
     void MouseLeftPressed();
     void MouseLeftReleased();
 
 protected:
     Q_DISABLE_COPY(VisToolSpline)
-    quint32              object4Id;
-    QGraphicsEllipseItem *point1;
-    QGraphicsEllipseItem *point4;
-    qreal                angle1;
-    qreal                angle2;
-    qreal                kAsm1;
-    qreal                kAsm2;
-    qreal                kCurve;
+    quint32         object4Id;
+    VScaledEllipse *point1;
+    VScaledEllipse *point4;
+    qreal           angle1;
+    qreal           angle2;
+    qreal           kAsm1;
+    qreal           kAsm2;
+    qreal           kCurve;
 
     bool isLeftMousePressed;
     bool p2Selected;

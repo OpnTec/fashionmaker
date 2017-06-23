@@ -46,22 +46,6 @@ VisPath::VisPath(const VContainer *data, QGraphicsItem *parent)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VisPath::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
-{
-    ScalePenWidth(this, SceneScale(scene()));
-
-    VCurvePathItem::paint(painter, option, widget);
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-QRectF VisPath::boundingRect() const
-{
-    QRectF recTool = VCurvePathItem::boundingRect();
-    recTool = recTool.united(childrenBoundingRect());
-    return recTool;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
 void VisPath::InitPen()
 {
     QPen visPen = pen();

@@ -44,6 +44,7 @@
 #include "../vpatterndb/vcontainer.h"
 #include "../visualization.h"
 #include "vispath.h"
+#include "../vwidgets/scalesceneitems.h"
 
 //---------------------------------------------------------------------------------------------------------------------
 VisToolCutSpline::VisToolCutSpline(const VContainer *data, QGraphicsItem *parent)
@@ -90,16 +91,4 @@ void VisToolCutSpline::RefreshGeometry()
 void VisToolCutSpline::setLength(const QString &expression)
 {
     length = FindLength(expression, Visualization::data->PlainVariables());
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void VisToolCutSpline::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
-{
-    const qreal scale = SceneScale(scene());
-
-    ScalePoint(point, scale);
-    ScalePenWidth(spl1, scale);
-    ScalePenWidth(spl2, scale);
-
-    VisPath::paint(painter, option, widget);
 }

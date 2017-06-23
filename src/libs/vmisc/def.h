@@ -165,6 +165,8 @@ enum class Vis : ToolVisHolderType
 {
     ControlPointSpline = static_cast<ToolVisHolderType>(Tool::LAST_ONE_DO_NOT_USE),
     GraphicsSimpleTextItem,
+    ScaledLine,
+    ScaledEllipse,
     SimplePoint,
     SimpleCurve,
     Line,

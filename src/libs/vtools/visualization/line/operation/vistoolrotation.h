@@ -51,8 +51,6 @@ public:
     virtual ~VisToolRotation();
 
     virtual void   RefreshGeometry() Q_DECL_OVERRIDE;
-    virtual void   paint(QPainter *painter, const QStyleOptionGraphicsItem *option,
-                         QWidget *widget = nullptr) Q_DECL_OVERRIDE;
 
     void SetOriginPointId(quint32 value);
 
@@ -63,10 +61,10 @@ public:
     enum { Type = UserType + static_cast<int>(Vis::ToolRotation)};
 private:
     Q_DISABLE_COPY(VisToolRotation)
-    qreal                angle;
-    QGraphicsEllipseItem *point;
-    VCurvePathItem       *angleArc;
-    QGraphicsLineItem    *xAxis;
+    qreal           angle;
+    VScaledEllipse *point;
+    VCurvePathItem *angleArc;
+    VScaledLine    *xAxis;
 
     template <class Item>
     int AddCurve(qreal angle, const QPointF &origin, quint32 id, int i);

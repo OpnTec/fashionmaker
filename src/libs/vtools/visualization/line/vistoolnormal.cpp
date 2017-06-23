@@ -52,7 +52,7 @@ VisToolNormal::VisToolNormal(const VContainer *data, QGraphicsItem *parent)
 
     lineP1 = InitPoint(supportColor, this);
     lineP2 = InitPoint(supportColor, this); //-V656
-    line = InitItem<QGraphicsLineItem>(supportColor, this);
+    line = InitItem<VScaledLine>(supportColor, this);
 
     point = InitPoint(mainColor, this);
 }
@@ -123,17 +123,4 @@ qreal VisToolNormal::GetAngle() const
 void VisToolNormal::SetAngle(const qreal &value)
 {
     angle = value;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void VisToolNormal::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
-{
-    const qreal scale = SceneScale(scene());
-
-    ScalePoint(point, scale);
-    ScalePoint(lineP1, scale);
-    ScalePoint(lineP2, scale);
-    ScalePenWidth(line, scale);
-
-    VisLine::paint(painter, option, widget);
 }

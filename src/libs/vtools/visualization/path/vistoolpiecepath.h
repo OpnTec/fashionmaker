@@ -48,9 +48,6 @@ public:
     void         SetPath(const VPiecePath &path);
     virtual int  type() const Q_DECL_OVERRIDE {return Type;}
     enum { Type = UserType + static_cast<int>(Vis::ToolPiecePath)};
-
-    virtual void   paint(QPainter *painter, const QStyleOptionGraphicsItem *option,
-                         QWidget *widget = nullptr) Q_DECL_OVERRIDE;
 protected:
     virtual void mousePressEvent( QGraphicsSceneMouseEvent * event ) Q_DECL_OVERRIDE;
 
@@ -58,7 +55,7 @@ private:
     Q_DISABLE_COPY(VisToolPiecePath)
     QVector<VSimplePoint *> m_points;
 
-    QGraphicsLineItem *m_line;
+    VScaledLine *m_line;
 
     VPiecePath m_path;
 

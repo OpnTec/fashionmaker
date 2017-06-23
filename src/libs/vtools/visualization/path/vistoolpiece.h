@@ -46,18 +46,15 @@ public:
     void         SetPiece(const VPiece &piece);
     virtual int  type() const Q_DECL_OVERRIDE {return Type;}
     enum { Type = UserType + static_cast<int>(Vis::ToolPiece)};
-
-    virtual void   paint(QPainter *painter, const QStyleOptionGraphicsItem *option,
-                         QWidget *widget = nullptr) Q_DECL_OVERRIDE;
 private:
     Q_DISABLE_COPY(VisToolPiece)
-    QVector<QGraphicsEllipseItem *> m_points;
+    QVector<VScaledEllipse *> m_points;
 
-    QGraphicsLineItem *m_line1;
-    QGraphicsLineItem *m_line2;
+    VScaledLine *m_line1;
+    VScaledLine *m_line2;
     VPiece m_piece;
 
-    QGraphicsEllipseItem* GetPoint(quint32 i, const QColor &color);
+    VScaledEllipse* GetPoint(quint32 i, const QColor &color);
 
     void HideAllItems();
 };

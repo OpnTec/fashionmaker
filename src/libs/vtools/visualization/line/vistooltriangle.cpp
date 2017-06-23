@@ -53,11 +53,11 @@ VisToolTriangle::VisToolTriangle(const VContainer *data, QGraphicsItem *parent)
 {
     axisP1 = InitPoint(supportColor, this);
     axisP2 = InitPoint(supportColor, this);
-    axis = InitItem<QGraphicsPathItem>(supportColor, this);
+    axis = InitItem<VCurvePathItem>(supportColor, this);
     hypotenuseP1 = InitPoint(supportColor, this);
     hypotenuseP2 = InitPoint(supportColor, this);
-    foot1 = InitItem<QGraphicsLineItem>(supportColor, this);
-    foot2 = InitItem<QGraphicsLineItem>(supportColor, this); //-V656
+    foot1 = InitItem<VScaledLine>(supportColor, this);
+    foot2 = InitItem<VScaledLine>(supportColor, this); //-V656
 
     point = InitPoint(mainColor, this);
 }
@@ -144,24 +144,7 @@ void VisToolTriangle::setHypotenuseP2Id(const quint32 &value)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VisToolTriangle::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
-{
-    const qreal scale = SceneScale(scene());
-
-    ScalePoint(point, scale);
-    ScalePoint(axisP1, scale);
-    ScalePoint(axisP2, scale);
-    ScalePenWidth(axis, scale);
-    ScalePoint(hypotenuseP1, scale);
-    ScalePoint(hypotenuseP2, scale);
-    ScalePenWidth(foot1, scale);
-    ScalePenWidth(foot2, scale);
-
-    VisLine::paint(painter, option, widget);
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void VisToolTriangle::DrawAimedAxis(QGraphicsPathItem *item, const QLineF &line, const QColor &color,
+void VisToolTriangle::DrawAimedAxis(VCurvePathItem *item, const QLineF &line, const QColor &color,
                                     Qt::PenStyle style)
 {
     SCASSERT (item != nullptr)

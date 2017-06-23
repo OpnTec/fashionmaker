@@ -56,21 +56,18 @@ public:
 
     virtual int  type() const Q_DECL_OVERRIDE {return Type;}
     enum { Type = UserType + static_cast<int>(Vis::ToolLineIntersectAxis)};
-
-    virtual void   paint(QPainter *painter, const QStyleOptionGraphicsItem *option,
-                         QWidget *widget = nullptr) Q_DECL_OVERRIDE;
 private:
     Q_DISABLE_COPY(VisToolLineIntersectAxis)
     quint32              point2Id;
     quint32              axisPointId;
     qreal                angle;
-    QGraphicsEllipseItem *point;
-    QGraphicsEllipseItem *lineP1;
-    QGraphicsEllipseItem *lineP2;
-    QGraphicsEllipseItem *basePoint;
-    QGraphicsLineItem    *baseLine;
-    QGraphicsLineItem    *axisLine;
-    QGraphicsLineItem    *line_intersection;
+    VScaledEllipse *point;
+    VScaledEllipse *lineP1;
+    VScaledEllipse *lineP2;
+    VScaledEllipse *basePoint;
+    VScaledLine    *baseLine;
+    VScaledLine    *axisLine;
+    VScaledLine    *line_intersection;
     void          ShowIntersection(const QLineF &axis_line, const QLineF &base_line);
 };
 

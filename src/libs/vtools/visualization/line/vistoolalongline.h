@@ -51,17 +51,14 @@ public:
     void         setLength(const QString &expression);
     virtual int  type() const Q_DECL_OVERRIDE {return Type;}
     enum { Type = UserType + static_cast<int>(Vis::ToolAlongLine)};
-
-    virtual void   paint(QPainter *painter, const QStyleOptionGraphicsItem *option,
-                         QWidget *widget = nullptr) Q_DECL_OVERRIDE;
 private:
     Q_DISABLE_COPY(VisToolAlongLine)
-    quint32              object2Id;
-    QGraphicsEllipseItem *point;
-    QGraphicsEllipseItem *lineP1;
-    QGraphicsEllipseItem *lineP2;
-    QGraphicsLineItem    *line;
-    qreal                length;
+    quint32         object2Id;
+    VScaledEllipse *point;
+    VScaledEllipse *lineP1;
+    VScaledEllipse *lineP2;
+    VScaledLine    *line;
+    qreal           length;
 };
 
 #endif // VISTOOLALONGLINE_H

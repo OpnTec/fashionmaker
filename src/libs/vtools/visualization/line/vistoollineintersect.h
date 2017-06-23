@@ -53,20 +53,17 @@ public:
     void         setLine2P2Id(const quint32 &value);
     virtual int  type() const Q_DECL_OVERRIDE {return Type;}
     enum { Type = UserType + static_cast<int>(Vis::ToolLineIntersect)};
-
-    virtual void   paint(QPainter *painter, const QStyleOptionGraphicsItem *option,
-                         QWidget *widget = nullptr) Q_DECL_OVERRIDE;
 private:
     Q_DISABLE_COPY(VisToolLineIntersect)
     quint32              line1P2Id;
     quint32              line2P1Id;
     quint32              line2P2Id;
-    QGraphicsEllipseItem *point;
-    QGraphicsEllipseItem *line1P1;
-    QGraphicsEllipseItem *line1P2;
-    QGraphicsLineItem    *line1;
-    QGraphicsEllipseItem *line2P1;
-    QGraphicsEllipseItem *line2P2;
+    VScaledEllipse *point;
+    VScaledEllipse *line1P1;
+    VScaledEllipse *line1P2;
+    VScaledLine    *line1;
+    VScaledEllipse *line2P1;
+    VScaledEllipse *line2P2;
 };
 
 #endif // VISTOOLLINEINTERSECT_H

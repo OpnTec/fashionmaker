@@ -50,8 +50,8 @@ VisToolHeight::VisToolHeight(const VContainer *data, QGraphicsItem *parent)
     base_point = InitPoint(supportColor, this);
     lineP1 = InitPoint(supportColor, this);
     lineP2 = InitPoint(supportColor, this);
-    line = InitItem<QGraphicsLineItem>(supportColor, this);
-    line_intersection = InitItem<QGraphicsLineItem>(supportColor, this); //-V656
+    line = InitItem<VScaledLine>(supportColor, this);
+    line_intersection = InitItem<VScaledLine>(supportColor, this); //-V656
 
     point = InitPoint(mainColor, this);
 }
@@ -110,21 +110,6 @@ void VisToolHeight::setLineP1Id(const quint32 &value)
 void VisToolHeight::setLineP2Id(const quint32 &value)
 {
     lineP2Id = value;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void VisToolHeight::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
-{
-    const qreal scale = SceneScale(scene());
-
-    ScalePoint(point, scale);
-    ScalePoint(base_point, scale);
-    ScalePoint(lineP1, scale);
-    ScalePoint(lineP2, scale);
-    ScalePenWidth(line, scale);
-    ScalePenWidth(line_intersection, scale);
-
-    VisLine::paint(painter, option, widget);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

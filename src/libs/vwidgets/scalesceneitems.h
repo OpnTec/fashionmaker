@@ -2,7 +2,7 @@
  **
  **  @file
  **  @author Roman Telezhynskyi <dismine(at)gmail.com>
- **  @date   14 6, 2017
+ **  @date   21 6, 2017
  **
  **  @brief
  **  @copyright
@@ -26,50 +26,48 @@
  **
  *************************************************************************/
 
-#ifndef VSCENEPOINT_H
-#define VSCENEPOINT_H
+#ifndef SCALESCENEITEMS_H
+#define SCALESCENEITEMS_H
 
-#include <QtGlobal>
-#include <QGraphicsEllipseItem>
+#include <QGraphicsLineItem>
 
-class VGraphicsSimpleTextItem;
-class VPointF;
-class VScaledLine;
+#include "../vmisc/def.h"
 
-class VScenePoint: public QGraphicsEllipseItem
+class VScaledLine : public QGraphicsLineItem
 {
 public:
-    explicit VScenePoint(QGraphicsItem *parent = nullptr);
-    virtual ~VScenePoint() = default;
+    explicit VScaledLine(QGraphicsItem * parent = nullptr);
+    VScaledLine(const QLineF &line, QGraphicsItem * parent = nullptr);
+    virtual ~VScaledLine() = default;
+
+    virtual int  type() const Q_DECL_OVERRIDE {return Type;}
+    enum { Type = UserType + static_cast<int>(Vis::ScaledLine)};
 
     virtual void paint(QPainter *painter, const QStyleOptionGraphicsItem *option,
                        QWidget *widget = nullptr) Q_DECL_OVERRIDE;
-    virtual void RefreshPointGeometry(const VPointF &point);
 
-protected:
-    /** @brief namePoint point label. */
-    VGraphicsSimpleTextItem *m_namePoint;
+    qreal GetBasicWidth() const;
+    void  SetBasicWidth(const qreal &value);
 
-    /** @brief lineName line what we see if label moved too away from point. */
-    VScaledLine             *m_lineName;
-
-    bool m_onlyPoint;
-    bool m_isHovered;
-
-    /** @brief m_baseColor base color of point. */
-    QColor m_baseColor;
-
-    virtual void hoverEnterEvent(QGraphicsSceneHoverEvent *event) Q_DECL_OVERRIDE;
-    virtual void hoverLeaveEvent(QGraphicsSceneHoverEvent *event) Q_DECL_OVERRIDE;
-
-    void RefreshLine();
-
-    void SetOnlyPoint(bool value);
-    bool IsOnlyPoint() const;
 private:
-    Q_DISABLE_COPY(VScenePoint)
+    Q_DISABLE_COPY(VScaledLine)
 
-    void ScaleMainPenWidth(qreal scale);
+    qreal basicWidth;
 };
 
-#endif // VSCENEPOINT_H
+class VScaledEllipse : public QGraphicsEllipseItem
+{
+public:
+    explicit VScaledEllipse(QGraphicsItem * parent = nullptr);
+    virtual ~VScaledEllipse() = default;
+
+    virtual int  type() const Q_DECL_OVERRIDE {return Type;}
+    enum { Type = UserType + static_cast<int>(Vis::ScaledEllipse)};
+
+    virtual void paint(QPainter *painter, const QStyleOptionGraphicsItem *option,
+                       QWidget *widget = nullptr) Q_DECL_OVERRIDE;
+private:
+    Q_DISABLE_COPY(VScaledEllipse)
+};
+
+#endif // SCALESCENEITEMS_H

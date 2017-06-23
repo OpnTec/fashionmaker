@@ -91,13 +91,3 @@ void VisToolEllipticalArc::setRotationAngle(const QString &expression)
 {
     rotationAngle = FindVal(expression, Visualization::data->PlainVariables());
 }
-
-//---------------------------------------------------------------------------------------------------------------------
-void VisToolEllipticalArc::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
-{
-    const qreal scale = SceneScale(scene());
-
-    ScalePoint(arcCenter, scale);
-
-    VisPath::paint(painter, option, widget);
-}

@@ -67,10 +67,10 @@ VisToolTrueDarts::VisToolTrueDarts(const VContainer *data, QGraphicsItem *parent
     dartP2 = InitPoint(supportColor, this);
     dartP3 = InitPoint(supportColor, this);
 
-    lineblP1P1 = InitItem<QGraphicsLineItem>(supportColor, this);
-    lineblP2P2 = InitItem<QGraphicsLineItem>(supportColor, this);
-    p1d2 = InitItem<QGraphicsLineItem>(supportColor, this);
-    d2p2 = InitItem<QGraphicsLineItem>(supportColor, this);
+    lineblP1P1 = InitItem<VScaledLine>(supportColor, this);
+    lineblP2P2 = InitItem<VScaledLine>(supportColor, this);
+    p1d2 = InitItem<VScaledLine>(supportColor, this);
+    d2p2 = InitItem<VScaledLine>(supportColor, this);
 
     point1 = InitPoint(mainColor, this);
     point2 = InitPoint(mainColor, this); //-V656
@@ -162,25 +162,4 @@ void VisToolTrueDarts::setD2PointId(const quint32 &value)
 void VisToolTrueDarts::setD3PointId(const quint32 &value)
 {
     dartP3Id = value;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void VisToolTrueDarts::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
-{
-    const qreal scale = SceneScale(scene());
-
-    ScalePoint(point1, scale);
-    ScalePoint(point2, scale);
-    ScalePoint(baseLineP1, scale);
-    ScalePoint(baseLineP2, scale);
-    ScalePoint(dartP1, scale);
-    ScalePoint(dartP2, scale);
-    ScalePoint(dartP3, scale);
-
-    ScalePenWidth(lineblP1P1, scale);
-    ScalePenWidth(lineblP2P2, scale);
-    ScalePenWidth(p1d2, scale);
-    ScalePenWidth(d2p2, scale);
-
-    VisLine::paint(painter, option, widget);
 }

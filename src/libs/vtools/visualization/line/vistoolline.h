@@ -54,7 +54,7 @@ public:
     virtual int  type() const Q_DECL_OVERRIDE {return Type;}
     enum { Type = UserType + static_cast<int>(Vis::ToolLine)};
 protected:
-    virtual void DrawLine(QGraphicsLineItem *lineItem, const QLineF &line, const QColor &color,
+    virtual void DrawLine(VScaledLine *lineItem, const QLineF &line, const QColor &color,
                           Qt::PenStyle style = Qt::SolidLine) Q_DECL_OVERRIDE;
 private:
     Q_DISABLE_COPY(VisToolLine)

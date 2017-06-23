@@ -53,9 +53,9 @@ VisToolLineIntersectAxis::VisToolLineIntersectAxis(const VContainer *data, QGrap
     lineP1 = InitPoint(supportColor, this);
     lineP2 = InitPoint(supportColor, this);
     basePoint = InitPoint(supportColor, this);
-    baseLine = InitItem<QGraphicsLineItem>(supportColor, this);
-    axisLine = InitItem<QGraphicsLineItem>(supportColor, this);
-    line_intersection = InitItem<QGraphicsLineItem>(supportColor, this);
+    baseLine = InitItem<VScaledLine>(supportColor, this);
+    axisLine = InitItem<VScaledLine>(supportColor, this);
+    line_intersection = InitItem<VScaledLine>(supportColor, this);
     point = InitPoint(mainColor, this);
 }
 
@@ -131,22 +131,6 @@ void VisToolLineIntersectAxis::setPoint2Id(const quint32 &value)
 void VisToolLineIntersectAxis::setAxisPointId(const quint32 &value)
 {
     axisPointId = value;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void VisToolLineIntersectAxis::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
-{
-    const qreal scale = SceneScale(scene());
-
-    ScalePoint(point, scale);
-    ScalePoint(lineP1, scale);
-    ScalePoint(lineP2, scale);
-    ScalePoint(basePoint, scale);
-    ScalePenWidth(baseLine, scale);
-    ScalePenWidth(axisLine, scale);
-    ScalePenWidth(line_intersection, scale);
-
-    VisLine::paint(painter, option, widget);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

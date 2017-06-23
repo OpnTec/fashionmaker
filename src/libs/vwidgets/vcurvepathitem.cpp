@@ -27,6 +27,7 @@
  *************************************************************************/
 
 #include "vcurvepathitem.h"
+#include "../vwidgets/global.h"
 
 #include <QPainter>
 
@@ -38,8 +39,48 @@ VCurvePathItem::VCurvePathItem(QGraphicsItem *parent)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+QPainterPath VCurvePathItem::shape() const
+{
+    QPainterPath itemPath = path();
+
+    if (m_direction != QPainterPath())
+    {
+        itemPath.addPath(m_direction);
+    }
+
+    itemPath.setFillRule(Qt::WindingFill);
+
+    // We unfortunately need this hack as QPainterPathStroker will set a width of 1.0
+    // if we pass a value of 0.0 to QPainterPathStroker::setWidth()
+    const qreal penWidthZero = qreal(0.00000001);
+
+    if (itemPath == QPainterPath() || pen() == Qt::NoPen)
+    {
+        return itemPath;
+    }
+
+    QPainterPathStroker ps;
+    ps.setCapStyle(pen().capStyle());
+    if (pen().widthF() <= 0.0)
+    {
+        ps.setWidth(penWidthZero);
+    }
+    else
+    {
+        ps.setWidth(pen().widthF());
+    }
+    ps.setJoinStyle(pen().joinStyle());
+    ps.setMiterLimit(pen().miterLimit());
+    QPainterPath p = ps.createStroke(itemPath);
+    p.addPath(itemPath);
+    return p;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 void VCurvePathItem::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
 {
+    ScalePenWidth();
+
     if (m_direction != QPainterPath())
     {
         painter->save();
@@ -61,4 +102,15 @@ void VCurvePathItem::paint(QPainter *painter, const QStyleOptionGraphicsItem *op
 void VCurvePathItem::SetDirectionPath(const QPainterPath &path)
 {
     m_direction = path;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VCurvePathItem::ScalePenWidth()
+{
+    const qreal width = ScaleWidth(widthMainLine, SceneScale(scene()));
+
+    QPen toolPen = pen();
+    toolPen.setWidthF(width);
+
+    setPen(toolPen);
 }

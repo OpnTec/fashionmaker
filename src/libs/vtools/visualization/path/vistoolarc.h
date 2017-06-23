@@ -52,15 +52,12 @@ public:
     void         setF2(const QString &expression);
     virtual int  type() const Q_DECL_OVERRIDE {return Type;}
     enum { Type = UserType + static_cast<int>(Vis::ToolArc)};
-
-    virtual void   paint(QPainter *painter, const QStyleOptionGraphicsItem *option,
-                         QWidget *widget = nullptr) Q_DECL_OVERRIDE;
 private:
     Q_DISABLE_COPY(VisToolArc)
-    QGraphicsEllipseItem *arcCenter;
-    qreal                radius;
-    qreal                f1;
-    qreal                f2;
+    VScaledEllipse *arcCenter;
+    qreal           radius;
+    qreal           f1;
+    qreal           f2;
 };
 
 #endif // VISTOOLARC_H

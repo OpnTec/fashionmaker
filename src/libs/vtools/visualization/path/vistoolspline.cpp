@@ -222,17 +222,6 @@ QPointF VisToolSpline::GetP3() const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VisToolSpline::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
-{
-    const qreal scale = SceneScale(scene());
-
-    ScalePoint(point1, scale);
-    ScalePoint(point4, scale);
-
-    VisPath::paint(painter, option, widget);
-}
-
-//---------------------------------------------------------------------------------------------------------------------
 void VisToolSpline::MouseLeftPressed()
 {
     if (mode == Mode::Creation)

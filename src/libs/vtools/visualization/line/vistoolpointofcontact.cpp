@@ -50,7 +50,7 @@ VisToolPointOfContact::VisToolPointOfContact(const VContainer *data, QGraphicsIt
     arc_point = InitPoint(supportColor, this);
     lineP1 = InitPoint(supportColor, this);
     lineP2 = InitPoint(supportColor, this);
-    circle = InitItem<QGraphicsEllipseItem>(supportColor, this);
+    circle = InitItem<VScaledEllipse>(supportColor, this);
 
     point = InitPoint(mainColor, this);
 }
@@ -113,18 +113,4 @@ void VisToolPointOfContact::setRadiusId(const quint32 &value)
 void VisToolPointOfContact::setRadius(const QString &expression)
 {
     radius = FindLength(expression, Visualization::data->PlainVariables());
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void VisToolPointOfContact::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
-{
-    const qreal scale = SceneScale(scene());
-
-    ScalePoint(point, scale);
-    ScalePoint(lineP1, scale);
-    ScalePoint(lineP2, scale);
-    ScalePoint(arc_point, scale);
-    ScalePoint(circle, scale);
-
-    VisLine::paint(painter, option, widget);
 }

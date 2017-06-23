@@ -48,7 +48,7 @@ VisToolPointOfIntersection::VisToolPointOfIntersection(const VContainer *data, Q
 {
     axisP1 = InitPoint(supportColor, this);
     axisP2 = InitPoint(supportColor, this); //-V656
-    axis2 = InitItem<QGraphicsLineItem>(supportColor, this);
+    axis2 = InitItem<VScaledLine>(supportColor, this);
 
     point = InitPoint(mainColor, this);
 }
@@ -91,19 +91,6 @@ void VisToolPointOfIntersection::RefreshGeometry()
 void VisToolPointOfIntersection::setPoint2Id(const quint32 &value)
 {
     point2Id = value;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void VisToolPointOfIntersection::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
-{
-    const qreal scale = SceneScale(scene());
-
-    ScalePoint(point, scale);
-    ScalePoint(axisP1, scale);
-    ScalePoint(axisP2, scale);
-    ScalePenWidth(axis2, scale);
-
-    VisLine::paint(painter, option, widget);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

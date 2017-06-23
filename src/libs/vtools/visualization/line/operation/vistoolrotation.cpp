@@ -65,7 +65,7 @@ VisToolRotation::VisToolRotation(const VContainer *data, QGraphicsItem *parent)
 {
     point = InitPoint(supportColor2, this);
     angleArc = InitItem<VCurvePathItem>(supportColor2, this);
-    xAxis = InitItem<QGraphicsLineItem>(supportColor2, this);
+    xAxis = InitItem<VScaledLine>(supportColor2, this);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -140,7 +140,7 @@ void VisToolRotation::RefreshGeometry()
                 const QSharedPointer<VPointF> p = Visualization::data->GeometricObject<VPointF>(id);
 
                 ++iPoint;
-                QGraphicsEllipseItem *point = GetPoint(static_cast<quint32>(iPoint), supportColor2);
+                VScaledEllipse *point = GetPoint(static_cast<quint32>(iPoint), supportColor2);
                 DrawPoint(point, static_cast<QPointF>(*p), supportColor2);
 
                 ++iPoint;
@@ -189,18 +189,6 @@ void VisToolRotation::RefreshGeometry()
     }
 }
 QT_WARNING_POP
-
-//---------------------------------------------------------------------------------------------------------------------
-void VisToolRotation::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
-{
-    const qreal scale = SceneScale(scene());
-
-    ScalePoint(point, scale);
-    ScalePenWidth(angleArc, scale);
-    ScalePenWidth(xAxis, scale);
-
-    VisOperation::paint(painter, option, widget);
-}
 
 //---------------------------------------------------------------------------------------------------------------------
 void VisToolRotation::SetOriginPointId(quint32 value)

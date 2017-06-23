@@ -58,30 +58,6 @@ VSimpleCurve::VSimpleCurve(quint32 id, const QSharedPointer<VAbstractCurve> &cur
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VSimpleCurve::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
-{
-    qreal width = 1;
-    if (m_isHovered)
-    {
-        width = widthMainLine;
-    }
-    else
-    {
-        width = widthHairLine;
-    }
-
-    const qreal scale = SceneScale(scene());
-    if (scale > 1)
-    {
-        width = qMax(1., width/scale);
-    }
-
-    setPen(QPen(CorrectColor(this, m_curve->GetColor()), width, LineStyleToPenStyle(m_curve->GetPenStyle())));
-
-    VCurvePathItem::paint(painter, option, widget);
-}
-
-//---------------------------------------------------------------------------------------------------------------------
 void VSimpleCurve::RefreshGeometry(const QSharedPointer<VAbstractCurve> &curve)
 {
     m_curve = curve;
@@ -190,4 +166,21 @@ void VSimpleCurve::keyReleaseEvent(QKeyEvent *event)
             break;
     }
     QGraphicsPathItem::keyReleaseEvent ( event );
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VSimpleCurve::ScalePenWidth()
+{
+    qreal width = 1;
+    if (m_isHovered)
+    {
+        width = widthMainLine;
+    }
+    else
+    {
+        width = widthHairLine;
+    }
+
+    width = ScaleWidth(width, SceneScale(scene()));
+    setPen(QPen(CorrectColor(this, m_curve->GetColor()), width, LineStyleToPenStyle(m_curve->GetPenStyle())));
 }

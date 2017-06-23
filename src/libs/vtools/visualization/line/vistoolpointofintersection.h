@@ -53,16 +53,13 @@ public:
     void         setPoint2Id(const quint32 &value);
     virtual int  type() const Q_DECL_OVERRIDE {return Type;}
     enum { Type = UserType + static_cast<int>(Vis::ToolPointOfIntersection)};
-
-    virtual void   paint(QPainter *painter, const QStyleOptionGraphicsItem *option,
-                         QWidget *widget = nullptr) Q_DECL_OVERRIDE;
 private:
     Q_DISABLE_COPY(VisToolPointOfIntersection)
     quint32              point2Id;
-    QGraphicsEllipseItem *point;
-    QGraphicsEllipseItem *axisP1;//axis1 is class themself
-    QGraphicsEllipseItem *axisP2;
-    QGraphicsLineItem    *axis2;//axis1 is class themself
+    VScaledEllipse *point;
+    VScaledEllipse *axisP1;//axis1 is class themself
+    VScaledEllipse *axisP2;
+    VScaledLine    *axis2;//axis1 is class themself
 
     void         ShowIntersection(const QLineF &axis1, const QLineF &axis2, const QColor &color);
 };

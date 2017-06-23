@@ -2,13 +2,13 @@
  **
  **  @file
  **  @author Roman Telezhynskyi <dismine(at)gmail.com>
- **  @date   12 9, 2016
+ **  @date   21 6, 2017
  **
  **  @brief
  **  @copyright
  **  This source code is part of the Valentine project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
- **  Copyright (C) 2016 Valentina project
+ **  Copyright (C) 2017 Valentina project
  **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
  **
  **  Valentina is free software: you can redistribute it and/or modify
@@ -26,60 +26,61 @@
  **
  *************************************************************************/
 
-#include "vistoolflippingbyline.h"
-#include "../vgeometry/vpointf.h"
+#include "scalesceneitems.h"
+#include "global.h"
+
+#include <QPen>
 
 //---------------------------------------------------------------------------------------------------------------------
-VisToolFlippingByLine::VisToolFlippingByLine(const VContainer *data, QGraphicsItem *parent)
-    : VisOperation(data, parent),
-      object2Id(NULL_ID),
-      point1(nullptr),
-      point2(nullptr)
+VScaledLine::VScaledLine(QGraphicsItem *parent)
+    : QGraphicsLineItem(parent),
+      basicWidth(widthMainLine)
+{}
+
+//---------------------------------------------------------------------------------------------------------------------
+VScaledLine::VScaledLine(const QLineF &line, QGraphicsItem *parent)
+    : QGraphicsLineItem(line, parent),
+      basicWidth(widthMainLine)
+{}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VScaledLine::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
 {
-    point1 = InitPoint(supportColor2, this);
-    point2 = InitPoint(supportColor2, this);
+    QPen lPen = pen();
+    lPen.setWidthF(ScaleWidth(basicWidth, SceneScale(scene())));
+    setPen(lPen);
+
+    QGraphicsLineItem::paint(painter, option, widget);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VisToolFlippingByLine::RefreshGeometry()
+qreal VScaledLine::GetBasicWidth() const
 {
-    if (objects.isEmpty())
-    {
-        return;
-    }
-
-    QPointF firstPoint;
-    QPointF secondPoint;
-
-    if (object1Id != NULL_ID)
-    {
-        firstPoint = static_cast<QPointF>(*Visualization::data->GeometricObject<VPointF>(object1Id));
-        DrawPoint(point1, firstPoint, supportColor2);
-
-        if (object2Id == NULL_ID)
-        {
-            secondPoint = Visualization::scenePos;
-        }
-        else
-        {
-            secondPoint = static_cast<QPointF>(*Visualization::data->GeometricObject<VPointF>(object2Id));
-            DrawPoint(point2, secondPoint, supportColor2);
-        }
-
-        DrawLine(this, QLineF(firstPoint, secondPoint), supportColor2, Qt::DashLine);
-    }
-
-    RefreshFlippedObjects(firstPoint, secondPoint);
+    return basicWidth;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VisToolFlippingByLine::SetFirstLinePointId(quint32 value)
+void VScaledLine::SetBasicWidth(const qreal &value)
 {
-    object1Id = value;
+    basicWidth = value;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VisToolFlippingByLine::SetSecondLinePointId(quint32 value)
+VScaledEllipse::VScaledEllipse(QGraphicsItem *parent)
+    : QGraphicsEllipseItem(parent)
+{}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VScaledEllipse::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
 {
-    object2Id = value;
+    const qreal scale = SceneScale(scene());
+    const qreal width = ScaleWidth(widthMainLine, scale);
+
+    QPen visPen = pen();
+    visPen.setWidthF(width);
+
+    setPen(visPen);
+    ScaleCircleSize(this, scale);
+
+    QGraphicsEllipseItem::paint(painter, option, widget);
 }

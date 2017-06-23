@@ -52,21 +52,18 @@ public:
     void         setLength(const QString &expression);
     virtual int  type() const Q_DECL_OVERRIDE {return Type;}
     enum { Type = UserType + static_cast<int>(Vis::ToolShoulderPoint)};
-
-    virtual void   paint(QPainter *painter, const QStyleOptionGraphicsItem *option,
-                         QWidget *widget = nullptr) Q_DECL_OVERRIDE;
 private:
     Q_DISABLE_COPY(VisToolShoulderPoint)
-    quint32              lineP1Id;
-    quint32              lineP2Id;
-    QGraphicsEllipseItem *point;
-    QGraphicsEllipseItem *line1P1;
-    QGraphicsEllipseItem *line1P2;
-    QGraphicsLineItem    *line1;
-    QGraphicsEllipseItem *line2P2;
-    QGraphicsLineItem    *line2;
-    QGraphicsLineItem    *line3;
-    qreal                length;
+    quint32         lineP1Id;
+    quint32         lineP2Id;
+    VScaledEllipse *point;
+    VScaledEllipse *line1P1;
+    VScaledEllipse *line1P2;
+    VScaledLine    *line1;
+    VScaledEllipse *line2P2;
+    VScaledLine    *line2;
+    VScaledLine    *line3;
+    qreal           length;
 };
 
 #endif // VISTOOLSHOULDERPOINT_H

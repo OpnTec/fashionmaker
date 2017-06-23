@@ -50,11 +50,11 @@ VisToolShoulderPoint::VisToolShoulderPoint(const VContainer *data, QGraphicsItem
 {
     line1P1 = InitPoint(supportColor, this);
     line1P2 = InitPoint(supportColor, this); //-V656
-    line1 = InitItem<QGraphicsLineItem>(supportColor, this);
+    line1 = InitItem<VScaledLine>(supportColor, this);
 
     line2P2 = InitPoint(supportColor, this);
-    line2 = InitItem<QGraphicsLineItem>(supportColor, this);
-    line3 = InitItem<QGraphicsLineItem>(supportColor, this); //-V656
+    line2 = InitItem<VScaledLine>(supportColor, this);
+    line3 = InitItem<VScaledLine>(supportColor, this); //-V656
 
     point = InitPoint(mainColor, this);
 }
@@ -130,20 +130,4 @@ void VisToolShoulderPoint::setLineP2Id(const quint32 &value)
 void VisToolShoulderPoint::setLength(const QString &expression)
 {
     length = FindLength(expression, Visualization::data->PlainVariables());
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void VisToolShoulderPoint::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
-{
-    const qreal scale = SceneScale(scene());
-
-    ScalePoint(point, scale);
-    ScalePoint(line1P1, scale);
-    ScalePoint(line1P2, scale);
-    ScalePenWidth(line1, scale);
-    ScalePoint(line2P2, scale);
-    ScalePenWidth(line2, scale);
-    ScalePenWidth(line3, scale);
-
-    VisLine::paint(painter, option, widget);
 }
