@@ -180,6 +180,10 @@ void dx_iface::InitHeader(VarMeasurement varMeasurement, VarInsunits varInsunits
     // explicitly.
     cData.headerC.addDouble("$DIMLFAC", 1.0, 40);
 
+    cData.headerC.addDouble("$LTSCALE", 0.5, 40);
+    cData.headerC.addDouble("$PSLTSCALE", 1.0, 70);
+    cData.headerC.addInt("$PLINEGEN", 1, 70);
+
     QString dateTime = QDateTime::currentDateTime().toString("yyyyMMdd.HHmmsszzz");
     dateTime.chop(1);// we need hundredths of a second
     cData.headerC.addStr("$TDCREATE", dateTime.toStdString(), 40);
@@ -187,29 +191,47 @@ void dx_iface::InitHeader(VarMeasurement varMeasurement, VarInsunits varInsunits
 
 void dx_iface::InitLTypes()
 {
-    cData.lineTypes.push_back(DRW_LType("ACAD_ISO02W100", "ACAD_ISO02W100"));
-    cData.lineTypes.push_back(DRW_LType("ACAD_ISO02W100", "ACAD_ISO02W100"));
-    cData.lineTypes.push_back(DRW_LType("ACAD_ISO03W100", "ACAD_ISO03W100"));
-    cData.lineTypes.push_back(DRW_LType("ACAD_ISO04W100", "ACAD_ISO04W100"));
-    cData.lineTypes.push_back(DRW_LType("ACAD_ISO05W100", "ACAD_ISO05W100"));
-    cData.lineTypes.push_back(DRW_LType("BORDER", "BORDER"));
-    cData.lineTypes.push_back(DRW_LType("BORDER2", "BORDER2"));
-    cData.lineTypes.push_back(DRW_LType("BORDERX2", "BORDERX2"));
-    cData.lineTypes.push_back(DRW_LType("CENTER", "CENTER"));
-    cData.lineTypes.push_back(DRW_LType("CENTER2", "CENTER2"));
-    cData.lineTypes.push_back(DRW_LType("CENTERX2", "CENTERX2"));
-    cData.lineTypes.push_back(DRW_LType("DASHDOT", "DASHDOT"));
-    cData.lineTypes.push_back(DRW_LType("DASHDOT2", "DASHDOT2"));
-    cData.lineTypes.push_back(DRW_LType("DASHDOTX2", "DASHDOTX2"));
-    cData.lineTypes.push_back(DRW_LType("DASHED", "DASHED"));
-    cData.lineTypes.push_back(DRW_LType("DASHED2", "DASHED2"));
-    cData.lineTypes.push_back(DRW_LType("DASHEDX2", "DASHEDX2"));
-    cData.lineTypes.push_back(DRW_LType("DIVIDE", "DIVIDE"));
-    cData.lineTypes.push_back(DRW_LType("DIVIDE2", "DIVIDE2"));
-    cData.lineTypes.push_back(DRW_LType("DIVIDEX2", "DIVIDEX2"));
-    cData.lineTypes.push_back(DRW_LType("DOT", "DOT"));
-    cData.lineTypes.push_back(DRW_LType("DOT2", "DOT2"));
-    cData.lineTypes.push_back(DRW_LType("DOTX2", "DOTX2"));
+    DRW_LType ltype;
+    ltype.name = "DOT";
+    ltype.desc = "Dot . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .";
+    ltype.size = 2;
+    ltype.length = 0.125;
+    ltype.path.push_back(0.0);
+    ltype.path.push_back(-0.125);
+    cData.lineTypes.push_back(ltype);
+
+    ltype.path.clear();
+    ltype.name = "DASHEDTINY";
+    ltype.desc = "Dashed (.15x) _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _";
+    ltype.size = 2;
+    ltype.length = 2.8575;
+    ltype.path.push_back(1.905);
+    ltype.path.push_back(-0.9525);
+    cData.lineTypes.push_back(ltype);
+
+    ltype.path.clear();
+    ltype.name = "DASHDOT2";
+    ltype.desc = "Dash dot2 _._._._._._._._._._._._._._._._._._._._._._._._._._._._._._.";
+    ltype.size = 4;
+    ltype.length = 0.5;
+    ltype.path.push_back(0.25);
+    ltype.path.push_back(-0.125);
+    ltype.path.push_back(0.0);
+    ltype.path.push_back(-0.125);
+    cData.lineTypes.push_back(ltype);
+
+    ltype.path.clear();
+    ltype.name = "DIVIDE2";
+    ltype.desc = "Divide2 __..__..__..__..__..__..__..__..__..__..__..__..__..__..__..__..";
+    ltype.size = 6;
+    ltype.length = 0.625;
+    ltype.path.push_back(0.25);
+    ltype.path.push_back(-0.125);
+    ltype.path.push_back(0.0);
+    ltype.path.push_back(-0.125);
+    ltype.path.push_back(0.0);
+    ltype.path.push_back(-0.125);
+    cData.lineTypes.push_back(ltype);
 }
 
 void dx_iface::InitLayers()

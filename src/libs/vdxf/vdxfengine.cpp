@@ -138,7 +138,10 @@ void VDxfEngine::drawPath(const QPainterPath &path)
             poly->color = getPenColor();
             poly->lWeight = DRW_LW_Conv::widthByLayer;
             poly->lineType = getPenStyle();
-            poly->ltypeScale = 1.0;
+            if (polygon.size() > 1 && polygon.first() == polygon.last())
+            {
+                poly->flags = 1; // closed
+            }
 
             for (int i=0; i < polygon.count(); ++i)
             {
@@ -155,7 +158,10 @@ void VDxfEngine::drawPath(const QPainterPath &path)
             poly->color = getPenColor();
             poly->lWeight = DRW_LW_Conv::widthByLayer;
             poly->lineType = getPenStyle();
-            poly->ltypeScale = 1.0;
+            if (polygon.size() > 1 && polygon.first() == polygon.last())
+            {
+                poly->flags = 1; // closed
+            }
 
             for (int i=0; i < polygon.count(); ++i)
             {
@@ -185,7 +191,6 @@ void VDxfEngine::drawLines(const QLineF * lines, int lineCount)
         line->color = getPenColor();
         line->lWeight = DRW_LW_Conv::widthByLayer;
         line->lineType = getPenStyle();
-        line->ltypeScale = 1.0;
 
         input->AddEntity(line);
     }
@@ -214,7 +219,6 @@ void VDxfEngine::drawPolygon(const QPointF *points, int pointCount, PolygonDrawM
         poly->color = getPenColor();
         poly->lWeight = DRW_LW_Conv::widthByLayer;
         poly->lineType = getPenStyle();
-        poly->ltypeScale = 1.0;
 
         for (int i = 0; i < pointCount; ++i)
         {
@@ -232,7 +236,6 @@ void VDxfEngine::drawPolygon(const QPointF *points, int pointCount, PolygonDrawM
         poly->color = getPenColor();
         poly->lWeight = DRW_LW_Conv::widthByLayer;
         poly->lineType = getPenStyle();
-        poly->ltypeScale = 1.0;
 
         for (int i = 0; i < pointCount; ++i)
         {
@@ -288,7 +291,6 @@ void VDxfEngine::drawEllipse(const QRectF & rect)
     ellipse->color = getPenColor();
     ellipse->lWeight = DRW_LW_Conv::widthByLayer;
     ellipse->lineType = getPenStyle();
-    ellipse->ltypeScale = 1.0;
 
     input->AddEntity(ellipse);
 }
@@ -324,7 +326,6 @@ void VDxfEngine::drawTextItem(const QPointF & p, const QTextItem & textItem)
         text->color = getPenColor();
         text->lWeight = DRW_LW_Conv::widthByLayer;
         text->lineType = getPenStyle();
-        text->ltypeScale = 1.0;
 
         input->AddEntity(text);
     }
@@ -344,7 +345,6 @@ void VDxfEngine::drawTextItem(const QPointF & p, const QTextItem & textItem)
         text->color = getPenColor();
         text->lWeight = DRW_LW_Conv::widthByLayer;
         text->lineType = getPenStyle();
-        text->ltypeScale = 1.0;
 
         input->AddEntity(text);
     }
@@ -423,13 +423,13 @@ std::string VDxfEngine::getPenStyle()
     switch (state->pen().style())
     {
         case Qt::DashLine:
-            return "DASHED";
+            return "DASHEDTINY";
         case Qt::DotLine:
             return "DOT";
         case Qt::DashDotLine:
-            return "DASHDOT";
+            return "DASHDOT2";
         case Qt::DashDotDotLine:
-            return "DIVIDE";
+            return "DIVIDE2";
         case Qt::SolidLine:
         default:
             return "BYLAYER";

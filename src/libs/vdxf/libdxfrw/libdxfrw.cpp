@@ -808,12 +808,14 @@ bool dxfRW::writePolyline(DRW_Polyline *ent) {
         writer->writeString(0, "VERTEX");
         writeEntity(ent);
         if (version > DRW::AC1009)
+        {
             writer->writeString(100, "AcDbVertex");
             if(is3d) {
                 writer->writeString(100, "AcDb3dPolylineVertex");
             } else {
                 writer->writeString(100, "AcDb2dVertex");
             }
+        }
         if ( (v->flags & 128) && !(v->flags & 64) ) {
             writer->writeDouble(10, 0);
             writer->writeDouble(20, 0);
