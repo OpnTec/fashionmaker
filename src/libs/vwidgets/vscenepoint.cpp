@@ -49,6 +49,9 @@ VScenePoint::VScenePoint(QGraphicsItem *parent)
     m_namePoint = new VGraphicsSimpleTextItem(this);
     m_lineName = new VScaledLine(this);
     m_lineName->SetBasicWidth(widthHairLine);
+    m_lineName->setLine(QLineF(0, 0, 1, 0));
+    m_lineName->setVisible(false);
+
     this->setBrush(QBrush(Qt::NoBrush));
     this->setAcceptHoverEvents(true);
     this->setFlag(QGraphicsItem::ItemIsFocusable, true);// For keyboard input focus
@@ -72,7 +75,6 @@ void VScenePoint::paint(QPainter *painter, const QStyleOptionGraphicsItem *optio
         if (not m_onlyPoint)
         {
             m_namePoint->setVisible(true);
-            m_lineName->setVisible(true);
 
             QPen lPen = m_lineName->pen();
             lPen.setColor(CorrectColor(m_lineName, Qt::black));
@@ -141,7 +143,6 @@ void VScenePoint::RefreshLine()
         VGObject::LineIntersectCircle(QPointF(), ScaledRadius(SceneScale(scene())),
                                       QLineF(QPointF(), nameRec.center() - scenePos()), p1, p2);
         const QPointF pRec = VGObject::LineIntersectRect(nameRec, QLineF(scenePos(), nameRec.center()));
-        m_lineName->setLine(QLineF(p1, pRec - scenePos()));
 
         if (QLineF(p1, pRec - scenePos()).length() <= ToPixel(4, Unit::Mm))
         {
@@ -149,6 +150,7 @@ void VScenePoint::RefreshLine()
         }
         else
         {
+            m_lineName->setLine(QLineF(p1, pRec - scenePos()));
             m_lineName->setVisible(true);
         }
     }

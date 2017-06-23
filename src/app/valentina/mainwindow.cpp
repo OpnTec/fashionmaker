@@ -4653,7 +4653,7 @@ void MainWindow::ZoomFirstShow()
     {
         ActionDraw(true);
     }
-    ui->view->ZoomFitBest();
+    ZoomFitBestCurrent();
 
     VMainGraphicsView::NewSceneRect(sceneDraw, ui->view);
     VMainGraphicsView::NewSceneRect(sceneDetails, ui->view);
