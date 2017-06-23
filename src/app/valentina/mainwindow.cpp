@@ -1191,8 +1191,6 @@ void MainWindow::ZoomFitBestCurrent()
     transform.setMatrix(factor, transform.m12(), transform.m13(), transform.m21(), factor, transform.m23(),
                         transform.m31(), transform.m32(), transform.m33());
     ui->view->setTransform(transform);
-
-    VMainGraphicsView::NewSceneRect(ui->view->scene(), ui->view);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
