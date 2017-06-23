@@ -44,6 +44,7 @@
 #include "../vpatterndb/vcontainer.h"
 #include "../visualization.h"
 #include "vispath.h"
+#include "../vwidgets/scalesceneitems.h"
 
 //---------------------------------------------------------------------------------------------------------------------
 VisToolCutSpline::VisToolCutSpline(const VContainer *data, QGraphicsItem *parent)
@@ -65,7 +66,7 @@ void VisToolCutSpline::RefreshGeometry()
     if (object1Id > NULL_ID)
     {
         const auto spl = Visualization::data->GeometricObject<VAbstractCubicBezier>(object1Id);
-        DrawPath(this, spl->GetPath(), spl->GetDirectionPath(), supportColor, lineStyle, Qt::RoundCap);
+        DrawPath(this, spl->GetPath(), spl->DirectionArrows(), supportColor, lineStyle, Qt::RoundCap);
 
         if (not qFuzzyIsNull(length))
         {
@@ -80,8 +81,8 @@ void VisToolCutSpline::RefreshGeometry()
 
             DrawPoint(point, p, mainColor);
 
-            DrawPath(spl1, sp1.GetPath(), sp1.GetDirectionPath(), Qt::darkGreen, lineStyle, Qt::RoundCap);
-            DrawPath(spl2, sp2.GetPath(), sp2.GetDirectionPath(), Qt::darkRed, lineStyle, Qt::RoundCap);
+            DrawPath(spl1, sp1.GetPath(), sp1.DirectionArrows(), Qt::darkGreen, lineStyle, Qt::RoundCap);
+            DrawPath(spl2, sp2.GetPath(), sp2.DirectionArrows(), Qt::darkRed, lineStyle, Qt::RoundCap);
         }
     }
 }
@@ -90,16 +91,4 @@ void VisToolCutSpline::RefreshGeometry()
 void VisToolCutSpline::setLength(const QString &expression)
 {
     length = FindLength(expression, Visualization::data->PlainVariables());
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void VisToolCutSpline::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
-{
-    const qreal scale = SceneScale(scene());
-
-    ScalePoint(point, scale);
-    ScalePenWidth(spl1, scale);
-    ScalePenWidth(spl2, scale);
-
-    VisPath::paint(painter, option, widget);
 }

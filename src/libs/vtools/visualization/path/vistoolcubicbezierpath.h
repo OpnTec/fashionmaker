@@ -55,22 +55,19 @@ public:
 
     virtual int  type() const Q_DECL_OVERRIDE {return Type;}
     enum { Type = UserType + static_cast<int>(Vis::ToolCubicBezierPath)};
-
-    virtual void   paint(QPainter *painter, const QStyleOptionGraphicsItem *option,
-                         QWidget *widget = nullptr) Q_DECL_OVERRIDE;
 protected:
     Q_DISABLE_COPY(VisToolCubicBezierPath)
-    QVector<QGraphicsEllipseItem *> mainPoints;
-    QVector<QGraphicsEllipseItem *> ctrlPoints;
-    QVector<QGraphicsLineItem *>    lines;
-    VCurvePathItem                  *newCurveSegment;
-    VCubicBezierPath                path;
-    QGraphicsLineItem               *helpLine1;
-    QGraphicsLineItem               *helpLine2;
+    QVector<VScaledEllipse *> mainPoints;
+    QVector<VScaledEllipse *> ctrlPoints;
+    QVector<VScaledLine *>    lines;
+    VCurvePathItem           *newCurveSegment;
+    VCubicBezierPath          path;
+    VScaledLine              *helpLine1;
+    VScaledLine              *helpLine2;
 
 private:
-    QGraphicsEllipseItem *getPoint(QVector<QGraphicsEllipseItem *> &points, quint32 i, qreal z = 0);
-    QGraphicsLineItem    *getLine(quint32 i);
+    VScaledEllipse *getPoint(QVector<VScaledEllipse *> &points, quint32 i, qreal z = 0);
+    VScaledLine    *getLine(quint32 i);
     void Creating(const QVector<VPointF> &pathPoints , int pointsLeft);
     void RefreshToolTip();
 };

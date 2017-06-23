@@ -53,20 +53,17 @@ public:
     void         setLineP2Id(const quint32 &value);
     virtual int  type() const Q_DECL_OVERRIDE {return Type;}
     enum { Type = UserType + static_cast<int>(Vis::ToolHeight)};
-
-    virtual void   paint(QPainter *painter, const QStyleOptionGraphicsItem *option,
-                         QWidget *widget = nullptr) Q_DECL_OVERRIDE;
 private:
     Q_DISABLE_COPY(VisToolHeight)
     //base point in parent class
     quint32              lineP1Id;//first point of line
     quint32              lineP2Id;//second point of line
-    QGraphicsEllipseItem *point;
-    QGraphicsEllipseItem *base_point;
-    QGraphicsEllipseItem *lineP1;
-    QGraphicsEllipseItem *lineP2;
-    QGraphicsLineItem    *line;
-    QGraphicsLineItem    *line_intersection;
+    VScaledEllipse *point;
+    VScaledEllipse *base_point;
+    VScaledEllipse *lineP1;
+    VScaledEllipse *lineP2;
+    VScaledLine    *line;
+    VScaledLine    *line_intersection;
     void         ShowIntersection(const QLineF &height_line, const QLineF &base_line);
 };
 

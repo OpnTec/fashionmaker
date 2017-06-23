@@ -52,8 +52,8 @@ VisToolPointOfIntersectionCircles::VisToolPointOfIntersectionCircles(const VCont
 {
     this->setPen(QPen(Qt::NoPen)); // don't use parent this time
 
-    c1Path = InitItem<QGraphicsEllipseItem>(Qt::darkGreen, this);
-    c2Path = InitItem<QGraphicsEllipseItem>(Qt::darkRed, this);
+    c1Path = InitItem<VScaledEllipse>(Qt::darkGreen, this);
+    c2Path = InitItem<VScaledEllipse>(Qt::darkRed, this);
     point = InitPoint(mainColor, this);
     c1Center = InitPoint(supportColor, this);
     c2Center = InitPoint(supportColor, this);  //-V656
@@ -124,19 +124,4 @@ void VisToolPointOfIntersectionCircles::setC2Radius(const QString &value)
 void VisToolPointOfIntersectionCircles::setCrossPoint(const CrossCirclesPoint &value)
 {
     crossPoint = value;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void VisToolPointOfIntersectionCircles::paint(QPainter *painter, const QStyleOptionGraphicsItem *option,
-                                              QWidget *widget)
-{
-    const qreal scale = SceneScale(scene());
-
-    ScalePoint(point, scale);
-    ScalePoint(c1Center, scale);
-    ScalePoint(c2Center, scale);
-    ScalePoint(c1Path, scale);
-    ScalePoint(c2Path, scale);
-
-    VisLine::paint(painter, option, widget);
 }

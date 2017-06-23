@@ -53,7 +53,7 @@ VisToolAlongLine::VisToolAlongLine(const VContainer *data, QGraphicsItem *parent
 
     lineP1 = InitPoint(supportColor, this);
     lineP2 = InitPoint(supportColor, this); //-V656
-    line = InitItem<QGraphicsLineItem>(supportColor, this);
+    line = InitItem<VScaledLine>(supportColor, this);
     point = InitPoint(mainColor, this);
 }
 
@@ -67,19 +67,6 @@ void VisToolAlongLine::setObject2Id(const quint32 &value)
 void VisToolAlongLine::setLength(const QString &expression)
 {
     length = FindLength(expression, Visualization::data->PlainVariables());
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void VisToolAlongLine::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
-{
-    const qreal scale = SceneScale(scene());
-
-    ScalePoint(point, scale);
-    ScalePoint(lineP1, scale);
-    ScalePoint(lineP2, scale);
-    ScalePenWidth(line, scale);
-
-    VisLine::paint(painter, option, widget);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

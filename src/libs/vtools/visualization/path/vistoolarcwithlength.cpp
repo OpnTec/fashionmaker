@@ -60,7 +60,7 @@ void VisToolArcWithLength::RefreshGeometry()
         if (not qFuzzyIsNull(radius) && f1 >= 0 && not qFuzzyIsNull(length))
         {
             VArc arc = VArc (length, *first, radius, f1);
-            DrawPath(this, arc.GetPath(), arc.GetDirectionPath(), mainColor, lineStyle, Qt::RoundCap);
+            DrawPath(this, arc.GetPath(), arc.DirectionArrows(), mainColor, lineStyle, Qt::RoundCap);
         }
     }
 }
@@ -81,14 +81,4 @@ void VisToolArcWithLength::setF1(const QString &expression)
 void VisToolArcWithLength::setLength(const QString &expression)
 {
     length = FindLength(expression, Visualization::data->PlainVariables());
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void VisToolArcWithLength::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
-{
-    const qreal scale = SceneScale(scene());
-
-    ScalePoint(arcCenter, scale);
-
-    VisPath::paint(painter, option, widget);
 }

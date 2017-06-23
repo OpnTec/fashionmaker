@@ -55,17 +55,14 @@ public:
 
     virtual int  type() const Q_DECL_OVERRIDE {return Type;}
     enum { Type = UserType + static_cast<int>(Vis::ToolPointFromArcAndTangent)};
-
-    virtual void   paint(QPainter *painter, const QStyleOptionGraphicsItem *option,
-                         QWidget *widget = nullptr) Q_DECL_OVERRIDE;
 private:
     Q_DISABLE_COPY(VisToolPointFromArcAndTangent)
-    quint32              arcId;
-    CrossCirclesPoint    crossPoint;
-    QGraphicsEllipseItem *point;
-    QGraphicsEllipseItem *tangent;
-    VCurvePathItem       *arcPath;
-    QGraphicsLineItem    *tangentLine2;
+    quint32           arcId;
+    CrossCirclesPoint crossPoint;
+    VScaledEllipse   *point;
+    VScaledEllipse   *tangent;
+    VCurvePathItem   *arcPath;
+    VScaledLine      *tangentLine2;
 
     void FindRays(const QPointF &p, const VArc *arc);
 };

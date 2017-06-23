@@ -59,10 +59,11 @@ public:
     virtual VSpline GetSpline(qint32 index) const =0;
     virtual QVector<VSplinePoint> GetSplinePath() const =0;
 
-    virtual QPainterPath     GetDirectionPath() const Q_DECL_OVERRIDE;
-    virtual QPainterPath     GetPath(PathDirection direction = PathDirection::Hide) const Q_DECL_OVERRIDE;
+    virtual QPainterPath     GetPath() const Q_DECL_OVERRIDE;
     virtual QVector<QPointF> GetPoints() const Q_DECL_OVERRIDE;
     virtual qreal            GetLength() const Q_DECL_OVERRIDE;
+
+    virtual QVector<DirectionArrow> DirectionArrows() const Q_DECL_OVERRIDE;
 
     int Segment(const QPointF &p) const;
 

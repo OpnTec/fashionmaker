@@ -56,14 +56,11 @@ public:
 
     virtual int  type() const Q_DECL_OVERRIDE {return Type;}
     enum { Type = UserType + static_cast<int>(Vis::ToolEndLine)};
-
-    virtual void   paint(QPainter *painter, const QStyleOptionGraphicsItem *option,
-                         QWidget *widget = nullptr) Q_DECL_OVERRIDE;
 private:
     Q_DISABLE_COPY(VisToolEndLine)
-    qreal                length;
-    qreal                angle;
-    QGraphicsEllipseItem *point;
+    qreal           length;
+    qreal           angle;
+    VScaledEllipse *point;
 };
 
 #endif // VISTOOLENDLINE_H

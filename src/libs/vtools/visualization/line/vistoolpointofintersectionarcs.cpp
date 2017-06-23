@@ -71,12 +71,12 @@ void VisToolPointOfIntersectionArcs::RefreshGeometry()
     if (arc1Id > NULL_ID)
     {
         const QSharedPointer<VArc> arc1 = Visualization::data->GeometricObject<VArc>(arc1Id);
-        DrawPath(arc1Path, arc1->GetPath(PathDirection::Show), Qt::darkGreen, Qt::SolidLine, Qt::RoundCap);
+        DrawPath(arc1Path, arc1->GetPath(), arc1->DirectionArrows(), Qt::darkGreen, Qt::SolidLine, Qt::RoundCap);
 
         if (arc2Id > NULL_ID)
         {
             const QSharedPointer<VArc> arc2 = Visualization::data->GeometricObject<VArc>(arc2Id);
-            DrawPath(arc2Path, arc2->GetPath(PathDirection::Show), Qt::darkRed, Qt::SolidLine, Qt::RoundCap);
+            DrawPath(arc2Path, arc2->GetPath(), arc2->DirectionArrows(), Qt::darkRed, Qt::SolidLine, Qt::RoundCap);
 
             const QPointF fPoint = VToolPointOfIntersectionArcs::FindPoint(arc1.data(), arc2.data(), crossPoint);
             DrawPoint(point, fPoint, mainColor);
@@ -113,16 +113,4 @@ void VisToolPointOfIntersectionArcs::setArc2Id(const quint32 &value)
 void VisToolPointOfIntersectionArcs::setCrossPoint(const CrossCirclesPoint &value)
 {
     crossPoint = value;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void VisToolPointOfIntersectionArcs::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
-{
-    const qreal scale = SceneScale(scene());
-
-    ScalePoint(point, scale);
-    ScalePenWidth(arc1Path, scale);
-    ScalePenWidth(arc2Path, scale);
-
-    VisLine::paint(painter, option, widget);
 }

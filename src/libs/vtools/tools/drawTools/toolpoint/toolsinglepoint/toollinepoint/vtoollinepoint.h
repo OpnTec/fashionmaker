@@ -58,7 +58,6 @@ public:
 
     virtual void   paint(QPainter *painter, const QStyleOptionGraphicsItem *option,
                          QWidget *widget = nullptr) Q_DECL_OVERRIDE;
-    virtual QRectF boundingRect() const Q_DECL_OVERRIDE;
 
     VFormula GetFormulaLength() const;
     void     SetFormulaLength(const VFormula &value);
@@ -88,7 +87,7 @@ protected:
     quint32           basePointId;
 
     /** @brief mainLine line item. */
-    QGraphicsLineItem *mainLine;
+    VScaledLine      *mainLine;
 
     /** @brief lineColor color of a line. */
     QString           lineColor;
@@ -96,6 +95,8 @@ protected:
     virtual void      RefreshGeometry();
     virtual void      RemoveReferens() Q_DECL_OVERRIDE;
     virtual void      SaveOptions(QDomElement &tag, QSharedPointer<VGObject> &obj) Q_DECL_OVERRIDE;
+    virtual void      hoverEnterEvent(QGraphicsSceneHoverEvent *event) Q_DECL_OVERRIDE;
+    virtual void      hoverLeaveEvent(QGraphicsSceneHoverEvent *event) Q_DECL_OVERRIDE;
 private:
     Q_DISABLE_COPY(VToolLinePoint)
 };

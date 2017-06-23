@@ -54,20 +54,17 @@ public:
 
     virtual int  type() const Q_DECL_OVERRIDE {return Type;}
     enum { Type = UserType + static_cast<int>(Vis::ToolCubicBezier)};
-
-    virtual void   paint(QPainter *painter, const QStyleOptionGraphicsItem *option,
-                         QWidget *widget = nullptr) Q_DECL_OVERRIDE;
 protected:
     Q_DISABLE_COPY(VisToolCubicBezier)
-    quint32              object2Id;
-    quint32              object3Id;
-    quint32              object4Id;
-    QGraphicsEllipseItem *point1;
-    QGraphicsEllipseItem *point2;
-    QGraphicsEllipseItem *point3;
-    QGraphicsEllipseItem *point4;
-    QGraphicsLineItem    *helpLine1;
-    QGraphicsLineItem    *helpLine2;
+    quint32         object2Id;
+    quint32         object3Id;
+    quint32         object4Id;
+    VScaledEllipse *point1;
+    VScaledEllipse *point2;
+    VScaledEllipse *point3;
+    VScaledEllipse *point4;
+    VScaledLine    *helpLine1;
+    VScaledLine    *helpLine2;
 };
 
 #endif // VISTOOLCUBICBEZIER_H

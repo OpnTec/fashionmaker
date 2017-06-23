@@ -65,7 +65,7 @@ void VisToolCutSplinePath::RefreshGeometry()
     if (object1Id > NULL_ID)
     {
         const auto splPath = Visualization::data->GeometricObject<VAbstractCubicBezierPath>(object1Id);
-        DrawPath(this, splPath->GetPath(), splPath->GetDirectionPath(), supportColor, lineStyle, Qt::RoundCap);
+        DrawPath(this, splPath->GetPath(), splPath->DirectionArrows(), supportColor, lineStyle, Qt::RoundCap);
 
         if (not qFuzzyIsNull(length))
         {
@@ -79,8 +79,8 @@ void VisToolCutSplinePath::RefreshGeometry()
             DrawPoint(point, static_cast<QPointF>(*p), mainColor);
             delete p;
 
-            DrawPath(splPath1, spPath1->GetPath(), spPath1->GetDirectionPath(), Qt::darkGreen, lineStyle, Qt::RoundCap);
-            DrawPath(splPath2, spPath2->GetPath(), spPath2->GetDirectionPath(), Qt::darkRed, lineStyle, Qt::RoundCap);
+            DrawPath(splPath1, spPath1->GetPath(), spPath1->DirectionArrows(), Qt::darkGreen, lineStyle, Qt::RoundCap);
+            DrawPath(splPath2, spPath2->GetPath(), spPath2->DirectionArrows(), Qt::darkRed, lineStyle, Qt::RoundCap);
 
             delete spPath1;
             delete spPath2;
@@ -92,16 +92,4 @@ void VisToolCutSplinePath::RefreshGeometry()
 void VisToolCutSplinePath::setLength(const QString &expression)
 {
     length = FindLength(expression, Visualization::data->PlainVariables());
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void VisToolCutSplinePath::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
-{
-    const qreal scale = SceneScale(scene());
-
-    ScalePoint(point, scale);
-    ScalePenWidth(splPath1, scale);
-    ScalePenWidth(splPath2, scale);
-
-    VisPath::paint(painter, option, widget);
 }

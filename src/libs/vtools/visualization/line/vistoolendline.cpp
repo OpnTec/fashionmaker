@@ -110,13 +110,3 @@ void VisToolEndLine::setLength(const QString &expression)
 {
     length = FindLength(expression, Visualization::data->PlainVariables());
 }
-
-//---------------------------------------------------------------------------------------------------------------------
-void VisToolEndLine::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
-{
-    const qreal scale = SceneScale(scene());
-
-    ScalePoint(point, scale);
-
-    VisLine::paint(painter, option, widget);
-}

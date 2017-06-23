@@ -56,17 +56,14 @@ public:
 
     virtual int  type() const Q_DECL_OVERRIDE {return Type;}
     enum { Type = UserType + static_cast<int>(Vis::ToolPointOfIntersectionArcs)};
-
-    virtual void   paint(QPainter *painter, const QStyleOptionGraphicsItem *option,
-                         QWidget *widget = nullptr) Q_DECL_OVERRIDE;
 private:
     Q_DISABLE_COPY(VisToolPointOfIntersectionArcs)
-    quint32              arc1Id;
-    quint32              arc2Id;
-    CrossCirclesPoint    crossPoint;
-    QGraphicsEllipseItem *point;
-    VCurvePathItem       *arc1Path;
-    VCurvePathItem       *arc2Path;
+    quint32            arc1Id;
+    quint32            arc2Id;
+    CrossCirclesPoint  crossPoint;
+    VScaledEllipse    *point;
+    VCurvePathItem    *arc1Path;
+    VCurvePathItem    *arc2Path;
 };
 
 #endif // VISTOOLPOINTOFINTERSECTIONARCS_H

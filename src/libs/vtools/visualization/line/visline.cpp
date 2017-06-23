@@ -41,7 +41,7 @@
 
 //---------------------------------------------------------------------------------------------------------------------
 VisLine::VisLine(const VContainer *data, QGraphicsItem *parent)
-    :Visualization(data), QGraphicsLineItem(parent)
+    :Visualization(data), VScaledLine(parent)
 {
     this->setZValue(1);// Show on top real tool
     InitPen();
@@ -76,22 +76,6 @@ qreal VisLine::CorrectAngle(const qreal &angle)
         default: // <360
             return 0;
     }
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void VisLine::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
-{
-    ScalePenWidth(this, SceneScale(scene()));
-
-    QGraphicsLineItem::paint(painter, option, widget);
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-QRectF VisLine::boundingRect() const
-{
-    QRectF recTool = QGraphicsLineItem::boundingRect();
-    recTool = recTool.united(childrenBoundingRect());
-    return recTool;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -164,7 +148,7 @@ void VisLine::AddOnScene()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VisLine::DrawRay(QGraphicsLineItem *lineItem, const QPointF &p, const QPointF &pTangent, const QColor &color,
+void VisLine::DrawRay(VScaledLine *lineItem, const QPointF &p, const QPointF &pTangent, const QColor &color,
                       Qt::PenStyle style)
 {
     SCASSERT (lineItem != nullptr)

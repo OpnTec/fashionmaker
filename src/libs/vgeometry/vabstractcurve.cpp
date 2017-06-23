@@ -37,6 +37,8 @@
 
 #include "vabstractcurve_p.h"
 
+const qreal VAbstractCurve::lengthCurveDirectionArrow = 14;
+
 VAbstractCurve::VAbstractCurve(const GOType &type, const quint32 &idObject, const Draw &mode)
     :VGObject(type, idObject, mode), d (new VAbstractCurveData())
 {}
@@ -169,13 +171,7 @@ QVector<QPointF> VAbstractCurve::ToEnd(const QVector<QPointF> &points, const QPo
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QPainterPath VAbstractCurve::GetDirectionPath() const
-{
-    return ShowDirection(GetPoints());
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-QPainterPath VAbstractCurve::GetPath(PathDirection direction) const
+QPainterPath VAbstractCurve::GetPath() const
 {
     QPainterPath path;
 
@@ -183,12 +179,6 @@ QPainterPath VAbstractCurve::GetPath(PathDirection direction) const
     if (points.count() >= 2)
     {
         path.addPolygon(QPolygonF(points));
-
-        if (direction == PathDirection::Show)
-        {
-            path.addPath(ShowDirection(points));
-        }
-        path.setFillRule(Qt::WindingFill);
     }
     else
     {
@@ -323,10 +313,11 @@ QVector<QPointF> VAbstractCurve::CurveIntersectLine(const QVector<QPointF> &poin
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QPainterPath VAbstractCurve::ShowDirection(const QVector<QPointF> &points) const
+QVector<DirectionArrow> VAbstractCurve::DirectionArrows() const
 {
-    QPainterPath path;
+    QVector<DirectionArrow> arrows;
 
+    const QVector<QPointF> points = GetPoints();
     if (points.count() >= 2)
     {
         /*Need find coordinate midle of curve.
@@ -350,15 +341,45 @@ QPainterPath VAbstractCurve::ShowDirection(const QVector<QPointF> &points) const
         //Reverse line because we want start arrow from this point
         arrow = QLineF(arrow.p2(), arrow.p1());
         const qreal angle = arrow.angle();//we each time change line angle, better save original angle value
-        arrow.setLength(14);//arrow length in pixels
+        arrow.setLength(lengthCurveDirectionArrow);//arrow length in pixels
+
+        DirectionArrow dArrow;
 
         arrow.setAngle(angle-35);
-        path.moveTo(arrow.p1());
-        path.lineTo(arrow.p2());
+        dArrow.first = arrow;
 
         arrow.setAngle(angle+35);
-        path.moveTo(arrow.p1());
-        path.lineTo(arrow.p2());
+        dArrow.second = arrow;
+
+        arrows.append(dArrow);
+    }
+    return arrows;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QPainterPath VAbstractCurve::ShowDirection(const QVector<DirectionArrow> &arrows, qreal width)
+{
+    QPainterPath path;
+
+    for (int i = 0; i < arrows.size(); ++i)
+    {
+        const DirectionArrow arrow = arrows.at(i);
+        if (not arrow.first.isNull() && not arrow.second.isNull())
+        {
+            QPainterPath arrowPath;
+
+            QLineF line = arrow.first;
+            line.setLength(width);
+            arrowPath.moveTo(line.p1());
+            arrowPath.lineTo(line.p2());
+
+            line = arrow.second;
+            line.setLength(width);
+            arrowPath.moveTo(line.p1());
+            arrowPath.lineTo(line.p2());
+
+            path.addPath(arrowPath);
+        }
     }
     return path;
 }

@@ -55,15 +55,13 @@ public:
     virtual int  type() const Q_DECL_OVERRIDE {return Type;}
     enum { Type = UserType + static_cast<int>(Vis::ToolNormal)};
 
-    virtual void   paint(QPainter *painter, const QStyleOptionGraphicsItem *option,
-                         QWidget *widget = nullptr) Q_DECL_OVERRIDE;
 private:
     Q_DISABLE_COPY(VisToolNormal)
     quint32              object2Id;
-    QGraphicsEllipseItem *point;
-    QGraphicsEllipseItem *lineP1;
-    QGraphicsEllipseItem *lineP2;
-    QGraphicsLineItem    *line;
+    VScaledEllipse *point;
+    VScaledEllipse *lineP1;
+    VScaledEllipse *lineP2;
+    VScaledLine    *line;
     qreal                length;
     qreal                angle;
 

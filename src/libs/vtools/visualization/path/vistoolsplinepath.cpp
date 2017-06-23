@@ -48,10 +48,10 @@
 //---------------------------------------------------------------------------------------------------------------------
 VisToolSplinePath::VisToolSplinePath(const VContainer *data, QGraphicsItem *parent)
     : VisPath(data, parent),
-      points(QVector<QGraphicsEllipseItem *>()),
-      ctrlPoints(QVector<VControlPointSpline *>()),
+      points(),
+      ctrlPoints(),
       newCurveSegment(nullptr),
-      path(VSplinePath()),
+      path(),
       isLeftMousePressed(false),
       pointSelected(false),
       ctrlPoint()
@@ -62,8 +62,6 @@ VisToolSplinePath::VisToolSplinePath(const VContainer *data, QGraphicsItem *pare
 //---------------------------------------------------------------------------------------------------------------------
 VisToolSplinePath::~VisToolSplinePath()
 {
-    qDeleteAll(ctrlPoints);
-    qDeleteAll(points);
     emit ToolTip("");
 }
 
@@ -77,7 +75,7 @@ void VisToolSplinePath::RefreshGeometry()
 
         for (int i = 0; i < size; ++i)
         {
-            QGraphicsEllipseItem *point = this->getPoint(static_cast<unsigned>(i));
+            VScaledEllipse *point = this->getPoint(static_cast<unsigned>(i));
             DrawPoint(point, static_cast<QPointF>(pathPoints.at(i).P()), supportColor);
         }
 
@@ -106,7 +104,7 @@ void VisToolSplinePath::RefreshGeometry()
 
         if (size > 1)
         {
-            DrawPath(this, path.GetPath(), path.GetDirectionPath(), mainColor, lineStyle, Qt::RoundCap);
+            DrawPath(this, path.GetPath(), path.DirectionArrows(), mainColor, lineStyle, Qt::RoundCap);
         }
 
         if (path.CountPoints() < 3)
@@ -140,19 +138,6 @@ VSplinePath VisToolSplinePath::getPath()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VisToolSplinePath::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
-{
-    const qreal scale = SceneScale(scene());
-
-    for (int i=0; i < points.size(); ++i)
-    {
-        ScalePoint(points[i], scale);
-    }
-
-    VisPath::paint(painter, option, widget);
-}
-
-//---------------------------------------------------------------------------------------------------------------------
 void VisToolSplinePath::MouseLeftPressed()
 {
     if (mode == Mode::Creation)
@@ -172,7 +157,7 @@ void VisToolSplinePath::MouseLeftReleased()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QGraphicsEllipseItem *VisToolSplinePath::getPoint(quint32 i)
+VScaledEllipse *VisToolSplinePath::getPoint(quint32 i)
 {
     if (static_cast<quint32>(points.size() - 1) >= i && points.isEmpty() == false)
     {
@@ -311,6 +296,6 @@ void VisToolSplinePath::Creating(const QPointF &pSpl, int size)
         }
         emit PathChanged(path);
 
-        DrawPath(newCurveSegment, spline.GetPath(PathDirection::Hide), mainColor, Qt::SolidLine, Qt::RoundCap);
+        DrawPath(newCurveSegment, spline.GetPath(), mainColor, Qt::SolidLine, Qt::RoundCap);
     }
 }

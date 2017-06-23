@@ -50,15 +50,12 @@ public:
     void         setLength(const QString &expression);
     virtual int  type() const Q_DECL_OVERRIDE {return Type;}
     enum { Type = UserType + static_cast<int>(Vis::ToolCutSpline)};
-
-    virtual void   paint(QPainter *painter, const QStyleOptionGraphicsItem *option,
-                         QWidget *widget = nullptr) Q_DECL_OVERRIDE;
 protected:
     Q_DISABLE_COPY(VisToolCutSplinePath)
-    QGraphicsEllipseItem *point;
-    VCurvePathItem       *splPath1;
-    VCurvePathItem       *splPath2;
-    qreal                length;
+    VScaledEllipse *point;
+    VCurvePathItem *splPath1;
+    VCurvePathItem *splPath2;
+    qreal           length;
 };
 
 #endif // VISTOOLCUTSPLINEPATH_H

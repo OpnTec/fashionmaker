@@ -55,12 +55,11 @@ public:
                         const QPointF &splinePoint, bool freeAngle, bool freeLength, QGraphicsItem * parent = nullptr);
     virtual ~VControlPointSpline();
 
-    virtual int       type() const Q_DECL_OVERRIDE {return Type;}
+    virtual int  type() const Q_DECL_OVERRIDE {return Type;}
     enum { Type = UserType + static_cast<int>(Vis::ControlPointSpline)};
 
-    virtual void   paint(QPainter *painter, const QStyleOptionGraphicsItem *option,
-                         QWidget *widget = nullptr) Q_DECL_OVERRIDE;
-    virtual QRectF boundingRect() const Q_DECL_OVERRIDE;
+    virtual void paint(QPainter *painter, const QStyleOptionGraphicsItem *option,
+                       QWidget *widget = nullptr) Q_DECL_OVERRIDE;
 signals:
     /**
      * @brief ControlPointChangePosition emit when control point change position.
@@ -81,7 +80,7 @@ public slots:
     void              setEnabledPoint(bool enable);
 protected:
     /** @brief controlLine pointer to line control point. */
-    QGraphicsLineItem *controlLine;
+    VScaledLine      *controlLine;
 
     virtual void      hoverEnterEvent ( QGraphicsSceneHoverEvent * event ) Q_DECL_OVERRIDE;
     virtual void      hoverLeaveEvent ( QGraphicsSceneHoverEvent * event ) Q_DECL_OVERRIDE;

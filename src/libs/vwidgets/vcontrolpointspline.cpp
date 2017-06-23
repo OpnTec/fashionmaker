@@ -48,6 +48,7 @@
 #include "vmaingraphicsscene.h"
 #include "vmaingraphicsview.h"
 #include "vgraphicssimpletextitem.h"
+#include "scalesceneitems.h"
 
 //---------------------------------------------------------------------------------------------------------------------
 VControlPointSpline::VControlPointSpline(const qint32 &indexSpline, SplinePointPosition position, QGraphicsItem *parent)
@@ -100,19 +101,11 @@ VControlPointSpline::~VControlPointSpline()
 //---------------------------------------------------------------------------------------------------------------------
 void VControlPointSpline::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
 {
-    const qreal scale = SceneScale(scene());
-
-    ScaleLinePenWidth(controlLine, scale);
+    QPen lPen = controlLine->pen();
+    lPen.setColor(CorrectColor(controlLine, Qt::black));
+    controlLine->setPen(lPen);
 
     VScenePoint::paint(painter, option, widget);
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-QRectF VControlPointSpline::boundingRect() const
-{
-    QRectF recTool = VScenePoint::boundingRect();
-    recTool = recTool.united(childrenBoundingRect());
-    return recTool;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -267,12 +260,8 @@ void VControlPointSpline::Init()
     this->setBrush(QBrush(Qt::NoBrush));
     this->setZValue(100);
 
-    controlLine = new QGraphicsLineItem(this);
-
-    QPen cPen = controlLine->pen();
-    cPen.setBrush(QBrush(Qt::red));
-
-    controlLine->setPen(cPen);
+    controlLine = new VScaledLine(this);
+    controlLine->SetBasicWidth(widthHairLine);
     controlLine->setFlag(QGraphicsItem::ItemStacksBehindParent, true);
 }
 

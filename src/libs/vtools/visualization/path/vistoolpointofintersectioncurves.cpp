@@ -63,12 +63,13 @@ void VisToolPointOfIntersectionCurves::RefreshGeometry()
     if (object1Id > NULL_ID)
     {
         auto curve1 = Visualization::data->GeometricObject<VAbstractCurve>(object1Id);
-        DrawPath(this, curve1->GetPath(PathDirection::Show), supportColor, Qt::SolidLine, Qt::RoundCap);
+        DrawPath(this, curve1->GetPath(), curve1->DirectionArrows(), supportColor, Qt::SolidLine, Qt::RoundCap);
 
         if (object2Id > NULL_ID)
         {
             auto curve2 = Visualization::data->GeometricObject<VAbstractCurve>(object2Id);
-            DrawPath(visCurve2, curve2->GetPath(PathDirection::Show), supportColor, Qt::SolidLine, Qt::RoundCap);
+            DrawPath(visCurve2, curve2->GetPath(), curve2->DirectionArrows(), supportColor, Qt::SolidLine,
+                     Qt::RoundCap);
 
             auto p = VToolPointOfIntersectionCurves::FindPoint(curve1->GetPoints(), curve2->GetPoints(), vCrossPoint,
                                                                hCrossPoint);
@@ -106,15 +107,4 @@ void VisToolPointOfIntersectionCurves::setVCrossPoint(const VCrossCurvesPoint &v
 void VisToolPointOfIntersectionCurves::setHCrossPoint(const HCrossCurvesPoint &value)
 {
     hCrossPoint = value;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void VisToolPointOfIntersectionCurves::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
-{
-    const qreal scale = SceneScale(scene());
-
-    ScalePoint(point, scale);
-    ScalePenWidth(visCurve2, scale);
-
-    VisPath::paint(painter, option, widget);
 }

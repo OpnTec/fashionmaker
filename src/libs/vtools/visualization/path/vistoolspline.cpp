@@ -122,7 +122,7 @@ void VisToolSpline::RefreshGeometry()
         if (object4Id <= NULL_ID)
         {
             VSpline spline(*first, p2, Visualization::scenePos, VPointF(Visualization::scenePos));
-            DrawPath(this, spline.GetPath(PathDirection::Hide), mainColor, lineStyle, Qt::RoundCap);
+            DrawPath(this, spline.GetPath(), mainColor, lineStyle, Qt::RoundCap);
         }
         else
         {
@@ -160,12 +160,12 @@ void VisToolSpline::RefreshGeometry()
             if (VFuzzyComparePossibleNulls(angle1, EMPTY_ANGLE) || VFuzzyComparePossibleNulls(angle2, EMPTY_ANGLE))
             {
                 VSpline spline(*first, p2, p3, *second);
-                DrawPath(this, spline.GetPath(PathDirection::Hide), mainColor, lineStyle, Qt::RoundCap);
+                DrawPath(this, spline.GetPath(), mainColor, lineStyle, Qt::RoundCap);
             }
             else
             {
                 VSpline spline(*first, *second, angle1, angle2, kAsm1, kAsm2, kCurve);
-                DrawPath(this, spline.GetPath(), spline.GetDirectionPath(), mainColor, lineStyle, Qt::RoundCap);
+                DrawPath(this, spline.GetPath(), spline.DirectionArrows(), mainColor, lineStyle, Qt::RoundCap);
                 Visualization::toolTip = tr("Use <b>Shift</b> for sticking angle!");
                 emit ToolTip(Visualization::toolTip);
             }
@@ -219,17 +219,6 @@ QPointF VisToolSpline::GetP2() const
 QPointF VisToolSpline::GetP3() const
 {
     return p3;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void VisToolSpline::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
-{
-    const qreal scale = SceneScale(scene());
-
-    ScalePoint(point1, scale);
-    ScalePoint(point4, scale);
-
-    VisPath::paint(painter, option, widget);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

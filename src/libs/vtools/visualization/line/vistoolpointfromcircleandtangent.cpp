@@ -47,11 +47,11 @@ VisToolPointFromCircleAndTangent::VisToolPointFromCircleAndTangent(const VContai
     : VisLine(data, parent), object2Id(NULL_ID), cRadius(0), crossPoint(CrossCirclesPoint::FirstPoint),
       point(nullptr), tangent(nullptr), cCenter(nullptr), cPath(nullptr), tangent2(nullptr)
 {
-    cPath = InitItem<QGraphicsEllipseItem>(Qt::darkGreen, this);
+    cPath = InitItem<VScaledEllipse>(Qt::darkGreen, this);
     point = InitPoint(mainColor, this);
     tangent = InitPoint(supportColor, this);
     cCenter = InitPoint(supportColor, this); //-V656
-    tangent2 = InitItem<QGraphicsLineItem>(supportColor, this);
+    tangent2 = InitItem<VScaledLine>(supportColor, this);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -99,20 +99,6 @@ void VisToolPointFromCircleAndTangent::setCRadius(const QString &value)
 void VisToolPointFromCircleAndTangent::setCrossPoint(const CrossCirclesPoint &value)
 {
     crossPoint = value;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void VisToolPointFromCircleAndTangent::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
-{
-    const qreal scale = SceneScale(scene());
-
-    ScalePoint(point, scale);
-    ScalePoint(tangent, scale);
-    ScalePoint(cCenter, scale);
-    ScalePoint(cPath, scale);
-    ScalePenWidth(tangent2, scale);
-
-    VisLine::paint(painter, option, widget);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

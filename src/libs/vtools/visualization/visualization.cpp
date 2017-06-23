@@ -53,6 +53,7 @@
 #include "../vpatterndb/vcontainer.h"
 #include "../vwidgets/vmaingraphicsscene.h"
 #include "../vwidgets/vcurvepathitem.h"
+#include "../vwidgets/scalesceneitems.h"
 
 template <class K, class V> class QHash;
 
@@ -136,14 +137,7 @@ void Visualization::MousePos(const QPointF &scenePos)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void Visualization::ScalePoint(QGraphicsEllipseItem *item, qreal scale)
-{
-    ScaleCircleSize(item, scale);
-    ScalePenWidth(item, scale);
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-QGraphicsEllipseItem *Visualization::InitPoint(const QColor &color, QGraphicsItem *parent, qreal z) const
+VScaledEllipse *Visualization::InitPoint(const QColor &color, QGraphicsItem *parent, qreal z) const
 {
     return InitPointItem(color, parent, z);
 }
@@ -192,7 +186,7 @@ qreal Visualization::FindVal(const QString &expression, const QHash<QString, qre
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void Visualization::DrawPoint(QGraphicsEllipseItem *point, const QPointF &pos, const QColor &color, Qt::PenStyle style)
+void Visualization::DrawPoint(VScaledEllipse *point, const QPointF &pos, const QColor &color, Qt::PenStyle style)
 {
     SCASSERT (point != nullptr)
 
@@ -207,7 +201,7 @@ void Visualization::DrawPoint(QGraphicsEllipseItem *point, const QPointF &pos, c
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void Visualization::DrawLine(QGraphicsLineItem *lineItem, const QLineF &line, const QColor &color, Qt::PenStyle style)
+void Visualization::DrawLine(VScaledLine *lineItem, const QLineF &line, const QColor &color, Qt::PenStyle style)
 {
     SCASSERT (lineItem != nullptr)
 
@@ -224,12 +218,13 @@ void Visualization::DrawLine(QGraphicsLineItem *lineItem, const QLineF &line, co
 void Visualization::DrawPath(VCurvePathItem *pathItem, const QPainterPath &path, const QColor &color,
                              Qt::PenStyle style, Qt::PenCapStyle cap)
 {
-    DrawPath(pathItem, path, QPainterPath(), color, style, cap);
+    DrawPath(pathItem, path, QVector<DirectionArrow>(), color, style, cap);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void Visualization::DrawPath(VCurvePathItem *pathItem, const QPainterPath &path, const QPainterPath &direction,
-                             const QColor &color, Qt::PenStyle style, Qt::PenCapStyle cap)
+void Visualization::DrawPath(VCurvePathItem *pathItem, const QPainterPath &path,
+                             const QVector<DirectionArrow> &directionArrows, const QColor &color, Qt::PenStyle style,
+                             Qt::PenCapStyle cap)
 {
     SCASSERT (pathItem != nullptr)
 
@@ -240,13 +235,13 @@ void Visualization::DrawPath(VCurvePathItem *pathItem, const QPainterPath &path,
 
     pathItem->setPen(visPen);
     pathItem->setPath(path);
-    pathItem->SetDirectionPath(direction);
+    pathItem->SetDirectionArrows(directionArrows);
     pathItem->setVisible(true);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QGraphicsEllipseItem *Visualization::GetPointItem(QVector<QGraphicsEllipseItem *> &points, quint32 i,
-                                                  const QColor &color, QGraphicsItem *parent)
+VScaledEllipse *Visualization::GetPointItem(QVector<VScaledEllipse *> &points, quint32 i,
+                                            const QColor &color, QGraphicsItem *parent)
 {
     if (not points.isEmpty() && static_cast<quint32>(points.size() - 1) >= i)
     {
@@ -262,9 +257,9 @@ QGraphicsEllipseItem *Visualization::GetPointItem(QVector<QGraphicsEllipseItem *
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QGraphicsEllipseItem *Visualization::InitPointItem(const QColor &color, QGraphicsItem *parent, qreal z)
+VScaledEllipse *Visualization::InitPointItem(const QColor &color, QGraphicsItem *parent, qreal z)
 {
-    QGraphicsEllipseItem *point = new QGraphicsEllipseItem(parent);
+    VScaledEllipse *point = new VScaledEllipse(parent);
     point->setZValue(1);
     point->setBrush(QBrush(Qt::NoBrush));
 

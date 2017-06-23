@@ -41,6 +41,7 @@
 #include "../vpatterndb/vcontainer.h"
 #include "../visualization.h"
 #include "vispath.h"
+#include "../vwidgets/scalesceneitems.h"
 
 //---------------------------------------------------------------------------------------------------------------------
 VisToolArc::VisToolArc(const VContainer *data, QGraphicsItem *parent)
@@ -60,7 +61,7 @@ void VisToolArc::RefreshGeometry()
         if (not qFuzzyIsNull(radius) && f1 >= 0 && f2 >= 0)
         {
             VArc arc = VArc (*first, radius, f1, f2);
-            DrawPath(this, arc.GetPath(), arc.GetDirectionPath(), mainColor, lineStyle, Qt::RoundCap);
+            DrawPath(this, arc.GetPath(), arc.DirectionArrows(), mainColor, lineStyle, Qt::RoundCap);
         }
     }
 }
@@ -81,14 +82,4 @@ void VisToolArc::setF1(const QString &expression)
 void VisToolArc::setF2(const QString &expression)
 {
     f2 = FindVal(expression, Visualization::data->PlainVariables());
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void VisToolArc::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
-{
-    const qreal scale = SceneScale(scene());
-
-    ScalePoint(arcCenter, scale);
-
-    VisPath::paint(painter, option, widget);
 }

@@ -44,6 +44,9 @@
 
 Q_DECLARE_LOGGING_CATEGORY(vVis)
 
+class VScaledEllipse;
+class VScaledLine;
+
 enum class Mode : char {Creation, Show};
 
 class Visualization : public QObject
@@ -86,20 +89,16 @@ protected:
     virtual void InitPen()=0;
     virtual void AddOnScene()=0;
 
-    template <typename Item>
-    void ScalePenWidth(Item *item, qreal scale);
-
-    void ScalePoint(QGraphicsEllipseItem *item, qreal scale);
-
-    QGraphicsEllipseItem *InitPoint(const QColor &color, QGraphicsItem *parent, qreal z = 0) const;
-    void         DrawPoint(QGraphicsEllipseItem *point, const QPointF &pos, const QColor &color,
+    VScaledEllipse *InitPoint(const QColor &color, QGraphicsItem *parent, qreal z = 0) const;
+    void         DrawPoint(VScaledEllipse *point, const QPointF &pos, const QColor &color,
                            Qt::PenStyle style = Qt::SolidLine);
-    virtual void DrawLine(QGraphicsLineItem *lineItem, const QLineF &line, const QColor &color,
+    virtual void DrawLine(VScaledLine *lineItem, const QLineF &line, const QColor &color,
                           Qt::PenStyle style = Qt::SolidLine);
     void         DrawPath(VCurvePathItem *pathItem, const QPainterPath &path, const QColor &color,
                           Qt::PenStyle style = Qt::SolidLine, Qt::PenCapStyle cap = Qt::SquareCap);
-    void         DrawPath(VCurvePathItem *pathItem, const QPainterPath &path, const QPainterPath &direction,
-                          const QColor &color, Qt::PenStyle style = Qt::SolidLine, Qt::PenCapStyle cap = Qt::SquareCap);
+    void         DrawPath(VCurvePathItem *pathItem, const QPainterPath &path,
+                          const QVector<DirectionArrow> &directionArrows, const QColor &color,
+                          Qt::PenStyle style = Qt::SolidLine, Qt::PenCapStyle cap = Qt::SquareCap);
 
     template <typename Item>
     void         AddItem(Item *item);
@@ -107,12 +106,12 @@ protected:
     template <class Item>
     Item         *InitItem(const QColor &color, QGraphicsItem *parent);
 
-    static QGraphicsEllipseItem* GetPointItem(QVector<QGraphicsEllipseItem *> &points, quint32 i, const QColor &color,
-                                              QGraphicsItem *parent);
+    static VScaledEllipse *GetPointItem(QVector<VScaledEllipse *> &points, quint32 i, const QColor &color,
+                                        QGraphicsItem *parent);
 private:
     Q_DISABLE_COPY(Visualization)
 
-    static QGraphicsEllipseItem* InitPointItem(const QColor &color, QGraphicsItem *parent, qreal z = 0);
+    static VScaledEllipse* InitPointItem(const QColor &color, QGraphicsItem *parent, qreal z = 0);
 };
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -141,20 +140,6 @@ inline Item *Visualization::InitItem(const QColor &color, QGraphicsItem *parent)
     item->setFlags(QGraphicsItem::ItemStacksBehindParent);
     item->setVisible(false);
     return item;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-template <class Item>
-void Visualization::ScalePenWidth(Item *item, qreal scale)
-{
-    SCASSERT(item != nullptr)
-
-    const qreal width = ScaleWidth(widthMainLine, scale);
-
-    QPen visPen = item->pen();
-    visPen.setWidthF(width);
-
-    item->setPen(visPen);
 }
 
 #endif // VISUALIZATION_H

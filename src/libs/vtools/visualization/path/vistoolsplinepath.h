@@ -58,9 +58,6 @@ public:
 
     virtual int  type() const Q_DECL_OVERRIDE {return Type;}
     enum { Type = UserType + static_cast<int>(Vis::ToolSplinePath)};
-
-    virtual void   paint(QPainter *painter, const QStyleOptionGraphicsItem *option,
-                         QWidget *widget = nullptr) Q_DECL_OVERRIDE;
 signals:
     void PathChanged(const VSplinePath &path);
 
@@ -70,17 +67,17 @@ public slots:
 
 protected:
     Q_DISABLE_COPY(VisToolSplinePath)
-    QVector<QGraphicsEllipseItem *> points;
-    QVector<VControlPointSpline *>  ctrlPoints;
-    VCurvePathItem                  *newCurveSegment;
-    VSplinePath                     path;
+    QVector<VScaledEllipse *>      points;
+    QVector<VControlPointSpline *> ctrlPoints;
+    VCurvePathItem                *newCurveSegment;
+    VSplinePath                    path;
 
     bool isLeftMousePressed;
     bool pointSelected;
 
     QPointF ctrlPoint;
 
-    QGraphicsEllipseItem * getPoint(quint32 i);
+    VScaledEllipse * getPoint(quint32 i);
     void Creating(const QPointF &pSpl, int size);
 };
 

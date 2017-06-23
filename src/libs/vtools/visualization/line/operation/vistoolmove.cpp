@@ -129,17 +129,6 @@ void VisToolMove::RefreshGeometry()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VisToolMove::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
-{
-    const qreal scale = SceneScale(scene());
-
-    ScalePoint(pointOrigin, scale);
-    ScalePoint(pointFinish, scale);
-
-    VisOperation::paint(painter, option, widget);
-}
-
-//---------------------------------------------------------------------------------------------------------------------
 QString VisToolMove::Angle() const
 {
     return QString::number(line().angle());
@@ -177,7 +166,7 @@ QGraphicsPathItem *VisToolMove::AddOriginCurve(quint32 id, int &i)
 
     ++i;
     VCurvePathItem *path = GetCurve(static_cast<quint32>(i), supportColor2);
-    DrawPath(path, curve->GetPath(PathDirection::Show), supportColor2, Qt::SolidLine, Qt::RoundCap);
+    DrawPath(path, curve->GetPath(), curve->DirectionArrows(), supportColor2, Qt::SolidLine, Qt::RoundCap);
 
     return path;
 }
@@ -191,7 +180,7 @@ int VisToolMove::AddMovedCurve(qreal angle, qreal length, quint32 id, int i)
     ++i;
     VCurvePathItem *path = GetCurve(static_cast<quint32>(i), supportColor);
     const Item moved = curve->Move(length, angle);
-    DrawPath(path, moved.GetPath(PathDirection::Show), supportColor, Qt::SolidLine, Qt::RoundCap);
+    DrawPath(path, moved.GetPath(), moved.DirectionArrows(), supportColor, Qt::SolidLine, Qt::RoundCap);
 
     return i;
 }
@@ -244,7 +233,7 @@ QVector<QGraphicsItem *> VisToolMove::CreateOriginObjects(int &iPoint, int &iCur
                 const QSharedPointer<VPointF> p = Visualization::data->GeometricObject<VPointF>(id);
 
                 ++iPoint;
-                QGraphicsEllipseItem *point = GetPoint(static_cast<quint32>(iPoint), supportColor2);
+                VScaledEllipse *point = GetPoint(static_cast<quint32>(iPoint), supportColor2);
                 DrawPoint(point, static_cast<QPointF>(*p), supportColor2);
                 originObjects.append(point);
 
@@ -299,7 +288,7 @@ void VisToolMove::CreateMovedObjects(int &iPoint, int &iCurve, qreal length, qre
                 const QSharedPointer<VPointF> p = Visualization::data->GeometricObject<VPointF>(id);
 
                 ++iPoint;
-                QGraphicsEllipseItem *point = GetPoint(static_cast<quint32>(iPoint), supportColor);
+                VScaledEllipse *point = GetPoint(static_cast<quint32>(iPoint), supportColor);
                 DrawPoint(point, static_cast<QPointF>(p->Move(length, angle)), supportColor);
                 break;
             }

@@ -42,7 +42,7 @@
 #include "vgeometrydef.h"
 #include "vgobject.h"
 
-enum class PathDirection : char { Hide, Show };
+typedef QPair<QLineF, QLineF> DirectionArrow;
 
 class QPainterPath;
 class VAbstractCurveData;
@@ -68,8 +68,7 @@ public:
                                               bool reverse = false);
     QVector<QPointF>         GetSegmentPoints(const QPointF &begin, const QPointF &end, bool reverse = false) const;
 
-    virtual QPainterPath     GetDirectionPath() const;
-    virtual QPainterPath     GetPath(PathDirection direction = PathDirection::Hide) const;
+    virtual QPainterPath     GetPath() const;
     virtual qreal            GetLength() const =0;
     qreal                    GetLengthByPoint(const QPointF &point) const;
     virtual QVector<QPointF> IntersectLine(const QLineF &line) const;
@@ -95,7 +94,10 @@ public:
     static QVector<QPointF>  CurveIntersectLine(const QVector<QPointF> &points, const QLineF &line);
 
     virtual QString          NameForHistory(const QString &toolName) const=0;
-    QPainterPath             ShowDirection(const QVector<QPointF> &points) const;
+    virtual QVector<DirectionArrow> DirectionArrows() const;
+    static QPainterPath      ShowDirection(const QVector<DirectionArrow> &arrows, qreal width);
+
+    static const qreal lengthCurveDirectionArrow;
 protected:
     virtual void             CreateName() =0;
 private:

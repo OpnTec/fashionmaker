@@ -54,17 +54,14 @@ public:
 
     virtual int type() const Q_DECL_OVERRIDE {return Type;}
     enum { Type = UserType + static_cast<int>(Vis::ToolEllipticalArc)};
-
-    virtual void   paint(QPainter *painter, const QStyleOptionGraphicsItem *option,
-                         QWidget *widget = nullptr) Q_DECL_OVERRIDE;
 private:
     Q_DISABLE_COPY(VisToolEllipticalArc)
-    QGraphicsEllipseItem *arcCenter;
-    qreal                radius1;
-    qreal                radius2;
-    qreal                f1;
-    qreal                f2;
-    qreal                rotationAngle;
+    VScaledEllipse *arcCenter;
+    qreal           radius1;
+    qreal           radius2;
+    qreal           f1;
+    qreal           f2;
+    qreal           rotationAngle;
 };
 
 #endif // VISTOOLELLIPTICALARC_H

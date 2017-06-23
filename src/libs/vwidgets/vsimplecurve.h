@@ -56,9 +56,6 @@ public:
     virtual int  type() const Q_DECL_OVERRIDE {return Type;}
     enum { Type = UserType + static_cast<int>(Vis::SimpleCurve)};
 
-    virtual void paint(QPainter *painter, const QStyleOptionGraphicsItem *option,
-                       QWidget *widget = nullptr) Q_DECL_OVERRIDE;
-
     void RefreshGeometry(const QSharedPointer<VAbstractCurve> &curve);
 signals:
     /**
@@ -80,6 +77,7 @@ protected:
     virtual QVariant itemChange ( GraphicsItemChange change, const QVariant &value ) Q_DECL_OVERRIDE;
     virtual void     contextMenuEvent ( QGraphicsSceneContextMenuEvent * event ) Q_DECL_OVERRIDE;
     virtual void     keyReleaseEvent ( QKeyEvent * event ) Q_DECL_OVERRIDE;
+    virtual void     ScalePenWidth() Q_DECL_OVERRIDE;
 
 private:
     Q_DISABLE_COPY(VSimpleCurve)

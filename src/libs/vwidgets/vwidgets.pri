@@ -20,7 +20,8 @@ SOURCES += \
     $$PWD/fancytabbar/stylehelper.cpp \
     $$PWD/vcurvepathitem.cpp \
     $$PWD/global.cpp \
-    $$PWD/vscenepoint.cpp
+    $$PWD/vscenepoint.cpp \
+    $$PWD/scalesceneitems.cpp
 
 win32-msvc*:SOURCES += $$PWD/stable.cpp
 
@@ -44,4 +45,5 @@ HEADERS += \
     $$PWD/fancytabbar/stylehelper.h \
     $$PWD/vcurvepathitem.h \
     $$PWD/global.h \
-    $$PWD/vscenepoint.h
+    $$PWD/vscenepoint.h \
+    $$PWD/scalesceneitems.h

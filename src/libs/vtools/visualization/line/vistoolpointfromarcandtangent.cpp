@@ -54,7 +54,7 @@ VisToolPointFromArcAndTangent::VisToolPointFromArcAndTangent(const VContainer *d
     arcPath = InitItem<VCurvePathItem>(Qt::darkGreen, this);
     point = InitPoint(mainColor, this);
     tangent = InitPoint(supportColor, this);
-    tangentLine2 = InitItem<QGraphicsLineItem>(supportColor, this);
+    tangentLine2 = InitItem<VScaledLine>(supportColor, this);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -68,7 +68,7 @@ void VisToolPointFromArcAndTangent::RefreshGeometry()
         if (arcId > NULL_ID)// circle center
         {
             const QSharedPointer<VArc> arc = Visualization::data->GeometricObject<VArc>(arcId);
-            DrawPath(arcPath, arc->GetPath(PathDirection::Show), Qt::darkGreen, Qt::SolidLine, Qt::RoundCap);
+            DrawPath(arcPath, arc->GetPath(), arc->DirectionArrows(), Qt::darkGreen, Qt::SolidLine, Qt::RoundCap);
 
             FindRays(static_cast<QPointF>(*tan), arc.data());
 
@@ -89,19 +89,6 @@ void VisToolPointFromArcAndTangent::setArcId(const quint32 &value)
 void VisToolPointFromArcAndTangent::setCrossPoint(const CrossCirclesPoint &value)
 {
     crossPoint = value;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void VisToolPointFromArcAndTangent::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
-{
-    const qreal scale = SceneScale(scene());
-
-    ScalePoint(point, scale);
-    ScalePoint(tangent, scale);
-    ScalePenWidth(arcPath, scale);
-    ScalePenWidth(tangentLine2, scale);
-
-    VisLine::paint(painter, option, widget);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

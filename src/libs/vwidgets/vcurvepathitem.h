@@ -38,6 +38,9 @@ class VCurvePathItem : public QGraphicsPathItem
 {
 public:
     explicit VCurvePathItem(QGraphicsItem *parent = nullptr);
+    virtual ~VCurvePathItem() = default;
+
+    virtual QPainterPath shape() const Q_DECL_OVERRIDE;
 
     virtual void paint(QPainter *painter, const QStyleOptionGraphicsItem *option,
                        QWidget *widget = nullptr) Q_DECL_OVERRIDE;
@@ -45,11 +48,13 @@ public:
     virtual int  type() const Q_DECL_OVERRIDE {return Type;}
     enum { Type = UserType + static_cast<int>(Vis::CurvePathItem)};
 
-    void SetDirectionPath(const QPainterPath &path);
+    void SetDirectionArrows(const QVector<QPair<QLineF, QLineF>> &arrows);
+protected:
+    virtual void ScalePenWidth();
 private:
     Q_DISABLE_COPY(VCurvePathItem)
 
-    QPainterPath m_direction;
+    QVector<QPair<QLineF, QLineF>> m_directionArrows;
 };
 
 #endif // VCURVEPATHITEM_H

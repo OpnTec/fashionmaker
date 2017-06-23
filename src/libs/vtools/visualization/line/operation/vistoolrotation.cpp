@@ -65,7 +65,7 @@ VisToolRotation::VisToolRotation(const VContainer *data, QGraphicsItem *parent)
 {
     point = InitPoint(supportColor2, this);
     angleArc = InitItem<VCurvePathItem>(supportColor2, this);
-    xAxis = InitItem<QGraphicsLineItem>(supportColor2, this);
+    xAxis = InitItem<VScaledLine>(supportColor2, this);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -117,7 +117,7 @@ void VisToolRotation::RefreshGeometry()
                  Qt::DashLine);
 
         VArc arc(*origin, defPointRadiusPixel*2, 0, tempAngle);
-        DrawPath(angleArc, arc.GetPath(PathDirection::Hide), supportColor2, Qt::SolidLine, Qt::RoundCap);
+        DrawPath(angleArc, arc.GetPath(), supportColor2, Qt::SolidLine, Qt::RoundCap);
 
         Visualization::toolTip = tr("Rotating angle = %1°, <b>Shift</b> - sticking angle, "
                                     "<b>Mouse click</b> - finish creation").arg(tempAngle);
@@ -140,7 +140,7 @@ void VisToolRotation::RefreshGeometry()
                 const QSharedPointer<VPointF> p = Visualization::data->GeometricObject<VPointF>(id);
 
                 ++iPoint;
-                QGraphicsEllipseItem *point = GetPoint(static_cast<quint32>(iPoint), supportColor2);
+                VScaledEllipse *point = GetPoint(static_cast<quint32>(iPoint), supportColor2);
                 DrawPoint(point, static_cast<QPointF>(*p), supportColor2);
 
                 ++iPoint;
@@ -191,18 +191,6 @@ void VisToolRotation::RefreshGeometry()
 QT_WARNING_POP
 
 //---------------------------------------------------------------------------------------------------------------------
-void VisToolRotation::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
-{
-    const qreal scale = SceneScale(scene());
-
-    ScalePoint(point, scale);
-    ScalePenWidth(angleArc, scale);
-    ScalePenWidth(xAxis, scale);
-
-    VisOperation::paint(painter, option, widget);
-}
-
-//---------------------------------------------------------------------------------------------------------------------
 void VisToolRotation::SetOriginPointId(quint32 value)
 {
     object1Id = value;
@@ -228,14 +216,14 @@ int VisToolRotation::AddCurve(qreal angle, const QPointF &origin, quint32 id, in
 
     ++i;
     VCurvePathItem *path = GetCurve(static_cast<quint32>(i), supportColor2);
-    DrawPath(path, curve->GetPath(PathDirection::Show), supportColor2, Qt::SolidLine, Qt::RoundCap);
+    DrawPath(path, curve->GetPath(), curve->DirectionArrows(), supportColor2, Qt::SolidLine, Qt::RoundCap);
 
     ++i;
     path = GetCurve(static_cast<quint32>(i), supportColor);
     if (object1Id != NULL_ID)
     {
         const Item rotated = curve->Rotate(origin, angle);
-        DrawPath(path, rotated.GetPath(PathDirection::Show), supportColor, Qt::SolidLine, Qt::RoundCap);
+        DrawPath(path, rotated.GetPath(), rotated.DirectionArrows(), supportColor, Qt::SolidLine, Qt::RoundCap);
     }
 
     return i;

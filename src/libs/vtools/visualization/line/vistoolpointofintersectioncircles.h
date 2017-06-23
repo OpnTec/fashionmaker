@@ -57,20 +57,17 @@ public:
 
     virtual int  type() const Q_DECL_OVERRIDE {return Type;}
     enum { Type = UserType + static_cast<int>(Vis::ToolPointOfIntersectionCircles)};
-
-    virtual void   paint(QPainter *painter, const QStyleOptionGraphicsItem *option,
-                         QWidget *widget = nullptr) Q_DECL_OVERRIDE;
 private:
     Q_DISABLE_COPY(VisToolPointOfIntersectionCircles)
-    quint32              object2Id;
-    qreal                c1Radius;
-    qreal                c2Radius;
-    CrossCirclesPoint    crossPoint;
-    QGraphicsEllipseItem *point;
-    QGraphicsEllipseItem *c1Center;
-    QGraphicsEllipseItem *c2Center;
-    QGraphicsEllipseItem *c1Path;
-    QGraphicsEllipseItem *c2Path;
+    quint32            object2Id;
+    qreal              c1Radius;
+    qreal              c2Radius;
+    CrossCirclesPoint  crossPoint;
+    VScaledEllipse    *point;
+    VScaledEllipse    *c1Center;
+    VScaledEllipse    *c2Center;
+    VScaledEllipse    *c1Path;
+    VScaledEllipse    *c2Path;
 };
 
 #endif // VISTOOLPOINTOFINTERSECTIONCIRCLES_H

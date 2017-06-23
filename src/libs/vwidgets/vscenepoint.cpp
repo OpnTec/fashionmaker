@@ -31,6 +31,7 @@
 #include "../vgeometry/vpointf.h"
 #include "global.h"
 #include "vgraphicssimpletextitem.h"
+#include "scalesceneitems.h"
 
 #include <QBrush>
 #include <QFont>
@@ -46,7 +47,11 @@ VScenePoint::VScenePoint(QGraphicsItem *parent)
       m_baseColor(Qt::black)
 {
     m_namePoint = new VGraphicsSimpleTextItem(this);
-    m_lineName = new QGraphicsLineItem(this);
+    m_lineName = new VScaledLine(this);
+    m_lineName->SetBasicWidth(widthHairLine);
+    m_lineName->setLine(QLineF(0, 0, 1, 0));
+    m_lineName->setVisible(false);
+
     this->setBrush(QBrush(Qt::NoBrush));
     this->setAcceptHoverEvents(true);
     this->setFlag(QGraphicsItem::ItemIsFocusable, true);// For keyboard input focus
@@ -70,9 +75,10 @@ void VScenePoint::paint(QPainter *painter, const QStyleOptionGraphicsItem *optio
         if (not m_onlyPoint)
         {
             m_namePoint->setVisible(true);
-            m_lineName->setVisible(true);
 
-            ScaleLinePenWidth(m_lineName, scale);
+            QPen lPen = m_lineName->pen();
+            lPen.setColor(CorrectColor(m_lineName, Qt::black));
+            m_lineName->setPen(lPen);
 
             RefreshLine();
         }
@@ -94,14 +100,6 @@ void VScenePoint::RefreshPointGeometry(const VPointF &point)
     m_namePoint->blockSignals(false);
 
     RefreshLine();
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-QRectF VScenePoint::boundingRect() const
-{
-    QRectF recTool = QGraphicsEllipseItem::boundingRect();
-    recTool = recTool.united(childrenBoundingRect());
-    return recTool;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -145,7 +143,6 @@ void VScenePoint::RefreshLine()
         VGObject::LineIntersectCircle(QPointF(), ScaledRadius(SceneScale(scene())),
                                       QLineF(QPointF(), nameRec.center() - scenePos()), p1, p2);
         const QPointF pRec = VGObject::LineIntersectRect(nameRec, QLineF(scenePos(), nameRec.center()));
-        m_lineName->setLine(QLineF(p1, pRec - scenePos()));
 
         if (QLineF(p1, pRec - scenePos()).length() <= ToPixel(4, Unit::Mm))
         {
@@ -153,6 +150,7 @@ void VScenePoint::RefreshLine()
         }
         else
         {
+            m_lineName->setLine(QLineF(p1, pRec - scenePos()));
             m_lineName->setVisible(true);
         }
     }
@@ -169,13 +167,3 @@ void VScenePoint::ScaleMainPenWidth(qreal scale)
 
     setPen(QPen(CorrectColor(this, m_baseColor), width));
 }
-
-//---------------------------------------------------------------------------------------------------------------------
-void VScenePoint::ScaleLinePenWidth(QGraphicsLineItem *line, qreal scale)
-{
-    SCASSERT(line != nullptr)
-    const qreal width = ScaleWidth(widthHairLine, scale);
-
-    line->setPen(QPen(CorrectColor(line, Qt::black), width));
-}
-

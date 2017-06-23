@@ -29,6 +29,7 @@
 #include "vistoolpiece.h"
 #include "../vpatterndb/vpiecepath.h"
 #include "../vgeometry/vpointf.h"
+#include "../vwidgets/scalesceneitems.h"
 
 //---------------------------------------------------------------------------------------------------------------------
 VisToolPiece::VisToolPiece(const VContainer *data, QGraphicsItem *parent)
@@ -38,8 +39,8 @@ VisToolPiece::VisToolPiece(const VContainer *data, QGraphicsItem *parent)
       m_line2(nullptr),
       m_piece()
 {
-    m_line1 = InitItem<QGraphicsLineItem>(supportColor, this);
-    m_line2 = InitItem<QGraphicsLineItem>(supportColor, this);
+    m_line1 = InitItem<VScaledLine>(supportColor, this);
+    m_line2 = InitItem<VScaledLine>(supportColor, this);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -55,7 +56,7 @@ void VisToolPiece::RefreshGeometry()
 
         for (int i = 0; i < nodes.size(); ++i)
         {
-            QGraphicsEllipseItem *point = GetPoint(static_cast<quint32>(i), supportColor);
+            VScaledEllipse *point = GetPoint(static_cast<quint32>(i), supportColor);
             DrawPoint(point, nodes.at(i).toQPointF(), supportColor);
         }
 
@@ -79,23 +80,7 @@ void VisToolPiece::SetPiece(const VPiece &piece)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VisToolPiece::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
-{
-    const qreal scale = SceneScale(scene());
-
-    for (int i=0; i < m_points.size(); ++i)
-    {
-        ScalePoint(m_points[i], scale);
-    }
-
-    ScalePenWidth(m_line1, scale);
-    ScalePenWidth(m_line2, scale);
-
-    VisPath::paint(painter, option, widget);
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-QGraphicsEllipseItem *VisToolPiece::GetPoint(quint32 i, const QColor &color)
+VScaledEllipse *VisToolPiece::GetPoint(quint32 i, const QColor &color)
 {
     return GetPointItem(m_points, i, color, this);
 }

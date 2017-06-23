@@ -51,8 +51,6 @@ public:
     virtual ~VisToolMove();
 
     virtual void   RefreshGeometry() Q_DECL_OVERRIDE;
-    virtual void   paint(QPainter *painter, const QStyleOptionGraphicsItem *option,
-                         QWidget *widget = nullptr) Q_DECL_OVERRIDE;
 
     QString Angle() const;
     void    SetAngle(const QString &expression);
@@ -65,10 +63,10 @@ public:
     enum { Type = UserType + static_cast<int>(Vis::ToolMove)};
 private:
     Q_DISABLE_COPY(VisToolMove)
-    qreal                angle;
-    qreal                length;
-    QGraphicsEllipseItem *pointOrigin;
-    QGraphicsEllipseItem *pointFinish;
+    qreal           angle;
+    qreal           length;
+    VScaledEllipse *pointOrigin;
+    VScaledEllipse *pointFinish;
 
     template <class Item>
     QGraphicsPathItem *AddOriginCurve(quint32 id, int &i);

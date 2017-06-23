@@ -43,8 +43,9 @@
 
 #include "../vtools/visualization/visualization.h"
 #include "../vmisc/def.h"
+#include "../vwidgets/scalesceneitems.h"
 
-class VisLine: public Visualization, public QGraphicsLineItem
+class VisLine: public Visualization, public VScaledLine
 {
     Q_OBJECT
 public:
@@ -54,10 +55,6 @@ public:
     virtual int  type() const Q_DECL_OVERRIDE {return Type;}
     enum { Type = UserType + static_cast<int>(Vis::Line)};
     static qreal CorrectAngle(const qreal &angle);
-
-    virtual void   paint(QPainter *painter, const QStyleOptionGraphicsItem *option,
-                         QWidget *widget = nullptr) Q_DECL_OVERRIDE;
-    virtual QRectF boundingRect() const Q_DECL_OVERRIDE;
 protected:
     QPointF      Ray(const QPointF &firstPoint, const qreal &angle) const;
     QPointF      Ray(const QPointF &firstPoint) const;
@@ -66,7 +63,7 @@ protected:
     virtual void InitPen() Q_DECL_OVERRIDE;
     virtual void AddOnScene() Q_DECL_OVERRIDE;
 
-    void         DrawRay(QGraphicsLineItem *lineItem, const QPointF &p, const QPointF &pTangent,
+    void         DrawRay(VScaledLine *lineItem, const QPointF &p, const QPointF &pTangent,
                          const QColor &color, Qt::PenStyle style);
 private:
     Q_DISABLE_COPY(VisLine)

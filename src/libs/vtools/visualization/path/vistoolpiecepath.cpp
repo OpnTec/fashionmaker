@@ -29,6 +29,7 @@
 #include "vistoolpiecepath.h"
 #include "../vwidgets/vsimplepoint.h"
 #include "../vgeometry/vpointf.h"
+#include "../vwidgets/scalesceneitems.h"
 
 #include <QGraphicsSceneMouseEvent>
 
@@ -39,7 +40,7 @@ VisToolPiecePath::VisToolPiecePath(const VContainer *data, QGraphicsItem *parent
       m_line(nullptr),
       m_path()
 {
-    m_line = InitItem<QGraphicsLineItem>(supportColor, this);
+    m_line = InitItem<VScaledLine>(supportColor, this);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -76,21 +77,6 @@ void VisToolPiecePath::RefreshGeometry()
 void VisToolPiecePath::SetPath(const VPiecePath &path)
 {
     m_path = path;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void VisToolPiecePath::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
-{
-    const qreal scale = SceneScale(scene());
-
-    for (int i=0; i < m_points.size(); ++i)
-    {
-        ScalePoint(m_points[i], scale);
-    }
-
-    ScalePenWidth(m_line, scale);
-
-    VisPath::paint(painter, option, widget);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

@@ -43,6 +43,7 @@
 #include "../vpatterndb/vcontainer.h"
 #include "../visualization.h"
 #include "vispath.h"
+#include "../vwidgets/scalesceneitems.h"
 
 //---------------------------------------------------------------------------------------------------------------------
 VisToolCubicBezier::VisToolCubicBezier(const VContainer *data, QGraphicsItem *parent)
@@ -57,8 +58,8 @@ VisToolCubicBezier::VisToolCubicBezier(const VContainer *data, QGraphicsItem *pa
       helpLine1(nullptr),
       helpLine2(nullptr)
 {
-    helpLine1 = InitItem<QGraphicsLineItem>(mainColor, this);
-    helpLine2 = InitItem<QGraphicsLineItem>(mainColor, this);
+    helpLine1 = InitItem<VScaledLine>(mainColor, this);
+    helpLine2 = InitItem<VScaledLine>(mainColor, this);
 
     point1 = InitPoint(supportColor, this);
     point2 = InitPoint(supportColor, this); //-V656
@@ -89,7 +90,7 @@ void VisToolCubicBezier::RefreshGeometry()
             {
                 VCubicBezier spline(*first, *second, VPointF(Visualization::scenePos),
                                     VPointF(Visualization::scenePos));
-                DrawPath(this, spline.GetPath(PathDirection::Hide), mainColor, lineStyle, Qt::RoundCap);
+                DrawPath(this, spline.GetPath(), mainColor, lineStyle, Qt::RoundCap);
             }
             else
             {
@@ -99,7 +100,7 @@ void VisToolCubicBezier::RefreshGeometry()
                 if (object4Id <= NULL_ID)
                 {
                     VCubicBezier spline(*first, *second, *third,  VPointF(Visualization::scenePos));
-                    DrawPath(this, spline.GetPath(PathDirection::Hide), mainColor, lineStyle, Qt::RoundCap);
+                    DrawPath(this, spline.GetPath(), mainColor, lineStyle, Qt::RoundCap);
                     DrawLine(helpLine2, QLineF(static_cast<QPointF>(*third), Visualization::scenePos), mainColor,
                              Qt::DashLine);
                 }
@@ -111,7 +112,7 @@ void VisToolCubicBezier::RefreshGeometry()
                              Qt::DashLine);
 
                     VCubicBezier spline(*first, *second, *third,  *fourth);
-                    DrawPath(this, spline.GetPath(), spline.GetDirectionPath(), mainColor, lineStyle, Qt::RoundCap);
+                    DrawPath(this, spline.GetPath(), spline.DirectionArrows(), mainColor, lineStyle, Qt::RoundCap);
                 }
             }
         }
@@ -134,19 +135,4 @@ void VisToolCubicBezier::setObject3Id(const quint32 &value)
 void VisToolCubicBezier::setObject4Id(const quint32 &value)
 {
     object4Id = value;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void VisToolCubicBezier::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
-{
-    const qreal scale = SceneScale(scene());
-
-    ScalePoint(point1, scale);
-    ScalePoint(point2, scale);
-    ScalePoint(point3, scale);
-    ScalePoint(point4, scale);
-    ScalePenWidth(helpLine1, scale);
-    ScalePenWidth(helpLine2, scale);
-
-    VisPath::paint(painter, option, widget);
 }
