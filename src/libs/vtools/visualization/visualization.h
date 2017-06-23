@@ -96,8 +96,9 @@ protected:
                           Qt::PenStyle style = Qt::SolidLine);
     void         DrawPath(VCurvePathItem *pathItem, const QPainterPath &path, const QColor &color,
                           Qt::PenStyle style = Qt::SolidLine, Qt::PenCapStyle cap = Qt::SquareCap);
-    void         DrawPath(VCurvePathItem *pathItem, const QPainterPath &path, const QPainterPath &direction,
-                          const QColor &color, Qt::PenStyle style = Qt::SolidLine, Qt::PenCapStyle cap = Qt::SquareCap);
+    void         DrawPath(VCurvePathItem *pathItem, const QPainterPath &path,
+                          const QVector<DirectionArrow> &directionArrows, const QColor &color,
+                          Qt::PenStyle style = Qt::SolidLine, Qt::PenCapStyle cap = Qt::SquareCap);
 
     template <typename Item>
     void         AddItem(Item *item);

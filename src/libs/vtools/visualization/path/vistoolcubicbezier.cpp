@@ -90,7 +90,7 @@ void VisToolCubicBezier::RefreshGeometry()
             {
                 VCubicBezier spline(*first, *second, VPointF(Visualization::scenePos),
                                     VPointF(Visualization::scenePos));
-                DrawPath(this, spline.GetPath(PathDirection::Hide), mainColor, lineStyle, Qt::RoundCap);
+                DrawPath(this, spline.GetPath(), mainColor, lineStyle, Qt::RoundCap);
             }
             else
             {
@@ -100,7 +100,7 @@ void VisToolCubicBezier::RefreshGeometry()
                 if (object4Id <= NULL_ID)
                 {
                     VCubicBezier spline(*first, *second, *third,  VPointF(Visualization::scenePos));
-                    DrawPath(this, spline.GetPath(PathDirection::Hide), mainColor, lineStyle, Qt::RoundCap);
+                    DrawPath(this, spline.GetPath(), mainColor, lineStyle, Qt::RoundCap);
                     DrawLine(helpLine2, QLineF(static_cast<QPointF>(*third), Visualization::scenePos), mainColor,
                              Qt::DashLine);
                 }
@@ -112,7 +112,7 @@ void VisToolCubicBezier::RefreshGeometry()
                              Qt::DashLine);
 
                     VCubicBezier spline(*first, *second, *third,  *fourth);
-                    DrawPath(this, spline.GetPath(), spline.GetDirectionPath(), mainColor, lineStyle, Qt::RoundCap);
+                    DrawPath(this, spline.GetPath(), spline.DirectionArrows(), mainColor, lineStyle, Qt::RoundCap);
                 }
             }
         }

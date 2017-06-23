@@ -117,7 +117,7 @@ void VisToolRotation::RefreshGeometry()
                  Qt::DashLine);
 
         VArc arc(*origin, defPointRadiusPixel*2, 0, tempAngle);
-        DrawPath(angleArc, arc.GetPath(PathDirection::Hide), supportColor2, Qt::SolidLine, Qt::RoundCap);
+        DrawPath(angleArc, arc.GetPath(), supportColor2, Qt::SolidLine, Qt::RoundCap);
 
         Visualization::toolTip = tr("Rotating angle = %1°, <b>Shift</b> - sticking angle, "
                                     "<b>Mouse click</b> - finish creation").arg(tempAngle);
@@ -216,14 +216,14 @@ int VisToolRotation::AddCurve(qreal angle, const QPointF &origin, quint32 id, in
 
     ++i;
     VCurvePathItem *path = GetCurve(static_cast<quint32>(i), supportColor2);
-    DrawPath(path, curve->GetPath(PathDirection::Show), supportColor2, Qt::SolidLine, Qt::RoundCap);
+    DrawPath(path, curve->GetPath(), curve->DirectionArrows(), supportColor2, Qt::SolidLine, Qt::RoundCap);
 
     ++i;
     path = GetCurve(static_cast<quint32>(i), supportColor);
     if (object1Id != NULL_ID)
     {
         const Item rotated = curve->Rotate(origin, angle);
-        DrawPath(path, rotated.GetPath(PathDirection::Show), supportColor, Qt::SolidLine, Qt::RoundCap);
+        DrawPath(path, rotated.GetPath(), rotated.DirectionArrows(), supportColor, Qt::SolidLine, Qt::RoundCap);
     }
 
     return i;

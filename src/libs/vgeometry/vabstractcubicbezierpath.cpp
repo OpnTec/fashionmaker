@@ -65,27 +65,16 @@ VAbstractCubicBezierPath::~VAbstractCubicBezierPath()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QPainterPath VAbstractCubicBezierPath::GetDirectionPath() const
-{
-    QPainterPath painterPath;
-    for (qint32 i = 1; i <= CountSubSpl(); ++i)
-    {
-        painterPath.addPath(GetSpline(i).GetDirectionPath());
-    }
-    return painterPath;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
 /**
  * @brief GetPath return QPainterPath which reprezent spline path.
  * @return path.
  */
-QPainterPath VAbstractCubicBezierPath::GetPath(PathDirection direction) const
+QPainterPath VAbstractCubicBezierPath::GetPath() const
 {
     QPainterPath painterPath;
     for (qint32 i = 1; i <= CountSubSpl(); ++i)
     {
-        painterPath.addPath(GetSpline(i).GetPath(direction));
+        painterPath.addPath(GetSpline(i).GetPath());
     }
     return painterPath;
 }
@@ -118,6 +107,17 @@ qreal VAbstractCubicBezierPath::GetLength() const
         length += GetSpline(i).GetLength();
     }
     return length;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QVector<DirectionArrow> VAbstractCubicBezierPath::DirectionArrows() const
+{
+    QVector<DirectionArrow> arrows;
+    for (qint32 i = 1; i <= CountSubSpl(); ++i)
+    {
+        arrows += GetSpline(i).DirectionArrows();
+    }
+    return arrows;
 }
 
 //---------------------------------------------------------------------------------------------------------------------

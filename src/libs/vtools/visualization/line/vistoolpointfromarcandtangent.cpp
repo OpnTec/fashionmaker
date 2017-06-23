@@ -68,7 +68,7 @@ void VisToolPointFromArcAndTangent::RefreshGeometry()
         if (arcId > NULL_ID)// circle center
         {
             const QSharedPointer<VArc> arc = Visualization::data->GeometricObject<VArc>(arcId);
-            DrawPath(arcPath, arc->GetPath(PathDirection::Show), Qt::darkGreen, Qt::SolidLine, Qt::RoundCap);
+            DrawPath(arcPath, arc->GetPath(), arc->DirectionArrows(), Qt::darkGreen, Qt::SolidLine, Qt::RoundCap);
 
             FindRays(static_cast<QPointF>(*tan), arc.data());
 

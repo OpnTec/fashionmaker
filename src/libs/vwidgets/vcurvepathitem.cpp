@@ -28,13 +28,14 @@
 
 #include "vcurvepathitem.h"
 #include "../vwidgets/global.h"
+#include "../vgeometry/vabstractcurve.h"
 
 #include <QPainter>
 
 //---------------------------------------------------------------------------------------------------------------------
 VCurvePathItem::VCurvePathItem(QGraphicsItem *parent)
     : QGraphicsPathItem(parent),
-      m_direction()
+      m_directionArrows()
 {
 }
 
@@ -43,12 +44,14 @@ QPainterPath VCurvePathItem::shape() const
 {
     QPainterPath itemPath = path();
 
-    if (m_direction != QPainterPath())
+    const QPainterPath arrowsPath = VAbstractCurve::ShowDirection(m_directionArrows,
+                                                                  ScaleWidth(VAbstractCurve::lengthCurveDirectionArrow,
+                                                                             SceneScale(scene())));
+    if (arrowsPath != QPainterPath())
     {
-        itemPath.addPath(m_direction);
+        itemPath.addPath(arrowsPath);
+        itemPath.setFillRule(Qt::WindingFill);
     }
-
-    itemPath.setFillRule(Qt::WindingFill);
 
     // We unfortunately need this hack as QPainterPathStroker will set a width of 1.0
     // if we pass a value of 0.0 to QPainterPathStroker::setWidth()
@@ -81,7 +84,11 @@ void VCurvePathItem::paint(QPainter *painter, const QStyleOptionGraphicsItem *op
 {
     ScalePenWidth();
 
-    if (m_direction != QPainterPath())
+    const QPainterPath arrowsPath = VAbstractCurve::ShowDirection(m_directionArrows,
+                                                                  ScaleWidth(VAbstractCurve::lengthCurveDirectionArrow,
+                                                                             SceneScale(scene())));
+
+    if (arrowsPath != QPainterPath())
     {
         painter->save();
 
@@ -90,7 +97,7 @@ void VCurvePathItem::paint(QPainter *painter, const QStyleOptionGraphicsItem *op
 
         painter->setPen(arrowPen);
         painter->setBrush(brush());
-        painter->drawPath(m_direction);
+        painter->drawPath(arrowsPath);
 
         painter->restore();
     }
@@ -99,9 +106,9 @@ void VCurvePathItem::paint(QPainter *painter, const QStyleOptionGraphicsItem *op
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VCurvePathItem::SetDirectionPath(const QPainterPath &path)
+void VCurvePathItem::SetDirectionArrows(const QVector<QPair<QLineF, QLineF> > &arrows)
 {
-    m_direction = path;
+    m_directionArrows = arrows;
 }
 
 //---------------------------------------------------------------------------------------------------------------------

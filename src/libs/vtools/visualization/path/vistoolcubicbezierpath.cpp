@@ -97,8 +97,7 @@ void VisToolCubicBezierPath::RefreshGeometry()
 
         if (countSubSpl >= 1)
         {
-            DrawPath(this, path.GetPath(), mainColor, lineStyle, Qt::RoundCap);
-            DrawPath(this, path.GetDirectionPath(), mainColor, Qt::SolidLine, Qt::RoundCap);
+            DrawPath(this, path.GetPath(), path.DirectionArrows(), mainColor, lineStyle, Qt::RoundCap);
 
             for (qint32 i = 1; i<=countSubSpl; ++i)
             {
@@ -203,7 +202,7 @@ void VisToolCubicBezierPath::Creating(const QVector<VPointF> &pathPoints, int po
                 const QPointF p2 = p1p2.p2();
 
                 VSpline spline(p1, p2, Visualization::scenePos, VPointF(Visualization::scenePos));
-                DrawPath(newCurveSegment, spline.GetPath(PathDirection::Hide), mainColor, Qt::SolidLine, Qt::RoundCap);
+                DrawPath(newCurveSegment, spline.GetPath(), mainColor, Qt::SolidLine, Qt::RoundCap);
 
                 DrawLine(helpLine1, p1p2, mainColor, Qt::DashLine);
 
@@ -234,7 +233,7 @@ void VisToolCubicBezierPath::Creating(const QVector<VPointF> &pathPoints, int po
             DrawLine(helpLine1, QLineF(static_cast<QPointF>(p1), p2), mainColor, Qt::DashLine);
 
             VSpline spline(p1, p2, Visualization::scenePos, VPointF(Visualization::scenePos));
-            DrawPath(newCurveSegment, spline.GetPath(PathDirection::Hide), mainColor, Qt::SolidLine, Qt::RoundCap);
+            DrawPath(newCurveSegment, spline.GetPath(), mainColor, Qt::SolidLine, Qt::RoundCap);
 
             const int preLastPoint = subSplCount * 2;
             VScaledEllipse *p2Ctrl = this->getPoint(ctrlPoints, static_cast<unsigned>(preLastPoint));
@@ -260,7 +259,7 @@ void VisToolCubicBezierPath::Creating(const QVector<VPointF> &pathPoints, int po
             DrawLine(helpLine2, QLineF(p3, Visualization::scenePos), mainColor, Qt::DashLine);
 
             VSpline spline(p1, p2, p3, VPointF(Visualization::scenePos));
-            DrawPath(newCurveSegment, spline.GetPath(PathDirection::Hide), mainColor, Qt::SolidLine, Qt::RoundCap);
+            DrawPath(newCurveSegment, spline.GetPath(), mainColor, Qt::SolidLine, Qt::RoundCap);
 
             const int preLastPoint = subSplCount * 2;
             VScaledEllipse *p2Ctrl = this->getPoint(ctrlPoints, static_cast<unsigned>(preLastPoint));

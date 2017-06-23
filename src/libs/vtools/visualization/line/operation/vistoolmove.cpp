@@ -166,7 +166,7 @@ QGraphicsPathItem *VisToolMove::AddOriginCurve(quint32 id, int &i)
 
     ++i;
     VCurvePathItem *path = GetCurve(static_cast<quint32>(i), supportColor2);
-    DrawPath(path, curve->GetPath(PathDirection::Show), supportColor2, Qt::SolidLine, Qt::RoundCap);
+    DrawPath(path, curve->GetPath(), curve->DirectionArrows(), supportColor2, Qt::SolidLine, Qt::RoundCap);
 
     return path;
 }
@@ -180,7 +180,7 @@ int VisToolMove::AddMovedCurve(qreal angle, qreal length, quint32 id, int i)
     ++i;
     VCurvePathItem *path = GetCurve(static_cast<quint32>(i), supportColor);
     const Item moved = curve->Move(length, angle);
-    DrawPath(path, moved.GetPath(PathDirection::Show), supportColor, Qt::SolidLine, Qt::RoundCap);
+    DrawPath(path, moved.GetPath(), moved.DirectionArrows(), supportColor, Qt::SolidLine, Qt::RoundCap);
 
     return i;
 }

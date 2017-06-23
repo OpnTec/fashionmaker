@@ -72,14 +72,14 @@ int VisOperation::AddFlippedCurve(const QPointF &firstPoint, const QPointF &seco
 
     ++i;
     VCurvePathItem *path = GetCurve(static_cast<quint32>(i), supportColor2);
-    DrawPath(path, curve->GetPath(PathDirection::Show), supportColor2, Qt::SolidLine, Qt::RoundCap);
+    DrawPath(path, curve->GetPath(), curve->DirectionArrows(), supportColor2, Qt::SolidLine, Qt::RoundCap);
 
     ++i;
     path = GetCurve(static_cast<quint32>(i), supportColor);
     if (object1Id != NULL_ID)
     {
         const Item flipped = curve->Flip(QLineF(firstPoint, secondPoint));
-        DrawPath(path, flipped.GetPath(PathDirection::Show), supportColor, Qt::SolidLine, Qt::RoundCap);
+        DrawPath(path, flipped.GetPath(), flipped.DirectionArrows(), supportColor, Qt::SolidLine, Qt::RoundCap);
     }
 
     return i;

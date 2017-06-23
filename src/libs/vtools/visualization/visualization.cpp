@@ -218,12 +218,13 @@ void Visualization::DrawLine(VScaledLine *lineItem, const QLineF &line, const QC
 void Visualization::DrawPath(VCurvePathItem *pathItem, const QPainterPath &path, const QColor &color,
                              Qt::PenStyle style, Qt::PenCapStyle cap)
 {
-    DrawPath(pathItem, path, QPainterPath(), color, style, cap);
+    DrawPath(pathItem, path, QVector<DirectionArrow>(), color, style, cap);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void Visualization::DrawPath(VCurvePathItem *pathItem, const QPainterPath &path, const QPainterPath &direction,
-                             const QColor &color, Qt::PenStyle style, Qt::PenCapStyle cap)
+void Visualization::DrawPath(VCurvePathItem *pathItem, const QPainterPath &path,
+                             const QVector<DirectionArrow> &directionArrows, const QColor &color, Qt::PenStyle style,
+                             Qt::PenCapStyle cap)
 {
     SCASSERT (pathItem != nullptr)
 
@@ -234,7 +235,7 @@ void Visualization::DrawPath(VCurvePathItem *pathItem, const QPainterPath &path,
 
     pathItem->setPen(visPen);
     pathItem->setPath(path);
-    pathItem->SetDirectionPath(direction);
+    pathItem->SetDirectionArrows(directionArrows);
     pathItem->setVisible(true);
 }
 

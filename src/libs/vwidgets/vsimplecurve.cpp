@@ -64,7 +64,7 @@ void VSimpleCurve::RefreshGeometry(const QSharedPointer<VAbstractCurve> &curve)
 
     if (not m_curve.isNull())
     {
-        m_isHovered ? SetDirectionPath(m_curve->GetDirectionPath()) : SetDirectionPath(QPainterPath());
+        m_isHovered ? SetDirectionArrows(m_curve->DirectionArrows()) : SetDirectionArrows(QVector<DirectionArrow>());
         setPath(m_curve->GetPath());
     }
     else
