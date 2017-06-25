@@ -91,7 +91,7 @@ defineTest(copyToDestdir) {
                     FILE ~= s,/,\\,g
                     DDIR ~= s,/,\\,g
                 }
-                QMAKE_PRE_LINK += $$VCOPY $$quote($$FILE) $$quote($$DDIR) $$escape_expand(\\n\\t)
+                QMAKE_POST_LINK += $$VCOPY $$quote($$FILE) $$quote($$DDIR) $$escape_expand(\\n\\t)
             }
 
             QMAKE_CLEAN += $$DDIR/$$basename(FILE)
@@ -117,7 +117,7 @@ defineTest(forceCopyToDestdir) {
                 FILE ~= s,/,\\,g
                 DDIR ~= s,/,\\,g
             }
-            QMAKE_PRE_LINK += $$VCOPY $$quote($$FILE) $$quote($$DDIR) $$escape_expand(\\n\\t)
+            QMAKE_POST_LINK += $$VCOPY $$quote($$FILE) $$quote($$DDIR) $$escape_expand(\\n\\t)
             QMAKE_CLEAN += $$DDIR/$$basename(FILE)
         }
     }
