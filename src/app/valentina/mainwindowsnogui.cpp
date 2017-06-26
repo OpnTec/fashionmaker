@@ -200,8 +200,6 @@ void MainWindowsNoGUI::ErrorConsoleMode(const LayoutErrors &state)
 //---------------------------------------------------------------------------------------------------------------------
 void MainWindowsNoGUI::ExportLayout(const DialogSaveLayout &dialog)
 {
-
-    const QString suf = dialog.Format().replace(".", "");
     const QString path = dialog.Path();
     QDir dir(path);
     dir.setPath(path);
@@ -215,51 +213,90 @@ void MainWindowsNoGUI::ExportLayout(const DialogSaveLayout &dialog)
     }
     qApp->ValentinaSettings()->SetPathLayout(path);
     const QString mask = dialog.FileName();
+    const LayoutExportFormats format = dialog.Format();
 
     for (int i=0; i < scenes.size(); ++i)
     {
         QGraphicsRectItem *paper = qgraphicsitem_cast<QGraphicsRectItem *>(papers.at(i));
         if (paper)
         {
-            const QString name = path + QLatin1String("/") + mask+QString::number(i+1) + dialog.Format();
+            const QString name = path + QLatin1String("/") + mask+QString::number(i+1)
+                    + DialogSaveLayout::ExportFromatSuffix(format);
             QBrush *brush = new QBrush();
             brush->setColor( QColor( Qt::white ) );
             scenes[i]->setBackgroundBrush( *brush );
             shadows[i]->setVisible(false);
             paper->setPen(QPen(QBrush(Qt::white, Qt::NoBrush), 0.1, Qt::NoPen));
-            const QStringList suffix = QStringList() << QLatin1String("svg")
-                                                     << QLatin1String("png")
-                                                     << QLatin1String("pdf")
-                                                     << QLatin1String("eps")
-                                                     << QLatin1String("ps")
-                                                     << QLatin1String("obj")
-                                                     << QLatin1String("dxf");
-            switch (suffix.indexOf(suf))
+
+            switch (format)
             {
-                case 0: //svg
+                case LayoutExportFormats::DXF_AC1006_AAMA:
+                case LayoutExportFormats::DXF_AC1009_AAMA:
+                case LayoutExportFormats::DXF_AC1012_AAMA:
+                case LayoutExportFormats::DXF_AC1014_AAMA:
+                case LayoutExportFormats::DXF_AC1015_AAMA:
+                case LayoutExportFormats::DXF_AC1018_AAMA:
+                case LayoutExportFormats::DXF_AC1021_AAMA:
+                case LayoutExportFormats::DXF_AC1024_AAMA:
+                case LayoutExportFormats::DXF_AC1027_AAMA:
+                case LayoutExportFormats::DXF_AC1006_ASTM:
+                case LayoutExportFormats::DXF_AC1009_ASTM:
+                case LayoutExportFormats::DXF_AC1012_ASTM:
+                case LayoutExportFormats::DXF_AC1014_ASTM:
+                case LayoutExportFormats::DXF_AC1015_ASTM:
+                case LayoutExportFormats::DXF_AC1018_ASTM:
+                case LayoutExportFormats::DXF_AC1021_ASTM:
+                case LayoutExportFormats::DXF_AC1024_ASTM:
+                case LayoutExportFormats::DXF_AC1027_ASTM:
+                    Q_UNREACHABLE(); // For now not supported
+                case LayoutExportFormats::SVG:
                     paper->setVisible(false);
                     SvgFile(name, i);
                     paper->setVisible(true);
                     break;
-                case 1: //png
-                    PngFile(name, i);
-                    break;
-                case 2: //pdf
+                case LayoutExportFormats::PDF:
                     PdfFile(name, i);
                     break;
-                case 3: //eps
-                    EpsFile(name, i);
+                case LayoutExportFormats::PNG:
+                    PngFile(name, i);
                     break;
-                case 4: //ps
-                    PsFile(name, i);
-                    break;
-                case 5: //obj
+                case LayoutExportFormats::OBJ:
                     paper->setVisible(false);
                     ObjFile(name, i);
                     paper->setVisible(true);
                     break;
-                case 6: //dxf
-                    DxfFile(name, i);
+                case LayoutExportFormats::PS:
+                    PsFile(name, i);
+                    break;
+                case LayoutExportFormats::EPS:
+                    EpsFile(name, i);
+                    break;
+                case LayoutExportFormats::DXF_AC1006_Flat:
+                    DxfFile(name, DRW::AC1006, dialog.IsBinaryDXFFormat(), i);
+                    break;
+                case LayoutExportFormats::DXF_AC1009_Flat:
+                    DxfFile(name, DRW::AC1009, dialog.IsBinaryDXFFormat(), i);
+                    break;
+                case LayoutExportFormats::DXF_AC1012_Flat:
+                    DxfFile(name, DRW::AC1012, dialog.IsBinaryDXFFormat(), i);
+                    break;
+                case LayoutExportFormats::DXF_AC1014_Flat:
+                    DxfFile(name, DRW::AC1014, dialog.IsBinaryDXFFormat(), i);
+                    break;
+                case LayoutExportFormats::DXF_AC1015_Flat:
+                    DxfFile(name, DRW::AC1015, dialog.IsBinaryDXFFormat(), i);
+                    break;
+                case LayoutExportFormats::DXF_AC1018_Flat:
+                    DxfFile(name, DRW::AC1018, dialog.IsBinaryDXFFormat(), i);
+                    break;
+                case LayoutExportFormats::DXF_AC1021_Flat:
+                    DxfFile(name, DRW::AC1021, dialog.IsBinaryDXFFormat(), i);
+                    break;
+                case LayoutExportFormats::DXF_AC1024_Flat:
+                    DxfFile(name, DRW::AC1024, dialog.IsBinaryDXFFormat(), i);
+                    break;
+                case LayoutExportFormats::DXF_AC1027_Flat:
+                    DxfFile(name, DRW::AC1027, dialog.IsBinaryDXFFormat(), i);
                     break;
                 default:
                     qDebug() << "Can't recognize file suffix." << Q_FUNC_INFO;
@@ -763,7 +800,7 @@ void MainWindowsNoGUI::ObjFile(const QString &name, int i) const
 QT_WARNING_PUSH
 QT_WARNING_DISABLE_GCC("-Wswitch-default")
 
-void MainWindowsNoGUI::DxfFile(const QString &name, int i) const
+void MainWindowsNoGUI::DxfFile(const QString &name, int version, bool binary, int i) const
 {
     QGraphicsRectItem *paper = qgraphicsitem_cast<QGraphicsRectItem *>(papers.at(i));
     if (paper)
@@ -772,6 +809,8 @@ void MainWindowsNoGUI::DxfFile(const QString &name, int i) const
         generator.setFileName(name);
         generator.setSize(paper->rect().size().toSize());
         generator.setResolution(PrintDPI);
+        generator.SetVersion(static_cast<DRW::Version>(version));
+        generator.SetBinaryFormat(binary);
 
         switch (*pattern->GetPatternUnit())
         {

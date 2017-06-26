@@ -75,6 +75,8 @@ public:
     //@brief returns export type set, defaults 0 - svg
     int OptExportType() const;
 
+    int IsBinaryDXF() const;
+
     //generator creation is moved here ... because most options are for it only, so no need to create extra getters...
     //@brief creates VLayoutGenerator
     VLayoutGeneratorPtr DefaultGenerator() const;

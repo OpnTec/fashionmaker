@@ -74,6 +74,7 @@ VDxfEngine::VDxfEngine()
       resolution(static_cast<int>(PrintDPI)),
       fileName(),
       m_version(DRW::AC1014),
+      m_binary(false),
       matrix(),
       input(),
       varMeasurement(VarMeasurement::Metric),
@@ -98,7 +99,7 @@ bool VDxfEngine::begin(QPaintDevice *pdev)
 //---------------------------------------------------------------------------------------------------------------------
 bool VDxfEngine::end()
 {
-    const bool res = input->fileExport(m_version, false);
+    const bool res = input->fileExport(m_version, m_binary);
     return res;
 }
 
@@ -434,6 +435,18 @@ void VDxfEngine::SetVersion(DRW::Version version)
 {
     Q_ASSERT(not isActive());
     m_version = version;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VDxfEngine::SetBinaryFormat(bool binary)
+{
+    m_binary = binary;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+bool VDxfEngine::IsBinaryFormat() const
+{
+    return m_binary;
 }
 
 //---------------------------------------------------------------------------------------------------------------------

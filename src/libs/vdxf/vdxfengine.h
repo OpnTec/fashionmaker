@@ -78,6 +78,9 @@ public:
     DRW::Version GetVersion() const;
     void         SetVersion(DRW::Version version);
 
+    void SetBinaryFormat(bool binary);
+    bool IsBinaryFormat() const;
+
     std::string getPenStyle();
     int getPenColor();
 
@@ -90,6 +93,7 @@ private:
     double           resolution;
     QString          fileName;
     DRW::Version     m_version;
+    bool             m_binary;
     QMatrix          matrix;
     QSharedPointer<dx_iface> input;
     VarMeasurement varMeasurement;

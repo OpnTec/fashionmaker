@@ -100,6 +100,10 @@ void VCommandLine::InitOptions(VCommandLineOptions &options, QMap<QString, int> 
                                                                     DialogSaveLayout::MakeHelpFormatList(),
                                           translate("VCommandLine", "Format number"), "0"));
 
+    optionsIndex.insert(LONG_OPTION_BINARYDXF, index++);
+    options.append(new QCommandLineOption(QStringList() << LONG_OPTION_BINARYDXF,
+                                          translate("VCommandLine", "Export dxf in binary form.")));
+
     optionsIndex.insert(LONG_OPTION_GRADATIONSIZE, index++);
     options.append(new QCommandLineOption(QStringList() << SINGLE_OPTION_GRADATIONSIZE << LONG_OPTION_GRADATIONSIZE,
                                           translate("VCommandLine", "Set size value a pattern file, that was opened "
@@ -615,6 +619,15 @@ int VCommandLine::OptExportType() const
         r = parser.value(*optionsUsed.value(optionsIndex.value(LONG_OPTION_EXP2FORMAT))).toInt();
     }
     return r;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+int VCommandLine::IsBinaryDXF() const
+{
+    if (parser.isSet(*optionsUsed.value(optionsIndex.value(LONG_OPTION_BINARYDXF))))
+    {
+        return true;
+    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------

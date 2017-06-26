@@ -4690,7 +4690,8 @@ void MainWindow::DoExport(const VCommandLinePtr &expParams)
         {
             DialogSaveLayout dialog(scenes.size(), expParams->OptBaseName(), this);
             dialog.SetDestinationPath(expParams->OptDestinationPath());
-            dialog.SelectFormate(expParams->OptExportType());
+            dialog.SelectFormat(static_cast<LayoutExportFormats>(expParams->OptExportType()));
+            dialog.SetBinaryDXFFormat(expParams->IsBinaryDXF());
             ExportLayout(dialog);
         }
         catch (const VException &e)

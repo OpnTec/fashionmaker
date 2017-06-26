@@ -49,6 +49,8 @@ const QString SINGLE_OPTION_PAGETEMPLATE    = QStringLiteral("p");
 const QString LONG_OPTION_EXP2FORMAT        = QStringLiteral("format");
 const QString SINGLE_OPTION_EXP2FORMAT      = QStringLiteral("f");
 
+const QString LONG_OPTION_BINARYDXF         = QStringLiteral("bdxf");
+
 const QString LONG_OPTION_ROTATE            = QStringLiteral("rotate");
 const QString SINGLE_OPTION_ROTATE          = QStringLiteral("r");
 
@@ -115,6 +117,7 @@ QStringList AllKeys()
          << LONG_OPTION_MEASUREFILE << SINGLE_OPTION_MEASUREFILE
          << LONG_OPTION_PAGETEMPLATE << SINGLE_OPTION_PAGETEMPLATE
          << LONG_OPTION_EXP2FORMAT << SINGLE_OPTION_EXP2FORMAT
+         << LONG_OPTION_BINARYDXF
          << LONG_OPTION_ROTATE << SINGLE_OPTION_ROTATE
          << LONG_OPTION_CROP << SINGLE_OPTION_CROP
          << LONG_OPTION_UNITE << SINGLE_OPTION_UNITE

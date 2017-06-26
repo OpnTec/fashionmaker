@@ -36,6 +36,7 @@
 #include <QtGlobal>
 
 #include "dxfdef.h"
+#include "libdxfrw/drw_base.h"
 
 class VDxfEngine;
 
@@ -54,6 +55,12 @@ public:
 
     double getResolution() const;
     void   setResolution(double dpi);
+
+    DRW::Version GetVersion() const;
+    void         SetVersion(DRW::Version version);
+
+    void SetBinaryFormat(bool binary);
+    bool IsBinaryFromat() const;
 
     void setMeasurement(const VarMeasurement &var);
     void setInsunits(const VarInsunits &var);
