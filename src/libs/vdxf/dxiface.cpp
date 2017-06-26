@@ -174,15 +174,6 @@ void dx_iface::InitHeader(VarMeasurement varMeasurement, VarInsunits varInsunits
     // Sets drawing units: 0 = English; 1 = Metric
     cData.headerC.addInt("$MEASUREMENT", static_cast<int>(varMeasurement), 70);
     cData.headerC.addInt("$INSUNITS", static_cast<int>(varInsunits), 70);
-    cData.headerC.addDouble("$DIMSCALE", 1.0, 40);
-
-    // Official documentation says that initial value is 1.0, however LibreCAD has trouble if not set this value
-    // explicitly.
-    cData.headerC.addDouble("$DIMLFAC", 1.0, 40);
-
-    cData.headerC.addDouble("$LTSCALE", 0.5, 40);
-    cData.headerC.addDouble("$PSLTSCALE", 1.0, 70);
-    cData.headerC.addInt("$PLINEGEN", 1, 70);
 
     QString dateTime = QDateTime::currentDateTime().toString("yyyyMMdd.HHmmsszzz");
     dateTime.chop(1);// we need hundredths of a second
@@ -201,12 +192,12 @@ void dx_iface::InitLTypes()
     cData.lineTypes.push_back(ltype);
 
     ltype.path.clear();
-    ltype.name = "DASHEDTINY";
-    ltype.desc = "Dashed (.15x) _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _";
+    ltype.name = "DASHED";
+    ltype.desc = "Dashed _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _";
     ltype.size = 2;
-    ltype.length = 2.8575;
-    ltype.path.push_back(1.905);
-    ltype.path.push_back(-0.9525);
+    ltype.length = 0.375;
+    ltype.path.push_back(0.25);
+    ltype.path.push_back(-0.125);
     cData.lineTypes.push_back(ltype);
 
     ltype.path.clear();

@@ -138,10 +138,13 @@ void VDxfEngine::drawPath(const QPainterPath &path)
             poly->color = getPenColor();
             poly->lWeight = DRW_LW_Conv::widthByLayer;
             poly->lineType = getPenStyle();
+
             if (polygon.size() > 1 && polygon.first() == polygon.last())
             {
-                poly->flags = 1; // closed
+                poly->flags |= 0x1; // closed
             }
+
+            poly->flags |= 0x80; // plinegen
 
             for (int i=0; i < polygon.count(); ++i)
             {
@@ -160,8 +163,10 @@ void VDxfEngine::drawPath(const QPainterPath &path)
             poly->lineType = getPenStyle();
             if (polygon.size() > 1 && polygon.first() == polygon.last())
             {
-                poly->flags = 1; // closed
+                poly->flags |= 0x1; // closed
             }
+
+            poly->flags |= 0x80; // plinegen
 
             for (int i=0; i < polygon.count(); ++i)
             {
@@ -220,6 +225,13 @@ void VDxfEngine::drawPolygon(const QPointF *points, int pointCount, PolygonDrawM
         poly->lWeight = DRW_LW_Conv::widthByLayer;
         poly->lineType = getPenStyle();
 
+        if (pointCount > 1 && points[0] == points[pointCount])
+        {
+            poly->flags |= 0x1; // closed
+        }
+
+        poly->flags |= 0x80; // plinegen
+
         for (int i = 0; i < pointCount; ++i)
         {
             const QPointF p = matrix.map(points[i]);
@@ -236,6 +248,13 @@ void VDxfEngine::drawPolygon(const QPointF *points, int pointCount, PolygonDrawM
         poly->color = getPenColor();
         poly->lWeight = DRW_LW_Conv::widthByLayer;
         poly->lineType = getPenStyle();
+
+        if (pointCount > 1 && points[0] == points[pointCount])
+        {
+            poly->flags |= 0x1; // closed
+        }
+
+        poly->flags |= 0x80; // plinegen
 
         for (int i = 0; i < pointCount; ++i)
         {
@@ -423,7 +442,7 @@ std::string VDxfEngine::getPenStyle()
     switch (state->pen().style())
     {
         case Qt::DashLine:
-            return "DASHEDTINY";
+            return "DASHED";
         case Qt::DotLine:
             return "DOT";
         case Qt::DashDotLine:
