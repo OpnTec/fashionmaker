@@ -26,6 +26,7 @@ dx_iface::dx_iface(const std::string &file, VarMeasurement varMeasurement, VarIn
     InitLTypes();
     InitLayers();
     InitTextstyles();
+    InitAppId();
 }
 
 dx_iface::~dx_iface()
@@ -250,6 +251,13 @@ void dx_iface::InitTextstyles()
     style.font = "txt";
 
     cData.textStyles.push_back(style);
+}
+
+void dx_iface::InitAppId()
+{
+    DRW_AppId ai;
+    ai.name ="Valentina";
+    cData.appIds.push_back(ai);
 }
 
 void dx_iface::AddEntity(DRW_Entity *e)

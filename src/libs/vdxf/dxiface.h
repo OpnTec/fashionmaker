@@ -94,6 +94,7 @@ public:
     void InitLTypes();
     void InitLayers();
     void InitTextstyles();
+    void InitAppId();
 
     void AddEntity(DRW_Entity* e);
 
