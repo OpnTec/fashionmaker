@@ -436,6 +436,7 @@ void DialogSaveLayout::Save()
                                   .arg(name), QMessageBox::Yes|QMessageBox::No, QMessageBox::Yes);
             if (res == QMessageBox::No)
             {
+                reject();
                 return;
             }
             else
