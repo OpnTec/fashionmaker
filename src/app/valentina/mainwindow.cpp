@@ -2306,6 +2306,7 @@ void MainWindow::ActionDraw(bool checked)
         ui->dockWidgetToolOptions->setVisible(isDockToolOptionsVisible);
 
         ui->dockWidgetGroups->setWidget(groupsWidget);
+        ui->dockWidgetGroups->setWindowTitle(tr("Group"));
         ui->dockWidgetGroups->setVisible(isDockGroupsVisible);
         ui->dockWidgetGroups->setToolTip(tr("Contains all visibility groups"));
     }
@@ -2380,6 +2381,7 @@ void MainWindow::ActionDetails(bool checked)
         ui->dockWidgetToolOptions->setVisible(isDockToolOptionsVisible);
 
         ui->dockWidgetGroups->setWidget(detailsWidget);
+        ui->dockWidgetGroups->setWindowTitle(tr("Details"));
         ui->dockWidgetGroups->setVisible(isDockGroupsVisible);
         ui->dockWidgetGroups->setToolTip(tr("Show which details will go in layout"));
 
@@ -2906,7 +2908,11 @@ void MainWindow::FullParseFile()
     }
     comboBoxDraws->blockSignals(true);
     comboBoxDraws->clear();
-    comboBoxDraws->addItems(doc->getPatternPieces());
+
+    QStringList patternPieceNames = doc->getPatternPieces();
+    patternPieceNames.sort();
+    comboBoxDraws->addItems(patternPieceNames);
+
     if (not drawMode)
     {
         comboBoxDraws->setCurrentIndex(comboBoxDraws->count()-1);

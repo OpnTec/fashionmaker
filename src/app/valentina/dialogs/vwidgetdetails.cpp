@@ -149,6 +149,7 @@ void VWidgetDetails::FillTable(const QHash<quint32, VPiece> *details)
         ui->tableWidget->setItem(currentRow, 1, item);
         ++i;
     }
+    ui->tableWidget->sortItems(1,Qt::AscendingOrder);
     ui->tableWidget->resizeColumnsToContents();
     ui->tableWidget->resizeRowsToContents();
 
