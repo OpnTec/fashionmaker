@@ -376,7 +376,8 @@ void VTextManager::Update(const VAbstractPattern *pDoc, qreal dSize, qreal dHeig
     }
     if (date.isValid() == true)
     {
-        tl.m_qsText = date.toString("dd MMMM yyyy");
+        QLocale locale(qApp->Settings()->GetLocale());
+        tl.m_qsText = locale.toString(date, "dd MMMM yyyy");
         tl.m_eFontWeight = QFont::Normal;
         tl.m_eStyle = QFont::StyleNormal;
         tl.m_iFontSize = 0;

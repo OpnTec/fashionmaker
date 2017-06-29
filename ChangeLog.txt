@@ -26,6 +26,7 @@
 - [#704] Valentina crashes if click on detail.
 - [#706] Default unit in preferences not changing new file unit.
 - Fix bug. Valentina overrids exported file even if a user said no.
+- Fix bug. Date on label doesn't obey GUI language locale.
 
 # Version 0.5.0 May 9, 2017
 - [#581] User can now filter input lists by keyword in function wizard.
