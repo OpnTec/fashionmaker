@@ -33,11 +33,6 @@ HEADERS += \
     $$PWD/vdxfengine.h \
     $$PWD/vdxfpaintdevice.h \
     $$PWD/dxfdef.h \
-    $$PWD/libdxfrw/intern/drw_cptable932.h \
-    $$PWD/libdxfrw/intern/drw_cptable936.h \
-    $$PWD/libdxfrw/intern/drw_cptable949.h \
-    $$PWD/libdxfrw/intern/drw_cptable950.h \
-    $$PWD/libdxfrw/intern/drw_cptables.h \
     $$PWD/libdxfrw/intern/drw_dbg.h \
     $$PWD/libdxfrw/intern/drw_textcodec.h \
     $$PWD/libdxfrw/intern/dwgbuffer.h \
