@@ -281,7 +281,7 @@ void dx_iface::AddEntity(DRW_Entity *e)
 UTF8STRING dx_iface::AddFont(const QFont &f)
 {
     DRW_Textstyle ts;
-    ts.name = f.family().toStdString();
+    ts.name = f.family().toUpper().toStdString();
 
     // Idea source https://stackoverflow.com/questions/20111522/writing-text-styles-into-dxf-from-a-delphi-application
     if (f.bold())
@@ -304,7 +304,7 @@ UTF8STRING dx_iface::AddFont(const QFont &f)
         }
     }
 
-    ts.font = "Times New Roman";//f.family().toStdString();
+    ts.font = f.family().toStdString();
 
     cData.textStyles.push_back(ts);
 
