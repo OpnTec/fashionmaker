@@ -1473,8 +1473,40 @@
         <translation type="vanished">Forro interno</translation>
     </message>
     <message>
+        <source>Cut on fold</source>
+        <translation type="vanished">Cortar e dobrar</translation>
+    </message>
+    <message>
+        <source>Grainline</source>
+        <translation type="vanished">Fio</translation>
+    </message>
+    <message>
+        <source>Grainline visible</source>
+        <translation type="vanished">Fio visível</translation>
+    </message>
+    <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation type="vanished">&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Mostrar cálculo completo na caixa de mensagem&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+    </message>
+    <message>
+        <source>Length should be positive</source>
+        <translation type="vanished">Comprimento deve ser positivo</translation>
+    </message>
+    <message>
+        <source>Arrows:</source>
+        <translation type="vanished">Setas:</translation>
+    </message>
+    <message>
+        <source>Both</source>
+        <translation type="vanished">Ambos</translation>
+    </message>
+    <message>
+        <source>Just front</source>
+        <translation type="vanished">Apenas frente</translation>
+    </message>
+    <message>
+        <source>Just rear</source>
+        <translation type="vanished">Apenas costas</translation>
     </message>
 </context>
 <context>
@@ -1581,7 +1613,7 @@
     </message>
     <message>
         <source>Curve angle</source>
-        <translation type="unfinished"></translation>
+        <translation>Ângulo da curva</translation>
     </message>
     <message>
         <source>Formula:</source>
@@ -1601,11 +1633,11 @@
     </message>
     <message>
         <source>Full name</source>
-        <translation type="unfinished"></translation>
+        <translation>Nome completo</translation>
     </message>
     <message>
         <source>Functions</source>
-        <translation type="unfinished"></translation>
+        <translation>Funções</translation>
     </message>
     <message>
         <source>Lengths to control points</source>
@@ -3175,15 +3207,15 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Change image</source>
-        <translation type="unfinished"></translation>
+        <translation>Trocar imagem</translation>
     </message>
     <message>
         <source>Save image to file</source>
-        <translation type="unfinished"></translation>
+        <translation>Salvar imagem para arquivo</translation>
     </message>
     <message>
         <source>Show image</source>
-        <translation type="unfinished"></translation>
+        <translation>Mostrar imagem</translation>
     </message>
     <message>
         <source>Image for pattern</source>
@@ -4076,7 +4108,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Grainline</source>
-        <translation type="unfinished"></translation>
+        <translation>Fio</translation>
     </message>
     <message>
         <source>Select main path objects clockwise, &lt;b&gt;Shift&lt;/b&gt; - reverse direction curve, &lt;b&gt;Enter&lt;/b&gt; - finish creation</source>
@@ -4112,7 +4144,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Length should be positive</source>
-        <translation type="unfinished"></translation>
+        <translation>Comprimento deve ser positivo</translation>
     </message>
     <message>
         <source>Parser error: %1</source>
@@ -4172,19 +4204,19 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Cut on fold</source>
-        <translation type="unfinished"></translation>
+        <translation>Cortar e dobrar</translation>
     </message>
     <message>
         <source>Both</source>
-        <translation type="unfinished"></translation>
+        <translation>Ambos</translation>
     </message>
     <message>
         <source>Just front</source>
-        <translation type="unfinished"></translation>
+        <translation>Apenas frente</translation>
     </message>
     <message>
         <source>Just rear</source>
-        <translation type="unfinished"></translation>
+        <translation>Apenas costas</translation>
     </message>
     <message>
         <source>Pins</source>
@@ -7118,7 +7150,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Full name</source>
-        <translation type="unfinished"></translation>
+        <translation>Nome completo</translation>
     </message>
     <message>
         <source>File &apos;%1&apos; doesn&apos;t exist!</source>
@@ -7328,7 +7360,7 @@ Do you want to save your changes?</source>
     <name>TabGrainline</name>
     <message>
         <source>Grainline visible</source>
-        <translation type="unfinished"></translation>
+        <translation>Fio visível</translation>
     </message>
     <message>
         <source>Rotation:</source>
@@ -7368,7 +7400,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Arrows:</source>
-        <translation type="unfinished"></translation>
+        <translation>Setas:</translation>
     </message>
 </context>
 <context>
