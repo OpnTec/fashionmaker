@@ -135,9 +135,8 @@ private:
 
     QGraphicsPathItem *GetMainItem() const Q_REQUIRED_RESULT;
 
-    QPainterPath CreateLabelText(const QVector<QPointF> &labelShape, const VTextManager &tm) const;
-
     void CreateInternalPathItem(int i, QGraphicsItem *parent) const;
+    void CreateLabelStrings(QGraphicsItem *parent, const QVector<QPointF> &labelShape, const VTextManager &tm) const;
     void CreateGrainlineItem(QGraphicsItem *parent) const;
 
     template <class T>

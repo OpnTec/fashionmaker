@@ -336,19 +336,6 @@ QPointF RotatePoint(const QPointF &ptCenter, const QPointF& pt, qreal dAng)
 
     return ptDest + ptCenter;
 }
-
-//---------------------------------------------------------------------------------------------------------------------
-void CreateLabel(QGraphicsItem *parent, const QPainterPath &path)
-{
-    SCASSERT(parent != nullptr)
-
-    if (not path.isEmpty())
-    {
-        QGraphicsPathItem* item = new QGraphicsPathItem(parent);
-        item->setPath(path);
-        item->setBrush(QBrush(Qt::black));
-    }
-}
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -489,8 +476,9 @@ void VLayoutPiece::SetDetail(const QString& qsName, const VPieceLabelData& data,
       << QPointF(ptPos.x() + labelWidth, ptPos.y() + labelHeight)
       << QPointF(ptPos.x(), ptPos.y() + labelHeight);
 
-    const qreal dAng = qDegreesToRadians(labelAngle);
+    const qreal dAng = qDegreesToRadians(-labelAngle);
     const QPointF ptCenter(ptPos.x() + labelWidth/2, ptPos.y() + labelHeight/2);
+
     for (int i = 0; i < v.count(); ++i)
     {
         v[i] = RotatePoint(ptCenter, v.at(i), dAng);
@@ -530,7 +518,7 @@ void VLayoutPiece::SetPatternInfo(const VAbstractPattern* pDoc, const VPatternLa
       << QPointF(ptPos.x() + labelWidth, ptPos.y() + labelHeight)
       << QPointF(ptPos.x(), ptPos.y() + labelHeight);
 
-    const qreal dAng = qDegreesToRadians(labelAngle);
+    const qreal dAng = qDegreesToRadians(-labelAngle);
     const QPointF ptCenter(ptPos.x() + labelWidth/2, ptPos.y() + labelHeight/2);
     for (int i = 0; i < v.count(); ++i)
     {
@@ -943,11 +931,86 @@ QGraphicsItem *VLayoutPiece::GetItem() const
         CreateInternalPathItem(i, item);
     }
 
-    CreateLabel(item, CreateLabelText(d->detailLabel, d->m_tmDetail));
-    CreateLabel(item, CreateLabelText(d->patternInfo, d->m_tmPattern));
+    CreateLabelStrings(item, d->detailLabel, d->m_tmDetail);
+    CreateLabelStrings(item, d->patternInfo, d->m_tmPattern);
     CreateGrainlineItem(item);
 
     return item;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VLayoutPiece::CreateLabelStrings(QGraphicsItem *parent, const QVector<QPointF> &labelShape,
+                                      const VTextManager &tm) const
+{
+    SCASSERT(parent != nullptr)
+
+    if (labelShape.count() > 2)
+    {
+        const qreal dW = QLineF(labelShape.at(0), labelShape.at(1)).length();
+        const qreal dH = QLineF(labelShape.at(1), labelShape.at(2)).length();
+        const qreal angle = - QLineF(labelShape.at(0), labelShape.at(1)).angle();
+        qreal dY = 0;
+        qreal dX = 0;
+
+        for (int i = 0; i < tm.GetSourceLinesCount(); ++i)
+        {
+            const TextLine& tl = tm.GetSourceLine(i);
+            QFont fnt = tm.GetFont();
+            fnt.setPixelSize(tm.GetFont().pixelSize() + tl.m_iFontSize);
+            fnt.setWeight(tl.m_eFontWeight);
+            fnt.setStyle(tl.m_eStyle);
+
+            QFontMetrics fm(fnt);
+
+            if (dY > dH)
+            {
+                break;
+            }
+
+            QString qsText = tl.m_qsText;
+            if (fm.width(qsText) > dW)
+            {
+                qsText = fm.elidedText(qsText, Qt::ElideMiddle, static_cast<int>(dW));
+            }
+            if ((tl.m_eAlign & Qt::AlignLeft) > 0)
+            {
+                dX = 0;
+            }
+            else if ((tl.m_eAlign & Qt::AlignHCenter) > 0)
+            {
+                dX = (dW - fm.width(qsText))/2;
+            }
+            else
+            {
+                dX = dW - fm.width(qsText);
+            }
+
+            // set up the rotation around top-left corner matrix
+            QTransform labelMatrix;
+            labelMatrix.translate(labelShape.at(0).x(), labelShape.at(0).y());
+            if (d->mirror)
+            {
+                labelMatrix.scale(-1, 1);
+                labelMatrix.rotate(angle);
+                labelMatrix.translate(-dW, 0);
+                labelMatrix.translate(dX, dY); // Each string has own position
+            }
+            else
+            {
+                labelMatrix.rotate(angle);
+                labelMatrix.translate(dX, dY); // Each string has own position
+            }
+
+            labelMatrix *= d->matrix;
+
+            QGraphicsSimpleTextItem* item = new QGraphicsSimpleTextItem(parent);
+            item->setFont(fnt);
+            item->setText(qsText);
+            item->setTransform(labelMatrix);
+
+            dY += (fm.height() + tm.GetSpacing());
+        }
+    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -1061,75 +1124,4 @@ int VLayoutPiece::EdgeByPoint(const QVector<QPointF> &path, const QPointF &p1) c
         }
     }
     return 0; // Did not find edge
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-QPainterPath VLayoutPiece::CreateLabelText(const QVector<QPointF> &labelShape, const VTextManager &tm) const
-{
-    QPainterPath textpath;
-    if (labelShape.count() > 2)
-    {
-        const qreal dW = QLineF(labelShape.at(0), labelShape.at(1)).length();
-        const qreal dH = QLineF(labelShape.at(1), labelShape.at(2)).length();
-        const qreal angle = QLineF(labelShape.at(0), labelShape.at(1)).angle();
-        qreal dY = 0;
-        qreal dX;
-
-        // set up the rotation around top-left corner matrix
-        QTransform mat;
-        mat.translate(labelShape.at(0).x(), labelShape.at(0).y());
-        if (d->mirror)
-        {
-            mat.scale(-1, 1);
-            mat.rotate(angle);
-            mat.translate(-dW, 0);
-        }
-        else
-        {
-            mat.rotate(angle);
-        }
-
-        mat *= d->matrix;
-
-        for (int i = 0; i < tm.GetSourceLinesCount(); ++i)
-        {
-            const TextLine& tl = tm.GetSourceLine(i);
-            QFont fnt = tm.GetFont();
-            fnt.setPixelSize(tm.GetFont().pixelSize() + tl.m_iFontSize);
-            fnt.setWeight(tl.m_eFontWeight);
-            fnt.setStyle(tl.m_eStyle);
-
-            QFontMetrics fm(fnt);
-
-            dY += fm.height();
-            if (dY > dH)
-            {
-                break;
-            }
-
-            QString qsText = tl.m_qsText;
-            if (fm.width(qsText) > dW)
-            {
-                qsText = fm.elidedText(qsText, Qt::ElideMiddle, static_cast<int>(dW));
-            }
-            if ((tl.m_eAlign & Qt::AlignLeft) > 0)
-            {
-                dX = 0;
-            }
-            else if ((tl.m_eAlign & Qt::AlignHCenter) > 0)
-            {
-                dX = (dW - fm.width(qsText))/2;
-            }
-            else
-            {
-                dX = dW - fm.width(qsText);
-            }
-            QPainterPath path;
-            path.addText(dX, dY - (fm.height() - fm.ascent())/2, fnt, qsText);
-            textpath.addPath(mat.map(path));
-            dY += tm.GetSpacing();
-        }
-    }
-
-    return textpath;
 }
