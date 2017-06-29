@@ -23,7 +23,8 @@ SOURCES += \
     $$PWD/libdxfrw/drw_objects.cpp \
     $$PWD/libdxfrw/libdwgr.cpp \
     $$PWD/libdxfrw/libdxfrw.cpp \
-    $$PWD/dxiface.cpp
+    $$PWD/dxiface.cpp \
+    $$PWD/dxfdef.cpp
 
 win32-msvc*:SOURCES += $$PWD/stable.cpp
 

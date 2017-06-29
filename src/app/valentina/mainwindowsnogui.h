@@ -125,6 +125,9 @@ private:
     void PreparePaper(int index) const;
     void RestorePaper(int index) const;
 
+    void PrepareTextForDXF(const QString &placeholder) const;
+    void RestoreTextAfterDXF(const QString &placeholder) const;
+
     void SaveLayoutAs();
     void PrintPreview();
     void LayoutPrint();

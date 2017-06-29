@@ -78,8 +78,15 @@ VDxfEngine::VDxfEngine()
       matrix(),
       input(),
       varMeasurement(VarMeasurement::Metric),
-      varInsunits(VarInsunits::Centimeters)
+      varInsunits(VarInsunits::Centimeters),
+      textBuffer(new DRW_Text())
 {
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+VDxfEngine::~VDxfEngine()
+{
+    delete textBuffer;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -92,14 +99,14 @@ bool VDxfEngine::begin(QPaintDevice *pdev)
         return false;
     }
 
-    input = QSharedPointer<dx_iface>(new dx_iface(fileName.toStdString(), varMeasurement, varInsunits));
+    input = QSharedPointer<dx_iface>(new dx_iface(fileName.toStdString(), m_version, varMeasurement, varInsunits));
     return true;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 bool VDxfEngine::end()
 {
-    const bool res = input->fileExport(m_version, m_binary);
+    const bool res = input->fileExport(m_binary);
     return res;
 }
 
@@ -324,53 +331,49 @@ void VDxfEngine::drawEllipse(const QRect & rect)
 //---------------------------------------------------------------------------------------------------------------------
 void VDxfEngine::drawTextItem(const QPointF & p, const QTextItem & textItem)
 {
-    const QPointF startPoint = matrix.map(p);
-    const double rotationAngle = atan(matrix.m12()/matrix.m11());
+    if (textBuffer->text.size() == 0)
+    {
+        const QPointF startPoint = matrix.map(p);
+        const double rotationAngle = qRadiansToDegrees(qAtan2(matrix.m12(), matrix.m11()));
 
-    const QFont f = textItem.font();
-    const int textSize = f.pixelSize() == -1 ? f.pointSize() : f.pixelSize();
+        const QFont f = textItem.font();
+        const UTF8STRING fontStyle = input->AddFont(f);
 
-    if (m_version > DRW::AC1009)
-    { // Use MTEXT
-        DRW_MText *text = new DRW_MText();
-        text->basePoint = DRW_Coord(FromPixel(startPoint.x(), varInsunits),
+        textBuffer->basePoint = DRW_Coord(FromPixel(startPoint.x(), varInsunits),
                                     FromPixel(getSize().height() - startPoint.y(), varInsunits), 0);
-        text->secPoint = DRW_Coord(FromPixel(startPoint.x(), varInsunits),
+        textBuffer->secPoint = DRW_Coord(FromPixel(startPoint.x(), varInsunits),
                                    FromPixel(getSize().height() - startPoint.y(), varInsunits), 0);
-        text->height = textSize * matrix.m11();
-        text->text = textItem.text().toStdString();
-        text->style = f.family().toStdString();
-        text->angle = -rotationAngle;
+        textBuffer->height = FromPixel(QFontMetrics(f).height(), varInsunits);
 
-        text->layer = "0";
-        text->color = getPenColor();
-        text->lWeight = DRW_LW_Conv::widthByLayer;
-        text->lineType = getPenStyle();
+        textBuffer->style = fontStyle;
+        textBuffer->angle = -rotationAngle;
 
-        input->AddEntity(text);
+        textBuffer->layer = "0";
+        textBuffer->color = getPenColor();
+        textBuffer->lWeight = DRW_LW_Conv::widthByLayer;
+        textBuffer->lineType = getPenStyle();
     }
-    else
-    { // Use TEXT
-        DRW_Text *text = new DRW_Text();
-        text->basePoint = DRW_Coord(FromPixel(startPoint.x(), varInsunits),
-                                    FromPixel(getSize().height() - startPoint.y(), varInsunits), 0);
-        text->secPoint = DRW_Coord(FromPixel(startPoint.x(), varInsunits),
-                                   FromPixel(getSize().height() - startPoint.y(), varInsunits), 0);
-        text->height = textSize * matrix.m11();
-        text->text = textItem.text().toStdString();
-        text->style = f.family().toStdString();
-        text->angle = -rotationAngle;
 
-        text->layer = "0";
-        text->color = getPenColor();
-        text->lWeight = DRW_LW_Conv::widthByLayer;
-        text->lineType = getPenStyle();
+    /* Because QPaintEngine::drawTextItem doesn't pass whole string per time we mark end of each string by adding
+     * special placholder. */
+    QString t = textItem.text();
+    const bool foundEndOfString = t.contains(endStringPlaceholder);
 
-        input->AddEntity(text);
+    if (foundEndOfString)
+    {
+        t.replace(endStringPlaceholder, "");
+    }
+
+    textBuffer->text += t.toStdString();
+
+    if (foundEndOfString)
+    {
+        input->AddEntity(textBuffer);
+        textBuffer = new DRW_Text();
     }
 }
 
- //---------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------
 QPaintEngine::Type VDxfEngine::type() const
 {
     return QPaintEngine::User;

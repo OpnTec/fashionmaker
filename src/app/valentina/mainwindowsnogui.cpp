@@ -805,6 +805,7 @@ void MainWindowsNoGUI::DxfFile(const QString &name, int version, bool binary, in
     QGraphicsRectItem *paper = qgraphicsitem_cast<QGraphicsRectItem *>(papers.at(i));
     if (paper)
     {
+        PrepareTextForDXF(endStringPlaceholder);
         VDxfPaintDevice generator;
         generator.setFileName(name);
         generator.setSize(paper->rect().size().toSize());
@@ -835,6 +836,7 @@ void MainWindowsNoGUI::DxfFile(const QString &name, int version, bool binary, in
             scenes.at(i)->render(&painter, paper->rect(), paper->rect(), Qt::IgnoreAspectRatio);
             painter.end();
         }
+        RestoreTextAfterDXF(endStringPlaceholder);
     }
 }
 
@@ -865,6 +867,72 @@ void MainWindowsNoGUI::RestorePaper(int index) const
         QBrush brush(Qt::gray);
         scenes.at(index)->setBackgroundBrush(brush);
         shadows.at(index)->setVisible(true);
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief PrepareTextForDXF prepare QGraphicsSimpleTextItem items for export to flat dxf.
+ *
+ * Because QPaintEngine::drawTextItem doesn't pass whole string per time we mark end of each string by adding special
+ * placholder. This method append it.
+ *
+ * @param placeholder placeholder that will be appended to each QGraphicsSimpleTextItem item's text string.
+ */
+void MainWindowsNoGUI::PrepareTextForDXF(const QString &placeholder) const
+{
+    for (int i = 0; i < details.size(); ++i)
+    {
+        const QList<QGraphicsItem *> &paperItems = details.at(i);
+        for (int j = 0; j < paperItems.size(); ++j)
+        {
+            QList<QGraphicsItem *> pieceChildren = paperItems.at(i)->childItems();
+            for (int k = 0; k < pieceChildren.size(); ++k)
+            {
+                QGraphicsItem *item = pieceChildren.at(k);
+                if (item->type() == QGraphicsSimpleTextItem::Type)
+                {
+                    if(QGraphicsSimpleTextItem *textItem = qgraphicsitem_cast<QGraphicsSimpleTextItem *>(item))
+                    {
+                        textItem->setText(textItem->text() + placeholder);
+                    }
+                }
+            }
+        }
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief MainWindowsNoGUI::RestoreTextAfterDXF restore QGraphicsSimpleTextItem items after export to flat dxf.
+ *
+ * Because QPaintEngine::drawTextItem doesn't pass whole string per time we mark end of each string by adding special
+ * placholder. This method remove it.
+ *
+ * @param placeholder placeholder that will be removed from each QGraphicsSimpleTextItem item's text string.
+ */
+void MainWindowsNoGUI::RestoreTextAfterDXF(const QString &placeholder) const
+{
+    for (int i = 0; i < details.size(); ++i)
+    {
+        const QList<QGraphicsItem *> &paperItems = details.at(i);
+        for (int j = 0; j < paperItems.size(); ++j)
+        {
+            QList<QGraphicsItem *> pieceChildren = paperItems.at(i)->childItems();
+            for (int k = 0; k < pieceChildren.size(); ++k)
+            {
+                QGraphicsItem *item = pieceChildren.at(k);
+                if (item->type() == QGraphicsSimpleTextItem::Type)
+                {
+                    if(QGraphicsSimpleTextItem *textItem = qgraphicsitem_cast<QGraphicsSimpleTextItem *>(item))
+                    {
+                        QString text = textItem->text();
+                        text.replace(placeholder, "");
+                        textItem->setText(text);
+                    }
+                }
+            }
+        }
     }
 }
 

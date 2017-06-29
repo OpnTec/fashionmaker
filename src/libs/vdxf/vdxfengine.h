@@ -45,12 +45,13 @@
 
 class QTextStream;
 class dx_iface;
+class DRW_Text;
 
 class VDxfEngine : public QPaintEngine
 {
 public:
     VDxfEngine();
-    virtual ~VDxfEngine() = default;
+    virtual ~VDxfEngine();
 
     virtual bool begin(QPaintDevice *pdev) Q_DECL_OVERRIDE;
     virtual bool end() Q_DECL_OVERRIDE;
@@ -98,6 +99,7 @@ private:
     QSharedPointer<dx_iface> input;
     VarMeasurement varMeasurement;
     VarInsunits varInsunits;
+    DRW_Text *textBuffer;
 
     double FromPixel(double pix, const VarInsunits &unit) const Q_REQUIRED_RESULT;
 };

@@ -16,6 +16,8 @@
 #include <algorithm>
 #include <sstream>
 #include <cassert>
+#include <QString>
+#include <QTextCodec>
 #include "intern/drw_textcodec.h"
 #include "intern/dxfreader.h"
 #include "intern/dxfwriter.h"
@@ -1167,7 +1169,14 @@ bool dxfRW::writeText(DRW_Text *ent){
     writer->writeDouble(20, ent->basePoint.y);
     writer->writeDouble(30, ent->basePoint.z);
     writer->writeDouble(40, ent->height);
-    writer->writeUtf8String(1, ent->text);
+
+    QString dxfText = QString::fromStdString(ent->text);
+    QTextCodec *codec = QTextCodec::codecForName("ANSI_1251");
+    QByteArray encodedString = codec->fromUnicode(dxfText);
+
+    writer->writeString(1, encodedString.constData());
+    //writer->writeUtf8String(1, ent->text);
+
     writer->writeDouble(50, ent->angle);
     writer->writeDouble(41, ent->widthscale);
     writer->writeDouble(51, ent->oblique);

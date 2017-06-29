@@ -13,14 +13,18 @@
 #include "dxiface.h"
 #include "libdxfrw/libdwgr.h"
 #include "libdxfrw/libdxfrw.h"
+#include "../vmisc/vabstractapplication.h"
 
 #include <iostream>
 #include <algorithm>
 #include <QDateTime>
+#include <QFont>
+#include <QLocale>
 
-dx_iface::dx_iface(const std::string &file, VarMeasurement varMeasurement, VarInsunits varInsunits)
+dx_iface::dx_iface(const std::string &file, DRW::Version v, VarMeasurement varMeasurement, VarInsunits varInsunits)
     : dxfW(new dxfRW(file.c_str())),
-      cData()
+      cData(),
+      version(v)
 {
     InitHeader(varMeasurement, varInsunits);
     InitLTypes();
@@ -34,9 +38,9 @@ dx_iface::~dx_iface()
     delete dxfW;
 }
 
-bool dx_iface::fileExport(DRW::Version v, bool binary)
+bool dx_iface::fileExport(bool binary)
 {
-    bool success = dxfW->write(this, v, binary);
+    bool success = dxfW->write(this, version, binary);
     return success;
 }
 
@@ -179,6 +183,15 @@ void dx_iface::InitHeader(VarMeasurement varMeasurement, VarInsunits varInsunits
     QString dateTime = QDateTime::currentDateTime().toString("yyyyMMdd.HHmmsszzz");
     dateTime.chop(1);// we need hundredths of a second
     cData.headerC.addStr("$TDCREATE", dateTime.toStdString(), 40);
+
+    if (version >= DRW::AC1021)
+    { // Full support Unicode
+        cData.headerC.addStr("$DWGCODEPAGE", "UTF-8", 3);
+    }
+    else
+    {
+        cData.headerC.addStr("$DWGCODEPAGE", LocaleToISO(), 3);
+    }
 }
 
 void dx_iface::InitLTypes()
@@ -263,4 +276,159 @@ void dx_iface::InitAppId()
 void dx_iface::AddEntity(DRW_Entity *e)
 {
     cData.mBlock->ent.push_back(e);
+}
+
+UTF8STRING dx_iface::AddFont(const QFont &f)
+{
+    DRW_Textstyle ts;
+    ts.name = f.family().toStdString();
+
+    // Idea source https://stackoverflow.com/questions/20111522/writing-text-styles-into-dxf-from-a-delphi-application
+    if (f.bold())
+    {
+        ts.name += "_BOLD";
+        ts.fontFamily += 0x2000000;
+    }
+
+    if (f.italic())
+    {
+        ts.name += "_ITALIC";
+        ts.fontFamily += 0x1000000;
+    }
+
+    for (auto it = cData.textStyles.begin() ; it !=cData.textStyles.end() ; ++it)
+    {
+        if ((*it).name == ts.name)
+        {
+            return ts.name;
+        }
+    }
+
+    ts.font = "Times New Roman";//f.family().toStdString();
+
+    cData.textStyles.push_back(ts);
+
+    return ts.name;
+}
+
+std::string dx_iface::LocaleToISO() const
+{
+    QMap <std::string, std::string> locMap;
+    locMap["croatian"] = "ISO8859-2";
+    locMap["cs"] = "ISO8859-2";
+    locMap["cs_CS"] = "ISO8859-2";
+    locMap["cs_CZ"] = "ISO8859-2";
+    locMap["cz"] = "ISO8859-2";
+    locMap["cz_CZ"] = "ISO8859-2";
+    locMap["czech"] = "ISO8859-2";
+    locMap["hr"] = "ISO8859-2";
+    locMap["hr_HR"] = "ISO8859-2";
+    locMap["hu"] = "ISO8859-2";
+    locMap["hu_HU"] = "ISO8859-2";
+    locMap["hungarian"] = "ISO8859-2";
+    locMap["pl"] = "ISO8859-2";
+    locMap["pl_PL"] = "ISO8859-2";
+    locMap["polish"] = "ISO8859-2";
+    locMap["ro"] = "ISO8859-2";
+    locMap["ro_RO"] = "ISO8859-2";
+    locMap["rumanian"] = "ISO8859-2";
+    locMap["serbocroatian"] = "ISO8859-2";
+    locMap["sh"] = "ISO8859-2";
+    locMap["sh_SP"] = "ISO8859-2";
+    locMap["sh_YU"] = "ISO8859-2";
+    locMap["sk"] = "ISO8859-2";
+    locMap["sk_SK"] = "ISO8859-2";
+    locMap["sl"] = "ISO8859-2";
+    locMap["sl_CS"] = "ISO8859-2";
+    locMap["sl_SI"] = "ISO8859-2";
+    locMap["slovak"] = "ISO8859-2";
+    locMap["slovene"] = "ISO8859-2";
+    locMap["sr_SP"] = "ISO8859-2";
+
+    locMap["eo"] = "ISO8859-3";
+
+    locMap["ee"] = "ISO8859-4";
+    locMap["ee_EE"] = "ISO8859-4";
+
+    locMap["mk"] = "ISO8859-5";
+    locMap["mk_MK"] = "ISO8859-5";
+    locMap["sp"] = "ISO8859-5";
+    locMap["sp_YU"] = "ISO8859-5";
+
+    locMap["ar_AA"] = "ISO8859-6";
+    locMap["ar_SA"] = "ISO8859-6";
+    locMap["arabic"] = "ISO8859-6";
+
+    locMap["el"] = "ISO8859-7";
+    locMap["el_GR"] = "ISO8859-7";
+    locMap["greek"] = "ISO8859-7";
+
+    locMap["hebrew"] = "ISO8859-8";
+    locMap["he"] = "ISO8859-8";
+    locMap["he_IL"] = "ISO8859-8";
+    locMap["iw"] = "ISO8859-8";
+    locMap["iw_IL"] = "ISO8859-8";
+
+    locMap["tr"] = "ISO8859-9";
+    locMap["tr_TR"] = "ISO8859-9";
+    locMap["turkish"] = "ISO8859-9";
+
+    locMap["lt"] = "ISO8859-13";
+    locMap["lt_LT"] = "ISO8859-13";
+    locMap["lv"] = "ISO8859-13";
+    locMap["lv_LV"] = "ISO8859-13";
+
+    locMap["et"] = "ISO8859-15";
+    locMap["et_EE"] = "ISO8859-15";
+    locMap["br_FR"] = "ISO8859-15";
+    locMap["ca_ES"] = "ISO8859-15";
+    locMap["de"] = "ISO8859-15";
+    locMap["de_AT"] = "ISO8859-15";
+    locMap["de_BE"] = "ISO8859-15";
+    locMap["de_DE"] = "ISO8859-15";
+    locMap["de_LU"] = "ISO8859-15";
+    locMap["en_IE"] = "ISO8859-15";
+    locMap["es"] = "ISO8859-15";
+    locMap["es_ES"] = "ISO8859-15";
+    locMap["eu_ES"] = "ISO8859-15";
+    locMap["fi"] = "ISO8859-15";
+    locMap["fi_FI"] = "ISO8859-15";
+    locMap["finnish"] = "ISO8859-15";
+    locMap["fr"] = "ISO8859-15";
+    locMap["fr_FR"] = "ISO8859-15";
+    locMap["fr_BE"] = "ISO8859-15";
+    locMap["fr_LU"] = "ISO8859-15";
+    locMap["french"] = "ISO8859-15";
+    locMap["ga_IE"] = "ISO8859-15";
+    locMap["gl_ES"] = "ISO8859-15";
+    locMap["it"] = "ISO8859-15";
+    locMap["it_IT"] = "ISO8859-15";
+    locMap["oc_FR"] = "ISO8859-15";
+    locMap["nl"] = "ISO8859-15";
+    locMap["nl_BE"] = "ISO8859-15";
+    locMap["nl_NL"] = "ISO8859-15";
+    locMap["pt"] = "ISO8859-15";
+    locMap["pt_PT"] = "ISO8859-15";
+    locMap["sv_FI"] = "ISO8859-15";
+    locMap["wa_BE"] = "ISO8859-15";
+
+    locMap["uk"] = "KOI8-U";
+    locMap["uk_UA"] = "KOI8-U";
+    locMap["ru_YA"] = "KOI8-U";
+    locMap["ukrainian"] = "KOI8-U";
+    locMap["ru_RU"] = "KOI8-U";
+
+    locMap["be"] = "KOI8-R";
+    locMap["be_BY"] = "KOI8-R";
+    locMap["bg"] = "KOI8-R";
+    locMap["bg_BG"] = "KOI8-R";
+    locMap["bulgarian"] = "KOI8-R";
+    locMap["ba_RU"] = "KOI8-R";
+    locMap["ky"] = "KOI8-R";
+    locMap["ky_KG"] = "KOI8-R";
+    locMap["kk"] = "KOI8-R";
+    locMap["kk_KZ"] = "KOI8-R";
+
+    QLocale locale(qApp->Settings()->GetLocale());
+    return locMap.value(locale.name().toStdString(), "ISO8859-1");
 }

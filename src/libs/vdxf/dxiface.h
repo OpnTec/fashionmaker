@@ -17,6 +17,8 @@
 #include "libdxfrw/libdxfrw.h"
 #include "dxfdef.h"
 
+class QFont;
+
 //class to store image data and path from DRW_ImageDef
 class dx_ifaceImg : public DRW_Image {
 public:
@@ -70,9 +72,9 @@ public:
 class dx_iface : public DRW_Interface
 {
 public:
-    dx_iface(const std::string& file, VarMeasurement varMeasurement, VarInsunits varInsunits);
+    dx_iface(const std::string& file, DRW::Version v, VarMeasurement varMeasurement, VarInsunits varInsunits);
     virtual ~dx_iface();
-    bool fileExport(DRW::Version v, bool binary);
+    bool fileExport(bool binary);
     void writeEntity(DRW_Entity* e);
 
 //reimplement virtual DRW_Interface functions
@@ -90,17 +92,21 @@ public:
     virtual void writeDimstyles();
     virtual void writeAppId();
 
+    void AddEntity(DRW_Entity* e);
+    UTF8STRING AddFont(const QFont &f);
+
+private:
+    dxfRW* dxfW; //pointer to writer, needed to send data
+    dx_data cData; // class to store or read data
+    DRW::Version version;
+
     void InitHeader(VarMeasurement varMeasurement, VarInsunits varInsunits);
     void InitLTypes();
     void InitLayers();
     void InitTextstyles();
     void InitAppId();
 
-    void AddEntity(DRW_Entity* e);
-
-private:
-    dxfRW* dxfW; //pointer to writer, needed to send data
-    dx_data cData; // class to store or read data
+    std::string LocaleToISO() const;
 };
 
 #endif // DX_IFACE_H
