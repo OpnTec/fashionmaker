@@ -272,31 +272,49 @@ void MainWindowsNoGUI::ExportLayout(const DialogSaveLayout &dialog)
                     EpsFile(name, i);
                     break;
                 case LayoutExportFormats::DXF_AC1006_Flat:
+                    paper->setVisible(false);
                     DxfFile(name, DRW::AC1006, dialog.IsBinaryDXFFormat(), i);
+                    paper->setVisible(true);
                     break;
                 case LayoutExportFormats::DXF_AC1009_Flat:
+                    paper->setVisible(false);
                     DxfFile(name, DRW::AC1009, dialog.IsBinaryDXFFormat(), i);
+                    paper->setVisible(true);
                     break;
                 case LayoutExportFormats::DXF_AC1012_Flat:
+                    paper->setVisible(false);
                     DxfFile(name, DRW::AC1012, dialog.IsBinaryDXFFormat(), i);
+                    paper->setVisible(true);
                     break;
                 case LayoutExportFormats::DXF_AC1014_Flat:
+                    paper->setVisible(false);
                     DxfFile(name, DRW::AC1014, dialog.IsBinaryDXFFormat(), i);
+                    paper->setVisible(true);
                     break;
                 case LayoutExportFormats::DXF_AC1015_Flat:
+                    paper->setVisible(false);
                     DxfFile(name, DRW::AC1015, dialog.IsBinaryDXFFormat(), i);
+                    paper->setVisible(true);
                     break;
                 case LayoutExportFormats::DXF_AC1018_Flat:
+                    paper->setVisible(false);
                     DxfFile(name, DRW::AC1018, dialog.IsBinaryDXFFormat(), i);
+                    paper->setVisible(true);
                     break;
                 case LayoutExportFormats::DXF_AC1021_Flat:
+                    paper->setVisible(false);
                     DxfFile(name, DRW::AC1021, dialog.IsBinaryDXFFormat(), i);
+                    paper->setVisible(true);
                     break;
                 case LayoutExportFormats::DXF_AC1024_Flat:
+                    paper->setVisible(false);
                     DxfFile(name, DRW::AC1024, dialog.IsBinaryDXFFormat(), i);
+                    paper->setVisible(true);
                     break;
                 case LayoutExportFormats::DXF_AC1027_Flat:
+                    paper->setVisible(false);
                     DxfFile(name, DRW::AC1027, dialog.IsBinaryDXFFormat(), i);
+                    paper->setVisible(true);
                     break;
                 default:
                     qDebug() << "Can't recognize file suffix." << Q_FUNC_INFO;
