@@ -2484,7 +2484,7 @@
     </message>
     <message>
         <source>Uknown</source>
-        <translation type="unfinished"></translation>
+        <translation>Desconocido</translation>
     </message>
 </context>
 <context>
@@ -3124,7 +3124,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Move</source>
-        <translation type="unfinished"></translation>
+        <translation>Mover</translation>
     </message>
 </context>
 <context>
@@ -7089,7 +7089,7 @@ Quiere guardar los cambios?</translation>
     </message>
     <message>
         <source>Layout</source>
-        <translation type="vanished">Diseño</translation>
+        <translation type="vanished">Plano</translation>
     </message>
     <message>
         <source>Templates</source>
@@ -7183,7 +7183,7 @@ Quiere guardar los cambios?</translation>
     </message>
     <message>
         <source>GUI language:</source>
-        <translation type="unfinished">Idioma de interfaz gráfica de usuario:</translation>
+        <translation>Idioma del interfaz gráfica de usuario:</translation>
     </message>
     <message>
         <source>Decimal separator parts:</source>
@@ -8864,7 +8864,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>GUI language:</source>
-        <translation type="unfinished">Idioma de interfaz gráfica de usuario:</translation>
+        <translation>Idioma del interfaz gráfica de usuario:</translation>
     </message>
     <message>
         <source>Decimal separator parts:</source>

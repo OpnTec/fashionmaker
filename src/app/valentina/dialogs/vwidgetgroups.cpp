@@ -88,6 +88,8 @@ void VWidgetGroups::RenameGroup(int row, int column)
 
     const quint32 id = ui->tableWidget->item(row, 0)->data(Qt::UserRole).toUInt();
     doc->SetGroupName(id, ui->tableWidget->item(row, column)->text());
+
+    UpdateGroups();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -174,6 +176,7 @@ void VWidgetGroups::FillTable(const QMap<quint32, QPair<QString, bool> > &groups
         ui->tableWidget->setItem(currentRow, 1, item);
         ++i;
     }
+    ui->tableWidget->sortItems(1, Qt::AscendingOrder);
     ui->tableWidget->resizeColumnsToContents();
     ui->tableWidget->resizeRowsToContents();
     ui->tableWidget->blockSignals(false);

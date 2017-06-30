@@ -690,19 +690,19 @@
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="509"/>
         <source>foot_instep_circ</source>
         <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
-        <translation>tour_coup_de_pied</translation>
+        <translation>tour_voute_de_pied</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="511"/>
         <source>Foot: Instep circumference</source>
         <comment>Full measurement name.</comment>
-        <translation>tour_de_cou_de_pied</translation>
+        <translation>Pied : Tour de la Voûte du pied</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="512"/>
         <source>Measure circumference at tallest part of instep.</source>
         <comment>Full measurement description.</comment>
-        <translation>Mesure du tour au plus creux du cou-de-pied</translation>
+        <translation>Mesure du tour au plus creux de la voûte du pied.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="528"/>
@@ -726,13 +726,13 @@
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="535"/>
         <source>head_length</source>
         <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
-        <translation>tete_longueur</translation>
+        <translation>tete_hauteur</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="537"/>
         <source>Head: Length</source>
         <comment>Full measurement name.</comment>
-        <translation>Tête: Longueur</translation>
+        <translation>Tête: Hauteur</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="538"/>
@@ -744,7 +744,7 @@
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="542"/>
         <source>head_depth</source>
         <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
-        <translation>Tete_profondeur</translation>
+        <translation>tete_profondeur</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="544"/>
@@ -768,7 +768,7 @@
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="551"/>
         <source>Head: Width</source>
         <comment>Full measurement name.</comment>
-        <translation>Tête : largeur</translation>
+        <translation>Tête : Largeur</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="552"/>
@@ -786,7 +786,7 @@
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="558"/>
         <source>Head: Crown to Neck Back</source>
         <comment>Full measurement name.</comment>
-        <translation>Tête: Du haut à la nuque</translation>
+        <translation>Tête: Du Haut à la Nuque</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="559"/>
@@ -804,7 +804,7 @@
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="565"/>
         <source>Head: Chin to Neck Back</source>
         <comment>Full measurement name.</comment>
-        <translation>Tête: Du menton à la nuque</translation>
+        <translation>Tête: Du Menton à la Nuque</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="566"/>
@@ -828,7 +828,7 @@
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="586"/>
         <source>Circumference of Neck midsection, about halfway between jaw and torso.</source>
         <comment>Full measurement description.</comment>
-        <translation>Circonférence du cou, à la moitié entre la machoire et le torse.</translation>
+        <translation>Circonférence du cou, à la moitié entre la mâchoire et le torse.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="590"/>
@@ -852,13 +852,13 @@
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="598"/>
         <source>highbust_circ</source>
         <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
-        <translation>tour_surpoitrinaire</translation>
+        <translation>surpoitrine_circ</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="600"/>
         <source>Highbust circumference</source>
         <comment>Full measurement name.</comment>
-        <translation>Tour surpoitrinaire</translation>
+        <translation>Tour Sur-Poitrine</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="601"/>
@@ -882,19 +882,19 @@
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="608"/>
         <source>Circumference around Bust, parallel to floor.</source>
         <comment>Full measurement description.</comment>
-        <translation>Circonférence autour du buste, parallèle au sol</translation>
+        <translation>Circonférence autour du buste, parallèle au sol.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="612"/>
         <source>lowbust_circ</source>
         <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
-        <translation>tour_souspoitrinaire</translation>
+        <translation>tour_souspoitrine</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="614"/>
         <source>Lowbust circumference</source>
         <comment>Full measurement name.</comment>
-        <translation>Tour sous-poitrinaire</translation>
+        <translation>Tour Sous-poitrine</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="615"/>
@@ -912,7 +912,7 @@
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="621"/>
         <source>Rib circumference</source>
         <comment>Full measurement name.</comment>
-        <translation>Tour cage thoracique</translation>
+        <translation>Tour Cage Thoracique</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="622"/>
@@ -930,7 +930,7 @@
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="629"/>
         <source>Waist circumference</source>
         <comment>Full measurement name.</comment>
-        <translation>Tour de taille</translation>
+        <translation>Tour de Taille</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="635"/>
@@ -942,7 +942,7 @@
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="637"/>
         <source>Highhip circumference</source>
         <comment>Full measurement name.</comment>
-        <translation>Tour des petites hanches</translation>
+        <translation>Tour des Petites Hanches</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="630"/>
@@ -954,19 +954,19 @@
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="345"/>
         <source>height_waist_back</source>
         <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
-        <translation>haut_taille_dos</translation>
+        <translation>hauteur_taille_dos</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="347"/>
         <source>Height: Waist Back</source>
         <comment>Full measurement name.</comment>
-        <translation>Hauteur taille dos</translation>
+        <translation>Hauteur Taille Dos</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="348"/>
         <source>Vertical height from Waist Back to floor. (&apos;Height: Waist Front&apos;&apos; - &apos;Leg: Crotch to floor&apos;&apos;).</source>
         <comment>Full measurement description.</comment>
-        <translation>hauteur_taille_dos</translation>
+        <translation>Hauteur Verticale partant de la Taille Dos jusqu&apos;au sol. (Hauteur: Taille Devant&quot; - &quot;Jambe: Fourche jusqu&apos;au sol&quot;).</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="428"/>
