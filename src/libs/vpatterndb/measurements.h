@@ -316,6 +316,6 @@ QStringList ListGroupQ();
 
 QStringList ListNumbers(const VTranslateMeasurements *trM, const QStringList & listMeasurements);
 QString MapDiagrams(const VTranslateMeasurements *trM, const QString &number);
-QStringList AllGroupNames() Q_REQUIRED_RESULT;
+Q_REQUIRED_RESULT QStringList AllGroupNames();
 
 #endif // MEASUREMENTS_H

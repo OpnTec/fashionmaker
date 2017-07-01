@@ -88,8 +88,8 @@ public:
 
     bool ArrangeDetail(const VLayoutPiece &detail, std::atomic_bool &stop);
     int  Count() const;
-    QGraphicsRectItem *GetPaperItem(bool autoCrop) const Q_REQUIRED_RESULT;
-    QList<QGraphicsItem *> GetItemDetails() const Q_REQUIRED_RESULT;
+    Q_REQUIRED_RESULT QGraphicsRectItem *GetPaperItem(bool autoCrop) const;
+    Q_REQUIRED_RESULT QList<QGraphicsItem *> GetItemDetails() const;
 
     QVector<VLayoutPiece> GetDetails() const;
     void                   SetDetails(const QList<VLayoutPiece>& details);

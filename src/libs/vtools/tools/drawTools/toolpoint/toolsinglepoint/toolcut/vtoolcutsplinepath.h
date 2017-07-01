@@ -65,9 +65,10 @@ public:
     enum { Type = UserType + static_cast<int>(Tool::CutSplinePath)};
     virtual void  ShowVisualization(bool show) Q_DECL_OVERRIDE;
 
-    static VPointF *CutSplinePath(qreal length, const QSharedPointer<VAbstractCubicBezierPath> &splPath,
-                                  const QString &pName, VSplinePath **splPath1,
-                                  VSplinePath **splPath2) Q_REQUIRED_RESULT;
+    Q_REQUIRED_RESULT static VPointF *CutSplinePath(qreal length,
+                                                    const QSharedPointer<VAbstractCubicBezierPath> &splPath,
+                                                    const QString &pName, VSplinePath **splPath1,
+                                                    VSplinePath **splPath2);
 protected:
     virtual void  contextMenuEvent ( QGraphicsSceneContextMenuEvent * event ) Q_DECL_OVERRIDE;
     virtual void  SaveDialog(QDomElement &domElement) Q_DECL_OVERRIDE;

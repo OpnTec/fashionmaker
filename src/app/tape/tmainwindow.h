@@ -175,7 +175,8 @@ private:
 
     QTableWidgetItem *AddCell(const QString &text, int row, int column, int aligment, bool ok = true);
 
-    QComboBox *SetGradationList(QLabel *label, const QStringList &list) Q_REQUIRED_RESULT;
+    Q_REQUIRED_RESULT QComboBox *SetGradationList(QLabel *label, const QStringList &list);
+
     void       SetDefaultHeight(int value);
     void       SetDefaultSize(int value);
 

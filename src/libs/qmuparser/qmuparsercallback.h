@@ -82,7 +82,8 @@ public:
     QmuParserCallback(const QmuParserCallback &a_Fun);
     QmuParserCallback &operator=(const QmuParserCallback &a_Fun);
 
-    QmuParserCallback* Clone() const Q_REQUIRED_RESULT;
+    Q_REQUIRED_RESULT QmuParserCallback* Clone() const;
+
     bool               IsOptimizable() const;
     void*              GetAddr() const;
     ECmdCode           GetCode() const;

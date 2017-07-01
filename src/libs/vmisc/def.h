@@ -375,29 +375,29 @@ void RestoreOverrideCursor(Qt::CursorShape shape);
 
 extern const qreal PrintDPI;
 
-double ToPixel(double val, const Unit &unit) Q_REQUIRED_RESULT;
-double FromPixel(double pix, const Unit &unit) Q_REQUIRED_RESULT;
+Q_REQUIRED_RESULT double ToPixel(double val, const Unit &unit);
+Q_REQUIRED_RESULT double FromPixel(double pix, const Unit &unit);
 
-qreal UnitConvertor(qreal value, const Unit &from, const Unit &to) Q_REQUIRED_RESULT;
+Q_REQUIRED_RESULT qreal UnitConvertor(qreal value, const Unit &from, const Unit &to);
 
 void InitLanguages(QComboBox *combobox);
-QStringList SupportedLocales() Q_REQUIRED_RESULT;
+Q_REQUIRED_RESULT QStringList SupportedLocales();
 
-QString StrippedName(const QString &fullFileName) Q_REQUIRED_RESULT;
-QString RelativeMPath(const QString &patternPath, const QString &absoluteMPath) Q_REQUIRED_RESULT;
-QString AbsoluteMPath(const QString &patternPath, const QString &relativeMPath) Q_REQUIRED_RESULT;
+Q_REQUIRED_RESULT QString StrippedName(const QString &fullFileName);
+Q_REQUIRED_RESULT QString RelativeMPath(const QString &patternPath, const QString &absoluteMPath);
+Q_REQUIRED_RESULT QString AbsoluteMPath(const QString &patternPath, const QString &relativeMPath);
 
-QSharedPointer<QPrinter> PreparePrinter(const QPrinterInfo &info,
-                                        QPrinter::PrinterMode mode = QPrinter::ScreenResolution) Q_REQUIRED_RESULT;
+Q_REQUIRED_RESULT QSharedPointer<QPrinter> PreparePrinter(const QPrinterInfo &info,
+                                                          QPrinter::PrinterMode mode = QPrinter::ScreenResolution);
 
 QMarginsF GetMinPrinterFields(const QSharedPointer<QPrinter> &printer);
 QMarginsF GetPrinterFields(const QSharedPointer<QPrinter> &printer);
 
-QPixmap darkenPixmap(const QPixmap &pixmap) Q_REQUIRED_RESULT;
+Q_REQUIRED_RESULT QPixmap darkenPixmap(const QPixmap &pixmap);
 
 void ShowInGraphicalShell(const QString &filePath);
 
-static inline bool VFuzzyComparePossibleNulls(double p1, double p2) Q_REQUIRED_RESULT;
+Q_REQUIRED_RESULT static inline bool VFuzzyComparePossibleNulls(double p1, double p2);
 static inline bool VFuzzyComparePossibleNulls(double p1, double p2)
 {
     if(qFuzzyIsNull(p1))

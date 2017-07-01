@@ -91,7 +91,8 @@ private:
     void InitGroup(QTreeWidgetItem **group, const QString &groupName, const QStringList &mList,
                    const QStringList &list = QStringList());
 
-    QTreeWidgetItem *AddGroup(const QString &text) Q_REQUIRED_RESULT;
+    Q_REQUIRED_RESULT QTreeWidgetItem *AddGroup(const QString &text);
+
     void AddMeasurement(QTreeWidgetItem *group, const QString &name, const QStringList &list);
 
     void ReadSettings();

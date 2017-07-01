@@ -126,14 +126,14 @@ public:
     QPainterPath ContourPath() const;
 
     QPainterPath LayoutAllowancePath() const;
-    QGraphicsItem *GetItem() const Q_REQUIRED_RESULT;
+    Q_REQUIRED_RESULT QGraphicsItem *GetItem() const;
 
 private:
     QSharedDataPointer<VLayoutPieceData> d;
 
     QVector<QPointF> DetailPath() const;
 
-    QGraphicsPathItem *GetMainItem() const Q_REQUIRED_RESULT;
+    Q_REQUIRED_RESULT QGraphicsPathItem *GetMainItem() const;
 
     QPainterPath CreateLabelText(const QVector<QPointF> &labelShape, const VTextManager &tm) const;
 

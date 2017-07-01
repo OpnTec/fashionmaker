@@ -91,7 +91,7 @@ private:
     VarMeasurement varMeasurement;
     VarInsunits varInsunits;
 
-    double FromPixel(double pix, const VarInsunits &unit) const Q_REQUIRED_RESULT;
+    Q_REQUIRED_RESULT double FromPixel(double pix, const VarInsunits &unit) const;
 };
 
 #endif // VDXFENGINE_H
