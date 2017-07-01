@@ -40,6 +40,7 @@ class PreferencesConfigurationPage;
 class PreferencesPatternPage;
 class PreferencesPathPage;
 class QListWidgetItem;
+class VPattern;
 
 class DialogPreferences : public QDialog
 {

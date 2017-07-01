@@ -32,6 +32,7 @@
 #include <QtGlobal>
 
 #include "../visline.h"
+#include "../vpatterndb/vcontainer.h"
 
 class VisOperation : public VisLine
 {

@@ -28,6 +28,7 @@
 
 #include "dialoginsertnode.h"
 #include "ui_dialoginsertnode.h"
+#include "../vpatterndb/vcontainer.h"
 
 //---------------------------------------------------------------------------------------------------------------------
 DialogInsertNode::DialogInsertNode(const VContainer *data, quint32 toolId, QWidget *parent)

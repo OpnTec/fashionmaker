@@ -29,6 +29,7 @@
 #include "vispiecepins.h"
 #include "../vwidgets/vsimplepoint.h"
 #include "../vgeometry/vpointf.h"
+#include "../vpatterndb/vcontainer.h"
 
 //---------------------------------------------------------------------------------------------------------------------
 VisPiecePins::VisPiecePins(const VContainer *data, QGraphicsItem *parent)
