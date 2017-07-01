@@ -12,8 +12,6 @@
 # version format
 version: '{build}-{branch}'
 
-os: Visual Studio 2015
-
 # branches to build
 branches:
   # whitelist
@@ -40,12 +38,32 @@ shallow_clone: false                 # default is "false"
 
 environment:
   matrix:
+  - QT5: Qt\5.9\mingw53_32
+    QMAKE_GENERATOR: "MinGW Makefiles"
+    MINGW_PATH: C:\Qt\Tools\mingw530_32\bin
+    PLATFORM: x86
+    DEPLOY: true
+  - QT5: Qt\5.9\msvc2017_64
+    QMAKE_GENERATOR: "NMake Makefiles JOM"
+    VSVER: 14.1
+    PLATFORM: x64
+    DEPLOY: false
+  - QT5: Qt\5.9\msvc2015_64
+    QMAKE_GENERATOR: "NMake Makefiles JOM"
+    VSVER: 14
+    PLATFORM: x64
+    DEPLOY: false
+  - QT5: Qt\5.9\msvc2015
+    QMAKE_GENERATOR: "NMake Makefiles JOM"
+    VSVER: 14
+    PLATFORM: x86
+    DEPLOY: false
   - QT5: Qt\5.8\mingw53_32
     QT_VERSION: Qt5.8
     QMAKE_GENERATOR: "MinGW Makefiles"
     MINGW_PATH: C:\Qt\Tools\mingw530_32\bin
     PLATFORM: x86
-    DEPLOY: true
+    DEPLOY: false
   - QT5: Qt\5.8\msvc2015_64
     QT_VERSION: Qt5.8
     QMAKE_GENERATOR: "NMake Makefiles JOM"
@@ -81,7 +99,7 @@ environment:
     QMAKE_GENERATOR: "MinGW Makefiles"
     MINGW_PATH: C:\Qt\Tools\mingw492_32\bin
     PLATFORM: x86
-    DEPLOY: true
+    DEPLOY: false
   - QT5: Qt\5.6\msvc2015_64
     QT_VERSION: Qt5.6
     QMAKE_GENERATOR: "NMake Makefiles JOM"
@@ -147,7 +165,7 @@ before_build:
 build_script:
   - cd build
   - if "%DEPLOY%" == "true" (qmake ..\Valentina.pro -r CONFIG+=no_ccache CONFIG+=checkWarnings CONFIG+=noWindowsInstaller) else (qmake ..\Valentina.pro -r CONFIG+=noDebugSymbols CONFIG+=no_ccache CONFIG+=checkWarnings)
-  - if not "%QMAKE_GENERATOR%" == "MinGW Makefiles" (nmake -s) else (mingw32-make)
+  - if not "%QMAKE_GENERATOR%" == "MinGW Makefiles" (nmake -s) else (mingw32-make -j%NUMBER_OF_PROCESSORS%)
 
 # to run your custom scripts instead of automatic tests
 test_script:
