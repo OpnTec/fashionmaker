@@ -41,6 +41,7 @@
 #include "../vpatterndb/floatItemData/vpatternlabeldata.h"
 #include "../vpatterndb/floatItemData/vgrainlinedata.h"
 #include "../vtools/tools/vabstracttool.h"
+#include "../vtools/tools/vtoolseamallowance.h"
 
 #include <QFileDialog>
 #include <QFileInfo>
@@ -526,6 +527,25 @@ void MainWindowsNoGUI::PrintTiled()
 {
     isTiled = false;
     LayoutPrint();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief RefreshDetailsLabel call to ecalculate piece labels. For example after changing a font.
+ */
+void MainWindowsNoGUI::RefreshDetailsLabel()
+{
+    const QHash<quint32, VPiece> *list = pattern->DataPieces();
+    QHash<quint32, VPiece>::const_iterator i = list->constBegin();
+    while (i != list->constEnd())
+    {
+        if (VToolSeamAllowance *tool = qobject_cast<VToolSeamAllowance*>(VAbstractPattern::getTool(i.key())))
+        {
+            tool->UpdatePatternInfo();
+            tool->UpdateDetailLabel();
+        }
+        ++i;
+    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------

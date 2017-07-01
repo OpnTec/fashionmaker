@@ -55,6 +55,7 @@ public slots:
     void PrintPreviewTiled();
     void PrintOrigin();
     void PrintTiled();
+    void RefreshDetailsLabel();
 protected:
     QVector<VLayoutPiece> listDetails;
 

@@ -157,6 +157,9 @@ public:
     QChar GetCSVSeparator() const;
     QChar GetDefCSVSeparator() const;
 
+    QFont GetLabelFont() const;
+    void  SetLabelFont(const QFont &f);
+
 #if !defined(Q_OS_WIN)
     static const QString unixStandardSharePath;
 #endif

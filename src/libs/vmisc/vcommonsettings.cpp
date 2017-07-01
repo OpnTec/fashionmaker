@@ -39,6 +39,7 @@
 #include <QVariant>
 #include <QtDebug>
 #include <QTextCodec>
+#include <QFont>
 
 #include "../vmisc/def.h"
 #include "../vmisc/vmath.h"
@@ -64,6 +65,7 @@ const QString settingPatternUndo           = QStringLiteral("pattern/undo");
 const QString settingPatternForbidFlipping = QStringLiteral("pattern/forbidFlipping");
 const QString settingPatternHideMainPath   = QStringLiteral("pattern/hideMainPath");
 const QString settingDoublePassmark        = QStringLiteral("pattern/doublePassmark");
+const QString settingLabelFont             = QStringLiteral("pattern/labelFont");
 
 const QString settingGeneralRecentFileList       = QStringLiteral("recentFileList");
 const QString settingGeneralRestoreFileList      = QStringLiteral("restoreFileList");
@@ -754,4 +756,16 @@ QChar VCommonSettings::GetCSVSeparator() const
 QChar VCommonSettings::GetDefCSVSeparator() const
 {
     return QChar(',');
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QFont VCommonSettings::GetLabelFont() const
+{
+    return qvariant_cast<QFont>(value(settingLabelFont, QApplication::font()));
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VCommonSettings::SetLabelFont(const QFont &f)
+{
+    setValue(settingLabelFont, f);
 }

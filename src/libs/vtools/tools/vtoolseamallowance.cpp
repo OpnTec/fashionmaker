@@ -1557,7 +1557,7 @@ bool VToolSeamAllowance::PrepareLabelData(const VPatternLabelData &labelData, VT
     }
     labelItem->SetMoveType(type);
 
-    QFont fnt = QApplication::font();
+    QFont fnt = qApp->Settings()->GetLabelFont();
     {
         const int iFS = labelData.GetFontSize();
         iFS < MIN_FONT_SIZE ? fnt.setPixelSize(MIN_FONT_SIZE) : fnt.setPixelSize(iFS);
