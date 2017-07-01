@@ -151,6 +151,10 @@ public:
     static quint8 GetDefMultiplier();
     void SetMultiplier(quint8 value);
 
+    bool GetTextAsPaths() const;
+    static bool GetDefTextAsPaths();
+    void SetTextAsPaths(bool value);
+
 private:
     Q_DISABLE_COPY(VSettings)
 };

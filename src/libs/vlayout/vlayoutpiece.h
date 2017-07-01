@@ -126,7 +126,7 @@ public:
     QPainterPath ContourPath() const;
 
     QPainterPath LayoutAllowancePath() const;
-    QGraphicsItem *GetItem() const Q_REQUIRED_RESULT;
+    QGraphicsItem *GetItem(bool textAsPaths) const Q_REQUIRED_RESULT;
 
 private:
     QSharedDataPointer<VLayoutPieceData> d;
@@ -136,7 +136,8 @@ private:
     QGraphicsPathItem *GetMainItem() const Q_REQUIRED_RESULT;
 
     void CreateInternalPathItem(int i, QGraphicsItem *parent) const;
-    void CreateLabelStrings(QGraphicsItem *parent, const QVector<QPointF> &labelShape, const VTextManager &tm) const;
+    void CreateLabelStrings(QGraphicsItem *parent, const QVector<QPointF> &labelShape, const VTextManager &tm,
+                            bool textAsPaths) const;
     void CreateGrainlineItem(QGraphicsItem *parent) const;
 
     template <class T>

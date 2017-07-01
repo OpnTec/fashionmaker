@@ -44,6 +44,8 @@
 
 Q_DECLARE_METATYPE(QMarginsF)
 
+namespace
+{
 const QString settingConfigurationLabelLanguage = QStringLiteral("configuration/label_language");
 
 const QString settingPathsPattern = QStringLiteral("paths/pattern");
@@ -76,6 +78,8 @@ const QString settingFields                 = QStringLiteral("layout/fields");
 const QString settingIgnoreFields           = QStringLiteral("layout/ignoreFields");
 const QString settingStripOptimization      = QStringLiteral("layout/stripOptimization");
 const QString settingMultiplier             = QStringLiteral("layout/multiplier");
+const QString settingTextAsPaths            = QStringLiteral("layout/textAsPaths");
+}
 
 //---------------------------------------------------------------------------------------------------------------------
 VSettings::VSettings(Format format, Scope scope, const QString &organization, const QString &application,
@@ -582,5 +586,23 @@ quint8 VSettings::GetDefMultiplier()
 void VSettings::SetMultiplier(quint8 value)
 {
     setValue(settingMultiplier, value);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+bool VSettings::GetTextAsPaths() const
+{
+    return value(settingTextAsPaths, GetDefTextAsPaths()).toBool();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+bool VSettings::GetDefTextAsPaths()
+{
+    return false;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VSettings::SetTextAsPaths(bool value)
+{
+    setValue(settingTextAsPaths, value);
 }
 

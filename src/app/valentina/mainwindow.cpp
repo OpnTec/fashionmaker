@@ -4678,8 +4678,6 @@ void MainWindow::ZoomFirstShow()
 //---------------------------------------------------------------------------------------------------------------------
 void MainWindow::DoExport(const VCommandLinePtr &expParams)
 {
-    auto settings = expParams->DefaultGenerator();
-
     const QHash<quint32, VPiece> *details = pattern->DataPieces();
     if(not qApp->getOpeningPattern())
     {
@@ -4691,6 +4689,10 @@ void MainWindow::DoExport(const VCommandLinePtr &expParams)
         }
     }
     PrepareDetailsForLayout(details);
+
+    auto settings = expParams->DefaultGenerator();
+    settings->SetTestAsPaths(expParams->IsTextAsPaths());
+
     if (LayoutSettings(*settings.get()))
     {
         try

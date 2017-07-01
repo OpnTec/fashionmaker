@@ -338,6 +338,18 @@ void DialogLayoutSettings::SetIgnoreAllFields(bool value)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+bool DialogLayoutSettings::IsTextAsPaths() const
+{
+    return ui->checkBoxTextAsPaths->isChecked();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogLayoutSettings::SetTextAsPaths(bool value)
+{
+    ui->checkBoxTextAsPaths->setChecked(value);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 QString DialogLayoutSettings::SelectedPrinter() const
 {
     return ui->comboBoxPrinter->currentText();
@@ -568,6 +580,7 @@ void DialogLayoutSettings::DialogAccepted()
     generator->SetUnitePages(IsUnitePages());
     generator->SetStripOptimization(IsStripOptimization());
     generator->SetMultiplier(GetMultiplier());
+    generator->SetTestAsPaths(IsTextAsPaths());
 
     if (IsIgnoreAllFields())
     {
@@ -659,6 +672,8 @@ void DialogLayoutSettings::RestoreDefaults()
 
     CorrectMaxFileds();
     IgnoreAllFields(ui->checkBoxIgnoreFileds->isChecked());
+
+    ui->checkBoxTextAsPaths->setChecked(false);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -1070,6 +1085,7 @@ void DialogLayoutSettings::ReadSettings()
     SetIgnoreAllFields(settings->GetIgnoreAllFields());
     SetStripOptimization(settings->GetStripOptimization());
     SetMultiplier(settings->GetMultiplier());
+    SetTextAsPaths(settings->GetTextAsPaths());
 
     FindTemplate();
 
@@ -1095,6 +1111,7 @@ void DialogLayoutSettings::WriteSettings() const
     settings->SetIgnoreAllFields(IsIgnoreAllFields());
     settings->SetStripOptimization(IsStripOptimization());
     settings->SetMultiplier(GetMultiplier());
+    settings->SetTextAsPaths(IsTextAsPaths());
 }
 
 //---------------------------------------------------------------------------------------------------------------------

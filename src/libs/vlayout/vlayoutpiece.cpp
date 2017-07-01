@@ -923,7 +923,7 @@ QPainterPath VLayoutPiece::LayoutAllowancePath() const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QGraphicsItem *VLayoutPiece::GetItem() const
+QGraphicsItem *VLayoutPiece::GetItem(bool textAsPaths) const
 {
     QGraphicsPathItem *item = GetMainItem();
 
@@ -932,8 +932,8 @@ QGraphicsItem *VLayoutPiece::GetItem() const
         CreateInternalPathItem(i, item);
     }
 
-    CreateLabelStrings(item, d->detailLabel, d->m_tmDetail);
-    CreateLabelStrings(item, d->patternInfo, d->m_tmPattern);
+    CreateLabelStrings(item, d->detailLabel, d->m_tmDetail, textAsPaths);
+    CreateLabelStrings(item, d->patternInfo, d->m_tmPattern, textAsPaths);
     CreateGrainlineItem(item);
 
     return item;
@@ -941,7 +941,7 @@ QGraphicsItem *VLayoutPiece::GetItem() const
 
 //---------------------------------------------------------------------------------------------------------------------
 void VLayoutPiece::CreateLabelStrings(QGraphicsItem *parent, const QVector<QPointF> &labelShape,
-                                      const VTextManager &tm) const
+                                      const VTextManager &tm, bool textAsPaths) const
 {
     SCASSERT(parent != nullptr)
 
@@ -962,6 +962,11 @@ void VLayoutPiece::CreateLabelStrings(QGraphicsItem *parent, const QVector<QPoin
             fnt.setStyle(tl.m_eStyle);
 
             QFontMetrics fm(fnt);
+
+            if (textAsPaths)
+            {
+                dY += fm.height();
+            }
 
             if (dY > dH)
             {
@@ -1004,12 +1009,27 @@ void VLayoutPiece::CreateLabelStrings(QGraphicsItem *parent, const QVector<QPoin
 
             labelMatrix *= d->matrix;
 
-            QGraphicsSimpleTextItem* item = new QGraphicsSimpleTextItem(parent);
-            item->setFont(fnt);
-            item->setText(qsText);
-            item->setTransform(labelMatrix);
+            if (textAsPaths)
+            {
+                QPainterPath path;
+                path.addText(0, - static_cast<qreal>(fm.ascent())/6., fnt, qsText);
 
-            dY += (fm.height() + tm.GetSpacing());
+                QGraphicsPathItem* item = new QGraphicsPathItem(parent);
+                item->setPath(path);
+                item->setBrush(QBrush(Qt::black));
+                item->setTransform(labelMatrix);
+
+                dY += tm.GetSpacing();
+            }
+            else
+            {
+                QGraphicsSimpleTextItem* item = new QGraphicsSimpleTextItem(parent);
+                item->setFont(fnt);
+                item->setText(qsText);
+                item->setTransform(labelMatrix);
+
+                dY += (fm.height() + tm.GetSpacing());
+            }
         }
     }
 }
