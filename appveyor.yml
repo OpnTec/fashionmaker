@@ -43,11 +43,6 @@ environment:
     MINGW_PATH: C:\Qt\Tools\mingw530_32\bin
     PLATFORM: x86
     DEPLOY: true
-  - QT5: Qt\5.9\msvc2017_64
-    QMAKE_GENERATOR: "NMake Makefiles JOM"
-    VSVER: 14.1
-    PLATFORM: x64
-    DEPLOY: false
   - QT5: Qt\5.9\msvc2015_64
     QMAKE_GENERATOR: "NMake Makefiles JOM"
     VSVER: 14
