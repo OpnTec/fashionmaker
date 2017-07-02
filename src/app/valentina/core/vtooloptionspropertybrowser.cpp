@@ -2237,7 +2237,7 @@ void VToolOptionsPropertyBrowser::ShowOptionsToolSpline(QGraphicsItem *item)
     VFormula length1(spl.GetC1LengthFormula(), i->getData());
     length1.setCheckZero(false);
     length1.setToolId(i->getId());
-    length1.setPostfix(VDomDocument::UnitsToStr(qApp->patternUnit()));
+    length1.setPostfix(UnitsToStr(qApp->patternUnit()));
     AddPropertyFormula(tr("C1: length:"), length1, AttrLength1);
 
     VFormula angle2(spl.GetEndAngleFormula(), i->getData());
@@ -2249,7 +2249,7 @@ void VToolOptionsPropertyBrowser::ShowOptionsToolSpline(QGraphicsItem *item)
     VFormula length2(spl.GetC2LengthFormula(), i->getData());
     length2.setCheckZero(false);
     length2.setToolId(i->getId());
-    length2.setPostfix(VDomDocument::UnitsToStr(qApp->patternUnit()));
+    length2.setPostfix(UnitsToStr(qApp->patternUnit()));
     AddPropertyFormula(tr("C2: length:"), length2, AttrLength2);
 
     AddPropertyCurvePenStyle(i, tr("Pen style:"), CurvePenStylesPics());
@@ -2947,7 +2947,7 @@ void VToolOptionsPropertyBrowser::UpdateOptionsToolSpline()
     VFormula length1F(spl.GetC1LengthFormula(), i->getData());
     length1F.setCheckZero(false);
     length1F.setToolId(i->getId());
-    length1F.setPostfix(VDomDocument::UnitsToStr(qApp->patternUnit()));
+    length1F.setPostfix(UnitsToStr(qApp->patternUnit()));
     QVariant length1;
     length1.setValue(length1F);
     idToProperty[AttrLength1]->setValue(length1);
@@ -2963,7 +2963,7 @@ void VToolOptionsPropertyBrowser::UpdateOptionsToolSpline()
     VFormula length2F(spl.GetC2LengthFormula(), i->getData());
     length2F.setCheckZero(false);
     length2F.setToolId(i->getId());
-    length2F.setPostfix(VDomDocument::UnitsToStr(qApp->patternUnit()));
+    length2F.setPostfix(UnitsToStr(qApp->patternUnit()));
     QVariant length2;
     length2.setValue(length2F);
     idToProperty[AttrLength2]->setValue(length2);

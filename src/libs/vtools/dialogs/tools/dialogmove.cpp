@@ -313,7 +313,7 @@ void DialogMove::FXLength()
     DialogEditWrongFormula *dialog = new DialogEditWrongFormula(data, toolId, this);
     dialog->setWindowTitle(tr("Edit length"));
     dialog->SetFormula(GetLength());
-    dialog->setPostfix(VDomDocument::UnitsToStr(qApp->patternUnit(), true));
+    dialog->setPostfix(UnitsToStr(qApp->patternUnit(), true));
     if (dialog->exec() == QDialog::Accepted)
     {
         SetLength(dialog->GetFormula());
@@ -415,6 +415,6 @@ void DialogMove::EvalAngle()
 void DialogMove::EvalLength()
 {
     labelEditFormula = ui->labelEditLength;
-    const QString postfix = VDomDocument::UnitsToStr(qApp->patternUnit(), true);
+    const QString postfix = UnitsToStr(qApp->patternUnit(), true);
     Eval(ui->plainTextEditLength->toPlainText(), flagLength, ui->labelResultLength, postfix);
 }

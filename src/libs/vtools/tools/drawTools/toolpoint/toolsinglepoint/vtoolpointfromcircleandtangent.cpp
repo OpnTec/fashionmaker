@@ -230,7 +230,7 @@ VFormula VToolPointFromCircleAndTangent::GetCircleRadius() const
     VFormula radius(circleRadius, getData());
     radius.setCheckZero(true);
     radius.setToolId(id);
-    radius.setPostfix(VDomDocument::UnitsToStr(qApp->patternUnit()));
+    radius.setPostfix(UnitsToStr(qApp->patternUnit()));
     return radius;
 }
 

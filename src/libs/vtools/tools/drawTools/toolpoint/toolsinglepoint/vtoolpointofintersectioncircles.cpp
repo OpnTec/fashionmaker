@@ -245,7 +245,7 @@ VFormula VToolPointOfIntersectionCircles::GetFirstCircleRadius() const
     VFormula radius(firstCircleRadius, getData());
     radius.setCheckZero(true);
     radius.setToolId(id);
-    radius.setPostfix(VDomDocument::UnitsToStr(qApp->patternUnit()));
+    radius.setPostfix(UnitsToStr(qApp->patternUnit()));
     return radius;
 }
 
@@ -269,7 +269,7 @@ VFormula VToolPointOfIntersectionCircles::GetSecondCircleRadius() const
     VFormula radius(secondCircleRadius, getData());
     radius.setCheckZero(true);
     radius.setToolId(id);
-    radius.setPostfix(VDomDocument::UnitsToStr(qApp->patternUnit()));
+    radius.setPostfix(UnitsToStr(qApp->patternUnit()));
     return radius;
 }
 

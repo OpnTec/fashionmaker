@@ -1631,7 +1631,7 @@ void MainWindow::ShowMeasurements()
             arguments = QStringList()
                     << absoluteMPath
                     << "-u"
-                    << VDomDocument::UnitsToStr(qApp->patternUnit())
+                    << UnitsToStr(qApp->patternUnit())
                     << "-e"
                     << QString().setNum(static_cast<int>(UnitConvertor(VContainer::height(), doc->MUnit(), Unit::Cm)))
                     << "-s"
@@ -1641,7 +1641,7 @@ void MainWindow::ShowMeasurements()
         {
             arguments = QStringList() << absoluteMPath
                                       << "-u"
-                                      << VDomDocument::UnitsToStr(qApp->patternUnit());
+                                      << UnitsToStr(qApp->patternUnit());
         }
 
         if (isNoScaling)
@@ -1790,7 +1790,7 @@ void MainWindow::ToolBarOption()
         ui->toolBarOption->addSeparator();
     }
 
-    mouseCoordinate = new QLabel(QString("0, 0 (%1)").arg(VDomDocument::UnitsToStr(qApp->patternUnit(), true)));
+    mouseCoordinate = new QLabel(QString("0, 0 (%1)").arg(UnitsToStr(qApp->patternUnit(), true)));
     ui->toolBarOption->addWidget(mouseCoordinate);
 }
 
@@ -1964,7 +1964,7 @@ void MainWindow::MouseMove(const QPointF &scenePos)
         //: Coords in status line: "X, Y (units)"
         mouseCoordinate->setText(QString("%1, %2 (%3)").arg(static_cast<qint32>(qApp->fromPixel(scenePos.x())))
                                                        .arg(static_cast<qint32>(qApp->fromPixel(scenePos.y())))
-                                                       .arg(VDomDocument::UnitsToStr(qApp->patternUnit(), true)));
+                                                       .arg(UnitsToStr(qApp->patternUnit(), true)));
     }
 }
 
@@ -3123,7 +3123,7 @@ void MainWindow::New()
 
         AddPP(patternPieceName);
 
-        mouseCoordinate = new QLabel(QString("0, 0 (%1)").arg(VDomDocument::UnitsToStr(qApp->patternUnit(), true)));
+        mouseCoordinate = new QLabel(QString("0, 0 (%1)").arg(UnitsToStr(qApp->patternUnit(), true)));
         ui->toolBarOption->addWidget(mouseCoordinate);
 
         m_curFileFormatVersion = VPatternConverter::PatternMaxVer;

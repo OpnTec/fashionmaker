@@ -636,7 +636,7 @@ void MApplication::ParseCommandLine(const SocketConnection &connection, const QS
         if (units.contains(unitValue))
         {
             flagUnit = true;
-            unit = VDomDocument::StrToUnits(unitValue);
+            unit = StrToUnits(unitValue);
         }
         else
         {

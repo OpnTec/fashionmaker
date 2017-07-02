@@ -1222,7 +1222,7 @@ void DialogTool::EvalFormula()
 {
     SCASSERT(plainTextEditFormula != nullptr)
     SCASSERT(labelResultCalculation != nullptr)
-    const QString postfix = VDomDocument::UnitsToStr(qApp->patternUnit());//Show unit in dialog lable (cm, mm or inch)
+    const QString postfix = UnitsToStr(qApp->patternUnit());//Show unit in dialog lable (cm, mm or inch)
     Eval(plainTextEditFormula->toPlainText(), flagFormula, labelResultCalculation, postfix, false);
 }
 

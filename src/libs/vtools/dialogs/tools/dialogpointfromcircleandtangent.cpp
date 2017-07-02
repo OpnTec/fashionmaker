@@ -255,7 +255,7 @@ void DialogPointFromCircleAndTangent::CircleRadiusChanged()
 {
     labelEditFormula = ui->labelEditRadius;
     labelResultCalculation = ui->labelResultCircleRadius;
-    const QString postfix = VDomDocument::UnitsToStr(qApp->patternUnit(), true);
+    const QString postfix = UnitsToStr(qApp->patternUnit(), true);
     ValFormulaChanged(flagCircleRadius, ui->plainTextEditRadius, timerCircleRadius, postfix);
 }
 
@@ -265,7 +265,7 @@ void DialogPointFromCircleAndTangent::FXCircleRadius()
     DialogEditWrongFormula *dialog = new DialogEditWrongFormula(data, toolId, this);
     dialog->setWindowTitle(tr("Edit radius"));
     dialog->SetFormula(GetCircleRadius());
-    dialog->setPostfix(VDomDocument::UnitsToStr(qApp->patternUnit(), true));
+    dialog->setPostfix(UnitsToStr(qApp->patternUnit(), true));
     if (dialog->exec() == QDialog::Accepted)
     {
         SetCircleRadius(dialog->GetFormula());
@@ -277,7 +277,7 @@ void DialogPointFromCircleAndTangent::FXCircleRadius()
 void DialogPointFromCircleAndTangent::EvalCircleRadius()
 {
     labelEditFormula = ui->labelEditRadius;
-    const QString postfix = VDomDocument::UnitsToStr(qApp->patternUnit(), true);
+    const QString postfix = UnitsToStr(qApp->patternUnit(), true);
     const qreal radius = Eval(ui->plainTextEditRadius->toPlainText(), flagCircleRadius,
                               ui->labelResultCircleRadius, postfix);
 

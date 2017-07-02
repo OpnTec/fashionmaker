@@ -409,7 +409,7 @@ VFormula VToolPointOfContact::getArcRadius() const
     VFormula radius(arcRadius, this->getData());
     radius.setCheckZero(true);
     radius.setToolId(id);
-    radius.setPostfix(VDomDocument::UnitsToStr(qApp->patternUnit()));
+    radius.setPostfix(UnitsToStr(qApp->patternUnit()));
 
     return radius;
 }

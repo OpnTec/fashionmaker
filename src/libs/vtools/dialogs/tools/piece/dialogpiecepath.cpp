@@ -554,7 +554,7 @@ void DialogPiecePath::PassmarkAngleTypeChanged(int id)
 void DialogPiecePath::EvalWidth()
 {
     labelEditFormula = ui->labelEditWidth;
-    const QString postfix = VDomDocument::UnitsToStr(qApp->patternUnit(), true);
+    const QString postfix = UnitsToStr(qApp->patternUnit(), true);
     const QString formula = ui->plainTextEditFormulaWidth->toPlainText();
     m_saWidth = Eval(formula, flagFormula, ui->labelResultWidth, postfix, false, true);
 
@@ -574,7 +574,7 @@ void DialogPiecePath::EvalWidth()
 void DialogPiecePath::EvalWidthBefore()
 {
     labelEditFormula = ui->labelEditBefore;
-    const QString postfix = VDomDocument::UnitsToStr(qApp->patternUnit(), true);
+    const QString postfix = UnitsToStr(qApp->patternUnit(), true);
     QString formula = ui->plainTextEditFormulaWidthBefore->toPlainText();
     bool flagFormula = false; // fake flag
     Eval(formula, flagFormula, ui->labelResultBefore, postfix, false, true);
@@ -592,7 +592,7 @@ void DialogPiecePath::EvalWidthBefore()
 void DialogPiecePath::EvalWidthAfter()
 {
     labelEditFormula = ui->labelEditAfter;
-    const QString postfix = VDomDocument::UnitsToStr(qApp->patternUnit(), true);
+    const QString postfix = UnitsToStr(qApp->patternUnit(), true);
     QString formula = ui->plainTextEditFormulaWidthAfter->toPlainText();
     bool flagFormula = false; // fake flag
     Eval(formula, flagFormula, ui->labelResultAfter, postfix, false, true);
@@ -613,7 +613,7 @@ void DialogPiecePath::FXWidth()
     dialog->setWindowTitle(tr("Edit seam allowance width"));
     dialog->SetFormula(GetFormulaSAWidth());
     dialog->setCheckLessThanZero(true);
-    dialog->setPostfix(VDomDocument::UnitsToStr(qApp->patternUnit(), true));
+    dialog->setPostfix(UnitsToStr(qApp->patternUnit(), true));
     if (dialog->exec() == QDialog::Accepted)
     {
         SetFormulaSAWidth(dialog->GetFormula());
@@ -628,7 +628,7 @@ void DialogPiecePath::FXWidthBefore()
     dialog->setWindowTitle(tr("Edit seam allowance width before"));
     dialog->SetFormula(GetFormulaSAWidthBefore());
     dialog->setCheckLessThanZero(true);
-    dialog->setPostfix(VDomDocument::UnitsToStr(qApp->patternUnit(), true));
+    dialog->setPostfix(UnitsToStr(qApp->patternUnit(), true));
     if (dialog->exec() == QDialog::Accepted)
     {
         SetCurrentSABefore(dialog->GetFormula());
@@ -643,7 +643,7 @@ void DialogPiecePath::FXWidthAfter()
     dialog->setWindowTitle(tr("Edit seam allowance width after"));
     dialog->SetFormula(GetFormulaSAWidthAfter());
     dialog->setCheckLessThanZero(true);
-    dialog->setPostfix(VDomDocument::UnitsToStr(qApp->patternUnit(), true));
+    dialog->setPostfix(UnitsToStr(qApp->patternUnit(), true));
     if (dialog->exec() == QDialog::Accepted)
     {
         SetCurrentSAAfter(dialog->GetFormula());
@@ -656,7 +656,7 @@ void DialogPiecePath::WidthChanged()
 {
     labelEditFormula = ui->labelEditWidth;
     labelResultCalculation = ui->labelResultWidth;
-    const QString postfix = VDomDocument::UnitsToStr(qApp->patternUnit(), true);
+    const QString postfix = UnitsToStr(qApp->patternUnit(), true);
     ValFormulaChanged(flagFormula, ui->plainTextEditFormulaWidth, m_timerWidth, postfix);
 }
 
@@ -665,7 +665,7 @@ void DialogPiecePath::WidthBeforeChanged()
 {
     labelEditFormula = ui->labelEditBefore;
     labelResultCalculation = ui->labelResultBefore;
-    const QString postfix = VDomDocument::UnitsToStr(qApp->patternUnit(), true);
+    const QString postfix = UnitsToStr(qApp->patternUnit(), true);
     bool flagFormula = false;
     ValFormulaChanged(flagFormula, ui->plainTextEditFormulaWidthBefore, m_timerWidthBefore, postfix);
 }
@@ -675,7 +675,7 @@ void DialogPiecePath::WidthAfterChanged()
 {
     labelEditFormula = ui->labelEditAfter;
     labelResultCalculation = ui->labelResultAfter;
-    const QString postfix = VDomDocument::UnitsToStr(qApp->patternUnit(), true);
+    const QString postfix = UnitsToStr(qApp->patternUnit(), true);
     bool flagFormula = false;
     ValFormulaChanged(flagFormula, ui->plainTextEditFormulaWidthAfter, m_timerWidthAfter, postfix);
 }

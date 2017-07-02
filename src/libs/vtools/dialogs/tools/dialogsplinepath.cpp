@@ -523,7 +523,7 @@ void DialogSplinePath::FXLength1()
                                                           qApp->Settings()->GetOsSeparator());
 
     dialog->SetFormula(length1F);
-    dialog->setPostfix(VDomDocument::UnitsToStr(qApp->patternUnit(), true));
+    dialog->setPostfix(UnitsToStr(qApp->patternUnit(), true));
     if (dialog->exec() == QDialog::Accepted)
     {
         length1F = qApp->TrVars()->FormulaToUser(dialog->GetFormula(), qApp->Settings()->GetOsSeparator());
@@ -548,7 +548,7 @@ void DialogSplinePath::FXLength2()
                                                           qApp->Settings()->GetOsSeparator());
 
     dialog->SetFormula(length2F);
-    dialog->setPostfix(VDomDocument::UnitsToStr(qApp->patternUnit(), true));
+    dialog->setPostfix(UnitsToStr(qApp->patternUnit(), true));
     if (dialog->exec() == QDialog::Accepted)
     {
         length2F = qApp->TrVars()->FormulaToUser(dialog->GetFormula(), qApp->Settings()->GetOsSeparator());
@@ -611,7 +611,7 @@ void DialogSplinePath::EvalLength1()
     }
 
     labelEditFormula = ui->labelEditLength1;
-    const QString postfix = VDomDocument::UnitsToStr(qApp->patternUnit(), true);
+    const QString postfix = UnitsToStr(qApp->patternUnit(), true);
     const qreal length1 = Eval(ui->plainTextEditLength1F->toPlainText(), flagLength1[row], ui->labelResultLength1,
                                postfix, false);
 
@@ -642,7 +642,7 @@ void DialogSplinePath::EvalLength2()
     }
 
     labelEditFormula = ui->labelEditLength2;
-    const QString postfix = VDomDocument::UnitsToStr(qApp->patternUnit(), true);
+    const QString postfix = UnitsToStr(qApp->patternUnit(), true);
     const qreal length2 = Eval(ui->plainTextEditLength2F->toPlainText(), flagLength2[row], ui->labelResultLength2,
                                postfix, false);
 

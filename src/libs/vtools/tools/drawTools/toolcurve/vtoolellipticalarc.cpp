@@ -240,7 +240,7 @@ VFormula VToolEllipticalArc::GetFormulaRadius1() const
     VFormula radius1(elArc->GetFormulaRadius1(), getData());
     radius1.setCheckZero(true);
     radius1.setToolId(id);
-    radius1.setPostfix(VDomDocument::UnitsToStr(qApp->patternUnit()));
+    radius1.setPostfix(UnitsToStr(qApp->patternUnit()));
     return radius1;
 }
 
@@ -268,7 +268,7 @@ VFormula VToolEllipticalArc::GetFormulaRadius2() const
     VFormula radius2(elArc->GetFormulaRadius2(), getData());
     radius2.setCheckZero(true);
     radius2.setToolId(id);
-    radius2.setPostfix(VDomDocument::UnitsToStr(qApp->patternUnit()));
+    radius2.setPostfix(UnitsToStr(qApp->patternUnit()));
     return radius2;
 }
 

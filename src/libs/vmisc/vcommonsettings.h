@@ -40,8 +40,6 @@
 
 #include "../vlayout/vbank.h"
 
-class VDomDocument;
-
 class VCommonSettings : public QSettings
 {
     Q_OBJECT

@@ -535,9 +535,9 @@ void TMainWindow::changeEvent(QEvent *event)
         {
             ui->labelMType->setText(tr("Multisize measurements"));
             ui->labelBaseSizeValue->setText(QString().setNum(m->BaseSize()) + QLatin1String(" ") +
-                                            VDomDocument::UnitsToStr(m->MUnit(), true));
+                                            UnitsToStr(m->MUnit(), true));
             ui->labelBaseHeightValue->setText(QString().setNum(m->BaseHeight()) + QLatin1String(" ") +
-                                              VDomDocument::UnitsToStr(m->MUnit(), true));
+                                              UnitsToStr(m->MUnit(), true));
 
             labelGradationHeights = new QLabel(tr("Height:"));
             labelGradationSizes = new QLabel(tr("Size:"));
@@ -1231,7 +1231,7 @@ void TMainWindow::Fx()
     dialog->setWindowTitle(tr("Edit measurement"));
     dialog->SetFormula(qApp->TrVars()->TryFormulaFromUser(ui->plainTextEditFormula->toPlainText().replace("\n", " "),
                                                           true));
-    const QString postfix = VDomDocument::UnitsToStr(mUnit, true);//Show unit in dialog lable (cm, mm or inch)
+    const QString postfix = UnitsToStr(mUnit, true);//Show unit in dialog lable (cm, mm or inch)
     dialog->setPostfix(postfix);
 
     if (dialog->exec() == QDialog::Accepted)
@@ -1488,7 +1488,7 @@ void TMainWindow::ShowNewMData(bool fresh)
             ui->doubleSpinBoxInSizes->blockSignals(true);
             ui->doubleSpinBoxInHeights->blockSignals(true);
 
-            const QString postfix = VDomDocument::UnitsToStr(pUnit);//Show unit in dialog lable (cm, mm or inch)
+            const QString postfix = UnitsToStr(pUnit);//Show unit in dialog lable (cm, mm or inch)
             const qreal value = UnitConvertor(data->GetTableValue(meash->GetName(), mType), mUnit, pUnit);
             ui->labelCalculatedValue->setText(qApp->LocaleToString(value) + " " +postfix);
 
@@ -1670,14 +1670,14 @@ void TMainWindow::SaveMValue()
     if (formulaField->text() == text)
     {
         QTableWidgetItem *result = ui->tableWidget->item(row, ColumnCalcValue);
-        const QString postfix = VDomDocument::UnitsToStr(mUnit);//Show unit in dialog lable (cm, mm or inch)
+        const QString postfix = UnitsToStr(mUnit);//Show unit in dialog lable (cm, mm or inch)
         ui->labelCalculatedValue->setText(result->text() + " " +postfix);
         return;
     }
 
     if (text.isEmpty())
     {
-        const QString postfix = VDomDocument::UnitsToStr(mUnit);//Show unit in dialog lable (cm, mm or inch)
+        const QString postfix = UnitsToStr(mUnit);//Show unit in dialog lable (cm, mm or inch)
         ui->labelCalculatedValue->setText(tr("Error") + " (" + postfix + "). " + tr("Empty field."));
         return;
     }
@@ -1997,9 +1997,9 @@ void TMainWindow::InitWindow()
     {
         ui->labelMType->setText(tr("Multisize measurements"));
         ui->labelBaseSizeValue->setText(QString().setNum(m->BaseSize()) + " " +
-                                        VDomDocument::UnitsToStr(m->MUnit(), true));
+                                        UnitsToStr(m->MUnit(), true));
         ui->labelBaseHeightValue->setText(QString().setNum(m->BaseHeight()) + " " +
-                                          VDomDocument::UnitsToStr(m->MUnit(), true));
+                                          UnitsToStr(m->MUnit(), true));
 
         // Because Qt Designer doesn't know about our deleting we will create empty objects for correct
         // working the retranslation UI
@@ -2184,9 +2184,9 @@ void TMainWindow::InitTable()
 //---------------------------------------------------------------------------------------------------------------------
 void TMainWindow::ShowUnits()
 {
-    const QString unit = VDomDocument::UnitsToStr(mUnit);
+    const QString unit = UnitsToStr(mUnit);
 
-    ShowHeaderUnits(ui->tableWidget, ColumnCalcValue, VDomDocument::UnitsToStr(pUnit));// calculated value
+    ShowHeaderUnits(ui->tableWidget, ColumnCalcValue, UnitsToStr(pUnit));// calculated value
     ShowHeaderUnits(ui->tableWidget, ColumnFormula, unit);// formula
     ShowHeaderUnits(ui->tableWidget, ColumnBaseValue, unit);// base value
     ShowHeaderUnits(ui->tableWidget, ColumnInSizes, unit);// in sizes
@@ -2645,7 +2645,7 @@ QString TMainWindow::ClearCustomName(const QString &name) const
 //---------------------------------------------------------------------------------------------------------------------
 bool TMainWindow::EvalFormula(const QString &formula, bool fromUser, VContainer *data, QLabel *label)
 {
-    const QString postfix = VDomDocument::UnitsToStr(pUnit);//Show unit in dialog lable (cm, mm or inch)
+    const QString postfix = UnitsToStr(pUnit);//Show unit in dialog lable (cm, mm or inch)
     if (formula.isEmpty())
     {
         label->setText(tr("Error") + " (" + postfix + "). " + tr("Empty field."));
@@ -3111,9 +3111,9 @@ void TMainWindow::InitUnits()
 void TMainWindow::InitComboBoxUnits()
 {
     SCASSERT(comboBoxUnits != nullptr)
-    comboBoxUnits->addItem(VDomDocument::UnitsToStr(Unit::Cm, true), QVariant(static_cast<int>(Unit::Cm)));
-    comboBoxUnits->addItem(VDomDocument::UnitsToStr(Unit::Mm, true), QVariant(static_cast<int>(Unit::Mm)));
-    comboBoxUnits->addItem(VDomDocument::UnitsToStr(Unit::Inch, true), QVariant(static_cast<int>(Unit::Inch)));
+    comboBoxUnits->addItem(UnitsToStr(Unit::Cm, true), QVariant(static_cast<int>(Unit::Cm)));
+    comboBoxUnits->addItem(UnitsToStr(Unit::Mm, true), QVariant(static_cast<int>(Unit::Mm)));
+    comboBoxUnits->addItem(UnitsToStr(Unit::Inch, true), QVariant(static_cast<int>(Unit::Inch)));
 }
 
 //---------------------------------------------------------------------------------------------------------------------

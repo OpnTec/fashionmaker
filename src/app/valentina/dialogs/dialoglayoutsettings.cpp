@@ -703,13 +703,13 @@ void DialogLayoutSettings::IgnoreAllFields(int state)
 //---------------------------------------------------------------------------------------------------------------------
 void DialogLayoutSettings::InitPaperUnits()
 {
-    ui->comboBoxPaperSizeUnit->addItem(tr("Millimiters"), QVariant(VDomDocument::UnitsToStr(Unit::Mm)));
-    ui->comboBoxPaperSizeUnit->addItem(tr("Centimeters"), QVariant(VDomDocument::UnitsToStr(Unit::Cm)));
-    ui->comboBoxPaperSizeUnit->addItem(tr("Inches"), QVariant(VDomDocument::UnitsToStr(Unit::Inch)));
-    ui->comboBoxPaperSizeUnit->addItem(tr("Pixels"), QVariant(VDomDocument::UnitsToStr(Unit::Px)));
+    ui->comboBoxPaperSizeUnit->addItem(tr("Millimiters"), QVariant(UnitsToStr(Unit::Mm)));
+    ui->comboBoxPaperSizeUnit->addItem(tr("Centimeters"), QVariant(UnitsToStr(Unit::Cm)));
+    ui->comboBoxPaperSizeUnit->addItem(tr("Inches"), QVariant(UnitsToStr(Unit::Inch)));
+    ui->comboBoxPaperSizeUnit->addItem(tr("Pixels"), QVariant(UnitsToStr(Unit::Px)));
 
     // set default unit
-    oldPaperUnit = VDomDocument::StrToUnits(qApp->ValentinaSettings()->GetUnit());
+    oldPaperUnit = StrToUnits(qApp->ValentinaSettings()->GetUnit());
     const qint32 indexUnit = ui->comboBoxPaperSizeUnit->findData(qApp->ValentinaSettings()->GetUnit());
     if (indexUnit != -1)
     {
@@ -720,12 +720,12 @@ void DialogLayoutSettings::InitPaperUnits()
 //---------------------------------------------------------------------------------------------------------------------
 void DialogLayoutSettings::InitLayoutUnits()
 {
-    ui->comboBoxLayoutUnit->addItem(tr("Centimeters"), QVariant(VDomDocument::UnitsToStr(Unit::Cm)));
-    ui->comboBoxLayoutUnit->addItem(tr("Millimiters"), QVariant(VDomDocument::UnitsToStr(Unit::Mm)));
-    ui->comboBoxLayoutUnit->addItem(tr("Inches"), QVariant(VDomDocument::UnitsToStr(Unit::Inch)));
+    ui->comboBoxLayoutUnit->addItem(tr("Centimeters"), QVariant(UnitsToStr(Unit::Cm)));
+    ui->comboBoxLayoutUnit->addItem(tr("Millimiters"), QVariant(UnitsToStr(Unit::Mm)));
+    ui->comboBoxLayoutUnit->addItem(tr("Inches"), QVariant(UnitsToStr(Unit::Inch)));
 
     // set default unit
-    oldLayoutUnit = VDomDocument::StrToUnits(qApp->ValentinaSettings()->GetUnit());
+    oldLayoutUnit = StrToUnits(qApp->ValentinaSettings()->GetUnit());
     const qint32 indexUnit = ui->comboBoxLayoutUnit->findData(qApp->ValentinaSettings()->GetUnit());
     if (indexUnit != -1)
     {
@@ -976,13 +976,13 @@ QMarginsF DialogLayoutSettings::GetDefPrinterFields() const
 //---------------------------------------------------------------------------------------------------------------------
 Unit DialogLayoutSettings::PaperUnit() const
 {
-    return VDomDocument::StrToUnits(ui->comboBoxPaperSizeUnit->currentData().toString());
+    return StrToUnits(ui->comboBoxPaperSizeUnit->currentData().toString());
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 Unit DialogLayoutSettings::LayoutUnit() const
 {
-    return VDomDocument::StrToUnits(ui->comboBoxLayoutUnit->currentData().toString());
+    return StrToUnits(ui->comboBoxLayoutUnit->currentData().toString());
 }
 
 //---------------------------------------------------------------------------------------------------------------------

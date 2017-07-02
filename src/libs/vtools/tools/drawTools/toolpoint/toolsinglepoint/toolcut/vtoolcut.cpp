@@ -99,7 +99,7 @@ VFormula VToolCut::GetFormula() const
     VFormula val(formula, getData());
     val.setCheckZero(true);
     val.setToolId(id);
-    val.setPostfix(VDomDocument::UnitsToStr(qApp->patternUnit()));
+    val.setPostfix(UnitsToStr(qApp->patternUnit()));
     return val;
 }
 

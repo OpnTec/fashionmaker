@@ -174,28 +174,28 @@ void DialogEditWrongFormula::ValChanged(int row)
         const QString name = qApp->TrVars()->VarFromUser(item->text());
         const QSharedPointer<VMeasurement> stable = data->GetVariable<VMeasurement>(name);
         SetDescription(item->text(), data->GetTableValue(name, qApp->patternType()),
-                       VDomDocument::UnitsToStr(qApp->patternUnit(), true), stable->GetGuiText());
+                       UnitsToStr(qApp->patternUnit(), true), stable->GetGuiText());
         return;
     }
     if (ui->radioButtonIncrements->isChecked())
     {
         const QSharedPointer<VIncrement> incr = data->GetVariable<VIncrement>(item->text());
         SetDescription(item->text(), data->GetTableValue(item->text(), qApp->patternType()),
-                       VDomDocument::UnitsToStr(qApp->patternUnit(), true), incr->GetDescription());
+                       UnitsToStr(qApp->patternUnit(), true), incr->GetDescription());
         return;
     }
     if (ui->radioButtonLengthLine->isChecked())
     {
         SetDescription(item->text(),
                        *data->GetVariable<VLengthLine>(qApp->TrVars()->VarFromUser(item->text()))->GetValue(),
-                       VDomDocument::UnitsToStr(qApp->patternUnit(), true), tr("Line length"));
+                       UnitsToStr(qApp->patternUnit(), true), tr("Line length"));
         return;
     }
     if (ui->radioButtonLengthSpline->isChecked())
     {
         SetDescription(item->text(),
                        *data->GetVariable<VCurveLength>(qApp->TrVars()->VarFromUser(item->text()))->GetValue(),
-                       VDomDocument::UnitsToStr(qApp->patternUnit(), true), tr("Curve length"));
+                       UnitsToStr(qApp->patternUnit(), true), tr("Curve length"));
         return;
     }
     if (ui->radioButtonAngleLine->isChecked())
@@ -209,7 +209,7 @@ void DialogEditWrongFormula::ValChanged(int row)
     {
         SetDescription(item->text(),
                        *data->GetVariable<VArcRadius>(qApp->TrVars()->VarFromUser(item->text()))->GetValue(),
-                       VDomDocument::UnitsToStr(qApp->patternUnit(), true), tr("Arc radius"));
+                       UnitsToStr(qApp->patternUnit(), true), tr("Arc radius"));
         return;
     }
     if (ui->radioButtonAnglesCurves->isChecked())

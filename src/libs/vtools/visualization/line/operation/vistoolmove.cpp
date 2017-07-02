@@ -117,7 +117,7 @@ void VisToolMove::RefreshGeometry()
     DrawLine(this, line, supportColor2, Qt::DashLine);
     DrawPoint(pointFinish, line.p2(), supportColor);
 
-    static const QString prefix = VDomDocument::UnitsToStr(qApp->patternUnit(), true);
+    static const QString prefix = UnitsToStr(qApp->patternUnit(), true);
     Visualization::toolTip = tr("Length = %1%2, angle = %3°, <b>Shift</b> - sticking angle, "
                                 "<b>Mouse click</b> - finish creation")
             .arg(qApp->TrVars()->FormulaToUser(QString::number(qApp->fromPixel(tempLength)),

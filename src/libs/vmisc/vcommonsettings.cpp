@@ -774,8 +774,7 @@ double VCommonSettings::GetDefaultSeamAllowance()
 {
     double defaultValue;
 
-    //Unit globalUnit = VDomDocument::StrToUnits(GetUnit());
-    Unit globalUnit = Unit::Cm; // just for test purpuses
+    Unit globalUnit = StrToUnits(GetUnit());
 
     switch (globalUnit)
     {

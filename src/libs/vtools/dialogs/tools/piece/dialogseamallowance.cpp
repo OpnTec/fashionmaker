@@ -1305,7 +1305,7 @@ void DialogSeamAllowance::UpdateGrainlineValues()
         {
             plbVal = uiTabGrainline->labelLen;
             plbText = uiTabGrainline->labelEditLen;
-            qsUnit = QLatin1String(" ") + VDomDocument::UnitsToStr(qApp->patternUnit());
+            qsUnit = QLatin1String(" ") + UnitsToStr(qApp->patternUnit());
         }
 
         plbVal->setToolTip(tr("Value"));
@@ -1375,13 +1375,13 @@ void DialogSeamAllowance::UpdateDetailLabelValues()
         {
             plbVal = uiTabLabels->labelDLWidth;
             plbText = uiTabLabels->labelEditDLWidth;
-            qsUnit = QLatin1String(" ") + VDomDocument::UnitsToStr(qApp->patternUnit());
+            qsUnit = QLatin1String(" ") + UnitsToStr(qApp->patternUnit());
         }
         else if (i == 1)
         {
             plbVal = uiTabLabels->labelDLHeight;
             plbText = uiTabLabels->labelEditDLHeight;
-            qsUnit = QLatin1String(" ") + VDomDocument::UnitsToStr(qApp->patternUnit());
+            qsUnit = QLatin1String(" ") + UnitsToStr(qApp->patternUnit());
         }
         else
         {
@@ -1460,13 +1460,13 @@ void DialogSeamAllowance::UpdatePatternLabelValues()
         {
             plbVal = uiTabLabels->labelPLWidth;
             plbText = uiTabLabels->labelEditPLWidth;
-            qsUnit = QLatin1String(" ") + VDomDocument::UnitsToStr(qApp->patternUnit());
+            qsUnit = QLatin1String(" ") + UnitsToStr(qApp->patternUnit());
         }
         else if (i == 1)
         {
             plbVal = uiTabLabels->labelPLHeight;
             plbText = uiTabLabels->labelEditPLHeight;
-            qsUnit = QLatin1String(" ") + VDomDocument::UnitsToStr(qApp->patternUnit());
+            qsUnit = QLatin1String(" ") + UnitsToStr(qApp->patternUnit());
         }
         else
         {
@@ -1868,7 +1868,7 @@ void DialogSeamAllowance::ResetLabelsWarning()
 void DialogSeamAllowance::EvalWidth()
 {
     labelEditFormula = uiTabPaths->labelEditWidth;
-    const QString postfix = VDomDocument::UnitsToStr(qApp->patternUnit(), true);
+    const QString postfix = UnitsToStr(qApp->patternUnit(), true);
     const QString formula = uiTabPaths->plainTextEditFormulaWidth->toPlainText();
     m_saWidth = Eval(formula, flagFormula, uiTabPaths->labelResultWidth, postfix, false, true);
 
@@ -1888,7 +1888,7 @@ void DialogSeamAllowance::EvalWidth()
 void DialogSeamAllowance::EvalWidthBefore()
 {
     labelEditFormula = uiTabPaths->labelEditBefore;
-    const QString postfix = VDomDocument::UnitsToStr(qApp->patternUnit(), true);
+    const QString postfix = UnitsToStr(qApp->patternUnit(), true);
     const QString formula = uiTabPaths->plainTextEditFormulaWidthBefore->toPlainText();
     bool flagFormula = false; // fake flag
     Eval(formula, flagFormula, uiTabPaths->labelResultBefore, postfix, false, true);
@@ -1902,7 +1902,7 @@ void DialogSeamAllowance::EvalWidthBefore()
 void DialogSeamAllowance::EvalWidthAfter()
 {
     labelEditFormula = uiTabPaths->labelEditAfter;
-    const QString postfix = VDomDocument::UnitsToStr(qApp->patternUnit(), true);
+    const QString postfix = UnitsToStr(qApp->patternUnit(), true);
     const QString formula = uiTabPaths->plainTextEditFormulaWidthAfter->toPlainText();
     bool flagFormula = false; // fake flag
     Eval(formula, flagFormula, uiTabPaths->labelResultAfter, postfix, false, true);
@@ -1919,7 +1919,7 @@ void DialogSeamAllowance::FXWidth()
     dialog->setWindowTitle(tr("Edit seam allowance width"));
     dialog->SetFormula(GetFormulaSAWidth());
     dialog->setCheckLessThanZero(true);
-    dialog->setPostfix(VDomDocument::UnitsToStr(qApp->patternUnit(), true));
+    dialog->setPostfix(UnitsToStr(qApp->patternUnit(), true));
     if (dialog->exec() == QDialog::Accepted)
     {
         SetFormulaSAWidth(dialog->GetFormula());
@@ -1934,7 +1934,7 @@ void DialogSeamAllowance::FXWidthBefore()
     dialog->setWindowTitle(tr("Edit seam allowance width before"));
     dialog->SetFormula(GetFormulaFromUser(uiTabPaths->plainTextEditFormulaWidthBefore));
     dialog->setCheckLessThanZero(true);
-    dialog->setPostfix(VDomDocument::UnitsToStr(qApp->patternUnit(), true));
+    dialog->setPostfix(UnitsToStr(qApp->patternUnit(), true));
     if (dialog->exec() == QDialog::Accepted)
     {
         SetCurrentSABefore(dialog->GetFormula());
@@ -1949,7 +1949,7 @@ void DialogSeamAllowance::FXWidthAfter()
     dialog->setWindowTitle(tr("Edit seam allowance width after"));
     dialog->SetFormula(GetFormulaFromUser(uiTabPaths->plainTextEditFormulaWidthAfter));
     dialog->setCheckLessThanZero(true);
-    dialog->setPostfix(VDomDocument::UnitsToStr(qApp->patternUnit(), true));
+    dialog->setPostfix(UnitsToStr(qApp->patternUnit(), true));
     if (dialog->exec() == QDialog::Accepted)
     {
         SetCurrentSAAfter(dialog->GetFormula());
@@ -1962,7 +1962,7 @@ void DialogSeamAllowance::WidthChanged()
 {
     labelEditFormula = uiTabPaths->labelEditWidth;
     labelResultCalculation = uiTabPaths->labelResultWidth;
-    const QString postfix = VDomDocument::UnitsToStr(qApp->patternUnit(), true);
+    const QString postfix = UnitsToStr(qApp->patternUnit(), true);
     ValFormulaChanged(flagFormula, uiTabPaths->plainTextEditFormulaWidth, m_timerWidth, postfix);
 }
 
@@ -1971,7 +1971,7 @@ void DialogSeamAllowance::WidthBeforeChanged()
 {
     labelEditFormula = uiTabPaths->labelEditBefore;
     labelResultCalculation = uiTabPaths->labelResultBefore;
-    const QString postfix = VDomDocument::UnitsToStr(qApp->patternUnit(), true);
+    const QString postfix = UnitsToStr(qApp->patternUnit(), true);
     bool flagFormula = false;
     ValFormulaChanged(flagFormula, uiTabPaths->plainTextEditFormulaWidthBefore, m_timerWidthBefore, postfix);
 }
@@ -1981,7 +1981,7 @@ void DialogSeamAllowance::WidthAfterChanged()
 {
     labelEditFormula = uiTabPaths->labelEditAfter;
     labelResultCalculation = uiTabPaths->labelResultAfter;
-    const QString postfix = VDomDocument::UnitsToStr(qApp->patternUnit(), true);
+    const QString postfix = UnitsToStr(qApp->patternUnit(), true);
     bool flagFormula = false;
     ValFormulaChanged(flagFormula, uiTabPaths->plainTextEditFormulaWidthAfter, m_timerWidthAfter, postfix);
 }
@@ -2525,8 +2525,15 @@ void DialogSeamAllowance::InitSeamAllowanceTab()
 
     connect(uiTabPaths->checkBoxSeams, &QCheckBox::toggled, this, &DialogSeamAllowance::EnableSeamAllowance);
 
-    // Default value for seam allowence is 1 cm. But pattern have different units, so just set 1 in dialog not enough.
-    m_saWidth = UnitConvertor(1, Unit::Cm, qApp->patternUnit());
+    // init the default seam allowance, convert the value if app unit is different than pattern unit
+    m_saWidth = qApp->Settings()->GetDefaultSeamAllowance();
+    Unit defaultUnit = StrToUnits(qApp->Settings()->GetUnit());
+    Unit patternUnit = qApp->patternUnit();
+    if(defaultUnit != patternUnit)
+    {
+        m_saWidth = UnitConvertor(m_saWidth, defaultUnit, patternUnit);
+    }
+
     uiTabPaths->plainTextEditFormulaWidth->setPlainText(qApp->LocaleToString(m_saWidth));
 
     InitNodesList();

@@ -292,7 +292,7 @@ void DialogArc::RadiusChanged()
 {
     labelEditFormula = ui->labelEditRadius;
     labelResultCalculation = ui->labelResultRadius;
-    const QString postfix = VDomDocument::UnitsToStr(qApp->patternUnit(), true);
+    const QString postfix = UnitsToStr(qApp->patternUnit(), true);
     ValFormulaChanged(flagRadius, ui->plainTextEditFormula, timerRadius, postfix);
 }
 
@@ -324,7 +324,7 @@ void DialogArc::FXRadius()
     DialogEditWrongFormula *dialog = new DialogEditWrongFormula(data, toolId, this);
     dialog->setWindowTitle(tr("Edit radius"));
     dialog->SetFormula(GetRadius());
-    dialog->setPostfix(VDomDocument::UnitsToStr(qApp->patternUnit(), true));
+    dialog->setPostfix(UnitsToStr(qApp->patternUnit(), true));
     if (dialog->exec() == QDialog::Accepted)
     {
         SetRadius(dialog->GetFormula());
@@ -379,7 +379,7 @@ void DialogArc::CheckState()
 void DialogArc::EvalRadius()
 {
     labelEditFormula = ui->labelEditRadius;
-    const QString postfix = VDomDocument::UnitsToStr(qApp->patternUnit(), true);
+    const QString postfix = UnitsToStr(qApp->patternUnit(), true);
     const qreal radius = Eval(ui->plainTextEditFormula->toPlainText(), flagRadius, ui->labelResultRadius, postfix);
 
     if (radius < 0)

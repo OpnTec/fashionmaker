@@ -78,7 +78,7 @@ void VisToolEndLine::RefreshGeometry()
         DrawPoint(point, line.p2(), mainColor);
     }
     DrawLine(this, line, mainColor, lineStyle);
-    static const QString prefix = VDomDocument::UnitsToStr(qApp->patternUnit(), true);
+    static const QString prefix = UnitsToStr(qApp->patternUnit(), true);
     Visualization::toolTip = tr("<b>Point at distance and angle</b>: angle = %1°, length = %2%3; "
                                 "<b>Shift</b> - sticking angle, <b>Enter</b> - finish creation")
             .arg(this->line().angle())

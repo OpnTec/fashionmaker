@@ -301,7 +301,7 @@ void DialogPointOfIntersectionCircles::Circle1RadiusChanged()
 {
     labelEditFormula = ui->labelEditCircle1Radius;
     labelResultCalculation = ui->labelResultCircle1Radius;
-    const QString postfix = VDomDocument::UnitsToStr(qApp->patternUnit(), true);
+    const QString postfix = UnitsToStr(qApp->patternUnit(), true);
     ValFormulaChanged(flagCircle1Radius, ui->plainTextEditCircle1Radius, timerCircle1Radius, postfix);
 }
 
@@ -310,7 +310,7 @@ void DialogPointOfIntersectionCircles::Circle2RadiusChanged()
 {
     labelEditFormula = ui->labelEditCircle2Radius;
     labelResultCalculation = ui->labelResultCircle2Radius;
-    const QString postfix = VDomDocument::UnitsToStr(qApp->patternUnit(), true);
+    const QString postfix = UnitsToStr(qApp->patternUnit(), true);
     ValFormulaChanged(flagCircle2Radius, ui->plainTextEditCircle2Radius, timerCircle2Radius, postfix);
 }
 
@@ -320,7 +320,7 @@ void DialogPointOfIntersectionCircles::FXCircle1Radius()
     DialogEditWrongFormula *dialog = new DialogEditWrongFormula(data, toolId, this);
     dialog->setWindowTitle(tr("Edit first circle radius"));
     dialog->SetFormula(GetFirstCircleRadius());
-    dialog->setPostfix(VDomDocument::UnitsToStr(qApp->patternUnit(), true));
+    dialog->setPostfix(UnitsToStr(qApp->patternUnit(), true));
     if (dialog->exec() == QDialog::Accepted)
     {
         SetFirstCircleRadius(dialog->GetFormula());
@@ -334,7 +334,7 @@ void DialogPointOfIntersectionCircles::FXCircle2Radius()
     DialogEditWrongFormula *dialog = new DialogEditWrongFormula(data, toolId, this);
     dialog->setWindowTitle(tr("Edit second circle radius"));
     dialog->SetFormula(GetSecondCircleRadius());
-    dialog->setPostfix(VDomDocument::UnitsToStr(qApp->patternUnit(), true));
+    dialog->setPostfix(UnitsToStr(qApp->patternUnit(), true));
     if (dialog->exec() == QDialog::Accepted)
     {
         SetSecondCircleRadius(dialog->GetFormula());
@@ -346,7 +346,7 @@ void DialogPointOfIntersectionCircles::FXCircle2Radius()
 void DialogPointOfIntersectionCircles::EvalCircle1Radius()
 {
     labelEditFormula = ui->labelEditCircle1Radius;
-    const QString postfix = VDomDocument::UnitsToStr(qApp->patternUnit(), true);
+    const QString postfix = UnitsToStr(qApp->patternUnit(), true);
     const qreal radius = Eval(ui->plainTextEditCircle1Radius->toPlainText(), flagCircle1Radius,
                               ui->labelResultCircle1Radius, postfix);
 
@@ -365,7 +365,7 @@ void DialogPointOfIntersectionCircles::EvalCircle1Radius()
 void DialogPointOfIntersectionCircles::EvalCircle2Radius()
 {
     labelEditFormula = ui->labelEditCircle2Radius;
-    const QString postfix = VDomDocument::UnitsToStr(qApp->patternUnit(), true);
+    const QString postfix = UnitsToStr(qApp->patternUnit(), true);
     const qreal radius = Eval(ui->plainTextEditCircle2Radius->toPlainText(), flagCircle2Radius,
                               ui->labelResultCircle2Radius, postfix);
 

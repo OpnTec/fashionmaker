@@ -227,7 +227,7 @@ VFormula VToolArc::GetFormulaRadius() const
     VFormula radius(arc->GetFormulaRadius(), getData());
     radius.setCheckZero(true);
     radius.setToolId(id);
-    radius.setPostfix(VDomDocument::UnitsToStr(qApp->patternUnit()));
+    radius.setPostfix(UnitsToStr(qApp->patternUnit()));
     return radius;
 }
 

@@ -31,7 +31,6 @@
 #include "../core/vapplication.h"
 #include "../vmisc/vsettings.h"
 #include "../vpatterndb/vcontainer.h"
-#include "../ifc/xml/vdomdocument.h"
 
 #include <QFileDialog>
 #include <QMessageBox>
@@ -70,7 +69,7 @@ DialogNewPattern::~DialogNewPattern()
 Unit DialogNewPattern::PatternUnit() const
 {
     const qint32 index = ui->comboBoxUnits->currentIndex();
-    return VDomDocument::StrToUnits(ui->comboBoxUnits->itemData(index).toString());
+    return StrToUnits(ui->comboBoxUnits->itemData(index).toString());
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -111,9 +110,9 @@ void DialogNewPattern::showEvent(QShowEvent *event)
 //---------------------------------------------------------------------------------------------------------------------
 void DialogNewPattern::InitUnits()
 {
-    ui->comboBoxUnits->addItem(tr("Centimeters"), QVariant(VDomDocument::UnitsToStr(Unit::Cm)));
-    ui->comboBoxUnits->addItem(tr("Millimiters"), QVariant(VDomDocument::UnitsToStr(Unit::Mm)));
-    ui->comboBoxUnits->addItem(tr("Inches"), QVariant(VDomDocument::UnitsToStr(Unit::Inch)));
+    ui->comboBoxUnits->addItem(tr("Centimeters"), QVariant(UnitsToStr(Unit::Cm)));
+    ui->comboBoxUnits->addItem(tr("Millimiters"), QVariant(UnitsToStr(Unit::Mm)));
+    ui->comboBoxUnits->addItem(tr("Inches"), QVariant(UnitsToStr(Unit::Inch)));
 
     // set default unit
     const qint32 indexUnit = ui->comboBoxUnits->findData(qApp->ValentinaSettings()->GetUnit());

@@ -94,6 +94,11 @@ enum class PassmarkAngleType : unsigned char
 QString           PassmarkAngleTypeToString(PassmarkAngleType type);
 PassmarkAngleType StringToPassmarkAngleType(const QString &value);
 
+
+Unit    StrToUnits(const QString &unit);
+QString UnitsToStr(const Unit &unit, const bool translate = false);
+
+
 enum class PiecePathIncludeType : unsigned char
 {
     AsMainPath = 0,

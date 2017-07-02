@@ -254,7 +254,7 @@ void DialogIncrements::FillAnglesCurves()
 //---------------------------------------------------------------------------------------------------------------------
 void DialogIncrements::ShowUnits()
 {
-    const QString unit = VDomDocument::UnitsToStr(qApp->patternUnit());
+    const QString unit = UnitsToStr(qApp->patternUnit());
 
     ShowHeaderUnits(ui->tableWidgetIncrement, 1, unit);// calculated value
     ShowHeaderUnits(ui->tableWidgetIncrement, 2, unit);// formula
@@ -328,7 +328,7 @@ QString DialogIncrements::ClearIncrementName(const QString &name) const
 //---------------------------------------------------------------------------------------------------------------------
 bool DialogIncrements::EvalIncrementFormula(const QString &formula, bool fromUser, VContainer *data, QLabel *label)
 {
-    const QString postfix = VDomDocument::UnitsToStr(qApp->patternUnit());//Show unit in dialog lable (cm, mm or inch)
+    const QString postfix = UnitsToStr(qApp->patternUnit());//Show unit in dialog lable (cm, mm or inch)
     if (formula.isEmpty())
     {
         label->setText(tr("Error") + " (" + postfix + "). " + tr("Empty field."));
@@ -636,7 +636,7 @@ void DialogIncrements::SaveIncrFormula()
     {
         QTableWidgetItem *result = ui->tableWidgetIncrement->item(row, 1);
         //Show unit in dialog lable (cm, mm or inch)
-        const QString postfix = VDomDocument::UnitsToStr(qApp->patternUnit());
+        const QString postfix = UnitsToStr(qApp->patternUnit());
         ui->labelCalculatedValue->setText(result->text() + " " +postfix);
         return;
     }
@@ -644,7 +644,7 @@ void DialogIncrements::SaveIncrFormula()
     if (text.isEmpty())
     {
         //Show unit in dialog lable (cm, mm or inch)
-        const QString postfix = VDomDocument::UnitsToStr(qApp->patternUnit());
+        const QString postfix = UnitsToStr(qApp->patternUnit());
         ui->labelCalculatedValue->setText(tr("Error") + " (" + postfix + "). " + tr("Empty field."));
         return;
     }
@@ -725,7 +725,7 @@ void DialogIncrements::Fx()
     dialog->setWindowTitle(tr("Edit increment"));
     dialog->SetFormula(qApp->TrVars()->TryFormulaFromUser(ui->plainTextEditFormula->toPlainText().replace("\n", " "),
                                                           qApp->Settings()->GetOsSeparator()));
-    const QString postfix = VDomDocument::UnitsToStr(qApp->patternUnit(), true);
+    const QString postfix = UnitsToStr(qApp->patternUnit(), true);
     dialog->setPostfix(postfix);//Show unit in dialog lable (cm, mm or inch)
 
     if (dialog->exec() == QDialog::Accepted)

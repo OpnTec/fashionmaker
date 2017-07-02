@@ -262,7 +262,7 @@ VFormula VToolMove::GetFormulaLength() const
     VFormula fLength(formulaLength, getData());
     fLength.setCheckZero(true);
     fLength.setToolId(id);
-    fLength.setPostfix(VDomDocument::UnitsToStr(qApp->patternUnit()));
+    fLength.setPostfix(UnitsToStr(qApp->patternUnit()));
     return fLength;
 }
 

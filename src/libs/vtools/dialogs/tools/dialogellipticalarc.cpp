@@ -367,7 +367,7 @@ void DialogEllipticalArc::SetColor(const QString &value)
 void DialogEllipticalArc::EvalRadiuses()
 {
     labelEditFormula = ui->labelEditRadius1;
-    const QString postfix = VDomDocument::UnitsToStr(qApp->patternUnit(), true);
+    const QString postfix = UnitsToStr(qApp->patternUnit(), true);
     const qreal radius_1 = Eval(ui->plainTextEditRadius1->toPlainText(), flagRadius1, ui->labelResultRadius1, postfix);
 
     if (radius_1 < 0)
@@ -442,7 +442,7 @@ void DialogEllipticalArc::FXRadius1()
     DialogEditWrongFormula *dialog = new DialogEditWrongFormula(data, toolId, this);
     dialog->setWindowTitle(tr("Edit radius1"));
     dialog->SetFormula(GetRadius1());
-    dialog->setPostfix(VDomDocument::UnitsToStr(qApp->patternUnit(), true));
+    dialog->setPostfix(UnitsToStr(qApp->patternUnit(), true));
     if (dialog->exec() == QDialog::Accepted)
     {
         SetRadius1(dialog->GetFormula());
@@ -456,7 +456,7 @@ void DialogEllipticalArc::FXRadius2()
     DialogEditWrongFormula *dialog = new DialogEditWrongFormula(data, toolId, this);
     dialog->setWindowTitle(tr("Edit radius2"));
     dialog->SetFormula(GetRadius2());
-    dialog->setPostfix(VDomDocument::UnitsToStr(qApp->patternUnit(), true));
+    dialog->setPostfix(UnitsToStr(qApp->patternUnit(), true));
     if (dialog->exec() == QDialog::Accepted)
     {
         SetRadius2(dialog->GetFormula());
@@ -514,7 +514,7 @@ void DialogEllipticalArc::Radius1Changed()
 {
     labelEditFormula = ui->labelEditRadius1;
     labelResultCalculation = ui->labelResultRadius1;
-    const QString postfix = VDomDocument::UnitsToStr(qApp->patternUnit(), true);
+    const QString postfix = UnitsToStr(qApp->patternUnit(), true);
     ValFormulaChanged(flagRadius1, ui->plainTextEditRadius1, timerRadius1, postfix);
 }
 
@@ -526,7 +526,7 @@ void DialogEllipticalArc::Radius2Changed()
 {
     labelEditFormula = ui->labelEditRadius2;
     labelResultCalculation = ui->labelResultRadius2;
-    const QString postfix = VDomDocument::UnitsToStr(qApp->patternUnit(), true);
+    const QString postfix = UnitsToStr(qApp->patternUnit(), true);
     ValFormulaChanged(flagRadius2, ui->plainTextEditRadius2, timerRadius2, postfix);
 }
 

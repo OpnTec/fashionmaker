@@ -677,6 +677,62 @@ PassmarkAngleType StringToPassmarkAngleType(const QString &value)
     return PassmarkAngleType::Straightforward;
 }
 
+
+//---------------------------------------------------------------------------------------------------------------------
+Unit StrToUnits(const QString &unit)
+{
+    const QStringList units = QStringList() << unitMM << unitCM << unitINCH << unitPX;
+    Unit result = Unit::Cm;
+    switch (units.indexOf(unit))
+    {
+        case 0:// mm
+            result = Unit::Mm;
+            break;
+        case 2:// inch
+            result = Unit::Inch;
+            break;
+        case 3:// px
+            result = Unit::Px;
+            break;
+        case 1:// cm
+        default:
+            result = Unit::Cm;
+            break;
+    }
+    return result;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief UnitsToStr translate unit to string.
+ *
+ * This method used when need write unit in xml file and for showing unit in dialogs.
+ * @param unit curent unit
+ * @param translate true if need show translated name. Default value false.
+ * @return string reprezantation for unit.
+ */
+QString UnitsToStr(const Unit &unit, const bool translate)
+{
+    QString result;
+    switch (unit)
+    {
+        case Unit::Mm:
+            translate ? result = QObject::tr("mm") : result = unitMM;
+            break;
+        case Unit::Inch:
+            translate ? result = QObject::tr("inch") : result = unitINCH;
+            break;
+        case Unit::Px:
+            translate ? result = QObject::tr("px") : result = unitPX;
+            break;
+        case Unit::Cm:
+        default:
+            translate ? result = QObject::tr("cm") : result = unitCM;
+            break;
+    }
+    return result;
+}
+
 //---------------------------------------------------------------------------------------------------------------------
 void InitLanguages(QComboBox *combobox)
 {
