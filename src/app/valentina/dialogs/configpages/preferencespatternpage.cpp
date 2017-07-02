@@ -52,6 +52,8 @@ PreferencesPatternPage::PreferencesPatternPage(QWidget *parent)
         QMessageBox::information(this, QCoreApplication::applicationName(), qsMsg);
     });
 
+    ui->defaultSeamAllowance->setValue(qApp->ValentinaSettings()->GetDefaultSeamAllowance());
+
     ui->forbidFlippingCheck->setChecked(qApp->ValentinaSettings()->GetForbidWorkpieceFlipping());
     ui->doublePassmarkCheck->setChecked(qApp->ValentinaSettings()->IsDoublePassmark());
     ui->checkBoxHideMainPath->setChecked(qApp->ValentinaSettings()->IsHideMainPath());
@@ -78,6 +80,8 @@ void PreferencesPatternPage::Apply()
      * non-empty stack might delete the command at the current index. Calling setUndoLimit() on a non-empty stack
      * prints a warning and does nothing.*/
     settings->SetUndoCount(ui->undoCount->value());
+
+    settings->SetDefaultSeamAllowance(ui->defaultSeamAllowance->value());
 
     settings->SetForbidWorkpieceFlipping(ui->forbidFlippingCheck->isChecked());
     settings->SetHideMainPath(ui->checkBoxHideMainPath->isChecked());

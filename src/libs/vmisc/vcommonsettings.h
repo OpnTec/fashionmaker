@@ -40,6 +40,8 @@
 
 #include "../vlayout/vbank.h"
 
+class VDomDocument;
+
 class VCommonSettings : public QSettings
 {
     Q_OBJECT
@@ -156,6 +158,10 @@ public:
     void  SetCSVSeparator(const QChar &separator);
     QChar GetCSVSeparator() const;
     QChar GetDefCSVSeparator() const;
+
+    void SetDefaultSeamAllowance(double value);
+    double GetDefaultSeamAllowance();
+
 
 #if !defined(Q_OS_WIN)
     static const QString unixStandardSharePath;

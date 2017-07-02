@@ -43,6 +43,8 @@
 #include "../vmisc/def.h"
 #include "../vmisc/vmath.h"
 #include "../vpatterndb/pmsystems.h"
+//#include "../ifc/xml/vdomdocument.h"
+
 
 const QString settingPathsIndividualMeasurements = QStringLiteral("paths/individual_measurements");
 const QString settingPathsStandardMeasurements   = QStringLiteral("paths/standard_measurements");
@@ -59,11 +61,12 @@ const QString settingConfigurationConfirmItemDeletion    = QStringLiteral("confi
 const QString settingConfigurationConfirmFormatRewriting = QStringLiteral("configuration/confirm_format_rewriting");
 const QString settingConfigurationToolBarStyle           = QStringLiteral("configuration/tool_bar_style");
 
-const QString settingPatternUser           = QStringLiteral("pattern/user");
-const QString settingPatternUndo           = QStringLiteral("pattern/undo");
-const QString settingPatternForbidFlipping = QStringLiteral("pattern/forbidFlipping");
-const QString settingPatternHideMainPath   = QStringLiteral("pattern/hideMainPath");
-const QString settingDoublePassmark        = QStringLiteral("pattern/doublePassmark");
+const QString settingPatternUser                    = QStringLiteral("pattern/user");
+const QString settingPatternUndo                    = QStringLiteral("pattern/undo");
+const QString settingPatternForbidFlipping          = QStringLiteral("pattern/forbidFlipping");
+const QString settingPatternHideMainPath            = QStringLiteral("pattern/hideMainPath");
+const QString settingDoublePassmark                 = QStringLiteral("pattern/doublePassmark");
+const QString settingPatternDefaultSeamAllowance    = QStringLiteral("pattern/defaultSeamAllowance");
 
 const QString settingGeneralRecentFileList       = QStringLiteral("recentFileList");
 const QString settingGeneralRestoreFileList      = QStringLiteral("restoreFileList");
@@ -755,3 +758,50 @@ QChar VCommonSettings::GetDefCSVSeparator() const
 {
     return QChar(',');
 }
+
+//---------------------------------------------------------------------------------------------------------------------
+void VCommonSettings::SetDefaultSeamAllowance(double value)
+{
+    setValue(settingPatternDefaultSeamAllowance, value);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief returns the default seam allowance. The corresponding unit is the default unit.
+ * @return the default seam allowance
+ */
+double VCommonSettings::GetDefaultSeamAllowance()
+{
+    double defaultValue;
+
+    //Unit globalUnit = VDomDocument::StrToUnits(GetUnit());
+    Unit globalUnit = Unit::Cm; // just for test purpuses
+
+    switch (globalUnit)
+    {
+        case Unit::Mm:
+            defaultValue = 10;
+            break;
+        case Unit::Inch:
+            defaultValue = 0.25;
+            break;
+        default:
+        case Unit::Cm:
+            defaultValue = 1;
+            break;
+    }
+
+    bool ok = false;
+    double val = value(settingPatternDefaultSeamAllowance, defaultValue).toDouble(&ok);
+    if (ok == false)
+    {
+        qDebug()<< "Could not convert value"<<value(settingPatternDefaultSeamAllowance, 0)
+                << "to int. Return default value for default seam allowance is "
+                << defaultValue << ".";
+        val = defaultValue;
+    }
+
+    return val;
+}
+
+
