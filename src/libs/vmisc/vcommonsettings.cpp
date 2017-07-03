@@ -43,8 +43,6 @@
 #include "../vmisc/def.h"
 #include "../vmisc/vmath.h"
 #include "../vpatterndb/pmsystems.h"
-//#include "../ifc/xml/vdomdocument.h"
-
 
 const QString settingPathsIndividualMeasurements = QStringLiteral("paths/individual_measurements");
 const QString settingPathsStandardMeasurements   = QStringLiteral("paths/standard_measurements");
@@ -762,7 +760,7 @@ QChar VCommonSettings::GetDefCSVSeparator() const
 //---------------------------------------------------------------------------------------------------------------------
 void VCommonSettings::SetDefaultSeamAllowance(double value)
 {
-    setValue(settingPatternDefaultSeamAllowance, value);
+    setValue(settingPatternDefaultSeamAllowance, UnitConvertor(value, StrToUnits(GetUnit()), Unit::Cm));
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -774,7 +772,7 @@ double VCommonSettings::GetDefaultSeamAllowance()
 {
     double defaultValue;
 
-    Unit globalUnit = StrToUnits(GetUnit());
+    const Unit globalUnit = StrToUnits(GetUnit());
 
     switch (globalUnit)
     {
@@ -791,13 +789,22 @@ double VCommonSettings::GetDefaultSeamAllowance()
     }
 
     bool ok = false;
-    double val = value(settingPatternDefaultSeamAllowance, defaultValue).toDouble(&ok);
+    double val = value(settingPatternDefaultSeamAllowance, -1).toDouble(&ok);
     if (ok == false)
     {
         qDebug()<< "Could not convert value"<<value(settingPatternDefaultSeamAllowance, 0)
-                << "to int. Return default value for default seam allowance is "
+                << "to real. Return default value for default seam allowance is "
                 << defaultValue << ".";
         val = defaultValue;
+    }
+
+    if (val < 0)
+    {
+        val = defaultValue;
+    }
+    else
+    {
+        val = UnitConvertor(val, Unit::Cm, globalUnit);
     }
 
     return val;

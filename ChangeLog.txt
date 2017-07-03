@@ -6,6 +6,7 @@
 - [#637] Max scene size too small to fit all objects.
 - New feature Zoom Fit Best Current pattern piece.
 - [#693] New feature: Sort workpiece "Groups" by name.
+- [#712] Default seam allowance setting.
 
 # Version 0.5.1
 - [#683] Tool Seam allowance's dialog is off screen on small resolutions.

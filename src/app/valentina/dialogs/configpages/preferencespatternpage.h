@@ -45,6 +45,7 @@ public:
     virtual ~PreferencesPatternPage();
 
     void Apply();
+    void InitDefaultSeamAllowance();
 
 private:
     Q_DISABLE_COPY(PreferencesPatternPage)

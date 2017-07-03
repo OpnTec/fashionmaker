@@ -126,6 +126,8 @@ void DialogPreferences::Apply()
     m_patternPage->Apply();
     m_pathPage->Apply();
 
+    m_patternPage->InitDefaultSeamAllowance();
+
     qApp->ValentinaSettings()->GetOsSeparator() ? setLocale(QLocale()) : setLocale(QLocale::c());
     emit UpdateProperties();
     setResult(QDialog::Accepted);

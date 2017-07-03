@@ -2526,13 +2526,8 @@ void DialogSeamAllowance::InitSeamAllowanceTab()
     connect(uiTabPaths->checkBoxSeams, &QCheckBox::toggled, this, &DialogSeamAllowance::EnableSeamAllowance);
 
     // init the default seam allowance, convert the value if app unit is different than pattern unit
-    m_saWidth = qApp->Settings()->GetDefaultSeamAllowance();
-    Unit defaultUnit = StrToUnits(qApp->Settings()->GetUnit());
-    Unit patternUnit = qApp->patternUnit();
-    if(defaultUnit != patternUnit)
-    {
-        m_saWidth = UnitConvertor(m_saWidth, defaultUnit, patternUnit);
-    }
+    m_saWidth = UnitConvertor(qApp->Settings()->GetDefaultSeamAllowance(),
+                              StrToUnits(qApp->Settings()->GetUnit()), qApp->patternUnit());
 
     uiTabPaths->plainTextEditFormulaWidth->setPlainText(qApp->LocaleToString(m_saWidth));
 

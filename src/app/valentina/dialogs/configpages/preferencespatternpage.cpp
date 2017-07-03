@@ -52,7 +52,7 @@ PreferencesPatternPage::PreferencesPatternPage(QWidget *parent)
         QMessageBox::information(this, QCoreApplication::applicationName(), qsMsg);
     });
 
-    ui->defaultSeamAllowance->setValue(qApp->ValentinaSettings()->GetDefaultSeamAllowance());
+    InitDefaultSeamAllowance();
 
     ui->forbidFlippingCheck->setChecked(qApp->ValentinaSettings()->GetForbidWorkpieceFlipping());
     ui->doublePassmarkCheck->setChecked(qApp->ValentinaSettings()->IsDoublePassmark());
@@ -91,4 +91,11 @@ void PreferencesPatternPage::Apply()
         settings->SetDoublePassmark(ui->doublePassmarkCheck->isChecked());
         qApp->getCurrentDocument()->LiteParseTree(Document::LiteParse);
     }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void PreferencesPatternPage::InitDefaultSeamAllowance()
+{
+    ui->defaultSeamAllowance->setValue(qApp->ValentinaSettings()->GetDefaultSeamAllowance());
+    ui->defaultSeamAllowance->setSuffix(UnitsToStr(StrToUnits(qApp->ValentinaSettings()->GetUnit()), true));
 }
