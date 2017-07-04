@@ -47,7 +47,10 @@ bool DialogSaveLayout::tested  = false;
 
 //---------------------------------------------------------------------------------------------------------------------
 DialogSaveLayout::DialogSaveLayout(int count, const QString &fileName, QWidget *parent)
-    :QDialog(parent), ui(new Ui::DialogSaveLAyout), count(count), isInitialized(false), availFormats(InitAvailFormats())
+    : QDialog(parent),
+      ui(new Ui::DialogSaveLAyout),
+      count(count),
+      isInitialized(false)
 {
     ui->setupUi(this);
 
@@ -80,20 +83,14 @@ DialogSaveLayout::DialogSaveLayout(int count, const QString &fileName, QWidget *
         }
     }
 
-    foreach (auto& v , availFormats)
+    foreach (auto& v, InitFormats())
     {
-        ui->comboBoxFormat->addItem(v.first, QVariant(v.second));
+        ui->comboBoxFormat->addItem(v.first, QVariant(static_cast<int>(v.second)));
     }
     connect(bOk, &QPushButton::clicked, this, &DialogSaveLayout::Save);
-
-    auto ShowExample = [this]()
-    {
-        ui->labelExample->setText(tr("Example:") + FileName() + QLatin1String("1") + Format());
-    };
-
-    connect(ui->lineEditFileName, &QLineEdit::textChanged, this, ShowExample);
+    connect(ui->lineEditFileName, &QLineEdit::textChanged, this, &DialogSaveLayout::ShowExample);
     connect(ui->comboBoxFormat, static_cast<void (QComboBox::*)(int)>(&QComboBox::currentIndexChanged),
-            this, ShowExample);
+            this, &DialogSaveLayout::ShowExample);
     connect(ui->pushButtonBrowse, &QPushButton::clicked, this, [this]()
     {
         const QString dirPath = qApp->ValentinaSettings()->GetPathLayout();
@@ -126,15 +123,15 @@ DialogSaveLayout::DialogSaveLayout(int count, const QString &fileName, QWidget *
 }
 //---------------------------------------------------------------------------------------------------------------------
 
-void DialogSaveLayout::SelectFormate(const int formate)
+void DialogSaveLayout::SelectFormat(LayoutExportFormats format)
 {
-    if (formate >= availFormats.size())
+    if (static_cast<int>(format) < 0 || format >= LayoutExportFormats::COUNT)
     {
         VException e(tr("Tried to use out of range format number."));
         throw e;
     }
 
-    const int i = ui->comboBoxFormat->findData(availFormats.at(formate).second);
+    const int i = ui->comboBoxFormat->findData(static_cast<int>(format));
     if (i < 0)
     {
         VException e(tr("Selected not present format."));
@@ -144,14 +141,103 @@ void DialogSaveLayout::SelectFormate(const int formate)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void DialogSaveLayout::SetBinaryDXFFormat(bool binary)
+{
+    switch(Format())
+    {
+        case LayoutExportFormats::DXF_AC1006_Flat:
+        case LayoutExportFormats::DXF_AC1009_Flat:
+        case LayoutExportFormats::DXF_AC1012_Flat:
+        case LayoutExportFormats::DXF_AC1014_Flat:
+        case LayoutExportFormats::DXF_AC1015_Flat:
+        case LayoutExportFormats::DXF_AC1018_Flat:
+        case LayoutExportFormats::DXF_AC1021_Flat:
+        case LayoutExportFormats::DXF_AC1024_Flat:
+        case LayoutExportFormats::DXF_AC1027_Flat:
+        case LayoutExportFormats::DXF_AC1006_AAMA:
+        case LayoutExportFormats::DXF_AC1009_AAMA:
+        case LayoutExportFormats::DXF_AC1012_AAMA:
+        case LayoutExportFormats::DXF_AC1014_AAMA:
+        case LayoutExportFormats::DXF_AC1015_AAMA:
+        case LayoutExportFormats::DXF_AC1018_AAMA:
+        case LayoutExportFormats::DXF_AC1021_AAMA:
+        case LayoutExportFormats::DXF_AC1024_AAMA:
+        case LayoutExportFormats::DXF_AC1027_AAMA:
+        case LayoutExportFormats::DXF_AC1006_ASTM:
+        case LayoutExportFormats::DXF_AC1009_ASTM:
+        case LayoutExportFormats::DXF_AC1012_ASTM:
+        case LayoutExportFormats::DXF_AC1014_ASTM:
+        case LayoutExportFormats::DXF_AC1015_ASTM:
+        case LayoutExportFormats::DXF_AC1018_ASTM:
+        case LayoutExportFormats::DXF_AC1021_ASTM:
+        case LayoutExportFormats::DXF_AC1024_ASTM:
+        case LayoutExportFormats::DXF_AC1027_ASTM:
+            ui->checkBoxBinaryDXF->setChecked(binary);
+            break;
+        case LayoutExportFormats::SVG:
+        case LayoutExportFormats::PDF:
+        case LayoutExportFormats::PNG:
+        case LayoutExportFormats::OBJ:
+        case LayoutExportFormats::PS:
+        case LayoutExportFormats::EPS:
+        default:
+            ui->checkBoxBinaryDXF->setChecked(false);
+            break;
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+bool DialogSaveLayout::IsBinaryDXFFormat() const
+{
+    switch(Format())
+    {
+        case LayoutExportFormats::DXF_AC1006_Flat:
+        case LayoutExportFormats::DXF_AC1009_Flat:
+        case LayoutExportFormats::DXF_AC1012_Flat:
+        case LayoutExportFormats::DXF_AC1014_Flat:
+        case LayoutExportFormats::DXF_AC1015_Flat:
+        case LayoutExportFormats::DXF_AC1018_Flat:
+        case LayoutExportFormats::DXF_AC1021_Flat:
+        case LayoutExportFormats::DXF_AC1024_Flat:
+        case LayoutExportFormats::DXF_AC1027_Flat:
+        case LayoutExportFormats::DXF_AC1006_AAMA:
+        case LayoutExportFormats::DXF_AC1009_AAMA:
+        case LayoutExportFormats::DXF_AC1012_AAMA:
+        case LayoutExportFormats::DXF_AC1014_AAMA:
+        case LayoutExportFormats::DXF_AC1015_AAMA:
+        case LayoutExportFormats::DXF_AC1018_AAMA:
+        case LayoutExportFormats::DXF_AC1021_AAMA:
+        case LayoutExportFormats::DXF_AC1024_AAMA:
+        case LayoutExportFormats::DXF_AC1027_AAMA:
+        case LayoutExportFormats::DXF_AC1006_ASTM:
+        case LayoutExportFormats::DXF_AC1009_ASTM:
+        case LayoutExportFormats::DXF_AC1012_ASTM:
+        case LayoutExportFormats::DXF_AC1014_ASTM:
+        case LayoutExportFormats::DXF_AC1015_ASTM:
+        case LayoutExportFormats::DXF_AC1018_ASTM:
+        case LayoutExportFormats::DXF_AC1021_ASTM:
+        case LayoutExportFormats::DXF_AC1024_ASTM:
+        case LayoutExportFormats::DXF_AC1027_ASTM:
+            return ui->checkBoxBinaryDXF->isChecked();
+        case LayoutExportFormats::SVG:
+        case LayoutExportFormats::PDF:
+        case LayoutExportFormats::PNG:
+        case LayoutExportFormats::OBJ:
+        case LayoutExportFormats::PS:
+        case LayoutExportFormats::EPS:
+        default:
+            return false;
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 QString DialogSaveLayout::MakeHelpFormatList()
 {
    QString out("\n");
-   int cntr = 0;
-   const QVector<std::pair<QString, QString>> availFormats = InitAvailFormats();
-   foreach(auto& v, availFormats)
+   foreach(auto& v, InitFormats())
    {
-       out += QLatin1String("\t") + v.first+QLatin1String(" = ") + QString::number(cntr++) + QLatin1String("\n");
+       out += QLatin1String("\t") + v.first + QLatin1String(" = ") + QString::number(static_cast<int>(v.second))
+               + QLatin1String("\n");
    }
    return out;
 }
@@ -184,6 +270,136 @@ void DialogSaveLayout::SetDestinationPath(const QString &cmdDestinationPath)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+QString DialogSaveLayout::ExportFormatDescription(LayoutExportFormats format)
+{
+    const QString dxfSuffix = QStringLiteral("(*.dxf)");
+    const QString dxfFlatFilesStr = tr("(flat) files");
+    const QString filesStr = tr("files");
+
+    switch(format)
+    {
+        case LayoutExportFormats::SVG:
+            return QString("Svg %1 (*.svg)").arg(filesStr);
+        case LayoutExportFormats::PDF:
+            return QString("PDF %1 (*.pdf)").arg(filesStr);
+        case LayoutExportFormats::PNG:
+            return tr("Image files") + QLatin1String(" (*.png)");
+        case LayoutExportFormats::OBJ:
+            return "Wavefront OBJ (*.obj)";
+        case LayoutExportFormats::PS:
+            return QString("PS %1 (*.ps)").arg(filesStr);
+        case LayoutExportFormats::EPS:
+            return QString("EPS %1 (*.eps)").arg(filesStr);
+        case LayoutExportFormats::DXF_AC1006_Flat:
+            return QString("AutoCAD DXF R10 %1 %2").arg(dxfFlatFilesStr, dxfSuffix);
+        case LayoutExportFormats::DXF_AC1009_Flat:
+            return QString("AutoCAD DXF R11/12 %1 %2").arg(dxfFlatFilesStr, dxfSuffix);
+        case LayoutExportFormats::DXF_AC1012_Flat:
+            return QString("AutoCAD DXF R13 %1 %2").arg(dxfFlatFilesStr, dxfSuffix);
+        case LayoutExportFormats::DXF_AC1014_Flat:
+            return QString("AutoCAD DXF R14 %1 %2").arg(dxfFlatFilesStr, dxfSuffix);
+        case LayoutExportFormats::DXF_AC1015_Flat:
+            return QString("AutoCAD DXF 2000 %1 %2").arg(dxfFlatFilesStr, dxfSuffix);
+        case LayoutExportFormats::DXF_AC1018_Flat:
+            return QString("AutoCAD DXF 2004 %1 %2").arg(dxfFlatFilesStr, dxfSuffix);
+        case LayoutExportFormats::DXF_AC1021_Flat:
+            return QString("AutoCAD DXF 2007 %1 %2").arg(dxfFlatFilesStr, dxfSuffix);
+        case LayoutExportFormats::DXF_AC1024_Flat:
+            return QString("AutoCAD DXF 2010 %1 %2").arg(dxfFlatFilesStr, dxfSuffix);
+        case LayoutExportFormats::DXF_AC1027_Flat:
+            return QString("AutoCAD DXF 2013 %1 %2").arg(dxfFlatFilesStr, dxfSuffix);
+        case LayoutExportFormats::DXF_AC1006_AAMA:
+            return QString("AutoCAD DXF R10 AAMA %1 %2").arg(dxfFlatFilesStr, dxfSuffix);
+        case LayoutExportFormats::DXF_AC1009_AAMA:
+            return QString("AutoCAD DXF R11/12 AAMA %1 %2").arg(dxfFlatFilesStr, dxfSuffix);
+        case LayoutExportFormats::DXF_AC1012_AAMA:
+            return QString("AutoCAD DXF R13 AAMA %1 %2").arg(filesStr, dxfSuffix);
+        case LayoutExportFormats::DXF_AC1014_AAMA:
+            return QString("AutoCAD DXF R14 AAMA %1 %2").arg(filesStr, dxfSuffix);
+        case LayoutExportFormats::DXF_AC1015_AAMA:
+            return QString("AutoCAD DXF 2000 AAMA %1 %2").arg(filesStr, dxfSuffix);
+        case LayoutExportFormats::DXF_AC1018_AAMA:
+            return QString("AutoCAD DXF 2004 AAMA %1 %2").arg(filesStr, dxfSuffix);
+        case LayoutExportFormats::DXF_AC1021_AAMA:
+            return QString("AutoCAD DXF 2007 AAMA %1 %2").arg(filesStr, dxfSuffix);
+        case LayoutExportFormats::DXF_AC1024_AAMA:
+            return QString("AutoCAD DXF 2010 AAMA %1 %2").arg(filesStr, dxfSuffix);
+        case LayoutExportFormats::DXF_AC1027_AAMA:
+            return QString("AutoCAD DXF 2013 AAMA %1 %2").arg(filesStr, dxfSuffix);
+        case LayoutExportFormats::DXF_AC1006_ASTM:
+            return QString("AutoCAD DXF R10 ASTM %1 %2").arg(filesStr, dxfSuffix);
+        case LayoutExportFormats::DXF_AC1009_ASTM:
+            return QString("AutoCAD DXF R11/12 ASTM %1 %2").arg(filesStr, dxfSuffix);
+        case LayoutExportFormats::DXF_AC1012_ASTM:
+            return QString("AutoCAD DXF R13 ASTM %1 %2").arg(filesStr, dxfSuffix);
+        case LayoutExportFormats::DXF_AC1014_ASTM:
+            return QString("AutoCAD DXF R14 ASTM %1 %2").arg(filesStr, dxfSuffix);
+        case LayoutExportFormats::DXF_AC1015_ASTM:
+            return QString("AutoCAD DXF 2000 ASTM %1 %2").arg(filesStr, dxfSuffix);
+        case LayoutExportFormats::DXF_AC1018_ASTM:
+            return QString("AutoCAD DXF 2004 ASTM %1 %2").arg(filesStr, dxfSuffix);
+        case LayoutExportFormats::DXF_AC1021_ASTM:
+            return QString("AutoCAD DXF 2007 ASTM %1 %2").arg(filesStr, dxfSuffix);
+        case LayoutExportFormats::DXF_AC1024_ASTM:
+            return QString("AutoCAD DXF 2010 ASTM %1 %2").arg(filesStr, dxfSuffix);
+        case LayoutExportFormats::DXF_AC1027_ASTM:
+            return QString("AutoCAD DXF 2013 ASTM %1 %2").arg(filesStr, dxfSuffix);
+        default:
+            return QString();
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QString DialogSaveLayout::ExportFromatSuffix(LayoutExportFormats format)
+{
+    switch(format)
+    {
+        case LayoutExportFormats::SVG:
+            return ".svg";
+        case LayoutExportFormats::PDF:
+            return ".pdf";
+        case LayoutExportFormats::PNG:
+            return ".png";
+        case LayoutExportFormats::OBJ:
+            return ".obj";
+        case LayoutExportFormats::PS:
+            return ".ps";
+        case LayoutExportFormats::EPS:
+            return ".eps";
+        case LayoutExportFormats::DXF_AC1006_Flat:
+        case LayoutExportFormats::DXF_AC1009_Flat:
+        case LayoutExportFormats::DXF_AC1012_Flat:
+        case LayoutExportFormats::DXF_AC1014_Flat:
+        case LayoutExportFormats::DXF_AC1015_Flat:
+        case LayoutExportFormats::DXF_AC1018_Flat:
+        case LayoutExportFormats::DXF_AC1021_Flat:
+        case LayoutExportFormats::DXF_AC1024_Flat:
+        case LayoutExportFormats::DXF_AC1027_Flat:
+        case LayoutExportFormats::DXF_AC1006_AAMA:
+        case LayoutExportFormats::DXF_AC1009_AAMA:
+        case LayoutExportFormats::DXF_AC1012_AAMA:
+        case LayoutExportFormats::DXF_AC1014_AAMA:
+        case LayoutExportFormats::DXF_AC1015_AAMA:
+        case LayoutExportFormats::DXF_AC1018_AAMA:
+        case LayoutExportFormats::DXF_AC1021_AAMA:
+        case LayoutExportFormats::DXF_AC1024_AAMA:
+        case LayoutExportFormats::DXF_AC1027_AAMA:
+        case LayoutExportFormats::DXF_AC1006_ASTM:
+        case LayoutExportFormats::DXF_AC1009_ASTM:
+        case LayoutExportFormats::DXF_AC1012_ASTM:
+        case LayoutExportFormats::DXF_AC1014_ASTM:
+        case LayoutExportFormats::DXF_AC1015_ASTM:
+        case LayoutExportFormats::DXF_AC1018_ASTM:
+        case LayoutExportFormats::DXF_AC1021_ASTM:
+        case LayoutExportFormats::DXF_AC1024_ASTM:
+        case LayoutExportFormats::DXF_AC1027_ASTM:
+            return ".dxf";
+        default:
+            return QString();
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 DialogSaveLayout::~DialogSaveLayout()
 {
     delete ui;
@@ -202,9 +418,9 @@ QString DialogSaveLayout::FileName() const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QString DialogSaveLayout::Format() const
+LayoutExportFormats DialogSaveLayout::Format() const
 {
-    return ui->comboBoxFormat->currentData().toString();
+    return static_cast<LayoutExportFormats>(ui->comboBoxFormat->currentData().toInt());
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -212,7 +428,7 @@ void DialogSaveLayout::Save()
 {
     for (int i=0; i < count; ++i)
     {
-        const QString name = Path()+QLatin1Literal("/")+FileName()+QString::number(i+1)+Format();
+        const QString name = Path()+QLatin1Literal("/")+FileName()+QString::number(i+1)+ExportFromatSuffix(Format());
         if (QFile::exists(name))
         {
             QMessageBox::StandardButton res = QMessageBox::question(this, tr("Name conflict"),
@@ -254,6 +470,55 @@ void DialogSaveLayout::PathChanged(const QString &text)
     }
 
     ui->lineEditPath->setPalette(palette);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogSaveLayout::ShowExample()
+{
+    const LayoutExportFormats currentFormat = Format();
+    ui->labelExample->setText(tr("Example:") + FileName() + QLatin1String("1") + ExportFromatSuffix(currentFormat));
+
+    switch(currentFormat)
+    {
+        case LayoutExportFormats::DXF_AC1006_Flat:
+        case LayoutExportFormats::DXF_AC1009_Flat:
+        case LayoutExportFormats::DXF_AC1012_Flat:
+        case LayoutExportFormats::DXF_AC1014_Flat:
+        case LayoutExportFormats::DXF_AC1015_Flat:
+        case LayoutExportFormats::DXF_AC1018_Flat:
+        case LayoutExportFormats::DXF_AC1021_Flat:
+        case LayoutExportFormats::DXF_AC1024_Flat:
+        case LayoutExportFormats::DXF_AC1027_Flat:
+        case LayoutExportFormats::DXF_AC1006_AAMA:
+        case LayoutExportFormats::DXF_AC1009_AAMA:
+        case LayoutExportFormats::DXF_AC1012_AAMA:
+        case LayoutExportFormats::DXF_AC1014_AAMA:
+        case LayoutExportFormats::DXF_AC1015_AAMA:
+        case LayoutExportFormats::DXF_AC1018_AAMA:
+        case LayoutExportFormats::DXF_AC1021_AAMA:
+        case LayoutExportFormats::DXF_AC1024_AAMA:
+        case LayoutExportFormats::DXF_AC1027_AAMA:
+        case LayoutExportFormats::DXF_AC1006_ASTM:
+        case LayoutExportFormats::DXF_AC1009_ASTM:
+        case LayoutExportFormats::DXF_AC1012_ASTM:
+        case LayoutExportFormats::DXF_AC1014_ASTM:
+        case LayoutExportFormats::DXF_AC1015_ASTM:
+        case LayoutExportFormats::DXF_AC1018_ASTM:
+        case LayoutExportFormats::DXF_AC1021_ASTM:
+        case LayoutExportFormats::DXF_AC1024_ASTM:
+        case LayoutExportFormats::DXF_AC1027_ASTM:
+            ui->checkBoxBinaryDXF->setEnabled(true);
+            break;
+        case LayoutExportFormats::SVG:
+        case LayoutExportFormats::PDF:
+        case LayoutExportFormats::PNG:
+        case LayoutExportFormats::OBJ:
+        case LayoutExportFormats::PS:
+        case LayoutExportFormats::EPS:
+        default:
+            ui->checkBoxBinaryDXF->setEnabled(false);
+            break;
+    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -311,22 +576,55 @@ bool DialogSaveLayout::TestPdf()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QVector<std::pair<QString, QString>> DialogSaveLayout::InitAvailFormats()
+QVector<std::pair<QString, LayoutExportFormats> > DialogSaveLayout::InitFormats()
 {
-    QVector<std::pair<QString, QString>> list;
-    list.append(std::make_pair(QLatin1String("Svg ") + tr("files") + QLatin1String(" (*.svg)"), QLatin1String(".svg")));
-    list.append(std::make_pair(QLatin1String("PDF ") + tr("files") + QLatin1String(" (*.pdf)"), QLatin1String(".pdf")));
-    list.append(std::make_pair(QLatin1String("Images") + QLatin1String(" (*.png)"), QLatin1String(".png")));
+    QVector<std::pair<QString, LayoutExportFormats>> list;
+
+    auto InitFormat = [&list](LayoutExportFormats format)
+    {
+        list.append(std::make_pair(ExportFormatDescription(format), format));
+    };
+
+    InitFormat(LayoutExportFormats::SVG);
+    InitFormat(LayoutExportFormats::PDF);
+    InitFormat(LayoutExportFormats::PNG);
 #ifndef V_NO_ASSERT // Temporarily unavailable
-    list.append(std::make_pair(QLatin1String("Wavefront OBJ (*.obj)"), QLatin1String(".obj")));
+    InitFormat(LayoutExportFormats::OBJ);
 #endif
     if (SupportPSTest())
     {
-        list.append(std::make_pair(QLatin1String("PS ") + tr("files") + QLatin1String(" (*.ps)"),
-                                   QLatin1String(".ps")));
-        list.append(std::make_pair(QLatin1String("EPS ") + tr("files") + QLatin1String(" (*.eps)"),
-                                   QLatin1String(".eps")));
+        InitFormat(LayoutExportFormats::PS);
+        InitFormat(LayoutExportFormats::EPS);
     }
-    list.append(std::make_pair(QLatin1String("DXF ") + tr("files") + QLatin1String(" (*.dxf)"), QLatin1String(".dxf")));
+    InitFormat(LayoutExportFormats::DXF_AC1006_Flat);
+    InitFormat(LayoutExportFormats::DXF_AC1009_Flat);
+    InitFormat(LayoutExportFormats::DXF_AC1012_Flat);
+    InitFormat(LayoutExportFormats::DXF_AC1014_Flat);
+    InitFormat(LayoutExportFormats::DXF_AC1015_Flat);
+    InitFormat(LayoutExportFormats::DXF_AC1018_Flat);
+    InitFormat(LayoutExportFormats::DXF_AC1021_Flat);
+    InitFormat(LayoutExportFormats::DXF_AC1024_Flat);
+    InitFormat(LayoutExportFormats::DXF_AC1027_Flat);
+
+    // We will support them anyway
+//    InitFormat(LayoutExportFormats::DXF_AC1006_AAMA);
+//    InitFormat(LayoutExportFormats::DXF_AC1009_AAMA);
+//    InitFormat(LayoutExportFormats::DXF_AC1012_AAMA);
+//    InitFormat(LayoutExportFormats::DXF_AC1014_AAMA);
+//    InitFormat(LayoutExportFormats::DXF_AC1015_AAMA);
+//    InitFormat(LayoutExportFormats::DXF_AC1018_AAMA);
+//    InitFormat(LayoutExportFormats::DXF_AC1021_AAMA);
+//    InitFormat(LayoutExportFormats::DXF_AC1024_AAMA);
+//    InitFormat(LayoutExportFormats::DXF_AC1027_AAMA);
+//    InitFormat(LayoutExportFormats::DXF_AC1006_ASTM);
+//    InitFormat(LayoutExportFormats::DXF_AC1009_ASTM);
+//    InitFormat(LayoutExportFormats::DXF_AC1012_ASTM);
+//    InitFormat(LayoutExportFormats::DXF_AC1014_ASTM);
+//    InitFormat(LayoutExportFormats::DXF_AC1015_ASTM);
+//    InitFormat(LayoutExportFormats::DXF_AC1018_ASTM);
+//    InitFormat(LayoutExportFormats::DXF_AC1021_ASTM);
+//    InitFormat(LayoutExportFormats::DXF_AC1024_ASTM);
+//    InitFormat(LayoutExportFormats::DXF_AC1027_ASTM);
+
     return list;
 }

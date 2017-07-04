@@ -55,6 +55,7 @@ public slots:
     void PrintPreviewTiled();
     void PrintOrigin();
     void PrintTiled();
+    void RefreshDetailsLabel();
 protected:
     QVector<VLayoutPiece> listDetails;
 
@@ -120,10 +121,13 @@ private:
     void PsFile(const QString &name, int i)const;
     void PdfToPs(const QStringList &params)const;
     void ObjFile(const QString &name, int i)const;
-    void DxfFile(const QString &name, int i)const;
+    void DxfFile(const QString &name, int version, bool binary, int i)const;
 
     void PreparePaper(int index) const;
     void RestorePaper(int index) const;
+
+    void PrepareTextForDXF(const QString &placeholder) const;
+    void RestoreTextAfterDXF(const QString &placeholder) const;
 
     void SaveLayoutAs();
     void PrintPreview();

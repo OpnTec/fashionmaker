@@ -37,15 +37,16 @@
 #include "../vmisc/def.h"
 #include "../vmisc/logging.h"
 #include "../vmisc/vabstractapplication.h"
-#include "../vpatterndb/vcontainer.h"
 #include "../vwidgets/vmaingraphicsscene.h"
 #include "../vwidgets/vcurvepathitem.h"
 #include "../vwidgets/global.h"
+#include "../vgeometry/vabstractcurve.h"
 
 Q_DECLARE_LOGGING_CATEGORY(vVis)
 
 class VScaledEllipse;
 class VScaledLine;
+class VContainer;
 
 enum class Mode : char {Creation, Show};
 

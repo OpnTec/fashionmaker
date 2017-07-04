@@ -98,18 +98,67 @@ double VDxfPaintDevice::getResolution() const
  //---------------------------------------------------------------------------------------------------------------------
 void VDxfPaintDevice::setResolution(double dpi)
 {
+    if (engine->isActive())
+    {
+        qWarning("VDxfPaintDevice::setResolution(), cannot set dpi while Dxf is being generated");
+        return;
+    }
     engine->setResolution(dpi);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+DRW::Version VDxfPaintDevice::GetVersion() const
+{
+    return engine->GetVersion();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VDxfPaintDevice::SetVersion(DRW::Version version)
+{
+    if (engine->isActive())
+    {
+        qWarning("VDxfPaintDevice::SetVersion(), cannot set version while Dxf is being generated");
+        return;
+    }
+    engine->SetVersion(version);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VDxfPaintDevice::SetBinaryFormat(bool binary)
+{
+    if (engine->isActive())
+    {
+        qWarning("VDxfPaintDevice::SetBinaryFormat(), cannot set binary format while Dxf is being generated");
+        return;
+    }
+    engine->SetBinaryFormat(binary);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+bool VDxfPaintDevice::IsBinaryFromat() const
+{
+    return engine->IsBinaryFormat();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void VDxfPaintDevice::setMeasurement(const VarMeasurement &var)
 {
+    if (engine->isActive())
+    {
+        qWarning("VDxfPaintDevice::setMeasurement(), cannot set measurements while Dxf is being generated");
+        return;
+    }
     engine->setMeasurement(var);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void VDxfPaintDevice::setInsunits(const VarInsunits &var)
 {
+    if (engine->isActive())
+    {
+        qWarning("VDxfPaintDevice::setInsunits(), cannot set units while Dxf is being generated");
+        return;
+    }
     engine->setInsunits(var);
 }
 

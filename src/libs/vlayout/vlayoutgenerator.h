@@ -106,6 +106,9 @@ public:
     bool IsStripOptimization() const;
     void SetStripOptimization(bool value);
 
+    bool IsTestAsPaths() const;
+    void SetTestAsPaths(bool value);
+
 signals:
     void Start();
     void Arranged(int count);
@@ -134,6 +137,7 @@ private:
     bool stripOptimizationEnabled;
     quint8 multiplier;
     bool stripOptimization;
+    bool textAsPaths;
 
     int PageHeight() const;
     int PageWidth() const;

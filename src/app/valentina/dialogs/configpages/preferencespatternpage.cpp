@@ -57,6 +57,7 @@ PreferencesPatternPage::PreferencesPatternPage(QWidget *parent)
     ui->forbidFlippingCheck->setChecked(qApp->ValentinaSettings()->GetForbidWorkpieceFlipping());
     ui->doublePassmarkCheck->setChecked(qApp->ValentinaSettings()->IsDoublePassmark());
     ui->checkBoxHideMainPath->setChecked(qApp->ValentinaSettings()->IsHideMainPath());
+    ui->fontComboBoxLabelFont->setCurrentFont(qApp->ValentinaSettings()->GetLabelFont());
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -85,6 +86,7 @@ void PreferencesPatternPage::Apply()
 
     settings->SetForbidWorkpieceFlipping(ui->forbidFlippingCheck->isChecked());
     settings->SetHideMainPath(ui->checkBoxHideMainPath->isChecked());
+    qApp->ValentinaSettings()->SetLabelFont(ui->fontComboBoxLabelFont->currentFont());
 
     if (settings->IsDoublePassmark() != ui->doublePassmarkCheck->isChecked())
     {

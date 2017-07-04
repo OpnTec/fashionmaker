@@ -30,6 +30,7 @@
 #include "ui_vwidgetgroups.h"
 #include "../vtools/dialogs/tools/dialoggroup.h"
 #include "../vtools/undocommands/delgroup.h"
+#include "../vpatterndb/vcontainer.h"
 
 #include <QMenu>
 

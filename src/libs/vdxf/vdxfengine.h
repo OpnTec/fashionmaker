@@ -41,15 +41,17 @@
 
 #include "../vmisc/def.h"
 #include "dxfdef.h"
-#include "dxflib/dl_dxf.h"
+#include "libdxfrw/drw_base.h"
 
 class QTextStream;
+class dx_iface;
+class DRW_Text;
 
 class VDxfEngine : public QPaintEngine
 {
 public:
     VDxfEngine();
-    virtual ~VDxfEngine() Q_DECL_OVERRIDE;
+    virtual ~VDxfEngine();
 
     virtual bool begin(QPaintDevice *pdev) Q_DECL_OVERRIDE;
     virtual bool end() Q_DECL_OVERRIDE;
@@ -74,6 +76,12 @@ public:
     QString getFileName() const;
     void setFileName(const QString &value);
 
+    DRW::Version GetVersion() const;
+    void         SetVersion(DRW::Version version);
+
+    void SetBinaryFormat(bool binary);
+    bool IsBinaryFormat() const;
+
     std::string getPenStyle();
     int getPenColor();
 
@@ -85,11 +93,13 @@ private:
     QSize            size;
     double           resolution;
     QString          fileName;
+    DRW::Version     m_version;
+    bool             m_binary;
     QMatrix          matrix;
-    DL_Dxf* dxf;
-    DL_WriterA* dw;
+    QSharedPointer<dx_iface> input;
     VarMeasurement varMeasurement;
     VarInsunits varInsunits;
+    DRW_Text *textBuffer;
 
     Q_REQUIRED_RESULT double FromPixel(double pix, const VarInsunits &unit) const;
 };

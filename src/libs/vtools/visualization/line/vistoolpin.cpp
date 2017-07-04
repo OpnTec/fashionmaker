@@ -29,6 +29,7 @@
 #include "vistoolpin.h"
 #include "../vwidgets/vsimplepoint.h"
 #include "../vgeometry/vpointf.h"
+#include "../vpatterndb/vcontainer.h"
 
 //---------------------------------------------------------------------------------------------------------------------
 VisToolPin::VisToolPin(const VContainer *data, QGraphicsItem *parent)

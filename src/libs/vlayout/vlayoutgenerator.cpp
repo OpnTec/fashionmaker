@@ -61,7 +61,8 @@ VLayoutGenerator::VLayoutGenerator(QObject *parent)
       unitePages(false),
       stripOptimizationEnabled(false),
       multiplier(1),
-      stripOptimization(false)
+      stripOptimization(false),
+      textAsPaths(false)
 {}
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -209,7 +210,7 @@ QList<QGraphicsItem *> VLayoutGenerator::GetPapersItems() const
     QList<QGraphicsItem *> list;
     for (int i=0; i < papers.count(); ++i)
     {
-        list.append(papers.at(i).GetPaperItem(autoCrop));
+        list.append(papers.at(i).GetPaperItem(autoCrop, IsTestAsPaths()));
     }
     return list;
 }
@@ -220,7 +221,7 @@ QList<QList<QGraphicsItem *> > VLayoutGenerator::GetAllDetails() const
     QList<QList<QGraphicsItem *> > list;
     for (int i=0; i < papers.count(); ++i)
     {
-        list.append(papers.at(i).GetItemDetails());
+        list.append(papers.at(i).GetItemDetails(IsTestAsPaths()));
     }
     return list;
 }
@@ -243,6 +244,18 @@ bool VLayoutGenerator::IsStripOptimization() const
 void VLayoutGenerator::SetStripOptimization(bool value)
 {
     stripOptimization = value;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+bool VLayoutGenerator::IsTestAsPaths() const
+{
+    return textAsPaths;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VLayoutGenerator::SetTestAsPaths(bool value)
+{
+    textAsPaths = value;
 }
 
 //---------------------------------------------------------------------------------------------------------------------

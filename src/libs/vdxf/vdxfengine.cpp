@@ -48,11 +48,7 @@
 #include "../vmisc/def.h"
 #include "../vmisc/diagnostic.h"
 #include "../vmisc/vmath.h"
-#include "dxflib/dl_attributes.h"
-#include "dxflib/dl_codes.h"
-#include "dxflib/dl_dxf.h"
-#include "dxflib/dl_entities.h"
-#include "dxflib/dl_writer_ascii.h"
+#include "dxiface.h"
 
 //---------------------------------------------------------------------------------------------------------------------
 static inline QPaintEngine::PaintEngineFeatures svgEngineFeatures()
@@ -77,20 +73,23 @@ VDxfEngine::VDxfEngine()
       size(),
       resolution(static_cast<int>(PrintDPI)),
       fileName(),
+      m_version(DRW::AC1014),
+      m_binary(false),
       matrix(),
-      dxf(nullptr),
-      dw(nullptr),
+      input(),
       varMeasurement(VarMeasurement::Metric),
-      varInsunits(VarInsunits::Centimeters)
+      varInsunits(VarInsunits::Centimeters),
+      textBuffer(new DRW_Text())
 {
 }
 
- //---------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------
 VDxfEngine::~VDxfEngine()
 {
+    delete textBuffer;
 }
 
- //---------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------
 bool VDxfEngine::begin(QPaintDevice *pdev)
 {
     Q_UNUSED(pdev)
@@ -100,147 +99,19 @@ bool VDxfEngine::begin(QPaintDevice *pdev)
         return false;
     }
 
-    dxf = new DL_Dxf();
-    DL_Codes::version exportVersion = DL_Codes::AC1015;
-    QByteArray fileNameArray = getFileName().toLocal8Bit();
-    dw = dxf->out(fileNameArray.data(), exportVersion);
-
-    if (dw==nullptr)
-    {
-        qWarning("VDxfEngine::begin(), can't open file");
-        return false;
-    }
-
-    dxf->writeHeader(*dw);
-
-    dxf->writeComment(*dw, "Valentina DXF File");
-
-    dw->dxfString(9, "$ANGDIR"); // 1 = Clockwise angles, 0 = Counterclockwise
-    dw->dxfInt(70, 0); // Qt use counterclockwise
-
-    dw->dxfString(9, "$MEASUREMENT"); // Sets drawing units: 0 = English; 1 = Metric
-    dw->dxfInt(70, static_cast<int>(varMeasurement));
-
-    dw->dxfString(9, "$INSUNITS");
-    dw->dxfInt(70, static_cast<int>(varInsunits));
-
-    dw->dxfString(9, "$DIMSCALE");
-    dw->dxfReal(40, 1.0);
-
-    // Official documentation says that initial value is 1.0, however LibreCAD has trouble if not set this value
-    // explicitly.
-    dw->dxfString(9, "$DIMLFAC");
-    dw->dxfReal(40, 1.0);
-
-    QString dateTime = QDateTime::currentDateTime().toString("yyyyMMdd.HHmmsszzz");
-    dateTime.chop(1);// we need hundredths of a second
-    dw->dxfString(9, "$TDCREATE");
-    dw->dxfString(40, dateTime.toUtf8().constData());
-
-    dw->sectionEnd();
-
-    dw->sectionTables();
-    dxf->writeVPort(*dw);
-
-    dw->tableLinetypes(25);
-    dxf->writeLinetype(*dw, DL_LinetypeData("BYBLOCK", "BYBLOCK", 0, 0, 0.0));
-    dxf->writeLinetype(*dw, DL_LinetypeData("BYLAYER", "BYLAYER", 0, 0, 0.0));
-    dxf->writeLinetype(*dw, DL_LinetypeData("CONTINUOUS", "Continuous", 0, 0, 0.0));
-    dxf->writeLinetype(*dw, DL_LinetypeData("ACAD_ISO02W100", "ACAD_ISO02W100", 0, 0, 0.0));
-    dxf->writeLinetype(*dw, DL_LinetypeData("ACAD_ISO03W100", "ACAD_ISO03W100", 0, 0, 0.0));
-    dxf->writeLinetype(*dw, DL_LinetypeData("ACAD_ISO04W100", "ACAD_ISO04W100", 0, 0, 0.0));
-    dxf->writeLinetype(*dw, DL_LinetypeData("ACAD_ISO05W100", "ACAD_ISO05W100", 0, 0, 0.0));
-    dxf->writeLinetype(*dw, DL_LinetypeData("BORDER", "BORDER", 0, 0, 0.0));
-    dxf->writeLinetype(*dw, DL_LinetypeData("BORDER2", "BORDER2", 0, 0, 0.0));
-    dxf->writeLinetype(*dw, DL_LinetypeData("BORDERX2", "BORDERX2", 0, 0, 0.0));
-    dxf->writeLinetype(*dw, DL_LinetypeData("CENTER", "CENTER", 0, 0, 0.0));
-    dxf->writeLinetype(*dw, DL_LinetypeData("CENTER2", "CENTER2", 0, 0, 0.0));
-    dxf->writeLinetype(*dw, DL_LinetypeData("CENTERX2", "CENTERX2", 0, 0, 0.0));
-    dxf->writeLinetype(*dw, DL_LinetypeData("DASHDOT", "DASHDOT", 0, 0, 0.0));
-    dxf->writeLinetype(*dw, DL_LinetypeData("DASHDOT2", "DASHDOT2", 0, 0, 0.0));
-    dxf->writeLinetype(*dw, DL_LinetypeData("DASHDOTX2", "DASHDOTX2", 0, 0, 0.0));
-    dxf->writeLinetype(*dw, DL_LinetypeData("DASHED", "DASHED", 0, 0, 0.0));
-    dxf->writeLinetype(*dw, DL_LinetypeData("DASHED2", "DASHED2", 0, 0, 0.0));
-    dxf->writeLinetype(*dw, DL_LinetypeData("DASHEDX2", "DASHEDX2", 0, 0, 0.0));
-    dxf->writeLinetype(*dw, DL_LinetypeData("DIVIDE", "DIVIDE", 0, 0, 0.0));
-    dxf->writeLinetype(*dw, DL_LinetypeData("DIVIDE2", "DIVIDE2", 0, 0, 0.0));
-    dxf->writeLinetype(*dw, DL_LinetypeData("DIVIDEX2", "DIVIDEX2", 0, 0, 0.0));
-    dxf->writeLinetype(*dw, DL_LinetypeData("DOT", "DOT", 0, 0, 0.0));
-    dxf->writeLinetype(*dw, DL_LinetypeData("DOT2", "DOT2", 0, 0, 0.0));
-    dxf->writeLinetype(*dw, DL_LinetypeData("DOTX2", "DOTX2", 0, 0, 0.0));
-    dw->tableEnd();
-
-    int numberOfLayers = 1;
-    dw->tableLayers(numberOfLayers);
-    dxf->writeLayer(*dw,
-                   DL_LayerData("0", 0),
-                   DL_Attributes(
-                       std::string(""),      // leave empty
-                       DL_Codes::black,      // default color
-                       100,                  // default width
-                       "CONTINUOUS",         // default line style
-                       1.0));                // default line type scale
-
-    dw->tableEnd();
-
-    dw->tableStyle(1);
-    DL_StyleData style("Standard", 0, 0.0, 1.0, 0.0, 0, 2.5, "txt", "");
-    style.bold = false;
-    style.italic = false;
-    dxf->writeStyle(*dw, style);
-    dw->tableEnd();
-
-    dxf->writeView(*dw);
-    dxf->writeUcs(*dw);
-    dw->tableAppid(1);
-    dw->tableAppidEntry(0x12);
-    dw->dxfString(2, "ACAD");
-    dw->dxfInt(70, 0);
-    dw->tableEnd();
-
-    dxf->writeDimStyle(*dw, 1, 1, 1, 1, 1);
-
-    dxf->writeBlockRecord(*dw);
-    dxf->writeBlockRecord(*dw, "layout");
-    dw->tableEnd();
-
-    dw->sectionEnd();
-
-    dw->sectionBlocks();
-    dxf->writeBlock(*dw, DL_BlockData("*Model_Space", 0, 0.0, 0.0, 0.0));
-    dxf->writeEndBlock(*dw, "*Model_Space");
-    dxf->writeBlock(*dw, DL_BlockData("*Paper_Space", 0, 0.0, 0.0, 0.0));
-    dxf->writeEndBlock(*dw, "*Paper_Space");
-    dxf->writeBlock(*dw, DL_BlockData("*Paper_Space0", 0, 0.0, 0.0, 0.0));
-    dxf->writeEndBlock(*dw, "*Paper_Space0");
-
-    dxf->writeBlock(*dw, DL_BlockData("layout", 0, 0.0, 0.0, 0.0));
-    // ...
-    // write block entities e.g. with dxf->writeLine(), ..
-    // ...
-    dxf->writeEndBlock(*dw, "layout");
-
-    dw->sectionEnd();
-
-    dw->sectionEntities();
+    input = QSharedPointer<dx_iface>(new dx_iface(fileName.toStdString(), m_version, varMeasurement, varInsunits));
     return true;
 }
 
- //---------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------
 bool VDxfEngine::end()
 {
-    dw->sectionEnd();
-    dxf->writeObjects(*dw);
-    dxf->writeObjectsEnd(*dw);
-    dw->dxfEOF();
-    dw->close();
-    delete dw;
-    delete dxf;
-    return true;
+    const bool res = input->fileExport(m_binary);
+    return res;
 }
 
- //---------------------------------------------------------------------------------------------------------------------
- // cppcheck-suppress unusedFunction
+//---------------------------------------------------------------------------------------------------------------------
+// cppcheck-suppress unusedFunction
 void VDxfEngine::updateState(const QPaintEngineState &state)
 {
     QPaintEngine::DirtyFlags flags = state.state();
@@ -255,7 +126,7 @@ void VDxfEngine::updateState(const QPaintEngineState &state)
     }
 }
 
- //---------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------
 void VDxfEngine::drawPath(const QPainterPath &path)
 {
     const QList<QPolygonF> subpaths = path.toSubpathPolygons(matrix);
@@ -265,21 +136,54 @@ void VDxfEngine::drawPath(const QPainterPath &path)
         const QPolygonF polygon = subpaths.at(j);
         if (polygon.isEmpty())
         {
-            return;
+            continue;
         }
 
-        dxf->writePolyline(*dw,
-                           DL_PolylineData(polygon.size(), 0, 0, 0),
-                           DL_Attributes("0", getPenColor(), -1, getPenStyle(), 1.0));
+        if (m_version > DRW::AC1009)
+        { // Use lwpolyline
+            DRW_LWPolyline *poly = new DRW_LWPolyline();
+            poly->layer = "0";
+            poly->color = getPenColor();
+            poly->lWeight = DRW_LW_Conv::widthByLayer;
+            poly->lineType = getPenStyle();
 
-        for (int i=0; i < polygon.count(); ++i)
-        {
-            dxf->writeVertex(*dw,
-                             DL_VertexData(FromPixel(polygon.at(i).x(), varInsunits),
+            if (polygon.size() > 1 && polygon.first() == polygon.last())
+            {
+                poly->flags |= 0x1; // closed
+            }
+
+            poly->flags |= 0x80; // plinegen
+
+            for (int i=0; i < polygon.count(); ++i)
+            {
+                poly->addVertex(DRW_Vertex2D(FromPixel(polygon.at(i).x(), varInsunits),
+                                             FromPixel(getSize().height() - polygon.at(i).y(), varInsunits), 0));
+            }
+
+            input->AddEntity(poly);
+        }
+        else
+        { // Use polyline
+            DRW_Polyline *poly = new DRW_Polyline();
+            poly->layer = "0";
+            poly->color = getPenColor();
+            poly->lWeight = DRW_LW_Conv::widthByLayer;
+            poly->lineType = getPenStyle();
+            if (polygon.size() > 1 && polygon.first() == polygon.last())
+            {
+                poly->flags |= 0x1; // closed
+            }
+
+            poly->flags |= 0x80; // plinegen
+
+            for (int i=0; i < polygon.count(); ++i)
+            {
+                poly->addVertex(DRW_Vertex(FromPixel(polygon.at(i).x(), varInsunits),
                                            FromPixel(getSize().height() - polygon.at(i).y(), varInsunits), 0, 0));
-        }
+            }
 
-        dxf->writePolylineEnd(*dw);
+            input->AddEntity(poly);
+        }
     }
 }
 
@@ -291,14 +195,17 @@ void VDxfEngine::drawLines(const QLineF * lines, int lineCount)
         const QPointF p1 = matrix.map(lines[i].p1());
         const QPointF p2 = matrix.map(lines[i].p2());
 
-        dxf->writeLine(*dw,
-                       DL_LineData(FromPixel(p1.x(), varInsunits), // start point
-                                   FromPixel(getSize().height() - p1.y(), varInsunits),
-                                   FromPixel(0.0, varInsunits),
-                                   FromPixel(p2.x(), varInsunits), // end point
-                                   FromPixel(getSize().height() - p2.y(), varInsunits),
-                                   FromPixel(0.0, varInsunits)),
-                       DL_Attributes("0", getPenColor(), -1, getPenStyle(), 1.0));
+        DRW_Line *line = new DRW_Line();
+        line->basePoint = DRW_Coord(FromPixel(p1.x(), varInsunits),
+                                    FromPixel(getSize().height() - p1.y(), varInsunits), 0);
+        line->secPoint =  DRW_Coord(FromPixel(p2.x(), varInsunits),
+                                    FromPixel(getSize().height() - p2.y(), varInsunits), 0);
+        line->layer = "0";
+        line->color = getPenColor();
+        line->lWeight = DRW_LW_Conv::widthByLayer;
+        line->lineType = getPenStyle();
+
+        input->AddEntity(line);
     }
 }
 
@@ -318,19 +225,54 @@ void VDxfEngine::drawPolygon(const QPointF *points, int pointCount, PolygonDrawM
         return;
     }
 
-    dxf->writePolyline(*dw,
-                       DL_PolylineData(pointCount, 0, 0, 0),
-                       DL_Attributes("0", getPenColor(), -1, getPenStyle(), 1.0));
+    if (m_version > DRW::AC1009)
+    { // Use lwpolyline
+        DRW_LWPolyline *poly = new DRW_LWPolyline();
+        poly->layer = "0";
+        poly->color = getPenColor();
+        poly->lWeight = DRW_LW_Conv::widthByLayer;
+        poly->lineType = getPenStyle();
 
-    for (int i = 0; i < pointCount; ++i)
-    {
-        const QPointF p = matrix.map(points[i]);
-        dxf->writeVertex(*dw,
-                         DL_VertexData(FromPixel(p.x(), varInsunits),
-                                       FromPixel(getSize().height() - p.y(), varInsunits), 0, 0));
+        if (pointCount > 1 && points[0] == points[pointCount])
+        {
+            poly->flags |= 0x1; // closed
+        }
+
+        poly->flags |= 0x80; // plinegen
+
+        for (int i = 0; i < pointCount; ++i)
+        {
+            const QPointF p = matrix.map(points[i]);
+            poly->addVertex(DRW_Vertex2D(FromPixel(p.x(), varInsunits),
+                                         FromPixel(getSize().height() - p.y(), varInsunits), 0));
+        }
+
+        input->AddEntity(poly);
     }
+    else
+    { // Use polyline
+        DRW_Polyline *poly = new DRW_Polyline();
+        poly->layer = "0";
+        poly->color = getPenColor();
+        poly->lWeight = DRW_LW_Conv::widthByLayer;
+        poly->lineType = getPenStyle();
 
-    dxf->writePolylineEnd(*dw);
+        if (pointCount > 1 && points[0] == points[pointCount])
+        {
+            poly->flags |= 0x1; // closed
+        }
+
+        poly->flags |= 0x80; // plinegen
+
+        for (int i = 0; i < pointCount; ++i)
+        {
+            const QPointF p = matrix.map(points[i]);
+            poly->addVertex(DRW_Vertex(FromPixel(p.x(), varInsunits),
+                                       FromPixel(getSize().height() - p.y(), varInsunits), 0, 0));
+        }
+
+        input->AddEntity(poly);
+    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -364,17 +306,20 @@ void VDxfEngine::drawEllipse(const QRectF & rect)
         ratio  = rect.height()/rect.width();
     }
 
-    dxf->writeEllipse(*dw,
-                      DL_EllipseData(FromPixel(newRect.center().x(), varInsunits),                      // center X
-                                     FromPixel(getSize().height() - newRect.center().y(), varInsunits), // center Y
-                                     FromPixel(0, varInsunits),                                         // center Z
-                                     FromPixel(majorX, varInsunits),
-                                     FromPixel(majorY, varInsunits),
-                                     FromPixel(0, varInsunits),
-                                     FromPixel(ratio, varInsunits),
-                                     0, 6.28 // startangle and endangle of ellipse in rad
-                                     ),
-                      DL_Attributes("0", getPenColor(), -1, getPenStyle(), 1.0));
+    DRW_Ellipse *ellipse = new DRW_Ellipse();
+    ellipse->basePoint = DRW_Coord(FromPixel(newRect.center().x(), varInsunits),
+                                   FromPixel(getSize().height() - newRect.center().y(), varInsunits), 0);
+    ellipse->secPoint = DRW_Coord(FromPixel(majorX, varInsunits), FromPixel(majorY, varInsunits), 0);
+    ellipse->ratio = ratio;
+    ellipse->staparam = 0;
+    ellipse->endparam = 2*M_PI;
+
+    ellipse->layer = "0";
+    ellipse->color = getPenColor();
+    ellipse->lWeight = DRW_LW_Conv::widthByLayer;
+    ellipse->lineType = getPenStyle();
+
+    input->AddEntity(ellipse);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -386,38 +331,56 @@ void VDxfEngine::drawEllipse(const QRect & rect)
 //---------------------------------------------------------------------------------------------------------------------
 void VDxfEngine::drawTextItem(const QPointF & p, const QTextItem & textItem)
 {
-    const QPointF startPoint = matrix.map(p);
-    const double rotationAngle = atan(matrix.m12()/matrix.m11());
+    if (textBuffer->text.size() == 0)
+    {
+        const QPointF startPoint = matrix.map(p);
+        const double rotationAngle = qRadiansToDegrees(qAtan2(matrix.m12(), matrix.m11()));
 
-    const QFont f = textItem.font();
-    const int textSize = f.pixelSize() == -1 ? f.pointSize() : f.pixelSize();
-    dxf->writeText(*dw,
-                   DL_TextData(FromPixel(startPoint.x(), varInsunits),
-                               FromPixel(getSize().height() - startPoint.y(), varInsunits),
-                               FromPixel(0, varInsunits),
-                               FromPixel(startPoint.x(), varInsunits),
-                               FromPixel(getSize().height() - startPoint.y(), varInsunits),
-                               FromPixel(0, varInsunits),
-                               textSize * matrix.m11(),
-                               1, // relative X scale factor
-                               0, // flag (0 = default, 2 = Backwards, 4 = Upside down)
-                               0, // Horizontal justification (0 = Left (default), 1 = Center, 2 = Right,)
-                               0, // Vertical justification (0 = Baseline (default), 1 = Bottom, 2 = Middle, 3= Top)
-                               textItem.text().toUtf8().constData(),  // text data
-                               f.family().toUtf8().constData(), // font
-                               -rotationAngle
-                               ),
-                   DL_Attributes("0", getPenColor(), -1, getPenStyle(), 1.0));
+        const QFont f = textItem.font();
+        const UTF8STRING fontStyle = input->AddFont(f);
+
+        textBuffer->basePoint = DRW_Coord(FromPixel(startPoint.x(), varInsunits),
+                                    FromPixel(getSize().height() - startPoint.y(), varInsunits), 0);
+        textBuffer->secPoint = DRW_Coord(FromPixel(startPoint.x(), varInsunits),
+                                   FromPixel(getSize().height() - startPoint.y(), varInsunits), 0);
+        textBuffer->height = FromPixel(QFontMetrics(f).height(), varInsunits);
+
+        textBuffer->style = fontStyle;
+        textBuffer->angle = -rotationAngle;
+
+        textBuffer->layer = "0";
+        textBuffer->color = getPenColor();
+        textBuffer->lWeight = DRW_LW_Conv::widthByLayer;
+        textBuffer->lineType = getPenStyle();
+    }
+
+    /* Because QPaintEngine::drawTextItem doesn't pass whole string per time we mark end of each string by adding
+     * special placholder. */
+    QString t = textItem.text();
+    const bool foundEndOfString = t.contains(endStringPlaceholder);
+
+    if (foundEndOfString)
+    {
+        t.replace(endStringPlaceholder, "");
+    }
+
+    textBuffer->text += t.toStdString();
+
+    if (foundEndOfString)
+    {
+        input->AddEntity(textBuffer);
+        textBuffer = new DRW_Text();
+    }
 }
 
- //---------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------
 QPaintEngine::Type VDxfEngine::type() const
 {
     return QPaintEngine::User;
 }
 
- //---------------------------------------------------------------------------------------------------------------------
- // cppcheck-suppress unusedFunction
+//---------------------------------------------------------------------------------------------------------------------
+// cppcheck-suppress unusedFunction
 void VDxfEngine::drawPixmap(const QRectF &r, const QPixmap &pm, const QRectF &sr)
 {
     Q_UNUSED(r)
@@ -444,24 +407,49 @@ double VDxfEngine::getResolution() const
     return resolution;
 }
 
- //---------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------
 void VDxfEngine::setResolution(double value)
 {
     Q_ASSERT(not isActive());
     resolution = value;
 }
 
- //---------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------
 QString VDxfEngine::getFileName() const
 {
     return fileName;
 }
 
- //---------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------
 void VDxfEngine::setFileName(const QString &value)
 {
     Q_ASSERT(not isActive());
     fileName = value;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+DRW::Version VDxfEngine::GetVersion() const
+{
+    return m_version;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VDxfEngine::SetVersion(DRW::Version version)
+{
+    Q_ASSERT(not isActive());
+    m_version = version;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VDxfEngine::SetBinaryFormat(bool binary)
+{
+    m_binary = binary;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+bool VDxfEngine::IsBinaryFormat() const
+{
+    return m_binary;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -474,9 +462,9 @@ std::string VDxfEngine::getPenStyle()
         case Qt::DotLine:
             return "DOT";
         case Qt::DashDotLine:
-            return "DASHDOT";
+            return "DASHDOT2";
         case Qt::DashDotDotLine:
-            return "DIVIDE";
+            return "DIVIDE2";
         case Qt::SolidLine:
         default:
             return "BYLAYER";
@@ -490,67 +478,67 @@ int VDxfEngine::getPenColor()
 
     if(color == Qt::black)
     {
-        return DL_Codes::black;
+        return DRW::black;
     }
     else if(color == Qt::white)
     {
-        return DL_Codes::white;
+        return DRW::white;
     }
     else if(color == Qt::darkGray)
     {
-        return DL_Codes::gray;
+        return DRW::gray;
     }
     else if(color == Qt::gray)
     {
-        return DL_Codes::l_gray;
+        return DRW::l_gray;
     }
     else if(color == Qt::darkMagenta)
     {
-        return DL_Codes::magenta;
+        return DRW::magenta;
     }
     else if(color == Qt::magenta)
     {
-        return DL_Codes::l_magenta;
+        return DRW::l_magenta;
     }
     else if(color == Qt::cyan)
     {
-        return DL_Codes::l_cyan;
+        return DRW::l_cyan;
     }
     else if(color == Qt::darkCyan)
     {
-        return DL_Codes::cyan;
+        return DRW::cyan;
     }
     else if(color == Qt::blue)
     {
-        return DL_Codes::l_blue;
+        return DRW::l_blue;
     }
     else if(color == Qt::darkBlue)
     {
-        return DL_Codes::blue;
+        return DRW::blue;
     }
     else if(color == Qt::darkGreen)
     {
-        return DL_Codes::green;
+        return DRW::green;
     }
     else if(color == Qt::green)
     {
-        return DL_Codes::l_green;
+        return DRW::l_green;
     }
     else if(color == Qt::darkRed)
     {
-        return DL_Codes::red;
+        return DRW::red;
     }
     else if(color == Qt::red)
     {
-        return DL_Codes::l_red;
+        return DRW::l_red;
     }
     else if(color == Qt::yellow)
     {
-        return DL_Codes::yellow;
+        return DRW::yellow;
     }
     else
     {
-        return DL_Codes::bylayer;
+        return DRW::ColorByLayer;
     }
 }
 

@@ -105,9 +105,9 @@ public slots:
     virtual void UpdateAll();
     virtual void retranslateUi();
     void         Highlight(quint32 id);
+    void         UpdateDetailLabel();
+    void         UpdatePatternInfo();
 protected slots:
-    void UpdateDetailLabel();
-    void UpdatePatternInfo();
     void UpdateGrainline();
     void SaveMoveDetail(const QPointF &ptPos);
     void SaveResizeDetail(qreal dLabelW, int iFontSize);

@@ -110,6 +110,9 @@ public:
     bool IsIgnoreAllFields() const;
     void SetIgnoreAllFields(bool value);
 
+    bool IsTextAsPaths() const;
+    void SetTextAsPaths(bool value);
+
     QString SelectedPrinter() const;
 
     //support functions for the command line parser which uses invisible dialog to properly build layout generator

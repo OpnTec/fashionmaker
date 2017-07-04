@@ -39,6 +39,7 @@
 #include <QVariant>
 #include <QtDebug>
 #include <QTextCodec>
+#include <QFont>
 
 #include "../vmisc/def.h"
 #include "../vmisc/vmath.h"
@@ -65,6 +66,7 @@ const QString settingPatternForbidFlipping          = QStringLiteral("pattern/fo
 const QString settingPatternHideMainPath            = QStringLiteral("pattern/hideMainPath");
 const QString settingDoublePassmark                 = QStringLiteral("pattern/doublePassmark");
 const QString settingPatternDefaultSeamAllowance    = QStringLiteral("pattern/defaultSeamAllowance");
+const QString settingLabelFont                      = QStringLiteral("pattern/labelFont");
 
 const QString settingGeneralRecentFileList       = QStringLiteral("recentFileList");
 const QString settingGeneralRestoreFileList      = QStringLiteral("restoreFileList");
@@ -810,4 +812,14 @@ double VCommonSettings::GetDefaultSeamAllowance()
     return val;
 }
 
+//---------------------------------------------------------------------------------------------------------------------
+QFont VCommonSettings::GetLabelFont() const
+{
+    return qvariant_cast<QFont>(value(settingLabelFont, QApplication::font()));
+}
 
+//---------------------------------------------------------------------------------------------------------------------
+void VCommonSettings::SetLabelFont(const QFont &f)
+{
+    setValue(settingLabelFont, f);
+}

@@ -315,13 +315,13 @@ bool VLayoutPaper::SaveResult(const VBestSquare &bestResult, const VLayoutPiece 
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QGraphicsRectItem *VLayoutPaper::GetPaperItem(bool autoCrop) const
+QGraphicsRectItem *VLayoutPaper::GetPaperItem(bool autoCrop, bool textAsPaths) const
 {
     QGraphicsRectItem *paper;
     if (autoCrop)
     {
         QScopedPointer<QGraphicsScene> scene(new QGraphicsScene());
-        QList<QGraphicsItem *> list = GetItemDetails();
+        QList<QGraphicsItem *> list = GetItemDetails(textAsPaths);
         for (int i=0; i < list.size(); ++i)
         {
             scene->addItem(list.at(i));
@@ -346,12 +346,12 @@ QGraphicsRectItem *VLayoutPaper::GetPaperItem(bool autoCrop) const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QList<QGraphicsItem *> VLayoutPaper::GetItemDetails() const
+QList<QGraphicsItem *> VLayoutPaper::GetItemDetails(bool textAsPaths) const
 {
     QList<QGraphicsItem *> list;
     for (int i=0; i < d->details.count(); ++i)
     {
-        list.append(d->details.at(i).GetItem());
+        list.append(d->details.at(i).GetItem(textAsPaths));
     }
     return list;
 }

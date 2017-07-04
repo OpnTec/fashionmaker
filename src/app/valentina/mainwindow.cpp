@@ -4350,6 +4350,7 @@ void MainWindow::Preferences()
         connect(dlg.data(), &DialogPreferences::UpdateProperties, toolOptions,
                 &VToolOptionsPropertyBrowser::RefreshOptions);
         connect(dlg.data(), &DialogPreferences::UpdateProperties, this, &MainWindow::ToolBarStyles);
+        connect(dlg.data(), &DialogPreferences::UpdateProperties, this, &MainWindow::RefreshDetailsLabel);
         QGuiApplication::restoreOverrideCursor();
 
         if (guard->exec() == QDialog::Accepted)
@@ -4677,8 +4678,6 @@ void MainWindow::ZoomFirstShow()
 //---------------------------------------------------------------------------------------------------------------------
 void MainWindow::DoExport(const VCommandLinePtr &expParams)
 {
-    auto settings = expParams->DefaultGenerator();
-
     const QHash<quint32, VPiece> *details = pattern->DataPieces();
     if(not qApp->getOpeningPattern())
     {
@@ -4690,13 +4689,18 @@ void MainWindow::DoExport(const VCommandLinePtr &expParams)
         }
     }
     PrepareDetailsForLayout(details);
+
+    auto settings = expParams->DefaultGenerator();
+    settings->SetTestAsPaths(expParams->IsTextAsPaths());
+
     if (LayoutSettings(*settings.get()))
     {
         try
         {
             DialogSaveLayout dialog(scenes.size(), expParams->OptBaseName(), this);
             dialog.SetDestinationPath(expParams->OptDestinationPath());
-            dialog.SelectFormate(expParams->OptExportType());
+            dialog.SelectFormat(static_cast<LayoutExportFormats>(expParams->OptExportType()));
+            dialog.SetBinaryDXFFormat(expParams->IsBinaryDXF());
             ExportLayout(dialog);
         }
         catch (const VException &e)

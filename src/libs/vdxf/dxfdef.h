@@ -1,6 +1,6 @@
 /************************************************************************
  **
- **  @file   def.h
+ **  @file   dxfdef.h
  **  @author Roman Telezhynskyi <dismine(at)gmail.com>
  **  @date   31 8, 2015
  **
@@ -39,6 +39,9 @@ enum class VarMeasurement : unsigned char { English=0, Metric=1 };
 
 //Default drawing units for AutoCAD DesignCenter blocks:
 enum class VarInsunits : unsigned char { Inches=1, Millimeters=4, Centimeters=5 };
+
+// Helps mark end of string. See VDxfEngine::drawTextItem for more details
+extern const QString endStringPlaceholder;
 
 Q_REQUIRED_RESULT static inline bool DL_FuzzyComparePossibleNulls(double p1, double p2);
 static inline bool DL_FuzzyComparePossibleNulls(double p1, double p2)

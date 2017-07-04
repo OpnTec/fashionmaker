@@ -160,6 +160,8 @@ public:
     void SetDefaultSeamAllowance(double value);
     double GetDefaultSeamAllowance();
 
+    QFont GetLabelFont() const;
+    void  SetLabelFont(const QFont &f);
 
 #if !defined(Q_OS_WIN)
     static const QString unixStandardSharePath;
