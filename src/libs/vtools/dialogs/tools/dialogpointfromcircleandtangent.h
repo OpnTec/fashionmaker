@@ -49,7 +49,7 @@ class DialogPointFromCircleAndTangent : public DialogTool
     Q_OBJECT
 
 public:
-    DialogPointFromCircleAndTangent(const VContainer *data, const quint32 &toolId, QWidget *parent = 0);
+    DialogPointFromCircleAndTangent(const VContainer *data, const quint32 &toolId, QWidget *parent = nullptr);
     ~DialogPointFromCircleAndTangent();
 
     void           SetPointName(const QString &value);

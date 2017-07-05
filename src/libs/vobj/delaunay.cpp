@@ -132,7 +132,7 @@ static point2d_t* point_alloc()
     point2d_t*	p;
 
     p	= (point2d_t*)malloc(sizeof(point2d_t));
-    assert( p != NULL );
+    assert( p != nullptr );
 // cppcheck-suppress memsetClassFloat
     memset(p, 0, sizeof(point2d_t));
 
@@ -144,7 +144,7 @@ static point2d_t* point_alloc()
 */
 static void point_free( point2d_t* p )
 {
-    assert( p != NULL );
+    assert( p != nullptr );
     free(p);
 }
 
@@ -156,7 +156,7 @@ static halfedge_t* halfedge_alloc()
     halfedge_t*		d;
 
     d	= (halfedge_t*)malloc(sizeof(halfedge_t));
-    assert( d != NULL );
+    assert( d != nullptr );
     memset(d, 0, sizeof(halfedge_t));
 
     return d;
@@ -167,7 +167,7 @@ static halfedge_t* halfedge_alloc()
 */
 static void halfedge_free( halfedge_t* d )
 {
-    assert( d != NULL );
+    assert( d != nullptr );
     memset(d, 0, sizeof(halfedge_t));
     free(d);
 }
@@ -182,21 +182,21 @@ void del_free_halfedges( delaunay_t *del )
     halfedge_t		*d, *sig;
 
     /* if there is nothing to do */
-    if( del->points == NULL )
+    if( del->points == nullptr )
         return;
 
     for( i = 0; i <= (del->end_point - del->start_point); i++ )
     {
         /* free all the halfedges around the point */
         d	= del->points[i]->he;
-        if( d != NULL )
+        if( d != nullptr )
         {
             do {
                 sig	= d->next;
                 halfedge_free( d );
                 d	= sig;
             } while( d != del->points[i]->he );
-            del->points[i]->he	= NULL;
+            del->points[i]->he	= nullptr;
         }
     }
 }
@@ -207,7 +207,7 @@ void del_free_halfedges( delaunay_t *del )
 //static face_t* face_alloc()
 //{
 //	face_t	*f = (face_t*)malloc(sizeof(face_t));
-//	assert( f != NULL );
+//	assert( f != nullptr );
 //	memset(f, 0, sizeof(face_t));
 //	return f;
 //}
@@ -217,7 +217,7 @@ void del_free_halfedges( delaunay_t *del )
  */
 //static void face_free(face_t *f)
 //{
-//	assert( f != NULL );
+//	assert( f != nullptr );
 //	free(f);
 //}
 
@@ -622,8 +622,8 @@ static void del_remove_edge( halfedge_t *d )
     prev	= d->prev;
     pair	= d->pair;
 
-    assert(next != NULL);
-    assert(prev != NULL);
+    assert(next != nullptr);
+    assert(prev != nullptr);
 
     next->prev	= prev;
     prev->next	= next;
@@ -631,23 +631,23 @@ static void del_remove_edge( halfedge_t *d )
 
     /* check to see if we have already removed pair */
     if( pair )
-        pair->pair	= NULL;
+        pair->pair	= nullptr;
 
     /* check to see if the vertex points to this halfedge */
     if( d->vertex->he == d )
         d->vertex->he	= next;
 
-    d->vertex	= NULL;
-    d->next		= NULL;
-    d->prev		= NULL;
-    d->pair		= NULL;
+    d->vertex	= nullptr;
+    d->next		= nullptr;
+    d->prev		= nullptr;
+    d->pair		= nullptr;
 
     next	= orig_pair->next;
     prev	= orig_pair->prev;
     pair	= orig_pair->pair;
 
-    assert(next != NULL);
-    assert(prev != NULL);
+    assert(next != nullptr);
+    assert(prev != nullptr);
 
     next->prev	= prev;
     prev->next	= next;
@@ -655,16 +655,16 @@ static void del_remove_edge( halfedge_t *d )
 
     /* check to see if we have already removed pair */
     if( pair )
-        pair->pair	= NULL;
+        pair->pair	= nullptr;
 
     /* check to see if the vertex points to this halfedge */
     if( orig_pair->vertex->he == orig_pair )
         orig_pair->vertex->he	= next;
 
-    orig_pair->vertex	= NULL;
-    orig_pair->next		= NULL;
-    orig_pair->prev		= NULL;
-    orig_pair->pair		= NULL;
+    orig_pair->vertex	= nullptr;
+    orig_pair->next		= nullptr;
+    orig_pair->prev		= nullptr;
+    orig_pair->pair		= nullptr;
 
 
     /* finally free the halfedges */
@@ -946,7 +946,7 @@ static void build_halfedge_face( delaunay_t *del, halfedge_t *d )
     halfedge_t	*curr;
 
     /* test if the halfedge has already a pointing face */
-    if( d->face != NULL )
+    if( d->face != nullptr )
         return;
 
     del->faces = (face_t*)realloc(del->faces, (del->num_faces + 1) * sizeof(face_t));
@@ -987,7 +987,7 @@ void del_build_faces( delaunay_t *del )
     halfedge_t	*curr;
 
     del->num_faces	= 0;
-    del->faces		= NULL;
+    del->faces		= nullptr;
 
     /* build external face first */
     build_halfedge_face(del, del->rightmost_he->pair);
@@ -1006,10 +1006,10 @@ void del_build_faces( delaunay_t *del )
 /*
 */
 delaunay2d_t* delaunay2d_from(del_point2d_t *points, quint32 num_points) {
-    delaunay2d_t*	res	= NULL;
+    delaunay2d_t*	res	= nullptr;
     delaunay_t	del;
     quint32	i;
-    quint32*	faces	= NULL;
+    quint32*	faces	= nullptr;
 
     del.num_faces	= 0; //Warning using uninitialized value
 
@@ -1019,7 +1019,7 @@ delaunay2d_t* delaunay2d_from(del_point2d_t *points, quint32 num_points) {
 
     /* allocate the points */
     del.points	= (point2d_t**)malloc(num_points * sizeof(point2d_t*));
-    assert( del.points != NULL );
+    assert( del.points != nullptr );
     memset(del.points, 0, num_points * sizeof(point2d_t*));
 
     /* copy the points */

@@ -44,7 +44,7 @@ class VTapeSettings : public VCommonSettings
     Q_OBJECT
 public:
     VTapeSettings(Format format, Scope scope, const QString &organization, const QString &application = QString(),
-                  QObject *parent = 0);
+                  QObject *parent = nullptr);
 
     QByteArray GetDataBaseGeometry() const;
     void SetDataBaseGeometry(const QByteArray &value);

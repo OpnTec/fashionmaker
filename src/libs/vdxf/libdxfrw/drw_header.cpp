@@ -16,11 +16,23 @@
 #include "intern/drw_dbg.h"
 #include "intern/dwgbuffer.h"
 
-DRW_Header::DRW_Header() {
-    linetypeCtrl = layerCtrl = styleCtrl = dimstyleCtrl = appidCtrl = 0;
-    blockCtrl = viewCtrl = ucsCtrl = vportCtrl = vpEntHeaderCtrl = 0;
-    version = DRW::AC1021;
-}
+DRW_Header::DRW_Header()
+    : vars(),
+      comments(),
+      name(),
+      curr(),
+      version(DRW::AC1021),
+      linetypeCtrl(0),
+      layerCtrl(0),
+      styleCtrl(0),
+      dimstyleCtrl(0),
+      appidCtrl(0),
+      blockCtrl(0),
+      viewCtrl(0),
+      ucsCtrl(0),
+      vportCtrl(0),
+      vpEntHeaderCtrl(0)
+{}
 
 void DRW_Header::addComment(std::string c){
     if (!comments.empty())

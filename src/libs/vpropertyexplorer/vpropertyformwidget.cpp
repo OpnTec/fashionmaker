@@ -79,7 +79,7 @@ void VPE::VPropertyFormWidget::build()
     if (layout())
     {
         QLayoutItem *child;
-        while (layout()->count() > 0 && (child = layout()->takeAt(0)) != 0)
+        while (layout()->count() > 0 && (child = layout()->takeAt(0)) != nullptr)
         {
             if (child->widget())
             {

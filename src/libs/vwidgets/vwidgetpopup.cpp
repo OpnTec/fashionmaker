@@ -66,7 +66,7 @@ void VWidgetPopup::SetWidget(QWidget *widget, bool own)
 
         if (mOwn)
         {
-            mWidget->setParent(0);
+            mWidget->setParent(nullptr);
             delete mWidget;
         }
         else
@@ -77,7 +77,7 @@ void VWidgetPopup::SetWidget(QWidget *widget, bool own)
 
     mWidget = widget;
     mOwn = own;
-    mOldParent = 0;
+    mOldParent = nullptr;
 
     if (mWidget)
     {

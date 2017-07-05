@@ -192,7 +192,7 @@ void VPE::VPropertyFormView::removeModelAndSet()
 {
     if (static_cast<VPropertyFormViewPrivate*>(d_ptr)->Model)
     {
-        disconnect(static_cast<VPropertyFormViewPrivate*>(d_ptr)->Model, 0, this, 0);
+        disconnect(static_cast<VPropertyFormViewPrivate*>(d_ptr)->Model, nullptr, this, nullptr);
         static_cast<VPropertyFormViewPrivate*>(d_ptr)->Model = nullptr;
     }
 

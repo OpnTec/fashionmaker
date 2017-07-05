@@ -38,7 +38,7 @@ class VPROPERTYEXPLORERSHARED_EXPORT VPropertyDelegate : public QStyledItemDeleg
 {
     Q_OBJECT
 public:
-    explicit VPropertyDelegate(QObject *parent = 0);
+    explicit VPropertyDelegate(QObject *parent = nullptr);
     virtual ~VPropertyDelegate() Q_DECL_OVERRIDE;
 
     //! Creates the editor widget

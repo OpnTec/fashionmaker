@@ -1505,15 +1505,15 @@ void VToolSeamAllowance::DeleteTool(bool ask)
     // Deleting inside UnionDetails cause crash.
     // Because this object should be inactive from no one we disconnect all signals that may cause a crash
     // KEEP THIS LIST ACTUALL!!!
-    disconnect(doc, 0, this, 0);
+    disconnect(doc, nullptr, this, nullptr);
     if (QGraphicsScene *toolScene = scene())
     {
-        disconnect(toolScene, 0, this, 0);
+        disconnect(toolScene, nullptr, this, nullptr);
     }
-    disconnect(m_dataLabel, 0, this, 0);
-    disconnect(m_patternInfo, 0, this, 0);
-    disconnect(m_grainLine, 0, this, 0);
-    disconnect(m_sceneDetails, 0, this, 0);
+    disconnect(m_dataLabel, nullptr, this, nullptr);
+    disconnect(m_patternInfo, nullptr, this, nullptr);
+    disconnect(m_grainLine, nullptr, this, nullptr);
+    disconnect(m_sceneDetails, nullptr, this, nullptr);
 
     hide();// User shouldn't see this object
 

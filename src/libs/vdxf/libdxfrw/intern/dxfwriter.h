@@ -17,8 +17,12 @@
 
 class dxfWriter {
 public:
-    dxfWriter(std::ofstream *stream){filestr = stream; /*count =0;*/}
-    virtual ~dxfWriter(){}
+    dxfWriter(std::ofstream *stream)
+        : filestr(stream),
+          encoder()
+    {}
+
+    virtual ~dxfWriter() = default;
     virtual bool writeString(int code, std::string text) = 0;
     bool writeUtf8String(int code, std::string text);
     bool writeUtf8Caps(int code, std::string text);
@@ -34,6 +38,7 @@ public:
 protected:
     std::ofstream *filestr;
 private:
+    Q_DISABLE_COPY(dxfWriter)
     DRW_TextCodec encoder;
 };
 

@@ -29,20 +29,19 @@
 #include <new>          // std::nothrow
 #include <fstream>
 
-RScodec::RScodec(unsigned int pp, int mm, int tt) {
-    this->mm = mm;
-    this->tt = tt;
-    nn = (1<<mm) -1; //mm==8 nn=255
-    kk = nn -(tt*2);
-    isOk = true;
-
-    alpha_to = new (std::nothrow) int[nn+1];
-    index_of = new (std::nothrow) unsigned int[nn+1];
-    gg = new (std::nothrow) int[nn-kk+1];
-
-    RSgenerate_gf(pp) ;
+RScodec::RScodec(unsigned int pp, int mm, int tt)
+    : mm(mm),
+      tt(tt),
+      nn((1<<mm) -1), //mm==8 nn=255
+      kk(nn -(tt*2)),
+      gg(new (std::nothrow) int[nn-kk+1]),
+      isOk(true),
+      index_of(new (std::nothrow) unsigned int[nn+1]),
+      alpha_to(new (std::nothrow) int[nn+1])
+{
+    RSgenerate_gf(pp);
     /* compute the generator polynomial for this RS code */
-    RSgen_poly() ;
+    RSgen_poly();
 }
 
 RScodec::~RScodec() {
@@ -304,7 +303,7 @@ int RScodec::calcDecode(unsigned char* data, int* recd, int** elp, int* d, int* 
             }
             q = q % nn;
             err[loc[i]] = alpha_to[(err[loc[i]] - q + nn) % nn];
-            data[loc[i]] ^= err[loc[i]];  /*change errors by correct data, in polynomial form */
+            data[loc[i]] ^= static_cast<unsigned char>(err[loc[i]]);/*change errors by correct data, in polynomial form */
         }
     }
     return count;
@@ -330,10 +329,10 @@ bool RScodec::encode(unsigned char *data, unsigned char *parity) {
         if (feedback != -1) {
             for (j=bb-1; j>0; j--)
                 if (gg[j] != -1)
-                    bd[j] = bd[j-1]^alpha_to[(gg[j]+feedback)%nn] ;
+                    bd[j] = static_cast<unsigned char>(bd[j-1]^alpha_to[(gg[j]+feedback)%nn]);
                 else
                     bd[j] = bd[j-1] ;
-            bd[0] = alpha_to[(gg[0]+feedback)%nn] ;
+            bd[0] = static_cast<unsigned char>(alpha_to[(gg[0]+feedback)%nn]);
         } else {
             for (j=bb-1; j>0; j--)
                 bd[j] = bd[j-1] ;

@@ -6,10 +6,11 @@
 #include <QTextCodec>
 #include "../drw_base.h"
 
-DRW_TextCodec::DRW_TextCodec() {
-    version = DRW::AC1021;
-    conv = nullptr;
-}
+DRW_TextCodec::DRW_TextCodec()
+    : version(DRW::AC1021),
+      cp(),
+      conv(nullptr)
+{}
 
 void DRW_TextCodec::setVersion(int v, bool dxfFormat){
     if (v == DRW::AC1009 || v == DRW::AC1006) {

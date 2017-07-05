@@ -43,11 +43,15 @@ static const int DRW_magicNumEnd18[] = {
 
 class dwgReader18 : public dwgReader {
 public:
-    dwgReader18(std::istream *stream, dwgR *p):dwgReader(stream, p){
-        objData = NULL;
-    }
+    dwgReader18(std::istream *stream, dwgR *p)
+        : dwgReader(stream, p),
+          objData(nullptr),
+          uncompSize(),
+          securityFlags()
+    {}
+
     virtual ~dwgReader18(){
-        if (objData != NULL)
+        if (objData != nullptr)
             delete[] objData;
     }
     bool readMetaData();
@@ -58,20 +62,20 @@ public:
     bool readDwgTables(DRW_Header& hdr);
     bool readDwgBlocks(DRW_Interface& intfa){
         bool ret = true;
-        dwgBuffer dataBuf(objData, uncompSize, &decoder);
+        dwgBuffer dataBuf(objData, static_cast<int>(uncompSize), &decoder);
         ret = dwgReader::readDwgBlocks(intfa, &dataBuf);
         return ret;
     }
 
     virtual bool readDwgEntities(DRW_Interface& intfa){
         bool ret = true;
-        dwgBuffer dataBuf(objData, uncompSize, &decoder);
+        dwgBuffer dataBuf(objData, static_cast<int>(uncompSize), &decoder);
         ret = dwgReader::readDwgEntities(intfa, &dataBuf);
         return ret;
     }
     virtual bool readDwgObjects(DRW_Interface& intfa){
         bool ret = true;
-        dwgBuffer dataBuf(objData, uncompSize, &decoder);
+        dwgBuffer dataBuf(objData, static_cast<int>(uncompSize), &decoder);
         ret = dwgReader::readDwgObjects(intfa, &dataBuf);
         return ret;
     }
@@ -86,6 +90,7 @@ protected:
     duint64 uncompSize;
 
 private:
+    Q_DISABLE_COPY(dwgReader18)
     void genMagicNumber();
 //    dwgBuffer* bufObj;
     void parseSysPage(duint8 *decompSec, duint32 decompSize); //called: Section page map: 0x41630e3b

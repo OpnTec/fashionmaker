@@ -30,19 +30,19 @@ public:
 //    bool readDwgTables(){return false;}
     bool readDwgBlocks(DRW_Interface& intfa){
         bool ret = true;
-        dwgBuffer dataBuf(objData, uncompSize, &decoder);
+        dwgBuffer dataBuf(objData, static_cast<int>(uncompSize), &decoder);
         ret = dwgReader::readDwgBlocks(intfa, &dataBuf);
         return ret;
     }
     virtual bool readDwgEntities(DRW_Interface& intfa){
         bool ret = true;
-        dwgBuffer dataBuf(objData, uncompSize, &decoder);
+        dwgBuffer dataBuf(objData, static_cast<int>(uncompSize), &decoder);
         ret = dwgReader::readDwgEntities(intfa, &dataBuf);
         return ret;
     }
     virtual bool readDwgObjects(DRW_Interface& intfa){
         bool ret = true;
-        dwgBuffer dataBuf(objData, uncompSize, &decoder);
+        dwgBuffer dataBuf(objData, static_cast<int>(uncompSize), &decoder);
         ret = dwgReader::readDwgObjects(intfa, &dataBuf);
         return ret;
     }

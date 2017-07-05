@@ -2,6 +2,7 @@
 #define DRW_TEXTCODEC_H
 
 #include <string>
+#include <QtGlobal>
 
 class QTextCodec;
 
@@ -22,6 +23,7 @@ private:
     std::string correctCodePage(const std::string& s);
 
 private:
+    Q_DISABLE_COPY(DRW_TextCodec)
     int version;
     std::string cp;
     QTextCodec *conv;

@@ -41,7 +41,8 @@ class MoveLabel : public MoveAbstractLabel
 {
     Q_OBJECT
 public:
-    MoveLabel(VAbstractPattern *doc, const double &x, const double &y, const quint32 &id, QUndoCommand *parent = 0);
+    MoveLabel(VAbstractPattern *doc, const double &x, const double &y, const quint32 &id,
+              QUndoCommand *parent = nullptr);
     virtual ~MoveLabel();
 
     virtual bool mergeWith(const QUndoCommand *command) Q_DECL_OVERRIDE;

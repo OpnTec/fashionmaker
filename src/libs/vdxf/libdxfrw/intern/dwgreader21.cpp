@@ -59,16 +59,17 @@ bool dwgReader21::parseSysPage(duint64 sizeCompressed, duint64 sizeUncompressed,
     //round to 8
     duint64 alsize = (sizeCompressed + 7) &(-8);
     //minimum RS chunk:
-    duint32 chunks = (((alsize * correctionFactor)+238)/239);
+    duint32 chunks = static_cast<duint32>(((alsize * correctionFactor)+238)/239);
     duint64 fpsize = chunks * 255;
 
     if (! fileBuf->setPosition(offset))
         return false;
     duint8 *tmpDataRaw = new duint8[fpsize];
-    fileBuf->getBytes(tmpDataRaw, fpsize);
+    fileBuf->getBytes(tmpDataRaw, static_cast<int>(fpsize));
     duint8 *tmpDataRS = new duint8[fpsize];
-    dwgRSCodec::decode239I(tmpDataRaw, tmpDataRS, fpsize/255);
-    dwgCompressor::decompress21(tmpDataRS, decompData, sizeCompressed, sizeUncompressed);
+    dwgRSCodec::decode239I(tmpDataRaw, tmpDataRS, static_cast<duint32>(fpsize/255));
+    dwgCompressor::decompress21(tmpDataRS, decompData, static_cast<duint32>(sizeCompressed),
+                                static_cast<duint32>(sizeUncompressed));
     delete[]tmpDataRaw;
     delete[]tmpDataRS;
     return true;
@@ -82,7 +83,7 @@ bool dwgReader21::parseDataPage(dwgSectionInfo si, duint8 *dData){
             return false;
 
         duint8 *tmpPageRaw = new duint8[pi.size];
-        fileBuf->getBytes(tmpPageRaw, pi.size);
+        fileBuf->getBytes(tmpPageRaw, static_cast<int>(pi.size));
     #ifdef DRW_DBG_DUMP
         DRW_DBG("\nSection OBJECTS raw data=\n");
         for (unsigned int i=0, j=0; i< pi.size;i++) {
@@ -93,7 +94,7 @@ bool dwgReader21::parseDataPage(dwgSectionInfo si, duint8 *dData){
     #endif
 
         duint8 *tmpPageRS = new duint8[pi.size];
-        duint8 chunks =pi.size / 255;
+        duint8 chunks = static_cast<duint8>(pi.size / 255);
         dwgRSCodec::decode251I(tmpPageRaw, tmpPageRS, chunks);
     #ifdef DRW_DBG_DUMP
         DRW_DBG("\nSection OBJECTS RS data=\n");
@@ -107,7 +108,8 @@ bool dwgReader21::parseDataPage(dwgSectionInfo si, duint8 *dData){
         DRW_DBG("\npage uncomp size: "); DRW_DBG(pi.uSize); DRW_DBG(" comp size: "); DRW_DBG(pi.cSize);
         DRW_DBG("\noffset: "); DRW_DBG(pi.startOffset);
         duint8 *pageData = dData + pi.startOffset;
-        dwgCompressor::decompress21(tmpPageRS, pageData, pi.cSize, pi.uSize);
+        dwgCompressor::decompress21(tmpPageRS, pageData, static_cast<duint32>(pi.cSize),
+                                    static_cast<duint32>(pi.uSize));
 
     #ifdef DRW_DBG_DUMP
         DRW_DBG("\n\nSection OBJECTS decompresed data=\n");
@@ -236,7 +238,7 @@ bool dwgReader21::readFileHeader() {
 
     duint64 address = 0x480;
     duint64 i = 0;
-    dwgBuffer PagesMapBuf(PagesMapData, PagesMapSizeUncompressed, &decoder);
+    dwgBuffer PagesMapBuf(PagesMapData, static_cast<int>(PagesMapSizeUncompressed), &decoder);
     //stores temporaly info of all pages:
     std::map<duint32, dwgPageInfo >sectionPageMapTmp;
 
@@ -249,7 +251,7 @@ bool dwgReader21::readFileHeader() {
 
         DRW_DBG("Page gap= "); DRW_DBG(id); DRW_DBG(" Page num= "); DRW_DBG(ind); DRW_DBG(" size= "); DRW_DBGH(size);
         DRW_DBG(" address= "); DRW_DBGH(address);  DRW_DBG("\n");
-        sectionPageMapTmp[ind] = dwgPageInfo(ind, address,size);
+        sectionPageMapTmp[static_cast<duint32>(ind)] = dwgPageInfo(ind, address, static_cast<duint32>(size));
         address += size;
         //TODO num can be negative indicating gap
 //        seek += offset;
@@ -258,15 +260,16 @@ bool dwgReader21::readFileHeader() {
 
     DRW_DBG("\n*** dwgReader21: Processing Section Map ***\n");
     duint8 *SectionsMapData = new duint8[SectionsMapSizeUncompressed];
-    dwgPageInfo sectionMap = sectionPageMapTmp[SectionsMapId];
-    ret = parseSysPage(SectionsMapSizeCompressed, SectionsMapSizeUncompressed, SectionsMapCorrectionFactor, sectionMap.address, SectionsMapData);
+    dwgPageInfo sectionMap = sectionPageMapTmp[static_cast<duint32>(SectionsMapId)];
+    ret = parseSysPage(SectionsMapSizeCompressed, SectionsMapSizeUncompressed, SectionsMapCorrectionFactor,
+                       sectionMap.address, SectionsMapData);
     if (!ret)
         return false;
 
 //reads sections:
     //Note: compressed value are not stored in file then, commpresed field are use to store
     // encoding value
-    dwgBuffer SectionsMapBuf(SectionsMapData, SectionsMapSizeUncompressed, &decoder);
+    dwgBuffer SectionsMapBuf(SectionsMapData, static_cast<int>(SectionsMapSizeUncompressed), &decoder);
     duint8 nextId =1;
     while(SectionsMapBuf.getPosition() < SectionsMapBuf.size()){
         dwgSectionInfo secInfo;
@@ -274,28 +277,28 @@ bool dwgReader21::readFileHeader() {
         DRW_DBG("\nSize of section (data size)= "); DRW_DBGH(secInfo.size);
         secInfo.maxSize = SectionsMapBuf.getRawLong64();
         DRW_DBG("\nMax Decompressed Size= "); DRW_DBGH(secInfo.maxSize);
-        secInfo.encrypted = SectionsMapBuf.getRawLong64();
+        secInfo.encrypted = static_cast<duint32>(SectionsMapBuf.getRawLong64());
         //encrypted (doc: 0 no, 1 yes, 2 unkn) on read: objects 0 and encrypted yes
         DRW_DBG("\nencription= "); DRW_DBGH(secInfo.encrypted);
         DRW_DBG("\nHashCode = "); DRW_DBGH(SectionsMapBuf.getRawLong64());
         duint64 SectionNameLength = SectionsMapBuf.getRawLong64();
         DRW_DBG("\nSectionNameLength = "); DRW_DBG(SectionNameLength);
         DRW_DBG("\nUnknown = "); DRW_DBGH(SectionsMapBuf.getRawLong64());
-        secInfo.compresed = SectionsMapBuf.getRawLong64();
+        secInfo.compresed = static_cast<duint32>(SectionsMapBuf.getRawLong64());
         DRW_DBG("\nEncoding (compresed) = "); DRW_DBGH(secInfo.compresed);
         secInfo.pageCount = SectionsMapBuf.getRawLong64();
         DRW_DBG("\nPage count= "); DRW_DBGH(secInfo.pageCount);
-        secInfo.name = SectionsMapBuf.getUCSStr(SectionNameLength);
+        secInfo.name = SectionsMapBuf.getUCSStr(static_cast<duint16>(SectionNameLength));
         DRW_DBG("\nSection name = "); DRW_DBG(secInfo.name); DRW_DBG("\n");
 
         for (unsigned int i=0; i< secInfo.pageCount; i++){
             duint64 po = SectionsMapBuf.getRawLong64();
-            duint32 ds = SectionsMapBuf.getRawLong64();
-            duint32 pn = SectionsMapBuf.getRawLong64();
+            duint32 ds = static_cast<duint32>(SectionsMapBuf.getRawLong64());
+            duint32 pn = static_cast<duint32>(SectionsMapBuf.getRawLong64());
             DRW_DBG("  pag Id = "); DRW_DBGH(pn); DRW_DBG(" data size = "); DRW_DBGH(ds);
             dwgPageInfo pi = sectionPageMapTmp[pn]; //get a copy
             pi.dataSize = ds;
-            pi.startOffset = po;
+            pi.startOffset = static_cast<duint32>(po);
             pi.uSize = SectionsMapBuf.getRawLong64();
             pi.cSize = SectionsMapBuf.getRawLong64();
             secInfo.pages[pn]= pi;//complete copy in secInfo
@@ -339,8 +342,8 @@ bool dwgReader21::readDwgHeader(DRW_Header& hdr){
         return ret;
     }
 
-    dwgBuffer dataBuf(tmpHeaderData, si.size, &decoder);
-    dwgBuffer handleBuf(tmpHeaderData, si.size, &decoder);
+    dwgBuffer dataBuf(tmpHeaderData, static_cast<int>(si.size), &decoder);
+    dwgBuffer handleBuf(tmpHeaderData, static_cast<int>(si.size), &decoder);
     DRW_DBG("Header section sentinel= ");
     checkSentinel(&dataBuf, secEnum::HEADER, true);
     ret = dwgReader::readDwgHeader(hdr, &dataBuf, &handleBuf);
@@ -360,7 +363,7 @@ bool dwgReader21::readDwgClasses(){
     if (!ret)
         return ret;
 
-    dwgBuffer buff(tmpClassesData, si.size, &decoder);
+    dwgBuffer buff(tmpClassesData, static_cast<int>(si.size), &decoder);
     DRW_DBG("classes section sentinel= ");
     checkSentinel(&buff, secEnum::CLASSES, true);
 
@@ -378,7 +381,7 @@ bool dwgReader21::readDwgClasses(){
 
     /*******************************/
     //prepare string stream
-    dwgBuffer strBuff(tmpClassesData, si.size, &decoder);
+    dwgBuffer strBuff(tmpClassesData, static_cast<int>(si.size), &decoder);
     duint32 strStartPos = bitSize + 159;//size in bits + 20 bytes (sn+size) - 1 bit (endbit)
     DRW_DBG("\nstrStartPos: "); DRW_DBG(strStartPos);
     strBuff.setPosition(strStartPos >> 3);
@@ -444,9 +447,9 @@ bool dwgReader21::readDwgHandles(){
     if (!ret)
         return ret;
 
-    dwgBuffer dataBuf(tmpHandlesData, si.size, &decoder);
+    dwgBuffer dataBuf(tmpHandlesData, static_cast<int>(si.size), &decoder);
 
-    ret = dwgReader::readDwgHandles(&dataBuf, 0, si.size);
+    ret = dwgReader::readDwgHandles(&dataBuf, 0, static_cast<duint32>(si.size));
     delete[]tmpHandlesData;
     return ret;
 }
@@ -470,7 +473,7 @@ bool dwgReader21::readDwgTables(DRW_Header& hdr) {
         return ret;
 
     DRW_DBG("readDwgTables total data size= "); DRW_DBG(dataSize); DRW_DBG("\n");
-    dwgBuffer dataBuf(objData, dataSize, &decoder);
+    dwgBuffer dataBuf(objData, static_cast<int>(dataSize), &decoder);
     ret = dwgReader::readDwgTables(hdr, &dataBuf);
 
     return ret;
@@ -479,7 +482,7 @@ bool dwgReader21::readDwgTables(DRW_Header& hdr) {
 
 bool dwgReader21::readDwgBlocks(DRW_Interface& intfa){
     bool ret = true;
-    dwgBuffer dataBuf(objData, dataSize, &decoder);
+    dwgBuffer dataBuf(objData, static_cast<int>(dataSize), &decoder);
     ret = dwgReader::readDwgBlocks(intfa, &dataBuf);
     return ret;
 

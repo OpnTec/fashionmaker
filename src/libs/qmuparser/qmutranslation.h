@@ -54,12 +54,13 @@ class QMUPARSERSHARED_EXPORT QmuTranslation
 public:
     QmuTranslation();
     ~QmuTranslation(){}
-    QmuTranslation(const QString &context, const QString &sourceText, const QString &disambiguation = 0, int n = -1);
+    QmuTranslation(const QString &context, const QString &sourceText, const QString &disambiguation = nullptr,
+                   int n = -1);
     QmuTranslation &operator=(const QmuTranslation &tr);
     QmuTranslation(const QmuTranslation &tr);
     QString translate() const;
     static QmuTranslation translate(const QString &context, const QString &sourceText,
-                                    const QString &disambiguation = 0, int n = -1);
+                                    const QString &disambiguation = nullptr, int n = -1);
     QString getMcontext() const;
     QString getMsourceText() const;
     QString getMdisambiguation() const;

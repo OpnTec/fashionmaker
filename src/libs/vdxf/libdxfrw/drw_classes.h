@@ -29,10 +29,19 @@ class dwgBuffer;
 */
 class DRW_Class {
 public:
-    DRW_Class() {
-    }
-    ~DRW_Class() {
-    }
+    DRW_Class()
+        : recName(),
+          className(),
+          appName(),
+          proxyFlag(),
+          instanceCount(),
+          wasaProxyFlag(),
+          entityFlag(),
+          classNum(),
+          dwgType()
+    {}
+
+    ~DRW_Class() = default;
 
     void parseCode(int code, dxfReader *reader);
     void write(dxfWriter *writer, DRW::Version ver);

@@ -42,7 +42,7 @@ public:
     virtual void printHL(int c, int s, int h);
     virtual void printPT(double x, double y, double z);
     print_debug();
-    virtual ~print_debug(){}
+    virtual ~print_debug() = default;
 private:
     std::ios_base::fmtflags flags;
 };
@@ -55,11 +55,11 @@ DRW_dbg *DRW_dbg::getInstance(){
     return instance;
 }
 
-DRW_dbg::DRW_dbg(){
-    level = NONE;
-    prClass = new print_none;
-    flags = std::cerr.flags();
-}
+DRW_dbg::DRW_dbg()
+    : level(NONE),
+      flags(std::cerr.flags()),
+      prClass(new print_none)
+{}
 
 void DRW_dbg::setLevel(LEVEL lvl){
     level = lvl;
@@ -120,9 +120,9 @@ void DRW_dbg::printPT(double x, double y, double z){
     prClass->printPT(x, y, z);
 }
 
-print_debug::print_debug(){
-    flags = std::cerr.flags();
-}
+print_debug::print_debug()
+    : flags(std::cerr.flags())
+{}
 
 void print_debug::printS(std::string s){
     std::cerr << s;

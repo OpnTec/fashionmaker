@@ -17,6 +17,7 @@
 #include <string>
 #include <vector>
 #include <map>
+#include <QtGlobal>
 #include "drw_base.h"
 
 class dxfReader;
@@ -56,13 +57,19 @@ namespace DRW {
 class DRW_TableEntry {
 public:
     //initializes default values
-    DRW_TableEntry() {
-        tType = DRW::UNKNOWNT;
-        flags = 0;
-        numReactors = xDictFlag = 0;
-        parentHandle = 0;
-        curr = NULL;
-    }
+    DRW_TableEntry()
+        : tType(DRW::UNKNOWNT),
+          handle(),
+          parentHandle(0),
+          name(),
+          flags(0),
+          extData(),
+          curr(nullptr),
+          oType(),
+          xDictFlag(0),
+          numReactors(0),
+          objSize()
+    {}
 
     virtual~DRW_TableEntry() {
         for (std::vector<DRW_Variant*>::iterator it=extData.begin(); it!=extData.end(); ++it)
@@ -71,15 +78,19 @@ public:
         extData.clear();
     }
 
-    DRW_TableEntry(const DRW_TableEntry& e) {
-        tType = e.tType;
-        handle = e.handle;
-        parentHandle = e.parentHandle;
-        name = e.name;
-        flags = e.flags;
-        numReactors = e.numReactors;
-        xDictFlag = e.xDictFlag;
-        curr = e.curr;
+    DRW_TableEntry(const DRW_TableEntry& e)
+        : tType(e.tType),
+          handle(e.handle),
+          parentHandle(e.parentHandle),
+          name(e.name),
+          flags(e.flags),
+          extData(),
+          curr(e.curr),
+          oType(),
+          xDictFlag(e.xDictFlag),
+          numReactors(e.numReactors),
+          objSize()
+    {
         for (std::vector<DRW_Variant*>::const_iterator it=e.extData.begin(); it!=e.extData.end(); ++it){
             extData.push_back(new DRW_Variant(*(*it)));
         }
@@ -90,7 +101,7 @@ protected:
     virtual bool parseDwg(DRW::Version version, dwgBuffer *buf, duint32 bs=0) = 0;
     bool parseDwg(DRW::Version version, dwgBuffer *buf, dwgBuffer* strBuf, duint32 bs=0);
     void reset(){
-        flags =0;
+        flags = 0;
         for (std::vector<DRW_Variant*>::iterator it=extData.begin(); it!=extData.end(); ++it)
             delete *it;
         extData.clear();
@@ -105,6 +116,7 @@ public:
     std::vector<DRW_Variant*> extData; /*!< FIFO list of extended data, codes 1000 to 1071*/
 
 private:
+    DRW_TableEntry &operator=(const DRW_TableEntry &) Q_DECL_EQ_DELETE;
     DRW_Variant* curr;
 
     //***** dwg parse ********/
@@ -124,7 +136,76 @@ protected:
 class DRW_Dimstyle : public DRW_TableEntry {
     SETOBJFRIENDS
 public:
-    DRW_Dimstyle() { reset();}
+    DRW_Dimstyle()
+    : dimpost(),
+      dimapost(),
+      dimblk(),
+      dimblk1(),
+      dimblk2(),
+      dimscale(),
+      dimasz(),
+      dimexo(),
+      dimdli(),
+      dimexe(),
+      dimrnd(),
+      dimdle(),
+      dimtp(),
+      dimtm(),
+      dimfxl(),
+      dimtxt(),
+      dimcen(),
+      dimtsz(),
+      dimaltf(),
+      dimlfac(),
+      dimtvp(),
+      dimtfac(),
+      dimgap(),
+      dimaltrnd(),
+      dimtol(),
+      dimlim(),
+      dimtih(),
+      dimtoh(),
+      dimse1(),
+      dimse2(),
+      dimtad(),
+      dimzin(),
+      dimazin(),
+      dimalt(),
+      dimaltd(),
+      dimtofl(),
+      dimsah(),
+      dimtix(),
+      dimsoxd(),
+      dimclrd(),
+      dimclre(),
+      dimclrt(),
+      dimadec(),
+      dimunit(),
+      dimdec(),
+      dimtdec(),
+      dimaltu(),
+      dimalttd(),
+      dimaunit(),
+      dimfrac(),
+      dimlunit(),
+      dimdsep(),
+      dimtmove(),
+      dimjust(),
+      dimsd1(),
+      dimsd2(),
+      dimtolj(),
+      dimtzin(),
+      dimaltz(),
+      dimaltttz(),
+      dimfit(),
+      dimupt(),
+      dimatfit(),
+      dimfxlon(),
+      dimtxsty(),
+      dimldrblk(),
+      dimlwd(),
+      dimlwe()
+    { reset();}
 
     void reset(){
         tType = DRW::DIMSTYLE;
@@ -243,7 +324,13 @@ public:
 class DRW_LType : public DRW_TableEntry {
     SETOBJFRIENDS
 public:
-    DRW_LType() { reset();}
+    DRW_LType()
+        : desc(),
+          size(),
+          length(),
+          path(),
+          pathIdx()
+    { reset();}
 
     void reset(){
         tType = DRW::LTYPE;
@@ -279,7 +366,16 @@ private:
 class DRW_Layer : public DRW_TableEntry {
     SETOBJFRIENDS
 public:
-    DRW_Layer() { reset();}
+    DRW_Layer()
+        : lineType(),
+          color(),
+          color24(),
+          plotF(),
+          lWeight(),
+          handlePlotS(),
+          handleMaterialS(),
+          lTypeH()
+    { reset();}
 
     void reset() {
         tType = DRW::LAYER;
@@ -315,7 +411,16 @@ public:
 class DRW_Block_Record : public DRW_TableEntry {
     SETOBJFRIENDS
 public:
-    DRW_Block_Record() { reset();}
+    DRW_Block_Record()
+        : insUnits(),
+          basePoint(),
+          block(),
+          endBlock(),
+          firstEH(),
+          lastEH(),
+          entMap()
+    { reset();}
+
     void reset() {
         tType = DRW::BLOCK_RECORD;
         flags = 0;
@@ -349,7 +454,16 @@ private:
 class DRW_Textstyle : public DRW_TableEntry {
     SETOBJFRIENDS
 public:
-    DRW_Textstyle() { reset();}
+    DRW_Textstyle()
+        : height(),
+          width(),
+          oblique(),
+          genFlag(),
+          lastHeight(),
+          font(),
+          bigFont(),
+          fontFamily()
+    {reset();}
 
     void reset(){
         tType = DRW::STYLE;
@@ -384,7 +498,32 @@ public:
 class DRW_Vport : public DRW_TableEntry {
     SETOBJFRIENDS
 public:
-    DRW_Vport() { reset();}
+    DRW_Vport()
+        : lowerLeft(),
+          UpperRight(),
+          center(),
+          snapBase(),
+          snapSpacing(),
+          gridSpacing(),
+          viewDir(),
+          viewTarget(),
+          height(),
+          ratio(),
+          lensHeight(),
+          frontClip(),
+          backClip(),
+          snapAngle(),
+          twistAngle(),
+          viewMode(),
+          circleZoom(),
+          fastZoom(),
+          ucsIcon(),
+          snap(),
+          grid(),
+          snapStyle(),
+          snapIsopair(),
+          gridBehavior()
+    { reset();}
 
     void reset(){
         tType = DRW::VPORT;
@@ -452,7 +591,17 @@ public:
 class DRW_ImageDef : public DRW_TableEntry {//
     SETOBJFRIENDS
 public:
-    DRW_ImageDef() {
+    DRW_ImageDef()
+        : name(),
+          imgVersion(),
+          u(),
+          v(),
+          up(),
+          vp(),
+          loaded(),
+          resolution(),
+          reactors()
+    {
         reset();
     }
 

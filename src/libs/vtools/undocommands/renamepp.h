@@ -41,7 +41,7 @@ class RenamePP :public VUndoCommand
 {
     Q_OBJECT
 public:
-    RenamePP(VAbstractPattern *doc, const QString &newPPname, QComboBox *combo, QUndoCommand *parent = 0);
+    RenamePP(VAbstractPattern *doc, const QString &newPPname, QComboBox *combo, QUndoCommand *parent = nullptr);
     virtual ~RenamePP() Q_DECL_OVERRIDE;
 
     virtual void undo() Q_DECL_OVERRIDE;

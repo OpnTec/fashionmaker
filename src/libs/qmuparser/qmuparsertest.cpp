@@ -339,12 +339,12 @@ int QmuParserTester::TestNames()
     PARSER_THROWCHECK ( Var, true,  "a_min", &a )
     PARSER_THROWCHECK ( Var, true,  "a_min0", &a )
     PARSER_THROWCHECK ( Var, true,  "a_min9", &a )
-    PARSER_THROWCHECK ( Var, false, "a_min9", 0 )
+    PARSER_THROWCHECK ( Var, false, "a_min9", nullptr )
     // Postfix operators
     // fail
     PARSER_THROWCHECK ( PostfixOprt, false, "(k", f1of1 )
     PARSER_THROWCHECK ( PostfixOprt, false, "9+", f1of1 )
-    PARSER_THROWCHECK ( PostfixOprt, false, "+", 0 )
+    PARSER_THROWCHECK ( PostfixOprt, false, "+", nullptr )
     // pass
     PARSER_THROWCHECK ( PostfixOprt, true, "-a",  f1of1 )
     PARSER_THROWCHECK ( PostfixOprt, true, "?a",  f1of1 )
@@ -543,7 +543,7 @@ int QmuParserTester::TestVarConst()
 
         for ( item = UsedVar.begin(); item != UsedVar.end(); ++item )
         {
-            if ( item->second != 0 )
+            if ( item->second != nullptr )
             {
                 throw false; // all pointers to undefined variables must be null
             }
@@ -1378,7 +1378,7 @@ int QmuParserTester::EqnTest ( const QString &a_str, double a_fRes, bool a_fPass
 
             // destroy the originals from p2
             vParser.clear();              // delete the vector
-            p1.reset ( 0 );
+            p1.reset ( nullptr );
 
             fVal[2] = p2.Eval();
 

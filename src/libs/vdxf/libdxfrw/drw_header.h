@@ -35,24 +35,42 @@ class DRW_Header {
     SETHDRFRIENDS
 public:
     DRW_Header();
+
     ~DRW_Header() {
         clearVars();
     }
 
-    DRW_Header(const DRW_Header& h){
-        this->version = h.version;
-        this->comments = h.comments;
-        for (std::map<std::string,DRW_Variant*>::const_iterator it=h.vars.begin(); it!=h.vars.end(); ++it){
+    DRW_Header(const DRW_Header& h)
+        : vars(),
+          comments(h.comments),
+          name(),
+          curr(nullptr),
+          version(h.version),
+          linetypeCtrl(),
+          layerCtrl(),
+          styleCtrl(),
+          dimstyleCtrl(),
+          appidCtrl(),
+          blockCtrl(),
+          viewCtrl(),
+          ucsCtrl(),
+          vportCtrl(),
+          vpEntHeaderCtrl()
+    {
+        for (std::map<std::string,DRW_Variant*>::const_iterator it=h.vars.begin(); it!=h.vars.end(); ++it)
+        {
             this->vars[it->first] = new DRW_Variant( *(it->second) );
         }
-        this->curr = NULL;
     }
-    DRW_Header& operator=(const DRW_Header &h) {
-       if(this != &h) {
+    DRW_Header& operator=(const DRW_Header &h)
+    {
+       if(this != &h)
+       {
            clearVars();
            this->version = h.version;
            this->comments = h.comments;
-           for (std::map<std::string,DRW_Variant*>::const_iterator it=h.vars.begin(); it!=h.vars.end(); ++it){
+           for (std::map<std::string,DRW_Variant*>::const_iterator it=h.vars.begin(); it!=h.vars.end(); ++it)
+           {
                this->vars[it->first] = new DRW_Variant( *(it->second) );
            }
        }
@@ -75,7 +93,8 @@ private:
     bool getInt(std::string key, int *varInt);
     bool getStr(std::string key, std::string *varStr);
     bool getCoord(std::string key, DRW_Coord *varStr);
-    void clearVars(){
+    void clearVars()
+    {
         for (std::map<std::string,DRW_Variant*>::iterator it=vars.begin(); it!=vars.end(); ++it)
             delete it->second;
 

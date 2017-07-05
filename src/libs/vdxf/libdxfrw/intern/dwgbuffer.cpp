@@ -144,32 +144,40 @@ bool dwgCharStream::read(duint8* s, duint64 n){
     return true;
 }
 
-dwgBuffer::dwgBuffer(duint8 *buf, int size, DRW_TextCodec *dc){
-    filestr = new dwgCharStream(buf, size);
-    decoder = dc;
-    maxSize = size;
-    bitPos = 0;
-}
+dwgBuffer::dwgBuffer(duint8 *buf, int size, DRW_TextCodec *dc)
+    : decoder(dc),
+      filestr(new dwgCharStream(buf, size)),
+      maxSize(size),
+      currByte(),
+      bitPos(0)
+{}
 
-dwgBuffer::dwgBuffer(std::istream *stream, DRW_TextCodec *dc){
-    filestr = new dwgFileStream(stream);
-    decoder = dc;
-    maxSize = filestr->size();
-    bitPos = 0;
-}
+dwgBuffer::dwgBuffer(std::istream *stream, DRW_TextCodec *dc)
+    : decoder(dc),
+      filestr(new dwgFileStream(stream)),
+      maxSize(static_cast<int>(filestr->size())),
+      currByte(),
+      bitPos(0)
+{}
 
-dwgBuffer::dwgBuffer( const dwgBuffer& org ){
+dwgBuffer::dwgBuffer( const dwgBuffer& org )
+    : decoder(org.decoder),
+      filestr(org.filestr->clone()),
+      maxSize(static_cast<int>(filestr->size())),
+      currByte(org.currByte),
+      bitPos(org.bitPos)
+{}
+
+dwgBuffer& dwgBuffer::operator=( const dwgBuffer& org )
+{
+    if (&org == this)
+    {
+        return *this;
+    }
+
     filestr = org.filestr->clone();
     decoder = org.decoder;
-    maxSize = filestr->size();
-    currByte = org.currByte;
-    bitPos = org.bitPos;
-}
-
-dwgBuffer& dwgBuffer::operator=( const dwgBuffer& org ){
-    filestr = org.filestr->clone();
-    decoder = org.decoder;
-    maxSize = filestr->size();
+    maxSize = static_cast<int>(filestr->size());
     currByte = org.currByte;
     bitPos = org.bitPos;
     return *this;
@@ -233,7 +241,7 @@ duint8 dwgBuffer::getBit(){
     }
 
     ret = (currByte >> (7 - bitPos) & 1);
-    bitPos +=1;
+    ++bitPos;
     if (bitPos == 8)
         bitPos = 0;
 
@@ -254,15 +262,15 @@ duint8 dwgBuffer::get2Bits(){
         currByte = buffer;
     }
 
-    bitPos +=2;
+    bitPos = static_cast<duint8>(bitPos+2);
     if (bitPos < 9)
-        ret = currByte >>(8 - bitPos);
+        ret = static_cast<duint8>(currByte >>(8 - bitPos));
     else {//read one bit per byte
-        ret = currByte << 1;
+        ret = static_cast<duint8>(currByte << 1);
         filestr->read (&buffer,1);
         currByte = buffer;
         bitPos = 1;
-        ret = ret | currByte >> 7;
+        ret = static_cast<duint8>(ret | currByte >> 7);
     }
     if (bitPos == 8)
         bitPos = 0;
@@ -280,15 +288,15 @@ duint8 dwgBuffer::get3Bits(){
         currByte = buffer;
     }
 
-    bitPos +=3;
+    bitPos = static_cast<duint8>(bitPos + 3);
     if (bitPos < 9)
-        ret = currByte >>(8 - bitPos);
+        ret = static_cast<duint8>(currByte >>(8 - bitPos));
     else {//read one bit per byte
-        ret = currByte << 1;
+        ret = static_cast<duint8>(currByte << 1);
         filestr->read (&buffer,1);
         currByte = buffer;
         bitPos = 1;
-        ret = ret | currByte >> 7;
+        ret = static_cast<duint8>(ret | currByte >> 7);
     }
     if (bitPos == 8)
         bitPos = 0;
@@ -315,9 +323,9 @@ duint16 dwgBuffer::getBitShort(){
 dint16 dwgBuffer::getSBitShort(){
     duint8 b = get2Bits();
     if (b == 0)
-        return (dint16)getRawShort16();
+        return static_cast<dint16>(getRawShort16());
     else if (b== 1)
-        return (dint16)getRawChar8();
+        return static_cast<dint16>(getRawChar8());
     else if (b == 2)
         return 0;
     else
@@ -384,9 +392,9 @@ duint8 dwgBuffer::getRawChar8(){
     if (bitPos == 0)
         return buffer;
     else {
-        ret = currByte << bitPos;
+        ret = static_cast<duint8>(currByte << bitPos);
         currByte = buffer;
-        ret = ret | (currByte >>(8 - bitPos));
+        ret = static_cast<duint8>(ret | (currByte >>(8 - bitPos)));
     }
     return ret;
 }
@@ -399,15 +407,15 @@ duint16 dwgBuffer::getRawShort16(){
     filestr->read (buffer,2);
     if (bitPos == 0) {
         /* no offset directly swap bytes for little-endian */
-        ret = (buffer[1] << 8) | (buffer[0] & 0x00FF);
+        ret = static_cast<duint16>((buffer[1] << 8) | (buffer[0] & 0x00FF));
     } else {
-        ret = (buffer[0] << 8) | (buffer[1] & 0x00FF);
+        ret = static_cast<duint16>((buffer[0] << 8) | (buffer[1] & 0x00FF));
         /* apply offset */
-        ret = ret >> (8 - bitPos);
-        ret = ret | (currByte << (8 + bitPos));
+        ret = static_cast<duint16>(ret >> (8 - bitPos));
+        ret = static_cast<duint16>(ret | (currByte << (8 + bitPos)));
         currByte = buffer[1];
         /* swap bytes for little-endian */
-        ret = (ret << 8) | (ret >> 8);
+        ret = static_cast<duint16>((ret << 8) | (ret >> 8));
     }
     return ret;
 }
@@ -593,10 +601,10 @@ std::string dwgBuffer::get8bitStr(){
 std::string dwgBuffer::get16bitStr(duint16 textSize, bool nullTerm){
     if (textSize == 0)
         return std::string();
-    textSize *=2;
+    textSize = static_cast<duint16>(textSize*2);
     duint16 ts = textSize;
     if (nullTerm)
-        ts += 2;
+        ts = static_cast<duint16>(ts+2);
     duint8 *tmpBuffer = new duint8[textSize + 2];
     bool good = getBytes(tmpBuffer, ts);
     if (!good)
@@ -664,7 +672,7 @@ duint16 dwgBuffer::getObjType(DRW::Version v){//OT
         if (b == 0)
             return getRawChar8();
         else if (b== 1){
-            return (getRawChar8() + 0x01F0);
+            return static_cast<duint16>((getRawChar8() + 0x01F0));
         } else //b == 2
             return getRawShort16();
     }
@@ -757,7 +765,7 @@ duint32 dwgBuffer::getCmColor(DRW::Version v) {
     duint16 idx = getBitShort();
     duint32 rgb = getBitLong();
     duint8 cb = getRawChar8();
-    duint8 type = rgb >> 24;
+    duint8 type = static_cast<duint8>(rgb >> 24);
     DRW_DBG("\ntype COLOR: "); DRW_DBGH(type);
     DRW_DBG("\nindex COLOR: "); DRW_DBGH(idx);
     DRW_DBG("\nRGB COLOR: "); DRW_DBGH(rgb);
@@ -802,7 +810,7 @@ duint32 dwgBuffer::getEnColor(DRW::Version v) {
     duint32 cb = 0;
     duint16 idx = getBitShort();
     DRW_DBG("idx reads COLOR: "); DRW_DBGH(idx);
-    duint16 flags = idx>>8;
+    duint16 flags = static_cast<duint16>(idx>>8);
     idx = idx & 0x1FF; //RLZ: warning this is correct?
     DRW_DBG("\nflag COLOR: "); DRW_DBGH(flags);
     DRW_DBG(", index COLOR: "); DRW_DBGH(idx);
@@ -835,7 +843,7 @@ duint16 dwgBuffer::getBERawShort16(){
     char buffer[2];
     buffer[0] = getRawChar8();
     buffer[1] = getRawChar8();
-    duint16 size = (buffer[0] << 8) | (buffer[1] & 0xFF);
+    duint16 size = static_cast<duint16>((buffer[0] << 8) | (buffer[1] & 0xFF));
     return size;
 }
 
@@ -849,15 +857,15 @@ bool dwgBuffer::getBytes(unsigned char *buf, int size){
     if (bitPos != 0){
         for (int i=0; i<size;i++){
             tmp =  buf[i];
-            buf[i] = (currByte << bitPos) | (tmp >> (8 - bitPos));
+            buf[i] = static_cast<unsigned char>((currByte << bitPos) | (tmp >> (8 - bitPos)));
             currByte = tmp;
         }
     }
     return true;
 }
 
-duint16 dwgBuffer::crc8(duint16 dx,dint32 start,dint32 end){
-    int pos = filestr->getPos();
+duint16 dwgBuffer::crc8(duint16 dx, dint32 start, dint32 end){
+    int pos = static_cast<int>(filestr->getPos());
     filestr->setPos(start);
     int n = end-start;
     duint8 *tmpBuf = new duint8[n];
@@ -870,9 +878,9 @@ duint16 dwgBuffer::crc8(duint16 dx,dint32 start,dint32 end){
     duint8 al;
 
   while (n-- > 0) {
-    al = (duint8)((*p) ^ ((dint8)(dx & 0xFF)));
+    al = static_cast<duint8>((*p) ^ (static_cast<duint8>(dx & 0xFF)));
     dx = (dx>>8) & 0xFF;
-    dx = dx ^ crctable[al & 0xFF];
+    dx = static_cast<duint16>(dx ^ crctable[al & 0xFF]);
     p++;
   }
   delete[]tmpBuf;
@@ -880,7 +888,7 @@ duint16 dwgBuffer::crc8(duint16 dx,dint32 start,dint32 end){
 }
 
 duint32 dwgBuffer::crc32(duint32 seed,dint32 start,dint32 end){
-    int pos = filestr->getPos();
+    int pos = static_cast<int>(filestr->getPos());
     filestr->setPos(start);
     int n = end-start;
     duint8 *tmpBuf = new duint8[n];

@@ -15,6 +15,7 @@
 
 #include <fstream>
 #include <sstream>
+#include <QtGlobal>
 #include "../drw_base.h"
 
 class DRW_Coord;
@@ -35,13 +36,16 @@ public:
 
 class dwgFileStream: public dwgBasicStream{
 public:
-    dwgFileStream(std::istream *s){
-        stream =s;
+    dwgFileStream(std::istream *s)
+        : stream(nullptr),
+          sz(0)
+    {
+        stream = s;
         stream->seekg (0, std::ios::end);
         sz = stream->tellg();
         stream->seekg(0, std::ios_base::beg);
     }
-    virtual ~dwgFileStream(){}
+    virtual ~dwgFileStream() = default;
     virtual bool read(duint8* s, duint64 n);
     virtual duint64 size(){return sz;}
     virtual duint64 getPos(){return stream->tellg();}
@@ -49,19 +53,21 @@ public:
     virtual bool good(){return stream->good();}
     virtual dwgBasicStream* clone(){return new dwgFileStream(stream);}
 private:
+    Q_DISABLE_COPY(dwgFileStream)
     std::istream *stream;
     duint64 sz;
 };
 
 class dwgCharStream: public dwgBasicStream{
 public:
-    dwgCharStream(duint8 *buf, int s){
-        stream =buf;
-        sz = s;
-        pos = 0;
-        isOk = true;
-    }
-    virtual ~dwgCharStream(){}
+    dwgCharStream(duint8 *buf, duint64 s)
+        : stream(buf),
+          sz(s),
+          pos(0),
+          isOk(true)
+    {}
+    virtual ~dwgCharStream() = default;
+
     virtual bool read(duint8* s, duint64 n);
     virtual duint64 size(){return sz;}
     virtual duint64 getPos(){return pos;}
@@ -69,6 +75,7 @@ public:
     virtual bool good(){return isOk;}
     virtual dwgBasicStream* clone(){return new dwgCharStream(stream, sz);}
 private:
+    Q_DISABLE_COPY(dwgCharStream)
     duint8 *stream;
     duint64 sz;
     duint64 pos;
@@ -134,7 +141,7 @@ public:
 
     bool isGood(){return filestr->good();}
     bool getBytes(duint8 *buf, int size);
-    int numRemainingBytes(){return (maxSize- filestr->getPos());}
+    int numRemainingBytes(){return (maxSize- static_cast<int>(filestr->getPos()));}
 
     duint16 crc8(duint16 dx,dint32 start,dint32 end);
     duint32 crc32(duint32 seed,dint32 start,dint32 end);

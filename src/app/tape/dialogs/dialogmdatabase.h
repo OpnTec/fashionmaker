@@ -43,8 +43,8 @@ class DialogMDataBase : public QDialog
     Q_OBJECT
 
 public:
-    explicit DialogMDataBase(const QStringList &list, QWidget *parent = 0);
-    explicit DialogMDataBase(QWidget *parent = 0);
+    explicit DialogMDataBase(const QStringList &list, QWidget *parent = nullptr);
+    explicit DialogMDataBase(QWidget *parent = nullptr);
     virtual ~DialogMDataBase() Q_DECL_OVERRIDE;
 
     QStringList GetNewNames() const;

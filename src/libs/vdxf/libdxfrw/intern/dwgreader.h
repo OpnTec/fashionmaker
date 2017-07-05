@@ -22,12 +22,18 @@
 
 class objHandle{
 public:
-    objHandle(){ handle = type = loc = 0; }
-    objHandle(duint32 t, duint32 h, duint32 l){
-        type = t;
-        handle = h;
-        loc = l;
-    }
+    objHandle()
+        : type(0),
+          handle(0),
+          loc(0)
+    {}
+
+    objHandle(duint32 t, duint32 h, duint32 l)
+        : type(t),
+          handle(h),
+          loc(l)
+    {}
+
     duint32 type;
     duint32 handle;
     duint32 loc;
@@ -55,11 +61,27 @@ public:
  * */
 class dwgPageInfo {
 public:
-    dwgPageInfo(){}
-    dwgPageInfo(duint64 i, duint64 ad, duint32 sz){
-        Id=i; address=ad; size=sz;
-    }
-    ~dwgPageInfo(){}
+    dwgPageInfo()
+        : Id(),
+          address(),
+          size(),
+          dataSize(),
+          startOffset(),
+          cSize(),
+          uSize()
+    {}
+
+    dwgPageInfo(duint64 i, duint64 ad, duint32 sz)
+        : Id(i),
+          address(ad),
+          size(sz),
+          dataSize(),
+          startOffset(),
+          cSize(),
+          uSize()
+    {}
+
+    ~dwgPageInfo() = default;
     duint64 Id;
     duint64 address; //in file stream, for rd18, rd21
     duint64 size; //in file stream, for rd18, rd21
@@ -82,13 +104,19 @@ public:
  * */
 class dwgSectionInfo {
 public:
-    dwgSectionInfo(){
-        compresed = 1;//1=no, 2=yes
-        encrypted = 0;//???
-        pageCount = 0;
-        Id=-1;
-    }
-    ~dwgSectionInfo(){}
+    dwgSectionInfo()
+        : Id(-1),
+          name(),
+          compresed(1),//1=no, 2=yes
+          encrypted(0),//???
+          pages(),
+          size(),
+          pageCount(0),
+          maxSize(),
+          address()
+    {}
+
+    ~dwgSectionInfo() = default;
     dint32 Id; //section Id, 2000-   rd15 rd18
     std::string name; //section name rd18
     duint32 compresed;//is compresed? 1=no, 2=yes rd18, rd21(encoding)
@@ -108,10 +136,11 @@ public:
 */
 class DRW_ObjControl : public DRW_TableEntry {
 public:
-    DRW_ObjControl() { reset();}
+    DRW_ObjControl()
+        : hadlesList()
+    { reset();}
 
-    void reset(){
-    }
+    void reset(){}
     bool parseDwg(DRW::Version version, dwgBuffer *buf, duint32 bs=0);
     std::list<duint32>hadlesList;
 };
@@ -120,16 +149,31 @@ public:
 class dwgReader {
     friend class dwgR;
 public:
-    dwgReader(std::istream *stream, dwgR *p){
-        fileBuf = new dwgBuffer(stream);
-        parent = p;
+    dwgReader(std::istream *stream, dwgR *p)
+        : ObjectMap(),
+          objObjectMap(),
+          remainingMap(),
+          ltypemap(),
+          layermap(),
+          blockmap(),
+          stylemap(),
+          dimstylemap(),
+          vportmap(),
+          blockRecordmap(),
+          appIdmap(),
+          maintenanceVersion(0),
+          fileBuf(new dwgBuffer(stream)),
+          parent(p),
+          version(),
+          previewImagePos(),
+          sections(),
+          classesmap(),
+          decoder(),
+          nextEntLink(0),
+          prevEntLink(0)
+    {
         decoder.setVersion(DRW::AC1021, false);//default 2007 in utf8(no convert)
         decoder.setCodePage("UTF-16", false);
-//        blockCtrl=0; //RLZ: temporary
-//        blockCtrl=layerCtrl=styleCtrl=linetypeCtrl=viewCtrl=0;
-//        ucsCtrl=vportCtrl=appidCtrl=dimstyleCtrl=vpEntHeaderCtrl=0;
-        nextEntLink = prevEntLink = 0;
-        maintenanceVersion=0;
     }
     virtual ~dwgReader();
 
@@ -196,6 +240,8 @@ protected:
 //    duint32 blockCtrl;
     duint32 nextEntLink;
     duint32 prevEntLink;
+private:
+    Q_DISABLE_COPY(dwgReader)
 };
 
 

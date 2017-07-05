@@ -32,18 +32,33 @@
     secObjects
 };*/
 
-dxfRW::dxfRW(const char* name){
+dxfRW::dxfRW(const char* name)
+    : version(),
+      fileName(name),
+      codePage(),
+      binFile(),
+      reader(nullptr),
+      writer(nullptr),
+      iface(),
+      header(),
+      nextentity(),
+      entCount(),
+      wlayer0(),
+      dimstyleStd(),
+      applyExt(false),
+      writingBlock(),
+      elParts(128), //parts munber when convert ellipse to polyline
+      blockMap(),
+      imageDef(),
+      currHandle()
+{
     DRW_DBGSL(DRW_dbg::NONE);
-    fileName = name;
-    reader = NULL;
-    writer = NULL;
-    applyExt = false;
-    elParts = 128; //parts munber when convert ellipse to polyline
 }
+
 dxfRW::~dxfRW(){
-    if (reader != NULL)
+    if (reader != nullptr)
         delete reader;
-    if (writer != NULL)
+    if (writer != nullptr)
         delete writer;
     for (std::vector<DRW_ImageDef*>::iterator it=imageDef.begin(); it!=imageDef.end(); ++it)
         delete *it;
@@ -66,7 +81,7 @@ bool dxfRW::read(DRW_Interface *interface_, bool ext){
     bool isOk = false;
     applyExt = ext;
     std::ifstream filestr;
-    if ( interface_ == NULL )
+    if ( interface_ == nullptr )
                 return isOk;
     DRW_DBG("dxfRW::read 1def\n");
     filestr.open (fileName.c_str(), std::ios_base::in | std::ios::binary);
@@ -77,7 +92,7 @@ bool dxfRW::read(DRW_Interface *interface_, bool ext){
 
     char line[22];
     char line2[22] = "AutoCAD Binary DXF\r\n";
-    line2[20] = (char)26;
+    line2[20] = static_cast<char>(26);
     line2[21] = '\0';
     filestr.read (line, 22);
     filestr.close();
@@ -99,7 +114,7 @@ bool dxfRW::read(DRW_Interface *interface_, bool ext){
     isOk = processDxf();
     filestr.close();
     delete reader;
-    reader = NULL;
+    reader = nullptr;
     return isOk;
 }
 
@@ -112,7 +127,7 @@ bool dxfRW::write(DRW_Interface *interface_, DRW::Version ver, bool bin){
     if (binFile) {
         filestr.open (fileName.c_str(), std::ios_base::out | std::ios::binary | std::ios::trunc);
         //write sentinel
-        filestr << "AutoCAD Binary DXF\r\n" << (char)26 << '\0';
+        filestr << "AutoCAD Binary DXF\r\n" << static_cast<char>(26) << '\0';
         writer = new dxfWriterBinary(&filestr);
         DRW_DBG("dxfRW::read binary file\n");
     } else {
@@ -157,7 +172,7 @@ bool dxfRW::write(DRW_Interface *interface_, DRW::Version ver, bool bin){
     filestr.close();
     isOk = true;
     delete writer;
-    writer = NULL;
+    writer = nullptr;
     return isOk;
 }
 
@@ -530,7 +545,7 @@ bool dxfRW::writePoint(DRW_Point *ent) {
     }
     writer->writeDouble(10, ent->basePoint.x);
     writer->writeDouble(20, ent->basePoint.y);
-    if (ent->basePoint.z != 0.0) {
+    if (not qFuzzyIsNull(ent->basePoint.z)) {
         writer->writeDouble(30, ent->basePoint.z);
     }
     return true;
@@ -544,7 +559,7 @@ bool dxfRW::writeLine(DRW_Line *ent) {
     }
     writer->writeDouble(10, ent->basePoint.x);
     writer->writeDouble(20, ent->basePoint.y);
-    if (ent->basePoint.z != 0.0 || ent->secPoint.z != 0.0) {
+    if (not qFuzzyIsNull(ent->basePoint.z) || not qFuzzyIsNull(ent->secPoint.z)) {
         writer->writeDouble(30, ent->basePoint.z);
         writer->writeDouble(11, ent->secPoint.x);
         writer->writeDouble(21, ent->secPoint.y);
@@ -566,7 +581,7 @@ bool dxfRW::writeRay(DRW_Ray *ent) {
     crd.unitize();
     writer->writeDouble(10, ent->basePoint.x);
     writer->writeDouble(20, ent->basePoint.y);
-    if (ent->basePoint.z != 0.0 || ent->secPoint.z != 0.0) {
+    if (not qFuzzyIsNull(ent->basePoint.z) || not qFuzzyIsNull(ent->secPoint.z)) {
         writer->writeDouble(30, ent->basePoint.z);
         writer->writeDouble(11, crd.x);
         writer->writeDouble(21, crd.y);
@@ -588,7 +603,7 @@ bool dxfRW::writeXline(DRW_Xline *ent) {
     crd.unitize();
     writer->writeDouble(10, ent->basePoint.x);
     writer->writeDouble(20, ent->basePoint.y);
-    if (ent->basePoint.z != 0.0 || ent->secPoint.z != 0.0) {
+    if (not qFuzzyIsNull(ent->basePoint.z) || not qFuzzyIsNull(ent->secPoint.z)) {
         writer->writeDouble(30, ent->basePoint.z);
         writer->writeDouble(11, crd.x);
         writer->writeDouble(21, crd.y);
@@ -608,7 +623,7 @@ bool dxfRW::writeCircle(DRW_Circle *ent) {
     }
     writer->writeDouble(10, ent->basePoint.x);
     writer->writeDouble(20, ent->basePoint.y);
-    if (ent->basePoint.z != 0.0) {
+    if (not qFuzzyIsNull(ent->basePoint.z)) {
         writer->writeDouble(30, ent->basePoint.z);
     }
     writer->writeDouble(40, ent->radious);
@@ -623,7 +638,7 @@ bool dxfRW::writeArc(DRW_Arc *ent) {
     }
     writer->writeDouble(10, ent->basePoint.x);
     writer->writeDouble(20, ent->basePoint.y);
-    if (ent->basePoint.z != 0.0) {
+    if (not qFuzzyIsNull(ent->basePoint.z)) {
         writer->writeDouble(30, ent->basePoint.z);
     }
     writer->writeDouble(40, ent->radious);
@@ -733,23 +748,23 @@ bool dxfRW::writeLWPolyline(DRW_LWPolyline *ent){
         if (version > DRW::AC1009) {
             writer->writeString(100, "AcDbPolyline");
         }
-        ent->vertexnum = (int)ent->vertlist.size();
+        ent->vertexnum = static_cast<int>(ent->vertlist.size());
         writer->writeInt32(90, ent->vertexnum);
         writer->writeInt16(70, ent->flags);
         writer->writeDouble(43, ent->width);
-        if (ent->elevation != 0)
+        if (not qFuzzyIsNull(ent->elevation))
             writer->writeDouble(38, ent->elevation);
-        if (ent->thickness != 0)
+        if (not qFuzzyIsNull(ent->thickness))
             writer->writeDouble(39, ent->thickness);
         for (int i = 0;  i< ent->vertexnum; i++){
             DRW_Vertex2D *v = ent->vertlist.at(i);
             writer->writeDouble(10, v->x);
             writer->writeDouble(20, v->y);
-            if (v->stawidth != 0)
+            if (not qFuzzyIsNull(v->stawidth))
                 writer->writeDouble(40, v->stawidth);
-            if (v->endwidth != 0)
+            if (not qFuzzyIsNull(v->endwidth))
                 writer->writeDouble(41, v->endwidth);
-            if (v->bulge != 0)
+            if (not qFuzzyIsNull(v->bulge))
                 writer->writeDouble(42, v->bulge);
         }
     } else {
@@ -774,14 +789,14 @@ bool dxfRW::writePolyline(DRW_Polyline *ent) {
     writer->writeDouble(10, 0.0);
     writer->writeDouble(20, 0.0);
     writer->writeDouble(30, ent->basePoint.z);
-    if (ent->thickness != 0) {
+    if (not qFuzzyIsNull(ent->thickness)) {
         writer->writeDouble(39, ent->thickness);
     }
     writer->writeInt16(70, ent->flags);
-    if (ent->defstawidth != 0) {
+    if (not qFuzzyIsNull(ent->defstawidth)) {
         writer->writeDouble(40, ent->defstawidth);
     }
-    if (ent->defendwidth != 0) {
+    if (not qFuzzyIsNull(ent->defendwidth)) {
         writer->writeDouble(41, ent->defendwidth);
     }
     if (ent->flags & 16 || ent->flags & 32) {
@@ -798,7 +813,7 @@ bool dxfRW::writePolyline(DRW_Polyline *ent) {
         writer->writeInt16(75, ent->curvetype);
     }
     DRW_Coord crd  = ent->extPoint;
-    if (crd.x != 0 || crd.y != 0 || crd.z != 1) {
+    if (not qFuzzyIsNull(crd.x) || not qFuzzyIsNull(crd.y) || not DRW_FuzzyComparePossibleNulls(crd.z, 1)) {
         writer->writeDouble(210, crd.x);
         writer->writeDouble(220, crd.y);
         writer->writeDouble(230, crd.z);
@@ -827,11 +842,11 @@ bool dxfRW::writePolyline(DRW_Polyline *ent) {
             writer->writeDouble(20, v->basePoint.y);
             writer->writeDouble(30, v->basePoint.z);
         }
-        if (v->stawidth != 0)
+        if (not qFuzzyIsNull(v->stawidth))
             writer->writeDouble(40, v->stawidth);
-        if (v->endwidth != 0)
+        if (not qFuzzyIsNull(v->endwidth))
             writer->writeDouble(41, v->endwidth);
-        if (v->bulge != 0)
+        if (not qFuzzyIsNull(v->bulge))
             writer->writeDouble(42, v->bulge);
         if (v->flags != 0) {
             writer->writeInt16(70, ent->flags);
@@ -883,7 +898,7 @@ bool dxfRW::writeSpline(DRW_Spline *ent){
         for (int i = 0;  i< ent->nknots; i++){
             writer->writeDouble(40, ent->knotslist.at(i));
         }
-        for (int i = 0; i< (int)ent->weightlist.size(); i++) {
+        for (int i = 0; i< static_cast<int>(ent->weightlist.size()); i++) {
             writer->writeDouble(41, ent->weightlist.at(i));
         }
         for (int i = 0;  i< ent->ncontrol; i++){
@@ -912,7 +927,7 @@ bool dxfRW::writeHatch(DRW_Hatch *ent){
         writer->writeString(2, ent->name);
         writer->writeInt16(70, ent->solid);
         writer->writeInt16(71, ent->associative);
-        ent->loopsnum = (int)ent->looplist.size();
+        ent->loopsnum = static_cast<int>(ent->looplist.size());
         writer->writeInt16(91, ent->loopsnum);
         //write paths data
         for (int i = 0;  i< ent->loopsnum; i++){
@@ -928,7 +943,7 @@ bool dxfRW::writeHatch(DRW_Hatch *ent){
                     switch ( (loop->objlist.at(j))->eType) {
                     case DRW::LINE: {
                         writer->writeInt16(72, 1);
-                        DRW_Line* l = (DRW_Line*)loop->objlist.at(j);
+                        DRW_Line* l = static_cast<DRW_Line*>(loop->objlist.at(j));
                         writer->writeDouble(10, l->basePoint.x);
                         writer->writeDouble(20, l->basePoint.y);
                         writer->writeDouble(11, l->secPoint.x);
@@ -936,7 +951,7 @@ bool dxfRW::writeHatch(DRW_Hatch *ent){
                         break; }
                     case DRW::ARC: {
                         writer->writeInt16(72, 2);
-                        DRW_Arc* a = (DRW_Arc*)loop->objlist.at(j);
+                        DRW_Arc* a = static_cast<DRW_Arc*>(loop->objlist.at(j));
                         writer->writeDouble(10, a->basePoint.x);
                         writer->writeDouble(20, a->basePoint.y);
                         writer->writeDouble(40, a->radious);
@@ -946,7 +961,7 @@ bool dxfRW::writeHatch(DRW_Hatch *ent){
                         break; }
                     case DRW::ELLIPSE: {
                         writer->writeInt16(72, 3);
-                        DRW_Ellipse* a = (DRW_Ellipse*)loop->objlist.at(j);
+                        DRW_Ellipse* a = static_cast<DRW_Ellipse*>(loop->objlist.at(j));
                         a->correctAxis();
                         writer->writeDouble(10, a->basePoint.x);
                         writer->writeDouble(20, a->basePoint.y);
@@ -1000,7 +1015,7 @@ bool dxfRW::writeLeader(DRW_Leader *ent){
         writer->writeDouble(40, ent->textheight);
         writer->writeDouble(41, ent->textwidth);
         writer->writeDouble(76, ent->vertnum);
-        writer->writeDouble(76, ent->vertexlist.size());
+        writer->writeDouble(76, static_cast<double>(ent->vertexlist.size()));
         for (unsigned int i=0; i<ent->vertexlist.size(); i++) {
             DRW_Coord *vert = ent->vertexlist.at(i);
             writer->writeDouble(10, vert->x);
@@ -1034,10 +1049,10 @@ bool dxfRW::writeDimension(DRW_Dimension *ent) {
         writer->writeInt16(71, ent->getAlign());
         if ( ent->getTextLineStyle() != 1)
             writer->writeInt16(72, ent->getTextLineStyle());
-        if ( ent->getTextLineFactor() != 1)
+        if ( not DRW_FuzzyComparePossibleNulls(ent->getTextLineFactor(), 1))
             writer->writeDouble(41, ent->getTextLineFactor());
         writer->writeUtf8String(3, ent->getStyle());
-        if ( ent->getTextLineFactor() != 0)
+        if ( not qFuzzyIsNull(ent->getTextLineFactor()))
             writer->writeDouble(53, ent->getDir());
         writer->writeDouble(210, ent->getExtrusion().x);
         writer->writeDouble(220, ent->getExtrusion().y);
@@ -1048,10 +1063,10 @@ bool dxfRW::writeDimension(DRW_Dimension *ent) {
         switch (ent->eType) {
         case DRW::DIMALIGNED:
         case DRW::DIMLINEAR: {
-            DRW_DimAligned * dd = (DRW_DimAligned*)ent;
+            DRW_DimAligned * dd = static_cast<DRW_DimAligned*>(ent);
             writer->writeString(100, "AcDbAlignedDimension");
             DRW_Coord crd = dd->getClonepoint();
-            if (crd.x != 0 || crd.y != 0 || crd.z != 0) {
+            if (not qFuzzyIsNull(crd.x) || not qFuzzyIsNull(crd.y) || not qFuzzyIsNull(crd.z)) {
                 writer->writeDouble(12, crd.x);
                 writer->writeDouble(22, crd.y);
                 writer->writeDouble(32, crd.z);
@@ -1063,16 +1078,16 @@ bool dxfRW::writeDimension(DRW_Dimension *ent) {
             writer->writeDouble(24, dd->getDef2Point().y);
             writer->writeDouble(34, dd->getDef2Point().z);
             if (ent->eType == DRW::DIMLINEAR) {
-                DRW_DimLinear * dl = (DRW_DimLinear*)ent;
-                if (dl->getAngle() != 0)
+                DRW_DimLinear * dl = static_cast<DRW_DimLinear*>(ent);
+                if (not qFuzzyIsNull(dl->getAngle()))
                     writer->writeDouble(50, dl->getAngle());
-                if (dl->getOblique() != 0)
+                if (not qFuzzyIsNull(dl->getOblique()))
                     writer->writeDouble(52, dl->getOblique());
                 writer->writeString(100, "AcDbRotatedDimension");
             }
             break; }
         case DRW::DIMRADIAL: {
-            DRW_DimRadial * dd = (DRW_DimRadial*)ent;
+            DRW_DimRadial * dd = static_cast<DRW_DimRadial*>(ent);
             writer->writeString(100, "AcDbRadialDimension");
             writer->writeDouble(15, dd->getDiameterPoint().x);
             writer->writeDouble(25, dd->getDiameterPoint().y);
@@ -1080,7 +1095,7 @@ bool dxfRW::writeDimension(DRW_Dimension *ent) {
             writer->writeDouble(40, dd->getLeaderLength());
             break; }
         case DRW::DIMDIAMETRIC: {
-            DRW_DimDiametric * dd = (DRW_DimDiametric*)ent;
+            DRW_DimDiametric * dd = static_cast<DRW_DimDiametric*>(ent);
             writer->writeString(100, "AcDbDiametricDimension");
             writer->writeDouble(15, dd->getDiameter1Point().x);
             writer->writeDouble(25, dd->getDiameter1Point().y);
@@ -1088,7 +1103,7 @@ bool dxfRW::writeDimension(DRW_Dimension *ent) {
             writer->writeDouble(40, dd->getLeaderLength());
             break; }
         case DRW::DIMANGULAR: {
-            DRW_DimAngular * dd = (DRW_DimAngular*)ent;
+            DRW_DimAngular * dd = static_cast<DRW_DimAngular*>(ent);
             writer->writeString(100, "AcDb2LineAngularDimension");
             writer->writeDouble(13, dd->getFirstLine1().x);
             writer->writeDouble(23, dd->getFirstLine1().y);
@@ -1104,7 +1119,7 @@ bool dxfRW::writeDimension(DRW_Dimension *ent) {
             writer->writeDouble(36, dd->getDimPoint().z);
             break; }
         case DRW::DIMANGULAR3P: {
-            DRW_DimAngular3p * dd = (DRW_DimAngular3p*)ent;
+            DRW_DimAngular3p * dd = static_cast<DRW_DimAngular3p*>(ent);
             writer->writeDouble(13, dd->getFirstLine().x);
             writer->writeDouble(23, dd->getFirstLine().y);
             writer->writeDouble(33, dd->getFirstLine().z);
@@ -1116,7 +1131,7 @@ bool dxfRW::writeDimension(DRW_Dimension *ent) {
             writer->writeDouble(35, dd->getVertexPoint().z);
             break; }
         case DRW::DIMORDINATE: {
-            DRW_DimOrdinate * dd = (DRW_DimOrdinate*)ent;
+            DRW_DimOrdinate * dd = static_cast<DRW_DimOrdinate*>(ent);
             writer->writeString(100, "AcDbOrdinateDimension");
             writer->writeDouble(13, dd->getFirstLine().x);
             writer->writeDouble(23, dd->getFirstLine().y);
@@ -1238,7 +1253,7 @@ bool dxfRW::writeViewport(DRW_Viewport *ent) {
     }
     writer->writeDouble(10, ent->basePoint.x);
     writer->writeDouble(20, ent->basePoint.y);
-    if (ent->basePoint.z != 0.0)
+    if (not qFuzzyIsNull(ent->basePoint.z))
         writer->writeDouble(30, ent->basePoint.z);
     writer->writeDouble(40, ent->pswidth);
     writer->writeDouble(41, ent->psheight);
@@ -1352,7 +1367,7 @@ bool dxfRW::writeBlock(DRW_Block *bk){
     writer->writeInt16(70, bk->flags);
     writer->writeDouble(10, bk->basePoint.x);
     writer->writeDouble(20, bk->basePoint.y);
-    if (bk->basePoint.z != 0.0) {
+    if (not qFuzzyIsNull(bk->basePoint.z)) {
         writer->writeDouble(30, bk->basePoint.z);
     }
     if (version > DRW::AC1009)
@@ -2667,6 +2682,10 @@ bool dxfRW::processDimension() {
             nextentity = reader->getString();
             DRW_DBG(nextentity); DRW_DBG("\n");
             int type = dim.type & 0x0F;
+
+            QT_WARNING_PUSH
+            QT_WARNING_DISABLE_GCC("-Wswitch-default")
+
             switch (type) {
             case 0: {
                 DRW_DimLinear d(dim);
@@ -2697,6 +2716,9 @@ bool dxfRW::processDimension() {
                 iface->addDimOrdinate(&d);
                 break; }
             }
+
+            QT_WARNING_POP
+
             return true;  //found new entity or ENDSEC, terminate
         }
         default:

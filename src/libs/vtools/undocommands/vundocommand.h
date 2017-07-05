@@ -68,7 +68,7 @@ class VUndoCommand : public QObject, public QUndoCommand
 {
     Q_OBJECT
 public:
-    VUndoCommand(const QDomElement &xml, VAbstractPattern *doc, QUndoCommand *parent = 0);
+    VUndoCommand(const QDomElement &xml, VAbstractPattern *doc, QUndoCommand *parent = nullptr);
     virtual ~VUndoCommand() Q_DECL_OVERRIDE;
 signals:
     void ClearScene();

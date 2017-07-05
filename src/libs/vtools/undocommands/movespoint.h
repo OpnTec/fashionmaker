@@ -44,7 +44,7 @@ class MoveSPoint : public VUndoCommand
     Q_OBJECT
 public:
     MoveSPoint(VAbstractPattern *doc, const double &x, const double &y, const quint32 &id, QGraphicsScene *scene,
-               QUndoCommand *parent = 0);
+               QUndoCommand *parent = nullptr);
     virtual ~MoveSPoint() Q_DECL_OVERRIDE;
     virtual void undo() Q_DECL_OVERRIDE;
     virtual void redo() Q_DECL_OVERRIDE;

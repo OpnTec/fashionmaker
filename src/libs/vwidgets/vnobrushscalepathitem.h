@@ -38,7 +38,7 @@
 class VNoBrushScalePathItem : public QGraphicsPathItem
 {
 public:
-    explicit VNoBrushScalePathItem(QGraphicsItem *parent = 0);
+    explicit VNoBrushScalePathItem(QGraphicsItem *parent = nullptr);
 
 protected:
     virtual void paint(QPainter * painter, const QStyleOptionGraphicsItem * option,

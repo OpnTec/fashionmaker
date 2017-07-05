@@ -160,7 +160,7 @@ bool dwgReader::readDwgHandles(dwgBuffer *dbuf, duint32 offset, duint32 size) {
         DRW_DBG("object map section crc8 read= "); DRW_DBG(crcRead);
         DRW_DBG("\nobject map section crc8 calculated= "); DRW_DBG(crcCalc);
         DRW_DBG("\nobject section buf->curPosition()= "); DRW_DBG(dbuf->getPosition()); DRW_DBG("\n");
-        startPos = dbuf->getPosition();
+        startPos = static_cast<int>(dbuf->getPosition());
     }
 
     bool ret = dbuf->isGood();
@@ -994,7 +994,7 @@ bool dwgReader::readDwgEntity(dwgBuffer *dbuf, objHandle& obj, DRW_Interface& in
             } else {
                 DRW_Class *cl = it->second;
                 if (cl->dwgType != 0)
-                    oType = cl->dwgType;
+                    oType = static_cast<dint16>(cl->dwgType);
             }
         }
 
@@ -1221,7 +1221,7 @@ bool dwgReader::readDwgObject(dwgBuffer *dbuf, objHandle& obj, DRW_Interface& in
         }
         dwgBuffer buff(tmpByteStr, size, &decoder);
         //oType are set parsing entities
-        dint16 oType = obj.type;
+        dint16 oType = static_cast<dint16>(obj.type);
 
         switch (oType){
         case 102: {
@@ -1235,7 +1235,11 @@ bool dwgReader::readDwgObject(dwgBuffer *dbuf, objHandle& obj, DRW_Interface& in
             break;
         }
         if (!ret){
-            DRW_DBG("Warning: Object type "); DRW_DBG(oType);DRW_DBG("has failed, handle: "); DRW_DBG(obj.handle); DRW_DBG("\n");
+            DRW_DBG("Warning: Object type ");
+            DRW_DBG(oType);
+            DRW_DBG("has failed, handle: ");
+            DRW_DBG(obj.handle);
+            DRW_DBG("\n");
         }
         delete[]tmpByteStr;
     return ret;
@@ -1245,8 +1249,8 @@ bool dwgReader::readDwgObject(dwgBuffer *dbuf, objHandle& obj, DRW_Interface& in
 
 bool DRW_ObjControl::parseDwg(DRW::Version version, dwgBuffer *buf, duint32 bs){
 int unkData=0;
-    bool ret = DRW_TableEntry::parseDwg(version, buf, NULL, bs);
-    DRW_DBG("\n***************************** parsing object control entry *********************************************\n");
+    bool ret = DRW_TableEntry::parseDwg(version, buf, nullptr, bs);
+    DRW_DBG("\n***************************** parsing object control entry *****************************************\n");
     if (!ret)
         return ret;
     //last parsed is: XDic Missing Flag 2004+

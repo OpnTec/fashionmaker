@@ -50,7 +50,7 @@ bool VPE::VPropertySet::addProperty(VProperty *property, const QString &id, cons
         return false;
     }
 
-    VProperty* tmpParent = parentid.isEmpty() ? NULL : getProperty(parentid);
+    VProperty* tmpParent = parentid.isEmpty() ? nullptr : getProperty(parentid);
     return addProperty(property, id, tmpParent);
 }
 
@@ -96,12 +96,12 @@ bool VPE::VPropertySet::hasProperty(VProperty *property) const
         return false;
     }
 
-    return hasProperty(property, NULL);
+    return hasProperty(property, nullptr);
 }
 
 VPE::VProperty *VPE::VPropertySet::getProperty(const QString &id) const
 {
-    return d_ptr->Properties.value(id, NULL);
+    return d_ptr->Properties.value(id, nullptr);
 }
 
 VPE::VProperty *VPE::VPropertySet::takeProperty(const QString &id)
@@ -125,7 +125,7 @@ void VPE::VPropertySet::removeProperty(VProperty* prop, bool delete_property)
     removePropertyFromSet(prop);
 
     // Remove from parent and optionally delete
-    prop->setParent(NULL);
+    prop->setParent(nullptr);
 
     if (delete_property)
     {
@@ -191,7 +191,7 @@ const QList<VPE::VProperty *> &VPE::VPropertySet::getRootProperties() const
 
 VPE::VProperty *VPE::VPropertySet::getRootProperty(int row) const
 {
-    return d_ptr->RootProperties.value(row, NULL);
+    return d_ptr->RootProperties.value(row, nullptr);
 }
 
 int VPE::VPropertySet::getRootPropertyCount() const
@@ -204,7 +204,7 @@ VPE::VPropertySet* VPE::VPropertySet::clone() const
     VPropertySet* tmpResult = new VPropertySet();
 
     foreach(VProperty* tmpProperty, d_ptr->RootProperties)
-        cloneProperty(tmpProperty, NULL, tmpResult);
+        cloneProperty(tmpProperty, nullptr, tmpResult);
 
 
     return tmpResult;
@@ -217,7 +217,7 @@ bool VPE::VPropertySet::hasProperty(VProperty *property, VProperty *parent) cons
         return false;
     }
 
-    const QList<VProperty*>& tmpChildrenList = (parent != NULL ? parent->getChildren() : d_ptr->RootProperties);
+    const QList<VProperty*>& tmpChildrenList = (parent != nullptr ? parent->getChildren() : d_ptr->RootProperties);
     foreach(VProperty* tmpProp, tmpChildrenList)
     {
         if (!tmpProp)

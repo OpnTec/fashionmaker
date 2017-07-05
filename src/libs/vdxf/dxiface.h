@@ -22,18 +22,32 @@ class QFont;
 //class to store image data and path from DRW_ImageDef
 class dx_ifaceImg : public DRW_Image {
 public:
-    dx_ifaceImg(){}
-    dx_ifaceImg(const DRW_Image& p):DRW_Image(p){}
-    ~dx_ifaceImg(){}
+    dx_ifaceImg()
+        : path()
+    {}
+
+    dx_ifaceImg(const DRW_Image& p)
+        : DRW_Image(p),
+          path()
+    {}
+
+    virtual ~dx_ifaceImg() = default;
     std::string path; //stores the image path
 };
 
 //container class to store entites.
 class dx_ifaceBlock : public DRW_Block {
 public:
-    dx_ifaceBlock(){}
-    dx_ifaceBlock(const DRW_Block& p):DRW_Block(p){}
-    ~dx_ifaceBlock(){
+    dx_ifaceBlock()
+        : ent()
+    {}
+
+    dx_ifaceBlock(const DRW_Block& p)
+        : DRW_Block(p),
+          ent()
+    {}
+
+    virtual ~dx_ifaceBlock(){
         for (std::list<DRW_Entity*>::const_iterator it=ent.begin(); it!=ent.end(); ++it)
             delete *it;
     }
@@ -44,9 +58,19 @@ public:
 //container class to store full dwg/dxf data.
 class dx_data {
 public:
-    dx_data(){
-        mBlock = new dx_ifaceBlock();
-    }
+    dx_data()
+        : headerC(),
+          lineTypes(),
+          layers(),
+          dimStyles(),
+          VPorts(),
+          textStyles(),
+          appIds(),
+          blocks(),
+          images(),
+          mBlock(new dx_ifaceBlock())
+    {}
+
     ~dx_data(){
         //cleanup,
         for (std::list<dx_ifaceBlock*>::const_iterator it=blocks.begin(); it!=blocks.end(); ++it)
@@ -65,7 +89,8 @@ public:
     std::list<dx_ifaceImg*>images;      //temporary list to find images for link with DRW_ImageDef. Do not delete it!!
 
     dx_ifaceBlock* mBlock;              //container to store model entities
-
+private:
+    Q_DISABLE_COPY(dx_data)
 
 };
 
@@ -96,6 +121,7 @@ public:
     UTF8STRING AddFont(const QFont &f);
 
 private:
+    Q_DISABLE_COPY(dx_iface)
     dxfRW* dxfW; //pointer to writer, needed to send data
     dx_data cData; // class to store or read data
     DRW::Version version;

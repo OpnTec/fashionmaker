@@ -28,6 +28,9 @@
 
 #ifndef RSCODEC_H
 #define RSCODEC_H
+
+#include <QtGlobal>
+
 /**
 mm: RS code over GF(2^4)
 nn: nn= (2^mm) - 1   length of codeword
@@ -55,6 +58,7 @@ private:
 
 
 private:
+    Q_DISABLE_COPY(RScodec)
     int mm; //RS code over GF(2^4)
     int tt; //number of errors that can be corrected
     int nn; //(2^mm) - 1   length of codeword

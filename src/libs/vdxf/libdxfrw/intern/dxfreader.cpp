@@ -105,13 +105,13 @@ bool dxfReaderBinary::readCode(int *code) {
     unsigned short *int16p;
     char buffer[2];
     filestr->read(buffer,2);
-    int16p = (unsigned short *) buffer;
+    int16p = reinterpret_cast<unsigned short *>(buffer);
 //exist a 32bits int (code 90) with 2 bytes???
     if ((*code == 90) && (*int16p>2000)){
         DRW_DBG(*code); DRW_DBG(" de 16bits\n");
         filestr->seekg(-4, std::ios_base::cur);
         filestr->read(buffer,2);
-        int16p = (unsigned short *) buffer;
+        int16p = reinterpret_cast<unsigned short *>(buffer);
     }
     *code = *int16p;
     DRW_DBG(*code); DRW_DBG("\n");
@@ -137,7 +137,7 @@ bool dxfReaderBinary::readInt16() {
     type = INT32;
     char buffer[2];
     filestr->read(buffer,2);
-    intData = (int)((buffer[1] << 8) | buffer[0]);
+    intData = static_cast<int>((buffer[1] << 8) | buffer[0]);
     DRW_DBG(intData); DRW_DBG("\n");
     return (filestr->good());
 }
@@ -147,7 +147,7 @@ bool dxfReaderBinary::readInt32() {
     unsigned int *int32p;
     char buffer[4];
     filestr->read(buffer,4);
-    int32p = (unsigned int *) buffer;
+    int32p = reinterpret_cast<unsigned int *>(buffer);
     intData = *int32p;
     DRW_DBG(intData); DRW_DBG("\n");
     return (filestr->good());
@@ -158,7 +158,7 @@ bool dxfReaderBinary::readInt64() {
     unsigned long long int *int64p; //64 bits integer pointer
     char buffer[8];
     filestr->read(buffer,8);
-    int64p = (unsigned long long int *) buffer;
+    int64p = reinterpret_cast<unsigned long long int *>(buffer);
     int64 = *int64p;
     DRW_DBG(int64); DRW_DBG(" int64\n");
     return (filestr->good());
@@ -169,7 +169,7 @@ bool dxfReaderBinary::readDouble() {
     double *result;
     char buffer[8];
     filestr->read(buffer,8);
-    result = (double *) buffer;
+    result = reinterpret_cast<double *>(buffer);
     doubleData = *result;
     DRW_DBG(doubleData); DRW_DBG("\n");
     return (filestr->good());
@@ -179,7 +179,7 @@ bool dxfReaderBinary::readDouble() {
 bool dxfReaderBinary::readBool() {
     char buffer[1];
     filestr->read(buffer,1);
-    intData = (int)(buffer[0]);
+    intData = static_cast<int>(buffer[0]);
     DRW_DBG(intData); DRW_DBG("\n");
     return (filestr->good());
 }

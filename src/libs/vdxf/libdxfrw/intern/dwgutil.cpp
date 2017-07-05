@@ -219,9 +219,9 @@ void dwgCompressor::decompress18(duint8 *cbuf, duint8 *dbuf, duint32 csize, duin
 
 
 void dwgCompressor::decrypt18Hdr(duint8 *buf, duint32 size, duint32 offset){
-    duint8 max = size / 4;
+    duint8 max = static_cast<duint8>(size / 4);
     duint32 secMask = 0x4164536b ^ offset;
-    duint32* pHdr = (duint32*)buf;
+    duint32* pHdr = reinterpret_cast<duint32*>(buf);
     for (duint8 j = 0; j < max; j++)
         *pHdr++ ^= secMask;
 }
@@ -245,7 +245,7 @@ duint32 dwgCompressor::litLength21(duint8 *cbuf, duint8 oc, duint32 *si){
         if (n == 0xff) {
             do {
                 n = cbuf[srcIndex++];
-                n |= (duint32)(cbuf[srcIndex++] << 8);
+                n |= static_cast<duint32>(cbuf[srcIndex++] << 8);
                 length += n;
             } while (n == 0xffff);
         }

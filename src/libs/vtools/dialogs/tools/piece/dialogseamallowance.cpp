@@ -2649,10 +2649,10 @@ void DialogSeamAllowance::InitPatternPieceDataTab()
 
     connect(uiTabLabels->lineEditName, &QLineEdit::textChanged, this, &DialogSeamAllowance::NameDetailChanged);
 
-    m_qslMaterials << QApplication::translate("Detail", "Fabric", 0)
-                   << QApplication::translate("Detail", "Lining", 0)
-                   << QApplication::translate("Detail", "Interfacing", 0)
-                   << QApplication::translate("Detail", "Interlining", 0);
+    m_qslMaterials << QApplication::translate("Detail", "Fabric", nullptr)
+                   << QApplication::translate("Detail", "Lining", nullptr)
+                   << QApplication::translate("Detail", "Interfacing", nullptr)
+                   << QApplication::translate("Detail", "Interlining", nullptr);
 
     for (int i = 0; i < m_qslMaterials.count(); ++i)
     {

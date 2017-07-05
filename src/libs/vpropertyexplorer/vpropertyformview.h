@@ -42,13 +42,13 @@ class VPROPERTYEXPLORERSHARED_EXPORT VPropertyFormView : public VPropertyFormWid
     Q_OBJECT
 public:
     //! Constructor
-    explicit VPropertyFormView(QWidget *parent = 0);
+    explicit VPropertyFormView(QWidget *parent = nullptr);
 
     //! Constructor
-    explicit VPropertyFormView(VPropertyModel* model, QWidget *parent = 0);
+    explicit VPropertyFormView(VPropertyModel* model, QWidget *parent = nullptr);
 
     //! Constructor
-    explicit VPropertyFormView(VPropertySet* property_set, QWidget *parent = 0);
+    explicit VPropertyFormView(VPropertySet* property_set, QWidget *parent = nullptr);
 
     //! Destructor
     virtual ~VPropertyFormView() Q_DECL_OVERRIDE;

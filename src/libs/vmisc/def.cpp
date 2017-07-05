@@ -155,7 +155,7 @@ void SetOverrideCursor(Qt::CursorShape shape)
 #ifndef QT_NO_CURSOR
     QPixmap oldPixmap;
     QCursor* pOldCursor = QGuiApplication::overrideCursor();
-    if (pOldCursor != 0)
+    if (pOldCursor != nullptr)
     {
         oldPixmap = pOldCursor->pixmap();
     }
@@ -200,7 +200,7 @@ void RestoreOverrideCursor(Qt::CursorShape shape)
 #ifndef QT_NO_CURSOR
     QPixmap oldPixmap;
     QCursor* pOldCursor = QGuiApplication::overrideCursor();
-    if (pOldCursor != 0)
+    if (pOldCursor != nullptr)
     {
         oldPixmap = pOldCursor->pixmap();
     }

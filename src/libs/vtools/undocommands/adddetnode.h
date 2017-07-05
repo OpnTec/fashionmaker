@@ -42,7 +42,7 @@ class AddDetNode : public VUndoCommand
 {
     Q_OBJECT
 public:
-    AddDetNode(const QDomElement &xml, VAbstractPattern *doc, const QString &drawName, QUndoCommand *parent = 0);
+    AddDetNode(const QDomElement &xml, VAbstractPattern *doc, const QString &drawName, QUndoCommand *parent = nullptr);
     virtual ~AddDetNode() Q_DECL_OVERRIDE;
     virtual void undo() Q_DECL_OVERRIDE;
     virtual void redo() Q_DECL_OVERRIDE;

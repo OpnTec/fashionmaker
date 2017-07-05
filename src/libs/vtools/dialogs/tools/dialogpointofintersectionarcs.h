@@ -49,7 +49,7 @@ class DialogPointOfIntersectionArcs : public DialogTool
     Q_OBJECT
 
 public:
-    DialogPointOfIntersectionArcs(const VContainer *data, const quint32 &toolId, QWidget *parent = 0);
+    DialogPointOfIntersectionArcs(const VContainer *data, const quint32 &toolId, QWidget *parent = nullptr);
     virtual ~DialogPointOfIntersectionArcs() Q_DECL_OVERRIDE;
 
     void           SetPointName(const QString &value);

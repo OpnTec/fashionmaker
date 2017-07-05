@@ -72,6 +72,7 @@ public:
     void setEllipseParts(int parts){elParts = parts;} /*!< set parts munber when convert ellipse to polyline */
 
 private:
+    Q_DISABLE_COPY(dxfRW)
     /// used by read() to parse the content of the file
     bool processDxf();
     bool processHeader();

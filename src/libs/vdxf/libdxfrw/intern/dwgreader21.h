@@ -22,12 +22,14 @@
 //reader for AC1021 aka v2007, chapter 5
 class dwgReader21 : public dwgReader {
 public:
-    dwgReader21(std::istream *stream, dwgR *p):dwgReader(stream, p){
-        objData = NULL;
-        dataSize = 0;
-    }
+    dwgReader21(std::istream *stream, dwgR *p)
+        : dwgReader(stream, p),
+          objData(nullptr),
+          dataSize(0)
+    {}
+
     virtual ~dwgReader21(){
-        if (objData != NULL)
+        if (objData != nullptr)
             delete[] objData;
     }
     bool readMetaData();
@@ -39,13 +41,13 @@ public:
     bool readDwgBlocks(DRW_Interface& intfa);
     virtual bool readDwgEntities(DRW_Interface& intfa){
         bool ret = true;
-        dwgBuffer dataBuf(objData, dataSize, &decoder);
+        dwgBuffer dataBuf(objData, static_cast<int>(dataSize), &decoder);
         ret = dwgReader::readDwgEntities(intfa, &dataBuf);
         return ret;
     }
     virtual bool readDwgObjects(DRW_Interface& intfa){
         bool ret = true;
-        dwgBuffer dataBuf(objData, dataSize, &decoder);
+        dwgBuffer dataBuf(objData, static_cast<int>(dataSize), &decoder);
         ret = dwgReader::readDwgObjects(intfa, &dataBuf);
         return ret;
     }
@@ -54,7 +56,9 @@ public:
 //}
 
 private:
-    bool parseSysPage(duint64 sizeCompressed, duint64 sizeUncompressed, duint64 correctionFactor, duint64 offset, duint8 *decompData);
+    Q_DISABLE_COPY(dwgReader21)
+    bool parseSysPage(duint64 sizeCompressed, duint64 sizeUncompressed, duint64 correctionFactor, duint64 offset,
+                      duint8 *decompData);
     bool parseDataPage(dwgSectionInfo si, duint8 *dData);
 
     duint8 *objData;

@@ -111,10 +111,10 @@ QString VPE::VFileEditWidget::getFile() const
 
 void VPE::VFileEditWidget::onToolButtonClicked()
 {
-    QString filepath = (Directory ? QFileDialog::getExistingDirectory(0, tr("Directory"), CurrentFilePath,
+    QString filepath = (Directory ? QFileDialog::getExistingDirectory(nullptr, tr("Directory"), CurrentFilePath,
                                                                       QFileDialog::ShowDirsOnly
                                                                       | QFileDialog::DontUseNativeDialog)
-                                  : QFileDialog::getOpenFileName(0, tr("Open File"), CurrentFilePath,
+                                  : QFileDialog::getOpenFileName(nullptr, tr("Open File"), CurrentFilePath,
                                                                  FileDialogFilter, nullptr,
                                                                  QFileDialog::DontUseNativeDialog));
     if (filepath.isNull() == false)

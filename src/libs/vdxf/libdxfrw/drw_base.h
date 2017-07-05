@@ -18,6 +18,7 @@
 #include <string>
 #include <list>
 #include <cmath>
+#include <QtGlobal>
 
 #ifdef DRW_ASSERTS
 # define drw_assert(a) assert(a)
@@ -158,6 +159,23 @@ enum TransparencyCodes {
 
 } // namespace DRW
 
+Q_REQUIRED_RESULT static inline bool DRW_FuzzyComparePossibleNulls(double p1, double p2);
+static inline bool DRW_FuzzyComparePossibleNulls(double p1, double p2)
+{
+    if(qFuzzyIsNull(p1))
+    {
+        return qFuzzyIsNull(p2);
+    }
+    else if(qFuzzyIsNull(p2))
+    {
+        return false;
+    }
+    else
+    {
+        return qFuzzyCompare(p1, p2);
+    }
+}
+
 //! Class to handle 3D coordinate point
 /*!
 *  Class to handle 3D coordinate point
@@ -165,13 +183,27 @@ enum TransparencyCodes {
 */
 class DRW_Coord {
 public:
-    DRW_Coord() { x = 0; y = 0; z = 0; }
-    DRW_Coord(double ix, double iy, double iz) {
-        x = ix; y = iy; z = iz;
-    }
+    DRW_Coord()
+        : x(0),
+          y(0),
+          z(0)
+    {}
+    DRW_Coord(double ix, double iy, double iz)
+        : x(ix),
+          y(iy),
+          z(iz)
+    {}
 
-     DRW_Coord operator = (const DRW_Coord& data) {
-        x = data.x;  y = data.y;  z = data.z;
+    DRW_Coord &operator = (const DRW_Coord& data)
+    {
+        if ( &data == this )
+        {
+            return *this;
+        }
+
+        x = data.x;
+        y = data.y;
+        z = data.z;
         return *this;
     }
 /*!< convert to unitary vector */
@@ -199,16 +231,22 @@ public:
 */
 class DRW_Vertex2D {
 public:
-    DRW_Vertex2D() {
+    DRW_Vertex2D()
+        : x(),
+          y(),
+          stawidth(0),
+          endwidth(0),
+          bulge(0)
+    {
 //        eType = DRW::LWPOLYLINE;
-        stawidth = endwidth = bulge = 0;
     }
-    DRW_Vertex2D(double sx, double sy, double b) {
-        stawidth = endwidth = 0;
-        x = sx;
-        y =sy;
-        bulge = b;
-    }
+    DRW_Vertex2D(double sx, double sy, double b)
+        : x(sx),
+          y(sy),
+          stawidth(0),
+          endwidth(0),
+          bulge(b)
+    {}
 
 public:
     double x;                 /*!< x coordinate, code 10 */
@@ -234,41 +272,85 @@ public:
         INVALID
     };
 //TODO: add INT64 support
-    DRW_Variant() {
-        type = INVALID;
+    DRW_Variant()
+        : content(),
+          type(INVALID),
+          code(),
+          sdata(),
+          vdata()
+    {}
+
+    DRW_Variant(int c, dint32 i)
+        : content(),
+          type(),
+          code(c),
+          sdata(),
+          vdata()
+    {
+        addInt(i);
     }
 
-    DRW_Variant(int c, dint32 i) {
-        code = c; addInt(i);
+    DRW_Variant(int c, duint32 i)
+        : content(),
+          type(),
+          code(c),
+          sdata(),
+          vdata()
+    {
+        addInt(static_cast<dint32>(i));//RLZ: verify if work with big numbers
     }
-    DRW_Variant(int c, duint32 i) {
-        code = c; addInt(static_cast<dint32>(i));//RLZ: verify if worrk with big numbers
+
+    DRW_Variant(int c, double d)
+        : content(),
+          type(),
+          code(c),
+          sdata(),
+          vdata()
+    {
+        addDouble(d);
     }
-    DRW_Variant(int c, double d) {
-        code = c; addDouble(d);
+
+    DRW_Variant(int c, UTF8STRING s)
+        : content(),
+          type(),
+          code(c),
+          sdata(),
+          vdata()
+    {
+        addString(s);
     }
-    DRW_Variant(int c, UTF8STRING s) {
-        code = c; addString(s);
+
+    DRW_Variant(int c, DRW_Coord crd)
+        : content(),
+          type(),
+          code(c),
+          sdata(),
+          vdata()
+    {
+        addCoord(crd);
     }
-    DRW_Variant(int c, DRW_Coord crd) {
-        code = c; addCoord(crd);
-    }
-    DRW_Variant(const DRW_Variant& d) {
-        code = d.code;
-        type = d.type;
-        content = d.content;
-        if (d.type == COORD) {
+
+    DRW_Variant(const DRW_Variant& d)
+        : content(d.content),
+          type(d.type),
+          code(d.code),
+          sdata(),
+          vdata()
+    {
+        if (d.type == COORD)
+        {
             vdata = d.vdata;
             content.v = &vdata;
         }
-        if (d.type == STRING) {
+
+        if (d.type == STRING)
+        {
             sdata = d.sdata;
             content.s = &sdata;
         }
     }
 
-    ~DRW_Variant() {
-    }
+    ~DRW_Variant() = default;
 
     void addString(UTF8STRING s) {setType(STRING); sdata = s; content.s = &sdata;}
     void addInt(int i) {setType(INTEGER); content.i = i;}
@@ -305,12 +387,14 @@ private:
 */
 class dwgHandle{
 public:
-    dwgHandle(){
-        code=0;
-        size=0;
-        ref=0;
-    }
-    ~dwgHandle(){}
+    dwgHandle()
+        : code(0),
+          size(0),
+          ref(0)
+    {}
+
+    ~dwgHandle() = default;
+
     duint8 code;
     duint8 size;
     duint32 ref;

@@ -35,17 +35,20 @@
     secObjects
 };*/
 
-dwgR::dwgR(){
+dwgR::dwgR()
+    : version(DRW::UNKNOWNV),
+      error(DRW::BAD_NONE),
+      fileName(),
+      applyExt(false),
+      codePage(),
+      iface(),
+      reader(nullptr)
+{
     DRW_DBGSL(DRW_dbg::NONE);
-    reader = NULL;
-//    writer = NULL;
-    applyExt = false;
-    version = DRW::UNKNOWNV;
-    error = DRW::BAD_NONE;
 }
 
 dwgR::~dwgR(){
-    if (reader != NULL)
+    if (reader != nullptr)
         delete reader;
 
 }
@@ -74,9 +77,9 @@ bool dwgR::getPreview(std::istream &stream){
     } else
         error = DRW::BAD_READ_METADATA;
 
-    if (reader != NULL) {
+    if (reader != nullptr) {
         delete reader;
-        reader = NULL;
+        reader = nullptr;
     }
     return isOk;
 }
@@ -101,9 +104,9 @@ bool dwgR::read(std::istream &stream, DRW_Interface *interface_, bool ext){
     } else
         error = DRW::BAD_READ_METADATA;
 
-    if (reader != NULL) {
+    if (reader != nullptr) {
         delete reader;
-        reader = NULL;
+        reader = nullptr;
     }
 
     return isOk;

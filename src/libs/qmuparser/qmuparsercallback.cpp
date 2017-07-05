@@ -296,8 +296,8 @@ QmuParserCallback::QmuParserCallback ( strfun_type3 a_pFun, bool a_bAllowOpti )
  * @throw nothrow
  */
 QmuParserCallback::QmuParserCallback()
-    : m_pFun ( 0 ), m_iArgc ( 0 ), m_iPri ( -1 ), m_eOprtAsct ( oaNONE ), m_iCode ( cmUNKNOWN ), m_iType ( tpVOID ),
-      m_bAllowOpti ( 0 )
+    : m_pFun ( nullptr ), m_iArgc ( 0 ), m_iPri ( -1 ), m_eOprtAsct ( oaNONE ), m_iCode ( cmUNKNOWN ),
+      m_iType ( tpVOID ), m_bAllowOpti ( 0 )
 {}
 
 //---------------------------------------------------------------------------------------------------------------------

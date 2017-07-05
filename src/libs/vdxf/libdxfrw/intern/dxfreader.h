@@ -27,11 +27,18 @@ public:
     };
     enum TYPE type;
 public:
-    dxfReader(std::istream *stream){
-        filestr = stream;
-        type = INVALID;
-    }
-    virtual ~dxfReader(){}
+    dxfReader(std::istream *stream)
+        : type(INVALID),
+          filestr(stream),
+          strData(),
+          doubleData(),
+          intData(),
+          int64(),
+          skip(),
+          decoder()
+    {}
+
+    virtual ~dxfReader() = default;
     bool readRec(int *code);
 
     std::string getString() {return strData;}
@@ -65,6 +72,7 @@ protected:
     unsigned long long int int64; //64 bits integer
     bool skip; //set to true for ascii dxf, false for binary
 private:
+    Q_DISABLE_COPY(dxfReader)
     DRW_TextCodec decoder;
 };
 

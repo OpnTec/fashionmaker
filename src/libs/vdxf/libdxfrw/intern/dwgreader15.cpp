@@ -88,8 +88,12 @@ bool dwgReader15::readFileHeader() {
         return false;
     DRW_DBG("\nposition after read section locator records= "); DRW_DBG(fileBuf->getPosition());
     DRW_DBG(", bit are= "); DRW_DBG(fileBuf->getBitPos());
-    duint32 ckcrc = fileBuf->crc8(0,0,fileBuf->getPosition());
+    duint32 ckcrc = static_cast<duint32>(fileBuf->crc8(0, 0, static_cast<dint32>(fileBuf->getPosition())));
     DRW_DBG("\nfile header crc8 0 result= "); DRW_DBG(ckcrc);
+
+    QT_WARNING_PUSH
+    QT_WARNING_DISABLE_GCC("-Wswitch-default")
+
     switch (count){
     case 3:
         ckcrc = ckcrc ^ 0xA598;
@@ -103,6 +107,9 @@ bool dwgReader15::readFileHeader() {
     case 6:
         ckcrc = ckcrc ^ 0x8461;
     }
+
+    QT_WARNING_POP
+
     DRW_DBG("\nfile header crc8 xor result= "); DRW_DBG(ckcrc);
     DRW_DBG("\nfile header CRC= "); DRW_DBG(fileBuf->getRawShort16());
     DRW_DBG("\nfile header sentinel= ");
@@ -123,8 +130,8 @@ bool dwgReader15::readDwgHeader(DRW_Header& hdr){
     if (!fileBuf->setPosition(si.address))
         return false;
     duint8 *tmpByteStr = new duint8[si.size];
-    fileBuf->getBytes(tmpByteStr, si.size);
-    dwgBuffer buff(tmpByteStr, si.size, &decoder);
+    fileBuf->getBytes(tmpByteStr, static_cast<int>(si.size));
+    dwgBuffer buff(tmpByteStr, static_cast<int>(si.size), &decoder);
     DRW_DBG("Header section sentinel= ");
     checkSentinel(&buff, secEnum::HEADER, true);
     bool ret = dwgReader::readDwgHeader(hdr, &buff, &buff);
@@ -172,7 +179,7 @@ bool dwgReader15::readDwgHandles() {
     if (si.Id<0)//not found, ends
         return false;
 
-    bool ret = dwgReader::readDwgHandles(fileBuf, si.address, si.size);
+    bool ret = dwgReader::readDwgHandles(fileBuf, static_cast<duint32>(si.address), static_cast<duint32>(si.size));
     return ret;
 }
 

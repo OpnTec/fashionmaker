@@ -947,7 +947,7 @@ bool QmuParserTokenReader::IsUndefVarTok ( token_type &a_Tok )
     else
     {
         a_Tok.SetVar ( &m_fZero, strTok );
-        m_UsedVar[strTok] = 0;  // Add variable to used-var-list
+        m_UsedVar[strTok] = nullptr;  // Add variable to used-var-list
     }
 
     m_iPos = iEnd;

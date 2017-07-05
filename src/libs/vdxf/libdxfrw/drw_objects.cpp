@@ -69,7 +69,7 @@ void DRW_TableEntry::parseCode(int code, dxfReader *reader){
     case 1033:
         if (curr)
             curr->setCoordZ(reader->getDouble());
-        curr=NULL;
+        curr=nullptr;
         break;
     case 1040:
     case 1041:
@@ -95,13 +95,14 @@ DRW_DBG("\n***************************** parsing table entry *******************
         DRW_DBG(" Object size: "); DRW_DBG(objSize); DRW_DBG("\n");
     }
     if (version > DRW::AC1021) {//2010+
-        duint32 ms = buf->size();
+        duint32 ms =static_cast<duint32>(buf->size());
         objSize = ms*8 - bs;
         DRW_DBG(" Object size: "); DRW_DBG(objSize); DRW_DBG("\n");
     }
     if (strBuf != NULL && version > DRW::AC1018) {//2007+
         strBuf->moveBitPos(objSize-1);
-        DRW_DBG(" strBuf strbit pos 2007: "); DRW_DBG(strBuf->getPosition()); DRW_DBG(" strBuf bpos 2007: "); DRW_DBG(strBuf->getBitPos()); DRW_DBG("\n");
+        DRW_DBG(" strBuf strbit pos 2007: "); DRW_DBG(strBuf->getPosition()); DRW_DBG(" strBuf bpos 2007: ");
+        DRW_DBG(strBuf->getBitPos()); DRW_DBG("\n");
         if (strBuf->getBit() == 1){
             DRW_DBG("DRW_TableEntry::parseDwg string bit is 1\n");
             strBuf->moveBitPos(-17);
@@ -111,7 +112,7 @@ DRW_DBG("\n***************************** parsing table entry *******************
                 DRW_DBG("\nDRW_TableEntry::parseDwg string 0x8000 bit is set");
                 strBuf->moveBitPos(-33);//RLZ pending to verify
                 duint16 hiSize = strBuf->getRawShort16();
-                strDataSize = ((strDataSize&0x7fff) | (hiSize<<15));
+                strDataSize = static_cast<duint16>((strDataSize&0x7fff) | (hiSize<<15));
             }
             strBuf->moveBitPos( -strDataSize -16); //-14
             DRW_DBG("strBuf start strDataSize pos 2007: "); DRW_DBG(strBuf->getPosition()); DRW_DBG(" strBuf bpos 2007: "); DRW_DBG(strBuf->getBitPos()); DRW_DBG("\n");
@@ -132,7 +133,7 @@ DRW_DBG("\n***************************** parsing table entry *******************
         duint8 *tmpExtData = new duint8[extDataSize];
         buf->getBytes(tmpExtData, extDataSize);
         dwgBuffer tmpExtDataBuf(tmpExtData, extDataSize, buf->decoder);
-        int pos = tmpExtDataBuf.getPosition();
+        int pos = static_cast<int>(tmpExtDataBuf.getPosition());
         int bpos = tmpExtDataBuf.getBitPos();
         DRW_DBG("ext data pos: "); DRW_DBG(pos); DRW_DBG("."); DRW_DBG(bpos); DRW_DBG("\n");
         duint8 dxfCode = tmpExtDataBuf.getRawChar8();
@@ -458,7 +459,7 @@ void DRW_LType::parseCode(int code, dxfReader *reader){
 /*TODO: control max length permited */
 void DRW_LType::update(){
     double d =0;
-    size = (int)path.size();
+    size = static_cast<int>(path.size());
     for (int i = 0;  i< size; i++){
         d += fabs(path.at(i));
     }

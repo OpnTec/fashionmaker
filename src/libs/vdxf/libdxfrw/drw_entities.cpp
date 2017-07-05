@@ -135,7 +135,7 @@ bool DRW_Entity::parseCode(int code, dxfReader *reader){
     case 1033:
         if (curr)
             curr->setCoordZ(reader->getDouble());
-        curr=NULL;
+        curr=nullptr;
         break;
     case 1040:
     case 1041:
@@ -159,7 +159,7 @@ bool DRW_Entity::parseDxfGroups(int code, dxfReader *reader){
     int nc;
     std::string appName= reader->getString();
     if (!appName.empty() && appName.at(0)== '{'){
-        curr.addString(appName.substr(1, (int) appName.size()-1));
+        curr.addString(appName.substr(1, static_cast<int>(appName.size()-1)));
         curr.code = code;
         ls.push_back(curr);
         while (code !=102 && appName.at(0)== '}'){
@@ -205,7 +205,7 @@ bool DRW_Entity::parseDwg(DRW::Version version, dwgBuffer *buf, dwgBuffer* strBu
         DRW_DBG(" Object size: "); DRW_DBG(objSize); DRW_DBG("\n");
     }
     if (version > DRW::AC1021) {//2010+
-        duint32 ms = buf->size();
+        duint32 ms = static_cast<duint32>(buf->size());
         objSize = ms*8 - bs;
         DRW_DBG(" Object size: "); DRW_DBG(objSize); DRW_DBG("\n");
     }
@@ -222,7 +222,7 @@ bool DRW_Entity::parseDwg(DRW::Version version, dwgBuffer *buf, dwgBuffer* strBu
                 DRW_DBG("\nDRW_TableEntry::parseDwg string 0x8000 bit is set");
                 strBuf->moveBitPos(-33);//RLZ pending to verify
                 duint16 hiSize = strBuf->getRawShort16();
-                strDataSize = ((strDataSize&0x7fff) | (hiSize<<15));
+                strDataSize = static_cast<duint16>((strDataSize&0x7fff) | (hiSize<<15));
             }
             strBuf->moveBitPos( -strDataSize -16); //-14
             DRW_DBG("strBuf start strDataSize pos 2007: "); DRW_DBG(strBuf->getPosition()); DRW_DBG(" strBuf bpos 2007: "); DRW_DBG(strBuf->getBitPos()); DRW_DBG("\n");
@@ -290,7 +290,7 @@ bool DRW_Entity::parseDwg(DRW::Version version, dwgBuffer *buf, dwgBuffer* strBu
 //        entmode = 2;
     else if(entmode ==2)
         entmode = 0;
-    space = (DRW::Space)entmode; //RLZ verify cast values
+    space = static_cast<DRW::Space>(entmode); //RLZ verify cast values
     DRW_DBG("entmode: "); DRW_DBG(entmode);
     numReactors = buf->getBitShort(); //BS
     DRW_DBG(", numReactors: "); DRW_DBG(numReactors);
@@ -493,7 +493,7 @@ void DRW_Point::parseCode(int code, dxfReader *reader){
 }
 
 bool DRW_Point::parseDwg(DRW::Version version, dwgBuffer *buf, duint32 bs){
-    bool ret = DRW_Entity::parseDwg(version, buf, NULL, bs);
+    bool ret = DRW_Entity::parseDwg(version, buf, nullptr, bs);
     if (!ret)
         return ret;
     DRW_DBG("\n***************************** parsing point *********************************************\n");
@@ -535,7 +535,7 @@ void DRW_Line::parseCode(int code, dxfReader *reader){
 }
 
 bool DRW_Line::parseDwg(DRW::Version version, dwgBuffer *buf, duint32 bs){
-    bool ret = DRW_Entity::parseDwg(version, buf, NULL, bs);
+    bool ret = DRW_Entity::parseDwg(version, buf, nullptr, bs);
     if (!ret)
         return ret;
     DRW_DBG("\n***************************** parsing line *********************************************\n");
@@ -573,7 +573,7 @@ bool DRW_Line::parseDwg(DRW::Version version, dwgBuffer *buf, duint32 bs){
 }
 
 bool DRW_Ray::parseDwg(DRW::Version version, dwgBuffer *buf, duint32 bs){
-    bool ret = DRW_Entity::parseDwg(version, buf, NULL, bs);
+    bool ret = DRW_Entity::parseDwg(version, buf, nullptr, bs);
     if (!ret)
         return ret;
     DRW_DBG("\n***************************** parsing ray/xline *********************************************\n");
@@ -613,7 +613,7 @@ void DRW_Circle::parseCode(int code, dxfReader *reader){
 }
 
 bool DRW_Circle::parseDwg(DRW::Version version, dwgBuffer *buf, duint32 bs){
-    bool ret = DRW_Entity::parseDwg(version, buf, NULL, bs);
+    bool ret = DRW_Entity::parseDwg(version, buf, nullptr, bs);
     if (!ret)
         return ret;
     DRW_DBG("\n***************************** parsing circle *********************************************\n");
@@ -672,7 +672,7 @@ void DRW_Arc::parseCode(int code, dxfReader *reader){
 }
 
 bool DRW_Arc::parseDwg(DRW::Version version, dwgBuffer *buf, duint32 bs){
-    bool ret = DRW_Entity::parseDwg(version, buf, NULL, bs);
+    bool ret = DRW_Entity::parseDwg(version, buf, nullptr, bs);
     if (!ret)
         return ret;
     DRW_DBG("\n***************************** parsing circle arc *********************************************\n");
@@ -730,7 +730,7 @@ void DRW_Ellipse::applyExtrusion(){
 //if ratio > 1 minor axis are greather than major axis, correct it
 void DRW_Ellipse::correctAxis(){
     bool complete = false;
-    if (staparam == endparam) {
+    if (DRW_FuzzyComparePossibleNulls(staparam, endparam)) {
         staparam = 0.0;
         endparam = M_PIx2; //2*M_PI;
         complete = true;
@@ -754,7 +754,7 @@ void DRW_Ellipse::correctAxis(){
 }
 
 bool DRW_Ellipse::parseDwg(DRW::Version version, dwgBuffer *buf, duint32 bs){
-    bool ret = DRW_Entity::parseDwg(version, buf, NULL, bs);
+    bool ret = DRW_Entity::parseDwg(version, buf, nullptr, bs);
     if (!ret)
         return ret;
     DRW_DBG("\n***************************** parsing ellipse *********************************************\n");
@@ -851,7 +851,7 @@ void DRW_Trace::parseCode(int code, dxfReader *reader){
 }
 
 bool DRW_Trace::parseDwg(DRW::Version version, dwgBuffer *buf, duint32 bs){
-    bool ret = DRW_Entity::parseDwg(version, buf, NULL, bs);
+    bool ret = DRW_Entity::parseDwg(version, buf, nullptr, bs);
     if (!ret)
         return ret;
     DRW_DBG("\n***************************** parsing Trace *********************************************\n");
@@ -909,7 +909,7 @@ void DRW_3Dface::parseCode(int code, dxfReader *reader){
 }
 
 bool DRW_3Dface::parseDwg(DRW::Version v, dwgBuffer *buf, duint32 bs){
-    bool ret = DRW_Entity::parseDwg(v, buf, NULL, bs);
+    bool ret = DRW_Entity::parseDwg(v, buf, nullptr, bs);
     if (!ret)
         return ret;
     DRW_DBG("\n***************************** parsing 3Dface *********************************************\n");
@@ -943,7 +943,7 @@ bool DRW_3Dface::parseDwg(DRW::Version v, dwgBuffer *buf, duint32 bs){
         fourPoint.x = buf->getDefaultDouble(thirdPoint.x);
         fourPoint.y = buf->getDefaultDouble(thirdPoint.y);
         fourPoint.z = buf->getDefaultDouble(thirdPoint.z);
-        invisibleflag = has_no_flag ? (int)NoEdge : buf->getBitShort();
+        invisibleflag = has_no_flag ? static_cast<int>(NoEdge) : buf->getBitShort();
     }
     drw_assert(invisibleflag>=NoEdge);
     drw_assert(invisibleflag<=AllEdges);
@@ -1041,7 +1041,7 @@ void DRW_Insert::parseCode(int code, dxfReader *reader){
 
 bool DRW_Insert::parseDwg(DRW::Version version, dwgBuffer *buf, duint32 bs){
     dint32 objCount = 0;
-    bool ret = DRW_Entity::parseDwg(version, buf, NULL, bs);
+    bool ret = DRW_Entity::parseDwg(version, buf, nullptr, bs);
     if (!ret)
         return ret;
     DRW_DBG("\n************************** parsing insert/minsert *****************************************\n");
@@ -1187,7 +1187,7 @@ void DRW_LWPolyline::parseCode(int code, dxfReader *reader){
 }
 
 bool DRW_LWPolyline::parseDwg(DRW::Version version, dwgBuffer *buf, duint32 bs){
-    bool ret = DRW_Entity::parseDwg(version, buf, NULL, bs);
+    bool ret = DRW_Entity::parseDwg(version, buf, nullptr, bs);
     if (!ret)
         return ret;
     DRW_DBG("\n***************************** parsing LWPolyline *******************************************\n");
@@ -1307,10 +1307,10 @@ void DRW_Text::parseCode(int code, dxfReader *reader){
         textgen = reader->getInt32();
         break;
     case 72:
-        alignH = (HAlign)reader->getInt32();
+        alignH = static_cast<HAlign>(reader->getInt32());
         break;
     case 73:
-        alignV = (VAlign)reader->getInt32();
+        alignV = static_cast<VAlign>(reader->getInt32());
         break;
     case 1:
         text = reader->getUtf8String();
@@ -1393,11 +1393,11 @@ bool DRW_Text::parseDwg(DRW::Version version, dwgBuffer *buf, duint32 bs){
         DRW_DBG("textgen: "); DRW_DBG(textgen);
     }
     if ( !(data_flags & 0x40) ) { /* Horiz align. BS 72 present if !(DataFlags & 0x40) */
-        alignH = (HAlign)buf->getBitShort();
+        alignH = static_cast<HAlign>(buf->getBitShort());
         DRW_DBG(", alignH: "); DRW_DBG(alignH);
     }
     if ( !(data_flags & 0x80) ) { /* Vert align. BS 73 present if !(DataFlags & 0x80) */
-        alignV = (VAlign)buf->getBitShort();
+        alignV = static_cast<VAlign>(buf->getBitShort());
         DRW_DBG(", alignV: "); DRW_DBG(alignV);
     }
     DRW_DBG("\n");
@@ -1432,7 +1432,10 @@ void DRW_MText::parseCode(int code, dxfReader *reader){
         break;
     case 71: {
         // Attachment point
-        Attach a = (Attach)reader->getInt32();
+        Attach a = static_cast<Attach>(reader->getInt32());
+
+        QT_WARNING_PUSH
+        QT_WARNING_DISABLE_GCC("-Wswitch-default")
 
         switch(a) {
             case TopLeft:
@@ -1472,6 +1475,8 @@ void DRW_MText::parseCode(int code, dxfReader *reader){
                 alignH = HRight;
                 break;
         }
+
+        QT_WARNING_POP
     } break;
     case 72:
         // To prevent redirection to DRW_Text::parseCode.
@@ -1606,7 +1611,7 @@ void DRW_Polyline::parseCode(int code, dxfReader *reader){
 //0x10 polyline 3D bit 4(8) set
 //0x1D PFACE bit 5(16) set
 bool DRW_Polyline::parseDwg(DRW::Version version, dwgBuffer *buf, duint32 bs){
-    bool ret = DRW_Entity::parseDwg(version, buf, NULL, bs);
+    bool ret = DRW_Entity::parseDwg(version, buf, nullptr, bs);
     if (!ret)
         return ret;
     DRW_DBG("\n***************************** parsing polyline *********************************************\n");
@@ -1721,7 +1726,7 @@ void DRW_Vertex::parseCode(int code, dxfReader *reader){
 //0x0D PFACE
 //0x0E PFACE FACE
 bool DRW_Vertex::parseDwg(DRW::Version version, dwgBuffer *buf, duint32 bs, double el){
-    bool ret = DRW_Entity::parseDwg(version, buf, NULL, bs);
+    bool ret = DRW_Entity::parseDwg(version, buf, nullptr, bs);
     if (!ret)
         return ret;
     DRW_DBG("\n***************************** parsing pline Vertex *********************************************\n");
@@ -2145,7 +2150,7 @@ void DRW_Spline::parseCode(int code, dxfReader *reader){
 }
 
 bool DRW_Spline::parseDwg(DRW::Version version, dwgBuffer *buf, duint32 bs){
-    bool ret = DRW_Entity::parseDwg(version, buf, NULL, bs);
+    bool ret = DRW_Entity::parseDwg(version, buf, nullptr, bs);
     if (!ret)
         return ret;
     DRW_DBG("\n***************************** parsing spline *********************************************\n");
@@ -2416,7 +2421,7 @@ void DRW_Dimension::parseCode(int code, dxfReader *reader){
         break;
     case 42:
         actual = reader->getDouble();
-        hasActual = (actual != 0.0);
+        hasActual = not qFuzzyIsNull(actual);
         break;
     case 53:
         rot = reader->getDouble();

@@ -43,7 +43,7 @@ class SaveToolOptions : public VUndoCommand
     Q_OBJECT
 public:
     SaveToolOptions(const QDomElement &oldXml, const QDomElement &newXml, VAbstractPattern *doc, const quint32 &id,
-                    QUndoCommand *parent = 0);
+                    QUndoCommand *parent = nullptr);
     virtual ~SaveToolOptions() Q_DECL_OVERRIDE;
     virtual void undo() Q_DECL_OVERRIDE;
     virtual void redo() Q_DECL_OVERRIDE;

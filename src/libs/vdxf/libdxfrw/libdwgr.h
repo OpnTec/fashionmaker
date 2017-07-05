@@ -14,7 +14,7 @@
 #define LIBDWGR_H
 
 #include <string>
-//#include <deque>
+#include <QtGlobal>
 #include "drw_entities.h"
 #include "drw_objects.h"
 #include "drw_classes.h"
@@ -37,6 +37,7 @@ private:
     bool open(std::istream *stream);
     bool processDwg();
 private:
+    Q_DISABLE_COPY(dwgR)
     DRW::Version version;
     DRW::error error;
     std::string fileName;

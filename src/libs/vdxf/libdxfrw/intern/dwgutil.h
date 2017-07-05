@@ -29,8 +29,16 @@ public:
 
 class dwgCompressor {
 public:
-    dwgCompressor(){}
-    ~dwgCompressor(){}
+    dwgCompressor()
+        : bufC(),
+          bufD(),
+          sizeC(),
+          sizeD(),
+          pos(),
+          rpos()
+    {}
+
+    ~dwgCompressor() = default;
 
     void decompress18(duint8 *cbuf, duint8 *dbuf, duint32 csize, duint32 dsize);
     static void decrypt18Hdr(duint8 *buf, duint32 size, duint32 offset);

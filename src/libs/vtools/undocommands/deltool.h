@@ -42,7 +42,7 @@ class DelTool : public VUndoCommand
 {
     Q_OBJECT
 public:
-    DelTool(VAbstractPattern *doc, quint32 id, QUndoCommand *parent = 0);
+    DelTool(VAbstractPattern *doc, quint32 id, QUndoCommand *parent = nullptr);
     virtual ~DelTool() Q_DECL_OVERRIDE;
     virtual void undo() Q_DECL_OVERRIDE;
     virtual void redo() Q_DECL_OVERRIDE;

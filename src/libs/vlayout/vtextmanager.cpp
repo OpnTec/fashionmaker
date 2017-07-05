@@ -264,10 +264,10 @@ void VTextManager::Update(const QString& qsName, const VPieceLabelData& data)
     }
     // MCP
     QStringList qslMaterials;
-    qslMaterials << QApplication::translate("Detail", "Fabric", 0)
-                 << QApplication::translate("Detail", "Lining", 0)
-                 << QApplication::translate("Detail", "Interfacing", 0)
-                 << QApplication::translate("Detail", "Interlining", 0);
+    qslMaterials << QApplication::translate("Detail", "Fabric", nullptr)
+                 << QApplication::translate("Detail", "Lining", nullptr)
+                 << QApplication::translate("Detail", "Interfacing", nullptr)
+                 << QApplication::translate("Detail", "Interlining", nullptr);
     QString qsText = QLatin1String("%1, ") + tr("cut") + QLatin1String(" %2%3");
     QStringList qslPlace;
     qslPlace << "" << QLatin1String(" ") + tr("on fold");

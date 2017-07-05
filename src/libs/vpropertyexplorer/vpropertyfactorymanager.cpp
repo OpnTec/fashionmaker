@@ -53,7 +53,7 @@ VPE::VPropertyFactoryManager::~VPropertyFactoryManager()
     delete d_ptr;
     if (this == DefaultManager)
     {
-        DefaultManager = NULL;
+        DefaultManager = nullptr;
     }
 }
 
@@ -94,7 +94,7 @@ void VPE::VPropertyFactoryManager::unregisterFactory(VAbstractPropertyFactory* f
     else
     {
         // Only remove one type
-        if (d_ptr->Factories.value(type, NULL) == factory)
+        if (d_ptr->Factories.value(type, nullptr) == factory)
         {
             d_ptr->Factories.remove(type);
         }
@@ -113,7 +113,7 @@ bool VPE::VPropertyFactoryManager::isRegistered(VAbstractPropertyFactory* factor
 
 VPE::VAbstractPropertyFactory* VPE::VPropertyFactoryManager::getFactory(const QString& type)
 {
-    return d_ptr->Factories.value(type, NULL);
+    return d_ptr->Factories.value(type, nullptr);
 }
 
 

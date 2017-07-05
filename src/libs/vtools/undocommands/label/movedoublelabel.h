@@ -44,7 +44,7 @@ class MoveDoubleLabel : public MoveAbstractLabel
     Q_OBJECT
 public:
     MoveDoubleLabel(VAbstractPattern *doc, const double &x, const double &y, DoublePoint type,
-                    quint32 toolId, quint32 pointId, QUndoCommand *parent = 0);
+                    quint32 toolId, quint32 pointId, QUndoCommand *parent = nullptr);
     virtual ~MoveDoubleLabel() Q_DECL_OVERRIDE;
 
     virtual bool mergeWith(const QUndoCommand *command) Q_DECL_OVERRIDE;

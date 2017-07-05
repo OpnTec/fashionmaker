@@ -17,6 +17,7 @@
 #include <string>
 #include <vector>
 #include <list>
+#include <QtGlobal>
 #include "drw_base.h"
 
 class dxfReader;
@@ -99,54 +100,87 @@ class DRW_Entity {
     SETENTFRIENDS
 public:
     //initializes default values
-    DRW_Entity() {
-        eType = DRW::UNKNOWN;
-        handle = parentHandle = DRW::NoHandle; //no handle (0)
-        lineType = "BYLAYER";
-        color = DRW::ColorByLayer; // default BYLAYER (256)
-        ltypeScale = 1.0;
-        visible = true;
-        layer = "0";
-        lWeight = DRW_LW_Conv::widthByLayer; // default BYLAYER  (dxf -1, dwg 29)
-        space = DRW::ModelSpace; // default ModelSpace (0)
-        haveExtrusion = false;
-        color24 = -1; //default -1 not set
-        numProxyGraph = 0;
-        shadow = DRW::CastAndReceieveShadows;
-        material = DRW::MaterialByLayer;
-        plotStyle = DRW::DefaultPlotStyle;
-        transparency = DRW::Opaque;
-        nextEntLink = prevEntLink = 0;
-        numReactors = xDictFlag = 0;
-        curr = NULL;
-        ownerHandle= false;
-    }
+    DRW_Entity()
+        : eType(DRW::UNKNOWN),
+          handle(DRW::NoHandle),
+          appData(),
+          parentHandle(DRW::NoHandle),
+          space(DRW::ModelSpace),
+          layer("0"),
+          lineType("BYLAYER"),
+          material(DRW::MaterialByLayer),
+          color(DRW::ColorByLayer),
+          lWeight(DRW_LW_Conv::widthByLayer),
+          ltypeScale(1.0),
+          visible(true),
+          numProxyGraph(0),
+          proxyGraphics(),
+          color24(-1),
+          colorName(),
+          transparency(DRW::Opaque),
+          plotStyle(DRW::DefaultPlotStyle),
+          shadow(DRW::CastAndReceieveShadows),
+          haveExtrusion(false),
+          extData(),
+          haveNextLinks(),
+          plotFlags(),
+          ltFlags(),
+          materialFlag(),
+          shadowFlag(),
+          lTypeH(),
+          layerH(),
+          nextEntLink(0),
+          prevEntLink(0),
+          ownerHandle(false),
+          xDictFlag(0),
+          numReactors(0),
+          objSize(),
+          oType(),
+          extAxisX(),
+          extAxisY(),
+          curr(nullptr)
+    {}
 
-    DRW_Entity(const DRW_Entity& e) {
-        eType = e.eType;
-        handle = e.handle;
-        parentHandle = e.parentHandle; //no handle (0)
-        lineType = e.lineType;
-        color = e.color; // default BYLAYER (256)
-        ltypeScale = e.ltypeScale;
-        visible = e.visible;
-        layer = e.layer;
-        lWeight = e.lWeight;
-        space = e.space;
-        haveExtrusion = e.haveExtrusion;
-        color24 = e.color24; //default -1 not set
-        numProxyGraph = e.numProxyGraph;
-        shadow = e.shadow;
-        material = e.material;
-        plotStyle = e.plotStyle;
-        transparency = e.transparency;
-        nextEntLink = e.nextEntLink;
-        prevEntLink = e.prevEntLink;
-        numReactors = e.numReactors;
-        xDictFlag = e.xDictFlag;
-        curr = NULL;
-        ownerHandle= false;
-//        curr = e.curr;
+    DRW_Entity(const DRW_Entity& e)
+        : eType(e.eType),
+          handle(e.handle),
+          appData(),
+          parentHandle(e.parentHandle),
+          space(e.space),
+          layer(e.layer),
+          lineType(e.lineType),
+          material(e.material),
+          color(e.color),
+          lWeight(e.lWeight),
+          ltypeScale(e.ltypeScale),
+          visible(e.visible),
+          numProxyGraph(e.numProxyGraph),
+          proxyGraphics(),
+          color24(e.color24),
+          colorName(),
+          transparency(e.transparency),
+          plotStyle(e.plotStyle),
+          shadow(e.shadow),
+          haveExtrusion(e.haveExtrusion),
+          extData(),
+          haveNextLinks(),
+          plotFlags(),
+          ltFlags(),
+          materialFlag(),
+          shadowFlag(),
+          lTypeH(),
+          layerH(),
+          nextEntLink(e.nextEntLink),
+          prevEntLink(e.prevEntLink),
+          ownerHandle(false),
+          xDictFlag(e.xDictFlag),
+          numReactors(e.numReactors),
+          objSize(),
+          oType(),
+          extAxisX(),
+          extAxisY(),
+          curr(nullptr/*e.curr*/)
+    {
         for (std::vector<DRW_Variant*>::const_iterator it=e.extData.begin(); it!=e.extData.end(); ++it){
             extData.push_back(new DRW_Variant(*(*it)));
         }
@@ -233,6 +267,7 @@ protected: //only for read dwg
     dint16 oType;
 
 private:
+    DRW_Entity &operator=(const DRW_Entity &) Q_DECL_EQ_DELETE;
     DRW_Coord extAxisX;
     DRW_Coord extAxisY;
     DRW_Variant* curr;
@@ -247,11 +282,12 @@ private:
 class DRW_Point : public DRW_Entity {
     SETENTFRIENDS
 public:
-    DRW_Point() {
+    DRW_Point()
+        : basePoint(),
+          thickness(0),
+          extPoint(DRW_Coord(0, 0, 1))
+    {
         eType = DRW::POINT;
-        basePoint.z = extPoint.x = extPoint.y = 0;
-        extPoint.z = 1;
-        thickness = 0;
     }
 
     virtual void applyExtrusion(){}
@@ -276,9 +312,10 @@ public:
 class DRW_Line : public DRW_Point {
     SETENTFRIENDS
 public:
-    DRW_Line() {
+    DRW_Line()
+        : secPoint()
+    {
         eType = DRW::LINE;
-        secPoint.z = 0;
     }
 
     virtual void applyExtrusion(){}
@@ -326,7 +363,9 @@ public:
 class DRW_Circle : public DRW_Point {
     SETENTFRIENDS
 public:
-    DRW_Circle() {
+    DRW_Circle()
+        : radious()
+    {
         eType = DRW::CIRCLE;
     }
 
@@ -348,9 +387,12 @@ public:
 class DRW_Arc : public DRW_Circle {
     SETENTFRIENDS
 public:
-    DRW_Arc() {
+    DRW_Arc()
+        : staangle(),
+          endangle(),
+          isccw(1)
+    {
         eType = DRW::ARC;
-        isccw = 1;
     }
 
     virtual void applyExtrusion();
@@ -390,9 +432,13 @@ public:
 class DRW_Ellipse : public DRW_Line {
     SETENTFRIENDS
 public:
-    DRW_Ellipse() {
+    DRW_Ellipse()
+        : ratio(),
+          staparam(),
+          endparam(),
+          isccw(1)
+    {
         eType = DRW::ELLIPSE;
-        isccw = 1;
     }
 
     void toPolyline(DRW_Polyline *pol, int parts = 128);
@@ -422,10 +468,11 @@ public:
 class DRW_Trace : public DRW_Line {
     SETENTFRIENDS
 public:
-    DRW_Trace() {
+    DRW_Trace()
+        : thirdPoint(),
+          fourPoint()
+    {
         eType = DRW::TRACE;
-        thirdPoint.z = 0;
-        fourPoint.z = 0;
     }
 
     virtual void applyExtrusion();
@@ -492,9 +539,10 @@ public:
         AllEdges = 0x0F
     };
 
-    DRW_3Dface() {
+    DRW_3Dface()
+        : invisibleflag(0)
+    {
         eType = DRW::E3DFACE;
-        invisibleflag = 0;
     }
 
     virtual void applyExtrusion(){}
@@ -508,7 +556,7 @@ public:
     //! fourth corner in WCS
     const DRW_Coord & fourthCorner() { return fourPoint; }
     //! edge visibility flags
-    InvisibleEdgeFlags edgeFlags() { return (InvisibleEdgeFlags)invisibleflag; }
+    InvisibleEdgeFlags edgeFlags() { return static_cast<InvisibleEdgeFlags>(invisibleflag); }
 
 protected:
     //! interpret code in dxf reading process or dispatch to inherited class
@@ -529,12 +577,13 @@ public:
 class DRW_Block : public DRW_Point {
     SETENTFRIENDS
 public:
-    DRW_Block() {
+    DRW_Block()
+        : name("*U0"),
+          flags(0),
+          isEnd(false)
+    {
         eType = DRW::BLOCK;
         layer = "0";
-        flags = 0;
-        name = "*U0";
-        isEnd = false;
     }
 
     virtual void applyExtrusion(){}
@@ -559,16 +608,20 @@ private:
 class DRW_Insert : public DRW_Point {
     SETENTFRIENDS
 public:
-    DRW_Insert() {
+    DRW_Insert()
+        : name(),
+          xscale(1),
+          yscale(1),
+          zscale(1),
+          angle(0),
+          colcount(1),
+          rowcount(1),
+          colspace(0),
+          rowspace(0),
+          blockRecH(),
+          seqendH()
+    {
         eType = DRW::INSERT;
-        xscale = 1;
-        yscale = 1;
-        zscale = 1;
-        angle = 0;
-        colcount = 1;
-        rowcount = 1;
-        colspace = 0;
-        rowspace = 0;
     }
 
     virtual void applyExtrusion(){DRW_Point::applyExtrusion();}
@@ -600,27 +653,33 @@ public: //only for read dwg
 class DRW_LWPolyline : public DRW_Entity {
     SETENTFRIENDS
 public:
-    DRW_LWPolyline() {
+    DRW_LWPolyline()
+        : vertexnum(),
+          flags(0),
+          width(0.0),
+          elevation(0.0),
+          thickness(0.0),
+          extPoint(DRW_Coord(0, 0, 1)),
+          vertex(nullptr),
+          vertlist()
+    {
         eType = DRW::LWPOLYLINE;
-        elevation = thickness = width = 0.0;
-        flags = 0;
-        extPoint.x = extPoint.y = 0;
-        extPoint.z = 1;
-        vertex = NULL;
     }
 
-    DRW_LWPolyline(const DRW_LWPolyline& p):DRW_Entity(p){
+    DRW_LWPolyline(const DRW_LWPolyline& p)
+        : DRW_Entity(p),
+          vertexnum(),
+          flags(p.flags),
+          width(p.width),
+          elevation(p.elevation),
+          thickness(p.thickness),
+          extPoint(p.extPoint),
+          vertex(nullptr),
+          vertlist()
+    {
         this->eType = DRW::LWPOLYLINE;
-        this->elevation = p.elevation;
-        this->thickness = p.thickness;
-        this->width = p.width;
-        this->flags = p.flags;
-        this->extPoint = p.extPoint;
-        this->vertex = NULL;
         for (unsigned i=0; i<p.vertlist.size(); i++)// RLZ ok or new
           this->vertlist.push_back( new DRW_Vertex2D( *(p.vertlist.at(i)) ) );
-
-        this->vertex = NULL;
     }
 
     ~DRW_LWPolyline() {
@@ -658,6 +717,8 @@ public:
     DRW_Coord extPoint;       /*!<  Dir extrusion normal vector, code 210, 220 & 230 */
     DRW_Vertex2D *vertex;       /*!< current vertex to add data */
     std::vector<DRW_Vertex2D *> vertlist;  /*!< vertex list */
+private:
+    DRW_LWPolyline &operator=(const DRW_LWPolyline &) Q_DECL_EQ_DELETE;
 };
 
 //! Class to handle insert entries
@@ -686,15 +747,19 @@ public:
             HFit           /*!< fit into point = 5 (if VAlign==0) */
         };
 
-    DRW_Text() {
+    DRW_Text()
+        : height(),
+          text(),
+          angle(0),
+          widthscale(1),
+          oblique(0),
+          style("STANDARD"),
+          textgen(0),
+          alignH(HLeft),
+          alignV(VBaseLine),
+          styleH()
+    {
         eType = DRW::TEXT;
-        angle = 0;
-        widthscale = 1;
-        oblique = 0;
-        style = "STANDARD";
-        textgen = 0;
-        alignH = HLeft;
-        alignV = VBaseLine;
     }
 
     virtual void applyExtrusion(){} //RLZ TODO
@@ -737,12 +802,13 @@ public:
         BottomRight
     };
 
-    DRW_MText() {
+    DRW_MText()
+        : interlin(1),
+          haveXAxis(false)//if true needed to recalculate angle
+    {
         eType = DRW::MTEXT;
-        interlin = 1;
-        alignV = (VAlign)TopLeft;
-        textgen = 1;
-        haveXAxis = false;    //if true needed to recalculate angle
+        alignV = static_cast<VAlign>(TopLeft);
+        textgen = 1;   
     }
 
 protected:
@@ -764,20 +830,36 @@ private:
 class DRW_Vertex : public DRW_Point {
     SETENTFRIENDS
 public:
-    DRW_Vertex() {
+    DRW_Vertex()
+        : stawidth(0),
+          endwidth(0),
+          bulge(0),
+          flags(0),
+          tgdir(),
+          vindex1(0),
+          vindex2(0),
+          vindex3(0),
+          vindex4(0),
+          identifier(0)
+    {
         eType = DRW::VERTEX;
-        stawidth = endwidth = bulge = 0;
-        vindex1 = vindex2 = vindex3 = vindex4 = 0;
-        flags = identifier = 0;
     }
-    DRW_Vertex(double sx, double sy, double sz, double b) {
-        stawidth = endwidth = 0;
-        vindex1 = vindex2 = vindex3 = vindex4 = 0;
-        flags = identifier = 0;
+
+    DRW_Vertex(double sx, double sy, double sz, double b)
+        : stawidth(0),
+          endwidth(0),
+          bulge(b),
+          flags(0),
+          tgdir(),
+          vindex1(0),
+          vindex2(0),
+          vindex3(0),
+          vindex4(0),
+          identifier(0)
+    {
         basePoint.x = sx;
-        basePoint.y =sy;
-        basePoint.z =sz;
-        bulge = b;
+        basePoint.y = sy;
+        basePoint.z = sz;
     }
 
 protected:
@@ -808,23 +890,41 @@ public:
 class DRW_Polyline : public DRW_Point {
     SETENTFRIENDS
 public:
-    DRW_Polyline() {
+    DRW_Polyline()
+        : flags(0),
+          defstawidth(0.0),
+          defendwidth(0.0),
+          vertexcount(0),
+          facecount(0),
+          smoothM(0),
+          smoothN(0),
+          curvetype(0),
+          vertlist(),
+          hadlesList(),
+          firstEH(),
+          lastEH(),
+          seqEndH()
+    {
         eType = DRW::POLYLINE;
-        defstawidth = defendwidth = 0.0;
         basePoint.x = basePoint.y = 0.0;
-        flags = vertexcount = facecount = 0;
-        smoothM = smoothN = curvetype = 0;
     }
     
-    DRW_Polyline(const DRW_Polyline& p) : DRW_Point(p) {
-        flags       = p.flags      ;
-        defstawidth = p.defstawidth;
-        defendwidth = p.defendwidth;
-        vertexcount = p.vertexcount;
-        facecount   = p.facecount  ;
-        smoothM     = p.smoothM    ;
-        smoothN     = p.smoothN    ;
-        curvetype   = p.curvetype  ;
+    DRW_Polyline(const DRW_Polyline& p)
+        : DRW_Point(p),
+          flags(p.flags),
+          defstawidth(p.defstawidth),
+          defendwidth(p.defendwidth),
+          vertexcount(p.vertexcount),
+          facecount(p.facecount),
+          smoothM(p.smoothM),
+          smoothN(p.smoothN),
+          curvetype(p.curvetype),
+          vertlist(),
+          hadlesList(),
+          firstEH(),
+          lastEH(),
+          seqEndH()
+    {
         for (unsigned i=0; i<p.vertlist.size(); i++)// RLZ ok or new
           this->vertlist.push_back( new DRW_Vertex( *(p.vertlist.at(i)) ) );
     }
@@ -878,26 +978,49 @@ private:
 class DRW_Spline : public DRW_Entity {
     SETENTFRIENDS
 public:
-    DRW_Spline() {
+    DRW_Spline()
+        : normalVec(),
+          tgStart(),
+          tgEnd(),
+          flags(0),
+          degree(),
+          nknots(0),
+          ncontrol(0),
+          nfit(0),
+          tolknot(0.0000001),
+          tolcontrol(0.0000001),
+          tolfit(0.0000001),
+          knotslist(),
+          weightlist(),
+          controllist(),
+          fitlist(),
+          controlpoint(),
+          fitpoint()
+    {
         eType = DRW::SPLINE;
-        flags = nknots = ncontrol = nfit = 0;
-        tolknot = tolcontrol = tolfit = 0.0000001;
-
     }
     
-    DRW_Spline(const DRW_Spline& p):DRW_Entity(p){
+    DRW_Spline(const DRW_Spline& p)
+        : DRW_Entity(p),
+          normalVec(p.normalVec),
+          tgStart(p.tgStart),
+          tgEnd(p.tgEnd),
+          flags(p.flags),
+          degree(p.degree),
+          nknots(p.nknots),
+          ncontrol(p.ncontrol),
+          nfit(p.nfit),
+          tolknot(p.tolknot),
+          tolcontrol(p.tolcontrol),
+          tolfit(p.tolfit),
+          knotslist(),
+          weightlist(),
+          controllist(),
+          fitlist(),
+          controlpoint(),
+          fitpoint()
+    {
         eType        = DRW::SPLINE;
-        normalVec    = p.normalVec ;
-        tgStart      = p.tgStart   ;
-        tgEnd        = p.tgEnd     ;
-        flags        = p.flags     ;
-        degree       = p.degree    ;
-        nknots       = p.nknots    ;
-        ncontrol     = p.ncontrol  ;
-        nfit         = p.nfit      ;
-        tolknot      = p.tolknot   ;
-        tolcontrol   = p.tolcontrol;
-        tolfit       = p.tolfit    ;
         
         for(double v : p.knotslist) knotslist.push_back(v);
         for(double v : p.weightlist) weightlist.push_back(v);
@@ -943,6 +1066,7 @@ public:
     std::vector<DRW_Coord *> fitlist;      /*!< fit points list, code 11, 21 & 31 */
 
 private:
+    DRW_Spline &operator=(const DRW_Spline &) Q_DECL_EQ_DELETE;
     DRW_Coord *controlpoint;   /*!< current control point to add data */
     DRW_Coord *fitpoint;       /*!< current fit point to add data */
 };
@@ -954,10 +1078,11 @@ private:
 */
 class DRW_HatchLoop {
 public:
-    DRW_HatchLoop(int t) {
-        type = t;
-        numedges = 0;
-    }
+    DRW_HatchLoop(int t)
+        : type(t),
+          numedges(0),
+          objlist()
+    {}
 
     ~DRW_HatchLoop() {
         // for(DRW_LWPolyline *item : pollist) delete item;
@@ -965,7 +1090,7 @@ public:
     }
 
     void update() {
-        numedges = (int)objlist.size();
+        numedges = static_cast<int>(objlist.size());
     }
 
 public:
@@ -985,14 +1110,30 @@ public:
 class DRW_Hatch : public DRW_Point {
     SETENTFRIENDS
 public:
-    DRW_Hatch() {
+    DRW_Hatch()
+        : name(),
+          solid(1),
+          associative(0),
+          hstyle(0),
+          hpattern(1),
+          doubleflag(0),
+          loopsnum(0),
+          angle(0.0),
+          scale(0.0),
+          deflines(0),
+          looplist(),
+          loop(nullptr),
+          line(),
+          arc(),
+          ellipse(),
+          spline(),
+          pline(),
+          pt(),
+          plvert(),
+          ispol()
+    {
         eType = DRW::HATCH;
-        angle = scale = 0.0;
         basePoint.x = basePoint.y = basePoint.z = 0.0;
-        loopsnum = hstyle = associative = 0;
-        solid = hpattern = 1;
-        deflines = doubleflag = 0;
-        loop = NULL;
         clearEntities();
     }
 
@@ -1025,13 +1166,14 @@ public:
     std::vector<DRW_HatchLoop *> looplist;  /*!< polyline list */
 
 private:
+    Q_DISABLE_COPY(DRW_Hatch)
     void clearEntities(){
-        pt = line = NULL;
-        pline = NULL;
-        arc = NULL;
-        ellipse = NULL;
-        spline = NULL;
-        plvert = NULL;
+        pt = line = nullptr;
+        pline = nullptr;
+        arc = nullptr;
+        ellipse = nullptr;
+        spline = nullptr;
+        plvert = nullptr;
     }
 
     void addLine() {
@@ -1061,7 +1203,7 @@ private:
     void addSpline() {
         clearEntities();
         if (loop) {
-            pt = NULL;
+            pt = nullptr;
             spline = new DRW_Spline;
             loop->objlist.push_back(spline);
         }
@@ -1086,10 +1228,18 @@ private:
 class DRW_Image : public DRW_Line {
     SETENTFRIENDS
 public:
-    DRW_Image() {
+    DRW_Image()
+        : ref(),
+          vVector(),
+          sizeu(),
+          sizev(),
+          dz(),
+          clip(0),
+          brightness(50),
+          contrast(50),
+          fade(0)
+    {
         eType = DRW::IMAGE;
-        fade = clip = 0;
-        brightness = contrast = 50;
     }
 
 protected:
@@ -1121,48 +1271,66 @@ public:
 class DRW_Dimension : public DRW_Entity {
     SETENTFRIENDS
 public:
-    DRW_Dimension() {
+    DRW_Dimension()
+        : type(0),
+          name(),
+          defPoint(),
+          textPoint(),
+          text(),
+          style("STANDARD"),
+          align(5),
+          linesty(1),
+          linefactor(1.0),
+          rot(0.0),
+          extPoint(DRW_Coord(0, 0, 1.0)),
+          hdir(),
+          clonePoint(),
+          def1(),
+          def2(),
+          angle(0.0),
+          oblique(0.0),
+          circlePoint(),
+          arcPoint(),
+          length(0.0),
+          hasActual(false),
+          actual(0.0),
+          dimStyleH(),
+          blockH()
+    {
         eType = DRW::DIMENSION;
-        type = 0;
-        linesty = 1;
-        linefactor = extPoint.z = 1.0;
-        angle = oblique = rot = 0.0;
-        align = 5;
-        style = "STANDARD";
-        defPoint.z = extPoint.x = extPoint.y = 0;
-        textPoint.z = rot = 0;
-        clonePoint.x = clonePoint.y = clonePoint.z = 0;
-        length = 0.0;
-        hasActual = false;
-        actual = 0.0;
     }
 
-    DRW_Dimension(const DRW_Dimension& d): DRW_Entity(d) {
+    DRW_Dimension(const DRW_Dimension& d)
+        : DRW_Entity(d),
+          type(d.type),
+          name(d.name),
+          defPoint(d.defPoint),
+          textPoint(d.textPoint),
+          text(d.text),
+          style(d.style),
+          align(d.align),
+          linesty(d.linesty),
+          linefactor(d.linefactor),
+          rot(d.rot),
+          extPoint(d.extPoint),
+          hdir(),
+          clonePoint(d.clonePoint),
+          def1(d.def1),
+          def2(d.def2),
+          angle(d.angle),
+          oblique(d.oblique),
+          circlePoint(d.circlePoint),
+          arcPoint(d.arcPoint),
+          length(d.length),
+          hasActual(d.hasActual),
+          actual(d.actual),
+          dimStyleH(),
+          blockH()
+    {
         eType = DRW::DIMENSION;
-        type =d.type;
-        name = d.name;
-        defPoint = d.defPoint;
-        textPoint = d.textPoint;
-        text = d.text;
-        style = d.style;
-        align = d.align;
-        linesty = d.linesty;
-        linefactor = d.linefactor;
-        rot = d.rot;
-        extPoint = d.extPoint;
-        clonePoint = d.clonePoint;
-        def1 = d.def1;
-        def2 = d.def2;
-        angle = d.angle;
-        oblique = d.oblique;
-        arcPoint = d.arcPoint;
-        circlePoint = d.circlePoint;
-        length = d.length;
-        hasActual = d.hasActual;
-        actual = d.actual;
         //RLZ needed a def value for this: hdir = ???
     }
-    virtual ~DRW_Dimension() {}
+    virtual ~DRW_Dimension() = default;
 
     virtual void applyExtrusion(){}
 
@@ -1451,13 +1619,28 @@ protected:
 class DRW_Leader : public DRW_Entity {
     SETENTFRIENDS
 public:
-    DRW_Leader() {
+    DRW_Leader()
+        : style(),
+          arrow(1),
+          leadertype(0),
+          flag(3),
+          hookline(),
+          hookflag(0),
+          textheight(),
+          textwidth(),
+          vertnum(0),
+          coloruse(),
+          annotHandle(),
+          extrusionPoint(DRW_Coord(0, 0, 1.0)),
+          horizdir(),
+          offsetblock(),
+          offsettext(),
+          vertexlist(),
+          vertexpoint(),
+          dimStyleH(),
+          AnnotH()
+    {
         eType = DRW::LEADER;
-        flag = 3;
-        hookflag = vertnum = leadertype = 0;
-        extrusionPoint.x = extrusionPoint.y = 0.0;
-        arrow = 1;
-        extrusionPoint.z = 1.0;
     }
     ~DRW_Leader() {
         for(DRW_Coord *item : vertexlist) delete item;
@@ -1489,6 +1672,7 @@ public:
     std::vector<DRW_Coord *> vertexlist;  /*!< vertex points list, code 10, 20 & 30 */
 
 private:
+    Q_DISABLE_COPY(DRW_Leader)
     DRW_Coord *vertexpoint;   /*!< current control point to add data */
     dwgHandle dimStyleH;
     dwgHandle AnnotH;
@@ -1502,13 +1686,28 @@ private:
 class DRW_Viewport : public DRW_Point {
     SETENTFRIENDS
 public:
-    DRW_Viewport() {
+    DRW_Viewport()
+        : pswidth(205),
+          psheight(156),
+          vpstatus(0),
+          vpID(),
+          centerPX(128.5),
+          centerPY(97.5),
+          snapPX(),
+          snapPY(),
+          snapSpPX(),
+          snapSpPY(),
+          viewDir(),
+          viewTarget(),
+          viewLength(),
+          frontClip(),
+          backClip(),
+          viewHeight(),
+          snapAngle(),
+          twistAngle(),
+          frozenLyCount()
+    {
         eType = DRW::VIEWPORT;
-        vpstatus = 0;
-        pswidth = 205;
-        psheight = 156;
-        centerPX = 128.5;
-        centerPY = 97.5;
     }
 
     virtual void applyExtrusion(){}

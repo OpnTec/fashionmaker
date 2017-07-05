@@ -48,7 +48,7 @@ class DialogPointOfIntersectionCurves : public DialogTool
     Q_OBJECT
 
 public:
-    explicit DialogPointOfIntersectionCurves(const VContainer *data, const quint32 &toolId, QWidget *parent = 0);
+    explicit DialogPointOfIntersectionCurves(const VContainer *data, const quint32 &toolId, QWidget *parent = nullptr);
     virtual ~DialogPointOfIntersectionCurves() Q_DECL_OVERRIDE;
 
     void    SetPointName(const QString &value);

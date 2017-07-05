@@ -49,7 +49,7 @@ class DialogPointFromArcAndTangent : public DialogTool
     Q_OBJECT
 
 public:
-    DialogPointFromArcAndTangent(const VContainer *data, const quint32 &toolId, QWidget *parent = 0);
+    DialogPointFromArcAndTangent(const VContainer *data, const quint32 &toolId, QWidget *parent = nullptr);
     ~DialogPointFromArcAndTangent();
 
 

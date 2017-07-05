@@ -338,7 +338,7 @@ QString QmuParserBase::GetVersion(EParserVersionInfo eInfo)
 void QmuParserBase::AddCallback(const QString &a_strName, const QmuParserCallback &a_Callback,
                                 funmap_type &a_Storage, const QString &a_szCharSet )
 {
-    if (a_Callback.GetAddr()==0)
+    if (a_Callback.GetAddr() == nullptr)
     {
         Error(ecINVALID_FUN_PTR);
     }
@@ -582,7 +582,7 @@ void QmuParserBase::DefineStrConst(const QString &a_strName, const QString &a_st
  */
 void QmuParserBase::DefineVar(const QString &a_sName, qreal *a_pVar)
 {
-    if (a_pVar==0)
+    if (a_pVar == nullptr)
     {
         Error(ecINVALID_VAR_PTR);
     }
@@ -787,7 +787,7 @@ void QmuParserBase::ApplyFunc( QStack<token_type> &a_stOpt, QStack<token_type> &
     assert(m_pTokenReader.get());
 
     // Operator stack empty or does not contain tokens with callback functions
-    if (a_stOpt.empty() || a_stOpt.top().GetFuncAddr()==0 )
+    if (a_stOpt.empty() || a_stOpt.top().GetFuncAddr() == nullptr)
     {
         return;
     }
@@ -1451,7 +1451,7 @@ void QmuParserBase::CreateRPN() const
                     // The opening bracket was popped from the stack now check if there
                     // was a function before this bracket
                     if (stOpt.size() && stOpt.top().GetCode()!=cmOPRT_INFIX && stOpt.top().GetCode()!=cmOPRT_BIN &&
-                            stOpt.top().GetFuncAddr()!=0)
+                            stOpt.top().GetFuncAddr()!=nullptr)
                     {
                         ApplyFunc(stOpt, stVal, iArgCount);
                     }
