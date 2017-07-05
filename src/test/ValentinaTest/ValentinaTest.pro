@@ -64,7 +64,7 @@ SOURCES += \
     tst_vtranslatevars.cpp \
     tst_vabstractpiece.cpp
 
-win32-msvc*:SOURCES += stable.cpp
+*msvc*:SOURCES += stable.cpp
 
 HEADERS += \
     tst_vposter.h \
@@ -97,9 +97,9 @@ include(warnings.pri)
 
 CONFIG(release, debug|release){
     # Release mode
-    !win32-msvc*:CONFIG += silent
+    !*msvc*:CONFIG += silent
     DEFINES += V_NO_ASSERT
-    !unix:*-g++{
+    !unix:*g++*{
         QMAKE_CXXFLAGS += -fno-omit-frame-pointer # Need for exchndl.dll
     }
 
@@ -108,7 +108,7 @@ CONFIG(release, debug|release){
     } else {
         # Turn on debug symbols in release mode on Unix systems.
         # On Mac OS X temporarily disabled. Need find way how to strip binary file.
-        !macx:!win32-msvc*{
+        !macx:!*msvc*{
             QMAKE_CXXFLAGS_RELEASE += -g -gdwarf-3
             QMAKE_CFLAGS_RELEASE += -g -gdwarf-3
             QMAKE_LFLAGS_RELEASE =

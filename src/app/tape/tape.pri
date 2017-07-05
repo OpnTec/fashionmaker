@@ -13,7 +13,7 @@ SOURCES  += \
     $$PWD/dialogs/configpages/tapepreferencesconfigurationpage.cpp \
     $$PWD/dialogs/configpages/tapepreferencespathpage.cpp
 
-win32-msvc*:SOURCES += $$PWD/stable.cpp
+*msvc*:SOURCES += $$PWD/stable.cpp
 
 HEADERS  += \
     $$PWD/tmainwindow.h \

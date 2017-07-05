@@ -77,16 +77,16 @@ include(warnings.pri)
 
 CONFIG(release, debug|release){
     # Release mode
-    !win32-msvc*:CONFIG += silent
+    !*msvc*:CONFIG += silent
 
-    !unix:*-g++{
+    !unix:*g++*{
         QMAKE_CXXFLAGS += -fno-omit-frame-pointer # Need for exchndl.dll
     }
 
     noStripDebugSymbols {
         # do nothing
     } else {
-        !macx:!win32-msvc*{
+        !macx:!*msvc*{
             noDebugSymbols{ # For enable run qmake with CONFIG+=noDebugSymbols
                 # do nothing
             } else {

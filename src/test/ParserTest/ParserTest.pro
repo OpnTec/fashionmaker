@@ -44,7 +44,7 @@ HEADERS += \
 SOURCES += \
     main.cpp
 
-win32-msvc*:SOURCES += stable.cpp
+*msvc*:SOURCES += stable.cpp
 
 # Set using ccache. Function enable_ccache() defined in common.pri.
 $$enable_ccache()
@@ -53,7 +53,7 @@ include(warnings.pri)
 
 CONFIG(release, debug|release){
     # Release mode
-    !win32-msvc*:CONFIG += silent
+    !*msvc*:CONFIG += silent
     DEFINES += QT_NO_DEBUG_OUTPUT
 
     noDebugSymbols{ # For enable run qmake with CONFIG+=noDebugSymbols
@@ -61,7 +61,7 @@ CONFIG(release, debug|release){
     } else {
         # Turn on debug symbols in release mode on Unix systems.
         # On Mac OS X temporarily disabled. Need find way how to strip binary file.
-        !macx:!win32-msvc*:QMAKE_CXXFLAGS_RELEASE += -g -gdwarf-3
+        !macx:!*msvc*:QMAKE_CXXFLAGS_RELEASE += -g -gdwarf-3
     }
 }
 

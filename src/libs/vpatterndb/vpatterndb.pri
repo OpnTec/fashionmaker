@@ -28,7 +28,7 @@ SOURCES += \
     $$PWD/measurements.cpp \
     $$PWD/pmsystems.cpp
 
-win32-msvc*:SOURCES += $$PWD/stable.cpp
+*msvc*:SOURCES += $$PWD/stable.cpp
 
 HEADERS += \
     $$PWD/vcontainer.h \

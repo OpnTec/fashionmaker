@@ -46,7 +46,7 @@ macx{
 }
 
 CONFIG(release, debug|release){
-    !noDebugSymbols:win32:!win32-msvc*{
+    !noDebugSymbols:win32:!*msvc*{
         unset(QMAKE_STRIP)
         QMAKE_STRIP = echo # we do striping manualy
     }
@@ -135,7 +135,7 @@ defineReplace(set_PCH){
         PRECOMPILED_HEADER = stable.h # Header file with all all static headers: libraries, static local headers.
         export(PRECOMPILED_HEADER) # export value to global variable
 
-        win32-msvc* {
+        *msvc* {
             PRECOMPILED_SOURCE = stable.cpp # MSVC need also cpp file.
             export(PRECOMPILED_SOURCE) # export value to global variable.
         }
@@ -150,14 +150,14 @@ defineReplace(enable_ccache){
         # ccache support only Unix systems.
         unix:{
             # This need for turn on ccache.
-            *-g++{
+            *g++*{
                 QMAKE_CC = ccache gcc
                 export(QMAKE_CC) # export value to global variable.
 
                 QMAKE_CXX = ccache g++
                 export(QMAKE_CXX) # export value to global variable.
             }
-            clang*{
+            *clang*{
                 QMAKE_CC = ccache clang
                 export(QMAKE_CC) # export value to global variable.
 

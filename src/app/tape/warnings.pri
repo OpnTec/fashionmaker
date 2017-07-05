@@ -1,6 +1,6 @@
 #Turn on compilers warnings.
 unix {
-    *-g++{
+    *g++*{
         QMAKE_CXXFLAGS += \
             # Key -isystem disable checking errors in system headers.
             -isystem "$${OUT_PWD}/$${UI_DIR}" \
@@ -36,7 +36,7 @@ unix {
         }
     }
 
-    clang*{
+    *clang*{
         QMAKE_CXXFLAGS += \
             # Key -isystem disable checking errors in system headers.
             -isystem "$${OUT_PWD}/$${UI_DIR}" \
@@ -67,7 +67,7 @@ unix {
         }
     }
 } else { # Windows
-    *-g++{
+    *g++*{
         QMAKE_CXXFLAGS += $$GCC_DEBUG_CXXFLAGS # See common.pri for more details.
 
         checkWarnings{ # For enable run qmake with CONFIG+=checkWarnings
@@ -75,7 +75,7 @@ unix {
         }
     }
 
-    win32-msvc*{
+    *msvc*{
         QMAKE_CXXFLAGS += $$MSVC_DEBUG_CXXFLAGS # See common.pri for more details.
 
         checkWarnings{ # For enable run qmake with CONFIG+=checkWarnings

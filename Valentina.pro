@@ -14,7 +14,7 @@ LIST = $$split(OUT_PWD,' ')
 count(LIST, 1, >): error("The build will fail. Path '$${OUT_PWD}' contains space!!!")
 
 unix {
-    *-g++ {
+    *g++* {
         GCC_VERSION = $$system("g++ -dumpversion")
         contains(GCC_VERSION, ^7.*$) {
             message( "g++ version 7.x found" )

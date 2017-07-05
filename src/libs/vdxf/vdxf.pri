@@ -26,7 +26,7 @@ SOURCES += \
     $$PWD/dxiface.cpp \
     $$PWD/dxfdef.cpp
 
-win32-msvc*:SOURCES += $$PWD/stable.cpp
+*msvc*:SOURCES += $$PWD/stable.cpp
 
 HEADERS += \
     $$PWD/stable.h \

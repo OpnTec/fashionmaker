@@ -49,13 +49,13 @@ include(warnings.pri)
 
 CONFIG(release, debug|release){
     # Release mode
-    !win32-msvc*:CONFIG += silent
+    !*msvc*:CONFIG += silent
     DEFINES += V_NO_ASSERT
-    !unix:*-g++{
+    !unix:*g++*{
         QMAKE_CXXFLAGS += -fno-omit-frame-pointer # Need for exchndl.dll
     }
 
-    !win32-msvc* {
+    !*msvc* {
         QMAKE_CXXFLAGS -= -O2 # Disable default optimization level
         QMAKE_CXXFLAGS += -O3 # For vlayout library enable speed optimizations
     }
@@ -63,7 +63,7 @@ CONFIG(release, debug|release){
     noDebugSymbols{ # For enable run qmake with CONFIG+=noDebugSymbols
         # do nothing
     } else {
-        !macx:!win32-msvc*{
+        !macx:!*msvc*{
             # Turn on debug symbols in release mode on Unix systems.
             # On Mac OS X temporarily disabled. TODO: find way how to strip binary file.
             QMAKE_CXXFLAGS_RELEASE += -g -gdwarf-3

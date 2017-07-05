@@ -1,6 +1,6 @@
 #Turn on compilers warnings.
 unix {
-    *-g++{
+    *g++*{
         QMAKE_CXXFLAGS += \
             # Key -isystem disable checking errors in system headers.
             -isystem "$${OUT_PWD}/$${MOC_DIR}" \
@@ -12,14 +12,7 @@ unix {
 
         # -isystem key works only for headers. In some cases it's not enough. But we can't delete these warnings and
         # want them in the global list. Compromise decision is to delete them from the local list.
-        QMAKE_CXXFLAGS -= \
-            -Weffc++ \
-            -Wconversion \
-            -Wold-style-cast \
-            -Wstack-protector \
-            -Wswitch-default \
-            -Wimplicit-fallthrough \
-            -Wfloat-equal
+        # QMAKE_CXXFLAGS -= \
 
         noAddressSanitizer{ # For enable run qmake with CONFIG+=noAddressSanitizer
             # do nothing
@@ -43,9 +36,12 @@ unix {
                 QMAKE_LFLAGS += -fsanitize=undefined
             }
         }
+
+        message(Qt version: $$QMAKESPEC)
+
     }
 
-    clang*{
+    *clang*{
         QMAKE_CXXFLAGS += \
             # Key -isystem disable checking errors in system headers.
             -isystem "$${OUT_PWD}/$${MOC_DIR}" \
@@ -66,7 +62,7 @@ unix {
         }
     }
 } else { # Windows
-    *-g++{
+    *g++*{
         QMAKE_CXXFLAGS += $$GCC_DEBUG_CXXFLAGS # See common.pri for more details.
 
         checkWarnings{ # For enable run qmake with CONFIG+=checkWarnings
@@ -74,7 +70,7 @@ unix {
         }
     }
 
-    win32-msvc*{
+    *msvc*{
         QMAKE_CXXFLAGS += $$MSVC_DEBUG_CXXFLAGS # See common.pri for more details.
 
         checkWarnings{ # For enable run qmake with CONFIG+=checkWarnings

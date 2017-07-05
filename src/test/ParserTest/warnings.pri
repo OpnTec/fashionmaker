@@ -1,6 +1,6 @@
 #Turn on compilers warnings.
 unix {
-    *-g++{
+    *g++*{
         QMAKE_CXXFLAGS += \
             $$GCC_DEBUG_CXXFLAGS # See common.pri for more details.
 
@@ -32,7 +32,7 @@ unix {
         }
     }
 
-    clang*{
+    *clang*{
         QMAKE_CXXFLAGS += \
             $$CLANG_DEBUG_CXXFLAGS # See common.pri for more details.
 
@@ -55,7 +55,7 @@ unix {
         }
     }
 } else { # Windows
-    *-g++{
+    *g++*{
         QMAKE_CXXFLAGS += $$GCC_DEBUG_CXXFLAGS # See common.pri for more details.
 
         checkWarnings{ # For enable run qmake with CONFIG+=checkWarnings
@@ -63,7 +63,7 @@ unix {
         }
     }
 
-    win32-msvc*{
+    *msvc*{
         QMAKE_CXXFLAGS += $$MSVC_DEBUG_CXXFLAGS # See common.pri for more details.
 
         checkWarnings{ # For enable run qmake with CONFIG+=checkWarnings

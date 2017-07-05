@@ -4,7 +4,7 @@
 SOURCES += \
     $$PWD/vmeasurements.cpp
 
-win32-msvc*:SOURCES += $$PWD/stable.cpp
+*msvc*:SOURCES += $$PWD/stable.cpp
 
 HEADERS += \
     $$PWD/vmeasurements.h \
