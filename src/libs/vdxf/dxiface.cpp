@@ -1,5 +1,4 @@
 /******************************************************************************
-**  dwg2dxf - Program to convert dwg/dxf to dxf(ascii & binary)              **
 **                                                                           **
 **  Copyright (C) 2015 José F. Soriano, rallazz@gmail.com                    **
 **                                                                           **
@@ -11,7 +10,6 @@
 ******************************************************************************/
 
 #include "dxiface.h"
-#include "libdxfrw/libdwgr.h"
 #include "libdxfrw/libdxfrw.h"
 #include "../vmisc/vabstractapplication.h"
 

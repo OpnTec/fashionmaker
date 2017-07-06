@@ -387,26 +387,6 @@ private:
     DRW_Coord vdata;
 };
 
-//! Class to handle dwg handles
-/*!
-*  Class to handle dwg handles
-*  @author Rallaz
-*/
-class dwgHandle{
-public:
-    dwgHandle()
-        : code(0),
-          size(0),
-          ref(0)
-    {}
-
-    ~dwgHandle() = default;
-
-    duint8 code;
-    duint8 size;
-    duint32 ref;
-};
-
 //! Class to convert between line width and integer
 /*!
 *  Class to convert between line width and integer
@@ -508,10 +488,6 @@ public:
         return -3;
     }
 
-    static int lineWidth2dwgInt(enum lineWidth lw){
-        return static_cast<int> (lw);
-    }
-
     static enum lineWidth dxfInt2lineWidth(int i){
         if (i<0) {
             if (i==-1)
@@ -568,14 +544,6 @@ public:
             return width22;
         } else {
             return width23;
-        }
-        //default by default
-        return widthDefault;
-    }
-
-    static enum lineWidth dwgInt2lineWidth(int i){
-        if ( (i>-1 && i<24) || (i>28 && i<32) ) {
-            return static_cast<lineWidth> (i);
         }
         //default by default
         return widthDefault;

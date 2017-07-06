@@ -19,10 +19,8 @@
 
 class dxfReader;
 class dxfWriter;
-class dwgBuffer;
 
-#define SETHDRFRIENDS  friend class dxfRW; \
-                       friend class dwgReader;
+#define SETHDRFRIENDS  friend class dxfRW;
 
 //! Class to handle header entries
 /*!
@@ -87,7 +85,6 @@ public:
 
 protected:
     void parseCode(int code, dxfReader *reader);
-    bool parseDwg(DRW::Version version, dwgBuffer *buf, dwgBuffer *hBbuf, duint8 mv=0);
 private:
     bool getDouble(std::string key, double *varDouble);
     bool getInt(std::string key, int *varInt);

@@ -1,5 +1,4 @@
 /******************************************************************************
-**  dwg2dxf - Program to convert dwg/dxf to dxf(ascii & binary)              **
 **                                                                           **
 **  Copyright (C) 2015 José F. Soriano, rallazz@gmail.com                    **
 **                                                                           **
@@ -55,7 +54,7 @@ public:
 };
 
 
-//container class to store full dwg/dxf data.
+//container class to store full dxf data.
 class dx_data {
 public:
     dx_data()
