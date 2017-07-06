@@ -39,6 +39,7 @@ shallow_clone: false                 # default is "false"
 environment:
   matrix:
   - QT5: Qt\5.9\mingw53_32
+    QT_VERSION: Qt5.9
     QMAKE_GENERATOR: "MinGW Makefiles"
     MINGW_PATH: C:\Qt\Tools\mingw530_32\bin
     PLATFORM: x86
