@@ -24,8 +24,8 @@ public:
 
     virtual ~dxfWriter() = default;
     virtual bool writeString(int code, std::string text) = 0;
-    bool writeUtf8String(int code, const std::__cxx11::string &text);
-    bool writeUtf8Caps(int code, const std::__cxx11::string &text);
+    bool writeUtf8String(int code, const std::string &text);
+    bool writeUtf8Caps(int code, const std::string &text);
     std::string fromUtf8String(std::string t) {return encoder.fromUtf8(t);}
     virtual bool writeInt16(int code, int data) = 0;
     virtual bool writeInt32(int code, int data) = 0;

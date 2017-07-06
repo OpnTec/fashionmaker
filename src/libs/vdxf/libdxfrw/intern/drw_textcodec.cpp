@@ -81,7 +81,7 @@ std::string DRW_TextCodec::toUtf8(const std::string &s) {
     return encodedString.toStdString();
 }
 
-std::string DRW_TextCodec::fromUtf8(const std::__cxx11::string &s) {
+std::string DRW_TextCodec::fromUtf8(const std::string &s) {
     if (conv == nullptr)
     {
         return s;

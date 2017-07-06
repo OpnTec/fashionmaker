@@ -66,7 +66,7 @@ public:
     bool writeText(DRW_Text *ent);
     bool writeHatch(DRW_Hatch *ent);
     bool writeViewport(DRW_Viewport *ent);
-    DRW_ImageDef *writeImage(DRW_Image *ent, const std::__cxx11::string &name);
+    DRW_ImageDef *writeImage(DRW_Image *ent, const std::string &name);
     bool writeLeader(DRW_Leader *ent);
     bool writeDimension(DRW_Dimension *ent);
     void setEllipseParts(int parts){elParts = parts;} /*!< set parts munber when convert ellipse to polyline */
