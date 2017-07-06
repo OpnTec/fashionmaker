@@ -20,6 +20,7 @@
 #include "intern/dxfreader.h"
 #include "intern/dxfwriter.h"
 #include "intern/drw_dbg.h"
+#include "../vmisc/diagnostic.h"
 
 #define FIRSTHANDLE 48
 
