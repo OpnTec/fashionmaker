@@ -149,7 +149,7 @@ bool dxfReaderBinary::readInt32() {
     char buffer[4];
     filestr->read(buffer,4);
     int32p = reinterpret_cast<unsigned int *>(buffer);
-    intData = *int32p;
+    intData = static_cast<signed int>(*int32p);
     DRW_DBG(intData); DRW_DBG("\n");
     return (filestr->good());
 }
