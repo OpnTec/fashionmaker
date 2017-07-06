@@ -29,9 +29,11 @@
 #ifndef DIAGNOSTIC_H
 #define DIAGNOSTIC_H
 
-#include <QtGlobal>
+#if QT_VERSION >= QT_VERSION_CHECK(5, 5, 0)
 
-#if QT_VERSION < QT_VERSION_CHECK(5, 5, 0)
+#include <QtCore/qcompilerdetection.h>
+
+#else
 
 /*
  * Warning/diagnostic handling
@@ -87,6 +89,6 @@
 #  define QT_WARNING_DISABLE_GCC(text)
 #endif
 
-#endif // QT_VERSION < QT_VERSION_CHECK(5, 5, 0)
+#endif // QT_VERSION >= QT_VERSION_CHECK(5, 5, 0)
 
 #endif // DIAGNOSTIC_H

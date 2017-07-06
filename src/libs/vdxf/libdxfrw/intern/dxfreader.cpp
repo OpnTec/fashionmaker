@@ -17,6 +17,7 @@
 #include "dxfreader.h"
 #include "drw_textcodec.h"
 #include "drw_dbg.h"
+#include "../vmisc/diagnostic.h"
 
 bool dxfReader::readRec(int *codeData) {
 //    std::string text;
