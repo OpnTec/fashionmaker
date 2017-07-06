@@ -14,6 +14,7 @@
 #include "drw_entities.h"
 #include "intern/dxfreader.h"
 #include "intern/drw_dbg.h"
+#include "../vmisc/diagnostic.h"
 
 
 //! Calculate arbitary axis
