@@ -264,7 +264,7 @@ GCC_DEBUG_CXXFLAGS += \
     -Wold-style-cast \
     -Wconversion \
     -Winit-self \
-    -Wstack-protector \
+#    -Wstack-protector \
     -Wunreachable-code \
     -Wcast-align \
     -Wcast-qual \
@@ -615,7 +615,7 @@ CLANG_DEBUG_CXXFLAGS += \
     -Wsizeof-pointer-memaccess \
     -Wsometimes-uninitialized \
     -Wsource-uses-openmp \
-    -Wstack-protector \
+#    -Wstack-protector \
     -Wstatic-float-init \
     -Wstatic-in-inline \
     -Wstatic-local-in-inline \
