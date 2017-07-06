@@ -102,6 +102,9 @@ int dxfReader::getHandleString(){
     return res;
 }
 
+QT_WARNING_PUSH
+QT_WARNING_DISABLE_GCC("-Wstack-protector")
+
 bool dxfReaderBinary::readCode(int *code) {
     unsigned short *int16p;
     char buffer[2];
@@ -120,6 +123,8 @@ bool dxfReaderBinary::readCode(int *code) {
     return (filestr->good());
 }
 
+QT_WARNING_POP
+
 bool dxfReaderBinary::readString() {
     type = STRING;
     std::getline(*filestr, strData, '\0');
@@ -134,6 +139,9 @@ bool dxfReaderBinary::readString(std::string *text) {
     return (filestr->good());
 }
 
+QT_WARNING_PUSH
+QT_WARNING_DISABLE_GCC("-Wstack-protector")
+
 bool dxfReaderBinary::readInt16() {
     type = INT32;
     char buffer[2];
@@ -142,6 +150,8 @@ bool dxfReaderBinary::readInt16() {
     DRW_DBG(intData); DRW_DBG("\n");
     return (filestr->good());
 }
+
+QT_WARNING_POP
 
 bool dxfReaderBinary::readInt32() {
     type = INT32;
@@ -177,6 +187,9 @@ bool dxfReaderBinary::readDouble() {
     return (filestr->good());
 }
 
+QT_WARNING_PUSH
+QT_WARNING_DISABLE_GCC("-Wstack-protector")
+
 //saved as int or add a bool member??
 bool dxfReaderBinary::readBool() {
     char buffer[1];
@@ -185,6 +198,8 @@ bool dxfReaderBinary::readBool() {
     DRW_DBG(intData); DRW_DBG("\n");
     return (filestr->good());
 }
+
+QT_WARNING_POP
 
 bool dxfReaderAscii::readCode(int *code) {
     std::string text;
