@@ -140,6 +140,7 @@ public:
         : hadlesList()
     { reset();}
 
+    // cppcheck-suppress functionStatic
     void reset(){}
     bool parseDwg(DRW::Version version, dwgBuffer *buf, duint32 bs=0);
     std::list<duint32>hadlesList;
@@ -195,11 +196,11 @@ protected:
     std::string findTableName(DRW::TTYPE table, dint32 handle);
 
     void setCodePage(std::string *c){decoder.setCodePage(c, false);}
-    std::string getCodePage(){ return decoder.getCodePage();}
+    std::string getCodePage() const { return decoder.getCodePage();}
     bool readDwgHeader(DRW_Header& hdr, dwgBuffer *buf, dwgBuffer *hBuf);
     bool readDwgHandles(dwgBuffer *dbuf, duint32 offset, duint32 size);
     bool readDwgTables(DRW_Header& hdr, dwgBuffer *dbuf);
-    bool checkSentinel(dwgBuffer *buf, enum secEnum::DWGSection, bool start);
+    static bool checkSentinel(dwgBuffer *buf, enum secEnum::DWGSection, bool start);
 
     bool readDwgBlocks(DRW_Interface& intfa, dwgBuffer *dbuf);
     bool readDwgEntities(DRW_Interface& intfa, dwgBuffer *dbuf);

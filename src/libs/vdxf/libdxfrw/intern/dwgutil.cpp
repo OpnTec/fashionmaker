@@ -40,11 +40,10 @@ std::string toHexStr(int n){
  * @param blk number of codewords ( 1 cw == 255 bytes)
  */
 void dwgRSCodec::decode239I(unsigned char *in, unsigned char *out, duint32 blk){
-    int k=0;
     unsigned char data[255];
     RScodec rsc(0x96, 8, 8); //(255, 239)
     for (duint32 i=0; i<blk; i++){
-        k = i;
+        int k = i;
         for (int j=0; j<255; j++) {
             data[j] = in[k];
             k +=blk;
@@ -66,11 +65,10 @@ void dwgRSCodec::decode239I(unsigned char *in, unsigned char *out, duint32 blk){
  * @param blk number of codewords ( 1 cw == 255 bytes)
  */
 void dwgRSCodec::decode251I(unsigned char *in, unsigned char *out, duint32 blk){
-    int k=0;
     unsigned char data[255];
     RScodec rsc(0xB8, 8, 2); //(255, 251)
     for (duint32 i=0; i<blk; i++){
-        k = i;
+        int k = i;
         for (int j=0; j<255; j++) {
             data[j] = in[k];
             k +=blk;
@@ -649,7 +647,7 @@ void dwgCompressor::copyCompBytes21(duint8 *cbuf, duint8 *dbuf, duint32 l, duint
 }
 
 
-secEnum::DWGSection secEnum::getEnum(std::string nameSec){
+secEnum::DWGSection secEnum::getEnum(const std::string &nameSec){
     //TODO: complete it
     if (nameSec=="AcDb:Header"){
         return HEADER;

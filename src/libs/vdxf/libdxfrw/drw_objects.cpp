@@ -1128,7 +1128,7 @@ bool DRW_Vport::parseDwg(DRW::Version version, dwgBuffer *buf, duint32 bs){
 void DRW_ImageDef::parseCode(int code, dxfReader *reader){
     switch (code) {
     case 1:
-        name = reader->getUtf8String();
+        fileName = reader->getUtf8String();
         break;
     case 5:
         handle = reader->getHandleString();
@@ -1173,8 +1173,8 @@ bool DRW_ImageDef::parseDwg(DRW::Version version, dwgBuffer *buf, duint32 bs){
     DRW_DBG("class Version: "); DRW_DBG(imgVersion);
     DRW_Coord size = buf->get2RawDouble();
     (void)size;
-    name = sBuf->getVariableText(version, false);
-    DRW_DBG("appId name: "); DRW_DBG(name.c_str()); DRW_DBG("\n");
+    fileName = sBuf->getVariableText(version, false);
+    DRW_DBG("appId name: "); DRW_DBG(fileName.c_str()); DRW_DBG("\n");
     loaded = buf->getBit();
     resolution = buf->getRawChar8();
     up = buf->getRawDouble();

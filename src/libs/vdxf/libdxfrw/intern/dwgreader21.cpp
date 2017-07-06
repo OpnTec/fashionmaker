@@ -481,10 +481,6 @@ bool dwgReader21::readDwgTables(DRW_Header& hdr) {
 
 
 bool dwgReader21::readDwgBlocks(DRW_Interface& intfa){
-    bool ret = true;
     dwgBuffer dataBuf(objData, static_cast<int>(dataSize), &decoder);
-    ret = dwgReader::readDwgBlocks(intfa, &dataBuf);
-    return ret;
-
-    return false;
+    return dwgReader::readDwgBlocks(intfa, &dataBuf);
 }

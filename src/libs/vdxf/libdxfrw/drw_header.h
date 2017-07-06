@@ -83,7 +83,7 @@ public:
     void addCoord(std::string key, DRW_Coord value, int code);
     std::string getComments() const {return comments;}
     void write(dxfWriter *writer, DRW::Version ver);
-    void addComment(std::string c);
+    void addComment(const std::string &c);
 
 protected:
     void parseCode(int code, dxfReader *reader);
@@ -92,7 +92,7 @@ private:
     bool getDouble(std::string key, double *varDouble);
     bool getInt(std::string key, int *varInt);
     bool getStr(std::string key, std::string *varStr);
-    bool getCoord(std::string key, DRW_Coord *varStr);
+    bool getCoord(std::string key, DRW_Coord *varCoord);
     void clearVars()
     {
         for (std::map<std::string,DRW_Variant*>::iterator it=vars.begin(); it!=vars.end(); ++it)

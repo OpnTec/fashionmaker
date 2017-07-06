@@ -55,7 +55,7 @@ void DRW_Entity::calculateAxis(DRW_Coord extPoint){
 *   apply extrusion in a point using arbitary axis (previous calculated)
 *  @author Rallaz
 */
-void DRW_Entity::extrudePoint(DRW_Coord extPoint, DRW_Coord *point){
+void DRW_Entity::extrudePoint(DRW_Coord extPoint, DRW_Coord *point) const{
     double px, py, pz;
     px = (extAxisX.x*point->x)+(extAxisY.x*point->y)+(extPoint.x*point->z);
     py = (extAxisX.y*point->x)+(extAxisY.y*point->y)+(extPoint.y*point->z);
@@ -782,7 +782,6 @@ bool DRW_Ellipse::parseDwg(DRW::Version version, dwgBuffer *buf, duint32 bs){
 //parts are the number of vertex to split polyline, default 128
 void DRW_Ellipse::toPolyline(DRW_Polyline *pol, int parts){
     double radMajor, radMinor, cosRot, sinRot, incAngle, curAngle;
-    double cosCurr, sinCurr;
     radMajor = sqrt(secPoint.x*secPoint.x + secPoint.y*secPoint.y);
     radMinor = radMajor*ratio;
     //calculate sin & cos of included angle
@@ -797,8 +796,8 @@ void DRW_Ellipse::toPolyline(DRW_Polyline *pol, int parts){
             curAngle = endparam;
             i = parts+2;
         }
-        cosCurr = cos(curAngle);
-        sinCurr = sin(curAngle);
+        double cosCurr = cos(curAngle);
+        double sinCurr = sin(curAngle);
         double x = basePoint.x + (cosCurr*cosRot*radMajor) - (sinCurr*sinRot*radMinor);
         double y = basePoint.y + (cosCurr*sinRot*radMajor) + (sinCurr*cosRot*radMinor);
         pol->addVertex( DRW_Vertex(x, y, 0.0, 0.0));

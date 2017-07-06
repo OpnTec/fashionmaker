@@ -29,22 +29,16 @@ public:
 //    bool readDwgHandles(){return false;}
 //    bool readDwgTables(){return false;}
     bool readDwgBlocks(DRW_Interface& intfa){
-        bool ret = true;
         dwgBuffer dataBuf(objData, static_cast<int>(uncompSize), &decoder);
-        ret = dwgReader::readDwgBlocks(intfa, &dataBuf);
-        return ret;
+        return dwgReader::readDwgBlocks(intfa, &dataBuf);
     }
     virtual bool readDwgEntities(DRW_Interface& intfa){
-        bool ret = true;
         dwgBuffer dataBuf(objData, static_cast<int>(uncompSize), &decoder);
-        ret = dwgReader::readDwgEntities(intfa, &dataBuf);
-        return ret;
+        return dwgReader::readDwgEntities(intfa, &dataBuf);
     }
     virtual bool readDwgObjects(DRW_Interface& intfa){
-        bool ret = true;
         dwgBuffer dataBuf(objData, static_cast<int>(uncompSize), &decoder);
-        ret = dwgReader::readDwgObjects(intfa, &dataBuf);
-        return ret;
+        return dwgReader::readDwgObjects(intfa, &dataBuf);
     }
 
 //    bool readDwgEntity(objHandle& obj, DRW_Interface& intfa){

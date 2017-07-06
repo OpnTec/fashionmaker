@@ -93,7 +93,7 @@ public:
     secEnum(){}
     ~secEnum(){}
 
-    static DWGSection getEnum(std::string nameSec);
+    static DWGSection getEnum(const std::__cxx11::string &nameSec);
 };
 
 #endif // DWGUTIL_H

@@ -25,7 +25,7 @@ class dwgBasicStream{
 protected:
     dwgBasicStream(){}
 public:
-    virtual ~dwgBasicStream(){}
+    virtual ~dwgBasicStream() = default;
     virtual bool read(duint8* s, duint64 n) = 0;
     virtual duint64 size() = 0;
     virtual duint64 getPos() = 0;
@@ -36,7 +36,7 @@ public:
 
 class dwgFileStream: public dwgBasicStream{
 public:
-    dwgFileStream(std::istream *s)
+    explicit dwgFileStream(std::istream *s)
         : stream(nullptr),
           sz(0)
     {
@@ -84,8 +84,8 @@ private:
 
 class dwgBuffer {
 public:
-    dwgBuffer(std::istream *stream, DRW_TextCodec *decoder = NULL);
-    dwgBuffer(duint8 *buf, int size, DRW_TextCodec *decoder= NULL);
+    dwgBuffer(std::istream *stream, DRW_TextCodec *dc = nullptr);
+    dwgBuffer(duint8 *buf, int size, DRW_TextCodec *dc = nullptr);
     dwgBuffer( const dwgBuffer& org );
     dwgBuffer& operator=( const dwgBuffer& org );
     ~dwgBuffer();
@@ -94,7 +94,7 @@ public:
     duint64 getPosition();
     void resetPosition(){setPosition(0); setBitPos(0);}
     void setBitPos(duint8 pos);
-    duint8 getBitPos(){return bitPos;}
+    duint8 getBitPos() const {return bitPos;}
     bool moveBitPos(dint32 size);
 
     duint8 getBit();  //B

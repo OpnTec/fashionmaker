@@ -6,11 +6,12 @@
 CPPCHECK="../../../../cppcheck/cppcheck"
 $CPPCHECK \
           -j4 -f -q \
+          -UDRW_DBG \
           -U__INTEL_COMPILER_UPDATE \
           -UqApp \
           --template '{file}:{line}:{message}:{id}' \
           --inline-suppr \
-          --platform=unix32 \
+          --platform=unix64 \
           --std=c++11 \
           --std=posix \
           --enable=all \

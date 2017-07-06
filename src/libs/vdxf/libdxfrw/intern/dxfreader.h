@@ -27,7 +27,7 @@ public:
     };
     enum TYPE type;
 public:
-    dxfReader(std::istream *stream)
+    explicit dxfReader(std::istream *stream)
         : type(INVALID),
           filestr(stream),
           strData(),
@@ -39,20 +39,20 @@ public:
     {}
 
     virtual ~dxfReader() = default;
-    bool readRec(int *code);
+    bool readRec(int *codeData);
 
-    std::string getString() {return strData;}
+    std::string getString() const {return strData;}
     int getHandleString();//Convert hex string to int
     std::string toUtf8String(std::string t) {return decoder.toUtf8(t);}
     std::string getUtf8String() {return decoder.toUtf8(strData);}
-    double getDouble() {return doubleData;}
-    int getInt32() {return intData;}
-    unsigned long long int getInt64() {return int64;}
-    bool getBool() { return (intData==0) ? false : true;}
-    int getVersion(){return decoder.getVersion();}
+    double getDouble() const {return doubleData;}
+    int getInt32() const {return intData;}
+    unsigned long long int getInt64() const {return int64;}
+    bool getBool() const { return (intData==0) ? false : true;}
+    int getVersion() const {return decoder.getVersion();}
     void setVersion(std::string *v, bool dxfFormat){decoder.setVersion(v, dxfFormat);}
     void setCodePage(std::string *c){decoder.setCodePage(c, true);}
-    std::string getCodePage(){ return decoder.getCodePage();}
+    std::string getCodePage() const { return decoder.getCodePage();}
 
 protected:
     virtual bool readCode(int *code) = 0; //return true if sucesful (not EOF)
@@ -78,8 +78,11 @@ private:
 
 class dxfReaderBinary : public dxfReader {
 public:
-    dxfReaderBinary(std::istream *stream):dxfReader(stream){skip = false; }
-    virtual ~dxfReaderBinary() {}
+    explicit dxfReaderBinary(std::istream *stream)
+        : dxfReader(stream)
+    {skip = false; }
+
+    virtual ~dxfReaderBinary() = default;
     virtual bool readCode(int *code);
     virtual bool readString(std::string *text);
     virtual bool readString();
@@ -92,8 +95,11 @@ public:
 
 class dxfReaderAscii : public dxfReader {
 public:
-    dxfReaderAscii(std::istream *stream):dxfReader(stream){skip = true; }
-    virtual ~dxfReaderAscii(){}
+    explicit dxfReaderAscii(std::istream *stream)
+        : dxfReader(stream)
+    {skip = true; }
+
+    virtual ~dxfReaderAscii() = default;
     virtual bool readCode(int *code);
     virtual bool readString(std::string *text);
     virtual bool readString();

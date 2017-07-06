@@ -694,13 +694,13 @@ bool dwgReader::readDwgTables(DRW_Header& hdr, dwgBuffer *dbuf) {
                 oc = mit->second;
                 ObjectMap.erase(mit);
                 DRW_DBG("vpEntHeader Control Obj Handle= "); DRW_DBGH(oc.handle); DRW_DBG(" "); DRW_DBG(oc.loc); DRW_DBG("\n");
-                DRW_ObjControl vpEntHeaderCtrl;
+//                DRW_ObjControl vpEntHeaderCtrl;
                 dbuf->setPosition(oc.loc);
                 int size = dbuf->getModularShort();
-                if (version > DRW::AC1021) //2010+
-                    bs = dbuf->getUModularChar();
-                else
-                    bs = 0;
+//                if (version > DRW::AC1021) //2010+
+//                    bs = dbuf->getUModularChar();
+//                else
+//                    bs = 0;
                 tmpByteStr = new duint8[size];
                 dbuf->getBytes(tmpByteStr, size);
                 dwgBuffer buff(tmpByteStr, size, &decoder);
@@ -934,13 +934,12 @@ bool dwgReader::readPlineVertex(DRW_Polyline& pline, dwgBuffer *dbuf){
 
 bool dwgReader::readDwgEntities(DRW_Interface& intfa, dwgBuffer *dbuf){
     bool ret = true;
-    bool ret2 = true;
 
     DRW_DBG("\nobject map total size= "); DRW_DBG(ObjectMap.size());
     std::map<duint32, objHandle>::iterator itB=ObjectMap.begin();
     std::map<duint32, objHandle>::iterator itE=ObjectMap.end();
     while (itB != itE){
-        ret2 = readDwgEntity(dbuf, itB->second, intfa);
+        bool ret2 = readDwgEntity(dbuf, itB->second, intfa);
         ObjectMap.erase(itB);
         itB=ObjectMap.begin();
         if (ret)
@@ -1170,21 +1169,20 @@ bool dwgReader::readDwgEntity(dwgBuffer *dbuf, objHandle& obj, DRW_Interface& in
 
 bool dwgReader::readDwgObjects(DRW_Interface& intfa, dwgBuffer *dbuf){
     bool ret = true;
-    bool ret2 = true;
 
-    duint32 i=0;
     DRW_DBG("\nentities map total size= "); DRW_DBG(ObjectMap.size());
     DRW_DBG("\nobjects map total size= "); DRW_DBG(objObjectMap.size());
     std::map<duint32, objHandle>::iterator itB=objObjectMap.begin();
     std::map<duint32, objHandle>::iterator itE=objObjectMap.end();
     while (itB != itE){
-        ret2 = readDwgObject(dbuf, itB->second, intfa);
+        bool ret2 = readDwgObject(dbuf, itB->second, intfa);
         objObjectMap.erase(itB);
         itB=objObjectMap.begin();
         if (ret)
             ret = ret2;
     }
     if (DRW_DBGGL == DRW_dbg::DEBUG) {
+        duint32 i=0;
         for (std::map<duint32, objHandle>::iterator it=remainingMap.begin(); it != remainingMap.end(); ++it){
             DRW_DBG("\nnum.# "); DRW_DBG(i++); DRW_DBG(" Remaining object Handle, loc, type= "); DRW_DBG(it->first);
             DRW_DBG(" "); DRW_DBG(it->second.loc); DRW_DBG(" "); DRW_DBG(it->second.type);

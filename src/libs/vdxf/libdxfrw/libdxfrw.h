@@ -25,9 +25,9 @@ class dxfWriter;
 
 class dxfRW {
 public:
-    dxfRW(const char* name);
+    explicit dxfRW(const char* name);
     ~dxfRW();
-    void setDebug(DRW::DBG_LEVEL lvl);
+    static void setDebug(DRW::DBG_LEVEL lvl);
     /// reads the file specified in constructor
     /*!
      * An interface must be provided. It is used by the class to signal various
@@ -60,13 +60,13 @@ public:
     bool writePolyline(DRW_Polyline *ent);
     bool writeSpline(DRW_Spline *ent);
     bool writeBlockRecord(std::string name);
-    bool writeBlock(DRW_Block *ent);
+    bool writeBlock(DRW_Block *bk);
     bool writeInsert(DRW_Insert *ent);
     bool writeMText(DRW_MText *ent);
     bool writeText(DRW_Text *ent);
     bool writeHatch(DRW_Hatch *ent);
     bool writeViewport(DRW_Viewport *ent);
-    DRW_ImageDef *writeImage(DRW_Image *ent, std::string name);
+    DRW_ImageDef *writeImage(DRW_Image *ent, const std::__cxx11::string &name);
     bool writeLeader(DRW_Leader *ent);
     bool writeDimension(DRW_Dimension *ent);
     void setEllipseParts(int parts){elParts = parts;} /*!< set parts munber when convert ellipse to polyline */
@@ -120,7 +120,7 @@ private:
     bool writeObjects();
     bool writeExtData(const std::vector<DRW_Variant*> &ed);
     /*use version from dwgutil.h*/
-    std::string toHexStr(int n);//RLZ removeme
+    static std::string toHexStr(int n);//RLZ removeme
 
 private:
     DRW::Version version;

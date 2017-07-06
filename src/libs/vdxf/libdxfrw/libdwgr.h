@@ -29,9 +29,9 @@ public:
     //read: return true if all ok
     bool read(std::istream &stream, DRW_Interface *interface_, bool ext);
     bool getPreview(std::istream &stream);
-    DRW::Version getVersion(){return version;}
-    DRW::error getError(){return error;}
-    void setDebug(DRW::DBG_LEVEL lvl);
+    DRW::Version getVersion() const {return version;}
+    DRW::error getError() const {return error;}
+    static void setDebug(DRW::DBG_LEVEL lvl);
 
 private:
     bool open(std::istream *stream);

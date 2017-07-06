@@ -179,8 +179,7 @@ bool dwgReader15::readDwgHandles() {
     if (si.Id<0)//not found, ends
         return false;
 
-    bool ret = dwgReader::readDwgHandles(fileBuf, static_cast<duint32>(si.address), static_cast<duint32>(si.size));
-    return ret;
+    return dwgReader::readDwgHandles(fileBuf, static_cast<duint32>(si.address), static_cast<duint32>(si.size));
 }
 
 /*********** objects ************************/
@@ -189,9 +188,7 @@ bool dwgReader15::readDwgHandles() {
  * (using their object file offsets)
  */
 bool dwgReader15::readDwgTables(DRW_Header& hdr) {
-    bool ret = dwgReader::readDwgTables(hdr, fileBuf);
-
-    return ret;
+    return dwgReader::readDwgTables(hdr, fileBuf);
 }
 
 /**
@@ -199,7 +196,5 @@ bool dwgReader15::readDwgTables(DRW_Header& hdr) {
  * (using their object file offsets)
  */
 bool dwgReader15::readDwgBlocks(DRW_Interface& intfa) {
-    bool ret = true;
-    ret = dwgReader::readDwgBlocks(intfa, fileBuf);
-    return ret;
+    return dwgReader::readDwgBlocks(intfa, fileBuf);
 }

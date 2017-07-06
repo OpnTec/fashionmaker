@@ -61,6 +61,11 @@ DRW_dbg::DRW_dbg()
       prClass(new print_none)
 {}
 
+DRW_dbg::~DRW_dbg()
+{
+    delete prClass;
+}
+
 void DRW_dbg::setLevel(LEVEL lvl){
     level = lvl;
     delete prClass;
@@ -73,7 +78,7 @@ void DRW_dbg::setLevel(LEVEL lvl){
     }
 }
 
-DRW_dbg::LEVEL DRW_dbg::getLevel(){
+DRW_dbg::LEVEL DRW_dbg::getLevel() const{
     return level;
 }
 

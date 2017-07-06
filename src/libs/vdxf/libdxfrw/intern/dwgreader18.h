@@ -61,23 +61,17 @@ public:
     bool readDwgHandles();
     bool readDwgTables(DRW_Header& hdr);
     bool readDwgBlocks(DRW_Interface& intfa){
-        bool ret = true;
         dwgBuffer dataBuf(objData, static_cast<int>(uncompSize), &decoder);
-        ret = dwgReader::readDwgBlocks(intfa, &dataBuf);
-        return ret;
+        return dwgReader::readDwgBlocks(intfa, &dataBuf);
     }
 
     virtual bool readDwgEntities(DRW_Interface& intfa){
-        bool ret = true;
         dwgBuffer dataBuf(objData, static_cast<int>(uncompSize), &decoder);
-        ret = dwgReader::readDwgEntities(intfa, &dataBuf);
-        return ret;
+        return dwgReader::readDwgEntities(intfa, &dataBuf);
     }
     virtual bool readDwgObjects(DRW_Interface& intfa){
-        bool ret = true;
         dwgBuffer dataBuf(objData, static_cast<int>(uncompSize), &decoder);
-        ret = dwgReader::readDwgObjects(intfa, &dataBuf);
-        return ret;
+        return dwgReader::readDwgObjects(intfa, &dataBuf);
     }
 
 //    bool readDwgEntity(objHandle& obj, DRW_Interface& intfa){
@@ -91,11 +85,12 @@ protected:
 
 private:
     Q_DISABLE_COPY(dwgReader18)
-    void genMagicNumber();
+    // cppcheck-suppress unusedPrivateFunction
+    static void genMagicNumber();
 //    dwgBuffer* bufObj;
     void parseSysPage(duint8 *decompSec, duint32 decompSize); //called: Section page map: 0x41630e3b
     bool parseDataPage(dwgSectionInfo si/*, duint8 *dData*/); //called ???: Section map: 0x4163003b
-    duint32 checksum(duint32 seed, duint8* data, duint32 sz);
+    static duint32 checksum(duint32 seed, duint8* data, duint32 sz);
 
 private:
 duint32 securityFlags;

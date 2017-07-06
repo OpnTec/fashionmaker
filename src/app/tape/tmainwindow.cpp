@@ -1923,9 +1923,10 @@ void TMainWindow::SetupMenu()
     {
         QAction *action = new QAction(this);
         recentFileActs[i] = action;
-        connect(action, &QAction::triggered, this, [action, this]()
+        connect(action, &QAction::triggered, this, [this]()
         {
-            if (action != nullptr)
+            QAction *action = qobject_cast<QAction *>(sender());
+            if (action)
             {
                 const QString filePath = action->data().toString();
                 if (not filePath.isEmpty())

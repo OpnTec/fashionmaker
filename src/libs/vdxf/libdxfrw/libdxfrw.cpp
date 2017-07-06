@@ -1264,7 +1264,7 @@ bool dxfRW::writeViewport(DRW_Viewport *ent) {
     return true;
 }
 
-DRW_ImageDef* dxfRW::writeImage(DRW_Image *ent, std::string name){
+DRW_ImageDef* dxfRW::writeImage(DRW_Image *ent, const std::string &name){
     if (version > DRW::AC1009) {
         //search if exist imagedef with this mane (image inserted more than 1 time)
         //RLZ: imagedef_reactor seem needed to read in acad
@@ -1280,7 +1280,7 @@ DRW_ImageDef* dxfRW::writeImage(DRW_Image *ent, std::string name){
             imageDef.push_back(id);
             id->handle = ++entCount;
         }
-        id->name = name;
+        id->fileName = name;
         std::string idReactor = toHexStr(++entCount);
 
         writer->writeString(0, "IMAGE");
@@ -1775,7 +1775,7 @@ bool dxfRW::writeObjects() {
         writer->writeString(102, "}");
         writer->writeString(100, "AcDbRasterImageDef");
         writer->writeInt16(90, 0); //version 0=R14 to v2010
-        writer->writeUtf8String(1, id->name);
+        writer->writeUtf8String(1, id->fileName);
         writer->writeDouble(10, id->u);
         writer->writeDouble(20, id->v);
         writer->writeDouble(11, id->up);

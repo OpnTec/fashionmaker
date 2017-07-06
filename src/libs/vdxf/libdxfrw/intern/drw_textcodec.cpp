@@ -48,7 +48,7 @@ void DRW_TextCodec::setVersion(std::string *v, bool dxfFormat){
     }
 }
 
-void DRW_TextCodec::setCodePage(std::string *c, bool dxfFormat){
+void DRW_TextCodec::setCodePage(const std::string *c, bool dxfFormat){
     cp = correctCodePage(*c);
     if (version < DRW::AC1021)
     {
@@ -71,7 +71,7 @@ void DRW_TextCodec::setCodePage(std::string *c, bool dxfFormat){
     }
 }
 
-std::string DRW_TextCodec::toUtf8(std::string s) {
+std::string DRW_TextCodec::toUtf8(const std::string &s) {
     if (conv == nullptr)
     {
         return s;
@@ -81,7 +81,7 @@ std::string DRW_TextCodec::toUtf8(std::string s) {
     return encodedString.toStdString();
 }
 
-std::string DRW_TextCodec::fromUtf8(std::string s) {
+std::string DRW_TextCodec::fromUtf8(const std::__cxx11::string &s) {
     if (conv == nullptr)
     {
         return s;

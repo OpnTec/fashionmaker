@@ -102,14 +102,6 @@ static unsigned int crc32Table[256] ={
 0xbdbdf21c, 0xcabac28a, 0x53b39330, 0x24b4a3a6, 0xbad03605, 0xcdd70693, 0x54de5729, 0x23d967bf,
 0xb3667a2e, 0xc4614ab8, 0x5d681b02, 0x2a6f2b94, 0xb40bbe37, 0xc30c8ea1, 0x5a05df1b, 0x2d02ef8d};
 
-union typeCast  {
-    char buf[8];
-    duint16 i16;
-    duint32 i32;
-    duint64 i64;
-    ddouble64 d64;
-};
-
 bool dwgFileStream::setPos(duint64 p){
     if (p >= sz)
         return false;
@@ -368,6 +360,7 @@ double dwgBuffer::getBitDouble(){
         } else {
         filestr->read (buffer,8);
         }
+        // cppcheck-suppress invalidPointerCast
         double* ret = reinterpret_cast<double*>( buffer );
         return *ret;
     }
@@ -429,6 +422,7 @@ double dwgBuffer::getRawDouble(){
         for (int i = 0; i < 8; i++)
             buffer[i] = getRawChar8();
     }
+    // cppcheck-suppress invalidPointerCast
     double* nOffset = reinterpret_cast<double*>( buffer );
     return *nOffset;
 }
@@ -713,9 +707,11 @@ double dwgBuffer::getDefaultDouble(double d){
         } else {
         filestr->read (buffer,4);
         }
+        // cppcheck-suppress invalidPointerCast
         tmp = reinterpret_cast<char*>(&d);
         for (int i = 0; i < 4; i++)
             tmp[i] = buffer[i];
+        // cppcheck-suppress invalidPointerCast
         double ret = *reinterpret_cast<double*>( tmp );
         return ret;
     } else if (b == 2){
@@ -727,11 +723,13 @@ double dwgBuffer::getDefaultDouble(double d){
         } else {
         filestr->read (buffer,6);
         }
+        // cppcheck-suppress invalidPointerCast
         tmp = reinterpret_cast<char*>(&d);
         for (int i = 2; i < 6; i++)
             tmp[i-2] = buffer[i];
         tmp[4] = buffer[0];
         tmp[5] = buffer[1];
+        // cppcheck-suppress invalidPointerCast
         double ret = *reinterpret_cast<double*>( tmp );
         return ret;
     }
@@ -807,7 +805,6 @@ duint32 dwgBuffer::getEnColor(DRW::Version v) {
     if (v < DRW::AC1018) //2000-
         return getSBitShort();
     duint32 rgb = 0;
-    duint32 cb = 0;
     duint16 idx = getBitShort();
     DRW_DBG("idx reads COLOR: "); DRW_DBGH(idx);
     duint16 flags = static_cast<duint16>(idx>>8);
@@ -819,7 +816,7 @@ duint32 dwgBuffer::getEnColor(DRW::Version v) {
 //        DRW_DBG("\nRGB COLOR: "); DRW_DBGH(rgb);
 //    }
     if (flags & 0x20) {
-        cb = getBitLong();
+        duint32 cb = getBitLong();
         DRW_DBG("\nTransparency COLOR: "); DRW_DBGH(cb);
     }
     if (flags & 0x40)
@@ -849,14 +846,13 @@ duint16 dwgBuffer::getBERawShort16(){
 
 /* reads "size" bytes and stores in "buf" return false if fail */
 bool dwgBuffer::getBytes(unsigned char *buf, int size){
-    duint8 tmp;
     filestr->read (buf,size);
     if (!filestr->good())
         return false;
 
     if (bitPos != 0){
         for (int i=0; i<size;i++){
-            tmp =  buf[i];
+            duint8 tmp =  buf[i];
             buf[i] = static_cast<unsigned char>((currByte << bitPos) | (tmp >> (8 - bitPos)));
             currByte = tmp;
         }
@@ -875,10 +871,8 @@ duint16 dwgBuffer::crc8(duint16 dx, dint32 start, dint32 end){
     if (!filestr->good())
         return 0;
 
-    duint8 al;
-
   while (n-- > 0) {
-    al = static_cast<duint8>((*p) ^ (static_cast<duint8>(dx & 0xFF)));
+    duint8 al = static_cast<duint8>((*p) ^ (static_cast<duint8>(dx & 0xFF)));
     dx = (dx>>8) & 0xFF;
     dx = static_cast<duint16>(dx ^ crctable[al & 0xFF]);
     p++;

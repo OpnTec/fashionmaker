@@ -194,6 +194,12 @@ public:
           z(iz)
     {}
 
+    DRW_Coord(const DRW_Coord &data)
+        : x(data.x),
+          y(data.y),
+          z(data.z)
+    {}
+
     DRW_Coord &operator = (const DRW_Coord& data)
     {
         if ( &data == this )
@@ -310,7 +316,7 @@ public:
         addDouble(d);
     }
 
-    DRW_Variant(int c, UTF8STRING s)
+    DRW_Variant(int c, const UTF8STRING &s)
         : content(),
           type(),
           code(c),
@@ -320,7 +326,7 @@ public:
         addString(s);
     }
 
-    DRW_Variant(int c, DRW_Coord crd)
+    DRW_Variant(int c, const DRW_Coord &crd)
         : content(),
           type(),
           code(c),
@@ -352,11 +358,11 @@ public:
 
     ~DRW_Variant() = default;
 
-    void addString(UTF8STRING s) {setType(STRING); sdata = s; content.s = &sdata;}
+    void addString(const UTF8STRING &s) {setType(STRING); sdata = s; content.s = &sdata;}
     void addInt(int i) {setType(INTEGER); content.i = i;}
     void addDouble(double d) {setType(DOUBLE); content.d = d;}
     void addCoord() {setType(COORD); vdata.x=0.0; vdata.y=0.0; vdata.z=0.0; content.v = &vdata;}
-    void addCoord(DRW_Coord v) {setType(COORD); vdata = v; content.v = &vdata;}
+    void addCoord(const DRW_Coord &v) {setType(COORD); vdata = v; content.v = &vdata;}
     void setType(enum TYPE t) { type = t;}
     void setCoordX(double d) { if (type == COORD) vdata.x = d;}
     void setCoordY(double d) { if (type == COORD) vdata.y = d;}
@@ -376,6 +382,7 @@ public:
     int code;            /*!< dxf code of this value*/
 
 private:
+    DRW_Variant &operator=(const DRW_Variant &) Q_DECL_EQ_DELETE;
     std::string sdata;
     DRW_Coord vdata;
 };

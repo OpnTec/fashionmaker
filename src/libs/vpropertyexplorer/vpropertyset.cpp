@@ -153,10 +153,10 @@ void VPE::VPropertySet::clear(bool delete_properties)
 
 QString VPE::VPropertySet::getPropertyID(const VProperty *prop, bool look_for_parent_id) const
 {
-    QString tmpResult;
+//    QString tmpResult;
     const VProperty* tmpCurrentProp = prop;
 
-    while (tmpCurrentProp && (look_for_parent_id || prop == tmpCurrentProp) && tmpResult.isEmpty())
+    while (tmpCurrentProp && (look_for_parent_id || prop == tmpCurrentProp) /*&& tmpResult.isEmpty()*/)
     {
 
         // todo: The following code doesn't work, because .key() doesn't accept a const VProperty* pointer ...
@@ -175,7 +175,8 @@ QString VPE::VPropertySet::getPropertyID(const VProperty *prop, bool look_for_pa
         tmpCurrentProp = tmpCurrentProp->getParent();
     }
 
-    return tmpResult;
+//    return tmpResult;
+    return QString();
 }
 
 // cppcheck-suppress unusedFunction

@@ -34,7 +34,7 @@ DRW_Header::DRW_Header()
       vpEntHeaderCtrl(0)
 {}
 
-void DRW_Header::addComment(std::string c){
+void DRW_Header::addComment(const std::string &c){
     if (!comments.empty())
         comments += '\n';
     comments += c;
@@ -1703,6 +1703,7 @@ void DRW_Header::write(dxfWriter *writer, DRW::Version ver){
 }
 
 void DRW_Header::addDouble(std::string key, double value, int code){
+    // cppcheck-suppress publicAllocationError
     curr = new DRW_Variant();
     curr->addDouble( value );
     curr->code = code;
@@ -1710,6 +1711,7 @@ void DRW_Header::addDouble(std::string key, double value, int code){
 }
 
 void DRW_Header::addInt(std::string key, int value, int code){
+    // cppcheck-suppress publicAllocationError
     curr = new DRW_Variant();
     curr->addInt( value );
     curr->code = code;
@@ -1717,6 +1719,7 @@ void DRW_Header::addInt(std::string key, int value, int code){
 }
 
 void DRW_Header::addStr(std::string key, std::string value, int code){
+    // cppcheck-suppress publicAllocationError
     curr = new DRW_Variant();
     curr->addString( value );
     curr->code = code;
@@ -1724,6 +1727,7 @@ void DRW_Header::addStr(std::string key, std::string value, int code){
 }
 
 void DRW_Header::addCoord(std::string key, DRW_Coord value, int code){
+    // cppcheck-suppress publicAllocationError
     curr = new DRW_Variant();
     curr->addCoord( value );
     curr->code = code;
@@ -1797,7 +1801,6 @@ bool DRW_Header::getCoord(std::string key, DRW_Coord *varCoord){
 bool DRW_Header::parseDwg(DRW::Version version, dwgBuffer *buf, dwgBuffer *hBbuf, duint8 mv){
     bool result = true;
     duint32 size = buf->getRawLong32();
-    duint32 bitSize = 0;
     duint32 endBitPos = 160; //start bit: 16 sentinel + 4 size
     DRW_DBG("\nbyte size of data: "); DRW_DBG(size);
     if (version > DRW::AC1021 && mv > 3) { //2010+
@@ -1812,7 +1815,7 @@ bool DRW_Header::parseDwg(DRW::Version version, dwgBuffer *buf, dwgBuffer *hBbuf
     //and mark the start of handle stream
     //header is one object reads data and continue read strings ???
     if (version > DRW::AC1018) {//2007+
-        bitSize = buf->getRawLong32();
+        duint32 bitSize = buf->getRawLong32();
         DRW_DBG("\nsize in bits: "); DRW_DBG(bitSize);
         endBitPos += bitSize;
         hBbuf->setPosition(endBitPos >>3);

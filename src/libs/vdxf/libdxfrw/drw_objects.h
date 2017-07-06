@@ -592,7 +592,7 @@ class DRW_ImageDef : public DRW_TableEntry {//
     SETOBJFRIENDS
 public:
     DRW_ImageDef()
-        : name(),
+        : fileName(),
           imgVersion(),
           u(),
           v(),
@@ -617,7 +617,7 @@ protected:
 
 public:
 //    std::string handle;       /*!< entity identifier, code 5 */
-    UTF8STRING name;          /*!< File name of image, code 1 */
+    UTF8STRING fileName;          /*!< File name of image, code 1 */
     int imgVersion;              /*!< class version, code 90, 0=R14 version */
     double u;                 /*!< image size in pixels U value, code 10 */
     double v;                 /*!< image size in pixels V value, code 20 */

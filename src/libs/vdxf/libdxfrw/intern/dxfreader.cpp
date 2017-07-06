@@ -90,6 +90,7 @@ bool dxfReader::readRec(int *codeData) {
 int dxfReader::getHandleString(){
     int res;
 #if defined(__APPLE__)
+    // cppcheck-suppress invalidScanfArgType_int
     int Succeeded = sscanf ( strData.c_str(), "%x", &res );
     if ( !Succeeded || Succeeded == EOF )
         res = 0;
@@ -169,6 +170,7 @@ bool dxfReaderBinary::readDouble() {
     double *result;
     char buffer[8];
     filestr->read(buffer,8);
+    // cppcheck-suppress invalidPointerCast
     result = reinterpret_cast<double *>(buffer);
     doubleData = *result;
     DRW_DBG(doubleData); DRW_DBG("\n");

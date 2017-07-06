@@ -65,9 +65,7 @@ void dwgR::setDebug(DRW::DBG_LEVEL lvl){
 
 /*reads metadata and loads image preview*/
 bool dwgR::getPreview(std::istream &stream){
-    bool isOk = false;
-
-    isOk = open(&stream);
+    bool isOk = open(&stream);
     if (!isOk)
         return false;
 
@@ -88,9 +86,7 @@ bool dwgR::read(std::istream &stream, DRW_Interface *interface_, bool ext){
     applyExt = ext;
     iface = interface_;
 
-    bool isOk = false;
-
-    isOk = open(&stream);
+    bool isOk = open(&stream);
     if (!isOk)
         return false;
 

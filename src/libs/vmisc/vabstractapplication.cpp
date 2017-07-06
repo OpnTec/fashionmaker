@@ -81,6 +81,7 @@ VAbstractApplication::VAbstractApplication(int &argc, char **argv)
 #endif //defined(V_NO_ASSERT)
 #endif // QT_VERSION >= QT_VERSION_CHECK(5, 4, 1)
 
+    // cppcheck-suppress reademptycontainer
     if (not rules.isEmpty())
     {
         QLoggingCategory::setFilterRules(rules);

@@ -26,7 +26,7 @@ public:
         : path()
     {}
 
-    dx_ifaceImg(const DRW_Image& p)
+    explicit dx_ifaceImg(const DRW_Image& p)
         : DRW_Image(p),
           path()
     {}
@@ -42,7 +42,7 @@ public:
         : ent()
     {}
 
-    dx_ifaceBlock(const DRW_Block& p)
+    explicit dx_ifaceBlock(const DRW_Block& p)
         : DRW_Block(p),
           ent()
     {}
@@ -132,7 +132,7 @@ private:
     void InitTextstyles();
     void InitAppId();
 
-    std::string LocaleToISO() const;
+    static std::string LocaleToISO();
 };
 
 #endif // DX_IFACE_H

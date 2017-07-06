@@ -15,6 +15,7 @@
 
 #include <string>
 #include <iostream>
+#include <QtGlobal>
 //#include <iomanip>
 
 #define DRW_DBGSL(a) DRW_dbg::getInstance()->setLevel(a)
@@ -35,7 +36,7 @@ public:
         DEBUG
     };
     void setLevel(LEVEL lvl);
-    LEVEL getLevel();
+    LEVEL getLevel() const;
     static DRW_dbg *getInstance();
     void print(std::string s);
     void print(int i);
@@ -50,7 +51,9 @@ public:
     void printPT(double x, double y, double z);
 
 private:
+    Q_DISABLE_COPY(DRW_dbg)
     DRW_dbg();
+    ~DRW_dbg();
     static DRW_dbg *instance;
     LEVEL level;
     std::ios_base::fmtflags flags;

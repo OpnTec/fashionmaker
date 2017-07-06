@@ -91,12 +91,12 @@
     return (filestr->good());
 }*/
 
-bool dxfWriter::writeUtf8String(int code, std::string text) {
+bool dxfWriter::writeUtf8String(int code, const std::string &text) {
     std::string t = encoder.fromUtf8(text);
     return writeString(code, t);
 }
 
-bool dxfWriter::writeUtf8Caps(int code, std::string text) {
+bool dxfWriter::writeUtf8Caps(int code, const std::string &text) {
     std::string strname = text;
     std::transform(strname.begin(), strname.end(), strname.begin(),::toupper);
     std::string t = encoder.fromUtf8(strname);
@@ -194,6 +194,7 @@ bool dxfWriterBinary::writeDouble(int code, double data) {
     filestr->write(bufcode, 2);
 
     unsigned char *val;
+    // cppcheck-suppress invalidPointerCast
     val = reinterpret_cast<unsigned char *>(&data);
     for (int i=0; i<8; i++) {
         buffer[i] =val[i];

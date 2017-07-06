@@ -31,14 +31,10 @@ public:
     bool readDwgTables(DRW_Header& hdr);
     bool readDwgBlocks(DRW_Interface& intfa);
     bool readDwgEntities(DRW_Interface& intfa){
-        bool ret = true;
-        ret = dwgReader::readDwgEntities(intfa, fileBuf);
-        return ret;
+        return dwgReader::readDwgEntities(intfa, fileBuf);
     }
     bool readDwgObjects(DRW_Interface& intfa){
-        bool ret = true;
-        ret = dwgReader::readDwgObjects(intfa, fileBuf);
-        return ret;
+        return dwgReader::readDwgObjects(intfa, fileBuf);
     }
 //    bool readDwgEntity(objHandle& obj, DRW_Interface& intfa);
 };

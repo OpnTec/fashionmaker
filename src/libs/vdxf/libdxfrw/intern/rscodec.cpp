@@ -58,14 +58,13 @@ RScodec::~RScodec() {
 */
 void RScodec::RSgenerate_gf(unsigned int pp) {
     int i, mask ;
-    int pb;
 
     mask = 1 ;
     alpha_to[mm] = 0 ;
     for (i=0; i<mm; i++) {
         alpha_to[i] = mask ;
         index_of[alpha_to[i]] = i ;
-        pb = (pp >>(mm-1-i)) & 1;
+        int pb = (pp >>(mm-1-i)) & 1;
         if (pb!=0) {
             alpha_to[mm] ^= mask;
         }
@@ -110,7 +109,8 @@ void RScodec::RSgen_poly() {
     for (i=0; i<=bb; i++)  gg[i] = index_of[gg[i]] ;
 }
 
-int RScodec::calcDecode(unsigned char* data, int* recd, int** elp, int* d, int* l, int* u_lu, int* s, int* root, int* loc, int* z, int* err, int* reg, int bb)
+int RScodec::calcDecode(unsigned char* data, int* recd, int** elp, int* d, int* l, int* u_lu, int* s, int* root,
+                        int* loc, int* z, int* err, int* reg, int bb) const
 {
     if (!isOk) return -1;
     int count = 0;
@@ -315,17 +315,16 @@ int RScodec::calcDecode(unsigned char* data, int* recd, int** elp, int* d, int* 
    Encoding is done by using a feedback shift register with appropriate
    connections specified by the elements of gg[], which was generated above.
    Codeword is   c(X) = data(X)*X**(nn-kk)+ b(X)         */
-bool RScodec::encode(unsigned char *data, unsigned char *parity) {
+bool RScodec::encode(unsigned char *data, unsigned char *parity) const {
     if (!isOk) return false;
     int i,j ;
-    int feedback ;
     unsigned char *idata = data;
     unsigned char *bd = parity;
     int bb = nn-kk;; //nn-kk length of parity data
 
     for (i=0; i<bb; i++)   bd[i] = 0 ;
     for (i=kk-1; i>=0; i--) {
-        feedback = index_of[idata[i]^bd[bb-1]] ;
+        int feedback = index_of[idata[i]^bd[bb-1]] ;
         if (feedback != -1) {
             for (j=bb-1; j>0; j--)
                 if (gg[j] != -1)
@@ -362,7 +361,7 @@ bool RScodec::encode(unsigned char *data, unsigned char *parity) {
    parity part of the transmitted codeword).  Of course, these insoluble cases
    can be returned as error flags to the calling routine if desired.   */
 /** return value: number of corrected errors or -1 if can't correct it */
-int RScodec::decode(unsigned char *data) {
+int RScodec::decode(unsigned char *data) const {
     if (!isOk) return -1;
     int bb = nn-kk;; //nn-kk length of parity data
 

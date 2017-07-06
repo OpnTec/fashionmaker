@@ -311,7 +311,7 @@ UTF8STRING dx_iface::AddFont(const QFont &f)
     return ts.name;
 }
 
-std::string dx_iface::LocaleToISO() const
+std::string dx_iface::LocaleToISO()
 {
     QMap <std::string, std::string> locMap;
     locMap["croatian"] = "ISO8859-2";

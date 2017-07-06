@@ -149,7 +149,10 @@ bool dwgReader18::parseDataPage(dwgSectionInfo si/*, duint8 *dData*/){
         //get compresed data
         duint8 *cData = new duint8[pi.cSize];
         if (!fileBuf->setPosition(pi.address+32))
+        {
+            delete[]cData;
             return false;
+        }
         fileBuf->getBytes(cData, static_cast<int>(pi.cSize));
 
         //calculate checksum
@@ -269,8 +272,8 @@ bool dwgReader18::readFileHeader() {
     DRW_DBG("\nGap array size= "); DRW_DBGH(buff.getRawLong32());
     //TODO: verify CRC
     DRW_DBG("\nCRC32= "); DRW_DBGH(buff.getRawLong32());
-    for (duint8 i = 0x68; i < 0x6c; ++i)
-        byteStr[i] = '\0';
+//    for (duint8 i = 0x68; i < 0x6c; ++i)
+//        byteStr[i] = '\0';
 //    byteStr[i] = '\0';
     duint32 crcCalc = buff.crc32(0x00,0,0x6C);
     DRW_DBG("\nCRC32 calculated= "); DRW_DBGH(crcCalc);
