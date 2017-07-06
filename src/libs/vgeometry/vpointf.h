@@ -92,6 +92,7 @@ private:
 Q_DECLARE_METATYPE(VPointF)
 Q_DECLARE_TYPEINFO(VPointF, Q_MOVABLE_TYPE);
 
+// cppcheck-suppress syntaxError
 QT_WARNING_POP
 
 #endif // VPOINTF_H
