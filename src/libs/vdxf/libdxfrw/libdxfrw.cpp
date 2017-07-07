@@ -1273,7 +1273,6 @@ DRW_ImageDef* dxfRW::writeImage(DRW_Image *ent, const std::string &name){
         for (unsigned int i=0; i<imageDef.size(); i++) {
             if (imageDef.at(i)->name == name ) {
                 id = imageDef.at(i);
-                continue;
             }
         }
         if (id == NULL) {

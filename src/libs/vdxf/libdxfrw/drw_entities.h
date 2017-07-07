@@ -552,8 +552,6 @@ public:
         eType = DRW::INSERT;
     }
 
-    virtual void applyExtrusion(){DRW_Point::applyExtrusion();}
-
 protected:
     void parseCode(int code, dxfReader *reader);
 
