@@ -99,7 +99,6 @@ deploy:
     all_branches: true
     condition: $DEPLOY = true
 addons:
-  sonarcloud:
-    organization: "dismine-github"
+  sonarqube:
     token:
       secure: Et0JMrRcVfmlNs+pwqUY1fJx49/SSwss0NMe46nSv8D6Tnv9zlPZyA8KPmOq3jIc9zsoa40dcrp3eXd3jBZrULSb2gD8KkAJAWuTFmBH7Hu18t8LGEnorh0puHK8S2jV5Ueowig67PF8hh20KjErDo7Wo0FDc14lLxCsm20Jt0WKzHU50aqWxAGY3f5f8po/o/6ClcuqPNfqXy4i93YIjgdsYsN2+PUoCSkm92yE7iA2Ggyx5Np93DajkEd75QtInhcbiP8OmNV0BMCMT41+evSnwgUhmyzzEgICrYwKwij0igsxPWkqiwI/jLC5qAOjp9KZqfK556c3FwsQY8hKEIdGKozXgcDMlBlIivQPF/zeo17LugifXjuie6lhC+e7stresxZSYmLhNFbrcKC98JF1GvBZj6xQnKoqp3+M+JAgP+LskyHVJABLHqbnYG+ubmIsTaTr6CsvRiq/9GoaODJIfkBATkPRb/WvLkPEuoJk3h+mW3oPlUbFVYs+6WPm9/+5WkKcEU7HS2nT1XM94TZh+7Adsd47vLzJ7KQ1vGK6pHChMcAK+MkZshSslvcn4H7is8sFkOSyZdMj/f+dnpTllpmU2AArPPVK6P2bQqGl8n16JY6lBw10KBkodpUd1D6JWXkNQIAyPUGGGjlqeqm1wetfad0hoHqrnQJ7HE0=
