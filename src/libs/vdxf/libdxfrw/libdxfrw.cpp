@@ -2562,6 +2562,7 @@ bool dxfRW::processVertex(DRW_Polyline *pl) {
             break;
         }
     }
+    delete v;
     return true;
 }
 
