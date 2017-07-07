@@ -69,10 +69,10 @@ void DRW_Entity::extrudePoint(DRW_Coord extPoint, DRW_Coord *point) const{
 bool DRW_Entity::parseCode(int code, dxfReader *reader){
     switch (code) {
     case 5:
-        handle = reader->getHandleString();
+        handle = static_cast<quint32>(reader->getHandleString());
         break;
     case 330:
-        parentHandle = reader->getHandleString();
+        parentHandle = static_cast<quint32>(reader->getHandleString());
         break;
     case 8:
         layer = reader->getUtf8String();
@@ -159,7 +159,7 @@ bool DRW_Entity::parseDxfGroups(int code, dxfReader *reader){
     int nc;
     std::string appName= reader->getString();
     if (!appName.empty() && appName.at(0)== '{'){
-        curr.addString(appName.substr(1, static_cast<int>(appName.size()-1)));
+        curr.addString(appName.substr(1, static_cast<size_t>(appName.size()-1)));
         curr.code = code;
         ls.push_back(curr);
         while (code !=102 && appName.at(0)== '}'){
@@ -535,7 +535,7 @@ void DRW_LWPolyline::parseCode(int code, dxfReader *reader){
         break;
     case 90:
         vertexnum = reader->getInt32();
-        vertlist.reserve(vertexnum);
+        vertlist.reserve(static_cast<size_t>(vertexnum));
         break;
     case 210:
         haveExtrusion = true;
@@ -826,7 +826,7 @@ void DRW_Hatch::parseCode(int code, dxfReader *reader){
         break;
     case 91:
         loopsnum = reader->getInt32();
-        looplist.reserve(loopsnum);
+        looplist.reserve(static_cast<size_t>(loopsnum));
         break;
     case 92:
         loop = new DRW_HatchLoop(reader->getInt32());
@@ -960,7 +960,7 @@ void DRW_Image::parseCode(int code, dxfReader *reader){
         sizev = reader->getDouble();
         break;
     case 340:
-        ref = reader->getHandleString();
+        ref = static_cast<duint32>(reader->getHandleString());
         break;
     case 280:
         clip = reader->getInt32();
@@ -1137,7 +1137,7 @@ void DRW_Leader::parseCode(int code, dxfReader *reader){
             vertexpoint->z = reader->getDouble();
         break;
     case 340:
-        annotHandle = reader->getHandleString();
+        annotHandle = static_cast<duint32>(reader->getHandleString());
         break;
     case 210:
         extrusionPoint.x = reader->getDouble();

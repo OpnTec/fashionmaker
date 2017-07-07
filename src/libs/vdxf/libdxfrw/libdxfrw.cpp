@@ -178,8 +178,8 @@ bool dxfRW::write(DRW_Interface *interface_, DRW::Version ver, bool bin){
 }
 
 bool dxfRW::writeEntity(DRW_Entity *ent) {
-    ent->handle = ++entCount;
-    writer->writeString(5, toHexStr(ent->handle));
+    ent->handle = static_cast<duint32>(++entCount);
+    writer->writeString(5, toHexStr(static_cast<int>(ent->handle)));
     if (version > DRW::AC1009) {
         writer->writeString(100, "AcDbEntity");
     }
@@ -758,7 +758,7 @@ bool dxfRW::writeLWPolyline(DRW_LWPolyline *ent){
         if (not qFuzzyIsNull(ent->thickness))
             writer->writeDouble(39, ent->thickness);
         for (int i = 0;  i< ent->vertexnum; i++){
-            DRW_Vertex2D *v = ent->vertlist.at(i);
+            DRW_Vertex2D *v = ent->vertlist.at(static_cast<size_t>(i));
             writer->writeDouble(10, v->x);
             writer->writeDouble(20, v->y);
             if (not qFuzzyIsNull(v->stawidth))
@@ -897,13 +897,13 @@ bool dxfRW::writeSpline(DRW_Spline *ent){
         writer->writeDouble(43, ent->tolcontrol);
         //RLZ: warning check if nknots are correct and ncontrol
         for (int i = 0;  i< ent->nknots; i++){
-            writer->writeDouble(40, ent->knotslist.at(i));
+            writer->writeDouble(40, ent->knotslist.at(static_cast<size_t>(i)));
         }
         for (int i = 0; i< static_cast<int>(ent->weightlist.size()); i++) {
-            writer->writeDouble(41, ent->weightlist.at(i));
+            writer->writeDouble(41, ent->weightlist.at(static_cast<size_t>(i)));
         }
         for (int i = 0;  i< ent->ncontrol; i++){
-            DRW_Coord *crd = ent->controllist.at(i);
+            DRW_Coord *crd = ent->controllist.at(static_cast<size_t>(i));
             writer->writeDouble(10, crd->x);
             writer->writeDouble(20, crd->y);
             writer->writeDouble(30, crd->z);
@@ -932,7 +932,7 @@ bool dxfRW::writeHatch(DRW_Hatch *ent){
         writer->writeInt16(91, ent->loopsnum);
         //write paths data
         for (int i = 0;  i< ent->loopsnum; i++){
-            DRW_HatchLoop *loop = ent->looplist.at(i);
+            DRW_HatchLoop *loop = ent->looplist.at(static_cast<size_t>(i));
             writer->writeInt16(92, loop->type);
             if ( (loop->type & 2) == 2){
                 //RLZ: polyline boundary writeme
@@ -941,10 +941,10 @@ bool dxfRW::writeHatch(DRW_Hatch *ent){
                 loop->update();
                 writer->writeInt16(93, loop->numedges);
                 for (int j = 0; j<loop->numedges; ++j) {
-                    switch ( (loop->objlist.at(j))->eType) {
+                    switch ( (loop->objlist.at(static_cast<size_t>(j)))->eType) {
                     case DRW::LINE: {
                         writer->writeInt16(72, 1);
-                        DRW_Line* l = static_cast<DRW_Line*>(loop->objlist.at(j));
+                        DRW_Line* l = static_cast<DRW_Line*>(loop->objlist.at(static_cast<size_t>(j)));
                         writer->writeDouble(10, l->basePoint.x);
                         writer->writeDouble(20, l->basePoint.y);
                         writer->writeDouble(11, l->secPoint.x);
@@ -952,7 +952,7 @@ bool dxfRW::writeHatch(DRW_Hatch *ent){
                         break; }
                     case DRW::ARC: {
                         writer->writeInt16(72, 2);
-                        DRW_Arc* a = static_cast<DRW_Arc*>(loop->objlist.at(j));
+                        DRW_Arc* a = static_cast<DRW_Arc*>(loop->objlist.at(static_cast<size_t>(j)));
                         writer->writeDouble(10, a->basePoint.x);
                         writer->writeDouble(20, a->basePoint.y);
                         writer->writeDouble(40, a->radious);
@@ -962,7 +962,7 @@ bool dxfRW::writeHatch(DRW_Hatch *ent){
                         break; }
                     case DRW::ELLIPSE: {
                         writer->writeInt16(72, 3);
-                        DRW_Ellipse* a = static_cast<DRW_Ellipse*>(loop->objlist.at(j));
+                        DRW_Ellipse* a = static_cast<DRW_Ellipse*>(loop->objlist.at(static_cast<size_t>(j)));
                         a->correctAxis();
                         writer->writeDouble(10, a->basePoint.x);
                         writer->writeDouble(20, a->basePoint.y);
@@ -1227,11 +1227,11 @@ bool dxfRW::writeMText(DRW_MText *ent){
         std::string text = writer->fromUtf8String(ent->text);
 
         int i;
-        for(i =0; (text.size()-i) > 250; ) {
-            writer->writeString(3, text.substr(i, 250));
+        for(i =0; (text.size()-static_cast<size_t>(i)) > 250; ) {
+            writer->writeString(3, text.substr(static_cast<size_t>(i), 250));
             i +=250;
         }
-        writer->writeString(1, text.substr(i));
+        writer->writeString(1, text.substr(static_cast<size_t>(i)));
         writer->writeString(7, ent->style);
         writer->writeDouble(210, ent->extPoint.x);
         writer->writeDouble(220, ent->extPoint.y);
@@ -1279,7 +1279,7 @@ DRW_ImageDef* dxfRW::writeImage(DRW_Image *ent, const std::string &name){
         if (id == NULL) {
             id = new DRW_ImageDef();
             imageDef.push_back(id);
-            id->handle = ++entCount;
+            id->handle = static_cast<duint32>(++entCount);
         }
         id->fileName = name;
         std::string idReactor = toHexStr(++entCount);
@@ -1298,14 +1298,14 @@ DRW_ImageDef* dxfRW::writeImage(DRW_Image *ent, const std::string &name){
         writer->writeDouble(32, ent->vVector.z);
         writer->writeDouble(13, ent->sizeu);
         writer->writeDouble(23, ent->sizev);
-        writer->writeString(340, toHexStr(id->handle));
+        writer->writeString(340, toHexStr(static_cast<int>(id->handle)));
         writer->writeInt16(70, 1);
         writer->writeInt16(280, ent->clip);
         writer->writeInt16(281, ent->brightness);
         writer->writeInt16(282, ent->contrast);
         writer->writeInt16(283, ent->fade);
         writer->writeString(360, idReactor);
-        id->reactors[idReactor] = toHexStr(ent->handle);
+        id->reactors[idReactor] = toHexStr(static_cast<int>(ent->handle));
         return id;
     }
     return NULL; //not exist in acad 12
@@ -1758,13 +1758,13 @@ bool dxfRW::writeObjects() {
             f2 =imageDef.at(i)->name.find_last_of('.');
             ++f1;
             writer->writeString(3, imageDef.at(i)->name.substr(f1,f2-f1));
-            writer->writeString(350, toHexStr(imageDef.at(i)->handle) );
+            writer->writeString(350, toHexStr(static_cast<int>(imageDef.at(i)->handle)) );
         }
     }
     for (unsigned int i=0; i<imageDef.size(); i++) {
         DRW_ImageDef *id = imageDef.at(i);
         writer->writeString(0, "IMAGEDEF");
-        writer->writeString(5, toHexStr(id->handle) );
+        writer->writeString(5, toHexStr(static_cast<int>(id->handle)) );
         if (version > DRW::AC1014) {
 //            writer->writeString(330, "0"); handle to DICTIONARY
         }
@@ -2530,6 +2530,7 @@ bool dxfRW::processPolyline() {
                 processVertex(&pl);
             }
         }
+        DRW_FALLTHROUGH
         default:
             pl.parseCode(code, reader);
             break;
@@ -2555,6 +2556,7 @@ bool dxfRW::processVertex(DRW_Polyline *pl) {
                 v = new DRW_Vertex(); //another vertex
             }
         }
+        DRW_FALLTHROUGH
         default:
             v->parseCode(code, reader);
             break;

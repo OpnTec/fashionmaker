@@ -52,6 +52,28 @@
 #define M_PIx2      6.283185307179586 // 2*PI
 #define ARAD 57.29577951308232
 
+#ifndef __has_cpp_attribute
+# define __has_cpp_attribute(x) 0
+#endif
+
+#if __cplusplus > 201402L && __has_cpp_attribute(fallthrough)
+#   define DRW_FALLTHROUGH [[fallthrough]];
+#elif defined(Q_CC_CLANG) && __cplusplus >= 201103L
+    /* clang's fallthrough annotations are only available starting in C++11. */
+#   define DRW_FALLTHROUGH [[clang::fallthrough]];
+#elif defined(Q_CC_MSVC)
+   /*
+    * MSVC's __fallthrough annotations are checked by /analyze (Code Analysis):
+    * https://msdn.microsoft.com/en-us/library/ms235402%28VS.80%29.aspx
+    */
+#   include <sal.h>
+#   define DRW_FALLTHROUGH __fallthrough;
+#elif defined(Q_CC_GNU) && (__GNUC__ >= 7)
+#   define DRW_FALLTHROUGH [[gnu::fallthrough]];
+#else
+#   define DRW_FALLTHROUGH
+#endif
+
 typedef signed char dint8;              /* 8 bit signed */
 typedef signed short dint16;            /* 16 bit signed */
 typedef signed int dint32;              /* 32 bit signed */

@@ -197,7 +197,7 @@ bool dxfWriterBinary::writeDouble(int code, double data) {
     // cppcheck-suppress invalidPointerCast
     val = reinterpret_cast<unsigned char *>(&data);
     for (int i=0; i<8; i++) {
-        buffer[i] =val[i];
+        buffer[i] = static_cast<char>(val[i]);
     }
     filestr->write(buffer, 8);
     return (filestr->good());

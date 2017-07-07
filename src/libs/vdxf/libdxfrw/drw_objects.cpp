@@ -25,7 +25,7 @@
 void DRW_TableEntry::parseCode(int code, dxfReader *reader){
     switch (code) {
     case 5:
-        handle = reader->getHandleString();
+        handle = static_cast<duint32>(reader->getHandleString());
         break;
     case 330:
         parentHandle = reader->getHandleString();
@@ -91,7 +91,7 @@ void DRW_TableEntry::parseCode(int code, dxfReader *reader){
 void DRW_Dimstyle::parseCode(int code, dxfReader *reader){
     switch (code) {
     case 105:
-        handle = reader->getHandleString();
+        handle = static_cast<duint32>(reader->getHandleString());
         break;
     case 3:
         dimpost = reader->getUtf8String();
@@ -319,7 +319,7 @@ void DRW_LType::parseCode(int code, dxfReader *reader){
     case 73:
         size = reader->getInt32();
         path.clear();
-        path.reserve(size);
+        path.reserve(static_cast<size_t>(size));
         break;
     case 40:
         length = reader->getDouble();
@@ -347,7 +347,7 @@ void DRW_LType::update(){
     double d =0;
     size = static_cast<int>(path.size());
     for (int i = 0;  i< size; i++){
-        d += fabs(path.at(i));
+        d += fabs(path.at(static_cast<size_t>(i)));
     }
     length = d;
 }
@@ -541,7 +541,7 @@ void DRW_ImageDef::parseCode(int code, dxfReader *reader){
         fileName = reader->getUtf8String();
         break;
     case 5:
-        handle = reader->getHandleString();
+        handle = static_cast<duint32>(reader->getHandleString());
         break;
     case 10:
         u = reader->getDouble();
