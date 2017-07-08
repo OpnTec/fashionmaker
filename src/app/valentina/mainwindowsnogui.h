@@ -50,7 +50,6 @@ public:
 
 public slots:
     void ToolLayoutSettings(bool checked);
-    void SaveAsTiledPDF();
     void PrintPreviewOrigin();
     void PrintPreviewTiled();
     void PrintOrigin();
@@ -117,6 +116,7 @@ private:
     void SvgFile(const QString &name, int i)const;
     void PngFile(const QString &name, int i)const;
     void PdfFile(const QString &name, int i)const;
+    void PdfTiledFile(const QString &name);
     void EpsFile(const QString &name, int i)const;
     void PsFile(const QString &name, int i)const;
     void PdfToPs(const QStringList &params)const;
@@ -129,7 +129,6 @@ private:
     void PrepareTextForDXF(const QString &placeholder) const;
     void RestoreTextAfterDXF(const QString &placeholder) const;
 
-    void SaveLayoutAs();
     void PrintPreview();
     void LayoutPrint();
 

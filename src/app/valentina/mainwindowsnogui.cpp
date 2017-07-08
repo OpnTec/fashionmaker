@@ -202,13 +202,15 @@ void MainWindowsNoGUI::ErrorConsoleMode(const LayoutErrors &state)
 void MainWindowsNoGUI::ExportLayout(const DialogSaveLayout &dialog)
 {
     const QString path = dialog.Path();
+    bool usedNotExistedDir = false;
     QDir dir(path);
     dir.setPath(path);
     if (not dir.exists(path))
     {
-        if (not dir.mkpath(path))
+        usedNotExistedDir = dir.mkpath(".");
+        if (not usedNotExistedDir)
         {
-            qCritical() << tr("Can't create path");
+            qCritical() << tr("Can't create a path");
             return;
         }
     }
@@ -216,126 +218,135 @@ void MainWindowsNoGUI::ExportLayout(const DialogSaveLayout &dialog)
     const QString mask = dialog.FileName();
     const LayoutExportFormats format = dialog.Format();
 
-    for (int i=0; i < scenes.size(); ++i)
+    if (format == LayoutExportFormats::PDFTiled)
     {
-        QGraphicsRectItem *paper = qgraphicsitem_cast<QGraphicsRectItem *>(papers.at(i));
-        if (paper)
+        const QString name = path + QLatin1String("/") + mask + QString::number(1)
+                + DialogSaveLayout::ExportFromatSuffix(format);
+        PdfTiledFile(name);
+    }
+    else
+    {
+        for (int i=0; i < scenes.size(); ++i)
         {
-            const QString name = path + QLatin1String("/") + mask+QString::number(i+1)
-                    + DialogSaveLayout::ExportFromatSuffix(format);
-            QBrush *brush = new QBrush();
-            brush->setColor( QColor( Qt::white ) );
-            scenes[i]->setBackgroundBrush( *brush );
-            shadows[i]->setVisible(false);
-            paper->setPen(QPen(QBrush(Qt::white, Qt::NoBrush), 0.1, Qt::NoPen));
-
-            switch (format)
+            QGraphicsRectItem *paper = qgraphicsitem_cast<QGraphicsRectItem *>(papers.at(i));
+            if (paper)
             {
-                case LayoutExportFormats::DXF_AC1006_AAMA:
-                case LayoutExportFormats::DXF_AC1009_AAMA:
-                case LayoutExportFormats::DXF_AC1012_AAMA:
-                case LayoutExportFormats::DXF_AC1014_AAMA:
-                case LayoutExportFormats::DXF_AC1015_AAMA:
-                case LayoutExportFormats::DXF_AC1018_AAMA:
-                case LayoutExportFormats::DXF_AC1021_AAMA:
-                case LayoutExportFormats::DXF_AC1024_AAMA:
-                case LayoutExportFormats::DXF_AC1027_AAMA:
-                case LayoutExportFormats::DXF_AC1006_ASTM:
-                case LayoutExportFormats::DXF_AC1009_ASTM:
-                case LayoutExportFormats::DXF_AC1012_ASTM:
-                case LayoutExportFormats::DXF_AC1014_ASTM:
-                case LayoutExportFormats::DXF_AC1015_ASTM:
-                case LayoutExportFormats::DXF_AC1018_ASTM:
-                case LayoutExportFormats::DXF_AC1021_ASTM:
-                case LayoutExportFormats::DXF_AC1024_ASTM:
-                case LayoutExportFormats::DXF_AC1027_ASTM:
-                    Q_UNREACHABLE(); // For now not supported
-                case LayoutExportFormats::SVG:
-                    paper->setVisible(false);
-                    SvgFile(name, i);
-                    paper->setVisible(true);
-                    break;
-                case LayoutExportFormats::PDF:
-                    PdfFile(name, i);
-                    break;
-                case LayoutExportFormats::PNG:
-                    PngFile(name, i);
-                    break;
-                case LayoutExportFormats::OBJ:
-                    paper->setVisible(false);
-                    ObjFile(name, i);
-                    paper->setVisible(true);
-                    break;
-                case LayoutExportFormats::PS:
-                    PsFile(name, i);
-                    break;
-                case LayoutExportFormats::EPS:
-                    EpsFile(name, i);
-                    break;
-                case LayoutExportFormats::DXF_AC1006_Flat:
-                    paper->setVisible(false);
-                    DxfFile(name, DRW::AC1006, dialog.IsBinaryDXFFormat(), i);
-                    paper->setVisible(true);
-                    break;
-                case LayoutExportFormats::DXF_AC1009_Flat:
-                    paper->setVisible(false);
-                    DxfFile(name, DRW::AC1009, dialog.IsBinaryDXFFormat(), i);
-                    paper->setVisible(true);
-                    break;
-                case LayoutExportFormats::DXF_AC1012_Flat:
-                    paper->setVisible(false);
-                    DxfFile(name, DRW::AC1012, dialog.IsBinaryDXFFormat(), i);
-                    paper->setVisible(true);
-                    break;
-                case LayoutExportFormats::DXF_AC1014_Flat:
-                    paper->setVisible(false);
-                    DxfFile(name, DRW::AC1014, dialog.IsBinaryDXFFormat(), i);
-                    paper->setVisible(true);
-                    break;
-                case LayoutExportFormats::DXF_AC1015_Flat:
-                    paper->setVisible(false);
-                    DxfFile(name, DRW::AC1015, dialog.IsBinaryDXFFormat(), i);
-                    paper->setVisible(true);
-                    break;
-                case LayoutExportFormats::DXF_AC1018_Flat:
-                    paper->setVisible(false);
-                    DxfFile(name, DRW::AC1018, dialog.IsBinaryDXFFormat(), i);
-                    paper->setVisible(true);
-                    break;
-                case LayoutExportFormats::DXF_AC1021_Flat:
-                    paper->setVisible(false);
-                    DxfFile(name, DRW::AC1021, dialog.IsBinaryDXFFormat(), i);
-                    paper->setVisible(true);
-                    break;
-                case LayoutExportFormats::DXF_AC1024_Flat:
-                    paper->setVisible(false);
-                    DxfFile(name, DRW::AC1024, dialog.IsBinaryDXFFormat(), i);
-                    paper->setVisible(true);
-                    break;
-                case LayoutExportFormats::DXF_AC1027_Flat:
-                    paper->setVisible(false);
-                    DxfFile(name, DRW::AC1027, dialog.IsBinaryDXFFormat(), i);
-                    paper->setVisible(true);
-                    break;
-                default:
-                    qDebug() << "Can't recognize file suffix." << Q_FUNC_INFO;
-                    break;
+                const QString name = path + QLatin1String("/") + mask+QString::number(i+1)
+                        + DialogSaveLayout::ExportFromatSuffix(format);
+                QBrush *brush = new QBrush();
+                brush->setColor( QColor( Qt::white ) );
+                scenes[i]->setBackgroundBrush( *brush );
+                shadows[i]->setVisible(false);
+                paper->setPen(QPen(QBrush(Qt::white, Qt::NoBrush), 0.1, Qt::NoPen));
+
+                switch (format)
+                {
+                    case LayoutExportFormats::PDFTiled: // Handled separately
+                    case LayoutExportFormats::DXF_AC1006_AAMA:
+                    case LayoutExportFormats::DXF_AC1009_AAMA:
+                    case LayoutExportFormats::DXF_AC1012_AAMA:
+                    case LayoutExportFormats::DXF_AC1014_AAMA:
+                    case LayoutExportFormats::DXF_AC1015_AAMA:
+                    case LayoutExportFormats::DXF_AC1018_AAMA:
+                    case LayoutExportFormats::DXF_AC1021_AAMA:
+                    case LayoutExportFormats::DXF_AC1024_AAMA:
+                    case LayoutExportFormats::DXF_AC1027_AAMA:
+                    case LayoutExportFormats::DXF_AC1006_ASTM:
+                    case LayoutExportFormats::DXF_AC1009_ASTM:
+                    case LayoutExportFormats::DXF_AC1012_ASTM:
+                    case LayoutExportFormats::DXF_AC1014_ASTM:
+                    case LayoutExportFormats::DXF_AC1015_ASTM:
+                    case LayoutExportFormats::DXF_AC1018_ASTM:
+                    case LayoutExportFormats::DXF_AC1021_ASTM:
+                    case LayoutExportFormats::DXF_AC1024_ASTM:
+                    case LayoutExportFormats::DXF_AC1027_ASTM:
+                        Q_UNREACHABLE(); // For now not supported
+                    case LayoutExportFormats::SVG:
+                        paper->setVisible(false);
+                        SvgFile(name, i);
+                        paper->setVisible(true);
+                        break;
+                    case LayoutExportFormats::PDF:
+                        PdfFile(name, i);
+                        break;
+                    case LayoutExportFormats::PNG:
+                        PngFile(name, i);
+                        break;
+                    case LayoutExportFormats::OBJ:
+                        paper->setVisible(false);
+                        ObjFile(name, i);
+                        paper->setVisible(true);
+                        break;
+                    case LayoutExportFormats::PS:
+                        PsFile(name, i);
+                        break;
+                    case LayoutExportFormats::EPS:
+                        EpsFile(name, i);
+                        break;
+                    case LayoutExportFormats::DXF_AC1006_Flat:
+                        paper->setVisible(false);
+                        DxfFile(name, DRW::AC1006, dialog.IsBinaryDXFFormat(), i);
+                        paper->setVisible(true);
+                        break;
+                    case LayoutExportFormats::DXF_AC1009_Flat:
+                        paper->setVisible(false);
+                        DxfFile(name, DRW::AC1009, dialog.IsBinaryDXFFormat(), i);
+                        paper->setVisible(true);
+                        break;
+                    case LayoutExportFormats::DXF_AC1012_Flat:
+                        paper->setVisible(false);
+                        DxfFile(name, DRW::AC1012, dialog.IsBinaryDXFFormat(), i);
+                        paper->setVisible(true);
+                        break;
+                    case LayoutExportFormats::DXF_AC1014_Flat:
+                        paper->setVisible(false);
+                        DxfFile(name, DRW::AC1014, dialog.IsBinaryDXFFormat(), i);
+                        paper->setVisible(true);
+                        break;
+                    case LayoutExportFormats::DXF_AC1015_Flat:
+                        paper->setVisible(false);
+                        DxfFile(name, DRW::AC1015, dialog.IsBinaryDXFFormat(), i);
+                        paper->setVisible(true);
+                        break;
+                    case LayoutExportFormats::DXF_AC1018_Flat:
+                        paper->setVisible(false);
+                        DxfFile(name, DRW::AC1018, dialog.IsBinaryDXFFormat(), i);
+                        paper->setVisible(true);
+                        break;
+                    case LayoutExportFormats::DXF_AC1021_Flat:
+                        paper->setVisible(false);
+                        DxfFile(name, DRW::AC1021, dialog.IsBinaryDXFFormat(), i);
+                        paper->setVisible(true);
+                        break;
+                    case LayoutExportFormats::DXF_AC1024_Flat:
+                        paper->setVisible(false);
+                        DxfFile(name, DRW::AC1024, dialog.IsBinaryDXFFormat(), i);
+                        paper->setVisible(true);
+                        break;
+                    case LayoutExportFormats::DXF_AC1027_Flat:
+                        paper->setVisible(false);
+                        DxfFile(name, DRW::AC1027, dialog.IsBinaryDXFFormat(), i);
+                        paper->setVisible(true);
+                        break;
+                    default:
+                        qDebug() << "Can't recognize file suffix." << Q_FUNC_INFO;
+                        break;
+                }
+                paper->setPen(QPen(Qt::black, 1));
+                brush->setColor( QColor( Qt::gray ) );
+                brush->setStyle( Qt::SolidPattern );
+                scenes[i]->setBackgroundBrush( *brush );
+                shadows[i]->setVisible(true);
+                delete brush;
             }
-            paper->setPen(QPen(Qt::black, 1));
-            brush->setColor( QColor( Qt::gray ) );
-            brush->setStyle( Qt::SolidPattern );
-            scenes[i]->setBackgroundBrush( *brush );
-            shadows[i]->setVisible(true);
-            delete brush;
         }
     }
-}
 
-//---------------------------------------------------------------------------------------------------------------------
-void MainWindowsNoGUI::SaveAsTiledPDF()
-{
-    isTiled = true;
-    SaveLayoutAs();
+    if (usedNotExistedDir)
+    {
+        QDir directory(dir);
+        directory.rmpath(".");
+    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -750,6 +761,33 @@ void MainWindowsNoGUI::PdfFile(const QString &name, int i) const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void MainWindowsNoGUI::PdfTiledFile(const QString &name)
+{
+    isTiled = true;
+
+    if (isLayoutStale)
+    {
+        if (ContinueIfLayoutStale() == QMessageBox::No)
+        {
+            return;
+        }
+    }
+    QPrinter printer;
+    SetPrinterSettings(&printer, PrintType::PrintPDF);
+    printer.setPageSize(QPrinter::A4);// Want to be sure that page size is correct.
+
+    // Call IsPagesFit after setting a printer settings and check if pages is not bigger than printer's paper size
+    if (not isTiled && not IsPagesFit(printer.paperRect().size()))
+    {
+        qWarning()<<tr("Pages will be cropped because they do not fit printer paper size.");
+    }
+
+    printer.setOutputFileName(name);
+    printer.setResolution(static_cast<int>(PrintDPI));
+    PrintPages( &printer );
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 /**
  * @brief EpsFile save layout to eps file.
  * @param name name layout file.
@@ -971,58 +1009,6 @@ void MainWindowsNoGUI::RestoreTextAfterDXF(const QString &placeholder) const
                 }
             }
         }
-    }
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void MainWindowsNoGUI::SaveLayoutAs()
-{
-    if (isLayoutStale)
-    {
-        if (ContinueIfLayoutStale() == QMessageBox::No)
-        {
-            return;
-        }
-    }
-    QPrinter printer;
-    SetPrinterSettings(&printer, PrintType::PrintPDF);
-    printer.setPageSize(QPrinter::A4);// Want to be sure that page size is correct.
-
-    // Call IsPagesFit after setting a printer settings and check if pages is not bigger than printer's paper size
-    if (not isTiled && not IsPagesFit(printer.paperRect().size()))
-    {
-        qWarning()<<tr("Pages will be cropped because they do not fit printer paper size.");
-    }
-
-    const QString dir = qApp->ValentinaSettings()->GetPathLayout();
-    bool usedNotExistedDir = false;
-    QDir directory(dir);
-    if (not directory.exists())
-    {
-        usedNotExistedDir = directory.mkpath(".");
-    }
-
-    QString fileName = QFileDialog::getSaveFileName(this, tr("Print to pdf"),
-                                                    dir + QLatin1String("/") + FileName() + QLatin1String(".pdf"),
-                                                    tr("PDF file (*.pdf)"), nullptr, QFileDialog::DontUseNativeDialog);
-    if (not fileName.isEmpty())
-    {
-        QFileInfo f( fileName );
-        if(f.suffix().isEmpty())
-        {
-            fileName.append(".pdf");
-        }
-        qApp->ValentinaSettings()->SetPathLayout(f.absolutePath());
-
-        printer.setOutputFileName(fileName);
-        printer.setResolution(static_cast<int>(PrintDPI));
-        PrintPages( &printer );
-    }
-
-    if (usedNotExistedDir)
-    {
-        QDir directory(dir);
-        directory.rmpath(".");
     }
 }
 

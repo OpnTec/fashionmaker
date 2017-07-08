@@ -77,6 +77,7 @@ enum class LayoutExportFormats : char
     DXF_AC1021_ASTM = 30, /* ACAD 2007. */
     DXF_AC1024_ASTM = 31, /* ACAD 2010. */
     DXF_AC1027_ASTM = 32, /* ACAD 2013. */
+    PDFTiled = 33,
     COUNT                 /*Use only for validation*/
 };
 

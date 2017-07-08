@@ -54,7 +54,7 @@
        <property name="geometry">
         <rect>
          <x>0</x>
-         <y>-32</y>
+         <y>0</y>
          <width>127</width>
          <height>358</height>
         </rect>
@@ -401,7 +401,7 @@
         <rect>
          <x>0</x>
          <y>0</y>
-         <width>127</width>
+         <width>140</width>
          <height>110</height>
         </rect>
        </property>
@@ -510,7 +510,7 @@
         <rect>
          <x>0</x>
          <y>0</y>
-         <width>127</width>
+         <width>140</width>
          <height>248</height>
         </rect>
        </property>
@@ -772,7 +772,7 @@
         <rect>
          <x>0</x>
          <y>0</y>
-         <width>127</width>
+         <width>140</width>
          <height>248</height>
         </rect>
        </property>
@@ -1121,7 +1121,7 @@
          <x>0</x>
          <y>0</y>
          <width>140</width>
-         <height>326</height>
+         <height>328</height>
         </rect>
        </property>
        <attribute name="icon">
@@ -1512,7 +1512,7 @@
          <x>0</x>
          <y>0</y>
          <width>140</width>
-         <height>326</height>
+         <height>328</height>
         </rect>
        </property>
        <attribute name="icon">
@@ -1626,7 +1626,6 @@
      <addaction name="actionPrintPreview"/>
      <addaction name="actionPrint"/>
      <addaction name="separator"/>
-     <addaction name="actionSaveAsTiledPDF"/>
      <addaction name="actionPrintPreviewTiled"/>
      <addaction name="actionPrintTiled"/>
      <addaction name="separator"/>
@@ -2420,24 +2419,6 @@
     <enum>QAction::NoRole</enum>
    </property>
   </action>
-  <action name="actionSaveAsTiledPDF">
-   <property name="enabled">
-    <bool>false</bool>
-   </property>
-   <property name="icon">
-    <iconset resource="../../libs/vmisc/share/resources/icon.qrc">
-     <normaloff>:/icon/32x32/pdf.png</normaloff>:/icon/32x32/pdf.png</iconset>
-   </property>
-   <property name="text">
-    <string>Save as tiled PDF</string>
-   </property>
-   <property name="toolTip">
-    <string>Split and save a layout into smaller pages</string>
-   </property>
-   <property name="shortcut">
-    <string notr="true"/>
-   </property>
-  </action>
   <action name="actionPrint">
    <property name="enabled">
     <bool>false</bool>
@@ -2674,8 +2655,8 @@
   </customwidget>
  </customwidgets>
  <resources>
-  <include location="share/resources/toolicon.qrc"/>
   <include location="../../libs/vmisc/share/resources/icon.qrc"/>
+  <include location="share/resources/toolicon.qrc"/>
  </resources>
  <connections/>
 </ui>

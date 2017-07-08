@@ -87,6 +87,13 @@ DialogSaveLayout::DialogSaveLayout(int count, const QString &fileName, QWidget *
     {
         ui->comboBoxFormat->addItem(v.first, QVariant(static_cast<int>(v.second)));
     }
+#ifdef V_NO_ASSERT // Temporarily unavailable
+    const int index = ui->comboBoxFormat->findData(LayoutExportFormats::OBJ);
+    if (index != -1)
+    {
+        ui->comboBoxFormat->removeItem(index);
+    }
+#endif
     connect(bOk, &QPushButton::clicked, this, &DialogSaveLayout::Save);
     connect(ui->lineEditFileName, &QLineEdit::textChanged, this, &DialogSaveLayout::ShowExample);
     connect(ui->comboBoxFormat, static_cast<void (QComboBox::*)(int)>(&QComboBox::currentIndexChanged),
@@ -176,6 +183,7 @@ void DialogSaveLayout::SetBinaryDXFFormat(bool binary)
             break;
         case LayoutExportFormats::SVG:
         case LayoutExportFormats::PDF:
+        case LayoutExportFormats::PDFTiled:
         case LayoutExportFormats::PNG:
         case LayoutExportFormats::OBJ:
         case LayoutExportFormats::PS:
@@ -221,6 +229,7 @@ bool DialogSaveLayout::IsBinaryDXFFormat() const
             return ui->checkBoxBinaryDXF->isChecked();
         case LayoutExportFormats::SVG:
         case LayoutExportFormats::PDF:
+        case LayoutExportFormats::PDFTiled:
         case LayoutExportFormats::PNG:
         case LayoutExportFormats::OBJ:
         case LayoutExportFormats::PS:
@@ -344,6 +353,8 @@ QString DialogSaveLayout::ExportFormatDescription(LayoutExportFormats format)
             return QString("AutoCAD DXF 2010 ASTM %1 %2").arg(filesStr, dxfSuffix);
         case LayoutExportFormats::DXF_AC1027_ASTM:
             return QString("AutoCAD DXF 2013 ASTM %1 %2").arg(filesStr, dxfSuffix);
+        case LayoutExportFormats::PDFTiled:
+            return QString("PDF tiled %1 (*.pdf)").arg(filesStr);
         default:
             return QString();
     }
@@ -357,6 +368,7 @@ QString DialogSaveLayout::ExportFromatSuffix(LayoutExportFormats format)
         case LayoutExportFormats::SVG:
             return ".svg";
         case LayoutExportFormats::PDF:
+        case LayoutExportFormats::PDFTiled:
             return ".pdf";
         case LayoutExportFormats::PNG:
             return ".png";
@@ -511,6 +523,7 @@ void DialogSaveLayout::ShowExample()
             break;
         case LayoutExportFormats::SVG:
         case LayoutExportFormats::PDF:
+        case LayoutExportFormats::PDFTiled:
         case LayoutExportFormats::PNG:
         case LayoutExportFormats::OBJ:
         case LayoutExportFormats::PS:
@@ -588,9 +601,7 @@ QVector<std::pair<QString, LayoutExportFormats> > DialogSaveLayout::InitFormats(
     InitFormat(LayoutExportFormats::SVG);
     InitFormat(LayoutExportFormats::PDF);
     InitFormat(LayoutExportFormats::PNG);
-#ifndef V_NO_ASSERT // Temporarily unavailable
     InitFormat(LayoutExportFormats::OBJ);
-#endif
     if (SupportPSTest())
     {
         InitFormat(LayoutExportFormats::PS);
@@ -625,6 +636,7 @@ QVector<std::pair<QString, LayoutExportFormats> > DialogSaveLayout::InitFormats(
 //    InitFormat(LayoutExportFormats::DXF_AC1021_ASTM);
 //    InitFormat(LayoutExportFormats::DXF_AC1024_ASTM);
 //    InitFormat(LayoutExportFormats::DXF_AC1027_ASTM);
+    InitFormat(LayoutExportFormats::PDFTiled); 
 
     return list;
 }
