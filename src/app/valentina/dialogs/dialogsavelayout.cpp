@@ -88,7 +88,7 @@ DialogSaveLayout::DialogSaveLayout(int count, const QString &fileName, QWidget *
         ui->comboBoxFormat->addItem(v.first, QVariant(static_cast<int>(v.second)));
     }
 #ifdef V_NO_ASSERT // Temporarily unavailable
-    const int index = ui->comboBoxFormat->findData(LayoutExportFormats::OBJ);
+    const int index = ui->comboBoxFormat->findData(static_cast<int>(LayoutExportFormats::OBJ));
     if (index != -1)
     {
         ui->comboBoxFormat->removeItem(index);
