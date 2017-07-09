@@ -49,8 +49,8 @@ void TST_TapeCommandLine::initTestCase()
         QFAIL("Fail to remove temp directory.");
     }
 
-    if (not CopyRecursively(QApplication::applicationDirPath() + QDir::separator() + QStringLiteral("tst_tape"),
-                            QApplication::applicationDirPath() + QDir::separator() + tmpTestFolder))
+    if (not CopyRecursively(QCoreApplication::applicationDirPath() + QDir::separator() + QStringLiteral("tst_tape"),
+                            QCoreApplication::applicationDirPath() + QDir::separator() + tmpTestFolder))
     {
         QFAIL("Fail to prepare files for testing.");
     }
@@ -117,7 +117,7 @@ void TST_TapeCommandLine::OpenMeasurements()
 
     QString error;
     const int exit = Run(exitCode, TapePath(), QStringList() << "--test"
-                         << QApplication::applicationDirPath() + QDir::separator() + tmpTestFolder + QDir::separator() +
+                         << QCoreApplication::applicationDirPath() + QDir::separator() + tmpTestFolder + QDir::separator() +
                          file, error);
 
     QVERIFY2(exit == exitCode, qUtf8Printable(error));

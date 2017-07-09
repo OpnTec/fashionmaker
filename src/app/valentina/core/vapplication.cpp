@@ -218,11 +218,11 @@ inline void noisyFailureMsgHandler(QtMsgType type, const QMessageLogContext &con
                     messageBox.setWindowModality(Qt::ApplicationModal);
                     messageBox.setModal(true);
                 #ifndef QT_NO_CURSOR
-                    QApplication::setOverrideCursor(Qt::ArrowCursor);
+                    QGuiApplication::setOverrideCursor(Qt::ArrowCursor);
                 #endif
                     messageBox.exec();
                 #ifndef QT_NO_CURSOR
-                    QApplication::restoreOverrideCursor();
+                    QGuiApplication::restoreOverrideCursor();
                 #endif
                 }
             }
@@ -403,24 +403,24 @@ QString VApplication::TapeFilePath() const
 {
     const QString tape = QStringLiteral("tape");
 #ifdef Q_OS_WIN
-    QFileInfo tapeFile(QApplication::applicationDirPath() + "/" + tape + ".exe");
+    QFileInfo tapeFile(QCoreApplication::applicationDirPath() + "/" + tape + ".exe");
     if (tapeFile.exists())
     {
         return tapeFile.absoluteFilePath();
     }
     else
     {
-        return QApplication::applicationDirPath() + "/../../tape/bin/" + tape + ".exe";
+        return QCoreApplication::applicationDirPath() + "/../../tape/bin/" + tape + ".exe";
     }
 #elif defined(Q_OS_MAC)
-    QFileInfo tapeFile(QApplication::applicationDirPath() + "/" + tape);
+    QFileInfo tapeFile(QCoreApplication::applicationDirPath() + "/" + tape);
     if (tapeFile.exists())
     {
         return tapeFile.absoluteFilePath();
     }
     else
     {
-        QFileInfo file(QApplication::applicationDirPath() + "/../../tape/bin/" + tape);
+        QFileInfo file(QCoreApplication::applicationDirPath() + "/../../tape/bin/" + tape);
         if (file.exists())
         {
             return file.absoluteFilePath();
@@ -431,14 +431,14 @@ QString VApplication::TapeFilePath() const
         }
     }
 #else // Unix
-    QFileInfo file(QApplication::applicationDirPath() + "/../../tape/bin/" + tape);
+    QFileInfo file(QCoreApplication::applicationDirPath() + "/../../tape/bin/" + tape);
     if (file.exists())
     {
         return file.absoluteFilePath();
     }
     else
     {
-        QFileInfo tapeFile(QApplication::applicationDirPath() + "/" + tape);
+        QFileInfo tapeFile(QCoreApplication::applicationDirPath() + "/" + tape);
         if (tapeFile.exists())
         {
             return tapeFile.absoluteFilePath();

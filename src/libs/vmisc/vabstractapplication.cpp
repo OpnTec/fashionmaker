@@ -129,16 +129,16 @@ QString VAbstractApplication::translationsPath(const QString &locale) const
     const QString trPath = QStringLiteral("/translations");
 #ifdef Q_OS_WIN
     Q_UNUSED(locale)
-    return QApplication::applicationDirPath() + trPath;
+    return QCoreApplication::applicationDirPath() + trPath;
 #elif defined(Q_OS_MAC)
     QString mainPath;
     if (locale.isEmpty())
     {
-        mainPath = QApplication::applicationDirPath() + QLatin1String("/../Resources") + trPath;
+        mainPath = QCoreApplication::applicationDirPath() + QLatin1String("/../Resources") + trPath;
     }
     else
     {
-        mainPath = QApplication::applicationDirPath() + QLatin1String("/../Resources") + trPath + QLatin1String("/")
+        mainPath = QCoreApplication::applicationDirPath() + QLatin1String("/../Resources") + trPath + QLatin1String("/")
                 + locale + QLatin1String(".lproj");
     }
     QDir dirBundle(mainPath);
@@ -164,7 +164,7 @@ QString VAbstractApplication::translationsPath(const QString &locale) const
     }
 #else // Unix
     Q_UNUSED(locale)
-    QDir dir(QApplication::applicationDirPath() + trPath);
+    QDir dir(QCoreApplication::applicationDirPath() + trPath);
     if (dir.exists())
     {
         return dir.absolutePath();

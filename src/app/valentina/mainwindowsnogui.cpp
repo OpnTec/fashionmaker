@@ -261,6 +261,7 @@ void MainWindowsNoGUI::ExportLayout(const DialogSaveLayout &dialog)
                     case LayoutExportFormats::DXF_AC1024_ASTM:
                     case LayoutExportFormats::DXF_AC1027_ASTM:
                         Q_UNREACHABLE(); // For now not supported
+                        break;
                     case LayoutExportFormats::SVG:
                         paper->setVisible(false);
                         SvgFile(name, i);
@@ -828,7 +829,7 @@ void MainWindowsNoGUI::PsFile(const QString &name, int i) const
 void MainWindowsNoGUI::PdfToPs(const QStringList &params) const
 {
 #ifndef QT_NO_CURSOR
-    QApplication::setOverrideCursor(Qt::WaitCursor);
+    QGuiApplication::setOverrideCursor(Qt::WaitCursor);
 #endif
     QProcess proc;
 #if defined(Q_OS_MAC)
@@ -843,7 +844,7 @@ void MainWindowsNoGUI::PdfToPs(const QStringList &params) const
         proc.waitForFinished(15000);
     }
 #ifndef QT_NO_CURSOR
-    QApplication::restoreOverrideCursor();
+    QGuiApplication::restoreOverrideCursor();
 #endif
 
     QFile f(params.last());

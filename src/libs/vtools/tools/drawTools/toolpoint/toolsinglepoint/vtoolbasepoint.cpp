@@ -388,7 +388,7 @@ void VToolBasePoint::contextMenuEvent ( QGraphicsSceneContextMenuEvent * event )
 {
     qCDebug(vTool, "Context menu base point");
 #ifndef QT_NO_CURSOR
-    QApplication::restoreOverrideCursor();
+    QGuiApplication::restoreOverrideCursor();
     qCDebug(vTool, "Restored overriden cursor");
 #endif
 

@@ -79,9 +79,9 @@ QString AbstractTest::ValentinaPath() const
 {
     const QString path = QStringLiteral("/../../../app/valentina/bin/valentina");
 #ifdef Q_OS_WIN
-    return QApplication::applicationDirPath() + path + QLatin1String(".exe");
+    return QCoreApplication::applicationDirPath() + path + QLatin1String(".exe");
 #else
-    return QApplication::applicationDirPath() + path;
+    return QCoreApplication::applicationDirPath() + path;
 #endif
 }
 
@@ -90,16 +90,16 @@ QString AbstractTest::TapePath() const
 {
     const QString path = QStringLiteral("/../../../app/tape/bin/tape");
 #ifdef Q_OS_WIN
-    return QApplication::applicationDirPath() + path + QLatin1String(".exe");
+    return QCoreApplication::applicationDirPath() + path + QLatin1String(".exe");
 #else
-    return QApplication::applicationDirPath() + path;
+    return QCoreApplication::applicationDirPath() + path;
 #endif
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 QString AbstractTest::TranslationsPath() const
 {
-    return QApplication::applicationDirPath() + QStringLiteral("/../../../app/valentina/bin/translations");
+    return QCoreApplication::applicationDirPath() + QStringLiteral("/../../../app/valentina/bin/translations");
 }
 
 //---------------------------------------------------------------------------------------------------------------------

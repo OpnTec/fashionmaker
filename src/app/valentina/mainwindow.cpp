@@ -2788,7 +2788,7 @@ void MainWindow::Clear()
     qApp->setPatternType(MeasurementsType::Unknown);
     ui->toolBarOption->clear();
 #ifndef QT_NO_CURSOR
-    QApplication::restoreOverrideCursor();
+    QGuiApplication::restoreOverrideCursor();
 #endif
     CleanLayout();
     listDetails.clear(); // don't move to CleanLayout()
@@ -2993,7 +2993,7 @@ void MainWindow::SetEnabledGUI(bool enabled)
         SetEnableTool(enabled);
         ui->toolBarOption->setEnabled(enabled);
     #ifndef QT_NO_CURSOR
-        QApplication::setOverrideCursor(Qt::ArrowCursor);
+        QGuiApplication::setOverrideCursor(Qt::ArrowCursor);
     #endif
     }
 }
@@ -4934,7 +4934,7 @@ void MainWindow::UpdateWindowTitle()
     setWindowFilePath(curFile);
 
 #if defined(Q_OS_MAC)
-    static QIcon fileIcon = QIcon(QApplication::applicationDirPath() +
+    static QIcon fileIcon = QIcon(QCoreApplication::applicationDirPath() +
                                   QLatin1String("/../Resources/Valentina.icns"));
     QIcon icon;
     if (not curFile.isEmpty())

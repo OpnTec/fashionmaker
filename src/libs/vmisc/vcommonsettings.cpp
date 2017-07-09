@@ -186,9 +186,9 @@ VCommonSettings::VCommonSettings(Format format, Scope scope, const QString &orga
 QString VCommonSettings::SharePath(const QString &shareItem)
 {
 #ifdef Q_OS_WIN
-    return QApplication::applicationDirPath() + shareItem;
+    return QCoreApplication::applicationDirPath() + shareItem;
 #elif defined(Q_OS_MAC)
-    QDir dirBundle(QApplication::applicationDirPath() + QStringLiteral("/../Resources") + shareItem);
+    QDir dirBundle(QCoreApplication::applicationDirPath() + QStringLiteral("/../Resources") + shareItem);
     if (dirBundle.exists())
     {
         return dirBundle.absolutePath();
@@ -211,9 +211,9 @@ QString VCommonSettings::SharePath(const QString &shareItem)
     }
 #else // Unix
 #ifdef QT_DEBUG
-    return QApplication::applicationDirPath() + shareItem;
+    return QCoreApplication::applicationDirPath() + shareItem;
 #else
-    QDir dir(QApplication::applicationDirPath() + shareItem);
+    QDir dir(QCoreApplication::applicationDirPath() + shareItem);
     if (dir.exists())
     {
         return dir.absolutePath();

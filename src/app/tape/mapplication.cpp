@@ -204,11 +204,11 @@ inline void noisyFailureMsgHandler(QtMsgType type, const QMessageLogContext &con
                     messageBox.setWindowModality(Qt::ApplicationModal);
                     messageBox.setModal(true);
                 #ifndef QT_NO_CURSOR
-                    QApplication::setOverrideCursor(Qt::ArrowCursor);
+                    QGuiApplication::setOverrideCursor(Qt::ArrowCursor);
                 #endif
                     messageBox.exec();
                 #ifndef QT_NO_CURSOR
-                    QApplication::restoreOverrideCursor();
+                    QGuiApplication::restoreOverrideCursor();
                 #endif
                 }
             }
@@ -482,16 +482,16 @@ QString MApplication::diagramsPath() const
 {
     const QString dPath = QStringLiteral("/diagrams.rcc");
 #ifdef Q_OS_WIN
-    return QApplication::applicationDirPath() + dPath;
+    return QCoreApplication::applicationDirPath() + dPath;
 #elif defined(Q_OS_MAC)
-    QFileInfo fileBundle(QApplication::applicationDirPath() + QStringLiteral("/../Resources") + dPath);
+    QFileInfo fileBundle(QCoreApplication::applicationDirPath() + QStringLiteral("/../Resources") + dPath);
     if (fileBundle.exists())
     {
         return fileBundle.absoluteFilePath();
     }
     else
     {
-        QFileInfo file(QApplication::applicationDirPath() + dPath);
+        QFileInfo file(QCoreApplication::applicationDirPath() + dPath);
         if (file.exists())
         {
             return file.absoluteFilePath();
@@ -502,7 +502,7 @@ QString MApplication::diagramsPath() const
         }
     }
 #else // Unix
-    QFileInfo file(QApplication::applicationDirPath() + dPath);
+    QFileInfo file(QCoreApplication::applicationDirPath() + dPath);
     if (file.exists())
     {
         return file.absoluteFilePath();

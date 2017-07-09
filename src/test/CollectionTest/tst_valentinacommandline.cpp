@@ -51,9 +51,9 @@ void TST_ValentinaCommandLine::initTestCase()
             QFAIL("Fail to remove test temp directory.");
         }
 
-        if (not CopyRecursively(QApplication::applicationDirPath() + QDir::separator() +
+        if (not CopyRecursively(QCoreApplication::applicationDirPath() + QDir::separator() +
                                 QLatin1String("tst_valentina"),
-                                QApplication::applicationDirPath() + QDir::separator() + tmpTestFolder))
+                                QCoreApplication::applicationDirPath() + QDir::separator() + tmpTestFolder))
         {
             QFAIL("Fail to prepare test files for testing.");
         }
@@ -66,9 +66,9 @@ void TST_ValentinaCommandLine::initTestCase()
             QFAIL("Fail to remove collection temp directory.");
         }
 
-        if (not CopyRecursively(QApplication::applicationDirPath() + QDir::separator() +
+        if (not CopyRecursively(QCoreApplication::applicationDirPath() + QDir::separator() +
                                 QLatin1String("tst_valentina_collection"),
-                                QApplication::applicationDirPath() + QDir::separator() + tmpTestCollectionFolder))
+                                QCoreApplication::applicationDirPath() + QDir::separator() + tmpTestCollectionFolder))
         {
             QFAIL("Fail to prepare collection files for testing.");
         }
@@ -104,7 +104,7 @@ void TST_ValentinaCommandLine::OpenPatterns()
     QFETCH(int, exitCode);
 
     QString error;
-    const QString tmp = QApplication::applicationDirPath() + QDir::separator() + tmpTestFolder;
+    const QString tmp = QCoreApplication::applicationDirPath() + QDir::separator() + tmpTestFolder;
     const int exit = Run(exitCode, ValentinaPath(), QStringList() << "--test"
                          << tmp + QDir::separator() + file, error);
 
@@ -119,7 +119,7 @@ void TST_ValentinaCommandLine::ExportMode_data() const
     QTest::addColumn<QString>("arguments");
     QTest::addColumn<int>("exitCode");
 
-    const QString tmp = QApplication::applicationDirPath() + QDir::separator() + tmpTestFolder;
+    const QString tmp = QCoreApplication::applicationDirPath() + QDir::separator() + tmpTestFolder;
 
     QTest::newRow("Issue #372")<< "issue_372.val"
                                << QString("-p;;0;;-d;;%1;;-b;;output").arg(tmp)
@@ -155,7 +155,7 @@ void TST_ValentinaCommandLine::ExportMode()
     QFETCH(int, exitCode);
 
     QString error;
-    const QString tmp = QApplication::applicationDirPath() + QDir::separator() + tmpTestFolder;
+    const QString tmp = QCoreApplication::applicationDirPath() + QDir::separator() + tmpTestFolder;
     const QStringList arg = QStringList() << tmp + QDir::separator() + file
                                           << arguments.split(";;");
     const int exit = Run(exitCode, ValentinaPath(), arg, error);
@@ -170,7 +170,7 @@ void TST_ValentinaCommandLine::TestMode_data() const
     QTest::addColumn<QString>("arguments");
     QTest::addColumn<int>("exitCode");
 
-    const QString tmp = QApplication::applicationDirPath() + QDir::separator() + tmpTestFolder;
+    const QString tmp = QCoreApplication::applicationDirPath() + QDir::separator() + tmpTestFolder;
 
     QTest::newRow("Issue #256. Correct path.")<< "issue_256.val"
                                << QString("--test")
@@ -213,7 +213,7 @@ void TST_ValentinaCommandLine::TestMode()
     QFETCH(int, exitCode);
 
     QString error;
-    const QString tmp = QApplication::applicationDirPath() + QDir::separator() + tmpTestFolder;
+    const QString tmp = QCoreApplication::applicationDirPath() + QDir::separator() + tmpTestFolder;
     const QStringList arg = QStringList() << tmp + QDir::separator() + file
                                           << arguments.split(";;");
     const int exit = Run(exitCode, ValentinaPath(), arg, error);
@@ -228,7 +228,7 @@ void TST_ValentinaCommandLine::TestOpenCollection_data() const
     QTest::addColumn<QString>("arguments");
     QTest::addColumn<int>("exitCode");
 
-    const QString tmp = QApplication::applicationDirPath() + QDir::separator() + tmpTestCollectionFolder;
+    const QString tmp = QCoreApplication::applicationDirPath() + QDir::separator() + tmpTestCollectionFolder;
     const QString testGOST = QString("--test;;-m;;%1").arg(tmp + QDir::separator() + QLatin1String("GOST_man_ru.vst"));
     const QString keyTest = QStringLiteral("--test");
 
@@ -274,7 +274,7 @@ void TST_ValentinaCommandLine::TestOpenCollection()
     QFETCH(int, exitCode);
 
     QString error;
-    const QString tmp = QApplication::applicationDirPath() + QDir::separator() + tmpTestCollectionFolder;
+    const QString tmp = QCoreApplication::applicationDirPath() + QDir::separator() + tmpTestCollectionFolder;
     const QStringList arg = QStringList() << tmp + QDir::separator() + file
                                           << arguments.split(";;");
     const int exit = Run(exitCode, ValentinaPath(), arg, error);

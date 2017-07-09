@@ -140,7 +140,7 @@ void SetOverrideCursor(const QString &pixmapPath, int hotX, int hotY)
 
     if (oldImage != newImage )
     {
-        QApplication::setOverrideCursor(QCursor(newPixmap, hotX, hotY));
+        QGuiApplication::setOverrideCursor(QCursor(newPixmap, hotX, hotY));
     }
 #else
     Q_UNUSED(pixmapPath)
@@ -163,7 +163,7 @@ void SetOverrideCursor(Qt::CursorShape shape)
     QPixmap newPixmap = cursor.pixmap();
     if (oldPixmap.toImage() != newPixmap.toImage())
     {
-        QApplication::setOverrideCursor(cursor);
+        QGuiApplication::setOverrideCursor(cursor);
     }
 
 #else
@@ -187,7 +187,7 @@ void RestoreOverrideCursor(const QString &pixmapPath)
 
     if (oldImage == newImage )
     {
-        QApplication::restoreOverrideCursor();
+        QGuiApplication::restoreOverrideCursor();
     }
 #else
     Q_UNUSED(pixmapPath)
@@ -208,7 +208,7 @@ void RestoreOverrideCursor(Qt::CursorShape shape)
     QPixmap newPixmap = cursor.pixmap();
     if (oldPixmap.toImage() == newPixmap.toImage())
     {
-        QApplication::restoreOverrideCursor();
+        QGuiApplication::restoreOverrideCursor();
     }
 
 #else
