@@ -149,8 +149,8 @@ bool MainWindowsNoGUI::LayoutSettings(VLayoutGenerator& lGenerator)
             CleanLayout();
             papers = lGenerator.GetPapersItems();// Blank sheets
             details = lGenerator.GetAllDetails();// All details
-            CreateShadows();
-            CreateScenes();
+            shadows = CreateShadows(papers);
+            scenes = CreateScenes(papers, shadows, details);
             PrepareSceneList();
             ignorePrinterFields = not lGenerator.IsUsePrinterFields();
             margins = lGenerator.GetPrinterFields();
@@ -199,7 +199,48 @@ void MainWindowsNoGUI::ErrorConsoleMode(const LayoutErrors &state)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void MainWindowsNoGUI::ExportLayout(const DialogSaveLayout &dialog)
+void MainWindowsNoGUI::ExportData(const QVector<VLayoutPiece> &listDetails, const DialogSaveLayout &dialog)
+{
+    if (dialog.Mode() == Draw::Layout)
+    {
+        ExportLayout(dialog, scenes, papers, shadows, ignorePrinterFields, margins);
+    }
+    else
+    {
+        QScopedPointer<QGraphicsScene> scene(new QGraphicsScene());
+
+        QList<QGraphicsItem *> list;
+        for (int i=0; i < listDetails.count(); ++i)
+        {
+            list.append(listDetails.at(i).GetItem(dialog.IsTextAsPaths()));
+        }
+
+        for (int i=0; i < list.size(); ++i)
+        {
+            scene->addItem(list.at(i));
+        }
+
+        QList<QGraphicsItem *> papers;// Blank sheets
+        papers.append(new QGraphicsRectItem(scene->itemsBoundingRect().toRect()));
+
+        QList<QList<QGraphicsItem *> > details;// All details
+        details.append(list);
+
+        QList<QGraphicsItem *> shadows = CreateShadows(papers);
+        QList<QGraphicsScene *> scenes = CreateScenes(papers, shadows, details);
+
+        const bool ignorePrinterFields = false;
+        const qreal margin = ToPixel(2, Unit::Mm);
+        ExportLayout(dialog, scenes, papers, shadows, ignorePrinterFields, QMarginsF(margin, margin, margin, margin));
+
+        qDeleteAll(scenes);//Scene will clear all other items
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void MainWindowsNoGUI::ExportLayout(const DialogSaveLayout &dialog, const QList<QGraphicsScene *> &scenes,
+                                    const QList<QGraphicsItem *> &papers, const QList<QGraphicsItem *> &shadows,
+                                    bool ignorePrinterFields, const QMarginsF &margins)
 {
     const QString path = dialog.Path();
     bool usedNotExistedDir = false;
@@ -218,7 +259,7 @@ void MainWindowsNoGUI::ExportLayout(const DialogSaveLayout &dialog)
     const QString mask = dialog.FileName();
     const LayoutExportFormats format = dialog.Format();
 
-    if (format == LayoutExportFormats::PDFTiled)
+    if (format == LayoutExportFormats::PDFTiled && dialog.Mode() == Draw::Layout)
     {
         const QString name = path + QLatin1String("/") + mask + QString::number(1)
                 + DialogSaveLayout::ExportFromatSuffix(format);
@@ -235,7 +276,8 @@ void MainWindowsNoGUI::ExportLayout(const DialogSaveLayout &dialog)
                         + DialogSaveLayout::ExportFromatSuffix(format);
                 QBrush *brush = new QBrush();
                 brush->setColor( QColor( Qt::white ) );
-                scenes[i]->setBackgroundBrush( *brush );
+                QGraphicsScene *scene = scenes.at(i);
+                scene->setBackgroundBrush( *brush );
                 shadows[i]->setVisible(false);
                 paper->setPen(QPen(QBrush(Qt::white, Qt::NoBrush), 0.1, Qt::NoPen));
 
@@ -264,69 +306,69 @@ void MainWindowsNoGUI::ExportLayout(const DialogSaveLayout &dialog)
                         break;
                     case LayoutExportFormats::SVG:
                         paper->setVisible(false);
-                        SvgFile(name, i);
+                        SvgFile(name, paper, scene);
                         paper->setVisible(true);
                         break;
                     case LayoutExportFormats::PDF:
-                        PdfFile(name, i);
+                        PdfFile(name, paper, scene, ignorePrinterFields, margins);
                         break;
                     case LayoutExportFormats::PNG:
-                        PngFile(name, i);
+                        PngFile(name, paper, scene);
                         break;
                     case LayoutExportFormats::OBJ:
                         paper->setVisible(false);
-                        ObjFile(name, i);
+                        ObjFile(name, paper, scene);
                         paper->setVisible(true);
                         break;
                     case LayoutExportFormats::PS:
-                        PsFile(name, i);
+                        PsFile(name, paper, scene, ignorePrinterFields, margins);
                         break;
                     case LayoutExportFormats::EPS:
-                        EpsFile(name, i);
+                        EpsFile(name, paper, scene, ignorePrinterFields, margins);
                         break;
                     case LayoutExportFormats::DXF_AC1006_Flat:
                         paper->setVisible(false);
-                        DxfFile(name, DRW::AC1006, dialog.IsBinaryDXFFormat(), i);
+                        DxfFile(name, DRW::AC1006, dialog.IsBinaryDXFFormat(), paper, scene);
                         paper->setVisible(true);
                         break;
                     case LayoutExportFormats::DXF_AC1009_Flat:
                         paper->setVisible(false);
-                        DxfFile(name, DRW::AC1009, dialog.IsBinaryDXFFormat(), i);
+                        DxfFile(name, DRW::AC1009, dialog.IsBinaryDXFFormat(), paper, scene);
                         paper->setVisible(true);
                         break;
                     case LayoutExportFormats::DXF_AC1012_Flat:
                         paper->setVisible(false);
-                        DxfFile(name, DRW::AC1012, dialog.IsBinaryDXFFormat(), i);
+                        DxfFile(name, DRW::AC1012, dialog.IsBinaryDXFFormat(), paper, scene);
                         paper->setVisible(true);
                         break;
                     case LayoutExportFormats::DXF_AC1014_Flat:
                         paper->setVisible(false);
-                        DxfFile(name, DRW::AC1014, dialog.IsBinaryDXFFormat(), i);
+                        DxfFile(name, DRW::AC1014, dialog.IsBinaryDXFFormat(), paper, scene);
                         paper->setVisible(true);
                         break;
                     case LayoutExportFormats::DXF_AC1015_Flat:
                         paper->setVisible(false);
-                        DxfFile(name, DRW::AC1015, dialog.IsBinaryDXFFormat(), i);
+                        DxfFile(name, DRW::AC1015, dialog.IsBinaryDXFFormat(), paper, scene);
                         paper->setVisible(true);
                         break;
                     case LayoutExportFormats::DXF_AC1018_Flat:
                         paper->setVisible(false);
-                        DxfFile(name, DRW::AC1018, dialog.IsBinaryDXFFormat(), i);
+                        DxfFile(name, DRW::AC1018, dialog.IsBinaryDXFFormat(), paper, scene);
                         paper->setVisible(true);
                         break;
                     case LayoutExportFormats::DXF_AC1021_Flat:
                         paper->setVisible(false);
-                        DxfFile(name, DRW::AC1021, dialog.IsBinaryDXFFormat(), i);
+                        DxfFile(name, DRW::AC1021, dialog.IsBinaryDXFFormat(), paper, scene);
                         paper->setVisible(true);
                         break;
                     case LayoutExportFormats::DXF_AC1024_Flat:
                         paper->setVisible(false);
-                        DxfFile(name, DRW::AC1024, dialog.IsBinaryDXFFormat(), i);
+                        DxfFile(name, DRW::AC1024, dialog.IsBinaryDXFFormat(), paper, scene);
                         paper->setVisible(true);
                         break;
                     case LayoutExportFormats::DXF_AC1027_Flat:
                         paper->setVisible(false);
-                        DxfFile(name, DRW::AC1027, dialog.IsBinaryDXFFormat(), i);
+                        DxfFile(name, DRW::AC1027, dialog.IsBinaryDXFFormat(), paper, scene);
                         paper->setVisible(true);
                         break;
                     default:
@@ -561,23 +603,22 @@ void MainWindowsNoGUI::RefreshDetailsLabel()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void MainWindowsNoGUI::PrepareDetailsForLayout(const QHash<quint32, VPiece> *details)
+QVector<VLayoutPiece> MainWindowsNoGUI::PrepareDetailsForLayout(const QHash<quint32, VPiece> &details)
 {
-    listDetails.clear();
-    SCASSERT(details != nullptr)
-    if (details->count() == 0)
+    QVector<VLayoutPiece> listDetails;
+    if (not details.isEmpty())
     {
-        return;
+        QHash<quint32, VPiece>::const_iterator i = details.constBegin();
+        while (i != details.constEnd())
+        {
+            VAbstractTool *tool = qobject_cast<VAbstractTool*>(VAbstractPattern::getTool(i.key()));
+            SCASSERT(tool != nullptr)
+            listDetails.append(VLayoutPiece::Create(i.value(), tool->getData()));
+            ++i;
+        }
     }
 
-    QHash<quint32, VPiece>::const_iterator i = details->constBegin();
-    while (i != details->constEnd())
-    {
-        VAbstractTool *tool = qobject_cast<VAbstractTool*>(VAbstractPattern::getTool(i.key()));
-        SCASSERT(tool != nullptr)
-        listDetails.append(VLayoutPiece::Create(i.value(), tool->getData()));
-        ++i;
-    }
+    return listDetails;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -623,8 +664,10 @@ QIcon MainWindowsNoGUI::ScenePreview(int i) const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void MainWindowsNoGUI::CreateShadows()
+QList<QGraphicsItem *> MainWindowsNoGUI::CreateShadows(const QList<QGraphicsItem *> &papers)
 {
+    QList<QGraphicsItem *> shadows;
+
     for (int i=0; i< papers.size(); ++i)
     {
         qreal x1=0, y1=0, x2=0, y2=0;
@@ -641,11 +684,16 @@ void MainWindowsNoGUI::CreateShadows()
             shadows.append(nullptr);
         }
     }
+
+    return shadows;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void MainWindowsNoGUI::CreateScenes()
+QList<QGraphicsScene *> MainWindowsNoGUI::CreateScenes(const QList<QGraphicsItem *> &papers,
+                                                       const QList<QGraphicsItem *> &shadows,
+                                                       const QList<QList<QGraphicsItem *> > &details)
 {
+    QList<QGraphicsScene *> scenes;
     for (int i=0; i<papers.size(); ++i)
     {
         QGraphicsScene *scene = new VMainGraphicsScene();
@@ -661,6 +709,8 @@ void MainWindowsNoGUI::CreateScenes()
 
         scenes.append(scene);
     }
+
+    return scenes;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -668,27 +718,23 @@ void MainWindowsNoGUI::CreateScenes()
  * @brief SvgFile save layout to svg file.
  * @param name name layout file.
  */
-void MainWindowsNoGUI::SvgFile(const QString &name, int i) const
+void MainWindowsNoGUI::SvgFile(const QString &name, QGraphicsRectItem *paper, QGraphicsScene *scene) const
 {
-    QGraphicsRectItem *paper = qgraphicsitem_cast<QGraphicsRectItem *>(papers.at(i));
-    if (paper)
-    {
-        QSvgGenerator generator;
-        generator.setFileName(name);
-        generator.setSize(paper->rect().size().toSize());
-        generator.setViewBox(paper->rect());
-        generator.setTitle("Valentina. Pattern layout");
-        generator.setDescription(doc->GetDescription());
-        generator.setResolution(static_cast<int>(PrintDPI));
-        QPainter painter;
-        painter.begin(&generator);
-        painter.setFont( QFont( "Arial", 8, QFont::Normal ) );
-        painter.setRenderHint(QPainter::Antialiasing, true);
-        painter.setPen(QPen(Qt::black, widthHairLine, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin));
-        painter.setBrush ( QBrush ( Qt::NoBrush ) );
-        scenes.at(i)->render(&painter, paper->rect(), paper->rect(), Qt::IgnoreAspectRatio);
-        painter.end();
-    }
+    QSvgGenerator generator;
+    generator.setFileName(name);
+    generator.setSize(paper->rect().size().toSize());
+    generator.setViewBox(paper->rect());
+    generator.setTitle(tr("Pattern"));
+    generator.setDescription(doc->GetDescription());
+    generator.setResolution(static_cast<int>(PrintDPI));
+    QPainter painter;
+    painter.begin(&generator);
+    painter.setFont( QFont( "Arial", 8, QFont::Normal ) );
+    painter.setRenderHint(QPainter::Antialiasing, true);
+    painter.setPen(QPen(Qt::black, widthHairLine, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin));
+    painter.setBrush ( QBrush ( Qt::NoBrush ) );
+    scene->render(&painter, paper->rect(), paper->rect(), Qt::IgnoreAspectRatio);
+    painter.end();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -696,23 +742,19 @@ void MainWindowsNoGUI::SvgFile(const QString &name, int i) const
  * @brief PngFile save layout to png file.
  * @param name name layout file.
  */
-void MainWindowsNoGUI::PngFile(const QString &name, int i) const
+void MainWindowsNoGUI::PngFile(const QString &name, QGraphicsRectItem *paper, QGraphicsScene *scene) const
 {
-    QGraphicsRectItem *paper = qgraphicsitem_cast<QGraphicsRectItem *>(papers.at(i));
-    if (paper)
-    {
-        const QRectF r = paper->rect();
-        // Create the image with the exact size of the shrunk scene
-        QImage image(r.size().toSize(), QImage::Format_ARGB32);
-        image.fill(Qt::transparent);                                              // Start all pixels transparent
-        QPainter painter(&image);
-        painter.setFont( QFont( "Arial", 8, QFont::Normal ) );
-        painter.setRenderHint(QPainter::Antialiasing, true);
-        painter.setPen(QPen(Qt::black, widthMainLine, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin));
-        painter.setBrush ( QBrush ( Qt::NoBrush ) );
-        scenes.at(i)->render(&painter, r, r, Qt::IgnoreAspectRatio);
-        image.save(name);
-    }
+    const QRectF r = paper->rect();
+    // Create the image with the exact size of the shrunk scene
+    QImage image(r.size().toSize(), QImage::Format_ARGB32);
+    image.fill(Qt::transparent);                                              // Start all pixels transparent
+    QPainter painter(&image);
+    painter.setFont( QFont( "Arial", 8, QFont::Normal ) );
+    painter.setRenderHint(QPainter::Antialiasing, true);
+    painter.setPen(QPen(Qt::black, widthMainLine, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin));
+    painter.setBrush ( QBrush ( Qt::NoBrush ) );
+    scene->render(&painter, r, r, Qt::IgnoreAspectRatio);
+    image.save(name);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -720,45 +762,42 @@ void MainWindowsNoGUI::PngFile(const QString &name, int i) const
  * @brief PdfFile save layout to pdf file.
  * @param name name layout file.
  */
-void MainWindowsNoGUI::PdfFile(const QString &name, int i) const
+void MainWindowsNoGUI::PdfFile(const QString &name, QGraphicsRectItem *paper, QGraphicsScene *scene,
+                               bool ignorePrinterFields, const QMarginsF &margins) const
 {
-    QGraphicsRectItem *paper = qgraphicsitem_cast<QGraphicsRectItem *>(papers.at(i));
-    if (paper)
+    QPrinter printer;
+    printer.setCreator(QGuiApplication::applicationDisplayName()+QLatin1String(" ")+
+                       QCoreApplication::applicationVersion());
+    printer.setOutputFormat(QPrinter::PdfFormat);
+    printer.setOutputFileName(name);
+    printer.setDocName(FileName());
+    const QRectF r = paper->rect();
+    printer.setResolution(static_cast<int>(PrintDPI));
+    // Set orientation
+    if (paper->rect().height()>= paper->rect().width())
     {
-        QPrinter printer;
-        printer.setCreator(QGuiApplication::applicationDisplayName()+QLatin1String(" ")+
-                           QCoreApplication::applicationVersion());
-        printer.setOutputFormat(QPrinter::PdfFormat);
-        printer.setOutputFileName(name);
-        printer.setDocName(FileName());
-        const QRectF r = paper->rect();
-        printer.setResolution(static_cast<int>(PrintDPI));
-        // Set orientation
-        if (paper->rect().height()>= paper->rect().width())
-        {
-            printer.setOrientation(QPrinter::Portrait);
-        }
-        else
-        {
-            printer.setOrientation(QPrinter::Landscape);
-        }
-        printer.setFullPage(ignorePrinterFields);
-        printer.setPaperSize ( QSizeF(FromPixel(r.width() + margins.left() + margins.right(), Unit::Mm),
-                                      FromPixel(r.height() + margins.top() + margins.bottom(), Unit::Mm)),
-                               QPrinter::Millimeter );
-        QPainter painter;
-        if (painter.begin( &printer ) == false)
-        { // failed to open file
-            qCritical("%s", qUtf8Printable(tr("Can't open printer %1").arg(name)));
-            return;
-        }
-        painter.setFont( QFont( "Arial", 8, QFont::Normal ) );
-        painter.setRenderHint(QPainter::Antialiasing, true);
-        painter.setPen(QPen(Qt::black, widthMainLine, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin));
-        painter.setBrush ( QBrush ( Qt::NoBrush ) );
-        scenes.at(i)->render(&painter, r, r, Qt::IgnoreAspectRatio);
-        painter.end();
+        printer.setOrientation(QPrinter::Portrait);
     }
+    else
+    {
+        printer.setOrientation(QPrinter::Landscape);
+    }
+    printer.setFullPage(ignorePrinterFields);
+    printer.setPaperSize ( QSizeF(FromPixel(r.width() + margins.left() + margins.right(), Unit::Mm),
+                                  FromPixel(r.height() + margins.top() + margins.bottom(), Unit::Mm)),
+                           QPrinter::Millimeter );
+    QPainter painter;
+    if (painter.begin( &printer ) == false)
+    { // failed to open file
+        qCritical("%s", qUtf8Printable(tr("Can't open printer %1").arg(name)));
+        return;
+    }
+    painter.setFont( QFont( "Arial", 8, QFont::Normal ) );
+    painter.setRenderHint(QPainter::Antialiasing, true);
+    painter.setPen(QPen(Qt::black, widthMainLine, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin));
+    painter.setBrush ( QBrush ( Qt::NoBrush ) );
+    scene->render(&painter, r, r, Qt::IgnoreAspectRatio);
+    painter.end();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -793,12 +832,13 @@ void MainWindowsNoGUI::PdfTiledFile(const QString &name)
  * @brief EpsFile save layout to eps file.
  * @param name name layout file.
  */
-void MainWindowsNoGUI::EpsFile(const QString &name, int i) const
+void MainWindowsNoGUI::EpsFile(const QString &name, QGraphicsRectItem *paper, QGraphicsScene *scene,
+                               bool ignorePrinterFields, const QMarginsF &margins) const
 {
     QTemporaryFile tmp;
     if (tmp.open())
     {
-        PdfFile(tmp.fileName(), i);
+        PdfFile(tmp.fileName(), paper, scene, ignorePrinterFields, margins);
         QStringList params = QStringList() << "-eps" << tmp.fileName() << name;
         PdfToPs(params);
     }
@@ -809,12 +849,13 @@ void MainWindowsNoGUI::EpsFile(const QString &name, int i) const
  * @brief PsFile save layout to ps file.
  * @param name name layout file.
  */
-void MainWindowsNoGUI::PsFile(const QString &name, int i) const
+void MainWindowsNoGUI::PsFile(const QString &name, QGraphicsRectItem *paper, QGraphicsScene *scene, bool
+                              ignorePrinterFields, const QMarginsF &margins) const
 {
     QTemporaryFile tmp;
     if (tmp.open())
     {
-        PdfFile(tmp.fileName(), i);
+        PdfFile(tmp.fileName(), paper, scene, ignorePrinterFields, margins);
         QStringList params = QStringList() << tmp.fileName() << name;
         PdfToPs(params);
     }
@@ -857,64 +898,57 @@ void MainWindowsNoGUI::PdfToPs(const QStringList &params) const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void MainWindowsNoGUI::ObjFile(const QString &name, int i) const
+void MainWindowsNoGUI::ObjFile(const QString &name, QGraphicsRectItem *paper, QGraphicsScene *scene) const
 {
-    QGraphicsRectItem *paper = qgraphicsitem_cast<QGraphicsRectItem *>(papers.at(i));
-    if (paper)
-    {
-        VObjPaintDevice generator;
-        generator.setFileName(name);
-        generator.setSize(paper->rect().size().toSize());
-        generator.setResolution(static_cast<int>(PrintDPI));
-        QPainter painter;
-        painter.begin(&generator);
-        scenes.at(i)->render(&painter, paper->rect(), paper->rect(), Qt::IgnoreAspectRatio);
-        painter.end();
-    }
+    VObjPaintDevice generator;
+    generator.setFileName(name);
+    generator.setSize(paper->rect().size().toSize());
+    generator.setResolution(static_cast<int>(PrintDPI));
+    QPainter painter;
+    painter.begin(&generator);
+    scene->render(&painter, paper->rect(), paper->rect(), Qt::IgnoreAspectRatio);
+    painter.end();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 QT_WARNING_PUSH
 QT_WARNING_DISABLE_GCC("-Wswitch-default")
 
-void MainWindowsNoGUI::DxfFile(const QString &name, int version, bool binary, int i) const
+void MainWindowsNoGUI::DxfFile(const QString &name, int version, bool binary, QGraphicsRectItem *paper,
+                               QGraphicsScene *scene) const
 {
-    QGraphicsRectItem *paper = qgraphicsitem_cast<QGraphicsRectItem *>(papers.at(i));
-    if (paper)
+    PrepareTextForDXF(endStringPlaceholder);
+    VDxfPaintDevice generator;
+    generator.setFileName(name);
+    generator.setSize(paper->rect().size().toSize());
+    generator.setResolution(PrintDPI);
+    generator.SetVersion(static_cast<DRW::Version>(version));
+    generator.SetBinaryFormat(binary);
+
+    switch (*pattern->GetPatternUnit())
     {
-        PrepareTextForDXF(endStringPlaceholder);
-        VDxfPaintDevice generator;
-        generator.setFileName(name);
-        generator.setSize(paper->rect().size().toSize());
-        generator.setResolution(PrintDPI);
-        generator.SetVersion(static_cast<DRW::Version>(version));
-        generator.SetBinaryFormat(binary);
-
-        switch (*pattern->GetPatternUnit())
-        {
-            case Unit::Cm:
-                generator.setInsunits(VarInsunits::Centimeters);
-                break;
-            case Unit::Mm:
-                generator.setInsunits(VarInsunits::Millimeters);
-                break;
-            case Unit::Inch:
-                generator.setInsunits(VarInsunits::Inches);
-                break;
-            case Unit::Px:
-            case Unit::LAST_UNIT_DO_NOT_USE:
-                Q_UNREACHABLE();
-                break;
-        }
-
-        QPainter painter;
-        if (painter.begin(&generator))
-        {
-            scenes.at(i)->render(&painter, paper->rect(), paper->rect(), Qt::IgnoreAspectRatio);
-            painter.end();
-        }
-        RestoreTextAfterDXF(endStringPlaceholder);
+        case Unit::Cm:
+            generator.setInsunits(VarInsunits::Centimeters);
+            break;
+        case Unit::Mm:
+            generator.setInsunits(VarInsunits::Millimeters);
+            break;
+        case Unit::Inch:
+            generator.setInsunits(VarInsunits::Inches);
+            break;
+        case Unit::Px:
+        case Unit::LAST_UNIT_DO_NOT_USE:
+            Q_UNREACHABLE();
+            break;
     }
+
+    QPainter painter;
+    if (painter.begin(&generator))
+    {
+        scene->render(&painter, paper->rect(), paper->rect(), Qt::IgnoreAspectRatio);
+        painter.end();
+    }
+    RestoreTextAfterDXF(endStringPlaceholder);
 }
 
 QT_WARNING_POP

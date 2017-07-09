@@ -46,11 +46,12 @@ bool DialogSaveLayout::havePdf = false;
 bool DialogSaveLayout::tested  = false;
 
 //---------------------------------------------------------------------------------------------------------------------
-DialogSaveLayout::DialogSaveLayout(int count, const QString &fileName, QWidget *parent)
+DialogSaveLayout::DialogSaveLayout(int count, Draw mode, const QString &fileName, QWidget *parent)
     : QDialog(parent),
       ui(new Ui::DialogSaveLAyout),
       count(count),
-      isInitialized(false)
+      isInitialized(false),
+      m_mode(mode)
 {
     ui->setupUi(this);
 
@@ -88,12 +89,18 @@ DialogSaveLayout::DialogSaveLayout(int count, const QString &fileName, QWidget *
         ui->comboBoxFormat->addItem(v.first, QVariant(static_cast<int>(v.second)));
     }
 #ifdef V_NO_ASSERT // Temporarily unavailable
-    const int index = ui->comboBoxFormat->findData(static_cast<int>(LayoutExportFormats::OBJ));
-    if (index != -1)
-    {
-        ui->comboBoxFormat->removeItem(index);
-    }
+    RemoveFormatFromList(LayoutExportFormats::OBJ);
 #endif
+
+    if (m_mode != Draw::Layout)
+    {
+        RemoveFormatFromList(LayoutExportFormats::PDFTiled);
+    }
+    else
+    {
+        ui->checkBoxTextAsPaths->setVisible(false);
+    }
+
     connect(bOk, &QPushButton::clicked, this, &DialogSaveLayout::Save);
     connect(ui->lineEditFileName, &QLineEdit::textChanged, this, &DialogSaveLayout::ShowExample);
     connect(ui->comboBoxFormat, static_cast<void (QComboBox::*)(int)>(&QComboBox::currentIndexChanged),
@@ -276,6 +283,12 @@ void DialogSaveLayout::SetDestinationPath(const QString &cmdDestinationPath)
 
     qDebug() << "Output full path: " << path << "\n";
     ui->lineEditPath->setText(path);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+Draw DialogSaveLayout::Mode() const
+{
+    return m_mode;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -535,6 +548,25 @@ void DialogSaveLayout::ShowExample()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+bool DialogSaveLayout::IsTextAsPaths() const
+{
+    return ui->checkBoxTextAsPaths->isChecked();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogSaveLayout::SetTextAsPaths(bool textAsPaths)
+{
+    if (m_mode != Draw::Layout)
+    {
+        ui->checkBoxTextAsPaths->setChecked(textAsPaths);
+    }
+    else
+    {
+        ui->checkBoxTextAsPaths->setChecked(false);
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 void DialogSaveLayout::showEvent(QShowEvent *event)
 {
     QDialog::showEvent( event );
@@ -639,4 +671,14 @@ QVector<std::pair<QString, LayoutExportFormats> > DialogSaveLayout::InitFormats(
     InitFormat(LayoutExportFormats::PDFTiled); 
 
     return list;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogSaveLayout::RemoveFormatFromList(LayoutExportFormats format)
+{
+    const int index = ui->comboBoxFormat->findData(static_cast<int>(format));
+    if (index != -1)
+    {
+        ui->comboBoxFormat->removeItem(index);
+    }
 }

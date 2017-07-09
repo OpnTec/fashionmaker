@@ -40,6 +40,7 @@
 
 class QGraphicsScene;
 struct PosterData;
+class QGraphicsRectItem;
 
 class MainWindowsNoGUI : public VAbstractMainWindow
 {
@@ -88,8 +89,14 @@ protected:
     QMarginsF margins;
     QSizeF paperSize;
 
-    void PrepareDetailsForLayout(const QHash<quint32, VPiece> *details);
-    void ExportLayout(const DialogSaveLayout &dialog);
+    static QVector<VLayoutPiece> PrepareDetailsForLayout(const QHash<quint32, VPiece> &details);
+
+    void ExportData(const QVector<VLayoutPiece> &listDetails, const DialogSaveLayout &dialog);
+    void ExportLayout(const DialogSaveLayout &dialog,
+                      const QList<QGraphicsScene *> &scenes,
+                      const QList<QGraphicsItem *> &papers,
+                      const QList<QGraphicsItem *> &shadows,
+                      bool ignorePrinterFields, const QMarginsF &margins);
 
     void InitTempLayoutScene();
     virtual void CleanLayout()=0;
@@ -110,18 +117,23 @@ private:
 
     QString layoutPrinterName;
 
-    void CreateShadows();
-    void CreateScenes();
+    static QList<QGraphicsItem *> CreateShadows(const QList<QGraphicsItem *> &papers);
+    static QList<QGraphicsScene *> CreateScenes(const QList<QGraphicsItem *> &papers,
+                                                const QList<QGraphicsItem *> &shadows,
+                                                const QList<QList<QGraphicsItem *> > &details);
 
-    void SvgFile(const QString &name, int i)const;
-    void PngFile(const QString &name, int i)const;
-    void PdfFile(const QString &name, int i)const;
+    void SvgFile(const QString &name, QGraphicsRectItem *paper, QGraphicsScene *scene)const;
+    void PngFile(const QString &name, QGraphicsRectItem *paper, QGraphicsScene *scene)const;
+    void PdfFile(const QString &name, QGraphicsRectItem *paper, QGraphicsScene *scene, bool ignorePrinterFields,
+                 const QMarginsF &margins)const;
     void PdfTiledFile(const QString &name);
-    void EpsFile(const QString &name, int i)const;
-    void PsFile(const QString &name, int i)const;
+    void EpsFile(const QString &name, QGraphicsRectItem *paper, QGraphicsScene *scene, bool ignorePrinterFields,
+                 const QMarginsF &margins)const;
+    void PsFile(const QString &name, QGraphicsRectItem *paper, QGraphicsScene *scene, bool ignorePrinterFields,
+                const QMarginsF &margins)const;
     void PdfToPs(const QStringList &params)const;
-    void ObjFile(const QString &name, int i)const;
-    void DxfFile(const QString &name, int version, bool binary, int i)const;
+    void ObjFile(const QString &name, QGraphicsRectItem *paper, QGraphicsScene *scene)const;
+    void DxfFile(const QString &name, int version, bool binary, QGraphicsRectItem *paper, QGraphicsScene *scene)const;
 
     void PreparePaper(int index) const;
     void RestorePaper(int index) const;

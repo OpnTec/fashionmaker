@@ -118,6 +118,7 @@ private slots:
     void CreateMeasurements();
 #endif
     void ExportLayoutAs();
+    void ExportDetailsAs();
 
     void ArrowTool();
     void ToolEndLine(bool checked);

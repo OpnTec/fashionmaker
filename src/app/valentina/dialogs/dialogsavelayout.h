@@ -30,6 +30,7 @@
 #define DIALOGSAVELAYOUT_H
 
 #include <QDialog>
+#include "../vgeometry/vgeometrydef.h"
 
 #ifdef Q_OS_WIN
 #   define PDFTOPS "pdftops.exe"
@@ -86,7 +87,8 @@ class DialogSaveLayout : public QDialog
     Q_OBJECT
 
 public:
-    explicit DialogSaveLayout(int count, const QString &fileName = QString(), QWidget *parent = nullptr);
+    explicit DialogSaveLayout(int count, Draw mode = Draw::Layout, const QString &fileName = QString(),
+                              QWidget *parent = nullptr);
     virtual ~DialogSaveLayout();
 
     QString Path() const;
@@ -101,8 +103,14 @@ public:
     static QString MakeHelpFormatList();
     void   SetDestinationPath(const QString& cmdDestinationPath);
 
+    Draw Mode() const;
+
     static QString ExportFormatDescription(LayoutExportFormats format);
     static QString ExportFromatSuffix(LayoutExportFormats format);
+
+    bool IsTextAsPaths() const;
+    void SetTextAsPaths(bool textAsPaths);
+
 protected:
     virtual void showEvent(QShowEvent *event) Q_DECL_OVERRIDE;
 private slots:
@@ -114,11 +122,15 @@ private:
     Ui::DialogSaveLAyout *ui;
     int count;
     bool isInitialized;
+    Draw m_mode;
+
     static bool havePdf;
     static bool tested;
     static bool SupportPSTest();
     static bool TestPdf();
     static QVector<std::pair<QString, LayoutExportFormats> > InitFormats();
+
+    void RemoveFormatFromList(LayoutExportFormats format);
 };
 
 #endif // DIALOGSAVELAYOUT_H

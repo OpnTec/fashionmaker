@@ -108,6 +108,12 @@ void VCommandLine::InitOptions(VCommandLineOptions &options, QMap<QString, int> 
     options.append(new QCommandLineOption(QStringList() << LONG_OPTION_TEXT2PATHS,
                                           translate("VCommandLine", "Export text as paths.")));
 
+    optionsIndex.insert(LONG_OPTION_EXPORTONLYDETAILS, index++);
+    options.append(new QCommandLineOption(QStringList() << LONG_OPTION_EXPORTONLYDETAILS,
+                                          translate("VCommandLine", "Export only details. Export details as they "
+                                                                    "positioned in the details mode. Any layout related"
+                                                                    " options will be ignored.")));
+
     optionsIndex.insert(LONG_OPTION_GRADATIONSIZE, index++);
     options.append(new QCommandLineOption(QStringList() << SINGLE_OPTION_GRADATIONSIZE << LONG_OPTION_GRADATIONSIZE,
                                           translate("VCommandLine", "Set size value a pattern file, that was opened "
@@ -635,6 +641,12 @@ int VCommandLine::IsBinaryDXF() const
 int VCommandLine::IsTextAsPaths() const
 {
     return parser.isSet(*optionsUsed.value(optionsIndex.value(LONG_OPTION_TEXT2PATHS)));
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+int VCommandLine::IsExportOnlyDetails() const
+{
+    return parser.isSet(*optionsUsed.value(optionsIndex.value(LONG_OPTION_EXPORTONLYDETAILS)));
 }
 
 //---------------------------------------------------------------------------------------------------------------------

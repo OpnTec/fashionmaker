@@ -1947,6 +1947,7 @@ void MainWindow::InitToolButtons()
     connect(ui->toolButtonMove, &QToolButton::clicked, this, &MainWindow::ToolMove);
     connect(ui->toolButtonMidpoint, &QToolButton::clicked, this, &MainWindow::ToolMidpoint);
     connect(ui->toolButtonLayoutExportAs, &QToolButton::clicked, this, &MainWindow::ExportLayoutAs);
+    connect(ui->toolButtonDetailExportAs, &QToolButton::clicked, this, &MainWindow::ExportDetailsAs);
     connect(ui->toolButtonEllipticalArc, &QToolButton::clicked, this, &MainWindow::ToolEllipticalArc);
     connect(ui->toolButtonPin, &QToolButton::clicked, this, &MainWindow::ToolPin);
     connect(ui->toolButtonInsertNode, &QToolButton::clicked, this, &MainWindow::ToolInsertNode);
@@ -2461,7 +2462,7 @@ void MainWindow::ActionLayout(bool checked)
 
         try
         {
-            PrepareDetailsForLayout(&details);
+            listDetails = PrepareDetailsForLayout(details);
         }
         catch (VException &e)
         {
@@ -3329,6 +3330,7 @@ void MainWindow::SetEnableTool(bool enable)
 
     //Modeling Tools
     ui->toolButtonUnionDetails->setEnabled(modelingTools);
+    ui->toolButtonDetailExportAs->setEnabled(modelingTools);
 
     //Layout tools
     ui->toolButtonLayoutSettings->setEnabled(layoutTools);
@@ -4389,7 +4391,7 @@ void MainWindow::ExportLayoutAs()
 
     try
     {
-        DialogSaveLayout dialog(scenes.size(), FileName(), this);
+        DialogSaveLayout dialog(scenes.size(), Draw::Layout, FileName(), this);
 
         if (dialog.exec() == QDialog::Rejected)
         {
@@ -4397,7 +4399,7 @@ void MainWindow::ExportLayoutAs()
             return;
         }
 
-        ExportLayout(dialog);
+        ExportLayout(dialog, scenes, papers, shadows, ignorePrinterFields, margins);
     }
     catch (const VException &e)
     {
@@ -4407,6 +4409,64 @@ void MainWindow::ExportLayoutAs()
         return;
     }
     ui->toolButtonLayoutExportAs->setChecked(false);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void MainWindow::ExportDetailsAs()
+{
+    const QHash<quint32, VPiece> *allDetails = pattern->DataPieces();
+    QHash<quint32, VPiece>::const_iterator i = allDetails->constBegin();
+    QHash<quint32, VPiece> detailsInLayout;
+    while (i != allDetails->constEnd())
+    {
+        if (i.value().IsInLayout())
+        {
+            detailsInLayout.insert(i.key(), i.value());
+        }
+        ++i;
+    }
+
+    if (detailsInLayout.count() == 0)
+    {
+        QMessageBox::information(this, tr("Layout mode"),  tr("You don't have enough details to export. Please, "
+                                                              "include at least one detail in layout."),
+                                 QMessageBox::Ok, QMessageBox::Ok);
+        return;
+    }
+
+    QVector<VLayoutPiece> listDetails;
+    try
+    {
+        listDetails = PrepareDetailsForLayout(detailsInLayout);
+    }
+    catch (VException &e)
+    {
+        QMessageBox::warning(this, tr("Export details"),
+                             tr("Can't export details.") + QLatin1String(" \n") + e.ErrorMessage(),
+                             QMessageBox::Ok, QMessageBox::Ok);
+        return;
+    }
+
+    try
+    {
+        DialogSaveLayout dialog(1, Draw::Modeling, FileName(), this);
+
+        if (dialog.exec() == QDialog::Rejected)
+        {
+            ui->toolButtonDetailExportAs->setChecked(false);
+            return;
+        }
+
+        ExportData(listDetails, dialog);
+    }
+    catch (const VException &e)
+    {
+        ui->toolButtonDetailExportAs->setChecked(false);
+        qCritical("%s\n\n%s\n\n%s", qUtf8Printable(tr("Export error.")),
+                  qUtf8Printable(e.ErrorMessage()), qUtf8Printable(e.DetailedInformation()));
+        return;
+    }
+    ui->toolButtonDetailExportAs->setChecked(false);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -4686,20 +4746,20 @@ void MainWindow::DoExport(const VCommandLinePtr &expParams)
             return;
         }
     }
-    PrepareDetailsForLayout(details);
+    listDetails = PrepareDetailsForLayout(*details);
 
-    auto settings = expParams->DefaultGenerator();
-    settings->SetTestAsPaths(expParams->IsTextAsPaths());
-
-    if (LayoutSettings(*settings.get()))
+    const bool exportOnlyDetails = expParams->IsExportOnlyDetails();
+    if (exportOnlyDetails)
     {
         try
         {
-            DialogSaveLayout dialog(scenes.size(), expParams->OptBaseName(), this);
+            DialogSaveLayout dialog(1, Draw::Modeling, expParams->OptBaseName(), this);
             dialog.SetDestinationPath(expParams->OptDestinationPath());
             dialog.SelectFormat(static_cast<LayoutExportFormats>(expParams->OptExportType()));
             dialog.SetBinaryDXFFormat(expParams->IsBinaryDXF());
-            ExportLayout(dialog);
+            dialog.SetTextAsPaths(expParams->IsTextAsPaths());
+
+            ExportData(listDetails, dialog);
         }
         catch (const VException &e)
         {
@@ -4710,7 +4770,31 @@ void MainWindow::DoExport(const VCommandLinePtr &expParams)
     }
     else
     {
-        return;
+        auto settings = expParams->DefaultGenerator();
+        settings->SetTestAsPaths(expParams->IsTextAsPaths());
+
+        if (LayoutSettings(*settings.get()))
+        {
+            try
+            {
+                DialogSaveLayout dialog(scenes.size(), Draw::Layout, expParams->OptBaseName(), this);
+                dialog.SetDestinationPath(expParams->OptDestinationPath());
+                dialog.SelectFormat(static_cast<LayoutExportFormats>(expParams->OptExportType()));
+                dialog.SetBinaryDXFFormat(expParams->IsBinaryDXF());
+
+                ExportData(listDetails, dialog);
+            }
+            catch (const VException &e)
+            {
+                qCCritical(vMainWindow, "%s\n\n%s", qUtf8Printable(tr("Export error.")), qUtf8Printable(e.ErrorMessage()));
+                qApp->exit(V_EX_DATAERR);
+                return;
+            }
+        }
+        else
+        {
+            return;
+        }
     }
 
     qApp->exit(V_EX_OK);

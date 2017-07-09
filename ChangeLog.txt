@@ -10,6 +10,7 @@
 - [#630] Improve export: upgrade to DXF r14 format.
 - [#669] Improve export: export labels as text in DXF.
 - [#716] Command line option to create *tiled* export.
+- [#660] New export: Export details without layout.
 
 # Version 0.5.1
 - [#683] Tool Seam allowance's dialog is off screen on small resolutions.
