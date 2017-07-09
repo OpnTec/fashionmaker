@@ -230,7 +230,7 @@
           </sizepolicy>
          </property>
          <property name="title">
-          <string>Fields</string>
+          <string>Margins</string>
          </property>
          <layout class="QFormLayout" name="formLayout">
           <property name="fieldGrowthPolicy">
@@ -304,7 +304,7 @@
           </sizepolicy>
          </property>
          <property name="text">
-          <string>Ignore fileds</string>
+          <string>Ignore margins</string>
          </property>
         </widget>
        </item>
@@ -755,7 +755,7 @@
   </connection>
  </connections>
  <buttongroups>
-  <buttongroup name="buttonGroup"/>
   <buttongroup name="buttonGroupPrinciple"/>
+  <buttongroup name="buttonGroup"/>
  </buttongroups>
 </ui>
