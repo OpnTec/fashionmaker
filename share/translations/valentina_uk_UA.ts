@@ -339,19 +339,19 @@
     <name>Detail</name>
     <message>
         <source>Fabric</source>
-        <translation>Тканина</translation>
+        <translation type="vanished">Тканина</translation>
     </message>
     <message>
         <source>Lining</source>
-        <translation>Підклада</translation>
+        <translation type="vanished">Підклада</translation>
     </message>
     <message>
         <source>Interfacing</source>
-        <translation>Дублерін</translation>
+        <translation type="vanished">Дублерін</translation>
     </message>
     <message>
         <source>Interlining</source>
-        <translation>Флізелін</translation>
+        <translation type="vanished">Флізелін</translation>
     </message>
 </context>
 <context>
@@ -2742,6 +2742,18 @@ Apply settings anyway?</source>
         <comment>Printer</comment>
         <translation>Жодного</translation>
     </message>
+    <message>
+        <source>Text</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Text will be converted to paths</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Export text as paths</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>DialogLine</name>
@@ -4485,6 +4497,10 @@ Apply settings anyway?</source>
         <source>Path to destination folder</source>
         <translation>Шлях до теки призначення</translation>
     </message>
+    <message>
+        <source>Binary form</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>DialogSaveLayout</name>
@@ -4555,6 +4571,14 @@ Apply settings anyway?</source>
     <message>
         <source>files</source>
         <translation>файли</translation>
+    </message>
+    <message>
+        <source>(flat) files</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Image files</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -6283,11 +6307,11 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Save as tiled PDF</source>
-        <translation>Зберегти плиткою як PDF</translation>
+        <translation type="vanished">Зберегти плиткою як PDF</translation>
     </message>
     <message>
         <source>Split and save a layout into smaller pages</source>
-        <translation>Розбити і зберегти розкладку на сторінки меншого розміру</translation>
+        <translation type="vanished">Розбити і зберегти розкладку на сторінки меншого розміру</translation>
     </message>
     <message>
         <source>Print</source>
@@ -6935,11 +6959,11 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Print to pdf</source>
-        <translation>Друк у pdf</translation>
+        <translation type="vanished">Друк у pdf</translation>
     </message>
     <message>
         <source>PDF file (*.pdf)</source>
-        <translation>PDF файл (*.pdf)</translation>
+        <translation type="vanished">PDF файл (*.pdf)</translation>
     </message>
     <message>
         <source>Print error</source>
@@ -6995,11 +7019,15 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Can&apos;t create path</source>
-        <translation>Не вдалося створити контур</translation>
+        <translation type="vanished">Не вдалося створити контур</translation>
     </message>
     <message>
         <source>Cannot set printer margins</source>
         <translation>Не вдалося встановити поля принтеру</translation>
+    </message>
+    <message>
+        <source>Can&apos;t create a path</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -7373,6 +7401,18 @@ Do you want to save your changes?</source>
     <message>
         <source>Hide main path</source>
         <translation>Ховати головний контур</translation>
+    </message>
+    <message>
+        <source>Label font:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Seam allowance</source>
+        <translation type="unfinished">Прибавка на шви</translation>
+    </message>
+    <message>
+        <source>Default value:</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -9497,6 +9537,14 @@ Do you want to save your changes?</source>
     <message>
         <source>Disable high dpi scaling. Call this option if has problem with scaling (by default scaling enabled). Alternatively you can use the %1 environment variable.</source>
         <translation>Відключити масштабування з високим розширенням. Викличте цю функцію якщо маєте проблему з масштабуванням (за замовчуванням масштабування увімкнено). Альтернативно ви можете використовувати перемену оточення %1.</translation>
+    </message>
+    <message>
+        <source>Export dxf in binary form.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Export text as paths.</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

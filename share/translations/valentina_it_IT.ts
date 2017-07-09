@@ -339,19 +339,19 @@
     <name>Detail</name>
     <message>
         <source>Fabric</source>
-        <translation>Tessuto</translation>
+        <translation type="vanished">Tessuto</translation>
     </message>
     <message>
         <source>Lining</source>
-        <translation>Imbottitura</translation>
+        <translation type="vanished">Imbottitura</translation>
     </message>
     <message>
         <source>Interfacing</source>
-        <translation>Teletta</translation>
+        <translation type="vanished">Teletta</translation>
     </message>
     <message>
         <source>Interlining</source>
-        <translation>Imbottitura interna</translation>
+        <translation type="vanished">Imbottitura interna</translation>
     </message>
 </context>
 <context>
@@ -2658,6 +2658,18 @@ Applicare le impostazioni comunque?</translation>
         <comment>Printer</comment>
         <translation>Nessun</translation>
     </message>
+    <message>
+        <source>Text</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Text will be converted to paths</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Export text as paths</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>DialogLine</name>
@@ -4393,6 +4405,10 @@ Applicare le impostazioni comunque?</translation>
         <source>Path to destination folder</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Binary form</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>DialogSaveLayout</name>
@@ -4462,6 +4478,14 @@ Applicare le impostazioni comunque?</translation>
     </message>
     <message>
         <source>files</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>(flat) files</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Image files</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -6192,11 +6216,11 @@ Vuoi salvare i cambiamenti?</translation>
     </message>
     <message>
         <source>Save as tiled PDF</source>
-        <translation>Salva come PDF porzionato</translation>
+        <translation type="vanished">Salva come PDF porzionato</translation>
     </message>
     <message>
         <source>Split and save a layout into smaller pages</source>
-        <translation>Dividi e salva un layout in pagine più piccole</translation>
+        <translation type="vanished">Dividi e salva un layout in pagine più piccole</translation>
     </message>
     <message>
         <source>Print</source>
@@ -6844,11 +6868,11 @@ Vuoi salvare i cambiamenti?</translation>
     </message>
     <message>
         <source>Print to pdf</source>
-        <translation>Stampa in pdf</translation>
+        <translation type="vanished">Stampa in pdf</translation>
     </message>
     <message>
         <source>PDF file (*.pdf)</source>
-        <translation>file PDF (*.pdf)</translation>
+        <translation type="vanished">file PDF (*.pdf)</translation>
     </message>
     <message>
         <source>Print error</source>
@@ -6903,11 +6927,11 @@ Vuoi salvare i cambiamenti?</translation>
         <translation>Le pagine verranno tagliate perchè non si adattano al formato della carta della stampante.</translation>
     </message>
     <message>
-        <source>Can&apos;t create path</source>
+        <source>Cannot set printer margins</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Cannot set printer margins</source>
+        <source>Can&apos;t create a path</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -7265,6 +7289,18 @@ Vuoi salvare i cambiamenti?</translation>
     </message>
     <message>
         <source>Hide main path</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Label font:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Seam allowance</source>
+        <translation type="unfinished">Margine di cucitura</translation>
+    </message>
+    <message>
+        <source>Default value:</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -9377,6 +9413,14 @@ Vuoi salvare le tue modifiche?</translation>
     </message>
     <message>
         <source>Disable high dpi scaling. Call this option if has problem with scaling (by default scaling enabled). Alternatively you can use the %1 environment variable.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Export dxf in binary form.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Export text as paths.</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

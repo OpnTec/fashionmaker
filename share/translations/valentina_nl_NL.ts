@@ -339,19 +339,19 @@
     <name>Detail</name>
     <message>
         <source>Fabric</source>
-        <translation>Stof</translation>
+        <translation type="vanished">Stof</translation>
     </message>
     <message>
         <source>Lining</source>
-        <translation>Voering</translation>
+        <translation type="vanished">Voering</translation>
     </message>
     <message>
         <source>Interfacing</source>
-        <translation>Vlieseline</translation>
+        <translation type="vanished">Vlieseline</translation>
     </message>
     <message>
         <source>Interlining</source>
-        <translation>Tussenvoering</translation>
+        <translation type="vanished">Tussenvoering</translation>
     </message>
 </context>
 <context>
@@ -2742,6 +2742,18 @@ Toch de instellingen aanpassen?</translation>
         <comment>Printer</comment>
         <translation>Geen</translation>
     </message>
+    <message>
+        <source>Text</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Text will be converted to paths</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Export text as paths</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>DialogLine</name>
@@ -4485,6 +4497,10 @@ Toch de instellingen aanpassen?</translation>
         <source>Path to destination folder</source>
         <translation>Pad naar doelmap</translation>
     </message>
+    <message>
+        <source>Binary form</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>DialogSaveLayout</name>
@@ -4555,6 +4571,14 @@ Toch de instellingen aanpassen?</translation>
     <message>
         <source>files</source>
         <translation>bestanden</translation>
+    </message>
+    <message>
+        <source>(flat) files</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Image files</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -6283,11 +6307,11 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Save as tiled PDF</source>
-        <translation>Sla op als papierformaat indeling PDF</translation>
+        <translation type="vanished">Sla op als papierformaat indeling PDF</translation>
     </message>
     <message>
         <source>Split and save a layout into smaller pages</source>
-        <translation>Verdeel en sla een opmaak op in kleinere pagina&apos;s</translation>
+        <translation type="vanished">Verdeel en sla een opmaak op in kleinere pagina&apos;s</translation>
     </message>
     <message>
         <source>Print</source>
@@ -6935,11 +6959,11 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Print to pdf</source>
-        <translation>Druk af naar PDF</translation>
+        <translation type="vanished">Druk af naar PDF</translation>
     </message>
     <message>
         <source>PDF file (*.pdf)</source>
-        <translation>PDF file (*.pdf)</translation>
+        <translation type="vanished">PDF file (*.pdf)</translation>
     </message>
     <message>
         <source>Print error</source>
@@ -6995,11 +7019,15 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Can&apos;t create path</source>
-        <translation>Kan het pad niet maken</translation>
+        <translation type="vanished">Kan het pad niet maken</translation>
     </message>
     <message>
         <source>Cannot set printer margins</source>
         <translation>Kan de printer marges niet bepalen</translation>
+    </message>
+    <message>
+        <source>Can&apos;t create a path</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -7373,6 +7401,18 @@ Do you want to save your changes?</source>
     <message>
         <source>Hide main path</source>
         <translation>Verberg hoofdpad</translation>
+    </message>
+    <message>
+        <source>Label font:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Seam allowance</source>
+        <translation type="unfinished">Naadtoeslag</translation>
+    </message>
+    <message>
+        <source>Default value:</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -9497,6 +9537,14 @@ Wil je deze veranderingen opslaan?</translation>
     <message>
         <source>Disable high dpi scaling. Call this option if has problem with scaling (by default scaling enabled). Alternatively you can use the %1 environment variable.</source>
         <translation>Schakel hoog-dpi-schaling uit. Gebruik deze optie als je problemen hebt met schaalverandering (als default is uitgeschakeld). Als alternatief kun je %1 omgevingsvariabele gebruiken.</translation>
+    </message>
+    <message>
+        <source>Export dxf in binary form.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Export text as paths.</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

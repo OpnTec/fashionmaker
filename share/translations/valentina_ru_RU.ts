@@ -339,19 +339,19 @@
     <name>Detail</name>
     <message>
         <source>Fabric</source>
-        <translation>Материал</translation>
+        <translation type="vanished">Материал</translation>
     </message>
     <message>
         <source>Lining</source>
-        <translation>Подкладка</translation>
+        <translation type="vanished">Подкладка</translation>
     </message>
     <message>
         <source>Interfacing</source>
-        <translation>Клеевая подкладка</translation>
+        <translation type="vanished">Клеевая подкладка</translation>
     </message>
     <message>
         <source>Interlining</source>
-        <translation>Прокладка</translation>
+        <translation type="vanished">Прокладка</translation>
     </message>
 </context>
 <context>
@@ -2742,6 +2742,18 @@ Apply settings anyway?</source>
         <comment>Printer</comment>
         <translation>Ничего</translation>
     </message>
+    <message>
+        <source>Text</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Text will be converted to paths</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Export text as paths</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>DialogLine</name>
@@ -4485,6 +4497,10 @@ Apply settings anyway?</source>
         <source>Path to destination folder</source>
         <translation>Путь к папке назначения</translation>
     </message>
+    <message>
+        <source>Binary form</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>DialogSaveLayout</name>
@@ -4555,6 +4571,14 @@ Apply settings anyway?</source>
     <message>
         <source>files</source>
         <translation>файлы</translation>
+    </message>
+    <message>
+        <source>(flat) files</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Image files</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -6283,11 +6307,11 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Save as tiled PDF</source>
-        <translation>Сохранить плиткой как PDF</translation>
+        <translation type="vanished">Сохранить плиткой как PDF</translation>
     </message>
     <message>
         <source>Split and save a layout into smaller pages</source>
-        <translation>Разделить и сохранить раскладку на меньшие страницы</translation>
+        <translation type="vanished">Разделить и сохранить раскладку на меньшие страницы</translation>
     </message>
     <message>
         <source>Print</source>
@@ -6936,11 +6960,11 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Print to pdf</source>
-        <translation>Печать в PDF</translation>
+        <translation type="vanished">Печать в PDF</translation>
     </message>
     <message>
         <source>PDF file (*.pdf)</source>
-        <translation>PDF-файл (*.pdf)</translation>
+        <translation type="vanished">PDF-файл (*.pdf)</translation>
     </message>
     <message>
         <source>Print error</source>
@@ -6996,11 +7020,15 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Can&apos;t create path</source>
-        <translation>Невозможно создать контур</translation>
+        <translation type="vanished">Невозможно создать контур</translation>
     </message>
     <message>
         <source>Cannot set printer margins</source>
         <translation>Невозможно установить поля принтера</translation>
+    </message>
+    <message>
+        <source>Can&apos;t create a path</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -7374,6 +7402,18 @@ Do you want to save your changes?</source>
     <message>
         <source>Hide main path</source>
         <translation>Прятать главный контур</translation>
+    </message>
+    <message>
+        <source>Label font:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Seam allowance</source>
+        <translation type="unfinished">Прибавка на швы</translation>
+    </message>
+    <message>
+        <source>Default value:</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -9498,6 +9538,14 @@ Do you want to save your changes?</source>
     <message>
         <source>Disable high dpi scaling. Call this option if has problem with scaling (by default scaling enabled). Alternatively you can use the %1 environment variable.</source>
         <translation>Отключить масштабирование с высоким разрешением. Вызовите эту опцию, если есть проблема с масштабированием (по умолчанию масштабирование включено). Или вы можете использовать %1 переменную среды.</translation>
+    </message>
+    <message>
+        <source>Export dxf in binary form.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Export text as paths.</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

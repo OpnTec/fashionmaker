@@ -339,19 +339,19 @@
     <name>Detail</name>
     <message>
         <source>Fabric</source>
-        <translation>Tissu</translation>
+        <translation type="vanished">Tissu</translation>
     </message>
     <message>
         <source>Lining</source>
-        <translation>Lin</translation>
+        <translation type="vanished">Lin</translation>
     </message>
     <message>
         <source>Interfacing</source>
-        <translation>Interfaçage</translation>
+        <translation type="vanished">Interfaçage</translation>
     </message>
     <message>
         <source>Interlining</source>
-        <translation>Interlignage</translation>
+        <translation type="vanished">Interlignage</translation>
     </message>
 </context>
 <context>
@@ -2739,6 +2739,18 @@ Appliquer les réglages quand-même ?</translation>
         <comment>Printer</comment>
         <translation>Rien</translation>
     </message>
+    <message>
+        <source>Text</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Text will be converted to paths</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Export text as paths</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>DialogLine</name>
@@ -4482,6 +4494,10 @@ Appliquer les réglages quand-même ?</translation>
         <source>Path to destination folder</source>
         <translation>Emplacement du dossier de destination</translation>
     </message>
+    <message>
+        <source>Binary form</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>DialogSaveLayout</name>
@@ -4551,6 +4567,14 @@ Appliquer les réglages quand-même ?</translation>
     </message>
     <message>
         <source>files</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>(flat) files</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Image files</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -6281,11 +6305,11 @@ Voulez-vous sauvegarder les changements?</translation>
     </message>
     <message>
         <source>Save as tiled PDF</source>
-        <translation>Enregistrer en tant que PDF</translation>
+        <translation type="vanished">Enregistrer en tant que PDF</translation>
     </message>
     <message>
         <source>Split and save a layout into smaller pages</source>
-        <translation>Découpe et sauvegarde le plan de coupe en plus petites pages</translation>
+        <translation type="vanished">Découpe et sauvegarde le plan de coupe en plus petites pages</translation>
     </message>
     <message>
         <source>Print</source>
@@ -6933,11 +6957,11 @@ Voulez-vous sauvegarder les changements?</translation>
     </message>
     <message>
         <source>Print to pdf</source>
-        <translation>Imprimer en PDF</translation>
+        <translation type="vanished">Imprimer en PDF</translation>
     </message>
     <message>
         <source>PDF file (*.pdf)</source>
-        <translation>fichier PDF (*.pdf)</translation>
+        <translation type="vanished">fichier PDF (*.pdf)</translation>
     </message>
     <message>
         <source>Print error</source>
@@ -6993,10 +7017,14 @@ Voulez-vous sauvegarder les changements?</translation>
     </message>
     <message>
         <source>Can&apos;t create path</source>
-        <translation>Impossible de créer l&apos;emplacement</translation>
+        <translation type="vanished">Impossible de créer l&apos;emplacement</translation>
     </message>
     <message>
         <source>Cannot set printer margins</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Can&apos;t create a path</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -7358,6 +7386,18 @@ Voulez-vous sauvegarder les changements?</translation>
     </message>
     <message>
         <source>Hide main path</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Label font:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Seam allowance</source>
+        <translation type="unfinished">Marge de couture</translation>
+    </message>
+    <message>
+        <source>Default value:</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -9474,6 +9514,14 @@ Voulez-vous enregistrer les changements?</translation>
     </message>
     <message>
         <source>Disable high dpi scaling. Call this option if has problem with scaling (by default scaling enabled). Alternatively you can use the %1 environment variable.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Export dxf in binary form.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Export text as paths.</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
