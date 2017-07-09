@@ -96,6 +96,7 @@ protected:
                       const QList<QGraphicsScene *> &scenes,
                       const QList<QGraphicsItem *> &papers,
                       const QList<QGraphicsItem *> &shadows,
+                      const QList<QList<QGraphicsItem *> > &details,
                       bool ignorePrinterFields, const QMarginsF &margins);
 
     void InitTempLayoutScene();
@@ -133,13 +134,14 @@ private:
                 const QMarginsF &margins)const;
     void PdfToPs(const QStringList &params)const;
     void ObjFile(const QString &name, QGraphicsRectItem *paper, QGraphicsScene *scene)const;
-    void DxfFile(const QString &name, int version, bool binary, QGraphicsRectItem *paper, QGraphicsScene *scene)const;
+    void DxfFile(const QString &name, int version, bool binary, QGraphicsRectItem *paper, QGraphicsScene *scene,
+                 const QList<QList<QGraphicsItem *> > &details)const;
 
     void PreparePaper(int index) const;
     void RestorePaper(int index) const;
 
-    void PrepareTextForDXF(const QString &placeholder) const;
-    void RestoreTextAfterDXF(const QString &placeholder) const;
+    void PrepareTextForDXF(const QString &placeholder, const QList<QList<QGraphicsItem *> > &details) const;
+    void RestoreTextAfterDXF(const QString &placeholder, const QList<QList<QGraphicsItem *> > &details) const;
 
     void PrintPreview();
     void LayoutPrint();

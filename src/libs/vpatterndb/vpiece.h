@@ -75,12 +75,6 @@ public:
     QPainterPath SeamAllowancePath(const VContainer *data) const;
     QPainterPath PassmarksPath(const VContainer *data) const;
 
-    qreal GetMx() const;
-    void  SetMx(qreal value);
-
-    qreal GetMy() const;
-    void  SetMy(qreal value);
-
     bool IsInLayout() const;
     void SetInLayout(bool inLayout);
 

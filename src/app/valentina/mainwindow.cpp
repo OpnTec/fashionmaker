@@ -4399,7 +4399,7 @@ void MainWindow::ExportLayoutAs()
             return;
         }
 
-        ExportLayout(dialog, scenes, papers, shadows, ignorePrinterFields, margins);
+        ExportLayout(dialog, scenes, papers, shadows, details, ignorePrinterFields, margins);
     }
     catch (const VException &e)
     {

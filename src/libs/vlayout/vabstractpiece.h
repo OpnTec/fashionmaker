@@ -171,6 +171,12 @@ public:
     qreal GetSAWidth() const;
     void  SetSAWidth(qreal value);
 
+    qreal GetMx() const;
+    void  SetMx(qreal value);
+
+    qreal GetMy() const;
+    void  SetMy(qreal value);
+
     static QVector<QPointF> Equidistant(const QVector<VSAPoint> &points, qreal width);
     static qreal            SumTrapezoids(const QVector<QPointF> &points);
     static QVector<QPointF> CheckLoops(const QVector<QPointF> &points);

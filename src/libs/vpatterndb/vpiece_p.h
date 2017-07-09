@@ -49,8 +49,6 @@ class VPieceData : public QSharedData
 public:
     explicit VPieceData(PiecePathType type)
         : m_path(type),
-          m_mx(0),
-          m_my(0),
           m_inLayout(true),
           m_united(false),
           m_customSARecords(),
@@ -65,8 +63,6 @@ public:
     VPieceData(const VPieceData &detail)
         : QSharedData(detail),
           m_path(detail.m_path),
-          m_mx(detail.m_mx),
-          m_my(detail.m_my),
           m_inLayout(detail.m_inLayout),
           m_united(detail.m_united),
           m_customSARecords(detail.m_customSARecords),
@@ -82,9 +78,6 @@ public:
 
     /** @brief nodes list detail nodes. */
     VPiecePath m_path;
-
-    qreal m_mx;
-    qreal m_my;
 
     bool m_inLayout;
     bool m_united;

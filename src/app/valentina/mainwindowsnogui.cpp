@@ -203,7 +203,7 @@ void MainWindowsNoGUI::ExportData(const QVector<VLayoutPiece> &listDetails, cons
 {
     if (dialog.Mode() == Draw::Layout)
     {
-        ExportLayout(dialog, scenes, papers, shadows, ignorePrinterFields, margins);
+        ExportLayout(dialog, scenes, papers, shadows, details, ignorePrinterFields, margins);
     }
     else
     {
@@ -212,7 +212,9 @@ void MainWindowsNoGUI::ExportData(const QVector<VLayoutPiece> &listDetails, cons
         QList<QGraphicsItem *> list;
         for (int i=0; i < listDetails.count(); ++i)
         {
-            list.append(listDetails.at(i).GetItem(dialog.IsTextAsPaths()));
+            QGraphicsItem *item = listDetails.at(i).GetItem(dialog.IsTextAsPaths());
+            item->setPos(listDetails.at(i).GetMx(), listDetails.at(i).GetMy());
+            list.append(item);
         }
 
         for (int i=0; i < list.size(); ++i)
@@ -221,7 +223,25 @@ void MainWindowsNoGUI::ExportData(const QVector<VLayoutPiece> &listDetails, cons
         }
 
         QList<QGraphicsItem *> papers;// Blank sheets
-        papers.append(new QGraphicsRectItem(scene->itemsBoundingRect().toRect()));
+        QRect rect = scene->itemsBoundingRect().toRect();
+
+        const int mx = rect.x();
+        const int my = rect.y();
+
+        QTransform matrix;
+        matrix = matrix.translate(-mx, -my);
+
+        for (int i=0; i < list.size(); ++i)
+        {
+            list.at(i)->setTransform(matrix);
+        }
+
+        rect = scene->itemsBoundingRect().toRect();
+
+        QGraphicsRectItem *paper = new QGraphicsRectItem(rect);
+        paper->setPen(QPen(Qt::black, 1));
+        paper->setBrush(QBrush(Qt::white));
+        papers.append(paper);
 
         QList<QList<QGraphicsItem *> > details;// All details
         details.append(list);
@@ -230,8 +250,9 @@ void MainWindowsNoGUI::ExportData(const QVector<VLayoutPiece> &listDetails, cons
         QList<QGraphicsScene *> scenes = CreateScenes(papers, shadows, details);
 
         const bool ignorePrinterFields = false;
-        const qreal margin = ToPixel(2, Unit::Mm);
-        ExportLayout(dialog, scenes, papers, shadows, ignorePrinterFields, QMarginsF(margin, margin, margin, margin));
+        const qreal margin = ToPixel(1, Unit::Cm);
+        ExportLayout(dialog, scenes, papers, shadows, details, ignorePrinterFields,
+                     QMarginsF(margin, margin, margin, margin));
 
         qDeleteAll(scenes);//Scene will clear all other items
     }
@@ -240,7 +261,8 @@ void MainWindowsNoGUI::ExportData(const QVector<VLayoutPiece> &listDetails, cons
 //---------------------------------------------------------------------------------------------------------------------
 void MainWindowsNoGUI::ExportLayout(const DialogSaveLayout &dialog, const QList<QGraphicsScene *> &scenes,
                                     const QList<QGraphicsItem *> &papers, const QList<QGraphicsItem *> &shadows,
-                                    bool ignorePrinterFields, const QMarginsF &margins)
+                                    const QList<QList<QGraphicsItem *> > &details, bool ignorePrinterFields,
+                                    const QMarginsF &margins)
 {
     const QString path = dialog.Path();
     bool usedNotExistedDir = false;
@@ -328,47 +350,47 @@ void MainWindowsNoGUI::ExportLayout(const DialogSaveLayout &dialog, const QList<
                         break;
                     case LayoutExportFormats::DXF_AC1006_Flat:
                         paper->setVisible(false);
-                        DxfFile(name, DRW::AC1006, dialog.IsBinaryDXFFormat(), paper, scene);
+                        DxfFile(name, DRW::AC1006, dialog.IsBinaryDXFFormat(), paper, scene, details);
                         paper->setVisible(true);
                         break;
                     case LayoutExportFormats::DXF_AC1009_Flat:
                         paper->setVisible(false);
-                        DxfFile(name, DRW::AC1009, dialog.IsBinaryDXFFormat(), paper, scene);
+                        DxfFile(name, DRW::AC1009, dialog.IsBinaryDXFFormat(), paper, scene, details);
                         paper->setVisible(true);
                         break;
                     case LayoutExportFormats::DXF_AC1012_Flat:
                         paper->setVisible(false);
-                        DxfFile(name, DRW::AC1012, dialog.IsBinaryDXFFormat(), paper, scene);
+                        DxfFile(name, DRW::AC1012, dialog.IsBinaryDXFFormat(), paper, scene, details);
                         paper->setVisible(true);
                         break;
                     case LayoutExportFormats::DXF_AC1014_Flat:
                         paper->setVisible(false);
-                        DxfFile(name, DRW::AC1014, dialog.IsBinaryDXFFormat(), paper, scene);
+                        DxfFile(name, DRW::AC1014, dialog.IsBinaryDXFFormat(), paper, scene, details);
                         paper->setVisible(true);
                         break;
                     case LayoutExportFormats::DXF_AC1015_Flat:
                         paper->setVisible(false);
-                        DxfFile(name, DRW::AC1015, dialog.IsBinaryDXFFormat(), paper, scene);
+                        DxfFile(name, DRW::AC1015, dialog.IsBinaryDXFFormat(), paper, scene, details);
                         paper->setVisible(true);
                         break;
                     case LayoutExportFormats::DXF_AC1018_Flat:
                         paper->setVisible(false);
-                        DxfFile(name, DRW::AC1018, dialog.IsBinaryDXFFormat(), paper, scene);
+                        DxfFile(name, DRW::AC1018, dialog.IsBinaryDXFFormat(), paper, scene, details);
                         paper->setVisible(true);
                         break;
                     case LayoutExportFormats::DXF_AC1021_Flat:
                         paper->setVisible(false);
-                        DxfFile(name, DRW::AC1021, dialog.IsBinaryDXFFormat(), paper, scene);
+                        DxfFile(name, DRW::AC1021, dialog.IsBinaryDXFFormat(), paper, scene, details);
                         paper->setVisible(true);
                         break;
                     case LayoutExportFormats::DXF_AC1024_Flat:
                         paper->setVisible(false);
-                        DxfFile(name, DRW::AC1024, dialog.IsBinaryDXFFormat(), paper, scene);
+                        DxfFile(name, DRW::AC1024, dialog.IsBinaryDXFFormat(), paper, scene, details);
                         paper->setVisible(true);
                         break;
                     case LayoutExportFormats::DXF_AC1027_Flat:
                         paper->setVisible(false);
-                        DxfFile(name, DRW::AC1027, dialog.IsBinaryDXFFormat(), paper, scene);
+                        DxfFile(name, DRW::AC1027, dialog.IsBinaryDXFFormat(), paper, scene, details);
                         paper->setVisible(true);
                         break;
                     default:
@@ -773,19 +795,26 @@ void MainWindowsNoGUI::PdfFile(const QString &name, QGraphicsRectItem *paper, QG
     printer.setDocName(FileName());
     const QRectF r = paper->rect();
     printer.setResolution(static_cast<int>(PrintDPI));
-    // Set orientation
-    if (paper->rect().height()>= paper->rect().width())
-    {
-        printer.setOrientation(QPrinter::Portrait);
-    }
-    else
-    {
-        printer.setOrientation(QPrinter::Landscape);
-    }
+    printer.setOrientation(QPrinter::Portrait);
     printer.setFullPage(ignorePrinterFields);
     printer.setPaperSize ( QSizeF(FromPixel(r.width() + margins.left() + margins.right(), Unit::Mm),
                                   FromPixel(r.height() + margins.top() + margins.bottom(), Unit::Mm)),
                            QPrinter::Millimeter );
+
+    const qreal left = FromPixel(margins.left(), Unit::Mm);
+    const qreal top = FromPixel(margins.top(), Unit::Mm);
+    const qreal right = FromPixel(margins.right(), Unit::Mm);
+    const qreal bottom = FromPixel(margins.bottom(), Unit::Mm);
+#if QT_VERSION >= QT_VERSION_CHECK(5, 3, 0)
+    const bool success = printer.setPageMargins(QMarginsF(left, top, right, bottom), QPageLayout::Millimeter);
+    if (not success)
+    {
+        qWarning() << tr("Cannot set printer margins");
+    }
+#else
+    printer.setPageMargins(left, top, right, bottom, QPrinter::Millimeter);
+#endif //QT_VERSION >= QT_VERSION_CHECK(5, 3, 0)
+
     QPainter painter;
     if (painter.begin( &printer ) == false)
     { // failed to open file
@@ -915,9 +944,9 @@ QT_WARNING_PUSH
 QT_WARNING_DISABLE_GCC("-Wswitch-default")
 
 void MainWindowsNoGUI::DxfFile(const QString &name, int version, bool binary, QGraphicsRectItem *paper,
-                               QGraphicsScene *scene) const
+                               QGraphicsScene *scene, const QList<QList<QGraphicsItem *> > &details) const
 {
-    PrepareTextForDXF(endStringPlaceholder);
+    PrepareTextForDXF(endStringPlaceholder, details);
     VDxfPaintDevice generator;
     generator.setFileName(name);
     generator.setSize(paper->rect().size().toSize());
@@ -948,7 +977,7 @@ void MainWindowsNoGUI::DxfFile(const QString &name, int version, bool binary, QG
         scene->render(&painter, paper->rect(), paper->rect(), Qt::IgnoreAspectRatio);
         painter.end();
     }
-    RestoreTextAfterDXF(endStringPlaceholder);
+    RestoreTextAfterDXF(endStringPlaceholder, details);
 }
 
 QT_WARNING_POP
@@ -990,14 +1019,15 @@ void MainWindowsNoGUI::RestorePaper(int index) const
  *
  * @param placeholder placeholder that will be appended to each QGraphicsSimpleTextItem item's text string.
  */
-void MainWindowsNoGUI::PrepareTextForDXF(const QString &placeholder) const
+void MainWindowsNoGUI::PrepareTextForDXF(const QString &placeholder,
+                                         const QList<QList<QGraphicsItem *> > &details) const
 {
     for (int i = 0; i < details.size(); ++i)
     {
         const QList<QGraphicsItem *> &paperItems = details.at(i);
         for (int j = 0; j < paperItems.size(); ++j)
         {
-            QList<QGraphicsItem *> pieceChildren = paperItems.at(i)->childItems();
+            QList<QGraphicsItem *> pieceChildren = paperItems.at(j)->childItems();
             for (int k = 0; k < pieceChildren.size(); ++k)
             {
                 QGraphicsItem *item = pieceChildren.at(k);
@@ -1022,7 +1052,8 @@ void MainWindowsNoGUI::PrepareTextForDXF(const QString &placeholder) const
  *
  * @param placeholder placeholder that will be removed from each QGraphicsSimpleTextItem item's text string.
  */
-void MainWindowsNoGUI::RestoreTextAfterDXF(const QString &placeholder) const
+void MainWindowsNoGUI::RestoreTextAfterDXF(const QString &placeholder,
+                                           const QList<QList<QGraphicsItem *> > &details) const
 {
     for (int i = 0; i < details.size(); ++i)
     {
@@ -1119,16 +1150,7 @@ void MainWindowsNoGUI::SetPrinterSettings(QPrinter *printer, const PrintType &pr
 {
     SCASSERT(printer != nullptr)
     printer->setCreator(QGuiApplication::applicationDisplayName()+" "+QCoreApplication::applicationVersion());
-
-    // Set orientation
-    if (paperSize.height() >= paperSize.width())
-    {
-        printer->setOrientation(QPrinter::Portrait);
-    }
-    else
-    {
-        printer->setOrientation(QPrinter::Landscape);
-    }
+    printer->setOrientation(QPrinter::Portrait);
 
     if (not isTiled)
     {

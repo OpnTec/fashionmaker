@@ -49,7 +49,9 @@ public:
           m_seamAllowance(false),
           m_seamAllowanceBuiltIn(false),
           m_hideMainPath(false),
-          m_width(0)
+          m_width(0),
+          m_mx(0),
+          m_my(0)
     {}
 
     VAbstractPieceData(const VAbstractPieceData &piece)
@@ -59,7 +61,9 @@ public:
           m_seamAllowance(piece.m_seamAllowance),
           m_seamAllowanceBuiltIn(piece.m_seamAllowanceBuiltIn),
           m_hideMainPath(piece.m_hideMainPath),
-          m_width(piece.m_width)
+          m_width(piece.m_width),
+          m_mx(piece.m_mx),
+          m_my(piece.m_my)
     {}
 
     ~VAbstractPieceData() Q_DECL_EQ_DEFAULT;
@@ -71,6 +75,8 @@ public:
     bool    m_seamAllowanceBuiltIn;
     bool    m_hideMainPath;
     qreal   m_width;
+    qreal   m_mx;
+    qreal   m_my;
 
 private:
     VAbstractPieceData &operator=(const VAbstractPieceData &) Q_DECL_EQ_DELETE;

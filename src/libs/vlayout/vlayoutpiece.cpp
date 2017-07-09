@@ -368,6 +368,10 @@ VLayoutPiece::~VLayoutPiece()
 VLayoutPiece VLayoutPiece::Create(const VPiece &piece, const VContainer *pattern)
 {
     VLayoutPiece det;
+
+    det.SetMx(piece.GetMx());
+    det.SetMy(piece.GetMy());
+
     det.SetCountourPoints(piece.MainPathPoints(pattern), piece.IsHideMainPath());
     det.SetSeamAllowancePoints(piece.SeamAllowancePoints(pattern), piece.IsSeamAllowance(),
                                piece.IsSeamAllowanceBuiltIn());

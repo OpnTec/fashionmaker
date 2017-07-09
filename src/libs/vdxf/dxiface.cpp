@@ -242,7 +242,7 @@ void dx_iface::InitLayers()
     DRW_Layer defLayer;
     defLayer.name = "0";
     defLayer.color = DRW::black;             // default color
-    defLayer.lWeight = DRW_LW_Conv::width17; // default width
+    defLayer.lWeight = DRW_LW_Conv::width03; // default width
     defLayer.lineType = "CONTINUOUS";        // default line style
     cData.layers.push_back(defLayer);
 
