@@ -556,7 +556,7 @@ void VGrainlineItem::UpdateRectangle()
                            pt2.y() - RECT_WIDTH*sin(m_dRotation - M_PI/2));
     m_polyBound << QPointF(pt2.x() + RECT_WIDTH*cos(m_dRotation + M_PI/2),
                            pt2.y() - RECT_WIDTH*sin(m_dRotation + M_PI/2));
-    m_rectBoundingBox = m_polyBound.boundingRect();
+    m_rectBoundingBox = m_polyBound.boundingRect().adjusted(-2, -2, 2, 2);
     setTransformOriginPoint(m_rectBoundingBox.center());
 
     UpdatePolyResize();
