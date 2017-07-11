@@ -793,6 +793,7 @@ void VToolSeamAllowance::paint(QPainter *painter, const QStyleOptionGraphicsItem
 
     setPen(toolPen);
     m_seamAllowance->setPen(toolPen);
+    m_passmarks->setPen(toolPen);
 
     if ((m_dataLabel->IsIdle() == false
             || m_patternInfo->IsIdle() == false
@@ -1101,7 +1102,8 @@ VToolSeamAllowance::VToolSeamAllowance(VAbstractPattern *doc, VContainer *data, 
       m_seamAllowance(new VNoBrushScalePathItem(this)),
       m_dataLabel(new VTextGraphicsItem(this)),
       m_patternInfo(new VTextGraphicsItem(this)),
-      m_grainLine(new VGrainlineItem(this))
+      m_grainLine(new VGrainlineItem(this)),
+      m_passmarks(new QGraphicsPathItem(this))
 {
     VPiece detail = data->GetPiece(id);
     InitNodes(detail, scene);
@@ -1184,11 +1186,8 @@ void VToolSeamAllowance::RefreshGeometry()
         m_seamAllowance->setBrush(QBrush(Qt::NoBrush)); // Disable if the main path was hidden
     }
 
-    {
-        QPainterPath mainPath = path;
-        mainPath.addPath(detail.PassmarksPath(this->getData()));
-        this->setPath(mainPath);
-    }
+    this->setPath(path);
+    m_passmarks->setPath(detail.PassmarksPath(this->getData()));
 
     this->setPos(detail.GetMx(), detail.GetMy());
 

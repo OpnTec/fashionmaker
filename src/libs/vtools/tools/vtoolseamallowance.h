@@ -146,6 +146,7 @@ private:
     VTextGraphicsItem     *m_dataLabel;
     VTextGraphicsItem     *m_patternInfo;
     VGrainlineItem        *m_grainLine;
+    QGraphicsPathItem     *m_passmarks;
 
     VToolSeamAllowance(VAbstractPattern *doc, VContainer *data, const quint32 &id, const Source &typeCreation,
                        VMainGraphicsScene *scene, const QString &drawName, QGraphicsItem * parent = nullptr);
