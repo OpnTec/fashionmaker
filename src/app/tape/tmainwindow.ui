@@ -850,7 +850,7 @@
      <x>0</x>
      <y>0</y>
      <width>835</width>
-     <height>25</height>
+     <height>19</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuFile">
@@ -1132,7 +1132,7 @@
      <normaloff>.</normaloff>.</iconset>
    </property>
    <property name="text">
-    <string>Open standard ...</string>
+    <string>Open multisize ...</string>
    </property>
    <property name="menuRole">
     <enum>QAction::NoRole</enum>

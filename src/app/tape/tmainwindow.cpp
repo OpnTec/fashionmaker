@@ -2848,7 +2848,7 @@ bool TMainWindow::LoadFromExistingFile(const QString &path)
 
             if (mType == MeasurementsType::Standard)
             {
-                VException e(tr("Export from standard measurements is not supported."));
+                VException e(tr("Export from multisize measurements is not supported."));
                 throw e;
             }
             else

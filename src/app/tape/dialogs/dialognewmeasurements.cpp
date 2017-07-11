@@ -183,7 +183,7 @@ void DialogNewMeasurements::InitMTypes()
     ui->comboBoxMType->blockSignals(true);
     ui->comboBoxMType->clear();
     ui->comboBoxMType->addItem(tr("Individual"), static_cast<int>(MeasurementsType::Individual));
-    ui->comboBoxMType->addItem(tr("Standard"), static_cast<int>(MeasurementsType::Standard));
+    ui->comboBoxMType->addItem(tr("Multisize"), static_cast<int>(MeasurementsType::Standard));
     ui->comboBoxMType->blockSignals(false);
 
     int index = ui->comboBoxMType->findData(val);
