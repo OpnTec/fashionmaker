@@ -124,6 +124,7 @@ public:
     bool isNull() const;
     qint64 Square() const;
     QPainterPath ContourPath() const;
+    QPainterPath MainPath() const;
 
     QPainterPath LayoutAllowancePath() const;
     Q_REQUIRED_RESULT QGraphicsItem *GetItem(bool textAsPaths) const;
@@ -134,6 +135,7 @@ private:
     QVector<QPointF> DetailPath() const;
 
     Q_REQUIRED_RESULT QGraphicsPathItem *GetMainItem() const;
+    Q_REQUIRED_RESULT QGraphicsPathItem *GetMainPathItem() const;
 
     void CreateInternalPathItem(int i, QGraphicsItem *parent) const;
     void CreateLabelStrings(QGraphicsItem *parent, const QVector<QPointF> &labelShape, const VTextManager &tm,
