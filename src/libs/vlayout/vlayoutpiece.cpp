@@ -1009,7 +1009,7 @@ void VLayoutPiece::CreateLabelStrings(QGraphicsItem *parent, const QVector<QPoin
             if (d->mirror)
             {
                 labelMatrix.scale(-1, 1);
-                labelMatrix.rotate(angle);
+                labelMatrix.rotate(-angle);
                 labelMatrix.translate(-dW, 0);
                 labelMatrix.translate(dX, dY); // Each string has own position
             }
