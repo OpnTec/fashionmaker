@@ -382,7 +382,7 @@ QSharedPointer<VMeasurements> MainWindow::OpenMeasurementFile(const QString &pat
             throw e;
         }
 
-        if (m->Type() == MeasurementsType::Standard)
+        if (m->Type() == MeasurementsType::Multisize)
         {
             VVSTConverter converter(path);
             m->setXMLContent(converter.Convert());// Read again after conversion
@@ -401,12 +401,12 @@ QSharedPointer<VMeasurements> MainWindow::OpenMeasurementFile(const QString &pat
 
         CheckRequiredMeasurements(m.data());
 
-        if (m->Type() == MeasurementsType::Standard)
+        if (m->Type() == MeasurementsType::Multisize)
         {
             if (m->MUnit() == Unit::Inch)
             {
                 qCCritical(vMainWindow, "%s\n\n%s", qUtf8Printable(tr("Wrong units.")),
-                          qUtf8Printable(tr("Application doesn't support standard table with inches.")));
+                          qUtf8Printable(tr("Application doesn't support multisize table with inches.")));
                 m->clear();
                 if (not VApplication::IsGUIMode())
                 {
@@ -440,13 +440,13 @@ bool MainWindow::LoadMeasurements(const QString &path)
         return false;
     }
 
-    if (qApp->patternUnit() == Unit::Inch && m->Type() == MeasurementsType::Standard)
+    if (qApp->patternUnit() == Unit::Inch && m->Type() == MeasurementsType::Multisize)
     {
         qWarning()<<tr("Gradation doesn't support inches");
         return false;
     }
 
-    if (m->Type() == MeasurementsType::Standard)
+    if (m->Type() == MeasurementsType::Multisize)
     {
         m->SetDataSize();
         m->SetDataHeight();
@@ -492,7 +492,7 @@ bool MainWindow::UpdateMeasurements(const QString &path, int size, int height)
         return false;
     }
 
-    if (m->Type() == MeasurementsType::Standard)
+    if (m->Type() == MeasurementsType::Multisize)
     {
         VContainer::SetSize(size);
         VContainer::SetHeight(height);
@@ -1536,13 +1536,13 @@ void MainWindow::LoadIndividual()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void MainWindow::LoadStandard()
+void MainWindow::LoadMultisize()
 {
     const QString filter = tr("Multisize measurements") + QLatin1String(" (*.vst);;") + tr("Individual measurements") +
                            QLatin1String("(*.vit)");
-    //Use standard path to standard measurements
-    QString path = qApp->ValentinaSettings()->GetPathStandardMeasurements();
-    path = VCommonSettings::PrepareStandardTables(path);
+    //Use standard path to multisize measurements
+    QString path = qApp->ValentinaSettings()->GetPathMultisizeMeasurements();
+    path = VCommonSettings::PrepareMultisizeTables(path);
     const QString mPath = QFileDialog::getOpenFileName(this, tr("Open file"), path, filter, nullptr,
                                                        QFileDialog::DontUseNativeDialog);
 
@@ -1575,7 +1575,7 @@ void MainWindow::LoadStandard()
 
             UpdateWindowTitle();
 
-            if (qApp->patternType() == MeasurementsType::Standard)
+            if (qApp->patternType() == MeasurementsType::Multisize)
             {
                 if (not hText.isEmpty() && not gradationHeights.isNull())
                 {
@@ -1626,7 +1626,7 @@ void MainWindow::ShowMeasurements()
         const QString absoluteMPath = AbsoluteMPath(curFile, doc->MPath());
 
         QStringList arguments;
-        if (qApp->patternType() == MeasurementsType::Standard)
+        if (qApp->patternType() == MeasurementsType::Multisize)
         {
             arguments = QStringList()
                     << absoluteMPath
@@ -1762,7 +1762,7 @@ void MainWindow::ToolBarOption()
         delete gradationSizesLabel;
     }
 
-    if (qApp->patternType() == MeasurementsType::Standard)
+    if (qApp->patternType() == MeasurementsType::Multisize)
     {
         const QStringList listHeights = VMeasurement::ListHeights(doc->GetGradationHeights(), qApp->patternUnit());
         const QStringList listSizes = VMeasurement::ListSizes(doc->GetGradationSizes(), qApp->patternUnit());
@@ -2298,7 +2298,7 @@ void MainWindow::ActionDraw(bool checked)
         SetEnableWidgets(true);
         ui->toolBox->setCurrentIndex(currentToolBoxIndex);
 
-        if (qApp->patternType() == MeasurementsType::Standard)
+        if (qApp->patternType() == MeasurementsType::Multisize)
         {
             ui->toolBarOption->setVisible(true);
         }
@@ -2373,7 +2373,7 @@ void MainWindow::ActionDetails(bool checked)
         SetEnableWidgets(true);
         ui->toolBox->setCurrentIndex(ui->toolBox->indexOf(ui->detailPage));
 
-        if (qApp->patternType() == MeasurementsType::Standard)
+        if (qApp->patternType() == MeasurementsType::Multisize)
         {
             ui->toolBarOption->setVisible(true);
         }
@@ -2489,7 +2489,7 @@ void MainWindow::ActionLayout(bool checked)
 
         mouseCoordinate->setText("");
 
-        if (qApp->patternType() == MeasurementsType::Standard)
+        if (qApp->patternType() == MeasurementsType::Multisize)
         {
             ui->toolBarOption->setVisible(false);
         }
@@ -2781,7 +2781,7 @@ void MainWindow::Clear()
     ui->actionLast_tool->setEnabled(false);
     ui->actionShowCurveDetails->setEnabled(false);
     ui->actionLoadIndividual->setEnabled(false);
-    ui->actionLoadStandard->setEnabled(false);
+    ui->actionLoadMultisize->setEnabled(false);
     ui->actionUnloadMeasurements->setEnabled(false);
     ui->actionEditCurrent->setEnabled(false);
     SetEnableTool(false);
@@ -3028,7 +3028,7 @@ void MainWindow::SetEnableWidgets(bool enable)
     ui->actionZoomOriginal->setEnabled(enable);
     ui->actionShowCurveDetails->setEnabled(enable && drawStage);
     ui->actionLoadIndividual->setEnabled(enable && designStage);
-    ui->actionLoadStandard->setEnabled(enable && designStage);
+    ui->actionLoadMultisize->setEnabled(enable && designStage);
     ui->actionUnloadMeasurements->setEnabled(enable && designStage);
 
     actionDockWidgetToolOptions->setEnabled(enable && designStage);
@@ -3994,7 +3994,7 @@ void MainWindow::CreateActions()
     });
 
     connect(ui->actionLoadIndividual, &QAction::triggered, this, &MainWindow::LoadIndividual);
-    connect(ui->actionLoadStandard, &QAction::triggered, this, &MainWindow::LoadStandard);
+    connect(ui->actionLoadMultisize, &QAction::triggered, this, &MainWindow::LoadMultisize);
 
     connect(ui->actionOpenTape, &QAction::triggered, this, [this]()
     {
@@ -4129,7 +4129,7 @@ bool MainWindow::LoadPattern(const QString &fileName, const QString& customMeasu
         VMeasurements m(pattern);
         m.setXMLContent(fileName);
 
-        if (m.Type() == MeasurementsType::Standard || m.Type() == MeasurementsType::Individual)
+        if (m.Type() == MeasurementsType::Multisize || m.Type() == MeasurementsType::Individual)
         {
             const QString tape = qApp->TapeFilePath();
             const QString workingDirectory = QFileInfo(tape).absoluteDir().absolutePath();
@@ -4551,7 +4551,7 @@ QString MainWindow::CheckPathToMeasurements(const QString &patternPath, const QS
                 MeasurementsType patternType;
                 if (table.suffix() == QLatin1String("vst"))
                 {
-                    patternType = MeasurementsType::Standard;
+                    patternType = MeasurementsType::Multisize;
                 }
                 else if (table.suffix() == QLatin1String("vit"))
                 {
@@ -4563,12 +4563,12 @@ QString MainWindow::CheckPathToMeasurements(const QString &patternPath, const QS
                 }
 
                 QString mPath;
-                if (patternType == MeasurementsType::Standard)
+                if (patternType == MeasurementsType::Multisize)
                 {
                     const QString filter = tr("Multisize measurements") + QLatin1String(" (*.vst)");
-                    //Use standard path to standard measurements
-                    QString path = qApp->ValentinaSettings()->GetPathStandardMeasurements();
-                    path = VCommonSettings::PrepareStandardTables(path);
+                    //Use standard path to multisize measurements
+                    QString path = qApp->ValentinaSettings()->GetPathMultisizeMeasurements();
+                    path = VCommonSettings::PrepareMultisizeTables(path);
                     mPath = QFileDialog::getOpenFileName(this, tr("Open file"), path, filter, nullptr,
                                                          QFileDialog::DontUseNativeDialog);
                 }
@@ -4600,7 +4600,7 @@ QString MainWindow::CheckPathToMeasurements(const QString &patternPath, const QS
                                            tr("Multisize measurements") + QLatin1String(" (*.vst)");
                     //Use standard path to individual measurements
                     const QString path = qApp->ValentinaSettings()->GetPathIndividualMeasurements();
-                    VCommonSettings::PrepareStandardTables(VCommonSettings::GetDefPathStandardMeasurements());
+                    VCommonSettings::PrepareMultisizeTables(VCommonSettings::GetDefPathMultisizeMeasurements());
 
                     bool usedNotExistedDir = false;
                     QDir directory(path);
@@ -4636,7 +4636,7 @@ QString MainWindow::CheckPathToMeasurements(const QString &patternPath, const QS
                         throw e;
                     }
 
-                    if (patternType == MeasurementsType::Standard)
+                    if (patternType == MeasurementsType::Multisize)
                     {
                         VVSTConverter converter(mPath);
                         m->setXMLContent(converter.Convert());// Read again after conversion
@@ -4807,7 +4807,7 @@ bool MainWindow::SetSize(const QString &text)
     {
         if (this->isWindowModified() || not curFile.isEmpty())
         {
-            if (qApp->patternType() == MeasurementsType::Standard)
+            if (qApp->patternType() == MeasurementsType::Multisize)
             {
                 const int size = static_cast<int>(UnitConvertor(text.toInt(), Unit::Cm, *pattern->GetPatternUnit()));
                 const qint32 index = gradationSizes->findText(QString().setNum(size));
@@ -4825,7 +4825,7 @@ bool MainWindow::SetSize(const QString &text)
             else
             {
                 qCCritical(vMainWindow, "%s",
-                          qUtf8Printable(tr("Couldn't set size. Need a file with standard measurements.")));
+                          qUtf8Printable(tr("Couldn't set size. Need a file with multisize measurements.")));
                 return false;
             }
         }
@@ -4850,7 +4850,7 @@ bool MainWindow::SetHeight(const QString &text)
     {
         if (this->isWindowModified() || not curFile.isEmpty())
         {
-            if (qApp->patternType() == MeasurementsType::Standard)
+            if (qApp->patternType() == MeasurementsType::Multisize)
             {
                 const int height = static_cast<int>(UnitConvertor(text.toInt(), Unit::Cm, *pattern->GetPatternUnit()));
                 const qint32 index = gradationHeights->findText(QString().setNum(height));
@@ -4868,7 +4868,7 @@ bool MainWindow::SetHeight(const QString &text)
             else
             {
                 qCCritical(vMainWindow, "%s",
-                          qUtf8Printable(tr("Couldn't set height. Need a file with standard measurements.")));
+                          qUtf8Printable(tr("Couldn't set height. Need a file with multisize measurements.")));
                 return false;
             }
         }

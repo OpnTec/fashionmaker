@@ -860,7 +860,7 @@
     <addaction name="actionNew"/>
     <addaction name="separator"/>
     <addaction name="actionOpenIndividual"/>
-    <addaction name="actionOpenStandard"/>
+    <addaction name="actionOpenMultisize"/>
     <addaction name="actionOpenTemplate"/>
     <addaction name="actionCreateFromExisting"/>
     <addaction name="separator"/>
@@ -1126,7 +1126,7 @@
     <enum>QAction::NoRole</enum>
    </property>
   </action>
-  <action name="actionOpenStandard">
+  <action name="actionOpenMultisize">
    <property name="icon">
     <iconset theme="document-open">
      <normaloff>.</normaloff>.</iconset>

@@ -542,7 +542,7 @@ void VContainer::UpdatePiecePath(quint32 id, const VPiecePath &path)
 qreal VContainer::GetTableValue(const QString &name, MeasurementsType patternType) const
 {
     QSharedPointer<VVariable> m = GetVariable<VVariable>(name);
-    if (patternType == MeasurementsType::Standard)
+    if (patternType == MeasurementsType::Multisize)
     {
         m->SetValue(size(), height(), *GetPatternUnit());
     }
@@ -617,7 +617,7 @@ const QHash<QString, qreal *> VContainer::PlainVariables() const
     while (i != d->variables.constEnd())
     {
         QSharedPointer<VInternalVariable> var = i.value();
-        if ((qApp->patternType() == MeasurementsType::Standard) &&
+        if ((qApp->patternType() == MeasurementsType::Multisize) &&
             (var->GetType() == VarType::Measurement || var->GetType() == VarType::Increment))
         {
             QSharedPointer<VVariable> m = GetVariable<VVariable>(i.key());

@@ -176,7 +176,7 @@ void TMainWindow::SetBaseMHeight(int height)
 {
     if (m != nullptr)
     {
-        if (mType == MeasurementsType::Standard)
+        if (mType == MeasurementsType::Multisize)
         {
             const int row = ui->tableWidget->currentRow();
             VContainer::SetHeight(UnitConvertor(height, Unit::Cm, mUnit));
@@ -191,7 +191,7 @@ void TMainWindow::SetBaseMSize(int size)
 {
     if (m != nullptr)
     {
-        if (mType == MeasurementsType::Standard)
+        if (mType == MeasurementsType::Multisize)
         {
             const int row = ui->tableWidget->currentRow();
             VContainer::SetSize(UnitConvertor(size, Unit::Cm, mUnit));
@@ -260,7 +260,7 @@ bool TMainWindow::LoadFile(const QString &path)
                 throw e;
             }
 
-            if (mType == MeasurementsType::Standard)
+            if (mType == MeasurementsType::Multisize)
             {
                 VVSTConverter converter(path);
                 m_curFileFormatVersion = converter.GetCurrentFormatVarsion();
@@ -361,7 +361,7 @@ void TMainWindow::FileNew()
         VContainer::SetHeight(measurements.BaseHeight());
         VContainer::SetSize(measurements.BaseSize());
 
-        if (mType == MeasurementsType::Standard)
+        if (mType == MeasurementsType::Multisize)
         {
             m = new VMeasurements(mUnit, measurements.BaseSize(), measurements.BaseHeight(), data);
             m_curFileFormatVersion = VVSTConverter::MeasurementMaxVer;
@@ -416,13 +416,13 @@ void TMainWindow::OpenIndividual()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void TMainWindow::OpenStandard()
+void TMainWindow::OpenMultisize()
 {
     const QString filter = tr("Multisize measurements") + QLatin1String(" (*.vst);;") + tr("Individual measurements") +
             QLatin1String(" (*.vit);;") + tr("All files") + QLatin1String(" (*.*)");
-    //Use standard path to standard measurements
-    QString pathTo = qApp->TapeSettings()->GetPathStandardMeasurements();
-    pathTo = VCommonSettings::PrepareStandardTables(pathTo);
+    //Use standard path to multisize measurements
+    QString pathTo = qApp->TapeSettings()->GetPathMultisizeMeasurements();
+    pathTo = VCommonSettings::PrepareMultisizeTables(pathTo);
 
     Open(pathTo, filter);
 }
@@ -448,7 +448,7 @@ void TMainWindow::OpenTemplate()
 void TMainWindow::CreateFromExisting()
 {
     const QString filter = tr("Individual measurements") + QLatin1String(" (*.vit)");
-    //Use standard path to standard measurements
+    //Use standard path to individual measurements
     const QString pathTo = qApp->TapeSettings()->GetPathIndividualMeasurements();
 
     bool usedNotExistedDir = false;
@@ -531,7 +531,7 @@ void TMainWindow::changeEvent(QEvent *event)
         // retranslate designer form (single inheritance approach)
         ui->retranslateUi(this);
 
-        if (mType == MeasurementsType::Standard)
+        if (mType == MeasurementsType::Multisize)
         {
             ui->labelMType->setText(tr("Multisize measurements"));
             ui->labelBaseSizeValue->setText(QString().setNum(m->BaseSize()) + QLatin1String(" ") +
@@ -715,7 +715,7 @@ bool TMainWindow::FileSave()
     }
     else
     {
-        if (mType == MeasurementsType::Standard
+        if (mType == MeasurementsType::Multisize
                 && m_curFileFormatVersion < VVSTConverter::MeasurementMaxVer
                 && not ContinueFormatRewrite(m_curFileFormatVersionStr, VVSTConverter::MeasurementMaxVerStr))
         {
@@ -788,7 +788,7 @@ bool TMainWindow::FileSave()
         }
         else
         {
-            if (mType == MeasurementsType::Standard)
+            if (mType == MeasurementsType::Multisize)
             {
                 m_curFileFormatVersion = VVSTConverter::MeasurementMaxVer;
                 m_curFileFormatVersionStr = VVSTConverter::MeasurementMaxVerStr;
@@ -831,8 +831,8 @@ bool TMainWindow::FileSaveAs()
         }
         else
         {
-            dir = qApp->TapeSettings()->GetPathStandardMeasurements();
-            dir = VCommonSettings::PrepareStandardTables(dir);
+            dir = qApp->TapeSettings()->GetPathMultisizeMeasurements();
+            dir = VCommonSettings::PrepareMultisizeTables(dir);
         }
     }
     else
@@ -958,7 +958,7 @@ void TMainWindow::AboutToShowDockMenu()
         menu->addSeparator();
 
         menu->addAction(ui->actionOpenIndividual);
-        menu->addAction(ui->actionOpenStandard);
+        menu->addAction(ui->actionOpenMultisize);
         menu->addAction(ui->actionOpenTemplate);
 
         menu->addSeparator();
@@ -1098,7 +1098,7 @@ void TMainWindow::Remove()
         ui->lineEditFullName->setText("");
         ui->lineEditFullName->blockSignals(false);
 
-        if (mType == MeasurementsType::Standard)
+        if (mType == MeasurementsType::Multisize)
         {
             ui->labelCalculatedValue->blockSignals(true);
             ui->doubleSpinBoxBaseValue->blockSignals(true);
@@ -1481,7 +1481,7 @@ void TMainWindow::ShowNewMData(bool fresh)
         connect(ui->lineEditName, &QLineEdit::textEdited, this, &TMainWindow::SaveMName);
         ui->plainTextEditDescription->blockSignals(false);
 
-        if (mType == MeasurementsType::Standard)
+        if (mType == MeasurementsType::Multisize)
         {
             ui->labelCalculatedValue->blockSignals(true);
             ui->doubleSpinBoxBaseValue->blockSignals(true);
@@ -1889,7 +1889,7 @@ void TMainWindow::SetupMenu()
     ui->actionNew->setShortcuts(QKeySequence::New);
 
     connect(ui->actionOpenIndividual, &QAction::triggered, this, &TMainWindow::OpenIndividual);
-    connect(ui->actionOpenStandard, &QAction::triggered, this, &TMainWindow::OpenStandard);
+    connect(ui->actionOpenMultisize, &QAction::triggered, this, &TMainWindow::OpenMultisize);
     connect(ui->actionOpenTemplate, &QAction::triggered, this, &TMainWindow::OpenTemplate);
     connect(ui->actionCreateFromExisting, &QAction::triggered, this, &TMainWindow::CreateFromExisting);
 
@@ -1994,7 +1994,7 @@ void TMainWindow::InitWindow()
     ui->plainTextEditNotes->setEnabled(true);
     ui->toolBarGradation->setVisible(true);
 
-    if (mType == MeasurementsType::Standard)
+    if (mType == MeasurementsType::Multisize)
     {
         ui->labelMType->setText(tr("Multisize measurements"));
         ui->labelBaseSizeValue->setText(QString().setNum(m->BaseSize()) + " " +
@@ -2162,7 +2162,7 @@ void TMainWindow::InitWindow()
 //---------------------------------------------------------------------------------------------------------------------
 void TMainWindow::InitTable()
 {
-    if (mType == MeasurementsType::Standard)
+    if (mType == MeasurementsType::Multisize)
     {
         ui->tableWidget->setColumnHidden( ColumnFormula, true );// formula
     }
@@ -2548,7 +2548,7 @@ void TMainWindow::MFields(bool enabled)
     ui->plainTextEditDescription->setEnabled(enabled);
     ui->lineEditFullName->setEnabled(enabled);
 
-    if (mType == MeasurementsType::Standard)
+    if (mType == MeasurementsType::Multisize)
     {
         ui->doubleSpinBoxBaseValue->setEnabled(enabled);
         ui->doubleSpinBoxInSizes->setEnabled(enabled);
@@ -2593,7 +2593,7 @@ void TMainWindow::UpdateWindowTitle()
     else
     {
         showName = tr("untitled %1").arg(qApp->MainWindows().size()+1);
-        mType == MeasurementsType::Standard ? showName += QLatin1String(".vst") : showName += QLatin1String(".vit");
+        mType == MeasurementsType::Multisize ? showName += QLatin1String(".vst") : showName += QLatin1String(".vit");
     }
 
     showName += QLatin1String("[*]");
@@ -2846,7 +2846,7 @@ bool TMainWindow::LoadFromExistingFile(const QString &path)
                 throw e;
             }
 
-            if (mType == MeasurementsType::Standard)
+            if (mType == MeasurementsType::Multisize)
             {
                 VException e(tr("Export from multisize measurements is not supported."));
                 throw e;

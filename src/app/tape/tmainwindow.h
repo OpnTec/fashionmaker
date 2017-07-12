@@ -75,7 +75,7 @@ protected:
 private slots:
     void FileNew();
     void OpenIndividual();
-    void OpenStandard();
+    void OpenMultisize();
     void OpenTemplate();
     void CreateFromExisting();
     void Preferences();

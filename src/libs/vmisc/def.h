@@ -56,7 +56,7 @@ class VTranslateMeasurements;
 
 enum class NodeDetail : char { Contour, Modeling };
 enum class SceneObject : char { Point, Line, Spline, Arc, ElArc, SplinePath, Detail, Unknown };
-enum class MeasurementsType : char { Standard, Individual , Unknown};
+enum class MeasurementsType : char { Multisize, Individual , Unknown};
 enum class Unit : char { Mm = 0, Cm, Inch, Px, LAST_UNIT_DO_NOT_USE};
 enum class Source : char { FromGui, FromFile, FromTool };
 enum class NodeUsage : bool {NotInUse = false, InUse = true};

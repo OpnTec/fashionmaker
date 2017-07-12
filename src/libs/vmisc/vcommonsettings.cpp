@@ -46,7 +46,7 @@
 #include "../vpatterndb/pmsystems.h"
 
 const QString settingPathsIndividualMeasurements = QStringLiteral("paths/individual_measurements");
-const QString settingPathsStandardMeasurements   = QStringLiteral("paths/standard_measurements");
+const QString settingPathsMultisizeMeasurements   = QStringLiteral("paths/standard_measurements");
 const QString settingPathsTemplates              = QStringLiteral("paths/templates");
 
 const QString settingConfigurationOsSeparator            = QStringLiteral("configuration/osSeparator");
@@ -227,9 +227,9 @@ QString VCommonSettings::SharePath(const QString &shareItem)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QString VCommonSettings::StandardTablesPath()
+QString VCommonSettings::MultisizeTablesPath()
 {
-    return SharePath(QStringLiteral("/tables/standard"));
+    return SharePath(QStringLiteral("/tables/multisize"));
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -245,9 +245,9 @@ QString VCommonSettings::PrepareStandardTemplates(const QString & currentPath)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QString VCommonSettings::PrepareStandardTables(const QString &currentPath)
+QString VCommonSettings::PrepareMultisizeTables(const QString &currentPath)
 {
-    return PrepareStandardFiles(currentPath, StandardTablesPath(), GetDefPathStandardMeasurements());
+    return PrepareStandardFiles(currentPath, MultisizeTablesPath(), GetDefPathMultisizeMeasurements());
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -272,23 +272,23 @@ void VCommonSettings::SetPathIndividualMeasurements(const QString &value)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QString VCommonSettings::GetDefPathStandardMeasurements()
+QString VCommonSettings::GetDefPathMultisizeMeasurements()
 {
     return QDir::homePath() + QLatin1String("/valentina/") + tr("measurements") + QLatin1String("/") + tr("multisize");
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QString VCommonSettings::GetPathStandardMeasurements() const
+QString VCommonSettings::GetPathMultisizeMeasurements() const
 {
     QSettings settings(this->format(), this->scope(), this->organizationName(), commonIniFilename);
-    return settings.value(settingPathsStandardMeasurements, GetDefPathStandardMeasurements()).toString();
+    return settings.value(settingPathsMultisizeMeasurements, GetDefPathMultisizeMeasurements()).toString();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VCommonSettings::SetPathStandardMeasurements(const QString &value)
+void VCommonSettings::SetPathMultisizeMeasurements(const QString &value)
 {
     QSettings settings(this->format(), this->scope(), this->organizationName(), commonIniFilename);
-    settings.setValue(settingPathsStandardMeasurements, value);
+    settings.setValue(settingPathsMultisizeMeasurements, value);
     settings.sync();
 }
 

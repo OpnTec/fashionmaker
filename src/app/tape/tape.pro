@@ -174,7 +174,7 @@ QMAKE_EXTRA_COMPILERS += diagrams
 
 QMAKE_CLEAN += $${OUT_PWD}/$${DESTDIR}/diagrams.rcc
 
-# INSTALL_STANDARD_MEASUREMENTS and INSTALL_STANDARD_TEMPLATES inside tables.pri
+# INSTALL_MULTISIZE_MEASUREMENTS and INSTALL_STANDARD_TEMPLATES inside tables.pri
 include(../tables.pri)
 copyToDestdir($$INSTALL_STANDARD_TEMPLATES, $$shell_path($${OUT_PWD}/$${DESTDIR}/tables/templates))
 include(../translations.pri)
@@ -244,15 +244,15 @@ unix{
 
         QMAKE_INFO_PLIST = $$PWD/../../../dist/macx/tape/Info.plist
 
-        # Copy to bundle standard measurements files
-        standard.path = $$RESOURCES_DIR/tables/standard/
-        standard.files = $$INSTALL_STANDARD_MEASUREMENTS
+        # Copy to bundle multisize measurements files
+        multisize.path = $$RESOURCES_DIR/tables/multisize/
+        multisize.files = $$INSTALL_MULTISIZE_MEASUREMENTS
 
         # Copy to bundle templates files
         templates.path = $$RESOURCES_DIR/tables/templates/
         templates.files = $$INSTALL_STANDARD_TEMPLATES
 
-        # Copy to bundle standard measurements files
+        # Copy to bundle multisize measurements files
         # We cannot add none exist files to bundle through QMAKE_BUNDLE_DATA. That's why we must do this manually.
         QMAKE_POST_LINK += $$VCOPY $$quote($${OUT_PWD}/$${DESTDIR}/diagrams.rcc) $$quote($$shell_path($${OUT_PWD}/$$DESTDIR/$${TARGET}.app/$$RESOURCES_DIR/)) $$escape_expand(\\n\\t)
 
@@ -262,7 +262,7 @@ unix{
 
         QMAKE_BUNDLE_DATA += \
             templates \
-            standard \
+            multisize \
             libraries \
             format
     }

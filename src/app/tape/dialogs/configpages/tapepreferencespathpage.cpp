@@ -58,7 +58,7 @@ void TapePreferencesPathPage::Apply()
 {
     VTapeSettings *settings = qApp->TapeSettings();
     settings->SetPathIndividualMeasurements(ui->pathTable->item(0, 1)->text());
-    settings->SetPathStandardMeasurements(ui->pathTable->item(1, 1)->text());
+    settings->SetPathMultisizeMeasurements(ui->pathTable->item(1, 1)->text());
     settings->SetPathTemplate(ui->pathTable->item(2, 1)->text());
 }
 
@@ -75,8 +75,8 @@ void TapePreferencesPathPage::DefaultPath()
         case 0: // individual measurements
             path = VCommonSettings::GetDefPathIndividualMeasurements();
             break;
-        case 1: // standard measurements
-            path = VCommonSettings::GetDefPathStandardMeasurements();
+        case 1: // multisize measurements
+            path = VCommonSettings::GetDefPathMultisizeMeasurements();
             break;
         case 2: // templates
             path = VCommonSettings::GetDefPathTemplate();
@@ -102,9 +102,9 @@ void TapePreferencesPathPage::EditPath()
         case 0: // individual measurements
             path = qApp->TapeSettings()->GetPathIndividualMeasurements();
             break;
-        case 1: // standard measurements
-            path = qApp->TapeSettings()->GetPathStandardMeasurements();
-            path = VCommonSettings::PrepareStandardTables(path);
+        case 1: // multisize measurements
+            path = qApp->TapeSettings()->GetPathMultisizeMeasurements();
+            path = VCommonSettings::PrepareMultisizeTables(path);
             break;
         case 2: // templates
             path = qApp->TapeSettings()->GetPathTemplate();
@@ -155,8 +155,8 @@ void TapePreferencesPathPage::InitTable()
 
     {
         ui->pathTable->setItem(1, 0, new QTableWidgetItem(tr("My Multisize Measurements")));
-        QTableWidgetItem *item = new QTableWidgetItem(settings->GetPathStandardMeasurements());
-        item->setToolTip(settings->GetPathStandardMeasurements());
+        QTableWidgetItem *item = new QTableWidgetItem(settings->GetPathMultisizeMeasurements());
+        item->setToolTip(settings->GetPathMultisizeMeasurements());
         ui->pathTable->setItem(1, 1, item);
     }
 

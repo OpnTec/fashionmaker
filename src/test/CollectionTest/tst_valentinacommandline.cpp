@@ -125,12 +125,12 @@ void TST_ValentinaCommandLine::ExportMode_data() const
                                << QString("-p;;0;;-d;;%1;;-b;;output").arg(tmp)
                                << V_EX_OK;
 
-    QTest::newRow("A file with limited gradation. Standard measurements. Wrong data.")
+    QTest::newRow("A file with limited gradation. Multisize measurements. Wrong data.")
             << "glimited_vst.val"
             << QString("-p;;0;;-d;;%1;;--gsize;;46;;--gheight;;164;;-b;;output").arg(tmp)
             << V_EX_DATAERR;
 
-    QTest::newRow("A file with limited gradation. Standard measurements. Correct data.")
+    QTest::newRow("A file with limited gradation. Multisize measurements. Correct data.")
             << "glimited_vst.val"
             << QString("-p;;0;;-d;;%1;;--gsize;;40;;--gheight;;134;;-b;;output").arg(tmp)
             << V_EX_OK;
@@ -190,12 +190,12 @@ void TST_ValentinaCommandLine::TestMode_data() const
                                                                 QLatin1String("issue_256_wrong.vit"))
                                << V_EX_NOINPUT;
 
-    QTest::newRow("Issue #256. Correct standard measurements.")<< "issue_256.val"
+    QTest::newRow("Issue #256. Correct multisize measurements.")<< "issue_256.val"
                                << QString("--test;;-m;;%1").arg(tmp + QDir::separator() +
                                                                 QLatin1String("issue_256_correct.vst"))
                                << V_EX_OK;
 
-    QTest::newRow("Issue #256. Wrong standard measurements.")<< "issue_256.val"
+    QTest::newRow("Issue #256. Wrong multisize measurements.")<< "issue_256.val"
                                << QString("--test;;-m;;%1").arg(tmp + QDir::separator() +
                                                                 QLatin1String("issue_256_wrong.vst"))
                                << V_EX_NOINPUT;

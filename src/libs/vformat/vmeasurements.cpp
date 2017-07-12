@@ -118,11 +118,11 @@ VMeasurements::VMeasurements(Unit unit, VContainer *data)
 VMeasurements::VMeasurements(Unit unit, int baseSize, int baseHeight, VContainer *data)
     :VDomDocument(),
       data(data),
-      type(MeasurementsType::Standard)
+      type(MeasurementsType::Multisize)
 {
     SCASSERT(data != nullptr)
 
-    CreateEmptyStandardFile(unit, baseSize, baseHeight);
+    CreateEmptyMultisizeFile(unit, baseSize, baseHeight);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -286,7 +286,7 @@ void VMeasurements::ReadMeasurements() const
 
         QSharedPointer<VMeasurement> meash;
         QSharedPointer<VMeasurement> tempMeash;
-        if (type == MeasurementsType::Standard)
+        if (type == MeasurementsType::Multisize)
         {
             qreal base = GetParametrDouble(dom, AttrBase, "0");
             qreal ksize = GetParametrDouble(dom, AttrSizeIncrease, "0");
@@ -350,7 +350,7 @@ MeasurementsType VMeasurements::Type() const
 //---------------------------------------------------------------------------------------------------------------------
 int VMeasurements::BaseSize() const
 {
-    if (type == MeasurementsType::Standard)
+    if (type == MeasurementsType::Multisize)
     {
         return static_cast<int>(UniqueTagAttr(TagSize, AttrBase, 50));
     }
@@ -363,7 +363,7 @@ int VMeasurements::BaseSize() const
 //---------------------------------------------------------------------------------------------------------------------
 int VMeasurements::BaseHeight() const
 {
-    if (type == MeasurementsType::Standard)
+    if (type == MeasurementsType::Multisize)
     {
         return static_cast<int>(UniqueTagAttr(TagHeight, AttrBase, 176));
     }
@@ -696,7 +696,7 @@ void VMeasurements::SetDataHeight()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VMeasurements::CreateEmptyStandardFile(Unit unit, int baseSize, int baseHeight)
+void VMeasurements::CreateEmptyMultisizeFile(Unit unit, int baseSize, int baseHeight)
 {
     this->clear();
     QDomElement mElement = this->createElement(TagVST);
@@ -819,7 +819,7 @@ QDomElement VMeasurements::MakeEmpty(const QString &name, const QString &formula
 
     SetAttribute(element, AttrName, name);
 
-    if (type == MeasurementsType::Standard)
+    if (type == MeasurementsType::Multisize)
     {
         SetAttribute(element, AttrBase, QString("0"));
         SetAttribute(element, AttrSizeIncrease, QString("0"));
@@ -873,7 +873,7 @@ MeasurementsType VMeasurements::ReadType() const
     QDomElement root = documentElement();
     if (root.tagName() == TagVST)
     {
-        return MeasurementsType::Standard;
+        return MeasurementsType::Multisize;
     }
     else if (root.tagName() == TagVIT)
     {

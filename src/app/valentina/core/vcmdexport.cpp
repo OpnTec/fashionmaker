@@ -117,7 +117,7 @@ void VCommandLine::InitOptions(VCommandLineOptions &options, QMap<QString, int> 
     optionsIndex.insert(LONG_OPTION_GRADATIONSIZE, index++);
     options.append(new QCommandLineOption(QStringList() << SINGLE_OPTION_GRADATIONSIZE << LONG_OPTION_GRADATIONSIZE,
                                           translate("VCommandLine", "Set size value a pattern file, that was opened "
-                                                                    "with standard measurements (export mode). Valid "
+                                                                    "with multisize measurements (export mode). Valid "
                                                                     "values: %1cm.")
                                                                 .arg(VMeasurement::WholeListSizes(Unit::Cm).join(", ")),
                                           translate("VCommandLine", "The size value")));
@@ -125,7 +125,7 @@ void VCommandLine::InitOptions(VCommandLineOptions &options, QMap<QString, int> 
     optionsIndex.insert(LONG_OPTION_GRADATIONHEIGHT, index++);
     options.append(new QCommandLineOption(QStringList() << SINGLE_OPTION_GRADATIONHEIGHT << LONG_OPTION_GRADATIONHEIGHT,
                                           translate("VCommandLine", "Set height value a pattern file, that was opened "
-                                                                    "with standard measurements (export mode). Valid "
+                                                                    "with multisize measurements (export mode). Valid "
                                                                     "values: %1cm.")
                                                               .arg(VMeasurement::WholeListHeights(Unit::Cm).join(", ")),
                                           translate("VCommandLine", "The height value")));

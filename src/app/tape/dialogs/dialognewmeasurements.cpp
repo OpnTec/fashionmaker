@@ -141,7 +141,7 @@ void DialogNewMeasurements::showEvent(QShowEvent *event)
 void DialogNewMeasurements::CurrentTypeChanged(int index)
 {
     const MeasurementsType type = static_cast<MeasurementsType>(ui->comboBoxMType->itemData(index).toInt());
-    if (type == MeasurementsType::Standard)
+    if (type == MeasurementsType::Multisize)
     {
         ui->comboBoxBaseSize->setEnabled(true);
         ui->comboBoxBaseHeight->setEnabled(true);
@@ -183,7 +183,7 @@ void DialogNewMeasurements::InitMTypes()
     ui->comboBoxMType->blockSignals(true);
     ui->comboBoxMType->clear();
     ui->comboBoxMType->addItem(tr("Individual"), static_cast<int>(MeasurementsType::Individual));
-    ui->comboBoxMType->addItem(tr("Multisize"), static_cast<int>(MeasurementsType::Standard));
+    ui->comboBoxMType->addItem(tr("Multisize"), static_cast<int>(MeasurementsType::Multisize));
     ui->comboBoxMType->blockSignals(false);
 
     int index = ui->comboBoxMType->findData(val);

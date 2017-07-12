@@ -213,7 +213,7 @@ VALENTINA_TEST_FILES += \
     tst_valentina/wrong_formula.val
 
 COLLECTION_FILES += \
-    $${PWD}/../../app/share/tables/standard/GOST_man_ru.vst \
+    $${PWD}/../../app/share/tables/multisize/GOST_man_ru.vst \
     $${PWD}/../../app/share/collection/bra.val \
     $${PWD}/../../app/share/collection/bra.vit \
     $${PWD}/../../app/share/collection/jacketМ1_52-176.val \

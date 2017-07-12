@@ -180,7 +180,7 @@ private slots:
 
     void ZoomFitBestCurrent();
     void LoadIndividual();
-    void LoadStandard();
+    void LoadMultisize();
     void UnloadMeasurements();
     void ShowMeasurements();
     void MeasurementsChanged(const QString &path);

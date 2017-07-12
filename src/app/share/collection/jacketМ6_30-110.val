@@ -10,7 +10,7 @@
         <heights all="true"/>
         <sizes all="true"/>
     </gradation>
-    <measurements>../../../../../build-Valentina-Qt_Qt_Version_GCC_32bit-Debug/src/app/valentina/bin/tables/standard/GOST_man_ru.vst</measurements>
+    <measurements>../../../../../build-Valentina-Qt_Qt_Version_GCC_32bit-Debug/src/app/valentina/bin/tables/multisize/GOST_man_ru.vst</measurements>
     <increments>
         <increment name="#Пс_впрз" description="Высота основания" formula="16.1"/>
         <increment name="#Пк_впрз1" description="проймы сзади АГ" formula="14"/>

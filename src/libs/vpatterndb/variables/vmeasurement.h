@@ -26,8 +26,8 @@
  **
  *************************************************************************/
 
-#ifndef VSTANDARDTABLEROW_H
-#define VSTANDARDTABLEROW_H
+#ifndef VMULTISIZETABLEROW_H
+#define VMULTISIZETABLEROW_H
 
 #include <qcompilerdetection.h>
 #include <QMap>
@@ -45,7 +45,7 @@ class VContainer;
 class VMeasurementData;
 
 /**
- * @brief The VMeasurement class keep data row of standard table
+ * @brief The VMeasurement class keep data row of multisize table
  */
 class VMeasurement :public VVariable
 {
@@ -96,4 +96,4 @@ private:
 
 Q_DECLARE_TYPEINFO(VMeasurement, Q_MOVABLE_TYPE);
 
-#endif // VSTANDARDTABLEROW_H
+#endif // VMULTISIZETABLEROW_H

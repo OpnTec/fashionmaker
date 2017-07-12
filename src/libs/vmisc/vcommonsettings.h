@@ -48,19 +48,19 @@ public:
               QObject *parent = nullptr);
 
     static QString SharePath(const QString &shareItem);
-    static QString StandardTablesPath();
+    static QString MultisizeTablesPath();
     static QString StandardTemplatesPath();
 
     static QString PrepareStandardTemplates(const QString &currentPath);
-    static QString PrepareStandardTables(const QString &currentPath);
+    static QString PrepareMultisizeTables(const QString &currentPath);
 
     static QString GetDefPathIndividualMeasurements();
     QString GetPathIndividualMeasurements() const;
     void SetPathIndividualMeasurements(const QString &value);
 
-    static QString GetDefPathStandardMeasurements();
-    QString GetPathStandardMeasurements() const;
-    void SetPathStandardMeasurements(const QString &value);
+    static QString GetDefPathMultisizeMeasurements();
+    QString GetPathMultisizeMeasurements() const;
+    void SetPathMultisizeMeasurements(const QString &value);
 
     static QString GetDefPathTemplate();
     QString GetPathTemplate() const;

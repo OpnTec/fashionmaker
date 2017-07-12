@@ -115,7 +115,7 @@ message(Examples: $$[QT_INSTALL_EXAMPLES])
 # Path to recource file.
 win32:RC_FILE = share/resources/valentina.rc
 
-# INSTALL_STANDARD_MEASUREMENTS and INSTALL_STANDARD_TEMPLATES inside tables.pri
+# INSTALL_MULTISIZE_MEASUREMENTS and INSTALL_STANDARD_TEMPLATES inside tables.pri
 include(../tables.pri)
 
 win32 {
@@ -159,9 +159,9 @@ unix{
         translations.path = /usr/share/$${TARGET}/translations/
         translations.files = $$INSTALL_TRANSLATIONS
 
-        # Path to standard measurement after installation
-        standard.path = /usr/share/$${TARGET}/tables/standard/
-        standard.files = $$INSTALL_STANDARD_MEASUREMENTS
+        # Path to multisize measurement after installation
+        multisize.path = /usr/share/$${TARGET}/tables/multisize/
+        multisize.files = $$INSTALL_MULTISIZE_MEASUREMENTS
 
         # Path to templates after installation
         templates.path = /usr/share/$${TARGET}/tables/templates/
@@ -173,7 +173,7 @@ unix{
             desktop \
             pixmaps \
             translations \
-            standard \
+            multisize \
             templates
     }
     macx{
@@ -226,9 +226,9 @@ unix{
 
         QMAKE_INFO_PLIST = $$PWD/../../../dist/macx/valentina/Info.plist
 
-        # Copy to bundle standard measurements files
-        standard.path = $$RESOURCES_DIR/tables/standard/
-        standard.files = $$INSTALL_STANDARD_MEASUREMENTS
+        # Copy to bundle multisize measurements files
+        multisize.path = $$RESOURCES_DIR/tables/multisize/
+        multisize.files = $$INSTALL_MULTISIZE_MEASUREMENTS
 
         # Copy to bundle templates files
         templates.path = $$RESOURCES_DIR/tables/templates/
@@ -239,13 +239,13 @@ unix{
         icns_resources.files += $$PWD/../../../dist/macx/s-measurements.icns
         icns_resources.files += $$PWD/../../../dist/macx/pattern.icns
 
-        # Copy to bundle standard measurements files
+        # Copy to bundle multisize measurements files
         # We cannot add none exist files to bundle through QMAKE_BUNDLE_DATA. That's why we must do this manually.
         QMAKE_POST_LINK += $$VCOPY $$quote($${OUT_PWD}/../tape/$${DESTDIR}/tape.app/$$RESOURCES_DIR/diagrams.rcc) $$quote($$shell_path($${OUT_PWD}/$$DESTDIR/$${TARGET}.app/$$RESOURCES_DIR/)) $$escape_expand(\\n\\t)
 
         QMAKE_BUNDLE_DATA += \
             templates \
-            standard \
+            multisize \
             libraries \
             tape \
             xpdf \
@@ -307,8 +307,8 @@ win32:*g++* {
     package.CONFIG = no_check_exist
     INSTALLS += package
 
-    package_tables.path = $${OUT_PWD}/../../../package/valentina/tables/standard
-    package_tables.files += $$INSTALL_STANDARD_MEASUREMENTS
+    package_tables.path = $${OUT_PWD}/../../../package/valentina/tables/multisize
+    package_tables.files += $$INSTALL_MULTISIZE_MEASUREMENTS
     INSTALLS += package_tables
 
     package_templates.path = $${OUT_PWD}/../../../package/valentina/tables/templates

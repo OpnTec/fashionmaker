@@ -147,7 +147,7 @@ private:
     VContainer     *data;
     MeasurementsType type;
 
-    void CreateEmptyStandardFile(Unit unit, int baseSize, int baseHeight);
+    void CreateEmptyMultisizeFile(Unit unit, int baseSize, int baseHeight);
     void CreateEmptyIndividualFile(Unit unit);
 
     qreal UniqueTagAttr(const QString &tag, const QString &attr, qreal defValue) const;

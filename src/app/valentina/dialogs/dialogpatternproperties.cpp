@@ -115,7 +115,7 @@ DialogPatternProperties::DialogPatternProperties(const QString &filePath, VPatte
     connect(bCancel, &QPushButton::clicked, this, &DialogPatternProperties::close);
 
     ui->tabWidget->setCurrentIndex(0);
-    if (qApp->patternType() != MeasurementsType::Standard)
+    if (qApp->patternType() != MeasurementsType::Multisize)
     {
         ui->tabWidget->setTabEnabled(1, false);
     }

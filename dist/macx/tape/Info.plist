@@ -50,7 +50,7 @@
 				<string>org.valentinaproject.vst</string>
 			</array>
 			<key>CFBundleTypeName</key>
-			<string>Valentina standard measurements</string>
+                        <string>Valentina multisize measurements</string>
 			<key>LSHandlerRank</key>
 			<string>Owner</string>
 		</dict>
@@ -86,7 +86,7 @@
 				<string>public.xml</string>
 			</array>
 			<key>UTTypeDescription</key>
-			<string>Valentina standard measurements</string>
+                        <string>Valentina multisize measurements</string>
 			<key>UTTypeIconFile</key>
 			<string>s-measurements.icns</string>
 			<key>UTTypeIdentifier</key>

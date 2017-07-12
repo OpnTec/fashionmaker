@@ -208,7 +208,7 @@
           <item>
            <widget class="QRadioButton" name="radioButtonDefFromM">
             <property name="text">
-             <string>From standard measurements</string>
+             <string>From multisize measurements</string>
             </property>
             <property name="checked">
              <bool>true</bool>

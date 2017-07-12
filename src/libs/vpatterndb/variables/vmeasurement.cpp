@@ -38,7 +38,7 @@
 
 //---------------------------------------------------------------------------------------------------------------------
 /**
- * @brief VMeasurement create measurement for standard table
+ * @brief VMeasurement create measurement for multisize table
  * @param name measurement's name
  * @param base value in base size and height
  * @param ksize increment in sizes
@@ -100,7 +100,7 @@ QStringList VMeasurement::ListHeights(QMap<GHeights, bool> heights, Unit pattern
     QStringList list;
     if (patternUnit == Unit::Inch)
     {
-        qWarning()<<"Standard table doesn't support inches.";
+        qWarning()<<"Multisize table doesn't support inches.";
         return list;
     }
 
@@ -127,7 +127,7 @@ QStringList VMeasurement::ListSizes(QMap<GSizes, bool> sizes, Unit patternUnit)
     QStringList list;
     if (patternUnit == Unit::Inch)
     {
-        qWarning()<<"Standard table doesn't support inches.";
+        qWarning()<<"Multisize table doesn't support inches.";
         return list;
     }
 
@@ -154,7 +154,7 @@ QStringList VMeasurement::WholeListHeights(Unit patternUnit)
     QStringList list;
     if (patternUnit == Unit::Inch)
     {
-        qWarning()<<"Standard table doesn't support inches.";
+        qWarning()<<"Multisize table doesn't support inches.";
         return list;
     }
 
@@ -172,7 +172,7 @@ QStringList VMeasurement::WholeListSizes(Unit patternUnit)
     QStringList list;
     if (patternUnit == Unit::Inch)
     {
-        qWarning()<<"Standard table doesn't support inches.";
+        qWarning()<<"Multisize table doesn't support inches.";
         return list;
     }
 

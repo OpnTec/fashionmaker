@@ -68,7 +68,7 @@ QT_WARNING_DISABLE_GCC("-Wnon-virtual-dtor")
  * or more pattern pieces.
  *
  * An increment is an auxiliary variable that is calculated from regular measurement
- * variables (that belong to the standard measurements table). Increments are used to
+ * variables (that belong to the multisize measurements table). Increments are used to
  * create a graduation schema for the sewing pattern.
  *
  * A pattern piece contains
@@ -176,7 +176,7 @@ template <>
 inline void VDomDocument::SetAttribute<MeasurementsType>(QDomElement &domElement, const QString &name,
                                                               const MeasurementsType &value) const
 {
-    domElement.setAttribute(name, value == MeasurementsType::Standard ? QStringLiteral("standard") :
+    domElement.setAttribute(name, value == MeasurementsType::Multisize ? QStringLiteral("multisize") :
                                                                         QStringLiteral("individual"));
 }
 

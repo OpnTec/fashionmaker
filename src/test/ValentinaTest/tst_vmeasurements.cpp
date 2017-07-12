@@ -42,9 +42,9 @@ TST_VMeasurements::TST_VMeasurements(QObject *parent) :
 
 //---------------------------------------------------------------------------------------------------------------------
 /**
- * @brief CreateEmptyStandardFile check if empty standard measurement file is valid.
+ * @brief CreateEmptyMultisizeFile check if empty multisize measurement file is valid.
  */
-void TST_VMeasurements::CreateEmptyStandardFile()
+void TST_VMeasurements::CreateEmptyMultisizeFile()
 {
     Unit mUnit = Unit::Cm;
     const int height = 176;
@@ -129,10 +129,10 @@ void TST_VMeasurements::CreateEmptyIndividualFile()
 
 //---------------------------------------------------------------------------------------------------------------------
 /**
- * @brief ValidPMCodesStandardFile helps to check that all current pattern making systems match pattern inside XSD
+ * @brief ValidPMCodesMultisizeFile helps to check that all current pattern making systems match pattern inside XSD
  * scheme.
  */
-void TST_VMeasurements::ValidPMCodesStandardFile()
+void TST_VMeasurements::ValidPMCodesMultisizeFile()
 {
     Unit mUnit = Unit::Cm;
     const int height = 176;
