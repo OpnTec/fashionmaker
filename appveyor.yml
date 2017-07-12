@@ -203,7 +203,7 @@ deploy:
 - provider: BinTray
   username: dismine
   api_key:
-    secure: J653yvPpcHqZ9hrPgXcgtRUz8a3tB/gqYseyQrE4LggyApcAm5fCtLF8wtw2my+m
+    secure: 1jW114y8neFIaH4B0rs5grypsejzCe97gZdmCsxl0V5Ff4aumNJ1eKbVIi2sdYEu
   subject: dismine
   repo: Valentina
   package: valentina-win_auto-upload
