@@ -644,7 +644,7 @@ void MainWindow::ClosedDialog(int result)
         SCASSERT(scene != nullptr)
 
         QGraphicsItem *tool = dynamic_cast<QGraphicsItem *>(DrawTool::Create(dialogTool, scene, doc, pattern));
-        SCASSERT(tool != nullptr)
+        // Do not check for nullptr! See issue #719.
         ui->view->itemClicked(tool);
     }
     ArrowTool();

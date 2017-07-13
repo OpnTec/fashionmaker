@@ -32,6 +32,9 @@
 - [#706] Default unit in preferences not changing new file unit.
 - Fix bug. Valentina overrids exported file even if a user said no.
 - Fix bug. Date on label doesn't obey GUI language locale.
+- Tool Seam allowance's bounding box should not include passmarks.
+- Fix grainline position on layout.
+- [#719] Valentina crashes when unite pieces.
 
 # Version 0.5.0 May 9, 2017
 - [#581] User can now filter input lists by keyword in function wizard.
