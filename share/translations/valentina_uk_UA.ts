@@ -2649,7 +2649,7 @@
     </message>
     <message>
         <source>Fields</source>
-        <translation>Поля</translation>
+        <translation type="vanished">Поля</translation>
     </message>
     <message>
         <source>Left:</source>
@@ -2669,7 +2669,7 @@
     </message>
     <message>
         <source>Ignore fileds</source>
-        <translation>Ігнорувати поля</translation>
+        <translation type="vanished">Ігнорувати поля</translation>
     </message>
     <message>
         <source>Custom</source>
@@ -2752,6 +2752,14 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Export text as paths</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Margins</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Ignore margins</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -3167,7 +3175,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Standard</source>
-        <translation>Стандарт</translation>
+        <translation type="vanished">Стандарт</translation>
     </message>
     <message>
         <source>Centimeters</source>
@@ -3180,6 +3188,10 @@ Apply settings anyway?</source>
     <message>
         <source>Inches</source>
         <translation>Дюйми</translation>
+    </message>
+    <message>
+        <source>Multisize</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -3376,7 +3388,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>From standard measurements</source>
-        <translation>Зі стандартної таблиці мірок</translation>
+        <translation type="vanished">Зі стандартної таблиці мірок</translation>
     </message>
     <message>
         <source>Custom</source>
@@ -3509,6 +3521,10 @@ Apply settings anyway?</source>
     <message>
         <source>Show measurements file</source>
         <translation>Показати файл мірок</translation>
+    </message>
+    <message>
+        <source>From multisize measurements</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -4499,6 +4515,10 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Binary form</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Text as paths</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -6143,7 +6163,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Application doesn&apos;t support standard table with inches.</source>
-        <translation>Програма не підтримує стандарнту таблицю з дюймами.</translation>
+        <translation type="vanished">Програма не підтримує стандарнту таблицю з дюймами.</translation>
     </message>
     <message>
         <source>File error.</source>
@@ -6267,7 +6287,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Tools</source>
-        <translation>Інструменти</translation>
+        <translation type="vanished">Інструменти</translation>
     </message>
     <message>
         <source>Point of intersection arcs</source>
@@ -6492,7 +6512,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Couldn&apos;t set size. Need a file with standard measurements.</source>
-        <translation>Не вдалося встановити розмір. Потрібно файл зі стандартними мірками.</translation>
+        <translation type="vanished">Не вдалося встановити розмір. Потрібно файл зі стандартними мірками.</translation>
     </message>
     <message>
         <source>Couldn&apos;t set size. File wasn&apos;t opened.</source>
@@ -6508,7 +6528,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Couldn&apos;t set height. Need a file with standard measurements.</source>
-        <translation>Не вдалося встановити зріст. Необхідно файл стандартних мірок.</translation>
+        <translation type="vanished">Не вдалося встановити зріст. Необхідно файл стандартних мірок.</translation>
     </message>
     <message>
         <source>Couldn&apos;t set height. File wasn&apos;t opened.</source>
@@ -6934,6 +6954,34 @@ Do you want to save your changes?</source>
         <source>zoom fit best current pattern piece</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Export details skiping the Layout stage</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Application doesn&apos;t support multisize table with inches.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>You don&apos;t have enough details to export. Please, include at least one detail in layout.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Export details</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Can&apos;t export details.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Couldn&apos;t set size. Need a file with multisize measurements.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Couldn&apos;t set height. Need a file with multisize measurements.</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>MainWindowsNoGUI</name>
@@ -7028,6 +7076,10 @@ Do you want to save your changes?</source>
     <message>
         <source>Can&apos;t create a path</source>
         <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Pattern</source>
+        <translation type="unfinished">Лекало</translation>
     </message>
 </context>
 <context>
@@ -8010,7 +8062,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Open standard ...</source>
-        <translation>Відкрити стандартні ...</translation>
+        <translation type="vanished">Відкрити стандартні ...</translation>
     </message>
     <message>
         <source>Open template</source>
@@ -8435,11 +8487,19 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Export from standard measurements is not supported.</source>
-        <translation>Експорт стандартних мірок не підтримується.</translation>
+        <translation type="vanished">Експорт стандартних мірок не підтримується.</translation>
     </message>
     <message>
         <source>Empty</source>
         <translation>Пусто</translation>
+    </message>
+    <message>
+        <source>Open multisize ...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Export from multisize measurements is not supported.</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -9372,7 +9432,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Set size value a pattern file, that was opened with standard measurements (export mode). Valid values: %1cm.</source>
-        <translation>Встановлює значення розміру для файлу лекала, котрий був відкрит за допомогою стандартних мірок (режим експорту). Припустимі значення: %1cm.</translation>
+        <translation type="vanished">Встановлює значення розміру для файлу лекала, котрий був відкрит за допомогою стандартних мірок (режим експорту). Припустимі значення: %1cm.</translation>
     </message>
     <message>
         <source>The size value</source>
@@ -9380,7 +9440,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Set height value a pattern file, that was opened with standard measurements (export mode). Valid values: %1cm.</source>
-        <translation>Встановлює значення росту для файлу лекала, котрий був відкрит за допомогою стандартних мірок (режим експорту). Допустимі значення: %1 см.</translation>
+        <translation type="vanished">Встановлює значення росту для файлу лекала, котрий був відкрит за допомогою стандартних мірок (режим експорту). Допустимі значення: %1 см.</translation>
     </message>
     <message>
         <source>The height value</source>
@@ -9544,6 +9604,18 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Export text as paths.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Export only details. Export details as they positioned in the details mode. Any layout related options will be ignored.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Set size value a pattern file, that was opened with multisize measurements (export mode). Valid values: %1cm.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Set height value a pattern file, that was opened with multisize measurements (export mode). Valid values: %1cm.</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

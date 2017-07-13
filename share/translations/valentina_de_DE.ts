@@ -2572,7 +2572,7 @@
     </message>
     <message>
         <source>Fields</source>
-        <translation>Felder</translation>
+        <translation type="vanished">Felder</translation>
     </message>
     <message>
         <source>Left:</source>
@@ -2592,7 +2592,7 @@
     </message>
     <message>
         <source>Ignore fileds</source>
-        <translation>Felder ignorieren</translation>
+        <translation type="vanished">Felder ignorieren</translation>
     </message>
     <message>
         <source>Custom</source>
@@ -2675,6 +2675,14 @@ Einstellungen trotzdem anwenden?</translation>
     </message>
     <message>
         <source>Export text as paths</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Margins</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Ignore margins</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -3090,7 +3098,7 @@ Einstellungen trotzdem anwenden?</translation>
     </message>
     <message>
         <source>Standard</source>
-        <translation>Standard</translation>
+        <translation type="vanished">Standard</translation>
     </message>
     <message>
         <source>Centimeters</source>
@@ -3103,6 +3111,10 @@ Einstellungen trotzdem anwenden?</translation>
     <message>
         <source>Inches</source>
         <translation>Zoll</translation>
+    </message>
+    <message>
+        <source>Multisize</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -3299,7 +3311,7 @@ Einstellungen trotzdem anwenden?</translation>
     </message>
     <message>
         <source>From standard measurements</source>
-        <translation>Vom Standardmaß</translation>
+        <translation type="vanished">Vom Standardmaß</translation>
     </message>
     <message>
         <source>Custom</source>
@@ -3432,6 +3444,10 @@ Einstellungen trotzdem anwenden?</translation>
     <message>
         <source>Show measurements file</source>
         <translation>Maßdatei anzeigen</translation>
+    </message>
+    <message>
+        <source>From multisize measurements</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -4410,6 +4426,10 @@ Einstellungen trotzdem anwenden?</translation>
     </message>
     <message>
         <source>Binary form</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Text as paths</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -6055,7 +6075,7 @@ Sollen die Änderungen gespeichert werden?</translation>
     </message>
     <message>
         <source>Application doesn&apos;t support standard table with inches.</source>
-        <translation>Die Anwendung unterstützt keine Standard-Maßtabellen mit Größen in Zoll.</translation>
+        <translation type="vanished">Die Anwendung unterstützt keine Standard-Maßtabellen mit Größen in Zoll.</translation>
     </message>
     <message>
         <source>File error.</source>
@@ -6179,7 +6199,7 @@ Sollen die Änderungen gespeichert werden?</translation>
     </message>
     <message>
         <source>Tools</source>
-        <translation>Werkzeuge</translation>
+        <translation type="vanished">Werkzeuge</translation>
     </message>
     <message>
         <source>Point of intersection arcs</source>
@@ -6404,7 +6424,7 @@ Sollen die Änderungen gespeichert werden?</translation>
     </message>
     <message>
         <source>Couldn&apos;t set size. Need a file with standard measurements.</source>
-        <translation>Größe konnte nicht bestimmt werden. Die Datei muss Standardmaße haben.</translation>
+        <translation type="vanished">Größe konnte nicht bestimmt werden. Die Datei muss Standardmaße haben.</translation>
     </message>
     <message>
         <source>Couldn&apos;t set size. File wasn&apos;t opened.</source>
@@ -6420,7 +6440,7 @@ Sollen die Änderungen gespeichert werden?</translation>
     </message>
     <message>
         <source>Couldn&apos;t set height. Need a file with standard measurements.</source>
-        <translation>Höhe konnte nicht bestimmt werden. Die Datei muss Standardmaße haben.</translation>
+        <translation type="vanished">Höhe konnte nicht bestimmt werden. Die Datei muss Standardmaße haben.</translation>
     </message>
     <message>
         <source>Couldn&apos;t set height. File wasn&apos;t opened.</source>
@@ -6842,6 +6862,34 @@ Sollen die Änderungen gespeichert werden?</translation>
         <source>zoom fit best current pattern piece</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Export details skiping the Layout stage</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Application doesn&apos;t support multisize table with inches.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>You don&apos;t have enough details to export. Please, include at least one detail in layout.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Export details</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Can&apos;t export details.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Couldn&apos;t set size. Need a file with multisize measurements.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Couldn&apos;t set height. Need a file with multisize measurements.</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>MainWindowsNoGUI</name>
@@ -6936,6 +6984,10 @@ Sollen die Änderungen gespeichert werden?</translation>
     <message>
         <source>Can&apos;t create a path</source>
         <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Pattern</source>
+        <translation type="unfinished">Schnittmuster</translation>
     </message>
 </context>
 <context>
@@ -7883,7 +7935,7 @@ Sollen die Änderungen gespeichert werden?</translation>
     </message>
     <message>
         <source>Open standard ...</source>
-        <translation>Standardmaße öffnen...</translation>
+        <translation type="vanished">Standardmaße öffnen...</translation>
     </message>
     <message>
         <source>Open template</source>
@@ -8298,11 +8350,15 @@ Do you want to save your changes?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Export from standard measurements is not supported.</source>
+        <source>Empty</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Empty</source>
+        <source>Open multisize ...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Export from multisize measurements is not supported.</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -9221,7 +9277,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Set size value a pattern file, that was opened with standard measurements (export mode). Valid values: %1cm.</source>
-        <translation>Größenwert einer Schnittteildatei setzen, die mit Standardmaßen (Exportmodus) geöffnet wurde. Gültige Werte: %1 cm.</translation>
+        <translation type="vanished">Größenwert einer Schnittteildatei setzen, die mit Standardmaßen (Exportmodus) geöffnet wurde. Gültige Werte: %1 cm.</translation>
     </message>
     <message>
         <source>The size value</source>
@@ -9229,7 +9285,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Set height value a pattern file, that was opened with standard measurements (export mode). Valid values: %1cm.</source>
-        <translation>Größenwert einer Schnittteildatei setzen, die mit Standardmaßen (Exportmodus) geöffnet wurde. Gültige Werte: %1 cm.</translation>
+        <translation type="vanished">Größenwert einer Schnittteildatei setzen, die mit Standardmaßen (Exportmodus) geöffnet wurde. Gültige Werte: %1 cm.</translation>
     </message>
     <message>
         <source>The height value</source>
@@ -9393,6 +9449,18 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Export text as paths.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Export only details. Export details as they positioned in the details mode. Any layout related options will be ignored.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Set size value a pattern file, that was opened with multisize measurements (export mode). Valid values: %1cm.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Set height value a pattern file, that was opened with multisize measurements (export mode). Valid values: %1cm.</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

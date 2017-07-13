@@ -1823,10 +1823,6 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Fields</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Left:</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1840,10 +1836,6 @@
     </message>
     <message>
         <source>Bottom:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Ignore fileds</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -1914,6 +1906,14 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Export text as paths</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Margins</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Ignore margins</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -2292,10 +2292,6 @@ Apply settings anyway?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Standard</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Centimeters</source>
         <translation>公分</translation>
     </message>
@@ -2306,6 +2302,10 @@ Apply settings anyway?</source>
     <message>
         <source>Inches</source>
         <translation>英寸</translation>
+    </message>
+    <message>
+        <source>Multisize</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -2469,10 +2469,6 @@ Apply settings anyway?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>From standard measurements</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Custom</source>
         <translation type="unfinished"></translation>
     </message>
@@ -2586,6 +2582,10 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Show measurements file</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>From multisize measurements</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -3266,6 +3266,10 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Binary form</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Text as paths</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -4661,10 +4665,6 @@ Do you want to save your changes?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Application doesn&apos;t support standard table with inches.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>File error.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -4770,10 +4770,6 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Show/hide control points and curve direction</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Tools</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -4917,10 +4913,6 @@ Do you want to save your changes?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Couldn&apos;t set size. Need a file with standard measurements.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Couldn&apos;t set size. File wasn&apos;t opened.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -4930,10 +4922,6 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Not supported height value &apos;%1&apos; for this pattern file.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Couldn&apos;t set height. Need a file with standard measurements.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -5324,6 +5312,34 @@ Do you want to save your changes?</source>
         <source>zoom fit best current pattern piece</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Export details skiping the Layout stage</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Application doesn&apos;t support multisize table with inches.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>You don&apos;t have enough details to export. Please, include at least one detail in layout.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Export details</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Can&apos;t export details.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Couldn&apos;t set size. Need a file with multisize measurements.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Couldn&apos;t set height. Need a file with multisize measurements.</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>MainWindowsNoGUI</name>
@@ -5386,6 +5402,10 @@ Do you want to save your changes?</source>
     <message>
         <source>Can&apos;t create a path</source>
         <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Pattern</source>
+        <translation type="unfinished">样板</translation>
     </message>
 </context>
 <context>
@@ -6188,10 +6208,6 @@ Do you want to save your changes?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Open standard ...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Open template</source>
         <translation type="unfinished"></translation>
     </message>
@@ -6528,11 +6544,15 @@ Do you want to save your changes?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Export from standard measurements is not supported.</source>
+        <source>Empty</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Empty</source>
+        <source>Open multisize ...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Export from multisize measurements is not supported.</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -7314,15 +7334,7 @@ Do you want to save your changes?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Set size value a pattern file, that was opened with standard measurements (export mode). Valid values: %1cm.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>The size value</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Set height value a pattern file, that was opened with standard measurements (export mode). Valid values: %1cm.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -7455,6 +7467,18 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Export text as paths.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Export only details. Export details as they positioned in the details mode. Any layout related options will be ignored.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Set size value a pattern file, that was opened with multisize measurements (export mode). Valid values: %1cm.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Set height value a pattern file, that was opened with multisize measurements (export mode). Valid values: %1cm.</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
