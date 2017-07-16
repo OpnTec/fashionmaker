@@ -762,7 +762,7 @@ public:
         eType = DRW::VERTEX;
     }
 
-    DRW_Vertex(double sx, double sy, double sz, double b)
+    DRW_Vertex(double sx, double sy, double sz = 0.0, double b = 0.0)
         : stawidth(0),
           endwidth(0),
           bulge(b),

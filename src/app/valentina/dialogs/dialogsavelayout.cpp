@@ -331,9 +331,9 @@ QString DialogSaveLayout::ExportFormatDescription(LayoutExportFormats format)
         case LayoutExportFormats::DXF_AC1027_Flat:
             return QString("AutoCAD DXF 2013 %1 %2").arg(dxfFlatFilesStr, dxfSuffix);
         case LayoutExportFormats::DXF_AC1006_AAMA:
-            return QString("AutoCAD DXF R10 AAMA %1 %2").arg(dxfFlatFilesStr, dxfSuffix);
+            return QString("AutoCAD DXF R10 AAMA %1 %2").arg(filesStr, dxfSuffix);
         case LayoutExportFormats::DXF_AC1009_AAMA:
-            return QString("AutoCAD DXF R11/12 AAMA %1 %2").arg(dxfFlatFilesStr, dxfSuffix);
+            return QString("AutoCAD DXF R11/12 AAMA %1 %2").arg(filesStr, dxfSuffix);
         case LayoutExportFormats::DXF_AC1012_AAMA:
             return QString("AutoCAD DXF R13 AAMA %1 %2").arg(filesStr, dxfSuffix);
         case LayoutExportFormats::DXF_AC1014_AAMA:
@@ -648,17 +648,16 @@ QVector<std::pair<QString, LayoutExportFormats> > DialogSaveLayout::InitFormats(
     InitFormat(LayoutExportFormats::DXF_AC1021_Flat);
     InitFormat(LayoutExportFormats::DXF_AC1024_Flat);
     InitFormat(LayoutExportFormats::DXF_AC1027_Flat);
-
+    InitFormat(LayoutExportFormats::DXF_AC1006_AAMA);
+    InitFormat(LayoutExportFormats::DXF_AC1009_AAMA);
+    InitFormat(LayoutExportFormats::DXF_AC1012_AAMA);
+    InitFormat(LayoutExportFormats::DXF_AC1014_AAMA);
+    InitFormat(LayoutExportFormats::DXF_AC1015_AAMA);
+    InitFormat(LayoutExportFormats::DXF_AC1018_AAMA);
+    InitFormat(LayoutExportFormats::DXF_AC1021_AAMA);
+    InitFormat(LayoutExportFormats::DXF_AC1024_AAMA);
+    InitFormat(LayoutExportFormats::DXF_AC1027_AAMA);
     // We will support them anyway
-//    InitFormat(LayoutExportFormats::DXF_AC1006_AAMA);
-//    InitFormat(LayoutExportFormats::DXF_AC1009_AAMA);
-//    InitFormat(LayoutExportFormats::DXF_AC1012_AAMA);
-//    InitFormat(LayoutExportFormats::DXF_AC1014_AAMA);
-//    InitFormat(LayoutExportFormats::DXF_AC1015_AAMA);
-//    InitFormat(LayoutExportFormats::DXF_AC1018_AAMA);
-//    InitFormat(LayoutExportFormats::DXF_AC1021_AAMA);
-//    InitFormat(LayoutExportFormats::DXF_AC1024_AAMA);
-//    InitFormat(LayoutExportFormats::DXF_AC1027_AAMA);
 //    InitFormat(LayoutExportFormats::DXF_AC1006_ASTM);
 //    InitFormat(LayoutExportFormats::DXF_AC1009_ASTM);
 //    InitFormat(LayoutExportFormats::DXF_AC1012_ASTM);

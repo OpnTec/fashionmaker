@@ -216,12 +216,23 @@ QList<QGraphicsItem *> VLayoutGenerator::GetPapersItems() const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QList<QList<QGraphicsItem *> > VLayoutGenerator::GetAllDetails() const
+QList<QList<QGraphicsItem *> > VLayoutGenerator::GetAllDetailsItems() const
 {
     QList<QList<QGraphicsItem *> > list;
     for (int i=0; i < papers.count(); ++i)
     {
         list.append(papers.at(i).GetItemDetails(IsTestAsPaths()));
+    }
+    return list;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QVector<QVector<VLayoutPiece> > VLayoutGenerator::GetAllDetails() const
+{
+    QVector<QVector<VLayoutPiece> > list;
+    for (int i=0; i < papers.count(); ++i)
+    {
+        list.append(papers.at(i).GetDetails());
     }
     return list;
 }

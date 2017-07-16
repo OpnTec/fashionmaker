@@ -75,6 +75,8 @@ protected:
     QList<QGraphicsScene *> scenes;
     QList<QList<QGraphicsItem *> > details;
 
+    QVector<QVector<VLayoutPiece> > detailsOnLayout;
+
     QAction *undoAction;
     QAction *redoAction;
     QAction *actionDockWidgetToolOptions;
@@ -92,12 +94,6 @@ protected:
     static QVector<VLayoutPiece> PrepareDetailsForLayout(const QHash<quint32, VPiece> &details);
 
     void ExportData(const QVector<VLayoutPiece> &listDetails, const DialogSaveLayout &dialog);
-    void ExportLayout(const DialogSaveLayout &dialog,
-                      const QList<QGraphicsScene *> &scenes,
-                      const QList<QGraphicsItem *> &papers,
-                      const QList<QGraphicsItem *> &shadows,
-                      const QList<QList<QGraphicsItem *> > &details,
-                      bool ignorePrinterFields, const QMarginsF &margins);
 
     void InitTempLayoutScene();
     virtual void CleanLayout()=0;
@@ -134,8 +130,10 @@ private:
                 const QMarginsF &margins)const;
     void PdfToPs(const QStringList &params)const;
     void ObjFile(const QString &name, QGraphicsRectItem *paper, QGraphicsScene *scene)const;
-    void DxfFile(const QString &name, int version, bool binary, QGraphicsRectItem *paper, QGraphicsScene *scene,
+    void FlatDxfFile(const QString &name, int version, bool binary, QGraphicsRectItem *paper, QGraphicsScene *scene,
                  const QList<QList<QGraphicsItem *> > &details)const;
+    void AAMADxfFile(const QString &name, int version, bool binary, const QSize &size,
+                     const QVector<VLayoutPiece> &details) const;
 
     void PreparePaper(int index) const;
     void RestorePaper(int index) const;
@@ -154,6 +152,27 @@ private:
 
     bool isPagesUniform() const;
     bool IsPagesFit(const QSizeF &printPaper) const;
+
+    void ExportScene(const DialogSaveLayout &dialog,
+                     const QList<QGraphicsScene *> &scenes,
+                     const QList<QGraphicsItem *> &papers,
+                     const QList<QGraphicsItem *> &shadows,
+                     const QList<QList<QGraphicsItem *> > &details,
+                     bool ignorePrinterFields, const QMarginsF &margins) const;
+
+    void ExportApparelLayout(const DialogSaveLayout &dialog, const QVector<VLayoutPiece> &details, const QString &name,
+                             const QSize &size) const;
+
+    void ExportDetailsAsApparelLayout(const DialogSaveLayout &dialog, QVector<VLayoutPiece> listDetails);
+
+    void ExportFlatLayout(const DialogSaveLayout &dialog,
+                          const QList<QGraphicsScene *> &scenes,
+                          const QList<QGraphicsItem *> &papers,
+                          const QList<QGraphicsItem *> &shadows,
+                          const QList<QList<QGraphicsItem *> > &details,
+                          bool ignorePrinterFields, const QMarginsF &margins);
+
+    void ExportDetailsAsFlatLayout(const DialogSaveLayout &dialog, const QVector<VLayoutPiece> &listDetails);
 };
 
 #endif // MAINWINDOWSNOGUI_H

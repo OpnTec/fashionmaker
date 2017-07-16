@@ -238,6 +238,18 @@ void VPiecePath::SetPenType(const Qt::PenStyle &type)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+bool VPiecePath::IsCutPath() const
+{
+    return d->m_cut;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VPiecePath::SetCutPath(bool cut)
+{
+    d->m_cut = cut;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 QVector<QPointF> VPiecePath::PathPoints(const VContainer *data) const
 {
     QVector<QPointF> points;

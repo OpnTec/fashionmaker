@@ -1,4 +1,4 @@
-/************************************************************************
+ /************************************************************************
  **
  **  @file   vdxfengine.cpp
  **  @author Valentina Zhuravska <zhuravska19(at)gmail.com>
@@ -49,6 +49,9 @@
 #include "../vmisc/diagnostic.h"
 #include "../vmisc/vmath.h"
 #include "dxiface.h"
+#include "../vlayout/vlayoutpiece.h"
+
+static const qreal AAMATextHeight = 2.5;
 
 //---------------------------------------------------------------------------------------------------------------------
 static inline QPaintEngine::PaintEngineFeatures svgEngineFeatures()
@@ -93,6 +96,13 @@ VDxfEngine::~VDxfEngine()
 bool VDxfEngine::begin(QPaintDevice *pdev)
 {
     Q_UNUSED(pdev)
+
+    if (isActive())
+    {
+        qWarning("VDxfEngine::begin(), the engine was alredy activated");
+        return false;
+    }
+
     if (size.isValid() == false)
     {
         qWarning()<<"VDxfEngine::begin(), size is not valid";
@@ -100,6 +110,7 @@ bool VDxfEngine::begin(QPaintDevice *pdev)
     }
 
     input = QSharedPointer<dx_iface>(new dx_iface(fileName.toStdString(), m_version, varMeasurement, varInsunits));
+    input->AddQtLTypes();
     return true;
 }
 
@@ -571,7 +582,259 @@ double VDxfEngine::FromPixel(double pix, const VarInsunits &unit) const
         case VarInsunits::Inches:
             return pix / resolution;
     }
-    return 0;
+    return pix;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+double VDxfEngine::ToPixel(double val, const VarInsunits &unit) const
+{
+    switch (unit)
+    {
+        case VarInsunits::Millimeters:
+            return (val / 25.4) * resolution;
+        case VarInsunits::Centimeters:
+            return ((val * 10.0) / 25.4) * resolution;
+        case VarInsunits::Inches:
+            return val * resolution;
+    }
+    return val;
 }
 
 QT_WARNING_POP
+
+//---------------------------------------------------------------------------------------------------------------------
+bool VDxfEngine::ExportToAAMA(const QVector<VLayoutPiece> &details)
+{
+    if (size.isValid() == false)
+    {
+        qWarning()<<"VDxfEngine::begin(), size is not valid";
+        return false;
+    }
+
+    input = QSharedPointer<dx_iface>(new dx_iface(fileName.toStdString(), m_version, varMeasurement, varInsunits));
+    input->AddAAMALayers();
+
+    ExportAAMAGlobalText(input, details);
+
+    for(int i = 0; i < details.size(); ++i)
+    {
+        const VLayoutPiece &detail = details.at(i);
+
+        dx_ifaceBlock *detailBlock = new dx_ifaceBlock();
+        detailBlock->name = detail.GetName().toStdString();
+
+        ExportAAMAOutline(detailBlock, detail);
+        ExportAAMADraw(detailBlock, detail);
+        ExportAAMAIntcut(detailBlock, detail);
+        ExportAAMANotch(detailBlock, detail);
+        ExportAAMAGrainline(detailBlock, detail);
+        ExportAAMAText(detailBlock, detail);
+
+        input->AddBlock(detailBlock);
+
+        DRW_Insert *insert = new DRW_Insert();
+        insert->name = detail.GetName().toStdString();
+        insert->basePoint = DRW_Coord(FromPixel(detail.GetMx(), varInsunits),
+                                      FromPixel(- detail.GetMy(), varInsunits), 0);
+        insert->layer = "0";
+
+        input->AddEntity(insert);
+    }
+
+    return input->fileExport(m_binary);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VDxfEngine::ExportAAMAOutline(dx_ifaceBlock *detailBlock, const VLayoutPiece &detail)
+{
+    QVector<QPointF> outline;
+    if (detail.IsSeamAllowance() && not detail.IsSeamAllowanceBuiltIn())
+    {
+        outline = detail.GetSeamAllowancePoints();
+    }
+    else
+    {
+        outline = detail.GetContourPoints();
+    }
+
+    DRW_Entity *e = AAMAPolygon(outline, "1", true);
+    if (e)
+    {
+        detailBlock->ent.push_back(e);
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VDxfEngine::ExportAAMADraw(dx_ifaceBlock *detailBlock, const VLayoutPiece &detail)
+{
+    if (not detail.IsHideMainPath())
+    {
+        QVector<QPointF> poly = detail.GetContourPoints();
+        DRW_Entity *e = AAMAPolygon(poly, "8", true);
+        if (e)
+        {
+            detailBlock->ent.push_back(e);
+        }
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VDxfEngine::ExportAAMAIntcut(dx_ifaceBlock *detailBlock, const VLayoutPiece &detail)
+{
+    QVector<QVector<QPointF>> drawIntCut = detail.InternalPathsForCut(false);
+    for(int j = 0; j < drawIntCut.size(); ++j)
+    {
+        DRW_Entity *e = AAMAPolygon(drawIntCut.at(j), "8", false);
+        if (e)
+        {
+            detailBlock->ent.push_back(e);
+        }
+    }
+
+    drawIntCut = detail.InternalPathsForCut(true);
+    for(int j = 0; j < drawIntCut.size(); ++j)
+    {
+        DRW_Entity *e = AAMAPolygon(drawIntCut.at(j), "11", false);
+        if (e)
+        {
+            detailBlock->ent.push_back(e);
+        }
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VDxfEngine::ExportAAMANotch(dx_ifaceBlock *detailBlock, const VLayoutPiece &detail)
+{
+    if (detail.IsSeamAllowance())
+    {
+        QVector<QLineF> passmarks = detail.GetPassmarks();
+        for(int i = 0; i < passmarks.size(); ++i)
+        {
+            DRW_Entity *e = AAMALine(passmarks.at(i), "4");
+            if (e)
+            {
+                detailBlock->ent.push_back(e);
+            }
+        }
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VDxfEngine::ExportAAMAGrainline(dx_ifaceBlock *detailBlock, const VLayoutPiece &detail)
+{
+    const QVector<QPointF> grainline = detail.GetGrainline();
+    if (grainline.count() > 1)
+    {
+        DRW_Entity *e = AAMALine(QLineF(grainline.last(), grainline.first()), "7");
+        if (e)
+        {
+            detailBlock->ent.push_back(e);
+        }
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VDxfEngine::ExportAAMAText(dx_ifaceBlock *detailBlock, const VLayoutPiece &detail)
+{
+    const QStringList list = detail.GetPieceText();
+    const QPointF startPos = detail.GetPieceTextPosition();
+
+    for (int i = 0; i < list.size(); ++i)
+    {
+        QPointF pos(startPos.x(), startPos.y() - ToPixel(AAMATextHeight, varInsunits)*(list.size() - i-1));
+        detailBlock->ent.push_back(AAMAText(pos, list.at(i), "19"));
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VDxfEngine::ExportAAMAGlobalText(const QSharedPointer<dx_iface> &input, const QVector<VLayoutPiece> &details)
+{
+    for(int i = 0; i < details.size(); ++i)
+    {
+        const QStringList strings = details.at(i).GetPatternText();
+        if (not strings.isEmpty())
+        {
+            for (int j = 0; j < strings.size(); ++j)
+            {
+                QPointF pos(0, getSize().height() - ToPixel(AAMATextHeight, varInsunits)*(strings.size() - j-1));
+                input->AddEntity(AAMAText(pos, strings.at(j), "1"));
+            }
+            return;
+        }
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+DRW_Entity *VDxfEngine::AAMAPolygon(const QVector<QPointF> &polygon, const QString &layer, bool forceClosed)
+{
+    if (polygon.isEmpty())
+    {
+        return nullptr;
+    }
+
+    if (m_version > DRW::AC1009)
+    { // Use lwpolyline
+        return CreateAAMAPolygon<DRW_LWPolyline, DRW_Vertex2D>(polygon, layer, forceClosed);
+    }
+    else
+    { // Use polyline
+        return CreateAAMAPolygon<DRW_Polyline, DRW_Vertex>(polygon, layer, forceClosed);
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+DRW_Entity *VDxfEngine::AAMALine(const QLineF &line, const QString &layer)
+{
+    DRW_Line *lineEnt = new DRW_Line();
+    lineEnt->basePoint = DRW_Coord(FromPixel(line.p1().x(), varInsunits),
+                                   FromPixel(getSize().height() - line.p1().y(), varInsunits), 0);
+    lineEnt->secPoint =  DRW_Coord(FromPixel(line.p2().x(), varInsunits),
+                                   FromPixel(getSize().height() - line.p2().y(), varInsunits), 0);
+    lineEnt->layer = layer.toStdString();
+
+    return lineEnt;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+DRW_Entity *VDxfEngine::AAMAText(const QPointF &pos, const QString &text, const QString &layer)
+{
+    DRW_Text *textLine = new DRW_Text();
+
+    textLine->basePoint = DRW_Coord(FromPixel(pos.x(), varInsunits),
+                                    FromPixel(getSize().height() - pos.y(), varInsunits), 0);
+    textLine->secPoint = DRW_Coord(FromPixel(pos.x(), varInsunits),
+                                   FromPixel(getSize().height() - pos.y(), varInsunits), 0);
+    textLine->height = AAMATextHeight;
+    textLine->layer = layer.toStdString();
+    textLine->text = text.toStdString();
+
+    return textLine;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+template<class P, class V>
+P *VDxfEngine::CreateAAMAPolygon(const QVector<QPointF> &polygon, const QString &layer, bool forceClosed)
+{
+    P *poly = new P();
+    poly->layer = layer.toStdString();
+
+    if (forceClosed)
+    {
+        poly->flags |= 0x1; // closed
+    }
+    else
+    {
+        if (polygon.size() > 1 && polygon.first() == polygon.last())
+        {
+            poly->flags |= 0x1; // closed
+        }
+    }
+
+    for (int i=0; i < polygon.count(); ++i)
+    {
+        poly->addVertex(V(FromPixel(polygon.at(i).x(), varInsunits),
+                          FromPixel(getSize().height() - polygon.at(i).y(), varInsunits)));
+    }
+
+    return poly;
+}

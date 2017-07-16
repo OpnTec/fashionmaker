@@ -85,15 +85,21 @@ public:
     QVector<QLineF> GetPassmarks() const;
     void SetPassmarks(const QVector<QLineF> &passmarks);
 
+    QVector<QVector<QPointF>> InternalPathsForCut(bool cut) const;
     QVector<VLayoutPiecePath> GetInternalPaths() const;
     void SetInternalPaths(const QVector<VLayoutPiecePath> &internalPaths);
 
-    void SetDetail(const QString &qsName, const VPieceLabelData& data, const QFont& font, const VContainer *pattern);
+    QPointF GetPieceTextPosition() const;
+    QStringList GetPieceText() const;
+    void SetPieceText(const QString &qsName, const VPieceLabelData& data, const QFont& font, const VContainer *pattern);
 
+    QPointF GetPatternTextPosition() const;
+    QStringList GetPatternText() const;
     void SetPatternInfo(const VAbstractPattern* pDoc, const VPatternLabelData& geom, const QFont& font,
                         qreal dSize, qreal dHeight, const VContainer *pattern);
 
     void SetGrainline(const VGrainlineData& geom, const VContainer *pattern);
+    QVector<QPointF> GetGrainline() const;
 
     QTransform GetMatrix() const;
     void    SetMatrix(const QTransform &matrix);

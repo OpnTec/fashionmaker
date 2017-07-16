@@ -162,6 +162,15 @@ void VDxfPaintDevice::setInsunits(const VarInsunits &var)
     engine->setInsunits(var);
 }
 
+//---------------------------------------------------------------------------------------------------------------------
+bool VDxfPaintDevice::ExportToAAMA(const QVector<VLayoutPiece> &details) const
+{
+    engine->setActive(true);
+    const bool res = engine->ExportToAAMA(details);
+    engine->setActive(false);
+    return res;
+}
+
  //---------------------------------------------------------------------------------------------------------------------
 int VDxfPaintDevice::metric(QPaintDevice::PaintDeviceMetric metric) const
 {

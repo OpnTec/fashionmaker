@@ -39,6 +39,7 @@
 #include "libdxfrw/drw_base.h"
 
 class VDxfEngine;
+class VLayoutPiece;
 
 class VDxfPaintDevice : public QPaintDevice
 {
@@ -64,6 +65,8 @@ public:
 
     void setMeasurement(const VarMeasurement &var);
     void setInsunits(const VarInsunits &var);
+
+    bool ExportToAAMA(const QVector<VLayoutPiece> &details) const;
 
 protected:
     virtual int metric(PaintDeviceMetric metric) const Q_DECL_OVERRIDE;
