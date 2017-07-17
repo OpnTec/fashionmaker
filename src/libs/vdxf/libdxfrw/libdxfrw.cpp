@@ -1478,7 +1478,7 @@ bool dxfRW::writeTables() {
     writer->writeInt16(70, 1); //end table def
     wlayer0 =false;
     iface->writeLayers();
-    if (!wlayer0) {
+    if (!wlayer0 && version > DRW::AC1009) {
         DRW_Layer lay0;
         lay0.name = "0";
         writeLayer(&lay0);

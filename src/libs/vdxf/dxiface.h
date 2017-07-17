@@ -121,6 +121,7 @@ public:
     void AddBlock(dx_ifaceBlock* block);
 
     void AddQtLTypes();
+    void AddDefLayers();
     void AddAAMALayers();
 
 private:
@@ -130,7 +131,6 @@ private:
     DRW::Version version;
 
     void InitHeader(VarMeasurement varMeasurement, VarInsunits varInsunits);
-    void InitDefLayers();
     void InitTextstyles();
     void InitAppId();
 

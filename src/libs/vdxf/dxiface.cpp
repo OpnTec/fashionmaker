@@ -25,7 +25,6 @@ dx_iface::dx_iface(const std::string &file, DRW::Version v, VarMeasurement varMe
       version(v)
 {
     InitHeader(varMeasurement, varInsunits);
-    InitDefLayers();
     InitTextstyles();
     InitAppId();
 }
@@ -277,7 +276,7 @@ void dx_iface::AddAAMALayers()
 //    cData.layers.push_back(layer);
 }
 
-void dx_iface::InitDefLayers()
+void dx_iface::AddDefLayers()
 {
     DRW_Layer defLayer;
     defLayer.name = "0";

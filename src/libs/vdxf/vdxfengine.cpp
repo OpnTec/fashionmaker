@@ -111,6 +111,7 @@ bool VDxfEngine::begin(QPaintDevice *pdev)
 
     input = QSharedPointer<dx_iface>(new dx_iface(fileName.toStdString(), m_version, varMeasurement, varInsunits));
     input->AddQtLTypes();
+    input->AddDefLayers();
     return true;
 }
 
@@ -612,6 +613,10 @@ bool VDxfEngine::ExportToAAMA(const QVector<VLayoutPiece> &details)
     }
 
     input = QSharedPointer<dx_iface>(new dx_iface(fileName.toStdString(), m_version, varMeasurement, varInsunits));
+    if (m_version > DRW::AC1009)
+    {
+        input->AddDefLayers();
+    }
     input->AddAAMALayers();
 
     ExportAAMAGlobalText(input, details);
