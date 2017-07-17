@@ -601,7 +601,7 @@ void MainWindowsNoGUI::PrintOrigin()
 //---------------------------------------------------------------------------------------------------------------------
 void MainWindowsNoGUI::PrintTiled()
 {
-    isTiled = false;
+    isTiled = true;
     LayoutPrint();
 }
 
