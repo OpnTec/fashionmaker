@@ -156,15 +156,13 @@ void DRW_Header::write(dxfWriter *writer, DRW::Version ver){
     case DRW::AC1018: //acad 2004
         varStr = "AC1018";
         break;
-/*    case DRW::AC1021: //acad 2007
-        varStr = "AC1021";
-        break;*/
     case DRW::AC1024: //acad 2010
         varStr = "AC1024";
         break;
     case DRW::AC1027: //acad 2013
         varStr = "AC1027";
         break;
+    case DRW::AC1021: //acad 2007
     default: //acad 2007 default version
         varStr = "AC1021";
         break;
