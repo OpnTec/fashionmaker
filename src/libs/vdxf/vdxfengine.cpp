@@ -626,7 +626,15 @@ bool VDxfEngine::ExportToAAMA(const QVector<VLayoutPiece> &details)
         const VLayoutPiece &detail = details.at(i);
 
         dx_ifaceBlock *detailBlock = new dx_ifaceBlock();
-        detailBlock->name = detail.GetName().toStdString();
+
+        QString blockName = detail.GetName();
+        if (m_version <= DRW::AC1009)
+        {
+            blockName.replace(' ', '_');
+        }
+
+        detailBlock->name = blockName.toStdString();
+        detailBlock->layer = "1";
 
         ExportAAMAOutline(detailBlock, detail);
         ExportAAMADraw(detailBlock, detail);
@@ -638,10 +646,10 @@ bool VDxfEngine::ExportToAAMA(const QVector<VLayoutPiece> &details)
         input->AddBlock(detailBlock);
 
         DRW_Insert *insert = new DRW_Insert();
-        insert->name = detail.GetName().toStdString();
+        insert->name = blockName.toStdString();
         insert->basePoint = DRW_Coord(FromPixel(detail.GetMx(), varInsunits),
                                       FromPixel(- detail.GetMy(), varInsunits), 0);
-        insert->layer = "0";
+        insert->layer = "1";
 
         input->AddEntity(insert);
     }
