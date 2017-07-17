@@ -422,15 +422,15 @@ bool dxfRW::writeDimstyle(DRW_Dimstyle *ent){
     } else
         writer->writeUtf8Caps(2, ent->name);
     writer->writeInt16(70, ent->flags);
-    if ( version == DRW::AC1009 || !(ent->dimpost.empty()) )
+    if ( version <= DRW::AC1009 || !(ent->dimpost.empty()) )
         writer->writeUtf8String(3, ent->dimpost);
-    if ( version == DRW::AC1009 || !(ent->dimapost.empty()) )
+    if ( version <= DRW::AC1009 || !(ent->dimapost.empty()) )
         writer->writeUtf8String(4, ent->dimapost);
-    if ( version == DRW::AC1009 || !(ent->dimblk.empty()) )
+    if ( version <= DRW::AC1009 || !(ent->dimblk.empty()) )
         writer->writeUtf8String(5, ent->dimblk);
-    if ( version == DRW::AC1009 || !(ent->dimblk1.empty()) )
+    if ( version <= DRW::AC1009 || !(ent->dimblk1.empty()) )
         writer->writeUtf8String(6, ent->dimblk1);
-    if ( version == DRW::AC1009 || !(ent->dimblk2.empty()) )
+    if ( version <= DRW::AC1009 || !(ent->dimblk2.empty()) )
         writer->writeUtf8String(7, ent->dimblk2);
     writer->writeDouble(40, ent->dimscale);
     writer->writeDouble(41, ent->dimasz);
