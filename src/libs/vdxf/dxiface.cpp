@@ -267,9 +267,10 @@ void dx_iface::AddAAMALayers()
     layer.color = DRW::black;
     cData.layers.push_back(layer);
 
-    layer.name = "19";// TEXT
-    layer.color = DRW::black;
-    cData.layers.push_back(layer);
+    // Optitex doesn't like this layer
+//    layer.name = "19";// TEXT
+//    layer.color = DRW::black;
+//    cData.layers.push_back(layer);
 
 //    layer.name = "26";// REF
 //    layer.color = DRW::black;

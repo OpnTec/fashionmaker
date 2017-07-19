@@ -755,7 +755,7 @@ void VDxfEngine::ExportAAMAText(dx_ifaceBlock *detailBlock, const VLayoutPiece &
     for (int i = 0; i < list.size(); ++i)
     {
         QPointF pos(startPos.x(), startPos.y() - ToPixel(AAMATextHeight, varInsunits)*(list.size() - i-1));
-        detailBlock->ent.push_back(AAMAText(pos, list.at(i), "19"));
+        detailBlock->ent.push_back(AAMAText(pos, list.at(i), "1"));
     }
 }
 
