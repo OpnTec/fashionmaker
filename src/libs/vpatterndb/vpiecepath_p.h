@@ -47,7 +47,7 @@ public:
           m_type(PiecePathType::Unknown),
           m_name(),
           m_penType(Qt::SolidLine),
-          m_cut(true)
+          m_cut(false)
     {}
 
     explicit VPiecePathData(PiecePathType type)
@@ -55,7 +55,7 @@ public:
           m_type(type),
           m_name(),
           m_penType(Qt::SolidLine),
-          m_cut(true)
+          m_cut(false)
     {}
 
     VPiecePathData(const VPiecePathData &path)

@@ -45,7 +45,7 @@ public:
     VLayoutPiecePathData()
         : m_points(),
           m_penStyle(Qt::SolidLine),
-          m_cut(true)
+          m_cut(false)
     {}
 
     VLayoutPiecePathData(const QVector<QPointF> points, bool cut, Qt::PenStyle penStyle)
