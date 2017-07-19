@@ -123,6 +123,7 @@ public:
     void AddQtLTypes();
     void AddDefLayers();
     void AddAAMALayers();
+    void AddAAMAHeaderData();
 
 private:
     Q_DISABLE_COPY(dx_iface)

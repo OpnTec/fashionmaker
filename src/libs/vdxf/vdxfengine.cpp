@@ -613,6 +613,7 @@ bool VDxfEngine::ExportToAAMA(const QVector<VLayoutPiece> &details)
     }
 
     input = QSharedPointer<dx_iface>(new dx_iface(fileName.toStdString(), m_version, varMeasurement, varInsunits));
+    input->AddAAMAHeaderData();
     if (m_version > DRW::AC1009)
     {
         input->AddDefLayers();

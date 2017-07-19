@@ -277,6 +277,11 @@ void dx_iface::AddAAMALayers()
 //    cData.layers.push_back(layer);
 }
 
+void dx_iface::AddAAMAHeaderData()
+{
+    cData.headerC.addStr("$CLAYER", "1", 8);
+}
+
 void dx_iface::AddDefLayers()
 {
     DRW_Layer defLayer;
