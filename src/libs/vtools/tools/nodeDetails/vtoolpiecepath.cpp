@@ -184,6 +184,11 @@ void VToolPiecePath::AddAttributes(VAbstractPattern *doc, QDomElement &domElemen
     doc->SetAttribute(domElement, AttrName, path.GetName());
     doc->SetAttribute(domElement, AttrType, static_cast<int>(path.GetType()));
     doc->SetAttribute(domElement, AttrTypeLine, PenStyleToLineStyle(path.GetPenType()));
+
+    if (path.GetType() == PiecePathType::InternalPath)
+    {
+        doc->SetAttribute(domElement, AttrCut, path.IsCutPath());
+    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------

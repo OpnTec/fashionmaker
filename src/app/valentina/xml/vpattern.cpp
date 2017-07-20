@@ -3249,6 +3249,7 @@ void VPattern::ParsePathElement(VMainGraphicsScene *scene, QDomElement &domEleme
         const PiecePathType type = static_cast<PiecePathType>(GetParametrUInt(domElement, AttrType, defType));
         const quint32 idTool = GetParametrUInt(domElement, VAbstractNode::AttrIdTool, NULL_ID_STR);
         const QString penType = GetParametrString(domElement, AttrTypeLine, TypeLineLine);
+        const bool cut = GetParametrBool(domElement, AttrCut, falseStr);
 
         VPiecePath path;
         const QDomElement element = domElement.firstChildElement(VAbstractPattern::TagNodes);
@@ -3260,6 +3261,7 @@ void VPattern::ParsePathElement(VMainGraphicsScene *scene, QDomElement &domEleme
         path.SetType(type);
         path.SetName(name);
         path.SetPenType(LineStyleToPenStyle(penType));
+        path.SetCutPath(cut);
 
         VToolPiecePath::Create(id, path, 0, scene, this, data, parse, Source::FromFile, "", idTool);
     }

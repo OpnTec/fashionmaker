@@ -14,7 +14,7 @@
    <string>Piece path tool</string>
   </property>
   <property name="windowIcon">
-   <iconset resource="../../../vmisc/share/resources/icon.qrc">
+   <iconset resource="../../../../vmisc/share/resources/icon.qrc">
     <normaloff>:/icon/64x64/icon64x64.png</normaloff>:/icon/64x64/icon64x64.png</iconset>
   </property>
   <layout class="QVBoxLayout" name="verticalLayout_2">
@@ -60,16 +60,6 @@
          <item row="1" column="1">
           <widget class="QComboBox" name="comboBoxType"/>
          </item>
-         <item row="3" column="0">
-          <widget class="QLabel" name="labelPiece">
-           <property name="text">
-            <string>Piece:</string>
-           </property>
-          </widget>
-         </item>
-         <item row="3" column="1">
-          <widget class="QComboBox" name="comboBoxPiece"/>
-         </item>
          <item row="2" column="0">
           <widget class="QLabel" name="labelPenType">
            <property name="text">
@@ -93,12 +83,32 @@
            </property>
           </widget>
          </item>
+         <item row="3" column="0">
+          <widget class="QLabel" name="labelPiece">
+           <property name="text">
+            <string>Piece:</string>
+           </property>
+          </widget>
+         </item>
+         <item row="3" column="1">
+          <widget class="QComboBox" name="comboBoxPiece"/>
+         </item>
         </layout>
        </item>
        <item>
         <widget class="QListWidget" name="listWidget">
          <property name="dragDropMode">
           <enum>QAbstractItemView::InternalMove</enum>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QCheckBox" name="checkBoxCut">
+         <property name="toolTip">
+          <string>The path is a cut contour</string>
+         </property>
+         <property name="text">
+          <string>Cut on fabric</string>
          </property>
         </widget>
        </item>
@@ -202,7 +212,7 @@
             <string notr="true">...</string>
            </property>
            <property name="icon">
-            <iconset resource="../../../vmisc/share/resources/icon.qrc">
+            <iconset resource="../../../../vmisc/share/resources/icon.qrc">
              <normaloff>:/icon/24x24/fx.png</normaloff>:/icon/24x24/fx.png</iconset>
            </property>
            <property name="iconSize">
@@ -219,7 +229,7 @@
             <string/>
            </property>
            <property name="pixmap">
-            <pixmap resource="../../../vmisc/share/resources/icon.qrc">:/icon/24x24/equal.png</pixmap>
+            <pixmap resource="../../../../vmisc/share/resources/icon.qrc">:/icon/24x24/equal.png</pixmap>
            </property>
           </widget>
          </item>
@@ -438,7 +448,7 @@
                <string notr="true">...</string>
               </property>
               <property name="icon">
-               <iconset resource="../../../vmisc/share/resources/icon.qrc">
+               <iconset resource="../../../../vmisc/share/resources/icon.qrc">
                 <normaloff>:/icon/24x24/fx.png</normaloff>:/icon/24x24/fx.png</iconset>
               </property>
               <property name="iconSize">
@@ -455,7 +465,7 @@
                <string/>
               </property>
               <property name="pixmap">
-               <pixmap resource="../../../vmisc/share/resources/icon.qrc">:/icon/24x24/equal.png</pixmap>
+               <pixmap resource="../../../../vmisc/share/resources/icon.qrc">:/icon/24x24/equal.png</pixmap>
               </property>
              </widget>
             </item>
@@ -637,7 +647,7 @@
                <string notr="true">...</string>
               </property>
               <property name="icon">
-               <iconset resource="../../../vmisc/share/resources/icon.qrc">
+               <iconset resource="../../../../vmisc/share/resources/icon.qrc">
                 <normaloff>:/icon/24x24/fx.png</normaloff>:/icon/24x24/fx.png</iconset>
               </property>
               <property name="iconSize">
@@ -654,7 +664,7 @@
                <string/>
               </property>
               <property name="pixmap">
-               <pixmap resource="../../../vmisc/share/resources/icon.qrc">:/icon/24x24/equal.png</pixmap>
+               <pixmap resource="../../../../vmisc/share/resources/icon.qrc">:/icon/24x24/equal.png</pixmap>
               </property>
              </widget>
             </item>
@@ -975,7 +985,7 @@
   </layout>
  </widget>
  <resources>
-  <include location="../../../vmisc/share/resources/icon.qrc"/>
+  <include location="../../../../vmisc/share/resources/icon.qrc"/>
  </resources>
  <connections>
   <connection>
@@ -1012,7 +1022,7 @@
   </connection>
  </connections>
  <buttongroups>
-  <buttongroup name="buttonGroupMarkType"/>
   <buttongroup name="buttonGroupAngleType"/>
+  <buttongroup name="buttonGroupMarkType"/>
  </buttongroups>
 </ui>

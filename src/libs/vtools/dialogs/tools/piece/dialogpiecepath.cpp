@@ -712,6 +712,7 @@ void DialogPiecePath::InitPathTab()
             [this]()
     {
         ui->comboBoxPenType->setEnabled(GetType() == PiecePathType::InternalPath);
+        ui->checkBoxCut->setEnabled(GetType() == PiecePathType::InternalPath);
         ValidObjects(PathIsValid());
     });
 
@@ -792,6 +793,7 @@ void DialogPiecePath::InitPathTypes()
     ui->comboBoxType->addItem(tr("Custom seam allowance"), static_cast<int>(PiecePathType::CustomSeamAllowance));
 
     ui->comboBoxPenType->setEnabled(GetType() == PiecePathType::InternalPath);
+    ui->checkBoxCut->setEnabled(GetType() == PiecePathType::InternalPath);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -903,6 +905,7 @@ void DialogPiecePath::SetPiecePath(const VPiecePath &path)
     SCASSERT(visPath != nullptr);
     visPath->SetPath(path);
     SetPenType(path.GetPenType());
+    SetCutPath(path.IsCutPath());
 
     ValidObjects(PathIsValid());
 
@@ -925,6 +928,7 @@ void DialogPiecePath::SetType(PiecePathType type)
     }
 
     ui->comboBoxPenType->setEnabled(type == PiecePathType::InternalPath);
+    ui->checkBoxCut->setEnabled(type == PiecePathType::InternalPath);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -938,6 +942,18 @@ void DialogPiecePath::SetPenType(const Qt::PenStyle &type)
 {
     ChangeCurrentData(ui->comboBoxPenType, PenStyleToLineStyle(type));
     vis->setLineStyle(type);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+bool DialogPiecePath::IsCutPath() const
+{
+    return ui->checkBoxCut->isChecked();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogPiecePath::SetCutPath(bool value)
+{
+    ui->checkBoxCut->setChecked(value);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -1105,6 +1121,7 @@ VPiecePath DialogPiecePath::CreatePath() const
     path.SetType(GetType());
     path.SetName(ui->lineEditName->text());
     path.SetPenType(GetType() == PiecePathType::InternalPath ? GetPenType() : Qt::SolidLine);
+    path.SetCutPath(GetType() == PiecePathType::InternalPath ? IsCutPath() : false);
 
     return path;
 }

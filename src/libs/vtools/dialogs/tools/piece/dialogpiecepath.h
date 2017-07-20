@@ -126,6 +126,9 @@ private:
     Qt::PenStyle GetPenType() const;
     void         SetPenType(const Qt::PenStyle &type);
 
+    bool IsCutPath() const;
+    void SetCutPath(bool value);
+
     QListWidgetItem *GetItemById(quint32 id);
 
     quint32 GetLastId() const;

@@ -63,6 +63,7 @@ const QString AttrDartP3      = QStringLiteral("dartP3");
 const QString AttrX           = QStringLiteral("x");
 const QString AttrY           = QStringLiteral("y");
 const QString AttrTypeLine    = QStringLiteral("typeLine");
+const QString AttrCut         = QStringLiteral("cut");
 const QString AttrLength      = QStringLiteral("length");
 const QString AttrBasePoint   = QStringLiteral("basePoint");
 const QString AttrFirstPoint  = QStringLiteral("firstPoint");

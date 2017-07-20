@@ -33,6 +33,7 @@
         <file>schema/pattern/v0.4.7.xsd</file>
         <file>schema/pattern/v0.4.8.xsd</file>
         <file>schema/pattern/v0.5.0.xsd</file>
+        <file>schema/pattern/v0.5.1.xsd</file>
         <file>schema/standard_measurements/v0.3.0.xsd</file>
         <file>schema/standard_measurements/v0.4.0.xsd</file>
         <file>schema/standard_measurements/v0.4.1.xsd</file>
