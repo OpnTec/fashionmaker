@@ -7,7 +7,7 @@
 # File with common stuff for whole project
 include(../../../common.pri)
 
-QT += printsupport
+QT += printsupport xml
 
 # Name of library
 TARGET = vdxf
