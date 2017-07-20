@@ -464,13 +464,10 @@ void MainWindowsNoGUI::ExportDetailsAsApparelLayout(const DialogSaveLayout &dial
 
     for (int i=0; i < listDetails.count(); ++i)
     {
-        QTransform moveMatrix;
-        matrix = matrix.translate(listDetails.at(i).GetMx(), listDetails.at(i).GetMy());
-        matrix = matrix.translate(-mx, -my);
-        moveMatrix *= listDetails.at(i).GetMatrix();
+        QTransform moveMatrix = listDetails[i].GetMatrix();
+        moveMatrix = moveMatrix.translate(listDetails.at(i).GetMx(), listDetails.at(i).GetMy());
+        moveMatrix = moveMatrix.translate(-mx, -my);
         listDetails[i].SetMatrix(moveMatrix);
-        listDetails[i].SetMx(listDetails.at(i).GetMx()-mx);
-        listDetails[i].SetMy(listDetails.at(i).GetMy()-my);
     }
 
     const QString name = dialog.Path() + QLatin1String("/") + dialog.FileName() + QString::number(1)

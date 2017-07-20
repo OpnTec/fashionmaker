@@ -648,8 +648,6 @@ bool VDxfEngine::ExportToAAMA(const QVector<VLayoutPiece> &details)
 
         DRW_Insert *insert = new DRW_Insert();
         insert->name = blockName.toStdString();
-        insert->basePoint = DRW_Coord(FromPixel(detail.GetMx(), varInsunits),
-                                      FromPixel(- detail.GetMy(), varInsunits), 0);
         insert->layer = "1";
 
         input->AddEntity(insert);
