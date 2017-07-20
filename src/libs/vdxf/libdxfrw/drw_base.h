@@ -272,7 +272,7 @@ public:
     {
 //        eType = DRW::LWPOLYLINE;
     }
-    DRW_Vertex2D(double sx, double sy, double b)
+    DRW_Vertex2D(double sx, double sy, double b = 0.0)
         : x(sx),
           y(sy),
           stawidth(0),

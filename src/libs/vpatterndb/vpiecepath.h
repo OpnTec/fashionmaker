@@ -78,6 +78,9 @@ public:
     Qt::PenStyle GetPenType() const;
     void         SetPenType(const Qt::PenStyle &type);
 
+    bool IsCutPath() const;
+    void SetCutPath(bool cut);
+
     QVector<QPointF>  PathPoints(const VContainer *data) const;
     QVector<VPointF>  PathNodePoints(const VContainer *data, bool showExcluded = true) const;
     QVector<VSAPoint> SeamAllowancePoints(const VContainer *data, qreal width, bool reverse) const;

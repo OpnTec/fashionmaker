@@ -4399,7 +4399,7 @@ void MainWindow::ExportLayoutAs()
             return;
         }
 
-        ExportLayout(dialog, scenes, papers, shadows, details, ignorePrinterFields, margins);
+        ExportData(QVector<VLayoutPiece>(), dialog);
     }
     catch (const VException &e)
     {

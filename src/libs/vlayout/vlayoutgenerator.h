@@ -83,7 +83,9 @@ public:
     LayoutErrors State() const;
 
     Q_REQUIRED_RESULT QList<QGraphicsItem *> GetPapersItems() const;
-    Q_REQUIRED_RESULT QList<QList<QGraphicsItem *>> GetAllDetails() const;
+    Q_REQUIRED_RESULT QList<QList<QGraphicsItem *>> GetAllDetailsItems() const;
+
+    QVector<QVector<VLayoutPiece>> GetAllDetails() const;
 
     bool GetRotate() const;
     void SetRotate(bool value);

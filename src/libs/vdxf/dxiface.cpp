@@ -25,8 +25,6 @@ dx_iface::dx_iface(const std::string &file, DRW::Version v, VarMeasurement varMe
       version(v)
 {
     InitHeader(varMeasurement, varInsunits);
-    InitLTypes();
-    InitLayers();
     InitTextstyles();
     InitAppId();
 }
@@ -192,7 +190,7 @@ void dx_iface::InitHeader(VarMeasurement varMeasurement, VarInsunits varInsunits
     }
 }
 
-void dx_iface::InitLTypes()
+void dx_iface::AddQtLTypes()
 {
     DRW_LType ltype;
     ltype.name = "DOT";
@@ -237,21 +235,60 @@ void dx_iface::InitLTypes()
     cData.lineTypes.push_back(ltype);
 }
 
-void dx_iface::InitLayers()
+void dx_iface::AddAAMALayers()
+{
+    DRW_Layer layer;
+
+    layer.name = "1";// CUT, OUTLINE
+    layer.color = DRW::black;
+    cData.layers.push_back(layer);
+
+    layer.name = "8";// DRAW, INK
+    layer.color = DRW::black;
+    cData.layers.push_back(layer);
+
+    layer.name = "7";// GRAINLINE
+    layer.color = DRW::black;
+    cData.layers.push_back(layer);
+
+//    layer.name = "6";// MIRROR LINES
+//    layer.color = DRW::black;
+//    cData.layers.push_back(layer);
+
+    layer.name = "11";// INTCUT
+    layer.color = DRW::black;
+    cData.layers.push_back(layer);
+
+//    layer.name = "13";// DRILL
+//    layer.color = DRW::black;
+//    cData.layers.push_back(layer);
+
+    layer.name = "4";// NOTCH
+    layer.color = DRW::black;
+    cData.layers.push_back(layer);
+
+    // Optitex doesn't like this layer
+//    layer.name = "19";// TEXT
+//    layer.color = DRW::black;
+//    cData.layers.push_back(layer);
+
+//    layer.name = "26";// REF
+//    layer.color = DRW::black;
+//    cData.layers.push_back(layer);
+}
+
+void dx_iface::AddAAMAHeaderData()
+{
+    cData.headerC.addStr("$CLAYER", "1", 8);
+}
+
+void dx_iface::AddDefLayers()
 {
     DRW_Layer defLayer;
     defLayer.name = "0";
     defLayer.color = DRW::black;             // default color
     defLayer.lWeight = DRW_LW_Conv::width03; // default width
-    defLayer.lineType = "CONTINUOUS";        // default line style
     cData.layers.push_back(defLayer);
-
-//    DRW_Layer mLayer;
-//    mLayer.name = "mainlayer";
-//    mLayer.color = DRW::black;      // default color
-//    mLayer.lWeight = 100;           // default width
-//    mLayer.lineType = "CONTINUOUS"; // default line style
-//    cData.lineTypes.push_back(mLayer);
 }
 
 void dx_iface::InitTextstyles()
@@ -307,6 +344,11 @@ UTF8STRING dx_iface::AddFont(const QFont &f)
     cData.textStyles.push_back(ts);
 
     return ts.name;
+}
+
+void dx_iface::AddBlock(dx_ifaceBlock *block)
+{
+    cData.blocks.push_back(block);
 }
 
 std::string dx_iface::LocaleToISO()

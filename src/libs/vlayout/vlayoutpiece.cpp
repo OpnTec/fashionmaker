@@ -68,7 +68,7 @@ QVector<VLayoutPiecePath> ConvertInternalPaths(const VPiece &piece, const VConta
         const VPiecePath path = pattern->GetPiecePath(pathsId.at(i));
         if (path.GetType() == PiecePathType::InternalPath)
         {
-            paths.append(VLayoutPiecePath(path.PathPoints(pattern), path.GetPenType()));
+            paths.append(VLayoutPiecePath(path.PathPoints(pattern), path.IsCutPath(), path.GetPenType()));
         }
     }
     return paths;
@@ -336,6 +336,20 @@ QPointF RotatePoint(const QPointF &ptCenter, const QPointF& pt, qreal dAng)
 
     return ptDest + ptCenter;
 }
+
+//---------------------------------------------------------------------------------------------------------------------
+QStringList PieceLabelText(const QVector<QPointF> &labelShape, const VTextManager &tm)
+{
+    QStringList text;
+    if (labelShape.count() > 2)
+    {
+        for (int i = 0; i < tm.GetSourceLinesCount(); ++i)
+        {
+            text.append(tm.GetSourceLine(i).m_qsText);
+        }
+    }
+    return text;
+}
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -389,7 +403,7 @@ VLayoutPiece VLayoutPiece::Create(const VPiece &piece, const VContainer *pattern
     const VPieceLabelData& data = piece.GetPatternPieceData();
     if (data.IsVisible() == true)
     {
-        det.SetDetail(piece.GetName(), data, qApp->Settings()->GetLabelFont(), pattern);
+        det.SetPieceText(piece.GetName(), data, qApp->Settings()->GetLabelFont(), pattern);
     }
 
     const VPatternLabelData& geom = piece.GetPatternInfo();
@@ -460,8 +474,27 @@ QVector<QPointF> VLayoutPiece::GetLayoutAllowancePoints() const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VLayoutPiece::SetDetail(const QString& qsName, const VPieceLabelData& data, const QFont &font,
-                             const VContainer *pattern)
+QPointF VLayoutPiece::GetPieceTextPosition() const
+{
+    if (d->detailLabel.count() > 2)
+    {
+        return d->matrix.map(d->detailLabel.first());
+    }
+    else
+    {
+        return QPointF();
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QStringList VLayoutPiece::GetPieceText() const
+{
+    return PieceLabelText(d->detailLabel, d->m_tmDetail);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VLayoutPiece::SetPieceText(const QString& qsName, const VPieceLabelData& data, const QFont &font,
+                                const VContainer *pattern)
 {
     QPointF ptPos;
     qreal labelWidth = 0;
@@ -499,6 +532,25 @@ void VLayoutPiece::SetDetail(const QString& qsName, const VPieceLabelData& data,
     // this will generate the lines of text
     d->m_tmDetail.SetFontSize(data.GetFontSize());
     d->m_tmDetail.FitFontSize(labelWidth, labelHeight);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QPointF VLayoutPiece::GetPatternTextPosition() const
+{
+    if (d->patternInfo.count() > 2)
+    {
+        return d->matrix.map(d->patternInfo.first());
+    }
+    else
+    {
+        return QPointF();
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QStringList VLayoutPiece::GetPatternText() const
+{
+    return PieceLabelText(d->patternInfo, d->m_tmPattern);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -584,6 +636,12 @@ void VLayoutPiece::SetGrainline(const VGrainlineData& geom, const VContainer* pa
 
     QScopedPointer<QGraphicsItem> item(GetMainPathItem());
     d->grainlinePoints = CorrectPosition(item->boundingRect(), RoundPoints(v));
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QVector<QPointF> VLayoutPiece::GetGrainline() const
+{
+    return Map(d->grainlinePoints);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -804,6 +862,22 @@ void VLayoutPiece::SetPassmarks(const QVector<QLineF> &passmarks)
     {
         d->passmarks = passmarks;
     }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QVector<QVector<QPointF> > VLayoutPiece::InternalPathsForCut(bool cut) const
+{
+    QVector<QVector<QPointF> > paths;
+
+    for (int i=0;i < d->m_internalPaths.count(); ++i)
+    {
+        if (d->m_internalPaths.at(i).IsCutPath() == cut)
+        {
+            paths.append(Map(d->m_internalPaths.at(i).Points()));
+        }
+    }
+
+    return paths;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -1059,7 +1133,7 @@ void VLayoutPiece::CreateGrainlineItem(QGraphicsItem *parent) const
 
     QPainterPath path;
 
-    QVector<QPointF> gPoints = Map(d->grainlinePoints);
+    QVector<QPointF> gPoints = GetGrainline();
     path.moveTo(gPoints.at(0));
     for (int i = 1; i < gPoints.count(); ++i)
     {

@@ -422,15 +422,15 @@ bool dxfRW::writeDimstyle(DRW_Dimstyle *ent){
     } else
         writer->writeUtf8Caps(2, ent->name);
     writer->writeInt16(70, ent->flags);
-    if ( version == DRW::AC1009 || !(ent->dimpost.empty()) )
+    if ( version <= DRW::AC1009 || !(ent->dimpost.empty()) )
         writer->writeUtf8String(3, ent->dimpost);
-    if ( version == DRW::AC1009 || !(ent->dimapost.empty()) )
+    if ( version <= DRW::AC1009 || !(ent->dimapost.empty()) )
         writer->writeUtf8String(4, ent->dimapost);
-    if ( version == DRW::AC1009 || !(ent->dimblk.empty()) )
+    if ( version <= DRW::AC1009 || !(ent->dimblk.empty()) )
         writer->writeUtf8String(5, ent->dimblk);
-    if ( version == DRW::AC1009 || !(ent->dimblk1.empty()) )
+    if ( version <= DRW::AC1009 || !(ent->dimblk1.empty()) )
         writer->writeUtf8String(6, ent->dimblk1);
-    if ( version == DRW::AC1009 || !(ent->dimblk2.empty()) )
+    if ( version <= DRW::AC1009 || !(ent->dimblk2.empty()) )
         writer->writeUtf8String(7, ent->dimblk2);
     writer->writeDouble(40, ent->dimscale);
     writer->writeDouble(41, ent->dimasz);
@@ -1343,7 +1343,7 @@ bool dxfRW::writeBlock(DRW_Block *bk){
             }
             writer->writeString(100, "AcDbEntity");
         }
-        writer->writeString(8, "0");
+        writer->writeString(8, bk->layer);
         if (version > DRW::AC1009) {
             writer->writeString(100, "AcDbBlockEnd");
         }
@@ -1358,7 +1358,7 @@ bool dxfRW::writeBlock(DRW_Block *bk){
         }
         writer->writeString(100, "AcDbEntity");
     }
-    writer->writeString(8, "0");
+    writer->writeString(8, bk->layer);
     if (version > DRW::AC1009) {
         writer->writeString(100, "AcDbBlockBegin");
         writer->writeUtf8String(2, bk->name);
@@ -1478,7 +1478,7 @@ bool dxfRW::writeTables() {
     writer->writeInt16(70, 1); //end table def
     wlayer0 =false;
     iface->writeLayers();
-    if (!wlayer0) {
+    if (!wlayer0 && version > DRW::AC1009) {
         DRW_Layer lay0;
         lay0.name = "0";
         writeLayer(&lay0);
