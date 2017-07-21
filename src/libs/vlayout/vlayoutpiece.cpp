@@ -299,16 +299,6 @@ QVector<QPointF> CorrectPosition(const QRectF &parentBoundingRect, QVector<QPoin
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QVector<QPointF> RoundPoints(QVector<QPointF> points)
-{
-    for (int i=0; i < points.size(); ++i)
-    {
-        points[i] = QPointF(qRound(points.at(i).x()), qRound(points.at(i).y()));
-    }
-    return points;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
 QVector<VSAPoint> PrepareAllowance(const QVector<QPointF> &points)
 {
     QVector<VSAPoint> allowancePoints;
@@ -436,7 +426,7 @@ QVector<QPointF> VLayoutPiece::GetContourPoints() const
 //---------------------------------------------------------------------------------------------------------------------
 void VLayoutPiece::SetCountourPoints(const QVector<QPointF> &points, bool hideMainPath)
 {
-    d->contour = RemoveDublicates(RoundPoints(points), false);
+    d->contour = RemoveDublicates(points, false);
     SetHideMainPath(hideMainPath);
 }
 
@@ -457,7 +447,7 @@ void VLayoutPiece::SetSeamAllowancePoints(const QVector<QPointF> &points, bool s
         d->seamAllowance = points;
         if (not d->seamAllowance.isEmpty())
         {
-            d->seamAllowance = RemoveDublicates(RoundPoints(d->seamAllowance), false);
+            d->seamAllowance = RemoveDublicates(d->seamAllowance, false);
         }
         else if (not IsSeamAllowanceBuiltIn())
         {
@@ -523,7 +513,7 @@ void VLayoutPiece::SetPieceText(const QString& qsName, const VPieceLabelData& da
     }
 
     QScopedPointer<QGraphicsItem> item(GetMainPathItem());
-    d->detailLabel = CorrectPosition(item->boundingRect(), RoundPoints(v));
+    d->detailLabel = CorrectPosition(item->boundingRect(), v);
 
     // generate text
     d->m_tmDetail.SetFont(font);
@@ -582,7 +572,7 @@ void VLayoutPiece::SetPatternInfo(const VAbstractPattern* pDoc, const VPatternLa
         v[i] = RotatePoint(ptCenter, v.at(i), dAng);
     }
     QScopedPointer<QGraphicsItem> item(GetMainPathItem());
-    d->patternInfo = CorrectPosition(item->boundingRect(), RoundPoints(v));
+    d->patternInfo = CorrectPosition(item->boundingRect(), v);
 
     // Generate text
     d->m_tmPattern.SetFont(font);
@@ -635,7 +625,7 @@ void VLayoutPiece::SetGrainline(const VGrainlineData& geom, const VContainer* pa
     }
 
     QScopedPointer<QGraphicsItem> item(GetMainPathItem());
-    d->grainlinePoints = CorrectPosition(item->boundingRect(), RoundPoints(v));
+    d->grainlinePoints = CorrectPosition(item->boundingRect(), v);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
