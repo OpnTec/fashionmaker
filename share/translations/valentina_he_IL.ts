@@ -1651,6 +1651,14 @@
         <source>Invalid result. Value is infinite or NaN. Please, check your calculations.</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Refresh a pattern with all changes you made</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Refresh</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>DialogInsertNode</name>
@@ -2783,6 +2791,14 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Each point in the &lt;b&gt;custom seam allowance&lt;/b&gt; path must be unique!</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>The path is a cut contour</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Cut on fabric</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -4907,10 +4923,6 @@ Do you want to save your changes?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Please, additionaly provide: %1</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Measurement files types have not match.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -5360,6 +5372,10 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Couldn&apos;t set height. Need a file with multisize measurements.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Please, additionally provide: %1</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

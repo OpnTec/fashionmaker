@@ -529,7 +529,7 @@ void MainWindow::CheckRequiredMeasurements(const VMeasurements *m)
         }
 
         VException e(tr("Measurement file doesn't include all required measurements."));
-        e.AddMoreInformation(tr("Please, additionaly provide: %1").arg(QStringList(list).join(", ")));
+        e.AddMoreInformation(tr("Please, additionally provide: %1").arg(QStringList(list).join(", ")));
         throw e;
     }
 }

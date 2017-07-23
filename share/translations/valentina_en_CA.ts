@@ -2466,6 +2466,14 @@
         <source>Invalid result. Value is infinite or NaN. Please, check your calculations.</source>
         <translation>Invalid result. Value is infinite or NaN. Please, check your calculations.</translation>
     </message>
+    <message>
+        <source>Refresh a pattern with all changes you made</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Refresh</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>DialogInsertNode</name>
@@ -3879,6 +3887,14 @@ Apply settings anyway?</translation>
     <message>
         <source>Each point in the &lt;b&gt;custom seam allowance&lt;/b&gt; path must be unique!</source>
         <translation>Each point in the &lt;b&gt;custom seam allowance&lt;/b&gt; path must be unique!</translation>
+    </message>
+    <message>
+        <source>The path is a cut contour</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Cut on fabric</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -6477,7 +6493,7 @@ Do you want to save your changes?</translation>
     </message>
     <message>
         <source>Please, additionaly provide: %1</source>
-        <translation>Please, additionaly provide: %1</translation>
+        <translation type="vanished">Please, additionaly provide: %1</translation>
     </message>
     <message>
         <source>Measurement files types have not match.</source>
@@ -6981,6 +6997,10 @@ Do you want to save your changes?</translation>
     </message>
     <message>
         <source>Couldn&apos;t set height. Need a file with multisize measurements.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Please, additionally provide: %1</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -8485,10 +8505,6 @@ Do you want to save your changes?</translation>
     <message>
         <source>Invalid result. Value is infinite or NaN. Please, check your calculations.</source>
         <translation>Invalid result. Value is infinite or NaN. Please, check your calculations.</translation>
-    </message>
-    <message>
-        <source>Export from standard measurements is not supported.</source>
-        <translation type="vanished">Export from standard measurements is not supported.</translation>
     </message>
     <message>
         <source>Empty</source>

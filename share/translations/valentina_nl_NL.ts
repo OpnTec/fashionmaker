@@ -2466,6 +2466,14 @@
         <source>Invalid result. Value is infinite or NaN. Please, check your calculations.</source>
         <translation>Ongeldig resultaat. Waarde is oneindig of NaN. Controleer uw berekeningen.</translation>
     </message>
+    <message>
+        <source>Refresh a pattern with all changes you made</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Refresh</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>DialogInsertNode</name>
@@ -3878,6 +3886,14 @@ Toch de instellingen aanpassen?</translation>
     </message>
     <message>
         <source>Each point in the &lt;b&gt;custom seam allowance&lt;/b&gt; path must be unique!</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>The path is a cut contour</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Cut on fabric</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -6476,7 +6492,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Please, additionaly provide: %1</source>
-        <translation>Alstublieft, extra voorzien van: %1</translation>
+        <translation type="vanished">Alstublieft, extra voorzien van: %1</translation>
     </message>
     <message>
         <source>Measurement files types have not match.</source>
@@ -6980,6 +6996,10 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Couldn&apos;t set height. Need a file with multisize measurements.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Please, additionally provide: %1</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -8484,10 +8504,6 @@ Wil je deze veranderingen opslaan?</translation>
     <message>
         <source>Invalid result. Value is infinite or NaN. Please, check your calculations.</source>
         <translation>Ongeldig resultaat. Waarde is oneindig of NaN. Controleer uw berekeningen.</translation>
-    </message>
-    <message>
-        <source>Export from standard measurements is not supported.</source>
-        <translation type="vanished">Export van standaard maten wordt niet ondersteunt.</translation>
     </message>
     <message>
         <source>Empty</source>

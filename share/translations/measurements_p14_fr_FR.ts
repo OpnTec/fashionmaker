@@ -1002,7 +1002,7 @@
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="651"/>
         <source>neck_arc_f</source>
         <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
-        <translation>encolure</translation>
+        <translation>encolure_dev</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="653"/>
@@ -1014,25 +1014,25 @@
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="654"/>
         <source>From Neck Side to Neck Side through Neck Front.</source>
         <comment>Full measurement description.</comment>
-        <translation>Demi encolure devant, d&apos;un coté à l&apos;autre.</translation>
+        <translation>Encolure devant, d&apos;un coté à l&apos;autre.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="658"/>
         <source>highbust_arc_f</source>
         <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
-        <translation>demi_tour_surpoitrinaire</translation>
+        <translation>demi_tour_surpoitrinaire_dev</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="660"/>
         <source>Highbust arc, front</source>
         <comment>Full measurement name.</comment>
-        <translation>arc_sur_poitrinaire</translation>
+        <translation>Arc Sur-Poitrinaire, devant</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="661"/>
         <source>From Highbust Side (Armpit) to HIghbust Side (Armpit) across chest.</source>
         <comment>Full measurement description.</comment>
-        <translation>De chaque pli du bras par la carrure devant</translation>
+        <translation>A partir du pli du bras (aisselle) jusqu&apos;à l&apos;autre (aisselle) par la poitrine.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="665"/>
@@ -1050,7 +1050,7 @@
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="668"/>
         <source>From Bust Side to Bust Side across chest.</source>
         <comment>Full measurement description.</comment>
-        <translation>De chaque coté de la poitrine par la carrure devant.</translation>
+        <translation>D&apos;un côté du Buste à l&apos;autre en passant par la poitrine.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="672"/>
