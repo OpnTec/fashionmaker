@@ -170,6 +170,7 @@ public:
     void               ClearCalculationGObjects();
     void               ClearVariables(const VarType &type = VarType::Unknown);
     static void        ClearUniqueNames();
+    static void        ClearUniqueIncrementNames();
 
     static void        SetSize(qreal size);
     static void        SetHeight(qreal height);

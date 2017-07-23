@@ -418,6 +418,77 @@ bool VPattern::SaveDocument(const QString &fileName, QString &error)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void VPattern::LiteParseIncrements()
+{
+    try
+    {
+        emit SetEnabledGUI(true);
+
+        VContainer::ClearUniqueIncrementNames();
+        data->ClearVariables(VarType::Increment);
+
+        const QDomNodeList tags = elementsByTagName(TagIncrements);
+        if (not tags.isEmpty())
+        {
+            const QDomNode domElement = tags.at(0);
+            if (not domElement.isNull())
+            {
+                ParseIncrementsElement(domElement);
+            }
+        }
+    }
+    catch (const VExceptionUndo &e)
+    {
+        Q_UNUSED(e)
+        /* If user want undo last operation before undo we need finish broken redo operation. For those we post event
+         * myself. Later in method customEvent call undo.*/
+        QApplication::postEvent(this, new UndoEvent());
+        return;
+    }
+    catch (const VExceptionObjectError &e)
+    {
+        qCCritical(vXML, "%s\n\n%s\n\n%s", qUtf8Printable(tr("Error parsing file.")), //-V807
+                   qUtf8Printable(e.ErrorMessage()), qUtf8Printable(e.DetailedInformation()));
+        emit SetEnabledGUI(false);
+        return;
+    }
+    catch (const VExceptionConversionError &e)
+    {
+        qCCritical(vXML, "%s\n\n%s\n\n%s", qUtf8Printable(tr("Error can't convert value.")),
+                   qUtf8Printable(e.ErrorMessage()), qUtf8Printable(e.DetailedInformation()));
+        emit SetEnabledGUI(false);
+        return;
+    }
+    catch (const VExceptionEmptyParameter &e)
+    {
+        qCCritical(vXML, "%s\n\n%s\n\n%s", qUtf8Printable(tr("Error empty parameter.")),
+                   qUtf8Printable(e.ErrorMessage()), qUtf8Printable(e.DetailedInformation()));
+        emit SetEnabledGUI(false);
+        return;
+    }
+    catch (const VExceptionWrongId &e)
+    {
+        qCCritical(vXML, "%s\n\n%s\n\n%s", qUtf8Printable(tr("Error wrong id.")),
+                   qUtf8Printable(e.ErrorMessage()), qUtf8Printable(e.DetailedInformation()));
+        emit SetEnabledGUI(false);
+        return;
+    }
+    catch (VException &e)
+    {
+        qCCritical(vXML, "%s\n\n%s\n\n%s", qUtf8Printable(tr("Error parsing file.")),
+                   qUtf8Printable(e.ErrorMessage()), qUtf8Printable(e.DetailedInformation()));
+        emit SetEnabledGUI(false);
+        return;
+    }
+    catch (const std::bad_alloc &)
+    {
+        qCCritical(vXML, "%s", qUtf8Printable(tr("Error parsing file (std::bad_alloc).")));
+        emit SetEnabledGUI(false);
+        return;
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 /**
  * @brief LiteParseTree lite parse file.
  */

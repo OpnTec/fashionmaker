@@ -94,6 +94,8 @@ public:
     bool IsReadOnly() const;
     void SetReadOnly(bool rOnly);
 
+    void LiteParseIncrements();
+
     static const QString AttrReadOnly;
 
 public slots:

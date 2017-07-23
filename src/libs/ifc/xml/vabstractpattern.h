@@ -68,6 +68,7 @@ public:
     virtual ~VAbstractPattern() Q_DECL_EQ_DEFAULT;
 
     QStringList    ListMeasurements() const;
+    QStringList    ListExpressions() const;
 
     virtual void   CreateEmptyFile()=0;
 
@@ -387,7 +388,6 @@ private:
     Q_DISABLE_COPY(VAbstractPattern)
 
     QStringList ListIncrements() const;
-    QStringList ListExpressions() const;
     QStringList ListPointExpressions() const;
     QStringList ListArcExpressions() const;
     QStringList ListElArcExpressions() const;

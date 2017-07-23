@@ -59,7 +59,8 @@ DialogIncrements::DialogIncrements(VContainer *data, VPattern *doc, QWidget *par
       data(data),
       doc(doc),
       formulaBaseHeight(0),
-      search()
+      search(),
+      hasChanges(false)
 {
     ui->setupUi(this);
 
@@ -87,7 +88,6 @@ DialogIncrements::DialogIncrements(VContainer *data, VPattern *doc, QWidget *par
     FillRadiusesArcs();
     FillAnglesCurves();
 
-    connect(this, &DialogIncrements::FullUpdateTree, this->doc, &VPattern::LiteParseTree);
     connect(this->doc, &VPattern::FullUpdateFromFile, this, &DialogIncrements::FullUpdateFromFile);
 
     ui->tabWidget->setCurrentIndex(0);
@@ -109,6 +109,7 @@ DialogIncrements::DialogIncrements(VContainer *data, VPattern *doc, QWidget *par
     connect(ui->lineEditFind, &QLineEdit::textEdited, this, [this](const QString &term){search->Find(term);});
     connect(ui->toolButtonFindPrevious, &QToolButton::clicked, this, [this](){search->FindPrevious();});
     connect(ui->toolButtonFindNext, &QToolButton::clicked, this, [this](){search->FindNext();});
+    connect(ui->pushButtonRefresh, &QPushButton::clicked, this, &DialogIncrements::RefreshPattern);
 
     connect(search.data(), &VTableSearch::HasResult, this, [this] (bool state)
     {
@@ -378,7 +379,10 @@ void DialogIncrements::Controls()
 {
     if (ui->tableWidgetIncrement->rowCount() > 0)
     {
-        ui->toolButtonRemove->setEnabled(true);
+        const QTableWidgetItem *nameField = ui->tableWidgetIncrement->item(ui->tableWidgetIncrement->currentRow(), 0);
+        SCASSERT(nameField != nullptr)
+
+        ui->toolButtonRemove->setEnabled(not IncrementUsed(nameField->text()));
     }
     else
     {
@@ -451,10 +455,15 @@ void DialogIncrements::EnableDetails(bool enabled)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-/**
- * @brief FullUpdateFromFile update information in tables form file
- */
-void DialogIncrements::FullUpdateFromFile()
+void DialogIncrements::LocalUpdateTree()
+{
+    doc->LiteParseIncrements();
+
+    UpdateTree();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogIncrements::UpdateTree()
 {
     ui->tableWidgetLines->clearContents();
     ui->tableWidgetSplines->clearContents();
@@ -471,6 +480,49 @@ void DialogIncrements::FullUpdateFromFile()
     FillAnglesCurves();
 
     search->RefreshList(ui->lineEditFind->text());
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+bool DialogIncrements::IncrementUsed(const QString &name) const
+{
+    const QStringList expressions = doc->ListExpressions();
+
+    for(int i = 0; i < expressions.size(); ++i)
+    {
+        if (expressions.at(i).indexOf(name) != -1)
+        {
+            return true;
+        }
+    }
+    return false;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief FullUpdateFromFile update information in tables form file
+ */
+void DialogIncrements::FullUpdateFromFile()
+{
+    hasChanges = false;
+
+    UpdateTree();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogIncrements::RefreshPattern()
+{
+    if (hasChanges)
+    {
+        const int row = ui->tableWidgetIncrement->currentRow();
+
+        doc->LiteParseTree(Document::LiteParse);
+
+        ui->tableWidgetIncrement->blockSignals(true);
+        ui->tableWidgetIncrement->selectRow(row);
+        ui->tableWidgetIncrement->blockSignals(false);
+
+        hasChanges = false;
+    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -496,7 +548,9 @@ void DialogIncrements::AddIncrement()
         doc->AddEmptyIncrementAfter(nameField->text(), name);
     }
 
-    FullUpdateTree(Document::LiteParse);
+    hasChanges = true;
+    LocalUpdateTree();
+
     ui->tableWidgetIncrement->selectRow(currentRow);
 }
 
@@ -516,7 +570,8 @@ void DialogIncrements::RemoveIncrement()
     const QTableWidgetItem *nameField = ui->tableWidgetIncrement->item(row, 0);
     doc->RemoveIncrement(nameField->text());
 
-    FullUpdateTree(Document::LiteParse);
+    hasChanges = true;
+    LocalUpdateTree();
 
     if (ui->tableWidgetIncrement->rowCount() > 0)
     {
@@ -540,7 +595,10 @@ void DialogIncrements::MoveUp()
 
     const QTableWidgetItem *nameField = ui->tableWidgetIncrement->item(row, 0);
     doc->MoveUpIncrement(nameField->text());
-    FullUpdateTree(Document::LiteParse);
+
+    hasChanges = true;
+    LocalUpdateTree();
+
     ui->tableWidgetIncrement->selectRow(row-1);
 }
 
@@ -556,7 +614,10 @@ void DialogIncrements::MoveDown()
 
     const QTableWidgetItem *nameField = ui->tableWidgetIncrement->item(row, 0);
     doc->MoveDownIncrement(nameField->text());
-    FullUpdateTree(Document::LiteParse);
+
+    hasChanges = true;
+    LocalUpdateTree();
+
     ui->tableWidgetIncrement->selectRow(row+1);
 }
 
@@ -587,7 +648,10 @@ void DialogIncrements::SaveIncrName(const QString &text)
     }
 
     doc->SetIncrementName(nameField->text(), newName);
-    FullUpdateTree(Document::LiteParse);
+
+    hasChanges = true;
+    LocalUpdateTree();
+
     ui->tableWidgetIncrement->blockSignals(true);
     ui->tableWidgetIncrement->selectRow(row);
     ui->tableWidgetIncrement->blockSignals(false);
@@ -606,7 +670,7 @@ void DialogIncrements::SaveIncrDescription()
     const QTableWidgetItem *nameField = ui->tableWidgetIncrement->item(row, 0);
     doc->SetIncrementDescription(nameField->text(), ui->plainTextEditDescription->toPlainText());
 
-    FullUpdateTree(Document::LiteParse);
+    LocalUpdateTree();
 
     const QTextCursor cursor = ui->plainTextEditDescription->textCursor();
     ui->tableWidgetIncrement->blockSignals(true);
@@ -666,7 +730,8 @@ void DialogIncrements::SaveIncrFormula()
         return;
     }
 
-    FullUpdateTree(Document::LiteParse);
+    hasChanges = true;
+    LocalUpdateTree();
 
     const QTextCursor cursor = ui->plainTextEditFormula->textCursor();
     ui->tableWidgetIncrement->blockSignals(true);
@@ -734,7 +799,10 @@ void DialogIncrements::Fx()
         // Because of the bug need to take QTableWidgetItem twice time. Previous update "killed" the pointer.
         const QTableWidgetItem *nameField = ui->tableWidgetIncrement->item(row, 0);
         doc->SetIncrementFormula(nameField->text(), dialog->GetFormula());
-        FullUpdateTree(Document::LiteParse);
+
+        hasChanges = true;
+        LocalUpdateTree();
+
         ui->tableWidgetIncrement->selectRow(row);
     }
     delete dialog;
@@ -743,6 +811,8 @@ void DialogIncrements::Fx()
 //---------------------------------------------------------------------------------------------------------------------
 void DialogIncrements::closeEvent(QCloseEvent *event)
 {
+    RefreshPattern();
+
     ui->plainTextEditFormula->blockSignals(true);
     ui->lineEditName->blockSignals(true);
     ui->plainTextEditDescription->blockSignals(true);
@@ -819,6 +889,7 @@ void DialogIncrements::ShowIncrementDetails()
         ui->lineEditName->blockSignals(true);
         ui->lineEditName->setText(ClearIncrementName(incr->GetName()));
         ui->lineEditName->blockSignals(false);
+        ui->lineEditName->setReadOnly(IncrementUsed(incr->GetName()));
 
         ui->plainTextEditDescription->blockSignals(true);
         ui->plainTextEditDescription->setPlainText(incr->GetDescription());

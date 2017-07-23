@@ -50,12 +50,6 @@ public:
      DialogIncrements(VContainer *data, VPattern *doc, QWidget *parent = nullptr);
      virtual ~DialogIncrements() Q_DECL_OVERRIDE;
 
-signals:
-    /**
-     * @brief FullUpdateTree signal update data for dom document
-     */
-    void                 FullUpdateTree(const Document &parse);
-
 protected:
     virtual void closeEvent ( QCloseEvent * event ) Q_DECL_OVERRIDE;
     virtual void changeEvent ( QEvent * event) Q_DECL_OVERRIDE;
@@ -72,6 +66,7 @@ private slots:
     void DeployFormula();
     void Fx();
     void FullUpdateFromFile();
+    void RefreshPattern();
 
 private:
     Q_DISABLE_COPY(DialogIncrements)
@@ -88,6 +83,8 @@ private:
     int                  formulaBaseHeight;
 
     QSharedPointer<VTableSearch> search;
+
+    bool hasChanges;
 
     template <typename T>
     void                 FillTable(const QMap<QString, T> &varTable, QTableWidget *table);
@@ -111,6 +108,11 @@ private:
     bool    EvalIncrementFormula(const QString &formula, bool fromUser, VContainer *data, QLabel *label);
     void    Controls();
     void    EnableDetails(bool enabled);
+
+    void LocalUpdateTree();
+    void UpdateTree();
+
+    bool IncrementUsed(const QString &name) const;
 };
 
 #endif // DIALOGINCREMENTS_H
