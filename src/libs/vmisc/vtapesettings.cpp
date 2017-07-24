@@ -36,7 +36,7 @@
 const QString settingDataBaseGeometry = QStringLiteral("database/geometry");
 
 const QString settingDefHeight = QStringLiteral("gradation/defHeight");
-const QString settingDefSize   = QStringLiteral("gradation/defHeight");
+const QString settingDefSize   = QStringLiteral("gradation/defSize");
 
 //---------------------------------------------------------------------------------------------------------------------
 VTapeSettings::VTapeSettings(Format format, Scope scope, const QString &organization, const QString &application,
