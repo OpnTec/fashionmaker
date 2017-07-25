@@ -130,7 +130,6 @@ public:
     bool isNull() const;
     qint64 Square() const;
     QPainterPath ContourPath() const;
-    QPainterPath MainPath() const;
 
     QPainterPath LayoutAllowancePath() const;
     Q_REQUIRED_RESULT QGraphicsItem *GetItem(bool textAsPaths) const;

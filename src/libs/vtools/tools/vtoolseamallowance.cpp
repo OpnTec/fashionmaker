@@ -805,6 +805,13 @@ void VToolSeamAllowance::paint(QPainter *painter, const QStyleOptionGraphicsItem
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+QRectF VToolSeamAllowance::boundingRect() const
+{
+    const VPiece detail = VAbstractTool::data.GetPiece(id);
+    return detail.MainPathPath(this->getData()).boundingRect();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 void VToolSeamAllowance::AddToFile()
 {
     const VPiece piece = VAbstractTool::data.GetPiece(id);

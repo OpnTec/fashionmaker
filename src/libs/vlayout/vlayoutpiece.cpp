@@ -907,7 +907,20 @@ QVector<T> VLayoutPiece::Map(const QVector<T> &points) const
 //---------------------------------------------------------------------------------------------------------------------
 QPainterPath VLayoutPiece::ContourPath() const
 {
-    QPainterPath path = MainPath();
+    QPainterPath path;
+
+    // contour
+    QVector<QPointF> points = GetContourPoints();
+
+    if (not IsHideMainPath() || not IsSeamAllowance() || IsSeamAllowanceBuiltIn())
+    {
+        path.moveTo(points.at(0));
+        for (qint32 i = 1; i < points.count(); ++i)
+        {
+            path.lineTo(points.at(i));
+        }
+        path.lineTo(points.at(0));
+    }
 
     // seam allowance
     if (IsSeamAllowance())
@@ -943,27 +956,6 @@ QPainterPath VLayoutPiece::ContourPath() const
 
         path.addPath(passmaksPath);
         path.setFillRule(Qt::WindingFill);
-    }
-
-    return path;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-QPainterPath VLayoutPiece::MainPath() const
-{
-    QPainterPath path;
-
-    // contour
-    QVector<QPointF> points = GetContourPoints();
-
-    if (not IsHideMainPath() || not IsSeamAllowance() || IsSeamAllowanceBuiltIn())
-    {
-        path.moveTo(points.at(0));
-        for (qint32 i = 1; i < points.count(); ++i)
-        {
-            path.lineTo(points.at(i));
-        }
-        path.lineTo(points.at(0));
     }
 
     return path;
@@ -1157,7 +1149,20 @@ QGraphicsPathItem *VLayoutPiece::GetMainItem() const
 QGraphicsPathItem *VLayoutPiece::GetMainPathItem() const
 {
     QGraphicsPathItem *item = new QGraphicsPathItem();
-    item->setPath(MainPath());
+
+    QPainterPath path;
+
+    // contour
+    QVector<QPointF> points = GetContourPoints();
+
+    path.moveTo(points.at(0));
+    for (qint32 i = 1; i < points.count(); ++i)
+    {
+        path.lineTo(points.at(i));
+    }
+    path.lineTo(points.at(0));
+
+    item->setPath(path);
     return item;
 }
 
