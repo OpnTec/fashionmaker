@@ -150,8 +150,8 @@ fi
 %dir %{_datadir}/%{name}/translations
 %{_datadir}/%{name}/translations/*.qm
 %dir %{_datadir}/%{name}/tables
-%dir %{_datadir}/%{name}/tables/standard
-%{_datadir}/%{name}/tables/standard/*.vst
+%dir %{_datadir}/%{name}/tables/multisize
+%{_datadir}/%{name}/tables/multisize/*.vst
 %dir %{_datadir}/%{name}/tables/templates
 %{_datadir}/%{name}/tables/templates/*.vit
 
