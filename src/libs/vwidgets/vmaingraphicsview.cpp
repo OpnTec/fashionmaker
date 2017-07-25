@@ -445,8 +445,8 @@ void VMainGraphicsView::mousePressEvent(QMouseEvent *event)
                 {
                     if (this->scene()->items().contains(list.at(i)))
                     {
-                        if (list.at(i)->type() <= VSimpleCurve::Type &&
-                            list.at(i)->type() > QGraphicsItem::UserType)
+                        if (list.at(i)->type() > QGraphicsItem::UserType &&
+                            list.at(i)->type() <= VSimpleCurve::Type)
                         {
                             emit itemClicked(list.at(i));
                             break;
