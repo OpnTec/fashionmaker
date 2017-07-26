@@ -40,7 +40,7 @@
 #include <QtDebug>
 #include <QRegularExpression>
 
-const QString baseFilenameRegExp = QStringLiteral("^[\\w\\-. ]+$");
+const QString baseFilenameRegExp = QStringLiteral("^[\\p{L}\\p{Nd}\\-. _]+$");
 
 bool DialogSaveLayout::havePdf = false;
 bool DialogSaveLayout::tested  = false;
