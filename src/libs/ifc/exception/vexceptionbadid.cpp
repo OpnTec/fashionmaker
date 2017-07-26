@@ -79,11 +79,11 @@ QString VExceptionBadId::ErrorMessage() const
     QString error;
     if (key.isEmpty())
     {
-        error = QString("ExceptionBadId: %1, id = %2").arg(error).arg(id);
+        error = QString("ExceptionBadId: %1, id = %2").arg(this->error).arg(id);
     }
     else
     {
-        error = QString("ExceptionBadId: %1, id = %2").arg(error).arg(key);
+        error = QString("ExceptionBadId: %1, id = %2").arg(this->error).arg(key);
     }
     return error;
 }
