@@ -39,6 +39,7 @@
 - Fixed Valentina crash. Used way to avoid Qt's bug QTBUG-61213.
 - Fixed behaviour on Windows. Valentina asks about synchronization measurements twice.
 - Fixed bug. Tape app saved default size value in wrong place.
+- [#737] Valentina produces corrupted file if unite two pieces with pins.
 
 # Version 0.5.0 May 9, 2017
 - [#581] User can now filter input lists by keyword in function wizard.
