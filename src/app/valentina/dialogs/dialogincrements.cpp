@@ -865,6 +865,44 @@ bool DialogIncrements::eventFilter(QObject *object, QEvent *event)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void DialogIncrements::showEvent(QShowEvent *event)
+{
+    // Skip DialogTool implementation
+    QDialog::showEvent(event);
+    if ( event->spontaneous() )
+    {
+        return;
+    }
+
+    if (isInitialized)
+    {
+        return;
+    }
+    // do your init stuff here
+
+    const QSize sz = qApp->Settings()->GetIncrementsDialogSize();
+    if (not sz.isEmpty())
+    {
+        resize(sz);
+    }
+
+    isInitialized = true;//first show windows are held
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogIncrements::resizeEvent(QResizeEvent *event)
+{
+    // remember the size for the next time this dialog is opened, but only
+    // if widget was already initialized, which rules out the resize at
+    // dialog creating, which would
+    if (isInitialized)
+    {
+        qApp->Settings()->SetIncrementsDialogSize(size());
+    }
+    DialogTool::resizeEvent(event);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 void DialogIncrements::ShowIncrementDetails()
 {
     if (ui->tableWidgetIncrement->rowCount() > 0)

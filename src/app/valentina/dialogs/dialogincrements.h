@@ -47,13 +47,15 @@ class DialogIncrements : public DialogTool
 {
     Q_OBJECT
 public:
-     DialogIncrements(VContainer *data, VPattern *doc, QWidget *parent = nullptr);
-     virtual ~DialogIncrements() Q_DECL_OVERRIDE;
+    DialogIncrements(VContainer *data, VPattern *doc, QWidget *parent = nullptr);
+    virtual ~DialogIncrements() Q_DECL_OVERRIDE;
 
 protected:
     virtual void closeEvent ( QCloseEvent * event ) Q_DECL_OVERRIDE;
     virtual void changeEvent ( QEvent * event) Q_DECL_OVERRIDE;
     virtual bool eventFilter(QObject *object, QEvent *event) Q_DECL_OVERRIDE;
+    virtual void showEvent( QShowEvent *event ) Q_DECL_OVERRIDE;
+    virtual void resizeEvent(QResizeEvent *event) Q_DECL_OVERRIDE;
 private slots:
     void ShowIncrementDetails();
     void AddIncrement();
