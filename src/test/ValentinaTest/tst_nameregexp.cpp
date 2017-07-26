@@ -102,8 +102,11 @@ void TST_NameRegExp::TestNameRegExp_data()
         tag = localeName+QLatin1String(". Any next character can't be \"")+decimalPoint+QLatin1String("\"");
         QTest::newRow(qUtf8Printable(tag)) << QLatin1String("a")+decimalPoint << false;
 
-        tag = localeName+QLatin1String(". Any next character can't be \"")+groupSeparator+QLatin1String("\"");
-        QTest::newRow(qUtf8Printable(tag)) << QLatin1String("a")+groupSeparator << false;
+        if (groupSeparator != '\'')
+        {
+            tag = localeName+QLatin1String(". Any next character can't be \"")+groupSeparator+QLatin1String("\"");
+            QTest::newRow(qUtf8Printable(tag)) << QLatin1String("a")+groupSeparator << false;
+        }
     }
 
     QTest::newRow("First character can't be \"+\"") << "+a" << false;
