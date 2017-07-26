@@ -90,8 +90,20 @@ void TST_NameRegExp::TestNameRegExp_data()
         tag = localeName+QLatin1String(". First character can't be \"")+negativeSign+QLatin1String("\"");
         QTest::newRow(qUtf8Printable(tag)) << negativeSign+QLatin1String("a") << false;
 
+        tag = localeName+QLatin1String(". First character can't be \"")+decimalPoint+QLatin1String("\"");
+        QTest::newRow(qUtf8Printable(tag)) << decimalPoint+QLatin1String("a") << false;
+
+        tag = localeName+QLatin1String(". First character can't be \"")+groupSeparator+QLatin1String("\"");
+        QTest::newRow(qUtf8Printable(tag)) << groupSeparator+QLatin1String("a") << false;
+
         tag = localeName+QLatin1String(". Any next character can't be \"")+negativeSign+QLatin1String("\"");
         QTest::newRow(qUtf8Printable(tag)) << QLatin1String("a")+negativeSign << false;
+
+        tag = localeName+QLatin1String(". Any next character can't be \"")+decimalPoint+QLatin1String("\"");
+        QTest::newRow(qUtf8Printable(tag)) << QLatin1String("a")+decimalPoint << false;
+
+        tag = localeName+QLatin1String(". Any next character can't be \"")+groupSeparator+QLatin1String("\"");
+        QTest::newRow(qUtf8Printable(tag)) << QLatin1String("a")+groupSeparator << false;
     }
 
     QTest::newRow("First character can't be \"+\"") << "+a" << false;

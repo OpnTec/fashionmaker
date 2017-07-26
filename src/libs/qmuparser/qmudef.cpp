@@ -77,6 +77,8 @@ static QChar EatWhiteSpace(const QString &formula, int &index)
 static int CheckChar(QChar &c, const QLocale &locale, const QChar &decimal, const QChar &thousand)
 {
     INIT_LOCALE_VARIABLES(locale);
+    Q_UNUSED(decimalPoint)
+    Q_UNUSED(groupSeparator)
 
     if (c == positiveSign)
     {
@@ -175,6 +177,8 @@ int ReadVal(const QString &formula, qreal &val, const QLocale &locale, const QCh
     }
 
     INIT_LOCALE_VARIABLES(locale);
+    Q_UNUSED(decimalPoint)
+    Q_UNUSED(groupSeparator)
 
     QSet<QChar> reserved;
     reserved << positiveSign
@@ -271,4 +275,55 @@ int ReadVal(const QString &formula, qreal &val, const QLocale &locale, const QCh
     }
 
     return -1;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QString NameRegExp()
+{
+    static QString regex;
+
+    if (regex.isEmpty())
+    {
+        const QList<QLocale> allLocales =
+                QLocale::matchingLocales(QLocale::AnyLanguage, QLocale::AnyScript, QLocale::AnyCountry);
+
+        QString positiveSigns;
+        QString negativeSigns;
+        QString decimalPoints;
+        QString groupSeparators;
+
+        for(int i = 0; i < allLocales.size(); ++i)
+        {
+            if (not positiveSigns.contains(allLocales.at(i).positiveSign()))
+            {
+                positiveSigns.append(allLocales.at(i).positiveSign());
+            }
+
+            if (not negativeSigns.contains(allLocales.at(i).negativeSign()))
+            {
+                negativeSigns.append(allLocales.at(i).negativeSign());
+            }
+
+            if (not decimalPoints.contains(allLocales.at(i).decimalPoint()))
+            {
+                decimalPoints.append(allLocales.at(i).decimalPoint());
+            }
+
+            if (not groupSeparators.contains(allLocales.at(i).groupSeparator()))
+            {
+                groupSeparators.append(allLocales.at(i).groupSeparator());
+            }
+        }
+
+        negativeSigns.replace('-', "\\-");
+
+        //Same regexp in pattern.xsd shema file. Don't forget to synchronize.
+        // \p{Nd} - \p{Decimal_Digit_Number}
+        // \p{Zs} - \p{Space_Separator}
+        regex = QString("^([^\\p{Nd}\\p{Zs}*/&|!<>^\\()%1%2%3%4=?:;'\"]){1,1}"
+                        "([^\\p{Zs}*/&|!<>^\\()%1%2%3%4=?:;\"]){0,}$")
+                .arg(negativeSigns).arg(positiveSigns).arg(decimalPoints).arg(groupSeparators);
+    }
+
+    return regex;
 }

@@ -24,8 +24,6 @@
 
 #include "qmuparser_global.h"
 
-#include <QString>
-
 #if QT_VERSION < QT_VERSION_CHECK(5, 5, 0)
 
 /*
@@ -92,32 +90,27 @@ QT_WARNING_DISABLE_GCC("-Wattributes")
 #endif /* Q_CC_MSVC */
 
 class QLocale;
+class QChar;
 
-#define INIT_LOCALE_VARIABLES(locale)                        \
-const QChar positiveSign = (locale).positiveSign();          \
-const QChar negativeSign = (locale).negativeSign();          \
-const QChar sign0        = (locale).toString(0).at(0);       \
-const QChar sign1        = (locale).toString(1).at(0);       \
-const QChar sign2        = (locale).toString(2).at(0);       \
-const QChar sign3        = (locale).toString(3).at(0);       \
-const QChar sign4        = (locale).toString(4).at(0);       \
-const QChar sign5        = (locale).toString(5).at(0);       \
-const QChar sign6        = (locale).toString(6).at(0);       \
-const QChar sign7        = (locale).toString(7).at(0);       \
-const QChar sign8        = (locale).toString(8).at(0);       \
-const QChar sign9        = (locale).toString(9).at(0);       \
-const QChar expUpper     = (locale).exponential().toUpper(); \
-const QChar expLower     = (locale).exponential().toLower()  \
+#define INIT_LOCALE_VARIABLES(locale)                          \
+const QChar positiveSign   = (locale).positiveSign();          \
+const QChar negativeSign   = (locale).negativeSign();          \
+const QChar sign0          = (locale).toString(0).at(0);       \
+const QChar sign1          = (locale).toString(1).at(0);       \
+const QChar sign2          = (locale).toString(2).at(0);       \
+const QChar sign3          = (locale).toString(3).at(0);       \
+const QChar sign4          = (locale).toString(4).at(0);       \
+const QChar sign5          = (locale).toString(5).at(0);       \
+const QChar sign6          = (locale).toString(6).at(0);       \
+const QChar sign7          = (locale).toString(7).at(0);       \
+const QChar sign8          = (locale).toString(8).at(0);       \
+const QChar sign9          = (locale).toString(9).at(0);       \
+const QChar expUpper       = (locale).exponential().toUpper(); \
+const QChar expLower       = (locale).exponential().toLower(); \
+const QChar decimalPoint   = (locale).decimalPoint();          \
+const QChar groupSeparator = (locale).groupSeparator()         \
 
-//---------------------------------------------------------------------------------------------------------------------
-inline QString NameRegExp()
-{
-    //Same regexp in pattern.xsd shema file. Don't forget to synchronize.
-    // \p{Nd} - \p{Decimal_Digit_Number}
-    // \p{Zs} - \p{Space_Separator}
-    // Note. All three minus characters are different!
-    return QStringLiteral("^([^\\p{Nd}\\p{Zs}*/&|!<>^\\-()–+−=?:;'\"]){1,1}([^\\p{Zs}*/&|!<>^\\-()–+−=?:;\"]){0,}$");
-}
+QString NameRegExp();
 
 QT_WARNING_POP
 

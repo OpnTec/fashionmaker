@@ -71,6 +71,8 @@ void QmuFormulaBase::InitCharSets()
     INIT_LOCALE_VARIABLES(m_locale);
     Q_UNUSED(expUpper)
     Q_UNUSED(expLower)
+    Q_UNUSED(decimalPoint)
+    Q_UNUSED(groupSeparator)
 
     // Defining identifier character sets
     const QString nameChars = QString() + sign0 + sign1 + sign2 + sign3 + sign4 + sign5 + sign6 + sign7 + sign8 +
