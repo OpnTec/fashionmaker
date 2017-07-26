@@ -110,7 +110,7 @@ const QChar expLower       = (locale).exponential().toLower(); \
 const QChar decimalPoint   = (locale).decimalPoint();          \
 const QChar groupSeparator = (locale).groupSeparator()         \
 
-QString NameRegExp();
+QMUPARSERSHARED_EXPORT QString NameRegExp();
 
 QT_WARNING_POP
 
