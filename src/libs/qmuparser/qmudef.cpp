@@ -316,6 +316,7 @@ QString NameRegExp()
         }
 
         negativeSigns.replace('-', "\\-");
+        groupSeparators.remove('\'');
 
         //Same regexp in pattern.xsd shema file. Don't forget to synchronize.
         // \p{Nd} - \p{Decimal_Digit_Number}
