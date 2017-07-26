@@ -807,7 +807,17 @@ void VToolSeamAllowance::paint(QPainter *painter, const QStyleOptionGraphicsItem
 //---------------------------------------------------------------------------------------------------------------------
 QRectF VToolSeamAllowance::boundingRect() const
 {
-    const VPiece detail = VAbstractTool::data.GetPiece(id);
+    VPiece detail;
+
+    try
+    {
+        detail = VAbstractTool::data.GetPiece(id);
+    }
+    catch(const VExceptionBadId &)
+    {
+        return QRectF();
+    }
+
     return detail.MainPathPath(this->getData()).boundingRect();
 }
 
