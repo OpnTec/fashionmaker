@@ -126,7 +126,7 @@ protected:
     template <typename T>
     void ShowToolVisualization(bool show);
 
-    VSimpleCurve *InitCurve(quint32 id, VContainer *data, GOType curveType);
+    void InitCurve(quint32 id, VContainer *data, GOType curveType, SceneObject sceneType);
 
     template <typename T>
     static void InitOperationToolConnections(VMainGraphicsScene *scene, T *tool);

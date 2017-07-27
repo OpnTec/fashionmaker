@@ -478,7 +478,7 @@ void VAbstractOperation::SaveSourceDestination(QDomElement &tag)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-VSimpleCurve *VAbstractOperation::InitCurve(quint32 id, VContainer *data, GOType curveType)
+void VAbstractOperation::InitCurve(quint32 id, VContainer *data, GOType curveType, SceneObject sceneType)
 {
     const QSharedPointer<VAbstractCurve> initCurve = data->GeometricObject<VAbstractCurve>(id);
     VSimpleCurve *curve = new VSimpleCurve(id, initCurve);
@@ -489,10 +489,13 @@ VSimpleCurve *VAbstractOperation::InitCurve(quint32 id, VContainer *data, GOType
     {
         contextMenuEvent(event);
     });
+    connect(curve, &VSimpleCurve::Choosed, this, [this, sceneType](quint32 id)
+    {
+        emit ChoosedTool(id, sceneType);
+    });
     connect(curve, &VSimpleCurve::Delete, this, &VAbstractOperation::DeleteFromLabel);
     curve->RefreshGeometry(VAbstractTool::data.GeometricObject<VAbstractCurve>(id));
     operatedObjects.insert(id, curve);
-    return curve;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -595,43 +598,19 @@ QT_WARNING_DISABLE_GCC("-Wswitch-default")
                 break;
             }
             case GOType::Arc:
-            {
-                VSimpleCurve *curve = InitCurve(object.id, &(VAbstractTool::data), obj->getType());
-                connect(curve, &VSimpleCurve::Choosed, this, [this](quint32 id)
-                {
-                    emit ChoosedTool(id, SceneObject::Arc);
-                });
+                InitCurve(object.id, &(VAbstractTool::data), obj->getType(), SceneObject::Arc);
                 break;
-            }
             case GOType::EllipticalArc:
-            {
-                VSimpleCurve *curve = InitCurve(object.id, &(VAbstractTool::data), obj->getType());
-                connect(curve, &VSimpleCurve::Choosed, this, [this](quint32 id)
-                {
-                    emit ChoosedTool(id, SceneObject::ElArc);
-                });
+                InitCurve(object.id, &(VAbstractTool::data), obj->getType(), SceneObject::ElArc);
                 break;
-            }
             case GOType::Spline:
             case GOType::CubicBezier:
-            {
-                VSimpleCurve *curve = InitCurve(object.id, &(VAbstractTool::data), obj->getType());
-                connect(curve, &VSimpleCurve::Choosed, this, [this](quint32 id)
-                {
-                    emit ChoosedTool(id, SceneObject::Spline);
-                });
+                InitCurve(object.id, &(VAbstractTool::data), obj->getType(), SceneObject::Spline);
                 break;
-            }
             case GOType::SplinePath:
             case GOType::CubicBezierPath:
-            {
-                VSimpleCurve *curve = InitCurve(object.id, &(VAbstractTool::data), obj->getType());
-                connect(curve, &VSimpleCurve::Choosed, this, [this](quint32 id)
-                {
-                    emit ChoosedTool(id, SceneObject::SplinePath);
-                });
+                InitCurve(object.id, &(VAbstractTool::data), obj->getType(), SceneObject::SplinePath);
                 break;
-            }
             case GOType::Unknown:
                 break;
         }
