@@ -49,12 +49,14 @@ public:
     enum { Type = UserType + static_cast<int>(Vis::CurvePathItem)};
 
     void SetDirectionArrows(const QVector<QPair<QLineF, QLineF>> &arrows);
+    void SetPoints(const QVector<QPointF> &points);
 protected:
     virtual void ScalePenWidth();
 private:
     Q_DISABLE_COPY(VCurvePathItem)
 
     QVector<QPair<QLineF, QLineF>> m_directionArrows;
+    QVector<QPointF> m_points;
 };
 
 #endif // VCURVEPATHITEM_H

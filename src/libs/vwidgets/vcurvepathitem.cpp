@@ -35,14 +35,28 @@
 //---------------------------------------------------------------------------------------------------------------------
 VCurvePathItem::VCurvePathItem(QGraphicsItem *parent)
     : QGraphicsPathItem(parent),
-      m_directionArrows()
+      m_directionArrows(),
+      m_points()
 {
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 QPainterPath VCurvePathItem::shape() const
 {
-    QPainterPath itemPath = path();
+    QPainterPath itemPath;
+
+    if (not m_points.isEmpty())
+    {
+        for (qint32 i = 0; i < m_points.count()-1; ++i)
+        {
+            itemPath.moveTo(m_points.at(i));
+            itemPath.lineTo(m_points.at(i+1));
+        }
+    }
+    else
+    {
+        itemPath = path();
+    }
 
     const QPainterPath arrowsPath = VAbstractCurve::ShowDirection(m_directionArrows,
                                                                   ScaleWidth(VAbstractCurve::lengthCurveDirectionArrow,
@@ -50,8 +64,8 @@ QPainterPath VCurvePathItem::shape() const
     if (arrowsPath != QPainterPath())
     {
         itemPath.addPath(arrowsPath);
-        itemPath.setFillRule(Qt::WindingFill);
     }
+    itemPath.setFillRule(Qt::WindingFill);
 
     // We unfortunately need this hack as QPainterPathStroker will set a width of 1.0
     // if we pass a value of 0.0 to QPainterPathStroker::setWidth()
@@ -109,6 +123,12 @@ void VCurvePathItem::paint(QPainter *painter, const QStyleOptionGraphicsItem *op
 void VCurvePathItem::SetDirectionArrows(const QVector<QPair<QLineF, QLineF> > &arrows)
 {
     m_directionArrows = arrows;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VCurvePathItem::SetPoints(const QVector<QPointF> &points)
+{
+    m_points = points;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
