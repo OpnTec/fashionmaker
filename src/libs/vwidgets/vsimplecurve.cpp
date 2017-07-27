@@ -127,6 +127,10 @@ void VSimpleCurve::mouseReleaseEvent(QGraphicsSceneMouseEvent *event)
 void VSimpleCurve::hoverEnterEvent(QGraphicsSceneHoverEvent *event)
 {
     m_isHovered = true;
+    if (not m_curve.isNull())
+    {
+        SetDirectionArrows(m_curve->DirectionArrows());
+    }
     QGraphicsPathItem::hoverEnterEvent(event);
 }
 
@@ -134,6 +138,7 @@ void VSimpleCurve::hoverEnterEvent(QGraphicsSceneHoverEvent *event)
 void VSimpleCurve::hoverLeaveEvent(QGraphicsSceneHoverEvent *event)
 {
     m_isHovered = false;
+    SetDirectionArrows(QVector<DirectionArrow>());
     QGraphicsPathItem::hoverLeaveEvent(event);
 }
 
