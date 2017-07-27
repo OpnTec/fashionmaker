@@ -124,11 +124,14 @@ VArc VArc::Rotate(const QPointF &originPoint, qreal degrees, const QString &pref
     const QPointF p1 = VPointF::RotatePF(originPoint, GetP1(), degrees);
     const QPointF p2 = VPointF::RotatePF(originPoint, GetP2(), degrees);
 
-    VArc arc(center, GetRadius(), QLineF(static_cast<QPointF>(center), p1).angle(),
-             QLineF(static_cast<QPointF>(center), p2).angle());
+    const qreal f1 = QLineF(static_cast<QPointF>(center), p1).angle();
+    const qreal f2 = QLineF(static_cast<QPointF>(center), p2).angle();
+
+    VArc arc(center, GetRadius(), f1, f2);
     arc.setName(name() + prefix);
     arc.SetColor(GetColor());
     arc.SetPenStyle(GetPenStyle());
+    arc.SetFlipped(IsFlipped());
     return arc;
 }
 
@@ -140,12 +143,14 @@ VArc VArc::Flip(const QLineF &axis, const QString &prefix) const
     const QPointF p1 = VPointF::FlipPF(axis, GetP1());
     const QPointF p2 = VPointF::FlipPF(axis, GetP2());
 
-    VArc arc(center, GetRadius(), QLineF(static_cast<QPointF>(center), p1).angle(),
-             QLineF(static_cast<QPointF>(center), p2).angle());
+    const qreal f1 = QLineF(static_cast<QPointF>(center), p1).angle();
+    const qreal f2 = QLineF(static_cast<QPointF>(center), p2).angle();
+
+    VArc arc(center, GetRadius(), f1, f2);
     arc.setName(name() + prefix);
-    arc.SetFlipped(true);
     arc.SetColor(GetColor());
     arc.SetPenStyle(GetPenStyle());
+    arc.SetFlipped(not IsFlipped());
     return arc;
 }
 
@@ -157,11 +162,14 @@ VArc VArc::Move(qreal length, qreal angle, const QString &prefix) const
     const QPointF p1 = VPointF::MovePF(GetP1(), length, angle);
     const QPointF p2 = VPointF::MovePF(GetP2(), length, angle);
 
-    VArc arc(center, GetRadius(), QLineF(static_cast<QPointF>(center), p1).angle(),
-             QLineF(static_cast<QPointF>(center), p2).angle());
+    const qreal f1 = QLineF(static_cast<QPointF>(center), p1).angle();
+    const qreal f2 = QLineF(static_cast<QPointF>(center), p2).angle();
+
+    VArc arc(center, GetRadius(), f1, f2);
     arc.setName(name() + prefix);
     arc.SetColor(GetColor());
     arc.SetPenStyle(GetPenStyle());
+    arc.SetFlipped(IsFlipped());
     return arc;
 }
 
