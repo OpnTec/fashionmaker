@@ -278,24 +278,28 @@ void VAbstractOperation::AllowPointLabelSelecting(bool enabled)
 void VAbstractOperation::AllowSplineHover(bool enabled)
 {
     AllowCurveHover(enabled, GOType::Spline);
+    AllowCurveHover(enabled, GOType::CubicBezier);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void VAbstractOperation::AllowSplineSelecting(bool enabled)
 {
     AllowCurveSelecting(enabled, GOType::Spline);
+    AllowCurveSelecting(enabled, GOType::CubicBezier);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void VAbstractOperation::AllowSplinePathHover(bool enabled)
 {
     AllowCurveHover(enabled, GOType::SplinePath);
+    AllowCurveHover(enabled, GOType::CubicBezierPath);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void VAbstractOperation::AllowSplinePathSelecting(bool enabled)
 {
     AllowCurveSelecting(enabled, GOType::SplinePath);
+    AllowCurveSelecting(enabled, GOType::CubicBezierPath);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

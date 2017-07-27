@@ -41,6 +41,7 @@
 - Fixed bug. Tape app saved default size value in wrong place.
 - [#737] Valentina produces corrupted file if unite two pieces with pins.
 - [#738] Bug in transformation over arc and elliptical arc.
+- [#729] Moved Bezier curves can't be rotated.
 
 # Version 0.5.0 May 9, 2017
 - [#581] User can now filter input lists by keyword in function wizard.
