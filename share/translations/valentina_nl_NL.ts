@@ -2468,11 +2468,11 @@
     </message>
     <message>
         <source>Refresh a pattern with all changes you made</source>
-        <translation type="unfinished"></translation>
+        <translation>Herstel een patroon met alle veranderingen welke je gemaakt hebt</translation>
     </message>
     <message>
         <source>Refresh</source>
-        <translation type="unfinished"></translation>
+        <translation>Herstel</translation>
     </message>
 </context>
 <context>
@@ -2752,23 +2752,23 @@ Toch de instellingen aanpassen?</translation>
     </message>
     <message>
         <source>Text</source>
-        <translation type="unfinished"></translation>
+        <translation>Tekst</translation>
     </message>
     <message>
         <source>Text will be converted to paths</source>
-        <translation type="unfinished"></translation>
+        <translation>tekst zal omgezet worden naar paden</translation>
     </message>
     <message>
         <source>Export text as paths</source>
-        <translation type="unfinished"></translation>
+        <translation>Exporteer tekst als paden</translation>
     </message>
     <message>
         <source>Margins</source>
-        <translation type="unfinished"></translation>
+        <translation>Marges</translation>
     </message>
     <message>
         <source>Ignore margins</source>
-        <translation type="unfinished"></translation>
+        <translation>Neger marges</translation>
     </message>
 </context>
 <context>
@@ -3199,7 +3199,7 @@ Toch de instellingen aanpassen?</translation>
     </message>
     <message>
         <source>Multisize</source>
-        <translation type="unfinished"></translation>
+        <translation>Meerdere maten</translation>
     </message>
 </context>
 <context>
@@ -3532,7 +3532,7 @@ Toch de instellingen aanpassen?</translation>
     </message>
     <message>
         <source>From multisize measurements</source>
-        <translation type="unfinished"></translation>
+        <translation>Van meerdere maten metingen</translation>
     </message>
 </context>
 <context>
@@ -3886,15 +3886,15 @@ Toch de instellingen aanpassen?</translation>
     </message>
     <message>
         <source>Each point in the &lt;b&gt;custom seam allowance&lt;/b&gt; path must be unique!</source>
-        <translation type="unfinished"></translation>
+        <translation>Elk punt in de &lt;b&gt; aangepaste naadtoeslag&lt;/b&gt;  pad moet uniek zijn!</translation>
     </message>
     <message>
         <source>The path is a cut contour</source>
-        <translation type="unfinished"></translation>
+        <translation>Het pad is een gesneden lijn</translation>
     </message>
     <message>
         <source>Cut on fabric</source>
-        <translation type="unfinished"></translation>
+        <translation>Knip in stof</translation>
     </message>
 </context>
 <context>
@@ -4531,11 +4531,11 @@ Toch de instellingen aanpassen?</translation>
     </message>
     <message>
         <source>Binary form</source>
-        <translation type="unfinished"></translation>
+        <translation>Binary formulier</translation>
     </message>
     <message>
         <source>Text as paths</source>
-        <translation type="unfinished"></translation>
+        <translation>Tekst als paden</translation>
     </message>
 </context>
 <context>
@@ -4610,11 +4610,11 @@ Toch de instellingen aanpassen?</translation>
     </message>
     <message>
         <source>(flat) files</source>
-        <translation type="unfinished"></translation>
+        <translation>(platte)bestanden</translation>
     </message>
     <message>
         <source>Image files</source>
-        <translation type="unfinished"></translation>
+        <translation>Afbeelding bestanden</translation>
     </message>
 </context>
 <context>
@@ -6964,43 +6964,43 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Zoom fit best current</source>
-        <translation type="unfinished"></translation>
+        <translation>Actuele best passend zoom</translation>
     </message>
     <message>
         <source>zoom fit best current pattern piece</source>
-        <translation type="unfinished"></translation>
+        <translation>Actuele patroon deel best passend zoom</translation>
     </message>
     <message>
         <source>Export details skiping the Layout stage</source>
-        <translation type="unfinished"></translation>
+        <translation>Exporteer de details van het overgeslagen Opmaak stadium</translation>
     </message>
     <message>
         <source>Application doesn&apos;t support multisize table with inches.</source>
-        <translation type="unfinished"></translation>
+        <translation>Applicatie ondersteunt niet het meerdere maten tabel met inches.</translation>
     </message>
     <message>
         <source>You don&apos;t have enough details to export. Please, include at least one detail in layout.</source>
-        <translation type="unfinished"></translation>
+        <translation>Er zijn te weinig details om te exporteren. Alstublieft, zorg dat er ten minste een detail in Opmaak bevat.</translation>
     </message>
     <message>
         <source>Export details</source>
-        <translation type="unfinished"></translation>
+        <translation>Exporteer details</translation>
     </message>
     <message>
         <source>Can&apos;t export details.</source>
-        <translation type="unfinished"></translation>
+        <translation>Kan geen details exporteren.</translation>
     </message>
     <message>
         <source>Couldn&apos;t set size. Need a file with multisize measurements.</source>
-        <translation type="unfinished"></translation>
+        <translation>Kon de maat niet vaststellen. Heb een bestand nodig met meerdere maten metingen.</translation>
     </message>
     <message>
         <source>Couldn&apos;t set height. Need a file with multisize measurements.</source>
-        <translation type="unfinished"></translation>
+        <translation>Kon de hoogte niet vaststellen. Heb een bestand nodig met meerdere maten metingen.</translation>
     </message>
     <message>
         <source>Please, additionally provide: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Alstublieft, verstrek extra: %1</translation>
     </message>
 </context>
 <context>
@@ -7095,11 +7095,11 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Can&apos;t create a path</source>
-        <translation type="unfinished"></translation>
+        <translation>Kan geen pad maken</translation>
     </message>
     <message>
         <source>Pattern</source>
-        <translation type="unfinished">Patroon</translation>
+        <translation>Patroon</translation>
     </message>
 </context>
 <context>
@@ -7476,15 +7476,15 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Label font:</source>
-        <translation type="unfinished"></translation>
+        <translation>Label voorkant:</translation>
     </message>
     <message>
         <source>Seam allowance</source>
-        <translation type="unfinished">Naadtoeslag</translation>
+        <translation>Naad toeslag</translation>
     </message>
     <message>
         <source>Default value:</source>
-        <translation type="unfinished"></translation>
+        <translation>Standaard waarde:</translation>
     </message>
 </context>
 <context>
@@ -8511,11 +8511,11 @@ Wil je deze veranderingen opslaan?</translation>
     </message>
     <message>
         <source>Open multisize ...</source>
-        <translation type="unfinished"></translation>
+        <translation>Open meerdere maten...</translation>
     </message>
     <message>
         <source>Export from multisize measurements is not supported.</source>
-        <translation type="unfinished"></translation>
+        <translation>Exporteren van meerdere maten metingen wordt niet ondersteunt.</translation>
     </message>
 </context>
 <context>
@@ -9616,23 +9616,23 @@ Wil je deze veranderingen opslaan?</translation>
     </message>
     <message>
         <source>Export dxf in binary form.</source>
-        <translation type="unfinished"></translation>
+        <translation>Exporteer DXF in binary vorm.</translation>
     </message>
     <message>
         <source>Export text as paths.</source>
-        <translation type="unfinished"></translation>
+        <translation>Exporteer tekst als paden.</translation>
     </message>
     <message>
         <source>Export only details. Export details as they positioned in the details mode. Any layout related options will be ignored.</source>
-        <translation type="unfinished"></translation>
+        <translation>Exporteer alleen details. Exporteer details zoals wanneer ze gepositioneerd in de details modus. Elke opmaak gerelateerde opties zullen worden genegeerd.</translation>
     </message>
     <message>
         <source>Set size value a pattern file, that was opened with multisize measurements (export mode). Valid values: %1cm.</source>
-        <translation type="unfinished"></translation>
+        <translation>Stel maat waarde van een patroon bestand vast, welke geopend zijn met meerdere maten metingen( exporteer modus). Geldige waardes: %1cm.</translation>
     </message>
     <message>
         <source>Set height value a pattern file, that was opened with multisize measurements (export mode). Valid values: %1cm.</source>
-        <translation type="unfinished"></translation>
+        <translation>Stel hoogte waarde van een patroon bestand vast, welke geopend zijn met meerdere maten metingen (exporteer modus). Geldige waarde: %1cm.</translation>
     </message>
 </context>
 <context>

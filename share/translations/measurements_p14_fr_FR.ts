@@ -1068,7 +1068,7 @@
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="675"/>
         <source>From Lowbust Side to Lowbust Side across front.</source>
         <comment>Full measurement description.</comment>
-        <translation>D&apos;un coté à l&apos;autre, sous la poitrine</translation>
+        <translation>D&apos;un Coté à l&apos;autre, sous la ligne de Poitrine devant.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="679"/>
@@ -1104,25 +1104,25 @@
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="689"/>
         <source>From Waist Side to Waist Side across front.</source>
         <comment>Full measurement description.</comment>
-        <translation>D&apos;un coté à l&apos;autre de la taille, dev</translation>
+        <translation>D&apos;un coté à l&apos;autre de la taille, devant.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="693"/>
         <source>highhip_arc_f</source>
         <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
-        <translation>demi_bassin_dev</translation>
+        <translation>petite_hanche_dev</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="695"/>
         <source>Highhip arc, front</source>
         <comment>Full measurement name.</comment>
-        <translation>Demi-bassin, devant.</translation>
+        <translation>Petites Hanches, devant.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="696"/>
         <source>From Highhip Side to Highhip Side across front.</source>
         <comment>Full measurement description.</comment>
-        <translation>D&apos;un coté à l&apos;autre du bassin, devant.</translation>
+        <translation>D&apos;un Coté à l&apos;autre de la ligne des Petites Hanches, devant.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="700"/>
@@ -1140,103 +1140,103 @@
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="703"/>
         <source>From Hip Side to Hip Side across Front.</source>
         <comment>Full measurement description.</comment>
-        <translation>D&apos;un coté à l&apos;autres des hanches, devant.</translation>
+        <translation>D&apos;un Coté à l&apos;autre des Hanches, devant.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="707"/>
         <source>neck_arc_half_f</source>
         <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
-        <translation>demi_cou_dev</translation>
+        <translation>demi_encolure_dev</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="709"/>
         <source>Neck arc, front, half</source>
         <comment>Full measurement name.</comment>
-        <translation>Demi-cou, devant.</translation>
+        <translation>Demi-encolure, devant.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="710"/>
         <source>Half of &apos;Neck arc, front&apos;. (&apos;Neck arc, front&apos; / 2).</source>
         <comment>Full measurement description.</comment>
-        <translation>Moitié de demi-cou (&apos;Demi-cou, devant&apos; / 2).</translation>
+        <translation>Moitié de &apos;Encolure, devant&quot; (&apos;Demi-encolure, devant&apos; / 2).</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="714"/>
         <source>highbust_arc_half_f</source>
         <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
-        <translation>quart_tour_surpoitrinaire</translation>
+        <translation>moitie_tour_surpoitrinaire_dev</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="716"/>
         <source>Highbust arc, front, half</source>
         <comment>Full measurement name.</comment>
-        <translation>demi_arc_surpoitrinaire</translation>
+        <translation>Moitié, ligne Surpoitrinaire, devant</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="717"/>
         <source>Half of &apos;Highbust arc, front&apos;. From Highbust Front to Highbust Side. (&apos;Highbust arc,  front&apos; / 2).</source>
         <comment>Full measurement description.</comment>
-        <translation>Moitié du demi tout sur-poitrinaire devant. Du point de sur-poitrine devant à point de sur-poitrine latéral (&apos;</translation>
+        <translation>Moitié de &apos;ligne Surpoitrinaire, devant&apos;. A partir du Milieu Surpoitrine Devant au Côté Surpoitrinaire. (&apos;ligne Surpoitrinaire, devant&apos; /2).</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="722"/>
         <source>bust_arc_half_f</source>
         <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
-        <translation>quart_tour_poitrine</translation>
+        <translation>moitie_tour_poitrine_devant</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="724"/>
         <source>Bust arc, front, half</source>
         <comment>Full measurement name.</comment>
-        <translation>Arc de sur-poitrine, devant.</translation>
+        <translation>Tour de Poitrine, devant, moitié</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="725"/>
         <source>Half of &apos;Bust arc, front&apos;. (&apos;Bust arc, front&apos;/2).</source>
         <comment>Full measurement description.</comment>
-        <translation>Moitié d&apos;&apos;arc de poitrine, devant.&apos; (&apos;arc de poitrine&apos; / 2).</translation>
+        <translation>Moitié de&apos;&apos;tour de Poitrine, devant.&apos; (&apos;tour de Poitrine&apos; / 2).</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="729"/>
         <source>lowbust_arc_half_f</source>
         <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
-        <translation>demi_arc_sous_mammaire</translation>
+        <translation>demi_tour_sous_poitrinaire</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="731"/>
         <source>Lowbust arc, front, half</source>
         <comment>Full measurement name.</comment>
-        <translation>Demi-arc sous mammaire, devant</translation>
+        <translation>Moitié du tour Sous-Poitrinaire, devant</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="732"/>
         <source>Half of &apos;Lowbust arc, front&apos;.  (&apos;Lowbust Arc, front&apos; / 2).</source>
         <comment>Full measurement description.</comment>
-        <translation>Moitié de demi-arc sous-mammaire, devant</translation>
+        <translation>Moitié de &apos;moitié tour Sous-Poitrinaire, devant&apos;. (Tour Sous-Poitrinaire, devant&apos; /2).</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="736"/>
         <source>rib_arc_half_f</source>
         <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
-        <translation>quart_tou_thorax</translation>
+        <translation>demi_tour_thorax_dev</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="738"/>
         <source>Rib arc, front, half</source>
         <comment>Full measurement name.</comment>
-        <translation>Moitié de l&apos;arc thoracique, devant</translation>
+        <translation>Tour de la Cage Thoracique, devant, moitié</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="739"/>
         <source>Half of &apos;Rib arc, front&apos;.   (&apos;Rib Arc, front&apos; / 2).</source>
         <comment>Full measurement description.</comment>
-        <translation>Moitié de &apos;Demi-arc thoracique, devant&apos;. (&apos;Demi-arc thoracique, devant&apos; / 2).</translation>
+        <translation>Moitié de &apos;Cage Thoracique, devant&apos;. (&apos;Cage Thoracique, devant&apos; / 2).</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="743"/>
         <source>waist_arc_half_f</source>
         <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
-        <translation>quart_tour_taille</translation>
+        <translation>demi_tour_taille_dev</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="745"/>
@@ -1248,25 +1248,25 @@
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="746"/>
         <source>Half of &apos;Waist arc, front&apos;. (&apos;Waist arc, front&apos; / 2).</source>
         <comment>Full measurement description.</comment>
-        <translation>Moitié de demi-tour de taille, devant. (&apos;demi-tour de taille, devant.&apos; / 2).</translation>
+        <translation>Moitié de &apos;Taille, devant&apos;. (&apos;Tour de Taille, devant.&apos; / 2).</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="750"/>
         <source>highhip_arc_half_f</source>
         <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
-        <translation>quart_tour_bassin</translation>
+        <translation>petite_hanche_moitie_dev</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="752"/>
         <source>Highhip arc, front, half</source>
         <comment>Full measurement name.</comment>
-        <translation>Moitié de demi-tour de bassin, devant</translation>
+        <translation>Moitié des Petites Hanches, devant</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="753"/>
         <source>Half of &apos;Highhip arc, front&apos;.  (&apos;Highhip arc, front&apos; / 2).</source>
         <comment>Full measurement description.</comment>
-        <translation>Moitié de &apos;demi-tour de bassin, devant&apos;. (&apos;Moitié de demi-tour de bassin, devant&apos; / 2).</translation>
+        <translation>Moitié de &apos;Petites Hanches, devant&apos;. (&apos;Petites Hanches, devant&apos; / 2).</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="757"/>
@@ -1314,7 +1314,7 @@
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="774"/>
         <source>Highbust arc, back</source>
         <comment>Full measurement name.</comment>
-        <translation>Demi-tour sur-poitrinaire, dos</translation>
+        <translation>Tour Sur-Poitrinaire, dos</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="775"/>
