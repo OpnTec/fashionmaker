@@ -83,6 +83,7 @@ protected:
     virtual void UpdateNamePosition(qreal mx, qreal my);
     virtual void ShowNode() Q_DECL_OVERRIDE;
     virtual void HideNode() Q_DECL_OVERRIDE;
+    virtual void contextMenuEvent(QGraphicsSceneContextMenuEvent *event) Q_DECL_OVERRIDE;
 private:
     Q_DISABLE_COPY(VNodePoint)
 

@@ -275,6 +275,12 @@ void VNodePoint::HideNode()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void VNodePoint::contextMenuEvent(QGraphicsSceneContextMenuEvent *event)
+{
+    emit ShowContextMenu(event);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 void VNodePoint::EnableToolMove(bool move)
 {
     m_namePoint->setFlag(QGraphicsItem::ItemIsMovable, move);
