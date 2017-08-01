@@ -50,7 +50,7 @@ class VGraphicsSimpleTextItem : public QObject, public QGraphicsSimpleTextItem
 public:
     explicit VGraphicsSimpleTextItem(QGraphicsItem *parent = nullptr);
     explicit VGraphicsSimpleTextItem( const QString & text, QGraphicsItem *parent = nullptr );
-    virtual ~VGraphicsSimpleTextItem() Q_DECL_OVERRIDE;
+    virtual ~VGraphicsSimpleTextItem() =default;
 
     qint32       BaseFontSize()const;
     virtual int  type() const Q_DECL_OVERRIDE {return Type;}

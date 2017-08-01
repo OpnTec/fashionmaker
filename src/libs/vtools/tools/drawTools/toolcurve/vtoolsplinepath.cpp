@@ -132,13 +132,6 @@ VToolSplinePath::VToolSplinePath(VAbstractPattern *doc, VContainer *data, quint3
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-VToolSplinePath::~VToolSplinePath()
-{
-    //Disable cursor-arrow-openhand
-    RestoreOverrideCursor(cursorArrowOpenHand);
-}
-
-//---------------------------------------------------------------------------------------------------------------------
 /**
  * @brief setDialog set dialog when user want change tool option.
  */
@@ -491,7 +484,7 @@ void VToolSplinePath::mousePressEvent(QGraphicsSceneMouseEvent *event)
             splIndex = splPath->Segment(oldPosition);
             if (IsMovable(splIndex))
             {
-                SetOverrideCursor(cursorArrowCloseHand, 1, 1);
+                SetItemOverrideCursor(this, cursorArrowCloseHand, 1, 1);
                 event->accept();
             }
         }
@@ -507,8 +500,7 @@ void VToolSplinePath::mouseReleaseEvent(QGraphicsSceneMouseEvent *event)
         if (event->button() == Qt::LeftButton && event->type() != QEvent::GraphicsSceneMouseDoubleClick)
         {
             oldPosition = event->scenePos();
-            //Disable cursor-arrow-closehand
-            RestoreOverrideCursor(cursorArrowCloseHand);
+            SetItemOverrideCursor(this, cursorArrowOpenHand, 1, 1);
         }
     }
     VAbstractSpline::mouseReleaseEvent(event);
@@ -606,7 +598,7 @@ void VToolSplinePath::hoverEnterEvent(QGraphicsSceneHoverEvent *event)
         splIndex = splPath->Segment(oldPosition);
         if (IsMovable(splIndex))
         {
-            SetOverrideCursor(cursorArrowOpenHand, 1, 1);
+            SetItemOverrideCursor(this, cursorArrowOpenHand, 1, 1);
         }
     }
 
@@ -619,8 +611,7 @@ void VToolSplinePath::hoverLeaveEvent(QGraphicsSceneHoverEvent *event)
     if (flags() & QGraphicsItem::ItemIsMovable)
     {
         oldPosition = event->scenePos();
-        //Disable cursor-arrow-openhand
-        RestoreOverrideCursor(cursorArrowOpenHand);
+        setCursor(QCursor());
     }
 
     VAbstractSpline::hoverLeaveEvent(event);

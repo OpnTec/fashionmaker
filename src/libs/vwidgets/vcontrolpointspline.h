@@ -53,7 +53,7 @@ public:
     VControlPointSpline(const qint32 &indexSpline, SplinePointPosition position, QGraphicsItem * parent = nullptr);
     VControlPointSpline(const qint32 &indexSpline, SplinePointPosition position, const QPointF &controlPoint,
                         const QPointF &splinePoint, bool freeAngle, bool freeLength, QGraphicsItem * parent = nullptr);
-    virtual ~VControlPointSpline();
+    virtual ~VControlPointSpline() =default;
 
     virtual int  type() const Q_DECL_OVERRIDE {return Type;}
     enum { Type = UserType + static_cast<int>(Vis::ControlPointSpline)};

@@ -123,13 +123,6 @@ VToolSpline::VToolSpline(VAbstractPattern *doc, VContainer *data, quint32 id, co
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-VToolSpline::~VToolSpline()
-{
-    //Disable cursor-arrow-openhand
-    RestoreOverrideCursor(cursorArrowOpenHand);
-}
-
-//---------------------------------------------------------------------------------------------------------------------
 /**
  * @brief setDialog set dialog when user want change tool option.
  */
@@ -367,7 +360,7 @@ void VToolSpline::mousePressEvent(QGraphicsSceneMouseEvent *event)
         {
             if (IsMovable())
             {
-                SetOverrideCursor(cursorArrowCloseHand, 1, 1);
+                SetItemOverrideCursor(this, cursorArrowCloseHand, 1, 1);
                 oldPosition = event->scenePos();
                 event->accept();
             }
@@ -385,8 +378,7 @@ void VToolSpline::mouseReleaseEvent(QGraphicsSceneMouseEvent *event)
         {
             if (IsMovable())
             {
-                //Disable cursor-arrow-closehand
-                RestoreOverrideCursor(cursorArrowCloseHand);
+                SetItemOverrideCursor(this, cursorArrowOpenHand, 1, 1);
             }
         }
     }
@@ -477,7 +469,7 @@ void VToolSpline::hoverEnterEvent(QGraphicsSceneHoverEvent *event)
     {
         if (IsMovable())
         {
-            SetOverrideCursor(cursorArrowOpenHand, 1, 1);
+            SetItemOverrideCursor(this, cursorArrowOpenHand, 1, 1);
         }
     }
 
@@ -491,8 +483,7 @@ void VToolSpline::hoverLeaveEvent(QGraphicsSceneHoverEvent *event)
     {
         if (IsMovable())
         {
-            //Disable cursor-arrow-openhand
-            RestoreOverrideCursor(cursorArrowOpenHand);
+            setCursor(QCursor());
         }
     }
 

@@ -91,13 +91,6 @@ VToolBasePoint::VToolBasePoint (VAbstractPattern *doc, VContainer *data, quint32
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-VToolBasePoint::~VToolBasePoint()
-{
-    //Disable cursor-arrow-openhand
-    RestoreOverrideCursor(cursorArrowOpenHand);
-}
-
-//---------------------------------------------------------------------------------------------------------------------
 /**
  * @brief setDialog set dialog when user want change tool option.
  */
@@ -316,7 +309,7 @@ void VToolBasePoint::hoverEnterEvent(QGraphicsSceneHoverEvent *event)
 
     if (flags() & QGraphicsItem::ItemIsMovable)
     {
-        SetOverrideCursor(cursorArrowOpenHand, 1, 1);
+        SetItemOverrideCursor(this, cursorArrowOpenHand, 1, 1);
     }
 }
 
@@ -327,8 +320,7 @@ void VToolBasePoint::hoverLeaveEvent(QGraphicsSceneHoverEvent *event)
 
     if (flags() & QGraphicsItem::ItemIsMovable)
     {
-        //Disable cursor-arrow-openhand
-        RestoreOverrideCursor(cursorArrowOpenHand);
+        setCursor(QCursor());
     }
 }
 
@@ -339,7 +331,7 @@ void VToolBasePoint::mousePressEvent(QGraphicsSceneMouseEvent *event)
     {
         if (event->button() == Qt::LeftButton && event->type() != QEvent::GraphicsSceneMouseDoubleClick)
         {
-            SetOverrideCursor(cursorArrowCloseHand, 1, 1);
+            SetItemOverrideCursor(this, cursorArrowCloseHand, 1, 1);
         }
     }
     VToolSinglePoint::mousePressEvent(event);
@@ -352,8 +344,7 @@ void VToolBasePoint::mouseReleaseEvent(QGraphicsSceneMouseEvent *event)
     {
         if (event->button() == Qt::LeftButton && event->type() != QEvent::GraphicsSceneMouseDoubleClick)
         {
-            //Disable cursor-arrow-closehand
-            RestoreOverrideCursor(cursorArrowCloseHand);
+            SetItemOverrideCursor(this, cursorArrowOpenHand, 1, 1);
         }
     }
     VToolSinglePoint::mouseReleaseEvent(event);

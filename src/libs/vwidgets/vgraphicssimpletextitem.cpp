@@ -82,13 +82,6 @@ VGraphicsSimpleTextItem::VGraphicsSimpleTextItem( const QString & text, QGraphic
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-VGraphicsSimpleTextItem::~VGraphicsSimpleTextItem()
-{
-    //Disable cursor-arrow-openhand
-    RestoreOverrideCursor(cursorArrowOpenHand);
-}
-
-//---------------------------------------------------------------------------------------------------------------------
 void VGraphicsSimpleTextItem::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
 {
     const qreal scale = SceneScale(scene());
@@ -194,7 +187,7 @@ void VGraphicsSimpleTextItem::hoverEnterEvent(QGraphicsSceneHoverEvent *event)
 {
     if (flags() & QGraphicsItem::ItemIsMovable)
     {
-        SetOverrideCursor(cursorArrowOpenHand, 1, 1);
+        SetItemOverrideCursor(this, cursorArrowOpenHand, 1, 1);
     }
     this->setBrush(Qt::green);
     QGraphicsSimpleTextItem::hoverEnterEvent(event);
@@ -209,8 +202,7 @@ void VGraphicsSimpleTextItem::hoverLeaveEvent(QGraphicsSceneHoverEvent *event)
 {
     if (flags() & QGraphicsItem::ItemIsMovable)
     {
-        //Disable cursor-arrow-openhand
-        RestoreOverrideCursor(cursorArrowOpenHand);
+        setCursor(QCursor());
     }
     this->setBrush(Qt::black);
     QGraphicsSimpleTextItem::hoverLeaveEvent(event);
@@ -242,7 +234,7 @@ void VGraphicsSimpleTextItem::mousePressEvent(QGraphicsSceneMouseEvent *event)
     {
         if (event->button() == Qt::LeftButton && event->type() != QEvent::GraphicsSceneMouseDoubleClick)
         {
-            SetOverrideCursor(cursorArrowCloseHand, 1, 1);
+            SetItemOverrideCursor(this, cursorArrowCloseHand, 1, 1);
         }
     }
     if (selectionType == SelectionType::ByMouseRelease)
@@ -262,8 +254,7 @@ void VGraphicsSimpleTextItem::mouseReleaseEvent(QGraphicsSceneMouseEvent *event)
     {
         if (event->button() == Qt::LeftButton && event->type() != QEvent::GraphicsSceneMouseDoubleClick)
         {
-            //Disable cursor-arrow-closehand
-            RestoreOverrideCursor(cursorArrowCloseHand);
+            SetItemOverrideCursor(this, cursorArrowOpenHand, 1, 1);
         }
     }
 

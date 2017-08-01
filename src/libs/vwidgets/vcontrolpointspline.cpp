@@ -92,13 +92,6 @@ VControlPointSpline::VControlPointSpline(const qint32 &indexSpline, SplinePointP
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-VControlPointSpline::~VControlPointSpline()
-{
-    //Disable cursor-arrow-openhand
-    RestoreOverrideCursor(cursorArrowOpenHand);
-}
-
-//---------------------------------------------------------------------------------------------------------------------
 void VControlPointSpline::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
 {
     QPen lPen = controlLine->pen();
@@ -117,7 +110,7 @@ void VControlPointSpline::hoverEnterEvent(QGraphicsSceneHoverEvent *event)
 {
     if (freeAngle || freeLength)
     {
-        SetOverrideCursor(cursorArrowOpenHand, 1, 1);
+        SetItemOverrideCursor(this, cursorArrowOpenHand, 1, 1);
     }
     VScenePoint::hoverEnterEvent(event);
 }
@@ -127,8 +120,7 @@ void VControlPointSpline::hoverLeaveEvent(QGraphicsSceneHoverEvent *event)
 {
     if (freeAngle || freeLength)
     {
-        //Disable cursor-arrow-openhand
-        RestoreOverrideCursor(cursorArrowOpenHand);
+        setCursor(QCursor());
     }
     VScenePoint::hoverLeaveEvent(event);
 }
@@ -226,7 +218,7 @@ void VControlPointSpline::mousePressEvent(QGraphicsSceneMouseEvent *event)
     {
         if (freeAngle || freeLength)
         {
-            SetOverrideCursor(cursorArrowCloseHand, 1, 1);
+            SetItemOverrideCursor(this, cursorArrowCloseHand, 1, 1);
         }
     }
     VScenePoint::mousePressEvent(event);
@@ -239,8 +231,7 @@ void VControlPointSpline::mouseReleaseEvent(QGraphicsSceneMouseEvent *event)
     {
         if (freeAngle || freeLength)
         {
-            //Disable cursor-arrow-closehand
-            RestoreOverrideCursor(cursorArrowCloseHand);
+            SetItemOverrideCursor(this, cursorArrowOpenHand, 1, 1);
         }
     }
     VScenePoint::mouseReleaseEvent(event);

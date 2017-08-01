@@ -7,7 +7,7 @@
 # File with common stuff for whole project
 include(../../../common.pri)
 
-QT += widgets printsupport testlib
+QT += widgets printsupport testlib gui
 
 # Name of library
 TARGET = vmisc

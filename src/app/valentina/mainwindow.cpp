@@ -2199,10 +2199,7 @@ void  MainWindow::ArrowTool()
 
     ui->view->AllowRubberBand(true);
 
-    RestoreOverrideCursor(cursorArrowCloseHand);
-    RestoreOverrideCursor(cursorArrowOpenHand);
-    QCursor cur(Qt::ArrowCursor);
-    ui->view->setCursor(cur);
+    ui->view->setCursor(Qt::ArrowCursor);
     helpLabel->setText("");
     ui->view->setShowToolOptions(true);
     qCDebug(vMainWindow, "Enabled arrow tool.");

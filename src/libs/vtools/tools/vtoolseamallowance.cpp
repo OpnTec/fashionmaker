@@ -975,7 +975,7 @@ void VToolSeamAllowance::mousePressEvent(QGraphicsSceneMouseEvent *event)
     {
         if (event->button() == Qt::LeftButton && event->type() != QEvent::GraphicsSceneMouseDoubleClick)
         {
-            SetOverrideCursor(cursorArrowCloseHand, 1, 1);
+            SetItemOverrideCursor(this, cursorArrowCloseHand, 1, 1);
         }
     }
 
@@ -993,20 +993,9 @@ void VToolSeamAllowance::mouseReleaseEvent(QGraphicsSceneMouseEvent *event)
 {
     if (event->button() == Qt::LeftButton)
     {
-        //Disable cursor-arrow-closehand
-        RestoreOverrideCursor(cursorArrowCloseHand);
+        SetItemOverrideCursor(this, cursorArrowOpenHand, 1, 1);
     }
     QGraphicsPathItem::mouseReleaseEvent(event);
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void VToolSeamAllowance::hoverMoveEvent(QGraphicsSceneHoverEvent *event)
-{
-    Q_UNUSED(event);
-    if (flags() & QGraphicsItem::ItemIsMovable)
-    {
-        SetOverrideCursor(cursorArrowOpenHand, 1, 1);
-    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -1014,7 +1003,7 @@ void VToolSeamAllowance::hoverEnterEvent(QGraphicsSceneHoverEvent *event)
 {
     if (flags() & QGraphicsItem::ItemIsMovable)
     {
-        SetOverrideCursor(cursorArrowOpenHand, 1, 1);
+        SetItemOverrideCursor(this, cursorArrowOpenHand, 1, 1);
     }
     QGraphicsPathItem::hoverEnterEvent(event);
 }
@@ -1025,7 +1014,7 @@ void VToolSeamAllowance::hoverLeaveEvent(QGraphicsSceneHoverEvent *event)
     //Disable cursor-arrow-openhand
     if (flags() & QGraphicsItem::ItemIsMovable)
     {
-        RestoreOverrideCursor(cursorArrowOpenHand);
+        setCursor(QCursor());
     }
     QGraphicsPathItem::hoverLeaveEvent(event);
 }

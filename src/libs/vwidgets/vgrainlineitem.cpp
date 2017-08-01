@@ -305,7 +305,7 @@ void VGrainlineItem::mousePressEvent(QGraphicsSceneMouseEvent* pME)
             else
             {
                 m_eMode = mRotate;
-                SetOverrideCursor(cursorArrowCloseHand, 1, 1);
+                SetItemOverrideCursor(this, cursorArrowCloseHand, 1, 1);
             }
             setZValue(ACTIVE_Z);
             Update();
@@ -336,7 +336,7 @@ void VGrainlineItem::mousePressEvent(QGraphicsSceneMouseEvent* pME)
             else
             {
                 m_eMode = mMove;
-                SetOverrideCursor(cursorArrowCloseHand, 1, 1);
+                SetItemOverrideCursor(this, cursorArrowCloseHand, 1, 1);
             }
 
             setZValue(ACTIVE_Z);
@@ -458,13 +458,9 @@ void VGrainlineItem::mouseReleaseEvent(QGraphicsSceneMouseEvent* pME)
 {
     if (pME->button() == Qt::LeftButton)
     {
-        if (m_eMode == mMove || m_eMode == mRotate)
+        if (m_eMode == mMove || m_eMode == mRotate || m_eMode == mResize)
         {
-            RestoreOverrideCursor(cursorArrowCloseHand);
-        }
-        else if (m_eMode == mResize)
-        {
-            RestoreOverrideCursor(Qt::SizeFDiagCursor);
+            SetItemOverrideCursor(this, cursorArrowOpenHand, 1, 1);
         }
 
         QPointF ptDiff = pME->scenePos() - m_ptStartMove;
@@ -709,7 +705,7 @@ void VGrainlineItem::AllUserModifications(const QPointF &pos)
     }
     else
     {
-        SetOverrideCursor(cursorArrowCloseHand, 1, 1);
+        SetItemOverrideCursor(this, cursorArrowCloseHand, 1, 1);
     }
 }
 
@@ -720,7 +716,7 @@ void VGrainlineItem::UserRotateAndMove()
     {
         m_eMode = mMove;
     }
-    SetOverrideCursor(cursorArrowCloseHand, 1, 1);
+    SetItemOverrideCursor(this, cursorArrowCloseHand, 1, 1);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -729,12 +725,12 @@ void VGrainlineItem::UserMoveAndResize(const QPointF &pos)
     if (m_polyResize.containsPoint(pos, Qt::OddEvenFill) == true)
     {
         m_eMode = mResize;
-        SetOverrideCursor(Qt::SizeFDiagCursor);
+        setCursor(Qt::SizeFDiagCursor);
     }
     else
     {
         m_eMode = mMove; // block later if need
-        SetOverrideCursor(cursorArrowCloseHand, 1, 1);
+        SetItemOverrideCursor(this, cursorArrowCloseHand, 1, 1);
     }
 }
 

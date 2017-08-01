@@ -432,7 +432,7 @@ void VTextGraphicsItem::mousePressEvent(QGraphicsSceneMouseEvent *pME)
             else
             {
                 m_eMode = mRotate;
-                SetOverrideCursor(cursorArrowCloseHand, 1, 1);
+                SetItemOverrideCursor(this, cursorArrowCloseHand, 1, 1);
             }
             setZValue(ACTIVE_Z);
             Update();
@@ -463,7 +463,7 @@ void VTextGraphicsItem::mousePressEvent(QGraphicsSceneMouseEvent *pME)
             else
             {
                 m_eMode = mMove;
-                SetOverrideCursor(cursorArrowCloseHand, 1, 1);
+                SetItemOverrideCursor(this, cursorArrowCloseHand, 1, 1);
             }
 
             setZValue(ACTIVE_Z);
@@ -572,13 +572,9 @@ void VTextGraphicsItem::mouseReleaseEvent(QGraphicsSceneMouseEvent* pME)
     if (pME->button() == Qt::LeftButton)
     {
         // restore the cursor
-        if (m_eMode == mMove || m_eMode == mRotate)
+        if (m_eMode == mMove || m_eMode == mRotate || m_eMode == mResize)
         {
-            RestoreOverrideCursor(cursorArrowCloseHand);
-        }
-        else if (m_eMode == mResize)
-        {
-            RestoreOverrideCursor(Qt::SizeFDiagCursor);
+            SetItemOverrideCursor(this, cursorArrowOpenHand, 1, 1);
         }
         double dDist = fabs(pME->scenePos().x() - m_ptStart.x()) + fabs(pME->scenePos().y() - m_ptStart.y());
         // determine if this was just press/release (bShort == true) or user did some operation between press and release
@@ -634,11 +630,11 @@ void VTextGraphicsItem::hoverMoveEvent(QGraphicsSceneHoverEvent* pHE)
     {
         if (m_rectResize.contains(pHE->pos()) == true)
         {
-            SetOverrideCursor(Qt::SizeFDiagCursor);
+            setCursor(Qt::SizeFDiagCursor);
         }
         else
         {
-            RestoreOverrideCursor(Qt::SizeFDiagCursor);
+            SetItemOverrideCursor(this, cursorArrowOpenHand, 1, 1);
         }
     }
     VPieceItem::hoverMoveEvent(pHE);
@@ -651,7 +647,7 @@ void VTextGraphicsItem::hoverMoveEvent(QGraphicsSceneHoverEvent* pHE)
  */
 void VTextGraphicsItem::hoverLeaveEvent(QGraphicsSceneHoverEvent* pHE)
 {
-    RestoreOverrideCursor(Qt::SizeFDiagCursor);
+    setCursor(QCursor());
     VPieceItem::hoverLeaveEvent(pHE);
 }
 
@@ -694,7 +690,7 @@ void VTextGraphicsItem::AllUserModifications(const QPointF &pos)
     }
     else
     {
-        SetOverrideCursor(cursorArrowCloseHand, 1, 1);
+        SetItemOverrideCursor(this, cursorArrowCloseHand, 1, 1);
     }
 }
 
@@ -705,7 +701,7 @@ void VTextGraphicsItem::UserRotateAndMove()
     {
         m_eMode = mMove;
     }
-    SetOverrideCursor(cursorArrowCloseHand, 1, 1);
+    SetItemOverrideCursor(this, cursorArrowCloseHand, 1, 1);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -714,11 +710,11 @@ void VTextGraphicsItem::UserMoveAndResize(const QPointF &pos)
     if (m_rectResize.contains(pos) == true)
     {
         m_eMode = mResize;
-        SetOverrideCursor(Qt::SizeFDiagCursor);
+        setCursor(Qt::SizeFDiagCursor);
     }
     else
     {
         m_eMode = mMove; // block later if need
-        SetOverrideCursor(cursorArrowCloseHand, 1, 1);
+        SetItemOverrideCursor(this, cursorArrowCloseHand, 1, 1);
     }
 }

@@ -53,7 +53,7 @@ class VToolBasePoint : public VToolSinglePoint
 {
     Q_OBJECT
 public:
-    virtual ~VToolBasePoint() Q_DECL_OVERRIDE;
+    virtual ~VToolBasePoint() =default;
     virtual void setDialog() Q_DECL_OVERRIDE;
     static VToolBasePoint *Create(quint32 _id, const QString &nameActivPP, VPointF *point,
                                   VMainGraphicsScene *scene, VAbstractPattern *doc, VContainer *data,

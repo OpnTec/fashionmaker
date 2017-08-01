@@ -51,6 +51,7 @@ template <class T> class QSharedPointer;
 class QComboBox;
 class QMarginsF;
 class VTranslateMeasurements;
+class QGraphicsItem;
 
 #define SceneSize 50000
 
@@ -373,10 +374,7 @@ extern const QString unitCM;
 extern const QString unitINCH;
 extern const QString unitPX;
 
-void SetOverrideCursor(const QString & pixmapPath, int hotX = -1, int hotY = -1);
-void SetOverrideCursor(Qt::CursorShape shape);
-void RestoreOverrideCursor(const QString & pixmapPath);
-void RestoreOverrideCursor(Qt::CursorShape shape);
+void SetItemOverrideCursor(QGraphicsItem *item, const QString & pixmapPath, int hotX = -1, int hotY = -1);
 
 extern const qreal PrintDPI;
 

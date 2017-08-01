@@ -51,6 +51,8 @@
 #include <QStringData>
 #include <QStringDataPtr>
 #include <QtDebug>
+#include <QPixmapCache>
+#include <QGraphicsItem>
 
 #include "vabstractapplication.h"
 
@@ -125,94 +127,25 @@ const QString unitINCH = QStringLiteral("inch");
 const QString unitPX   = QStringLiteral("px");
 
 //---------------------------------------------------------------------------------------------------------------------
-void SetOverrideCursor(const QString &pixmapPath, int hotX, int hotY)
+void SetItemOverrideCursor(QGraphicsItem *item, const QString &pixmapPath, int hotX, int hotY)
 {
 #ifndef QT_NO_CURSOR
-    QPixmap oldPixmap;
-    if (QCursor *oldCursor = QGuiApplication::overrideCursor())
-    {
-        oldPixmap = oldCursor->pixmap();
-    }
-    QPixmap newPixmap(pixmapPath);
+    SCASSERT(item != nullptr)
 
-    QImage oldImage = oldPixmap.toImage();
-    QImage newImage = newPixmap.toImage();
+    QPixmap pixmap;
 
-    if (oldImage != newImage )
+    if (not QPixmapCache::find(pixmapPath, pixmap))
     {
-        QGuiApplication::setOverrideCursor(QCursor(newPixmap, hotX, hotY));
+        pixmap = QPixmap(pixmapPath);
+        QPixmapCache::insert(pixmapPath, pixmap);
     }
+
+    item->setCursor(QCursor(pixmap, hotX, hotY));
 #else
+    Q_UNUSED(item)
     Q_UNUSED(pixmapPath)
     Q_UNUSED(hotX)
     Q_UNUSED(hotY)
-#endif
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void SetOverrideCursor(Qt::CursorShape shape)
-{
-#ifndef QT_NO_CURSOR
-    QPixmap oldPixmap;
-    QCursor* pOldCursor = QGuiApplication::overrideCursor();
-    if (pOldCursor != nullptr)
-    {
-        oldPixmap = pOldCursor->pixmap();
-    }
-    QCursor cursor(shape);
-    QPixmap newPixmap = cursor.pixmap();
-    if (oldPixmap.toImage() != newPixmap.toImage())
-    {
-        QGuiApplication::setOverrideCursor(cursor);
-    }
-
-#else
-    Q_UNUSED(shape)
-#endif
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void RestoreOverrideCursor(const QString &pixmapPath)
-{
-#ifndef QT_NO_CURSOR
-    QPixmap oldPixmap;
-    if (QCursor *oldCursor = QGuiApplication::overrideCursor())
-    {
-        oldPixmap = oldCursor->pixmap();
-    }
-    QPixmap newPixmap(pixmapPath);
-
-    QImage oldImage = oldPixmap.toImage();
-    QImage newImage = newPixmap.toImage();
-
-    if (oldImage == newImage )
-    {
-        QGuiApplication::restoreOverrideCursor();
-    }
-#else
-    Q_UNUSED(pixmapPath)
-#endif
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void RestoreOverrideCursor(Qt::CursorShape shape)
-{
-#ifndef QT_NO_CURSOR
-    QPixmap oldPixmap;
-    QCursor* pOldCursor = QGuiApplication::overrideCursor();
-    if (pOldCursor != nullptr)
-    {
-        oldPixmap = pOldCursor->pixmap();
-    }
-    QCursor cursor(shape);
-    QPixmap newPixmap = cursor.pixmap();
-    if (oldPixmap.toImage() == newPixmap.toImage())
-    {
-        QGuiApplication::restoreOverrideCursor();
-    }
-
-#else
-    Q_UNUSED(shape)
 #endif
 }
 
