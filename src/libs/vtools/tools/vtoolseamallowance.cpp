@@ -818,6 +818,19 @@ QRectF VToolSeamAllowance::boundingRect() const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+QPainterPath VToolSeamAllowance::shape() const
+{
+    if (m_mainPath == QPainterPath())
+    {
+        return QGraphicsPathItem::shape();
+    }
+    else
+    {
+        return ItemShapeFromPath(m_mainPath, pen());
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 void VToolSeamAllowance::AddToFile()
 {
     const VPiece piece = VAbstractTool::data.GetPiece(id);

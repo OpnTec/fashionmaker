@@ -97,6 +97,7 @@ public:
     virtual void         paint(QPainter *painter, const QStyleOptionGraphicsItem *option,
                                QWidget *widget) Q_DECL_OVERRIDE;
     virtual QRectF       boundingRect() const Q_DECL_OVERRIDE;
+    virtual QPainterPath shape() const Q_DECL_OVERRIDE;
 public slots:
     virtual void FullUpdateFromFile () Q_DECL_OVERRIDE;
     void         EnableToolMove(bool move);
