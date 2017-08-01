@@ -807,18 +807,14 @@ void VToolSeamAllowance::paint(QPainter *painter, const QStyleOptionGraphicsItem
 //---------------------------------------------------------------------------------------------------------------------
 QRectF VToolSeamAllowance::boundingRect() const
 {
-    VPiece detail;
-
-    try
+    if (m_mainPathRect.isNull())
     {
-        detail = VAbstractTool::data.GetPiece(id);
+        return QGraphicsPathItem::boundingRect();
     }
-    catch(const VExceptionBadId &)
+    else
     {
-        return QRectF();
+        return m_mainPathRect;
     }
-
-    return detail.MainPathPath(this->getData()).boundingRect();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -1114,6 +1110,8 @@ VToolSeamAllowance::VToolSeamAllowance(VAbstractPattern *doc, VContainer *data, 
                                        const QString &drawName, QGraphicsItem *parent)
     : VInteractiveTool(doc, data, id),
       QGraphicsPathItem(parent),
+      m_mainPath(),
+      m_mainPathRect(),
       m_sceneDetails(scene),
       m_drawName(drawName),
       m_seamAllowance(new VNoBrushScalePathItem(this)),
@@ -1191,16 +1189,21 @@ void VToolSeamAllowance::RefreshGeometry()
     this->setFlag(QGraphicsItem::ItemSendsGeometryChanges, false);
 
     const VPiece detail = VAbstractTool::data.GetPiece(id);
-    QPainterPath path;
+    QPainterPath path = detail.MainPathPath(this->getData());
 
     if (not detail.IsHideMainPath() || not detail.IsSeamAllowance() || detail.IsSeamAllowanceBuiltIn())
     {
+        m_mainPath = QPainterPath();
+        m_mainPathRect = QRectF();
         m_seamAllowance->setBrush(QBrush(Qt::Dense7Pattern));
-        path = detail.MainPathPath(this->getData());
     }
     else
     {
         m_seamAllowance->setBrush(QBrush(Qt::NoBrush)); // Disable if the main path was hidden
+        // need for returning a bounding rect when main path is not visible
+        m_mainPath = path;
+        m_mainPathRect = m_mainPath.controlPointRect();
+        path = QPainterPath();
     }
 
     this->setPath(path);

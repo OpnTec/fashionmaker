@@ -91,12 +91,12 @@ public:
     virtual int        type() const Q_DECL_OVERRIDE {return Type;}
     enum { Type = UserType + static_cast<int>(Tool::Piece)};
 
-    virtual QString    getTagName() const Q_DECL_OVERRIDE;
-    virtual void       ShowVisualization(bool show) Q_DECL_OVERRIDE;
-    virtual void       GroupVisibility(quint32 object, bool visible) Q_DECL_OVERRIDE;
-    virtual void       paint(QPainter *painter, const QStyleOptionGraphicsItem *option,
-                             QWidget *widget) Q_DECL_OVERRIDE;
-    virtual QRectF     boundingRect() const Q_DECL_OVERRIDE;
+    virtual QString      getTagName() const Q_DECL_OVERRIDE;
+    virtual void         ShowVisualization(bool show) Q_DECL_OVERRIDE;
+    virtual void         GroupVisibility(quint32 object, bool visible) Q_DECL_OVERRIDE;
+    virtual void         paint(QPainter *painter, const QStyleOptionGraphicsItem *option,
+                               QWidget *widget) Q_DECL_OVERRIDE;
+    virtual QRectF       boundingRect() const Q_DECL_OVERRIDE;
 public slots:
     virtual void FullUpdateFromFile () Q_DECL_OVERRIDE;
     void         EnableToolMove(bool move);
@@ -138,6 +138,9 @@ protected:
 
 private:
     Q_DISABLE_COPY(VToolSeamAllowance)
+
+    QPainterPath m_mainPath; // Must be first to prevent crash
+    QRectF       m_mainPathRect;
 
     /** @brief sceneDetails pointer to the scene. */
     VMainGraphicsScene *m_sceneDetails;
