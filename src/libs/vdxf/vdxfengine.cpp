@@ -737,7 +737,7 @@ void VDxfEngine::ExportAAMAGrainline(dx_ifaceBlock *detailBlock, const VLayoutPi
     const QVector<QPointF> grainline = detail.GetGrainline();
     if (grainline.count() > 1)
     {
-        DRW_Entity *e = AAMALine(QLineF(grainline.last(), grainline.first()), "7");
+        DRW_Entity *e = AAMALine(QLineF(grainline.first(), grainline.last()), "7");
         if (e)
         {
             detailBlock->ent.push_back(e);
