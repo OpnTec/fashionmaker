@@ -88,8 +88,7 @@ public:
 
     VDomDocument();
     virtual ~VDomDocument() Q_DECL_EQ_DEFAULT;
-    QDomElement    elementById(const QString& id, const QString &tagName = QString());
-    QDomElement    elementById(quint32 id, const QString &tagName = QString());
+    QDomElement elementById(quint32 id, const QString &tagName = QString());
 
     template <typename T>
     void SetAttribute(QDomElement &domElement, const QString &name, const T &value) const;
@@ -134,9 +133,9 @@ protected:
 private:
     Q_DISABLE_COPY(VDomDocument)
     /** @brief Map used for finding element by id. */
-    QHash<QString, QDomElement> map;
+    QHash<quint32, QDomElement> map;
 
-    bool           find(const QDomElement &node, const QString& id);
+    bool           find(const QDomElement &node, quint32 id);
 
     bool SaveCanonicalXML(QIODevice *file, int indent, QString &error) const;
 };

@@ -189,13 +189,13 @@ VDomDocument::VDomDocument()
 {}
 
 //---------------------------------------------------------------------------------------------------------------------
-/**
- * @brief Finds an element by id.
- * @param id value id attribute.
- * @return dom element.
- */
-QDomElement VDomDocument::elementById(const QString& id, const QString &tagName)
+QDomElement VDomDocument::elementById(quint32 id, const QString &tagName)
 {
+    if (id == 0)
+    {
+        return QDomElement();
+    }
+
     if (map.contains(id))
     {
        const QDomElement e = map[id];
@@ -221,11 +221,19 @@ QDomElement VDomDocument::elementById(const QString& id, const QString &tagName)
             const QDomElement domElement = list.at(i).toElement();
             if (not domElement.isNull() && domElement.hasAttribute(AttrId))
             {
-                const QString value = domElement.attribute(AttrId);
-                this->map[value] = domElement;
-                if (value == id)
+                try
                 {
-                    return domElement;
+                    const quint32 elementId = GetParametrUInt(domElement, AttrId, NULL_ID_STR);
+
+                    this->map[elementId] = domElement;
+                    if (elementId == id)
+                    {
+                        return domElement;
+                    }
+                }
+                catch (const VExceptionConversionError &)
+                {
+                    // do nothing
                 }
             }
         }
@@ -235,27 +243,29 @@ QDomElement VDomDocument::elementById(const QString& id, const QString &tagName)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QDomElement VDomDocument::elementById(quint32 id, const QString &tagName)
-{
-    return elementById(QString().setNum(id), tagName);
-}
-
-//---------------------------------------------------------------------------------------------------------------------
 /**
  * @brief Find element by id.
  * @param node node
  * @param id id value
  * @return true if found
  */
-bool VDomDocument::find(const QDomElement &node, const QString& id)
+bool VDomDocument::find(const QDomElement &node, quint32 id)
 {
     if (node.hasAttribute(AttrId))
     {
-        const QString value = node.attribute(AttrId);
-        this->map[value] = node;
-        if (value == id)
+        try
         {
-            return true;
+            const quint32 elementId = GetParametrUInt(node, AttrId, NULL_ID_STR);
+
+            this->map[elementId] = node;
+            if (elementId == id)
+            {
+                return true;
+            }
+        }
+        catch (const VExceptionConversionError &)
+        {
+            // do nothing
         }
     }
 
@@ -815,7 +825,7 @@ QDomElement VDomDocument::CloneNodeById(const quint32 &nodeId)
 //---------------------------------------------------------------------------------------------------------------------
 QDomElement VDomDocument::NodeById(const quint32 &nodeId)
 {
-    QDomElement domElement = elementById(QString().setNum(nodeId));
+    QDomElement domElement = elementById(nodeId);
     if (domElement.isNull() || domElement.isElement() == false)
     {
         throw VExceptionBadId(tr("Couldn't get node"), nodeId);
