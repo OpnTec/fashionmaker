@@ -75,7 +75,6 @@ protected:
 
     void          RefreshGeometry();
     virtual void  RemoveReferens() Q_DECL_OVERRIDE;
-    void          FullUpdateCurveFromFile(const QString &attrCurve);
 
     template <typename T>
     void ShowToolVisualization(bool show);
