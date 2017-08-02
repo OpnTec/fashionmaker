@@ -194,7 +194,7 @@ VDomDocument::VDomDocument()
  * @param id value id attribute.
  * @return dom element.
  */
-QDomElement VDomDocument::elementById(const QString& id)
+QDomElement VDomDocument::elementById(const QString& id, const QString &tagName)
 {
     if (map.contains(id))
     {
@@ -206,18 +206,38 @@ QDomElement VDomDocument::elementById(const QString& id)
        map.remove(id);
     }
 
-    if (this->find(this->documentElement(), id))
+    if (tagName.isEmpty())
     {
-       return map[id];
+        if (this->find(this->documentElement(), id))
+        {
+           return map[id];
+        }
+    }
+    else
+    {
+        const QDomNodeList list = elementsByTagName(tagName);
+        for (int i=0; i < list.size(); ++i)
+        {
+            const QDomElement domElement = list.at(i).toElement();
+            if (not domElement.isNull() && domElement.hasAttribute(AttrId))
+            {
+                const QString value = domElement.attribute(AttrId);
+                this->map[value] = domElement;
+                if (value == id)
+                {
+                    return domElement;
+                }
+            }
+        }
     }
 
     return QDomElement();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QDomElement VDomDocument::elementById(quint32 id)
+QDomElement VDomDocument::elementById(quint32 id, const QString &tagName)
 {
-    return elementById(QString().setNum(id));
+    return elementById(QString().setNum(id), tagName);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

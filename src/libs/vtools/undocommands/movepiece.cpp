@@ -52,7 +52,7 @@ MovePiece::MovePiece(VAbstractPattern *doc, const double &x, const double &y, co
     nodeId = id;
 
     SCASSERT(scene != nullptr)
-    QDomElement domElement = doc->elementById(id);
+    QDomElement domElement = doc->elementById(id, VAbstractPattern::TagDetail);
     if (domElement.isElement())
     {
         m_oldX = qApp->toPixel(doc->GetParametrDouble(domElement, AttrMx, "0.0"));
@@ -74,7 +74,7 @@ void MovePiece::undo()
 {
     qCDebug(vUndo, "Undo.");
 
-    QDomElement domElement = doc->elementById(nodeId);
+    QDomElement domElement = doc->elementById(nodeId, VAbstractPattern::TagDetail);
     if (domElement.isElement())
     {
         SaveCoordinates(domElement, m_oldX, m_oldY);
@@ -93,7 +93,7 @@ void MovePiece::redo()
 {
     qCDebug(vUndo, "Redo.");
 
-    QDomElement domElement = doc->elementById(nodeId);
+    QDomElement domElement = doc->elementById(nodeId, VAbstractPattern::TagDetail);
     if (domElement.isElement())
     {
         SaveCoordinates(domElement, m_newX, m_newY);

@@ -90,7 +90,7 @@ void VAbstractNode::incrementReferens()
             doc->IncrementReferens(node->getIdTool());
         }
         ShowNode();
-        QDomElement domElement = doc->elementById(id);
+        QDomElement domElement = doc->elementById(id, getTagName());
         if (domElement.isElement())
         {
             doc->SetParametrUsage(domElement, AttrInUse, NodeUsage::InUse);
@@ -117,7 +117,7 @@ void VAbstractNode::decrementReferens()
             doc->DecrementReferens(node->getIdTool());
         }
         HideNode();
-        QDomElement domElement = doc->elementById(id);
+        QDomElement domElement = doc->elementById(id, getTagName());
         if (domElement.isElement())
         {
             doc->SetParametrUsage(domElement, AttrInUse, NodeUsage::NotInUse);

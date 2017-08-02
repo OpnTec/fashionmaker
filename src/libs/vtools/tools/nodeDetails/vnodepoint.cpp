@@ -230,7 +230,7 @@ void VNodePoint::NameChangePosition(const QPointF &pos)
  */
 void VNodePoint::UpdateNamePosition(qreal mx, qreal my)
 {
-    QDomElement domElement = doc->elementById(id);
+    QDomElement domElement = doc->elementById(id, getTagName());
     if (domElement.isElement())
     {
         doc->SetAttribute(domElement, AttrMx, QString().setNum(qApp->fromPixel(mx)));

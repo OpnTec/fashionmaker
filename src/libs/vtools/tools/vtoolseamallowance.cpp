@@ -857,7 +857,7 @@ void VToolSeamAllowance::AddToFile()
 //---------------------------------------------------------------------------------------------------------------------
 void VToolSeamAllowance::RefreshDataInFile()
 {
-    QDomElement domElement = doc->elementById(id);
+    QDomElement domElement = doc->elementById(id, getTagName());
     if (domElement.isElement())
     {
         // Refresh only parts that we possibly need to update

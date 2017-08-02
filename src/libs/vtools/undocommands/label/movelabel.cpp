@@ -44,7 +44,7 @@ MoveLabel::MoveLabel(VAbstractPattern *doc, const double &x, const double &y, co
 {
     setText(tr("move point label"));
 
-    QDomElement domElement = doc->elementById(nodeId);
+    QDomElement domElement = doc->elementById(nodeId, VAbstractPattern::TagPoint);
     if (domElement.isElement())
     {
         m_oldMx = qApp->toPixel(doc->GetParametrDouble(domElement, AttrMx, "0.0"));
@@ -95,7 +95,7 @@ void MoveLabel::Do(double mx, double my)
     qCDebug(vUndo, "New mx %f", mx);
     qCDebug(vUndo, "New my %f", my);
 
-    QDomElement domElement = doc->elementById(nodeId);
+    QDomElement domElement = doc->elementById(nodeId, VAbstractPattern::TagPoint);
     if (domElement.isElement())
     {
         doc->SetAttribute(domElement, AttrMx, QString().setNum(qApp->fromPixel(mx)));

@@ -58,7 +58,7 @@ void SavePiecePathOptions::undo()
 {
     qCDebug(vUndo, "Undo.");
 
-    QDomElement domElement = doc->elementById(nodeId);
+    QDomElement domElement = doc->elementById(nodeId, VAbstractPattern::TagPath);
     if (domElement.isElement())
     {
         VToolPiecePath::AddAttributes(doc, domElement, nodeId, m_oldPath);
@@ -82,7 +82,7 @@ void SavePiecePathOptions::redo()
 {
     qCDebug(vUndo, "Redo.");
 
-    QDomElement domElement = doc->elementById(nodeId);
+    QDomElement domElement = doc->elementById(nodeId, VAbstractPattern::TagPath);
     if (domElement.isElement())
     {
         VToolPiecePath::AddAttributes(doc, domElement, nodeId, m_newPath);

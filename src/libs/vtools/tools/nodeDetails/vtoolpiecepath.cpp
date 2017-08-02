@@ -146,7 +146,7 @@ void VToolPiecePath::incrementReferens()
             IncrementNodes(VAbstractTool::data.GetPiecePath(id));
         }
         ShowNode();
-        QDomElement domElement = doc->elementById(id);
+        QDomElement domElement = doc->elementById(id, getTagName());
         if (domElement.isElement())
         {
             doc->SetParametrUsage(domElement, AttrInUse, NodeUsage::InUse);
@@ -169,7 +169,7 @@ void VToolPiecePath::decrementReferens()
             DecrementNodes(VAbstractTool::data.GetPiecePath(id));
         }
         HideNode();
-        QDomElement domElement = doc->elementById(id);
+        QDomElement domElement = doc->elementById(id, getTagName());
         if (domElement.isElement())
         {
             doc->SetParametrUsage(domElement, AttrInUse, NodeUsage::NotInUse);

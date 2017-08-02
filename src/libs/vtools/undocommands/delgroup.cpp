@@ -86,7 +86,7 @@ void DelGroup::redo()
     QDomElement groups = doc->CreateGroups();
     if (not groups.isNull())
     {
-        QDomElement group = doc->elementById(nodeId);
+        QDomElement group = doc->elementById(nodeId, VAbstractPattern::TagGroup);
         if (group.isElement())
         {
             group.setAttribute(VAbstractPattern::AttrVisible, trueStr);

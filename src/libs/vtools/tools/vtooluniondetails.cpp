@@ -97,7 +97,7 @@ namespace
 //---------------------------------------------------------------------------------------------------------------------
 VPiecePath GetPiecePath(int piece, VAbstractPattern *doc, quint32 id)
 {
-    const QDomElement tool = doc->elementById(id);
+    const QDomElement tool = doc->elementById(id, VAbstractPattern::TagTools);
     if (tool.isNull())
     {
         VException e(QString("Can't get tool by id='%1'.").arg(id));
@@ -140,7 +140,7 @@ VPiecePath GetPiece2MainPath(VAbstractPattern *doc, quint32 id)
 //---------------------------------------------------------------------------------------------------------------------
 QVector<CustomSARecord> GetPiece2CSAPaths(VAbstractPattern *doc, quint32 id)
 {
-    const QDomElement tool = doc->elementById(id);
+    const QDomElement tool = doc->elementById(id, VAbstractPattern::TagTools);
     if (tool.isNull())
     {
         VException e(QString("Can't get tool by id='%1'.").arg(id));
@@ -171,7 +171,7 @@ QVector<CustomSARecord> GetPiece2CSAPaths(VAbstractPattern *doc, quint32 id)
 //---------------------------------------------------------------------------------------------------------------------
 QVector<quint32> GetPiece2InternalPaths(VAbstractPattern *doc, quint32 id)
 {
-    const QDomElement tool = doc->elementById(id);
+    const QDomElement tool = doc->elementById(id, VAbstractPattern::TagTools);
     if (tool.isNull())
     {
         VException e(QString("Can't get tool by id='%1'.").arg(id));
@@ -202,7 +202,7 @@ QVector<quint32> GetPiece2InternalPaths(VAbstractPattern *doc, quint32 id)
 //---------------------------------------------------------------------------------------------------------------------
 QVector<quint32> GetPiece2Pins(VAbstractPattern *doc, quint32 id)
 {
-    const QDomElement tool = doc->elementById(id);
+    const QDomElement tool = doc->elementById(id, VAbstractPattern::TagTools);
     if (tool.isNull())
     {
         VException e(QString("Can't get tool by id='%1'.").arg(id));
@@ -233,13 +233,13 @@ QVector<quint32> GetPiece2Pins(VAbstractPattern *doc, quint32 id)
 //---------------------------------------------------------------------------------------------------------------------
 QString DrawName(VAbstractPattern *doc, quint32 d1id, quint32 d2id)
 {
-    const QDomElement detail1 = doc->elementById(d1id);
+    const QDomElement detail1 = doc->elementById(d1id, VAbstractPattern::TagDetail);
     if (detail1.isNull())
     {
         return QString();
     }
 
-    const QDomElement detail2 = doc->elementById(d2id);
+    const QDomElement detail2 = doc->elementById(d2id, VAbstractPattern::TagDetail);
     if (detail2.isNull())
     {
         return QString();
@@ -656,7 +656,7 @@ void FindIndexJ(qint32 pointsD2, const VPiecePath &d2Path, quint32 indexD2, qint
 //---------------------------------------------------------------------------------------------------------------------
 QDomElement GetTagChildren(VAbstractPattern *doc, quint32 id)
 {
-    QDomElement toolUnion = doc->elementById(id);
+    QDomElement toolUnion = doc->elementById(id, VAbstractPattern::TagTools);
     if (toolUnion.isNull())
     {
         VException e(QString("Can't get tool by id='%1'.").arg(id));
@@ -717,7 +717,7 @@ void SavePinsChildren(VAbstractPattern *doc, quint32 id, const QVector<quint32> 
 //---------------------------------------------------------------------------------------------------------------------
 QVector<quint32> GetChildren(VAbstractPattern *doc, quint32 id, const QString &tagName)
 {
-    const QDomElement toolUnion = doc->elementById(id);
+    const QDomElement toolUnion = doc->elementById(id, VAbstractPattern::TagTools);
     if (toolUnion.isNull())
     {
         return QVector<quint32>();
@@ -1390,7 +1390,7 @@ void VToolUnionDetails::incrementReferens()
             doc->IncrementReferens(objects.at(i));
         }
 
-        QDomElement domElement = doc->elementById(id);
+        QDomElement domElement = doc->elementById(id, getTagName());
         if (domElement.isElement())
         {
             doc->SetParametrUsage(domElement, AttrInUse, NodeUsage::InUse);
@@ -1410,7 +1410,7 @@ void VToolUnionDetails::decrementReferens()
             doc->DecrementReferens(objects.at(i));
         }
 
-        QDomElement domElement = doc->elementById(id);
+        QDomElement domElement = doc->elementById(id, getTagName());
         if (domElement.isElement())
         {
             doc->SetParametrUsage(domElement, AttrInUse, NodeUsage::NotInUse);
@@ -1558,7 +1558,7 @@ void VToolUnionDetails::AddToModeling(const QDomElement &domElement)
 QVector<quint32> VToolUnionDetails::GetReferenceObjects() const
 {
     QVector<quint32> list;
-    const QDomElement tool = doc->elementById(id);
+    const QDomElement tool = doc->elementById(id, getTagName());
     if (tool.isNull())
     {
         return list;

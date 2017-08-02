@@ -2207,7 +2207,7 @@ QString VAbstractPattern::GetGroupName(quint32 id)
     QDomElement groups = CreateGroups();
     if (not groups.isNull())
     {
-        QDomElement group = elementById(id);
+        QDomElement group = elementById(id, TagGroup);
         if (group.isElement())
         {
             name = GetParametrString(group, AttrName, name);
@@ -2238,7 +2238,7 @@ void VAbstractPattern::SetGroupName(quint32 id, const QString &name)
     QDomElement groups = CreateGroups();
     if (not groups.isNull())
     {
-        QDomElement group = elementById(id);
+        QDomElement group = elementById(id, TagGroup);
         if (group.isElement())
         {
             group.setAttribute(AttrName, name);
@@ -2311,7 +2311,7 @@ QMap<quint32, QPair<QString, bool> > VAbstractPattern::GetGroups()
 //---------------------------------------------------------------------------------------------------------------------
 bool VAbstractPattern::GetGroupVisivility(quint32 id)
 {
-    QDomElement group = elementById(id);
+    QDomElement group = elementById(id, TagGroup);
     if (group.isElement())
     {
         return GetParametrBool(group, AttrVisible, trueStr);
@@ -2326,7 +2326,7 @@ bool VAbstractPattern::GetGroupVisivility(quint32 id)
 //---------------------------------------------------------------------------------------------------------------------
 void VAbstractPattern::SetGroupVisivility(quint32 id, bool visible)
 {
-    QDomElement group = elementById(id);
+    QDomElement group = elementById(id, TagGroup);
     if (group.isElement())
     {
         SetAttribute(group, AttrVisible, visible);

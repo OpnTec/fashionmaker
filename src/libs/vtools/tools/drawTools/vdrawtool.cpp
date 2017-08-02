@@ -106,7 +106,7 @@ void VDrawTool::ChangedNameDraw(const QString &oldName, const QString &newName)
 void VDrawTool::SaveDialogChange()
 {
     qCDebug(vTool, "Saving tool options after using dialog");
-    QDomElement oldDomElement = doc->elementById(id);
+    QDomElement oldDomElement = doc->elementById(id, getTagName());
     if (oldDomElement.isElement())
     {
         QDomElement newDomElement = oldDomElement.cloneNode().toElement();
@@ -138,7 +138,7 @@ void VDrawTool::AddToFile()
 void VDrawTool::SaveOption(QSharedPointer<VGObject> &obj)
 {
     qCDebug(vTool, "Saving tool options");
-    QDomElement oldDomElement = doc->elementById(id);
+    QDomElement oldDomElement = doc->elementById(id, getTagName());
     if (oldDomElement.isElement())
     {
         QDomElement newDomElement = oldDomElement.cloneNode().toElement();
@@ -179,7 +179,7 @@ bool VDrawTool::CorrectDisable(bool disable, const QString &namePP) const
 //---------------------------------------------------------------------------------------------------------------------
 void VDrawTool::ReadAttributes()
 {
-    const QDomElement domElement = doc->elementById(id);
+    const QDomElement domElement = doc->elementById(id, getTagName());
     if (domElement.isElement())
     {
         ReadToolAttributes(domElement);

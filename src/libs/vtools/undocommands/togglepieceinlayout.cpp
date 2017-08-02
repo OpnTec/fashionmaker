@@ -101,7 +101,7 @@ bool TogglePieceInLayout::getNewState() const
 //---------------------------------------------------------------------------------------------------------------------
 void TogglePieceInLayout::Do(bool state)
 {
-    QDomElement detail = doc->elementById(m_id);
+    QDomElement detail = doc->elementById(m_id, VAbstractPattern::TagDetail);
     if (detail.isElement())
     {
         if (state == false)

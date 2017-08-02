@@ -118,7 +118,7 @@ void OperationMoveLabel::Do(double mx, double my)
 //---------------------------------------------------------------------------------------------------------------------
 QDomElement OperationMoveLabel::GetDestinationObject(quint32 idTool, quint32 idPoint) const
 {
-    const QDomElement tool = doc->elementById(idTool);
+    const QDomElement tool = doc->elementById(idTool, VAbstractPattern::TagOperation);
     if (tool.isElement())
     {
         QDomElement correctDest;

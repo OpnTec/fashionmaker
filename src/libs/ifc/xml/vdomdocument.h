@@ -88,8 +88,8 @@ public:
 
     VDomDocument();
     virtual ~VDomDocument() Q_DECL_EQ_DEFAULT;
-    QDomElement    elementById(const QString& id);
-    QDomElement    elementById(quint32 id);
+    QDomElement    elementById(const QString& id, const QString &tagName = QString());
+    QDomElement    elementById(quint32 id, const QString &tagName = QString());
 
     template <typename T>
     void SetAttribute(QDomElement &domElement, const QString &name, const T &value) const;

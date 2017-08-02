@@ -53,7 +53,7 @@ void AddPiece::undo()
     QDomElement details = GetDetailsSection();
     if (not details.isNull())
     {
-        QDomElement domElement = doc->elementById(nodeId);
+        QDomElement domElement = doc->elementById(nodeId, VAbstractPattern::TagDetail);
         if (domElement.isElement())
         {
             if (details.removeChild(domElement).isNull())

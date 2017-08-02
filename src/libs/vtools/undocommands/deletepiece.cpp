@@ -50,7 +50,7 @@ DeletePiece::DeletePiece(VAbstractPattern *doc, quint32 id, const VPiece &detail
 {
     setText(tr("delete tool"));
     nodeId = id;
-    QDomElement domElement = doc->elementById(id);
+    QDomElement domElement = doc->elementById(id, VAbstractPattern::TagDetail);
     if (domElement.isElement())
     {
         xml = domElement.cloneNode().toElement();
@@ -91,7 +91,7 @@ void DeletePiece::redo()
 {
     qCDebug(vUndo, "Redo.");
 
-    QDomElement domElement = doc->elementById(nodeId);
+    QDomElement domElement = doc->elementById(nodeId, VAbstractPattern::TagDetail);
     if (domElement.isElement())
     {
         m_parentNode.removeChild(domElement);
