@@ -121,7 +121,7 @@ protected:
     /**
      * @brief RefreshDataInFile refresh attributes in file. If attributes don't exist create them.
      */
-    virtual void            RefreshDataInFile()=0;
+    virtual void            RefreshDataInFile();
     /**
      * @brief RemoveReferens decrement value of reference.
      */

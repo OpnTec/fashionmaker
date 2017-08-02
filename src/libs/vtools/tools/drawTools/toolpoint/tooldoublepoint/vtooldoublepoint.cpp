@@ -363,18 +363,3 @@ void VToolDoublePoint::AddToFile()
     SaveOptions(domElement, obj);
     AddToCalculation(domElement);
 }
-
-//---------------------------------------------------------------------------------------------------------------------
-void VToolDoublePoint::RefreshDataInFile()
-{
-    QDomElement domElement = doc->elementById(id);
-    if (domElement.isElement())
-    {
-        QSharedPointer<VGObject> obj = VContainer::GetFakeGObject(id);
-        SaveOptions(domElement, obj);
-    }
-    else
-    {
-        qCDebug(vTool, "Can't find tool with id = %u", id);
-    }
-}

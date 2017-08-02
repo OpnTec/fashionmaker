@@ -289,24 +289,6 @@ void VToolLine::AddToFile()
 
 //---------------------------------------------------------------------------------------------------------------------
 /**
- * @brief RefreshDataInFile refresh attributes in file. If attributes don't exist create them.
- */
-void VToolLine::RefreshDataInFile()
-{
-    QDomElement domElement = doc->elementById(id);
-    if (domElement.isElement())
-    {
-        QSharedPointer<VGObject> obj = QSharedPointer<VGObject> ();
-        SaveOptions(domElement, obj);
-    }
-    else
-    {
-        qDebug()<<"Can't find tool with id ="<< id << Q_FUNC_INFO;
-    }
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-/**
  * @brief hoverEnterEvent handle hover enter events.
  * @param event hover enter event.
  */

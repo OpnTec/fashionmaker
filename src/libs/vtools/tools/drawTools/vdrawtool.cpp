@@ -135,24 +135,6 @@ void VDrawTool::AddToFile()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-/**
- * @brief RefreshDataInFile refresh attributes in file. If attributes don't exist create them.
- */
-void VDrawTool::RefreshDataInFile()
-{
-    QDomElement domElement = doc->elementById(id);
-    if (domElement.isElement())
-    {
-        QSharedPointer<VGObject> obj = VAbstractTool::data.GetGObject(id);
-        SaveOptions(domElement, obj);
-    }
-    else
-    {
-        qCDebug(vTool, "Can't find tool with id = %u", id);
-    }
-}
-
-//---------------------------------------------------------------------------------------------------------------------
 void VDrawTool::SaveOption(QSharedPointer<VGObject> &obj)
 {
     qCDebug(vTool, "Saving tool options");

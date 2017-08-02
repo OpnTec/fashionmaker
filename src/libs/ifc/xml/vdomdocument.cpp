@@ -198,7 +198,7 @@ QDomElement VDomDocument::elementById(const QString& id)
 {
     if (map.contains(id))
     {
-       QDomElement e = map[id];
+       const QDomElement e = map[id];
        if (e.parentNode().nodeType() != QDomNode::BaseNode)
        {
            return e;
@@ -241,7 +241,7 @@ bool VDomDocument::find(const QDomElement &node, const QString& id)
 
     for (qint32 i=0; i<node.childNodes().length(); ++i)
     {
-        QDomNode n = node.childNodes().at(i);
+        const QDomNode n = node.childNodes().at(i);
         if (n.isElement())
         {
             if (this->find(n.toElement(), id))

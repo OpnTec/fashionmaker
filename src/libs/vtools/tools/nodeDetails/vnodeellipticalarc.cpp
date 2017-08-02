@@ -108,20 +108,6 @@ void VNodeEllipticalArc::AddToFile()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VNodeEllipticalArc::RefreshDataInFile()
-{
-    QDomElement domElement = doc->elementById(id);
-    if (domElement.isElement())
-    {
-        doc->SetAttribute(domElement, AttrIdObject, idNode);
-        if (idTool != NULL_ID)
-        {
-            doc->SetAttribute(domElement, AttrIdTool, idTool);
-        }
-    }
-}
-
-//---------------------------------------------------------------------------------------------------------------------
 VNodeEllipticalArc::VNodeEllipticalArc(VAbstractPattern *doc, VContainer *data, quint32 id, quint32 idArc,
                                        const Source &typeCreation, const QString &drawName, const quint32 &idTool,
                                        QObject *qoParent)

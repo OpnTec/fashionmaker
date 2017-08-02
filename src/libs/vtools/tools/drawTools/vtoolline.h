@@ -92,7 +92,6 @@ public slots:
 protected:
     virtual void     contextMenuEvent ( QGraphicsSceneContextMenuEvent * event ) Q_DECL_OVERRIDE;
     virtual void     AddToFile() Q_DECL_OVERRIDE;
-    virtual void     RefreshDataInFile() Q_DECL_OVERRIDE;
     virtual void     hoverEnterEvent ( QGraphicsSceneHoverEvent * event ) Q_DECL_OVERRIDE;
     virtual void     hoverLeaveEvent ( QGraphicsSceneHoverEvent * event ) Q_DECL_OVERRIDE;
     virtual void     RemoveReferens() Q_DECL_OVERRIDE;

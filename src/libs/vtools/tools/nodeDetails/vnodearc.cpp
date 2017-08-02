@@ -136,20 +136,3 @@ void VNodeArc::AddToFile()
 
     AddToModeling(domElement);
 }
-
-//---------------------------------------------------------------------------------------------------------------------
-/**
- * @brief RefreshDataInFile refresh attributes in file. If attributes don't exist create them.
- */
-void VNodeArc::RefreshDataInFile()
-{
-    QDomElement domElement = doc->elementById(id);
-    if (domElement.isElement())
-    {
-        doc->SetAttribute(domElement, AttrIdObject, idNode);
-        if (idTool != NULL_ID)
-        {
-            doc->SetAttribute(domElement, AttrIdTool, idTool);
-        }
-    }
-}

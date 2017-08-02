@@ -118,7 +118,6 @@ protected:
                        QGraphicsItem *parent = nullptr);
 
     virtual void AddToFile() Q_DECL_OVERRIDE;
-    virtual void RefreshDataInFile() Q_DECL_OVERRIDE;
 
     void UpdateNamePosition(quint32 id);
     void SaveSourceDestination(QDomElement &tag);

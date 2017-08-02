@@ -426,21 +426,6 @@ void VAbstractOperation::AddToFile()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VAbstractOperation::RefreshDataInFile()
-{
-    QDomElement domElement = doc->elementById(id);
-    if (domElement.isElement())
-    {
-        QSharedPointer<VGObject> obj = VContainer::GetFakeGObject(id);
-        SaveOptions(domElement, obj);
-    }
-    else
-    {
-        qCDebug(vTool, "Can't find tool with id = %u", id);
-    }
-}
-
-//---------------------------------------------------------------------------------------------------------------------
 void VAbstractOperation::UpdateNamePosition(quint32 id)
 {
     const QSharedPointer<VPointF> point = VAbstractTool::data.GeometricObject<VPointF>(id);

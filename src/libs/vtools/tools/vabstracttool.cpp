@@ -404,6 +404,12 @@ void VAbstractTool::ToolSelectionType(const SelectionType &type)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void VAbstractTool::RefreshDataInFile()
+{
+    // do nothing
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 void VAbstractTool::ToolCreation(const Source &typeCreation)
 {
     if (typeCreation == Source::FromGui)

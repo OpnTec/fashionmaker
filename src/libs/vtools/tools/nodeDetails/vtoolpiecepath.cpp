@@ -253,19 +253,6 @@ void VToolPiecePath::AddToFile()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VToolPiecePath::RefreshDataInFile()
-{
-    QDomElement domElement = doc->elementById(id);
-    if (domElement.isElement())
-    {
-        if (idTool != NULL_ID)
-        {
-            doc->SetAttribute(domElement, AttrIdTool, idTool);
-        }
-    }
-}
-
-//---------------------------------------------------------------------------------------------------------------------
 void VToolPiecePath::ShowNode()
 {
     if (parentType != ParentType::Scene)

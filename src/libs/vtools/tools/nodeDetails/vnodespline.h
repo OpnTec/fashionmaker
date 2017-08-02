@@ -60,7 +60,6 @@ public slots:
     virtual void AllowSelecting(bool enabled) Q_DECL_OVERRIDE;
 protected:
     virtual void AddToFile () Q_DECL_OVERRIDE;
-    virtual void RefreshDataInFile() Q_DECL_OVERRIDE;
     virtual void ShowNode() Q_DECL_OVERRIDE {}
     virtual void HideNode() Q_DECL_OVERRIDE {}
 private:

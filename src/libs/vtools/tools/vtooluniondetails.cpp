@@ -1514,15 +1514,6 @@ void VToolUnionDetails::AddToFile()
 
 //---------------------------------------------------------------------------------------------------------------------
 /**
- * @brief RefreshDataInFile refresh attributes in file. If attributes don't exist create them.
- */
-void VToolUnionDetails::RefreshDataInFile()
-{
-    // do nothing
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-/**
  * @brief AddDetail add detail to xml file.
  * @param domElement tag in xml tree.
  * @param d detail.

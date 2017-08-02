@@ -178,26 +178,6 @@ void VNodePoint::AddToFile()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-/**
- * @brief RefreshDataInFile refresh attributes in file. If attributes don't exist create them.
- */
-void VNodePoint::RefreshDataInFile()
-{
-    const QSharedPointer<VPointF> point = VAbstractTool::data.GeometricObject<VPointF>(id);
-    QDomElement domElement = doc->elementById(id);
-    if (domElement.isElement())
-    {
-        doc->SetAttribute(domElement, AttrIdObject, idNode);
-        doc->SetAttribute(domElement, AttrMx, qApp->fromPixel(point->mx()));
-        doc->SetAttribute(domElement, AttrMy, qApp->fromPixel(point->my()));
-        if (idTool != NULL_ID)
-        {
-            doc->SetAttribute(domElement, AttrIdTool, idTool);
-        }
-    }
-}
-
-//---------------------------------------------------------------------------------------------------------------------
 void VNodePoint::mousePressEvent(QGraphicsSceneMouseEvent *event)
 {
     // Special for not selectable item first need to call standard mousePressEvent then accept event

@@ -111,7 +111,6 @@ public slots:
     virtual void AllowSelecting(bool) Q_DECL_OVERRIDE {}
 protected:
     virtual void AddToFile() Q_DECL_OVERRIDE;
-    virtual void RefreshDataInFile() Q_DECL_OVERRIDE;
     virtual void SetVisualization() Q_DECL_OVERRIDE {}
 private:
     Q_DISABLE_COPY(VToolUnionDetails)

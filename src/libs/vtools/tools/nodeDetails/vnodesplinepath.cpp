@@ -138,20 +138,3 @@ void VNodeSplinePath::AddToFile()
 
     AddToModeling(domElement);
 }
-
-//---------------------------------------------------------------------------------------------------------------------
-/**
- * @brief RefreshDataInFile refresh attributes in file. If attributes don't exist create them.
- */
-void VNodeSplinePath::RefreshDataInFile()
-{
-    QDomElement domElement = doc->elementById(id);
-    if (domElement.isElement())
-    {
-        doc->SetAttribute(domElement, AttrIdObject, QString().setNum(idNode));
-        if (idTool != 0)
-        {
-            doc->SetAttribute(domElement, AttrIdTool, idTool);
-        }
-    }
-}

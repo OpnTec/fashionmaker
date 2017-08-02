@@ -153,12 +153,6 @@ void VToolPin::AddToFile()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VToolPin::RefreshDataInFile()
-{
-    // do nothing
-}
-
-//---------------------------------------------------------------------------------------------------------------------
 VToolPin::VToolPin(VAbstractPattern *doc, VContainer *data, quint32 id, quint32 pointId, quint32 pieceId,
                    const Source &typeCreation, const QString &drawName, const quint32 &idTool, QObject *qoParent)
     : VAbstractNode(doc, data, id, pointId, drawName, idTool, qoParent),

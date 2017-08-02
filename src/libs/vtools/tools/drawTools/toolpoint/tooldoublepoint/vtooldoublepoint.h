@@ -93,7 +93,6 @@ protected:
     virtual void contextMenuEvent ( QGraphicsSceneContextMenuEvent * event ) Q_DECL_OVERRIDE;
     virtual void SaveOptions(QDomElement &tag, QSharedPointer<VGObject> &obj) Q_DECL_OVERRIDE;
     virtual void AddToFile() Q_DECL_OVERRIDE;
-    virtual void RefreshDataInFile() Q_DECL_OVERRIDE;
 
 private:
     Q_DISABLE_COPY(VToolDoublePoint)
