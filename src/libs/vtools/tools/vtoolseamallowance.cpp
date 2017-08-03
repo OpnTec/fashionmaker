@@ -1131,8 +1131,6 @@ VToolSeamAllowance::VToolSeamAllowance(VAbstractPattern *doc, VContainer *data, 
     this->setFlag(QGraphicsItem::ItemIsSelectable, true);
     RefreshGeometry();
 
-    m_seamAllowance->setBrush(QBrush(Qt::Dense7Pattern));
-
     this->setFlag(QGraphicsItem::ItemSendsGeometryChanges, true);
     this->setFlag(QGraphicsItem::ItemIsFocusable, true);// For keyboard input focus
 
