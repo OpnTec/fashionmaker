@@ -69,7 +69,7 @@ class VUndoCommand : public QObject, public QUndoCommand
     Q_OBJECT
 public:
     VUndoCommand(const QDomElement &xml, VAbstractPattern *doc, QUndoCommand *parent = nullptr);
-    virtual ~VUndoCommand() Q_DECL_OVERRIDE;
+    virtual ~VUndoCommand() =default;
 signals:
     void ClearScene();
     void NeedFullParsing();

@@ -3,7 +3,6 @@
 
 SOURCES += \
     $$PWD/def.cpp \
-    $$PWD/undoevent.cpp \
     $$PWD/vsettings.cpp \
     $$PWD/vabstractapplication.cpp \
     $$PWD/projectversion.cpp \
@@ -21,7 +20,6 @@ HEADERS += \
     $$PWD/def.h \
     $$PWD/logging.h \
     $$PWD/vmath.h \
-    $$PWD/undoevent.h \
     $$PWD/vsettings.h \
     $$PWD/vabstractapplication.h \
     $$PWD/projectversion.h \
@@ -34,7 +32,8 @@ HEADERS += \
     $$PWD/qxtcsvmodel.h \
     $$PWD/vtablesearch.h \
     $$PWD/diagnostic.h \
-    $$PWD/dialogs/dialogexporttocsv.h
+    $$PWD/dialogs/dialogexporttocsv.h \
+    $$PWD/customevents.h
 
 # Qt's versions
 # 5.2.0, 5.2.1

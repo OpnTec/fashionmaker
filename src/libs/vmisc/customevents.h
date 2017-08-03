@@ -1,6 +1,6 @@
 /************************************************************************
  **
- **  @file   undoevent.cpp
+ **  @file   customevents.h
  **  @author Roman Telezhynskyi <dismine(at)gmail.com>
  **  @date   23 6, 2014
  **
@@ -26,13 +26,37 @@
  **
  *************************************************************************/
 
-#include "undoevent.h"
+#ifndef CUSTOMEVENTS_H
+#define CUSTOMEVENTS_H
 
-//---------------------------------------------------------------------------------------------------------------------
-UndoEvent::UndoEvent()
-    :QEvent(UNDO_EVENT)
-{}
+#include <qcompilerdetection.h>
+#include <QEvent>
 
-//---------------------------------------------------------------------------------------------------------------------
-UndoEvent::~UndoEvent()
-{}
+enum CustomEventType { UndoEventType = 1, LiteParseEventType = 2 };
+
+// Define undo event identifier
+const QEvent::Type UNDO_EVENT = static_cast<QEvent::Type>(QEvent::User + CustomEventType::UndoEventType);
+
+class UndoEvent : public QEvent
+{
+public:
+    UndoEvent()
+        : QEvent(UNDO_EVENT)
+    {}
+
+    virtual ~UndoEvent() =default;
+};
+
+const QEvent::Type LITE_PARSE_EVENT = static_cast<QEvent::Type>(QEvent::User + CustomEventType::LiteParseEventType);
+
+class LiteParseEvent : public QEvent
+{
+public:
+    LiteParseEvent()
+        : QEvent(LITE_PARSE_EVENT)
+    {}
+
+    virtual ~LiteParseEvent() =default;
+};
+
+#endif // CUSTOMEVENTS_H

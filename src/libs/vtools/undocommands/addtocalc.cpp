@@ -35,6 +35,7 @@
 #include "../ifc/ifcdef.h"
 #include "../vmisc/logging.h"
 #include "../vmisc/vabstractapplication.h"
+#include "../vmisc/customevents.h"
 #include "vundocommand.h"
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -44,10 +45,6 @@ AddToCalc::AddToCalc(const QDomElement &xml, VAbstractPattern *doc, QUndoCommand
     setText(tr("add object"));
     nodeId = doc->GetParametrId(xml);
 }
-
-//---------------------------------------------------------------------------------------------------------------------
-AddToCalc::~AddToCalc()
-{}
 
 //---------------------------------------------------------------------------------------------------------------------
 void AddToCalc::undo()
@@ -129,6 +126,10 @@ void AddToCalc::RedoFullParsing()
     {
         emit NeedFullParsing();
         doc->SetCurrentPP(nameActivDraw);//Return current pattern piece after undo
+    }
+    else
+    {
+        QApplication::postEvent(doc, new LiteParseEvent());
     }
     redoFlag = true;
 }

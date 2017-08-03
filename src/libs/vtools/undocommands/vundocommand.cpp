@@ -29,9 +29,11 @@
 #include "vundocommand.h"
 
 #include <QDomNode>
+#include <QApplication>
 
 #include "../ifc/ifcdef.h"
 #include "../vmisc/def.h"
+#include "../vmisc/customevents.h"
 #include "../vpatterndb/vnodedetail.h"
 #include "../vpatterndb/vpiecenode.h"
 
@@ -45,15 +47,15 @@ VUndoCommand::VUndoCommand(const QDomElement &xml, VAbstractPattern *doc, QUndoC
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-VUndoCommand::~VUndoCommand()
-{}
-
-//---------------------------------------------------------------------------------------------------------------------
 void VUndoCommand::RedoFullParsing()
 {
     if (redoFlag)
     {
         emit NeedFullParsing();
+    }
+    else
+    {
+        QApplication::postEvent(doc, new LiteParseEvent());
     }
     redoFlag = true;
 }

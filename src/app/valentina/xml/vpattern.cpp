@@ -39,7 +39,7 @@
 #include "../ifc/exception/vexceptionemptyparameter.h"
 #include "../ifc/exception/vexceptionundo.h"
 #include "../ifc/xml/vpatternconverter.h"
-#include "../vmisc/undoevent.h"
+#include "../vmisc/customevents.h"
 #include "../vmisc/vsettings.h"
 #include "../vmisc/vmath.h"
 #include "../vmisc/projectversion.h"
@@ -607,6 +607,10 @@ void VPattern::customEvent(QEvent *event)
     if (event->type() == UNDO_EVENT)
     {
         qApp->getUndoStack()->undo();
+    }
+    else if (event->type() == LITE_PARSE_EVENT)
+    {
+        LiteParseTree(Document::LiteParse);
     }
 }
 
