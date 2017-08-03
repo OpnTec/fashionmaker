@@ -89,6 +89,11 @@ QVector<QPointF> VAbstractCubicBezierPath::GetPoints() const
     QVector<QPointF> pathPoints;
     for (qint32 i = 1; i <= CountSubSpl(); ++i)
     {
+        if (not pathPoints.isEmpty())
+        {
+            pathPoints.removeLast();
+        }
+
         pathPoints += GetSpline(i).GetPoints();
     }
     return pathPoints;
