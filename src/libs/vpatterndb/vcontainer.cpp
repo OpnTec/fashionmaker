@@ -345,11 +345,6 @@ void VContainer::ClearVariables(const VarType &type)
     {
         if (type == VarType::Unknown)
         {
-            QHash<QString, QSharedPointer<VInternalVariable> >::iterator i;
-            for (i = d->variables.begin(); i != d->variables.end(); ++i)
-            {
-                i.value().clear();
-            }
             d->variables.clear();
         }
         else
@@ -360,16 +355,13 @@ void VContainer::ClearVariables(const VarType &type)
             {
                 if (i.value()->GetType() == type)
                 {
-                    i.value().clear();
                     keys.append(i.key());
                 }
             }
-            if (keys.size()>0)
+
+            for (int i = 0; i < keys.size(); ++i)
             {
-                for (int i = 0; i < keys.size(); ++i)
-                {
-                    d->variables.remove(keys.at(i));
-                }
+                d->variables.remove(keys.at(i));
             }
         }
     }
