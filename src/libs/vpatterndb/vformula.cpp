@@ -242,7 +242,7 @@ void VFormula::Eval()
         {
             QScopedPointer<Calculator> cal(new Calculator());
             QString expression = qApp->TrVars()->FormulaFromUser(formula, qApp->Settings()->GetOsSeparator());
-            const qreal result = cal->EvalFormula(data->PlainVariables(), expression);
+            const qreal result = cal->EvalFormula(data->DataVariables(), expression);
 
             if (qIsInf(result) || qIsNaN(result))
             {

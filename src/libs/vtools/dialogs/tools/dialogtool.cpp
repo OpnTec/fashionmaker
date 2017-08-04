@@ -781,7 +781,7 @@ qreal DialogTool::Eval(const QString &text, bool &flag, QLabel *label, const QSt
             // Translate to internal look.
             formula = qApp->TrVars()->FormulaFromUser(formula, qApp->Settings()->GetOsSeparator());
             QScopedPointer<Calculator> cal(new Calculator());
-            result = cal->EvalFormula(data->PlainVariables(), formula);
+            result = cal->EvalFormula(data->DataVariables(), formula);
 
             if (qIsInf(result) || qIsNaN(result))
             {

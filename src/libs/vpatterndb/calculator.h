@@ -37,6 +37,8 @@
 
 #include "../qmuparser/qmuformulabase.h"
 
+class VInternalVariable;
+
 /**
  * @brief The Calculator class for calculation formula.
  *
@@ -61,11 +63,12 @@ public:
     Calculator();
     virtual ~Calculator() Q_DECL_EQ_DEFAULT;
 
-    qreal EvalFormula(const QHash<QString, qreal *> &vars, const QString &formula);
+    qreal EvalFormula(const QHash<QString, QSharedPointer<VInternalVariable> > *vars, const QString &formula);
 private:
     Q_DISABLE_COPY(Calculator)
 
-    void InitVariables(const QHash<QString, qreal *> &vars, const QMap<int, QString> &tokens, const QString &formula);
+    void InitVariables(const QHash<QString, QSharedPointer<VInternalVariable> > *vars, const QMap<int, QString> &tokens,
+                       const QString &formula);
 };
 
 #endif // CALCULATOR_H

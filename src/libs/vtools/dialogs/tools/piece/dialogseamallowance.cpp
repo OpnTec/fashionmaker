@@ -1317,7 +1317,7 @@ void DialogSeamAllowance::UpdateGrainlineValues()
             qsFormula.replace("\n", " ");
             qsFormula = qApp->TrVars()->FormulaFromUser(qsFormula, qApp->Settings()->GetOsSeparator());
             Calculator cal;
-            qreal dVal = cal.EvalFormula(data->PlainVariables(), qsFormula);
+            qreal dVal = cal.EvalFormula(data->DataVariables(), qsFormula);
             if (qIsInf(dVal) == true || qIsNaN(dVal) == true)
             {
                 throw qmu::QmuParserError(tr("Infinite/undefined result"));
@@ -1399,7 +1399,7 @@ void DialogSeamAllowance::UpdateDetailLabelValues()
             qsFormula.replace("\n", " ");
             qsFormula = qApp->TrVars()->FormulaFromUser(qsFormula, qApp->Settings()->GetOsSeparator());
             Calculator cal;
-            qreal dVal = cal.EvalFormula(data->PlainVariables(), qsFormula);
+            qreal dVal = cal.EvalFormula(data->DataVariables(), qsFormula);
             if (qIsInf(dVal) == true || qIsNaN(dVal) == true)
             {
                 throw qmu::QmuParserError(tr("Infinite/undefined result"));
@@ -1484,7 +1484,7 @@ void DialogSeamAllowance::UpdatePatternLabelValues()
             qsFormula.replace("\n", " ");
             qsFormula = qApp->TrVars()->FormulaFromUser(qsFormula, qApp->Settings()->GetOsSeparator());
             Calculator cal;
-            qreal dVal = cal.EvalFormula(data->PlainVariables(), qsFormula);
+            qreal dVal = cal.EvalFormula(data->DataVariables(), qsFormula);
             if (qIsInf(dVal) == true || qIsNaN(dVal) == true)
             {
                 throw qmu::QmuParserError(tr("Infinite/undefined result"));

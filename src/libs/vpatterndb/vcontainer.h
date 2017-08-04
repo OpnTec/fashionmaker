@@ -136,7 +136,6 @@ public:
     static const QSharedPointer<VGObject> GetFakeGObject(quint32 id);
     VPiece             GetPiece(quint32 id) const;
     VPiecePath         GetPiecePath(quint32 id) const;
-    qreal              GetTableValue(const QString& name, MeasurementsType patternType) const;
     template <typename T>
     QSharedPointer<T>  GetVariable(QString name) const;
     static quint32     getId();
@@ -195,8 +194,6 @@ public:
     const QMap<QString, QSharedPointer<VLineAngle> >    DataAngleLines() const;
     const QMap<QString, QSharedPointer<VArcRadius> >    DataRadiusesArcs() const;
     const QMap<QString, QSharedPointer<VCurveAngle> >   DataAnglesCurves() const;
-
-    const QHash<QString, qreal *> PlainVariables() const;
 
     static bool        IsUnique(const QString &name);
     static QStringList AllUniqueNames();

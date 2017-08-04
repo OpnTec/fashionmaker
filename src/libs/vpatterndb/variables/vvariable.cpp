@@ -37,24 +37,12 @@
 //---------------------------------------------------------------------------------------------------------------------
 VVariable::VVariable()
     :VInternalVariable(), d(new VVariableData)
-{
-    VInternalVariable::SetValue(d->base);
-}
+{}
 
 //---------------------------------------------------------------------------------------------------------------------
-VVariable::VVariable(const QString &name, qreal baseSize, qreal baseHeight, const qreal &base, const qreal &ksize,
-                     const qreal &kheight, const QString &description)
-    :VInternalVariable(), d(new VVariableData(baseSize, baseHeight, base, ksize, kheight, description))
+VVariable::VVariable(const QString &name, const QString &description)
+    :VInternalVariable(), d(new VVariableData(description))
 {
-    VInternalVariable::SetValue(d->base);
-    SetName(name);
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-VVariable::VVariable(const QString &name, const qreal &base, const QString &description)
-    :d(new VVariableData(base, description))
-{
-    VInternalVariable::SetValue(base);
     SetName(name);
 }
 
@@ -78,87 +66,6 @@ VVariable &VVariable::operator=(const VVariable &var)
 //---------------------------------------------------------------------------------------------------------------------
 VVariable::~VVariable()
 {}
-
-//---------------------------------------------------------------------------------------------------------------------
-void VVariable::SetValue(const qreal &size, const qreal &height, Unit patternUnit)
-{
-    if (patternUnit == Unit::Inch)
-    {
-        qWarning("Gradation doesn't support inches");
-        return;
-    }
-    const qreal sizeIncrement = UnitConvertor(2.0, Unit::Cm, patternUnit);
-    const qreal heightIncrement = UnitConvertor(6.0, Unit::Cm, patternUnit);
-
-    // Formula for calculation gradation
-    const qreal k_size    = ( size - d->baseSize ) / sizeIncrement;
-    const qreal k_height  = ( height - d->baseHeight ) / heightIncrement;
-    VInternalVariable::SetValue(d->base + k_size * d->ksize + k_height * d->kheight);
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-bool VVariable::IsNotUsed() const
-{
-    if (qFuzzyIsNull(d->base) && qFuzzyIsNull(d->ksize) && qFuzzyIsNull(d->kheight))
-    {
-        return true;
-    }
-    else
-    {
-        return false;
-    }
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-/**
- * @brief GetBase return value in base size and height
- * @return value
- */
-qreal VVariable::GetBase() const
-{
-    return d->base;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void VVariable::SetBase(const qreal &value)
-{
-    d->base = value;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-/**
- * @brief GetKsize return increment in sizes
- * @return increment
- */
-qreal VVariable::GetKsize() const
-{
-    return d->ksize;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-// cppcheck-suppress unusedFunction
-void VVariable::SetKsize(const qreal &value)
-{
-    d->ksize = value;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-/**
- * @brief GetKheight return increment in heights
- * @return increment
- */
-qreal VVariable::GetKheight() const
-{
-    return d->kheight;
-}
-
-
-//---------------------------------------------------------------------------------------------------------------------
-// cppcheck-suppress unusedFunction
-void VVariable::SetKheight(const qreal &value)
-{
-    d->kheight = value;
-}
 
 //---------------------------------------------------------------------------------------------------------------------
 QString VVariable::GetDescription() const

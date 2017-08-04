@@ -143,13 +143,15 @@ VScaledEllipse *Visualization::InitPoint(const QColor &color, QGraphicsItem *par
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-qreal Visualization::FindLength(const QString &expression, const QHash<QString, qreal *> &vars)
+qreal Visualization::FindLength(const QString &expression,
+                                const QHash<QString, QSharedPointer<VInternalVariable> > *vars)
 {
     return qApp->toPixel(FindVal(expression, vars));
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-qreal Visualization::FindVal(const QString &expression, const QHash<QString, qreal *> &vars)
+qreal Visualization::FindVal(const QString &expression,
+                             const QHash<QString, QSharedPointer<VInternalVariable> > *vars)
 {
     qreal val = 0;
     if (expression.isEmpty())

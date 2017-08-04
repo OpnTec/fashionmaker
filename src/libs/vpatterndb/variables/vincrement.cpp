@@ -51,9 +51,10 @@ VIncrement::VIncrement()
  */
 VIncrement::VIncrement(VContainer *data, const QString &name, quint32 index, qreal base, const QString &formula,
                        bool ok, const QString &description)
-    :VVariable(name, base, description), d(new VIncrementData(data, index, formula, ok))
+    :VVariable(name, description), d(new VIncrementData(data, index, formula, ok))
 {
     SetType(VarType::Increment);
+    VInternalVariable::SetValue(base);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

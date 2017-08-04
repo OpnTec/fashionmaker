@@ -377,6 +377,8 @@ QSharedPointer<VMeasurements> MainWindow::OpenMeasurementFile(const QString &pat
     try
     {
         m = QSharedPointer<VMeasurements>(new VMeasurements(pattern));
+        m->SetSize(VContainer::rsize());
+        m->SetHeight(VContainer::rheight());
         m->setXMLContent(path);
 
         if (m->Type() == MeasurementsType::Unknown)
@@ -451,8 +453,8 @@ bool MainWindow::LoadMeasurements(const QString &path)
 
     if (m->Type() == MeasurementsType::Multisize)
     {
-        m->SetDataSize();
-        m->SetDataHeight();
+        VContainer::SetSize(UnitConvertor(m->BaseSize(), m->MUnit(), *m->GetData()->GetPatternUnit()));
+        VContainer::SetHeight(UnitConvertor(m->BaseHeight(), m->MUnit(), *m->GetData()->GetPatternUnit()));
     }
 
     try
@@ -4127,6 +4129,8 @@ bool MainWindow::LoadPattern(const QString &fileName, const QString& customMeasu
         // Here comes undocumented Valentina's feature.
         // Because app bundle in Mac OS X doesn't allow setup assosiation for Tape we must do this through Valentina
         VMeasurements m(pattern);
+        m.SetSize(VContainer::rsize());
+        m.SetHeight(VContainer::rheight());
         m.setXMLContent(fileName);
 
         if (m.Type() == MeasurementsType::Multisize || m.Type() == MeasurementsType::Individual)
@@ -4626,6 +4630,8 @@ QString MainWindow::CheckPathToMeasurements(const QString &patternPath, const QS
                 else
                 {
                     QScopedPointer<VMeasurements> m(new VMeasurements(pattern));
+                    m->SetSize(VContainer::rsize());
+                    m->SetHeight(VContainer::rheight());
                     m->setXMLContent(mPath);
 
                     patternType = m->Type();

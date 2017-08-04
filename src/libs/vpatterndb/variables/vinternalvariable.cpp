@@ -79,6 +79,7 @@ qreal *VInternalVariable::GetValue()
     return &d->value;
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void VInternalVariable::SetValue(const qreal &value)
 {
     d->value = value;

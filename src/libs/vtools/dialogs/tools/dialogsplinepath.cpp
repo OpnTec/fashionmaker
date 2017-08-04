@@ -325,7 +325,7 @@ void DialogSplinePath::Angle1Changed()
         VSplinePoint p = qvariant_cast<VSplinePoint>(item->data(Qt::UserRole));
 
         const QString angle1F = ui->plainTextEditAngle1F->toPlainText().replace("\n", " ");
-        const qreal angle1 = Visualization::FindVal(angle1F, data->PlainVariables());
+        const qreal angle1 = Visualization::FindVal(angle1F, data->DataVariables());
 
         try
         {
@@ -368,7 +368,7 @@ void DialogSplinePath::Angle2Changed()
         VSplinePoint p = qvariant_cast<VSplinePoint>(item->data(Qt::UserRole));
 
         const QString angle2F = ui->plainTextEditAngle2F->toPlainText().replace("\n", " ");
-        const qreal angle2 = Visualization::FindVal(angle2F, data->PlainVariables());
+        const qreal angle2 = Visualization::FindVal(angle2F, data->DataVariables());
 
         try
         {
@@ -411,7 +411,7 @@ void DialogSplinePath::Length1Changed()
         VSplinePoint p = qvariant_cast<VSplinePoint>(item->data(Qt::UserRole));
 
         const QString length1F = ui->plainTextEditLength1F->toPlainText().replace("\n", " ");
-        const qreal length1 = Visualization::FindLength(length1F, data->PlainVariables());
+        const qreal length1 = Visualization::FindLength(length1F, data->DataVariables());
 
         try
         {
@@ -445,7 +445,7 @@ void DialogSplinePath::Length2Changed()
         VSplinePoint p = qvariant_cast<VSplinePoint>(item->data(Qt::UserRole));
 
         const QString length2F = ui->plainTextEditLength2F->toPlainText().replace("\n", " ");
-        const qreal length2 = Visualization::FindLength(length2F, data->PlainVariables());
+        const qreal length2 = Visualization::FindLength(length2F, data->DataVariables());
 
         try
         {

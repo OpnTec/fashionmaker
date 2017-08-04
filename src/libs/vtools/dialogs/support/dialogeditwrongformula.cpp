@@ -173,14 +173,14 @@ void DialogEditWrongFormula::ValChanged(int row)
     {
         const QString name = qApp->TrVars()->VarFromUser(item->text());
         const QSharedPointer<VMeasurement> stable = data->GetVariable<VMeasurement>(name);
-        SetDescription(item->text(), data->GetTableValue(name, qApp->patternType()),
+        SetDescription(item->text(), *data->DataVariables()->value(name)->GetValue(),
                        UnitsToStr(qApp->patternUnit(), true), stable->GetGuiText());
         return;
     }
     if (ui->radioButtonIncrements->isChecked())
     {
         const QSharedPointer<VIncrement> incr = data->GetVariable<VIncrement>(item->text());
-        SetDescription(item->text(), data->GetTableValue(item->text(), qApp->patternType()),
+        SetDescription(item->text(), *data->DataVariables()->value(item->text())->GetValue(),
                        UnitsToStr(qApp->patternUnit(), true), incr->GetDescription());
         return;
     }

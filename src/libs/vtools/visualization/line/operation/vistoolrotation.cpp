@@ -205,7 +205,7 @@ QString VisToolRotation::Angle() const
 //---------------------------------------------------------------------------------------------------------------------
 void VisToolRotation::SetAngle(const QString &expression)
 {
-    angle = FindVal(expression, Visualization::data->PlainVariables());
+    angle = FindVal(expression, Visualization::data->DataVariables());
 }
 
 //---------------------------------------------------------------------------------------------------------------------

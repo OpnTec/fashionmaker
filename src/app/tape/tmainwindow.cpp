@@ -83,6 +83,8 @@ TMainWindow::TMainWindow(QWidget *parent)
       mUnit(Unit::Cm),
       pUnit(Unit::Cm),
       mType(MeasurementsType::Individual),
+      currentSize(0),
+      currentHeight(0),
       curFile(),
       gradationHeights(nullptr),
       gradationSizes(nullptr),
@@ -179,7 +181,7 @@ void TMainWindow::SetBaseMHeight(int height)
         if (mType == MeasurementsType::Multisize)
         {
             const int row = ui->tableWidget->currentRow();
-            VContainer::SetHeight(UnitConvertor(height, Unit::Cm, mUnit));
+            currentHeight = UnitConvertor(height, Unit::Cm, mUnit);
             RefreshData();
             ui->tableWidget->selectRow(row);
         }
@@ -194,7 +196,7 @@ void TMainWindow::SetBaseMSize(int size)
         if (mType == MeasurementsType::Multisize)
         {
             const int row = ui->tableWidget->currentRow();
-            VContainer::SetSize(UnitConvertor(size, Unit::Cm, mUnit));
+            currentSize = UnitConvertor(size, Unit::Cm, mUnit);
             RefreshData();
             ui->tableWidget->selectRow(row);
         }
@@ -250,6 +252,8 @@ bool TMainWindow::LoadFile(const QString &path)
             data = new VContainer(qApp->TrVars(), &mUnit);
 
             m = new VMeasurements(data);
+            m->SetSize(&currentSize);
+            m->SetHeight(&currentHeight);
             m->setXMLContent(path);
 
             mType = m->Type();
@@ -284,8 +288,8 @@ bool TMainWindow::LoadFile(const QString &path)
             mUnit = m->MUnit();
             pUnit = mUnit;
 
-            VContainer::SetHeight(m->BaseHeight());
-            VContainer::SetSize(m->BaseSize());
+            currentSize = m->BaseSize();
+            currentHeight = m->BaseHeight();
 
             ui->labelToolTip->setVisible(false);
             ui->tabWidget->setVisible(true);
@@ -358,12 +362,14 @@ void TMainWindow::FileNew()
         mType = measurements.Type();
 
         data = new VContainer(qApp->TrVars(), &mUnit);
-        VContainer::SetHeight(measurements.BaseHeight());
-        VContainer::SetSize(measurements.BaseSize());
+        currentHeight = measurements.BaseHeight();
+        currentSize = measurements.BaseSize();
 
         if (mType == MeasurementsType::Multisize)
         {
             m = new VMeasurements(mUnit, measurements.BaseSize(), measurements.BaseHeight(), data);
+            m->SetSize(&currentSize);
+            m->SetHeight(&currentHeight);
             m_curFileFormatVersion = VVSTConverter::MeasurementMaxVer;
             m_curFileFormatVersionStr = VVSTConverter::MeasurementMaxVerStr;
         }
@@ -1416,7 +1422,7 @@ void TMainWindow::ImportFromPattern()
 void TMainWindow::ChangedSize(const QString &text)
 {
     const int row = ui->tableWidget->currentRow();
-    VContainer::SetSize(text.toInt());
+    currentSize = text.toInt();
     RefreshData();
     search->RefreshList(ui->lineEditFind->text());
     ui->tableWidget->selectRow(row);
@@ -1426,7 +1432,7 @@ void TMainWindow::ChangedSize(const QString &text)
 void TMainWindow::ChangedHeight(const QString &text)
 {
     const int row = ui->tableWidget->currentRow();
-    VContainer::SetHeight(text.toInt());
+    currentHeight = text.toInt();
     RefreshData();
     search->RefreshList(ui->lineEditFind->text());
     ui->tableWidget->selectRow(row);
@@ -1489,7 +1495,8 @@ void TMainWindow::ShowNewMData(bool fresh)
             ui->doubleSpinBoxInHeights->blockSignals(true);
 
             const QString postfix = UnitsToStr(pUnit);//Show unit in dialog lable (cm, mm or inch)
-            const qreal value = UnitConvertor(data->GetTableValue(meash->GetName(), mType), mUnit, pUnit);
+            const qreal value = UnitConvertor(*data->DataVariables()->value(meash->GetName())->GetValue(), mUnit,
+                                              pUnit);
             ui->labelCalculatedValue->setText(qApp->LocaleToString(value) + " " +postfix);
 
             if (fresh)
@@ -2353,7 +2360,7 @@ void TMainWindow::SetDefaultHeight(int value)
     }
     else
     {
-        VContainer::SetHeight(gradationHeights->currentText().toInt());
+        currentHeight = gradationHeights->currentText().toInt();
     }
 }
 
@@ -2367,7 +2374,7 @@ void TMainWindow::SetDefaultSize(int value)
     }
     else
     {
-        VContainer::SetSize(gradationSizes->currentText().toInt());
+        currentSize = gradationSizes->currentText().toInt();
     }
 }
 
@@ -2453,7 +2460,8 @@ void TMainWindow::RefreshTable(bool freshCall)
                 AddCell(qApp->TrVars()->GuiText(meash->GetName()), currentRow, ColumnFullName, Qt::AlignVCenter);
             }
 
-            const qreal value = UnitConvertor(data->GetTableValue(meash->GetName(), mType), mUnit, pUnit);
+            const qreal value = UnitConvertor(*data->DataVariables()->value(meash->GetName())->GetValue(), mUnit,
+                                              pUnit);
             AddCell(locale().toString(value), currentRow, ColumnCalcValue,
                     Qt::AlignHCenter | Qt::AlignVCenter, meash->IsFormulaOk()); // calculated value
 
@@ -2669,7 +2677,7 @@ bool TMainWindow::EvalFormula(const QString &formula, bool fromUser, VContainer 
             }
             f.replace("\n", " ");
             QScopedPointer<Calculator> cal(new Calculator());
-            qreal result = cal->EvalFormula(data->PlainVariables(), f);
+            qreal result = cal->EvalFormula(data->DataVariables(), f);
 
             if (qIsInf(result) || qIsNaN(result))
             {
@@ -2836,6 +2844,8 @@ bool TMainWindow::LoadFromExistingFile(const QString &path)
             data = new VContainer(qApp->TrVars(), &mUnit);
 
             m = new VMeasurements(data);
+            m->SetSize(&currentSize);
+            m->SetHeight(&currentHeight);
             m->setXMLContent(path);
 
             mType = m->Type();
@@ -2868,8 +2878,8 @@ bool TMainWindow::LoadFromExistingFile(const QString &path)
             mUnit = m->MUnit();
             pUnit = mUnit;
 
-            VContainer::SetHeight(m->BaseHeight());
-            VContainer::SetSize(m->BaseSize());
+            currentHeight = m->BaseHeight();
+            currentSize = m->BaseSize();
 
             ui->labelToolTip->setVisible(false);
             ui->tabWidget->setVisible(true);

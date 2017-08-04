@@ -98,7 +98,9 @@ QString FileComment()
 VMeasurements::VMeasurements(VContainer *data)
     :VDomDocument(),
       data(data),
-      type(MeasurementsType::Unknown)
+      type(MeasurementsType::Unknown),
+      m_currentSize(nullptr),
+      m_currentHeight(nullptr)
 {
     SCASSERT(data != nullptr)
 }
@@ -107,7 +109,9 @@ VMeasurements::VMeasurements(VContainer *data)
 VMeasurements::VMeasurements(Unit unit, VContainer *data)
     :VDomDocument(),
       data(data),
-      type(MeasurementsType::Individual)
+      type(MeasurementsType::Individual),
+      m_currentSize(nullptr),
+      m_currentHeight(nullptr)
 {
     SCASSERT(data != nullptr)
 
@@ -118,7 +122,9 @@ VMeasurements::VMeasurements(Unit unit, VContainer *data)
 VMeasurements::VMeasurements(Unit unit, int baseSize, int baseHeight, VContainer *data)
     :VDomDocument(),
       data(data),
-      type(MeasurementsType::Multisize)
+      type(MeasurementsType::Multisize),
+      m_currentSize(nullptr),
+      m_currentHeight(nullptr)
 {
     SCASSERT(data != nullptr)
 
@@ -294,6 +300,9 @@ void VMeasurements::ReadMeasurements() const
 
             tempMeash = QSharedPointer<VMeasurement>(new VMeasurement(static_cast<quint32>(i), name, BaseSize(),
                                                                       BaseHeight(), base, ksize, kheight));
+            tempMeash->SetSize(m_currentSize);
+            tempMeash->SetHeight(m_currentHeight);
+            tempMeash->SetUnit(data->GetPatternUnit());
 
             base = UnitConvertor(base, MUnit(), *data->GetPatternUnit());
             ksize = UnitConvertor(ksize, MUnit(), *data->GetPatternUnit());
@@ -304,6 +313,9 @@ void VMeasurements::ReadMeasurements() const
 
             meash = QSharedPointer<VMeasurement>(new VMeasurement(static_cast<quint32>(i), name, baseSize, baseHeight,
                                                                   base, ksize, kheight, fullName, description));
+            meash->SetSize(m_currentSize);
+            meash->SetHeight(m_currentHeight);
+            meash->SetUnit(data->GetPatternUnit());
         }
         else
         {
@@ -498,6 +510,18 @@ void VMeasurements::SetReadOnly(bool ro)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void VMeasurements::SetSize(qreal *size)
+{
+    m_currentSize = size;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VMeasurements::SetHeight(qreal *height)
+{
+    m_currentHeight = height;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 void VMeasurements::SetMName(const QString &name, const QString &text)
 {
     QDomElement node = FindM(name);
@@ -684,15 +708,9 @@ bool VMeasurements::IsDefinedKnownNamesValid() const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VMeasurements::SetDataSize()
+VContainer *VMeasurements::GetData() const
 {
-    VContainer::SetSize(UnitConvertor(BaseSize(), MUnit(), *data->GetPatternUnit()));
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void VMeasurements::SetDataHeight()
-{
-    VContainer::SetHeight(UnitConvertor(BaseHeight(), MUnit(), *data->GetPatternUnit()));
+    return data;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -901,7 +919,7 @@ qreal VMeasurements::EvalFormula(VContainer *data, const QString &formula, bool 
             QString f = formula;
             f.replace("\n", " ");
             QScopedPointer<Calculator> cal(new Calculator());
-            const qreal result = cal->EvalFormula(data->PlainVariables(), f);
+            const qreal result = cal->EvalFormula(data->DataVariables(), f);
 
             (qIsInf(result) || qIsNaN(result)) ? *ok = false : *ok = true;
             return result;

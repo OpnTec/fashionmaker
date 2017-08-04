@@ -42,40 +42,22 @@ class VVariableData : public QSharedData
 public:
 
     VVariableData()
-        :base(0), ksize(0), kheight(0), description(QString()), baseSize(0), baseHeight(0)
+        : description()
     {}
 
-    VVariableData(qreal baseSize, qreal baseHeight, const qreal &base, const qreal &ksize, const qreal &kheight,
-                  const QString &description)
-        :base(base), ksize(ksize), kheight(kheight), description(description), baseSize(baseSize),
-          baseHeight(baseHeight)
-    {}
-
-    VVariableData(const qreal &base, const QString &description)
-        :base(base), ksize(0), kheight(0), description(description), baseSize(0), baseHeight(0)
+    VVariableData(const QString &description)
+        : description(description)
     {}
 
     VVariableData(const VVariableData &var)
-        :QSharedData(var), base(var.base), ksize(var.ksize), kheight(var.kheight), description(var.description),
-          baseSize(var.baseSize), baseHeight(var.baseHeight)
+        : QSharedData(var),
+          description(var.description)
     {}
 
     virtual ~VVariableData();
 
-    /** @brief base value in base size and height */
-    qreal   base;
-
-    /** @brief ksize increment in sizes */
-    qreal   ksize;
-
-    /** @brief kgrowth increment in heights */
-    qreal   kheight;
-
     /** @brief description description of increment */
     QString description;
-
-    qreal baseSize;
-    qreal baseHeight;
 
 private:
     VVariableData &operator=(const VVariableData &) Q_DECL_EQ_DELETE;

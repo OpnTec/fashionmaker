@@ -80,7 +80,25 @@ public:
     int     Index() const;
     bool    IsFormulaOk() const;
 
+    virtual bool IsNotUsed() const Q_DECL_OVERRIDE;
+
+    virtual qreal  GetValue() const Q_DECL_OVERRIDE;
+    virtual qreal* GetValue() Q_DECL_OVERRIDE;
+
     VContainer *GetData();
+
+    void SetSize(qreal *size);
+    void SetHeight(qreal *height);
+    void SetUnit(const Unit *unit);
+
+    qreal   GetBase() const;
+    void    SetBase(const qreal &value);
+
+    qreal   GetKsize() const;
+    void    SetKsize(const qreal &value);
+
+    qreal   GetKheight() const;
+    void    SetKheight(const qreal &value);
 
     static QStringList ListHeights(QMap<GHeights, bool> heights, Unit patternUnit);
     static QStringList ListSizes(QMap<GSizes, bool> sizes, Unit patternUnit);
@@ -90,6 +108,8 @@ public:
     static bool IsGradationHeightValid(const QString &height);
 private:
     QSharedDataPointer<VMeasurementData> d;
+
+    qreal CalcValue() const;
 
     static void        ListValue(QStringList &list, qreal value, Unit patternUnit);
 };

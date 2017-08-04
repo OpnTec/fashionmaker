@@ -54,9 +54,8 @@ public:
     void Swap(VInternalVariable &var) Q_DECL_NOTHROW
     { std::swap(d, var.d); }
 
-    qreal        GetValue() const;
-    qreal*       GetValue();
-    void         SetValue(const qreal &value);
+    virtual qreal  GetValue() const;
+    virtual qreal* GetValue();
 
     QString      GetName() const;
     void         SetName(const QString &name);
@@ -67,6 +66,8 @@ public:
     virtual bool Filter(quint32 id);
 
     virtual bool IsNotUsed() const;
+protected:
+    void SetValue(const qreal &value);
 private:
     QSharedDataPointer<VInternalVariableData> d;
 };

@@ -50,10 +50,11 @@
 VMeasurement::VMeasurement(quint32 index, const QString &name, qreal baseSize, qreal baseHeight, const qreal &base,
                            const qreal &ksize, const qreal &kheight, const QString &gui_text,
                            const QString &description, const QString &tagName)
-    :VVariable(name, baseSize, baseHeight, base, ksize, kheight, description),
-      d(new VMeasurementData(index, gui_text, tagName))
+    :VVariable(name, description),
+      d(new VMeasurementData(index, gui_text, tagName, baseSize, baseHeight, base, ksize, kheight))
 {
     SetType(VarType::Measurement);
+    VInternalVariable::SetValue(d->base);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -68,9 +69,10 @@ VMeasurement::VMeasurement(quint32 index, const QString &name, qreal baseSize, q
 VMeasurement::VMeasurement(VContainer *data, quint32 index, const QString &name, const qreal &base,
                            const QString &formula, bool ok, const QString &gui_text, const QString &description,
                            const QString &tagName)
-    :VVariable(name, base, description), d(new VMeasurementData(data, index, formula, ok, gui_text, tagName))
+    :VVariable(name, description), d(new VMeasurementData(data, index, formula, ok, gui_text, tagName, base))
 {
     SetType(VarType::Measurement);
+    VInternalVariable::SetValue(base);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -213,6 +215,29 @@ bool VMeasurement::IsGradationHeightValid(const QString &height)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+qreal VMeasurement::CalcValue() const
+{
+    if (d->currentUnit == nullptr || d->currentSize == nullptr || d->currentHeight == nullptr)
+    {
+        return VInternalVariable::GetValue();
+    }
+
+    if (*d->currentUnit == Unit::Inch)
+    {
+        qWarning("Gradation doesn't support inches");
+        return 0;
+    }
+
+    const qreal sizeIncrement = UnitConvertor(2.0, Unit::Cm, *d->currentUnit);
+    const qreal heightIncrement = UnitConvertor(6.0, Unit::Cm, *d->currentUnit);
+
+    // Formula for calculation gradation
+    const qreal k_size    = ( *d->currentSize - d->baseSize ) / sizeIncrement;
+    const qreal k_height  = ( *d->currentHeight - d->baseHeight ) / heightIncrement;
+    return d->base + k_size * d->ksize + k_height * d->kheight;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 void VMeasurement::ListValue(QStringList &list, qreal value, Unit patternUnit)
 {
     const qreal val = UnitConvertor(value, Unit::Cm, patternUnit);
@@ -251,14 +276,7 @@ QString VMeasurement::GetFormula() const
 //---------------------------------------------------------------------------------------------------------------------
 bool VMeasurement::IsCustom() const
 {
-    if (GetName().indexOf(CustomMSign) == 0)
-    {
-        return true;
-    }
-    else
-    {
-        return false;
-    }
+    return GetName().indexOf(CustomMSign) == 0;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -274,7 +292,94 @@ bool VMeasurement::IsFormulaOk() const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+bool VMeasurement::IsNotUsed() const
+{
+    return qFuzzyIsNull(d->base) && qFuzzyIsNull(d->ksize) && qFuzzyIsNull(d->kheight);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+qreal VMeasurement::GetValue() const
+{
+    return CalcValue();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+qreal *VMeasurement::GetValue()
+{
+    VInternalVariable::SetValue(CalcValue());
+    return VInternalVariable::GetValue();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 VContainer *VMeasurement::GetData()
 {
     return &d->data;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VMeasurement::SetSize(qreal *size)
+{
+    d->currentSize = size;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VMeasurement::SetHeight(qreal *height)
+{
+    d->currentHeight = height;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VMeasurement::SetUnit(const Unit *unit)
+{
+    d->currentUnit = unit;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief GetBase return value in base size and height
+ * @return value
+ */
+qreal VMeasurement::GetBase() const
+{
+    return d->base;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VMeasurement::SetBase(const qreal &value)
+{
+    d->base = value;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief GetKsize return increment in sizes
+ * @return increment
+ */
+qreal VMeasurement::GetKsize() const
+{
+    return d->ksize;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+// cppcheck-suppress unusedFunction
+void VMeasurement::SetKsize(const qreal &value)
+{
+    d->ksize = value;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief GetKheight return increment in heights
+ * @return increment
+ */
+qreal VMeasurement::GetKheight() const
+{
+    return d->kheight;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+// cppcheck-suppress unusedFunction
+void VMeasurement::SetKheight(const qreal &value)
+{
+    d->kheight = value;
 }

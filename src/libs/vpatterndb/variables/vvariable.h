@@ -45,9 +45,7 @@ class VVariable :public VInternalVariable
 {
 public:
     VVariable();
-    VVariable(const QString &name, qreal baseSize, qreal baseHeight, const qreal &base, const qreal &ksize = 0,
-              const qreal &kheight = 0, const QString &description = QString());
-    VVariable(const QString &name, const qreal &base, const QString &description = QString());
+    VVariable(const QString &name, const QString &description = QString());
     VVariable(const VVariable &var);
 
     virtual ~VVariable() Q_DECL_OVERRIDE;
@@ -60,21 +58,9 @@ public:
     void Swap(VVariable &var) Q_DECL_NOTHROW
     { VInternalVariable::Swap(var); std::swap(d, var.d); }
 
-    qreal   GetBase() const;
-    void    SetBase(const qreal &value);
-
-    qreal   GetKsize() const;
-    void    SetKsize(const qreal &value);
-
-    qreal   GetKheight() const;
-    void    SetKheight(const qreal &value);
-
     QString GetDescription() const;
     void    SetDescription(const QString &desc);
 
-    void    SetValue(const qreal &size, const qreal &height, Unit patternUnit);
-
-    virtual bool IsNotUsed() const Q_DECL_OVERRIDE;
 private:
     QSharedDataPointer<VVariableData> d;
 };

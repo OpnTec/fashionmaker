@@ -35,6 +35,7 @@
 
 #include "../vmisc/def.h"
 #include "../qmuparser/qmuparsererror.h"
+#include "variables/vinternalvariable.h"
 
 //---------------------------------------------------------------------------------------------------------------------
 /**
@@ -69,7 +70,7 @@ Calculator::Calculator()
  * @param formula string of formula.
  * @return value of formula.
  */
-qreal Calculator::EvalFormula(const QHash<QString, qreal *> &vars, const QString &formula)
+qreal Calculator::EvalFormula(const QHash<QString, QSharedPointer<VInternalVariable>> *vars, const QString &formula)
 {
     // Parser doesn't know any variable on this stage. So, we just use variable factory that for each unknown variable
     // set value to 0.
@@ -115,16 +116,16 @@ qreal Calculator::EvalFormula(const QHash<QString, qreal *> &vars, const QString
  * @param tokens all tokens (measurements names, variables with lengths) that parser have found in expression.
  * @param formula expression, need for throwing better error message.
  */
-void Calculator::InitVariables(const QHash<QString, qreal *> &vars, const QMap<int, QString> &tokens,
-                               const QString &formula)
+void Calculator::InitVariables(const QHash<QString, QSharedPointer<VInternalVariable> > *vars,
+                               const QMap<int, QString> &tokens, const QString &formula)
 {
     QMap<int, QString>::const_iterator i = tokens.constBegin();
     while (i != tokens.constEnd())
     {
         bool found = false;
-        if (vars.contains(i.value()))
+        if (vars->contains(i.value()))
         {
-            DefineVar(i.value(), vars.value(i.value()));
+            DefineVar(i.value(), vars->value(i.value())->GetValue());
             found = true;
         }
 

@@ -452,7 +452,7 @@ VSpline DialogSpline::CurrentSpline() const
     QString length2F = ui->plainTextEditLength2F->toPlainText();
     length2F.replace("\n", " ");
 
-    const QHash<QString, qreal *> vars = data->PlainVariables();
+    const QHash<QString, QSharedPointer<VInternalVariable> > *vars = data->DataVariables();
 
     const qreal angle1 = Visualization::FindVal(angle1F, vars);
     const qreal angle2 = Visualization::FindVal(angle2F, vars);

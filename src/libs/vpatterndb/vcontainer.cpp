@@ -539,17 +539,6 @@ void VContainer::UpdatePiecePath(quint32 id, const VPiecePath &path)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-qreal VContainer::GetTableValue(const QString &name, MeasurementsType patternType) const
-{
-    QSharedPointer<VVariable> m = GetVariable<VVariable>(name);
-    if (patternType == MeasurementsType::Multisize)
-    {
-        m->SetValue(size(), height(), *GetPatternUnit());
-    }
-    return *m->GetValue();
-}
-
-//---------------------------------------------------------------------------------------------------------------------
 /**
  * @brief RemoveIncrement remove increment by name from increment table
  * @param name name of existing increment
@@ -606,28 +595,6 @@ const QMap<QString, QSharedPointer<VArcRadius> > VContainer::DataRadiusesArcs() 
 const QMap<QString, QSharedPointer<VCurveAngle> > VContainer::DataAnglesCurves() const
 {
     return DataVar<VCurveAngle>(VarType::CurveAngle);
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-const QHash<QString, qreal *> VContainer::PlainVariables() const
-{
-    QHash<QString, qreal *> vars;
-
-    auto i = d->variables.constBegin();
-    while (i != d->variables.constEnd())
-    {
-        QSharedPointer<VInternalVariable> var = i.value();
-        if (qApp->patternType() == MeasurementsType::Multisize && var->GetType() == VarType::Measurement)
-        {
-            QSharedPointer<VVariable> m = GetVariable<VVariable>(i.key());
-            m->SetValue(size(), height(), qApp->patternUnit());
-        }
-        vars.insert(i.key(), var->GetValue());
-
-        ++i;
-    }
-
-    return vars;
 }
 
 //---------------------------------------------------------------------------------------------------------------------

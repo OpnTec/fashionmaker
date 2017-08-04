@@ -3015,7 +3015,7 @@ qreal VPattern::EvalFormula(VContainer *data, const QString &formula, bool *ok) 
             QString f = formula;
             f.replace("\n", " ");
             QScopedPointer<Calculator> cal(new Calculator());
-            const qreal result = cal->EvalFormula(data->PlainVariables(), f);
+            const qreal result = cal->EvalFormula(data->DataVariables(), f);
 
             (qIsInf(result) || qIsNaN(result)) ? *ok = false : *ok = true;
             return result;

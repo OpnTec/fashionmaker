@@ -50,7 +50,7 @@ qreal EvalFormula(const VContainer *data, QString formula)
             // Replace line return character with spaces for calc if exist
             formula.replace("\n", " ");
             QScopedPointer<Calculator> cal(new Calculator());
-            const qreal result = cal->EvalFormula(data->PlainVariables(), formula);
+            const qreal result = cal->EvalFormula(data->DataVariables(), formula);
 
             if (qIsInf(result) || qIsNaN(result))
             {

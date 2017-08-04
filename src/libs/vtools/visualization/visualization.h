@@ -47,6 +47,7 @@ Q_DECLARE_LOGGING_CATEGORY(vVis)
 class VScaledEllipse;
 class VScaledLine;
 class VContainer;
+class VInternalVariable;
 
 enum class Mode : char {Creation, Show};
 
@@ -71,8 +72,8 @@ public:
     Mode GetMode() const;
     void SetMode(const Mode &value);
 
-    static qreal FindLength(const QString &expression, const QHash<QString, qreal *> &vars);
-    static qreal FindVal(const QString &expression, const QHash<QString, qreal *> &vars);
+    static qreal FindLength(const QString &expression, const QHash<QString, QSharedPointer<VInternalVariable> > *vars);
+    static qreal FindVal(const QString &expression, const QHash<QString, QSharedPointer<VInternalVariable> > *vars);
 signals:
     void         ToolTip(const QString &toolTip);
 public slots:

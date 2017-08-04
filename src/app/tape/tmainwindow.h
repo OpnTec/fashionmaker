@@ -135,6 +135,8 @@ private:
     Unit             mUnit;
     Unit             pUnit;
     MeasurementsType mType;
+    qreal            currentSize;
+    qreal            currentHeight;
     QString          curFile;
     QComboBox       *gradationHeights;
     QComboBox       *gradationSizes;

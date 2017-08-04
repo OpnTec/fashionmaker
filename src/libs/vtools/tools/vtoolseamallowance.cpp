@@ -1254,7 +1254,7 @@ VPieceItem::MoveTypes VToolSeamAllowance::FindLabelGeometry(const VPatternLabelD
         }
 
         Calculator cal1;
-        rotationAngle = cal1.EvalFormula(VAbstractTool::data.PlainVariables(), labelData.GetRotation());
+        rotationAngle = cal1.EvalFormula(VAbstractTool::data.DataVariables(), labelData.GetRotation());
     }
     catch(qmu::QmuParserError &e)
     {
@@ -1295,12 +1295,12 @@ VPieceItem::MoveTypes VToolSeamAllowance::FindLabelGeometry(const VPatternLabelD
         const bool widthIsSingle = qmu::QmuTokenParser::IsSingle(labelData.GetLabelWidth());
 
         Calculator cal1;
-        labelWidth = cal1.EvalFormula(VAbstractTool::data.PlainVariables(), labelData.GetLabelWidth());
+        labelWidth = cal1.EvalFormula(VAbstractTool::data.DataVariables(), labelData.GetLabelWidth());
 
         const bool heightIsSingle = qmu::QmuTokenParser::IsSingle(labelData.GetLabelHeight());
 
         Calculator cal2;
-        labelHeight = cal2.EvalFormula(VAbstractTool::data.PlainVariables(), labelData.GetLabelHeight());
+        labelHeight = cal2.EvalFormula(VAbstractTool::data.DataVariables(), labelData.GetLabelHeight());
 
         if (not widthIsSingle || not heightIsSingle)
         {
@@ -1381,7 +1381,7 @@ VPieceItem::MoveTypes VToolSeamAllowance::FindGrainlineGeometry(const VGrainline
         }
 
         Calculator cal1;
-        rotationAngle = cal1.EvalFormula(VAbstractTool::data.PlainVariables(), geom.GetRotation());
+        rotationAngle = cal1.EvalFormula(VAbstractTool::data.DataVariables(), geom.GetRotation());
 
         if (not qmu::QmuTokenParser::IsSingle(geom.GetLength()))
         {
@@ -1389,7 +1389,7 @@ VPieceItem::MoveTypes VToolSeamAllowance::FindGrainlineGeometry(const VGrainline
         }
 
         Calculator cal2;
-        length = cal2.EvalFormula(VAbstractTool::data.PlainVariables(), geom.GetLength());
+        length = cal2.EvalFormula(VAbstractTool::data.DataVariables(), geom.GetLength());
     }
     catch(qmu::QmuParserError &e)
     {

@@ -352,7 +352,7 @@ bool DialogIncrements::EvalIncrementFormula(const QString &formula, bool fromUse
             }
             f.replace("\n", " ");
             QScopedPointer<Calculator> cal(new Calculator());
-            const qreal result = cal->EvalFormula(data->PlainVariables(), f);
+            const qreal result = cal->EvalFormula(data->DataVariables(), f);
 
             if (qIsInf(result) || qIsNaN(result))
             {

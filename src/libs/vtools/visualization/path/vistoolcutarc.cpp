@@ -82,5 +82,5 @@ void VisToolCutArc::RefreshGeometry()
 //---------------------------------------------------------------------------------------------------------------------
 void VisToolCutArc::setLength(const QString &expression)
 {
-    length = FindLength(expression, Visualization::data->PlainVariables());
+    length = FindLength(expression, Visualization::data->DataVariables());
 }

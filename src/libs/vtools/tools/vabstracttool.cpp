@@ -162,7 +162,7 @@ qreal VAbstractTool::CheckFormula(const quint32 &toolId, QString &formula, VCont
     try
     {
         QScopedPointer<Calculator> cal(new Calculator());
-        result = cal->EvalFormula(data->PlainVariables(), formula);
+        result = cal->EvalFormula(data->DataVariables(), formula);
 
         if (qIsInf(result) || qIsNaN(result))
         {
@@ -198,7 +198,7 @@ qreal VAbstractTool::CheckFormula(const quint32 &toolId, QString &formula, VCont
                              * parsing here. */
                             delete dialog;
                             QScopedPointer<Calculator> cal1(new Calculator());
-                            result = cal1->EvalFormula(data->PlainVariables(), formula);
+                            result = cal1->EvalFormula(data->DataVariables(), formula);
 
                             if (qIsInf(result) || qIsNaN(result))
                             {

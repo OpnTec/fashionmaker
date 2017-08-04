@@ -93,6 +93,9 @@ public:
     bool    IsReadOnly() const;
     void    SetReadOnly(bool ro);
 
+    void SetSize(qreal *size);
+    void SetHeight(qreal *height);
+
     void SetMName(const QString &name, const QString &text);
     void SetMValue(const QString &name, const QString &text);
     void SetMBaseValue(const QString &name, double value);
@@ -137,8 +140,7 @@ public:
 
     bool IsDefinedKnownNamesValid() const;
 
-    void SetDataSize();
-    void SetDataHeight();
+    VContainer *GetData() const;
 
 private:
     Q_DISABLE_COPY(VMeasurements)
@@ -146,6 +148,9 @@ private:
     /** @brief data container with data. */
     VContainer     *data;
     MeasurementsType type;
+
+    qreal *m_currentSize;
+    qreal *m_currentHeight;
 
     void CreateEmptyMultisizeFile(Unit unit, int baseSize, int baseHeight);
     void CreateEmptyIndividualFile(Unit unit);

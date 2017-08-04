@@ -83,7 +83,7 @@ bool FindLabelGeometry(const VPatternLabelData &labelData, const VContainer *pat
     try
     {
         Calculator cal1;
-        rotationAngle = cal1.EvalFormula(pattern->PlainVariables(), labelData.GetRotation());
+        rotationAngle = cal1.EvalFormula(pattern->DataVariables(), labelData.GetRotation());
     }
     catch(qmu::QmuParserError &e)
     {
@@ -119,10 +119,10 @@ bool FindLabelGeometry(const VPatternLabelData &labelData, const VContainer *pat
     try
     {
         Calculator cal1;
-        labelWidth = cal1.EvalFormula(pattern->PlainVariables(), labelData.GetLabelWidth());
+        labelWidth = cal1.EvalFormula(pattern->DataVariables(), labelData.GetLabelWidth());
 
         Calculator cal2;
-        labelHeight = cal2.EvalFormula(pattern->PlainVariables(), labelData.GetLabelHeight());
+        labelHeight = cal2.EvalFormula(pattern->DataVariables(), labelData.GetLabelHeight());
     }
     catch(qmu::QmuParserError &e)
     {
@@ -194,11 +194,11 @@ bool FindGrainlineGeometry(const VGrainlineData& geom, const VContainer *pattern
     try
     {
         Calculator cal1;
-        rotationAngle = cal1.EvalFormula(pattern->PlainVariables(), geom.GetRotation());
+        rotationAngle = cal1.EvalFormula(pattern->DataVariables(), geom.GetRotation());
         rotationAngle = qDegreesToRadians(rotationAngle);
 
         Calculator cal2;
-        length = cal2.EvalFormula(pattern->PlainVariables(), geom.GetLength());
+        length = cal2.EvalFormula(pattern->DataVariables(), geom.GetLength());
         length = ToPixel(length, *pattern->GetPatternUnit());
     }
     catch(qmu::QmuParserError &e)

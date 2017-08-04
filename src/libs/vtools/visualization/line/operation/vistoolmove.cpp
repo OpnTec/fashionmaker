@@ -137,7 +137,7 @@ QString VisToolMove::Angle() const
 //---------------------------------------------------------------------------------------------------------------------
 void VisToolMove::SetAngle(const QString &expression)
 {
-    angle = FindVal(expression, Visualization::data->PlainVariables());
+    angle = FindVal(expression, Visualization::data->DataVariables());
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -155,7 +155,7 @@ qreal VisToolMove::LengthValue() const
 //---------------------------------------------------------------------------------------------------------------------
 void VisToolMove::SetLength(const QString &expression)
 {
-    length = FindLength(expression, Visualization::data->PlainVariables());
+    length = FindLength(expression, Visualization::data->DataVariables());
 }
 
 //---------------------------------------------------------------------------------------------------------------------
