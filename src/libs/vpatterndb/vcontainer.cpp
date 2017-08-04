@@ -617,8 +617,7 @@ const QHash<QString, qreal *> VContainer::PlainVariables() const
     while (i != d->variables.constEnd())
     {
         QSharedPointer<VInternalVariable> var = i.value();
-        if ((qApp->patternType() == MeasurementsType::Multisize) &&
-            (var->GetType() == VarType::Measurement || var->GetType() == VarType::Increment))
+        if (qApp->patternType() == MeasurementsType::Multisize && var->GetType() == VarType::Measurement)
         {
             QSharedPointer<VVariable> m = GetVariable<VVariable>(i.key());
             m->SetValue(size(), height(), qApp->patternUnit());
