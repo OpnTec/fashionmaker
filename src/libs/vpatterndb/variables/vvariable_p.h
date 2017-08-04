@@ -45,7 +45,7 @@ public:
         : description()
     {}
 
-    VVariableData(const QString &description)
+    explicit VVariableData(const QString &description)
         : description(description)
     {}
 
