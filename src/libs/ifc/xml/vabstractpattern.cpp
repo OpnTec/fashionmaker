@@ -2046,7 +2046,14 @@ bool VAbstractPattern::IsVariable(const QString &token) const
     {
         if (token.indexOf( builInVariables.at(i) ) == 0)
         {
-            return true;
+            if (builInVariables.at(i) == currentLength || builInVariables.at(i) == currentSeamAllowance)
+            {
+                return token == builInVariables.at(i);
+            }
+            else
+            {
+                return true;
+            }
         }
     }
 

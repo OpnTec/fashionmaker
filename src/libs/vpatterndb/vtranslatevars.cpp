@@ -530,15 +530,26 @@ void VTranslateVars::BiasTokens(int position, int bias, QMap<int, QString> &toke
  */
 bool VTranslateVars::VariablesFromUser(QString &newFormula, int position, const QString &token, int &bias) const
 {
+    const QString currentLengthTr = variables.value(currentLength).translate();
+    const QString currentSeamAllowanceTr = variables.value(currentSeamAllowance).translate();
+
     QMap<QString, qmu::QmuTranslation>::const_iterator i = variables.constBegin();
     while (i != variables.constEnd())
     {
         const qmu::QmuTranslation &var = i.value();
-        if (token.indexOf( var.translate() ) == 0)
+        const QString varTr = var.translate();
+
+        if (token.indexOf(varTr) == 0)
         {
-            newFormula.replace(position, var.translate().length(), i.key());
+            if ((varTr == currentLengthTr || varTr == currentSeamAllowanceTr) && token != varTr)
+            {
+                ++i;
+                continue;
+            }
+
+            newFormula.replace(position, varTr.length(), i.key());
             QString newToken = token;
-            newToken.replace(0, var.translate().length(), i.key());
+            newToken.replace(0, varTr.length(), i.key());
             bias = token.length() - newToken.length();
             return true;
         }
@@ -613,6 +624,12 @@ bool VTranslateVars::VariablesToUser(QString &newFormula, int position, const QS
     {
         if (token.indexOf( i.key() ) == 0)
         {
+            if ((i.key() == currentLength || i.key() == currentSeamAllowance) && token != i.key())
+            {
+                ++i;
+                continue;
+            }
+
             newFormula.replace(position, i.key().length(), i.value().translate());
 
             QString newToken = token;
