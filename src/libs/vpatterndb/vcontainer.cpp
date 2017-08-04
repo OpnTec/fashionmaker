@@ -304,11 +304,6 @@ void VContainer::ClearForFullParse()
  */
 void VContainer::ClearGObjects()
 {
-    QHash<quint32, QSharedPointer<VGObject> >::iterator i;
-    for (i = d->gObjects.begin(); i != d->gObjects.end(); ++i) //-V807
-    {
-        i.value().clear();
-    }
     d->gObjects.clear();
 }
 
