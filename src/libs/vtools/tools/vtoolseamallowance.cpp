@@ -1207,13 +1207,21 @@ void VToolSeamAllowance::RefreshGeometry()
     }
 
     this->setPath(path);
-    m_passmarks->setPath(detail.PassmarksPath(this->getData()));
+
+    QVector<QPointF> seamAllowancePoints;
+
+    if (detail.IsSeamAllowance())
+    {
+        seamAllowancePoints = detail.SeamAllowancePoints(this->getData());
+    }
+
+    m_passmarks->setPath(detail.PassmarksPath(this->getData(), seamAllowancePoints));
 
     this->setPos(detail.GetMx(), detail.GetMy());
 
     if (detail.IsSeamAllowance() && not detail.IsSeamAllowanceBuiltIn())
     {
-        path.addPath(detail.SeamAllowancePath(this->getData()));
+        path.addPath(detail.SeamAllowancePath(seamAllowancePoints));
         path.setFillRule(Qt::OddEvenFill);
         m_seamAllowance->setPath(path);
     }

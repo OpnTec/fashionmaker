@@ -123,4 +123,11 @@ inline void VToolRecord::setNameDraw(const QString &value)
     nameDraw = value;
 }
 
+//---------------------------------------------------------------------------------------------------------------------
+inline bool VToolRecord::operator==(const VToolRecord &record) const
+{
+    // Id should be enough
+    return id == record.getId()/* && typeTool == record.getTypeTool() && nameDraw == record.getNameDraw()*/;
+}
+
 #endif // VTOOLRECORD_H

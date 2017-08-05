@@ -410,7 +410,7 @@ QVector<QPointF> VPiece::SeamAllowancePoints(const VContainer *data) const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QVector<QLineF> VPiece::PassmarksLines(const VContainer *data) const
+QVector<QLineF> VPiece::PassmarksLines(const VContainer *data, const QVector<QPointF> &seamAllowance) const
 {
     const QVector<VPieceNode> unitedPath = GetUnitedPath(data);
     if (not IsSeamAllowance() || not IsPassmarksPossible(unitedPath))
@@ -431,7 +431,7 @@ QVector<QLineF> VPiece::PassmarksLines(const VContainer *data) const
         const int previousIndex = VPiecePath::FindInLoopNotExcludedUp(i, unitedPath);
         const int nextIndex = VPiecePath::FindInLoopNotExcludedDown(i, unitedPath);
 
-        passmarks += CreatePassmark(unitedPath, previousIndex, i, nextIndex, data);
+        passmarks += CreatePassmark(unitedPath, previousIndex, i, nextIndex, data, seamAllowance);
     }
 
     return passmarks;
@@ -460,18 +460,23 @@ QPainterPath VPiece::MainPathPath(const VContainer *data) const
 //---------------------------------------------------------------------------------------------------------------------
 QPainterPath VPiece::SeamAllowancePath(const VContainer *data) const
 {
-    const QVector<QPointF> pointsEkv = SeamAllowancePoints(data);
+    return SeamAllowancePath(SeamAllowancePoints(data));
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QPainterPath VPiece::SeamAllowancePath(const QVector<QPointF> &points) const
+{
     QPainterPath ekv;
 
     // seam allowence
     if (IsSeamAllowance() && not IsSeamAllowanceBuiltIn())
     {
-        if (not pointsEkv.isEmpty())
+        if (not points.isEmpty())
         {
-            ekv.moveTo(pointsEkv.at(0));
-            for (qint32 i = 1; i < pointsEkv.count(); ++i)
+            ekv.moveTo(points.at(0));
+            for (qint32 i = 1; i < points.count(); ++i)
             {
-                ekv.lineTo(pointsEkv.at(i));
+                ekv.lineTo(points.at(i));
             }
 
             ekv.setFillRule(Qt::WindingFill);
@@ -482,9 +487,9 @@ QPainterPath VPiece::SeamAllowancePath(const VContainer *data) const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QPainterPath VPiece::PassmarksPath(const VContainer *data) const
+QPainterPath VPiece::PassmarksPath(const VContainer *data, const QVector<QPointF> &seamAllowance) const
 {
-    const QVector<QLineF> passmarks = PassmarksLines(data);
+    const QVector<QLineF> passmarks = PassmarksLines(data, seamAllowance);
     QPainterPath path;
 
     // seam allowence
@@ -1048,7 +1053,8 @@ bool VPiece::IsPassmarkVisible(const QVector<VPieceNode> &path, int passmarkInde
 
 //---------------------------------------------------------------------------------------------------------------------
 QVector<QLineF> VPiece::CreatePassmark(const QVector<VPieceNode> &path, int previousIndex, int passmarkIndex,
-                                       int nextIndex, const VContainer *data) const
+                                       int nextIndex, const VContainer *data,
+                                       const QVector<QPointF> &seamAllowance) const
 {
     SCASSERT(data != nullptr);
 
@@ -1079,7 +1085,7 @@ QVector<QLineF> VPiece::CreatePassmark(const QVector<VPieceNode> &path, int prev
     if (not IsSeamAllowanceBuiltIn())
     {
         QVector<QLineF> lines;
-        lines += SAPassmark(path, previousSAPoint, passmarkSAPoint, nextSAPoint, data, passmarkIndex);
+        lines += SAPassmark(path, previousSAPoint, passmarkSAPoint, nextSAPoint, data, passmarkIndex, seamAllowance);
         if (qApp->Settings()->IsDoublePassmark()
                 && not IsHideMainPath()
                 && path.at(passmarkIndex).IsMainPathNode()
@@ -1099,7 +1105,7 @@ QVector<QLineF> VPiece::CreatePassmark(const QVector<VPieceNode> &path, int prev
 //---------------------------------------------------------------------------------------------------------------------
 QVector<QLineF> VPiece::SAPassmark(const QVector<VPieceNode> &path, VSAPoint &previousSAPoint,
                                    const VSAPoint &passmarkSAPoint, VSAPoint &nextSAPoint, const VContainer *data,
-                                   int passmarkIndex) const
+                                   int passmarkIndex, const QVector<QPointF> &seamAllowance) const
 {
     QPointF seamPassmarkSAPoint;
     if (not GetSeamPassmarkSAPoint(previousSAPoint, passmarkSAPoint, nextSAPoint, data, seamPassmarkSAPoint))
@@ -1135,12 +1141,15 @@ QVector<QLineF> VPiece::SAPassmark(const QVector<VPieceNode> &path, VSAPoint &pr
     }
     else if (node.GetPassmarkAngleType() == PassmarkAngleType::Intersection)
     {
+        QVector<QPointF> seamPoints;
+        seamAllowance.isEmpty() ? seamPoints = SeamAllowancePoints(data) : seamPoints = seamAllowance;
+
         {
             // first passmark
             QLineF line(previousSAPoint, passmarkSAPoint);
             line.setLength(line.length()*100); // Hope 100 is enough
 
-            const QVector<QPointF> intersections = VAbstractCurve::CurveIntersectLine(SeamAllowancePoints(data), line);
+            const QVector<QPointF> intersections = VAbstractCurve::CurveIntersectLine(seamPoints, line);
             if (intersections.isEmpty())
             {
                 return QVector<QLineF>(); // Something wrong
@@ -1157,7 +1166,7 @@ QVector<QLineF> VPiece::SAPassmark(const QVector<VPieceNode> &path, VSAPoint &pr
             QLineF line(nextSAPoint, passmarkSAPoint);
             line.setLength(line.length()*100); // Hope 100 is enough
 
-            const QVector<QPointF> intersections = VAbstractCurve::CurveIntersectLine(SeamAllowancePoints(data), line);
+            const QVector<QPointF> intersections = VAbstractCurve::CurveIntersectLine(seamPoints, line);
 
             if (intersections.isEmpty())
             {

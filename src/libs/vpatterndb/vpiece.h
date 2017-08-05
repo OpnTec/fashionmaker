@@ -69,11 +69,14 @@ public:
     QVector<QPointF> MainPathPoints(const VContainer *data) const;
     QVector<VPointF> MainPathNodePoints(const VContainer *data, bool showExcluded = false) const;
     QVector<QPointF> SeamAllowancePoints(const VContainer *data) const;
-    QVector<QLineF>  PassmarksLines(const VContainer *data) const;
+    QVector<QLineF>  PassmarksLines(const VContainer *data,
+                                    const QVector<QPointF> &seamAllowance = QVector<QPointF>()) const;
 
     QPainterPath MainPathPath(const VContainer *data) const;
     QPainterPath SeamAllowancePath(const VContainer *data) const;
-    QPainterPath PassmarksPath(const VContainer *data) const;
+    QPainterPath SeamAllowancePath(const QVector<QPointF> &points) const;
+    QPainterPath PassmarksPath(const VContainer *data,
+                               const QVector<QPointF> &seamAllowance = QVector<QPointF>()) const;
 
     bool IsInLayout() const;
     void SetInLayout(bool inLayout);
@@ -133,10 +136,11 @@ private:
     bool IsPassmarkVisible(const QVector<VPieceNode> &path, int passmarkIndex) const;
 
     QVector<QLineF> CreatePassmark(const QVector<VPieceNode> &path, int previousIndex, int passmarkIndex, int nextIndex,
-                                   const VContainer *data) const;
+                                   const VContainer *data,
+                                   const QVector<QPointF> &seamAllowance = QVector<QPointF>()) const;
     QVector<QLineF> SAPassmark(const QVector<VPieceNode> &path, VSAPoint &previousSAPoint,
                                const VSAPoint &passmarkSAPoint, VSAPoint &nextSAPoint, const VContainer *data,
-                               int passmarkIndex) const;
+                               int passmarkIndex, const QVector<QPointF> &seamAllowance = QVector<QPointF>()) const;
     QVector<QLineF> BuiltInSAPassmark(const QVector<VPieceNode> &path, const VSAPoint &previousSAPoint,
                                       const VSAPoint &passmarkSAPoint, const VSAPoint &nextSAPoint,
                                       const VContainer *data, int passmarkIndex) const;

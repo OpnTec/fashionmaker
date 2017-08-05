@@ -330,19 +330,18 @@ quint32 VDomDocument::GetParametrUInt(const QDomElement &domElement, const QStri
     QString parametr;
     quint32 id = 0;
 
-    const QString message = QObject::tr("Can't convert toUInt parameter");
     try
     {
         parametr = GetParametrString(domElement, name, defValue);
         id = parametr.toUInt(&ok);
         if (ok == false)
         {
-            throw VExceptionConversionError(message, name);
+            throw VExceptionConversionError(QObject::tr("Can't convert toUInt parameter"), name);
         }
     }
     catch (const VExceptionEmptyParameter &e)
     {
-        VExceptionConversionError excep(message, name);
+        VExceptionConversionError excep(QObject::tr("Can't convert toUInt parameter"), name);
         excep.AddMoreInformation(e.ErrorMessage());
         throw excep;
     }
