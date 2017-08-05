@@ -267,11 +267,22 @@ QVector<QPointF> VAbstractPiece::CheckLoops(const QVector<QPointF> &points)
                 continue;
             }
 
-            QSet<qint32> uniqueVertices;
-            uniqueVertices << i << i+1 << j;
+            QVector<qint32> uniqueVertices;
+
+            auto AddUniqueIndex = [&uniqueVertices](qint32 i)
+            {
+                if (not uniqueVertices.contains(i))
+                {
+                    uniqueVertices.append(i);
+                }
+            };
+
+            AddUniqueIndex(i);
+            AddUniqueIndex(i+1);
+            AddUniqueIndex(j);
 
             // For closed path last point is equal to first. Using index of the first.
-            pathClosed && jNext == count-1 ? uniqueVertices << 0 : uniqueVertices << jNext;
+            pathClosed && jNext == count-1 ? AddUniqueIndex(0) : AddUniqueIndex(jNext);
 
             const QLineF::IntersectType intersect = line1.intersect(line2, &crosPoint);
             if (intersect == QLineF::NoIntersection)
