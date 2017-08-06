@@ -37,7 +37,8 @@ win32{
 win32 {
     INSTALL_OPENSSL += \
                        ../../../dist/win/libeay32.dll \
-                       ../../../dist/win/ssleay32.dll
+                       ../../../dist/win/ssleay32.dll \
+                       ../../../dist/win/msvcr120.dll
 }
 
 macx{

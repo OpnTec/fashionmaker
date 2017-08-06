@@ -268,6 +268,7 @@ win32:*g++* {
         $$PWD/../../../dist/win/pdftops.exe \
         $$PWD/../../../dist/win/libeay32.dll \
         $$PWD/../../../dist/win/ssleay32.dll \
+        $$PWD/../../../dist/win/msvcr120.dll \
         $$PWD/../../../AUTHORS.txt \
         $$PWD/../../../LICENSE_GPL.txt \
         $$PWD/../../../README.txt \
