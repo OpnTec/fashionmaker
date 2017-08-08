@@ -61,7 +61,8 @@ DialogIncrements::DialogIncrements(VContainer *data, VPattern *doc, QWidget *par
       doc(doc),
       formulaBaseHeight(0),
       search(),
-      hasChanges(false)
+      hasChanges(false),
+      renameList()
 {
     ui->setupUi(this);
 
@@ -466,6 +467,64 @@ void DialogIncrements::LocalUpdateTree()
 //---------------------------------------------------------------------------------------------------------------------
 void DialogIncrements::UpdateTree()
 {
+    FillIncrements();
+
+    search->RefreshList(ui->lineEditFind->text());
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+bool DialogIncrements::IncrementUsed(const QString &name) const
+{
+    const QVector<VFormulaField> expressions = doc->ListExpressions();
+
+    for(int i = 0; i < expressions.size(); ++i)
+    {
+        if (expressions.at(i).expression.indexOf(name) != -1)
+        {
+            // Eval formula
+            try
+            {
+                QScopedPointer<qmu::QmuTokenParser> cal(new qmu::QmuTokenParser(expressions.at(i).expression, false,
+                                                                                false));
+
+                // Tokens (variables, measurements)
+                if (cal->GetTokens().values().contains(name))
+                {
+                    return true;
+                }
+            }
+            catch (const qmu::QmuParserError &)
+            {
+                // Do nothing. Because we not sure if used. A formula is broken.
+            }
+        }
+    }
+    return false;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogIncrements::CacheRename(const QString &name, const QString &newName)
+{
+    for (int i = 0; i < renameList.size(); ++i)
+    {
+        if (renameList.at(i).second == name)
+        {
+            renameList[i].second = newName;
+            return;
+        }
+    }
+
+    renameList.append(qMakePair(name, newName));
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief FullUpdateFromFile update information in tables form file
+ */
+void DialogIncrements::FullUpdateFromFile()
+{
+    hasChanges = false;
+
     ui->tableWidgetLines->clearContents();
     ui->tableWidgetSplines->clearContents();
     ui->tableWidgetAnglesCurves->clearContents();
@@ -484,50 +543,17 @@ void DialogIncrements::UpdateTree()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-bool DialogIncrements::IncrementUsed(const QString &name) const
-{
-    const QStringList expressions = doc->ListExpressions();
-
-    for(int i = 0; i < expressions.size(); ++i)
-    {
-        if (expressions.at(i).indexOf(name) != -1)
-        {
-            // Eval formula
-            try
-            {
-                QScopedPointer<qmu::QmuTokenParser> cal(new qmu::QmuTokenParser(expressions.at(i), false, false));
-
-                // Tokens (variables, measurements)
-                if (cal->GetTokens().values().contains(name))
-                {
-                    return true;
-                }
-            }
-            catch (const qmu::QmuParserError &)
-            {
-                // Do nothing. Because we not sure if used. A formula is broken.
-            }
-        }
-    }
-    return false;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-/**
- * @brief FullUpdateFromFile update information in tables form file
- */
-void DialogIncrements::FullUpdateFromFile()
-{
-    hasChanges = false;
-
-    UpdateTree();
-}
-
-//---------------------------------------------------------------------------------------------------------------------
 void DialogIncrements::RefreshPattern()
 {
     if (hasChanges)
     {
+        QVector<VFormulaField> expressions = doc->ListExpressions();
+        for (int i = 0; i < renameList.size(); ++i)
+        {
+            doc->ReplaceNameInFormula(expressions, renameList.at(i).first, renameList.at(i).second);
+        }
+        renameList.clear();
+
         const int row = ui->tableWidgetIncrement->currentRow();
 
         doc->LiteParseTree(Document::LiteParse);
@@ -663,6 +689,9 @@ void DialogIncrements::SaveIncrName(const QString &text)
     }
 
     doc->SetIncrementName(nameField->text(), newName);
+    QVector<VFormulaField> expressions = doc->ListIncrementExpressions();
+    doc->ReplaceNameInFormula(expressions, nameField->text(), newName);
+    CacheRename(nameField->text(), newName);
 
     hasChanges = true;
     LocalUpdateTree();
@@ -832,6 +861,7 @@ void DialogIncrements::closeEvent(QCloseEvent *event)
     ui->lineEditName->blockSignals(true);
     ui->plainTextEditDescription->blockSignals(true);
 
+    emit UpdateProperties();
     emit DialogClosed(QDialog::Accepted);
     event->accept();
 }
@@ -942,7 +972,6 @@ void DialogIncrements::ShowIncrementDetails()
         ui->lineEditName->blockSignals(true);
         ui->lineEditName->setText(ClearIncrementName(incr->GetName()));
         ui->lineEditName->blockSignals(false);
-        ui->lineEditName->setReadOnly(IncrementUsed(incr->GetName()));
 
         ui->plainTextEditDescription->blockSignals(true);
         ui->plainTextEditDescription->setPlainText(incr->GetDescription());

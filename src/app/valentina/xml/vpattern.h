@@ -79,6 +79,8 @@ public:
     void SetIncrementFormula(const QString &name, const QString &text);
     void SetIncrementDescription(const QString &name, const QString &text);
 
+    void ReplaceNameInFormula(QVector<VFormulaField> &expressions, const QString &name, const QString &newName);
+
     virtual QString GenerateLabel(const LabelType &type, const QString &reservedName = QString())const Q_DECL_OVERRIDE;
     virtual QString GenerateSuffix() const Q_DECL_OVERRIDE;
 

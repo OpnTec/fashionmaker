@@ -44,6 +44,7 @@
 #include "../vmisc/vmath.h"
 #include "../vmisc/projectversion.h"
 #include "../qmuparser/qmuparsererror.h"
+#include "../qmuparser/qmutokenparser.h"
 #include "../vgeometry/varc.h"
 #include "../vgeometry/vellipticalarc.h"
 #include "../vgeometry/vsplinepath.h"
@@ -3506,6 +3507,63 @@ void VPattern::SetIncrementDescription(const QString &name, const QString &text)
     {
         SetAttribute(node, IncrementDescription, text);
         emit patternChanged(false);
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VPattern::ReplaceNameInFormula(QVector<VFormulaField> &expressions, const QString &name, const QString &newName)
+{
+    const int bias = name.length() - newName.length();
+
+    for(int i = 0; i < expressions.size(); ++i)
+    {
+        if (expressions.at(i).expression.indexOf(name) != -1)
+        {
+            QMap<int, QString> tokens;
+
+            // Eval formula
+            try
+            {
+                QScopedPointer<qmu::QmuTokenParser> cal(new qmu::QmuTokenParser(expressions.at(i).expression, false,
+                                                                                false));
+                tokens = cal->GetTokens();// Tokens (variables, measurements)
+
+            }
+            catch (const qmu::QmuParserError &)
+            {
+                continue;// Because we not sure if used. A formula is broken.
+            }
+
+            QList<QString> tValues = tokens.values();
+            if (not tValues.contains(name))
+            {
+                continue;
+            }
+
+            QList<int> tKeys = tokens.keys();// Take all tokens positions
+            QString newFormula = expressions.at(i).expression;
+
+            for (int i = 0; i < tKeys.size(); ++i)
+            {
+                if (tValues.at(i) != name)
+                {
+                    continue;
+                }
+
+                newFormula.replace(tKeys.at(i), name.length(), newName);
+
+                if (bias != 0)
+                {// Translated token has different length than original. Position next tokens need to be corrected.
+                    VTranslateVars::BiasTokens(tKeys.at(i), bias, tokens);
+                    tKeys = tokens.keys();
+                    tValues = tokens.values();
+                }
+            }
+
+            expressions[i].expression = newFormula;
+            expressions[i].element.setAttribute(expressions.at(i).attribute, newFormula);
+            emit patternChanged(false);
+        }
     }
 }
 

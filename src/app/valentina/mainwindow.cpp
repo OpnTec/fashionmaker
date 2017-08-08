@@ -3919,6 +3919,8 @@ void MainWindow::CreateActions()
         if (checked)
         {
             dialogTable = new DialogIncrements(pattern, doc, this);
+            connect(dialogTable.data(), &DialogIncrements::UpdateProperties, toolOptions,
+                    &VToolOptionsPropertyBrowser::RefreshOptions);
             connect(dialogTable.data(), &DialogIncrements::DialogClosed, this, [this]()
             {
                 ui->actionTable->setChecked(false);

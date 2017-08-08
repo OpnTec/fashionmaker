@@ -33,6 +33,8 @@
 #include "../xml/vpattern.h"
 #include "../vmisc/vtablesearch.h"
 
+#include <QPair>
+
 class VIndividualMeasurements;
 
 namespace Ui
@@ -49,6 +51,9 @@ class DialogIncrements : public DialogTool
 public:
     DialogIncrements(VContainer *data, VPattern *doc, QWidget *parent = nullptr);
     virtual ~DialogIncrements() Q_DECL_OVERRIDE;
+
+signals:
+    void UpdateProperties();
 
 protected:
     virtual void closeEvent ( QCloseEvent * event ) Q_DECL_OVERRIDE;
@@ -88,6 +93,8 @@ private:
 
     bool hasChanges;
 
+    QVector<QPair<QString, QString>> renameList;
+
     template <typename T>
     void                 FillTable(const QMap<QString, T> &varTable, QTableWidget *table);
 
@@ -115,6 +122,8 @@ private:
     void UpdateTree();
 
     bool IncrementUsed(const QString &name) const;
+
+    void CacheRename(const QString &name, const QString &newName);
 };
 
 #endif // DIALOGINCREMENTS_H

@@ -65,6 +65,8 @@ public:
 
     QMap<QString, qmu::QmuTranslation> GetFunctions() const;
 
+    static void BiasTokens(int position, int bias, QMap<int, QString> &tokens);
+
 private:
     Q_DISABLE_COPY(VTranslateVars)
     QMap<QString, qmu::QmuTranslation> PMSystemNames;
@@ -86,7 +88,7 @@ private:
                     const qmu::QmuTranslation &book);
 
     void CorrectionsPositions(int position, int bias, QMap<int, QString> &tokens, QMap<int, QString> &numbers) const;
-    static void BiasTokens(int position, int bias, QMap<int, QString> &tokens);
+
 };
 
 #endif // VTRANSLATEVARS_H

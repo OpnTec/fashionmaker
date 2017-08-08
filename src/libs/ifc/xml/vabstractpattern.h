@@ -60,6 +60,18 @@ enum class AxisType : char {VerticalAxis = 1, HorizontalAxis = 2};
 class VContainer;
 class VDataTool;
 
+QT_WARNING_PUSH
+QT_WARNING_DISABLE_GCC("-Weffc++")
+
+struct VFormulaField
+{
+    QString     expression;
+    QDomElement element;
+    QString     attribute;
+};
+
+QT_WARNING_POP
+
 class VAbstractPattern : public QObject, public VDomDocument
 {
     Q_OBJECT
@@ -68,7 +80,8 @@ public:
     virtual ~VAbstractPattern() Q_DECL_EQ_DEFAULT;
 
     QStringList    ListMeasurements() const;
-    QStringList    ListExpressions() const;
+    QVector<VFormulaField> ListExpressions() const;
+    QVector<VFormulaField> ListIncrementExpressions() const;
 
     virtual void   CreateEmptyFile()=0;
 
@@ -388,17 +401,16 @@ private:
     Q_DISABLE_COPY(VAbstractPattern)
 
     QStringList ListIncrements() const;
-    QStringList ListPointExpressions() const;
-    QStringList ListArcExpressions() const;
-    QStringList ListElArcExpressions() const;
-    QStringList ListSplineExpressions() const;
-    QStringList ListPathPointExpressions() const;
-    QStringList ListIncrementExpressions() const;
-    QStringList ListOperationExpressions() const;
-    QStringList ListNodesExpressions(const QDomElement &nodes) const;
-    QStringList ListPathExpressions() const;
-    QStringList ListGrainlineExpressions(const QDomElement &element) const;
-    QStringList ListPieceExpressions() const;
+    QVector<VFormulaField> ListPointExpressions() const;
+    QVector<VFormulaField> ListArcExpressions() const;
+    QVector<VFormulaField> ListElArcExpressions() const;
+    QVector<VFormulaField> ListSplineExpressions() const;
+    QVector<VFormulaField> ListPathPointExpressions() const;
+    QVector<VFormulaField> ListOperationExpressions() const;
+    QVector<VFormulaField> ListNodesExpressions(const QDomElement &nodes) const;
+    QVector<VFormulaField> ListPathExpressions() const;
+    QVector<VFormulaField> ListGrainlineExpressions(const QDomElement &element) const;
+    QVector<VFormulaField> ListPieceExpressions() const;
 
     bool IsVariable(const QString& token) const;
     bool IsPostfixOperator(const QString& token) const;
