@@ -481,7 +481,7 @@ QPointF VEllipticalArc::CutArc(const qreal &length) const
 //---------------------------------------------------------------------------------------------------------------------
 void VEllipticalArc::CreateName()
 {
-    QString name = EARC_ + QString("%1").arg(this->GetCenter().name());
+    QString name = ELARC_ + QString("%1").arg(this->GetCenter().name());
 
     if (VAbstractCurve::id() != NULL_ID)
     {

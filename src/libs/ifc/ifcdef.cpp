@@ -252,9 +252,12 @@ const QString line_                = QStringLiteral("Line_");
 const QString angleLine_           = QStringLiteral("AngleLine_");
 const QString spl_                 = QStringLiteral(SPL_);
 const QString arc_                 = QStringLiteral(ARC_);
+const QString elarc_               = QStringLiteral(ELARC_);
 const QString splPath              = QStringLiteral("SplPath");
 const QString radius_V             = QStringLiteral("Radius");
 const QString radiusArc_           = radius_V + arc_;
+const QString radius1ElArc_        = radius_V + QLatin1Char('1') + elarc_;
+const QString radius2ElArc_        = radius_V + QLatin1Char('2') + elarc_;
 const QString angle1_V             = QStringLiteral("Angle1");
 const QString angle2_V             = QStringLiteral("Angle2");
 const QString c1Length_V           = QStringLiteral("C1Length");
@@ -265,6 +268,8 @@ const QString c1LengthSplPath      = c1Length_V + splPath;
 const QString c2LengthSplPath      = c2Length_V + splPath;
 const QString angle1Arc_           = angle1_V + arc_;
 const QString angle2Arc_           = angle2_V + arc_;
+const QString angle1ElArc_         = angle1_V + elarc_;
+const QString angle2ElArc_         = angle2_V + elarc_;
 const QString angle1Spl_           = angle1_V + spl_;
 const QString angle2Spl_           = angle2_V + spl_;
 const QString angle1SplPath        = angle1_V + splPath;
@@ -278,11 +283,16 @@ const QStringList builInVariables = QStringList() << measurement_
                                                   << line_
                                                   << angleLine_
                                                   << arc_
+                                                  << elarc_
                                                   << spl_
                                                   << splPath
                                                   << radiusArc_
+                                                  << radius1ElArc_
+                                                  << radius2ElArc_
                                                   << angle1Arc_
                                                   << angle2Arc_
+                                                  << angle1ElArc_
+                                                  << angle2ElArc_
                                                   << angle1Spl_
                                                   << angle2Spl_
                                                   << angle1SplPath

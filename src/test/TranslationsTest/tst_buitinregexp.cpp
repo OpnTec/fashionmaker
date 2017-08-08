@@ -124,11 +124,16 @@ void TST_BuitInRegExp::TestCheckUnderlineExists_data()
     data.insert(line_, true);
     data.insert(angleLine_, true);
     data.insert(arc_, true);
+    data.insert(elarc_, true);
     data.insert(spl_, true);
     data.insert(splPath, false);
     data.insert(radiusArc_, true);
+    data.insert(radius1ElArc_, true);
+    data.insert(radius2ElArc_, true);
     data.insert(angle1Arc_, true);
     data.insert(angle2Arc_, true);
+    data.insert(angle1ElArc_, true);
+    data.insert(angle2ElArc_, true);
     data.insert(angle1Spl_, true);
     data.insert(angle2Spl_, true);
     data.insert(angle1SplPath, false);

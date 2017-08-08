@@ -177,17 +177,20 @@ extern const QString ColorCornFlowerBlue;
 // Hacks for avoiding the linker error "undefined reference to"
 #define SPL_ "Spl_"
 #define ARC_ "Arc_"
-#define EARC_ "ElArc_"
+#define ELARC_ "ElArc_"
 
 extern const QString measurement_;
 extern const QString increment_;
 extern const QString line_;
 extern const QString angleLine_;
 extern const QString arc_;
+extern const QString elarc_;
 extern const QString spl_;
 extern const QString splPath;
 extern const QString radius_V;
 extern const QString radiusArc_;
+extern const QString radius1ElArc_;
+extern const QString radius2ElArc_;
 extern const QString angle1_V;
 extern const QString angle2_V;
 extern const QString c1Length_V;
@@ -198,6 +201,8 @@ extern const QString c1LengthSplPath;
 extern const QString c2LengthSplPath;
 extern const QString angle1Arc_;
 extern const QString angle2Arc_;
+extern const QString angle1ElArc_;
+extern const QString angle2ElArc_;
 extern const QString angle1Spl_;
 extern const QString angle2Spl_;
 extern const QString angle1SplPath;

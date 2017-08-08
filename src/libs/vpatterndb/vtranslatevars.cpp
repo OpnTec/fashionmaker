@@ -378,11 +378,16 @@ void VTranslateVars::InitVariables()
     variables.insert(line_, translate("VTranslateVars", "Line_", "Left symbol _ in the name"));
     variables.insert(angleLine_, translate("VTranslateVars", "AngleLine_", "Left symbol _ in the name"));
     variables.insert(arc_, translate("VTranslateVars", "Arc_", "Left symbol _ in the name"));
+    variables.insert(elarc_, translate("VTranslateVars", "ElArc_", "Left symbol _ in the name"));
     variables.insert(spl_, translate("VTranslateVars", "Spl_", "Left symbol _ in the name"));
     variables.insert(splPath, translate("VTranslateVars", "SplPath", "Do not add symbol _ to the end of the name"));
     variables.insert(radiusArc_, translate("VTranslateVars", "RadiusArc_", "Left symbol _ in the name"));
+    variables.insert(radius1ElArc_, translate("VTranslateVars", "Radius1ElArc_", "Left symbol _ in the name"));
+    variables.insert(radius2ElArc_, translate("VTranslateVars", "Radius2ElArc_", "Left symbol _ in the name"));
     variables.insert(angle1Arc_, translate("VTranslateVars", "Angle1Arc_", "Left symbol _ in the name"));
     variables.insert(angle2Arc_, translate("VTranslateVars", "Angle2Arc_", "Left symbol _ in the name"));
+    variables.insert(angle1ElArc_, translate("VTranslateVars", "Angle1ElArc_", "Left symbol _ in the name"));
+    variables.insert(angle2ElArc_, translate("VTranslateVars", "Angle2ElArc_", "Left symbol _ in the name"));
     variables.insert(angle1Spl_, translate("VTranslateVars", "Angle1Spl_", "Left symbol _ in the name"));
     variables.insert(angle2Spl_, translate("VTranslateVars", "Angle2Spl_", "Left symbol _ in the name"));
     variables.insert(angle1SplPath, translate("VTranslateVars", "Angle1SplPath",
