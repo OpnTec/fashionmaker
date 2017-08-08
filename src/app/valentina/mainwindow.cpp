@@ -568,8 +568,8 @@ void MainWindow::SetToolButton(bool checked, Tool t, const QString &cursor, cons
             }
         }
         QPixmap pixmap(cursorResource);
-        QCursor cur(pixmap, 2, 3);
-        ui->view->setCursor(cur);
+        QCursor cur(pixmap, 2, 2);
+        ui->view->viewport()->setCursor(cur);
         helpLabel->setText(toolTip);
         ui->view->setShowToolOptions(false);
         dialogTool = QSharedPointer<Dialog>(new Dialog(pattern, 0, this));
@@ -2201,7 +2201,7 @@ void  MainWindow::ArrowTool()
 
     ui->view->AllowRubberBand(true);
 
-    ui->view->setCursor(Qt::ArrowCursor);
+    ui->view->viewport()->unsetCursor();
     helpLabel->setText("");
     ui->view->setShowToolOptions(true);
     qCDebug(vMainWindow, "Enabled arrow tool.");
