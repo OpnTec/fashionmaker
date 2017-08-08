@@ -31,6 +31,7 @@
 #include "../vwidgets/vwidgetpopup.h"
 #include "../vmisc/vsettings.h"
 #include "../qmuparser/qmudef.h"
+#include "../qmuparser/qmutokenparser.h"
 #include "../vpatterndb/vtranslatevars.h"
 #include "../vpatterndb/calculator.h"
 #include "../vtools/dialogs/support/dialogeditwrongformula.h"
@@ -491,7 +492,21 @@ bool DialogIncrements::IncrementUsed(const QString &name) const
     {
         if (expressions.at(i).indexOf(name) != -1)
         {
-            return true;
+            // Eval formula
+            try
+            {
+                QScopedPointer<qmu::QmuTokenParser> cal(new qmu::QmuTokenParser(expressions.at(i), false, false));
+
+                // Tokens (variables, measurements)
+                if (cal->GetTokens().values().contains(name))
+                {
+                    return true;
+                }
+            }
+            catch (const qmu::QmuParserError &)
+            {
+                // Do nothing. Because we not sure if used. A formula is broken.
+            }
         }
     }
     return false;
