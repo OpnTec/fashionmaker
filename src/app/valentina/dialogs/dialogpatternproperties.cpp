@@ -36,6 +36,7 @@
 #include "../xml/vpattern.h"
 #include "../vpatterndb/vcontainer.h"
 #include "../core/vapplication.h"
+#include "../vtools/dialogs/support/dialogeditlabel.h"
 
 // calc how many combinations we have
 static const int heightsCount = (static_cast<int>(GHeights::H200) -
@@ -201,6 +202,7 @@ DialogPatternProperties::DialogPatternProperties(const QString &filePath, VPatte
     connect(ui->lineEditSize, &QLineEdit::editingFinished, this, &DialogPatternProperties::GeneralInfoChanged);
     connect(ui->checkBoxShowDate, &QCheckBox::stateChanged, this, &DialogPatternProperties::GeneralInfoChanged);
     connect(ui->checkBoxShowMeasurements, &QCheckBox::stateChanged, this, &DialogPatternProperties::GeneralInfoChanged);
+    connect(ui->pushButtonEditPatternLabel, &QPushButton::clicked, this, &DialogPatternProperties::EditLabel);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -848,4 +850,11 @@ void DialogPatternProperties::SaveImage()
             file.close();
         }
     }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogPatternProperties::EditLabel()
+{
+    DialogEditLabel editor;
+    editor.exec();
 }

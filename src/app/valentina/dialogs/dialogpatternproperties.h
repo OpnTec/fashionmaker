@@ -62,6 +62,7 @@ private slots:
     void DescEdited();
     void ChangeImage();
     void SaveImage();
+    void EditLabel();
 private:
     Q_DISABLE_COPY(DialogPatternProperties)
     Ui::DialogPatternProperties *ui;

@@ -3,8 +3,9 @@
 
 #include <QDialog>
 
-namespace Ui {
-class DialogEditLabel;
+namespace Ui
+{
+    class DialogEditLabel;
 }
 
 class DialogEditLabel : public QDialog
@@ -12,10 +13,11 @@ class DialogEditLabel : public QDialog
     Q_OBJECT
 
 public:
-    explicit DialogEditLabel(QWidget *parent = 0);
-    ~DialogEditLabel();
+    explicit DialogEditLabel(QWidget *parent = nullptr);
+    virtual ~DialogEditLabel();
 
 private:
+    Q_DISABLE_COPY(DialogEditLabel)
     Ui::DialogEditLabel *ui;
 };
 
