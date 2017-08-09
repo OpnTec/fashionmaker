@@ -14,18 +14,18 @@
    <string>Pattern properties</string>
   </property>
   <property name="windowIcon">
-   <iconset resource="../../../libs/vmisc/share/resources/icon.qrc">
+   <iconset>
     <normaloff>:/icon/64x64/icon64x64.png</normaloff>:/icon/64x64/icon64x64.png</iconset>
   </property>
   <layout class="QVBoxLayout" name="verticalLayout_4">
    <item>
     <widget class="QTabWidget" name="tabWidget">
      <property name="currentIndex">
-      <number>4</number>
+      <number>0</number>
      </property>
      <widget class="QWidget" name="tab">
       <attribute name="title">
-       <string>Description</string>
+       <string>Pattern</string>
       </attribute>
       <layout class="QVBoxLayout" name="verticalLayout_3">
        <item>
@@ -85,7 +85,7 @@
          <item>
           <widget class="QLabel" name="label">
            <property name="text">
-            <string>Author name</string>
+            <string>Author:</string>
            </property>
           </widget>
          </item>
@@ -183,7 +183,7 @@
          <item>
           <widget class="QLabel" name="label_3">
            <property name="text">
-            <string>For technical notes.</string>
+            <string>For technical notes</string>
            </property>
           </widget>
          </item>
@@ -1205,82 +1205,130 @@
      </widget>
      <widget class="QWidget" name="tab_4">
       <attribute name="title">
-       <string>General info</string>
+       <string>Label data</string>
       </attribute>
-      <layout class="QVBoxLayout" name="verticalLayout_12">
+      <layout class="QVBoxLayout" name="verticalLayout_32">
        <item>
-        <layout class="QFormLayout" name="formLayout_2">
-         <item row="0" column="0">
-          <widget class="QLabel" name="label_6">
+        <layout class="QHBoxLayout" name="horizontalLayout_19">
+         <item>
+          <widget class="QLabel" name="label_13">
            <property name="text">
-            <string>Pattern name:</string>
+            <string>Label:</string>
            </property>
           </widget>
          </item>
-         <item row="0" column="1">
-          <widget class="QLineEdit" name="lineEditPatternName">
-           <property name="maxLength">
-            <number>30</number>
+         <item>
+          <widget class="QPushButton" name="pushButtonEditPatternLabel">
+           <property name="toolTip">
+            <string>Edit pattern label</string>
            </property>
-          </widget>
-         </item>
-         <item row="1" column="0">
-          <widget class="QLabel" name="label_7">
            <property name="text">
-            <string>Pattern number:</string>
+            <string>Edit label</string>
            </property>
           </widget>
          </item>
-         <item row="1" column="1">
-          <widget class="QLineEdit" name="lineEditPatternNumber">
-           <property name="maxLength">
-            <number>30</number>
+         <item>
+          <spacer name="horizontalSpacer">
+           <property name="orientation">
+            <enum>Qt::Horizontal</enum>
            </property>
-          </widget>
-         </item>
-         <item row="2" column="0">
-          <widget class="QLabel" name="label_8">
-           <property name="text">
-            <string>Company/Designer name:</string>
+           <property name="sizeHint" stdset="0">
+            <size>
+             <width>40</width>
+             <height>20</height>
+            </size>
            </property>
-          </widget>
-         </item>
-         <item row="2" column="1">
-          <widget class="QLineEdit" name="lineEditCompanyName">
-           <property name="maxLength">
-            <number>30</number>
-           </property>
-          </widget>
-         </item>
-         <item row="3" column="0">
-          <widget class="QLabel" name="label_10">
-           <property name="text">
-            <string>Customer name:</string>
-           </property>
-          </widget>
-         </item>
-         <item row="3" column="1">
-          <widget class="QLineEdit" name="lineEditCustomerName">
-           <property name="maxLength">
-            <number>30</number>
-           </property>
-          </widget>
-         </item>
-         <item row="4" column="0">
-          <widget class="QLabel" name="label_12">
-           <property name="text">
-            <string>Pattern size:</string>
-           </property>
-          </widget>
-         </item>
-         <item row="4" column="1">
-          <widget class="QLineEdit" name="lineEditSize">
-           <property name="maxLength">
-            <number>40</number>
-           </property>
-          </widget>
+          </spacer>
          </item>
         </layout>
+       </item>
+       <item>
+        <widget class="QGroupBox" name="groupBox_4">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+           <horstretch>0</horstretch>
+           <verstretch>1</verstretch>
+          </sizepolicy>
+         </property>
+         <property name="title">
+          <string>Label data</string>
+         </property>
+         <layout class="QFormLayout" name="formLayout">
+          <property name="fieldGrowthPolicy">
+           <enum>QFormLayout::AllNonFixedFieldsGrow</enum>
+          </property>
+          <item row="0" column="0">
+           <widget class="QLabel" name="label_6">
+            <property name="text">
+             <string>Pattern name:</string>
+            </property>
+           </widget>
+          </item>
+          <item row="0" column="1">
+           <widget class="QLineEdit" name="lineEditPatternName">
+            <property name="maxLength">
+             <number>30</number>
+            </property>
+           </widget>
+          </item>
+          <item row="1" column="0">
+           <widget class="QLabel" name="label_7">
+            <property name="text">
+             <string>Pattern number:</string>
+            </property>
+           </widget>
+          </item>
+          <item row="1" column="1">
+           <widget class="QLineEdit" name="lineEditPatternNumber">
+            <property name="maxLength">
+             <number>30</number>
+            </property>
+           </widget>
+          </item>
+          <item row="2" column="0">
+           <widget class="QLabel" name="label_8">
+            <property name="text">
+             <string>Company/Designer name:</string>
+            </property>
+           </widget>
+          </item>
+          <item row="2" column="1">
+           <widget class="QLineEdit" name="lineEditCompanyName">
+            <property name="maxLength">
+             <number>30</number>
+            </property>
+           </widget>
+          </item>
+          <item row="3" column="0">
+           <widget class="QLabel" name="label_10">
+            <property name="text">
+             <string>Customer name:</string>
+            </property>
+           </widget>
+          </item>
+          <item row="3" column="1">
+           <widget class="QLineEdit" name="lineEditCustomerName">
+            <property name="maxLength">
+             <number>30</number>
+            </property>
+           </widget>
+          </item>
+          <item row="4" column="0">
+           <widget class="QLabel" name="label_12">
+            <property name="text">
+             <string>Pattern size:</string>
+            </property>
+           </widget>
+          </item>
+          <item row="4" column="1">
+           <widget class="QLineEdit" name="lineEditSize">
+            <property name="maxLength">
+             <number>40</number>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </widget>
        </item>
        <item>
         <widget class="QCheckBox" name="checkBoxShowDate">
@@ -1298,269 +1346,6 @@
        </item>
       </layout>
      </widget>
-     <widget class="QWidget" name="tab_5">
-      <attribute name="title">
-       <string>Pattern label data</string>
-      </attribute>
-      <layout class="QVBoxLayout" name="verticalLayout_13">
-       <item>
-        <layout class="QHBoxLayout" name="horizontalLayout_9">
-         <item>
-          <widget class="QToolButton" name="toolButtonNewLabel">
-           <property name="toolTip">
-            <string>Clear current and begin new label</string>
-           </property>
-           <property name="text">
-            <string notr="true">...</string>
-           </property>
-           <property name="icon">
-            <iconset theme="document-new"/>
-           </property>
-           <property name="iconSize">
-            <size>
-             <width>24</width>
-             <height>24</height>
-            </size>
-           </property>
-          </widget>
-         </item>
-         <item>
-          <spacer name="horizontalSpacer_3">
-           <property name="orientation">
-            <enum>Qt::Horizontal</enum>
-           </property>
-           <property name="sizeHint" stdset="0">
-            <size>
-             <width>40</width>
-             <height>20</height>
-            </size>
-           </property>
-          </spacer>
-         </item>
-         <item>
-          <widget class="QToolButton" name="toolButtonImportLabel">
-           <property name="toolTip">
-            <string>Import from label template</string>
-           </property>
-           <property name="text">
-            <string notr="true">...</string>
-           </property>
-           <property name="icon">
-            <iconset theme="document-open"/>
-           </property>
-           <property name="iconSize">
-            <size>
-             <width>24</width>
-             <height>24</height>
-            </size>
-           </property>
-          </widget>
-         </item>
-         <item>
-          <widget class="QToolButton" name="toolButtonExportLabel">
-           <property name="toolTip">
-            <string>Export label as template</string>
-           </property>
-           <property name="text">
-            <string notr="true">...</string>
-           </property>
-           <property name="icon">
-            <iconset theme="document-save-as"/>
-           </property>
-           <property name="iconSize">
-            <size>
-             <width>24</width>
-             <height>24</height>
-            </size>
-           </property>
-          </widget>
-         </item>
-        </layout>
-       </item>
-       <item>
-        <widget class="QListWidget" name="listWidget">
-         <property name="sizePolicy">
-          <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
-           <horstretch>0</horstretch>
-           <verstretch>1</verstretch>
-          </sizepolicy>
-         </property>
-         <property name="dragDropMode">
-          <enum>QAbstractItemView::InternalMove</enum>
-         </property>
-        </widget>
-       </item>
-       <item>
-        <layout class="QFormLayout" name="formLayout">
-         <item row="0" column="1">
-          <layout class="QHBoxLayout" name="horizontalLayout_11">
-           <property name="spacing">
-            <number>6</number>
-           </property>
-           <item>
-            <widget class="QToolButton" name="toolButtonBold">
-             <property name="toolTip">
-              <string comment="Font formating">Bold</string>
-             </property>
-             <property name="text">
-              <string notr="true">...</string>
-             </property>
-             <property name="icon">
-              <iconset theme="format-text-bold"/>
-             </property>
-             <property name="checkable">
-              <bool>true</bool>
-             </property>
-            </widget>
-           </item>
-           <item>
-            <widget class="QToolButton" name="toolButtonItalic">
-             <property name="toolTip">
-              <string comment="Font formating">Italic</string>
-             </property>
-             <property name="text">
-              <string notr="true">...</string>
-             </property>
-             <property name="icon">
-              <iconset theme="format-text-italic"/>
-             </property>
-             <property name="checkable">
-              <bool>true</bool>
-             </property>
-            </widget>
-           </item>
-           <item>
-            <widget class="QToolButton" name="toolButtonTextLeft">
-             <property name="toolTip">
-              <string>Aligns with the left edge</string>
-             </property>
-             <property name="text">
-              <string notr="true">...</string>
-             </property>
-             <property name="icon">
-              <iconset theme="format-justify-left"/>
-             </property>
-             <property name="checkable">
-              <bool>true</bool>
-             </property>
-            </widget>
-           </item>
-           <item>
-            <widget class="QToolButton" name="toolButtonTextCenter">
-             <property name="toolTip">
-              <string>Centers horizontally in the available space</string>
-             </property>
-             <property name="text">
-              <string notr="true">...</string>
-             </property>
-             <property name="icon">
-              <iconset theme="format-justify-center"/>
-             </property>
-             <property name="checkable">
-              <bool>true</bool>
-             </property>
-            </widget>
-           </item>
-           <item>
-            <widget class="QToolButton" name="toolButtonTextRight">
-             <property name="toolTip">
-              <string>Aligns with the right edge</string>
-             </property>
-             <property name="text">
-              <string notr="true">...</string>
-             </property>
-             <property name="icon">
-              <iconset theme="format-justify-right"/>
-             </property>
-             <property name="checkable">
-              <bool>true</bool>
-             </property>
-            </widget>
-           </item>
-           <item>
-            <spacer name="horizontalSpacer_5">
-             <property name="orientation">
-              <enum>Qt::Horizontal</enum>
-             </property>
-             <property name="sizeHint" stdset="0">
-              <size>
-               <width>20</width>
-               <height>20</height>
-              </size>
-             </property>
-            </spacer>
-           </item>
-           <item alignment="Qt::AlignRight">
-            <widget class="QToolButton" name="toolButtonAdd_2">
-             <property name="sizePolicy">
-              <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
-               <horstretch>0</horstretch>
-               <verstretch>0</verstretch>
-              </sizepolicy>
-             </property>
-             <property name="text">
-              <string notr="true">...</string>
-             </property>
-             <property name="icon">
-              <iconset theme="list-add">
-               <normaloff>.</normaloff>.</iconset>
-             </property>
-            </widget>
-           </item>
-           <item alignment="Qt::AlignLeft">
-            <widget class="QToolButton" name="toolButtonRemove_2">
-             <property name="enabled">
-              <bool>false</bool>
-             </property>
-             <property name="text">
-              <string notr="true">...</string>
-             </property>
-             <property name="icon">
-              <iconset theme="list-remove">
-               <normaloff>.</normaloff>.</iconset>
-             </property>
-            </widget>
-           </item>
-          </layout>
-         </item>
-         <item row="1" column="0">
-          <widget class="QLabel" name="label_11">
-           <property name="text">
-            <string>Text:</string>
-           </property>
-          </widget>
-         </item>
-         <item row="1" column="1">
-          <layout class="QHBoxLayout" name="horizontalLayout_6">
-           <item>
-            <widget class="QLineEdit" name="lineEditText">
-             <property name="enabled">
-              <bool>true</bool>
-             </property>
-             <property name="placeholderText">
-              <string>Line of text</string>
-             </property>
-             <property name="clearButtonEnabled">
-              <bool>true</bool>
-             </property>
-            </widget>
-           </item>
-           <item>
-            <widget class="QPushButton" name="pushButtonInsert">
-             <property name="toolTip">
-              <string>Insert placeholders</string>
-             </property>
-             <property name="text">
-              <string>Insert...</string>
-             </property>
-            </widget>
-           </item>
-          </layout>
-         </item>
-        </layout>
-       </item>
-      </layout>
-     </widget>
     </widget>
    </item>
    <item>
@@ -1575,9 +1360,7 @@
    </item>
   </layout>
  </widget>
- <resources>
-  <include location="../../../libs/vmisc/share/resources/icon.qrc"/>
- </resources>
+ <resources/>
  <connections>
   <connection>
    <sender>buttonBox</sender>
