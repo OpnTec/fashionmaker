@@ -96,7 +96,7 @@ void DialogEditLabel::ShowLineDetails()
 
             const int lineAlignment = line->textAlignment();
 
-            if (lineAlignment & Qt::AlignLeft)
+            if (lineAlignment == 0 || lineAlignment & Qt::AlignLeft)
             {
                 ui->toolButtonTextLeft->setChecked(true);
                 ui->toolButtonTextCenter->setChecked(false);
