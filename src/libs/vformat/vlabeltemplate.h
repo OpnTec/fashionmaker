@@ -1,14 +1,14 @@
 /************************************************************************
  **
- **  @file   dialogeditlabel.h
+ **  @file   vlabeltemplate.h
  **  @author Roman Telezhynskyi <dismine(at)gmail.com>
- **  @date   11 8, 2017
+ **  @date   10 8, 2015
  **
  **  @brief
  **  @copyright
  **  This source code is part of the Valentine project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
- **  Copyright (C) 2013-2017 Valentina project
+ **  Copyright (C) 2015 Valentina project
  **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
  **
  **  Valentina is free software: you can redistribute it and/or modify
@@ -26,44 +26,44 @@
  **
  *************************************************************************/
 
-#ifndef DIALOGEDITLABEL_H
-#define DIALOGEDITLABEL_H
+#ifndef VLABELTEMPLATE_H
+#define VLABELTEMPLATE_H
 
-#include <QDialog>
+#include "../ifc/xml/vdomdocument.h"
 
-namespace Ui
+QT_WARNING_PUSH
+QT_WARNING_DISABLE_GCC("-Weffc++")
+
+struct VLabelTemplateLine
 {
-    class DialogEditLabel;
-}
-
-class VLabelTemplateLine;
-
-class DialogEditLabel : public QDialog
-{
-    Q_OBJECT
-
-public:
-    explicit DialogEditLabel(QWidget *parent = nullptr);
-    virtual ~DialogEditLabel();
-
-private slots:
-    void ShowLineDetails();
-    void AddLine();
-    void RemoveLine();
-    void SaveLineText(const QString &text);
-    void SaveFontStyle(bool checked);
-    void SaveTextFormating(bool checked);
-    void NewTemplate();
-    void ExportTemplate();
-    void ImportTemplate();
-
-private:
-    Q_DISABLE_COPY(DialogEditLabel)
-    Ui::DialogEditLabel *ui;
-
-    void SetupControls();
-
-    QVector<VLabelTemplateLine> PrepareLines() const;
+    QString line;
+    bool    bold;
+    bool    italic;
+    int     alignment;
 };
 
-#endif // DIALOGEDITLABEL_H
+QT_WARNING_POP
+
+class VLabelTemplate : public VDomDocument
+{
+public:
+    VLabelTemplate();
+    virtual ~VLabelTemplate() Q_DECL_EQ_DEFAULT;
+
+    static const QString TagTemplate;
+    static const QString TagLines;
+    static const QString TagLine;
+
+    static const QString AttrText;
+    static const QString AttrBold;
+    static const QString AttrItalic;
+    static const QString AttrAlignment;
+
+    void CreateEmptyTemplate();
+
+    void AddLines(const QVector<VLabelTemplateLine> &lines);
+private:
+    Q_DISABLE_COPY(VLabelTemplate)
+};
+
+#endif // VLABELTEMPLATE_H

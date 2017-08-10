@@ -29,6 +29,7 @@
 #include "dialogeditlabel.h"
 #include "ui_dialogeditlabel.h"
 #include "../vmisc/vabstractapplication.h"
+#include "../vformat/vlabeltemplate.h"
 
 #include <QDir>
 #include <QMessageBox>
@@ -298,18 +299,22 @@ void DialogEditLabel::ExportTemplate()
         fileName += QLatin1String(".xml");
     }
 
-//    QString error;
-//    const bool result = doc->SaveDocument(fileName, error);
-//    if (result == false)
-//    {
-//        QMessageBox messageBox(this);
-//        messageBox.setIcon(QMessageBox::Warning);
-//        messageBox.setInformativeText(tr("Could not save file"));
-//        messageBox.setDefaultButton(QMessageBox::Ok);
-//        messageBox.setDetailedText(error);
-//        messageBox.setStandardButtons(QMessageBox::Ok);
-//        messageBox.exec();
-//    }
+    VLabelTemplate ltemplate;
+    ltemplate.CreateEmptyTemplate();
+    ltemplate.AddLines(PrepareLines());
+
+    QString error;
+    const bool result = ltemplate.SaveDocument(fileName, error);
+    if (result == false)
+    {
+        QMessageBox messageBox(this);
+        messageBox.setIcon(QMessageBox::Warning);
+        messageBox.setInformativeText(tr("Could not save file"));
+        messageBox.setDefaultButton(QMessageBox::Ok);
+        messageBox.setDetailedText(error);
+        messageBox.setStandardButtons(QMessageBox::Ok);
+        messageBox.exec();
+    }
 
     RemoveTempDir();
     return;
@@ -346,4 +351,29 @@ void DialogEditLabel::SetupControls()
     ui->toolButtonNewLabel->setEnabled(enabled);
     ui->toolButtonExportLabel->setEnabled(enabled);
     ui->lineEditLine->setEnabled(enabled);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QVector<VLabelTemplateLine> DialogEditLabel::PrepareLines() const
+{
+    QVector<VLabelTemplateLine> lines;
+
+    for (int i=0; i<ui->listWidget->count(); ++i)
+    {
+        const QListWidgetItem *lineItem = ui->listWidget->item(i);
+        if (lineItem)
+        {
+            VLabelTemplateLine line;
+            line.line = lineItem->text();
+            line.alignment = lineItem->textAlignment();
+
+            const QFont font = lineItem->font();
+            line.bold = font.bold();
+            line.italic = font.italic();
+
+            lines.append(line);
+        }
+    }
+
+    return lines;
 }
