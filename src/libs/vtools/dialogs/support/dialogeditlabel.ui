@@ -241,7 +241,7 @@
         </spacer>
        </item>
        <item alignment="Qt::AlignRight">
-        <widget class="QToolButton" name="toolButtonAdd_2">
+        <widget class="QToolButton" name="toolButtonAdd">
          <property name="sizePolicy">
           <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
            <horstretch>0</horstretch>
@@ -258,7 +258,7 @@
         </widget>
        </item>
        <item alignment="Qt::AlignLeft">
-        <widget class="QToolButton" name="toolButtonRemove_2">
+        <widget class="QToolButton" name="toolButtonRemove">
          <property name="enabled">
           <bool>false</bool>
          </property>
@@ -283,7 +283,7 @@
      <item row="1" column="1">
       <layout class="QHBoxLayout" name="horizontalLayout_6">
        <item>
-        <widget class="QLineEdit" name="lineEditText">
+        <widget class="QLineEdit" name="lineEditLine">
          <property name="enabled">
           <bool>false</bool>
          </property>
@@ -291,7 +291,7 @@
           <string>Line of text</string>
          </property>
          <property name="clearButtonEnabled">
-          <bool>true</bool>
+          <bool>false</bool>
          </property>
         </widget>
        </item>
