@@ -81,7 +81,7 @@ VDxfEngine::VDxfEngine()
       matrix(),
       input(),
       varMeasurement(VarMeasurement::Metric),
-      varInsunits(VarInsunits::Centimeters),
+      varInsunits(VarInsunits::Millimeters),
       textBuffer(new DRW_Text())
 {
 }

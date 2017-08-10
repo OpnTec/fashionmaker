@@ -1015,23 +1015,7 @@ void MainWindowsNoGUI::FlatDxfFile(const QString &name, int version, bool binary
     generator.setResolution(PrintDPI);
     generator.SetVersion(static_cast<DRW::Version>(version));
     generator.SetBinaryFormat(binary);
-
-    switch (*pattern->GetPatternUnit())
-    {
-        case Unit::Cm:
-            generator.setInsunits(VarInsunits::Centimeters);
-            break;
-        case Unit::Mm:
-            generator.setInsunits(VarInsunits::Millimeters);
-            break;
-        case Unit::Inch:
-            generator.setInsunits(VarInsunits::Inches);
-            break;
-        case Unit::Px:
-        case Unit::LAST_UNIT_DO_NOT_USE:
-            Q_UNREACHABLE();
-            break;
-    }
+    generator.setInsunits(VarInsunits::Millimeters);// Decided to always use mm. See issue #745
 
     QPainter painter;
     if (painter.begin(&generator))
@@ -1052,24 +1036,7 @@ void MainWindowsNoGUI::AAMADxfFile(const QString &name, int version, bool binary
     generator.setResolution(PrintDPI);
     generator.SetVersion(static_cast<DRW::Version>(version));
     generator.SetBinaryFormat(binary);
-
-    switch (*pattern->GetPatternUnit())
-    {
-        case Unit::Cm:
-            generator.setInsunits(VarInsunits::Centimeters);
-            break;
-        case Unit::Mm:
-            generator.setInsunits(VarInsunits::Millimeters);
-            break;
-        case Unit::Inch:
-            generator.setInsunits(VarInsunits::Inches);
-            break;
-        case Unit::Px:
-        case Unit::LAST_UNIT_DO_NOT_USE:
-            Q_UNREACHABLE();
-            break;
-    }
-
+    generator.setInsunits(VarInsunits::Millimeters);// Decided to always use mm. See issue #745
     generator.ExportToAAMA(details);
 }
 
