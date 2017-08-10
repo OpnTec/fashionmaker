@@ -46,8 +46,9 @@
 #include "../vpatterndb/pmsystems.h"
 
 const QString settingPathsIndividualMeasurements = QStringLiteral("paths/individual_measurements");
-const QString settingPathsMultisizeMeasurements   = QStringLiteral("paths/standard_measurements");
+const QString settingPathsMultisizeMeasurements  = QStringLiteral("paths/standard_measurements");
 const QString settingPathsTemplates              = QStringLiteral("paths/templates");
+const QString settingPathsLabelTemplate          = QStringLiteral("paths/labelTemplate");
 
 const QString settingConfigurationOsSeparator            = QStringLiteral("configuration/osSeparator");
 const QString settingConfigurationAutosaveState          = QStringLiteral("configuration/autosave/state");
@@ -312,6 +313,24 @@ void VCommonSettings::SetPathTemplate(const QString &value)
     QSettings settings(this->format(), this->scope(), this->organizationName(), commonIniFilename);
     settings.setValue(settingPathsTemplates, value);
     settings.sync();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QString VCommonSettings::GetDefPathLabelTemplate()
+{
+    return QDir::homePath() + QLatin1String("/valentina/") + tr("label templates");
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QString VCommonSettings::GetPathLabelTemplate() const
+{
+    return value(settingPathsLabelTemplate, GetDefPathLabelTemplate()).toString();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VCommonSettings::SetPathLabelTemplate(const QString &value)
+{
+    setValue(settingPathsLabelTemplate, value);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

@@ -53,6 +53,7 @@ DialogEditLabel::DialogEditLabel(QWidget *parent)
     connect(ui->toolButtonTextRight, &QToolButton::toggled, this, &DialogEditLabel::SaveTextFormating);
     connect(ui->listWidget, &QListWidget::itemSelectionChanged, this, &DialogEditLabel::ShowLineDetails);
     connect(ui->toolButtonNewLabel, &QToolButton::clicked, this, &DialogEditLabel::NewTemplate);
+    connect(ui->toolButtonExportLabel, &QToolButton::clicked, this, &DialogEditLabel::ExportTemplate);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -262,7 +263,56 @@ void DialogEditLabel::NewTemplate()
 //---------------------------------------------------------------------------------------------------------------------
 void DialogEditLabel::ExportTemplate()
 {
+    QString filters(tr("Label template") + QLatin1String("(*.xml)"));
+    QString dir = qApp->Settings()->GetPathLabelTemplate();
 
+    bool usedNotExistedDir = false;
+    QDir directory(dir);
+    if (not directory.exists())
+    {
+        usedNotExistedDir = directory.mkpath(".");
+    }
+
+    QString fileName = QFileDialog::getSaveFileName(this, tr("Export label template"),
+                                                    dir + QLatin1String("/") + tr("template") + QLatin1String(".xml"),
+                                                    filters, nullptr, QFileDialog::DontUseNativeDialog);
+
+    auto RemoveTempDir = [usedNotExistedDir, dir]()
+    {
+        if (usedNotExistedDir)
+        {
+            QDir directory(dir);
+            directory.rmpath(".");
+        }
+    };
+
+    if (fileName.isEmpty())
+    {
+        RemoveTempDir();
+        return;
+    }
+
+    QFileInfo f( fileName );
+    if (f.suffix().isEmpty() && f.suffix() != QLatin1String("xml"))
+    {
+        fileName += QLatin1String(".xml");
+    }
+
+//    QString error;
+//    const bool result = doc->SaveDocument(fileName, error);
+//    if (result == false)
+//    {
+//        QMessageBox messageBox(this);
+//        messageBox.setIcon(QMessageBox::Warning);
+//        messageBox.setInformativeText(tr("Could not save file"));
+//        messageBox.setDefaultButton(QMessageBox::Ok);
+//        messageBox.setDetailedText(error);
+//        messageBox.setStandardButtons(QMessageBox::Ok);
+//        messageBox.exec();
+//    }
+
+    RemoveTempDir();
+    return;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
