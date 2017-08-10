@@ -45,5 +45,6 @@
         <file>schema/individual_measurements/v0.3.1.xsd</file>
         <file>schema/individual_measurements/v0.3.2.xsd</file>
         <file>schema/individual_measurements/v0.3.3.xsd</file>
+        <file>schema/label_template/v1.0.0.xsd</file>
     </qresource>
 </RCC>

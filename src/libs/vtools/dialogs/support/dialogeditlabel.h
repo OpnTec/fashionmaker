@@ -64,6 +64,7 @@ private:
     void SetupControls();
 
     QVector<VLabelTemplateLine> PrepareLines() const;
+    void InitLines(const QVector<VLabelTemplateLine> &lines);
 };
 
 #endif // DIALOGEDITLABEL_H

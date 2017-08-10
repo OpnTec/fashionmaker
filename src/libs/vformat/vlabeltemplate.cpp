@@ -27,6 +27,7 @@
  *************************************************************************/
 
 #include "vlabeltemplate.h"
+#include "../ifc/xml/vlabeltemplateconverter.h"
 
 const QString VLabelTemplate::TagTemplate = QStringLiteral("template");
 const QString VLabelTemplate::TagLines    = QStringLiteral("lines");
@@ -49,7 +50,7 @@ void VLabelTemplate::CreateEmptyTemplate()
     QDomElement templateElement = this->createElement(TagTemplate);
 
     QDomElement version = createElement(TagVersion);
-    QDomText newNodeText = createTextNode("1.0"/*VLabelTemplateConverter::TemplateMaxVerStr*/);
+    QDomText newNodeText = createTextNode(VLabelTemplateConverter::LabelTemplateMaxVerStr);
     version.appendChild(newNodeText);
     templateElement.appendChild(version);
 
@@ -83,4 +84,37 @@ void VLabelTemplate::AddLines(const QVector<VLabelTemplateLine> &lines)
             tagLines.appendChild(tagLine);
         }
     }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QVector<VLabelTemplateLine> VLabelTemplate::ReadLines() const
+{
+    QVector<VLabelTemplateLine> lines;
+
+    const QDomNodeList listLines = elementsByTagName(TagLines);
+    if (listLines.size() == 0)
+    {
+        return lines;
+    }
+
+    QDomElement tagLines = listLines.at(0).toElement();
+    if (not tagLines.isNull())
+    {
+        QDomElement tagLine = tagLines.firstChildElement();
+        while (tagLine.isNull() == false)
+        {
+            if (tagLine.tagName() == TagLine)
+            {
+                VLabelTemplateLine line;
+                line.line = GetParametrString(tagLine, AttrText, tr("<empty>"));
+                line.bold = GetParametrBool(tagLine, AttrBold, falseStr);
+                line.italic = GetParametrBool(tagLine, AttrItalic, falseStr);
+                line.alignment = GetParametrUInt(tagLine, AttrAlignment, "0");
+                lines.append(line);
+            }
+            tagLine = tagLine.nextSiblingElement(TagLine);
+        }
+    }
+
+    return lines;
 }

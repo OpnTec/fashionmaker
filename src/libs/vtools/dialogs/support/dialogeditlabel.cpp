@@ -30,6 +30,8 @@
 #include "ui_dialogeditlabel.h"
 #include "../vmisc/vabstractapplication.h"
 #include "../vformat/vlabeltemplate.h"
+#include "../ifc/xml/vlabeltemplateconverter.h"
+#include "../ifc/exception/vexception.h"
 
 #include <QDir>
 #include <QMessageBox>
@@ -55,6 +57,7 @@ DialogEditLabel::DialogEditLabel(QWidget *parent)
     connect(ui->listWidget, &QListWidget::itemSelectionChanged, this, &DialogEditLabel::ShowLineDetails);
     connect(ui->toolButtonNewLabel, &QToolButton::clicked, this, &DialogEditLabel::NewTemplate);
     connect(ui->toolButtonExportLabel, &QToolButton::clicked, this, &DialogEditLabel::ExportTemplate);
+    connect(ui->toolButtonImportLabel, &QToolButton::clicked, this, &DialogEditLabel::ImportTemplate);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -99,7 +102,7 @@ void DialogEditLabel::ShowLineDetails()
                 ui->toolButtonTextCenter->setChecked(false);
                 ui->toolButtonTextRight->setChecked(false);
             }
-            else if (lineAlignment & Qt::AlignCenter)
+            else if (lineAlignment & Qt::AlignHCenter)
             {
                 ui->toolButtonTextLeft->setChecked(false);
                 ui->toolButtonTextCenter->setChecked(true);
@@ -208,7 +211,7 @@ void DialogEditLabel::SaveTextFormating(bool checked)
             {
                 if (checked)
                 {
-                    curLine->setTextAlignment(Qt::AlignCenter);
+                    curLine->setTextAlignment(Qt::AlignHCenter);
 
                     ui->toolButtonTextLeft->setChecked(false);
                     ui->toolButtonTextRight->setChecked(false);
@@ -317,13 +320,43 @@ void DialogEditLabel::ExportTemplate()
     }
 
     RemoveTempDir();
-    return;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void DialogEditLabel::ImportTemplate()
 {
+    if (ui->listWidget->count() > 0)
+    {
+        const QMessageBox::StandardButton answer = QMessageBox::question(this, tr("Import template"),
+                                                            tr("Import template will overwrite the current, do "
+                                                               "you want to continue?"),
+                                                            QMessageBox::Yes | QMessageBox::No, QMessageBox::Yes);
+        if (answer == QMessageBox::No)
+        {
+            return;
+        }
+    }
 
+    QString filter(tr("Label template") + QLatin1String("(*.xml)"));
+    const QString fileName = QFileDialog::getOpenFileName(this, tr("Import template"),
+                                                          qApp->Settings()->GetPathLabelTemplate(), filter, nullptr,
+                                                          QFileDialog::DontUseNativeDialog);
+    if (fileName.isEmpty())
+    {
+        return;
+    }
+
+    try
+    {
+        VLabelTemplate ltemplate;
+        ltemplate.setXMLContent(VLabelTemplateConverter(fileName).Convert());
+        InitLines(ltemplate.ReadLines());
+    }
+    catch (VException &e)
+    {
+        qCritical("%s\n\n%s\n\n%s", qUtf8Printable(tr("File error.")), qUtf8Printable(e.ErrorMessage()),
+                  qUtf8Printable(e.DetailedInformation()));
+    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -376,4 +409,33 @@ QVector<VLabelTemplateLine> DialogEditLabel::PrepareLines() const
     }
 
     return lines;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogEditLabel::InitLines(const QVector<VLabelTemplateLine> &lines)
+{
+    ui->listWidget->blockSignals(true);
+    ui->listWidget->clear();
+
+    int row = -1;
+
+    for (int i=0; i<lines.size(); ++i)
+    {
+        QListWidgetItem *item = new QListWidgetItem(lines.at(i).line);
+        item->setTextAlignment(lines.at(i).alignment);
+
+        QFont font = item->font();
+        font.setBold(lines.at(i).bold);
+        font.setItalic(lines.at(i).italic);
+        item->setFont(font);
+
+        ui->listWidget->insertItem(++row, item);
+    }
+
+    ui->listWidget->blockSignals(false);
+
+    if (ui->listWidget->count() > 0)
+    {
+        ui->listWidget->setCurrentRow(0);
+    }
 }
