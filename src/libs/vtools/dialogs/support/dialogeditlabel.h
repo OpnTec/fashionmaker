@@ -59,6 +59,7 @@ private slots:
     void ExportTemplate();
     void ImportTemplate();
     void InsertPlaceholder();
+    void TabChanged(int index);
 
 private:
     Q_DISABLE_COPY(DialogEditLabel)
@@ -71,8 +72,11 @@ private:
     void InitPlaceholdersMenu();
     void InitPlaceholders();
 
+    QString ReplacePlaceholders(QString line) const;
+
     QVector<VLabelTemplateLine> PrepareLines() const;
-    void InitLines(const QVector<VLabelTemplateLine> &lines);
+    void InitEditLines(const QVector<VLabelTemplateLine> &lines);
+    void InitPreviewLines(const QVector<VLabelTemplateLine> &lines);
 };
 
 #endif // DIALOGEDITLABEL_H

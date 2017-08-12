@@ -58,7 +58,8 @@ DialogEditLabel::DialogEditLabel(QWidget *parent)
     connect(ui->toolButtonTextLeft, &QToolButton::toggled, this, &DialogEditLabel::SaveTextFormating);
     connect(ui->toolButtonTextCenter, &QToolButton::toggled, this, &DialogEditLabel::SaveTextFormating);
     connect(ui->toolButtonTextRight, &QToolButton::toggled, this, &DialogEditLabel::SaveTextFormating);
-    connect(ui->listWidget, &QListWidget::itemSelectionChanged, this, &DialogEditLabel::ShowLineDetails);
+    connect(ui->listWidgetEdit, &QListWidget::itemSelectionChanged, this, &DialogEditLabel::ShowLineDetails);
+    connect(ui->tabWidget, &QTabWidget::currentChanged, this, &DialogEditLabel::TabChanged);
     connect(ui->toolButtonNewLabel, &QToolButton::clicked, this, &DialogEditLabel::NewTemplate);
     connect(ui->toolButtonExportLabel, &QToolButton::clicked, this, &DialogEditLabel::ExportTemplate);
     connect(ui->toolButtonImportLabel, &QToolButton::clicked, this, &DialogEditLabel::ImportTemplate);
@@ -78,14 +79,13 @@ DialogEditLabel::~DialogEditLabel()
 //---------------------------------------------------------------------------------------------------------------------
 void DialogEditLabel::ShowLineDetails()
 {
-    if (ui->listWidget->count() > 0)
+    if (ui->listWidgetEdit->count() > 0)
     {
-        const QListWidgetItem *line = ui->listWidget->currentItem();
+        const QListWidgetItem *line = ui->listWidgetEdit->currentItem();
         if (line)
         {
             ui->lineEditLine->blockSignals(true);
             ui->lineEditLine->setText(line->text());
-            ui->lineEditLine->setFocus();
             ui->lineEditLine->blockSignals(false);
 
             const QFont lineFont = line->font();
@@ -135,28 +135,28 @@ void DialogEditLabel::ShowLineDetails()
 //---------------------------------------------------------------------------------------------------------------------
 void DialogEditLabel::AddLine()
 {
-    int row = ui->listWidget->currentRow();
-    ui->listWidget->insertItem(++row, new QListWidgetItem(tr("<empty>")));
-    ui->listWidget->setCurrentRow(row);
+    int row = ui->listWidgetEdit->currentRow();
+    ui->listWidgetEdit->insertItem(++row, new QListWidgetItem(tr("<empty>")));
+    ui->listWidgetEdit->setCurrentRow(row);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void DialogEditLabel::RemoveLine()
 {
-    ui->listWidget->blockSignals(true);
-    QListWidgetItem *curLine = ui->listWidget->takeItem(ui->listWidget->currentRow());
+    ui->listWidgetEdit->blockSignals(true);
+    QListWidgetItem *curLine = ui->listWidgetEdit->takeItem(ui->listWidgetEdit->currentRow());
     if (curLine)
     {
         delete curLine;
     }
-    ui->listWidget->blockSignals(false);
+    ui->listWidgetEdit->blockSignals(false);
     ShowLineDetails();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void DialogEditLabel::SaveLineText(const QString &text)
 {
-    QListWidgetItem *curLine = ui->listWidget->currentItem();
+    QListWidgetItem *curLine = ui->listWidgetEdit->currentItem();
     if (curLine)
     {
         curLine->setText(text);
@@ -166,7 +166,7 @@ void DialogEditLabel::SaveLineText(const QString &text)
 //---------------------------------------------------------------------------------------------------------------------
 void DialogEditLabel::SaveFontStyle(bool checked)
 {
-    QListWidgetItem *curLine = ui->listWidget->currentItem();
+    QListWidgetItem *curLine = ui->listWidgetEdit->currentItem();
     if (curLine)
     {
         QFont lineFont = curLine->font();
@@ -191,7 +191,7 @@ void DialogEditLabel::SaveFontStyle(bool checked)
 //---------------------------------------------------------------------------------------------------------------------
 void DialogEditLabel::SaveTextFormating(bool checked)
 {
-    QListWidgetItem *curLine = ui->listWidget->currentItem();
+    QListWidgetItem *curLine = ui->listWidgetEdit->currentItem();
     if (curLine)
     {
         QToolButton *button = qobject_cast<QToolButton *>(sender());
@@ -254,7 +254,7 @@ void DialogEditLabel::SaveTextFormating(bool checked)
 //---------------------------------------------------------------------------------------------------------------------
 void DialogEditLabel::NewTemplate()
 {
-    if (ui->listWidget->count() > 0)
+    if (ui->listWidgetEdit->count() > 0)
     {
         const QMessageBox::StandardButton answer = QMessageBox::question(this, tr("Create new template"),
                                                             tr("Creating new template will overwrite the current, do "
@@ -266,9 +266,9 @@ void DialogEditLabel::NewTemplate()
         }
     }
 
-    ui->listWidget->blockSignals(true);
-    ui->listWidget->clear();
-    ui->listWidget->blockSignals(false);
+    ui->listWidgetEdit->blockSignals(true);
+    ui->listWidgetEdit->clear();
+    ui->listWidgetEdit->blockSignals(false);
     ShowLineDetails();
 }
 
@@ -333,7 +333,7 @@ void DialogEditLabel::ExportTemplate()
 //---------------------------------------------------------------------------------------------------------------------
 void DialogEditLabel::ImportTemplate()
 {
-    if (ui->listWidget->count() > 0)
+    if (ui->listWidgetEdit->count() > 0)
     {
         const QMessageBox::StandardButton answer = QMessageBox::question(this, tr("Import template"),
                                                             tr("Import template will overwrite the current, do "
@@ -358,7 +358,7 @@ void DialogEditLabel::ImportTemplate()
     {
         VLabelTemplate ltemplate;
         ltemplate.setXMLContent(VLabelTemplateConverter(fileName).Convert());
-        InitLines(ltemplate.ReadLines());
+        InitEditLines(ltemplate.ReadLines());
     }
     catch (VException &e)
     {
@@ -379,9 +379,25 @@ void DialogEditLabel::InsertPlaceholder()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void DialogEditLabel::TabChanged(int index)
+{
+    if (index == ui->tabWidget->indexOf(ui->tabPreview))
+    {
+        ui->toolButtonNewLabel->setDisabled(true);
+        ui->toolButtonImportLabel->setDisabled(true);
+        InitPreviewLines(PrepareLines());
+    }
+    else
+    {
+        ui->toolButtonNewLabel->setEnabled(ui->listWidgetEdit->count() > 0);
+        ui->toolButtonImportLabel->setEnabled(true);
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 void DialogEditLabel::SetupControls()
 {
-    const bool enabled = ui->listWidget->count() > 0;
+    const bool enabled = ui->listWidgetEdit->count() > 0;
 
     if (not enabled)
     {
@@ -427,13 +443,25 @@ void DialogEditLabel::InitPlaceholders()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+QString DialogEditLabel::ReplacePlaceholders(QString line) const
+{
+    auto i = m_placeholders.constBegin();
+    while (i != m_placeholders.constEnd())
+    {
+        line.replace(i.key(), i.value().second);
+        ++i;
+    }
+    return line;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 QVector<VLabelTemplateLine> DialogEditLabel::PrepareLines() const
 {
     QVector<VLabelTemplateLine> lines;
 
-    for (int i=0; i<ui->listWidget->count(); ++i)
+    for (int i=0; i<ui->listWidgetEdit->count(); ++i)
     {
-        const QListWidgetItem *lineItem = ui->listWidget->item(i);
+        const QListWidgetItem *lineItem = ui->listWidgetEdit->item(i);
         if (lineItem)
         {
             VLabelTemplateLine line;
@@ -452,10 +480,10 @@ QVector<VLabelTemplateLine> DialogEditLabel::PrepareLines() const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void DialogEditLabel::InitLines(const QVector<VLabelTemplateLine> &lines)
+void DialogEditLabel::InitEditLines(const QVector<VLabelTemplateLine> &lines)
 {
-    ui->listWidget->blockSignals(true);
-    ui->listWidget->clear();
+    ui->listWidgetEdit->blockSignals(true);
+    ui->listWidgetEdit->clear();
 
     int row = -1;
 
@@ -469,13 +497,39 @@ void DialogEditLabel::InitLines(const QVector<VLabelTemplateLine> &lines)
         font.setItalic(lines.at(i).italic);
         item->setFont(font);
 
-        ui->listWidget->insertItem(++row, item);
+        ui->listWidgetEdit->insertItem(++row, item);
     }
 
-    ui->listWidget->blockSignals(false);
+    ui->listWidgetEdit->blockSignals(false);
 
-    if (ui->listWidget->count() > 0)
+    if (ui->listWidgetEdit->count() > 0)
     {
-        ui->listWidget->setCurrentRow(0);
+        ui->listWidgetEdit->setCurrentRow(0);
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogEditLabel::InitPreviewLines(const QVector<VLabelTemplateLine> &lines)
+{
+    ui->listWidgetPreview->clear();
+
+    int row = -1;
+
+    for (int i=0; i<lines.size(); ++i)
+    {
+        QListWidgetItem *item = new QListWidgetItem(ReplacePlaceholders(lines.at(i).line));
+        item->setTextAlignment(lines.at(i).alignment);
+
+        QFont font = item->font();
+        font.setBold(lines.at(i).bold);
+        font.setItalic(lines.at(i).italic);
+        item->setFont(font);
+
+        ui->listWidgetPreview->insertItem(++row, item);
+    }
+
+    if (ui->listWidgetPreview->count() > 0)
+    {
+        ui->listWidgetPreview->setCurrentRow(0);
     }
 }
