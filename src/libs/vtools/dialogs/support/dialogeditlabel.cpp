@@ -36,11 +36,15 @@
 #include <QDir>
 #include <QMessageBox>
 #include <QFileDialog>
+#include <QMenu>
+#include <QDate>
 
 //---------------------------------------------------------------------------------------------------------------------
 DialogEditLabel::DialogEditLabel(QWidget *parent)
     : QDialog(parent),
-      ui(new Ui::DialogEditLabel)
+      ui(new Ui::DialogEditLabel),
+      m_placeholdersMenu(new QMenu(this)),
+      m_placeholders()
 {
     ui->setupUi(this);
 
@@ -58,6 +62,11 @@ DialogEditLabel::DialogEditLabel(QWidget *parent)
     connect(ui->toolButtonNewLabel, &QToolButton::clicked, this, &DialogEditLabel::NewTemplate);
     connect(ui->toolButtonExportLabel, &QToolButton::clicked, this, &DialogEditLabel::ExportTemplate);
     connect(ui->toolButtonImportLabel, &QToolButton::clicked, this, &DialogEditLabel::ImportTemplate);
+
+    InitPlaceholders();
+    InitPlaceholdersMenu();
+
+    ui->pushButtonInsert->setMenu(m_placeholdersMenu);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -360,6 +369,17 @@ void DialogEditLabel::ImportTemplate()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void DialogEditLabel::InsertPlaceholder()
+{
+    QAction *action = qobject_cast<QAction *>(sender());
+    if (action)
+    {
+        ui->lineEditLine->insert(action->data().toString());
+        ui->lineEditLine->setFocus();
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 void DialogEditLabel::SetupControls()
 {
     const bool enabled = ui->listWidget->count() > 0;
@@ -384,6 +404,27 @@ void DialogEditLabel::SetupControls()
     ui->toolButtonNewLabel->setEnabled(enabled);
     ui->toolButtonExportLabel->setEnabled(enabled);
     ui->lineEditLine->setEnabled(enabled);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogEditLabel::InitPlaceholdersMenu()
+{
+    auto i = m_placeholders.constBegin();
+    while (i != m_placeholders.constEnd())
+    {
+        auto value = i.value();
+        QAction *action = m_placeholdersMenu->addAction(value.first);
+        action->setData(i.key());
+        connect(action, &QAction::triggered, this, &DialogEditLabel::InsertPlaceholder);
+        ++i;
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogEditLabel::InitPlaceholders()
+{
+    QLocale locale(qApp->Settings()->GetLocale());
+    m_placeholders.insert("%date%", qMakePair(tr("Date"), locale.toString(QDate::currentDate(), "dd MMMM yyyy")));
 }
 
 //---------------------------------------------------------------------------------------------------------------------

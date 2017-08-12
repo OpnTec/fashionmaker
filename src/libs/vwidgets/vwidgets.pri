@@ -21,7 +21,8 @@ SOURCES += \
     $$PWD/vcurvepathitem.cpp \
     $$PWD/global.cpp \
     $$PWD/vscenepoint.cpp \
-    $$PWD/scalesceneitems.cpp
+    $$PWD/scalesceneitems.cpp \
+    $$PWD/vlineedit.cpp
 
 *msvc*:SOURCES += $$PWD/stable.cpp
 
@@ -46,4 +47,5 @@ HEADERS += \
     $$PWD/vcurvepathitem.h \
     $$PWD/global.h \
     $$PWD/vscenepoint.h \
-    $$PWD/scalesceneitems.h
+    $$PWD/scalesceneitems.h \
+    $$PWD/vlineedit.h

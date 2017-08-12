@@ -283,7 +283,7 @@
      <item row="1" column="1">
       <layout class="QHBoxLayout" name="horizontalLayout_6">
        <item>
-        <widget class="QLineEdit" name="lineEditLine">
+        <widget class="VLineEdit" name="lineEditLine">
          <property name="enabled">
           <bool>false</bool>
          </property>
@@ -324,6 +324,13 @@
    </item>
   </layout>
  </widget>
+ <customwidgets>
+  <customwidget>
+   <class>VLineEdit</class>
+   <extends>QLineEdit</extends>
+   <header>vlineedit.h</header>
+  </customwidget>
+ </customwidgets>
  <resources>
   <include location="../../../vmisc/share/resources/icon.qrc"/>
  </resources>

@@ -30,6 +30,7 @@
 #define DIALOGEDITLABEL_H
 
 #include <QDialog>
+#include <QMap>
 
 namespace Ui
 {
@@ -37,6 +38,7 @@ namespace Ui
 }
 
 class VLabelTemplateLine;
+class QMenu;
 
 class DialogEditLabel : public QDialog
 {
@@ -56,12 +58,18 @@ private slots:
     void NewTemplate();
     void ExportTemplate();
     void ImportTemplate();
+    void InsertPlaceholder();
 
 private:
     Q_DISABLE_COPY(DialogEditLabel)
     Ui::DialogEditLabel *ui;
+    QMenu               *m_placeholdersMenu;
+
+    QMap<QString, QPair<QString, QString>> m_placeholders;
 
     void SetupControls();
+    void InitPlaceholdersMenu();
+    void InitPlaceholders();
 
     QVector<VLabelTemplateLine> PrepareLines() const;
     void InitLines(const QVector<VLabelTemplateLine> &lines);
