@@ -85,7 +85,6 @@ void DialogEditLabel::ShowLineDetails()
         {
             ui->lineEditLine->blockSignals(true);
             ui->lineEditLine->setText(line->text());
-            ui->lineEditLine->selectAll();
             ui->lineEditLine->setFocus();
             ui->lineEditLine->blockSignals(false);
 

@@ -33,12 +33,18 @@
 
 class VLineEdit : public QLineEdit
 {
+    Q_OBJECT
 public:
     VLineEdit(QWidget * parent = nullptr);
     VLineEdit(const QString &contents, QWidget *parent = nullptr);
 
 protected:
+    virtual void focusInEvent(QFocusEvent *e) Q_DECL_OVERRIDE;
     virtual void focusOutEvent(QFocusEvent *e) Q_DECL_OVERRIDE;
+    virtual void mousePressEvent(QMouseEvent *e) Q_DECL_OVERRIDE;
+private:
+    Q_DISABLE_COPY(VLineEdit)
+    bool m_selectOnMousePress;
 };
 
 #endif // VLINEEDIT_H
