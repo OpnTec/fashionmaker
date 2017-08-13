@@ -1808,7 +1808,7 @@
     </message>
     <message>
         <source>Elliptical arc</source>
-        <translation type="unfinished">Arc éliptique</translation>
+        <translation>Arc elliptique</translation>
     </message>
     <message>
         <source>Pen style:</source>
@@ -2472,7 +2472,7 @@
     </message>
     <message>
         <source>Refresh</source>
-        <translation type="unfinished"></translation>
+        <translation>Actualiser</translation>
     </message>
 </context>
 <context>
@@ -2749,7 +2749,7 @@ Appliquer les réglages quand-même ?</translation>
     </message>
     <message>
         <source>Text</source>
-        <translation type="unfinished"></translation>
+        <translation>Texte</translation>
     </message>
     <message>
         <source>Text will be converted to paths</source>
@@ -3819,27 +3819,27 @@ Appliquer les réglages quand-même ?</translation>
     </message>
     <message>
         <source>Passmarks</source>
-        <translation type="unfinished"></translation>
+        <translation>Repères de montage</translation>
     </message>
     <message>
         <source>Passmark:</source>
-        <translation type="unfinished"></translation>
+        <translation>Repère de montage :</translation>
     </message>
     <message>
         <source>One line</source>
-        <translation type="unfinished"></translation>
+        <translation>Un trait</translation>
     </message>
     <message>
         <source>Two lines</source>
-        <translation type="unfinished"></translation>
+        <translation>Deux traits</translation>
     </message>
     <message>
         <source>Three lines</source>
-        <translation type="unfinished"></translation>
+        <translation>Trois traits</translation>
     </message>
     <message>
         <source>Angle</source>
-        <translation type="unfinished">Angle</translation>
+        <translation>Angle</translation>
     </message>
     <message>
         <source>Straightforward</source>
@@ -3851,7 +3851,7 @@ Appliquer les réglages quand-même ?</translation>
     </message>
     <message>
         <source>Passmark</source>
-        <translation type="unfinished"></translation>
+        <translation>Repère de montage</translation>
     </message>
     <message>
         <source>Marks</source>
@@ -4786,7 +4786,7 @@ Appliquer les réglages quand-même ?</translation>
     </message>
     <message>
         <source>Passmark</source>
-        <translation type="unfinished"></translation>
+        <translation>Repère de montage</translation>
     </message>
     <message>
         <source>Each point in the path must be unique!</source>
@@ -4794,7 +4794,7 @@ Appliquer les réglages quand-même ?</translation>
     </message>
     <message>
         <source>Passmarks</source>
-        <translation type="unfinished"></translation>
+        <translation>Repères de montage</translation>
     </message>
     <message>
         <source>To open all detail&apos;s features complete creating the main path.</source>
@@ -8516,15 +8516,15 @@ Voulez-vous enregistrer les changements?</translation>
     </message>
     <message>
         <source>Formula wizard</source>
-        <translation type="unfinished">Assistant Formule</translation>
+        <translation>Assistant</translation>
     </message>
     <message>
         <source>Value</source>
-        <translation type="unfinished">Valeur</translation>
+        <translation>Valeur</translation>
     </message>
     <message>
         <source>Calculation</source>
-        <translation type="unfinished">Calcul</translation>
+        <translation>Formule</translation>
     </message>
     <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
@@ -8619,19 +8619,19 @@ Voulez-vous enregistrer les changements?</translation>
     </message>
     <message>
         <source>Width:</source>
-        <translation type="unfinished">Largeur :</translation>
+        <translation>Largeur :</translation>
     </message>
     <message>
         <source>Formula wizard</source>
-        <translation type="unfinished">Assistant Formule</translation>
+        <translation>Assistant de composition de formule</translation>
     </message>
     <message>
         <source>Value</source>
-        <translation type="unfinished">Valeur</translation>
+        <translation>Valeur</translation>
     </message>
     <message>
         <source>Calculation</source>
-        <translation type="unfinished">Calcul</translation>
+        <translation>Formule</translation>
     </message>
     <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
@@ -8666,19 +8666,19 @@ Voulez-vous enregistrer les changements?</translation>
     <name>TabPassmarks</name>
     <message>
         <source>Passmark:</source>
-        <translation type="unfinished"></translation>
+        <translation>Repère de montage :</translation>
     </message>
     <message>
         <source>One line</source>
-        <translation type="unfinished"></translation>
+        <translation>Un trait</translation>
     </message>
     <message>
         <source>Two lines</source>
-        <translation type="unfinished"></translation>
+        <translation>Deux traits</translation>
     </message>
     <message>
         <source>Three lines</source>
-        <translation type="unfinished"></translation>
+        <translation>Trois traits</translation>
     </message>
     <message>
         <source>T mark</source>
@@ -8690,7 +8690,7 @@ Voulez-vous enregistrer les changements?</translation>
     </message>
     <message>
         <source>Angle</source>
-        <translation type="unfinished">Angle</translation>
+        <translation>Angle</translation>
     </message>
     <message>
         <source>Straightforward</source>
@@ -8753,19 +8753,19 @@ Voulez-vous enregistrer les changements?</translation>
     </message>
     <message>
         <source>Width:</source>
-        <translation type="unfinished">Largeur :</translation>
+        <translation>Largeur :</translation>
     </message>
     <message>
         <source>Formula wizard</source>
-        <translation type="unfinished">Assistant Formule</translation>
+        <translation>Assistant</translation>
     </message>
     <message>
         <source>Value</source>
-        <translation type="unfinished">Valeur</translation>
+        <translation>Valeur</translation>
     </message>
     <message>
         <source>Calculation</source>
-        <translation type="unfinished">Calcul</translation>
+        <translation>Formule</translation>
     </message>
     <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
@@ -10176,6 +10176,14 @@ Voulez-vous enregistrer les changements?</translation>
         <source>rotate pattern info label</source>
         <translation type="vanished">tourne l&apos;étiquette d&apos;information du patron</translation>
     </message>
+    <message>
+        <source>move grainline</source>
+        <translation type="vanished">déplacer le droit-fil</translation>
+    </message>
+    <message>
+        <source>resize grainline</source>
+        <translation type="vanished">redimensionner le droit-fil</translation>
+    </message>
 </context>
 <context>
     <name>VToolOptionsPropertyBrowser</name>
@@ -10732,11 +10740,11 @@ Voulez-vous enregistrer les changements?</translation>
     </message>
     <message>
         <source>move grainline</source>
-        <translation type="unfinished"></translation>
+        <translation>déplacer le droit-fil</translation>
     </message>
     <message>
         <source>resize grainline</source>
-        <translation type="unfinished"></translation>
+        <translation>redimensionner le droit-fil</translation>
     </message>
     <message>
         <source>rotate grainline</source>
@@ -12030,7 +12038,7 @@ Voulez-vous enregistrer les changements?</translation>
     <name>VWidgetDetails</name>
     <message>
         <source>Form</source>
-        <translation type="unfinished"></translation>
+        <translation>Formulaire</translation>
     </message>
     <message>
         <source>Unnamed</source>
@@ -12054,15 +12062,19 @@ Voulez-vous enregistrer les changements?</translation>
     </message>
     <message>
         <source>Invert selection</source>
-        <translation type="unfinished"></translation>
+        <translation>Inverser la sélection</translation>
     </message>
     <message>
         <source>invert selection</source>
-        <translation type="unfinished"></translation>
+        <translation>inverser la sélection</translation>
     </message>
 </context>
 <context>
     <name>VWidgetGroups</name>
+    <message>
+        <source>Form</source>
+        <translation type="vanished">Formulaire</translation>
+    </message>
     <message>
         <source>Rename</source>
         <translation>Renommer</translation>
