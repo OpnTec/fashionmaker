@@ -33,6 +33,8 @@
 #include <QFileDialog>
 #include <QMenu>
 #include <QDate>
+#include <QMessageBox>
+
 #include "../xml/vpattern.h"
 #include "../vpatterndb/vcontainer.h"
 #include "../core/vapplication.h"
@@ -59,7 +61,8 @@ DialogPatternProperties::DialogPatternProperties(const QString &filePath, VPatte
       gradationChanged(false),
       defaultChanged(false),
       securityChanged(false),
-      generalInfoChanged(false),
+      labelDataChanged(false),
+      askSaveLabelData(false),
       deleteAction(nullptr),
       changeImageAction(nullptr),
       saveImageAction(nullptr),
@@ -195,13 +198,13 @@ DialogPatternProperties::DialogPatternProperties(const QString &filePath, VPatte
         ui->checkBoxShowMeasurements->setChecked(doc->IsMeasurementsVisible());
     }
 
-    connect(ui->lineEditPatternName, &QLineEdit::editingFinished, this, &DialogPatternProperties::GeneralInfoChanged);
-    connect(ui->lineEditPatternNumber, &QLineEdit::editingFinished, this, &DialogPatternProperties::GeneralInfoChanged);
-    connect(ui->lineEditCompanyName, &QLineEdit::editingFinished, this, &DialogPatternProperties::GeneralInfoChanged);
-    connect(ui->lineEditCustomerName, &QLineEdit::editingFinished, this, &DialogPatternProperties::GeneralInfoChanged);
-    connect(ui->lineEditSize, &QLineEdit::editingFinished, this, &DialogPatternProperties::GeneralInfoChanged);
-    connect(ui->checkBoxShowDate, &QCheckBox::stateChanged, this, &DialogPatternProperties::GeneralInfoChanged);
-    connect(ui->checkBoxShowMeasurements, &QCheckBox::stateChanged, this, &DialogPatternProperties::GeneralInfoChanged);
+    connect(ui->lineEditPatternName, &QLineEdit::editingFinished, this, &DialogPatternProperties::LabelDataChanged);
+    connect(ui->lineEditPatternNumber, &QLineEdit::editingFinished, this, &DialogPatternProperties::LabelDataChanged);
+    connect(ui->lineEditCompanyName, &QLineEdit::editingFinished, this, &DialogPatternProperties::LabelDataChanged);
+    connect(ui->lineEditCustomerName, &QLineEdit::editingFinished, this, &DialogPatternProperties::LabelDataChanged);
+    connect(ui->lineEditSize, &QLineEdit::editingFinished, this, &DialogPatternProperties::LabelDataChanged);
+    connect(ui->checkBoxShowDate, &QCheckBox::stateChanged, this, &DialogPatternProperties::LabelDataChanged);
+    connect(ui->checkBoxShowMeasurements, &QCheckBox::stateChanged, this, &DialogPatternProperties::LabelDataChanged);
     connect(ui->pushButtonEditPatternLabel, &QPushButton::clicked, this, &DialogPatternProperties::EditLabel);
 }
 
@@ -234,11 +237,8 @@ void DialogPatternProperties::Apply()
             emit doc->patternChanged(false);
             break;
         case 3:
-            SaveGeneralInfo();
-            generalInfoChanged = false;
-            emit doc->patternChanged(false);
+            SaveLabelData();
             break;
-
         default:
             break;
     }
@@ -275,11 +275,9 @@ void DialogPatternProperties::Ok()
         emit doc->patternChanged(false);
     }
 
-    if (generalInfoChanged == true)
+    if (labelDataChanged == true)
     {
-        SaveGeneralInfo();
-        generalInfoChanged = false;
-        emit doc->patternChanged(false);
+        SaveLabelData();
     }
 
     close();
@@ -423,9 +421,10 @@ void DialogPatternProperties::DefValueChanged()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void DialogPatternProperties::GeneralInfoChanged()
+void DialogPatternProperties::LabelDataChanged()
 {
-    generalInfoChanged = true;
+    labelDataChanged = true;
+    askSaveLabelData = true;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -597,7 +596,7 @@ void DialogPatternProperties::SaveDefValues()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void DialogPatternProperties::SaveGeneralInfo()
+void DialogPatternProperties::SaveLabelData()
 {
     doc->SetPatternName(ui->lineEditPatternName->text());
     doc->SetPatternNumber(ui->lineEditPatternNumber->text());
@@ -606,6 +605,10 @@ void DialogPatternProperties::SaveGeneralInfo()
     doc->SetPatternSize(ui->lineEditSize->text());
     doc->SetDateVisible(ui->checkBoxShowDate->isChecked());
     doc->SetMesurementsVisible(ui->checkBoxShowMeasurements->isChecked());
+
+    labelDataChanged = false;
+    askSaveLabelData = false;
+    emit doc->patternChanged(false);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -855,6 +858,22 @@ void DialogPatternProperties::SaveImage()
 //---------------------------------------------------------------------------------------------------------------------
 void DialogPatternProperties::EditLabel()
 {
+    if (labelDataChanged && askSaveLabelData)
+    {
+        QMessageBox::StandardButton answer = QMessageBox::question(this, tr("Save label data."),
+                                 tr("Label data were changed. Do you want to save them before editing label template?"),
+                                                                   QMessageBox::Yes|QMessageBox::No, QMessageBox::Yes);
+
+        if (answer == QMessageBox::Yes)
+        {
+            SaveLabelData();
+        }
+        else
+        {
+            askSaveLabelData = false;
+        }
+    }
+
     DialogEditLabel editor;
     editor.exec();
 }

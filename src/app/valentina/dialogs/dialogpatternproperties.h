@@ -53,7 +53,7 @@ signals:
     void UpdateGradation();
 private slots:
     void DefValueChanged();
-    void GeneralInfoChanged();
+    void LabelDataChanged();
     void Apply();
     void Ok();
     void SelectAll(int state);
@@ -77,7 +77,8 @@ private:
     bool                   gradationChanged;
     bool                   defaultChanged;
     bool                   securityChanged;
-    bool                   generalInfoChanged;
+    bool                   labelDataChanged;
+    bool                   askSaveLabelData;
     QAction                *deleteAction;
     QAction                *changeImageAction;
     QAction                *saveImageAction;
@@ -98,7 +99,7 @@ private:
     void         SaveDescription();
     void         SaveGradation();
     void         SaveDefValues();
-    void         SaveGeneralInfo();
+    void         SaveLabelData();
 
     void         SetDefaultHeight(const QString &def);
     void         SetDefaultSize(const QString &def);
