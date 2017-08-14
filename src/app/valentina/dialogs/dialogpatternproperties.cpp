@@ -46,8 +46,7 @@ static const int heightsCount = (static_cast<int>(GHeights::H200) -
 static const int sizesCount = (static_cast<int>(GSizes::S72) - (static_cast<int>(GSizes::S22) - sizeStep))/sizeStep;
 
 //---------------------------------------------------------------------------------------------------------------------
-DialogPatternProperties::DialogPatternProperties(const QString &filePath, VPattern *doc,  VContainer *pattern,
-                                                 QWidget *parent)
+DialogPatternProperties::DialogPatternProperties(VPattern *doc,  VContainer *pattern, QWidget *parent)
     : QDialog(parent),
       ui(new Ui::DialogPatternProperties),
       doc(doc),
@@ -66,8 +65,7 @@ DialogPatternProperties::DialogPatternProperties(const QString &filePath, VPatte
       deleteAction(nullptr),
       changeImageAction(nullptr),
       saveImageAction(nullptr),
-      showImageAction(nullptr),
-      m_filePath(filePath)
+      showImageAction(nullptr)
 {
     ui->setupUi(this);
 
@@ -77,7 +75,7 @@ DialogPatternProperties::DialogPatternProperties(const QString &filePath, VPatte
 
     qApp->ValentinaSettings()->GetOsSeparator() ? setLocale(QLocale()) : setLocale(QLocale::c());
 
-    if (m_filePath.isEmpty())
+    if (qApp->GetPPath().isEmpty())
     {
         ui->lineEditPathToFile->setText(tr("<Empty>"));
         ui->lineEditPathToFile->setToolTip(tr("File was not saved yet."));
@@ -85,15 +83,15 @@ DialogPatternProperties::DialogPatternProperties(const QString &filePath, VPatte
     }
     else
     {
-        ui->lineEditPathToFile->setText(QDir::toNativeSeparators(m_filePath));
-        ui->lineEditPathToFile->setToolTip(QDir::toNativeSeparators(m_filePath));
+        ui->lineEditPathToFile->setText(QDir::toNativeSeparators(qApp->GetPPath()));
+        ui->lineEditPathToFile->setToolTip(QDir::toNativeSeparators(qApp->GetPPath()));
         ui->pushButtonShowInExplorer->setEnabled(true);
     }
     ui->lineEditPathToFile->setCursorPosition(0);
 
     connect(ui->pushButtonShowInExplorer, &QPushButton::clicked, this, [this]()
     {
-        ShowInGraphicalShell(m_filePath);
+        ShowInGraphicalShell(qApp->GetPPath());
     });
 #if defined(Q_OS_MAC)
     ui->pushButtonShowInExplorer->setText(tr("Show in Finder"));
@@ -874,6 +872,6 @@ void DialogPatternProperties::EditLabel()
         }
     }
 
-    DialogEditLabel editor;
+    DialogEditLabel editor(doc);
     editor.exec();
 }

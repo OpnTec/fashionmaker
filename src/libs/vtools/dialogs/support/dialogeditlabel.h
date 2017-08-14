@@ -39,13 +39,14 @@ namespace Ui
 
 class VLabelTemplateLine;
 class QMenu;
+class VAbstractPattern;
 
 class DialogEditLabel : public QDialog
 {
     Q_OBJECT
 
 public:
-    explicit DialogEditLabel(QWidget *parent = nullptr);
+    explicit DialogEditLabel(VAbstractPattern *doc, QWidget *parent = nullptr);
     virtual ~DialogEditLabel();
 
 private slots:
@@ -65,6 +66,7 @@ private:
     Q_DISABLE_COPY(DialogEditLabel)
     Ui::DialogEditLabel *ui;
     QMenu               *m_placeholdersMenu;
+    VAbstractPattern    *m_doc;
 
     QMap<QString, QPair<QString, QString>> m_placeholders;
 

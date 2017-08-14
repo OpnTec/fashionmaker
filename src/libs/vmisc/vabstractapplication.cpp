@@ -54,6 +54,7 @@ VAbstractApplication::VAbstractApplication(int &argc, char **argv)
       pmsTranslator(nullptr),
       _patternUnit(Unit::Cm),
       _patternType(MeasurementsType::Unknown),
+      patternFilePath(),
       currentScene(nullptr),
       sceneView(nullptr),
       doc(nullptr),

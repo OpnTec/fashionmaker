@@ -109,8 +109,18 @@ const QStringList builInPostfixOperators = QStringList() << cm_Oprt
                                                          << mm_Oprt
                                                          << in_Oprt;
 
-const QString pl_size   = QStringLiteral("size");
-const QString pl_height = QStringLiteral("height");
+const QString pl_size          = QStringLiteral("size");
+const QString pl_height        = QStringLiteral("height");
+const QString pl_date          = QStringLiteral("date");
+const QString pl_time          = QStringLiteral("time");
+const QString pl_patternName   = QStringLiteral("patternName");
+const QString pl_patternNumber = QStringLiteral("patternNumber");
+const QString pl_author        = QStringLiteral("author");
+const QString pl_customer      = QStringLiteral("customer");
+const QString pl_pExt          = QStringLiteral("pExt");
+const QString pl_pFileName     = QStringLiteral("pFileName");
+const QString pl_mFileName     = QStringLiteral("mFileName");
+const QString pl_mExt          = QStringLiteral("mExt");
 
 const QString cursorArrowOpenHand = QStringLiteral("://cursor/cursor-arrow-openhand.png");
 const QString cursorArrowCloseHand = QStringLiteral("://cursor/cursor-arrow-closehand.png");

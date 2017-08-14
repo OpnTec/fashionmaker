@@ -31,7 +31,9 @@
 #include "../vmisc/vabstractapplication.h"
 #include "../vformat/vlabeltemplate.h"
 #include "../ifc/xml/vlabeltemplateconverter.h"
+#include "../ifc/xml/vabstractpattern.h"
 #include "../ifc/exception/vexception.h"
+#include "../vpatterndb/vcontainer.h"
 
 #include <QDir>
 #include <QMessageBox>
@@ -40,10 +42,11 @@
 #include <QDate>
 
 //---------------------------------------------------------------------------------------------------------------------
-DialogEditLabel::DialogEditLabel(QWidget *parent)
+DialogEditLabel::DialogEditLabel(VAbstractPattern *doc, QWidget *parent)
     : QDialog(parent),
       ui(new Ui::DialogEditLabel),
       m_placeholdersMenu(new QMenu(this)),
+      m_doc(doc),
       m_placeholders()
 {
     ui->setupUi(this);
@@ -429,7 +432,7 @@ void DialogEditLabel::InitPlaceholdersMenu()
     {
         auto value = i.value();
         QAction *action = m_placeholdersMenu->addAction(value.first);
-        action->setData(i.key());
+        action->setData(trPL(i.key()));
         connect(action, &QAction::triggered, this, &DialogEditLabel::InsertPlaceholder);
         ++i;
     }
@@ -439,7 +442,39 @@ void DialogEditLabel::InitPlaceholdersMenu()
 void DialogEditLabel::InitPlaceholders()
 {
     QLocale locale(qApp->Settings()->GetLocale());
-    m_placeholders.insert("%date%", qMakePair(tr("Date"), locale.toString(QDate::currentDate(), "dd MMMM yyyy")));
+    m_placeholders.insert(pl_date, qMakePair(tr("Date"), locale.toString(QDate::currentDate())));
+    m_placeholders.insert(pl_time, qMakePair(tr("Time"), locale.toString(QTime::currentTime())));
+
+    m_placeholders.insert(pl_patternName, qMakePair(tr("Pattern name"), m_doc->GetPatternName()));
+    m_placeholders.insert(pl_patternNumber, qMakePair(tr("Pattern number"), m_doc->GetPatternNumber()));
+    m_placeholders.insert(pl_author, qMakePair(tr("Company name or designer name"),
+                                                           m_doc->GetCompanyName()));
+    m_placeholders.insert(pl_customer, qMakePair(tr("Customer name"), m_doc->GetCustomerName()));
+    m_placeholders.insert(pl_pExt, qMakePair(tr("Pattern extension"), QString("val")));
+
+    const QString patternFilePath = QFileInfo(qApp->GetPPath()).fileName();
+    m_placeholders.insert(pl_pFileName, qMakePair(tr("Pattern file name"), patternFilePath));
+
+    const QString measurementsFilePath = QFileInfo(m_doc->MPath()).fileName();
+    m_placeholders.insert(pl_mFileName, qMakePair(tr("Measurments file name"), measurementsFilePath));
+
+    QString curSize;
+    QString curHeight;
+    QString mExt;
+    if (qApp->patternType() == MeasurementsType::Multisize)
+    {
+        curSize = QString::number(VContainer::size());
+        curHeight = QString::number(VContainer::height());
+        mExt = "vst";
+    }
+    else if (qApp->patternType() == MeasurementsType::Individual)
+    {
+        mExt = "vit";
+    }
+
+    m_placeholders.insert(pl_size, qMakePair(tr("Size"), curSize));
+    m_placeholders.insert(pl_height, qMakePair(tr("Height"), curHeight));
+    m_placeholders.insert(pl_mExt, qMakePair(tr("Measurments extension"), mExt));
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -448,7 +483,7 @@ QString DialogEditLabel::ReplacePlaceholders(QString line) const
     auto i = m_placeholders.constBegin();
     while (i != m_placeholders.constEnd())
     {
-        line.replace(i.key(), i.value().second);
+        line.replace(QChar('%')+i.key()+QChar('%'), i.value().second);
         ++i;
     }
     return line;

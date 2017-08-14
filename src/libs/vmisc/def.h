@@ -353,6 +353,16 @@ extern const QStringList builInPostfixOperators;
 // Placeholders
 extern const QString pl_size;
 extern const QString pl_height;
+extern const QString pl_date;
+extern const QString pl_time;
+extern const QString pl_patternName;
+extern const QString pl_patternNumber;
+extern const QString pl_author;
+extern const QString pl_customer;
+extern const QString pl_pExt;
+extern const QString pl_pFileName;
+extern const QString pl_mFileName;
+extern const QString pl_mExt;
 
 extern const QString cursorArrowOpenHand;
 extern const QString cursorArrowCloseHand;

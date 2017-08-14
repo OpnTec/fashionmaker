@@ -459,6 +459,16 @@ void VTranslateVars::InitPlaceholder()
 {
     placeholders.insert(pl_size, translate("VTranslateVars", "size", "placeholder"));
     placeholders.insert(pl_height, translate("VTranslateVars", "height", "placeholder"));
+    placeholders.insert(pl_date, translate("VTranslateVars", "date", "placeholder"));
+    placeholders.insert(pl_time, translate("VTranslateVars", "time", "placeholder"));
+    placeholders.insert(pl_patternName, translate("VTranslateVars", "patternName", "placeholder"));
+    placeholders.insert(pl_patternNumber, translate("VTranslateVars", "patternNumber", "placeholder"));
+    placeholders.insert(pl_author, translate("VTranslateVars", "author", "placeholder"));
+    placeholders.insert(pl_customer, translate("VTranslateVars", "customer", "placeholder"));
+    placeholders.insert(pl_pExt, translate("VTranslateVars", "pExt", "placeholder"));
+    placeholders.insert(pl_pFileName, translate("VTranslateVars", "pFileName", "placeholder"));
+    placeholders.insert(pl_mFileName, translate("VTranslateVars", "mFileName", "placeholder"));
+    placeholders.insert(pl_mExt, translate("VTranslateVars", "mExt", "placeholder"));
 }
 
 #undef translate

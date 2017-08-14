@@ -82,9 +82,6 @@ protected:
     QAction *actionDockWidgetToolOptions;
     QAction *actionDockWidgetGroups;
 
-    /** @brief fileName name current pattern file. */
-    QString            curFile;
-
     bool isNoScaling;
     bool isLayoutStale;
     bool ignorePrinterFields;

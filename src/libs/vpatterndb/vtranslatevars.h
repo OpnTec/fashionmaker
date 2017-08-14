@@ -34,6 +34,8 @@
 
 #include "vtranslatemeasurements.h"
 
+#define trPL(pl) QLatin1String("%") + qApp->TrVars()->PlaceholderToUser((pl)) + QLatin1String("%")
+
 class VTranslateVars : public VTranslateMeasurements
 {
 public:
