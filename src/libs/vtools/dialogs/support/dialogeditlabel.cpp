@@ -361,7 +361,7 @@ void DialogEditLabel::ImportTemplate()
     {
         VLabelTemplate ltemplate;
         ltemplate.setXMLContent(VLabelTemplateConverter(fileName).Convert());
-        InitEditLines(ltemplate.ReadLines());
+        SetTemplate(ltemplate.ReadLines());
     }
     catch (VException &e)
     {
@@ -516,7 +516,7 @@ QVector<VLabelTemplateLine> DialogEditLabel::GetTemplate() const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void DialogEditLabel::InitEditLines(const QVector<VLabelTemplateLine> &lines)
+void DialogEditLabel::SetTemplate(const QVector<VLabelTemplateLine> &lines)
 {
     ui->listWidgetEdit->blockSignals(true);
     ui->listWidgetEdit->clear();

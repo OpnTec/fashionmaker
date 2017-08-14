@@ -50,6 +50,7 @@ public:
     virtual ~DialogEditLabel();
 
     QVector<VLabelTemplateLine> GetTemplate() const;
+    void SetTemplate(const QVector<VLabelTemplateLine> &lines);
 
 private slots:
     void ShowLineDetails();
@@ -78,8 +79,6 @@ private:
 
     QString ReplacePlaceholders(QString line) const;
 
-
-    void InitEditLines(const QVector<VLabelTemplateLine> &lines);
     void InitPreviewLines(const QVector<VLabelTemplateLine> &lines);
 };
 
