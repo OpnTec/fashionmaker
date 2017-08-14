@@ -221,20 +221,13 @@ void DialogPatternProperties::Apply()
     {
         case 0:
             SaveDescription();
-            descriptionChanged = false;
-            emit doc->patternChanged(false);
             break;
         case 1:
             SaveGradation();
-            gradationChanged = false;
             SaveDefValues();
-            defaultChanged = false;
-            emit doc->patternChanged(false);
             break;
         case 2:
-            doc->SetReadOnly(ui->checkBoxPatternReadOnly->isChecked());
-            securityChanged = false;
-            emit doc->patternChanged(false);
+            SaveReadOnlyState();
             break;
         case 3:
             SaveLabelData();
@@ -248,34 +241,10 @@ void DialogPatternProperties::Apply()
 //---------------------------------------------------------------------------------------------------------------------
 void DialogPatternProperties::Ok()
 {
-    if (descriptionChanged)
-    {
-        SaveDescription();
-        descriptionChanged = false;
-        emit doc->patternChanged(false);
-    }
-
-    if (gradationChanged)
-    {
-        SaveGradation();
-        gradationChanged = false;
-        emit doc->patternChanged(false);
-    }
-
-    if (defaultChanged)
-    {
-        SaveDefValues();
-        defaultChanged = false;
-        emit doc->patternChanged(false);
-    }
-
-    if (securityChanged)
-    {
-        doc->SetReadOnly(ui->checkBoxPatternReadOnly->isChecked());
-        securityChanged = false;
-        emit doc->patternChanged(false);
-    }
-
+    SaveDescription();
+    SaveGradation();
+    SaveDefValues();
+    SaveReadOnlyState();
     SaveLabelData();
     SaveTemplateData();
 
@@ -565,33 +534,48 @@ void DialogPatternProperties::CheckApplyOk()
 //---------------------------------------------------------------------------------------------------------------------
 void DialogPatternProperties::SaveDescription()
 {
-    doc->SetNotes(ui->plainTextEditTechNotes->document()->toPlainText());
-    doc->SetDescription(ui->plainTextEditDescription->document()->toPlainText());
-    doc->SetAuthor(ui->lineEditAuthor->text());
+    if (descriptionChanged)
+    {
+        doc->SetNotes(ui->plainTextEditTechNotes->document()->toPlainText());
+        doc->SetDescription(ui->plainTextEditDescription->document()->toPlainText());
+        doc->SetAuthor(ui->lineEditAuthor->text());
+
+        descriptionChanged = false;
+        emit doc->patternChanged(false);
+    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void DialogPatternProperties::SaveGradation()
 {
-    doc->SetGradationHeights(heights);
-    doc->SetGradationSizes(sizes);
-    emit UpdateGradation();
+    if (gradationChanged)
+    {
+        doc->SetGradationHeights(heights);
+        doc->SetGradationSizes(sizes);
+        emit UpdateGradation();
+        gradationChanged = false;
+        emit doc->patternChanged(false);
+    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void DialogPatternProperties::SaveDefValues()
 {
-    if (ui->radioButtonDefFromM->isChecked())
+    if (defaultChanged)
     {
-        doc->SetDefCustom(false);
+        if (ui->radioButtonDefFromM->isChecked())
+        {
+            doc->SetDefCustom(false);
+        }
+        else
+        {
+            doc->SetDefCustom(true);
+            doc->SetDefCustomHeight(ui->comboBoxHeight->currentText().toInt());
+            doc->SetDefCustomSize(ui->comboBoxSize->currentText().toInt());
+        }
+        defaultChanged = false;
+        emit doc->patternChanged(false);
     }
-    else
-    {
-        doc->SetDefCustom(true);
-        doc->SetDefCustomHeight(ui->comboBoxHeight->currentText().toInt());
-        doc->SetDefCustomSize(ui->comboBoxSize->currentText().toInt());
-    }
-    defaultChanged = false;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -621,6 +605,17 @@ void DialogPatternProperties::SaveTemplateData()
         //doc->SetTemplate(templateLines);
         templateDataChanged = false;
         //emit doc->patternChanged(false);
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogPatternProperties::SaveReadOnlyState()
+{
+    if (securityChanged)
+    {
+        doc->SetReadOnly(ui->checkBoxPatternReadOnly->isChecked());
+        securityChanged = false;
+        emit doc->patternChanged(false);
     }
 }
 

@@ -104,6 +104,7 @@ private:
     void         SaveDefValues();
     void         SaveLabelData();
     void         SaveTemplateData();
+    void         SaveReadOnlyState();
 
     void         SetDefaultHeight(const QString &def);
     void         SetDefaultSize(const QString &def);
