@@ -684,6 +684,44 @@ QString VTranslateVars::PlaceholderToUser(const QString &var) const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+QString VTranslateVars::PlaceholderToUserText(QString text) const
+{
+    QChar per('%');
+    auto i = placeholders.constBegin();
+    while (i != placeholders.constEnd())
+    {
+        const QString translated = per + i.value().translate() + per;
+        const QString original = per + i.key() + per;
+
+        while (text.indexOf(original) != -1)
+        {
+            text.replace(original, translated);
+        }
+        ++i;
+    }
+    return text;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QString VTranslateVars::PlaceholderFromUserText(QString text) const
+{
+    QChar per('%');
+    auto i = placeholders.constBegin();
+    while (i != placeholders.constEnd())
+    {
+        const QString translated = per + i.value().translate() + per;
+        const QString original = per + i.key() + per;
+
+        while (text.indexOf(translated) != -1)
+        {
+            text.replace(translated, original);
+        }
+        ++i;
+    }
+    return text;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 QString VTranslateVars::VarToUser(const QString &var) const
 {
     if (measurements.contains(var))
