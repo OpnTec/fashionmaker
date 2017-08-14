@@ -48,7 +48,7 @@
 const QString settingPathsIndividualMeasurements = QStringLiteral("paths/individual_measurements");
 const QString settingPathsMultisizeMeasurements  = QStringLiteral("paths/standard_measurements");
 const QString settingPathsTemplates              = QStringLiteral("paths/templates");
-const QString settingPathsLabelTemplate          = QStringLiteral("paths/labelTemplate");
+const QString settingPathsLabelTemplate          = QStringLiteral("paths/labels");
 
 const QString settingConfigurationOsSeparator            = QStringLiteral("configuration/osSeparator");
 const QString settingConfigurationAutosaveState          = QStringLiteral("configuration/autosave/state");

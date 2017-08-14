@@ -167,6 +167,10 @@ unix{
         templates.path = /usr/share/$${TARGET}/tables/templates/
         templates.files = $$INSTALL_STANDARD_TEMPLATES
 
+        # Path to label templates after installation
+        label.path = /usr/share/$${TARGET}/labels/
+        label.files = $$INSTALL_LABEL_TEMPLATES
+
         INSTALLS += \
             target \
             tape \
@@ -174,7 +178,8 @@ unix{
             pixmaps \
             translations \
             multisize \
-            templates
+            templates \
+            label
     }
     macx{
         # Some macx stuff
@@ -234,6 +239,10 @@ unix{
         templates.path = $$RESOURCES_DIR/tables/templates/
         templates.files = $$INSTALL_STANDARD_TEMPLATES
 
+        # Path to label templates after installation
+        label.path = /usr/share/$${TARGET}/labels/
+        label.files = $$INSTALL_LABEL_TEMPLATES
+
         icns_resources.path = $$RESOURCES_DIR/
         icns_resources.files += $$PWD/../../../dist/macx/i-measurements.icns
         icns_resources.files += $$PWD/../../../dist/macx/s-measurements.icns
@@ -246,6 +255,7 @@ unix{
         QMAKE_BUNDLE_DATA += \
             templates \
             multisize \
+            label \
             libraries \
             tape \
             xpdf \
@@ -315,6 +325,10 @@ win32:*g++* {
     package_templates.path = $${OUT_PWD}/../../../package/valentina/tables/templates
     package_templates.files += $$INSTALL_STANDARD_TEMPLATES
     INSTALLS += package_templates
+
+    package_labels.path = $${OUT_PWD}/../../../package/valentina/labels
+    package_labels.files += $$INSTALL_LABEL_TEMPLATES
+    INSTALLS += package_labels
 
     package_translations.path = $${OUT_PWD}/../../../package/valentina/translations
     package_translations.files += \
