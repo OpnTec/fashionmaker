@@ -62,10 +62,12 @@ DialogPatternProperties::DialogPatternProperties(VPattern *doc,  VContainer *pat
       securityChanged(false),
       labelDataChanged(false),
       askSaveLabelData(false),
+      templateDataChanged(false),
       deleteAction(nullptr),
       changeImageAction(nullptr),
       saveImageAction(nullptr),
-      showImageAction(nullptr)
+      showImageAction(nullptr),
+      templateLines()
 {
     ui->setupUi(this);
 
@@ -236,6 +238,7 @@ void DialogPatternProperties::Apply()
             break;
         case 3:
             SaveLabelData();
+            SaveTemplateData();
             break;
         default:
             break;
@@ -273,10 +276,8 @@ void DialogPatternProperties::Ok()
         emit doc->patternChanged(false);
     }
 
-    if (labelDataChanged == true)
-    {
-        SaveLabelData();
-    }
+    SaveLabelData();
+    SaveTemplateData();
 
     close();
 }
@@ -596,17 +597,31 @@ void DialogPatternProperties::SaveDefValues()
 //---------------------------------------------------------------------------------------------------------------------
 void DialogPatternProperties::SaveLabelData()
 {
-    doc->SetPatternName(ui->lineEditPatternName->text());
-    doc->SetPatternNumber(ui->lineEditPatternNumber->text());
-    doc->SetCompanyName(ui->lineEditCompanyName->text());
-    doc->SetCustomerName(ui->lineEditCustomerName->text());
-    doc->SetPatternSize(ui->lineEditSize->text());
-    doc->SetDateVisible(ui->checkBoxShowDate->isChecked());
-    doc->SetMesurementsVisible(ui->checkBoxShowMeasurements->isChecked());
+    if (labelDataChanged)
+    {
+        doc->SetPatternName(ui->lineEditPatternName->text());
+        doc->SetPatternNumber(ui->lineEditPatternNumber->text());
+        doc->SetCompanyName(ui->lineEditCompanyName->text());
+        doc->SetCustomerName(ui->lineEditCustomerName->text());
+        doc->SetPatternSize(ui->lineEditSize->text());
+        doc->SetDateVisible(ui->checkBoxShowDate->isChecked());
+        doc->SetMesurementsVisible(ui->checkBoxShowMeasurements->isChecked());
 
-    labelDataChanged = false;
-    askSaveLabelData = false;
-    emit doc->patternChanged(false);
+        labelDataChanged = false;
+        askSaveLabelData = false;
+        emit doc->patternChanged(false);
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogPatternProperties::SaveTemplateData()
+{
+    if (templateDataChanged)
+    {
+        //doc->SetTemplate(templateLines);
+        templateDataChanged = false;
+        //emit doc->patternChanged(false);
+    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -873,5 +888,19 @@ void DialogPatternProperties::EditLabel()
     }
 
     DialogEditLabel editor(doc);
-    editor.exec();
+
+//    if (templateDataChanged)
+//    {
+//        editor.SetTemplate(templateLines);
+//    }
+//    else
+//    {
+//        editor.SetTemplate(doc->GetTemplate());
+//    }
+
+    if (QDialog::Accepted == editor.exec())
+    {
+        templateLines = editor.GetTemplate();
+        templateDataChanged = true;
+    }
 }

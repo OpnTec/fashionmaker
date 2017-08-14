@@ -33,6 +33,8 @@
 #include "../options.h"
 #include <QMap>
 
+#include "../vformat/vlabeltemplate.h"
+
 class VPattern;
 class VContainer;
 class QCheckBox;
@@ -78,10 +80,13 @@ private:
     bool                   securityChanged;
     bool                   labelDataChanged;
     bool                   askSaveLabelData;
+    bool                   templateDataChanged;
     QAction                *deleteAction;
     QAction                *changeImageAction;
     QAction                *saveImageAction;
     QAction                *showImageAction;
+
+    QVector<VLabelTemplateLine> templateLines;
 
     void         SetHeightsChecked(bool enabled);
     void         SetSizesChecked(bool enabled);
@@ -98,6 +103,7 @@ private:
     void         SaveGradation();
     void         SaveDefValues();
     void         SaveLabelData();
+    void         SaveTemplateData();
 
     void         SetDefaultHeight(const QString &def);
     void         SetDefaultSize(const QString &def);

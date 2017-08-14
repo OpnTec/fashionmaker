@@ -49,6 +49,8 @@ public:
     explicit DialogEditLabel(VAbstractPattern *doc, QWidget *parent = nullptr);
     virtual ~DialogEditLabel();
 
+    QVector<VLabelTemplateLine> GetTemplate() const;
+
 private slots:
     void ShowLineDetails();
     void AddLine();
@@ -76,7 +78,7 @@ private:
 
     QString ReplacePlaceholders(QString line) const;
 
-    QVector<VLabelTemplateLine> PrepareLines() const;
+
     void InitEditLines(const QVector<VLabelTemplateLine> &lines);
     void InitPreviewLines(const QVector<VLabelTemplateLine> &lines);
 };

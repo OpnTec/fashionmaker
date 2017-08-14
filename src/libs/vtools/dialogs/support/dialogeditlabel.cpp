@@ -315,7 +315,7 @@ void DialogEditLabel::ExportTemplate()
 
     VLabelTemplate ltemplate;
     ltemplate.CreateEmptyTemplate();
-    ltemplate.AddLines(PrepareLines());
+    ltemplate.AddLines(GetTemplate());
 
     QString error;
     const bool result = ltemplate.SaveDocument(fileName, error);
@@ -388,7 +388,7 @@ void DialogEditLabel::TabChanged(int index)
     {
         ui->toolButtonNewLabel->setDisabled(true);
         ui->toolButtonImportLabel->setDisabled(true);
-        InitPreviewLines(PrepareLines());
+        InitPreviewLines(GetTemplate());
     }
     else
     {
@@ -491,7 +491,7 @@ QString DialogEditLabel::ReplacePlaceholders(QString line) const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QVector<VLabelTemplateLine> DialogEditLabel::PrepareLines() const
+QVector<VLabelTemplateLine> DialogEditLabel::GetTemplate() const
 {
     QVector<VLabelTemplateLine> lines;
 
