@@ -693,9 +693,12 @@ QString VTranslateVars::PlaceholderToUserText(QString text) const
         const QString translated = per + i.value().translate() + per;
         const QString original = per + i.key() + per;
 
-        while (text.indexOf(original) != -1)
+        if (translated != original)
         {
-            text.replace(original, translated);
+            while (text.indexOf(original) != -1)
+            {
+                text.replace(original, translated);
+            }
         }
         ++i;
     }
@@ -712,9 +715,12 @@ QString VTranslateVars::PlaceholderFromUserText(QString text) const
         const QString translated = per + i.value().translate() + per;
         const QString original = per + i.key() + per;
 
-        while (text.indexOf(translated) != -1)
+        if (translated != original)
         {
-            text.replace(translated, original);
+            while (text.indexOf(translated) != -1)
+            {
+                text.replace(translated, original);
+            }
         }
         ++i;
     }
