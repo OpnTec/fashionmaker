@@ -909,6 +909,11 @@ bool VDomDocument::SafeCopy(const QString &source, const QString &destination, Q
 //---------------------------------------------------------------------------------------------------------------------
 QVector<VLabelTemplateLine> VDomDocument::GetLabelTemplate(const QDomElement &element) const
 {
+    // We use implicit conversion. That's why check if values are still the same as excpected.
+    Q_STATIC_ASSERT(Qt::AlignLeft == 1);
+    Q_STATIC_ASSERT(Qt::AlignRight == 2);
+    Q_STATIC_ASSERT(Qt::AlignHCenter == 4);
+
     QVector<VLabelTemplateLine> lines;
 
     if (not element.isNull())
