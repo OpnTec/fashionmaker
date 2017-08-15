@@ -2,7 +2,7 @@
 <template>
     <version>1.0.0</version>
     <lines>
-        <line alignment="0" bold="false" italic="false" text="%author%"/>
+        <line alignment="0" bold="true" italic="false" text="%author%"/>
         <line alignment="0" bold="false" italic="false" text="%patternName%"/>
         <line alignment="0" bold="false" italic="false" text="%patternNumber%"/>
         <line alignment="0" bold="false" italic="true" text="%customer%"/>
