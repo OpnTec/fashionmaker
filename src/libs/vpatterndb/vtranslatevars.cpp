@@ -695,10 +695,7 @@ QString VTranslateVars::PlaceholderToUserText(QString text) const
 
         if (translated != original)
         {
-            while (text.indexOf(original) != -1)
-            {
-                text.replace(original, translated);
-            }
+            text.replace(original, translated);
         }
         ++i;
     }
@@ -717,10 +714,7 @@ QString VTranslateVars::PlaceholderFromUserText(QString text) const
 
         if (translated != original)
         {
-            while (text.indexOf(translated) != -1)
-            {
-                text.replace(translated, original);
-            }
+            text.replace(translated, original);
         }
         ++i;
     }
