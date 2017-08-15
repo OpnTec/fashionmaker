@@ -31,12 +31,6 @@
 
 const QString VLabelTemplate::TagTemplate = QStringLiteral("template");
 const QString VLabelTemplate::TagLines    = QStringLiteral("lines");
-const QString VLabelTemplate::TagLine     = QStringLiteral("line");
-
-const QString VLabelTemplate::AttrText      = QStringLiteral("text");
-const QString VLabelTemplate::AttrBold      = QStringLiteral("bold");
-const QString VLabelTemplate::AttrItalic    = QStringLiteral("italic");
-const QString VLabelTemplate::AttrAlignment = QStringLiteral("alignment");
 
 //---------------------------------------------------------------------------------------------------------------------
 VLabelTemplate::VLabelTemplate()
@@ -69,52 +63,18 @@ void VLabelTemplate::AddLines(const QVector<VLabelTemplateLine> &lines)
         return;
     }
 
-    QDomElement tagLines = listLines.at(0).toElement();
-    if (not tagLines.isNull())
-    {
-        for (int i=0; i < lines.size(); ++i)
-        {
-            QDomElement tagLine = createElement(TagLine);
-
-            SetAttribute(tagLine, AttrText, lines.at(i).line);
-            SetAttribute(tagLine, AttrBold, lines.at(i).bold);
-            SetAttribute(tagLine, AttrItalic, lines.at(i).italic);
-            SetAttribute(tagLine, AttrAlignment, lines.at(i).alignment);
-
-            tagLines.appendChild(tagLine);
-        }
-    }
+    QDomElement tag = listLines.at(0).toElement();
+    VDomDocument::SetLabelTemplate(tag, lines);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 QVector<VLabelTemplateLine> VLabelTemplate::ReadLines() const
 {
-    QVector<VLabelTemplateLine> lines;
-
     const QDomNodeList listLines = elementsByTagName(TagLines);
     if (listLines.size() == 0)
     {
-        return lines;
+        return QVector<VLabelTemplateLine>();
     }
 
-    QDomElement tagLines = listLines.at(0).toElement();
-    if (not tagLines.isNull())
-    {
-        QDomElement tagLine = tagLines.firstChildElement();
-        while (tagLine.isNull() == false)
-        {
-            if (tagLine.tagName() == TagLine)
-            {
-                VLabelTemplateLine line;
-                line.line = GetParametrString(tagLine, AttrText, tr("<empty>"));
-                line.bold = GetParametrBool(tagLine, AttrBold, falseStr);
-                line.italic = GetParametrBool(tagLine, AttrItalic, falseStr);
-                line.alignment = GetParametrUInt(tagLine, AttrAlignment, "0");
-                lines.append(line);
-            }
-            tagLine = tagLine.nextSiblingElement(TagLine);
-        }
-    }
-
-    return lines;
+    return VDomDocument::GetLabelTemplate(listLines.at(0).toElement());
 }

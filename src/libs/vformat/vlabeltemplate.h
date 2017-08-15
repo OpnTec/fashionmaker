@@ -31,19 +31,6 @@
 
 #include "../ifc/xml/vdomdocument.h"
 
-QT_WARNING_PUSH
-QT_WARNING_DISABLE_GCC("-Weffc++")
-
-struct VLabelTemplateLine
-{
-    QString line;
-    bool    bold;
-    bool    italic;
-    int     alignment;
-};
-
-QT_WARNING_POP
-
 class VLabelTemplate : public VDomDocument
 {
 public:
@@ -52,12 +39,6 @@ public:
 
     static const QString TagTemplate;
     static const QString TagLines;
-    static const QString TagLine;
-
-    static const QString AttrText;
-    static const QString AttrBold;
-    static const QString AttrItalic;
-    static const QString AttrAlignment;
 
     void CreateEmptyTemplate();
 

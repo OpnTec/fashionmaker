@@ -154,6 +154,9 @@ public:
     bool           IsMeasurementsVisible() const;
     void           SetMesurementsVisible(bool bVisible);
 
+    void                        SetPatternLabelTemplate(const QVector<VLabelTemplateLine> &lines);
+    QVector<VLabelTemplateLine> GetPatternLabelTemplate() const;
+
     QString        GetImage() const;
     QString        GetImageExtension() const;
     void           SetImage(const QString &text, const QString &extension);
@@ -209,6 +212,7 @@ public:
     static const QString TagPatternNum;
     static const QString TagCompanyName;
     static const QString TagCustomerName;
+    static const QString TagPatternLabel;
     static const QString TagSize;
     static const QString TagShowDate;
     static const QString TagShowMeasurements;

@@ -602,9 +602,9 @@ void DialogPatternProperties::SaveTemplateData()
 {
     if (templateDataChanged)
     {
-        //doc->SetTemplate(templateLines);
+        doc->SetPatternLabelTemplate(templateLines);
         templateDataChanged = false;
-        //emit doc->patternChanged(false);
+        emit doc->patternChanged(false);
     }
 }
 
@@ -884,14 +884,7 @@ void DialogPatternProperties::EditLabel()
 
     DialogEditLabel editor(doc);
 
-//    if (templateDataChanged)
-//    {
-//        editor.SetTemplate(templateLines);
-//    }
-//    else
-//    {
-//        editor.SetTemplate(doc->GetTemplate());
-//    }
+    templateDataChanged ? editor.SetTemplate(templateLines) : editor.SetTemplate(doc->GetPatternLabelTemplate());
 
     if (QDialog::Accepted == editor.exec())
     {

@@ -83,8 +83,14 @@ class VDomDocument : public QDomDocument
     Q_DECLARE_TR_FUNCTIONS(VDomDocument)
 public:
     static const QString AttrId;
+    static const QString AttrText;
+    static const QString AttrBold;
+    static const QString AttrItalic;
+    static const QString AttrAlignment;
+
     static const QString TagVersion;
     static const QString TagUnit;
+    static const QString TagLine;
 
     VDomDocument();
     virtual ~VDomDocument() Q_DECL_EQ_DEFAULT;
@@ -129,6 +135,9 @@ protected:
 
     void           TestUniqueId() const;
     void           CollectId(const QDomElement &node, QVector<quint32> &vector)const;
+
+    QVector<VLabelTemplateLine> GetLabelTemplate(const QDomElement &element) const;
+    void                        SetLabelTemplate(QDomElement &element, const QVector<VLabelTemplateLine> &lines);
 
 private:
     Q_DISABLE_COPY(VDomDocument)
