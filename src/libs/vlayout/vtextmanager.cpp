@@ -122,7 +122,7 @@ QList<TextLine> PrepareLines(const QVector<VLabelTemplateLine> &lines)
             TextLine tl;
             tl.m_qsText = lines.at(i).line;
             tl.m_eAlign = static_cast<Qt::Alignment>(lines.at(i).alignment);
-            tl.m_iFontSize = 0;
+            tl.m_iFontSize = lines.at(i).fontSizeIncrement;
             tl.bold = lines.at(i).bold;
             tl.italic = lines.at(i).italic;
 

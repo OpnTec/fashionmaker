@@ -238,6 +238,19 @@
             </widget>
            </item>
            <item>
+            <widget class="QSpinBox" name="spinBoxFontSize">
+             <property name="enabled">
+              <bool>false</bool>
+             </property>
+             <property name="toolTip">
+              <string>Additional font size. Use to make a line bigger.</string>
+             </property>
+             <property name="maximum">
+              <number>25</number>
+             </property>
+            </widget>
+           </item>
+           <item>
             <spacer name="horizontalSpacer_5">
              <property name="orientation">
               <enum>Qt::Horizontal</enum>

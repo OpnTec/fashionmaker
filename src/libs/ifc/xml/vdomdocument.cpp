@@ -178,11 +178,12 @@ void MessageHandler::handleMessage(QtMsgType type, const QString &description, c
 
 Q_LOGGING_CATEGORY(vXML, "v.xml")
 
-const QString VDomDocument::AttrId        = QStringLiteral("id");
-const QString VDomDocument::AttrText      = QStringLiteral("text");
-const QString VDomDocument::AttrBold      = QStringLiteral("bold");
-const QString VDomDocument::AttrItalic    = QStringLiteral("italic");
-const QString VDomDocument::AttrAlignment = QStringLiteral("alignment");
+const QString VDomDocument::AttrId          = QStringLiteral("id");
+const QString VDomDocument::AttrText        = QStringLiteral("text");
+const QString VDomDocument::AttrBold        = QStringLiteral("bold");
+const QString VDomDocument::AttrItalic      = QStringLiteral("italic");
+const QString VDomDocument::AttrAlignment   = QStringLiteral("alignment");
+const QString VDomDocument::AttrFSIncrement = QStringLiteral("sfIncrement");
 
 const QString VDomDocument::TagVersion = QStringLiteral("version");
 const QString VDomDocument::TagUnit    = QStringLiteral("unit");
@@ -928,6 +929,7 @@ QVector<VLabelTemplateLine> VDomDocument::GetLabelTemplate(const QDomElement &el
                 line.bold = GetParametrBool(tagLine, AttrBold, falseStr);
                 line.italic = GetParametrBool(tagLine, AttrItalic, falseStr);
                 line.alignment = GetParametrUInt(tagLine, AttrAlignment, "0");
+                line.fontSizeIncrement = GetParametrUInt(tagLine, AttrFSIncrement, "0");
                 lines.append(line);
             }
             tagLine = tagLine.nextSiblingElement(TagLine);
@@ -950,6 +952,7 @@ void VDomDocument::SetLabelTemplate(QDomElement &element, const QVector<VLabelTe
             SetAttribute(tagLine, AttrBold, lines.at(i).bold);
             SetAttribute(tagLine, AttrItalic, lines.at(i).italic);
             SetAttribute(tagLine, AttrAlignment, lines.at(i).alignment);
+            SetAttribute(tagLine, AttrFSIncrement, lines.at(i).fontSizeIncrement);
 
             element.appendChild(tagLine);
         }

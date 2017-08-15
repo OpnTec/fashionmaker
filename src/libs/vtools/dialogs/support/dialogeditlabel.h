@@ -64,6 +64,7 @@ private slots:
     void ImportTemplate();
     void InsertPlaceholder();
     void TabChanged(int index);
+    void SaveAdditionalFontSize(int i);
 
 private:
     Q_DISABLE_COPY(DialogEditLabel)

@@ -222,6 +222,7 @@ struct VLabelTemplateLine
     bool    bold;
     bool    italic;
     int     alignment;
+    int     fontSizeIncrement;
 };
 
 QT_WARNING_POP

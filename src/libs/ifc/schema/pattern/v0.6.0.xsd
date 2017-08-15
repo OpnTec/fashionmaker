@@ -102,6 +102,7 @@
                   <xs:attribute name="bold" type="xs:boolean"/>
                   <xs:attribute name="italic" type="xs:boolean"/>
                   <xs:attribute name="alignment" type="alignmentType"/>
+                  <xs:attribute name="sfIncrement" type="xs:unsignedInt"/>
                 </xs:complexType>
               </xs:element>
             </xs:sequence>

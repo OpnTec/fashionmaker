@@ -66,6 +66,8 @@ DialogEditLabel::DialogEditLabel(VAbstractPattern *doc, QWidget *parent)
     connect(ui->toolButtonNewLabel, &QToolButton::clicked, this, &DialogEditLabel::NewTemplate);
     connect(ui->toolButtonExportLabel, &QToolButton::clicked, this, &DialogEditLabel::ExportTemplate);
     connect(ui->toolButtonImportLabel, &QToolButton::clicked, this, &DialogEditLabel::ImportTemplate);
+    connect(ui->spinBoxFontSize, static_cast<void (QSpinBox::*)(int)>(&QSpinBox::valueChanged), this,
+            &DialogEditLabel::SaveAdditionalFontSize);
 
     InitPlaceholders();
     InitPlaceholdersMenu();
@@ -129,6 +131,10 @@ void DialogEditLabel::ShowLineDetails()
             ui->toolButtonTextLeft->blockSignals(false);
             ui->toolButtonTextCenter->blockSignals(false);
             ui->toolButtonTextRight->blockSignals(false);
+
+            ui->spinBoxFontSize->blockSignals(true);
+            ui->spinBoxFontSize->setValue(line->data(Qt::UserRole).toInt());
+            ui->spinBoxFontSize->blockSignals(false);
         }
     }
 
@@ -398,6 +404,19 @@ void DialogEditLabel::TabChanged(int index)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void DialogEditLabel::SaveAdditionalFontSize(int i)
+{
+    QListWidgetItem *curLine = ui->listWidgetEdit->currentItem();
+    if (curLine)
+    {
+        QFont lineFont = curLine->font();
+        lineFont.setPointSize(lineFont.pointSize() - curLine->data(Qt::UserRole).toInt() + i);
+        curLine->setFont(lineFont);
+        curLine->setData(Qt::UserRole, i);
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 void DialogEditLabel::SetupControls()
 {
     const bool enabled = ui->listWidgetEdit->count() > 0;
@@ -422,6 +441,7 @@ void DialogEditLabel::SetupControls()
     ui->toolButtonNewLabel->setEnabled(enabled);
     ui->toolButtonExportLabel->setEnabled(enabled);
     ui->lineEditLine->setEnabled(enabled);
+    ui->spinBoxFontSize->setEnabled(enabled);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -503,6 +523,7 @@ QVector<VLabelTemplateLine> DialogEditLabel::GetTemplate() const
             VLabelTemplateLine line;
             line.line = qApp->TrVars()->PlaceholderFromUserText(lineItem->text());
             line.alignment = lineItem->textAlignment();
+            line.fontSizeIncrement = lineItem->data(Qt::UserRole).toInt();
 
             const QFont font = lineItem->font();
             line.bold = font.bold();
@@ -527,10 +548,12 @@ void DialogEditLabel::SetTemplate(const QVector<VLabelTemplateLine> &lines)
     {
         QListWidgetItem *item = new QListWidgetItem(qApp->TrVars()->PlaceholderToUserText(lines.at(i).line));
         item->setTextAlignment(lines.at(i).alignment);
+        item->setData(Qt::UserRole, lines.at(i).fontSizeIncrement);
 
         QFont font = item->font();
         font.setBold(lines.at(i).bold);
         font.setItalic(lines.at(i).italic);
+        font.setPointSize(font.pointSize() + lines.at(i).fontSizeIncrement);
         item->setFont(font);
 
         ui->listWidgetEdit->insertItem(++row, item);
@@ -555,10 +578,12 @@ void DialogEditLabel::InitPreviewLines(const QVector<VLabelTemplateLine> &lines)
     {
         QListWidgetItem *item = new QListWidgetItem(ReplacePlaceholders(lines.at(i).line));
         item->setTextAlignment(lines.at(i).alignment);
+        item->setData(Qt::UserRole, lines.at(i).fontSizeIncrement);
 
         QFont font = item->font();
         font.setBold(lines.at(i).bold);
         font.setItalic(lines.at(i).italic);
+        font.setPointSize(font.pointSize() + lines.at(i).fontSizeIncrement);
         item->setFont(font);
 
         ui->listWidgetPreview->insertItem(++row, item);

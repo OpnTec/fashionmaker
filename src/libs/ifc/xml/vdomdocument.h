@@ -87,6 +87,7 @@ public:
     static const QString AttrBold;
     static const QString AttrItalic;
     static const QString AttrAlignment;
+    static const QString AttrFSIncrement;
 
     static const QString TagVersion;
     static const QString TagUnit;
