@@ -51,8 +51,8 @@ struct TextLine
 {
     QString             m_qsText;
     int                 m_iFontSize;  // 0 means default
-    QFont::Weight       m_eFontWeight;
-    QFont::Style        m_eStyle;
+    bool bold;
+    bool italic;
     Qt::Alignment       m_eAlign;
 
     TextLine();
@@ -67,7 +67,7 @@ class VTextManager
     Q_DECLARE_TR_FUNCTIONS(VTextManager)
 public:
     VTextManager();
-    virtual ~VTextManager();
+    virtual ~VTextManager() = default;
 
     VTextManager(const VTextManager &text);
     VTextManager &operator=(const VTextManager &text);
@@ -80,17 +80,17 @@ public:
     void         FitFontSize(qreal fW, qreal fH);
 
     QList<TextLine> GetAllSourceLines() const;
-    void            AddSourceLine(const TextLine& tl);
-    void            ClearSourceLines();
     int             GetSourceLinesCount() const;
     const TextLine& GetSourceLine(int i) const;
 
     void Update(const QString& qsName, const VPieceLabelData& data);
-    void Update(const VAbstractPattern* pDoc, qreal dSize, qreal dHeight);
+    void Update(const VAbstractPattern* pDoc);
 
 private:
     QFont           m_font;
     QList<TextLine> m_liLines;
+
+    static QList<TextLine> m_patternLabelLines;
 };
 
 #endif // VTEXTMANAGER_H

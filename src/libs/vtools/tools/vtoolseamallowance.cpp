@@ -578,7 +578,7 @@ void VToolSeamAllowance::UpdatePatternInfo()
 
         if (PrepareLabelData(geom, m_patternInfo, pos, labelAngle))
         {
-            m_patternInfo->UpdateData(doc, VContainer::size(), VContainer::height());
+            m_patternInfo->UpdateData(doc);
             UpdateLabelItem(m_patternInfo, pos, labelAngle);
         }
     }

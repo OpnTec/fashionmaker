@@ -157,6 +157,9 @@ public:
     void                        SetPatternLabelTemplate(const QVector<VLabelTemplateLine> &lines);
     QVector<VLabelTemplateLine> GetPatternLabelTemplate() const;
 
+    void SetPatternWasChanged(bool changed);
+    bool GetPatternWasChanged() const;
+
     QString        GetImage() const;
     QString        GetImageExtension() const;
     void           SetImage(const QString &text, const QString &extension);
@@ -389,6 +392,7 @@ protected:
     static QHash<quint32, VDataTool*> tools;
     /** @brief patternLabelLines list to speed up reading a template by many pieces. */
     static QVector<VLabelTemplateLine> patternLabelLines;
+    static bool patternLabelWasChanged;
 
     static void       ToolExists(const quint32 &id);
     static VPiecePath ParsePathNodes(const QDomElement &domElement);

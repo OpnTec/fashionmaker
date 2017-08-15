@@ -195,6 +195,7 @@ const QString VAbstractPattern::NodeSplinePath = QStringLiteral("NodeSplinePath"
 
 QHash<quint32, VDataTool*> VAbstractPattern::tools = QHash<quint32, VDataTool*>();
 QVector<VLabelTemplateLine> VAbstractPattern::patternLabelLines = QVector<VLabelTemplateLine>();
+bool VAbstractPattern::patternLabelWasChanged = false;
 
 namespace
 {
@@ -1383,6 +1384,7 @@ void VAbstractPattern::SetPatternLabelTemplate(const QVector<VLabelTemplateLine>
     RemoveAllChildren(tag);
     SetLabelTemplate(tag, lines);
     patternLabelLines = lines;
+    patternLabelWasChanged = true;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -1400,6 +1402,18 @@ QVector<VLabelTemplateLine> VAbstractPattern::GetPatternLabelTemplate() const
     }
 
     return patternLabelLines;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VAbstractPattern::SetPatternWasChanged(bool changed)
+{
+    patternLabelWasChanged = changed;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+bool VAbstractPattern::GetPatternWasChanged() const
+{
+    return patternLabelWasChanged;
 }
 
 //---------------------------------------------------------------------------------------------------------------------

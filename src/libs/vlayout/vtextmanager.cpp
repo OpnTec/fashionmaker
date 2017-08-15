@@ -38,6 +38,7 @@
 #include "../vpatterndb/floatItemData/vpiecelabeldata.h"
 #include "../vmisc/vabstractapplication.h"
 #include "../vmisc/vmath.h"
+#include "../vpatterndb/vcontainer.h"
 #include "vtextmanager.h"
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -47,10 +48,91 @@
 TextLine::TextLine()
     : m_qsText(),
       m_iFontSize(MIN_FONT_SIZE),
-      m_eFontWeight(QFont::Normal),
-      m_eStyle(QFont::StyleNormal),
+      bold(false),
+      italic(false),
       m_eAlign(Qt::AlignCenter)
 {}
+
+QList<TextLine> VTextManager::m_patternLabelLines = QList<TextLine>();
+
+namespace
+{
+
+//---------------------------------------------------------------------------------------------------------------------
+QMap<QString, QString> PreparePlaceholders(const VAbstractPattern *doc)
+{
+    SCASSERT(doc != nullptr)
+
+    QMap<QString, QString> placeholders;
+
+    QLocale locale(qApp->Settings()->GetLocale());
+    placeholders.insert(pl_date, locale.toString(QDate::currentDate()));
+    placeholders.insert(pl_time, locale.toString(QTime::currentTime()));
+    placeholders.insert(pl_patternName, doc->GetPatternName());
+    placeholders.insert(pl_patternNumber, doc->GetPatternNumber());
+    placeholders.insert(pl_author, doc->GetCompanyName());
+    placeholders.insert(pl_customer, doc->GetCustomerName());
+    placeholders.insert(pl_pExt, QString("val"));
+    placeholders.insert(pl_pFileName, QFileInfo(qApp->GetPPath()).fileName());
+    placeholders.insert(pl_mFileName, QFileInfo(doc->MPath()).fileName());
+
+    QString curSize;
+    QString curHeight;
+    QString mExt;
+    if (qApp->patternType() == MeasurementsType::Multisize)
+    {
+        curSize = QString::number(VContainer::size());
+        curHeight = QString::number(VContainer::height());
+        mExt = "vst";
+    }
+    else if (qApp->patternType() == MeasurementsType::Individual)
+    {
+        mExt = "vit";
+    }
+
+    placeholders.insert(pl_size, curSize);
+    placeholders.insert(pl_height, curHeight);
+    placeholders.insert(pl_mExt, mExt);
+
+    return placeholders;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QString ReplacePlaceholders(const QMap<QString, QString> &placeholders, QString line)
+{
+    QChar per('%');
+    auto i = placeholders.constBegin();
+    while (i != placeholders.constEnd())
+    {
+        line.replace(per+i.key()+per, i.value());
+        ++i;
+    }
+    return line;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QList<TextLine> PrepareLines(const QVector<VLabelTemplateLine> &lines)
+{
+    QList<TextLine> textLines;
+
+    for (int i=0; i < lines.size(); ++i)
+    {
+        if (not lines.at(i).line.isEmpty())
+        {
+            TextLine tl;
+            tl.m_qsText = lines.at(i).line;
+            tl.m_eAlign = static_cast<Qt::Alignment>(lines.at(i).alignment);
+            tl.m_iFontSize = 0;
+            tl.bold = lines.at(i).bold;
+            tl.italic = lines.at(i).italic;
+
+            textLines << tl;
+        }
+    }
+
+    return textLines;
+}
+}
 
 //---------------------------------------------------------------------------------------------------------------------
 /**
@@ -58,13 +140,6 @@ TextLine::TextLine()
  */
 VTextManager::VTextManager()
      : m_font(), m_liLines()
-{}
-
-//---------------------------------------------------------------------------------------------------------------------
-/**
- * @brief VTextManager::~VTextManager destructor
- */
-VTextManager::~VTextManager()
 {}
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -132,25 +207,6 @@ QList<TextLine> VTextManager::GetAllSourceLines() const
 
 //---------------------------------------------------------------------------------------------------------------------
 /**
- * @brief AddSourceLine add new text line to the list
- * @param tl text line object to be added
- */
-void VTextManager::AddSourceLine(const TextLine& tl)
-{
-    m_liLines << tl;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-/**
- * @brief ClearSourceLines deletes the list of texts
- */
-void VTextManager::ClearSourceLines()
-{
-    m_liLines.clear();
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-/**
  * @brief VTextManager::GetSourceLinesCount returns the number of input text lines
  * @return number of text lines that were added to the list by calling AddLine
  */
@@ -202,8 +258,8 @@ void VTextManager::FitFontSize(qreal fW, qreal fH)
         const TextLine& tl = GetSourceLine(i);
         fnt = m_font;
         fnt.setPixelSize(iFS + tl.m_iFontSize);
-        fnt.setWeight(tl.m_eFontWeight);
-        fnt.setStyle(tl.m_eStyle);
+        fnt.setBold(tl.bold);
+        fnt.setItalic(tl.italic);
         QFontMetrics fm(fnt);
         const int iTW = fm.width(tl.m_qsText);
         if (iTW > iMaxLen)
@@ -215,8 +271,8 @@ void VTextManager::FitFontSize(qreal fW, qreal fH)
     if (iMaxLen > fW)
     {
         QFont fnt = m_font;
-        fnt.setWeight(maxLine.m_eFontWeight);
-        fnt.setStyle(maxLine.m_eStyle);
+        fnt.setBold(maxLine.bold);
+        fnt.setItalic(maxLine.italic);
 
         int lineLength = 0;
         do
@@ -240,27 +296,27 @@ void VTextManager::FitFontSize(qreal fW, qreal fH)
  */
 void VTextManager::Update(const QString& qsName, const VPieceLabelData& data)
 {
-    ClearSourceLines();
+    m_liLines.clear();
+
     TextLine tl;
     // all text must be centered and normal style!
     tl.m_eAlign = Qt::AlignCenter;
-    tl.m_eStyle = QFont::StyleNormal;
 
     // letter
     tl.m_qsText = data.GetLetter();
     if (tl.m_qsText.isEmpty() == false)
     {
-        tl.m_eFontWeight = QFont::Bold;
+        tl.bold = true;
         tl.m_iFontSize = 6;
-        AddSourceLine(tl);
+        m_liLines << tl;
     }
     // name
     tl.m_qsText = qsName;
     if (tl.m_qsText.isEmpty() == false)
     {
-        tl.m_eFontWeight = QFont::DemiBold;
+        tl.bold = true;
         tl.m_iFontSize = 2;
-        AddSourceLine(tl);
+        m_liLines << tl;
     }
     // MCP
     QStringList qslMaterials;
@@ -271,7 +327,7 @@ void VTextManager::Update(const QString& qsName, const VPieceLabelData& data)
     QString qsText = QLatin1String("%1, ") + tr("cut") + QLatin1String(" %2%3");
     QStringList qslPlace;
     qslPlace << "" << QLatin1String(" ") + tr("on fold");
-    tl.m_eFontWeight = QFont::Normal;
+    tl.bold = false;
     tl.m_iFontSize = 0;
     for (int i = 0; i < data.GetMCPCount(); ++i)
     {
@@ -289,7 +345,7 @@ void VTextManager::Update(const QString& qsName, const VPieceLabelData& data)
             }
             tl.m_qsText = qsText.arg(qsMat).arg(mcp.m_iCutNumber).
                     arg(qslPlace[int(mcp.m_ePlacement)]);
-            AddSourceLine(tl);
+            m_liLines << tl;
         }
     }
 }
@@ -299,89 +355,27 @@ void VTextManager::Update(const QString& qsName, const VPieceLabelData& data)
  * @brief VTextManager::Update updates the text lines with pattern info
  * @param pDoc pointer to the abstract pattern object
  */
-void VTextManager::Update(const VAbstractPattern *pDoc, qreal dSize, qreal dHeight)
+void VTextManager::Update(const VAbstractPattern *pDoc)
 {
-    ClearSourceLines();
-    TextLine tl;
-    // all information must be centered
-    tl.m_eAlign = Qt::AlignCenter;
+    m_liLines.clear();
 
-    // Company name
-    tl.m_qsText = pDoc->GetCompanyName();
-    if (tl.m_qsText.isEmpty() == false)
+    if (m_patternLabelLines.isEmpty() || pDoc->GetPatternWasChanged())
     {
-        tl.m_eFontWeight = QFont::DemiBold;
-        tl.m_eStyle = QFont::StyleNormal;
-        tl.m_iFontSize = 4;
-        AddSourceLine(tl);
-    }
-    // Pattern name
-    tl.m_qsText = pDoc->GetPatternName();
-    if (tl.m_qsText.isEmpty() == false)
-    {
-        tl.m_eFontWeight = QFont::Normal;
-        tl.m_eStyle = QFont::StyleNormal;
-        tl.m_iFontSize = 2;
-        AddSourceLine(tl);
-    }
-    // Pattern number
-    tl.m_qsText = pDoc->GetPatternNumber();
-    if (tl.m_qsText.isEmpty() == false)
-    {
-        tl.m_eFontWeight = QFont::Normal;
-        tl.m_eStyle = QFont::StyleNormal;
-        tl.m_iFontSize = 0;
-        AddSourceLine(tl);
-    }
-    // Customer name
-    tl.m_qsText = pDoc->GetCustomerName();
-    if (tl.m_qsText.isEmpty() == false)
-    {
-        tl.m_eFontWeight = QFont::Normal;
-        tl.m_eStyle = QFont::StyleItalic;
-        tl.m_iFontSize = 0;
-        AddSourceLine(tl);
-    }
-    // Size
-    tl.m_qsText = pDoc->GetPatternSize();
-    if (tl.m_qsText.isEmpty() == false)
-    {
-        // Such describing placeholders will help avoid mistake of localization.
-        // Translators very often remove '%'.
-        QString placeholder = QLatin1String("%") + qApp->TrVars()->PlaceholderToUser(pl_size) + QLatin1String("%");
-        tl.m_qsText.replace(placeholder, QString::number(dSize));
+        QVector<VLabelTemplateLine> lines = pDoc->GetPatternLabelTemplate();
+        if (lines.isEmpty() && m_patternLabelLines.isEmpty())
+        {
+            return; // Nothing to parse
+        }
 
-        placeholder = QLatin1String("%") + qApp->TrVars()->PlaceholderToUser(pl_height) + QLatin1String("%");
-        tl.m_qsText.replace(placeholder, QString::number(dHeight));
+        const QMap<QString, QString> placeholders = PreparePlaceholders(pDoc);
 
-        tl.m_eFontWeight = QFont::Normal;
-        tl.m_eStyle = QFont::StyleNormal;
-        tl.m_iFontSize = 0;
-        AddSourceLine(tl);
+        for (int i=0; i<lines.size(); ++i)
+        {
+            lines[i].line = ReplacePlaceholders(placeholders, lines.at(i).line);
+        }
+
+        m_patternLabelLines = PrepareLines(lines);
     }
-    // Measurements
-    tl.m_qsText = QFileInfo(pDoc->MPath()).fileName();
-    if (tl.m_qsText.isEmpty() == false && pDoc->IsMeasurementsVisible() == true)
-    {
-        tl.m_eFontWeight = QFont::Normal;
-        tl.m_eStyle = QFont::StyleNormal;
-        tl.m_iFontSize = 0;
-        AddSourceLine(tl);
-    }
-    // Date
-    QDate date;
-    if (pDoc->IsDateVisible() == true)
-    {
-        date = QDate::currentDate();
-    }
-    if (date.isValid() == true)
-    {
-        QLocale locale(qApp->Settings()->GetLocale());
-        tl.m_qsText = locale.toString(date, "dd MMMM yyyy");
-        tl.m_eFontWeight = QFont::Normal;
-        tl.m_eStyle = QFont::StyleNormal;
-        tl.m_iFontSize = 0;
-        AddSourceLine(tl);
-    }
+
+    m_liLines = m_patternLabelLines;
 }
-

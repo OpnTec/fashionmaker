@@ -164,8 +164,8 @@ void VTextGraphicsItem::paint(QPainter *painter, const QStyleOptionGraphicsItem 
         const TextLine& tl = m_tm.GetSourceLine(i);
 
         fnt.setPixelSize(m_tm.GetFont().pixelSize() + tl.m_iFontSize);
-        fnt.setWeight(tl.m_eFontWeight);
-        fnt.setStyle(tl.m_eStyle);
+        fnt.setBold(tl.bold);
+        fnt.setItalic(tl.italic);
 
         QString qsText = tl.m_qsText;
         QFontMetrics fm(fnt);
@@ -233,25 +233,6 @@ void VTextGraphicsItem::paint(QPainter *painter, const QStyleOptionGraphicsItem 
             }
         }
     }
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-/**
- * @brief VTextGraphicsItem::AddLine adds a line of text to the label list.
- * @param tl line of text to add
- */
-void VTextGraphicsItem::AddLine(const TextLine& tl)
-{
-    m_tm.AddSourceLine(tl);
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-/**
- * @brief VTextGraphicsItem::Clear deletes all the label texts
- */
-void VTextGraphicsItem::Clear()
-{
-    m_tm.ClearSourceLines();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -362,9 +343,9 @@ void VTextGraphicsItem::UpdateData(const QString &qsName, const VPieceLabelData 
  * @brief VTextGraphicsItem::UpdateData Updates the pattern label
  * @param pDoc pointer to the pattern object
  */
-void VTextGraphicsItem::UpdateData(const VAbstractPattern* pDoc, qreal dSize, qreal dHeight)
+void VTextGraphicsItem::UpdateData(const VAbstractPattern* pDoc)
 {
-    m_tm.Update(pDoc, dSize, dHeight);
+    m_tm.Update(pDoc);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
