@@ -387,6 +387,8 @@ protected:
 
     /** @brief tools list with pointer on tools. */
     static QHash<quint32, VDataTool*> tools;
+    /** @brief patternLabelLines list to speed up reading a template by many pieces. */
+    static QVector<VLabelTemplateLine> patternLabelLines;
 
     static void       ToolExists(const quint32 &id);
     static VPiecePath ParsePathNodes(const QDomElement &domElement);

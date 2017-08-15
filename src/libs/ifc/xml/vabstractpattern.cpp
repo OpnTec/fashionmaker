@@ -194,6 +194,7 @@ const QString VAbstractPattern::NodeSpline     = QStringLiteral("NodeSpline");
 const QString VAbstractPattern::NodeSplinePath = QStringLiteral("NodeSplinePath");
 
 QHash<quint32, VDataTool*> VAbstractPattern::tools = QHash<quint32, VDataTool*>();
+QVector<VLabelTemplateLine> VAbstractPattern::patternLabelLines = QVector<VLabelTemplateLine>();
 
 namespace
 {
@@ -1381,17 +1382,24 @@ void VAbstractPattern::SetPatternLabelTemplate(const QVector<VLabelTemplateLine>
     QDomElement tag = CheckTagExists(TagPatternLabel);
     RemoveAllChildren(tag);
     SetLabelTemplate(tag, lines);
+    patternLabelLines = lines;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 QVector<VLabelTemplateLine> VAbstractPattern::GetPatternLabelTemplate() const
 {
-    const QDomNodeList list = elementsByTagName(TagPatternLabel);
-    if (list.isEmpty())
+    if (patternLabelLines.isEmpty())
     {
-        return QVector<VLabelTemplateLine>();
+        const QDomNodeList list = elementsByTagName(TagPatternLabel);
+        if (list.isEmpty())
+        {
+            return QVector<VLabelTemplateLine>();
+        }
+
+        patternLabelLines = GetLabelTemplate(list.at(0).toElement());
     }
-    return GetLabelTemplate(list.at(0).toElement());
+
+    return patternLabelLines;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
