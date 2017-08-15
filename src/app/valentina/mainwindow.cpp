@@ -63,6 +63,7 @@
 #include "dialogs/vwidgetdetails.h"
 #include "../vpatterndb/vpiecepath.h"
 #include "../qmuparser/qmuparsererror.h"
+#include "../vtools/dialogs/support/dialogeditlabel.h"
 
 #include <QInputDialog>
 #include <QtDebug>
@@ -4051,6 +4052,12 @@ void MainWindow::CreateActions()
 
     connect(ui->actionSyncMeasurements, &QAction::triggered, this, &MainWindow::SyncMeasurements);
     connect(ui->actionUnloadMeasurements, &QAction::triggered, this, &MainWindow::UnloadMeasurements);
+
+    connect(ui->actionLabelTemplateEditor, &QAction::triggered, this, [this]()
+    {
+        DialogEditLabel editor(doc);
+        editor.exec();
+    });
 }
 
 //---------------------------------------------------------------------------------------------------------------------

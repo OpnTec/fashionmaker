@@ -55,8 +55,8 @@
         <rect>
          <x>0</x>
          <y>0</y>
-         <width>126</width>
-         <height>351</height>
+         <width>127</width>
+         <height>358</height>
         </rect>
        </property>
        <property name="sizePolicy">
@@ -402,7 +402,7 @@
          <x>0</x>
          <y>0</y>
          <width>140</width>
-         <height>108</height>
+         <height>110</height>
         </rect>
        </property>
        <property name="sizePolicy">
@@ -511,7 +511,7 @@
          <x>0</x>
          <y>0</y>
          <width>140</width>
-         <height>243</height>
+         <height>248</height>
         </rect>
        </property>
        <property name="sizePolicy">
@@ -773,7 +773,7 @@
          <x>0</x>
          <y>0</y>
          <width>140</width>
-         <height>243</height>
+         <height>248</height>
         </rect>
        </property>
        <property name="sizePolicy">
@@ -1038,7 +1038,7 @@
          <x>0</x>
          <y>0</y>
          <width>140</width>
-         <height>102</height>
+         <height>104</height>
         </rect>
        </property>
        <property name="sizePolicy">
@@ -1121,7 +1121,7 @@
          <x>0</x>
          <y>0</y>
          <width>140</width>
-         <height>326</height>
+         <height>328</height>
         </rect>
        </property>
        <attribute name="icon">
@@ -1325,7 +1325,7 @@
          <x>0</x>
          <y>0</y>
          <width>140</width>
-         <height>192</height>
+         <height>196</height>
         </rect>
        </property>
        <property name="sizePolicy">
@@ -1535,7 +1535,7 @@
          <x>0</x>
          <y>0</y>
          <width>140</width>
-         <height>326</height>
+         <height>328</height>
         </rect>
        </property>
        <attribute name="icon">
@@ -1635,7 +1635,7 @@
      <x>0</x>
      <y>0</y>
      <width>1100</width>
-     <height>19</height>
+     <height>25</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuFile">
@@ -1663,6 +1663,8 @@
     <addaction name="separator"/>
     <addaction name="actionPreferences"/>
     <addaction name="actionPattern_properties"/>
+    <addaction name="separator"/>
+    <addaction name="actionLabelTemplateEditor"/>
     <addaction name="separator"/>
     <addaction name="actionExit"/>
    </widget>
@@ -2666,6 +2668,11 @@
    </property>
    <property name="menuRole">
     <enum>QAction::NoRole</enum>
+   </property>
+  </action>
+  <action name="actionLabelTemplateEditor">
+   <property name="text">
+    <string>Label template editor</string>
    </property>
   </action>
  </widget>
