@@ -2,10 +2,10 @@
 <template>
     <version>1.0.0</version>
     <lines>
-        <line alignment="0" bold="true" italic="false" text="%author%"/>
-        <line alignment="0" bold="false" italic="false" text="%patternName%"/>
-        <line alignment="0" bold="false" italic="false" text="%patternNumber%"/>
-        <line alignment="0" bold="false" italic="true" text="%customer%"/>
-        <line alignment="0" bold="false" italic="true" text="%date%"/>
+        <line alignment="0" bold="true" italic="false" sfIncrement="4" text="%author%"/>
+        <line alignment="0" bold="false" italic="false" sfIncrement="2" text="%patternName%"/>
+        <line alignment="0" bold="false" italic="false" sfIncrement="0" text="%patternNumber%"/>
+        <line alignment="0" bold="false" italic="true" sfIncrement="0" text="%customer%"/>
+        <line alignment="0" bold="false" italic="true" sfIncrement="0" text="%date%"/>
     </lines>
 </template>
