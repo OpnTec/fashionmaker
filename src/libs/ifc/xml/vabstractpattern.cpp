@@ -59,7 +59,6 @@ const QString VAbstractPattern::TagCalculation      = QStringLiteral("calculatio
 const QString VAbstractPattern::TagModeling         = QStringLiteral("modeling");
 const QString VAbstractPattern::TagDetails          = QStringLiteral("details");
 const QString VAbstractPattern::TagDetail           = QStringLiteral("detail");
-const QString VAbstractPattern::TagAuthor           = QStringLiteral("author");
 const QString VAbstractPattern::TagDescription      = QStringLiteral("description");
 const QString VAbstractPattern::TagNotes            = QStringLiteral("notes");
 const QString VAbstractPattern::TagImage            = QStringLiteral("image");
@@ -88,9 +87,6 @@ const QString VAbstractPattern::TagPatternNum       = QStringLiteral("patternNum
 const QString VAbstractPattern::TagCustomerName     = QStringLiteral("customer");
 const QString VAbstractPattern::TagCompanyName      = QStringLiteral("company");
 const QString VAbstractPattern::TagPatternLabel     = QStringLiteral("patternLabel");
-const QString VAbstractPattern::TagSize             = QStringLiteral("size");
-const QString VAbstractPattern::TagShowDate         = QStringLiteral("showDate");
-const QString VAbstractPattern::TagShowMeasurements = QStringLiteral("showMeasurements");
 const QString VAbstractPattern::TagGrainline        = QStringLiteral("grainline");
 const QString VAbstractPattern::TagPath             = QStringLiteral("path");
 const QString VAbstractPattern::TagNodes            = QStringLiteral("nodes");
@@ -1333,51 +1329,6 @@ void VAbstractPattern::SetCustomerName(const QString& qsName)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QString VAbstractPattern::GetPatternSize() const
-{
-    return UniqueTagText(TagSize);
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void VAbstractPattern::SetPatternSize(const QString& qsSize)
-{
-    CheckTagExists(TagSize);
-    setTagText(TagSize, qsSize);
-    modified = true;
-    emit patternChanged(false);
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-bool VAbstractPattern::IsDateVisible() const
-{
-    return UniqueTagText(TagShowDate) != falseStr;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void VAbstractPattern::SetDateVisible(bool bVisible)
-{
-    CheckTagExists(TagShowDate);
-    setTagText(TagShowDate, bVisible == true? trueStr : falseStr);
-    modified = true;
-    emit patternChanged(false);
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-bool VAbstractPattern::IsMeasurementsVisible() const
-{
-    return UniqueTagText(TagShowMeasurements) == trueStr;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void VAbstractPattern::SetMesurementsVisible(bool bVisible)
-{
-    CheckTagExists(TagShowMeasurements);
-    setTagText(TagShowMeasurements, bVisible == true? trueStr : falseStr);
-    modified = true;
-    emit patternChanged(false);
-}
-
-//---------------------------------------------------------------------------------------------------------------------
 void VAbstractPattern::SetPatternLabelTemplate(const QVector<VLabelTemplateLine> &lines)
 {
     QDomElement tag = CheckTagExists(TagPatternLabel);
@@ -1556,25 +1507,21 @@ QDomElement VAbstractPattern::CheckTagExists(const QString &tag)
     QDomElement element;
     if (list.isEmpty())
     {
-        const QStringList tags = QStringList() << TagUnit << TagImage << TagAuthor << TagDescription << TagNotes
+        const QStringList tags = QStringList() << TagUnit << TagImage << TagDescription << TagNotes
                                          << TagGradation << TagPatternName << TagPatternNum << TagCompanyName
-                                         << TagCustomerName << TagPatternLabel << TagSize << TagShowDate
-                                         << TagShowMeasurements;
+                                         << TagCustomerName << TagPatternLabel;
         switch (tags.indexOf(tag))
         {
             case 1: //TagImage
                 element = createElement(TagImage);
                 break;
-            case 2: //TagAuthor
-                element = createElement(TagAuthor);
-                break;
-            case 3: //TagDescription
+            case 2: //TagDescription
                 element = createElement(TagDescription);
                 break;
-            case 4: //TagNotes
+            case 3: //TagNotes
                 element = createElement(TagNotes);
                 break;
-            case 5: //TagGradation
+            case 4: //TagGradation
             {
                 element = createElement(TagGradation);
 
@@ -1587,30 +1534,21 @@ QDomElement VAbstractPattern::CheckTagExists(const QString &tag)
                 element.appendChild(sizes);
                 break;
             }
-            case 6: // TagPatternName
+            case 5: // TagPatternName
                 element = createElement(TagPatternName);
                 break;
-            case 7: // TagPatternNum
+            case 6: // TagPatternNum
                 element = createElement(TagPatternNum);
                 break;
-            case 8: // TagCompanyName
+            case 7: // TagCompanyName
                 element = createElement(TagCompanyName);
                 break;
-            case 9: // TagCustomerName
+            case 8: // TagCustomerName
                 element = createElement(TagCustomerName);
                 break;
-            case 10: // TagPatternLabel
+            case 9: // TagPatternLabel
                 element = createElement(TagPatternLabel);
                 break;
-            case 11: // TagSize
-                 element = createElement(TagSize);
-                 break;
-            case 12: // TagShowDate
-                 element = createElement(TagShowDate);
-                 break;
-            case 13: // TagShowMeasurements
-                 element = createElement(TagShowMeasurements);
-                 break;
             case 0: //TagUnit (Mandatory tag)
             default:
                 return QDomElement();

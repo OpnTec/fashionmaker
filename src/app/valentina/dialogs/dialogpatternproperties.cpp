@@ -71,8 +71,6 @@ DialogPatternProperties::DialogPatternProperties(VPattern *doc,  VContainer *pat
 {
     ui->setupUi(this);
 
-    ui->lineEditAuthor->setClearButtonEnabled(true);
-
     SCASSERT(doc != nullptr)
 
     qApp->ValentinaSettings()->GetOsSeparator() ? setLocale(QLocale()) : setLocale(QLocale::c());
@@ -98,9 +96,6 @@ DialogPatternProperties::DialogPatternProperties(VPattern *doc,  VContainer *pat
 #if defined(Q_OS_MAC)
     ui->pushButtonShowInExplorer->setText(tr("Show in Finder"));
 #endif //defined(Q_OS_MAC)
-
-    ui->lineEditAuthor->setText(doc->GetAuthor());
-    connect(ui->lineEditAuthor, &QLineEdit::editingFinished, this, &DialogPatternProperties::DescEdited);
 
     ui->plainTextEditDescription->setPlainText(doc->GetDescription());
     connect(ui->plainTextEditDescription, &QPlainTextEdit::textChanged, this, &DialogPatternProperties::DescEdited);
@@ -179,32 +174,11 @@ DialogPatternProperties::DialogPatternProperties(VPattern *doc,  VContainer *pat
     ui->lineEditPatternNumber->setText(doc->GetPatternNumber());
     ui->lineEditCompanyName->setText(doc->GetCompanyName());
     ui->lineEditCustomerName->setText(doc->GetCustomerName());
-    ui->checkBoxShowDate->setText(ui->checkBoxShowDate->text()
-                                  .arg(QDate::currentDate().toString(Qt::SystemLocaleLongDate)));
-    ui->lineEditSize->setText(doc->GetPatternSize());
-
-    const QString plSize = QLatin1String("%") + qApp->TrVars()->PlaceholderToUser(pl_size) + QLatin1String("%");
-    const QString plHeight = QLatin1String("%") + qApp->TrVars()->PlaceholderToUser(pl_height) + QLatin1String("%");
-    ui->lineEditSize->setToolTip(tr("Use %1 and %2 to insert pattern size and height").arg(plSize, plHeight));
-
-    ui->checkBoxShowDate->setChecked(doc->IsDateVisible());
-    if (doc->MPath().isEmpty() == true)
-    {
-        ui->checkBoxShowMeasurements->setChecked(false);
-        ui->checkBoxShowMeasurements->setEnabled(false);
-    }
-    else
-    {
-        ui->checkBoxShowMeasurements->setChecked(doc->IsMeasurementsVisible());
-    }
 
     connect(ui->lineEditPatternName, &QLineEdit::editingFinished, this, &DialogPatternProperties::LabelDataChanged);
     connect(ui->lineEditPatternNumber, &QLineEdit::editingFinished, this, &DialogPatternProperties::LabelDataChanged);
     connect(ui->lineEditCompanyName, &QLineEdit::editingFinished, this, &DialogPatternProperties::LabelDataChanged);
     connect(ui->lineEditCustomerName, &QLineEdit::editingFinished, this, &DialogPatternProperties::LabelDataChanged);
-    connect(ui->lineEditSize, &QLineEdit::editingFinished, this, &DialogPatternProperties::LabelDataChanged);
-    connect(ui->checkBoxShowDate, &QCheckBox::stateChanged, this, &DialogPatternProperties::LabelDataChanged);
-    connect(ui->checkBoxShowMeasurements, &QCheckBox::stateChanged, this, &DialogPatternProperties::LabelDataChanged);
     connect(ui->pushButtonEditPatternLabel, &QPushButton::clicked, this, &DialogPatternProperties::EditLabel);
 }
 
@@ -538,7 +512,6 @@ void DialogPatternProperties::SaveDescription()
     {
         doc->SetNotes(ui->plainTextEditTechNotes->document()->toPlainText());
         doc->SetDescription(ui->plainTextEditDescription->document()->toPlainText());
-        doc->SetAuthor(ui->lineEditAuthor->text());
 
         descriptionChanged = false;
         emit doc->patternChanged(false);
@@ -587,9 +560,6 @@ void DialogPatternProperties::SaveLabelData()
         doc->SetPatternNumber(ui->lineEditPatternNumber->text());
         doc->SetCompanyName(ui->lineEditCompanyName->text());
         doc->SetCustomerName(ui->lineEditCustomerName->text());
-        doc->SetPatternSize(ui->lineEditSize->text());
-        doc->SetDateVisible(ui->checkBoxShowDate->isChecked());
-        doc->SetMesurementsVisible(ui->checkBoxShowMeasurements->isChecked());
 
         labelDataChanged = false;
         askSaveLabelData = false;

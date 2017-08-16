@@ -66,9 +66,6 @@ public:
 
     QRectF         ActiveDrawBoundingRect() const;
 
-    QString        GetAuthor() const;
-    void           SetAuthor(const QString &text);
-
     void AddEmptyIncrement(const QString &name);
     void AddEmptyIncrementAfter(const QString &after, const QString &name);
     void RemoveIncrement(const QString &name);

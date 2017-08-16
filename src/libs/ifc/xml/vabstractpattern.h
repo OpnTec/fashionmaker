@@ -147,12 +147,6 @@ public:
     void           SetPatternNumber(const QString &qsNum);
     QString        GetCustomerName() const;
     void           SetCustomerName(const QString& qsName);
-    QString        GetPatternSize() const;
-    void           SetPatternSize(const QString &qsSize);
-    bool           IsDateVisible() const;
-    void           SetDateVisible(bool bVisible);
-    bool           IsMeasurementsVisible() const;
-    void           SetMesurementsVisible(bool bVisible);
 
     void                        SetPatternLabelTemplate(const QVector<VLabelTemplateLine> &lines);
     QVector<VLabelTemplateLine> GetPatternLabelTemplate() const;
@@ -187,7 +181,6 @@ public:
     static const QString TagModeling;
     static const QString TagDetails;
     static const QString TagDetail;
-    static const QString TagAuthor;
     static const QString TagDescription;
     static const QString TagImage;
     static const QString TagNotes;
@@ -216,9 +209,6 @@ public:
     static const QString TagCompanyName;
     static const QString TagCustomerName;
     static const QString TagPatternLabel;
-    static const QString TagSize;
-    static const QString TagShowDate;
-    static const QString TagShowMeasurements;
     static const QString TagGrainline;
     static const QString TagPath;
     static const QString TagNodes;
