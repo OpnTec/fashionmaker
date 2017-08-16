@@ -364,6 +364,8 @@ extern const QString pl_pFileName;
 extern const QString pl_mFileName;
 extern const QString pl_mExt;
 
+extern const QStringList labelTemplatePlaceholders;
+
 extern const QString cursorArrowOpenHand;
 extern const QString cursorArrowCloseHand;
 

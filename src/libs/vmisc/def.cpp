@@ -122,6 +122,19 @@ const QString pl_pFileName     = QStringLiteral("pFileName");
 const QString pl_mFileName     = QStringLiteral("mFileName");
 const QString pl_mExt          = QStringLiteral("mExt");
 
+const QStringList labelTemplatePlaceholders = QStringList() << pl_size
+                                                            << pl_height
+                                                            << pl_date
+                                                            << pl_time
+                                                            << pl_patternName
+                                                            << pl_patternNumber
+                                                            << pl_author
+                                                            << pl_customer
+                                                            << pl_pExt
+                                                            << pl_pFileName
+                                                            << pl_mFileName
+                                                            << pl_mExt;
+
 const QString cursorArrowOpenHand = QStringLiteral("://cursor/cursor-arrow-openhand.png");
 const QString cursorArrowCloseHand = QStringLiteral("://cursor/cursor-arrow-closehand.png");
 

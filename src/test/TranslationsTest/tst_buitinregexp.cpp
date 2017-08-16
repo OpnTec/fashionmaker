@@ -225,6 +225,22 @@ void TST_BuitInRegExp::TestCheckInternalVaribleRegExp()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void TST_BuitInRegExp::TestTemplatePlaceholders()
+{
+    QSet<QString> originals;
+    QSet<QString> translations;
+
+    for (int i = 0; i < labelTemplatePlaceholders.size(); ++i)
+    {
+        originals.insert(labelTemplatePlaceholders.at(i));
+        translations.insert(m_trMs->PlaceholderToUser(labelTemplatePlaceholders.at(i)));
+    }
+
+    QCOMPARE(originals.size(), labelTemplatePlaceholders.size()); // All tags are unique
+    QCOMPARE(translations.size(), labelTemplatePlaceholders.size()); // All translated tags are unique
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 void TST_BuitInRegExp::cleanupTestCase()
 {
     RemoveTrVariables(m_locale);
