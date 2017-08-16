@@ -135,6 +135,25 @@ static const QString strNodeType                  = QStringLiteral("nodeType");
 static const QString strDet                       = QStringLiteral("det");
 static const QString strTypeObject                = QStringLiteral("typeObject");
 static const QString strReadOnly                  = QStringLiteral("readOnly");
+static const QString strPatternLabel              = QStringLiteral("patternLabel");
+static const QString strImage                     = QStringLiteral("image");
+static const QString strAuthor                    = QStringLiteral("author");
+static const QString strDescription               = QStringLiteral("description");
+static const QString strNotes                     = QStringLiteral("notes");
+static const QString strGradation                 = QStringLiteral("gradation");
+static const QString strPatternName               = QStringLiteral("patternName");
+static const QString strPatternNum                = QStringLiteral("patternNumber");
+static const QString strCompanyName               = QStringLiteral("company");
+static const QString strCustomerName              = QStringLiteral("customer");
+static const QString strLine                      = QStringLiteral("line");
+static const QString strText                      = QStringLiteral("text");
+static const QString strBold                      = QStringLiteral("bold");
+static const QString strItalic                    = QStringLiteral("italic");
+static const QString strAlignment                 = QStringLiteral("alignment");
+static const QString strFSIncrement               = QStringLiteral("sfIncrement");
+static const QString strShowDate                  = QStringLiteral("showDate");
+static const QString strShowMeasurements          = QStringLiteral("showMeasurements");
+static const QString strSize                      = QStringLiteral("size");
 
 //---------------------------------------------------------------------------------------------------------------------
 VPatternConverter::VPatternConverter(const QString &fileName)
@@ -781,6 +800,9 @@ void VPatternConverter::ToV0_6_0()
     Q_STATIC_ASSERT_X(VPatternConverter::PatternMinVer < CONVERTER_VERSION_CHECK(0, 6, 0),
                       "Time to refactor the code.");
     SetVersion(QStringLiteral("0.6.0"));
+    QDomElement label = AddTagPatternLabelV0_5_1();
+    PortLabeltoV0_6_0(label);
+    RemoveUnusedTagsV0_6_0();
     Save();
 }
 
@@ -2054,6 +2076,145 @@ void VPatternConverter::LabelTagToV0_4_4(const QString &tagName)
             ConvertData(dom, strHeight);
         }
     }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QDomElement VPatternConverter::AddTagPatternLabelV0_5_1()
+{
+    // TODO. Delete if minimal supported version is 0.6.0
+    Q_STATIC_ASSERT_X(VPatternConverter::PatternMinVer < CONVERTER_VERSION_CHECK(0, 6, 0),
+                      "Time to refactor the code.");
+
+    const QDomNodeList list = elementsByTagName(strPatternLabel);
+    if (list.isEmpty())
+    {
+        const QStringList tags = QStringList() << strUnit
+                                               << strImage
+                                               << strAuthor
+                                               << strDescription
+                                               << strNotes
+                                               << strGradation
+                                               << strPatternName
+                                               << strPatternNum
+                                               << strCompanyName
+                                               << strCustomerName
+                                               << strPatternLabel;
+
+        QDomElement element = createElement(strPatternLabel);
+        QDomElement pattern = documentElement();
+        for (int i = tags.indexOf(element.tagName())-1; i >= 0; --i)
+        {
+            const QDomNodeList list = elementsByTagName(tags.at(i));
+            if (not list.isEmpty())
+            {
+                pattern.insertAfter(element, list.at(0));
+                break;
+            }
+        }
+        return element;
+    }
+    return list.at(0).toElement();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VPatternConverter::PortLabeltoV0_6_0(QDomElement &label)
+{
+    // TODO. Delete if minimal supported version is 0.6.0
+    Q_STATIC_ASSERT_X(VPatternConverter::PatternMinVer < CONVERTER_VERSION_CHECK(0, 6, 0),
+                      "Time to refactor the code.");
+
+    if (not UniqueTagText(strCompanyName).isEmpty())
+    {
+        AddLabelTemplateLineV0_6_0(label, "%author%", true, false, 0, 4);
+    }
+    else
+    {
+        const QString author = UniqueTagText(strAuthor);
+        if (not author.isEmpty())
+        {
+            AddLabelTemplateLineV0_6_0(label, author, true, false, 0, 4);
+        }
+    }
+
+    if (not UniqueTagText(strPatternName).isEmpty())
+    {
+        AddLabelTemplateLineV0_6_0(label, "%patternName%", false, false, 0, 2);
+    }
+
+    if (not UniqueTagText(strPatternNum).isEmpty())
+    {
+        AddLabelTemplateLineV0_6_0(label, "%patternNumber%", false, false, 0, 0);
+    }
+
+    if (not UniqueTagText(strCustomerName).isEmpty())
+    {
+        AddLabelTemplateLineV0_6_0(label, "%customer%", false, true, 0, 0);
+    }
+
+    const QString sizeField = UniqueTagText(strSize);
+    if (not sizeField.isEmpty())
+    {
+        AddLabelTemplateLineV0_6_0(label, sizeField, false, false, 0, 0);
+    }
+
+    if (UniqueTagText(strShowMeasurements) == trueStr)
+    {
+        AddLabelTemplateLineV0_6_0(label, "%mFileName%.%mExt%", false, false, 0, 0);
+    }
+
+    if (UniqueTagText(strShowDate) == trueStr)
+    {
+        AddLabelTemplateLineV0_6_0(label, "%date%", false, true, 0, 0);
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VPatternConverter::AddLabelTemplateLineV0_6_0(QDomElement &label, const QString &text, bool bold, bool italic,
+                                                   int alignment, int fontSizeIncrement)
+{
+    // TODO. Delete if minimal supported version is 0.6.0
+    Q_STATIC_ASSERT_X(VPatternConverter::PatternMinVer < CONVERTER_VERSION_CHECK(0, 6, 0),
+                      "Time to refactor the code.");
+
+    QDomElement tagLine = createElement(strLine);
+
+    SetAttribute(tagLine, strText, text);
+    SetAttribute(tagLine, strBold, bold);
+    SetAttribute(tagLine, strItalic, italic);
+    SetAttribute(tagLine, strAlignment, alignment);
+    SetAttribute(tagLine, strFSIncrement, fontSizeIncrement);
+
+    label.appendChild(tagLine);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VPatternConverter::RemoveUnusedTagsV0_6_0()
+{
+    // TODO. Delete if minimal supported version is 0.6.0
+    Q_STATIC_ASSERT_X(VPatternConverter::PatternMinVer < CONVERTER_VERSION_CHECK(0, 6, 0),
+                      "Time to refactor the code.");
+
+    RemoveUniqueTagV0_6_0(strAuthor);
+    RemoveUniqueTagV0_6_0(strSize);
+    RemoveUniqueTagV0_6_0(strShowDate);
+    RemoveUniqueTagV0_6_0(strShowMeasurements);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VPatternConverter::RemoveUniqueTagV0_6_0(const QString &tag)
+{
+    // TODO. Delete if minimal supported version is 0.6.0
+    Q_STATIC_ASSERT_X(VPatternConverter::PatternMinVer < CONVERTER_VERSION_CHECK(0, 6, 0),
+                      "Time to refactor the code.");
+
+    const QDomNodeList nodeList = elementsByTagName(tag);
+    if (nodeList.isEmpty())
+    {
+        return;
+    }
+
+    QDomElement pattern = documentElement();
+    pattern.removeChild(nodeList.at(0));
 }
 
 //---------------------------------------------------------------------------------------------------------------------

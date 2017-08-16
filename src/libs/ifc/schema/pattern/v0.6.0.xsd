@@ -15,7 +15,6 @@
             </xs:simpleContent>
           </xs:complexType>
         </xs:element>
-        <xs:element name="author" type="xs:string" minOccurs="0" maxOccurs="1"/>
         <xs:element name="description" type="xs:string" minOccurs="0" maxOccurs="1"/>
         <xs:element name="notes" type="xs:string" minOccurs="0" maxOccurs="1"/>
         <xs:element name="gradation" minOccurs="0" maxOccurs="1">
@@ -108,9 +107,6 @@
             </xs:sequence>
           </xs:complexType>
         </xs:element>
-        <xs:element name="size" type="xs:string" minOccurs="0" maxOccurs="1"/>
-        <xs:element name="showDate" type="xs:boolean" minOccurs="0" maxOccurs="1"/>
-        <xs:element name="showMeasurements" type="xs:boolean" minOccurs="0" maxOccurs="1"/>
         <xs:element name="measurements" type="xs:string"/>
         <xs:element name="increments" minOccurs="0" maxOccurs="1">
           <xs:complexType>
