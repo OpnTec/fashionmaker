@@ -515,6 +515,7 @@ void DialogPatternProperties::SaveDescription()
 
         descriptionChanged = false;
         emit doc->patternChanged(false);
+        emit doc->UpdatePatternLabel();
     }
 }
 
@@ -564,6 +565,7 @@ void DialogPatternProperties::SaveLabelData()
         labelDataChanged = false;
         askSaveLabelData = false;
         emit doc->patternChanged(false);
+        emit doc->UpdatePatternLabel();
     }
 }
 
@@ -575,6 +577,7 @@ void DialogPatternProperties::SaveTemplateData()
         doc->SetPatternLabelTemplate(templateLines);
         templateDataChanged = false;
         emit doc->patternChanged(false);
+        emit doc->UpdatePatternLabel();
     }
 }
 

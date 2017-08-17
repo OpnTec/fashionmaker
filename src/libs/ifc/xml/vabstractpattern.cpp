@@ -794,6 +794,7 @@ void VAbstractPattern::SetMPath(const QString &path)
     if (setTagText(TagMeasurements, path))
     {
         emit patternChanged(false);
+        emit UpdatePatternLabel();
     }
     else
     {

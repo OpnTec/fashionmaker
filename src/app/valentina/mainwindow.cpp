@@ -3435,6 +3435,7 @@ void MainWindow::setCurrentFile(const QString &fileName)
 {
     qCDebug(vMainWindow, "Set current name to \"%s\"", qUtf8Printable(fileName));
     qApp->SetPPath(fileName);
+    emit doc->UpdatePatternLabel();
     qApp->getUndoStack()->setClean();
 
     if (not qApp->GetPPath().isEmpty() && VApplication::IsGUIMode())
@@ -4679,9 +4680,9 @@ QString MainWindow::CheckPathToMeasurements(const QString &patternPath, const QS
 
                     CheckRequiredMeasurements(m.data());
 
+                    qApp->setPatternType(patternType);
                     doc->SetMPath(RelativeMPath(patternPath, mPath));
                     PatternChangesWereSaved(false);
-                    qApp->setPatternType(patternType);
                     return mPath;
                 }
             }
