@@ -473,10 +473,10 @@ void DialogEditLabel::InitPlaceholders()
     m_placeholders.insert(pl_customer, qMakePair(tr("Customer name"), m_doc->GetCustomerName()));
     m_placeholders.insert(pl_pExt, qMakePair(tr("Pattern extension"), QString("val")));
 
-    const QString patternFilePath = QFileInfo(qApp->GetPPath()).fileName();
+    const QString patternFilePath = QFileInfo(qApp->GetPPath()).baseName();
     m_placeholders.insert(pl_pFileName, qMakePair(tr("Pattern file name"), patternFilePath));
 
-    const QString measurementsFilePath = QFileInfo(m_doc->MPath()).fileName();
+    const QString measurementsFilePath = QFileInfo(m_doc->MPath()).baseName();
     m_placeholders.insert(pl_mFileName, qMakePair(tr("Measurments file name"), measurementsFilePath));
 
     QString curSize;
