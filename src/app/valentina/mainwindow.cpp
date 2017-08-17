@@ -1609,6 +1609,11 @@ void MainWindow::UnloadMeasurements()
     if (doc->ListMeasurements().isEmpty())
     {
         watcher->removePath(AbsoluteMPath(qApp->GetPPath(), doc->MPath()));
+        if (qApp->patternType() == MeasurementsType::Multisize)
+        {
+            ToolBarOption();
+        }
+        qApp->setPatternType(MeasurementsType::Unknown);
         doc->SetMPath(QString());
         PatternChangesWereSaved(false);
         ui->actionEditCurrent->setEnabled(false);
