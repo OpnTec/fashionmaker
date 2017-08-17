@@ -363,6 +363,15 @@ extern const QString pl_pExt;
 extern const QString pl_pFileName;
 extern const QString pl_mFileName;
 extern const QString pl_mExt;
+extern const QString pl_pLetter;
+extern const QString pl_pName;
+extern const QString pl_pQuantity;
+extern const QString pl_mFabric;
+extern const QString pl_mLining;
+extern const QString pl_mInterfacing;
+extern const QString pl_mInterlining;
+extern const QString pl_wCut;
+extern const QString pl_wOnFold;
 
 extern const QStringList labelTemplatePlaceholders;
 

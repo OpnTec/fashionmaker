@@ -42,6 +42,7 @@
 #include "dialogpiecepath.h"
 #include "../../../undocommands/savepiecepathoptions.h"
 #include "../../support/dialogeditwrongformula.h"
+#include "../../support/dialogeditlabel.h"
 #include "../../../tools/vtoolseamallowance.h"
 
 #include <QMenu>
@@ -123,7 +124,8 @@ DialogSeamAllowance::DialogSeamAllowance(const VContainer *data, const quint32 &
       m_timerWidth(nullptr),
       m_timerWidthBefore(nullptr),
       m_timerWidthAfter(nullptr),
-      m_saWidth(0)
+      m_saWidth(0),
+      m_templateLines()
 {
     ui->setupUi(this);
 
@@ -246,6 +248,9 @@ void DialogSeamAllowance::SetPiece(const VPiece &piece)
     m_my = piece.GetMy();
 
     uiTabLabels->lineEditLetter->setText(piece.GetPatternPieceData().GetLetter());
+    uiTabLabels->spinBoxQuantity->setValue(piece.GetPatternPieceData().GetQuantity());
+    uiTabLabels->checkBoxFold->setChecked(piece.GetPatternPieceData().IsOnFold());
+    m_templateLines = piece.GetPatternPieceData().GetLabelTemplate();
 
     m_conMCP.clear();
     for (int i = 0; i < piece.GetPatternPieceData().GetMCPCount(); ++i)
@@ -2100,6 +2105,19 @@ void DialogSeamAllowance::PatternPinPointChanged()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void DialogSeamAllowance::EditLabel()
+{
+    DialogEditLabel editor(qApp->getCurrentDocument());
+    editor.SetTemplate(m_templateLines);
+    editor.SetPiece(GetPiece());
+
+    if (QDialog::Accepted == editor.exec())
+    {
+        m_templateLines = editor.GetTemplate();
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 VPiece DialogSeamAllowance::CreatePiece() const
 {
     VPiece piece;
@@ -2116,6 +2134,9 @@ VPiece DialogSeamAllowance::CreatePiece() const
     piece.SetMy(m_my);
     piece.SetFormulaSAWidth(GetFormulaFromUser(uiTabPaths->plainTextEditFormulaWidth), m_saWidth);
     piece.GetPatternPieceData().SetLetter(uiTabLabels->lineEditLetter->text());
+    piece.GetPatternPieceData().SetQuantity(uiTabLabels->spinBoxQuantity->value());
+    piece.GetPatternPieceData().SetOnFold(uiTabLabels->checkBoxFold->isChecked());
+    piece.GetPatternPieceData().SetLabelTemplate(m_templateLines);
 
     for (int i = 0; i < m_conMCP.count(); ++i)
     {
@@ -2673,6 +2694,7 @@ void DialogSeamAllowance::InitPatternPieceDataTab()
     connect(uiTabLabels->pushButtonRemove, &QPushButton::clicked, this, &DialogSeamAllowance::Remove);
     connect(uiTabLabels->listWidgetMCP, &QListWidget::itemClicked, this, &DialogSeamAllowance::SetEditMode);
     connect(uiTabLabels->comboBoxMaterial, &QComboBox::currentTextChanged, this, &DialogSeamAllowance::MaterialChanged);
+    connect(uiTabLabels->pushButtonEditPieceLabel, &QPushButton::clicked, this, &DialogSeamAllowance::EditLabel);
 
     SetAddMode();
 }

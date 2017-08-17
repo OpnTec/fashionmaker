@@ -156,6 +156,8 @@ private slots:
     void DetailPinPointChanged();
     void PatternPinPointChanged();
 
+    void EditLabel();
+
 private:
     Q_DISABLE_COPY(DialogSeamAllowance)
 
@@ -214,6 +216,8 @@ private:
     QTimer *m_timerWidthBefore;
     QTimer *m_timerWidthAfter;
     qreal   m_saWidth;
+
+    QVector<VLabelTemplateLine> m_templateLines;
 
     VPiece CreatePiece() const;
 

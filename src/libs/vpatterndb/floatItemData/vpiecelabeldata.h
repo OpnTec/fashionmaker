@@ -35,6 +35,7 @@
 #include "floatitemdef.h"
 
 class VPieceLabelDataPrivate;
+class VLabelTemplateLine;
 
 /**
  * @brief The VPieceLabelData class holds some information about a single
@@ -68,6 +69,15 @@ public:
     // methods, which operate on other members
     const QString&              GetLetter() const;
     void                        SetLetter(QString qsLetter);
+
+    int  GetQuantity() const;
+    void SetQuantity(int val);
+
+    bool IsOnFold() const;
+    void SetOnFold(bool onFold);
+
+    QVector<VLabelTemplateLine> GetLabelTemplate() const;
+    void                        SetLabelTemplate(const QVector<VLabelTemplateLine> &lines);
 
 private:
     QSharedDataPointer<VPieceLabelDataPrivate> d;

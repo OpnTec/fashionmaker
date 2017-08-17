@@ -121,3 +121,42 @@ void VPieceLabelData::SetLetter(QString qsLetter)
 {
     d->m_qsLetter = qsLetter.left(3);
 }
+
+//---------------------------------------------------------------------------------------------------------------------
+int VPieceLabelData::GetQuantity() const
+{
+    return d->m_quantity;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VPieceLabelData::SetQuantity(int val)
+{
+    if (val >= 1)
+    {
+        d->m_quantity = val;
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+bool VPieceLabelData::IsOnFold() const
+{
+    return d->m_onFold;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VPieceLabelData::SetOnFold(bool onFold)
+{
+    d->m_onFold = onFold;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QVector<VLabelTemplateLine> VPieceLabelData::GetLabelTemplate() const
+{
+    return d->m_lines;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VPieceLabelData::SetLabelTemplate(const QVector<VLabelTemplateLine> &lines)
+{
+    d->m_lines = lines;
+}

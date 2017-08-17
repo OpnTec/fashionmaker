@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>566</width>
-    <height>596</height>
+    <width>579</width>
+    <height>500</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -28,8 +28,8 @@
        <rect>
         <x>0</x>
         <y>0</y>
-        <width>546</width>
-        <height>576</height>
+        <width>559</width>
+        <height>480</height>
        </rect>
       </property>
       <layout class="QVBoxLayout" name="verticalLayout">
@@ -44,56 +44,129 @@
           </attribute>
           <layout class="QVBoxLayout" name="verticalLayout_2">
            <item>
+            <layout class="QHBoxLayout" name="horizontalLayout_30">
+             <item>
+              <widget class="QLabel" name="label_13">
+               <property name="text">
+                <string>Label template:</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QPushButton" name="pushButtonEditPieceLabel">
+               <property name="toolTip">
+                <string>Edit pattern label</string>
+               </property>
+               <property name="text">
+                <string>Edit template</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <spacer name="horizontalSpacer">
+               <property name="orientation">
+                <enum>Qt::Horizontal</enum>
+               </property>
+               <property name="sizeHint" stdset="0">
+                <size>
+                 <width>40</width>
+                 <height>20</height>
+                </size>
+               </property>
+              </spacer>
+             </item>
+            </layout>
+           </item>
+           <item>
+            <widget class="QGroupBox" name="groupBoxLabelData">
+             <property name="title">
+              <string>Label data</string>
+             </property>
+             <layout class="QFormLayout" name="formLayout">
+              <property name="fieldGrowthPolicy">
+               <enum>QFormLayout::ExpandingFieldsGrow</enum>
+              </property>
+              <item row="0" column="0">
+               <widget class="QLabel" name="label_5">
+                <property name="text">
+                 <string>Letter:</string>
+                </property>
+               </widget>
+              </item>
+              <item row="0" column="1">
+               <widget class="QLineEdit" name="lineEditLetter">
+                <property name="maxLength">
+                 <number>3</number>
+                </property>
+                <property name="placeholderText">
+                 <string>Letter of pattern piece</string>
+                </property>
+               </widget>
+              </item>
+              <item row="1" column="0">
+               <widget class="QLabel" name="labelEditName">
+                <property name="text">
+                 <string>Name of detail:</string>
+                </property>
+               </widget>
+              </item>
+              <item row="1" column="1">
+               <widget class="QLineEdit" name="lineEditName">
+                <property name="text">
+                 <string>Detail</string>
+                </property>
+                <property name="maxLength">
+                 <number>30</number>
+                </property>
+                <property name="placeholderText">
+                 <string>Name can't be empty</string>
+                </property>
+               </widget>
+              </item>
+              <item row="2" column="0">
+               <widget class="QLabel" name="labelQuantity">
+                <property name="text">
+                 <string>Quantity:</string>
+                </property>
+               </widget>
+              </item>
+              <item row="2" column="1">
+               <widget class="QSpinBox" name="spinBoxQuantity">
+                <property name="minimum">
+                 <number>1</number>
+                </property>
+                <property name="maximum">
+                 <number>9999</number>
+                </property>
+                <property name="value">
+                 <number>1</number>
+                </property>
+               </widget>
+              </item>
+              <item row="3" column="0">
+               <widget class="QLabel" name="label">
+                <property name="text">
+                 <string>Placement:</string>
+                </property>
+               </widget>
+              </item>
+              <item row="3" column="1">
+               <widget class="QCheckBox" name="checkBoxFold">
+                <property name="text">
+                 <string>on fold</string>
+                </property>
+               </widget>
+              </item>
+             </layout>
+            </widget>
+           </item>
+           <item>
             <widget class="QSplitter" name="splitter">
              <property name="orientation">
               <enum>Qt::Horizontal</enum>
              </property>
              <widget class="QWidget" name="layoutWidget1">
               <layout class="QVBoxLayout" name="verticalLayout_7">
-               <item>
-                <layout class="QFormLayout" name="formLayout_3">
-                 <property name="fieldGrowthPolicy">
-                  <enum>QFormLayout::ExpandingFieldsGrow</enum>
-                 </property>
-                 <item row="0" column="0">
-                  <widget class="QLabel" name="label_5">
-                   <property name="text">
-                    <string>Letter:</string>
-                   </property>
-                  </widget>
-                 </item>
-                 <item row="0" column="1">
-                  <widget class="QLineEdit" name="lineEditLetter">
-                   <property name="maxLength">
-                    <number>3</number>
-                   </property>
-                   <property name="placeholderText">
-                    <string>Letter of pattern piece</string>
-                   </property>
-                  </widget>
-                 </item>
-                 <item row="1" column="0">
-                  <widget class="QLabel" name="labelEditName">
-                   <property name="text">
-                    <string>Name of detail:</string>
-                   </property>
-                  </widget>
-                 </item>
-                 <item row="1" column="1">
-                  <widget class="QLineEdit" name="lineEditName">
-                   <property name="text">
-                    <string>Detail</string>
-                   </property>
-                   <property name="maxLength">
-                    <number>30</number>
-                   </property>
-                   <property name="placeholderText">
-                    <string>Name can't be empty</string>
-                   </property>
-                  </widget>
-                 </item>
-                </layout>
-               </item>
                <item>
                 <widget class="QGroupBox" name="groupBox_2">
                  <property name="title">

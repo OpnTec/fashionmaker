@@ -40,6 +40,7 @@ namespace Ui
 class VLabelTemplateLine;
 class QMenu;
 class VAbstractPattern;
+class VPiece;
 
 class DialogEditLabel : public QDialog
 {
@@ -51,6 +52,8 @@ public:
 
     QVector<VLabelTemplateLine> GetTemplate() const;
     void SetTemplate(const QVector<VLabelTemplateLine> &lines);
+
+    void SetPiece(const VPiece &piece);
 
 private slots:
     void ShowLineDetails();

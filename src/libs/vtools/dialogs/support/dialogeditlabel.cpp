@@ -34,6 +34,8 @@
 #include "../ifc/xml/vabstractpattern.h"
 #include "../ifc/exception/vexception.h"
 #include "../vpatterndb/vcontainer.h"
+#include "../vpatterndb/vpiece.h"
+#include "../vpatterndb/floatItemData/vpiecelabeldata.h"
 
 #include <QDir>
 #include <QMessageBox>
@@ -462,6 +464,7 @@ void DialogEditLabel::InitPlaceholdersMenu()
 //---------------------------------------------------------------------------------------------------------------------
 void DialogEditLabel::InitPlaceholders()
 {
+    // Pattern tags
     QLocale locale(qApp->Settings()->GetLocale());
     m_placeholders.insert(pl_date, qMakePair(tr("Date"), locale.toString(QDate::currentDate())));
     m_placeholders.insert(pl_time, qMakePair(tr("Time"), locale.toString(QTime::currentTime())));
@@ -496,6 +499,17 @@ void DialogEditLabel::InitPlaceholders()
     m_placeholders.insert(pl_size, qMakePair(tr("Size"), curSize));
     m_placeholders.insert(pl_height, qMakePair(tr("Height"), curHeight));
     m_placeholders.insert(pl_mExt, qMakePair(tr("Measurments extension"), mExt));
+
+    // Piece tags
+    m_placeholders.insert(pl_pLetter, qMakePair(tr("Piece letter"), QString("")));
+    m_placeholders.insert(pl_pName, qMakePair(tr("Piece name"), QString("")));
+    m_placeholders.insert(pl_pQuantity, qMakePair(tr("Quantity"), QString("")));
+    m_placeholders.insert(pl_mFabric, qMakePair(tr("Material: Fabric"), tr("Fabric")));
+    m_placeholders.insert(pl_mLining, qMakePair(tr("Material: Lining"), tr("Lining")));
+    m_placeholders.insert(pl_mInterfacing, qMakePair(tr("Material: Interfacing"), tr("Interfacing")));
+    m_placeholders.insert(pl_mInterlining, qMakePair(tr("Material: Interlining"), tr("Interlining")));
+    m_placeholders.insert(pl_wCut, qMakePair(tr("Word: Cut"), tr("Cut")));
+    m_placeholders.insert(pl_wOnFold, qMakePair(tr("Word: on fold"), QString("")));// By default should be empty
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -564,6 +578,18 @@ void DialogEditLabel::SetTemplate(const QVector<VLabelTemplateLine> &lines)
     if (ui->listWidgetEdit->count() > 0)
     {
         ui->listWidgetEdit->setCurrentRow(0);
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogEditLabel::SetPiece(const VPiece &piece)
+{
+    m_placeholders[pl_pLetter].second = piece.GetPatternPieceData().GetLetter();
+    m_placeholders[pl_pName].second = piece.GetName();
+    m_placeholders[pl_pQuantity].second = QString::number(piece.GetPatternPieceData().GetQuantity());
+    if (piece.GetPatternPieceData().IsOnFold())
+    {
+        m_placeholders[pl_wOnFold].second = tr("on fold");
     }
 }
 

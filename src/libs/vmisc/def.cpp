@@ -121,6 +121,15 @@ const QString pl_pExt          = QStringLiteral("pExt");
 const QString pl_pFileName     = QStringLiteral("pFileName");
 const QString pl_mFileName     = QStringLiteral("mFileName");
 const QString pl_mExt          = QStringLiteral("mExt");
+const QString pl_pLetter       = QStringLiteral("pLetter");
+const QString pl_pName         = QStringLiteral("pName");
+const QString pl_pQuantity     = QStringLiteral("pQuantity");
+const QString pl_mFabric       = QStringLiteral("mFabric");
+const QString pl_mLining       = QStringLiteral("mLining");
+const QString pl_mInterfacing  = QStringLiteral("mInterfacing");
+const QString pl_mInterlining  = QStringLiteral("mInterlining");
+const QString pl_wCut          = QStringLiteral("wCut");
+const QString pl_wOnFold       = QStringLiteral("wOnFold");
 
 const QStringList labelTemplatePlaceholders = QStringList() << pl_size
                                                             << pl_height
@@ -133,7 +142,16 @@ const QStringList labelTemplatePlaceholders = QStringList() << pl_size
                                                             << pl_pExt
                                                             << pl_pFileName
                                                             << pl_mFileName
-                                                            << pl_mExt;
+                                                            << pl_mExt
+                                                            << pl_pLetter
+                                                            << pl_pName
+                                                            << pl_pQuantity
+                                                            << pl_mFabric
+                                                            << pl_mLining
+                                                            << pl_mInterfacing
+                                                            << pl_mInterlining
+                                                            << pl_wCut
+                                                            << pl_wOnFold;
 
 const QString cursorArrowOpenHand = QStringLiteral("://cursor/cursor-arrow-openhand.png");
 const QString cursorArrowCloseHand = QStringLiteral("://cursor/cursor-arrow-closehand.png");
