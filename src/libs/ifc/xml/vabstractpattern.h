@@ -121,7 +121,7 @@ public:
     QVector<VToolRecord> getLocalHistory() const;
 
     QString        MPath() const;
-    void           SetPath(const QString &path);
+    void           SetMPath(const QString &path);
 
     quint32        SiblingNodeId(const quint32 &nodeId) const;
 

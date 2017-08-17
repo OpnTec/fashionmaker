@@ -789,7 +789,7 @@ QString VAbstractPattern::MPath() const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VAbstractPattern::SetPath(const QString &path)
+void VAbstractPattern::SetMPath(const QString &path)
 {
     if (setTagText(TagMeasurements, path))
     {

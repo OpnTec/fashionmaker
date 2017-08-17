@@ -1523,7 +1523,7 @@ void MainWindow::LoadIndividual()
                 watcher->removePath(AbsoluteMPath(qApp->GetPPath(), doc->MPath()));
             }
             ui->actionUnloadMeasurements->setEnabled(true);
-            doc->SetPath(RelativeMPath(qApp->GetPPath(), mPath));
+            doc->SetMPath(RelativeMPath(qApp->GetPPath(), mPath));
             watcher->addPath(mPath);
             PatternChangesWereSaved(false);
             ui->actionEditCurrent->setEnabled(true);
@@ -1572,7 +1572,7 @@ void MainWindow::LoadMultisize()
                 watcher->removePath(AbsoluteMPath(qApp->GetPPath(), doc->MPath()));
             }
             ui->actionUnloadMeasurements->setEnabled(true);
-            doc->SetPath(RelativeMPath(qApp->GetPPath(), mPath));
+            doc->SetMPath(RelativeMPath(qApp->GetPPath(), mPath));
             watcher->addPath(mPath);
             PatternChangesWereSaved(false);
             ui->actionEditCurrent->setEnabled(true);
@@ -1609,7 +1609,7 @@ void MainWindow::UnloadMeasurements()
     if (doc->ListMeasurements().isEmpty())
     {
         watcher->removePath(AbsoluteMPath(qApp->GetPPath(), doc->MPath()));
-        doc->SetPath(QString());
+        doc->SetMPath(QString());
         PatternChangesWereSaved(false);
         ui->actionEditCurrent->setEnabled(false);
         ui->actionUnloadMeasurements->setDisabled(true);
@@ -3387,7 +3387,7 @@ bool MainWindow::SavePattern(const QString &fileName, QString &error)
     const QString mPath = AbsoluteMPath(qApp->GetPPath(), doc->MPath());
     if (not mPath.isEmpty() && qApp->GetPPath() != fileName)
     {
-        doc->SetPath(RelativeMPath(fileName, mPath));
+        doc->SetMPath(RelativeMPath(fileName, mPath));
     }
 
     const bool result = doc->SaveDocument(fileName, error);
@@ -3403,7 +3403,7 @@ bool MainWindow::SavePattern(const QString &fileName, QString &error)
     }
     else
     {
-        doc->SetPath(mPath);
+        doc->SetMPath(mPath);
         qCDebug(vMainWindow, "Could not save file %s. %s.", qUtf8Printable(fileName), qUtf8Printable(error));
     }
     return result;
@@ -4207,7 +4207,7 @@ bool MainWindow::LoadPattern(const QString &fileName, const QString& customMeasu
         doc->setXMLContent(converter.Convert());
         if (!customMeasureFile.isEmpty())
         {
-            doc->SetPath(RelativeMPath(fileName, customMeasureFile));
+            doc->SetMPath(RelativeMPath(fileName, customMeasureFile));
         }
         qApp->setPatternUnit(doc->MUnit());
         const QString path = AbsoluteMPath(fileName, doc->MPath());
@@ -4679,7 +4679,7 @@ QString MainWindow::CheckPathToMeasurements(const QString &patternPath, const QS
 
                     CheckRequiredMeasurements(m.data());
 
-                    doc->SetPath(RelativeMPath(patternPath, mPath));
+                    doc->SetMPath(RelativeMPath(patternPath, mPath));
                     PatternChangesWereSaved(false);
                     qApp->setPatternType(patternType);
                     return mPath;
