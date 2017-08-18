@@ -2204,6 +2204,8 @@ void VPatternConverter::PortPieceLabelstoV0_6_0()
     for (int i = 0; i < nodeList.size(); ++i)
     {
         QDomElement dataTag = nodeList.at(i).toElement();
+        QDomNodeList nodeListMCP = dataTag.childNodes();
+        const int count = nodeListMCP.count();
         try
         {
             if (not GetParametrString(dataTag, strLetter, "").isEmpty())
@@ -2216,14 +2218,13 @@ void VPatternConverter::PortPieceLabelstoV0_6_0()
 
         AddLabelTemplateLineV0_6_0(dataTag, "%pName%", true, false, Qt::AlignHCenter, 2);
 
-        QDomNodeList nodeListMCP = dataTag.childNodes();
-        for (int iMCP = 0; iMCP < nodeListMCP.count(); ++iMCP)
+        for (int iMCP = 0; iMCP < count; ++iMCP)
         {
             QDomElement domMCP = nodeListMCP.at(iMCP).toElement();
 
             QString line;
 
-            const int material = GetParametrUInt(domMCP, strMaterial, 0);
+            const int material = GetParametrUInt(domMCP, strMaterial, "0");
             switch(material)
             {
                 case 0:
@@ -2245,7 +2246,7 @@ void VPatternConverter::PortPieceLabelstoV0_6_0()
             }
 
             line.append(", %wCut% %pQuantity%");
-            if (GetParametrUInt(domMCP, strPlacement, 0) == 1)
+            if (GetParametrUInt(domMCP, strPlacement, "0") == 1)
             {
                 line.append(" %wOnFold%");
             }
