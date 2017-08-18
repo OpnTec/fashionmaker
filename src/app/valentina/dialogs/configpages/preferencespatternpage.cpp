@@ -43,15 +43,6 @@ PreferencesPatternPage::PreferencesPatternPage(QWidget *parent)
     ui->graphOutputCheck->setChecked(qApp->ValentinaSettings()->GetGraphicalOutput());
     ui->undoCount->setValue(qApp->ValentinaSettings()->GetUndoCount());
 
-    connect(ui->userMaterialClearButton, &QPushButton::clicked, this, [this]()
-    {
-        VSettings* pSet = qApp->ValentinaSettings();
-        pSet->ClearUserDefinedMaterial();
-        pSet->sync();
-        QString qsMsg = tr("All user defined materials have been deleted!");
-        QMessageBox::information(this, QCoreApplication::applicationName(), qsMsg);
-    });
-
     InitDefaultSeamAllowance();
 
     ui->forbidFlippingCheck->setChecked(qApp->ValentinaSettings()->GetForbidWorkpieceFlipping());

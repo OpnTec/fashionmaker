@@ -104,9 +104,6 @@ DialogSeamAllowance::DialogSeamAllowance(const VContainer *data, const quint32 &
       m_my(0),
       m_dialog(),
       m_visPins(),
-      m_qslMaterials(),
-      m_qslPlacements(),
-      m_conMCP(),
       m_oldData(),
       m_oldGeom(),
       m_oldGrainline(),
@@ -251,14 +248,6 @@ void DialogSeamAllowance::SetPiece(const VPiece &piece)
     uiTabLabels->spinBoxQuantity->setValue(piece.GetPatternPieceData().GetQuantity());
     uiTabLabels->checkBoxFold->setChecked(piece.GetPatternPieceData().IsOnFold());
     m_templateLines = piece.GetPatternPieceData().GetLabelTemplate();
-
-    m_conMCP.clear();
-    for (int i = 0; i < piece.GetPatternPieceData().GetMCPCount(); ++i)
-    {
-        m_conMCP << piece.GetPatternPieceData().GetMCP(i);
-    }
-
-    UpdateList();
 
     uiTabGrainline->comboBoxArrow->setCurrentIndex(int(piece.GetGrainlineGeometry().GetArrowType()));
 
@@ -465,105 +454,6 @@ void DialogSeamAllowance::resizeEvent(QResizeEvent *event)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void DialogSeamAllowance::UpdateList()
-{
-    uiTabLabels->listWidgetMCP->clear();
-    for (int i = 0; i < m_conMCP.count(); ++i)
-    {
-        MaterialCutPlacement mcp = m_conMCP.at(i);
-        QString qsText = tr("Cut %1 of %2%3").arg(mcp.m_iCutNumber);
-        if (mcp.m_eMaterial < MaterialType::mtUserDefined)
-        {
-            qsText = qsText.arg(m_qslMaterials[int(mcp.m_eMaterial)]);
-        }
-        else
-        {
-            qsText = qsText.arg(mcp.m_qsMaterialUserDef);
-        }
-        if (mcp.m_ePlacement == PlacementType::ptCutOnFold)
-        {
-            qsText = qsText.arg(QLatin1String(" ") + tr("on Fold"));
-        }
-        else
-        {
-            qsText = qsText.arg("");
-        }
-
-        uiTabLabels->listWidgetMCP->addItem(qsText);
-    }
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void DialogSeamAllowance::AddUpdate()
-{
-    MaterialCutPlacement mcp;
-    QStringList qslUserMaterials = qApp->Settings()->GetUserDefinedMaterials();
-
-    const int i = uiTabLabels->comboBoxMaterial->currentData().toInt();
-    QString qsMat = uiTabLabels->comboBoxMaterial->currentText();
-    if (i < m_qslMaterials.count() && qsMat == m_qslMaterials[i])
-    {
-        mcp.m_eMaterial = MaterialType(i);
-        mcp.m_qsMaterialUserDef.clear();
-    }
-    else
-    {
-        mcp.m_eMaterial = MaterialType::mtUserDefined;
-        mcp.m_qsMaterialUserDef = qsMat;
-        // check if we have new user defined material
-        bool bFound = false;
-        for (int i = 0; i < qslUserMaterials.count() && bFound == false; ++i)
-        {
-            if (mcp.m_qsMaterialUserDef == qslUserMaterials[i])
-            {
-                bFound = true;
-            }
-        }
-        if (bFound == false)
-        {
-            qApp->Settings()->AddUserDefinedMaterial(mcp.m_qsMaterialUserDef);
-            qApp->Settings()->sync();
-            uiTabLabels->comboBoxMaterial->addItem(mcp.m_qsMaterialUserDef, int(MaterialType::mtUserDefined));
-        }
-    }
-
-    mcp.m_iCutNumber = uiTabLabels->spinBoxCutNumber->value();
-    mcp.m_ePlacement = PlacementType(uiTabLabels->comboBoxPlacement->currentIndex());
-
-    if (m_bAddMode == true)
-    {
-        m_conMCP << mcp;
-    }
-    else
-    {
-        int iR = uiTabLabels->listWidgetMCP->currentRow();
-        SCASSERT(iR >= 0)
-        m_conMCP[iR] = mcp;
-        SetAddMode();
-    }
-    UpdateList();
-    ClearFields();
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void DialogSeamAllowance::Cancel()
-{
-    ClearFields();
-    SetAddMode();
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void DialogSeamAllowance::Remove()
-{
-    int iR = uiTabLabels->listWidgetMCP->currentRow();
-    SCASSERT(iR >= 0)
-    m_conMCP.removeAt(iR);
-    UpdateList();
-    ClearFields();
-    SetAddMode();
-}
-
-//---------------------------------------------------------------------------------------------------------------------
 void DialogSeamAllowance::NameDetailChanged()
 {
     QLineEdit* edit = qobject_cast<QLineEdit*>(sender());
@@ -587,12 +477,6 @@ void DialogSeamAllowance::NameDetailChanged()
         }
     }
     CheckState();
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void DialogSeamAllowance::MaterialChanged()
-{
-    uiTabLabels->pushButtonAdd->setEnabled(uiTabLabels->comboBoxMaterial->currentText().isEmpty() == false);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -1535,53 +1419,6 @@ void DialogSeamAllowance::UpdatePatternLabelValues()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void DialogSeamAllowance::SetAddMode()
-{
-    uiTabLabels->pushButtonAdd->setText(tr("Add"));
-    uiTabLabels->pushButtonCancel->hide();
-    uiTabLabels->pushButtonRemove->hide();
-    uiTabLabels->listWidgetMCP->setCurrentRow(-1);
-    m_bAddMode = true;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void DialogSeamAllowance::SetEditMode()
-{
-    int iR = uiTabLabels->listWidgetMCP->currentRow();
-    // this method can be called by clicking on item or by update. In the latter case there is nothing else to do!
-    if (iR < 0 || iR >= m_conMCP.count())
-    {
-        return;
-    }
-
-    uiTabLabels->pushButtonAdd->setText(tr("Update"));
-    uiTabLabels->pushButtonCancel->show();
-    uiTabLabels->pushButtonRemove->show();
-
-    MaterialCutPlacement mcp = m_conMCP.at(iR);
-    if (mcp.m_eMaterial == MaterialType::mtUserDefined)
-    {
-        int iRow = qApp->Settings()->GetUserDefinedMaterials().indexOf(mcp.m_qsMaterialUserDef);
-        if (iRow >= 0)
-        {
-            uiTabLabels->comboBoxMaterial->setCurrentIndex(iRow + m_qslMaterials.count());
-        }
-        else
-        {
-            uiTabLabels->comboBoxMaterial->setCurrentText(mcp.m_qsMaterialUserDef);
-        }
-    }
-    else
-    {
-        uiTabLabels->comboBoxMaterial->setCurrentIndex(int(mcp.m_eMaterial));
-    }
-    uiTabLabels->spinBoxCutNumber->setValue(mcp.m_iCutNumber);
-    uiTabLabels->comboBoxPlacement->setCurrentIndex(int(mcp.m_ePlacement));
-
-    m_bAddMode = false;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
 void DialogSeamAllowance::EnabledGrainline()
 {
     if (uiTabGrainline->groupBoxGrainline->isChecked() == true)
@@ -2137,12 +1974,6 @@ VPiece DialogSeamAllowance::CreatePiece() const
     piece.GetPatternPieceData().SetQuantity(uiTabLabels->spinBoxQuantity->value());
     piece.GetPatternPieceData().SetOnFold(uiTabLabels->checkBoxFold->isChecked());
     piece.GetPatternPieceData().SetLabelTemplate(m_templateLines);
-
-    for (int i = 0; i < m_conMCP.count(); ++i)
-    {
-        piece.GetPatternPieceData().Append(m_conMCP[i]);
-    }
-
     piece.GetPatternPieceData().SetPos(m_oldData.GetPos());
     piece.GetPatternPieceData().SetLabelWidth(GetFormulaFromUser(uiTabLabels->lineEditDLWidthFormula));
     piece.GetPatternPieceData().SetLabelHeight(GetFormulaFromUser(uiTabLabels->lineEditDLHeightFormula));
@@ -2669,34 +2500,7 @@ void DialogSeamAllowance::InitPatternPieceDataTab()
     uiTabLabels->lineEditLetter->setClearButtonEnabled(true);
 
     connect(uiTabLabels->lineEditName, &QLineEdit::textChanged, this, &DialogSeamAllowance::NameDetailChanged);
-
-    m_qslMaterials << QApplication::translate("Detail", "Fabric", nullptr)
-                   << QApplication::translate("Detail", "Lining", nullptr)
-                   << QApplication::translate("Detail", "Interfacing", nullptr)
-                   << QApplication::translate("Detail", "Interlining", nullptr);
-
-    for (int i = 0; i < m_qslMaterials.count(); ++i)
-    {
-        uiTabLabels->comboBoxMaterial->addItem(m_qslMaterials[i], i);
-    }
-
-    const QStringList qsl = qApp->Settings()->GetUserDefinedMaterials();
-    for (int i = 0; i < qsl.count(); ++i)
-    {
-        uiTabLabels->comboBoxMaterial->addItem(qsl.at(i), int(MaterialType::mtUserDefined));
-    }
-
-    m_qslPlacements << tr("None") << tr("Cut on fold");
-    uiTabLabels->comboBoxPlacement->addItems(m_qslPlacements);
-
-    connect(uiTabLabels->pushButtonAdd, &QPushButton::clicked, this, &DialogSeamAllowance::AddUpdate);
-    connect(uiTabLabels->pushButtonCancel, &QPushButton::clicked, this, &DialogSeamAllowance::Cancel);
-    connect(uiTabLabels->pushButtonRemove, &QPushButton::clicked, this, &DialogSeamAllowance::Remove);
-    connect(uiTabLabels->listWidgetMCP, &QListWidget::itemClicked, this, &DialogSeamAllowance::SetEditMode);
-    connect(uiTabLabels->comboBoxMaterial, &QComboBox::currentTextChanged, this, &DialogSeamAllowance::MaterialChanged);
     connect(uiTabLabels->pushButtonEditPieceLabel, &QPushButton::clicked, this, &DialogSeamAllowance::EditLabel);
-
-    SetAddMode();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -2900,14 +2704,6 @@ void DialogSeamAllowance::UpdateCurrentInternalPathRecord()
     SCASSERT(item != nullptr);
     const quint32 path = qvariant_cast<quint32>(item->data(Qt::UserRole));
     item->setText(GetPathName(path));
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void DialogSeamAllowance::ClearFields()
-{
-    uiTabLabels->comboBoxMaterial->setCurrentIndex(0);
-    uiTabLabels->spinBoxCutNumber->setValue(0);
-    uiTabLabels->comboBoxPlacement->setCurrentIndex(0);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

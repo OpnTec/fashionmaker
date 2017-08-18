@@ -75,15 +75,8 @@ protected:
     virtual void showEvent( QShowEvent *event ) Q_DECL_OVERRIDE;
     virtual void resizeEvent(QResizeEvent *event) Q_DECL_OVERRIDE;
 
-protected slots:
-    void UpdateList();
-    void AddUpdate();
-    void Cancel();
-    void Remove();
-
 private slots:
     void NameDetailChanged();
-    void MaterialChanged();
     void ShowMainPathContextMenu(const QPoint &pos);
     void ShowCustomSAContextMenu(const QPoint &pos);
     void ShowInternalPathsContextMenu(const QPoint &pos);
@@ -110,9 +103,6 @@ private slots:
     void UpdateGrainlineValues();
     void UpdateDetailLabelValues();
     void UpdatePatternLabelValues();
-
-    void SetAddMode();
-    void SetEditMode();
 
     void EditGrainlineFormula();
     void EditDLFormula();
@@ -192,14 +182,9 @@ private:
     QPointer<DialogTool>   m_dialog;
     QPointer<VisPiecePins> m_visPins;
 
-    QStringList      m_qslMaterials;
-    QStringList      m_qslPlacements;
-    // temporary container for Material/Cut/Placement 3-tuples
-    MCPContainer m_conMCP;
-
-    VPieceLabelData    m_oldData;
+    VPieceLabelData   m_oldData;
     VPatternLabelData m_oldGeom;
-    VGrainlineData   m_oldGrainline;
+    VGrainlineData    m_oldGrainline;
     int                  m_iRotBaseHeight;
     int                  m_iLenBaseHeight;
     int                  m_DLWidthBaseHeight;
@@ -231,7 +216,6 @@ private:
     bool    MainPathIsClockwise() const;
     void    UpdateCurrentCustomSARecord();
     void    UpdateCurrentInternalPathRecord();
-    void    ClearFields();
 
     QListWidgetItem *GetItemById(quint32 id);
 

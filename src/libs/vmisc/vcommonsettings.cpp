@@ -80,7 +80,6 @@ const QString settingIncrementsDialogSize        = QStringLiteral("toolIncrement
 const QString settingFormulaWizardDialogSize     = QStringLiteral("formulaWizardDialogSize");
 const QString settingLatestSkippedVersion        = QStringLiteral("lastestSkippedVersion");
 const QString settingDateOfLastRemind            = QStringLiteral("dateOfLastRemind");
-const QString settingUserDefinedMaterials        = QStringLiteral("configuration/userDefinedMaterials");
 
 const QString settingCSVWithHeader = QStringLiteral("csv/withHeader");
 const QString settingCSVCodec      = QStringLiteral("csv/withCodec");
@@ -647,27 +646,6 @@ void VCommonSettings::SetDateOfLastRemind(const QDate &date)
     QSettings settings(this->format(), this->scope(), this->organizationName(), commonIniFilename);
     settings.setValue(settingDateOfLastRemind, date);
     settings.sync();
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-QStringList VCommonSettings::GetUserDefinedMaterials() const
-{
-    return value(settingUserDefinedMaterials).toStringList();
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void VCommonSettings::AddUserDefinedMaterial(QString qsMaterial)
-{
-    QStringList qsl = GetUserDefinedMaterials();
-    qsl << qsMaterial;
-    setValue(settingUserDefinedMaterials, qsl);
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void VCommonSettings::ClearUserDefinedMaterial()
-{
-    QStringList qsl;
-    setValue(settingUserDefinedMaterials, qsl);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

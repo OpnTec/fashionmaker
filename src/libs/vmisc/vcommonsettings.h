@@ -139,10 +139,6 @@ public:
     QDate GetDateOfLastRemind() const;
     void  SetDateOfLastRemind(const QDate &date);
 
-    QStringList GetUserDefinedMaterials() const;
-    void AddUserDefinedMaterial(QString qsMaterial);
-    void ClearUserDefinedMaterial();
-
     bool GetForbidWorkpieceFlipping() const;
     void SetForbidWorkpieceFlipping(bool value);
 
