@@ -150,9 +150,10 @@ private:
     void LabelTagToV0_4_4(const QString &tagName);
 
     QDomElement AddTagPatternLabelV0_5_1();
-    void PortLabeltoV0_6_0(QDomElement &label);
+    void PortPatternLabeltoV0_6_0(QDomElement &label);
     void AddLabelTemplateLineV0_6_0(QDomElement &label, const QString &text, bool bold, bool italic, int alignment,
                                     int fontSizeIncrement);
+    void PortPieceLabelstoV0_6_0();
     void RemoveUnusedTagsV0_6_0();
     void RemoveUniqueTagV0_6_0(const QString &tag);
 };

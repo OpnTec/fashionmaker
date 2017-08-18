@@ -512,14 +512,6 @@
 				    <xs:attribute name="sfIncrement" type="xs:unsignedInt"/>
 				  </xs:complexType>
 			        </xs:element>
-                                <xs:element name="mcp" minOccurs="0" maxOccurs="unbounded">
-                                  <xs:complexType>
-                                    <xs:attribute name="cutNumber" type="xs:unsignedInt"/>
-                                    <xs:attribute name="userDef" type="xs:string"/>
-                                    <xs:attribute name="material" type="materialType"/>
-                                    <xs:attribute name="placement" type="placementType"/>
-                                  </xs:complexType>
-                                </xs:element>
                               </xs:sequence>
                               <xs:attribute name="letter" type="xs:string"/>
                               <xs:attribute name="visible" type="xs:boolean"/>
@@ -859,28 +851,6 @@
     <xs:restriction base="xs:unsignedInt">
       <xs:enumeration value="1"/>
       <xs:enumeration value="2"/>
-    </xs:restriction>
-  </xs:simpleType>
-  <xs:simpleType name="materialType">
-    <xs:restriction base="xs:unsignedInt">
-      <xs:enumeration value="0"/>
-      <!--Fabric-->
-      <xs:enumeration value="1"/>
-      <!--Lining-->
-      <xs:enumeration value="2"/>
-      <!--Interfacing-->
-      <xs:enumeration value="3"/>
-      <!--Interlining-->
-      <xs:enumeration value="4"/>
-      <!--UserDefined-->
-    </xs:restriction>
-  </xs:simpleType>
-  <xs:simpleType name="placementType">
-    <xs:restriction base="xs:unsignedInt">
-      <xs:enumeration value="0"/>
-      <!--No placement-->
-      <xs:enumeration value="1"/>
-      <!--Cut on Fold-->
     </xs:restriction>
   </xs:simpleType>
   <xs:simpleType name="arrowType">

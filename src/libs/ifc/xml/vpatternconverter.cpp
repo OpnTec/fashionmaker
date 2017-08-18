@@ -154,6 +154,11 @@ static const QString strFSIncrement               = QStringLiteral("sfIncrement"
 static const QString strShowDate                  = QStringLiteral("showDate");
 static const QString strShowMeasurements          = QStringLiteral("showMeasurements");
 static const QString strSize                      = QStringLiteral("size");
+static const QString strMCP                       = QStringLiteral("mcp");
+static const QString strLetter                    = QStringLiteral("letter");
+static const QString strMaterial                  = QStringLiteral("material");
+static const QString strUserDefined               = QStringLiteral("userDef");
+static const QString strPlacement                 = QStringLiteral("placement");
 
 //---------------------------------------------------------------------------------------------------------------------
 VPatternConverter::VPatternConverter(const QString &fileName)
@@ -801,7 +806,8 @@ void VPatternConverter::ToV0_6_0()
                       "Time to refactor the code.");
     SetVersion(QStringLiteral("0.6.0"));
     QDomElement label = AddTagPatternLabelV0_5_1();
-    PortLabeltoV0_6_0(label);
+    PortPatternLabeltoV0_6_0(label);
+    PortPieceLabelstoV0_6_0();
     RemoveUnusedTagsV0_6_0();
     Save();
 }
@@ -2117,7 +2123,7 @@ QDomElement VPatternConverter::AddTagPatternLabelV0_5_1()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VPatternConverter::PortLabeltoV0_6_0(QDomElement &label)
+void VPatternConverter::PortPatternLabeltoV0_6_0(QDomElement &label)
 {
     // TODO. Delete if minimal supported version is 0.6.0
     Q_STATIC_ASSERT_X(VPatternConverter::PatternMinVer < CONVERTER_VERSION_CHECK(0, 6, 0),
@@ -2188,6 +2194,68 @@ void VPatternConverter::AddLabelTemplateLineV0_6_0(QDomElement &label, const QSt
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void VPatternConverter::PortPieceLabelstoV0_6_0()
+{
+    // TODO. Delete if minimal supported version is 0.6.0
+    Q_STATIC_ASSERT_X(VPatternConverter::PatternMinVer < CONVERTER_VERSION_CHECK(0, 6, 0),
+                      "Time to refactor the code.");
+
+    const QDomNodeList nodeList = elementsByTagName(strData);
+    for (int i = 0; i < nodeList.size(); ++i)
+    {
+        QDomElement dataTag = nodeList.at(i).toElement();
+        try
+        {
+            if (not GetParametrString(dataTag, strLetter, "").isEmpty())
+            {
+                AddLabelTemplateLineV0_6_0(dataTag, "%pLetter%", true, false, Qt::AlignHCenter, 6);
+            }
+        }
+        catch(const VExceptionEmptyParameter &)
+        {}
+
+        AddLabelTemplateLineV0_6_0(dataTag, "%pName%", true, false, Qt::AlignHCenter, 2);
+
+        QDomNodeList nodeListMCP = dataTag.childNodes();
+        for (int iMCP = 0; iMCP < nodeListMCP.count(); ++iMCP)
+        {
+            QDomElement domMCP = nodeListMCP.at(iMCP).toElement();
+
+            QString line;
+
+            const int material = GetParametrUInt(domMCP, strMaterial, 0);
+            switch(material)
+            {
+                case 0:
+                    line.append("%mFabric%");
+                    break;
+                case 1:
+                    line.append("%mLining%");
+                    break;
+                case 2:
+                    line.append("%mInterfacing%");
+                    break;
+                case 3:
+                    line.append("%mInterlining%");
+                    break;
+                case 4:
+                default:
+                    line.append(GetParametrString(domMCP, strUserDefined, "User material"));
+                    break;
+            }
+
+            line.append(", %wCut% %pQuantity%");
+            if (GetParametrUInt(domMCP, strPlacement, 0) == 1)
+            {
+                line.append(" %wOnFold%");
+            }
+
+            AddLabelTemplateLineV0_6_0(dataTag, line, false, false, Qt::AlignHCenter, 0);
+        }
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 void VPatternConverter::RemoveUnusedTagsV0_6_0()
 {
     // TODO. Delete if minimal supported version is 0.6.0
@@ -2198,6 +2266,12 @@ void VPatternConverter::RemoveUnusedTagsV0_6_0()
     RemoveUniqueTagV0_6_0(strSize);
     RemoveUniqueTagV0_6_0(strShowDate);
     RemoveUniqueTagV0_6_0(strShowMeasurements);
+
+    const QDomNodeList nodeList = elementsByTagName(strMCP);
+    for (int i = 0; i < nodeList.size(); ++i)
+    {
+        nodeList.at(i).parentNode().removeChild(nodeList.at(i));
+    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
