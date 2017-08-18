@@ -60,64 +60,19 @@ VPieceLabelData::~VPieceLabelData()
 {}
 
 //---------------------------------------------------------------------------------------------------------------------
-void VPieceLabelData::Append(const MaterialCutPlacement& rMCP)
-{
-    d->m_conMCP.append(rMCP);
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void VPieceLabelData::Insert(int i, const MaterialCutPlacement& rMCP)
-{
-    Q_ASSERT(i >= 0);
-    Q_ASSERT(i <= GetMCPCount());
-    d->m_conMCP.insert(i, rMCP);
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void VPieceLabelData::Set(int i, const MaterialCutPlacement& rMCP)
-{
-    Q_ASSERT(i >= 0);
-    Q_ASSERT(i < GetMCPCount());
-    d->m_conMCP[i] = rMCP;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-int VPieceLabelData::GetMCPCount() const
-{
-    return d->m_conMCP.count();
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-const MaterialCutPlacement& VPieceLabelData::GetMCP(int i) const
-{
-    Q_ASSERT(i >= 0);
-    Q_ASSERT(i < GetMCPCount());
-    return d->m_conMCP.at(i);
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void VPieceLabelData::RemoveMCP(int i)
-{
-    Q_ASSERT(i >= 0);
-    Q_ASSERT(i < GetMCPCount());
-    d->m_conMCP.removeAt(i);
-}
-
-//---------------------------------------------------------------------------------------------------------------------
 void VPieceLabelData::Clear()
 {
     d->m_qsLetter.clear();
-    d->m_conMCP.clear();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-const QString& VPieceLabelData::GetLetter() const
+QString VPieceLabelData::GetLetter() const
 {
     return d->m_qsLetter;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VPieceLabelData::SetLetter(QString qsLetter)
+void VPieceLabelData::SetLetter(const QString &qsLetter)
 {
     d->m_qsLetter = qsLetter.left(3);
 }

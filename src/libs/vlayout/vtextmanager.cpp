@@ -65,6 +65,7 @@ QMap<QString, QString> PreparePlaceholders(const VAbstractPattern *doc)
 
     QMap<QString, QString> placeholders;
 
+    // Pattern tags
     QLocale locale(qApp->Settings()->GetLocale());
     placeholders.insert(pl_date, locale.toString(QDate::currentDate()));
     placeholders.insert(pl_time, locale.toString(QTime::currentTime()));
@@ -94,7 +95,31 @@ QMap<QString, QString> PreparePlaceholders(const VAbstractPattern *doc)
     placeholders.insert(pl_height, curHeight);
     placeholders.insert(pl_mExt, mExt);
 
+    // Piece tags
+    placeholders.insert(pl_pLetter, "");
+    placeholders.insert(pl_pName, "");
+    placeholders.insert(pl_pQuantity, "");
+    placeholders.insert(pl_wOnFold, "");
+    placeholders.insert(pl_mFabric, QObject::tr("Fabric"));
+    placeholders.insert(pl_mLining, QObject::tr("Lining"));
+    placeholders.insert(pl_mInterfacing, QObject::tr("Interfacing"));
+    placeholders.insert(pl_mInterlining, QObject::tr("Interlining"));
+    placeholders.insert(pl_wCut, QObject::tr("Cut"));
+
     return placeholders;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void InitPiecePlaceholders(QMap<QString, QString> &placeholders, const QString &name, const VPieceLabelData& data)
+{
+    placeholders[pl_pLetter] = data.GetLetter();
+    placeholders[pl_pName] = name;
+    placeholders[pl_pQuantity] = QString::number(data.GetQuantity());
+
+    if (data.IsOnFold())
+    {
+        placeholders[pl_wOnFold] = QObject::tr("on fold");
+    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -298,56 +323,17 @@ void VTextManager::Update(const QString& qsName, const VPieceLabelData& data)
 {
     m_liLines.clear();
 
-    TextLine tl;
-    // all text must be centered and normal style!
-    tl.m_eAlign = Qt::AlignCenter;
+    QMap<QString, QString> placeholders = PreparePlaceholders(qApp->getCurrentDocument());
+    InitPiecePlaceholders(placeholders, qsName, data);
 
-    // letter
-    tl.m_qsText = data.GetLetter();
-    if (tl.m_qsText.isEmpty() == false)
+    QVector<VLabelTemplateLine> lines = data.GetLabelTemplate();
+
+    for (int i=0; i<lines.size(); ++i)
     {
-        tl.bold = true;
-        tl.m_iFontSize = 6;
-        m_liLines << tl;
+        lines[i].line = ReplacePlaceholders(placeholders, lines.at(i).line);
     }
-    // name
-    tl.m_qsText = qsName;
-    if (tl.m_qsText.isEmpty() == false)
-    {
-        tl.bold = true;
-        tl.m_iFontSize = 2;
-        m_liLines << tl;
-    }
-    // MCP
-    QStringList qslMaterials;
-    qslMaterials << QApplication::translate("Detail", "Fabric", nullptr)
-                 << QApplication::translate("Detail", "Lining", nullptr)
-                 << QApplication::translate("Detail", "Interfacing", nullptr)
-                 << QApplication::translate("Detail", "Interlining", nullptr);
-    QString qsText = QLatin1String("%1, ") + tr("cut") + QLatin1String(" %2%3");
-    QStringList qslPlace;
-    qslPlace << "" << QLatin1String(" ") + tr("on fold");
-    tl.bold = false;
-    tl.m_iFontSize = 0;
-    for (int i = 0; i < data.GetMCPCount(); ++i)
-    {
-        MaterialCutPlacement mcp = data.GetMCP(i);
-        if (mcp.m_iCutNumber > 0)//Not gonna happen because min value is 1 now, but decided to left
-        {
-            QString qsMat;
-            if (mcp.m_eMaterial == MaterialType::mtUserDefined)
-            {
-                qsMat = mcp.m_qsMaterialUserDef;
-            }
-            else
-            {
-                qsMat = qslMaterials[int(mcp.m_eMaterial)];
-            }
-            tl.m_qsText = qsText.arg(qsMat).arg(mcp.m_iCutNumber).
-                    arg(qslPlace[int(mcp.m_ePlacement)]);
-            m_liLines << tl;
-        }
-    }
+
+    m_liLines = PrepareLines(lines);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

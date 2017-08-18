@@ -46,7 +46,6 @@ class VPieceLabelDataPrivate : public QSharedData
 public:
     VPieceLabelDataPrivate()
         : m_qsLetter(),
-          m_conMCP(),
           m_quantity(1),
           m_onFold(false),
           m_lines()
@@ -55,7 +54,6 @@ public:
     VPieceLabelDataPrivate(const VPieceLabelDataPrivate &data)
         : QSharedData(data),
           m_qsLetter(data.m_qsLetter),
-          m_conMCP(data.m_conMCP),
           m_quantity(data.m_quantity),
           m_onFold(data.m_onFold),
           m_lines(data.m_lines)
@@ -65,8 +63,6 @@ public:
 
     /** @brief m_qsLetter Detail letter (should be no more than 3 characters) */
     QString      m_qsLetter;
-    /** @brief m_conMCP List of material, cut, placement tuples */
-    MCPContainer m_conMCP;
 
     int  m_quantity;
     bool m_onFold;

@@ -203,7 +203,6 @@ public:
     static const QString TagSizes;
     static const QString TagData;
     static const QString TagPatternInfo;
-    static const QString TagMCP;
     static const QString TagPatternName;
     static const QString TagPatternNum;
     static const QString TagCompanyName;
@@ -222,10 +221,6 @@ public:
     static const QString AttrLetter;
     static const QString AttrQuantity;
     static const QString AttrOnFold;
-    static const QString AttrMaterial;
-    static const QString AttrUserDefined;
-    static const QString AttrCutNumber;
-    static const QString AttrPlacement;
     static const QString AttrArrows;
     static const QString AttrNodeReverse;
     static const QString AttrNodeExcluded;
