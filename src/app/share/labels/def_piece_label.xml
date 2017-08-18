@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<template>
+    <version>1.0.0</version>
+    <lines>
+        <line alignment="4" bold="true" italic="false" sfIncrement="6" text="%pLetter%"/>
+        <line alignment="4" bold="true" italic="false" sfIncrement="2" text="%pName%"/>
+        <line alignment="4" bold="false" italic="false" sfIncrement="0" text="%mFabric%, %wCut% %pQuantity%"/>
+    </lines>
+</template>
