@@ -584,10 +584,11 @@ void DialogEditLabel::SetTemplate(const QVector<VLabelTemplateLine> &lines)
 //---------------------------------------------------------------------------------------------------------------------
 void DialogEditLabel::SetPiece(const VPiece &piece)
 {
-    m_placeholders[pl_pLetter].second = piece.GetPatternPieceData().GetLetter();
+    const VPieceLabelData& pieceData = piece.GetPatternPieceData();
+    m_placeholders[pl_pLetter].second = pieceData.GetLetter();
     m_placeholders[pl_pName].second = piece.GetName();
-    m_placeholders[pl_pQuantity].second = QString::number(piece.GetPatternPieceData().GetQuantity());
-    if (piece.GetPatternPieceData().IsOnFold())
+    m_placeholders[pl_pQuantity].second = QString::number(pieceData.GetQuantity());
+    if (pieceData.IsOnFold())
     {
         m_placeholders[pl_wOnFold].second = tr("on fold");
     }
