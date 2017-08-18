@@ -129,6 +129,9 @@ public:
 
     static bool    SafeCopy(const QString &source, const QString &destination, QString &error);
 
+    QVector<VLabelTemplateLine> GetLabelTemplate(const QDomElement &element) const;
+    void                        SetLabelTemplate(QDomElement &element, const QVector<VLabelTemplateLine> &lines);
+
 protected:
     bool           setTagText(const QString &tag, const QString &text);
     bool           setTagText(const QDomElement &domElement, const QString &text);
@@ -136,9 +139,6 @@ protected:
 
     void           TestUniqueId() const;
     void           CollectId(const QDomElement &node, QVector<quint32> &vector)const;
-
-    QVector<VLabelTemplateLine> GetLabelTemplate(const QDomElement &element) const;
-    void                        SetLabelTemplate(QDomElement &element, const QVector<VLabelTemplateLine> &lines);
 
 private:
     Q_DISABLE_COPY(VDomDocument)

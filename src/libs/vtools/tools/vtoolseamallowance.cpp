@@ -302,7 +302,9 @@ void VToolSeamAllowance::AddPatternPieceData(VAbstractPattern *doc, QDomElement 
     QDomElement domData = doc->createElement(VAbstractPattern::TagData);
     const VPieceLabelData& data = piece.GetPatternPieceData();
     doc->SetAttribute(domData, VAbstractPattern::AttrLetter, data.GetLetter());
-    doc->SetAttribute(domData, VAbstractPattern::AttrVisible, data.IsVisible() == true? trueStr : falseStr);
+    doc->SetAttribute(domData, VAbstractPattern::AttrQuantity, data.GetQuantity());
+    doc->SetAttribute(domData, VAbstractPattern::AttrVisible, data.IsVisible());
+    doc->SetAttribute(domData, VAbstractPattern::AttrOnFold, data.IsOnFold());
     doc->SetAttribute(domData, AttrMx, data.GetPos().x());
     doc->SetAttribute(domData, AttrMy, data.GetPos().y());
     doc->SetAttribute(domData, VAbstractPattern::AttrWidth, data.GetLabelWidth());
@@ -336,6 +338,8 @@ void VToolSeamAllowance::AddPatternPieceData(VAbstractPattern *doc, QDomElement 
     {
         domData.removeAttribute(AttrBottomRightPin);
     }
+
+    doc->SetLabelTemplate(domData, data.GetLabelTemplate());
 
     for (int i = 0; i < data.GetMCPCount(); ++i)
     {

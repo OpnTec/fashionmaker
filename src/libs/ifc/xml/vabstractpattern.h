@@ -220,6 +220,8 @@ public:
     static const QString AttrTool;
     static const QString AttrType;
     static const QString AttrLetter;
+    static const QString AttrQuantity;
+    static const QString AttrOnFold;
     static const QString AttrMaterial;
     static const QString AttrUserDefined;
     static const QString AttrCutNumber;

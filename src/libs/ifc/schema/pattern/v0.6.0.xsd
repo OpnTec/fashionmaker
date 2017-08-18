@@ -503,6 +503,15 @@
                           <xs:element name="data" minOccurs="0" maxOccurs="1">
                             <xs:complexType>
                               <xs:sequence>
+                                <xs:element name="line" minOccurs="0" maxOccurs="unbounded">
+				  <xs:complexType>
+				    <xs:attribute name="text" type="xs:string" use="required"/>
+				    <xs:attribute name="bold" type="xs:boolean"/>
+				    <xs:attribute name="italic" type="xs:boolean"/>
+				    <xs:attribute name="alignment" type="alignmentType"/>
+				    <xs:attribute name="sfIncrement" type="xs:unsignedInt"/>
+				  </xs:complexType>
+			        </xs:element>
                                 <xs:element name="mcp" minOccurs="0" maxOccurs="unbounded">
                                   <xs:complexType>
                                     <xs:attribute name="cutNumber" type="xs:unsignedInt"/>
@@ -514,6 +523,7 @@
                               </xs:sequence>
                               <xs:attribute name="letter" type="xs:string"/>
                               <xs:attribute name="visible" type="xs:boolean"/>
+                              <xs:attribute name="onFold" type="xs:boolean"/>
                               <xs:attribute name="fontSize" type="xs:unsignedInt"/>
                               <xs:attribute name="mx" type="xs:double"/>
                               <xs:attribute name="my" type="xs:double"/>
@@ -522,6 +532,7 @@
                               <xs:attribute name="rotation" type="xs:string"/>
                               <xs:attribute name="centerPin" type="xs:unsignedInt"/>
                               <xs:attribute name="topLeftPin" type="xs:unsignedInt"/>
+                              <xs:attribute name="quantity" type="xs:unsignedInt"/>
                               <xs:attribute name="bottomRightPin" type="xs:unsignedInt"/>
                             </xs:complexType>
                           </xs:element>

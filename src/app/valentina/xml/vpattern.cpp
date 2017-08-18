@@ -903,6 +903,8 @@ void VPattern::ParsePieceDataTag(const QDomElement &domElement, VPiece &detail) 
         Q_UNUSED(e)
         ppData.SetLetter("");
     }
+    ppData.SetQuantity(static_cast<int>(GetParametrUInt(domElement, AttrQuantity, "1")));
+    ppData.SetOnFold(GetParametrBool(domElement, AttrOnFold, falseStr));
     ppData.SetPos(QPointF(GetParametrDouble(domElement, AttrMx, "0"), GetParametrDouble(domElement, AttrMy, "0")));
     ppData.SetLabelWidth(GetParametrString(domElement, AttrWidth, "1"));
     ppData.SetLabelHeight(GetParametrString(domElement, VToolSeamAllowance::AttrHeight, "1"));
@@ -911,6 +913,7 @@ void VPattern::ParsePieceDataTag(const QDomElement &domElement, VPiece &detail) 
     ppData.SetCenterPin(GetParametrUInt(domElement, VToolSeamAllowance::AttrCenterPin, NULL_ID_STR));
     ppData.SetTopLeftPin(GetParametrUInt(domElement, VToolSeamAllowance::AttrTopLeftPin, NULL_ID_STR));
     ppData.SetBottomRightPin(GetParametrUInt(domElement, VToolSeamAllowance::AttrBottomRightPin, NULL_ID_STR));
+    ppData.SetLabelTemplate(GetLabelTemplate(domElement));
 
     QDomNodeList nodeListMCP = domElement.childNodes();
     for (int iMCP = 0; iMCP < nodeListMCP.count(); ++iMCP)
