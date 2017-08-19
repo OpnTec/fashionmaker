@@ -63,7 +63,6 @@ const QString settingConfigurationConfirmItemDeletion    = QStringLiteral("confi
 const QString settingConfigurationConfirmFormatRewriting = QStringLiteral("configuration/confirm_format_rewriting");
 const QString settingConfigurationToolBarStyle           = QStringLiteral("configuration/tool_bar_style");
 
-const QString settingPatternUser                    = QStringLiteral("pattern/user");
 const QString settingPatternUndo                    = QStringLiteral("pattern/undo");
 const QString settingPatternForbidFlipping          = QStringLiteral("pattern/forbidFlipping");
 const QString settingPatternHideMainPath            = QStringLiteral("pattern/hideMainPath");
@@ -477,24 +476,6 @@ bool VCommonSettings::GetToolBarStyle() const
 void VCommonSettings::SetToolBarStyle(const bool &value)
 {
     setValue(settingConfigurationToolBarStyle, value);
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-QString VCommonSettings::GetUser() const
-{
-    QString user;
-#ifdef Q_OS_WIN
-    user = value(settingPatternUser, QString::fromLocal8Bit(qgetenv("USERNAME").constData())).toString();
-#else
-    user = value(settingPatternUser, QString::fromLocal8Bit(qgetenv("USER").constData())).toString();
-#endif
-    return user;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void VCommonSettings::SetUser(const QString &value)
-{
-    setValue(settingPatternUser, value);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

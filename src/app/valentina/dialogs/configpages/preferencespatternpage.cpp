@@ -58,7 +58,6 @@ PreferencesPatternPage::PreferencesPatternPage(QWidget *parent)
       ui(new Ui::PreferencesPatternPage)
 {
     ui->setupUi(this);
-    ui->userName->setText(qApp->ValentinaSettings()->GetUser());
     ui->graphOutputCheck->setChecked(qApp->ValentinaSettings()->GetGraphicalOutput());
     ui->undoCount->setValue(qApp->ValentinaSettings()->GetUndoCount());
 
@@ -81,7 +80,6 @@ PreferencesPatternPage::~PreferencesPatternPage()
 void PreferencesPatternPage::Apply()
 {
     VSettings *settings = qApp->ValentinaSettings();
-    settings->SetUser(ui->userName->text());
 
     // Scene antialiasing
     settings->SetGraphicalOutput(ui->graphOutputCheck->isChecked());

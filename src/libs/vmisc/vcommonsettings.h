@@ -100,9 +100,6 @@ public:
     bool GetToolBarStyle() const;
     void SetToolBarStyle(const bool &value);
 
-    QString GetUser() const;
-    void SetUser(const QString &value);
-
     int  GetUndoCount() const;
     void SetUndoCount(const int &value);
 
