@@ -466,8 +466,12 @@ void DialogEditLabel::InitPlaceholders()
 {
     // Pattern tags
     QLocale locale(qApp->Settings()->GetLocale());
-    m_placeholders.insert(pl_date, qMakePair(tr("Date"), locale.toString(QDate::currentDate())));
-    m_placeholders.insert(pl_time, qMakePair(tr("Time"), locale.toString(QTime::currentTime())));
+
+    const QString date = locale.toString(QDate::currentDate(), m_doc->GetLabelDateFormat());
+    m_placeholders.insert(pl_date, qMakePair(tr("Date"), date));
+
+    const QString time = locale.toString(QTime::currentTime(), m_doc->GetLabelTimeFormat());
+    m_placeholders.insert(pl_time, qMakePair(tr("Time"), time));
 
     m_placeholders.insert(pl_patternName, qMakePair(tr("Pattern name"), m_doc->GetPatternName()));
     m_placeholders.insert(pl_patternNumber, qMakePair(tr("Pattern number"), m_doc->GetPatternNumber()));
