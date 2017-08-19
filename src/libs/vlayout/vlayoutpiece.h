@@ -95,7 +95,7 @@ public:
 
     QPointF GetPatternTextPosition() const;
     QStringList GetPatternText() const;
-    void SetPatternInfo(const VAbstractPattern* pDoc, const VPatternLabelData& geom, const QFont& font,
+    void SetPatternInfo(VAbstractPattern *pDoc, const VPatternLabelData& geom, const QFont& font,
                         const VContainer *pattern);
 
     void SetGrainline(const VGrainlineData& geom, const VContainer *pattern);

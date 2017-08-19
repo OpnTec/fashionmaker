@@ -84,7 +84,7 @@ public:
     const TextLine& GetSourceLine(int i) const;
 
     void Update(const QString& qsName, const VPieceLabelData& data);
-    void Update(const VAbstractPattern* pDoc);
+    void Update(VAbstractPattern* pDoc);
 
 private:
     QFont           m_font;

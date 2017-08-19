@@ -1349,6 +1349,7 @@ void VAbstractPattern::SetLabelDateFormat(const QString &format)
 {
     QDomElement tag = CheckTagExists(TagPatternLabel);
     SetAttribute(tag, AttrDateFormat, format);
+    patternLabelWasChanged = true;
     modified = true;
     emit patternChanged(false);
 }
@@ -1373,6 +1374,7 @@ void VAbstractPattern::SetLabelTimeFormat(const QString &format)
 {
     QDomElement tag = CheckTagExists(TagPatternLabel);
     SetAttribute(tag, AttrTimeFormat, format);
+    patternLabelWasChanged = true;
     modified = true;
     emit patternChanged(false);
 }

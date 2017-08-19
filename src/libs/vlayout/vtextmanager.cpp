@@ -346,7 +346,7 @@ void VTextManager::Update(const QString& qsName, const VPieceLabelData& data)
  * @brief VTextManager::Update updates the text lines with pattern info
  * @param pDoc pointer to the abstract pattern object
  */
-void VTextManager::Update(const VAbstractPattern *pDoc)
+void VTextManager::Update(VAbstractPattern *pDoc)
 {
     m_liLines.clear();
 
@@ -365,6 +365,7 @@ void VTextManager::Update(const VAbstractPattern *pDoc)
             lines[i].line = ReplacePlaceholders(placeholders, lines.at(i).line);
         }
 
+        pDoc->SetPatternWasChanged(false);
         m_patternLabelLines = PrepareLines(lines);
     }
 

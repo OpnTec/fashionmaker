@@ -543,7 +543,7 @@ QStringList VLayoutPiece::GetPatternText() const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VLayoutPiece::SetPatternInfo(const VAbstractPattern* pDoc, const VPatternLabelData& geom, const QFont &font,
+void VLayoutPiece::SetPatternInfo(VAbstractPattern* pDoc, const VPatternLabelData& geom, const QFont &font,
                                   const VContainer *pattern)
 {
     QPointF ptPos;

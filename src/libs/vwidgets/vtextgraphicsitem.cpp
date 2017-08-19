@@ -343,7 +343,7 @@ void VTextGraphicsItem::UpdateData(const QString &qsName, const VPieceLabelData 
  * @brief VTextGraphicsItem::UpdateData Updates the pattern label
  * @param pDoc pointer to the pattern object
  */
-void VTextGraphicsItem::UpdateData(const VAbstractPattern* pDoc)
+void VTextGraphicsItem::UpdateData(VAbstractPattern* pDoc)
 {
     m_tm.Update(pDoc);
 }

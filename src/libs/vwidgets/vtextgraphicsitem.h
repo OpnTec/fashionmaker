@@ -66,7 +66,7 @@ public:
     void SetSize(qreal fW, qreal fH);
     bool IsContained(QRectF rectBB, qreal dRot, qreal& dX, qreal& dY) const;
     void UpdateData(const QString& qsName, const VPieceLabelData& data);
-    void UpdateData(const VAbstractPattern* pDoc);
+    void UpdateData(VAbstractPattern* pDoc);
     int  GetTextLines() const;
 
 protected:
