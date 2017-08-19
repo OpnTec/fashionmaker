@@ -105,6 +105,8 @@
                 </xs:complexType>
               </xs:element>
             </xs:sequence>
+            <xs:attribute name="dateFormat" type="xs:string"/>
+            <xs:attribute name="timeFormat" type="xs:string"/>
           </xs:complexType>
         </xs:element>
         <xs:element name="measurements" type="xs:string"/>

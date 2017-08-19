@@ -30,8 +30,27 @@
 #include "ui_preferencespatternpage.h"
 #include "../../core/vapplication.h"
 #include "../ifc/xml/vabstractpattern.h"
+#include "../dialogdatetimeformats.h"
 
 #include <QMessageBox>
+#include <QDate>
+#include <QTime>
+
+namespace
+{
+QStringList ComboBoxAllStrings(QComboBox *combo)
+{
+    SCASSERT(combo != nullptr)
+
+    QStringList itemsInComboBox;
+    for (int index = 0; index < combo->count(); ++index)
+    {
+        itemsInComboBox << combo->itemText(index);
+    }
+
+    return itemsInComboBox;
+}
+}
 
 //---------------------------------------------------------------------------------------------------------------------
 PreferencesPatternPage::PreferencesPatternPage(QWidget *parent)
@@ -44,6 +63,7 @@ PreferencesPatternPage::PreferencesPatternPage(QWidget *parent)
     ui->undoCount->setValue(qApp->ValentinaSettings()->GetUndoCount());
 
     InitDefaultSeamAllowance();
+    InitLabelDateTimeFormats();
 
     ui->forbidFlippingCheck->setChecked(qApp->ValentinaSettings()->GetForbidWorkpieceFlipping());
     ui->doublePassmarkCheck->setChecked(qApp->ValentinaSettings()->IsDoublePassmark());
@@ -77,13 +97,19 @@ void PreferencesPatternPage::Apply()
 
     settings->SetForbidWorkpieceFlipping(ui->forbidFlippingCheck->isChecked());
     settings->SetHideMainPath(ui->checkBoxHideMainPath->isChecked());
-    qApp->ValentinaSettings()->SetLabelFont(ui->fontComboBoxLabelFont->currentFont());
+    settings->SetLabelFont(ui->fontComboBoxLabelFont->currentFont());
 
     if (settings->IsDoublePassmark() != ui->doublePassmarkCheck->isChecked())
     {
         settings->SetDoublePassmark(ui->doublePassmarkCheck->isChecked());
         qApp->getCurrentDocument()->LiteParseTree(Document::LiteParse);
     }
+
+    settings->SetLabelDateFormat(ui->comboBoxDateFormats->currentText());
+    settings->SetLabelTimeFormat(ui->comboBoxTimeFormats->currentText());
+
+    settings->SetUserDefinedDateFormats(ComboBoxAllStrings(ui->comboBoxDateFormats));
+    settings->SetUserDefinedTimeFormats(ComboBoxAllStrings(ui->comboBoxTimeFormats));
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -91,4 +117,82 @@ void PreferencesPatternPage::InitDefaultSeamAllowance()
 {
     ui->defaultSeamAllowance->setValue(qApp->ValentinaSettings()->GetDefaultSeamAllowance());
     ui->defaultSeamAllowance->setSuffix(UnitsToStr(StrToUnits(qApp->ValentinaSettings()->GetUnit()), true));
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void PreferencesPatternPage::EditDateTimeFormats()
+{
+    VSettings *settings = qApp->ValentinaSettings();
+
+    QPushButton *button = qobject_cast<QPushButton *>(sender());
+    if (button == ui->pushButtonEditDateFormats)
+    {
+        CallDateTimeFormatEditor(QDate::currentDate(), settings->PredefinedDateFormats(),
+                           settings->GetUserDefinedDateFormats(), ui->comboBoxDateFormats);
+    }
+    else if (button == ui->pushButtonEditTimeFormats)
+    {
+        CallDateTimeFormatEditor(QTime::currentTime(), settings->PredefinedTimeFormats(),
+                           settings->GetUserDefinedTimeFormats(), ui->comboBoxTimeFormats);
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void PreferencesPatternPage::InitLabelDateTimeFormats()
+{
+    VSettings *settings = qApp->ValentinaSettings();
+
+    InitComboBoxFormats(ui->comboBoxDateFormats,
+                        VSettings::PredefinedDateFormats() + settings->GetUserDefinedDateFormats(),
+                        settings->GetLabelDateFormat());
+    InitComboBoxFormats(ui->comboBoxTimeFormats,
+                        VSettings::PredefinedTimeFormats() + settings->GetUserDefinedTimeFormats(),
+                        settings->GetLabelTimeFormat());
+
+    connect(ui->pushButtonEditDateFormats, &QPushButton::clicked, this, &PreferencesPatternPage::EditDateTimeFormats);
+    connect(ui->pushButtonEditTimeFormats, &QPushButton::clicked, this, &PreferencesPatternPage::EditDateTimeFormats);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void PreferencesPatternPage::InitComboBoxFormats(QComboBox *box, const QStringList &items, const QString &currentFormat)
+{
+    SCASSERT(box != nullptr)
+
+    box->addItems(items);
+    int index = box->findText(currentFormat);
+    if (index != -1)
+    {
+        box->setCurrentIndex(index);
+    }
+    else
+    {
+        box->setCurrentIndex(0);
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+template <typename T>
+void PreferencesPatternPage::CallDateTimeFormatEditor(const T &type, const QStringList &predefinedFormats,
+                                                      const QStringList &userDefinedFormats, QComboBox *box)
+{
+    SCASSERT(box != nullptr)
+
+    DialogDateTimeFormats dialog(type, predefinedFormats, userDefinedFormats);
+
+    if (QDialog::Accepted == dialog.exec())
+    {
+        const QString currentFormat = box->currentText();
+        box->clear();
+        box->addItems(dialog.GetFormats());
+
+        int index = box->findText(currentFormat);
+        if (index != -1)
+        {
+            box->setCurrentIndex(index);
+        }
+        else
+        {
+            box->setCurrentIndex(0);
+        }
+    }
 }

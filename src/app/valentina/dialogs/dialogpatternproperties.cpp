@@ -73,7 +73,8 @@ DialogPatternProperties::DialogPatternProperties(VPattern *doc,  VContainer *pat
 
     SCASSERT(doc != nullptr)
 
-    qApp->ValentinaSettings()->GetOsSeparator() ? setLocale(QLocale()) : setLocale(QLocale::c());
+    VSettings *settings = qApp->ValentinaSettings();
+    settings->GetOsSeparator() ? setLocale(QLocale()) : setLocale(QLocale::c());
 
     if (qApp->GetPPath().isEmpty())
     {
@@ -180,6 +181,18 @@ DialogPatternProperties::DialogPatternProperties(VPattern *doc,  VContainer *pat
     connect(ui->lineEditCompanyName, &QLineEdit::editingFinished, this, &DialogPatternProperties::LabelDataChanged);
     connect(ui->lineEditCustomerName, &QLineEdit::editingFinished, this, &DialogPatternProperties::LabelDataChanged);
     connect(ui->pushButtonEditPatternLabel, &QPushButton::clicked, this, &DialogPatternProperties::EditLabel);
+
+    InitComboBoxFormats(ui->comboBoxDateFormat,
+                        VSettings::PredefinedDateFormats() + settings->GetUserDefinedDateFormats(),
+                        doc->GetLabelDateFormat());
+    InitComboBoxFormats(ui->comboBoxTimeFormat,
+                        VSettings::PredefinedTimeFormats() + settings->GetUserDefinedTimeFormats(),
+                        doc->GetLabelTimeFormat());
+
+    connect(ui->comboBoxDateFormat, static_cast<void (QComboBox::*)(int)>(&QComboBox::currentIndexChanged),
+            this, &DialogPatternProperties::LabelDataChanged);
+    connect(ui->comboBoxTimeFormat, static_cast<void (QComboBox::*)(int)>(&QComboBox::currentIndexChanged),
+            this, &DialogPatternProperties::LabelDataChanged);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -498,6 +511,24 @@ void DialogPatternProperties::InitSizes()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void DialogPatternProperties::InitComboBoxFormats(QComboBox *box, const QStringList &items,
+                                                  const QString &currentFormat)
+{
+    SCASSERT(box != nullptr)
+
+    box->addItems(items);
+    int index = box->findText(currentFormat);
+    if (index != -1)
+    {
+        box->setCurrentIndex(index);
+    }
+    else
+    {
+        box->setCurrentIndex(0);
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 void DialogPatternProperties::CheckApplyOk()
 {
     bool enable = !(heightsChecked == 0 || sizesChecked == 0);
@@ -561,6 +592,8 @@ void DialogPatternProperties::SaveLabelData()
         doc->SetPatternNumber(ui->lineEditPatternNumber->text());
         doc->SetCompanyName(ui->lineEditCompanyName->text());
         doc->SetCustomerName(ui->lineEditCustomerName->text());
+        doc->SetLabelDateFormat(ui->comboBoxDateFormat->currentText());
+        doc->SetLabelTimeFormat(ui->comboBoxTimeFormat->currentText());
 
         labelDataChanged = false;
         askSaveLabelData = false;

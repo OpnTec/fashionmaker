@@ -36,6 +36,8 @@ namespace Ui
     class PreferencesPatternPage;
 }
 
+class QComboBox;
+
 class PreferencesPatternPage : public QWidget
 {
     Q_OBJECT
@@ -47,9 +49,19 @@ public:
     void Apply();
     void InitDefaultSeamAllowance();
 
+private slots:
+    void EditDateTimeFormats();
+
 private:
     Q_DISABLE_COPY(PreferencesPatternPage)
     Ui::PreferencesPatternPage *ui;
+
+    void InitLabelDateTimeFormats();
+    void InitComboBoxFormats(QComboBox *box, const QStringList &items, const QString &currentFormat);
+
+    template <typename T>
+    void CallDateTimeFormatEditor(const T &type, const QStringList &predefinedFormats,
+                                  const QStringList &userDefinedFormats, QComboBox *box);
 };
 
 #endif // PREFERENCESPATTERNPAGE_H

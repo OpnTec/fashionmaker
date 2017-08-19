@@ -170,6 +170,20 @@ public:
     static const QString unixStandardSharePath;
 #endif
 
+    QString GetLabelDateFormat() const;
+    void    SetLabelDateFormat(const QString &format);
+
+    static QStringList PredefinedDateFormats();
+    QStringList GetUserDefinedDateFormats() const;
+    void        SetUserDefinedDateFormats(const QStringList &formats);
+
+    QString GetLabelTimeFormat() const;
+    void    SetLabelTimeFormat(const QString &format);
+
+    static QStringList PredefinedTimeFormats();
+    QStringList GetUserDefinedTimeFormats() const;
+    void        SetUserDefinedTimeFormats(const QStringList &formats);
+
 private:
     Q_DISABLE_COPY(VCommonSettings)
 };

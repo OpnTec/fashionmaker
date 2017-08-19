@@ -1241,7 +1241,7 @@
          </property>
          <layout class="QFormLayout" name="formLayout">
           <property name="fieldGrowthPolicy">
-           <enum>QFormLayout::AllNonFixedFieldsGrow</enum>
+           <enum>QFormLayout::ExpandingFieldsGrow</enum>
           </property>
           <item row="0" column="0">
            <widget class="QLabel" name="label_6">
@@ -1298,6 +1298,26 @@
              <number>30</number>
             </property>
            </widget>
+          </item>
+          <item row="4" column="0">
+           <widget class="QLabel" name="label">
+            <property name="text">
+             <string>Date format:</string>
+            </property>
+           </widget>
+          </item>
+          <item row="4" column="1">
+           <widget class="QComboBox" name="comboBoxDateFormat"/>
+          </item>
+          <item row="5" column="0">
+           <widget class="QLabel" name="label_11">
+            <property name="text">
+             <string>Time format:</string>
+            </property>
+           </widget>
+          </item>
+          <item row="5" column="1">
+           <widget class="QComboBox" name="comboBoxTimeFormat"/>
           </item>
          </layout>
         </widget>

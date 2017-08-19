@@ -141,12 +141,21 @@ public:
 
     QString        GetPatternName() const;
     void           SetPatternName(const QString& qsName);
+
     QString        GetCompanyName() const;
     void           SetCompanyName(const QString& qsName);
+
     QString        GetPatternNumber() const;
     void           SetPatternNumber(const QString &qsNum);
+
     QString        GetCustomerName() const;
     void           SetCustomerName(const QString& qsName);
+
+    QString        GetLabelDateFormat() const;
+    void           SetLabelDateFormat(const QString &format);
+
+    QString        GetLabelTimeFormat() const;
+    void           SetLabelTimeFormat(const QString &format);
 
     void                        SetPatternLabelTemplate(const QVector<VLabelTemplateLine> &lines);
     QVector<VLabelTemplateLine> GetPatternLabelTemplate() const;
@@ -221,6 +230,8 @@ public:
     static const QString AttrLetter;
     static const QString AttrQuantity;
     static const QString AttrOnFold;
+    static const QString AttrDateFormat;
+    static const QString AttrTimeFormat;
     static const QString AttrArrows;
     static const QString AttrNodeReverse;
     static const QString AttrNodeExcluded;

@@ -98,6 +98,7 @@ private:
     void         SetOptions(const QMap<GVal, bool> &option);
     template<typename GVal>
     void         InitComboBox(QComboBox *box, const QMap<GVal, bool> &option);
+    void         InitComboBoxFormats(QComboBox *box, const QStringList &items, const QString &currentFormat);
     void         CheckApplyOk();
     void         SaveDescription();
     void         SaveGradation();

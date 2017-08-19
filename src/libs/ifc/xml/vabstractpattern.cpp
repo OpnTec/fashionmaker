@@ -51,6 +51,7 @@
 #include "vpatternconverter.h"
 #include "vdomdocument.h"
 #include "vtoolrecord.h"
+#include "../vmisc/vabstractapplication.h"
 
 class QDomElement;
 
@@ -99,6 +100,8 @@ const QString VAbstractPattern::AttrType              = QStringLiteral("type");
 const QString VAbstractPattern::AttrLetter            = QStringLiteral("letter");
 const QString VAbstractPattern::AttrQuantity          = QStringLiteral("quantity");
 const QString VAbstractPattern::AttrOnFold            = QStringLiteral("onFold");
+const QString VAbstractPattern::AttrDateFormat        = QStringLiteral("dateFormat");
+const QString VAbstractPattern::AttrTimeFormat        = QStringLiteral("timeFormat");
 const QString VAbstractPattern::AttrArrows            = QStringLiteral("arrows");
 const QString VAbstractPattern::AttrNodeReverse       = QStringLiteral("reverse");
 const QString VAbstractPattern::AttrNodeExcluded      = QStringLiteral("excluded");
@@ -1327,6 +1330,54 @@ void VAbstractPattern::SetCustomerName(const QString& qsName)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+QString VAbstractPattern::GetLabelDateFormat() const
+{
+    QString globalLabelDateFormat = qApp->Settings()->GetLabelDateFormat();
+
+    const QDomNodeList list = elementsByTagName(TagPatternLabel);
+    if (list.isEmpty())
+    {
+        return globalLabelDateFormat;
+    }
+
+    QDomElement tag = list.at(0).toElement();
+    return GetParametrString(tag, AttrDateFormat, globalLabelDateFormat);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VAbstractPattern::SetLabelDateFormat(const QString &format)
+{
+    QDomElement tag = CheckTagExists(TagPatternLabel);
+    SetAttribute(tag, AttrDateFormat, format);
+    modified = true;
+    emit patternChanged(false);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QString VAbstractPattern::GetLabelTimeFormat() const
+{
+    QString globalLabelTimeFormat = qApp->Settings()->GetLabelTimeFormat();
+
+    const QDomNodeList list = elementsByTagName(TagPatternLabel);
+    if (list.isEmpty())
+    {
+        return globalLabelTimeFormat;
+    }
+
+    QDomElement tag = list.at(0).toElement();
+    return GetParametrString(tag, AttrTimeFormat, globalLabelTimeFormat);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VAbstractPattern::SetLabelTimeFormat(const QString &format)
+{
+    QDomElement tag = CheckTagExists(TagPatternLabel);
+    SetAttribute(tag, AttrTimeFormat, format);
+    modified = true;
+    emit patternChanged(false);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 void VAbstractPattern::SetPatternLabelTemplate(const QVector<VLabelTemplateLine> &lines)
 {
     QDomElement tag = CheckTagExists(TagPatternLabel);
@@ -1334,6 +1385,8 @@ void VAbstractPattern::SetPatternLabelTemplate(const QVector<VLabelTemplateLine>
     SetLabelTemplate(tag, lines);
     patternLabelLines = lines;
     patternLabelWasChanged = true;
+    modified = true;
+    emit patternChanged(false);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
