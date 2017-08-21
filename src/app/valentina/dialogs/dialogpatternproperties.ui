@@ -1251,7 +1251,7 @@
            </widget>
           </item>
           <item row="0" column="1">
-           <widget class="QLineEdit" name="lineEditPatternName">
+           <widget class="VLineEdit" name="lineEditPatternName">
             <property name="maxLength">
              <number>30</number>
             </property>
@@ -1265,7 +1265,7 @@
            </widget>
           </item>
           <item row="1" column="1">
-           <widget class="QLineEdit" name="lineEditPatternNumber">
+           <widget class="VLineEdit" name="lineEditPatternNumber">
             <property name="maxLength">
              <number>30</number>
             </property>
@@ -1279,7 +1279,7 @@
            </widget>
           </item>
           <item row="2" column="1">
-           <widget class="QLineEdit" name="lineEditCompanyName">
+           <widget class="VLineEdit" name="lineEditCompanyName">
             <property name="maxLength">
              <number>30</number>
             </property>
@@ -1293,7 +1293,7 @@
            </widget>
           </item>
           <item row="3" column="1">
-           <widget class="QLineEdit" name="lineEditCustomerName">
+           <widget class="VLineEdit" name="lineEditCustomerName">
             <property name="maxLength">
              <number>30</number>
             </property>
@@ -1338,6 +1338,13 @@
    </item>
   </layout>
  </widget>
+ <customwidgets>
+  <customwidget>
+   <class>VLineEdit</class>
+   <extends>QLineEdit</extends>
+   <header>vlineedit.h</header>
+  </customwidget>
+ </customwidgets>
  <resources>
   <include location="../../../libs/vmisc/share/resources/icon.qrc"/>
  </resources>
