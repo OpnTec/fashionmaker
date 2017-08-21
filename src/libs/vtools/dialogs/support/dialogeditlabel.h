@@ -37,7 +37,8 @@ namespace Ui
     class DialogEditLabel;
 }
 
-class VLabelTemplateLine;
+struct VLabelTemplateLine;
+
 class QMenu;
 class VAbstractPattern;
 class VPiece;
