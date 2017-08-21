@@ -1303,6 +1303,25 @@
     </message>
 </context>
 <context>
+    <name>DialogDateTimeFormats</name>
+    <message>
+        <source>Label date time editor</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Format:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Insert a format</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&lt;empty&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>DialogDetail</name>
     <message>
         <source>Detail</source>
@@ -1575,6 +1594,243 @@
     <message>
         <source>Just rear</source>
         <translation type="vanished">Только вниз</translation>
+    </message>
+</context>
+<context>
+    <name>DialogEditLabel</name>
+    <message>
+        <source>Edit label template</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Clear current and begin new label</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Import from label template</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Export label as template</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Edit</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Bold</source>
+        <comment>Font formating</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Italic</source>
+        <comment>Font formating</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Aligns with the left edge</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Centers horizontally in the available space</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Aligns with the right edge</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Additional font size. Use to make a line bigger.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Text:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Line of text</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Insert placeholders</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Insert...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Preview</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&lt;empty&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Create new template</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Creating new template will overwrite the current, do you want to continue?</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Label template</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Export label template</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>template</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Could not save file</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Import template</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Import template will overwrite the current, do you want to continue?</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>File error.</source>
+        <translation type="unfinished">Ошибка файла.</translation>
+    </message>
+    <message>
+        <source>Date</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Time</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Pattern name</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Pattern number</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Company name or designer name</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Customer name</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Pattern extension</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Pattern file name</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Measurments file name</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Size</source>
+        <translation type="unfinished">Размер</translation>
+    </message>
+    <message>
+        <source>Height</source>
+        <translation type="unfinished">Рост</translation>
+    </message>
+    <message>
+        <source>Measurments extension</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Piece letter</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Piece annotation</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Piece orientation</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Piece rotation</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Piece tilt</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Piece fold position</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Piece name</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Quantity</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Material: Fabric</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Fabric</source>
+        <translation type="unfinished">Материал</translation>
+    </message>
+    <message>
+        <source>Material: Lining</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Lining</source>
+        <translation type="unfinished">Подкладка</translation>
+    </message>
+    <message>
+        <source>Material: Interfacing</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Interfacing</source>
+        <translation type="unfinished">Клеевая подкладка</translation>
+    </message>
+    <message>
+        <source>Material: Interlining</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Interlining</source>
+        <translation type="unfinished">Прокладка</translation>
+    </message>
+    <message>
+        <source>Word: Cut</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Cut</source>
+        <translation type="unfinished">Вырезать</translation>
+    </message>
+    <message>
+        <source>Word: on fold</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>on fold</source>
+        <translation type="unfinished">на сгибе</translation>
     </message>
 </context>
 <context>
@@ -3364,11 +3620,11 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Description</source>
-        <translation>Описание</translation>
+        <translation type="vanished">Описание</translation>
     </message>
     <message>
         <source>Author name</source>
-        <translation>Имя автора</translation>
+        <translation type="vanished">Имя автора</translation>
     </message>
     <message>
         <source>Pattern description</source>
@@ -3376,7 +3632,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>For technical notes.</source>
-        <translation>Для технических заметок.</translation>
+        <translation type="vanished">Для технических заметок.</translation>
     </message>
     <message>
         <source>Heights and Sizes</source>
@@ -3484,7 +3740,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>General info</source>
-        <translation>Основная информация</translation>
+        <translation type="vanished">Основная информация</translation>
     </message>
     <message>
         <source>Pattern name:</source>
@@ -3508,7 +3764,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Pattern size:</source>
-        <translation>Размер модели:</translation>
+        <translation type="vanished">Размер модели:</translation>
     </message>
     <message>
         <source>Show measurements</source>
@@ -3520,18 +3776,58 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Use %1 and %2 to insert pattern size and height</source>
-        <translation>Используйте %1 и %2 для вставки размера и высоты модели</translation>
+        <translation type="vanished">Используйте %1 и %2 для вставки размера и высоты модели</translation>
     </message>
     <message>
         <source>Show date of layout creation (%1)</source>
-        <translation>Показать дату создания раскладки (%1)</translation>
+        <translation type="vanished">Показать дату создания раскладки (%1)</translation>
     </message>
     <message>
         <source>Show measurements file</source>
-        <translation>Показать файл мерок</translation>
+        <translation type="vanished">Показать файл мерок</translation>
     </message>
     <message>
         <source>From multisize measurements</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Pattern</source>
+        <translation type="unfinished">Выкройка</translation>
+    </message>
+    <message>
+        <source>For technical notes</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Label data</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Label template:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Edit pattern label</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Edit template</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Date format:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Time format:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Save label data.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Label data were changed. Do you want to save them before editing label template?</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -4633,7 +4929,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Add</source>
-        <translation>Добавить</translation>
+        <translation type="vanished">Добавить</translation>
     </message>
     <message>
         <source>Grainline</source>
@@ -4645,11 +4941,11 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Cut %1 of %2%3</source>
-        <translation>Раскрой %1 из %2%3</translation>
+        <translation type="vanished">Раскрой %1 из %2%3</translation>
     </message>
     <message>
         <source>on Fold</source>
-        <translation>на сгибе</translation>
+        <translation type="vanished">на сгибе</translation>
     </message>
     <message>
         <source>Reverse</source>
@@ -4681,7 +4977,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Update</source>
-        <translation>Обновление</translation>
+        <translation type="vanished">Обновление</translation>
     </message>
     <message>
         <source>Current seam allowance</source>
@@ -4729,11 +5025,11 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>None</source>
-        <translation>Произвольное</translation>
+        <translation type="vanished">Произвольное</translation>
     </message>
     <message>
         <source>Cut on fold</source>
-        <translation>Размещать на сгибе</translation>
+        <translation type="vanished">Размещать на сгибе</translation>
     </message>
     <message>
         <source>Both</source>
@@ -7003,6 +7299,10 @@ Do you want to save your changes?</source>
         <source>Please, additionally provide: %1</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Label template editor</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>MainWindowsNoGUI</name>
@@ -7408,16 +7708,20 @@ Do you want to save your changes?</source>
         <source>My Templates</source>
         <translation>Мои шаблоны</translation>
     </message>
+    <message>
+        <source>My label templates</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>PreferencesPatternPage</name>
     <message>
         <source>User</source>
-        <translation>Пользователь</translation>
+        <translation type="vanished">Пользователь</translation>
     </message>
     <message>
         <source>User name:</source>
-        <translation>Имя пользователя:</translation>
+        <translation type="vanished">Имя пользователя:</translation>
     </message>
     <message>
         <source>Graphical output</source>
@@ -7437,11 +7741,11 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>User defined materials</source>
-        <translation>Установленные пользователем материалы</translation>
+        <translation type="vanished">Установленные пользователем материалы</translation>
     </message>
     <message>
         <source>Delete all</source>
-        <translation>Удалить все</translation>
+        <translation type="vanished">Удалить все</translation>
     </message>
     <message>
         <source>Workpiece</source>
@@ -7461,7 +7765,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>All user defined materials have been deleted!</source>
-        <translation>Все установленные пользователем материалы удалены!</translation>
+        <translation type="vanished">Все установленные пользователем материалы удалены!</translation>
     </message>
     <message>
         <source>By default forbid flipping for all new created workpieces</source>
@@ -7485,6 +7789,22 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Default value:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Label data/time format</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Date:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Edit formats</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Time:</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -7620,6 +7940,30 @@ Do you want to save your changes?</source>
     <message>
         <source>United detail</source>
         <translation>Объединённая деталь</translation>
+    </message>
+    <message>
+        <source>Fabric</source>
+        <translation type="unfinished">Материал</translation>
+    </message>
+    <message>
+        <source>Lining</source>
+        <translation type="unfinished">Подкладка</translation>
+    </message>
+    <message>
+        <source>Interfacing</source>
+        <translation type="unfinished">Клеевая подкладка</translation>
+    </message>
+    <message>
+        <source>Interlining</source>
+        <translation type="unfinished">Прокладка</translation>
+    </message>
+    <message>
+        <source>Cut</source>
+        <translation type="unfinished">Вырезать</translation>
+    </message>
+    <message>
+        <source>on fold</source>
+        <translation type="unfinished">на сгибе</translation>
     </message>
 </context>
 <context>
@@ -8594,19 +8938,19 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Material/Cut number/Placement</source>
-        <translation>Материал/количество в раскрое/размещение</translation>
+        <translation type="vanished">Материал/количество в раскрое/размещение</translation>
     </message>
     <message>
         <source>Cut number:</source>
-        <translation>Количество в раскрое:</translation>
+        <translation type="vanished">Количество в раскрое:</translation>
     </message>
     <message>
         <source>Material type:</source>
-        <translation>Тип материала:</translation>
+        <translation type="vanished">Тип материала:</translation>
     </message>
     <message>
         <source>You can choose one of the predefined materials or enter a new one</source>
-        <translation>Вы можете выбрать один из предустановленных в системе материалов или ввести новый</translation>
+        <translation type="vanished">Вы можете выбрать один из предустановленных в системе материалов или ввести новый</translation>
     </message>
     <message>
         <source>Placement:</source>
@@ -8614,15 +8958,15 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Add</source>
-        <translation>Добавить</translation>
+        <translation type="vanished">Добавить</translation>
     </message>
     <message>
         <source>Cancel</source>
-        <translation>Отмена</translation>
+        <translation type="vanished">Отмена</translation>
     </message>
     <message>
         <source>Remove</source>
-        <translation>Удалить</translation>
+        <translation type="vanished">Удалить</translation>
     </message>
     <message>
         <source>Labels</source>
@@ -8675,6 +9019,54 @@ Do you want to save your changes?</source>
     <message>
         <source>Pattern label visible</source>
         <translation>Отображение метки детали</translation>
+    </message>
+    <message>
+        <source>Label template:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Edit pattern label</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Edit template</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Label data</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Quantity:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>on fold</source>
+        <translation type="unfinished">на сгибе</translation>
+    </message>
+    <message>
+        <source>Annotation:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>A text field to add comments in</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Orientation:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Rotation:</source>
+        <translation type="unfinished">Вращение:</translation>
+    </message>
+    <message>
+        <source>Tilt:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Fold position:</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -9654,6 +10046,10 @@ Do you want to save your changes?</source>
         <source>templates</source>
         <translation>шаблоны</translation>
     </message>
+    <message>
+        <source>label templates</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>VContainer</name>
@@ -9758,6 +10154,10 @@ Do you want to save your changes?</source>
     <message>
         <source>Fail to write Canonical XML.</source>
         <translation>Не удалось записать канонический XML.</translation>
+    </message>
+    <message>
+        <source>&lt;empty&gt;</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -10159,11 +10559,11 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>cut</source>
-        <translation>вырезать</translation>
+        <translation type="vanished">вырезать</translation>
     </message>
     <message>
         <source>on fold</source>
-        <translation>на сгибе</translation>
+        <translation type="vanished">на сгибе</translation>
     </message>
 </context>
 <context>
@@ -12050,6 +12450,126 @@ Do you want to save your changes?</source>
     <message>
         <source>Angle2ElArc_</source>
         <comment>Left symbol _ in the name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>date</source>
+        <comment>placeholder</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>time</source>
+        <comment>placeholder</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>patternName</source>
+        <comment>placeholder</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>patternNumber</source>
+        <comment>placeholder</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>author</source>
+        <comment>placeholder</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>customer</source>
+        <comment>placeholder</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>pExt</source>
+        <comment>placeholder</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>pFileName</source>
+        <comment>placeholder</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>mFileName</source>
+        <comment>placeholder</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>mExt</source>
+        <comment>placeholder</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>pLetter</source>
+        <comment>placeholder</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>pAnnotation</source>
+        <comment>placeholder</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>pOrientation</source>
+        <comment>placeholder</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>pRotation</source>
+        <comment>placeholder</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>pTilt</source>
+        <comment>placeholder</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>pFoldPosition</source>
+        <comment>placeholder</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>pName</source>
+        <comment>placeholder</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>pQuantity</source>
+        <comment>placeholder</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>mFabric</source>
+        <comment>placeholder</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>mLining</source>
+        <comment>placeholder</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>mInterfacing</source>
+        <comment>placeholder</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>mInterlining</source>
+        <comment>placeholder</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>wCut</source>
+        <comment>placeholder</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>wOnFold</source>
+        <comment>placeholder</comment>
         <translation type="unfinished"></translation>
     </message>
 </context>
