@@ -98,6 +98,11 @@ const QString VAbstractPattern::AttrObject            = QStringLiteral("object")
 const QString VAbstractPattern::AttrTool              = QStringLiteral("tool");
 const QString VAbstractPattern::AttrType              = QStringLiteral("type");
 const QString VAbstractPattern::AttrLetter            = QStringLiteral("letter");
+const QString VAbstractPattern::AttrAnnotation        = QStringLiteral("annotation");
+const QString VAbstractPattern::AttrOrientation       = QStringLiteral("orientation");
+const QString VAbstractPattern::AttrRotation          = QStringLiteral("rotation");
+const QString VAbstractPattern::AttrTilt              = QStringLiteral("tilt");
+const QString VAbstractPattern::AttrFoldPosition      = QStringLiteral("foldPosition");
 const QString VAbstractPattern::AttrQuantity          = QStringLiteral("quantity");
 const QString VAbstractPattern::AttrOnFold            = QStringLiteral("onFold");
 const QString VAbstractPattern::AttrDateFormat        = QStringLiteral("dateFormat");
@@ -116,7 +121,6 @@ const QString VAbstractPattern::AttrPath              = QStringLiteral("path");
 const QString VAbstractPattern::AttrEnd               = QStringLiteral("end");
 const QString VAbstractPattern::AttrIncludeAs         = QStringLiteral("includeAs");
 const QString VAbstractPattern::AttrWidth             = QStringLiteral("width");
-const QString VAbstractPattern::AttrRotation          = QStringLiteral("rotation");
 
 const QString VAbstractPattern::AttrAll             = QStringLiteral("all");
 

@@ -108,6 +108,7 @@ public:
 
     static QString GetParametrString(const QDomElement& domElement, const QString &name,
                                      const QString &defValue = QString());
+    static QString GetParametrEmptyString(const QDomElement& domElement, const QString &name);
     static qreal   GetParametrDouble(const QDomElement& domElement, const QString &name, const QString &defValue);
     static quint32 GetParametrId(const QDomElement& domElement);
 

@@ -244,14 +244,19 @@ void DialogSeamAllowance::SetPiece(const VPiece &piece)
     m_mx = piece.GetMx();
     m_my = piece.GetMy();
 
-    uiTabLabels->lineEditLetter->setText(piece.GetPatternPieceData().GetLetter());
-    uiTabLabels->spinBoxQuantity->setValue(piece.GetPatternPieceData().GetQuantity());
-    uiTabLabels->checkBoxFold->setChecked(piece.GetPatternPieceData().IsOnFold());
-    m_templateLines = piece.GetPatternPieceData().GetLabelTemplate();
+    m_oldData = piece.GetPatternPieceData();
+    uiTabLabels->lineEditLetter->setText(m_oldData.GetLetter());
+    uiTabLabels->lineEditAnnotation->setText(m_oldData.GetAnnotation());
+    uiTabLabels->lineEditOrientation->setText(m_oldData.GetOrientation());
+    uiTabLabels->lineEditRotation->setText(m_oldData.GetRotation());
+    uiTabLabels->lineEditTilt->setText(m_oldData.GetTilt());
+    uiTabLabels->lineEditFoldPosition->setText(m_oldData.GetFoldPosition());
+    uiTabLabels->spinBoxQuantity->setValue(m_oldData.GetQuantity());
+    uiTabLabels->checkBoxFold->setChecked(m_oldData.IsOnFold());
+    m_templateLines = m_oldData.GetLabelTemplate();
 
     uiTabGrainline->comboBoxArrow->setCurrentIndex(int(piece.GetGrainlineGeometry().GetArrowType()));
 
-    m_oldData = piece.GetPatternPieceData();
     uiTabLabels->groupBoxDetailLabel->setChecked(m_oldData.IsVisible());
     ChangeCurrentData(uiTabLabels->comboBoxDLCenterPin, m_oldData.CenterPin());
     ChangeCurrentData(uiTabLabels->comboBoxDLTopLeftPin, m_oldData.TopLeftPin());
@@ -1971,6 +1976,11 @@ VPiece DialogSeamAllowance::CreatePiece() const
     piece.SetMy(m_my);
     piece.SetFormulaSAWidth(GetFormulaFromUser(uiTabPaths->plainTextEditFormulaWidth), m_saWidth);
     piece.GetPatternPieceData().SetLetter(uiTabLabels->lineEditLetter->text());
+    piece.GetPatternPieceData().SetAnnotation(uiTabLabels->lineEditAnnotation->text());
+    piece.GetPatternPieceData().SetOrientation(uiTabLabels->lineEditOrientation->text());
+    piece.GetPatternPieceData().SetRotation(uiTabLabels->lineEditRotation->text());
+    piece.GetPatternPieceData().SetTilt(uiTabLabels->lineEditTilt->text());
+    piece.GetPatternPieceData().SetFoldPosition(uiTabLabels->lineEditFoldPosition->text());
     piece.GetPatternPieceData().SetQuantity(uiTabLabels->spinBoxQuantity->value());
     piece.GetPatternPieceData().SetOnFold(uiTabLabels->checkBoxFold->isChecked());
     piece.GetPatternPieceData().SetLabelTemplate(m_templateLines);
@@ -2498,6 +2508,11 @@ void DialogSeamAllowance::InitPatternPieceDataTab()
 {
     uiTabLabels->lineEditName->setClearButtonEnabled(true);
     uiTabLabels->lineEditLetter->setClearButtonEnabled(true);
+    uiTabLabels->lineEditAnnotation->setClearButtonEnabled(true);
+    uiTabLabels->lineEditOrientation->setClearButtonEnabled(true);
+    uiTabLabels->lineEditRotation->setClearButtonEnabled(true);
+    uiTabLabels->lineEditTilt->setClearButtonEnabled(true);
+    uiTabLabels->lineEditFoldPosition->setClearButtonEnabled(true);
 
     connect(uiTabLabels->lineEditName, &QLineEdit::textChanged, this, &DialogSeamAllowance::NameDetailChanged);
     connect(uiTabLabels->pushButtonEditPieceLabel, &QPushButton::clicked, this, &DialogSeamAllowance::EditLabel);

@@ -228,6 +228,11 @@ public:
     static const QString AttrTool;
     static const QString AttrType;
     static const QString AttrLetter;
+    static const QString AttrAnnotation;
+    static const QString AttrOrientation;
+    static const QString AttrRotation;
+    static const QString AttrTilt;
+    static const QString AttrFoldPosition;
     static const QString AttrQuantity;
     static const QString AttrOnFold;
     static const QString AttrDateFormat;
@@ -246,7 +251,6 @@ public:
     static const QString AttrEnd;
     static const QString AttrIncludeAs;
     static const QString AttrWidth;
-    static const QString AttrRotation;
 
     static const QString AttrAll;
 

@@ -122,6 +122,11 @@ const QString pl_pFileName     = QStringLiteral("pFileName");
 const QString pl_mFileName     = QStringLiteral("mFileName");
 const QString pl_mExt          = QStringLiteral("mExt");
 const QString pl_pLetter       = QStringLiteral("pLetter");
+const QString pl_pAnnotation   = QStringLiteral("pAnnotation");
+const QString pl_pOrientation  = QStringLiteral("pOrientation");
+const QString pl_pRotation     = QStringLiteral("pRotation");
+const QString pl_pTilt         = QStringLiteral("pTilt");
+const QString pl_pFoldPosition = QStringLiteral("pFoldPosition");
 const QString pl_pName         = QStringLiteral("pName");
 const QString pl_pQuantity     = QStringLiteral("pQuantity");
 const QString pl_mFabric       = QStringLiteral("mFabric");
@@ -144,6 +149,11 @@ const QStringList labelTemplatePlaceholders = QStringList() << pl_size
                                                             << pl_mFileName
                                                             << pl_mExt
                                                             << pl_pLetter
+                                                            << pl_pAnnotation
+                                                            << pl_pOrientation
+                                                            << pl_pRotation
+                                                            << pl_pTilt
+                                                            << pl_pFoldPosition
                                                             << pl_pName
                                                             << pl_pQuantity
                                                             << pl_mFabric

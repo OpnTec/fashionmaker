@@ -470,6 +470,11 @@ void VTranslateVars::InitPlaceholder()
     placeholders.insert(pl_mFileName,     translate("VTranslateVars", "mFileName",     "placeholder"));
     placeholders.insert(pl_mExt,          translate("VTranslateVars", "mExt",          "placeholder"));
     placeholders.insert(pl_pLetter,       translate("VTranslateVars", "pLetter",       "placeholder"));
+    placeholders.insert(pl_pAnnotation,   translate("VTranslateVars", "pAnnotation",   "placeholder"));
+    placeholders.insert(pl_pOrientation,  translate("VTranslateVars", "pOrientation",  "placeholder"));
+    placeholders.insert(pl_pRotation,     translate("VTranslateVars", "pRotation",     "placeholder"));
+    placeholders.insert(pl_pTilt,         translate("VTranslateVars", "pTilt",         "placeholder"));
+    placeholders.insert(pl_pFoldPosition, translate("VTranslateVars", "pFoldPosition", "placeholder"));
     placeholders.insert(pl_pName,         translate("VTranslateVars", "pName",         "placeholder"));
     placeholders.insert(pl_pQuantity,     translate("VTranslateVars", "pQuantity",     "placeholder"));
     placeholders.insert(pl_mFabric,       translate("VTranslateVars", "mFabric",       "placeholder"));

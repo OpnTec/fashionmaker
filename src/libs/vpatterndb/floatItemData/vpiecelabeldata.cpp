@@ -78,6 +78,66 @@ void VPieceLabelData::SetLetter(const QString &qsLetter)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+QString VPieceLabelData::GetAnnotation() const
+{
+    return d->m_annotation;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VPieceLabelData::SetAnnotation(const QString &val)
+{
+    d->m_annotation = val;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QString VPieceLabelData::GetOrientation() const
+{
+    return d->m_orientation;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VPieceLabelData::SetOrientation(const QString &val)
+{
+    d->m_orientation = val;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QString VPieceLabelData::GetRotation() const
+{
+    return d->m_rotation;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VPieceLabelData::SetRotation(const QString &val)
+{
+    d->m_rotation = val;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QString VPieceLabelData::GetTilt() const
+{
+    return d->m_tilt;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VPieceLabelData::SetTilt(const QString &val)
+{
+    d->m_tilt = val;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QString VPieceLabelData::GetFoldPosition() const
+{
+    return d->m_foldPosition;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VPieceLabelData::SetFoldPosition(const QString &val)
+{
+    d->m_foldPosition = val;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 int VPieceLabelData::GetQuantity() const
 {
     return d->m_quantity;

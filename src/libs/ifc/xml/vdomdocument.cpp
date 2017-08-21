@@ -454,6 +454,21 @@ QString VDomDocument::GetParametrString(const QDomElement &domElement, const QSt
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+QString VDomDocument::GetParametrEmptyString(const QDomElement &domElement, const QString &name)
+{
+    QString result;
+    try
+    {
+        result = GetParametrString(domElement, name, "");
+    }
+    catch(const VExceptionEmptyParameter &)
+    {
+        // do nothing
+    }
+    return result;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 /**
  * @brief Returns the double value of the given attribute.
  * @param domElement tag in xml tree

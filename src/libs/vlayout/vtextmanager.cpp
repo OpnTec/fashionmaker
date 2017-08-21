@@ -102,6 +102,11 @@ QMap<QString, QString> PreparePlaceholders(const VAbstractPattern *doc)
 
     // Piece tags
     placeholders.insert(pl_pLetter, "");
+    placeholders.insert(pl_pAnnotation, "");
+    placeholders.insert(pl_pOrientation, "");
+    placeholders.insert(pl_pRotation, "");
+    placeholders.insert(pl_pTilt, "");
+    placeholders.insert(pl_pFoldPosition, "");
     placeholders.insert(pl_pName, "");
     placeholders.insert(pl_pQuantity, "");
     placeholders.insert(pl_wOnFold, "");
@@ -118,6 +123,11 @@ QMap<QString, QString> PreparePlaceholders(const VAbstractPattern *doc)
 void InitPiecePlaceholders(QMap<QString, QString> &placeholders, const QString &name, const VPieceLabelData& data)
 {
     placeholders[pl_pLetter] = data.GetLetter();
+    placeholders[pl_pAnnotation] = data.GetAnnotation();
+    placeholders[pl_pOrientation] = data.GetOrientation();
+    placeholders[pl_pRotation] = data.GetRotation();
+    placeholders[pl_pTilt] = data.GetTilt();
+    placeholders[pl_pFoldPosition] = data.GetFoldPosition();
     placeholders[pl_pName] = name;
     placeholders[pl_pQuantity] = QString::number(data.GetQuantity());
 

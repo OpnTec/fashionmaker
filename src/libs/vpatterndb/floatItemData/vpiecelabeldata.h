@@ -63,6 +63,21 @@ public:
     QString GetLetter() const;
     void    SetLetter(const QString &qsLetter);
 
+    QString GetAnnotation() const;
+    void    SetAnnotation(const QString &val);
+
+    QString GetOrientation() const;
+    void    SetOrientation(const QString &val);
+
+    QString GetRotation() const;
+    void    SetRotation(const QString &val);
+
+    QString GetTilt() const;
+    void    SetTilt(const QString &val);
+
+    QString GetFoldPosition() const;
+    void    SetFoldPosition(const QString &val);
+
     int  GetQuantity() const;
     void SetQuantity(int val);
 

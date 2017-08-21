@@ -157,6 +157,76 @@
                 </property>
                </widget>
               </item>
+              <item row="5" column="0">
+               <widget class="QLabel" name="label_2">
+                <property name="text">
+                 <string>Annotation:</string>
+                </property>
+               </widget>
+              </item>
+              <item row="5" column="1">
+               <widget class="QLineEdit" name="lineEditAnnotation">
+                <property name="placeholderText">
+                 <string>A text field to add comments in</string>
+                </property>
+               </widget>
+              </item>
+              <item row="6" column="0">
+               <widget class="QLabel" name="label_3">
+                <property name="text">
+                 <string>Orientation:</string>
+                </property>
+               </widget>
+              </item>
+              <item row="6" column="1">
+               <widget class="QLineEdit" name="lineEditOrientation">
+                <property name="placeholderText">
+                 <string notr="true">&quot;Left&quot;/&quot;Right&quot;/&quot;Undefined&quot;</string>
+                </property>
+               </widget>
+              </item>
+              <item row="7" column="0">
+               <widget class="QLabel" name="label_4">
+                <property name="text">
+                 <string>Rotation:</string>
+                </property>
+               </widget>
+              </item>
+              <item row="7" column="1">
+               <widget class="QLineEdit" name="lineEditRotation">
+                <property name="placeholderText">
+                 <string notr="true">&quot;1-Way&quot;/&quot;2-Way&quot;/&quot;4-Way&quot;/&quot;Any&quot;</string>
+                </property>
+               </widget>
+              </item>
+              <item row="8" column="0">
+               <widget class="QLabel" name="label_6">
+                <property name="text">
+                 <string>Tilt:</string>
+                </property>
+               </widget>
+              </item>
+              <item row="8" column="1">
+               <widget class="QLineEdit" name="lineEditTilt">
+                <property name="placeholderText">
+                 <string notr="true">&quot;CW X&quot;/&quot;CCW X&quot;</string>
+                </property>
+               </widget>
+              </item>
+              <item row="4" column="0">
+               <widget class="QLabel" name="label_7">
+                <property name="text">
+                 <string>Fold position:</string>
+                </property>
+               </widget>
+              </item>
+              <item row="4" column="1">
+               <widget class="QLineEdit" name="lineEditFoldPosition">
+                <property name="placeholderText">
+                 <string notr="true">&quot;Up/Down&quot;/&quot;Left/Right&quot;</string>
+                </property>
+               </widget>
+              </item>
              </layout>
             </widget>
            </item>
