@@ -2268,10 +2268,15 @@ void VPatternConverter::RemoveUnusedTagsV0_6_0()
     RemoveUniqueTagV0_6_0(strShowDate);
     RemoveUniqueTagV0_6_0(strShowMeasurements);
 
-    const QDomNodeList nodeList = elementsByTagName(strMCP);
+    QDomNodeList nodeList = elementsByTagName(strData);
     for (int i = 0; i < nodeList.size(); ++i)
     {
-        nodeList.at(i).parentNode().removeChild(nodeList.at(i));
+        QDomElement child = nodeList.at(i).firstChildElement(strMCP);
+        while (not child.isNull())
+        {
+            nodeList.at(i).removeChild(child);
+            child = nodeList.at(i).firstChildElement(strMCP);
+        }
     }
 }
 
