@@ -943,8 +943,8 @@ QVector<VLabelTemplateLine> VDomDocument::GetLabelTemplate(const QDomElement &el
                 line.line = GetParametrString(tagLine, AttrText, tr("<empty>"));
                 line.bold = GetParametrBool(tagLine, AttrBold, falseStr);
                 line.italic = GetParametrBool(tagLine, AttrItalic, falseStr);
-                line.alignment = GetParametrUInt(tagLine, AttrAlignment, "0");
-                line.fontSizeIncrement = GetParametrUInt(tagLine, AttrFSIncrement, "0");
+                line.alignment = static_cast<int>(GetParametrUInt(tagLine, AttrAlignment, "0"));
+                line.fontSizeIncrement = static_cast<int>(GetParametrUInt(tagLine, AttrFSIncrement, "0"));
                 lines.append(line);
             }
             tagLine = tagLine.nextSiblingElement(TagLine);
