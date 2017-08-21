@@ -71,7 +71,6 @@ const QString VAbstractPattern::TagGroups           = QStringLiteral("groups");
 const QString VAbstractPattern::TagGroup            = QStringLiteral("group");
 const QString VAbstractPattern::TagGroupItem        = QStringLiteral("item");
 const QString VAbstractPattern::TagPoint            = QStringLiteral("point");
-const QString VAbstractPattern::TagLine             = QStringLiteral("line");
 const QString VAbstractPattern::TagSpline           = QStringLiteral("spline");
 const QString VAbstractPattern::TagArc              = QStringLiteral("arc");
 const QString VAbstractPattern::TagElArc            = QStringLiteral("elArc");

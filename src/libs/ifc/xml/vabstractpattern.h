@@ -201,7 +201,6 @@ public:
     static const QString TagGroup;
     static const QString TagGroupItem;
     static const QString TagPoint;
-    static const QString TagLine;
     static const QString TagSpline;
     static const QString TagArc;
     static const QString TagElArc;

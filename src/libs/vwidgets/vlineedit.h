@@ -35,7 +35,7 @@ class VLineEdit : public QLineEdit
 {
     Q_OBJECT
 public:
-    VLineEdit(QWidget * parent = nullptr);
+    explicit VLineEdit(QWidget * parent = nullptr);
     VLineEdit(const QString &contents, QWidget *parent = nullptr);
 
 protected:
