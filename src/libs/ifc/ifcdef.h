@@ -34,6 +34,7 @@
 #include <QtGlobal>
 
 #include "../vmisc/def.h"
+#include "../vmisc/diagnostic.h"
 
 extern const QString CustomMSign;
 extern const QString CustomIncrSign;
