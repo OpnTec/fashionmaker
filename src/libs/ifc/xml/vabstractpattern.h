@@ -121,7 +121,7 @@ public:
     QVector<VToolRecord> getLocalHistory() const;
 
     QString        MPath() const;
-    void           SetPath(const QString &path);
+    void           SetMPath(const QString &path);
 
     quint32        SiblingNodeId(const quint32 &nodeId) const;
 
@@ -141,18 +141,27 @@ public:
 
     QString        GetPatternName() const;
     void           SetPatternName(const QString& qsName);
+
     QString        GetCompanyName() const;
     void           SetCompanyName(const QString& qsName);
+
     QString        GetPatternNumber() const;
     void           SetPatternNumber(const QString &qsNum);
+
     QString        GetCustomerName() const;
     void           SetCustomerName(const QString& qsName);
-    QString        GetPatternSize() const;
-    void           SetPatternSize(const QString &qsSize);
-    bool           IsDateVisible() const;
-    void           SetDateVisible(bool bVisible);
-    bool           IsMeasurementsVisible() const;
-    void           SetMesurementsVisible(bool bVisible);
+
+    QString        GetLabelDateFormat() const;
+    void           SetLabelDateFormat(const QString &format);
+
+    QString        GetLabelTimeFormat() const;
+    void           SetLabelTimeFormat(const QString &format);
+
+    void                        SetPatternLabelTemplate(const QVector<VLabelTemplateLine> &lines);
+    QVector<VLabelTemplateLine> GetPatternLabelTemplate() const;
+
+    void SetPatternWasChanged(bool changed);
+    bool GetPatternWasChanged() const;
 
     QString        GetImage() const;
     QString        GetImageExtension() const;
@@ -181,7 +190,6 @@ public:
     static const QString TagModeling;
     static const QString TagDetails;
     static const QString TagDetail;
-    static const QString TagAuthor;
     static const QString TagDescription;
     static const QString TagImage;
     static const QString TagNotes;
@@ -204,14 +212,11 @@ public:
     static const QString TagSizes;
     static const QString TagData;
     static const QString TagPatternInfo;
-    static const QString TagMCP;
     static const QString TagPatternName;
     static const QString TagPatternNum;
     static const QString TagCompanyName;
     static const QString TagCustomerName;
-    static const QString TagSize;
-    static const QString TagShowDate;
-    static const QString TagShowMeasurements;
+    static const QString TagPatternLabel;
     static const QString TagGrainline;
     static const QString TagPath;
     static const QString TagNodes;
@@ -223,10 +228,15 @@ public:
     static const QString AttrTool;
     static const QString AttrType;
     static const QString AttrLetter;
-    static const QString AttrMaterial;
-    static const QString AttrUserDefined;
-    static const QString AttrCutNumber;
-    static const QString AttrPlacement;
+    static const QString AttrAnnotation;
+    static const QString AttrOrientation;
+    static const QString AttrRotation;
+    static const QString AttrTilt;
+    static const QString AttrFoldPosition;
+    static const QString AttrQuantity;
+    static const QString AttrOnFold;
+    static const QString AttrDateFormat;
+    static const QString AttrTimeFormat;
     static const QString AttrArrows;
     static const QString AttrNodeReverse;
     static const QString AttrNodeExcluded;
@@ -241,7 +251,6 @@ public:
     static const QString AttrEnd;
     static const QString AttrIncludeAs;
     static const QString AttrWidth;
-    static const QString AttrRotation;
 
     static const QString AttrAll;
 
@@ -341,6 +350,7 @@ signals:
      * @brief patternChanged emit if we have unsaved change.
      */
     void           patternChanged(bool saved);
+    void           UpdatePatternLabel();
     /**
      * @brief ShowTool highlight tool.
      * @param id tool id.
@@ -383,6 +393,9 @@ protected:
 
     /** @brief tools list with pointer on tools. */
     static QHash<quint32, VDataTool*> tools;
+    /** @brief patternLabelLines list to speed up reading a template by many pieces. */
+    static QVector<VLabelTemplateLine> patternLabelLines;
+    static bool patternLabelWasChanged;
 
     static void       ToolExists(const quint32 &id);
     static VPiecePath ParsePathNodes(const QDomElement &domElement);

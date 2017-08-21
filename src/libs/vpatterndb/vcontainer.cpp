@@ -611,18 +611,6 @@ const VTranslateVars *VContainer::GetTrVars() const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-/**
- * @brief VariableExist check if exist variable this same name.
- * @param name name of row
- * @return true if contains
- */
-// cppcheck-suppress unusedFunction
-bool VContainer::VariableExist(const QString &name)
-{
-    return d->variables.contains(name);
-}
-
-//---------------------------------------------------------------------------------------------------------------------
 template <typename T>
 const QMap<QString, QSharedPointer<T> > VContainer::DataVar(const VarType &type) const
 {

@@ -213,4 +213,18 @@ extern const QString currentSeamAllowance;
 
 extern const QStringList builInVariables;
 
+QT_WARNING_PUSH
+QT_WARNING_DISABLE_GCC("-Weffc++")
+
+struct VLabelTemplateLine
+{
+    QString line;
+    bool    bold;
+    bool    italic;
+    int     alignment;
+    int     fontSizeIncrement;
+};
+
+QT_WARNING_POP
+
 #endif // IFCDEF_H

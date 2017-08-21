@@ -400,8 +400,7 @@ VLayoutPiece VLayoutPiece::Create(const VPiece &piece, const VContainer *pattern
     if (geom.IsVisible() == true)
     {
         VAbstractPattern* pDoc = qApp->getCurrentDocument();
-        det.SetPatternInfo(pDoc, geom, qApp->Settings()->GetLabelFont(), VContainer::size(), VContainer::height(),
-                           pattern);
+        det.SetPatternInfo(pDoc, geom, qApp->Settings()->GetLabelFont(), pattern);
     }
 
     const VGrainlineData& grainlineGeom = piece.GetGrainlineGeometry();
@@ -544,8 +543,8 @@ QStringList VLayoutPiece::GetPatternText() const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VLayoutPiece::SetPatternInfo(const VAbstractPattern* pDoc, const VPatternLabelData& geom, const QFont &font,
-                                   qreal dSize, qreal dHeight, const VContainer *pattern)
+void VLayoutPiece::SetPatternInfo(VAbstractPattern* pDoc, const VPatternLabelData& geom, const QFont &font,
+                                  const VContainer *pattern)
 {
     QPointF ptPos;
     qreal labelWidth = 0;
@@ -578,7 +577,7 @@ void VLayoutPiece::SetPatternInfo(const VAbstractPattern* pDoc, const VPatternLa
     d->m_tmPattern.SetFont(font);
     d->m_tmPattern.SetFontSize(geom.GetFontSize());
 
-    d->m_tmPattern.Update(pDoc, dSize, dHeight);
+    d->m_tmPattern.Update(pDoc);
 
     // generate lines of text
     d->m_tmPattern.SetFontSize(geom.GetFontSize());
@@ -1026,8 +1025,8 @@ void VLayoutPiece::CreateLabelStrings(QGraphicsItem *parent, const QVector<QPoin
             const TextLine& tl = tm.GetSourceLine(i);
             QFont fnt = tm.GetFont();
             fnt.setPixelSize(tm.GetFont().pixelSize() + tl.m_iFontSize);
-            fnt.setWeight(tl.m_eFontWeight);
-            fnt.setStyle(tl.m_eStyle);
+            fnt.setBold(tl.bold);
+            fnt.setItalic(tl.italic);
 
             QFontMetrics fm(fnt);
 

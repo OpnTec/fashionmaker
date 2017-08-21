@@ -96,7 +96,11 @@ const QString highhipCirc_M        = QStringLiteral("highhip_circ");           /
 const QString hipCirc_M            = QStringLiteral("hip_circ");               // G09
 const QString neckArcF_M           = QStringLiteral("neck_arc_f");             // G10
 const QString highbustArcF_M       = QStringLiteral("highbust_arc_f");         // G11
+
+// size and bust_arc_f are synonyms
+const QString size_M               = QStringLiteral("size");                   // G12
 const QString bustArcF_M           = QStringLiteral("bust_arc_f");             // G12
+
 const QString lowbustArcF_M        = QStringLiteral("lowbust_arc_f");          // G13
 const QString ribArcF_M            = QStringLiteral("rib_arc_f");              // G14
 const QString waistArcF_M          = QStringLiteral("waist_arc_f");            // G15
@@ -400,6 +404,7 @@ QStringList ListGroupG()
                                            << neckArcF_M            // G10
                                            << highbustArcF_M        // G11
                                            << bustArcF_M            // G12
+                                           << size_M                // G12
                                            << lowbustArcF_M         // G13
                                            << ribArcF_M             // G14
                                            << waistArcF_M           // G15
@@ -794,47 +799,48 @@ QString MapDiagrams(const VTranslateMeasurements *trM, const QString &number)
         case 9: // G10
         case 10: // G11
         case 11: // G12
-        case 12: // G13
-        case 13: // G14
-        case 14: // G15
-        case 15: // G16
-        case 16: // G17
+        case 12: // G12
+        case 13: // G13
+        case 14: // G14
+        case 15: // G15
+        case 16: // G16
+        case 17: // G17
             return QStringLiteral("Gp2");
-        case 17: // G18
-        case 18: // G19
-        case 19: // G20
-        case 20: // G21
-        case 21: // G22
-        case 22: // G23
-        case 23: // G24
-        case 24: // G25
+        case 18: // G18
+        case 19: // G19
+        case 20: // G20
+        case 21: // G21
+        case 22: // G22
+        case 23: // G23
+        case 24: // G24
+        case 25: // G25
             return QStringLiteral("Gp3");
-        case 25: // G26
-        case 26: // G27
-        case 27: // G28
-        case 28: // G29
-        case 29: // G30
-        case 30: // G31
-        case 31: // G32
-        case 32: // G33
+        case 26: // G26
+        case 27: // G27
+        case 28: // G28
+        case 29: // G29
+        case 30: // G30
+        case 31: // G31
+        case 32: // G32
+        case 33: // G33
             return QStringLiteral("Gp4");
-        case 33: // G34
-        case 34: // G35
-        case 35: // G36
-        case 36: // G37
-        case 37: // G38
-        case 38: // G39
-        case 39: // G40
-        case 40: // G41
+        case 34: // G34
+        case 35: // G35
+        case 36: // G36
+        case 37: // G37
+        case 38: // G38
+        case 39: // G39
+        case 40: // G40
+        case 41: // G41
             return QStringLiteral("Gp5");
-        case 41: // G42
+        case 42: // G42
             return QStringLiteral("Gp6");
-        case 42: // G43
-        case 43: // G44
+        case 43: // G43
+        case 44: // G44
             return QStringLiteral("Gp7");
-        case 44: // G45
+        case 45: // G45
             return QStringLiteral("Gp8");
-        case 45: // G46
+        case 46: // G46
             return QStringLiteral("Gp9");
         default:
             break;

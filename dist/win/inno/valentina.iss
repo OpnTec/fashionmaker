@@ -213,6 +213,7 @@ Source: ".\valentina\iconengines\*"; DestDir: "{app}\iconengines"; Flags: recurs
 Source: ".\valentina\platforms\*"; DestDir: "{app}\platforms"; Flags: recursesubdirs createallsubdirs
 Source: ".\valentina\printsupport\*"; DestDir: "{app}\printsupport"; Flags: recursesubdirs createallsubdirs
 Source: ".\valentina\tables\*"; DestDir: "{app}\tables"; Flags: ignoreversion recursesubdirs createallsubdirs
+Source: ".\valentina\labels\*"; DestDir: "{app}\labels"; Flags: ignoreversion recursesubdirs createallsubdirs
 Source: ".\valentina\*.exe"; DestDir: "{app}"; Flags: ignoreversion
 Source: ".\valentina\*.dll"; DestDir: "{app}"
 Source: ".\valentina\*.txt"; DestDir: "{app}"; Flags: ignoreversion 

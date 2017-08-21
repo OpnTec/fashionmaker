@@ -35,6 +35,7 @@
 #include "floatitemdef.h"
 
 class VPieceLabelDataPrivate;
+class VLabelTemplateLine;
 
 /**
  * @brief The VPieceLabelData class holds some information about a single
@@ -56,18 +57,35 @@ public:
     void Swap(VPieceLabelData &data) Q_DECL_NOTHROW
     { VPatternLabelData::Swap(data); std::swap(d, data.d); }
 
-    // methods, which operate on MaterialCutPlacement container
-    void                        Append(const MaterialCutPlacement& rMCP);
-    void                        Insert(int i, const MaterialCutPlacement& rMCP);
-    void                        Set(int i, const MaterialCutPlacement& rMCP);
-    int                         GetMCPCount() const;
-    const MaterialCutPlacement& GetMCP(int i) const;
-    void                        RemoveMCP(int i);
-    void                        Clear();
+    void Clear();
 
     // methods, which operate on other members
-    const QString&              GetLetter() const;
-    void                        SetLetter(QString qsLetter);
+    QString GetLetter() const;
+    void    SetLetter(const QString &qsLetter);
+
+    QString GetAnnotation() const;
+    void    SetAnnotation(const QString &val);
+
+    QString GetOrientation() const;
+    void    SetOrientation(const QString &val);
+
+    QString GetRotation() const;
+    void    SetRotation(const QString &val);
+
+    QString GetTilt() const;
+    void    SetTilt(const QString &val);
+
+    QString GetFoldPosition() const;
+    void    SetFoldPosition(const QString &val);
+
+    int  GetQuantity() const;
+    void SetQuantity(int val);
+
+    bool IsOnFold() const;
+    void SetOnFold(bool onFold);
+
+    QVector<VLabelTemplateLine> GetLabelTemplate() const;
+    void                        SetLabelTemplate(const QVector<VLabelTemplateLine> &lines);
 
 private:
     QSharedDataPointer<VPieceLabelDataPrivate> d;

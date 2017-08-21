@@ -105,6 +105,9 @@ public:
 
     virtual bool     IsAppInGUIMode()const =0;
 
+    QString         GetPPath() const;
+    void            SetPPath(const QString &value);
+
 protected:
     QUndoStack         *undoStack;
 
@@ -131,7 +134,7 @@ private:
     Q_DISABLE_COPY(VAbstractApplication)
     Unit               _patternUnit;
     MeasurementsType   _patternType;
-
+    QString            patternFilePath;
 
     QGraphicsScene     **currentScene;
     VMainGraphicsView  *sceneView;
@@ -146,6 +149,18 @@ private:
 
     void ClearTranslation();
 };
+
+//---------------------------------------------------------------------------------------------------------------------
+inline QString VAbstractApplication::GetPPath() const
+{
+    return patternFilePath;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+inline void VAbstractApplication::SetPPath(const QString &value)
+{
+    patternFilePath = value;
+}
 
 
 //---------------------------------------------------------------------------------------------------------------------

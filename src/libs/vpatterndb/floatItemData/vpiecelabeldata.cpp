@@ -60,64 +60,118 @@ VPieceLabelData::~VPieceLabelData()
 {}
 
 //---------------------------------------------------------------------------------------------------------------------
-void VPieceLabelData::Append(const MaterialCutPlacement& rMCP)
-{
-    d->m_conMCP.append(rMCP);
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void VPieceLabelData::Insert(int i, const MaterialCutPlacement& rMCP)
-{
-    Q_ASSERT(i >= 0);
-    Q_ASSERT(i <= GetMCPCount());
-    d->m_conMCP.insert(i, rMCP);
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void VPieceLabelData::Set(int i, const MaterialCutPlacement& rMCP)
-{
-    Q_ASSERT(i >= 0);
-    Q_ASSERT(i < GetMCPCount());
-    d->m_conMCP[i] = rMCP;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-int VPieceLabelData::GetMCPCount() const
-{
-    return d->m_conMCP.count();
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-const MaterialCutPlacement& VPieceLabelData::GetMCP(int i) const
-{
-    Q_ASSERT(i >= 0);
-    Q_ASSERT(i < GetMCPCount());
-    return d->m_conMCP.at(i);
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void VPieceLabelData::RemoveMCP(int i)
-{
-    Q_ASSERT(i >= 0);
-    Q_ASSERT(i < GetMCPCount());
-    d->m_conMCP.removeAt(i);
-}
-
-//---------------------------------------------------------------------------------------------------------------------
 void VPieceLabelData::Clear()
 {
     d->m_qsLetter.clear();
-    d->m_conMCP.clear();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-const QString& VPieceLabelData::GetLetter() const
+QString VPieceLabelData::GetLetter() const
 {
     return d->m_qsLetter;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VPieceLabelData::SetLetter(QString qsLetter)
+void VPieceLabelData::SetLetter(const QString &qsLetter)
 {
     d->m_qsLetter = qsLetter.left(3);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QString VPieceLabelData::GetAnnotation() const
+{
+    return d->m_annotation;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VPieceLabelData::SetAnnotation(const QString &val)
+{
+    d->m_annotation = val;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QString VPieceLabelData::GetOrientation() const
+{
+    return d->m_orientation;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VPieceLabelData::SetOrientation(const QString &val)
+{
+    d->m_orientation = val;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QString VPieceLabelData::GetRotation() const
+{
+    return d->m_rotation;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VPieceLabelData::SetRotation(const QString &val)
+{
+    d->m_rotation = val;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QString VPieceLabelData::GetTilt() const
+{
+    return d->m_tilt;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VPieceLabelData::SetTilt(const QString &val)
+{
+    d->m_tilt = val;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QString VPieceLabelData::GetFoldPosition() const
+{
+    return d->m_foldPosition;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VPieceLabelData::SetFoldPosition(const QString &val)
+{
+    d->m_foldPosition = val;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+int VPieceLabelData::GetQuantity() const
+{
+    return d->m_quantity;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VPieceLabelData::SetQuantity(int val)
+{
+    if (val >= 1)
+    {
+        d->m_quantity = val;
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+bool VPieceLabelData::IsOnFold() const
+{
+    return d->m_onFold;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VPieceLabelData::SetOnFold(bool onFold)
+{
+    d->m_onFold = onFold;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QVector<VLabelTemplateLine> VPieceLabelData::GetLabelTemplate() const
+{
+    return d->m_lines;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VPieceLabelData::SetLabelTemplate(const QVector<VLabelTemplateLine> &lines)
+{
+    d->m_lines = lines;
 }

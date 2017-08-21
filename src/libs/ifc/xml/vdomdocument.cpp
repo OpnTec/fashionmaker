@@ -178,9 +178,16 @@ void MessageHandler::handleMessage(QtMsgType type, const QString &description, c
 
 Q_LOGGING_CATEGORY(vXML, "v.xml")
 
-const QString VDomDocument::AttrId     = QStringLiteral("id");
+const QString VDomDocument::AttrId          = QStringLiteral("id");
+const QString VDomDocument::AttrText        = QStringLiteral("text");
+const QString VDomDocument::AttrBold        = QStringLiteral("bold");
+const QString VDomDocument::AttrItalic      = QStringLiteral("italic");
+const QString VDomDocument::AttrAlignment   = QStringLiteral("alignment");
+const QString VDomDocument::AttrFSIncrement = QStringLiteral("sfIncrement");
+
 const QString VDomDocument::TagVersion = QStringLiteral("version");
 const QString VDomDocument::TagUnit    = QStringLiteral("unit");
+const QString VDomDocument::TagLine    = QStringLiteral("line");
 
 //---------------------------------------------------------------------------------------------------------------------
 VDomDocument::VDomDocument()
@@ -444,6 +451,21 @@ QString VDomDocument::GetParametrString(const QDomElement &domElement, const QSt
         }
     }
     return parameter;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QString VDomDocument::GetParametrEmptyString(const QDomElement &domElement, const QString &name)
+{
+    QString result;
+    try
+    {
+        result = GetParametrString(domElement, name, "");
+    }
+    catch(const VExceptionEmptyParameter &)
+    {
+        // do nothing
+    }
+    return result;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -898,4 +920,56 @@ bool VDomDocument::SafeCopy(const QString &source, const QString &destination, Q
 #endif /*Q_OS_WIN32*/
 
     return result;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QVector<VLabelTemplateLine> VDomDocument::GetLabelTemplate(const QDomElement &element) const
+{
+    // We use implicit conversion. That's why check if values are still the same as excpected.
+    Q_STATIC_ASSERT(Qt::AlignLeft == 1);
+    Q_STATIC_ASSERT(Qt::AlignRight == 2);
+    Q_STATIC_ASSERT(Qt::AlignHCenter == 4);
+
+    QVector<VLabelTemplateLine> lines;
+
+    if (not element.isNull())
+    {
+        QDomElement tagLine = element.firstChildElement();
+        while (tagLine.isNull() == false)
+        {
+            if (tagLine.tagName() == TagLine)
+            {
+                VLabelTemplateLine line;
+                line.line = GetParametrString(tagLine, AttrText, tr("<empty>"));
+                line.bold = GetParametrBool(tagLine, AttrBold, falseStr);
+                line.italic = GetParametrBool(tagLine, AttrItalic, falseStr);
+                line.alignment = GetParametrUInt(tagLine, AttrAlignment, "0");
+                line.fontSizeIncrement = GetParametrUInt(tagLine, AttrFSIncrement, "0");
+                lines.append(line);
+            }
+            tagLine = tagLine.nextSiblingElement(TagLine);
+        }
+    }
+
+    return lines;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VDomDocument::SetLabelTemplate(QDomElement &element, const QVector<VLabelTemplateLine> &lines)
+{
+    if (not element.isNull())
+    {
+        for (int i=0; i < lines.size(); ++i)
+        {
+            QDomElement tagLine = createElement(TagLine);
+
+            SetAttribute(tagLine, AttrText, lines.at(i).line);
+            SetAttribute(tagLine, AttrBold, lines.at(i).bold);
+            SetAttribute(tagLine, AttrItalic, lines.at(i).italic);
+            SetAttribute(tagLine, AttrAlignment, lines.at(i).alignment);
+            SetAttribute(tagLine, AttrFSIncrement, lines.at(i).fontSizeIncrement);
+
+            element.appendChild(tagLine);
+        }
+    }
 }

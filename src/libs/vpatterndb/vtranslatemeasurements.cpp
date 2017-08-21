@@ -669,6 +669,13 @@ void VTranslateMeasurements::InitGroupG()
                   "Full measurement description.");
     InitMeasurement(bustArcF_M, m, g, d, "G12");
     //=================================================================================================================
+    m = translate("VTranslateMeasurements", "size",
+                  "Name in a formula. Don't use math symbols and space in name!!!!");
+    g = translate("VTranslateMeasurements", "Size", "Full measurement name.");
+    d = translate("VTranslateMeasurements", "Same as bust_arc_f.",
+                  "Full measurement description.");
+    InitMeasurement(size_M, m, g, d, "G12");
+    //=================================================================================================================
     m = translate("VTranslateMeasurements", "lowbust_arc_f",
                   "Name in a formula. Don't use math symbols and space in name!!!!");
     g = translate("VTranslateMeasurements", "Lowbust arc, front", "Full measurement name.");

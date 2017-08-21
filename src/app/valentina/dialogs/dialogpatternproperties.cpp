@@ -33,9 +33,12 @@
 #include <QFileDialog>
 #include <QMenu>
 #include <QDate>
+#include <QMessageBox>
+
 #include "../xml/vpattern.h"
 #include "../vpatterndb/vcontainer.h"
 #include "../core/vapplication.h"
+#include "../vtools/dialogs/support/dialogeditlabel.h"
 
 // calc how many combinations we have
 static const int heightsCount = (static_cast<int>(GHeights::H200) -
@@ -43,8 +46,7 @@ static const int heightsCount = (static_cast<int>(GHeights::H200) -
 static const int sizesCount = (static_cast<int>(GSizes::S72) - (static_cast<int>(GSizes::S22) - sizeStep))/sizeStep;
 
 //---------------------------------------------------------------------------------------------------------------------
-DialogPatternProperties::DialogPatternProperties(const QString &filePath, VPattern *doc,  VContainer *pattern,
-                                                 QWidget *parent)
+DialogPatternProperties::DialogPatternProperties(VPattern *doc,  VContainer *pattern, QWidget *parent)
     : QDialog(parent),
       ui(new Ui::DialogPatternProperties),
       doc(doc),
@@ -58,22 +60,23 @@ DialogPatternProperties::DialogPatternProperties(const QString &filePath, VPatte
       gradationChanged(false),
       defaultChanged(false),
       securityChanged(false),
-      generalInfoChanged(false),
+      labelDataChanged(false),
+      askSaveLabelData(false),
+      templateDataChanged(false),
       deleteAction(nullptr),
       changeImageAction(nullptr),
       saveImageAction(nullptr),
       showImageAction(nullptr),
-      m_filePath(filePath)
+      templateLines()
 {
     ui->setupUi(this);
 
-    ui->lineEditAuthor->setClearButtonEnabled(true);
-
     SCASSERT(doc != nullptr)
 
-    qApp->ValentinaSettings()->GetOsSeparator() ? setLocale(QLocale()) : setLocale(QLocale::c());
+    VSettings *settings = qApp->ValentinaSettings();
+    settings->GetOsSeparator() ? setLocale(QLocale()) : setLocale(QLocale::c());
 
-    if (m_filePath.isEmpty())
+    if (qApp->GetPPath().isEmpty())
     {
         ui->lineEditPathToFile->setText(tr("<Empty>"));
         ui->lineEditPathToFile->setToolTip(tr("File was not saved yet."));
@@ -81,22 +84,19 @@ DialogPatternProperties::DialogPatternProperties(const QString &filePath, VPatte
     }
     else
     {
-        ui->lineEditPathToFile->setText(QDir::toNativeSeparators(m_filePath));
-        ui->lineEditPathToFile->setToolTip(QDir::toNativeSeparators(m_filePath));
+        ui->lineEditPathToFile->setText(QDir::toNativeSeparators(qApp->GetPPath()));
+        ui->lineEditPathToFile->setToolTip(QDir::toNativeSeparators(qApp->GetPPath()));
         ui->pushButtonShowInExplorer->setEnabled(true);
     }
     ui->lineEditPathToFile->setCursorPosition(0);
 
     connect(ui->pushButtonShowInExplorer, &QPushButton::clicked, this, [this]()
     {
-        ShowInGraphicalShell(m_filePath);
+        ShowInGraphicalShell(qApp->GetPPath());
     });
 #if defined(Q_OS_MAC)
     ui->pushButtonShowInExplorer->setText(tr("Show in Finder"));
 #endif //defined(Q_OS_MAC)
-
-    ui->lineEditAuthor->setText(doc->GetAuthor());
-    connect(ui->lineEditAuthor, &QLineEdit::editingFinished, this, &DialogPatternProperties::DescEdited);
 
     ui->plainTextEditDescription->setPlainText(doc->GetDescription());
     connect(ui->plainTextEditDescription, &QPlainTextEdit::textChanged, this, &DialogPatternProperties::DescEdited);
@@ -175,32 +175,24 @@ DialogPatternProperties::DialogPatternProperties(const QString &filePath, VPatte
     ui->lineEditPatternNumber->setText(doc->GetPatternNumber());
     ui->lineEditCompanyName->setText(doc->GetCompanyName());
     ui->lineEditCustomerName->setText(doc->GetCustomerName());
-    ui->checkBoxShowDate->setText(ui->checkBoxShowDate->text()
-                                  .arg(QDate::currentDate().toString(Qt::SystemLocaleLongDate)));
-    ui->lineEditSize->setText(doc->GetPatternSize());
 
-    const QString plSize = QLatin1String("%") + qApp->TrVars()->PlaceholderToUser(pl_size) + QLatin1String("%");
-    const QString plHeight = QLatin1String("%") + qApp->TrVars()->PlaceholderToUser(pl_height) + QLatin1String("%");
-    ui->lineEditSize->setToolTip(tr("Use %1 and %2 to insert pattern size and height").arg(plSize, plHeight));
+    connect(ui->lineEditPatternName, &QLineEdit::editingFinished, this, &DialogPatternProperties::LabelDataChanged);
+    connect(ui->lineEditPatternNumber, &QLineEdit::editingFinished, this, &DialogPatternProperties::LabelDataChanged);
+    connect(ui->lineEditCompanyName, &QLineEdit::editingFinished, this, &DialogPatternProperties::LabelDataChanged);
+    connect(ui->lineEditCustomerName, &QLineEdit::editingFinished, this, &DialogPatternProperties::LabelDataChanged);
+    connect(ui->pushButtonEditPatternLabel, &QPushButton::clicked, this, &DialogPatternProperties::EditLabel);
 
-    ui->checkBoxShowDate->setChecked(doc->IsDateVisible());
-    if (doc->MPath().isEmpty() == true)
-    {
-        ui->checkBoxShowMeasurements->setChecked(false);
-        ui->checkBoxShowMeasurements->setEnabled(false);
-    }
-    else
-    {
-        ui->checkBoxShowMeasurements->setChecked(doc->IsMeasurementsVisible());
-    }
+    InitComboBoxFormats(ui->comboBoxDateFormat,
+                        VSettings::PredefinedDateFormats() + settings->GetUserDefinedDateFormats(),
+                        doc->GetLabelDateFormat());
+    InitComboBoxFormats(ui->comboBoxTimeFormat,
+                        VSettings::PredefinedTimeFormats() + settings->GetUserDefinedTimeFormats(),
+                        doc->GetLabelTimeFormat());
 
-    connect(ui->lineEditPatternName, &QLineEdit::editingFinished, this, &DialogPatternProperties::GeneralInfoChanged);
-    connect(ui->lineEditPatternNumber, &QLineEdit::editingFinished, this, &DialogPatternProperties::GeneralInfoChanged);
-    connect(ui->lineEditCompanyName, &QLineEdit::editingFinished, this, &DialogPatternProperties::GeneralInfoChanged);
-    connect(ui->lineEditCustomerName, &QLineEdit::editingFinished, this, &DialogPatternProperties::GeneralInfoChanged);
-    connect(ui->lineEditSize, &QLineEdit::editingFinished, this, &DialogPatternProperties::GeneralInfoChanged);
-    connect(ui->checkBoxShowDate, &QCheckBox::stateChanged, this, &DialogPatternProperties::GeneralInfoChanged);
-    connect(ui->checkBoxShowMeasurements, &QCheckBox::stateChanged, this, &DialogPatternProperties::GeneralInfoChanged);
+    connect(ui->comboBoxDateFormat, static_cast<void (QComboBox::*)(int)>(&QComboBox::currentIndexChanged),
+            this, &DialogPatternProperties::LabelDataChanged);
+    connect(ui->comboBoxTimeFormat, static_cast<void (QComboBox::*)(int)>(&QComboBox::currentIndexChanged),
+            this, &DialogPatternProperties::LabelDataChanged);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -216,27 +208,18 @@ void DialogPatternProperties::Apply()
     {
         case 0:
             SaveDescription();
-            descriptionChanged = false;
-            emit doc->patternChanged(false);
             break;
         case 1:
             SaveGradation();
-            gradationChanged = false;
             SaveDefValues();
-            defaultChanged = false;
-            emit doc->patternChanged(false);
             break;
         case 2:
-            doc->SetReadOnly(ui->checkBoxPatternReadOnly->isChecked());
-            securityChanged = false;
-            emit doc->patternChanged(false);
+            SaveReadOnlyState();
             break;
         case 3:
-            SaveGeneralInfo();
-            generalInfoChanged = false;
-            emit doc->patternChanged(false);
+            SaveLabelData();
+            SaveTemplateData();
             break;
-
         default:
             break;
     }
@@ -245,40 +228,12 @@ void DialogPatternProperties::Apply()
 //---------------------------------------------------------------------------------------------------------------------
 void DialogPatternProperties::Ok()
 {
-    if (descriptionChanged)
-    {
-        SaveDescription();
-        descriptionChanged = false;
-        emit doc->patternChanged(false);
-    }
-
-    if (gradationChanged)
-    {
-        SaveGradation();
-        gradationChanged = false;
-        emit doc->patternChanged(false);
-    }
-
-    if (defaultChanged)
-    {
-        SaveDefValues();
-        defaultChanged = false;
-        emit doc->patternChanged(false);
-    }
-
-    if (securityChanged)
-    {
-        doc->SetReadOnly(ui->checkBoxPatternReadOnly->isChecked());
-        securityChanged = false;
-        emit doc->patternChanged(false);
-    }
-
-    if (generalInfoChanged == true)
-    {
-        SaveGeneralInfo();
-        generalInfoChanged = false;
-        emit doc->patternChanged(false);
-    }
+    SaveDescription();
+    SaveGradation();
+    SaveDefValues();
+    SaveReadOnlyState();
+    SaveLabelData();
+    SaveTemplateData();
 
     close();
 }
@@ -421,9 +376,10 @@ void DialogPatternProperties::DefValueChanged()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void DialogPatternProperties::GeneralInfoChanged()
+void DialogPatternProperties::LabelDataChanged()
 {
-    generalInfoChanged = true;
+    labelDataChanged = true;
+    askSaveLabelData = true;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -555,6 +511,24 @@ void DialogPatternProperties::InitSizes()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void DialogPatternProperties::InitComboBoxFormats(QComboBox *box, const QStringList &items,
+                                                  const QString &currentFormat)
+{
+    SCASSERT(box != nullptr)
+
+    box->addItems(items);
+    int index = box->findText(currentFormat);
+    if (index != -1)
+    {
+        box->setCurrentIndex(index);
+    }
+    else
+    {
+        box->setCurrentIndex(0);
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 void DialogPatternProperties::CheckApplyOk()
 {
     bool enable = !(heightsChecked == 0 || sizesChecked == 0);
@@ -565,45 +539,90 @@ void DialogPatternProperties::CheckApplyOk()
 //---------------------------------------------------------------------------------------------------------------------
 void DialogPatternProperties::SaveDescription()
 {
-    doc->SetNotes(ui->plainTextEditTechNotes->document()->toPlainText());
-    doc->SetDescription(ui->plainTextEditDescription->document()->toPlainText());
-    doc->SetAuthor(ui->lineEditAuthor->text());
+    if (descriptionChanged)
+    {
+        doc->SetNotes(ui->plainTextEditTechNotes->document()->toPlainText());
+        doc->SetDescription(ui->plainTextEditDescription->document()->toPlainText());
+
+        descriptionChanged = false;
+        emit doc->patternChanged(false);
+        emit doc->UpdatePatternLabel();
+    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void DialogPatternProperties::SaveGradation()
 {
-    doc->SetGradationHeights(heights);
-    doc->SetGradationSizes(sizes);
-    emit UpdateGradation();
+    if (gradationChanged)
+    {
+        doc->SetGradationHeights(heights);
+        doc->SetGradationSizes(sizes);
+        emit UpdateGradation();
+        gradationChanged = false;
+        emit doc->patternChanged(false);
+    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void DialogPatternProperties::SaveDefValues()
 {
-    if (ui->radioButtonDefFromM->isChecked())
+    if (defaultChanged)
     {
-        doc->SetDefCustom(false);
+        if (ui->radioButtonDefFromM->isChecked())
+        {
+            doc->SetDefCustom(false);
+        }
+        else
+        {
+            doc->SetDefCustom(true);
+            doc->SetDefCustomHeight(ui->comboBoxHeight->currentText().toInt());
+            doc->SetDefCustomSize(ui->comboBoxSize->currentText().toInt());
+        }
+        defaultChanged = false;
+        emit doc->patternChanged(false);
     }
-    else
-    {
-        doc->SetDefCustom(true);
-        doc->SetDefCustomHeight(ui->comboBoxHeight->currentText().toInt());
-        doc->SetDefCustomSize(ui->comboBoxSize->currentText().toInt());
-    }
-    defaultChanged = false;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void DialogPatternProperties::SaveGeneralInfo()
+void DialogPatternProperties::SaveLabelData()
 {
-    doc->SetPatternName(ui->lineEditPatternName->text());
-    doc->SetPatternNumber(ui->lineEditPatternNumber->text());
-    doc->SetCompanyName(ui->lineEditCompanyName->text());
-    doc->SetCustomerName(ui->lineEditCustomerName->text());
-    doc->SetPatternSize(ui->lineEditSize->text());
-    doc->SetDateVisible(ui->checkBoxShowDate->isChecked());
-    doc->SetMesurementsVisible(ui->checkBoxShowMeasurements->isChecked());
+    if (labelDataChanged)
+    {
+        doc->SetPatternName(ui->lineEditPatternName->text());
+        doc->SetPatternNumber(ui->lineEditPatternNumber->text());
+        doc->SetCompanyName(ui->lineEditCompanyName->text());
+        doc->SetCustomerName(ui->lineEditCustomerName->text());
+        doc->SetLabelDateFormat(ui->comboBoxDateFormat->currentText());
+        doc->SetLabelTimeFormat(ui->comboBoxTimeFormat->currentText());
+
+        labelDataChanged = false;
+        askSaveLabelData = false;
+        emit doc->patternChanged(false);
+        emit doc->UpdatePatternLabel();
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogPatternProperties::SaveTemplateData()
+{
+    if (templateDataChanged)
+    {
+        doc->SetPatternLabelTemplate(templateLines);
+        templateDataChanged = false;
+        emit doc->patternChanged(false);
+        emit doc->UpdatePatternLabel();
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogPatternProperties::SaveReadOnlyState()
+{
+    if (securityChanged)
+    {
+        doc->SetReadOnly(ui->checkBoxPatternReadOnly->isChecked());
+        securityChanged = false;
+        emit doc->patternChanged(false);
+    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -847,5 +866,35 @@ void DialogPatternProperties::SaveImage()
             file.write(ba);
             file.close();
         }
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogPatternProperties::EditLabel()
+{
+    if (labelDataChanged && askSaveLabelData)
+    {
+        QMessageBox::StandardButton answer = QMessageBox::question(this, tr("Save label data."),
+                                 tr("Label data were changed. Do you want to save them before editing label template?"),
+                                                                   QMessageBox::Yes|QMessageBox::No, QMessageBox::Yes);
+
+        if (answer == QMessageBox::Yes)
+        {
+            SaveLabelData();
+        }
+        else
+        {
+            askSaveLabelData = false;
+        }
+    }
+
+    DialogEditLabel editor(doc);
+
+    templateDataChanged ? editor.SetTemplate(templateLines) : editor.SetTemplate(doc->GetPatternLabelTemplate());
+
+    if (QDialog::Accepted == editor.exec())
+    {
+        templateLines = editor.GetTemplate();
+        templateDataChanged = true;
     }
 }

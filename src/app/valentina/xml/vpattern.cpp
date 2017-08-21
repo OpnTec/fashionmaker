@@ -106,7 +106,6 @@ void VPattern::CreateEmptyFile()
     unit.appendChild(newNodeText);
     patternElement.appendChild(unit);
 
-    patternElement.appendChild(createElement(TagAuthor));
     patternElement.appendChild(createElement(TagDescription));
     patternElement.appendChild(createElement(TagNotes));
 
@@ -149,10 +148,10 @@ void VPattern::Parse(const Document &parse)
 
     SCASSERT(sceneDraw != nullptr)
     SCASSERT(sceneDetail != nullptr)
-    QStringList tags = QStringList() << TagDraw << TagIncrements << TagAuthor << TagDescription << TagNotes
+    QStringList tags = QStringList() << TagDraw << TagIncrements << TagDescription << TagNotes
                                      << TagMeasurements << TagVersion << TagGradation << TagImage << TagUnit
                                      << TagPatternName << TagPatternNum << TagCompanyName << TagCustomerName
-                                     << TagSize << TagShowDate << TagShowMeasurements;
+                                     << TagPatternLabel;
     PrepareForParse(parse);
     QDomNode domNode = documentElement().firstChild();
     while (domNode.isNull() == false)
@@ -188,50 +187,41 @@ void VPattern::Parse(const Document &parse)
                         qCDebug(vXML, "Tag increments.");
                         ParseIncrementsElement(domElement);
                         break;
-                    case 2: // TagAuthor
-                        qCDebug(vXML, "Tag author.");
-                        break;
-                    case 3: // TagDescription
+                    case 2: // TagDescription
                         qCDebug(vXML, "Tag description.");
                         break;
-                    case 4: // TagNotes
+                    case 3: // TagNotes
                         qCDebug(vXML, "Tag notes.");
                         break;
-                    case 5: // TagMeasurements
+                    case 4: // TagMeasurements
                         qCDebug(vXML, "Tag measurements.");
                         break;
-                    case 6: // TagVersion
+                    case 5: // TagVersion
                         qCDebug(vXML, "Tag version.");
                         break;
-                    case 7: // TagGradation
+                    case 6: // TagGradation
                         qCDebug(vXML, "Tag gradation.");
                         break;
-                    case 8: // TagImage
+                    case 7: // TagImage
                         qCDebug(vXML, "Tag image.");
                         break;
-                    case 9: // TagUnit
+                    case 8: // TagUnit
                         qCDebug(vXML, "Tag unit.");
                         break;
-                    case 10: // TagPatternName
+                    case 9: // TagPatternName
                         qCDebug(vXML, "Pattern name.");
                         break;
-                    case 11: // TagPatternNumber
+                    case 10: // TagPatternNumber
                         qCDebug(vXML, "Pattern number.");
                         break;
-                    case 12: // TagCompanyName
+                    case 11: // TagCompanyName
                         qCDebug(vXML, "Company name.");
                         break;
-                    case 13: // TagCustomerName
+                    case 12: // TagCustomerName
                         qCDebug(vXML, "Customer name.");
                         break;
-                    case 14: // TagSize
-                        qCDebug(vXML, "Size");
-                        break;
-                    case 15:
-                        qCDebug(vXML, "Show creation date");
-                        break;
-                    case 16:
-                        qCDebug(vXML, "Show measurements");
+                    case 13: // TagPatternLabel
+                        qCDebug(vXML, "Pattern label.");
                         break;
                     default:
                         qCDebug(vXML, "Wrong tag name %s", qUtf8Printable(domElement.tagName()));
@@ -903,16 +893,14 @@ void VPattern::ParsePieceDataTag(const QDomElement &domElement, VPiece &detail) 
 {
     VPieceLabelData &ppData = detail.GetPatternPieceData();
     ppData.SetVisible(GetParametrBool(domElement, AttrVisible, trueStr));
-    try
-    {
-        QString qsLetter = GetParametrString(domElement, AttrLetter, "");
-        ppData.SetLetter(qsLetter);
-    }
-    catch(const VExceptionEmptyParameter &e)
-    {
-        Q_UNUSED(e)
-        ppData.SetLetter("");
-    }
+    ppData.SetLetter(GetParametrEmptyString(domElement, AttrLetter));
+    ppData.SetAnnotation(GetParametrEmptyString(domElement, AttrAnnotation));
+    ppData.SetOrientation(GetParametrEmptyString(domElement, AttrOrientation));
+    ppData.SetRotation(GetParametrEmptyString(domElement, AttrRotation));
+    ppData.SetTilt(GetParametrEmptyString(domElement, AttrTilt));
+    ppData.SetFoldPosition(GetParametrEmptyString(domElement, AttrFoldPosition));
+    ppData.SetQuantity(static_cast<int>(GetParametrUInt(domElement, AttrQuantity, "1")));
+    ppData.SetOnFold(GetParametrBool(domElement, AttrOnFold, falseStr));
     ppData.SetPos(QPointF(GetParametrDouble(domElement, AttrMx, "0"), GetParametrDouble(domElement, AttrMy, "0")));
     ppData.SetLabelWidth(GetParametrString(domElement, AttrWidth, "1"));
     ppData.SetLabelHeight(GetParametrString(domElement, VToolSeamAllowance::AttrHeight, "1"));
@@ -921,21 +909,7 @@ void VPattern::ParsePieceDataTag(const QDomElement &domElement, VPiece &detail) 
     ppData.SetCenterPin(GetParametrUInt(domElement, VToolSeamAllowance::AttrCenterPin, NULL_ID_STR));
     ppData.SetTopLeftPin(GetParametrUInt(domElement, VToolSeamAllowance::AttrTopLeftPin, NULL_ID_STR));
     ppData.SetBottomRightPin(GetParametrUInt(domElement, VToolSeamAllowance::AttrBottomRightPin, NULL_ID_STR));
-
-    QDomNodeList nodeListMCP = domElement.childNodes();
-    for (int iMCP = 0; iMCP < nodeListMCP.count(); ++iMCP)
-    {
-        MaterialCutPlacement mcp;
-        QDomElement domMCP = nodeListMCP.at(iMCP).toElement();
-        mcp.m_eMaterial = MaterialType(GetParametrUInt(domMCP, AttrMaterial, 0));
-        if (mcp.m_eMaterial == MaterialType::mtUserDefined)
-        {
-            mcp.m_qsMaterialUserDef = GetParametrString(domMCP, AttrUserDefined, "");
-        }
-        mcp.m_iCutNumber = static_cast<int>(GetParametrUInt(domMCP, AttrCutNumber, 0));
-        mcp.m_ePlacement = PlacementType(GetParametrUInt(domMCP, AttrPlacement, 0));
-        ppData.Append(mcp);
-    }
+    ppData.SetLabelTemplate(GetLabelTemplate(domElement));
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -3391,21 +3365,6 @@ void VPattern::ParseIncrementsElement(const QDomNode &node)
         }
         domNode = domNode.nextSibling();
     }
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-QString VPattern::GetAuthor() const
-{
-    return UniqueTagText(TagAuthor, qApp->ValentinaSettings()->GetUser());
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void VPattern::SetAuthor(const QString &text)
-{
-    CheckTagExists(TagAuthor);
-    setTagText(TagAuthor, text);
-    modified = true;
-    emit patternChanged(false);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

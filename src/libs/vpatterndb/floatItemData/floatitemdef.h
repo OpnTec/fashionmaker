@@ -40,40 +40,5 @@ enum class ArrowType : char
     atRear
 };
 
-enum class MaterialType : char
-{
-    mtFabric = 0,
-    mtLining = 1,
-    mtInterfacing = 2,
-    mtInterlining = 3,
-    mtUserDefined = 4
-};
-
-enum class PlacementType : char
-{
-    ptNone = 0,
-    ptCutOnFold = 1
-};
-
-/**
- * @brief The MaterialCutPlacement struct used to hold a material, cut number and placement 3-tuple
- */
-struct MaterialCutPlacement
-{
-    MaterialType  m_eMaterial;
-    QString       m_qsMaterialUserDef;
-    int           m_iCutNumber;
-    PlacementType m_ePlacement;
-
-    MaterialCutPlacement()
-        : m_eMaterial(MaterialType::mtFabric),
-          m_qsMaterialUserDef(),
-          m_iCutNumber(0),
-          m_ePlacement(PlacementType::ptNone)
-    {}
-};
-
-typedef QList<MaterialCutPlacement> MCPContainer;
-
 #endif // FLOATITEMDEF_H
 

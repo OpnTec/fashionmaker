@@ -178,8 +178,6 @@ public:
     static qreal       height();
     static qreal      *rheight();
 
-    bool               VariableExist(const QString& name);
-
     void               RemoveIncrement(const QString& name);
 
     const QHash<quint32, QSharedPointer<VGObject> >         *DataGObjects() const;

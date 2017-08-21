@@ -61,6 +61,7 @@ private slots:
     void TestCheckUnderlineExists();
     void TestCheckInternalVaribleRegExp_data();
     void TestCheckInternalVaribleRegExp();
+    void TestTemplatePlaceholders();
     void cleanupTestCase();
 
 private:

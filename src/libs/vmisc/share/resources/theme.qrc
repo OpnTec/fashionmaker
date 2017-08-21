@@ -84,5 +84,20 @@
         <file alias="16x16/status/help-about.png">icons/win.icon.theme/16x16/actions/help-about.png</file>
         <file alias="24x24/status/help-about.png">icons/win.icon.theme/24x24/actions/help-about.png</file>
         <file alias="32x32/status/help-about.png">icons/win.icon.theme/32x32/actions/help-about.png</file>
+        <file alias="16x16/actions/format-justify-center.png">icons/win.icon.theme/16x16/actions/format-justify-center.png</file>
+        <file alias="16x16/actions/format-justify-left.png">icons/win.icon.theme/16x16/actions/format-justify-left.png</file>
+        <file alias="16x16/actions/format-justify-right.png">icons/win.icon.theme/16x16/actions/format-justify-right.png</file>
+        <file alias="16x16/actions/format-text-bold.png">icons/win.icon.theme/16x16/actions/format-text-bold.png</file>
+        <file alias="16x16/actions/format-text-italic.png">icons/win.icon.theme/16x16/actions/format-text-italic.png</file>
+        <file alias="24x24/actions/format-justify-left.png">icons/win.icon.theme/24x24/actions/format-justify-left.png</file>
+        <file alias="24x24/actions/format-justify-right.png">icons/win.icon.theme/24x24/actions/format-justify-right.png</file>
+        <file alias="24x24/actions/format-justify-center.png">icons/win.icon.theme/24x24/actions/format-justify-center.png</file>
+        <file alias="24x24/actions/format-text-bold.png">icons/win.icon.theme/24x24/actions/format-text-bold.png</file>
+        <file alias="24x24/actions/format-text-italic.png">icons/win.icon.theme/24x24/actions/format-text-italic.png</file>
+        <file alias="32x32/actions/format-justify-center.png">icons/win.icon.theme/32x32/actions/format-justify-center.png</file>
+        <file alias="32x32/actions/format-justify-left.png">icons/win.icon.theme/32x32/actions/format-justify-left.png</file>
+        <file alias="32x32/actions/format-justify-right.png">icons/win.icon.theme/32x32/actions/format-justify-right.png</file>
+        <file alias="32x32/actions/format-text-bold.png">icons/win.icon.theme/32x32/actions/format-text-bold.png</file>
+        <file alias="32x32/actions/format-text-italic.png">icons/win.icon.theme/32x32/actions/format-text-italic.png</file>
     </qresource>
 </RCC>

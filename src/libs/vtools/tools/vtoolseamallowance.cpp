@@ -302,7 +302,14 @@ void VToolSeamAllowance::AddPatternPieceData(VAbstractPattern *doc, QDomElement 
     QDomElement domData = doc->createElement(VAbstractPattern::TagData);
     const VPieceLabelData& data = piece.GetPatternPieceData();
     doc->SetAttribute(domData, VAbstractPattern::AttrLetter, data.GetLetter());
-    doc->SetAttribute(domData, VAbstractPattern::AttrVisible, data.IsVisible() == true? trueStr : falseStr);
+    doc->SetAttribute(domData, VAbstractPattern::AttrAnnotation, data.GetAnnotation());
+    doc->SetAttribute(domData, VAbstractPattern::AttrOrientation, data.GetOrientation());
+    doc->SetAttribute(domData, VAbstractPattern::AttrRotation, data.GetRotation());
+    doc->SetAttribute(domData, VAbstractPattern::AttrTilt, data.GetTilt());
+    doc->SetAttribute(domData, VAbstractPattern::AttrFoldPosition, data.GetFoldPosition());
+    doc->SetAttribute(domData, VAbstractPattern::AttrQuantity, data.GetQuantity());
+    doc->SetAttribute(domData, VAbstractPattern::AttrVisible, data.IsVisible());
+    doc->SetAttribute(domData, VAbstractPattern::AttrOnFold, data.IsOnFold());
     doc->SetAttribute(domData, AttrMx, data.GetPos().x());
     doc->SetAttribute(domData, AttrMy, data.GetPos().y());
     doc->SetAttribute(domData, VAbstractPattern::AttrWidth, data.GetLabelWidth());
@@ -337,19 +344,8 @@ void VToolSeamAllowance::AddPatternPieceData(VAbstractPattern *doc, QDomElement 
         domData.removeAttribute(AttrBottomRightPin);
     }
 
-    for (int i = 0; i < data.GetMCPCount(); ++i)
-    {
-        const MaterialCutPlacement mcp = data.GetMCP(i);
-        QDomElement domMCP = doc->createElement(VAbstractPattern::TagMCP);
-        doc->SetAttribute(domMCP, VAbstractPattern::AttrMaterial, int(mcp.m_eMaterial));
-        if (mcp.m_eMaterial == MaterialType::mtUserDefined)
-        {
-            doc->SetAttribute(domMCP, VAbstractPattern::AttrUserDefined, mcp.m_qsMaterialUserDef);
-        }
-        doc->SetAttribute(domMCP, VAbstractPattern::AttrCutNumber, mcp.m_iCutNumber);
-        doc->SetAttribute(domMCP, VAbstractPattern::AttrPlacement, int(mcp.m_ePlacement));
-        domData.appendChild(domMCP);
-    }
+    doc->SetLabelTemplate(domData, data.GetLabelTemplate());
+
     domElement.appendChild(domData);
 }
 
@@ -358,7 +354,7 @@ void VToolSeamAllowance::AddPatternInfo(VAbstractPattern *doc, QDomElement &domE
 {
     QDomElement domData = doc->createElement(VAbstractPattern::TagPatternInfo);
     const VPatternLabelData& geom = piece.GetPatternInfo();
-    doc->SetAttribute(domData, VAbstractPattern::AttrVisible, geom.IsVisible() == true ? trueStr : falseStr);
+    doc->SetAttribute(domData, VAbstractPattern::AttrVisible, geom.IsVisible());
     doc->SetAttribute(domData, AttrMx, geom.GetPos().x());
     doc->SetAttribute(domData, AttrMy, geom.GetPos().y());
     doc->SetAttribute(domData, VAbstractPattern::AttrWidth, geom.GetLabelWidth());
@@ -402,7 +398,7 @@ void VToolSeamAllowance::AddGrainline(VAbstractPattern *doc, QDomElement &domEle
     // grainline
     QDomElement domData = doc->createElement(VAbstractPattern::TagGrainline);
     const VGrainlineData& glGeom = piece.GetGrainlineGeometry();
-    doc->SetAttribute(domData, VAbstractPattern::AttrVisible, glGeom.IsVisible() == true ? trueStr : falseStr);
+    doc->SetAttribute(domData, VAbstractPattern::AttrVisible, glGeom.IsVisible());
     doc->SetAttribute(domData, AttrMx, glGeom.GetPos().x());
     doc->SetAttribute(domData, AttrMy, glGeom.GetPos().y());
     doc->SetAttribute(domData, AttrLength, glGeom.GetLength());
@@ -578,7 +574,7 @@ void VToolSeamAllowance::UpdatePatternInfo()
 
         if (PrepareLabelData(geom, m_patternInfo, pos, labelAngle))
         {
-            m_patternInfo->UpdateData(doc, VContainer::size(), VContainer::height());
+            m_patternInfo->UpdateData(doc);
             UpdateLabelItem(m_patternInfo, pos, labelAngle);
         }
     }
@@ -1151,7 +1147,7 @@ VToolSeamAllowance::VToolSeamAllowance(VAbstractPattern *doc, VContainer *data, 
     connect(m_grainLine, &VGrainlineItem::SignalResized, this, &VToolSeamAllowance::SaveResizeGrainline);
     connect(m_grainLine, &VGrainlineItem::SignalRotated, this, &VToolSeamAllowance::SaveRotateGrainline);
 
-    connect(doc, &VAbstractPattern::patternChanged, this, &VToolSeamAllowance::UpdatePatternInfo);
+    connect(doc, &VAbstractPattern::UpdatePatternLabel, this, &VToolSeamAllowance::UpdatePatternInfo);
     connect(doc, &VAbstractPattern::CheckLayout, this, &VToolSeamAllowance::UpdateDetailLabel);
     connect(doc, &VAbstractPattern::CheckLayout, this, &VToolSeamAllowance::UpdatePatternInfo);
     connect(doc, &VAbstractPattern::CheckLayout, this, &VToolSeamAllowance::UpdateGrainline);

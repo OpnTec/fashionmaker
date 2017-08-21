@@ -33,6 +33,8 @@
 #include "../options.h"
 #include <QMap>
 
+#include "../vformat/vlabeltemplate.h"
+
 class VPattern;
 class VContainer;
 class QCheckBox;
@@ -46,14 +48,13 @@ class DialogPatternProperties : public QDialog
 {
     Q_OBJECT
 public:
-    explicit DialogPatternProperties(const QString &filePath, VPattern *doc, VContainer *pattern,
-                                     QWidget *parent = nullptr);
+    explicit DialogPatternProperties(VPattern *doc, VContainer *pattern, QWidget *parent = nullptr);
     virtual ~DialogPatternProperties() Q_DECL_OVERRIDE;
 signals:
     void UpdateGradation();
 private slots:
     void DefValueChanged();
-    void GeneralInfoChanged();
+    void LabelDataChanged();
     void Apply();
     void Ok();
     void SelectAll(int state);
@@ -62,6 +63,7 @@ private slots:
     void DescEdited();
     void ChangeImage();
     void SaveImage();
+    void EditLabel();
 private:
     Q_DISABLE_COPY(DialogPatternProperties)
     Ui::DialogPatternProperties *ui;
@@ -76,12 +78,15 @@ private:
     bool                   gradationChanged;
     bool                   defaultChanged;
     bool                   securityChanged;
-    bool                   generalInfoChanged;
+    bool                   labelDataChanged;
+    bool                   askSaveLabelData;
+    bool                   templateDataChanged;
     QAction                *deleteAction;
     QAction                *changeImageAction;
     QAction                *saveImageAction;
     QAction                *showImageAction;
-    const QString          &m_filePath;
+
+    QVector<VLabelTemplateLine> templateLines;
 
     void         SetHeightsChecked(bool enabled);
     void         SetSizesChecked(bool enabled);
@@ -93,11 +98,14 @@ private:
     void         SetOptions(const QMap<GVal, bool> &option);
     template<typename GVal>
     void         InitComboBox(QComboBox *box, const QMap<GVal, bool> &option);
+    void         InitComboBoxFormats(QComboBox *box, const QStringList &items, const QString &currentFormat);
     void         CheckApplyOk();
     void         SaveDescription();
     void         SaveGradation();
     void         SaveDefValues();
-    void         SaveGeneralInfo();
+    void         SaveLabelData();
+    void         SaveTemplateData();
+    void         SaveReadOnlyState();
 
     void         SetDefaultHeight(const QString &def);
     void         SetDefaultSize(const QString &def);

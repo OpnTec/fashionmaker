@@ -109,8 +109,59 @@ const QStringList builInPostfixOperators = QStringList() << cm_Oprt
                                                          << mm_Oprt
                                                          << in_Oprt;
 
-const QString pl_size   = QStringLiteral("size");
-const QString pl_height = QStringLiteral("height");
+const QString pl_size          = QStringLiteral("size");
+const QString pl_height        = QStringLiteral("height");
+const QString pl_date          = QStringLiteral("date");
+const QString pl_time          = QStringLiteral("time");
+const QString pl_patternName   = QStringLiteral("patternName");
+const QString pl_patternNumber = QStringLiteral("patternNumber");
+const QString pl_author        = QStringLiteral("author");
+const QString pl_customer      = QStringLiteral("customer");
+const QString pl_pExt          = QStringLiteral("pExt");
+const QString pl_pFileName     = QStringLiteral("pFileName");
+const QString pl_mFileName     = QStringLiteral("mFileName");
+const QString pl_mExt          = QStringLiteral("mExt");
+const QString pl_pLetter       = QStringLiteral("pLetter");
+const QString pl_pAnnotation   = QStringLiteral("pAnnotation");
+const QString pl_pOrientation  = QStringLiteral("pOrientation");
+const QString pl_pRotation     = QStringLiteral("pRotation");
+const QString pl_pTilt         = QStringLiteral("pTilt");
+const QString pl_pFoldPosition = QStringLiteral("pFoldPosition");
+const QString pl_pName         = QStringLiteral("pName");
+const QString pl_pQuantity     = QStringLiteral("pQuantity");
+const QString pl_mFabric       = QStringLiteral("mFabric");
+const QString pl_mLining       = QStringLiteral("mLining");
+const QString pl_mInterfacing  = QStringLiteral("mInterfacing");
+const QString pl_mInterlining  = QStringLiteral("mInterlining");
+const QString pl_wCut          = QStringLiteral("wCut");
+const QString pl_wOnFold       = QStringLiteral("wOnFold");
+
+const QStringList labelTemplatePlaceholders = QStringList() << pl_size
+                                                            << pl_height
+                                                            << pl_date
+                                                            << pl_time
+                                                            << pl_patternName
+                                                            << pl_patternNumber
+                                                            << pl_author
+                                                            << pl_customer
+                                                            << pl_pExt
+                                                            << pl_pFileName
+                                                            << pl_mFileName
+                                                            << pl_mExt
+                                                            << pl_pLetter
+                                                            << pl_pAnnotation
+                                                            << pl_pOrientation
+                                                            << pl_pRotation
+                                                            << pl_pTilt
+                                                            << pl_pFoldPosition
+                                                            << pl_pName
+                                                            << pl_pQuantity
+                                                            << pl_mFabric
+                                                            << pl_mLining
+                                                            << pl_mInterfacing
+                                                            << pl_mInterlining
+                                                            << pl_wCut
+                                                            << pl_wOnFold;
 
 const QString cursorArrowOpenHand = QStringLiteral("://cursor/cursor-arrow-openhand.png");
 const QString cursorArrowCloseHand = QStringLiteral("://cursor/cursor-arrow-closehand.png");

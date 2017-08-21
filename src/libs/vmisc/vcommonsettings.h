@@ -66,6 +66,10 @@ public:
     QString GetPathTemplate() const;
     void SetPathTemplate(const QString &value);
 
+    static QString GetDefPathLabelTemplate();
+    QString GetPathLabelTemplate() const;
+    void SetPathLabelTemplate(const QString &value);
+
     bool GetOsSeparator() const;
     void SetOsSeparator(const bool &value);
 
@@ -95,9 +99,6 @@ public:
 
     bool GetToolBarStyle() const;
     void SetToolBarStyle(const bool &value);
-
-    QString GetUser() const;
-    void SetUser(const QString &value);
 
     int  GetUndoCount() const;
     void SetUndoCount(const int &value);
@@ -135,10 +136,6 @@ public:
     QDate GetDateOfLastRemind() const;
     void  SetDateOfLastRemind(const QDate &date);
 
-    QStringList GetUserDefinedMaterials() const;
-    void AddUserDefinedMaterial(QString qsMaterial);
-    void ClearUserDefinedMaterial();
-
     bool GetForbidWorkpieceFlipping() const;
     void SetForbidWorkpieceFlipping(bool value);
 
@@ -169,6 +166,20 @@ public:
 #if !defined(Q_OS_WIN)
     static const QString unixStandardSharePath;
 #endif
+
+    QString GetLabelDateFormat() const;
+    void    SetLabelDateFormat(const QString &format);
+
+    static QStringList PredefinedDateFormats();
+    QStringList GetUserDefinedDateFormats() const;
+    void        SetUserDefinedDateFormats(const QStringList &formats);
+
+    QString GetLabelTimeFormat() const;
+    void    SetLabelTimeFormat(const QString &format);
+
+    static QStringList PredefinedTimeFormats();
+    QStringList GetUserDefinedTimeFormats() const;
+    void        SetUserDefinedTimeFormats(const QStringList &formats);
 
 private:
     Q_DISABLE_COPY(VCommonSettings)

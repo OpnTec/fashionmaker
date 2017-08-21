@@ -101,7 +101,6 @@ MainWindowsNoGUI::MainWindowsNoGUI(QWidget *parent)
       redoAction(nullptr),
       actionDockWidgetToolOptions(nullptr),
       actionDockWidgetGroups(nullptr),
-      curFile(),
       isNoScaling(false),
       isLayoutStale(true),
       ignorePrinterFields(false),
@@ -1512,7 +1511,7 @@ void MainWindowsNoGUI::ExportScene(const DialogSaveLayout &dialog, const QList<Q
 QString MainWindowsNoGUI::FileName() const
 {
     QString fileName;
-    curFile.isEmpty() ? fileName = tr("unnamed") : fileName = curFile;
+    qApp->GetPPath().isEmpty() ? fileName = tr("unnamed") : fileName = qApp->GetPPath();
     return QFileInfo(fileName).baseName();
 }
 

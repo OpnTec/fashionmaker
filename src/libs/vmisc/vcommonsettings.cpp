@@ -45,9 +45,12 @@
 #include "../vmisc/vmath.h"
 #include "../vpatterndb/pmsystems.h"
 
+namespace
+{
 const QString settingPathsIndividualMeasurements = QStringLiteral("paths/individual_measurements");
-const QString settingPathsMultisizeMeasurements   = QStringLiteral("paths/standard_measurements");
+const QString settingPathsMultisizeMeasurements  = QStringLiteral("paths/standard_measurements");
 const QString settingPathsTemplates              = QStringLiteral("paths/templates");
+const QString settingPathsLabelTemplate          = QStringLiteral("paths/labels");
 
 const QString settingConfigurationOsSeparator            = QStringLiteral("configuration/osSeparator");
 const QString settingConfigurationAutosaveState          = QStringLiteral("configuration/autosave/state");
@@ -60,13 +63,12 @@ const QString settingConfigurationConfirmItemDeletion    = QStringLiteral("confi
 const QString settingConfigurationConfirmFormatRewriting = QStringLiteral("configuration/confirm_format_rewriting");
 const QString settingConfigurationToolBarStyle           = QStringLiteral("configuration/tool_bar_style");
 
-const QString settingPatternUser                    = QStringLiteral("pattern/user");
 const QString settingPatternUndo                    = QStringLiteral("pattern/undo");
 const QString settingPatternForbidFlipping          = QStringLiteral("pattern/forbidFlipping");
 const QString settingPatternHideMainPath            = QStringLiteral("pattern/hideMainPath");
 const QString settingDoublePassmark                 = QStringLiteral("pattern/doublePassmark");
 const QString settingPatternDefaultSeamAllowance    = QStringLiteral("pattern/defaultSeamAllowance");
-const QString settingLabelFont                      = QStringLiteral("pattern/labelFont");
+const QString settingPatternLabelFont               = QStringLiteral("pattern/labelFont");
 
 const QString settingGeneralRecentFileList       = QStringLiteral("recentFileList");
 const QString settingGeneralRestoreFileList      = QStringLiteral("restoreFileList");
@@ -79,11 +81,26 @@ const QString settingIncrementsDialogSize        = QStringLiteral("toolIncrement
 const QString settingFormulaWizardDialogSize     = QStringLiteral("formulaWizardDialogSize");
 const QString settingLatestSkippedVersion        = QStringLiteral("lastestSkippedVersion");
 const QString settingDateOfLastRemind            = QStringLiteral("dateOfLastRemind");
-const QString settingUserDefinedMaterials        = QStringLiteral("configuration/userDefinedMaterials");
 
 const QString settingCSVWithHeader = QStringLiteral("csv/withHeader");
 const QString settingCSVCodec      = QStringLiteral("csv/withCodec");
 const QString settingCSVSeparator  = QStringLiteral("csv/withSeparator");
+
+const QString settingLabelDateFormat      = QStringLiteral("label/dateFormat");
+const QString settingLabelUserDateFormats = QStringLiteral("label/userDateFormats");
+const QString settingLabelTimeFormat      = QStringLiteral("label/timeFormat");
+const QString settingLabelUserTimeFormats = QStringLiteral("label/userTimeFormats");
+
+//---------------------------------------------------------------------------------------------------------------------
+QStringList ClearFormats(const QStringList &predefinedFormats, QStringList formats)
+{
+    for (int i = 0; i < predefinedFormats.size(); ++i)
+    {
+        formats.removeAll(predefinedFormats.at(i));
+    }
+    return formats;
+}
+}
 
 static const QString commonIniFilename = QStringLiteral("common");
 
@@ -315,6 +332,24 @@ void VCommonSettings::SetPathTemplate(const QString &value)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+QString VCommonSettings::GetDefPathLabelTemplate()
+{
+    return QDir::homePath() + QLatin1String("/valentina/") + tr("label templates");
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QString VCommonSettings::GetPathLabelTemplate() const
+{
+    return value(settingPathsLabelTemplate, GetDefPathLabelTemplate()).toString();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VCommonSettings::SetPathLabelTemplate(const QString &value)
+{
+    setValue(settingPathsLabelTemplate, value);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 bool VCommonSettings::GetOsSeparator() const
 {
     return value(settingConfigurationOsSeparator, 1).toBool();
@@ -441,24 +476,6 @@ bool VCommonSettings::GetToolBarStyle() const
 void VCommonSettings::SetToolBarStyle(const bool &value)
 {
     setValue(settingConfigurationToolBarStyle, value);
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-QString VCommonSettings::GetUser() const
-{
-    QString user;
-#ifdef Q_OS_WIN
-    user = value(settingPatternUser, QString::fromLocal8Bit(qgetenv("USERNAME").constData())).toString();
-#else
-    user = value(settingPatternUser, QString::fromLocal8Bit(qgetenv("USER").constData())).toString();
-#endif
-    return user;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void VCommonSettings::SetUser(const QString &value)
-{
-    setValue(settingPatternUser, value);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -628,27 +645,6 @@ void VCommonSettings::SetDateOfLastRemind(const QDate &date)
     QSettings settings(this->format(), this->scope(), this->organizationName(), commonIniFilename);
     settings.setValue(settingDateOfLastRemind, date);
     settings.sync();
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-QStringList VCommonSettings::GetUserDefinedMaterials() const
-{
-    return value(settingUserDefinedMaterials).toStringList();
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void VCommonSettings::AddUserDefinedMaterial(QString qsMaterial)
-{
-    QStringList qsl = GetUserDefinedMaterials();
-    qsl << qsMaterial;
-    setValue(settingUserDefinedMaterials, qsl);
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void VCommonSettings::ClearUserDefinedMaterial()
-{
-    QStringList qsl;
-    setValue(settingUserDefinedMaterials, qsl);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -828,11 +824,115 @@ double VCommonSettings::GetDefaultSeamAllowance()
 //---------------------------------------------------------------------------------------------------------------------
 QFont VCommonSettings::GetLabelFont() const
 {
-    return qvariant_cast<QFont>(value(settingLabelFont, QApplication::font()));
+    return qvariant_cast<QFont>(value(settingPatternLabelFont, QApplication::font()));
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void VCommonSettings::SetLabelFont(const QFont &f)
 {
-    setValue(settingLabelFont, f);
+    setValue(settingPatternLabelFont, f);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QString VCommonSettings::GetLabelDateFormat() const
+{
+    const QString format = value(settingLabelDateFormat, VCommonSettings::PredefinedDateFormats().first()).toString();
+    const QStringList allFormats = VCommonSettings::PredefinedDateFormats() + GetUserDefinedDateFormats();
+
+    if (allFormats.contains(format))
+    {
+        return format;
+    }
+    else
+    {
+        return VCommonSettings::PredefinedDateFormats().first();
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VCommonSettings::SetLabelDateFormat(const QString &format)
+{
+    setValue(settingLabelDateFormat, format);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QStringList VCommonSettings::PredefinedDateFormats()
+{
+    QStringList formats = QStringList() << "MM-dd-yyyy"
+                                        << "d/M/yy"
+                                        << "ddddMMMM dd, yyyy"
+                                        << "dd/MM/yy"
+                                        << "dd/MM/yyyy"
+                                        << "MMM d, yy"
+                                        << "MMM d, yyyy"
+                                        << "d. MMM. yyyy"
+                                        << "MMMM d, yyyy"
+                                        << "d. MMMM yyyy"
+                                        << "ddd, MMM d, yy"
+                                        << "ddd dd/MMM yy"
+                                        << "ddd, MMMM d, yyyy"
+                                        << "ddddMMMM d, yyyy"
+                                        << "MM-dd"
+                                        << "yy-MM-dd"
+                                        << "yyyy-MM-dd"
+                                        << "MM/yy"
+                                        << "MMM dd"
+                                        << "MMMM";
+    return formats;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QStringList VCommonSettings::GetUserDefinedDateFormats() const
+{
+    return value(settingLabelUserDateFormats, QStringList()).toStringList();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VCommonSettings::SetUserDefinedDateFormats(const QStringList &formats)
+{
+    setValue(settingLabelUserDateFormats, ClearFormats(VCommonSettings::PredefinedDateFormats(), formats));
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QString VCommonSettings::GetLabelTimeFormat() const
+{
+    const QString format = value(settingLabelTimeFormat, VCommonSettings::PredefinedTimeFormats().first()).toString();
+    const QStringList allFormats = VCommonSettings::PredefinedTimeFormats() + GetUserDefinedTimeFormats();
+
+    if (allFormats.contains(format))
+    {
+        return format;
+    }
+    else
+    {
+        return VCommonSettings::PredefinedTimeFormats().first();
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VCommonSettings::SetLabelTimeFormat(const QString &format)
+{
+    setValue(settingLabelTimeFormat, format);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QStringList VCommonSettings::PredefinedTimeFormats()
+{
+    QStringList formats = QStringList() << "hh:mm:ss"
+                                        << "hh:mm:ss AP"
+                                        << "hh:mm"
+                                        << "hh:mm AP";
+    return formats;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QStringList VCommonSettings::GetUserDefinedTimeFormats() const
+{
+    return value(settingLabelUserTimeFormats, QStringList()).toStringList();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VCommonSettings::SetUserDefinedTimeFormats(const QStringList &formats)
+{
+    setValue(settingLabelUserTimeFormats, ClearFormats(VCommonSettings::PredefinedTimeFormats(), formats));
 }

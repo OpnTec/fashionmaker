@@ -457,8 +457,32 @@ void VTranslateVars::InitPostfixOperators()
 //---------------------------------------------------------------------------------------------------------------------
 void VTranslateVars::InitPlaceholder()
 {
-    placeholders.insert(pl_size, translate("VTranslateVars", "size", "placeholder"));
-    placeholders.insert(pl_height, translate("VTranslateVars", "height", "placeholder"));
+    placeholders.insert(pl_size,          translate("VTranslateVars", "size",          "placeholder"));
+    placeholders.insert(pl_height,        translate("VTranslateVars", "height",        "placeholder"));
+    placeholders.insert(pl_date,          translate("VTranslateVars", "date",          "placeholder"));
+    placeholders.insert(pl_time,          translate("VTranslateVars", "time",          "placeholder"));
+    placeholders.insert(pl_patternName,   translate("VTranslateVars", "patternName",   "placeholder"));
+    placeholders.insert(pl_patternNumber, translate("VTranslateVars", "patternNumber", "placeholder"));
+    placeholders.insert(pl_author,        translate("VTranslateVars", "author",        "placeholder"));
+    placeholders.insert(pl_customer,      translate("VTranslateVars", "customer",      "placeholder"));
+    placeholders.insert(pl_pExt,          translate("VTranslateVars", "pExt",          "placeholder"));
+    placeholders.insert(pl_pFileName,     translate("VTranslateVars", "pFileName",     "placeholder"));
+    placeholders.insert(pl_mFileName,     translate("VTranslateVars", "mFileName",     "placeholder"));
+    placeholders.insert(pl_mExt,          translate("VTranslateVars", "mExt",          "placeholder"));
+    placeholders.insert(pl_pLetter,       translate("VTranslateVars", "pLetter",       "placeholder"));
+    placeholders.insert(pl_pAnnotation,   translate("VTranslateVars", "pAnnotation",   "placeholder"));
+    placeholders.insert(pl_pOrientation,  translate("VTranslateVars", "pOrientation",  "placeholder"));
+    placeholders.insert(pl_pRotation,     translate("VTranslateVars", "pRotation",     "placeholder"));
+    placeholders.insert(pl_pTilt,         translate("VTranslateVars", "pTilt",         "placeholder"));
+    placeholders.insert(pl_pFoldPosition, translate("VTranslateVars", "pFoldPosition", "placeholder"));
+    placeholders.insert(pl_pName,         translate("VTranslateVars", "pName",         "placeholder"));
+    placeholders.insert(pl_pQuantity,     translate("VTranslateVars", "pQuantity",     "placeholder"));
+    placeholders.insert(pl_mFabric,       translate("VTranslateVars", "mFabric",       "placeholder"));
+    placeholders.insert(pl_mLining,       translate("VTranslateVars", "mLining",       "placeholder"));
+    placeholders.insert(pl_mInterfacing,  translate("VTranslateVars", "mInterfacing",  "placeholder"));
+    placeholders.insert(pl_mInterlining,  translate("VTranslateVars", "mInterlining",  "placeholder"));
+    placeholders.insert(pl_wCut,          translate("VTranslateVars", "wCut",          "placeholder"));
+    placeholders.insert(pl_wOnFold,       translate("VTranslateVars", "wOnFold",       "placeholder"));
 }
 
 #undef translate
@@ -671,6 +695,44 @@ QString VTranslateVars::PlaceholderToUser(const QString &var) const
     }
 
     return var;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QString VTranslateVars::PlaceholderToUserText(QString text) const
+{
+    QChar per('%');
+    auto i = placeholders.constBegin();
+    while (i != placeholders.constEnd())
+    {
+        const QString translated = per + i.value().translate() + per;
+        const QString original = per + i.key() + per;
+
+        if (translated != original)
+        {
+            text.replace(original, translated);
+        }
+        ++i;
+    }
+    return text;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QString VTranslateVars::PlaceholderFromUserText(QString text) const
+{
+    QChar per('%');
+    auto i = placeholders.constBegin();
+    while (i != placeholders.constEnd())
+    {
+        const QString translated = per + i.value().translate() + per;
+        const QString original = per + i.key() + per;
+
+        if (translated != original)
+        {
+            text.replace(translated, original);
+        }
+        ++i;
+    }
+    return text;
 }
 
 //---------------------------------------------------------------------------------------------------------------------

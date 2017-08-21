@@ -154,6 +154,8 @@ fi
 %{_datadir}/%{name}/tables/multisize/*.vst
 %dir %{_datadir}/%{name}/tables/templates
 %{_datadir}/%{name}/tables/templates/*.vit
+%dir %{_datadir}/%{name}/labels
+%{_datadir}/%{name}/labels/*.xml
 
 %clean
 rm -f dist/debian/%{name}.1.gz dist/debian/tape.1.gz dist/debian/%{name}.xml dist/debian/%{name}

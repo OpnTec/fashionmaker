@@ -98,7 +98,11 @@ extern const QString highhipCirc_M;        // G08
 extern const QString hipCirc_M;            // G09
 extern const QString neckArcF_M;           // G10
 extern const QString highbustArcF_M;       // G11
+
+// size and bust_arc_f are synonyms
+extern const QString size_M;               // G12
 extern const QString bustArcF_M;           // G12
+
 extern const QString lowbustArcF_M;        // G13
 extern const QString ribArcF_M;            // G14
 extern const QString waistArcF_M;          // G15

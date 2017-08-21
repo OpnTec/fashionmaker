@@ -48,6 +48,9 @@ public:
     QString InternalVarToUser(const QString &var) const;
     QString PlaceholderToUser(const QString &var) const;
 
+    QString PlaceholderToUserText(QString text) const;
+    QString PlaceholderFromUserText(QString text) const;
+
     QString VarToUser(const QString &var) const;
     QString VarFromUser(const QString &var) const;
 

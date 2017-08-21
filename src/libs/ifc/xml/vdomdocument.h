@@ -83,8 +83,15 @@ class VDomDocument : public QDomDocument
     Q_DECLARE_TR_FUNCTIONS(VDomDocument)
 public:
     static const QString AttrId;
+    static const QString AttrText;
+    static const QString AttrBold;
+    static const QString AttrItalic;
+    static const QString AttrAlignment;
+    static const QString AttrFSIncrement;
+
     static const QString TagVersion;
     static const QString TagUnit;
+    static const QString TagLine;
 
     VDomDocument();
     virtual ~VDomDocument() Q_DECL_EQ_DEFAULT;
@@ -101,6 +108,7 @@ public:
 
     static QString GetParametrString(const QDomElement& domElement, const QString &name,
                                      const QString &defValue = QString());
+    static QString GetParametrEmptyString(const QDomElement& domElement, const QString &name);
     static qreal   GetParametrDouble(const QDomElement& domElement, const QString &name, const QString &defValue);
     static quint32 GetParametrId(const QDomElement& domElement);
 
@@ -121,6 +129,9 @@ public:
     QDomElement    NodeById(const quint32 &nodeId);
 
     static bool    SafeCopy(const QString &source, const QString &destination, QString &error);
+
+    QVector<VLabelTemplateLine> GetLabelTemplate(const QDomElement &element) const;
+    void                        SetLabelTemplate(QDomElement &element, const QVector<VLabelTemplateLine> &lines);
 
 protected:
     bool           setTagText(const QString &tag, const QString &text);

@@ -63,6 +63,7 @@ void PreferencesPathPage::Apply()
     settings->SetPathPattern(ui->pathTable->item(2, 1)->text());
     settings->SetPathLayout(ui->pathTable->item(3, 1)->text());
     settings->SetPathTemplate(ui->pathTable->item(4, 1)->text());
+    settings->SetPathLabelTemplate(ui->pathTable->item(5, 1)->text());
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -90,6 +91,9 @@ void PreferencesPathPage::DefaultPath()
             break;
         case 4: // templates
             path = VCommonSettings::GetDefPathTemplate();
+            break;
+        case 5: // label templates
+            path = VSettings::GetDefPathLabelTemplate();
             break;
         default:
             break;
@@ -124,6 +128,9 @@ void PreferencesPathPage::EditPath()
             break;
         case 4: // templates
             path = qApp->ValentinaSettings()->GetPathTemplate();
+            break;
+        case 5: // label templates
+            path = qApp->ValentinaSettings()->GetPathLabelTemplate();
             break;
         default:
             break;
@@ -164,7 +171,7 @@ void PreferencesPathPage::EditPath()
 //---------------------------------------------------------------------------------------------------------------------
 void PreferencesPathPage::InitTable()
 {
-    ui->pathTable->setRowCount(5);
+    ui->pathTable->setRowCount(6);
     ui->pathTable->setColumnCount(2);
 
     const VSettings *settings = qApp->ValentinaSettings();
@@ -202,6 +209,13 @@ void PreferencesPathPage::InitTable()
         QTableWidgetItem *item = new QTableWidgetItem(settings->GetPathTemplate());
         item->setToolTip(settings->GetPathTemplate());
         ui->pathTable->setItem(4, 1, item);
+    }
+
+    {
+        ui->pathTable->setItem(5, 0, new QTableWidgetItem(tr("My label templates")));
+        QTableWidgetItem *item = new QTableWidgetItem(settings->GetPathLabelTemplate());
+        item->setToolTip(settings->GetPathLabelTemplate());
+        ui->pathTable->setItem(5, 1, item);
     }
 
     ui->pathTable->verticalHeader()->setDefaultSectionSize(20);

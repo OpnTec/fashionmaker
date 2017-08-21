@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" attributeFormDefault="unqualified">
+  <xs:element name="template">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="version" type="formatVersion"/>
+        <xs:element name="lines">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="line" minOccurs="0" maxOccurs="unbounded">
+                <xs:complexType>
+                  <xs:attribute name="text" type="xs:string" use="required"/>
+                  <xs:attribute name="bold" type="xs:boolean"/>
+                  <xs:attribute name="italic" type="xs:boolean"/>
+                  <xs:attribute name="alignment" type="alignmentType"/>
+                  <xs:attribute name="sfIncrement" type="xs:unsignedInt"/>
+                </xs:complexType>
+              </xs:element>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:simpleType name="formatVersion">
+    <xs:restriction base="xs:string">
+      <xs:pattern value="^(0|([1-9][0-9]*))\.(0|([1-9][0-9]*))\.(0|([1-9][0-9]*))$"/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="alignmentType">
+    <xs:restriction base="xs:unsignedInt">
+      <xs:enumeration value="0"/><!--default (no aligns)-->
+      <xs:enumeration value="1"/><!--aligns with the left edge-->
+      <xs:enumeration value="2"/><!--aligns with the right edge-->
+      <xs:enumeration value="4"/><!--Centers horizontally in the available space-->
+    </xs:restriction>
+  </xs:simpleType>
+</xs:schema>
