@@ -62,7 +62,6 @@
 #include "../vtools/undocommands/addgroup.h"
 #include "dialogs/vwidgetdetails.h"
 #include "../vpatterndb/vpiecepath.h"
-#include "../vpatterndb/measurements.h"
 #include "../qmuparser/qmuparsererror.h"
 #include "../vtools/dialogs/support/dialogeditlabel.h"
 
@@ -478,8 +477,7 @@ bool MainWindow::LoadMeasurements(const QString &path)
     }
     else if (m->Type() == MeasurementsType::Individual)
     {
-        VContainer::SetSize(*pattern->DataVariables()->value(size_M)->GetValue());
-        VContainer::SetHeight(*pattern->DataVariables()->value(height_M)->GetValue());
+        SetSizeHeightForIndividualM();
     }
 
     return true;
@@ -528,8 +526,7 @@ bool MainWindow::UpdateMeasurements(const QString &path, int size, int height)
     }
     else if (m->Type() == MeasurementsType::Individual)
     {
-        VContainer::SetSize(*pattern->DataVariables()->value(size_M)->GetValue());
-        VContainer::SetHeight(*pattern->DataVariables()->value(height_M)->GetValue());
+        SetSizeHeightForIndividualM();
     }
 
     return true;

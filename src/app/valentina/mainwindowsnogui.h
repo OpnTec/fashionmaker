@@ -99,6 +99,7 @@ protected:
     bool LayoutSettings(VLayoutGenerator& lGenerator);
     int ContinueIfLayoutStale();
     QString FileName() const;
+    void SetSizeHeightForIndividualM() const;
 private slots:
     void PrintPages (QPrinter *printer);
     void ErrorConsoleMode(const LayoutErrors &state);

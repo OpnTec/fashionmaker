@@ -40,6 +40,7 @@
 #include "../vpatterndb/floatItemData/vpiecelabeldata.h"
 #include "../vpatterndb/floatItemData/vpatternlabeldata.h"
 #include "../vpatterndb/floatItemData/vgrainlinedata.h"
+#include "../vpatterndb/measurements.h"
 #include "../vtools/tools/vabstracttool.h"
 #include "../vtools/tools/vtoolseamallowance.h"
 
@@ -1513,6 +1514,30 @@ QString MainWindowsNoGUI::FileName() const
     QString fileName;
     qApp->GetPPath().isEmpty() ? fileName = tr("unnamed") : fileName = qApp->GetPPath();
     return QFileInfo(fileName).baseName();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void MainWindowsNoGUI::SetSizeHeightForIndividualM() const
+{
+    const QHash<QString, QSharedPointer<VInternalVariable> > * vars = pattern->DataVariables();
+
+    if (vars->contains(size_M))
+    {
+        VContainer::SetSize(*vars->value(size_M)->GetValue());
+    }
+    else
+    {
+        VContainer::SetSize(0);
+    }
+
+    if (vars->contains(height_M))
+    {
+        VContainer::SetHeight(*vars->value(height_M)->GetValue());
+    }
+    else
+    {
+        VContainer::SetHeight(0);
+    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
