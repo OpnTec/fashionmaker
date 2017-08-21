@@ -599,7 +599,7 @@ void DialogEditLabel::SetPiece(const VPiece &piece)
     m_placeholders[pl_pLetter].second = pieceData.GetLetter();
     m_placeholders[pl_pAnnotation].second = pieceData.GetAnnotation();
     m_placeholders[pl_pOrientation].second = pieceData.GetOrientation();
-    m_placeholders[pl_pRotation].second = pieceData.GetRotation();
+    m_placeholders[pl_pRotation].second = pieceData.GetRotationWay();
     m_placeholders[pl_pTilt].second = pieceData.GetTilt();
     m_placeholders[pl_pFoldPosition].second = pieceData.GetFoldPosition();
     m_placeholders[pl_pName].second = piece.GetName();

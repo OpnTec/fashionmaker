@@ -248,7 +248,7 @@ void DialogSeamAllowance::SetPiece(const VPiece &piece)
     uiTabLabels->lineEditLetter->setText(m_oldData.GetLetter());
     uiTabLabels->lineEditAnnotation->setText(m_oldData.GetAnnotation());
     uiTabLabels->lineEditOrientation->setText(m_oldData.GetOrientation());
-    uiTabLabels->lineEditRotation->setText(m_oldData.GetRotation());
+    uiTabLabels->lineEditRotation->setText(m_oldData.GetRotationWay());
     uiTabLabels->lineEditTilt->setText(m_oldData.GetTilt());
     uiTabLabels->lineEditFoldPosition->setText(m_oldData.GetFoldPosition());
     uiTabLabels->spinBoxQuantity->setValue(m_oldData.GetQuantity());
@@ -1978,7 +1978,7 @@ VPiece DialogSeamAllowance::CreatePiece() const
     piece.GetPatternPieceData().SetLetter(uiTabLabels->lineEditLetter->text());
     piece.GetPatternPieceData().SetAnnotation(uiTabLabels->lineEditAnnotation->text());
     piece.GetPatternPieceData().SetOrientation(uiTabLabels->lineEditOrientation->text());
-    piece.GetPatternPieceData().SetRotation(uiTabLabels->lineEditRotation->text());
+    piece.GetPatternPieceData().SetRotationWay(uiTabLabels->lineEditRotation->text());
     piece.GetPatternPieceData().SetTilt(uiTabLabels->lineEditTilt->text());
     piece.GetPatternPieceData().SetFoldPosition(uiTabLabels->lineEditFoldPosition->text());
     piece.GetPatternPieceData().SetQuantity(uiTabLabels->spinBoxQuantity->value());

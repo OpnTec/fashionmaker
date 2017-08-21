@@ -229,7 +229,7 @@ public:
     static const QString AttrLetter;
     static const QString AttrAnnotation;
     static const QString AttrOrientation;
-    static const QString AttrRotation;
+    static const QString AttrRotationWay;
     static const QString AttrTilt;
     static const QString AttrFoldPosition;
     static const QString AttrQuantity;
@@ -250,6 +250,7 @@ public:
     static const QString AttrEnd;
     static const QString AttrIncludeAs;
     static const QString AttrWidth;
+    static const QString AttrRotation;
 
     static const QString AttrAll;
 

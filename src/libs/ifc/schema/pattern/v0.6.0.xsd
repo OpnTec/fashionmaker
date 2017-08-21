@@ -518,7 +518,7 @@
                               <xs:attribute name="letter" type="xs:string"/>
                               <xs:attribute name="annotation" type="xs:string"/>
                               <xs:attribute name="orientation" type="xs:string"/>
-                              <xs:attribute name="rotation" type="xs:string"/>
+                              <xs:attribute name="rotationWay" type="xs:string"/>
                               <xs:attribute name="tilt" type="xs:string"/>
                               <xs:attribute name="foldPosition" type="xs:string"/>
                               <xs:attribute name="visible" type="xs:boolean"/>

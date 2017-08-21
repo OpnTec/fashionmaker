@@ -896,7 +896,7 @@ void VPattern::ParsePieceDataTag(const QDomElement &domElement, VPiece &detail) 
     ppData.SetLetter(GetParametrEmptyString(domElement, AttrLetter));
     ppData.SetAnnotation(GetParametrEmptyString(domElement, AttrAnnotation));
     ppData.SetOrientation(GetParametrEmptyString(domElement, AttrOrientation));
-    ppData.SetRotation(GetParametrEmptyString(domElement, AttrRotation));
+    ppData.SetRotationWay(GetParametrEmptyString(domElement, AttrRotationWay));
     ppData.SetTilt(GetParametrEmptyString(domElement, AttrTilt));
     ppData.SetFoldPosition(GetParametrEmptyString(domElement, AttrFoldPosition));
     ppData.SetQuantity(static_cast<int>(GetParametrUInt(domElement, AttrQuantity, "1")));

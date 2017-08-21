@@ -127,7 +127,7 @@ void InitPiecePlaceholders(QMap<QString, QString> &placeholders, const QString &
     placeholders[pl_pLetter] = data.GetLetter();
     placeholders[pl_pAnnotation] = data.GetAnnotation();
     placeholders[pl_pOrientation] = data.GetOrientation();
-    placeholders[pl_pRotation] = data.GetRotation();
+    placeholders[pl_pRotation] = data.GetRotationWay();
     placeholders[pl_pTilt] = data.GetTilt();
     placeholders[pl_pFoldPosition] = data.GetFoldPosition();
     placeholders[pl_pName] = name;

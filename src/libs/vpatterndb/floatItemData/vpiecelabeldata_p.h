@@ -48,7 +48,7 @@ public:
         : m_qsLetter(),
           m_annotation(),
           m_orientation(),
-          m_rotation(),
+          m_rotationWay(),
           m_tilt(),
           m_foldPosition(),
           m_quantity(1),
@@ -61,7 +61,7 @@ public:
           m_qsLetter(data.m_qsLetter),
           m_annotation(data.m_annotation),
           m_orientation(data.m_orientation),
-          m_rotation(data.m_rotation),
+          m_rotationWay(data.m_rotationWay),
           m_tilt(data.m_tilt),
           m_foldPosition(data.m_foldPosition),
           m_quantity(data.m_quantity),
@@ -75,7 +75,7 @@ public:
     QString m_qsLetter;
     QString m_annotation;
     QString m_orientation;
-    QString m_rotation;
+    QString m_rotationWay;
     QString m_tilt;
     QString m_foldPosition;
 

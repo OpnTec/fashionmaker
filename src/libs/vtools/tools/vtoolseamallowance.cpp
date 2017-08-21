@@ -304,7 +304,7 @@ void VToolSeamAllowance::AddPatternPieceData(VAbstractPattern *doc, QDomElement 
     doc->SetAttribute(domData, VAbstractPattern::AttrLetter, data.GetLetter());
     doc->SetAttribute(domData, VAbstractPattern::AttrAnnotation, data.GetAnnotation());
     doc->SetAttribute(domData, VAbstractPattern::AttrOrientation, data.GetOrientation());
-    doc->SetAttribute(domData, VAbstractPattern::AttrRotation, data.GetRotation());
+    doc->SetAttribute(domData, VAbstractPattern::AttrRotationWay, data.GetRotationWay());
     doc->SetAttribute(domData, VAbstractPattern::AttrTilt, data.GetTilt());
     doc->SetAttribute(domData, VAbstractPattern::AttrFoldPosition, data.GetFoldPosition());
     doc->SetAttribute(domData, VAbstractPattern::AttrQuantity, data.GetQuantity());
@@ -668,7 +668,7 @@ void VToolSeamAllowance::SaveRotationDetail(qreal dRot)
     // Tranform angle to anticlockwise
     QLineF line(0, 0, 100, 0);
     line.setAngle(-dRot);
-    newDet.GetPatternPieceData().SetRotation(QString().setNum(line.angle()));
+    newDet.GetPatternPieceData().SetRotationWay(QString().setNum(line.angle()));
 
     SavePieceOptions* rotateCommand = new SavePieceOptions(oldDet, newDet, doc, id);
     rotateCommand->setText(tr("rotate pattern piece label"));
