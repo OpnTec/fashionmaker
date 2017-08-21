@@ -141,7 +141,6 @@ void VBank::Arranged(int i)
     if (small.contains(i))
     {
         small.remove(i);
-        return;
     }
 }
 
@@ -166,7 +165,6 @@ void VBank::NotArranged(int i)
     {
         unsorted.insert(i, small.value(i));
         small.remove(i);
-        return;
     }
 }
 

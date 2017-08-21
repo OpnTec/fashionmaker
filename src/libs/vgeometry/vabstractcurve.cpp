@@ -127,7 +127,6 @@ QVector<QPointF> VAbstractCurve::FromBegin(const QVector<QPointF> &points, const
                     {
                          segment.append(points.at(i+1));
                     }
-                    continue;
                 }
             }
             else

@@ -132,11 +132,7 @@ int VAbstractCubicBezierPath::Segment(const QPointF &p) const
     for (qint32 i = 1; i <= CountSubSpl(); ++i)
     {
         const qreal t = GetSpline(i).ParamT(p);
-        if (not qFuzzyIsNull(t) && qFuzzyCompare(t, -1))
-        {
-            continue;
-        }
-        else
+        if (qFuzzyIsNull(t) || not qFuzzyCompare(t, -1))
         {
             index = i;
             break;
