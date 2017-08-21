@@ -35,7 +35,7 @@
 #include "floatitemdef.h"
 
 class VPieceLabelDataPrivate;
-class VLabelTemplateLine;
+struct VLabelTemplateLine;
 
 /**
  * @brief The VPieceLabelData class holds some information about a single
