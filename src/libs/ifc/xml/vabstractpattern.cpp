@@ -272,7 +272,6 @@ QStringList VAbstractPattern::ListMeasurements() const
             if (IsVariable(tValues.at(j)) || IsPostfixOperator(tValues.at(j)) || IsFunction(tValues.at(j)))
             {
                 others.insert(tValues.at(j));
-                continue;
             }
             else
             {
@@ -2150,13 +2149,11 @@ void VAbstractPattern::SetGroupName(quint32 id, const QString &name)
             }
 
             qDebug("Can't get group by id = %u.", id);
-            return;
         }
     }
     else
     {
         qDebug("Can't get tag Groups.");
-        return;
     }
 }
 
@@ -2238,6 +2235,5 @@ void VAbstractPattern::SetGroupVisivility(quint32 id, bool visible)
     else
     {
         qDebug("Can't get group by id = %u.", id);
-        return;
     }
 }
