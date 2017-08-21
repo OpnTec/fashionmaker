@@ -2224,7 +2224,7 @@ void VPatternConverter::PortPieceLabelstoV0_6_0()
 
             QString line;
 
-            const int material = GetParametrUInt(domMCP, strMaterial, "0");
+            const int material = static_cast<int>(GetParametrUInt(domMCP, strMaterial, "0"));
             switch(material)
             {
                 case 0:
