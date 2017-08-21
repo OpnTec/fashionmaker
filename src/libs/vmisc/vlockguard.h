@@ -171,12 +171,12 @@ bool VLockGuard<Guarded>::TryLock(const QString &lockName, int stale, int timeou
     {
         lock.reset();
     }
+#if defined(Q_OS_WIN)
     else
     {
-#if defined(Q_OS_WIN)
         SetFileAttributesW(lockFile.toStdWString().c_str(), FILE_ATTRIBUTE_HIDDEN);
-#endif
     }
+#endif
     return res;
 }
 

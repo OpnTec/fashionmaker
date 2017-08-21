@@ -57,6 +57,10 @@ void DRW_Header::parseCode(int code, dxfReader *reader){
         curr->code = code;
         break;
     case 2:
+    case 6:
+    case 7:
+    case 8:
+    case 390:
         curr->addString(reader->getUtf8String());
         curr->code = code;
         break;
@@ -66,18 +70,6 @@ void DRW_Header::parseCode(int code, dxfReader *reader){
             reader->setCodePage(curr->content.s);
             curr->addString(reader->getCodePage());
         }
-        curr->code = code;
-        break;
-    case 6:
-        curr->addString(reader->getUtf8String());
-        curr->code = code;
-        break;
-    case 7:
-        curr->addString(reader->getUtf8String());
-        curr->code = code;
-        break;
-    case 8:
-        curr->addString(reader->getUtf8String());
         curr->code = code;
         break;
     case 10:
@@ -93,39 +85,17 @@ void DRW_Header::parseCode(int code, dxfReader *reader){
         curr->code = code;
         break;
     case 40:
-        curr->addDouble(reader->getDouble());
-        curr->code = code;
-        break;
     case 50:
         curr->addDouble(reader->getDouble());
         curr->code = code;
         break;
     case 62:
-        curr->addInt(reader->getInt32());
-        curr->code = code;
-        break;
     case 70:
-        curr->addInt(reader->getInt32());
-        curr->code = code;
-        break;
     case 280:
-        curr->addInt(reader->getInt32());
-        curr->code = code;
-        break;
     case 290:
-        curr->addInt(reader->getInt32());
-        curr->code = code;
-        break;
     case 370:
-        curr->addInt(reader->getInt32());
-        curr->code = code;
-        break;
     case 380:
         curr->addInt(reader->getInt32());
-        curr->code = code;
-        break;
-    case 390:
-        curr->addString(reader->getUtf8String());
         curr->code = code;
         break;
     default:
