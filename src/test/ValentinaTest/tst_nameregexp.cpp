@@ -250,7 +250,11 @@ void TST_NameRegExp::TestCorrectOrderMeasurement_data()
     QTest::newRow("G09") << hipCirc_M << "hip_circ";
     QTest::newRow("G10") << neckArcF_M << "neck_arc_f";
     QTest::newRow("G11") << highbustArcF_M << "highbust_arc_f";
+
+    // size and bust_arc_f are synonyms
     QTest::newRow("G12") << bustArcF_M << "bust_arc_f";
+    QTest::newRow("G12") << size_M << "size";
+
     QTest::newRow("G13") << lowbustArcF_M << "lowbust_arc_f";
     QTest::newRow("G14") << ribArcF_M << "rib_arc_f";
     QTest::newRow("G15") << waistArcF_M << "waist_arc_f";

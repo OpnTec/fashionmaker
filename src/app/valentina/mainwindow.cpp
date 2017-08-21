@@ -62,6 +62,7 @@
 #include "../vtools/undocommands/addgroup.h"
 #include "dialogs/vwidgetdetails.h"
 #include "../vpatterndb/vpiecepath.h"
+#include "../vpatterndb/measurements.h"
 #include "../qmuparser/qmuparsererror.h"
 #include "../vtools/dialogs/support/dialogeditlabel.h"
 
@@ -452,12 +453,6 @@ bool MainWindow::LoadMeasurements(const QString &path)
         return false;
     }
 
-    if (m->Type() == MeasurementsType::Multisize)
-    {
-        VContainer::SetSize(UnitConvertor(m->BaseSize(), m->MUnit(), *m->GetData()->GetPatternUnit()));
-        VContainer::SetHeight(UnitConvertor(m->BaseHeight(), m->MUnit(), *m->GetData()->GetPatternUnit()));
-    }
-
     try
     {
         qApp->setPatternType(m->Type());
@@ -475,6 +470,18 @@ bool MainWindow::LoadMeasurements(const QString &path)
         }
         return false;
     }
+
+    if (m->Type() == MeasurementsType::Multisize)
+    {
+        VContainer::SetSize(UnitConvertor(m->BaseSize(), m->MUnit(), *m->GetData()->GetPatternUnit()));
+        VContainer::SetHeight(UnitConvertor(m->BaseHeight(), m->MUnit(), *m->GetData()->GetPatternUnit()));
+    }
+    else if (m->Type() == MeasurementsType::Individual)
+    {
+        VContainer::SetSize(*pattern->DataVariables()->value(size_M)->GetValue());
+        VContainer::SetHeight(*pattern->DataVariables()->value(height_M)->GetValue());
+    }
+
     return true;
 }
 
@@ -498,12 +505,6 @@ bool MainWindow::UpdateMeasurements(const QString &path, int size, int height)
         return false;
     }
 
-    if (m->Type() == MeasurementsType::Multisize)
-    {
-        VContainer::SetSize(size);
-        VContainer::SetHeight(height);
-    }
-
     try
     {
         pattern->ClearVariables(VarType::Measurement);
@@ -519,6 +520,18 @@ bool MainWindow::UpdateMeasurements(const QString &path, int size, int height)
         }
         return false;
     }
+
+    if (m->Type() == MeasurementsType::Multisize)
+    {
+        VContainer::SetSize(size);
+        VContainer::SetHeight(height);
+    }
+    else if (m->Type() == MeasurementsType::Individual)
+    {
+        VContainer::SetSize(*pattern->DataVariables()->value(size_M)->GetValue());
+        VContainer::SetHeight(*pattern->DataVariables()->value(height_M)->GetValue());
+    }
+
     return true;
 }
 

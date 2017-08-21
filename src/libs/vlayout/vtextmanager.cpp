@@ -93,6 +93,8 @@ QMap<QString, QString> PreparePlaceholders(const VAbstractPattern *doc)
     }
     else if (qApp->patternType() == MeasurementsType::Individual)
     {
+        curSize = QString::number(VContainer::size());
+        curHeight = QString::number(VContainer::height());
         mExt = "vit";
     }
 
