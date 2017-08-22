@@ -33,8 +33,6 @@
 #include "../options.h"
 #include <QMap>
 
-#include "../vformat/vlabeltemplate.h"
-
 class VPattern;
 class VContainer;
 class QCheckBox;
