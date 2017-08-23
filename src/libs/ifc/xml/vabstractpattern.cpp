@@ -797,6 +797,7 @@ void VAbstractPattern::SetMPath(const QString &path)
     if (setTagText(TagMeasurements, path))
     {
         emit patternChanged(false);
+        patternLabelWasChanged = true;
     }
     else
     {
@@ -1282,6 +1283,7 @@ void VAbstractPattern::SetPatternName(const QString &qsName)
 {
     CheckTagExists(TagPatternName);
     setTagText(TagPatternName, qsName);
+    patternLabelWasChanged = true;
     modified = true;
     emit patternChanged(false);
 }
@@ -1297,6 +1299,7 @@ void VAbstractPattern::SetCompanyName(const QString& qsName)
 {
     CheckTagExists(TagCompanyName);
     setTagText(TagCompanyName, qsName);
+    patternLabelWasChanged = true;
     modified = true;
     emit patternChanged(false);
 }
@@ -1312,6 +1315,7 @@ void VAbstractPattern::SetPatternNumber(const QString& qsNum)
 {
     CheckTagExists(TagPatternNum);
     setTagText(TagPatternNum, qsNum);
+    patternLabelWasChanged = true;
     modified = true;
     emit patternChanged(false);
 }
@@ -1327,6 +1331,7 @@ void VAbstractPattern::SetCustomerName(const QString& qsName)
 {
     CheckTagExists(TagCustomerName);
     setTagText(TagCustomerName, qsName);
+    patternLabelWasChanged = true;
     modified = true;
     emit patternChanged(false);
 }

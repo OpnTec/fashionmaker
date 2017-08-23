@@ -162,7 +162,6 @@ inline void VAbstractApplication::SetPPath(const QString &value)
     patternFilePath = value;
 }
 
-
 //---------------------------------------------------------------------------------------------------------------------
 template <typename T>
 inline QString VAbstractApplication::LocaleToString(const T &value)

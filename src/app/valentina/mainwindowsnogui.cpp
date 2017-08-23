@@ -1538,6 +1538,9 @@ void MainWindowsNoGUI::SetSizeHeightForIndividualM() const
     {
         VContainer::SetHeight(0);
     }
+
+    doc->SetPatternWasChanged(true);
+    emit doc->UpdatePatternLabel();
 }
 
 //---------------------------------------------------------------------------------------------------------------------

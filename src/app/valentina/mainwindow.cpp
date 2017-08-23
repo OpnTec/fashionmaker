@@ -474,6 +474,9 @@ bool MainWindow::LoadMeasurements(const QString &path)
     {
         VContainer::SetSize(UnitConvertor(m->BaseSize(), m->MUnit(), *m->GetData()->GetPatternUnit()));
         VContainer::SetHeight(UnitConvertor(m->BaseHeight(), m->MUnit(), *m->GetData()->GetPatternUnit()));
+
+        doc->SetPatternWasChanged(true);
+        emit doc->UpdatePatternLabel();
     }
     else if (m->Type() == MeasurementsType::Individual)
     {
@@ -523,6 +526,9 @@ bool MainWindow::UpdateMeasurements(const QString &path, int size, int height)
     {
         VContainer::SetSize(size);
         VContainer::SetHeight(height);
+
+        doc->SetPatternWasChanged(true);
+        emit doc->UpdatePatternLabel();
     }
     else if (m->Type() == MeasurementsType::Individual)
     {
@@ -3452,6 +3458,7 @@ void MainWindow::setCurrentFile(const QString &fileName)
 {
     qCDebug(vMainWindow, "Set current name to \"%s\"", qUtf8Printable(fileName));
     qApp->SetPPath(fileName);
+    doc->SetPatternWasChanged(true);
     emit doc->UpdatePatternLabel();
     qApp->getUndoStack()->setClean();
 
