@@ -164,6 +164,33 @@ void VToolAlongLine::SetVisualization()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+QString VToolAlongLine::MakeToolTip() const
+{
+    const QSharedPointer<VPointF> basePoint = VAbstractTool::data.GeometricObject<VPointF>(basePointId);
+    const QSharedPointer<VPointF> secondPoint = VAbstractTool::data.GeometricObject<VPointF>(secondPointId);
+    const QSharedPointer<VPointF> current = VAbstractTool::data.GeometricObject<VPointF>(id);
+
+    const QLineF curLine(static_cast<QPointF>(*basePoint), static_cast<QPointF>(*current));
+    const QLineF curToSecond(static_cast<QPointF>(*current), static_cast<QPointF>(*secondPoint));
+
+    const QString toolTip = QString("<table>"
+                                    "<tr> <td><b>%1:</b> %2 %3</td> </tr>"
+                                    "<tr> <td><b>%4:</b> %5°</td> </tr>"
+                                    "<tr> <td><b>%6:</b> %2 %3</td> </tr>"
+                                    "<tr> <td><b>%7:</b> %8 %3</td> </tr>"
+                                    "</table>")
+            .arg(tr("Length"))
+            .arg(qApp->fromPixel(curLine.length()))
+            .arg(UnitsToStr(qApp->patternUnit(), true))
+            .arg(tr("Angle"))
+            .arg(curLine.angle())
+            .arg(QString("%1->%2").arg(basePoint->name(), current->name()))
+            .arg(QString("%1->%2").arg(current->name(), secondPoint->name()))
+            .arg(qApp->fromPixel(curToSecond.length()));
+    return toolTip;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 quint32 VToolAlongLine::GetSecondPointId() const
 {
     return secondPointId;

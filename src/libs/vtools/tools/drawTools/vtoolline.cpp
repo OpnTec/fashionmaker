@@ -78,9 +78,7 @@ VToolLine::VToolLine(VAbstractPattern *doc, VContainer *data, quint32 id, quint3
 {
     this->m_lineType = typeLine;
     //Line
-    const QSharedPointer<VPointF> first = data->GeometricObject<VPointF>(firstPoint);
-    const QSharedPointer<VPointF> second = data->GeometricObject<VPointF>(secondPoint);
-    this->setLine(QLineF(static_cast<QPointF>(*first), static_cast<QPointF>(*second)));
+    RefreshGeometry();
     this->setFlag(QGraphicsItem::ItemStacksBehindParent, true);
     this->setFlag(QGraphicsItem::ItemIsFocusable, true);// For keyboard input focus
     this->setAcceptHoverEvents(true);
@@ -295,6 +293,7 @@ void VToolLine::AddToFile()
 void VToolLine::hoverEnterEvent(QGraphicsSceneHoverEvent *event)
 {
     m_isHovered = true;
+    setToolTip(MakeToolTip());
     QGraphicsLineItem::hoverEnterEvent(event);
 }
 
@@ -416,6 +415,26 @@ void VToolLine::SetVisualization()
         visual->setLineStyle(LineStyleToPenStyle(m_lineType));
         visual->RefreshGeometry();
     }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QString VToolLine::MakeToolTip() const
+{
+    const QSharedPointer<VPointF> first = VAbstractTool::data.GeometricObject<VPointF>(firstPoint);
+    const QSharedPointer<VPointF> second = VAbstractTool::data.GeometricObject<VPointF>(secondPoint);
+
+    const QLineF line(static_cast<QPointF>(*first), static_cast<QPointF>(*second));
+
+    const QString toolTip = QString("<table>"
+                                    "<tr> <td><b>%1:</b> %2 %3</td> </tr>"
+                                    "<tr> <td><b>%4:</b> %5°</td> </tr>"
+                                    "</table>")
+            .arg(tr("Length"))
+            .arg(qApp->fromPixel(line.length()))
+            .arg(UnitsToStr(qApp->patternUnit(), true))
+            .arg(tr("Angle"))
+            .arg(line.angle());
+    return toolTip;
 }
 
 //---------------------------------------------------------------------------------------------------------------------

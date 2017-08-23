@@ -343,3 +343,26 @@ void VToolArcWithLength::SetVisualization()
         visual->RefreshGeometry();
     }
 }
+
+//---------------------------------------------------------------------------------------------------------------------
+QString VToolArcWithLength::MakeToolTip() const
+{
+    const QSharedPointer<VArc> arc = VAbstractTool::data.GeometricObject<VArc>(id);
+
+    const QString toolTip = QString("<table>"
+                                    "<tr> <td><b>%1:</b> %2 %3</td> </tr>"
+                                    "<tr> <td><b>%4:</b> %5 %3</td> </tr>"
+                                    "<tr> <td><b>%6:</b> %7°</td> </tr>"
+                                    "<tr> <td><b>%8:</b> %9°</td> </tr>"
+                                    "</table>")
+            .arg(tr("Length"))
+            .arg(qApp->fromPixel(arc->GetLength()))
+            .arg(UnitsToStr(qApp->patternUnit(), true))
+            .arg(tr("Radius"))
+            .arg(qApp->fromPixel(arc->GetRadius()))
+            .arg(tr("Start angle"))
+            .arg(qApp->fromPixel(arc->GetStartAngle()))
+            .arg(tr("End angle"))
+            .arg(qApp->fromPixel(arc->GetEndAngle()));
+    return toolTip;
+}

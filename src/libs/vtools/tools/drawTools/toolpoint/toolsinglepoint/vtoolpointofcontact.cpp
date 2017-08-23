@@ -356,6 +356,36 @@ void VToolPointOfContact::SetVisualization()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+QString VToolPointOfContact::MakeToolTip() const
+{
+    const QSharedPointer<VPointF> p1 = VAbstractTool::data.GeometricObject<VPointF>(firstPointId);
+    const QSharedPointer<VPointF> p2 = VAbstractTool::data.GeometricObject<VPointF>(secondPointId);
+    const QSharedPointer<VPointF> centerP = VAbstractTool::data.GeometricObject<VPointF>(center);
+    const QSharedPointer<VPointF> current = VAbstractTool::data.GeometricObject<VPointF>(id);
+
+    const QLineF p1ToCur(static_cast<QPointF>(*p1), static_cast<QPointF>(*current));
+    const QLineF p2ToCur(static_cast<QPointF>(*p2), static_cast<QPointF>(*current));
+    const QLineF centerToCur(static_cast<QPointF>(*centerP), static_cast<QPointF>(*current));
+
+    const QString toolTip = QString("<table>"
+                                    "<tr> <td><b>%1:</b> %2 %3</td> </tr>"
+                                    "<tr> <td><b>%4:</b> %5 %3</td> </tr>"
+                                    "<tr> <td><b>%6:</b> %7 %3</td> </tr>"
+                                    "<tr> <td><b>%8:</b> %9°</td> </tr>"
+                                    "</table>")
+            .arg(QString("%1->%2").arg(p1->name(), current->name()))
+            .arg(qApp->fromPixel(p1ToCur.length()))
+            .arg(UnitsToStr(qApp->patternUnit(), true))
+            .arg(QString("%1->%2").arg(p2->name(), current->name()))
+            .arg(qApp->fromPixel(p2ToCur.length()))
+            .arg(QString("%1 %2->%3").arg(tr("Length"), centerP->name(), current->name()))
+            .arg(qApp->fromPixel(centerToCur.length()))
+            .arg(QString("%1 %2->%3").arg(tr("Angle"), centerP->name(), current->name()))
+            .arg(centerToCur.angle());
+    return toolTip;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 quint32 VToolPointOfContact::GetSecondPointId() const
 {
     return secondPointId;

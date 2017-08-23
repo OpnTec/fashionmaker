@@ -190,6 +190,12 @@ void VGraphicsSimpleTextItem::hoverEnterEvent(QGraphicsSceneHoverEvent *event)
         SetItemOverrideCursor(this, cursorArrowOpenHand, 1, 1);
     }
     this->setBrush(Qt::green);
+
+    if(QGraphicsItem *parent = parentItem())
+    {
+        setToolTip(parent->toolTip());
+    }
+
     QGraphicsSimpleTextItem::hoverEnterEvent(event);
 }
 

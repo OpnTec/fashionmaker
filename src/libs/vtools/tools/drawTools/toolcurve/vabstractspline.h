@@ -78,11 +78,12 @@ public:
 
     virtual void GroupVisibility(quint32 object, bool visible) Q_DECL_OVERRIDE;
 public slots:
-    virtual void     FullUpdateFromFile () Q_DECL_OVERRIDE;
-    virtual void     Disable(bool disable, const QString &namePP) Q_DECL_OVERRIDE;
-    virtual void     DetailsMode(bool mode) Q_DECL_OVERRIDE;
-    virtual void     AllowHover(bool enabled) Q_DECL_OVERRIDE;
-    virtual void     AllowSelecting(bool enabled) Q_DECL_OVERRIDE;
+    virtual void    FullUpdateFromFile () Q_DECL_OVERRIDE;
+    virtual void    Disable(bool disable, const QString &namePP) Q_DECL_OVERRIDE;
+    virtual void    DetailsMode(bool mode) Q_DECL_OVERRIDE;
+    virtual void    AllowHover(bool enabled) Q_DECL_OVERRIDE;
+    virtual void    AllowSelecting(bool enabled) Q_DECL_OVERRIDE;
+    virtual QString MakeToolTip() const Q_DECL_OVERRIDE;
 signals:
     /**
      * @brief setEnabledPoint disable control points.

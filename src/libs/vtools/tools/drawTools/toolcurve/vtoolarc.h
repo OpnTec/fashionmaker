@@ -83,6 +83,7 @@ protected:
     virtual void     SaveDialog(QDomElement &domElement) Q_DECL_OVERRIDE;
     virtual void     SaveOptions(QDomElement &tag, QSharedPointer<VGObject> &obj) Q_DECL_OVERRIDE;
     virtual void     SetVisualization() Q_DECL_OVERRIDE;
+    virtual QString  MakeToolTip() const Q_DECL_OVERRIDE;
 private:
     Q_DISABLE_COPY(VToolArc)
 

@@ -144,6 +144,26 @@ void VToolLinePoint::hoverLeaveEvent(QGraphicsSceneHoverEvent *event)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+QString VToolLinePoint::MakeToolTip() const
+{
+    const QSharedPointer<VPointF> first = VAbstractTool::data.GeometricObject<VPointF>(basePointId);
+    const QSharedPointer<VPointF> second = VAbstractTool::data.GeometricObject<VPointF>(id);
+
+    const QLineF line(static_cast<QPointF>(*first), static_cast<QPointF>(*second));
+
+    const QString toolTip = QString("<table>"
+                                    "<tr> <td><b>%1:</b> %2 %3</td> </tr>"
+                                    "<tr> <td><b>%4:</b> %5°</td> </tr>"
+                                    "</table>")
+            .arg(tr("Length"))
+            .arg(qApp->fromPixel(line.length()))
+            .arg(UnitsToStr(qApp->patternUnit(), true))
+            .arg(tr("Angle"))
+            .arg(line.angle());
+    return toolTip;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 void VToolLinePoint::Disable(bool disable, const QString &namePP)
 {
     VToolSinglePoint::Disable(disable, namePP);

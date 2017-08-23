@@ -75,6 +75,23 @@ void VToolCut::FullUpdateFromFile()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+QString VToolCut::MakeToolTip() const
+{
+    const QSharedPointer<VAbstractCurve> curve = VAbstractTool::data.GeometricObject<VAbstractCurve>(curveCutId);
+
+    const QString toolTip = QString("<table>"
+                                    "<tr> <td><b>%1:</b> %2 %3</td> </tr>"
+                                    "<tr> <td><b>%4:</b> %5 %3</td> </tr>"
+                                    "<tr> <td><b>%6:</b> %7°</td> </tr>"
+                                    "<tr> <td><b>%8:</b> %9°</td> </tr>"
+                                    "</table>")
+            .arg(tr("Length"))
+            .arg(qApp->fromPixel(curve->GetLength()))
+            .arg(UnitsToStr(qApp->patternUnit(), true));
+    return toolTip;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 // cppcheck-suppress unusedFunction
 quint32 VToolCut::getCurveCutId() const
 {

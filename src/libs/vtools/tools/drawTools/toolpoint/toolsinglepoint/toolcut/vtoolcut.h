@@ -63,9 +63,10 @@ public:
     void    setCurveCutId(const quint32 &value);
 
 public slots:
-    virtual void  Disable(bool disable, const QString &namePP) Q_DECL_OVERRIDE;
-    virtual void  DetailsMode(bool mode) Q_DECL_OVERRIDE;
-    virtual void  FullUpdateFromFile() Q_DECL_OVERRIDE;
+    virtual void    Disable(bool disable, const QString &namePP) Q_DECL_OVERRIDE;
+    virtual void    DetailsMode(bool mode) Q_DECL_OVERRIDE;
+    virtual void    FullUpdateFromFile() Q_DECL_OVERRIDE;
+    virtual QString MakeToolTip() const Q_DECL_OVERRIDE;
 protected:
     /** @brief formula keep formula of length */
     QString       formula;

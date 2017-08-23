@@ -90,11 +90,12 @@ protected:
     void         AddToCalculation(const QDomElement &domElement);
 
     /** @brief SaveDialog save options into file after change in dialog. */
-    virtual void SaveDialog(QDomElement &domElement)=0;
-    virtual void SaveDialogChange() Q_DECL_FINAL;
-    virtual void AddToFile() Q_DECL_OVERRIDE;
-    void         SaveOption(QSharedPointer<VGObject> &obj);
-    virtual void SaveOptions(QDomElement &tag, QSharedPointer<VGObject> &obj);
+    virtual void    SaveDialog(QDomElement &domElement)=0;
+    virtual void    SaveDialogChange() Q_DECL_FINAL;
+    virtual void    AddToFile() Q_DECL_OVERRIDE;
+    void            SaveOption(QSharedPointer<VGObject> &obj);
+    virtual void    SaveOptions(QDomElement &tag, QSharedPointer<VGObject> &obj);
+    virtual QString MakeToolTip() const;
 
     bool         CorrectDisable(bool disable, const QString &namePP) const;
 

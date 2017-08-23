@@ -164,6 +164,20 @@ void VAbstractSpline::AllowSelecting(bool enabled)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+QString VAbstractSpline::MakeToolTip() const
+{
+    const QSharedPointer<VAbstractCurve> curve = VAbstractTool::data.GeometricObject<VAbstractCurve>(id);
+
+    const QString toolTip = QString("<table>"
+                                    "<tr> <td><b>%1:</b> %2 %3</td> </tr>"
+                                    "</table>")
+            .arg(tr("Length"))
+            .arg(qApp->fromPixel(curve->GetLength()))
+            .arg(UnitsToStr(qApp->patternUnit(), true));
+    return toolTip;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 /**
  * @brief ShowTool highlight tool.
  * @param id object id in container
@@ -191,6 +205,7 @@ void VAbstractSpline::RefreshGeometry()
 void VAbstractSpline::hoverEnterEvent(QGraphicsSceneHoverEvent *event)
 {
     m_isHovered = true;
+    setToolTip(MakeToolTip());
     QGraphicsPathItem::hoverEnterEvent(event);
 }
 

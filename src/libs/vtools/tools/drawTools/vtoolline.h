@@ -101,6 +101,7 @@ protected:
     virtual void     SaveOptions(QDomElement &tag, QSharedPointer<VGObject> &obj) Q_DECL_OVERRIDE;
     virtual void     ReadToolAttributes(const QDomElement &domElement) Q_DECL_OVERRIDE;
     virtual void     SetVisualization() Q_DECL_OVERRIDE;
+    virtual QString  MakeToolTip() const Q_DECL_OVERRIDE;
 private:
     Q_DISABLE_COPY(VToolLine)
 
@@ -119,7 +120,7 @@ private:
               const QString &typeLine, const QString &lineColor, const Source &typeCreation,
               QGraphicsItem * parent = nullptr);
 
-    void             RefreshGeometry();
+    void RefreshGeometry();
 };
 
 #endif // VTOOLLINE_H

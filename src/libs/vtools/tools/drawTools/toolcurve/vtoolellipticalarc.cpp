@@ -460,3 +460,29 @@ void VToolEllipticalArc::SetVisualization()
         visual->RefreshGeometry();
     }
 }
+
+//---------------------------------------------------------------------------------------------------------------------
+QString VToolEllipticalArc::MakeToolTip() const
+{
+    const QSharedPointer<VEllipticalArc> elArc = VAbstractTool::data.GeometricObject<VEllipticalArc>(id);
+
+    const QString toolTip = QString("<table>"
+                                    "<tr> <td><b>%1:</b> %2 %3</td> </tr>"
+                                    "<tr> <td><b>%4:</b> %5 %3</td> </tr>"
+                                    "<tr> <td><b>%6:</b> %7 %3</td> </tr>"
+                                    "<tr> <td><b>%8:</b> %9°</td> </tr>"
+                                    "<tr> <td><b>%10:</b> %11°</td> </tr>"
+                                    "</table>")
+            .arg(tr("Length"))
+            .arg(qApp->fromPixel(elArc->GetLength()))
+            .arg(UnitsToStr(qApp->patternUnit(), true))
+            .arg(tr("Radius") + QLatin1String("1"))
+            .arg(qApp->fromPixel(elArc->GetRadius1()))
+            .arg(tr("Radius") + QLatin1String("2"))
+            .arg(qApp->fromPixel(elArc->GetRadius2()))
+            .arg(tr("Start angle"))
+            .arg(qApp->fromPixel(elArc->GetStartAngle()))
+            .arg(tr("End angle"))
+            .arg(qApp->fromPixel(elArc->GetEndAngle()));
+    return toolTip;
+}

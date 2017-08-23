@@ -253,3 +253,43 @@ void VToolCutArc::SetVisualization()
         visual->RefreshGeometry();
     }
 }
+
+//---------------------------------------------------------------------------------------------------------------------
+QString VToolCutArc::MakeToolTip() const
+{
+    const QSharedPointer<VArc> arc = VAbstractTool::data.GeometricObject<VArc>(curveCutId);
+
+    const QString expression = qApp->TrVars()->FormulaToUser(formula, qApp->Settings()->GetOsSeparator());
+    const qreal length = Visualization::FindVal(expression, VAbstractTool::data.DataVariables());
+
+    const QString arcStr = tr("Arc");
+    const QString lengthStr = tr("length");
+    const QString startAngleStr = tr("start angle");
+    const QString endAngleStr = tr("end angle");
+    const QString radiusStr = tr("radius");
+
+    VArc ar1;
+    VArc ar2;
+    arc->CutArc(qApp->toPixel(length), ar1, ar2);
+
+    auto ArcToolTip = [arcStr, lengthStr, startAngleStr, endAngleStr, radiusStr](QString toolTip, const VArc &arc,
+            const QString &arcNumber)
+    {
+        toolTip += QString("<tr> <td><b>%1:</b> %2 %3</td> </tr>"
+                           "<tr> <td><b>%4:</b> %5 %3</td> </tr>"
+                           "<tr> <td><b>%6:</b> %7°</td> </tr>"
+                           "<tr> <td><b>%8:</b> %9°</td> </tr>")
+                    .arg(arcStr + arcNumber + QLatin1String(" ") + lengthStr)
+                    .arg(qApp->fromPixel(arc.GetLength()))
+                    .arg(UnitsToStr(qApp->patternUnit(), true))
+                    .arg(arcStr + arcNumber + QLatin1String(" ") + radiusStr)
+                    .arg(qApp->fromPixel(arc.GetRadius()))
+                    .arg(arcStr + arcNumber + QLatin1String(" ") + startAngleStr)
+                    .arg(qApp->fromPixel(arc.GetStartAngle()))
+                    .arg(arcStr + arcNumber + QLatin1String(" ") + endAngleStr)
+                    .arg(qApp->fromPixel(arc.GetEndAngle()));
+        return toolTip;
+    };
+
+    return ArcToolTip(ArcToolTip("<table>", ar1, "1"), ar2, "2") + QLatin1String("</table>");
+}

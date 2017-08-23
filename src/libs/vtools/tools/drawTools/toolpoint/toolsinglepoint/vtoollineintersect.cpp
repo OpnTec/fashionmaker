@@ -312,6 +312,38 @@ void VToolLineIntersect::SetVisualization()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+QString VToolLineIntersect::MakeToolTip() const
+{
+    const QSharedPointer<VPointF> p1L1 = VAbstractTool::data.GeometricObject<VPointF>(p1Line1);
+    const QSharedPointer<VPointF> p2L1 = VAbstractTool::data.GeometricObject<VPointF>(p2Line1);
+    const QSharedPointer<VPointF> p1L2 = VAbstractTool::data.GeometricObject<VPointF>(p1Line2);
+    const QSharedPointer<VPointF> p2L2 = VAbstractTool::data.GeometricObject<VPointF>(p2Line2);
+    const QSharedPointer<VPointF> current = VAbstractTool::data.GeometricObject<VPointF>(id);
+
+    const QLineF p1L1ToCur(static_cast<QPointF>(*p1L1), static_cast<QPointF>(*current));
+    const QLineF curToP2L1(static_cast<QPointF>(*current), static_cast<QPointF>(*p2L1));
+    const QLineF p1L2ToCur(static_cast<QPointF>(*p1L2), static_cast<QPointF>(*current));
+    const QLineF curToP2L2(static_cast<QPointF>(*current), static_cast<QPointF>(*p2L2));
+
+    const QString toolTip = QString("<table>"
+                                    "<tr> <td><b>%1:</b> %2 %3</td> </tr>"
+                                    "<tr> <td><b>%4:</b> %5 %3</td> </tr>"
+                                    "<tr> <td><b>%6:</b> %7 %3</td> </tr>"
+                                    "<tr> <td><b>%8:</b> %9 %3</td> </tr>"
+                                    "</table>")
+            .arg(QString("%1->%2").arg(p1L1->name(), current->name()))
+            .arg(qApp->fromPixel(p1L1ToCur.length()))
+            .arg(UnitsToStr(qApp->patternUnit(), true))
+            .arg(QString("%1->%2").arg(current->name(), p2L1->name()))
+            .arg(qApp->fromPixel(curToP2L1.length()))
+            .arg(QString("%1->%2").arg(p1L2->name(), current->name()))
+            .arg(qApp->fromPixel(p1L2ToCur.length()))
+            .arg(QString("%1->%2").arg(current->name(), p2L2->name()))
+            .arg(qApp->fromPixel(curToP2L2.length()));
+    return toolTip;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 quint32 VToolLineIntersect::GetP2Line2() const
 {
     return p2Line2;

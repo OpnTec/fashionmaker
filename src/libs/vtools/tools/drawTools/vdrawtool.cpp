@@ -164,6 +164,12 @@ void VDrawTool::SaveOptions(QDomElement &tag, QSharedPointer<VGObject> &obj)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+QString VDrawTool::MakeToolTip() const
+{
+    return QString();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 bool VDrawTool::CorrectDisable(bool disable, const QString &namePP) const
 {
     if (disable)

@@ -216,6 +216,13 @@ void VToolSinglePoint::mouseReleaseEvent(QGraphicsSceneMouseEvent *event)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void VToolSinglePoint::hoverEnterEvent(QGraphicsSceneHoverEvent *event)
+{
+    setToolTip(MakeToolTip());
+    VScenePoint::hoverEnterEvent(event);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 /**
  * @brief itemChange hadle item change.
  * @param change change.

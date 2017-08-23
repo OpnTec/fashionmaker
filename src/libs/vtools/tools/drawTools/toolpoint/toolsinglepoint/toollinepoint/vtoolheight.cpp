@@ -286,6 +286,36 @@ void VToolHeight::SetVisualization()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+QString VToolHeight::MakeToolTip() const
+{
+    const QSharedPointer<VPointF> basePoint = VAbstractTool::data.GeometricObject<VPointF>(basePointId);
+    const QSharedPointer<VPointF> p1Line = VAbstractTool::data.GeometricObject<VPointF>(p1LineId);
+    const QSharedPointer<VPointF> p2Line = VAbstractTool::data.GeometricObject<VPointF>(p2LineId);
+    const QSharedPointer<VPointF> current = VAbstractTool::data.GeometricObject<VPointF>(id);
+
+    const QLineF curLine(static_cast<QPointF>(*basePoint), static_cast<QPointF>(*current));
+    const QLineF p1ToCur(static_cast<QPointF>(*p1Line), static_cast<QPointF>(*current));
+    const QLineF p2ToCur(static_cast<QPointF>(*p2Line), static_cast<QPointF>(*current));
+
+    const QString toolTip = QString("<table>"
+                                    "<tr> <td><b>%1:</b> %2 %3</td> </tr>"
+                                    "<tr> <td><b>%4:</b> %5°</td> </tr>"
+                                    "<tr> <td><b>%6:</b> %7 %3</td> </tr>"
+                                    "<tr> <td><b>%8:</b> %9 %3</td> </tr>"
+                                    "</table>")
+            .arg(tr("Length"))
+            .arg(qApp->fromPixel(curLine.length()))
+            .arg(UnitsToStr(qApp->patternUnit(), true))
+            .arg(tr("Angle"))
+            .arg(curLine.angle())
+            .arg(QString("%1->%2").arg(p1Line->name(), current->name()))
+            .arg(qApp->fromPixel(p1ToCur.length()))
+            .arg(QString("%1->%2").arg(p2Line->name(), current->name()))
+            .arg(qApp->fromPixel(p2ToCur.length()));
+    return toolTip;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 quint32 VToolHeight::GetP2LineId() const
 {
     return p2LineId;

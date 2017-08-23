@@ -253,3 +253,33 @@ void VToolCutSpline::SetVisualization()
         visual->RefreshGeometry();
     }
 }
+
+//---------------------------------------------------------------------------------------------------------------------
+QString VToolCutSpline::MakeToolTip() const
+{
+    const auto spl = VAbstractTool::data.GeometricObject<VAbstractCubicBezier>(curveCutId);
+
+    const QString expression = qApp->TrVars()->FormulaToUser(formula, qApp->Settings()->GetOsSeparator());
+    const qreal length = Visualization::FindVal(expression, VAbstractTool::data.DataVariables());
+
+    QPointF spl1p2, spl1p3, spl2p2, spl2p3;
+    QPointF point = spl->CutSpline(qApp->toPixel(length), spl1p2, spl1p3, spl2p2, spl2p3);
+
+    VSpline spline1 = VSpline(spl->GetP1(), spl1p2, spl1p3, VPointF(point));
+    VSpline spline2 = VSpline(VPointF(point), spl2p2, spl2p3, spl->GetP4());
+
+    const QString curveStr = tr("Curve");
+    const QString lengthStr = tr("length");
+
+    const QString toolTip = QString("<table>"
+                                    "<tr> <td><b>%1:</b> %2 %3</td> </tr>"
+                                    "<tr> <td><b>%4:</b> %5 %3</td> </tr>"
+                                    "</table>")
+            .arg(curveStr + QLatin1String("1 ") + lengthStr)
+            .arg(qApp->fromPixel(spline1.GetLength()))
+            .arg(UnitsToStr(qApp->patternUnit(), true))
+            .arg(curveStr + QLatin1String("2 ") + lengthStr)
+            .arg(qApp->fromPixel(spline2.GetLength()));
+
+    return toolTip;
+}

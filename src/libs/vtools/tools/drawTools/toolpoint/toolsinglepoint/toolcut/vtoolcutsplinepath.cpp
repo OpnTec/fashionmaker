@@ -340,3 +340,35 @@ void VToolCutSplinePath::SetVisualization()
         visual->RefreshGeometry();
     }
 }
+
+//---------------------------------------------------------------------------------------------------------------------
+QString VToolCutSplinePath::MakeToolTip() const
+{
+    const auto splPath = VAbstractTool::data.GeometricObject<VAbstractCubicBezierPath>(curveCutId);
+
+    const QString expression = qApp->TrVars()->FormulaToUser(formula, qApp->Settings()->GetOsSeparator());
+    const qreal length = Visualization::FindVal(expression, VAbstractTool::data.DataVariables());
+
+    VSplinePath *splPath1 = nullptr;
+    VSplinePath *splPath2 = nullptr;
+    VPointF *p = VToolCutSplinePath::CutSplinePath(qApp->toPixel(length), splPath, "X", &splPath1, &splPath2);
+    delete p; // Don't need this point
+
+    const QString curveStr = tr("Curve");
+    const QString lengthStr = tr("length");
+
+    const QString toolTip = QString("<table>"
+                                    "<tr> <td><b>%1:</b> %2 %3</td> </tr>"
+                                    "<tr> <td><b>%4:</b> %5 %3</td> </tr>"
+                                    "</table>")
+            .arg(curveStr + QLatin1String("1 ") + lengthStr)
+            .arg(qApp->fromPixel(splPath1->GetLength()))
+            .arg(UnitsToStr(qApp->patternUnit(), true))
+            .arg(curveStr + QLatin1String("2 ") + lengthStr)
+            .arg(qApp->fromPixel(splPath2->GetLength()));
+
+    delete splPath1;
+    delete splPath2;
+
+    return toolTip;
+}

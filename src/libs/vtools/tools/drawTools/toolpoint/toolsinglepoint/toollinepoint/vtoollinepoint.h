@@ -97,6 +97,7 @@ protected:
     virtual void      SaveOptions(QDomElement &tag, QSharedPointer<VGObject> &obj) Q_DECL_OVERRIDE;
     virtual void      hoverEnterEvent(QGraphicsSceneHoverEvent *event) Q_DECL_OVERRIDE;
     virtual void      hoverLeaveEvent(QGraphicsSceneHoverEvent *event) Q_DECL_OVERRIDE;
+    virtual QString   MakeToolTip() const Q_DECL_OVERRIDE;
 private:
     Q_DISABLE_COPY(VToolLinePoint)
 };

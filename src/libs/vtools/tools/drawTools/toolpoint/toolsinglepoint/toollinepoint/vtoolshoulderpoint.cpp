@@ -350,6 +350,31 @@ void VToolShoulderPoint::SetVisualization()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+QString VToolShoulderPoint::MakeToolTip() const
+{
+    const QSharedPointer<VPointF> first = VAbstractTool::data.GeometricObject<VPointF>(basePointId);
+    const QSharedPointer<VPointF> second = VAbstractTool::data.GeometricObject<VPointF>(p2Line);
+    const QSharedPointer<VPointF> current = VAbstractTool::data.GeometricObject<VPointF>(id);
+
+    const QLineF firstToCur(static_cast<QPointF>(*first), static_cast<QPointF>(*current));
+    const QLineF secondToCur(static_cast<QPointF>(*second), static_cast<QPointF>(*current));
+
+    const QString toolTip = QString("<table>"
+                                    "<tr> <td><b>%1:</b> %2 %3</td> </tr>"
+                                    "<tr> <td><b>%4:</b> %5°</td> </tr>"
+                                    "<tr> <td><b>%6:</b> %7 %3</td> </tr>"
+                                    "</table>")
+            .arg(tr("Length"))
+            .arg(qApp->fromPixel(firstToCur.length()))
+            .arg(UnitsToStr(qApp->patternUnit(), true))
+            .arg(tr("Angle"))
+            .arg(firstToCur.angle())
+            .arg(QString("%1->%2").arg(second->name(), current->name()))
+            .arg(qApp->fromPixel(secondToCur.length()));
+    return toolTip;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 // cppcheck-suppress unusedFunction
 quint32 VToolShoulderPoint::getPShoulder() const
 {

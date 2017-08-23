@@ -70,11 +70,12 @@ public:
                                                     const QString &pName, VSplinePath **splPath1,
                                                     VSplinePath **splPath2);
 protected:
-    virtual void  contextMenuEvent ( QGraphicsSceneContextMenuEvent * event ) Q_DECL_OVERRIDE;
-    virtual void  SaveDialog(QDomElement &domElement) Q_DECL_OVERRIDE;
-    virtual void  SaveOptions(QDomElement &tag, QSharedPointer<VGObject> &obj) Q_DECL_OVERRIDE;
-    virtual void  ReadToolAttributes(const QDomElement &domElement) Q_DECL_OVERRIDE;
-    virtual void  SetVisualization() Q_DECL_OVERRIDE;
+    virtual void    contextMenuEvent ( QGraphicsSceneContextMenuEvent * event ) Q_DECL_OVERRIDE;
+    virtual void    SaveDialog(QDomElement &domElement) Q_DECL_OVERRIDE;
+    virtual void    SaveOptions(QDomElement &tag, QSharedPointer<VGObject> &obj) Q_DECL_OVERRIDE;
+    virtual void    ReadToolAttributes(const QDomElement &domElement) Q_DECL_OVERRIDE;
+    virtual void    SetVisualization() Q_DECL_OVERRIDE;
+    virtual QString MakeToolTip() const Q_DECL_OVERRIDE;
 private:
     Q_DISABLE_COPY(VToolCutSplinePath)
 

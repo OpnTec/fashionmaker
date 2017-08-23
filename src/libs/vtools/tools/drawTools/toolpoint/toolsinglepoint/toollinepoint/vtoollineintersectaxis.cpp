@@ -331,3 +331,33 @@ void VToolLineIntersectAxis::SetVisualization()
         visual->RefreshGeometry();
     }
 }
+
+//---------------------------------------------------------------------------------------------------------------------
+QString VToolLineIntersectAxis::MakeToolTip() const
+{
+    const QSharedPointer<VPointF> basePoint = VAbstractTool::data.GeometricObject<VPointF>(basePointId);
+    const QSharedPointer<VPointF> firstPoint = VAbstractTool::data.GeometricObject<VPointF>(firstPointId);
+    const QSharedPointer<VPointF> secondPoint = VAbstractTool::data.GeometricObject<VPointF>(secondPointId);
+    const QSharedPointer<VPointF> current = VAbstractTool::data.GeometricObject<VPointF>(id);
+
+    const QLineF curLine(static_cast<QPointF>(*basePoint), static_cast<QPointF>(*current));
+    const QLineF firstToCur(static_cast<QPointF>(*firstPoint), static_cast<QPointF>(*current));
+    const QLineF curToSecond(static_cast<QPointF>(*current), static_cast<QPointF>(*secondPoint));
+
+    const QString toolTip = QString("<table>"
+                                    "<tr> <td><b>%1:</b> %2 %3</td> </tr>"
+                                    "<tr> <td><b>%4:</b> %5°</td> </tr>"
+                                    "<tr> <td><b>%6:</b> %7 %3</td> </tr>"
+                                    "<tr> <td><b>%8:</b> %9 %3</td> </tr>"
+                                    "</table>")
+            .arg(tr("Length"))
+            .arg(qApp->fromPixel(curLine.length()))
+            .arg(UnitsToStr(qApp->patternUnit(), true))
+            .arg(tr("Angle"))
+            .arg(curLine.angle())
+            .arg(QString("%1->%2").arg(firstPoint->name(), current->name()))
+            .arg(qApp->fromPixel(firstToCur.length()))
+            .arg(QString("%1->%2").arg(current->name(), secondPoint->name()))
+            .arg(qApp->fromPixel(curToSecond.length()));
+    return toolTip;
+}
