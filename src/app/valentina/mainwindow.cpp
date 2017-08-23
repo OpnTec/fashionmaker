@@ -1625,6 +1625,7 @@ void MainWindow::UnloadMeasurements()
         }
         qApp->setPatternType(MeasurementsType::Unknown);
         doc->SetMPath(QString());
+        emit doc->UpdatePatternLabel();
         PatternChangesWereSaved(false);
         ui->actionEditCurrent->setEnabled(false);
         ui->actionUnloadMeasurements->setDisabled(true);
@@ -3419,6 +3420,7 @@ bool MainWindow::SavePattern(const QString &fileName, QString &error)
     else
     {
         doc->SetMPath(mPath);
+        emit doc->UpdatePatternLabel();
         qCDebug(vMainWindow, "Could not save file %s. %s.", qUtf8Printable(fileName), qUtf8Printable(error));
     }
     return result;

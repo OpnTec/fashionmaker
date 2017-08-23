@@ -219,6 +219,7 @@ void DialogPatternProperties::Apply()
         case 3:
             SaveLabelData();
             SaveTemplateData();
+            emit doc->UpdatePatternLabel();
             break;
         default:
             break;
@@ -234,6 +235,8 @@ void DialogPatternProperties::Ok()
     SaveReadOnlyState();
     SaveLabelData();
     SaveTemplateData();
+
+    emit doc->UpdatePatternLabel();
 
     close();
 }
@@ -546,7 +549,6 @@ void DialogPatternProperties::SaveDescription()
 
         descriptionChanged = false;
         emit doc->patternChanged(false);
-        emit doc->UpdatePatternLabel();
     }
 }
 
