@@ -1427,12 +1427,12 @@
          </widget>
         </item>
         <item row="2" column="0">
-         <widget class="QToolButton" name="toolButtonPiecePath">
+         <widget class="QToolButton" name="toolButtonInternalPath">
           <property name="enabled">
            <bool>false</bool>
           </property>
           <property name="toolTip">
-           <string>Piece path tool</string>
+           <string>Internal path tool</string>
           </property>
           <property name="text">
            <string notr="true">...</string>
@@ -2685,8 +2685,8 @@
   </customwidget>
  </customwidgets>
  <resources>
-  <include location="share/resources/toolicon.qrc"/>
   <include location="../../libs/vmisc/share/resources/icon.qrc"/>
+  <include location="share/resources/toolicon.qrc"/>
  </resources>
  <connections/>
 </ui>

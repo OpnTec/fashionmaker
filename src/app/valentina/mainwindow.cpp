@@ -1946,7 +1946,7 @@ void MainWindow::InitToolButtons()
     connect(ui->toolButtonCubicBezierPath, &QToolButton::clicked, this, &MainWindow::ToolCubicBezierPath);
     connect(ui->toolButtonPointOfContact, &QToolButton::clicked, this, &MainWindow::ToolPointOfContact);
     connect(ui->toolButtonNewDetail, &QToolButton::clicked, this, &MainWindow::ToolDetail);
-    connect(ui->toolButtonPiecePath, &QToolButton::clicked, this, &MainWindow::ToolPiecePath);
+    connect(ui->toolButtonInternalPath, &QToolButton::clicked, this, &MainWindow::ToolPiecePath);
     connect(ui->toolButtonHeight, &QToolButton::clicked, this, &MainWindow::ToolHeight);
     connect(ui->toolButtonTriangle, &QToolButton::clicked, this, &MainWindow::ToolTriangle);
     connect(ui->toolButtonPointOfIntersection, &QToolButton::clicked, this, &MainWindow::ToolPointOfIntersection);
@@ -2096,7 +2096,7 @@ void MainWindow::CancelTool()
             ui->toolButtonNewDetail->setChecked(false);
             break;
         case Tool::PiecePath:
-            ui->toolButtonPiecePath->setChecked(false);
+            ui->toolButtonInternalPath->setChecked(false);
             break;
         case Tool::Height:
             ui->toolButtonHeight->setChecked(false);
@@ -3327,7 +3327,7 @@ void MainWindow::SetEnableTool(bool enable)
     ui->toolButtonCubicBezierPath->setEnabled(drawTools);
     ui->toolButtonPointOfContact->setEnabled(drawTools);
     ui->toolButtonNewDetail->setEnabled(drawTools);
-    ui->toolButtonPiecePath->setEnabled(drawTools);
+    ui->toolButtonInternalPath->setEnabled(drawTools);
     ui->toolButtonHeight->setEnabled(drawTools);
     ui->toolButtonTriangle->setEnabled(drawTools);
     ui->toolButtonPointOfIntersection->setEnabled(drawTools);
@@ -3729,7 +3729,7 @@ void MainWindow::LastUsedTool()
             ToolDetail(true);
             break;
         case Tool::PiecePath:
-            ui->toolButtonPiecePath->setChecked(true);
+            ui->toolButtonInternalPath->setChecked(true);
             ToolPiecePath(true);
             break;
         case Tool::Height:
