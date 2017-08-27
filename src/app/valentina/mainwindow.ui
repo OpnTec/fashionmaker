@@ -1380,7 +1380,7 @@
            <bool>false</bool>
           </property>
           <property name="toolTip">
-           <string>Seam allowance tool</string>
+           <string>Workpiece tool</string>
           </property>
           <property name="text">
            <string notr="true">...</string>
