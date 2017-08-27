@@ -4929,7 +4929,7 @@ Apply settings anyway?</translation>
     <name>DialogSeamAllowance</name>
     <message>
         <source>Seam allowance tool</source>
-        <translation type="unfinished">Seam allowance tool</translation>
+        <translation type="obsolete">Seam allowance tool</translation>
     </message>
     <message>
         <source>All objects in path should follow in clockwise direction.</source>
@@ -5233,6 +5233,10 @@ Apply settings anyway?</translation>
     </message>
     <message>
         <source>To open all detail&apos;s features complete creating the main path.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Workpiece tool</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -6688,7 +6692,7 @@ Do you want to save your changes?</translation>
     </message>
     <message>
         <source>Seam allowance tool</source>
-        <translation>Seam allowance tool</translation>
+        <translation type="vanished">Seam allowance tool</translation>
     </message>
     <message>
         <source>Union tool</source>
@@ -7232,10 +7236,6 @@ Do you want to save your changes?</translation>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Piece path tool</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Select main path objects clockwise.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -7437,6 +7437,14 @@ Do you want to save your changes?</translation>
     </message>
     <message>
         <source>Label template editor</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Workpiece tool</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Internal path tool</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -9743,6 +9751,13 @@ Do you want to save your changes?</translation>
     </message>
 </context>
 <context>
+    <name>VAbstractSpline</name>
+    <message>
+        <source>Length</source>
+        <translation type="unfinished">Length</translation>
+    </message>
+</context>
+<context>
     <name>VAbstractTool</name>
     <message>
         <source>black</source>
@@ -10730,6 +10745,107 @@ Do you want to save your changes?</translation>
     </message>
 </context>
 <context>
+    <name>VToolAlongLine</name>
+    <message>
+        <source>Length</source>
+        <translation type="unfinished">Length</translation>
+    </message>
+    <message>
+        <source>Angle</source>
+        <translation type="unfinished">Angle</translation>
+    </message>
+</context>
+<context>
+    <name>VToolArc</name>
+    <message>
+        <source>Length</source>
+        <translation type="unfinished">Length</translation>
+    </message>
+    <message>
+        <source>Radius</source>
+        <translation type="unfinished">Radius</translation>
+    </message>
+    <message>
+        <source>Start angle</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>End angle</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>VToolArcWithLength</name>
+    <message>
+        <source>Length</source>
+        <translation type="unfinished">Length</translation>
+    </message>
+    <message>
+        <source>Radius</source>
+        <translation type="unfinished">Radius</translation>
+    </message>
+    <message>
+        <source>Start angle</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>End angle</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>VToolCut</name>
+    <message>
+        <source>Length</source>
+        <translation type="unfinished">Length</translation>
+    </message>
+</context>
+<context>
+    <name>VToolCutArc</name>
+    <message>
+        <source>Arc</source>
+        <translation type="unfinished">Arc</translation>
+    </message>
+    <message>
+        <source>length</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>start angle</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>end angle</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>radius</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>VToolCutSpline</name>
+    <message>
+        <source>Curve</source>
+        <translation type="unfinished">Curve</translation>
+    </message>
+    <message>
+        <source>length</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>VToolCutSplinePath</name>
+    <message>
+        <source>Curve</source>
+        <translation type="unfinished">Curve</translation>
+    </message>
+    <message>
+        <source>length</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>VToolDetail</name>
     <message>
         <source>Options</source>
@@ -10778,6 +10894,69 @@ Do you want to save your changes?</translation>
     <message>
         <source>rotate grainline</source>
         <translation type="vanished">rotate grainline</translation>
+    </message>
+</context>
+<context>
+    <name>VToolEllipticalArc</name>
+    <message>
+        <source>Length</source>
+        <translation type="unfinished">Length</translation>
+    </message>
+    <message>
+        <source>Radius</source>
+        <translation type="unfinished">Radius</translation>
+    </message>
+    <message>
+        <source>Start angle</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>End angle</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>VToolHeight</name>
+    <message>
+        <source>Length</source>
+        <translation type="unfinished">Length</translation>
+    </message>
+    <message>
+        <source>Angle</source>
+        <translation type="unfinished">Angle</translation>
+    </message>
+</context>
+<context>
+    <name>VToolLine</name>
+    <message>
+        <source>Length</source>
+        <translation type="unfinished">Length</translation>
+    </message>
+    <message>
+        <source>Angle</source>
+        <translation type="unfinished">Angle</translation>
+    </message>
+</context>
+<context>
+    <name>VToolLineIntersectAxis</name>
+    <message>
+        <source>Length</source>
+        <translation type="unfinished">Length</translation>
+    </message>
+    <message>
+        <source>Angle</source>
+        <translation type="unfinished">Angle</translation>
+    </message>
+</context>
+<context>
+    <name>VToolLinePoint</name>
+    <message>
+        <source>Length</source>
+        <translation type="unfinished">Length</translation>
+    </message>
+    <message>
+        <source>Angle</source>
+        <translation type="unfinished">Angle</translation>
     </message>
 </context>
 <context>
@@ -11308,6 +11487,17 @@ Do you want to save your changes?</translation>
     </message>
 </context>
 <context>
+    <name>VToolPointOfContact</name>
+    <message>
+        <source>Length</source>
+        <translation type="unfinished">Length</translation>
+    </message>
+    <message>
+        <source>Angle</source>
+        <translation type="unfinished">Angle</translation>
+    </message>
+</context>
+<context>
     <name>VToolSeamAllowance</name>
     <message>
         <source>Current seam allowance</source>
@@ -11360,6 +11550,17 @@ Do you want to save your changes?</translation>
     <message>
         <source>Delete</source>
         <translation type="unfinished">Delete</translation>
+    </message>
+</context>
+<context>
+    <name>VToolShoulderPoint</name>
+    <message>
+        <source>Length</source>
+        <translation type="unfinished">Length</translation>
+    </message>
+    <message>
+        <source>Angle</source>
+        <translation type="unfinished">Angle</translation>
     </message>
 </context>
 <context>

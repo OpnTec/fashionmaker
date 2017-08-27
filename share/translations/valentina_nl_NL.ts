@@ -4917,7 +4917,7 @@ Toch de instellingen aanpassen?</translation>
     <name>DialogSeamAllowance</name>
     <message>
         <source>Seam allowance tool</source>
-        <translation>Naadtoeslag gereedschap</translation>
+        <translation type="vanished">Naadtoeslag gereedschap</translation>
     </message>
     <message>
         <source>Ready!</source>
@@ -4928,24 +4928,12 @@ Toch de instellingen aanpassen?</translation>
         <translation>Waarde</translation>
     </message>
     <message>
-        <source>Add</source>
-        <translation type="vanished">Voeg toe</translation>
-    </message>
-    <message>
         <source>Grainline</source>
         <translation>Recht van draad</translation>
     </message>
     <message>
         <source>Select main path objects clockwise, &lt;b&gt;Shift&lt;/b&gt; - reverse direction curve, &lt;b&gt;Enter&lt;/b&gt; - finish creation</source>
         <translation>Selecteer hoofdpad-objecten met de klok mee,&lt;b&gt;Shift&lt;/b&gt; - draai richting kromming om, &lt;b&gt;Enter&lt;/b&gt; - einde creatie</translation>
-    </message>
-    <message>
-        <source>Cut %1 of %2%3</source>
-        <translation type="vanished">Knip %1 of %2%3</translation>
-    </message>
-    <message>
-        <source>on Fold</source>
-        <translation type="vanished">Op vouw</translation>
     </message>
     <message>
         <source>Reverse</source>
@@ -4974,10 +4962,6 @@ Toch de instellingen aanpassen?</translation>
     <message>
         <source>Parser error: %1</source>
         <translation>Verwerkingsfout: %1</translation>
-    </message>
-    <message>
-        <source>Update</source>
-        <translation type="vanished">Opwaardering</translation>
     </message>
     <message>
         <source>Current seam allowance</source>
@@ -5022,14 +5006,6 @@ Toch de instellingen aanpassen?</translation>
     <message>
         <source>custom seam allowance</source>
         <translation>aangepaste naadtoeslag</translation>
-    </message>
-    <message>
-        <source>None</source>
-        <translation type="vanished">Geen</translation>
-    </message>
-    <message>
-        <source>Cut on fold</source>
-        <translation type="vanished">Knip op de vouw</translation>
     </message>
     <message>
         <source>Both</source>
@@ -5098,6 +5074,10 @@ Toch de instellingen aanpassen?</translation>
     <message>
         <source>To open all detail&apos;s features complete creating the main path.</source>
         <translation>Om alle functie details te openen maak het hoofdpad volledig af.</translation>
+    </message>
+    <message>
+        <source>Workpiece tool</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -6551,7 +6531,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Seam allowance tool</source>
-        <translation>Naadtoeslag gereedschap</translation>
+        <translation type="vanished">Naadtoeslag gereedschap</translation>
     </message>
     <message>
         <source>Union tool</source>
@@ -7096,7 +7076,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Piece path tool</source>
-        <translation>Gereedschap om pad van onderdeel te bepalen</translation>
+        <translation type="vanished">Gereedschap om pad van onderdeel te bepalen</translation>
     </message>
     <message>
         <source>Select main path objects clockwise.</source>
@@ -7300,6 +7280,14 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Label template editor</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Workpiece tool</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Internal path tool</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -7715,14 +7703,6 @@ Do you want to save your changes?</source>
 <context>
     <name>PreferencesPatternPage</name>
     <message>
-        <source>User</source>
-        <translation type="vanished">Gebruiker</translation>
-    </message>
-    <message>
-        <source>User name:</source>
-        <translation type="vanished">Gebruikers naam:</translation>
-    </message>
-    <message>
         <source>Graphical output</source>
         <translation>Grafische voltooiing</translation>
     </message>
@@ -7739,14 +7719,6 @@ Do you want to save your changes?</source>
         <translation>Tel stappen (0 - geen limiet):</translation>
     </message>
     <message>
-        <source>User defined materials</source>
-        <translation type="vanished">Door gebruiker gedefinieerde materialen</translation>
-    </message>
-    <message>
-        <source>Delete all</source>
-        <translation type="vanished">Verwijder alles</translation>
-    </message>
-    <message>
         <source>Workpiece</source>
         <translation>Werkstuk</translation>
     </message>
@@ -7761,10 +7733,6 @@ Do you want to save your changes?</source>
     <message>
         <source>Show second passmark on seam line</source>
         <translation>Toon tweede pasmarkering op de naadlijn</translation>
-    </message>
-    <message>
-        <source>All user defined materials have been deleted!</source>
-        <translation type="vanished">Alle door de gebruiker gedefinieerde materialen zijn verwijderd!</translation>
     </message>
     <message>
         <source>By default forbid flipping for all new created workpieces</source>
@@ -8936,36 +8904,8 @@ Wil je deze veranderingen opslaan?</translation>
         <translation>Naam mag niet leeg zijn</translation>
     </message>
     <message>
-        <source>Material/Cut number/Placement</source>
-        <translation type="vanished">Materiaal/Snijnummer/Positie</translation>
-    </message>
-    <message>
-        <source>Cut number:</source>
-        <translation type="vanished">Snijnummer:</translation>
-    </message>
-    <message>
-        <source>Material type:</source>
-        <translation type="vanished">Materiaalsoort:</translation>
-    </message>
-    <message>
-        <source>You can choose one of the predefined materials or enter a new one</source>
-        <translation type="vanished">U kunt kiezen uit een van de voorgedefinieerde materialen of voeg een nieuwe toe</translation>
-    </message>
-    <message>
         <source>Placement:</source>
         <translation>Positie:</translation>
-    </message>
-    <message>
-        <source>Add</source>
-        <translation type="vanished">Voeg toe</translation>
-    </message>
-    <message>
-        <source>Cancel</source>
-        <translation type="vanished">Stop</translation>
-    </message>
-    <message>
-        <source>Remove</source>
-        <translation type="vanished">Verwijder</translation>
     </message>
     <message>
         <source>Labels</source>
@@ -9576,6 +9516,13 @@ Wil je deze veranderingen opslaan?</translation>
     <message>
         <source>Detail</source>
         <translation>Detail</translation>
+    </message>
+</context>
+<context>
+    <name>VAbstractSpline</name>
+    <message>
+        <source>Length</source>
+        <translation type="unfinished">Lengte</translation>
     </message>
 </context>
 <context>
@@ -10566,6 +10513,107 @@ Wil je deze veranderingen opslaan?</translation>
     </message>
 </context>
 <context>
+    <name>VToolAlongLine</name>
+    <message>
+        <source>Length</source>
+        <translation type="unfinished">Lengte</translation>
+    </message>
+    <message>
+        <source>Angle</source>
+        <translation type="unfinished">Hoek</translation>
+    </message>
+</context>
+<context>
+    <name>VToolArc</name>
+    <message>
+        <source>Length</source>
+        <translation type="unfinished">Lengte</translation>
+    </message>
+    <message>
+        <source>Radius</source>
+        <translation type="unfinished">Straal</translation>
+    </message>
+    <message>
+        <source>Start angle</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>End angle</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>VToolArcWithLength</name>
+    <message>
+        <source>Length</source>
+        <translation type="unfinished">Lengte</translation>
+    </message>
+    <message>
+        <source>Radius</source>
+        <translation type="unfinished">Straal</translation>
+    </message>
+    <message>
+        <source>Start angle</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>End angle</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>VToolCut</name>
+    <message>
+        <source>Length</source>
+        <translation type="unfinished">Lengte</translation>
+    </message>
+</context>
+<context>
+    <name>VToolCutArc</name>
+    <message>
+        <source>Arc</source>
+        <translation type="unfinished">Boog</translation>
+    </message>
+    <message>
+        <source>length</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>start angle</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>end angle</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>radius</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>VToolCutSpline</name>
+    <message>
+        <source>Curve</source>
+        <translation type="unfinished">Kromming</translation>
+    </message>
+    <message>
+        <source>length</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>VToolCutSplinePath</name>
+    <message>
+        <source>Curve</source>
+        <translation type="unfinished">Kromming</translation>
+    </message>
+    <message>
+        <source>length</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>VToolDetail</name>
     <message>
         <source>Options</source>
@@ -10614,6 +10662,69 @@ Wil je deze veranderingen opslaan?</translation>
     <message>
         <source>rotate grainline</source>
         <translation type="vanished">draai de recht-van-draad</translation>
+    </message>
+</context>
+<context>
+    <name>VToolEllipticalArc</name>
+    <message>
+        <source>Length</source>
+        <translation type="unfinished">Lengte</translation>
+    </message>
+    <message>
+        <source>Radius</source>
+        <translation type="unfinished">Straal</translation>
+    </message>
+    <message>
+        <source>Start angle</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>End angle</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>VToolHeight</name>
+    <message>
+        <source>Length</source>
+        <translation type="unfinished">Lengte</translation>
+    </message>
+    <message>
+        <source>Angle</source>
+        <translation type="unfinished">Hoek</translation>
+    </message>
+</context>
+<context>
+    <name>VToolLine</name>
+    <message>
+        <source>Length</source>
+        <translation type="unfinished">Lengte</translation>
+    </message>
+    <message>
+        <source>Angle</source>
+        <translation type="unfinished">Hoek</translation>
+    </message>
+</context>
+<context>
+    <name>VToolLineIntersectAxis</name>
+    <message>
+        <source>Length</source>
+        <translation type="unfinished">Lengte</translation>
+    </message>
+    <message>
+        <source>Angle</source>
+        <translation type="unfinished">Hoek</translation>
+    </message>
+</context>
+<context>
+    <name>VToolLinePoint</name>
+    <message>
+        <source>Length</source>
+        <translation type="unfinished">Lengte</translation>
+    </message>
+    <message>
+        <source>Angle</source>
+        <translation type="unfinished">Hoek</translation>
     </message>
 </context>
 <context>
@@ -11144,6 +11255,17 @@ Wil je deze veranderingen opslaan?</translation>
     </message>
 </context>
 <context>
+    <name>VToolPointOfContact</name>
+    <message>
+        <source>Length</source>
+        <translation type="unfinished">Lengte</translation>
+    </message>
+    <message>
+        <source>Angle</source>
+        <translation type="unfinished">Hoek</translation>
+    </message>
+</context>
+<context>
     <name>VToolSeamAllowance</name>
     <message>
         <source>Current seam allowance</source>
@@ -11196,6 +11318,17 @@ Wil je deze veranderingen opslaan?</translation>
     <message>
         <source>Delete</source>
         <translation>Verwijder</translation>
+    </message>
+</context>
+<context>
+    <name>VToolShoulderPoint</name>
+    <message>
+        <source>Length</source>
+        <translation type="unfinished">Lengte</translation>
+    </message>
+    <message>
+        <source>Angle</source>
+        <translation type="unfinished">Hoek</translation>
     </message>
 </context>
 <context>

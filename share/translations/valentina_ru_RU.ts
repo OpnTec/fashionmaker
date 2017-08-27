@@ -4917,7 +4917,7 @@ Apply settings anyway?</source>
     <name>DialogSeamAllowance</name>
     <message>
         <source>Seam allowance tool</source>
-        <translation>Деталь</translation>
+        <translation type="vanished">Деталь</translation>
     </message>
     <message>
         <source>Ready!</source>
@@ -4928,24 +4928,12 @@ Apply settings anyway?</source>
         <translation>Значение</translation>
     </message>
     <message>
-        <source>Add</source>
-        <translation type="vanished">Добавить</translation>
-    </message>
-    <message>
         <source>Grainline</source>
         <translation>Долевая нить</translation>
     </message>
     <message>
         <source>Select main path objects clockwise, &lt;b&gt;Shift&lt;/b&gt; - reverse direction curve, &lt;b&gt;Enter&lt;/b&gt; - finish creation</source>
         <translation>Выберите объекты основного контура по часовой стрелке, &lt;b&gt;Shift&lt;/b&gt; - обратное направление кривой, &lt;b&gt;Enter&lt;/b&gt; - закончить создание</translation>
-    </message>
-    <message>
-        <source>Cut %1 of %2%3</source>
-        <translation type="vanished">Раскрой %1 из %2%3</translation>
-    </message>
-    <message>
-        <source>on Fold</source>
-        <translation type="vanished">на сгибе</translation>
     </message>
     <message>
         <source>Reverse</source>
@@ -4974,10 +4962,6 @@ Apply settings anyway?</source>
     <message>
         <source>Parser error: %1</source>
         <translation>Ошибка синтаксического анализа: %1</translation>
-    </message>
-    <message>
-        <source>Update</source>
-        <translation type="vanished">Обновление</translation>
     </message>
     <message>
         <source>Current seam allowance</source>
@@ -5022,14 +5006,6 @@ Apply settings anyway?</source>
     <message>
         <source>custom seam allowance</source>
         <translation>пользовательская прибавка на швы</translation>
-    </message>
-    <message>
-        <source>None</source>
-        <translation type="vanished">Произвольное</translation>
-    </message>
-    <message>
-        <source>Cut on fold</source>
-        <translation type="vanished">Размещать на сгибе</translation>
     </message>
     <message>
         <source>Both</source>
@@ -5098,6 +5074,10 @@ Apply settings anyway?</source>
     <message>
         <source>To open all detail&apos;s features complete creating the main path.</source>
         <translation>Для открытия всех функций детали закончите создание главного контура.</translation>
+    </message>
+    <message>
+        <source>Workpiece tool</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -6551,7 +6531,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Seam allowance tool</source>
-        <translation>Деталь</translation>
+        <translation type="vanished">Деталь</translation>
     </message>
     <message>
         <source>Union tool</source>
@@ -7097,7 +7077,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Piece path tool</source>
-        <translation>Инструмент контур детали</translation>
+        <translation type="vanished">Инструмент контур детали</translation>
     </message>
     <message>
         <source>Select main path objects clockwise.</source>
@@ -7301,6 +7281,14 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Label template editor</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Workpiece tool</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Internal path tool</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -7716,14 +7704,6 @@ Do you want to save your changes?</source>
 <context>
     <name>PreferencesPatternPage</name>
     <message>
-        <source>User</source>
-        <translation type="vanished">Пользователь</translation>
-    </message>
-    <message>
-        <source>User name:</source>
-        <translation type="vanished">Имя пользователя:</translation>
-    </message>
-    <message>
         <source>Graphical output</source>
         <translation>Графический вывод</translation>
     </message>
@@ -7740,14 +7720,6 @@ Do you want to save your changes?</source>
         <translation>Количество шагов (0 - без ограничений):</translation>
     </message>
     <message>
-        <source>User defined materials</source>
-        <translation type="vanished">Установленные пользователем материалы</translation>
-    </message>
-    <message>
-        <source>Delete all</source>
-        <translation type="vanished">Удалить все</translation>
-    </message>
-    <message>
         <source>Workpiece</source>
         <translation>Деталь</translation>
     </message>
@@ -7762,10 +7734,6 @@ Do you want to save your changes?</source>
     <message>
         <source>Show second passmark on seam line</source>
         <translation>Показать вторую надсечку на линии шва</translation>
-    </message>
-    <message>
-        <source>All user defined materials have been deleted!</source>
-        <translation type="vanished">Все установленные пользователем материалы удалены!</translation>
     </message>
     <message>
         <source>By default forbid flipping for all new created workpieces</source>
@@ -8937,36 +8905,8 @@ Do you want to save your changes?</source>
         <translation>Имя не может быть пустым</translation>
     </message>
     <message>
-        <source>Material/Cut number/Placement</source>
-        <translation type="vanished">Материал/количество в раскрое/размещение</translation>
-    </message>
-    <message>
-        <source>Cut number:</source>
-        <translation type="vanished">Количество в раскрое:</translation>
-    </message>
-    <message>
-        <source>Material type:</source>
-        <translation type="vanished">Тип материала:</translation>
-    </message>
-    <message>
-        <source>You can choose one of the predefined materials or enter a new one</source>
-        <translation type="vanished">Вы можете выбрать один из предустановленных в системе материалов или ввести новый</translation>
-    </message>
-    <message>
         <source>Placement:</source>
         <translation>Размещение:</translation>
-    </message>
-    <message>
-        <source>Add</source>
-        <translation type="vanished">Добавить</translation>
-    </message>
-    <message>
-        <source>Cancel</source>
-        <translation type="vanished">Отмена</translation>
-    </message>
-    <message>
-        <source>Remove</source>
-        <translation type="vanished">Удалить</translation>
     </message>
     <message>
         <source>Labels</source>
@@ -9577,6 +9517,13 @@ Do you want to save your changes?</source>
     <message>
         <source>Detail</source>
         <translation>Деталь</translation>
+    </message>
+</context>
+<context>
+    <name>VAbstractSpline</name>
+    <message>
+        <source>Length</source>
+        <translation type="unfinished">Длина</translation>
     </message>
 </context>
 <context>
@@ -10567,6 +10514,107 @@ Do you want to save your changes?</source>
     </message>
 </context>
 <context>
+    <name>VToolAlongLine</name>
+    <message>
+        <source>Length</source>
+        <translation type="unfinished">Длина</translation>
+    </message>
+    <message>
+        <source>Angle</source>
+        <translation type="unfinished">Угол</translation>
+    </message>
+</context>
+<context>
+    <name>VToolArc</name>
+    <message>
+        <source>Length</source>
+        <translation type="unfinished">Длина</translation>
+    </message>
+    <message>
+        <source>Radius</source>
+        <translation type="unfinished">Радиус</translation>
+    </message>
+    <message>
+        <source>Start angle</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>End angle</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>VToolArcWithLength</name>
+    <message>
+        <source>Length</source>
+        <translation type="unfinished">Длина</translation>
+    </message>
+    <message>
+        <source>Radius</source>
+        <translation type="unfinished">Радиус</translation>
+    </message>
+    <message>
+        <source>Start angle</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>End angle</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>VToolCut</name>
+    <message>
+        <source>Length</source>
+        <translation type="unfinished">Длина</translation>
+    </message>
+</context>
+<context>
+    <name>VToolCutArc</name>
+    <message>
+        <source>Arc</source>
+        <translation type="unfinished">Дуга</translation>
+    </message>
+    <message>
+        <source>length</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>start angle</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>end angle</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>radius</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>VToolCutSpline</name>
+    <message>
+        <source>Curve</source>
+        <translation type="unfinished">Кривая</translation>
+    </message>
+    <message>
+        <source>length</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>VToolCutSplinePath</name>
+    <message>
+        <source>Curve</source>
+        <translation type="unfinished">Кривая</translation>
+    </message>
+    <message>
+        <source>length</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>VToolDetail</name>
     <message>
         <source>Options</source>
@@ -10615,6 +10663,69 @@ Do you want to save your changes?</source>
     <message>
         <source>rotate grainline</source>
         <translation type="vanished">повернуть долевую</translation>
+    </message>
+</context>
+<context>
+    <name>VToolEllipticalArc</name>
+    <message>
+        <source>Length</source>
+        <translation type="unfinished">Длина</translation>
+    </message>
+    <message>
+        <source>Radius</source>
+        <translation type="unfinished">Радиус</translation>
+    </message>
+    <message>
+        <source>Start angle</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>End angle</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>VToolHeight</name>
+    <message>
+        <source>Length</source>
+        <translation type="unfinished">Длина</translation>
+    </message>
+    <message>
+        <source>Angle</source>
+        <translation type="unfinished">Угол</translation>
+    </message>
+</context>
+<context>
+    <name>VToolLine</name>
+    <message>
+        <source>Length</source>
+        <translation type="unfinished">Длина</translation>
+    </message>
+    <message>
+        <source>Angle</source>
+        <translation type="unfinished">Угол</translation>
+    </message>
+</context>
+<context>
+    <name>VToolLineIntersectAxis</name>
+    <message>
+        <source>Length</source>
+        <translation type="unfinished">Длина</translation>
+    </message>
+    <message>
+        <source>Angle</source>
+        <translation type="unfinished">Угол</translation>
+    </message>
+</context>
+<context>
+    <name>VToolLinePoint</name>
+    <message>
+        <source>Length</source>
+        <translation type="unfinished">Длина</translation>
+    </message>
+    <message>
+        <source>Angle</source>
+        <translation type="unfinished">Угол</translation>
     </message>
 </context>
 <context>
@@ -11145,6 +11256,17 @@ Do you want to save your changes?</source>
     </message>
 </context>
 <context>
+    <name>VToolPointOfContact</name>
+    <message>
+        <source>Length</source>
+        <translation type="unfinished">Длина</translation>
+    </message>
+    <message>
+        <source>Angle</source>
+        <translation type="unfinished">Угол</translation>
+    </message>
+</context>
+<context>
     <name>VToolSeamAllowance</name>
     <message>
         <source>Current seam allowance</source>
@@ -11197,6 +11319,17 @@ Do you want to save your changes?</source>
     <message>
         <source>Delete</source>
         <translation>Удалить</translation>
+    </message>
+</context>
+<context>
+    <name>VToolShoulderPoint</name>
+    <message>
+        <source>Length</source>
+        <translation type="unfinished">Длина</translation>
+    </message>
+    <message>
+        <source>Angle</source>
+        <translation type="unfinished">Угол</translation>
     </message>
 </context>
 <context>

@@ -4830,7 +4830,7 @@ Apply settings anyway?</source>
     <name>DialogSeamAllowance</name>
     <message>
         <source>Seam allowance tool</source>
-        <translation>Εργαλείο περιθωρίου ραφής</translation>
+        <translation type="vanished">Εργαλείο περιθωρίου ραφής</translation>
     </message>
     <message>
         <source>Ready!</source>
@@ -4841,20 +4841,12 @@ Apply settings anyway?</source>
         <translation>Τιμή</translation>
     </message>
     <message>
-        <source>Add</source>
-        <translation type="vanished">Προσθήκη</translation>
-    </message>
-    <message>
         <source>Grainline</source>
         <translation>Γραμμή ισιάδας</translation>
     </message>
     <message>
         <source>Select main path objects clockwise, &lt;b&gt;Shift&lt;/b&gt; - reverse direction curve, &lt;b&gt;Enter&lt;/b&gt; - finish creation</source>
         <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>on Fold</source>
-        <translation type="vanished">στη Δίπλωση</translation>
     </message>
     <message>
         <source>Reverse</source>
@@ -4883,10 +4875,6 @@ Apply settings anyway?</source>
     <message>
         <source>Parser error: %1</source>
         <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Update</source>
-        <translation type="vanished">Ενημέρωση</translation>
     </message>
     <message>
         <source>Current seam allowance</source>
@@ -4931,10 +4919,6 @@ Apply settings anyway?</source>
     <message>
         <source>custom seam allowance</source>
         <translation>προσαρμοσμένο περιθώριο ραφής</translation>
-    </message>
-    <message>
-        <source>None</source>
-        <translation type="vanished">Κανένα</translation>
     </message>
     <message>
         <source>Both</source>
@@ -5002,6 +4986,10 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>To open all detail&apos;s features complete creating the main path.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Workpiece tool</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -6449,7 +6437,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Seam allowance tool</source>
-        <translation>Εργαλείο περιθωρίου ραφής</translation>
+        <translation type="vanished">Εργαλείο περιθωρίου ραφής</translation>
     </message>
     <message>
         <source>Union tool</source>
@@ -6969,10 +6957,6 @@ Do you want to save your changes?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Piece path tool</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Select main path objects clockwise.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -7174,6 +7158,14 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Label template editor</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Workpiece tool</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Internal path tool</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -7553,14 +7545,6 @@ Do you want to save your changes?</source>
 <context>
     <name>PreferencesPatternPage</name>
     <message>
-        <source>User</source>
-        <translation type="vanished">Χρήστης</translation>
-    </message>
-    <message>
-        <source>User name:</source>
-        <translation type="vanished">Όνομα χρήστη:</translation>
-    </message>
-    <message>
         <source>Graphical output</source>
         <translation type="unfinished"></translation>
     </message>
@@ -7575,10 +7559,6 @@ Do you want to save your changes?</source>
     <message>
         <source>Count steps (0 - no limit):</source>
         <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Delete all</source>
-        <translation type="vanished">Διαγραφή όλων</translation>
     </message>
     <message>
         <source>Workpiece</source>
@@ -9297,6 +9277,13 @@ Do you want to save your changes?</source>
     </message>
 </context>
 <context>
+    <name>VAbstractSpline</name>
+    <message>
+        <source>Length</source>
+        <translation type="unfinished">Μήκος</translation>
+    </message>
+</context>
+<context>
     <name>VAbstractTool</name>
     <message>
         <source>black</source>
@@ -10162,6 +10149,107 @@ Do you want to save your changes?</source>
     </message>
 </context>
 <context>
+    <name>VToolAlongLine</name>
+    <message>
+        <source>Length</source>
+        <translation type="unfinished">Μήκος</translation>
+    </message>
+    <message>
+        <source>Angle</source>
+        <translation type="unfinished">Γωνία</translation>
+    </message>
+</context>
+<context>
+    <name>VToolArc</name>
+    <message>
+        <source>Length</source>
+        <translation type="unfinished">Μήκος</translation>
+    </message>
+    <message>
+        <source>Radius</source>
+        <translation type="unfinished">Ακτίνα</translation>
+    </message>
+    <message>
+        <source>Start angle</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>End angle</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>VToolArcWithLength</name>
+    <message>
+        <source>Length</source>
+        <translation type="unfinished">Μήκος</translation>
+    </message>
+    <message>
+        <source>Radius</source>
+        <translation type="unfinished">Ακτίνα</translation>
+    </message>
+    <message>
+        <source>Start angle</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>End angle</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>VToolCut</name>
+    <message>
+        <source>Length</source>
+        <translation type="unfinished">Μήκος</translation>
+    </message>
+</context>
+<context>
+    <name>VToolCutArc</name>
+    <message>
+        <source>Arc</source>
+        <translation type="unfinished">Τόξο</translation>
+    </message>
+    <message>
+        <source>length</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>start angle</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>end angle</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>radius</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>VToolCutSpline</name>
+    <message>
+        <source>Curve</source>
+        <translation type="unfinished">Καμπύλη</translation>
+    </message>
+    <message>
+        <source>length</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>VToolCutSplinePath</name>
+    <message>
+        <source>Curve</source>
+        <translation type="unfinished">Καμπύλη</translation>
+    </message>
+    <message>
+        <source>length</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>VToolDetail</name>
     <message>
         <source>Options</source>
@@ -10206,6 +10294,69 @@ Do you want to save your changes?</source>
     <message>
         <source>rotate grainline</source>
         <translation type="vanished">περιστροφή γραμμής ίσιου</translation>
+    </message>
+</context>
+<context>
+    <name>VToolEllipticalArc</name>
+    <message>
+        <source>Length</source>
+        <translation type="unfinished">Μήκος</translation>
+    </message>
+    <message>
+        <source>Radius</source>
+        <translation type="unfinished">Ακτίνα</translation>
+    </message>
+    <message>
+        <source>Start angle</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>End angle</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>VToolHeight</name>
+    <message>
+        <source>Length</source>
+        <translation type="unfinished">Μήκος</translation>
+    </message>
+    <message>
+        <source>Angle</source>
+        <translation type="unfinished">Γωνία</translation>
+    </message>
+</context>
+<context>
+    <name>VToolLine</name>
+    <message>
+        <source>Length</source>
+        <translation type="unfinished">Μήκος</translation>
+    </message>
+    <message>
+        <source>Angle</source>
+        <translation type="unfinished">Γωνία</translation>
+    </message>
+</context>
+<context>
+    <name>VToolLineIntersectAxis</name>
+    <message>
+        <source>Length</source>
+        <translation type="unfinished">Μήκος</translation>
+    </message>
+    <message>
+        <source>Angle</source>
+        <translation type="unfinished">Γωνία</translation>
+    </message>
+</context>
+<context>
+    <name>VToolLinePoint</name>
+    <message>
+        <source>Length</source>
+        <translation type="unfinished">Μήκος</translation>
+    </message>
+    <message>
+        <source>Angle</source>
+        <translation type="unfinished">Γωνία</translation>
     </message>
 </context>
 <context>
@@ -10732,6 +10883,17 @@ Do you want to save your changes?</source>
     </message>
 </context>
 <context>
+    <name>VToolPointOfContact</name>
+    <message>
+        <source>Length</source>
+        <translation type="unfinished">Μήκος</translation>
+    </message>
+    <message>
+        <source>Angle</source>
+        <translation type="unfinished">Γωνία</translation>
+    </message>
+</context>
+<context>
     <name>VToolSeamAllowance</name>
     <message>
         <source>Current seam allowance</source>
@@ -10784,6 +10946,17 @@ Do you want to save your changes?</source>
     <message>
         <source>Delete</source>
         <translation>Διαγραφή</translation>
+    </message>
+</context>
+<context>
+    <name>VToolShoulderPoint</name>
+    <message>
+        <source>Length</source>
+        <translation type="unfinished">Μήκος</translation>
+    </message>
+    <message>
+        <source>Angle</source>
+        <translation type="unfinished">Γωνία</translation>
     </message>
 </context>
 <context>
