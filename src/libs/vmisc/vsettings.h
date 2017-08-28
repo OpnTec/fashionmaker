@@ -155,6 +155,9 @@ public:
     static bool GetDefTextAsPaths();
     void SetTextAsPaths(bool value);
 
+    QStringList GetKnownMaterials() const;
+    void        SetKnownMaterials(const QStringList &list);
+
 private:
     Q_DISABLE_COPY(VSettings)
 };

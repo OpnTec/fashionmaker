@@ -39,6 +39,7 @@
 #include "../vpatterndb/vcontainer.h"
 #include "../core/vapplication.h"
 #include "../vtools/dialogs/support/dialogeditlabel.h"
+#include "dialogknownmaterials.h"
 
 // calc how many combinations we have
 static const int heightsCount = (static_cast<int>(GHeights::H200) -
@@ -181,6 +182,9 @@ DialogPatternProperties::DialogPatternProperties(VPattern *doc,  VContainer *pat
     connect(ui->lineEditCompanyName, &QLineEdit::editingFinished, this, &DialogPatternProperties::LabelDataChanged);
     connect(ui->lineEditCustomerName, &QLineEdit::editingFinished, this, &DialogPatternProperties::LabelDataChanged);
     connect(ui->pushButtonEditPatternLabel, &QPushButton::clicked, this, &DialogPatternProperties::EditLabel);
+    connect(ui->pushButtonKnownMaterials, &QPushButton::clicked, this, &DialogPatternProperties::ManageKnownMaterials);
+    connect(ui->pushButtonPatternMaterials, &QPushButton::clicked, this,
+            &DialogPatternProperties::ManagePatternMaterials);
 
     InitComboBoxFormats(ui->comboBoxDateFormat,
                         VSettings::PredefinedDateFormats() + settings->GetUserDefinedDateFormats(),
@@ -899,4 +903,24 @@ void DialogPatternProperties::EditLabel()
         templateLines = editor.GetTemplate();
         templateDataChanged = true;
     }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogPatternProperties::ManageKnownMaterials()
+{
+    VSettings *settings = qApp->ValentinaSettings();
+
+    DialogKnownMaterials editor;
+    editor.SetList(settings->GetKnownMaterials());
+
+    if (QDialog::Accepted == editor.exec())
+    {
+        settings->SetKnownMaterials(editor.GetList());
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogPatternProperties::ManagePatternMaterials()
+{
+
 }

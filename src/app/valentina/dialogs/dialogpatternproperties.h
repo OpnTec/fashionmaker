@@ -62,6 +62,8 @@ private slots:
     void ChangeImage();
     void SaveImage();
     void EditLabel();
+    void ManageKnownMaterials();
+    void ManagePatternMaterials();
 private:
     Q_DISABLE_COPY(DialogPatternProperties)
     Ui::DialogPatternProperties *ui;
