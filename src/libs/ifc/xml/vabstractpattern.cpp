@@ -2066,7 +2066,7 @@ QMap<int, QString> VAbstractPattern::GetMaterials(const QDomElement &element) co
         {
             if (tagMaterial.tagName() == TagMaterial)
             {
-                const int number = GetParametrUInt(tagMaterial, AttrNumber, "0");
+                const int number = static_cast<int>(GetParametrUInt(tagMaterial, AttrNumber, "0"));
                 const QString name = GetParametrEmptyString(tagMaterial, AttrName);
 
                 if (number > 0 && number <= userMaterialPlaceholdersQuantity)
