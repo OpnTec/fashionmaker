@@ -13,6 +13,7 @@
 - [#660] New export: Export details without layout.
 - [#734] Optimization. Stop increments/variables table from updating immediately.
 - [#750] Info Box Beside Mouse.
+- [#634] New feature: Fabric manager.
 
 # Version 0.5.1
 - [#683] Tool Seam allowance's dialog is off screen on small resolutions.
