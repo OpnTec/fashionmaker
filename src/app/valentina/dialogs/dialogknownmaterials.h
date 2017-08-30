@@ -1,8 +1,8 @@
 /************************************************************************
  **
- **  @file   preferencespatternpage.h
+ **  @file   dialogknownmaterials.h
  **  @author Roman Telezhynskyi <dismine(at)gmail.com>
- **  @date   12 4, 2017
+ **  @date   28 8, 2017
  **
  **  @brief
  **  @copyright
@@ -26,44 +26,38 @@
  **
  *************************************************************************/
 
-#ifndef PREFERENCESPATTERNPAGE_H
-#define PREFERENCESPATTERNPAGE_H
+#ifndef DIALOGKNOWNMATERIALS_H
+#define DIALOGKNOWNMATERIALS_H
 
-#include <QWidget>
+#include <QDialog>
 
 namespace Ui
 {
-    class PreferencesPatternPage;
+    class DialogKnownMaterials;
 }
 
-class QComboBox;
-
-class PreferencesPatternPage : public QWidget
+class DialogKnownMaterials : public QDialog
 {
     Q_OBJECT
 
 public:
-    explicit PreferencesPatternPage(QWidget *parent = nullptr);
-    virtual ~PreferencesPatternPage();
+    explicit DialogKnownMaterials(QWidget *parent = nullptr);
+    virtual ~DialogKnownMaterials();
 
-    void Apply();
-    void InitDefaultSeamAllowance();
+    void        SetList(const QStringList &list);
+    QStringList GetList() const;
 
 private slots:
-    void EditDateTimeFormats();
-    void ManageKnownMaterials();
+    void ShowDetails();
+    void Add();
+    void Remove();
+    void SaveText(const QString &text);
 
 private:
-    Q_DISABLE_COPY(PreferencesPatternPage)
-    Ui::PreferencesPatternPage *ui;
-    QStringList m_knownMaterials;
+    Q_DISABLE_COPY(DialogKnownMaterials)
+    Ui::DialogKnownMaterials *ui;
 
-    void InitLabelDateTimeFormats();
-    void InitComboBoxFormats(QComboBox *box, const QStringList &items, const QString &currentFormat);
-
-    template <typename T>
-    void CallDateTimeFormatEditor(const T &type, const QStringList &predefinedFormats,
-                                  const QStringList &userDefinedFormats, QComboBox *box);
+    void SetupControls();
 };
 
-#endif // PREFERENCESPATTERNPAGE_H
+#endif // DIALOGKNOWNMATERIALS_H

@@ -51,7 +51,9 @@ const QString settingConfigurationLabelLanguage = QStringLiteral("configuration/
 const QString settingPathsPattern = QStringLiteral("paths/pattern");
 const QString settingPathsLayout  = QStringLiteral("paths/layout");
 
-const QString settingPatternGraphicalOutput = QStringLiteral("pattern/graphicalOutput");
+const QString settingPatternGraphicalOutput   = QStringLiteral("pattern/graphicalOutput");
+const QString settingPatternKnownMaterials    = QStringLiteral("pattern/knownMaterials");
+const QString settingPatternRememberMaterials = QStringLiteral("pattern/rememberMaterials");
 
 const QString settingCommunityServer       = QStringLiteral("community/server");
 const QString settingCommunityServerSecure = QStringLiteral("community/serverSecure");
@@ -606,3 +608,26 @@ void VSettings::SetTextAsPaths(bool value)
     setValue(settingTextAsPaths, value);
 }
 
+//---------------------------------------------------------------------------------------------------------------------
+QStringList VSettings::GetKnownMaterials() const
+{
+    return value(settingPatternKnownMaterials, QStringList()).toStringList();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VSettings::SetKnownMaterials(const QStringList &list)
+{
+    setValue(settingPatternKnownMaterials, list);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+bool VSettings::IsRememberPatternMaterials() const
+{
+    return value(settingPatternRememberMaterials, true).toBool();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VSettings::SetRememberPatternMaterials(bool value)
+{
+    setValue(settingPatternRememberMaterials, value);
+}

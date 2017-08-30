@@ -160,6 +160,9 @@ public:
     void                        SetPatternLabelTemplate(const QVector<VLabelTemplateLine> &lines);
     QVector<VLabelTemplateLine> GetPatternLabelTemplate() const;
 
+    void               SetPatternMaterials(const QMap<int, QString> &materials);
+    QMap<int, QString> GetPatternMaterials() const;
+
     void SetPatternWasChanged(bool changed);
     bool GetPatternWasChanged() const;
 
@@ -216,6 +219,8 @@ public:
     static const QString TagCompanyName;
     static const QString TagCustomerName;
     static const QString TagPatternLabel;
+    static const QString TagPatternMaterials;
+    static const QString TagMaterial;
     static const QString TagGrainline;
     static const QString TagPath;
     static const QString TagNodes;
@@ -251,6 +256,7 @@ public:
     static const QString AttrIncludeAs;
     static const QString AttrWidth;
     static const QString AttrRotation;
+    static const QString AttrNumber;
 
     static const QString AttrAll;
 
@@ -395,6 +401,8 @@ protected:
     static QHash<quint32, VDataTool*> tools;
     /** @brief patternLabelLines list to speed up reading a template by many pieces. */
     static QVector<VLabelTemplateLine> patternLabelLines;
+    /** @brief patternMaterials list to speed up reading materials by many pieces. */
+    static QMap<int, QString> patternMaterials;
     static bool patternLabelWasChanged;
 
     static void       ToolExists(const quint32 &id);
@@ -430,6 +438,9 @@ private:
     bool IsFunction(const QString& token) const;
 
     QPair<bool, QMap<quint32, quint32> > ParseItemElement(const QDomElement &domElement);
+
+    QMap<int, QString> GetMaterials(const QDomElement &element) const;
+    void               SetMaterials(QDomElement &element, const QMap<int, QString> &materials);
 
 };
 

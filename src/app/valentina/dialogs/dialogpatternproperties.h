@@ -62,6 +62,7 @@ private slots:
     void ChangeImage();
     void SaveImage();
     void EditLabel();
+    void ManagePatternMaterials();
 private:
     Q_DISABLE_COPY(DialogPatternProperties)
     Ui::DialogPatternProperties *ui;
@@ -79,12 +80,14 @@ private:
     bool                   labelDataChanged;
     bool                   askSaveLabelData;
     bool                   templateDataChanged;
+    bool                   patternMaterialsChanged;
     QAction                *deleteAction;
     QAction                *changeImageAction;
     QAction                *saveImageAction;
     QAction                *showImageAction;
 
     QVector<VLabelTemplateLine> templateLines;
+    QMap<int, QString>          patternMaterials;
 
     void         SetHeightsChecked(bool enabled);
     void         SetSizesChecked(bool enabled);
@@ -103,6 +106,7 @@ private:
     void         SaveDefValues();
     void         SaveLabelData();
     void         SaveTemplateData();
+    void         SaveMaterialData();
     void         SaveReadOnlyState();
 
     void         SetDefaultHeight(const QString &def);

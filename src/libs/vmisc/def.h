@@ -359,6 +359,7 @@ extern const QString pl_patternName;
 extern const QString pl_patternNumber;
 extern const QString pl_author;
 extern const QString pl_customer;
+extern const QString pl_userMaterial;
 extern const QString pl_pExt;
 extern const QString pl_pFileName;
 extern const QString pl_mFileName;
@@ -377,6 +378,8 @@ extern const QString pl_mInterfacing;
 extern const QString pl_mInterlining;
 extern const QString pl_wCut;
 extern const QString pl_wOnFold;
+
+const int userMaterialPlaceholdersQuantity = 9;
 
 extern const QStringList labelTemplatePlaceholders;
 

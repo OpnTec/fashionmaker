@@ -151,7 +151,7 @@ void VPattern::Parse(const Document &parse)
     QStringList tags = QStringList() << TagDraw << TagIncrements << TagDescription << TagNotes
                                      << TagMeasurements << TagVersion << TagGradation << TagImage << TagUnit
                                      << TagPatternName << TagPatternNum << TagCompanyName << TagCustomerName
-                                     << TagPatternLabel;
+                                     << TagPatternLabel << TagPatternMaterials;
     PrepareForParse(parse);
     QDomNode domNode = documentElement().firstChild();
     while (domNode.isNull() == false)
@@ -222,6 +222,9 @@ void VPattern::Parse(const Document &parse)
                         break;
                     case 13: // TagPatternLabel
                         qCDebug(vXML, "Pattern label.");
+                        break;
+                    case 14: // TagPatternMaterials
+                        qCDebug(vXML, "Pattern materials.");
                         break;
                     default:
                         qCDebug(vXML, "Wrong tag name %s", qUtf8Printable(domElement.tagName()));

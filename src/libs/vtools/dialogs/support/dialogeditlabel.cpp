@@ -506,6 +506,21 @@ void DialogEditLabel::InitPlaceholders()
     m_placeholders.insert(pl_height, qMakePair(tr("Height"), curHeight));
     m_placeholders.insert(pl_mExt, qMakePair(tr("Measurments extension"), mExt));
 
+    const QString materialDescription = tr("User material");
+    const QMap<int, QString> materials = m_doc->GetPatternMaterials();
+    for (int i = 0; i < userMaterialPlaceholdersQuantity; ++i)
+    {
+        const QString number = QString::number(i + 1);
+
+        QString value;
+        if (materials.contains(i + 1))
+        {
+            value = materials.value(i + 1);
+        }
+
+        m_placeholders.insert(pl_userMaterial + number, qMakePair(materialDescription + number, value));
+    }
+
     // Piece tags
     m_placeholders.insert(pl_pLetter, qMakePair(tr("Piece letter"), QString("")));
     m_placeholders.insert(pl_pAnnotation, qMakePair(tr("Piece annotation"), QString("")));

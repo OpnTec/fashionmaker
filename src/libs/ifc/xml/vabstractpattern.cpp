@@ -86,6 +86,8 @@ const QString VAbstractPattern::TagPatternNum       = QStringLiteral("patternNum
 const QString VAbstractPattern::TagCustomerName     = QStringLiteral("customer");
 const QString VAbstractPattern::TagCompanyName      = QStringLiteral("company");
 const QString VAbstractPattern::TagPatternLabel     = QStringLiteral("patternLabel");
+const QString VAbstractPattern::TagPatternMaterials = QStringLiteral("patternMaterials");
+const QString VAbstractPattern::TagMaterial         = QStringLiteral("material");
 const QString VAbstractPattern::TagGrainline        = QStringLiteral("grainline");
 const QString VAbstractPattern::TagPath             = QStringLiteral("path");
 const QString VAbstractPattern::TagNodes            = QStringLiteral("nodes");
@@ -121,6 +123,7 @@ const QString VAbstractPattern::AttrEnd               = QStringLiteral("end");
 const QString VAbstractPattern::AttrIncludeAs         = QStringLiteral("includeAs");
 const QString VAbstractPattern::AttrWidth             = QStringLiteral("width");
 const QString VAbstractPattern::AttrRotation          = QStringLiteral("rotation");
+const QString VAbstractPattern::AttrNumber            = QStringLiteral("number");
 
 const QString VAbstractPattern::AttrAll             = QStringLiteral("all");
 
@@ -195,6 +198,7 @@ const QString VAbstractPattern::NodeSplinePath = QStringLiteral("NodeSplinePath"
 
 QHash<quint32, VDataTool*> VAbstractPattern::tools = QHash<quint32, VDataTool*>();
 QVector<VLabelTemplateLine> VAbstractPattern::patternLabelLines = QVector<VLabelTemplateLine>();
+QMap<int, QString> VAbstractPattern::patternMaterials = QMap<int, QString>();
 bool VAbstractPattern::patternLabelWasChanged = false;
 
 namespace
@@ -1404,7 +1408,7 @@ QVector<VLabelTemplateLine> VAbstractPattern::GetPatternLabelTemplate() const
     if (patternLabelLines.isEmpty())
     {
         const QDomNodeList list = elementsByTagName(TagPatternLabel);
-        if (list.isEmpty())
+        if (list.isEmpty() || list.at(0).childNodes().count() == 0)
         {
             return QVector<VLabelTemplateLine>();
         }
@@ -1413,6 +1417,35 @@ QVector<VLabelTemplateLine> VAbstractPattern::GetPatternLabelTemplate() const
     }
 
     return patternLabelLines;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VAbstractPattern::SetPatternMaterials(const QMap<int, QString> &materials)
+{
+    QDomElement tag = CheckTagExists(TagPatternMaterials);
+    RemoveAllChildren(tag);
+    SetMaterials(tag, materials);
+    patternMaterials = materials;
+    patternLabelWasChanged = true;
+    modified = true;
+    emit patternChanged(false);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QMap<int, QString> VAbstractPattern::GetPatternMaterials() const
+{
+    if (patternMaterials.isEmpty())
+    {
+        const QDomNodeList list = elementsByTagName(TagPatternMaterials);
+        if (list.isEmpty() || list.at(0).childNodes().count() == 0)
+        {
+            return QMap<int, QString>();
+        }
+
+        patternMaterials = GetMaterials(list.at(0).toElement());
+    }
+
+    return patternMaterials;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -1569,7 +1602,7 @@ QDomElement VAbstractPattern::CheckTagExists(const QString &tag)
     {
         const QStringList tags = QStringList() << TagUnit << TagImage << TagDescription << TagNotes
                                          << TagGradation << TagPatternName << TagPatternNum << TagCompanyName
-                                         << TagCustomerName << TagPatternLabel;
+                                         << TagCustomerName << TagPatternLabel << TagPatternMaterials;
         switch (tags.indexOf(tag))
         {
             case 1: //TagImage
@@ -1608,6 +1641,9 @@ QDomElement VAbstractPattern::CheckTagExists(const QString &tag)
                 break;
             case 9: // TagPatternLabel
                 element = createElement(TagPatternLabel);
+                break;
+            case 10: // TagPatternMaterials
+                element = createElement(TagPatternMaterials);
                 break;
             case 0: //TagUnit (Mandatory tag)
             default:
@@ -2015,6 +2051,52 @@ QPair<bool, QMap<quint32, quint32> > VAbstractPattern::ParseItemElement(const QD
         VExceptionObjectError excep(tr("Error creating or updating group"), domElement);
         excep.AddMoreInformation(e.ErrorMessage());
         throw excep;
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QMap<int, QString> VAbstractPattern::GetMaterials(const QDomElement &element) const
+{
+    QMap<int, QString> materials;
+
+    if (not element.isNull())
+    {
+        QDomElement tagMaterial = element.firstChildElement();
+        while (tagMaterial.isNull() == false)
+        {
+            if (tagMaterial.tagName() == TagMaterial)
+            {
+                const int number = GetParametrUInt(tagMaterial, AttrNumber, "0");
+                const QString name = GetParametrEmptyString(tagMaterial, AttrName);
+
+                if (number > 0 && number <= userMaterialPlaceholdersQuantity)
+                {
+                    materials.insert(number, name);
+                }
+            }
+            tagMaterial = tagMaterial.nextSiblingElement(TagMaterial);
+        }
+    }
+
+    return materials;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VAbstractPattern::SetMaterials(QDomElement &element, const QMap<int, QString> &materials)
+{
+    if (not element.isNull())
+    {
+        QMap<int, QString>::const_iterator i = materials.constBegin();
+        while (i != materials.constEnd())
+        {
+            QDomElement tagMaterial = createElement(TagMaterial);
+
+            SetAttribute(tagMaterial, AttrNumber, i.key());
+            SetAttribute(tagMaterial, AttrName, i.value());
+
+            element.appendChild(tagMaterial);
+            ++i;
+        }
     }
 }
 

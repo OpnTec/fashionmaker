@@ -155,6 +155,12 @@ public:
     static bool GetDefTextAsPaths();
     void SetTextAsPaths(bool value);
 
+    QStringList GetKnownMaterials() const;
+    void        SetKnownMaterials(const QStringList &list);
+
+    bool IsRememberPatternMaterials() const;
+    void SetRememberPatternMaterials(bool value);
+
 private:
     Q_DISABLE_COPY(VSettings)
 };

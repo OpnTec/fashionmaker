@@ -1833,6 +1833,10 @@
         <source>on fold</source>
         <translation type="unfinished">en pliegue</translation>
     </message>
+    <message>
+        <source>User material</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>DialogEditWrongFormula</name>
@@ -2752,6 +2756,25 @@
     </message>
 </context>
 <context>
+    <name>DialogKnownMaterials</name>
+    <message>
+        <source>Known materials</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Material:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Name of material</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>User material</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>DialogLayoutProgress</name>
     <message>
         <source>Couldn&apos;t prepare data for creation layout</source>
@@ -3613,6 +3636,21 @@ Apply settings anyway?</source>
     </message>
 </context>
 <context>
+    <name>DialogPatternMaterials</name>
+    <message>
+        <source>Dialog</source>
+        <translation type="unfinished">Diálogo</translation>
+    </message>
+    <message>
+        <source>Placeholder</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Value</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>DialogPatternProperties</name>
     <message>
         <source>Pattern properties</source>
@@ -3828,6 +3866,22 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Label data were changed. Do you want to save them before editing label template?</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Materials</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Pattern materials:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Manage list of pattern materials</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Manage</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -4915,10 +4969,6 @@ Apply settings anyway?</source>
 </context>
 <context>
     <name>DialogSeamAllowance</name>
-    <message>
-        <source>Seam allowance tool</source>
-        <translation type="vanished">Herramienta para las costuras</translation>
-    </message>
     <message>
         <source>Ready!</source>
         <translation>¡Listo!</translation>
@@ -7076,10 +7126,6 @@ Quiere guardar los cambios?</translation>
         <translation>Seleccionar el punto del centro del arco elíptico</translation>
     </message>
     <message>
-        <source>Piece path tool</source>
-        <translation type="vanished">Herramienta de trayectoria de piezas</translation>
-    </message>
-    <message>
         <source>Select main path objects clockwise.</source>
         <translation>Seleccionar los objetos de la ruta principal en el sentido horario.</translation>
     </message>
@@ -7773,6 +7819,30 @@ Quiere guardar los cambios?</translation>
     </message>
     <message>
         <source>Time:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Materials</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Known materials:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Manage list of known materials</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Manage</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>When manage pattern materials save them to known materials list</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Remeber pattern materials</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -9645,6 +9715,13 @@ Do you want to save your changes?</source>
     <message>
         <source>Exception thrown: %1. Program will be terminated.</source>
         <translation>Se ha lanzado una excepción: %1. El programa se terminará.</translation>
+    </message>
+</context>
+<context>
+    <name>VComboBoxDelegate</name>
+    <message>
+        <source>Select material</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -12696,6 +12773,11 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>wOnFold</source>
+        <comment>placeholder</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>userMaterial</source>
         <comment>placeholder</comment>
         <translation type="unfinished"></translation>
     </message>

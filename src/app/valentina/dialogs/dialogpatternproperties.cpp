@@ -39,6 +39,8 @@
 #include "../vpatterndb/vcontainer.h"
 #include "../core/vapplication.h"
 #include "../vtools/dialogs/support/dialogeditlabel.h"
+#include "dialogknownmaterials.h"
+#include "dialogpatternmaterials.h"
 
 // calc how many combinations we have
 static const int heightsCount = (static_cast<int>(GHeights::H200) -
@@ -63,11 +65,13 @@ DialogPatternProperties::DialogPatternProperties(VPattern *doc,  VContainer *pat
       labelDataChanged(false),
       askSaveLabelData(false),
       templateDataChanged(false),
+      patternMaterialsChanged(false),
       deleteAction(nullptr),
       changeImageAction(nullptr),
       saveImageAction(nullptr),
       showImageAction(nullptr),
-      templateLines()
+      templateLines(),
+      patternMaterials()
 {
     ui->setupUi(this);
 
@@ -75,6 +79,8 @@ DialogPatternProperties::DialogPatternProperties(VPattern *doc,  VContainer *pat
 
     VSettings *settings = qApp->ValentinaSettings();
     settings->GetOsSeparator() ? setLocale(QLocale()) : setLocale(QLocale::c());
+
+    patternMaterials = doc->GetPatternMaterials();
 
     if (qApp->GetPPath().isEmpty())
     {
@@ -181,6 +187,8 @@ DialogPatternProperties::DialogPatternProperties(VPattern *doc,  VContainer *pat
     connect(ui->lineEditCompanyName, &QLineEdit::editingFinished, this, &DialogPatternProperties::LabelDataChanged);
     connect(ui->lineEditCustomerName, &QLineEdit::editingFinished, this, &DialogPatternProperties::LabelDataChanged);
     connect(ui->pushButtonEditPatternLabel, &QPushButton::clicked, this, &DialogPatternProperties::EditLabel);
+    connect(ui->pushButtonPatternMaterials, &QPushButton::clicked, this,
+            &DialogPatternProperties::ManagePatternMaterials);
 
     InitComboBoxFormats(ui->comboBoxDateFormat,
                         VSettings::PredefinedDateFormats() + settings->GetUserDefinedDateFormats(),
@@ -219,6 +227,7 @@ void DialogPatternProperties::Apply()
         case 3:
             SaveLabelData();
             SaveTemplateData();
+            SaveMaterialData();
             emit doc->UpdatePatternLabel();
             break;
         default:
@@ -235,6 +244,7 @@ void DialogPatternProperties::Ok()
     SaveReadOnlyState();
     SaveLabelData();
     SaveTemplateData();
+    SaveMaterialData();
 
     emit doc->UpdatePatternLabel();
 
@@ -548,7 +558,6 @@ void DialogPatternProperties::SaveDescription()
         doc->SetDescription(ui->plainTextEditDescription->document()->toPlainText());
 
         descriptionChanged = false;
-        emit doc->patternChanged(false);
     }
 }
 
@@ -561,7 +570,6 @@ void DialogPatternProperties::SaveGradation()
         doc->SetGradationSizes(sizes);
         emit UpdateGradation();
         gradationChanged = false;
-        emit doc->patternChanged(false);
     }
 }
 
@@ -599,8 +607,6 @@ void DialogPatternProperties::SaveLabelData()
 
         labelDataChanged = false;
         askSaveLabelData = false;
-        emit doc->patternChanged(false);
-        emit doc->UpdatePatternLabel();
     }
 }
 
@@ -611,8 +617,16 @@ void DialogPatternProperties::SaveTemplateData()
     {
         doc->SetPatternLabelTemplate(templateLines);
         templateDataChanged = false;
-        emit doc->patternChanged(false);
-        emit doc->UpdatePatternLabel();
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogPatternProperties::SaveMaterialData()
+{
+    if (patternMaterialsChanged)
+    {
+        doc->SetPatternMaterials(patternMaterials);
+        patternMaterialsChanged = false;
     }
 }
 
@@ -898,5 +912,24 @@ void DialogPatternProperties::EditLabel()
     {
         templateLines = editor.GetTemplate();
         templateDataChanged = true;
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogPatternProperties::ManagePatternMaterials()
+{
+    VSettings *settings = qApp->ValentinaSettings();
+
+    DialogPatternMaterials editor(patternMaterials, settings->IsRememberPatternMaterials());
+
+    if (QDialog::Accepted == editor.exec())
+    {
+        patternMaterials = editor.GetPatternMaterials();
+        patternMaterialsChanged = true;
+
+        if (settings->IsRememberPatternMaterials())
+        {
+            settings->SetKnownMaterials(editor.GetKnownMaterials());
+        }
     }
 }
