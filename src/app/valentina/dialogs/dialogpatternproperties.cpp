@@ -65,11 +65,13 @@ DialogPatternProperties::DialogPatternProperties(VPattern *doc,  VContainer *pat
       labelDataChanged(false),
       askSaveLabelData(false),
       templateDataChanged(false),
+      patternMaterialsChanged(false),
       deleteAction(nullptr),
       changeImageAction(nullptr),
       saveImageAction(nullptr),
       showImageAction(nullptr),
-      templateLines()
+      templateLines(),
+      patternMaterials()
 {
     ui->setupUi(this);
 
@@ -77,6 +79,8 @@ DialogPatternProperties::DialogPatternProperties(VPattern *doc,  VContainer *pat
 
     VSettings *settings = qApp->ValentinaSettings();
     settings->GetOsSeparator() ? setLocale(QLocale()) : setLocale(QLocale::c());
+
+    patternMaterials = doc->GetPatternMaterials();
 
     if (qApp->GetPPath().isEmpty())
     {
@@ -223,6 +227,7 @@ void DialogPatternProperties::Apply()
         case 3:
             SaveLabelData();
             SaveTemplateData();
+            SaveMaterialData();
             emit doc->UpdatePatternLabel();
             break;
         default:
@@ -239,6 +244,7 @@ void DialogPatternProperties::Ok()
     SaveReadOnlyState();
     SaveLabelData();
     SaveTemplateData();
+    SaveMaterialData();
 
     emit doc->UpdatePatternLabel();
 
@@ -552,7 +558,6 @@ void DialogPatternProperties::SaveDescription()
         doc->SetDescription(ui->plainTextEditDescription->document()->toPlainText());
 
         descriptionChanged = false;
-        emit doc->patternChanged(false);
     }
 }
 
@@ -565,7 +570,6 @@ void DialogPatternProperties::SaveGradation()
         doc->SetGradationSizes(sizes);
         emit UpdateGradation();
         gradationChanged = false;
-        emit doc->patternChanged(false);
     }
 }
 
@@ -603,8 +607,6 @@ void DialogPatternProperties::SaveLabelData()
 
         labelDataChanged = false;
         askSaveLabelData = false;
-        emit doc->patternChanged(false);
-        emit doc->UpdatePatternLabel();
     }
 }
 
@@ -615,8 +617,16 @@ void DialogPatternProperties::SaveTemplateData()
     {
         doc->SetPatternLabelTemplate(templateLines);
         templateDataChanged = false;
-        emit doc->patternChanged(false);
-        emit doc->UpdatePatternLabel();
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogPatternProperties::SaveMaterialData()
+{
+    if (patternMaterialsChanged)
+    {
+        doc->SetPatternMaterials(patternMaterials);
+        patternMaterialsChanged = false;
     }
 }
 
@@ -910,10 +920,13 @@ void DialogPatternProperties::ManagePatternMaterials()
 {
     VSettings *settings = qApp->ValentinaSettings();
 
-    DialogPatternMaterials editor(QMap<int, QString>(), settings->IsRememberPatternMaterials());
+    DialogPatternMaterials editor(patternMaterials, settings->IsRememberPatternMaterials());
 
     if (QDialog::Accepted == editor.exec())
     {
+        patternMaterials = editor.GetPatternMaterials();
+        patternMaterialsChanged = true;
+
         if (settings->IsRememberPatternMaterials())
         {
             settings->SetKnownMaterials(editor.GetKnownMaterials());
