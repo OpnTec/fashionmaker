@@ -688,11 +688,18 @@ QString VTranslateVars::InternalVarToUser(const QString &var) const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QString VTranslateVars::PlaceholderToUser(const QString &var) const
+QString VTranslateVars::PlaceholderToUser(QString var) const
 {
+    QString number;
+    if (var.startsWith(pl_userMaterial) && var.length() > pl_userMaterial.length())
+    {
+        number = var.right(var.length() - pl_userMaterial.length());
+        var = pl_userMaterial;
+    }
+
     if (placeholders.contains(var))
     {
-        return placeholders.value(var).translate();
+        return placeholders.value(var).translate() + number;
     }
 
     return var;

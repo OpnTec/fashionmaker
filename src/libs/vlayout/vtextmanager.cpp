@@ -102,6 +102,20 @@ QMap<QString, QString> PreparePlaceholders(const VAbstractPattern *doc)
     placeholders.insert(pl_height, curHeight);
     placeholders.insert(pl_mExt, mExt);
 
+    const QMap<int, QString> materials = doc->GetPatternMaterials();
+    for (int i = 0; i < userMaterialPlaceholdersQuantity; ++i)
+    {
+        const QString number = QString::number(i + 1);
+
+        QString value;
+        if (materials.contains(i + 1))
+        {
+            value = materials.value(i + 1);
+        }
+
+        placeholders.insert(pl_userMaterial + number, value);
+    }
+
     // Piece tags
     placeholders.insert(pl_pLetter, "");
     placeholders.insert(pl_pAnnotation, "");

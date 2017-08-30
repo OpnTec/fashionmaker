@@ -46,7 +46,7 @@ public:
     bool VariablesToUser(QString &newFormula, int position, const QString &token, int &bias) const;
 
     QString InternalVarToUser(const QString &var) const;
-    QString PlaceholderToUser(const QString &var) const;
+    QString PlaceholderToUser(QString var) const;
 
     QString PlaceholderToUserText(QString text) const;
     QString PlaceholderFromUserText(QString text) const;

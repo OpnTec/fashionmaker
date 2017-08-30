@@ -145,8 +145,8 @@ void DialogPatternMaterials::SetPatternMaterials(const QMap<int, QString> &list)
 
     for (int i = 0; i < userMaterialPlaceholdersQuantity; ++i)
     {
-        QTableWidgetItem *item = new QTableWidgetItem(per + qApp->TrVars()->PlaceholderToUser(pl_userMaterial) +
-                                                      QString::number(i + 1) + per);
+        const QString translated = qApp->TrVars()->PlaceholderToUser(pl_userMaterial + QString::number(i + 1));
+        QTableWidgetItem *item = new QTableWidgetItem(per + translated + per);
         item->setFlags(item->flags() ^ Qt::ItemIsEditable);
         item->setTextAlignment(Qt::AlignLeft);
 
