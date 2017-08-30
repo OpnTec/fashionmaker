@@ -114,7 +114,7 @@
             <xs:sequence>
               <xs:element name="material" minOccurs="0" maxOccurs="9">
                 <xs:complexType>
-                  <xs:attribute name="number" type="xs:unsignedInt" use="required"/>
+                  <xs:attribute name="number" type="userMaterialType" use="required"/>
                   <xs:attribute name="name" type="xs:string"/>
                 </xs:complexType>
               </xs:element>
@@ -944,6 +944,12 @@
       <xs:enumeration value="1"/><!--aligns with the left edge-->
       <xs:enumeration value="2"/><!--aligns with the right edge-->
       <xs:enumeration value="4"/><!--Centers horizontally in the available space-->
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="userMaterialType">
+    <xs:restriction base="xs:unsignedInt">
+      <xs:minInclusive value="1"/>
+      <xs:maxInclusive value="9"/>
     </xs:restriction>
   </xs:simpleType>
 </xs:schema>
