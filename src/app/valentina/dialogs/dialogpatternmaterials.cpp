@@ -140,10 +140,10 @@ DialogPatternMaterials::~DialogPatternMaterials()
 //---------------------------------------------------------------------------------------------------------------------
 void DialogPatternMaterials::SetPatternMaterials(const QMap<int, QString> &list)
 {
-    ui->tableWidget->setRowCount(9);
+    ui->tableWidget->setRowCount(userMaterialPlaceholdersQuantity);
     QLatin1String per("%");
 
-    for (int i = 0; i < 9; ++i)
+    for (int i = 0; i < userMaterialPlaceholdersQuantity; ++i)
     {
         QTableWidgetItem *item = new QTableWidgetItem(per + qApp->TrVars()->PlaceholderToUser(pl_userMaterial) +
                                                       QString::number(i + 1) + per);
