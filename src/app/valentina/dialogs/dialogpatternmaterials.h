@@ -1,8 +1,8 @@
 /************************************************************************
  **
- **  @file   preferencespatternpage.h
+ **  @file   dialogpatternmaterials.h
  **  @author Roman Telezhynskyi <dismine(at)gmail.com>
- **  @date   12 4, 2017
+ **  @date   28 8, 2017
  **
  **  @brief
  **  @copyright
@@ -26,44 +26,36 @@
  **
  *************************************************************************/
 
-#ifndef PREFERENCESPATTERNPAGE_H
-#define PREFERENCESPATTERNPAGE_H
+#ifndef DIALOGPATTERNMATERIALS_H
+#define DIALOGPATTERNMATERIALS_H
 
-#include <QWidget>
+#include <QDialog>
 
 namespace Ui
 {
-    class PreferencesPatternPage;
+    class DialogPatternMaterials;
 }
 
-class QComboBox;
+class VComboBoxDelegate;
 
-class PreferencesPatternPage : public QWidget
+class DialogPatternMaterials : public QDialog
 {
     Q_OBJECT
 
 public:
-    explicit PreferencesPatternPage(QWidget *parent = nullptr);
-    virtual ~PreferencesPatternPage();
+    explicit DialogPatternMaterials(const QMap<int, QString> &list, bool rememberPM, QWidget *parent = nullptr);
+    virtual ~DialogPatternMaterials();
 
-    void Apply();
-    void InitDefaultSeamAllowance();
 
-private slots:
-    void EditDateTimeFormats();
-    void ManageKnownMaterials();
+    QMap<int, QString> GetPatternMaterials() const;
+    QStringList        GetKnownMaterials() const;
 
 private:
-    Q_DISABLE_COPY(PreferencesPatternPage)
-    Ui::PreferencesPatternPage *ui;
+    Q_DISABLE_COPY(DialogPatternMaterials)
+    Ui::DialogPatternMaterials *ui;
     QStringList m_knownMaterials;
 
-    void InitLabelDateTimeFormats();
-    void InitComboBoxFormats(QComboBox *box, const QStringList &items, const QString &currentFormat);
-
-    template <typename T>
-    void CallDateTimeFormatEditor(const T &type, const QStringList &predefinedFormats,
-                                  const QStringList &userDefinedFormats, QComboBox *box);
+    void SetPatternMaterials(const QMap<int, QString> &list);
 };
 
-#endif // PREFERENCESPATTERNPAGE_H
+#endif // DIALOGPATTERNMATERIALS_H

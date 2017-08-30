@@ -117,6 +117,7 @@ const QString pl_patternName   = QStringLiteral("patternName");
 const QString pl_patternNumber = QStringLiteral("patternNumber");
 const QString pl_author        = QStringLiteral("author");
 const QString pl_customer      = QStringLiteral("customer");
+const QString pl_userMaterial  = QStringLiteral("userMaterial");
 const QString pl_pExt          = QStringLiteral("pExt");
 const QString pl_pFileName     = QStringLiteral("pFileName");
 const QString pl_mFileName     = QStringLiteral("mFileName");
@@ -144,6 +145,7 @@ const QStringList labelTemplatePlaceholders = QStringList() << pl_size
                                                             << pl_patternNumber
                                                             << pl_author
                                                             << pl_customer
+                                                            << pl_userMaterial
                                                             << pl_pExt
                                                             << pl_pFileName
                                                             << pl_mFileName

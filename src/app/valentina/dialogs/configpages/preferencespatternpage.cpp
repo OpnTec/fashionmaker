@@ -31,6 +31,7 @@
 #include "../../core/vapplication.h"
 #include "../ifc/xml/vabstractpattern.h"
 #include "../dialogdatetimeformats.h"
+#include "../dialogknownmaterials.h"
 
 #include <QMessageBox>
 #include <QDate>
@@ -55,19 +56,28 @@ QStringList ComboBoxAllStrings(QComboBox *combo)
 //---------------------------------------------------------------------------------------------------------------------
 PreferencesPatternPage::PreferencesPatternPage(QWidget *parent)
     : QWidget(parent),
-      ui(new Ui::PreferencesPatternPage)
+      ui(new Ui::PreferencesPatternPage),
+      m_knownMaterials()
 {
     ui->setupUi(this);
-    ui->graphOutputCheck->setChecked(qApp->ValentinaSettings()->GetGraphicalOutput());
-    ui->undoCount->setValue(qApp->ValentinaSettings()->GetUndoCount());
+
+    VSettings *settings = qApp->ValentinaSettings();
+
+    ui->graphOutputCheck->setChecked(settings->GetGraphicalOutput());
+    ui->undoCount->setValue(settings->GetUndoCount());
 
     InitDefaultSeamAllowance();
     InitLabelDateTimeFormats();
 
-    ui->forbidFlippingCheck->setChecked(qApp->ValentinaSettings()->GetForbidWorkpieceFlipping());
-    ui->doublePassmarkCheck->setChecked(qApp->ValentinaSettings()->IsDoublePassmark());
-    ui->checkBoxHideMainPath->setChecked(qApp->ValentinaSettings()->IsHideMainPath());
-    ui->fontComboBoxLabelFont->setCurrentFont(qApp->ValentinaSettings()->GetLabelFont());
+    ui->forbidFlippingCheck->setChecked(settings->GetForbidWorkpieceFlipping());
+    ui->doublePassmarkCheck->setChecked(settings->IsDoublePassmark());
+    ui->checkBoxHideMainPath->setChecked(settings->IsHideMainPath());
+    ui->fontComboBoxLabelFont->setCurrentFont(settings->GetLabelFont());
+
+    ui->checkBoxRemeberPatternMaterials->setChecked(settings->IsRememberPatternMaterials());
+    m_knownMaterials = settings->GetKnownMaterials();
+
+    connect(ui->pushButtonKnownMaterials, &QPushButton::clicked, this, &PreferencesPatternPage::ManageKnownMaterials);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -108,6 +118,9 @@ void PreferencesPatternPage::Apply()
 
     settings->SetUserDefinedDateFormats(ComboBoxAllStrings(ui->comboBoxDateFormats));
     settings->SetUserDefinedTimeFormats(ComboBoxAllStrings(ui->comboBoxTimeFormats));
+
+    settings->SetKnownMaterials(m_knownMaterials);
+    settings->SetRememberPatternMaterials(ui->checkBoxRemeberPatternMaterials->isChecked());
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -132,6 +145,18 @@ void PreferencesPatternPage::EditDateTimeFormats()
     {
         CallDateTimeFormatEditor(QTime::currentTime(), settings->PredefinedTimeFormats(),
                            settings->GetUserDefinedTimeFormats(), ui->comboBoxTimeFormats);
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void PreferencesPatternPage::ManageKnownMaterials()
+{
+    DialogKnownMaterials editor;
+    editor.SetList(m_knownMaterials);
+
+    if (QDialog::Accepted == editor.exec())
+    {
+        m_knownMaterials = editor.GetList();
     }
 }
 
