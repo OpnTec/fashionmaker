@@ -793,8 +793,8 @@ double VCommonSettings::GetDefaultSeamAllowance()
         case Unit::Inch:
             defaultValue = 0.25;
             break;
-        default:
         case Unit::Cm:
+        default:
             defaultValue = 1;
             break;
     }
