@@ -10,7 +10,7 @@ Build-Depends: debhelper (>= 8.0.0),
                qttools5-dev-tools (>= 5.2.0), 
                libqt5xmlpatterns5-dev (>= 5.2.0)
 Standards-Version: 3.9.5
-Homepage: http://www.valentina-project.org/
+Homepage: https://valentinaproject.bitbucket.io/
 Vcs-Browser: https://bitbucket.org/dismine/valentina
 
 Package: valentina

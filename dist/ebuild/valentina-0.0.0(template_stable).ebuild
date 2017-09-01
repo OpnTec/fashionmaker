@@ -7,7 +7,7 @@ EAPI=5
 inherit qmake-utils gnome2-utils fdo-mime
 
 DESCRIPTION="Cloth patternmaking software"
-HOMEPAGE="http://www.valentina-project.org/"
+HOMEPAGE="https://valentinaproject.bitbucket.io/"
 SRC_URI="https://bitbucket.org/dismine/valentina/get/v0.0.0.zip -> ${P}.zip"
 
 LICENSE="GPL-3"

@@ -72,7 +72,7 @@ namespace
 //---------------------------------------------------------------------------------------------------------------------
 QString FileComment()
 {
-    return QString("Pattern created with Valentina v%1 (http://www.valentina-project.org/).").arg(APP_VERSION_STR);
+    return QString("Pattern created with Valentina v%1 (https://valentinaproject.bitbucket.io/).").arg(APP_VERSION_STR);
 }
 }
 

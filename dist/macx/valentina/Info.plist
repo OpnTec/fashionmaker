@@ -17,7 +17,7 @@
 	<key>CFBundleExecutable</key>
 	<string>@EXECUTABLE@</string>
 	<key>CFBundleIdentifier</key>
-	<string>org.valentinaproject.@EXECUTABLE@</string>
+	<string>io.bitbucket.valentinaproject.@EXECUTABLE@</string>
 	<key>CFBundleShortVersionString</key>
 	<string>0.6.0</string>
 	<key>CFBundleVersion</key>
@@ -33,7 +33,7 @@
 			<string>pattern.icns</string>
 			<key>LSItemContentTypes</key>
 			<array>
-				<string>org.valentinaproject.val</string>
+				<string>io.bitbucket.valentinaproject.val</string>
 			</array>
 			<key>CFBundleTypeName</key>
 			<string>Valentina pattern file</string>
@@ -47,7 +47,7 @@
 			<string>i-measurements.icns</string>
 			<key>LSItemContentTypes</key>
 			<array>
-				<string>org.valentinaproject.vit</string>
+				<string>io.bitbucket.valentinaproject.vit</string>
 			</array>
 			<key>CFBundleTypeName</key>
 			<string>Valentina individual measurements</string>
@@ -61,7 +61,7 @@
 			<string>s-measurements.icns</string>
 			<key>LSItemContentTypes</key>
 			<array>
-				<string>org.valentinaproject.vst</string>
+				<string>io.bitbucket.valentinaproject.vst</string>
 			</array>
 			<key>CFBundleTypeName</key>
                         <string>Valentina multisize measurements</string>
@@ -104,7 +104,7 @@
 			<key>UTTypeIconFile</key>
 			<string>i-measurements.icns</string>
 			<key>UTTypeIdentifier</key>
-			<string>org.valentinaproject.vit</string>
+			<string>io.bitbucket.valentinaproject.vit</string>
 			<key>UTTypeTagSpecification</key>
 			<dict>
 				<key>public.filename-extension</key>
@@ -126,7 +126,7 @@
 			<key>UTTypeIconFile</key>
 			<string>s-measurements.icns</string>
 			<key>UTTypeIdentifier</key>
-			<string>org.valentinaproject.vst</string>
+			<string>io.bitbucket.valentinaproject.vst</string>
 			<key>UTTypeTagSpecification</key>
 			<dict>
 				<key>public.filename-extension</key>
