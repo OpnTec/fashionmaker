@@ -67,36 +67,6 @@ public:
     bool GetGraphicalOutput() const;
     void SetGraphicalOutput(const bool &value);
 
-    QString GetServer() const;
-    void SetServer(const QString &value);
-
-    bool GetServerSecure() const;
-    void SetServerSecure(const bool &value);
-
-    bool GetProxy() const;
-    void SetProxy(const bool &value);
-
-    QString GetProxyAddress() const;
-    void SetProxyAddress(const QString &value);
-
-    QString GetProxyPort() const;
-    void SetProxyPort(const QString &value);
-
-    QString GetProxyUser() const;
-    void SetProxyUser(const QString &value);
-
-    QString GetProxyPass() const;
-    void SetProxyPass(const QString &value);
-
-    QString GetUsername() const;
-    void SetUsername(const QString &value);
-
-    bool GetSavePassword() const;
-    void SetSavePassword(const bool &value);
-
-    QString GetUserPassword() const;
-    void SetUserPassword(const QString &value);
-
     // Layout settings
     qreal GetLayoutPaperHeight() const;
     void SetLayoutPaperHeight(qreal value);
