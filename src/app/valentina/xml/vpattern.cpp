@@ -3161,34 +3161,12 @@ void VPattern::MoveDownIncrement(const QString &type, const QString &name)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VPattern::SetIncrementName(const QString &type, const QString &name, const QString &text)
+void VPattern::SetIncrementAttribute(const QString &name, const QString &attr, const QString &text)
 {
     QDomElement node = FindIncrement(name);
     if (not node.isNull())
     {
-        SetAttribute(node, IncrementName, text);
-        emit patternChanged(false);
-    }
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void VPattern::SetIncrementFormula(const QString &type, const QString &name, const QString &text)
-{
-    QDomElement node = FindIncrement(name);
-    if (not node.isNull())
-    {
-        SetAttribute(node, IncrementFormula, text);
-        emit patternChanged(false);
-    }
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void VPattern::SetIncrementDescription(const QString &type, const QString &name, const QString &text)
-{
-    QDomElement node = FindIncrement(name);
-    if (not node.isNull())
-    {
-        SetAttribute(node, IncrementDescription, text);
+        SetAttribute(node, attr, text);
         emit patternChanged(false);
     }
 }
@@ -3552,37 +3530,19 @@ void VPattern::MoveDownPreviewCalculation(const QString &name)
 //---------------------------------------------------------------------------------------------------------------------
 void VPattern::SetIncrementName(const QString &name, const QString &text)
 {
-    SetIncrementName(TagIncrement, name, text);
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void VPattern::SetPreviewCalculationName(const QString &name, const QString &text)
-{
-    SetIncrementName(TagPreviewCalculations, name, text);
+    SetIncrementAttribute(name, IncrementName, text);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void VPattern::SetIncrementFormula(const QString &name, const QString &text)
 {
-    SetIncrementFormula(TagIncrement, name, text);
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void VPattern::SetPreviewCalculationFormula(const QString &name, const QString &text)
-{
-    SetIncrementFormula(TagPreviewCalculations, name, text);
+    SetIncrementAttribute(name, IncrementFormula, text);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void VPattern::SetIncrementDescription(const QString &name, const QString &text)
 {
-    SetIncrementDescription(TagIncrement, name, text);
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void VPattern::SetPreviewCalculationDescription(const QString &name, const QString &text)
-{
-    SetIncrementDescription(TagPreviewCalculations, name, text);
+    SetIncrementAttribute(name, IncrementDescription, text);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

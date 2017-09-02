@@ -979,16 +979,7 @@ void DialogIncrements::SaveIncrName(const QString &text)
         newName = name;
     }
 
-    if (lineEdit == ui->lineEditName)
-    {
-        doc->SetIncrementName(nameField->text(), newName);
-
-    }
-    else if (lineEdit == ui->lineEditNamePC)
-    {
-        doc->SetPreviewCalculationName(nameField->text(), newName);
-    }
-
+    doc->SetIncrementName(nameField->text(), newName);
     QVector<VFormulaField> expression = doc->ListIncrementExpressions();
     doc->ReplaceNameInFormula(expression, nameField->text(), newName);
 
@@ -1030,16 +1021,7 @@ void DialogIncrements::SaveIncrDescription()
     }
 
     const QTableWidgetItem *nameField = table->item(row, 0);
-
-    if (textEdit == ui->plainTextEditDescription)
-    {
-        doc->SetIncrementDescription(nameField->text(), textEdit->toPlainText());
-    }
-    else if (textEdit == ui->plainTextEditDescriptionPC)
-    {
-        doc->SetPreviewCalculationDescription(nameField->text(), textEdit->toPlainText());
-    }
-
+    doc->SetIncrementDescription(nameField->text(), textEdit->toPlainText());
     LocalUpdateTree();
 
     const QTextCursor cursor = textEdit->textCursor();
@@ -1112,16 +1094,7 @@ void DialogIncrements::SaveIncrFormula()
     try
     {
         const QString formula = qApp->TrVars()->FormulaFromUser(text, qApp->Settings()->GetOsSeparator());
-
-        if (textEdit == ui->plainTextEditFormula)
-        {
-            doc->SetIncrementFormula(nameField->text(), formula);
-        }
-        else if (textEdit == ui->plainTextEditFormulaPC)
-        {
-            doc->SetPreviewCalculationFormula(nameField->text(), formula);
-        }
-
+        doc->SetIncrementFormula(nameField->text(), formula);
     }
     catch (qmu::QmuParserError &e) // Just in case something bad will happen
     {

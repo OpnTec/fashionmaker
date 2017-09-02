@@ -82,13 +82,8 @@ public:
     void MoveDownPreviewCalculation(const QString &name);
 
     void SetIncrementName(const QString &name, const QString &text);
-    void SetPreviewCalculationName(const QString &name, const QString &text);
-
     void SetIncrementFormula(const QString &name, const QString &text);
-    void SetPreviewCalculationFormula(const QString &name, const QString &text);
-
     void SetIncrementDescription(const QString &name, const QString &text);
-    void SetPreviewCalculationDescription(const QString &name, const QString &text);
 
     void ReplaceNameInFormula(QVector<VFormulaField> &expressions, const QString &name, const QString &newName);
 
@@ -242,9 +237,8 @@ private:
     void RemoveIncrement(const QString &type, const QString &name);
     void MoveUpIncrement(const QString &type, const QString &name);
     void MoveDownIncrement(const QString &type, const QString &name);
-    void SetIncrementName(const QString &type, const QString &name, const QString &text);
-    void SetIncrementFormula(const QString &type, const QString &name, const QString &text);
-    void SetIncrementDescription(const QString &type, const QString &name, const QString &text);
+
+    void SetIncrementAttribute(const QString &name, const QString &attr, const QString &text);
 };
 
 #endif // VPATTERN_H
