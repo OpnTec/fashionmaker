@@ -87,6 +87,7 @@ public slots:
     void         CurvesCLength();
     void         AngleLines();
     void         Increments();
+    void         PreviewCalculations();
     void         Functions();
 protected:
     virtual void CheckState() Q_DECL_FINAL;
@@ -116,6 +117,7 @@ private:
     void ShowVariable(const QMap<key, val> &var);
     void ShowMeasurements(const QMap<QString, QSharedPointer<VMeasurement> > &var);
     void ShowFunctions();
+    void ShowIncrementsInPreviewCalculation(bool show);
 
     void SetDescription(const QString &name, qreal value, const QString &unit, const QString &description);
 };

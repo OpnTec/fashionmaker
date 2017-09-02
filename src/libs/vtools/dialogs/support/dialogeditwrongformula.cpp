@@ -319,8 +319,13 @@ void DialogEditWrongFormula::AngleLines()
  */
 void DialogEditWrongFormula::Increments()
 {
-    ui->checkBoxHideEmpty->setEnabled(false);
-    ShowVariable(data->DataIncrements());
+    ShowIncrementsInPreviewCalculation(false);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogEditWrongFormula::PreviewCalculations()
+{
+    ShowIncrementsInPreviewCalculation(true);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -438,6 +443,9 @@ void DialogEditWrongFormula::InitVariables()
 
     connect(ui->radioButtonIncrements, &QRadioButton::clicked, this, &DialogEditWrongFormula::Increments);
     connect(ui->radioButtonIncrements, &QRadioButton::clicked, this, ClearFilterFormulaInputs);
+
+    connect(ui->radioButtonPC, &QRadioButton::clicked, this, &DialogEditWrongFormula::PreviewCalculations);
+    connect(ui->radioButtonPC, &QRadioButton::clicked, this, ClearFilterFormulaInputs);
 
     connect(ui->radioButtonLengthLine, &QRadioButton::clicked, this, &DialogEditWrongFormula::LengthLines);
     connect(ui->radioButtonLengthLine, &QRadioButton::clicked, this, ClearFilterFormulaInputs);
@@ -581,6 +589,27 @@ void DialogEditWrongFormula::ShowFunctions()
     ui->tableWidget->blockSignals(false);
     ui->tableWidget->selectRow(0);
     ui->tableWidget->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogEditWrongFormula::ShowIncrementsInPreviewCalculation(bool show)
+{
+    ui->checkBoxHideEmpty->setEnabled(false);
+
+    QMap<QString, QSharedPointer<VIncrement> > increments;
+
+    const QMap<QString, QSharedPointer<VIncrement> > list = data->DataIncrements();
+    QMap<QString, QSharedPointer<VIncrement> >::const_iterator i = list.constBegin();
+    while (i != list.constEnd())
+    {
+        if(i.value()->IsPreviewCalculation() == show)
+        {
+            increments.insert(i.key(), i.value());
+        }
+        ++i;
+    }
+
+    ShowVariable(increments);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

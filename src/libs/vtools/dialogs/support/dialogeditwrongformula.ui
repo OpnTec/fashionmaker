@@ -10,7 +10,7 @@
     <x>0</x>
     <y>0</y>
     <width>448</width>
-    <height>425</height>
+    <height>526</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -252,6 +252,13 @@
            </property>
            <property name="text">
             <string>Increments</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QRadioButton" name="radioButtonPC">
+           <property name="text">
+            <string>Preview calculations</string>
            </property>
           </widget>
          </item>
