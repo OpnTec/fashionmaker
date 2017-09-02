@@ -65,6 +65,7 @@ const QString VAbstractPattern::TagNotes            = QStringLiteral("notes");
 const QString VAbstractPattern::TagImage            = QStringLiteral("image");
 const QString VAbstractPattern::TagMeasurements     = QStringLiteral("measurements");
 const QString VAbstractPattern::TagIncrements       = QStringLiteral("increments");
+const QString VAbstractPattern::TagPreviewCalculations = QStringLiteral("previewCalculations");
 const QString VAbstractPattern::TagIncrement        = QStringLiteral("increment");
 const QString VAbstractPattern::TagDraw             = QStringLiteral("draw");
 const QString VAbstractPattern::TagGroups           = QStringLiteral("groups");
@@ -1697,20 +1698,27 @@ int VAbstractPattern::GetIndexActivPP() const
 QStringList VAbstractPattern::ListIncrements() const
 {
     QStringList increments;
-    const QDomNodeList list = elementsByTagName(TagIncrement);
-    for (int i=0; i < list.size(); ++i)
-    {
-        const QDomElement dom = list.at(i).toElement();
 
-        try
+    auto GetExpressions = [&increments, this](const QString &type)
+    {
+        const QDomNodeList list = elementsByTagName(type);
+        for (int i=0; i < list.size(); ++i)
         {
-            increments.append(GetParametrString(dom, IncrementName));
+            const QDomElement dom = list.at(i).toElement();
+
+            try
+            {
+                increments.append(GetParametrString(dom, IncrementName));
+            }
+            catch (VExceptionEmptyParameter &e)
+            {
+                Q_UNUSED(e)
+            }
         }
-        catch (VExceptionEmptyParameter &e)
-        {
-            Q_UNUSED(e)
-        }
-    }
+    };
+
+    GetExpressions(TagIncrement);
+    GetExpressions(TagPreviewCalculations);
 
     return increments;
 }

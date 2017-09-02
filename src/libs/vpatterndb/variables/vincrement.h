@@ -66,6 +66,9 @@ public:
     bool        IsFormulaOk() const;
     VContainer *GetData();
 
+    bool IsPreviewCalculation() const;
+    void SetPreviewCalculation(bool value);
+
 private:
     QSharedDataPointer<VIncrementData> d;
 };

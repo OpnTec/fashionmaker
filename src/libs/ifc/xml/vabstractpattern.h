@@ -198,6 +198,7 @@ public:
     static const QString TagNotes;
     static const QString TagMeasurements;
     static const QString TagIncrements;
+    static const QString TagPreviewCalculations;
     static const QString TagIncrement;
     static const QString TagDraw;
     static const QString TagGroups;
@@ -441,7 +442,6 @@ private:
 
     QMap<int, QString> GetMaterials(const QDomElement &element) const;
     void               SetMaterials(QDomElement &element, const QMap<int, QString> &materials);
-
 };
 
 #endif // VABSTRACTPATTERN_H

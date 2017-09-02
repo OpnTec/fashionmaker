@@ -58,8 +58,8 @@ class QDomElement;
  */
 
 const QString VPatternConverter::PatternMinVerStr = QStringLiteral("0.1.0");
-const QString VPatternConverter::PatternMaxVerStr = QStringLiteral("0.6.1");
-const QString VPatternConverter::CurrentSchema    = QStringLiteral("://schema/pattern/v0.6.1.xsd");
+const QString VPatternConverter::PatternMaxVerStr = QStringLiteral("0.6.2");
+const QString VPatternConverter::CurrentSchema    = QStringLiteral("://schema/pattern/v0.6.2.xsd");
 
 //VPatternConverter::PatternMinVer; // <== DON'T FORGET TO UPDATE TOO!!!!
 //VPatternConverter::PatternMaxVer; // <== DON'T FORGET TO UPDATE TOO!!!!
@@ -98,6 +98,7 @@ static const QString strColor                     = QStringLiteral("color");
 static const QString strMeasurements              = QStringLiteral("measurements");
 static const QString strIncrement                 = QStringLiteral("increment");
 static const QString strIncrements                = QStringLiteral("increments");
+static const QString strPreviewCalculations       = QStringLiteral("previewCalculations");
 static const QString strModeling                  = QStringLiteral("modeling");
 static const QString strTools                     = QStringLiteral("tools");
 static const QString strIdTool                    = QStringLiteral("idTool");
@@ -243,6 +244,8 @@ QString VPatternConverter::XSDSchema(int ver) const
         case (0x000600):
             return QStringLiteral("://schema/pattern/v0.6.0.xsd");
         case (0x000601):
+            return QStringLiteral("://schema/pattern/v0.6.1.xsd");
+        case (0x000602):
             return CurrentSchema;
         default:
             InvalidVersion(ver);
@@ -397,6 +400,10 @@ void VPatternConverter::ApplyPatches()
             ValidateXML(XSDSchema(0x000601), m_convertedFileName);
             V_FALLTHROUGH
         case (0x000601):
+            ToV0_6_2();
+            ValidateXML(XSDSchema(0x000602), m_convertedFileName);
+            V_FALLTHROUGH
+        case (0x000602):
             break;
         default:
             InvalidVersion(m_ver);
@@ -415,7 +422,7 @@ void VPatternConverter::DowngradeToCurrentMaxVersion()
 bool VPatternConverter::IsReadOnly() const
 {
     // Check if attribute readOnly was not changed in file format
-    Q_STATIC_ASSERT_X(VPatternConverter::PatternMaxVer == CONVERTER_VERSION_CHECK(0, 6, 1),
+    Q_STATIC_ASSERT_X(VPatternConverter::PatternMaxVer == CONVERTER_VERSION_CHECK(0, 6, 2),
                       "Check attribute readOnly.");
 
     // Possibly in future attribute readOnly will change position etc.
@@ -825,6 +832,17 @@ void VPatternConverter::ToV0_6_1()
     Q_STATIC_ASSERT_X(VPatternConverter::PatternMinVer < CONVERTER_VERSION_CHECK(0, 6, 1),
                       "Time to refactor the code.");
     SetVersion(QStringLiteral("0.6.1"));
+    Save();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VPatternConverter::ToV0_6_2()
+{
+    // TODO. Delete if minimal supported version is 0.6.2
+    Q_STATIC_ASSERT_X(VPatternConverter::PatternMinVer < CONVERTER_VERSION_CHECK(0, 6, 2),
+                      "Time to refactor the code.");
+    SetVersion(QStringLiteral("0.6.2"));
+    AddTagPreviewCalculationsV0_6_2();
     Save();
 }
 
@@ -2311,6 +2329,21 @@ void VPatternConverter::RemoveUniqueTagV0_6_0(const QString &tag)
 
     QDomElement pattern = documentElement();
     pattern.removeChild(nodeList.at(0));
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VPatternConverter::AddTagPreviewCalculationsV0_6_2()
+{
+    // TODO. Delete if minimal supported version is 0.6.2
+    Q_STATIC_ASSERT_X(VPatternConverter::PatternMinVer < CONVERTER_VERSION_CHECK(0, 6, 2),
+                      "Time to refactor the code.");
+
+    const QDomNodeList list = elementsByTagName(strIncrements);
+    if (not list.isEmpty())
+    {
+        QDomElement pattern = documentElement();
+        pattern.insertAfter(createElement(strPreviewCalculations), list.at(0));
+    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------

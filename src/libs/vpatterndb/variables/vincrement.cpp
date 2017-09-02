@@ -105,3 +105,15 @@ VContainer *VIncrement::GetData()
 {
     return &d->data;
 }
+
+//---------------------------------------------------------------------------------------------------------------------
+bool VIncrement::IsPreviewCalculation() const
+{
+    return d->previewCalculation;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VIncrement::SetPreviewCalculation(bool value)
+{
+    d->previewCalculation = value;
+}

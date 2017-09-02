@@ -88,8 +88,10 @@ private:
     VPattern             *doc;
 
     int                  formulaBaseHeight;
+    int                  formulaBaseHeightPC;
 
     QSharedPointer<VTableSearch> search;
+    QSharedPointer<VTableSearch> searchPC;
 
     bool hasChanges;
 
@@ -98,7 +100,12 @@ private:
     template <typename T>
     void                 FillTable(const QMap<QString, T> &varTable, QTableWidget *table);
 
+    void                 FillIncrementsTable(QTableWidget *table,
+                                             const QMap<QString, QSharedPointer<VIncrement> > &increments,
+                                             bool takePreviewCalculations, bool freshCall = false);
+
     void                 FillIncrements(bool freshCall = false);
+    void                 FillPreviewCalculations(bool freshCall = false);
     void                 FillLengthsLines();
     void                 FillLengthLinesAngles();
     void                 FillLengthsCurves();
@@ -115,8 +122,8 @@ private:
     QString ClearIncrementName(const QString &name) const;
 
     bool    EvalIncrementFormula(const QString &formula, bool fromUser, VContainer *data, QLabel *label);
-    void    Controls();
-    void    EnableDetails(bool enabled);
+    void    Controls(QTableWidget *table);
+    void    EnableDetails(QTableWidget *table, bool enabled);
 
     void LocalUpdateTree();
     void UpdateTree();

@@ -44,15 +44,28 @@ class VIncrementData : public QSharedData
 public:
 
     VIncrementData()
-        :index(NULL_ID), formula(QString()), formulaOk(false), data(VContainer(nullptr, nullptr))
+        : index(NULL_ID),
+          formula(QString()),
+          formulaOk(false),
+          previewCalculation(false),
+          data(VContainer(nullptr, nullptr))
     {}
 
     VIncrementData(VContainer *data, quint32 index, const QString &formula, bool ok)
-        :index(index), formula(formula), formulaOk(ok), data(*data)
+        : index(index),
+          formula(formula),
+          formulaOk(ok),
+          previewCalculation(false),
+          data(*data)
     {}
 
     VIncrementData(const VIncrementData &incr)
-        :QSharedData(incr), index(incr.index), formula(incr.formula), formulaOk(incr.formulaOk), data(incr.data)
+        : QSharedData(incr),
+          index(incr.index),
+          formula(incr.formula),
+          formulaOk(incr.formulaOk),
+          previewCalculation(incr.previewCalculation),
+          data(incr.data)
     {}
 
     virtual  ~VIncrementData();
@@ -61,6 +74,7 @@ public:
     quint32 index;
     QString formula;
     bool    formulaOk;
+    bool    previewCalculation;
     VContainer data;
 
 private:

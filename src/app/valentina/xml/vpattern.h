@@ -67,14 +67,28 @@ public:
     QRectF         ActiveDrawBoundingRect() const;
 
     void AddEmptyIncrement(const QString &name);
+    void AddEmptyPreviewCalculation(const QString &name);
+
     void AddEmptyIncrementAfter(const QString &after, const QString &name);
+    void AddEmptyPreviewCalculationAfter(const QString &after, const QString &name);
+
     void RemoveIncrement(const QString &name);
+    void RemovePreviewCalculation(const QString &name);
+
     void MoveUpIncrement(const QString &name);
+    void MoveUpPreviewCalculation(const QString &name);
+
     void MoveDownIncrement(const QString &name);
+    void MoveDownPreviewCalculation(const QString &name);
 
     void SetIncrementName(const QString &name, const QString &text);
+    void SetPreviewCalculationName(const QString &name, const QString &text);
+
     void SetIncrementFormula(const QString &name, const QString &text);
+    void SetPreviewCalculationFormula(const QString &name, const QString &text);
+
     void SetIncrementDescription(const QString &name, const QString &text);
+    void SetPreviewCalculationDescription(const QString &name, const QString &text);
 
     void ReplaceNameInFormula(QVector<VFormulaField> &expressions, const QString &name, const QString &newName);
 
@@ -222,6 +236,15 @@ private:
     QDomElement FindIncrement(const QString &name) const;
 
     void GarbageCollector();
+
+    void NewEmptyIncrement(const QString &type, const QString &name);
+    void NewEmptyIncrementAfter(const QString &type, const QString &after, const QString &name);
+    void RemoveIncrement(const QString &type, const QString &name);
+    void MoveUpIncrement(const QString &type, const QString &name);
+    void MoveDownIncrement(const QString &type, const QString &name);
+    void SetIncrementName(const QString &type, const QString &name, const QString &text);
+    void SetIncrementFormula(const QString &type, const QString &name, const QString &text);
+    void SetIncrementDescription(const QString &type, const QString &name, const QString &text);
 };
 
 #endif // VPATTERN_H
