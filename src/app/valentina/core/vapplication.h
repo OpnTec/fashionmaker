@@ -70,10 +70,6 @@ public:
 
     virtual const VTranslateVars *TrVars() Q_DECL_OVERRIDE;
 
-#if defined(Q_OS_WIN) && defined(Q_CC_GNU)
-    static void        DrMingw();
-    void               CollectReports() const;
-#endif // defined(Q_OS_WIN) && defined(Q_CC_GNU)
     bool static IsGUIMode();
     virtual bool IsAppInGUIMode() const Q_DECL_OVERRIDE;
 
@@ -84,11 +80,6 @@ protected:
     virtual void       InitTrVars() Q_DECL_OVERRIDE;
     virtual bool	   event(QEvent *e) Q_DECL_OVERRIDE;
 
-private slots:
-#if defined(Q_OS_WIN) && defined(Q_CC_GNU)
-    void               CleanGist() const;
-#endif // defined(Q_OS_WIN) && defined(Q_CC_GNU)
-
 private:
     Q_DISABLE_COPY(VApplication)
     VTranslateVars     *trVars;
@@ -96,16 +87,6 @@ private:
 
     std::shared_ptr<VLockGuard<QFile>> lockLog;
     std::shared_ptr<QTextStream> out;
-
-#if defined(Q_OS_WIN) && defined(Q_CC_GNU)
-    static const QString GistFileName;
-
-    void               CollectReport(const QString &reportName) const;
-    void               SendReport(const QString &reportName) const;
-    QString            ReadFileForSending(QFile &file)const;
-    void               ClearOldReports()const;
-    void               GatherLogs()const;
-#endif // defined(Q_OS_WIN) && defined(Q_CC_GNU)
 
     QString            LogDirPath()const;
     QString            LogPath()const;

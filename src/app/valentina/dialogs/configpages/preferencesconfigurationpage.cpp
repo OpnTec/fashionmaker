@@ -98,13 +98,6 @@ PreferencesConfigurationPage::PreferencesConfigurationPage(QWidget *parent)
     {
         ui->systemCombo->setCurrentIndex(index);
     }
-    //---------------------- Send crash reports
-    ui->sendReportCheck->setChecked(qApp->ValentinaSettings()->GetSendReportState());
-    ui->description = new QLabel(tr("After each crash Valentina collects information that may help us fix the "
-                                    "problem. We do not collect any personal information. Find more about what %1"
-                                    "kind of information%2 we collect.")
-                                 .arg("<a href=\"https://wiki.valentinaproject.org/wiki/UserManual:Crash_reports\">")
-                                 .arg("</a>"));
 
     //----------------------------- Pattern Editing
     connect(ui->resetWarningsButton, &QPushButton::released, []()
@@ -138,7 +131,6 @@ void PreferencesConfigurationPage::Apply()
     ui->autoSaveCheck->isChecked() ? autoSaveTimer->start(ui->autoTime->value()*60000) : autoSaveTimer->stop();
 
     settings->SetOsSeparator(ui->osOptionCheck->isChecked());
-    settings->SetSendReportState(ui->sendReportCheck->isChecked());
     settings->SetToolBarStyle(ui->toolBarStyleCheck->isChecked());
 
     if (m_langChanged || m_systemChanged)
@@ -211,9 +203,4 @@ void PreferencesConfigurationPage::InitUnits()
 void PreferencesConfigurationPage::RetranslateUi()
 {
     ui->osOptionCheck->setText(tr("With OS options") + QString(" (%1)").arg(QLocale().decimalPoint()));
-    ui->description->setText(tr("After each crash Valentina collects information that may help us fix the "
-                                "problem. We do not collect any personal information. Find more about what %1"
-                                "kind of information%2 we collect.")
-                             .arg("<a href=\"https://wiki.valentinaproject.org/wiki/UserManual:Crash_reports\">")
-                             .arg("</a>"));
 }

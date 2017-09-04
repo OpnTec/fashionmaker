@@ -55,7 +55,6 @@ const QString settingPathsLabelTemplate          = QStringLiteral("paths/labels"
 const QString settingConfigurationOsSeparator            = QStringLiteral("configuration/osSeparator");
 const QString settingConfigurationAutosaveState          = QStringLiteral("configuration/autosave/state");
 const QString settingConfigurationAutosaveTime           = QStringLiteral("configuration/autosave/time");
-const QString settingConfigurationSendReportState        = QStringLiteral("configuration/send_report/state");
 const QString settingConfigurationLocale                 = QStringLiteral("configuration/locale");
 const QString settingPMSystemCode                        = QStringLiteral("configuration/pmscode");
 const QString settingConfigurationUnit                   = QStringLiteral("configuration/unit");
@@ -391,18 +390,6 @@ int VCommonSettings::GetAutosaveTime() const
 void VCommonSettings::SetAutosaveTime(const int &value)
 {
     setValue(settingConfigurationAutosaveTime, value);
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-bool VCommonSettings::GetSendReportState() const
-{
-    return value(settingConfigurationSendReportState, 1).toBool();
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void VCommonSettings::SetSendReportState(const bool &value)
-{
-    setValue(settingConfigurationSendReportState, value);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

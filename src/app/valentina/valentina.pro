@@ -81,9 +81,6 @@ CONFIG(release, debug|release){
     noDebugSymbols{ # For enable run qmake with CONFIG+=noDebugSymbols
         DEFINES += V_NO_DEBUG
     } else {
-        noCrashReports{
-            DEFINES += V_NO_DEBUG
-        }
         # Turn on debug symbols in release mode on Unix systems.
         # On Mac OS X temporarily disabled. Need find way how to strip binary file.
         !macx:!*msvc*{
@@ -300,20 +297,6 @@ win32:*g++* {
         $$[QT_INSTALL_BINS]/libgcc_s_dw2-1.dll \
         $$[QT_INSTALL_BINS]/libstdc++-6.dll \
         $$[QT_INSTALL_BINS]/libwinpthread-1.dll
-
-    !noDebugSymbols:!noCrashReports{
-        package.files += \
-            $${OUT_PWD}/$${DESTDIR}/valentina.exe.dbg \
-            $${OUT_PWD}/../tape/$${DESTDIR}/tape.exe.dbg \
-            $$PWD/../../../dist/win/exchndl.dll \
-            $$PWD/../../../dist/win/dbghelp.dll \
-            $$PWD/../../../dist/win/mgwhelp.dll \
-            $$PWD/../../../dist/win/symsrv.dll \
-            $$PWD/../../../dist/win/symsrv.yes \
-            $${OUT_PWD}/../../libs/qmuparser/$${DESTDIR}/qmuparser2.dll.dbg \
-            $${OUT_PWD}/../../libs/vpropertyexplorer/$${DESTDIR}/vpropertyexplorer.dll.dbg \
-            $$PWD/../../../dist/win/curl.exe
-    }
 
     package.CONFIG = no_check_exist
     INSTALLS += package

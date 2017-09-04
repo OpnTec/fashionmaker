@@ -15,6 +15,7 @@
 - [#750] Info Box Beside Mouse.
 - [#634] New feature: Fabric manager.
 - [#731] Improve tab Increments. Separate the tab on two: Increments and Preview Calculation.
+- Removed crash sending system for Windows.
 
 # Version 0.5.1
 - [#683] Tool Seam allowance's dialog is off screen on small resolutions.

@@ -219,8 +219,6 @@ Source: ".\valentina\*.dll"; DestDir: "{app}"
 Source: ".\valentina\*.txt"; DestDir: "{app}"; Flags: ignoreversion 
 Source: ".\valentina\*.rcc"; DestDir: "{app}"; Flags: ignoreversion 
 Source: ".\valentina\*.ico"; DestDir: "{app}"; Flags: ignoreversion 
-Source: ".\valentina\*.dbg"; DestDir: "{app}"; Flags: ignoreversion skipifsourcedoesntexist
-Source: ".\valentina\*.yes"; DestDir: "{app}"; Flags: ignoreversion skipifsourcedoesntexist
 ; NOTE: Don't use "Flags: ignoreversion" on any shared system files
 ; DLL used to check if the target program is running at install time
 

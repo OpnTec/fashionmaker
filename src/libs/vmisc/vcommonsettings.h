@@ -79,9 +79,6 @@ public:
     int  GetAutosaveTime() const;
     void SetAutosaveTime(const int &value);
 
-    bool GetSendReportState() const;
-    void SetSendReportState(const bool &value);
-
     QString GetLocale() const;
     void SetLocale(const QString &value);
 

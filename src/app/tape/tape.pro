@@ -298,9 +298,6 @@ CONFIG(release, debug|release){
     noDebugSymbols{ # For enable run qmake with CONFIG+=noDebugSymbols
         DEFINES += V_NO_DEBUG
     } else {
-        noCrashReports{
-            DEFINES += V_NO_DEBUG
-        }
         # Turn on debug symbols in release mode on Unix systems.
         # On Mac OS X temporarily disabled. Need find way how to strip binary file.
         !macx:!*msvc*{
