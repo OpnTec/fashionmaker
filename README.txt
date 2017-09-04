@@ -1,9 +1,8 @@
 Pattern making program
 Author Roman Telezhynskyi <dismine(at)gmail.com>
 Copyright (C) 2013-2017 Valentina project  
-Valentina Web page: http://www.valentina-project.org/ 
-Wiki: https://wiki.valentinaproject.org   
-Valentina user manual https://bitbucket.org/dismine/valentina/wiki/manual/Content    
+Valentina Web page: https://valentinaproject.bitbucket.io/
+Wiki: https://wiki.valentinaproject.org    
 Valentina main repository: https://bitbucket.org/dismine/valentina/overview    
 Forum http://forum.valentina-project.org/    
 PPA for Ubuntu (develop): https://launchpad.net/~dismine/+archive/valentina-dev    
@@ -83,10 +82,6 @@ prefix build with qmake command:
 qmake PREFIX=/usr/local PREFIX_LIB=/usr/lib/i386-linux-gnu Valentina.pro -r CONFIG+=noDebugSymbols CONFIG+=no_ccache
 
 where /usr/local is a new prefix for installation binary files and /usr/lib/i386-linux-gnu is new prefix for install libraries.
-
-More about creation installers read in articles:
-* How create Windows installer - https://bitbucket.org/dismine/valentina/wiki/developers/Creation_Windows_installer
-* How create debian package - https://bitbucket.org/dismine/valentina/wiki/developers/Creation_deb_package
 
 LICENSING
 ==========
