@@ -1979,6 +1979,10 @@
         <source>Filter list by keyword</source>
         <translation>Filter de lijst met een sleutelwoord</translation>
     </message>
+    <message>
+        <source>Preview calculations</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>DialogEllipticalArc</name>
@@ -2733,6 +2737,14 @@
     <message>
         <source>Refresh</source>
         <translation>Herstel</translation>
+    </message>
+    <message>
+        <source>Preview calculations</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Unique variable name</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

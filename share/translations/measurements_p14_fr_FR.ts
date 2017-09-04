@@ -1290,31 +1290,31 @@
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="764"/>
         <source>hip_arc_half_f</source>
         <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
-        <translation>quart_tour_hanches</translation>
+        <translation>demi_tour_hanche_dev</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="766"/>
         <source>Hip arc, front, half</source>
         <comment>Full measurement name.</comment>
-        <translation>moitié du demi-tour de hanche, devant</translation>
+        <translation>Tour de hanches, devant, moitié</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="767"/>
         <source>Half of &apos;Hip arc, front&apos;. (&apos;Hip arc, front&apos; / 2).</source>
         <comment>Full measurement description.</comment>
-        <translation>Moitié du &apos;demi-tour de hanches&apos;. (&apos;Demi-tour de hanches, devant&apos; / 2).</translation>
+        <translation>Moitié du &apos;Tour de Hanches, devant&apos;. (&apos;Tour de Hanches, devant&apos; / 2).</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="771"/>
         <source>neck_arc_b</source>
         <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
-        <translation>demi_encolure_dos</translation>
+        <translation>encolure_dos</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="773"/>
         <source>Neck arc, back</source>
         <comment>Full measurement name.</comment>
-        <translation>Demi-encolure, dos</translation>
+        <translation>Encolure, dos</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="774"/>
