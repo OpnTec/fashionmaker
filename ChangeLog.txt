@@ -50,6 +50,7 @@
 - [#743] Valentina doesn't update update pattern after adding item.
 - Fix translation variables.
 - [#744] Check for Updates button produces error.
+- Remove space as thousands separator when return formula to user.
 
 # Version 0.5.0 May 9, 2017
 - [#581] User can now filter input lists by keyword in function wizard.
