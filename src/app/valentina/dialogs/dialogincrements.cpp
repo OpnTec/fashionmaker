@@ -963,12 +963,14 @@ void DialogIncrements::SaveIncrName(const QString &text)
         return;
     }
 
-    const QTableWidgetItem *nameField = table->item(row, 0);
+    QTableWidgetItem *nameField = table->item(row, 0);
 
     QString newName = text.isEmpty() ? GetCustomName() : CustomIncrSign + text;
+    bool updateFlag = not text.isEmpty();
 
     if (not data->IsUnique(newName))
     {
+        updateFlag = false;
         qint32 num = 2;
         QString name = newName;
         do
@@ -986,7 +988,7 @@ void DialogIncrements::SaveIncrName(const QString &text)
     CacheRename(nameField->text(), newName);
 
     hasChanges = true;
-    LocalUpdateTree();
+    updateFlag ? LocalUpdateTree() : nameField->setText(newName);
 
     table->blockSignals(true);
     table->selectRow(row);
@@ -1020,11 +1022,12 @@ void DialogIncrements::SaveIncrDescription()
         return;
     }
 
+    const QTextCursor cursor = textEdit->textCursor();
+
     const QTableWidgetItem *nameField = table->item(row, 0);
     doc->SetIncrementDescription(nameField->text(), textEdit->toPlainText());
     LocalUpdateTree();
 
-    const QTextCursor cursor = textEdit->textCursor();
     table->blockSignals(true);
     table->selectRow(row);
     table->blockSignals(false);
@@ -1102,10 +1105,11 @@ void DialogIncrements::SaveIncrFormula()
         return;
     }
 
+    const QTextCursor cursor = textEdit->textCursor();
+
     hasChanges = true;
     LocalUpdateTree();
 
-    const QTextCursor cursor = textEdit->textCursor();
     table->blockSignals(true);
     table->selectRow(row);
     table->blockSignals(false);
