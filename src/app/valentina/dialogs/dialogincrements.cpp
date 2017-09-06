@@ -988,7 +988,15 @@ void DialogIncrements::SaveIncrName(const QString &text)
     CacheRename(nameField->text(), newName);
 
     hasChanges = true;
-    updateFlag ? LocalUpdateTree() : nameField->setText(newName);
+    if (updateFlag)
+    {
+        LocalUpdateTree();
+    }
+    else
+    {
+        nameField->setText(newName);
+        doc->LiteParseIncrements();
+    }
 
     table->blockSignals(true);
     table->selectRow(row);
