@@ -4575,6 +4575,29 @@ QString MainWindow::CheckPathToMeasurements(const QString &patternPath, const QS
         return path;
     }
 
+    auto FindLocation = [this](const QString &filter, const QString &dirPath)
+    {
+        VCommonSettings::PrepareMultisizeTables(VCommonSettings::GetDefPathMultisizeMeasurements());
+
+        bool usedNotExistedDir = false;
+        QDir directory(dirPath);
+        if (not directory.exists())
+        {
+            usedNotExistedDir = directory.mkpath(".");
+        }
+
+        const QString mPath = QFileDialog::getOpenFileName(this, tr("Open file"), dirPath, filter, nullptr,
+                                                           QFileDialog::DontUseNativeDialog);
+
+        if (usedNotExistedDir)
+        {
+            QDir directory(dirPath);
+            directory.rmpath(".");
+        }
+
+        return mPath;
+    };
+
     QFileInfo table(path);
     if (table.exists() == false)
     {
@@ -4600,70 +4623,43 @@ QString MainWindow::CheckPathToMeasurements(const QString &patternPath, const QS
                 {
                     patternType = MeasurementsType::Multisize;
                 }
-                else if (table.suffix() == QLatin1String("vit"))
-                {
-                    patternType = MeasurementsType::Individual;
-                }
                 else
                 {
-                    patternType = MeasurementsType::Unknown;
+                    patternType = MeasurementsType::Individual; // or Unknown
                 }
+
+                auto DirPath = [patternPath, table](const QString &defPath)
+                {
+                    QString dirPath;
+                    const QDir patternDir = QFileInfo(patternPath).absoluteDir();
+                    if (patternDir.exists(table.fileName()))
+                    {
+                        dirPath = patternDir.absolutePath();
+                    }
+                    else
+                    {
+                        dirPath = defPath;
+                    }
+                    return dirPath;
+                };
+
 
                 QString mPath;
                 if (patternType == MeasurementsType::Multisize)
                 {
-                    const QString filter = tr("Multisize measurements") + QLatin1String(" (*.vst)");
+                    const QString filter = tr("Multisize measurements") + QLatin1String(" (*.vst);;") +
+                                           tr("Individual measurements") + QLatin1String(" (*.vit)");
                     //Use standard path to multisize measurements
-                    QString path = qApp->ValentinaSettings()->GetPathMultisizeMeasurements();
-                    path = VCommonSettings::PrepareMultisizeTables(path);
-                    mPath = QFileDialog::getOpenFileName(this, tr("Open file"), path, filter, nullptr,
-                                                         QFileDialog::DontUseNativeDialog);
-                }
-                else if (patternType == MeasurementsType::Individual)
-                {
-                    const QString filter = tr("Individual measurements") + QLatin1String(" (*.vit)");
-                    //Use standard path to individual measurements
-                    const QString path = qApp->ValentinaSettings()->GetPathIndividualMeasurements();
-
-                    bool usedNotExistedDir = false;
-                    QDir directory(path);
-                    if (not directory.exists())
-                    {
-                        usedNotExistedDir = directory.mkpath(".");
-                    }
-
-                    mPath = QFileDialog::getOpenFileName(this, tr("Open file"), path, filter, nullptr,
-                                                         QFileDialog::DontUseNativeDialog);
-
-                    if (usedNotExistedDir)
-                    {
-                        QDir directory(path);
-                        directory.rmpath(".");
-                    }
+                    const QString dirPath = DirPath(qApp->ValentinaSettings()->GetPathMultisizeMeasurements());
+                    mPath = FindLocation(filter, dirPath);
                 }
                 else
                 {
                     const QString filter = tr("Individual measurements") + QLatin1String(" (*.vit);;") +
                                            tr("Multisize measurements") + QLatin1String(" (*.vst)");
                     //Use standard path to individual measurements
-                    const QString path = qApp->ValentinaSettings()->GetPathIndividualMeasurements();
-                    VCommonSettings::PrepareMultisizeTables(VCommonSettings::GetDefPathMultisizeMeasurements());
-
-                    bool usedNotExistedDir = false;
-                    QDir directory(path);
-                    if (not directory.exists())
-                    {
-                        usedNotExistedDir = directory.mkpath(".");
-                    }
-
-                    mPath = QFileDialog::getOpenFileName(this, tr("Open file"), path, filter, nullptr,
-                                                         QFileDialog::DontUseNativeDialog);
-
-                    if (usedNotExistedDir)
-                    {
-                        QDir directory(path);
-                        directory.rmpath(".");
-                    }
+                    const QString dirPath = DirPath(qApp->ValentinaSettings()->GetPathIndividualMeasurements());
+                    mPath = FindLocation(filter, dirPath);
                 }
 
                 if (mPath.isEmpty())
