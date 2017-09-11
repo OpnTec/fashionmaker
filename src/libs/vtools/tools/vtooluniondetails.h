@@ -102,6 +102,9 @@ public:
     virtual void incrementReferens() Q_DECL_OVERRIDE;
     virtual void decrementReferens() Q_DECL_OVERRIDE;
     virtual void GroupVisibility(quint32 object, bool visible) Q_DECL_OVERRIDE;
+
+    static QVector<QPair<bool, VPieceNode> > CalcUnitedPath(const VPiecePath &d1Path, const VPiecePath &d2Path,
+                                                            quint32 indexD2, quint32 pRotate);
 public slots:
     /**
      * @brief FullUpdateFromFile update tool data form file.

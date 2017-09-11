@@ -985,34 +985,24 @@ void CreateUnitedNodes(VPiece &newDetail, const VPiece &d1, const VPiece &d2, qu
     const VPiecePath d1Path = d1.GetPath().RemoveEdge(initData.indexD1);
     const VPiecePath d2Path = d2.GetPath().RemoveEdge(initData.indexD2);
 
-    const qint32 countNodeD1 = d1Path.CountNodes();
-    const qint32 countNodeD2 = d2Path.CountNodes();
+    const QVector<QPair<bool, VPieceNode> > unitedPath = VToolUnionDetails::CalcUnitedPath(d1Path, d2Path,
+                                                                                           initData.indexD2, pRotate);
 
-    qint32 pointsD2 = 0; //Keeps number points the second detail, what we have already added.
-    qint32 i = 0;
     QVector<quint32> children;
     VPiecePath newPath;
-    const int det1P1Index = d1.GetPath().indexOfNode(pRotate);
-    do
+
+    for (int i=0; i < unitedPath.size(); ++i)
     {
-        AddNodeToNewPath(initData, newPath, d1Path.at(i), id, children, drawName);
-        ++i;
-        if (i > det1P1Index && pointsD2 < countNodeD2-1)
-        {
-            qint32 j = 0;
-            FindIndexJ(pointsD2, d2.GetPath(), initData.indexD2, j);
-            do
-            {
-                if (j >= countNodeD2)
-                {
-                    j=0;
-                }
-                AddNodeToNewPath(initData, newPath, d2Path.at(j), id, children, drawName, dx, dy, pRotate, angle);
-                ++pointsD2;
-                ++j;
-            } while (pointsD2 < countNodeD2-1);
+        if (unitedPath.at(i).first)
+        {// first piece
+            AddNodeToNewPath(initData, newPath, unitedPath.at(i).second, id, children, drawName);
         }
-    } while (i < countNodeD1);
+        else
+        {// second piece
+            AddNodeToNewPath(initData, newPath, unitedPath.at(i).second, id, children, drawName, dx, dy, pRotate,
+                             angle);
+        }
+    }
 
     newDetail.SetPath(newPath);
 
@@ -1134,11 +1124,8 @@ void CreateUnitedPins(VPiece &newDetail, const VPiece &d1, const VPiece &d2, qui
 void UpdateUnitedNodes(quint32 id, const VToolUnionDetailsInitData &initData, qreal dx, qreal dy, quint32 pRotate,
                        qreal angle)
 {
-    const VPiecePath d1Path = GetPiece1MainPath(initData.doc, id);
-    const VPiecePath d1REPath = d1Path.RemoveEdge(initData.indexD1);
-
-    const VPiecePath d2Path = GetPiece2MainPath(initData.doc, id);
-    const VPiecePath d2REPath = d2Path.RemoveEdge(initData.indexD2);
+    const VPiecePath d1REPath = GetPiece1MainPath(initData.doc, id).RemoveEdge(initData.indexD1);
+    const VPiecePath d2REPath = GetPiece2MainPath(initData.doc, id).RemoveEdge(initData.indexD2);
 
     const qint32 countNodeD1 = d1REPath.CountNodes();
     const qint32 countNodeD2 = d2REPath.CountNodes();
@@ -1152,35 +1139,27 @@ void UpdateUnitedNodes(quint32 id, const VToolUnionDetailsInitData &initData, qr
                           "Time to refactor the code.");
         if (children.size() == countNodeD1 + countNodeD2-1)
         {
-            qint32 pointsD2 = 0; //Keeps number points the second detail, what we have already added.
-            qint32 i = 0;
-            const int indexOfNode = d1Path.indexOfNode(pRotate);
-            do
+            const QVector<QPair<bool, VPieceNode> > unitedPath = VToolUnionDetails::CalcUnitedPath(d1REPath, d2REPath,
+                                                                                                   initData.indexD2,
+                                                                                                   pRotate);
+
+            for (int i=0; i < unitedPath.size(); ++i)
             {
-                UpdatePathNode(initData.data, d1REPath.at(i), children);
-                ++i;
-                if (i > indexOfNode && pointsD2 < countNodeD2-1)
-                {
-                    qint32 j = 0;
-                    FindIndexJ(pointsD2, d2Path, initData.indexD2, j);
-                    do
-                    {
-                        if (j >= countNodeD2)
-                        {
-                            j=0;
-                        }
-                        UpdatePathNode(initData.data, d2REPath.at(j), children, dx, dy, pRotate, angle);
-                        ++pointsD2;
-                        ++j;
-                    } while (pointsD2 < countNodeD2-1);
+                if (unitedPath.at(i).first)
+                {// first piece
+                    UpdatePathNode(initData.data, unitedPath.at(i).second, children);
                 }
-            } while (i<countNodeD1);
+                else
+                {// second piece
+                    UpdatePathNode(initData.data, unitedPath.at(i).second, children, dx, dy, pRotate, angle);
+                }
+            }
         }
         else // remove if min version is 0.3.2
         {
             qint32 pointsD2 = 0; //Keeps number points the second detail, what we have already added.
             qint32 i = 0;
-            const int indexOfNode = d1Path.indexOfNode(pRotate);
+            const int indexOfNode = d1REPath.indexOfNode(pRotate);
             do
             {
                 ++i;
@@ -1188,7 +1167,7 @@ void UpdateUnitedNodes(quint32 id, const VToolUnionDetailsInitData &initData, qr
                 {
                     const int childrenCount = children.size();
                     qint32 j = 0;
-                    FindIndexJ(pointsD2, d2Path, initData.indexD2, j);
+                    FindIndexJ(pointsD2, d2REPath, initData.indexD2, j);
                     do
                     {
                         if (j >= countNodeD2)
@@ -1635,4 +1614,40 @@ QVector<quint32> VToolUnionDetails::ReferenceObjects(const QDomElement &root, co
     }
 
     return objects;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QVector<QPair<bool, VPieceNode> > VToolUnionDetails::CalcUnitedPath(const VPiecePath &d1Path, const VPiecePath &d2Path,
+                                                                    quint32 indexD2, quint32 pRotate)
+{
+    QVector<QPair<bool, VPieceNode> > path;
+
+    const qint32 countNodeD1 = d1Path.CountNodes();
+    const qint32 countNodeD2 = d2Path.CountNodes();
+
+    qint32 pointsD2 = 0; //Keeps number points the second detail, that we have already added.
+    qint32 i = 0;
+    const int det1P1Index = d1Path.indexOfNode(pRotate);
+    do
+    {
+        path.append(qMakePair(true, d1Path.at(i)));
+        ++i;
+        if (i > det1P1Index && pointsD2 < countNodeD2-1)
+        {
+            qint32 j = 0;
+            FindIndexJ(pointsD2, d2Path, indexD2, j);
+            do
+            {
+                if (j >= countNodeD2)
+                {
+                    j=0;
+                }
+                path.append(qMakePair(false, d2Path.at(j)));
+                ++pointsD2;
+                ++j;
+            } while (pointsD2 < countNodeD2-1);
+        }
+    } while (i < countNodeD1);
+
+    return path;
 }

@@ -622,30 +622,33 @@ VPiecePath VPiecePath::RemoveEdge(quint32 index) const
 
     // Edge can be only segment. We ignore all curves inside segments.
     const quint32 edges = static_cast<quint32>(ListNodePoint().size());
-    quint32 k = 0;
     for (quint32 i=0; i<edges; ++i)
     {
+        VPieceNode p1;
+        VPieceNode p2;
+        this->NodeOnEdge(i, p1, p2);
+        const int j1 = this->indexOfNode(p1.GetId());
+
         if (i == index)
         {
-            path.Append(this->at(static_cast<int>(k)));
-            ++k;
+            path.Append(this->at(j1));
         }
         else
         {
-            VPieceNode p1;
-            VPieceNode p2;
-            this->NodeOnEdge(i, p1, p2);
-            const int j1 = this->indexOfNode(p1.GetId());
-            int j2 = this->indexOfNode(p2.GetId());
-            if (j2 == 0)
+            const int j2 = this->indexOfNode(p2.GetId());
+            int j = j1;
+            do
             {
-                j2 = this->CountNodes();
-            }
-            for (int j=j1; j<j2; ++j)
-            {// Add "segment" except last point. Inside can be curves too.
+                // Add "segment" except last point. Inside can be curves too.
                 path.Append(this->at(j));
-                ++k;
+                ++j;
+
+                if (j2 < j1 && j == this->CountNodes())
+                {
+                    j = 0;
+                }
             }
+            while (j != j2);
         }
     }
     return path;

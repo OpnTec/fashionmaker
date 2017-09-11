@@ -124,5 +124,6 @@ private:
 };
 
 Q_DECLARE_TYPEINFO(VPiecePath, Q_MOVABLE_TYPE);
+Q_DECLARE_METATYPE(VPiecePath)
 
 #endif // VPIECEPATH_H
