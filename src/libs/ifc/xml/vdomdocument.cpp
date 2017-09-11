@@ -594,7 +594,7 @@ void VDomDocument::CollectId(const QDomElement &node, QVector<quint32> &vector) 
         const quint32 id = GetParametrId(node);
         if (vector.contains(id))
         {
-            throw VExceptionWrongId(tr("This id is not unique."), node);
+            throw VExceptionWrongId(QString("This id (%1) is not unique.").arg(id), node);
         }
         vector.append(id);
     }
