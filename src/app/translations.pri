@@ -258,7 +258,7 @@ macx{
                 $$files($${TRANSLATIONS_PATH}/*_pl_PL.qm) \
                 $$[QT_INSTALL_TRANSLATIONS]/qt_pl.qm \
                 $${TRANSLATIONS_PATH}/Localizable.strings
-            TRANSLATION_el_GR.path = "$$RESOURCES_DIR/translations/pl_PL.lproj"
+            TRANSLATION_pl_PL.path = "$$RESOURCES_DIR/translations/pl_PL.lproj"
             QMAKE_BUNDLE_DATA += TRANSLATION_pl_PL
         }
 }
