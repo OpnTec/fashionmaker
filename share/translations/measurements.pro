@@ -42,7 +42,8 @@ LANGUAGES += \
     ro_RO \
     zh_CN \
     pt_BR \
-    el_GR
+    el_GR \
+    pl_PL
 
 
 for(sys, PMSYSTEMS) {
