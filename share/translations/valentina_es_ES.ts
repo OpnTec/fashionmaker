@@ -1743,7 +1743,7 @@
     </message>
     <message>
         <source>Size</source>
-        <translation type="unfinished">Tamaño</translation>
+        <translation>Tamaño</translation>
     </message>
     <message>
         <source>Height</source>
@@ -7660,14 +7660,6 @@ Quiere guardar los cambios?</translation>
         <translation type="unfinished">Libro:</translation>
     </message>
     <message>
-        <source>Send crash reports</source>
-        <translation type="unfinished">Enviar informe de errores</translation>
-    </message>
-    <message>
-        <source>Send crash reports (recommended)</source>
-        <translation type="unfinished">Enviar informe de errores (recomendado)</translation>
-    </message>
-    <message>
         <source>Pattern editing</source>
         <translation type="unfinished"></translation>
     </message>
@@ -7686,10 +7678,6 @@ Quiere guardar los cambios?</translation>
     <message>
         <source>With OS options</source>
         <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>After each crash Valentina collects information that may help us fix the problem. We do not collect any personal information. Find more about what %1kind of information%2 we collect.</source>
-        <translation type="unfinished">Tras cada cuelgue Valentina recolecta información que puede ayudarnos a resolver el problema. No recolectamos ninguna información personal. Encuentre más sobre qué %1tipo de información%2 recolectamos.</translation>
     </message>
     <message>
         <source>The Default unit has been updated and will be used as the default for the next pattern you create.</source>
@@ -10172,7 +10160,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>This id is not unique.</source>
-        <translation>Este identificador no es único.</translation>
+        <translation type="vanished">Este identificador no es único.</translation>
     </message>
     <message>
         <source>Could not copy temp file to document file</source>

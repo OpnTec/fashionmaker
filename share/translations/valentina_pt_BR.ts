@@ -7065,14 +7065,6 @@ Do you want to save your changes?</source>
         <translation type="unfinished">Livro:</translation>
     </message>
     <message>
-        <source>Send crash reports</source>
-        <translation type="unfinished">Enviar relatório de erro</translation>
-    </message>
-    <message>
-        <source>Send crash reports (recommended)</source>
-        <translation type="unfinished">Enviar relatório de erro ( Recomendável )</translation>
-    </message>
-    <message>
         <source>Pattern editing</source>
         <translation type="unfinished"></translation>
     </message>
@@ -7094,7 +7086,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>After each crash Valentina collects information that may help us fix the problem. We do not collect any personal information. Find more about what %1kind of information%2 we collect.</source>
-        <translation>Após cada erro, Valentina coleta informações que poderão nos ajudar a solucionar o problema. Nós não coletamos qualquer informação pessoal. Para maiores detalhes sobre qual %1tipo de informação%2 nós coletamos.</translation>
+        <translation type="vanished">Após cada erro, Valentina coleta informações que poderão nos ajudar a solucionar o problema. Nós não coletamos qualquer informação pessoal. Para maiores detalhes sobre qual %1tipo de informação%2 nós coletamos.</translation>
     </message>
     <message>
         <source>The Default unit has been updated and will be used as the default for the next pattern you create.</source>
@@ -9249,10 +9241,6 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Couldn&apos;t get node</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>This id is not unique.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>

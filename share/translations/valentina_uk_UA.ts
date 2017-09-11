@@ -7660,11 +7660,11 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Send crash reports</source>
-        <translation>Надсилати звіти про помилки</translation>
+        <translation type="vanished">Надсилати звіти про помилки</translation>
     </message>
     <message>
         <source>Send crash reports (recommended)</source>
-        <translation>Надсилати звіти про помилки (рекомендується)</translation>
+        <translation type="vanished">Надсилати звіти про помилки (рекомендується)</translation>
     </message>
     <message>
         <source>Pattern editing</source>
@@ -7688,7 +7688,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>After each crash Valentina collects information that may help us fix the problem. We do not collect any personal information. Find more about what %1kind of information%2 we collect.</source>
-        <translation>Після кожного падіння Valentina збирає інформацію яка може допомогти нам у виправленні помилки. Ми не збираємо персональну інформацію користувачів. Дізнатися більше про %1інформацію%2 яку ми збираємо.</translation>
+        <translation type="vanished">Після кожного падіння Valentina збирає інформацію яка може допомогти нам у виправленні помилки. Ми не збираємо персональну інформацію користувачів. Дізнатися більше про %1інформацію%2 яку ми збираємо.</translation>
     </message>
     <message>
         <source>The Default unit has been updated and will be used as the default for the next pattern you create.</source>
@@ -10171,7 +10171,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>This id is not unique.</source>
-        <translation>Цей id не унікальний.</translation>
+        <translation type="vanished">Цей id не унікальний.</translation>
     </message>
     <message>
         <source>Could not copy temp file to document file</source>

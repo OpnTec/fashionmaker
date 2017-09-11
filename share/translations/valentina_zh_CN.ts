@@ -5942,11 +5942,11 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Send crash reports</source>
-        <translation>发送崩溃报告</translation>
+        <translation type="vanished">发送崩溃报告</translation>
     </message>
     <message>
         <source>Send crash reports (recommended)</source>
-        <translation>发送软件崩溃报告（推荐）</translation>
+        <translation type="vanished">发送软件崩溃报告（推荐）</translation>
     </message>
     <message>
         <source>Pattern editing</source>
@@ -5966,10 +5966,6 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>With OS options</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>After each crash Valentina collects information that may help us fix the problem. We do not collect any personal information. Find more about what %1kind of information%2 we collect.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -8081,10 +8077,6 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Couldn&apos;t get node</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>This id is not unique.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>

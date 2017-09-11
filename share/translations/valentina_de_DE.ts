@@ -7535,14 +7535,6 @@ Sollen die Änderungen gespeichert werden?</translation>
         <translation type="unfinished">Buch:</translation>
     </message>
     <message>
-        <source>Send crash reports</source>
-        <translation type="unfinished">Absturzberichte senden</translation>
-    </message>
-    <message>
-        <source>Send crash reports (recommended)</source>
-        <translation type="unfinished">Absturzberichte senden (empfohlen)</translation>
-    </message>
-    <message>
         <source>Pattern editing</source>
         <translation type="unfinished"></translation>
     </message>
@@ -7561,10 +7553,6 @@ Sollen die Änderungen gespeichert werden?</translation>
     <message>
         <source>With OS options</source>
         <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>After each crash Valentina collects information that may help us fix the problem. We do not collect any personal information. Find more about what %1kind of information%2 we collect.</source>
-        <translation type="unfinished">Nach jedem Absturz stellt Valentina Informationen zusammen, die helfen können, das Problem zu beheben. Es werden keine persönlichen Daten übertragen. Finde mehr darüber heraus, welche %1 Information %2 übertragen werden.</translation>
     </message>
     <message>
         <source>The Default unit has been updated and will be used as the default for the next pattern you create.</source>
@@ -10016,7 +10004,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>This id is not unique.</source>
-        <translation>Diese ID ist nicht eindeutig.</translation>
+        <translation type="vanished">Diese ID ist nicht eindeutig.</translation>
     </message>
     <message>
         <source>Could not copy temp file to document file</source>

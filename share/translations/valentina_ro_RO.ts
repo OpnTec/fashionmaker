@@ -6783,14 +6783,6 @@ Do you want to save your changes?</source>
         <translation type="unfinished">Carte:</translation>
     </message>
     <message>
-        <source>Send crash reports</source>
-        <translation type="unfinished">Trimite raport de blocare</translation>
-    </message>
-    <message>
-        <source>Send crash reports (recommended)</source>
-        <translation type="unfinished">Trimite rapoarte de blocaj (recomandat)</translation>
-    </message>
-    <message>
         <source>Pattern editing</source>
         <translation type="unfinished"></translation>
     </message>
@@ -6808,10 +6800,6 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>With OS options</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>After each crash Valentina collects information that may help us fix the problem. We do not collect any personal information. Find more about what %1kind of information%2 we collect.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -8951,10 +8939,6 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Couldn&apos;t get node</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>This id is not unique.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>

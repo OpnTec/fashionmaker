@@ -1306,19 +1306,19 @@
     <name>DialogDateTimeFormats</name>
     <message>
         <source>Label date time editor</source>
-        <translation type="unfinished"></translation>
+        <translation>Label datum tijd bewerker</translation>
     </message>
     <message>
         <source>Format:</source>
-        <translation type="unfinished"></translation>
+        <translation>Indeling:</translation>
     </message>
     <message>
         <source>Insert a format</source>
-        <translation type="unfinished"></translation>
+        <translation>Voeg formaat toe</translation>
     </message>
     <message>
         <source>&lt;empty&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;empty&gt;</translation>
     </message>
 </context>
 <context>
@@ -1600,241 +1600,241 @@
     <name>DialogEditLabel</name>
     <message>
         <source>Edit label template</source>
-        <translation type="unfinished"></translation>
+        <translation>Verander label sjabloon</translation>
     </message>
     <message>
         <source>Clear current and begin new label</source>
-        <translation type="unfinished"></translation>
+        <translation>Maak recente schoon en begin een nieuw label</translation>
     </message>
     <message>
         <source>Import from label template</source>
-        <translation type="unfinished"></translation>
+        <translation>Invoeren vanaf label sjabloon</translation>
     </message>
     <message>
         <source>Export label as template</source>
-        <translation type="unfinished"></translation>
+        <translation>Exporteer label als een sjabloon</translation>
     </message>
     <message>
         <source>Edit</source>
-        <translation type="unfinished">Verander</translation>
+        <translation>Verander</translation>
     </message>
     <message>
         <source>Bold</source>
         <comment>Font formating</comment>
-        <translation type="unfinished"></translation>
+        <translation>Vet</translation>
     </message>
     <message>
         <source>Italic</source>
         <comment>Font formating</comment>
-        <translation type="unfinished"></translation>
+        <translation>Schuin</translation>
     </message>
     <message>
         <source>Aligns with the left edge</source>
-        <translation type="unfinished"></translation>
+        <translation>Uitgelijnd op de linkerrand</translation>
     </message>
     <message>
         <source>Centers horizontally in the available space</source>
-        <translation type="unfinished"></translation>
+        <translation>Horizontaal gecentreerd in de beschikbare ruimte</translation>
     </message>
     <message>
         <source>Aligns with the right edge</source>
-        <translation type="unfinished"></translation>
+        <translation>Uitgelijnd op de rechterrand</translation>
     </message>
     <message>
         <source>Additional font size. Use to make a line bigger.</source>
-        <translation type="unfinished"></translation>
+        <translation>Extra lettertype grootte. Gebruik om een lijn groter te maken.</translation>
     </message>
     <message>
         <source>Text:</source>
-        <translation type="unfinished"></translation>
+        <translation>Tekst:</translation>
     </message>
     <message>
         <source>Line of text</source>
-        <translation type="unfinished"></translation>
+        <translation>Tekstlijn</translation>
     </message>
     <message>
         <source>Insert placeholders</source>
-        <translation type="unfinished"></translation>
+        <translation>Voeg tijdelijke aanduidingen toe</translation>
     </message>
     <message>
         <source>Insert...</source>
-        <translation type="unfinished"></translation>
+        <translation>Voeg toe....</translation>
     </message>
     <message>
         <source>Preview</source>
-        <translation type="unfinished"></translation>
+        <translation>Voorbeeld</translation>
     </message>
     <message>
         <source>&lt;empty&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;empty&gt;</translation>
     </message>
     <message>
         <source>Create new template</source>
-        <translation type="unfinished"></translation>
+        <translation>Maak een nieuw sjabloon</translation>
     </message>
     <message>
         <source>Creating new template will overwrite the current, do you want to continue?</source>
-        <translation type="unfinished"></translation>
+        <translation>Door een nieuw sjabloon te maken zal je de recente overschrijven, wil je doorgaan?</translation>
     </message>
     <message>
         <source>Label template</source>
-        <translation type="unfinished"></translation>
+        <translation>Label sjabloon</translation>
     </message>
     <message>
         <source>Export label template</source>
-        <translation type="unfinished"></translation>
+        <translation>Exporteer label sjabloon</translation>
     </message>
     <message>
         <source>template</source>
-        <translation type="unfinished"></translation>
+        <translation>sjabloon</translation>
     </message>
     <message>
         <source>Could not save file</source>
-        <translation type="unfinished">Kon bestand niet opslaan</translation>
+        <translation>Kon bestand niet opslaan</translation>
     </message>
     <message>
         <source>Import template</source>
-        <translation type="unfinished"></translation>
+        <translation>Voer sjabloon in</translation>
     </message>
     <message>
         <source>Import template will overwrite the current, do you want to continue?</source>
-        <translation type="unfinished"></translation>
+        <translation>Door een sjabloon te in te voeren zal je de recente overschrijven, wil je doorgaan?</translation>
     </message>
     <message>
         <source>File error.</source>
-        <translation type="unfinished">Bestandsfout.</translation>
+        <translation>Bestandsfout.</translation>
     </message>
     <message>
         <source>Date</source>
-        <translation type="unfinished"></translation>
+        <translation>Datum</translation>
     </message>
     <message>
         <source>Time</source>
-        <translation type="unfinished"></translation>
+        <translation>Tijd</translation>
     </message>
     <message>
         <source>Pattern name</source>
-        <translation type="unfinished"></translation>
+        <translation>Patroon naam</translation>
     </message>
     <message>
         <source>Pattern number</source>
-        <translation type="unfinished"></translation>
+        <translation>Patroon nummer</translation>
     </message>
     <message>
         <source>Company name or designer name</source>
-        <translation type="unfinished"></translation>
+        <translation>Bedrijfsnaam of ontwerpersnaam</translation>
     </message>
     <message>
         <source>Customer name</source>
-        <translation type="unfinished"></translation>
+        <translation>Klant naam</translation>
     </message>
     <message>
         <source>Pattern extension</source>
-        <translation type="unfinished"></translation>
+        <translation>Patroon uitbreiding</translation>
     </message>
     <message>
         <source>Pattern file name</source>
-        <translation type="unfinished"></translation>
+        <translation>Patroon bestandsnaam</translation>
     </message>
     <message>
         <source>Measurments file name</source>
-        <translation type="unfinished"></translation>
+        <translation>Maten bestandsnaam</translation>
     </message>
     <message>
         <source>Size</source>
-        <translation type="unfinished">Maat</translation>
+        <translation>Maat</translation>
     </message>
     <message>
         <source>Height</source>
-        <translation type="unfinished">Hoogte</translation>
+        <translation>Hoogte</translation>
     </message>
     <message>
         <source>Measurments extension</source>
-        <translation type="unfinished"></translation>
+        <translation>Maten uitbreiding</translation>
     </message>
     <message>
         <source>Piece letter</source>
-        <translation type="unfinished"></translation>
+        <translation>Onderdeel letter</translation>
     </message>
     <message>
         <source>Piece annotation</source>
-        <translation type="unfinished"></translation>
+        <translation>Onderdeel aantekening</translation>
     </message>
     <message>
         <source>Piece orientation</source>
-        <translation type="unfinished"></translation>
+        <translation>Onderdeel orientatie</translation>
     </message>
     <message>
         <source>Piece rotation</source>
-        <translation type="unfinished"></translation>
+        <translation>Onderdeel rotatie</translation>
     </message>
     <message>
         <source>Piece tilt</source>
-        <translation type="unfinished"></translation>
+        <translation>Onderdeel tillen</translation>
     </message>
     <message>
         <source>Piece fold position</source>
-        <translation type="unfinished"></translation>
+        <translation>Onderdeel vouw postie</translation>
     </message>
     <message>
         <source>Piece name</source>
-        <translation type="unfinished"></translation>
+        <translation>Onderdeel naam</translation>
     </message>
     <message>
         <source>Quantity</source>
-        <translation type="unfinished"></translation>
+        <translation>Kwantiteit</translation>
     </message>
     <message>
         <source>Material: Fabric</source>
-        <translation type="unfinished"></translation>
+        <translation>Materiaal: Stof</translation>
     </message>
     <message>
         <source>Fabric</source>
-        <translation type="unfinished">Stof</translation>
+        <translation>Stof</translation>
     </message>
     <message>
         <source>Material: Lining</source>
-        <translation type="unfinished"></translation>
+        <translation>Materiaal: Voering</translation>
     </message>
     <message>
         <source>Lining</source>
-        <translation type="unfinished">Voering</translation>
+        <translation>Voering</translation>
     </message>
     <message>
         <source>Material: Interfacing</source>
-        <translation type="unfinished"></translation>
+        <translation>Materiaal: Vlieseline</translation>
     </message>
     <message>
         <source>Interfacing</source>
-        <translation type="unfinished">Vlieseline</translation>
+        <translation>Vlieseline</translation>
     </message>
     <message>
         <source>Material: Interlining</source>
-        <translation type="unfinished"></translation>
+        <translation>Materiaal: Tussenvoering</translation>
     </message>
     <message>
         <source>Interlining</source>
-        <translation type="unfinished">Tussenvoering</translation>
+        <translation>Tussenvoering</translation>
     </message>
     <message>
         <source>Word: Cut</source>
-        <translation type="unfinished"></translation>
+        <translation>Woord: knippen</translation>
     </message>
     <message>
         <source>Cut</source>
-        <translation type="unfinished">Knip</translation>
+        <translation>Knippen</translation>
     </message>
     <message>
         <source>Word: on fold</source>
-        <translation type="unfinished"></translation>
+        <translation>Woord:  op vouw</translation>
     </message>
     <message>
         <source>on fold</source>
-        <translation type="unfinished">op vouw</translation>
+        <translation>op vouw</translation>
     </message>
     <message>
         <source>User material</source>
-        <translation type="unfinished"></translation>
+        <translation>Gebruikers materiaal</translation>
     </message>
 </context>
 <context>
@@ -1981,7 +1981,7 @@
     </message>
     <message>
         <source>Preview calculations</source>
-        <translation type="unfinished"></translation>
+        <translation>Voorbeeld berekeningen</translation>
     </message>
 </context>
 <context>
@@ -2740,11 +2740,11 @@
     </message>
     <message>
         <source>Preview calculations</source>
-        <translation type="unfinished"></translation>
+        <translation>Voorbeeld berekeningen</translation>
     </message>
     <message>
         <source>Unique variable name</source>
-        <translation type="unfinished"></translation>
+        <translation>Unieke variabele naam</translation>
     </message>
 </context>
 <context>
@@ -2770,19 +2770,19 @@
     <name>DialogKnownMaterials</name>
     <message>
         <source>Known materials</source>
-        <translation type="unfinished"></translation>
+        <translation>Bekende materialen</translation>
     </message>
     <message>
         <source>Material:</source>
-        <translation type="unfinished"></translation>
+        <translation>Materiaal:</translation>
     </message>
     <message>
         <source>Name of material</source>
-        <translation type="unfinished"></translation>
+        <translation>Naam van het materiaal</translation>
     </message>
     <message>
         <source>User material</source>
-        <translation type="unfinished"></translation>
+        <translation>Gebruikers materiaal</translation>
     </message>
 </context>
 <context>
@@ -3651,15 +3651,15 @@ Toch de instellingen aanpassen?</translation>
     <name>DialogPatternMaterials</name>
     <message>
         <source>Dialog</source>
-        <translation type="unfinished">Dialoog</translation>
+        <translation>Dialoog</translation>
     </message>
     <message>
         <source>Placeholder</source>
-        <translation type="unfinished"></translation>
+        <translation>Tijdelijke aanduidingen</translation>
     </message>
     <message>
         <source>Value</source>
-        <translation type="unfinished">Waarde</translation>
+        <translation>Waarde</translation>
     </message>
 </context>
 <context>
@@ -3842,59 +3842,59 @@ Toch de instellingen aanpassen?</translation>
     </message>
     <message>
         <source>Pattern</source>
-        <translation type="unfinished">Patroon</translation>
+        <translation>Patroon</translation>
     </message>
     <message>
         <source>For technical notes</source>
-        <translation type="unfinished"></translation>
+        <translation>Voor technische aantekeningen</translation>
     </message>
     <message>
         <source>Label data</source>
-        <translation type="unfinished"></translation>
+        <translation>Gegevens label</translation>
     </message>
     <message>
         <source>Label template:</source>
-        <translation type="unfinished"></translation>
+        <translation>Sjabloon label:</translation>
     </message>
     <message>
         <source>Edit pattern label</source>
-        <translation type="unfinished"></translation>
+        <translation>Verander patroon label</translation>
     </message>
     <message>
         <source>Edit template</source>
-        <translation type="unfinished"></translation>
+        <translation>Verander sjabloon</translation>
     </message>
     <message>
         <source>Date format:</source>
-        <translation type="unfinished"></translation>
+        <translation>Datum indeling:</translation>
     </message>
     <message>
         <source>Time format:</source>
-        <translation type="unfinished"></translation>
+        <translation>Tijdsindeling:</translation>
     </message>
     <message>
         <source>Save label data.</source>
-        <translation type="unfinished"></translation>
+        <translation>Sla gegevens label op.</translation>
     </message>
     <message>
         <source>Label data were changed. Do you want to save them before editing label template?</source>
-        <translation type="unfinished"></translation>
+        <translation>Gegevens label is veranderd. Wil je deze eerst opslaan voordat u het sjabloon label veranderd?</translation>
     </message>
     <message>
         <source>Materials</source>
-        <translation type="unfinished"></translation>
+        <translation>Materialen</translation>
     </message>
     <message>
         <source>Pattern materials:</source>
-        <translation type="unfinished"></translation>
+        <translation>Patroon materialen:</translation>
     </message>
     <message>
         <source>Manage list of pattern materials</source>
-        <translation type="unfinished"></translation>
+        <translation>Beheren van patroon materiaallijst</translation>
     </message>
     <message>
         <source>Manage</source>
-        <translation type="unfinished"></translation>
+        <translation>Beheren</translation>
     </message>
 </context>
 <context>
@@ -5139,7 +5139,7 @@ Toch de instellingen aanpassen?</translation>
     </message>
     <message>
         <source>Workpiece tool</source>
-        <translation type="unfinished"></translation>
+        <translation>Werkstuk gereedschap</translation>
     </message>
 </context>
 <context>
@@ -7338,15 +7338,15 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Label template editor</source>
-        <translation type="unfinished"></translation>
+        <translation>Label sjabloon bewerker</translation>
     </message>
     <message>
         <source>Workpiece tool</source>
-        <translation type="unfinished"></translation>
+        <translation>Werkstuk gereedschap</translation>
     </message>
     <message>
         <source>Internal path tool</source>
-        <translation type="unfinished"></translation>
+        <translation>Ingesloten paden gereedschap</translation>
     </message>
 </context>
 <context>
@@ -7660,11 +7660,11 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Send crash reports</source>
-        <translation>Verzend crash rapport</translation>
+        <translation type="vanished">Verzend crash rapport</translation>
     </message>
     <message>
         <source>Send crash reports (recommended)</source>
-        <translation>Verzend crash rapporten (aanbevolen)</translation>
+        <translation type="vanished">Verzend crash rapporten (aanbevolen)</translation>
     </message>
     <message>
         <source>Pattern editing</source>
@@ -7688,7 +7688,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>After each crash Valentina collects information that may help us fix the problem. We do not collect any personal information. Find more about what %1kind of information%2 we collect.</source>
-        <translation>Na iedere crash verzamelt Valentina informatie die mogelijk kunnen bijdragen het probleem te verhelpen. Wij verzamelen geen persoonlijke informatie. Voor meer informatie zie %1soort informatie%2.</translation>
+        <translation type="vanished">Na iedere crash verzamelt Valentina informatie die mogelijk kunnen bijdragen het probleem te verhelpen. Wij verzamelen geen persoonlijke informatie. Voor meer informatie zie %1soort informatie%2.</translation>
     </message>
     <message>
         <source>The Default unit has been updated and will be used as the default for the next pattern you create.</source>
@@ -7755,7 +7755,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>My label templates</source>
-        <translation type="unfinished"></translation>
+        <translation>Mijn label sjablonen</translation>
     </message>
 </context>
 <context>
@@ -7818,43 +7818,43 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Label data/time format</source>
-        <translation type="unfinished"></translation>
+        <translation>Label datum/tijd indeling</translation>
     </message>
     <message>
         <source>Date:</source>
-        <translation type="unfinished"></translation>
+        <translation>Datum:</translation>
     </message>
     <message>
         <source>Edit formats</source>
-        <translation type="unfinished"></translation>
+        <translation>Verander indelingen</translation>
     </message>
     <message>
         <source>Time:</source>
-        <translation type="unfinished"></translation>
+        <translation>Tijd:</translation>
     </message>
     <message>
         <source>Materials</source>
-        <translation type="unfinished"></translation>
+        <translation>Materialen</translation>
     </message>
     <message>
         <source>Known materials:</source>
-        <translation type="unfinished"></translation>
+        <translation>Bekende materialen:</translation>
     </message>
     <message>
         <source>Manage list of known materials</source>
-        <translation type="unfinished"></translation>
+        <translation>Beheren van bekende materialen llijst</translation>
     </message>
     <message>
         <source>Manage</source>
-        <translation type="unfinished"></translation>
+        <translation>Beheren</translation>
     </message>
     <message>
         <source>When manage pattern materials save them to known materials list</source>
-        <translation type="unfinished"></translation>
+        <translation>Wanneer beheren van patroon materialen sla deze op bij bekende materialen lijst</translation>
     </message>
     <message>
         <source>Remeber pattern materials</source>
-        <translation type="unfinished"></translation>
+        <translation>Herinner patroon materialen</translation>
     </message>
 </context>
 <context>
@@ -7992,27 +7992,27 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Fabric</source>
-        <translation type="unfinished">Stof</translation>
+        <translation>Stof</translation>
     </message>
     <message>
         <source>Lining</source>
-        <translation type="unfinished">Voering</translation>
+        <translation>Voering</translation>
     </message>
     <message>
         <source>Interfacing</source>
-        <translation type="unfinished">Vlieseline</translation>
+        <translation>Vlieseline</translation>
     </message>
     <message>
         <source>Interlining</source>
-        <translation type="unfinished">Tussenvoering</translation>
+        <translation>Tussenvoering</translation>
     </message>
     <message>
         <source>Cut</source>
-        <translation type="unfinished">Knip</translation>
+        <translation>Knippen</translation>
     </message>
     <message>
         <source>on fold</source>
-        <translation type="unfinished">op vouw</translation>
+        <translation>op vouw</translation>
     </message>
 </context>
 <context>
@@ -9043,51 +9043,51 @@ Wil je deze veranderingen opslaan?</translation>
     </message>
     <message>
         <source>Label template:</source>
-        <translation type="unfinished"></translation>
+        <translation>Sjabloon label:</translation>
     </message>
     <message>
         <source>Edit pattern label</source>
-        <translation type="unfinished"></translation>
+        <translation>Verander patroon label</translation>
     </message>
     <message>
         <source>Edit template</source>
-        <translation type="unfinished"></translation>
+        <translation>Verander sjabloon</translation>
     </message>
     <message>
         <source>Label data</source>
-        <translation type="unfinished"></translation>
+        <translation>Gegevens label</translation>
     </message>
     <message>
         <source>Quantity:</source>
-        <translation type="unfinished"></translation>
+        <translation>Kwantiteit:</translation>
     </message>
     <message>
         <source>on fold</source>
-        <translation type="unfinished">op vouw</translation>
+        <translation>op vouw</translation>
     </message>
     <message>
         <source>Annotation:</source>
-        <translation type="unfinished"></translation>
+        <translation>Aantekening:</translation>
     </message>
     <message>
         <source>A text field to add comments in</source>
-        <translation type="unfinished"></translation>
+        <translation>Een tekstveld om opmerkingen in te voegen</translation>
     </message>
     <message>
         <source>Orientation:</source>
-        <translation type="unfinished"></translation>
+        <translation>Orientatie:</translation>
     </message>
     <message>
         <source>Rotation:</source>
-        <translation type="unfinished">Draaiing:</translation>
+        <translation>Draaiing:</translation>
     </message>
     <message>
         <source>Tilt:</source>
-        <translation type="unfinished"></translation>
+        <translation>Tillen:</translation>
     </message>
     <message>
         <source>Fold position:</source>
-        <translation type="unfinished"></translation>
+        <translation>Vouw positie:</translation>
     </message>
 </context>
 <context>
@@ -9604,7 +9604,7 @@ Wil je deze veranderingen opslaan?</translation>
     <name>VAbstractSpline</name>
     <message>
         <source>Length</source>
-        <translation type="unfinished">Lengte</translation>
+        <translation>Lengte</translation>
     </message>
 </context>
 <context>
@@ -9733,7 +9733,7 @@ Wil je deze veranderingen opslaan?</translation>
     <name>VComboBoxDelegate</name>
     <message>
         <source>Select material</source>
-        <translation type="unfinished"></translation>
+        <translation>Selecteer materiaal</translation>
     </message>
 </context>
 <context>
@@ -10083,7 +10083,7 @@ Wil je deze veranderingen opslaan?</translation>
     </message>
     <message>
         <source>label templates</source>
-        <translation type="unfinished"></translation>
+        <translation>Label sjablonen</translation>
     </message>
 </context>
 <context>
@@ -10172,7 +10172,7 @@ Wil je deze veranderingen opslaan?</translation>
     </message>
     <message>
         <source>This id is not unique.</source>
-        <translation>Deze ID is niet uniek.</translation>
+        <translation type="vanished">Deze ID is niet uniek.</translation>
     </message>
     <message>
         <source>Could not copy temp file to document file</source>
@@ -10192,7 +10192,7 @@ Wil je deze veranderingen opslaan?</translation>
     </message>
     <message>
         <source>&lt;empty&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;empty&gt;</translation>
     </message>
 </context>
 <context>
@@ -10605,101 +10605,101 @@ Wil je deze veranderingen opslaan?</translation>
     <name>VToolAlongLine</name>
     <message>
         <source>Length</source>
-        <translation type="unfinished">Lengte</translation>
+        <translation>Lengte</translation>
     </message>
     <message>
         <source>Angle</source>
-        <translation type="unfinished">Hoek</translation>
+        <translation>Hoek</translation>
     </message>
 </context>
 <context>
     <name>VToolArc</name>
     <message>
         <source>Length</source>
-        <translation type="unfinished">Lengte</translation>
+        <translation>Lengte</translation>
     </message>
     <message>
         <source>Radius</source>
-        <translation type="unfinished">Straal</translation>
+        <translation>Straal</translation>
     </message>
     <message>
         <source>Start angle</source>
-        <translation type="unfinished"></translation>
+        <translation>Start hoek</translation>
     </message>
     <message>
         <source>End angle</source>
-        <translation type="unfinished"></translation>
+        <translation>Einde straal</translation>
     </message>
 </context>
 <context>
     <name>VToolArcWithLength</name>
     <message>
         <source>Length</source>
-        <translation type="unfinished">Lengte</translation>
+        <translation>Lengte</translation>
     </message>
     <message>
         <source>Radius</source>
-        <translation type="unfinished">Straal</translation>
+        <translation>Straal</translation>
     </message>
     <message>
         <source>Start angle</source>
-        <translation type="unfinished"></translation>
+        <translation>Start hoek</translation>
     </message>
     <message>
         <source>End angle</source>
-        <translation type="unfinished"></translation>
+        <translation>Einde straal</translation>
     </message>
 </context>
 <context>
     <name>VToolCut</name>
     <message>
         <source>Length</source>
-        <translation type="unfinished">Lengte</translation>
+        <translation>Lengte</translation>
     </message>
 </context>
 <context>
     <name>VToolCutArc</name>
     <message>
         <source>Arc</source>
-        <translation type="unfinished">Boog</translation>
+        <translation>Boog</translation>
     </message>
     <message>
         <source>length</source>
-        <translation type="unfinished"></translation>
+        <translation>lengte</translation>
     </message>
     <message>
         <source>start angle</source>
-        <translation type="unfinished"></translation>
+        <translation>start hoek</translation>
     </message>
     <message>
         <source>end angle</source>
-        <translation type="unfinished"></translation>
+        <translation>einde hoek</translation>
     </message>
     <message>
         <source>radius</source>
-        <translation type="unfinished"></translation>
+        <translation>straal</translation>
     </message>
 </context>
 <context>
     <name>VToolCutSpline</name>
     <message>
         <source>Curve</source>
-        <translation type="unfinished">Kromming</translation>
+        <translation>Kromming</translation>
     </message>
     <message>
         <source>length</source>
-        <translation type="unfinished"></translation>
+        <translation>lengte</translation>
     </message>
 </context>
 <context>
     <name>VToolCutSplinePath</name>
     <message>
         <source>Curve</source>
-        <translation type="unfinished">Kromming</translation>
+        <translation>Kromming</translation>
     </message>
     <message>
         <source>length</source>
-        <translation type="unfinished"></translation>
+        <translation>lengte</translation>
     </message>
 </context>
 <context>
@@ -10757,63 +10757,63 @@ Wil je deze veranderingen opslaan?</translation>
     <name>VToolEllipticalArc</name>
     <message>
         <source>Length</source>
-        <translation type="unfinished">Lengte</translation>
+        <translation>Lengte</translation>
     </message>
     <message>
         <source>Radius</source>
-        <translation type="unfinished">Straal</translation>
+        <translation>Straal</translation>
     </message>
     <message>
         <source>Start angle</source>
-        <translation type="unfinished"></translation>
+        <translation>Start hoek</translation>
     </message>
     <message>
         <source>End angle</source>
-        <translation type="unfinished"></translation>
+        <translation>Einde straal</translation>
     </message>
 </context>
 <context>
     <name>VToolHeight</name>
     <message>
         <source>Length</source>
-        <translation type="unfinished">Lengte</translation>
+        <translation>Lengte</translation>
     </message>
     <message>
         <source>Angle</source>
-        <translation type="unfinished">Hoek</translation>
+        <translation>Hoek</translation>
     </message>
 </context>
 <context>
     <name>VToolLine</name>
     <message>
         <source>Length</source>
-        <translation type="unfinished">Lengte</translation>
+        <translation>Lengte</translation>
     </message>
     <message>
         <source>Angle</source>
-        <translation type="unfinished">Hoek</translation>
+        <translation>Hoek</translation>
     </message>
 </context>
 <context>
     <name>VToolLineIntersectAxis</name>
     <message>
         <source>Length</source>
-        <translation type="unfinished">Lengte</translation>
+        <translation>Lengte</translation>
     </message>
     <message>
         <source>Angle</source>
-        <translation type="unfinished">Hoek</translation>
+        <translation>Hoek</translation>
     </message>
 </context>
 <context>
     <name>VToolLinePoint</name>
     <message>
         <source>Length</source>
-        <translation type="unfinished">Lengte</translation>
+        <translation>Lengte</translation>
     </message>
     <message>
         <source>Angle</source>
-        <translation type="unfinished">Hoek</translation>
+        <translation>Hoek</translation>
     </message>
 </context>
 <context>
@@ -11347,11 +11347,11 @@ Wil je deze veranderingen opslaan?</translation>
     <name>VToolPointOfContact</name>
     <message>
         <source>Length</source>
-        <translation type="unfinished">Lengte</translation>
+        <translation>Lengte</translation>
     </message>
     <message>
         <source>Angle</source>
-        <translation type="unfinished">Hoek</translation>
+        <translation>Hoek</translation>
     </message>
 </context>
 <context>
@@ -11413,11 +11413,11 @@ Wil je deze veranderingen opslaan?</translation>
     <name>VToolShoulderPoint</name>
     <message>
         <source>Length</source>
-        <translation type="unfinished">Lengte</translation>
+        <translation>Lengte</translation>
     </message>
     <message>
         <source>Angle</source>
-        <translation type="unfinished">Hoek</translation>
+        <translation>Hoek</translation>
     </message>
 </context>
 <context>
@@ -12646,152 +12646,152 @@ Wil je deze veranderingen opslaan?</translation>
     <message>
         <source>ElArc_</source>
         <comment>Left symbol _ in the name</comment>
-        <translation type="unfinished"></translation>
+        <translation>ElHoek_</translation>
     </message>
     <message>
         <source>Radius1ElArc_</source>
         <comment>Left symbol _ in the name</comment>
-        <translation type="unfinished"></translation>
+        <translation>Straal1ElHoek_</translation>
     </message>
     <message>
         <source>Radius2ElArc_</source>
         <comment>Left symbol _ in the name</comment>
-        <translation type="unfinished"></translation>
+        <translation>Straal2ElHoek_</translation>
     </message>
     <message>
         <source>Angle1ElArc_</source>
         <comment>Left symbol _ in the name</comment>
-        <translation type="unfinished"></translation>
+        <translation>HoekEl1Hoek_</translation>
     </message>
     <message>
         <source>Angle2ElArc_</source>
         <comment>Left symbol _ in the name</comment>
-        <translation type="unfinished"></translation>
+        <translation>Hoek2ElHoek_</translation>
     </message>
     <message>
         <source>date</source>
         <comment>placeholder</comment>
-        <translation type="unfinished"></translation>
+        <translation>datum</translation>
     </message>
     <message>
         <source>time</source>
         <comment>placeholder</comment>
-        <translation type="unfinished"></translation>
+        <translation>tijd</translation>
     </message>
     <message>
         <source>patternName</source>
         <comment>placeholder</comment>
-        <translation type="unfinished"></translation>
+        <translation>patroonNaam</translation>
     </message>
     <message>
         <source>patternNumber</source>
         <comment>placeholder</comment>
-        <translation type="unfinished"></translation>
+        <translation>patroonNummer</translation>
     </message>
     <message>
         <source>author</source>
         <comment>placeholder</comment>
-        <translation type="unfinished"></translation>
+        <translation>auteur</translation>
     </message>
     <message>
         <source>customer</source>
         <comment>placeholder</comment>
-        <translation type="unfinished"></translation>
+        <translation>klant</translation>
     </message>
     <message>
         <source>pExt</source>
         <comment>placeholder</comment>
-        <translation type="unfinished"></translation>
+        <translation>pExt</translation>
     </message>
     <message>
         <source>pFileName</source>
         <comment>placeholder</comment>
-        <translation type="unfinished"></translation>
+        <translation>pBestandsNaam</translation>
     </message>
     <message>
         <source>mFileName</source>
         <comment>placeholder</comment>
-        <translation type="unfinished"></translation>
+        <translation>mBestandsNaam</translation>
     </message>
     <message>
         <source>mExt</source>
         <comment>placeholder</comment>
-        <translation type="unfinished"></translation>
+        <translation>mExt</translation>
     </message>
     <message>
         <source>pLetter</source>
         <comment>placeholder</comment>
-        <translation type="unfinished"></translation>
+        <translation>pLetter</translation>
     </message>
     <message>
         <source>pAnnotation</source>
         <comment>placeholder</comment>
-        <translation type="unfinished"></translation>
+        <translation>pAantekening</translation>
     </message>
     <message>
         <source>pOrientation</source>
         <comment>placeholder</comment>
-        <translation type="unfinished"></translation>
+        <translation>pOrientatie</translation>
     </message>
     <message>
         <source>pRotation</source>
         <comment>placeholder</comment>
-        <translation type="unfinished"></translation>
+        <translation>pDraaiing</translation>
     </message>
     <message>
         <source>pTilt</source>
         <comment>placeholder</comment>
-        <translation type="unfinished"></translation>
+        <translation>pTillen</translation>
     </message>
     <message>
         <source>pFoldPosition</source>
         <comment>placeholder</comment>
-        <translation type="unfinished"></translation>
+        <translation>pVouwPostie</translation>
     </message>
     <message>
         <source>pName</source>
         <comment>placeholder</comment>
-        <translation type="unfinished"></translation>
+        <translation>pNaam</translation>
     </message>
     <message>
         <source>pQuantity</source>
         <comment>placeholder</comment>
-        <translation type="unfinished"></translation>
+        <translation>pKwantiteit</translation>
     </message>
     <message>
         <source>mFabric</source>
         <comment>placeholder</comment>
-        <translation type="unfinished"></translation>
+        <translation>mStof</translation>
     </message>
     <message>
         <source>mLining</source>
         <comment>placeholder</comment>
-        <translation type="unfinished"></translation>
+        <translation>mVoering</translation>
     </message>
     <message>
         <source>mInterfacing</source>
         <comment>placeholder</comment>
-        <translation type="unfinished"></translation>
+        <translation>mVlieseline</translation>
     </message>
     <message>
         <source>mInterlining</source>
         <comment>placeholder</comment>
-        <translation type="unfinished"></translation>
+        <translation>mTussenvoering</translation>
     </message>
     <message>
         <source>wCut</source>
         <comment>placeholder</comment>
-        <translation type="unfinished"></translation>
+        <translation>wKnippen</translation>
     </message>
     <message>
         <source>wOnFold</source>
         <comment>placeholder</comment>
-        <translation type="unfinished"></translation>
+        <translation>wOpVouw</translation>
     </message>
     <message>
         <source>userMaterial</source>
         <comment>placeholder</comment>
-        <translation type="unfinished"></translation>
+        <translation>gebruikersMateriaal</translation>
     </message>
 </context>
 <context>

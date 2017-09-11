@@ -7645,14 +7645,6 @@ Voulez-vous sauvegarder les changements?</translation>
         <translation type="unfinished">Livre:</translation>
     </message>
     <message>
-        <source>Send crash reports</source>
-        <translation type="unfinished">Envoyer le rapport de plantage</translation>
-    </message>
-    <message>
-        <source>Send crash reports (recommended)</source>
-        <translation type="unfinished">Envoyer le rapport de plantage (recommandé)</translation>
-    </message>
-    <message>
         <source>Pattern editing</source>
         <translation type="unfinished"></translation>
     </message>
@@ -7671,10 +7663,6 @@ Voulez-vous sauvegarder les changements?</translation>
     <message>
         <source>With OS options</source>
         <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>After each crash Valentina collects information that may help us fix the problem. We do not collect any personal information. Find more about what %1kind of information%2 we collect.</source>
-        <translation type="unfinished">Après chaque plantage, Valentina collecte des informations qui peuvent nous servir à régler le problème. Nous ne collectons aucune information personnelle. Pour en savoir plus : %1 le genre d&apos;information%2 que nous collectons.</translation>
     </message>
     <message>
         <source>The Default unit has been updated and will be used as the default for the next pattern you create.</source>
@@ -10149,7 +10137,7 @@ Voulez-vous enregistrer les changements?</translation>
     </message>
     <message>
         <source>This id is not unique.</source>
-        <translation>Cet identifiant n&apos;est pas unique.</translation>
+        <translation type="vanished">Cet identifiant n&apos;est pas unique.</translation>
     </message>
     <message>
         <source>Could not copy temp file to document file</source>

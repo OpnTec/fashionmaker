@@ -7540,14 +7540,6 @@ Vuoi salvare i cambiamenti?</translation>
         <translation type="unfinished">Libro:</translation>
     </message>
     <message>
-        <source>Send crash reports</source>
-        <translation type="unfinished">Invia segnalazioni di crash</translation>
-    </message>
-    <message>
-        <source>Send crash reports (recommended)</source>
-        <translation type="unfinished">Invia segnalazioni di crash (Raccomandato)</translation>
-    </message>
-    <message>
         <source>Pattern editing</source>
         <translation type="unfinished"></translation>
     </message>
@@ -7569,7 +7561,7 @@ Vuoi salvare i cambiamenti?</translation>
     </message>
     <message>
         <source>After each crash Valentina collects information that may help us fix the problem. We do not collect any personal information. Find more about what %1kind of information%2 we collect.</source>
-        <translation>Dopo ogni crash Valentina recupera informazioni utili per risolvere un problema. Non raccogliamo informazioni personali. Scopri di più in merito al %1tipo di informazioni%2 che collezioniamo.</translation>
+        <translation type="vanished">Dopo ogni crash Valentina recupera informazioni utili per risolvere un problema. Non raccogliamo informazioni personali. Scopri di più in merito al %1tipo di informazioni%2 che collezioniamo.</translation>
     </message>
     <message>
         <source>The Default unit has been updated and will be used as the default for the next pattern you create.</source>
@@ -10019,7 +10011,7 @@ Vuoi salvare le tue modifiche?</translation>
     </message>
     <message>
         <source>This id is not unique.</source>
-        <translation>Questo ID è già esistente.</translation>
+        <translation type="vanished">Questo ID è già esistente.</translation>
     </message>
     <message>
         <source>Could not load schema file &apos;%1&apos;.</source>

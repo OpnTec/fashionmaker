@@ -7506,11 +7506,11 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Send crash reports</source>
-        <translation>Αποστολή αναφορών απότομης διακοπής</translation>
+        <translation type="vanished">Αποστολή αναφορών απότομης διακοπής</translation>
     </message>
     <message>
         <source>Send crash reports (recommended)</source>
-        <translation>Αποστολή αναφορών απότομης διακοπής (συνιστάται)</translation>
+        <translation type="vanished">Αποστολή αναφορών απότομης διακοπής (συνιστάται)</translation>
     </message>
     <message>
         <source>Pattern editing</source>
@@ -7531,10 +7531,6 @@ Do you want to save your changes?</source>
     <message>
         <source>With OS options</source>
         <translation>Με επιλογές του λειτουργικού συστήματος</translation>
-    </message>
-    <message>
-        <source>After each crash Valentina collects information that may help us fix the problem. We do not collect any personal information. Find more about what %1kind of information%2 we collect.</source>
-        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>The Default unit has been updated and will be used as the default for the next pattern you create.</source>
@@ -9825,10 +9821,6 @@ Do you want to save your changes?</source>
     <message>
         <source>Got wrong parameter id. Need only id &gt; 0.</source>
         <translation type="vanished">Λήψη λάθους παραμέτρου ταυτότητας. Χρειάζεται μόνο ταυτότητα &gt; 0.</translation>
-    </message>
-    <message>
-        <source>This id is not unique.</source>
-        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Could not copy temp file to document file</source>

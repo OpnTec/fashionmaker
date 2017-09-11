@@ -6806,14 +6806,6 @@ Haluatko tallentaa muutokset?</translation>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Send crash reports</source>
-        <translation type="unfinished">Lähetä kaatumisraportteja</translation>
-    </message>
-    <message>
-        <source>Send crash reports (recommended)</source>
-        <translation type="unfinished">Lähetä kaatumisraportteja (suositus)</translation>
-    </message>
-    <message>
         <source>Pattern editing</source>
         <translation type="unfinished"></translation>
     </message>
@@ -6831,10 +6823,6 @@ Haluatko tallentaa muutokset?</translation>
     </message>
     <message>
         <source>With OS options</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>After each crash Valentina collects information that may help us fix the problem. We do not collect any personal information. Find more about what %1kind of information%2 we collect.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -9016,7 +9004,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>This id is not unique.</source>
-        <translation>Tämä id ei ole yksikäsitteinen.</translation>
+        <translation type="vanished">Tämä id ei ole yksikäsitteinen.</translation>
     </message>
     <message>
         <source>Could not copy temp file to document file</source>

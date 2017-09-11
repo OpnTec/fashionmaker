@@ -6821,14 +6821,6 @@ Chcete uložit své změny?</translation>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Send crash reports</source>
-        <translation type="unfinished">Poslat hlášení o pádu</translation>
-    </message>
-    <message>
-        <source>Send crash reports (recommended)</source>
-        <translation type="unfinished">Poslat hlášení o pádu (doporučeno)</translation>
-    </message>
-    <message>
         <source>Pattern editing</source>
         <translation type="unfinished"></translation>
     </message>
@@ -6846,10 +6838,6 @@ Chcete uložit své změny?</translation>
     </message>
     <message>
         <source>With OS options</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>After each crash Valentina collects information that may help us fix the problem. We do not collect any personal information. Find more about what %1kind of information%2 we collect.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -9066,7 +9054,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>This id is not unique.</source>
-        <translation>Tento identifikátor není jedinečný.</translation>
+        <translation type="vanished">Tento identifikátor není jedinečný.</translation>
     </message>
     <message>
         <source>Could not copy temp file to document file</source>
