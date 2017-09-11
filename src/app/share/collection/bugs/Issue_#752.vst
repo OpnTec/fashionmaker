@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<vst>
+    <!--Measurements created with Valentina v0.6.0.301a (http://www.valentina-project.org/).-->
+    <version>0.4.4</version>
+    <read-only>false</read-only>
+    <notes/>
+    <unit>cm</unit>
+    <pm_system>42</pm_system>
+    <size base="38"/>
+    <height base="164"/>
+    <body-measurements>
+        <m base="158" height_increase="2" name="height" size_increase="0"/>
+        <m base="1.5" full_name="Armyscye diagonal back" height_increase="0" name="@armscye_diagonal_b" size_increase="0.25"/>
+        <m base="1" full_name="Armyscye diagonal front" height_increase="0" name="@armscye_diagonal_f" size_increase="0.25"/>
+        <m base="78.4" height_increase="1" name="height_hip" size_increase="0"/>
+        <m base="44.3" height_increase="0.5" name="height_knee" size_increase="0"/>
+        <m base="7" height_increase="0" name="height_ankle" size_increase="0"/>
+        <m base="20.2" height_increase="0" name="leg_ankle_circ" size_increase="1.1"/>
+        <m base="88.4" height_increase="1.1" name="height_highhip" size_increase="0"/>
+        <m base="53.4" height_increase="0" name="head_circ" size_increase="0.6"/>
+        <m base="31.7" height_increase="0" name="neck_mid_circ" size_increase="1.3"/>
+        <m base="33" height_increase="0" name="neck_circ" size_increase="1.3"/>
+        <m base="77.2" height_increase="0" name="highbust_circ" size_increase="4.3"/>
+        <m base="31.36" height_increase="0" name="across_chest_f" size_increase="1.34"/>
+        <m base="76" height_increase="0" name="bust_circ" size_increase="5"/>
+        <m base="63" height_increase="0" name="lowbust_circ" size_increase="4"/>
+        <m base="58" height_increase="0" name="waist_circ" size_increase="4.5"/>
+        <m base="136.04" height_increase="0" name="height_neck_back" size_increase="2.35"/>
+        <m base="23" height_increase="0" name="shoulder_tip_to_waist_back" size_increase="0"/>
+        <m base="98.54" height_increase="0" name="height_waist_front" size_increase="1.16"/>
+        <m base="33.14" height_increase="0" name="neck_front_to_waist_f" size_increase="1.16"/>
+        <m base="40.3" height_increase="0" name="neck_side_to_waist_f" size_increase="0.8"/>
+        <m base="38.8" height_increase="0" name="neck_back_to_waist_b" size_increase="0.8"/>
+        <m base="35.16" height_increase="0" name="shoulder_tip_to_shoulder_tip_b" size_increase="1.34"/>
+        <m base="17.2" height_increase="0" name="bustpoint_to_bustpoint" size_increase="0.6"/>
+        <m base="33.14" height_increase="0" name="arm_shoulder_tip_to_elbow_bent" size_increase="0.56"/>
+        <m base="78" height_increase="0" name="highhip_circ" size_increase="5"/>
+        <m base="82" height_increase="0" name="hip_circ" size_increase="5"/>
+        <m base="12.12" height_increase="0" name="shoulder_length" size_increase="0.38"/>
+        <m base="32.4" height_increase="0" name="across_back_b" size_increase="1"/>
+        <m base="22.16" height_increase="0" name="bustpoint_to_neck_side" size_increase="1.34"/>
+        <m base="40.3" height_increase="0" name="bustpoint_neck_side_to_waist" size_increase="0.8"/>
+        <m base="57.45" height_increase="0" name="arm_shoulder_tip_to_wrist_bent" size_increase="0.85"/>
+        <m base="24.08" height_increase="0" name="arm_upper_circ" size_increase="1.32"/>
+        <m base="23.05" height_increase="0" name="arm_elbow_circ" size_increase="0.75"/>
+        <m base="13.7" height_increase="0" name="arm_wrist_circ" size_increase="0.6"/>
+        <m base="35" height_increase="0" name="armscye_circ" size_increase="2"/>
+        <m base="17.5" height_increase="0" name="armscye_length" size_increase="0.6"/>
+        <m base="74.9" height_increase="0" name="leg_crotch_to_floor" size_increase="0"/>
+        <m base="45.7" height_increase="0" name="leg_thigh_upper_circ" size_increase="3.81"/>
+        <m base="43.8" height_increase="0" name="leg_thigh_mid_circ" size_increase="2.6"/>
+        <m base="31.1" height_increase="0" name="leg_knee_circ" size_increase="1.9"/>
+        <m base="28.98" height_increase="0" name="leg_calf_circ" size_increase="2.82"/>
+        <m base="59.7" height_increase="0" name="crotch_length" size_increase="3.8"/>
+        <m base="7" height_increase="0" name="dart_width_shoulder" size_increase="0"/>
+        <m base="6" height_increase="0" name="dart_width_waist" size_increase="0"/>
+    </body-measurements>
+</vst>

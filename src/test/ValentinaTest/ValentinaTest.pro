@@ -62,7 +62,8 @@ SOURCES += \
     tst_vpointf.cpp \
     tst_readval.cpp \
     tst_vtranslatevars.cpp \
-    tst_vabstractpiece.cpp
+    tst_vabstractpiece.cpp \
+    tst_vtooluniondetails.cpp
 
 *msvc*:SOURCES += stable.cpp
 
@@ -88,7 +89,8 @@ HEADERS += \
     tst_vpointf.h \
     tst_readval.h \
     tst_vtranslatevars.h \
-    tst_vabstractpiece.h
+    tst_vabstractpiece.h \
+    tst_vtooluniondetails.h
 
 # Set using ccache. Function enable_ccache() defined in common.pri.
 $$enable_ccache()

@@ -49,6 +49,7 @@
 #include "tst_vpointf.h"
 #include "tst_readval.h"
 #include "tst_vtranslatevars.h"
+#include "tst_vtooluniondetails.h"
 
 #include "../vmisc/def.h"
 #include "../qmuparser/qmudef.h"
@@ -130,6 +131,7 @@ int main(int argc, char** argv)
     ASSERT_TEST(new TST_VPointF());
     ASSERT_TEST(new TST_ReadVal());
     ASSERT_TEST(new TST_VTranslateVars());
+    ASSERT_TEST(new TST_VToolUnionDetails());
 
     return status;
 }
