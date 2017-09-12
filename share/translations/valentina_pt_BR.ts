@@ -7085,10 +7085,6 @@ Do you want to save your changes?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>After each crash Valentina collects information that may help us fix the problem. We do not collect any personal information. Find more about what %1kind of information%2 we collect.</source>
-        <translation type="vanished">Após cada erro, Valentina coleta informações que poderão nos ajudar a solucionar o problema. Nós não coletamos qualquer informação pessoal. Para maiores detalhes sobre qual %1tipo de informação%2 nós coletamos.</translation>
-    </message>
-    <message>
         <source>The Default unit has been updated and will be used as the default for the next pattern you create.</source>
         <translation type="unfinished">A unidade padrão foi atuaizada e será usada como padrão para o próximo molde criado.</translation>
     </message>

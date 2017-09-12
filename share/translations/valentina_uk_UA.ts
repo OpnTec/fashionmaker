@@ -7659,14 +7659,6 @@ Do you want to save your changes?</source>
         <translation>Книга:</translation>
     </message>
     <message>
-        <source>Send crash reports</source>
-        <translation type="vanished">Надсилати звіти про помилки</translation>
-    </message>
-    <message>
-        <source>Send crash reports (recommended)</source>
-        <translation type="vanished">Надсилати звіти про помилки (рекомендується)</translation>
-    </message>
-    <message>
         <source>Pattern editing</source>
         <translation>Редагування лекала</translation>
     </message>
@@ -7685,10 +7677,6 @@ Do you want to save your changes?</source>
     <message>
         <source>With OS options</source>
         <translation>З параметрами ОС</translation>
-    </message>
-    <message>
-        <source>After each crash Valentina collects information that may help us fix the problem. We do not collect any personal information. Find more about what %1kind of information%2 we collect.</source>
-        <translation type="vanished">Після кожного падіння Valentina збирає інформацію яка може допомогти нам у виправленні помилки. Ми не збираємо персональну інформацію користувачів. Дізнатися більше про %1інформацію%2 яку ми збираємо.</translation>
     </message>
     <message>
         <source>The Default unit has been updated and will be used as the default for the next pattern you create.</source>

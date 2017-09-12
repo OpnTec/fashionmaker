@@ -7560,10 +7560,6 @@ Vuoi salvare i cambiamenti?</translation>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>After each crash Valentina collects information that may help us fix the problem. We do not collect any personal information. Find more about what %1kind of information%2 we collect.</source>
-        <translation type="vanished">Dopo ogni crash Valentina recupera informazioni utili per risolvere un problema. Non raccogliamo informazioni personali. Scopri di più in merito al %1tipo di informazioni%2 che collezioniamo.</translation>
-    </message>
-    <message>
         <source>The Default unit has been updated and will be used as the default for the next pattern you create.</source>
         <translation type="unfinished">L&apos;unità di default è stata aggiornata e verrà utilizzata come impostazione predefinita nella creazione del prossimo modello.</translation>
     </message>

@@ -7505,14 +7505,6 @@ Do you want to save your changes?</source>
         <translation>Βιβλίο:</translation>
     </message>
     <message>
-        <source>Send crash reports</source>
-        <translation type="vanished">Αποστολή αναφορών απότομης διακοπής</translation>
-    </message>
-    <message>
-        <source>Send crash reports (recommended)</source>
-        <translation type="vanished">Αποστολή αναφορών απότομης διακοπής (συνιστάται)</translation>
-    </message>
-    <message>
         <source>Pattern editing</source>
         <translation>Επεξεργασία πατρόν</translation>
     </message>

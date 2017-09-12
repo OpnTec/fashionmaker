@@ -7659,14 +7659,6 @@ Do you want to save your changes?</source>
         <translation>Boek:</translation>
     </message>
     <message>
-        <source>Send crash reports</source>
-        <translation type="vanished">Verzend crash rapport</translation>
-    </message>
-    <message>
-        <source>Send crash reports (recommended)</source>
-        <translation type="vanished">Verzend crash rapporten (aanbevolen)</translation>
-    </message>
-    <message>
         <source>Pattern editing</source>
         <translation>Patroon verandering</translation>
     </message>
@@ -7685,10 +7677,6 @@ Do you want to save your changes?</source>
     <message>
         <source>With OS options</source>
         <translation>Met OS optiies</translation>
-    </message>
-    <message>
-        <source>After each crash Valentina collects information that may help us fix the problem. We do not collect any personal information. Find more about what %1kind of information%2 we collect.</source>
-        <translation type="vanished">Na iedere crash verzamelt Valentina informatie die mogelijk kunnen bijdragen het probleem te verhelpen. Wij verzamelen geen persoonlijke informatie. Voor meer informatie zie %1soort informatie%2.</translation>
     </message>
     <message>
         <source>The Default unit has been updated and will be used as the default for the next pattern you create.</source>
