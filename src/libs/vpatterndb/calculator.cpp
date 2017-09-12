@@ -32,6 +32,7 @@
 #include <QStringData>
 #include <QStringDataPtr>
 #include <QStringList>
+#include <QSharedPointer>
 
 #include "../vmisc/def.h"
 #include "../qmuparser/qmuparsererror.h"
