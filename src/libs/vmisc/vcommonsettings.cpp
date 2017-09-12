@@ -256,6 +256,12 @@ QString VCommonSettings::StandardTemplatesPath()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+QString VCommonSettings::LabelTemplatesPath()
+{
+    return SharePath(QStringLiteral("/labels"));
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 QString VCommonSettings::PrepareStandardTemplates(const QString & currentPath)
 {
     return PrepareStandardFiles(currentPath, StandardTemplatesPath(), GetDefPathTemplate());
@@ -265,6 +271,12 @@ QString VCommonSettings::PrepareStandardTemplates(const QString & currentPath)
 QString VCommonSettings::PrepareMultisizeTables(const QString &currentPath)
 {
     return PrepareStandardFiles(currentPath, MultisizeTablesPath(), GetDefPathMultisizeMeasurements());
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QString VCommonSettings::PrepareLabelTemplates(const QString &currentPath)
+{
+    return PrepareStandardFiles(currentPath, LabelTemplatesPath(), GetDefPathLabelTemplate());
 }
 
 //---------------------------------------------------------------------------------------------------------------------

@@ -50,9 +50,11 @@ public:
     static QString SharePath(const QString &shareItem);
     static QString MultisizeTablesPath();
     static QString StandardTemplatesPath();
+    static QString LabelTemplatesPath();
 
     static QString PrepareStandardTemplates(const QString &currentPath);
     static QString PrepareMultisizeTables(const QString &currentPath);
+    static QString PrepareLabelTemplates(const QString &currentPath);
 
     static QString GetDefPathIndividualMeasurements();
     QString GetPathIndividualMeasurements() const;

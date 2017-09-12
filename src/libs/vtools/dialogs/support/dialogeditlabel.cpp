@@ -287,31 +287,14 @@ void DialogEditLabel::NewTemplate()
 void DialogEditLabel::ExportTemplate()
 {
     QString filters(tr("Label template") + QLatin1String("(*.xml)"));
-    QString dir = qApp->Settings()->GetPathLabelTemplate();
-
-    bool usedNotExistedDir = false;
-    QDir directory(dir);
-    if (not directory.exists())
-    {
-        usedNotExistedDir = directory.mkpath(".");
-    }
+    const QString path = VCommonSettings::PrepareLabelTemplates(qApp->Settings()->GetPathLabelTemplate());
 
     QString fileName = QFileDialog::getSaveFileName(this, tr("Export label template"),
-                                                    dir + QLatin1String("/") + tr("template") + QLatin1String(".xml"),
+                                                    path + QLatin1String("/") + tr("template") + QLatin1String(".xml"),
                                                     filters, nullptr, QFileDialog::DontUseNativeDialog);
-
-    auto RemoveTempDir = [usedNotExistedDir, dir]()
-    {
-        if (usedNotExistedDir)
-        {
-            QDir directory(dir);
-            directory.rmpath(".");
-        }
-    };
 
     if (fileName.isEmpty())
     {
-        RemoveTempDir();
         return;
     }
 
@@ -337,8 +320,6 @@ void DialogEditLabel::ExportTemplate()
         messageBox.setStandardButtons(QMessageBox::Ok);
         messageBox.exec();
     }
-
-    RemoveTempDir();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -357,8 +338,9 @@ void DialogEditLabel::ImportTemplate()
     }
 
     QString filter(tr("Label template") + QLatin1String("(*.xml)"));
-    const QString fileName = QFileDialog::getOpenFileName(this, tr("Import template"),
-                                                          qApp->Settings()->GetPathLabelTemplate(), filter, nullptr,
+    //Use standard path to label templates
+    const QString path = VCommonSettings::PrepareLabelTemplates(qApp->Settings()->GetPathLabelTemplate());
+    const QString fileName = QFileDialog::getOpenFileName(this, tr("Import template"), path, filter, nullptr,
                                                           QFileDialog::DontUseNativeDialog);
     if (fileName.isEmpty())
     {
