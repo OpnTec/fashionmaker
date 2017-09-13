@@ -481,8 +481,8 @@ QString VToolEllipticalArc::MakeToolTip() const
             .arg(tr("Radius") + QLatin1String("2"))
             .arg(qApp->fromPixel(elArc->GetRadius2()))
             .arg(tr("Start angle"))
-            .arg(qApp->fromPixel(elArc->GetStartAngle()))
+            .arg(elArc->GetStartAngle())
             .arg(tr("End angle"))
-            .arg(qApp->fromPixel(elArc->GetEndAngle()));
+            .arg(elArc->GetEndAngle());
     return toolTip;
 }
