@@ -257,7 +257,7 @@ QVector<QPointF> VEllipticalArc::GetPoints() const
     }
 
     QPainterPath path;
-    IsFlipped() ? path.arcTo(box, startAngle, sweepAngle) : path.arcTo(box, startAngle, sweepAngle);
+    path.arcTo(box, startAngle, sweepAngle);
 
     QTransform t;
     t.translate(GetCenter().x(), GetCenter().y());
