@@ -84,7 +84,7 @@ void TST_VEllipticalArc::CompareTwoWays()
 
     VEllipticalArc arc2(length, center, radius1, radius2, f1, rotationAngle);
 
-    const qreal lengthEps = ToPixel(0.1, Unit::Mm); // computing error
+    const qreal lengthEps = ToPixel(0.4, Unit::Mm); // computing error
     const QString errorLengthMsg =
             QString("Difference between real and computing lengthes bigger than eps = %1.").number(lengthEps);
     QVERIFY2(qAbs(arc1.GetLength() - length) <= lengthEps, qUtf8Printable(errorLengthMsg));
@@ -371,7 +371,7 @@ void TST_VEllipticalArc::TestGetPoints3()
     if (VFuzzyComparePossibleNulls(arc.AngleArc(), 360.0))
     {// calculated full ellipse square
         const qreal ellipseSquare = M_PI * radius1 * radius2;
-        const qreal epsSquare = ellipseSquare * 0.5 / 100; // computing error 0.5 % from origin squere
+        const qreal epsSquare = ellipseSquare * 1.7 / 100; // computing error 1.7 % from origin squere
         const qreal arcSquare = qAbs(VAbstractPiece::SumTrapezoids(points)/2.0);
         const qreal diffSquare = qAbs(ellipseSquare - arcSquare);
         const QString errorMsg1 = QString("Broken the second rule. Interpolation has too big computing error. "
@@ -448,7 +448,7 @@ void TST_VEllipticalArc::TestRotation()
     const VEllipticalArc arcOrigin(VPointF(center), radius1, radius2, startAngle, endAngle, rotationAngle);
     const VEllipticalArc rotatedArc = arcOrigin.Rotate(rotatePoint, degrees, prefix);
 
-    QVERIFY(qAbs(arcOrigin.AngleArc() - rotatedArc.AngleArc()) <= 0.4);
+    QVERIFY(qAbs(arcOrigin.AngleArc() - rotatedArc.AngleArc()) <= 1.6);
     QVERIFY(qAbs(arcOrigin.GetLength() - rotatedArc.GetLength()) <= ToPixel(1, Unit::Mm));
     QCOMPARE(arcOrigin.GetRadius1(), rotatedArc.GetRadius1());
     QCOMPARE(arcOrigin.GetRadius2(), rotatedArc.GetRadius2());

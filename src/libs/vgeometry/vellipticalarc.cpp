@@ -230,8 +230,34 @@ QVector<QPointF> VEllipticalArc::GetPoints() const
 {
     QRectF box(GetCenter().x() - d->radius1, GetCenter().y() - d->radius2, d->radius1*2,
                d->radius2*2);
+
+    qreal startAngle = 0;
+    qreal endAngle = 0;
+    if (not IsFlipped())
+    {
+        startAngle = GetStartAngle();
+        endAngle = GetEndAngle();
+    }
+    else
+    {
+        startAngle = GetEndAngle();
+        endAngle = GetStartAngle();
+    }
+
+    QLineF startLine(GetCenter().x(), GetCenter().y(), GetCenter().x() + d->radius1, GetCenter().y());
+    QLineF endLine = startLine;
+
+    startLine.setAngle(startAngle);
+    endLine.setAngle(endAngle);
+    qreal sweepAngle = startLine.angleTo(endLine);
+
+    if (qFuzzyIsNull(sweepAngle))
+    {
+        sweepAngle = 360;
+    }
+
     QPainterPath path;
-    IsFlipped() ? path.arcTo(box, GetEndAngle(), GetStartAngle()) : path.arcTo(box, GetStartAngle(), GetEndAngle());
+    IsFlipped() ? path.arcTo(box, startAngle, sweepAngle) : path.arcTo(box, startAngle, sweepAngle);
 
     QTransform t;
     t.translate(GetCenter().x(), GetCenter().y());
@@ -339,7 +365,10 @@ void VEllipticalArc::FindF2(qreal length)
     // We need to calculate the second angle
     // first approximation of angle between start and end angles
 
-    qreal endAngle = GetStartAngle() + gap;
+    QLineF radius1(GetCenter().x(), GetCenter().y(), GetCenter().x() + d->radius1, GetCenter().y());
+    radius1.setAngle(GetStartAngle());
+    radius1.setAngle(radius1.angle() + gap);
+    qreal endAngle = radius1.angle();
 
     // we need to set the end angle, because we want to use GetLength()
     SetFormulaF2(QString::number(endAngle), endAngle);
@@ -357,17 +386,17 @@ void VEllipticalArc::FindF2(qreal length)
         }
         if (lenBez > length)
         { // we selected too big end angle
-            endAngle = endAngle - qAbs(gap);
+            radius1.setAngle(endAngle - qAbs(gap));
         }
         else
         { // we selected too little end angle
-            endAngle = endAngle + qAbs(gap);
+            radius1.setAngle(endAngle + qAbs(gap));
         }
+        endAngle = radius1.angle();
         // we need to set d->f2, because we use it when we calculate GetLength
         SetFormulaF2(QString::number(endAngle), endAngle);
         lenBez = GetLength();
     }
-    SetFormulaF2(QString::number(endAngle), endAngle);
     SetFormulaLength(QString::number(qApp->fromPixel(lenBez)));
 }
 
