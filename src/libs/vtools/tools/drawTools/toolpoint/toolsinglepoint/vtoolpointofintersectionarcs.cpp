@@ -127,7 +127,7 @@ VToolPointOfIntersectionArcs *VToolPointOfIntersectionArcs::Create(const quint32
 
     if (parse == Document::FullParse)
     {
-        VDrawTool::AddRecord(id, Tool::PointOfIntersectionArcs, doc);
+        VAbstractTool::AddRecord(id, Tool::PointOfIntersectionArcs, doc);
         VToolPointOfIntersectionArcs *point = new VToolPointOfIntersectionArcs(doc, data, id, firstArcId,
                                                                                secondArcId, pType, typeCreation);
         scene->addItem(point);

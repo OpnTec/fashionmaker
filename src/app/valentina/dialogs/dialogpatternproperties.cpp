@@ -191,10 +191,10 @@ DialogPatternProperties::DialogPatternProperties(VPattern *doc,  VContainer *pat
             &DialogPatternProperties::ManagePatternMaterials);
 
     InitComboBoxFormats(ui->comboBoxDateFormat,
-                        VSettings::PredefinedDateFormats() + settings->GetUserDefinedDateFormats(),
+                        VCommonSettings::PredefinedDateFormats() + settings->GetUserDefinedDateFormats(),
                         doc->GetLabelDateFormat());
     InitComboBoxFormats(ui->comboBoxTimeFormat,
-                        VSettings::PredefinedTimeFormats() + settings->GetUserDefinedTimeFormats(),
+                        VCommonSettings::PredefinedTimeFormats() + settings->GetUserDefinedTimeFormats(),
                         doc->GetLabelTimeFormat());
 
     connect(ui->comboBoxDateFormat, static_cast<void (QComboBox::*)(int)>(&QComboBox::currentIndexChanged),
@@ -824,13 +824,9 @@ void DialogPatternProperties::ChangeImage()
     const QString filter = tr("Images") + QLatin1String(" (*.png *.jpg *.jpeg *.bmp)");
     const QString fileName = QFileDialog::getOpenFileName(this, tr("Image for pattern"), QString(), filter, nullptr,
                                                           QFileDialog::DontUseNativeDialog);
-    QImage image;
-    if (fileName.isEmpty())
+    if (not fileName.isEmpty())
     {
-        return;
-    }
-    else
-    {
+        QImage image;
         if (not image.load(fileName))
         {
             return;

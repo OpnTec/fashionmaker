@@ -157,7 +157,7 @@ VToolPointOfIntersection *VToolPointOfIntersection::Create(const quint32 _id, co
 
     if (parse == Document::FullParse)
     {
-        VDrawTool::AddRecord(id, Tool::PointOfIntersection, doc);
+        VAbstractTool::AddRecord(id, Tool::PointOfIntersection, doc);
         VToolPointOfIntersection *point = new VToolPointOfIntersection(doc, data, id, firstPointId,
                                                                        secondPointId, typeCreation);
         scene->addItem(point);

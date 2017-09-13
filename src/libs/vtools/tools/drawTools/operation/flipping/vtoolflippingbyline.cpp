@@ -118,7 +118,7 @@ VToolFlippingByLine *VToolFlippingByLine::Create(const quint32 _id, quint32 firs
 
     if (parse == Document::FullParse)
     {
-        VDrawTool::AddRecord(id, Tool::FlippingByLine, doc);
+        VAbstractTool::AddRecord(id, Tool::FlippingByLine, doc);
         VToolFlippingByLine *tool = new VToolFlippingByLine(doc, data, id, firstLinePointId, secondLinePointId, suffix,
                                                             source, dest, typeCreation);
         scene->addItem(tool);

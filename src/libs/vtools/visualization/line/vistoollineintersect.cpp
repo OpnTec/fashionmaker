@@ -75,11 +75,7 @@ void VisToolLineIntersect::RefreshGeometry()
 
             DrawLine(line1, QLineF(static_cast<QPointF>(*first), static_cast<QPointF>(*second)), supportColor);
 
-            if (line2P1Id <= NULL_ID)
-            {
-                return;
-            }
-            else
+            if (line2P1Id > NULL_ID)
             {
                 const QSharedPointer<VPointF> third = Visualization::data->GeometricObject<VPointF>(line2P1Id);
                 DrawPoint(line2P1, static_cast<QPointF>(*third), supportColor);

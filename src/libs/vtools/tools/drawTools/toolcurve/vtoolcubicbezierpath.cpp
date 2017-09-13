@@ -130,7 +130,7 @@ VToolCubicBezierPath *VToolCubicBezierPath::Create(const quint32 _id, VCubicBezi
 
     if (parse == Document::FullParse)
     {
-        VDrawTool::AddRecord(id, Tool::CubicBezierPath, doc);
+        VAbstractTool::AddRecord(id, Tool::CubicBezierPath, doc);
         VToolCubicBezierPath *spl = new VToolCubicBezierPath(doc, data, id, typeCreation);
         scene->addItem(spl);
         InitSplinePathToolConnections(scene, spl);

@@ -62,7 +62,6 @@ MoveSPoint::MoveSPoint(VAbstractPattern *doc, const double &x, const double &y, 
     else
     {
         qCDebug(vUndo, "Can't find spoint with id = %u.", nodeId);
-        return;
     }
 }
 
@@ -131,6 +130,5 @@ void MoveSPoint::Do(double x, double y)
     else
     {
         qCDebug(vUndo, "Can't find spoint with id = %u.", nodeId);
-        return;
     }
 }

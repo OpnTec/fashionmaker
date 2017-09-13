@@ -138,12 +138,12 @@ void PreferencesPatternPage::EditDateTimeFormats()
     QPushButton *button = qobject_cast<QPushButton *>(sender());
     if (button == ui->pushButtonEditDateFormats)
     {
-        CallDateTimeFormatEditor(QDate::currentDate(), settings->PredefinedDateFormats(),
+        CallDateTimeFormatEditor(QDate::currentDate(), VCommonSettings::PredefinedDateFormats(),
                            settings->GetUserDefinedDateFormats(), ui->comboBoxDateFormats);
     }
     else if (button == ui->pushButtonEditTimeFormats)
     {
-        CallDateTimeFormatEditor(QTime::currentTime(), settings->PredefinedTimeFormats(),
+        CallDateTimeFormatEditor(QTime::currentTime(), VCommonSettings::PredefinedTimeFormats(),
                            settings->GetUserDefinedTimeFormats(), ui->comboBoxTimeFormats);
     }
 }
@@ -166,10 +166,10 @@ void PreferencesPatternPage::InitLabelDateTimeFormats()
     VSettings *settings = qApp->ValentinaSettings();
 
     InitComboBoxFormats(ui->comboBoxDateFormats,
-                        VSettings::PredefinedDateFormats() + settings->GetUserDefinedDateFormats(),
+                        VCommonSettings::PredefinedDateFormats() + settings->GetUserDefinedDateFormats(),
                         settings->GetLabelDateFormat());
     InitComboBoxFormats(ui->comboBoxTimeFormats,
-                        VSettings::PredefinedTimeFormats() + settings->GetUserDefinedTimeFormats(),
+                        VCommonSettings::PredefinedTimeFormats() + settings->GetUserDefinedTimeFormats(),
                         settings->GetLabelTimeFormat());
 
     connect(ui->pushButtonEditDateFormats, &QPushButton::clicked, this, &PreferencesPatternPage::EditDateTimeFormats);

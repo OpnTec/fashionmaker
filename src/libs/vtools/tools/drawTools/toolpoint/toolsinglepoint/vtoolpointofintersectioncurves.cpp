@@ -136,7 +136,7 @@ VToolPointOfIntersectionCurves *VToolPointOfIntersectionCurves::Create(const qui
 
     if (parse == Document::FullParse)
     {
-        VDrawTool::AddRecord(id, Tool::PointOfIntersectionCurves, doc);
+        VAbstractTool::AddRecord(id, Tool::PointOfIntersectionCurves, doc);
         auto point = new VToolPointOfIntersectionCurves(doc, data, id, firstCurveId, secondCurveId, vCrossPoint,
                                                         hCrossPoint, typeCreation);
         scene->addItem(point);
@@ -185,17 +185,13 @@ QPointF VToolPointOfIntersectionCurves::FindPoint(const QVector<QPointF> &curve1
         for ( auto i = 1; i < intersections.count(); ++i )
         {
             const QPointF p = intersections.at(i);
-            if (p.y() > minY)
-            {
-                continue;
-            }
-            else if (p.y() < minY)
+            if (p.y() < minY)
             {
                 minY = p.y();
                 vIntersections.clear();
                 vIntersections.append(p);
             }
-            else
+            else if (VFuzzyComparePossibleNulls(p.y(), minY))
             {
                 vIntersections.append(p);
             }
@@ -215,11 +211,7 @@ QPointF VToolPointOfIntersectionCurves::FindPoint(const QVector<QPointF> &curve1
                 vIntersections.clear();
                 vIntersections.append(p);
             }
-            else if (p.y() < maxY)
-            {
-                continue;
-            }
-            else
+            else if (VFuzzyComparePossibleNulls(p.y(), maxY))
             {
                 vIntersections.append(p);
             }

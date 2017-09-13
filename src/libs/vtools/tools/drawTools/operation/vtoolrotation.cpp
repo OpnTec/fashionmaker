@@ -236,7 +236,7 @@ QT_WARNING_POP
 
     if (parse == Document::FullParse)
     {
-        VDrawTool::AddRecord(id, Tool::Rotation, doc);
+        VAbstractTool::AddRecord(id, Tool::Rotation, doc);
         VToolRotation *tool = new VToolRotation(doc, data, id, origin, angle, suffix, source, dest, typeCreation);
         scene->addItem(tool);
         InitOperationToolConnections(scene, tool);

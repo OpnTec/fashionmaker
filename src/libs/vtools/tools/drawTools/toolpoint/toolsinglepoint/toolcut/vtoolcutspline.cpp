@@ -170,7 +170,7 @@ VToolCutSpline* VToolCutSpline::Create(const quint32 _id, const QString &pointNa
 
     if (parse == Document::FullParse)
     {
-        VDrawTool::AddRecord(id, Tool::CutSpline, doc);
+        VAbstractTool::AddRecord(id, Tool::CutSpline, doc);
         VToolCutSpline *point = new VToolCutSpline(doc, data, id, formula, splineId, typeCreation);
         scene->addItem(point);
         InitToolConnections(scene, point);

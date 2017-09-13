@@ -219,7 +219,7 @@ QT_WARNING_POP
 
     if (parse == Document::FullParse)
     {
-        VDrawTool::AddRecord(id, Tool::Move, doc);
+        VAbstractTool::AddRecord(id, Tool::Move, doc);
         VToolMove *tool = new VToolMove(doc, data, id, formulaAngle, formulaLength, suffix, source, dest,
                                             typeCreation);
         scene->addItem(tool);

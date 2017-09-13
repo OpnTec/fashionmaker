@@ -149,7 +149,7 @@ VToolLineIntersectAxis *VToolLineIntersectAxis::Create(const quint32 _id, const 
 
     if (parse == Document::FullParse)
     {
-        VDrawTool::AddRecord(id, Tool::LineIntersectAxis, doc);
+        VAbstractTool::AddRecord(id, Tool::LineIntersectAxis, doc);
         VToolLineIntersectAxis *point = new VToolLineIntersectAxis(doc, data, id, typeLine, lineColor, formulaAngle,
                                                                    basePointId, firstPointId, secondPointId,
                                                                    typeCreation);

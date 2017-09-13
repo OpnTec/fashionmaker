@@ -93,7 +93,7 @@ void PreferencesPathPage::DefaultPath()
             path = VCommonSettings::GetDefPathTemplate();
             break;
         case 5: // label templates
-            path = VSettings::GetDefPathLabelTemplate();
+            path = VCommonSettings::GetDefPathLabelTemplate();
             break;
         default:
             break;

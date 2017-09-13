@@ -110,6 +110,5 @@ void MoveSplinePath::Do(const VSplinePath &splPath)
     else
     {
         qCDebug(vUndo, "Can't find spline path with id = %u.", nodeId);
-        return;
     }
 }

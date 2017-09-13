@@ -63,7 +63,6 @@ void SaveToolOptions::undo()
     else
     {
         qCDebug(vUndo, "Can't find tool with id = %u.", nodeId);
-        return;
     }
 }
 
@@ -82,7 +81,6 @@ void SaveToolOptions::redo()
     else
     {
         qCDebug(vUndo, "Can't find tool with id = %u.", nodeId);
-        return;
     }
 }
 

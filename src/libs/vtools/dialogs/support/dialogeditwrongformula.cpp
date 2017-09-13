@@ -222,7 +222,6 @@ void DialogEditWrongFormula::ValChanged(int row)
     if (ui->radioButtonFunctions->isChecked())
     {
         ui->labelDescription->setText(item->toolTip());
-        return;
     }
 }
 

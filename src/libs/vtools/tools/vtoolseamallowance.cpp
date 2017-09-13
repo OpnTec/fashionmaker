@@ -1065,7 +1065,7 @@ void VToolSeamAllowance::contextMenuEvent(QGraphicsSceneContextMenuEvent *event)
             Q_UNUSED(e);
             return;//Leave this method immediately!!!
         }
-        return; //Leave this method immediately after call!!!
+        //Leave this method immediately after call!!!
     }
 }
 

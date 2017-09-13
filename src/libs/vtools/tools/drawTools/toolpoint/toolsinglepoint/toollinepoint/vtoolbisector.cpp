@@ -215,7 +215,7 @@ VToolBisector* VToolBisector::Create(const quint32 _id, QString &formula, const 
 
     if (parse == Document::FullParse)
     {
-        VDrawTool::AddRecord(id, Tool::Bisector, doc);
+        VAbstractTool::AddRecord(id, Tool::Bisector, doc);
         VToolBisector *point = new VToolBisector(doc, data, id, typeLine, lineColor, formula, firstPointId,
                                                  secondPointId, thirdPointId, typeCreation);
         scene->addItem(point);

@@ -1529,7 +1529,6 @@ void VToolUnionDetails::AddToModeling(const QDomElement &domElement)
     else
     {
         qCCritical(vToolUnion, "Can't find tag %s.", qUtf8Printable(VAbstractPattern::TagModeling));
-        return;
     }
 }
 

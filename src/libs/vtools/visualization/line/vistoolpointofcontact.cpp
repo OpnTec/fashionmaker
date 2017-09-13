@@ -73,11 +73,7 @@ void VisToolPointOfContact::RefreshGeometry()
             DrawPoint(lineP2, static_cast<QPointF>(*second), supportColor);
             DrawLine(this, QLineF(static_cast<QPointF>(*first), static_cast<QPointF>(*second)), supportColor);
 
-            if (radiusId <= NULL_ID)
-            {
-                return;
-            }
-            else
+            if (radiusId > NULL_ID)
             {
                 const QSharedPointer<VPointF> third = Visualization::data->GeometricObject<VPointF>(radiusId);
                 DrawPoint(arc_point, static_cast<QPointF>(*third), supportColor);

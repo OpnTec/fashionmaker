@@ -177,7 +177,7 @@ VToolEndLine* VToolEndLine::Create(const quint32 _id, const QString &pointName, 
 
     if (parse == Document::FullParse)
     {
-        VDrawTool::AddRecord(id, Tool::EndLine, doc);
+        VAbstractTool::AddRecord(id, Tool::EndLine, doc);
         VToolEndLine *point = new VToolEndLine(doc, data, id, typeLine, lineColor, formulaLength, formulaAngle,
                                                basePointId, typeCreation);
         scene->addItem(point);

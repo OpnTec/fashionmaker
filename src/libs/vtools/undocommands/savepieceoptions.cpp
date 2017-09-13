@@ -86,7 +86,6 @@ void SavePieceOptions::undo()
     else
     {
         qCDebug(vUndo, "Can't find detail with id = %u.", nodeId);
-        return;
     }
 }
 
@@ -118,7 +117,6 @@ void SavePieceOptions::redo()
     else
     {
         qCDebug(vUndo, "Can't find detail with id = %u.", nodeId);
-        return;
     }
 }
 

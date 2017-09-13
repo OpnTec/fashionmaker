@@ -221,11 +221,7 @@ bool VPE::VPropertySet::hasProperty(VProperty *property, VProperty *parent) cons
     const QList<VProperty*>& tmpChildrenList = (parent != nullptr ? parent->getChildren() : d_ptr->RootProperties);
     foreach(VProperty* tmpProp, tmpChildrenList)
     {
-        if (!tmpProp)
-        {
-            continue;
-        }
-        else if (tmpProp == property || hasProperty(property, tmpProp))
+        if (tmpProp && (tmpProp == property || hasProperty(property, tmpProp)))
         {
             return true;
         }

@@ -177,7 +177,6 @@ void DialogUnionDetails::ChoosedDetail(const quint32 &id, const SceneObject &typ
                     emit ToolTip("");
                     this->setModal(true);
                     this->show();
-                    return;
                 }
                 else
                 {
@@ -185,13 +184,11 @@ void DialogUnionDetails::ChoosedDetail(const quint32 &id, const SceneObject &typ
                     p1 = 0;
                     p2 = 0;
                     emit ToolTip(tr("Select a detail"));
-                    return;
                 }
             }
             else
             {
                 emit ToolTip(tr("Select a point on edge"));
-                return;
             }
         }
     }

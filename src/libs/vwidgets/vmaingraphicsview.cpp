@@ -213,7 +213,7 @@ bool GraphicsViewZoom::eventFilter(QObject *object, QEvent *event)
     {
         QWheelEvent* wheel_event = static_cast<QWheelEvent*>(event);
         SCASSERT(wheel_event != nullptr)
-        if (QApplication::keyboardModifiers() == _modifiers)
+        if (QGuiApplication::keyboardModifiers() == _modifiers)
         {
             if (wheel_event->orientation() == Qt::Vertical)
             {
@@ -225,7 +225,7 @@ bool GraphicsViewZoom::eventFilter(QObject *object, QEvent *event)
         }
         else
         {
-            if (QApplication::keyboardModifiers() == Qt::ShiftModifier)
+            if (QGuiApplication::keyboardModifiers() == Qt::ShiftModifier)
             {
                 return StartHorizontalScrollings(wheel_event);
             }

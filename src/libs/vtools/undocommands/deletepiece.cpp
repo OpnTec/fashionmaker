@@ -63,13 +63,12 @@ DeletePiece::DeletePiece(VAbstractPattern *doc, quint32 id, const VPiece &detail
         else
         {
             // Better save id of previous detail instead of reference to node.
-            m_siblingId = doc->GetParametrUInt(previousDetail.toElement(), VAbstractPattern::AttrId, NULL_ID_STR);
+            m_siblingId = doc->GetParametrUInt(previousDetail.toElement(), VDomDocument::AttrId, NULL_ID_STR);
         }
     }
     else
     {
         qCDebug(vUndo, "Can't get detail by id = %u.", nodeId);
-        return;
     }
 }
 
@@ -111,6 +110,5 @@ void DeletePiece::redo()
     else
     {
         qCDebug(vUndo, "Can't get detail by id = %u.", nodeId);
-        return;
     }
 }

@@ -61,19 +61,16 @@ void AddDetNode::undo()
             if (modeling.removeChild(domElement).isNull())
             {
                 qCDebug(vUndo, "Can't delete node.");
-                return;
             }
         }
         else
         {
             qCDebug(vUndo, "Can't get node by id = %u.", nodeId);
-            return;
         }
     }
     else
     {
         qCDebug(vUndo, "Can't find tag %s.", qUtf8Printable(VAbstractPattern::TagModeling));
-        return;
     }
 }
 
@@ -90,7 +87,6 @@ void AddDetNode::redo()
     else
     {
         qCDebug(vUndo, "Can't find tag %s.", qUtf8Printable(VAbstractPattern::TagModeling));
-        return;
     }
 }
 

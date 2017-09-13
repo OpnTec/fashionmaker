@@ -62,7 +62,6 @@ OperationMoveLabel::OperationMoveLabel(quint32 idTool, VAbstractPattern *doc, do
     else
     {
         qCDebug(vUndo, "Can't find point with id = %u.", nodeId);
-        return;
     }
 }
 
@@ -111,7 +110,6 @@ void OperationMoveLabel::Do(double mx, double my)
     else
     {
         qCDebug(vUndo, "Can't find point with id = %u.", nodeId);
-        return;
     }
 }
 
@@ -126,7 +124,7 @@ QDomElement OperationMoveLabel::GetDestinationObject(quint32 idTool, quint32 idP
         for (qint32 i = 0; i < nodeList.size(); ++i)
         {
             const QDomElement dest = nodeList.at(i).toElement();
-            if (not dest.isNull() && dest.isElement() && dest.tagName() == VToolRotation::TagDestination)
+            if (not dest.isNull() && dest.isElement() && dest.tagName() == VAbstractOperation::TagDestination)
             {
                 correctDest = dest;
                 break;

@@ -148,7 +148,7 @@ VToolPointOfIntersectionCircles *VToolPointOfIntersectionCircles::Create(const q
 
     if (parse == Document::FullParse)
     {
-        VDrawTool::AddRecord(id, Tool::PointOfIntersectionCircles, doc);
+        VAbstractTool::AddRecord(id, Tool::PointOfIntersectionCircles, doc);
         VToolPointOfIntersectionCircles *point = new VToolPointOfIntersectionCircles(doc, data, id, firstCircleCenterId,
                                                                                      secondCircleCenterId,
                                                                                      firstCircleRadius,

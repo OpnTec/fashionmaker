@@ -345,7 +345,6 @@ void VGrainlineItem::mousePressEvent(QGraphicsSceneMouseEvent* pME)
         else
         {
             pME->ignore();
-            return;
         }
     }
 }

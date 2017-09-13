@@ -168,7 +168,7 @@ VToolLine * VToolLine::Create(const quint32 &_id, const quint32 &firstPoint, con
 
     if (parse == Document::FullParse)
     {
-        VDrawTool::AddRecord(id, Tool::Line, doc);
+        VAbstractTool::AddRecord(id, Tool::Line, doc);
         VToolLine *line = new VToolLine(doc, data, id, firstPoint, secondPoint, typeLine, lineColor, typeCreation);
         scene->addItem(line);
         InitDrawToolConnections(scene, line);
@@ -189,7 +189,7 @@ VToolLine * VToolLine::Create(const quint32 &_id, const quint32 &firstPoint, con
 //---------------------------------------------------------------------------------------------------------------------
 QString VToolLine::getTagName() const
 {
-    return VAbstractPattern::TagLine;
+    return VDomDocument::TagLine;
 }
 
 //---------------------------------------------------------------------------------------------------------------------

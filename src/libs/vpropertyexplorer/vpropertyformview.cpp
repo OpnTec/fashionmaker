@@ -135,10 +135,13 @@ void VPE::VPropertyFormView::dataChanged(const QModelIndex &top_left, const QMod
 {
     Q_UNUSED(top_left)
     Q_UNUSED(bottom_right)
-    if (static_cast<VPropertyFormViewPrivate*>(d_ptr)->IgnoreDataChangedSignal)
-    {
-        return;
-    }
+
+    // Ucomment when handle data changes
+//    if (static_cast<VPropertyFormViewPrivate*>(d_ptr)->IgnoreDataChangedSignal)
+//    {
+//        return;
+//    }
+
     // todo: handle data changes
 }
 

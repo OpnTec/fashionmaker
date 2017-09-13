@@ -179,7 +179,7 @@ VToolNormal* VToolNormal::Create(const quint32 _id, QString &formula, const quin
 
     if (parse == Document::FullParse)
     {
-        VDrawTool::AddRecord(id, Tool::Normal, doc);
+        VAbstractTool::AddRecord(id, Tool::Normal, doc);
         VToolNormal *point = new VToolNormal(doc, data, id, typeLine, lineColor, formula, angle, firstPointId,
                                              secondPointId, typeCreation);
         scene->addItem(point);

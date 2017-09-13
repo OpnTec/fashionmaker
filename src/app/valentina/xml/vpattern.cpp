@@ -3067,13 +3067,13 @@ void VPattern::GarbageCollector()
             {
                 // First get next sibling because later will not have chance to get it
                 QDomElement nextSibling = modNode.nextSibling().toElement();
-                if (modNode.hasAttribute(VAbstractNode::AttrInUse))
+                if (modNode.hasAttribute(VAbstractTool::AttrInUse))
                 {
-                    const NodeUsage inUse = GetParametrUsage(modNode, VAbstractNode::AttrInUse);
+                    const NodeUsage inUse = GetParametrUsage(modNode, VAbstractTool::AttrInUse);
                     if (inUse == NodeUsage::InUse)
                     { // It is dangerous to leave object with attribute 'inUse'
                       // Each parse should confirm this status.
-                        SetParametrUsage(modNode, VAbstractNode::AttrInUse, NodeUsage::NotInUse);
+                        SetParametrUsage(modNode, VAbstractTool::AttrInUse, NodeUsage::NotInUse);
                     }
                     else
                     { // Parent was deleted. We do not need this object anymore
@@ -3082,7 +3082,7 @@ void VPattern::GarbageCollector()
                 }
                 else
                 { // Each parse should confirm his status.
-                    SetParametrUsage(modNode, VAbstractNode::AttrInUse, NodeUsage::NotInUse);
+                    SetParametrUsage(modNode, VAbstractTool::AttrInUse, NodeUsage::NotInUse);
                 }
 
                 modNode = nextSibling;

@@ -211,7 +211,7 @@ VToolSplinePath* VToolSplinePath::Create(const quint32 _id, VSplinePath *path, V
 
     if (parse == Document::FullParse)
     {
-        VDrawTool::AddRecord(id, Tool::SplinePath, doc);
+        VAbstractTool::AddRecord(id, Tool::SplinePath, doc);
         VToolSplinePath *spl = new VToolSplinePath(doc, data, id, typeCreation);
         scene->addItem(spl);
         InitSplinePathToolConnections(scene, spl);

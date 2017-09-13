@@ -81,11 +81,7 @@ void VisToolTriangle::RefreshGeometry()
 
             DrawAimedAxis(axis, QLineF(static_cast<QPointF>(*first), static_cast<QPointF>(*second)), supportColor);
 
-            if (hypotenuseP1Id <= NULL_ID)
-            {
-                return;
-            }
-            else
+            if (hypotenuseP1Id > NULL_ID)
             {
                 const QSharedPointer<VPointF> third = Visualization::data->GeometricObject<VPointF>(hypotenuseP1Id);
                 DrawPoint(hypotenuseP1, static_cast<QPointF>(*third), supportColor);

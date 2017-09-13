@@ -162,7 +162,7 @@ VToolCurveIntersectAxis *VToolCurveIntersectAxis::Create(const quint32 _id, cons
 
     if (parse == Document::FullParse)
     {
-        VDrawTool::AddRecord(id, Tool::CurveIntersectAxis, doc);
+        VAbstractTool::AddRecord(id, Tool::CurveIntersectAxis, doc);
         VToolCurveIntersectAxis *point = new VToolCurveIntersectAxis(doc, data, id, typeLine, lineColor, formulaAngle,
                                                                      basePointId, curveId, typeCreation);
         scene->addItem(point);

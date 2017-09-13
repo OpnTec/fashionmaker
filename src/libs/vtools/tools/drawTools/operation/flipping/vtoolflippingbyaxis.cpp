@@ -124,7 +124,7 @@ VToolFlippingByAxis *VToolFlippingByAxis::Create(const quint32 _id, quint32 orig
 
     if (parse == Document::FullParse)
     {
-        VDrawTool::AddRecord(id, Tool::FlippingByAxis, doc);
+        VAbstractTool::AddRecord(id, Tool::FlippingByAxis, doc);
         VToolFlippingByAxis *tool = new VToolFlippingByAxis(doc, data, id, originPointId, axisType, suffix, source,
                                                             dest, typeCreation);
         scene->addItem(tool);

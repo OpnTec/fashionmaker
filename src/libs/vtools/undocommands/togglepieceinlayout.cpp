@@ -121,6 +121,5 @@ void TogglePieceInLayout::Do(bool state)
     else
     {
         qDebug("Can't get detail by id = %u.", m_id);
-        return;
     }
 }

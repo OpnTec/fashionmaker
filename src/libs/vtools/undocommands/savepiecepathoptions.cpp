@@ -73,7 +73,6 @@ void SavePiecePathOptions::undo()
     else
     {
         qCDebug(vUndo, "Can't find path with id = %u.", nodeId);
-        return;
     }
 }
 
@@ -97,7 +96,6 @@ void SavePiecePathOptions::redo()
     else
     {
         qCDebug(vUndo, "Can't find path with id = %u.", nodeId);
-        return;
     }
 }
 

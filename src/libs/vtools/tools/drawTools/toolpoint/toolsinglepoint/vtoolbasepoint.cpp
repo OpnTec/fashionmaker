@@ -126,7 +126,7 @@ VToolBasePoint *VToolBasePoint::Create(quint32 _id, const QString &nameActivPP, 
 
     if (parse == Document::FullParse)
     {
-        VDrawTool::AddRecord(id, Tool::BasePoint, doc);
+        VAbstractTool::AddRecord(id, Tool::BasePoint, doc);
         VToolBasePoint *spoint = new VToolBasePoint(doc, data, id, typeCreation, nameActivPP);
         scene->addItem(spoint);
         InitToolConnections(scene, spoint);

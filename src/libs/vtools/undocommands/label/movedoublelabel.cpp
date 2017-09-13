@@ -77,7 +77,6 @@ MoveDoubleLabel::MoveDoubleLabel(VAbstractPattern *doc, const double &x, const d
     else
     {
         qCDebug(vUndo, "Can't find point with id = %u.", nodeId);
-        return;
     }
 }
 
@@ -151,6 +150,5 @@ void MoveDoubleLabel::Do(double mx, double my)
     else
     {
         qCDebug(vUndo, "Can't find point with id = %u.", nodeId);
-        return;
     }
 }
