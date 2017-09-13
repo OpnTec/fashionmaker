@@ -46,7 +46,7 @@ ChangesAssociations=yes
 ;SignTool=MySign
 ;Uncomment the previous string for code signing
 ;The next string is an example of parameter SignTool. Should not be uncommented.
-;MySign=signtool.exe sign /v /a /n $qSeamly, LLC$q /t http://timestamp.comodoca.com/authenticode /d $qPatternmaking program$q $f
+;MySign=signtool.exe sign /v /a /n $qOpen Source Developer, Roman Telezhynskyi$q /t http://time.certum.pl /fd sha256 /d $qValentina$q $f
 
 [Languages]
 Name: "english"; MessagesFile: "compiler:Default.isl"
