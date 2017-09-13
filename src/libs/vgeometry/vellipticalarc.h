@@ -102,12 +102,7 @@ protected:
 private:
     QSharedDataPointer<VEllipticalArcData> d;
 
-    // cppcheck-suppress unusedPrivateFunction
-    QVector<qreal> GetAngles () const;
-    qreal          MaxLength() const;
-    QPointF        GetPoint (qreal angle) const;
-
-    static int GetQuadransRad(qreal &rad);
+    qreal MaxLength() const;
 };
 
 Q_DECLARE_METATYPE(VEllipticalArc)

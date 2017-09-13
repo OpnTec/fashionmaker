@@ -208,7 +208,7 @@ qreal VEllipticalArc::GetLength() const
  */
 QPointF VEllipticalArc::GetP1() const
 {
-    return GetPoint(GetStartAngle());
+    return GetPoints().first();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -218,169 +218,7 @@ QPointF VEllipticalArc::GetP1() const
  */
 QPointF VEllipticalArc::GetP2 () const
 {
-    return GetPoint(GetEndAngle());
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-/**
- * @brief GetPoint return point associated with angle.
- * @return point.
- */
-QPointF VEllipticalArc::GetPoint (qreal angle) const
-{
-    // Original idea http://alex-black.ru/article.php?content=109#head_3
-    if (angle > 360 || angle < 0)
-    {// Filter incorect value of angle
-        QLineF dummy(0, 0, 100, 0);
-        dummy.setAngle(angle);
-        angle = dummy.angle();
-    }
-
-    // p - point without rotation
-    qreal x = 0;
-    qreal y = 0;
-
-    qreal angleRad = qDegreesToRadians(angle);
-    const int n = GetQuadransRad(angleRad);
-    if (VFuzzyComparePossibleNulls(angleRad, 0) || VFuzzyComparePossibleNulls(angleRad, M_2PI) ||
-        VFuzzyComparePossibleNulls(angleRad, -M_2PI))
-    { // 0 (360, -360) degress
-        x = d->radius1;
-        y = 0;
-    }
-    else if (VFuzzyComparePossibleNulls(angleRad, M_PI_2) || VFuzzyComparePossibleNulls(angleRad, -3 * M_PI_2))
-    { // 90 (-270) degress
-        x = 0;
-        y = d->radius2;
-    }
-    else if (VFuzzyComparePossibleNulls(angleRad, M_PI) || VFuzzyComparePossibleNulls(angleRad, -M_PI))
-    { // 180 (-180) degress
-        x = -d->radius1;
-        y = 0;
-    }
-    else if (VFuzzyComparePossibleNulls(angleRad, 3 * M_PI_2) || VFuzzyComparePossibleNulls(angleRad, -M_PI_2))
-    { // 270 (-90) degress
-        x = 0;
-        y = -d->radius2;
-    }
-    else
-    { // cases between
-        const qreal r1Pow = qPow(d->radius1, 2);
-        const qreal r2Pow = qPow(d->radius2, 2);
-        const qreal angleTan = qTan(angleRad);
-        const qreal angleTan2 = qPow(angleTan, 2);
-        x = qSqrt((r1Pow * r2Pow) / (r1Pow * angleTan2 + r2Pow));
-        y = angleTan * x;
-    }
-
-    switch (n)
-    {
-        case 1:
-            x = +x;
-            y = +y;
-            break;
-        case 2:
-            x = -x;
-            y = +y;
-            break;
-        case 3:
-            x = -x;
-            y = -y;
-            break;
-        case 4:
-            x = +x;
-            y = -y;
-            break;
-        default:
-            break;
-    }
-
-    QPointF p (GetCenter().x() + x, GetCenter().y() + y);
-    // rotation of point
-    QLineF line(static_cast<QPointF>(GetCenter()), p);
-    line.setAngle(line.angle() + GetRotationAngle());
-
-    return line.p2();
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-int VEllipticalArc::GetQuadransRad(qreal &rad)
-{
-    if (rad > M_PI)
-    {
-        rad = rad - M_2PI;
-    }
-
-    if (rad < -M_PI)
-    {
-        rad = rad + M_2PI;
-    }
-
-    int n = 0;
-    if (rad >= 0)
-    {
-        if (rad <= M_PI_2)
-        {
-            n = 1;
-            rad = -rad;
-        }
-        else if (rad > M_PI_2 && rad <= M_PI)
-        {
-            n = 2;
-            rad = M_PI+rad;
-        }
-    }
-    else
-    {
-        if (rad >= -M_PI_2)
-        {
-            n = 4;
-        }
-        else if (rad < -M_PI_2 && rad >= -M_PI)
-        {
-            n = 3;
-            rad = M_PI-rad;
-        }
-    }
-    return n;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-/**
- * @brief GetAngles return list of angles needed for drawing arc.
- * @return list of angles
- */
-QVector<qreal> VEllipticalArc::GetAngles() const
-{
-    QVector<qreal> sectionAngle;
-    qreal angle = AngleArc();
-
-    if (qFuzzyIsNull(angle))
-    {// Return the array that includes one angle
-        sectionAngle.append(GetStartAngle());
-        return sectionAngle;
-    }
-
-    if (angle > 360 || angle < 0)
-    {// Filter incorect value of angle
-        QLineF dummy(0,0, 100, 0);
-        dummy.setAngle(angle);
-        angle = dummy.angle();
-    }
-
-    const qreal angleInterpolation = 45; //degree
-    const int sections = qFloor(angle / angleInterpolation);
-    for (int i = 0; i < sections; ++i)
-    {
-        sectionAngle.append(angleInterpolation);
-    }
-
-    const qreal tail = angle - sections * angleInterpolation;
-    if (tail > 0)
-    {
-        sectionAngle.append(tail);
-    }
-    return sectionAngle;
+    return GetPoints().last();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -390,34 +228,22 @@ QVector<qreal> VEllipticalArc::GetAngles() const
  */
 QVector<QPointF> VEllipticalArc::GetPoints() const
 {
-    QVector<QPointF> points;
-    QVector<qreal> sectionAngle = GetAngles();
+    QRectF box(GetCenter().x() - d->radius1, GetCenter().y() - d->radius2, d->radius1*2,
+               d->radius2*2);
+    QPainterPath path;
+    IsFlipped() ? path.arcTo(box, GetEndAngle(), GetStartAngle()) : path.arcTo(box, GetStartAngle(), GetEndAngle());
 
-    qreal currentAngle;
-    IsFlipped() ? currentAngle = GetEndAngle() : currentAngle = GetStartAngle();
-    for (int i = 0; i < sectionAngle.size(); ++i)
-    {
-        QPointF startPoint = GetPoint(currentAngle);
-        QPointF ellipsePoint2 = GetPoint(currentAngle + sectionAngle.at(i)/3);
-        QPointF ellipsePoint3 = GetPoint(currentAngle + 2*sectionAngle.at(i)/3);
-        QPointF lastPoint = GetPoint(currentAngle + sectionAngle.at(i));
-        // four points that are on ellipse
+    QTransform t;
+    t.translate(GetCenter().x(), GetCenter().y());
+    t.rotate(-GetRotationAngle());
+    t.translate(-GetCenter().x(), -GetCenter().y());
 
-        QPointF bezierPoint1 = ( -5*startPoint + 18*ellipsePoint2 -9*ellipsePoint3 + 2*lastPoint )/6;
-        QPointF bezierPoint2 = ( 2*startPoint - 9*ellipsePoint2 + 18*ellipsePoint3 - 5*lastPoint )/6;
+    path = t.map(path);
 
-        VSpline spl(VPointF(startPoint), bezierPoint1, bezierPoint2, VPointF(lastPoint), 1.0);
+    QPolygonF polygon = path.toSubpathPolygons().first();
+    polygon.removeFirst(); // remove point (0;0)
 
-        QVector<QPointF> splPoints = spl.GetPoints();
-
-        if (not splPoints.isEmpty() && i != sectionAngle.size() - 1)
-        {
-            splPoints.removeLast();
-        }
-        points << splPoints;
-        currentAngle += sectionAngle.at(i);
-    }
-    return points;
+    return polygon;
 }
 
 //---------------------------------------------------------------------------------------------------------------------

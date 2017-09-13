@@ -53,6 +53,7 @@
 - [#744] Check for Updates button produces error.
 - Remove space as thousands separator when return formula to user.
 - [#752] Valentina produces corrupted file if unite two pieces.
+- [#753] Elliptical arc tool is broken.
 
 # Version 0.5.0 May 9, 2017
 - [#581] User can now filter input lists by keyword in function wizard.
