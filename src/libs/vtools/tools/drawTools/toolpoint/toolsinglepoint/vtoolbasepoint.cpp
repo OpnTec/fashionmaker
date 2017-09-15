@@ -371,11 +371,7 @@ void VToolBasePoint::ReadToolAttributes(const QDomElement &domElement)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-/**
- * @brief contextMenuEvent handle context menu events.
- * @param event context menu event.
- */
-void VToolBasePoint::contextMenuEvent ( QGraphicsSceneContextMenuEvent * event )
+void VToolBasePoint::ShowContextMenu(QGraphicsSceneContextMenuEvent *event, quint32 id)
 {
     qCDebug(vTool, "Context menu base point");
 #ifndef QT_NO_CURSOR
@@ -388,12 +384,12 @@ void VToolBasePoint::contextMenuEvent ( QGraphicsSceneContextMenuEvent * event )
         if (doc->CountPP() > 1)
         {
             qCDebug(vTool, "PP count > 1");
-            ContextMenu<DialogSinglePoint>(this, event, RemoveOption::Enable, Referens::Ignore);
+            ContextMenu<DialogSinglePoint>(event, id, RemoveOption::Enable, Referens::Ignore);
         }
         else
         {
             qCDebug(vTool, "PP count = 1");
-            ContextMenu<DialogSinglePoint>(this, event, RemoveOption::Disable);
+            ContextMenu<DialogSinglePoint>(event, id, RemoveOption::Disable);
         }
     }
     catch(const VExceptionToolWasDeleted &e)

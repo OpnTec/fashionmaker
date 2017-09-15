@@ -285,6 +285,20 @@ void VToolPointFromArcAndTangent::ShowVisualization(bool show)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void VToolPointFromArcAndTangent::ShowContextMenu(QGraphicsSceneContextMenuEvent *event, quint32 id)
+{
+    try
+    {
+        ContextMenu<DialogPointFromArcAndTangent>(event, id);
+    }
+    catch(const VExceptionToolWasDeleted &e)
+    {
+        Q_UNUSED(e)
+        return;//Leave this method immediately!!!
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 void VToolPointFromArcAndTangent::RemoveReferens()
 {
     const auto arc = VAbstractTool::data.GetGObject(arcId);
@@ -292,20 +306,6 @@ void VToolPointFromArcAndTangent::RemoveReferens()
 
     doc->DecrementReferens(arc->getIdTool());
     doc->DecrementReferens(tP->getIdTool());
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void VToolPointFromArcAndTangent::contextMenuEvent(QGraphicsSceneContextMenuEvent *event)
-{
-    try
-    {
-        ContextMenu<DialogPointFromArcAndTangent>(this, event);
-    }
-    catch(const VExceptionToolWasDeleted &e)
-    {
-        Q_UNUSED(e)
-        return;//Leave this method immediately!!!
-    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------

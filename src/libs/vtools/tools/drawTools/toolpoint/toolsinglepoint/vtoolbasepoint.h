@@ -75,7 +75,6 @@ signals:
      */
     void         LiteUpdateTree();
 protected:
-    virtual void contextMenuEvent ( QGraphicsSceneContextMenuEvent * event ) Q_DECL_OVERRIDE;
     virtual void AddToFile() Q_DECL_OVERRIDE;
     virtual QVariant itemChange ( GraphicsItemChange change, const QVariant &value ) Q_DECL_OVERRIDE;
     virtual void DeleteTool(bool ask = true) Q_DECL_OVERRIDE;
@@ -87,6 +86,8 @@ protected:
     virtual void SaveOptions(QDomElement &tag, QSharedPointer<VGObject> &obj) Q_DECL_OVERRIDE;
     virtual void ReadToolAttributes(const QDomElement &domElement) Q_DECL_OVERRIDE;
     virtual void SetVisualization() Q_DECL_OVERRIDE {}
+private slots:
+    virtual void ShowContextMenu(QGraphicsSceneContextMenuEvent *event, quint32 id=NULL_ID) Q_DECL_OVERRIDE;
 private:
     Q_DISABLE_COPY(VToolBasePoint)
 

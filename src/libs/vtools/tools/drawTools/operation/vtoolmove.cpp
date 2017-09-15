@@ -285,6 +285,20 @@ void VToolMove::ShowVisualization(bool show)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void VToolMove::ShowContextMenu(QGraphicsSceneContextMenuEvent *event, quint32 id)
+{
+    try
+    {
+        ContextMenu<DialogMove>(event, id);
+    }
+    catch(const VExceptionToolWasDeleted &e)
+    {
+        Q_UNUSED(e)
+        return;//Leave this method immediately!!!
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 void VToolMove::SetVisualization()
 {
     if (not vis.isNull())
@@ -331,20 +345,6 @@ void VToolMove::SaveOptions(QDomElement &tag, QSharedPointer<VGObject> &obj)
     doc->SetAttribute(tag, AttrSuffix, suffix);
 
     SaveSourceDestination(tag);
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void VToolMove::contextMenuEvent(QGraphicsSceneContextMenuEvent *event)
-{
-    try
-    {
-        ContextMenu<DialogMove>(this, event);
-    }
-    catch(const VExceptionToolWasDeleted &e)
-    {
-        Q_UNUSED(e)
-        return;//Leave this method immediately!!!
-    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------

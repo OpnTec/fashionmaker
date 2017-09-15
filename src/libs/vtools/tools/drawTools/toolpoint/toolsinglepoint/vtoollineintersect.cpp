@@ -225,24 +225,6 @@ QString VToolLineIntersect::Line2P2Name() const
 
 //---------------------------------------------------------------------------------------------------------------------
 /**
- * @brief contextMenuEvent handle context menu events.
- * @param event context menu event.
- */
-void VToolLineIntersect::contextMenuEvent(QGraphicsSceneContextMenuEvent *event)
-{
-    try
-    {
-        ContextMenu<DialogLineIntersect>(this, event);
-    }
-    catch(const VExceptionToolWasDeleted &e)
-    {
-        Q_UNUSED(e)
-        return;//Leave this method immediately!!!
-    }
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-/**
  * @brief RemoveReferens decrement value of reference.
  */
 void VToolLineIntersect::RemoveReferens()
@@ -365,6 +347,20 @@ void VToolLineIntersect::SetP2Line2(const quint32 &value)
 void VToolLineIntersect::ShowVisualization(bool show)
 {
     ShowToolVisualization<VisToolLineIntersect>(show);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VToolLineIntersect::ShowContextMenu(QGraphicsSceneContextMenuEvent *event, quint32 id)
+{
+    try
+    {
+        ContextMenu<DialogLineIntersect>(event, id);
+    }
+    catch(const VExceptionToolWasDeleted &e)
+    {
+        Q_UNUSED(e)
+        return;//Leave this method immediately!!!
+    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------

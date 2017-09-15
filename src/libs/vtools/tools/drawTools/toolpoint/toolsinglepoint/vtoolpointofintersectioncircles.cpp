@@ -309,6 +309,20 @@ void VToolPointOfIntersectionCircles::ShowVisualization(bool show)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void VToolPointOfIntersectionCircles::ShowContextMenu(QGraphicsSceneContextMenuEvent *event, quint32 id)
+{
+    try
+    {
+        ContextMenu<DialogPointOfIntersectionCircles>(event, id);
+    }
+    catch(const VExceptionToolWasDeleted &e)
+    {
+        Q_UNUSED(e)
+        return;//Leave this method immediately!!!
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 void VToolPointOfIntersectionCircles::RemoveReferens()
 {
     const auto firstCircleCenter = VAbstractTool::data.GetGObject(firstCircleCenterId);
@@ -316,20 +330,6 @@ void VToolPointOfIntersectionCircles::RemoveReferens()
 
     doc->DecrementReferens(firstCircleCenter->getIdTool());
     doc->DecrementReferens(secondCircleCenter->getIdTool());
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void VToolPointOfIntersectionCircles::contextMenuEvent(QGraphicsSceneContextMenuEvent *event)
-{
-    try
-    {
-        ContextMenu<DialogPointOfIntersectionCircles>(this, event);
-    }
-    catch(const VExceptionToolWasDeleted &e)
-    {
-        Q_UNUSED(e)
-        return;//Leave this method immediately!!!
-    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------

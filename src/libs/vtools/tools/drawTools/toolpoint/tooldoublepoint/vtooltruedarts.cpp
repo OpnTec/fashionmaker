@@ -334,11 +334,11 @@ void VToolTrueDarts::SetDartP3Id(const quint32 &value)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VToolTrueDarts::contextMenuEvent(QGraphicsSceneContextMenuEvent *event)
+void VToolTrueDarts::ShowContextMenu(QGraphicsSceneContextMenuEvent *event, quint32 id)
 {
     try
     {
-        ContextMenu<DialogTrueDarts>(this, event);
+        ContextMenu<DialogTrueDarts>(event, id);
     }
     catch(const VExceptionToolWasDeleted &e)
     {

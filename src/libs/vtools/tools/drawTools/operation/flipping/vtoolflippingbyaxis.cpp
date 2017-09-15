@@ -168,6 +168,20 @@ void VToolFlippingByAxis::ShowVisualization(bool show)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void VToolFlippingByAxis::ShowContextMenu(QGraphicsSceneContextMenuEvent *event, quint32 id)
+{
+    try
+    {
+        ContextMenu<DialogFlippingByAxis>(event, id);
+    }
+    catch(const VExceptionToolWasDeleted &e)
+    {
+        Q_UNUSED(e)
+        return;//Leave this method immediately!!!
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 void VToolFlippingByAxis::SetVisualization()
 {
     if (not vis.isNull())
@@ -213,20 +227,6 @@ void VToolFlippingByAxis::SaveOptions(QDomElement &tag, QSharedPointer<VGObject>
     doc->SetAttribute(tag, AttrSuffix, suffix);
 
     SaveSourceDestination(tag);
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void VToolFlippingByAxis::contextMenuEvent(QGraphicsSceneContextMenuEvent *event)
-{
-    try
-    {
-        ContextMenu<DialogFlippingByAxis>(this, event);
-    }
-    catch(const VExceptionToolWasDeleted &e)
-    {
-        Q_UNUSED(e)
-        return;//Leave this method immediately!!!
-    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------

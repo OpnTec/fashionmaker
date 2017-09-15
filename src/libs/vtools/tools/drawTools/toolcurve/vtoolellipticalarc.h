@@ -84,9 +84,9 @@ public:
     void             SetFormulaRotationAngle(const VFormula &value);
 
     virtual void     ShowVisualization(bool show) Q_DECL_OVERRIDE;
-
+protected slots:
+    virtual void ShowContextMenu(QGraphicsSceneContextMenuEvent *event, quint32 id=NULL_ID) Q_DECL_OVERRIDE;
 protected:
-    virtual void    contextMenuEvent ( QGraphicsSceneContextMenuEvent * event ) Q_DECL_OVERRIDE;
     virtual void    RemoveReferens() Q_DECL_OVERRIDE;
     virtual void    SaveDialog(QDomElement &domElement) Q_DECL_OVERRIDE;
     virtual void    SaveOptions(QDomElement &tag, QSharedPointer<VGObject> &obj) Q_DECL_OVERRIDE;

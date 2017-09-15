@@ -256,21 +256,27 @@ void VToolLine::AllowSelecting(bool enabled)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-/**
- * @brief contextMenuEvent handle context menu events.
- * @param event context menu event.
- */
-void VToolLine::contextMenuEvent(QGraphicsSceneContextMenuEvent *event)
+void VToolLine::ShowContextMenu(QGraphicsSceneContextMenuEvent *event, quint32 id)
 {
     try
     {
-        ContextMenu<DialogLine>(this, event);
+        ContextMenu<DialogLine>(event, id);
     }
     catch(const VExceptionToolWasDeleted &e)
     {
         Q_UNUSED(e)
         return;//Leave this method immediately!!!
     }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief contextMenuEvent handle context menu events.
+ * @param event context menu event.
+ */
+void VToolLine::contextMenuEvent(QGraphicsSceneContextMenuEvent *event)
+{
+    ShowContextMenu(event);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

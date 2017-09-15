@@ -288,24 +288,6 @@ void VToolSpline::EnableToolMove(bool move)
 
 //---------------------------------------------------------------------------------------------------------------------
 /**
- * @brief contextMenuEvent handle context menu events.
- * @param event context menu event.
- */
-void VToolSpline::contextMenuEvent(QGraphicsSceneContextMenuEvent *event)
-{
-    try
-    {
-        ContextMenu<DialogSpline>(this, event);
-    }
-    catch(const VExceptionToolWasDeleted &e)
-    {
-        Q_UNUSED(e)
-        return;//Leave this method immediately!!!
-    }
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-/**
  * @brief RemoveReferens decrement value of reference.
  */
 void VToolSpline::RemoveReferens()
@@ -563,6 +545,20 @@ void VToolSpline::RefreshCtrlPoints()
     foreach (auto *point, controlPoints)
     {
         point->setFlag(QGraphicsItem::ItemSendsGeometryChanges, true);
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VToolSpline::ShowContextMenu(QGraphicsSceneContextMenuEvent *event, quint32 id)
+{
+    try
+    {
+        ContextMenu<DialogSpline>(event, id);
+    }
+    catch(const VExceptionToolWasDeleted &e)
+    {
+        Q_UNUSED(e)
+        return;//Leave this method immediately!!!
     }
 }
 

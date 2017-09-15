@@ -85,11 +85,12 @@ public:
     virtual void   ShowVisualization(bool show) Q_DECL_OVERRIDE;
 protected:
     virtual void   RemoveReferens() Q_DECL_OVERRIDE;
-    virtual void   contextMenuEvent ( QGraphicsSceneContextMenuEvent * event ) Q_DECL_OVERRIDE;
     virtual void   SaveDialog(QDomElement &domElement) Q_DECL_OVERRIDE;
     virtual void   SaveOptions(QDomElement &tag, QSharedPointer<VGObject> &obj) Q_DECL_OVERRIDE;
     virtual void   ReadToolAttributes(const QDomElement &domElement) Q_DECL_OVERRIDE;
     virtual void   SetVisualization() Q_DECL_OVERRIDE;
+private slots:
+    virtual void ShowContextMenu(QGraphicsSceneContextMenuEvent *event, quint32 id=NULL_ID) Q_DECL_OVERRIDE;
 private:
     Q_DISABLE_COPY(VToolTriangle)
     /** @brief axisP1Id id first axis point. */

@@ -316,6 +316,12 @@ void VAbstractSpline::RefreshCtrlPoints()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void VAbstractSpline::contextMenuEvent(QGraphicsSceneContextMenuEvent *event)
+{
+    ShowContextMenu(event);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 VSpline VAbstractSpline::CorrectedSpline(const VSpline &spline, const SplinePointPosition &position,
                                          const QPointF &pos) const
 {

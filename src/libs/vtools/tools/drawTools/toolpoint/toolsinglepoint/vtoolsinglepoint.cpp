@@ -271,7 +271,7 @@ void VToolSinglePoint::keyReleaseEvent(QKeyEvent *event)
 //---------------------------------------------------------------------------------------------------------------------
 void VToolSinglePoint::contextMenuEvent(QGraphicsSceneContextMenuEvent *event)
 {
-    Q_UNUSED(event)
+    ShowContextMenu(event, id);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

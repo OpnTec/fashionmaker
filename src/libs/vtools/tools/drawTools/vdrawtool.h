@@ -76,6 +76,8 @@ public slots:
     virtual void EnableToolMove(bool move);
     virtual void Disable(bool disable, const QString &namePP)=0;
     virtual void DetailsMode(bool mode);
+protected slots:
+    virtual void ShowContextMenu(QGraphicsSceneContextMenuEvent *event, quint32 id=NULL_ID)=0;
 protected:
 
     enum class RemoveOption : bool {Disable = false, Enable = true};
@@ -102,8 +104,8 @@ protected:
     void         ReadAttributes();
     virtual void ReadToolAttributes(const QDomElement &domElement)=0;
 
-    template <typename Dialog, typename Tool>
-    void ContextMenu(Tool *tool, QGraphicsSceneContextMenuEvent *event,
+    template <typename Dialog>
+    void ContextMenu(QGraphicsSceneContextMenuEvent *event, quint32 itemId,
                      const RemoveOption &showRemove = RemoveOption::Enable,
                      const Referens &ref = Referens::Follow);
 
@@ -120,18 +122,18 @@ private:
 };
 
 //---------------------------------------------------------------------------------------------------------------------
-template <typename Dialog, typename Tool>
+template <typename Dialog>
 /**
  * @brief ContextMenu show context menu for tool.
- * @param tool tool.
  * @param event context menu event.
+ * @param itemId id of point. 0 if not a point
  * @param showRemove true - tool enable option delete.
  * @param ref true - do not ignore referens value.
  */
-void VDrawTool::ContextMenu(Tool *tool, QGraphicsSceneContextMenuEvent *event, const RemoveOption &showRemove,
+void VDrawTool::ContextMenu(QGraphicsSceneContextMenuEvent *event, quint32 itemId, const RemoveOption &showRemove,
                             const Referens &ref)
 {
-    SCASSERT(tool != nullptr)
+    Q_UNUSED(itemId)
     SCASSERT(event != nullptr)
 
     if (m_suppressContextMenu)
@@ -178,10 +180,10 @@ void VDrawTool::ContextMenu(Tool *tool, QGraphicsSceneContextMenuEvent *event, c
         m_dialog = QSharedPointer<Dialog>(new Dialog(getData(), id, qApp->getMainWindow()));
         m_dialog->setModal(true);
 
-        connect(m_dialog.data(), &DialogTool::DialogClosed, tool, &Tool::FullUpdateFromGuiOk);
-        connect(m_dialog.data(), &DialogTool::DialogApplied, tool, &Tool::FullUpdateFromGuiApply);
+        connect(m_dialog.data(), &DialogTool::DialogClosed, this, &VDrawTool::FullUpdateFromGuiOk);
+        connect(m_dialog.data(), &DialogTool::DialogApplied, this, &VDrawTool::FullUpdateFromGuiApply);
 
-        tool->setDialog();
+        this->setDialog();
 
         m_dialog->show();
     }

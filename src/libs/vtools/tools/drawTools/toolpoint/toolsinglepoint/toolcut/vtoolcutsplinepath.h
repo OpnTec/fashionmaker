@@ -69,8 +69,9 @@ public:
                                                     const QSharedPointer<VAbstractCubicBezierPath> &splPath,
                                                     const QString &pName, VSplinePath **splPath1,
                                                     VSplinePath **splPath2);
+protected slots:
+    virtual void ShowContextMenu(QGraphicsSceneContextMenuEvent *event, quint32 id=NULL_ID) Q_DECL_OVERRIDE;
 protected:
-    virtual void    contextMenuEvent ( QGraphicsSceneContextMenuEvent * event ) Q_DECL_OVERRIDE;
     virtual void    SaveDialog(QDomElement &domElement) Q_DECL_OVERRIDE;
     virtual void    SaveOptions(QDomElement &tag, QSharedPointer<VGObject> &obj) Q_DECL_OVERRIDE;
     virtual void    ReadToolAttributes(const QDomElement &domElement) Q_DECL_OVERRIDE;

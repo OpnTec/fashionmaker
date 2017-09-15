@@ -286,6 +286,20 @@ void VToolRotation::ShowVisualization(bool show)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void VToolRotation::ShowContextMenu(QGraphicsSceneContextMenuEvent *event, quint32 id)
+{
+    try
+    {
+        ContextMenu<DialogRotation>(event, id);
+    }
+    catch(const VExceptionToolWasDeleted &e)
+    {
+        Q_UNUSED(e)
+        return;//Leave this method immediately!!!
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 void VToolRotation::SetVisualization()
 {
     if (not vis.isNull())
@@ -331,20 +345,6 @@ void VToolRotation::SaveOptions(QDomElement &tag, QSharedPointer<VGObject> &obj)
     doc->SetAttribute(tag, AttrSuffix, suffix);
 
     SaveSourceDestination(tag);
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void VToolRotation::contextMenuEvent(QGraphicsSceneContextMenuEvent *event)
-{
-    try
-    {
-        ContextMenu<DialogRotation>(this, event);
-    }
-    catch(const VExceptionToolWasDeleted &e)
-    {
-        Q_UNUSED(e)
-        return;//Leave this method immediately!!!
-    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------

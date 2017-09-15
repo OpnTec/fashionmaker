@@ -262,11 +262,11 @@ void VToolCurveIntersectAxis::ShowVisualization(bool show)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VToolCurveIntersectAxis::contextMenuEvent(QGraphicsSceneContextMenuEvent *event)
+void VToolCurveIntersectAxis::ShowContextMenu(QGraphicsSceneContextMenuEvent *event, quint32 id)
 {
     try
     {
-        ContextMenu<DialogCurveIntersectAxis>(this, event);
+        ContextMenu<DialogCurveIntersectAxis>(event, id);
     }
     catch(const VExceptionToolWasDeleted &e)
     {

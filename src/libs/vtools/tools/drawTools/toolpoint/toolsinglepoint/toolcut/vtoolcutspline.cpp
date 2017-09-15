@@ -188,15 +188,11 @@ void VToolCutSpline::ShowVisualization(bool show)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-/**
- * @brief contextMenuEvent handle context menu events.
- * @param event context menu event.
- */
-void VToolCutSpline::contextMenuEvent(QGraphicsSceneContextMenuEvent *event)
+void VToolCutSpline::ShowContextMenu(QGraphicsSceneContextMenuEvent *event, quint32 id)
 {
     try
     {
-        ContextMenu<DialogCutSpline>(this, event);
+        ContextMenu<DialogCutSpline>(event, id);
     }
     catch(const VExceptionToolWasDeleted &e)
     {

@@ -312,7 +312,7 @@ void VToolDoublePoint::keyReleaseEvent(QKeyEvent *event)
 //---------------------------------------------------------------------------------------------------------------------
 void VToolDoublePoint::contextMenuEvent(QGraphicsSceneContextMenuEvent *event)
 {
-    Q_UNUSED(event)
+    ShowContextMenu(event);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

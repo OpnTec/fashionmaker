@@ -276,11 +276,11 @@ void VToolArcWithLength::ShowVisualization(bool show)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VToolArcWithLength::contextMenuEvent(QGraphicsSceneContextMenuEvent *event)
+void VToolArcWithLength::ShowContextMenu(QGraphicsSceneContextMenuEvent *event, quint32 id)
 {
     try
     {
-        ContextMenu<DialogArcWithLength>(this, event);
+        ContextMenu<DialogArcWithLength>(event, id);
     }
     catch(const VExceptionToolWasDeleted &e)
     {

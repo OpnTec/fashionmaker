@@ -89,6 +89,8 @@ public slots:
     virtual void     Disable(bool disable, const QString &namePP) Q_DECL_OVERRIDE;
     virtual void     AllowHover(bool enabled) Q_DECL_OVERRIDE;
     virtual void     AllowSelecting(bool enabled) Q_DECL_OVERRIDE;
+protected slots:
+    virtual void ShowContextMenu(QGraphicsSceneContextMenuEvent *event, quint32 id=NULL_ID) Q_DECL_OVERRIDE;
 protected:
     virtual void     contextMenuEvent ( QGraphicsSceneContextMenuEvent * event ) Q_DECL_OVERRIDE;
     virtual void     AddToFile() Q_DECL_OVERRIDE;

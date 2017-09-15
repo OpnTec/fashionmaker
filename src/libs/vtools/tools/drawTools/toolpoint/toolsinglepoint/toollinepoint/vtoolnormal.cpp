@@ -219,24 +219,6 @@ QString VToolNormal::SecondPointName() const
 
 //---------------------------------------------------------------------------------------------------------------------
 /**
- * @brief contextMenuEvent handle context menu events.
- * @param event context menu event.
- */
-void VToolNormal::contextMenuEvent(QGraphicsSceneContextMenuEvent *event)
-{
-    try
-    {
-        ContextMenu<DialogNormal>(this, event);
-    }
-    catch(const VExceptionToolWasDeleted &e)
-    {
-        Q_UNUSED(e)
-        return;//Leave this method immediately!!!
-    }
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-/**
  * @brief RemoveReferens decrement value of reference.
  */
 void VToolNormal::RemoveReferens()
@@ -326,4 +308,18 @@ void VToolNormal::SetSecondPointId(const quint32 &value)
 void VToolNormal::ShowVisualization(bool show)
 {
     ShowToolVisualization<VisToolNormal>(show);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VToolNormal::ShowContextMenu(QGraphicsSceneContextMenuEvent *event, quint32 id)
+{
+    try
+    {
+        ContextMenu<DialogNormal>(event, id);
+    }
+    catch(const VExceptionToolWasDeleted &e)
+    {
+        Q_UNUSED(e)
+        return;//Leave this method immediately!!!
+    }
 }

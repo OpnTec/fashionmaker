@@ -197,24 +197,6 @@ void VToolPointOfIntersection::RemoveReferens()
 
 //---------------------------------------------------------------------------------------------------------------------
 /**
- * @brief contextMenuEvent handle context menu events.
- * @param event context menu event.
- */
-void VToolPointOfIntersection::contextMenuEvent(QGraphicsSceneContextMenuEvent *event)
-{
-    try
-    {
-        ContextMenu<DialogPointOfIntersection>(this, event);
-    }
-    catch(const VExceptionToolWasDeleted &e)
-    {
-        Q_UNUSED(e)
-        return;//Leave this method immediately!!!
-    }
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-/**
  * @brief SaveDialog save options into file after change in dialog.
  */
 void VToolPointOfIntersection::SaveDialog(QDomElement &domElement)
@@ -255,6 +237,20 @@ void VToolPointOfIntersection::SetVisualization()
         visual->setObject1Id(firstPointId);
         visual->setPoint2Id(secondPointId);
         visual->RefreshGeometry();
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VToolPointOfIntersection::ShowContextMenu(QGraphicsSceneContextMenuEvent *event, quint32 id)
+{
+    try
+    {
+        ContextMenu<DialogPointOfIntersection>(event, id);
+    }
+    catch(const VExceptionToolWasDeleted &e)
+    {
+        Q_UNUSED(e)
+        return;//Leave this method immediately!!!
     }
 }
 

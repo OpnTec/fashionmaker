@@ -264,11 +264,11 @@ void VToolLineIntersectAxis::ShowVisualization(bool show)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VToolLineIntersectAxis::contextMenuEvent(QGraphicsSceneContextMenuEvent *event)
+void VToolLineIntersectAxis::ShowContextMenu(QGraphicsSceneContextMenuEvent *event, quint32 id)
 {
     try
     {
-        ContextMenu<DialogLineIntersectAxis>(this, event);
+        ContextMenu<DialogLineIntersectAxis>(event, id);
     }
     catch(const VExceptionToolWasDeleted &e)
     {

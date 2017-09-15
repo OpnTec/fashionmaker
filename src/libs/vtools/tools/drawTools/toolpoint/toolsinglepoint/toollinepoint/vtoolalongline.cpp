@@ -82,25 +82,6 @@ VToolAlongLine::VToolAlongLine(VAbstractPattern *doc, VContainer *data, quint32 
 
 //---------------------------------------------------------------------------------------------------------------------
 /**
- * @brief contextMenuEvent handle context menu events. handle context menu event.
- * @param event context menu event.
- */
-//cppcheck-suppress unusedFunction
-void VToolAlongLine::contextMenuEvent(QGraphicsSceneContextMenuEvent *event)
-{
-    try
-    {
-        ContextMenu<DialogAlongLine>(this, event);
-    }
-    catch(const VExceptionToolWasDeleted &e)
-    {
-        Q_UNUSED(e)
-        return;//Leave this method immediately!!!
-    }
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-/**
  * @brief RemoveReferens decrement value of reference.
  */
 void VToolAlongLine::RemoveReferens()
@@ -212,6 +193,20 @@ void VToolAlongLine::SetSecondPointId(const quint32 &value)
 void VToolAlongLine::ShowVisualization(bool show)
 {
     ShowToolVisualization<VisToolAlongLine>(show);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VToolAlongLine::ShowContextMenu(QGraphicsSceneContextMenuEvent *event, quint32 id)
+{
+    try
+    {
+        ContextMenu<DialogAlongLine>(event, id);
+    }
+    catch(const VExceptionToolWasDeleted &e)
+    {
+        Q_UNUSED(e)
+        return;//Leave this method immediately!!!
+    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------

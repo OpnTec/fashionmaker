@@ -376,15 +376,11 @@ void VToolEllipticalArc::ShowVisualization(bool show)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-/**
- * @brief contextMenuEvent handle context menu events.
- * @param event context menu event.
- */
-void VToolEllipticalArc::contextMenuEvent(QGraphicsSceneContextMenuEvent *event)
+void VToolEllipticalArc::ShowContextMenu(QGraphicsSceneContextMenuEvent *event, quint32 id)
 {
     try
     {
-        ContextMenu<DialogEllipticalArc>(this, event);
+        ContextMenu<DialogEllipticalArc>(event, id);
     }
     catch(const VExceptionToolWasDeleted &e)
     {

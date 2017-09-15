@@ -270,6 +270,20 @@ void VToolPointFromCircleAndTangent::ShowVisualization(bool show)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void VToolPointFromCircleAndTangent::ShowContextMenu(QGraphicsSceneContextMenuEvent *event, quint32 id)
+{
+    try
+    {
+        ContextMenu<DialogPointFromCircleAndTangent>(event, id);
+    }
+    catch(const VExceptionToolWasDeleted &e)
+    {
+        Q_UNUSED(e)
+        return;//Leave this method immediately!!!
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 void VToolPointFromCircleAndTangent::RemoveReferens()
 {
     const auto circleCenter = VAbstractTool::data.GetGObject(circleCenterId);
@@ -277,20 +291,6 @@ void VToolPointFromCircleAndTangent::RemoveReferens()
 
     doc->DecrementReferens(circleCenter->getIdTool());
     doc->DecrementReferens(tangentPoint->getIdTool());
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void VToolPointFromCircleAndTangent::contextMenuEvent(QGraphicsSceneContextMenuEvent *event)
-{
-    try
-    {
-        ContextMenu<DialogPointFromCircleAndTangent>(this, event);
-    }
-    catch(const VExceptionToolWasDeleted &e)
-    {
-        Q_UNUSED(e)
-        return;//Leave this method immediately!!!
-    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------

@@ -215,24 +215,6 @@ QString VToolHeight::SecondLinePointName() const
 
 //---------------------------------------------------------------------------------------------------------------------
 /**
- * @brief contextMenuEvent handle context menu events.
- * @param event context menu event.
- */
-void VToolHeight::contextMenuEvent(QGraphicsSceneContextMenuEvent *event)
-{
-    try
-    {
-        ContextMenu<DialogHeight>(this, event);
-    }
-    catch(const VExceptionToolWasDeleted &e)
-    {
-        Q_UNUSED(e)
-        return;//Leave this method immediately!!!
-    }
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-/**
  * @brief SaveDialog save options into file after change in dialog.
  */
 void VToolHeight::SaveDialog(QDomElement &domElement)
@@ -337,6 +319,20 @@ void VToolHeight::SetP2LineId(const quint32 &value)
 void VToolHeight::ShowVisualization(bool show)
 {
     ShowToolVisualization<VisToolHeight>(show);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VToolHeight::ShowContextMenu(QGraphicsSceneContextMenuEvent *event, quint32 id)
+{
+    try
+    {
+        ContextMenu<DialogHeight>(event, id);
+    }
+    catch(const VExceptionToolWasDeleted &e)
+    {
+        Q_UNUSED(e)
+        return;//Leave this method immediately!!!
+    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------

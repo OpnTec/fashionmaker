@@ -189,11 +189,11 @@ void VToolCubicBezier::ShowVisualization(bool show)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VToolCubicBezier::contextMenuEvent(QGraphicsSceneContextMenuEvent *event)
+void VToolCubicBezier::ShowContextMenu(QGraphicsSceneContextMenuEvent *event, quint32 id)
 {
     try
     {
-        ContextMenu<DialogCubicBezier>(this, event);
+        ContextMenu<DialogCubicBezier>(event, id);
     }
     catch(const VExceptionToolWasDeleted &e)
     {

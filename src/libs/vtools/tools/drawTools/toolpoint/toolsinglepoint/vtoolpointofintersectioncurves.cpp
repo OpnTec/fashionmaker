@@ -347,6 +347,20 @@ void VToolPointOfIntersectionCurves::ShowVisualization(bool show)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void VToolPointOfIntersectionCurves::ShowContextMenu(QGraphicsSceneContextMenuEvent *event, quint32 id)
+{
+    try
+    {
+        ContextMenu<DialogPointOfIntersectionCurves>(event, id);
+    }
+    catch(const VExceptionToolWasDeleted &e)
+    {
+        Q_UNUSED(e)
+        return;//Leave this method immediately!!!
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 void VToolPointOfIntersectionCurves::RemoveReferens()
 {
     const auto curve1 = VAbstractTool::data.GetGObject(firstCurveId);
@@ -354,20 +368,6 @@ void VToolPointOfIntersectionCurves::RemoveReferens()
 
     doc->DecrementReferens(curve1->getIdTool());
     doc->DecrementReferens(curve2->getIdTool());
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void VToolPointOfIntersectionCurves::contextMenuEvent(QGraphicsSceneContextMenuEvent *event)
-{
-    try
-    {
-        ContextMenu<DialogPointOfIntersectionCurves>(this, event);
-    }
-    catch(const VExceptionToolWasDeleted &e)
-    {
-        Q_UNUSED(e)
-        return;//Leave this method immediately!!!
-    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------

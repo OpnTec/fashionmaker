@@ -275,15 +275,11 @@ VPointF *VToolCutSplinePath::CutSplinePath(qreal length, const QSharedPointer<VA
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-/**
- * @brief contextMenuEvent handle context menu events.
- * @param event context menu event.
- */
-void VToolCutSplinePath::contextMenuEvent(QGraphicsSceneContextMenuEvent *event)
+void VToolCutSplinePath::ShowContextMenu(QGraphicsSceneContextMenuEvent *event, quint32 id)
 {
     try
     {
-        ContextMenu<DialogCutSplinePath>(this, event);
+        ContextMenu<DialogCutSplinePath>(event, id);
     }
     catch(const VExceptionToolWasDeleted &e)
     {

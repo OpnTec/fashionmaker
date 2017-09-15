@@ -154,6 +154,20 @@ void VToolFlippingByLine::ShowVisualization(bool show)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void VToolFlippingByLine::ShowContextMenu(QGraphicsSceneContextMenuEvent *event, quint32 id)
+{
+    try
+    {
+        ContextMenu<DialogFlippingByLine>(event, id);
+    }
+    catch(const VExceptionToolWasDeleted &e)
+    {
+        Q_UNUSED(e)
+        return;//Leave this method immediately!!!
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 void VToolFlippingByLine::SetVisualization()
 {
     if (not vis.isNull())
@@ -199,20 +213,6 @@ void VToolFlippingByLine::SaveOptions(QDomElement &tag, QSharedPointer<VGObject>
     doc->SetAttribute(tag, AttrSuffix, suffix);
 
     SaveSourceDestination(tag);
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void VToolFlippingByLine::contextMenuEvent(QGraphicsSceneContextMenuEvent *event)
-{
-    try
-    {
-        ContextMenu<DialogFlippingByLine>(this, event);
-    }
-    catch(const VExceptionToolWasDeleted &e)
-    {
-        Q_UNUSED(e)
-        return;//Leave this method immediately!!!
-    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------

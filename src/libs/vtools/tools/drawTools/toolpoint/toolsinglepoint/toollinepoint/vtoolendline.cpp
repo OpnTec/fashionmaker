@@ -191,24 +191,6 @@ VToolEndLine* VToolEndLine::Create(const quint32 _id, const QString &pointName, 
 
 //---------------------------------------------------------------------------------------------------------------------
 /**
- * @brief contextMenuEvent handle context menu events.
- * @param event context menu event.
- */
-void VToolEndLine::contextMenuEvent(QGraphicsSceneContextMenuEvent *event)
-{
-    try
-    {
-        ContextMenu<DialogEndLine>(this, event);
-    }
-    catch(const VExceptionToolWasDeleted &e)
-    {
-        Q_UNUSED(e)
-        return;//Leave this method immediately!!!
-    }
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-/**
  * @brief SaveDialog save options into file after change in dialog.
  */
 void VToolEndLine::SaveDialog(QDomElement &domElement)
@@ -287,4 +269,18 @@ void VToolEndLine::SetFormulaAngle(const VFormula &value)
 void VToolEndLine::ShowVisualization(bool show)
 {
     ShowToolVisualization<VisToolEndLine>(show);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VToolEndLine::ShowContextMenu(QGraphicsSceneContextMenuEvent *event, quint32 id)
+{
+    try
+    {
+        ContextMenu<DialogEndLine>(event, id);
+    }
+    catch(const VExceptionToolWasDeleted &e)
+    {
+        Q_UNUSED(e)
+        return;//Leave this method immediately!!!
+    }
 }

@@ -275,24 +275,6 @@ void VToolTriangle::RemoveReferens()
 
 //---------------------------------------------------------------------------------------------------------------------
 /**
- * @brief contextMenuEvent handle context menu events.
- * @param event context menu event.
- */
-void VToolTriangle::contextMenuEvent(QGraphicsSceneContextMenuEvent *event)
-{
-    try
-    {
-        ContextMenu<DialogTriangle>(this, event);
-    }
-    catch(const VExceptionToolWasDeleted &e)
-    {
-        Q_UNUSED(e)
-        return;//Leave this method immediately!!!
-    }
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-/**
  * @brief SaveDialog save options into file after change in dialog.
  */
 void VToolTriangle::SaveDialog(QDomElement &domElement)
@@ -341,6 +323,20 @@ void VToolTriangle::SetVisualization()
         visual->setHypotenuseP1Id(firstPointId);
         visual->setHypotenuseP2Id(secondPointId);
         visual->RefreshGeometry();
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VToolTriangle::ShowContextMenu(QGraphicsSceneContextMenuEvent *event, quint32 id)
+{
+    try
+    {
+        ContextMenu<DialogTriangle>(event, id);
+    }
+    catch(const VExceptionToolWasDeleted &e)
+    {
+        Q_UNUSED(e)
+        return;//Leave this method immediately!!!
     }
 }
 

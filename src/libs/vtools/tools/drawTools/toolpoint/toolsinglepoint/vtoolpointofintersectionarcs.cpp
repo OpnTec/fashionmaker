@@ -292,6 +292,20 @@ void VToolPointOfIntersectionArcs::ShowVisualization(bool show)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void VToolPointOfIntersectionArcs::ShowContextMenu(QGraphicsSceneContextMenuEvent *event, quint32 id)
+{
+    try
+    {
+        ContextMenu<DialogPointOfIntersectionArcs>(event, id);
+    }
+    catch(const VExceptionToolWasDeleted &e)
+    {
+        Q_UNUSED(e)
+        return;//Leave this method immediately!!!
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 void VToolPointOfIntersectionArcs::RemoveReferens()
 {
     const auto firstArc = VAbstractTool::data.GetGObject(firstArcId);
@@ -299,20 +313,6 @@ void VToolPointOfIntersectionArcs::RemoveReferens()
 
     doc->DecrementReferens(firstArc->getIdTool());
     doc->DecrementReferens(secondArc->getIdTool());
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void VToolPointOfIntersectionArcs::contextMenuEvent(QGraphicsSceneContextMenuEvent *event)
-{
-    try
-    {
-        ContextMenu<DialogPointOfIntersectionArcs>(this, event);
-    }
-    catch(const VExceptionToolWasDeleted &e)
-    {
-        Q_UNUSED(e)
-        return;//Leave this method immediately!!!
-    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------

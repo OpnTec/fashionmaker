@@ -243,24 +243,6 @@ QString VToolBisector::ThirdPointName() const
 
 //---------------------------------------------------------------------------------------------------------------------
 /**
- * @brief contextMenuEvent handle context menu events.
- * @param event context menu event.
- */
-void VToolBisector::contextMenuEvent(QGraphicsSceneContextMenuEvent *event)
-{
-    try
-    {
-        ContextMenu<DialogBisector>(this, event);
-    }
-    catch(const VExceptionToolWasDeleted &e)
-    {
-        Q_UNUSED(e)
-        return;//Leave this method immediately!!!
-    }
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-/**
  * @brief RemoveReferens decrement value of reference.
  */
 void VToolBisector::RemoveReferens()
@@ -353,6 +335,20 @@ void VToolBisector::SetThirdPointId(const quint32 &value)
 void VToolBisector::ShowVisualization(bool show)
 {
     ShowToolVisualization<VisToolBisector>(show);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VToolBisector::ShowContextMenu(QGraphicsSceneContextMenuEvent *event, quint32 id)
+{
+    try
+    {
+        ContextMenu<DialogBisector>(event, id);
+    }
+    catch(const VExceptionToolWasDeleted &e)
+    {
+        Q_UNUSED(e)
+        return;//Leave this method immediately!!!
+    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------

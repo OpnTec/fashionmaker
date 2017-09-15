@@ -271,24 +271,6 @@ QString VToolPointOfContact::SecondPointName() const
 
 //---------------------------------------------------------------------------------------------------------------------
 /**
- * @brief contextMenuEvent handle context menu events.
- * @param event context menu event.
- */
-void VToolPointOfContact::contextMenuEvent(QGraphicsSceneContextMenuEvent *event)
-{
-    try
-    {
-        ContextMenu<DialogPointOfContact>(this, event);
-    }
-    catch(const VExceptionToolWasDeleted &e)
-    {
-        Q_UNUSED(e)
-        return;//Leave this method immediately!!!
-    }
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-/**
  * @brief RemoveReferens decrement value of reference.
  */
 void VToolPointOfContact::RemoveReferens()
@@ -401,6 +383,20 @@ void VToolPointOfContact::SetSecondPointId(const quint32 &value)
 void VToolPointOfContact::ShowVisualization(bool show)
 {
     ShowToolVisualization<VisToolPointOfContact>(show);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VToolPointOfContact::ShowContextMenu(QGraphicsSceneContextMenuEvent *event, quint32 id)
+{
+    try
+    {
+        ContextMenu<DialogPointOfContact>(event, id);
+    }
+    catch(const VExceptionToolWasDeleted &e)
+    {
+        Q_UNUSED(e)
+        return;//Leave this method immediately!!!
+    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------

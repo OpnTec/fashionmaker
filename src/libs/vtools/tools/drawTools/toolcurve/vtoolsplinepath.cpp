@@ -282,6 +282,20 @@ void VToolSplinePath::EnableToolMove(bool move)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void VToolSplinePath::ShowContextMenu(QGraphicsSceneContextMenuEvent *event, quint32 id)
+{
+    try
+    {
+        ContextMenu<DialogSplinePath>(event, id);
+    }
+    catch(const VExceptionToolWasDeleted &e)
+    {
+        Q_UNUSED(e)
+        return;//Leave this method immediately!!!
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 /**
  * @brief UpdateControlPoints update position points control points in file.
  * @param spl spline what was changed.
@@ -362,24 +376,6 @@ void VToolSplinePath::setSplinePath(const VSplinePath &splPath)
 void VToolSplinePath::ShowVisualization(bool show)
 {
     ShowToolVisualization<VisToolSplinePath>(show);
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-/**
- * @brief contextMenuEvent handle context menu events.
- * @param event context menu event.
- */
-void VToolSplinePath::contextMenuEvent(QGraphicsSceneContextMenuEvent *event)
-{
-    try
-    {
-        ContextMenu<DialogSplinePath>(this, event);
-    }
-    catch(const VExceptionToolWasDeleted &e)
-    {
-        Q_UNUSED(e)
-        return;//Leave this method immediately!!!
-    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------

@@ -310,15 +310,11 @@ void VToolArc::ShowVisualization(bool show)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-/**
- * @brief contextMenuEvent handle context menu events.
- * @param event context menu event.
- */
-void VToolArc::contextMenuEvent(QGraphicsSceneContextMenuEvent *event)
+void VToolArc::ShowContextMenu(QGraphicsSceneContextMenuEvent *event, quint32 id)
 {
     try
     {
-        ContextMenu<DialogArc>(this, event);
+        ContextMenu<DialogArc>(event, id);
     }
     catch(const VExceptionToolWasDeleted &e)
     {

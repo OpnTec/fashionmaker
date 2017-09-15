@@ -261,24 +261,6 @@ QString VToolShoulderPoint::ShoulderPointName() const
 
 //---------------------------------------------------------------------------------------------------------------------
 /**
- * @brief contextMenuEvent handle context menu events.
- * @param event context menu event.
- */
-void VToolShoulderPoint::contextMenuEvent(QGraphicsSceneContextMenuEvent *event)
-{
-    try
-    {
-        ContextMenu<DialogShoulderPoint>(this, event);
-    }
-    catch(const VExceptionToolWasDeleted &e)
-    {
-        Q_UNUSED(e)
-        return;//Leave this method immediately!!!
-    }
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-/**
  * @brief RemoveReferens decrement value of reference.
  */
 void VToolShoulderPoint::RemoveReferens()
@@ -372,6 +354,20 @@ QString VToolShoulderPoint::MakeToolTip() const
             .arg(QString("%1->%2").arg(second->name(), current->name()))
             .arg(qApp->fromPixel(secondToCur.length()));
     return toolTip;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VToolShoulderPoint::ShowContextMenu(QGraphicsSceneContextMenuEvent *event, quint32 id)
+{
+    try
+    {
+        ContextMenu<DialogShoulderPoint>(event, id);
+    }
+    catch(const VExceptionToolWasDeleted &e)
+    {
+        Q_UNUSED(e)
+        return;//Leave this method immediately!!!
+    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
