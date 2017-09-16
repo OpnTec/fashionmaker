@@ -82,6 +82,9 @@ public:
     qreal   y() const;
     void    setY(const qreal &value);
 
+    bool IsShowLabel() const;
+    void SetHideLabel(bool hide);
+
     static QPointF RotatePF(const QPointF &originPoint, const QPointF &point, qreal degrees);
     static QPointF FlipPF(const QLineF &axis, const QPointF &point);
     static QPointF MovePF(const QPointF &originPoint, qreal length, qreal angle);

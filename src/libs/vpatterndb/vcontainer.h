@@ -239,6 +239,11 @@ Q_DECLARE_TYPEINFO(VContainer, Q_MOVABLE_TYPE);
 template <typename T>
 const QSharedPointer<T> VContainer::GeometricObject(const quint32 &id) const
 {
+    if (id == NULL_ID)
+    {
+        throw VExceptionBadId(tr("Can't find object"), id);
+    }
+
     QSharedPointer<VGObject> gObj = QSharedPointer<VGObject>();
     if (d->gObjects.contains(id))
     {

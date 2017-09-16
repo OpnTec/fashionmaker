@@ -49,6 +49,7 @@
 #include "../vwidgets/vmaingraphicsscene.h"
 #include "../vwidgets/vmaingraphicsview.h"
 #include "../vdatatool.h"
+#include "../vgeometry/vpointf.h"
 
 template <class T> class QSharedPointer;
 
@@ -133,7 +134,6 @@ template <typename Dialog>
 void VDrawTool::ContextMenu(QGraphicsSceneContextMenuEvent *event, quint32 itemId, const RemoveOption &showRemove,
                             const Referens &ref)
 {
-    Q_UNUSED(itemId)
     SCASSERT(event != nullptr)
 
     if (m_suppressContextMenu)
@@ -144,6 +144,20 @@ void VDrawTool::ContextMenu(QGraphicsSceneContextMenuEvent *event, quint32 itemI
     qCDebug(vTool, "Creating tool context menu.");
     QMenu menu;
     QAction *actionOption = menu.addAction(QIcon::fromTheme("preferences-other"), tr("Options"));
+
+    QAction *actionShowLabel = menu.addAction(tr("Show label"));
+    actionShowLabel->setCheckable(true);
+
+    try
+    {
+        const QSharedPointer<VPointF> point = VAbstractTool::data.GeometricObject<VPointF>(itemId);
+        actionShowLabel->setChecked(point->IsShowLabel());
+    }
+    catch(const VExceptionBadId &)
+    {
+        actionShowLabel->setVisible(false);
+    }
+
     QAction *actionRemove = menu.addAction(QIcon::fromTheme("edit-delete"), tr("Delete"));
     if (showRemove == RemoveOption::Enable)
     {
@@ -187,11 +201,15 @@ void VDrawTool::ContextMenu(QGraphicsSceneContextMenuEvent *event, quint32 itemI
 
         m_dialog->show();
     }
-    if (selectedAction == actionRemove)
+    else if (selectedAction == actionRemove)
     {
         qCDebug(vTool, "Deleting tool.");
         DeleteTool(); // do not catch exception here
         return; //Leave this method immediately after call!!!
+    }
+    else if (selectedAction == actionShowLabel)
+    {
+        // do something here to show/hide a label
     }
 }
 

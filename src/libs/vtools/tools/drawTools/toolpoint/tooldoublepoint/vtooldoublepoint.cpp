@@ -67,7 +67,7 @@ VToolDoublePoint::VToolDoublePoint(VAbstractPattern *doc, VContainer *data, quin
     firstPoint->setParentItem(this);
     connect(firstPoint, &VSimplePoint::Choosed, this, &VToolDoublePoint::Point1Choosed);
     connect(firstPoint, &VSimplePoint::Selected, this, &VToolDoublePoint::Point1Selected);
-    connect(firstPoint, &VSimplePoint::ShowContextMenu, this, &VToolDoublePoint::contextMenuEvent);
+    connect(firstPoint, &VSimplePoint::ShowContextMenu, this, &VToolDoublePoint::ShowContextMenu);
     connect(firstPoint, &VSimplePoint::Delete, this, &VToolDoublePoint::DeleteFromLabel);
     connect(firstPoint, &VSimplePoint::NameChangedPosition, this, &VToolDoublePoint::Label1ChangePosition);
     firstPoint->RefreshPointGeometry(*VAbstractTool::data.GeometricObject<VPointF>(p1id));
@@ -76,7 +76,7 @@ VToolDoublePoint::VToolDoublePoint(VAbstractPattern *doc, VContainer *data, quin
     secondPoint->setParentItem(this);
     connect(secondPoint, &VSimplePoint::Choosed, this, &VToolDoublePoint::Point2Choosed);
     connect(secondPoint, &VSimplePoint::Selected, this, &VToolDoublePoint::Point2Selected);
-    connect(secondPoint, &VSimplePoint::ShowContextMenu, this, &VToolDoublePoint::contextMenuEvent);
+    connect(secondPoint, &VSimplePoint::ShowContextMenu, this, &VToolDoublePoint::ShowContextMenu);
     connect(secondPoint, &VSimplePoint::Delete, this, &VToolDoublePoint::DeleteFromLabel);
     connect(secondPoint, &VSimplePoint::NameChangedPosition, this, &VToolDoublePoint::Label2ChangePosition);
     secondPoint->RefreshPointGeometry(*VAbstractTool::data.GeometricObject<VPointF>(p2id));

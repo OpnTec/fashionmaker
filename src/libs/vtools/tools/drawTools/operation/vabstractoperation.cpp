@@ -474,9 +474,9 @@ void VAbstractOperation::InitCurve(quint32 id, VContainer *data, GOType curveTyp
     curve->setParentItem(this);
     curve->SetType(curveType);
     connect(curve, &VSimpleCurve::Selected, this, &VAbstractOperation::ObjectSelected);
-    connect(curve, &VSimpleCurve::ShowContextMenu, this, [this](QGraphicsSceneContextMenuEvent * event)
+    connect(curve, &VSimpleCurve::ShowContextMenu, this, [this](QGraphicsSceneContextMenuEvent * event, quint32 id)
     {
-        contextMenuEvent(event);
+        ShowContextMenu(event, id);
     });
     connect(curve, &VSimpleCurve::Choosed, this, [this, sceneType](quint32 id)
     {
@@ -576,9 +576,9 @@ QT_WARNING_DISABLE_GCC("-Wswitch-default")
                 });
                 connect(point, &VSimplePoint::Selected, this, &VAbstractOperation::ObjectSelected);
                 connect(point, &VSimplePoint::ShowContextMenu,
-                        this, [this](QGraphicsSceneContextMenuEvent * event)
+                        this, [this](QGraphicsSceneContextMenuEvent * event, quint32 id)
                 {
-                    contextMenuEvent(event);
+                    ShowContextMenu(event, id);
                 });
                 connect(point, &VSimplePoint::Delete, this, &VAbstractOperation::DeleteFromLabel);
                 connect(point, &VSimplePoint::NameChangedPosition, this, &VAbstractOperation::LabelChangePosition);

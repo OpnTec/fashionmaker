@@ -44,12 +44,6 @@ void VAbstractSimple::ToolSelectionType(const SelectionType &type)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VAbstractSimple::ContextMenu(QGraphicsSceneContextMenuEvent *event)
-{
-    emit ShowContextMenu(event);
-}
-
-//---------------------------------------------------------------------------------------------------------------------
 GOType VAbstractSimple::GetType() const
 {
     return type;

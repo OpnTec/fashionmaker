@@ -215,6 +215,18 @@ void VPointF::setY(const qreal &value)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+bool VPointF::IsShowLabel() const
+{
+    return d->m_showLabel;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VPointF::SetHideLabel(bool hide)
+{
+    d->m_showLabel = hide;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 QPointF VPointF::RotatePF(const QPointF &originPoint, const QPointF &point, qreal degrees)
 {
     QLineF axis(originPoint, point);

@@ -56,11 +56,8 @@ public:
     void   SetType(const GOType &value);
 
 signals:
-    void ShowContextMenu(QGraphicsSceneContextMenuEvent * event);
+    void ShowContextMenu(QGraphicsSceneContextMenuEvent * event, quint32 id = NULL_ID);
     void Delete();
-
-public slots:
-    void ContextMenu(QGraphicsSceneContextMenuEvent * event);
 
 protected:
     /** @brief id spline id. */

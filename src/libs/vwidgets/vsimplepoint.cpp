@@ -55,7 +55,7 @@ VSimplePoint::VSimplePoint(quint32 id, const QColor &currentColor, QObject *pare
       m_alwaysHovered(false)
 {
     m_baseColor = currentColor;
-    connect(m_namePoint, &VGraphicsSimpleTextItem::ShowContextMenu, this, &VSimplePoint::ContextMenu);
+    connect(m_namePoint, &VGraphicsSimpleTextItem::ShowContextMenu, this, &VSimplePoint::contextMenuEvent);
     connect(m_namePoint, &VGraphicsSimpleTextItem::DeleteTool, this, &VSimplePoint::DeleteFromLabel);
     connect(m_namePoint, &VGraphicsSimpleTextItem::PointChoosed, this, &VSimplePoint::PointChoosed);
     connect(m_namePoint, &VGraphicsSimpleTextItem::PointSelected, this, &VSimplePoint::PointSelected);
@@ -234,5 +234,5 @@ QVariant VSimplePoint::itemChange(QGraphicsItem::GraphicsItemChange change, cons
 //---------------------------------------------------------------------------------------------------------------------
 void VSimplePoint::contextMenuEvent(QGraphicsSceneContextMenuEvent *event)
 {
-    emit ShowContextMenu(event);
+    emit ShowContextMenu(event, id);
 }
