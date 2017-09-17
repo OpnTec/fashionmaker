@@ -350,6 +350,7 @@ QString VToolPointOfContact::MakeToolTip() const
     const QLineF centerToCur(static_cast<QPointF>(*centerP), static_cast<QPointF>(*current));
 
     const QString toolTip = QString("<table>"
+                                    "<tr> <td><b>%10:</b> %11</td> </tr>"
                                     "<tr> <td><b>%1:</b> %2 %3</td> </tr>"
                                     "<tr> <td><b>%4:</b> %5 %3</td> </tr>"
                                     "<tr> <td><b>%6:</b> %7 %3</td> </tr>"
@@ -363,7 +364,9 @@ QString VToolPointOfContact::MakeToolTip() const
             .arg(QString("%1 %2->%3").arg(tr("Length"), centerP->name(), current->name()))
             .arg(qApp->fromPixel(centerToCur.length()))
             .arg(QString("%1 %2->%3").arg(tr("Angle"), centerP->name(), current->name()))
-            .arg(centerToCur.angle());
+            .arg(centerToCur.angle())
+            .arg(tr("Label"))
+            .arg(current->name());
     return toolTip;
 }
 

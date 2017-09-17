@@ -280,6 +280,7 @@ QString VToolHeight::MakeToolTip() const
     const QLineF p2ToCur(static_cast<QPointF>(*p2Line), static_cast<QPointF>(*current));
 
     const QString toolTip = QString("<table>"
+                                    "<tr> <td><b>%10:</b> %11</td> </tr>"
                                     "<tr> <td><b>%1:</b> %2 %3</td> </tr>"
                                     "<tr> <td><b>%4:</b> %5°</td> </tr>"
                                     "<tr> <td><b>%6:</b> %7 %3</td> </tr>"
@@ -293,7 +294,9 @@ QString VToolHeight::MakeToolTip() const
             .arg(QString("%1->%2").arg(p1Line->name(), current->name()))
             .arg(qApp->fromPixel(p1ToCur.length()))
             .arg(QString("%1->%2").arg(p2Line->name(), current->name()))
-            .arg(qApp->fromPixel(p2ToCur.length()));
+            .arg(qApp->fromPixel(p2ToCur.length()))
+            .arg(tr("Label"))
+            .arg(current->name());
     return toolTip;
 }
 

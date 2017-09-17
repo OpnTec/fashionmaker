@@ -169,11 +169,14 @@ QString VAbstractSpline::MakeToolTip() const
     const QSharedPointer<VAbstractCurve> curve = VAbstractTool::data.GeometricObject<VAbstractCurve>(m_id);
 
     const QString toolTip = QString("<table>"
+                                    "<tr> <td><b>%4:</b> %5</td> </tr>"
                                     "<tr> <td><b>%1:</b> %2 %3</td> </tr>"
                                     "</table>")
             .arg(tr("Length"))
             .arg(qApp->fromPixel(curve->GetLength()))
-            .arg(UnitsToStr(qApp->patternUnit(), true));
+            .arg(UnitsToStr(qApp->patternUnit(), true))
+            .arg(tr("Label"))
+            .arg(curve->name());
     return toolTip;
 }
 

@@ -390,6 +390,7 @@ QString VToolArc::MakeToolTip() const
     const QSharedPointer<VArc> arc = VAbstractTool::data.GeometricObject<VArc>(m_id);
 
     const QString toolTip = QString("<table>"
+                                    "<tr> <td><b>%10:</b> %11</td> </tr>"
                                     "<tr> <td><b>%1:</b> %2 %3</td> </tr>"
                                     "<tr> <td><b>%4:</b> %5 %3</td> </tr>"
                                     "<tr> <td><b>%6:</b> %7°</td> </tr>"
@@ -403,6 +404,8 @@ QString VToolArc::MakeToolTip() const
             .arg(tr("Start angle"))
             .arg(qApp->fromPixel(arc->GetStartAngle()))
             .arg(tr("End angle"))
-            .arg(qApp->fromPixel(arc->GetEndAngle()));
+            .arg(qApp->fromPixel(arc->GetEndAngle()))
+            .arg(tr("Label"))
+            .arg(arc->name());
     return toolTip;
 }

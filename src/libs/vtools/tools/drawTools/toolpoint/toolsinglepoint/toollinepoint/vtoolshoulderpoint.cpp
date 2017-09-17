@@ -342,6 +342,7 @@ QString VToolShoulderPoint::MakeToolTip() const
     const QLineF secondToCur(static_cast<QPointF>(*second), static_cast<QPointF>(*current));
 
     const QString toolTip = QString("<table>"
+                                    "<tr> <td><b>%8:</b> %9</td> </tr>"
                                     "<tr> <td><b>%1:</b> %2 %3</td> </tr>"
                                     "<tr> <td><b>%4:</b> %5°</td> </tr>"
                                     "<tr> <td><b>%6:</b> %7 %3</td> </tr>"
@@ -352,7 +353,9 @@ QString VToolShoulderPoint::MakeToolTip() const
             .arg(tr("Angle"))
             .arg(firstToCur.angle())
             .arg(QString("%1->%2").arg(second->name(), current->name()))
-            .arg(qApp->fromPixel(secondToCur.length()));
+            .arg(qApp->fromPixel(secondToCur.length()))
+            .arg(tr("Label"))
+            .arg(current->name());
     return toolTip;
 }
 

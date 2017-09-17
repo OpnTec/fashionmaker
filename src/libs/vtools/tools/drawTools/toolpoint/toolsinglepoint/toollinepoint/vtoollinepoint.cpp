@@ -152,6 +152,7 @@ QString VToolLinePoint::MakeToolTip() const
     const QLineF line(static_cast<QPointF>(*first), static_cast<QPointF>(*second));
 
     const QString toolTip = QString("<table>"
+                                    "<tr> <td><b>%6:</b> %7</td> </tr>"
                                     "<tr> <td><b>%1:</b> %2 %3</td> </tr>"
                                     "<tr> <td><b>%4:</b> %5°</td> </tr>"
                                     "</table>")
@@ -159,7 +160,9 @@ QString VToolLinePoint::MakeToolTip() const
             .arg(qApp->fromPixel(line.length()))
             .arg(UnitsToStr(qApp->patternUnit(), true))
             .arg(tr("Angle"))
-            .arg(line.angle());
+            .arg(line.angle())
+            .arg(tr("Label"))
+            .arg(second->name());
     return toolTip;
 }
 

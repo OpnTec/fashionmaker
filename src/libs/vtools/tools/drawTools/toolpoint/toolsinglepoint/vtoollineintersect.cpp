@@ -308,6 +308,7 @@ QString VToolLineIntersect::MakeToolTip() const
     const QLineF curToP2L2(static_cast<QPointF>(*current), static_cast<QPointF>(*p2L2));
 
     const QString toolTip = QString("<table>"
+                                    "<tr> <td><b>%10:</b> %11</td> </tr>"
                                     "<tr> <td><b>%1:</b> %2 %3</td> </tr>"
                                     "<tr> <td><b>%4:</b> %5 %3</td> </tr>"
                                     "<tr> <td><b>%6:</b> %7 %3</td> </tr>"
@@ -321,7 +322,9 @@ QString VToolLineIntersect::MakeToolTip() const
             .arg(QString("%1->%2").arg(p1L2->name(), current->name()))
             .arg(qApp->fromPixel(p1L2ToCur.length()))
             .arg(QString("%1->%2").arg(current->name(), p2L2->name()))
-            .arg(qApp->fromPixel(curToP2L2.length()));
+            .arg(qApp->fromPixel(curToP2L2.length()))
+            .arg(tr("Label"))
+            .arg(current->name());
     return toolTip;
 }
 

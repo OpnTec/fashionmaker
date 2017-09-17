@@ -463,6 +463,7 @@ QString VToolEllipticalArc::MakeToolTip() const
     const QSharedPointer<VEllipticalArc> elArc = VAbstractTool::data.GeometricObject<VEllipticalArc>(m_id);
 
     const QString toolTip = QString("<table>"
+                                    "<tr> <td><b>%12:</b> %13</td> </tr>"
                                     "<tr> <td><b>%1:</b> %2 %3</td> </tr>"
                                     "<tr> <td><b>%4:</b> %5 %3</td> </tr>"
                                     "<tr> <td><b>%6:</b> %7 %3</td> </tr>"
@@ -479,6 +480,8 @@ QString VToolEllipticalArc::MakeToolTip() const
             .arg(tr("Start angle"))
             .arg(elArc->GetStartAngle())
             .arg(tr("End angle"))
-            .arg(elArc->GetEndAngle());
+            .arg(elArc->GetEndAngle())
+            .arg(tr("Label"))
+            .arg(elArc->name());
     return toolTip;
 }

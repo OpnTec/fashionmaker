@@ -354,14 +354,20 @@ QString VToolCutSplinePath::MakeToolTip() const
     const QString lengthStr = tr("length");
 
     const QString toolTip = QString("<table>"
+                                    "<tr> <td><b>%6:</b> %7</td> </tr>"
                                     "<tr> <td><b>%1:</b> %2 %3</td> </tr>"
+                                    "<tr> <td><b>%8:</b> %9</td> </tr>"
                                     "<tr> <td><b>%4:</b> %5 %3</td> </tr>"
                                     "</table>")
             .arg(curveStr + QLatin1String("1 ") + lengthStr)
             .arg(qApp->fromPixel(splPath1->GetLength()))
             .arg(UnitsToStr(qApp->patternUnit(), true))
             .arg(curveStr + QLatin1String("2 ") + lengthStr)
-            .arg(qApp->fromPixel(splPath2->GetLength()));
+            .arg(qApp->fromPixel(splPath2->GetLength()))
+            .arg(curveStr + QLatin1String(" 1") + tr("label"))
+            .arg(splPath1->name())
+            .arg(curveStr + QLatin1String(" 2") + tr("label"))
+            .arg(splPath2->name());
 
     delete splPath1;
     delete splPath2;

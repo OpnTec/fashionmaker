@@ -155,6 +155,7 @@ QString VToolAlongLine::MakeToolTip() const
     const QLineF curToSecond(static_cast<QPointF>(*current), static_cast<QPointF>(*secondPoint));
 
     const QString toolTip = QString("<table>"
+                                    "<tr> <td><b>%9:</b> %10</td> </tr>"
                                     "<tr> <td><b>%1:</b> %2 %3</td> </tr>"
                                     "<tr> <td><b>%4:</b> %5°</td> </tr>"
                                     "<tr> <td><b>%6:</b> %2 %3</td> </tr>"
@@ -167,7 +168,9 @@ QString VToolAlongLine::MakeToolTip() const
             .arg(curLine.angle())
             .arg(QString("%1->%2").arg(basePoint->name(), current->name()))
             .arg(QString("%1->%2").arg(current->name(), secondPoint->name()))
-            .arg(qApp->fromPixel(curToSecond.length()));
+            .arg(qApp->fromPixel(curToSecond.length()))
+            .arg(tr("Label"))
+            .arg(current->name());
     return toolTip;
 }
 

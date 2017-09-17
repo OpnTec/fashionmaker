@@ -371,6 +371,19 @@ void VToolBasePoint::ReadToolAttributes(const QDomElement &domElement)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+QString VToolBasePoint::MakeToolTip() const
+{
+    const QSharedPointer<VPointF> point = VAbstractTool::data.GeometricObject<VPointF>(m_id);
+
+    const QString toolTip = QString("<table>"
+                                    "<tr> <td><b>%1:</b> %2</td> </tr>"
+                                    "</table>")
+            .arg(tr("Label"))
+            .arg(point->name());
+    return toolTip;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 void VToolBasePoint::ShowContextMenu(QGraphicsSceneContextMenuEvent *event, quint32 id)
 {
     qCDebug(vTool, "Context menu base point");
