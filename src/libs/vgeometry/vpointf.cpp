@@ -221,7 +221,7 @@ bool VPointF::IsShowLabel() const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VPointF::SetHideLabel(bool hide)
+void VPointF::SetShowLabel(bool hide)
 {
     d->m_showLabel = hide;
 }
