@@ -230,6 +230,15 @@ void VToolFlippingByAxis::SaveOptions(QDomElement &tag, QSharedPointer<VGObject>
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+QString VToolFlippingByAxis::MakeToolTip() const
+{
+    const QString toolTip = QString("<tr> <td><b>%1:</b> %2</td> </tr>")
+            .arg(tr("Origin point"))
+            .arg(OriginPointName());
+    return toolTip;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 VToolFlippingByAxis::VToolFlippingByAxis(VAbstractPattern *doc, VContainer *data, quint32 id, quint32 originPointId,
                                          AxisType axisType, const QString &suffix,
                                          const QVector<quint32> &source, const QVector<DestinationItem> &destination,

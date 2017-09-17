@@ -138,12 +138,14 @@ void VAbstractOperation::FullUpdateFromFile()
         {
             VSimplePoint *item = qobject_cast<VSimplePoint *>(i.value());
             SCASSERT(item != nullptr)
+            item->setToolTip(ComplexPointToolTip(i.key()));
             item->RefreshPointGeometry(*VAbstractTool::data.GeometricObject<VPointF>(i.key()));
         }
         else
         {
             VSimpleCurve *item = qobject_cast<VSimpleCurve *>(i.value());
             SCASSERT(item != nullptr)
+            item->setToolTip(ComplexCurveToolTip(i.key()));
             item->RefreshGeometry(VAbstractTool::data.GeometricObject<VAbstractCurve>(i.key()));
         }
     }
@@ -473,6 +475,7 @@ void VAbstractOperation::InitCurve(quint32 id, VContainer *data, GOType curveTyp
     VSimpleCurve *curve = new VSimpleCurve(id, initCurve);
     curve->setParentItem(this);
     curve->SetType(curveType);
+    curve->setToolTip(ComplexCurveToolTip(id));
     connect(curve, &VSimpleCurve::Selected, this, &VAbstractOperation::ObjectSelected);
     connect(curve, &VSimpleCurve::ShowContextMenu, this, [this](QGraphicsSceneContextMenuEvent * event, quint32 id)
     {
@@ -570,6 +573,7 @@ QT_WARNING_DISABLE_GCC("-Wswitch-default")
                 VSimplePoint *point = new VSimplePoint(object.id, QColor(Qt::black));
                 point->setParentItem(this);
                 point->SetType(GOType::Point);
+                point->setToolTip(ComplexPointToolTip(object.id));
                 connect(point, &VSimplePoint::Choosed, this, [this](quint32 id)
                 {
                     emit ChoosedTool(id, SceneObject::Point);
@@ -605,4 +609,36 @@ QT_WARNING_DISABLE_GCC("-Wswitch-default")
         }
 QT_WARNING_POP
     }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QString VAbstractOperation::ComplexPointToolTip(quint32 itemId) const
+{
+    const QSharedPointer<VPointF> point = VAbstractTool::data.GeometricObject<VPointF>(itemId);
+
+    const QString toolTip = QString("<table>"
+                                    "<tr> <td><b>%1:</b> %2</td> </tr>"
+                                    "%3"
+                                    "</table>")
+            .arg(tr("Label"), point->name(), MakeToolTip());
+    return toolTip;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QString VAbstractOperation::ComplexCurveToolTip(quint32 itemId) const
+{
+    const QSharedPointer<VAbstractCurve> curve = VAbstractTool::data.GeometricObject<VAbstractCurve>(itemId);
+
+    const QString toolTip = QString("<table>"
+                                    "<tr> <td><b>%1:</b> %2</td> </tr>"
+                                    "<tr> <td><b>%3:</b> %4 %5</td> </tr>"
+                                    "%6"
+                                    "</table>")
+            .arg(tr("Label"))
+            .arg(curve->name())
+            .arg(tr("Length"))
+            .arg(qApp->fromPixel(curve->GetLength()))
+            .arg(UnitsToStr(qApp->patternUnit(), true))
+            .arg(MakeToolTip());
+    return toolTip;
 }

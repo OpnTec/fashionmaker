@@ -131,6 +131,9 @@ protected:
     static void InitOperationToolConnections(VMainGraphicsScene *scene, T *tool);
 
     void InitOperatedObjects();
+
+    QString ComplexPointToolTip(quint32 itemId) const;
+    QString ComplexCurveToolTip(quint32 itemId) const;
 protected slots:
     void DoChangePosition(quint32 id, qreal mx, qreal my);
 private:

@@ -83,7 +83,6 @@ public slots:
     virtual void    DetailsMode(bool mode) Q_DECL_OVERRIDE;
     virtual void    AllowHover(bool enabled) Q_DECL_OVERRIDE;
     virtual void    AllowSelecting(bool enabled) Q_DECL_OVERRIDE;
-    virtual QString MakeToolTip() const Q_DECL_OVERRIDE;
 signals:
     /**
      * @brief setEnabledPoint disable control points.
@@ -113,6 +112,7 @@ protected:
     virtual void     SaveOptions(QDomElement &tag, QSharedPointer<VGObject> &obj) Q_DECL_OVERRIDE;
     virtual void     RefreshCtrlPoints();
     virtual void     contextMenuEvent ( QGraphicsSceneContextMenuEvent * event ) Q_DECL_OVERRIDE;
+    virtual QString  MakeToolTip() const Q_DECL_OVERRIDE;
 
     VSpline CorrectedSpline(const VSpline &spline, const SplinePointPosition &position, const QPointF &pos) const;
 

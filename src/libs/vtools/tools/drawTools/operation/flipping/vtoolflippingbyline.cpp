@@ -216,6 +216,18 @@ void VToolFlippingByLine::SaveOptions(QDomElement &tag, QSharedPointer<VGObject>
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+QString VToolFlippingByLine::MakeToolTip() const
+{
+    const QString toolTip = QString("<tr> <td><b>%1:</b> %2</td> </tr>"
+                                    "<tr> <td><b>%3:</b> %4</td> </tr>")
+            .arg(tr("First line point"))
+            .arg(FirstLinePointName())
+            .arg(tr("Second line point"))
+            .arg(SecondLinePointName());
+    return toolTip;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 VToolFlippingByLine::VToolFlippingByLine(VAbstractPattern *doc, VContainer *data, quint32 id, quint32 firstLinePointId,
                                          quint32 secondLinePointId, const QString &suffix,
                                          const QVector<quint32> &source, const QVector<DestinationItem> &destination,

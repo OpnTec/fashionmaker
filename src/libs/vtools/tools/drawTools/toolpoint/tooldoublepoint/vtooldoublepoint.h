@@ -94,6 +94,8 @@ protected:
     virtual void SaveOptions(QDomElement &tag, QSharedPointer<VGObject> &obj) Q_DECL_OVERRIDE;
     virtual void AddToFile() Q_DECL_OVERRIDE;
 
+    QString ComplexToolTip(quint32 itemId) const;
+
 private:
     Q_DISABLE_COPY(VToolDoublePoint)
 };

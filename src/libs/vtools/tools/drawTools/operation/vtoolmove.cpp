@@ -348,6 +348,19 @@ void VToolMove::SaveOptions(QDomElement &tag, QSharedPointer<VGObject> &obj)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+QString VToolMove::MakeToolTip() const
+{
+    const QString toolTip = QString("<tr> <td><b>%1:</b> %2°</td> </tr>"
+                                    "<tr> <td><b>%3:</b> %4 %5</td> </tr>")
+            .arg(tr("Rotation angle"))
+            .arg(GetFormulaAngle().getDoubleValue())
+            .arg(tr("Length"))
+            .arg(GetFormulaLength().getDoubleValue())
+            .arg(UnitsToStr(qApp->patternUnit(), true));
+    return toolTip;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 VToolMove::VToolMove(VAbstractPattern *doc, VContainer *data, quint32 id,
                          const QString &formulaAngle, const QString &formulaLength, const QString &suffix,
                          const QVector<quint32> &source, const QVector<DestinationItem> &destination,

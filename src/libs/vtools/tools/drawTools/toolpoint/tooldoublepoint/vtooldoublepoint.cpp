@@ -65,6 +65,7 @@ VToolDoublePoint::VToolDoublePoint(VAbstractPattern *doc, VContainer *data, quin
 {
     firstPoint = new VSimplePoint(p1id, QColor(Qt::black));
     firstPoint->setParentItem(this);
+    firstPoint->setToolTip(ComplexToolTip(p1id));
     connect(firstPoint, &VSimplePoint::Choosed, this, &VToolDoublePoint::Point1Choosed);
     connect(firstPoint, &VSimplePoint::Selected, this, &VToolDoublePoint::Point1Selected);
     connect(firstPoint, &VSimplePoint::ShowContextMenu, this, &VToolDoublePoint::ShowContextMenu);
@@ -74,6 +75,7 @@ VToolDoublePoint::VToolDoublePoint(VAbstractPattern *doc, VContainer *data, quin
 
     secondPoint = new VSimplePoint(p2id, QColor(Qt::black));
     secondPoint->setParentItem(this);
+    secondPoint->setToolTip(ComplexToolTip(p2id));
     connect(secondPoint, &VSimplePoint::Choosed, this, &VToolDoublePoint::Point2Choosed);
     connect(secondPoint, &VSimplePoint::Selected, this, &VToolDoublePoint::Point2Selected);
     connect(secondPoint, &VSimplePoint::ShowContextMenu, this, &VToolDoublePoint::ShowContextMenu);
@@ -175,7 +177,9 @@ void VToolDoublePoint::Point2Selected(bool selected)
 void VToolDoublePoint::FullUpdateFromFile()
 {
     ReadAttributes();
+    firstPoint->setToolTip(ComplexToolTip(p1id));
     firstPoint->RefreshPointGeometry(*VAbstractTool::data.GeometricObject<VPointF>(p1id));
+    secondPoint->setToolTip(ComplexToolTip(p2id));
     secondPoint->RefreshPointGeometry(*VAbstractTool::data.GeometricObject<VPointF>(p2id));
     SetVisualization();
 }
@@ -362,4 +366,17 @@ void VToolDoublePoint::AddToFile()
     QSharedPointer<VGObject> obj = VContainer::GetFakeGObject(m_id);
     SaveOptions(domElement, obj);
     AddToCalculation(domElement);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QString VToolDoublePoint::ComplexToolTip(quint32 itemId) const
+{
+    const QSharedPointer<VPointF> point = VAbstractTool::data.GeometricObject<VPointF>(itemId);
+
+    const QString toolTip = QString("<table>"
+                                    "<tr> <td><b>%1:</b> %2</td> </tr>"
+                                    "%3"
+                                    "</table>")
+            .arg(tr("Label"), point->name(), MakeToolTip());
+    return toolTip;
 }

@@ -348,6 +348,18 @@ void VToolRotation::SaveOptions(QDomElement &tag, QSharedPointer<VGObject> &obj)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+QString VToolRotation::MakeToolTip() const
+{
+    const QString toolTip = QString("<tr> <td><b>%1:</b> %2</td> </tr>"
+                                    "<tr> <td><b>%3:</b> %4°</td> </tr>")
+            .arg(tr("Origin point"))
+            .arg(OriginPointName())
+            .arg(tr("Rotation angle"))
+            .arg(GetFormulaAngle().getDoubleValue());
+    return toolTip;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 DestinationItem VToolRotation::CreatePoint(quint32 idTool, quint32 idItem, const QPointF &origin, qreal angle,
                                           const QString &suffix, VContainer *data)
 {
