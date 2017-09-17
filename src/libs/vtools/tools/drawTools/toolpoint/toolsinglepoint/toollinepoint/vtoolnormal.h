@@ -54,12 +54,11 @@ public:
     virtual void   setDialog() Q_DECL_OVERRIDE;
     static VToolNormal* Create(QSharedPointer<DialogTool> dialog, VMainGraphicsScene  *scene, VAbstractPattern *doc,
                                VContainer *data);
-    static VToolNormal* Create(const quint32 _id, QString &formula, const quint32 &firstPointId,
-                               const quint32 &secondPointId, const QString &typeLine, const QString &lineColor,
-                               const QString &pointName, const qreal angle, const qreal &mx, const qreal &my,
+    static VToolNormal* Create(const quint32 _id, QString &formula, quint32 firstPointId,
+                               quint32 secondPointId, const QString &typeLine, const QString &lineColor,
+                               const QString &pointName, const qreal angle, qreal mx, qreal my, bool showLabel,
                                VMainGraphicsScene  *scene, VAbstractPattern *doc, VContainer *data,
-                               const Document &parse,
-                               const Source &typeCreation);
+                               const Document &parse, const Source &typeCreation);
     static QPointF FindPoint(const QPointF &firstPoint, const QPointF &secondPoint, const qreal &length,
                              const qreal &angle = 0);
     static const QString ToolType;

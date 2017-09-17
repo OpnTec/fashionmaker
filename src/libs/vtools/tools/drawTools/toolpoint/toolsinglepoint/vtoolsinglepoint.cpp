@@ -44,6 +44,7 @@
 #include <new>
 
 #include "../../../../undocommands/label/movelabel.h"
+#include "../../../../undocommands/label/showlabel.h"
 #include "../ifc/exception/vexception.h"
 #include "../ifc/exception/vexceptionbadid.h"
 #include "../ifc/ifcdef.h"
@@ -310,6 +311,16 @@ void VToolSinglePoint::SaveOptions(QDomElement &tag, QSharedPointer<VGObject> &o
     doc->SetAttribute(tag, AttrName, point->name());
     doc->SetAttribute(tag, AttrMx, qApp->fromPixel(point->mx()));
     doc->SetAttribute(tag, AttrMy, qApp->fromPixel(point->my()));
+    doc->SetAttribute(tag, AttrShowLabel, point->IsShowLabel());
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VToolSinglePoint::ChangeLabelVisibility(quint32 id, bool visible)
+{
+    if (id == m_id)
+    {
+        qApp->getUndoStack()->push(new ShowLabel(doc, id, visible));
+    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------

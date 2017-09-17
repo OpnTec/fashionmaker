@@ -56,9 +56,9 @@ public:
     static VToolLineIntersectAxis *Create(QSharedPointer<DialogTool> dialog, VMainGraphicsScene *scene,
                                           VAbstractPattern *doc, VContainer *data);
     static VToolLineIntersectAxis *Create(const quint32 _id, const QString &pointName, const QString &typeLine,
-                                          const QString &lineColor, QString &formulaAngle, const quint32 &basePointId,
-                                          const quint32 &firstPointId, const quint32 &secondPointId,
-                                          const qreal &mx, const qreal &my, VMainGraphicsScene  *scene,
+                                          const QString &lineColor, QString &formulaAngle, quint32 basePointId,
+                                          quint32 firstPointId, quint32 secondPointId,
+                                          qreal mx, qreal my, bool showLabel, VMainGraphicsScene  *scene,
                                           VAbstractPattern *doc,
                                           VContainer *data, const Document &parse, const Source &typeCreation);
 

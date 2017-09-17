@@ -114,7 +114,7 @@ VToolTriangle* VToolTriangle::Create(QSharedPointer<DialogTool> dialog, VMainGra
     const quint32 firstPointId = dialogTool->GetFirstPointId();
     const quint32 secondPointId = dialogTool->GetSecondPointId();
     const QString pointName = dialogTool->getPointName();
-    VToolTriangle* point = Create(0, pointName, axisP1Id, axisP2Id, firstPointId, secondPointId, 5, 10,
+    VToolTriangle* point = Create(0, pointName, axisP1Id, axisP2Id, firstPointId, secondPointId, 5, 10, true,
                                   scene, doc, data, Document::FullParse, Source::FromGui);
     if (point != nullptr)
     {
@@ -141,9 +141,9 @@ VToolTriangle* VToolTriangle::Create(QSharedPointer<DialogTool> dialog, VMainGra
  * @param typeCreation way we create this tool.
  * @return the created tool
  */
-VToolTriangle* VToolTriangle::Create(const quint32 _id, const QString &pointName, const quint32 &axisP1Id,
-                                     const quint32 &axisP2Id, const quint32 &firstPointId, const quint32 &secondPointId,
-                                     const qreal &mx, const qreal &my, VMainGraphicsScene *scene, VAbstractPattern *doc,
+VToolTriangle* VToolTriangle::Create(const quint32 _id, const QString &pointName, quint32 axisP1Id, quint32 axisP2Id,
+                                     quint32 firstPointId, quint32 secondPointId, qreal mx, qreal my, bool showLabel,
+                                     VMainGraphicsScene *scene, VAbstractPattern *doc,
                                      VContainer *data, const Document &parse, const Source &typeCreation)
 {
     const QSharedPointer<VPointF> axisP1 = data->GeometricObject<VPointF>(axisP1Id);
@@ -154,13 +154,17 @@ VToolTriangle* VToolTriangle::Create(const quint32 _id, const QString &pointName
     QPointF point = FindPoint(static_cast<QPointF>(*axisP1), static_cast<QPointF>(*axisP2),
                               static_cast<QPointF>(*firstPoint), static_cast<QPointF>(*secondPoint));
     quint32 id = _id;
+
+    VPointF *p = new VPointF(point, pointName, mx, my);
+    p->SetShowLabel(showLabel);
+
     if (typeCreation == Source::FromGui)
     {
-        id = data->AddGObject(new VPointF(point, pointName, mx, my));
+        id = data->AddGObject(p);
     }
     else
     {
-        data->UpdateGObject(id, new VPointF(point, pointName, mx, my));
+        data->UpdateGObject(id, p);
         if (parse != Document::FullParse)
         {
             doc->UpdateToolData(id, data);

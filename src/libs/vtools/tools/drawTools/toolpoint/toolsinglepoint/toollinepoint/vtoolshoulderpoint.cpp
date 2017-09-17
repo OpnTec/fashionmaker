@@ -170,7 +170,7 @@ VToolShoulderPoint* VToolShoulderPoint::Create(QSharedPointer<DialogTool> dialog
     const QString lineColor = dialogTool->GetLineColor();
     const QString pointName = dialogTool->getPointName();
     VToolShoulderPoint * point = Create(0, formula, p1Line, p2Line, pShoulder, typeLine, lineColor, pointName, 5,
-                                        10, scene, doc, data, Document::FullParse, Source::FromGui);
+                                        10, true, scene, doc, data, Document::FullParse, Source::FromGui);
     if (point != nullptr)
     {
         point->m_dialog = dialogTool;
@@ -190,6 +190,7 @@ VToolShoulderPoint* VToolShoulderPoint::Create(QSharedPointer<DialogTool> dialog
  * @param pointName point name.
  * @param mx label bias x axis.
  * @param my label bias y axis.
+ * @param showLabel show/hide label.
  * @param scene pointer to scene.
  * @param doc dom document container.
  * @param data container with variables.
@@ -197,11 +198,11 @@ VToolShoulderPoint* VToolShoulderPoint::Create(QSharedPointer<DialogTool> dialog
  * @param typeCreation way we create this tool.
  * @return the created tool
  */
-VToolShoulderPoint* VToolShoulderPoint::Create(const quint32 _id, QString &formula, const quint32 &p1Line,
-                                               const quint32 &p2Line, const quint32 &pShoulder, const QString &typeLine,
-                                               const QString &lineColor, const QString &pointName, const qreal &mx,
-                                               const qreal &my, VMainGraphicsScene *scene, VAbstractPattern *doc,
-                                               VContainer *data, const Document &parse, const Source &typeCreation)
+VToolShoulderPoint* VToolShoulderPoint::Create(const quint32 _id, QString &formula, quint32 p1Line, quint32 p2Line,
+                                               quint32 pShoulder, const QString &typeLine, const QString &lineColor,
+                                               const QString &pointName, qreal mx, qreal my, bool showLabel,
+                                               VMainGraphicsScene *scene, VAbstractPattern *doc, VContainer *data,
+                                               const Document &parse, const Source &typeCreation)
 {
     const QSharedPointer<VPointF> firstPoint = data->GeometricObject<VPointF>(p1Line);
     const QSharedPointer<VPointF> secondPoint = data->GeometricObject<VPointF>(p2Line);
@@ -213,15 +214,19 @@ VToolShoulderPoint* VToolShoulderPoint::Create(const quint32 _id, QString &formu
                                                    static_cast<QPointF>(*secondPoint),
                                                    static_cast<QPointF>(*shoulderPoint), qApp->toPixel(result));
     quint32 id =  _id;
+
+    VPointF *p = new VPointF(fPoint, pointName, mx, my);
+    p->SetShowLabel(showLabel);
+
     if (typeCreation == Source::FromGui)
     {
-        id = data->AddGObject(new VPointF(fPoint, pointName, mx, my));
+        id = data->AddGObject(p);
         data->AddLine(p1Line, id);
         data->AddLine(p2Line, id);
     }
     else
     {
-        data->UpdateGObject(id, new VPointF(fPoint, pointName, mx, my));
+        data->UpdateGObject(id, p);
         data->AddLine(p1Line, id);
         data->AddLine(p2Line, id);
         if (parse != Document::FullParse)

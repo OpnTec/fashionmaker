@@ -53,9 +53,9 @@ public:
     virtual void setDialog() Q_DECL_OVERRIDE;
     static VToolLineIntersect *Create(QSharedPointer<DialogTool> dialog, VMainGraphicsScene *scene,
                                       VAbstractPattern *doc, VContainer *data);
-    static VToolLineIntersect *Create(const quint32 _id, const quint32 &p1Line1Id, const quint32 &p2Line1Id,
-                                      const quint32 &p1Line2Id, const quint32 &p2Line2Id, const QString &pointName,
-                                      const qreal &mx, const qreal &my, VMainGraphicsScene  *scene,
+    static VToolLineIntersect *Create(const quint32 _id, quint32 p1Line1Id, quint32 p2Line1Id,
+                                      quint32 p1Line2Id, quint32 p2Line2Id, const QString &pointName,
+                                      qreal mx, qreal my, bool showLabel, VMainGraphicsScene  *scene,
                                       VAbstractPattern *doc,
                                       VContainer *data, const Document &parse, const Source &typeCreation);
     static const QString ToolType;

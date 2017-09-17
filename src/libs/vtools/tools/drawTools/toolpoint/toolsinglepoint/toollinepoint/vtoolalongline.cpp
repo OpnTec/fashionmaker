@@ -251,7 +251,7 @@ VToolAlongLine* VToolAlongLine::Create(QSharedPointer<DialogTool> dialog, VMainG
     const QString lineColor = dialogTool->GetLineColor();
     const QString pointName = dialogTool->getPointName();
     VToolAlongLine *point = Create(0, pointName, typeLine, lineColor, formula, firstPointId, secondPointId,
-                                   5, 10, scene, doc, data, Document::FullParse, Source::FromGui);
+                                   5, 10, true, scene, doc, data, Document::FullParse, Source::FromGui);
     if (point != nullptr)
     {
         point->m_dialog = dialogTool;
@@ -270,6 +270,7 @@ VToolAlongLine* VToolAlongLine::Create(QSharedPointer<DialogTool> dialog, VMainG
  * @param secondPointId id second point of line.
  * @param mx label bias x axis.
  * @param my label bias y axis.
+ * @param showLabel show/hide label.
  * @param scene pointer to scene.
  * @param doc dom document container.
  * @param data container with variables.
@@ -278,7 +279,7 @@ VToolAlongLine* VToolAlongLine::Create(QSharedPointer<DialogTool> dialog, VMainG
  */
 VToolAlongLine* VToolAlongLine::Create(const quint32 _id, const QString &pointName, const QString &typeLine,
                                        const QString &lineColor, QString &formula, const quint32 &firstPointId,
-                                       const quint32 &secondPointId, const qreal &mx, const qreal &my,
+                                       quint32 secondPointId, qreal mx, qreal my, bool showLabel,
                                        VMainGraphicsScene *scene, VAbstractPattern *doc, VContainer *data,
                                        const Document &parse, const Source &typeCreation)
 {
@@ -295,15 +296,19 @@ VToolAlongLine* VToolAlongLine::Create(const quint32 _id, const QString &pointNa
     line.setLength(qApp->toPixel(CheckFormula(_id, formula, data)));
 
     quint32 id = _id;
+
+    VPointF *p = new VPointF(line.p2(), pointName, mx, my);
+    p->SetShowLabel(showLabel);
+
     if (typeCreation == Source::FromGui)
     {
-        id = data->AddGObject( new VPointF(line.p2(), pointName, mx, my));
+        id = data->AddGObject(p);
         data->AddLine(firstPointId, id);
         data->AddLine(id, secondPointId);
     }
     else
     {
-        data->UpdateGObject(id, new VPointF(line.p2(), pointName, mx, my));
+        data->UpdateGObject(id, p);
         data->AddLine(firstPointId, id);
         data->AddLine(id, secondPointId);
         if (parse != Document::FullParse)

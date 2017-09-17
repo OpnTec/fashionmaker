@@ -88,6 +88,7 @@ protected:
     virtual void     keyReleaseEvent(QKeyEvent * event) Q_DECL_OVERRIDE;
     virtual void     contextMenuEvent ( QGraphicsSceneContextMenuEvent * event ) Q_DECL_OVERRIDE;
     virtual void     SaveOptions(QDomElement &tag, QSharedPointer<VGObject> &obj) Q_DECL_OVERRIDE;
+    virtual void     ChangeLabelVisibility(quint32 id, bool visible);
 private:
     Q_DISABLE_COPY(VToolSinglePoint)
 };

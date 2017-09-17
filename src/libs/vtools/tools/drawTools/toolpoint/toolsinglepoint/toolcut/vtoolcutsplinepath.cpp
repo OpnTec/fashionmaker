@@ -113,7 +113,7 @@ VToolCutSplinePath* VToolCutSplinePath::Create(QSharedPointer<DialogTool> dialog
     const QString pointName = dialogTool->getPointName();
     QString formula = dialogTool->GetFormula();
     const quint32 splinePathId = dialogTool->getSplinePathId();
-    VToolCutSplinePath* point = Create(0, pointName, formula, splinePathId, 5, 10, scene, doc, data,
+    VToolCutSplinePath* point = Create(0, pointName, formula, splinePathId, 5, 10, true, scene, doc, data,
                                        Document::FullParse, Source::FromGui);
     if (point != nullptr)
     {
@@ -138,7 +138,7 @@ VToolCutSplinePath* VToolCutSplinePath::Create(QSharedPointer<DialogTool> dialog
  * @param typeCreation way we create this tool.
  */
 VToolCutSplinePath* VToolCutSplinePath::Create(const quint32 _id, const QString &pointName, QString &formula,
-                                               const quint32 &splinePathId, const qreal &mx, const qreal &my,
+                                               quint32 splinePathId, qreal mx, qreal my, bool showLabel,
                                                VMainGraphicsScene *scene, VAbstractPattern *doc,
                                                VContainer *data, const Document &parse, const Source &typeCreation)
 {
@@ -151,6 +151,7 @@ VToolCutSplinePath* VToolCutSplinePath::Create(const quint32 _id, const QString 
     VSplinePath *splPath1 = nullptr;
     VSplinePath *splPath2 = nullptr;
     VPointF *p = VToolCutSplinePath::CutSplinePath(qApp->toPixel(result), splPath, pointName, &splPath1, &splPath2);
+    p->SetShowLabel(showLabel);
 
     SCASSERT(splPath1 != nullptr)
     SCASSERT(splPath2 != nullptr)

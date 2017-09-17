@@ -54,7 +54,7 @@ public:
     static VToolCutSpline *Create(QSharedPointer<DialogTool> dialog, VMainGraphicsScene  *scene, VAbstractPattern *doc,
                                   VContainer *data);
     static VToolCutSpline *Create(const quint32 _id, const QString &pointName, QString &formula,
-                                  const quint32 &splineId, const qreal &mx, const qreal &my,
+                                  quint32 splineId, qreal mx, qreal my, bool showLabel,
                                   VMainGraphicsScene *scene, VAbstractPattern *doc, VContainer *data,
                                   const Document &parse,
                                   const Source &typeCreation);

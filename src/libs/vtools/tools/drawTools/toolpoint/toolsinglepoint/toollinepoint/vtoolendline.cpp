@@ -120,7 +120,7 @@ VToolEndLine* VToolEndLine::Create(QSharedPointer<DialogTool> dialog, VMainGraph
     const quint32 basePointId = dialogTool->GetBasePointId();
 
     VToolEndLine *point = Create(0, pointName, typeLine, lineColor, formulaLength, formulaAngle,
-                                 basePointId, 5, 10, scene, doc, data, Document::FullParse, Source::FromGui);
+                                 basePointId, 5, 10, true, scene, doc, data, Document::FullParse, Source::FromGui);
     if (point != nullptr)
     {
         point->m_dialog = dialogTool;
@@ -140,6 +140,7 @@ VToolEndLine* VToolEndLine::Create(QSharedPointer<DialogTool> dialog, VMainGraph
  * @param basePointId id first point of line.
  * @param mx label bias x axis.
  * @param my label bias y axis.
+ * @param showLabel show/hide label
  * @param scene pointer to scene.
  * @param doc dom document container.
  * @param data container with variables.
@@ -149,10 +150,9 @@ VToolEndLine* VToolEndLine::Create(QSharedPointer<DialogTool> dialog, VMainGraph
  */
 VToolEndLine* VToolEndLine::Create(const quint32 _id, const QString &pointName, const QString &typeLine,
                                    const QString &lineColor, QString &formulaLength, QString &formulaAngle,
-                                   const quint32 &basePointId, const qreal &mx, const qreal &my,
+                                   quint32 basePointId, qreal mx, qreal my, bool showLabel,
                                    VMainGraphicsScene *scene, VAbstractPattern *doc, VContainer *data,
-                                   const Document &parse,
-                                   const Source &typeCreation)
+                                   const Document &parse, const Source &typeCreation)
 {
     const QSharedPointer<VPointF> basePoint = data->GeometricObject<VPointF>(basePointId);
     QLineF line = QLineF(static_cast<QPointF>(*basePoint), QPointF(basePoint->x()+100, basePoint->y()));
@@ -160,14 +160,18 @@ VToolEndLine* VToolEndLine::Create(const quint32 _id, const QString &pointName, 
     line.setAngle(CheckFormula(_id, formulaAngle, data)); //First set angle.
     line.setLength(qApp->toPixel(CheckFormula(_id, formulaLength, data)));
     quint32 id = _id;
+
+    VPointF *p = new VPointF(line.p2(), pointName, mx, my);
+    p->SetShowLabel(showLabel);
+
     if (typeCreation == Source::FromGui)
     {
-        id = data->AddGObject(new VPointF(line.p2(), pointName, mx, my));
+        id = data->AddGObject(p);
         data->AddLine(basePointId, id);
     }
     else
     {
-        data->UpdateGObject(id, new VPointF(line.p2(), pointName, mx, my));
+        data->UpdateGObject(id, p);
         data->AddLine(basePointId, id);
         if (parse != Document::FullParse)
         {

@@ -115,8 +115,8 @@ VToolLineIntersect* VToolLineIntersect::Create(QSharedPointer<DialogTool> dialog
     const quint32 p1Line2Id = dialogTool->GetP1Line2();
     const quint32 p2Line2Id = dialogTool->GetP2Line2();
     const QString pointName = dialogTool->getPointName();
-    VToolLineIntersect* point = Create(0, p1Line1Id, p2Line1Id, p1Line2Id, p2Line2Id, pointName, 5, 10, scene, doc,
-                                       data, Document::FullParse, Source::FromGui);
+    VToolLineIntersect* point = Create(0, p1Line1Id, p2Line1Id, p1Line2Id, p2Line2Id, pointName, 5, 10, true, scene,
+                                       doc, data, Document::FullParse, Source::FromGui);
     if (point != nullptr)
     {
         point->m_dialog = dialogTool;
@@ -142,11 +142,11 @@ VToolLineIntersect* VToolLineIntersect::Create(QSharedPointer<DialogTool> dialog
  * @param typeCreation way we create this tool.
  * @return the created tool
  */
-VToolLineIntersect* VToolLineIntersect::Create(const quint32 _id, const quint32 &p1Line1Id, const quint32 &p2Line1Id,
-                                               const quint32 &p1Line2Id, const quint32 &p2Line2Id,
-                                               const QString &pointName, const qreal &mx, const qreal &my,
-                                               VMainGraphicsScene *scene, VAbstractPattern *doc, VContainer *data,
-                                               const Document &parse, const Source &typeCreation)
+VToolLineIntersect* VToolLineIntersect::Create(const quint32 _id, quint32 p1Line1Id, quint32 p2Line1Id,
+                                               quint32 p1Line2Id, quint32 p2Line2Id, const QString &pointName,
+                                               qreal mx, qreal my, bool showLabel, VMainGraphicsScene *scene,
+                                               VAbstractPattern *doc, VContainer *data, const Document &parse,
+                                               const Source &typeCreation)
 {
     const QSharedPointer<VPointF> p1Line1 = data->GeometricObject<VPointF>(p1Line1Id);
     const QSharedPointer<VPointF> p2Line1 = data->GeometricObject<VPointF>(p2Line1Id);
@@ -160,9 +160,13 @@ VToolLineIntersect* VToolLineIntersect::Create(const quint32 _id, const quint32 
     if (intersect == QLineF::UnboundedIntersection || intersect == QLineF::BoundedIntersection)
     {
         quint32 id = _id;
+
+        VPointF *p = new VPointF(fPoint, pointName, mx, my);
+        p->SetShowLabel(showLabel);
+
         if (typeCreation == Source::FromGui)
         {
-            id = data->AddGObject(new VPointF(fPoint, pointName, mx, my));
+            id = data->AddGObject(p);
             data->AddLine(p1Line1Id, id);
             data->AddLine(id, p2Line1Id);
             data->AddLine(p1Line2Id, id);
@@ -170,7 +174,7 @@ VToolLineIntersect* VToolLineIntersect::Create(const quint32 _id, const quint32 
         }
         else
         {
-            data->UpdateGObject(id, new VPointF(fPoint, pointName, mx, my));
+            data->UpdateGObject(id, p);
             data->AddLine(p1Line1Id, id);
             data->AddLine(id, p2Line1Id);
             data->AddLine(p1Line2Id, id);

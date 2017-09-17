@@ -52,9 +52,9 @@ public:
     virtual void setDialog() Q_DECL_OVERRIDE;
     static VToolPointOfIntersectionArcs *Create(QSharedPointer<DialogTool> dialog, VMainGraphicsScene  *scene,
                                                 VAbstractPattern *doc, VContainer *data);
-    static VToolPointOfIntersectionArcs *Create(const quint32 _id, const QString &pointName, const quint32 &firstArcId,
-                                                const quint32 &secondArcId, CrossCirclesPoint pType,
-                                                const qreal &mx, const qreal &my, VMainGraphicsScene *scene,
+    static VToolPointOfIntersectionArcs *Create(const quint32 _id, const QString &pointName, quint32 firstArcId,
+                                                quint32 secondArcId, CrossCirclesPoint pType,
+                                                qreal mx, qreal my, bool showLabel, VMainGraphicsScene *scene,
                                                 VAbstractPattern *doc, VContainer *data, const Document &parse,
                                                 const Source &typeCreation);
     static QPointF FindPoint(const VArc *arc1, const VArc *arc2, const CrossCirclesPoint pType);

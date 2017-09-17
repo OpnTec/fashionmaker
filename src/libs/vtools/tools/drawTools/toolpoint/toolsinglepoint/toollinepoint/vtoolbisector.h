@@ -57,12 +57,11 @@ public:
     virtual void   setDialog() Q_DECL_OVERRIDE;
     static VToolBisector* Create(QSharedPointer<DialogTool> dialog, VMainGraphicsScene  *scene, VAbstractPattern *doc,
                                  VContainer *data);
-    static VToolBisector* Create(const quint32 _id, QString &formula, const quint32 &firstPointId,
-                                 const quint32 &secondPointId, const quint32 &thirdPointId, const QString &typeLine,
-                                 const QString &lineColor, const QString &pointName, const qreal &mx, const qreal &my,
-                                 VMainGraphicsScene  *scene, VAbstractPattern *doc, VContainer *data,
-                                 const Document &parse,
-                                 const Source &typeCreation);
+    static VToolBisector* Create(const quint32 _id, QString &formula, quint32 firstPointId, quint32 secondPointId,
+                                 quint32 thirdPointId, const QString &typeLine, const QString &lineColor,
+                                 const QString &pointName, qreal mx, qreal my, bool showLabel,
+                                 VMainGraphicsScene *scene, VAbstractPattern *doc, VContainer *data,
+                                 const Document &parse, const Source &typeCreation);
     static const QString ToolType;
     virtual int    type() const Q_DECL_OVERRIDE {return Type;}
     enum { Type = UserType + static_cast<int>(Tool::Bisector)};

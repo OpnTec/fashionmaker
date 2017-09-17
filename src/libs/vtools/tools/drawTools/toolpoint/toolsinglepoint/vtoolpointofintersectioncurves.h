@@ -55,7 +55,7 @@ public:
     static VToolPointOfIntersectionCurves *Create(const quint32 _id, const QString &pointName,
                                                   quint32 firstCurveId, quint32 secondCurveId,
                                                   VCrossCurvesPoint vCrossPoint, HCrossCurvesPoint hCrossPoint,
-                                                  const qreal &mx, const qreal &my, VMainGraphicsScene *scene,
+                                                  qreal mx, qreal my, bool showLabel, VMainGraphicsScene *scene,
                                                   VAbstractPattern *doc, VContainer *data, const Document &parse,
                                                   const Source &typeCreation);
     static QPointF FindPoint(const QVector<QPointF> &curve1Points, const QVector<QPointF> &curve2Points,

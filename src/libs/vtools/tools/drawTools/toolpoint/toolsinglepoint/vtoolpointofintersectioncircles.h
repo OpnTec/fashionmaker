@@ -56,7 +56,7 @@ public:
                                                    quint32 firstCircleCenterId, quint32 secondCircleCenterId,
                                                    QString &firstCircleRadius, QString &secondCircleRadius,
                                                    CrossCirclesPoint crossPoint,
-                                                   const qreal &mx, const qreal &my, VMainGraphicsScene *scene,
+                                                   qreal mx, qreal my, bool showLabel, VMainGraphicsScene *scene,
                                                    VAbstractPattern *doc, VContainer *data, const Document &parse,
                                                    const Source &typeCreation);
     static QPointF FindPoint(const QPointF &c1Point, const QPointF &c2Point, qreal c1Radius, qreal c2Radius,

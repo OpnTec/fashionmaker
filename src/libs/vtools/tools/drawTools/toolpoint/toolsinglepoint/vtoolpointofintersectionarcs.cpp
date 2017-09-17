@@ -89,7 +89,7 @@ VToolPointOfIntersectionArcs *VToolPointOfIntersectionArcs::Create(QSharedPointe
     const quint32 secondArcId = dialogTool->GetSecondArcId();
     const CrossCirclesPoint pType = dialogTool->GetCrossArcPoint();
     const QString pointName = dialogTool->getPointName();
-    VToolPointOfIntersectionArcs *point = Create(0, pointName, firstArcId, secondArcId, pType, 5, 10, scene, doc,
+    VToolPointOfIntersectionArcs *point = Create(0, pointName, firstArcId, secondArcId, pType, 5, 10, true, scene, doc,
                                                  data, Document::FullParse, Source::FromGui);
     if (point != nullptr)
     {
@@ -100,25 +100,28 @@ VToolPointOfIntersectionArcs *VToolPointOfIntersectionArcs::Create(QSharedPointe
 
 //---------------------------------------------------------------------------------------------------------------------
 VToolPointOfIntersectionArcs *VToolPointOfIntersectionArcs::Create(const quint32 _id, const QString &pointName,
-                                                                   const quint32 &firstArcId,
-                                                                   const quint32 &secondArcId, CrossCirclesPoint pType,
-                                                                   const qreal &mx, const qreal &my,
-                                                                   VMainGraphicsScene *scene, VAbstractPattern *doc,
-                                                                   VContainer *data, const Document &parse,
-                                                                   const Source &typeCreation)
+                                                                   quint32 firstArcId, quint32 secondArcId,
+                                                                   CrossCirclesPoint pType, qreal mx, qreal my,
+                                                                   bool showLabel, VMainGraphicsScene *scene,
+                                                                   VAbstractPattern *doc, VContainer *data,
+                                                                   const Document &parse, const Source &typeCreation)
 {
     const QSharedPointer<VArc> firstArc = data->GeometricObject<VArc>(firstArcId);
     const QSharedPointer<VArc> secondArc = data->GeometricObject<VArc>(secondArcId);
 
     const QPointF point = FindPoint(firstArc.data(), secondArc.data(), pType);
     quint32 id = _id;
+
+    VPointF *p = new VPointF(point, pointName, mx, my);
+    p->SetShowLabel(showLabel);
+
     if (typeCreation == Source::FromGui)
     {
-        id = data->AddGObject(new VPointF(point, pointName, mx, my));
+        id = data->AddGObject(p);
     }
     else
     {
-        data->UpdateGObject(id, new VPointF(point, pointName, mx, my));
+        data->UpdateGObject(id, p);
         if (parse != Document::FullParse)
         {
             doc->UpdateToolData(id, data);

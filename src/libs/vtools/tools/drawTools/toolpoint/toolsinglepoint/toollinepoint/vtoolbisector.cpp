@@ -156,7 +156,7 @@ VToolBisector* VToolBisector::Create(QSharedPointer<DialogTool> dialog, VMainGra
     const QString lineColor = dialogTool->GetLineColor();
     const QString pointName = dialogTool->getPointName();
     VToolBisector *point = Create(0, formula, firstPointId, secondPointId, thirdPointId, typeLine, lineColor,
-                                  pointName, 5, 10, scene, doc, data, Document::FullParse, Source::FromGui);
+                                  pointName, 5, 10, true, scene, doc, data, Document::FullParse, Source::FromGui);
     if (point != nullptr)
     {
         point->m_dialog = dialogTool;
@@ -176,17 +176,17 @@ VToolBisector* VToolBisector::Create(QSharedPointer<DialogTool> dialog, VMainGra
  * @param pointName point name.
  * @param mx label bias x axis.
  * @param my label bias y axis.
+ * @param showLabel show/hide label.
  * @param scene pointer to scene.
  * @param doc dom document container.
  * @param data container with variables.
  * @param parse parser file mode.
  * @param typeCreation way we create this tool.
  */
-VToolBisector* VToolBisector::Create(const quint32 _id, QString &formula, const quint32 &firstPointId,
-                                     const quint32 &secondPointId, const quint32 &thirdPointId, const QString &typeLine,
-                                     const QString &lineColor, const QString &pointName, const qreal &mx,
-                                     const qreal &my, VMainGraphicsScene *scene, VAbstractPattern *doc,
-                                     VContainer *data,
+VToolBisector* VToolBisector::Create(const quint32 _id, QString &formula, quint32 firstPointId, quint32 secondPointId,
+                                     quint32 thirdPointId, const QString &typeLine, const QString &lineColor,
+                                     const QString &pointName, qreal mx, qreal my, bool showLabel,
+                                     VMainGraphicsScene *scene, VAbstractPattern *doc, VContainer *data,
                                      const Document &parse, const Source &typeCreation)
 {
     const QSharedPointer<VPointF> firstPoint = data->GeometricObject<VPointF>(firstPointId);
@@ -198,14 +198,18 @@ VToolBisector* VToolBisector::Create(const quint32 _id, QString &formula, const 
     QPointF fPoint = VToolBisector::FindPoint(static_cast<QPointF>(*firstPoint), static_cast<QPointF>(*secondPoint),
                                               static_cast<QPointF>(*thirdPoint), qApp->toPixel(result));
     quint32 id = _id;
+
+    VPointF *p = new VPointF(fPoint, pointName, mx, my);
+    p->SetShowLabel(showLabel);
+
     if (typeCreation == Source::FromGui)
     {
-        id = data->AddGObject(new VPointF(fPoint, pointName, mx, my));
+        id = data->AddGObject(p);
         data->AddLine(secondPointId, id);
     }
     else
     {
-        data->UpdateGObject(id, new VPointF(fPoint, pointName, mx, my));
+        data->UpdateGObject(id, p);
         data->AddLine(secondPointId, id);
         if (parse != Document::FullParse)
         {

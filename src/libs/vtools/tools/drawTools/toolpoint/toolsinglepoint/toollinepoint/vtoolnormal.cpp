@@ -121,7 +121,7 @@ VToolNormal* VToolNormal::Create(QSharedPointer<DialogTool> dialog, VMainGraphic
     const QString pointName = dialogTool->getPointName();
     const qreal angle = dialogTool->GetAngle();
     VToolNormal *point = Create(0, formula, firstPointId, secondPointId, typeLine, lineColor, pointName, angle, 5, 10,
-                                scene, doc, data, Document::FullParse, Source::FromGui);
+                                true, scene, doc, data, Document::FullParse, Source::FromGui);
     if (point != nullptr)
     {
         point->m_dialog = dialogTool;
@@ -141,18 +141,18 @@ VToolNormal* VToolNormal::Create(QSharedPointer<DialogTool> dialog, VMainGraphic
  * @param angle additional angle.
  * @param mx label bias x axis.
  * @param my label bias y axis.
+ * @param showLabel show/hide label.
  * @param scene pointer to scene.
  * @param doc dom document container.
  * @param data container with variables.
  * @param parse parser file mode.
  * @param typeCreation way we create this tool.
  */
-VToolNormal* VToolNormal::Create(const quint32 _id, QString &formula, const quint32 &firstPointId,
-                                 const quint32 &secondPointId, const QString &typeLine, const QString &lineColor,
-                                 const QString &pointName, const qreal angle, const qreal &mx, const qreal &my,
+VToolNormal* VToolNormal::Create(const quint32 _id, QString &formula, quint32 firstPointId, quint32 secondPointId,
+                                 const QString &typeLine, const QString &lineColor,
+                                 const QString &pointName, qreal angle, qreal mx, qreal my, bool showLabel,
                                  VMainGraphicsScene *scene, VAbstractPattern *doc, VContainer *data,
-                                 const Document &parse,
-                                 const Source &typeCreation)
+                                 const Document &parse, const Source &typeCreation)
 {
     const QSharedPointer<VPointF> firstPoint = data->GeometricObject<VPointF>(firstPointId);
     const QSharedPointer<VPointF> secondPoint = data->GeometricObject<VPointF>(secondPointId);
@@ -162,14 +162,18 @@ VToolNormal* VToolNormal::Create(const quint32 _id, QString &formula, const quin
     QPointF fPoint = VToolNormal::FindPoint(static_cast<QPointF>(*firstPoint), static_cast<QPointF>(*secondPoint),
                                             qApp->toPixel(result), angle);
     quint32 id = _id;
+
+    VPointF *p = new VPointF(fPoint, pointName, mx, my);
+    p->SetShowLabel(showLabel);
+
     if (typeCreation == Source::FromGui)
     {
-        id = data->AddGObject(new VPointF(fPoint, pointName, mx, my));
+        id = data->AddGObject(p);
         data->AddLine(firstPointId, id);
     }
     else
     {
-        data->UpdateGObject(id, new VPointF(fPoint, pointName, mx, my));
+        data->UpdateGObject(id, p);
         data->AddLine(firstPointId, id);
         if (parse != Document::FullParse)
         {

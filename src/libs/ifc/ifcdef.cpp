@@ -122,6 +122,7 @@ const QString AttrIdObject    = QStringLiteral("idObject");
 const QString AttrInLayout    = QStringLiteral("inLayout");
 const QString AttrRotationAngle = QStringLiteral("rotationAngle");
 const QString AttrClosed      = QStringLiteral("closed");
+const QString AttrShowLabel   = QStringLiteral("showLabel");
 
 const QString TypeLineNone           = QStringLiteral("none");
 const QString TypeLineLine           = QStringLiteral("hair");

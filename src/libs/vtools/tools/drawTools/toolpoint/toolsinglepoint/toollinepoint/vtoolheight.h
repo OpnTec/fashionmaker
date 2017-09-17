@@ -56,8 +56,8 @@ public:
     static VToolHeight *Create(QSharedPointer<DialogTool> dialog, VMainGraphicsScene  *scene, VAbstractPattern *doc,
                                VContainer *data);
     static VToolHeight *Create(const quint32 _id, const QString &pointName, const QString &typeLine,
-                               const QString &lineColor, const quint32 &basePointId, const quint32 &p1LineId,
-                               const quint32 &p2LineId, const qreal &mx, const qreal &my, VMainGraphicsScene  *scene,
+                               const QString &lineColor, quint32 basePointId, quint32 p1LineId,
+                               quint32 p2LineId, qreal mx, qreal my, bool showLabel, VMainGraphicsScene  *scene,
                                VAbstractPattern *doc, VContainer *data, const Document &parse,
                                const Source &typeCreation);
     static QPointF FindPoint(const QLineF &line, const QPointF &point);

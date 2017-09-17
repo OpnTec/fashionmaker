@@ -52,9 +52,10 @@ public:
     static VToolPointFromArcAndTangent *Create(QSharedPointer<DialogTool> dialog, VMainGraphicsScene  *scene,
                                                VAbstractPattern *doc, VContainer *data);
     static VToolPointFromArcAndTangent *Create(const quint32 _id, const QString &pointName, quint32 arcId,
-                                               quint32 tangentPointId, CrossCirclesPoint crossPoint, const qreal &mx,
-                                               const qreal &my, VMainGraphicsScene *scene, VAbstractPattern *doc,
-                                               VContainer *data, const Document &parse, const Source &typeCreation);
+                                               quint32 tangentPointId, CrossCirclesPoint crossPoint, qreal mx,
+                                               qreal my, bool showLabel, VMainGraphicsScene *scene,
+                                               VAbstractPattern *doc, VContainer *data, const Document &parse,
+                                               const Source &typeCreation);
     static QPointF FindPoint(const QPointF &p, const VArc *arc, const CrossCirclesPoint pType);
     static const QString ToolType;
     virtual int  type() const Q_DECL_OVERRIDE {return Type;}

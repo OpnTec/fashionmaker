@@ -100,7 +100,7 @@ VToolLineIntersectAxis *VToolLineIntersectAxis::Create(QSharedPointer<DialogTool
     const quint32 secondPointId = dialogTool->GetSecondPointId();
 
     VToolLineIntersectAxis *point = Create(0, pointName, typeLine, lineColor, formulaAngle,
-                                           basePointId, firstPointId, secondPointId, 5, 10,
+                                           basePointId, firstPointId, secondPointId, 5, 10, true,
                                            scene, doc, data, Document::FullParse, Source::FromGui);
     if (point != nullptr)
     {
@@ -112,9 +112,9 @@ VToolLineIntersectAxis *VToolLineIntersectAxis::Create(QSharedPointer<DialogTool
 //---------------------------------------------------------------------------------------------------------------------
 VToolLineIntersectAxis *VToolLineIntersectAxis::Create(const quint32 _id, const QString &pointName,
                                                        const QString &typeLine, const QString &lineColor,
-                                                       QString &formulaAngle, const quint32 &basePointId,
-                                                       const quint32 &firstPointId, const quint32 &secondPointId,
-                                                       const qreal &mx, const qreal &my, VMainGraphicsScene *scene,
+                                                       QString &formulaAngle, quint32 basePointId,
+                                                       quint32 firstPointId, quint32 secondPointId,
+                                                       qreal mx, qreal my, bool showLabel, VMainGraphicsScene *scene,
                                                        VAbstractPattern *doc, VContainer *data, const Document &parse,
                                                        const Source &typeCreation)
 {
@@ -128,16 +128,20 @@ VToolLineIntersectAxis *VToolLineIntersectAxis::Create(const quint32 _id, const 
 
     QPointF fPoint = FindPoint(axis, line);
     quint32 id = _id;
+
+    VPointF *p = new VPointF(fPoint, pointName, mx, my);
+    p->SetShowLabel(showLabel);
+
     if (typeCreation == Source::FromGui)
     {
-        id = data->AddGObject(new VPointF(fPoint, pointName, mx, my));
+        id = data->AddGObject(p);
         data->AddLine(basePointId, id);
         data->AddLine(firstPointId, id);
         data->AddLine(id, secondPointId);
     }
     else
     {
-        data->UpdateGObject(id, new VPointF(fPoint, pointName, mx, my));
+        data->UpdateGObject(id, p);
         data->AddLine(basePointId, id);
         data->AddLine(firstPointId, id);
         data->AddLine(id, secondPointId);

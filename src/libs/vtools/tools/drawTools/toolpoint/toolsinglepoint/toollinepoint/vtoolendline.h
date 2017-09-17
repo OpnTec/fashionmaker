@@ -57,7 +57,7 @@ public:
                                 VContainer *data);
     static VToolEndLine *Create(const quint32 _id, const QString &pointName, const QString &typeLine,
                                 const QString &lineColor, QString &formulaLength, QString &formulaAngle,
-                                const quint32 &basePointId, const qreal &mx, const qreal &my,
+                                quint32 basePointId, qreal mx, qreal my, bool showLabel,
                                 VMainGraphicsScene  *scene, VAbstractPattern *doc, VContainer *data,
                                 const Document &parse,
                                 const Source &typeCreation);

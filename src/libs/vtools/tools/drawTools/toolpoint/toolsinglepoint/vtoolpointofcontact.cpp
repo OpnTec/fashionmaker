@@ -175,8 +175,8 @@ VToolPointOfContact* VToolPointOfContact::Create(QSharedPointer<DialogTool> dial
     const quint32 firstPointId = dialogTool->GetFirstPoint();
     const quint32 secondPointId = dialogTool->GetSecondPoint();
     const QString pointName = dialogTool->getPointName();
-    VToolPointOfContact *point = Create(0, radius, center, firstPointId, secondPointId, pointName, 5, 10, scene, doc,
-                                        data, Document::FullParse, Source::FromGui);
+    VToolPointOfContact *point = Create(0, radius, center, firstPointId, secondPointId, pointName, 5, 10, true, scene,
+                                        doc, data, Document::FullParse, Source::FromGui);
     if (point != nullptr)
     {
         point->m_dialog = dialogTool;
@@ -201,9 +201,9 @@ VToolPointOfContact* VToolPointOfContact::Create(QSharedPointer<DialogTool> dial
  * @param parse parser file mode.
  * @param typeCreation way we create this tool.
  */
-VToolPointOfContact* VToolPointOfContact::Create(const quint32 _id, QString &radius, const quint32 &center,
-                                                 const quint32 &firstPointId, const quint32 &secondPointId,
-                                                 const QString &pointName, const qreal &mx, const qreal &my,
+VToolPointOfContact* VToolPointOfContact::Create(const quint32 _id, QString &radius, quint32 center,
+                                                 quint32 firstPointId, quint32 secondPointId,
+                                                 const QString &pointName, qreal mx, qreal my, bool showLabel,
                                                  VMainGraphicsScene *scene, VAbstractPattern *doc, VContainer *data,
                                                  const Document &parse, const Source &typeCreation)
 {
@@ -216,16 +216,20 @@ VToolPointOfContact* VToolPointOfContact::Create(const quint32 _id, QString &rad
     QPointF fPoint = VToolPointOfContact::FindPoint(qApp->toPixel(result), static_cast<QPointF>(*centerP),
                                                     static_cast<QPointF>(*firstP), static_cast<QPointF>(*secondP));
     quint32 id =  _id;
+
+    VPointF *p = new VPointF(fPoint, pointName, mx, my);
+    p->SetShowLabel(showLabel);
+
     if (typeCreation == Source::FromGui)
     {
-        id = data->AddGObject(new VPointF(fPoint, pointName, mx, my));
+        id = data->AddGObject(p);
         data->AddLine(firstPointId, id);
         data->AddLine(secondPointId, id);
         data->AddLine(center, id);
     }
     else
     {
-        data->UpdateGObject(id, new VPointF(fPoint, pointName, mx, my));
+        data->UpdateGObject(id, p);
         data->AddLine(firstPointId, id);
         data->AddLine(secondPointId, id);
         data->AddLine(center, id);

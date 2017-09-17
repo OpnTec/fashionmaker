@@ -53,8 +53,8 @@ public:
     virtual void setDialog() Q_DECL_OVERRIDE;
     static VToolCutArc*  Create(QSharedPointer<DialogTool> dialog, VMainGraphicsScene *scene, VAbstractPattern *doc,
                                 VContainer *data);
-    static VToolCutArc*  Create(const quint32 _id, const QString &pointName, QString &formula, const quint32 &arcId,
-                                const qreal &mx, const qreal &my, VMainGraphicsScene *scene,
+    static VToolCutArc*  Create(const quint32 _id, const QString &pointName, QString &formula, quint32 arcId,
+                                qreal mx, qreal my, bool showLabel, VMainGraphicsScene *scene,
                                 VAbstractPattern *doc, VContainer *data, const Document &parse,
                                 const Source &typeCreation);
     static const QString ToolType;

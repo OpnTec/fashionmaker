@@ -57,9 +57,9 @@ public:
                              const qreal &length);
     static VToolShoulderPoint* Create(QSharedPointer<DialogTool> dialog, VMainGraphicsScene  *scene,
                                       VAbstractPattern *doc, VContainer *data);
-    static VToolShoulderPoint* Create(const quint32 _id, QString &formula, const quint32 &p1Line, const quint32 &p2Line,
-                                      const quint32 &pShoulder, const QString &typeLine, const QString &lineColor,
-                                      const QString &pointName, const qreal &mx, const qreal &my,
+    static VToolShoulderPoint* Create(const quint32 _id, QString &formula, quint32 p1Line, quint32 p2Line,
+                                      quint32 pShoulder, const QString &typeLine, const QString &lineColor,
+                                      const QString &pointName, qreal mx, qreal my, bool showLabel,
                                       VMainGraphicsScene *scene, VAbstractPattern *doc, VContainer *data,
                                       const Document &parse,
                                       const Source &typeCreation);

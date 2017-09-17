@@ -54,7 +54,7 @@ public:
                                                   VAbstractPattern *doc, VContainer *data);
     static VToolPointFromCircleAndTangent *Create(const quint32 _id, const QString &pointName,
                                                   quint32 circleCenterId, QString &circleRadius, quint32 tangentPointId,
-                                                  CrossCirclesPoint crossPoint, const qreal &mx, const qreal &my,
+                                                  CrossCirclesPoint crossPoint, qreal mx, qreal my, bool showLabel,
                                                   VMainGraphicsScene *scene, VAbstractPattern *doc, VContainer *data,
                                                   const Document &parse, const Source &typeCreation);
     static QPointF FindPoint(const QPointF &p, const QPointF &center, qreal radius, const CrossCirclesPoint crossPoint);

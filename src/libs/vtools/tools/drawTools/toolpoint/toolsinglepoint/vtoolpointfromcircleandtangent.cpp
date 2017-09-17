@@ -95,7 +95,7 @@ VToolPointFromCircleAndTangent *VToolPointFromCircleAndTangent::Create(QSharedPo
     const CrossCirclesPoint pType = dialogTool->GetCrossCirclesPoint();
     const QString pointName = dialogTool->getPointName();
     VToolPointFromCircleAndTangent *point = Create(0, pointName, circleCenterId, circleRadius, tangentPointId, pType,
-                                                   5, 10, scene, doc, data, Document::FullParse, Source::FromGui);
+                                                   5, 10, true, scene, doc, data, Document::FullParse, Source::FromGui);
     if (point != nullptr)
     {
         point->m_dialog = dialogTool;
@@ -107,8 +107,9 @@ VToolPointFromCircleAndTangent *VToolPointFromCircleAndTangent::Create(QSharedPo
 VToolPointFromCircleAndTangent *VToolPointFromCircleAndTangent::Create(const quint32 _id, const QString &pointName,
                                                                        quint32 circleCenterId, QString &circleRadius,
                                                                        quint32 tangentPointId,
-                                                                       CrossCirclesPoint crossPoint, const qreal &mx,
-                                                                       const qreal &my, VMainGraphicsScene *scene,
+                                                                       CrossCirclesPoint crossPoint, qreal mx,
+                                                                       qreal my, bool showLabel,
+                                                                       VMainGraphicsScene *scene,
                                                                        VAbstractPattern *doc, VContainer *data,
                                                                        const Document &parse,
                                                                        const Source &typeCreation)
@@ -120,13 +121,17 @@ VToolPointFromCircleAndTangent *VToolPointFromCircleAndTangent::Create(const qui
     const QPointF point = VToolPointFromCircleAndTangent::FindPoint(static_cast<QPointF>(tPoint),
                                                                     static_cast<QPointF>(cPoint), radius, crossPoint);
     quint32 id = _id;
+
+    VPointF *p = new VPointF(point, pointName, mx, my);
+    p->SetShowLabel(showLabel);
+
     if (typeCreation == Source::FromGui)
     {
-        id = data->AddGObject(new VPointF(point, pointName, mx, my));
+        id = data->AddGObject(p);
     }
     else
     {
-        data->UpdateGObject(id, new VPointF(point, pointName, mx, my));
+        data->UpdateGObject(id, p);
         if (parse != Document::FullParse)
         {
             doc->UpdateToolData(id, data);

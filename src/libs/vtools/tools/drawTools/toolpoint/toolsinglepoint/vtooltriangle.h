@@ -55,9 +55,9 @@ public:
     virtual void   setDialog() Q_DECL_OVERRIDE;
     static VToolTriangle *Create(QSharedPointer<DialogTool> dialog, VMainGraphicsScene  *scene, VAbstractPattern *doc,
                                  VContainer *data);
-    static VToolTriangle *Create(const quint32 _id, const QString &pointName, const quint32 &axisP1Id,
-                                 const quint32 &axisP2Id, const quint32 &firstPointId, const quint32 &secondPointId,
-                                 const qreal &mx, const qreal &my, VMainGraphicsScene *scene, VAbstractPattern *doc,
+    static VToolTriangle *Create(const quint32 _id, const QString &pointName, quint32 axisP1Id,
+                                 quint32 axisP2Id, quint32 firstPointId, quint32 secondPointId,
+                                 qreal mx, qreal my, bool showLabel, VMainGraphicsScene *scene, VAbstractPattern *doc,
                                  VContainer *data, const Document &parse, const Source &typeCreation);
     static QPointF FindPoint(const QPointF &axisP1, const QPointF &axisP2, const QPointF &firstPoint,
                              const QPointF &secondPoint);

@@ -55,7 +55,7 @@ public:
                                   VAbstractPattern *doc, VContainer *data);
     static VToolAlongLine* Create(const quint32 _id, const QString &pointName, const QString &typeLine,
                                   const QString &lineColor, QString &formula, const quint32 &firstPointId,
-                                  const quint32 &secondPointId, const qreal &mx, const qreal &my,
+                                  quint32 secondPointId, qreal mx, qreal my, bool showLabel,
                                   VMainGraphicsScene *scene, VAbstractPattern *doc, VContainer *data,
                                   const Document &parse,
                                   const Source &typeCreation);

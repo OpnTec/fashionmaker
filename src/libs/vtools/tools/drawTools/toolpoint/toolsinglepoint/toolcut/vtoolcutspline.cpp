@@ -109,7 +109,7 @@ VToolCutSpline* VToolCutSpline::Create(QSharedPointer<DialogTool> dialog, VMainG
     const QString pointName = dialogTool->getPointName();
     QString formula = dialogTool->GetFormula();
     const quint32 splineId = dialogTool->getSplineId();
-    VToolCutSpline* point = Create(0, pointName, formula, splineId, 5, 10, scene, doc, data, Document::FullParse,
+    VToolCutSpline* point = Create(0, pointName, formula, splineId, 5, 10, true, scene, doc, data, Document::FullParse,
                                    Source::FromGui);
     if (point != nullptr)
     {
@@ -134,7 +134,7 @@ VToolCutSpline* VToolCutSpline::Create(QSharedPointer<DialogTool> dialog, VMainG
  * @param typeCreation way we create this tool.
  */
 VToolCutSpline* VToolCutSpline::Create(const quint32 _id, const QString &pointName, QString &formula,
-                                       const quint32 &splineId, const qreal &mx, const qreal &my,
+                                       quint32 splineId, qreal mx, qreal my, bool showLabel,
                                        VMainGraphicsScene *scene, VAbstractPattern *doc, VContainer *data,
                                        const Document &parse, const Source &typeCreation)
 {
@@ -146,7 +146,10 @@ VToolCutSpline* VToolCutSpline::Create(const quint32 _id, const QString &pointNa
     QPointF point = spl->CutSpline(qApp->toPixel(result), spl1p2, spl1p3, spl2p2, spl2p3);
 
     quint32 id = _id;
+
     VPointF *p = new VPointF(point, pointName, mx, my);
+    p->SetShowLabel(showLabel);
+
     auto spline1 = QSharedPointer<VAbstractBezier>(new VSpline(spl->GetP1(), spl1p2, spl1p3, *p));
     auto spline2 = QSharedPointer<VAbstractBezier>(new VSpline(*p, spl2p2, spl2p3, spl->GetP4()));
 

@@ -113,7 +113,8 @@ VToolCurveIntersectAxis *VToolCurveIntersectAxis::Create(QSharedPointer<DialogTo
     const quint32 curveId = dialogTool->getCurveId();
 
     VToolCurveIntersectAxis *point = Create(0, pointName, typeLine, lineColor, formulaAngle, basePointId,
-                                            curveId, 5, 10, scene, doc, data, Document::FullParse, Source::FromGui);
+                                            curveId, 5, 10, true, scene, doc, data, Document::FullParse,
+                                            Source::FromGui);
     if (point != nullptr)
     {
         point->m_dialog = dialogTool;
@@ -124,11 +125,11 @@ VToolCurveIntersectAxis *VToolCurveIntersectAxis::Create(QSharedPointer<DialogTo
 //---------------------------------------------------------------------------------------------------------------------
 VToolCurveIntersectAxis *VToolCurveIntersectAxis::Create(const quint32 _id, const QString &pointName,
                                                          const QString &typeLine, const QString &lineColor,
-                                                         QString &formulaAngle, const quint32 &basePointId,
-                                                         const quint32 &curveId, const qreal &mx, const qreal &my,
+                                                         QString &formulaAngle, quint32 basePointId,
+                                                         quint32 curveId, qreal mx, qreal my, bool showLabel,
                                                          VMainGraphicsScene *scene, VAbstractPattern *doc,
-                                                         VContainer *data,
-                                                         const Document &parse, const Source &typeCreation)
+                                                         VContainer *data, const Document &parse,
+                                                         const Source &typeCreation)
 {
     const QSharedPointer<VPointF> basePoint = data->GeometricObject<VPointF>(basePointId);
     const qreal angle = CheckFormula(_id, formulaAngle, data);
@@ -137,7 +138,10 @@ VToolCurveIntersectAxis *VToolCurveIntersectAxis::Create(const quint32 _id, cons
     const QPointF fPoint = FindPoint(static_cast<QPointF>(*basePoint), angle, curve);
     const qreal segLength = curve->GetLengthByPoint(fPoint);
     quint32 id = _id;
+
     VPointF *p = new VPointF(fPoint, pointName, mx, my);
+    p->SetShowLabel(showLabel);
+
     if (typeCreation == Source::FromGui)
     {
         id = data->AddGObject(p);

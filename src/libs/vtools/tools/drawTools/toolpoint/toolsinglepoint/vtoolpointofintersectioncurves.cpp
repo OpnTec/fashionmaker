@@ -97,7 +97,7 @@ VToolPointOfIntersectionCurves *VToolPointOfIntersectionCurves::Create(QSharedPo
     const HCrossCurvesPoint hCrossPoint = dialogTool->GetHCrossPoint();
     const QString pointName = dialogTool->getPointName();
     VToolPointOfIntersectionCurves *point = Create(0, pointName, firstCurveId, secondCurveId, vCrossPoint, hCrossPoint,
-                                                   5, 10, scene, doc, data, Document::FullParse, Source::FromGui);
+                                                   5, 10, true, scene, doc, data, Document::FullParse, Source::FromGui);
     if (point != nullptr)
     {
         point->m_dialog = dialogTool;
@@ -109,8 +109,9 @@ VToolPointOfIntersectionCurves *VToolPointOfIntersectionCurves::Create(QSharedPo
 VToolPointOfIntersectionCurves *VToolPointOfIntersectionCurves::Create(const quint32 _id, const QString &pointName,
                                                                        quint32 firstCurveId, quint32 secondCurveId,
                                                                        VCrossCurvesPoint vCrossPoint,
-                                                                       HCrossCurvesPoint hCrossPoint, const qreal &mx,
-                                                                       const qreal &my, VMainGraphicsScene *scene,
+                                                                       HCrossCurvesPoint hCrossPoint,qreal mx,
+                                                                       qreal my, bool showLabel,
+                                                                       VMainGraphicsScene *scene,
                                                                        VAbstractPattern *doc, VContainer *data,
                                                                        const Document &parse,
                                                                        const Source &typeCreation)
@@ -121,13 +122,17 @@ VToolPointOfIntersectionCurves *VToolPointOfIntersectionCurves::Create(const qui
     const QPointF point = VToolPointOfIntersectionCurves::FindPoint(curve1->GetPoints(), curve2->GetPoints(),
                                                                     vCrossPoint, hCrossPoint);
     quint32 id = _id;
+
+    VPointF *p = new VPointF(point, pointName, mx, my);
+    p->SetShowLabel(showLabel);
+
     if (typeCreation == Source::FromGui)
     {
-        id = data->AddGObject(new VPointF(point, pointName, mx, my));
+        id = data->AddGObject(p);
     }
     else
     {
-        data->UpdateGObject(id, new VPointF(point, pointName, mx, my));
+        data->UpdateGObject(id, p);
         if (parse != Document::FullParse)
         {
             doc->UpdateToolData(id, data);

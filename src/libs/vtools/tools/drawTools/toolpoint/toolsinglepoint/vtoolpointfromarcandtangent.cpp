@@ -89,7 +89,7 @@ VToolPointFromArcAndTangent *VToolPointFromArcAndTangent::Create(QSharedPointer<
     const quint32 tangentPointId = dialogTool->GetTangentPointId();
     const CrossCirclesPoint pType = dialogTool->GetCrossCirclesPoint();
     const QString pointName = dialogTool->getPointName();
-    VToolPointFromArcAndTangent *point = Create(0, pointName, arcId, tangentPointId, pType, 5, 10, scene, doc,
+    VToolPointFromArcAndTangent *point = Create(0, pointName, arcId, tangentPointId, pType, 5, 10, true, scene, doc,
                                                 data, Document::FullParse, Source::FromGui);
     if (point != nullptr)
     {
@@ -101,8 +101,8 @@ VToolPointFromArcAndTangent *VToolPointFromArcAndTangent::Create(QSharedPointer<
 //---------------------------------------------------------------------------------------------------------------------
 VToolPointFromArcAndTangent *VToolPointFromArcAndTangent::Create(const quint32 _id, const QString &pointName,
                                                                  quint32 arcId, quint32 tangentPointId,
-                                                                 CrossCirclesPoint crossPoint, const qreal &mx,
-                                                                 const qreal &my, VMainGraphicsScene *scene,
+                                                                 CrossCirclesPoint crossPoint, qreal mx,
+                                                                 qreal my, bool showLabel, VMainGraphicsScene *scene,
                                                                  VAbstractPattern *doc, VContainer *data,
                                                                  const Document &parse, const Source &typeCreation)
 {
@@ -111,13 +111,17 @@ VToolPointFromArcAndTangent *VToolPointFromArcAndTangent::Create(const quint32 _
 
     const QPointF point = VToolPointFromArcAndTangent::FindPoint(static_cast<QPointF>(tPoint), &arc, crossPoint);
     quint32 id = _id;
+
+    VPointF *p = new VPointF(point, pointName, mx, my);
+    p->SetShowLabel(showLabel);
+
     if (typeCreation == Source::FromGui)
     {
-        id = data->AddGObject(new VPointF(point, pointName, mx, my));
+        id = data->AddGObject(p);
     }
     else
     {
-        data->UpdateGObject(id, new VPointF(point, pointName, mx, my));
+        data->UpdateGObject(id, p);
         if (parse != Document::FullParse)
         {
             doc->UpdateToolData(id, data);

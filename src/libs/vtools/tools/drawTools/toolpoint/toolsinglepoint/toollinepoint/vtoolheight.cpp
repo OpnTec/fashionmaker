@@ -114,8 +114,8 @@ VToolHeight* VToolHeight::Create(QSharedPointer<DialogTool> dialog, VMainGraphic
     const quint32 p1LineId = dialogTool->GetP1LineId();
     const quint32 p2LineId = dialogTool->GetP2LineId();
 
-    VToolHeight *point = Create(0, pointName, typeLine, lineColor, basePointId, p1LineId, p2LineId, 5, 10, scene, doc,
-                                data, Document::FullParse, Source::FromGui);
+    VToolHeight *point = Create(0, pointName, typeLine, lineColor, basePointId, p1LineId, p2LineId, 5, 10, true, scene,
+                                doc, data, Document::FullParse, Source::FromGui);
     if (point != nullptr)
     {
         point->m_dialog = dialogTool;
@@ -142,8 +142,8 @@ VToolHeight* VToolHeight::Create(QSharedPointer<DialogTool> dialog, VMainGraphic
  * @return the created tool
  */
 VToolHeight* VToolHeight::Create(const quint32 _id, const QString &pointName, const QString &typeLine,
-                                 const QString &lineColor, const quint32 &basePointId, const quint32 &p1LineId,
-                                 const quint32 &p2LineId, const qreal &mx, const qreal &my, VMainGraphicsScene *scene,
+                                 const QString &lineColor, quint32 basePointId, quint32 p1LineId,
+                                 quint32 p2LineId, qreal mx, qreal my, bool showLabel, VMainGraphicsScene *scene,
                                  VAbstractPattern *doc, VContainer *data, const Document &parse,
                                  const Source &typeCreation)
 {
@@ -154,16 +154,20 @@ VToolHeight* VToolHeight::Create(const quint32 _id, const QString &pointName, co
     QPointF pHeight = FindPoint(QLineF(static_cast<QPointF>(*p1Line), static_cast<QPointF>(*p2Line)),
                                 static_cast<QPointF>(*basePoint));
     quint32 id = _id;
+
+    VPointF *p = new VPointF(pHeight, pointName, mx, my);
+    p->SetShowLabel(showLabel);
+
     if (typeCreation == Source::FromGui)
     {
-        id = data->AddGObject(new VPointF(pHeight, pointName, mx, my));
+        id = data->AddGObject(p);
         data->AddLine(basePointId, id);
         data->AddLine(p1LineId, id);
         data->AddLine(p2LineId, id);
     }
     else
     {
-        data->UpdateGObject(id, new VPointF(pHeight, pointName, mx, my));
+        data->UpdateGObject(id, p);
         data->AddLine(basePointId, id);
         data->AddLine(p1LineId, id);
         data->AddLine(p2LineId, id);

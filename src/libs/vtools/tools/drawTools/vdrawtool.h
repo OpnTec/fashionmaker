@@ -82,7 +82,6 @@ public slots:
     virtual void DetailsMode(bool mode);
 protected slots:
     virtual void ShowContextMenu(QGraphicsSceneContextMenuEvent *event, quint32 id=NULL_ID)=0;
-    virtual void ChangeLabelVisibility(quint32 id, bool visible);
 protected:
 
     enum class RemoveOption : bool {Disable = false, Enable = true};
@@ -108,6 +107,7 @@ protected:
 
     void         ReadAttributes();
     virtual void ReadToolAttributes(const QDomElement &domElement)=0;
+    virtual void ChangeLabelVisibility(quint32 id, bool visible);
 
     template <typename Dialog>
     void ContextMenu(QGraphicsSceneContextMenuEvent *event, quint32 itemId,
@@ -151,16 +151,7 @@ void VDrawTool::ContextMenu(QGraphicsSceneContextMenuEvent *event, quint32 itemI
 
     QAction *actionShowLabel = menu.addAction(tr("Show label"));
     actionShowLabel->setCheckable(true);
-
-    try
-    {
-        const QSharedPointer<VPointF> point = VAbstractTool::data.GeometricObject<VPointF>(itemId);
-        actionShowLabel->setChecked(point->IsShowLabel());
-    }
-    catch(const VExceptionBadId &)
-    {
-        actionShowLabel->setVisible(false);
-    }
+    actionShowLabel->setChecked(IsLabelVisible(itemId));
 
     QAction *actionRemove = menu.addAction(QIcon::fromTheme("edit-delete"), tr("Delete"));
     if (showRemove == RemoveOption::Enable)
@@ -213,7 +204,7 @@ void VDrawTool::ContextMenu(QGraphicsSceneContextMenuEvent *event, quint32 itemI
     }
     else if (selectedAction == actionShowLabel)
     {
-        SetLabelVisible(itemId, selectedAction->isChecked());
+        ChangeLabelVisibility(itemId, selectedAction->isChecked());
     }
 }
 

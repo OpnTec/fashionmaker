@@ -106,7 +106,7 @@ VToolCutArc* VToolCutArc::Create(QSharedPointer<DialogTool> dialog, VMainGraphic
     const QString pointName = dialogTool->getPointName();
     QString formula = dialogTool->GetFormula();
     const quint32 arcId = dialogTool->getArcId();
-    VToolCutArc* point = Create(0, pointName, formula, arcId, 5, 10, scene, doc, data, Document::FullParse,
+    VToolCutArc* point = Create(0, pointName, formula, arcId, 5, 10, true, scene, doc, data, Document::FullParse,
                                 Source::FromGui);
     if (point != nullptr)
     {
@@ -130,8 +130,8 @@ VToolCutArc* VToolCutArc::Create(QSharedPointer<DialogTool> dialog, VMainGraphic
  * @param parse parser file mode.
  * @param typeCreation way we create this tool.
  */
-VToolCutArc* VToolCutArc::Create(const quint32 _id, const QString &pointName, QString &formula, const quint32 &arcId,
-                                 const qreal &mx, const qreal &my, VMainGraphicsScene *scene, VAbstractPattern *doc,
+VToolCutArc* VToolCutArc::Create(const quint32 _id, const QString &pointName, QString &formula, quint32 arcId,
+                                 qreal mx, qreal my, bool showLabel, VMainGraphicsScene *scene, VAbstractPattern *doc,
                                  VContainer *data, const Document &parse, const Source &typeCreation)
 {
     const QSharedPointer<VArc> arc = data->GeometricObject<VArc>(arcId);
@@ -143,7 +143,10 @@ VToolCutArc* VToolCutArc::Create(const quint32 _id, const QString &pointName, QS
     QPointF point = arc->CutArc(qApp->toPixel(result), arc1, arc2);
 
     quint32 id = _id;
+
     VPointF *p = new VPointF(point, pointName, mx, my);
+    p->SetShowLabel(showLabel);
+
     auto a1 = QSharedPointer<VArc>(new VArc(arc1));
     auto a2 = QSharedPointer<VArc>(new VArc(arc2));
     if (typeCreation == Source::FromGui)

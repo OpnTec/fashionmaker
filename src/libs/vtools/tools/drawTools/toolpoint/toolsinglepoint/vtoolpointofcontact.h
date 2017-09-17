@@ -57,10 +57,10 @@ public:
                              const QPointF &secondPoint);
     static VToolPointOfContact* Create(QSharedPointer<DialogTool> dialog, VMainGraphicsScene  *scene,
                                        VAbstractPattern *doc, VContainer *data);
-    static VToolPointOfContact* Create(const quint32 _id, QString &radius, const quint32 &center,
-                                       const quint32 &firstPointId, const quint32 &secondPointId,
+    static VToolPointOfContact* Create(const quint32 _id, QString &radius, quint32 center,
+                                       quint32 firstPointId, quint32 secondPointId,
                                        const QString &pointName,
-                                       const qreal &mx, const qreal &my, VMainGraphicsScene  *scene,
+                                       qreal mx, qreal my, bool showLabel, VMainGraphicsScene  *scene,
                                        VAbstractPattern *doc,
                                        VContainer *data, const Document &parse, const Source &typeCreation);
     static const QString ToolType;
