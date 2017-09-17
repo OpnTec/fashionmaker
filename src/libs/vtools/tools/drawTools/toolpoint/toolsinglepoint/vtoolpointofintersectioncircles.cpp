@@ -78,7 +78,7 @@ void VToolPointOfIntersectionCircles::setDialog()
     QSharedPointer<DialogPointOfIntersectionCircles> dialogTool =
             m_dialog.objectCast<DialogPointOfIntersectionCircles>();
     SCASSERT(not dialogTool.isNull())
-    const QSharedPointer<VPointF> p = VAbstractTool::data.GeometricObject<VPointF>(id);
+    const QSharedPointer<VPointF> p = VAbstractTool::data.GeometricObject<VPointF>(m_id);
     dialogTool->SetFirstCircleCenterId(firstCircleCenterId);
     dialogTool->SetSecondCircleCenterId(secondCircleCenterId);
     dialogTool->SetFirstCircleRadius(firstCircleRadius);
@@ -216,7 +216,7 @@ void VToolPointOfIntersectionCircles::SetFirstCircleCenterId(const quint32 &valu
     {
         firstCircleCenterId = value;
 
-        QSharedPointer<VGObject> obj = VAbstractTool::data.GetGObject(id);
+        QSharedPointer<VGObject> obj = VAbstractTool::data.GetGObject(m_id);
         SaveOption(obj);
     }
 }
@@ -234,7 +234,7 @@ void VToolPointOfIntersectionCircles::SetSecondCircleCenterId(const quint32 &val
     {
         secondCircleCenterId = value;
 
-        QSharedPointer<VGObject> obj = VAbstractTool::data.GetGObject(id);
+        QSharedPointer<VGObject> obj = VAbstractTool::data.GetGObject(m_id);
         SaveOption(obj);
     }
 }
@@ -244,7 +244,7 @@ VFormula VToolPointOfIntersectionCircles::GetFirstCircleRadius() const
 {
     VFormula radius(firstCircleRadius, getData());
     radius.setCheckZero(true);
-    radius.setToolId(id);
+    radius.setToolId(m_id);
     radius.setPostfix(UnitsToStr(qApp->patternUnit()));
     return radius;
 }
@@ -257,7 +257,7 @@ void VToolPointOfIntersectionCircles::SetFirstCircleRadius(const VFormula &value
         if (value.getDoubleValue() > 0)// Formula don't check this, but radius can't be 0 or negative
         {
             firstCircleRadius = value.GetFormula(FormulaType::FromUser);
-            QSharedPointer<VGObject> obj = VAbstractTool::data.GetGObject(id);
+            QSharedPointer<VGObject> obj = VAbstractTool::data.GetGObject(m_id);
             SaveOption(obj);
         }
     }
@@ -268,7 +268,7 @@ VFormula VToolPointOfIntersectionCircles::GetSecondCircleRadius() const
 {
     VFormula radius(secondCircleRadius, getData());
     radius.setCheckZero(true);
-    radius.setToolId(id);
+    radius.setToolId(m_id);
     radius.setPostfix(UnitsToStr(qApp->patternUnit()));
     return radius;
 }
@@ -281,7 +281,7 @@ void VToolPointOfIntersectionCircles::SetSecondCircleRadius(const VFormula &valu
         if (value.getDoubleValue() > 0)// Formula don't check this, but radius can't be 0 or negative
         {
             secondCircleRadius = value.GetFormula(FormulaType::FromUser);
-            QSharedPointer<VGObject> obj = VAbstractTool::data.GetGObject(id);
+            QSharedPointer<VGObject> obj = VAbstractTool::data.GetGObject(m_id);
             SaveOption(obj);
         }
     }
@@ -298,7 +298,7 @@ void VToolPointOfIntersectionCircles::SetCrossCirclesPoint(const CrossCirclesPoi
 {
     crossPoint = value;
 
-    QSharedPointer<VGObject> obj = VAbstractTool::data.GetGObject(id);
+    QSharedPointer<VGObject> obj = VAbstractTool::data.GetGObject(m_id);
     SaveOption(obj);
 }
 

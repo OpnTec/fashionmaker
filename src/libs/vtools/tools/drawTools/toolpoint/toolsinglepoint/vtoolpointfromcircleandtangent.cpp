@@ -73,7 +73,7 @@ void VToolPointFromCircleAndTangent::setDialog()
     SCASSERT(not m_dialog.isNull())
     QSharedPointer<DialogPointFromCircleAndTangent> dialogTool = m_dialog.objectCast<DialogPointFromCircleAndTangent>();
     SCASSERT(not dialogTool.isNull())
-    const QSharedPointer<VPointF> p = VAbstractTool::data.GeometricObject<VPointF>(id);
+    const QSharedPointer<VPointF> p = VAbstractTool::data.GeometricObject<VPointF>(m_id);
     dialogTool->SetCircleCenterId(circleCenterId);
     dialogTool->SetCircleRadius(circleRadius);
     dialogTool->SetCrossCirclesPoint(crossPoint);
@@ -201,7 +201,7 @@ void VToolPointFromCircleAndTangent::SetTangentPointId(const quint32 &value)
     {
         tangentPointId = value;
 
-        QSharedPointer<VGObject> obj = VAbstractTool::data.GetGObject(id);
+        QSharedPointer<VGObject> obj = VAbstractTool::data.GetGObject(m_id);
         SaveOption(obj);
     }
 }
@@ -219,7 +219,7 @@ void VToolPointFromCircleAndTangent::SetCircleCenterId(const quint32 &value)
     {
         circleCenterId = value;
 
-        QSharedPointer<VGObject> obj = VAbstractTool::data.GetGObject(id);
+        QSharedPointer<VGObject> obj = VAbstractTool::data.GetGObject(m_id);
         SaveOption(obj);
     }
 }
@@ -229,7 +229,7 @@ VFormula VToolPointFromCircleAndTangent::GetCircleRadius() const
 {
     VFormula radius(circleRadius, getData());
     radius.setCheckZero(true);
-    radius.setToolId(id);
+    radius.setToolId(m_id);
     radius.setPostfix(UnitsToStr(qApp->patternUnit()));
     return radius;
 }
@@ -242,7 +242,7 @@ void VToolPointFromCircleAndTangent::SetCircleRadius(const VFormula &value)
         if (value.getDoubleValue() > 0)// Formula don't check this, but radius can't be 0 or negative
         {
             circleRadius = value.GetFormula(FormulaType::FromUser);
-            QSharedPointer<VGObject> obj = VAbstractTool::data.GetGObject(id);
+            QSharedPointer<VGObject> obj = VAbstractTool::data.GetGObject(m_id);
             SaveOption(obj);
         }
     }
@@ -259,7 +259,7 @@ void VToolPointFromCircleAndTangent::SetCrossCirclesPoint(const CrossCirclesPoin
 {
     crossPoint = value;
 
-    QSharedPointer<VGObject> obj = VAbstractTool::data.GetGObject(id);
+    QSharedPointer<VGObject> obj = VAbstractTool::data.GetGObject(m_id);
     SaveOption(obj);
 }
 

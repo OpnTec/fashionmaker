@@ -109,7 +109,7 @@ protected:
     VAbstractPattern         *doc;
 
     /** @brief id object id. */
-    const quint32            id;
+    const quint32            m_id;
 
     QPointer<Visualization> vis;
     SelectionType           selectionType;
@@ -153,7 +153,7 @@ private:
  */
 inline quint32 VAbstractTool::getId() const
 {
-    return id;
+    return m_id;
 }
 
 //---------------------------------------------------------------------------------------------------------------------

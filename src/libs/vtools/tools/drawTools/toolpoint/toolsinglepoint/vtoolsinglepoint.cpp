@@ -91,13 +91,13 @@ VToolSinglePoint::VToolSinglePoint(VAbstractPattern *doc, VContainer *data, quin
 //---------------------------------------------------------------------------------------------------------------------
 QString VToolSinglePoint::name() const
 {
-    return ObjectName<VPointF>(id);
+    return ObjectName<VPointF>(m_id);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void VToolSinglePoint::setName(const QString &name)
 {
-    SetPointName(id, name);
+    SetPointName(m_id, name);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -117,7 +117,7 @@ void VToolSinglePoint::GroupVisibility(quint32 object, bool visible)
 //---------------------------------------------------------------------------------------------------------------------
 bool VToolSinglePoint::IsLabelVisible(quint32 id) const
 {
-    if (this->id == id)
+    if (m_id == id)
     {
         const QSharedPointer<VPointF> point = VAbstractTool::data.GeometricObject<VPointF>(id);
         return point->IsShowLabel();
@@ -131,7 +131,7 @@ bool VToolSinglePoint::IsLabelVisible(quint32 id) const
 //---------------------------------------------------------------------------------------------------------------------
 void VToolSinglePoint::SetLabelVisible(quint32 id, bool visible)
 {
-    if (this->id == id)
+    if (m_id == id)
     {
         const QSharedPointer<VPointF> point = VAbstractTool::data.GeometricObject<VPointF>(id);
         point->SetShowLabel(visible);
@@ -146,7 +146,7 @@ void VToolSinglePoint::SetLabelVisible(quint32 id, bool visible)
  */
 void VToolSinglePoint::NameChangePosition(const QPointF &pos)
 {
-    ChangePosition(this, id, pos);
+    ChangePosition(this, m_id, pos);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -203,7 +203,7 @@ void VToolSinglePoint::EnableToolMove(bool move)
 //---------------------------------------------------------------------------------------------------------------------
 void VToolSinglePoint::PointChoosed()
 {
-    emit ChoosedTool(id, SceneObject::Point);
+    emit ChoosedTool(m_id, SceneObject::Point);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -219,7 +219,7 @@ void VToolSinglePoint::PointSelected(bool selected)
 void VToolSinglePoint::FullUpdateFromFile()
 {
     ReadAttributes();
-    RefreshPointGeometry(*VAbstractTool::data.GeometricObject<VPointF>(id));
+    RefreshPointGeometry(*VAbstractTool::data.GeometricObject<VPointF>(m_id));
     SetVisualization();
 }
 
@@ -261,7 +261,7 @@ QVariant VToolSinglePoint::itemChange(QGraphicsItem::GraphicsItemChange change, 
         m_namePoint->blockSignals(true);
         m_namePoint->setSelected(value.toBool());
         m_namePoint->blockSignals(false);
-        emit ChangedToolSelection(value.toBool(), id, id);
+        emit ChangedToolSelection(value.toBool(), m_id, m_id);
     }
 
     return VScenePoint::itemChange(change, value);
@@ -296,7 +296,7 @@ void VToolSinglePoint::keyReleaseEvent(QKeyEvent *event)
 //---------------------------------------------------------------------------------------------------------------------
 void VToolSinglePoint::contextMenuEvent(QGraphicsSceneContextMenuEvent *event)
 {
-    ShowContextMenu(event, id);
+    ShowContextMenu(event, m_id);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

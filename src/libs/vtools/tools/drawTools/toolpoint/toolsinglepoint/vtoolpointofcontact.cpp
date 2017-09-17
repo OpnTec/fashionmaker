@@ -92,7 +92,7 @@ void VToolPointOfContact::setDialog()
     SCASSERT(not m_dialog.isNull())
     QSharedPointer<DialogPointOfContact> dialogTool = m_dialog.objectCast<DialogPointOfContact>();
     SCASSERT(not dialogTool.isNull())
-    const QSharedPointer<VPointF> p = VAbstractTool::data.GeometricObject<VPointF>(id);
+    const QSharedPointer<VPointF> p = VAbstractTool::data.GeometricObject<VPointF>(m_id);
     dialogTool->setRadius(arcRadius);
     dialogTool->setCenter(center);
     dialogTool->SetFirstPoint(firstPointId);
@@ -343,7 +343,7 @@ QString VToolPointOfContact::MakeToolTip() const
     const QSharedPointer<VPointF> p1 = VAbstractTool::data.GeometricObject<VPointF>(firstPointId);
     const QSharedPointer<VPointF> p2 = VAbstractTool::data.GeometricObject<VPointF>(secondPointId);
     const QSharedPointer<VPointF> centerP = VAbstractTool::data.GeometricObject<VPointF>(center);
-    const QSharedPointer<VPointF> current = VAbstractTool::data.GeometricObject<VPointF>(id);
+    const QSharedPointer<VPointF> current = VAbstractTool::data.GeometricObject<VPointF>(m_id);
 
     const QLineF p1ToCur(static_cast<QPointF>(*p1), static_cast<QPointF>(*current));
     const QLineF p2ToCur(static_cast<QPointF>(*p2), static_cast<QPointF>(*current));
@@ -424,7 +424,7 @@ void VToolPointOfContact::setCenter(const quint32 &value)
     {
         center = value;
 
-        QSharedPointer<VGObject> obj = VAbstractTool::data.GetGObject(id);
+        QSharedPointer<VGObject> obj = VAbstractTool::data.GetGObject(m_id);
         SaveOption(obj);
     }
 }
@@ -434,7 +434,7 @@ VFormula VToolPointOfContact::getArcRadius() const
 {
     VFormula radius(arcRadius, this->getData());
     radius.setCheckZero(true);
-    radius.setToolId(id);
+    radius.setToolId(m_id);
     radius.setPostfix(UnitsToStr(qApp->patternUnit()));
 
     return radius;
@@ -447,7 +447,7 @@ void VToolPointOfContact::setArcRadius(const VFormula &value)
     {
         arcRadius = value.GetFormula(FormulaType::FromUser);
 
-        QSharedPointer<VGObject> obj = VAbstractTool::data.GetGObject(id);
+        QSharedPointer<VGObject> obj = VAbstractTool::data.GetGObject(m_id);
         SaveOption(obj);
     }
 }

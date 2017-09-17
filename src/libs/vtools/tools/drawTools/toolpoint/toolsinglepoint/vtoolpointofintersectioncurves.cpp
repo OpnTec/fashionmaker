@@ -75,7 +75,7 @@ void VToolPointOfIntersectionCurves::setDialog()
     SCASSERT(not m_dialog.isNull())
     auto dialogTool = qobject_cast<DialogPointOfIntersectionCurves*>(m_dialog);
     SCASSERT(dialogTool != nullptr)
-    auto p = VAbstractTool::data.GeometricObject<VPointF>(id);
+    auto p = VAbstractTool::data.GeometricObject<VPointF>(m_id);
     dialogTool->SetFirstCurveId(firstCurveId);
     dialogTool->SetSecondCurveId(secondCurveId);
     dialogTool->SetVCrossPoint(vCrossPoint);
@@ -287,7 +287,7 @@ void VToolPointOfIntersectionCurves::SetFirstCurveId(const quint32 &value)
     {
         firstCurveId = value;
 
-        auto obj = VAbstractTool::data.GetGObject(id);
+        auto obj = VAbstractTool::data.GetGObject(m_id);
         SaveOption(obj);
     }
 }
@@ -305,7 +305,7 @@ void VToolPointOfIntersectionCurves::SetSecondCurveId(const quint32 &value)
     {
         secondCurveId = value;
 
-        auto obj = VAbstractTool::data.GetGObject(id);
+        auto obj = VAbstractTool::data.GetGObject(m_id);
         SaveOption(obj);
     }
 }
@@ -321,7 +321,7 @@ void VToolPointOfIntersectionCurves::SetVCrossPoint(const VCrossCurvesPoint &val
 {
     vCrossPoint = value;
 
-    auto obj = VAbstractTool::data.GetGObject(id);
+    auto obj = VAbstractTool::data.GetGObject(m_id);
     SaveOption(obj);
 }
 
@@ -336,7 +336,7 @@ void VToolPointOfIntersectionCurves::SetHCrossPoint(const HCrossCurvesPoint &val
 {
     hCrossPoint = value;
 
-    auto obj = VAbstractTool::data.GetGObject(id);
+    auto obj = VAbstractTool::data.GetGObject(m_id);
     SaveOption(obj);
 }
 

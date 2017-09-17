@@ -51,7 +51,7 @@ void VAbstractOperation::SetSuffix(const QString &suffix)
 {
     // Don't know if need check name here.
     this->suffix = suffix;
-    QSharedPointer<VGObject> obj = VContainer::GetFakeGObject(id);
+    QSharedPointer<VGObject> obj = VContainer::GetFakeGObject(m_id);
     SaveOption(obj);
 }
 
@@ -371,7 +371,7 @@ void VAbstractOperation::Disable(bool disable, const QString &namePP)
 //---------------------------------------------------------------------------------------------------------------------
 void VAbstractOperation::ObjectSelected(bool selected, quint32 objId)
 {
-    emit ChangedToolSelection(selected, objId, id);
+    emit ChangedToolSelection(selected, objId, m_id);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -420,7 +420,7 @@ VAbstractOperation::VAbstractOperation(VAbstractPattern *doc, VContainer *data, 
 void VAbstractOperation::AddToFile()
 {
     QDomElement domElement = doc->createElement(getTagName());
-    QSharedPointer<VGObject> obj = VContainer::GetFakeGObject(id);
+    QSharedPointer<VGObject> obj = VContainer::GetFakeGObject(m_id);
     SaveOptions(domElement, obj);
     AddToCalculation(domElement);
 }
@@ -429,7 +429,7 @@ void VAbstractOperation::AddToFile()
 void VAbstractOperation::UpdateNamePosition(quint32 id)
 {
     const QSharedPointer<VPointF> point = VAbstractTool::data.GeometricObject<VPointF>(id);
-    auto moveLabel = new OperationMoveLabel(this->id, doc, point->mx(), point->my(), id);
+    auto moveLabel = new OperationMoveLabel(m_id, doc, point->mx(), point->my(), id);
     connect(moveLabel, &OperationMoveLabel::ChangePosition, this, &VAbstractOperation::DoChangePosition);
     qApp->getUndoStack()->push(moveLabel);
 }

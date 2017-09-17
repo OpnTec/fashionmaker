@@ -76,7 +76,7 @@ void VToolArcWithLength::setDialog()
     SCASSERT(not m_dialog.isNull())
     QSharedPointer<DialogArcWithLength> dialogTool = m_dialog.objectCast<DialogArcWithLength>();
     SCASSERT(not dialogTool.isNull())
-    const QSharedPointer<VArc> arc = VAbstractTool::data.GeometricObject<VArc>(id);
+    const QSharedPointer<VArc> arc = VAbstractTool::data.GeometricObject<VArc>(m_id);
     dialogTool->SetCenter(arc->GetCenter().id());
     dialogTool->SetF1(arc->GetFormulaF1());
     dialogTool->SetLength(arc->GetFormulaLength());
@@ -167,7 +167,7 @@ QString VToolArcWithLength::CenterPointName() const
 //---------------------------------------------------------------------------------------------------------------------
 quint32 VToolArcWithLength::getCenter() const
 {
-    QSharedPointer<VArc> arc = VAbstractTool::data.GeometricObject<VArc>(id);
+    QSharedPointer<VArc> arc = VAbstractTool::data.GeometricObject<VArc>(m_id);
     SCASSERT(arc.isNull() == false)
 
     return arc->GetCenter().id();
@@ -178,7 +178,7 @@ void VToolArcWithLength::setCenter(const quint32 &value)
 {
     if (value != NULL_ID)
     {
-        QSharedPointer<VGObject> obj = VAbstractTool::data.GetGObject(id);
+        QSharedPointer<VGObject> obj = VAbstractTool::data.GetGObject(m_id);
         QSharedPointer<VArc> arc = qSharedPointerDynamicCast<VArc>(obj);
 
         QSharedPointer<VPointF> point = VAbstractTool::data.GeometricObject<VPointF>(value);
@@ -190,12 +190,12 @@ void VToolArcWithLength::setCenter(const quint32 &value)
 //---------------------------------------------------------------------------------------------------------------------
 VFormula VToolArcWithLength::GetFormulaRadius() const
 {
-    QSharedPointer<VArc> arc = VAbstractTool::data.GeometricObject<VArc>(id);
+    QSharedPointer<VArc> arc = VAbstractTool::data.GeometricObject<VArc>(m_id);
     SCASSERT(arc.isNull() == false)
 
     VFormula radius(arc->GetFormulaRadius(), getData());
     radius.setCheckZero(true);
-    radius.setToolId(id);
+    radius.setToolId(m_id);
     radius.setPostfix(UnitsToStr(qApp->patternUnit()));
     return radius;
 }
@@ -207,7 +207,7 @@ void VToolArcWithLength::SetFormulaRadius(const VFormula &value)
     {
         if (value.getDoubleValue() > 0)// Formula don't check this, but radius can't be 0 or negative
         {
-            QSharedPointer<VGObject> obj = VAbstractTool::data.GetGObject(id);
+            QSharedPointer<VGObject> obj = VAbstractTool::data.GetGObject(m_id);
             QSharedPointer<VArc> arc = qSharedPointerDynamicCast<VArc>(obj);
             arc->SetFormulaRadius(value.GetFormula(FormulaType::FromUser), value.getDoubleValue());
             SaveOption(obj);
@@ -218,12 +218,12 @@ void VToolArcWithLength::SetFormulaRadius(const VFormula &value)
 //---------------------------------------------------------------------------------------------------------------------
 VFormula VToolArcWithLength::GetFormulaF1() const
 {
-    QSharedPointer<VArc> arc = VAbstractTool::data.GeometricObject<VArc>(id);
+    QSharedPointer<VArc> arc = VAbstractTool::data.GeometricObject<VArc>(m_id);
     SCASSERT(arc.isNull() == false)
 
     VFormula f1(arc->GetFormulaF1(), getData());
     f1.setCheckZero(false);
-    f1.setToolId(id);
+    f1.setToolId(m_id);
     f1.setPostfix(degreeSymbol);
     return f1;
 }
@@ -233,7 +233,7 @@ void VToolArcWithLength::SetFormulaF1(const VFormula &value)
 {
     if (value.error() == false)
     {
-        QSharedPointer<VGObject> obj = VAbstractTool::data.GetGObject(id);
+        QSharedPointer<VGObject> obj = VAbstractTool::data.GetGObject(m_id);
         QSharedPointer<VArc> arc = qSharedPointerDynamicCast<VArc>(obj);
 
         if (not VFuzzyComparePossibleNulls(value.getDoubleValue(), arc->GetEndAngle()))// Angles can't be equal
@@ -247,12 +247,12 @@ void VToolArcWithLength::SetFormulaF1(const VFormula &value)
 //---------------------------------------------------------------------------------------------------------------------
 VFormula VToolArcWithLength::GetFormulaLength() const
 {
-    QSharedPointer<VArc> arc = VAbstractTool::data.GeometricObject<VArc>(id);
+    QSharedPointer<VArc> arc = VAbstractTool::data.GeometricObject<VArc>(m_id);
     SCASSERT(arc.isNull() == false)
 
     VFormula radius(arc->GetFormulaLength(), getData());
     radius.setCheckZero(true);
-    radius.setToolId(id);
+    radius.setToolId(m_id);
     radius.setPostfix(UnitsToStr(qApp->patternUnit()));
     return radius;
 }
@@ -262,7 +262,7 @@ void VToolArcWithLength::SetFormulaLength(const VFormula &value)
 {
     if (value.error() == false)
     {
-        QSharedPointer<VGObject> obj = VAbstractTool::data.GetGObject(id);
+        QSharedPointer<VGObject> obj = VAbstractTool::data.GetGObject(m_id);
         QSharedPointer<VArc> arc = qSharedPointerDynamicCast<VArc>(obj);
         arc->SetFormulaLength(value.GetFormula(FormulaType::FromUser), value.getDoubleValue());
         SaveOption(obj);
@@ -292,7 +292,7 @@ void VToolArcWithLength::ShowContextMenu(QGraphicsSceneContextMenuEvent *event, 
 //---------------------------------------------------------------------------------------------------------------------
 void VToolArcWithLength::RemoveReferens()
 {
-    const auto arc = VAbstractTool::data.GeometricObject<VArc>(id);
+    const auto arc = VAbstractTool::data.GeometricObject<VArc>(m_id);
     doc->DecrementReferens(arc->GetCenter().getIdTool());
 }
 
@@ -330,7 +330,7 @@ void VToolArcWithLength::SetVisualization()
 {
     if (not vis.isNull())
     {
-        const QSharedPointer<VArc> arc = VAbstractTool::data.GeometricObject<VArc>(id);
+        const QSharedPointer<VArc> arc = VAbstractTool::data.GeometricObject<VArc>(m_id);
         VisToolArcWithLength *visual = qobject_cast<VisToolArcWithLength *>(vis);
         SCASSERT(visual != nullptr)
 
@@ -347,7 +347,7 @@ void VToolArcWithLength::SetVisualization()
 //---------------------------------------------------------------------------------------------------------------------
 QString VToolArcWithLength::MakeToolTip() const
 {
-    const QSharedPointer<VArc> arc = VAbstractTool::data.GeometricObject<VArc>(id);
+    const QSharedPointer<VArc> arc = VAbstractTool::data.GeometricObject<VArc>(m_id);
 
     const QString toolTip = QString("<table>"
                                     "<tr> <td><b>%1:</b> %2 %3</td> </tr>"

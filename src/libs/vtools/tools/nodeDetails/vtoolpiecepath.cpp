@@ -143,10 +143,10 @@ void VToolPiecePath::incrementReferens()
         }
         else
         {
-            IncrementNodes(VAbstractTool::data.GetPiecePath(id));
+            IncrementNodes(VAbstractTool::data.GetPiecePath(m_id));
         }
         ShowNode();
-        QDomElement domElement = doc->elementById(id, getTagName());
+        QDomElement domElement = doc->elementById(m_id, getTagName());
         if (domElement.isElement())
         {
             doc->SetParametrUsage(domElement, AttrInUse, NodeUsage::InUse);
@@ -166,10 +166,10 @@ void VToolPiecePath::decrementReferens()
         }
         else
         {
-            DecrementNodes(VAbstractTool::data.GetPiecePath(id));
+            DecrementNodes(VAbstractTool::data.GetPiecePath(m_id));
         }
         HideNode();
-        QDomElement domElement = doc->elementById(id, getTagName());
+        QDomElement domElement = doc->elementById(m_id, getTagName());
         if (domElement.isElement())
         {
             doc->SetParametrUsage(domElement, AttrInUse, NodeUsage::NotInUse);
@@ -215,9 +215,9 @@ void VToolPiecePath::AllowSelecting(bool enabled)
 void VToolPiecePath::AddToFile()
 {
     QDomElement domElement = doc->createElement(getTagName());
-    const VPiecePath path = VAbstractTool::data.GetPiecePath(id);
+    const VPiecePath path = VAbstractTool::data.GetPiecePath(m_id);
 
-    AddAttributes(doc, domElement, id, path);
+    AddAttributes(doc, domElement, m_id, path);
 
     if (idTool != NULL_ID)
     {
@@ -235,12 +235,12 @@ void VToolPiecePath::AddToFile()
 
         if (path.GetType() == PiecePathType::InternalPath)
         {
-            newDet.GetInternalPaths().append(id);
+            newDet.GetInternalPaths().append(m_id);
         }
         else if (path.GetType() == PiecePathType::CustomSeamAllowance)
         {
             CustomSARecord record;
-            record.path = id;
+            record.path = m_id;
 
             newDet.GetCustomSARecords().append(record);
         }
@@ -300,7 +300,7 @@ VToolPiecePath::VToolPiecePath(VAbstractPattern *doc, VContainer *data, quint32 
 //---------------------------------------------------------------------------------------------------------------------
 void VToolPiecePath::RefreshGeometry()
 {
-    const VPiecePath path = VAbstractTool::data.GetPiecePath(id);
+    const VPiecePath path = VAbstractTool::data.GetPiecePath(m_id);
     if (path.GetType() == PiecePathType::InternalPath)
     {
         QPainterPath p = path.PainterPath(this->getData());

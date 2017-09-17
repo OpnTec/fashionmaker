@@ -123,7 +123,7 @@ quint32 CreateNodeSplinePath(VContainer *data, quint32 id)
 VAbstractTool::VAbstractTool(VAbstractPattern *doc, VContainer *data, quint32 id, QObject *parent)
     :VDataTool(data, parent),
       doc(doc),
-      id(id),
+      m_id(id),
       vis(),
       selectionType(SelectionType::ByMouseRelease)
 {
@@ -254,7 +254,7 @@ void VAbstractTool::DeleteTool(bool ask)
         }
 
         qCDebug(vTool, "Begin deleting.");
-        DelTool *delTool = new DelTool(doc, id);
+        DelTool *delTool = new DelTool(doc, m_id);
         connect(delTool, &DelTool::NeedFullParsing, doc, &VAbstractPattern::NeedFullParsing);
         qApp->getUndoStack()->push(delTool);
 
@@ -384,7 +384,7 @@ QMap<QString, quint32> VAbstractTool::PointsList() const
     QHash<quint32, QSharedPointer<VGObject> >::const_iterator i;
     for (i = objs->constBegin(); i != objs->constEnd(); ++i)
     {
-        if (i.key() != id)
+        if (i.key() != m_id)
         {
             QSharedPointer<VGObject> obj = i.value();
             if (obj->getType() == GOType::Point && obj->getMode() == Draw::Calculation)

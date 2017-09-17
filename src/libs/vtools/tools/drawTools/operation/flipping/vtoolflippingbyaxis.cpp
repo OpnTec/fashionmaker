@@ -151,7 +151,7 @@ void VToolFlippingByAxis::SetAxisType(AxisType value)
 {
     m_axisType = value;
 
-    QSharedPointer<VGObject> obj = VContainer::GetFakeGObject(id);
+    QSharedPointer<VGObject> obj = VContainer::GetFakeGObject(m_id);
     SaveOption(obj);
 }
 

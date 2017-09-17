@@ -128,7 +128,7 @@ void VToolPin::AddToFile()
 {
     QDomElement domElement = doc->createElement(getTagName());
 
-    doc->SetAttribute(domElement, VDomDocument::AttrId, id);
+    doc->SetAttribute(domElement, VDomDocument::AttrId, m_id);
     doc->SetAttribute(domElement, AttrType, ToolType);
     doc->SetAttribute(domElement, AttrIdObject, idNode);
     if (idTool != NULL_ID)
@@ -143,7 +143,7 @@ void VToolPin::AddToFile()
         const VPiece oldDet = VAbstractTool::data.GetPiece(m_pieceId);
         VPiece newDet = oldDet;
 
-        newDet.GetPins().append(id);
+        newDet.GetPins().append(m_id);
 
         SavePieceOptions *saveCommand = new SavePieceOptions(oldDet, newDet, doc, m_pieceId);
         qApp->getUndoStack()->push(saveCommand);// First push then make a connect

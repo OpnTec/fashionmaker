@@ -195,7 +195,7 @@ void VDrawTool::ContextMenu(QGraphicsSceneContextMenuEvent *event, quint32 itemI
     {
         qCDebug(vTool, "Show options.");
         qApp->getSceneView()->itemClicked(nullptr);
-        m_dialog = QSharedPointer<Dialog>(new Dialog(getData(), id, qApp->getMainWindow()));
+        m_dialog = QSharedPointer<Dialog>(new Dialog(getData(), m_id, qApp->getMainWindow()));
         m_dialog->setModal(true);
 
         connect(m_dialog.data(), &DialogTool::DialogClosed, this, &VDrawTool::FullUpdateFromGuiOk);
@@ -228,7 +228,7 @@ template <typename Item>
 void VDrawTool::ShowItem(Item *item, quint32 id, bool enable)
 {
     SCASSERT(item != nullptr)
-    if (id == item->id)
+    if (id == item->m_id)
     {
         ShowVisualization(enable);
     }

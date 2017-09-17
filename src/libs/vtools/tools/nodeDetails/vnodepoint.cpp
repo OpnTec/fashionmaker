@@ -143,7 +143,7 @@ QString VNodePoint::getTagName() const
 //---------------------------------------------------------------------------------------------------------------------
 void VNodePoint::PointChoosed()
 {
-    emit ChoosedTool(id, SceneObject::Point);
+    emit ChoosedTool(m_id, SceneObject::Point);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -152,7 +152,7 @@ void VNodePoint::PointChoosed()
  */
 void VNodePoint::FullUpdateFromFile()
 {
-    RefreshPointGeometry(*VAbstractTool::data.GeometricObject<VPointF>(id));
+    RefreshPointGeometry(*VAbstractTool::data.GeometricObject<VPointF>(m_id));
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -161,10 +161,10 @@ void VNodePoint::FullUpdateFromFile()
  */
 void VNodePoint::AddToFile()
 {
-    const QSharedPointer<VPointF> point = VAbstractTool::data.GeometricObject<VPointF>(id);
+    const QSharedPointer<VPointF> point = VAbstractTool::data.GeometricObject<VPointF>(m_id);
     QDomElement domElement = doc->createElement(getTagName());
 
-    doc->SetAttribute(domElement, VDomDocument::AttrId, id);
+    doc->SetAttribute(domElement, VDomDocument::AttrId, m_id);
     doc->SetAttribute(domElement, AttrType, ToolType);
     doc->SetAttribute(domElement, AttrIdObject, idNode);
     doc->SetAttribute(domElement, AttrMx, qApp->fromPixel(point->mx()));
@@ -201,7 +201,7 @@ void VNodePoint::mouseReleaseEvent(QGraphicsSceneMouseEvent *event)
 {
     if (event->button() == Qt::LeftButton)
     {
-        emit ChoosedTool(id, SceneObject::Point);
+        emit ChoosedTool(m_id, SceneObject::Point);
     }
     VScenePoint::mouseReleaseEvent(event);
 }
@@ -213,13 +213,13 @@ void VNodePoint::mouseReleaseEvent(QGraphicsSceneMouseEvent *event)
  */
 void VNodePoint::NameChangePosition(const QPointF &pos)
 {
-    VPointF *point = new VPointF(*VAbstractTool::data.GeometricObject<VPointF>(id));
+    VPointF *point = new VPointF(*VAbstractTool::data.GeometricObject<VPointF>(m_id));
     QPointF p = pos - this->pos();
     point->setMx(p.x());
     point->setMy(p.y());
     RefreshLine();
     UpdateNamePosition(point->mx(), point->my());
-    VAbstractTool::data.UpdateGObject(id, point);
+    VAbstractTool::data.UpdateGObject(m_id, point);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -230,7 +230,7 @@ void VNodePoint::NameChangePosition(const QPointF &pos)
  */
 void VNodePoint::UpdateNamePosition(qreal mx, qreal my)
 {
-    QDomElement domElement = doc->elementById(id, getTagName());
+    QDomElement domElement = doc->elementById(m_id, getTagName());
     if (domElement.isElement())
     {
         doc->SetAttribute(domElement, AttrMx, QString().setNum(qApp->fromPixel(mx)));

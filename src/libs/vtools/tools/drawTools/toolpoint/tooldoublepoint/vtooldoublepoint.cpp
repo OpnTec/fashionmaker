@@ -162,13 +162,13 @@ void VToolDoublePoint::Point2Choosed()
 //---------------------------------------------------------------------------------------------------------------------
 void VToolDoublePoint::Point1Selected(bool selected)
 {
-    emit ChangedToolSelection(selected, p1id, id);
+    emit ChangedToolSelection(selected, p1id, m_id);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void VToolDoublePoint::Point2Selected(bool selected)
 {
-    emit ChangedToolSelection(selected, p2id, id);
+    emit ChangedToolSelection(selected, p2id, m_id);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -244,7 +244,7 @@ void VToolDoublePoint::UpdateNamePosition(quint32 id)
     {
         const VPointF *p1 = VAbstractTool::data.GeometricObject<VPointF>(p1id).data();
 
-        auto moveLabel = new MoveDoubleLabel(doc, p1->mx(), p1->my(), DoublePoint::FirstPoint, this->id, p1id);
+        auto moveLabel = new MoveDoubleLabel(doc, p1->mx(), p1->my(), DoublePoint::FirstPoint, m_id, p1id);
         connect(moveLabel, &MoveDoubleLabel::ChangePosition, this, &VToolDoublePoint::DoChangePosition);
         qApp->getUndoStack()->push(moveLabel);
     }
@@ -252,7 +252,7 @@ void VToolDoublePoint::UpdateNamePosition(quint32 id)
     {
         const VPointF *p2 = VAbstractTool::data.GeometricObject<VPointF>(p2id).data();
 
-        auto moveLabel = new MoveDoubleLabel(doc, p2->mx(), p2->my(), DoublePoint::SecondPoint, this->id, p2id);
+        auto moveLabel = new MoveDoubleLabel(doc, p2->mx(), p2->my(), DoublePoint::SecondPoint, m_id, p2id);
         connect(moveLabel, &MoveDoubleLabel::ChangePosition, this, &VToolDoublePoint::DoChangePosition);
         qApp->getUndoStack()->push(moveLabel);
     }
@@ -359,7 +359,7 @@ void VToolDoublePoint::SaveOptions(QDomElement &tag, QSharedPointer<VGObject> &o
 void VToolDoublePoint::AddToFile()
 {
     QDomElement domElement = doc->createElement(getTagName());
-    QSharedPointer<VGObject> obj = VContainer::GetFakeGObject(id);
+    QSharedPointer<VGObject> obj = VContainer::GetFakeGObject(m_id);
     SaveOptions(domElement, obj);
     AddToCalculation(domElement);
 }
