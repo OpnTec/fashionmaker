@@ -55,6 +55,7 @@ protected:
 
     bool m_onlyPoint;
     bool m_isHovered;
+    bool m_showLabel;
 
     /** @brief m_baseColor base color of point. */
     QColor m_baseColor;

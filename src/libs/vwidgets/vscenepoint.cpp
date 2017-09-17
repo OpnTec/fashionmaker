@@ -44,6 +44,7 @@ VScenePoint::VScenePoint(QGraphicsItem *parent)
       m_lineName(nullptr),
       m_onlyPoint(false),
       m_isHovered(false),
+      m_showLabel(true),
       m_baseColor(Qt::black)
 {
     m_namePoint = new VGraphicsSimpleTextItem(this);
@@ -74,7 +75,7 @@ void VScenePoint::paint(QPainter *painter, const QStyleOptionGraphicsItem *optio
 
         if (not m_onlyPoint)
         {
-            m_namePoint->setVisible(true);
+            m_namePoint->setVisible(m_showLabel);
 
             QPen lPen = m_lineName->pen();
             lPen.setColor(CorrectColor(m_lineName, Qt::black));
@@ -94,9 +95,12 @@ void VScenePoint::RefreshPointGeometry(const VPointF &point)
     setPos(static_cast<QPointF>(point));
     setFlag(QGraphicsItem::ItemSendsGeometryChanges, true);
 
+    m_showLabel = point.IsShowLabel();
+
     m_namePoint->blockSignals(true);
     m_namePoint->setText(point.name());
     m_namePoint->setPos(QPointF(point.mx(), point.my()));
+    m_namePoint->setVisible(m_showLabel);
     m_namePoint->blockSignals(false);
 
     RefreshLine();
@@ -151,7 +155,7 @@ void VScenePoint::RefreshLine()
         else
         {
             m_lineName->setLine(QLineF(p1, pRec - scenePos()));
-            m_lineName->setVisible(true);
+            m_lineName->setVisible(m_showLabel);
         }
     }
     else

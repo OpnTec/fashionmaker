@@ -160,6 +160,7 @@ public:
     void               RemovePiece(quint32 id);
 
     void               UpdateGObject(quint32 id, VGObject* obj);
+    void               UpdateGObject(quint32 id, const QSharedPointer<VGObject> &obj);
     void               UpdatePiece(quint32 id, const VPiece &detail);
     void               UpdatePiecePath(quint32 id, const VPiecePath &path);
 
@@ -220,7 +221,7 @@ private:
     const val GetObject(const QHash<key, val> &obj, key id) const;
 
     template <typename val>
-    void UpdateObject(QHash<quint32, val > &obj, const quint32 &id, val point);
+    void UpdateObject(const quint32 &id, val point);
 
     template <typename key, typename val>
     static quint32 AddObject(QHash<key, val> &obj, val value);

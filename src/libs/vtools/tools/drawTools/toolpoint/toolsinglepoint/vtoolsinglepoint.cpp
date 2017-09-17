@@ -115,6 +115,31 @@ void VToolSinglePoint::GroupVisibility(quint32 object, bool visible)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+bool VToolSinglePoint::IsLabelVisible(quint32 id) const
+{
+    if (this->id == id)
+    {
+        const QSharedPointer<VPointF> point = VAbstractTool::data.GeometricObject<VPointF>(id);
+        return point->IsShowLabel();
+    }
+    else
+    {
+        return false;
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VToolSinglePoint::SetLabelVisible(quint32 id, bool visible)
+{
+    if (this->id == id)
+    {
+        const QSharedPointer<VPointF> point = VAbstractTool::data.GeometricObject<VPointF>(id);
+        point->SetShowLabel(visible);
+        RefreshPointGeometry(*point);
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 /**
  * @brief NameChangePosition handle change posion point label.
  * @param pos new position.

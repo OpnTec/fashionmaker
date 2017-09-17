@@ -211,6 +211,13 @@ void VDrawTool::DetailsMode(bool mode)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void VDrawTool::ChangeLabelVisibility(quint32 id, bool visible)
+{
+    Q_UNUSED(id)
+    Q_UNUSED(visible)
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 /**
  * @brief AddToCalculation add tool to calculation tag in pattern file.
  * @param domElement tag in xml tree.
@@ -235,4 +242,18 @@ void VDrawTool::SetTypeLine(const QString &value)
 
     QSharedPointer<VGObject> obj = VAbstractTool::data.GetGObject(id);
     SaveOption(obj);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+bool VDrawTool::IsLabelVisible(quint32 id) const
+{
+    Q_UNUSED(id)
+    return false;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VDrawTool::SetLabelVisible(quint32 id, bool visible)
+{
+    Q_UNUSED(id)
+    Q_UNUSED(visible)
 }

@@ -67,6 +67,9 @@ public:
     QString      getLineType() const;
     virtual void SetTypeLine(const QString &value);
 
+    virtual bool IsLabelVisible(quint32 id) const;
+    virtual void SetLabelVisible(quint32 id, bool visible);
+
 signals:
     void ChangedToolSelection(bool selected, quint32 object, quint32 tool);
 
@@ -79,6 +82,7 @@ public slots:
     virtual void DetailsMode(bool mode);
 protected slots:
     virtual void ShowContextMenu(QGraphicsSceneContextMenuEvent *event, quint32 id=NULL_ID)=0;
+    virtual void ChangeLabelVisibility(quint32 id, bool visible);
 protected:
 
     enum class RemoveOption : bool {Disable = false, Enable = true};
@@ -209,7 +213,7 @@ void VDrawTool::ContextMenu(QGraphicsSceneContextMenuEvent *event, quint32 itemI
     }
     else if (selectedAction == actionShowLabel)
     {
-        // do something here to show/hide a label
+        SetLabelVisible(itemId, selectedAction->isChecked());
     }
 }
 

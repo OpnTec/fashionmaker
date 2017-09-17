@@ -63,6 +63,9 @@ public:
     void SetEnabled(bool enabled);
 
     virtual void GroupVisibility(quint32 object, bool visible) Q_DECL_OVERRIDE;
+
+    virtual bool IsLabelVisible(quint32 id) const Q_DECL_OVERRIDE;
+    virtual void SetLabelVisible(quint32 id, bool visible) Q_DECL_OVERRIDE;
 public slots:
     void         NameChangePosition(const QPointF &pos);
     virtual void Disable(bool disable, const QString &namePP) Q_DECL_OVERRIDE;
