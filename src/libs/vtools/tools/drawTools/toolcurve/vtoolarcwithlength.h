@@ -43,6 +43,22 @@
 class VFormula;
 template <class T> class QSharedPointer;
 
+struct VToolArcWithLengthInitData : public VAbstractSplineInitData
+{
+    VToolArcWithLengthInitData()
+        : VAbstractSplineInitData(),
+          center(NULL_ID),
+          radius("0"),
+          f1("0"),
+          length("0")
+    {}
+
+    quint32 center;
+    QString radius;
+    QString f1;
+    QString length;
+};
+
 class VToolArcWithLength : public VAbstractSpline
 {
     Q_OBJECT
@@ -50,10 +66,7 @@ public:
     virtual void     setDialog() Q_DECL_OVERRIDE;
     static VToolArcWithLength* Create(QSharedPointer<DialogTool> dialog, VMainGraphicsScene  *scene,
                                       VAbstractPattern *doc, VContainer *data);
-    static VToolArcWithLength* Create(const quint32 _id, const quint32 &center, QString &radius, QString &f1,
-                                      QString &length, const QString &color, const QString &penStyle,
-                                      VMainGraphicsScene *scene, VAbstractPattern *doc, VContainer *data,
-                                      const Document &parse, const Source &typeCreation);
+    static VToolArcWithLength* Create(VToolArcWithLengthInitData &initData);
 
     static const QString ToolType;
     virtual int      type() const Q_DECL_OVERRIDE {return Type;}
@@ -86,8 +99,7 @@ protected:
 private:
     Q_DISABLE_COPY(VToolArcWithLength)
 
-    VToolArcWithLength(VAbstractPattern *doc, VContainer *data, quint32 id, const Source &typeCreation,
-                       QGraphicsItem * parent = nullptr);
+    VToolArcWithLength(const VToolArcWithLengthInitData &initData, QGraphicsItem *parent = nullptr);
 };
 
 #endif // VTOOLARCWITHLENGTH_H

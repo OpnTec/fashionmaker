@@ -45,6 +45,20 @@
 
 template <class T> class QSharedPointer;
 
+struct VToolHeightInitData : public VToolLinePointInitData
+{
+    VToolHeightInitData()
+        : VToolLinePointInitData(),
+          basePointId(NULL_ID),
+          p1LineId(NULL_ID),
+          p2LineId(NULL_ID)
+    {}
+
+    quint32 basePointId;
+    quint32 p1LineId;
+    quint32 p2LineId;
+};
+
 /**
  * @brief The VToolHeight class tool for creation point of height. Help find point of projection onto line.
  */
@@ -55,11 +69,7 @@ public:
     virtual void   setDialog() Q_DECL_OVERRIDE;
     static VToolHeight *Create(QSharedPointer<DialogTool> dialog, VMainGraphicsScene  *scene, VAbstractPattern *doc,
                                VContainer *data);
-    static VToolHeight *Create(const quint32 _id, const QString &pointName, const QString &typeLine,
-                               const QString &lineColor, quint32 basePointId, quint32 p1LineId,
-                               quint32 p2LineId, qreal mx, qreal my, bool showLabel, VMainGraphicsScene  *scene,
-                               VAbstractPattern *doc, VContainer *data, const Document &parse,
-                               const Source &typeCreation);
+    static VToolHeight *Create(VToolHeightInitData initData);
     static QPointF FindPoint(const QLineF &line, const QPointF &point);
     static const QString ToolType;
     virtual int    type() const Q_DECL_OVERRIDE {return Type;}
@@ -92,10 +102,7 @@ private:
     /** @brief p2LineId id second point of line. */
     quint32         p2LineId;
 
-    VToolHeight(VAbstractPattern *doc, VContainer *data, const quint32 &id, const QString &typeLine,
-                const QString &lineColor,
-                const quint32 &basePointId, const quint32 &p1LineId, const quint32 &p2LineId,
-                const Source &typeCreation, QGraphicsItem * parent = nullptr);
+    VToolHeight(const VToolHeightInitData &initData, QGraphicsItem *parent = nullptr);
 };
 
 #endif // VTOOLHEIGHT_H

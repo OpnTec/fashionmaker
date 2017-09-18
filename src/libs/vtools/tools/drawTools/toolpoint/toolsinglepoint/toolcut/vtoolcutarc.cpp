@@ -59,19 +59,13 @@ const QString VToolCutArc::ToolType = QStringLiteral("cutArc");
 //---------------------------------------------------------------------------------------------------------------------
 /**
  * @brief VToolCutArc constructor.
- * @param doc dom document container.
- * @param data container with variables.
- * @param id object id in container.
- * @param formula string with formula length first arc.
- * @param arcId id arc in data container.
- * @param typeCreation way we create this tool.
+ * @param initData init data.
  * @param parent parent object.
  */
-VToolCutArc::VToolCutArc(VAbstractPattern *doc, VContainer *data, const quint32 &id, const QString &formula,
-                         const quint32 &arcId, const Source &typeCreation, QGraphicsItem * parent)
-    :VToolCut(doc, data, id, formula, arcId, parent)
+VToolCutArc::VToolCutArc(const VToolCutArcInitData &initData, QGraphicsItem * parent)
+    :VToolCut(initData.doc, initData.data, initData.id, initData.formula, initData.arcId, parent)
 {
-    ToolCreation(typeCreation);
+    ToolCreation(initData.typeCreation);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -103,11 +97,18 @@ VToolCutArc* VToolCutArc::Create(QSharedPointer<DialogTool> dialog, VMainGraphic
     SCASSERT(not dialog.isNull())
     QSharedPointer<DialogCutArc> dialogTool = dialog.objectCast<DialogCutArc>();
     SCASSERT(not dialogTool.isNull())
-    const QString pointName = dialogTool->getPointName();
-    QString formula = dialogTool->GetFormula();
-    const quint32 arcId = dialogTool->getArcId();
-    VToolCutArc* point = Create(0, pointName, formula, arcId, 5, 10, true, scene, doc, data, Document::FullParse,
-                                Source::FromGui);
+
+    VToolCutArcInitData initData;
+    initData.formula = dialogTool->GetFormula();
+    initData.arcId = dialogTool->getArcId();
+    initData.name = dialogTool->getPointName();
+    initData.scene = scene;
+    initData.doc = doc;
+    initData.data = data;
+    initData.parse = Document::FullParse;
+    initData.typeCreation = Source::FromGui;
+
+    VToolCutArc* point = Create(initData);
     if (point != nullptr)
     {
         point->m_dialog = dialogTool;
@@ -118,67 +119,54 @@ VToolCutArc* VToolCutArc::Create(QSharedPointer<DialogTool> dialog, VMainGraphic
 //---------------------------------------------------------------------------------------------------------------------
 /**
  * @brief Create help create tool.
- * @param _id tool id, 0 if tool doesn't exist yet.
- * @param pointName point name.
- * @param formula string with formula length first arc.
- * @param arcId id arc in data container.
- * @param mx label bias x axis.
- * @param my label bias y axis.
- * @param scene pointer to scene.
- * @param doc dom document container.
- * @param data container with variables.
- * @param parse parser file mode.
+ * @param initData init data.
  * @param typeCreation way we create this tool.
  */
-VToolCutArc* VToolCutArc::Create(const quint32 _id, const QString &pointName, QString &formula, quint32 arcId,
-                                 qreal mx, qreal my, bool showLabel, VMainGraphicsScene *scene, VAbstractPattern *doc,
-                                 VContainer *data, const Document &parse, const Source &typeCreation)
+VToolCutArc* VToolCutArc::Create(VToolCutArcInitData &initData)
 {
-    const QSharedPointer<VArc> arc = data->GeometricObject<VArc>(arcId);
+    const QSharedPointer<VArc> arc = initData.data->GeometricObject<VArc>(initData.arcId);
 
-    const qreal result = CheckFormula(_id, formula, data);
+    const qreal result = CheckFormula(initData.id, initData.formula, initData.data);
 
     VArc arc1;
     VArc arc2;
     QPointF point = arc->CutArc(qApp->toPixel(result), arc1, arc2);
 
-    quint32 id = _id;
-
-    VPointF *p = new VPointF(point, pointName, mx, my);
-    p->SetShowLabel(showLabel);
+    VPointF *p = new VPointF(point, initData.name, initData.mx, initData.my);
+    p->SetShowLabel(initData.showLabel);
 
     auto a1 = QSharedPointer<VArc>(new VArc(arc1));
     auto a2 = QSharedPointer<VArc>(new VArc(arc2));
-    if (typeCreation == Source::FromGui)
+    if (initData.typeCreation == Source::FromGui)
     {
-        id = data->AddGObject(p);
+        initData.id = initData.data->AddGObject(p);
         a1->setId(VContainer::getNextId());
         a2->setId(VContainer::getNextId());
-        data->AddArc(a1, a1->id(), id);
-        data->AddArc(a2, a2->id(), id);
+        initData.data->AddArc(a1, a1->id(), initData.id);
+        initData.data->AddArc(a2, a2->id(), initData.id);
     }
     else
     {
-        data->UpdateGObject(id, p);
-        a1->setId(id + 1);
-        a2->setId(id + 2);
-        data->AddArc(a1, a1->id(), id);
-        data->AddArc(a2, a2->id(), id);
+        initData.data->UpdateGObject(initData.id, p);
+        a1->setId(initData.id + 1);
+        a2->setId(initData.id + 2);
+        initData.data->AddArc(a1, a1->id(), initData.id);
+        initData.data->AddArc(a2, a2->id(), initData.id);
 
-        if (parse != Document::FullParse)
+        if (initData.parse != Document::FullParse)
         {
-            doc->UpdateToolData(id, data);
+            initData.doc->UpdateToolData(initData.id, initData.data);
         }
     }
 
-    if (parse == Document::FullParse)
+    if (initData.parse == Document::FullParse)
     {
-        VAbstractTool::AddRecord(id, Tool::CutArc, doc);
-        VToolCutArc *point = new VToolCutArc(doc, data, id, formula, arcId, typeCreation);
-        scene->addItem(point);
-        InitToolConnections(scene, point);
-        VAbstractPattern::AddTool(id, point);
-        doc->IncrementReferens(arc->getIdTool());
+        VAbstractTool::AddRecord(initData.id, Tool::CutArc, initData.doc);
+        VToolCutArc *point = new VToolCutArc(initData);
+        initData.scene->addItem(point);
+        InitToolConnections(initData.scene, point);
+        VAbstractPattern::AddTool(initData.id, point);
+        initData.doc->IncrementReferens(arc->getIdTool());
         return point;
     }
     return nullptr;

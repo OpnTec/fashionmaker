@@ -54,6 +54,18 @@
 class VControlPointSpline;
 template <class T> class QSharedPointer;
 
+struct VAbstractSplineInitData : public VAbstractToolInitData
+{
+    VAbstractSplineInitData()
+        : VAbstractToolInitData(),
+          color(ColorBlack),
+          penStyle(TypeLineLine)
+    {}
+
+    QString color;
+    QString penStyle;
+};
+
 class VAbstractSpline:public VDrawTool, public QGraphicsPathItem
 {
     Q_OBJECT

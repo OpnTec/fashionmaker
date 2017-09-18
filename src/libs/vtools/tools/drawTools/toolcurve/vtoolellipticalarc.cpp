@@ -61,21 +61,17 @@ const QString VToolEllipticalArc::ToolType = QStringLiteral("simple");
 //---------------------------------------------------------------------------------------------------------------------
 /**
  * @brief VToolEllipticalArc constuctor.
- * @param doc dom document container
- * @param data container with variables
- * @param id object id in container
- * @param typeCreation way we create this tool.
+ * @param initData init data
  * @param parent parent object
  */
-VToolEllipticalArc::VToolEllipticalArc(VAbstractPattern *doc, VContainer *data, quint32 id, const Source &typeCreation,
-                                       QGraphicsItem *parent)
-    :VAbstractSpline(doc, data, id, parent)
+VToolEllipticalArc::VToolEllipticalArc(const VToolEllipticalArcInitData &initData, QGraphicsItem *parent)
+    :VAbstractSpline(initData.doc, initData.data, initData.id, parent)
 {
     sceneType = SceneObject::ElArc;
 
     this->setFlag(QGraphicsItem::ItemIsFocusable, true);// For keyboard input focus
 
-    ToolCreation(typeCreation);
+    ToolCreation(initData.typeCreation);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -113,16 +109,22 @@ VToolEllipticalArc* VToolEllipticalArc::Create(QSharedPointer<DialogTool> dialog
     QSharedPointer<DialogEllipticalArc> dialogTool = dialog.objectCast<DialogEllipticalArc>();
     SCASSERT(not dialogTool.isNull())
 
-    const quint32 center = dialogTool->GetCenter();
-    QString radius1 = dialogTool->GetRadius1();
-    QString radius2 = dialogTool->GetRadius2();
-    QString f1 = dialogTool->GetF1();
-    QString f2 = dialogTool->GetF2();
-    QString rotationAngle = dialogTool->GetRotationAngle();
-    const QString color = dialogTool->GetColor();
-    const QString penStyle = dialogTool->GetPenStyle();
-    VToolEllipticalArc* point = Create(0, center, radius1, radius2, f1, f2, rotationAngle, color, penStyle, scene, doc,
-                                       data, Document::FullParse, Source::FromGui);
+    VToolEllipticalArcInitData initData;
+    initData.center = dialogTool->GetCenter();
+    initData.radius1 = dialogTool->GetRadius1();
+    initData.radius2 = dialogTool->GetRadius2();
+    initData.f1 = dialogTool->GetF1();
+    initData.f2 = dialogTool->GetF2();
+    initData.rotationAngle = dialogTool->GetRotationAngle();
+    initData.color = dialogTool->GetColor();
+    initData.penStyle = dialogTool->GetPenStyle();
+    initData.scene = scene;
+    initData.doc = doc;
+    initData.data = data;
+    initData.parse = Document::FullParse;
+    initData.typeCreation = Source::FromGui;
+
+    VToolEllipticalArc* point = Create(initData);
     if (point != nullptr)
     {
         point->m_dialog = dialogTool;
@@ -134,63 +136,49 @@ VToolEllipticalArc* VToolEllipticalArc::Create(QSharedPointer<DialogTool> dialog
 //---------------------------------------------------------------------------------------------------------------------
 /**
  * @brief Create help create tool form GUI.
- * @param _id tool id, 0 if tool doesn't exist yet.
- * @param center id elliptical arc center point.
- * @param radius1 elliptical arc radius1.
- * @param radius2 elliptical arc radius2.
- * @param f1 start angle of elliptical arc.
- * @param f2 end angle of elliptical arc.
- * @param rotationAngle rotation angle of elliptical arc.
- * @param scene pointer to scene.
- * @param doc dom document container.
- * @param data container with variables.
- * @param parse parser file mode.
- * @param typeCreation way we create this tool.
+ * @param initData init data.
  */
-VToolEllipticalArc* VToolEllipticalArc::Create(const quint32 _id, const quint32 &center, QString &radius1,
-                                               QString &radius2, QString &f1, QString &f2, QString &rotationAngle,
-                                               const QString &color, const QString &penStyle, VMainGraphicsScene *scene,
-                                               VAbstractPattern *doc, VContainer *data, const Document &parse,
-                                               const Source &typeCreation)
+VToolEllipticalArc* VToolEllipticalArc::Create(VToolEllipticalArcInitData &initData)
 {
     qreal calcRadius1 = 0, calcRadius2 = 0, calcF1 = 0, calcF2 = 0, calcRotationAngle = 0;
 
-    calcRadius1 = qApp->toPixel(CheckFormula(_id, radius1, data));
-    calcRadius2 = qApp->toPixel(CheckFormula(_id, radius2, data));
+    calcRadius1 = qApp->toPixel(CheckFormula(initData.id, initData.radius1, initData.data));
+    calcRadius2 = qApp->toPixel(CheckFormula(initData.id, initData.radius2, initData.data));
 
-    calcF1 = CheckFormula(_id, f1, data);
-    calcF2 = CheckFormula(_id, f2, data);
-    calcRotationAngle = CheckFormula(_id, rotationAngle, data);
+    calcF1 = CheckFormula(initData.id, initData.f1, initData.data);
+    calcF2 = CheckFormula(initData.id, initData.f2, initData.data);
+    calcRotationAngle = CheckFormula(initData.id, initData.rotationAngle, initData.data);
 
-    const VPointF c = *data->GeometricObject<VPointF>(center);
-    VEllipticalArc *elArc = new VEllipticalArc(c, calcRadius1, calcRadius2, radius1, radius2, calcF1, f1, calcF2, f2,
-                                               calcRotationAngle, rotationAngle);
-    elArc->SetColor(color);
-    elArc->SetPenStyle(penStyle);
-    quint32 id = _id;
-    if (typeCreation == Source::FromGui)
+    const VPointF c = *initData.data->GeometricObject<VPointF>(initData.center);
+    VEllipticalArc *elArc = new VEllipticalArc(c, calcRadius1, calcRadius2, initData.radius1, initData.radius2, calcF1,
+                                               initData.f1, calcF2, initData.f2, calcRotationAngle,
+                                               initData.rotationAngle);
+    elArc->SetColor(initData.color);
+    elArc->SetPenStyle(initData.penStyle);
+
+    if (initData.typeCreation == Source::FromGui)
     {
-        id = data->AddGObject(elArc);
-        data->AddArc(data->GeometricObject<VEllipticalArc>(id), id);
+        initData.id = initData.data->AddGObject(elArc);
+        initData.data->AddArc(initData.data->GeometricObject<VEllipticalArc>(initData.id), initData.id);
     }
     else
     {
-        data->UpdateGObject(id, elArc);
-        data->AddArc(data->GeometricObject<VEllipticalArc>(id), id);
-        if (parse != Document::FullParse)
+        initData.data->UpdateGObject(initData.id, elArc);
+        initData.data->AddArc(initData.data->GeometricObject<VEllipticalArc>(initData.id), initData.id);
+        if (initData.parse != Document::FullParse)
         {
-            doc->UpdateToolData(id, data);
+            initData.doc->UpdateToolData(initData.id, initData.data);
         }
     }
 
-    if (parse == Document::FullParse)
+    if (initData.parse == Document::FullParse)
     {
-        VAbstractTool::AddRecord(id, Tool::EllipticalArc, doc);
-        VToolEllipticalArc *toolEllipticalArc = new VToolEllipticalArc(doc, data, id, typeCreation);
-        scene->addItem(toolEllipticalArc);
-        InitElArcToolConnections(scene, toolEllipticalArc);
-        VAbstractPattern::AddTool(id, toolEllipticalArc);
-        doc->IncrementReferens(c.getIdTool());
+        VAbstractTool::AddRecord(initData.id, Tool::EllipticalArc, initData.doc);
+        VToolEllipticalArc *toolEllipticalArc = new VToolEllipticalArc(initData);
+        initData.scene->addItem(toolEllipticalArc);
+        InitElArcToolConnections(initData.scene, toolEllipticalArc);
+        VAbstractPattern::AddTool(initData.id, toolEllipticalArc);
+        initData.doc->IncrementReferens(c.getIdTool());
         return toolEllipticalArc;
     }
     return nullptr;

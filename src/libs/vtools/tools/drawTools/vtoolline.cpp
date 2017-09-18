@@ -57,33 +57,25 @@ template <class T> class QSharedPointer;
 //---------------------------------------------------------------------------------------------------------------------
 /**
  * @brief VToolLine constructor.
- * @param doc dom document container.
- * @param data container with variables.
- * @param id object id in container.
- * @param firstPoint id first line point.
- * @param secondPoint id second line point.
- * @param typeLine line type.
- * @param typeCreation way we create this tool.
+ * @param initData init data.
  * @param parent parent object.
  */
-VToolLine::VToolLine(VAbstractPattern *doc, VContainer *data, quint32 id, quint32 firstPoint, quint32 secondPoint,
-                     const QString &typeLine, const QString &lineColor, const Source &typeCreation,
-                     QGraphicsItem *parent)
-    :VDrawTool(doc, data, id),
+VToolLine::VToolLine(const VToolLineInitData &initData, QGraphicsItem *parent)
+    :VDrawTool(initData.doc, initData.data, initData.id),
       QGraphicsLineItem(parent),
-      firstPoint(firstPoint),
-      secondPoint(secondPoint),
-      lineColor(lineColor),
+      firstPoint(initData.firstPoint),
+      secondPoint(initData.secondPoint),
+      lineColor(initData.lineColor),
       m_isHovered(false)
 {
-    this->m_lineType = typeLine;
+    this->m_lineType = initData.typeLine;
     //Line
     RefreshGeometry();
     this->setFlag(QGraphicsItem::ItemStacksBehindParent, true);
     this->setFlag(QGraphicsItem::ItemIsFocusable, true);// For keyboard input focus
     this->setAcceptHoverEvents(true);
 
-    ToolCreation(typeCreation);
+    ToolCreation(initData.typeCreation);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -115,13 +107,19 @@ VToolLine *VToolLine::Create(QSharedPointer<DialogTool> dialog, VMainGraphicsSce
     SCASSERT(not dialog.isNull())
     QSharedPointer<DialogLine> dialogTool = dialog.objectCast<DialogLine>();
     SCASSERT(not dialogTool.isNull())
-    const quint32 firstPoint = dialogTool->GetFirstPoint();
-    const quint32 secondPoint = dialogTool->GetSecondPoint();
-    const QString typeLine = dialogTool->GetTypeLine();
-    const QString lineColor = dialogTool->GetLineColor();
 
-    VToolLine *line = Create(0, firstPoint, secondPoint, typeLine, lineColor,  scene, doc, data, Document::FullParse,
-                             Source::FromGui);
+    VToolLineInitData initData;
+    initData.firstPoint = dialogTool->GetFirstPoint();
+    initData.secondPoint = dialogTool->GetSecondPoint();
+    initData.typeLine = dialogTool->GetTypeLine();
+    initData.lineColor = dialogTool->GetLineColor();
+    initData.scene = scene;
+    initData.doc = doc;
+    initData.data = data;
+    initData.parse = Document::FullParse;
+    initData.typeCreation = Source::FromGui;
+
+    VToolLine *line = Create(initData);
     if (line != nullptr)
     {
         line->m_dialog = dialogTool;
@@ -142,45 +140,41 @@ VToolLine *VToolLine::Create(QSharedPointer<DialogTool> dialog, VMainGraphicsSce
  * @param parse parser file mode.
  * @param typeCreation way we create this tool.
  */
-VToolLine * VToolLine::Create(const quint32 &_id, const quint32 &firstPoint, const quint32 &secondPoint,
-                              const QString &typeLine, const QString &lineColor, VMainGraphicsScene *scene,
-                              VAbstractPattern *doc, VContainer *data, const Document &parse,
-                              const Source &typeCreation)
+VToolLine * VToolLine::Create(VToolLineInitData initData)
 {
-    SCASSERT(scene != nullptr)
-    SCASSERT(doc != nullptr)
-    SCASSERT(data != nullptr)
-    quint32 id = _id;
-    if (typeCreation == Source::FromGui)
+    SCASSERT(initData.scene != nullptr)
+    SCASSERT(initData.doc != nullptr)
+    SCASSERT(initData.data != nullptr)
+    if (initData.typeCreation == Source::FromGui)
     {
-        id = VContainer::getNextId();
-        data->AddLine(firstPoint, secondPoint);
+        initData.id = VContainer::getNextId();
+        initData.data->AddLine(initData.firstPoint, initData.secondPoint);
     }
     else
     {
-        VContainer::UpdateId(id);
-        data->AddLine(firstPoint, secondPoint);
-        if (parse != Document::FullParse)
+        VContainer::UpdateId(initData.id);
+        initData.data->AddLine(initData.firstPoint, initData.secondPoint);
+        if (initData.parse != Document::FullParse)
         {
-            doc->UpdateToolData(id, data);
+            initData.doc->UpdateToolData(initData.id, initData.data);
         }
     }
 
-    if (parse == Document::FullParse)
+    if (initData.parse == Document::FullParse)
     {
-        VAbstractTool::AddRecord(id, Tool::Line, doc);
-        VToolLine *line = new VToolLine(doc, data, id, firstPoint, secondPoint, typeLine, lineColor, typeCreation);
-        scene->addItem(line);
-        InitDrawToolConnections(scene, line);
-        connect(scene, &VMainGraphicsScene::EnableLineItemSelection, line, &VToolLine::AllowSelecting);
-        connect(scene, &VMainGraphicsScene::EnableLineItemHover, line, &VToolLine::AllowHover);
-        VAbstractPattern::AddTool(id, line);
+        VAbstractTool::AddRecord(initData.id, Tool::Line, initData.doc);
+        VToolLine *line = new VToolLine(initData);
+        initData.scene->addItem(line);
+        InitDrawToolConnections(initData.scene, line);
+        connect(initData.scene, &VMainGraphicsScene::EnableLineItemSelection, line, &VToolLine::AllowSelecting);
+        connect(initData.scene, &VMainGraphicsScene::EnableLineItemHover, line, &VToolLine::AllowHover);
+        VAbstractPattern::AddTool(initData.id, line);
 
-        const QSharedPointer<VPointF> first = data->GeometricObject<VPointF>(firstPoint);
-        const QSharedPointer<VPointF> second = data->GeometricObject<VPointF>(secondPoint);
+        const QSharedPointer<VPointF> first = initData.data->GeometricObject<VPointF>(initData.firstPoint);
+        const QSharedPointer<VPointF> second = initData.data->GeometricObject<VPointF>(initData.secondPoint);
 
-        doc->IncrementReferens(first->getIdTool());
-        doc->IncrementReferens(second->getIdTool());
+        initData.doc->IncrementReferens(first->getIdTool());
+        initData.doc->IncrementReferens(second->getIdTool());
         return line;
     }
     return nullptr;

@@ -55,13 +55,14 @@ template <class T> class QSharedPointer;
 const QString VToolPointFromArcAndTangent::ToolType = QStringLiteral("pointFromArcAndTangent");
 
 //---------------------------------------------------------------------------------------------------------------------
-VToolPointFromArcAndTangent::VToolPointFromArcAndTangent(VAbstractPattern *doc, VContainer *data, const quint32 &id,
-                                                         quint32 arcId, quint32 tangentPointId,
-                                                         CrossCirclesPoint crossPoint, const Source &typeCreation,
+VToolPointFromArcAndTangent::VToolPointFromArcAndTangent(const VToolPointFromArcAndTangentInitData &initData,
                                                          QGraphicsItem *parent)
-    :VToolSinglePoint(doc, data, id, parent), arcId(arcId), tangentPointId(tangentPointId), crossPoint(crossPoint)
+    :VToolSinglePoint(initData.doc, initData.data, initData.id, parent),
+      arcId(initData.arcId),
+      tangentPointId(initData.tangentPointId),
+      crossPoint(initData.crossPoint)
 {
-    ToolCreation(typeCreation);
+    ToolCreation(initData.typeCreation);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -85,12 +86,19 @@ VToolPointFromArcAndTangent *VToolPointFromArcAndTangent::Create(QSharedPointer<
     SCASSERT(not dialog.isNull())
     QSharedPointer<DialogPointFromArcAndTangent> dialogTool = dialog.objectCast<DialogPointFromArcAndTangent>();
     SCASSERT(not dialogTool.isNull())
-    const quint32 arcId = dialogTool->GetArcId();
-    const quint32 tangentPointId = dialogTool->GetTangentPointId();
-    const CrossCirclesPoint pType = dialogTool->GetCrossCirclesPoint();
-    const QString pointName = dialogTool->getPointName();
-    VToolPointFromArcAndTangent *point = Create(0, pointName, arcId, tangentPointId, pType, 5, 10, true, scene, doc,
-                                                data, Document::FullParse, Source::FromGui);
+
+    VToolPointFromArcAndTangentInitData initData;
+    initData.arcId = dialogTool->GetArcId();
+    initData.tangentPointId = dialogTool->GetTangentPointId();
+    initData.crossPoint = dialogTool->GetCrossCirclesPoint();
+    initData.name = dialogTool->getPointName();
+    initData.scene = scene;
+    initData.doc = doc;
+    initData.data = data;
+    initData.parse = Document::FullParse;
+    initData.typeCreation = Source::FromGui;
+
+    VToolPointFromArcAndTangent *point = Create(initData);
     if (point != nullptr)
     {
         point->m_dialog = dialogTool;
@@ -99,45 +107,39 @@ VToolPointFromArcAndTangent *VToolPointFromArcAndTangent::Create(QSharedPointer<
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-VToolPointFromArcAndTangent *VToolPointFromArcAndTangent::Create(const quint32 _id, const QString &pointName,
-                                                                 quint32 arcId, quint32 tangentPointId,
-                                                                 CrossCirclesPoint crossPoint, qreal mx,
-                                                                 qreal my, bool showLabel, VMainGraphicsScene *scene,
-                                                                 VAbstractPattern *doc, VContainer *data,
-                                                                 const Document &parse, const Source &typeCreation)
+VToolPointFromArcAndTangent *VToolPointFromArcAndTangent::Create(VToolPointFromArcAndTangentInitData initData)
 {
-    const VArc arc = *data->GeometricObject<VArc>(arcId);
-    const VPointF tPoint = *data->GeometricObject<VPointF>(tangentPointId);
+    const VArc arc = *initData.data->GeometricObject<VArc>(initData.arcId);
+    const VPointF tPoint = *initData.data->GeometricObject<VPointF>(initData.tangentPointId);
 
-    const QPointF point = VToolPointFromArcAndTangent::FindPoint(static_cast<QPointF>(tPoint), &arc, crossPoint);
-    quint32 id = _id;
+    const QPointF point = VToolPointFromArcAndTangent::FindPoint(static_cast<QPointF>(tPoint), &arc,
+                                                                 initData.crossPoint);
 
-    VPointF *p = new VPointF(point, pointName, mx, my);
-    p->SetShowLabel(showLabel);
+    VPointF *p = new VPointF(point, initData.name, initData.mx, initData.my);
+    p->SetShowLabel(initData.showLabel);
 
-    if (typeCreation == Source::FromGui)
+    if (initData.typeCreation == Source::FromGui)
     {
-        id = data->AddGObject(p);
+        initData.id = initData.data->AddGObject(p);
     }
     else
     {
-        data->UpdateGObject(id, p);
-        if (parse != Document::FullParse)
+        initData.data->UpdateGObject(initData.id, p);
+        if (initData.parse != Document::FullParse)
         {
-            doc->UpdateToolData(id, data);
+            initData.doc->UpdateToolData(initData.id, initData.data);
         }
     }
 
-    if (parse == Document::FullParse)
+    if (initData.parse == Document::FullParse)
     {
-        VAbstractTool::AddRecord(id, Tool::PointFromArcAndTangent, doc);
-        VToolPointFromArcAndTangent *point = new VToolPointFromArcAndTangent(doc, data, id, arcId, tangentPointId,
-                                                                             crossPoint, typeCreation);
-        scene->addItem(point);
-        InitToolConnections(scene, point);
-        VAbstractPattern::AddTool(id, point);
-        doc->IncrementReferens(arc.getIdTool());
-        doc->IncrementReferens(tPoint.getIdTool());
+        VAbstractTool::AddRecord(initData.id, Tool::PointFromArcAndTangent, initData.doc);
+        VToolPointFromArcAndTangent *point = new VToolPointFromArcAndTangent(initData);
+        initData.scene->addItem(point);
+        InitToolConnections(initData.scene, point);
+        VAbstractPattern::AddTool(initData.id, point);
+        initData.doc->IncrementReferens(arc.getIdTool());
+        initData.doc->IncrementReferens(tPoint.getIdTool());
         return point;
     }
     return nullptr;

@@ -45,6 +45,22 @@
 
 template <class T> class QSharedPointer;
 
+struct VToolPointOfIntersectionCurvesInitData : public VToolSinglePointInitData
+{
+    VToolPointOfIntersectionCurvesInitData()
+        : VToolSinglePointInitData(),
+          firstCurveId(NULL_ID),
+          secondCurveId(NULL_ID),
+          vCrossPoint(VCrossCurvesPoint::HighestPoint),
+          hCrossPoint(HCrossCurvesPoint::LeftmostPoint)
+    {}
+
+    quint32 firstCurveId;
+    quint32 secondCurveId;
+    VCrossCurvesPoint vCrossPoint;
+    HCrossCurvesPoint hCrossPoint;
+};
+
 class VToolPointOfIntersectionCurves : public VToolSinglePoint
 {
     Q_OBJECT
@@ -52,12 +68,7 @@ public:
     virtual void setDialog() Q_DECL_OVERRIDE;
     static VToolPointOfIntersectionCurves *Create(QSharedPointer<DialogTool> dialog, VMainGraphicsScene  *scene,
                                                   VAbstractPattern *doc, VContainer *data);
-    static VToolPointOfIntersectionCurves *Create(const quint32 _id, const QString &pointName,
-                                                  quint32 firstCurveId, quint32 secondCurveId,
-                                                  VCrossCurvesPoint vCrossPoint, HCrossCurvesPoint hCrossPoint,
-                                                  qreal mx, qreal my, bool showLabel, VMainGraphicsScene *scene,
-                                                  VAbstractPattern *doc, VContainer *data, const Document &parse,
-                                                  const Source &typeCreation);
+    static VToolPointOfIntersectionCurves *Create(VToolPointOfIntersectionCurvesInitData initData);
     static QPointF FindPoint(const QVector<QPointF> &curve1Points, const QVector<QPointF> &curve2Points,
                              VCrossCurvesPoint vCrossPoint, HCrossCurvesPoint hCrossPoint);
     static const QString ToolType;
@@ -97,10 +108,8 @@ private:
     VCrossCurvesPoint vCrossPoint;
     HCrossCurvesPoint hCrossPoint;
 
-    explicit VToolPointOfIntersectionCurves(VAbstractPattern *doc, VContainer *data, const quint32 &id, const
-                                            quint32 firstCurveId, quint32 secondCurveId,
-                                            VCrossCurvesPoint vCrossPoint, HCrossCurvesPoint hCrossPoint,
-                                            const Source &typeCreation, QGraphicsItem * parent = nullptr);
+    explicit VToolPointOfIntersectionCurves(const VToolPointOfIntersectionCurvesInitData &initData,
+                                            QGraphicsItem *parent = nullptr);
 };
 
 #endif // VTOOLPOINTOFINTERSECTIONCURVES_H

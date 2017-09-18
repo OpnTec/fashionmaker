@@ -44,6 +44,22 @@
 
 template <class T> class QSharedPointer;
 
+struct VToolSinglePointInitData : public VAbstractToolInitData
+{
+    VToolSinglePointInitData()
+        : VAbstractToolInitData(),
+          name(),
+          mx(5),
+          my(10),
+          showLabel(true)
+    {}
+
+    QString name;
+    qreal   mx;
+    qreal   my;
+    bool    showLabel;
+};
+
 /**
  * @brief The VToolSinglePoint class parent for all tools what create points.
  */

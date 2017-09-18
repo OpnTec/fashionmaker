@@ -45,6 +45,20 @@
 
 template <class T> class QSharedPointer;
 
+struct VToolBasePointInitData : public VToolSinglePointInitData
+{
+    VToolBasePointInitData()
+        : VToolSinglePointInitData(),
+          nameActivPP(),
+          x(10),
+          y(10)
+    {}
+
+    QString nameActivPP;
+    qreal x;
+    qreal y;
+};
+
 /**
  * @brief The VToolBasePoint class tool for creation pattern base point. Only base point can move. All object
  * pattern peace depend on base point.
@@ -55,9 +69,7 @@ class VToolBasePoint : public VToolSinglePoint
 public:
     virtual ~VToolBasePoint() =default;
     virtual void setDialog() Q_DECL_OVERRIDE;
-    static VToolBasePoint *Create(quint32 _id, const QString &nameActivPP, VPointF *point,
-                                  VMainGraphicsScene *scene, VAbstractPattern *doc, VContainer *data,
-                                  const Document &parse, const Source &typeCreation);
+    static VToolBasePoint *Create(VToolBasePointInitData initData);
     static const QString ToolType;
     virtual int  type() const Q_DECL_OVERRIDE {return Type;}
     enum { Type = UserType + static_cast<int>(Tool::BasePoint)};
@@ -94,8 +106,7 @@ private:
 
     QString namePP;
 
-    VToolBasePoint (VAbstractPattern *doc, VContainer *data, quint32 id, const Source &typeCreation,
-                      const QString &namePP, QGraphicsItem * parent = nullptr );
+    VToolBasePoint (const VToolBasePointInitData &initData, QGraphicsItem * parent = nullptr );
 };
 
 #endif // VTOOLBASEPOINT_H

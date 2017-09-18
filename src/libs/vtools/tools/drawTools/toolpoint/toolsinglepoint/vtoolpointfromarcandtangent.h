@@ -44,6 +44,20 @@
 
 template <class T> class QSharedPointer;
 
+struct VToolPointFromArcAndTangentInitData : public VToolSinglePointInitData
+{
+    VToolPointFromArcAndTangentInitData()
+        : VToolSinglePointInitData(),
+          arcId(NULL_ID),
+          tangentPointId(NULL_ID),
+          crossPoint(CrossCirclesPoint::FirstPoint)
+    {}
+
+    quint32 arcId;
+    quint32 tangentPointId;
+    CrossCirclesPoint crossPoint;
+};
+
 class VToolPointFromArcAndTangent : public VToolSinglePoint
 {
     Q_OBJECT
@@ -51,11 +65,7 @@ public:
     virtual void setDialog() Q_DECL_OVERRIDE;
     static VToolPointFromArcAndTangent *Create(QSharedPointer<DialogTool> dialog, VMainGraphicsScene  *scene,
                                                VAbstractPattern *doc, VContainer *data);
-    static VToolPointFromArcAndTangent *Create(const quint32 _id, const QString &pointName, quint32 arcId,
-                                               quint32 tangentPointId, CrossCirclesPoint crossPoint, qreal mx,
-                                               qreal my, bool showLabel, VMainGraphicsScene *scene,
-                                               VAbstractPattern *doc, VContainer *data, const Document &parse,
-                                               const Source &typeCreation);
+    static VToolPointFromArcAndTangent *Create(VToolPointFromArcAndTangentInitData initData);
     static QPointF FindPoint(const QPointF &p, const VArc *arc, const CrossCirclesPoint pType);
     static const QString ToolType;
     virtual int  type() const Q_DECL_OVERRIDE {return Type;}
@@ -89,9 +99,7 @@ private:
     quint32 tangentPointId;
     CrossCirclesPoint crossPoint;
 
-    VToolPointFromArcAndTangent(VAbstractPattern *doc, VContainer *data, const quint32 &id, quint32 arcId,
-                                quint32 tangentPointId, CrossCirclesPoint crossPoint, const Source &typeCreation,
-                                QGraphicsItem * parent = nullptr);
+    VToolPointFromArcAndTangent(const VToolPointFromArcAndTangentInitData &initData, QGraphicsItem *parent = nullptr);
 };
 
 #endif // VTOOLPOINTFROMARCANDTANGENT_H

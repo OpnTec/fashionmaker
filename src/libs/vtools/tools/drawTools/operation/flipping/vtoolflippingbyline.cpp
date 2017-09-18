@@ -84,13 +84,19 @@ VToolFlippingByLine *VToolFlippingByLine::Create(QSharedPointer<DialogTool> dial
     SCASSERT(not dialog.isNull())
     QSharedPointer<DialogFlippingByLine> dialogTool = dialog.objectCast<DialogFlippingByLine>();
     SCASSERT(not dialogTool.isNull())
-    const quint32 firstLinePointId = dialogTool->GetFirstLinePointId();
-    const quint32 secondLinePointId = dialogTool->GetSecondLinePointId();
-    const QString suffix = dialogTool->GetSuffix();
-    const QVector<quint32> source = dialogTool->GetObjects();
-    VToolFlippingByLine* operation = Create(0, firstLinePointId, secondLinePointId, suffix, source,
-                                            QVector<DestinationItem>(), scene, doc, data, Document::FullParse,
-                                            Source::FromGui);
+
+    VToolFlippingByLineInitData initData;
+    initData.firstLinePointId = dialogTool->GetFirstLinePointId();
+    initData.secondLinePointId = dialogTool->GetSecondLinePointId();
+    initData.suffix = dialogTool->GetSuffix();
+    initData.source = dialogTool->GetObjects();
+    initData.scene = scene;
+    initData.doc = doc;
+    initData.data = data;
+    initData.parse = Document::FullParse;
+    initData.typeCreation = Source::FromGui;
+
+    VToolFlippingByLine* operation = Create(initData);
     if (operation != nullptr)
     {
         operation->m_dialog = dialogTool;
@@ -99,36 +105,28 @@ VToolFlippingByLine *VToolFlippingByLine::Create(QSharedPointer<DialogTool> dial
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-VToolFlippingByLine *VToolFlippingByLine::Create(const quint32 _id, quint32 firstLinePointId, quint32 secondLinePointId,
-                                                 const QString &suffix, const QVector<quint32> &source,
-                                                 const QVector<DestinationItem> &destination, VMainGraphicsScene *scene,
-                                                 VAbstractPattern *doc, VContainer *data, const Document &parse,
-                                                 const Source &typeCreation)
+VToolFlippingByLine *VToolFlippingByLine::Create(VToolFlippingByLineInitData initData)
 {
-    const auto firstPoint = *data->GeometricObject<VPointF>(firstLinePointId);
+    const auto firstPoint = *initData.data->GeometricObject<VPointF>(initData.firstLinePointId);
     const QPointF fPoint = static_cast<QPointF>(firstPoint);
 
-    const auto secondPoint = *data->GeometricObject<VPointF>(secondLinePointId);
+    const auto secondPoint = *initData.data->GeometricObject<VPointF>(initData.secondLinePointId);
     const QPointF sPoint = static_cast<QPointF>(secondPoint);
 
-    QVector<DestinationItem> dest = destination;
+    CreateDestination(initData, fPoint, sPoint);
 
-    quint32 id = _id;
-    CreateDestination(typeCreation, id, dest, source, fPoint, sPoint, suffix, doc, data, parse);
-
-    if (parse == Document::FullParse)
+    if (initData.parse == Document::FullParse)
     {
-        VAbstractTool::AddRecord(id, Tool::FlippingByLine, doc);
-        VToolFlippingByLine *tool = new VToolFlippingByLine(doc, data, id, firstLinePointId, secondLinePointId, suffix,
-                                                            source, dest, typeCreation);
-        scene->addItem(tool);
-        InitOperationToolConnections(scene, tool);
-        VAbstractPattern::AddTool(id, tool);
-        doc->IncrementReferens(firstPoint.getIdTool());
-        doc->IncrementReferens(secondPoint.getIdTool());
-        for (int i = 0; i < source.size(); ++i)
+        VAbstractTool::AddRecord(initData.id, Tool::FlippingByLine, initData.doc);
+        VToolFlippingByLine *tool = new VToolFlippingByLine(initData);
+        initData.scene->addItem(tool);
+        InitOperationToolConnections(initData.scene, tool);
+        VAbstractPattern::AddTool(initData.id, tool);
+        initData.doc->IncrementReferens(firstPoint.getIdTool());
+        initData.doc->IncrementReferens(secondPoint.getIdTool());
+        for (int i = 0; i < initData.source.size(); ++i)
         {
-            doc->IncrementReferens(data->GetGObject(source.at(i))->getIdTool());
+            initData.doc->IncrementReferens(initData.data->GetGObject(initData.source.at(i))->getIdTool());
         }
         return tool;
     }
@@ -228,14 +226,12 @@ QString VToolFlippingByLine::MakeToolTip() const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-VToolFlippingByLine::VToolFlippingByLine(VAbstractPattern *doc, VContainer *data, quint32 id, quint32 firstLinePointId,
-                                         quint32 secondLinePointId, const QString &suffix,
-                                         const QVector<quint32> &source, const QVector<DestinationItem> &destination,
-                                         const Source &typeCreation, QGraphicsItem *parent)
-    : VAbstractFlipping(doc, data, id, suffix, source, destination, parent),
-      m_firstLinePointId(firstLinePointId),
-      m_secondLinePointId(secondLinePointId)
+VToolFlippingByLine::VToolFlippingByLine(const VToolFlippingByLineInitData &initData, QGraphicsItem *parent)
+    : VAbstractFlipping(initData.doc, initData.data, initData.id, initData.suffix, initData.source,
+                        initData.destination, parent),
+      m_firstLinePointId(initData.firstLinePointId),
+      m_secondLinePointId(initData.secondLinePointId)
 {
     InitOperatedObjects();
-    ToolCreation(typeCreation);
+    ToolCreation(initData.typeCreation);
 }

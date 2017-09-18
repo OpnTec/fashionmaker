@@ -60,18 +60,12 @@ const QString VNodePoint::ToolType = QStringLiteral("modeling");
 //---------------------------------------------------------------------------------------------------------------------
 /**
  * @brief VNodePoint constructor.
- * @param doc dom document container.
- * @param data container with variables.
- * @param id object id in container.
- * @param idPoint object id in containerPoint.
- * @param typeCreation way we create this tool.
- * @param idTool tool id.
- * @param qoParent QObject parent
+ * @param initData init data.
  * @param parent parent object.
  */
-VNodePoint::VNodePoint(VAbstractPattern *doc, VContainer *data, quint32 id, quint32 idPoint, const Source &typeCreation,
-                       const QString &drawName, const quint32 &idTool, QObject *qoParent, QGraphicsItem *parent)
-    : VAbstractNode(doc, data, id, idPoint, drawName, idTool, qoParent),
+VNodePoint::VNodePoint(const VAbstractNodeInitData &initData, QObject *qoParent, QGraphicsItem *parent)
+    : VAbstractNode(initData.doc, initData.data, initData.id, initData.idObject, initData.drawName, initData.idTool,
+                    qoParent),
       VScenePoint(parent)
 {
     connect(m_namePoint, &VGraphicsSimpleTextItem::PointChoosed, this, &VNodePoint::PointChoosed);
@@ -81,56 +75,48 @@ VNodePoint::VNodePoint(VAbstractPattern *doc, VContainer *data, quint32 id, quin
     {
         emit ShowContextMenu(event);
     });
-    RefreshPointGeometry(*VAbstractTool::data.GeometricObject<VPointF>(id));
-    ToolCreation(typeCreation);
+    RefreshPointGeometry(*VAbstractTool::data.GeometricObject<VPointF>(initData.id));
+    ToolCreation(initData.typeCreation);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 /**
  * @brief Create help create tool.
- * @param doc dom document container.
- * @param data container with variables.
- * @param id object id in container.
- * @param idPoint object id in containerPoint.
- * @param parse parser file mode.
- * @param typeCreation way we create this tool.
- * @param idTool tool id.
+ * @param initData init data.
  */
-void VNodePoint::Create(VAbstractPattern *doc, VContainer *data, VMainGraphicsScene *scene,
-                        quint32 id, quint32 idPoint, const Document &parse,
-                        const Source &typeCreation, const QString &drawName, const quint32 &idTool)
+void VNodePoint::Create(VAbstractNodeInitData initData)
 {
-    if (parse == Document::FullParse)
+    if (initData.parse == Document::FullParse)
     {
-        VAbstractTool::AddRecord(id, Tool::NodePoint, doc);
+        VAbstractTool::AddRecord(initData.id, Tool::NodePoint, initData.doc);
         //TODO Need create garbage collector and remove all nodes, what we don't use.
         //Better check garbage before each saving file. Check only modeling tags.
-        VNodePoint *point = new VNodePoint(doc, data, id, idPoint, typeCreation, drawName, idTool, doc);
+        VNodePoint *point = new VNodePoint(initData);
 
-        connect(scene, &VMainGraphicsScene::EnableToolMove, point, &VNodePoint::EnableToolMove);
-        connect(scene, &VMainGraphicsScene::EnablePointItemHover, point, &VNodePoint::AllowHover);
-        connect(scene, &VMainGraphicsScene::EnablePointItemSelection, point, &VNodePoint::AllowSelecting);
-        connect(scene, &VMainGraphicsScene::EnableLabelItemHover, point, &VNodePoint::AllowLabelHover);
-        connect(scene, &VMainGraphicsScene::EnableLabelItemSelection, point, &VNodePoint::AllowLabelSelecting);
-        VAbstractPattern::AddTool(id, point);
-        if (idTool != NULL_ID)
+        connect(initData.scene, &VMainGraphicsScene::EnableToolMove, point, &VNodePoint::EnableToolMove);
+        connect(initData.scene, &VMainGraphicsScene::EnablePointItemHover, point, &VNodePoint::AllowHover);
+        connect(initData.scene, &VMainGraphicsScene::EnablePointItemSelection, point, &VNodePoint::AllowSelecting);
+        connect(initData.scene, &VMainGraphicsScene::EnableLabelItemHover, point, &VNodePoint::AllowLabelHover);
+        connect(initData.scene, &VMainGraphicsScene::EnableLabelItemSelection, point, &VNodePoint::AllowLabelSelecting);
+        VAbstractPattern::AddTool(initData.id, point);
+        if (initData.idTool != NULL_ID)
         {
             //Some nodes we don't show on scene. Tool that create this nodes must free memory.
-            VDataTool *tool = VAbstractPattern::getTool(idTool);
+            VDataTool *tool = VAbstractPattern::getTool(initData.idTool);
             SCASSERT(tool != nullptr)
             point->setParent(tool);// Adopted by a tool
         }
         else
         {
             // Try to prevent memory leak
-            scene->addItem(point);// First adopted by scene
+            initData.scene->addItem(point);// First adopted by scene
             point->hide();// If no one will use node, it will stay hidden
             point->SetParentType(ParentType::Scene);
         }
     }
     else
     {
-        doc->UpdateToolData(id, data);
+        initData.doc->UpdateToolData(initData.id, initData.data);
     }
 }
 

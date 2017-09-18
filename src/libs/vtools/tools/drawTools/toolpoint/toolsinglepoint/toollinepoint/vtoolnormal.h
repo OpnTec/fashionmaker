@@ -44,6 +44,22 @@
 
 template <class T> class QSharedPointer;
 
+struct VToolNormalInitData : public VToolLinePointInitData
+{
+    VToolNormalInitData()
+        : VToolLinePointInitData(),
+          formula(),
+          firstPointId(NULL_ID),
+          secondPointId(NULL_ID),
+          angle(0)
+    {}
+
+    QString formula;
+    quint32 firstPointId;
+    quint32 secondPointId;
+    qreal angle;
+};
+
 /**
  * @brief The VToolNormal class tool for creation point on normal. Normal begin from first point of line.
  */
@@ -54,11 +70,7 @@ public:
     virtual void   setDialog() Q_DECL_OVERRIDE;
     static VToolNormal* Create(QSharedPointer<DialogTool> dialog, VMainGraphicsScene  *scene, VAbstractPattern *doc,
                                VContainer *data);
-    static VToolNormal* Create(const quint32 _id, QString &formula, quint32 firstPointId,
-                               quint32 secondPointId, const QString &typeLine, const QString &lineColor,
-                               const QString &pointName, const qreal angle, qreal mx, qreal my, bool showLabel,
-                               VMainGraphicsScene  *scene, VAbstractPattern *doc, VContainer *data,
-                               const Document &parse, const Source &typeCreation);
+    static VToolNormal* Create(VToolNormalInitData initData);
     static QPointF FindPoint(const QPointF &firstPoint, const QPointF &secondPoint, const qreal &length,
                              const qreal &angle = 0);
     static const QString ToolType;
@@ -85,10 +97,7 @@ private:
     /** @brief secondPointId id second line point. */
     quint32        secondPointId;
 
-    VToolNormal(VAbstractPattern *doc, VContainer *data, const quint32 &id, const QString &typeLine,
-                const QString &lineColor,
-                const QString &formula, const qreal &angle, const quint32 &firstPointId, const quint32 &secondPointId,
-                const Source &typeCreation, QGraphicsItem * parent = nullptr);
+    VToolNormal(const VToolNormalInitData &initData, QGraphicsItem *parent = nullptr);
 };
 
 #endif // VTOOLNORMAL_H

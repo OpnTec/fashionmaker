@@ -45,6 +45,18 @@
 template <class T> class QSharedPointer;
 class VFormula;
 
+struct VToolRotationInitData : public VAbstractOperationInitData
+{
+    VToolRotationInitData()
+        : VAbstractOperationInitData(),
+          origin(NULL_ID),
+          angle()
+    {}
+
+    quint32 origin;
+    QString angle;
+};
+
 class VToolRotation : public VAbstractOperation
 {
     Q_OBJECT
@@ -53,10 +65,7 @@ public:
     virtual void setDialog() Q_DECL_OVERRIDE;
     static VToolRotation* Create(QSharedPointer<DialogTool> dialog, VMainGraphicsScene *scene, VAbstractPattern *doc,
                                  VContainer *data);
-    static VToolRotation* Create(const quint32 _id, const quint32 &origin, QString &angle, const QString &suffix,
-                                 const QVector<quint32> &source, const QVector<DestinationItem> &destination,
-                                 VMainGraphicsScene *scene, VAbstractPattern *doc, VContainer *data,
-                                 const Document &parse, const Source &typeCreation);
+    static VToolRotation* Create(VToolRotationInitData &initData);
 
     static const QString ToolType;
 
@@ -83,10 +92,7 @@ private:
     quint32 origPointId;
     QString formulaAngle;
 
-    VToolRotation(VAbstractPattern *doc, VContainer *data, quint32 id, quint32 origPointId,
-                  const QString &angle, const QString &suffix, const QVector<quint32> &source,
-                  const QVector<DestinationItem> &destination, const Source &typeCreation,
-                  QGraphicsItem *parent = nullptr);
+    VToolRotation(const VToolRotationInitData &initData, QGraphicsItem *parent = nullptr);
 
     static DestinationItem CreatePoint(quint32 idTool, quint32 idItem, const QPointF &origin, qreal angle,
                                        const QString &suffix, VContainer *data);

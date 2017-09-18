@@ -46,6 +46,20 @@
 
 template <class T> class QSharedPointer;
 
+struct VToolCurveIntersectAxisInitData : public VToolLinePointInitData
+{
+    VToolCurveIntersectAxisInitData()
+        : VToolLinePointInitData(),
+          formulaAngle("0"),
+          basePointId(NULL_ID),
+          curveId(NULL_ID)
+    {}
+
+    QString formulaAngle;
+    quint32 basePointId;
+    quint32 curveId;
+};
+
 class VToolCurveIntersectAxis : public VToolLinePoint
 {
     Q_OBJECT
@@ -55,11 +69,7 @@ public:
 
     static VToolCurveIntersectAxis *Create(QSharedPointer<DialogTool> dialog, VMainGraphicsScene *scene,
                                            VAbstractPattern *doc, VContainer *data);
-    static VToolCurveIntersectAxis *Create(const quint32 _id, const QString &pointName, const QString &typeLine,
-                                           const QString &lineColor, QString &formulaAngle, quint32 basePointId,
-                                           quint32 curveId, qreal mx, qreal my, bool showLabel,
-                                           VMainGraphicsScene  *scene, VAbstractPattern *doc, VContainer *data,
-                                           const Document &parse, const Source &typeCreation);
+    static VToolCurveIntersectAxis *Create(VToolCurveIntersectAxisInitData &initData);
 
     static QPointF FindPoint(const QPointF &point, qreal angle, const QSharedPointer<VAbstractCurve> &curve);
 
@@ -88,9 +98,7 @@ private:
     QString formulaAngle;
     quint32 curveId;
 
-    VToolCurveIntersectAxis(VAbstractPattern *doc, VContainer *data, const quint32 &id, const QString &typeLine,
-                            const QString &lineColor, const QString &formulaAngle, const quint32 &basePointId,
-                            const quint32 &curveId, const Source &typeCreation, QGraphicsItem * parent = nullptr);
+    VToolCurveIntersectAxis(const VToolCurveIntersectAxisInitData &initData, QGraphicsItem *parent = nullptr);
 
     template <class Item>
     static void InitArc(VContainer *data, qreal segLength, const VPointF *p, quint32 curveId);

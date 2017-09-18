@@ -33,6 +33,19 @@
 
 #include "vabstractflipping.h"
 
+struct VToolFlippingByLineInitData : public VAbstractOperationInitData
+{
+    VToolFlippingByLineInitData()
+        : VAbstractOperationInitData(),
+          firstLinePointId(NULL_ID),
+          secondLinePointId(NULL_ID)
+    {}
+
+    quint32 firstLinePointId;
+    quint32 secondLinePointId;
+};
+
+
 class VToolFlippingByLine : public VAbstractFlipping
 {
     Q_OBJECT
@@ -41,11 +54,7 @@ public:
     virtual void setDialog() Q_DECL_OVERRIDE;
     static VToolFlippingByLine* Create(QSharedPointer<DialogTool> dialog, VMainGraphicsScene *scene,
                                        VAbstractPattern *doc, VContainer *data);
-    static VToolFlippingByLine* Create(const quint32 _id, quint32 firstLinePointId, quint32 secondLinePointId,
-                                       const QString &suffix, const QVector<quint32> &source,
-                                       const QVector<DestinationItem> &destination, VMainGraphicsScene *scene,
-                                       VAbstractPattern *doc, VContainer *data, const Document &parse,
-                                       const Source &typeCreation);
+    static VToolFlippingByLine* Create(VToolFlippingByLineInitData initData);
 
     static const QString ToolType;
 
@@ -70,10 +79,7 @@ private:
     quint32 m_firstLinePointId;
     quint32 m_secondLinePointId;
 
-    VToolFlippingByLine(VAbstractPattern *doc, VContainer *data, quint32 id, quint32 firstLinePointId,
-                        quint32 secondLinePointId, const QString &suffix, const QVector<quint32> &source,
-                        const QVector<DestinationItem> &destination, const Source &typeCreation,
-                        QGraphicsItem *parent = nullptr);
+    VToolFlippingByLine(const VToolFlippingByLineInitData &initData, QGraphicsItem *parent = nullptr);
 };
 
 #endif // VTOOLFLIPPINGBYLINE_H

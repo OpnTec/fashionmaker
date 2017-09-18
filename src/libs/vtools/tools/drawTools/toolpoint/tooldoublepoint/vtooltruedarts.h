@@ -44,6 +44,40 @@
 
 template <class T> class QSharedPointer;
 
+struct VToolTrueDartsInitData : public VAbstractToolInitData
+{
+    VToolTrueDartsInitData()
+        : VAbstractToolInitData(),
+          p1id(NULL_ID),
+          p2id(NULL_ID),
+          baseLineP1Id(NULL_ID),
+          baseLineP2Id(NULL_ID),
+          dartP1Id(NULL_ID),
+          dartP2Id(NULL_ID),
+          dartP3Id(NULL_ID),
+          name1(),
+          mx1(10),
+          my1(15),
+          name2(),
+          mx2(10),
+          my2(15)
+    {}
+
+    quint32 p1id;
+    quint32 p2id;
+    quint32 baseLineP1Id;
+    quint32 baseLineP2Id;
+    quint32 dartP1Id;
+    quint32 dartP2Id;
+    quint32 dartP3Id;
+    QString name1;
+    qreal mx1;
+    qreal my1;
+    QString name2;
+    qreal mx2;
+    qreal my2;
+};
+
 class VToolTrueDarts : public VToolDoublePoint
 {
     Q_OBJECT
@@ -53,17 +87,7 @@ public:
     virtual void   setDialog() Q_DECL_OVERRIDE;
     static VToolTrueDarts* Create(QSharedPointer<DialogTool> dialog, VMainGraphicsScene *scene, VAbstractPattern *doc,
                                   VContainer *data);
-    static VToolTrueDarts* Create(quint32 _id,
-                                  const quint32 &_p1id, const quint32 &_p2id,
-                                  const quint32 &baseLineP1Id,
-                                  const quint32 &baseLineP2Id,
-                                  const quint32 &dartP1Id,
-                                  const quint32 &dartP2Id,
-                                  const quint32 &dartP3Id,
-                                  const QString &point1Name, const qreal &mx1, const qreal &my1,
-                                  const QString &point2Name, const qreal &mx2, const qreal &my2,
-                                  VMainGraphicsScene  *scene, VAbstractPattern *doc, VContainer *data,
-                                  const Document &parse, const Source &typeCreation);
+    static VToolTrueDarts* Create(VToolTrueDartsInitData initData);
     static const QString ToolType;
     virtual int    type() const  Q_DECL_OVERRIDE {return Type;}
     enum { Type = UserType + static_cast<int>(Tool::TrueDarts)};
@@ -108,18 +132,7 @@ private:
     quint32 dartP2Id;
     quint32 dartP3Id;
 
-    VToolTrueDarts(VAbstractPattern *doc,
-                   VContainer *data,
-                   const quint32 &id,
-                   const quint32 &p1id,
-                   const quint32 &p2id,
-                   const quint32 &baseLineP1Id,
-                   const quint32 &baseLineP2Id,
-                   const quint32 &dartP1Id,
-                   const quint32 &dartP2Id,
-                   const quint32 &dartP3Id,
-                   const Source &typeCreation,
-                   QGraphicsItem * parent = nullptr);
+    VToolTrueDarts(const VToolTrueDartsInitData &initData, QGraphicsItem *parent = nullptr);
 };
 
 #endif // VTOOLTRUEDARTS_H

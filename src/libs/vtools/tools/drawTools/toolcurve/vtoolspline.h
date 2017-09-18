@@ -44,6 +44,28 @@
 
 template <class T> class QSharedPointer;
 
+struct VToolSplineInitData : public VAbstractSplineInitData
+{
+    VToolSplineInitData()
+        : VAbstractSplineInitData(),
+          point1(NULL_ID),
+          point4(NULL_ID),
+          a1(),
+          a2(),
+          l1(),
+          l2(),
+          duplicate(0)
+    {}
+
+    quint32 point1;
+    quint32 point4;
+    QString a1;
+    QString a2;
+    QString l1;
+    QString l2;
+    quint32 duplicate;
+};
+
 /**
  * @brief The VToolSpline class tool for creation spline. I mean bezier curve.
  */
@@ -55,13 +77,8 @@ public:
     virtual void setDialog() Q_DECL_OVERRIDE;
     static VToolSpline *Create(QSharedPointer<DialogTool> dialog, VMainGraphicsScene *scene, VAbstractPattern *doc,
                                VContainer *data);
-    static VToolSpline *Create(const quint32 _id, VSpline *spline,
-                               VMainGraphicsScene *scene, VAbstractPattern *doc, VContainer *data,
-                               const Document &parse, const Source &typeCreation);
-    static VToolSpline *Create(const quint32 _id, quint32 point1, quint32 point4, QString &a1, QString &a2, QString &l1,
-                               QString &l2, quint32 duplicate, const QString &color, const QString &penStyle,
-                               VMainGraphicsScene *scene, VAbstractPattern *doc, VContainer *data,
-                               const Document &parse, const Source &typeCreation);
+    static VToolSpline *Create(VToolSplineInitData &initData, VSpline *spline);
+    static VToolSpline *Create(VToolSplineInitData &initData);
     static const QString ToolType;
     static const QString OldToolType;
     virtual int  type() const Q_DECL_OVERRIDE {return Type;}
@@ -92,8 +109,7 @@ private:
     Q_DISABLE_COPY(VToolSpline)
     QPointF oldPosition;
 
-    VToolSpline (VAbstractPattern *doc, VContainer *data, quint32 id, const Source &typeCreation,
-                 QGraphicsItem * parent = nullptr );
+    VToolSpline (VToolSplineInitData initData, QGraphicsItem *parent = nullptr );
 
     bool IsMovable() const;
     void SetSplineAttributes(QDomElement &domElement, const VSpline &spl);

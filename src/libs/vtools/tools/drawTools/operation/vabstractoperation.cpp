@@ -85,8 +85,7 @@ void VAbstractOperation::paint(QPainter *painter, const QStyleOptionGraphicsItem
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VAbstractOperation::ExtractData(const QDomElement &domElement, QVector<quint32> &source,
-                                     QVector<DestinationItem> &destination)
+void VAbstractOperation::ExtractData(const QDomElement &domElement, VAbstractOperationInitData &initData)
 {
     const QDomNodeList nodeList = domElement.childNodes();
     for (qint32 i = 0; i < nodeList.size(); ++i)
@@ -94,21 +93,21 @@ void VAbstractOperation::ExtractData(const QDomElement &domElement, QVector<quin
         const QDomElement dataElement = nodeList.at(i).toElement();
         if (not dataElement.isNull() && dataElement.tagName() == TagSource)
         {
-            source.clear();
+            initData.source.clear();
             const QDomNodeList srcList = dataElement.childNodes();
             for (qint32 j = 0; j < srcList.size(); ++j)
             {
                 const QDomElement element = srcList.at(j).toElement();
                 if (not element.isNull())
                 {
-                    source.append(VDomDocument::GetParametrUInt(element, AttrIdObject, NULL_ID_STR));
+                    initData.source.append(VDomDocument::GetParametrUInt(element, AttrIdObject, NULL_ID_STR));
                 }
             }
         }
 
         if (not dataElement.isNull() && dataElement.tagName() == TagDestination)
         {
-            destination.clear();
+            initData.destination.clear();
             const QDomNodeList srcList = dataElement.childNodes();
             for (qint32 j = 0; j < srcList.size(); ++j)
             {
@@ -119,7 +118,7 @@ void VAbstractOperation::ExtractData(const QDomElement &domElement, QVector<quin
                     d.id = VDomDocument::GetParametrUInt(element, AttrIdObject, NULL_ID_STR);
                     d.mx = qApp->toPixel(VDomDocument::GetParametrDouble(element, AttrMx, QString::number(INT_MAX)));
                     d.my = qApp->toPixel(VDomDocument::GetParametrDouble(element, AttrMy, QString::number(INT_MAX)));
-                    destination.append(d);
+                    initData.destination.append(d);
                 }
             }
         }

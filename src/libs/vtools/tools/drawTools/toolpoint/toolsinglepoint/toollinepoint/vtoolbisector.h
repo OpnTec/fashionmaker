@@ -44,6 +44,22 @@
 
 template <class T> class QSharedPointer;
 
+struct VToolBisectorInitData : public VToolLinePointInitData
+{
+    VToolBisectorInitData()
+        : VToolLinePointInitData(),
+          formula("100.0"),
+          firstPointId(NULL_ID),
+          secondPointId(NULL_ID),
+          thirdPointId(NULL_ID)
+    {}
+
+    QString formula;
+    quint32 firstPointId;
+    quint32 secondPointId;
+    quint32 thirdPointId;
+};
+
 /**
  * @brief The VToolBisector class tool for creation bisector point.
  */
@@ -57,11 +73,7 @@ public:
     virtual void   setDialog() Q_DECL_OVERRIDE;
     static VToolBisector* Create(QSharedPointer<DialogTool> dialog, VMainGraphicsScene  *scene, VAbstractPattern *doc,
                                  VContainer *data);
-    static VToolBisector* Create(const quint32 _id, QString &formula, quint32 firstPointId, quint32 secondPointId,
-                                 quint32 thirdPointId, const QString &typeLine, const QString &lineColor,
-                                 const QString &pointName, qreal mx, qreal my, bool showLabel,
-                                 VMainGraphicsScene *scene, VAbstractPattern *doc, VContainer *data,
-                                 const Document &parse, const Source &typeCreation);
+    static VToolBisector* Create(VToolBisectorInitData &initData);
     static const QString ToolType;
     virtual int    type() const Q_DECL_OVERRIDE {return Type;}
     enum { Type = UserType + static_cast<int>(Tool::Bisector)};
@@ -93,10 +105,7 @@ private:
     /** @brief thirdPointId id third point of angle. */
     quint32         thirdPointId;
 
-    VToolBisector(VAbstractPattern *doc, VContainer *data, const quint32 &id, const QString &typeLine,
-                  const QString &lineColor,
-                  const QString &formula, const quint32 &firstPointId, const quint32 &secondPointId,
-                  const quint32 &thirdPointId, const Source &typeCreation, QGraphicsItem * parent = nullptr);
+    VToolBisector(const VToolBisectorInitData &initData, QGraphicsItem *parent = nullptr);
 };
 
 #endif // VTOOLBISECTOR_H

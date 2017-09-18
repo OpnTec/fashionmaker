@@ -62,19 +62,13 @@ const QString VToolCutSpline::AttrSpline = QStringLiteral("spline");
 //---------------------------------------------------------------------------------------------------------------------
 /**
  * @brief VToolCutSpline constructor.
- * @param doc dom document container.
- * @param data container with variables.
- * @param id object id in container.
- * @param formula string with formula length first spline.
- * @param splineId id spline in data container.
- * @param typeCreation way we create this tool.
+ * @param initData init data.
  * @param parent parent object.
  */
-VToolCutSpline::VToolCutSpline(VAbstractPattern *doc, VContainer *data, const quint32 &id, const QString &formula,
-                               const quint32 &splineId, const Source &typeCreation, QGraphicsItem *parent)
-    :VToolCut(doc, data, id, formula, splineId, parent)
+VToolCutSpline::VToolCutSpline(const VToolCutSplineInitData &initData, QGraphicsItem *parent)
+    :VToolCut(initData.doc, initData.data, initData.id, initData.formula, initData.splineId, parent)
 {
-    ToolCreation(typeCreation);
+    ToolCreation(initData.typeCreation);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -106,11 +100,18 @@ VToolCutSpline* VToolCutSpline::Create(QSharedPointer<DialogTool> dialog, VMainG
     SCASSERT(not dialog.isNull())
     QSharedPointer<DialogCutSpline> dialogTool = dialog.objectCast<DialogCutSpline>();
     SCASSERT(not dialogTool.isNull())
-    const QString pointName = dialogTool->getPointName();
-    QString formula = dialogTool->GetFormula();
-    const quint32 splineId = dialogTool->getSplineId();
-    VToolCutSpline* point = Create(0, pointName, formula, splineId, 5, 10, true, scene, doc, data, Document::FullParse,
-                                   Source::FromGui);
+
+    VToolCutSplineInitData initData;
+    initData.formula = dialogTool->GetFormula();
+    initData.splineId = dialogTool->getSplineId();
+    initData.name = dialogTool->getPointName();
+    initData.scene = scene;
+    initData.doc = doc;
+    initData.data = data;
+    initData.parse = Document::FullParse;
+    initData.typeCreation = Source::FromGui;
+
+    VToolCutSpline* point = Create(initData);
     if (point != nullptr)
     {
         point->m_dialog = dialogTool;
@@ -121,64 +122,49 @@ VToolCutSpline* VToolCutSpline::Create(QSharedPointer<DialogTool> dialog, VMainG
 //---------------------------------------------------------------------------------------------------------------------
 /**
  * @brief Create help create tool.
- * @param _id tool id, 0 if tool doesn't exist yet.
- * @param pointName point name.
- * @param formula string with formula length first spline.
- * @param splineId id spline in data container.
- * @param mx label bias x axis.
- * @param my label bias y axis.
- * @param scene pointer to scene.
- * @param doc dom document container.
- * @param data container with variables.
- * @param parse parser file mode.
- * @param typeCreation way we create this tool.
+ * @param initData init data.
  */
-VToolCutSpline* VToolCutSpline::Create(const quint32 _id, const QString &pointName, QString &formula,
-                                       quint32 splineId, qreal mx, qreal my, bool showLabel,
-                                       VMainGraphicsScene *scene, VAbstractPattern *doc, VContainer *data,
-                                       const Document &parse, const Source &typeCreation)
+VToolCutSpline* VToolCutSpline::Create(VToolCutSplineInitData &initData)
 {
-    const auto spl = data->GeometricObject<VAbstractCubicBezier>(splineId);
+    const auto spl = initData.data->GeometricObject<VAbstractCubicBezier>(initData.splineId);
 
-    const qreal result = CheckFormula(_id, formula, data);
+    const qreal result = CheckFormula(initData.id, initData.formula, initData.data);
 
     QPointF spl1p2, spl1p3, spl2p2, spl2p3;
     QPointF point = spl->CutSpline(qApp->toPixel(result), spl1p2, spl1p3, spl2p2, spl2p3);
 
-    quint32 id = _id;
-
-    VPointF *p = new VPointF(point, pointName, mx, my);
-    p->SetShowLabel(showLabel);
+    VPointF *p = new VPointF(point, initData.name, initData.mx, initData.my);
+    p->SetShowLabel(initData.showLabel);
 
     auto spline1 = QSharedPointer<VAbstractBezier>(new VSpline(spl->GetP1(), spl1p2, spl1p3, *p));
     auto spline2 = QSharedPointer<VAbstractBezier>(new VSpline(*p, spl2p2, spl2p3, spl->GetP4()));
 
-    if (typeCreation == Source::FromGui)
+    if (initData.typeCreation == Source::FromGui)
     {
-        id = data->AddGObject(p);
-        data->AddSpline(spline1, NULL_ID, id);
-        data->AddSpline(spline2, NULL_ID, id);
+        initData.id = initData.data->AddGObject(p);
+        initData.data->AddSpline(spline1, NULL_ID, initData.id);
+        initData.data->AddSpline(spline2, NULL_ID, initData.id);
     }
     else
     {
-        data->UpdateGObject(id, p);
-        data->AddSpline(spline1, NULL_ID, id);
-        data->AddSpline(spline2, NULL_ID, id);
+        initData.data->UpdateGObject(initData.id, p);
+        initData.data->AddSpline(spline1, NULL_ID, initData.id);
+        initData.data->AddSpline(spline2, NULL_ID, initData.id);
 
-        if (parse != Document::FullParse)
+        if (initData.parse != Document::FullParse)
         {
-            doc->UpdateToolData(id, data);
+            initData.doc->UpdateToolData(initData.id, initData.data);
         }
     }
 
-    if (parse == Document::FullParse)
+    if (initData.parse == Document::FullParse)
     {
-        VAbstractTool::AddRecord(id, Tool::CutSpline, doc);
-        VToolCutSpline *point = new VToolCutSpline(doc, data, id, formula, splineId, typeCreation);
-        scene->addItem(point);
-        InitToolConnections(scene, point);
-        VAbstractPattern::AddTool(id, point);
-        doc->IncrementReferens(spl->getIdTool());
+        VAbstractTool::AddRecord(initData.id, Tool::CutSpline, initData.doc);
+        VToolCutSpline *point = new VToolCutSpline(initData);
+        initData.scene->addItem(point);
+        InitToolConnections(initData.scene, point);
+        VAbstractPattern::AddTool(initData.id, point);
+        initData.doc->IncrementReferens(spl->getIdTool());
         return point;
     }
     return nullptr;

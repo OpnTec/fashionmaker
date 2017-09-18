@@ -91,12 +91,20 @@ VToolSeamAllowance *VToolSeamAllowance::Create(QSharedPointer<DialogTool> dialog
     SCASSERT(not dialog.isNull());
     QSharedPointer<DialogSeamAllowance> dialogTool = dialog.objectCast<DialogSeamAllowance>();
     SCASSERT(not dialogTool.isNull())
-    VPiece detail = dialogTool->GetPiece();
-    QString width = detail.GetFormulaSAWidth();
-    qApp->getUndoStack()->beginMacro("add detail");
-    detail.GetPath().SetNodes(PrepareNodes(detail.GetPath(), scene, doc, data));
 
-    VToolSeamAllowance *piece = Create(0, detail, width, scene, doc, data, Document::FullParse, Source::FromGui);
+    VToolSeamAllowanceInitData initData;
+    initData.detail = dialogTool->GetPiece();
+    initData.width = initData.detail.GetFormulaSAWidth();
+    initData.scene = scene;
+    initData.doc = doc;
+    initData.data = data;
+    initData.parse = Document::FullParse;
+    initData.typeCreation = Source::FromGui;
+
+    qApp->getUndoStack()->beginMacro("add detail");
+    initData.detail.GetPath().SetNodes(PrepareNodes(initData.detail.GetPath(), scene, doc, data));
+
+    VToolSeamAllowance *piece = Create(initData);
 
     if (piece != nullptr)
     {
@@ -106,45 +114,47 @@ VToolSeamAllowance *VToolSeamAllowance::Create(QSharedPointer<DialogTool> dialog
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-VToolSeamAllowance *VToolSeamAllowance::Create(quint32 id, VPiece newPiece, QString &width, VMainGraphicsScene *scene,
-                                               VAbstractPattern *doc, VContainer *data, const Document &parse,
-                                               const Source &typeCreation, const QString &drawName)
+VToolSeamAllowance *VToolSeamAllowance::Create(VToolSeamAllowanceInitData &initData)
 {
-    if (typeCreation == Source::FromGui || typeCreation == Source::FromTool)
+    if (initData.typeCreation == Source::FromGui || initData.typeCreation == Source::FromTool)
     {
-        data->AddVariable(currentSeamAllowance, new VIncrement(data, currentSeamAllowance, 0, newPiece.GetSAWidth(),
-                                                               width, true, tr("Current seam allowance")));
-        id = data->AddPiece(newPiece);
+        initData.data->AddVariable(currentSeamAllowance, new VIncrement(initData.data, currentSeamAllowance, 0,
+                                                                        initData.detail.GetSAWidth(),
+                                                                        initData.width, true,
+                                                                        tr("Current seam allowance")));
+        initData.id = initData.data->AddPiece(initData.detail);
     }
     else
     {
-        const qreal calcWidth = CheckFormula(id, width, data);
-        newPiece.SetFormulaSAWidth(width, calcWidth);
+        const qreal calcWidth = CheckFormula(initData.id, initData.width, initData.data);
+        initData.detail.SetFormulaSAWidth(initData.width, calcWidth);
 
-        data->AddVariable(currentSeamAllowance, new VIncrement(data, currentSeamAllowance, 0, calcWidth,
-                                                               width, true, tr("Current seam allowance")));
+        initData.data->AddVariable(currentSeamAllowance, new VIncrement(initData.data, currentSeamAllowance, 0,
+                                                                        calcWidth, initData.width, true,
+                                                                        tr("Current seam allowance")));
 
-        data->UpdatePiece(id, newPiece);
-        if (parse != Document::FullParse)
+        initData.data->UpdatePiece(initData.id, initData.detail);
+        if (initData.parse != Document::FullParse)
         {
-            doc->UpdateToolData(id, data);
+            initData.doc->UpdateToolData(initData.id, initData.data);
         }
     }
 
     VToolSeamAllowance *piece = nullptr;
-    if (parse == Document::FullParse)
+    if (initData.parse == Document::FullParse)
     {
-        VAbstractTool::AddRecord(id, Tool::Piece, doc);
-        piece = new VToolSeamAllowance(doc, data, id, typeCreation, scene, drawName);
-        scene->addItem(piece);
-        connect(piece, &VToolSeamAllowance::ChoosedTool, scene, &VMainGraphicsScene::ChoosedItem);
-        connect(scene, &VMainGraphicsScene::EnableDetailItemHover, piece, &VToolSeamAllowance::AllowHover);
-        connect(scene, &VMainGraphicsScene::EnableDetailItemSelection, piece, &VToolSeamAllowance::AllowSelecting);
-        connect(scene, &VMainGraphicsScene::HighlightDetail, piece, &VToolSeamAllowance::Highlight);
-        VAbstractPattern::AddTool(id, piece);
+        VAbstractTool::AddRecord(initData.id, Tool::Piece, initData.doc);
+        piece = new VToolSeamAllowance(initData);
+        initData.scene->addItem(piece);
+        connect(piece, &VToolSeamAllowance::ChoosedTool, initData.scene, &VMainGraphicsScene::ChoosedItem);
+        connect(initData.scene, &VMainGraphicsScene::EnableDetailItemHover, piece, &VToolSeamAllowance::AllowHover);
+        connect(initData.scene, &VMainGraphicsScene::EnableDetailItemSelection, piece,
+                &VToolSeamAllowance::AllowSelecting);
+        connect(initData.scene, &VMainGraphicsScene::HighlightDetail, piece, &VToolSeamAllowance::Highlight);
+        VAbstractPattern::AddTool(initData.id, piece);
     }
     //Very important to delete it. Only this tool need this special variable.
-    data->RemoveVariable(currentSeamAllowance);
+    initData.data->RemoveVariable(currentSeamAllowance);
     return piece;
 }
 
@@ -1103,23 +1113,21 @@ void VToolSeamAllowance::SetDialog()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-VToolSeamAllowance::VToolSeamAllowance(VAbstractPattern *doc, VContainer *data, const quint32 &id,
-                                       const Source &typeCreation, VMainGraphicsScene *scene,
-                                       const QString &drawName, QGraphicsItem *parent)
-    : VInteractiveTool(doc, data, id),
+VToolSeamAllowance::VToolSeamAllowance(const VToolSeamAllowanceInitData &initData, QGraphicsItem *parent)
+    : VInteractiveTool(initData.doc, initData.data, initData.id),
       QGraphicsPathItem(parent),
       m_mainPath(),
       m_mainPathRect(),
-      m_sceneDetails(scene),
-      m_drawName(drawName),
+      m_sceneDetails(initData.scene),
+      m_drawName(initData.drawName),
       m_seamAllowance(new VNoBrushScalePathItem(this)),
       m_dataLabel(new VTextGraphicsItem(this)),
       m_patternInfo(new VTextGraphicsItem(this)),
       m_grainLine(new VGrainlineItem(this)),
       m_passmarks(new QGraphicsPathItem(this))
 {
-    VPiece detail = data->GetPiece(id);
-    InitNodes(detail, scene);
+    VPiece detail = initData.data->GetPiece(initData.id);
+    InitNodes(detail, initData.scene);
     InitCSAPaths(detail);
     InitInternalPaths(detail);
     InitPins(detail);
@@ -1130,9 +1138,9 @@ VToolSeamAllowance::VToolSeamAllowance(VAbstractPattern *doc, VContainer *data, 
     this->setFlag(QGraphicsItem::ItemSendsGeometryChanges, true);
     this->setFlag(QGraphicsItem::ItemIsFocusable, true);// For keyboard input focus
 
-    connect(scene, &VMainGraphicsScene::EnableToolMove, this, &VToolSeamAllowance::EnableToolMove);
-    connect(scene, &VMainGraphicsScene::ItemClicked, this, &VToolSeamAllowance::ResetChildren);
-    ToolCreation(typeCreation);
+    connect(initData.scene, &VMainGraphicsScene::EnableToolMove, this, &VToolSeamAllowance::EnableToolMove);
+    connect(initData.scene, &VMainGraphicsScene::ItemClicked, this, &VToolSeamAllowance::ResetChildren);
+    ToolCreation(initData.typeCreation);
     setAcceptHoverEvents(true);
 
     connect(m_dataLabel, &VTextGraphicsItem::SignalMoved, this, &VToolSeamAllowance::SaveMoveDetail);

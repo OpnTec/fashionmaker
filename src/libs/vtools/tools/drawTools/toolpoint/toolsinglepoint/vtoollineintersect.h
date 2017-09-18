@@ -43,6 +43,22 @@
 
 template <class T> class QSharedPointer;
 
+struct VToolLineIntersectInitData : public VToolSinglePointInitData
+{
+    VToolLineIntersectInitData()
+        : VToolSinglePointInitData(),
+          p1Line1Id(NULL_ID),
+          p2Line1Id(NULL_ID),
+          p1Line2Id(NULL_ID),
+          p2Line2Id(NULL_ID)
+    {}
+
+    quint32 p1Line1Id;
+    quint32 p2Line1Id;
+    quint32 p1Line2Id;
+    quint32 p2Line2Id;
+};
+
 /**
  * @brief The VToolLineIntersect class help find point intersection lines.
  */
@@ -53,11 +69,7 @@ public:
     virtual void setDialog() Q_DECL_OVERRIDE;
     static VToolLineIntersect *Create(QSharedPointer<DialogTool> dialog, VMainGraphicsScene *scene,
                                       VAbstractPattern *doc, VContainer *data);
-    static VToolLineIntersect *Create(const quint32 _id, quint32 p1Line1Id, quint32 p2Line1Id,
-                                      quint32 p1Line2Id, quint32 p2Line2Id, const QString &pointName,
-                                      qreal mx, qreal my, bool showLabel, VMainGraphicsScene  *scene,
-                                      VAbstractPattern *doc,
-                                      VContainer *data, const Document &parse, const Source &typeCreation);
+    static VToolLineIntersect *Create(VToolLineIntersectInitData initData);
     static const QString ToolType;
     virtual int  type() const Q_DECL_OVERRIDE {return Type;}
     enum { Type = UserType + static_cast<int>(Tool::LineIntersect)};
@@ -104,9 +116,7 @@ private:
     /** @brief p2Line2 id second point second line.*/
     quint32       p2Line2;
 
-    VToolLineIntersect(VAbstractPattern *doc, VContainer *data, const quint32 &id, const quint32 &p1Line1,
-                       const quint32 &p2Line1, const quint32 &p1Line2, const quint32 &p2Line2,
-                       const Source &typeCreation, QGraphicsItem * parent = nullptr);
+    VToolLineIntersect(const VToolLineIntersectInitData &initData, QGraphicsItem *parent = nullptr);
 };
 
 #endif // VTOOLLINEINTERSECT_H

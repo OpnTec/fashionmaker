@@ -263,9 +263,19 @@ void MainWindow::AddPP(const QString &PPName)
     ui->view->itemClicked(nullptr);//hide options previous tool
     const QString label = doc->GenerateLabel(LabelType::NewPatternPiece);
     const QPointF startPosition = StartPositionNewPP();
-    VPointF *point = new VPointF(startPosition.x(), startPosition.y(), label, 5, 10);
-    auto spoint = VToolBasePoint::Create(0, PPName, point, sceneDraw, doc, pattern, Document::FullParse,
-                                         Source::FromGui);
+
+    VToolBasePointInitData initData;
+    initData.scene = sceneDraw;
+    initData.doc = doc;
+    initData.data = pattern;
+    initData.parse = Document::FullParse;
+    initData.typeCreation = Source::FromGui;
+    initData.x = startPosition.x();
+    initData.y = startPosition.y();
+    initData.name = label;
+    initData.nameActivPP = PPName;
+
+    auto spoint = VToolBasePoint::Create(initData);
     ui->view->itemClicked(spoint);
 
     SetEnableTool(true);

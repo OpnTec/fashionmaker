@@ -41,6 +41,20 @@
 class DialogTool;
 class VNoBrushScalePathItem;
 
+struct VToolSeamAllowanceInitData : public VAbstractToolInitData
+{
+    VToolSeamAllowanceInitData()
+        : VAbstractToolInitData(),
+          detail(),
+          width("0"),
+          drawName()
+    {}
+
+    VPiece detail;
+    QString width;
+    QString drawName;
+};
+
 class VToolSeamAllowance : public VInteractiveTool, public QGraphicsPathItem
 {
     Q_OBJECT
@@ -49,9 +63,7 @@ public:
 
     static VToolSeamAllowance* Create(QSharedPointer<DialogTool> dialog, VMainGraphicsScene *scene,
                                       VAbstractPattern *doc, VContainer *data);
-    static VToolSeamAllowance* Create(quint32 id, VPiece newPiece, QString &width, VMainGraphicsScene *scene,
-                                      VAbstractPattern *doc, VContainer *data, const Document &parse,
-                                      const Source &typeCreation, const QString &drawName = QString());
+    static VToolSeamAllowance* Create(VToolSeamAllowanceInitData &initData);
 
     static const quint8 pieceVersion;
 
@@ -152,8 +164,7 @@ private:
     VGrainlineItem        *m_grainLine;
     QGraphicsPathItem     *m_passmarks;
 
-    VToolSeamAllowance(VAbstractPattern *doc, VContainer *data, const quint32 &id, const Source &typeCreation,
-                       VMainGraphicsScene *scene, const QString &drawName, QGraphicsItem * parent = nullptr);
+    VToolSeamAllowance(const VToolSeamAllowanceInitData &initData, QGraphicsItem * parent = nullptr);
 
     void UpdateExcludeState();
     void RefreshGeometry();

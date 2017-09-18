@@ -45,6 +45,22 @@
 
 template <class T> class QSharedPointer;
 
+struct VToolLineInitData : public VAbstractToolInitData
+{
+    VToolLineInitData()
+        : VAbstractToolInitData(),
+          firstPoint(NULL_ID),
+          secondPoint(NULL_ID),
+          typeLine(TypeLineLine),
+          lineColor(ColorBlack)
+    {}
+
+    quint32 firstPoint;
+    quint32 secondPoint;
+    QString typeLine;
+    QString lineColor;
+};
+
 /**
  * @brief The VToolLine class tool for creation line.
  */
@@ -55,10 +71,7 @@ public:
     virtual void     setDialog() Q_DECL_OVERRIDE;
     static VToolLine *Create(QSharedPointer<DialogTool> dialog, VMainGraphicsScene  *scene, VAbstractPattern *doc,
                              VContainer *data);
-    static VToolLine *Create(const quint32 &_id, const quint32 &firstPoint, const quint32 &secondPoint,
-                             const QString &typeLine, const QString &lineColor, VMainGraphicsScene  *scene,
-                             VAbstractPattern *doc, VContainer *data, const Document &parse,
-                             const Source &typeCreation);
+    static VToolLine *Create(VToolLineInitData initData);
 
     virtual int      type() const Q_DECL_OVERRIDE {return Type;}
     enum { Type = UserType + static_cast<int>(Tool::Line)};
@@ -118,9 +131,7 @@ private:
 
     bool m_isHovered;
 
-    VToolLine(VAbstractPattern *doc, VContainer *data, quint32 id, quint32 firstPoint, quint32 secondPoint,
-              const QString &typeLine, const QString &lineColor, const Source &typeCreation,
-              QGraphicsItem * parent = nullptr);
+    VToolLine(const VToolLineInitData &initData, QGraphicsItem *parent = nullptr);
 
     void RefreshGeometry();
 };

@@ -55,23 +55,16 @@ const QString VToolHeight::ToolType = QStringLiteral("height");
 //---------------------------------------------------------------------------------------------------------------------
 /**
  * @brief VToolHeight constructor.
- * @param doc dom document container.
- * @param data container with variables.
- * @param id object id in container.
- * @param typeLine line type.
- * @param basePointId id base point of projection.
- * @param p1LineId id first point of line.
- * @param p2LineId id second point of line.
- * @param typeCreation way we create this tool.
+ * @param initData init data.
  * @param parent parent object.
  */
-VToolHeight::VToolHeight(VAbstractPattern *doc, VContainer *data, const quint32 &id, const QString &typeLine,
-                         const QString &lineColor, const quint32 &basePointId, const quint32 &p1LineId,
-                         const quint32 &p2LineId, const Source &typeCreation, QGraphicsItem * parent)
-    :VToolLinePoint(doc, data, id, typeLine, lineColor, QString(), basePointId, 0, parent), p1LineId(p1LineId),
-      p2LineId(p2LineId)
+VToolHeight::VToolHeight(const VToolHeightInitData &initData, QGraphicsItem * parent)
+    :VToolLinePoint(initData.doc, initData.data, initData.id, initData.typeLine, initData.lineColor, QString(),
+                    initData.basePointId, 0, parent),
+      p1LineId(initData.p1LineId),
+      p2LineId(initData.p2LineId)
 {
-    ToolCreation(typeCreation);
+    ToolCreation(initData.typeCreation);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -107,15 +100,21 @@ VToolHeight* VToolHeight::Create(QSharedPointer<DialogTool> dialog, VMainGraphic
     SCASSERT(not dialog.isNull())
     QSharedPointer<DialogHeight> dialogTool = dialog.objectCast<DialogHeight>();
     SCASSERT(not dialogTool.isNull())
-    const QString pointName = dialogTool->getPointName();
-    const QString typeLine = dialogTool->GetTypeLine();
-    const QString lineColor = dialogTool->GetLineColor();
-    const quint32 basePointId = dialogTool->GetBasePointId();
-    const quint32 p1LineId = dialogTool->GetP1LineId();
-    const quint32 p2LineId = dialogTool->GetP2LineId();
 
-    VToolHeight *point = Create(0, pointName, typeLine, lineColor, basePointId, p1LineId, p2LineId, 5, 10, true, scene,
-                                doc, data, Document::FullParse, Source::FromGui);
+    VToolHeightInitData initData;
+    initData.basePointId = dialogTool->GetBasePointId();
+    initData.p1LineId = dialogTool->GetP1LineId();
+    initData.p2LineId = dialogTool->GetP2LineId();
+    initData.typeLine = dialogTool->GetTypeLine();
+    initData.lineColor = dialogTool->GetLineColor();
+    initData.name = dialogTool->getPointName();
+    initData.scene = scene;
+    initData.doc = doc;
+    initData.data = data;
+    initData.parse = Document::FullParse;
+    initData.typeCreation = Source::FromGui;
+
+    VToolHeight *point = Create(initData);
     if (point != nullptr)
     {
         point->m_dialog = dialogTool;
@@ -126,68 +125,49 @@ VToolHeight* VToolHeight::Create(QSharedPointer<DialogTool> dialog, VMainGraphic
 //---------------------------------------------------------------------------------------------------------------------
 /**
  * @brief Create help create tool
- * @param _id tool id, 0 if tool doesn't exist yet.
- * @param pointName point name.
- * @param typeLine line type.
- * @param basePointId id base point of projection.
- * @param p1LineId id first point of line.
- * @param p2LineId id second point of line.
- * @param mx label bias x axis.
- * @param my label bias y axis.
- * @param scene pointer to scene.
- * @param doc dom document container.
- * @param data container with variables.
- * @param parse parser file mode.
- * @param typeCreation way we create this tool.
- * @return the created tool
+ * @param initData init data.
  */
-VToolHeight* VToolHeight::Create(const quint32 _id, const QString &pointName, const QString &typeLine,
-                                 const QString &lineColor, quint32 basePointId, quint32 p1LineId,
-                                 quint32 p2LineId, qreal mx, qreal my, bool showLabel, VMainGraphicsScene *scene,
-                                 VAbstractPattern *doc, VContainer *data, const Document &parse,
-                                 const Source &typeCreation)
+VToolHeight* VToolHeight::Create(VToolHeightInitData initData)
 {
-    const QSharedPointer<VPointF> basePoint = data->GeometricObject<VPointF>(basePointId);
-    const QSharedPointer<VPointF> p1Line = data->GeometricObject<VPointF>(p1LineId);
-    const QSharedPointer<VPointF> p2Line = data->GeometricObject<VPointF>(p2LineId);
+    const QSharedPointer<VPointF> basePoint = initData.data->GeometricObject<VPointF>(initData.basePointId);
+    const QSharedPointer<VPointF> p1Line = initData.data->GeometricObject<VPointF>(initData.p1LineId);
+    const QSharedPointer<VPointF> p2Line = initData.data->GeometricObject<VPointF>(initData.p2LineId);
 
     QPointF pHeight = FindPoint(QLineF(static_cast<QPointF>(*p1Line), static_cast<QPointF>(*p2Line)),
                                 static_cast<QPointF>(*basePoint));
-    quint32 id = _id;
 
-    VPointF *p = new VPointF(pHeight, pointName, mx, my);
-    p->SetShowLabel(showLabel);
+    VPointF *p = new VPointF(pHeight, initData.name, initData.mx, initData.my);
+    p->SetShowLabel(initData.showLabel);
 
-    if (typeCreation == Source::FromGui)
+    if (initData.typeCreation == Source::FromGui)
     {
-        id = data->AddGObject(p);
-        data->AddLine(basePointId, id);
-        data->AddLine(p1LineId, id);
-        data->AddLine(p2LineId, id);
+        initData.id = initData.data->AddGObject(p);
+        initData.data->AddLine(initData.basePointId, initData.id);
+        initData.data->AddLine(initData.p1LineId, initData.id);
+        initData.data->AddLine(initData.p2LineId, initData.id);
     }
     else
     {
-        data->UpdateGObject(id, p);
-        data->AddLine(basePointId, id);
-        data->AddLine(p1LineId, id);
-        data->AddLine(p2LineId, id);
-        if (parse != Document::FullParse)
+        initData.data->UpdateGObject(initData.id, p);
+        initData.data->AddLine(initData.basePointId, initData.id);
+        initData.data->AddLine(initData.p1LineId, initData.id);
+        initData.data->AddLine(initData.p2LineId, initData.id);
+        if (initData.parse != Document::FullParse)
         {
-            doc->UpdateToolData(id, data);
+            initData.doc->UpdateToolData(initData.id, initData.data);
         }
     }
 
-    if (parse == Document::FullParse)
+    if (initData.parse == Document::FullParse)
     {
-        VAbstractTool::AddRecord(id, Tool::Height, doc);
-        VToolHeight *point = new VToolHeight(doc, data, id, typeLine, lineColor, basePointId, p1LineId, p2LineId,
-                                             typeCreation);
-        scene->addItem(point);
-        InitToolConnections(scene, point);
-        VAbstractPattern::AddTool(id, point);
-        doc->IncrementReferens(basePoint->getIdTool());
-        doc->IncrementReferens(p1Line->getIdTool());
-        doc->IncrementReferens(p2Line->getIdTool());
+        VAbstractTool::AddRecord(initData.id, Tool::Height, initData.doc);
+        VToolHeight *point = new VToolHeight(initData);
+        initData.scene->addItem(point);
+        InitToolConnections(initData.scene, point);
+        VAbstractPattern::AddTool(initData.id, point);
+        initData.doc->IncrementReferens(basePoint->getIdTool());
+        initData.doc->IncrementReferens(p1Line->getIdTool());
+        initData.doc->IncrementReferens(p2Line->getIdTool());
         return point;
     }
     return nullptr;

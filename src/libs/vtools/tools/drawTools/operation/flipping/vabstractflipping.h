@@ -43,10 +43,7 @@ protected:
                       const QVector<quint32> &source, const QVector<DestinationItem> &destination,
                       QGraphicsItem *parent = nullptr);
 
-    static void CreateDestination(Source typeCreation, quint32 &id, QVector<DestinationItem> &dest,
-                                  const QVector<quint32> &source, const QPointF &fPoint, const QPointF &sPoint,
-                                  const QString &suffix, VAbstractPattern *doc, VContainer *data,
-                                  const Document &parse);
+    static void CreateDestination(VAbstractOperationInitData &initData, const QPointF &fPoint, const QPointF &sPoint);
 
     static DestinationItem CreatePoint(quint32 idTool, quint32 idItem, const QPointF &firstPoint,
                                        const QPointF &secondPoint, const QString &suffix, VContainer *data);

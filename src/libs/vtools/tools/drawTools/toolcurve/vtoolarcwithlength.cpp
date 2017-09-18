@@ -59,15 +59,14 @@
 const QString VToolArcWithLength::ToolType = QStringLiteral("arcWithLength");
 
 //---------------------------------------------------------------------------------------------------------------------
-VToolArcWithLength::VToolArcWithLength(VAbstractPattern *doc, VContainer *data, quint32 id, const Source &typeCreation,
-                                       QGraphicsItem *parent)
-    :VAbstractSpline(doc, data, id, parent)
+VToolArcWithLength::VToolArcWithLength(const VToolArcWithLengthInitData &initData, QGraphicsItem *parent)
+    :VAbstractSpline(initData.doc, initData.data, initData.id, parent)
 {
     sceneType = SceneObject::Arc;
 
     this->setFlag(QGraphicsItem::ItemIsFocusable, true);// For keyboard input focus
 
-    ToolCreation(typeCreation);
+    ToolCreation(initData.typeCreation);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -92,14 +91,21 @@ VToolArcWithLength *VToolArcWithLength::Create(QSharedPointer<DialogTool> dialog
     SCASSERT(not dialog.isNull())
     QSharedPointer<DialogArcWithLength> dialogTool = dialog.objectCast<DialogArcWithLength>();
     SCASSERT(not dialogTool.isNull())
-    const quint32 center = dialogTool->GetCenter();
-    QString radius = dialogTool->GetRadius();
-    QString f1 = dialogTool->GetF1();
-    QString length = dialogTool->GetLength();
-    const QString color = dialogTool->GetColor();
-    const QString penStyle = dialogTool->GetPenStyle();
-    VToolArcWithLength* point = Create(0, center, radius, f1, length, color, penStyle, scene, doc, data,
-                                       Document::FullParse, Source::FromGui);
+
+    VToolArcWithLengthInitData initData;
+    initData.center = dialogTool->GetCenter();
+    initData.radius = dialogTool->GetRadius();
+    initData.f1 = dialogTool->GetF1();
+    initData.length = dialogTool->GetLength();
+    initData.color = dialogTool->GetColor();
+    initData.penStyle = dialogTool->GetPenStyle();
+    initData.scene = scene;
+    initData.doc = doc;
+    initData.data = data;
+    initData.parse = Document::FullParse;
+    initData.typeCreation = Source::FromGui;
+
+    VToolArcWithLength* point = Create(initData);
     if (point != nullptr)
     {
         point->m_dialog = dialogTool;
@@ -108,45 +114,42 @@ VToolArcWithLength *VToolArcWithLength::Create(QSharedPointer<DialogTool> dialog
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-VToolArcWithLength *VToolArcWithLength::Create(const quint32 _id, const quint32 &center, QString &radius, QString &f1,
-                                               QString &length, const QString &color, const QString &penStyle,
-                                               VMainGraphicsScene *scene, VAbstractPattern *doc, VContainer *data,
-                                               const Document &parse, const Source &typeCreation)
+VToolArcWithLength *VToolArcWithLength::Create(VToolArcWithLengthInitData &initData)
 {
     qreal calcRadius = 0, calcF1 = 0, calcLength = 0;
 
-    calcRadius = qApp->toPixel(CheckFormula(_id, radius, data));
-    calcLength = qApp->toPixel(CheckFormula(_id, length, data));
-    calcF1 = CheckFormula(_id, f1, data);
+    calcRadius = qApp->toPixel(CheckFormula(initData.id, initData.radius, initData.data));
+    calcLength = qApp->toPixel(CheckFormula(initData.id, initData.length, initData.data));
+    calcF1 = CheckFormula(initData.id, initData.f1, initData.data);
 
-    const VPointF c = *data->GeometricObject<VPointF>(center);
-    VArc *arc = new VArc(calcLength, length, c, calcRadius, radius, calcF1, f1);
-    arc->SetColor(color);
-    arc->SetPenStyle(penStyle);
-    quint32 id = _id;
-    if (typeCreation == Source::FromGui)
+    const VPointF c = *initData.data->GeometricObject<VPointF>(initData.center);
+    VArc *arc = new VArc(calcLength, initData.length, c, calcRadius, initData.radius, calcF1, initData.f1);
+    arc->SetColor(initData.color);
+    arc->SetPenStyle(initData.penStyle);
+
+    if (initData.typeCreation == Source::FromGui)
     {
-        id = data->AddGObject(arc);
-        data->AddArc(data->GeometricObject<VArc>(id), id);
+        initData.id = initData.data->AddGObject(arc);
+        initData.data->AddArc(initData.data->GeometricObject<VArc>(initData.id), initData.id);
     }
     else
     {
-        data->UpdateGObject(id, arc);
-        data->AddArc(data->GeometricObject<VArc>(id), id);
-        if (parse != Document::FullParse)
+        initData.data->UpdateGObject(initData.id, arc);
+        initData.data->AddArc(initData.data->GeometricObject<VArc>(initData.id), initData.id);
+        if (initData.parse != Document::FullParse)
         {
-            doc->UpdateToolData(id, data);
+            initData.doc->UpdateToolData(initData.id, initData.data);
         }
     }
 
-    if (parse == Document::FullParse)
+    if (initData.parse == Document::FullParse)
     {
-        VAbstractTool::AddRecord(id, Tool::ArcWithLength, doc);
-        VToolArcWithLength *toolArc = new VToolArcWithLength(doc, data, id, typeCreation);
-        scene->addItem(toolArc);
-        InitArcToolConnections(scene, toolArc);
-        VAbstractPattern::AddTool(id, toolArc);
-        doc->IncrementReferens(c.getIdTool());
+        VAbstractTool::AddRecord(initData.id, Tool::ArcWithLength, initData.doc);
+        VToolArcWithLength *toolArc = new VToolArcWithLength(initData);
+        initData.scene->addItem(toolArc);
+        InitArcToolConnections(initData.scene, toolArc);
+        VAbstractPattern::AddTool(initData.id, toolArc);
+        initData.doc->IncrementReferens(c.getIdTool());
         return toolArc;
     }
     return nullptr;

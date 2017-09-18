@@ -57,15 +57,14 @@
 const QString VToolCubicBezier::ToolType = QStringLiteral("cubicBezier");
 
 //---------------------------------------------------------------------------------------------------------------------
-VToolCubicBezier::VToolCubicBezier(VAbstractPattern *doc, VContainer *data, quint32 id,
-                                   const Source &typeCreation, QGraphicsItem *parent)
-    :VAbstractSpline(doc, data, id, parent)
+VToolCubicBezier::VToolCubicBezier(const VToolCubicBezierInitData &initData, QGraphicsItem *parent)
+    :VAbstractSpline(initData.doc, initData.data, initData.id, parent)
 {
     sceneType = SceneObject::Spline;
 
     this->setFlag(QGraphicsItem::ItemIsFocusable, true);// For keyboard input focus
 
-    ToolCreation(typeCreation);
+    ToolCreation(initData.typeCreation);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -88,11 +87,17 @@ VToolCubicBezier *VToolCubicBezier::Create(QSharedPointer<DialogTool> dialog, VM
     QSharedPointer<DialogCubicBezier> dialogTool = dialog.objectCast<DialogCubicBezier>();
     SCASSERT(not dialogTool.isNull())
 
-    VCubicBezier *spline = new VCubicBezier(dialogTool->GetSpline());
-    spline->SetColor(dialogTool->GetColor());
-    spline->SetPenStyle(dialogTool->GetPenStyle());
+    VToolCubicBezierInitData initData;
+    initData.scene = scene;
+    initData.doc = doc;
+    initData.data = data;
+    initData.parse = Document::FullParse;
+    initData.typeCreation = Source::FromGui;
+    initData.spline = new VCubicBezier(dialogTool->GetSpline());
+    initData.spline->SetColor(dialogTool->GetColor());
+    initData.spline->SetPenStyle(dialogTool->GetPenStyle());
 
-    auto spl = Create(0, spline, scene, doc, data, Document::FullParse, Source::FromGui);
+    auto spl = Create(initData);
 
     if (spl != nullptr)
     {
@@ -102,37 +107,34 @@ VToolCubicBezier *VToolCubicBezier::Create(QSharedPointer<DialogTool> dialog, VM
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-VToolCubicBezier *VToolCubicBezier::Create(const quint32 _id, VCubicBezier *spline, VMainGraphicsScene *scene,
-                                           VAbstractPattern *doc, VContainer *data, const Document &parse,
-                                           const Source &typeCreation)
+VToolCubicBezier *VToolCubicBezier::Create(VToolCubicBezierInitData initData)
 {
-    quint32 id = _id;
-    if (typeCreation == Source::FromGui)
+    if (initData.typeCreation == Source::FromGui)
     {
-        id = data->AddGObject(spline);
-        data->AddSpline(data->GeometricObject<VAbstractBezier>(id), id);
+        initData.id = initData.data->AddGObject(initData.spline);
+        initData.data->AddSpline(initData.data->GeometricObject<VAbstractBezier>(initData.id), initData.id);
     }
     else
     {
-        data->UpdateGObject(id, spline);
-        data->AddSpline(data->GeometricObject<VAbstractBezier>(id), id);
-        if (parse != Document::FullParse)
+        initData.data->UpdateGObject(initData.id, initData.spline);
+        initData.data->AddSpline(initData.data->GeometricObject<VAbstractBezier>(initData.id), initData.id);
+        if (initData.parse != Document::FullParse)
         {
-            doc->UpdateToolData(id, data);
+            initData.doc->UpdateToolData(initData.id, initData.data);
         }
     }
 
-    if (parse == Document::FullParse)
+    if (initData.parse == Document::FullParse)
     {
-        VAbstractTool::AddRecord(id, Tool::CubicBezier, doc);
-        auto _spl = new VToolCubicBezier(doc, data, id, typeCreation);
-        scene->addItem(_spl);
-        InitSplineToolConnections(scene, _spl);
-        VAbstractPattern::AddTool(id, _spl);
-        doc->IncrementReferens(spline->GetP1().getIdTool());
-        doc->IncrementReferens(spline->GetP1().getIdTool());
-        doc->IncrementReferens(spline->GetP1().getIdTool());
-        doc->IncrementReferens(spline->GetP4().getIdTool());
+        VAbstractTool::AddRecord(initData.id, Tool::CubicBezier, initData.doc);
+        auto _spl = new VToolCubicBezier(initData);
+        initData.scene->addItem(_spl);
+        InitSplineToolConnections(initData.scene, _spl);
+        VAbstractPattern::AddTool(initData.id, _spl);
+        initData.doc->IncrementReferens(initData.spline->GetP1().getIdTool());
+        initData.doc->IncrementReferens(initData.spline->GetP1().getIdTool());
+        initData.doc->IncrementReferens(initData.spline->GetP1().getIdTool());
+        initData.doc->IncrementReferens(initData.spline->GetP4().getIdTool());
         return _spl;
     }
     return nullptr;

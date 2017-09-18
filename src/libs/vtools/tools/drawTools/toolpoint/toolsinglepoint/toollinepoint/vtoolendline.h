@@ -44,6 +44,20 @@
 
 template <class T> class QSharedPointer;
 
+struct VToolEndLineInitData : public VToolLinePointInitData
+{
+    VToolEndLineInitData()
+        : VToolLinePointInitData(),
+          formulaLength(),
+          formulaAngle(),
+          basePointId(NULL_ID)
+    {}
+
+    QString formulaLength;
+    QString formulaAngle;
+    quint32 basePointId;
+};
+
 /**
  * @brief The VToolEndLine class tool for creation point on the line end.
  */
@@ -55,12 +69,7 @@ public:
     virtual void setDialog() Q_DECL_OVERRIDE;
     static VToolEndLine *Create(QSharedPointer<DialogTool> dialog, VMainGraphicsScene  *scene, VAbstractPattern *doc,
                                 VContainer *data);
-    static VToolEndLine *Create(const quint32 _id, const QString &pointName, const QString &typeLine,
-                                const QString &lineColor, QString &formulaLength, QString &formulaAngle,
-                                quint32 basePointId, qreal mx, qreal my, bool showLabel,
-                                VMainGraphicsScene  *scene, VAbstractPattern *doc, VContainer *data,
-                                const Document &parse,
-                                const Source &typeCreation);
+    static VToolEndLine *Create(VToolEndLineInitData &initData);
     static const QString ToolType;
     virtual int  type() const Q_DECL_OVERRIDE {return Type;}
     enum { Type = UserType + static_cast<int>(Tool::EndLine)};
@@ -80,10 +89,7 @@ private:
 
     QString formulaAngle;
 
-    VToolEndLine(VAbstractPattern *doc, VContainer *data, const quint32 &id, const QString &typeLine,
-                 const QString &lineColor,
-                 const QString &formulaLength, const QString &formulaAngle, const quint32 &basePointId,
-                 const Source &typeCreation, QGraphicsItem * parent = nullptr);
+    VToolEndLine(const VToolEndLineInitData &initData, QGraphicsItem *parent = nullptr);
 };
 
 #endif // VTOOLENDLINE_H

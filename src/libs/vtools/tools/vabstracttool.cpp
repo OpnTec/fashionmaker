@@ -618,32 +618,38 @@ quint32 VAbstractTool::PrepareNode(const VPieceNode &node, VMainGraphicsScene *s
     SCASSERT(doc != nullptr)
     SCASSERT(data != nullptr)
 
-    quint32 id = NULL_ID;
+    VAbstractNodeInitData initData;
+    initData.idObject = node.GetId();
+    initData.doc = doc;
+    initData.data = data;
+    initData.parse = Document::FullParse;
+    initData.typeCreation = Source::FromGui;
+
     switch (node.GetTypeTool())
     {
         case (Tool::NodePoint):
-            id = CreateNode<VPointF>(data, node.GetId());
-            VNodePoint::Create(doc, data, scene, id, node.GetId(), Document::FullParse, Source::FromGui);
+            initData.id = CreateNode<VPointF>(data, node.GetId());
+            VNodePoint::Create(initData);
             break;
         case (Tool::NodeArc):
-            id = CreateNode<VArc>(data, node.GetId());
-            VNodeArc::Create(doc, data, id, node.GetId(), Document::FullParse, Source::FromGui);
+            initData.id = CreateNode<VArc>(data, node.GetId());
+            VNodeArc::Create(initData);
             break;
         case (Tool::NodeElArc):
-            id = CreateNode<VEllipticalArc>(data, node.GetId());
-            VNodeEllipticalArc::Create(doc, data, id, node.GetId(), Document::FullParse, Source::FromGui);
+            initData.id = CreateNode<VEllipticalArc>(data, node.GetId());
+            VNodeEllipticalArc::Create(initData);
             break;
         case (Tool::NodeSpline):
-            id = CreateNodeSpline(data, node.GetId());
-            VNodeSpline::Create(doc, data, id, node.GetId(), Document::FullParse, Source::FromGui);
+            initData.id = CreateNodeSpline(data, node.GetId());
+            VNodeSpline::Create(initData);
             break;
         case (Tool::NodeSplinePath):
-            id = CreateNodeSplinePath(data, node.GetId());
-            VNodeSplinePath::Create(doc, data, id, node.GetId(), Document::FullParse, Source::FromGui);
+            initData.id = CreateNodeSplinePath(data, node.GetId());
+            VNodeSplinePath::Create(initData);
             break;
         default:
             qDebug()<<"May be wrong tool type!!! Ignoring."<<Q_FUNC_INFO;
             break;
     }
-    return id;
+    return initData.id;
 }

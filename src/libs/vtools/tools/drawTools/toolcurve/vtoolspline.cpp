@@ -74,22 +74,19 @@ const QString VToolSpline::OldToolType = QStringLiteral("simple");
 //---------------------------------------------------------------------------------------------------------------------
 /**
  * @brief VToolSpline constructor.
- * @param doc dom document container.
- * @param data container with variables.
- * @param id object id in container.
- * @param typeCreation way we create this tool.
+ * @param initData init data.
  * @param parent parent object.
  */
-VToolSpline::VToolSpline(VAbstractPattern *doc, VContainer *data, quint32 id, const Source &typeCreation,
-                         QGraphicsItem *parent)
-    :VAbstractSpline(doc, data, id, parent), oldPosition()
+VToolSpline::VToolSpline(VToolSplineInitData initData, QGraphicsItem *parent)
+    : VAbstractSpline(initData.doc, initData.data, initData.id, parent),
+      oldPosition()
 {
     sceneType = SceneObject::Spline;
 
     this->setFlag(QGraphicsItem::ItemIsMovable, true);
     this->setFlag(QGraphicsItem::ItemIsFocusable, true);// For keyboard input focus
 
-    const auto spl = VAbstractTool::data.GeometricObject<VSpline>(id);
+    const auto spl = VAbstractTool::data.GeometricObject<VSpline>(initData.id);
 
     const bool freeAngle1 = qmu::QmuTokenParser::IsSingle(spl->GetStartAngleFormula());
     const bool freeLength1 = qmu::QmuTokenParser::IsSingle(spl->GetC1LengthFormula());
@@ -119,7 +116,7 @@ VToolSpline::VToolSpline(VAbstractPattern *doc, VContainer *data, quint32 id, co
 
     ShowHandles(false);
 
-    ToolCreation(typeCreation);
+    ToolCreation(initData.typeCreation);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -153,11 +150,18 @@ VToolSpline* VToolSpline::Create(QSharedPointer<DialogTool> dialog, VMainGraphic
     QSharedPointer<DialogSpline> dialogTool = dialog.objectCast<DialogSpline>();
     SCASSERT(not dialogTool.isNull())
 
+    VToolSplineInitData initData;
+    initData.scene = scene;
+    initData.doc = doc;
+    initData.data = data;
+    initData.parse = Document::FullParse;
+    initData.typeCreation = Source::FromGui;
+
     VSpline *spline = new VSpline(dialogTool->GetSpline());
     spline->SetColor(dialogTool->GetColor());
     spline->SetPenStyle(dialogTool->GetPenStyle());
 
-    auto spl = Create(0, spline, scene, doc, data, Document::FullParse, Source::FromGui);
+    auto spl = Create(initData, spline);
 
     if (spl != nullptr)
     {
@@ -169,74 +173,64 @@ VToolSpline* VToolSpline::Create(QSharedPointer<DialogTool> dialog, VMainGraphic
 //---------------------------------------------------------------------------------------------------------------------
 /**
  * @brief Create help create tool.
- * @param _id tool id, 0 if tool doesn't exist yet.
+ * @param initData init data.
  * @param spline spline.
- * @param scene pointer to scene.
- * @param doc dom document container.
- * @param data container with variables.
- * @param parse parser file mode.
- * @param typeCreation way we create this tool.
  * @return the created tool
  */
-VToolSpline* VToolSpline::Create(const quint32 _id, VSpline *spline, VMainGraphicsScene *scene, VAbstractPattern *doc,
-                                 VContainer *data, const Document &parse, const Source &typeCreation)
+VToolSpline* VToolSpline::Create(VToolSplineInitData &initData, VSpline *spline)
 {
-    quint32 id = _id;
-
-    if (typeCreation == Source::FromGui)
+    if (initData.typeCreation == Source::FromGui)
     {
-        id = data->AddGObject(spline);
-        data->AddSpline(data->GeometricObject<VAbstractBezier>(id), id);
+        initData.id = initData.data->AddGObject(spline);
+        initData.data->AddSpline(initData.data->GeometricObject<VAbstractBezier>(initData.id), initData.id);
     }
     else
     {
-        data->UpdateGObject(id, spline);
-        data->AddSpline(data->GeometricObject<VAbstractBezier>(id), id);
-        if (parse != Document::FullParse)
+        initData.data->UpdateGObject(initData.id, spline);
+        initData.data->AddSpline(initData.data->GeometricObject<VAbstractBezier>(initData.id), initData.id);
+        if (initData.parse != Document::FullParse)
         {
-            doc->UpdateToolData(id, data);
+            initData.doc->UpdateToolData(initData.id, initData.data);
         }
     }
 
-    if (parse == Document::FullParse)
+    if (initData.parse == Document::FullParse)
     {
-        VAbstractTool::AddRecord(id, Tool::Spline, doc);
-        auto _spl = new VToolSpline(doc, data, id, typeCreation);
-        scene->addItem(_spl);
-        InitSplineToolConnections(scene, _spl);
-        VAbstractPattern::AddTool(id, _spl);
-        doc->IncrementReferens(spline->GetP1().getIdTool());
-        doc->IncrementReferens(spline->GetP4().getIdTool());
+        VAbstractTool::AddRecord(initData.id, Tool::Spline, initData.doc);
+        auto _spl = new VToolSpline(initData);
+        initData.scene->addItem(_spl);
+        InitSplineToolConnections(initData.scene, _spl);
+        VAbstractPattern::AddTool(initData.id, _spl);
+        initData.doc->IncrementReferens(spline->GetP1().getIdTool());
+        initData.doc->IncrementReferens(spline->GetP4().getIdTool());
         return _spl;
     }
     return nullptr;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-VToolSpline *VToolSpline::Create(const quint32 _id, quint32 point1, quint32 point4, QString &a1, QString &a2,
-                                 QString &l1, QString &l2, quint32 duplicate, const QString &color,
-                                 const QString &penStyle, VMainGraphicsScene *scene, VAbstractPattern *doc,
-                                 VContainer *data, const Document &parse, const Source &typeCreation)
+VToolSpline *VToolSpline::Create(VToolSplineInitData &initData)
 {
-    const qreal calcAngle1 = CheckFormula(_id, a1, data);
-    const qreal calcAngle2 = CheckFormula(_id, a2, data);
+    const qreal calcAngle1 = CheckFormula(initData.id, initData.a1, initData.data);
+    const qreal calcAngle2 = CheckFormula(initData.id, initData.a2, initData.data);
 
-    const qreal calcLength1 = qApp->toPixel(CheckFormula(_id, l1, data));
-    const qreal calcLength2 = qApp->toPixel(CheckFormula(_id, l2, data));
+    const qreal calcLength1 = qApp->toPixel(CheckFormula(initData.id, initData.l1, initData.data));
+    const qreal calcLength2 = qApp->toPixel(CheckFormula(initData.id, initData.l2, initData.data));
 
-    auto p1 = data->GeometricObject<VPointF>(point1);
-    auto p4 = data->GeometricObject<VPointF>(point4);
+    auto p1 = initData.data->GeometricObject<VPointF>(initData.point1);
+    auto p4 = initData.data->GeometricObject<VPointF>(initData.point4);
 
-    auto spline = new VSpline(*p1, *p4, calcAngle1, a1, calcAngle2, a2, calcLength1, l1, calcLength2, l2);
-    if (duplicate > 0)
+    auto spline = new VSpline(*p1, *p4, calcAngle1, initData.a1, calcAngle2, initData.a2, calcLength1, initData.l1,
+                              calcLength2, initData.l2);
+    if (initData.duplicate > 0)
     {
-        spline->SetDuplicate(duplicate);
+        spline->SetDuplicate(initData.duplicate);
     }
 
-    spline->SetColor(color);
-    spline->SetPenStyle(penStyle);
+    spline->SetColor(initData.color);
+    spline->SetPenStyle(initData.penStyle);
 
-    return VToolSpline::Create(_id, spline, scene, doc, data, parse, typeCreation);
+    return VToolSpline::Create(initData, spline);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

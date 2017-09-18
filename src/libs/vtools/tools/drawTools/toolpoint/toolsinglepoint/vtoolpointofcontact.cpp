@@ -63,24 +63,17 @@ const QString VToolPointOfContact::ToolType = QStringLiteral("pointOfContact");
 //---------------------------------------------------------------------------------------------------------------------
 /**
  * @brief VToolPointOfContact constructor.
- * @param doc dom document container.
- * @param data container with variables.
- * @param id object id in container.
- * @param radius string with formula radius arc.
- * @param center id center arc point.
- * @param firstPointId id first line point.
- * @param secondPointId id second line point.
- * @param typeCreation way we create this tool.
+ * @param initData init data.
  * @param parent parent object.
  */
-VToolPointOfContact::VToolPointOfContact(VAbstractPattern *doc, VContainer *data, const quint32 &id,
-                                         const QString &radius, const quint32 &center,
-                                         const quint32 &firstPointId, const quint32 &secondPointId,
-                                         const Source &typeCreation, QGraphicsItem *parent)
-    : VToolSinglePoint(doc, data, id, parent), arcRadius(radius), center(center), firstPointId(firstPointId),
-      secondPointId(secondPointId)
+VToolPointOfContact::VToolPointOfContact(const VToolPointOfContactInitData &initData, QGraphicsItem *parent)
+    : VToolSinglePoint(initData.doc, initData.data, initData.id, parent),
+      arcRadius(initData.radius),
+      center(initData.center),
+      firstPointId(initData.firstPointId),
+      secondPointId(initData.secondPointId)
 {
-    ToolCreation(typeCreation);
+    ToolCreation(initData.typeCreation);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -170,13 +163,20 @@ VToolPointOfContact* VToolPointOfContact::Create(QSharedPointer<DialogTool> dial
     SCASSERT(not dialog.isNull())
     QSharedPointer<DialogPointOfContact> dialogTool = dialog.objectCast<DialogPointOfContact>();
     SCASSERT(not dialogTool.isNull())
-    QString radius = dialogTool->getRadius();
-    const quint32 center = dialogTool->getCenter();
-    const quint32 firstPointId = dialogTool->GetFirstPoint();
-    const quint32 secondPointId = dialogTool->GetSecondPoint();
-    const QString pointName = dialogTool->getPointName();
-    VToolPointOfContact *point = Create(0, radius, center, firstPointId, secondPointId, pointName, 5, 10, true, scene,
-                                        doc, data, Document::FullParse, Source::FromGui);
+
+    VToolPointOfContactInitData initData;
+    initData.radius = dialogTool->getRadius();
+    initData.center = dialogTool->getCenter();
+    initData.firstPointId = dialogTool->GetFirstPoint();
+    initData.secondPointId = dialogTool->GetSecondPoint();
+    initData.name = dialogTool->getPointName();
+    initData.scene = scene;
+    initData.doc = doc;
+    initData.data = data;
+    initData.parse = Document::FullParse;
+    initData.typeCreation = Source::FromGui;
+
+    VToolPointOfContact *point = Create(initData);
     if (point != nullptr)
     {
         point->m_dialog = dialogTool;
@@ -187,69 +187,51 @@ VToolPointOfContact* VToolPointOfContact::Create(QSharedPointer<DialogTool> dial
 //---------------------------------------------------------------------------------------------------------------------
 /**
  * @brief Create help create tool.
- * @param _id tool id, 0 if tool doesn't exist yet.
- * @param radius string with formula radius arc.
- * @param center id center arc point.
- * @param firstPointId id first line point.
- * @param secondPointId id second line point.
- * @param pointName point name.
- * @param mx label bias x axis.
- * @param my label bias y axis.
- * @param scene pointer to scene.
- * @param doc dom document container.
- * @param data container with variables.
- * @param parse parser file mode.
- * @param typeCreation way we create this tool.
+ * @param initData init data.
  */
-VToolPointOfContact* VToolPointOfContact::Create(const quint32 _id, QString &radius, quint32 center,
-                                                 quint32 firstPointId, quint32 secondPointId,
-                                                 const QString &pointName, qreal mx, qreal my, bool showLabel,
-                                                 VMainGraphicsScene *scene, VAbstractPattern *doc, VContainer *data,
-                                                 const Document &parse, const Source &typeCreation)
+VToolPointOfContact* VToolPointOfContact::Create(VToolPointOfContactInitData &initData)
 {
-    const QSharedPointer<VPointF> centerP = data->GeometricObject<VPointF>(center);
-    const QSharedPointer<VPointF> firstP = data->GeometricObject<VPointF>(firstPointId);
-    const QSharedPointer<VPointF> secondP = data->GeometricObject<VPointF>(secondPointId);
+    const QSharedPointer<VPointF> centerP = initData.data->GeometricObject<VPointF>(initData.center);
+    const QSharedPointer<VPointF> firstP = initData.data->GeometricObject<VPointF>(initData.firstPointId);
+    const QSharedPointer<VPointF> secondP = initData.data->GeometricObject<VPointF>(initData.secondPointId);
 
-    const qreal result = CheckFormula(_id, radius, data);
+    const qreal result = CheckFormula(initData.id, initData.radius, initData.data);
 
     QPointF fPoint = VToolPointOfContact::FindPoint(qApp->toPixel(result), static_cast<QPointF>(*centerP),
                                                     static_cast<QPointF>(*firstP), static_cast<QPointF>(*secondP));
-    quint32 id =  _id;
 
-    VPointF *p = new VPointF(fPoint, pointName, mx, my);
-    p->SetShowLabel(showLabel);
+    VPointF *p = new VPointF(fPoint, initData.name, initData.mx, initData.my);
+    p->SetShowLabel(initData.showLabel);
 
-    if (typeCreation == Source::FromGui)
+    if (initData.typeCreation == Source::FromGui)
     {
-        id = data->AddGObject(p);
-        data->AddLine(firstPointId, id);
-        data->AddLine(secondPointId, id);
-        data->AddLine(center, id);
+        initData.id = initData.data->AddGObject(p);
+        initData.data->AddLine(initData.firstPointId, initData.id);
+        initData.data->AddLine(initData.secondPointId, initData.id);
+        initData.data->AddLine(initData.center, initData.id);
     }
     else
     {
-        data->UpdateGObject(id, p);
-        data->AddLine(firstPointId, id);
-        data->AddLine(secondPointId, id);
-        data->AddLine(center, id);
-        if (parse != Document::FullParse)
+        initData.data->UpdateGObject(initData.id, p);
+        initData.data->AddLine(initData.firstPointId, initData.id);
+        initData.data->AddLine(initData.secondPointId, initData.id);
+        initData.data->AddLine(initData.center, initData.id);
+        if (initData.parse != Document::FullParse)
         {
-            doc->UpdateToolData(id, data);
+            initData.doc->UpdateToolData(initData.id, initData.data);
         }
     }
 
-    if (parse == Document::FullParse)
+    if (initData.parse == Document::FullParse)
     {
-        VAbstractTool::AddRecord(id, Tool::PointOfContact, doc);
-        VToolPointOfContact *point = new VToolPointOfContact(doc, data, id, radius, center,
-                                                             firstPointId, secondPointId, typeCreation);
-        scene->addItem(point);
-        InitToolConnections(scene, point);
-        VAbstractPattern::AddTool(id, point);
-        doc->IncrementReferens(centerP->getIdTool());
-        doc->IncrementReferens(firstP->getIdTool());
-        doc->IncrementReferens(secondP->getIdTool());
+        VAbstractTool::AddRecord(initData.id, Tool::PointOfContact, initData.doc);
+        VToolPointOfContact *point = new VToolPointOfContact(initData);
+        initData.scene->addItem(point);
+        InitToolConnections(initData.scene, point);
+        VAbstractPattern::AddTool(initData.id, point);
+        initData.doc->IncrementReferens(centerP->getIdTool());
+        initData.doc->IncrementReferens(firstP->getIdTool());
+        initData.doc->IncrementReferens(secondP->getIdTool());
         return point;
     }
     return nullptr;

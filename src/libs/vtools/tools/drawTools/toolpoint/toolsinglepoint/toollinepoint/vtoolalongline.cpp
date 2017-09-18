@@ -71,13 +71,12 @@ const QString VToolAlongLine::ToolType = QStringLiteral("alongLine");
  * @param typeCreation way we create this tool.
  * @param parent parent object.
  */
-VToolAlongLine::VToolAlongLine(VAbstractPattern *doc, VContainer *data, quint32 id, const QString &formula,
-                               const quint32 &firstPointId, const quint32 &secondPointId,
-                               const QString &typeLine, const QString &lineColor, const Source &typeCreation,
-                               QGraphicsItem *parent)
-    :VToolLinePoint(doc, data, id, typeLine, lineColor, formula, firstPointId, 0, parent), secondPointId(secondPointId)
+VToolAlongLine::VToolAlongLine(const VToolAlongLineInitData &initData, QGraphicsItem *parent)
+    :VToolLinePoint(initData.doc, initData.data, initData.id, initData.typeLine, initData.lineColor, initData.formula,
+                    initData.firstPointId, 0, parent),
+      secondPointId(initData.secondPointId)
 {
-    ToolCreation(typeCreation);
+    ToolCreation(initData.typeCreation);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -244,14 +243,21 @@ VToolAlongLine* VToolAlongLine::Create(QSharedPointer<DialogTool> dialog, VMainG
     SCASSERT(not dialog.isNull())
     QSharedPointer<DialogAlongLine> dialogTool = dialog.objectCast<DialogAlongLine>();
     SCASSERT(not dialogTool.isNull())
-    QString formula = dialogTool->GetFormula();
-    const quint32 firstPointId = dialogTool->GetFirstPointId();
-    const quint32 secondPointId = dialogTool->GetSecondPointId();
-    const QString typeLine = dialogTool->GetTypeLine();
-    const QString lineColor = dialogTool->GetLineColor();
-    const QString pointName = dialogTool->getPointName();
-    VToolAlongLine *point = Create(0, pointName, typeLine, lineColor, formula, firstPointId, secondPointId,
-                                   5, 10, true, scene, doc, data, Document::FullParse, Source::FromGui);
+
+    VToolAlongLineInitData initData;
+    initData.formula = dialogTool->GetFormula();
+    initData.firstPointId = dialogTool->GetFirstPointId();
+    initData.secondPointId = dialogTool->GetSecondPointId();
+    initData.typeLine = dialogTool->GetTypeLine();
+    initData.lineColor = dialogTool->GetLineColor();
+    initData.name = dialogTool->getPointName();
+    initData.scene = scene;
+    initData.doc = doc;
+    initData.data = data;
+    initData.parse = Document::FullParse;
+    initData.typeCreation = Source::FromGui;
+
+    VToolAlongLine *point = Create(initData);
     if (point != nullptr)
     {
         point->m_dialog = dialogTool;
@@ -262,75 +268,55 @@ VToolAlongLine* VToolAlongLine::Create(QSharedPointer<DialogTool> dialog, VMainG
 //---------------------------------------------------------------------------------------------------------------------
 /**
  * @brief Create help create tool.
- * @param _id tool id, 0 if tool doesn't exist yet.
- * @param pointName point name. point name.
- * @param typeLine line type.
- * @param formula string with length formula.
- * @param firstPointId id first point of line.
- * @param secondPointId id second point of line.
- * @param mx label bias x axis.
- * @param my label bias y axis.
- * @param showLabel show/hide label.
- * @param scene pointer to scene.
- * @param doc dom document container.
- * @param data container with variables.
- * @param parse parser file mode.
- * @param typeCreation way we create this tool.
+ * @param initData init data.
  */
-VToolAlongLine* VToolAlongLine::Create(const quint32 _id, const QString &pointName, const QString &typeLine,
-                                       const QString &lineColor, QString &formula, const quint32 &firstPointId,
-                                       quint32 secondPointId, qreal mx, qreal my, bool showLabel,
-                                       VMainGraphicsScene *scene, VAbstractPattern *doc, VContainer *data,
-                                       const Document &parse, const Source &typeCreation)
+VToolAlongLine* VToolAlongLine::Create(VToolAlongLineInitData &initData)
 {
-    const QSharedPointer<VPointF> firstPoint = data->GeometricObject<VPointF>(firstPointId);
-    const QSharedPointer<VPointF> secondPoint = data->GeometricObject<VPointF>(secondPointId);
+    const QSharedPointer<VPointF> firstPoint = initData.data->GeometricObject<VPointF>(initData.firstPointId);
+    const QSharedPointer<VPointF> secondPoint = initData.data->GeometricObject<VPointF>(initData.secondPointId);
     QLineF line = QLineF(static_cast<QPointF>(*firstPoint), static_cast<QPointF>(*secondPoint));
 
     //Declare special variable "CurrentLength"
-    VLengthLine *length = new VLengthLine(firstPoint.data(), firstPointId, secondPoint.data(),
-                                          secondPointId, *data->GetPatternUnit());
+    VLengthLine *length = new VLengthLine(firstPoint.data(), initData.firstPointId, secondPoint.data(),
+                                          initData.secondPointId, *initData.data->GetPatternUnit());
     length->SetName(currentLength);
-    data->AddVariable(currentLength, length);
+    initData.data->AddVariable(currentLength, length);
 
-    line.setLength(qApp->toPixel(CheckFormula(_id, formula, data)));
+    line.setLength(qApp->toPixel(CheckFormula(initData.id, initData.formula, initData.data)));
 
-    quint32 id = _id;
+    VPointF *p = new VPointF(line.p2(), initData.name, initData.mx, initData.my);
+    p->SetShowLabel(initData.showLabel);
 
-    VPointF *p = new VPointF(line.p2(), pointName, mx, my);
-    p->SetShowLabel(showLabel);
-
-    if (typeCreation == Source::FromGui)
+    if (initData.typeCreation == Source::FromGui)
     {
-        id = data->AddGObject(p);
-        data->AddLine(firstPointId, id);
-        data->AddLine(id, secondPointId);
+        initData.id = initData.data->AddGObject(p);
+        initData.data->AddLine(initData.firstPointId, initData.id);
+        initData.data->AddLine(initData.id, initData.secondPointId);
     }
     else
     {
-        data->UpdateGObject(id, p);
-        data->AddLine(firstPointId, id);
-        data->AddLine(id, secondPointId);
-        if (parse != Document::FullParse)
+        initData.data->UpdateGObject(initData.id, p);
+        initData.data->AddLine(initData.firstPointId, initData.id);
+        initData.data->AddLine(initData.id, initData.secondPointId);
+        if (initData.parse != Document::FullParse)
         {
-            doc->UpdateToolData(id, data);
+            initData.doc->UpdateToolData(initData.id, initData.data);
         }
     }
 
     VToolAlongLine *point = nullptr;
-    if (parse == Document::FullParse)
+    if (initData.parse == Document::FullParse)
     {
-        VAbstractTool::AddRecord(id, Tool::AlongLine, doc);
-        point = new VToolAlongLine(doc, data, id, formula, firstPointId, secondPointId, typeLine, lineColor,
-                                   typeCreation);
-        scene->addItem(point);
-        InitToolConnections(scene, point);
-        VAbstractPattern::AddTool(id, point);
-        doc->IncrementReferens(firstPoint->getIdTool());
-        doc->IncrementReferens(secondPoint->getIdTool());
+        VAbstractTool::AddRecord(initData.id, Tool::AlongLine, initData.doc);
+        point = new VToolAlongLine(initData);
+        initData.scene->addItem(point);
+        InitToolConnections(initData.scene, point);
+        VAbstractPattern::AddTool(initData.id, point);
+        initData.doc->IncrementReferens(firstPoint->getIdTool());
+        initData.doc->IncrementReferens(secondPoint->getIdTool());
     }
     //Very important to delete it. Only this tool need this special variable.
-    data->RemoveVariable(currentLength);
+    initData.data->RemoveVariable(currentLength);
     return point;
 }
 

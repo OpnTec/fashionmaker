@@ -43,6 +43,16 @@
 class VCubicBezier;
 template <class T> class QSharedPointer;
 
+struct VToolCubicBezierInitData : public VAbstractToolInitData
+{
+    VToolCubicBezierInitData()
+        : VAbstractToolInitData(),
+          spline(nullptr)
+    {}
+
+    VCubicBezier *spline;
+};
+
 class VToolCubicBezier : public VAbstractSpline
 {
     Q_OBJECT
@@ -51,9 +61,7 @@ public:
     virtual void setDialog() Q_DECL_OVERRIDE;
     static VToolCubicBezier *Create(QSharedPointer<DialogTool> dialog, VMainGraphicsScene *scene,
                                     VAbstractPattern *doc, VContainer *data);
-    static VToolCubicBezier *Create(const quint32 _id, VCubicBezier *spline, VMainGraphicsScene *scene,
-                                    VAbstractPattern *doc, VContainer *data, const Document &parse,
-                                    const Source &typeCreation);
+    static VToolCubicBezier *Create(VToolCubicBezierInitData initData);
     static const QString ToolType;
     virtual int  type() const Q_DECL_OVERRIDE {return Type;}
     enum { Type = UserType + static_cast<int>(Tool::CubicBezier)};
@@ -78,8 +86,7 @@ protected:
 private:
     Q_DISABLE_COPY(VToolCubicBezier)
 
-    VToolCubicBezier(VAbstractPattern *doc, VContainer *data, quint32 id, const Source &typeCreation,
-                     QGraphicsItem * parent = nullptr);
+    VToolCubicBezier(const VToolCubicBezierInitData &initData, QGraphicsItem *parent = nullptr);
 
     void SetSplineAttributes(QDomElement &domElement, const VCubicBezier &spl);
 };

@@ -73,21 +73,17 @@ const QString VToolBasePoint::ToolType = QStringLiteral("single");
 //---------------------------------------------------------------------------------------------------------------------
 /**
  * @brief VToolBasePoint constructor.
- * @param doc dom document container.
- * @param data container with variables.
- * @param id object id in container.
- * @param typeCreation way we create this tool.
+ * @param initData init data.
  * @param parent parent object.
  */
-VToolBasePoint::VToolBasePoint (VAbstractPattern *doc, VContainer *data, quint32 id, const Source &typeCreation,
-                                const QString &namePP, QGraphicsItem * parent )
-    :VToolSinglePoint(doc, data, id, parent), namePP(namePP)
+VToolBasePoint::VToolBasePoint (const VToolBasePointInitData &initData, QGraphicsItem * parent )
+    :VToolSinglePoint(initData.doc, initData.data, initData.id, parent), namePP(initData.nameActivPP)
 {
     m_baseColor = Qt::red;
     this->setFlag(QGraphicsItem::ItemIsMovable, true);
     this->setFlag(QGraphicsItem::ItemSendsGeometryChanges, true);
     m_namePoint->setBrush(Qt::black);
-    ToolCreation(typeCreation);
+    ToolCreation(initData.typeCreation);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -104,33 +100,31 @@ void VToolBasePoint::setDialog()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-VToolBasePoint *VToolBasePoint::Create(quint32 _id, const QString &nameActivPP, VPointF *point,
-                                       VMainGraphicsScene *scene, VAbstractPattern *doc, VContainer *data,
-                                       const Document &parse, const Source &typeCreation)
+VToolBasePoint *VToolBasePoint::Create(VToolBasePointInitData initData)
 {
-    SCASSERT(point != nullptr)
+    VPointF *point = new VPointF(initData.x, initData.y, initData.name, initData.mx, initData.my);
+    point->SetShowLabel(initData.showLabel);
 
-    quint32 id = _id;
-    if (typeCreation == Source::FromGui)
+    if (initData.typeCreation == Source::FromGui)
     {
-        id = data->AddGObject(point);
+        initData.id = initData.data->AddGObject(point);
     }
     else
     {
-        data->UpdateGObject(id, point);
-        if (parse != Document::FullParse)
+        initData.data->UpdateGObject(initData.id, point);
+        if (initData.parse != Document::FullParse)
         {
-            doc->UpdateToolData(id, data);
+            initData.doc->UpdateToolData(initData.id, initData.data);
         }
     }
 
-    if (parse == Document::FullParse)
+    if (initData.parse == Document::FullParse)
     {
-        VAbstractTool::AddRecord(id, Tool::BasePoint, doc);
-        VToolBasePoint *spoint = new VToolBasePoint(doc, data, id, typeCreation, nameActivPP);
-        scene->addItem(spoint);
-        InitToolConnections(scene, spoint);
-        VAbstractPattern::AddTool(id, spoint);
+        VAbstractTool::AddRecord(initData.id, Tool::BasePoint, initData.doc);
+        VToolBasePoint *spoint = new VToolBasePoint(initData);
+        initData.scene->addItem(spoint);
+        InitToolConnections(initData.scene, spoint);
+        VAbstractPattern::AddTool(initData.id, spoint);
         return spoint;
     }
     return nullptr;

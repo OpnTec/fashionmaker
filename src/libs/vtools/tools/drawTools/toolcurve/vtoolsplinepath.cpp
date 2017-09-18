@@ -79,15 +79,11 @@ const QString VToolSplinePath::OldToolType = QStringLiteral("path");
 //---------------------------------------------------------------------------------------------------------------------
 /**
  * @brief VToolSplinePath constructor.
- * @param doc dom document container.
- * @param data container with variables.
- * @param id object id in container.
- * @param typeCreation way we create this tool.
+ * @param initData init data.
  * @param parent parent object.
  */
-VToolSplinePath::VToolSplinePath(VAbstractPattern *doc, VContainer *data, quint32 id, const Source &typeCreation,
-                                 QGraphicsItem *parent)
-    : VAbstractSpline(doc, data, id, parent),
+VToolSplinePath::VToolSplinePath(const VToolSplinePathInitData &initData, QGraphicsItem *parent)
+    : VAbstractSpline(initData.doc, initData.data, initData.id, parent),
       oldPosition(),
       splIndex(-1)
 {
@@ -96,7 +92,7 @@ VToolSplinePath::VToolSplinePath(VAbstractPattern *doc, VContainer *data, quint3
     this->setFlag(QGraphicsItem::ItemIsMovable, true);
     this->setFlag(QGraphicsItem::ItemIsFocusable, true);// For keyboard input focus
 
-    const QSharedPointer<VSplinePath> splPath = data->GeometricObject<VSplinePath>(id);
+    const QSharedPointer<VSplinePath> splPath = initData.data->GeometricObject<VSplinePath>(initData.id);
     for (qint32 i = 1; i<=splPath->CountSubSpl(); ++i)
     {
         const VSpline spl = splPath->GetSpline(i);
@@ -128,7 +124,7 @@ VToolSplinePath::VToolSplinePath(VAbstractPattern *doc, VContainer *data, quint3
 
     ShowHandles(false);
 
-    ToolCreation(typeCreation);
+    ToolCreation(initData.typeCreation);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -160,6 +156,14 @@ VToolSplinePath* VToolSplinePath::Create(QSharedPointer<DialogTool> dialog, VMai
     SCASSERT(not dialog.isNull())
     QSharedPointer<DialogSplinePath> dialogTool = dialog.objectCast<DialogSplinePath>();
     SCASSERT(not dialogTool.isNull())
+
+    VToolSplinePathInitData initData;
+    initData.scene = scene;
+    initData.doc = doc;
+    initData.data = data;
+    initData.parse = Document::FullParse;
+    initData.typeCreation = Source::FromGui;
+
     VSplinePath *path = new VSplinePath(dialogTool->GetPath());
     for (qint32 i = 0; i < path->CountPoints(); ++i)
     {
@@ -169,7 +173,7 @@ VToolSplinePath* VToolSplinePath::Create(QSharedPointer<DialogTool> dialog, VMai
     path->SetColor(dialogTool->GetColor());
     path->SetPenStyle(dialogTool->GetPenStyle());
 
-    VToolSplinePath* spl = Create(0, path, scene, doc, data, Document::FullParse, Source::FromGui);
+    VToolSplinePath* spl = Create(initData, path);
     if (spl != nullptr)
     {
         spl->m_dialog = dialogTool;
@@ -180,79 +184,69 @@ VToolSplinePath* VToolSplinePath::Create(QSharedPointer<DialogTool> dialog, VMai
 //---------------------------------------------------------------------------------------------------------------------
 /**
  * @brief Create help create tool.
- * @param _id tool id, 0 if tool doesn't exist yet.
+ * @param initData init data.
  * @param path spline path.
- * @param scene pointer to scene.
- * @param doc dom document container.
- * @param data container with variables.
- * @param parse parser file mode.
  * @param typeCreation way we create this tool.
  */
-VToolSplinePath* VToolSplinePath::Create(const quint32 _id, VSplinePath *path, VMainGraphicsScene *scene,
-                                         VAbstractPattern *doc, VContainer *data, const Document &parse,
-                                         const Source &typeCreation)
+VToolSplinePath* VToolSplinePath::Create(VToolSplinePathInitData &initData,  VSplinePath *path)
 {
-    quint32 id = _id;
-
-    if (typeCreation == Source::FromGui)
+    if (initData.typeCreation == Source::FromGui)
     {
-        id = data->AddGObject(path);
-        data->AddCurveWithSegments(data->GeometricObject<VAbstractCubicBezierPath>(id), id);
+        initData.id = initData.data->AddGObject(path);
+        initData.data->AddCurveWithSegments(initData.data->GeometricObject<VAbstractCubicBezierPath>(initData.id),
+                                            initData.id);
     }
     else
     {
-        data->UpdateGObject(id, path);
-        data->AddCurveWithSegments(data->GeometricObject<VAbstractCubicBezierPath>(id), id);
-        if (parse != Document::FullParse)
+        initData.data->UpdateGObject(initData.id, path);
+        initData.data->AddCurveWithSegments(initData.data->GeometricObject<VAbstractCubicBezierPath>(initData.id),
+                                            initData.id);
+        if (initData.parse != Document::FullParse)
         {
-            doc->UpdateToolData(id, data);
+            initData.doc->UpdateToolData(initData.id, initData.data);
         }
     }
 
-    if (parse == Document::FullParse)
+    if (initData.parse == Document::FullParse)
     {
-        VAbstractTool::AddRecord(id, Tool::SplinePath, doc);
-        VToolSplinePath *spl = new VToolSplinePath(doc, data, id, typeCreation);
-        scene->addItem(spl);
-        InitSplinePathToolConnections(scene, spl);
-        VAbstractPattern::AddTool(id, spl);
+        VAbstractTool::AddRecord(initData.id, Tool::SplinePath, initData.doc);
+        VToolSplinePath *spl = new VToolSplinePath(initData);
+        initData.scene->addItem(spl);
+        InitSplinePathToolConnections(initData.scene, spl);
+        VAbstractPattern::AddTool(initData.id, spl);
         return spl;
     }
     return nullptr;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-VToolSplinePath *VToolSplinePath::Create(const quint32 _id, const QVector<quint32> &points, QVector<QString> &a1,
-                                         QVector<QString> &a2, QVector<QString> &l1, QVector<QString> &l2,
-                                         const QString &color, const QString &penStyle, quint32 duplicate,
-                                         VMainGraphicsScene *scene, VAbstractPattern *doc, VContainer *data,
-                                         const Document &parse, const Source &typeCreation)
+VToolSplinePath *VToolSplinePath::Create(VToolSplinePathInitData &initData)
 {
     auto path = new VSplinePath();
 
-    if (duplicate > 0)
+    if (initData.duplicate > 0)
     {
-        path->SetDuplicate(duplicate);
+        path->SetDuplicate(initData.duplicate);
     }
 
-    for (int i = 0; i < points.size(); ++i)
+    for (int i = 0; i < initData.points.size(); ++i)
     {
-        const qreal calcAngle1 = CheckFormula(_id, a1[i], data);
-        const qreal calcAngle2 = CheckFormula(_id, a2[i], data);
+        const qreal calcAngle1 = CheckFormula(initData.id, initData.a1[i], initData.data);
+        const qreal calcAngle2 = CheckFormula(initData.id, initData.a2[i], initData.data);
 
-        const qreal calcLength1 = qApp->toPixel(CheckFormula(_id, l1[i], data));
-        const qreal calcLength2 = qApp->toPixel(CheckFormula(_id, l2[i], data));
+        const qreal calcLength1 = qApp->toPixel(CheckFormula(initData.id, initData.l1[i], initData.data));
+        const qreal calcLength2 = qApp->toPixel(CheckFormula(initData.id, initData.l2[i], initData.data));
 
-        const auto p = *data->GeometricObject<VPointF>(points.at(i));
+        const auto p = *initData.data->GeometricObject<VPointF>(initData.points.at(i));
 
-        path->append(VSplinePoint(p, calcAngle1, a1.at(i), calcAngle2, a2.at(i), calcLength1, l1.at(i), calcLength2,
-                                  l2.at(i)));
+        path->append(VSplinePoint(p, calcAngle1, initData.a1.at(i), calcAngle2, initData.a2.at(i), calcLength1,
+                                  initData.l1.at(i), calcLength2, initData.l2.at(i)));
     }
 
-    path->SetColor(color);
-    path->SetPenStyle(penStyle);
+    path->SetColor(initData.color);
+    path->SetPenStyle(initData.penStyle);
 
-    return VToolSplinePath::Create(_id, path, scene, doc, data, parse, typeCreation);
+    return VToolSplinePath::Create(initData, path);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

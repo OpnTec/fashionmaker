@@ -44,6 +44,18 @@
 class VSplinePath;
 template <class T> class QSharedPointer;
 
+struct VToolCutSplinePathInitData : public VToolSinglePointInitData
+{
+    VToolCutSplinePathInitData()
+        : VToolSinglePointInitData(),
+          formula(),
+          splinePathId(NULL_ID)
+    {}
+
+    QString formula;
+    quint32 splinePathId;
+};
+
 /**
  * @brief The VToolCutSplinePath class for tool CutSplinePath. This tool find point on splinePath and cut splinePath on
  * two.
@@ -55,10 +67,7 @@ public:
     virtual void setDialog() Q_DECL_OVERRIDE;
     static VToolCutSplinePath *Create(QSharedPointer<DialogTool> dialog, VMainGraphicsScene  *scene,
                                       VAbstractPattern *doc, VContainer *data);
-    static VToolCutSplinePath *Create(const quint32 _id, const QString &pointName, QString &formula,
-                                      quint32 splinePathId, qreal mx, qreal my, bool showLabel,
-                                      VMainGraphicsScene *scene, VAbstractPattern *doc, VContainer *data,
-                                      const Document &parse, const Source &typeCreation);
+    static VToolCutSplinePath *Create(VToolCutSplinePathInitData &initData);
     static const QString ToolType;
     static const QString AttrSplinePath;
     virtual int  type() const Q_DECL_OVERRIDE {return Type;}
@@ -80,8 +89,7 @@ protected:
 private:
     Q_DISABLE_COPY(VToolCutSplinePath)
 
-    VToolCutSplinePath(VAbstractPattern *doc, VContainer *data, const quint32 &id, const QString &formula,
-                       const quint32 &splinePathId, const Source &typeCreation, QGraphicsItem * parent = nullptr);
+    VToolCutSplinePath(const VToolCutSplinePathInitData &initData, QGraphicsItem *parent = nullptr);
 };
 
 #endif // VTOOLCUTSPLINEPATH_H

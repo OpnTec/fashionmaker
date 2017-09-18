@@ -41,6 +41,20 @@
 
 enum class ParentType : bool {Scene, Item};
 
+struct VAbstractNodeInitData : public VAbstractToolInitData
+{
+    VAbstractNodeInitData()
+        : VAbstractToolInitData(),
+          idObject(NULL_ID),
+          drawName(),
+          idTool(NULL_ID)
+    {}
+
+    quint32 idObject;
+    QString drawName;
+    quint32 idTool;
+};
+
 /**
  * @brief The VAbstractNode class parent class for all detail node.
  */

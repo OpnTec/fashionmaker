@@ -49,6 +49,20 @@ struct DestinationItem
     qreal my;
 };
 
+struct VAbstractOperationInitData : public VAbstractToolInitData
+{
+    VAbstractOperationInitData()
+        : VAbstractToolInitData(),
+          suffix(),
+          source(),
+          destination()
+    {}
+
+    QString suffix;
+    QVector<quint32> source;
+    QVector<DestinationItem> destination;
+};
+
 // FIXME. I don't know how to use QGraphicsItem properly, so just took first available finished class.
 // QGraphicsItem itself produce case where clicking on empty space produce call to QGraphicsItem.
 // And i don't know how to fix it.
@@ -73,8 +87,7 @@ public:
     virtual void GroupVisibility(quint32 object, bool visible) Q_DECL_OVERRIDE;
     virtual void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget) Q_DECL_OVERRIDE;
 
-    static void ExtractData(const QDomElement &domElement, QVector<quint32> &source,
-                            QVector<DestinationItem> &destination);
+    static void ExtractData(const QDomElement &domElement, VAbstractOperationInitData &initData);
 public slots:
     virtual void FullUpdateFromFile() Q_DECL_OVERRIDE;
 

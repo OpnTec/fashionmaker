@@ -46,6 +46,22 @@
 
 template <class T> class QSharedPointer;
 
+struct VToolLineIntersectAxisInitData : public VToolLinePointInitData
+{
+    VToolLineIntersectAxisInitData()
+        : VToolLinePointInitData(),
+          formulaAngle("0"),
+          basePointId(NULL_ID),
+          firstPointId(NULL_ID),
+          secondPointId(NULL_ID)
+    {}
+
+    QString formulaAngle;
+    quint32 basePointId;
+    quint32 firstPointId;
+    quint32 secondPointId;
+};
+
 class VToolLineIntersectAxis : public VToolLinePoint
 {
     Q_OBJECT
@@ -55,12 +71,7 @@ public:
 
     static VToolLineIntersectAxis *Create(QSharedPointer<DialogTool> dialog, VMainGraphicsScene *scene,
                                           VAbstractPattern *doc, VContainer *data);
-    static VToolLineIntersectAxis *Create(const quint32 _id, const QString &pointName, const QString &typeLine,
-                                          const QString &lineColor, QString &formulaAngle, quint32 basePointId,
-                                          quint32 firstPointId, quint32 secondPointId,
-                                          qreal mx, qreal my, bool showLabel, VMainGraphicsScene  *scene,
-                                          VAbstractPattern *doc,
-                                          VContainer *data, const Document &parse, const Source &typeCreation);
+    static VToolLineIntersectAxis *Create(VToolLineIntersectAxisInitData &initData);
 
     static QPointF FindPoint(const QLineF &axis, const QLineF &line);
 
@@ -96,10 +107,7 @@ private:
     quint32 firstPointId;
     quint32 secondPointId;
 
-    VToolLineIntersectAxis(VAbstractPattern *doc, VContainer *data, const quint32 &id, const QString &typeLine,
-                           const QString &lineColor, const QString &formulaAngle, const quint32 &basePointId,
-                           const quint32 &firstPointId, const quint32 &secondPointId, const Source &typeCreation,
-                           QGraphicsItem * parent = nullptr);
+    VToolLineIntersectAxis(const VToolLineIntersectAxisInitData &initData, QGraphicsItem * parent = nullptr);
 };
 
 #endif // VTOOLLINEINTERSECTAXIS_H
