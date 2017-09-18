@@ -160,6 +160,8 @@ static const QString strLetter                    = QStringLiteral("letter");
 static const QString strMaterial                  = QStringLiteral("material");
 static const QString strUserDefined               = QStringLiteral("userDef");
 static const QString strPlacement                 = QStringLiteral("placement");
+static const QString strCutNumber                 = QStringLiteral("cutNumber");
+static const QString strQuantity                  = QStringLiteral("quantity");
 
 //---------------------------------------------------------------------------------------------------------------------
 VPatternConverter::VPatternConverter(const QString &fileName)
@@ -2252,6 +2254,9 @@ void VPatternConverter::PortPieceLabelstoV0_6_0()
 
         AddLabelTemplateLineV0_6_0(dataTag, "%pName%", true, false, Qt::AlignHCenter, 2);
 
+        int firstLineCutNumber = 1;
+        bool firstLine = true;
+
         for (int iMCP = 0; iMCP < count; ++iMCP)
         {
             QDomElement domMCP = nodeListMCP.at(iMCP).toElement();
@@ -2279,7 +2284,29 @@ void VPatternConverter::PortPieceLabelstoV0_6_0()
                     break;
             }
 
-            line.append(", %wCut% %pQuantity%");
+            line.append(", %wCut% ");
+
+            const int cutNumber = static_cast<int>(GetParametrUInt(domMCP, strCutNumber, "1"));
+
+            if (firstLine)
+            {
+                firstLineCutNumber = cutNumber;
+                dataTag.setAttribute(strQuantity, cutNumber);
+                line.append("%pQuantity%");
+                firstLine = false;
+            }
+            else
+            {
+                if (firstLineCutNumber != cutNumber)
+                {
+                    line.append(QString::number(cutNumber));
+                }
+                else
+                {
+                    line.append("%pQuantity%");
+                }
+            }
+
             if (GetParametrUInt(domMCP, strPlacement, "0") == 1)
             {
                 line.append(" %wOnFold%");
