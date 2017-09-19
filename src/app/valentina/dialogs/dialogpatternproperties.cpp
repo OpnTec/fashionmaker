@@ -180,7 +180,17 @@ DialogPatternProperties::DialogPatternProperties(VPattern *doc,  VContainer *pat
     ui->lineEditPatternName->setText(doc->GetPatternName());
     ui->lineEditPatternNumber->setText(doc->GetPatternNumber());
     ui->lineEditCompanyName->setText(doc->GetCompanyName());
-    ui->lineEditCustomerName->setText(doc->GetCustomerName());
+
+    if (qApp->patternType() == MeasurementsType::Individual)
+    {
+        ui->lineEditCustomerName->setText(qApp->GetCustomerName());
+        ui->lineEditCustomerName->setReadOnly(true);
+        ui->lineEditCustomerName->setToolTip(tr("The customer name from individual measurements"));
+    }
+    else
+    {
+        ui->lineEditCustomerName->setText(doc->GetCustomerName());
+    }
 
     connect(ui->lineEditPatternName, &QLineEdit::editingFinished, this, &DialogPatternProperties::LabelDataChanged);
     connect(ui->lineEditPatternNumber, &QLineEdit::editingFinished, this, &DialogPatternProperties::LabelDataChanged);
@@ -601,7 +611,10 @@ void DialogPatternProperties::SaveLabelData()
         doc->SetPatternName(ui->lineEditPatternName->text());
         doc->SetPatternNumber(ui->lineEditPatternNumber->text());
         doc->SetCompanyName(ui->lineEditCompanyName->text());
-        doc->SetCustomerName(ui->lineEditCustomerName->text());
+        if (qApp->patternType() != MeasurementsType::Individual)
+        {
+            doc->SetCustomerName(ui->lineEditCustomerName->text());
+        }
         doc->SetLabelDateFormat(ui->comboBoxDateFormat->currentText());
         doc->SetLabelTimeFormat(ui->comboBoxTimeFormat->currentText());
 

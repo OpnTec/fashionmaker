@@ -110,8 +110,7 @@ TMainWindow::TMainWindow(QWidget *parent)
     ui->lineEditFind->setClearButtonEnabled(true);
     ui->lineEditName->setClearButtonEnabled(true);
     ui->lineEditFullName->setClearButtonEnabled(true);
-    ui->lineEditGivenName->setClearButtonEnabled(true);
-    ui->lineEditFamilyName->setClearButtonEnabled(true);
+    ui->lineEditCustomerName->setClearButtonEnabled(true);
     ui->lineEditEmail->setClearButtonEnabled(true);
 
     ui->lineEditFind->installEventFilter(this);
@@ -990,21 +989,11 @@ void TMainWindow::OpenAt(QAction *where)
 #endif //defined(Q_OS_MAC)
 
 //---------------------------------------------------------------------------------------------------------------------
-void TMainWindow::SaveGivenName()
+void TMainWindow::SaveCustomerName()
 {
-    if (m->GivenName() != ui->lineEditGivenName->text())
+    if (m->Customer() != ui->lineEditCustomerName->text())
     {
-        m->SetGivenName(ui->lineEditGivenName->text());
-        MeasurementsWasSaved(false);
-    }
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void TMainWindow::SaveFamilyName()
-{
-    if (m->FamilyName() != ui->lineEditFamilyName->text())
-    {
-        m->SetFamilyName(ui->lineEditFamilyName->text());
+        m->SetCustomer(ui->lineEditCustomerName->text());
         MeasurementsWasSaved(false);
     }
 }
@@ -2019,12 +2008,10 @@ void TMainWindow::InitWindow()
         HackWidget(&ui->pushButtonGrow);
 
         // Tab Information
-        HackWidget(&ui->lineEditGivenName);
-        HackWidget(&ui->lineEditFamilyName);
+        HackWidget(&ui->lineEditCustomerName);
         HackWidget(&ui->comboBoxGender);
         HackWidget(&ui->lineEditEmail);
-        HackWidget(&ui->labelGivenName);
-        HackWidget(&ui->labelFamilyName);
+        HackWidget(&ui->labelCustomerName);
         HackWidget(&ui->labelBirthDate);
         HackWidget(&ui->dateEditBirthDate);
         HackWidget(&ui->labelGender);
@@ -2061,8 +2048,7 @@ void TMainWindow::InitWindow()
     {
         ui->labelMType->setText(tr("Individual measurements"));
 
-        ui->lineEditGivenName->setEnabled(true);
-        ui->lineEditFamilyName->setEnabled(true);
+        ui->lineEditCustomerName->setEnabled(true);
         ui->dateEditBirthDate->setEnabled(true);
         ui->comboBoxGender->setEnabled(true);
         ui->lineEditEmail->setEnabled(true);
@@ -2081,8 +2067,7 @@ void TMainWindow::InitWindow()
         HackWidget(&ui->labelBaseHeight);
         HackWidget(&ui->labelBaseHeightValue);
 
-        ui->lineEditGivenName->setText(m->GivenName());
-        ui->lineEditFamilyName->setText(m->FamilyName());
+        ui->lineEditCustomerName->setText(m->Customer());
 
         ui->comboBoxGender->clear();
         InitGender(ui->comboBoxGender);
@@ -2098,8 +2083,7 @@ void TMainWindow::InitWindow()
 
         ui->lineEditEmail->setText(m->Email());
 
-        connect(ui->lineEditGivenName, &QLineEdit::editingFinished, this, &TMainWindow::SaveGivenName);
-        connect(ui->lineEditFamilyName, &QLineEdit::editingFinished, this, &TMainWindow::SaveFamilyName);
+        connect(ui->lineEditCustomerName, &QLineEdit::editingFinished, this, &TMainWindow::SaveCustomerName);
         connect(ui->lineEditEmail, &QLineEdit::editingFinished, this, &TMainWindow::SaveEmail);
         connect(ui->comboBoxGender, static_cast<void (QComboBox::*)(int)>(&QComboBox::currentIndexChanged), this,
                 &TMainWindow::SaveGender);

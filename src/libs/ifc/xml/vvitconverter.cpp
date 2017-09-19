@@ -53,13 +53,19 @@
  */
 
 const QString VVITConverter::MeasurementMinVerStr = QStringLiteral("0.2.0");
-const QString VVITConverter::MeasurementMaxVerStr = QStringLiteral("0.3.3");
-const QString VVITConverter::CurrentSchema        = QStringLiteral("://schema/individual_measurements/v0.3.3.xsd");
+const QString VVITConverter::MeasurementMaxVerStr = QStringLiteral("0.4.0");
+const QString VVITConverter::CurrentSchema        = QStringLiteral("://schema/individual_measurements/v0.4.0.xsd");
 
 //VVITConverter::MeasurementMinVer; // <== DON'T FORGET TO UPDATE TOO!!!!
 //VVITConverter::MeasurementMaxVer; // <== DON'T FORGET TO UPDATE TOO!!!!
 
+// The list of all string we use for conversion
+// Better to use global variables because repeating QStringLiteral blows up code size
 static const QString strTagRead_Only = QStringLiteral("read-only");
+static const QString strGivenName    = QStringLiteral("given-name");
+static const QString strFamilyName   = QStringLiteral("family-name");
+static const QString strCustomer     = QStringLiteral("customer");
+static const QString strPersonal     = QStringLiteral("personal");
 
 //---------------------------------------------------------------------------------------------------------------------
 VVITConverter::VVITConverter(const QString &fileName)
@@ -82,6 +88,8 @@ QString VVITConverter::XSDSchema(int ver) const
         case (0x000302):
             return QStringLiteral("://schema/individual_measurements/v0.3.2.xsd");
         case (0x000303):
+            return QStringLiteral("://schema/individual_measurements/v0.3.3.xsd");
+        case (0x000400):
             return CurrentSchema;
         default:
             InvalidVersion(ver);
@@ -112,6 +120,10 @@ void VVITConverter::ApplyPatches()
             ValidateXML(XSDSchema(0x000303), m_convertedFileName);
             V_FALLTHROUGH
         case (0x000303):
+            ToV0_4_0();
+            ValidateXML(XSDSchema(0x000400), m_convertedFileName);
+            V_FALLTHROUGH
+        case (0x000400):
             break;
         default:
             InvalidVersion(m_ver);
@@ -130,7 +142,7 @@ void VVITConverter::DowngradeToCurrentMaxVersion()
 bool VVITConverter::IsReadOnly() const
 {
     // Check if attribute read-only was not changed in file format
-    Q_STATIC_ASSERT_X(VVITConverter::MeasurementMaxVer == CONVERTER_VERSION_CHECK(0, 3, 3),
+    Q_STATIC_ASSERT_X(VVITConverter::MeasurementMaxVer == CONVERTER_VERSION_CHECK(0, 4, 0),
                       "Check attribute read-only.");
 
     // Possibly in future attribute read-only will change position etc.
@@ -300,6 +312,43 @@ void VVITConverter::ConvertMeasurementsToV0_3_3()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void VVITConverter::ConverCustomerNameToV0_4_0()
+{
+    // Find root tag
+    const QDomNodeList personalList = this->elementsByTagName(strPersonal);
+    if (personalList.isEmpty())
+    {
+        return;
+    }
+
+    QDomNode personal = personalList.at(0);
+
+    // Given name
+    QString givenName;
+    const QDomNodeList givenNameList = this->elementsByTagName(strGivenName);
+    if (not givenNameList.isEmpty())
+    {
+        QDomNode givenNameNode = givenNameList.at(0);
+        givenName = givenNameNode.toElement().text();
+        personal.removeChild(givenNameNode);
+    }
+
+    // Family name
+    QString familyName;
+    const QDomNodeList familyNameList = this->elementsByTagName(strFamilyName);
+    if (not familyNameList.isEmpty())
+    {
+        QDomNode familyNameNode = familyNameList.at(0);
+        familyName = familyNameNode.toElement().text();
+        personal.removeChild(familyNameNode);
+    }
+
+    QDomElement customer = createElement(strCustomer);
+    customer.appendChild(createTextNode(givenName + QLatin1Char(' ') + familyName));
+    personal.insertBefore(customer, personal.firstChild());
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 void VVITConverter::ToV0_3_0()
 {
     // TODO. Delete if minimal supported version is 0.3.0
@@ -346,5 +395,17 @@ void VVITConverter::ToV0_3_3()
 
     SetVersion(QStringLiteral("0.3.3"));
     ConvertMeasurementsToV0_3_3();
+    Save();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VVITConverter::ToV0_4_0()
+{
+    // TODO. Delete if minimal supported version is 0.4.0
+    Q_STATIC_ASSERT_X(VVITConverter::MeasurementMinVer < CONVERTER_VERSION_CHECK(0, 4, 0),
+                      "Time to refactor the code.");
+
+    SetVersion(QStringLiteral("0.4.0"));
+    ConverCustomerNameToV0_4_0();
     Save();
 }

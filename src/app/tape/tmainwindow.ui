@@ -682,14 +682,14 @@
          </widget>
         </item>
         <item row="5" column="0">
-         <widget class="QLabel" name="labelGivenName">
+         <widget class="QLabel" name="labelCustomerName">
           <property name="text">
-           <string>Given name:</string>
+           <string>Customer name:</string>
           </property>
          </widget>
         </item>
         <item row="5" column="1">
-         <widget class="QLineEdit" name="lineEditGivenName">
+         <widget class="QLineEdit" name="lineEditCustomerName">
           <property name="enabled">
            <bool>false</bool>
           </property>
@@ -705,36 +705,13 @@
          </widget>
         </item>
         <item row="6" column="0">
-         <widget class="QLabel" name="labelFamilyName">
-          <property name="text">
-           <string>Family name:</string>
-          </property>
-         </widget>
-        </item>
-        <item row="6" column="1">
-         <widget class="QLineEdit" name="lineEditFamilyName">
-          <property name="enabled">
-           <bool>false</bool>
-          </property>
-          <property name="sizePolicy">
-           <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
-            <horstretch>0</horstretch>
-            <verstretch>0</verstretch>
-           </sizepolicy>
-          </property>
-          <property name="placeholderText">
-           <string>Customer's family name</string>
-          </property>
-         </widget>
-        </item>
-        <item row="7" column="0">
          <widget class="QLabel" name="labelBirthDate">
           <property name="text">
            <string>Birth date:</string>
           </property>
          </widget>
         </item>
-        <item row="7" column="1">
+        <item row="6" column="1">
          <widget class="QDateEdit" name="dateEditBirthDate">
           <property name="enabled">
            <bool>false</bool>
@@ -769,14 +746,14 @@
           </property>
          </widget>
         </item>
-        <item row="8" column="0">
+        <item row="7" column="0">
          <widget class="QLabel" name="labelGender">
           <property name="text">
            <string>Gender:</string>
           </property>
          </widget>
         </item>
-        <item row="8" column="1">
+        <item row="7" column="1">
          <widget class="QComboBox" name="comboBoxGender">
           <property name="enabled">
            <bool>false</bool>
@@ -795,14 +772,14 @@
           </property>
          </widget>
         </item>
-        <item row="9" column="0">
+        <item row="8" column="0">
          <widget class="QLabel" name="labelEmail">
           <property name="text">
            <string>Email:</string>
           </property>
          </widget>
         </item>
-        <item row="9" column="1">
+        <item row="8" column="1">
          <widget class="QLineEdit" name="lineEditEmail">
           <property name="enabled">
            <bool>false</bool>
@@ -818,14 +795,14 @@
           </property>
          </widget>
         </item>
-        <item row="10" column="0">
+        <item row="9" column="0">
          <widget class="QLabel" name="labelNotes">
           <property name="text">
            <string>Notes:</string>
           </property>
          </widget>
         </item>
-        <item row="10" column="1">
+        <item row="9" column="1">
          <widget class="QPlainTextEdit" name="plainTextEditNotes">
           <property name="enabled">
            <bool>false</bool>
@@ -850,7 +827,7 @@
      <x>0</x>
      <y>0</y>
      <width>835</width>
-     <height>19</height>
+     <height>25</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuFile">

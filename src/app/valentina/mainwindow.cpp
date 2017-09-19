@@ -455,6 +455,10 @@ bool MainWindow::LoadMeasurements(const QString &path)
     try
     {
         qApp->setPatternType(m->Type());
+        if (m->Type() == MeasurementsType::Individual)
+        {
+            qApp->SetCustomerName(m->Customer());
+        }
         ToolBarOption();
         pattern->ClearVariables(VarType::Measurement);
         m->ReadMeasurements();
@@ -510,6 +514,10 @@ bool MainWindow::UpdateMeasurements(const QString &path, int size, int height)
     {
         pattern->ClearVariables(VarType::Measurement);
         m->ReadMeasurements();
+        if (m->Type() == MeasurementsType::Individual)
+        {
+            qApp->SetCustomerName(m->Customer());
+        }
     }
     catch (VExceptionEmptyParameter &e)
     {

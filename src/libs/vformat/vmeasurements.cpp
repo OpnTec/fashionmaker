@@ -62,8 +62,7 @@ const QString VMeasurements::TagNotes            = QStringLiteral("notes");
 const QString VMeasurements::TagSize             = QStringLiteral("size");
 const QString VMeasurements::TagHeight           = QStringLiteral("height");
 const QString VMeasurements::TagPersonal         = QStringLiteral("personal");
-const QString VMeasurements::TagFamilyName       = QStringLiteral("family-name");
-const QString VMeasurements::TagGivenName        = QStringLiteral("given-name");
+const QString VMeasurements::TagCustomer         = QStringLiteral("customer");
 const QString VMeasurements::TagBirthDate        = QStringLiteral("birth-date");
 const QString VMeasurements::TagGender           = QStringLiteral("gender");
 const QString VMeasurements::TagPMSystem         = QStringLiteral("pm_system");
@@ -402,32 +401,17 @@ void VMeasurements::SetNotes(const QString &text)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QString VMeasurements::FamilyName() const
+QString VMeasurements::Customer() const
 {
-    return UniqueTagText(TagFamilyName, "");
+    return UniqueTagText(TagCustomer, "");
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VMeasurements::SetFamilyName(const QString &text)
+void VMeasurements::SetCustomer(const QString &text)
 {
     if (not IsReadOnly())
     {
-        setTagText(TagFamilyName, text);
-    }
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-QString VMeasurements::GivenName() const
-{
-    return UniqueTagText(TagGivenName, "");
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void VMeasurements::SetGivenName(const QString &text)
-{
-    if (not IsReadOnly())
-    {
-        setTagText(TagGivenName, text);
+        setTagText(TagCustomer, text);
     }
 }
 
@@ -786,8 +770,7 @@ void VMeasurements::CreateEmptyIndividualFile(Unit unit)
     mElement.appendChild(system);
 
     QDomElement personal = createElement(TagPersonal);
-    personal.appendChild(createElement(TagFamilyName));
-    personal.appendChild(createElement(TagGivenName));
+    personal.appendChild(createElement(TagCustomer));
 
     QDomElement date = createElement(TagBirthDate);
     date.appendChild(createTextNode(defBirthDate));

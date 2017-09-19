@@ -457,9 +457,17 @@ void DialogEditLabel::InitPlaceholders()
 
     m_placeholders.insert(pl_patternName, qMakePair(tr("Pattern name"), m_doc->GetPatternName()));
     m_placeholders.insert(pl_patternNumber, qMakePair(tr("Pattern number"), m_doc->GetPatternNumber()));
-    m_placeholders.insert(pl_author, qMakePair(tr("Company name or designer name"),
-                                                           m_doc->GetCompanyName()));
-    m_placeholders.insert(pl_customer, qMakePair(tr("Customer name"), m_doc->GetCustomerName()));
+    m_placeholders.insert(pl_author, qMakePair(tr("Company name or designer name"), m_doc->GetCompanyName()));
+
+    if (qApp->patternType() == MeasurementsType::Individual)
+    {
+        m_placeholders.insert(pl_customer, qMakePair(tr("Customer name"), qApp->GetCustomerName()));
+    }
+    else
+    {
+        m_placeholders.insert(pl_customer, qMakePair(tr("Customer name"), m_doc->GetCustomerName()));
+    }
+
     m_placeholders.insert(pl_pExt, qMakePair(tr("Pattern extension"), QString("val")));
 
     const QString patternFilePath = QFileInfo(qApp->GetPPath()).baseName();
