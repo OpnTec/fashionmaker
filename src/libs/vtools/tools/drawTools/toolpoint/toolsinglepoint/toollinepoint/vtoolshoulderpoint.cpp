@@ -61,26 +61,16 @@ const QString VToolShoulderPoint::ToolType = QStringLiteral("shoulder");
 //---------------------------------------------------------------------------------------------------------------------
 /**
  * @brief VToolShoulderPoint constructor.
- * @param doc dom document container.
- * @param data container with variables.
- * @param id object id in container.
- * @param typeLine line type.
- * @param formula string with formula length.
- * @param p1Line id first line point.
- * @param p2Line id second line point.
- * @param pShoulder id shoulder point.
- * @param typeCreation way we create this tool.
+ * @param initData init data.
  * @param parent parent object.
  */
-VToolShoulderPoint::VToolShoulderPoint(VAbstractPattern *doc, VContainer *data, const quint32 &id,
-                                       const QString &typeLine,
-                                       const QString &lineColor, const QString &formula, const quint32 &p1Line,
-                                       const quint32 &p2Line, const quint32 &pShoulder, const Source &typeCreation,
-                                       QGraphicsItem * parent)
-    :VToolLinePoint(doc, data, id, typeLine, lineColor, formula, p1Line, 0, parent), p2Line(p2Line),
-      pShoulder(pShoulder)
+VToolShoulderPoint::VToolShoulderPoint(const VToolShoulderPointInitData &initData, QGraphicsItem * parent)
+    :VToolLinePoint(initData.doc, initData.data, initData.id, initData.typeLine, initData.lineColor, initData.formula,
+                    initData.p1Line, 0, parent),
+      p2Line(initData.p2Line),
+      pShoulder(initData.pShoulder)
 {
-    ToolCreation(typeCreation);
+    ToolCreation(initData.typeCreation);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -92,7 +82,7 @@ void VToolShoulderPoint::setDialog()
     SCASSERT(not m_dialog.isNull())
     QSharedPointer<DialogShoulderPoint> dialogTool = m_dialog.objectCast<DialogShoulderPoint>();
     SCASSERT(not dialogTool.isNull())
-    const QSharedPointer<VPointF> p = VAbstractTool::data.GeometricObject<VPointF>(id);
+    const QSharedPointer<VPointF> p = VAbstractTool::data.GeometricObject<VPointF>(m_id);
     dialogTool->SetTypeLine(m_lineType);
     dialogTool->SetLineColor(lineColor);
     dialogTool->SetFormula(formulaLength);
@@ -162,15 +152,22 @@ VToolShoulderPoint* VToolShoulderPoint::Create(QSharedPointer<DialogTool> dialog
     SCASSERT(not dialog.isNull())
     QSharedPointer<DialogShoulderPoint> dialogTool = dialog.objectCast<DialogShoulderPoint>();
     SCASSERT(not dialogTool.isNull())
-    QString formula = dialogTool->GetFormula();
-    const quint32 p1Line = dialogTool->GetP1Line();
-    const quint32 p2Line = dialogTool->GetP2Line();
-    const quint32 pShoulder = dialogTool->GetP3();
-    const QString typeLine = dialogTool->GetTypeLine();
-    const QString lineColor = dialogTool->GetLineColor();
-    const QString pointName = dialogTool->getPointName();
-    VToolShoulderPoint * point = Create(0, formula, p1Line, p2Line, pShoulder, typeLine, lineColor, pointName, 5,
-                                        10, scene, doc, data, Document::FullParse, Source::FromGui);
+
+    VToolShoulderPointInitData initData;
+    initData.formula = dialogTool->GetFormula();
+    initData.p1Line = dialogTool->GetP1Line();
+    initData.p2Line = dialogTool->GetP2Line();
+    initData.pShoulder = dialogTool->GetP3();
+    initData.typeLine = dialogTool->GetTypeLine();
+    initData.lineColor = dialogTool->GetLineColor();
+    initData.name = dialogTool->getPointName();
+    initData.scene = scene;
+    initData.doc = doc;
+    initData.data = data;
+    initData.parse = Document::FullParse;
+    initData.typeCreation = Source::FromGui;
+
+    VToolShoulderPoint * point = Create(initData);
     if (point != nullptr)
     {
         point->m_dialog = dialogTool;
@@ -181,67 +178,51 @@ VToolShoulderPoint* VToolShoulderPoint::Create(QSharedPointer<DialogTool> dialog
 //---------------------------------------------------------------------------------------------------------------------
 /**
  * @brief Create help create tool.
- * @param _id tool id, 0 if tool doesn't exist yet.
- * @param formula string with formula length.
- * @param p1Line id first line point.
- * @param p2Line id second line point.
- * @param pShoulder id shoulder point.
- * @param typeLine line type.
- * @param pointName point name.
- * @param mx label bias x axis.
- * @param my label bias y axis.
- * @param scene pointer to scene.
- * @param doc dom document container.
- * @param data container with variables.
- * @param parse parser file mode.
- * @param typeCreation way we create this tool.
+ * @param initData init data.
  * @return the created tool
  */
-VToolShoulderPoint* VToolShoulderPoint::Create(const quint32 _id, QString &formula, const quint32 &p1Line,
-                                               const quint32 &p2Line, const quint32 &pShoulder, const QString &typeLine,
-                                               const QString &lineColor, const QString &pointName, const qreal &mx,
-                                               const qreal &my, VMainGraphicsScene *scene, VAbstractPattern *doc,
-                                               VContainer *data, const Document &parse, const Source &typeCreation)
+VToolShoulderPoint* VToolShoulderPoint::Create(VToolShoulderPointInitData &initData)
 {
-    const QSharedPointer<VPointF> firstPoint = data->GeometricObject<VPointF>(p1Line);
-    const QSharedPointer<VPointF> secondPoint = data->GeometricObject<VPointF>(p2Line);
-    const QSharedPointer<VPointF> shoulderPoint = data->GeometricObject<VPointF>(pShoulder);
+    const QSharedPointer<VPointF> firstPoint = initData.data->GeometricObject<VPointF>(initData.p1Line);
+    const QSharedPointer<VPointF> secondPoint = initData.data->GeometricObject<VPointF>(initData.p2Line);
+    const QSharedPointer<VPointF> shoulderPoint = initData.data->GeometricObject<VPointF>(initData.pShoulder);
 
-    const qreal result = CheckFormula(_id, formula, data);
+    const qreal result = CheckFormula(initData.id, initData.formula, initData.data);
 
     QPointF fPoint = VToolShoulderPoint::FindPoint(static_cast<QPointF>(*firstPoint),
                                                    static_cast<QPointF>(*secondPoint),
                                                    static_cast<QPointF>(*shoulderPoint), qApp->toPixel(result));
-    quint32 id =  _id;
-    if (typeCreation == Source::FromGui)
+
+    VPointF *p = new VPointF(fPoint, initData.name, initData.mx, initData.my);
+    p->SetShowLabel(initData.showLabel);
+
+    if (initData.typeCreation == Source::FromGui)
     {
-        id = data->AddGObject(new VPointF(fPoint, pointName, mx, my));
-        data->AddLine(p1Line, id);
-        data->AddLine(p2Line, id);
+        initData.id = initData.data->AddGObject(p);
+        initData.data->AddLine(initData.p1Line, initData.id);
+        initData.data->AddLine(initData.p2Line, initData.id);
     }
     else
     {
-        data->UpdateGObject(id, new VPointF(fPoint, pointName, mx, my));
-        data->AddLine(p1Line, id);
-        data->AddLine(p2Line, id);
-        if (parse != Document::FullParse)
+        initData.data->UpdateGObject(initData.id, p);
+        initData.data->AddLine(initData.p1Line, initData.id);
+        initData.data->AddLine(initData.p2Line, initData.id);
+        if (initData.parse != Document::FullParse)
         {
-            doc->UpdateToolData(id, data);
+            initData.doc->UpdateToolData(initData.id, initData.data);
         }
     }
 
-    if (parse == Document::FullParse)
+    if (initData.parse == Document::FullParse)
     {
-        VAbstractTool::AddRecord(id, Tool::ShoulderPoint, doc);
-        VToolShoulderPoint *point = new VToolShoulderPoint(doc, data, id, typeLine, lineColor, formula,
-                                                           p1Line, p2Line, pShoulder,
-                                                           typeCreation);
-        scene->addItem(point);
-        InitToolConnections(scene, point);
-        VAbstractPattern::AddTool(id, point);
-        doc->IncrementReferens(firstPoint->getIdTool());
-        doc->IncrementReferens(secondPoint->getIdTool());
-        doc->IncrementReferens(shoulderPoint->getIdTool());
+        VAbstractTool::AddRecord(initData.id, Tool::ShoulderPoint, initData.doc);
+        VToolShoulderPoint *point = new VToolShoulderPoint(initData);
+        initData.scene->addItem(point);
+        InitToolConnections(initData.scene, point);
+        VAbstractPattern::AddTool(initData.id, point);
+        initData.doc->IncrementReferens(firstPoint->getIdTool());
+        initData.doc->IncrementReferens(secondPoint->getIdTool());
+        initData.doc->IncrementReferens(shoulderPoint->getIdTool());
         return point;
     }
     return nullptr;
@@ -257,24 +238,6 @@ QString VToolShoulderPoint::SecondPointName() const
 QString VToolShoulderPoint::ShoulderPointName() const
 {
     return VAbstractTool::data.GetGObject(pShoulder)->name();
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-/**
- * @brief contextMenuEvent handle context menu events.
- * @param event context menu event.
- */
-void VToolShoulderPoint::contextMenuEvent(QGraphicsSceneContextMenuEvent *event)
-{
-    try
-    {
-        ContextMenu<DialogShoulderPoint>(this, event);
-    }
-    catch(const VExceptionToolWasDeleted &e)
-    {
-        Q_UNUSED(e)
-        return;//Leave this method immediately!!!
-    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -354,12 +317,13 @@ QString VToolShoulderPoint::MakeToolTip() const
 {
     const QSharedPointer<VPointF> first = VAbstractTool::data.GeometricObject<VPointF>(basePointId);
     const QSharedPointer<VPointF> second = VAbstractTool::data.GeometricObject<VPointF>(p2Line);
-    const QSharedPointer<VPointF> current = VAbstractTool::data.GeometricObject<VPointF>(id);
+    const QSharedPointer<VPointF> current = VAbstractTool::data.GeometricObject<VPointF>(m_id);
 
     const QLineF firstToCur(static_cast<QPointF>(*first), static_cast<QPointF>(*current));
     const QLineF secondToCur(static_cast<QPointF>(*second), static_cast<QPointF>(*current));
 
     const QString toolTip = QString("<table>"
+                                    "<tr> <td><b>%8:</b> %9</td> </tr>"
                                     "<tr> <td><b>%1:</b> %2 %3</td> </tr>"
                                     "<tr> <td><b>%4:</b> %5°</td> </tr>"
                                     "<tr> <td><b>%6:</b> %7 %3</td> </tr>"
@@ -370,8 +334,24 @@ QString VToolShoulderPoint::MakeToolTip() const
             .arg(tr("Angle"))
             .arg(firstToCur.angle())
             .arg(QString("%1->%2").arg(second->name(), current->name()))
-            .arg(qApp->fromPixel(secondToCur.length()));
+            .arg(qApp->fromPixel(secondToCur.length()))
+            .arg(tr("Label"))
+            .arg(current->name());
     return toolTip;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VToolShoulderPoint::ShowContextMenu(QGraphicsSceneContextMenuEvent *event, quint32 id)
+{
+    try
+    {
+        ContextMenu<DialogShoulderPoint>(event, id);
+    }
+    catch(const VExceptionToolWasDeleted &e)
+    {
+        Q_UNUSED(e)
+        return;//Leave this method immediately!!!
+    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -389,7 +369,7 @@ void VToolShoulderPoint::setPShoulder(const quint32 &value)
     {
         pShoulder = value;
 
-        QSharedPointer<VGObject> obj = VAbstractTool::data.GetGObject(id);
+        QSharedPointer<VGObject> obj = VAbstractTool::data.GetGObject(m_id);
         SaveOption(obj);
     }
 }
@@ -413,7 +393,7 @@ void VToolShoulderPoint::SetP2Line(const quint32 &value)
     {
         p2Line = value;
 
-        QSharedPointer<VGObject> obj = VAbstractTool::data.GetGObject(id);
+        QSharedPointer<VGObject> obj = VAbstractTool::data.GetGObject(m_id);
         SaveOption(obj);
     }
 }

@@ -55,8 +55,6 @@ protected:
 private:
     Q_DISABLE_COPY(OperationMoveLabel)
     quint32 m_idTool;
-
-    QDomElement GetDestinationObject(quint32 idTool, quint32 idPoint) const;
 };
 
 //---------------------------------------------------------------------------------------------------------------------

@@ -160,6 +160,7 @@ public:
     void               RemovePiece(quint32 id);
 
     void               UpdateGObject(quint32 id, VGObject* obj);
+    void               UpdateGObject(quint32 id, const QSharedPointer<VGObject> &obj);
     void               UpdatePiece(quint32 id, const VPiece &detail);
     void               UpdatePiecePath(quint32 id, const VPiecePath &path);
 
@@ -220,7 +221,7 @@ private:
     const val GetObject(const QHash<key, val> &obj, key id) const;
 
     template <typename val>
-    void UpdateObject(QHash<quint32, val > &obj, const quint32 &id, val point);
+    void UpdateObject(const quint32 &id, val point);
 
     template <typename key, typename val>
     static quint32 AddObject(QHash<key, val> &obj, val value);
@@ -239,6 +240,11 @@ Q_DECLARE_TYPEINFO(VContainer, Q_MOVABLE_TYPE);
 template <typename T>
 const QSharedPointer<T> VContainer::GeometricObject(const quint32 &id) const
 {
+    if (id == NULL_ID)
+    {
+        throw VExceptionBadId(tr("Can't find object"), id);
+    }
+
     QSharedPointer<VGObject> gObj = QSharedPointer<VGObject>();
     if (d->gObjects.contains(id))
     {

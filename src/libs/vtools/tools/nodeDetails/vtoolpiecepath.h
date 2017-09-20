@@ -35,16 +35,23 @@
 
 class DialogTool;
 
+struct VToolPiecePathInitData : public VAbstractNodeInitData
+{
+    VToolPiecePathInitData()
+        : VAbstractNodeInitData(),
+          path()
+    {}
+
+    VPiecePath path;
+};
+
 class VToolPiecePath : public VAbstractNode, public QGraphicsPathItem
 {
     Q_OBJECT
 public:
     static VToolPiecePath* Create(QSharedPointer<DialogTool> dialog, VMainGraphicsScene *scene, VAbstractPattern *doc,
                                   VContainer *data);
-    static VToolPiecePath *Create(quint32 _id, const VPiecePath &path, quint32 pieceId, VMainGraphicsScene *scene,
-                                  VAbstractPattern *doc, VContainer *data, const Document &parse,
-                                  const Source &typeCreation, const QString &drawName = QString(),
-                                  const quint32 &idTool = 0);
+    static VToolPiecePath *Create(VToolPiecePathInitData initData);
 
     virtual int  type() const Q_DECL_OVERRIDE {return Type;}
     enum { Type = UserType + static_cast<int>(Tool::PiecePath)};
@@ -71,9 +78,8 @@ private:
 
     quint32 m_pieceId;
 
-    VToolPiecePath(VAbstractPattern *doc, VContainer *data, quint32 id, quint32 pieceId,  const Source &typeCreation,
-                   const QString &drawName = QString(), const quint32 &idTool = 0, QObject *qoParent = nullptr,
-                   QGraphicsItem * parent = nullptr );
+    VToolPiecePath(const VToolPiecePathInitData &initData, QObject *qoParent = nullptr,
+                   QGraphicsItem *parent = nullptr);
 
     void RefreshGeometry();
 

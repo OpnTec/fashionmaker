@@ -245,21 +245,16 @@ void VContainer::UpdateId(quint32 newId)
 //---------------------------------------------------------------------------------------------------------------------
 /**
  * @brief UpdateObject update object in container
- * @param obj container
  * @param id id of existing object
  * @param point object
  */
 template <typename val>
-void VContainer::UpdateObject(QHash<quint32, val> &obj, const quint32 &id, val point)
+void VContainer::UpdateObject(const quint32 &id, val point)
 {
     Q_ASSERT_X(id != NULL_ID, Q_FUNC_INFO, "id == 0"); //-V654 //-V712
     SCASSERT(point.isNull() == false)
     point->setId(id);
-    if (d->gObjects.contains(id))
-    {
-        d->gObjects[id].clear();
-    }
-    obj[id] = point;
+    d->gObjects.insert(id, point);
     UpdateId(id);
 }
 
@@ -505,7 +500,14 @@ void VContainer::UpdateGObject(quint32 id, VGObject* obj)
 {
     SCASSERT(obj != nullptr)
     QSharedPointer<VGObject> pointer(obj);
-    UpdateObject(d->gObjects, id, pointer);
+    UpdateGObject(id, pointer);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VContainer::UpdateGObject(quint32 id, const QSharedPointer<VGObject> &obj)
+{
+    SCASSERT(not obj.isNull())
+    UpdateObject(id, obj);
     uniqueNames.insert(obj->name());
 }
 

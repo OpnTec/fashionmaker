@@ -36,6 +36,8 @@
 
 class VMainGraphicsScene;
 class VNodeDetail;
+class VToolSinglePointInitData;
+class VToolLinePointInitData;
 
 /**
  * @brief The VPattern class working with pattern file.
@@ -155,10 +157,8 @@ private:
     void           ParseIncrementsElement(const QDomNode& node);
     void           PrepareForParse(const Document &parse);
     void           ToolsCommonAttributes(const QDomElement &domElement, quint32 &id);
-    void           PointsCommonAttributes(const QDomElement &domElement, quint32 &id, QString &name, qreal &mx,
-                                          qreal &my, QString &typeLine, QString &lineColor);
-    void           PointsCommonAttributes(const QDomElement &domElement, quint32 &id, QString &name, qreal &mx,
-                                          qreal &my);
+    void           PointsWithLineCommonAttributes(const QDomElement &domElement, VToolLinePointInitData &initData);
+    void           PointsCommonAttributes(const QDomElement &domElement, VToolSinglePointInitData &initData);
     void           PointsCommonAttributes(const QDomElement &domElement, quint32 &id, qreal &mx, qreal &my);
     void           SplinesCommonAttributes(const QDomElement &domElement, quint32 &id, quint32 &idObject,
                                            quint32 &idTool);

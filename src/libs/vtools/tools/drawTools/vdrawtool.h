@@ -49,6 +49,7 @@
 #include "../vwidgets/vmaingraphicsscene.h"
 #include "../vwidgets/vmaingraphicsview.h"
 #include "../vdatatool.h"
+#include "../vgeometry/vpointf.h"
 
 template <class T> class QSharedPointer;
 
@@ -66,6 +67,9 @@ public:
     QString      getLineType() const;
     virtual void SetTypeLine(const QString &value);
 
+    virtual bool IsLabelVisible(quint32 id) const;
+    virtual void SetLabelVisible(quint32 id, bool visible);
+
 signals:
     void ChangedToolSelection(bool selected, quint32 object, quint32 tool);
 
@@ -76,6 +80,8 @@ public slots:
     virtual void EnableToolMove(bool move);
     virtual void Disable(bool disable, const QString &namePP)=0;
     virtual void DetailsMode(bool mode);
+protected slots:
+    virtual void ShowContextMenu(QGraphicsSceneContextMenuEvent *event, quint32 id=NULL_ID)=0;
 protected:
 
     enum class RemoveOption : bool {Disable = false, Enable = true};
@@ -101,9 +107,10 @@ protected:
 
     void         ReadAttributes();
     virtual void ReadToolAttributes(const QDomElement &domElement)=0;
+    virtual void ChangeLabelVisibility(quint32 id, bool visible);
 
-    template <typename Dialog, typename Tool>
-    void ContextMenu(Tool *tool, QGraphicsSceneContextMenuEvent *event,
+    template <typename Dialog>
+    void ContextMenu(QGraphicsSceneContextMenuEvent *event, quint32 itemId = NULL_ID,
                      const RemoveOption &showRemove = RemoveOption::Enable,
                      const Referens &ref = Referens::Follow);
 
@@ -120,18 +127,17 @@ private:
 };
 
 //---------------------------------------------------------------------------------------------------------------------
-template <typename Dialog, typename Tool>
+template <typename Dialog>
 /**
  * @brief ContextMenu show context menu for tool.
- * @param tool tool.
  * @param event context menu event.
+ * @param itemId id of point. 0 if not a point
  * @param showRemove true - tool enable option delete.
  * @param ref true - do not ignore referens value.
  */
-void VDrawTool::ContextMenu(Tool *tool, QGraphicsSceneContextMenuEvent *event, const RemoveOption &showRemove,
+void VDrawTool::ContextMenu(QGraphicsSceneContextMenuEvent *event, quint32 itemId, const RemoveOption &showRemove,
                             const Referens &ref)
 {
-    SCASSERT(tool != nullptr)
     SCASSERT(event != nullptr)
 
     if (m_suppressContextMenu)
@@ -142,6 +148,18 @@ void VDrawTool::ContextMenu(Tool *tool, QGraphicsSceneContextMenuEvent *event, c
     qCDebug(vTool, "Creating tool context menu.");
     QMenu menu;
     QAction *actionOption = menu.addAction(QIcon::fromTheme("preferences-other"), tr("Options"));
+
+    QAction *actionShowLabel = menu.addAction(tr("Show label"));
+    actionShowLabel->setCheckable(true);
+    if (itemId != NULL_ID)
+    {
+        actionShowLabel->setChecked(IsLabelVisible(itemId));
+    }
+    else
+    {
+       actionShowLabel->setVisible(false);
+    }
+
     QAction *actionRemove = menu.addAction(QIcon::fromTheme("edit-delete"), tr("Delete"));
     if (showRemove == RemoveOption::Enable)
     {
@@ -175,21 +193,25 @@ void VDrawTool::ContextMenu(Tool *tool, QGraphicsSceneContextMenuEvent *event, c
     {
         qCDebug(vTool, "Show options.");
         qApp->getSceneView()->itemClicked(nullptr);
-        m_dialog = QSharedPointer<Dialog>(new Dialog(getData(), id, qApp->getMainWindow()));
+        m_dialog = QSharedPointer<Dialog>(new Dialog(getData(), m_id, qApp->getMainWindow()));
         m_dialog->setModal(true);
 
-        connect(m_dialog.data(), &DialogTool::DialogClosed, tool, &Tool::FullUpdateFromGuiOk);
-        connect(m_dialog.data(), &DialogTool::DialogApplied, tool, &Tool::FullUpdateFromGuiApply);
+        connect(m_dialog.data(), &DialogTool::DialogClosed, this, &VDrawTool::FullUpdateFromGuiOk);
+        connect(m_dialog.data(), &DialogTool::DialogApplied, this, &VDrawTool::FullUpdateFromGuiApply);
 
-        tool->setDialog();
+        this->setDialog();
 
         m_dialog->show();
     }
-    if (selectedAction == actionRemove)
+    else if (selectedAction == actionRemove)
     {
         qCDebug(vTool, "Deleting tool.");
         DeleteTool(); // do not catch exception here
         return; //Leave this method immediately after call!!!
+    }
+    else if (selectedAction == actionShowLabel)
+    {
+        ChangeLabelVisibility(itemId, selectedAction->isChecked());
     }
 }
 
@@ -204,7 +226,7 @@ template <typename Item>
 void VDrawTool::ShowItem(Item *item, quint32 id, bool enable)
 {
     SCASSERT(item != nullptr)
-    if (id == item->id)
+    if (id == item->m_id)
     {
         ShowVisualization(enable);
     }

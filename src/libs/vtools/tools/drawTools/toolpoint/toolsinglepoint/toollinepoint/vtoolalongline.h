@@ -43,6 +43,20 @@
 
 template <class T> class QSharedPointer;
 
+struct VToolAlongLineInitData : public VToolLinePointInitData
+{
+    VToolAlongLineInitData()
+        : VToolLinePointInitData(),
+          formula("100.0"),
+          firstPointId(NULL_ID),
+          secondPointId(NULL_ID)
+    {}
+
+    QString formula;
+    quint32 firstPointId;
+    quint32 secondPointId;
+};
+
 /**
  * @brief The VToolAlongLine class tool for creation point along line.
  */
@@ -53,12 +67,7 @@ public:
     virtual void setDialog() Q_DECL_OVERRIDE;
     static VToolAlongLine* Create(QSharedPointer<DialogTool> dialog, VMainGraphicsScene  *scene,
                                   VAbstractPattern *doc, VContainer *data);
-    static VToolAlongLine* Create(const quint32 _id, const QString &pointName, const QString &typeLine,
-                                  const QString &lineColor, QString &formula, const quint32 &firstPointId,
-                                  const quint32 &secondPointId, const qreal &mx, const qreal &my,
-                                  VMainGraphicsScene *scene, VAbstractPattern *doc, VContainer *data,
-                                  const Document &parse,
-                                  const Source &typeCreation);
+    static VToolAlongLine* Create(VToolAlongLineInitData &initData);
     static const QString ToolType;
     virtual int  type() const Q_DECL_OVERRIDE {return Type;}
     enum { Type = UserType + static_cast<int>(Tool::AlongLine)};
@@ -68,8 +77,9 @@ public:
     quint32      GetSecondPointId() const;
     void         SetSecondPointId(const quint32 &value);
     virtual void ShowVisualization(bool show) Q_DECL_OVERRIDE;
+protected slots:
+    virtual void ShowContextMenu(QGraphicsSceneContextMenuEvent *event, quint32 id=NULL_ID) Q_DECL_OVERRIDE;
 protected:
-    virtual void    contextMenuEvent ( QGraphicsSceneContextMenuEvent * event ) Q_DECL_OVERRIDE;
     virtual void    RemoveReferens() Q_DECL_OVERRIDE;
     virtual void    SaveDialog(QDomElement &domElement) Q_DECL_OVERRIDE;
     virtual void    SaveOptions(QDomElement &tag, QSharedPointer<VGObject> &obj) Q_DECL_OVERRIDE;
@@ -82,10 +92,7 @@ private:
     /** @brief secondPointId id second point of line. */
     quint32       secondPointId;
 
-    VToolAlongLine(VAbstractPattern *doc, VContainer *data, quint32 id, const QString &formula,
-                   const quint32 &firstPointId,
-                   const quint32 &secondPointId, const QString &typeLine, const QString &lineColor,
-                   const Source &typeCreation, QGraphicsItem * parent = nullptr);
+    VToolAlongLine(const VToolAlongLineInitData &initData, QGraphicsItem *parent = nullptr);
 };
 
 #endif // VTOOLALONGLINE_H

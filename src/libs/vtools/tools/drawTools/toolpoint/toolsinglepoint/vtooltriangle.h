@@ -44,6 +44,22 @@
 
 template <class T> class QSharedPointer;
 
+struct VToolTriangleInitData : public VToolSinglePointInitData
+{
+    VToolTriangleInitData()
+        : VToolSinglePointInitData(),
+          axisP1Id(NULL_ID),
+          axisP2Id(NULL_ID),
+          firstPointId(NULL_ID),
+          secondPointId(NULL_ID)
+    {}
+
+    quint32 axisP1Id;
+    quint32 axisP2Id;
+    quint32 firstPointId;
+    quint32 secondPointId;
+};
+
 /**
  * @brief The VToolTriangle class for tool that find point intersection two foots right triangle
  * (triangle with 90 degree).
@@ -55,10 +71,7 @@ public:
     virtual void   setDialog() Q_DECL_OVERRIDE;
     static VToolTriangle *Create(QSharedPointer<DialogTool> dialog, VMainGraphicsScene  *scene, VAbstractPattern *doc,
                                  VContainer *data);
-    static VToolTriangle *Create(const quint32 _id, const QString &pointName, const quint32 &axisP1Id,
-                                 const quint32 &axisP2Id, const quint32 &firstPointId, const quint32 &secondPointId,
-                                 const qreal &mx, const qreal &my, VMainGraphicsScene *scene, VAbstractPattern *doc,
-                                 VContainer *data, const Document &parse, const Source &typeCreation);
+    static VToolTriangle *Create(VToolTriangleInitData initData);
     static QPointF FindPoint(const QPointF &axisP1, const QPointF &axisP2, const QPointF &firstPoint,
                              const QPointF &secondPoint);
     static const QString ToolType;
@@ -85,11 +98,12 @@ public:
     virtual void   ShowVisualization(bool show) Q_DECL_OVERRIDE;
 protected:
     virtual void   RemoveReferens() Q_DECL_OVERRIDE;
-    virtual void   contextMenuEvent ( QGraphicsSceneContextMenuEvent * event ) Q_DECL_OVERRIDE;
     virtual void   SaveDialog(QDomElement &domElement) Q_DECL_OVERRIDE;
     virtual void   SaveOptions(QDomElement &tag, QSharedPointer<VGObject> &obj) Q_DECL_OVERRIDE;
     virtual void   ReadToolAttributes(const QDomElement &domElement) Q_DECL_OVERRIDE;
     virtual void   SetVisualization() Q_DECL_OVERRIDE;
+private slots:
+    virtual void ShowContextMenu(QGraphicsSceneContextMenuEvent *event, quint32 id=NULL_ID) Q_DECL_OVERRIDE;
 private:
     Q_DISABLE_COPY(VToolTriangle)
     /** @brief axisP1Id id first axis point. */
@@ -104,10 +118,7 @@ private:
     /** @brief secondPointId id second triangle point, what lies on the hypotenuse. */
     quint32        secondPointId;
 
-    VToolTriangle(VAbstractPattern *doc, VContainer *data, const quint32 &id, const quint32 &axisP1Id,
-                  const quint32 &axisP2Id,
-                  const quint32 &firstPointId, const quint32 &secondPointId, const Source &typeCreation,
-                  QGraphicsItem * parent = nullptr);
+    VToolTriangle(const VToolTriangleInitData &initData, QGraphicsItem *parent = nullptr);
 };
 
 #endif // VTOOLTRIANGLE_H

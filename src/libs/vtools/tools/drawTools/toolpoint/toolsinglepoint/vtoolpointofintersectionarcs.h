@@ -44,6 +44,20 @@
 
 template <class T> class QSharedPointer;
 
+struct VToolPointOfIntersectionArcsInitData : public VToolSinglePointInitData
+{
+    VToolPointOfIntersectionArcsInitData()
+        : VToolSinglePointInitData(),
+          firstArcId(NULL_ID),
+          secondArcId(NULL_ID),
+          pType(CrossCirclesPoint::FirstPoint)
+    {}
+
+    quint32 firstArcId;
+    quint32 secondArcId;
+    CrossCirclesPoint pType;
+};
+
 class VToolPointOfIntersectionArcs : public VToolSinglePoint
 {
     Q_OBJECT
@@ -52,11 +66,7 @@ public:
     virtual void setDialog() Q_DECL_OVERRIDE;
     static VToolPointOfIntersectionArcs *Create(QSharedPointer<DialogTool> dialog, VMainGraphicsScene  *scene,
                                                 VAbstractPattern *doc, VContainer *data);
-    static VToolPointOfIntersectionArcs *Create(const quint32 _id, const QString &pointName, const quint32 &firstArcId,
-                                                const quint32 &secondArcId, CrossCirclesPoint pType,
-                                                const qreal &mx, const qreal &my, VMainGraphicsScene *scene,
-                                                VAbstractPattern *doc, VContainer *data, const Document &parse,
-                                                const Source &typeCreation);
+    static VToolPointOfIntersectionArcs *Create(VToolPointOfIntersectionArcsInitData initData);
     static QPointF FindPoint(const VArc *arc1, const VArc *arc2, const CrossCirclesPoint pType);
     static const QString ToolType;
     virtual int  type() const Q_DECL_OVERRIDE {return Type;}
@@ -75,9 +85,10 @@ public:
     void              SetCrossCirclesPoint(const CrossCirclesPoint &value);
 
     virtual void ShowVisualization(bool show) Q_DECL_OVERRIDE;
+protected slots:
+    virtual void ShowContextMenu(QGraphicsSceneContextMenuEvent *event, quint32 id=NULL_ID) Q_DECL_OVERRIDE;
 protected:
     virtual void RemoveReferens() Q_DECL_OVERRIDE;
-    virtual void contextMenuEvent ( QGraphicsSceneContextMenuEvent * event ) Q_DECL_OVERRIDE;
     virtual void SaveDialog(QDomElement &domElement) Q_DECL_OVERRIDE;
     virtual void SaveOptions(QDomElement &tag, QSharedPointer<VGObject> &obj) Q_DECL_OVERRIDE;
     virtual void ReadToolAttributes(const QDomElement &domElement) Q_DECL_OVERRIDE;
@@ -93,8 +104,7 @@ private:
 
     CrossCirclesPoint crossPoint;
 
-    VToolPointOfIntersectionArcs(VAbstractPattern *doc, VContainer *data, const quint32 &id, const quint32 &firstArcId,
-                                 const quint32 &secondArcId, CrossCirclesPoint pType, const Source &typeCreation,
+    VToolPointOfIntersectionArcs(const VToolPointOfIntersectionArcsInitData &initData,
                                  QGraphicsItem * parent = nullptr);
 };
 

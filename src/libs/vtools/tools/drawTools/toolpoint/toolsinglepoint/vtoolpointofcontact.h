@@ -45,6 +45,22 @@
 class VFormula;
 template <class T> class QSharedPointer;
 
+struct VToolPointOfContactInitData : public VToolSinglePointInitData
+{
+    VToolPointOfContactInitData()
+        : VToolSinglePointInitData(),
+          radius("0"),
+          center(NULL_ID),
+          firstPointId(NULL_ID),
+          secondPointId(NULL_ID)
+    {}
+
+    QString radius;
+    quint32 center;
+    quint32 firstPointId;
+    quint32 secondPointId;
+};
+
 /**
  * @brief The VToolPointOfContact class tool for creation point intersection line and arc.
  */
@@ -57,12 +73,7 @@ public:
                              const QPointF &secondPoint);
     static VToolPointOfContact* Create(QSharedPointer<DialogTool> dialog, VMainGraphicsScene  *scene,
                                        VAbstractPattern *doc, VContainer *data);
-    static VToolPointOfContact* Create(const quint32 _id, QString &radius, const quint32 &center,
-                                       const quint32 &firstPointId, const quint32 &secondPointId,
-                                       const QString &pointName,
-                                       const qreal &mx, const qreal &my, VMainGraphicsScene  *scene,
-                                       VAbstractPattern *doc,
-                                       VContainer *data, const Document &parse, const Source &typeCreation);
+    static VToolPointOfContact* Create(VToolPointOfContactInitData &initData);
     static const QString ToolType;
     virtual int    type() const Q_DECL_OVERRIDE {return Type;}
     enum { Type = UserType + static_cast<int>(Tool::PointOfContact) };
@@ -84,8 +95,9 @@ public:
     void    SetSecondPointId(const quint32 &value);
 
     virtual void   ShowVisualization(bool show) Q_DECL_OVERRIDE;
+protected slots:
+    virtual void ShowContextMenu(QGraphicsSceneContextMenuEvent *event, quint32 id=NULL_ID) Q_DECL_OVERRIDE;
 protected:
-    virtual void    contextMenuEvent ( QGraphicsSceneContextMenuEvent * event ) Q_DECL_OVERRIDE;
     virtual void    RemoveReferens() Q_DECL_OVERRIDE;
     virtual void    SaveDialog(QDomElement &domElement) Q_DECL_OVERRIDE;
     virtual void    SaveOptions(QDomElement &tag, QSharedPointer<VGObject> &obj) Q_DECL_OVERRIDE;
@@ -107,9 +119,7 @@ private:
     /** @brief secondPointId id second line point. */
     quint32        secondPointId;
 
-    VToolPointOfContact(VAbstractPattern *doc, VContainer *data, const quint32 &id, const QString &radius,
-                        const quint32 &center, const quint32 &firstPointId, const quint32 &secondPointId,
-                        const Source &typeCreation, QGraphicsItem * parent = nullptr);
+    VToolPointOfContact(const VToolPointOfContactInitData &initData, QGraphicsItem *parent = nullptr);
 };
 
 #endif // VTOOLPOINTOFCONTACT_H

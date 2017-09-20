@@ -43,6 +43,18 @@
 
 template <class T> class QSharedPointer;
 
+struct VToolCutSplineInitData : public VToolSinglePointInitData
+{
+    VToolCutSplineInitData()
+        : VToolSinglePointInitData(),
+          formula(),
+          splineId(NULL_ID)
+    {}
+
+    QString formula;
+    quint32 splineId;
+};
+
 /**
  * @brief The VToolCutSpline class for tool CutSpline. This tool find point on spline and cut spline on two.
  */
@@ -53,18 +65,15 @@ public:
     virtual void setDialog() Q_DECL_OVERRIDE;
     static VToolCutSpline *Create(QSharedPointer<DialogTool> dialog, VMainGraphicsScene  *scene, VAbstractPattern *doc,
                                   VContainer *data);
-    static VToolCutSpline *Create(const quint32 _id, const QString &pointName, QString &formula,
-                                  const quint32 &splineId, const qreal &mx, const qreal &my,
-                                  VMainGraphicsScene *scene, VAbstractPattern *doc, VContainer *data,
-                                  const Document &parse,
-                                  const Source &typeCreation);
+    static VToolCutSpline *Create(VToolCutSplineInitData &initData);
     static const QString ToolType;
     static const QString AttrSpline;
     virtual int  type() const Q_DECL_OVERRIDE {return Type;}
     enum { Type = UserType + static_cast<int>(Tool::CutSpline)};
     virtual void  ShowVisualization(bool show) Q_DECL_OVERRIDE;
+protected slots:
+    virtual void ShowContextMenu(QGraphicsSceneContextMenuEvent *event, quint32 id=NULL_ID) Q_DECL_OVERRIDE;
 protected:
-    virtual void    contextMenuEvent ( QGraphicsSceneContextMenuEvent * event ) Q_DECL_OVERRIDE;
     virtual void    SaveDialog(QDomElement &domElement) Q_DECL_OVERRIDE;
     virtual void    SaveOptions(QDomElement &tag, QSharedPointer<VGObject> &obj) Q_DECL_OVERRIDE;
     virtual void    ReadToolAttributes(const QDomElement &domElement) Q_DECL_OVERRIDE;
@@ -73,8 +82,7 @@ protected:
 private:
     Q_DISABLE_COPY(VToolCutSpline)
 
-    VToolCutSpline(VAbstractPattern *doc, VContainer *data, const quint32 &id, const QString &formula,
-                   const quint32 &splineId, const Source &typeCreation, QGraphicsItem * parent = nullptr);
+    VToolCutSpline(const VToolCutSplineInitData &initData, QGraphicsItem * parent = nullptr);
 };
 
 #endif // VTOOLCUTSPLINE_H

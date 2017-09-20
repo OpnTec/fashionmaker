@@ -44,6 +44,22 @@
 
 template <class T> class QSharedPointer;
 
+struct VToolShoulderPointInitData : public VToolLinePointInitData
+{
+    VToolShoulderPointInitData()
+        : VToolLinePointInitData(),
+          formula(),
+          p1Line(NULL_ID),
+          p2Line(NULL_ID),
+          pShoulder(NULL_ID)
+    {}
+
+    QString formula;
+    quint32 p1Line;
+    quint32 p2Line;
+    quint32 pShoulder;
+};
+
 /**
  * @brief The VToolShoulderPoint class tool for creation point on shoulder. This tool for special situation, when you
  * want find point along line, but have only length from another point (shoulder).
@@ -57,12 +73,7 @@ public:
                              const qreal &length);
     static VToolShoulderPoint* Create(QSharedPointer<DialogTool> dialog, VMainGraphicsScene  *scene,
                                       VAbstractPattern *doc, VContainer *data);
-    static VToolShoulderPoint* Create(const quint32 _id, QString &formula, const quint32 &p1Line, const quint32 &p2Line,
-                                      const quint32 &pShoulder, const QString &typeLine, const QString &lineColor,
-                                      const QString &pointName, const qreal &mx, const qreal &my,
-                                      VMainGraphicsScene *scene, VAbstractPattern *doc, VContainer *data,
-                                      const Document &parse,
-                                      const Source &typeCreation);
+    static VToolShoulderPoint* Create(VToolShoulderPointInitData &initData);
     static const QString ToolType;
     virtual int    type() const Q_DECL_OVERRIDE {return Type;}
     enum { Type = UserType + static_cast<int>(Tool::ShoulderPoint) };
@@ -78,13 +89,14 @@ public:
 
     virtual void   ShowVisualization(bool show) Q_DECL_OVERRIDE;
 protected:
-    virtual void    contextMenuEvent ( QGraphicsSceneContextMenuEvent * event ) Q_DECL_OVERRIDE;
     virtual void    RemoveReferens() Q_DECL_OVERRIDE;
     virtual void    SaveDialog(QDomElement &domElement) Q_DECL_OVERRIDE;
     virtual void    SaveOptions(QDomElement &tag, QSharedPointer<VGObject> &obj) Q_DECL_OVERRIDE;
     virtual void    ReadToolAttributes(const QDomElement &domElement) Q_DECL_OVERRIDE;
     virtual void    SetVisualization() Q_DECL_OVERRIDE;
     virtual QString MakeToolTip() const Q_DECL_OVERRIDE;
+private slots:
+    virtual void ShowContextMenu(QGraphicsSceneContextMenuEvent *event, quint32 id=NULL_ID) Q_DECL_OVERRIDE;
 private:
     Q_DISABLE_COPY(VToolShoulderPoint)
 
@@ -94,9 +106,7 @@ private:
     /** @brief pShoulder id shoulder line point. */
     quint32         pShoulder;
 
-    VToolShoulderPoint(VAbstractPattern *doc, VContainer *data, const quint32 &id, const QString &typeLine,
-                       const QString &lineColor, const QString &formula, const quint32 &p1Line, const quint32 &p2Line,
-                       const quint32 &pShoulder, const Source &typeCreation, QGraphicsItem * parent = nullptr);
+    VToolShoulderPoint(const VToolShoulderPointInitData &initData, QGraphicsItem *parent = nullptr);
 };
 
 #endif // VTOOLSHOULDERPOINT_H

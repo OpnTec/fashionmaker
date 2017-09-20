@@ -44,60 +44,47 @@ const QString VNodeSpline::ToolType = QStringLiteral("modelingSpline");
 //---------------------------------------------------------------------------------------------------------------------
 /**
  * @brief VNodeSpline constructor.
- * @param doc dom document container.
- * @param data container with variables.
- * @param id object id in container.
- * @param idSpline object id in containerSpline.
- * @param typeCreation way we create this tool.
- * @param idTool id node.
+ * @param initData init data.
  * @param qoParent QObject parent.
  */
-VNodeSpline::VNodeSpline(VAbstractPattern *doc, VContainer *data, quint32 id, quint32 idSpline,
-                         const Source &typeCreation, const QString &drawName, const quint32 &idTool, QObject *qoParent)
-    :VAbstractNode(doc, data, id, idSpline, drawName, idTool, qoParent)
+VNodeSpline::VNodeSpline(const VAbstractNodeInitData &initData, QObject *qoParent)
+    :VAbstractNode(initData.doc, initData.data, initData.id, initData.idObject, initData.drawName, initData.idTool,
+                   qoParent)
 {
-    ToolCreation(typeCreation);
+    ToolCreation(initData.typeCreation);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 /**
  * @brief Create help create tool.
- * @param doc dom document container.
- * @param data container with variables.
- * @param id object id in container.
- * @param idSpline object id in containerSpline.
- * @param parse parser file mode.
- * @param typeCreation way we create this tool.
- * @param idTool id node.
+ * @param initData init data.
  * @return pointer to node.
  */
-VNodeSpline *VNodeSpline::Create(VAbstractPattern *doc, VContainer *data, quint32 id,
-                                 quint32 idSpline, const Document &parse,
-                                 const Source &typeCreation, const QString &drawName, const quint32 &idTool)
+VNodeSpline *VNodeSpline::Create(VAbstractNodeInitData initData)
 {
     VNodeSpline *spl = nullptr;
-    if (parse == Document::FullParse)
+    if (initData.parse == Document::FullParse)
     {
-        VAbstractTool::AddRecord(id, Tool::NodeSpline, doc);
-        spl = new VNodeSpline(doc, data, id, idSpline, typeCreation, drawName, idTool, doc);
+        VAbstractTool::AddRecord(initData.id, Tool::NodeSpline, initData.doc);
+        spl = new VNodeSpline(initData);
 
-        VAbstractPattern::AddTool(id, spl);
-        if (idTool != NULL_ID)
+        VAbstractPattern::AddTool(initData.id, spl);
+        if (initData.idTool != NULL_ID)
         {
             //Some nodes we don't show on scene. Tool that create this nodes must free memory.
-            VDataTool *tool = VAbstractPattern::getTool(idTool);
+            VDataTool *tool = VAbstractPattern::getTool(initData.idTool);
             SCASSERT(tool != nullptr)
             spl->setParent(tool);// Adopted by a tool
         }
         else
         {
             // Help to delete the node before each FullParse
-            doc->AddToolOnRemove(spl);
+            initData.doc->AddToolOnRemove(spl);
         }
     }
     else
     {
-        doc->UpdateToolData(id, data);
+        initData.doc->UpdateToolData(initData.id, initData.data);
     }
     return spl;
 }
@@ -130,7 +117,7 @@ void VNodeSpline::AddToFile()
 {
     QDomElement domElement = doc->createElement(getTagName());
 
-    doc->SetAttribute(domElement, VDomDocument::AttrId, id);
+    doc->SetAttribute(domElement, VDomDocument::AttrId, m_id);
     doc->SetAttribute(domElement, AttrType, ToolType);
     doc->SetAttribute(domElement, AttrIdObject, idNode);
     if (idTool != NULL_ID)

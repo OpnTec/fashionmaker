@@ -59,15 +59,14 @@
 const QString VToolCubicBezierPath::ToolType = QStringLiteral("cubicBezierPath");
 
 //---------------------------------------------------------------------------------------------------------------------
-VToolCubicBezierPath::VToolCubicBezierPath(VAbstractPattern *doc, VContainer *data, quint32 id,
-                                           const Source &typeCreation, QGraphicsItem *parent)
-    : VAbstractSpline(doc, data, id, parent)
+VToolCubicBezierPath::VToolCubicBezierPath(const VToolCubicBezierPathInitData &initData, QGraphicsItem *parent)
+    : VAbstractSpline(initData.doc, initData.data, initData.id, parent)
 {
     sceneType = SceneObject::SplinePath;
 
     this->setFlag(QGraphicsItem::ItemIsFocusable, true);// For keyboard input focus
 
-    ToolCreation(typeCreation);
+    ToolCreation(initData.typeCreation);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -76,7 +75,7 @@ void VToolCubicBezierPath::setDialog()
     SCASSERT(not m_dialog.isNull())
     auto dialogTool = qobject_cast<DialogCubicBezierPath*>(m_dialog);
     SCASSERT(dialogTool != nullptr)
-    const QSharedPointer<VCubicBezierPath> splPath = VAbstractTool::data.GeometricObject<VCubicBezierPath>(id);
+    const QSharedPointer<VCubicBezierPath> splPath = VAbstractTool::data.GeometricObject<VCubicBezierPath>(m_id);
     dialogTool->SetPath(*splPath);
     dialogTool->SetColor(splPath->GetColor());
     dialogTool->SetPenStyle(splPath->GetPenStyle());
@@ -89,17 +88,25 @@ VToolCubicBezierPath *VToolCubicBezierPath::Create(QSharedPointer<DialogTool> di
     SCASSERT(not dialog.isNull())
     QSharedPointer<DialogCubicBezierPath> dialogTool = dialog.objectCast<DialogCubicBezierPath>();
     SCASSERT(not dialogTool.isNull())
-    auto path = new VCubicBezierPath(dialogTool->GetPath());
+
+    VToolCubicBezierPathInitData initData;
+    initData.scene = scene;
+    initData.doc = doc;
+    initData.data = data;
+    initData.parse = Document::FullParse;
+    initData.typeCreation = Source::FromGui;
+
+    initData.path = new VCubicBezierPath(dialogTool->GetPath());
     const QString color = dialogTool->GetColor();
     const QString penStyle = dialogTool->GetPenStyle();
-    for (qint32 i = 0; i < path->CountPoints(); ++i)
+    for (qint32 i = 0; i < initData.path->CountPoints(); ++i)
     {
-        doc->IncrementReferens((*path)[i].getIdTool());
+        doc->IncrementReferens((*initData.path)[i].getIdTool());
     }
-    path->SetColor(color);
-    path->SetPenStyle(penStyle);
+    initData.path->SetColor(color);
+    initData.path->SetPenStyle(penStyle);
 
-    VToolCubicBezierPath* spl = Create(0, path, scene, doc, data, Document::FullParse, Source::FromGui);
+    VToolCubicBezierPath* spl = Create(initData);
     if (spl != nullptr)
     {
         spl->m_dialog = dialogTool;
@@ -108,33 +115,32 @@ VToolCubicBezierPath *VToolCubicBezierPath::Create(QSharedPointer<DialogTool> di
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-VToolCubicBezierPath *VToolCubicBezierPath::Create(const quint32 _id, VCubicBezierPath *path, VMainGraphicsScene *scene,
-                                                   VAbstractPattern *doc, VContainer *data, const Document &parse,
-                                                   const Source &typeCreation)
+VToolCubicBezierPath *VToolCubicBezierPath::Create(VToolCubicBezierPathInitData initData)
 {
-    quint32 id = _id;
-    if (typeCreation == Source::FromGui)
+    if (initData.typeCreation == Source::FromGui)
     {
-        id = data->AddGObject(path);
-        data->AddCurveWithSegments(data->GeometricObject<VAbstractCubicBezierPath>(id), id);
+        initData.id = initData.data->AddGObject(initData.path);
+        initData.data->AddCurveWithSegments(initData.data->GeometricObject<VAbstractCubicBezierPath>(initData.id),
+                                            initData.id);
     }
     else
     {
-        data->UpdateGObject(id, path);
-        data->AddCurveWithSegments(data->GeometricObject<VAbstractCubicBezierPath>(id), id);
-        if (parse != Document::FullParse)
+        initData.data->UpdateGObject(initData.id, initData.path);
+        initData.data->AddCurveWithSegments(initData.data->GeometricObject<VAbstractCubicBezierPath>(initData.id),
+                                            initData.id);
+        if (initData.parse != Document::FullParse)
         {
-            doc->UpdateToolData(id, data);
+            initData.doc->UpdateToolData(initData.id, initData.data);
         }
     }
 
-    if (parse == Document::FullParse)
+    if (initData.parse == Document::FullParse)
     {
-        VAbstractTool::AddRecord(id, Tool::CubicBezierPath, doc);
-        VToolCubicBezierPath *spl = new VToolCubicBezierPath(doc, data, id, typeCreation);
-        scene->addItem(spl);
-        InitSplinePathToolConnections(scene, spl);
-        VAbstractPattern::AddTool(id, spl);
+        VAbstractTool::AddRecord(initData.id, Tool::CubicBezierPath, initData.doc);
+        VToolCubicBezierPath *spl = new VToolCubicBezierPath(initData);
+        initData.scene->addItem(spl);
+        InitSplinePathToolConnections(initData.scene, spl);
+        VAbstractPattern::AddTool(initData.id, spl);
         return spl;
     }
     return nullptr;
@@ -153,14 +159,14 @@ void VToolCubicBezierPath::UpdatePathPoints(VAbstractPattern *doc, QDomElement &
 //---------------------------------------------------------------------------------------------------------------------
 VCubicBezierPath VToolCubicBezierPath::getSplinePath() const
 {
-    QSharedPointer<VCubicBezierPath> splPath = VAbstractTool::data.GeometricObject<VCubicBezierPath>(id);
+    QSharedPointer<VCubicBezierPath> splPath = VAbstractTool::data.GeometricObject<VCubicBezierPath>(m_id);
     return *splPath.data();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void VToolCubicBezierPath::setSplinePath(const VCubicBezierPath &splPath)
 {
-    QSharedPointer<VGObject> obj = VAbstractTool::data.GetGObject(id);
+    QSharedPointer<VGObject> obj = VAbstractTool::data.GetGObject(m_id);
     QSharedPointer<VCubicBezierPath> splinePath = qSharedPointerDynamicCast<VCubicBezierPath>(obj);
     *splinePath.data() = splPath;
     SaveOption(obj);
@@ -173,11 +179,12 @@ void VToolCubicBezierPath::ShowVisualization(bool show)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VToolCubicBezierPath::contextMenuEvent(QGraphicsSceneContextMenuEvent *event)
+void VToolCubicBezierPath::ShowContextMenu(QGraphicsSceneContextMenuEvent *event, quint32 id)
 {
+    Q_UNUSED(id)
     try
     {
-        ContextMenu<DialogCubicBezierPath>(this, event);
+        ContextMenu<DialogCubicBezierPath>(event);
     }
     catch(const VExceptionToolWasDeleted &e)
     {
@@ -189,7 +196,7 @@ void VToolCubicBezierPath::contextMenuEvent(QGraphicsSceneContextMenuEvent *even
 //---------------------------------------------------------------------------------------------------------------------
 void VToolCubicBezierPath::RemoveReferens()
 {
-    const QSharedPointer<VCubicBezierPath> splPath = VAbstractTool::data.GeometricObject<VCubicBezierPath>(id);
+    const QSharedPointer<VCubicBezierPath> splPath = VAbstractTool::data.GeometricObject<VCubicBezierPath>(m_id);
     for (qint32 i = 0; i < splPath->CountSubSpl(); ++i)
     {
         doc->DecrementReferens(splPath->at(i).getIdTool());
@@ -227,7 +234,7 @@ void VToolCubicBezierPath::SetVisualization()
         auto visual = qobject_cast<VisToolCubicBezierPath *>(vis);
         SCASSERT(visual != nullptr)
 
-        QSharedPointer<VCubicBezierPath> splPath = VAbstractTool::data.GeometricObject<VCubicBezierPath>(id);
+        QSharedPointer<VCubicBezierPath> splPath = VAbstractTool::data.GeometricObject<VCubicBezierPath>(m_id);
         visual->setPath(*splPath.data());
         visual->setLineStyle(LineStyleToPenStyle(splPath->GetPenStyle()));
         visual->SetMode(Mode::Show);
@@ -238,7 +245,7 @@ void VToolCubicBezierPath::SetVisualization()
 //---------------------------------------------------------------------------------------------------------------------
 void VToolCubicBezierPath::RefreshGeometry()
 {
-    QSharedPointer<VCubicBezierPath> splPath = VAbstractTool::data.GeometricObject<VCubicBezierPath>(id);
+    QSharedPointer<VCubicBezierPath> splPath = VAbstractTool::data.GeometricObject<VCubicBezierPath>(m_id);
     setPath(splPath->GetPath());
 
     SetVisualization();

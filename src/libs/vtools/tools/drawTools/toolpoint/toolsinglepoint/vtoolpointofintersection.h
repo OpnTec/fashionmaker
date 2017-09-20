@@ -43,6 +43,18 @@
 
 template <class T> class QSharedPointer;
 
+struct VToolPointOfIntersectionInitData : public VToolSinglePointInitData
+{
+    VToolPointOfIntersectionInitData()
+        : VToolSinglePointInitData(),
+          firstPointId(NULL_ID),
+          secondPointId(NULL_ID)
+    {}
+
+    quint32 firstPointId;
+    quint32 secondPointId;
+};
+
 /**
  * @brief The VToolPointOfIntersection class tool for creation point intersection two lines.
  */
@@ -53,10 +65,7 @@ public:
     virtual void setDialog() Q_DECL_OVERRIDE;
     static VToolPointOfIntersection *Create(QSharedPointer<DialogTool> dialog, VMainGraphicsScene  *scene,
                                             VAbstractPattern *doc, VContainer *data);
-    static VToolPointOfIntersection *Create(const quint32 _id, const QString &pointName, const quint32 &firstPointId,
-                                            const quint32 &secondPointId, const qreal &mx, const qreal &my,
-                                            VMainGraphicsScene *scene, VAbstractPattern *doc, VContainer *data,
-                                            const Document &parse, const Source &typeCreation);
+    static VToolPointOfIntersection *Create(VToolPointOfIntersectionInitData initData);
     static const QString ToolType;
     virtual int  type() const Q_DECL_OVERRIDE {return Type;}
     enum { Type = UserType + static_cast<int>(Tool::PointOfIntersection) };
@@ -73,11 +82,12 @@ public:
     virtual void ShowVisualization(bool show) Q_DECL_OVERRIDE;
 protected:
     virtual void RemoveReferens() Q_DECL_OVERRIDE;
-    virtual void contextMenuEvent ( QGraphicsSceneContextMenuEvent * event ) Q_DECL_OVERRIDE;
     virtual void SaveDialog(QDomElement &domElement) Q_DECL_OVERRIDE;
     virtual void SaveOptions(QDomElement &tag, QSharedPointer<VGObject> &obj) Q_DECL_OVERRIDE;
     virtual void ReadToolAttributes(const QDomElement &domElement) Q_DECL_OVERRIDE;
     virtual void SetVisualization() Q_DECL_OVERRIDE;
+private slots:
+    virtual void ShowContextMenu(QGraphicsSceneContextMenuEvent *event, quint32 id=NULL_ID) Q_DECL_OVERRIDE;
 private:
     Q_DISABLE_COPY(VToolPointOfIntersection)
 
@@ -87,9 +97,7 @@ private:
     /** @brief secondPointId id second line point. */
     quint32       secondPointId;
 
-    VToolPointOfIntersection(VAbstractPattern *doc, VContainer *data, const quint32 &id, const quint32 &firstPointId,
-                             const quint32 &secondPointId, const Source &typeCreation,
-                             QGraphicsItem * parent = nullptr);
+    VToolPointOfIntersection(const VToolPointOfIntersectionInitData &initData, QGraphicsItem *parent = nullptr);
 };
 
 #endif // VTOOLPOINTOFINTERSECTION_H

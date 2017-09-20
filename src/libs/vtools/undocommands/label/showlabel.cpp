@@ -1,14 +1,14 @@
 /************************************************************************
  **
- **  @file   vabstractsimple.cpp
+ **  @file
  **  @author Roman Telezhynskyi <dismine(at)gmail.com>
- **  @date   20 6, 2015
+ **  @date   17 9, 2017
  **
  **  @brief
  **  @copyright
  **  This source code is part of the Valentine project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
- **  Copyright (C) 2015 Valentina project
+ **  Copyright (C) 2017 Valentina project
  **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
  **
  **  Valentina is free software: you can redistribute it and/or modify
@@ -26,31 +26,70 @@
  **
  *************************************************************************/
 
-#include "vabstractsimple.h"
+#include "showlabel.h"
+
+#include <QDomElement>
+
+#include "../ifc/xml/vabstractpattern.h"
+#include "../vmisc/logging.h"
+#include "../vwidgets/vmaingraphicsview.h"
+#include "../vmisc/vabstractapplication.h"
+#include "../vtools/tools/drawTools/vdrawtool.h"
 
 //---------------------------------------------------------------------------------------------------------------------
-VAbstractSimple::VAbstractSimple(quint32 id, QObject *parent)
-    : QObject(parent),
-      id (id),
-      selectionType(SelectionType::ByMouseRelease),
-      type(GOType::Unknown)
+ShowLabel::ShowLabel(VAbstractPattern *doc, quint32 id, bool visible, QUndoCommand *parent)
+    : VUndoCommand(QDomElement(), doc, parent),
+      m_visible(visible),
+      m_oldVisible(true),
+      m_scene(qApp->getCurrentScene())
 {
+    setText(tr("toggle label"));
+
+    nodeId = id;
+
+    QDomElement domElement = doc->elementById(nodeId, VAbstractPattern::TagPoint);
+    if (domElement.isElement())
+    {
+        m_oldVisible = doc->GetParametrBool(domElement, AttrShowLabel, trueStr);
+    }
+    else
+    {
+        qCDebug(vUndo, "Can't find point with id = %u.", nodeId);
+    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VAbstractSimple::ToolSelectionType(const SelectionType &type)
+void ShowLabel::undo()
 {
-    selectionType = type;
+    qCDebug(vUndo, "Undo.");
+
+    Do(m_oldVisible);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-GOType VAbstractSimple::GetType() const
+void ShowLabel::redo()
 {
-    return type;
+    qCDebug(vUndo, "Redo.");
+
+    Do(m_visible);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VAbstractSimple::SetType(const GOType &value)
+void ShowLabel::Do(bool visible)
 {
-    type = value;
+    QDomElement domElement = doc->elementById(nodeId, VAbstractPattern::TagPoint);
+    if (domElement.isElement())
+    {
+        doc->SetAttribute<bool>(domElement, AttrShowLabel, visible);
+
+        if (VDrawTool *tool = qobject_cast<VDrawTool *>(VAbstractPattern::getTool(nodeId)))
+        {
+            tool->SetLabelVisible(nodeId, visible);
+        }
+        VMainGraphicsView::NewSceneRect(m_scene, qApp->getSceneView());
+    }
+    else
+    {
+        qCDebug(vUndo, "Can't find point with id = %u.", nodeId);
+    }
 }

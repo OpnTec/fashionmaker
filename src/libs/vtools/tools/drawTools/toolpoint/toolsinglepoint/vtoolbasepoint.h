@@ -45,6 +45,20 @@
 
 template <class T> class QSharedPointer;
 
+struct VToolBasePointInitData : public VToolSinglePointInitData
+{
+    VToolBasePointInitData()
+        : VToolSinglePointInitData(),
+          nameActivPP(),
+          x(10),
+          y(10)
+    {}
+
+    QString nameActivPP;
+    qreal x;
+    qreal y;
+};
+
 /**
  * @brief The VToolBasePoint class tool for creation pattern base point. Only base point can move. All object
  * pattern peace depend on base point.
@@ -55,9 +69,7 @@ class VToolBasePoint : public VToolSinglePoint
 public:
     virtual ~VToolBasePoint() =default;
     virtual void setDialog() Q_DECL_OVERRIDE;
-    static VToolBasePoint *Create(quint32 _id, const QString &nameActivPP, VPointF *point,
-                                  VMainGraphicsScene *scene, VAbstractPattern *doc, VContainer *data,
-                                  const Document &parse, const Source &typeCreation);
+    static VToolBasePoint *Create(VToolBasePointInitData initData);
     static const QString ToolType;
     virtual int  type() const Q_DECL_OVERRIDE {return Type;}
     enum { Type = UserType + static_cast<int>(Tool::BasePoint)};
@@ -75,7 +87,6 @@ signals:
      */
     void         LiteUpdateTree();
 protected:
-    virtual void contextMenuEvent ( QGraphicsSceneContextMenuEvent * event ) Q_DECL_OVERRIDE;
     virtual void AddToFile() Q_DECL_OVERRIDE;
     virtual QVariant itemChange ( GraphicsItemChange change, const QVariant &value ) Q_DECL_OVERRIDE;
     virtual void DeleteTool(bool ask = true) Q_DECL_OVERRIDE;
@@ -87,13 +98,15 @@ protected:
     virtual void SaveOptions(QDomElement &tag, QSharedPointer<VGObject> &obj) Q_DECL_OVERRIDE;
     virtual void ReadToolAttributes(const QDomElement &domElement) Q_DECL_OVERRIDE;
     virtual void SetVisualization() Q_DECL_OVERRIDE {}
+    virtual QString MakeToolTip() const Q_DECL_OVERRIDE;
+private slots:
+    virtual void ShowContextMenu(QGraphicsSceneContextMenuEvent *event, quint32 id=NULL_ID) Q_DECL_OVERRIDE;
 private:
     Q_DISABLE_COPY(VToolBasePoint)
 
     QString namePP;
 
-    VToolBasePoint (VAbstractPattern *doc, VContainer *data, quint32 id, const Source &typeCreation,
-                      const QString &namePP, QGraphicsItem * parent = nullptr );
+    VToolBasePoint (const VToolBasePointInitData &initData, QGraphicsItem * parent = nullptr );
 };
 
 #endif // VTOOLBASEPOINT_H

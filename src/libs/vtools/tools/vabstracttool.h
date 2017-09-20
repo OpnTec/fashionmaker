@@ -49,6 +49,26 @@
 class VGraphicsSimpleTextItem;
 class VAbstractNode;
 
+struct VAbstractToolInitData
+{
+    VAbstractToolInitData()
+        : id(NULL_ID),
+          scene(nullptr),
+          doc(nullptr),
+          data(nullptr),
+          parse(Document::FullParse),
+          typeCreation(Source::FromFile)
+    {}
+
+    /** @brief id tool id, 0 if tool doesn't exist yet.*/
+    quint32             id;
+    VMainGraphicsScene *scene;
+    VAbstractPattern   *doc;
+    VContainer         *data;
+    Document            parse;
+    Source              typeCreation;
+};
+
 /**
  * @brief The VAbstractTool abstract class for all tools.
  */
@@ -109,7 +129,7 @@ protected:
     VAbstractPattern         *doc;
 
     /** @brief id object id. */
-    const quint32            id;
+    const quint32            m_id;
 
     QPointer<Visualization> vis;
     SelectionType           selectionType;
@@ -153,7 +173,7 @@ private:
  */
 inline quint32 VAbstractTool::getId() const
 {
-    return id;
+    return m_id;
 }
 
 //---------------------------------------------------------------------------------------------------------------------

@@ -35,14 +35,22 @@
 
 class DialogTool;
 
+struct VToolPinInitData : public VAbstractNodeInitData
+{
+    VToolPinInitData()
+        : VAbstractNodeInitData(),
+          pointId(NULL_ID)
+    {}
+
+    quint32 pointId;
+};
+
 class VToolPin : public VAbstractNode
 {
     Q_OBJECT
 public:
     static VToolPin* Create(QSharedPointer<DialogTool> dialog, VAbstractPattern *doc, VContainer *data);
-    static VToolPin *Create(quint32 _id, quint32 pointId, quint32 pieceId, VAbstractPattern *doc, VContainer *data,
-                            const Document &parse, const Source &typeCreation, const QString &drawName = QString(),
-                            const quint32 &idTool = 0);
+    static VToolPin *Create(VToolPinInitData initData);
 
     static const QString ToolType;
     virtual QString getTagName() const Q_DECL_OVERRIDE;
@@ -59,9 +67,7 @@ private:
 
     quint32 m_pieceId;
 
-    VToolPin(VAbstractPattern *doc, VContainer *data, quint32 id, quint32 pointId, quint32 pieceId,
-             const Source &typeCreation, const QString &drawName = QString(), const quint32 &idTool = 0,
-             QObject *qoParent = nullptr);
+    VToolPin(const VToolPinInitData &initData, QObject *qoParent = nullptr);
 };
 
 #endif // VTOOLPIN_H

@@ -46,6 +46,20 @@
 
 template <class T> class QSharedPointer;
 
+struct VToolCurveIntersectAxisInitData : public VToolLinePointInitData
+{
+    VToolCurveIntersectAxisInitData()
+        : VToolLinePointInitData(),
+          formulaAngle("0"),
+          basePointId(NULL_ID),
+          curveId(NULL_ID)
+    {}
+
+    QString formulaAngle;
+    quint32 basePointId;
+    quint32 curveId;
+};
+
 class VToolCurveIntersectAxis : public VToolLinePoint
 {
     Q_OBJECT
@@ -55,11 +69,7 @@ public:
 
     static VToolCurveIntersectAxis *Create(QSharedPointer<DialogTool> dialog, VMainGraphicsScene *scene,
                                            VAbstractPattern *doc, VContainer *data);
-    static VToolCurveIntersectAxis *Create(const quint32 _id, const QString &pointName, const QString &typeLine,
-                                           const QString &lineColor, QString &formulaAngle, const quint32 &basePointId,
-                                           const quint32 &curveId, const qreal &mx, const qreal &my,
-                                           VMainGraphicsScene  *scene, VAbstractPattern *doc, VContainer *data,
-                                           const Document &parse, const Source &typeCreation);
+    static VToolCurveIntersectAxis *Create(VToolCurveIntersectAxisInitData &initData);
 
     static QPointF FindPoint(const QPointF &point, qreal angle, const QSharedPointer<VAbstractCurve> &curve);
 
@@ -76,8 +86,9 @@ public:
     void         setCurveId(const quint32 &value);
 
     virtual void ShowVisualization(bool show) Q_DECL_OVERRIDE;
+protected slots:
+    virtual void ShowContextMenu(QGraphicsSceneContextMenuEvent *event, quint32 id=NULL_ID) Q_DECL_OVERRIDE;
 protected:
-    virtual void contextMenuEvent ( QGraphicsSceneContextMenuEvent * event ) Q_DECL_OVERRIDE;
     virtual void SaveDialog(QDomElement &domElement) Q_DECL_OVERRIDE;
     virtual void SaveOptions(QDomElement &tag, QSharedPointer<VGObject> &obj) Q_DECL_OVERRIDE;
     virtual void ReadToolAttributes(const QDomElement &domElement) Q_DECL_OVERRIDE;
@@ -87,9 +98,7 @@ private:
     QString formulaAngle;
     quint32 curveId;
 
-    VToolCurveIntersectAxis(VAbstractPattern *doc, VContainer *data, const quint32 &id, const QString &typeLine,
-                            const QString &lineColor, const QString &formulaAngle, const quint32 &basePointId,
-                            const quint32 &curveId, const Source &typeCreation, QGraphicsItem * parent = nullptr);
+    VToolCurveIntersectAxis(const VToolCurveIntersectAxisInitData &initData, QGraphicsItem *parent = nullptr);
 
     template <class Item>
     static void InitArc(VContainer *data, qreal segLength, const VPointF *p, quint32 curveId);

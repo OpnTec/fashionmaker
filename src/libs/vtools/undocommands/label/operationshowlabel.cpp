@@ -1,14 +1,14 @@
 /************************************************************************
  **
- **  @file   moverotationlabel.cpp
+ **  @file
  **  @author Roman Telezhynskyi <dismine(at)gmail.com>
- **  @date   13 5, 2016
+ **  @date   20 9, 2017
  **
  **  @brief
  **  @copyright
  **  This source code is part of the Valentine project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
- **  Copyright (C) 2016 Valentina project
+ **  Copyright (C) 2017 Valentina project
  **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
  **
  **  Valentina is free software: you can redistribute it and/or modify
@@ -26,37 +26,36 @@
  **
  *************************************************************************/
 
-#include "operationmovelabel.h"
+#include "operationshowlabel.h"
 
-#include <QDomNode>
-#include <QDomNodeList>
+#include <QDomElement>
 
 #include "../ifc/xml/vabstractpattern.h"
-#include "../ifc/ifcdef.h"
 #include "../vmisc/logging.h"
+#include "../vwidgets/vmaingraphicsview.h"
 #include "../vmisc/vabstractapplication.h"
-#include "../vmisc/def.h"
-#include "../vundocommand.h"
-#include "moveabstractlabel.h"
+#include "../vtools/tools/drawTools/vdrawtool.h"
 
 //---------------------------------------------------------------------------------------------------------------------
-OperationMoveLabel::OperationMoveLabel(quint32 idTool, VAbstractPattern *doc, double x, double y, quint32 idPoint,
+OperationShowLabel::OperationShowLabel(VAbstractPattern *doc, quint32 idTool, quint32 idPoint, bool visible,
                                        QUndoCommand *parent)
-    : MoveAbstractLabel(doc, idPoint, x, y, parent),
+    : VUndoCommand(QDomElement(), doc, parent),
+      m_visible(visible),
+      m_oldVisible(not visible),
+      m_scene(qApp->getCurrentScene()),
       m_idTool(idTool)
 {
-    setText(tr("move point label"));
+    nodeId = idPoint;
+    qCDebug(vUndo, "Point id %u", nodeId);
+
+    setText(tr("toggle label"));
 
     qCDebug(vUndo, "Tool id %u", m_idTool);
 
     const QDomElement element = GetDestinationObject(m_idTool, nodeId);
     if (element.isElement())
     {
-        m_oldMx = qApp->toPixel(doc->GetParametrDouble(element, AttrMx, "0.0"));
-        m_oldMy = qApp->toPixel(doc->GetParametrDouble(element, AttrMy, "0.0"));
-
-        qCDebug(vUndo, "Label old Mx %f", m_oldMx);
-        qCDebug(vUndo, "Label old My %f", m_oldMy);
+        m_oldVisible = doc->GetParametrBool(element, AttrShowLabel, trueStr);
     }
     else
     {
@@ -65,49 +64,38 @@ OperationMoveLabel::OperationMoveLabel(quint32 idTool, VAbstractPattern *doc, do
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-OperationMoveLabel::~OperationMoveLabel()
+void OperationShowLabel::undo()
 {
+    qCDebug(vUndo, "Undo.");
+
+    Do(m_oldVisible);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-bool OperationMoveLabel::mergeWith(const QUndoCommand *command)
+void OperationShowLabel::redo()
 {
-    const OperationMoveLabel *moveCommand = static_cast<const OperationMoveLabel *>(command);
-    SCASSERT(moveCommand != nullptr)
+    qCDebug(vUndo, "Redo.");
 
-    if (moveCommand->GetToolId() != m_idTool && moveCommand->GetPointId() != nodeId)
-    {
-        return false;
-    }
-
-    qCDebug(vUndo, "Mergin undo.");
-    m_newMx = moveCommand->GetNewMx();
-    m_newMy = moveCommand->GetNewMy();
-    qCDebug(vUndo, "Label new Mx %f", m_newMx);
-    qCDebug(vUndo, "Label new My %f", m_newMy);
-    return true;
+    Do(m_visible);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-int OperationMoveLabel::id() const
+void OperationShowLabel::Do(bool visible)
 {
-    return static_cast<int>(UndoCommand::RotationMoveLabel);
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void OperationMoveLabel::Do(double mx, double my)
-{
-    qCDebug(vUndo, "New mx %f", mx);
-    qCDebug(vUndo, "New my %f", my);
-
     QDomElement domElement = GetDestinationObject(m_idTool, nodeId);
     if (not domElement.isNull() && domElement.isElement())
     {
-        doc->SetAttribute(domElement, AttrMx, QString().setNum(qApp->fromPixel(mx)));
-        doc->SetAttribute(domElement, AttrMy, QString().setNum(qApp->fromPixel(my)));
+        doc->SetAttribute<bool>(domElement, AttrShowLabel, visible);
+
+        if (VDrawTool *tool = qobject_cast<VDrawTool *>(VAbstractPattern::getTool(m_idTool)))
+        {
+            tool->SetLabelVisible(nodeId, visible);
+        }
+        VMainGraphicsView::NewSceneRect(m_scene, qApp->getSceneView());
     }
     else
     {
         qCDebug(vUndo, "Can't find point with id = %u.", nodeId);
     }
 }
+

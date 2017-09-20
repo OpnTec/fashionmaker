@@ -39,13 +39,13 @@
 #include "moveabstractlabel.h"
 
 //---------------------------------------------------------------------------------------------------------------------
-MoveDoubleLabel::MoveDoubleLabel(VAbstractPattern *doc, const double &x, const double &y, DoublePoint type,
+MoveDoubleLabel::MoveDoubleLabel(VAbstractPattern *doc, const double &x, const double &y, MoveDoublePoint type,
                                  quint32 toolId, quint32 pointId, QUndoCommand *parent)
     : MoveAbstractLabel(doc, pointId, x, y, parent),
       m_type(type),
       m_idTool(toolId)
 {
-    if (type == DoublePoint::FirstPoint)
+    if (type == MoveDoublePoint::FirstPoint)
     {
         setText(tr("move the first dart label"));
     }
@@ -57,7 +57,7 @@ MoveDoubleLabel::MoveDoubleLabel(VAbstractPattern *doc, const double &x, const d
     const QDomElement domElement = doc->elementById(m_idTool, VAbstractPattern::TagPoint);
     if (domElement.isElement())
     {
-        if (type == DoublePoint::FirstPoint)
+        if (type == MoveDoublePoint::FirstPoint)
         {
             m_oldMx = qApp->toPixel(doc->GetParametrDouble(domElement, AttrMx1, "0.0"));
             m_oldMy = qApp->toPixel(doc->GetParametrDouble(domElement, AttrMy1, "0.0"));
@@ -100,7 +100,7 @@ bool MoveDoubleLabel::mergeWith(const QUndoCommand *command)
     m_newMx = moveCommand->GetNewMx();
     m_newMy = moveCommand->GetNewMy();
 
-    if (m_type == DoublePoint::FirstPoint)
+    if (m_type == MoveDoublePoint::FirstPoint)
     {
         qCDebug(vUndo, "Label new Mx1 %f", m_newMx);
         qCDebug(vUndo, "Label new My1 %f", m_newMy);
@@ -122,7 +122,7 @@ int MoveDoubleLabel::id() const
 //---------------------------------------------------------------------------------------------------------------------
 void MoveDoubleLabel::Do(double mx, double my)
 {
-    if (m_type == DoublePoint::FirstPoint)
+    if (m_type == MoveDoublePoint::FirstPoint)
     {
         qCDebug(vUndo, "New mx1 %f", mx);
         qCDebug(vUndo, "New my1 %f", my);
@@ -136,7 +136,7 @@ void MoveDoubleLabel::Do(double mx, double my)
     QDomElement domElement = doc->elementById(m_idTool, VAbstractPattern::TagPoint);
     if (domElement.isElement())
     {
-        if (m_type == DoublePoint::FirstPoint)
+        if (m_type == MoveDoublePoint::FirstPoint)
         {
             doc->SetAttribute(domElement, AttrMx1, QString().setNum(qApp->fromPixel(mx)));
             doc->SetAttribute(domElement, AttrMy1, QString().setNum(qApp->fromPixel(my)));

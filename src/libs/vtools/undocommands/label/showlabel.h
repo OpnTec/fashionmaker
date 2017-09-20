@@ -1,14 +1,14 @@
 /************************************************************************
  **
- **  @file   vabstractsimple.cpp
+ **  @file
  **  @author Roman Telezhynskyi <dismine(at)gmail.com>
- **  @date   20 6, 2015
+ **  @date   17 9, 2017
  **
  **  @brief
  **  @copyright
  **  This source code is part of the Valentine project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
- **  Copyright (C) 2015 Valentina project
+ **  Copyright (C) 2017 Valentina project
  **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
  **
  **  Valentina is free software: you can redistribute it and/or modify
@@ -26,31 +26,29 @@
  **
  *************************************************************************/
 
-#include "vabstractsimple.h"
+#ifndef SHOWLABEL_H
+#define SHOWLABEL_H
 
-//---------------------------------------------------------------------------------------------------------------------
-VAbstractSimple::VAbstractSimple(quint32 id, QObject *parent)
-    : QObject(parent),
-      id (id),
-      selectionType(SelectionType::ByMouseRelease),
-      type(GOType::Unknown)
-{
-}
+#include "../vundocommand.h"
 
-//---------------------------------------------------------------------------------------------------------------------
-void VAbstractSimple::ToolSelectionType(const SelectionType &type)
-{
-    selectionType = type;
-}
+class QGraphicsScene;
 
-//---------------------------------------------------------------------------------------------------------------------
-GOType VAbstractSimple::GetType() const
+class ShowLabel : public VUndoCommand
 {
-    return type;
-}
+public:
+    ShowLabel(VAbstractPattern *doc, quint32 id, bool visible, QUndoCommand *parent = nullptr);
+    virtual ~ShowLabel()=default;
 
-//---------------------------------------------------------------------------------------------------------------------
-void VAbstractSimple::SetType(const GOType &value)
-{
-    type = value;
-}
+    virtual void undo() Q_DECL_OVERRIDE;
+    virtual void redo() Q_DECL_OVERRIDE;
+private:
+    Q_DISABLE_COPY(ShowLabel)
+    bool m_visible;
+    bool m_oldVisible;
+    //Need for resizing scene rect
+    QGraphicsScene *m_scene;
+
+    void Do(bool visible);
+};
+
+#endif // SHOWLABEL_H

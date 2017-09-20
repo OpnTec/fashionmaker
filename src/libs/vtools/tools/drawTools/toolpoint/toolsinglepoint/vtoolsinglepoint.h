@@ -44,6 +44,22 @@
 
 template <class T> class QSharedPointer;
 
+struct VToolSinglePointInitData : public VAbstractToolInitData
+{
+    VToolSinglePointInitData()
+        : VAbstractToolInitData(),
+          name(),
+          mx(5),
+          my(10),
+          showLabel(true)
+    {}
+
+    QString name;
+    qreal   mx;
+    qreal   my;
+    bool    showLabel;
+};
+
 /**
  * @brief The VToolSinglePoint class parent for all tools what create points.
  */
@@ -63,6 +79,9 @@ public:
     void SetEnabled(bool enabled);
 
     virtual void GroupVisibility(quint32 object, bool visible) Q_DECL_OVERRIDE;
+
+    virtual bool IsLabelVisible(quint32 id) const Q_DECL_OVERRIDE;
+    virtual void SetLabelVisible(quint32 id, bool visible) Q_DECL_OVERRIDE;
 public slots:
     void         NameChangePosition(const QPointF &pos);
     virtual void Disable(bool disable, const QString &namePP) Q_DECL_OVERRIDE;
@@ -85,6 +104,7 @@ protected:
     virtual void     keyReleaseEvent(QKeyEvent * event) Q_DECL_OVERRIDE;
     virtual void     contextMenuEvent ( QGraphicsSceneContextMenuEvent * event ) Q_DECL_OVERRIDE;
     virtual void     SaveOptions(QDomElement &tag, QSharedPointer<VGObject> &obj) Q_DECL_OVERRIDE;
+    virtual void     ChangeLabelVisibility(quint32 id, bool visible) Q_DECL_OVERRIDE;
 private:
     Q_DISABLE_COPY(VToolSinglePoint)
 };

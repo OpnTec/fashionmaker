@@ -37,13 +37,13 @@
 
 #include "moveabstractlabel.h"
 
-enum class DoublePoint: char { FirstPoint, SecondPoint };
+enum class MoveDoublePoint: char { FirstPoint, SecondPoint };
 
 class MoveDoubleLabel : public MoveAbstractLabel
 {
     Q_OBJECT
 public:
-    MoveDoubleLabel(VAbstractPattern *doc, const double &x, const double &y, DoublePoint type,
+    MoveDoubleLabel(VAbstractPattern *doc, const double &x, const double &y, MoveDoublePoint type,
                     quint32 toolId, quint32 pointId, QUndoCommand *parent = nullptr);
     virtual ~MoveDoubleLabel() Q_DECL_OVERRIDE;
 
@@ -51,17 +51,17 @@ public:
     virtual int  id() const Q_DECL_OVERRIDE;
 
     quint32     GetToolId() const;
-    DoublePoint GetPointType() const;
+    MoveDoublePoint GetPointType() const;
 protected:
     virtual void Do(double mx, double my) Q_DECL_OVERRIDE;
 private:
     Q_DISABLE_COPY(MoveDoubleLabel)
-    DoublePoint m_type;
+    MoveDoublePoint m_type;
     quint32 m_idTool;
 };
 
 //---------------------------------------------------------------------------------------------------------------------
-inline DoublePoint MoveDoubleLabel::GetPointType() const
+inline MoveDoublePoint MoveDoubleLabel::GetPointType() const
 {
     return m_type;
 }

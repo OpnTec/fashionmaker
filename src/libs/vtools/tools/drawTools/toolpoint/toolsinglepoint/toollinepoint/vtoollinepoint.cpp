@@ -104,8 +104,8 @@ void VToolLinePoint::paint(QPainter *painter, const QStyleOptionGraphicsItem *op
  */
 void VToolLinePoint::RefreshGeometry()
 {
-    VToolSinglePoint::RefreshPointGeometry(*VDrawTool::data.GeometricObject<VPointF>(id));
-    QPointF point = static_cast<QPointF>(*VDrawTool::data.GeometricObject<VPointF>(id));
+    VToolSinglePoint::RefreshPointGeometry(*VDrawTool::data.GeometricObject<VPointF>(m_id));
+    QPointF point = static_cast<QPointF>(*VDrawTool::data.GeometricObject<VPointF>(m_id));
     QPointF basePoint = static_cast<QPointF>(*VDrawTool::data.GeometricObject<VPointF>(basePointId));
     mainLine->setLine(QLineF(basePoint - point, QPointF()));
 }
@@ -147,11 +147,12 @@ void VToolLinePoint::hoverLeaveEvent(QGraphicsSceneHoverEvent *event)
 QString VToolLinePoint::MakeToolTip() const
 {
     const QSharedPointer<VPointF> first = VAbstractTool::data.GeometricObject<VPointF>(basePointId);
-    const QSharedPointer<VPointF> second = VAbstractTool::data.GeometricObject<VPointF>(id);
+    const QSharedPointer<VPointF> second = VAbstractTool::data.GeometricObject<VPointF>(m_id);
 
     const QLineF line(static_cast<QPointF>(*first), static_cast<QPointF>(*second));
 
     const QString toolTip = QString("<table>"
+                                    "<tr> <td><b>%6:</b> %7</td> </tr>"
                                     "<tr> <td><b>%1:</b> %2 %3</td> </tr>"
                                     "<tr> <td><b>%4:</b> %5°</td> </tr>"
                                     "</table>")
@@ -159,7 +160,9 @@ QString VToolLinePoint::MakeToolTip() const
             .arg(qApp->fromPixel(line.length()))
             .arg(UnitsToStr(qApp->patternUnit(), true))
             .arg(tr("Angle"))
-            .arg(line.angle());
+            .arg(line.angle())
+            .arg(tr("Label"))
+            .arg(second->name());
     return toolTip;
 }
 
@@ -191,7 +194,7 @@ qreal VToolLinePoint::GetAngle() const
 void VToolLinePoint::SetAngle(const qreal &value)
 {
     angle = value;
-    QSharedPointer<VGObject> obj = VAbstractTool::data.GetGObject(id);
+    QSharedPointer<VGObject> obj = VAbstractTool::data.GetGObject(m_id);
     SaveOption(obj);
 }
 
@@ -206,7 +209,7 @@ void VToolLinePoint::SetLineColor(const QString &value)
 {
     lineColor = value;
 
-    QSharedPointer<VGObject> obj = VAbstractTool::data.GetGObject(id);
+    QSharedPointer<VGObject> obj = VAbstractTool::data.GetGObject(m_id);
     SaveOption(obj);
 }
 
@@ -223,7 +226,7 @@ void VToolLinePoint::SetBasePointId(const quint32 &value)
     {
         basePointId = value;
 
-        QSharedPointer<VGObject> obj = VAbstractTool::data.GetGObject(id);
+        QSharedPointer<VGObject> obj = VAbstractTool::data.GetGObject(m_id);
         SaveOption(obj);
     }
 }
@@ -233,7 +236,7 @@ VFormula VToolLinePoint::GetFormulaLength() const
 {
     VFormula fLength(formulaLength, this->getData());
     fLength.setCheckZero(true);
-    fLength.setToolId(id);
+    fLength.setToolId(m_id);
     fLength.setPostfix(UnitsToStr(qApp->patternUnit()));
 
     return fLength;
@@ -246,7 +249,7 @@ void VToolLinePoint::SetFormulaLength(const VFormula &value)
     {
         formulaLength = value.GetFormula(FormulaType::FromUser);
 
-        QSharedPointer<VGObject> obj = VAbstractTool::data.GetGObject(id);
+        QSharedPointer<VGObject> obj = VAbstractTool::data.GetGObject(m_id);
         SaveOption(obj);
     }
 }

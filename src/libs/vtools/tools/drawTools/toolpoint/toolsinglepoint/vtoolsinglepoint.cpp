@@ -44,6 +44,7 @@
 #include <new>
 
 #include "../../../../undocommands/label/movelabel.h"
+#include "../../../../undocommands/label/showlabel.h"
 #include "../ifc/exception/vexception.h"
 #include "../ifc/exception/vexceptionbadid.h"
 #include "../ifc/ifcdef.h"
@@ -91,13 +92,13 @@ VToolSinglePoint::VToolSinglePoint(VAbstractPattern *doc, VContainer *data, quin
 //---------------------------------------------------------------------------------------------------------------------
 QString VToolSinglePoint::name() const
 {
-    return ObjectName<VPointF>(id);
+    return ObjectName<VPointF>(m_id);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void VToolSinglePoint::setName(const QString &name)
 {
-    SetPointName(id, name);
+    SetPointName(m_id, name);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -115,13 +116,38 @@ void VToolSinglePoint::GroupVisibility(quint32 object, bool visible)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+bool VToolSinglePoint::IsLabelVisible(quint32 id) const
+{
+    if (m_id == id)
+    {
+        const QSharedPointer<VPointF> point = VAbstractTool::data.GeometricObject<VPointF>(id);
+        return point->IsShowLabel();
+    }
+    else
+    {
+        return false;
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VToolSinglePoint::SetLabelVisible(quint32 id, bool visible)
+{
+    if (m_id == id)
+    {
+        const QSharedPointer<VPointF> point = VAbstractTool::data.GeometricObject<VPointF>(id);
+        point->SetShowLabel(visible);
+        RefreshPointGeometry(*point);
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 /**
  * @brief NameChangePosition handle change posion point label.
  * @param pos new position.
  */
 void VToolSinglePoint::NameChangePosition(const QPointF &pos)
 {
-    ChangePosition(this, id, pos);
+    ChangePosition(this, m_id, pos);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -178,7 +204,7 @@ void VToolSinglePoint::EnableToolMove(bool move)
 //---------------------------------------------------------------------------------------------------------------------
 void VToolSinglePoint::PointChoosed()
 {
-    emit ChoosedTool(id, SceneObject::Point);
+    emit ChoosedTool(m_id, SceneObject::Point);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -194,7 +220,7 @@ void VToolSinglePoint::PointSelected(bool selected)
 void VToolSinglePoint::FullUpdateFromFile()
 {
     ReadAttributes();
-    RefreshPointGeometry(*VAbstractTool::data.GeometricObject<VPointF>(id));
+    RefreshPointGeometry(*VAbstractTool::data.GeometricObject<VPointF>(m_id));
     SetVisualization();
 }
 
@@ -236,7 +262,7 @@ QVariant VToolSinglePoint::itemChange(QGraphicsItem::GraphicsItemChange change, 
         m_namePoint->blockSignals(true);
         m_namePoint->setSelected(value.toBool());
         m_namePoint->blockSignals(false);
-        emit ChangedToolSelection(value.toBool(), id, id);
+        emit ChangedToolSelection(value.toBool(), m_id, m_id);
     }
 
     return VScenePoint::itemChange(change, value);
@@ -271,7 +297,7 @@ void VToolSinglePoint::keyReleaseEvent(QKeyEvent *event)
 //---------------------------------------------------------------------------------------------------------------------
 void VToolSinglePoint::contextMenuEvent(QGraphicsSceneContextMenuEvent *event)
 {
-    Q_UNUSED(event)
+    ShowContextMenu(event, m_id);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -285,6 +311,16 @@ void VToolSinglePoint::SaveOptions(QDomElement &tag, QSharedPointer<VGObject> &o
     doc->SetAttribute(tag, AttrName, point->name());
     doc->SetAttribute(tag, AttrMx, qApp->fromPixel(point->mx()));
     doc->SetAttribute(tag, AttrMy, qApp->fromPixel(point->my()));
+    doc->SetAttribute<bool>(tag, AttrShowLabel, point->IsShowLabel());
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VToolSinglePoint::ChangeLabelVisibility(quint32 id, bool visible)
+{
+    if (id == m_id)
+    {
+        qApp->getUndoStack()->push(new ShowLabel(doc, id, visible));
+    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------

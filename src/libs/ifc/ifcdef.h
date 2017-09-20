@@ -141,6 +141,9 @@ extern const QString AttrSuffix;
 extern const QString AttrIdObject;
 extern const QString AttrInLayout;
 extern const QString AttrClosed;
+extern const QString AttrShowLabel;
+extern const QString AttrShowLabel1;
+extern const QString AttrShowLabel2;
 
 extern const QString TypeLineNone;
 extern const QString TypeLineLine;

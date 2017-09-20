@@ -42,6 +42,18 @@
 
 template <class T> class QSharedPointer;
 
+struct VToolLinePointInitData : public VToolSinglePointInitData
+{
+    VToolLinePointInitData()
+        : VToolSinglePointInitData(),
+          typeLine(TypeLineLine),
+          lineColor(ColorBlack)
+    {}
+
+    QString typeLine;
+    QString lineColor;
+};
+
 /**
  * @brief The VToolLinePoint class parent for all tools what create point with line.
  */

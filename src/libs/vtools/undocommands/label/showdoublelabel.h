@@ -1,14 +1,14 @@
 /************************************************************************
  **
- **  @file   vabstractsimple.cpp
+ **  @file
  **  @author Roman Telezhynskyi <dismine(at)gmail.com>
- **  @date   20 6, 2015
+ **  @date   20 9, 2017
  **
  **  @brief
  **  @copyright
  **  This source code is part of the Valentine project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
- **  Copyright (C) 2015 Valentina project
+ **  Copyright (C) 2017 Valentina project
  **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
  **
  **  Valentina is free software: you can redistribute it and/or modify
@@ -26,31 +26,34 @@
  **
  *************************************************************************/
 
-#include "vabstractsimple.h"
+#ifndef SHOWDOUBLELABEL_H
+#define SHOWDOUBLELABEL_H
 
-//---------------------------------------------------------------------------------------------------------------------
-VAbstractSimple::VAbstractSimple(quint32 id, QObject *parent)
-    : QObject(parent),
-      id (id),
-      selectionType(SelectionType::ByMouseRelease),
-      type(GOType::Unknown)
-{
-}
+#include "../vundocommand.h"
 
-//---------------------------------------------------------------------------------------------------------------------
-void VAbstractSimple::ToolSelectionType(const SelectionType &type)
-{
-    selectionType = type;
-}
+class QGraphicsScene;
 
-//---------------------------------------------------------------------------------------------------------------------
-GOType VAbstractSimple::GetType() const
-{
-    return type;
-}
+enum class ShowDoublePoint: char { FirstPoint, SecondPoint };
 
-//---------------------------------------------------------------------------------------------------------------------
-void VAbstractSimple::SetType(const GOType &value)
+class ShowDoubleLabel : public VUndoCommand
 {
-    type = value;
-}
+public:
+    ShowDoubleLabel(VAbstractPattern *doc, quint32 toolId, quint32 pointId, bool visible, ShowDoublePoint type,
+                    QUndoCommand *parent = nullptr);
+    virtual ~ShowDoubleLabel()=default;
+
+    virtual void undo() Q_DECL_OVERRIDE;
+    virtual void redo() Q_DECL_OVERRIDE;
+private:
+    Q_DISABLE_COPY(ShowDoubleLabel)
+    bool m_visible;
+    bool m_oldVisible;
+    //Need for resizing scene rect
+    QGraphicsScene *m_scene;
+    ShowDoublePoint m_type;
+    quint32         m_idTool;
+
+    void Do(bool visible);
+};
+
+#endif // SHOWDOUBLELABEL_H

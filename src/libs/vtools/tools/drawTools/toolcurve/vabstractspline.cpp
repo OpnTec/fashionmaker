@@ -69,7 +69,7 @@ VAbstractSpline::VAbstractSpline(VAbstractPattern *doc, VContainer *data, quint3
 //---------------------------------------------------------------------------------------------------------------------
 QPainterPath VAbstractSpline::shape() const
 {
-    const QSharedPointer<VAbstractCurve> curve = VAbstractTool::data.GeometricObject<VAbstractCurve>(id);
+    const QSharedPointer<VAbstractCurve> curve = VAbstractTool::data.GeometricObject<VAbstractCurve>(m_id);
     const QVector<QPointF> points = curve->GetPoints();
 
     QPainterPath path;
@@ -94,7 +94,7 @@ void VAbstractSpline::paint(QPainter *painter, const QStyleOptionGraphicsItem *o
 {
     const qreal width = ScaleWidth(m_isHovered ? widthMainLine : widthHairLine, SceneScale(scene()));
 
-    const QSharedPointer<VAbstractCurve> curve = VAbstractTool::data.GeometricObject<VAbstractCurve>(id);
+    const QSharedPointer<VAbstractCurve> curve = VAbstractTool::data.GeometricObject<VAbstractCurve>(m_id);
     setPen(QPen(CorrectColor(this, curve->GetColor()), width, LineStyleToPenStyle(curve->GetPenStyle()), Qt::RoundCap));
 
     RefreshCtrlPoints();
@@ -166,14 +166,17 @@ void VAbstractSpline::AllowSelecting(bool enabled)
 //---------------------------------------------------------------------------------------------------------------------
 QString VAbstractSpline::MakeToolTip() const
 {
-    const QSharedPointer<VAbstractCurve> curve = VAbstractTool::data.GeometricObject<VAbstractCurve>(id);
+    const QSharedPointer<VAbstractCurve> curve = VAbstractTool::data.GeometricObject<VAbstractCurve>(m_id);
 
     const QString toolTip = QString("<table>"
+                                    "<tr> <td><b>%4:</b> %5</td> </tr>"
                                     "<tr> <td><b>%1:</b> %2 %3</td> </tr>"
                                     "</table>")
             .arg(tr("Length"))
             .arg(qApp->fromPixel(curve->GetLength()))
-            .arg(UnitsToStr(qApp->patternUnit(), true));
+            .arg(UnitsToStr(qApp->patternUnit(), true))
+            .arg(tr("Label"))
+            .arg(curve->name());
     return toolTip;
 }
 
@@ -232,7 +235,7 @@ QVariant VAbstractSpline::itemChange(QGraphicsItem::GraphicsItemChange change, c
 {
     if (change == QGraphicsItem::ItemSelectedChange)
     {
-        emit ChangedToolSelection(value.toBool(), id, id);
+        emit ChangedToolSelection(value.toBool(), m_id, m_id);
     }
 
     return QGraphicsPathItem::itemChange(change, value);
@@ -288,7 +291,7 @@ void VAbstractSpline::mouseReleaseEvent(QGraphicsSceneMouseEvent *event)
 {
     if (event->button() == Qt::LeftButton)
     {
-        emit ChoosedTool(id, sceneType);
+        emit ChoosedTool(m_id, sceneType);
     }
     QGraphicsPathItem::mouseReleaseEvent(event);
 }
@@ -313,6 +316,12 @@ void VAbstractSpline::SaveOptions(QDomElement &tag, QSharedPointer<VGObject> &ob
 void VAbstractSpline::RefreshCtrlPoints()
 {
     // do nothing
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VAbstractSpline::contextMenuEvent(QGraphicsSceneContextMenuEvent *event)
+{
+    ShowContextMenu(event);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -386,7 +395,7 @@ VSpline VAbstractSpline::CorrectedSpline(const VSpline &spline, const SplinePoin
 //---------------------------------------------------------------------------------------------------------------------
 void VAbstractSpline::InitDefShape()
 {
-    const QSharedPointer<VAbstractCurve> curve = VAbstractTool::data.GeometricObject<VAbstractCurve>(id);
+    const QSharedPointer<VAbstractCurve> curve = VAbstractTool::data.GeometricObject<VAbstractCurve>(m_id);
     this->setPath(curve->GetPath());
 }
 
@@ -402,14 +411,14 @@ void VAbstractSpline::ShowHandles(bool show)
 //---------------------------------------------------------------------------------------------------------------------
 QString VAbstractSpline::GetLineColor() const
 {
-    const QSharedPointer<VAbstractCurve> curve = VAbstractTool::data.GeometricObject<VAbstractCurve>(id);
+    const QSharedPointer<VAbstractCurve> curve = VAbstractTool::data.GeometricObject<VAbstractCurve>(m_id);
     return curve->GetColor();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void VAbstractSpline::SetLineColor(const QString &value)
 {
-    QSharedPointer<VAbstractCurve> curve = VAbstractTool::data.GeometricObject<VAbstractCurve>(id);
+    QSharedPointer<VAbstractCurve> curve = VAbstractTool::data.GeometricObject<VAbstractCurve>(m_id);
     curve->SetColor(value);
     QSharedPointer<VGObject> obj = qSharedPointerCast<VGObject>(curve);
     SaveOption(obj);
@@ -418,14 +427,14 @@ void VAbstractSpline::SetLineColor(const QString &value)
 //---------------------------------------------------------------------------------------------------------------------
 QString VAbstractSpline::GetPenStyle() const
 {
-    const QSharedPointer<VAbstractCurve> curve = VAbstractTool::data.GeometricObject<VAbstractCurve>(id);
+    const QSharedPointer<VAbstractCurve> curve = VAbstractTool::data.GeometricObject<VAbstractCurve>(m_id);
     return curve->GetPenStyle();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void VAbstractSpline::SetPenStyle(const QString &value)
 {
-    QSharedPointer<VAbstractCurve> curve = VAbstractTool::data.GeometricObject<VAbstractCurve>(id);
+    QSharedPointer<VAbstractCurve> curve = VAbstractTool::data.GeometricObject<VAbstractCurve>(m_id);
     curve->SetPenStyle(value);
     QSharedPointer<VGObject> obj = qSharedPointerCast<VGObject>(curve);
     SaveOption(obj);
@@ -434,7 +443,7 @@ void VAbstractSpline::SetPenStyle(const QString &value)
 //---------------------------------------------------------------------------------------------------------------------
 QString VAbstractSpline::name() const
 {
-    return ObjectName<VAbstractCurve>(id);
+    return ObjectName<VAbstractCurve>(m_id);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

@@ -47,10 +47,7 @@ class VNodeSpline:public VAbstractNode
 {
     Q_OBJECT
 public:
-    static VNodeSpline *Create(VAbstractPattern *doc, VContainer *data, quint32 id,
-                               quint32 idSpline, const Document &parse,
-                               const Source &typeCreation, const QString &drawName = QString(),
-                               const quint32 &idTool = 0);
+    static VNodeSpline *Create(VAbstractNodeInitData initData);
 
     static const QString ToolType;
     virtual QString getTagName() const Q_DECL_OVERRIDE;
@@ -65,8 +62,7 @@ protected:
 private:
     Q_DISABLE_COPY(VNodeSpline)
 
-    VNodeSpline(VAbstractPattern *doc, VContainer *data, quint32 id, quint32 idSpline, const Source &typeCreation,
-                const QString &drawName = QString(), const quint32 &idTool = 0, QObject *qoParent = nullptr);
+    VNodeSpline(const VAbstractNodeInitData &initData, QObject *qoParent = nullptr);
 };
 
 #endif // VNODESPLINE_H

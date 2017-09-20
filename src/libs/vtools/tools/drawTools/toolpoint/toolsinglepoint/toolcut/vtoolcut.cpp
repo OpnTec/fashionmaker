@@ -75,23 +75,6 @@ void VToolCut::FullUpdateFromFile()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QString VToolCut::MakeToolTip() const
-{
-    const QSharedPointer<VAbstractCurve> curve = VAbstractTool::data.GeometricObject<VAbstractCurve>(curveCutId);
-
-    const QString toolTip = QString("<table>"
-                                    "<tr> <td><b>%1:</b> %2 %3</td> </tr>"
-                                    "<tr> <td><b>%4:</b> %5 %3</td> </tr>"
-                                    "<tr> <td><b>%6:</b> %7°</td> </tr>"
-                                    "<tr> <td><b>%8:</b> %9°</td> </tr>"
-                                    "</table>")
-            .arg(tr("Length"))
-            .arg(qApp->fromPixel(curve->GetLength()))
-            .arg(UnitsToStr(qApp->patternUnit(), true));
-    return toolTip;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
 // cppcheck-suppress unusedFunction
 quint32 VToolCut::getCurveCutId() const
 {
@@ -105,7 +88,7 @@ void VToolCut::setCurveCutId(const quint32 &value)
     if (value != NULL_ID)
     {
         curveCutId = value;
-        QSharedPointer<VGObject> obj = VAbstractTool::data.GetGObject(id);
+        QSharedPointer<VGObject> obj = VAbstractTool::data.GetGObject(m_id);
         SaveOption(obj);
     }
 }
@@ -115,7 +98,7 @@ VFormula VToolCut::GetFormula() const
 {
     VFormula val(formula, getData());
     val.setCheckZero(true);
-    val.setToolId(id);
+    val.setToolId(m_id);
     val.setPostfix(UnitsToStr(qApp->patternUnit()));
     return val;
 }
@@ -127,7 +110,7 @@ void VToolCut::SetFormula(const VFormula &value)
     {
         formula = value.GetFormula(FormulaType::FromUser);
 
-        QSharedPointer<VGObject> obj = VAbstractTool::data.GetGObject(id);
+        QSharedPointer<VGObject> obj = VAbstractTool::data.GetGObject(m_id);
         SaveOption(obj);
     }
 }
@@ -144,7 +127,7 @@ QString VToolCut::CurveName() const
  */
 void VToolCut::RefreshGeometry()
 {
-    VToolSinglePoint::RefreshPointGeometry(*VDrawTool::data.GeometricObject<VPointF>(id));
+    VToolSinglePoint::RefreshPointGeometry(*VDrawTool::data.GeometricObject<VPointF>(m_id));
 }
 
 //---------------------------------------------------------------------------------------------------------------------

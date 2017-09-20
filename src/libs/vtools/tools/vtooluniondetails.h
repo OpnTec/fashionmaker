@@ -47,18 +47,14 @@
 
 class DialogTool;
 
-struct VToolUnionDetailsInitData
+struct VToolUnionDetailsInitData : public VAbstractToolInitData
 {
     VToolUnionDetailsInitData()
-        : d1id(NULL_ID),
+        : VAbstractToolInitData(),
+          d1id(NULL_ID),
           d2id(NULL_ID),
           indexD1(NULL_ID),
           indexD2(NULL_ID),
-          scene(nullptr),
-          doc(nullptr),
-          data(nullptr),
-          parse(Document::FullParse),
-          typeCreation(Source::FromFile),
           retainPieces(false)
     {}
 
@@ -66,11 +62,6 @@ struct VToolUnionDetailsInitData
     quint32 d2id;
     quint32 indexD1;
     quint32 indexD2;
-    VMainGraphicsScene *scene;
-    VAbstractPattern *doc;
-    VContainer *data;
-    Document parse;
-    Source typeCreation;
     bool retainPieces;
 };
 
@@ -83,7 +74,7 @@ class VToolUnionDetails : public VAbstractTool
 public:
     static VToolUnionDetails *Create(QSharedPointer<DialogTool> dialog, VMainGraphicsScene *scene,
                                      VAbstractPattern *doc, VContainer *data);
-    static VToolUnionDetails *Create(const quint32 _id, const VToolUnionDetailsInitData &initData);
+    static VToolUnionDetails *Create(VToolUnionDetailsInitData initData);
 
     static const QString ToolType;
     static const QString TagDetail;
@@ -129,7 +120,7 @@ private:
     /** @brief indexD2 index edge in second detail. */
     quint32 indexD2;
 
-    VToolUnionDetails(quint32 id, const VToolUnionDetailsInitData &initData, QObject *parent = nullptr);
+    VToolUnionDetails(const VToolUnionDetailsInitData &initData, QObject *parent = nullptr);
 
     void             AddDetail(QDomElement &domElement, const VPiece &d) const;
     void             AddToModeling(const QDomElement &domElement);
