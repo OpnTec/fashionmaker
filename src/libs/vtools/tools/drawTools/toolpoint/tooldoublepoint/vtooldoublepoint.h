@@ -63,6 +63,7 @@ public:
     void    setNameP2(const QString &name);
 
     virtual void GroupVisibility(quint32 object, bool visible) Q_DECL_OVERRIDE;
+    virtual void DoChangePosition(quint32 id, const QPointF &pos) Q_DECL_OVERRIDE;
 
     virtual bool IsLabelVisible(quint32 id) const Q_DECL_OVERRIDE;
     virtual void SetLabelVisible(quint32 id, bool visible) Q_DECL_OVERRIDE;
@@ -76,7 +77,6 @@ public slots:
     void         Point1Selected(bool selected);
     void         Point2Selected(bool selected);
     virtual void FullUpdateFromFile() Q_DECL_OVERRIDE;
-    virtual void DoChangePosition(quint32 id, qreal mx, qreal my) Q_DECL_OVERRIDE;
     virtual void AllowHover(bool enabled) Q_DECL_OVERRIDE;
     virtual void AllowSelecting(bool enabled) Q_DECL_OVERRIDE;
     void         AllowLabelHover(bool enabled);
@@ -90,7 +90,7 @@ protected:
     quint32      p1id;
     quint32      p2id;
 
-    virtual void UpdateNamePosition(quint32 id) Q_DECL_OVERRIDE;
+    virtual void UpdateNamePosition(quint32 id, const QPointF &pos) Q_DECL_OVERRIDE;
     virtual QVariant itemChange ( GraphicsItemChange change, const QVariant &value ) Q_DECL_OVERRIDE;
     virtual void keyReleaseEvent(QKeyEvent * event) Q_DECL_OVERRIDE;
     virtual void contextMenuEvent ( QGraphicsSceneContextMenuEvent * event ) Q_DECL_OVERRIDE;

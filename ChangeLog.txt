@@ -18,6 +18,7 @@
 - Removed crash sending system for Windows.
 - Added new language Polish (Poland).
 - [#755] New feature. Toggle point label.
+- Fixed bug. After full parse undocommand Move labe losts connection to tool.
 
 # Version 0.5.1
 - [#683] Tool Seam allowance's dialog is off screen on small resolutions.

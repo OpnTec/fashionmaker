@@ -147,19 +147,19 @@ void VToolSinglePoint::SetLabelVisible(quint32 id, bool visible)
  */
 void VToolSinglePoint::NameChangePosition(const QPointF &pos)
 {
-    ChangePosition(this, m_id, pos);
+    UpdateNamePosition(m_id, pos - this->pos());
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 /**
  * @brief UpdateNamePosition save new position label to the pattern file.
  */
-void VToolSinglePoint::UpdateNamePosition(quint32 id)
+void VToolSinglePoint::UpdateNamePosition(quint32 id, const QPointF &pos)
 {
-    const QSharedPointer<VPointF> point = VAbstractTool::data.GeometricObject<VPointF>(id);
-    auto moveLabel = new MoveLabel(doc, point->mx(), point->my(), id);
-    connect(moveLabel, &MoveLabel::ChangePosition, this, &VToolSinglePoint::DoChangePosition);
-    qApp->getUndoStack()->push(moveLabel);
+    if (id == m_id)
+    {
+        qApp->getUndoStack()->push(new MoveLabel(doc, pos, id));
+    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -324,16 +324,19 @@ void VToolSinglePoint::ChangeLabelVisibility(quint32 id, bool visible)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VToolSinglePoint::DoChangePosition(quint32 id, qreal mx, qreal my)
+void VToolSinglePoint::DoChangePosition(quint32 id, const QPointF &pos)
 {
-    VPointF *point = new VPointF(*VAbstractTool::data.GeometricObject<VPointF>(id));
-    point->setMx(mx);
-    point->setMy(my);
-    VAbstractTool::data.UpdateGObject(id, point);
-    m_namePoint->blockSignals(true);
-    m_namePoint->setPos(QPointF(mx, my));
-    m_namePoint->blockSignals(false);
-    RefreshLine();
+    if (id == m_id)
+    {
+        QSharedPointer<VPointF> point = VAbstractTool::data.GeometricObject<VPointF>(id);
+        point->setMx(pos.x());
+        point->setMy(pos.y());
+        VAbstractTool::data.UpdateGObject(id, point);
+        m_namePoint->blockSignals(true);
+        m_namePoint->setPos(pos);
+        m_namePoint->blockSignals(false);
+        RefreshLine();
+    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------

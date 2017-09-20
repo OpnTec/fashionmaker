@@ -64,16 +64,11 @@ public:
 public slots:
     virtual void ShowTool(quint32 id, bool enable) Q_DECL_OVERRIDE;
     void         DeleteFromLabel();
-    virtual void DoChangePosition(quint32 id, qreal mx, qreal my) =0;
 
 protected:
     void SetPointName(quint32 id, const QString &name);
 
-    template <typename T>
-    void ChangePosition(T *item, quint32 id, const QPointF &pos);
-
-
-    virtual void UpdateNamePosition(quint32 id)=0;
+    virtual void UpdateNamePosition(quint32 id, const QPointF &pos)=0;
 
     template <typename T>
     static void InitToolConnections(VMainGraphicsScene *scene, T *tool);
@@ -105,15 +100,6 @@ void VAbstractPoint::ShowToolVisualization(bool show)
     {
         delete vis;
     }
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-template <typename T>
-void VAbstractPoint::ChangePosition(T *item, quint32 id, const QPointF &pos)
-{
-    const QPointF p = pos - item->pos();
-    DoChangePosition(id, p.x(), p.y());
-    UpdateNamePosition(id);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

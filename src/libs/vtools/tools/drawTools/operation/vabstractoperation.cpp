@@ -86,6 +86,25 @@ void VAbstractOperation::paint(QPainter *painter, const QStyleOptionGraphicsItem
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void VAbstractOperation::DoChangePosition(quint32 id, const QPointF &pos)
+{
+    if (operatedObjects.contains(id))
+    {
+        VAbstractSimple *obj = operatedObjects.value(id);
+        if (obj && obj->GetType() == GOType::Point)
+        {
+            VSimplePoint *item = qobject_cast<VSimplePoint *>(obj);
+            SCASSERT(item != nullptr)
+            QSharedPointer<VPointF> point = VAbstractTool::data.GeometricObject<VPointF>(id);
+            point->setMx(pos.x());
+            point->setMy(pos.y());
+            VAbstractTool::data.UpdateGObject(id, point);
+            item->RefreshPointGeometry(*(point.data()));
+        }
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 bool VAbstractOperation::IsLabelVisible(quint32 id) const
 {
     if (operatedObjects.contains(id))
@@ -433,7 +452,7 @@ void VAbstractOperation::LabelChangePosition(const QPointF &pos, quint32 labelId
         {
             VSimplePoint *item = qobject_cast<VSimplePoint *>(obj);
             SCASSERT(item != nullptr)
-            ChangePosition(item, labelId, pos);
+            UpdateNamePosition(labelId, pos - item->pos());
         }
     }
 }
@@ -474,12 +493,16 @@ void VAbstractOperation::ChangeLabelVisibility(quint32 id, bool visible)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VAbstractOperation::UpdateNamePosition(quint32 id)
+void VAbstractOperation::UpdateNamePosition(quint32 id, const QPointF &pos)
 {
-    const QSharedPointer<VPointF> point = VAbstractTool::data.GeometricObject<VPointF>(id);
-    auto moveLabel = new OperationMoveLabel(m_id, doc, point->mx(), point->my(), id);
-    connect(moveLabel, &OperationMoveLabel::ChangePosition, this, &VAbstractOperation::DoChangePosition);
-    qApp->getUndoStack()->push(moveLabel);
+    if (operatedObjects.contains(id))
+    {
+        VAbstractSimple *obj = operatedObjects.value(id);
+        if (obj && obj->GetType() == GOType::Point)
+        {
+            qApp->getUndoStack()->push(new OperationMoveLabel(m_id, doc, pos, id));
+        }
+    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -538,23 +561,6 @@ void VAbstractOperation::InitCurve(quint32 id, VContainer *data, GOType curveTyp
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VAbstractOperation::DoChangePosition(quint32 id, qreal mx, qreal my)
-{
-    if (operatedObjects.contains(id))
-    {
-        VPointF *point = new VPointF(*VAbstractTool::data.GeometricObject<VPointF>(id));
-        point->setMx(mx);
-        point->setMy(my);
-        VAbstractTool::data.UpdateGObject(id, point);
-
-        VSimplePoint *item = qobject_cast<VSimplePoint *>(operatedObjects.value(id));
-        SCASSERT(item != nullptr)
-
-        item->RefreshPointGeometry(*point);
-    }
-}
-
-//---------------------------------------------------------------------------------------------------------------------
 void VAbstractOperation::AllowCurveHover(bool enabled, GOType type)
 {
     QMapIterator<quint32, VAbstractSimple *> i(operatedObjects);
@@ -590,14 +596,6 @@ void VAbstractOperation::AllowCurveSelecting(bool enabled, GOType type)
             }
         }
     }
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void VAbstractOperation::ChangePosition(QGraphicsItem *item, quint32 id, const QPointF &pos)
-{
-    const QPointF p = pos - item->pos();
-    DoChangePosition(id, p.x(), p.y());
-    UpdateNamePosition(id);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

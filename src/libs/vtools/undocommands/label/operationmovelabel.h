@@ -40,21 +40,22 @@
 
 class OperationMoveLabel : public MoveAbstractLabel
 {
-    Q_OBJECT
 public:
-    OperationMoveLabel(quint32 idTool, VAbstractPattern *doc, double x, double y, quint32 idPoint,
+    OperationMoveLabel(quint32 idTool, VAbstractPattern *doc, const QPointF &pos, quint32 idPoint,
                       QUndoCommand *parent = nullptr);
-    virtual ~OperationMoveLabel();
+    virtual ~OperationMoveLabel()=default;
 
     virtual bool mergeWith(const QUndoCommand *command) Q_DECL_OVERRIDE;
     virtual int  id() const Q_DECL_OVERRIDE;
 
     quint32 GetToolId() const;
 protected:
-    virtual void Do(double mx, double my) Q_DECL_OVERRIDE;
+    virtual void Do(const QPointF &pos) Q_DECL_OVERRIDE;
 private:
     Q_DISABLE_COPY(OperationMoveLabel)
     quint32 m_idTool;
+    //Need for resizing scene rect
+    QGraphicsScene *m_scene;
 };
 
 //---------------------------------------------------------------------------------------------------------------------

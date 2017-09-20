@@ -159,13 +159,13 @@ void VToolDoublePoint::SetLabelVisible(quint32 id, bool visible)
 //---------------------------------------------------------------------------------------------------------------------
 void VToolDoublePoint::Label1ChangePosition(const QPointF &pos)
 {
-    ChangePosition(firstPoint, p1id, pos);
+    UpdateNamePosition(p1id, pos - firstPoint->pos());
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void VToolDoublePoint::Label2ChangePosition(const QPointF &pos)
 {
-    ChangePosition(secondPoint, p2id, pos);
+    UpdateNamePosition(p2id, pos - secondPoint->pos());
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -220,23 +220,23 @@ void VToolDoublePoint::FullUpdateFromFile()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VToolDoublePoint::DoChangePosition(quint32 id, qreal mx, qreal my)
+void VToolDoublePoint::DoChangePosition(quint32 id, const QPointF &pos)
 {
     if (id == p1id)
     {
-        VPointF *point = new VPointF(*VAbstractTool::data.GeometricObject<VPointF>(p1id));
-        point->setMx(mx);
-        point->setMy(my);
+        QSharedPointer<VPointF> point = VAbstractTool::data.GeometricObject<VPointF>(p1id);
+        point->setMx(pos.x());
+        point->setMy(pos.y());
         VAbstractTool::data.UpdateGObject(p1id, point);
-        firstPoint->RefreshPointGeometry(*point);
+        firstPoint->RefreshPointGeometry(*(point.data()));
     }
     else if (id == p2id)
     {
-        VPointF *point = new VPointF(*VAbstractTool::data.GeometricObject<VPointF>(p2id));
-        point->setMx(mx);
-        point->setMy(my);
+        QSharedPointer<VPointF> point = VAbstractTool::data.GeometricObject<VPointF>(p2id);
+        point->setMx(pos.x());
+        point->setMy(pos.y());
         VAbstractTool::data.UpdateGObject(p2id, point);
-        secondPoint->RefreshPointGeometry(*point);
+        secondPoint->RefreshPointGeometry(*(point.data()));
     }
 }
 
@@ -277,23 +277,15 @@ void VToolDoublePoint::ToolSelectionType(const SelectionType &type)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VToolDoublePoint::UpdateNamePosition(quint32 id)
-{
+void VToolDoublePoint::UpdateNamePosition(quint32 id, const QPointF &pos)
+{    
     if (id == p1id)
     {
-        const VPointF *p1 = VAbstractTool::data.GeometricObject<VPointF>(p1id).data();
-
-        auto moveLabel = new MoveDoubleLabel(doc, p1->mx(), p1->my(), MoveDoublePoint::FirstPoint, m_id, p1id);
-        connect(moveLabel, &MoveDoubleLabel::ChangePosition, this, &VToolDoublePoint::DoChangePosition);
-        qApp->getUndoStack()->push(moveLabel);
+        qApp->getUndoStack()->push(new MoveDoubleLabel(doc, pos, MoveDoublePoint::FirstPoint, m_id, p1id));
     }
     else if (id == p2id)
     {
-        const VPointF *p2 = VAbstractTool::data.GeometricObject<VPointF>(p2id).data();
-
-        auto moveLabel = new MoveDoubleLabel(doc, p2->mx(), p2->my(), MoveDoublePoint::SecondPoint, m_id, p2id);
-        connect(moveLabel, &MoveDoubleLabel::ChangePosition, this, &VToolDoublePoint::DoChangePosition);
-        qApp->getUndoStack()->push(moveLabel);
+        qApp->getUndoStack()->push(new MoveDoubleLabel(doc, pos, MoveDoublePoint::SecondPoint, m_id, p2id));
     }
 }
 

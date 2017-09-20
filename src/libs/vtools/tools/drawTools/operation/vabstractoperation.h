@@ -87,6 +87,7 @@ public:
 
     virtual void GroupVisibility(quint32 object, bool visible) Q_DECL_OVERRIDE;
     virtual void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget) Q_DECL_OVERRIDE;
+    virtual void DoChangePosition(quint32 id, const QPointF &pos) Q_DECL_OVERRIDE;
 
     virtual bool IsLabelVisible(quint32 id) const Q_DECL_OVERRIDE;
     virtual void SetLabelVisible(quint32 id, bool visible) Q_DECL_OVERRIDE;
@@ -137,7 +138,7 @@ protected:
     virtual void AddToFile() Q_DECL_OVERRIDE;
     virtual void ChangeLabelVisibility(quint32 id, bool visible) Q_DECL_OVERRIDE;
 
-    void UpdateNamePosition(quint32 id);
+    void UpdateNamePosition(quint32 id, const QPointF &pos);
     void SaveSourceDestination(QDomElement &tag);
 
     template <typename T>
@@ -152,15 +153,11 @@ protected:
 
     QString ComplexPointToolTip(quint32 itemId) const;
     QString ComplexCurveToolTip(quint32 itemId) const;
-protected slots:
-    void DoChangePosition(quint32 id, qreal mx, qreal my);
 private:
     Q_DISABLE_COPY(VAbstractOperation)
 
     void AllowCurveHover(bool enabled, GOType type);
     void AllowCurveSelecting(bool enabled, GOType type);
-
-    void ChangePosition(QGraphicsItem *item, quint32 id, const QPointF &pos);
 };
 
 //---------------------------------------------------------------------------------------------------------------------

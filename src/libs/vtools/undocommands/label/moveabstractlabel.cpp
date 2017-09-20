@@ -36,26 +36,15 @@
 #include "../vundocommand.h"
 
 //---------------------------------------------------------------------------------------------------------------------
-MoveAbstractLabel::MoveAbstractLabel(VAbstractPattern *doc, quint32 pointId, double x, double y,
-                                     QUndoCommand *parent)
+MoveAbstractLabel::MoveAbstractLabel(VAbstractPattern *doc, quint32 pointId, const QPointF &pos, QUndoCommand *parent)
     : VUndoCommand(QDomElement(), doc, parent),
-      m_oldMx(0.0),
-      m_oldMy(0.0),
-      m_newMx(x),
-      m_newMy(y),
-      m_isRedo(false),
-      m_scene(qApp->getCurrentScene())
+      m_oldPos(),
+      m_newPos(pos)
 {
     nodeId = pointId;
     qCDebug(vUndo, "Point id %u", nodeId);
 
-    qCDebug(vUndo, "Label new Mx %f", m_newMx);
-    qCDebug(vUndo, "Label new My %f", m_newMy);
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-MoveAbstractLabel::~MoveAbstractLabel()
-{
+    qCDebug(vUndo, "Label new position (%f;%f)", m_newPos.x(), m_newPos.y());
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -63,10 +52,7 @@ void MoveAbstractLabel::undo()
 {
     qCDebug(vUndo, "Undo.");
 
-    Do(m_oldMx, m_oldMy);
-    VMainGraphicsView::NewSceneRect(m_scene, qApp->getSceneView());
-    m_isRedo = true;
-    emit ChangePosition(nodeId, m_oldMx, m_oldMy);
+    Do(m_oldPos);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -74,10 +60,5 @@ void MoveAbstractLabel::redo()
 {
     qCDebug(vUndo, "Redo.");
 
-    Do(m_newMx, m_newMy);
-    VMainGraphicsView::NewSceneRect(m_scene, qApp->getSceneView());
-    if (m_isRedo)
-    {
-        emit ChangePosition(nodeId, m_newMx, m_newMy);
-    }
+    Do(m_newPos);
 }

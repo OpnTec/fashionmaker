@@ -41,30 +41,20 @@ class QGraphicsScene;
 
 class MoveAbstractLabel : public VUndoCommand
 {
-    Q_OBJECT
 public:
-    MoveAbstractLabel(VAbstractPattern *doc, quint32 pointId, double x, double y, QUndoCommand *parent = nullptr);
-    virtual ~MoveAbstractLabel();
+    MoveAbstractLabel(VAbstractPattern *doc, quint32 pointId, const QPointF &pos, QUndoCommand *parent = nullptr);
+    virtual ~MoveAbstractLabel()=default;
 
     virtual void undo() Q_DECL_OVERRIDE;
     virtual void redo() Q_DECL_OVERRIDE;
 
     quint32 GetPointId() const;
-    double  GetNewMx() const;
-    double  GetNewMy() const;
-
-signals:
-    void ChangePosition(quint32 id, qreal mx, qreal my);
+    QPointF GetNewPos() const;
 protected:
-    double m_oldMx;
-    double m_oldMy;
-    double m_newMx;
-    double m_newMy;
-    bool   m_isRedo;
-    //Need for resizing scene rect
-    QGraphicsScene *m_scene;
+    QPointF m_oldPos;
+    QPointF m_newPos;
 
-    virtual void Do(double mx, double my)=0;
+    virtual void Do(const QPointF &pos)=0;
 private:
     Q_DISABLE_COPY(MoveAbstractLabel)
 };
@@ -76,15 +66,9 @@ inline quint32 MoveAbstractLabel::GetPointId() const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-inline double MoveAbstractLabel::GetNewMx() const
+inline QPointF MoveAbstractLabel::GetNewPos() const
 {
-    return m_newMx;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-inline double MoveAbstractLabel::GetNewMy() const
-{
-    return m_newMy;
+    return m_newPos;
 }
 
 #endif // MOVEABSTRACTLABEL_H
