@@ -186,7 +186,6 @@ VToolSplinePath* VToolSplinePath::Create(QSharedPointer<DialogTool> dialog, VMai
  * @brief Create help create tool.
  * @param initData init data.
  * @param path spline path.
- * @param typeCreation way we create this tool.
  */
 VToolSplinePath* VToolSplinePath::Create(VToolSplinePathInitData &initData,  VSplinePath *path)
 {

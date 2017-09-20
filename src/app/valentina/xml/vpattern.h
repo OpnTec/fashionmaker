@@ -36,8 +36,8 @@
 
 class VMainGraphicsScene;
 class VNodeDetail;
-class VToolSinglePointInitData;
-class VToolLinePointInitData;
+struct VToolSinglePointInitData;
+struct VToolLinePointInitData;
 
 /**
  * @brief The VPattern class working with pattern file.

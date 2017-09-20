@@ -52,6 +52,7 @@ class VAbstractNode;
 
 QT_WARNING_PUSH
 QT_WARNING_DISABLE_GCC("-Weffc++")
+QT_WARNING_DISABLE_CLANG("-Wdeprecated")
 
 struct VAbstractToolInitData
 {
