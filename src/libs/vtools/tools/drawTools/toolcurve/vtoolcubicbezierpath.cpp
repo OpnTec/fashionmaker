@@ -181,9 +181,10 @@ void VToolCubicBezierPath::ShowVisualization(bool show)
 //---------------------------------------------------------------------------------------------------------------------
 void VToolCubicBezierPath::ShowContextMenu(QGraphicsSceneContextMenuEvent *event, quint32 id)
 {
+    Q_UNUSED(id)
     try
     {
-        ContextMenu<DialogCubicBezierPath>(event, id);
+        ContextMenu<DialogCubicBezierPath>(event);
     }
     catch(const VExceptionToolWasDeleted &e)
     {

@@ -252,9 +252,10 @@ void VToolLine::AllowSelecting(bool enabled)
 //---------------------------------------------------------------------------------------------------------------------
 void VToolLine::ShowContextMenu(QGraphicsSceneContextMenuEvent *event, quint32 id)
 {
+    Q_UNUSED(id)
     try
     {
-        ContextMenu<DialogLine>(event, id);
+        ContextMenu<DialogLine>(event);
     }
     catch(const VExceptionToolWasDeleted &e)
     {

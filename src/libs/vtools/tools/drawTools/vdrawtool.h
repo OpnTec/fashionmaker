@@ -110,7 +110,7 @@ protected:
     virtual void ChangeLabelVisibility(quint32 id, bool visible);
 
     template <typename Dialog>
-    void ContextMenu(QGraphicsSceneContextMenuEvent *event, quint32 itemId,
+    void ContextMenu(QGraphicsSceneContextMenuEvent *event, quint32 itemId = NULL_ID,
                      const RemoveOption &showRemove = RemoveOption::Enable,
                      const Referens &ref = Referens::Follow);
 
@@ -151,7 +151,14 @@ void VDrawTool::ContextMenu(QGraphicsSceneContextMenuEvent *event, quint32 itemI
 
     QAction *actionShowLabel = menu.addAction(tr("Show label"));
     actionShowLabel->setCheckable(true);
-    actionShowLabel->setChecked(IsLabelVisible(itemId));
+    if (itemId != NULL_ID)
+    {
+        actionShowLabel->setChecked(IsLabelVisible(itemId));
+    }
+    else
+    {
+       actionShowLabel->setVisible(false);
+    }
 
     QAction *actionRemove = menu.addAction(QIcon::fromTheme("edit-delete"), tr("Delete"));
     if (showRemove == RemoveOption::Enable)

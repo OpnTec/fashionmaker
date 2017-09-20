@@ -278,9 +278,10 @@ void VToolSplinePath::EnableToolMove(bool move)
 //---------------------------------------------------------------------------------------------------------------------
 void VToolSplinePath::ShowContextMenu(QGraphicsSceneContextMenuEvent *event, quint32 id)
 {
+    Q_UNUSED(id)
     try
     {
-        ContextMenu<DialogSplinePath>(event, id);
+        ContextMenu<DialogSplinePath>(event);
     }
     catch(const VExceptionToolWasDeleted &e)
     {

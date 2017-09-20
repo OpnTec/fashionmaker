@@ -366,9 +366,10 @@ void VToolEllipticalArc::ShowVisualization(bool show)
 //---------------------------------------------------------------------------------------------------------------------
 void VToolEllipticalArc::ShowContextMenu(QGraphicsSceneContextMenuEvent *event, quint32 id)
 {
+    Q_UNUSED(id)
     try
     {
-        ContextMenu<DialogEllipticalArc>(event, id);
+        ContextMenu<DialogEllipticalArc>(event);
     }
     catch(const VExceptionToolWasDeleted &e)
     {

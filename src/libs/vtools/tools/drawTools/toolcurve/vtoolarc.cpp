@@ -303,9 +303,10 @@ void VToolArc::ShowVisualization(bool show)
 //---------------------------------------------------------------------------------------------------------------------
 void VToolArc::ShowContextMenu(QGraphicsSceneContextMenuEvent *event, quint32 id)
 {
+    Q_UNUSED(id)
     try
     {
-        ContextMenu<DialogArc>(event, id);
+        ContextMenu<DialogArc>(event);
     }
     catch(const VExceptionToolWasDeleted &e)
     {

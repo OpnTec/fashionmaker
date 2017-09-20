@@ -545,9 +545,10 @@ void VToolSpline::RefreshCtrlPoints()
 //---------------------------------------------------------------------------------------------------------------------
 void VToolSpline::ShowContextMenu(QGraphicsSceneContextMenuEvent *event, quint32 id)
 {
+    Q_UNUSED(id)
     try
     {
-        ContextMenu<DialogSpline>(event, id);
+        ContextMenu<DialogSpline>(event);
     }
     catch(const VExceptionToolWasDeleted &e)
     {
