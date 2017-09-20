@@ -58,9 +58,11 @@ struct VToolTrueDartsInitData : public VAbstractToolInitData
           name1(),
           mx1(10),
           my1(15),
+          showLabel1(true),
           name2(),
           mx2(10),
-          my2(15)
+          my2(15),
+          showLabel2(true)
     {}
 
     quint32 p1id;
@@ -71,11 +73,13 @@ struct VToolTrueDartsInitData : public VAbstractToolInitData
     quint32 dartP2Id;
     quint32 dartP3Id;
     QString name1;
-    qreal mx1;
-    qreal my1;
+    qreal   mx1;
+    qreal   my1;
+    bool    showLabel1;
     QString name2;
-    qreal mx2;
-    qreal my2;
+    qreal   mx2;
+    qreal   my2;
+    bool    showLabel2;
 };
 
 class VToolTrueDarts : public VToolDoublePoint

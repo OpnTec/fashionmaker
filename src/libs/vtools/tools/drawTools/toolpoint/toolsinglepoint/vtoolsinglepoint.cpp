@@ -311,7 +311,7 @@ void VToolSinglePoint::SaveOptions(QDomElement &tag, QSharedPointer<VGObject> &o
     doc->SetAttribute(tag, AttrName, point->name());
     doc->SetAttribute(tag, AttrMx, qApp->fromPixel(point->mx()));
     doc->SetAttribute(tag, AttrMy, qApp->fromPixel(point->my()));
-    doc->SetAttribute(tag, AttrShowLabel, point->IsShowLabel());
+    doc->SetAttribute<bool>(tag, AttrShowLabel, point->IsShowLabel());
 }
 
 //---------------------------------------------------------------------------------------------------------------------

@@ -217,6 +217,8 @@
                           <xs:attribute name="baseLineP1" type="xs:unsignedInt"/>
                           <xs:attribute name="baseLineP2" type="xs:unsignedInt"/>
                           <xs:attribute name="showLabel" type="xs:boolean"/>
+                          <xs:attribute name="showLabel1" type="xs:boolean"/>
+                          <xs:attribute name="showLabel2" type="xs:boolean"/>
                         </xs:complexType>
                       </xs:element>
                       <xs:element name="line" minOccurs="0" maxOccurs="unbounded">

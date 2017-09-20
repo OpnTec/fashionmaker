@@ -63,6 +63,9 @@ public:
     void    setNameP2(const QString &name);
 
     virtual void GroupVisibility(quint32 object, bool visible) Q_DECL_OVERRIDE;
+
+    virtual bool IsLabelVisible(quint32 id) const Q_DECL_OVERRIDE;
+    virtual void SetLabelVisible(quint32 id, bool visible) Q_DECL_OVERRIDE;
 public slots:
     void         Label1ChangePosition(const QPointF &pos);
     void         Label2ChangePosition(const QPointF &pos);
@@ -93,6 +96,7 @@ protected:
     virtual void contextMenuEvent ( QGraphicsSceneContextMenuEvent * event ) Q_DECL_OVERRIDE;
     virtual void SaveOptions(QDomElement &tag, QSharedPointer<VGObject> &obj) Q_DECL_OVERRIDE;
     virtual void AddToFile() Q_DECL_OVERRIDE;
+    virtual void ChangeLabelVisibility(quint32 id, bool visible) Q_DECL_OVERRIDE;
 
     QString ComplexToolTip(quint32 itemId) const;
 

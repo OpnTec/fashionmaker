@@ -2186,10 +2186,12 @@ void VPattern::ParseToolTrueDarts(VMainGraphicsScene *scene, const QDomElement &
         initData.name1 = GetParametrString(domElement, AttrName1, "A");
         initData.mx1 = qApp->toPixel(GetParametrDouble(domElement, AttrMx1, "10.0"));
         initData.my1 = qApp->toPixel(GetParametrDouble(domElement, AttrMy1, "15.0"));
+        initData.showLabel1 = GetParametrBool(domElement, AttrShowLabel1, trueStr);
 
         initData.name2 = GetParametrString(domElement, AttrName2, "A");
         initData.mx2 = qApp->toPixel(GetParametrDouble(domElement, AttrMx2, "10.0"));
         initData.my2 = qApp->toPixel(GetParametrDouble(domElement, AttrMy2, "15.0"));
+        initData.showLabel2 = GetParametrBool(domElement, AttrShowLabel2, trueStr);
 
         VToolTrueDarts::Create(initData);
     }

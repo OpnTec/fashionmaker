@@ -154,20 +154,22 @@ VToolTrueDarts *VToolTrueDarts::Create(VToolTrueDartsInitData initData)
                               static_cast<QPointF>(*dartP1), static_cast<QPointF>(*dartP2),
                               static_cast<QPointF>(*dartP3), fPoint1, fPoint2);
 
+    VPointF *p1 = new VPointF(fPoint1, initData.name1, initData.mx1, initData.my1, initData.id);
+    p1->SetShowLabel(initData.showLabel1);
+
+    VPointF *p2 = new VPointF(fPoint2, initData.name2, initData.mx2, initData.my2, initData.id);
+    p2->SetShowLabel(initData.showLabel2);
+
     if (initData.typeCreation == Source::FromGui)
     {
         initData.id = VContainer::getNextId();//Just reserve id for tool
-        initData.p1id = initData.data->AddGObject(new VPointF(fPoint1, initData.name1, initData.mx1, initData.my1,
-                                                              initData.id));
-        initData.p2id = initData.data->AddGObject(new VPointF(fPoint2, initData.name2, initData.mx2, initData.my2,
-                                                              initData.id));
+        initData.p1id = initData.data->AddGObject(p1);
+        initData.p2id = initData.data->AddGObject(p2);
     }
     else
     {
-        initData.data->UpdateGObject(initData.p1id, new VPointF(fPoint1, initData.name1, initData.mx1, initData.my1,
-                                                                initData.id));
-        initData.data->UpdateGObject(initData.p2id, new VPointF(fPoint2, initData.name2, initData.mx2, initData.my2,
-                                                                initData.id));
+        initData.data->UpdateGObject(initData.p1id, p1);
+        initData.data->UpdateGObject(initData.p2id, p2);
         if (initData.parse != Document::FullParse)
         {
             initData.doc->UpdateToolData(initData.id, initData.data);

@@ -2,7 +2,7 @@
  **
  **  @file
  **  @author Roman Telezhynskyi <dismine(at)gmail.com>
- **  @date   17 9, 2017
+ **  @date   20 9, 2017
  **
  **  @brief
  **  @copyright
@@ -26,29 +26,34 @@
  **
  *************************************************************************/
 
-#ifndef SHOWLABEL_H
-#define SHOWLABEL_H
+#ifndef SHOWDOUBLELABEL_H
+#define SHOWDOUBLELABEL_H
 
 #include "../vundocommand.h"
 
 class QGraphicsScene;
 
-class ShowLabel : public VUndoCommand
+enum class ShowDoublePoint: char { FirstPoint, SecondPoint };
+
+class ShowDoubleLabel : public VUndoCommand
 {
 public:
-    ShowLabel(VAbstractPattern *doc, quint32 id, bool visible, QUndoCommand *parent = nullptr);
-    virtual ~ShowLabel()=default;
+    ShowDoubleLabel(VAbstractPattern *doc, quint32 toolId, quint32 pointId, bool visible, ShowDoublePoint type,
+                    QUndoCommand *parent = nullptr);
+    virtual ~ShowDoubleLabel()=default;
 
     virtual void undo() Q_DECL_OVERRIDE;
     virtual void redo() Q_DECL_OVERRIDE;
 private:
-    Q_DISABLE_COPY(ShowLabel)
+    Q_DISABLE_COPY(ShowDoubleLabel)
     bool m_visible;
     bool m_oldVisible;
     //Need for resizing scene rect
     QGraphicsScene *m_scene;
+    ShowDoublePoint m_type;
+    quint32         m_idTool;
 
     void Do(bool visible);
 };
 
-#endif // SHOWLABEL_H
+#endif // SHOWDOUBLELABEL_H
