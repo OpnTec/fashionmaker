@@ -208,9 +208,8 @@ QT_WARNING_DISABLE_GCC("-Wswitch-default")
             {
                 case GOType::Point:
                 {
-                    const DestinationItem &item = initData.destination.at(i);
                     UpdatePoint(initData.id, idObject, oPoint, calcAngle, initData.suffix, initData.data,
-                                item.id, item.mx, item.my);
+                                initData.destination.at(i));
                     break;
                 }
                 case GOType::Arc:
@@ -384,6 +383,7 @@ DestinationItem VToolRotation::CreatePoint(quint32 idTool, quint32 idItem, const
     DestinationItem item;
     item.mx = rotated.mx();
     item.my = rotated.my();
+    item.showLabel = rotated.IsShowLabel();
     item.id = data->AddGObject(new VPointF(rotated));
     return item;
 }
@@ -436,14 +436,15 @@ DestinationItem VToolRotation::CreateCurveWithSegments(quint32 idTool, quint32 i
 
 //---------------------------------------------------------------------------------------------------------------------
 void VToolRotation::UpdatePoint(quint32 idTool, quint32 idItem, const QPointF &origin, qreal angle,
-                                const QString &suffix, VContainer *data, quint32 id, qreal mx, qreal my)
+                                const QString &suffix, VContainer *data, const DestinationItem &item)
 {
     const QSharedPointer<VPointF> point = data->GeometricObject<VPointF>(idItem);
     VPointF rotated = point->Rotate(origin, angle, suffix);
     rotated.setIdObject(idTool);
-    rotated.setMx(mx);
-    rotated.setMy(my);
-    data->UpdateGObject(id, new VPointF(rotated));
+    rotated.setMx(item.mx);
+    rotated.setMy(item.my);
+    rotated.SetShowLabel(item.showLabel);
+    data->UpdateGObject(item.id, new VPointF(rotated));
 }
 
 //---------------------------------------------------------------------------------------------------------------------

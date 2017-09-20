@@ -47,6 +47,7 @@ struct DestinationItem
     quint32 id;
     qreal mx;
     qreal my;
+    bool showLabel;
 };
 
 struct VAbstractOperationInitData : public VAbstractToolInitData
@@ -86,6 +87,9 @@ public:
 
     virtual void GroupVisibility(quint32 object, bool visible) Q_DECL_OVERRIDE;
     virtual void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget) Q_DECL_OVERRIDE;
+
+    virtual bool IsLabelVisible(quint32 id) const Q_DECL_OVERRIDE;
+    virtual void SetLabelVisible(quint32 id, bool visible) Q_DECL_OVERRIDE;
 
     static void ExtractData(const QDomElement &domElement, VAbstractOperationInitData &initData);
 public slots:
@@ -131,6 +135,7 @@ protected:
                        QGraphicsItem *parent = nullptr);
 
     virtual void AddToFile() Q_DECL_OVERRIDE;
+    virtual void ChangeLabelVisibility(quint32 id, bool visible) Q_DECL_OVERRIDE;
 
     void UpdateNamePosition(quint32 id);
     void SaveSourceDestination(QDomElement &tag);

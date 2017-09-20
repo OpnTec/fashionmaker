@@ -120,8 +120,7 @@ QT_WARNING_DISABLE_GCC("-Wswitch-default")
                 case GOType::Point:
                 {
                     const DestinationItem &item = initData.destination.at(i);
-                    UpdatePoint(initData.id, idObject, fPoint, sPoint, initData.suffix, initData.data, item.id, item.mx,
-                                item.my);
+                    UpdatePoint(initData.id, idObject, fPoint, sPoint, initData.suffix, initData.data, item);
                     break;
                 }
                 case GOType::Arc:
@@ -171,6 +170,7 @@ DestinationItem VAbstractFlipping::CreatePoint(quint32 idTool, quint32 idItem, c
     DestinationItem item;
     item.mx = rotated.mx();
     item.my = rotated.my();
+    item.showLabel = rotated.IsShowLabel();
     item.id = data->AddGObject(new VPointF(rotated));
     return item;
 }
@@ -187,15 +187,16 @@ DestinationItem VAbstractFlipping::CreateArc(quint32 idTool, quint32 idItem, con
 
 //---------------------------------------------------------------------------------------------------------------------
 void VAbstractFlipping::UpdatePoint(quint32 idTool, quint32 idItem, const QPointF &firstPoint,
-                                    const QPointF &secondPoint, const QString &suffix, VContainer *data, quint32 id,
-                                    qreal mx, qreal my)
+                                    const QPointF &secondPoint, const QString &suffix, VContainer *data,
+                                    const DestinationItem &item)
 {
     const QSharedPointer<VPointF> point = data->GeometricObject<VPointF>(idItem);
     VPointF rotated = point->Flip(QLineF(firstPoint, secondPoint), suffix);
     rotated.setIdObject(idTool);
-    rotated.setMx(mx);
-    rotated.setMy(my);
-    data->UpdateGObject(id, new VPointF(rotated));
+    rotated.setMx(item.mx);
+    rotated.setMy(item.my);
+    rotated.SetShowLabel(item.showLabel);
+    data->UpdateGObject(item.id, new VPointF(rotated));
 }
 
 //---------------------------------------------------------------------------------------------------------------------

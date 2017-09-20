@@ -28,6 +28,7 @@
 
 #include "vabstractoperation.h"
 #include "../../../undocommands/label/operationmovelabel.h"
+#include "../../../undocommands/label/operationshowlabel.h"
 #include "../vgeometry/vpointf.h"
 
 const QString VAbstractOperation::TagItem        = QStringLiteral("item");
@@ -85,6 +86,38 @@ void VAbstractOperation::paint(QPainter *painter, const QStyleOptionGraphicsItem
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+bool VAbstractOperation::IsLabelVisible(quint32 id) const
+{
+    if (operatedObjects.contains(id))
+    {
+        VAbstractSimple *obj = operatedObjects.value(id);
+        if (obj && obj->GetType() == GOType::Point)
+        {
+            return VAbstractTool::data.GeometricObject<VPointF>(id)->IsShowLabel();
+        }
+    }
+
+    return false;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VAbstractOperation::SetLabelVisible(quint32 id, bool visible)
+{
+    if (operatedObjects.contains(id))
+    {
+        VAbstractSimple *obj = operatedObjects.value(id);
+        if (obj && obj->GetType() == GOType::Point)
+        {
+            VSimplePoint *item = qobject_cast<VSimplePoint *>(obj);
+            SCASSERT(item != nullptr)
+            const QSharedPointer<VPointF> point = VAbstractTool::data.GeometricObject<VPointF>(id);
+            point->SetShowLabel(visible);
+            item->RefreshPointGeometry(*point);
+        }
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 void VAbstractOperation::ExtractData(const QDomElement &domElement, VAbstractOperationInitData &initData)
 {
     const QDomNodeList nodeList = domElement.childNodes();
@@ -118,6 +151,7 @@ void VAbstractOperation::ExtractData(const QDomElement &domElement, VAbstractOpe
                     d.id = VDomDocument::GetParametrUInt(element, AttrIdObject, NULL_ID_STR);
                     d.mx = qApp->toPixel(VDomDocument::GetParametrDouble(element, AttrMx, QString::number(INT_MAX)));
                     d.my = qApp->toPixel(VDomDocument::GetParametrDouble(element, AttrMy, QString::number(INT_MAX)));
+                    d.showLabel = VDomDocument::GetParametrBool(element, AttrShowLabel, trueStr);
                     initData.destination.append(d);
                 }
             }
@@ -427,6 +461,19 @@ void VAbstractOperation::AddToFile()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void VAbstractOperation::ChangeLabelVisibility(quint32 id, bool visible)
+{
+    if (operatedObjects.contains(id))
+    {
+        VAbstractSimple *obj = operatedObjects.value(id);
+        if (obj && obj->GetType() == GOType::Point)
+        {
+            qApp->getUndoStack()->push(new OperationShowLabel(doc, m_id, id, visible));
+        }
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 void VAbstractOperation::UpdateNamePosition(quint32 id)
 {
     const QSharedPointer<VPointF> point = VAbstractTool::data.GeometricObject<VPointF>(id);
@@ -460,6 +507,7 @@ void VAbstractOperation::SaveSourceDestination(QDomElement &tag)
         {
             doc->SetAttribute(item, AttrMx, qApp->fromPixel(destination.at(i).mx));
             doc->SetAttribute(item, AttrMy, qApp->fromPixel(destination.at(i).my));
+            doc->SetAttribute<bool>(item, AttrShowLabel, destination.at(i).showLabel);
         }
 
         tagObjects.appendChild(item);

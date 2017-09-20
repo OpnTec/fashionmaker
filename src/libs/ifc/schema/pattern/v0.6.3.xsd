@@ -252,6 +252,7 @@
                                       <xs:attribute name="idObject" type="xs:unsignedInt" use="required"/>
                                       <xs:attribute name="mx" type="xs:double"/>
                                       <xs:attribute name="my" type="xs:double"/>
+                                      <xs:attribute name="showLabel" type="xs:boolean"/>
                                     </xs:complexType>
                                   </xs:element>
                                 </xs:sequence>

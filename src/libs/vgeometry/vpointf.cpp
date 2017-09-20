@@ -111,21 +111,27 @@ VPointF::operator QPointF() const
 VPointF VPointF::Rotate(const QPointF &originPoint, qreal degrees, const QString &prefix) const
 {
     const QPointF p = RotatePF(originPoint, toQPointF(), degrees);
-    return VPointF(p, name() + prefix, mx(), my());
+    VPointF rotated(p, name() + prefix, mx(), my());
+    rotated.SetShowLabel(IsShowLabel());
+    return rotated;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 VPointF VPointF::Flip(const QLineF &axis, const QString &prefix) const
 {
     const QPointF p = FlipPF(axis, toQPointF());
-    return VPointF(p, name() + prefix, mx(), my());
+    VPointF flipped(p, name() + prefix, mx(), my());
+    flipped.SetShowLabel(IsShowLabel());
+    return flipped;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 VPointF VPointF::Move(qreal length, qreal angle, const QString &prefix) const
 {
     const QPointF p = MovePF(toQPointF(), length, angle);
-    return VPointF(p, name() + prefix, mx(), my());
+    VPointF moved(p, name() + prefix, mx(), my());
+    moved.SetShowLabel(IsShowLabel());
+    return moved;
 }
 
 //---------------------------------------------------------------------------------------------------------------------

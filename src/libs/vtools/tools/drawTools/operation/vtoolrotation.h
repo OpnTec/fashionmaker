@@ -111,7 +111,7 @@ private:
                                                    qreal angle, const QString &suffix, VContainer *data);
 
     static void UpdatePoint(quint32 idTool, quint32 idItem, const QPointF &origin, qreal angle,
-                            const QString &suffix, VContainer *data, quint32 id, qreal mx, qreal my);
+                            const QString &suffix, VContainer *data, const DestinationItem &item);
     template <class Item>
     static void UpdateItem(quint32 idTool, quint32 idItem, const QPointF &origin, qreal angle,
                            const QString &suffix, VContainer *data, quint32 id);

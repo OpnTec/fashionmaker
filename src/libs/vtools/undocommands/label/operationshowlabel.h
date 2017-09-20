@@ -1,14 +1,14 @@
 /************************************************************************
  **
- **  @file   operationmovelabel.h
+ **  @file
  **  @author Roman Telezhynskyi <dismine(at)gmail.com>
- **  @date   13 5, 2016
+ **  @date   20 9, 2017
  **
  **  @brief
  **  @copyright
  **  This source code is part of the Valentine project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
- **  Copyright (C) 2016 Valentina project
+ **  Copyright (C) 2017 Valentina project
  **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
  **
  **  Valentina is free software: you can redistribute it and/or modify
@@ -26,41 +26,32 @@
  **
  *************************************************************************/
 
-#ifndef OPERATIONMOVELABEL_H
-#define OPERATIONMOVELABEL_H
+#ifndef OPERATIONSHOWLABEL_H
+#define OPERATIONSHOWLABEL_H
 
-#include <qcompilerdetection.h>
-#include <QDomElement>
-#include <QMetaObject>
-#include <QObject>
-#include <QString>
-#include <QtGlobal>
+#include "../vundocommand.h"
 
-#include "moveabstractlabel.h"
+class QGraphicsScene;
 
-class OperationMoveLabel : public MoveAbstractLabel
+class OperationShowLabel : public VUndoCommand
 {
-    Q_OBJECT
 public:
-    OperationMoveLabel(quint32 idTool, VAbstractPattern *doc, double x, double y, quint32 idPoint,
-                      QUndoCommand *parent = nullptr);
-    virtual ~OperationMoveLabel();
+    OperationShowLabel(VAbstractPattern *doc, quint32 idTool, quint32 idPoint, bool visible,
+                       QUndoCommand *parent = nullptr);
+    virtual ~OperationShowLabel()=default;
 
-    virtual bool mergeWith(const QUndoCommand *command) Q_DECL_OVERRIDE;
-    virtual int  id() const Q_DECL_OVERRIDE;
+    virtual void undo() Q_DECL_OVERRIDE;
+    virtual void redo() Q_DECL_OVERRIDE;
 
-    quint32 GetToolId() const;
-protected:
-    virtual void Do(double mx, double my) Q_DECL_OVERRIDE;
 private:
-    Q_DISABLE_COPY(OperationMoveLabel)
+    Q_DISABLE_COPY(OperationShowLabel)
+    bool m_visible;
+    bool m_oldVisible;
+    //Need for resizing scene rect
+    QGraphicsScene *m_scene;
     quint32 m_idTool;
+
+    void Do(bool visible);
 };
 
-//---------------------------------------------------------------------------------------------------------------------
-inline quint32 OperationMoveLabel::GetToolId() const
-{
-    return m_idTool;
-}
-
-#endif // OPERATIONMOVELABEL_H
+#endif // OPERATIONSHOWLABEL_H

@@ -26,7 +26,7 @@
  **
  *************************************************************************/
 
-#include "showdoublelabel.h"
+#include "operationshowlabel.h"
 
 #include <QDomElement>
 
@@ -37,47 +37,34 @@
 #include "../vtools/tools/drawTools/vdrawtool.h"
 
 //---------------------------------------------------------------------------------------------------------------------
-ShowDoubleLabel::ShowDoubleLabel(VAbstractPattern *doc, quint32 toolId, quint32 pointId, bool visible,
-                                 ShowDoublePoint type, QUndoCommand *parent)
+OperationShowLabel::OperationShowLabel(VAbstractPattern *doc, quint32 idTool, quint32 idPoint, bool visible,
+                                       QUndoCommand *parent)
     : VUndoCommand(QDomElement(), doc, parent),
       m_visible(visible),
       m_oldVisible(not visible),
       m_scene(qApp->getCurrentScene()),
-      m_type(type),
-      m_idTool(toolId)
+      m_idTool(idTool)
 {
-    nodeId = pointId;
+    nodeId = idPoint;
     qCDebug(vUndo, "Point id %u", nodeId);
 
-    if (type == ShowDoublePoint::FirstPoint)
-    {
-        setText(tr("toggle the first dart label"));
-    }
-    else
-    {
-        setText(tr("togggle the second dart label"));
-    }
+    setText(tr("toggle label"));
 
-    const QDomElement domElement = doc->elementById(m_idTool, VAbstractPattern::TagPoint);
-    if (domElement.isElement())
+    qCDebug(vUndo, "Tool id %u", m_idTool);
+
+    const QDomElement element = GetDestinationObject(m_idTool, nodeId);
+    if (element.isElement())
     {
-        if (type == ShowDoublePoint::FirstPoint)
-        {
-            m_oldVisible = doc->GetParametrBool(domElement, AttrShowLabel1, trueStr);
-        }
-        else
-        {
-            m_oldVisible = doc->GetParametrBool(domElement, AttrShowLabel2, trueStr);
-        }
+        m_oldVisible = doc->GetParametrBool(element, AttrShowLabel, trueStr);
     }
     else
     {
-        qCDebug(vUndo, "Can't find point with id = %u.", m_idTool);
+        qCDebug(vUndo, "Can't find point with id = %u.", nodeId);
     }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void ShowDoubleLabel::undo()
+void OperationShowLabel::undo()
 {
     qCDebug(vUndo, "Undo.");
 
@@ -85,7 +72,7 @@ void ShowDoubleLabel::undo()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void ShowDoubleLabel::redo()
+void OperationShowLabel::redo()
 {
     qCDebug(vUndo, "Redo.");
 
@@ -93,19 +80,12 @@ void ShowDoubleLabel::redo()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void ShowDoubleLabel::Do(bool visible)
+void OperationShowLabel::Do(bool visible)
 {
-    QDomElement domElement = doc->elementById(m_idTool, VAbstractPattern::TagPoint);
-    if (domElement.isElement())
+    QDomElement domElement = GetDestinationObject(m_idTool, nodeId);
+    if (not domElement.isNull() && domElement.isElement())
     {
-        if (m_type == ShowDoublePoint::FirstPoint)
-        {
-            doc->SetAttribute<bool>(domElement, AttrShowLabel1, visible);
-        }
-        else
-        {
-            doc->SetAttribute<bool>(domElement, AttrShowLabel2, visible);
-        }
+        doc->SetAttribute<bool>(domElement, AttrShowLabel, visible);
 
         if (VDrawTool *tool = qobject_cast<VDrawTool *>(VAbstractPattern::getTool(m_idTool)))
         {
@@ -115,7 +95,7 @@ void ShowDoubleLabel::Do(bool visible)
     }
     else
     {
-        qCDebug(vUndo, "Can't find point with id = %u.", m_idTool);
+        qCDebug(vUndo, "Can't find point with id = %u.", nodeId);
     }
 }
 

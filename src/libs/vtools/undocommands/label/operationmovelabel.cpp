@@ -31,7 +31,6 @@
 #include <QDomNode>
 #include <QDomNodeList>
 
-#include "../../tools/drawTools/operation/vtoolrotation.h"
 #include "../ifc/xml/vabstractpattern.h"
 #include "../ifc/ifcdef.h"
 #include "../vmisc/logging.h"
@@ -111,43 +110,4 @@ void OperationMoveLabel::Do(double mx, double my)
     {
         qCDebug(vUndo, "Can't find point with id = %u.", nodeId);
     }
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-QDomElement OperationMoveLabel::GetDestinationObject(quint32 idTool, quint32 idPoint) const
-{
-    const QDomElement tool = doc->elementById(idTool, VAbstractPattern::TagOperation);
-    if (tool.isElement())
-    {
-        QDomElement correctDest;
-        const QDomNodeList nodeList = tool.childNodes();
-        for (qint32 i = 0; i < nodeList.size(); ++i)
-        {
-            const QDomElement dest = nodeList.at(i).toElement();
-            if (not dest.isNull() && dest.isElement() && dest.tagName() == VAbstractOperation::TagDestination)
-            {
-                correctDest = dest;
-                break;
-            }
-        }
-
-        if (not correctDest.isNull())
-        {
-            const QDomNodeList destObjects = correctDest.childNodes();
-            for (qint32 i = 0; i < destObjects.size(); ++i)
-            {
-                const QDomElement obj = destObjects.at(i).toElement();
-                if (not obj.isNull() && obj.isElement())
-                {
-                    const quint32 id = doc->GetParametrUInt(obj, AttrIdObject, NULL_ID_STR);
-                    if (idPoint == id)
-                    {
-                        return obj;
-                    }
-                }
-            }
-        }
-    }
-
-    return QDomElement();
 }

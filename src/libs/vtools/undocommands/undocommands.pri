@@ -26,7 +26,8 @@ HEADERS += \
     $$PWD/togglepieceinlayout.h \
     $$PWD/savepiecepathoptions.h \
     $$PWD/label/showlabel.h \
-    $$PWD/label/showdoublelabel.h
+    $$PWD/label/showdoublelabel.h \
+    $$PWD/label/operationshowlabel.h
 
 SOURCES += \
     $$PWD/addtocalc.cpp \
@@ -53,4 +54,5 @@ SOURCES += \
     $$PWD/togglepieceinlayout.cpp \
     $$PWD/savepiecepathoptions.cpp \
     $$PWD/label/showlabel.cpp \
-    $$PWD/label/showdoublelabel.cpp
+    $$PWD/label/showdoublelabel.cpp \
+    $$PWD/label/operationshowlabel.cpp

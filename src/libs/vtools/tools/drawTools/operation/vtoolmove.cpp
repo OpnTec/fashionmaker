@@ -191,12 +191,9 @@ QT_WARNING_DISABLE_GCC("-Wswitch-default")
             switch(static_cast<GOType>(obj->getType()))
             {
                 case GOType::Point:
-                {
-                    const DestinationItem &item = initData.destination.at(i);
-                    UpdatePoint(initData.id, idObject, calcAngle, calcLength, initData.suffix, initData.data, item.id,
-                                item.mx, item.my);
+                    UpdatePoint(initData.id, idObject, calcAngle, calcLength, initData.suffix, initData.data,
+                                initData.destination.at(i));
                     break;
-                }
                 case GOType::Arc:
                     UpdateArc<VArc>(initData.id, idObject, calcAngle, calcLength, initData.suffix, initData.data,
                                     initData.destination.at(i).id);
@@ -397,6 +394,7 @@ DestinationItem VToolMove::CreatePoint(quint32 idTool, quint32 idItem, qreal ang
     DestinationItem item;
     item.mx = moved.mx();
     item.my = moved.my();
+    item.showLabel = moved.IsShowLabel();
     item.id = data->AddGObject(new VPointF(moved));
     return item;
 }
@@ -413,14 +411,15 @@ DestinationItem VToolMove::CreateArc(quint32 idTool, quint32 idItem, qreal angle
 
 //---------------------------------------------------------------------------------------------------------------------
 void VToolMove::UpdatePoint(quint32 idTool, quint32 idItem, qreal angle, qreal length, const QString &suffix,
-                              VContainer *data, quint32 id, qreal mx, qreal my)
+                              VContainer *data, const DestinationItem &item)
 {
     const QSharedPointer<VPointF> point = data->GeometricObject<VPointF>(idItem);
     VPointF moved = point->Move(length, angle, suffix);
     moved.setIdObject(idTool);
-    moved.setMx(mx);
-    moved.setMy(my);
-    data->UpdateGObject(id, new VPointF(moved));
+    moved.setMx(item.mx);
+    moved.setMy(item.my);
+    moved.SetShowLabel(item.showLabel);
+    data->UpdateGObject(item.id, new VPointF(moved));
 }
 
 //---------------------------------------------------------------------------------------------------------------------
