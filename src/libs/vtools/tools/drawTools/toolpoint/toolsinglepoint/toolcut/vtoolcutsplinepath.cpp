@@ -137,7 +137,6 @@ VToolCutSplinePath* VToolCutSplinePath::Create(VToolCutSplinePathInitData &initD
     VSplinePath *splPath1 = nullptr;
     VSplinePath *splPath2 = nullptr;
     VPointF *p = VToolCutSplinePath::CutSplinePath(qApp->toPixel(result), splPath, initData.name, &splPath1, &splPath2);
-    p->SetShowLabel(initData.showLabel);
 
     SCASSERT(splPath1 != nullptr)
     SCASSERT(splPath2 != nullptr)
@@ -145,6 +144,7 @@ VToolCutSplinePath* VToolCutSplinePath::Create(VToolCutSplinePathInitData &initD
 
     p->setMx(initData.mx);
     p->setMy(initData.my);
+    p->SetShowLabel(initData.showLabel);
 
     if (initData.typeCreation == Source::FromGui)
     {
