@@ -72,11 +72,8 @@ public:
     QString Notes() const;
     void    SetNotes(const QString &text);
 
-    QString FamilyName() const;
-    void    SetFamilyName(const QString &text);
-
-    QString GivenName() const;
-    void    SetGivenName(const QString &text);
+    QString Customer() const;
+    void    SetCustomer(const QString &text);
 
     QDate   BirthDate() const;
     void    SetBirthDate(const QDate &date);
@@ -111,8 +108,7 @@ public:
     static const QString TagSize;
     static const QString TagHeight;
     static const QString TagPersonal;
-    static const QString TagFamilyName;
-    static const QString TagGivenName;
+    static const QString TagCustomer;
     static const QString TagBirthDate;
     static const QString TagGender;
     static const QString TagPMSystem;

@@ -77,6 +77,9 @@ public:
     MeasurementsType patternType() const;
     void             setPatternType(const MeasurementsType &patternType);
 
+    QString GetCustomerName() const;
+    void    SetCustomerName(const QString &name);
+
     virtual void     OpenSettings()=0;
     VCommonSettings *Settings();
 
@@ -140,6 +143,7 @@ private:
     VMainGraphicsView  *sceneView;
 
     VAbstractPattern   *doc;
+    QString            m_customerName;
 
     /**
      * @brief openingPattern true when we opening pattern. If something will be wrong in formula this help understand if
@@ -149,6 +153,18 @@ private:
 
     void ClearTranslation();
 };
+
+//---------------------------------------------------------------------------------------------------------------------
+inline QString VAbstractApplication::GetCustomerName() const
+{
+    return m_customerName;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+inline void VAbstractApplication::SetCustomerName(const QString &name)
+{
+    m_customerName = name;
+}
 
 //---------------------------------------------------------------------------------------------------------------------
 inline QString VAbstractApplication::GetPPath() const

@@ -91,8 +91,7 @@ private slots:
     void OpenAt(QAction *where);
 #endif //defined(Q_OS_MAC)
 
-    void SaveGivenName();
-    void SaveFamilyName();
+    void SaveCustomerName();
     void SaveEmail();
     void SaveGender(int index);
     void SaveBirthDate(const QDate & date);
