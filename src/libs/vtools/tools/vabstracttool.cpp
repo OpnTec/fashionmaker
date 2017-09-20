@@ -611,8 +611,8 @@ QVector<VPieceNode> VAbstractTool::PrepareNodes(const VPiecePath &path, VMainGra
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-quint32 VAbstractTool::PrepareNode(const VPieceNode &node, VMainGraphicsScene *scene,
-                                   VAbstractPattern *doc, VContainer *data)
+quint32 VAbstractTool::PrepareNode(const VPieceNode &node, VMainGraphicsScene *scene, VAbstractPattern *doc,
+                                   VContainer *data)
 {
     SCASSERT(scene != nullptr)
     SCASSERT(doc != nullptr)
@@ -624,6 +624,7 @@ quint32 VAbstractTool::PrepareNode(const VPieceNode &node, VMainGraphicsScene *s
     initData.data = data;
     initData.parse = Document::FullParse;
     initData.typeCreation = Source::FromGui;
+    initData.scene = scene;
 
     switch (node.GetTypeTool())
     {

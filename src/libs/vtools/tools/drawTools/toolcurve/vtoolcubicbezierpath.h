@@ -43,6 +43,9 @@
 class VCubicBezierPath;
 template <class T> class QSharedPointer;
 
+QT_WARNING_PUSH
+QT_WARNING_DISABLE_GCC("-Weffc++")
+
 struct VToolCubicBezierPathInitData : public VAbstractToolInitData
 {
     VToolCubicBezierPathInitData()
@@ -52,6 +55,8 @@ struct VToolCubicBezierPathInitData : public VAbstractToolInitData
 
     VCubicBezierPath *path;
 };
+
+QT_WARNING_POP
 
 class VToolCubicBezierPath:public VAbstractSpline
 {

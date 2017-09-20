@@ -44,10 +44,14 @@
 #include "../vmisc/vabstractapplication.h"
 #include "../vmisc/def.h"
 #include "../vwidgets/vmaingraphicsscene.h"
+#include "../vmisc/diagnostic.h"
 #include "vdatatool.h"
 
 class VGraphicsSimpleTextItem;
 class VAbstractNode;
+
+QT_WARNING_PUSH
+QT_WARNING_DISABLE_GCC("-Weffc++")
 
 struct VAbstractToolInitData
 {
@@ -68,6 +72,8 @@ struct VAbstractToolInitData
     Document            parse;
     Source              typeCreation;
 };
+
+QT_WARNING_POP
 
 /**
  * @brief The VAbstractTool abstract class for all tools.
