@@ -64,6 +64,8 @@ struct VAbstractToolInitData
           typeCreation(Source::FromFile)
     {}
 
+    virtual ~VAbstractToolInitData()=default;
+
     /** @brief id tool id, 0 if tool doesn't exist yet.*/
     quint32             id;
     VMainGraphicsScene *scene;
