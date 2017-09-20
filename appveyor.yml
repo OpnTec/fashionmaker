@@ -196,7 +196,7 @@ after_test:
 
 artifacts:
   - path: build/package/valentina
-    name: valentina-win-$(QT_VERSION)-($APPVEYOR_REPO_BRANCH)-$(APPVEYOR_REPO_COMMIT)
+    name: valentina-win-$(QT_VERSION)-$(APPVEYOR_REPO_BRANCH)-$(APPVEYOR_REPO_COMMIT)
 
 deploy:
 - provider: BinTray
@@ -211,4 +211,4 @@ deploy:
   version: 0.6
   on:
     DEPLOY: true
-  artifact: valentina-win-$(QT_VERSION)-($APPVEYOR_REPO_BRANCH)-$(APPVEYOR_REPO_COMMIT)
+  artifact: valentina-win-$(QT_VERSION)-$(APPVEYOR_REPO_BRANCH)-$(APPVEYOR_REPO_COMMIT)
