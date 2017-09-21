@@ -61,14 +61,7 @@ const QString VToolAlongLine::ToolType = QStringLiteral("alongLine");
 //---------------------------------------------------------------------------------------------------------------------
 /**
  * @brief VToolAlongLine constuctor.
- * @param doc dom document container.
- * @param data container with variables.
- * @param id object id in container.
- * @param formula string with length formula.
- * @param firstPointId id first point of line.
- * @param secondPointId id second point of line.
- * @param typeLine line type. line type.
- * @param typeCreation way we create this tool.
+ * @param initData init data.
  * @param parent parent object.
  */
 VToolAlongLine::VToolAlongLine(const VToolAlongLineInitData &initData, QGraphicsItem *parent)

@@ -120,7 +120,6 @@ VToolCutArc* VToolCutArc::Create(QSharedPointer<DialogTool> dialog, VMainGraphic
 /**
  * @brief Create help create tool.
  * @param initData init data.
- * @param typeCreation way we create this tool.
  */
 VToolCutArc* VToolCutArc::Create(VToolCutArcInitData &initData)
 {
