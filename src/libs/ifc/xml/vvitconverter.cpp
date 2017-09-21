@@ -344,7 +344,25 @@ void VVITConverter::ConverCustomerNameToV0_4_0()
     }
 
     QDomElement customer = createElement(strCustomer);
-    customer.appendChild(createTextNode(givenName + QLatin1Char(' ') + familyName));
+
+    QString customerName;
+    if (not givenName.isEmpty() && not familyName.isEmpty())
+    {
+        customerName = givenName + QLatin1Char(' ') + familyName;
+    }
+    else if (not givenName.isEmpty() && familyName.isEmpty())
+    {
+        customerName = givenName;
+    }
+    else if (givenName.isEmpty() && not familyName.isEmpty())
+    {
+        customerName = familyName;
+    }
+
+    if (not customerName.isEmpty())
+    {
+        customer.appendChild(createTextNode(customerName));
+    }
     personal.insertBefore(customer, personal.firstChild());
 }
 
