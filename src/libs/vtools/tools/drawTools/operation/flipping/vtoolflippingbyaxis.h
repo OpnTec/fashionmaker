@@ -33,7 +33,7 @@
 
 #include "vabstractflipping.h"
 
-struct VToolFlippingByAxisInitData : public VAbstractOperationInitData
+struct VToolFlippingByAxisInitData : VAbstractOperationInitData
 {
     VToolFlippingByAxisInitData()
         : VAbstractOperationInitData(),

@@ -45,7 +45,7 @@
 template <class T> class QSharedPointer;
 class VFormula;
 
-struct VToolRotationInitData : public VAbstractOperationInitData
+struct VToolRotationInitData : VAbstractOperationInitData
 {
     VToolRotationInitData()
         : VAbstractOperationInitData(),

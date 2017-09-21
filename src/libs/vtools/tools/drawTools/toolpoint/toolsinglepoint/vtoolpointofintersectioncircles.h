@@ -45,7 +45,7 @@
 class VFormula;
 template <class T> class QSharedPointer;
 
-struct VToolPointOfIntersectionCirclesInitData : public VToolSinglePointInitData
+struct VToolPointOfIntersectionCirclesInitData : VToolSinglePointInitData
 {
     VToolPointOfIntersectionCirclesInitData()
         : VToolSinglePointInitData(),

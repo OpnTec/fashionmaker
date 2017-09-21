@@ -46,7 +46,7 @@
 
 template <class T> class QSharedPointer;
 
-struct VToolCurveIntersectAxisInitData : public VToolLinePointInitData
+struct VToolCurveIntersectAxisInitData : VToolLinePointInitData
 {
     VToolCurveIntersectAxisInitData()
         : VToolLinePointInitData(),

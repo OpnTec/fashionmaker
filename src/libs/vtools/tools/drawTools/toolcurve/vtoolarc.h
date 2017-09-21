@@ -43,7 +43,7 @@
 class VFormula;
 template <class T> class QSharedPointer;
 
-struct VToolArcInitData : public VAbstractSplineInitData
+struct VToolArcInitData : VAbstractSplineInitData
 {
     VToolArcInitData()
         : VAbstractSplineInitData(),

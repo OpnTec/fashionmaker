@@ -43,7 +43,7 @@
 
 template <class T> class QSharedPointer;
 
-struct VToolPointOfIntersectionInitData : public VToolSinglePointInitData
+struct VToolPointOfIntersectionInitData : VToolSinglePointInitData
 {
     VToolPointOfIntersectionInitData()
         : VToolSinglePointInitData(),

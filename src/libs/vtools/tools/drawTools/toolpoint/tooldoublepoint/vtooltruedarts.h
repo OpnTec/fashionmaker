@@ -44,7 +44,7 @@
 
 template <class T> class QSharedPointer;
 
-struct VToolTrueDartsInitData : public VAbstractToolInitData
+struct VToolTrueDartsInitData : VAbstractToolInitData
 {
     VToolTrueDartsInitData()
         : VAbstractToolInitData(),

@@ -46,7 +46,7 @@
 class VSplinePath;
 template <class T> class QSharedPointer;
 
-struct VToolSplinePathInitData : public VAbstractSplineInitData
+struct VToolSplinePathInitData : VAbstractSplineInitData
 {
     VToolSplinePathInitData()
         : VAbstractSplineInitData(),

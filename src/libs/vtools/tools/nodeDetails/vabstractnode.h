@@ -41,7 +41,7 @@
 
 enum class ParentType : bool {Scene, Item};
 
-struct VAbstractNodeInitData : public VAbstractToolInitData
+struct VAbstractNodeInitData : VAbstractToolInitData
 {
     VAbstractNodeInitData()
         : VAbstractToolInitData(),

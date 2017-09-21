@@ -50,7 +50,7 @@ struct DestinationItem
     bool showLabel;
 };
 
-struct VAbstractOperationInitData : public VAbstractToolInitData
+struct VAbstractOperationInitData : VAbstractToolInitData
 {
     VAbstractOperationInitData()
         : VAbstractToolInitData(),

@@ -41,7 +41,7 @@
 class DialogTool;
 class VNoBrushScalePathItem;
 
-struct VToolSeamAllowanceInitData : public VAbstractToolInitData
+struct VToolSeamAllowanceInitData : VAbstractToolInitData
 {
     VToolSeamAllowanceInitData()
         : VAbstractToolInitData(),

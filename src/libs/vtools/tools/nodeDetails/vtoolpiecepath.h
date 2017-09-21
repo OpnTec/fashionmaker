@@ -35,7 +35,7 @@
 
 class DialogTool;
 
-struct VToolPiecePathInitData : public VAbstractNodeInitData
+struct VToolPiecePathInitData : VAbstractNodeInitData
 {
     VToolPiecePathInitData()
         : VAbstractNodeInitData(),

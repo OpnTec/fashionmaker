@@ -46,7 +46,7 @@ template <class T> class QSharedPointer;
 QT_WARNING_PUSH
 QT_WARNING_DISABLE_GCC("-Weffc++")
 
-struct VToolCubicBezierPathInitData : public VAbstractToolInitData
+struct VToolCubicBezierPathInitData : VAbstractToolInitData
 {
     VToolCubicBezierPathInitData()
         : VAbstractToolInitData(),

@@ -43,7 +43,7 @@
 
 template <class T> class QSharedPointer;
 
-struct VToolCutArcInitData : public VToolSinglePointInitData
+struct VToolCutArcInitData : VToolSinglePointInitData
 {
     VToolCutArcInitData()
         : VToolSinglePointInitData(),

@@ -47,7 +47,7 @@
 
 class DialogTool;
 
-struct VToolUnionDetailsInitData : public VAbstractToolInitData
+struct VToolUnionDetailsInitData : VAbstractToolInitData
 {
     VToolUnionDetailsInitData()
         : VAbstractToolInitData(),
