@@ -504,6 +504,7 @@ void VApplication::BeginLogging()
 //---------------------------------------------------------------------------------------------------------------------
 void VApplication::ClearOldLogs() const
 {
+    const QString workingDirectory = QDir::currentPath();// Save the app working directory
     QDir logsDir(LogDirPath());
     logsDir.setNameFilters(QStringList("*.log"));
     logsDir.setCurrent(LogDirPath());
@@ -541,6 +542,8 @@ void VApplication::ClearOldLogs() const
     {
         qCDebug(vApp, "There are no old logs.");
     }
+
+    QDir::setCurrent(workingDirectory); // Restore working directory
 }
 
 //---------------------------------------------------------------------------------------------------------------------

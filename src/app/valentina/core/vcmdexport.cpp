@@ -114,6 +114,12 @@ void VCommandLine::InitOptions(VCommandLineOptions &options, QMap<QString, int> 
                                                                     "positioned in the details mode. Any layout related"
                                                                     " options will be ignored.")));
 
+    optionsIndex.insert(LONG_OPTION_EXPORTSUCHDETAILS, index++);
+    options.append(new QCommandLineOption(QStringList() << LONG_OPTION_EXPORTSUCHDETAILS,
+                                          translate("VCommandLine", "Export only details that match a piece name "
+                                                                    "regex."),
+                                          translate("VCommandLine", "The name regex")));
+
     optionsIndex.insert(LONG_OPTION_GRADATIONSIZE, index++);
     options.append(new QCommandLineOption(QStringList() << SINGLE_OPTION_GRADATIONSIZE << LONG_OPTION_GRADATIONSIZE,
                                           translate("VCommandLine", "Set size value a pattern file, that was opened "
@@ -647,6 +653,18 @@ int VCommandLine::IsTextAsPaths() const
 int VCommandLine::IsExportOnlyDetails() const
 {
     return parser.isSet(*optionsUsed.value(optionsIndex.value(LONG_OPTION_EXPORTONLYDETAILS)));
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QString VCommandLine::OptExportSuchDetails() const
+{
+    QString path;
+    if (IsExportEnabled())
+    {
+        path = parser.value(*optionsUsed.value(optionsIndex.value(LONG_OPTION_EXPORTSUCHDETAILS)));
+    }
+
+    return path;
 }
 
 //---------------------------------------------------------------------------------------------------------------------

@@ -19,6 +19,7 @@
 - Added new language Polish (Poland).
 - [#755] New feature. Toggle point label.
 - Fixed bug. After full parse undocommand Move labe losts connection to tool.
+- [#756] New feature. Select pieces from command line.
 
 # Version 0.5.1
 - [#683] Tool Seam allowance's dialog is off screen on small resolutions.

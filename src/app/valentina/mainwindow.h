@@ -61,7 +61,7 @@ public:
     explicit MainWindow(QWidget *parent = nullptr);
     virtual ~MainWindow() Q_DECL_OVERRIDE;
 
-    bool LoadPattern(const QString &fileName, const QString &customMeasureFile = QString());
+    bool LoadPattern(QString fileName, const QString &customMeasureFile = QString());
 
 public slots:
     void ProcessCMD();

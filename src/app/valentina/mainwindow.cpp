@@ -4168,9 +4168,17 @@ MainWindow::~MainWindow()
  * @brief LoadPattern open pattern file.
  * @param fileName name of file.
  */
-bool MainWindow::LoadPattern(const QString &fileName, const QString& customMeasureFile)
+bool MainWindow::LoadPattern(QString fileName, const QString& customMeasureFile)
 {
     qCDebug(vMainWindow, "Loading new file %s.", qUtf8Printable(fileName));
+
+    { // Convert to absolute path is need
+        QFileInfo info(fileName);
+        if (info.isRelative())
+        {
+            fileName = QDir::currentPath() + QLatin1Char('/') + fileName;
+        }
+    }
 
     //We have unsaved changes or load more then one file per time
     if (OpenNewValentina(fileName))
@@ -4811,14 +4819,31 @@ void MainWindow::DoExport(const VCommandLinePtr &expParams)
         }
         else
         {
-            QHash<quint32, VPiece>::const_iterator i = allDetails->constBegin();
-            while (i != allDetails->constEnd())
+            const QString nameRegex = expParams->OptExportSuchDetails();
+            if (nameRegex.isEmpty())
             {
-                if (i.value().IsInLayout())
+                QHash<quint32, VPiece>::const_iterator i = allDetails->constBegin();
+                while (i != allDetails->constEnd())
                 {
-                    details.insert(i.key(), i.value());
+                    if (i.value().IsInLayout())
+                    {
+                        details.insert(i.key(), i.value());
+                    }
+                    ++i;
                 }
-                ++i;
+            }
+            else
+            {
+                const QRegularExpression nameRe(nameRegex);
+                QHash<quint32, VPiece>::const_iterator i = allDetails->constBegin();
+                while (i != allDetails->constEnd())
+                {
+                    if (nameRe.match(i.value().GetName()).hasMatch())
+                    {
+                        details.insert(i.key(), i.value());
+                    }
+                    ++i;
+                }
             }
 
             if (details.count() == 0)
@@ -4870,7 +4895,8 @@ void MainWindow::DoExport(const VCommandLinePtr &expParams)
             }
             catch (const VException &e)
             {
-                qCCritical(vMainWindow, "%s\n\n%s", qUtf8Printable(tr("Export error.")), qUtf8Printable(e.ErrorMessage()));
+                qCCritical(vMainWindow, "%s\n\n%s", qUtf8Printable(tr("Export error.")),
+                           qUtf8Printable(e.ErrorMessage()));
                 qApp->exit(V_EX_DATAERR);
                 return;
             }

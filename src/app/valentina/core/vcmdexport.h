@@ -79,6 +79,9 @@ public:
     int IsTextAsPaths() const;
     int IsExportOnlyDetails() const;
 
+    //@brief returns the piece name regex or empty string if not set
+    QString OptExportSuchDetails() const;
+
     //generator creation is moved here ... because most options are for it only, so no need to create extra getters...
     //@brief creates VLayoutGenerator
     VLayoutGeneratorPtr DefaultGenerator() const;
