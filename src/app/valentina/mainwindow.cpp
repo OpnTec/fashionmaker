@@ -4799,17 +4799,38 @@ void MainWindow::ZoomFirstShow()
 //---------------------------------------------------------------------------------------------------------------------
 void MainWindow::DoExport(const VCommandLinePtr &expParams)
 {
-    const QHash<quint32, VPiece> *details = pattern->DataPieces();
+    QHash<quint32, VPiece> details;
     if(not qApp->getOpeningPattern())
     {
-        if (details->count() == 0)
+        const QHash<quint32, VPiece> *allDetails = pattern->DataPieces();
+        if (allDetails->count() == 0)
         {
             qCCritical(vMainWindow, "%s", qUtf8Printable(tr("You can't export empty scene.")));
             qApp->exit(V_EX_DATAERR);
             return;
         }
+        else
+        {
+            QHash<quint32, VPiece>::const_iterator i = allDetails->constBegin();
+            while (i != allDetails->constEnd())
+            {
+                if (i.value().IsInLayout())
+                {
+                    details.insert(i.key(), i.value());
+                }
+                ++i;
+            }
+
+            if (details.count() == 0)
+            {
+                qCCritical(vMainWindow, "%s", qUtf8Printable(tr("You can't export empty scene. Please, "
+                                                                "include at least one detail in layout.")));
+                qApp->exit(V_EX_DATAERR);
+                return;
+            }
+        }
     }
-    listDetails = PrepareDetailsForLayout(*details);
+    listDetails = PrepareDetailsForLayout(details);
 
     const bool exportOnlyDetails = expParams->IsExportOnlyDetails();
     if (exportOnlyDetails)
