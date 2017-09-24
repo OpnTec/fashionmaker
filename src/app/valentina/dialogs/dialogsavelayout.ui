@@ -69,7 +69,7 @@
           <string>Select path to destination folder</string>
          </property>
          <property name="text">
-          <string>Browse...</string>
+          <string>Browse…</string>
          </property>
         </widget>
        </item>

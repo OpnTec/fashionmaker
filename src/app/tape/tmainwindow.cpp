@@ -2270,7 +2270,7 @@ bool TMainWindow::MaybeSave()
         messageBox->setDefaultButton(QMessageBox::Yes);
         messageBox->setEscapeButton(QMessageBox::Cancel);
 
-        messageBox->setButtonText(QMessageBox::Yes, curFile.isEmpty() || mIsReadOnly ? tr("Save...") : tr("Save"));
+        messageBox->setButtonText(QMessageBox::Yes, curFile.isEmpty() || mIsReadOnly ? tr("Save…") : tr("Save"));
         messageBox->setButtonText(QMessageBox::No, tr("Don't Save"));
 
         messageBox->setWindowModality(Qt::ApplicationModal);

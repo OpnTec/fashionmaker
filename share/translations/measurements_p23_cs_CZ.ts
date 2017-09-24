@@ -13,7 +13,7 @@
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="192"/>
         <source>Height: Total</source>
         <comment>Full measurement name.</comment>
-        <translation type="unfinished"></translation>
+        <translation>Výška: Celkem</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="193"/>

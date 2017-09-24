@@ -1658,7 +1658,7 @@
     </message>
     <message>
         <source>Insert...</source>
-        <translation>Voeg toe....</translation>
+        <translation type="vanished">Voeg toe....</translation>
     </message>
     <message>
         <source>Preview</source>
@@ -1835,6 +1835,10 @@
     <message>
         <source>User material</source>
         <translation>Gebruikers materiaal</translation>
+    </message>
+    <message>
+        <source>Insert…</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -3896,6 +3900,10 @@ Toch de instellingen aanpassen?</translation>
         <source>Manage</source>
         <translation>Beheren</translation>
     </message>
+    <message>
+        <source>The customer name from individual measurements</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>DialogPatternXmlEdit</name>
@@ -4857,7 +4865,7 @@ Toch de instellingen aanpassen?</translation>
     </message>
     <message>
         <source>Browse...</source>
-        <translation>Browse..</translation>
+        <translation type="vanished">Browse..</translation>
     </message>
     <message>
         <source>TextLabel</source>
@@ -4898,6 +4906,10 @@ Toch de instellingen aanpassen?</translation>
     <message>
         <source>Text as paths</source>
         <translation>Tekst als paden</translation>
+    </message>
+    <message>
+        <source>Browse…</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -6228,7 +6240,7 @@ Toch de instellingen aanpassen?</translation>
     </message>
     <message>
         <source>Save &amp;As...</source>
-        <translation>Opslaan &amp;als...</translation>
+        <translation type="vanished">Opslaan &amp;als...</translation>
     </message>
     <message>
         <source>Save not yet saved pattern</source>
@@ -6709,7 +6721,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Export As...</source>
-        <translation>Export als...</translation>
+        <translation type="vanished">Export als...</translation>
     </message>
     <message>
         <source>Export original layout</source>
@@ -6954,7 +6966,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Save...</source>
-        <translation>Sla op...</translation>
+        <translation type="vanished">Sla op...</translation>
     </message>
     <message>
         <source>Don&apos;t Save</source>
@@ -6986,7 +6998,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Report Bug...</source>
-        <translation>Rapporteer fout...</translation>
+        <translation type="vanished">Rapporteer fout...</translation>
     </message>
     <message>
         <source>Point intersection curves</source>
@@ -7348,6 +7360,22 @@ Do you want to save your changes?</source>
         <source>Internal path tool</source>
         <translation>Ingesloten paden gereedschap</translation>
     </message>
+    <message>
+        <source>Save &amp;As…</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Report Bug…</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Export As…</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Save…</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>MainWindowsNoGUI</name>
@@ -7492,6 +7520,13 @@ Do you want to save your changes?</source>
     <message>
         <source>move point label</source>
         <translation>verzet punt label</translation>
+    </message>
+</context>
+<context>
+    <name>OperationShowLabel</name>
+    <message>
+        <source>toggle label</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -8257,6 +8292,24 @@ Do you want to save your changes?</source>
     </message>
 </context>
 <context>
+    <name>ShowDoubleLabel</name>
+    <message>
+        <source>toggle the first dart label</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>togggle the second dart label</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>ShowLabel</name>
+    <message>
+        <source>toggle label</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>TMainWindow</name>
     <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:18pt;&quot;&gt;Select New for creation measurement file.&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
@@ -8376,11 +8429,11 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Given name:</source>
-        <translation>Voornaam:</translation>
+        <translation type="vanished">Voornaam:</translation>
     </message>
     <message>
         <source>Family name:</source>
-        <translation>Achternaam:</translation>
+        <translation type="vanished">Achternaam:</translation>
     </message>
     <message>
         <source>Birth date:</source>
@@ -8424,7 +8477,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Open individual ...</source>
-        <translation>Open individueel ...</translation>
+        <translation type="vanished">Open individueel ...</translation>
     </message>
     <message>
         <source>Save</source>
@@ -8432,7 +8485,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Save As ...</source>
-        <translation>Opslaan als ...</translation>
+        <translation type="vanished">Opslaan als ...</translation>
     </message>
     <message>
         <source>Quit</source>
@@ -8721,7 +8774,7 @@ Wil je deze veranderingen opslaan?</translation>
     </message>
     <message>
         <source>Create from existing ...</source>
-        <translation>Creëer vanuit bestaande ...</translation>
+        <translation type="vanished">Creëer vanuit bestaande ...</translation>
     </message>
     <message>
         <source>Create from existing file</source>
@@ -8785,7 +8838,7 @@ Wil je deze veranderingen opslaan?</translation>
     </message>
     <message>
         <source>Save...</source>
-        <translation>Sla op...</translation>
+        <translation type="vanished">Sla op...</translation>
     </message>
     <message>
         <source>Don&apos;t Save</source>
@@ -8841,7 +8894,7 @@ Wil je deze veranderingen opslaan?</translation>
     </message>
     <message>
         <source>Customer&apos;s family name</source>
-        <translation>Klant&apos;s family naam</translation>
+        <translation type="vanished">Klant&apos;s family naam</translation>
     </message>
     <message>
         <source>Customer&apos;s email address</source>
@@ -8893,11 +8946,35 @@ Wil je deze veranderingen opslaan?</translation>
     </message>
     <message>
         <source>Open multisize ...</source>
-        <translation>Open meerdere maten...</translation>
+        <translation type="vanished">Open meerdere maten...</translation>
     </message>
     <message>
         <source>Export from multisize measurements is not supported.</source>
         <translation>Exporteren van meerdere maten metingen wordt niet ondersteunt.</translation>
+    </message>
+    <message>
+        <source>Customer name:</source>
+        <translation type="unfinished">Klant naam:</translation>
+    </message>
+    <message>
+        <source>Open individual …</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Save As …</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Open multisize …</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Create from existing …</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Save…</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -9567,6 +9644,17 @@ Wil je deze veranderingen opslaan?</translation>
     </message>
 </context>
 <context>
+    <name>VAbstractOperation</name>
+    <message>
+        <source>Label</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Length</source>
+        <translation type="unfinished">Lengte</translation>
+    </message>
+</context>
+<context>
     <name>VAbstractPattern</name>
     <message>
         <source>Can&apos;t find tool in table.</source>
@@ -9593,6 +9681,10 @@ Wil je deze veranderingen opslaan?</translation>
     <message>
         <source>Length</source>
         <translation>Lengte</translation>
+    </message>
+    <message>
+        <source>Label</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -10197,6 +10289,10 @@ Wil je deze veranderingen opslaan?</translation>
         <source>Delete</source>
         <translation>Verwijderen</translation>
     </message>
+    <message>
+        <source>Show label</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>VException</name>
@@ -10599,6 +10695,10 @@ Wil je deze veranderingen opslaan?</translation>
         <source>Angle</source>
         <translation>Hoek</translation>
     </message>
+    <message>
+        <source>Label</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>VToolArc</name>
@@ -10617,6 +10717,10 @@ Wil je deze veranderingen opslaan?</translation>
     <message>
         <source>End angle</source>
         <translation>Einde straal</translation>
+    </message>
+    <message>
+        <source>Label</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -10637,12 +10741,23 @@ Wil je deze veranderingen opslaan?</translation>
         <source>End angle</source>
         <translation>Einde straal</translation>
     </message>
+    <message>
+        <source>Label</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>VToolBasePoint</name>
+    <message>
+        <source>Label</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>VToolCut</name>
     <message>
         <source>Length</source>
-        <translation>Lengte</translation>
+        <translation type="vanished">Lengte</translation>
     </message>
 </context>
 <context>
@@ -10667,6 +10782,10 @@ Wil je deze veranderingen opslaan?</translation>
         <source>radius</source>
         <translation>straal</translation>
     </message>
+    <message>
+        <source>label</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>VToolCutSpline</name>
@@ -10678,6 +10797,10 @@ Wil je deze veranderingen opslaan?</translation>
         <source>length</source>
         <translation>lengte</translation>
     </message>
+    <message>
+        <source>label</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>VToolCutSplinePath</name>
@@ -10688,6 +10811,10 @@ Wil je deze veranderingen opslaan?</translation>
     <message>
         <source>length</source>
         <translation>lengte</translation>
+    </message>
+    <message>
+        <source>label</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -10742,6 +10869,13 @@ Wil je deze veranderingen opslaan?</translation>
     </message>
 </context>
 <context>
+    <name>VToolDoublePoint</name>
+    <message>
+        <source>Label</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>VToolEllipticalArc</name>
     <message>
         <source>Length</source>
@@ -10759,6 +10893,28 @@ Wil je deze veranderingen opslaan?</translation>
         <source>End angle</source>
         <translation>Einde straal</translation>
     </message>
+    <message>
+        <source>Label</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>VToolFlippingByAxis</name>
+    <message>
+        <source>Origin point</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>VToolFlippingByLine</name>
+    <message>
+        <source>First line point</source>
+        <translation type="unfinished">Eerste lijnpunt</translation>
+    </message>
+    <message>
+        <source>Second line point</source>
+        <translation type="unfinished">Tweede lijnpunt</translation>
+    </message>
 </context>
 <context>
     <name>VToolHeight</name>
@@ -10769,6 +10925,10 @@ Wil je deze veranderingen opslaan?</translation>
     <message>
         <source>Angle</source>
         <translation>Hoek</translation>
+    </message>
+    <message>
+        <source>Label</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -10783,6 +10943,13 @@ Wil je deze veranderingen opslaan?</translation>
     </message>
 </context>
 <context>
+    <name>VToolLineIntersect</name>
+    <message>
+        <source>Label</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>VToolLineIntersectAxis</name>
     <message>
         <source>Length</source>
@@ -10791,6 +10958,10 @@ Wil je deze veranderingen opslaan?</translation>
     <message>
         <source>Angle</source>
         <translation>Hoek</translation>
+    </message>
+    <message>
+        <source>Label</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -10802,6 +10973,21 @@ Wil je deze veranderingen opslaan?</translation>
     <message>
         <source>Angle</source>
         <translation>Hoek</translation>
+    </message>
+    <message>
+        <source>Label</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>VToolMove</name>
+    <message>
+        <source>Rotation angle</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Length</source>
+        <translation type="unfinished">Lengte</translation>
     </message>
 </context>
 <context>
@@ -11341,6 +11527,21 @@ Wil je deze veranderingen opslaan?</translation>
         <source>Angle</source>
         <translation>Hoek</translation>
     </message>
+    <message>
+        <source>Label</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>VToolRotation</name>
+    <message>
+        <source>Origin point</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Rotation angle</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>VToolSeamAllowance</name>
@@ -11406,6 +11607,10 @@ Wil je deze veranderingen opslaan?</translation>
     <message>
         <source>Angle</source>
         <translation>Hoek</translation>
+    </message>
+    <message>
+        <source>Label</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

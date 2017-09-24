@@ -327,7 +327,7 @@
               <string>Insert placeholders</string>
              </property>
              <property name="text">
-              <string>Insert...</string>
+              <string>Insert…</string>
              </property>
             </widget>
            </item>

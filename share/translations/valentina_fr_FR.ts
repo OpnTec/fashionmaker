@@ -1657,10 +1657,6 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Insert...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Preview</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1834,6 +1830,10 @@
     </message>
     <message>
         <source>User material</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Insert…</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -3893,6 +3893,10 @@ Appliquer les réglages quand-même ?</translation>
         <source>Manage</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>The customer name from individual measurements</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>DialogPatternXmlEdit</name>
@@ -4854,7 +4858,7 @@ Appliquer les réglages quand-même ?</translation>
     </message>
     <message>
         <source>Browse...</source>
-        <translation>Parcourir...</translation>
+        <translation type="vanished">Parcourir...</translation>
     </message>
     <message>
         <source>TextLabel</source>
@@ -4894,6 +4898,10 @@ Appliquer les réglages quand-même ?</translation>
     </message>
     <message>
         <source>Text as paths</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Browse…</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -6225,7 +6233,7 @@ Appliquer les réglages quand-même ?</translation>
     </message>
     <message>
         <source>Save &amp;As...</source>
-        <translation>Enregistrer &amp;sous...</translation>
+        <translation type="vanished">Enregistrer &amp;sous...</translation>
     </message>
     <message>
         <source>Save not yet saved pattern</source>
@@ -6707,7 +6715,7 @@ Voulez-vous sauvegarder les changements?</translation>
     </message>
     <message>
         <source>Export As...</source>
-        <translation>Exporter en...</translation>
+        <translation type="vanished">Exporter en...</translation>
     </message>
     <message>
         <source>Export original layout</source>
@@ -6952,7 +6960,7 @@ Voulez-vous sauvegarder les changements?</translation>
     </message>
     <message>
         <source>Save...</source>
-        <translation>Sauvegarder ...</translation>
+        <translation type="vanished">Sauvegarder ...</translation>
     </message>
     <message>
         <source>Don&apos;t Save</source>
@@ -6984,7 +6992,7 @@ Voulez-vous sauvegarder les changements?</translation>
     </message>
     <message>
         <source>Report Bug...</source>
-        <translation>Rapport de bug ...</translation>
+        <translation type="vanished">Rapport de bug ...</translation>
     </message>
     <message>
         <source>Point intersection curves</source>
@@ -7346,6 +7354,22 @@ Voulez-vous sauvegarder les changements?</translation>
         <source>Internal path tool</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Save &amp;As…</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Report Bug…</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Export As…</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Save…</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>MainWindowsNoGUI</name>
@@ -7489,6 +7513,13 @@ Voulez-vous sauvegarder les changements?</translation>
     <name>OperationMoveLabel</name>
     <message>
         <source>move point label</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>OperationShowLabel</name>
+    <message>
+        <source>toggle label</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -8243,6 +8274,24 @@ Voulez-vous sauvegarder les changements?</translation>
     </message>
 </context>
 <context>
+    <name>ShowDoubleLabel</name>
+    <message>
+        <source>toggle the first dart label</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>togggle the second dart label</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>ShowLabel</name>
+    <message>
+        <source>toggle label</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>TMainWindow</name>
     <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:18pt;&quot;&gt;Select New for creation measurement file.&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
@@ -8362,11 +8411,11 @@ Voulez-vous sauvegarder les changements?</translation>
     </message>
     <message>
         <source>Given name:</source>
-        <translation>Prénom:</translation>
+        <translation type="vanished">Prénom:</translation>
     </message>
     <message>
         <source>Family name:</source>
-        <translation>Nom de famille:</translation>
+        <translation type="vanished">Nom de famille:</translation>
     </message>
     <message>
         <source>Birth date:</source>
@@ -8410,7 +8459,7 @@ Voulez-vous sauvegarder les changements?</translation>
     </message>
     <message>
         <source>Open individual ...</source>
-        <translation>Ouvrir individuelles ...</translation>
+        <translation type="vanished">Ouvrir individuelles ...</translation>
     </message>
     <message>
         <source>Save</source>
@@ -8418,7 +8467,7 @@ Voulez-vous sauvegarder les changements?</translation>
     </message>
     <message>
         <source>Save As ...</source>
-        <translation>Enregistrer sous ...</translation>
+        <translation type="vanished">Enregistrer sous ...</translation>
     </message>
     <message>
         <source>Quit</source>
@@ -8707,7 +8756,7 @@ Voulez-vous enregistrer les changements?</translation>
     </message>
     <message>
         <source>Create from existing ...</source>
-        <translation>Créer à partir de ...</translation>
+        <translation type="vanished">Créer à partir de ...</translation>
     </message>
     <message>
         <source>Create from existing file</source>
@@ -8771,7 +8820,7 @@ Voulez-vous enregistrer les changements?</translation>
     </message>
     <message>
         <source>Save...</source>
-        <translation>Sauvegarder ...</translation>
+        <translation type="vanished">Sauvegarder ...</translation>
     </message>
     <message>
         <source>Don&apos;t Save</source>
@@ -8827,7 +8876,7 @@ Voulez-vous enregistrer les changements?</translation>
     </message>
     <message>
         <source>Customer&apos;s family name</source>
-        <translation>Nom de famille du client</translation>
+        <translation type="vanished">Nom de famille du client</translation>
     </message>
     <message>
         <source>Customer&apos;s email address</source>
@@ -8878,11 +8927,31 @@ Voulez-vous enregistrer les changements?</translation>
         <translation type="unfinished">Vide</translation>
     </message>
     <message>
-        <source>Open multisize ...</source>
+        <source>Export from multisize measurements is not supported.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Export from multisize measurements is not supported.</source>
+        <source>Customer name:</source>
+        <translation type="unfinished">Nom du client :</translation>
+    </message>
+    <message>
+        <source>Open individual …</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Save As …</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Open multisize …</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Create from existing …</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Save…</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -9549,6 +9618,17 @@ Voulez-vous enregistrer les changements?</translation>
     </message>
 </context>
 <context>
+    <name>VAbstractOperation</name>
+    <message>
+        <source>Label</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Length</source>
+        <translation type="unfinished">Longueur</translation>
+    </message>
+</context>
+<context>
     <name>VAbstractPattern</name>
     <message>
         <source>Can&apos;t find tool in table.</source>
@@ -9575,6 +9655,10 @@ Voulez-vous enregistrer les changements?</translation>
     <message>
         <source>Length</source>
         <translation type="unfinished">Longueur</translation>
+    </message>
+    <message>
+        <source>Label</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -10174,6 +10258,10 @@ Voulez-vous enregistrer les changements?</translation>
         <source>Delete</source>
         <translation>Supprimer</translation>
     </message>
+    <message>
+        <source>Show label</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>VException</name>
@@ -10572,6 +10660,10 @@ Voulez-vous enregistrer les changements?</translation>
         <source>Angle</source>
         <translation type="unfinished">Angle</translation>
     </message>
+    <message>
+        <source>Label</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>VToolArc</name>
@@ -10589,6 +10681,10 @@ Voulez-vous enregistrer les changements?</translation>
     </message>
     <message>
         <source>End angle</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Label</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -10610,12 +10706,16 @@ Voulez-vous enregistrer les changements?</translation>
         <source>End angle</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Label</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
-    <name>VToolCut</name>
+    <name>VToolBasePoint</name>
     <message>
-        <source>Length</source>
-        <translation type="unfinished">Longueur</translation>
+        <source>Label</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -10640,6 +10740,10 @@ Voulez-vous enregistrer les changements?</translation>
         <source>radius</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>label</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>VToolCutSpline</name>
@@ -10651,6 +10755,10 @@ Voulez-vous enregistrer les changements?</translation>
         <source>length</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>label</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>VToolCutSplinePath</name>
@@ -10660,6 +10768,10 @@ Voulez-vous enregistrer les changements?</translation>
     </message>
     <message>
         <source>length</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>label</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -10707,6 +10819,13 @@ Voulez-vous enregistrer les changements?</translation>
     </message>
 </context>
 <context>
+    <name>VToolDoublePoint</name>
+    <message>
+        <source>Label</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>VToolEllipticalArc</name>
     <message>
         <source>Length</source>
@@ -10724,6 +10843,28 @@ Voulez-vous enregistrer les changements?</translation>
         <source>End angle</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Label</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>VToolFlippingByAxis</name>
+    <message>
+        <source>Origin point</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>VToolFlippingByLine</name>
+    <message>
+        <source>First line point</source>
+        <translation type="unfinished">Point de la première ligne</translation>
+    </message>
+    <message>
+        <source>Second line point</source>
+        <translation type="unfinished">Point de deuxieme ligne</translation>
+    </message>
 </context>
 <context>
     <name>VToolHeight</name>
@@ -10734,6 +10875,10 @@ Voulez-vous enregistrer les changements?</translation>
     <message>
         <source>Angle</source>
         <translation type="unfinished">Angle</translation>
+    </message>
+    <message>
+        <source>Label</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -10748,6 +10893,13 @@ Voulez-vous enregistrer les changements?</translation>
     </message>
 </context>
 <context>
+    <name>VToolLineIntersect</name>
+    <message>
+        <source>Label</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>VToolLineIntersectAxis</name>
     <message>
         <source>Length</source>
@@ -10756,6 +10908,10 @@ Voulez-vous enregistrer les changements?</translation>
     <message>
         <source>Angle</source>
         <translation type="unfinished">Angle</translation>
+    </message>
+    <message>
+        <source>Label</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -10767,6 +10923,21 @@ Voulez-vous enregistrer les changements?</translation>
     <message>
         <source>Angle</source>
         <translation type="unfinished">Angle</translation>
+    </message>
+    <message>
+        <source>Label</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>VToolMove</name>
+    <message>
+        <source>Rotation angle</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Length</source>
+        <translation type="unfinished">Longueur</translation>
     </message>
 </context>
 <context>
@@ -11302,6 +11473,21 @@ Voulez-vous enregistrer les changements?</translation>
         <source>Angle</source>
         <translation type="unfinished">Angle</translation>
     </message>
+    <message>
+        <source>Label</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>VToolRotation</name>
+    <message>
+        <source>Origin point</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Rotation angle</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>VToolSeamAllowance</name>
@@ -11367,6 +11553,10 @@ Voulez-vous enregistrer les changements?</translation>
     <message>
         <source>Angle</source>
         <translation type="unfinished">Angle</translation>
+    </message>
+    <message>
+        <source>Label</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

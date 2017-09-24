@@ -1073,7 +1073,7 @@ Vertikalen Abstand von der hohen Hüfte Ebene, stärkste Stelle des  vorderen Ba
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="674"/>
         <source>Size</source>
         <comment>Full measurement name.</comment>
-        <translation type="unfinished"></translation>
+        <translation>Größe</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="675"/>
