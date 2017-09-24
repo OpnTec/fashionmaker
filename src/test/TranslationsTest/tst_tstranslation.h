@@ -51,6 +51,8 @@ private slots:
     void TestPunctuation();
     void TestHTMLTags_data();
     void TestHTMLTags();
+    void CheckEllipsis_data();
+    void CheckEllipsis();
 
 private:
     Q_DISABLE_COPY(TST_TSTranslation)
@@ -68,6 +70,8 @@ private:
     static const QString AttrValObsolete;
 
     QDomNodeList LoadTSFile(const QString &filename);
+
+    void PrepareOriginalStrings();
 };
 
 #endif // TST_TSTRANSLATION_H

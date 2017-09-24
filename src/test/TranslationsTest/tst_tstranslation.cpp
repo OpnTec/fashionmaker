@@ -116,37 +116,7 @@ void TST_TSTranslation::CheckEnglishLocalization()
 //---------------------------------------------------------------------------------------------------------------------
 void TST_TSTranslation::CheckEmptyToolButton_data()
 {
-    QTest::addColumn<QString>("source");
-    QTest::addColumn<QDomElement>("message");
-
-    const QString fileName = QStringLiteral("valentina.ts");
-    const QDomNodeList messages = LoadTSFile(fileName);
-    if (messages.isEmpty())
-    {
-        QFAIL("Can't begin test.");
-    }
-
-    for (qint32 i = 0, num = messages.size(); i < num; ++i)
-    {
-        const QDomElement message = messages.at(i).toElement();
-        if (message.isNull() == false)
-        {
-            const QString source = message.firstChildElement(TagSource).text();
-            if (source.isEmpty())
-            {
-                continue;
-            }
-
-            const QString tag = QString("File '%1'. Check modification source message '%2'.").arg(fileName)
-                    .arg(source);
-            QTest::newRow(qUtf8Printable(tag)) << source << message;
-        }
-        else
-        {
-            const QString message = QString("Message %1 is null.").arg(i);
-            QFAIL(qUtf8Printable(message));
-        }
-    }
+    PrepareOriginalStrings();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -367,7 +337,8 @@ void TST_TSTranslation::TestPunctuation()
                                                          << QLatin1String("\n")
                                                          << QLatin1String("!")
                                                          << QLatin1String("?")
-                                                         << QLatin1String(";");
+                                                         << QLatin1String(";")
+                                                         << "…";
     bool testFail = false;
     const QChar cSource = source.at(source.length()-1);
     QChar cPunctuation = cSource;
@@ -495,6 +466,43 @@ void TST_TSTranslation::TestHTMLTags()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void TST_TSTranslation::CheckEllipsis_data()
+{
+    PrepareOriginalStrings();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void TST_TSTranslation::CheckEllipsis()
+{
+    QFETCH(QString, source);
+    QFETCH(QDomElement, message);
+
+    if (source.endsWith("..."))
+    {
+        const QDomElement translationTag = message.firstChildElement(TagTranslation);
+        if (translationTag.hasAttribute(AttrType))
+        {
+            const QString attrVal = translationTag.attribute(AttrType);
+            if (attrVal == AttrValVanished || attrVal == AttrValObsolete)
+            {
+                return;
+            }
+        }
+
+        const QDomNode context = message.parentNode();
+        if (context.isNull())
+        {
+            QFAIL("Can't get context.");
+        }
+
+        const QString contextName = context.firstChildElement(TagName).text();
+        const QString error = QString("String '%1' ends with '...' in context '%2'. Repalce it with '…'.")
+                .arg(source, contextName);
+        QFAIL(qUtf8Printable(error));
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 QDomNodeList TST_TSTranslation::LoadTSFile(const QString &filename)
 {
     tsFile.reset();
@@ -534,4 +542,40 @@ QDomNodeList TST_TSTranslation::LoadTSFile(const QString &filename)
     }
 
     return messages;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void TST_TSTranslation::PrepareOriginalStrings()
+{
+    QTest::addColumn<QString>("source");
+    QTest::addColumn<QDomElement>("message");
+
+    const QString fileName = QStringLiteral("valentina.ts");
+    const QDomNodeList messages = LoadTSFile(fileName);
+    if (messages.isEmpty())
+    {
+        QFAIL("Can't begin test.");
+    }
+
+    for (qint32 i = 0, num = messages.size(); i < num; ++i)
+    {
+        const QDomElement message = messages.at(i).toElement();
+        if (message.isNull() == false)
+        {
+            const QString source = message.firstChildElement(TagSource).text();
+            if (source.isEmpty())
+            {
+                continue;
+            }
+
+            const QString tag = QString("File '%1'. Check modification source message '%2'.").arg(fileName)
+                    .arg(source);
+            QTest::newRow(qUtf8Printable(tag)) << source << message;
+        }
+        else
+        {
+            const QString message = QString("Message %1 is null.").arg(i);
+            QFAIL(qUtf8Printable(message));
+        }
+    }
 }
