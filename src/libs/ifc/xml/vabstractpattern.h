@@ -419,6 +419,8 @@ protected:
 
     int  GetIndexActivPP() const;
     bool GetActivDrawElement(QDomElement &element) const;
+
+    QVector<VToolRecord> getLocalHistory(const QString &draw) const;
 private:
     Q_DISABLE_COPY(VAbstractPattern)
 

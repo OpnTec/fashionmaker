@@ -55,6 +55,7 @@ public:
 
     void           setCurrentData();
     virtual void   UpdateToolData(const quint32 &id, VContainer *data) Q_DECL_OVERRIDE;
+    VContainer     GetCompleteData() const;
 
     virtual void   IncrementReferens(quint32 id) const Q_DECL_OVERRIDE;
     virtual void   DecrementReferens(quint32 id) const Q_DECL_OVERRIDE;
@@ -239,6 +240,9 @@ private:
     void MoveDownIncrement(const QString &type, const QString &name);
 
     void SetIncrementAttribute(const QString &name, const QString &attr, const QString &text);
+
+    QString LastDrawName() const;
+    quint32 LastToolId() const;
 };
 
 #endif // VPATTERN_H

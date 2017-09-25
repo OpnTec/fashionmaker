@@ -350,6 +350,21 @@ bool VAbstractPattern::GetActivDrawElement(QDomElement &element) const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+QVector<VToolRecord> VAbstractPattern::getLocalHistory(const QString &draw) const
+{
+    QVector<VToolRecord> historyPP;
+    for (qint32 i = 0; i< history.size(); ++i)
+    {
+        const VToolRecord &tool = history.at(i);
+        if (tool.getNameDraw() == draw)
+        {
+            historyPP.append(tool);
+        }
+    }
+    return historyPP;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 /**
  * @brief CheckNameDraw check if exist pattern peace with this name.
  * @param name pattern peace name.
@@ -777,17 +792,7 @@ QVector<VToolRecord> *VAbstractPattern::getHistory()
 //---------------------------------------------------------------------------------------------------------------------
 QVector<VToolRecord> VAbstractPattern::getLocalHistory() const
 {
-    QVector<VToolRecord> historyPP;
-    for (qint32 i = 0; i< history.size(); ++i)
-    {
-        const VToolRecord tool = history.at(i);
-        if (tool.getNameDraw() != GetNameActivPP())
-        {
-            continue;
-        }
-        historyPP.append(tool);
-    }
-    return historyPP;
+    return getLocalHistory(GetNameActivPP());
 }
 
 //---------------------------------------------------------------------------------------------------------------------

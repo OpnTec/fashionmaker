@@ -87,6 +87,9 @@ private:
     /** @brief doc dom document container */
     VPattern             *doc;
 
+    /** @brief m_completeData need to show all internal variables */
+    VContainer           m_completeData;
+
     int                  formulaBaseHeight;
     int                  formulaBaseHeightPC;
 

@@ -334,6 +334,40 @@ void VPattern::UpdateToolData(const quint32 &id, VContainer *data)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+VContainer VPattern::GetCompleteData() const
+{
+    const int countPP = CountPP();
+    if (countPP <= 0 || history.isEmpty() || tools.isEmpty())
+    {
+        return (data != nullptr ? *data : VContainer(nullptr, nullptr));
+    }
+
+    const quint32 id = (countPP == 1 ? history.last().getId() : LastToolId());
+
+    if (id == NULL_ID)
+    {
+        return (data != nullptr ? *data : VContainer(nullptr, nullptr));
+    }
+
+    try
+    {
+        ToolExists(id);
+    }
+    catch (VExceptionBadId &e)
+    {
+        Q_UNUSED(e)
+        return (data != nullptr ? *data : VContainer(nullptr, nullptr));
+    }
+
+    const VDataTool *vTool = tools.value(id);
+    VContainer lastData = vTool->getData();
+    //Delete special variables if exist
+    lastData.RemoveVariable(currentLength);
+    lastData.RemoveVariable(currentSeamAllowance);
+    return lastData;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 /**
  * @brief SPointActiveDraw return id base point current pattern peace.
  * @return id base point.
@@ -3255,6 +3289,38 @@ void VPattern::SetIncrementAttribute(const QString &name, const QString &attr, c
         SetAttribute(node, attr, text);
         emit patternChanged(false);
     }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QString VPattern::LastDrawName() const
+{
+    const QDomNodeList elements = this->documentElement().elementsByTagName(TagDraw);
+    if (elements.size() == 0)
+    {
+        return QString();
+    }
+
+    const QDomElement &elem = elements.at(elements.size()-1).toElement();
+    if (not elem.isNull())
+    {
+        return GetParametrString(elem, AttrName);
+    }
+
+    return QString();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+quint32 VPattern::LastToolId() const
+{
+    const QString name = LastDrawName();
+    if (name.isEmpty())
+    {
+        return NULL_ID;
+    }
+
+    const QVector<VToolRecord> localHistory = getLocalHistory(name);
+
+    return (not localHistory.isEmpty() ? localHistory.last().getId() : NULL_ID);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
