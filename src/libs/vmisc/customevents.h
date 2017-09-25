@@ -32,7 +32,7 @@
 #include <qcompilerdetection.h>
 #include <QEvent>
 
-enum CustomEventType { UndoEventType = 1, LiteParseEventType = 2 };
+enum CustomEventType { UndoEventType = 1, LiteParseEventType = 2, FitBestCurrentEventType = 3 };
 
 // Define undo event identifier
 const QEvent::Type UNDO_EVENT = static_cast<QEvent::Type>(QEvent::User + CustomEventType::UndoEventType);
@@ -57,6 +57,19 @@ public:
     {}
 
     virtual ~LiteParseEvent() =default;
+};
+
+const QEvent::Type FIT_BEST_CURRENT_EVENT = static_cast<QEvent::Type>(QEvent::User +
+                                                                      CustomEventType::FitBestCurrentEventType);
+
+class FitBestCurrentEvent : public QEvent
+{
+public:
+    FitBestCurrentEvent()
+        : QEvent(FIT_BEST_CURRENT_EVENT)
+    {}
+
+    virtual ~FitBestCurrentEvent() =default;
 };
 
 #endif // CUSTOMEVENTS_H

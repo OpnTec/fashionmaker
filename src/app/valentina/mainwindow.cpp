@@ -294,7 +294,8 @@ void MainWindow::AddPP(const QString &PPName)
 
     // Show best for new PP
     VMainGraphicsView::NewSceneRect(ui->view->scene(), ui->view);
-    ZoomFitBestCurrent();
+    //ZoomFitBestCurrent();
+    QApplication::postEvent(this, new FitBestCurrentEvent());
 
     ui->actionNewDraw->setEnabled(true);
     helpLabel->setText("");
@@ -1445,6 +1446,10 @@ void MainWindow::customEvent(QEvent *event)
     if (event->type() == UNDO_EVENT)
     {
         qApp->getUndoStack()->undo();
+    }
+    else if (event->type() == FIT_BEST_CURRENT_EVENT)
+    {
+        ZoomFitBestCurrent();
     }
 }
 
