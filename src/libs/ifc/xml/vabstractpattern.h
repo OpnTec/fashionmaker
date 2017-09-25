@@ -446,4 +446,14 @@ private:
     void               SetMaterials(QDomElement &element, const QMap<int, QString> &materials);
 };
 
+//---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief GetNameActivPP return current pattern piece name.
+ * @return pattern piece name.
+ */
+inline QString VAbstractPattern::GetNameActivPP() const
+{
+    return nameActivPP;
+}
+
 #endif // VABSTRACTPATTERN_H

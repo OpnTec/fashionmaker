@@ -309,16 +309,6 @@ void VAbstractPattern::ChangeActivPP(const QString &name, const Document &parse)
 
 //---------------------------------------------------------------------------------------------------------------------
 /**
- * @brief GetNameActivPP return current pattern piece name.
- * @return pattern piece name.
- */
-QString VAbstractPattern::GetNameActivPP() const
-{
-    return nameActivPP;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-/**
  * @brief GetActivDrawElement return draw tag for current pattern peace.
  * @param element draw tag.
  * @return true if found.

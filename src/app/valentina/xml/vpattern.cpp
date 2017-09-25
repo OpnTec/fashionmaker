@@ -254,41 +254,23 @@ void VPattern::setCurrentData()
 {
     if (*mode == Draw::Calculation)
     {
-        if (CountPP() > 1)//don't need upadate data if we have only one pattern piece
+        const int countPP = CountPP();
+        if (countPP > 1)//don't need upadate data if we have only one pattern piece
         {
             qCDebug(vXML, "Setting current data");
             qCDebug(vXML, "Current PP name %s", qUtf8Printable(nameActivPP));
-            qCDebug(vXML, "PP count %d", CountPP());
+            qCDebug(vXML, "PP count %d", countPP);
 
-            quint32 id = 0;
-            if (history.size() == 0)
+            const QVector<VToolRecord> localHistory = getLocalHistory();
+            if (localHistory.size() == 0)
             {
                 qCDebug(vXML, "History is empty!");
                 return;
             }
-            for (qint32 i = 0; i < history.size(); ++i)
-            {
-                const VToolRecord tool = history.at(i);
-                if (tool.getNameDraw() == nameActivPP)
-                {
-                    id = tool.getId();
-                }
-            }
-            qCDebug(vXML, "Resoring data from tool with id %u", id);
-            if (id == NULL_ID)
-            {
-                qCDebug(vXML, "Could not find record for this current pattern piece %s",
-                        qUtf8Printable(nameActivPP));
 
-                const VToolRecord tool = history.at(history.size()-1);
-                id = tool.getId();
-                qCDebug(vXML, "Taking record with id %u from PP %s", id, qUtf8Printable(tool.getNameDraw()));
-                if (id == NULL_ID)
-                {
-                    qCDebug(vXML, "Bad id for last record in history.");
-                    return;
-                }
-            }
+            const quint32 id = localHistory.last().getId();
+            qCDebug(vXML, "Resoring data from tool with id %u", id);
+
             if (tools.size() > 0)
             {
                 try
