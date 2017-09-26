@@ -47,6 +47,7 @@ class QLabel;
 class DialogIncrements;
 class DialogTool;
 class DialogHistory;
+class DialogFinalMeasurements;
 class VWidgetGroups;
 class VWidgetDetails;
 class QToolButton;
@@ -226,9 +227,10 @@ private:
 
     bool               patternReadOnly;
 
-    QPointer<DialogIncrements> dialogTable;
-    QSharedPointer<DialogTool> dialogTool;
-    QPointer<DialogHistory>    dialogHistory;
+    QPointer<DialogIncrements>        dialogTable;
+    QSharedPointer<DialogTool>        dialogTool;
+    QPointer<DialogHistory>           dialogHistory;
+    QPointer<DialogFinalMeasurements> dialogFMeasurements;
 
     /** @brief comboBoxDraws comboc who show name of pattern peaces. */
     QComboBox          *comboBoxDraws;

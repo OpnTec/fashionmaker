@@ -1070,6 +1070,20 @@ QString VTranslateVars::FormulaToUser(const QString &formula, bool osSeparator) 
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+QString VTranslateVars::TryFormulaToUser(const QString &formula, bool osSeparator)
+{
+    try
+    {
+        return qApp->TrVars()->FormulaToUser(formula, osSeparator);
+    }
+    catch (qmu::QmuParserError &e)// In case something bad will happen
+    {
+        Q_UNUSED(e)
+        return formula;
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 void VTranslateVars::Retranslate()
 {
     VTranslateMeasurements::Retranslate();

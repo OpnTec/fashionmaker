@@ -78,6 +78,7 @@ const QString settingPreferenceDialogSize        = QStringLiteral("preferenceDia
 const QString settingToolSeamAllowanceDialogSize = QStringLiteral("toolSeamAllowanceDialogSize");
 const QString settingIncrementsDialogSize        = QStringLiteral("toolIncrementsDialogSize");
 const QString settingFormulaWizardDialogSize     = QStringLiteral("formulaWizardDialogSize");
+const QString settingFinalMeasurementsDialogSize = QStringLiteral("finalMeasurementsDialogSize");
 const QString settingLatestSkippedVersion        = QStringLiteral("lastestSkippedVersion");
 const QString settingDateOfLastRemind            = QStringLiteral("dateOfLastRemind");
 
@@ -614,6 +615,18 @@ QSize VCommonSettings::GetIncrementsDialogSize() const
 void VCommonSettings::SetIncrementsDialogSize(const QSize &sz)
 {
     setValue(settingIncrementsDialogSize, sz);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QSize VCommonSettings::GetFinalMeasurementsDialogSize() const
+{
+    return value(settingFinalMeasurementsDialogSize, QSize(0, 0)).toSize();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VCommonSettings::SetFinalMeasurementsDialogSize(const QSize &sz)
+{
+    setValue(settingFinalMeasurementsDialogSize, sz);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

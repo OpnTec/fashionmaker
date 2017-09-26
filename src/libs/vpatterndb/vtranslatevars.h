@@ -62,7 +62,9 @@ public:
 
     QString FormulaFromUser(const QString &formula, bool osSeparator) const;
     static QString TryFormulaFromUser(const QString &formula, bool osSeparator);
+
     QString FormulaToUser(const QString &formula, bool osSeparator) const;
+    static QString TryFormulaToUser(const QString &formula, bool osSeparator);
 
     virtual void Retranslate() Q_DECL_OVERRIDE;
 

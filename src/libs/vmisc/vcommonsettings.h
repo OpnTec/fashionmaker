@@ -129,6 +129,9 @@ public:
     QSize GetIncrementsDialogSize() const;
     void  SetIncrementsDialogSize(const QSize& sz);
 
+    QSize GetFinalMeasurementsDialogSize() const;
+    void  SetFinalMeasurementsDialogSize(const QSize& sz);
+
     int  GetLatestSkippedVersion() const;
     void SetLatestSkippedVersion(int value);
 

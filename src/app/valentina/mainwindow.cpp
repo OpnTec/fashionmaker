@@ -117,7 +117,9 @@ MainWindow::MainWindow(QWidget *parent)
       patternReadOnly(false),
       dialogTable(nullptr),
       dialogTool(),
-      dialogHistory(nullptr), comboBoxDraws(nullptr), patternPieceLabel(nullptr), mode(Draw::Calculation),
+      dialogHistory(nullptr),
+      dialogFMeasurements(nullptr),
+      comboBoxDraws(nullptr), patternPieceLabel(nullptr), mode(Draw::Calculation),
       currentDrawIndex(0), currentToolBoxIndex(0),
       isDockToolOptionsVisible(true),
       isDockGroupsVisible(true),
@@ -2833,6 +2835,8 @@ void MainWindow::Clear()
     ui->actionZoomOriginal->setEnabled(false);
     ui->actionHistory->setEnabled(false);
     ui->actionTable->setEnabled(false);
+    ui->actionExportIncrementsToCSV->setEnabled(false);
+    ui->actionFinalMeasurements->setEnabled(false);
     ui->actionLast_tool->setEnabled(false);
     ui->actionShowCurveDetails->setEnabled(false);
     ui->actionLoadIndividual->setEnabled(false);
@@ -3078,6 +3082,8 @@ void MainWindow::SetEnableWidgets(bool enable)
     ui->actionDetails->setEnabled(enable);
     ui->actionLayout->setEnabled(enable);
     ui->actionTable->setEnabled(enable && drawStage);
+    ui->actionExportIncrementsToCSV->setEnabled(enable);
+    ui->actionFinalMeasurements->setEnabled(enable);
     ui->actionZoomFitBest->setEnabled(enable);
     ui->actionZoomFitBestCurrent->setEnabled(enable && drawStage);
     ui->actionZoomOriginal->setEnabled(enable);
@@ -3990,6 +3996,27 @@ void MainWindow::CreateActions()
         {
             ui->actionTable->setChecked(true);
             dialogTable->activateWindow();
+        }
+    });
+
+    connect(ui->actionFinalMeasurements, &QAction::triggered, this, [this]()
+    {
+        if (dialogFMeasurements.isNull())
+        {
+            dialogFMeasurements = new DialogFinalMeasurements(doc, this);
+            connect(dialogFMeasurements.data(), &DialogFinalMeasurements::finished, this, [this](int result)
+            {
+                if (result == QDialog::Accepted)
+                {
+                    doc->SetFinalMeasurements(dialogFMeasurements->FinalMeasurements());
+                }
+                delete dialogFMeasurements;
+            });
+            dialogFMeasurements->show();
+        }
+        else
+        {
+            dialogFMeasurements->activateWindow();
         }
     });
 
