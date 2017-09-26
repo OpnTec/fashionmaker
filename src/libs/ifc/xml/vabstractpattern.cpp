@@ -88,7 +88,9 @@ const QString VAbstractPattern::TagCustomerName     = QStringLiteral("customer")
 const QString VAbstractPattern::TagCompanyName      = QStringLiteral("company");
 const QString VAbstractPattern::TagPatternLabel     = QStringLiteral("patternLabel");
 const QString VAbstractPattern::TagPatternMaterials = QStringLiteral("patternMaterials");
+const QString VAbstractPattern::TagFinalMeasurements= QStringLiteral("finalMeasurements");
 const QString VAbstractPattern::TagMaterial         = QStringLiteral("material");
+const QString VAbstractPattern::TagFMeasurement     = QStringLiteral("finalMeasurment");
 const QString VAbstractPattern::TagGrainline        = QStringLiteral("grainline");
 const QString VAbstractPattern::TagPath             = QStringLiteral("path");
 const QString VAbstractPattern::TagNodes            = QStringLiteral("nodes");
@@ -187,9 +189,8 @@ const QString VAbstractPattern::AttrDefHeight       = QStringLiteral("defHeight"
 const QString VAbstractPattern::AttrDefSize         = QStringLiteral("defSize");
 const QString VAbstractPattern::AttrExtension       = QStringLiteral("extension");
 
-const QString VAbstractPattern::IncrementName        = QStringLiteral("name");
-const QString VAbstractPattern::IncrementFormula     = QStringLiteral("formula");
-const QString VAbstractPattern::IncrementDescription = QStringLiteral("description");
+const QString VAbstractPattern::AttrFormula     = QStringLiteral("formula");
+const QString VAbstractPattern::AttrDescription = QStringLiteral("description");
 
 const QString VAbstractPattern::NodeArc        = QStringLiteral("NodeArc");
 const QString VAbstractPattern::NodeElArc      = QStringLiteral("NodeElArc");
@@ -1445,6 +1446,28 @@ QMap<int, QString> VAbstractPattern::GetPatternMaterials() const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+QVector<VFinalMeasurement> VAbstractPattern::GetFinalMeasurements() const
+{
+    const QDomNodeList list = elementsByTagName(TagFinalMeasurements);
+    if (list.isEmpty() || list.at(0).childNodes().count() == 0)
+    {
+        return QVector<VFinalMeasurement>();
+    }
+
+    return GetFMeasurements(list.at(0).toElement());
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VAbstractPattern::SetFinalMeasurements(const QVector<VFinalMeasurement> &measurements)
+{
+    QDomElement tag = CheckTagExists(TagFinalMeasurements);
+    RemoveAllChildren(tag);
+    SetFMeasurements(tag, measurements);
+    modified = true;
+    emit patternChanged(false);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 void VAbstractPattern::SetPatternWasChanged(bool changed)
 {
     patternLabelWasChanged = changed;
@@ -1598,7 +1621,8 @@ QDomElement VAbstractPattern::CheckTagExists(const QString &tag)
     {
         const QStringList tags = QStringList() << TagUnit << TagImage << TagDescription << TagNotes
                                          << TagGradation << TagPatternName << TagPatternNum << TagCompanyName
-                                         << TagCustomerName << TagPatternLabel << TagPatternMaterials;
+                                         << TagCustomerName << TagPatternLabel << TagPatternMaterials
+                                         << TagFinalMeasurements;
         switch (tags.indexOf(tag))
         {
             case 1: //TagImage
@@ -1640,6 +1664,9 @@ QDomElement VAbstractPattern::CheckTagExists(const QString &tag)
                 break;
             case 10: // TagPatternMaterials
                 element = createElement(TagPatternMaterials);
+                break;
+            case 11: // TagFinalMeasurements
+                element = createElement(TagFinalMeasurements);
                 break;
             case 0: //TagUnit (Mandatory tag)
             default:
@@ -1703,7 +1730,7 @@ QStringList VAbstractPattern::ListIncrements() const
 
             try
             {
-                increments.append(GetParametrString(dom, IncrementName));
+                increments.append(GetParametrString(dom, AttrName));
             }
             catch (VExceptionEmptyParameter &e)
             {
@@ -1853,7 +1880,7 @@ QVector<VFormulaField> VAbstractPattern::ListIncrementExpressions() const
     {
         const QDomElement dom = list.at(i).toElement();
 
-        ReadExpressionAttribute(expressions, dom, IncrementFormula);
+        ReadExpressionAttribute(expressions, dom, AttrFormula);
     }
 
     return expressions;
@@ -2099,6 +2126,51 @@ void VAbstractPattern::SetMaterials(QDomElement &element, const QMap<int, QStrin
 
             element.appendChild(tagMaterial);
             ++i;
+        }
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QVector<VFinalMeasurement> VAbstractPattern::GetFMeasurements(const QDomElement &element) const
+{
+    QVector<VFinalMeasurement> measurements;
+
+    if (not element.isNull())
+    {
+        QDomElement tagFMeasurement = element.firstChildElement();
+        while (not tagFMeasurement.isNull())
+        {
+            if (tagFMeasurement.tagName() == TagFMeasurement)
+            {
+                VFinalMeasurement m;
+
+                m.name = GetParametrString(tagFMeasurement, AttrName, tr("measurement"));
+                m.formula = GetParametrString(tagFMeasurement, AttrFormula, "0");
+                m.description = GetParametrEmptyString(tagFMeasurement, AttrDescription);
+
+                measurements.append(m);
+            }
+            tagFMeasurement = tagFMeasurement.nextSiblingElement(TagFMeasurement);
+        }
+    }
+
+    return measurements;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VAbstractPattern::SetFMeasurements(QDomElement &element, const QVector<VFinalMeasurement> &measurements)
+{
+    if (not element.isNull())
+    {
+        for (int i=0; i < measurements.size(); ++i)
+        {
+            QDomElement tagFMeasurement = createElement(TagFMeasurement);
+
+            SetAttribute(tagFMeasurement, AttrName, measurements.at(i).name);
+            SetAttribute(tagFMeasurement, AttrFormula, measurements.at(i).formula);
+            SetAttribute(tagFMeasurement, AttrDescription, measurements.at(i).description);
+
+            element.appendChild(tagFMeasurement);
         }
     }
 }

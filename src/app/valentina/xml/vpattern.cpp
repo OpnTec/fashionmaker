@@ -152,7 +152,8 @@ void VPattern::Parse(const Document &parse)
     QStringList tags = QStringList() << TagDraw << TagIncrements << TagDescription << TagNotes
                                      << TagMeasurements << TagVersion << TagGradation << TagImage << TagUnit
                                      << TagPatternName << TagPatternNum << TagCompanyName << TagCustomerName
-                                     << TagPatternLabel << TagPatternMaterials << TagPreviewCalculations;
+                                     << TagPatternLabel << TagPatternMaterials << TagPreviewCalculations
+                                     << TagFinalMeasurements;
     PrepareForParse(parse);
     QDomNode domNode = documentElement().firstChild();
     while (domNode.isNull() == false)
@@ -230,6 +231,9 @@ void VPattern::Parse(const Document &parse)
                     case 15: // TagPreviewCalculations
                         qCDebug(vXML, "Tag prewiew calculations.");
                         ParseIncrementsElement(domElement);
+                        break;
+                    case 16: // TagFinalMeasurements
+                        qCDebug(vXML, "Tag final measurements.");
                         break;
                     default:
                         qCDebug(vXML, "Wrong tag name %s", qUtf8Printable(domElement.tagName()));
@@ -3128,9 +3132,9 @@ qreal VPattern::EvalFormula(VContainer *data, const QString &formula, bool *ok) 
 QDomElement VPattern::MakeEmptyIncrement(const QString &name)
 {
     QDomElement element = createElement(TagIncrement);
-    SetAttribute(element, IncrementName, name);
-    SetAttribute(element, IncrementFormula, QString("0"));
-    SetAttribute(element, IncrementDescription, QString(""));
+    SetAttribute(element, AttrName, name);
+    SetAttribute(element, AttrFormula, QString("0"));
+    SetAttribute(element, AttrDescription, QString(""));
     return element;
 }
 
@@ -3144,7 +3148,7 @@ QDomElement VPattern::FindIncrement(const QString &name) const
         const QDomElement domElement = list.at(i).toElement();
         if (domElement.isNull() == false)
         {
-            const QString parameter = domElement.attribute(IncrementName);
+            const QString parameter = domElement.attribute(AttrName);
             if (parameter == name)
             {
                 return domElement;
@@ -3573,19 +3577,19 @@ void VPattern::ParseIncrementsElement(const QDomNode &node)
             {
                 if (domElement.tagName() == TagIncrement)
                 {
-                    const QString name = GetParametrString(domElement, IncrementName, "");
+                    const QString name = GetParametrString(domElement, AttrName, "");
 
                     QString desc;
                     try
                     {
-                        desc = GetParametrString(domElement, IncrementDescription);
+                        desc = GetParametrString(domElement, AttrDescription);
                     }
                     catch (VExceptionEmptyParameter &e)
                     {
                         Q_UNUSED(e)
                     }
 
-                    const QString formula = GetParametrString(domElement, IncrementFormula, "0");
+                    const QString formula = GetParametrString(domElement, AttrFormula, "0");
                     bool ok = false;
                     const qreal value = EvalFormula(data, formula, &ok);
 
@@ -3664,19 +3668,19 @@ void VPattern::MoveDownPreviewCalculation(const QString &name)
 //---------------------------------------------------------------------------------------------------------------------
 void VPattern::SetIncrementName(const QString &name, const QString &text)
 {
-    SetIncrementAttribute(name, IncrementName, text);
+    SetIncrementAttribute(name, AttrName, text);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void VPattern::SetIncrementFormula(const QString &name, const QString &text)
 {
-    SetIncrementAttribute(name, IncrementFormula, text);
+    SetIncrementAttribute(name, AttrFormula, text);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void VPattern::SetIncrementDescription(const QString &name, const QString &text)
 {
-    SetIncrementAttribute(name, IncrementDescription, text);
+    SetIncrementAttribute(name, AttrDescription, text);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

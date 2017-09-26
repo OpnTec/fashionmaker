@@ -70,6 +70,13 @@ struct VFormulaField
     QString     attribute;
 };
 
+struct VFinalMeasurement
+{
+    QString name;
+    QString formula;
+    QString description;
+};
+
 QT_WARNING_POP
 
 class VAbstractPattern : public QObject, public VDomDocument
@@ -163,6 +170,9 @@ public:
     void               SetPatternMaterials(const QMap<int, QString> &materials);
     QMap<int, QString> GetPatternMaterials() const;
 
+    QVector<VFinalMeasurement> GetFinalMeasurements() const;
+    void                       SetFinalMeasurements(const QVector<VFinalMeasurement> &measurements);
+
     void SetPatternWasChanged(bool changed);
     bool GetPatternWasChanged() const;
 
@@ -221,7 +231,9 @@ public:
     static const QString TagCustomerName;
     static const QString TagPatternLabel;
     static const QString TagPatternMaterials;
+    static const QString TagFinalMeasurements;
     static const QString TagMaterial;
+    static const QString TagFMeasurement;
     static const QString TagGrainline;
     static const QString TagPath;
     static const QString TagNodes;
@@ -320,9 +332,8 @@ public:
     static const QString AttrDefSize;
     static const QString AttrExtension;
 
-    static const QString IncrementName;
-    static const QString IncrementFormula;
-    static const QString IncrementDescription;
+    static const QString AttrFormula;
+    static const QString AttrDescription;
 
     static const QString NodeArc;
     static const QString NodeElArc;
@@ -444,6 +455,9 @@ private:
 
     QMap<int, QString> GetMaterials(const QDomElement &element) const;
     void               SetMaterials(QDomElement &element, const QMap<int, QString> &materials);
+
+    QVector<VFinalMeasurement> GetFMeasurements(const QDomElement &element) const;
+    void                       SetFMeasurements(QDomElement &element, const QVector<VFinalMeasurement> &measurements);
 };
 
 //---------------------------------------------------------------------------------------------------------------------
