@@ -1520,17 +1520,7 @@ void MainWindow::ExportToCSVData(const QString &fileName, const DialogExportToCS
         csv.setText(currentRow, 0, incr->GetName()); // name
         csv.setText(currentRow, 1, qApp->LocaleToString(*incr->GetValue())); // calculated value
 
-        QString formula;
-        try
-        {
-            formula = qApp->TrVars()->FormulaToUser(incr->GetFormula(), qApp->Settings()->GetOsSeparator());
-        }
-        catch (qmu::QmuParserError &e)
-        {
-            Q_UNUSED(e)
-            formula = incr->GetFormula();
-        }
-
+        QString formula = VTranslateVars::TryFormulaToUser(incr->GetFormula(), qApp->Settings()->GetOsSeparator());
         csv.setText(currentRow, 2, formula); // formula
     }
 

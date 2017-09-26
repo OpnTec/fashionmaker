@@ -1506,16 +1506,7 @@ void TMainWindow::ShowNewMData(bool fresh)
 
             ui->plainTextEditFormula->blockSignals(true);
 
-            QString formula;
-            try
-            {
-                formula = qApp->TrVars()->FormulaToUser(meash->GetFormula(), qApp->Settings()->GetOsSeparator());
-            }
-            catch (qmu::QmuParserError &e)
-            {
-                Q_UNUSED(e)
-                formula = meash->GetFormula();
-            }
+            QString formula = VTranslateVars::TryFormulaToUser(meash->GetFormula(), qApp->Settings()->GetOsSeparator());
 
             ui->plainTextEditFormula->setPlainText(formula);
             ui->plainTextEditFormula->blockSignals(false);
@@ -2416,16 +2407,7 @@ void TMainWindow::RefreshTable(bool freshCall)
             AddCell(locale().toString(value), currentRow, ColumnCalcValue, Qt::AlignHCenter | Qt::AlignVCenter,
                     meash->IsFormulaOk()); // calculated value
 
-            QString formula;
-            try
-            {
-                formula = qApp->TrVars()->FormulaToUser(meash->GetFormula(), qApp->Settings()->GetOsSeparator());
-            }
-            catch (qmu::QmuParserError &e)
-            {
-                Q_UNUSED(e)
-                formula = meash->GetFormula();
-            }
+            QString formula = VTranslateVars::TryFormulaToUser(meash->GetFormula(), qApp->Settings()->GetOsSeparator());
 
             AddCell(formula, currentRow, ColumnFormula, Qt::AlignVCenter); // formula
         }
