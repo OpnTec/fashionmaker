@@ -44,23 +44,21 @@ DialogExportToCSV::DialogExportToCSV(QWidget *parent)
 {
     ui->setupUi(this);
 
-    ui->checkBoxWithHeader->setChecked(qApp->Settings()->GetCSVWithHeader());
-
     foreach (int mib, QTextCodec::availableMibs())
     {
         ui->comboBoxCodec->addItem(QTextCodec::codecForMib(mib)->name(), mib);
     }
 
-    ui->comboBoxCodec->setCurrentIndex(ui->comboBoxCodec->findData(qApp->Settings()->GetCSVCodec()));
+    ui->comboBoxCodec->setCurrentIndex(ui->comboBoxCodec->findData(VCommonSettings::GetDefCSVCodec()));
 
-    SetSeparator(qApp->Settings()->GetCSVSeparator());
+    SetSeparator(qApp->Settings()->GetDefCSVSeparator());
 
     QPushButton *bDefaults = ui->buttonBox->button(QDialogButtonBox::RestoreDefaults);
     SCASSERT(bDefaults != nullptr)
     connect(bDefaults, &QPushButton::clicked, this, [this]()
     {
         ui->checkBoxWithHeader->setChecked(qApp->Settings()->GetDefCSVWithHeader());
-        ui->comboBoxCodec->setCurrentIndex(ui->comboBoxCodec->findData(qApp->Settings()->GetDefCSVCodec()));
+        ui->comboBoxCodec->setCurrentIndex(ui->comboBoxCodec->findData(VCommonSettings::GetDefCSVCodec()));
 
         SetSeparator(qApp->Settings()->GetDefCSVSeparator());
     });
@@ -73,19 +71,46 @@ DialogExportToCSV::~DialogExportToCSV()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-bool DialogExportToCSV::WithHeader() const
+bool DialogExportToCSV::IsWithHeader() const
 {
     return ui->checkBoxWithHeader->isChecked();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-int DialogExportToCSV::SelectedMib() const
+void DialogExportToCSV::SetWithHeader(bool value)
 {
-    return ui->comboBoxCodec->currentData().toInt();
+    ui->checkBoxWithHeader->setChecked(value);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QChar DialogExportToCSV::Separator() const
+int DialogExportToCSV::GetSelectedMib() const
+{
+    if (ui->comboBoxCodec->currentIndex() != -1)
+    {
+        return ui->comboBoxCodec->currentData().toInt();
+    }
+    else
+    {
+        return VCommonSettings::GetDefCSVCodec();
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogExportToCSV::SetSelectedMib(int value)
+{
+    const int index = ui->comboBoxCodec->findData(value);
+    if (index != -1)
+    {
+        ui->comboBoxCodec->setCurrentIndex(index);
+    }
+    else
+    {
+        ui->comboBoxCodec->setCurrentIndex(ui->comboBoxCodec->findData(VCommonSettings::GetDefCSVCodec()));
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QChar DialogExportToCSV::GetSeparator() const
 {
     if (ui->radioButtonTab->isChecked())
     {

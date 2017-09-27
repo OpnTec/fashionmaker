@@ -40,7 +40,6 @@
 #include "../vmisc/vsettings.h"
 #include "../vmisc/def.h"
 #include "../vmisc/qxtcsvmodel.h"
-#include "../vmisc/dialogs/dialogexporttocsv.h"
 #include "undocommands/renamepp.h"
 #include "core/vtooloptionspropertybrowser.h"
 #include "options.h"
@@ -1483,7 +1482,7 @@ void MainWindow::PrepareSceneList()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void MainWindow::ExportToCSVData(const QString &fileName, const DialogExportToCSV &dialog)
+void MainWindow::ExportToCSVData(const QString &fileName, bool withHeader, int mib, const QChar &separator)
 {
     QxtCsvModel csv;
 
@@ -1491,7 +1490,7 @@ void MainWindow::ExportToCSVData(const QString &fileName, const DialogExportToCS
     csv.insertColumn(1);
     csv.insertColumn(2);
 
-    if (dialog.WithHeader())
+    if (withHeader)
     {
         csv.setHeaderText(0, tr("Name"));
         csv.setHeaderText(1, tr("The calculated value"));
@@ -1536,7 +1535,7 @@ void MainWindow::ExportToCSVData(const QString &fileName, const DialogExportToCS
     SavePreviewCalculation(false);
     SavePreviewCalculation(true);
 
-    csv.toCSV(fileName, dialog.WithHeader(), dialog.Separator(), QTextCodec::codecForMib(dialog.SelectedMib()));
+    csv.toCSV(fileName, withHeader, separator, QTextCodec::codecForMib(mib));
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -3978,7 +3977,7 @@ void MainWindow::CreateActions()
     connect(ui->actionSave, &QAction::triggered, this, &MainWindow::Save);
     connect(ui->actionOpen, &QAction::triggered, this, &MainWindow::Open);
     connect(ui->actionNew, &QAction::triggered, this, &MainWindow::New);
-    connect(ui->actionExportIncrementsToCSV, &QAction::triggered, this, &MainWindow::ExportToCSV);
+    connect(ui->actionExportIncrementsToCSV, &QAction::triggered, this, &MainWindow::ExportDataToCSV);
 
     connect(ui->actionTable, &QAction::triggered, this, [this](bool checked)
     {

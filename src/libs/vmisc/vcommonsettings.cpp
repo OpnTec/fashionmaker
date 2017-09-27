@@ -710,7 +710,7 @@ bool VCommonSettings::GetCSVWithHeader() const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-bool VCommonSettings::GetDefCSVWithHeader() const
+bool VCommonSettings::GetDefCSVWithHeader()
 {
     return false;
 }
@@ -730,7 +730,7 @@ int VCommonSettings::GetCSVCodec() const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-int VCommonSettings::GetDefCSVCodec() const
+int VCommonSettings::GetDefCSVCodec()
 {
     return QTextCodec::codecForLocale()->mibEnum();
 }
@@ -775,7 +775,7 @@ QChar VCommonSettings::GetCSVSeparator() const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QChar VCommonSettings::GetDefCSVSeparator() const
+QChar VCommonSettings::GetDefCSVSeparator()
 {
     return QChar(',');
 }

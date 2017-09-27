@@ -149,15 +149,15 @@ public:
 
     void SetCSVWithHeader(bool withHeader);
     bool GetCSVWithHeader() const;
-    bool GetDefCSVWithHeader() const;
+    static bool GetDefCSVWithHeader();
 
     void SetCSVCodec(int mib);
     int  GetCSVCodec() const;
-    int  GetDefCSVCodec() const;
+    static int GetDefCSVCodec();
 
     void  SetCSVSeparator(const QChar &separator);
     QChar GetCSVSeparator() const;
-    QChar GetDefCSVSeparator() const;
+    static QChar GetDefCSVSeparator();
 
     void SetDefaultSeamAllowance(double value);
     double GetDefaultSeamAllowance();
