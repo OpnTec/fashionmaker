@@ -1596,7 +1596,6 @@ void MainWindowsNoGUI::ExportFMeasurementsToCSVData(const QString &fileName, boo
         csv.insertRow(i);
         csv.setText(i, 0, m.name); // name
 
-        qreal result = 0;
         if (not m.formula.isEmpty())
         {
             try
@@ -1605,20 +1604,33 @@ void MainWindowsNoGUI::ExportFMeasurementsToCSVData(const QString &fileName, boo
                 // Replace line return character with spaces for calc if exist
                 f.replace("\n", " ");
                 QScopedPointer<Calculator> cal(new Calculator());
-                result = cal->EvalFormula(completeData.DataVariables(), f);
+                const qreal result = cal->EvalFormula(completeData.DataVariables(), f);
+
+                csv.setText(i, 1, qApp->LocaleToString(result)); // value
 
                 if (qIsInf(result) || qIsNaN(result))
                 {
-                    result = 0;
+                    qCritical("%s\n\n%s", qUtf8Printable(tr("Export final measurements error.")),
+                              qUtf8Printable(tr("Value in line %1 is infinite or NaN. Please, check your calculations.")
+                                             .arg(i+1)));
+                    if (not VApplication::IsGUIMode())
+                    {
+                        qApp->exit(V_EX_DATAERR);
+                    }
+                    return;
                 }
             }
-            catch (qmu::QmuParserError &)
+            catch (qmu::QmuParserError &e)
             {
-                result = 0;
+                qCritical("%s\n\n%s", qUtf8Printable(tr("Export final measurements error.")),
+                          qUtf8Printable(tr("Parser error at line %1: %2.").arg(i+1).arg(e.GetMsg())));
+                if (not VApplication::IsGUIMode())
+                {
+                    qApp->exit(V_EX_DATAERR);
+                }
+                return;
             }
         }
-
-        csv.setText(i, 1, qApp->LocaleToString(result)); // value
     }
 
     csv.toCSV(fileName, withHeader, separator, QTextCodec::codecForMib(mib));
