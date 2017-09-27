@@ -1499,30 +1499,42 @@ void MainWindow::ExportToCSVData(const QString &fileName, const DialogExportToCS
     }
 
     const QMap<QString, QSharedPointer<VIncrement> > increments = pattern->DataIncrements();
-    QMap<QString, QSharedPointer<VIncrement> >::const_iterator i;
-    QMap<quint32, QString> map;
-    //Sorting QHash by id
-    for (i = increments.constBegin(); i != increments.constEnd(); ++i)
-    {
-        QSharedPointer<VIncrement> incr = i.value();
-        map.insert(incr->getIndex(), i.key());
-    }
 
     qint32 currentRow = -1;
-    QMapIterator<quint32, QString> iMap(map);
-    while (iMap.hasNext())
+
+    auto SavePreviewCalculation = [&currentRow, &csv, increments](bool save)
     {
-        iMap.next();
-        QSharedPointer<VIncrement> incr = increments.value(iMap.value());
-        currentRow++;
+        QMap<QString, QSharedPointer<VIncrement> >::const_iterator i;
+        QMap<quint32, QString> map;
+        //Sorting QHash by id
+        for (i = increments.constBegin(); i != increments.constEnd(); ++i)
+        {
+            const QSharedPointer<VIncrement> incr = i.value();
+            if (incr->IsPreviewCalculation() == save)
+            {
+                map.insert(incr->getIndex(), i.key());
+            }
+        }
 
-        csv.insertRow(currentRow);
-        csv.setText(currentRow, 0, incr->GetName()); // name
-        csv.setText(currentRow, 1, qApp->LocaleToString(*incr->GetValue())); // calculated value
+        QMapIterator<quint32, QString> iMap(map);
+        while (iMap.hasNext())
+        {
+            iMap.next();
+            QSharedPointer<VIncrement> incr = increments.value(iMap.value());
+            currentRow++;
 
-        QString formula = VTranslateVars::TryFormulaToUser(incr->GetFormula(), qApp->Settings()->GetOsSeparator());
-        csv.setText(currentRow, 2, formula); // formula
-    }
+            csv.insertRow(currentRow);
+            csv.setText(currentRow, 0, incr->GetName()); // name
+            csv.setText(currentRow, 1, qApp->LocaleToString(*incr->GetValue())); // calculated value
+
+            QString formula = VTranslateVars::TryFormulaToUser(incr->GetFormula(),
+                                                               qApp->Settings()->GetOsSeparator());
+            csv.setText(currentRow, 2, formula); // formula
+        }
+    };
+
+    SavePreviewCalculation(false);
+    SavePreviewCalculation(true);
 
     csv.toCSV(fileName, dialog.WithHeader(), dialog.Separator(), QTextCodec::codecForMib(dialog.SelectedMib()));
 }
