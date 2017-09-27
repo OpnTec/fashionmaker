@@ -33,6 +33,8 @@
 #include "../vdxf/vdxfpaintdevice.h"
 #include "dialogs/dialoglayoutsettings.h"
 #include "../vwidgets/vmaingraphicsscene.h"
+#include "../vmisc/dialogs/dialogexporttocsv.h"
+#include "../vmisc/qxtcsvmodel.h"
 #include "../vlayout/vlayoutgenerator.h"
 #include "dialogs/dialoglayoutprogress.h"
 #include "dialogs/dialogsavelayout.h"
@@ -41,6 +43,7 @@
 #include "../vpatterndb/floatItemData/vpatternlabeldata.h"
 #include "../vpatterndb/floatItemData/vgrainlinedata.h"
 #include "../vpatterndb/measurements.h"
+#include "../vpatterndb/calculator.h"
 #include "../vtools/tools/vabstracttool.h"
 #include "../vtools/tools/vtoolseamallowance.h"
 
@@ -222,6 +225,31 @@ void MainWindowsNoGUI::ErrorConsoleMode(const LayoutErrors &state)
     }
 
     qApp->exit(V_EX_DATAERR);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void MainWindowsNoGUI::ExportFMeasurementsToCSV()
+{
+    QString fileName = CSVFilePath();
+
+    if (fileName.isEmpty())
+    {
+        return;
+    }
+
+    DialogExportToCSV dialog(this);
+    dialog.SetWithHeader(qApp->Settings()->GetCSVWithHeader());
+    dialog.SetSelectedMib(qApp->Settings()->GetCSVCodec());
+    dialog.SetSeparator(qApp->Settings()->GetCSVSeparator());
+
+    if (dialog.exec() == QDialog::Accepted)
+    {
+        ExportFMeasurementsToCSVData(fileName, dialog.IsWithHeader(), dialog.GetSelectedMib(), dialog.GetSeparator());
+
+        qApp->Settings()->SetCSVSeparator(dialog.GetSeparator());
+        qApp->Settings()->SetCSVCodec(dialog.GetSelectedMib());
+        qApp->Settings()->SetCSVWithHeader(dialog.IsWithHeader());
+    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -1541,6 +1569,59 @@ void MainWindowsNoGUI::SetSizeHeightForIndividualM() const
 
     doc->SetPatternWasChanged(true);
     emit doc->UpdatePatternLabel();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void MainWindowsNoGUI::ExportFMeasurementsToCSVData(const QString &fileName, bool withHeader, int mib,
+                                                    const QChar &separator) const
+{
+    QxtCsvModel csv;
+
+    csv.insertColumn(0);
+    csv.insertColumn(1);
+
+    if (withHeader)
+    {
+        csv.setHeaderText(0, tr("Name"));
+        csv.setHeaderText(1, tr("Value"));
+    }
+
+    const QVector<VFinalMeasurement> measurements = doc->GetFinalMeasurements();
+    const VContainer completeData = doc->GetCompleteData();
+
+    for (int i=0; i < measurements.size(); ++i)
+    {
+        const VFinalMeasurement &m = measurements.at(i);
+
+        csv.insertRow(i);
+        csv.setText(i, 0, m.name); // name
+
+        qreal result = 0;
+        if (not m.formula.isEmpty())
+        {
+            try
+            {
+                QString f = m.formula;
+                // Replace line return character with spaces for calc if exist
+                f.replace("\n", " ");
+                QScopedPointer<Calculator> cal(new Calculator());
+                result = cal->EvalFormula(completeData.DataVariables(), f);
+
+                if (qIsInf(result) || qIsNaN(result))
+                {
+                    result = 0;
+                }
+            }
+            catch (qmu::QmuParserError &)
+            {
+                result = 0;
+            }
+        }
+
+        csv.setText(i, 1, qApp->LocaleToString(result)); // value
+    }
+
+    csv.toCSV(fileName, withHeader, separator, QTextCodec::codecForMib(mib));
 }
 
 //---------------------------------------------------------------------------------------------------------------------

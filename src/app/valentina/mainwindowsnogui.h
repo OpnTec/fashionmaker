@@ -56,6 +56,8 @@ public slots:
     void PrintOrigin();
     void PrintTiled();
     void RefreshDetailsLabel();
+protected slots:
+    void ExportFMeasurementsToCSV();
 protected:
     QVector<VLayoutPiece> listDetails;
 
@@ -100,6 +102,9 @@ protected:
     int ContinueIfLayoutStale();
     QString FileName() const;
     void SetSizeHeightForIndividualM() const;
+
+    void ExportFMeasurementsToCSVData(const QString &fileName,
+                                      bool withHeader, int mib, const QChar &separator) const;
 private slots:
     void PrintPages (QPrinter *printer);
     void ErrorConsoleMode(const LayoutErrors &state);

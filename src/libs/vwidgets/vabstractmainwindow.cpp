@@ -30,6 +30,7 @@
 #include "../vpropertyexplorer/checkablemessagebox.h"
 #include "../vmisc/vabstractapplication.h"
 #include "dialogs/dialogexporttocsv.h"
+#include "../ifc/xml/vabstractpattern.h"
 
 #include <QStyle>
 #include <QToolBar>

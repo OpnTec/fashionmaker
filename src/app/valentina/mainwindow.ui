@@ -1709,6 +1709,7 @@
     <addaction name="actionExportIncrementsToCSV"/>
     <addaction name="separator"/>
     <addaction name="actionFinalMeasurements"/>
+    <addaction name="actionExportFinalMeasurementsToCSV"/>
    </widget>
    <widget class="QMenu" name="menuWindow">
     <property name="title">
@@ -2693,6 +2694,14 @@
     <string>Final measurements</string>
    </property>
   </action>
+  <action name="actionExportFinalMeasurementsToCSV">
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
+   <property name="text">
+    <string>Export Final Measurements to CSV</string>
+   </property>
+  </action>
  </widget>
  <layoutdefault spacing="6" margin="11"/>
  <customwidgets>
@@ -2703,8 +2712,8 @@
   </customwidget>
  </customwidgets>
  <resources>
-  <include location="../../libs/vmisc/share/resources/icon.qrc"/>
   <include location="share/resources/toolicon.qrc"/>
+  <include location="../../libs/vmisc/share/resources/icon.qrc"/>
  </resources>
  <connections/>
 </ui>

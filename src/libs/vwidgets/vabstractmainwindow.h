@@ -35,7 +35,7 @@
 #include <QObject>
 #include <QString>
 
-class DialogExportToCSV;
+class VFinalMeasurement;
 
 class VAbstractMainWindow : public QMainWindow
 {
@@ -58,11 +58,12 @@ protected:
     bool ContinueFormatRewrite(const QString &currentFormatVersion, const QString &maxFormatVersion);
     void ToolBarStyle(QToolBar *bar);
 
+    QString CSVFilePath();
+
     virtual void ExportToCSVData(const QString &fileName, bool withHeader, int mib, const QChar &separator)=0;
+
 private:
     Q_DISABLE_COPY(VAbstractMainWindow)
-
-    QString CSVFilePath();
 };
 
 #endif // VABSTRACTMAINWINDOW_H

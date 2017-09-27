@@ -2837,6 +2837,7 @@ void MainWindow::Clear()
     ui->actionHistory->setEnabled(false);
     ui->actionTable->setEnabled(false);
     ui->actionExportIncrementsToCSV->setEnabled(false);
+    ui->actionExportFinalMeasurementsToCSV->setEnabled(false);
     ui->actionFinalMeasurements->setEnabled(false);
     ui->actionLast_tool->setEnabled(false);
     ui->actionShowCurveDetails->setEnabled(false);
@@ -3084,6 +3085,7 @@ void MainWindow::SetEnableWidgets(bool enable)
     ui->actionLayout->setEnabled(enable);
     ui->actionTable->setEnabled(enable && drawStage);
     ui->actionExportIncrementsToCSV->setEnabled(enable);
+    ui->actionExportFinalMeasurementsToCSV->setEnabled(enable);
     ui->actionFinalMeasurements->setEnabled(enable);
     ui->actionZoomFitBest->setEnabled(enable);
     ui->actionZoomFitBestCurrent->setEnabled(enable && drawStage);
@@ -3978,6 +3980,7 @@ void MainWindow::CreateActions()
     connect(ui->actionOpen, &QAction::triggered, this, &MainWindow::Open);
     connect(ui->actionNew, &QAction::triggered, this, &MainWindow::New);
     connect(ui->actionExportIncrementsToCSV, &QAction::triggered, this, &MainWindow::ExportDataToCSV);
+    connect(ui->actionExportFinalMeasurementsToCSV, &QAction::triggered, this, &MainWindow::ExportFMeasurementsToCSV);
 
     connect(ui->actionTable, &QAction::triggered, this, [this](bool checked)
     {
