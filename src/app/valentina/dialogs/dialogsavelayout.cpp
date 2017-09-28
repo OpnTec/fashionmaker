@@ -250,10 +250,20 @@ bool DialogSaveLayout::IsBinaryDXFFormat() const
 QString DialogSaveLayout::MakeHelpFormatList()
 {
    QString out("\n");
-   foreach(auto& v, InitFormats())
+   const auto formats = InitFormats();
+   for(int i = 0; i < formats.size(); ++i)
    {
-       out += QLatin1String("\t") + v.first + QLatin1String(" = ") + QString::number(static_cast<int>(v.second))
-               + QLatin1String("\n");
+       out += QLatin1String("\t* ") + formats.at(i).first + QLatin1String(" = ")
+               + QString::number(static_cast<int>(formats.at(i).second));
+
+       if (i < formats.size() - 1)
+       {
+           out += QLatin1String(",\n");
+       }
+       else
+       {
+           out += QLatin1String(".\n");
+       }
    }
    return out;
 }
