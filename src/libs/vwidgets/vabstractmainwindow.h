@@ -35,7 +35,7 @@
 #include <QObject>
 #include <QString>
 
-class VFinalMeasurement;
+struct VFinalMeasurement;
 
 class VAbstractMainWindow : public QMainWindow
 {
