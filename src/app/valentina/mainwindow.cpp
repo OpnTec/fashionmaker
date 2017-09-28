@@ -4209,11 +4209,11 @@ bool MainWindow::LoadPattern(QString fileName, const QString& customMeasureFile)
 {
     qCDebug(vMainWindow, "Loading new file %s.", qUtf8Printable(fileName));
 
-    { // Convert to absolute path is need
+    { // Convert to absolute path if need
         QFileInfo info(fileName);
-        if (info.isRelative())
+        if (info.exists() && info.isRelative())
         {
-            fileName = QDir::currentPath() + QLatin1Char('/') + fileName;
+            fileName = QFileInfo(QDir::currentPath() + QLatin1Char('/') + fileName).canonicalFilePath();
         }
     }
 
