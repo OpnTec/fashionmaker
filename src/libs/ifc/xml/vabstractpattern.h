@@ -446,6 +446,7 @@ private:
     QVector<VFormulaField> ListPathExpressions() const;
     QVector<VFormulaField> ListGrainlineExpressions(const QDomElement &element) const;
     QVector<VFormulaField> ListPieceExpressions() const;
+    QVector<VFormulaField> ListFinalMeasurementsExpressions() const;
 
     bool IsVariable(const QString& token) const;
     bool IsPostfixOperator(const QString& token) const;

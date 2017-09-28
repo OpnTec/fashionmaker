@@ -1761,6 +1761,7 @@ QVector<VFormulaField> VAbstractPattern::ListExpressions() const
     list << ListOperationExpressions();
     list << ListPathExpressions();
     list << ListPieceExpressions();
+    list << ListFinalMeasurementsExpressions();
 
     return list;
 }
@@ -1992,6 +1993,26 @@ QVector<VFormulaField> VAbstractPattern::ListPieceExpressions() const
 
         expressions << ListNodesExpressions(dom.firstChildElement(TagNodes));
         expressions << ListGrainlineExpressions(dom.firstChildElement(TagGrainline));
+    }
+
+    return expressions;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QVector<VFormulaField> VAbstractPattern::ListFinalMeasurementsExpressions() const
+{
+    QVector<VFormulaField> expressions;
+    const QDomNodeList list = elementsByTagName(TagFMeasurement);
+    for (int i=0; i < list.size(); ++i)
+    {
+        const QDomElement dom = list.at(i).toElement();
+        if (dom.isNull())
+        {
+            continue;
+        }
+
+        // Each tag can contains several attributes.
+        ReadExpressionAttribute(expressions, dom, AttrFormula);
     }
 
     return expressions;
