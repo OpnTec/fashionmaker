@@ -326,16 +326,7 @@ void DialogSplinePath::Angle1Changed()
 
         const QString angle1F = ui->plainTextEditAngle1F->toPlainText().replace("\n", " ");
         const qreal angle1 = Visualization::FindVal(angle1F, data->DataVariables());
-
-        try
-        {
-            p.SetAngle1(angle1, qApp->TrVars()->FormulaFromUser(angle1F, qApp->Settings()->GetOsSeparator()));
-        }
-        catch (qmu::QmuParserError &e)
-        {
-            Q_UNUSED(e)
-            p.SetAngle1(angle1, angle1F);
-        }
+        p.SetAngle1(angle1, VTranslateVars::TryFormulaFromUser(angle1F, qApp->Settings()->GetOsSeparator()));
 
         item->setData(Qt::UserRole, QVariant::fromValue(p));
 
@@ -369,16 +360,7 @@ void DialogSplinePath::Angle2Changed()
 
         const QString angle2F = ui->plainTextEditAngle2F->toPlainText().replace("\n", " ");
         const qreal angle2 = Visualization::FindVal(angle2F, data->DataVariables());
-
-        try
-        {
-            p.SetAngle2(angle2, qApp->TrVars()->FormulaFromUser(angle2F, qApp->Settings()->GetOsSeparator()));
-        }
-        catch (qmu::QmuParserError &e)
-        {
-            Q_UNUSED(e)
-            p.SetAngle2(angle2, angle2F);
-        }
+        p.SetAngle2(angle2, VTranslateVars::TryFormulaFromUser(angle2F, qApp->Settings()->GetOsSeparator()));
 
         item->setData(Qt::UserRole, QVariant::fromValue(p));
 
@@ -412,16 +394,7 @@ void DialogSplinePath::Length1Changed()
 
         const QString length1F = ui->plainTextEditLength1F->toPlainText().replace("\n", " ");
         const qreal length1 = Visualization::FindLength(length1F, data->DataVariables());
-
-        try
-        {
-            p.SetLength1(length1, qApp->TrVars()->FormulaFromUser(length1F, qApp->Settings()->GetOsSeparator()));
-        }
-        catch (qmu::QmuParserError &e)
-        {
-            Q_UNUSED(e)
-            p.SetLength1(length1, length1F);
-        }
+        p.SetLength1(length1, VTranslateVars::TryFormulaFromUser(length1F, qApp->Settings()->GetOsSeparator()));
 
         item->setData(Qt::UserRole, QVariant::fromValue(p));
 
@@ -446,16 +419,7 @@ void DialogSplinePath::Length2Changed()
 
         const QString length2F = ui->plainTextEditLength2F->toPlainText().replace("\n", " ");
         const qreal length2 = Visualization::FindLength(length2F, data->DataVariables());
-
-        try
-        {
-            p.SetLength2(length2, qApp->TrVars()->FormulaFromUser(length2F, qApp->Settings()->GetOsSeparator()));
-        }
-        catch (qmu::QmuParserError &e)
-        {
-            Q_UNUSED(e)
-            p.SetLength2(length2, length2F);
-        }
+        p.SetLength2(length2, VTranslateVars::TryFormulaFromUser(length2F, qApp->Settings()->GetOsSeparator()));
 
         item->setData(Qt::UserRole, QVariant::fromValue(p));
 
@@ -469,14 +433,14 @@ void DialogSplinePath::FXAngle1()
     auto dialog = new DialogEditWrongFormula(data, toolId, this);
     dialog->setWindowTitle(tr("Edit first control point angle"));
 
-    QString angle1F = qApp->TrVars()->TryFormulaFromUser(ui->plainTextEditAngle1F->toPlainText().replace("\n", " "),
+    QString angle1F = VTranslateVars::TryFormulaFromUser(ui->plainTextEditAngle1F->toPlainText().replace("\n", " "),
                                                          qApp->Settings()->GetOsSeparator());
 
     dialog->SetFormula(angle1F);
     dialog->setPostfix(degreeSymbol);
     if (dialog->exec() == QDialog::Accepted)
     {
-        angle1F = qApp->TrVars()->FormulaToUser(dialog->GetFormula(), qApp->Settings()->GetOsSeparator());
+        angle1F = VTranslateVars::TryFormulaToUser(dialog->GetFormula(), qApp->Settings()->GetOsSeparator());
         // increase height if needed.
         if (angle1F.length() > 80)
         {
@@ -494,14 +458,14 @@ void DialogSplinePath::FXAngle2()
     auto dialog = new DialogEditWrongFormula(data, toolId, this);
     dialog->setWindowTitle(tr("Edit second control point angle"));
 
-    QString angle2F = qApp->TrVars()->TryFormulaFromUser(ui->plainTextEditAngle2F->toPlainText().replace("\n", " "),
+    QString angle2F = VTranslateVars::TryFormulaFromUser(ui->plainTextEditAngle2F->toPlainText().replace("\n", " "),
                                                          qApp->Settings()->GetOsSeparator());
 
     dialog->SetFormula(angle2F);
     dialog->setPostfix(degreeSymbol);
     if (dialog->exec() == QDialog::Accepted)
     {
-        angle2F = qApp->TrVars()->FormulaToUser(dialog->GetFormula(), qApp->Settings()->GetOsSeparator());
+        angle2F = VTranslateVars::TryFormulaToUser(dialog->GetFormula(), qApp->Settings()->GetOsSeparator());
         // increase height if needed.
         if (angle2F.length() > 80)
         {
@@ -519,14 +483,14 @@ void DialogSplinePath::FXLength1()
     auto dialog = new DialogEditWrongFormula(data, toolId, this);
     dialog->setWindowTitle(tr("Edit first control point length"));
 
-    QString length1F = qApp->TrVars()->TryFormulaFromUser(ui->plainTextEditLength1F->toPlainText().replace("\n", " "),
+    QString length1F = VTranslateVars::TryFormulaFromUser(ui->plainTextEditLength1F->toPlainText().replace("\n", " "),
                                                           qApp->Settings()->GetOsSeparator());
 
     dialog->SetFormula(length1F);
     dialog->setPostfix(UnitsToStr(qApp->patternUnit(), true));
     if (dialog->exec() == QDialog::Accepted)
     {
-        length1F = qApp->TrVars()->FormulaToUser(dialog->GetFormula(), qApp->Settings()->GetOsSeparator());
+        length1F = VTranslateVars::TryFormulaToUser(dialog->GetFormula(), qApp->Settings()->GetOsSeparator());
         // increase height if needed.
         if (length1F.length() > 80)
         {
@@ -544,14 +508,14 @@ void DialogSplinePath::FXLength2()
     auto dialog = new DialogEditWrongFormula(data, toolId, this);
     dialog->setWindowTitle(tr("Edit second control point length"));
 
-    QString length2F = qApp->TrVars()->TryFormulaFromUser(ui->plainTextEditLength2F->toPlainText().replace("\n", " "),
+    QString length2F = VTranslateVars::TryFormulaFromUser(ui->plainTextEditLength2F->toPlainText().replace("\n", " "),
                                                           qApp->Settings()->GetOsSeparator());
 
     dialog->SetFormula(length2F);
     dialog->setPostfix(UnitsToStr(qApp->patternUnit(), true));
     if (dialog->exec() == QDialog::Accepted)
     {
-        length2F = qApp->TrVars()->FormulaToUser(dialog->GetFormula(), qApp->Settings()->GetOsSeparator());
+        length2F = VTranslateVars::TryFormulaToUser(dialog->GetFormula(), qApp->Settings()->GetOsSeparator());
         // increase height if needed.
         if (length2F.length() > 80)
         {

@@ -825,11 +825,20 @@ QString DialogLayoutSettings::MakeHelpTemplateList()
     QString out = "\n";
 
     auto cntr = static_cast<VIndexType>(PaperSizeTemplate::A0);
-    foreach(const auto& v,  pageFormatNames)
+    for (int i = 0; i < pageFormatNames.size(); ++i)
     {
         if (cntr <= static_cast<int>(PaperSizeTemplate::Roll44in))// Don't include custom template
         {
-            out += "\t"+v+" = "+ QString::number(cntr++)+"\n";
+            out += "\t* "+pageFormatNames.at(i)+" = "+ QString::number(cntr++);
+
+            if (i < pageFormatNames.size() - 1)
+            {
+               out += ",\n";
+            }
+            else
+            {
+               out += ".\n";
+            }
         }
     }
     return out;

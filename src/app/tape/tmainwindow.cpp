@@ -32,7 +32,6 @@
 #include "dialogs/dialognewmeasurements.h"
 #include "dialogs/dialogmdatabase.h"
 #include "dialogs/dialogtapepreferences.h"
-#include "dialogs/dialogexporttocsv.h"
 #include "../vpatterndb/calculator.h"
 #include "../vpatterndb/pmsystems.h"
 #include "../ifc/ifcdef.h"
@@ -663,7 +662,7 @@ bool TMainWindow::eventFilter(QObject *object, QEvent *event)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void TMainWindow::ExportToCSVData(const QString &fileName, const DialogExportToCSV &dialog)
+void TMainWindow::ExportToCSVData(const QString &fileName, bool withHeader, int mib, const QChar &separator)
 {
     QxtCsvModel csv;
     const int columns = ui->tableWidget->columnCount();
@@ -678,7 +677,7 @@ void TMainWindow::ExportToCSVData(const QString &fileName, const DialogExportToC
         }
     }
 
-    if (dialog.WithHeader())
+    if (withHeader)
     {
         int colCount = 0;
         for (int column = 0; column < columns; ++column)
@@ -708,7 +707,8 @@ void TMainWindow::ExportToCSVData(const QString &fileName, const DialogExportToC
         }
     }
 
-    csv.toCSV(fileName, dialog.WithHeader(), dialog.Separator(), QTextCodec::codecForMib(dialog.SelectedMib()));
+    QString error;
+    csv.toCSV(fileName, error, withHeader, separator, QTextCodec::codecForMib(mib));
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -1506,16 +1506,7 @@ void TMainWindow::ShowNewMData(bool fresh)
 
             ui->plainTextEditFormula->blockSignals(true);
 
-            QString formula;
-            try
-            {
-                formula = qApp->TrVars()->FormulaToUser(meash->GetFormula(), qApp->Settings()->GetOsSeparator());
-            }
-            catch (qmu::QmuParserError &e)
-            {
-                Q_UNUSED(e)
-                formula = meash->GetFormula();
-            }
+            QString formula = VTranslateVars::TryFormulaToUser(meash->GetFormula(), qApp->Settings()->GetOsSeparator());
 
             ui->plainTextEditFormula->setPlainText(formula);
             ui->plainTextEditFormula->blockSignals(false);
@@ -1895,7 +1886,7 @@ void TMainWindow::SetupMenu()
     connect(ui->actionSaveAs, &QAction::triggered, this, &TMainWindow::FileSaveAs);
     ui->actionSaveAs->setShortcuts(QKeySequence::SaveAs);
 
-    connect(ui->actionExportToCSV, &QAction::triggered, this, &TMainWindow::ExportToCSV);
+    connect(ui->actionExportToCSV, &QAction::triggered, this, &TMainWindow::ExportDataToCSV);
     connect(ui->actionReadOnly, &QAction::triggered, this, [this](bool ro)
     {
         if (not mIsReadOnly)
@@ -2416,16 +2407,7 @@ void TMainWindow::RefreshTable(bool freshCall)
             AddCell(locale().toString(value), currentRow, ColumnCalcValue, Qt::AlignHCenter | Qt::AlignVCenter,
                     meash->IsFormulaOk()); // calculated value
 
-            QString formula;
-            try
-            {
-                formula = qApp->TrVars()->FormulaToUser(meash->GetFormula(), qApp->Settings()->GetOsSeparator());
-            }
-            catch (qmu::QmuParserError &e)
-            {
-                Q_UNUSED(e)
-                formula = meash->GetFormula();
-            }
+            QString formula = VTranslateVars::TryFormulaToUser(meash->GetFormula(), qApp->Settings()->GetOsSeparator());
 
             AddCell(formula, currentRow, ColumnFormula, Qt::AlignVCenter); // formula
         }

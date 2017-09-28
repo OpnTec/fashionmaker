@@ -19,7 +19,8 @@ HEADERS += \
     $$PWD/configpages/preferencespathpage.h \
     $$PWD/dialogdatetimeformats.h \
     $$PWD/dialogknownmaterials.h \
-    $$PWD/dialogpatternmaterials.h
+    $$PWD/dialogpatternmaterials.h \
+    $$PWD/dialogfinalmeasurements.h
 
 SOURCES += \
     $$PWD/dialogincrements.cpp \
@@ -38,7 +39,8 @@ SOURCES += \
     $$PWD/configpages/preferencespathpage.cpp \
     $$PWD/dialogdatetimeformats.cpp \
     $$PWD/dialogknownmaterials.cpp \
-    $$PWD/dialogpatternmaterials.cpp
+    $$PWD/dialogpatternmaterials.cpp \
+    $$PWD/dialogfinalmeasurements.cpp
 
 FORMS += \
     $$PWD/dialogincrements.ui \
@@ -57,4 +59,5 @@ FORMS += \
     $$PWD/configpages/preferencespathpage.ui \
     $$PWD/dialogdatetimeformats.ui \
     $$PWD/dialogknownmaterials.ui \
-    $$PWD/dialogpatternmaterials.ui
+    $$PWD/dialogpatternmaterials.ui \
+    $$PWD/dialogfinalmeasurements.ui

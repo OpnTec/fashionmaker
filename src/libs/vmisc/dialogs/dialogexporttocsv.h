@@ -31,8 +31,9 @@
 
 #include <QDialog>
 
-namespace Ui {
-class DialogExportToCSV;
+namespace Ui
+{
+    class DialogExportToCSV;
 }
 
 class DialogExportToCSV : public QDialog
@@ -43,9 +44,17 @@ public:
     explicit DialogExportToCSV(QWidget *parent = nullptr);
     virtual ~DialogExportToCSV();
 
-    bool  WithHeader() const;
-    int   SelectedMib() const;
-    QChar Separator() const;
+    bool IsWithHeader() const;
+    void SetWithHeader(bool value);
+
+    int  GetSelectedMib() const;
+    void SetSelectedMib(int value);
+
+    QChar GetSeparator() const;
+    void  SetSeparator(const QChar &separator);
+
+    static QString MakeHelpCodecsList();
+    static QString MakeHelpSeparatorList();
 
 protected:
     virtual void changeEvent(QEvent* event) Q_DECL_OVERRIDE;
@@ -55,8 +64,6 @@ private:
     Q_DISABLE_COPY(DialogExportToCSV)
     Ui::DialogExportToCSV *ui;
     bool isInitialized;
-
-    void SetSeparator(const QChar &separator);
 };
 
 #endif // DIALOGEXPORTTOCSV_H

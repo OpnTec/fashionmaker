@@ -30,6 +30,7 @@
 #include "../vpropertyexplorer/checkablemessagebox.h"
 #include "../vmisc/vabstractapplication.h"
 #include "dialogs/dialogexporttocsv.h"
+#include "../ifc/xml/vabstractpattern.h"
 
 #include <QStyle>
 #include <QToolBar>
@@ -87,13 +88,7 @@ void VAbstractMainWindow::ToolBarStyle(QToolBar *bar)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VAbstractMainWindow::WindowsLocale()
-{
-    qApp->Settings()->GetOsSeparator() ? setLocale(QLocale()) : setLocale(QLocale::c());
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void VAbstractMainWindow::ExportToCSV()
+QString VAbstractMainWindow::CSVFilePath()
 {
     const QString filters = tr("Comma-Separated Values") + QLatin1String(" (*.csv)");
     const QString suffix("csv");
@@ -104,7 +99,7 @@ void VAbstractMainWindow::ExportToCSV()
 
     if (fileName.isEmpty())
     {
-        return;
+        return fileName;
     }
 
     QFileInfo f( fileName );
@@ -113,13 +108,36 @@ void VAbstractMainWindow::ExportToCSV()
         fileName += QLatin1String(".") + suffix;
     }
 
+    return fileName;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VAbstractMainWindow::WindowsLocale()
+{
+    qApp->Settings()->GetOsSeparator() ? setLocale(QLocale()) : setLocale(QLocale::c());
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VAbstractMainWindow::ExportDataToCSV()
+{
+    QString fileName = CSVFilePath();
+
+    if (fileName.isEmpty())
+    {
+        return;
+    }
+
     DialogExportToCSV dialog(this);
+    dialog.SetWithHeader(qApp->Settings()->GetCSVWithHeader());
+    dialog.SetSelectedMib(qApp->Settings()->GetCSVCodec());
+    dialog.SetSeparator(qApp->Settings()->GetCSVSeparator());
+
     if (dialog.exec() == QDialog::Accepted)
     {
-        ExportToCSVData(fileName, dialog);
+        ExportToCSVData(fileName, dialog.IsWithHeader(), dialog.GetSelectedMib(), dialog.GetSeparator());
 
-        qApp->Settings()->SetCSVSeparator(dialog.Separator());
-        qApp->Settings()->SetCSVCodec(dialog.SelectedMib());
-        qApp->Settings()->SetCSVWithHeader(dialog.WithHeader());
+        qApp->Settings()->SetCSVSeparator(dialog.GetSeparator());
+        qApp->Settings()->SetCSVCodec(dialog.GetSelectedMib());
+        qApp->Settings()->SetCSVWithHeader(dialog.IsWithHeader());
     }
 }

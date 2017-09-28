@@ -78,6 +78,7 @@ const QString settingPreferenceDialogSize        = QStringLiteral("preferenceDia
 const QString settingToolSeamAllowanceDialogSize = QStringLiteral("toolSeamAllowanceDialogSize");
 const QString settingIncrementsDialogSize        = QStringLiteral("toolIncrementsDialogSize");
 const QString settingFormulaWizardDialogSize     = QStringLiteral("formulaWizardDialogSize");
+const QString settingFinalMeasurementsDialogSize = QStringLiteral("finalMeasurementsDialogSize");
 const QString settingLatestSkippedVersion        = QStringLiteral("lastestSkippedVersion");
 const QString settingDateOfLastRemind            = QStringLiteral("dateOfLastRemind");
 
@@ -617,6 +618,18 @@ void VCommonSettings::SetIncrementsDialogSize(const QSize &sz)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+QSize VCommonSettings::GetFinalMeasurementsDialogSize() const
+{
+    return value(settingFinalMeasurementsDialogSize, QSize(0, 0)).toSize();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VCommonSettings::SetFinalMeasurementsDialogSize(const QSize &sz)
+{
+    setValue(settingFinalMeasurementsDialogSize, sz);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 int VCommonSettings::GetLatestSkippedVersion() const
 {
     QSettings settings(this->format(), this->scope(), this->organizationName(), commonIniFilename);
@@ -697,7 +710,7 @@ bool VCommonSettings::GetCSVWithHeader() const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-bool VCommonSettings::GetDefCSVWithHeader() const
+bool VCommonSettings::GetDefCSVWithHeader()
 {
     return false;
 }
@@ -717,7 +730,7 @@ int VCommonSettings::GetCSVCodec() const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-int VCommonSettings::GetDefCSVCodec() const
+int VCommonSettings::GetDefCSVCodec()
 {
     return QTextCodec::codecForLocale()->mibEnum();
 }
@@ -762,7 +775,7 @@ QChar VCommonSettings::GetCSVSeparator() const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QChar VCommonSettings::GetDefCSVSeparator() const
+QChar VCommonSettings::GetDefCSVSeparator()
 {
     return QChar(',');
 }

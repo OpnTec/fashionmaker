@@ -713,16 +713,7 @@ void DialogIncrements::FillIncrementsTable(QTableWidget *table,
         AddCell(table, qApp->LocaleToString(*incr->GetValue()), currentRow, 1,
                 Qt::AlignHCenter | Qt::AlignVCenter, incr->IsFormulaOk()); // calculated value
 
-        QString formula;
-        try
-        {
-            formula = qApp->TrVars()->FormulaToUser(incr->GetFormula(), qApp->Settings()->GetOsSeparator());
-        }
-        catch (qmu::QmuParserError &e)
-        {
-            Q_UNUSED(e)
-            formula = incr->GetFormula();
-        }
+        QString formula = VTranslateVars::TryFormulaToUser(incr->GetFormula(), qApp->Settings()->GetOsSeparator());
 
         AddCell(table, formula, currentRow, 2, Qt::AlignVCenter); // formula
     }
@@ -1394,16 +1385,7 @@ void DialogIncrements::ShowIncrementDetails()
         EvalIncrementFormula(incr->GetFormula(), false, incr->GetData(), labelCalculatedValue);
         plainTextEditFormula->blockSignals(true);
 
-        QString formula;
-        try
-        {
-            formula = qApp->TrVars()->FormulaToUser(incr->GetFormula(), qApp->Settings()->GetOsSeparator());
-        }
-        catch (qmu::QmuParserError &e)
-        {
-            Q_UNUSED(e)
-            formula = incr->GetFormula();
-        }
+        QString formula = VTranslateVars::TryFormulaToUser(incr->GetFormula(), qApp->Settings()->GetOsSeparator());
 
         plainTextEditFormula->setPlainText(formula);
         plainTextEditFormula->blockSignals(false);

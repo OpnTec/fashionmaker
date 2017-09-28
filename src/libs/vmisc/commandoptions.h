@@ -108,6 +108,11 @@ extern const QString SINGLE_OPTION_TOP_MARGIN;
 extern const QString LONG_OPTION_BOTTOM_MARGIN;
 extern const QString SINGLE_OPTION_BOTTOM_MARGIN;
 
+extern const QString LONG_OPTION_CSVWITHHEADER;
+extern const QString LONG_OPTION_CSVCODEC;
+extern const QString LONG_OPTION_CSVSEPARATOR;
+extern const QString LONG_OPTION_CSVEXPORTFM;
+
 QStringList AllKeys();
 
 #endif // COMMANDOPTIONS_H

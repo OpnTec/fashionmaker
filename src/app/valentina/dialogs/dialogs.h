@@ -35,5 +35,6 @@
 #include "dialognewpattern.h"
 #include "dialogaboutapp.h"
 #include "dialogpreferences.h"
+#include "dialogfinalmeasurements.h"
 
 #endif // DIALOGS_H

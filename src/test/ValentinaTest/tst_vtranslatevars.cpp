@@ -72,16 +72,7 @@ void TST_VTranslateVars::TestFormulaFromUser()
 
     QLocale::setDefault(locale);
 
-    QString result;
-    try
-    {
-        result = m_trMs->FormulaFromUser(input, true);
-    }
-    catch (qmu::QmuParserError &e)// In case something bad will happen
-    {
-        Q_UNUSED(e)
-        result = input;
-    }
+    const QString result = VTranslateVars::TryFormulaFromUser(input, true);
 
     QCOMPARE(result, output);
 }
@@ -111,16 +102,7 @@ void TST_VTranslateVars::TestFormulaToUser()
 
     QLocale::setDefault(locale);
 
-    QString result;
-    try
-    {
-        result = m_trMs->FormulaToUser(input, true);
-    }
-    catch (qmu::QmuParserError &e)// In case something bad will happen
-    {
-        Q_UNUSED(e)
-        result = input;
-    }
+    const QString result = VTranslateVars::TryFormulaToUser(input, true);
 
     QCOMPARE(result, output);
 }

@@ -1699,12 +1699,17 @@
     </property>
     <addaction name="actionOpenTape"/>
     <addaction name="actionEditCurrent"/>
+    <addaction name="separator"/>
     <addaction name="actionUnloadMeasurements"/>
     <addaction name="actionLoadIndividual"/>
     <addaction name="actionLoadMultisize"/>
     <addaction name="actionSyncMeasurements"/>
+    <addaction name="separator"/>
     <addaction name="actionTable"/>
     <addaction name="actionExportIncrementsToCSV"/>
+    <addaction name="separator"/>
+    <addaction name="actionFinalMeasurements"/>
+    <addaction name="actionExportFinalMeasurementsToCSV"/>
    </widget>
    <widget class="QMenu" name="menuWindow">
     <property name="title">
@@ -2649,6 +2654,9 @@
    </property>
   </action>
   <action name="actionExportIncrementsToCSV">
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
    <property name="text">
     <string>Export increments to CSV</string>
    </property>
@@ -2657,6 +2665,9 @@
    </property>
   </action>
   <action name="actionZoomFitBestCurrent">
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
    <property name="text">
     <string>Zoom fit best current</string>
    </property>
@@ -2673,6 +2684,22 @@
   <action name="actionLabelTemplateEditor">
    <property name="text">
     <string>Label template editor</string>
+   </property>
+  </action>
+  <action name="actionFinalMeasurements">
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
+   <property name="text">
+    <string>Final measurements</string>
+   </property>
+  </action>
+  <action name="actionExportFinalMeasurementsToCSV">
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
+   <property name="text">
+    <string>Export Final Measurements to CSV</string>
    </property>
   </action>
  </widget>

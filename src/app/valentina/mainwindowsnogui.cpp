@@ -33,6 +33,8 @@
 #include "../vdxf/vdxfpaintdevice.h"
 #include "dialogs/dialoglayoutsettings.h"
 #include "../vwidgets/vmaingraphicsscene.h"
+#include "../vmisc/dialogs/dialogexporttocsv.h"
+#include "../vmisc/qxtcsvmodel.h"
 #include "../vlayout/vlayoutgenerator.h"
 #include "dialogs/dialoglayoutprogress.h"
 #include "dialogs/dialogsavelayout.h"
@@ -41,6 +43,7 @@
 #include "../vpatterndb/floatItemData/vpatternlabeldata.h"
 #include "../vpatterndb/floatItemData/vgrainlinedata.h"
 #include "../vpatterndb/measurements.h"
+#include "../vpatterndb/calculator.h"
 #include "../vtools/tools/vabstracttool.h"
 #include "../vtools/tools/vtoolseamallowance.h"
 
@@ -222,6 +225,31 @@ void MainWindowsNoGUI::ErrorConsoleMode(const LayoutErrors &state)
     }
 
     qApp->exit(V_EX_DATAERR);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void MainWindowsNoGUI::ExportFMeasurementsToCSV()
+{
+    QString fileName = CSVFilePath();
+
+    if (fileName.isEmpty())
+    {
+        return;
+    }
+
+    DialogExportToCSV dialog(this);
+    dialog.SetWithHeader(qApp->Settings()->GetCSVWithHeader());
+    dialog.SetSelectedMib(qApp->Settings()->GetCSVCodec());
+    dialog.SetSeparator(qApp->Settings()->GetCSVSeparator());
+
+    if (dialog.exec() == QDialog::Accepted)
+    {
+        ExportFMeasurementsToCSVData(fileName, dialog.IsWithHeader(), dialog.GetSelectedMib(), dialog.GetSeparator());
+
+        qApp->Settings()->SetCSVSeparator(dialog.GetSeparator());
+        qApp->Settings()->SetCSVCodec(dialog.GetSelectedMib());
+        qApp->Settings()->SetCSVWithHeader(dialog.IsWithHeader());
+    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -1541,6 +1569,84 @@ void MainWindowsNoGUI::SetSizeHeightForIndividualM() const
 
     doc->SetPatternWasChanged(true);
     emit doc->UpdatePatternLabel();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+bool MainWindowsNoGUI::ExportFMeasurementsToCSVData(const QString &fileName, bool withHeader, int mib,
+                                                    const QChar &separator) const
+{
+    QxtCsvModel csv;
+
+    csv.insertColumn(0);
+    csv.insertColumn(1);
+
+    if (withHeader)
+    {
+        csv.setHeaderText(0, tr("Name"));
+        csv.setHeaderText(1, tr("Value"));
+    }
+
+    const QVector<VFinalMeasurement> measurements = doc->GetFinalMeasurements();
+    const VContainer completeData = doc->GetCompleteData();
+
+    for (int i=0; i < measurements.size(); ++i)
+    {
+        const VFinalMeasurement &m = measurements.at(i);
+
+        csv.insertRow(i);
+        csv.setText(i, 0, m.name); // name
+
+        if (not m.formula.isEmpty())
+        {
+            try
+            {
+                QString f = m.formula;
+                // Replace line return character with spaces for calc if exist
+                f.replace("\n", " ");
+                QScopedPointer<Calculator> cal(new Calculator());
+                const qreal result = cal->EvalFormula(completeData.DataVariables(), f);
+
+                csv.setText(i, 1, qApp->LocaleToString(result)); // value
+
+                if (qIsInf(result) || qIsNaN(result))
+                {
+                    qCritical("%s\n\n%s", qUtf8Printable(tr("Export final measurements error.")),
+                              qUtf8Printable(tr("Value in line %1 is infinite or NaN. Please, check your calculations.")
+                                             .arg(i+1)));
+                    if (not VApplication::IsGUIMode())
+                    {
+                        qApp->exit(V_EX_DATAERR);
+                    }
+                    return false;
+                }
+            }
+            catch (qmu::QmuParserError &e)
+            {
+                qCritical("%s\n\n%s", qUtf8Printable(tr("Export final measurements error.")),
+                          qUtf8Printable(tr("Parser error at line %1: %2.").arg(i+1).arg(e.GetMsg())));
+                if (not VApplication::IsGUIMode())
+                {
+                    qApp->exit(V_EX_DATAERR);
+                }
+                return false;
+            }
+        }
+    }
+
+    QString error;
+    const bool success = csv.toCSV(fileName, error, withHeader, separator, QTextCodec::codecForMib(mib));
+
+    if (not success)
+    {
+        qCritical("%s\n\n%s", qUtf8Printable(tr("Export final measurements error.")),
+                  qUtf8Printable(tr("File error %1.").arg(error)));
+        if (not VApplication::IsGUIMode())
+        {
+            qApp->exit(V_EX_CANTCREAT);
+        }
+    }
+
+    return success;
 }
 
 //---------------------------------------------------------------------------------------------------------------------

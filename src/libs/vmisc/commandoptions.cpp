@@ -111,6 +111,11 @@ const QString SINGLE_OPTION_TOP_MARGIN      = QStringLiteral("T");
 const QString LONG_OPTION_BOTTOM_MARGIN     = QStringLiteral("bmargin");
 const QString SINGLE_OPTION_BOTTOM_MARGIN   = QStringLiteral("B");
 
+const QString LONG_OPTION_CSVWITHHEADER = QStringLiteral("csvWithHeader");
+const QString LONG_OPTION_CSVCODEC      = QStringLiteral("csvCodec");
+const QString LONG_OPTION_CSVSEPARATOR  = QStringLiteral("csvSeparator");
+const QString LONG_OPTION_CSVEXPORTFM   = QStringLiteral("csvExportFM");
+
 //---------------------------------------------------------------------------------------------------------------------
 QStringList AllKeys()
 {
@@ -143,7 +148,11 @@ QStringList AllKeys()
          << LONG_OPTION_RIGHT_MARGIN << SINGLE_OPTION_RIGHT_MARGIN
          << LONG_OPTION_TOP_MARGIN << SINGLE_OPTION_TOP_MARGIN
          << LONG_OPTION_BOTTOM_MARGIN << SINGLE_OPTION_BOTTOM_MARGIN
-         << LONG_OPTION_NO_HDPI_SCALING;
+         << LONG_OPTION_NO_HDPI_SCALING
+         << LONG_OPTION_CSVWITHHEADER
+         << LONG_OPTION_CSVCODEC
+         << LONG_OPTION_CSVSEPARATOR
+         << LONG_OPTION_CSVEXPORTFM;
 
     return list;
 }

@@ -80,7 +80,8 @@ VIncrement::~VIncrement()
 
 //---------------------------------------------------------------------------------------------------------------------
 /**
- * @brief getIndex return index of row
+ * @brief getIndex return index of row. Row index for increments and preview calucalations is unique. Check type before
+ * using.
  * @return index
  */
 quint32 VIncrement::getIndex() const

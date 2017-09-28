@@ -40,7 +40,6 @@
 #include "../vmisc/vsettings.h"
 #include "../vmisc/def.h"
 #include "../vmisc/qxtcsvmodel.h"
-#include "../vmisc/dialogs/dialogexporttocsv.h"
 #include "undocommands/renamepp.h"
 #include "core/vtooloptionspropertybrowser.h"
 #include "options.h"
@@ -117,7 +116,9 @@ MainWindow::MainWindow(QWidget *parent)
       patternReadOnly(false),
       dialogTable(nullptr),
       dialogTool(),
-      dialogHistory(nullptr), comboBoxDraws(nullptr), patternPieceLabel(nullptr), mode(Draw::Calculation),
+      dialogHistory(nullptr),
+      dialogFMeasurements(nullptr),
+      comboBoxDraws(nullptr), patternPieceLabel(nullptr), mode(Draw::Calculation),
       currentDrawIndex(0), currentToolBoxIndex(0),
       isDockToolOptionsVisible(true),
       isDockGroupsVisible(true),
@@ -1481,7 +1482,7 @@ void MainWindow::PrepareSceneList()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void MainWindow::ExportToCSVData(const QString &fileName, const DialogExportToCSV &dialog)
+void MainWindow::ExportToCSVData(const QString &fileName, bool withHeader, int mib, const QChar &separator)
 {
     QxtCsvModel csv;
 
@@ -1489,7 +1490,7 @@ void MainWindow::ExportToCSVData(const QString &fileName, const DialogExportToCS
     csv.insertColumn(1);
     csv.insertColumn(2);
 
-    if (dialog.WithHeader())
+    if (withHeader)
     {
         csv.setHeaderText(0, tr("Name"));
         csv.setHeaderText(1, tr("The calculated value"));
@@ -1497,42 +1498,45 @@ void MainWindow::ExportToCSVData(const QString &fileName, const DialogExportToCS
     }
 
     const QMap<QString, QSharedPointer<VIncrement> > increments = pattern->DataIncrements();
-    QMap<QString, QSharedPointer<VIncrement> >::const_iterator i;
-    QMap<quint32, QString> map;
-    //Sorting QHash by id
-    for (i = increments.constBegin(); i != increments.constEnd(); ++i)
-    {
-        QSharedPointer<VIncrement> incr = i.value();
-        map.insert(incr->getIndex(), i.key());
-    }
 
     qint32 currentRow = -1;
-    QMapIterator<quint32, QString> iMap(map);
-    while (iMap.hasNext())
+
+    auto SavePreviewCalculation = [&currentRow, &csv, increments](bool save)
     {
-        iMap.next();
-        QSharedPointer<VIncrement> incr = increments.value(iMap.value());
-        currentRow++;
-
-        csv.insertRow(currentRow);
-        csv.setText(currentRow, 0, incr->GetName()); // name
-        csv.setText(currentRow, 1, qApp->LocaleToString(*incr->GetValue())); // calculated value
-
-        QString formula;
-        try
+        QMap<QString, QSharedPointer<VIncrement> >::const_iterator i;
+        QMap<quint32, QString> map;
+        //Sorting QHash by id
+        for (i = increments.constBegin(); i != increments.constEnd(); ++i)
         {
-            formula = qApp->TrVars()->FormulaToUser(incr->GetFormula(), qApp->Settings()->GetOsSeparator());
-        }
-        catch (qmu::QmuParserError &e)
-        {
-            Q_UNUSED(e)
-            formula = incr->GetFormula();
+            const QSharedPointer<VIncrement> incr = i.value();
+            if (incr->IsPreviewCalculation() == save)
+            {
+                map.insert(incr->getIndex(), i.key());
+            }
         }
 
-        csv.setText(currentRow, 2, formula); // formula
-    }
+        QMapIterator<quint32, QString> iMap(map);
+        while (iMap.hasNext())
+        {
+            iMap.next();
+            QSharedPointer<VIncrement> incr = increments.value(iMap.value());
+            currentRow++;
 
-    csv.toCSV(fileName, dialog.WithHeader(), dialog.Separator(), QTextCodec::codecForMib(dialog.SelectedMib()));
+            csv.insertRow(currentRow);
+            csv.setText(currentRow, 0, incr->GetName()); // name
+            csv.setText(currentRow, 1, qApp->LocaleToString(*incr->GetValue())); // calculated value
+
+            QString formula = VTranslateVars::TryFormulaToUser(incr->GetFormula(),
+                                                               qApp->Settings()->GetOsSeparator());
+            csv.setText(currentRow, 2, formula); // formula
+        }
+    };
+
+    SavePreviewCalculation(false);
+    SavePreviewCalculation(true);
+
+    QString error;
+    csv.toCSV(fileName, error, withHeader, separator, QTextCodec::codecForMib(mib));
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -2833,6 +2837,9 @@ void MainWindow::Clear()
     ui->actionZoomOriginal->setEnabled(false);
     ui->actionHistory->setEnabled(false);
     ui->actionTable->setEnabled(false);
+    ui->actionExportIncrementsToCSV->setEnabled(false);
+    ui->actionExportFinalMeasurementsToCSV->setEnabled(false);
+    ui->actionFinalMeasurements->setEnabled(false);
     ui->actionLast_tool->setEnabled(false);
     ui->actionShowCurveDetails->setEnabled(false);
     ui->actionLoadIndividual->setEnabled(false);
@@ -3078,6 +3085,9 @@ void MainWindow::SetEnableWidgets(bool enable)
     ui->actionDetails->setEnabled(enable);
     ui->actionLayout->setEnabled(enable);
     ui->actionTable->setEnabled(enable && drawStage);
+    ui->actionExportIncrementsToCSV->setEnabled(enable);
+    ui->actionExportFinalMeasurementsToCSV->setEnabled(enable);
+    ui->actionFinalMeasurements->setEnabled(enable);
     ui->actionZoomFitBest->setEnabled(enable);
     ui->actionZoomFitBestCurrent->setEnabled(enable && drawStage);
     ui->actionZoomOriginal->setEnabled(enable);
@@ -3970,7 +3980,8 @@ void MainWindow::CreateActions()
     connect(ui->actionSave, &QAction::triggered, this, &MainWindow::Save);
     connect(ui->actionOpen, &QAction::triggered, this, &MainWindow::Open);
     connect(ui->actionNew, &QAction::triggered, this, &MainWindow::New);
-    connect(ui->actionExportIncrementsToCSV, &QAction::triggered, this, &MainWindow::ExportToCSV);
+    connect(ui->actionExportIncrementsToCSV, &QAction::triggered, this, &MainWindow::ExportDataToCSV);
+    connect(ui->actionExportFinalMeasurementsToCSV, &QAction::triggered, this, &MainWindow::ExportFMeasurementsToCSV);
 
     connect(ui->actionTable, &QAction::triggered, this, [this](bool checked)
     {
@@ -3990,6 +4001,27 @@ void MainWindow::CreateActions()
         {
             ui->actionTable->setChecked(true);
             dialogTable->activateWindow();
+        }
+    });
+
+    connect(ui->actionFinalMeasurements, &QAction::triggered, this, [this]()
+    {
+        if (dialogFMeasurements.isNull())
+        {
+            dialogFMeasurements = new DialogFinalMeasurements(doc, this);
+            connect(dialogFMeasurements.data(), &DialogFinalMeasurements::finished, this, [this](int result)
+            {
+                if (result == QDialog::Accepted)
+                {
+                    doc->SetFinalMeasurements(dialogFMeasurements->FinalMeasurements());
+                }
+                delete dialogFMeasurements;
+            });
+            dialogFMeasurements->show();
+        }
+        else
+        {
+            dialogFMeasurements->activateWindow();
         }
     });
 
@@ -4177,11 +4209,11 @@ bool MainWindow::LoadPattern(QString fileName, const QString& customMeasureFile)
 {
     qCDebug(vMainWindow, "Loading new file %s.", qUtf8Printable(fileName));
 
-    { // Convert to absolute path is need
+    { // Convert to absolute path if need
         QFileInfo info(fileName);
-        if (info.isRelative())
+        if (info.exists() && info.isRelative())
         {
-            fileName = QDir::currentPath() + QLatin1Char('/') + fileName;
+            fileName = QFileInfo(QDir::currentPath() + QLatin1Char('/') + fileName).canonicalFilePath();
         }
     }
 
@@ -4810,7 +4842,7 @@ void MainWindow::ZoomFirstShow()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void MainWindow::DoExport(const VCommandLinePtr &expParams)
+bool MainWindow::DoExport(const VCommandLinePtr &expParams)
 {
     QHash<quint32, VPiece> details;
     if(not qApp->getOpeningPattern())
@@ -4820,7 +4852,7 @@ void MainWindow::DoExport(const VCommandLinePtr &expParams)
         {
             qCCritical(vMainWindow, "%s", qUtf8Printable(tr("You can't export empty scene.")));
             qApp->exit(V_EX_DATAERR);
-            return;
+            return false;
         }
         else
         {
@@ -4856,7 +4888,7 @@ void MainWindow::DoExport(const VCommandLinePtr &expParams)
                 qCCritical(vMainWindow, "%s", qUtf8Printable(tr("You can't export empty scene. Please, "
                                                                 "include at least one detail in layout.")));
                 qApp->exit(V_EX_DATAERR);
-                return;
+                return false;
             }
         }
     }
@@ -4879,7 +4911,7 @@ void MainWindow::DoExport(const VCommandLinePtr &expParams)
         {
             qCCritical(vMainWindow, "%s\n\n%s", qUtf8Printable(tr("Export error.")), qUtf8Printable(e.ErrorMessage()));
             qApp->exit(V_EX_DATAERR);
-            return;
+            return false;
         }
     }
     else
@@ -4903,16 +4935,61 @@ void MainWindow::DoExport(const VCommandLinePtr &expParams)
                 qCCritical(vMainWindow, "%s\n\n%s", qUtf8Printable(tr("Export error.")),
                            qUtf8Printable(e.ErrorMessage()));
                 qApp->exit(V_EX_DATAERR);
-                return;
+                return false;
             }
         }
         else
         {
-            return;
+            qApp->exit(V_EX_DATAERR);
+            return false;
         }
     }
 
-    qApp->exit(V_EX_OK);
+    return true;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief DoFMExport process export final measurements
+ * @param expParams command line options
+ * @return true if succesfull
+ */
+bool MainWindow::DoFMExport(const VCommandLinePtr &expParams)
+{
+    QString filePath = expParams->OptExportFMTo();
+
+    if (filePath.isEmpty())
+    {
+        qCCritical(vMainWindow, "%s\n\n%s", qUtf8Printable(tr("Export final measurements error.")),
+                   qUtf8Printable(tr("Destination path is empty.")));
+        qApp->exit(V_EX_DATAERR);
+        return false;
+    }
+
+    QFileInfo info(filePath);
+    if (info.isRelative())
+    {
+        filePath = QDir::currentPath() + QLatin1Char('/') + filePath;
+    }
+
+    const QString codecName = expParams->OptCSVCodecName();
+    int mib = QTextCodec::codecForLocale()->mibEnum();
+    if (not codecName.isEmpty())
+    {
+        if (QTextCodec *codec = QTextCodec::codecForName(codecName.toLatin1()))
+        {
+            mib = codec->mibEnum();
+        }
+    }
+
+    QChar separator = expParams->OptCSVSeparator();
+    if (separator.isNull())
+    {
+        separator = VCommonSettings::GetDefCSVSeparator();
+    }
+
+    return ExportFMeasurementsToCSVData(filePath, expParams->IsCSVWithHeader(), mib, separator);
+
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -5012,6 +5089,11 @@ void MainWindow::ProcessCMD()
     if (VApplication::IsGUIMode())
     {
         ReopenFilesAfterCrash(args);
+
+        for (int i=0, sz = args.size(); i < sz; ++i)
+        {
+            LoadPattern(args.at(i));
+        }
     }
     else
     {
@@ -5021,53 +5103,45 @@ void MainWindow::ProcessCMD()
             qApp->exit(V_EX_NOINPUT);
             return;
         }
-    }
 
-    for (int i=0, sz = args.size(); i < sz; ++i)
-    {
-        const bool loaded = LoadPattern(args.at(static_cast<int>(i)), cmd->OptMeasurePath());
+        const bool loaded = LoadPattern(args.first(), cmd->OptMeasurePath());
 
-        if (not loaded && not VApplication::IsGUIMode())
+        if (not loaded)
         {
             return; // process only one input file
         }
 
         bool hSetted = true;
         bool sSetted = true;
-        if (loaded && (cmd->IsTestModeEnabled() || cmd->IsExportEnabled()))
+        if (cmd->IsSetGradationSize())
         {
-            if (cmd->IsSetGradationSize())
-            {
-                sSetted = SetSize(cmd->OptGradationSize());
-            }
+            sSetted = SetSize(cmd->OptGradationSize());
+        }
 
-            if (cmd->IsSetGradationHeight())
-            {
-                hSetted = SetHeight(cmd->OptGradationHeight());
-            }
+        if (cmd->IsSetGradationHeight())
+        {
+            hSetted = SetHeight(cmd->OptGradationHeight());
+        }
+
+        if (not (hSetted && sSetted))
+        {
+            qApp->exit(V_EX_DATAERR);
+            return;
         }
 
         if (not cmd->IsTestModeEnabled())
         {
-            if (cmd->IsExportEnabled())
+            if (cmd->IsExportEnabled() && not DoExport(cmd))
             {
-                if (loaded && hSetted && sSetted)
-                {
-                    DoExport(cmd);
-                    return; // process only one input file
-                }
-                else
-                {
-                    qApp->exit(V_EX_DATAERR);
-                    return;
-                }
-                break;
+                return;
+            }
+
+            if (cmd->IsExportFMEnabled() && not DoFMExport(cmd))
+            {
+                return;
             }
         }
-    }
 
-    if (not VApplication::IsGUIMode())
-    {
         qApp->exit(V_EX_OK);// close program after processing in console mode
     }
 }

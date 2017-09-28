@@ -1,6 +1,6 @@
 .\" Manpage for valentina.
 .\" Contact dismine@gmail.com to correct errors.
-.TH valentina 1 "10 March, 2017" "valentina man page"
+.TH valentina 1 "28 September, 2017" "valentina man page"
 .SH NAME
 Valentina \- Pattern making program.
 .SH SYNOPSIS
@@ -106,6 +106,8 @@ The path to output destination folder. By default the directory at which the app
 .RB "Export text as paths."
 .IP "--exportOnlyDetails"
 .RB "Export only details. Export details as they positioned in the details mode. Any layout related options will be ignored."
+.IP "--exportSuchDetails <The name regex>"
+.RB "Export only details that match a piece name regex."
 .IP "-x, --gsize <The size value>"
 .RB "Set size value a pattern file, that was opened with multisize measurements " "(export mode)" ". Valid values: 22, 24, 26, 28, 30, 32, 34, 36, 38, 40, 42, 44, 46, 48, 50, 52, 54, 56cm."
 .IP "-e, --gheight <The height value>"
@@ -193,14 +195,366 @@ The path to output destination folder. By default the directory at which the app
 Run the program in a test mode. The program in this mode loads a single pattern file and silently quit without showing the main window. The key have priority before key \*(lqbasename\*(rq.
 .IP "--no-scaling"
 .RB "Disable high dpi scaling. Call this option if has problem with scaling (by default scaling enabled). Alternatively you can use the QT_AUTO_SCREEN_SCALE_FACTOR=0 environment variable."
+.IP "--csvWithHeader"
+.RB "Export to csv with header. By default disabled."
+.IP "--csvCodec <Codec name>"
+.RB "Specify codec that will be used to save data. List of supported codecs provided by Qt. Default value depend from system. On Windows, the codec will be based on a system locale. On Unix systems, the codec will might fall back to using the iconv library if no builtin codec for the locale can be found. Valid values usually these:"
+.RS
+.BR "*" " US-ASCII,"
+.RE
+.RS
+.BR "*" " US-ASCII,"
+.RE
+.RS
+.BR "*" " ISO-8859-1,"
+.RE
+.RS
+.BR "*" " ISO-8859-2,"
+.RE
+.RS
+.BR "*" " ISO-8859-3,"
+.RE
+.RS
+.BR "*" " ISO-8859-4,"
+.RE
+.RS
+.BR "*" " ISO-8859-5,"
+.RE
+.RS
+.BR "*" " ISO-8859-6,"
+.RE
+.RS
+.BR "*" " ISO-8859-7,"
+.RE
+.RS
+.BR "*" " ISO-8859-8,"
+.RE
+.RS
+.BR "*" " ISO-8859-9,"
+.RE
+.RS
+.BR "*" " ISO-8859-10,"
+.RE
+.RS
+.BR "*" " ISO-2022-JP-1,"
+.RE
+.RS
+.BR "*" " Shift_JIS,"
+.RE
+.RS
+.BR "*" " EUC-JP,"
+.RE
+.RS
+.BR "*" " US-ASCII,"
+.RE
+.RS
+.BR "*" " windows-949,"
+.RE
+.RS
+.BR "*" " ISO-2022-KR,"
+.RE
+.RS
+.BR "*" " windows-949,"
+.RE
+.RS
+.BR "*" " ISO-2022-JP,"
+.RE
+.RS
+.BR "*" " ISO-2022-JP-2,"
+.RE
+.RS
+.BR "*" " GBK,"
+.RE
+.RS
+.BR "*" " ISO-8859-6,"
+.RE
+.RS
+.BR "*" " ISO-8859-6,"
+.RE
+.RS
+.BR "*" " ISO-8859-8,"
+.RE
+.RS
+.BR "*" " ISO-8859-8,"
+.RE
+.RS
+.BR "*" " ISO-2022-CN,"
+.RE
+.RS
+.BR "*" " ISO-2022-CN-EXT,"
+.RE
+.RS
+.BR "*" " UTF-8,"
+.RE
+.RS
+.BR "*" " ISO-8859-13,"
+.RE
+.RS
+.BR "*" " ISO-8859-14,"
+.RE
+.RS
+.BR "*" " ISO-8859-15,"
+.RE
+.RS
+.BR "*" " GBK,"
+.RE
+.RS
+.BR "*" " GB18030,"
+.RE
+.RS
+.BR "*" " UTF-16,"
+.RE
+.RS
+.BR "*" " UTF-32,"
+.RE
+.RS
+.BR "*" " SCSU,"
+.RE
+.RS
+.BR "*" " UTF-7,"
+.RE
+.RS
+.BR "*" " UTF-16BE,"
+.RE
+.RS
+.BR "*" " UTF-16LE,"
+.RE
+.RS
+.BR "*" " UTF-16,"
+.RE
+.RS
+.BR "*" " CESU-8,"
+.RE
+.RS
+.BR "*" " UTF-32,"
+.RE
+.RS
+.BR "*" " UTF-32BE,"
+.RE
+.RS
+.BR "*" " UTF-32LE,"
+.RE
+.RS
+.BR "*" " BOCU-1,"
+.RE
+.RS
+.BR "*" " hp-roman8,"
+.RE
+.RS
+.BR "*" " Adobe-Standard-Encoding,"
+.RE
+.RS
+.BR "*" " IBM850,"
+.RE
+.RS
+.BR "*" " IBM862,"
+.RE
+.RS
+.BR "*" " IBM-Thai,"
+.RE
+.RS
+.BR "*" " Shift_JIS,"
+.RE
+.RS
+.BR "*" " GBK,"
+.RE
+.RS
+.BR "*" " Big5,"
+.RE
+.RS
+.BR "*" " macintosh,"
+.RE
+.RS
+.BR "*" " IBM037,"
+.RE
+.RS
+.BR "*" " IBM273,"
+.RE
+.RS
+.BR "*" " IBM277,"
+.RE
+.RS
+.BR "*" " IBM278,"
+.RE
+.RS
+.BR "*" " IBM280,"
+.RE
+.RS
+.BR "*" " IBM284,"
+.RE
+.RS
+.BR "*" " IBM285,"
+.RE
+.RS
+.BR "*" " IBM290,"
+.RE
+.RS
+.BR "*" " IBM297,"
+.RE
+.RS
+.BR "*" " IBM420,"
+.RE
+.RS
+.BR "*" " IBM424,"
+.RE
+.RS
+.BR "*" " IBM437,"
+.RE
+.RS
+.BR "*" " IBM500,"
+.RE
+.RS
+.BR "*" " cp851,"
+.RE
+.RS
+.BR "*" " IBM852,"
+.RE
+.RS
+.BR "*" " IBM855,"
+.RE
+.RS
+.BR "*" " IBM857,"
+.RE
+.RS
+.BR "*" " IBM860,"
+.RE
+.RS
+.BR "*" " IBM861,"
+.RE
+.RS
+.BR "*" " IBM863,"
+.RE
+.RS
+.BR "*" " IBM864,"
+.RE
+.RS
+.BR "*" " IBM865,"
+.RE
+.RS
+.BR "*" " IBM868,"
+.RE
+.RS
+.BR "*" " IBM869,"
+.RE
+.RS
+.BR "*" " IBM870,"
+.RE
+.RS
+.BR "*" " IBM871,"
+.RE
+.RS
+.BR "*" " IBM918,"
+.RE
+.RS
+.BR "*" " IBM1026,"
+.RE
+.RS
+.BR "*" " KOI8-R,"
+.RE
+.RS
+.BR "*" " HZ-GB-2312,"
+.RE
+.RS
+.BR "*" " IBM866,"
+.RE
+.RS
+.BR "*" " IBM775,"
+.RE
+.RS
+.BR "*" " KOI8-U,"
+.RE
+.RS
+.BR "*" " IBM00858,"
+.RE
+.RS
+.BR "*" " IBM01140,"
+.RE
+.RS
+.BR "*" " IBM01141,"
+.RE
+.RS
+.BR "*" " IBM01142,"
+.RE
+.RS
+.BR "*" " IBM01143,"
+.RE
+.RS
+.BR "*" " IBM01144,"
+.RE
+.RS
+.BR "*" " IBM01145,"
+.RE
+.RS
+.BR "*" " IBM01146,"
+.RE
+.RS
+.BR "*" " IBM01147,"
+.RE
+.RS
+.BR "*" " IBM01148,"
+.RE
+.RS
+.BR "*" " IBM01149,"
+.RE
+.RS
+.BR "*" " Big5-HKSCS,"
+.RE
+.RS
+.BR "*" " IBM1047,"
+.RE
+.RS
+.BR "*" " windows-1250,"
+.RE
+.RS
+.BR "*" " windows-1251,"
+.RE
+.RS
+.BR "*" " windows-1252,"
+.RE
+.RS
+.BR "*" " windows-1253,"
+.RE
+.RS
+.BR "*" " windows-1254,"
+.RE
+.RS
+.BR "*" " windows-1255,"
+.RE
+.RS
+.BR "*" " windows-1256,"
+.RE
+.RS
+.BR "*" " windows-1257,"
+.RE
+.RS
+.BR "*" " windows-1258,"
+.RE
+.RS
+.BR "*" " TIS-620,"
+.RE
+.RS
+.BR "*" " TSCII."
+.RE
+.IP "--csvSeparator <Separator character>"
+.RB "Specify csv separator character. Default value is ','. Valid characters:"
+.RS
+.BR "*" " 'Tab',"
+.RE
+.RS
+.BR "*" " ';',"
+.RE
+.RS
+.BR "*" " 'Space',"
+.RE
+.RS
+.BR "*" " ','."
+.RE
+.IP "--csvExportFM <Path to csv file>"
+.RB "Calling this command enable exporting final measurements. Specify path to csv file with final measurements. The path must contain path to directory and name of file. It can be absolute or relatetive. In case of relative path will be used current working directory to calc a destination path."
 .IP Arguments: 
 .I filename
 \- a pattern file.
 .SH AUTHOR
 .RI "This  manual  page  was  written  by Roman Telezhynskyi <" dismine@gmail.com ">"
 .SH "SEE ALSO"
-.RB "Full " "User Manual" " is availiable in" 
-.UR https://bitbucket.org/dismine/valentina/wiki/manual/Content
-.UE
-
 .BR tape (1)

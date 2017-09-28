@@ -47,6 +47,7 @@ class QLabel;
 class DialogIncrements;
 class DialogTool;
 class DialogHistory;
+class DialogFinalMeasurements;
 class VWidgetGroups;
 class VWidgetDetails;
 class QToolButton;
@@ -102,7 +103,8 @@ protected:
     virtual void customEvent(QEvent * event) Q_DECL_OVERRIDE;
     virtual void CleanLayout() Q_DECL_OVERRIDE;
     virtual void PrepareSceneList() Q_DECL_OVERRIDE;
-    virtual void ExportToCSVData(const QString &fileName, const DialogExportToCSV &dialog) Q_DECL_FINAL;
+    virtual void ExportToCSVData(const QString &fileName, bool withHeader, int mib,
+                                 const QChar &separator) Q_DECL_FINAL;
 private slots:
     void MouseMove(const QPointF &scenePos);
     void Clear();
@@ -226,9 +228,10 @@ private:
 
     bool               patternReadOnly;
 
-    QPointer<DialogIncrements> dialogTable;
-    QSharedPointer<DialogTool> dialogTool;
-    QPointer<DialogHistory>    dialogHistory;
+    QPointer<DialogIncrements>        dialogTable;
+    QSharedPointer<DialogTool>        dialogTool;
+    QPointer<DialogHistory>           dialogHistory;
+    QPointer<DialogFinalMeasurements> dialogFMeasurements;
 
     /** @brief comboBoxDraws comboc who show name of pattern peaces. */
     QComboBox          *comboBoxDraws;
@@ -348,7 +351,8 @@ private:
     void               CheckRequiredMeasurements(const VMeasurements *m);
 
     void               ReopenFilesAfterCrash(QStringList &args);
-    void               DoExport(const VCommandLinePtr& expParams);
+    bool               DoExport(const VCommandLinePtr& expParams);
+    bool               DoFMExport(const VCommandLinePtr& expParams);
 
     bool               SetSize(const QString &text);
     bool               SetHeight(const QString & text);

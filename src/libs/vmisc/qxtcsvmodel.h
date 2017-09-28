@@ -93,8 +93,9 @@ public:
     void setSource(const QString &filename, bool withHeader = false, QChar separator = ',',
                    QTextCodec* codec = nullptr);
 
-    void toCSV(QIODevice *file, bool withHeader = false, QChar separator = ',', QTextCodec* codec = nullptr) const;
-    void toCSV(const QString &filename, bool withHeader = false, QChar separator = ',',
+    bool toCSV(QIODevice *file, QString &error, bool withHeader = false, QChar separator = ',',
+               QTextCodec* codec = nullptr) const;
+    bool toCSV(const QString &filename, QString &error, bool withHeader = false, QChar separator = ',',
                QTextCodec* codec = nullptr) const;
 
     enum QuoteOption { NoQuotes = 0,
