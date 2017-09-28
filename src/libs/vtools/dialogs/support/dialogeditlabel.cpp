@@ -500,7 +500,7 @@ void DialogEditLabel::InitPlaceholders()
     const QMap<int, QString> materials = m_doc->GetPatternMaterials();
     for (int i = 0; i < userMaterialPlaceholdersQuantity; ++i)
     {
-        const QString number = QString::number(i + 1);
+        const QString number = QString(" %1").arg(i + 1, 2, 10, QLatin1Char('0'));
 
         QString value;
         if (materials.contains(i + 1))

@@ -379,7 +379,7 @@ extern const QString pl_mInterlining;
 extern const QString pl_wCut;
 extern const QString pl_wOnFold;
 
-const int userMaterialPlaceholdersQuantity = 9;
+const int userMaterialPlaceholdersQuantity = 20;
 
 extern const QStringList labelTemplatePlaceholders;
 
