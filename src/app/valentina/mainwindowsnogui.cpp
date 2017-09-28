@@ -1572,7 +1572,7 @@ void MainWindowsNoGUI::SetSizeHeightForIndividualM() const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void MainWindowsNoGUI::ExportFMeasurementsToCSVData(const QString &fileName, bool withHeader, int mib,
+bool MainWindowsNoGUI::ExportFMeasurementsToCSVData(const QString &fileName, bool withHeader, int mib,
                                                     const QChar &separator) const
 {
     QxtCsvModel csv;
@@ -1617,7 +1617,7 @@ void MainWindowsNoGUI::ExportFMeasurementsToCSVData(const QString &fileName, boo
                     {
                         qApp->exit(V_EX_DATAERR);
                     }
-                    return;
+                    return false;
                 }
             }
             catch (qmu::QmuParserError &e)
@@ -1628,12 +1628,25 @@ void MainWindowsNoGUI::ExportFMeasurementsToCSVData(const QString &fileName, boo
                 {
                     qApp->exit(V_EX_DATAERR);
                 }
-                return;
+                return false;
             }
         }
     }
 
-    csv.toCSV(fileName, withHeader, separator, QTextCodec::codecForMib(mib));
+    QString error;
+    const bool success = csv.toCSV(fileName, error, withHeader, separator, QTextCodec::codecForMib(mib));
+
+    if (not success)
+    {
+        qCritical("%s\n\n%s", qUtf8Printable(tr("Export final measurements error.")),
+                  qUtf8Printable(tr("File error %1.").arg(error)));
+        if (not VApplication::IsGUIMode())
+        {
+            qApp->exit(V_EX_CANTCREAT);
+        }
+    }
+
+    return success;
 }
 
 //---------------------------------------------------------------------------------------------------------------------

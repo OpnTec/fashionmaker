@@ -33,8 +33,10 @@
 #include "../vformat/vmeasurements.h"
 #include "../vmisc/commandoptions.h"
 #include "../vmisc/vsettings.h"
+#include "../vmisc/dialogs/dialogexporttocsv.h"
 #include "../vlayout/vlayoutgenerator.h"
 #include <QDebug>
+#include <QTextCodec>
 
 VCommandLinePtr VCommandLine::instance = nullptr;
 
@@ -278,6 +280,46 @@ void VCommandLine::InitOptions(VCommandLineOptions &options, QMap<QString, int> 
                                                                     "enabled). Alternatively you can use the "
                                                                     "%1 environment variable.")
                                           .arg("QT_AUTO_SCREEN_SCALE_FACTOR=0")));
+
+    //=================================================================================================================
+    optionsIndex.insert(LONG_OPTION_CSVWITHHEADER, index++);
+    options.append(new QCommandLineOption(QStringList() << LONG_OPTION_CSVWITHHEADER,
+                                          translate("VCommandLine", "Export to csv with header. By default "
+                                                                    "disabled.")));
+
+    optionsIndex.insert(LONG_OPTION_CSVCODEC, index++);
+    options.append(new QCommandLineOption(QStringList() << LONG_OPTION_CSVCODEC,
+                                          translate("VCommandLine", "Specify codec that will be used to save data. List"
+                                                                    " of supported codecs provided by Qt. Default "
+                                                                    "value depend from system. On Windows, the codec "
+                                                                    "will be based on a system locale. On Unix "
+                                                                    "systems, the codec will might fall back to using "
+                                                                    "the iconv library if no builtin codec for the "
+                                                                    "locale can be found. Valid values for this "
+                                                                    "installation:")
+                                          + DialogExportToCSV::MakeHelpCodecsList(),
+                                          translate("VCommandLine", "Codec name"), QString("%1")
+                                          .arg(QString(QTextCodec::codecForLocale()->name()))));
+
+    optionsIndex.insert(LONG_OPTION_CSVSEPARATOR, index++);
+    options.append(new QCommandLineOption(QStringList() << LONG_OPTION_CSVSEPARATOR,
+                                          translate("VCommandLine", "Specify csv separator character. Default value "
+                                                                    "is '%1'. Valid characters:")
+                                          .arg(VCommonSettings::GetDefCSVSeparator()) +
+                                          DialogExportToCSV::MakeHelpSeparatorList(),
+                                          translate("VCommandLine", "Separator character"), QString("%1")
+                                          .arg(VCommonSettings::GetDefCSVSeparator())));
+
+    optionsIndex.insert(LONG_OPTION_CSVEXPORTFM, index++);
+    options.append(new QCommandLineOption(QStringList() << LONG_OPTION_CSVEXPORTFM,
+                                          translate("VCommandLine", "Calling this command enable exporting final "
+                                                                    "measurements. Specify path to csv file with "
+                                                                    "final measurements. The path must contain path "
+                                                                    "to directory and name of file. It can be "
+                                                                    "absolute or relatetive. In case of "
+                                                                    "relative path will be used current working "
+                                                                    "directory to calc a destination path."),
+                                          translate("VCommandLine", "Path to csv file")));
 }
 
 //------------------------------------------------------------------------------------------------------
@@ -499,7 +541,9 @@ VCommandLinePtr VCommandLine::Get(const QCoreApplication& app)
     instance->parser.process(app);
 
     //fixme: in case of additional options/modes which will need to disable GUI - add it here too
-    instance->isGuiEnabled = not (instance->IsExportEnabled() || instance->IsTestModeEnabled());
+    instance->isGuiEnabled = not (instance->IsExportEnabled()
+                                  || instance->IsTestModeEnabled()
+                                  || instance->IsExportFMEnabled());
 
     return instance;
 }
@@ -539,6 +583,18 @@ bool VCommandLine::IsNoScalingEnabled() const
 bool VCommandLine::IsExportEnabled() const
 {
     const bool r = parser.isSet(*optionsUsed.value(optionsIndex.value(LONG_OPTION_BASENAME)));
+    if (r && parser.positionalArguments().size() != 1)
+    {
+        qCritical() << translate("VCommandLine", "Export options can be used with single input file only.") << "/n";
+        const_cast<VCommandLine*>(this)->parser.showHelp(V_EX_USAGE);
+    }
+    return r;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+bool VCommandLine::IsExportFMEnabled() const
+{
+    const bool r = parser.isSet(*optionsUsed.value(optionsIndex.value(LONG_OPTION_CSVEXPORTFM)));
     if (r && parser.positionalArguments().size() != 1)
     {
         qCritical() << translate("VCommandLine", "Export options can be used with single input file only.") << "/n";
@@ -656,6 +712,12 @@ int VCommandLine::IsExportOnlyDetails() const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+int VCommandLine::IsCSVWithHeader() const
+{
+    return parser.isSet(*optionsUsed.value(optionsIndex.value(LONG_OPTION_CSVWITHHEADER)));
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 QString VCommandLine::OptExportSuchDetails() const
 {
     QString path;
@@ -665,6 +727,32 @@ QString VCommandLine::OptExportSuchDetails() const
     }
 
     return path;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QString VCommandLine::OptCSVCodecName() const
+{
+    return parser.value(*optionsUsed.value(optionsIndex.value(LONG_OPTION_CSVCODEC)));
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QChar VCommandLine::OptCSVSeparator() const
+{
+    const QString value = parser.value(*optionsUsed.value(optionsIndex.value(LONG_OPTION_CSVSEPARATOR)));
+    if (not value.isEmpty())
+    {
+        return value.at(0);
+    }
+    else
+    {
+        return QChar();
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QString VCommandLine::OptExportFMTo() const
+{
+    return parser.value(*optionsUsed.value(optionsIndex.value(LONG_OPTION_CSVEXPORTFM)));
 }
 
 //---------------------------------------------------------------------------------------------------------------------

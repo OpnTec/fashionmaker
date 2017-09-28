@@ -1535,7 +1535,8 @@ void MainWindow::ExportToCSVData(const QString &fileName, bool withHeader, int m
     SavePreviewCalculation(false);
     SavePreviewCalculation(true);
 
-    csv.toCSV(fileName, withHeader, separator, QTextCodec::codecForMib(mib));
+    QString error;
+    csv.toCSV(fileName, error, withHeader, separator, QTextCodec::codecForMib(mib));
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -4841,7 +4842,7 @@ void MainWindow::ZoomFirstShow()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void MainWindow::DoExport(const VCommandLinePtr &expParams)
+bool MainWindow::DoExport(const VCommandLinePtr &expParams)
 {
     QHash<quint32, VPiece> details;
     if(not qApp->getOpeningPattern())
@@ -4851,7 +4852,7 @@ void MainWindow::DoExport(const VCommandLinePtr &expParams)
         {
             qCCritical(vMainWindow, "%s", qUtf8Printable(tr("You can't export empty scene.")));
             qApp->exit(V_EX_DATAERR);
-            return;
+            return false;
         }
         else
         {
@@ -4887,7 +4888,7 @@ void MainWindow::DoExport(const VCommandLinePtr &expParams)
                 qCCritical(vMainWindow, "%s", qUtf8Printable(tr("You can't export empty scene. Please, "
                                                                 "include at least one detail in layout.")));
                 qApp->exit(V_EX_DATAERR);
-                return;
+                return false;
             }
         }
     }
@@ -4910,7 +4911,7 @@ void MainWindow::DoExport(const VCommandLinePtr &expParams)
         {
             qCCritical(vMainWindow, "%s\n\n%s", qUtf8Printable(tr("Export error.")), qUtf8Printable(e.ErrorMessage()));
             qApp->exit(V_EX_DATAERR);
-            return;
+            return false;
         }
     }
     else
@@ -4934,16 +4935,61 @@ void MainWindow::DoExport(const VCommandLinePtr &expParams)
                 qCCritical(vMainWindow, "%s\n\n%s", qUtf8Printable(tr("Export error.")),
                            qUtf8Printable(e.ErrorMessage()));
                 qApp->exit(V_EX_DATAERR);
-                return;
+                return false;
             }
         }
         else
         {
-            return;
+            qApp->exit(V_EX_DATAERR);
+            return false;
         }
     }
 
-    qApp->exit(V_EX_OK);
+    return true;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief DoFMExport process export final measurements
+ * @param expParams command line options
+ * @return true if succesfull
+ */
+bool MainWindow::DoFMExport(const VCommandLinePtr &expParams)
+{
+    QString filePath = expParams->OptExportFMTo();
+
+    if (filePath.isEmpty())
+    {
+        qCCritical(vMainWindow, "%s\n\n%s", qUtf8Printable(tr("Export final measurements error.")),
+                   qUtf8Printable(tr("Destination path is empty.")));
+        qApp->exit(V_EX_DATAERR);
+        return false;
+    }
+
+    QFileInfo info(filePath);
+    if (info.isRelative())
+    {
+        filePath = QDir::currentPath() + QLatin1Char('/') + filePath;
+    }
+
+    const QString codecName = expParams->OptCSVCodecName();
+    int mib = QTextCodec::codecForLocale()->mibEnum();
+    if (not codecName.isEmpty())
+    {
+        if (QTextCodec *codec = QTextCodec::codecForName(codecName.toLatin1()))
+        {
+            mib = codec->mibEnum();
+        }
+    }
+
+    QChar separator = expParams->OptCSVSeparator();
+    if (separator.isNull())
+    {
+        separator = VCommonSettings::GetDefCSVSeparator();
+    }
+
+    return ExportFMeasurementsToCSVData(filePath, expParams->IsCSVWithHeader(), mib, separator);
+
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -5043,6 +5089,11 @@ void MainWindow::ProcessCMD()
     if (VApplication::IsGUIMode())
     {
         ReopenFilesAfterCrash(args);
+
+        for (int i=0, sz = args.size(); i < sz; ++i)
+        {
+            LoadPattern(args.at(i));
+        }
     }
     else
     {
@@ -5052,53 +5103,45 @@ void MainWindow::ProcessCMD()
             qApp->exit(V_EX_NOINPUT);
             return;
         }
-    }
 
-    for (int i=0, sz = args.size(); i < sz; ++i)
-    {
-        const bool loaded = LoadPattern(args.at(static_cast<int>(i)), cmd->OptMeasurePath());
+        const bool loaded = LoadPattern(args.first(), cmd->OptMeasurePath());
 
-        if (not loaded && not VApplication::IsGUIMode())
+        if (not loaded)
         {
             return; // process only one input file
         }
 
         bool hSetted = true;
         bool sSetted = true;
-        if (loaded && (cmd->IsTestModeEnabled() || cmd->IsExportEnabled()))
+        if (cmd->IsSetGradationSize())
         {
-            if (cmd->IsSetGradationSize())
-            {
-                sSetted = SetSize(cmd->OptGradationSize());
-            }
+            sSetted = SetSize(cmd->OptGradationSize());
+        }
 
-            if (cmd->IsSetGradationHeight())
-            {
-                hSetted = SetHeight(cmd->OptGradationHeight());
-            }
+        if (cmd->IsSetGradationHeight())
+        {
+            hSetted = SetHeight(cmd->OptGradationHeight());
+        }
+
+        if (not (hSetted && sSetted))
+        {
+            qApp->exit(V_EX_DATAERR);
+            return;
         }
 
         if (not cmd->IsTestModeEnabled())
         {
-            if (cmd->IsExportEnabled())
+            if (cmd->IsExportEnabled() && not DoExport(cmd))
             {
-                if (loaded && hSetted && sSetted)
-                {
-                    DoExport(cmd);
-                    return; // process only one input file
-                }
-                else
-                {
-                    qApp->exit(V_EX_DATAERR);
-                    return;
-                }
-                break;
+                return;
+            }
+
+            if (cmd->IsExportFMEnabled() && not DoFMExport(cmd))
+            {
+                return;
             }
         }
-    }
 
-    if (not VApplication::IsGUIMode())
-    {
         qApp->exit(V_EX_OK);// close program after processing in console mode
     }
 }

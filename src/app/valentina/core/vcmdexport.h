@@ -62,6 +62,10 @@ public:
     //export enabled
     bool IsExportEnabled() const;
 
+    //@brief tests if user enabled export final measurements from cmd, throws exception if not exactly 1 input VAL
+    //file supplied in case export enabled
+    bool IsExportFMEnabled() const;
+
     //@brief returns path to custom measure file or empty string
     QString OptMeasurePath() const;
 
@@ -78,9 +82,19 @@ public:
     int IsBinaryDXF() const;
     int IsTextAsPaths() const;
     int IsExportOnlyDetails() const;
+    int IsCSVWithHeader() const;
 
     //@brief returns the piece name regex or empty string if not set
     QString OptExportSuchDetails() const;
+
+    //@brief returns user selected csv codec or empty string if not set
+    QString OptCSVCodecName() const;
+
+    //@brief returns user selected csv separator or empty string if not set
+    QChar OptCSVSeparator() const;
+
+    //@brief returns the destination path for export final measurements or empty string if not set
+    QString OptExportFMTo() const;
 
     //generator creation is moved here ... because most options are for it only, so no need to create extra getters...
     //@brief creates VLayoutGenerator

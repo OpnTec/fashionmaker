@@ -351,7 +351,8 @@ private:
     void               CheckRequiredMeasurements(const VMeasurements *m);
 
     void               ReopenFilesAfterCrash(QStringList &args);
-    void               DoExport(const VCommandLinePtr& expParams);
+    bool               DoExport(const VCommandLinePtr& expParams);
+    bool               DoFMExport(const VCommandLinePtr& expParams);
 
     bool               SetSize(const QString &text);
     bool               SetHeight(const QString & text);

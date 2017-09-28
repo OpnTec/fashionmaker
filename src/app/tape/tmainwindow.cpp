@@ -707,7 +707,8 @@ void TMainWindow::ExportToCSVData(const QString &fileName, bool withHeader, int 
         }
     }
 
-    csv.toCSV(fileName, withHeader, separator, QTextCodec::codecForMib(mib));
+    QString error;
+    csv.toCSV(fileName, error, withHeader, separator, QTextCodec::codecForMib(mib));
 }
 
 //---------------------------------------------------------------------------------------------------------------------

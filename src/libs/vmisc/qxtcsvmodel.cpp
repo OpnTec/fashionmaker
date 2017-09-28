@@ -591,7 +591,7 @@ static QString qxt_addCsvQuotes(QxtCsvModel::QuoteMode mode, QString field)
   to output a row of headers at the top of the file.
  */
 // cppcheck-suppress funcArgNamesDifferent
-void QxtCsvModel::toCSV(QIODevice* dest, bool withHeader, QChar separator, QTextCodec* codec) const
+bool QxtCsvModel::toCSV(QIODevice* dest, QString &error, bool withHeader, QChar separator, QTextCodec* codec) const
 {
     const QxtCsvModelPrivate& d_ptr = qxt_d();
     int row, col, rows, cols;
@@ -600,7 +600,11 @@ void QxtCsvModel::toCSV(QIODevice* dest, bool withHeader, QChar separator, QText
     QString data;
     if (not dest->isOpen())
     {
-        dest->open(QIODevice::WriteOnly | QIODevice::Truncate);
+        if ( not dest->open(QIODevice::WriteOnly | QIODevice::Truncate))
+        {
+            error = dest->errorString();
+            return false;
+        }
     }
     QTextStream stream(dest);
     if (codec)
@@ -643,6 +647,7 @@ void QxtCsvModel::toCSV(QIODevice* dest, bool withHeader, QChar separator, QText
     }
     stream << flush;
     dest->close();
+    return true;
 }
 
 /*!
@@ -653,10 +658,11 @@ void QxtCsvModel::toCSV(QIODevice* dest, bool withHeader, QChar separator, QText
   Fields in the output file will be separated by \a separator. Set \a withHeader to true
   to output a row of headers at the top of the file.
  */
-void QxtCsvModel::toCSV(const QString &filename, bool withHeader, QChar separator, QTextCodec* codec) const
+bool QxtCsvModel::toCSV(const QString &filename, QString &error, bool withHeader, QChar separator,
+                        QTextCodec* codec) const
 {
     QFile dest(filename);
-    toCSV(&dest, withHeader, separator, codec);
+    return toCSV(&dest, error, withHeader, separator, codec);
 }
 
 /*!

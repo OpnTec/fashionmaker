@@ -53,6 +53,9 @@ public:
     QChar GetSeparator() const;
     void  SetSeparator(const QChar &separator);
 
+    static QString MakeHelpCodecsList();
+    static QString MakeHelpSeparatorList();
+
 protected:
     virtual void changeEvent(QEvent* event) Q_DECL_OVERRIDE;
     virtual void showEvent(QShowEvent *event) Q_DECL_OVERRIDE;

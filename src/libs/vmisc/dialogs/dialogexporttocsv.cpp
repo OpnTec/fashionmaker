@@ -51,7 +51,7 @@ DialogExportToCSV::DialogExportToCSV(QWidget *parent)
 
     ui->comboBoxCodec->setCurrentIndex(ui->comboBoxCodec->findData(VCommonSettings::GetDefCSVCodec()));
 
-    SetSeparator(qApp->Settings()->GetDefCSVSeparator());
+    SetSeparator(VCommonSettings::GetDefCSVSeparator());
 
     QPushButton *bDefaults = ui->buttonBox->button(QDialogButtonBox::RestoreDefaults);
     SCASSERT(bDefaults != nullptr)
@@ -60,7 +60,7 @@ DialogExportToCSV::DialogExportToCSV(QWidget *parent)
         ui->checkBoxWithHeader->setChecked(qApp->Settings()->GetDefCSVWithHeader());
         ui->comboBoxCodec->setCurrentIndex(ui->comboBoxCodec->findData(VCommonSettings::GetDefCSVCodec()));
 
-        SetSeparator(qApp->Settings()->GetDefCSVSeparator());
+        SetSeparator(VCommonSettings::GetDefCSVSeparator());
     });
 }
 
@@ -126,7 +126,7 @@ QChar DialogExportToCSV::GetSeparator() const
     }
     else
     {
-        return QChar(',');
+        return VCommonSettings::GetDefCSVSeparator();
     }
 }
 
@@ -183,4 +183,35 @@ void DialogExportToCSV::SetSeparator(const QChar &separator)
             ui->radioButtonComma->setChecked(true);
             break;
     }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QString DialogExportToCSV::MakeHelpCodecsList()
+{
+    QString out("\n");
+    const QList<int> list = QTextCodec::availableMibs();
+    for (int i = 0; i < list.size(); ++i)
+    {
+        out += QLatin1String("\t* ") + QTextCodec::codecForMib(list.at(i))->name();
+        if (i < list.size()-1)
+        {
+            out += QLatin1String(",\n");
+        }
+        else
+        {
+            out += QLatin1String(".\n");
+        }
+    }
+    return out;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QString DialogExportToCSV::MakeHelpSeparatorList()
+{
+    QString out("\n");
+    out += QLatin1String("\t* 'Tab',\n");
+    out += QLatin1String("\t* ';',\n");
+    out += QLatin1String("\t* 'Space',\n");
+    out += QLatin1String("\t* ','.\n");
+    return out;
 }

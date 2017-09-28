@@ -103,7 +103,7 @@ protected:
     QString FileName() const;
     void SetSizeHeightForIndividualM() const;
 
-    void ExportFMeasurementsToCSVData(const QString &fileName,
+    bool ExportFMeasurementsToCSVData(const QString &fileName,
                                       bool withHeader, int mib, const QChar &separator) const;
 private slots:
     void PrintPages (QPrinter *printer);
