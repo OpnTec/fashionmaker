@@ -89,7 +89,9 @@ enum class PassmarkAngleType : unsigned char
 {
     Straightforward = 0, // Default
     Bisector,
-    Intersection
+    Intersection,
+    IntersectionOnlyLeft,
+    IntersectionOnlyRight
 };
 
 QString           PassmarkAngleTypeToString(PassmarkAngleType type);
@@ -397,6 +399,8 @@ extern const QString strThree;
 extern const QString strStraightforward;
 extern const QString strBisector;
 extern const QString strIntersection;
+extern const QString strIntersectionOnlyLeft;
+extern const QString strIntersectionOnlyRight;
 
 extern const QString unitMM;
 extern const QString unitCM;

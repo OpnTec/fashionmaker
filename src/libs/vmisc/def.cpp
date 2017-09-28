@@ -623,9 +623,11 @@ PassmarkLineType StringToPassmarkLineType(const QString &value)
     return PassmarkLineType::OneLine;
 }
 
-const QString strStraightforward = QStringLiteral("straightforward");
-const QString strBisector        = QStringLiteral("bisector");
-const QString strIntersection    = QStringLiteral("intersection");
+const QString strStraightforward       = QStringLiteral("straightforward");
+const QString strBisector              = QStringLiteral("bisector");
+const QString strIntersection          = QStringLiteral("intersection");
+const QString strIntersectionOnlyLeft  = QStringLiteral("intersectionLeft");
+const QString strIntersectionOnlyRight = QStringLiteral("intersectionRight");
 
 //---------------------------------------------------------------------------------------------------------------------
 QString PassmarkAngleTypeToString(PassmarkAngleType type)
@@ -638,6 +640,10 @@ QString PassmarkAngleTypeToString(PassmarkAngleType type)
             return strBisector;
         case PassmarkAngleType::Intersection:
             return strIntersection;
+        case PassmarkAngleType::IntersectionOnlyLeft:
+            return strIntersectionOnlyLeft;
+        case PassmarkAngleType::IntersectionOnlyRight:
+            return strIntersectionOnlyRight;
         default:
             break;
     }
@@ -648,7 +654,11 @@ QString PassmarkAngleTypeToString(PassmarkAngleType type)
 //---------------------------------------------------------------------------------------------------------------------
 PassmarkAngleType StringToPassmarkAngleType(const QString &value)
 {
-    const QStringList values = QStringList() << strStraightforward << strBisector << strIntersection;
+    const QStringList values = QStringList() << strStraightforward
+                                             << strBisector
+                                             << strIntersection
+                                             << strIntersectionOnlyLeft
+                                             << strIntersectionOnlyRight;
 
     switch(values.indexOf(value))
     {
@@ -658,6 +668,10 @@ PassmarkAngleType StringToPassmarkAngleType(const QString &value)
             return PassmarkAngleType::Bisector;
         case 2:
             return PassmarkAngleType::Intersection;
+        case 3:
+            return PassmarkAngleType::IntersectionOnlyLeft;
+        case 4:
+            return PassmarkAngleType::IntersectionOnlyRight;
         default:
             break;
     }

@@ -58,8 +58,8 @@ class QDomElement;
  */
 
 const QString VPatternConverter::PatternMinVerStr = QStringLiteral("0.1.0");
-const QString VPatternConverter::PatternMaxVerStr = QStringLiteral("0.6.4");
-const QString VPatternConverter::CurrentSchema    = QStringLiteral("://schema/pattern/v0.6.4.xsd");
+const QString VPatternConverter::PatternMaxVerStr = QStringLiteral("0.6.5");
+const QString VPatternConverter::CurrentSchema    = QStringLiteral("://schema/pattern/v0.6.5.xsd");
 
 //VPatternConverter::PatternMinVer; // <== DON'T FORGET TO UPDATE TOO!!!!
 //VPatternConverter::PatternMaxVer; // <== DON'T FORGET TO UPDATE TOO!!!!
@@ -252,6 +252,8 @@ QString VPatternConverter::XSDSchema(int ver) const
         case (0x000603):
             return QStringLiteral("://schema/pattern/v0.6.3.xsd");
         case (0x000604):
+            return QStringLiteral("://schema/pattern/v0.6.4.xsd");
+        case (0x000605):
             return CurrentSchema;
         default:
             InvalidVersion(ver);
@@ -418,6 +420,10 @@ void VPatternConverter::ApplyPatches()
             ValidateXML(XSDSchema(0x000604), m_convertedFileName);
             V_FALLTHROUGH
         case (0x000604):
+            ToV0_6_5();
+            ValidateXML(XSDSchema(0x000605), m_convertedFileName);
+            V_FALLTHROUGH
+        case (0x000605):
             break;
         default:
             InvalidVersion(m_ver);
@@ -436,7 +442,7 @@ void VPatternConverter::DowngradeToCurrentMaxVersion()
 bool VPatternConverter::IsReadOnly() const
 {
     // Check if attribute readOnly was not changed in file format
-    Q_STATIC_ASSERT_X(VPatternConverter::PatternMaxVer == CONVERTER_VERSION_CHECK(0, 6, 4),
+    Q_STATIC_ASSERT_X(VPatternConverter::PatternMaxVer == CONVERTER_VERSION_CHECK(0, 6, 5),
                       "Check attribute readOnly.");
 
     // Possibly in future attribute readOnly will change position etc.
@@ -877,6 +883,16 @@ void VPatternConverter::ToV0_6_4()
     Q_STATIC_ASSERT_X(VPatternConverter::PatternMinVer < CONVERTER_VERSION_CHECK(0, 6, 4),
                       "Time to refactor the code.");
     SetVersion(QStringLiteral("0.6.4"));
+    Save();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VPatternConverter::ToV0_6_5()
+{
+    // TODO. Delete if minimal supported version is 0.6.5
+    Q_STATIC_ASSERT_X(VPatternConverter::PatternMinVer < CONVERTER_VERSION_CHECK(0, 6, 5),
+                      "Time to refactor the code.");
+    SetVersion(QStringLiteral("0.6.5"));
     Save();
 }
 

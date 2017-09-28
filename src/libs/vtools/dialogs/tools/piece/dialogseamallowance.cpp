@@ -765,6 +765,8 @@ void DialogSeamAllowance::PassmarkChanged(int index)
     uiTabPassmarks->radioButtonStraightforward->setDisabled(true);
     uiTabPassmarks->radioButtonBisector->setDisabled(true);
     uiTabPassmarks->radioButtonIntersection->setDisabled(true);
+    uiTabPassmarks->radioButtonIntersectionOnlyLeft->setDisabled(true);
+    uiTabPassmarks->radioButtonIntersectionOnlyRight->setDisabled(true);
 
     uiTabPassmarks->checkBoxShowSecondPassmark->setDisabled(true);
     uiTabPassmarks->checkBoxShowSecondPassmark->blockSignals(true);
@@ -812,6 +814,8 @@ void DialogSeamAllowance::PassmarkChanged(int index)
             uiTabPassmarks->radioButtonStraightforward->setEnabled(true);
             uiTabPassmarks->radioButtonBisector->setEnabled(true);
             uiTabPassmarks->radioButtonIntersection->setEnabled(true);
+            uiTabPassmarks->radioButtonIntersectionOnlyLeft->setEnabled(true);
+            uiTabPassmarks->radioButtonIntersectionOnlyRight->setEnabled(true);
 
             switch(node.GetPassmarkAngleType())
             {
@@ -823,6 +827,12 @@ void DialogSeamAllowance::PassmarkChanged(int index)
                     break;
                 case PassmarkAngleType::Intersection:
                     uiTabPassmarks->radioButtonIntersection->setChecked(true);
+                    break;
+                case PassmarkAngleType::IntersectionOnlyLeft:
+                    uiTabPassmarks->radioButtonIntersectionOnlyLeft->setChecked(true);
+                    break;
+                case PassmarkAngleType::IntersectionOnlyRight:
+                    uiTabPassmarks->radioButtonIntersectionOnlyRight->setChecked(true);
                     break;
                 default:
                     break;
@@ -1150,6 +1160,14 @@ void DialogSeamAllowance::PassmarkAngleTypeChanged(int id)
             else if (id == uiTabPassmarks->buttonGroupAngleType->id(uiTabPassmarks->radioButtonIntersection))
             {
                 angleType = PassmarkAngleType::Intersection;
+            }
+            else if (id == uiTabPassmarks->buttonGroupAngleType->id(uiTabPassmarks->radioButtonIntersectionOnlyLeft))
+            {
+                angleType = PassmarkAngleType::IntersectionOnlyLeft;
+            }
+            else if (id == uiTabPassmarks->buttonGroupAngleType->id(uiTabPassmarks->radioButtonIntersectionOnlyRight))
+            {
+                angleType = PassmarkAngleType::IntersectionOnlyRight;
             }
 
             rowNode.SetPassmarkAngleType(angleType);

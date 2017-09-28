@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>352</width>
-    <height>411</height>
+    <height>482</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -25,7 +25,7 @@
         <x>0</x>
         <y>0</y>
         <width>332</width>
-        <height>391</height>
+        <height>462</height>
        </rect>
       </property>
       <layout class="QVBoxLayout" name="verticalLayout_3">
@@ -165,6 +165,38 @@
             </property>
             <property name="text">
              <string>Intersection</string>
+            </property>
+            <attribute name="buttonGroup">
+             <string notr="true">buttonGroupAngleType</string>
+            </attribute>
+           </widget>
+          </item>
+          <item>
+           <widget class="QRadioButton" name="radioButtonIntersectionOnlyLeft">
+            <property name="enabled">
+             <bool>false</bool>
+            </property>
+            <property name="toolTip">
+             <string>Select if need designate the corner point as a passmark. Show only left passmark.</string>
+            </property>
+            <property name="text">
+             <string>Intersection (only left)</string>
+            </property>
+            <attribute name="buttonGroup">
+             <string notr="true">buttonGroupAngleType</string>
+            </attribute>
+           </widget>
+          </item>
+          <item>
+           <widget class="QRadioButton" name="radioButtonIntersectionOnlyRight">
+            <property name="enabled">
+             <bool>false</bool>
+            </property>
+            <property name="toolTip">
+             <string>Select if need designate the corner point as a passmark. Show only right passmark.</string>
+            </property>
+            <property name="text">
+             <string>Intersection (only right)</string>
             </property>
             <attribute name="buttonGroup">
              <string notr="true">buttonGroupAngleType</string>

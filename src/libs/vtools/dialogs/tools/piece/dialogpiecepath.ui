@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>480</width>
-    <height>437</height>
+    <height>490</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -952,6 +952,38 @@
             </attribute>
            </widget>
           </item>
+          <item>
+           <widget class="QRadioButton" name="radioButtonIntersectionOnlyLeft">
+            <property name="enabled">
+             <bool>false</bool>
+            </property>
+            <property name="toolTip">
+             <string>Select if need designate the corner point as a passmark. Show only left passmark.</string>
+            </property>
+            <property name="text">
+             <string>Intersection (only left)</string>
+            </property>
+            <attribute name="buttonGroup">
+             <string notr="true">buttonGroupAngleType</string>
+            </attribute>
+           </widget>
+          </item>
+          <item>
+           <widget class="QRadioButton" name="radioButtonIntersectionOnlyRight">
+            <property name="enabled">
+             <bool>false</bool>
+            </property>
+            <property name="toolTip">
+             <string>Select if need designate the corner point as a passmark. Show only right passmark.</string>
+            </property>
+            <property name="text">
+             <string>Intersection (only right)</string>
+            </property>
+            <attribute name="buttonGroup">
+             <string notr="true">buttonGroupAngleType</string>
+            </attribute>
+           </widget>
+          </item>
          </layout>
         </widget>
        </item>
@@ -1022,7 +1054,7 @@
   </connection>
  </connections>
  <buttongroups>
-  <buttongroup name="buttonGroupAngleType"/>
   <buttongroup name="buttonGroupMarkType"/>
+  <buttongroup name="buttonGroupAngleType"/>
  </buttongroups>
 </ui>

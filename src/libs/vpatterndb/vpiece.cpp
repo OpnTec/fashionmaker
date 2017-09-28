@@ -201,7 +201,10 @@ QVector<QLineF> CreatePassmarkLines(PassmarkLineType lineType, PassmarkAngleType
 {
     QVector<QLineF> passmarksLines;
 
-    if (angleType == PassmarkAngleType::Straightforward || angleType == PassmarkAngleType::Intersection)
+    if (angleType == PassmarkAngleType::Straightforward
+            || angleType == PassmarkAngleType::Intersection
+            || angleType == PassmarkAngleType::IntersectionOnlyLeft
+            || angleType == PassmarkAngleType::IntersectionOnlyRight)
     {
         switch (lineType)
         {
@@ -1090,6 +1093,8 @@ QVector<QLineF> VPiece::CreatePassmark(const QVector<VPieceNode> &path, int prev
                 && not IsHideMainPath()
                 && path.at(passmarkIndex).IsMainPathNode()
                 && path.at(passmarkIndex).GetPassmarkAngleType() != PassmarkAngleType::Intersection
+                && path.at(passmarkIndex).GetPassmarkAngleType() != PassmarkAngleType::IntersectionOnlyLeft
+                && path.at(passmarkIndex).GetPassmarkAngleType() != PassmarkAngleType::IntersectionOnlyRight
                 && path.at(passmarkIndex).IsShowSecondPassmark())
         {
             lines += BuiltInSAPassmark(path, previousSAPoint, passmarkSAPoint, nextSAPoint, data, passmarkIndex);
@@ -1139,11 +1144,15 @@ QVector<QLineF> VPiece::SAPassmark(const QVector<VPieceNode> &path, VSAPoint &pr
 
         passmarksLines += CreatePassmarkLines(node.GetPassmarkLineType(), node.GetPassmarkAngleType(), edge1);
     }
-    else if (node.GetPassmarkAngleType() == PassmarkAngleType::Intersection)
+    else if (node.GetPassmarkAngleType() == PassmarkAngleType::Intersection
+             || node.GetPassmarkAngleType() == PassmarkAngleType::IntersectionOnlyLeft
+             || node.GetPassmarkAngleType() == PassmarkAngleType::IntersectionOnlyRight)
     {
         QVector<QPointF> seamPoints;
         seamAllowance.isEmpty() ? seamPoints = SeamAllowancePoints(data) : seamPoints = seamAllowance;
 
+        if (node.GetPassmarkAngleType() == PassmarkAngleType::Intersection
+                || node.GetPassmarkAngleType() == PassmarkAngleType::IntersectionOnlyRight)
         {
             // first passmark
             QLineF line(previousSAPoint, passmarkSAPoint);
@@ -1161,6 +1170,8 @@ QVector<QLineF> VPiece::SAPassmark(const QVector<VPieceNode> &path, VSAPoint &pr
             passmarksLines += CreatePassmarkLines(node.GetPassmarkLineType(), node.GetPassmarkAngleType(), line);
         }
 
+        if (node.GetPassmarkAngleType() == PassmarkAngleType::Intersection
+                || node.GetPassmarkAngleType() == PassmarkAngleType::IntersectionOnlyLeft)
         {
             // second passmark
             QLineF line(nextSAPoint, passmarkSAPoint);
