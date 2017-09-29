@@ -1850,6 +1850,105 @@
     </message>
 </context>
 <context>
+    <name>DialogFinalMeasurements</name>
+    <message>
+        <source>Final measurements</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Find:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Search</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Name</source>
+        <translation type="unfinished">Nimi</translation>
+    </message>
+    <message>
+        <source>The calculated value</source>
+        <translation type="unfinished">Laskettu arvo</translation>
+    </message>
+    <message>
+        <source>Formula</source>
+        <translation type="unfinished">Matemaattinen kaava</translation>
+    </message>
+    <message>
+        <source>Details</source>
+        <translation type="unfinished">Yksityiskohdat</translation>
+    </message>
+    <message>
+        <source>Name:</source>
+        <translation type="unfinished">Nmi:</translation>
+    </message>
+    <message>
+        <source>Calculated value:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Formula:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Calculation</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation type="unfinished">&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Näytä koko laskenta ikkunassa&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+    </message>
+    <message>
+        <source>Formula wizard</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Description:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Move measurement up</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Move measurement down</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>measurement</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Error</source>
+        <translation type="unfinished">Virhe</translation>
+    </message>
+    <message>
+        <source>Empty field.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Edit measurement</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Empty field</source>
+        <translation type="unfinished">Tyhjä sarake</translation>
+    </message>
+    <message>
+        <source>Invalid result. Value is infinite or NaN. Please, check your calculations.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Value</source>
+        <translation type="unfinished">Arvo</translation>
+    </message>
+    <message>
+        <source>Parser error: %1</source>
+        <translation type="unfinished">Jäsentämis virhe: %1</translation>
+    </message>
+</context>
+<context>
     <name>DialogFlippingByAxis</name>
     <message>
         <source>Origin point:</source>
@@ -3759,6 +3858,22 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Cut on fabric</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Select if need designate the corner point as a passmark. Show only left passmark.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Intersection (only left)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Select if need designate the corner point as a passmark. Show only right passmark.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Intersection (only right)</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -6575,6 +6690,26 @@ Haluatko tallentaa muutokset?</translation>
         <source>Save…</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Final measurements</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Export Final Measurements to CSV</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>You can&apos;t export empty scene. Please, include at least one detail in layout.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Export final measurements error.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Destination path is empty.</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>MainWindowsNoGUI</name>
@@ -6641,6 +6776,30 @@ Haluatko tallentaa muutokset?</translation>
     <message>
         <source>Pattern</source>
         <translation type="unfinished">Kaava</translation>
+    </message>
+    <message>
+        <source>Name</source>
+        <translation type="unfinished">Nimi</translation>
+    </message>
+    <message>
+        <source>Value</source>
+        <translation type="unfinished">Arvo</translation>
+    </message>
+    <message>
+        <source>Export final measurements error.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Value in line %1 is infinite or NaN. Please, check your calculations.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Parser error at line %1: %2.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>File error %1.</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -8156,6 +8315,22 @@ Do you want to save your changes?</source>
         <source>This option has effect only if the second passmark on seam line enabled in global preferences. The option helps disable the second passmark for this passmark only.</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Select if need designate the corner point as a passmark. Show only left passmark.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Intersection (only left)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Select if need designate the corner point as a passmark. Show only right passmark.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Intersection (only right)</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>TabPaths</name>
@@ -8556,6 +8731,10 @@ Do you want to save your changes?</source>
         <source>New group</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>measurement</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>VAbstractPieceData</name>
@@ -8940,6 +9119,42 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Set height value a pattern file, that was opened with multisize measurements (export mode). Valid values: %1cm.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Export only details that match a piece name regex.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>The name regex</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Export to csv with header. By default disabled.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Specify codec that will be used to save data. List of supported codecs provided by Qt. Default value depend from system. On Windows, the codec will be based on a system locale. On Unix systems, the codec will might fall back to using the iconv library if no builtin codec for the locale can be found. Valid values for this installation:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Codec name</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Specify csv separator character. Default value is &apos;%1&apos;. Valid characters:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Separator character</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Calling this command enable exporting final measurements. Specify path to csv file with final measurements. The path must contain path to directory and name of file. It can be absolute or relatetive. In case of relative path will be used current working directory to calc a destination path.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Path to csv file</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -11611,6 +11826,11 @@ Do you want to save your changes?</source>
     <message>
         <source>userMaterial</source>
         <comment>placeholder</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>r2cm</source>
+        <comment>round to up to 1 decimal</comment>
         <translation type="unfinished"></translation>
     </message>
 </context>

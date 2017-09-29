@@ -1657,10 +1657,6 @@
         <translation>Voeg tijdelijke aanduidingen toe</translation>
     </message>
     <message>
-        <source>Insert...</source>
-        <translation type="vanished">Voeg toe....</translation>
-    </message>
-    <message>
         <source>Preview</source>
         <translation>Voorbeeld</translation>
     </message>
@@ -2223,6 +2219,105 @@
     <message>
         <source>Space</source>
         <translation>Spatie</translation>
+    </message>
+</context>
+<context>
+    <name>DialogFinalMeasurements</name>
+    <message>
+        <source>Final measurements</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Find:</source>
+        <translation type="unfinished">Vind:</translation>
+    </message>
+    <message>
+        <source>Search</source>
+        <translation type="unfinished">Zoek</translation>
+    </message>
+    <message>
+        <source>Name</source>
+        <translation type="unfinished">Naam</translation>
+    </message>
+    <message>
+        <source>The calculated value</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Formula</source>
+        <translation type="unfinished">Formule</translation>
+    </message>
+    <message>
+        <source>Details</source>
+        <translation type="unfinished">Details</translation>
+    </message>
+    <message>
+        <source>Name:</source>
+        <translation type="unfinished">Naam:</translation>
+    </message>
+    <message>
+        <source>Calculated value:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Formula:</source>
+        <translation type="unfinished">Formule:</translation>
+    </message>
+    <message>
+        <source>Calculation</source>
+        <translation type="unfinished">Berekening</translation>
+    </message>
+    <message>
+        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Formula wizard</source>
+        <translation type="unfinished">Formule wizard</translation>
+    </message>
+    <message>
+        <source>Description:</source>
+        <translation type="unfinished">Beschrijving:</translation>
+    </message>
+    <message>
+        <source>Move measurement up</source>
+        <translation type="unfinished">Verplaats maten omhoog</translation>
+    </message>
+    <message>
+        <source>Move measurement down</source>
+        <translation type="unfinished">Verplaats maten omlaag</translation>
+    </message>
+    <message>
+        <source>measurement</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Error</source>
+        <translation type="unfinished">Fout</translation>
+    </message>
+    <message>
+        <source>Empty field.</source>
+        <translation type="unfinished">Leeg veld.</translation>
+    </message>
+    <message>
+        <source>Edit measurement</source>
+        <translation type="unfinished">Verander maten</translation>
+    </message>
+    <message>
+        <source>Empty field</source>
+        <translation type="unfinished">Leeg veld</translation>
+    </message>
+    <message>
+        <source>Invalid result. Value is infinite or NaN. Please, check your calculations.</source>
+        <translation type="unfinished">Ongeldig resultaat. Waarde is oneindig of NaN. Controleer uw berekeningen.</translation>
+    </message>
+    <message>
+        <source>Value</source>
+        <translation type="unfinished">Waarde</translation>
+    </message>
+    <message>
+        <source>Parser error: %1</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -4265,6 +4360,22 @@ Toch de instellingen aanpassen?</translation>
     <message>
         <source>Cut on fabric</source>
         <translation>Knip in stof</translation>
+    </message>
+    <message>
+        <source>Select if need designate the corner point as a passmark. Show only left passmark.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Intersection (only left)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Select if need designate the corner point as a passmark. Show only right passmark.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Intersection (only right)</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -7376,6 +7487,26 @@ Do you want to save your changes?</source>
         <source>Save…</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Final measurements</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Export Final Measurements to CSV</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>You can&apos;t export empty scene. Please, include at least one detail in layout.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Export final measurements error.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Destination path is empty.</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>MainWindowsNoGUI</name>
@@ -7474,6 +7605,30 @@ Do you want to save your changes?</source>
     <message>
         <source>Pattern</source>
         <translation>Patroon</translation>
+    </message>
+    <message>
+        <source>Name</source>
+        <translation type="unfinished">Naam</translation>
+    </message>
+    <message>
+        <source>Value</source>
+        <translation type="unfinished">Waarde</translation>
+    </message>
+    <message>
+        <source>Export final measurements error.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Value in line %1 is infinite or NaN. Please, check your calculations.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Parser error at line %1: %2.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>File error %1.</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -8945,10 +9100,6 @@ Wil je deze veranderingen opslaan?</translation>
         <translation>Leeg</translation>
     </message>
     <message>
-        <source>Open multisize ...</source>
-        <translation type="vanished">Open meerdere maten...</translation>
-    </message>
-    <message>
         <source>Export from multisize measurements is not supported.</source>
         <translation>Exporteren van meerdere maten metingen wordt niet ondersteunt.</translation>
     </message>
@@ -9212,6 +9363,22 @@ Wil je deze veranderingen opslaan?</translation>
     <message>
         <source>This option has effect only if the second passmark on seam line enabled in global preferences. The option helps disable the second passmark for this passmark only.</source>
         <translation>Deze optie heeft alleen effect als de optie om een tweede knipje te laten zien op de zoomlijn aangevinkt is in de algemene opties. Deze optie staat het vervolgens toe om het tweede knipje voor dit specifieke knipje, uit te zetten.</translation>
+    </message>
+    <message>
+        <source>Select if need designate the corner point as a passmark. Show only left passmark.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Intersection (only left)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Select if need designate the corner point as a passmark. Show only right passmark.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Intersection (only right)</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -9667,6 +9834,10 @@ Wil je deze veranderingen opslaan?</translation>
     <message>
         <source>New group</source>
         <translation>Nieuwe naam</translation>
+    </message>
+    <message>
+        <source>measurement</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -10141,6 +10312,42 @@ Wil je deze veranderingen opslaan?</translation>
     <message>
         <source>Set height value a pattern file, that was opened with multisize measurements (export mode). Valid values: %1cm.</source>
         <translation>Stel hoogte waarde van een patroon bestand vast, welke geopend zijn met meerdere maten metingen (exporteer modus). Geldige waarde: %1cm.</translation>
+    </message>
+    <message>
+        <source>Export only details that match a piece name regex.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>The name regex</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Export to csv with header. By default disabled.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Specify codec that will be used to save data. List of supported codecs provided by Qt. Default value depend from system. On Windows, the codec will be based on a system locale. On Unix systems, the codec will might fall back to using the iconv library if no builtin codec for the locale can be found. Valid values for this installation:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Codec name</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Specify csv separator character. Default value is &apos;%1&apos;. Valid characters:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Separator character</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Calling this command enable exporting final measurements. Specify path to csv file with final measurements. The path must contain path to directory and name of file. It can be absolute or relatetive. In case of relative path will be used current working directory to calc a destination path.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Path to csv file</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -10751,13 +10958,6 @@ Wil je deze veranderingen opslaan?</translation>
     <message>
         <source>Label</source>
         <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>VToolCut</name>
-    <message>
-        <source>Length</source>
-        <translation type="vanished">Lengte</translation>
     </message>
 </context>
 <context>
@@ -12985,6 +13185,11 @@ Wil je deze veranderingen opslaan?</translation>
         <source>userMaterial</source>
         <comment>placeholder</comment>
         <translation>gebruikersMateriaal</translation>
+    </message>
+    <message>
+        <source>r2cm</source>
+        <comment>round to up to 1 decimal</comment>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

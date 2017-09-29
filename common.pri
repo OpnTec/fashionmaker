@@ -289,8 +289,8 @@ GCC_DEBUG_CXXFLAGS += \
     -Wmissing-noreturn \
     -Wpointer-arith \
     -Wstrict-null-sentinel \
-#    -Wstrict-overflow=5 \
-    -Wno-strict-overflow \
+    -Wstrict-overflow=5 \
+    -Wno-error=strict-overflow \
     -Wundef \
     -Wno-unused \
     -ftrapv
