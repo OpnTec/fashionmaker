@@ -171,6 +171,12 @@ qreal QmuParser::Rint(qreal v)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+qreal QmuParser::R2CM(qreal v)
+{
+    return Rint(v*10.0)/10.0;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 qreal QmuParser::Sign(qreal v)
 {
     return ((v<0) ? -1 : (v>0) ? 1 : 0);
@@ -365,6 +371,7 @@ void QmuParser::InitFun()
     DefineFun("sqrt",  qSqrt);
     DefineFun("sign",  Sign);
     DefineFun("rint",  Rint);
+    DefineFun("r2cm",  R2CM);
     DefineFun("abs",   Abs);
     DefineFun("fmod",  FMod);
     // Functions with variable number of arguments

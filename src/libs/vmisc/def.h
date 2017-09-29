@@ -336,6 +336,7 @@ extern const QString exp_F;
 extern const QString sqrt_F;
 extern const QString sign_F;
 extern const QString rint_F;
+extern const QString r2cm_F;
 extern const QString abs_F;
 extern const QString min_F;
 extern const QString max_F;

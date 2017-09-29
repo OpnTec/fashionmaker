@@ -22,6 +22,7 @@
 - [#756] New feature. Select pieces from command line.
 - [#761] New feature. Export final measurements.
 - [#758] Intersection Passmark - select which side is shown.
+- New math parser function "r2cm". Round to up to 1 decimal.
 
 # Version 0.5.1
 - [#683] Tool Seam allowance's dialog is off screen on small resolutions.

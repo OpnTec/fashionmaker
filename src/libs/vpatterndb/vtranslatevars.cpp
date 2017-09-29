@@ -437,6 +437,7 @@ void VTranslateVars::InitFunctions()
     functions.insert(sqrt_F, translate("VTranslateVars", "sqrt", "square root of a value"));
     functions.insert(sign_F, translate("VTranslateVars", "sign", "sign function -1 if x<0; 1 if x>0"));
     functions.insert(rint_F, translate("VTranslateVars", "rint", "round to nearest integer"));
+    functions.insert(r2cm_F, translate("VTranslateVars", "r2cm", "round to up to 1 decimal"));
     functions.insert(abs_F, translate("VTranslateVars", "abs", "absolute value"));
     functions.insert(min_F, translate("VTranslateVars", "min", "min of all arguments"));
     functions.insert(max_F, translate("VTranslateVars", "max", "max of all arguments"));

@@ -84,6 +84,7 @@ namespace qmu
         // misc
         static qreal Abs(qreal);
         static qreal Rint(qreal);
+        static qreal R2CM(qreal);
         static qreal Sign(qreal);
         static qreal FMod(qreal, qreal);
         // Prefix operators
