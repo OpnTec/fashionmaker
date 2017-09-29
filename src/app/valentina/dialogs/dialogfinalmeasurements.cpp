@@ -307,16 +307,11 @@ void DialogFinalMeasurements::MoveUp()
         return;
     }
 
-QT_WARNING_PUSH
-QT_WARNING_DISABLE_GCC("-Wstrict-overflow")
-
 #if QT_VERSION < QT_VERSION_CHECK(5, 6, 0)
     Move(m_measurements, row, row-1);
 #else
     m_measurements.move(row, row-1);
 #endif
-
-QT_WARNING_POP
 
     UpdateTree();
 
@@ -333,16 +328,11 @@ void DialogFinalMeasurements::MoveDown()
         return;
     }
 
-QT_WARNING_PUSH
-QT_WARNING_DISABLE_GCC("-Wstrict-overflow")
-
 #if QT_VERSION < QT_VERSION_CHECK(5, 6, 0)
     Move(m_measurements, row, row+1);
 #else
     m_measurements.move(row, row+1);
 #endif
-
-QT_WARNING_POP
 
     UpdateTree();
 

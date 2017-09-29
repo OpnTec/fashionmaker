@@ -29,6 +29,8 @@
 #ifndef DIAGNOSTIC_H
 #define DIAGNOSTIC_H
 
+#include <QtGlobal>
+
 #if QT_VERSION < QT_VERSION_CHECK(5, 5, 0)
 
 /*
@@ -84,6 +86,10 @@
 #  define QT_WARNING_DISABLE_CLANG(text)
 #  define QT_WARNING_DISABLE_GCC(text)
 #endif
+
+#else
+
+#include <qcompilerdetection.h>
 
 #endif // QT_VERSION < QT_VERSION_CHECK(5, 5, 0)
 
