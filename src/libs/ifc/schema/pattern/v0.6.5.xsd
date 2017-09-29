@@ -981,7 +981,7 @@
   <xs:simpleType name="userMaterialType">
     <xs:restriction base="xs:unsignedInt">
       <xs:minInclusive value="1"/>
-      <xs:maxInclusive value="9"/>
+      <xs:maxInclusive value="20"/>
     </xs:restriction>
   </xs:simpleType>
 </xs:schema>
