@@ -29,15 +29,7 @@
 #ifndef DIALOGFINALMEASUREMENTS_H
 #define DIALOGFINALMEASUREMENTS_H
 
-#include "../vmisc/diagnostic.h"
-
-QT_WARNING_PUSH
-QT_WARNING_DISABLE_GCC("-Wstrict-overflow")
-// suppress warning Wstrict-overflow because of method QVector::move()
-
 #include <QDialog>
-
-QT_WARNING_POP
 
 #include "../vmisc/vtablesearch.h"
 #include "../vpatterndb/vcontainer.h"
