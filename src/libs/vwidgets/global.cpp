@@ -82,7 +82,7 @@ qreal ScaledRadius(qreal scale)
     qreal scaledRadius = defPointRadiusPixel;
     if (scale > 1)
     {
-        scaledRadius = qMax(defPointRadiusPixel/12, defPointRadiusPixel/scale);
+        scaledRadius = qMax(defPointRadiusPixel/96, defPointRadiusPixel/scale);
     }
     return scaledRadius;
 }
@@ -100,7 +100,7 @@ qreal ScaleWidth(qreal width, qreal scale)
 {
     if (scale > 1)
     {
-        width = qMax(0.1, width/scale);
+        width = qMax(0.01, width/scale);
     }
     return width;
 }

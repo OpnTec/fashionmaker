@@ -85,15 +85,10 @@ VGraphicsSimpleTextItem::VGraphicsSimpleTextItem( const QString & text, QGraphic
 void VGraphicsSimpleTextItem::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
 {
     const qreal scale = SceneScale(scene());
-    qreal fontSize = BaseFontSize();
     if (scale > 1)
     {
-        fontSize = qMax(0.1, fontSize/scale);
+        setScale(1/scale);
     }
-
-    QFont font = this->font();
-    font.setPointSizeF(fontSize);
-    setFont(font);
 
     QGraphicsSimpleTextItem::paint(painter, option, widget);
 }
