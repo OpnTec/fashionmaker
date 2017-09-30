@@ -90,7 +90,8 @@ HEADERS += \
     tst_readval.h \
     tst_vtranslatevars.h \
     tst_vabstractpiece.h \
-    tst_vtooluniondetails.h
+    tst_vtooluniondetails.h \
+    testvapplication.h
 
 # Set using ccache. Function enable_ccache() defined in common.pri.
 $$enable_ccache()

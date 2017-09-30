@@ -53,48 +53,7 @@
 
 #include "../vmisc/def.h"
 #include "../qmuparser/qmudef.h"
-#include "../vmisc/vabstractapplication.h"
-
-class TestVApplication : public VAbstractApplication
-{
-public:
-
-    TestVApplication(int &argc, char ** argv);
-    virtual ~TestVApplication() Q_DECL_EQ_DEFAULT;
-
-    virtual const VTranslateVars *TrVars();
-    virtual void                  OpenSettings();
-    virtual bool                  IsAppInGUIMode() const;
-    virtual void                  InitTrVars();
-};
-
-//---------------------------------------------------------------------------------------------------------------------
-TestVApplication::TestVApplication(int &argc, char **argv)
-    : VAbstractApplication(argc, argv)
-{
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-const VTranslateVars *TestVApplication::TrVars()
-{
-    return nullptr;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void TestVApplication::OpenSettings()
-{
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-bool TestVApplication::IsAppInGUIMode() const
-{
-    return false;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void TestVApplication::InitTrVars()
-{
-}
+#include "testvapplication.h"
 
 //---------------------------------------------------------------------------------------------------------------------
 int main(int argc, char** argv)

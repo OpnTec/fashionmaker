@@ -30,6 +30,7 @@
 #include "../vmisc/logging.h"
 #include "../vpatterndb/vtranslatevars.h"
 #include "../qmuparser/qmuparsererror.h"
+#include "testvapplication.h"
 
 #include <QtTest>
 
@@ -45,6 +46,7 @@ TST_VTranslateVars::TST_VTranslateVars(QObject *parent)
 void TST_VTranslateVars::initTestCase()
 {
     m_trMs = new VTranslateVars();
+    qApp->SetTrVars(m_trMs);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

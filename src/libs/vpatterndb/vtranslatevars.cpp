@@ -930,6 +930,7 @@ QString VTranslateVars::TryFormulaFromUser(const QString &formula, bool osSepara
 {
     try
     {
+        SCASSERT(qApp->TrVars() != nullptr)
         return qApp->TrVars()->FormulaFromUser(formula, osSeparator);
     }
     catch (qmu::QmuParserError &e)// In case something bad will happen
