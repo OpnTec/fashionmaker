@@ -731,6 +731,7 @@ ICC_DEBUG_CXXFLAGS += \
 GCC_DEBUG_CXXFLAGS += \
     -O0 \
     -Wall \
+    -Wno-error=strict-overflow \
     -Wextra \
     -fno-omit-frame-pointer # Need for exchndl.dll
 
