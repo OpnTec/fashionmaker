@@ -46,6 +46,7 @@
 #include <QWheelEvent>
 #include <QWidget>
 #include <QDesktopWidget>
+#include <QThread>
 
 #include "../vmisc/def.h"
 #include "../vmisc/vmath.h"
@@ -339,6 +340,8 @@ bool GraphicsViewZoom::StartHorizontalScrollings(QWheelEvent *wheel_event)
     return true;
 }
 
+const unsigned long VMainGraphicsView::scrollDelay = 80;
+
 //---------------------------------------------------------------------------------------------------------------------
 /**
  * @brief VMainGraphicsView constructor.
@@ -527,6 +530,34 @@ qreal VMainGraphicsView::MaxScale()
     const qreal screenSize = qMin(screenRect.width(), screenRect.height());
 
     return maxSceneSize / screenSize;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VMainGraphicsView::EnsureVisibleWithDelay(const QRectF &rect, unsigned long msecs, int xmargin, int ymargin)
+{
+    const int hbar = horizontalScrollBar()->value();
+    const int vbar = verticalScrollBar()->value();
+
+    ensureVisible(rect, xmargin, ymargin);
+
+    if (hbar != horizontalScrollBar()->value() || vbar != verticalScrollBar()->value())
+    {
+        QThread::msleep(msecs);
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VMainGraphicsView::EnsureVisibleWithDelay(const QGraphicsItem *item, unsigned long msecs, int xmargin, int ymargin)
+{
+    const int hbar = horizontalScrollBar()->value();
+    const int vbar = verticalScrollBar()->value();
+
+    ensureVisible(item, xmargin, ymargin);
+
+    if (hbar != horizontalScrollBar()->value() || vbar != verticalScrollBar()->value())
+    {
+        QThread::msleep(msecs);
+    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------

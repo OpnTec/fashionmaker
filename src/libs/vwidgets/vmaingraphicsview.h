@@ -124,6 +124,11 @@ public:
     static qreal MinScale();
     static qreal MaxScale();
 
+    void EnsureVisibleWithDelay(const QRectF &rect, unsigned long msecs, int xmargin = 50, int ymargin = 50);
+    void EnsureVisibleWithDelay(const QGraphicsItem *item, unsigned long msecs, int xmargin = 50, int ymargin = 50);
+
+    static const unsigned long scrollDelay;
+
 signals:
     /**
      * @brief MouseRelease help catch mouse release event.
