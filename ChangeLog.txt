@@ -23,6 +23,7 @@
 - [#761] New feature. Export final measurements.
 - [#758] Intersection Passmark - select which side is shown.
 - New math parser function "r2cm". Round to up to 1 decimal.
+- Two new shortcut sequences: Ctrl+PgDown and Ctrl+PgUp to switch to next and previous pattern piece.
 
 # Version 0.5.1
 - [#683] Tool Seam allowance's dialog is off screen on small resolutions.

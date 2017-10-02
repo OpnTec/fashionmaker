@@ -1938,6 +1938,9 @@ void MainWindow::ToolBarTools()
     zoomFitBestCurrentShortcuts.append(QKeySequence(Qt::ControlModifier + Qt::Key_M));
     ui->actionZoomFitBestCurrent->setShortcuts(zoomFitBestCurrentShortcuts);
     connect(ui->actionZoomFitBestCurrent, &QAction::triggered, this, &MainWindow::ZoomFitBestCurrent);
+
+    connect(ui->actionPreviousPatternPiece, &QAction::triggered, this, &MainWindow::PreviousPatternPiece);
+    connect(ui->actionNextPatternPiece, &QAction::triggered, this, &MainWindow::NextPatternPiece);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -2846,6 +2849,8 @@ void MainWindow::Clear()
     ui->actionLoadMultisize->setEnabled(false);
     ui->actionUnloadMeasurements->setEnabled(false);
     ui->actionEditCurrent->setEnabled(false);
+    ui->actionPreviousPatternPiece->setEnabled(false);
+    ui->actionNextPatternPiece->setEnabled(false);
     SetEnableTool(false);
     qApp->setPatternUnit(Unit::Cm);
     qApp->setPatternType(MeasurementsType::Unknown);
@@ -3040,6 +3045,50 @@ void MainWindow::GlobalChangePP(const QString &patternPiece)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void MainWindow::PreviousPatternPiece()
+{
+    int index = comboBoxDraws->currentIndex();
+
+    if (index == -1 || comboBoxDraws->count() <= 1)
+    {
+        return;
+    }
+
+    if (index == 0)
+    {
+        index = comboBoxDraws->count() - 1;
+    }
+    else
+    {
+        --index;
+    }
+
+    comboBoxDraws->setCurrentIndex(index);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void MainWindow::NextPatternPiece()
+{
+    int index = comboBoxDraws->currentIndex();
+
+    if (index == -1 || comboBoxDraws->count() <= 1)
+    {
+        return;
+    }
+
+    if (index == comboBoxDraws->count()-1)
+    {
+        index = 0;
+    }
+    else
+    {
+        ++index;
+    }
+
+    comboBoxDraws->setCurrentIndex(index);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 void MainWindow::SetEnabledGUI(bool enabled)
 {
     if (guiEnabled != enabled)
@@ -3095,6 +3144,8 @@ void MainWindow::SetEnableWidgets(bool enable)
     ui->actionLoadIndividual->setEnabled(enable && designStage);
     ui->actionLoadMultisize->setEnabled(enable && designStage);
     ui->actionUnloadMeasurements->setEnabled(enable && designStage);
+    ui->actionPreviousPatternPiece->setEnabled(enable && drawStage);
+    ui->actionNextPatternPiece->setEnabled(enable && drawStage);
 
     actionDockWidgetToolOptions->setEnabled(enable && designStage);
     actionDockWidgetGroups->setEnabled(enable && designStage);

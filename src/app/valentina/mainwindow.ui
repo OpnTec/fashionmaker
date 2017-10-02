@@ -1690,6 +1690,9 @@
     <addaction name="actionZoomFitBestCurrent"/>
     <addaction name="actionZoomOriginal"/>
     <addaction name="separator"/>
+    <addaction name="actionPreviousPatternPiece"/>
+    <addaction name="actionNextPatternPiece"/>
+    <addaction name="separator"/>
     <addaction name="actionLast_tool"/>
     <addaction name="actionShowCurveDetails"/>
    </widget>
@@ -2702,6 +2705,28 @@
     <string>Export Final Measurements to CSV</string>
    </property>
   </action>
+  <action name="actionNextPatternPiece">
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
+   <property name="text">
+    <string>Next pattern piece</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+PgDown</string>
+   </property>
+  </action>
+  <action name="actionPreviousPatternPiece">
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
+   <property name="text">
+    <string>Previous pattern piece</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+PgUp</string>
+   </property>
+  </action>
  </widget>
  <layoutdefault spacing="6" margin="11"/>
  <customwidgets>
@@ -2712,8 +2737,8 @@
   </customwidget>
  </customwidgets>
  <resources>
-  <include location="share/resources/toolicon.qrc"/>
   <include location="../../libs/vmisc/share/resources/icon.qrc"/>
+  <include location="share/resources/toolicon.qrc"/>
  </resources>
  <connections/>
 </ui>

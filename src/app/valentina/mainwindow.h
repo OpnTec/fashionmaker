@@ -113,6 +113,8 @@ private slots:
     void FullParseFile();
     void SetEnabledGUI(bool enabled);
     void GlobalChangePP(const QString &patternPiece);
+    void PreviousPatternPiece();
+    void NextPatternPiece();
     void ToolBarStyles();
     void ShowPaper(int index);
     void Preferences();
