@@ -280,6 +280,7 @@ win32:*g++* {
         $$PWD/../../../LICENSE_GPL.txt \
         $$PWD/../../../README.txt \
         $$PWD/../../../ChangeLog.txt \
+        $$PWD/../../../share/qtlogging.ini \
         $$PWD/../../libs/qmuparser/LICENSE_BSD.txt \
         $${OUT_PWD}/../../libs/qmuparser/$${DESTDIR}/qmuparser2.dll \
         $${OUT_PWD}/../../libs/vpropertyexplorer/$${DESTDIR}/vpropertyexplorer.dll \
