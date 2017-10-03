@@ -108,6 +108,8 @@ PreferencesConfigurationPage::PreferencesConfigurationPage(QWidget *parent)
         settings->SetConfirmFormatRewriting(true);
     });
 
+    ui->checkBoxFreeCurve->setChecked(qApp->ValentinaSettings()->IsFreeCurveMode());
+
     //----------------------- Toolbar
     ui->toolBarStyleCheck->setChecked(qApp->ValentinaSettings()->GetToolBarStyle());
 }
@@ -132,6 +134,7 @@ void PreferencesConfigurationPage::Apply()
 
     settings->SetOsSeparator(ui->osOptionCheck->isChecked());
     settings->SetToolBarStyle(ui->toolBarStyleCheck->isChecked());
+    settings->SetFreeCurveMode(ui->checkBoxFreeCurve->isChecked());
 
     if (m_langChanged || m_systemChanged)
     {

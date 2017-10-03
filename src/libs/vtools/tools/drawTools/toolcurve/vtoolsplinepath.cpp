@@ -85,12 +85,24 @@ const QString VToolSplinePath::OldToolType = QStringLiteral("path");
 VToolSplinePath::VToolSplinePath(const VToolSplinePathInitData &initData, QGraphicsItem *parent)
     : VAbstractSpline(initData.doc, initData.data, initData.id, parent),
       oldPosition(),
-      splIndex(-1)
+      splIndex(-1),
+      moved(false),
+      oldMoveSplinePath(),
+      newMoveSplinePath()
 {
     sceneType = SceneObject::SplinePath;
 
     this->setFlag(QGraphicsItem::ItemIsMovable, true);
     this->setFlag(QGraphicsItem::ItemIsFocusable, true);// For keyboard input focus
+
+    auto InitControlPoint = [this](VControlPointSpline* cPoint)
+    {
+        connect(cPoint, &VControlPointSpline::ControlPointChangePosition, this,
+                &VToolSplinePath::ControlPointChangePosition);
+        connect(this, &VToolSplinePath::setEnabledPoint, cPoint, &VControlPointSpline::setEnabledPoint);
+        connect(cPoint, &VControlPointSpline::ShowContextMenu, this, &VToolSplinePath::contextMenuEvent);
+        controlPoints.append(cPoint);
+    };
 
     const QSharedPointer<VSplinePath> splPath = initData.data->GeometricObject<VSplinePath>(initData.id);
     for (qint32 i = 1; i<=splPath->CountSubSpl(); ++i)
@@ -104,22 +116,14 @@ VToolSplinePath::VToolSplinePath(const VToolSplinePathInitData &initData, QGraph
                                                      static_cast<QPointF>(spl.GetP2()),
                                                      static_cast<QPointF>(spl.GetP1()),
                                                      freeAngle1, freeLength1, this);
-        connect(controlPoint, &VControlPointSpline::ControlPointChangePosition, this,
-                &VToolSplinePath::ControlPointChangePosition);
-        connect(this, &VToolSplinePath::setEnabledPoint, controlPoint, &VControlPointSpline::setEnabledPoint);
-        connect(controlPoint, &VControlPointSpline::ShowContextMenu, this, &VToolSplinePath::contextMenuEvent);
-        controlPoints.append(controlPoint);
+        InitControlPoint(controlPoint);
 
         const bool freeAngle2 = qmu::QmuTokenParser::IsSingle(spl.GetEndAngleFormula());
         const bool freeLength2 = qmu::QmuTokenParser::IsSingle(spl.GetC2LengthFormula());
 
         controlPoint = new VControlPointSpline(i, SplinePointPosition::LastPoint, static_cast<QPointF>(spl.GetP3()),
                                                static_cast<QPointF>(spl.GetP4()), freeAngle2, freeLength2, this);
-        connect(controlPoint, &VControlPointSpline::ControlPointChangePosition, this,
-                &VToolSplinePath::ControlPointChangePosition);
-        connect(this, &VToolSplinePath::setEnabledPoint, controlPoint, &VControlPointSpline::setEnabledPoint);
-        connect(controlPoint, &VControlPointSpline::ShowContextMenu, this, &VToolSplinePath::contextMenuEvent);
-        controlPoints.append(controlPoint);
+        InitControlPoint(controlPoint);
     }
 
     ShowHandles(false);
@@ -258,14 +262,34 @@ VToolSplinePath *VToolSplinePath::Create(VToolSplinePathInitData &initData)
 void VToolSplinePath::ControlPointChangePosition(const qint32 &indexSpline, const SplinePointPosition &position,
                                                  const QPointF &pos)
 {
-    const VSplinePath oldSplPath = *VAbstractTool::data.GeometricObject<VSplinePath>(m_id);
-    VSplinePath newSplPath = oldSplPath;
-    const VSpline spl = CorrectedSpline(newSplPath.GetSpline(indexSpline), position, pos);
+    const QSharedPointer<VSplinePath> oldSplPath = VAbstractTool::data.GeometricObject<VSplinePath>(m_id);
+
+    if (qApp->Settings()->IsFreeCurveMode() && not moved)
+    {
+        oldMoveSplinePath = oldSplPath;
+        moved = true;
+    }
+
+    QSharedPointer<VSplinePath> newSplPath = oldSplPath;
+    const VSpline spl = CorrectedSpline(newSplPath->GetSpline(indexSpline), position, pos);
+
     UpdateControlPoints(spl, newSplPath, indexSpline);
 
-    MoveSplinePath *moveSplPath = new MoveSplinePath(doc, oldSplPath, newSplPath, m_id);
-    connect(moveSplPath, &VUndoCommand::NeedLiteParsing, doc, &VAbstractPattern::LiteParseTree);
-    qApp->getUndoStack()->push(moveSplPath);
+    if (not qApp->Settings()->IsFreeCurveMode())
+    {
+        UndoCommandMove(*oldSplPath, *newSplPath);
+    }
+    else
+    {
+        newMoveSplinePath = newSplPath;
+        VAbstractTool::data.UpdateGObject(m_id, newMoveSplinePath);
+        RefreshGeometry();
+
+        if (QGraphicsScene *sc = scene())
+        {
+            VMainGraphicsView::NewSceneRect(sc, qApp->getSceneView());
+        }
+    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -296,17 +320,18 @@ void VToolSplinePath::ShowContextMenu(QGraphicsSceneContextMenuEvent *event, qui
  * @param splPath spline path.
  * @param indexSpline index spline in spline path.
  */
-void VToolSplinePath::UpdateControlPoints(const VSpline &spl, VSplinePath &splPath, const qint32 &indexSpline) const
+void VToolSplinePath::UpdateControlPoints(const VSpline &spl, QSharedPointer<VSplinePath> &splPath,
+                                          qint32 indexSpline) const
 {
-    VSplinePoint p = splPath.GetSplinePoint(indexSpline, SplinePointPosition::FirstPoint);
+    VSplinePoint p = splPath->GetSplinePoint(indexSpline, SplinePointPosition::FirstPoint);
     p.SetAngle2(spl.GetStartAngle(), spl.GetStartAngleFormula());
     p.SetLength2(spl.GetC1Length(), spl.GetC1LengthFormula());
-    splPath.UpdatePoint(indexSpline, SplinePointPosition::FirstPoint, p);
+    splPath->UpdatePoint(indexSpline, SplinePointPosition::FirstPoint, p);
 
-    p = splPath.GetSplinePoint(indexSpline, SplinePointPosition::LastPoint);
+    p = splPath->GetSplinePoint(indexSpline, SplinePointPosition::LastPoint);
     p.SetAngle1(spl.GetEndAngle(), spl.GetEndAngleFormula());
     p.SetLength1(spl.GetC2Length(), spl.GetC2LengthFormula());
-    splPath.UpdatePoint(indexSpline, SplinePointPosition::LastPoint, p);
+    splPath->UpdatePoint(indexSpline, SplinePointPosition::LastPoint, p);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -332,6 +357,14 @@ void VToolSplinePath::SetSplinePathAttributes(QDomElement &domElement, const VSp
     }
 
     UpdatePathPoints(doc, domElement, path);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VToolSplinePath::UndoCommandMove(const VSplinePath &oldPath, const VSplinePath &newPath)
+{
+    MoveSplinePath *moveSplPath = new MoveSplinePath(doc, oldPath, newPath, m_id);
+    connect(moveSplPath, &VUndoCommand::NeedLiteParsing, doc, &VAbstractPattern::LiteParseTree);
+    qApp->getUndoStack()->push(moveSplPath);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -491,6 +524,8 @@ void VToolSplinePath::mouseReleaseEvent(QGraphicsSceneMouseEvent *event)
         {
             oldPosition = event->scenePos();
             SetItemOverrideCursor(this, cursorArrowOpenHand, 1, 1);
+
+            CurveReleased();
         }
     }
     VAbstractSpline::mouseReleaseEvent(event);
@@ -505,10 +540,17 @@ void VToolSplinePath::mouseMoveEvent(QGraphicsSceneMouseEvent *event)
 
     if (IsMovable(splIndex))
     {
-        VSplinePath oldSplPath = *VAbstractTool::data.GeometricObject<VSplinePath>(m_id);
-        VSplinePath newSplPath = oldSplPath;
+        const auto oldSplPath = VAbstractTool::data.GeometricObject<VSplinePath>(m_id);
 
-        VSpline spline = newSplPath.GetSpline(splIndex);
+        if (qApp->Settings()->IsFreeCurveMode() && not moved)
+        {
+            oldMoveSplinePath = oldSplPath;
+            moved = true;
+        }
+
+        newMoveSplinePath = oldSplPath;
+
+        VSpline spline = newMoveSplinePath->GetSpline(splIndex);
         const qreal t = spline.ParamT(oldPosition);
 
         if (qFloor(t) == -1)
@@ -549,11 +591,22 @@ void VToolSplinePath::mouseMoveEvent(QGraphicsSceneMouseEvent *event)
 
         const VSpline spl = VSpline(spline.GetP1(), p2, p3, spline.GetP4());
 
-        UpdateControlPoints(spl, newSplPath, splIndex);
+        UpdateControlPoints(spl, newMoveSplinePath, splIndex);
 
-        MoveSplinePath *moveSplPath = new MoveSplinePath(doc, oldSplPath, newSplPath, m_id);
-        connect(moveSplPath, &VUndoCommand::NeedLiteParsing, doc, &VAbstractPattern::LiteParseTree);
-        qApp->getUndoStack()->push(moveSplPath);
+        if (not qApp->Settings()->IsFreeCurveMode())
+        {
+            UndoCommandMove(*oldSplPath, *newMoveSplinePath);
+        }
+        else
+        {
+            VAbstractTool::data.UpdateGObject(m_id, newMoveSplinePath);
+            RefreshGeometry();
+
+            if (QGraphicsScene *sc = scene())
+            {
+                VMainGraphicsView::NewSceneRect(sc, qApp->getSceneView());
+            }
+        }
 
         // Each time we move something we call recalculation scene rect. In some cases this can cause moving
         // objects positions. And this cause infinite redrawing. That's why we wait the finish of saving the last move.
@@ -686,5 +739,19 @@ void VToolSplinePath::RefreshCtrlPoints()
     foreach (auto *point, controlPoints)
     {
         point->setFlag(QGraphicsItem::ItemSendsGeometryChanges, true);
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VToolSplinePath::CurveReleased()
+{
+    if (qApp->Settings()->IsFreeCurveMode() && moved)
+    {
+        UndoCommandMove(*oldMoveSplinePath, *newMoveSplinePath);
+
+        oldMoveSplinePath.clear();
+        newMoveSplinePath.clear();
+
+        moved = false;
     }
 }

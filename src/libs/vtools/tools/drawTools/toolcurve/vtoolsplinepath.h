@@ -117,17 +117,26 @@ protected:
     virtual void hoverLeaveEvent ( QGraphicsSceneHoverEvent * event ) Q_DECL_OVERRIDE;
     virtual void SetVisualization() Q_DECL_OVERRIDE;
     virtual void RefreshCtrlPoints() Q_DECL_OVERRIDE;
+private slots:
+    void CurveReleased();
 private:
     Q_DISABLE_COPY(VToolSplinePath)
     QPointF oldPosition;
     int     splIndex;
 
+    bool moved;
+    QSharedPointer<VSplinePath> oldMoveSplinePath;
+    QSharedPointer<VSplinePath> newMoveSplinePath;
+
     VToolSplinePath(const VToolSplinePathInitData &initData, QGraphicsItem *parent = nullptr);
 
     bool          IsMovable(int index) const;
     static void   AddPathPoint(VAbstractPattern *doc, QDomElement &domElement, const VSplinePoint &splPoint);
-    void          UpdateControlPoints(const VSpline &spl, VSplinePath &splPath, const qint32 &indexSpline) const;
+    void          UpdateControlPoints(const VSpline &spl, QSharedPointer<VSplinePath> &splPath,
+                                      qint32 indexSpline) const;
     void          SetSplinePathAttributes(QDomElement &domElement, const VSplinePath &path);
+
+    void UndoCommandMove(const VSplinePath &oldPath, const VSplinePath &newPath);
 };
 
 #endif // VTOOLSPLINEPATH_H

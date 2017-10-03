@@ -61,6 +61,7 @@ const QString settingConfigurationUnit                   = QStringLiteral("confi
 const QString settingConfigurationConfirmItemDeletion    = QStringLiteral("configuration/confirm_item_deletion");
 const QString settingConfigurationConfirmFormatRewriting = QStringLiteral("configuration/confirm_format_rewriting");
 const QString settingConfigurationToolBarStyle           = QStringLiteral("configuration/tool_bar_style");
+const QString settingConfigurationFreeCurveMode          = QStringLiteral("configuration/freeCurveMode");
 
 const QString settingPatternUndo                    = QStringLiteral("pattern/undo");
 const QString settingPatternForbidFlipping          = QStringLiteral("pattern/forbidFlipping");
@@ -476,6 +477,18 @@ bool VCommonSettings::GetToolBarStyle() const
 void VCommonSettings::SetToolBarStyle(const bool &value)
 {
     setValue(settingConfigurationToolBarStyle, value);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+bool VCommonSettings::IsFreeCurveMode() const
+{
+    return value(settingConfigurationFreeCurveMode, 1).toBool();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VCommonSettings::SetFreeCurveMode(bool value)
+{
+    setValue(settingConfigurationFreeCurveMode, value);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

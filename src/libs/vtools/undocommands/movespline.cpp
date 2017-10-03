@@ -41,10 +41,10 @@
 #include "vundocommand.h"
 
 //---------------------------------------------------------------------------------------------------------------------
-MoveSpline::MoveSpline(VAbstractPattern *doc, const VSpline *oldSpl, const VSpline &newSpl, const quint32 &id,
+MoveSpline::MoveSpline(VAbstractPattern *doc, const VSpline &oldSpl, const VSpline &newSpl, const quint32 &id,
                        QUndoCommand *parent)
     : VUndoCommand(QDomElement(), doc, parent),
-      oldSpline(*oldSpl),
+      oldSpline(oldSpl),
       newSpline(newSpl),
       scene(qApp->getCurrentScene())
 {

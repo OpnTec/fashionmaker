@@ -41,6 +41,7 @@
 #include "../vmisc/def.h"
 #include "../ifc/xml/vabstractpattern.h"
 #include "vabstractspline.h"
+#include "../vgeometry/vspline.h"
 
 template <class T> class QSharedPointer;
 
@@ -105,14 +106,22 @@ protected:
     virtual void hoverLeaveEvent ( QGraphicsSceneHoverEvent * event ) Q_DECL_OVERRIDE;
     virtual void SetVisualization() Q_DECL_OVERRIDE;
     virtual void RefreshCtrlPoints() Q_DECL_OVERRIDE;
+private slots:
+    void CurveReleased();
 private:
     Q_DISABLE_COPY(VToolSpline)
     QPointF oldPosition;
+
+    bool moved;
+    QSharedPointer<VSpline> oldMoveSpline;
+    QSharedPointer<VSpline> newMoveSpline;
 
     VToolSpline (VToolSplineInitData initData, QGraphicsItem *parent = nullptr );
 
     bool IsMovable() const;
     void SetSplineAttributes(QDomElement &domElement, const VSpline &spl);
+
+    void UndoCommandMove(const VSpline &oldSpl, const VSpline &newSpl);
 };
 
 #endif // VTOOLSPLINE_H

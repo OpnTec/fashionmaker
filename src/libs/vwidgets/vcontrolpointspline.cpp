@@ -234,6 +234,7 @@ void VControlPointSpline::mouseReleaseEvent(QGraphicsSceneMouseEvent *event)
         if (freeAngle || freeLength)
         {
             SetItemOverrideCursor(this, cursorArrowOpenHand, 1, 1);
+            emit Released();
         }
     }
     VScenePoint::mouseReleaseEvent(event);

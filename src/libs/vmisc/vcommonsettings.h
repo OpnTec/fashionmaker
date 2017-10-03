@@ -99,6 +99,9 @@ public:
     bool GetToolBarStyle() const;
     void SetToolBarStyle(const bool &value);
 
+    bool IsFreeCurveMode() const;
+    void SetFreeCurveMode(bool value);
+
     int  GetUndoCount() const;
     void SetUndoCount(const int &value);
 

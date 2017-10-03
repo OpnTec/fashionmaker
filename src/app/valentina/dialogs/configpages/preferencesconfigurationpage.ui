@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>501</width>
-    <height>559</height>
+    <height>582</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -184,6 +184,19 @@
         </property>
         <property name="text">
          <string>Reset warnings</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QCheckBox" name="checkBoxFreeCurve">
+        <property name="toolTip">
+         <string>Update a pattern only after a curve release</string>
+        </property>
+        <property name="text">
+         <string>Free curve mode</string>
+        </property>
+        <property name="checked">
+         <bool>true</bool>
         </property>
        </widget>
       </item>
