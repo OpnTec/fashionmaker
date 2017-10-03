@@ -1579,11 +1579,13 @@ bool MainWindowsNoGUI::ExportFMeasurementsToCSVData(const QString &fileName, boo
 
     csv.insertColumn(0);
     csv.insertColumn(1);
+    csv.insertColumn(2);
 
     if (withHeader)
     {
         csv.setHeaderText(0, tr("Name"));
         csv.setHeaderText(1, tr("Value"));
+        csv.setHeaderText(2, tr("Description"));
     }
 
     const QVector<VFinalMeasurement> measurements = doc->GetFinalMeasurements();
@@ -1631,6 +1633,8 @@ bool MainWindowsNoGUI::ExportFMeasurementsToCSVData(const QString &fileName, boo
                 return false;
             }
         }
+
+        csv.setText(i, 2, m.description); // description
     }
 
     QString error;
