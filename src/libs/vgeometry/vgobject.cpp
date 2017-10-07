@@ -457,19 +457,31 @@ bool VGObject::IsPointOnLineSegment(const QPointF &t, const QPointF &p1, const Q
     // The test point must lie inside the bounding box spanned by the two line points.
     if (not ( (p1.x() <= t.x() && t.x() <= p2.x()) || (p2.x() <= t.x() && t.x() <= p1.x()) ))
     {
-        if (not (qAbs(p1.x() - t.x()) <= accuracyPointOnLine) && not (qAbs(p2.x() - t.x()) <= accuracyPointOnLine))
+        if (VFuzzyComparePossibleNulls(p1.x(), p2.x()))
+        {// vertical line
+            if (not (qAbs(p1.x() - t.x()) <= accuracyPointOnLine))
+            {
+                return false;// test point not in x-range
+            }
+        }
+        else
         {
-            // test point not in x-range
-            return false;
+            return false;// test point not in x-range
         }
     }
 
     if (not ( (p1.y() <= t.y() && t.y() <= p2.y()) || (p2.y() <= t.y() && t.y() <= p1.y()) ))
     {
-        if (not (qAbs(p1.y() - t.y()) <= accuracyPointOnLine) && not (qAbs(p2.y() - t.y()) <= accuracyPointOnLine))
+        if (VFuzzyComparePossibleNulls(p1.y(), p2.y()))
+        {// horizontal line
+            if (not (qAbs(p1.y() - t.y()) <= accuracyPointOnLine))
+            {
+                return false;// test point not in y-range
+            }
+        }
+        else
         {
-            // test point not in y-range
-            return false;
+            return false;// test point not in y-range
         }
     }
 
