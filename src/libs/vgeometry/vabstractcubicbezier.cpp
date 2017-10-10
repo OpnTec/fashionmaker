@@ -231,7 +231,7 @@ void VAbstractCubicBezier::PointBezier_r(qreal x1, qreal y1, qreal x2, qreal y2,
     const double m_angle_tolerance = 0.0;
     enum curve_recursion_limit_e { curve_recursion_limit = 32 };
     const double m_cusp_limit = 0.0;
-    double m_approximation_scale = 1.0;
+    double m_approximation_scale = 10.0;
     double m_distance_tolerance_square;
 
     m_distance_tolerance_square = 0.5 / m_approximation_scale;
