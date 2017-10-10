@@ -39,6 +39,7 @@
 #include <QProcess>
 #include <QtDebug>
 #include <QRegularExpression>
+#include <QtDebug>
 
 const QString baseFilenameRegExp = QStringLiteral("^[\\p{L}\\p{Nd}\\-. _]+$");
 
@@ -47,7 +48,7 @@ bool DialogSaveLayout::tested  = false;
 
 //---------------------------------------------------------------------------------------------------------------------
 DialogSaveLayout::DialogSaveLayout(int count, Draw mode, const QString &fileName, QWidget *parent)
-    : QDialog(parent),
+    :  VAbstractLayoutDialog(parent),
       ui(new Ui::DialogSaveLAyout),
       count(count),
       isInitialized(false),
@@ -133,8 +134,44 @@ DialogSaveLayout::DialogSaveLayout(int count, Draw mode, const QString &fileName
     connect(ui->lineEditPath, &QLineEdit::textChanged, this, &DialogSaveLayout::PathChanged);
 
     ui->lineEditPath->setText(qApp->ValentinaSettings()->GetPathLayout());
+
+    InitTemplates(ui->comboBoxTemplates);
+
+    ReadSettings();
+
+    // connect for the template drop down box of the tiled pds
+    connect(ui->comboBoxTemplates, static_cast<void (QComboBox::*)(int)>(&QComboBox::currentIndexChanged),
+            this, &DialogSaveLayout::WriteSettings);
+
+    // connects for the margins of the tiled pdf
+    connect(ui->doubleSpinBoxLeftField, static_cast<void (QDoubleSpinBox::*)(double)>(&QDoubleSpinBox::valueChanged),
+            this, &DialogSaveLayout::WriteSettings);
+    connect(ui->doubleSpinBoxTopField, static_cast<void (QDoubleSpinBox::*)(double)>(&QDoubleSpinBox::valueChanged),
+            this, &DialogSaveLayout::WriteSettings);
+    connect(ui->doubleSpinBoxRightField, static_cast<void (QDoubleSpinBox::*)(double)>(&QDoubleSpinBox::valueChanged),
+            this, &DialogSaveLayout::WriteSettings);
+    connect(ui->doubleSpinBoxBottomField, static_cast<void (QDoubleSpinBox::*)(double)>(&QDoubleSpinBox::valueChanged),
+            this, &DialogSaveLayout::WriteSettings);
+
+    // connects for the orientation buttons for the tiled pdf
+    connect(ui->toolButtonPortrait, &QToolButton::toggled, this, &DialogSaveLayout::WriteSettings);
+    connect(ui->toolButtonLandscape, &QToolButton::toggled, this, &DialogSaveLayout::WriteSettings);
+
+
     ShowExample();//Show example for current format.
 }
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogSaveLayout::InitTemplates(QComboBox *comboBoxTemplates)
+{
+    SCASSERT(comboBoxTemplates != nullptr)
+    VAbstractLayoutDialog::InitTemplates(comboBoxTemplates);
+
+    // remove the custom format,
+    comboBoxTemplates->removeItem(comboBoxTemplates->findData(static_cast<int>(PaperSizeTemplate::Custom)));
+}
+
+
 //---------------------------------------------------------------------------------------------------------------------
 
 void DialogSaveLayout::SelectFormat(LayoutExportFormats format)
@@ -513,6 +550,10 @@ void DialogSaveLayout::ShowExample()
     const LayoutExportFormats currentFormat = Format();
     ui->labelExample->setText(tr("Example:") + FileName() + QLatin1String("1") + ExportFromatSuffix(currentFormat));
 
+    ui->checkBoxBinaryDXF->setEnabled(false);
+    ui->groupBoxPaperFormat->setEnabled(false);
+    ui->groupBoxMargins->setEnabled(false);
+
     switch(currentFormat)
     {
         case LayoutExportFormats::DXF_AC1006_Flat:
@@ -544,15 +585,17 @@ void DialogSaveLayout::ShowExample()
         case LayoutExportFormats::DXF_AC1027_ASTM:
             ui->checkBoxBinaryDXF->setEnabled(true);
             break;
+        case LayoutExportFormats::PDFTiled:
+            ui->groupBoxPaperFormat->setEnabled(true);
+            ui->groupBoxMargins->setEnabled(true);
+            break;
         case LayoutExportFormats::SVG:
         case LayoutExportFormats::PDF:
-        case LayoutExportFormats::PDFTiled:
         case LayoutExportFormats::PNG:
         case LayoutExportFormats::OBJ:
         case LayoutExportFormats::PS:
         case LayoutExportFormats::EPS:
         default:
-            ui->checkBoxBinaryDXF->setEnabled(false);
             break;
     }
 }
@@ -691,3 +734,87 @@ void DialogSaveLayout::RemoveFormatFromList(LayoutExportFormats format)
         ui->comboBoxFormat->removeItem(index);
     }
 }
+
+//---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief ReadSettings reads the values of the variables needed for the save layout dialog, for instance
+ * the margins, teamplte and orientation of tiled pdf. Then sets the corresponding
+ * elements of the dialog to these values.
+ */
+void DialogSaveLayout::ReadSettings()
+{
+    VSettings *settings = qApp->ValentinaSettings();
+    const Unit unit = qApp->patternUnit();
+
+    // read Margins top, right, bottom, left
+    const QMarginsF margins = settings->GetTiledPDFMargins(unit);
+
+    ui->doubleSpinBoxLeftField->setValue(margins.left());
+    ui->doubleSpinBoxTopField->setValue(margins.top());
+    ui->doubleSpinBoxRightField->setValue(margins.right());
+    ui->doubleSpinBoxBottomField->setValue(margins.bottom());
+
+    // read Template
+    const QSizeF size = QSizeF(settings->GetTiledPDFPaperWidth(Unit::Mm), settings->GetTiledPDFPaperHeight(Unit::Mm));
+
+    const int max = static_cast<int>(PaperSizeTemplate::Custom);
+    for (int i=0; i < max; ++i)
+    {
+
+        const QSizeF tmplSize = GetTemplateSize(static_cast<PaperSizeTemplate>(i), Unit::Mm);
+        if (size == tmplSize)
+        {
+            ui->comboBoxTemplates->setCurrentIndex(i);
+            break;
+        }
+    }
+
+    // read Orientation
+    if(settings->GetTiledPDFOrientation() == PageOrientation::Portrait)
+    {
+        ui->toolButtonPortrait->setChecked(true);
+    }
+    else
+    {
+        ui->toolButtonLandscape->setChecked(true);
+    }
+
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief WriteSettings writes the values of some variables (like the margins, template and orientation of tiled pdf)
+ * of the save layout dialog into the settings.
+ */
+void DialogSaveLayout::WriteSettings() const
+{
+    VSettings *settings = qApp->ValentinaSettings();
+    const Unit unit = qApp->patternUnit();
+
+    // write Margins top, right, bottom, left
+    QMarginsF margins = QMarginsF(
+        ui->doubleSpinBoxLeftField->value(),
+        ui->doubleSpinBoxTopField->value(),
+        ui->doubleSpinBoxRightField->value(),
+        ui->doubleSpinBoxBottomField->value()
+    );
+    settings->SetTiledPDFMargins(margins,unit);
+
+    // write Template
+    const PaperSizeTemplate temp = static_cast<PaperSizeTemplate>(ui->comboBoxTemplates->currentData().toInt());
+    const QSizeF size = GetTemplateSize(temp, Unit::Mm);
+
+    settings->SetTiledPDFPaperHeight(size.height(), Unit::Mm);
+    settings->SetTiledPDFPaperWidth(size.width(), Unit::Mm);
+
+    // write Orientation
+    if(ui->toolButtonPortrait->isChecked())
+    {
+        settings->SetTiledPDFOrientation(PageOrientation::Portrait);
+    }
+    else
+    {
+        settings->SetTiledPDFOrientation(PageOrientation::Landscape);
+    }
+}
+

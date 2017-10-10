@@ -343,6 +343,27 @@ qreal UnitConvertor(qreal value, const Unit &from, const Unit &to)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief UnitConvertor Converts the values of the given margin from given unit to the new unit.
+ * returns a new instand of QMarginsF.
+ *
+ * @param margin
+ * @param from
+ * @param to
+ * @return
+ */
+QMarginsF UnitConvertor(const QMarginsF &margins, const Unit &from, const Unit &to)
+{
+    const qreal left = UnitConvertor(margins.left(), from, to);
+    const qreal top = UnitConvertor(margins.top(), from, to);
+    const qreal right = UnitConvertor(margins.right(), from, to);
+    const qreal bottom = UnitConvertor(margins.bottom(), from, to);
+
+    return QMarginsF(left, top, right, bottom);
+}
+
+
+//---------------------------------------------------------------------------------------------------------------------
 QStringList SupportedLocales()
 {
     const QStringList locales = QStringList() << QStringLiteral("ru_RU")

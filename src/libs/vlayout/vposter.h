@@ -33,6 +33,8 @@
 #include <QRect>
 #include <QtGlobal>
 
+#include "../vmisc/def.h"
+
 class QGraphicsItem;
 class QPrinter;
 template <class T> class QVector;
@@ -62,17 +64,21 @@ class VPoster
 public:
     explicit VPoster(const QPrinter *printer);
 
-    QVector<PosterData> Calc(const QRect &imageRect, int page) const;
+    QVector<PosterData> Calc(const QRect &imageRect, int page, PageOrientation orientation) const;
 
     QVector<QGraphicsItem *> Borders(QGraphicsItem *parent, const PosterData &img, int sheets) const;
 private:
     const QPrinter *printer;
+    /**
+     * @brief allowance is the width of the strip that holds the tiled
+     * grid information and that is used for the gluing.
+     */
     quint32 allowance;
 
-    int CountRows(int height) const;
-    int CountColumns(int width) const;
+    int CountRows(int height, PageOrientation orientation) const;
+    int CountColumns(int width, PageOrientation orientation) const;
 
-    PosterData Cut(int i, int j, const QRect &imageRect) const;
+    PosterData Cut(int i, int j, const QRect &imageRect, PageOrientation orientation) const;
 
     QRect PageRect() const;
 

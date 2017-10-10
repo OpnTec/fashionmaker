@@ -61,7 +61,7 @@ void TST_VPoster::BigPoster()
 
     const QRect image(0, 0, 2622, 3178); // Little bit bigger than A1
     VPoster posterazor(&printer);
-    const QVector<PosterData> poster = posterazor.Calc(image, 0);
+    const QVector<PosterData> poster = posterazor.Calc(image, 0, PageOrientation::Portrait);
 
     QCOMPARE(poster.size(), 12);
 
@@ -81,7 +81,7 @@ void TST_VPoster::SmallPoster()
 
     const QRect image(0, 0, 700, 1000); // Little bit less than A4
     VPoster posterazor(&printer);
-    const QVector<PosterData> poster = posterazor.Calc(image, 0);
+    const QVector<PosterData> poster = posterazor.Calc(image, 0, PageOrientation::Portrait);
 
     QCOMPARE(poster.size(), 1);
 

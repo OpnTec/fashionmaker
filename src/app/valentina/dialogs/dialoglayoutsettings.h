@@ -30,7 +30,7 @@
 #define DIALOGLAYOUTSETTINGS_H
 
 #include <QCloseEvent>
-#include <QDialog>
+#include "vabstractlayoutdialog.h"
 
 #include "../vlayout/vbank.h"
 #include "../ifc/ifcdef.h"
@@ -48,23 +48,10 @@ namespace Ui
 
 class VLayoutGenerator;
 
-class DialogLayoutSettings : public QDialog
+class DialogLayoutSettings : public VAbstractLayoutDialog
 {
     Q_OBJECT
 public:
-    enum class PaperSizeTemplate : char { A0 = 0,
-                                          A1,
-                                          A2,
-                                          A3,
-                                          A4,
-                                          Letter,
-                                          Legal,
-                                          Roll24in = 7, // Be carefull when change order roll type
-                                          Roll30in,     // Used also for showing icon
-                                          Roll36in,
-                                          Roll42in,
-                                          Roll44in = 11,
-                                          Custom = 12};
     explicit DialogLayoutSettings(VLayoutGenerator *generator, QWidget *parent = nullptr, bool disableSettings = false);
     virtual ~DialogLayoutSettings();
 
@@ -125,6 +112,8 @@ public:
     static QString MakeGroupsHelp();
 protected:
     virtual void showEvent(QShowEvent *event) Q_DECL_OVERRIDE;
+    QSizeF GetTemplateSize(const PaperSizeTemplate &tmpl, const Unit &unit) const;
+
 public slots:
     void DialogAccepted();
 private slots:
@@ -155,11 +144,9 @@ private:
 
     void InitPaperUnits();
     void InitLayoutUnits();
-    void InitTemplates();
     void InitPrinter();
     QSizeF Template();
-    QSizeF TemplateSize(const PaperSizeTemplate &tmpl) const;
-    QSizeF RoundTemplateSize(qreal width, qreal height) const;
+
     QMarginsF MinPrinterFields() const;
     QMarginsF GetDefPrinterFields() const;
 

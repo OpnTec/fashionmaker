@@ -38,25 +38,12 @@
 #include <QPushButton>
 #include <QPrinterInfo>
 
-//must be the same order as PaperSizeTemplate constants
-const DialogLayoutSettings::FormatsVector DialogLayoutSettings::pageFormatNames =
-        DialogLayoutSettings::FormatsVector () << QLatin1String("A0")
-                                               << QLatin1String("A1")
-                                               << QLatin1String("A2")
-                                               << QLatin1String("A3")
-                                               << QLatin1String("A4")
-                                               << QApplication::translate("DialogLayoutSettings", "Letter")
-                                               << QApplication::translate("DialogLayoutSettings", "Legal")
-                                               << QApplication::translate("DialogLayoutSettings", "Roll 24in")
-                                               << QApplication::translate("DialogLayoutSettings", "Roll 30in")
-                                               << QApplication::translate("DialogLayoutSettings", "Roll 36in")
-                                               << QApplication::translate("DialogLayoutSettings", "Roll 42in")
-                                               << QApplication::translate("DialogLayoutSettings", "Roll 44in")
-                                               << QApplication::translate("DialogLayoutSettings", "Custom");
-
 //---------------------------------------------------------------------------------------------------------------------
 DialogLayoutSettings::DialogLayoutSettings(VLayoutGenerator *generator, QWidget *parent, bool disableSettings)
-    : QDialog(parent), disableSettings(disableSettings), ui(new Ui::DialogLayoutSettings), oldPaperUnit(Unit::Mm),
+    : VAbstractLayoutDialog(parent), 
+      disableSettings(disableSettings), 
+      ui(new Ui::DialogLayoutSettings), 
+      oldPaperUnit(Unit::Mm),
       oldLayoutUnit(Unit::Mm), generator(generator), isInitialized(false)
 {
     ui->setupUi(this);
@@ -67,7 +54,7 @@ DialogLayoutSettings::DialogLayoutSettings(VLayoutGenerator *generator, QWidget 
     //even cleanse lists before adding
     InitPaperUnits();
     InitLayoutUnits();
-    InitTemplates();
+    InitTemplates(ui->comboBoxTemplates);
     MinimumPaperSize();
     MinimumLayoutSize();
     InitPrinter();
@@ -107,7 +94,7 @@ DialogLayoutSettings::DialogLayoutSettings(VLayoutGenerator *generator, QWidget 
 
     connect(ui->checkBoxIgnoreFileds, &QCheckBox::stateChanged, this, &DialogLayoutSettings::IgnoreAllFields);
 
-    connect(ui->toolButtonPortrate, &QToolButton::toggled, this, &DialogLayoutSettings::Swap);
+    connect(ui->toolButtonPortrait, &QToolButton::toggled, this, &DialogLayoutSettings::Swap);
     connect(ui->toolButtonLandscape, &QToolButton::toggled, this, &DialogLayoutSettings::Swap);
     connect(ui->comboBoxLayoutUnit,  static_cast<void (QComboBox::*)(int)>(&QComboBox::currentIndexChanged),
             this, &DialogLayoutSettings::ConvertLayoutSize);
@@ -368,10 +355,12 @@ void DialogLayoutSettings::FindTemplate()
     const qreal height = ui->doubleSpinBoxPaperHeight->value();
     QSizeF size(width, height);
 
+    const Unit paperUnit = PaperUnit();
+
     const int max = static_cast<int>(PaperSizeTemplate::Custom);
     for (int i=0; i < max; ++i)
     {
-        const QSizeF tmplSize = TemplateSize(static_cast<PaperSizeTemplate>(i));
+        const QSizeF tmplSize = GetTemplateSize(static_cast<PaperSizeTemplate>(i), paperUnit);
         if (size == tmplSize)
         {
             ui->comboBoxTemplates->blockSignals(true);
@@ -522,9 +511,9 @@ void DialogLayoutSettings::PaperSizeChanged()
 {
     if (ui->doubleSpinBoxPaperHeight->value() > ui->doubleSpinBoxPaperWidth->value())
     {
-        ui->toolButtonPortrate->blockSignals(true);
-        ui->toolButtonPortrate->setChecked(true);
-        ui->toolButtonPortrate->blockSignals(false);
+        ui->toolButtonPortrait->blockSignals(true);
+        ui->toolButtonPortrait->setChecked(true);
+        ui->toolButtonPortrait->blockSignals(false);
     }
     else
     {
@@ -602,7 +591,7 @@ void DialogLayoutSettings::DialogAccepted()
             {
                 QMessageBox::StandardButton answer;
                 answer = QMessageBox::question(this, tr("Wrong fields."),
-                                               tr("Fields go beyond printing. \n\nApply settings anyway?"),
+                                               tr("Margins go beyond printing. \n\nApply settings anyway?"),
                                                QMessageBox::Yes|QMessageBox::No, QMessageBox::No);
                 if (answer == QMessageBox::No)
                 {
@@ -748,31 +737,6 @@ void DialogLayoutSettings::InitLayoutUnits()
     }
 }
 
-//---------------------------------------------------------------------------------------------------------------------
-void DialogLayoutSettings::InitTemplates()
-{
-    const QIcon icoPaper("://icon/16x16/template.png");
-    const QIcon icoRoll("://icon/16x16/roll.png");
-    const QString pdi = QString("(%1ppi)").arg(PrintDPI);
-
-    auto cntr = static_cast<VIndexType>(PaperSizeTemplate::A0);
-    foreach(const auto& v, pageFormatNames)
-    {
-        if (cntr <= static_cast<int>(PaperSizeTemplate::Legal))
-        {
-            ui->comboBoxTemplates->addItem(icoPaper, v+" "+pdi, QVariant(cntr++));
-        }
-        else if (cntr <= static_cast<int>(PaperSizeTemplate::Roll44in))
-        {
-            ui->comboBoxTemplates->addItem(icoRoll, v+" "+pdi, QVariant(cntr++));
-        }
-        else
-        {
-            ui->comboBoxTemplates->addItem(v+" "+pdi, QVariant(cntr++));
-        }
-    }
-    ui->comboBoxTemplates->setCurrentIndex(-1);
-}
 
 //---------------------------------------------------------------------------------------------------------------------
 void DialogLayoutSettings::InitPrinter()
@@ -825,13 +789,13 @@ QString DialogLayoutSettings::MakeHelpTemplateList()
     QString out = "\n";
 
     auto cntr = static_cast<VIndexType>(PaperSizeTemplate::A0);
-    for (int i = 0; i < pageFormatNames.size(); ++i)
+    for (int i = 0; i < VAbstractLayoutDialog::pageFormatNames.size(); ++i)
     {
         if (cntr <= static_cast<int>(PaperSizeTemplate::Roll44in))// Don't include custom template
         {
-            out += "\t* "+pageFormatNames.at(i)+" = "+ QString::number(cntr++);
+            out += "\t* "+VAbstractLayoutDialog::pageFormatNames.at(i)+" = "+ QString::number(cntr++);
 
-            if (i < pageFormatNames.size() - 1)
+            if (i < VAbstractLayoutDialog::pageFormatNames.size() - 1)
             {
                out += ",\n";
             }
@@ -850,6 +814,8 @@ QSizeF DialogLayoutSettings::Template()
     PaperSizeTemplate temp;
     temp = static_cast<PaperSizeTemplate>(ui->comboBoxTemplates->currentData().toInt());
 
+    const Unit paperUnit = PaperUnit();
+
     switch (temp)
     {
         case PaperSizeTemplate::A0:
@@ -859,7 +825,7 @@ QSizeF DialogLayoutSettings::Template()
         case PaperSizeTemplate::A4:
         case PaperSizeTemplate::Letter:
             SetAdditionalOptions(false);
-            return TemplateSize(temp);
+            return GetTemplateSize(temp, paperUnit);
         case PaperSizeTemplate::Legal:
         case PaperSizeTemplate::Roll24in:
         case PaperSizeTemplate::Roll30in:
@@ -867,9 +833,9 @@ QSizeF DialogLayoutSettings::Template()
         case PaperSizeTemplate::Roll42in:
         case PaperSizeTemplate::Roll44in:
             SetAdditionalOptions(true);
-            return TemplateSize(temp);
+            return GetTemplateSize(temp, paperUnit);
         case PaperSizeTemplate::Custom:
-            return TemplateSize(temp);
+            return GetTemplateSize(temp, paperUnit);
         default:
             break;
     }
@@ -877,96 +843,24 @@ QSizeF DialogLayoutSettings::Template()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QSizeF DialogLayoutSettings::TemplateSize(const PaperSizeTemplate &tmpl) const
+QSizeF DialogLayoutSettings::GetTemplateSize(const PaperSizeTemplate &tmpl, const Unit &unit) const
 {
-    const Unit paperUnit = PaperUnit();
     qreal width = 0;
     qreal height = 0;
 
     switch (tmpl)
     {
-        case PaperSizeTemplate::A0:
-            width = UnitConvertor(841, Unit::Mm, paperUnit);
-            height = UnitConvertor(1189, Unit::Mm, paperUnit);
-            return RoundTemplateSize(width, height);
-        case PaperSizeTemplate::A1:
-            width = UnitConvertor(594, Unit::Mm, paperUnit);
-            height = UnitConvertor(841, Unit::Mm, paperUnit);
-            return RoundTemplateSize(width, height);
-        case PaperSizeTemplate::A2:
-            width = UnitConvertor(420, Unit::Mm, paperUnit);
-            height = UnitConvertor(594, Unit::Mm, paperUnit);
-            return RoundTemplateSize(width, height);
-        case PaperSizeTemplate::A3:
-            width = UnitConvertor(297, Unit::Mm, paperUnit);
-            height = UnitConvertor(420, Unit::Mm, paperUnit);
-            return RoundTemplateSize(width, height);
-        case PaperSizeTemplate::A4:
-            width = UnitConvertor(210, Unit::Mm, paperUnit);
-            height = UnitConvertor(297, Unit::Mm, paperUnit);
-            return RoundTemplateSize(width, height);
-        case PaperSizeTemplate::Letter:
-            width = UnitConvertor(8.5, Unit::Inch, paperUnit);
-            height = UnitConvertor(11, Unit::Inch, paperUnit);
-            return RoundTemplateSize(width, height);
-        case PaperSizeTemplate::Legal:
-            width = UnitConvertor(8.5, Unit::Inch, paperUnit);
-            height = UnitConvertor(14, Unit::Inch, paperUnit);
-            return RoundTemplateSize(width, height);
-        case PaperSizeTemplate::Roll24in:
-            width = UnitConvertor(24, Unit::Inch, paperUnit);
-            height = UnitConvertor(QIMAGE_MAX, Unit::Px, paperUnit);
-            return RoundTemplateSize(width, height);
-        case PaperSizeTemplate::Roll30in:
-            width = UnitConvertor(30, Unit::Inch, paperUnit);
-            height = UnitConvertor(QIMAGE_MAX, Unit::Px, paperUnit);
-            return RoundTemplateSize(width, height);
-        case PaperSizeTemplate::Roll36in:
-            width = UnitConvertor(36, Unit::Inch, paperUnit);
-            height = UnitConvertor(QIMAGE_MAX, Unit::Px, paperUnit);
-            return RoundTemplateSize(width, height);
-        case PaperSizeTemplate::Roll42in:
-            width = UnitConvertor(42, Unit::Inch, paperUnit);
-            height = UnitConvertor(QIMAGE_MAX, Unit::Px, paperUnit);
-            return RoundTemplateSize(width, height);
-        case PaperSizeTemplate::Roll44in:
-            width = UnitConvertor(44, Unit::Inch, paperUnit);
-            height = UnitConvertor(QIMAGE_MAX, Unit::Px, paperUnit);
-            return RoundTemplateSize(width, height);
         case PaperSizeTemplate::Custom:
             width = ui->doubleSpinBoxPaperWidth->value();
             height = ui->doubleSpinBoxPaperHeight->value();
-            return RoundTemplateSize(width, height);
+            return RoundTemplateSize(width, height, unit);
         default:
-            break;
+            return VAbstractLayoutDialog::GetTemplateSize(tmpl, unit);
     }
-    return QSizeF();
 }
 
-//---------------------------------------------------------------------------------------------------------------------
-QSizeF DialogLayoutSettings::RoundTemplateSize(qreal width, qreal height) const
-{
-    qreal w = 0;
-    qreal h = 0;
 
-    switch (PaperUnit())
-    {
-        case Unit::Cm:
-        case Unit::Mm:
-        case Unit::Px:
-            w = qRound(width * 100.0) / 100.0;
-            h = qRound(height * 100.0) / 100.0;
-            return QSizeF(w, h);
-        case Unit::Inch:
-            w = qRound(width * 100000.0) / 100000.0;
-            h = qRound(height * 100000.0) / 100000.0;
-            return QSizeF(w, h);
-        default:
-            break;
-    }
 
-    return QSizeF(width, height);
-}
 
 //---------------------------------------------------------------------------------------------------------------------
 QMarginsF DialogLayoutSettings::MinPrinterFields() const

@@ -75,7 +75,7 @@
             <item row="2" column="0">
              <layout class="QHBoxLayout" name="horizontalLayout">
               <item>
-               <widget class="QToolButton" name="toolButtonPortrate">
+               <widget class="QToolButton" name="toolButtonPortrait">
                 <property name="text">
                  <string notr="true">...</string>
                 </property>

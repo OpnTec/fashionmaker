@@ -151,7 +151,7 @@ private:
 
     void SetPrinterSettings(QPrinter *printer, const PrintType &printType);
     bool IsLayoutGrayscale() const;
-    QPrinter::PaperSize FindTemplate(const QSizeF &size) const;
+    QPrinter::PaperSize FindQPrinterPageSize(const QSizeF &size) const;
 
     bool isPagesUniform() const;
     bool IsPagesFit(const QSizeF &printPaper) const;

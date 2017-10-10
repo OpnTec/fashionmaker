@@ -92,7 +92,8 @@ void DialogLayoutProgress::Error(const LayoutErrors &state)
             qCritical() << tr("Couldn't prepare data for creation layout");
             break;
         case LayoutErrors::EmptyPaperError:
-            qCritical() << tr("Several workpieces left not arranged, but none of them match for paper");
+            qCritical() << tr("One or more pattern pieces are bigger than the paper format you selected. Please, "
+                              "select a bigger paper format.");
             break;
         case LayoutErrors::ProcessStoped:
         default:

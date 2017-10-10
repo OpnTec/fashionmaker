@@ -20,7 +20,8 @@ HEADERS += \
     $$PWD/dialogdatetimeformats.h \
     $$PWD/dialogknownmaterials.h \
     $$PWD/dialogpatternmaterials.h \
-    $$PWD/dialogfinalmeasurements.h
+    $$PWD/dialogfinalmeasurements.h \
+    $$PWD/vabstractlayoutdialog.h
 
 SOURCES += \
     $$PWD/dialogincrements.cpp \
@@ -40,7 +41,8 @@ SOURCES += \
     $$PWD/dialogdatetimeformats.cpp \
     $$PWD/dialogknownmaterials.cpp \
     $$PWD/dialogpatternmaterials.cpp \
-    $$PWD/dialogfinalmeasurements.cpp
+    $$PWD/dialogfinalmeasurements.cpp \
+    $$PWD/vabstractlayoutdialog.cpp
 
 FORMS += \
     $$PWD/dialogincrements.ui \
