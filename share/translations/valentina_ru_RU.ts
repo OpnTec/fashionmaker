@@ -2892,7 +2892,7 @@
     </message>
     <message>
         <source>Several workpieces left not arranged, but none of them match for paper</source>
-        <translation>Несколько заготовок остались неуложенными, но ни одна из них не подходит под формат листа</translation>
+        <translation type="vanished">Несколько заготовок остались неуложенными, но ни одна из них не подходит под формат листа</translation>
     </message>
     <message>
         <source>Create a Layout</source>
@@ -2909,6 +2909,10 @@
     <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Finding best position for workpieces. Please, wait.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Поиск лучшей позиции для детали. Пожалуйста, подождите.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+    </message>
+    <message>
+        <source>One or more pattern pieces are bigger than the paper format you selected. Please, select a bigger paper format.</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -3003,31 +3007,31 @@
     </message>
     <message>
         <source>Letter</source>
-        <translation>Буква/символ</translation>
+        <translation type="vanished">Буква/символ</translation>
     </message>
     <message>
         <source>Legal</source>
-        <translation>Legal</translation>
+        <translation type="vanished">Legal</translation>
     </message>
     <message>
         <source>Roll 24in</source>
-        <translation>Рулон 24 дюйма</translation>
+        <translation type="vanished">Рулон 24 дюйма</translation>
     </message>
     <message>
         <source>Roll 30in</source>
-        <translation>Рулон 30 дюймов</translation>
+        <translation type="vanished">Рулон 30 дюймов</translation>
     </message>
     <message>
         <source>Roll 36in</source>
-        <translation>Рулон 36 дюймов</translation>
+        <translation type="vanished">Рулон 36 дюймов</translation>
     </message>
     <message>
         <source>Roll 42in</source>
-        <translation>Рулон 42 дюйма</translation>
+        <translation type="vanished">Рулон 42 дюйма</translation>
     </message>
     <message>
         <source>Roll 44in</source>
-        <translation>Рулон 44 дюйма</translation>
+        <translation type="vanished">Рулон 44 дюйма</translation>
     </message>
     <message>
         <source>
@@ -3071,7 +3075,7 @@
     </message>
     <message>
         <source>Custom</source>
-        <translation>Пользовательский</translation>
+        <translation type="vanished">Пользовательский</translation>
     </message>
     <message>
         <source>Wrong fields.</source>
@@ -3081,7 +3085,7 @@
         <source>Fields go beyond printing. 
 
 Apply settings anyway?</source>
-        <translation>Поля выходят за границы печати.
+        <translation type="vanished">Поля выходят за границы печати.
 
 Всеравно применить настройки?</translation>
     </message>
@@ -3158,6 +3162,12 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Ignore margins</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Margins go beyond printing. 
+
+Apply settings anyway?</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -5017,6 +5027,42 @@ Apply settings anyway?</source>
     <message>
         <source>Text as paths</source>
         <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Margins</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Right:</source>
+        <translation type="unfinished">Правое:</translation>
+    </message>
+    <message>
+        <source>Left:</source>
+        <translation type="unfinished">Левое:</translation>
+    </message>
+    <message>
+        <source>Top:</source>
+        <translation type="unfinished">Верхнее:</translation>
+    </message>
+    <message>
+        <source>Bottom:</source>
+        <translation type="unfinished">Нижнее:</translation>
+    </message>
+    <message>
+        <source>Paper format</source>
+        <translation type="unfinished">Формат листа</translation>
+    </message>
+    <message>
+        <source>Templates: </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Orientation: </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>...</source>
+        <translation type="obsolete">...</translation>
     </message>
     <message>
         <source>Browse…</source>
@@ -7508,6 +7554,22 @@ Do you want to save your changes?</source>
         <source>Destination path is empty.</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Next pattern piece</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Ctrl+PgDown</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Previous pattern piece</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Ctrl+PgUp</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>MainWindowsNoGUI</name>
@@ -7565,7 +7627,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Several workpieces left not arranged, but none of them match for paper</source>
-        <translation>Несколько заготовок остались неуложенными, но ни одна из них не подходит под формат листа</translation>
+        <translation type="vanished">Несколько заготовок остались неуложенными, но ни одна из них не подходит под формат листа</translation>
     </message>
     <message>
         <source>Can&apos;t open printer %1</source>
@@ -7630,6 +7692,14 @@ Do you want to save your changes?</source>
     <message>
         <source>File error %1.</source>
         <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>One or more pattern pieces are bigger than the paper format you selected. Please, select a bigger paper format.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Description</source>
+        <translation type="unfinished">Описание</translation>
     </message>
 </context>
 <context>
@@ -7884,6 +7954,14 @@ Do you want to save your changes?</source>
     <message>
         <source>Inches</source>
         <translation>Дюймы</translation>
+    </message>
+    <message>
+        <source>Update a pattern only after a curve release</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Free curve mode</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -9809,6 +9887,41 @@ Do you want to save your changes?</source>
     <message>
         <source>Can&apos;t cut this spline</source>
         <translation>Невозможно вырезать кривую</translation>
+    </message>
+</context>
+<context>
+    <name>VAbstractLayoutDialog</name>
+    <message>
+        <source>Letter</source>
+        <translation type="unfinished">Буква/символ</translation>
+    </message>
+    <message>
+        <source>Legal</source>
+        <translation type="unfinished">Legal</translation>
+    </message>
+    <message>
+        <source>Roll 24in</source>
+        <translation type="unfinished">Рулон 24 дюйма</translation>
+    </message>
+    <message>
+        <source>Roll 30in</source>
+        <translation type="unfinished">Рулон 30 дюймов</translation>
+    </message>
+    <message>
+        <source>Roll 36in</source>
+        <translation type="unfinished">Рулон 36 дюймов</translation>
+    </message>
+    <message>
+        <source>Roll 42in</source>
+        <translation type="unfinished">Рулон 42 дюйма</translation>
+    </message>
+    <message>
+        <source>Roll 44in</source>
+        <translation type="unfinished">Рулон 44 дюйма</translation>
+    </message>
+    <message>
+        <source>Custom</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

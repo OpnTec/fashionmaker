@@ -2808,7 +2808,7 @@
     </message>
     <message>
         <source>Several workpieces left not arranged, but none of them match for paper</source>
-        <translation>Molti pezzi non sono stati disposti, nessuno corrisponde alla dimensione della carta</translation>
+        <translation type="vanished">Molti pezzi non sono stati disposti, nessuno corrisponde alla dimensione della carta</translation>
     </message>
     <message>
         <source>Create a Layout</source>
@@ -2824,6 +2824,10 @@
     </message>
     <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Finding best position for workpieces. Please, wait.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>One or more pattern pieces are bigger than the paper format you selected. Please, select a bigger paper format.</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -2919,31 +2923,31 @@
     </message>
     <message>
         <source>Letter</source>
-        <translation>Lettera</translation>
+        <translation type="vanished">Lettera</translation>
     </message>
     <message>
         <source>Legal</source>
-        <translation>Legale</translation>
+        <translation type="vanished">Legale</translation>
     </message>
     <message>
         <source>Roll 24in</source>
-        <translation>Rotolo 24pollici</translation>
+        <translation type="vanished">Rotolo 24pollici</translation>
     </message>
     <message>
         <source>Roll 30in</source>
-        <translation>Rotolo 30pollici</translation>
+        <translation type="vanished">Rotolo 30pollici</translation>
     </message>
     <message>
         <source>Roll 36in</source>
-        <translation>Rotolo 36pollici</translation>
+        <translation type="vanished">Rotolo 36pollici</translation>
     </message>
     <message>
         <source>Roll 42in</source>
-        <translation>Rotolo 42pollici</translation>
+        <translation type="vanished">Rotolo 42pollici</translation>
     </message>
     <message>
         <source>Roll 44in</source>
-        <translation>Rotolo 44pollici</translation>
+        <translation type="vanished">Rotolo 44pollici</translation>
     </message>
     <message>
         <source>
@@ -2987,7 +2991,7 @@
     </message>
     <message>
         <source>Custom</source>
-        <translation>Personalizzato</translation>
+        <translation type="vanished">Personalizzato</translation>
     </message>
     <message>
         <source>Wrong fields.</source>
@@ -2997,7 +3001,7 @@
         <source>Fields go beyond printing. 
 
 Apply settings anyway?</source>
-        <translation>I campi vanno al di là della stampa. 
+        <translation type="vanished">I campi vanno al di là della stampa. 
 
 Applicare le impostazioni comunque?</translation>
     </message>
@@ -3074,6 +3078,12 @@ Applicare le impostazioni comunque?</translation>
     </message>
     <message>
         <source>Ignore margins</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Margins go beyond printing. 
+
+Apply settings anyway?</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -4917,6 +4927,42 @@ Applicare le impostazioni comunque?</translation>
     <message>
         <source>Text as paths</source>
         <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Margins</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Right:</source>
+        <translation type="unfinished">Destra:</translation>
+    </message>
+    <message>
+        <source>Left:</source>
+        <translation type="unfinished">Sinistra:</translation>
+    </message>
+    <message>
+        <source>Top:</source>
+        <translation type="unfinished">Top:</translation>
+    </message>
+    <message>
+        <source>Bottom:</source>
+        <translation type="unfinished">Fondo:</translation>
+    </message>
+    <message>
+        <source>Paper format</source>
+        <translation type="unfinished">Formato carta</translation>
+    </message>
+    <message>
+        <source>Templates: </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Orientation: </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>...</source>
+        <translation type="obsolete">...</translation>
     </message>
     <message>
         <source>Browse…</source>
@@ -7408,6 +7454,22 @@ Vuoi salvare i cambiamenti?</translation>
         <source>Destination path is empty.</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Next pattern piece</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Ctrl+PgDown</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Previous pattern piece</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Ctrl+PgUp</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>MainWindowsNoGUI</name>
@@ -7465,7 +7527,7 @@ Vuoi salvare i cambiamenti?</translation>
     </message>
     <message>
         <source>Several workpieces left not arranged, but none of them match for paper</source>
-        <translation>Molti pezzi non sono stati disposti, nessuno corrisponde alla dimensione della carta</translation>
+        <translation type="vanished">Molti pezzi non sono stati disposti, nessuno corrisponde alla dimensione della carta</translation>
     </message>
     <message>
         <source>Can&apos;t open printer %1</source>
@@ -7526,6 +7588,14 @@ Vuoi salvare i cambiamenti?</translation>
     <message>
         <source>File error %1.</source>
         <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>One or more pattern pieces are bigger than the paper format you selected. Please, select a bigger paper format.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Description</source>
+        <translation type="unfinished">Descrizione</translation>
     </message>
 </context>
 <context>
@@ -7764,6 +7834,14 @@ Vuoi salvare i cambiamenti?</translation>
     <message>
         <source>Inches</source>
         <translation type="unfinished">Pollici</translation>
+    </message>
+    <message>
+        <source>Update a pattern only after a curve release</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Free curve mode</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -9685,6 +9763,41 @@ Vuoi salvare le tue modifiche?</translation>
     <message>
         <source>Can&apos;t cut this spline</source>
         <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>VAbstractLayoutDialog</name>
+    <message>
+        <source>Letter</source>
+        <translation type="unfinished">Lettera</translation>
+    </message>
+    <message>
+        <source>Legal</source>
+        <translation type="unfinished">Legale</translation>
+    </message>
+    <message>
+        <source>Roll 24in</source>
+        <translation type="unfinished">Rotolo 24pollici</translation>
+    </message>
+    <message>
+        <source>Roll 30in</source>
+        <translation type="unfinished">Rotolo 30pollici</translation>
+    </message>
+    <message>
+        <source>Roll 36in</source>
+        <translation type="unfinished">Rotolo 36pollici</translation>
+    </message>
+    <message>
+        <source>Roll 42in</source>
+        <translation type="unfinished">Rotolo 42pollici</translation>
+    </message>
+    <message>
+        <source>Roll 44in</source>
+        <translation type="unfinished">Rotolo 44pollici</translation>
+    </message>
+    <message>
+        <source>Custom</source>
+        <translation type="unfinished">Personalizzato</translation>
     </message>
 </context>
 <context>

@@ -2892,7 +2892,7 @@
     </message>
     <message>
         <source>Several workpieces left not arranged, but none of them match for paper</source>
-        <translation>Plusieurs pièces du patron n&apos;ont pas été arrangées, mais aucune ne va sur le papier</translation>
+        <translation type="vanished">Plusieurs pièces du patron n&apos;ont pas été arrangées, mais aucune ne va sur le papier</translation>
     </message>
     <message>
         <source>Create a Layout</source>
@@ -2908,6 +2908,10 @@
     </message>
     <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Finding best position for workpieces. Please, wait.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>One or more pattern pieces are bigger than the paper format you selected. Please, select a bigger paper format.</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -3003,31 +3007,31 @@
     </message>
     <message>
         <source>Letter</source>
-        <translation>Lettre</translation>
+        <translation type="vanished">Lettre</translation>
     </message>
     <message>
         <source>Legal</source>
-        <translation>Légal</translation>
+        <translation type="vanished">Légal</translation>
     </message>
     <message>
         <source>Roll 24in</source>
-        <translation>Roulleau 24 pouces</translation>
+        <translation type="vanished">Roulleau 24 pouces</translation>
     </message>
     <message>
         <source>Roll 30in</source>
-        <translation>Rouleau de 30po</translation>
+        <translation type="vanished">Rouleau de 30po</translation>
     </message>
     <message>
         <source>Roll 36in</source>
-        <translation>Rouleau de 36po</translation>
+        <translation type="vanished">Rouleau de 36po</translation>
     </message>
     <message>
         <source>Roll 42in</source>
-        <translation>Rouleau de 42po</translation>
+        <translation type="vanished">Rouleau de 42po</translation>
     </message>
     <message>
         <source>Roll 44in</source>
-        <translation>Rouleau de 44po</translation>
+        <translation type="vanished">Rouleau de 44po</translation>
     </message>
     <message>
         <source>
@@ -3068,7 +3072,7 @@
     </message>
     <message>
         <source>Custom</source>
-        <translation>Personnalisé</translation>
+        <translation type="vanished">Personnalisé</translation>
     </message>
     <message>
         <source>Wrong fields.</source>
@@ -3078,7 +3082,7 @@
         <source>Fields go beyond printing. 
 
 Apply settings anyway?</source>
-        <translation>Les champs dépassent l&apos;impression.
+        <translation type="vanished">Les champs dépassent l&apos;impression.
 
 Appliquer les réglages quand-même ?</translation>
     </message>
@@ -3155,6 +3159,12 @@ Appliquer les réglages quand-même ?</translation>
     </message>
     <message>
         <source>Ignore margins</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Margins go beyond printing. 
+
+Apply settings anyway?</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -5014,6 +5024,42 @@ Appliquer les réglages quand-même ?</translation>
     <message>
         <source>Text as paths</source>
         <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Margins</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Right:</source>
+        <translation type="unfinished">Droite:</translation>
+    </message>
+    <message>
+        <source>Left:</source>
+        <translation type="unfinished">Gauche:</translation>
+    </message>
+    <message>
+        <source>Top:</source>
+        <translation type="unfinished">Haut:</translation>
+    </message>
+    <message>
+        <source>Bottom:</source>
+        <translation type="unfinished">Bas:</translation>
+    </message>
+    <message>
+        <source>Paper format</source>
+        <translation type="unfinished">Format du papier</translation>
+    </message>
+    <message>
+        <source>Templates: </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Orientation: </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>...</source>
+        <translation type="obsolete">...</translation>
     </message>
     <message>
         <source>Browse…</source>
@@ -7505,6 +7551,22 @@ Voulez-vous sauvegarder les changements?</translation>
         <source>Destination path is empty.</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Next pattern piece</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Ctrl+PgDown</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Previous pattern piece</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Ctrl+PgUp</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>MainWindowsNoGUI</name>
@@ -7562,7 +7624,7 @@ Voulez-vous sauvegarder les changements?</translation>
     </message>
     <message>
         <source>Several workpieces left not arranged, but none of them match for paper</source>
-        <translation>Plusieurs pièces du patron n&apos;ont pas été arrangées, mais aucune ne va sur le papier</translation>
+        <translation type="vanished">Plusieurs pièces du patron n&apos;ont pas été arrangées, mais aucune ne va sur le papier</translation>
     </message>
     <message>
         <source>Can&apos;t open printer %1</source>
@@ -7627,6 +7689,14 @@ Voulez-vous sauvegarder les changements?</translation>
     <message>
         <source>File error %1.</source>
         <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>One or more pattern pieces are bigger than the paper format you selected. Please, select a bigger paper format.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Description</source>
+        <translation type="unfinished">Description du patron</translation>
     </message>
 </context>
 <context>
@@ -7869,6 +7939,14 @@ Voulez-vous sauvegarder les changements?</translation>
     <message>
         <source>Inches</source>
         <translation type="unfinished">Pouces</translation>
+    </message>
+    <message>
+        <source>Update a pattern only after a curve release</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Free curve mode</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -9790,6 +9868,41 @@ Voulez-vous enregistrer les changements?</translation>
     <message>
         <source>Can&apos;t cut this spline</source>
         <translation>Impossible de couper la ligne</translation>
+    </message>
+</context>
+<context>
+    <name>VAbstractLayoutDialog</name>
+    <message>
+        <source>Letter</source>
+        <translation type="unfinished">Lettre</translation>
+    </message>
+    <message>
+        <source>Legal</source>
+        <translation type="unfinished">Légal</translation>
+    </message>
+    <message>
+        <source>Roll 24in</source>
+        <translation type="unfinished">Roulleau 24 pouces</translation>
+    </message>
+    <message>
+        <source>Roll 30in</source>
+        <translation type="unfinished">Rouleau de 30po</translation>
+    </message>
+    <message>
+        <source>Roll 36in</source>
+        <translation type="unfinished">Rouleau de 36po</translation>
+    </message>
+    <message>
+        <source>Roll 42in</source>
+        <translation type="unfinished">Rouleau de 42po</translation>
+    </message>
+    <message>
+        <source>Roll 44in</source>
+        <translation type="unfinished">Rouleau de 44po</translation>
+    </message>
+    <message>
+        <source>Custom</source>
+        <translation type="unfinished">Personnalisé</translation>
     </message>
 </context>
 <context>

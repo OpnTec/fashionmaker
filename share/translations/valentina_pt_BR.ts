@@ -2831,10 +2831,6 @@
         <translation>Não foi possível preparar dados para layout</translation>
     </message>
     <message>
-        <source>Several workpieces left not arranged, but none of them match for paper</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Create a Layout</source>
         <translation>Criar Layout</translation>
     </message>
@@ -2848,6 +2844,10 @@
     </message>
     <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Finding best position for workpieces. Please, wait.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>One or more pattern pieces are bigger than the paper format you selected. Please, select a bigger paper format.</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -2939,31 +2939,31 @@
     </message>
     <message>
         <source>Letter</source>
-        <translation>Carta</translation>
+        <translation type="vanished">Carta</translation>
     </message>
     <message>
         <source>Legal</source>
-        <translation>Ofício</translation>
+        <translation type="vanished">Ofício</translation>
     </message>
     <message>
         <source>Roll 24in</source>
-        <translation>Rolo de 24&quot;</translation>
+        <translation type="vanished">Rolo de 24&quot;</translation>
     </message>
     <message>
         <source>Roll 30in</source>
-        <translation>Rolo de 30&quot;</translation>
+        <translation type="vanished">Rolo de 30&quot;</translation>
     </message>
     <message>
         <source>Roll 36in</source>
-        <translation>Rolo de 36&quot;</translation>
+        <translation type="vanished">Rolo de 36&quot;</translation>
     </message>
     <message>
         <source>Roll 42in</source>
-        <translation>Rolo de 42&quot;</translation>
+        <translation type="vanished">Rolo de 42&quot;</translation>
     </message>
     <message>
         <source>Roll 44in</source>
-        <translation>Rolo de 44&quot;</translation>
+        <translation type="vanished">Rolo de 44&quot;</translation>
     </message>
     <message>
         <source>Paper format</source>
@@ -2995,17 +2995,11 @@
     </message>
     <message>
         <source>Custom</source>
-        <translation>Personalizado</translation>
+        <translation type="vanished">Personalizado</translation>
     </message>
     <message>
         <source>Wrong fields.</source>
         <translation>Campos incorretos.</translation>
-    </message>
-    <message>
-        <source>Fields go beyond printing. 
-
-Apply settings anyway?</source>
-        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>
@@ -3069,6 +3063,12 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Ignore margins</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Margins go beyond printing. 
+
+Apply settings anyway?</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -4852,6 +4852,42 @@ Apply settings anyway?</source>
     <message>
         <source>Text as paths</source>
         <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Margins</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Right:</source>
+        <translation type="unfinished">Direita:</translation>
+    </message>
+    <message>
+        <source>Left:</source>
+        <translation type="unfinished">Esquerda:</translation>
+    </message>
+    <message>
+        <source>Top:</source>
+        <translation type="unfinished">Topo:</translation>
+    </message>
+    <message>
+        <source>Bottom:</source>
+        <translation type="unfinished">Base:</translation>
+    </message>
+    <message>
+        <source>Paper format</source>
+        <translation type="unfinished">Formato do papel</translation>
+    </message>
+    <message>
+        <source>Templates: </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Orientation: </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>...</source>
+        <translation type="obsolete">...</translation>
     </message>
     <message>
         <source>Browse…</source>
@@ -7017,6 +7053,22 @@ Do you want to save your changes?</source>
         <source>Destination path is empty.</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Next pattern piece</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Ctrl+PgDown</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Previous pattern piece</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Ctrl+PgUp</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>MainWindowsNoGUI</name>
@@ -7051,10 +7103,6 @@ Do you want to save your changes?</source>
     <message>
         <source>Couldn&apos;t prepare data for creation layout</source>
         <translation>Não foi possível preparar dados para layout</translation>
-    </message>
-    <message>
-        <source>Several workpieces left not arranged, but none of them match for paper</source>
-        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Can&apos;t open printer %1</source>
@@ -7107,6 +7155,14 @@ Do you want to save your changes?</source>
     <message>
         <source>File error %1.</source>
         <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>One or more pattern pieces are bigger than the paper format you selected. Please, select a bigger paper format.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Description</source>
+        <translation type="unfinished">Descrição</translation>
     </message>
 </context>
 <context>
@@ -7273,6 +7329,14 @@ Do you want to save your changes?</source>
     <message>
         <source>Inches</source>
         <translation type="unfinished">Polegadas</translation>
+    </message>
+    <message>
+        <source>Update a pattern only after a curve release</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Free curve mode</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -8959,6 +9023,41 @@ Do you want to save your changes?</source>
     <message>
         <source>Can&apos;t cut this spline</source>
         <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>VAbstractLayoutDialog</name>
+    <message>
+        <source>Letter</source>
+        <translation type="unfinished">Carta</translation>
+    </message>
+    <message>
+        <source>Legal</source>
+        <translation type="unfinished">Ofício</translation>
+    </message>
+    <message>
+        <source>Roll 24in</source>
+        <translation type="unfinished">Rolo de 24&quot;</translation>
+    </message>
+    <message>
+        <source>Roll 30in</source>
+        <translation type="unfinished">Rolo de 30&quot;</translation>
+    </message>
+    <message>
+        <source>Roll 36in</source>
+        <translation type="unfinished">Rolo de 36&quot;</translation>
+    </message>
+    <message>
+        <source>Roll 42in</source>
+        <translation type="unfinished">Rolo de 42&quot;</translation>
+    </message>
+    <message>
+        <source>Roll 44in</source>
+        <translation type="unfinished">Rolo de 44&quot;</translation>
+    </message>
+    <message>
+        <source>Custom</source>
+        <translation type="unfinished">Personalizado</translation>
     </message>
 </context>
 <context>

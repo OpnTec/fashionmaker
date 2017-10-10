@@ -1320,7 +1320,7 @@
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="774"/>
         <source>From Neck Side to Neck Side across back. (&apos;Neck circumference&apos; - &apos;Neck arc, front&apos;).</source>
         <comment>Full measurement description.</comment>
-        <translation>D&apos;un point d&apos;encolure à l&apos;autre en passant par le dos (&apos;Encolure&apos; - demi-encolure, devant&apos;).</translation>
+        <translation>D&apos;un point d&apos;encolure à l&apos;autre en passant par le dos (&apos;Encolure&apos; - &apos;Encolure, devant&apos;).</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="779"/>
@@ -1338,43 +1338,45 @@
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="782"/>
         <source>From Highbust Side  to Highbust Side across back. (&apos;Highbust circumference&apos; - &apos;Highbust arc, front&apos;).</source>
         <comment>Full measurement description.</comment>
-        <translation>Du point de sur-poitrine devant à point de sur-poitrine latéral par le dos (&apos;Tour sur-poitrinaire&apos; - &apos;arc sur-poitrinaire, devant&apos;)</translation>
+        <translation>Du point de sur-poitrine devant à point de sur-poitrine latéral par le dos (&apos;Tour sur-poitrinaire&apos; - &apos;arc sur-poitrinaire, devant&apos;)
+
+A partir du point de Sur-Poitrine sur le Côté à l&apos;autre Côté du point de Sur-Poitrine en passant par le dos. (&apos;Tour Sur-Poitrinaire&apos; - &apos;Sur-Poitrine, devant&apos;).</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="786"/>
         <source>bust_arc_b</source>
         <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
-        <translation>demi_poitrine_dos</translation>
+        <translation>tour_poitrine_dos</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="788"/>
         <source>Bust arc, back</source>
         <comment>Full measurement name.</comment>
-        <translation>Demi-tour de poitrine, dos</translation>
+        <translation>Tour de poitrine, dos</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="789"/>
         <source>From Bust Side to Bust Side across back. (&apos;Bust circumference&apos; - &apos;Bust arc, front&apos;).</source>
         <comment>Full measurement description.</comment>
-        <translation>D&apos;un coté à l&apos;autre de la poitrine, par la carrure dos (&apos;Tour de poitrine&apos; - &apos;Demi-tour de poirtrine, devant&apos;).</translation>
+        <translation>A partir du côté sur la ligne du Tour de Poitrine jusqu&apos;à l&apos;autre côté en passant par le dos. (&apos;Tour de poitrine&apos; - &apos;Tour de Poitrine, devant&apos;).</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="794"/>
         <source>lowbust_arc_b</source>
         <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
-        <translation>demi_sous_mammaire_dos</translation>
+        <translation>Tour_sous_mammaire_dos</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="796"/>
         <source>Lowbust arc, back</source>
         <comment>Full measurement name.</comment>
-        <translation>Demi-arc sous-mammaire, dos</translation>
+        <translation>Arc sous-mammaire, dos</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="797"/>
         <source>From Lowbust Side to Lowbust Side across back.  (&apos;Lowbust circumference&apos; - &apos;Lowbust arc, front&apos;).</source>
         <comment>Full measurement description.</comment>
-        <translation>Segment sous-mammaire d&apos;un coté à l&apos;autre, passant par le dos (&apos;Tour sous-mammaire&apos; - &apos;Demi-tour sous-mammaire, devant&apos;).</translation>
+        <translation>Segment Sous-mammaire d&apos;un Coté à l&apos;autre, passant par le dos (&apos;Tour Sous-mammaire&apos; - &apos;Tour Sous-mammaire, devant&apos;)</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="802"/>

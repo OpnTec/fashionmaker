@@ -57,7 +57,7 @@
           <string>Select path to destination folder</string>
          </property>
          <property name="text">
-          <string>Browse...</string>
+          <string>Browse…</string>
          </property>
         </widget>
        </item>
@@ -208,7 +208,7 @@
               <item>
                <widget class="QToolButton" name="toolButtonPortrait">
                 <property name="text">
-                 <string>...</string>
+                 <string notr="true">...</string>
                 </property>
                 <property name="icon">
                  <iconset resource="../../../libs/vmisc/share/resources/icon.qrc">
@@ -228,7 +228,7 @@
               <item>
                <widget class="QToolButton" name="toolButtonLandscape">
                 <property name="text">
-                 <string>...</string>
+                 <string notr="true">...</string>
                 </property>
                 <property name="icon">
                  <iconset resource="../../../libs/vmisc/share/resources/icon.qrc">

@@ -2892,7 +2892,7 @@
     </message>
     <message>
         <source>Several workpieces left not arranged, but none of them match for paper</source>
-        <translation>Several workpieces left not arranged, but none of them match for paper</translation>
+        <translation type="vanished">Several workpieces left not arranged, but none of them match for paper</translation>
     </message>
     <message>
         <source>Create a Layout</source>
@@ -2909,6 +2909,10 @@
     <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Finding best position for workpieces. Please, wait.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Finding best position for workpieces. Please, wait.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+    </message>
+    <message>
+        <source>One or more pattern pieces are bigger than the paper format you selected. Please, select a bigger paper format.</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -3003,31 +3007,31 @@
     </message>
     <message>
         <source>Letter</source>
-        <translation>Letter</translation>
+        <translation type="vanished">Letter</translation>
     </message>
     <message>
         <source>Legal</source>
-        <translation>Legal</translation>
+        <translation type="vanished">Legal</translation>
     </message>
     <message>
         <source>Roll 24in</source>
-        <translation>Roll 24in</translation>
+        <translation type="vanished">Roll 24in</translation>
     </message>
     <message>
         <source>Roll 30in</source>
-        <translation>Roll 30in</translation>
+        <translation type="vanished">Roll 30in</translation>
     </message>
     <message>
         <source>Roll 36in</source>
-        <translation>Roll 36in</translation>
+        <translation type="vanished">Roll 36in</translation>
     </message>
     <message>
         <source>Roll 42in</source>
-        <translation>Roll 42in</translation>
+        <translation type="vanished">Roll 42in</translation>
     </message>
     <message>
         <source>Roll 44in</source>
-        <translation>Roll 44in</translation>
+        <translation type="vanished">Roll 44in</translation>
     </message>
     <message>
         <source>
@@ -3071,7 +3075,7 @@
     </message>
     <message>
         <source>Custom</source>
-        <translation>Custom</translation>
+        <translation type="vanished">Custom</translation>
     </message>
     <message>
         <source>Wrong fields.</source>
@@ -3081,7 +3085,7 @@
         <source>Fields go beyond printing. 
 
 Apply settings anyway?</source>
-        <translation>Fields go beyond printing. 
+        <translation type="vanished">Fields go beyond printing. 
 
 Apply settings anyway?</translation>
     </message>
@@ -3158,6 +3162,12 @@ Apply settings anyway?</translation>
     </message>
     <message>
         <source>Ignore margins</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Margins go beyond printing. 
+
+Apply settings anyway?</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -5017,6 +5027,42 @@ Apply settings anyway?</translation>
     <message>
         <source>Text as paths</source>
         <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Margins</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Right:</source>
+        <translation type="unfinished">Right:</translation>
+    </message>
+    <message>
+        <source>Left:</source>
+        <translation type="unfinished">Left:</translation>
+    </message>
+    <message>
+        <source>Top:</source>
+        <translation type="unfinished">Top:</translation>
+    </message>
+    <message>
+        <source>Bottom:</source>
+        <translation type="unfinished">Bottom:</translation>
+    </message>
+    <message>
+        <source>Paper format</source>
+        <translation type="unfinished">Paper format</translation>
+    </message>
+    <message>
+        <source>Templates: </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Orientation: </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>...</source>
+        <translation type="obsolete">...</translation>
     </message>
     <message>
         <source>Browse…</source>
@@ -7508,6 +7554,22 @@ Do you want to save your changes?</translation>
         <source>Destination path is empty.</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Next pattern piece</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Ctrl+PgDown</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Previous pattern piece</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Ctrl+PgUp</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>MainWindowsNoGUI</name>
@@ -7565,7 +7627,7 @@ Do you want to save your changes?</translation>
     </message>
     <message>
         <source>Several workpieces left not arranged, but none of them match for paper</source>
-        <translation>Several workpieces left not arranged, but none of them match for paper</translation>
+        <translation type="vanished">Several workpieces left not arranged, but none of them match for paper</translation>
     </message>
     <message>
         <source>Can&apos;t open printer %1</source>
@@ -7630,6 +7692,14 @@ Do you want to save your changes?</translation>
     <message>
         <source>File error %1.</source>
         <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>One or more pattern pieces are bigger than the paper format you selected. Please, select a bigger paper format.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Description</source>
+        <translation type="unfinished">Description</translation>
     </message>
 </context>
 <context>
@@ -7884,6 +7954,14 @@ Do you want to save your changes?</translation>
     <message>
         <source>Inches</source>
         <translation>Inches</translation>
+    </message>
+    <message>
+        <source>Update a pattern only after a curve release</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Free curve mode</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -9809,6 +9887,41 @@ Do you want to save your changes?</translation>
     <message>
         <source>Can&apos;t cut this spline</source>
         <translation>Can&apos;t cut this spline</translation>
+    </message>
+</context>
+<context>
+    <name>VAbstractLayoutDialog</name>
+    <message>
+        <source>Letter</source>
+        <translation type="unfinished">Letter</translation>
+    </message>
+    <message>
+        <source>Legal</source>
+        <translation type="unfinished">Legal</translation>
+    </message>
+    <message>
+        <source>Roll 24in</source>
+        <translation type="unfinished">Roll 24in</translation>
+    </message>
+    <message>
+        <source>Roll 30in</source>
+        <translation type="unfinished">Roll 30in</translation>
+    </message>
+    <message>
+        <source>Roll 36in</source>
+        <translation type="unfinished">Roll 36in</translation>
+    </message>
+    <message>
+        <source>Roll 42in</source>
+        <translation type="unfinished">Roll 42in</translation>
+    </message>
+    <message>
+        <source>Roll 44in</source>
+        <translation type="unfinished">Roll 44in</translation>
+    </message>
+    <message>
+        <source>Custom</source>
+        <translation type="unfinished">Custom</translation>
     </message>
 </context>
 <context>

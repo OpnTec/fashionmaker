@@ -2840,7 +2840,7 @@
     </message>
     <message>
         <source>Several workpieces left not arranged, but none of them match for paper</source>
-        <translation>Μερικά κομμάτια δεν έχουν τοποθετηθεί, αλλά κανένα απο αυτά δε χωράει στο χαρτί</translation>
+        <translation type="vanished">Μερικά κομμάτια δεν έχουν τοποθετηθεί, αλλά κανένα απο αυτά δε χωράει στο χαρτί</translation>
     </message>
     <message>
         <source>Create a Layout</source>
@@ -2852,6 +2852,10 @@
     </message>
     <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Finding best position for workpieces. Please, wait.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>One or more pattern pieces are bigger than the paper format you selected. Please, select a bigger paper format.</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -2947,31 +2951,31 @@
     </message>
     <message>
         <source>Letter</source>
-        <translation>Letter</translation>
+        <translation type="vanished">Letter</translation>
     </message>
     <message>
         <source>Legal</source>
-        <translation>Legal</translation>
+        <translation type="vanished">Legal</translation>
     </message>
     <message>
         <source>Roll 24in</source>
-        <translation>Ρολό 24 ιντσών</translation>
+        <translation type="vanished">Ρολό 24 ιντσών</translation>
     </message>
     <message>
         <source>Roll 30in</source>
-        <translation>Ρολό 30 ιντσών</translation>
+        <translation type="vanished">Ρολό 30 ιντσών</translation>
     </message>
     <message>
         <source>Roll 36in</source>
-        <translation>Ρολό 36 ιντσών</translation>
+        <translation type="vanished">Ρολό 36 ιντσών</translation>
     </message>
     <message>
         <source>Roll 42in</source>
-        <translation>Ρολό 42 ιντσών</translation>
+        <translation type="vanished">Ρολό 42 ιντσών</translation>
     </message>
     <message>
         <source>Roll 44in</source>
-        <translation>Ρολό 44 ιντσών</translation>
+        <translation type="vanished">Ρολό 44 ιντσών</translation>
     </message>
     <message>
         <source>Paper format</source>
@@ -3003,7 +3007,7 @@
     </message>
     <message>
         <source>Custom</source>
-        <translation>Προσαρμογή</translation>
+        <translation type="vanished">Προσαρμογή</translation>
     </message>
     <message>
         <source>Wrong fields.</source>
@@ -3013,7 +3017,7 @@
         <source>Fields go beyond printing. 
 
 Apply settings anyway?</source>
-        <translation>Τα πεδία υπερβαίνουν την εκτύπωση. 
+        <translation type="vanished">Τα πεδία υπερβαίνουν την εκτύπωση. 
 
 Εφαρμογή των ρυθμίσεων ούτως ή άλλως;</translation>
     </message>
@@ -3088,6 +3092,12 @@ Apply settings anyway?</source>
     <message>
         <source>Ignore margins</source>
         <translation>Αγνόηση περιθωρίων</translation>
+    </message>
+    <message>
+        <source>Margins go beyond printing. 
+
+Apply settings anyway?</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -4934,6 +4944,42 @@ Apply settings anyway?</source>
     <message>
         <source>Text as paths</source>
         <translation>Κείμενο ως μονοπάτια</translation>
+    </message>
+    <message>
+        <source>Margins</source>
+        <translation type="unfinished">Περιθώρια</translation>
+    </message>
+    <message>
+        <source>Right:</source>
+        <translation type="unfinished">Δεξιά:</translation>
+    </message>
+    <message>
+        <source>Left:</source>
+        <translation type="unfinished">Αριστερά:</translation>
+    </message>
+    <message>
+        <source>Top:</source>
+        <translation type="unfinished">Επάνω:</translation>
+    </message>
+    <message>
+        <source>Bottom:</source>
+        <translation type="unfinished">Κάτω:</translation>
+    </message>
+    <message>
+        <source>Paper format</source>
+        <translation type="unfinished">Μορφή χαρτιού</translation>
+    </message>
+    <message>
+        <source>Templates: </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Orientation: </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>...</source>
+        <translation type="obsolete">...</translation>
     </message>
     <message>
         <source>Browse…</source>
@@ -7389,6 +7435,22 @@ Do you want to save your changes?</source>
         <source>Destination path is empty.</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Next pattern piece</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Ctrl+PgDown</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Previous pattern piece</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Ctrl+PgUp</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>MainWindowsNoGUI</name>
@@ -7446,7 +7508,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Several workpieces left not arranged, but none of them match for paper</source>
-        <translation>Μερικά κομμάτια δεν έχουν τοποθετηθεί, αλλά κανένα απο αυτά δε χωράει στο χαρτί</translation>
+        <translation type="vanished">Μερικά κομμάτια δεν έχουν τοποθετηθεί, αλλά κανένα απο αυτά δε χωράει στο χαρτί</translation>
     </message>
     <message>
         <source>Can&apos;t open printer %1</source>
@@ -7511,6 +7573,14 @@ Do you want to save your changes?</source>
     <message>
         <source>File error %1.</source>
         <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>One or more pattern pieces are bigger than the paper format you selected. Please, select a bigger paper format.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Description</source>
+        <translation type="unfinished">Περιγραφή</translation>
     </message>
 </context>
 <context>
@@ -7729,6 +7799,14 @@ Do you want to save your changes?</source>
     <message>
         <source>Inches</source>
         <translation>Ίντσες</translation>
+    </message>
+    <message>
+        <source>Update a pattern only after a curve release</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Free curve mode</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -9566,6 +9644,41 @@ Do you want to save your changes?</source>
     <message>
         <source>Can&apos;t cut this spline</source>
         <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>VAbstractLayoutDialog</name>
+    <message>
+        <source>Letter</source>
+        <translation type="unfinished">Letter</translation>
+    </message>
+    <message>
+        <source>Legal</source>
+        <translation type="unfinished">Legal</translation>
+    </message>
+    <message>
+        <source>Roll 24in</source>
+        <translation type="unfinished">Ρολό 24 ιντσών</translation>
+    </message>
+    <message>
+        <source>Roll 30in</source>
+        <translation type="unfinished">Ρολό 30 ιντσών</translation>
+    </message>
+    <message>
+        <source>Roll 36in</source>
+        <translation type="unfinished">Ρολό 36 ιντσών</translation>
+    </message>
+    <message>
+        <source>Roll 42in</source>
+        <translation type="unfinished">Ρολό 42 ιντσών</translation>
+    </message>
+    <message>
+        <source>Roll 44in</source>
+        <translation type="unfinished">Ρολό 44 ιντσών</translation>
+    </message>
+    <message>
+        <source>Custom</source>
+        <translation type="unfinished">Προσαρμογή</translation>
     </message>
 </context>
 <context>
