@@ -44,7 +44,9 @@ DialogLayoutSettings::DialogLayoutSettings(VLayoutGenerator *generator, QWidget 
       disableSettings(disableSettings), 
       ui(new Ui::DialogLayoutSettings), 
       oldPaperUnit(Unit::Mm),
-      oldLayoutUnit(Unit::Mm), generator(generator), isInitialized(false)
+      oldLayoutUnit(Unit::Mm),
+      generator(generator),
+      isInitialized(false)
 {
     ui->setupUi(this);
 

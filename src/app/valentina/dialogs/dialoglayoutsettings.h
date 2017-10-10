@@ -130,9 +130,6 @@ private slots:
     void IgnoreAllFields(int state);
 private:
     Q_DISABLE_COPY(DialogLayoutSettings)
-    typedef QStringList FormatsVector;
-    typedef int VIndexType;
-    const static  FormatsVector pageFormatNames;
 
     bool disableSettings;
 
