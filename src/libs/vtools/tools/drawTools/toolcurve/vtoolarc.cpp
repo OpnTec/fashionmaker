@@ -89,6 +89,7 @@ void VToolArc::setDialog()
     dialogTool->SetRadius(arc->GetFormulaRadius());
     dialogTool->SetColor(arc->GetColor());
     dialogTool->SetPenStyle(arc->GetPenStyle());
+    dialogTool->SetApproximationScale(arc->GetApproximationScale());
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -118,6 +119,7 @@ VToolArc* VToolArc::Create(QSharedPointer<DialogTool> dialog, VMainGraphicsScene
     initData.data = data;
     initData.parse = Document::FullParse;
     initData.typeCreation = Source::FromGui;
+    initData.approximationScale = dialogTool->GetApproximationScale();
 
     VToolArc* point = Create(initData);
     if (point != nullptr)
@@ -145,6 +147,7 @@ VToolArc* VToolArc::Create(VToolArcInitData &initData)
     VArc *arc = new VArc(c, calcRadius, initData.radius, calcF1, initData.f1, calcF2, initData.f2 );
     arc->SetColor(initData.color);
     arc->SetPenStyle(initData.penStyle);
+    arc->SetApproximationScale(initData.approximationScale);
 
     if (initData.typeCreation == Source::FromGui)
     {
@@ -295,6 +298,24 @@ void VToolArc::SetFormulaF2(const VFormula &value)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+qreal VToolArc::GetApproximationScale() const
+{
+    QSharedPointer<VArc> arc = VAbstractTool::data.GeometricObject<VArc>(m_id);
+    SCASSERT(arc.isNull() == false)
+
+    return arc->GetApproximationScale();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VToolArc::SetApproximationScale(qreal value)
+{
+    QSharedPointer<VGObject> obj = VAbstractTool::data.GetGObject(m_id);
+    QSharedPointer<VArc> arc = qSharedPointerDynamicCast<VArc>(obj);
+    arc->SetApproximationScale(value);
+    SaveOption(obj);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 void VToolArc::ShowVisualization(bool show)
 {
     ShowToolVisualization<VisToolArc>(show);
@@ -340,6 +361,7 @@ void VToolArc::SaveDialog(QDomElement &domElement)
     doc->SetAttribute(domElement, AttrAngle2, dialogTool->GetF2());
     doc->SetAttribute(domElement, AttrColor, dialogTool->GetColor());
     doc->SetAttribute(domElement, AttrPenStyle, dialogTool->GetPenStyle());
+    doc->SetAttribute(domElement, AttrAScale, dialogTool->GetApproximationScale());
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -372,6 +394,7 @@ void VToolArc::SetVisualization()
         visual->setF1(trVars->FormulaToUser(arc->GetFormulaF1(), qApp->Settings()->GetOsSeparator()));
         visual->setF2(trVars->FormulaToUser(arc->GetFormulaF2(), qApp->Settings()->GetOsSeparator()));
         visual->setLineStyle(LineStyleToPenStyle(arc->GetPenStyle()));
+        visual->setApproximationScale(arc->GetApproximationScale());
         visual->RefreshGeometry();
     }
 }

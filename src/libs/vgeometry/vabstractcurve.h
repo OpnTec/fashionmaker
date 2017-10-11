@@ -89,6 +89,9 @@ public:
     QString                  GetPenStyle() const;
     void                     SetPenStyle(const QString &penStyle);
 
+    qreal                    GetApproximationScale() const;
+    void                     SetApproximationScale(qreal value);
+
     static qreal             PathLength(const QVector<QPointF> &path);
 
     static QVector<QPointF>  CurveIntersectLine(const QVector<QPointF> &points, const QLineF &line);

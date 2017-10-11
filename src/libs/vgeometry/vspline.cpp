@@ -123,6 +123,7 @@ VSpline VSpline::Rotate(const QPointF &originPoint, qreal degrees, const QString
     spl.setName(name() + prefix);
     spl.SetColor(GetColor());
     spl.SetPenStyle(GetPenStyle());
+    spl.SetApproximationScale(GetApproximationScale());
     return spl;
 }
 
@@ -139,6 +140,7 @@ VSpline VSpline::Flip(const QLineF &axis, const QString &prefix) const
     spl.setName(name() + prefix);
     spl.SetColor(GetColor());
     spl.SetPenStyle(GetPenStyle());
+    spl.SetApproximationScale(GetApproximationScale());
     return spl;
 }
 
@@ -155,6 +157,7 @@ VSpline VSpline::Move(qreal length, qreal angle, const QString &prefix) const
     spl.setName(name() + prefix);
     spl.SetColor(GetColor());
     spl.SetPenStyle(GetPenStyle());
+    spl.SetApproximationScale(GetApproximationScale());
     return spl;
 }
 
@@ -170,7 +173,7 @@ VSpline::~VSpline()
 qreal VSpline::GetLength () const
 {
     return LengthBezier ( static_cast<QPointF>(GetP1()), static_cast<QPointF>(GetP2()), static_cast<QPointF>(GetP3()),
-                          static_cast<QPointF>(GetP4()));
+                          static_cast<QPointF>(GetP4()), GetApproximationScale());
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -183,7 +186,10 @@ QPointF VSpline::CutSpline(qreal length, VSpline &spl1, VSpline &spl2) const
     const QPointF cutPoint = CutSpline (length, spl1p2, spl1p3, spl2p2, spl2p3 );
 
     spl1 = VSpline(GetP1(), spl1p2, spl1p3, VPointF(cutPoint));
+    spl1.SetApproximationScale(GetApproximationScale());
+
     spl2 = VSpline(VPointF(cutPoint), spl2p2, spl2p3, GetP4());
+    spl2.SetApproximationScale(GetApproximationScale());
     return cutPoint;
 }
 
@@ -195,7 +201,7 @@ QPointF VSpline::CutSpline(qreal length, VSpline &spl1, VSpline &spl2) const
 QVector<QPointF> VSpline::GetPoints () const
 {
     return GetCubicBezierPoints(static_cast<QPointF>(GetP1()), static_cast<QPointF>(GetP2()),
-                                static_cast<QPointF>(GetP3()), static_cast<QPointF>(GetP4()));
+                                static_cast<QPointF>(GetP3()), static_cast<QPointF>(GetP4()), GetApproximationScale());
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -212,7 +218,7 @@ QVector<QPointF> VSpline::GetPoints () const
  */
 // cppcheck-suppress unusedFunction
 QVector<QPointF> VSpline::SplinePoints(const QPointF &p1, const QPointF &p4, qreal angle1, qreal angle2, qreal kAsm1,
-                                       qreal kAsm2, qreal kCurve)
+                                       qreal kAsm2, qreal kCurve, qreal approximationScale)
 {
     QLineF p1pX(p1.x(), p1.y(), p1.x() + 100, p1.y());
     p1pX.setAngle( angle1 );
@@ -225,7 +231,7 @@ QVector<QPointF> VSpline::SplinePoints(const QPointF &p1, const QPointF &p4, qre
     p4p3.setAngle(angle2);
     QPointF p2 = p1p2.p2();
     QPointF p3 = p4p3.p2();
-    return GetCubicBezierPoints(p1, p2, p3, p4);
+    return GetCubicBezierPoints(p1, p2, p3, p4, approximationScale);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

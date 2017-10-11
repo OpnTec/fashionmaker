@@ -121,6 +121,7 @@ VSplinePath VSplinePath::Rotate(const QPointF &originPoint, qreal degrees, const
     splPath.setName(name() + prefix);
     splPath.SetColor(GetColor());
     splPath.SetPenStyle(GetPenStyle());
+    splPath.SetApproximationScale(GetApproximationScale());
     return splPath;
 }
 
@@ -145,6 +146,7 @@ VSplinePath VSplinePath::Flip(const QLineF &axis, const QString &prefix) const
     splPath.setName(name() + prefix);
     splPath.SetColor(GetColor());
     splPath.SetPenStyle(GetPenStyle());
+    splPath.SetApproximationScale(GetApproximationScale());
     return splPath;
 }
 
@@ -169,6 +171,7 @@ VSplinePath VSplinePath::Move(qreal length, qreal angle, const QString &prefix) 
     splPath.setName(name() + prefix);
     splPath.SetColor(GetColor());
     splPath.SetPenStyle(GetPenStyle());
+    splPath.SetApproximationScale(GetApproximationScale());
     return splPath;
 }
 
@@ -231,6 +234,7 @@ VSpline VSplinePath::GetSpline(qint32 index) const
     const VSplinePoint &p2 = d->path.at(index);
     VSpline spl(p1.P(), p2.P(), p1.Angle2(), p1.Angle2Formula(), p2.Angle1(), p2.Angle1Formula(), p1.Length2(),
                 p1.Length2Formula(), p2.Length1(), p2.Length1Formula(), 1);
+    spl.SetApproximationScale(GetApproximationScale());
     return spl;
 }
 

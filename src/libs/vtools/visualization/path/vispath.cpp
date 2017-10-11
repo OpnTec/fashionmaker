@@ -39,7 +39,8 @@
 //---------------------------------------------------------------------------------------------------------------------
 VisPath::VisPath(const VContainer *data, QGraphicsItem *parent)
     : Visualization(data),
-      VCurvePathItem(parent)
+      VCurvePathItem(parent),
+      m_approximationScale(0)
 {
     this->setZValue(1);// Show on top real tool
     InitPen();
@@ -79,4 +80,10 @@ VSimplePoint *VisPath::GetPoint(QVector<VSimplePoint *> &points, quint32 i, cons
         return point;
     }
     return nullptr;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VisPath::setApproximationScale(qreal approximationScale)
+{
+    m_approximationScale = approximationScale;
 }

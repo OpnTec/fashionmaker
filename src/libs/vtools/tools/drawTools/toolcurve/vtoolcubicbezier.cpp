@@ -75,8 +75,6 @@ void VToolCubicBezier::setDialog()
     SCASSERT(dialogTool != nullptr)
     const auto spl = VAbstractTool::data.GeometricObject<VCubicBezier>(m_id);
     dialogTool->SetSpline(*spl);
-    dialogTool->SetColor(spl->GetColor());
-    dialogTool->SetPenStyle(spl->GetPenStyle());
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -94,8 +92,6 @@ VToolCubicBezier *VToolCubicBezier::Create(QSharedPointer<DialogTool> dialog, VM
     initData.parse = Document::FullParse;
     initData.typeCreation = Source::FromGui;
     initData.spline = new VCubicBezier(dialogTool->GetSpline());
-    initData.spline->SetColor(dialogTool->GetColor());
-    initData.spline->SetPenStyle(dialogTool->GetPenStyle());
 
     auto spl = Create(initData);
 
@@ -225,8 +221,6 @@ void VToolCubicBezier::SaveDialog(QDomElement &domElement)
     const VCubicBezier spl = dialogTool->GetSpline();
 
     SetSplineAttributes(domElement, spl);
-    doc->SetAttribute(domElement, AttrColor, dialogTool->GetColor());
-    doc->SetAttribute(domElement, AttrPenStyle, dialogTool->GetPenStyle());
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -253,6 +247,7 @@ void VToolCubicBezier::SetVisualization()
         visual->setObject3Id(spl->GetP3().id());
         visual->setObject4Id(spl->GetP4().id());
         visual->setLineStyle(LineStyleToPenStyle(spl->GetPenStyle()));
+        visual->setApproximationScale(spl->GetApproximationScale());
         visual->SetMode(Mode::Show);
         visual->RefreshGeometry();
     }
@@ -272,11 +267,14 @@ void VToolCubicBezier::SetSplineAttributes(QDomElement &domElement, const VCubic
 {
     SCASSERT(doc != nullptr)
 
-    doc->SetAttribute(domElement, AttrType,    ToolType);
-    doc->SetAttribute(domElement, AttrPoint1,  spl.GetP1().id());
-    doc->SetAttribute(domElement, AttrPoint2,  spl.GetP2().id());
-    doc->SetAttribute(domElement, AttrPoint3,  spl.GetP3().id());
-    doc->SetAttribute(domElement, AttrPoint4,  spl.GetP4().id());
+    doc->SetAttribute(domElement, AttrType,     ToolType);
+    doc->SetAttribute(domElement, AttrPoint1,   spl.GetP1().id());
+    doc->SetAttribute(domElement, AttrPoint2,   spl.GetP2().id());
+    doc->SetAttribute(domElement, AttrPoint3,   spl.GetP3().id());
+    doc->SetAttribute(domElement, AttrPoint4,   spl.GetP4().id());
+    doc->SetAttribute(domElement, AttrColor,    spl.GetColor());
+    doc->SetAttribute(domElement, AttrPenStyle, spl.GetPenStyle());
+    doc->SetAttribute(domElement, AttrAScale,   spl.GetApproximationScale());
 
     if (spl.GetDuplicate() > 0)
     {

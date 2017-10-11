@@ -90,6 +90,7 @@ VCubicBezierPath VCubicBezierPath::Rotate(const QPointF &originPoint, qreal degr
     curve.setName(name() + prefix);
     curve.SetColor(GetColor());
     curve.SetPenStyle(GetPenStyle());
+    curve.SetApproximationScale(GetApproximationScale());
     return curve;
 }
 
@@ -105,6 +106,7 @@ VCubicBezierPath VCubicBezierPath::Flip(const QLineF &axis, const QString &prefi
     curve.setName(name() + prefix);
     curve.SetColor(GetColor());
     curve.SetPenStyle(GetPenStyle());
+    curve.SetApproximationScale(GetApproximationScale());
     return curve;
 }
 
@@ -120,6 +122,7 @@ VCubicBezierPath VCubicBezierPath::Move(qreal length, qreal angle, const QString
     curve.setName(name() + prefix);
     curve.SetColor(GetColor());
     curve.SetPenStyle(GetPenStyle());
+    curve.SetApproximationScale(GetApproximationScale());
     return curve;
 }
 
@@ -199,6 +202,7 @@ VSpline VCubicBezierPath::GetSpline(qint32 index) const
     }
 
     VSpline spl(d->path.at(base), p2, static_cast<QPointF>(d->path.at(base + 2)), d->path.at(base + 3));
+    spl.SetApproximationScale(GetApproximationScale());
     return spl;
 }
 

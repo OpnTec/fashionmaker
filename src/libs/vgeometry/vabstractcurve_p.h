@@ -45,14 +45,16 @@ public:
     VAbstractCurveData ()
         : duplicate(0),
           color(ColorBlack),
-          penStyle(TypeLineLine)
+          penStyle(TypeLineLine),
+          approximationScale(defCurveApproximationScale)
     {}
 
     VAbstractCurveData(const VAbstractCurveData &curve)
         : QSharedData(curve),
           duplicate(curve.duplicate),
           color(curve.color),
-          penStyle(curve.penStyle)
+          penStyle(curve.penStyle),
+          approximationScale(curve.approximationScale)
     {}
 
     virtual ~VAbstractCurveData();
@@ -62,6 +64,8 @@ public:
 
     QString color;
     QString penStyle;
+
+    qreal approximationScale;
 
 private:
     VAbstractCurveData &operator=(const VAbstractCurveData &) Q_DECL_EQ_DELETE;

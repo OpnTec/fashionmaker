@@ -301,6 +301,18 @@ void VAbstractCurve::SetPenStyle(const QString &penStyle)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+qreal VAbstractCurve::GetApproximationScale() const
+{
+    return d->approximationScale;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VAbstractCurve::SetApproximationScale(qreal value)
+{
+    d->approximationScale = value;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 QVector<QPointF> VAbstractCurve::CurveIntersectLine(const QVector<QPointF> &points, const QLineF &line)
 {
     QVector<QPointF> intersections;

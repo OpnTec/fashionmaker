@@ -310,6 +310,7 @@ void VAbstractSpline::SaveOptions(QDomElement &tag, QSharedPointer<VGObject> &ob
     const QSharedPointer<VAbstractCurve> curve = qSharedPointerCast<VAbstractCurve>(obj);
     doc->SetAttribute(tag, AttrColor, curve->GetColor());
     doc->SetAttribute(tag, AttrPenStyle, curve->GetPenStyle());
+    doc->SetAttribute(tag, AttrAScale, curve->GetApproximationScale());
 }
 
 //---------------------------------------------------------------------------------------------------------------------

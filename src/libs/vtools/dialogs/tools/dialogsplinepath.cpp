@@ -105,6 +105,8 @@ DialogSplinePath::DialogSplinePath(const VContainer *data, const quint32 &toolId
     FillComboBoxLineColors(ui->comboBoxColor);
     FillComboBoxTypeLine(ui->comboBoxPenStyle, CurvePenStylesPics());
 
+    ui->doubleSpinBoxApproximationScale->setMaximum(maxCurveApproximationScale);
+
     connect(ui->listWidget, &QListWidget::currentRowChanged, this, &DialogSplinePath::PointChanged);
     connect(ui->comboBoxPoint,  static_cast<void (QComboBox::*)(int)>(&QComboBox::currentIndexChanged),
             this, &DialogSplinePath::currentPointChanged);
@@ -161,35 +163,15 @@ void DialogSplinePath::SetPath(const VSplinePath &value)
     }
     ui->listWidget->setFocus(Qt::OtherFocusReason);
     ui->lineEditSplPathName->setText(qApp->TrVars()->VarToUser(path.name()));
+    ui->doubleSpinBoxApproximationScale->setValue(path.GetApproximationScale());
+
+    ChangeCurrentData(ui->comboBoxPenStyle, path.GetPenStyle());
+    ChangeCurrentData(ui->comboBoxColor, path.GetColor());
 
     auto visPath = qobject_cast<VisToolSplinePath *>(vis);
     SCASSERT(visPath != nullptr)
     visPath->setPath(path);
     ui->listWidget->blockSignals(false);
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-QString DialogSplinePath::GetPenStyle() const
-{
-    return GetComboBoxCurrentData(ui->comboBoxPenStyle, TypeLineLine);
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void DialogSplinePath::SetPenStyle(const QString &value)
-{
-    ChangeCurrentData(ui->comboBoxPenStyle, value);
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-QString DialogSplinePath::GetColor() const
-{
-    return GetComboBoxCurrentData(ui->comboBoxColor, ColorBlack);
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void DialogSplinePath::SetColor(const QString &value)
-{
-    ChangeCurrentData(ui->comboBoxColor, value);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -888,6 +870,9 @@ void DialogSplinePath::SavePath()
 {
     path.Clear();
     path = ExtractPath();
+    path.SetApproximationScale(ui->doubleSpinBoxApproximationScale->value());
+    path.SetPenStyle(GetComboBoxCurrentData(ui->comboBoxPenStyle, TypeLineLine));
+    path.SetColor(GetComboBoxCurrentData(ui->comboBoxColor, ColorBlack));
 }
 
 //---------------------------------------------------------------------------------------------------------------------

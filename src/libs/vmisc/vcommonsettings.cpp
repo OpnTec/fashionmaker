@@ -69,6 +69,7 @@ const QString settingPatternHideMainPath            = QStringLiteral("pattern/hi
 const QString settingDoublePassmark                 = QStringLiteral("pattern/doublePassmark");
 const QString settingPatternDefaultSeamAllowance    = QStringLiteral("pattern/defaultSeamAllowance");
 const QString settingPatternLabelFont               = QStringLiteral("pattern/labelFont");
+const QString settingPatternCurveApproximationScale = QStringLiteral("pattern/curveApproximationScale");
 
 const QString settingGeneralRecentFileList       = QStringLiteral("recentFileList");
 const QString settingGeneralRestoreFileList      = QStringLiteral("restoreFileList");
@@ -960,4 +961,28 @@ QStringList VCommonSettings::GetUserDefinedTimeFormats() const
 void VCommonSettings::SetUserDefinedTimeFormats(const QStringList &formats)
 {
     setValue(settingLabelUserTimeFormats, ClearFormats(VCommonSettings::PredefinedTimeFormats(), formats));
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+qreal VCommonSettings::GetCurveApproximationScale() const
+{
+    bool ok = false;
+    const qreal scale = value(settingPatternCurveApproximationScale, defCurveApproximationScale).toDouble(&ok);
+    if (ok && scale >= minCurveApproximationScale && scale <= maxCurveApproximationScale)
+    {
+        return scale;
+    }
+    else
+    {
+        return defCurveApproximationScale;
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VCommonSettings::SetCurveApproximationScale(qreal value)
+{
+    if (value >= minCurveApproximationScale && value <= maxCurveApproximationScale)
+    {
+        setValue(settingPatternCurveApproximationScale, value);
+    }
 }

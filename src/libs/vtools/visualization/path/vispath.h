@@ -49,9 +49,13 @@ public:
     explicit VisPath(const VContainer *data, QGraphicsItem *parent = nullptr);
     virtual ~VisPath() = default;
 
+    void setApproximationScale(qreal approximationScale);
+
     virtual int  type() const Q_DECL_OVERRIDE {return Type;}
     enum { Type = UserType + static_cast<int>(Vis::Path)};
 protected:
+    qreal m_approximationScale;
+
     virtual void InitPen() Q_DECL_OVERRIDE;
     virtual void AddOnScene() Q_DECL_OVERRIDE;
 

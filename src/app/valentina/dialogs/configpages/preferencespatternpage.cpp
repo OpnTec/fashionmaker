@@ -32,6 +32,7 @@
 #include "../ifc/xml/vabstractpattern.h"
 #include "../dialogdatetimeformats.h"
 #include "../dialogknownmaterials.h"
+#include "../vmisc/def.h"
 
 #include <QMessageBox>
 #include <QDate>
@@ -64,6 +65,9 @@ PreferencesPatternPage::PreferencesPatternPage(QWidget *parent)
     VSettings *settings = qApp->ValentinaSettings();
 
     ui->graphOutputCheck->setChecked(settings->GetGraphicalOutput());
+    ui->doubleSpinBoxCurveApproximation->setValue(settings->GetCurveApproximationScale());
+    ui->doubleSpinBoxCurveApproximation->setMinimum(minCurveApproximationScale);
+    ui->doubleSpinBoxCurveApproximation->setMaximum(maxCurveApproximationScale);
     ui->undoCount->setValue(settings->GetUndoCount());
 
     InitDefaultSeamAllowance();
@@ -93,6 +97,7 @@ void PreferencesPatternPage::Apply()
 
     // Scene antialiasing
     settings->SetGraphicalOutput(ui->graphOutputCheck->isChecked());
+    settings->SetCurveApproximationScale(ui->doubleSpinBoxCurveApproximation->value());
     qApp->getSceneView()->setRenderHint(QPainter::Antialiasing, ui->graphOutputCheck->isChecked());
     qApp->getSceneView()->setRenderHint(QPainter::SmoothPixmapTransform, ui->graphOutputCheck->isChecked());
 

@@ -87,6 +87,9 @@ public:
     VFormula         GetFormulaLength() const;
     void             SetFormulaLength(const VFormula &value);
 
+    qreal            GetApproximationScale() const;
+    void             SetApproximationScale(qreal value);
+
     virtual void     ShowVisualization(bool show) Q_DECL_OVERRIDE;
 protected slots:
     virtual void ShowContextMenu(QGraphicsSceneContextMenuEvent *event, quint32 id=NULL_ID) Q_DECL_OVERRIDE;

@@ -79,6 +79,8 @@ DialogArcWithLength::DialogArcWithLength(const VContainer *data, const quint32 &
     FillComboBoxLineColors(ui->comboBoxColor);
     FillComboBoxTypeLine(ui->comboBoxPenStyle, CurvePenStylesPics());
 
+    ui->doubleSpinBoxApproximationScale->setMaximum(maxCurveApproximationScale);
+
     CheckState();
 
     connect(ui->toolButtonExprRadius, &QPushButton::clicked, this, &DialogArcWithLength::FXRadius);
@@ -208,6 +210,22 @@ QString DialogArcWithLength::GetColor() const
 void DialogArcWithLength::SetColor(const QString &value)
 {
     ChangeCurrentData(ui->comboBoxColor, value);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+qreal DialogArcWithLength::GetApproximationScale() const
+{
+    return ui->doubleSpinBoxApproximationScale->value();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogArcWithLength::SetApproximationScale(qreal value)
+{
+    ui->doubleSpinBoxApproximationScale->setValue(value);
+
+    VisToolArcWithLength *path = qobject_cast<VisToolArcWithLength *>(vis);
+    SCASSERT(path != nullptr)
+    path->setApproximationScale(value);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -351,6 +369,7 @@ void DialogArcWithLength::SaveData()
     path->setRadius(radius);
     path->setF1(f1);
     path->setLength(length);
+    path->setApproximationScale(ui->doubleSpinBoxApproximationScale->value());
     path->RefreshGeometry();
 }
 

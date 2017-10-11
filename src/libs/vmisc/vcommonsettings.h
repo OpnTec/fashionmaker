@@ -186,6 +186,9 @@ public:
     QStringList GetUserDefinedTimeFormats() const;
     void        SetUserDefinedTimeFormats(const QStringList &formats);
 
+    qreal GetCurveApproximationScale() const;
+    void  SetCurveApproximationScale(qreal value);
+
 private:
     Q_DISABLE_COPY(VCommonSettings)
 };

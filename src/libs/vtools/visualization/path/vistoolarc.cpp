@@ -61,6 +61,7 @@ void VisToolArc::RefreshGeometry()
         if (not qFuzzyIsNull(radius) && f1 >= 0 && f2 >= 0)
         {
             VArc arc = VArc (*first, radius, f1, f2);
+            arc.SetApproximationScale(m_approximationScale);
             DrawPath(this, arc.GetPath(), arc.DirectionArrows(), mainColor, lineStyle, Qt::RoundCap);
         }
     }

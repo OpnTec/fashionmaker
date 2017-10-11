@@ -59,11 +59,13 @@ struct VAbstractSplineInitData : VAbstractToolInitData
     VAbstractSplineInitData()
         : VAbstractToolInitData(),
           color(ColorBlack),
-          penStyle(TypeLineLine)
+          penStyle(TypeLineLine),
+          approximationScale(defCurveApproximationScale)
     {}
 
     QString color;
     QString penStyle;
+    qreal approximationScale;
 };
 
 class VAbstractSpline:public VDrawTool, public QGraphicsPathItem

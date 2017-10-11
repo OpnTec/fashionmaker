@@ -111,7 +111,7 @@ public:
     virtual QVector<QPointF> GetPoints () const Q_DECL_OVERRIDE;
     // cppcheck-suppress unusedFunction
     static QVector<QPointF> SplinePoints(const QPointF &p1, const QPointF &p4, qreal angle1, qreal angle2, qreal kAsm1,
-                                         qreal kAsm2, qreal kCurve);
+                                         qreal kAsm2, qreal kCurve, qreal approximationScale);
     qreal   ParamT(const QPointF &pBt) const;
 
 protected:

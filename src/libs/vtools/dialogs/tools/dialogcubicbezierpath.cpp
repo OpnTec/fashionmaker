@@ -73,6 +73,8 @@ DialogCubicBezierPath::DialogCubicBezierPath(const VContainer *data, const quint
     FillComboBoxLineColors(ui->comboBoxColor);
     FillComboBoxTypeLine(ui->comboBoxPenStyle, CurvePenStylesPics());
 
+    ui->doubleSpinBoxApproximationScale->setMaximum(maxCurveApproximationScale);
+
     connect(ui->listWidget, &QListWidget::currentRowChanged, this, &DialogCubicBezierPath::PointChanged);
     connect(ui->comboBoxPoint,  static_cast<void (QComboBox::*)(int)>(&QComboBox::currentIndexChanged),
             this, &DialogCubicBezierPath::currentPointChanged);
@@ -104,6 +106,10 @@ void DialogCubicBezierPath::SetPath(const VCubicBezierPath &value)
     }
     ui->listWidget->setFocus(Qt::OtherFocusReason);
     ui->lineEditSplPathName->setText(qApp->TrVars()->VarToUser(path.name()));
+    ui->doubleSpinBoxApproximationScale->setValue(path.GetApproximationScale());
+
+    ChangeCurrentData(ui->comboBoxPenStyle, path.GetPenStyle());
+    ChangeCurrentData(ui->comboBoxColor, path.GetColor());
 
     auto visPath = qobject_cast<VisToolCubicBezierPath *>(vis);
     SCASSERT(visPath != nullptr)
@@ -114,30 +120,6 @@ void DialogCubicBezierPath::SetPath(const VCubicBezierPath &value)
     {
         ui->listWidget->setCurrentRow(0);
     }
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-QString DialogCubicBezierPath::GetPenStyle() const
-{
-    return GetComboBoxCurrentData(ui->comboBoxPenStyle, TypeLineLine);
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void DialogCubicBezierPath::SetPenStyle(const QString &value)
-{
-    ChangeCurrentData(ui->comboBoxPenStyle, value);
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-QString DialogCubicBezierPath::GetColor() const
-{
-    return GetComboBoxCurrentData(ui->comboBoxColor, ColorBlack);
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void DialogCubicBezierPath::SetColor(const QString &value)
-{
-    ChangeCurrentData(ui->comboBoxColor, value);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -208,6 +190,10 @@ void DialogCubicBezierPath::SaveData()
     const quint32 d = path.GetDuplicate();//Save previous value
     SavePath();
     newDuplicate <= -1 ? path.SetDuplicate(d) : path.SetDuplicate(static_cast<quint32>(newDuplicate));
+
+    path.SetPenStyle(GetComboBoxCurrentData(ui->comboBoxPenStyle, TypeLineLine));
+    path.SetColor(GetComboBoxCurrentData(ui->comboBoxColor, ColorBlack));
+    path.SetApproximationScale(ui->doubleSpinBoxApproximationScale->value());
 
     auto visPath = qobject_cast<VisToolCubicBezierPath *>(vis);
     SCASSERT(visPath != nullptr)

@@ -4512,6 +4512,7 @@ void MainWindow::Preferences()
                 &VToolOptionsPropertyBrowser::RefreshOptions);
         connect(dlg.data(), &DialogPreferences::UpdateProperties, this, &MainWindow::ToolBarStyles);
         connect(dlg.data(), &DialogPreferences::UpdateProperties, this, &MainWindow::RefreshDetailsLabel);
+        connect(dlg.data(), &DialogPreferences::UpdateProperties, this, [](){VPattern::RefreshCurves();});
         QGuiApplication::restoreOverrideCursor();
 
         if (guard->exec() == QDialog::Accepted)

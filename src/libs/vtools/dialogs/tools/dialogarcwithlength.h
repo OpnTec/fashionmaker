@@ -69,6 +69,8 @@ public:
     QString       GetColor() const;
     void          SetColor(const QString &value);
 
+    qreal         GetApproximationScale() const;
+    void          SetApproximationScale(qreal value);
 public slots:
     virtual void  ChosenObject(quint32 id, const SceneObject &type) Q_DECL_OVERRIDE;
     /**

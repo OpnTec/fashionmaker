@@ -26,6 +26,7 @@
 - Two new shortcut sequences: Ctrl+PgDown and Ctrl+PgUp to switch to next and previous pattern piece.
 - [#765] New feature. Free curve mode.
 - [#657] Improve feature: Allow more paper formats for printing tiled PDF
+- [#768] New feature. Custom curve approximation scale.
 
 # Version 0.5.1
 - [#683] Tool Seam allowance's dialog is off screen on small resolutions.

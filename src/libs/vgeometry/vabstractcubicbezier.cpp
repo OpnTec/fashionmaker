@@ -36,6 +36,7 @@
 #include "../vmisc/def.h"
 #include "../vmisc/vmath.h"
 #include "../vgeometry/vpointf.h"
+#include "../vmisc/vabstractapplication.h"
 
 //---------------------------------------------------------------------------------------------------------------------
 VAbstractCubicBezier::VAbstractCubicBezier(const GOType &type, const quint32 &idObject, const Draw &mode)
@@ -211,9 +212,10 @@ qreal VAbstractCubicBezier::CalcSqDistance(qreal x1, qreal y1, qreal x2, qreal y
  * @param level level of recursion. In the begin 0.
  * @param px list х coordinat spline points.
  * @param py list у coordinat spline points.
+ * @param approximationScale curve approximation scale.
  */
 void VAbstractCubicBezier::PointBezier_r(qreal x1, qreal y1, qreal x2, qreal y2, qreal x3, qreal y3, qreal x4, qreal y4,
-                                         qint16 level, QVector<qreal> &px, QVector<qreal> &py)
+                                         qint16 level, QVector<qreal> &px, QVector<qreal> &py, qreal approximationScale)
 {
     if (px.size() >= 2)
     {
@@ -231,7 +233,13 @@ void VAbstractCubicBezier::PointBezier_r(qreal x1, qreal y1, qreal x2, qreal y2,
     const double m_angle_tolerance = 0.0;
     enum curve_recursion_limit_e { curve_recursion_limit = 32 };
     const double m_cusp_limit = 0.0;
-    double m_approximation_scale = 10.0;
+
+    double m_approximation_scale = approximationScale;
+    if(m_approximation_scale < minCurveApproximationScale || m_approximation_scale > maxCurveApproximationScale)
+    {
+        m_approximation_scale = qApp->Settings()->GetCurveApproximationScale();
+    }
+
     double m_distance_tolerance_square;
 
     m_distance_tolerance_square = 0.5 / m_approximation_scale;
@@ -495,8 +503,10 @@ void VAbstractCubicBezier::PointBezier_r(qreal x1, qreal y1, qreal x2, qreal y2,
 
     // Continue subdivision
     //----------------------
-    PointBezier_r(x1, y1, x12, y12, x123, y123, x1234, y1234, static_cast<qint16>(level + 1), px, py);
-    PointBezier_r(x1234, y1234, x234, y234, x34, y34, x4, y4, static_cast<qint16>(level + 1), px, py);
+    PointBezier_r(x1, y1, x12, y12, x123, y123, x1234, y1234, static_cast<qint16>(level + 1), px, py,
+                  approximationScale);
+    PointBezier_r(x1234, y1234, x234, y234, x34, y34, x4, y4, static_cast<qint16>(level + 1), px, py,
+                  approximationScale);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -506,10 +516,11 @@ void VAbstractCubicBezier::PointBezier_r(qreal x1, qreal y1, qreal x2, qreal y2,
  * @param p2 first control point.
  * @param p3 second control point.
  * @param p4 last spline point.
+ * @param approximationScale curve approximation scale.
  * @return list of points.
  */
 QVector<QPointF> VAbstractCubicBezier::GetCubicBezierPoints(const QPointF &p1, const QPointF &p2, const QPointF &p3,
-                                                            const QPointF &p4)
+                                                            const QPointF &p4, qreal approximationScale)
 {
     QVector<QPointF> pvector;
     QVector<qreal> x;
@@ -519,7 +530,7 @@ QVector<QPointF> VAbstractCubicBezier::GetCubicBezierPoints(const QPointF &p1, c
     x.append ( p1.x () );
     y.append ( p1.y () );
     PointBezier_r ( p1.x (), p1.y (), p2.x (), p2.y (),
-                    p3.x (), p3.y (), p4.x (), p4.y (), 0, wx, wy );
+                    p3.x (), p3.y (), p4.x (), p4.y (), 0, wx, wy, approximationScale );
     x.append ( p4.x () );
     y.append ( p4.y () );
     for ( qint32 i = 0; i < x.count(); ++i )
@@ -536,11 +547,13 @@ QVector<QPointF> VAbstractCubicBezier::GetCubicBezierPoints(const QPointF &p1, c
  * @param p2 first control point.
  * @param p3 second control point.
  * @param p4 last spline point.
+ * @param approximationScale curve approximation scale.
  * @return length.
  */
-qreal VAbstractCubicBezier::LengthBezier(const QPointF &p1, const QPointF &p2, const QPointF &p3, const QPointF &p4)
+qreal VAbstractCubicBezier::LengthBezier(const QPointF &p1, const QPointF &p2, const QPointF &p3, const QPointF &p4,
+                                         qreal approximationScale)
 {
-    return PathLength(GetCubicBezierPoints(p1, p2, p3, p4));
+    return PathLength(GetCubicBezierPoints(p1, p2, p3, p4, approximationScale));
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -575,5 +588,5 @@ qreal VAbstractCubicBezier::LengthT(qreal t) const
     seg123_234.setLength(seg123_234.length () * t);
     const QPointF p1234 = seg123_234.p2();
 
-    return LengthBezier ( static_cast<QPointF>(GetP1()), p12, p123, p1234);
+    return LengthBezier ( static_cast<QPointF>(GetP1()), p12, p123, p1234, GetApproximationScale());
 }

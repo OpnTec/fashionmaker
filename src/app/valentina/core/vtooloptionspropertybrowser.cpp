@@ -37,6 +37,8 @@
 #include "../vpropertyexplorer/vproperties.h"
 #include "vformulaproperty.h"
 #include "../vpatterndb/vformula.h"
+#include "../vgeometry/vcubicbezier.h"
+#include "../vgeometry/vcubicbezierpath.h"
 
 #include <QDockWidget>
 #include <QHBoxLayout>
@@ -650,6 +652,20 @@ void VToolOptionsPropertyBrowser::AddPropertyLineColor(Tool *i, const QString &p
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void VToolOptionsPropertyBrowser::AddPropertyApproximationScale(const QString &propertyName, qreal aScale)
+{
+    QMap<QString, QVariant> settings;
+    settings.insert(QString("Min"), 0);
+    settings.insert(QString("Max"), maxCurveApproximationScale);
+    settings.insert(QString("Step"), 0.1);
+    settings.insert(QString("Precision"), 1);
+
+    VPE::VDoubleProperty *aScaleProperty = new VPE::VDoubleProperty(propertyName, settings);
+    aScaleProperty->setValue(aScale);
+    AddProperty(aScaleProperty, AttrAScale);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 template<class Tool>
 void VToolOptionsPropertyBrowser::SetPointName(const QString &name)
 {
@@ -976,6 +992,9 @@ void VToolOptionsPropertyBrowser::ChangeDataToolArc(VPE::VProperty *property)
         case 59: // AttrPenStyle
             i->SetPenStyle(value.toString());
             break;
+        case 60: // AttrAScale
+            i->SetApproximationScale(value.toDouble());
+            break;
         default:
             qWarning()<<"Unknown property type. id = "<<id;
             break;
@@ -1010,6 +1029,9 @@ void VToolOptionsPropertyBrowser::ChangeDataToolArcWithLength(VPE::VProperty *pr
             break;
         case 59: // AttrPenStyle
             i->SetPenStyle(value.toString());
+            break;
+        case 60: // AttrAScale
+            i->SetApproximationScale(value.toDouble());
             break;
         default:
             qWarning()<<"Unknown property type. id = "<<id;
@@ -1571,6 +1593,10 @@ void VToolOptionsPropertyBrowser::ChangeDataToolSpline(VPE::VProperty *property)
         case 59: // AttrPenStyle
             i->SetPenStyle(value.toString());
             break;
+        case 60: // AttrAScale
+            spl.SetApproximationScale(value.toDouble());
+            i->setSpline(spl);
+            break;
         default:
             qWarning()<<"Unknown property type. id = "<<id;
             break;
@@ -1599,6 +1625,13 @@ void VToolOptionsPropertyBrowser::ChangeDataToolCubicBezier(VPE::VProperty *prop
         case 59: // AttrPenStyle
             i->SetPenStyle(value.toString());
             break;
+        case 60: // AttrAScale
+        {
+            VCubicBezier spl = i->getSpline();
+            spl.SetApproximationScale(value.toDouble());
+            i->setSpline(spl);
+            break;
+        }
         case 55: // AttrPoint1 (read only)
         case 56: // AttrPoint2 (read only)
         case 57: // AttrPoint3 (read only)
@@ -1631,6 +1664,13 @@ void VToolOptionsPropertyBrowser::ChangeDataToolSplinePath(VPE::VProperty *prope
         case 59: // AttrPenStyle
             i->SetPenStyle(value.toString());
             break;
+        case 60: // AttrAScale
+        {
+            VSplinePath spl = i->getSplinePath();
+            spl.SetApproximationScale(value.toDouble());
+            i->setSplinePath(spl);
+            break;
+        }
         default:
             qWarning()<<"Unknown property type. id = "<<id;
             break;
@@ -1658,6 +1698,13 @@ void VToolOptionsPropertyBrowser::ChangeDataToolCubicBezierPath(VPE::VProperty *
         case 59: // AttrPenStyle
             i->SetPenStyle(value.toString());
             break;
+        case 60: // AttrAScale
+        {
+            VCubicBezierPath spl = i->getSplinePath();
+            spl.SetApproximationScale(value.toDouble());
+            i->setSplinePath(spl);
+            break;
+        }
         default:
             qWarning()<<"Unknown property type. id = "<<id;
             break;
@@ -1955,6 +2002,7 @@ void VToolOptionsPropertyBrowser::ShowOptionsToolArc(QGraphicsItem *item)
     AddPropertyFormula(tr("Second angle:"), i->GetFormulaF2(), AttrAngle2);
     AddPropertyCurvePenStyle(i, tr("Pen style:"), CurvePenStylesPics());
     AddPropertyLineColor(i, tr("Color:"), VAbstractTool::ColorsList(), AttrColor);
+    AddPropertyApproximationScale(tr("Approximation scale:"), i->GetApproximationScale());
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -1970,6 +2018,7 @@ void VToolOptionsPropertyBrowser::ShowOptionsToolArcWithLength(QGraphicsItem *it
     AddPropertyFormula(tr("Length:"), i->GetFormulaLength(), AttrLength);
     AddPropertyCurvePenStyle(i, tr("Pen style:"), CurvePenStylesPics());
     AddPropertyLineColor(i, tr("Color:"), VAbstractTool::ColorsList(), AttrColor);
+    AddPropertyApproximationScale(tr("Approximation scale:"), i->GetApproximationScale());
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -2254,6 +2303,7 @@ void VToolOptionsPropertyBrowser::ShowOptionsToolSpline(QGraphicsItem *item)
 
     AddPropertyCurvePenStyle(i, tr("Pen style:"), CurvePenStylesPics());
     AddPropertyLineColor(i, tr("Color:"), VAbstractTool::ColorsList(), AttrColor);
+    AddPropertyApproximationScale(tr("Approximation scale:"), spl.GetApproximationScale());
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -2270,6 +2320,7 @@ void VToolOptionsPropertyBrowser::ShowOptionsToolCubicBezier(QGraphicsItem *item
     AddPropertyParentPointName(i->ForthPointName(), tr("Fourth point:"), AttrPoint4);
     AddPropertyCurvePenStyle(i, tr("Pen style:"), CurvePenStylesPics());
     AddPropertyLineColor(i, tr("Color:"), VAbstractTool::ColorsList(), AttrColor);
+    AddPropertyApproximationScale(tr("Approximation scale:"), i->getSpline().GetApproximationScale());
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -2282,6 +2333,7 @@ void VToolOptionsPropertyBrowser::ShowOptionsToolSplinePath(QGraphicsItem *item)
     AddPropertyObjectName(i, tr("Name:"), true);
     AddPropertyCurvePenStyle(i, tr("Pen style:"), CurvePenStylesPics());
     AddPropertyLineColor(i, tr("Color:"), VAbstractTool::ColorsList(), AttrColor);
+    AddPropertyApproximationScale(tr("Approximation scale:"), i->getSplinePath().GetApproximationScale());
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -2294,6 +2346,7 @@ void VToolOptionsPropertyBrowser::ShowOptionsToolCubicBezierPath(QGraphicsItem *
     AddPropertyObjectName(i, tr("Name:"), true);
     AddPropertyCurvePenStyle(i, tr("Pen style:"), CurvePenStylesPics());
     AddPropertyLineColor(i, tr("Color:"), VAbstractTool::ColorsList(), AttrColor);
+    AddPropertyApproximationScale(tr("Approximation scale:"), i->getSplinePath().GetApproximationScale());
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -2501,6 +2554,10 @@ void VToolOptionsPropertyBrowser::UpdateOptionsToolArc()
     QVariant valueCenterPoint;
     valueCenterPoint.setValue(i->CenterPointName());
     idToProperty[AttrCenter]->setValue(valueCenterPoint);
+
+    QVariant valueApproximationScale;
+    valueApproximationScale.setValue(i->GetApproximationScale());
+    idToProperty[AttrAScale]->setValue(valueApproximationScale);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -2533,6 +2590,10 @@ void VToolOptionsPropertyBrowser::UpdateOptionsToolArcWithLength()
     QVariant valueCenterPoint;
     valueCenterPoint.setValue(i->CenterPointName());
     idToProperty[AttrCenter]->setValue(valueCenterPoint);
+
+    QVariant valueApproximationScale;
+    valueApproximationScale.setValue(i->GetApproximationScale());
+    idToProperty[AttrAScale]->setValue(valueApproximationScale);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -2975,6 +3036,10 @@ void VToolOptionsPropertyBrowser::UpdateOptionsToolSpline()
 
     idToProperty[AttrColor]->setValue(VPE::VLineColorProperty::IndexOfColor(VAbstractTool::ColorsList(),
                                                                             i->GetLineColor()));
+
+    QVariant valueApproximationScale;
+    valueApproximationScale.setValue(spl.GetApproximationScale());
+    idToProperty[AttrAScale]->setValue(valueApproximationScale);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -3007,6 +3072,10 @@ void VToolOptionsPropertyBrowser::UpdateOptionsToolCubicBezier()
     QVariant valueForthPoint;
     valueForthPoint.setValue(i->ForthPointName());
     idToProperty[AttrPoint4]->setValue(valueForthPoint);
+
+    QVariant valueApproximationScale;
+    valueApproximationScale.setValue(i->getSpline().GetApproximationScale());
+    idToProperty[AttrAScale]->setValue(valueApproximationScale);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -3023,6 +3092,10 @@ void VToolOptionsPropertyBrowser::UpdateOptionsToolSplinePath()
 
     idToProperty[AttrColor]->setValue(VPE::VLineColorProperty::IndexOfColor(VAbstractTool::ColorsList(),
                                                                             i->GetLineColor()));
+
+    QVariant valueApproximationScale;
+    valueApproximationScale.setValue(i->getSplinePath().GetApproximationScale());
+    idToProperty[AttrAScale]->setValue(valueApproximationScale);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -3039,6 +3112,10 @@ void VToolOptionsPropertyBrowser::UpdateOptionsToolCubicBezierPath()
 
     idToProperty[AttrColor]->setValue(VPE::VLineColorProperty::IndexOfColor(VAbstractTool::ColorsList(),
                                                                             i->GetLineColor()));
+
+    QVariant valueApproximationScale;
+    valueApproximationScale.setValue(i->getSplinePath().GetApproximationScale());
+    idToProperty[AttrAScale]->setValue(valueApproximationScale);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -3279,6 +3356,7 @@ QStringList VToolOptionsPropertyBrowser::PropertiesList() const
                                             << AttrPoint2                         /* 56 */
                                             << AttrPoint3                         /* 57 */
                                             << AttrPoint4                         /* 58 */
-                                            << AttrPenStyle;                      /* 59 */
+                                            << AttrPenStyle                       /* 59 */
+                                            << AttrAScale;                        /* 60 */
     return attr;
 }

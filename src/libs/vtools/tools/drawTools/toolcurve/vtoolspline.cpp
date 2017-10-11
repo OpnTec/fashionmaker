@@ -134,8 +134,6 @@ void VToolSpline::setDialog()
     SCASSERT(not dialogTool.isNull())
     const auto spl = VAbstractTool::data.GeometricObject<VSpline>(m_id);
     dialogTool->SetSpline(*spl);
-    dialogTool->SetColor(spl->GetColor());
-    dialogTool->SetPenStyle(spl->GetPenStyle());
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -161,11 +159,7 @@ VToolSpline* VToolSpline::Create(QSharedPointer<DialogTool> dialog, VMainGraphic
     initData.parse = Document::FullParse;
     initData.typeCreation = Source::FromGui;
 
-    VSpline *spline = new VSpline(dialogTool->GetSpline());
-    spline->SetColor(dialogTool->GetColor());
-    spline->SetPenStyle(dialogTool->GetPenStyle());
-
-    auto spl = Create(initData, spline);
+    auto spl = Create(initData, new VSpline(dialogTool->GetSpline()));
 
     if (spl != nullptr)
     {
@@ -233,6 +227,7 @@ VToolSpline *VToolSpline::Create(VToolSplineInitData &initData)
 
     spline->SetColor(initData.color);
     spline->SetPenStyle(initData.penStyle);
+    spline->SetApproximationScale(initData.approximationScale);
 
     return VToolSpline::Create(initData, spline);
 }
@@ -336,8 +331,6 @@ void VToolSpline::SaveDialog(QDomElement &domElement)
     controlPoints[1]->blockSignals(false);
 
     SetSplineAttributes(domElement, spl);
-    doc->SetAttribute(domElement, AttrColor,   dialogTool->GetColor());
-    doc->SetAttribute(domElement, AttrPenStyle, dialogTool->GetPenStyle());
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -527,6 +520,7 @@ void VToolSpline::SetVisualization()
         visual->SetKAsm2(spl->GetKasm2());
         visual->SetKCurve(spl->GetKcurve());
         visual->setLineStyle(LineStyleToPenStyle(spl->GetPenStyle()));
+        visual->setApproximationScale(spl->GetApproximationScale());
         visual->SetMode(Mode::Show);
         visual->RefreshGeometry();
     }
@@ -627,6 +621,9 @@ void VToolSpline::SetSplineAttributes(QDomElement &domElement, const VSpline &sp
     doc->SetAttribute(domElement, AttrAngle2,  spl.GetEndAngleFormula());
     doc->SetAttribute(domElement, AttrLength1, spl.GetC1LengthFormula());
     doc->SetAttribute(domElement, AttrLength2, spl.GetC2LengthFormula());
+    doc->SetAttribute(domElement, AttrColor,   spl.GetColor());
+    doc->SetAttribute(domElement, AttrPenStyle, spl.GetPenStyle());
+    doc->SetAttribute(domElement, AttrAScale, spl.GetApproximationScale());
 
     if (spl.GetDuplicate() > 0)
     {

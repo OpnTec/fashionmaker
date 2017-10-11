@@ -107,6 +107,8 @@ DialogSpline::DialogSpline(const VContainer *data, const quint32 &toolId, QWidge
     FillComboBoxLineColors(ui->comboBoxColor);
     FillComboBoxTypeLine(ui->comboBoxPenStyle, CurvePenStylesPics());
 
+    ui->doubleSpinBoxApproximationScale->setMaximum(maxCurveApproximationScale);
+
     CheckState();
 
     connect(ui->comboBoxP1, static_cast<void (QComboBox::*)(const QString &)>(&QComboBox::currentIndexChanged),
@@ -209,6 +211,7 @@ void DialogSpline::SaveData()
     path->SetKAsm1(spl.GetKasm1());
     path->SetKAsm2(spl.GetKasm2());
     path->SetKCurve(spl.GetKcurve());
+    path->setApproximationScale(spl.GetApproximationScale());
     path->SetMode(Mode::Show);
     path->RefreshGeometry();
 }
@@ -467,6 +470,9 @@ VSpline DialogSpline::CurrentSpline() const
     length2F = qApp->TrVars()->TryFormulaFromUser(length2F, separator);
 
     VSpline spline(*GetP1(), *GetP4(), angle1, angle1F, angle2, angle2F, length1, length1F,  length2, length2F);
+    spline.SetApproximationScale(ui->doubleSpinBoxApproximationScale->value());
+    spline.SetPenStyle(GetComboBoxCurrentData(ui->comboBoxPenStyle, TypeLineLine));
+    spline.SetColor(GetComboBoxCurrentData(ui->comboBoxColor, ColorBlack));
 
     return spline;
 }
@@ -578,6 +584,10 @@ void DialogSpline::SetSpline(const VSpline &spline)
 {
     spl = spline;
 
+    ui->doubleSpinBoxApproximationScale->setValue(spl.GetApproximationScale());
+    ChangeCurrentData(ui->comboBoxColor, spl.GetColor());
+    ChangeCurrentData(ui->comboBoxPenStyle, spl.GetPenStyle());
+
     setCurrentPointId(ui->comboBoxP1, spl.GetP1().id());
     setCurrentPointId(ui->comboBoxP4, spl.GetP4().id());
 
@@ -608,28 +618,5 @@ void DialogSpline::SetSpline(const VSpline &spline)
     path->SetKAsm1(spl.GetKasm1());
     path->SetKAsm2(spl.GetKasm2());
     path->SetKCurve(spl.GetKcurve());
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-QString DialogSpline::GetPenStyle() const
-{
-    return GetComboBoxCurrentData(ui->comboBoxPenStyle, TypeLineLine);
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void DialogSpline::SetPenStyle(const QString &value)
-{
-    ChangeCurrentData(ui->comboBoxPenStyle, value);
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-QString DialogSpline::GetColor() const
-{
-    return GetComboBoxCurrentData(ui->comboBoxColor, ColorBlack);
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void DialogSpline::SetColor(const QString &value)
-{
-    ChangeCurrentData(ui->comboBoxColor, value);
+    path->setApproximationScale(spl.GetApproximationScale());
 }

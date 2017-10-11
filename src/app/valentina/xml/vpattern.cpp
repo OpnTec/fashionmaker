@@ -518,6 +518,20 @@ void VPattern::LiteParseIncrements()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void VPattern::RefreshCurves()
+{
+    QHash<quint32, VDataTool*>::const_iterator i = tools.constBegin();
+    while (i != tools.constEnd())
+    {
+        if (VAbstractSpline *vTool = qobject_cast<VAbstractSpline *>(i.value()))
+        {
+            vTool->FullUpdateFromFile();
+        }
+        ++i;
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 /**
  * @brief LiteParseTree lite parse file.
  */
@@ -2304,6 +2318,7 @@ void VPattern::ParseToolSpline(VMainGraphicsScene *scene, QDomElement &domElemen
         initData.color = GetParametrString(domElement, AttrColor, ColorBlack);
         initData.penStyle = GetParametrString(domElement, AttrPenStyle, TypeLineLine);
         initData.duplicate = GetParametrUInt(domElement, AttrDuplicate, "0");
+        initData.approximationScale = GetParametrDouble(domElement, AttrAScale, "0");
 
         VToolSpline *spl = VToolSpline::Create(initData);
 
@@ -2364,6 +2379,7 @@ void VPattern::ParseToolCubicBezier(VMainGraphicsScene *scene, const QDomElement
         const QString color = GetParametrString(domElement, AttrColor, ColorBlack);
         const QString penStyle = GetParametrString(domElement, AttrPenStyle, TypeLineLine);
         const quint32 duplicate = GetParametrUInt(domElement, AttrDuplicate, "0");
+        const qreal approximationScale = GetParametrDouble(domElement, AttrAScale, "0");
 
         auto p1 = data->GeometricObject<VPointF>(point1);
         auto p2 = data->GeometricObject<VPointF>(point2);
@@ -2377,6 +2393,8 @@ void VPattern::ParseToolCubicBezier(VMainGraphicsScene *scene, const QDomElement
         }
         initData.spline->SetColor(color);
         initData.spline->SetPenStyle(penStyle);
+        initData.spline->SetPenStyle(penStyle);
+        initData.spline->SetApproximationScale(approximationScale);
 
         VToolCubicBezier::Create(initData);
     }
@@ -2407,6 +2425,7 @@ void VPattern::ParseOldToolSplinePath(VMainGraphicsScene *scene, const QDomEleme
         const qreal kCurve = GetParametrDouble(domElement, AttrKCurve, "1.0");
         const QString color = GetParametrString(domElement, AttrColor, ColorBlack);
         const quint32 duplicate = GetParametrUInt(domElement, AttrDuplicate, "0");
+        const qreal approximationScale = GetParametrDouble(domElement, AttrAScale, "0");
 
         QVector<VFSplinePoint> points;
 
@@ -2444,6 +2463,7 @@ void VPattern::ParseOldToolSplinePath(VMainGraphicsScene *scene, const QDomEleme
             path->SetDuplicate(duplicate);
         }
         path->SetColor(color);
+        path->SetApproximationScale(approximationScale);
 
         VToolSplinePath::Create(initData, path);
     }
@@ -2474,6 +2494,7 @@ void VPattern::ParseToolSplinePath(VMainGraphicsScene *scene, const QDomElement 
         initData.color = GetParametrString(domElement, AttrColor, ColorBlack);
         initData.penStyle = GetParametrString(domElement, AttrPenStyle, TypeLineLine);
         initData.duplicate = GetParametrUInt(domElement, AttrDuplicate, "0");
+        initData.approximationScale = GetParametrDouble(domElement, AttrAScale, "0");
 
         const QDomNodeList nodeList = domElement.childNodes();
         const qint32 num = nodeList.size();
@@ -2565,6 +2586,7 @@ void VPattern::ParseToolCubicBezierPath(VMainGraphicsScene *scene, const QDomEle
         const QString color = GetParametrString(domElement, AttrColor, ColorBlack);
         const QString penStyle = GetParametrString(domElement, AttrPenStyle, TypeLineLine);
         const quint32 duplicate = GetParametrUInt(domElement, AttrDuplicate, "0");
+        const qreal approximationScale = GetParametrDouble(domElement, AttrAScale, "0");
 
         QVector<VPointF> points;
 
@@ -2595,6 +2617,7 @@ void VPattern::ParseToolCubicBezierPath(VMainGraphicsScene *scene, const QDomEle
         }
         initData.path->SetColor(color);
         initData.path->SetPenStyle(penStyle);
+        initData.path->SetApproximationScale(approximationScale);
 
         VToolCubicBezierPath::Create(initData);
     }
@@ -2727,6 +2750,7 @@ void VPattern::ParseToolArc(VMainGraphicsScene *scene, QDomElement &domElement, 
         const QString f2Fix = initData.f2;//need for saving fixed formula;
         initData.color = GetParametrString(domElement, AttrColor, ColorBlack);
         initData.penStyle = GetParametrString(domElement, AttrPenStyle, TypeLineLine);
+        initData.approximationScale = GetParametrDouble(domElement, AttrAScale, "0");
 
         VToolArc::Create(initData);
         //Rewrite attribute formula. Need for situation when we have wrong formula.

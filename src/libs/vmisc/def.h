@@ -53,7 +53,10 @@ class QMarginsF;
 class VTranslateMeasurements;
 class QGraphicsItem;
 
-#define SceneSize 50000
+#define SceneSize 50000  
+extern const qreal   defCurveApproximationScale;
+extern const qreal   minCurveApproximationScale;
+extern const qreal   maxCurveApproximationScale;
 
 enum class NodeDetail : char { Contour, Modeling };
 enum class SceneObject : char { Point, Line, Spline, Arc, ElArc, SplinePath, Detail, Unknown };

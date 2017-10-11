@@ -75,6 +75,7 @@ VCubicBezier VCubicBezier::Rotate(const QPointF &originPoint, qreal degrees, con
     curve.setName(name() + prefix);
     curve.SetColor(GetColor());
     curve.SetPenStyle(GetPenStyle());
+    curve.SetApproximationScale(GetApproximationScale());
     return curve;
 }
 
@@ -89,6 +90,7 @@ VCubicBezier VCubicBezier::Flip(const QLineF &axis, const QString &prefix) const
     curve.setName(name() + prefix);
     curve.SetColor(GetColor());
     curve.SetPenStyle(GetPenStyle());
+    curve.SetApproximationScale(GetApproximationScale());
     return curve;
 }
 
@@ -103,6 +105,7 @@ VCubicBezier VCubicBezier::Move(qreal length, qreal angle, const QString &prefix
     curve.setName(name() + prefix);
     curve.SetColor(GetColor());
     curve.SetPenStyle(GetPenStyle());
+    curve.SetApproximationScale(GetApproximationScale());
     return curve;
 }
 
@@ -179,7 +182,7 @@ qreal VCubicBezier::GetEndAngle() const
 qreal VCubicBezier::GetLength() const
 {
     return LengthBezier (static_cast<QPointF>(GetP1()), static_cast<QPointF>(GetP2()),
-                         static_cast<QPointF>(GetP3()), static_cast<QPointF>(GetP4()));
+                         static_cast<QPointF>(GetP3()), static_cast<QPointF>(GetP4()), GetApproximationScale());
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -190,7 +193,7 @@ qreal VCubicBezier::GetLength() const
 QVector<QPointF> VCubicBezier::GetPoints() const
 {
     return GetCubicBezierPoints(static_cast<QPointF>(GetP1()), static_cast<QPointF>(GetP2()),
-                                static_cast<QPointF>(GetP3()), static_cast<QPointF>(GetP4()));
+                                static_cast<QPointF>(GetP3()), static_cast<QPointF>(GetP4()), GetApproximationScale());
 }
 
 //---------------------------------------------------------------------------------------------------------------------

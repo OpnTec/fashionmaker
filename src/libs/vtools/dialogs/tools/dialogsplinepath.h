@@ -58,12 +58,6 @@ public:
 
     VSplinePath GetPath() const;
     void        SetPath(const VSplinePath &value);
-
-    QString GetPenStyle() const;
-    void    SetPenStyle(const QString &value);
-
-    QString GetColor() const;
-    void    SetColor(const QString &value);
 public slots:
     virtual void ChosenObject(quint32 id, const SceneObject &type) Q_DECL_OVERRIDE;
     virtual void ShowDialog(bool click) Q_DECL_OVERRIDE;

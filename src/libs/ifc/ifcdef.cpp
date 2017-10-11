@@ -93,6 +93,7 @@ const QString AttrKAsm1       = QStringLiteral("kAsm1");
 const QString AttrKAsm2       = QStringLiteral("kAsm2");
 const QString AttrKCurve      = QStringLiteral("kCurve");
 const QString AttrDuplicate   = QStringLiteral("duplicate");
+const QString AttrAScale      = QStringLiteral("aScale");
 const QString AttrPathPoint   = QStringLiteral("pathPoint");
 const QString AttrPSpline     = QStringLiteral("pSpline");
 const QString AttrAxisP1      = QStringLiteral("axisP1");

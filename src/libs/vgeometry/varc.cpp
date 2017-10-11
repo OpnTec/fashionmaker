@@ -132,6 +132,7 @@ VArc VArc::Rotate(const QPointF &originPoint, qreal degrees, const QString &pref
     arc.SetColor(GetColor());
     arc.SetPenStyle(GetPenStyle());
     arc.SetFlipped(IsFlipped());
+    arc.SetApproximationScale(GetApproximationScale());
     return arc;
 }
 
@@ -151,6 +152,7 @@ VArc VArc::Flip(const QLineF &axis, const QString &prefix) const
     arc.SetColor(GetColor());
     arc.SetPenStyle(GetPenStyle());
     arc.SetFlipped(not IsFlipped());
+    arc.SetApproximationScale(GetApproximationScale());
     return arc;
 }
 
@@ -170,6 +172,7 @@ VArc VArc::Move(qreal length, qreal angle, const QString &prefix) const
     arc.SetColor(GetColor());
     arc.SetPenStyle(GetPenStyle());
     arc.SetFlipped(IsFlipped());
+    arc.SetApproximationScale(GetApproximationScale());
     return arc;
 }
 
@@ -280,6 +283,7 @@ QVector<QPointF> VArc::GetPoints() const
         lineP4P3.setLength(lDistance);
 
         VSpline spl(VPointF(pStart), lineP1P2.p2(), lineP4P3.p2(), VPointF(lineP4P3.p1()), 1.0);
+        spl.SetApproximationScale(GetApproximationScale());
         QVector<QPointF> splPoints = spl.GetPoints();
         if (not splPoints.isEmpty() && i != sectionAngle.size() - 1)
         {
@@ -336,9 +340,11 @@ QPointF VArc::CutArc(const qreal &length, VArc &arc1, VArc &arc2) const
 
     arc1 = VArc (GetCenter(), d->radius, d->formulaRadius, GetStartAngle(), GetFormulaF1(), line.angle(),
                  QString().setNum(line.angle()), getIdObject(), getMode());
+    arc1.SetApproximationScale(GetApproximationScale());
 
     arc2 = VArc (GetCenter(), d->radius, d->formulaRadius, line.angle(), QString().setNum(line.angle()), GetEndAngle(),
                  GetFormulaF2(), getIdObject(), getMode());
+    arc2.SetApproximationScale(GetApproximationScale());
     return line.p2();
 }
 

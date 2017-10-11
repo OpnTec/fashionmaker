@@ -142,8 +142,6 @@ void VToolSplinePath::setDialog()
     SCASSERT(not dialogTool.isNull())
     const QSharedPointer<VSplinePath> splPath = VAbstractTool::data.GeometricObject<VSplinePath>(m_id);
     dialogTool->SetPath(*splPath);
-    dialogTool->SetColor(splPath->GetColor());
-    dialogTool->SetPenStyle(splPath->GetPenStyle());
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -173,9 +171,6 @@ VToolSplinePath* VToolSplinePath::Create(QSharedPointer<DialogTool> dialog, VMai
     {
         doc->IncrementReferens((*path)[i].P().getIdTool());
     }
-
-    path->SetColor(dialogTool->GetColor());
-    path->SetPenStyle(dialogTool->GetPenStyle());
 
     VToolSplinePath* spl = Create(initData, path);
     if (spl != nullptr)
@@ -248,6 +243,7 @@ VToolSplinePath *VToolSplinePath::Create(VToolSplinePathInitData &initData)
 
     path->SetColor(initData.color);
     path->SetPenStyle(initData.penStyle);
+    path->SetApproximationScale(initData.approximationScale);
 
     return VToolSplinePath::Create(initData, path);
 }
@@ -355,6 +351,10 @@ void VToolSplinePath::SetSplinePathAttributes(QDomElement &domElement, const VSp
     {
         domElement.removeAttribute(AttrKCurve);
     }
+
+    doc->SetAttribute(domElement, AttrColor, path.GetColor());
+    doc->SetAttribute(domElement, AttrPenStyle, path.GetPenStyle());
+    doc->SetAttribute(domElement, AttrAScale, path.GetApproximationScale());
 
     UpdatePathPoints(doc, domElement, path);
 }
@@ -479,8 +479,6 @@ void VToolSplinePath::SaveDialog(QDomElement &domElement)
         controlPoints[j-1]->blockSignals(false);
     }
 
-    doc->SetAttribute(domElement, AttrColor, dialogTool->GetColor());
-    doc->SetAttribute(domElement, AttrPenStyle, dialogTool->GetPenStyle());
     SetSplinePathAttributes(domElement, splPath);
 }
 

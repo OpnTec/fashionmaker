@@ -60,6 +60,8 @@ DialogCubicBezier::DialogCubicBezier(const VContainer *data, const quint32 &tool
     FillComboBoxLineColors(ui->comboBoxColor);
     FillComboBoxTypeLine(ui->comboBoxPenStyle, CurvePenStylesPics());
 
+    ui->doubleSpinBoxApproximationScale->setMaximum(maxCurveApproximationScale);
+
     DialogTool::CheckState();
 
     connect(ui->comboBoxP1, static_cast<void (QComboBox::*)(const QString &)>(&QComboBox::currentIndexChanged),
@@ -96,39 +98,19 @@ void DialogCubicBezier::SetSpline(const VCubicBezier &spline)
     setCurrentPointId(ui->comboBoxP3, spl.GetP3().id());
     setCurrentPointId(ui->comboBoxP4, spl.GetP4().id());
 
+    ChangeCurrentData(ui->comboBoxPenStyle, spl.GetPenStyle());
+    ChangeCurrentData(ui->comboBoxColor, spl.GetColor());
+
     ui->lineEditSplineName->setText(qApp->TrVars()->VarToUser(spl.name()));
+    ui->doubleSpinBoxApproximationScale->setValue(spl.GetApproximationScale());
 
     auto path = qobject_cast<VisToolCubicBezier *>(vis);
     SCASSERT(path != nullptr)
-
+    path->setApproximationScale(spl.GetApproximationScale());
     path->setObject1Id(spl.GetP1().id());
     path->setObject2Id(spl.GetP2().id());
     path->setObject3Id(spl.GetP3().id());
     path->setObject4Id(spl.GetP4().id());
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-QString DialogCubicBezier::GetPenStyle() const
-{
-    return GetComboBoxCurrentData(ui->comboBoxPenStyle, TypeLineLine);
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void DialogCubicBezier::SetPenStyle(const QString &value)
-{
-    ChangeCurrentData(ui->comboBoxPenStyle, value);
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-QString DialogCubicBezier::GetColor() const
-{
-    return GetComboBoxCurrentData(ui->comboBoxColor, ColorBlack);
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void DialogCubicBezier::SetColor(const QString &value)
-{
-    ChangeCurrentData(ui->comboBoxColor, value);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -246,13 +228,16 @@ void DialogCubicBezier::SaveData()
     const auto p4 = GetP4();
 
     spl = VCubicBezier(*p1, *p2, *p3, *p4);
+    spl.SetApproximationScale(ui->doubleSpinBoxApproximationScale->value());
+    spl.SetPenStyle(GetComboBoxCurrentData(ui->comboBoxPenStyle, TypeLineLine));
+    spl.SetColor(GetComboBoxCurrentData(ui->comboBoxColor, ColorBlack));
 
     const quint32 d = spl.GetDuplicate();//Save previous value
     newDuplicate <= -1 ? spl.SetDuplicate(d) : spl.SetDuplicate(static_cast<quint32>(newDuplicate));
 
     auto path = qobject_cast<VisToolCubicBezier *>(vis);
     SCASSERT(path != nullptr)
-
+    path->setApproximationScale(ui->doubleSpinBoxApproximationScale->value());
     path->setObject1Id(p1->id());
     path->setObject2Id(p2->id());
     path->setObject3Id(p3->id());

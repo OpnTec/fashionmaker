@@ -53,7 +53,7 @@ public:
     static const QString PatternMaxVerStr;
     static const QString CurrentSchema;
     static Q_DECL_CONSTEXPR const int PatternMinVer = CONVERTER_VERSION_CHECK(0, 1, 0);
-    static Q_DECL_CONSTEXPR const int PatternMaxVer = CONVERTER_VERSION_CHECK(0, 6, 5);
+    static Q_DECL_CONSTEXPR const int PatternMaxVer = CONVERTER_VERSION_CHECK(0, 6, 6);
 
 protected:
     virtual int     MinVer() const Q_DECL_OVERRIDE;
@@ -111,6 +111,7 @@ private:
     void ToV0_6_3();
     void ToV0_6_4();
     void ToV0_6_5();
+    void ToV0_6_6();
 
     void          TagUnitToV0_2_0();
     void          TagIncrementToV0_2_0();

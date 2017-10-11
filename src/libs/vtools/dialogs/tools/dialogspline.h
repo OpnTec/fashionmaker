@@ -60,11 +60,6 @@ public:
     VSpline GetSpline() const;
     void    SetSpline(const VSpline &spline);
 
-    QString GetPenStyle() const;
-    void    SetPenStyle(const QString &value);
-
-    QString GetColor() const;
-    void    SetColor(const QString &value);
 public slots:
     virtual void  ChosenObject(quint32 id, const SceneObject &type) Q_DECL_OVERRIDE;
     virtual void  PointNameChanged() Q_DECL_OVERRIDE;

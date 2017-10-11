@@ -107,6 +107,8 @@ public:
 
     void LiteParseIncrements();
 
+    static void RefreshCurves();
+
     static const QString AttrReadOnly;
 
 public slots:

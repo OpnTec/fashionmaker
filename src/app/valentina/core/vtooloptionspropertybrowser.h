@@ -127,6 +127,7 @@ private:
     void AddPropertyLineColor(Tool *i, const QString &propertyName, const QMap<QString, QString> &colors,
                               const QString &id);
 
+    void AddPropertyApproximationScale(const QString &propertyName, qreal aScale);
     void AddPropertyFormula(const QString &propertyName, const VFormula &formula, const QString &attrName);
     void AddPropertyParentPointName(const QString &pointName, const QString &propertyName,
                                     const QString &propertyAttribure);

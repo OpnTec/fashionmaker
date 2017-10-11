@@ -60,6 +60,8 @@ DialogArc::DialogArc(const VContainer *data, const quint32 &toolId, QWidget *par
 {
     ui->setupUi(this);
 
+    ui->doubleSpinBoxApproximationScale->setMaximum(maxCurveApproximationScale);
+
     plainTextEditFormula = ui->plainTextEditFormula;
     this->formulaBaseHeight = ui->plainTextEditFormula->height();
     this->formulaBaseHeightF1 = ui->plainTextEditF1->height();
@@ -183,6 +185,22 @@ void DialogArc::SetColor(const QString &value)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+qreal DialogArc::GetApproximationScale() const
+{
+    return ui->doubleSpinBoxApproximationScale->value();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogArc::SetApproximationScale(qreal value)
+{
+    ui->doubleSpinBoxApproximationScale->setValue(value);
+
+    VisToolArc *path = qobject_cast<VisToolArc *>(vis);
+    SCASSERT(path != nullptr)
+    path->setApproximationScale(value);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 /**
  * @brief SetF1 set formula first angle of arc
  * @param value formula
@@ -272,6 +290,7 @@ void DialogArc::SaveData()
     path->setRadius(radius);
     path->setF1(f1);
     path->setF2(f2);
+    path->setApproximationScale(ui->doubleSpinBoxApproximationScale->value());
     path->RefreshGeometry();
 }
 

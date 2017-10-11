@@ -202,8 +202,12 @@ VPointF *VToolCutSplinePath::CutSplinePath(qreal length, const QSharedPointer<VA
 
     const VSplinePoint splP1 = points.at(p1);
     const VSplinePoint splP2 = points.at(p2);
-    const VSpline spl1 = VSpline(splP1.P(), spl1p2, spl1p3, *p);
-    const VSpline spl2 = VSpline(*p, spl2p2, spl2p3, splP2.P());
+
+    VSpline spl1 = VSpline(splP1.P(), spl1p2, spl1p3, *p);
+    spl1.SetApproximationScale(splPath->GetApproximationScale());
+
+    VSpline spl2 = VSpline(*p, spl2p2, spl2p3, splP2.P());
+    spl2.SetApproximationScale(splPath->GetApproximationScale());
 
     *splPath1 = new VSplinePath();
     *splPath2 = new VSplinePath();
