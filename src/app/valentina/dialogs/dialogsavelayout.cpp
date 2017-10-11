@@ -157,7 +157,6 @@ DialogSaveLayout::DialogSaveLayout(int count, Draw mode, const QString &fileName
     connect(ui->toolButtonPortrait, &QToolButton::toggled, this, &DialogSaveLayout::WriteSettings);
     connect(ui->toolButtonLandscape, &QToolButton::toggled, this, &DialogSaveLayout::WriteSettings);
 
-
     ShowExample();//Show example for current format.
 }
 
@@ -753,6 +752,11 @@ void DialogSaveLayout::ReadSettings()
     ui->doubleSpinBoxTopField->setValue(margins.top());
     ui->doubleSpinBoxRightField->setValue(margins.right());
     ui->doubleSpinBoxBottomField->setValue(margins.bottom());
+
+    ui->doubleSpinBoxLeftField->setSuffix(UnitsToStr(unit, true));
+    ui->doubleSpinBoxTopField->setSuffix(UnitsToStr(unit, true));
+    ui->doubleSpinBoxRightField->setSuffix(UnitsToStr(unit, true));
+    ui->doubleSpinBoxBottomField->setSuffix(UnitsToStr(unit, true));
 
     // read Template
     const QSizeF size = QSizeF(settings->GetTiledPDFPaperWidth(Unit::Mm), settings->GetTiledPDFPaperHeight(Unit::Mm));

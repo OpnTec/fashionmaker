@@ -1100,7 +1100,7 @@ void MainWindowsNoGUI::RestorePaper(int index) const
     if (paper)
     {
         // Restore
-        paper->setPen(QPen(Qt::black, widthMainLine));
+        paper->setPen(QPen(Qt::black, 1));
         QBrush brush(Qt::gray);
         scenes.at(index)->setBackgroundBrush(brush);
         shadows.at(index)->setVisible(true);
@@ -1248,10 +1248,10 @@ void MainWindowsNoGUI::SetPrinterSettings(QPrinter *printer, const PrintType &pr
     SCASSERT(printer != nullptr)
     printer->setCreator(QGuiApplication::applicationDisplayName()+" "+QCoreApplication::applicationVersion());
 
+    printer->setOrientation(QPrinter::Portrait);
+
     if (not isTiled)
     {
-        printer->setOrientation(QPrinter::Portrait);
-
         QSizeF size = QSizeF(FromPixel(paperSize.width(), Unit::Mm), FromPixel(paperSize.height(), Unit::Mm));
         if (isAutoCrop || isUnitePages)
         {
@@ -1271,18 +1271,6 @@ void MainWindowsNoGUI::SetPrinterSettings(QPrinter *printer, const PrintType &pr
         else
         {
             printer->setPaperSize (pSZ);
-        }
-    }
-    else
-    {
-        VSettings *settings = qApp->ValentinaSettings();
-        if(settings->GetTiledPDFOrientation() == PageOrientation::Landscape)
-        {
-            printer->setOrientation(QPrinter::Landscape);
-        }
-        else
-        {
-            printer->setOrientation(QPrinter::Portrait);
         }
     }
 

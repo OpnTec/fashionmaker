@@ -84,6 +84,11 @@ QVector<QGraphicsItem *> VPoster::Borders(QGraphicsItem *parent, const PosterDat
     QPen pen(Qt::NoBrush, 1, Qt::DashLine);
     pen.setColor(Qt::black);
 
+    if (img.columns == 1 && img.rows == 1)
+    {
+        return data;
+    }
+
     const QRect rec = img.rect;
     if (img.column != 0)
     {// Left border
@@ -180,7 +185,14 @@ int VPoster::CountRows(int height, PageOrientation orientation) const
         pageLength = PageRect().height();
     }
 
-    return qCeil(imgLength/(pageLength - static_cast<int>(allowance)));
+    if (pageLength >= imgLength)
+    {
+        return 1;
+    }
+    else
+    {
+        return qCeil(imgLength/(pageLength - static_cast<int>(allowance)));
+    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -198,7 +210,14 @@ int VPoster::CountColumns(int width, PageOrientation orientation) const
         pageLength = PageRect().width();
     }
 
-    return qCeil(imgLength/(pageLength-static_cast<int>(allowance)));
+    if (pageLength >= imgLength)
+    {
+        return 1;
+    }
+    else
+    {
+        return qCeil(imgLength/(pageLength-static_cast<int>(allowance)));
+    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
