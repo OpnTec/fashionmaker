@@ -350,11 +350,6 @@ qreal UnitConvertor(qreal value, const Unit &from, const Unit &to)
 /**
  * @brief UnitConvertor Converts the values of the given margin from given unit to the new unit.
  * returns a new instand of QMarginsF.
- *
- * @param margin
- * @param from
- * @param to
- * @return
  */
 QMarginsF UnitConvertor(const QMarginsF &margins, const Unit &from, const Unit &to)
 {
