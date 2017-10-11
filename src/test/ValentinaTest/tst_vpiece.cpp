@@ -84,7 +84,11 @@ void TST_VPiece::ClearLoop()
         points.append(p);
     }
 
-    data->UpdateGObject(308, new VSplinePath(points));
+    {
+        VSplinePath *path = new VSplinePath(points);
+        path->SetApproximationScale(10);
+        data->UpdateGObject(308, path);
+    }
 
     data->UpdateGObject(309, new VPointF(799.45989815267649, 850.6707401574804, "Г8", -30.431206299212597,
                                          29.487155905511813));
@@ -258,11 +262,18 @@ void TST_VPiece::Issue620()
         points.append(p);
     }
 
-    data->UpdateGObject(7, new VSplinePath(points));
+    {
+        VSplinePath *path = new VSplinePath(points);
+        path->SetApproximationScale(10);
+        data->UpdateGObject(7, path);
+    }
 
-    data->UpdateGObject(8, new VSpline(*p4, *p5, 59.932499999999997, "59.9325", 257.56999999999999,
-                                       "257.57", 170.46425196850396, "4.5102", 150.6164409448819,
-                                       "3.98506"));
+    {
+        VSpline *spl = new VSpline(*p4, *p5, 59.932499999999997, "59.9325", 257.56999999999999,
+                                   "257.57", 170.46425196850396, "4.5102", 150.6164409448819, "3.98506");
+        spl->SetApproximationScale(10);
+        data->UpdateGObject(8, spl);
+    }
 
     VPiece detail;
     detail.SetSeamAllowance(false);

@@ -173,6 +173,7 @@ void TST_VArc::TestGetPoints()
 
     const VPointF center;
     VArc arc(center, radius, startAngle, endAngle);
+    arc.SetApproximationScale(10);
 
     QVector<QPointF> points = arc.GetPoints();
 
