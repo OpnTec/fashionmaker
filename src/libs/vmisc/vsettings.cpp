@@ -512,8 +512,9 @@ void VSettings::SetRememberPatternMaterials(bool value)
 /**
  * @brief GetTiledPDFMargins returns the tiled pdf margins in the given unit. When the setting is
  * called for the first time, the 4 default margins are 10mm.
- * @param unit
- * @return
+ * @param unit the unit in which are the value. Necessary because we save the values
+ * internaly as mm so there is conversion beeing made.
+ * @return tiled pdf margins
  */
 QMarginsF VSettings::GetTiledPDFMargins(const Unit &unit) const
 {
@@ -544,8 +545,9 @@ void VSettings::SetTiledPDFMargins(const QMarginsF &value, const Unit &unit)
 //---------------------------------------------------------------------------------------------------------------------
 /**
  * @brief GetTiledPDFPaperHeight returns the paper height of tiled pdf in the desired unit.
- * @param unit the unit to return the value to (internally it's saved as mm)
- * @return
+ * @param unit the unit in which are the value. Necessary because we save the values
+ * internaly as mm so there is conversion beeing made.
+ * @return tiled pdf paper height
  */
 qreal VSettings::GetTiledPDFPaperHeight(const Unit &unit) const
 {
@@ -565,7 +567,7 @@ qreal VSettings::GetTiledPDFPaperHeight(const Unit &unit) const
 //---------------------------------------------------------------------------------------------------------------------
 /**
  * @brief SetTiledPDFPaperHeight sets the tiled pdf paper height
- * @param value in Mm
+ * @param value in mm
  * @param unit unit of the given value
  */
 void VSettings::SetTiledPDFPaperHeight(qreal value, const Unit &unit)
@@ -576,8 +578,9 @@ void VSettings::SetTiledPDFPaperHeight(qreal value, const Unit &unit)
 //---------------------------------------------------------------------------------------------------------------------
 /**
  * @brief GetTiledPDFPaperWidth returns the paper height of tiled pdf in the desired unit.
- * @param unit the unit to return the value to (internally it's saved as mm)
- * @return
+ * @param unit the unit in which are the value. Necessary because we save the values
+ * internaly as mm so there is conversion beeing made.
+ * @return tiled pdf paper width
  */
 qreal VSettings::GetTiledPDFPaperWidth(const Unit &unit) const
 {
@@ -599,7 +602,7 @@ qreal VSettings::GetTiledPDFPaperWidth(const Unit &unit) const
 /**
  * @brief SetTiledPDFPaperWidth sets the tiled pdf paper width
  * @param unit unit of the given value
- * @param value in Mm
+ * @param value in mm
  */
 void VSettings::SetTiledPDFPaperWidth(qreal value, const Unit &unit)
 {
