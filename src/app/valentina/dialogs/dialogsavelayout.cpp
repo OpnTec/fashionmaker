@@ -166,8 +166,11 @@ void DialogSaveLayout::InitTemplates(QComboBox *comboBoxTemplates)
     SCASSERT(comboBoxTemplates != nullptr)
     VAbstractLayoutDialog::InitTemplates(comboBoxTemplates);
 
-    // remove the custom format,
-    comboBoxTemplates->removeItem(comboBoxTemplates->findData(static_cast<int>(PaperSizeTemplate::Custom)));
+    // remove unused formats
+    for (int i = static_cast<int>(PaperSizeTemplate::Roll24in); i <= static_cast<int>(PaperSizeTemplate::Custom); ++i)
+    {
+       comboBoxTemplates->removeItem(comboBoxTemplates->findData(i));
+    }
 }
 
 
