@@ -4106,7 +4106,7 @@ void MainWindow::CreateActions()
     connect(ui->actionForum, &QAction::triggered, this, [this]()
     {
         qCDebug(vMainWindow, "Opening forum");
-        QDesktopServices::openUrl(QUrl(QStringLiteral("http://forum.valentina-project.org/")));
+        QDesktopServices::openUrl(QUrl(QStringLiteral("http://valentinaproject.forumotion.me/")));
     });
 
     connect(ui->actionLast_tool, &QAction::triggered, this, &MainWindow::LastUsedTool);
