@@ -79,12 +79,6 @@ void VAbstractLayoutDialog::InitTemplates(QComboBox *comboBoxTemplates)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-/**
- * @brief DialogLayoutSettings::TemplateSize
- * @param tmpl
- * @param unit
- * @return
- */
 QSizeF VAbstractLayoutDialog::GetTemplateSize(const PaperSizeTemplate &tmpl, const Unit &unit) const
 {
     qreal width = 0;
