@@ -25,7 +25,13 @@
 #include <QKeyEvent>
 #include <QLayout>
 #include <QLayoutItem>
-#include <QMargins>
+
+#if QT_VERSION < QT_VERSION_CHECK(5, 3, 0)
+#   include "../vmisc/backport/qmarginsf.h"
+#else
+#   include <QMargins>
+#endif
+
 #include <QStyleOptionViewItem>
 #include <QVariant>
 #include <QWidget>
