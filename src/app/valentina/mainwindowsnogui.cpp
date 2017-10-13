@@ -110,11 +110,11 @@ MainWindowsNoGUI::MainWindowsNoGUI(QWidget *parent)
       ignorePrinterFields(false),
       margins(),
       paperSize(),
+      m_dialogSaveLayout(),
       isTiled(false),
       isAutoCrop(false),
       isUnitePages(false),
       layoutPrinterName()
-
 {
     InitTempLayoutScene();
 }
@@ -254,9 +254,9 @@ void MainWindowsNoGUI::ExportFMeasurementsToCSV()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void MainWindowsNoGUI::ExportData(const QVector<VLayoutPiece> &listDetails, const DialogSaveLayout &dialog)
+void MainWindowsNoGUI::ExportData(const QVector<VLayoutPiece> &listDetails)
 {
-    const LayoutExportFormats format = dialog.Format();
+    const LayoutExportFormats format = m_dialogSaveLayout->Format();
 
     if (format == LayoutExportFormats::DXF_AC1006_AAMA ||
         format == LayoutExportFormats::DXF_AC1009_AAMA ||
@@ -268,44 +268,45 @@ void MainWindowsNoGUI::ExportData(const QVector<VLayoutPiece> &listDetails, cons
         format == LayoutExportFormats::DXF_AC1024_AAMA ||
         format == LayoutExportFormats::DXF_AC1027_AAMA)
     {
-        if (dialog.Mode() == Draw::Layout)
+        if (m_dialogSaveLayout->Mode() == Draw::Layout)
         {
             for (int i = 0; i < detailsOnLayout.size(); ++i)
             {
-                const QString name = dialog.Path() + QLatin1String("/") + dialog.FileName() + QString::number(i+1)
-                        + DialogSaveLayout::ExportFromatSuffix(dialog.Format());
+                const QString name = m_dialogSaveLayout->Path() + QLatin1String("/") + m_dialogSaveLayout->FileName() +
+                        QString::number(i+1)
+                        + DialogSaveLayout::ExportFromatSuffix(m_dialogSaveLayout->Format());
 
                 QGraphicsRectItem *paper = qgraphicsitem_cast<QGraphicsRectItem *>(papers.at(i));
                 SCASSERT(paper != nullptr)
 
-                ExportApparelLayout(dialog, detailsOnLayout.at(i), name, paper->rect().size().toSize());
+                ExportApparelLayout(detailsOnLayout.at(i), name, paper->rect().size().toSize());
             }
         }
         else
         {
-            ExportDetailsAsApparelLayout(dialog, listDetails);
+            ExportDetailsAsApparelLayout(listDetails);
         }
     }
     else
     {
-        if (dialog.Mode() == Draw::Layout)
+        if (m_dialogSaveLayout->Mode() == Draw::Layout)
         {
-            ExportFlatLayout(dialog, scenes, papers, shadows, details, ignorePrinterFields, margins);
+            ExportFlatLayout(scenes, papers, shadows, details, ignorePrinterFields, margins);
         }
         else
         {
-            ExportDetailsAsFlatLayout(dialog, listDetails);
+            ExportDetailsAsFlatLayout(listDetails);
         }
     }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void MainWindowsNoGUI::ExportFlatLayout(const DialogSaveLayout &dialog, const QList<QGraphicsScene *> &scenes,
+void MainWindowsNoGUI::ExportFlatLayout(const QList<QGraphicsScene *> &scenes,
                                         const QList<QGraphicsItem *> &papers, const QList<QGraphicsItem *> &shadows,
                                         const QList<QList<QGraphicsItem *> > &details, bool ignorePrinterFields,
                                         const QMarginsF &margins)
 {
-    const QString path = dialog.Path();
+    const QString path = m_dialogSaveLayout->Path();
     bool usedNotExistedDir = CreateLayoutPath(path);
     if (not usedNotExistedDir)
     {
@@ -314,25 +315,24 @@ void MainWindowsNoGUI::ExportFlatLayout(const DialogSaveLayout &dialog, const QL
     }
 
     qApp->ValentinaSettings()->SetPathLayout(path);
-    const LayoutExportFormats format = dialog.Format();
+    const LayoutExportFormats format = m_dialogSaveLayout->Format();
 
-    if (format == LayoutExportFormats::PDFTiled && dialog.Mode() == Draw::Layout)
+    if (format == LayoutExportFormats::PDFTiled && m_dialogSaveLayout->Mode() == Draw::Layout)
     {
-        const QString name = path + QLatin1String("/") + dialog.FileName() + QString::number(1)
-                + DialogSaveLayout::ExportFromatSuffix(dialog.Format());
+        const QString name = path + QLatin1String("/") + m_dialogSaveLayout->FileName() + QString::number(1)
+                + DialogSaveLayout::ExportFromatSuffix(m_dialogSaveLayout->Format());
         PdfTiledFile(name);
     }
     else
     {
-        ExportScene(dialog, scenes, papers, shadows, details, ignorePrinterFields, margins);
+        ExportScene(scenes, papers, shadows, details, ignorePrinterFields, margins);
     }
 
     RemoveLayoutPath(path, usedNotExistedDir);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void MainWindowsNoGUI::ExportDetailsAsFlatLayout(const DialogSaveLayout &dialog,
-                                                 const QVector<VLayoutPiece> &listDetails)
+void MainWindowsNoGUI::ExportDetailsAsFlatLayout(const QVector<VLayoutPiece> &listDetails)
 {
     if (listDetails.isEmpty())
     {
@@ -344,7 +344,7 @@ void MainWindowsNoGUI::ExportDetailsAsFlatLayout(const DialogSaveLayout &dialog,
     QList<QGraphicsItem *> list;
     for (int i=0; i < listDetails.count(); ++i)
     {
-        QGraphicsItem *item = listDetails.at(i).GetItem(dialog.IsTextAsPaths());
+        QGraphicsItem *item = listDetails.at(i).GetItem(m_dialogSaveLayout->IsTextAsPaths());
         item->setPos(listDetails.at(i).GetMx(), listDetails.at(i).GetMy());
         list.append(item);
     }
@@ -383,17 +383,16 @@ void MainWindowsNoGUI::ExportDetailsAsFlatLayout(const DialogSaveLayout &dialog,
 
     const bool ignorePrinterFields = false;
     const qreal margin = ToPixel(1, Unit::Cm);
-    ExportFlatLayout(dialog, scenes, papers, shadows, details, ignorePrinterFields,
-                     QMarginsF(margin, margin, margin, margin));
+    ExportFlatLayout(scenes, papers, shadows, details, ignorePrinterFields, QMarginsF(margin, margin, margin, margin));
 
     qDeleteAll(scenes);//Scene will clear all other items
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void MainWindowsNoGUI::ExportApparelLayout(const DialogSaveLayout &dialog, const QVector<VLayoutPiece> &details,
-                                           const QString &name, const QSize &size) const
+void MainWindowsNoGUI::ExportApparelLayout(const QVector<VLayoutPiece> &details, const QString &name,
+                                           const QSize &size) const
 {
-    const QString path = dialog.Path();
+    const QString path = m_dialogSaveLayout->Path();
     bool usedNotExistedDir = CreateLayoutPath(path);
     if (not usedNotExistedDir)
     {
@@ -402,7 +401,7 @@ void MainWindowsNoGUI::ExportApparelLayout(const DialogSaveLayout &dialog, const
     }
 
     qApp->ValentinaSettings()->SetPathLayout(path);
-    const LayoutExportFormats format = dialog.Format();
+    const LayoutExportFormats format = m_dialogSaveLayout->Format();
 
     switch (format)
     {
@@ -418,31 +417,31 @@ void MainWindowsNoGUI::ExportApparelLayout(const DialogSaveLayout &dialog, const
             Q_UNREACHABLE(); // For now not supported
             break;
         case LayoutExportFormats::DXF_AC1006_AAMA:
-            AAMADxfFile(name, DRW::AC1006, dialog.IsBinaryDXFFormat(), size, details);
+            AAMADxfFile(name, DRW::AC1006, m_dialogSaveLayout->IsBinaryDXFFormat(), size, details);
             break;
         case LayoutExportFormats::DXF_AC1009_AAMA:
-            AAMADxfFile(name, DRW::AC1009, dialog.IsBinaryDXFFormat(), size, details);
+            AAMADxfFile(name, DRW::AC1009, m_dialogSaveLayout->IsBinaryDXFFormat(), size, details);
             break;
         case LayoutExportFormats::DXF_AC1012_AAMA:
-            AAMADxfFile(name, DRW::AC1012, dialog.IsBinaryDXFFormat(), size, details);
+            AAMADxfFile(name, DRW::AC1012, m_dialogSaveLayout->IsBinaryDXFFormat(), size, details);
             break;
         case LayoutExportFormats::DXF_AC1014_AAMA:
-            AAMADxfFile(name, DRW::AC1014, dialog.IsBinaryDXFFormat(), size, details);
+            AAMADxfFile(name, DRW::AC1014, m_dialogSaveLayout->IsBinaryDXFFormat(), size, details);
             break;
         case LayoutExportFormats::DXF_AC1015_AAMA:
-            AAMADxfFile(name, DRW::AC1015, dialog.IsBinaryDXFFormat(), size, details);
+            AAMADxfFile(name, DRW::AC1015, m_dialogSaveLayout->IsBinaryDXFFormat(), size, details);
             break;
         case LayoutExportFormats::DXF_AC1018_AAMA:
-            AAMADxfFile(name, DRW::AC1018, dialog.IsBinaryDXFFormat(), size, details);
+            AAMADxfFile(name, DRW::AC1018, m_dialogSaveLayout->IsBinaryDXFFormat(), size, details);
             break;
         case LayoutExportFormats::DXF_AC1021_AAMA:
-            AAMADxfFile(name, DRW::AC1021, dialog.IsBinaryDXFFormat(), size, details);
+            AAMADxfFile(name, DRW::AC1021, m_dialogSaveLayout->IsBinaryDXFFormat(), size, details);
             break;
         case LayoutExportFormats::DXF_AC1024_AAMA:
-            AAMADxfFile(name, DRW::AC1024, dialog.IsBinaryDXFFormat(), size, details);
+            AAMADxfFile(name, DRW::AC1024, m_dialogSaveLayout->IsBinaryDXFFormat(), size, details);
             break;
         case LayoutExportFormats::DXF_AC1027_AAMA:
-            AAMADxfFile(name, DRW::AC1027, dialog.IsBinaryDXFFormat(), size, details);
+            AAMADxfFile(name, DRW::AC1027, m_dialogSaveLayout->IsBinaryDXFFormat(), size, details);
             break;
         default:
             qDebug() << "Can't recognize file type." << Q_FUNC_INFO;
@@ -453,8 +452,7 @@ void MainWindowsNoGUI::ExportApparelLayout(const DialogSaveLayout &dialog, const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void MainWindowsNoGUI::ExportDetailsAsApparelLayout(const DialogSaveLayout &dialog,
-                                                    QVector<VLayoutPiece> listDetails)
+void MainWindowsNoGUI::ExportDetailsAsApparelLayout(QVector<VLayoutPiece> listDetails)
 {
     if (listDetails.isEmpty())
     {
@@ -466,7 +464,7 @@ void MainWindowsNoGUI::ExportDetailsAsApparelLayout(const DialogSaveLayout &dial
     QList<QGraphicsItem *> list;
     for (int i=0; i < listDetails.count(); ++i)
     {
-        QGraphicsItem *item = listDetails.at(i).GetItem(dialog.IsTextAsPaths());
+        QGraphicsItem *item = listDetails.at(i).GetItem(m_dialogSaveLayout->IsTextAsPaths());
         item->setPos(listDetails.at(i).GetMx(), listDetails.at(i).GetMy());
         list.append(item);
     }
@@ -499,10 +497,10 @@ void MainWindowsNoGUI::ExportDetailsAsApparelLayout(const DialogSaveLayout &dial
         listDetails[i].SetMatrix(moveMatrix);
     }
 
-    const QString name = dialog.Path() + QLatin1String("/") + dialog.FileName() + QString::number(1)
-            + DialogSaveLayout::ExportFromatSuffix(dialog.Format());
+    const QString name = m_dialogSaveLayout->Path() + QLatin1String("/") + m_dialogSaveLayout->FileName() +
+            QString::number(1) + DialogSaveLayout::ExportFromatSuffix(m_dialogSaveLayout->Format());
 
-    ExportApparelLayout(dialog, listDetails, name, rect.size());
+    ExportApparelLayout(listDetails, name, rect.size());
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -534,10 +532,19 @@ void MainWindowsNoGUI::PrintPages(QPrinter *printer)
 
     if (isTiled)
     {
-        VSettings *settings = qApp->ValentinaSettings();
+        PageOrientation orientation;
+        if (not m_dialogSaveLayout.isNull())
+        {
+            orientation = m_dialogSaveLayout->GetTiledPageOrientation();
+        }
+        else
+        {
+            orientation = qApp->ValentinaSettings()->GetTiledPDFOrientation();
+        }
+
         // when isTiled, the landscape tiles have to be rotated, because the pages
         // stay portrait in the pdf
-        if(settings->GetTiledPDFOrientation() == PageOrientation::Landscape)
+        if(orientation == PageOrientation::Landscape)
         {
             painter.rotate(-90);
             painter.translate(-ToPixel(printer->pageRect(QPrinter::Millimeter).height(), Unit::Mm), 0);
@@ -551,7 +558,7 @@ void MainWindowsNoGUI::PrintPages(QPrinter *printer)
             auto *paper = qgraphicsitem_cast<QGraphicsRectItem *>(papers.at(i));
             if (paper)
             {
-                *poster += posterazor->Calc(paper->rect().toRect(), i, settings->GetTiledPDFOrientation());
+                *poster += posterazor->Calc(paper->rect().toRect(), i, orientation);
             }
         }
 
@@ -952,7 +959,7 @@ void MainWindowsNoGUI::PdfTiledFile(const QString &name)
 
     printer.setOutputFileName(name);
     printer.setResolution(static_cast<int>(PrintDPI));
-    PrintPages( &printer );
+    PrintPages(&printer);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -1288,9 +1295,21 @@ void MainWindowsNoGUI::SetPrinterSettings(QPrinter *printer, const PrintType &pr
     }
     else
     {
-        VSettings *settings = qApp->ValentinaSettings();
-        QMarginsF  pageMargin = QMarginsF(settings->GetTiledPDFMargins(Unit::Mm));
-        if(settings->GetTiledPDFOrientation() == PageOrientation::Landscape)
+        QMarginsF pageMargin;
+        PageOrientation orientation;
+        if (not m_dialogSaveLayout.isNull())
+        {
+            pageMargin = m_dialogSaveLayout->GetTiledMargins();
+            orientation = m_dialogSaveLayout->GetTiledPageOrientation();
+        }
+        else
+        {
+            VSettings *settings = qApp->ValentinaSettings();
+            pageMargin = QMarginsF(settings->GetTiledPDFMargins(Unit::Mm));
+            orientation = settings->GetTiledPDFOrientation();
+        }
+
+        if(orientation == PageOrientation::Landscape)
         {
             // because when painting we have a -90rotation in landscape modus,
             // see function PrintPages.
@@ -1467,7 +1486,7 @@ bool MainWindowsNoGUI::IsPagesFit(const QSizeF &printPaper) const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void MainWindowsNoGUI::ExportScene(const DialogSaveLayout &dialog, const QList<QGraphicsScene *> &scenes,
+void MainWindowsNoGUI::ExportScene(const QList<QGraphicsScene *> &scenes,
                                    const QList<QGraphicsItem *> &papers, const QList<QGraphicsItem *> &shadows,
                                    const QList<QList<QGraphicsItem *> > &details, bool ignorePrinterFields,
                                    const QMarginsF &margins) const
@@ -1477,8 +1496,8 @@ void MainWindowsNoGUI::ExportScene(const DialogSaveLayout &dialog, const QList<Q
         QGraphicsRectItem *paper = qgraphicsitem_cast<QGraphicsRectItem *>(papers.at(i));
         if (paper)
         {
-            const QString name = dialog.Path() + QLatin1String("/") + dialog.FileName() + QString::number(i+1)
-                    + DialogSaveLayout::ExportFromatSuffix(dialog.Format());
+            const QString name = m_dialogSaveLayout->Path() + QLatin1String("/") + m_dialogSaveLayout->FileName() +
+                    QString::number(i+1) + DialogSaveLayout::ExportFromatSuffix(m_dialogSaveLayout->Format());
             QBrush *brush = new QBrush();
             brush->setColor( QColor( Qt::white ) );
             QGraphicsScene *scene = scenes.at(i);
@@ -1486,7 +1505,7 @@ void MainWindowsNoGUI::ExportScene(const DialogSaveLayout &dialog, const QList<Q
             shadows[i]->setVisible(false);
             paper->setPen(QPen(QBrush(Qt::white, Qt::NoBrush), 0.1, Qt::NoPen));
 
-            switch (dialog.Format())
+            switch (m_dialogSaveLayout->Format())
             {
                 case LayoutExportFormats::SVG:
                     paper->setVisible(false);
@@ -1512,47 +1531,47 @@ void MainWindowsNoGUI::ExportScene(const DialogSaveLayout &dialog, const QList<Q
                     break;
                 case LayoutExportFormats::DXF_AC1006_Flat:
                     paper->setVisible(false);
-                    FlatDxfFile(name, DRW::AC1006, dialog.IsBinaryDXFFormat(), paper, scene, details);
+                    FlatDxfFile(name, DRW::AC1006, m_dialogSaveLayout->IsBinaryDXFFormat(), paper, scene, details);
                     paper->setVisible(true);
                     break;
                 case LayoutExportFormats::DXF_AC1009_Flat:
                     paper->setVisible(false);
-                    FlatDxfFile(name, DRW::AC1009, dialog.IsBinaryDXFFormat(), paper, scene, details);
+                    FlatDxfFile(name, DRW::AC1009, m_dialogSaveLayout->IsBinaryDXFFormat(), paper, scene, details);
                     paper->setVisible(true);
                     break;
                 case LayoutExportFormats::DXF_AC1012_Flat:
                     paper->setVisible(false);
-                    FlatDxfFile(name, DRW::AC1012, dialog.IsBinaryDXFFormat(), paper, scene, details);
+                    FlatDxfFile(name, DRW::AC1012, m_dialogSaveLayout->IsBinaryDXFFormat(), paper, scene, details);
                     paper->setVisible(true);
                     break;
                 case LayoutExportFormats::DXF_AC1014_Flat:
                     paper->setVisible(false);
-                    FlatDxfFile(name, DRW::AC1014, dialog.IsBinaryDXFFormat(), paper, scene, details);
+                    FlatDxfFile(name, DRW::AC1014, m_dialogSaveLayout->IsBinaryDXFFormat(), paper, scene, details);
                     paper->setVisible(true);
                     break;
                 case LayoutExportFormats::DXF_AC1015_Flat:
                     paper->setVisible(false);
-                    FlatDxfFile(name, DRW::AC1015, dialog.IsBinaryDXFFormat(), paper, scene, details);
+                    FlatDxfFile(name, DRW::AC1015, m_dialogSaveLayout->IsBinaryDXFFormat(), paper, scene, details);
                     paper->setVisible(true);
                     break;
                 case LayoutExportFormats::DXF_AC1018_Flat:
                     paper->setVisible(false);
-                    FlatDxfFile(name, DRW::AC1018, dialog.IsBinaryDXFFormat(), paper, scene, details);
+                    FlatDxfFile(name, DRW::AC1018, m_dialogSaveLayout->IsBinaryDXFFormat(), paper, scene, details);
                     paper->setVisible(true);
                     break;
                 case LayoutExportFormats::DXF_AC1021_Flat:
                     paper->setVisible(false);
-                    FlatDxfFile(name, DRW::AC1021, dialog.IsBinaryDXFFormat(), paper, scene, details);
+                    FlatDxfFile(name, DRW::AC1021, m_dialogSaveLayout->IsBinaryDXFFormat(), paper, scene, details);
                     paper->setVisible(true);
                     break;
                 case LayoutExportFormats::DXF_AC1024_Flat:
                     paper->setVisible(false);
-                    FlatDxfFile(name, DRW::AC1024, dialog.IsBinaryDXFFormat(), paper, scene, details);
+                    FlatDxfFile(name, DRW::AC1024, m_dialogSaveLayout->IsBinaryDXFFormat(), paper, scene, details);
                     paper->setVisible(true);
                     break;
                 case LayoutExportFormats::DXF_AC1027_Flat:
                     paper->setVisible(false);
-                    FlatDxfFile(name, DRW::AC1027, dialog.IsBinaryDXFFormat(), paper, scene, details);
+                    FlatDxfFile(name, DRW::AC1027, m_dialogSaveLayout->IsBinaryDXFFormat(), paper, scene, details);
                     paper->setVisible(true);
                     break;
                 default:

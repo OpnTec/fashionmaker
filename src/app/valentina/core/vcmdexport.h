@@ -110,13 +110,17 @@ public:
 
     QString OptGradationSize() const;
     QString OptGradationHeight() const;
+    
+    QMarginsF TiledPageMargins() const;
+    VAbstractLayoutDialog::PaperSizeTemplate OptTiledPaperSize() const;
+    PageOrientation OptTiledPageOrientation();
 
 protected:
 
     VCommandLine();
 
-    //@brief returns DialogLayoutSettings::PaperSizeTemplate
-    DialogLayoutSettings::PaperSizeTemplate  OptPaperSize() const;
+    //@brief returns VAbstractLayoutDialog::PaperSizeTemplate
+    VAbstractLayoutDialog::PaperSizeTemplate OptPaperSize() const;
     //@brief returns rotation in degrees or 0 if not set
     int OptRotation() const;
 
@@ -141,6 +145,8 @@ private:
     static qreal Pg2Px(const QString& src, const DialogLayoutSettings& converter);
 
     static void InitOptions(VCommandLineOptions &options, QMap<QString, int> &optionsIndex);
+    
+    VAbstractLayoutDialog::PaperSizeTemplate FormatSize(const QString &key) const;
 };
 
 #endif // VCMDEXPORT_H

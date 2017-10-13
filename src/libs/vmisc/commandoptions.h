@@ -113,6 +113,13 @@ extern const QString LONG_OPTION_CSVCODEC;
 extern const QString LONG_OPTION_CSVSEPARATOR;
 extern const QString LONG_OPTION_CSVEXPORTFM;
 
+extern const QString LONG_OPTION_TILED_PDF_PAGE_TEMPLATE;
+extern const QString LONG_OPTION_TILED_PDF_LEFT_MARGIN;
+extern const QString LONG_OPTION_TILED_PDF_RIGHT_MARGIN;
+extern const QString LONG_OPTION_TILED_PDF_TOP_MARGIN;
+extern const QString LONG_OPTION_TILED_PDF_BOTTOM_MARGIN;
+extern const QString LONG_OPTION_TILED_PDF_LANDSCAPE;
+
 QStringList AllKeys();
 
 #endif // COMMANDOPTIONS_H

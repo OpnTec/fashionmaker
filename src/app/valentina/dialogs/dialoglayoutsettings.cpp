@@ -811,6 +811,27 @@ QString DialogLayoutSettings::MakeHelpTemplateList()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+QString DialogLayoutSettings::MakeHelpTiledPdfTemplateList()
+{
+    QString out = "\n";
+
+    for (int i = 0; i <= static_cast<int>(PaperSizeTemplate::Legal); ++i)
+    {
+        out += "\t* "+VAbstractLayoutDialog::pageFormatNames.at(i)+" = "+ QString::number(i);
+
+        if (i < static_cast<int>(PaperSizeTemplate::Legal))
+        {
+           out += ",\n";
+        }
+        else
+        {
+           out += ".\n";
+        }
+    }
+    return out;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 QSizeF DialogLayoutSettings::Template()
 {
     PaperSizeTemplate temp;

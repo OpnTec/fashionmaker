@@ -111,6 +111,17 @@ public:
     bool IsTextAsPaths() const;
     void SetTextAsPaths(bool textAsPaths);
 
+    void SetTiledExportMode(bool tiledExportMode);
+
+    void      SetTiledMargins(QMarginsF margins);
+    QMarginsF GetTiledMargins() const;
+
+    void              SetTiledPageFormat(PaperSizeTemplate format);
+    PaperSizeTemplate GetTiledPageFormat() const;
+
+    void            SetTiledPageOrientation(PageOrientation orientation);
+    PageOrientation GetTiledPageOrientation() const;
+
 protected:
     virtual void showEvent(QShowEvent *event) Q_DECL_OVERRIDE;
     void InitTemplates(QComboBox *comboBoxTemplates);
@@ -125,6 +136,7 @@ private:
     int count;
     bool isInitialized;
     Draw m_mode;
+    bool m_tiledExportMode;
 
     static bool havePdf;
     static bool tested;

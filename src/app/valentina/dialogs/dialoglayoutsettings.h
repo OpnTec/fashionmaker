@@ -105,6 +105,7 @@ public:
     //support functions for the command line parser which uses invisible dialog to properly build layout generator
     bool SelectTemplate(const PaperSizeTemplate& id);
     static QString MakeHelpTemplateList();
+    static QString MakeHelpTiledPdfTemplateList();
     bool SelectPaperUnit(const QString& units);
     bool SelectLayoutUnit(const QString& units);
     qreal LayoutToPixels(qreal value) const;

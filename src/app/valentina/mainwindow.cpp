@@ -4553,18 +4553,22 @@ void MainWindow::ExportLayoutAs()
 
     try
     {
-        DialogSaveLayout dialog(scenes.size(), Draw::Layout, FileName(), this);
+        m_dialogSaveLayout = QSharedPointer<DialogSaveLayout>(new DialogSaveLayout(scenes.size(), Draw::Layout,
+                                                                                   FileName(), this));
 
-        if (dialog.exec() == QDialog::Rejected)
+        if (m_dialogSaveLayout->exec() == QDialog::Rejected)
         {
+            m_dialogSaveLayout.clear();
             ui->toolButtonLayoutExportAs->setChecked(false);
             return;
         }
 
-        ExportData(QVector<VLayoutPiece>(), dialog);
+        ExportData(QVector<VLayoutPiece>());
+        m_dialogSaveLayout.clear();
     }
     catch (const VException &e)
     {
+        m_dialogSaveLayout.clear();
         ui->toolButtonLayoutExportAs->setChecked(false);
         qCritical("%s\n\n%s\n\n%s", qUtf8Printable(tr("Export error.")),
                   qUtf8Printable(e.ErrorMessage()), qUtf8Printable(e.DetailedInformation()));
@@ -4611,18 +4615,22 @@ void MainWindow::ExportDetailsAs()
 
     try
     {
-        DialogSaveLayout dialog(1, Draw::Modeling, FileName(), this);
+        m_dialogSaveLayout = QSharedPointer<DialogSaveLayout>(new DialogSaveLayout(1, Draw::Modeling, FileName(),
+                                                                                   this));
 
-        if (dialog.exec() == QDialog::Rejected)
+        if (m_dialogSaveLayout->exec() == QDialog::Rejected)
         {
+            m_dialogSaveLayout.clear();
             ui->toolButtonDetailExportAs->setChecked(false);
             return;
         }
 
-        ExportData(listDetails, dialog);
+        ExportData(listDetails);
+        m_dialogSaveLayout.clear();
     }
     catch (const VException &e)
     {
+        m_dialogSaveLayout.clear();
         ui->toolButtonDetailExportAs->setChecked(false);
         qCritical("%s\n\n%s\n\n%s", qUtf8Printable(tr("Export error.")),
                   qUtf8Printable(e.ErrorMessage()), qUtf8Printable(e.DetailedInformation()));
@@ -4951,16 +4959,27 @@ bool MainWindow::DoExport(const VCommandLinePtr &expParams)
     {
         try
         {
-            DialogSaveLayout dialog(1, Draw::Modeling, expParams->OptBaseName(), this);
-            dialog.SetDestinationPath(expParams->OptDestinationPath());
-            dialog.SelectFormat(static_cast<LayoutExportFormats>(expParams->OptExportType()));
-            dialog.SetBinaryDXFFormat(expParams->IsBinaryDXF());
-            dialog.SetTextAsPaths(expParams->IsTextAsPaths());
+            m_dialogSaveLayout = QSharedPointer<DialogSaveLayout>(new DialogSaveLayout(1, Draw::Modeling,
+                                                                                       expParams->OptBaseName(), this));
+            m_dialogSaveLayout->SetDestinationPath(expParams->OptDestinationPath());
+            m_dialogSaveLayout->SelectFormat(static_cast<LayoutExportFormats>(expParams->OptExportType()));
+            m_dialogSaveLayout->SetBinaryDXFFormat(expParams->IsBinaryDXF());
+            m_dialogSaveLayout->SetTextAsPaths(expParams->IsTextAsPaths());
 
-            ExportData(listDetails, dialog);
+            if (static_cast<LayoutExportFormats>(expParams->OptExportType()) == LayoutExportFormats::PDFTiled)
+            {
+                m_dialogSaveLayout->SetTiledExportMode(true);
+                m_dialogSaveLayout->SetTiledMargins(expParams->TiledPageMargins());
+                m_dialogSaveLayout->SetTiledPageFormat(expParams->OptTiledPaperSize());
+                m_dialogSaveLayout->SetTiledPageOrientation(expParams->OptTiledPageOrientation());
+            }
+
+            ExportData(listDetails);
+            m_dialogSaveLayout.clear();
         }
         catch (const VException &e)
         {
+            m_dialogSaveLayout.clear();
             qCCritical(vMainWindow, "%s\n\n%s", qUtf8Printable(tr("Export error.")), qUtf8Printable(e.ErrorMessage()));
             qApp->exit(V_EX_DATAERR);
             return false;
@@ -4975,15 +4994,27 @@ bool MainWindow::DoExport(const VCommandLinePtr &expParams)
         {
             try
             {
-                DialogSaveLayout dialog(scenes.size(), Draw::Layout, expParams->OptBaseName(), this);
-                dialog.SetDestinationPath(expParams->OptDestinationPath());
-                dialog.SelectFormat(static_cast<LayoutExportFormats>(expParams->OptExportType()));
-                dialog.SetBinaryDXFFormat(expParams->IsBinaryDXF());
+                m_dialogSaveLayout = QSharedPointer<DialogSaveLayout>(new DialogSaveLayout(scenes.size(), Draw::Layout,
+                                                                                           expParams->OptBaseName(),
+                                                                                           this));
+                m_dialogSaveLayout->SetDestinationPath(expParams->OptDestinationPath());
+                m_dialogSaveLayout->SelectFormat(static_cast<LayoutExportFormats>(expParams->OptExportType()));
+                m_dialogSaveLayout->SetBinaryDXFFormat(expParams->IsBinaryDXF());
 
-                ExportData(listDetails, dialog);
+                if (static_cast<LayoutExportFormats>(expParams->OptExportType()) == LayoutExportFormats::PDFTiled)
+                {
+                    m_dialogSaveLayout->SetTiledExportMode(true);
+                    m_dialogSaveLayout->SetTiledMargins(expParams->TiledPageMargins());
+                    m_dialogSaveLayout->SetTiledPageFormat(expParams->OptTiledPaperSize());
+                    m_dialogSaveLayout->SetTiledPageOrientation(expParams->OptTiledPageOrientation());
+                }
+
+                ExportData(listDetails);
+                m_dialogSaveLayout.clear();
             }
             catch (const VException &e)
             {
+                m_dialogSaveLayout.clear();
                 qCCritical(vMainWindow, "%s\n\n%s", qUtf8Printable(tr("Export error.")),
                            qUtf8Printable(e.ErrorMessage()));
                 qApp->exit(V_EX_DATAERR);

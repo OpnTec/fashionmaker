@@ -52,7 +52,8 @@ DialogSaveLayout::DialogSaveLayout(int count, Draw mode, const QString &fileName
       ui(new Ui::DialogSaveLAyout),
       count(count),
       isInitialized(false),
-      m_mode(mode)
+      m_mode(mode),
+      m_tiledExportMode(false)
 {
     ui->setupUi(this);
 
@@ -622,6 +623,83 @@ void DialogSaveLayout::SetTextAsPaths(bool textAsPaths)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void DialogSaveLayout::SetTiledExportMode(bool tiledExportMode)
+{
+    m_tiledExportMode = tiledExportMode;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogSaveLayout::SetTiledMargins(QMarginsF margins)
+{
+    // read Margins top, right, bottom, left
+    margins = UnitConvertor(margins, Unit::Mm, qApp->patternUnit());
+
+    ui->doubleSpinBoxLeftField->setValue(margins.left());
+    ui->doubleSpinBoxTopField->setValue(margins.top());
+    ui->doubleSpinBoxRightField->setValue(margins.right());
+    ui->doubleSpinBoxBottomField->setValue(margins.bottom());
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QMarginsF DialogSaveLayout::GetTiledMargins() const
+{
+    QMarginsF margins = QMarginsF(
+        ui->doubleSpinBoxLeftField->value(),
+        ui->doubleSpinBoxTopField->value(),
+        ui->doubleSpinBoxRightField->value(),
+        ui->doubleSpinBoxBottomField->value()
+    );
+
+    return UnitConvertor(margins, qApp->patternUnit(), Unit::Mm);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogSaveLayout::SetTiledPageFormat(PaperSizeTemplate format)
+{
+    int index = ui->comboBoxTemplates->findData(static_cast<int>(format));
+    if (index != -1)
+    {
+        ui->comboBoxTemplates->setCurrentIndex(index);
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+VAbstractLayoutDialog::PaperSizeTemplate DialogSaveLayout::GetTiledPageFormat() const
+{
+    if (ui->comboBoxTemplates->currentIndex() != -1)
+    {
+        return static_cast<PaperSizeTemplate>(ui->comboBoxTemplates->currentData().toInt());
+    }
+    return PaperSizeTemplate::A0;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogSaveLayout::SetTiledPageOrientation(PageOrientation orientation)
+{
+    if(orientation == PageOrientation::Portrait)
+    {
+        ui->toolButtonPortrait->setChecked(true);
+    }
+    else
+    {
+        ui->toolButtonLandscape->setChecked(true);
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+PageOrientation DialogSaveLayout::GetTiledPageOrientation() const
+{
+    if(ui->toolButtonPortrait->isChecked())
+    {
+        return PageOrientation::Portrait;
+    }
+    else
+    {
+        return PageOrientation::Landscape;
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 void DialogSaveLayout::showEvent(QShowEvent *event)
 {
     QDialog::showEvent( event );
@@ -785,7 +863,6 @@ void DialogSaveLayout::ReadSettings()
     {
         ui->toolButtonLandscape->setChecked(true);
     }
-
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -795,6 +872,11 @@ void DialogSaveLayout::ReadSettings()
  */
 void DialogSaveLayout::WriteSettings() const
 {
+    if (m_tiledExportMode)
+    {
+        return;
+    }
+
     VSettings *settings = qApp->ValentinaSettings();
     const Unit unit = qApp->patternUnit();
 

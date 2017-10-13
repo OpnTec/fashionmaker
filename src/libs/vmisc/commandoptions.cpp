@@ -116,6 +116,13 @@ const QString LONG_OPTION_CSVCODEC      = QStringLiteral("csvCodec");
 const QString LONG_OPTION_CSVSEPARATOR  = QStringLiteral("csvSeparator");
 const QString LONG_OPTION_CSVEXPORTFM   = QStringLiteral("csvExportFM");
 
+const QString LONG_OPTION_TILED_PDF_PAGE_TEMPLATE = QStringLiteral("tiledPageformat");
+const QString LONG_OPTION_TILED_PDF_LEFT_MARGIN   = QStringLiteral("tiledlmargin");
+const QString LONG_OPTION_TILED_PDF_RIGHT_MARGIN  = QStringLiteral("tiledrmargin");
+const QString LONG_OPTION_TILED_PDF_TOP_MARGIN    = QStringLiteral("tiledtmargin");
+const QString LONG_OPTION_TILED_PDF_BOTTOM_MARGIN = QStringLiteral("tiledbmargin");
+const QString LONG_OPTION_TILED_PDF_LANDSCAPE     = QStringLiteral("tiledLandscape");
+
 //---------------------------------------------------------------------------------------------------------------------
 QStringList AllKeys()
 {
@@ -152,7 +159,13 @@ QStringList AllKeys()
          << LONG_OPTION_CSVWITHHEADER
          << LONG_OPTION_CSVCODEC
          << LONG_OPTION_CSVSEPARATOR
-         << LONG_OPTION_CSVEXPORTFM;
+         << LONG_OPTION_CSVEXPORTFM
+         << LONG_OPTION_TILED_PDF_PAGE_TEMPLATE
+         << LONG_OPTION_TILED_PDF_LEFT_MARGIN
+         << LONG_OPTION_TILED_PDF_RIGHT_MARGIN
+         << LONG_OPTION_TILED_PDF_TOP_MARGIN
+         << LONG_OPTION_TILED_PDF_BOTTOM_MARGIN
+         << LONG_OPTION_TILED_PDF_LANDSCAPE;
 
     return list;
 }
