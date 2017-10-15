@@ -46,7 +46,8 @@ HEADERS += \
     $$PWD/tools/piece/dialogpiecepath.h \
     $$PWD/tools/dialogpin.h \
     $$PWD/tools/dialoginsertnode.h \
-    $$PWD/support/dialogeditlabel.h
+    $$PWD/support/dialogeditlabel.h \
+    $$PWD/tools/dialogplacelabel.h
 
 SOURCES += \
     $$PWD/tools/dialogalongline.cpp \
@@ -92,7 +93,8 @@ SOURCES += \
     $$PWD/tools/piece/dialogpiecepath.cpp \
     $$PWD/tools/dialogpin.cpp \
     $$PWD/tools/dialoginsertnode.cpp \
-    $$PWD/support/dialogeditlabel.cpp
+    $$PWD/support/dialogeditlabel.cpp \
+    $$PWD/tools/dialogplacelabel.cpp
 
 FORMS += \
     $$PWD/tools/dialogalongline.ui \
@@ -142,4 +144,6 @@ FORMS += \
     $$PWD/tools/piece/tabs/tabpins.ui \
     $$PWD/tools/dialoginsertnode.ui \
     $$PWD/tools/piece/tabs/tabpassmarks.ui \
-    $$PWD/support/dialogeditlabel.ui
+    $$PWD/support/dialogeditlabel.ui \
+    $$PWD/tools/dialogplacelabel.ui \
+    $$PWD/tools/piece/tabs/tabplacelabels.ui

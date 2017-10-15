@@ -145,6 +145,7 @@ private slots:
     void ToolDetail(bool checked);
     void ToolPiecePath(bool checked);
     void ToolPin(bool checked);
+    void ToolPlaceLabel(bool checked);
     void ToolHeight(bool checked);
     void ToolTriangle(bool checked);
     void ToolPointOfIntersection(bool checked);
@@ -180,6 +181,7 @@ private slots:
     void ClosedDialogGroup(int result);
     void ClosedDialogPiecePath(int result);
     void ClosedDialogPin(int result);
+    void ClosedDialogPlaceLabel(int result);
     void ClosedDialogInsertNode(int result);
 
     void ZoomFitBestCurrent();

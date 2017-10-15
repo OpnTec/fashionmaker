@@ -607,7 +607,7 @@ void VAbstractOperation::InitOperatedObjects()
         const QSharedPointer<VGObject> obj = VAbstractTool::data.GetGObject(object.id);
 
         // This check helps to find missed objects in the switch
-        Q_STATIC_ASSERT_X(static_cast<int>(GOType::Unknown) == 7, "Not all objects were handled.");
+        Q_STATIC_ASSERT_X(static_cast<int>(GOType::Unknown) == 8, "Not all objects were handled.");
 
 QT_WARNING_PUSH
 QT_WARNING_DISABLE_GCC("-Wswitch-default")
@@ -650,6 +650,8 @@ QT_WARNING_DISABLE_GCC("-Wswitch-default")
                 InitCurve(object.id, &(VAbstractTool::data), obj->getType(), SceneObject::SplinePath);
                 break;
             case GOType::Unknown:
+            case GOType::PlaceLabel:
+                Q_UNREACHABLE();
                 break;
         }
 QT_WARNING_POP

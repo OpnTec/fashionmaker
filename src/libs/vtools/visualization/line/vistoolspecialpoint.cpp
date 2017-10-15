@@ -2,7 +2,7 @@
  **
  **  @file
  **  @author Roman Telezhynskyi <dismine(at)gmail.com>
- **  @date   14 2, 2017
+ **  @date   31 1, 2017
  **
  **  @brief
  **  @copyright
@@ -26,55 +26,46 @@
  **
  *************************************************************************/
 
-#include "vispiecepins.h"
+#include "vistoolspecialpoint.h"
 #include "../vwidgets/vsimplepoint.h"
 #include "../vgeometry/vpointf.h"
 #include "../vpatterndb/vcontainer.h"
 
 //---------------------------------------------------------------------------------------------------------------------
-VisPiecePins::VisPiecePins(const VContainer *data, QGraphicsItem *parent)
-    : VisPath(data, parent),
-      m_points(),
-      m_pins()
+VisToolSpecialPoint::VisToolSpecialPoint(const VContainer *data, QGraphicsItem *parent)
+    : VisLine(data, parent),
+      m_point()
 {
+    this->mainColor = Qt::red;
+    this->setZValue(2);// Show on top real tool
+    this->setPen(QPen(Qt::NoPen));
+
+    m_point = new VSimplePoint(NULL_ID, mainColor);
+    m_point->SetPointHighlight(true);
+    m_point->setParentItem(this);
+    m_point->SetVisualizationMode(true);
+    m_point->setVisible(false);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VisPiecePins::RefreshGeometry()
+VisToolSpecialPoint::~VisToolSpecialPoint()
 {
-    HideAllItems();
-
-    for (int i = 0; i < m_pins.size(); ++i)
+    if (not m_point.isNull())
     {
-        VSimplePoint *point = GetPoint(static_cast<quint32>(i), supportColor);
-        point->SetOnlyPoint(false);
-        const QSharedPointer<VPointF> p = Visualization::data->GeometricObject<VPointF>(m_pins.at(i));
-        point->RefreshPointGeometry(*p);
-        point->setVisible(true);
+        delete m_point;
     }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VisPiecePins::SetPins(const QVector<quint32> &pins)
+void VisToolSpecialPoint::RefreshGeometry()
 {
-    m_pins = pins;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-VSimplePoint *VisPiecePins::GetPoint(quint32 i, const QColor &color)
-{
-    return VisPath::GetPoint(m_points, i, color);
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void VisPiecePins::HideAllItems()
-{
-    for (int i=0; i < m_points.size(); ++i)
+    if (object1Id > NULL_ID)
     {
-        if (QGraphicsEllipseItem *item = m_points.at(i))
-        {
-            item->setVisible(false);
-        }
+        const QSharedPointer<VPointF> point = Visualization::data->GeometricObject<VPointF>(object1Id);
+
+        m_point->SetOnlyPoint(mode == Mode::Creation);
+        m_point->RefreshPointGeometry(*point);
+        m_point->setVisible(true);
     }
 }
 

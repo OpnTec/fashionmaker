@@ -55,6 +55,7 @@
 #include "tools/vtoolseamallowance.h"
 #include "tools/nodeDetails/vtoolpiecepath.h"
 #include "tools/nodeDetails/vtoolpin.h"
+#include "tools/nodeDetails/vtoolplacelabel.h"
 #include "tools/vtooluniondetails.h"
 #include "dialogs/dialogs.h"
 #include "dialogs/vwidgetgroups.h"
@@ -611,6 +612,9 @@ void MainWindow::SetToolButton(bool checked, Tool t, const QString &cursor, cons
         ui->view->setShowToolOptions(false);
         dialogTool = QSharedPointer<Dialog>(new Dialog(pattern, 0, this));
 
+        // This check helps to find missed tools in the switch
+        Q_STATIC_ASSERT_X(static_cast<int>(Tool::LAST_ONE_DO_NOT_USE) == 54, "Check if need to extend.");
+
         switch(t)
         {
             case Tool::Midpoint:
@@ -619,6 +623,7 @@ void MainWindow::SetToolButton(bool checked, Tool t, const QString &cursor, cons
             case Tool::PiecePath:
             case Tool::Pin:
             case Tool::InsertNode:
+            case Tool::PlaceLabel:
                 dialogTool->SetPiecesList(doc->GetActivePPPieces());
                 break;
             default:
@@ -1034,6 +1039,14 @@ void MainWindow::ToolPin(bool checked)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void MainWindow::ToolPlaceLabel(bool checked)
+{
+    ToolSelectPointByRelease();
+    SetToolButton<DialogPlaceLabel>(checked, Tool::PlaceLabel, "://cursor/place_label_cursor.png",
+                                    tr("Select placelabel center point"), &MainWindow::ClosedDialogPlaceLabel);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 /**
  * @brief ToolHeight handler tool height.
  * @param checked true - button checked.
@@ -1195,6 +1208,18 @@ void MainWindow::ClosedDialogPin(int result)
     if (result == QDialog::Accepted)
     {
         VToolPin::Create(dialogTool, doc, pattern);
+    }
+    ArrowTool();
+    doc->LiteParseTree(Document::LiteParse);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void MainWindow::ClosedDialogPlaceLabel(int result)
+{
+    SCASSERT(dialogTool != nullptr);
+    if (result == QDialog::Accepted)
+    {
+        VToolPlaceLabel::Create(dialogTool, doc, pattern);
     }
     ArrowTool();
     doc->LiteParseTree(Document::LiteParse);
@@ -1960,7 +1985,7 @@ void MainWindow::InitToolButtons()
     }
 
     // This check helps to find missed tools
-    Q_STATIC_ASSERT_X(static_cast<int>(Tool::LAST_ONE_DO_NOT_USE) == 53, "Check if all tools were connected.");
+    Q_STATIC_ASSERT_X(static_cast<int>(Tool::LAST_ONE_DO_NOT_USE) == 54, "Check if all tools were connected.");
 
     connect(ui->toolButtonEndLine, &QToolButton::clicked, this, &MainWindow::ToolEndLine);
     connect(ui->toolButtonLine, &QToolButton::clicked, this, &MainWindow::ToolLine);
@@ -2009,6 +2034,7 @@ void MainWindow::InitToolButtons()
     connect(ui->toolButtonEllipticalArc, &QToolButton::clicked, this, &MainWindow::ToolEllipticalArc);
     connect(ui->toolButtonPin, &QToolButton::clicked, this, &MainWindow::ToolPin);
     connect(ui->toolButtonInsertNode, &QToolButton::clicked, this, &MainWindow::ToolInsertNode);
+    connect(ui->toolButtonPlaceLabel, &QToolButton::clicked, this, &MainWindow::ToolPlaceLabel);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -2036,7 +2062,7 @@ QT_WARNING_DISABLE_GCC("-Wswitch-default")
 void MainWindow::CancelTool()
 {
     // This check helps to find missed tools in the switch
-    Q_STATIC_ASSERT_X(static_cast<int>(Tool::LAST_ONE_DO_NOT_USE) == 53, "Not all tools were handled.");
+    Q_STATIC_ASSERT_X(static_cast<int>(Tool::LAST_ONE_DO_NOT_USE) == 54, "Not all tools were handled.");
 
     qCDebug(vMainWindow, "Canceling tool.");
     dialogTool.clear();
@@ -2199,6 +2225,9 @@ void MainWindow::CancelTool()
             break;
         case Tool::InsertNode:
             ui->toolButtonInsertNode->setChecked(false);
+            break;
+        case Tool::PlaceLabel:
+            ui->toolButtonPlaceLabel->setChecked(false);
             break;
     }
 
@@ -3378,6 +3407,8 @@ void MainWindow::SetEnableTool(bool enable)
     bool modelingTools = false;
     bool layoutTools = false;
 
+QT_WARNING_PUSH
+QT_WARNING_DISABLE_GCC("-Wswitch-default")
     switch (mode)
     {
         case Draw::Calculation:
@@ -3389,12 +3420,11 @@ void MainWindow::SetEnableTool(bool enable)
         case Draw::Layout:
             layoutTools = enable;
             break;
-        default:
-            break;
     }
+QT_WARNING_POP
 
     // This check helps to find missed tools
-    Q_STATIC_ASSERT_X(static_cast<int>(Tool::LAST_ONE_DO_NOT_USE) == 53, "Not all tools were handled.");
+    Q_STATIC_ASSERT_X(static_cast<int>(Tool::LAST_ONE_DO_NOT_USE) == 54, "Not all tools were handled.");
 
     //Drawing Tools
     ui->toolButtonEndLine->setEnabled(drawTools);
@@ -3437,6 +3467,7 @@ void MainWindow::SetEnableTool(bool enable)
     ui->toolButtonEllipticalArc->setEnabled(drawTools);
     ui->toolButtonPin->setEnabled(drawTools);
     ui->toolButtonInsertNode->setEnabled(drawTools);
+    ui->toolButtonPlaceLabel->setEnabled(drawTools);
 
     ui->actionLast_tool->setEnabled(drawTools);
 
@@ -3721,7 +3752,7 @@ QT_WARNING_DISABLE_GCC("-Wswitch-default")
 void MainWindow::LastUsedTool()
 {
     // This check helps to find missed tools in the switch
-    Q_STATIC_ASSERT_X(static_cast<int>(Tool::LAST_ONE_DO_NOT_USE) == 53, "Not all tools were handled.");
+    Q_STATIC_ASSERT_X(static_cast<int>(Tool::LAST_ONE_DO_NOT_USE) == 54, "Not all tools were handled.");
 
     if (currentTool == lastUsedTool)
     {
@@ -3915,6 +3946,10 @@ void MainWindow::LastUsedTool()
         case Tool::InsertNode:
             ui->toolButtonInsertNode->setChecked(true);
             ToolInsertNode(true);
+            break;
+        case Tool::PlaceLabel:
+            ui->toolButtonPlaceLabel->setChecked(true);
+            ToolPlaceLabel(true);
             break;
     }
 }

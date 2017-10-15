@@ -71,13 +71,13 @@ public:
     static const QString TagRecord;
     static const QString TagIPaths;
     static const QString TagPins;
+    static const QString TagPlaceLabels;
 
     static const QString AttrVersion;
     static const QString AttrForbidFlipping;
     static const QString AttrSeamAllowance;
     static const QString AttrHideMainPath;
     static const QString AttrSeamAllowanceBuiltIn;
-    static const QString AttrHeight;
     static const QString AttrUnited;
     static const QString AttrFont;
     static const QString AttrTopLeftPin;
@@ -96,6 +96,7 @@ public:
     static void AddCSARecords(VAbstractPattern *doc, QDomElement &domElement, const QVector<CustomSARecord> &records);
     static void AddInternalPaths(VAbstractPattern *doc, QDomElement &domElement, const QVector<quint32> &paths);
     static void AddPins(VAbstractPattern *doc, QDomElement &domElement, const QVector<quint32> &pins);
+    static void AddPlaceLabels(VAbstractPattern *doc, QDomElement &domElement, const QVector<quint32> &placeLabels);
     static void AddPatternPieceData(VAbstractPattern *doc, QDomElement &domElement, const VPiece &piece);
     static void AddPatternInfo(VAbstractPattern *doc, QDomElement &domElement, const VPiece &piece);
     static void AddGrainline(VAbstractPattern *doc, QDomElement &domElement, const VPiece &piece);
@@ -169,6 +170,7 @@ private:
     VTextGraphicsItem     *m_patternInfo;
     VGrainlineItem        *m_grainLine;
     QGraphicsPathItem     *m_passmarks;
+    QGraphicsPathItem     *m_placeLabels;
 
     VToolSeamAllowance(const VToolSeamAllowanceInitData &initData, QGraphicsItem * parent = nullptr);
 
@@ -183,15 +185,18 @@ private:
     void InitNodes(const VPiece &detail, VMainGraphicsScene *scene);
     static void InitNode(const VPieceNode &node, VMainGraphicsScene *scene, VContainer *data, VAbstractPattern *doc,
                          VToolSeamAllowance *parent);
-    void InitCSAPaths(const VPiece &detail);
+    void InitCSAPaths(const VPiece &detail) const;
     void InitInternalPaths(const VPiece &detail);
-    void InitPins(const VPiece &detail);
+    void InitSpecialPoints(const QVector<quint32> &points) const;
 
     bool PrepareLabelData(const VPatternLabelData &labelData, VTextGraphicsItem *labelItem, QPointF &pos,
                           qreal &labelAngle);
     void UpdateLabelItem(VTextGraphicsItem *labelItem, QPointF pos, qreal labelAngle);
 
     QList<VToolSeamAllowance *> SelectedTools() const;
+
+    static void AddPointRecords(VAbstractPattern *doc, QDomElement &domElement, const QVector<quint32> &records,
+                                const QString &tag);
 };
 
 #endif // VTOOLSEAMALLOWANCE_H

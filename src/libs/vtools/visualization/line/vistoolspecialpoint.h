@@ -26,26 +26,26 @@
  **
  *************************************************************************/
 
-#ifndef VISTOOLPIN_H
-#define VISTOOLPIN_H
+#ifndef VISTOOLSPECIALPOINT_H
+#define VISTOOLSPECIALPOINT_H
 
 #include "visline.h"
 
 class VSimplePoint;
 
-class VisToolPin : public VisLine
+class VisToolSpecialPoint : public VisLine
 {
     Q_OBJECT
 public:
-    explicit VisToolPin(const VContainer *data, QGraphicsItem *parent = nullptr);
-    virtual ~VisToolPin();
+    explicit VisToolSpecialPoint(const VContainer *data, QGraphicsItem *parent = nullptr);
+    virtual ~VisToolSpecialPoint();
 
     virtual void RefreshGeometry() Q_DECL_OVERRIDE;
     virtual int  type() const Q_DECL_OVERRIDE {return Type;}
-    enum { Type = UserType + static_cast<int>(Vis::ToolPin)};
+    enum { Type = UserType + static_cast<int>(Vis::ToolSpecialPoint)};
 private:
-    Q_DISABLE_COPY(VisToolPin)
+    Q_DISABLE_COPY(VisToolSpecialPoint)
     QPointer<VSimplePoint> m_point;
 };
 
-#endif // VISTOOLPIN_H
+#endif // VISTOOLSPECIALPOINT_H

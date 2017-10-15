@@ -858,7 +858,8 @@ void VPattern::ParseDetailElement(QDomElement &domElement, const Document &parse
                                                << TagGrainline
                                                << VToolSeamAllowance::TagCSA
                                                << VToolSeamAllowance::TagIPaths
-                                               << VToolSeamAllowance::TagPins;
+                                               << VToolSeamAllowance::TagPins
+                                               << VToolSeamAllowance::TagPlaceLabels;
 
         const QDomNodeList nodeList = domElement.childNodes();
         for (qint32 i = 0; i < nodeList.size(); ++i)
@@ -899,7 +900,10 @@ void VPattern::ParseDetailElement(QDomElement &domElement, const Document &parse
                         initData.detail.SetInternalPaths(ParsePieceInternalPaths(element));
                         break;
                     case 6:// VToolSeamAllowance::TagPins
-                        initData.detail.SetPins(ParsePiecePins(element));
+                        initData.detail.SetPins(ParsePiecePointRecords(element));
+                        break;
+                    case 7:// VToolSeamAllowance::TagPlaceLabels
+                        initData.detail.SetPlaceLabels(ParsePiecePointRecords(element));
                         break;
                     default:
                         break;
@@ -963,7 +967,7 @@ void VPattern::ParsePieceDataTag(const QDomElement &domElement, VPiece &detail) 
     ppData.SetOnFold(GetParametrBool(domElement, AttrOnFold, falseStr));
     ppData.SetPos(QPointF(GetParametrDouble(domElement, AttrMx, "0"), GetParametrDouble(domElement, AttrMy, "0")));
     ppData.SetLabelWidth(GetParametrString(domElement, AttrWidth, "1"));
-    ppData.SetLabelHeight(GetParametrString(domElement, VToolSeamAllowance::AttrHeight, "1"));
+    ppData.SetLabelHeight(GetParametrString(domElement, AttrHeight, "1"));
     ppData.SetFontSize(static_cast<int>(GetParametrUInt(domElement, VToolSeamAllowance::AttrFont, "0")));
     ppData.SetRotation(GetParametrString(domElement, AttrRotation, "0"));
     ppData.SetCenterPin(GetParametrUInt(domElement, VToolSeamAllowance::AttrCenterPin, NULL_ID_STR));
@@ -979,7 +983,7 @@ void VPattern::ParsePiecePatternInfo(const QDomElement &domElement, VPiece &deta
     patternInfo.SetVisible(GetParametrBool(domElement, AttrVisible, trueStr));
     patternInfo.SetPos(QPointF(GetParametrDouble(domElement, AttrMx, "0"), GetParametrDouble(domElement, AttrMy, "0")));
     patternInfo.SetLabelWidth(GetParametrString(domElement, AttrWidth, "1"));
-    patternInfo.SetLabelHeight(GetParametrString(domElement, VToolSeamAllowance::AttrHeight, "1"));
+    patternInfo.SetLabelHeight(GetParametrString(domElement, AttrHeight, "1"));
     patternInfo.SetFontSize(static_cast<int>(GetParametrUInt(domElement, VToolSeamAllowance::AttrFont, "0")));
     patternInfo.SetRotation(GetParametrString(domElement, AttrRotation, "0"));
     patternInfo.SetCenterPin(GetParametrUInt(domElement, VToolSeamAllowance::AttrCenterPin, NULL_ID_STR));
@@ -1090,7 +1094,8 @@ void VPattern::ParsePointElement(VMainGraphicsScene *scene, QDomElement &domElem
                                        << VToolPointFromArcAndTangent::ToolType     /*20*/
                                        << VToolTrueDarts::ToolType                  /*21*/
                                        << VToolPointOfIntersectionCurves::ToolType  /*22*/
-                                       << VToolPin::ToolType;                       /*23*/
+                                       << VToolPin::ToolType                        /*23*/
+                                       << VToolPlaceLabel::ToolType;                /*24*/
     switch (points.indexOf(type))
     {
         case 0: //VToolBasePoint::ToolType
@@ -1164,6 +1169,9 @@ void VPattern::ParsePointElement(VMainGraphicsScene *scene, QDomElement &domElem
             break;
         case 23: //VToolPin::ToolType
             ParsePinPoint(domElement, parse);
+            break;
+        case 24: //VToolPlaceLabel::ToolType
+            ParsePlaceLabel(domElement, parse);
             break;
         default:
             VException e(tr("Unknown point type '%1'.").arg(type));
@@ -1692,6 +1700,60 @@ void VPattern::ParsePinPoint(const QDomElement &domElement, const Document &pars
     {
         VExceptionObjectError excep(tr("Error creating or updating pin point"), domElement);
         excep.AddMoreInformation(e.ErrorMessage());
+        throw excep;
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VPattern::ParsePlaceLabel(QDomElement &domElement, const Document &parse)
+{
+    Q_ASSERT_X(not domElement.isNull(), Q_FUNC_INFO, "domElement is null");
+
+    try
+    {
+        VToolPlaceLabelInitData initData;
+        initData.doc = this;
+        initData.data = data;
+        initData.parse = parse;
+        initData.typeCreation = Source::FromFile;
+
+        ToolsCommonAttributes(domElement, initData.id);
+        initData.centerPoint = GetParametrUInt(domElement, AttrIdObject, NULL_ID_STR);
+        initData.idTool = GetParametrUInt(domElement, VAbstractNode::AttrIdTool, NULL_ID_STR);
+
+        initData.width = GetParametrString(domElement, AttrLength, "1.0");
+        const QString w = initData.width;//need for saving fixed formula;
+
+        initData.height = GetParametrString(domElement, AttrHeight, "1.0");
+        const QString h = initData.height;//need for saving fixed formula;
+
+        initData.angle = GetParametrString(domElement, AttrAngle, "0.0");
+        const QString angle = initData.angle;//need for saving fixed formula;
+
+        initData.type = static_cast<PlaceLabelType>(GetParametrUInt(domElement, AttrPlaceLabelType, "0"));
+
+        VToolPlaceLabel::Create(initData);
+
+        //Rewrite attribute formula. Need for situation when we have wrong formula.
+        if (w != initData.width || h != initData.height || angle != initData.angle)
+        {
+            SetAttribute(domElement, AttrWidth, initData.width);
+            SetAttribute(domElement, AttrHeight, initData.height);
+            SetAttribute(domElement, AttrAngle, initData.angle);
+            modified = true;
+            haveLiteChange();
+        }
+    }
+    catch (const VExceptionBadId &e)
+    {
+        VExceptionObjectError excep(tr("Error creating or updating place lavel"), domElement);
+        excep.AddMoreInformation(e.ErrorMessage());
+        throw excep;
+    }
+    catch (qmu::QmuParserError &e)
+    {
+        VExceptionObjectError excep(tr("Error creating or updating place lavel"), domElement);
+        excep.AddMoreInformation(QString("Message:     " + e.GetMsg() + "\n"+ "Expression:  " + e.GetExpr()));
         throw excep;
     }
 }
@@ -4103,7 +4165,7 @@ QT_WARNING_DISABLE_GCC("-Wswitch-default")
 QRectF VPattern::ActiveDrawBoundingRect() const
 {
     // This check helps to find missed tools in the switch
-    Q_STATIC_ASSERT_X(static_cast<int>(Tool::LAST_ONE_DO_NOT_USE) == 53, "Not all tools were used.");
+    Q_STATIC_ASSERT_X(static_cast<int>(Tool::LAST_ONE_DO_NOT_USE) == 54, "Not all tools were used.");
 
     QRectF rec;
 
@@ -4183,6 +4245,7 @@ QRectF VPattern::ActiveDrawBoundingRect() const
                 case Tool::PiecePath:
                 case Tool::Pin:
                 case Tool::InsertNode:
+                case Tool::PlaceLabel:
                     break;
             }
         }

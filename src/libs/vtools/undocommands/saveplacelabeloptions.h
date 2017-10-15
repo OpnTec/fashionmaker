@@ -1,8 +1,8 @@
 /************************************************************************
  **
- **  @file
+ **  @file   saveplacelabeloptions.h
  **  @author Roman Telezhynskyi <dismine(at)gmail.com>
- **  @date   14 2, 2017
+ **  @date   16 10, 2017
  **
  **  @brief
  **  @copyright
@@ -25,33 +25,33 @@
  **  along with Valentina.  If not, see <http://www.gnu.org/licenses/>.
  **
  *************************************************************************/
+#ifndef SAVEPLACELABELOPTIONS_H
+#define SAVEPLACELABELOPTIONS_H
 
-#ifndef VISPIECEPINS_H
-#define VISPIECEPINS_H
+#include "vundocommand.h"
+#include "../vgeometry/vplacelabelitem.h"
 
-#include "vispath.h"
-
-class VSimplePoint;
-
-class VisPiecePins : public VisPath
+class SavePlaceLabelOptions : public VUndoCommand
 {
-    Q_OBJECT
 public:
-    VisPiecePins(const VContainer *data, QGraphicsItem *parent = nullptr);
-    virtual ~VisPiecePins() Q_DECL_EQ_DEFAULT;
+    SavePlaceLabelOptions(const VPlaceLabelItem &oldLabel, const VPlaceLabelItem &newLabel, VAbstractPattern *doc,
+                          VContainer *data, quint32 id, QUndoCommand *parent = nullptr);
+    virtual ~SavePlaceLabelOptions()=default;
 
-    virtual void RefreshGeometry() Q_DECL_OVERRIDE;
-    void         SetPins(const QVector<quint32> &pins);
-    virtual int  type() const Q_DECL_OVERRIDE {return Type;}
-    enum { Type = UserType + static_cast<int>(Vis::PiecePins)};
+    virtual void undo() Q_DECL_OVERRIDE;
+    virtual void redo() Q_DECL_OVERRIDE;
+    virtual bool mergeWith(const QUndoCommand *command) Q_DECL_OVERRIDE;
+    virtual int  id() const Q_DECL_OVERRIDE;
+
+    quint32         LabelId() const;
+    VPlaceLabelItem NewLabel() const;
 private:
-    Q_DISABLE_COPY(VisPiecePins)
-    QVector<VSimplePoint *> m_points;
-    QVector<quint32>        m_pins;
+    Q_DISABLE_COPY(SavePlaceLabelOptions)
 
-    VSimplePoint *GetPoint(quint32 i, const QColor &color);
+    const VPlaceLabelItem m_oldLabel;
+    VPlaceLabelItem       m_newLabel;
 
-    void HideAllItems();
+    VContainer *m_data;
 };
 
-#endif // VISPIECEPINS_H
+#endif // SAVEPLACELABELOPTIONS_H

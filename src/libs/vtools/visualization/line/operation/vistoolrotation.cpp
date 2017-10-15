@@ -131,7 +131,7 @@ void VisToolRotation::RefreshGeometry()
         const QSharedPointer<VGObject> obj = Visualization::data->GetGObject(id);
 
         // This check helps to find missed objects in the switch
-        Q_STATIC_ASSERT_X(static_cast<int>(GOType::Unknown) == 7, "Not all objects was handled.");
+        Q_STATIC_ASSERT_X(static_cast<int>(GOType::Unknown) == 8, "Not all objects was handled.");
 
         switch(static_cast<GOType>(obj->getType()))
         {
@@ -184,6 +184,8 @@ void VisToolRotation::RefreshGeometry()
                 break;
             }
             case GOType::Unknown:
+            case GOType::PlaceLabel:
+                Q_UNREACHABLE();
                 break;
         }
     }

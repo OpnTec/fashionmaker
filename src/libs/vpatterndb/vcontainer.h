@@ -143,6 +143,7 @@ public:
     static void        UpdateId(quint32 newId);
 
     quint32            AddGObject(VGObject *obj);
+    quint32            AddGObject(const QSharedPointer<VGObject> &obj);
     quint32            AddPiece(const VPiece &detail);
     quint32            AddPiecePath(const VPiecePath &path);
     void               AddLine(const quint32 &firstPointId, const quint32 &secondPointId);

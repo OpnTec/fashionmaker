@@ -109,7 +109,7 @@ void VisOperation::RefreshFlippedObjects(const QPointF &firstPoint, const QPoint
         const QSharedPointer<VGObject> obj = Visualization::data->GetGObject(id);
 
         // This check helps to find missed objects in the switch
-        Q_STATIC_ASSERT_X(static_cast<int>(GOType::Unknown) == 7, "Not all objects were handled.");
+        Q_STATIC_ASSERT_X(static_cast<int>(GOType::Unknown) == 8, "Not all objects were handled.");
 
         switch(static_cast<GOType>(obj->getType()))
         {
@@ -161,6 +161,8 @@ void VisOperation::RefreshFlippedObjects(const QPointF &firstPoint, const QPoint
                 break;
             }
             case GOType::Unknown:
+            case GOType::PlaceLabel:
+                Q_UNREACHABLE();
                 break;
         }
     }

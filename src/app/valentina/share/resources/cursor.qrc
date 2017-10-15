@@ -84,5 +84,7 @@
         <file>cursor/pin_cursor@2x.png</file>
         <file>cursor/insert_node_cursor.png</file>
         <file>cursor/insert_node_cursor@2x.png</file>
+        <file>cursor/place_label_cursor@2x.png</file>
+        <file>cursor/place_label_cursor.png</file>
     </qresource>
 </RCC>

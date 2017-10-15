@@ -15,7 +15,8 @@ SOURCES += \
         $$PWD/vabstractcubicbezierpath.cpp \
         $$PWD/vcubicbezierpath.cpp \
         $$PWD/vabstractarc.cpp \
-        $$PWD/vabstractbezier.cpp
+        $$PWD/vabstractbezier.cpp \
+    $$PWD/vplacelabelitem.cpp
 
 *msvc*:SOURCES += $$PWD/stable.cpp
 
@@ -46,4 +47,6 @@ HEADERS += \
         $$PWD/vcubicbezierpath_p.h \
         $$PWD/vabstractarc.h \
         $$PWD/vabstractarc_p.h \
-        $$PWD/vabstractbezier.h
+        $$PWD/vabstractbezier.h \
+    $$PWD/vplacelabelitem.h \
+    $$PWD/vplacelabelitem_p.h

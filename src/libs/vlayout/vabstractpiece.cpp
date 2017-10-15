@@ -992,6 +992,21 @@ bool VAbstractPiece::IsEkvPointOnLine(const VSAPoint &iPoint, const VSAPoint &pr
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+QPainterPath VAbstractPiece::PlaceLabelImgPath(const PlaceLabelImg &img) const
+{
+    QPainterPath path;
+    foreach(const QPolygonF &p, img)
+    {
+        if (not p.isEmpty())
+        {
+            path.moveTo(p.first());
+            path.addPolygon(p);
+        }
+    }
+    return path;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 qreal VAbstractPiece::GetMx() const
 {
     return d->m_mx;

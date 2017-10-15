@@ -69,6 +69,7 @@
 #include "tools/piece/dialogpiecepath.h"
 #include "tools/dialogpin.h"
 #include "tools/dialoginsertnode.h"
+#include "tools/dialogplacelabel.h"
 
 #include "support/dialogeditwrongformula.h"
 #include "support/dialogundo.h"

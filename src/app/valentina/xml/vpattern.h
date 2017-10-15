@@ -180,6 +180,7 @@ private:
     void ParseToolPointOfContact(VMainGraphicsScene *scene, QDomElement &domElement, const Document &parse);
     void ParseNodePoint(const QDomElement &domElement, const Document &parse);
     void ParsePinPoint(const QDomElement &domElement, const Document &parse);
+    void ParsePlaceLabel(QDomElement &domElement, const Document &parse);
     void ParseToolHeight(VMainGraphicsScene *scene, const QDomElement &domElement, const Document &parse);
     void ParseToolTriangle(VMainGraphicsScene *scene, const QDomElement &domElement, const Document &parse);
     void ParseToolPointOfIntersection(VMainGraphicsScene *scene, const QDomElement &domElement, const Document &parse);

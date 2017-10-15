@@ -185,8 +185,15 @@ quint32 VContainer::AddGObject(VGObject *obj)
 {
     SCASSERT(obj != nullptr)
     QSharedPointer<VGObject> pointer(obj);
+    return AddGObject(pointer);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+quint32 VContainer::AddGObject(const QSharedPointer<VGObject> &obj)
+{
+    SCASSERT(not obj.isNull())
     uniqueNames.insert(obj->name());
-    return AddObject(d->gObjects, pointer);
+    return AddObject(d->gObjects, obj);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

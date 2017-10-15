@@ -150,7 +150,7 @@ VToolRotation *VToolRotation::Create(VToolRotationInitData &initData)
             const QSharedPointer<VGObject> obj = initData.data->GetGObject(idObject);
 
             // This check helps to find missed objects in the switch
-            Q_STATIC_ASSERT_X(static_cast<int>(GOType::Unknown) == 7, "Not all objects were handled.");
+            Q_STATIC_ASSERT_X(static_cast<int>(GOType::Unknown) == 8, "Not all objects were handled.");
 
 QT_WARNING_PUSH
 QT_WARNING_DISABLE_GCC("-Wswitch-default")
@@ -187,6 +187,8 @@ QT_WARNING_DISABLE_GCC("-Wswitch-default")
                                                                                           initData.data));
                     break;
                 case GOType::Unknown:
+                case GOType::PlaceLabel:
+                    Q_UNREACHABLE();
                     break;
             }
 QT_WARNING_POP
@@ -200,7 +202,7 @@ QT_WARNING_POP
             const QSharedPointer<VGObject> obj = initData.data->GetGObject(idObject);
 
             // This check helps to find missed objects in the switch
-            Q_STATIC_ASSERT_X(static_cast<int>(GOType::Unknown) == 7, "Not all objects were handled.");
+            Q_STATIC_ASSERT_X(static_cast<int>(GOType::Unknown) == 8, "Not all objects were handled.");
 
 QT_WARNING_PUSH
 QT_WARNING_DISABLE_GCC("-Wswitch-default")
@@ -237,6 +239,8 @@ QT_WARNING_DISABLE_GCC("-Wswitch-default")
                                                               initData.data, initData.destination.at(i).id);
                     break;
                 case GOType::Unknown:
+                case GOType::PlaceLabel:
+                    Q_UNREACHABLE();
                     break;
             }
 QT_WARNING_POP

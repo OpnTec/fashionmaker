@@ -49,6 +49,7 @@
 #include "../vmisc/vabstractapplication.h"
 #include "../vpatterndb/calculator.h"
 #include "../vgeometry/vpointf.h"
+#include "../vgeometry/vplacelabelitem.h"
 #include "vlayoutdef.h"
 #include "vlayoutpiece_p.h"
 #include "vtextmanager.h"
@@ -340,6 +341,22 @@ QStringList PieceLabelText(const QVector<QPointF> &labelShape, const VTextManage
     }
     return text;
 }
+
+//---------------------------------------------------------------------------------------------------------------------
+QVector<VLayoutPlaceLabel> ConvertPlaceLabels(const VPiece &piece, const VContainer *pattern)
+{
+    QVector<VLayoutPlaceLabel> labels;
+    for(int i=0; i < piece.GetPlaceLabels().size(); ++i)
+    {
+        const auto label = pattern->GeometricObject<VPlaceLabelItem>(piece.GetPlaceLabels().at(i));
+        VLayoutPlaceLabel layoutLabel;
+        layoutLabel.shape = label->LabelShape(pattern);
+        layoutLabel.center = pattern->GeometricObject<VPointF>(label->GetCenterPoint())->toQPointF();
+        layoutLabel.type = label->GetLabelType();
+        labels.append(layoutLabel);
+    }
+    return labels;
+}
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -381,6 +398,7 @@ VLayoutPiece VLayoutPiece::Create(const VPiece &piece, const VContainer *pattern
                                piece.IsSeamAllowanceBuiltIn());
     det.SetInternalPaths(ConvertInternalPaths(piece, pattern));
     det.SetPassmarks(piece.PassmarksLines(pattern));
+    det.SetPlaceLabels(ConvertPlaceLabels(piece, pattern));
 
     det.SetName(piece.GetName());
 
@@ -413,6 +431,48 @@ VLayoutPiece VLayoutPiece::Create(const VPiece &piece, const VContainer *pattern
     det.SetForbidFlipping(piece.IsForbidFlipping());
 
     return det;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+template <class T>
+QVector<T> VLayoutPiece::Map(const QVector<T> &points) const
+{
+    QVector<T> p;
+    for (int i = 0; i < points.size(); ++i)
+    {
+        p.append(d->matrix.map(points.at(i)));
+    }
+
+    if (d->mirror)
+    {
+        QList<T> list = p.toList();
+        for (int k=0, s=list.size(), max=(s/2); k<max; k++)
+        {
+            list.swap(k, s-(1+k));
+        }
+        p = list.toVector();
+    }
+    return p;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+template <>
+QVector<VLayoutPlaceLabel> VLayoutPiece::Map<VLayoutPlaceLabel>(const QVector<VLayoutPlaceLabel> &points) const
+{
+    QVector<VLayoutPlaceLabel> p;
+    foreach (const VLayoutPlaceLabel &label, points)
+    {
+        VLayoutPlaceLabel mappedLabel;
+        mappedLabel.type = label.type;
+        mappedLabel.center = d->matrix.map(label.center);
+        foreach (const QPolygonF &p, label.shape)
+        {
+            mappedLabel.shape.append(d->matrix.map(p));
+        }
+        p.append(mappedLabel);
+    }
+
+    return p;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -854,6 +914,18 @@ void VLayoutPiece::SetPassmarks(const QVector<QLineF> &passmarks)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+QVector<VLayoutPlaceLabel> VLayoutPiece::GetPlaceLabels() const
+{
+    return Map(d->m_placeLabels);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VLayoutPiece::SetPlaceLabels(const QVector<VLayoutPlaceLabel> &labels)
+{
+    d->m_placeLabels = labels;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 QVector<QVector<QPointF> > VLayoutPiece::InternalPathsForCut(bool cut) const
 {
     QVector<QVector<QPointF> > paths;
@@ -879,28 +951,6 @@ QVector<VLayoutPiecePath> VLayoutPiece::GetInternalPaths() const
 void VLayoutPiece::SetInternalPaths(const QVector<VLayoutPiecePath> &internalPaths)
 {
     d->m_internalPaths = internalPaths;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-template <class T>
-QVector<T> VLayoutPiece::Map(const QVector<T> &points) const
-{
-    QVector<T> p;
-    for (int i = 0; i < points.size(); ++i)
-    {
-        p.append(d->matrix.map(points.at(i)));
-    }
-
-    if (d->mirror)
-    {
-        QList<T> list = p.toList();
-        for (int k=0, s=list.size(), max=(s/2); k<max; k++)
-        {
-            list.swap(k, s-(1+k));
-        }
-        p = list.toVector();
-    }
-    return p;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -961,18 +1011,6 @@ QPainterPath VLayoutPiece::ContourPath() const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VLayoutPiece::CreateInternalPathItem(int i, QGraphicsItem *parent) const
-{
-    SCASSERT(parent != nullptr)
-    QGraphicsPathItem* item = new QGraphicsPathItem(parent);
-    item->setPath(d->matrix.map(d->m_internalPaths.at(i).GetPainterPath()));
-
-    QPen pen = item->pen();
-    pen.setStyle(d->m_internalPaths.at(i).PenStyle());
-    item->setPen(pen);
-}
-
-//---------------------------------------------------------------------------------------------------------------------
 QPainterPath VLayoutPiece::LayoutAllowancePath() const
 {
     QPainterPath path;
@@ -996,7 +1034,18 @@ QGraphicsItem *VLayoutPiece::GetItem(bool textAsPaths) const
 
     for (int i = 0; i < d->m_internalPaths.count(); ++i)
     {
-        CreateInternalPathItem(i, item);
+        QGraphicsPathItem* pathItem = new QGraphicsPathItem(item);
+        pathItem->setPath(d->matrix.map(d->m_internalPaths.at(i).GetPainterPath()));
+
+        QPen pen = pathItem->pen();
+        pen.setStyle(d->m_internalPaths.at(i).PenStyle());
+        pathItem->setPen(pen);
+    }
+
+    for (int i = 0; i < d->m_placeLabels.count(); ++i)
+    {
+        QGraphicsPathItem* pathItem = new QGraphicsPathItem(item);
+        pathItem->setPath(d->matrix.map(PlaceLabelImgPath(d->m_placeLabels.at(i).shape)));
     }
 
     CreateLabelStrings(item, d->detailLabel, d->m_tmDetail, textAsPaths);

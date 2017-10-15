@@ -471,6 +471,7 @@ void VToolCurveIntersectAxis::InitSegments(const GOType &curveType, qreal segLen
             break;
         }
         case GOType::Point:
+        case GOType::PlaceLabel:
         case GOType::Unknown:
             Q_UNREACHABLE();
             break;

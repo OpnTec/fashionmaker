@@ -29,8 +29,51 @@
 #ifndef VGEOMETRYDEF_H
 #define VGEOMETRYDEF_H
 
+#include <QVector>
+#include <QPolygonF>
+
 enum class Draw : char { Calculation, Modeling, Layout };
-enum class GOType : char { Point, Arc, EllipticalArc, Spline, SplinePath, CubicBezier, CubicBezierPath, Unknown };
+enum class GOType : char
+{
+    Point,
+    Arc,
+    EllipticalArc,
+    Spline,
+    SplinePath,
+    CubicBezier,
+    CubicBezierPath,
+    PlaceLabel,
+    Unknown
+};
 enum class SplinePointPosition : char { FirstPoint, LastPoint };
+
+// Keep synchronized with XSD schema
+enum class PlaceLabelType :  unsigned char
+{
+    Segment= 0,
+    Rectangle = 1,
+    Cross = 2,
+    Tshaped = 3,
+    Doubletree = 4,
+    Corner = 5,
+    Triangle = 6,
+    Hshaped = 7,
+    Button = 8
+};
+
+typedef QVector<QPolygonF> PlaceLabelImg;
+
+struct VLayoutPlaceLabel
+{
+    VLayoutPlaceLabel()
+        : center(),
+          type(PlaceLabelType::Button),
+          shape()
+    {}
+
+    QPointF        center;
+    PlaceLabelType type;
+    PlaceLabelImg  shape;
+};
 
 #endif // VGEOMETRYDEF_H

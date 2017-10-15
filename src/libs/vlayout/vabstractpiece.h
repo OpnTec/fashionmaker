@@ -41,6 +41,7 @@
 template <class T> class QVector;
 
 class VAbstractPieceData;
+class QPainterPath;
 
 QT_WARNING_PUSH
 QT_WARNING_DISABLE_GCC("-Weffc++")
@@ -193,6 +194,8 @@ protected:
     static qreal      MaxLocalSA(const VSAPoint &p, qreal width);
     static bool       IsEkvPointOnLine(const QPointF &iPoint, const QPointF &prevPoint, const QPointF &nextPoint);
     static bool       IsEkvPointOnLine(const VSAPoint &iPoint, const VSAPoint &prevPoint, const VSAPoint &nextPoint);
+
+    QPainterPath PlaceLabelImgPath(const PlaceLabelImg &img) const;
 
 private:
     QSharedDataPointer<VAbstractPieceData> d;

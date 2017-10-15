@@ -126,6 +126,9 @@ const QString AttrClosed      = QStringLiteral("closed");
 const QString AttrShowLabel   = QStringLiteral("showLabel");
 const QString AttrShowLabel1  = QStringLiteral("showLabel1");
 const QString AttrShowLabel2  = QStringLiteral("showLabel2");
+const QString AttrWidth       = QStringLiteral("width");
+const QString AttrHeight      = QStringLiteral("height");
+const QString AttrPlaceLabelType = QStringLiteral("placeLabelType");
 
 const QString TypeLineNone           = QStringLiteral("none");
 const QString TypeLineLine           = QStringLiteral("hair");
