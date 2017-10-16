@@ -661,6 +661,14 @@
         <source>Pen style:</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Approximation scale:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Set approximation scale for this curve, 0 - use global value</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>DialogArcWithLength</name>
@@ -766,6 +774,14 @@
     </message>
     <message>
         <source>Pen style:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Approximation scale:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Set approximation scale for this curve, 0 - use global value</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -942,6 +958,14 @@
         <source>Pen Style:</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Approximation Scale:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Set approximation scale for this curve, 0 - use global value</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>DialogCubicBezierPath</name>
@@ -975,6 +999,14 @@
     </message>
     <message>
         <source>Pen style:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Approximation scale:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Set approximation scale for this curve, 0 - use global value</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -5058,11 +5090,11 @@ Apply settings anyway?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>...</source>
-        <translation type="obsolete">...</translation>
+        <source>Browse…</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Browse…</source>
+        <source>cm</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -5580,6 +5612,14 @@ Apply settings anyway?</source>
         <source>Pen style:</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Approximation scale:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Set approximation scale for this curve, 0 - use global value</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>DialogSplinePath</name>
@@ -5713,6 +5753,14 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Pen style:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Approximation scale:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Set approximation scale for this curve, 0 - use global value</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -8098,6 +8146,14 @@ Voulez-vous sauvegarder les changements?</translation>
         <source>Remeber pattern materials</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Curve approximation:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Set default curve approximation scale</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>QApplication</name>
@@ -10166,7 +10222,7 @@ Voulez-vous enregistrer les changements?</translation>
     </message>
     <message>
         <source>Cannot use pageformat and page explicit size/units together.</source>
-        <translation>On ne peut utiliser un format de page et une longueur/largeur explicite.</translation>
+        <translation type="vanished">On ne peut utiliser un format de page et une longueur/largeur explicite.</translation>
     </message>
     <message>
         <source>Page height, width, units must be used all 3 at once.</source>
@@ -10266,19 +10322,19 @@ Voulez-vous enregistrer les changements?</translation>
     </message>
     <message>
         <source>Page left margin in current units like 3.0 (export mode). If not set will be used value from default printer. Or 0 if none printers was found.</source>
-        <translation type="vanished">Marge gauche de la page en unité courante, ex. 3.0 (mode exportation).   Si non renseigné, la valeur par défaut de l&apos;imprimante sera utilisé. Ou 0 si aucune imprimante n&apos;a été trouvé. </translation>
+        <translation>Marge gauche de la page en unité courante, ex. 3.0 (mode exportation).   Si non renseigné, la valeur par défaut de l&apos;imprimante sera utilisé. Ou 0 si aucune imprimante n&apos;a été trouvé.</translation>
     </message>
     <message>
         <source>Page right margin in current units like 3.0 (export mode). If not set will be used value from default printer. Or 0 if none printers was found.</source>
-        <translation type="vanished">Marge droite de la page en unité courante, ex. 3.0 (mode exportation).   Si non renseigné, la valeur par défaut de l&apos;imprimante sera utilisé. Ou 0 si aucune imprimante n&apos;a été trouvé. </translation>
+        <translation>Marge droite de la page en unité courante, ex. 3.0 (mode exportation).   Si non renseigné, la valeur par défaut de l&apos;imprimante sera utilisé. Ou 0 si aucune imprimante n&apos;a été trouvé.</translation>
     </message>
     <message>
         <source>Page top margin in current units like 3.0 (export mode). If not set will be used value from default printer. Or 0 if none printers was found.</source>
-        <translation type="vanished">Marge haute de la page en unité courante, ex. 3.0 (mode exportation).   Si non renseigné, la valeur par défaut de l&apos;imprimante sera utilisé. Ou 0 si aucune imprimante n&apos;a été trouvé. </translation>
+        <translation>Marge haute de la page en unité courante, ex. 3.0 (mode exportation).   Si non renseigné, la valeur par défaut de l&apos;imprimante sera utilisé. Ou 0 si aucune imprimante n&apos;a été trouvé.</translation>
     </message>
     <message>
         <source>Page bottom margin in current units like 3.0 (export mode). If not set will be used value from default printer. Or 0 if none printers was found.</source>
-        <translation type="vanished">Marge basse de la page en unité courante, ex. 3.0 (mode exportation).   Si non renseigné, la valeur par défaut de l&apos;imprimante sera utilisé. Ou 0 si aucune imprimante n&apos;a été trouvé. </translation>
+        <translation>Marge basse de la page en unité courante, ex. 3.0 (mode exportation).   Si non renseigné, la valeur par défaut de l&apos;imprimante sera utilisé. Ou 0 si aucune imprimante n&apos;a été trouvé.</translation>
     </message>
     <message>
         <source>Shift length must be used together with shift units.</source>
@@ -10310,27 +10366,27 @@ Voulez-vous enregistrer les changements?</translation>
     </message>
     <message>
         <source>Page height/width measure units (cannot be used with &quot;%1&quot;, export mode). Valid values: %2.</source>
-        <translation>Unité de mesure des hauteur/largeur de la page (&quot;%1&quot; ne peut pas être utilisé, mode exportation). Valeur valide: %2.</translation>
+        <translation type="vanished">Unité de mesure des hauteur/largeur de la page (&quot;%1&quot; ne peut pas être utilisé, mode exportation). Valeur valide: %2.</translation>
     </message>
     <message>
         <source>Ignore margins printing (export mode). Disable value keys: &quot;%1&quot;, &quot;%2&quot;, &quot;%3&quot;, &quot;%4&quot;. Set all margins to 0.</source>
-        <translation>Ignorer les marges d&apos;impression (mode export). Inactive les valeurs clés: &quot;%1&quot;, &quot;%2&quot;, &quot;%3&quot;, &quot;%4&quot;. Règle les marge à 0.</translation>
+        <translation type="vanished">Ignorer les marges d&apos;impression (mode export). Inactive les valeurs clés: &quot;%1&quot;, &quot;%2&quot;, &quot;%3&quot;, &quot;%4&quot;. Règle les marge à 0.</translation>
     </message>
     <message>
         <source>Page left margin in current units like 3.0 (export mode). If not set will be used value from default printer. Or 0 if none printers was found. Value will be ignored if key &quot;%1&quot; is used.</source>
-        <translation>Marge gauche de la page en unité courante, ex. 3.0 (mode exportation).   Si non renseigné, la valeur par défaut de l&apos;imprimante sera utilisé. Ou 0 si aucune imprimante n&apos;a été trouvé. La valeur sera ignorée si &quot;%1&quot; est utilisé.</translation>
+        <translation type="vanished">Marge gauche de la page en unité courante, ex. 3.0 (mode exportation).   Si non renseigné, la valeur par défaut de l&apos;imprimante sera utilisé. Ou 0 si aucune imprimante n&apos;a été trouvé. La valeur sera ignorée si &quot;%1&quot; est utilisé.</translation>
     </message>
     <message>
         <source>Page right margin in current units like 3.0 (export mode). If not set will be used value from default printer. Or 0 if none printers was found. Value will be ignored if key &quot;%1&quot; is used.</source>
-        <translation>Marge droite de la page en unité courante, ex. 3.0 (mode exportation).   Si non renseigné, la valeur par défaut de l&apos;imprimante sera utilisé. Ou 0 si aucune imprimante n&apos;a été trouvé. La valeur sera ignorée si &quot;%1&quot; est utilisé.</translation>
+        <translation type="vanished">Marge droite de la page en unité courante, ex. 3.0 (mode exportation).   Si non renseigné, la valeur par défaut de l&apos;imprimante sera utilisé. Ou 0 si aucune imprimante n&apos;a été trouvé. La valeur sera ignorée si &quot;%1&quot; est utilisé.</translation>
     </message>
     <message>
         <source>Page top margin in current units like 3.0 (export mode). If not set will be used value from default printer. Or 0 if none printers was found. Value will be ignored if key &quot;%1&quot; is used.</source>
-        <translation>Marge haute de la page en unité courante, ex. 3.0 (mode exportation).   Si non renseigné, la valeur par défaut de l&apos;imprimante sera utilisé. Ou 0 si aucune imprimante n&apos;a été trouvé. La valeur sera ignorée si &quot;%1&quot; est utilisé.</translation>
+        <translation type="vanished">Marge haute de la page en unité courante, ex. 3.0 (mode exportation).   Si non renseigné, la valeur par défaut de l&apos;imprimante sera utilisé. Ou 0 si aucune imprimante n&apos;a été trouvé. La valeur sera ignorée si &quot;%1&quot; est utilisé.</translation>
     </message>
     <message>
         <source>Page bottom margin in current units like 3.0 (export mode). If not set will be used value from default printer. Or 0 if none printers was found. Value will be ignored if key &quot;%1&quot; is used.</source>
-        <translation>Marge basse de la page en unité courante, ex. 3.0 (mode exportation).   Si non renseigné, la valeur par défaut de l&apos;imprimante sera utilisé. Ou 0 si aucune imprimante n&apos;a été trouvé. La valeur sera ignorée si &quot;%1&quot; est utilisé.</translation>
+        <translation type="vanished">Marge basse de la page en unité courante, ex. 3.0 (mode exportation).   Si non renseigné, la valeur par défaut de l&apos;imprimante sera utilisé. Ou 0 si aucune imprimante n&apos;a été trouvé. La valeur sera ignorée si &quot;%1&quot; est utilisé.</translation>
     </message>
     <message>
         <source>Rotation in degrees (one of predefined, export mode). Default value is 180. 0 is no-rotate. Valid values: %1. Each value show how many times details will be rotated. For example 180 mean two times (360/180=2) by 180 degree.</source>
@@ -10378,7 +10434,7 @@ Voulez-vous enregistrer les changements?</translation>
     </message>
     <message>
         <source>Number corresponding to page template (default = 0, export mode):</source>
-        <translation>Numéro correspondant au modèle de page (défaut=0, mode export) :</translation>
+        <translation type="vanished">Numéro correspondant au modèle de page (défaut=0, mode export) :</translation>
     </message>
     <message>
         <source>Disable high dpi scaling. Call this option if has problem with scaling (by default scaling enabled). Alternatively you can use the %1 environment variable.</source>
@@ -10438,6 +10494,78 @@ Voulez-vous enregistrer les changements?</translation>
     </message>
     <message>
         <source>Path to csv file</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Number corresponding to layout page template (default = 0, export mode):</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Page measure units (export mode). Valid values: %2.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Ignore printer margins (export mode). Use if need full paper space. In case of later printing you must account for the margins himself.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Number corresponding to tiled pdf page template (default = 0, export mode with tiled pdf format):</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Tiled page left margin in current units like 3.0 (export mode). If not set will be used default value 1 cm.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>The left margin</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Tiled page right margin in current units like 3.0 (export mode). If not set will be used default value 1 cm.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>The right margin</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Tiled page top margin in current units like 3.0 (export mode). If not set will be used value default value 1 cm.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>The top margin</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Tiled page bottom margin in current units like 3.0 (export mode). If not set will be used value default value 1 cm.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>The bottom margin</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Set tiled page orienatation to landscape (export mode). Default value if not set portrait.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Cannot use pageformat and page explicit size together.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Tiled left margin must be used together with page units.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Tiled right margin must be used together with page units.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Tiled top margin must be used together with page units.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Tiled bottom margin must be used together with page units.</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -11788,6 +11916,10 @@ Voulez-vous enregistrer les changements?</translation>
     </message>
     <message>
         <source>Pen style:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Approximation scale:</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
