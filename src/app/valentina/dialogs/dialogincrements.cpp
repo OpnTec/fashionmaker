@@ -557,19 +557,21 @@ void DialogIncrements::LocalUpdateTree()
 {
     doc->LiteParseIncrements();
 
-    UpdateTree();
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void DialogIncrements::UpdateTree()
-{
     int row = ui->tableWidgetIncrement->currentRow();
+
     FillIncrements();
+
+    ui->tableWidgetIncrement->blockSignals(true);
     ui->tableWidgetIncrement->selectRow(row);
+    ui->tableWidgetIncrement->blockSignals(false);
 
     row = ui->tableWidgetPC->currentRow();
+
     FillPreviewCalculations();
+
+    ui->tableWidgetPC->blockSignals(true);
     ui->tableWidgetPC->selectRow(row);
+    ui->tableWidgetPC->blockSignals(false);
 
     search->RefreshList(ui->lineEditFind->text());
     searchPC->RefreshList(ui->lineEditFindPC->text());
@@ -1209,7 +1211,7 @@ void DialogIncrements::Fx()
     const QTableWidgetItem *nameField = table->item(row, 0);
     QSharedPointer<VIncrement> incr = data->GetVariable<VIncrement>(nameField->text());
 
-    DialogEditWrongFormula *dialog = new DialogEditWrongFormula(incr->GetData(), NULL_ID, this);
+    QScopedPointer<DialogEditWrongFormula> dialog(new DialogEditWrongFormula(incr->GetData(), NULL_ID, this));
     dialog->setWindowTitle(tr("Edit increment"));
     dialog->SetFormula(qApp->TrVars()->TryFormulaFromUser(plainTextEditFormula->toPlainText().replace("\n", " "),
                                                           qApp->Settings()->GetOsSeparator()));
@@ -1228,7 +1230,6 @@ void DialogIncrements::Fx()
 
         table->selectRow(row);
     }
-    delete dialog;
 }
 
 //---------------------------------------------------------------------------------------------------------------------

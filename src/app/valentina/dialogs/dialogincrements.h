@@ -129,7 +129,6 @@ private:
     void    EnableDetails(QTableWidget *table, bool enabled);
 
     void LocalUpdateTree();
-    void UpdateTree();
 
     bool IncrementUsed(const QString &name) const;
 
