@@ -181,11 +181,17 @@ void VToolFlippingByLine::SetVisualization()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VToolFlippingByLine::SaveDialog(QDomElement &domElement)
+void VToolFlippingByLine::SaveDialog(QDomElement &domElement, QList<quint32> &oldDependencies,
+                                     QList<quint32> &newDependencies)
 {
     SCASSERT(not m_dialog.isNull())
     QSharedPointer<DialogFlippingByLine> dialogTool = m_dialog.objectCast<DialogFlippingByLine>();
     SCASSERT(not dialogTool.isNull())
+
+    AddDependence(oldDependencies, m_firstLinePointId);
+    AddDependence(oldDependencies, m_secondLinePointId);
+    AddDependence(newDependencies, dialogTool->GetFirstLinePointId());
+    AddDependence(newDependencies, dialogTool->GetSecondLinePointId());
 
     doc->SetAttribute(domElement, AttrP1Line, QString().setNum(dialogTool->GetFirstLinePointId()));
     doc->SetAttribute(domElement, AttrP2Line, QString().setNum(dialogTool->GetSecondLinePointId()));

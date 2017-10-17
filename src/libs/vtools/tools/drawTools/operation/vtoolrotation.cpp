@@ -332,11 +332,15 @@ void VToolRotation::SetVisualization()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VToolRotation::SaveDialog(QDomElement &domElement)
+void VToolRotation::SaveDialog(QDomElement &domElement, QList<quint32> &oldDependencies,
+                               QList<quint32> &newDependencies)
 {
     SCASSERT(not m_dialog.isNull())
     QSharedPointer<DialogRotation> dialogTool = m_dialog.objectCast<DialogRotation>();
     SCASSERT(not dialogTool.isNull())
+
+    AddDependence(oldDependencies, origPointId);
+    AddDependence(newDependencies, dialogTool->GetOrigPointId());
 
     doc->SetAttribute(domElement, AttrCenter, QString().setNum(dialogTool->GetOrigPointId()));
     doc->SetAttribute(domElement, AttrAngle, dialogTool->GetAngle());

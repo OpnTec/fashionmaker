@@ -73,16 +73,11 @@ public:
     QString FirstPointName() const;
     QString SecondPointName() const;
 
-    quint32 GetFirstPointId() const;
-    void    SetFirstPointId(const quint32 &value);
-
-    quint32 GetSecondPointId() const;
-    void    SetSecondPointId(const quint32 &value);
-
     virtual void ShowVisualization(bool show) Q_DECL_OVERRIDE;
 protected:
     virtual void RemoveReferens() Q_DECL_OVERRIDE;
-    virtual void SaveDialog(QDomElement &domElement) Q_DECL_OVERRIDE;
+    virtual void SaveDialog(QDomElement &domElement, QList<quint32> &oldDependencies,
+                            QList<quint32> &newDependencies) Q_DECL_OVERRIDE;
     virtual void SaveOptions(QDomElement &tag, QSharedPointer<VGObject> &obj) Q_DECL_OVERRIDE;
     virtual void ReadToolAttributes(const QDomElement &domElement) Q_DECL_OVERRIDE;
     virtual void SetVisualization() Q_DECL_OVERRIDE;

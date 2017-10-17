@@ -47,6 +47,7 @@
 #include "../vgeometry/vgobject.h"
 #include "../vgeometry/vpointf.h"
 #include "../vgeometry/vspline.h"
+#include "../vgeometry/vabstractarc.h"
 #include "../vpatterndb/vcontainer.h"
 #include "../vwidgets/vcontrolpointspline.h"
 #include "../../../visualization/line/visline.h"
@@ -452,4 +453,19 @@ void VAbstractSpline::GroupVisibility(quint32 object, bool visible)
 {
     Q_UNUSED(object)
     setVisible(visible);
+}
+
+// VToolAbstractArc
+//---------------------------------------------------------------------------------------------------------------------
+VToolAbstractArc::VToolAbstractArc(VAbstractPattern *doc, VContainer *data, quint32 id, QGraphicsItem *parent)
+    : VAbstractSpline(doc, data, id, parent)
+{}
+
+//---------------------------------------------------------------------------------------------------------------------
+QString VToolAbstractArc::CenterPointName() const
+{
+    QSharedPointer<VAbstractArc> arc = VAbstractTool::data.GeometricObject<VAbstractArc>(m_id);
+    SCASSERT(arc.isNull() == false)
+
+    return VAbstractTool::data.GetGObject(arc->GetCenter().id())->name();
 }

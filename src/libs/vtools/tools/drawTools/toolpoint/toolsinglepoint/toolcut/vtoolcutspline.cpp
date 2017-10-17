@@ -194,11 +194,16 @@ void VToolCutSpline::ShowContextMenu(QGraphicsSceneContextMenuEvent *event, quin
 /**
  * @brief SaveDialog save options into file after change in dialog.
  */
-void VToolCutSpline::SaveDialog(QDomElement &domElement)
+void VToolCutSpline::SaveDialog(QDomElement &domElement, QList<quint32> &oldDependencies,
+                                QList<quint32> &newDependencies)
 {
     SCASSERT(not m_dialog.isNull())
     QSharedPointer<DialogCutSpline> dialogTool = m_dialog.objectCast<DialogCutSpline>();
     SCASSERT(not dialogTool.isNull())
+
+    AddDependence(oldDependencies, curveCutId);
+    AddDependence(newDependencies, dialogTool->getSplineId());
+
     doc->SetAttribute(domElement, AttrName, dialogTool->getPointName());
     doc->SetAttribute(domElement, AttrLength, dialogTool->GetFormula());
     doc->SetAttribute(domElement, AttrSpline, QString().setNum(dialogTool->getSplineId()));

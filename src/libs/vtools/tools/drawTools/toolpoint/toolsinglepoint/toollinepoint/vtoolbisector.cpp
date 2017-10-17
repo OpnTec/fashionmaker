@@ -240,11 +240,20 @@ void VToolBisector::RemoveReferens()
 /**
  * @brief SaveDialog save options into file after change in dialog.
  */
-void VToolBisector::SaveDialog(QDomElement &domElement)
+void VToolBisector::SaveDialog(QDomElement &domElement, QList<quint32> &oldDependencies,
+                               QList<quint32> &newDependencies)
 {
     SCASSERT(not m_dialog.isNull())
     QSharedPointer<DialogBisector> dialogTool = m_dialog.objectCast<DialogBisector>();
     SCASSERT(not dialogTool.isNull())
+
+    AddDependence(oldDependencies, firstPointId);
+    AddDependence(oldDependencies, basePointId);
+    AddDependence(oldDependencies, thirdPointId);
+    AddDependence(newDependencies, dialogTool->GetFirstPointId());
+    AddDependence(newDependencies, dialogTool->GetSecondPointId());
+    AddDependence(newDependencies, dialogTool->GetThirdPointId());
+
     doc->SetAttribute(domElement, AttrName, dialogTool->getPointName());
     doc->SetAttribute(domElement, AttrTypeLine, dialogTool->GetTypeLine());
     doc->SetAttribute(domElement, AttrLineColor, dialogTool->GetLineColor());
@@ -295,24 +304,6 @@ void VToolBisector::SetVisualization()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-quint32 VToolBisector::GetThirdPointId() const
-{
-    return thirdPointId;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void VToolBisector::SetThirdPointId(const quint32 &value)
-{
-    if (value != NULL_ID)
-    {
-        thirdPointId = value;
-
-        QSharedPointer<VGObject> obj = VAbstractTool::data.GetGObject(m_id);
-        SaveOption(obj);
-    }
-}
-
-//---------------------------------------------------------------------------------------------------------------------
 void VToolBisector::ShowVisualization(bool show)
 {
     ShowToolVisualization<VisToolBisector>(show);
@@ -329,23 +320,5 @@ void VToolBisector::ShowContextMenu(QGraphicsSceneContextMenuEvent *event, quint
     {
         Q_UNUSED(e)
         return;//Leave this method immediately!!!
-    }
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-quint32 VToolBisector::GetFirstPointId() const
-{
-    return firstPointId;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void VToolBisector::SetFirstPointId(const quint32 &value)
-{
-    if (value != NULL_ID)
-    {
-        firstPointId = value;
-
-        QSharedPointer<VGObject> obj = VAbstractTool::data.GetGObject(m_id);
-        SaveOption(obj);
     }
 }

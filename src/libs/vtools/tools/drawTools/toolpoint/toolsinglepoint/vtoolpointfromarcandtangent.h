@@ -74,12 +74,6 @@ public:
     QString TangentPointName() const;
     QString ArcName() const;
 
-    quint32 GetTangentPointId() const;
-    void    SetTangentPointId(const quint32 &value);
-
-    quint32 GetArcId() const;
-    void    SetArcId(const quint32 &value);
-
     CrossCirclesPoint GetCrossCirclesPoint() const;
     void              SetCrossCirclesPoint(const CrossCirclesPoint &value);
 
@@ -88,7 +82,8 @@ protected slots:
     virtual void ShowContextMenu(QGraphicsSceneContextMenuEvent *event, quint32 id=NULL_ID) Q_DECL_OVERRIDE;
 protected:
     virtual void RemoveReferens() Q_DECL_OVERRIDE;
-    virtual void SaveDialog(QDomElement &domElement) Q_DECL_OVERRIDE;
+    virtual void SaveDialog(QDomElement &domElement, QList<quint32> &oldDependencies,
+                            QList<quint32> &newDependencies) Q_DECL_OVERRIDE;
     virtual void SaveOptions(QDomElement &tag, QSharedPointer<VGObject> &obj) Q_DECL_OVERRIDE;
     virtual void ReadToolAttributes(const QDomElement &domElement) Q_DECL_OVERRIDE;
     virtual void SetVisualization() Q_DECL_OVERRIDE;

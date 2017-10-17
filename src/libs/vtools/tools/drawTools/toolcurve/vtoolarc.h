@@ -62,7 +62,7 @@ struct VToolArcInitData : VAbstractSplineInitData
 /**
  * @brief The VToolArc class tool for creation arc.
  */
-class VToolArc :public VAbstractSpline
+class VToolArc :public VToolAbstractArc
 {
     Q_OBJECT
 public:
@@ -75,11 +75,6 @@ public:
     virtual int      type() const Q_DECL_OVERRIDE {return Type;}
     enum { Type = UserType + static_cast<int>(Tool::Arc)};
     virtual QString  getTagName() const Q_DECL_OVERRIDE;
-
-    QString CenterPointName() const;
-
-    quint32          getCenter() const;
-    void             setCenter(const quint32 &value);
 
     VFormula         GetFormulaRadius() const;
     void             SetFormulaRadius(const VFormula &value);
@@ -98,7 +93,8 @@ protected slots:
     virtual void ShowContextMenu(QGraphicsSceneContextMenuEvent *event, quint32 id=NULL_ID) Q_DECL_OVERRIDE;
 protected:
     virtual void     RemoveReferens() Q_DECL_OVERRIDE;
-    virtual void     SaveDialog(QDomElement &domElement) Q_DECL_OVERRIDE;
+    virtual void     SaveDialog(QDomElement &domElement, QList<quint32> &oldDependencies,
+                                QList<quint32> &newDependencies) Q_DECL_OVERRIDE;
     virtual void     SaveOptions(QDomElement &tag, QSharedPointer<VGObject> &obj) Q_DECL_OVERRIDE;
     virtual void     SetVisualization() Q_DECL_OVERRIDE;
     virtual QString  MakeToolTip() const Q_DECL_OVERRIDE;
@@ -106,6 +102,7 @@ private:
     Q_DISABLE_COPY(VToolArc)
 
     VToolArc(const VToolArcInitData &initData, QGraphicsItem * parent = nullptr);
+    virtual ~VToolArc()=default;
 };
 
 #endif // VTOOLARC_H

@@ -274,11 +274,20 @@ void VToolPointOfContact::RemoveReferens()
 /**
  * @brief SaveDialog save options into file after change in dialog.
  */
-void VToolPointOfContact::SaveDialog(QDomElement &domElement)
+void VToolPointOfContact::SaveDialog(QDomElement &domElement, QList<quint32> &oldDependencies,
+                                     QList<quint32> &newDependencies)
 {
     SCASSERT(not m_dialog.isNull())
     QSharedPointer<DialogPointOfContact> dialogTool = m_dialog.objectCast<DialogPointOfContact>();
     SCASSERT(not dialogTool.isNull())
+
+    AddDependence(oldDependencies, center);
+    AddDependence(oldDependencies, firstPointId);
+    AddDependence(oldDependencies, secondPointId);
+    AddDependence(newDependencies, dialogTool->getCenter());
+    AddDependence(newDependencies, dialogTool->GetFirstPoint());
+    AddDependence(newDependencies, dialogTool->GetSecondPoint());
+
     doc->SetAttribute(domElement, AttrName, dialogTool->getPointName());
     doc->SetAttribute(domElement, AttrRadius, dialogTool->getRadius());
     doc->SetAttribute(domElement, AttrCenter, QString().setNum(dialogTool->getCenter()));
@@ -357,18 +366,6 @@ QString VToolPointOfContact::MakeToolTip() const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-quint32 VToolPointOfContact::GetSecondPointId() const
-{
-    return secondPointId;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void VToolPointOfContact::SetSecondPointId(const quint32 &value)
-{
-    secondPointId = value;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
 void VToolPointOfContact::ShowVisualization(bool show)
 {
     ShowToolVisualization<VisToolPointOfContact>(show);
@@ -385,36 +382,6 @@ void VToolPointOfContact::ShowContextMenu(QGraphicsSceneContextMenuEvent *event,
     {
         Q_UNUSED(e)
         return;//Leave this method immediately!!!
-    }
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-quint32 VToolPointOfContact::GetFirstPointId() const
-{
-    return firstPointId;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void VToolPointOfContact::SetFirstPointId(const quint32 &value)
-{
-    firstPointId = value;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-quint32 VToolPointOfContact::getCenter() const
-{
-    return center;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void VToolPointOfContact::setCenter(const quint32 &value)
-{
-    if (value != NULL_ID)
-    {
-        center = value;
-
-        QSharedPointer<VGObject> obj = VAbstractTool::data.GetGObject(m_id);
-        SaveOption(obj);
     }
 }
 

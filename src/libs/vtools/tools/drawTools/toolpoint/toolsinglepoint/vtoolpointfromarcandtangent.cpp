@@ -234,42 +234,6 @@ QString VToolPointFromArcAndTangent::ArcName() const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-quint32 VToolPointFromArcAndTangent::GetTangentPointId() const
-{
-    return tangentPointId;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void VToolPointFromArcAndTangent::SetTangentPointId(const quint32 &value)
-{
-    if (value != NULL_ID)
-    {
-        tangentPointId = value;
-
-        QSharedPointer<VGObject> obj = VAbstractTool::data.GetGObject(m_id);
-        SaveOption(obj);
-    }
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-quint32 VToolPointFromArcAndTangent::GetArcId() const
-{
-    return arcId;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void VToolPointFromArcAndTangent::SetArcId(const quint32 &value)
-{
-    if (value != NULL_ID)
-    {
-        arcId = value;
-
-        QSharedPointer<VGObject> obj = VAbstractTool::data.GetGObject(m_id);
-        SaveOption(obj);
-    }
-}
-
-//---------------------------------------------------------------------------------------------------------------------
 CrossCirclesPoint VToolPointFromArcAndTangent::GetCrossCirclesPoint() const
 {
     return crossPoint;
@@ -315,11 +279,18 @@ void VToolPointFromArcAndTangent::RemoveReferens()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VToolPointFromArcAndTangent::SaveDialog(QDomElement &domElement)
+void VToolPointFromArcAndTangent::SaveDialog(QDomElement &domElement, QList<quint32> &oldDependencies,
+                                             QList<quint32> &newDependencies)
 {
     SCASSERT(not m_dialog.isNull())
     QSharedPointer<DialogPointFromArcAndTangent> dialogTool = m_dialog.objectCast<DialogPointFromArcAndTangent>();
     SCASSERT(not dialogTool.isNull())
+
+    AddDependence(oldDependencies, arcId);
+    AddDependence(oldDependencies, tangentPointId);
+    AddDependence(newDependencies, dialogTool->GetArcId());
+    AddDependence(newDependencies, dialogTool->GetTangentPointId());
+
     doc->SetAttribute(domElement, AttrName, dialogTool->getPointName());
     doc->SetAttribute(domElement, AttrArc, QString().setNum(dialogTool->GetArcId()));
     doc->SetAttribute(domElement, AttrTangent, QString().setNum(dialogTool->GetTangentPointId()));

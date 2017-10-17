@@ -174,11 +174,16 @@ VToolEndLine* VToolEndLine::Create(VToolEndLineInitData &initData)
 /**
  * @brief SaveDialog save options into file after change in dialog.
  */
-void VToolEndLine::SaveDialog(QDomElement &domElement)
+void VToolEndLine::SaveDialog(QDomElement &domElement, QList<quint32> &oldDependencies,
+                              QList<quint32> &newDependencies)
 {
     SCASSERT(not m_dialog.isNull())
     QSharedPointer<DialogEndLine> dialogTool = m_dialog.objectCast<DialogEndLine>();
     SCASSERT(not dialogTool.isNull())
+
+    AddDependence(oldDependencies, basePointId);
+    AddDependence(newDependencies, dialogTool->GetBasePointId());
+
     doc->SetAttribute(domElement, AttrName, dialogTool->getPointName());
     doc->SetAttribute(domElement, AttrTypeLine, dialogTool->GetTypeLine());
     doc->SetAttribute(domElement, AttrLineColor, dialogTool->GetLineColor());

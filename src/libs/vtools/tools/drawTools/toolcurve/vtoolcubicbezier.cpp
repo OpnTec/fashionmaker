@@ -212,13 +212,24 @@ void VToolCubicBezier::RemoveReferens()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VToolCubicBezier::SaveDialog(QDomElement &domElement)
+void VToolCubicBezier::SaveDialog(QDomElement &domElement, QList<quint32> &oldDependencies,
+                                  QList<quint32> &newDependencies)
 {
     SCASSERT(not m_dialog.isNull())
     auto dialogTool = qobject_cast<DialogCubicBezier*>(m_dialog);
     SCASSERT(dialogTool != nullptr)
 
+    const auto oldSpl = VAbstractTool::data.GeometricObject<VCubicBezier>(m_id);
+    AddDependence(oldDependencies, oldSpl->GetP1().id());
+    AddDependence(oldDependencies, oldSpl->GetP2().id());
+    AddDependence(oldDependencies, oldSpl->GetP3().id());
+    AddDependence(oldDependencies, oldSpl->GetP4().id());
+
     const VCubicBezier spl = dialogTool->GetSpline();
+    AddDependence(newDependencies, spl.GetP1().id());
+    AddDependence(newDependencies, spl.GetP2().id());
+    AddDependence(newDependencies, spl.GetP3().id());
+    AddDependence(newDependencies, spl.GetP4().id());
 
     SetSplineAttributes(domElement, spl);
 }

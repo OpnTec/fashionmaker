@@ -201,11 +201,20 @@ QString VToolHeight::SecondLinePointName() const
 /**
  * @brief SaveDialog save options into file after change in dialog.
  */
-void VToolHeight::SaveDialog(QDomElement &domElement)
+void VToolHeight::SaveDialog(QDomElement &domElement, QList<quint32> &oldDependencies,
+                             QList<quint32> &newDependencies)
 {
     SCASSERT(not m_dialog.isNull())
     QSharedPointer<DialogHeight> dialogTool = m_dialog.objectCast<DialogHeight>();
     SCASSERT(not dialogTool.isNull())
+
+    AddDependence(oldDependencies, basePointId);
+    AddDependence(oldDependencies, p1LineId);
+    AddDependence(oldDependencies, p2LineId);
+    AddDependence(newDependencies, dialogTool->GetBasePointId());
+    AddDependence(newDependencies, dialogTool->GetP1LineId());
+    AddDependence(newDependencies, dialogTool->GetP2LineId());
+
     doc->SetAttribute(domElement, AttrName, dialogTool->getPointName());
     doc->SetAttribute(domElement, AttrTypeLine, dialogTool->GetTypeLine());
     doc->SetAttribute(domElement, AttrLineColor, dialogTool->GetLineColor());
@@ -285,24 +294,6 @@ QString VToolHeight::MakeToolTip() const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-quint32 VToolHeight::GetP2LineId() const
-{
-    return p2LineId;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void VToolHeight::SetP2LineId(const quint32 &value)
-{
-    if (value != NULL_ID)
-    {
-        p2LineId = value;
-
-        QSharedPointer<VGObject> obj = VAbstractTool::data.GetGObject(m_id);
-        SaveOption(obj);
-    }
-}
-
-//---------------------------------------------------------------------------------------------------------------------
 void VToolHeight::ShowVisualization(bool show)
 {
     ShowToolVisualization<VisToolHeight>(show);
@@ -319,23 +310,5 @@ void VToolHeight::ShowContextMenu(QGraphicsSceneContextMenuEvent *event, quint32
     {
         Q_UNUSED(e)
         return;//Leave this method immediately!!!
-    }
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-quint32 VToolHeight::GetP1LineId() const
-{
-    return p1LineId;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void VToolHeight::SetP1LineId(const quint32 &value)
-{
-    if (value != NULL_ID)
-    {
-        p1LineId = value;
-
-        QSharedPointer<VGObject> obj = VAbstractTool::data.GetGObject(m_id);
-        SaveOption(obj);
     }
 }

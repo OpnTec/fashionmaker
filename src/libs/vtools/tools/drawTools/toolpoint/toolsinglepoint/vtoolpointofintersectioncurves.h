@@ -78,12 +78,6 @@ public:
     QString FirstCurveName() const;
     QString SecondCurveName() const;
 
-    quint32 GetFirstCurveId() const;
-    void    SetFirstCurveId(const quint32 &value);
-
-    quint32 GetSecondCurveId() const;
-    void    SetSecondCurveId(const quint32 &value);
-
     VCrossCurvesPoint GetVCrossPoint() const;
     void              SetVCrossPoint(const VCrossCurvesPoint &value);
 
@@ -95,7 +89,8 @@ protected slots:
     virtual void ShowContextMenu(QGraphicsSceneContextMenuEvent *event, quint32 id=NULL_ID) Q_DECL_OVERRIDE;
 protected:
     virtual void RemoveReferens() Q_DECL_OVERRIDE;
-    virtual void SaveDialog(QDomElement &domElement) Q_DECL_OVERRIDE;
+    virtual void SaveDialog(QDomElement &domElement, QList<quint32> &oldDependencies,
+                            QList<quint32> &newDependencies) Q_DECL_OVERRIDE;
     virtual void SaveOptions(QDomElement &tag, QSharedPointer<VGObject> &obj) Q_DECL_OVERRIDE;
     virtual void ReadToolAttributes(const QDomElement &domElement) Q_DECL_OVERRIDE;
     virtual void SetVisualization() Q_DECL_OVERRIDE;

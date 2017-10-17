@@ -285,11 +285,16 @@ void VToolBasePoint::DeleteToolWithConfirm(bool ask)
 /**
  * @brief SaveDialog save options into file after change in dialog.
  */
-void VToolBasePoint::SaveDialog(QDomElement &domElement)
+void VToolBasePoint::SaveDialog(QDomElement &domElement, QList<quint32> &oldDependencies,
+                                QList<quint32> &newDependencies)
 {
     SCASSERT(not m_dialog.isNull())
     QSharedPointer<DialogSinglePoint> dialogTool = m_dialog.objectCast<DialogSinglePoint>();
     SCASSERT(not dialogTool.isNull())
+
+    Q_UNUSED(oldDependencies)
+    Q_UNUSED(newDependencies)
+
     const QPointF p = dialogTool->GetPoint();
     const QString name = dialogTool->getPointName();
     doc->SetAttribute(domElement, AttrName, name);

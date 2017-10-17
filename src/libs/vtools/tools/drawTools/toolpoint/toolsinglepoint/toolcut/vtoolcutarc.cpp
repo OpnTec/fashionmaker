@@ -195,11 +195,16 @@ void VToolCutArc::ShowContextMenu(QGraphicsSceneContextMenuEvent *event, quint32
 /**
  * @brief SaveDialog save options into file after change in dialog.
  */
-void VToolCutArc::SaveDialog(QDomElement &domElement)
+void VToolCutArc::SaveDialog(QDomElement &domElement, QList<quint32> &oldDependencies,
+                             QList<quint32> &newDependencies)
 {
     SCASSERT(not m_dialog.isNull())
     QSharedPointer<DialogCutArc> dialogTool = m_dialog.objectCast<DialogCutArc>();
     SCASSERT(not dialogTool.isNull())
+
+    AddDependence(oldDependencies, curveCutId);
+    AddDependence(newDependencies, dialogTool->getArcId());
+
     doc->SetAttribute(domElement, AttrName, dialogTool->getPointName());
     doc->SetAttribute(domElement, AttrLength, dialogTool->GetFormula());
     doc->SetAttribute(domElement, AttrArc, QString().setNum(dialogTool->getArcId()));

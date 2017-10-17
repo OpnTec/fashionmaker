@@ -80,12 +80,6 @@ public:
     QString FirstCircleCenterPointName() const;
     QString SecondCircleCenterPointName() const;
 
-    quint32 GetFirstCircleCenterId() const;
-    void    SetFirstCircleCenterId(const quint32 &value);
-
-    quint32 GetSecondCircleCenterId() const;
-    void    SetSecondCircleCenterId(const quint32 &value);
-
     VFormula GetFirstCircleRadius() const;
     void     SetFirstCircleRadius(const VFormula &value);
 
@@ -100,7 +94,8 @@ protected slots:
     virtual void ShowContextMenu(QGraphicsSceneContextMenuEvent *event, quint32 id=NULL_ID) Q_DECL_OVERRIDE;
 protected:
     virtual void RemoveReferens() Q_DECL_OVERRIDE;
-    virtual void SaveDialog(QDomElement &domElement) Q_DECL_OVERRIDE;
+    virtual void SaveDialog(QDomElement &domElement, QList<quint32> &oldDependencies,
+                            QList<quint32> &newDependencies) Q_DECL_OVERRIDE;
     virtual void SaveOptions(QDomElement &tag, QSharedPointer<VGObject> &obj) Q_DECL_OVERRIDE;
     virtual void ReadToolAttributes(const QDomElement &domElement) Q_DECL_OVERRIDE;
     virtual void SetVisualization() Q_DECL_OVERRIDE;

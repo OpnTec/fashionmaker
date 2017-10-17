@@ -110,9 +110,12 @@ void VDrawTool::SaveDialogChange()
     if (oldDomElement.isElement())
     {
         QDomElement newDomElement = oldDomElement.cloneNode().toElement();
-        SaveDialog(newDomElement);
+        QList<quint32> oldDependencies;
+        QList<quint32> newDependencies;
+        SaveDialog(newDomElement, oldDependencies, newDependencies);
 
-        SaveToolOptions *saveOptions = new SaveToolOptions(oldDomElement, newDomElement, doc, m_id);
+        SaveToolOptions *saveOptions = new SaveToolOptions(oldDomElement, newDomElement, oldDependencies,
+                                                           newDependencies, doc, m_id);
         connect(saveOptions, &SaveToolOptions::NeedLiteParsing, doc, &VAbstractPattern::LiteParseTree);
         qApp->getUndoStack()->push(saveOptions);
     }
@@ -145,7 +148,8 @@ void VDrawTool::SaveOption(QSharedPointer<VGObject> &obj)
 
         SaveOptions(newDomElement, obj);
 
-        SaveToolOptions *saveOptions = new SaveToolOptions(oldDomElement, newDomElement, doc, m_id);
+        SaveToolOptions *saveOptions = new SaveToolOptions(oldDomElement, newDomElement, QList<quint32>(),
+                                                           QList<quint32>(), doc, m_id);
         connect(saveOptions, &SaveToolOptions::NeedLiteParsing, doc, &VAbstractPattern::LiteParseTree);
         qApp->getUndoStack()->push(saveOptions);
     }
@@ -227,6 +231,13 @@ void VDrawTool::AddToCalculation(const QDomElement &domElement)
     AddToCalc *addToCal = new AddToCalc(domElement, doc);
     connect(addToCal, &AddToCalc::NeedFullParsing, doc, &VAbstractPattern::NeedFullParsing);
     qApp->getUndoStack()->push(addToCal);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VDrawTool::AddDependence(QList<quint32> &list, quint32 objectId) const
+{
+    auto originPoint = VAbstractTool::data.GetGObject(objectId);
+    list.append(originPoint->getIdTool());
 }
 
 //---------------------------------------------------------------------------------------------------------------------

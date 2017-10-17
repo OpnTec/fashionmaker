@@ -94,10 +94,12 @@ protected:
     /** @brief typeLine line type. */
     QString      m_lineType;
 
-    void         AddToCalculation(const QDomElement &domElement);
+    void AddToCalculation(const QDomElement &domElement);
+    void AddDependence(QList<quint32> &list, quint32 objectId) const;
 
     /** @brief SaveDialog save options into file after change in dialog. */
-    virtual void    SaveDialog(QDomElement &domElement)=0;
+    virtual void    SaveDialog(QDomElement &domElement, QList<quint32> &oldDependencies,
+                               QList<quint32> &newDependencies)=0;
     virtual void    SaveDialogChange() Q_DECL_FINAL;
     virtual void    AddToFile() Q_DECL_OVERRIDE;
     void            SaveOption(QSharedPointer<VGObject> &obj);

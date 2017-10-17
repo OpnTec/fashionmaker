@@ -229,11 +229,22 @@ void VToolLineIntersect::RemoveReferens()
 /**
  * @brief SaveDialog save options into file after change in dialog.
  */
-void VToolLineIntersect::SaveDialog(QDomElement &domElement)
+void VToolLineIntersect::SaveDialog(QDomElement &domElement, QList<quint32> &oldDependencies,
+                                    QList<quint32> &newDependencies)
 {
     SCASSERT(not m_dialog.isNull())
     QSharedPointer<DialogLineIntersect> dialogTool = m_dialog.objectCast<DialogLineIntersect>();
     SCASSERT(not dialogTool.isNull())
+
+    AddDependence(oldDependencies, p1Line1);
+    AddDependence(oldDependencies, p2Line1);
+    AddDependence(oldDependencies, p1Line2);
+    AddDependence(oldDependencies, p2Line2);
+    AddDependence(newDependencies, dialogTool->GetP1Line1());
+    AddDependence(newDependencies, dialogTool->GetP2Line1());
+    AddDependence(newDependencies, dialogTool->GetP1Line2());
+    AddDependence(newDependencies, dialogTool->GetP2Line2());
+
     doc->SetAttribute(domElement, AttrName, dialogTool->getPointName());
     doc->SetAttribute(domElement, AttrP1Line1, QString().setNum(dialogTool->GetP1Line1()));
     doc->SetAttribute(domElement, AttrP2Line1, QString().setNum(dialogTool->GetP2Line1()));
@@ -314,24 +325,6 @@ QString VToolLineIntersect::MakeToolTip() const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-quint32 VToolLineIntersect::GetP2Line2() const
-{
-    return p2Line2;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void VToolLineIntersect::SetP2Line2(const quint32 &value)
-{
-    if (value != NULL_ID)
-    {
-        p2Line2 = value;
-
-        QSharedPointer<VGObject> obj = VAbstractTool::data.GetGObject(m_id);
-        SaveOption(obj);
-    }
-}
-
-//---------------------------------------------------------------------------------------------------------------------
 void VToolLineIntersect::ShowVisualization(bool show)
 {
     ShowToolVisualization<VisToolLineIntersect>(show);
@@ -348,59 +341,5 @@ void VToolLineIntersect::ShowContextMenu(QGraphicsSceneContextMenuEvent *event, 
     {
         Q_UNUSED(e)
         return;//Leave this method immediately!!!
-    }
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-quint32 VToolLineIntersect::GetP1Line2() const
-{
-    return p1Line2;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void VToolLineIntersect::SetP1Line2(const quint32 &value)
-{
-    if (value != NULL_ID)
-    {
-        p1Line2 = value;
-
-        QSharedPointer<VGObject> obj = VAbstractTool::data.GetGObject(m_id);
-        SaveOption(obj);
-    }
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-quint32 VToolLineIntersect::GetP2Line1() const
-{
-    return p2Line1;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void VToolLineIntersect::SetP2Line1(const quint32 &value)
-{
-    if (value != NULL_ID)
-    {
-        p2Line1 = value;
-
-        QSharedPointer<VGObject> obj = VAbstractTool::data.GetGObject(m_id);
-        SaveOption(obj);
-    }
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-quint32 VToolLineIntersect::GetP1Line1() const
-{
-    return p1Line1;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void VToolLineIntersect::SetP1Line1(const quint32 &value)
-{
-    if (value != NULL_ID)
-    {
-        p1Line1 = value;
-
-        QSharedPointer<VGObject> obj = VAbstractTool::data.GetGObject(m_id);
-        SaveOption(obj);
     }
 }

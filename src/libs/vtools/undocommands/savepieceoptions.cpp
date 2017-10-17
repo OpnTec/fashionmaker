@@ -85,7 +85,7 @@ void SavePieceOptions::undo()
 
         DecrementReferences(m_newDet.MissingPins(m_oldDet));
         IncrementReferences(m_oldDet.MissingPins(m_newDet));
-        
+
         DecrementReferences(m_newDet.MissingPlaceLabels(m_oldDet));
         IncrementReferences(m_oldDet.MissingPlaceLabels(m_newDet));
         

@@ -66,7 +66,7 @@ struct VToolEllipticalArcInitData : VAbstractSplineInitData
 /**
  * @brief The VToolEllipticalArc class tool for creation elliptical arc.
  */
-class VToolEllipticalArc : public VAbstractSpline
+class VToolEllipticalArc : public VToolAbstractArc
 {
     Q_OBJECT
 public:
@@ -78,11 +78,6 @@ public:
     virtual int      type() const Q_DECL_OVERRIDE {return Type;}
     enum { Type = UserType + static_cast<int>(Tool::EllipticalArc)};
     virtual QString  getTagName() const Q_DECL_OVERRIDE;
-
-    QString CenterPointName() const;
-
-    quint32          getCenter() const;
-    void             setCenter(const quint32 &value);
 
     VFormula         GetFormulaRadius1() const;
     void             SetFormulaRadius1(const VFormula &value);
@@ -104,7 +99,8 @@ protected slots:
     virtual void ShowContextMenu(QGraphicsSceneContextMenuEvent *event, quint32 id=NULL_ID) Q_DECL_OVERRIDE;
 protected:
     virtual void    RemoveReferens() Q_DECL_OVERRIDE;
-    virtual void    SaveDialog(QDomElement &domElement) Q_DECL_OVERRIDE;
+    virtual void    SaveDialog(QDomElement &domElement, QList<quint32> &oldDependencies,
+                               QList<quint32> &newDependencies) Q_DECL_OVERRIDE;
     virtual void    SaveOptions(QDomElement &tag, QSharedPointer<VGObject> &obj) Q_DECL_OVERRIDE;
     virtual void    SetVisualization() Q_DECL_OVERRIDE;
     virtual QString MakeToolTip() const Q_DECL_OVERRIDE;
@@ -112,6 +108,7 @@ protected:
 private:
     Q_DISABLE_COPY(VToolEllipticalArc)
     VToolEllipticalArc(const VToolEllipticalArcInitData &initData, QGraphicsItem *parent = nullptr);
+    virtual ~VToolEllipticalArc()=default;
 };
 
 #endif // VTOOLELLIPTICALARC_H

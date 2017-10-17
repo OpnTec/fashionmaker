@@ -274,42 +274,6 @@ QString VToolPointOfIntersectionCurves::SecondCurveName() const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-quint32 VToolPointOfIntersectionCurves::GetFirstCurveId() const
-{
-    return firstCurveId;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void VToolPointOfIntersectionCurves::SetFirstCurveId(const quint32 &value)
-{
-    if (value != NULL_ID)
-    {
-        firstCurveId = value;
-
-        auto obj = VAbstractTool::data.GetGObject(m_id);
-        SaveOption(obj);
-    }
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-quint32 VToolPointOfIntersectionCurves::GetSecondCurveId() const
-{
-    return secondCurveId;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void VToolPointOfIntersectionCurves::SetSecondCurveId(const quint32 &value)
-{
-    if (value != NULL_ID)
-    {
-        secondCurveId = value;
-
-        auto obj = VAbstractTool::data.GetGObject(m_id);
-        SaveOption(obj);
-    }
-}
-
-//---------------------------------------------------------------------------------------------------------------------
 VCrossCurvesPoint VToolPointOfIntersectionCurves::GetVCrossPoint() const
 {
     return vCrossPoint;
@@ -370,11 +334,18 @@ void VToolPointOfIntersectionCurves::RemoveReferens()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VToolPointOfIntersectionCurves::SaveDialog(QDomElement &domElement)
+void VToolPointOfIntersectionCurves::SaveDialog(QDomElement &domElement, QList<quint32> &oldDependencies,
+                                                QList<quint32> &newDependencies)
 {
     SCASSERT(not m_dialog.isNull())
     auto dialogTool = qobject_cast<DialogPointOfIntersectionCurves*>(m_dialog);
     SCASSERT(dialogTool != nullptr)
+
+    AddDependence(oldDependencies, firstCurveId);
+    AddDependence(oldDependencies, secondCurveId);
+    AddDependence(newDependencies, dialogTool->GetFirstCurveId());
+    AddDependence(newDependencies, dialogTool->GetSecondCurveId());
+
     doc->SetAttribute(domElement, AttrName, dialogTool->getPointName());
     doc->SetAttribute(domElement, AttrCurve1, QString().setNum(dialogTool->GetFirstCurveId()));
     doc->SetAttribute(domElement, AttrCurve2, QString().setNum(dialogTool->GetSecondCurveId()));

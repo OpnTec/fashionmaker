@@ -221,42 +221,6 @@ void VToolLineIntersectAxis::SetFormulaAngle(const VFormula &value)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-quint32 VToolLineIntersectAxis::GetFirstPointId() const
-{
-    return firstPointId;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void VToolLineIntersectAxis::SetFirstPointId(const quint32 &value)
-{
-    if (value != NULL_ID)
-    {
-        firstPointId = value;
-
-        QSharedPointer<VGObject> obj = VAbstractTool::data.GetGObject(m_id);
-        SaveOption(obj);
-    }
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-quint32 VToolLineIntersectAxis::GetSecondPointId() const
-{
-    return secondPointId;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void VToolLineIntersectAxis::SetSecondPointId(const quint32 &value)
-{
-    if (value != NULL_ID)
-    {
-        secondPointId = value;
-
-        QSharedPointer<VGObject> obj = VAbstractTool::data.GetGObject(m_id);
-        SaveOption(obj);
-    }
-}
-
-//---------------------------------------------------------------------------------------------------------------------
 void VToolLineIntersectAxis::ShowVisualization(bool show)
 {
     ShowToolVisualization<VisToolLineIntersectAxis>(show);
@@ -277,11 +241,20 @@ void VToolLineIntersectAxis::ShowContextMenu(QGraphicsSceneContextMenuEvent *eve
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VToolLineIntersectAxis::SaveDialog(QDomElement &domElement)
+void VToolLineIntersectAxis::SaveDialog(QDomElement &domElement, QList<quint32> &oldDependencies,
+                                        QList<quint32> &newDependencies)
 {
     SCASSERT(not m_dialog.isNull())
     QSharedPointer<DialogLineIntersectAxis> dialogTool = m_dialog.objectCast<DialogLineIntersectAxis>();
     SCASSERT(not dialogTool.isNull())
+
+    AddDependence(oldDependencies, basePointId);
+    AddDependence(oldDependencies, firstPointId);
+    AddDependence(oldDependencies, secondPointId);
+    AddDependence(newDependencies, dialogTool->GetBasePointId());
+    AddDependence(newDependencies, dialogTool->GetFirstPointId());
+    AddDependence(newDependencies, dialogTool->GetSecondPointId());
+
     doc->SetAttribute(domElement, AttrName, dialogTool->getPointName());
     doc->SetAttribute(domElement, AttrTypeLine, dialogTool->GetTypeLine());
     doc->SetAttribute(domElement, AttrLineColor, dialogTool->GetLineColor());

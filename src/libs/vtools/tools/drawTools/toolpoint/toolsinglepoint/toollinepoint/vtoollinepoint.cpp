@@ -214,24 +214,6 @@ void VToolLinePoint::SetLineColor(const QString &value)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-quint32 VToolLinePoint::GetBasePointId() const
-{
-    return basePointId;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void VToolLinePoint::SetBasePointId(const quint32 &value)
-{
-    if (value != NULL_ID)
-    {
-        basePointId = value;
-
-        QSharedPointer<VGObject> obj = VAbstractTool::data.GetGObject(m_id);
-        SaveOption(obj);
-    }
-}
-
-//---------------------------------------------------------------------------------------------------------------------
 VFormula VToolLinePoint::GetFormulaLength() const
 {
     VFormula fLength(formulaLength, this->getData());

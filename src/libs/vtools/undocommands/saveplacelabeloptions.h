@@ -40,11 +40,6 @@ public:
 
     virtual void undo() Q_DECL_OVERRIDE;
     virtual void redo() Q_DECL_OVERRIDE;
-    virtual bool mergeWith(const QUndoCommand *command) Q_DECL_OVERRIDE;
-    virtual int  id() const Q_DECL_OVERRIDE;
-
-    quint32         LabelId() const;
-    VPlaceLabelItem NewLabel() const;
 private:
     Q_DISABLE_COPY(SavePlaceLabelOptions)
 

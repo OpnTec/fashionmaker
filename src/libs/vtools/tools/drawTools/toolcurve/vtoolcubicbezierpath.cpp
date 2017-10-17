@@ -191,20 +191,33 @@ void VToolCubicBezierPath::ShowContextMenu(QGraphicsSceneContextMenuEvent *event
 void VToolCubicBezierPath::RemoveReferens()
 {
     const QSharedPointer<VCubicBezierPath> splPath = VAbstractTool::data.GeometricObject<VCubicBezierPath>(m_id);
-    for (qint32 i = 0; i < splPath->CountSubSpl(); ++i)
+    for (qint32 i = 0; i < splPath->CountPoints(); ++i)
     {
         doc->DecrementReferens(splPath->at(i).getIdTool());
     }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VToolCubicBezierPath::SaveDialog(QDomElement &domElement)
+void VToolCubicBezierPath::SaveDialog(QDomElement &domElement, QList<quint32> &oldDependencies,
+                                      QList<quint32> &newDependencies)
 {
     SCASSERT(not m_dialog.isNull())
     const auto dialogTool = qobject_cast<DialogCubicBezierPath*>(m_dialog);
     SCASSERT(dialogTool != nullptr)
 
-    SetSplinePathAttributes(domElement, dialogTool->GetPath());
+    const auto oldSplPath = VAbstractTool::data.GeometricObject<VCubicBezierPath>(m_id);
+    for (qint32 i = 0; i < oldSplPath->CountPoints(); ++i)
+    {
+        AddDependence(oldDependencies, oldSplPath->at(i).id());
+    }
+
+    const VCubicBezierPath splPath = dialogTool->GetPath();
+    for (qint32 i = 0; i < splPath.CountPoints(); ++i)
+    {
+        AddDependence(newDependencies, splPath.at(i).id());
+    }
+
+    SetSplinePathAttributes(domElement, splPath);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

@@ -39,7 +39,7 @@ class SavePieceOptions : public VUndoCommand
 public:
     SavePieceOptions(const VPiece &oldDet, const VPiece &newDet, VAbstractPattern *doc, quint32 id,
                      QUndoCommand *parent = nullptr);
-    virtual ~SavePieceOptions() =default;
+    virtual ~SavePieceOptions() = default;
 
     virtual void undo() Q_DECL_OVERRIDE;
     virtual void redo() Q_DECL_OVERRIDE;

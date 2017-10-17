@@ -65,7 +65,7 @@ const QString VToolEllipticalArc::ToolType = QStringLiteral("simple");
  * @param parent parent object
  */
 VToolEllipticalArc::VToolEllipticalArc(const VToolEllipticalArcInitData &initData, QGraphicsItem *parent)
-    :VAbstractSpline(initData.doc, initData.data, initData.id, parent)
+    :VToolAbstractArc(initData.doc, initData.data, initData.id, parent)
 {
     sceneType = SceneObject::ElArc;
 
@@ -188,35 +188,6 @@ VToolEllipticalArc* VToolEllipticalArc::Create(VToolEllipticalArcInitData &initD
 QString VToolEllipticalArc::getTagName() const
 {
     return VAbstractPattern::TagElArc;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-QString VToolEllipticalArc::CenterPointName() const
-{
-    return VAbstractTool::data.GetGObject(getCenter())->name();
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-quint32 VToolEllipticalArc::getCenter() const
-{
-    QSharedPointer<VEllipticalArc> elArc = VAbstractTool::data.GeometricObject<VEllipticalArc>(m_id);
-    SCASSERT(elArc.isNull() == false)
-
-    return elArc->GetCenter().id();
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void VToolEllipticalArc::setCenter(const quint32 &value)
-{
-    if (value != NULL_ID)
-    {
-        QSharedPointer<VGObject> obj = VAbstractTool::data.GetGObject(m_id);
-        QSharedPointer<VEllipticalArc> elArc = qSharedPointerDynamicCast<VEllipticalArc>(obj);
-
-        QSharedPointer<VPointF> point = VAbstractTool::data.GeometricObject<VPointF>(value);
-        elArc->SetCenter(*point.data());
-        SaveOption(obj);
-    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -392,11 +363,18 @@ void VToolEllipticalArc::RemoveReferens()
 /**
  * @brief SaveDialog save options into file after change in dialog.
  */
-void VToolEllipticalArc::SaveDialog(QDomElement &domElement)
+void VToolEllipticalArc::SaveDialog(QDomElement &domElement, QList<quint32> &oldDependencies,
+                                    QList<quint32> &newDependencies)
 {
     SCASSERT(not m_dialog.isNull())
     QSharedPointer<DialogEllipticalArc> dialogTool = m_dialog.objectCast<DialogEllipticalArc>();
     SCASSERT(not dialogTool.isNull())
+
+    const auto elArc = VAbstractTool::data.GeometricObject<VEllipticalArc>(m_id);
+    SCASSERT(elArc.isNull() == false)
+    AddDependence(oldDependencies, elArc->GetCenter().id());
+    AddDependence(newDependencies, dialogTool->GetCenter());
+
     doc->SetAttribute(domElement, AttrCenter, QString().setNum(dialogTool->GetCenter()));
     doc->SetAttribute(domElement, AttrRadius1, dialogTool->GetRadius1());
     doc->SetAttribute(domElement, AttrRadius2, dialogTool->GetRadius2());

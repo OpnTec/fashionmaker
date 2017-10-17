@@ -89,37 +89,3 @@ void SavePlaceLabelOptions::redo()
         qCDebug(vUndo, "Can't find path with id = %u.", nodeId);
     }
 }
-
-//---------------------------------------------------------------------------------------------------------------------
-bool SavePlaceLabelOptions::mergeWith(const QUndoCommand *command)
-{
-    const SavePlaceLabelOptions *saveCommand = static_cast<const SavePlaceLabelOptions *>(command);
-    SCASSERT(saveCommand != nullptr);
-    const quint32 id = saveCommand->LabelId();
-
-    if (id != nodeId)
-    {
-        return false;
-    }
-
-    m_newLabel = saveCommand->NewLabel();
-    return true;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-int SavePlaceLabelOptions::id() const
-{
-    return static_cast<int>(UndoCommand::SavePlaceLabelOptions);
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-quint32 SavePlaceLabelOptions::LabelId() const
-{
-    return nodeId;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-VPlaceLabelItem SavePlaceLabelOptions::NewLabel() const
-{
-    return m_newLabel;
-}

@@ -79,24 +79,13 @@ public:
     QString Line2P1Name() const;
     QString Line2P2Name() const;
 
-    quint32 GetP1Line1() const;
-    void    SetP1Line1(const quint32 &value);
-
-    quint32 GetP2Line1() const;
-    void    SetP2Line1(const quint32 &value);
-
-    quint32 GetP1Line2() const;
-    void    SetP1Line2(const quint32 &value);
-
-    quint32 GetP2Line2() const;
-    void    SetP2Line2(const quint32 &value);
-
     virtual void ShowVisualization(bool show) Q_DECL_OVERRIDE;
 protected slots:
     virtual void ShowContextMenu(QGraphicsSceneContextMenuEvent *event, quint32 id=NULL_ID) Q_DECL_OVERRIDE;
 protected:
     virtual void    RemoveReferens() Q_DECL_OVERRIDE;
-    virtual void    SaveDialog(QDomElement &domElement) Q_DECL_OVERRIDE;
+    virtual void    SaveDialog(QDomElement &domElement, QList<quint32> &oldDependencies,
+                               QList<quint32> &newDependencies) Q_DECL_OVERRIDE;
     virtual void    SaveOptions(QDomElement &tag, QSharedPointer<VGObject> &obj) Q_DECL_OVERRIDE;
     virtual void    ReadToolAttributes(const QDomElement &domElement) Q_DECL_OVERRIDE;
     virtual void    SetVisualization() Q_DECL_OVERRIDE;

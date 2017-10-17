@@ -230,96 +230,6 @@ QString VToolTrueDarts::DartP3Name() const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-quint32 VToolTrueDarts::GetBaseLineP1Id() const
-{
-    return baseLineP1Id;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void VToolTrueDarts::SetBaseLineP1Id(const quint32 &value)
-{
-    if (value != NULL_ID)
-    {
-        baseLineP1Id = value;
-
-        QSharedPointer<VGObject> obj = VContainer::GetFakeGObject(m_id);
-        SaveOption(obj);
-    }
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-quint32 VToolTrueDarts::GetBaseLineP2Id() const
-{
-    return baseLineP2Id;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void VToolTrueDarts::SetBaseLineP2Id(const quint32 &value)
-{
-    if (value != NULL_ID)
-    {
-        baseLineP2Id = value;
-
-        QSharedPointer<VGObject> obj = VContainer::GetFakeGObject(m_id);
-        SaveOption(obj);
-    }
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-quint32 VToolTrueDarts::GetDartP1Id() const
-{
-    return dartP1Id;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void VToolTrueDarts::SetDartP1Id(const quint32 &value)
-{
-    if (value != NULL_ID)
-    {
-        dartP1Id = value;
-
-        QSharedPointer<VGObject> obj = VContainer::GetFakeGObject(m_id);
-        SaveOption(obj);
-    }
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-quint32 VToolTrueDarts::GetDartP2Id() const
-{
-    return dartP2Id;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void VToolTrueDarts::SetDartP2Id(const quint32 &value)
-{
-    if (value != NULL_ID)
-    {
-        dartP2Id = value;
-
-        QSharedPointer<VGObject> obj = VContainer::GetFakeGObject(m_id);
-        SaveOption(obj);
-    }
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-quint32 VToolTrueDarts::GetDartP3Id() const
-{
-    return dartP3Id;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void VToolTrueDarts::SetDartP3Id(const quint32 &value)
-{
-    if (value != NULL_ID)
-    {
-        dartP3Id = value;
-
-        QSharedPointer<VGObject> obj = VContainer::GetFakeGObject(m_id);
-        SaveOption(obj);
-    }
-}
-
-//---------------------------------------------------------------------------------------------------------------------
 void VToolTrueDarts::ShowContextMenu(QGraphicsSceneContextMenuEvent *event, quint32 id)
 {
     try
@@ -351,11 +261,24 @@ void VToolTrueDarts::RemoveReferens()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VToolTrueDarts::SaveDialog(QDomElement &domElement)
+void VToolTrueDarts::SaveDialog(QDomElement &domElement, QList<quint32> &oldDependencies,
+                                QList<quint32> &newDependencies)
 {
     SCASSERT(not m_dialog.isNull())
     QSharedPointer<DialogTrueDarts> dialogTool = m_dialog.objectCast<DialogTrueDarts>();
     SCASSERT(not dialogTool.isNull())
+
+    AddDependence(oldDependencies, baseLineP1Id);
+    AddDependence(oldDependencies, baseLineP2Id);
+    AddDependence(oldDependencies, dartP1Id);
+    AddDependence(oldDependencies, dartP2Id);
+    AddDependence(oldDependencies, dartP3Id);
+
+    AddDependence(newDependencies, dialogTool->GetFirstBasePointId());
+    AddDependence(newDependencies, dialogTool->GetSecondBasePointId());
+    AddDependence(newDependencies, dialogTool->GetFirstDartPointId());
+    AddDependence(newDependencies, dialogTool->GetSecondDartPointId());
+    AddDependence(newDependencies, dialogTool->GetThirdDartPointId());
 
     doc->SetAttribute(domElement, AttrName1, dialogTool->GetFirstNewDartPointName());
     doc->SetAttribute(domElement, AttrName2, dialogTool->GetSecondNewDartPointName());

@@ -330,11 +330,14 @@ void VToolMove::SetVisualization()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VToolMove::SaveDialog(QDomElement &domElement)
+void VToolMove::SaveDialog(QDomElement &domElement, QList<quint32> &oldDependencies, QList<quint32> &newDependencies)
 {
     SCASSERT(not m_dialog.isNull())
     QSharedPointer<DialogMove> dialogTool = m_dialog.objectCast<DialogMove>();
     SCASSERT(not dialogTool.isNull())
+
+    Q_UNUSED(oldDependencies);
+    Q_UNUSED(newDependencies)
 
     doc->SetAttribute(domElement, AttrAngle, dialogTool->GetAngle());
     QString length = dialogTool->GetLength();

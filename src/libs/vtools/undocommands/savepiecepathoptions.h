@@ -39,7 +39,7 @@ class SavePiecePathOptions : public VUndoCommand
 public:
     SavePiecePathOptions(const VPiecePath &oldPath, const VPiecePath &newPath, VAbstractPattern *doc,
                          VContainer *data, quint32 id, QUndoCommand *parent = nullptr);
-    virtual ~SavePiecePathOptions()=default;
+    virtual ~SavePiecePathOptions() = default;
 
     virtual void undo() Q_DECL_OVERRIDE;
     virtual void redo() Q_DECL_OVERRIDE;

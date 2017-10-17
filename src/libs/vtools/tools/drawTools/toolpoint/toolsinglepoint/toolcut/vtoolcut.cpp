@@ -75,25 +75,6 @@ void VToolCut::FullUpdateFromFile()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-// cppcheck-suppress unusedFunction
-quint32 VToolCut::getCurveCutId() const
-{
-    return curveCutId;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-// cppcheck-suppress unusedFunction
-void VToolCut::setCurveCutId(const quint32 &value)
-{
-    if (value != NULL_ID)
-    {
-        curveCutId = value;
-        QSharedPointer<VGObject> obj = VAbstractTool::data.GetGObject(m_id);
-        SaveOption(obj);
-    }
-}
-
-//---------------------------------------------------------------------------------------------------------------------
 VFormula VToolCut::GetFormula() const
 {
     VFormula val(formula, getData());
