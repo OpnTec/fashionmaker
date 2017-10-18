@@ -446,6 +446,20 @@ void VToolSeamAllowance::AddGrainline(VAbstractPattern *doc, QDomElement &domEle
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void VToolSeamAllowance::Move(qreal x, qreal y)
+{
+    setFlag(QGraphicsItem::ItemSendsGeometryChanges, false);
+    // Don't forget to update geometry, because first change never call full parse
+    VPiece detail = VAbstractTool::data.GetPiece(m_id);
+    detail.SetMx(x);
+    detail.SetMy(y);
+    VAbstractTool::data.UpdatePiece(m_id, detail);
+
+    setPos(x, y);
+    setFlag(QGraphicsItem::ItemSendsGeometryChanges, true);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 QString VToolSeamAllowance::getTagName() const
 {
     return VAbstractPattern::TagDetail;
@@ -907,9 +921,7 @@ QVariant VToolSeamAllowance::itemChange(QGraphicsItem::GraphicsItemChange change
             // value - this is new position.
             const QPointF newPos = value.toPointF();
 
-            MovePiece *moveDet = new MovePiece(doc, newPos.x(), newPos.y(), m_id, scene());
-            connect(moveDet, &MovePiece::NeedLiteParsing, doc, &VAbstractPattern::LiteParseTree);
-            qApp->getUndoStack()->push(moveDet);
+            qApp->getUndoStack()->push(new MovePiece(doc, newPos.x(), newPos.y(), m_id, scene()));
 
             const QList<QGraphicsView *> viewList = scene()->views();
             if (not viewList.isEmpty())
@@ -945,7 +957,6 @@ QVariant VToolSeamAllowance::itemChange(QGraphicsItem::GraphicsItemChange change
             detail.SetMy(newPos.y());
             VAbstractTool::data.UpdatePiece(m_id, detail);
 
-            RefreshGeometry();
             changeFinished = true;
         }
     }

@@ -37,6 +37,7 @@
 #include "../vmisc/def.h"
 #include "../vwidgets/vmaingraphicsview.h"
 #include "vundocommand.h"
+#include "../tools/vtoolseamallowance.h"
 
 //---------------------------------------------------------------------------------------------------------------------
 MovePiece::MovePiece(VAbstractPattern *doc, const double &x, const double &y, const quint32 &id,
@@ -65,10 +66,6 @@ MovePiece::MovePiece(VAbstractPattern *doc, const double &x, const double &y, co
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-MovePiece::~MovePiece()
-{}
-
-//---------------------------------------------------------------------------------------------------------------------
 void MovePiece::undo()
 {
     qCDebug(vUndo, "Undo.");
@@ -77,8 +74,11 @@ void MovePiece::undo()
     if (domElement.isElement())
     {
         SaveCoordinates(domElement, m_oldX, m_oldY);
-
-        emit NeedLiteParsing(Document::LiteParse);
+        if (VToolSeamAllowance *tool = qobject_cast<VToolSeamAllowance *>(VAbstractPattern::getTool(nodeId)))
+        {
+            tool->Move(m_oldX, m_oldY);
+        }
+        VMainGraphicsView::NewSceneRect(m_scene, qApp->getSceneView());
     }
     else
     {
@@ -98,12 +98,12 @@ void MovePiece::redo()
 
         if (redoFlag)
         {
-            emit NeedLiteParsing(Document::LiteParse);
+            if (VToolSeamAllowance *tool = qobject_cast<VToolSeamAllowance *>(VAbstractPattern::getTool(nodeId)))
+            {
+                tool->Move(m_newX, m_newY);
+            }
         }
-        else
-        {
-            VMainGraphicsView::NewSceneRect(m_scene, qApp->getSceneView());
-        }
+        VMainGraphicsView::NewSceneRect(m_scene, qApp->getSceneView());
         redoFlag = true;
     }
     else

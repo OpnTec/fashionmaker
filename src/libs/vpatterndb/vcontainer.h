@@ -71,8 +71,8 @@ public:
     VContainerData(const VTranslateVars *trVars, const Unit *patternUnit)
         : gObjects(QHash<quint32, QSharedPointer<VGObject> >()),
           variables(QHash<QString, QSharedPointer<VInternalVariable> > ()),
-          pieces(QSharedPointer<QHash<quint32, VPiece>>(new QHash<quint32, VPiece>())),
-          piecePaths(QSharedPointer<QHash<quint32, VPiecePath>>(new QHash<quint32, VPiecePath>())),
+          pieces(QSharedPointer<QHash<quint32, VPiece>>::create()),
+          piecePaths(QSharedPointer<QHash<quint32, VPiecePath>>::create()),
           trVars(trVars),
           patternUnit(patternUnit)
     {}

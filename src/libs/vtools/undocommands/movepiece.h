@@ -45,7 +45,7 @@ class MovePiece : public VUndoCommand
 public:
     MovePiece(VAbstractPattern *doc, const double &x, const double &y, const quint32 &id, QGraphicsScene *scene,
                QUndoCommand *parent = nullptr);
-    virtual ~MovePiece();
+    virtual ~MovePiece()=default;
 
     virtual void undo() Q_DECL_OVERRIDE;
     virtual void redo() Q_DECL_OVERRIDE;
