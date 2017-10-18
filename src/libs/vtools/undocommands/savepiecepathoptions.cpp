@@ -50,10 +50,6 @@ SavePiecePathOptions::SavePiecePathOptions(const VPiecePath &oldPath, const VPie
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-SavePiecePathOptions::~SavePiecePathOptions()
-{}
-
-//---------------------------------------------------------------------------------------------------------------------
 void SavePiecePathOptions::undo()
 {
     qCDebug(vUndo, "Undo.");
@@ -65,6 +61,7 @@ void SavePiecePathOptions::undo()
         doc->RemoveAllChildren(domElement);//Very important to clear before rewrite
         VToolPiecePath::AddNodes(doc, domElement, m_oldPath);
 
+        DecrementReferences(m_newPath.MissingNodes(m_oldPath));
         IncrementReferences(m_oldPath.MissingNodes(m_newPath));
 
         SCASSERT(m_data);
@@ -89,6 +86,7 @@ void SavePiecePathOptions::redo()
         VToolPiecePath::AddNodes(doc, domElement, m_newPath);
 
         DecrementReferences(m_oldPath.MissingNodes(m_newPath));
+        IncrementReferences(m_newPath.MissingNodes(m_oldPath));
 
         SCASSERT(m_data);
         m_data->UpdatePiecePath(nodeId, m_newPath);
@@ -97,38 +95,4 @@ void SavePiecePathOptions::redo()
     {
         qCDebug(vUndo, "Can't find path with id = %u.", nodeId);
     }
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-bool SavePiecePathOptions::mergeWith(const QUndoCommand *command)
-{
-    const SavePiecePathOptions *saveCommand = static_cast<const SavePiecePathOptions *>(command);
-    SCASSERT(saveCommand != nullptr);
-    const quint32 id = saveCommand->PathId();
-
-    if (id != nodeId)
-    {
-        return false;
-    }
-
-    m_newPath = saveCommand->NewPath();
-    return true;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-int SavePiecePathOptions::id() const
-{
-    return static_cast<int>(UndoCommand::SavePiecePathOptions);
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-quint32 SavePiecePathOptions::PathId() const
-{
-    return nodeId;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-VPiecePath SavePiecePathOptions::NewPath() const
-{
-    return m_newPath;
 }
