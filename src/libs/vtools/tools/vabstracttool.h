@@ -96,6 +96,9 @@ public:
     static const QStringList      Colors();
     static QMap<QString, QString> ColorsList();
 
+    static VToolRecord GetRecord(const quint32 id, const Tool &toolType, VAbstractPattern *doc);
+    static void RemoveRecord(const VToolRecord &record, VAbstractPattern *doc);
+    static void AddRecord(const VToolRecord &record, VAbstractPattern *doc);
     static void AddRecord(const quint32 id, const Tool &toolType, VAbstractPattern *doc);
     static void AddNodes(VAbstractPattern *doc, QDomElement &domElement, const VPiecePath &path);
     static void AddNodes(VAbstractPattern *doc, QDomElement &domElement, const VPiece &piece);

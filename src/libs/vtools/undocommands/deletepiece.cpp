@@ -40,13 +40,19 @@
 #include "vundocommand.h"
 #include "../vpatterndb/vpiecenode.h"
 #include "../vpatterndb/vpiecepath.h"
+#include "../vwidgets/vmaingraphicsview.h"
 
 //---------------------------------------------------------------------------------------------------------------------
-DeletePiece::DeletePiece(VAbstractPattern *doc, quint32 id, const VPiece &detail, QUndoCommand *parent)
+DeletePiece::DeletePiece(VAbstractPattern *doc, quint32 id, VContainer data, VMainGraphicsScene *scene,
+                         QUndoCommand *parent)
     : VUndoCommand(QDomElement(), doc, parent),
       m_parentNode(),
       m_siblingId(NULL_ID),
-      m_detail(detail)
+      m_detail(data.GetPiece(id)),
+      m_data(data),
+      m_scene(scene),
+      m_tool(),
+      m_record(VAbstractTool::GetRecord(id, Tool::Piece, doc))
 {
     setText(tr("delete tool"));
     nodeId = id;
@@ -74,7 +80,12 @@ DeletePiece::DeletePiece(VAbstractPattern *doc, quint32 id, const VPiece &detail
 
 //---------------------------------------------------------------------------------------------------------------------
 DeletePiece::~DeletePiece()
-{}
+{
+    if (not m_tool.isNull())
+    {
+        delete m_tool;
+    }
+}
 
 //---------------------------------------------------------------------------------------------------------------------
 void DeletePiece::undo()
@@ -82,7 +93,19 @@ void DeletePiece::undo()
     qCDebug(vUndo, "Undo.");
 
     UndoDeleteAfterSibling(m_parentNode, m_siblingId);
-    emit NeedFullParsing();
+
+    VAbstractPattern::AddTool(nodeId, m_tool);
+    m_data.UpdatePiece(nodeId, m_detail);
+
+    m_tool->ReinitInternals(m_detail, m_scene);
+
+    VAbstractTool::AddRecord(m_record, doc);
+    m_scene->addItem(m_tool);
+    m_tool->ConnectOutsideSignals();
+    m_tool->show();
+    m_tool.clear();
+
+    VMainGraphicsView::NewSceneRect(m_scene, qApp->getSceneView());
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -95,17 +118,23 @@ void DeletePiece::redo()
     {
         m_parentNode.removeChild(domElement);
 
-        // UnionDetails delete two old details and create one new.
-        // So when UnionDetail delete detail we can't use FullParsing. So we hide detail on scene directly.
-        VToolSeamAllowance *toolDet = qobject_cast<VToolSeamAllowance*>(VAbstractPattern::getTool(nodeId));
-        SCASSERT(toolDet != nullptr);
-        toolDet->hide();
+        m_tool = qobject_cast<VToolSeamAllowance*>(VAbstractPattern::getTool(nodeId));
+        SCASSERT(not m_tool.isNull());
+        m_tool->DisconnectOutsideSignals();
+        m_tool->hide();
+
+        m_scene->removeItem(m_tool);
+
+        VAbstractPattern::RemoveTool(nodeId);
+        m_data.RemovePiece(nodeId);
+        VAbstractTool::RemoveRecord(m_record, doc);
 
         DecrementReferences(m_detail.GetPath().GetNodes());
         DecrementReferences(m_detail.GetCustomSARecords());
         DecrementReferences(m_detail.GetInternalPaths());
         DecrementReferences(m_detail.GetPins());
-        emit NeedFullParsing(); // Doesn't work when UnionDetail delete detail.
+
+        VMainGraphicsView::NewSceneRect(m_scene, qApp->getSceneView());
     }
     else
     {

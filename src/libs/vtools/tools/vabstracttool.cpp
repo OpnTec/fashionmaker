@@ -423,16 +423,37 @@ void VAbstractTool::ToolCreation(const Source &typeCreation)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-/**
- * @brief AddRecord add record about tool in history.
- * @param id object id in container
- * @param toolType tool type
- * @param doc dom document container
- */
-void VAbstractTool::AddRecord(const quint32 id, const Tool &toolType, VAbstractPattern *doc)
+VToolRecord VAbstractTool::GetRecord(const quint32 id, const Tool &toolType, VAbstractPattern *doc)
 {
     QVector<VToolRecord> *history = doc->getHistory();
-    VToolRecord record = VToolRecord(id, toolType, doc->GetNameActivPP());
+    for(int i = 0; i < history->size(); ++i)
+    {
+        if (history->at(i).getId() == id && history->at(i).getTypeTool() == toolType)
+        {
+            return history->at(i);
+        }
+    }
+    return VToolRecord();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VAbstractTool::RemoveRecord(const VToolRecord &record, VAbstractPattern *doc)
+{
+    QVector<VToolRecord> *history = doc->getHistory();
+    for(int i = 0; i < history->size(); ++i)
+    {
+        if (history->at(i) == record)
+        {
+            history->remove(i);
+            return;
+        }
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VAbstractTool::AddRecord(const VToolRecord &record, VAbstractPattern *doc)
+{
+    QVector<VToolRecord> *history = doc->getHistory();
     if (history->contains(record))
     {
         return;
@@ -457,6 +478,18 @@ void VAbstractTool::AddRecord(const quint32 id, const Tool &toolType, VAbstractP
         }
         history->insert(index+1, record);
     }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief AddRecord add record about tool in history.
+ * @param id object id in container
+ * @param toolType tool type
+ * @param doc dom document container
+ */
+void VAbstractTool::AddRecord(const quint32 id, const Tool &toolType, VAbstractPattern *doc)
+{
+    AddRecord(VToolRecord(id, toolType, doc->GetNameActivPP()), doc);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

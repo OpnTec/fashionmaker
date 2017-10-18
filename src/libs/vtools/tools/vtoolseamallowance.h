@@ -102,6 +102,9 @@ public:
 
     void Move(qreal x, qreal y);
     void Update(const VPiece &piece);
+    void DisconnectOutsideSignals();
+    void ConnectOutsideSignals();
+    void ReinitInternals(const VPiece &detail, VMainGraphicsScene *scene);
 
     virtual int        type() const Q_DECL_OVERRIDE {return Type;}
     enum { Type = UserType + static_cast<int>(Tool::Piece)};

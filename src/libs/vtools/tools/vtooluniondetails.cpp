@@ -1369,9 +1369,6 @@ void CreateUnitedDetail(const VToolUnionDetailsInitData &initData, qreal dx, qre
         SCASSERT(toolDet != nullptr);
         bool ask = false;
         toolDet->Remove(ask);
-        // We do not call full parse, so will need more to do more cleaning than usually
-        initData.doc->RemoveTool(id);
-        initData.data->RemovePiece(id);
     };
 
     if (not initData.retainPieces)

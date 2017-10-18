@@ -146,11 +146,6 @@ VToolSeamAllowance *VToolSeamAllowance::Create(VToolSeamAllowanceInitData &initD
         VAbstractTool::AddRecord(initData.id, Tool::Piece, initData.doc);
         piece = new VToolSeamAllowance(initData);
         initData.scene->addItem(piece);
-        connect(piece, &VToolSeamAllowance::ChoosedTool, initData.scene, &VMainGraphicsScene::ChoosedItem);
-        connect(initData.scene, &VMainGraphicsScene::EnableDetailItemHover, piece, &VToolSeamAllowance::AllowHover);
-        connect(initData.scene, &VMainGraphicsScene::EnableDetailItemSelection, piece,
-                &VToolSeamAllowance::AllowSelecting);
-        connect(initData.scene, &VMainGraphicsScene::HighlightDetail, piece, &VToolSeamAllowance::Highlight);
         VAbstractPattern::AddTool(initData.id, piece);
     }
     //Very important to delete it. Only this tool need this special variable.
@@ -461,7 +456,66 @@ void VToolSeamAllowance::Update(const VPiece &piece)
     setFlag(QGraphicsItem::ItemSendsGeometryChanges, false);
     VAbstractTool::data.UpdatePiece(m_id, piece);
     RefreshGeometry();
+    VMainGraphicsView::NewSceneRect(m_sceneDetails, qApp->getSceneView());
     setFlag(QGraphicsItem::ItemSendsGeometryChanges, true);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VToolSeamAllowance::DisconnectOutsideSignals()
+{
+    // If UnionDetails tool delete the detail this object will be deleted only after full parse.
+    // Deleting inside UnionDetails cause crash.
+    // Because this object should be inactive from no one we disconnect all signals that may cause a crash
+    // KEEP THIS LIST ACTUALL!!!
+    disconnect(doc, nullptr, this, nullptr);
+    if (QGraphicsScene *toolScene = scene())
+    {
+        disconnect(toolScene, nullptr, this, nullptr);
+    }
+    disconnect(m_dataLabel, nullptr, this, nullptr);
+    disconnect(m_patternInfo, nullptr, this, nullptr);
+    disconnect(m_grainLine, nullptr, this, nullptr);
+    disconnect(m_sceneDetails, nullptr, this, nullptr);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VToolSeamAllowance::ConnectOutsideSignals()
+{
+    connect(m_dataLabel, &VTextGraphicsItem::SignalMoved, this, &VToolSeamAllowance::SaveMoveDetail);
+    connect(m_dataLabel, &VTextGraphicsItem::SignalResized, this, &VToolSeamAllowance::SaveResizeDetail);
+    connect(m_dataLabel, &VTextGraphicsItem::SignalRotated, this, &VToolSeamAllowance::SaveRotationDetail);
+
+    connect(m_patternInfo, &VTextGraphicsItem::SignalMoved, this, &VToolSeamAllowance::SaveMovePattern);
+    connect(m_patternInfo, &VTextGraphicsItem::SignalResized, this, &VToolSeamAllowance::SaveResizePattern);
+    connect(m_patternInfo, &VTextGraphicsItem::SignalRotated, this, &VToolSeamAllowance::SaveRotationPattern);
+
+    connect(m_grainLine, &VGrainlineItem::SignalMoved, this, &VToolSeamAllowance::SaveMoveGrainline);
+    connect(m_grainLine, &VGrainlineItem::SignalResized, this, &VToolSeamAllowance::SaveResizeGrainline);
+    connect(m_grainLine, &VGrainlineItem::SignalRotated, this, &VToolSeamAllowance::SaveRotateGrainline);
+
+    connect(doc, &VAbstractPattern::UpdatePatternLabel, this, &VToolSeamAllowance::UpdatePatternInfo);
+    connect(doc, &VAbstractPattern::UpdatePatternLabel, this, &VToolSeamAllowance::UpdateDetailLabel);
+    connect(doc, &VAbstractPattern::CheckLayout, this, &VToolSeamAllowance::UpdateDetailLabel);
+    connect(doc, &VAbstractPattern::CheckLayout, this, &VToolSeamAllowance::UpdatePatternInfo);
+    connect(doc, &VAbstractPattern::CheckLayout, this, &VToolSeamAllowance::UpdateGrainline);
+
+    connect(m_sceneDetails, &VMainGraphicsScene::EnableToolMove, this, &VToolSeamAllowance::EnableToolMove);
+    connect(m_sceneDetails, &VMainGraphicsScene::ItemClicked, this, &VToolSeamAllowance::ResetChildren);
+    connect(m_sceneDetails, &VMainGraphicsScene::DimensionsChanged, this, &VToolSeamAllowance::UpdateDetailLabel);
+    connect(m_sceneDetails, &VMainGraphicsScene::DimensionsChanged, this, &VToolSeamAllowance::UpdatePatternInfo);
+    connect(m_sceneDetails, &VMainGraphicsScene::LanguageChanged, this, &VToolSeamAllowance::retranslateUi);
+    connect(m_sceneDetails, &VMainGraphicsScene::EnableDetailItemHover, this, &VToolSeamAllowance::AllowHover);
+    connect(m_sceneDetails, &VMainGraphicsScene::EnableDetailItemSelection, this, &VToolSeamAllowance::AllowSelecting);
+    connect(m_sceneDetails, &VMainGraphicsScene::HighlightDetail, this, &VToolSeamAllowance::Highlight);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VToolSeamAllowance::ReinitInternals(const VPiece &detail, VMainGraphicsScene *scene)
+{
+    InitNodes(detail, scene);
+    InitCSAPaths(detail);
+    InitInternalPaths(detail);
+    InitPins(detail);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -1137,10 +1191,7 @@ VToolSeamAllowance::VToolSeamAllowance(const VToolSeamAllowanceInitData &initDat
       m_passmarks(new QGraphicsPathItem(this))
 {
     VPiece detail = initData.data->GetPiece(initData.id);
-    InitNodes(detail, initData.scene);
-    InitCSAPaths(detail);
-    InitInternalPaths(detail);
-    InitPins(detail);
+    ReinitInternals(detail, m_sceneDetails);
     this->setFlag(QGraphicsItem::ItemIsMovable, true);
     this->setFlag(QGraphicsItem::ItemIsSelectable, true);
     RefreshGeometry();
@@ -1148,32 +1199,12 @@ VToolSeamAllowance::VToolSeamAllowance(const VToolSeamAllowanceInitData &initDat
     this->setFlag(QGraphicsItem::ItemSendsGeometryChanges, true);
     this->setFlag(QGraphicsItem::ItemIsFocusable, true);// For keyboard input focus
 
-    connect(initData.scene, &VMainGraphicsScene::EnableToolMove, this, &VToolSeamAllowance::EnableToolMove);
-    connect(initData.scene, &VMainGraphicsScene::ItemClicked, this, &VToolSeamAllowance::ResetChildren);
     ToolCreation(initData.typeCreation);
     setAcceptHoverEvents(true);
 
-    connect(m_dataLabel, &VTextGraphicsItem::SignalMoved, this, &VToolSeamAllowance::SaveMoveDetail);
-    connect(m_dataLabel, &VTextGraphicsItem::SignalResized, this, &VToolSeamAllowance::SaveResizeDetail);
-    connect(m_dataLabel, &VTextGraphicsItem::SignalRotated, this, &VToolSeamAllowance::SaveRotationDetail);
+    connect(this, &VToolSeamAllowance::ChoosedTool, m_sceneDetails, &VMainGraphicsScene::ChoosedItem);
 
-    connect(m_patternInfo, &VTextGraphicsItem::SignalMoved, this, &VToolSeamAllowance::SaveMovePattern);
-    connect(m_patternInfo, &VTextGraphicsItem::SignalResized, this, &VToolSeamAllowance::SaveResizePattern);
-    connect(m_patternInfo, &VTextGraphicsItem::SignalRotated, this, &VToolSeamAllowance::SaveRotationPattern);
-
-    connect(m_grainLine, &VGrainlineItem::SignalMoved, this, &VToolSeamAllowance::SaveMoveGrainline);
-    connect(m_grainLine, &VGrainlineItem::SignalResized, this, &VToolSeamAllowance::SaveResizeGrainline);
-    connect(m_grainLine, &VGrainlineItem::SignalRotated, this, &VToolSeamAllowance::SaveRotateGrainline);
-
-    connect(doc, &VAbstractPattern::UpdatePatternLabel, this, &VToolSeamAllowance::UpdatePatternInfo);
-    connect(doc, &VAbstractPattern::UpdatePatternLabel, this, &VToolSeamAllowance::UpdateDetailLabel);
-    connect(doc, &VAbstractPattern::CheckLayout, this, &VToolSeamAllowance::UpdateDetailLabel);
-    connect(doc, &VAbstractPattern::CheckLayout, this, &VToolSeamAllowance::UpdatePatternInfo);
-    connect(doc, &VAbstractPattern::CheckLayout, this, &VToolSeamAllowance::UpdateGrainline);
-
-    connect(m_sceneDetails, &VMainGraphicsScene::DimensionsChanged, this, &VToolSeamAllowance::UpdateDetailLabel);
-    connect(m_sceneDetails, &VMainGraphicsScene::DimensionsChanged, this, &VToolSeamAllowance::UpdatePatternInfo);
-    connect(m_sceneDetails, &VMainGraphicsScene::LanguageChanged, this, &VToolSeamAllowance::retranslateUi);
+    ConnectOutsideSignals();
 
     UpdateDetailLabel();
     UpdatePatternInfo();
@@ -1478,13 +1509,16 @@ void VToolSeamAllowance::InitNode(const VPieceNode &node, VMainGraphicsScene *sc
             VNodePoint *tool = qobject_cast<VNodePoint*>(VAbstractPattern::getTool(node.GetId()));
             SCASSERT(tool != nullptr);
 
-            connect(tool, &VNodePoint::ShowContextMenu, parent, &VToolSeamAllowance::contextMenuEvent);
-            connect(tool, &VNodePoint::ChoosedTool, scene, &VMainGraphicsScene::ChoosedItem);
-            tool->setParentItem(parent);
-            tool->SetParentType(ParentType::Item);
-            tool->SetExluded(node.IsExcluded());
+            if (tool->parent() != parent)
+            {
+                connect(tool, &VNodePoint::ShowContextMenu, parent, &VToolSeamAllowance::contextMenuEvent);
+                connect(tool, &VNodePoint::ChoosedTool, scene, &VMainGraphicsScene::ChoosedItem);
+                tool->setParentItem(parent);
+                tool->SetParentType(ParentType::Item);
+                tool->SetExluded(node.IsExcluded());
+                doc->IncrementReferens(node.GetId());
+            }
             tool->setVisible(not node.IsExcluded());//Hide excluded point
-            doc->IncrementReferens(node.GetId());
             break;
         }
         case (Tool::NodeArc):
@@ -1515,8 +1549,12 @@ void VToolSeamAllowance::InitInternalPaths(const VPiece &detail)
     {
         auto *tool = qobject_cast<VToolPiecePath*>(VAbstractPattern::getTool(detail.GetInternalPaths().at(i)));
         SCASSERT(tool != nullptr);
-        tool->setParentItem(this);
-        tool->SetParentType(ParentType::Item);
+
+        if (tool->parent() != this)
+        {
+            tool->setParentItem(this);
+            tool->SetParentType(ParentType::Item);
+        }
         tool->show();
         doc->IncrementReferens(detail.GetInternalPaths().at(i));
     }
@@ -1534,32 +1572,14 @@ void VToolSeamAllowance::InitPins(const VPiece &detail)
 //---------------------------------------------------------------------------------------------------------------------
 void VToolSeamAllowance::DeleteTool(bool ask)
 {
-    QScopedPointer<DeletePiece> delDet(new DeletePiece(doc, m_id, VAbstractTool::data.GetPiece(m_id)));
+    QScopedPointer<DeletePiece> delDet(new DeletePiece(doc, m_id, VAbstractTool::data, m_sceneDetails));
     if (ask)
     {
         if (ConfirmDeletion() == QMessageBox::No)
         {
             return;
         }
-        /* If UnionDetails tool delete detail no need emit FullParsing.*/
-        connect(delDet.data(), &DeletePiece::NeedFullParsing, doc, &VAbstractPattern::NeedFullParsing);
     }
-
-    // If UnionDetails tool delete the detail this object will be deleted only after full parse.
-    // Deleting inside UnionDetails cause crash.
-    // Because this object should be inactive from no one we disconnect all signals that may cause a crash
-    // KEEP THIS LIST ACTUALL!!!
-    disconnect(doc, nullptr, this, nullptr);
-    if (QGraphicsScene *toolScene = scene())
-    {
-        disconnect(toolScene, nullptr, this, nullptr);
-    }
-    disconnect(m_dataLabel, nullptr, this, nullptr);
-    disconnect(m_patternInfo, nullptr, this, nullptr);
-    disconnect(m_grainLine, nullptr, this, nullptr);
-    disconnect(m_sceneDetails, nullptr, this, nullptr);
-
-    hide();// User shouldn't see this object
 
     qApp->getUndoStack()->push(delDet.take());
 
