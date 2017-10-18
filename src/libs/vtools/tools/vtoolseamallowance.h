@@ -101,6 +101,7 @@ public:
     static void AddGrainline(VAbstractPattern *doc, QDomElement &domElement, const VPiece &piece);
 
     void Move(qreal x, qreal y);
+    void Update(const VPiece &piece);
 
     virtual int        type() const Q_DECL_OVERRIDE {return Type;}
     enum { Type = UserType + static_cast<int>(Tool::Piece)};

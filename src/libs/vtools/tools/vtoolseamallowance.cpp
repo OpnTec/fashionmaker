@@ -209,10 +209,7 @@ void VToolSeamAllowance::InsertNode(VPieceNode node, quint32 pieceId, VMainGraph
 
         InitNode(node, scene, data, doc, saTool);
 
-        SavePieceOptions *saveCommand = new SavePieceOptions(oldDet, newDet, doc, pieceId);
-        qApp->getUndoStack()->push(saveCommand);// First push then make a connect
-        data->UpdatePiece(pieceId, newDet);// Update piece because first save will not call lite update
-        connect(saveCommand, &SavePieceOptions::NeedLiteParsing, doc, &VAbstractPattern::LiteParseTree);
+        qApp->getUndoStack()->push(new SavePieceOptions(oldDet, newDet, doc, pieceId));
     }
 }
 
@@ -449,13 +446,21 @@ void VToolSeamAllowance::AddGrainline(VAbstractPattern *doc, QDomElement &domEle
 void VToolSeamAllowance::Move(qreal x, qreal y)
 {
     setFlag(QGraphicsItem::ItemSendsGeometryChanges, false);
-    // Don't forget to update geometry, because first change never call full parse
     VPiece detail = VAbstractTool::data.GetPiece(m_id);
     detail.SetMx(x);
     detail.SetMy(y);
     VAbstractTool::data.UpdatePiece(m_id, detail);
 
     setPos(x, y);
+    setFlag(QGraphicsItem::ItemSendsGeometryChanges, true);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VToolSeamAllowance::Update(const VPiece &piece)
+{
+    setFlag(QGraphicsItem::ItemSendsGeometryChanges, false);
+    VAbstractTool::data.UpdatePiece(m_id, piece);
+    RefreshGeometry();
     setFlag(QGraphicsItem::ItemSendsGeometryChanges, true);
 }
 
@@ -653,7 +658,6 @@ void VToolSeamAllowance::SaveMoveDetail(const QPointF& ptPos)
 
     SavePieceOptions* moveCommand = new SavePieceOptions(oldDet, newDet, doc, m_id);
     moveCommand->setText(tr("move pattern piece label"));
-    connect(moveCommand, &SavePieceOptions::NeedLiteParsing, doc, &VAbstractPattern::LiteParseTree);
     qApp->getUndoStack()->push(moveCommand);
 }
 
@@ -674,7 +678,6 @@ void VToolSeamAllowance::SaveResizeDetail(qreal dLabelW, int iFontSize)
 
     SavePieceOptions* resizeCommand = new SavePieceOptions(oldDet, newDet, doc, m_id);
     resizeCommand->setText(tr("resize pattern piece label"));
-    connect(resizeCommand, &SavePieceOptions::NeedLiteParsing, doc, &VAbstractPattern::LiteParseTree);
     qApp->getUndoStack()->push(resizeCommand);
 }
 
@@ -696,7 +699,6 @@ void VToolSeamAllowance::SaveRotationDetail(qreal dRot)
 
     SavePieceOptions* rotateCommand = new SavePieceOptions(oldDet, newDet, doc, m_id);
     rotateCommand->setText(tr("rotate pattern piece label"));
-    connect(rotateCommand, &SavePieceOptions::NeedLiteParsing, doc, &VAbstractPattern::LiteParseTree);
     qApp->getUndoStack()->push(rotateCommand);
 }
 
@@ -713,7 +715,6 @@ void VToolSeamAllowance::SaveMovePattern(const QPointF &ptPos)
 
     SavePieceOptions* moveCommand = new SavePieceOptions(oldDet, newDet, doc, m_id);
     moveCommand->setText(tr("move pattern info label"));
-    connect(moveCommand, &SavePieceOptions::NeedLiteParsing, doc, &VAbstractPattern::LiteParseTree);
     qApp->getUndoStack()->push(moveCommand);
 }
 
@@ -734,7 +735,6 @@ void VToolSeamAllowance::SaveResizePattern(qreal dLabelW, int iFontSize)
 
     SavePieceOptions* resizeCommand = new SavePieceOptions(oldDet, newDet, doc, m_id);
     resizeCommand->setText(tr("resize pattern info label"));
-    connect(resizeCommand, &SavePieceOptions::NeedLiteParsing, doc, &VAbstractPattern::LiteParseTree);
     qApp->getUndoStack()->push(resizeCommand);
 }
 
@@ -754,7 +754,6 @@ void VToolSeamAllowance::SaveRotationPattern(qreal dRot)
 
     SavePieceOptions* rotateCommand = new SavePieceOptions(oldDet, newDet, doc, m_id);
     rotateCommand->setText(tr("rotate pattern info label"));
-    connect(rotateCommand, &SavePieceOptions::NeedLiteParsing, doc, &VAbstractPattern::LiteParseTree);
     qApp->getUndoStack()->push(rotateCommand);
 }
 
@@ -769,7 +768,6 @@ void VToolSeamAllowance::SaveMoveGrainline(const QPointF& ptPos)
 
     SavePieceOptions* moveCommand = new SavePieceOptions(oldDet, newDet, doc, m_id);
     moveCommand->setText(tr("move grainline"));
-    connect(moveCommand, &SavePieceOptions::NeedLiteParsing, doc, &VAbstractPattern::LiteParseTree);
     qApp->getUndoStack()->push(moveCommand);
 }
 
@@ -782,9 +780,9 @@ void VToolSeamAllowance::SaveResizeGrainline(qreal dLength)
     dLength = FromPixel(dLength, *VDataTool::data.GetPatternUnit());
     newDet.GetGrainlineGeometry().SetPos(m_grainLine->pos());
     newDet.GetGrainlineGeometry().SetLength(QString().setNum(dLength));
+
     SavePieceOptions* resizeCommand = new SavePieceOptions(oldDet, newDet, doc, m_id);
     resizeCommand->setText(tr("resize grainline"));
-    connect(resizeCommand, &SavePieceOptions::NeedLiteParsing, doc, &VAbstractPattern::LiteParseTree);
     qApp->getUndoStack()->push(resizeCommand);
 }
 
@@ -796,9 +794,9 @@ void VToolSeamAllowance::SaveRotateGrainline(qreal dRot, const QPointF& ptPos)
 
     newDet.GetGrainlineGeometry().SetRotation(QString().setNum(qRadiansToDegrees(dRot)));
     newDet.GetGrainlineGeometry().SetPos(ptPos);
+
     SavePieceOptions* rotateCommand = new SavePieceOptions(oldDet, newDet, doc, m_id);
     rotateCommand->setText(tr("rotate grainline"));
-    connect(rotateCommand, &SavePieceOptions::NeedLiteParsing, doc, &VAbstractPattern::LiteParseTree);
     qApp->getUndoStack()->push(rotateCommand);
 }
 
@@ -1247,6 +1245,10 @@ void VToolSeamAllowance::RefreshGeometry()
         m_seamAllowance->setPath(QPainterPath());
     }
 
+    UpdateDetailLabel();
+    UpdatePatternInfo();
+    UpdateGrainline();
+
     this->setFlag(QGraphicsItem::ItemSendsGeometryChanges, true);
 }
 
@@ -1259,9 +1261,7 @@ void VToolSeamAllowance::SaveDialogChange()
     const VPiece newDet = dialogTool->GetPiece();
     const VPiece oldDet = VAbstractTool::data.GetPiece(m_id);
 
-    SavePieceOptions *saveCommand = new SavePieceOptions(oldDet, newDet, doc, m_id);
-    connect(saveCommand, &SavePieceOptions::NeedLiteParsing, doc, &VAbstractPattern::LiteParseTree);
-    qApp->getUndoStack()->push(saveCommand);
+    qApp->getUndoStack()->push(new SavePieceOptions(oldDet, newDet, doc, m_id));
     UpdateDetailLabel();
 }
 
