@@ -50,7 +50,6 @@ VToolPiecePath *VToolPiecePath::Create(QSharedPointer<DialogTool> dialog, VMainG
     initData.parse = Document::FullParse;
     initData.typeCreation = Source::FromGui;
 
-    qApp->getUndoStack()->beginMacro("add path");
     initData.path.SetNodes(PrepareNodes(initData.path, scene, doc, data));
 
     VToolPiecePath *pathTool = Create(initData);
@@ -276,10 +275,6 @@ void VToolPiecePath::ToolCreation(const Source &typeCreation)
     if (typeCreation == Source::FromGui || typeCreation == Source::FromTool)
     {
         AddToFile();
-        if (typeCreation != Source::FromTool)
-        {
-            qApp->getUndoStack()->endMacro();
-        }
     }
     else
     {

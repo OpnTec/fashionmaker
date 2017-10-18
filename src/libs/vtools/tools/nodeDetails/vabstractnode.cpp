@@ -35,7 +35,6 @@
 #include <QUndoStack>
 #include <Qt>
 
-#include "../../undocommands/adddetnode.h"
 #include "../ifc/ifcdef.h"
 #include "../ifc/xml/vabstractpattern.h"
 #include "../vgeometry/vgobject.h"
@@ -176,6 +175,14 @@ void VAbstractNode::ToolCreation(const Source &typeCreation)
  */
 void VAbstractNode::AddToModeling(const QDomElement &domElement)
 {
-    AddDetNode *addNode = new AddDetNode(domElement, doc, m_drawName);
-    qApp->getUndoStack()->push(addNode);
+    QDomElement modeling;
+    if (m_drawName.isEmpty())
+    {
+        doc->GetActivNodeElement(VAbstractPattern::TagModeling, modeling);
+    }
+    else
+    {
+        modeling = doc->GetDraw(m_drawName).firstChildElement(VAbstractPattern::TagModeling);
+    }
+    modeling.appendChild(domElement);
 }

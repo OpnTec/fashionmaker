@@ -101,7 +101,6 @@ VToolSeamAllowance *VToolSeamAllowance::Create(QSharedPointer<DialogTool> dialog
     initData.parse = Document::FullParse;
     initData.typeCreation = Source::FromGui;
 
-    qApp->getUndoStack()->beginMacro("add detail");
     initData.detail.GetPath().SetNodes(PrepareNodes(initData.detail.GetPath(), scene, doc, data));
 
     VToolSeamAllowance *piece = Create(initData);
@@ -921,9 +920,7 @@ void VToolSeamAllowance::AddToFile()
     AddInternalPaths(doc, domElement, piece.GetInternalPaths());
     AddPins(doc, domElement, piece.GetPins());
 
-    AddPiece *addDet = new AddPiece(domElement, doc, piece, m_drawName);
-    connect(addDet, &AddPiece::NeedFullParsing, doc, &VAbstractPattern::NeedFullParsing);
-    qApp->getUndoStack()->push(addDet);
+    qApp->getUndoStack()->push(new AddPiece(domElement, doc, VAbstractTool::data, m_sceneDetails, m_drawName));
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -1594,10 +1591,6 @@ void VToolSeamAllowance::ToolCreation(const Source &typeCreation)
     if (typeCreation == Source::FromGui || typeCreation == Source::FromTool)
     {
         AddToFile();
-        if (typeCreation != Source::FromTool)
-        {
-            qApp->getUndoStack()->endMacro();
-        }
     }
     else
     {

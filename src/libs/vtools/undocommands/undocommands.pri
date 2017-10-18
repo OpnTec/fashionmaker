@@ -10,7 +10,6 @@ HEADERS += \
     $$PWD/savetooloptions.h \
     $$PWD/deltool.h \
     $$PWD/deletepatternpiece.h \
-    $$PWD/adddetnode.h \
     $$PWD/vundocommand.h \
     $$PWD/renamepp.h \
     $$PWD/label/movelabel.h \
@@ -38,7 +37,6 @@ SOURCES += \
     $$PWD/savetooloptions.cpp \
     $$PWD/deltool.cpp \
     $$PWD/deletepatternpiece.cpp \
-    $$PWD/adddetnode.cpp \
     $$PWD/vundocommand.cpp \
     $$PWD/renamepp.cpp \
     $$PWD/label/movelabel.cpp \

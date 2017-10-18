@@ -29,21 +29,33 @@
 #include "addpiece.h"
 #include "../vpatterndb/vpiecenode.h"
 #include "../vpatterndb/vpiecepath.h"
+#include "../vwidgets/vmaingraphicsview.h"
 
 //---------------------------------------------------------------------------------------------------------------------
-AddPiece::AddPiece(const QDomElement &xml, VAbstractPattern *doc, const VPiece &detail, const QString &drawName,
-                   QUndoCommand *parent)
+AddPiece::AddPiece(const QDomElement &xml, VAbstractPattern *doc, VContainer data, VMainGraphicsScene *scene,
+                   const QString &drawName, QUndoCommand *parent)
     : VUndoCommand(xml, doc, parent),
-      m_detail(detail),
-      m_drawName(drawName)
+      m_detail(),
+      m_drawName(drawName),
+      m_tool(),
+      m_record(),
+      m_scene(scene),
+      m_data(data)
 {
     setText(tr("add detail"));
     nodeId = doc->GetParametrId(xml);
+    m_detail = data.GetPiece(nodeId);
+    m_record = VAbstractTool::GetRecord(nodeId, Tool::Piece, doc);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 AddPiece::~AddPiece()
-{}
+{
+    if (not m_tool.isNull())
+    {
+        delete m_tool;
+    }
+}
 
 //---------------------------------------------------------------------------------------------------------------------
 void AddPiece::undo()
@@ -62,10 +74,23 @@ void AddPiece::undo()
                 return;
             }
 
+            m_tool = qobject_cast<VToolSeamAllowance*>(VAbstractPattern::getTool(nodeId));
+            SCASSERT(not m_tool.isNull());
+            m_tool->DisconnectOutsideSignals();
+            m_tool->hide();
+
+            m_scene->removeItem(m_tool);
+
+            VAbstractPattern::RemoveTool(nodeId);
+            m_data.RemovePiece(nodeId);
+            VAbstractTool::RemoveRecord(m_record, doc);
+
             DecrementReferences(m_detail.GetPath().GetNodes());
             DecrementReferences(m_detail.GetCustomSARecords());
             DecrementReferences(m_detail.GetInternalPaths());
             DecrementReferences(m_detail.GetPins());
+
+            VMainGraphicsView::NewSceneRect(m_scene, qApp->getSceneView());
         }
         else
         {
@@ -90,13 +115,28 @@ void AddPiece::redo()
     if (not details.isNull())
     {
         details.appendChild(xml);
+
+        if (not m_tool.isNull())
+        {
+            VAbstractPattern::AddTool(nodeId, m_tool);
+            m_data.UpdatePiece(nodeId, m_detail);
+
+            m_tool->ReinitInternals(m_detail, m_scene);
+
+            VAbstractTool::AddRecord(m_record, doc);
+            m_scene->addItem(m_tool);
+            m_tool->ConnectOutsideSignals();
+            m_tool->show();
+            m_tool.clear();
+        }
+
+        VMainGraphicsView::NewSceneRect(m_scene, qApp->getSceneView());
     }
     else
     {
         qCDebug(vUndo, "Can't find tag %s.", qUtf8Printable(VAbstractPattern::TagDetails));
         return;
     }
-    RedoFullParsing();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
