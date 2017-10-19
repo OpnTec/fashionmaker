@@ -404,6 +404,7 @@ void VToolSpline::mouseMoveEvent(QGraphicsSceneMouseEvent *event)
 
         if (qFloor(t) == -1)
         {
+            moved = false;
             return;
         }
 
