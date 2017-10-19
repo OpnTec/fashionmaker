@@ -190,6 +190,8 @@ private:
     bool PrepareLabelData(const VPatternLabelData &labelData, VTextGraphicsItem *labelItem, QPointF &pos,
                           qreal &labelAngle);
     void UpdateLabelItem(VTextGraphicsItem *labelItem, QPointF pos, qreal labelAngle);
+
+    QList<VToolSeamAllowance *> SelectedTools() const;
 };
 
 #endif // VTOOLSEAMALLOWANCE_H

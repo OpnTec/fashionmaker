@@ -1146,14 +1146,32 @@ void VToolSeamAllowance::keyReleaseEvent(QKeyEvent *event)
     switch (event->key())
     {
         case Qt::Key_Delete:
-            try
+            if (ConfirmDeletion() == QMessageBox::Yes)
             {
-                DeleteTool();
-            }
-            catch(const VExceptionToolWasDeleted &e)
-            {
-                Q_UNUSED(e);
-                return;//Leave this method immediately!!!
+                const QList<VToolSeamAllowance *> toolList = SelectedTools();
+
+                try
+                {
+                    if (not toolList.isEmpty())
+                    {
+                        qApp->getUndoStack()->beginMacro(tr("multi deletion"));
+
+                        for(int i=0; i < toolList.size(); ++i)
+                        {
+                            toolList.at(i)->Remove(false);
+                        }
+                    }
+                    DeleteTool(false);
+                }
+                catch(const VExceptionToolWasDeleted &e)
+                {
+                    Q_UNUSED(e);
+                    if (not toolList.isEmpty())
+                    {
+                        qApp->getUndoStack()->endMacro();
+                    }
+                    return;//Leave this method immediately!!!
+                }
             }
             break;
         default:
@@ -1647,4 +1665,28 @@ void VToolSeamAllowance::UpdateLabelItem(VTextGraphicsItem *labelItem, QPointF p
     labelItem->setRotation(-labelAngle);// expects clockwise direction
     labelItem->Update();
     labelItem->GetTextLines() > 0 ? labelItem->show() : labelItem->hide();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QList<VToolSeamAllowance *> VToolSeamAllowance::SelectedTools() const
+{
+    QList<VToolSeamAllowance *> tools;
+    if(m_sceneDetails)
+    {
+        const QList<QGraphicsItem *> list = m_sceneDetails->selectedItems();
+
+        if (not list.isEmpty())
+        {
+            for(int i=0; i < list.size(); ++i)
+            {
+                VToolSeamAllowance *tool = qgraphicsitem_cast<VToolSeamAllowance *>(list.at(i));
+                if (tool->getId() != m_id)
+                {
+                    tools.append(tool);
+                }
+            }
+        }
+    }
+
+    return tools;
 }
