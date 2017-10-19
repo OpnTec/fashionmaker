@@ -153,11 +153,11 @@ VToolSeamAllowance *VToolSeamAllowance::Create(VToolSeamAllowanceInitData &initD
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VToolSeamAllowance::Remove(bool ask)
+void VToolSeamAllowance::RemoveWithConfirm(bool ask)
 {
     try
     {
-        DeleteTool(ask);
+        DeleteToolWithConfirm(ask);
     }
     catch(const VExceptionToolWasDeleted &e)
     {
@@ -1129,7 +1129,7 @@ void VToolSeamAllowance::contextMenuEvent(QGraphicsSceneContextMenuEvent *event)
     {
         try
         {
-            DeleteTool();
+            DeleteToolWithConfirm();
         }
         catch(const VExceptionToolWasDeleted &e)
         {
@@ -1158,10 +1158,10 @@ void VToolSeamAllowance::keyReleaseEvent(QKeyEvent *event)
 
                         for(int i=0; i < toolList.size(); ++i)
                         {
-                            toolList.at(i)->Remove(false);
+                            toolList.at(i)->RemoveWithConfirm(false);
                         }
                     }
-                    DeleteTool(false);
+                    DeleteToolWithConfirm(false);
                 }
                 catch(const VExceptionToolWasDeleted &e)
                 {
@@ -1585,7 +1585,7 @@ void VToolSeamAllowance::InitPins(const VPiece &detail)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VToolSeamAllowance::DeleteTool(bool ask)
+void VToolSeamAllowance::DeleteToolWithConfirm(bool ask)
 {
     QScopedPointer<DeletePiece> delDet(new DeletePiece(doc, m_id, VAbstractTool::data, m_sceneDetails));
     if (ask)

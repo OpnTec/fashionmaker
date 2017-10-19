@@ -86,7 +86,7 @@ public:
     static const QString AttrTopPin;
     static const QString AttrBottomPin;
 
-    void Remove(bool ask);
+    void RemoveWithConfirm(bool ask);
 
     static void InsertNode(VPieceNode node, quint32 pieceId, VMainGraphicsScene *scene, VContainer *data,
                            VAbstractPattern *doc);
@@ -149,7 +149,7 @@ protected:
     virtual void       contextMenuEvent ( QGraphicsSceneContextMenuEvent * event ) Q_DECL_OVERRIDE;
     virtual void       keyReleaseEvent(QKeyEvent * event) Q_DECL_OVERRIDE;
     virtual void       SetVisualization() Q_DECL_OVERRIDE {}
-    virtual void       DeleteTool(bool ask = true) Q_DECL_OVERRIDE;
+    virtual void       DeleteToolWithConfirm(bool ask = true) Q_DECL_OVERRIDE;
     virtual void       ToolCreation(const Source &typeCreation) Q_DECL_OVERRIDE;
     virtual void       SetDialog() Q_DECL_FINAL;
     virtual void       SaveDialogChange() Q_DECL_FINAL;

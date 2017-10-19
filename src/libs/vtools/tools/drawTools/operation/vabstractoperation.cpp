@@ -433,7 +433,7 @@ void VAbstractOperation::DeleteFromLabel()
 {
     try
     {
-        DeleteTool();
+        DeleteToolWithConfirm();
     }
     catch(const VExceptionToolWasDeleted &e)
     {

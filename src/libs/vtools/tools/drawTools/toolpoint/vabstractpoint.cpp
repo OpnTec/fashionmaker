@@ -62,7 +62,7 @@ void VAbstractPoint::DeleteFromLabel()
 {
     try
     {
-        DeleteTool();
+        DeleteToolWithConfirm();
     }
     catch(const VExceptionToolWasDeleted &e)
     {

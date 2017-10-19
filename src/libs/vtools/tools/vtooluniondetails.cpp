@@ -1368,7 +1368,7 @@ void CreateUnitedDetail(const VToolUnionDetailsInitData &initData, qreal dx, qre
         VToolSeamAllowance *toolDet = qobject_cast<VToolSeamAllowance*>(VAbstractPattern::getTool(id));
         SCASSERT(toolDet != nullptr);
         bool ask = false;
-        toolDet->Remove(ask);
+        toolDet->RemoveWithConfirm(ask);
     };
 
     if (not initData.retainPieces)

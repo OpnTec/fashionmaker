@@ -236,7 +236,7 @@ qreal VAbstractTool::CheckFormula(const quint32 &toolId, QString &formula, VCont
 /**
  * @brief DeleteTool full delete object form scene and file.
  */
-void VAbstractTool::DeleteTool(bool ask)
+void VAbstractTool::DeleteToolWithConfirm(bool ask)
 {
     qCDebug(vTool, "Deleting abstract tool.");
     if (_referens <= 1)

@@ -280,7 +280,7 @@ void VToolSinglePoint::keyReleaseEvent(QKeyEvent *event)
         case Qt::Key_Delete:
             try
             {
-                DeleteTool();
+                DeleteToolWithConfirm();
             }
             catch(const VExceptionToolWasDeleted &e)
             {

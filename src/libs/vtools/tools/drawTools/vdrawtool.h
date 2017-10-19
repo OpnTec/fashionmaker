@@ -207,7 +207,7 @@ void VDrawTool::ContextMenu(QGraphicsSceneContextMenuEvent *event, quint32 itemI
     else if (selectedAction == actionRemove)
     {
         qCDebug(vTool, "Deleting tool.");
-        DeleteTool(); // do not catch exception here
+        DeleteToolWithConfirm(); // do not catch exception here
         return; //Leave this method immediately after call!!!
     }
     else if (selectedAction == actionShowLabel)

@@ -89,7 +89,7 @@ signals:
 protected:
     virtual void AddToFile() Q_DECL_OVERRIDE;
     virtual QVariant itemChange ( GraphicsItemChange change, const QVariant &value ) Q_DECL_OVERRIDE;
-    virtual void DeleteTool(bool ask = true) Q_DECL_OVERRIDE;
+    virtual void DeleteToolWithConfirm(bool ask = true) Q_DECL_OVERRIDE;
     virtual void SaveDialog(QDomElement &domElement) Q_DECL_OVERRIDE;
     virtual void hoverEnterEvent ( QGraphicsSceneHoverEvent * event ) Q_DECL_OVERRIDE;
     virtual void hoverLeaveEvent ( QGraphicsSceneHoverEvent * event ) Q_DECL_OVERRIDE;

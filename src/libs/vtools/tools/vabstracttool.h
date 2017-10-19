@@ -158,7 +158,7 @@ protected:
      * @brief RemoveReferens decrement value of reference.
      */
     virtual void            RemoveReferens() {}
-    virtual void            DeleteTool(bool ask = true);
+    virtual void            DeleteToolWithConfirm(bool ask = true);
     static int              ConfirmDeletion();
 
     template <typename T>

@@ -257,7 +257,7 @@ void VToolBasePoint::SetBasePointPos(const QPointF &pos)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VToolBasePoint::DeleteTool(bool ask)
+void VToolBasePoint::DeleteToolWithConfirm(bool ask)
 {
     qCDebug(vTool, "Deleting base point.");
     qApp->getSceneView()->itemClicked(nullptr);
