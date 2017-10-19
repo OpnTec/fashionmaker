@@ -455,22 +455,9 @@ void VGObject::LineCoefficients(const QLineF &line, qreal *a, qreal *b, qreal *c
 bool VGObject::IsPointOnLineSegment(const QPointF &t, const QPointF &p1, const QPointF &p2)
 {
     auto InsideRange = [](qreal p1, qreal p2, qreal t)
-    {
-        if (not ( (p1 <= t && t <= p2) || (p2 <= t && t <= p1) ))
-        {
-            if (VFuzzyComparePossibleNulls(p1, p2))
-            {// vertical line or horizontal line
-                if (not (qAbs(p1 - t) <= accuracyPointOnLine))
-                {
-                    return false;// point not in range
-                }
-            }
-            else if (not (qAbs(p1 - t) <= accuracyPointOnLine) && not (qAbs(p2 - t) <= accuracyPointOnLine))
-            {
-                return false;// point not in range
-            }
-        }
-        return true;// point in range
+    {        
+        return not ( not ((p1 <= t && t <= p2) || (p2 <= t && t <= p1))
+                     && not (qAbs(p1 - t) <= accuracyPointOnLine) && not (qAbs(p2 - t) <= accuracyPointOnLine));
     };
 
     if (not InsideRange(p1.x(), p2.x(), t.x()))
