@@ -207,9 +207,8 @@ void TST_VPiece::ClearLoop()
     origPoints.append(QPointF(786.289580235633, 825.0061972612904));
     origPoints.append(QPointF(790.0960997334876, 824.8952573520692));
     origPoints.append(QPointF(793.9863149544959, 824.7107371151485));
-    origPoints.append(QPointF(797.9907834493861, 824.4526387407261));
-    origPoints.append(QPointF(826.0032661558732, 877.1274330708662));
-    origPoints.append(QPointF(828.6858753986579, 1697.3058334680109));
+    origPoints.append(QPointF(826.2455325542998, 822.6315469221747));
+    origPoints.append(QPointF(828.6637938138197, 1697.2698270114065));
     origPoints.append(QPointF(42.46405659601942, 415.2845470563873));
 
     // Begin comparison

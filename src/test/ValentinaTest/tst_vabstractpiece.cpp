@@ -2672,6 +2672,637 @@ void TST_VAbstractPiece::BrokenDetailEquidistant_data() const
 
     // See the file "collection/bugs/Issue_#687.val"
     QTest::newRow("Issue #687.") << points << 37.795275590551185 << ekvOrig;
+
+    points.clear();
+    points.append(VSAPoint(-2956.4986596431745, -931.902205605136));
+
+    point = VSAPoint(-2845.8986453348375, -956.881848270395);
+    point.SetSAAfter(43.46456692913386);
+    points.append(point);
+
+    point = VSAPoint(-2845.8986453348375, -956.881848270395);
+    point.SetSAAfter(43.46456692913386);
+    points.append(point);
+
+    point = VSAPoint(-2836.260963611866, -967.4683165923368);
+    point.SetSAAfter(43.97603360000783);
+    point.SetSABefore(43.97603360000783);
+    points.append(point);
+
+    point = VSAPoint(-2816.778439161989, -990.3317076365227);
+    point.SetSAAfter(45.049184926830954);
+    point.SetSABefore(45.049184926830954);
+    points.append(point);
+
+    point = VSAPoint(-2787.1311433576584, -1027.9779235071023);
+    point.SetSAAfter(46.76112870286518);
+    point.SetSABefore(46.76112870286518);
+    points.append(point);
+
+    point = VSAPoint(-2746.751847204707, -1084.542680645765);
+    point.SetSAAfter(49.24403825622278);
+    point.SetSABefore(49.24403825622278);
+    points.append(point);
+
+    point = VSAPoint(-2705.497537071667, -1147.1631960355985);
+    point.SetSAAfter(51.92307240777298);
+    point.SetSABefore(51.92307240777298);
+    points.append(point);
+
+    point = VSAPoint(-2690.762883414773, -1170.642333063125);
+    point.SetSAAfter(52.91338582677166);
+    point.SetSABefore(52.91338582677166);
+    points.append(point);
+
+    point = VSAPoint(-2690.762883414773, -1170.642333063125);
+    point.SetSAAfter(52.91338582677166);
+    point.SetSABefore(52.91338582677166);
+    points.append(point);
+
+    point = VSAPoint(-2690.762883414773, -1170.642333063125);
+    point.SetSAAfter(52.91338582677166);
+    point.SetSABefore(52.91338582677166);
+    points.append(point);
+
+    point = VSAPoint(-2663.422466976175, -1214.9038229173848);
+    point.SetSAAfter(53.46401455483577);
+    point.SetSABefore(53.46401455483577);
+    points.append(point);
+
+    point = VSAPoint(-2620.5808909358666, -1286.8289145319047);
+    point.SetSAAfter(54.350078048241386);
+    point.SetSABefore(54.350078048241386);
+    points.append(point);
+
+    point = VSAPoint(-2555.0788677550413, -1400.2850275624346);
+    point.SetSAAfter(55.736651029960576);
+    point.SetSABefore(55.736651029960576);
+    points.append(point);
+
+    point = VSAPoint(-2510.4555036137926, -1478.8463991280223);
+    point.SetSAAfter(56.69291338582678);
+    point.SetSABefore(56.69291338582678);
+    points.append(point);
+
+    point = VSAPoint(-2510.4555036137926, -1478.8463991280223);
+    point.SetSAAfter(56.69291338582678);
+    point.SetSABefore(56.69291338582678);
+    points.append(point);
+
+    point = VSAPoint(-2510.4555036137926, -1478.8463991280225);
+    point.SetSAAfter(56.69291338582678);
+    point.SetSABefore(56.69291338582678);
+    points.append(point);
+
+    point = VSAPoint(-2465.8020785414137, -1557.3906882829588);
+    point.SetSAAfter(55.736651029960576);
+    point.SetSABefore(55.736651029960576);
+    points.append(point);
+
+    point = VSAPoint(-2401.8564705072536, -1671.7312490561126);
+    point.SetSAAfter(54.35007804824139);
+    point.SetSABefore(54.35007804824139);
+    points.append(point);
+
+    point = VSAPoint(-2361.9923364810647, -1745.348300475717);
+    point.SetSAAfter(53.46401455483577);
+    point.SetSABefore(53.46401455483577);
+    points.append(point);
+
+    point = VSAPoint(-2337.960366148942, -1791.489846365627);
+    point.SetSAAfter(52.91338582677166);
+    point.SetSABefore(52.91338582677166);
+    points.append(point);
+
+    point = VSAPoint(-2337.960366148942, -1791.489846365627);
+    point.SetSAAfter(52.91338582677166);
+    point.SetSABefore(52.91338582677166);
+    points.append(point);
+
+    point = VSAPoint(-2337.960366148942, -1791.489846365627);
+    point.SetSAAfter(52.91338582677166);
+    point.SetSABefore(52.91338582677166);
+    points.append(point);
+
+    point = VSAPoint(-2325.3307700973705, -1816.1652024424925);
+    point.SetSAAfter(51.92307240777299);
+    point.SetSABefore(51.92307240777299);
+    points.append(point);
+
+    point = VSAPoint(-2292.647817425233, -1883.6564734104645);
+    point.SetSAAfter(49.2440382562228);
+    point.SetSABefore(49.2440382562228);
+    points.append(point);
+
+    point = VSAPoint(-2264.7195245337134, -1947.2966318336582);
+    point.SetSAAfter(46.761128702865186);
+    point.SetSABefore(46.761128702865186);
+    points.append(point);
+
+    point = VSAPoint(-2247.5514136970696, -1992.0342635119725);
+    point.SetSAAfter(45.04918492683095);
+    point.SetSABefore(45.04918492683095);
+    points.append(point);
+
+    point = VSAPoint(-2237.880805276518, -2020.4733693656342);
+    point.SetSAAfter(43.976033600007824);
+    point.SetSABefore(43.976033600007824);
+    points.append(point);
+
+    point = VSAPoint(-2233.71862201755, -2034.1713418814313);
+    point.SetSABefore(43.46456692913386);
+    points.append(point);
+
+    point = VSAPoint(-2233.71862201755, -2034.1713418814313);
+    point.SetSABefore(43.46456692913386);
+    points.append(point);
+
+    points.append(VSAPoint(-2268.8646463902414, -2141.9725602580456));
+    points.append(VSAPoint(-2142.3438861707664, -2153.5104738154614));
+    points.append(VSAPoint(-2102.1087124090764, -2047.5035093977458));
+    points.append(VSAPoint(-1984.2738327304821, -1869.448287965361));
+
+    point = VSAPoint(-1957.6856602021662, -1829.272055600212);
+    point.SetSAAfter(22.67716535433071);
+    points.append(point);
+
+    point = VSAPoint(-2074.791337229537, -1711.039758580631);
+    point.SetSAAfter(22.67716535433071);
+    point.SetSABefore(22.67716535433071);
+    points.append(point);
+
+    point = VSAPoint(-2074.791337229537, -1711.039758580631);
+    point.SetSAAfter(22.67716535433071);
+    point.SetSABefore(22.67716535433071);
+    points.append(point);
+
+    point = VSAPoint(-2105.0691172163697, -1679.8718788745382);
+    point.SetSAAfter(22.67716535433071);
+    point.SetSABefore(22.67716535433071);
+    points.append(point);
+
+    point = VSAPoint(-2157.1664430173314, -1623.6842413627824);
+    point.SetSAAfter(22.67716535433071);
+    point.SetSABefore(22.67716535433071);
+    points.append(point);
+
+    point = VSAPoint(-2193.519806327426, -1582.6099746660036);
+    point.SetSAAfter(22.67716535433071);
+    point.SetSABefore(22.67716535433071);
+    points.append(point);
+
+    point = VSAPoint(-2229.9791235350895, -1539.3264424355502);
+    point.SetSAAfter(22.67716535433071);
+    point.SetSABefore(22.67716535433071);
+    points.append(point);
+
+    point = VSAPoint(-2265.345834723823, -1494.6643368578134);
+    point.SetSAAfter(22.67716535433071);
+    point.SetSABefore(22.67716535433071);
+    points.append(point);
+
+    point = VSAPoint(-2298.421379977127, -1449.4543501191831);
+    point.SetSAAfter(22.67716535433071);
+    point.SetSABefore(22.67716535433071);
+    points.append(point);
+
+    point = VSAPoint(-2328.007199378502, -1404.52717440605);
+    point.SetSAAfter(22.67716535433071);
+    point.SetSABefore(22.67716535433071);
+    points.append(point);
+
+    point = VSAPoint(-2340.896596672199, -1382.4929340466704);
+    point.SetSAAfter(22.67716535433071);
+    point.SetSABefore(22.67716535433071);
+    points.append(point);
+
+    point = VSAPoint(-2340.896596672199, -1382.49293404667);
+    point.SetSAAfter(22.67716535433071);
+    point.SetSABefore(22.67716535433071);
+    points.append(point);
+
+    point = VSAPoint(-2340.896596672199, -1382.49293404667);
+    point.SetSAAfter(22.67716535433071);
+    point.SetSABefore(22.67716535433071);
+    points.append(point);
+
+    point = VSAPoint(-2353.229300455175, -1360.1423472934985);
+    point.SetSAAfter(22.67716535433071);
+    point.SetSABefore(22.67716535433071);
+    points.append(point);
+
+    point = VSAPoint(-2376.683944957661, -1311.7310730025702);
+    point.SetSAAfter(22.67716535433071);
+    point.SetSABefore(22.67716535433071);
+    points.append(point);
+
+    point = VSAPoint(-2398.595481020915, -1260.1770316279192);
+    point.SetSAAfter(22.67716535433071);
+    point.SetSABefore(22.67716535433071);
+    points.append(point);
+
+    point = VSAPoint(-2418.863694463742, -1206.9350607893014);
+    point.SetSAAfter(22.67716535433071);
+    point.SetSABefore(22.67716535433071);
+    points.append(point);
+
+    point = VSAPoint(-2437.3883711049484, -1153.4599981064728);
+    point.SetSAAfter(22.67716535433071);
+    point.SetSABefore(22.67716535433071);
+    points.append(point);
+
+    point = VSAPoint(-2454.0692967633395, -1101.206681199188);
+    point.SetSAAfter(22.67716535433071);
+    point.SetSABefore(22.67716535433071);
+    points.append(point);
+
+    point = VSAPoint(-2475.6762194412613, -1027.6925814825058);
+    point.SetSAAfter(22.67716535433071);
+    point.SetSABefore(22.67716535433071);
+    points.append(point);
+
+    point = VSAPoint(-2486.956107269708, -985.7289684721587);
+    point.SetSAAfter(22.67716535433071);
+    point.SetSABefore(22.67716535433071);
+    points.append(point);
+
+    point = VSAPoint(-2486.956107269708, -985.7289684721587);
+    point.SetSAAfter(22.67716535433071);
+    point.SetSABefore(22.67716535433071);
+    points.append(point);
+
+    point = VSAPoint(-2528.5937454925997, -824.6112390511391);
+    point.SetSABefore(22.67716535433071);
+    points.append(point);
+
+    points.append(VSAPoint(-2576.717181801796, -826.8905905485153));
+    points.append(VSAPoint(-2789.9932374825075, -836.9923142371927));
+    points.append(VSAPoint(-2901.656478768932, -817.3030720450208));
+
+    ekvOrig.clear();
+    ekvOrig.append(QPointF(-3011.0459236325178, -958.3296651887044));
+    ekvOrig.append(QPointF(-2875.7052973685904, -988.8971158649783));
+    ekvOrig.append(QPointF(-2870.260387393261, -995.324820816642));
+    ekvOrig.append(QPointF(-2852.6061966162415, -1017.6075332449855));
+    ekvOrig.append(QPointF(-2825.503388518729, -1054.6724785426588));
+    ekvOrig.append(QPointF(-2788.3093097188694, -1110.9189954407311));
+    ekvOrig.append(QPointF(-2750.1189919746207, -1173.6551419899274));
+    ekvOrig.append(QPointF(-2709.423307261418, -1242.1469723195428));
+    ekvOrig.append(QPointF(-2667.7504092472172, -1313.8247232989397));
+    ekvOrig.append(QPointF(-2603.7341468196178, -1427.4682657103372));
+    ekvOrig.append(QPointF(-2559.7459842621583, -1506.8561845862187));
+    ekvOrig.append(QPointF(-2514.057371190275, -1585.2778062486059));
+    ekvOrig.append(QPointF(-2449.1903177064596, -1698.437878533329));
+    ekvOrig.append(QPointF(-2408.9405345956425, -1770.924328120598));
+    ekvOrig.append(QPointF(-2370.9276285164447, -1840.9406729811838));
+    ekvOrig.append(QPointF(-2336.5771598874117, -1905.8588503917545));
+    ekvOrig.append(QPointF(-2307.2920458113667, -1966.5997118809223));
+    ekvOrig.append(QPointF(-2289.3210139012212, -2008.8538760404763));
+    ekvOrig.append(QPointF(-2279.2135095625417, -2035.4250649707842));
+    ekvOrig.append(QPointF(-2276.4782220358147, -2043.3925387067675));
+    ekvOrig.append(QPointF(-2319.486217821659, -2175.3082938569505));
+    ekvOrig.append(QPointF(-2117.1931262791986, -2193.7561770298817));
+    ekvOrig.append(QPointF(-2068.2669671953195, -2064.8512135315364));
+    ekvOrig.append(QPointF(-1952.7554769180979, -1890.3067659503313));
+    ekvOrig.append(QPointF(-1917.7323129703223, -1837.3847845155408));
+    ekvOrig.append(QPointF(-2058.602200122849, -1695.1596528078817));
+    ekvOrig.append(QPointF(-2088.6195002428954, -1664.259910500151));
+    ekvOrig.append(QPointF(-2140.3590128721157, -1608.4581791070227));
+    ekvOrig.append(QPointF(-2176.3545492221115, -1567.7882073269216));
+    ekvOrig.append(QPointF(-2212.414007045006, -1524.9793775290368));
+    ekvOrig.append(QPointF(-2247.2991384140373, -1480.9254248733198));
+    ekvOrig.append(QPointF(-2279.789328152741, -1436.5155433136006));
+    ekvOrig.append(QPointF(-2308.736909783362, -1392.55755557814));
+    ekvOrig.append(QPointF(-2321.178893964517, -1371.2881615367894));
+    ekvOrig.append(QPointF(-2333.0835084227488, -1349.7134020279238));
+    ekvOrig.append(QPointF(-2356.032179444513, -1302.346476158332));
+    ekvOrig.append(QPointF(-2377.555935401122, -1251.704814071218));
+    ekvOrig.append(QPointF(-2397.548161559648, -1199.1878260725543));
+    ekvOrig.append(QPointF(-2415.869672964287, -1146.299239146947));
+    ekvOrig.append(QPointF(-2432.3864079020423, -1094.5602527950712));
+    ekvOrig.append(QPointF(-2453.8449306108814, -1021.5510602457688));
+    ekvOrig.append(QPointF(-2465.027777517513, -979.948460372355));
+    ekvOrig.append(QPointF(-2515.1149256956105, -786.1351719137306));
+    ekvOrig.append(QPointF(-2578.505312645544, -789.1376377494045));
+    ekvOrig.append(QPointF(-2787.576150708099, -799.040183212032));
+    ekvOrig.append(QPointF(-2923.3591732783775, -775.0979728107262));
+    ekvOrig.append(QPointF(-3011.0459236325178, -958.3296651887044));
+
+    // See private test cases in file jacket_issue_#767.val, piece "Fabric_TopCollar"
+    // Curve approximation scale 0.4
+    QTest::newRow("Issue #767.") << points << 37.795275590551185 << ekvOrig;
+
+    points.clear();
+    point = VSAPoint(-2956.4986596431745, -931.902205605136);
+    point.SetSAAfter(0.0);
+    point.SetSABefore(0.0);
+    points.append(point);
+
+    point = VSAPoint(-2845.8986453348375, -956.881848270395);
+    point.SetSAAfter(0.0);
+    point.SetSABefore(0.0);
+    points.append(point);
+
+    point = VSAPoint(-2845.8986453348375, -956.881848270395);
+    point.SetSAAfter(0.0);
+    point.SetSABefore(0.0);
+    points.append(point);
+
+    point = VSAPoint(-2836.260963611866, -967.4683165923368);
+    point.SetSAAfter(0.43525524017831524);
+    point.SetSABefore(0.43525524017831524);
+    points.append(point);
+
+    point = VSAPoint(-2816.778439161989, -990.3317076365227);
+    point.SetSAAfter(1.3485009414200446);
+    point.SetSABefore(1.3485009414200446);
+    points.append(point);
+
+    point = VSAPoint(-2787.1311433576584, -1027.9779235071023);
+    point.SetSAAfter(2.805355399084501);
+    point.SetSABefore(2.805355399084501);
+    points.append(point);
+
+    point = VSAPoint(-2746.751847204707, -1084.542680645765);
+    point.SetSAAfter(4.918297366820228);
+    point.SetSABefore(4.918297366820228);
+    points.append(point);
+
+    point = VSAPoint(-2705.497537071667, -1147.1631960355985);
+    point.SetSAAfter(7.198140256849341);
+    point.SetSABefore(7.198140256849341);
+    points.append(point);
+
+    point = VSAPoint(-2663.422466976175, -1214.9038229173848);
+    point.SetSAAfter(9.622568324608272);
+    point.SetSABefore(9.622568324608272);
+    points.append(point);
+
+    point = VSAPoint(-2620.5808909358666, -1286.8289145319047);
+    point.SetSAAfter(12.167801509953053);
+    point.SetSABefore(12.167801509953053);
+    points.append(point);
+
+    point = VSAPoint(-2555.0788677550413, -1400.2850275624346);
+    point.SetSAAfter(16.150757125706626);
+    point.SetSABefore(16.150757125706626);
+    points.append(point);
+
+    point = VSAPoint(-2510.4555036137926, -1478.8463991280223);
+    point.SetSAAfter(18.897637795275593);
+    point.SetSABefore(18.897637795275593);
+    points.append(point);
+
+    point = VSAPoint(-2510.4555036137926, -1478.8463991280223);
+    point.SetSAAfter(18.897637795275593);
+    point.SetSABefore(18.897637795275593);
+    points.append(point);
+
+    point = VSAPoint(-2510.4555036137926, -1478.8463991280225);
+    point.SetSAAfter(18.897637795275593);
+    point.SetSABefore(18.897637795275593);
+    points.append(point);
+
+    point = VSAPoint(-2465.8020785414137, -1557.3906882829588);
+    point.SetSAAfter(16.15075712570663);
+    point.SetSABefore(16.15075712570663);
+    points.append(point);
+
+    point = VSAPoint(-2401.8564705072536, -1671.7312490561126);
+    point.SetSAAfter(12.167801509953058);
+    point.SetSABefore(12.167801509953058);
+    points.append(point);
+
+    point = VSAPoint(-2361.9923364810647, -1745.348300475717);
+    point.SetSAAfter(9.622568324608276);
+    point.SetSABefore(9.622568324608276);
+    points.append(point);
+
+    point = VSAPoint(-2325.3307700973705, -1816.1652024424925);
+    point.SetSAAfter(7.198140256849351);
+    point.SetSABefore(7.198140256849351);
+    points.append(point);
+
+    point = VSAPoint(-2292.647817425233, -1883.6564734104645);
+    point.SetSAAfter(4.918297366820237);
+    point.SetSABefore(4.918297366820237);
+    points.append(point);
+
+    point = VSAPoint(-2264.7195245337134, -1947.2966318336582);
+    point.SetSAAfter(2.805355399084501);
+    point.SetSABefore(2.805355399084501);
+    points.append(point);
+
+    point = VSAPoint(-2247.5514136970696, -1992.0342635119725);
+    point.SetSAAfter(1.3485009414200313);
+    point.SetSABefore(1.3485009414200313);
+    points.append(point);
+
+    point = VSAPoint(-2237.880805276518, -2020.4733693656342);
+    point.SetSAAfter(0.43525524017830364);
+    point.SetSABefore(0.43525524017830364);
+    points.append(point);
+
+    point = VSAPoint(-2233.71862201755, -2034.1713418814313);
+    point.SetSAAfter(0.0);
+    point.SetSABefore(0.0);
+    points.append(point);
+
+    point = VSAPoint(-2233.71862201755, -2034.1713418814313);
+    point.SetSAAfter(0.0);
+    point.SetSABefore(0.0);
+    points.append(point);
+
+    point = VSAPoint(-2268.8646463902414, -2141.9725602580456);
+    point.SetSAAfter(0.0);
+    point.SetSABefore(0.0);
+    points.append(point);
+
+    point = VSAPoint(-2142.3438861707664, -2153.5104738154614);
+    point.SetSAAfter(0.0);
+    point.SetSABefore(0.0);
+    points.append(point);
+
+    point = VSAPoint(-2102.1087124090764, -2047.5035093977458);
+    point.SetSAAfter(0.0);
+    point.SetSABefore(0.0);
+    points.append(point);
+
+    point = VSAPoint(-1957.6856602021662, -1829.272055600212);
+    point.SetSAAfter(0.0);
+    point.SetSABefore(0.0);
+    points.append(point);
+
+    point = VSAPoint(-2074.791337229537, -1711.039758580631);
+    point.SetSAAfter(0.0);
+    point.SetSABefore(0.0);
+    points.append(point);
+
+    point = VSAPoint(-2074.791337229537, -1711.039758580631);
+    point.SetSAAfter(0.0);
+    point.SetSABefore(0.0);
+    points.append(point);
+
+    point = VSAPoint(-2105.0691172163697, -1679.8718788745382);
+    point.SetSAAfter(0.0);
+    point.SetSABefore(0.0);
+    points.append(point);
+
+    point = VSAPoint(-2157.1664430173314, -1623.6842413627824);
+    point.SetSAAfter(0.0);
+    point.SetSABefore(0.0);
+    points.append(point);
+
+    point = VSAPoint(-2193.519806327426, -1582.6099746660036);
+    point.SetSAAfter(0.0);
+    point.SetSABefore(0.0);
+    points.append(point);
+
+    point = VSAPoint(-2229.9791235350895, -1539.3264424355502);
+    point.SetSAAfter(0.0);
+    point.SetSABefore(0.0);
+    points.append(point);
+
+    point = VSAPoint(-2265.345834723823, -1494.6643368578134);
+    point.SetSAAfter(0.0);
+    point.SetSABefore(0.0);
+    points.append(point);
+
+    point = VSAPoint(-2298.421379977127, -1449.4543501191831);
+    point.SetSAAfter(0.0);
+    point.SetSABefore(0.0);
+    points.append(point);
+
+    point = VSAPoint(-2328.007199378502, -1404.52717440605);
+    point.SetSAAfter(0.0);
+    point.SetSABefore(0.0);
+    points.append(point);
+
+    point = VSAPoint(-2340.896596672199, -1382.4929340466704);
+    point.SetSAAfter(0.0);
+    point.SetSABefore(0.0);
+    points.append(point);
+
+    point = VSAPoint(-2340.896596672199, -1382.49293404667);
+    point.SetSAAfter(0.0);
+    point.SetSABefore(0.0);
+    points.append(point);
+
+    point = VSAPoint(-2340.896596672199, -1382.49293404667);
+    point.SetSAAfter(0.0);
+    point.SetSABefore(0.0);
+    points.append(point);
+
+    point = VSAPoint(-2353.229300455175, -1360.1423472934985);
+    point.SetSAAfter(0.0);
+    point.SetSABefore(0.0);
+    points.append(point);
+
+    point = VSAPoint(-2376.683944957661, -1311.7310730025702);
+    point.SetSAAfter(0.0);
+    point.SetSABefore(0.0);
+    points.append(point);
+
+    point = VSAPoint(-2398.595481020915, -1260.1770316279192);
+    point.SetSAAfter(0.0);
+    point.SetSABefore(0.0);
+    points.append(point);
+
+    point = VSAPoint(-2418.863694463742, -1206.9350607893014);
+    point.SetSAAfter(0.0);
+    point.SetSABefore(0.0);
+    points.append(point);
+
+    point = VSAPoint(-2437.3883711049484, -1153.4599981064728);
+    point.SetSAAfter(0.0);
+    point.SetSABefore(0.0);
+    points.append(point);
+
+    point = VSAPoint(-2454.0692967633395, -1101.206681199188);
+    point.SetSAAfter(0.0);
+    point.SetSABefore(0.0);
+    points.append(point);
+
+    point = VSAPoint(-2475.6762194412613, -1027.6925814825058);
+    point.SetSAAfter(0.0);
+    point.SetSABefore(0.0);
+    points.append(point);
+
+    point = VSAPoint(-2486.956107269708, -985.7289684721587);
+    point.SetSAAfter(0.0);
+    point.SetSABefore(0.0);
+    points.append(point);
+
+    point = VSAPoint(-2486.956107269708, -985.7289684721587);
+    point.SetSAAfter(0.0);
+    point.SetSABefore(0.0);
+    points.append(point);
+
+    point = VSAPoint(-2528.5937454925997, -824.6112390511391);
+    point.SetSAAfter(0.0);
+    point.SetSABefore(0.0);
+    points.append(point);
+
+    point = VSAPoint(-2789.9932374825075, -836.9923142371927);
+    point.SetSAAfter(0.0);
+    point.SetSABefore(0.0);
+    points.append(point);
+
+    point = VSAPoint(-2901.656478768932, -817.3030720450208);
+    point.SetSAAfter(0.0);
+    point.SetSABefore(0.0);
+    points.append(point);
+
+    ekvOrig.clear();
+    ekvOrig.append(QPointF(-2956.4986596431745, -931.902205605136));
+    ekvOrig.append(QPointF(-2845.8986453348375, -956.881848270395));
+    ekvOrig.append(QPointF(-2836.596062852828, -967.7458621971263));
+    ekvOrig.append(QPointF(-2817.8467371988295, -991.1540172736422));
+    ekvOrig.append(QPointF(-2789.4250765168626, -1029.5919209880126));
+    ekvOrig.append(QPointF(-2750.889100543337, -1087.199542098131));
+    ekvOrig.append(QPointF(-2711.6736648654487, -1150.8550884073957));
+    ekvOrig.append(QPointF(-2671.7881331031967, -1219.6506051948052));
+    ekvOrig.append(QPointF(-2631.2544330468827, -1292.6599547989217));
+    ekvOrig.append(QPointF(-2569.3251398982766, -1407.8779858979287));
+    ekvOrig.append(QPointF(-2526.88572613584, -1488.1830296867358));
+    ekvOrig.append(QPointF(-2479.6165486777995, -1565.743514218805));
+    ekvOrig.append(QPointF(-2412.3287240613545, -1677.91650873456));
+    ekvOrig.append(QPointF(-2370.3519139635614, -1750.1057973020093));
+    ekvOrig.append(QPointF(-2331.663467829433, -1819.5815694082025));
+    ekvOrig.append(QPointF(-2297.0478073034897, -1885.850981791927));
+    ekvOrig.append(QPointF(-2267.2801635224105, -1948.441291248876));
+    ekvOrig.append(QPointF(-2248.8046235492425, -1992.5311728610834));
+    ekvOrig.append(QPointF(-2238.2907512202123, -2020.619202788688));
+    ekvOrig.append(QPointF(-2233.71862201755, -2034.1713418814313));
+    ekvOrig.append(QPointF(-2268.8646463902414, -2141.9725602580456));
+    ekvOrig.append(QPointF(-2142.3438861707664, -2153.5104738154614));
+    ekvOrig.append(QPointF(-2102.1087124090764, -2047.5035093977458));
+    ekvOrig.append(QPointF(-1957.6856602021662, -1829.272055600212));
+    ekvOrig.append(QPointF(-2074.791337229537, -1711.039758580631));
+    ekvOrig.append(QPointF(-2105.0691172163697, -1679.8718788745382));
+    ekvOrig.append(QPointF(-2157.1664430173314, -1623.6842413627824));
+    ekvOrig.append(QPointF(-2193.519806327426, -1582.6099746660036));
+    ekvOrig.append(QPointF(-2229.9791235350895, -1539.3264424355502));
+    ekvOrig.append(QPointF(-2265.345834723823, -1494.6643368578134));
+    ekvOrig.append(QPointF(-2298.421379977127, -1449.4543501191831));
+    ekvOrig.append(QPointF(-2328.007199378502, -1404.52717440605));
+    ekvOrig.append(QPointF(-2340.896596672199, -1382.4929340466704));
+    ekvOrig.append(QPointF(-2353.229300455175, -1360.1423472934985));
+    ekvOrig.append(QPointF(-2376.683944957661, -1311.7310730025702));
+    ekvOrig.append(QPointF(-2398.595481020915, -1260.1770316279192));
+    ekvOrig.append(QPointF(-2418.863694463742, -1206.9350607893014));
+    ekvOrig.append(QPointF(-2437.3883711049484, -1153.4599981064728));
+    ekvOrig.append(QPointF(-2454.0692967633395, -1101.206681199188));
+    ekvOrig.append(QPointF(-2475.6762194412613, -1027.6925814825058));
+    ekvOrig.append(QPointF(-2486.956107269708, -985.7289684721587));
+    ekvOrig.append(QPointF(-2528.5937454925997, -824.6112390511391));
+    ekvOrig.append(QPointF(-2789.9932374825075, -836.9923142371927));
+    ekvOrig.append(QPointF(-2901.656478768932, -817.3030720450208));
+    ekvOrig.append(QPointF(-2956.4986596431745, -931.902205605136));
+
+    // See private test cases in file jacket_issue_#767.val, piece "SkinFusing_TopCollar_Notch"
+    // Curve approximation scale 0.4
+    QTest::newRow("Issue #767.") << points << 37.795275590551185 << ekvOrig;
 }
 
 //---------------------------------------------------------------------------------------------------------------------

@@ -454,35 +454,33 @@ void VGObject::LineCoefficients(const QLineF &line, qreal *a, qreal *b, qreal *c
  */
 bool VGObject::IsPointOnLineSegment(const QPointF &t, const QPointF &p1, const QPointF &p2)
 {
-    // The test point must lie inside the bounding box spanned by the two line points.
-    if (not ( (p1.x() <= t.x() && t.x() <= p2.x()) || (p2.x() <= t.x() && t.x() <= p1.x()) ))
+    auto InsideRange = [](qreal p1, qreal p2, qreal t)
     {
-        if (VFuzzyComparePossibleNulls(p1.x(), p2.x()))
-        {// vertical line
-            if (not (qAbs(p1.x() - t.x()) <= accuracyPointOnLine))
+        if (not ( (p1 <= t && t <= p2) || (p2 <= t && t <= p1) ))
+        {
+            if (VFuzzyComparePossibleNulls(p1, p2))
+            {// vertical line or horizontal line
+                if (not (qAbs(p1 - t) <= accuracyPointOnLine))
+                {
+                    return false;// point not in range
+                }
+            }
+            else if (not (qAbs(p1 - t) <= accuracyPointOnLine) && not (qAbs(p2 - t) <= accuracyPointOnLine))
             {
-                return false;// test point not in x-range
+                return false;// point not in range
             }
         }
-        else
-        {
-            return false;// test point not in x-range
-        }
+        return true;// point in range
+    };
+
+    if (not InsideRange(p1.x(), p2.x(), t.x()))
+    {
+        return false; // test point not in x-range
     }
 
-    if (not ( (p1.y() <= t.y() && t.y() <= p2.y()) || (p2.y() <= t.y() && t.y() <= p1.y()) ))
+    if (not InsideRange(p1.y(), p2.y(), t.y()))
     {
-        if (VFuzzyComparePossibleNulls(p1.y(), p2.y()))
-        {// horizontal line
-            if (not (qAbs(p1.y() - t.y()) <= accuracyPointOnLine))
-            {
-                return false;// test point not in y-range
-            }
-        }
-        else
-        {
-            return false;// test point not in y-range
-        }
+        return false; // test point not in y-range
     }
 
     // Test via the perp dot product (PDP)
