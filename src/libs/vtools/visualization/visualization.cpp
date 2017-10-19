@@ -255,7 +255,6 @@ VScaledEllipse *Visualization::GetPointItem(QVector<VScaledEllipse *> &points, q
         points.append(point);
         return point;
     }
-    return nullptr;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -269,7 +268,7 @@ VScaledEllipse *Visualization::InitPointItem(const QColor &color, QGraphicsItem 
     visPen.setColor(color);
 
     point->setPen(visPen);
-    point->setRect(PointRect(defPointRadiusPixel));
+    point->setRect(PointRect(ScaledRadius(SceneScale(qApp->getCurrentScene()))));
     point->setPos(QPointF());
     point->setFlags(QGraphicsItem::ItemStacksBehindParent);
     point->setZValue(z);

@@ -86,7 +86,7 @@ VisToolSpline::~VisToolSpline()
 void VisToolSpline::RefreshGeometry()
 {
     //Radius of point circle, but little bigger. Need handle with hover sizes.
-    const static qreal radius = defPointRadiusPixel*1.5;
+    const static qreal radius = ScaledRadius(SceneScale(qApp->getCurrentScene()))*1.5;
 
     if (object1Id > NULL_ID)
     {

@@ -216,7 +216,7 @@ void DialogRotation::ShowDialog(bool click)
         const QLineF line = QLineF(static_cast<QPointF>(*point), scene->getScenePos());
 
         //Radius of point circle, but little bigger. Need handle with hover sizes.
-        if (line.length() <= defPointRadiusPixel*1.5)
+        if (line.length() <= ScaledRadius(SceneScale(qApp->getCurrentScene()))*1.5)
         {
             return;
         }

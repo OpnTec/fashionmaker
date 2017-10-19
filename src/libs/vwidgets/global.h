@@ -31,7 +31,6 @@
 
 #include <QtGlobal>
 
-extern const qreal defPointRadiusPixel;
 extern const qreal widthMainLine;
 extern const qreal widthHairLine;
 

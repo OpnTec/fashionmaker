@@ -213,7 +213,7 @@ void VisToolSplinePath::Creating(const QPointF &pSpl, int size)
         if (not ctrlPoints[lastPoint]->isVisible())
         {
             //Radius of point circle, but little bigger. Need handle with hover sizes.
-            if (QLineF(pSpl, ctrlPoint).length() > defPointRadiusPixel*1.5)
+            if (QLineF(pSpl, ctrlPoint).length() > ScaledRadius(SceneScale(qApp->getCurrentScene()))*1.5)
             {
                 if (size == 1)
                 {

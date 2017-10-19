@@ -116,7 +116,7 @@ void VisToolRotation::RefreshGeometry()
         DrawLine(xAxis, QLineF(static_cast<QPointF>(*origin), Ray(static_cast<QPointF>(*origin), 0)), supportColor2,
                  Qt::DashLine);
 
-        VArc arc(*origin, defPointRadiusPixel*2, 0, tempAngle);
+        VArc arc(*origin, ScaledRadius(SceneScale(qApp->getCurrentScene()))*2, 0, tempAngle);
         DrawPath(angleArc, arc.GetPath(), supportColor2, Qt::SolidLine, Qt::RoundCap);
 
         Visualization::toolTip = tr("Rotating angle = %1°, <b>Shift</b> - sticking angle, "
