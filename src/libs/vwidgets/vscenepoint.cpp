@@ -78,7 +78,9 @@ void VScenePoint::paint(QPainter *painter, const QStyleOptionGraphicsItem *optio
             m_namePoint->setVisible(m_showLabel);
 
             QPen lPen = m_lineName->pen();
-            lPen.setColor(CorrectColor(m_lineName, Qt::black));
+            QColor color = CorrectColor(m_lineName, Qt::black);
+            color.setAlpha(50);
+            lPen.setColor(color);
             m_lineName->setPen(lPen);
 
             RefreshLine();
@@ -148,7 +150,7 @@ void VScenePoint::RefreshLine()
                                       QLineF(QPointF(), nameRec.center() - scenePos()), p1, p2);
         const QPointF pRec = VGObject::LineIntersectRect(nameRec, QLineF(scenePos(), nameRec.center()));
 
-        if (QLineF(p1, pRec - scenePos()).length() <= ToPixel(4, Unit::Mm))
+        if (QLineF(p1, pRec - scenePos()).length() <= ToPixel(4/qMax(1.0, SceneScale(scene())), Unit::Mm))
         {
             m_lineName->setVisible(false);
         }
