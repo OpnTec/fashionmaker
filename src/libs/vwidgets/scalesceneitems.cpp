@@ -47,7 +47,9 @@ VScaledLine::VScaledLine(const QLineF &line, QGraphicsItem *parent)
 void VScaledLine::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
 {
     QPen lPen = pen();
-    lPen.setWidthF(ScaleWidth(basicWidth, SceneScale(scene())));
+
+    const qreal width = ScaleWidth(basicWidth, SceneScale(scene()));
+    qRound(width) < 1 ? lPen.setWidthF(width) : lPen.setWidth(qRound(width));
     setPen(lPen);
 
     QGraphicsLineItem::paint(painter, option, widget);
