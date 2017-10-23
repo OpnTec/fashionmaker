@@ -28,7 +28,7 @@
 #include "vplacelabelitem.h"
 #include "vplacelabelitem_p.h"
 #include "../vpatterndb/vcontainer.h"
-#include "vellipticalarc.h"
+#include "varc.h"
 
 #include <QPolygonF>
 #include <QTransform>
@@ -286,17 +286,19 @@ PlaceLabelImg VPlaceLabelItem::LabelShape(const VContainer *data) const
 
     auto ButtonShape = [center, t, this]()
     {
+        const qreal radius = qMin(d->wValue/2.0, d->hValue/2.0);
         QPolygonF shape1;
-        shape1 << QPointF(center->x(), center->y() - d->hValue/2.0)
-               << QPointF(center->x(), center->y() + d->hValue/2.0);
+        shape1 << QPointF(center->x(), center->y() - radius)
+               << QPointF(center->x(), center->y() + radius);
 
         QPolygonF shape2;
-        shape2 << QPointF(center->x() - d->wValue/2.0, center->y())
-               << QPointF(center->x() + d->wValue/2.0, center->y());
+        shape2 << QPointF(center->x() - radius, center->y())
+               << QPointF(center->x() + radius, center->y());
 
         const qreal circleSize = 0.85;
-        VEllipticalArc elArc(*center, d->wValue/2.0*circleSize, d->hValue/2.0*circleSize, 0, 360, 0);
-        QPolygonF shape3(elArc.GetPoints());
+        VArc arc(*center, radius*circleSize, 0, 360);
+        arc.SetApproximationScale(10);
+        QPolygonF shape3(arc.GetPoints());
         if (not shape3.isClosed() && not shape3.isEmpty())
         {
             shape3 << shape3.first();
