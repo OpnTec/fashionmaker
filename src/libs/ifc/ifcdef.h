@@ -148,6 +148,7 @@ extern const QString AttrShowLabel2;
 extern const QString AttrWidth;
 extern const QString AttrHeight;
 extern const QString AttrPlaceLabelType;
+extern const QString AttrVersion;
 
 extern const QString TypeLineNone;
 extern const QString TypeLineLine;

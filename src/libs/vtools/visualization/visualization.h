@@ -72,8 +72,10 @@ public:
     Mode GetMode() const;
     void SetMode(const Mode &value);
 
-    static qreal FindLength(const QString &expression, const QHash<QString, QSharedPointer<VInternalVariable> > *vars);
-    static qreal FindVal(const QString &expression, const QHash<QString, QSharedPointer<VInternalVariable> > *vars);
+    static qreal FindLengthFromUser(const QString &expression, const QHash<QString,
+                                    QSharedPointer<VInternalVariable> > *vars, bool fromUser = true);
+    static qreal FindValFromUser(const QString &expression, const QHash<QString,
+                                 QSharedPointer<VInternalVariable> > *vars, bool fromUser = true);
 signals:
     void         ToolTip(const QString &toolTip);
 public slots:

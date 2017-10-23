@@ -128,7 +128,10 @@ DialogSeamAllowance::DialogSeamAllowance(const VContainer *data, const quint32 &
       m_timerWidthBefore(nullptr),
       m_timerWidthAfter(nullptr),
       m_saWidth(0),
-      m_templateLines()
+      m_templateLines(),
+      m_undoStack(),
+      m_newPlaceLabels(),
+      m_newPaths()
 {
     ui->setupUi(this);
 
@@ -641,7 +644,7 @@ void DialogSeamAllowance::ShowCustomSAContextMenu(const QPoint &pos)
     else if (selectedAction == actionOption)
     {
         auto *dialog = new DialogPiecePath(data, record.path, this);
-        dialog->SetPiecePath(data->GetPiecePath(record.path));
+        dialog->SetPiecePath(CurrentPath(record.path));
         dialog->SetPieceId(toolId);
         if (record.includeType == PiecePathIncludeType::AsMainPath)
         {
@@ -681,7 +684,7 @@ void DialogSeamAllowance::ShowInternalPathsContextMenu(const QPoint &pos)
         const quint32 pathId = qvariant_cast<quint32>(rowItem->data(Qt::UserRole));
 
         auto *dialog = new DialogPiecePath(data, pathId, this);
-        dialog->SetPiecePath(data->GetPiecePath(pathId));
+        dialog->SetPiecePath(CurrentPath(pathId));
         dialog->SetPieceId(toolId);
         dialog->EnbleShowMode(true);
         m_dialog = dialog;
@@ -726,26 +729,28 @@ void DialogSeamAllowance::ShowPlaceLabelsContextMenu(const QPoint &pos)
     QListWidgetItem *rowItem = uiTabPlaceLabels->listWidgetPlaceLabels->item(row);
     SCASSERT(rowItem != nullptr);
     const quint32 labelId = qvariant_cast<quint32>(rowItem->data(Qt::UserRole));
-    const auto label = data->GeometricObject<VPlaceLabelItem>(labelId);
+    VPlaceLabelItem currentLabel = CurrentPlaceLabel(labelId);
 
     QScopedPointer<QMenu> menu(new QMenu());
 
-    auto InitAction = [&menu, label](const QString &text, PlaceLabelType type)
+    auto InitAction = [currentLabel, &menu](const QString &text, PlaceLabelType type)
     {
         QAction *action = menu->addAction(text);
         action->setCheckable(true);
-        action->setChecked(label->GetLabelType() == type);
+        action->setChecked(currentLabel.GetLabelType() == type);
         return action;
     };
 
-    auto SaveType = [this, label, labelId](PlaceLabelType type)
+    auto SaveType = [this, currentLabel, labelId](PlaceLabelType type)
     {
-        VPlaceLabelItem newLabel = VPlaceLabelItem(*label);
+        VPlaceLabelItem newLabel = VPlaceLabelItem(currentLabel);
         newLabel.SetLabelType(type);
+        m_newPlaceLabels.insert(labelId, newLabel);
 
-        SavePlaceLabelOptions *saveCommand = new SavePlaceLabelOptions(*label, newLabel, qApp->getCurrentDocument(),
+        SavePlaceLabelOptions *saveCommand = new SavePlaceLabelOptions(toolId, currentLabel, newLabel,
+                                                                       qApp->getCurrentDocument(),
                                                                        const_cast<VContainer *>(data), labelId);
-        qApp->getUndoStack()->push(saveCommand);
+        m_undoStack.append(saveCommand);
         UpdateCurrentPlaceLabelRecords();
     };
 
@@ -772,11 +777,11 @@ void DialogSeamAllowance::ShowPlaceLabelsContextMenu(const QPoint &pos)
     else if (selectedAction == actionOption)
     {
         auto *dialog = new DialogPlaceLabel(data, labelId, this);
-        dialog->SetCenterPoint(label->GetCenterPoint());
-        dialog->SetLabelType(label->GetLabelType());
-        dialog->SetWidth(label->GetWidthFormula());
-        dialog->SetHeight(label->GetHeightFormula());
-        dialog->SetAngle(label->GetAngleFormula());
+        dialog->SetCenterPoint(labelId);
+        dialog->SetLabelType(currentLabel.GetLabelType());
+        dialog->SetWidth(currentLabel.GetWidthFormula());
+        dialog->SetHeight(currentLabel.GetHeightFormula());
+        dialog->SetAngle(currentLabel.GetAngleFormula());
         dialog->SetPieceId(toolId);
         dialog->EnbleShowMode(true);
         m_dialog = dialog;
@@ -1175,13 +1180,15 @@ void DialogSeamAllowance::PathDialogClosed(int result)
         SCASSERT(dialogTool != nullptr);
         try
         {
-            const VPiecePath newPath = dialogTool->GetPiecePath();
-            const VPiecePath oldPath = data->GetPiecePath(dialogTool->GetToolId());
+            VPiecePath currentPath = CurrentPath(dialogTool->GetToolId());
+            VPiecePath newPath = dialogTool->GetPiecePath();
+            m_newPaths.insert(dialogTool->GetToolId(), newPath);
 
-            SavePiecePathOptions *saveCommand = new SavePiecePathOptions(oldPath, newPath, qApp->getCurrentDocument(),
+            SavePiecePathOptions *saveCommand = new SavePiecePathOptions(toolId, currentPath, newPath,
+                                                                         qApp->getCurrentDocument(),
                                                                          const_cast<VContainer *>(data),
                                                                          dialogTool->GetToolId());
-            qApp->getUndoStack()->push(saveCommand);
+            m_undoStack.append(saveCommand);
             UpdateCurrentCustomSARecord();
             UpdateCurrentInternalPathRecord();
         }
@@ -1204,34 +1211,35 @@ void DialogSeamAllowance::PlaceLabelDialogClosed(int result)
         SCASSERT(dialogTool != nullptr);
         try
         {
-            auto oldLabel = data->GeometricObject<VPlaceLabelItem>(dialogTool->GetToolId());
-
-            auto point = data->GeometricObject<VPointF>(dialogTool->GetCenterPoint());
+            VPlaceLabelItem currentLabel = CurrentPlaceLabel(dialogTool->GetToolId());
 
             const QHash<QString, QSharedPointer<VInternalVariable> > *vars = data->DataVariables();
 
-            const qreal w = qAbs(Visualization::FindLength(dialogTool->GetWidth(), vars));
-            const qreal h = qAbs(Visualization::FindLength(dialogTool->GetHeight(), vars));
-            const qreal a = Visualization::FindVal(dialogTool->GetAngle(), vars);
+            const qreal w = qAbs(Visualization::FindLengthFromUser(dialogTool->GetWidth(), vars, false));
+            const qreal h = qAbs(Visualization::FindLengthFromUser(dialogTool->GetHeight(), vars, false));
+            const qreal a = Visualization::FindValFromUser(dialogTool->GetAngle(), vars, false);
+            qDebug() << w << h << a;
 
-            VPlaceLabelItem newLabel = VPlaceLabelItem();
-            newLabel.setName(point->name());
-            newLabel.setX(point->x());
-            newLabel.setY(point->y());
-            newLabel.setMx(point->mx());
-            newLabel.setMy(point->my());
+            VPlaceLabelItem newLabel =  VPlaceLabelItem();
+            newLabel.setName(currentLabel.name());
+            newLabel.setX(currentLabel.x());
+            newLabel.setY(currentLabel.y());
+            newLabel.setMx(currentLabel.mx());
+            newLabel.setMy(currentLabel.my());
             newLabel.SetWidth(w, dialogTool->GetWidth());
             newLabel.SetHeight(h, dialogTool->GetHeight());
             newLabel.SetAngle(a, dialogTool->GetAngle());
             newLabel.SetLabelType(dialogTool->GetLabelType());
-            newLabel.SetCenterPoint(dialogTool->GetCenterPoint());
-            newLabel.SetCorrectionAngle(oldLabel->GetCorrectionAngle());
+            newLabel.SetCenterPoint(currentLabel.GetCenterPoint());
+            newLabel.SetCorrectionAngle(currentLabel.GetCorrectionAngle());
 
-            SavePlaceLabelOptions *saveCommand = new SavePlaceLabelOptions(*oldLabel, newLabel,
+            m_newPlaceLabels.insert(dialogTool->GetToolId(), newLabel);
+
+            SavePlaceLabelOptions *saveCommand = new SavePlaceLabelOptions(toolId, currentLabel, newLabel,
                                                                            qApp->getCurrentDocument(),
                                                                            const_cast<VContainer *>(data),
                                                                            dialogTool->GetToolId());
-            qApp->getUndoStack()->push(saveCommand);
+            m_undoStack.append(saveCommand);
             UpdateCurrentPlaceLabelRecords();
         }
         catch (const VExceptionBadId &e)
@@ -2271,7 +2279,7 @@ QString DialogSeamAllowance::GetPathName(quint32 path, bool reverse) const
 
     if (path > NULL_ID)
     {
-        name = data->GetPiecePath(path).GetName();
+        name = CurrentPath(path).GetName();
 
         if (reverse)
         {
@@ -2884,6 +2892,12 @@ QString DialogSeamAllowance::GetFormulaSAWidth() const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+QVector<QUndoCommand *> &DialogSeamAllowance::UndoStack()
+{
+    return m_undoStack;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 void DialogSeamAllowance::SetFormulaSAWidth(const QString &formula)
 {
     const QString width = qApp->TrVars()->FormulaToUser(formula, qApp->Settings()->GetOsSeparator());
@@ -2943,9 +2957,8 @@ void DialogSeamAllowance::UpdateCurrentPlaceLabelRecords()
 
     QListWidgetItem *item = uiTabPlaceLabels->listWidgetPlaceLabels->item(row);
     SCASSERT(item != nullptr);
-    const quint32 pointId = qvariant_cast<quint32>(item->data(Qt::UserRole));
-    auto point = data->GeometricObject<VPointF>(pointId);
-    item->setText(point->name());
+    const quint32 labelId = qvariant_cast<quint32>(item->data(Qt::UserRole));
+    item->setText(CurrentPlaceLabel(labelId).name());
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -3130,4 +3143,16 @@ void DialogSeamAllowance::ShowPieceSpecialPoints(const QListWidget *list)
     {
         m_visSpecialPoints->RefreshGeometry();
     }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+VPiecePath DialogSeamAllowance::CurrentPath(quint32 id) const
+{
+    return m_newPaths.contains(id) ? m_newPaths.value(id) : data->GetPiecePath(id);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+VPlaceLabelItem DialogSeamAllowance::CurrentPlaceLabel(quint32 id) const
+{
+    return m_newPlaceLabels.contains(id) ? m_newPlaceLabels.value(id) : *data->GeometricObject<VPlaceLabelItem>(id);
 }

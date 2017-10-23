@@ -34,12 +34,17 @@
 class SavePlaceLabelOptions : public VUndoCommand
 {
 public:
-    SavePlaceLabelOptions(const VPlaceLabelItem &oldLabel, const VPlaceLabelItem &newLabel, VAbstractPattern *doc,
-                          VContainer *data, quint32 id, QUndoCommand *parent = nullptr);
+    SavePlaceLabelOptions(quint32 pieceId, const VPlaceLabelItem &oldLabel, const VPlaceLabelItem &newLabel,
+                          VAbstractPattern *doc, VContainer *data, quint32 id, QUndoCommand *parent = nullptr);
     virtual ~SavePlaceLabelOptions()=default;
 
     virtual void undo() Q_DECL_OVERRIDE;
     virtual void redo() Q_DECL_OVERRIDE;
+    virtual bool mergeWith(const QUndoCommand *command) Q_DECL_OVERRIDE;
+    virtual int  id() const Q_DECL_OVERRIDE;
+
+    quint32         LabelId() const;
+    VPlaceLabelItem NewLabel() const;
 private:
     Q_DISABLE_COPY(SavePlaceLabelOptions)
 
@@ -47,6 +52,25 @@ private:
     VPlaceLabelItem       m_newLabel;
 
     VContainer *m_data;
+    quint32 m_pieceId;
 };
+
+//---------------------------------------------------------------------------------------------------------------------
+inline int SavePlaceLabelOptions::id() const
+{
+    return static_cast<int>(UndoCommand::SavePlaceLabelOptions);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+inline quint32 SavePlaceLabelOptions::LabelId() const
+{
+    return nodeId;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+inline VPlaceLabelItem SavePlaceLabelOptions::NewLabel() const
+{
+    return m_newLabel;
+}
 
 #endif // SAVEPLACELABELOPTIONS_H

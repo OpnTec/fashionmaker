@@ -250,7 +250,7 @@ QString VToolCutSpline::MakeToolTip() const
     const auto spl = VAbstractTool::data.GeometricObject<VAbstractCubicBezier>(curveCutId);
 
     const QString expression = qApp->TrVars()->FormulaToUser(formula, qApp->Settings()->GetOsSeparator());
-    const qreal length = Visualization::FindVal(expression, VAbstractTool::data.DataVariables());
+    const qreal length = Visualization::FindValFromUser(expression, VAbstractTool::data.DataVariables());
 
     QPointF spl1p2, spl1p3, spl2p2, spl2p3;
     QPointF point = spl->CutSpline(qApp->toPixel(length), spl1p2, spl1p3, spl2p2, spl2p3);

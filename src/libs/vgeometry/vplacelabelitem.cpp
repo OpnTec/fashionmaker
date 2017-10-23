@@ -180,7 +180,7 @@ PlaceLabelImg VPlaceLabelItem::LabelShape(const VContainer *data) const
 
     QTransform t;
     t.translate(center->x(), center->y());
-    t.rotate(-d->aValue+d->correctionAngle);
+    t.rotate(-(d->aValue+d->correctionAngle));
     t.translate(-center->x(), -center->y());
 
     auto SegmentShape = [center, t, this]()

@@ -548,6 +548,7 @@
                           <xs:attribute name="indexD1" type="xs:unsignedInt"/>
                           <xs:attribute name="indexD2" type="xs:unsignedInt"/>
                           <xs:attribute name="inUse" type="xs:boolean"/>
+                          <xs:attribute name="version" type="unionVersion"/>
                         </xs:complexType>
                       </xs:element>
                     </xs:choice>
@@ -1028,6 +1029,14 @@
       <xs:enumeration value="6"/><!--Triangle-->
       <xs:enumeration value="7"/><!--Hshaped-->
       <xs:enumeration value="8"/><!--Button-->
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="unionVersion">
+    <xs:restriction base="xs:unsignedInt">
+      <xs:enumeration value="1"/>
+      <!--Old version-->
+      <xs:enumeration value="2"/>
+      <!--New version-->
     </xs:restriction>
   </xs:simpleType>
 </xs:schema>

@@ -71,7 +71,6 @@ const QString VToolSeamAllowance::TagIPaths      = QStringLiteral("iPaths");
 const QString VToolSeamAllowance::TagPins        = QStringLiteral("pins");
 const QString VToolSeamAllowance::TagPlaceLabels = QStringLiteral("placeLabels");
 
-const QString VToolSeamAllowance::AttrVersion              = QStringLiteral("version");
 const QString VToolSeamAllowance::AttrForbidFlipping       = QStringLiteral("forbidFlipping");
 const QString VToolSeamAllowance::AttrSeamAllowance        = QStringLiteral("seamAllowance");
 const QString VToolSeamAllowance::AttrHideMainPath         = QStringLiteral("hideMainPath");
@@ -901,6 +900,12 @@ QPainterPath VToolSeamAllowance::shape() const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void VToolSeamAllowance::FullUpdateFromGuiApply()
+{
+    SaveDialogChange(tr("apply save detail options"));
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 void VToolSeamAllowance::AddToFile()
 {
     const VPiece piece = VAbstractTool::data.GetPiece(m_id);
@@ -935,7 +940,7 @@ void VToolSeamAllowance::RefreshDataInFile()
             Q_STATIC_ASSERT_X(VPatternConverter::PatternMinVer < CONVERTER_VERSION_CHECK(0, 4, 0),
                               "Time to refactor the code.");
 
-            const uint version = doc->GetParametrUInt(domElement, VToolSeamAllowance::AttrVersion, "1");
+            const uint version = doc->GetParametrUInt(domElement, AttrVersion, "1");
             if (version == 1)
             {
                 const VPiece piece = VAbstractTool::data.GetPiece(m_id);
@@ -1221,10 +1226,6 @@ VToolSeamAllowance::VToolSeamAllowance(const VToolSeamAllowanceInitData &initDat
     connect(this, &VToolSeamAllowance::ChoosedTool, m_sceneDetails, &VMainGraphicsScene::ChoosedItem);
 
     ConnectOutsideSignals();
-
-    UpdateDetailLabel();
-    UpdatePatternInfo();
-    UpdateGrainline();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -1302,7 +1303,7 @@ void VToolSeamAllowance::RefreshGeometry()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VToolSeamAllowance::SaveDialogChange()
+void VToolSeamAllowance::SaveDialogChange(const QString &undoText)
 {
     SCASSERT(not m_dialog.isNull());
     DialogSeamAllowance *dialogTool = qobject_cast<DialogSeamAllowance*>(m_dialog.data());
@@ -1310,8 +1311,28 @@ void VToolSeamAllowance::SaveDialogChange()
     const VPiece newDet = dialogTool->GetPiece();
     const VPiece oldDet = VAbstractTool::data.GetPiece(m_id);
 
-    qApp->getUndoStack()->push(new SavePieceOptions(oldDet, newDet, doc, m_id));
-    UpdateDetailLabel();
+    QVector<QUndoCommand*> &undocommands = dialogTool->UndoStack();
+    const bool groupChange = not undocommands.isEmpty();
+
+    SavePieceOptions *saveCommand = new SavePieceOptions(oldDet, newDet, doc, m_id);
+
+    if (groupChange)
+    {
+        qApp->getUndoStack()->beginMacro(undoText.isEmpty() ? saveCommand->text(): undoText);
+
+        foreach (QUndoCommand* command, undocommands)
+        {
+            qApp->getUndoStack()->push(command);
+        }
+        undocommands.clear();
+    }
+
+    qApp->getUndoStack()->push(saveCommand);
+
+    if (groupChange)
+    {
+        qApp->getUndoStack()->endMacro();
+    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------

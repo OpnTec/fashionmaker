@@ -339,7 +339,7 @@ QString VToolCutSplinePath::MakeToolTip() const
     const auto splPath = VAbstractTool::data.GeometricObject<VAbstractCubicBezierPath>(curveCutId);
 
     const QString expression = qApp->TrVars()->FormulaToUser(formula, qApp->Settings()->GetOsSeparator());
-    const qreal length = Visualization::FindVal(expression, VAbstractTool::data.DataVariables());
+    const qreal length = Visualization::FindValFromUser(expression, VAbstractTool::data.DataVariables());
 
     VSplinePath *splPath1 = nullptr;
     VSplinePath *splPath2 = nullptr;

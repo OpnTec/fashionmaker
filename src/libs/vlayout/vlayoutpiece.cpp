@@ -350,8 +350,8 @@ QVector<VLayoutPlaceLabel> ConvertPlaceLabels(const VPiece &piece, const VContai
     {
         const auto label = pattern->GeometricObject<VPlaceLabelItem>(piece.GetPlaceLabels().at(i));
         VLayoutPlaceLabel layoutLabel;
-        layoutLabel.shape = label->LabelShape(pattern);
-        layoutLabel.center = pattern->GeometricObject<VPointF>(label->GetCenterPoint())->toQPointF();
+        layoutLabel.shape = label->LabelShape();
+        layoutLabel.center = label->toQPointF();
         layoutLabel.type = label->GetLabelType();
         labels.append(layoutLabel);
     }

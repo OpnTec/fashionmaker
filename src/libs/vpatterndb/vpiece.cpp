@@ -663,6 +663,34 @@ void VPiece::SetPlaceLabels(const QVector<quint32> &labels)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+QList<quint32> VPiece::Dependencies() const
+{
+    QList<quint32> list = d->m_path.Dependencies();
+
+    foreach (const CustomSARecord &record, d->m_customSARecords)
+    {
+        list.append(record.path);
+    }
+
+    foreach (const quint32 &value, d->m_internalPaths)
+    {
+        list.append(value);
+    }
+
+    foreach (const quint32 &value, d->m_pins)
+    {
+        list.append(value);
+    }
+
+    foreach (const quint32 &value, d->m_placeLabels)
+    {
+        list.append(value);
+    }
+
+    return list;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 /**
  * @brief MissingNodes find missing nodes in detail. When we deleted object in detail and return this detail need
  * understand, what nodes need make invisible.

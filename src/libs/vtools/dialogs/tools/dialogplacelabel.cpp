@@ -112,6 +112,7 @@ void DialogPlaceLabel::EnbleShowMode(bool disable)
 {
     m_showMode = disable;
     ui->comboBoxPiece->setDisabled(m_showMode);
+    ui->comboBoxPoint->setDisabled(m_showMode);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

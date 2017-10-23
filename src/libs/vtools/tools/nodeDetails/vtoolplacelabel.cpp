@@ -102,7 +102,7 @@ VToolPlaceLabel *VToolPlaceLabel::Create(VToolPlaceLabelInitData &initData)
         node->setMx(point->mx());
         node->setMy(point->my());
 
-        if (initData.typeCreation == Source::FromTool)
+        if (initData.idTool != NULL_ID)
         {
             QSharedPointer<VPlaceLabelItem> label = qSharedPointerDynamicCast<VPlaceLabelItem>(point);
             SCASSERT(label.isNull() == false)

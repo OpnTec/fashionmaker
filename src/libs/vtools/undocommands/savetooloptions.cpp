@@ -98,3 +98,31 @@ QVector<quint32> SaveToolOptions::Missing(const QList<quint32> &list1, const QLi
     QSet<quint32> set2 = QSet<quint32>::fromList(list2);
     return set1.subtract(set2).toList().toVector();
 }
+
+//---------------------------------------------------------------------------------------------------------------------
+bool SaveToolOptions::mergeWith(const QUndoCommand *command)
+{
+    const SaveToolOptions *saveCommand = static_cast<const SaveToolOptions *>(command);
+    SCASSERT(saveCommand != nullptr)
+
+    if (saveCommand->getToolId() != nodeId)
+    {
+        return false;
+    }
+    else
+    {
+        const QSet<quint32> currentSet;
+        currentSet.fromList(newDependencies);
+
+        const QSet<quint32> candidateSet;
+        candidateSet.fromList(saveCommand->NewDependencies());
+
+        if (currentSet != candidateSet)
+        {
+            return false;
+        }
+    }
+
+    newXml = saveCommand->getNewXml();
+    return true;
+}

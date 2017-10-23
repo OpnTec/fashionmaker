@@ -251,7 +251,7 @@ QString VToolCutArc::MakeToolTip() const
     const QSharedPointer<VArc> arc = VAbstractTool::data.GeometricObject<VArc>(curveCutId);
 
     const QString expression = qApp->TrVars()->FormulaToUser(formula, qApp->Settings()->GetOsSeparator());
-    const qreal length = Visualization::FindVal(expression, VAbstractTool::data.DataVariables());
+    const qreal length = Visualization::FindValFromUser(expression, VAbstractTool::data.DataVariables());
 
     const QString arcStr = tr("Arc");
     const QString lengthStr = tr("length");

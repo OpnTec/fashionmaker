@@ -48,14 +48,44 @@ public:
     virtual ~SaveToolOptions() = default;
     virtual void undo() Q_DECL_OVERRIDE;
     virtual void redo() Q_DECL_OVERRIDE;
+    virtual bool mergeWith(const QUndoCommand *command) Q_DECL_OVERRIDE;
+    virtual int  id() const Q_DECL_OVERRIDE;
+
+    QDomElement    getNewXml() const;
+    quint32        getToolId() const;
+    QList<quint32> NewDependencies() const;
 private:
     Q_DISABLE_COPY(SaveToolOptions)
     const QDomElement    oldXml;
-    const QDomElement    newXml;
+    QDomElement          newXml;
     const QList<quint32> oldDependencies;
     const QList<quint32> newDependencies;
 
     QVector<quint32> Missing(const QList<quint32> &list1, const QList<quint32> &list2) const;
 };
+
+//---------------------------------------------------------------------------------------------------------------------
+inline int SaveToolOptions::id() const
+{
+    return static_cast<int>(UndoCommand::SaveToolOptions);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+inline QDomElement SaveToolOptions::getNewXml() const
+{
+    return newXml;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+inline quint32 SaveToolOptions::getToolId() const
+{
+    return nodeId;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+inline QList<quint32> SaveToolOptions::NewDependencies() const
+{
+    return newDependencies;
+}
 
 #endif // SAVETOOLOPTIONS_H

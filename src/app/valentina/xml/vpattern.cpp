@@ -850,7 +850,7 @@ void VPattern::ParseDetailElement(QDomElement &domElement, const Document &parse
 
         initData.width = GetParametrString(domElement, AttrWidth, "0.0");
         const QString w = initData.width;//need for saving fixed formula;
-        const uint version = GetParametrUInt(domElement, VToolSeamAllowance::AttrVersion, "1");
+        const uint version = GetParametrUInt(domElement, AttrVersion, "1");
 
         const QStringList tags = QStringList() << TagNodes
                                                << TagData
@@ -1721,7 +1721,7 @@ void VPattern::ParsePlaceLabel(QDomElement &domElement, const Document &parse)
         initData.centerPoint = GetParametrUInt(domElement, AttrIdObject, NULL_ID_STR);
         initData.idTool = GetParametrUInt(domElement, VAbstractNode::AttrIdTool, NULL_ID_STR);
 
-        initData.width = GetParametrString(domElement, AttrLength, "1.0");
+        initData.width = GetParametrString(domElement, AttrWidth, "1.0");
         const QString w = initData.width;//need for saving fixed formula;
 
         initData.height = GetParametrString(domElement, AttrHeight, "1.0");
@@ -3550,6 +3550,7 @@ void VPattern::ParseToolsElement(VMainGraphicsScene *scene, const QDomElement &d
                 VToolUnionDetailsInitData initData;
                 initData.indexD1 = GetParametrUInt(domElement, VToolUnionDetails::AttrIndexD1, "-1");
                 initData.indexD2 = GetParametrUInt(domElement, VToolUnionDetails::AttrIndexD2, "-1");
+                initData.version = GetParametrUInt(domElement, AttrVersion, "1");
                 initData.scene = scene;
                 initData.doc = this;
                 initData.data = data;

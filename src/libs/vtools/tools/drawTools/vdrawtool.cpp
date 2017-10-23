@@ -103,8 +103,9 @@ void VDrawTool::ChangedNameDraw(const QString &oldName, const QString &newName)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VDrawTool::SaveDialogChange()
+void VDrawTool::SaveDialogChange(const QString &undoText)
 {
+    Q_UNUSED(undoText)
     qCDebug(vTool, "Saving tool options after using dialog");
     QDomElement oldDomElement = doc->elementById(m_id, getTagName());
     if (oldDomElement.isElement())

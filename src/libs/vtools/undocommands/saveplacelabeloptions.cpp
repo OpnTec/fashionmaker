@@ -27,14 +27,17 @@
  *************************************************************************/
 #include "saveplacelabeloptions.h"
 #include "../tools/nodeDetails/vtoolplacelabel.h"
+#include "../tools/vtoolseamallowance.h"
 
 //---------------------------------------------------------------------------------------------------------------------
-SavePlaceLabelOptions::SavePlaceLabelOptions(const VPlaceLabelItem &oldLabel, const VPlaceLabelItem &newLabel,
-                                             VAbstractPattern *doc, VContainer *data, quint32 id, QUndoCommand *parent)
+SavePlaceLabelOptions::SavePlaceLabelOptions(quint32 pieceId, const VPlaceLabelItem &oldLabel,
+                                             const VPlaceLabelItem &newLabel, VAbstractPattern *doc, VContainer *data,
+                                             quint32 id, QUndoCommand *parent)
     : VUndoCommand(QDomElement(), doc, parent),
       m_oldLabel(oldLabel),
       m_newLabel(newLabel),
-      m_data(data)
+      m_data(data),
+      m_pieceId(pieceId)
 {
     setText(tr("save place label options"));
     nodeId = id;
@@ -58,6 +61,14 @@ void SavePlaceLabelOptions::undo()
 
         SCASSERT(m_data);
         m_data->UpdateGObject(nodeId, new VPlaceLabelItem(m_oldLabel));
+
+        if (m_pieceId != NULL_ID)
+        {
+            if (VToolSeamAllowance *tool = qobject_cast<VToolSeamAllowance *>(VAbstractPattern::getTool(m_pieceId)))
+            {
+                tool->RefreshGeometry();
+            }
+        }
     }
     else
     {
@@ -83,9 +94,41 @@ void SavePlaceLabelOptions::redo()
 
         SCASSERT(m_data);
         m_data->UpdateGObject(nodeId, new VPlaceLabelItem(m_newLabel));
+
+        if (m_pieceId != NULL_ID)
+        {
+            if (VToolSeamAllowance *tool = qobject_cast<VToolSeamAllowance *>(VAbstractPattern::getTool(m_pieceId)))
+            {
+                tool->RefreshGeometry();
+            }
+        }
     }
     else
     {
         qCDebug(vUndo, "Can't find path with id = %u.", nodeId);
     }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+bool SavePlaceLabelOptions::mergeWith(const QUndoCommand *command)
+{
+    const SavePlaceLabelOptions *saveCommand = static_cast<const SavePlaceLabelOptions *>(command);
+    SCASSERT(saveCommand != nullptr);
+
+    if (saveCommand->LabelId() != nodeId)
+    {
+        return false;
+    }
+    else
+    {
+        const VPlaceLabelItem candidate = saveCommand->NewLabel();
+
+        if (m_newLabel.GetCenterPoint() != candidate.GetCenterPoint())
+        {
+            return false;
+        }
+    }
+
+    m_newLabel = saveCommand->NewLabel();
+    return true;
 }

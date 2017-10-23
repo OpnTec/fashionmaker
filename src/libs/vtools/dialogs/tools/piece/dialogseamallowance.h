@@ -48,6 +48,8 @@ namespace Ui
 
 class VisPieceSpecialPoints;
 class FancyTabBar;
+class VPlaceLabelItem;
+class QUndoCommand;
 
 class DialogSeamAllowance : public DialogTool
 {
@@ -63,6 +65,8 @@ public:
     void   SetPiece(const VPiece &piece);
 
     QString GetFormulaSAWidth() const;
+
+    QVector<QUndoCommand*> &UndoStack();
 
 public slots:
     virtual void ChosenObject(quint32 id, const SceneObject &type) Q_DECL_OVERRIDE;
@@ -209,6 +213,10 @@ private:
 
     QVector<VLabelTemplateLine> m_templateLines;
 
+    QVector<QUndoCommand*> m_undoStack;
+    QHash<quint32, VPlaceLabelItem> m_newPlaceLabels;
+    QHash<quint32, VPiecePath> m_newPaths;
+
     VPiece CreatePiece() const;
 
     void    NewMainPathItem(const VPieceNode &node);
@@ -261,6 +269,9 @@ private:
     void SetPLAngle(QString angleFormula);
 
     void ShowPieceSpecialPoints(const QListWidget *list);
+
+    VPiecePath      CurrentPath(quint32 id) const;
+    VPlaceLabelItem CurrentPlaceLabel(quint32 id) const;
 };
 
 #endif // DIALOGSEAMALLOWANCE_H

@@ -106,6 +106,7 @@ public:
     QVector<quint32> &GetPlaceLabels();
     void             SetPlaceLabels(const QVector<quint32> &labels);
 
+    QList<quint32> Dependencies() const;
     QVector<quint32> MissingNodes(const VPiece &det) const;
     QVector<quint32> MissingCSAPath(const VPiece &det) const;
     QVector<quint32> MissingInternalPaths(const VPiece &det) const;

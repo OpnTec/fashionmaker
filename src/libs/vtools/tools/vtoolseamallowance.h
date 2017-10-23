@@ -73,7 +73,6 @@ public:
     static const QString TagPins;
     static const QString TagPlaceLabels;
 
-    static const QString AttrVersion;
     static const QString AttrForbidFlipping;
     static const QString AttrSeamAllowance;
     static const QString AttrHideMainPath;
@@ -106,6 +105,7 @@ public:
     void DisconnectOutsideSignals();
     void ConnectOutsideSignals();
     void ReinitInternals(const VPiece &detail, VMainGraphicsScene *scene);
+    void RefreshGeometry();
 
     virtual int        type() const Q_DECL_OVERRIDE {return Type;}
     enum { Type = UserType + static_cast<int>(Tool::Piece)};
@@ -118,6 +118,7 @@ public:
     virtual QRectF       boundingRect() const Q_DECL_OVERRIDE;
     virtual QPainterPath shape() const Q_DECL_OVERRIDE;
 public slots:
+    virtual void FullUpdateFromGuiApply() Q_DECL_OVERRIDE;
     virtual void FullUpdateFromFile () Q_DECL_OVERRIDE;
     void         EnableToolMove(bool move);
     virtual void AllowHover(bool enabled) Q_DECL_OVERRIDE;
@@ -153,7 +154,7 @@ protected:
     virtual void       DeleteToolWithConfirm(bool ask = true) Q_DECL_OVERRIDE;
     virtual void       ToolCreation(const Source &typeCreation) Q_DECL_OVERRIDE;
     virtual void       SetDialog() Q_DECL_FINAL;
-    virtual void       SaveDialogChange() Q_DECL_FINAL;
+    virtual void       SaveDialogChange(const QString &undoText = QString()) Q_DECL_FINAL;
 
 private:
     Q_DISABLE_COPY(VToolSeamAllowance)
@@ -175,7 +176,6 @@ private:
     VToolSeamAllowance(const VToolSeamAllowanceInitData &initData, QGraphicsItem * parent = nullptr);
 
     void UpdateExcludeState();
-    void RefreshGeometry();
 
     VPieceItem::MoveTypes FindLabelGeometry(const VPatternLabelData &labelData, qreal &rotationAngle, qreal &labelWidth,
                                             qreal &labelHeight, QPointF &pos);

@@ -51,7 +51,7 @@ SavePieceOptions::SavePieceOptions(const VPiece &oldDet, const VPiece &newDet, V
       m_oldDet(oldDet),
       m_newDet(newDet)
 {
-    setText(tr("save detail option"));
+    setText(tr("save detail options"));
     nodeId = id;
 }
 
@@ -143,4 +143,39 @@ void SavePieceOptions::redo()
     {
         qCDebug(vUndo, "Can't find detail with id = %u.", nodeId);
     }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+bool SavePieceOptions::mergeWith(const QUndoCommand *command)
+{
+    const SavePieceOptions *saveCommand = static_cast<const SavePieceOptions *>(command);
+    SCASSERT(saveCommand != nullptr);
+
+    if (saveCommand->DetId() != nodeId)
+    {
+        return false;
+    }
+    else
+    {
+        const QSet<quint32> currentSet;
+        currentSet.fromList(m_newDet.Dependencies());
+
+        const VPiece candidate = saveCommand->NewDet();
+        const QSet<quint32> candidateSet;
+        candidateSet.fromList(candidate.Dependencies());
+
+        if (currentSet != candidateSet)
+        {
+            return false;
+        }
+    }
+
+    m_newDet = saveCommand->NewDet();
+    return true;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+int SavePieceOptions::id() const
+{
+    return static_cast<int>(UndoCommand::SavePieceOptions);
 }
