@@ -528,7 +528,8 @@ void DialogSeamAllowance::NameDetailChanged()
             flagName = false;
             ChangeColor(uiTabLabels->labelEditName, Qt::red);
             m_ftb->SetTabText(TabOrder::Labels, tr("Labels") + QLatin1String("*"));
-            QIcon icon(":/icons/win.icon.theme/16x16/status/dialog-warning.png");
+            const QIcon icon = QIcon::fromTheme("dialog-warning",
+                                                QIcon(":/icons/win.icon.theme/16x16/status/dialog-warning.png"));
             uiTabLabels->tabWidget->setTabIcon(uiTabLabels->tabWidget->indexOf(uiTabLabels->tabPieceLabelData), icon);
         }
         else
@@ -1578,7 +1579,8 @@ void DialogSeamAllowance::UpdateDetailLabelValues()
     if (not flagDLAngle || not (flagDLFormulas || flagDPin) || not flagPLAngle || not (flagPLFormulas || flagPPin))
     {
         m_ftb->SetTabText(TabOrder::Labels, tr("Labels") + QLatin1String("*"));
-        QIcon icon(":/icons/win.icon.theme/16x16/status/dialog-warning.png");
+        const QIcon icon = QIcon::fromTheme("dialog-warning",
+                                            QIcon(":/icons/win.icon.theme/16x16/status/dialog-warning.png"));
         uiTabLabels->tabWidget->setTabIcon(uiTabLabels->tabWidget->indexOf(uiTabLabels->tabLabels), icon);
     }
     else
@@ -1663,7 +1665,8 @@ void DialogSeamAllowance::UpdatePatternLabelValues()
     if (not flagDLAngle || not (flagDLFormulas || flagDPin) || not flagPLAngle || not (flagPLFormulas || flagPPin))
     {
         m_ftb->SetTabText(TabOrder::Labels, tr("Labels") + QLatin1String("*"));
-        QIcon icon(":/icons/win.icon.theme/16x16/status/dialog-warning.png");
+        const QIcon icon = QIcon::fromTheme("dialog-warning",
+                                            QIcon(":/icons/win.icon.theme/16x16/status/dialog-warning.png"));
         uiTabLabels->tabWidget->setTabIcon(uiTabLabels->tabWidget->indexOf(uiTabLabels->tabLabels), icon);
     }
     else
@@ -2155,7 +2158,8 @@ void DialogSeamAllowance::DetailPinPointChanged()
         topPinId == NULL_ID && bottomPinId == NULL_ID ? color = okColor : color = errorColor;
 
         m_ftb->SetTabText(TabOrder::Labels, tr("Labels") + QLatin1String("*"));
-        QIcon icon(":/icons/win.icon.theme/16x16/status/dialog-warning.png");
+        const QIcon icon = QIcon::fromTheme("dialog-warning",
+                                            QIcon(":/icons/win.icon.theme/16x16/status/dialog-warning.png"));
         uiTabLabels->tabWidget->setTabIcon(uiTabLabels->tabWidget->indexOf(uiTabLabels->tabLabels), icon);
     }
     UpdateDetailLabelValues();
@@ -2187,7 +2191,8 @@ void DialogSeamAllowance::PatternPinPointChanged()
         topPinId == NULL_ID && bottomPinId == NULL_ID ? color = okColor : color = errorColor;
 
         m_ftb->SetTabText(TabOrder::Labels, tr("Labels") + QLatin1String("*"));
-        QIcon icon(":/icons/win.icon.theme/16x16/status/dialog-warning.png");
+        const QIcon icon = QIcon::fromTheme("dialog-warning",
+                                            QIcon(":/icons/win.icon.theme/16x16/status/dialog-warning.png"));
         uiTabLabels->tabWidget->setTabIcon(uiTabLabels->tabWidget->indexOf(uiTabLabels->tabLabels), icon);
     }
     UpdatePatternLabelValues();
