@@ -1063,7 +1063,7 @@ void VToolSeamAllowance::mousePressEvent(QGraphicsSceneMouseEvent *event)
 //---------------------------------------------------------------------------------------------------------------------
 void VToolSeamAllowance::mouseReleaseEvent(QGraphicsSceneMouseEvent *event)
 {
-    if (event->button() == Qt::LeftButton)
+    if (event->button() == Qt::LeftButton && (flags() & QGraphicsItem::ItemIsMovable))
     {
         SetItemOverrideCursor(this, cursorArrowOpenHand, 1, 1);
     }
@@ -1076,6 +1076,16 @@ void VToolSeamAllowance::hoverEnterEvent(QGraphicsSceneHoverEvent *event)
     if (flags() & QGraphicsItem::ItemIsMovable)
     {
         SetItemOverrideCursor(this, cursorArrowOpenHand, 1, 1);
+    }
+    else
+    {
+        if (QGraphicsScene *scene = this->scene())
+        {
+            if (QGraphicsView *view = scene->views().at(0))
+            {
+                setCursor(view->viewport()->cursor());
+            }
+        }
     }
     QGraphicsPathItem::hoverEnterEvent(event);
 }
