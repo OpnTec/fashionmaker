@@ -46,6 +46,9 @@
 #include "vmaingraphicsscene.h"
 #include "vmaingraphicsview.h"
 #include "global.h"
+#include "vscenepoint.h"
+
+#define DEFAULT_SCALE 0.0001
 
 //---------------------------------------------------------------------------------------------------------------------
 /**
@@ -53,7 +56,8 @@
  * @param parent parent object.
  */
 VGraphicsSimpleTextItem::VGraphicsSimpleTextItem(QGraphicsItem * parent)
-    :QGraphicsSimpleTextItem(parent), m_fontSize(0), selectionType(SelectionType::ByMouseRelease)
+    :QGraphicsSimpleTextItem(parent), m_fontSize(0), selectionType(SelectionType::ByMouseRelease),
+      m_oldScale(DEFAULT_SCALE)
 {
     this->setFlag(QGraphicsItem::ItemIsMovable, true);
     this->setFlag(QGraphicsItem::ItemIsSelectable, true);
@@ -64,6 +68,7 @@ VGraphicsSimpleTextItem::VGraphicsSimpleTextItem(QGraphicsItem * parent)
     font.setPointSize(font.pointSize()+20);
     m_fontSize = font.pointSize();
     this->setFont(font);
+    setScale(m_oldScale);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -73,23 +78,53 @@ VGraphicsSimpleTextItem::VGraphicsSimpleTextItem(QGraphicsItem * parent)
  * @param parent parent object.
  */
 VGraphicsSimpleTextItem::VGraphicsSimpleTextItem( const QString & text, QGraphicsItem * parent )
-    :QGraphicsSimpleTextItem(text, parent), m_fontSize(0), selectionType(SelectionType::ByMouseRelease)
+    :QGraphicsSimpleTextItem(text, parent), m_fontSize(0), selectionType(SelectionType::ByMouseRelease),
+      m_oldScale(DEFAULT_SCALE)
 {
     this->setFlag(QGraphicsItem::ItemIsMovable, true);
     this->setFlag(QGraphicsItem::ItemIsSelectable, true);
     this->setFlag(QGraphicsItem::ItemSendsGeometryChanges, true);
     this->setAcceptHoverEvents(true);
+    setScale(m_oldScale);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void VGraphicsSimpleTextItem::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
 {
-    const qreal scale = SceneScale(scene());
-    if (scale > 1)
+    auto UpdateLine = [this]()
     {
+        if (VScenePoint *parent = dynamic_cast<VScenePoint *>(parentItem()))
+        {
+            parent->RefreshLine();
+        }
+    };
+
+    QGraphicsScene *scene = this->scene();
+    const qreal scale = SceneScale(scene);
+    if (scale > 1 && not VFuzzyComparePossibleNulls(m_oldScale, scale))
+    {
+        const QRectF nameRec = boundingRect();
+        setTransformOriginPoint(nameRec.center());
         setScale(1/scale);
+        UpdateLine();
+        m_oldScale = scale;
+    }
+    else if (scale <= 1 && not VFuzzyComparePossibleNulls(m_oldScale, 1.0))
+    {
+        const QRectF nameRec = boundingRect();
+        setTransformOriginPoint(nameRec.center());
+        setScale(1);
+        UpdateLine();
+        m_oldScale = 1;
     }
 
+    if (scene)
+    {
+        if (QGraphicsView *view = scene->views().at(0))
+        {
+            VMainGraphicsView::NewSceneRect(scene, view);
+        }
+    }
     QGraphicsSimpleTextItem::paint(painter, option, widget);
 }
 

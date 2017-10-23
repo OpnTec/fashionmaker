@@ -87,6 +87,7 @@ private:
     /** @brief fontSize label font size. */
     qint32        m_fontSize;
     SelectionType selectionType;
+    qreal         m_oldScale;
 };
 
 //---------------------------------------------------------------------------------------------------------------------
