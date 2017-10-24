@@ -146,7 +146,7 @@ void MoveDoubleLabel::Do(const QPointF &pos)
 
         if (VDrawTool *tool = qobject_cast<VDrawTool *>(VAbstractPattern::getTool(m_idTool)))
         {
-            tool->DoChangePosition(nodeId, pos);
+            tool->ChangeLabelPosition(nodeId, pos);
         }
         VMainGraphicsView::NewSceneRect(m_scene, qApp->getSceneView());
     }

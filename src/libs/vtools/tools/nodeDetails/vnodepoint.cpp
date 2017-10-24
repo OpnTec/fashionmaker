@@ -54,6 +54,7 @@
 #include "../vabstracttool.h"
 #include "../vdatatool.h"
 #include "vabstractnode.h"
+#include "../../undocommands/label/movelabel.h"
 
 const QString VNodePoint::ToolType = QStringLiteral("modeling");
 
@@ -124,6 +125,21 @@ void VNodePoint::Create(VAbstractNodeInitData initData)
 QString VNodePoint::getTagName() const
 {
     return VAbstractPattern::TagPoint;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VNodePoint::ChangeLabelPosition(quint32 id, const QPointF &pos)
+{
+    if (id == m_id)
+    {
+        QSharedPointer<VPointF> point = VAbstractTool::data.GeometricObject<VPointF>(id);
+        point->setMx(pos.x());
+        point->setMy(pos.y());
+        m_namePoint->blockSignals(true);
+        m_namePoint->setPos(pos);
+        m_namePoint->blockSignals(false);
+        RefreshLine();
+    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -199,30 +215,7 @@ void VNodePoint::mouseReleaseEvent(QGraphicsSceneMouseEvent *event)
  */
 void VNodePoint::NameChangePosition(const QPointF &pos)
 {
-    VPointF *point = new VPointF(*VAbstractTool::data.GeometricObject<VPointF>(m_id));
-    QPointF p = pos - this->pos();
-    point->setMx(p.x());
-    point->setMy(p.y());
-    RefreshLine();
-    UpdateNamePosition(point->mx(), point->my());
-    VAbstractTool::data.UpdateGObject(m_id, point);
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-/**
- * @brief UpdateNamePosition update label position in file.
- * @param mx label bias x axis.
- * @param my label bias y axis.
- */
-void VNodePoint::UpdateNamePosition(qreal mx, qreal my)
-{
-    QDomElement domElement = doc->elementById(m_id, getTagName());
-    if (domElement.isElement())
-    {
-        doc->SetAttribute(domElement, AttrMx, QString().setNum(qApp->fromPixel(mx)));
-        doc->SetAttribute(domElement, AttrMy, QString().setNum(qApp->fromPixel(my)));
-        emit toolhaveChange();
-    }
+    qApp->getUndoStack()->push(new MoveLabel(doc, pos - this->pos(), m_id));
 }
 
 //---------------------------------------------------------------------------------------------------------------------

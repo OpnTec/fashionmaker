@@ -108,6 +108,7 @@ public:
     QMap<QString, quint32>  PointsList() const;
     virtual QString         getTagName() const =0;
     virtual void            ShowVisualization(bool show) =0;
+    virtual void            ChangeLabelPosition(quint32 id, const QPointF &pos);
 
     template<typename T>
     static quint32 CreateNode(VContainer *data, quint32 id);

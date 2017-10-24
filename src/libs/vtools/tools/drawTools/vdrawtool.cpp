@@ -269,10 +269,3 @@ void VDrawTool::SetLabelVisible(quint32 id, bool visible)
     Q_UNUSED(id)
     Q_UNUSED(visible)
 }
-
-//---------------------------------------------------------------------------------------------------------------------
-void VDrawTool::DoChangePosition(quint32 id, const QPointF &pos)
-{
-    Q_UNUSED(id)
-    Q_UNUSED(pos)
-}

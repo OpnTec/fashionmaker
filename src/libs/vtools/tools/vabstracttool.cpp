@@ -398,6 +398,13 @@ QMap<QString, quint32> VAbstractTool::PointsList() const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void VAbstractTool::ChangeLabelPosition(quint32 id, const QPointF &pos)
+{
+    Q_UNUSED(id)
+    Q_UNUSED(pos)
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 void VAbstractTool::ToolSelectionType(const SelectionType &type)
 {
     selectionType = type;

@@ -69,7 +69,6 @@ public:
 
     virtual bool IsLabelVisible(quint32 id) const;
     virtual void SetLabelVisible(quint32 id, bool visible);
-    virtual void DoChangePosition(quint32 id, const QPointF &pos);
 
 signals:
     void ChangedToolSelection(bool selected, quint32 object, quint32 tool);

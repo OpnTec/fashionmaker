@@ -79,7 +79,7 @@ public:
     void SetEnabled(bool enabled);
 
     virtual void GroupVisibility(quint32 object, bool visible) Q_DECL_OVERRIDE;
-    virtual void DoChangePosition(quint32 id, const QPointF &pos) Q_DECL_OVERRIDE;
+    virtual void ChangeLabelPosition(quint32 id, const QPointF &pos) Q_DECL_OVERRIDE;
 
     virtual bool IsLabelVisible(quint32 id) const Q_DECL_OVERRIDE;
     virtual void SetLabelVisible(quint32 id, bool visible) Q_DECL_OVERRIDE;

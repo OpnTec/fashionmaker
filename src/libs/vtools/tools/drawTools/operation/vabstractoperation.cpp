@@ -86,7 +86,7 @@ void VAbstractOperation::paint(QPainter *painter, const QStyleOptionGraphicsItem
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VAbstractOperation::DoChangePosition(quint32 id, const QPointF &pos)
+void VAbstractOperation::ChangeLabelPosition(quint32 id, const QPointF &pos)
 {
     if (operatedObjects.contains(id))
     {
@@ -98,7 +98,6 @@ void VAbstractOperation::DoChangePosition(quint32 id, const QPointF &pos)
             QSharedPointer<VPointF> point = VAbstractTool::data.GeometricObject<VPointF>(id);
             point->setMx(pos.x());
             point->setMy(pos.y());
-            VAbstractTool::data.UpdateGObject(id, point);
             item->RefreshPointGeometry(*(point.data()));
         }
     }

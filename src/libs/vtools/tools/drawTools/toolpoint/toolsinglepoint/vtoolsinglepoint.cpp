@@ -324,14 +324,13 @@ void VToolSinglePoint::ChangeLabelVisibility(quint32 id, bool visible)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VToolSinglePoint::DoChangePosition(quint32 id, const QPointF &pos)
+void VToolSinglePoint::ChangeLabelPosition(quint32 id, const QPointF &pos)
 {
     if (id == m_id)
     {
         QSharedPointer<VPointF> point = VAbstractTool::data.GeometricObject<VPointF>(id);
         point->setMx(pos.x());
         point->setMy(pos.y());
-        VAbstractTool::data.UpdateGObject(id, point);
         m_namePoint->blockSignals(true);
         m_namePoint->setPos(pos);
         m_namePoint->blockSignals(false);
