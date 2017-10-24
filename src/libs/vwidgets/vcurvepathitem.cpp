@@ -36,7 +36,8 @@
 VCurvePathItem::VCurvePathItem(QGraphicsItem *parent)
     : QGraphicsPathItem(parent),
       m_directionArrows(),
-      m_points()
+      m_points(),
+      m_defaultWidth(widthMainLine)
 {
 }
 
@@ -108,9 +109,15 @@ void VCurvePathItem::SetPoints(const QVector<QPointF> &points)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void VCurvePathItem::SetWidth(qreal width)
+{
+    m_defaultWidth = width;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 void VCurvePathItem::ScalePenWidth()
 {
-    const qreal width = ScaleWidth(widthMainLine, SceneScale(scene()));
+    const qreal width = ScaleWidth(m_defaultWidth, SceneScale(scene()));
 
     QPen toolPen = pen();
     toolPen.setWidthF(width);

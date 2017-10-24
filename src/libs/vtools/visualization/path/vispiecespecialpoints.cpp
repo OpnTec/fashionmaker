@@ -31,12 +31,31 @@
 #include "../vgeometry/vpointf.h"
 #include "../vpatterndb/vcontainer.h"
 
+namespace
+{
+QPainterPath RectPath(const QRectF &rect)
+{
+    QPainterPath path;
+    if (not rect.isNull())
+    {
+        path.addRect(rect);
+    }
+    return path;
+}
+}
+
 //---------------------------------------------------------------------------------------------------------------------
 VisPieceSpecialPoints::VisPieceSpecialPoints(const VContainer *data, QGraphicsItem *parent)
     : VisPath(data, parent),
       m_points(),
-      m_spoints()
+      m_spoints(),
+      m_showRect(false),
+      m_placeLabelRect(),
+      m_rectItem(nullptr),
+      supportColor2(Qt::darkGreen)
 {
+    m_rectItem = InitItem<VCurvePathItem>(supportColor2, this);
+    m_rectItem->SetWidth(widthHairLine);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -51,13 +70,12 @@ void VisPieceSpecialPoints::RefreshGeometry()
         const QSharedPointer<VPointF> p = Visualization::data->GeometricObject<VPointF>(m_spoints.at(i));
         point->RefreshPointGeometry(*p);
         point->setVisible(true);
-    }
-}
 
-//---------------------------------------------------------------------------------------------------------------------
-void VisPieceSpecialPoints::SetPoints(const QVector<quint32> &pins)
-{
-    m_spoints = pins;
+        if (m_showRect)
+        {
+            DrawPath(m_rectItem, RectPath(m_placeLabelRect), supportColor2, Qt::SolidLine, Qt::RoundCap);
+        }
+    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------

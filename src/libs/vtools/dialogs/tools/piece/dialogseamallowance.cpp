@@ -281,6 +281,11 @@ void DialogSeamAllowance::SetPiece(const VPiece &piece)
         NewSpecialPoint(uiTabPlaceLabels->listWidgetPlaceLabels, piece.GetPlaceLabels().at(i));
     }
 
+    if (piece.GetPlaceLabels().size() > 0)
+    {
+        uiTabPlaceLabels->listWidgetPlaceLabels->setCurrentRow(0);
+    }
+
     uiTabPaths->comboBoxStartPoint->blockSignals(true);
     uiTabPaths->comboBoxStartPoint->clear();
     uiTabPaths->comboBoxStartPoint->blockSignals(false);
@@ -1297,11 +1302,11 @@ QT_WARNING_POP
             || (index == TabOrder::Labels &&
                 uiTabLabels->tabWidget->currentIndex() == uiTabLabels->tabWidget->indexOf(uiTabLabels->tabLabels)))
     {
-        ShowPieceSpecialPoints(uiTabPins->listWidgetPins);
+        ShowPieceSpecialPointsWithRect(uiTabPins->listWidgetPins, false);
     }
     else if (index == TabOrder::PlaceLabels)
     {
-        ShowPieceSpecialPoints(uiTabPlaceLabels->listWidgetPlaceLabels);
+        ShowPieceSpecialPointsWithRect(uiTabPlaceLabels->listWidgetPlaceLabels, true);
     }
     else
     {
@@ -1317,7 +1322,7 @@ void DialogSeamAllowance::TabChanged(int index)
 {
     if (index == uiTabLabels->tabWidget->indexOf(uiTabLabels->tabLabels))
     {
-        ShowPieceSpecialPoints(uiTabPins->listWidgetPins);
+        ShowPieceSpecialPointsWithRect(uiTabPins->listWidgetPins, false);
     }
     else
     {
@@ -2868,6 +2873,15 @@ void DialogSeamAllowance::InitPassmarksTab()
 void DialogSeamAllowance::InitPlaceLabelsTab()
 {
     uiTabPlaceLabels->listWidgetPlaceLabels->setContextMenuPolicy(Qt::CustomContextMenu);
+    connect(uiTabPlaceLabels->listWidgetPlaceLabels, &QListWidget::currentRowChanged, this, [this]()
+    {
+        if (not m_visSpecialPoints.isNull())
+        {
+            m_visSpecialPoints->SetShowRect(true);
+            m_visSpecialPoints->SetRect(CurrentRect());
+            m_visSpecialPoints->RefreshGeometry();
+        }
+    });
     connect(uiTabPlaceLabels->listWidgetPlaceLabels, &QListWidget::customContextMenuRequested, this,
             &DialogSeamAllowance::ShowPlaceLabelsContextMenu);
 }
@@ -3126,7 +3140,20 @@ void DialogSeamAllowance::SetPLAngle(QString angleFormula)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void DialogSeamAllowance::ShowPieceSpecialPoints(const QListWidget *list)
+QRectF DialogSeamAllowance::CurrentRect() const
+{
+    QRectF rect;
+    if (QListWidgetItem *item = uiTabPlaceLabels->listWidgetPlaceLabels->currentItem())
+    {
+        VPlaceLabelItem label = CurrentPlaceLabel(qvariant_cast<quint32>(item->data(Qt::UserRole)));
+        rect = QRectF(QPointF(label.x() - label.GetWidth()/2.0, label.y() - label.GetHeight()/2.0),
+                      QPointF(label.x() + label.GetWidth()/2.0, label.y() + label.GetHeight()/2.0));
+    }
+    return rect;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogSeamAllowance::ShowPieceSpecialPointsWithRect(const QListWidget *list, bool showRect)
 {
     SCASSERT(list != nullptr)
     if (m_visSpecialPoints.isNull())
@@ -3135,6 +3162,8 @@ void DialogSeamAllowance::ShowPieceSpecialPoints(const QListWidget *list)
     }
 
     m_visSpecialPoints->SetPoints(GetListInternals<quint32>(list));
+    m_visSpecialPoints->SetShowRect(showRect);
+    m_visSpecialPoints->SetRect(CurrentRect());
 
     if (not qApp->getCurrentScene()->items().contains(m_visSpecialPoints))
     {

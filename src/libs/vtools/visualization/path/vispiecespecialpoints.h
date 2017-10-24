@@ -41,17 +41,43 @@ public:
     virtual ~VisPieceSpecialPoints() Q_DECL_EQ_DEFAULT;
 
     virtual void RefreshGeometry() Q_DECL_OVERRIDE;
-    void         SetPoints(const QVector<quint32> &pins);
+
+    void SetPoints(const QVector<quint32> &pins);
+    void SetShowRect(bool show);
+    void SetRect(const QRectF &rect);
+
     virtual int  type() const Q_DECL_OVERRIDE {return Type;}
     enum { Type = UserType + static_cast<int>(Vis::PieceSpecialPoints)};
 private:
     Q_DISABLE_COPY(VisPieceSpecialPoints)
     QVector<VSimplePoint *> m_points;
     QVector<quint32>        m_spoints;
+    bool                    m_showRect;
+    QRectF                  m_placeLabelRect;
+    VCurvePathItem         *m_rectItem;
+    QColor                 supportColor2;
 
     VSimplePoint *GetPoint(quint32 i, const QColor &color);
 
     void HideAllItems();
 };
+
+//---------------------------------------------------------------------------------------------------------------------
+inline void VisPieceSpecialPoints::SetPoints(const QVector<quint32> &pins)
+{
+    m_spoints = pins;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+inline void VisPieceSpecialPoints::SetShowRect(bool show)
+{
+    m_showRect = show;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+inline void VisPieceSpecialPoints::SetRect(const QRectF &rect)
+{
+    m_placeLabelRect = rect;
+}
 
 #endif // VISPIECESPECIALPOINTS_H

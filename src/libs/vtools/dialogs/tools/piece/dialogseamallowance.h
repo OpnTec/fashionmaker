@@ -268,7 +268,8 @@ private:
     void SetPLHeight(QString heightFormula);
     void SetPLAngle(QString angleFormula);
 
-    void ShowPieceSpecialPoints(const QListWidget *list);
+    QRectF CurrentRect() const;
+    void ShowPieceSpecialPointsWithRect(const QListWidget *list, bool showRect);
 
     VPiecePath      CurrentPath(quint32 id) const;
     VPlaceLabelItem CurrentPlaceLabel(quint32 id) const;
