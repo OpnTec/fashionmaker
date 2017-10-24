@@ -1,8 +1,8 @@
 /************************************************************************
  **
- **  @file   dialoginsertnode.h
+ **  @file   dialogpin.h
  **  @author Roman Telezhynskyi <dismine(at)gmail.com>
- **  @date   21 3, 2017
+ **  @date   31 1, 2017
  **
  **  @brief
  **  @copyright
@@ -26,48 +26,48 @@
  **
  *************************************************************************/
 
-#ifndef DIALOGINSERTNODE_H
-#define DIALOGINSERTNODE_H
+#ifndef DIALOGPIN_H
+#define DIALOGPIN_H
 
-#include "dialogtool.h"
-#include "../vpatterndb/vpiecenode.h"
+#include "../dialogtool.h"
 
 namespace Ui
 {
-    class DialogInsertNode;
+    class DialogPin;
 }
 
-class DialogInsertNode : public DialogTool
+class DialogPin : public DialogTool
 {
     Q_OBJECT
-
 public:
-    explicit DialogInsertNode(const VContainer *data, quint32 toolId, QWidget *parent = nullptr);
-    virtual ~DialogInsertNode();
+    explicit DialogPin(const VContainer *data, quint32 toolId, QWidget *parent = nullptr);
+    virtual ~DialogPin();
 
-    virtual void SetPiecesList(const QVector<quint32> &list) Q_DECL_OVERRIDE;
+    void EnbleShowMode(bool disable);
 
     quint32 GetPieceId() const;
     void    SetPieceId(quint32 id);
 
-    VPieceNode GetNode() const;
-    void       SetNode(const VPieceNode &node);
+    quint32 GetPointId() const;
+    void    SetPointId(quint32 id);
+
+    virtual void SetPiecesList(const QVector<quint32> &list) Q_DECL_OVERRIDE;
 
 public slots:
     virtual void ChosenObject(quint32 id, const SceneObject &type) Q_DECL_OVERRIDE;
 
 protected:
     virtual void CheckState() Q_DECL_FINAL;
+    virtual void ShowVisualization() Q_DECL_OVERRIDE;
 
 private:
-    Q_DISABLE_COPY(DialogInsertNode)
-    Ui::DialogInsertNode *ui;
-
-    VPieceNode m_node;
-    bool m_flagItem;
+    Q_DISABLE_COPY(DialogPin)
+    Ui::DialogPin *ui;
+    bool  m_showMode;
+    bool  m_flagPoint;
 
     void CheckPieces();
-    void CheckItem();
+    void CheckPoint();
 };
 
-#endif // DIALOGINSERTNODE_H
+#endif // DIALOGPIN_H

@@ -28,7 +28,7 @@
 #ifndef DIALOGPLACELABEL_H
 #define DIALOGPLACELABEL_H
 
-#include "dialogtool.h"
+#include "../dialogtool.h"
 
 namespace Ui
 {

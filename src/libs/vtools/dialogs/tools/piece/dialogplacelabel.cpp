@@ -29,9 +29,9 @@
 #include "ui_dialogplacelabel.h"
 
 #include "visualization/line/vistoolspecialpoint.h"
-#include "../../tools/vabstracttool.h"
-#include "../../tools/vtoolseamallowance.h"
-#include "../support/dialogeditwrongformula.h"
+#include "../../../tools/vabstracttool.h"
+#include "../../../tools/vtoolseamallowance.h"
+#include "../../support/dialogeditwrongformula.h"
 #include "../vgeometry/vplacelabelitem.h"
 
 #include <QTimer>

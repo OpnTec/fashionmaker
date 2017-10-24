@@ -41,7 +41,7 @@
 #include "visualization/path/vistoolpiece.h"
 #include "visualization/path/vispiecespecialpoints.h"
 #include "dialogpiecepath.h"
-#include "../dialogplacelabel.h"
+#include "dialogplacelabel.h"
 #include "../../../undocommands/savepiecepathoptions.h"
 #include "../../../undocommands/saveplacelabeloptions.h"
 #include "../../support/dialogeditwrongformula.h"

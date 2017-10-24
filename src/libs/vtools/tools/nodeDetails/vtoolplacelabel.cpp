@@ -27,7 +27,7 @@
  *************************************************************************/
 
 #include "vtoolplacelabel.h"
-#include "../../dialogs/tools/dialogplacelabel.h"
+#include "../../dialogs/tools/piece/dialogplacelabel.h"
 #include "../../undocommands/savepieceoptions.h"
 #include "../vtoolseamallowance.h"
 #include "../vgeometry/vpointf.h"

@@ -29,7 +29,7 @@
 #include "dialogpin.h"
 #include "ui_dialogpin.h"
 #include "visualization/line/vistoolspecialpoint.h"
-#include "../../tools/vabstracttool.h"
+#include "../../../tools/vabstracttool.h"
 
 //---------------------------------------------------------------------------------------------------------------------
 DialogPin::DialogPin(const VContainer *data, quint32 toolId, QWidget *parent)
