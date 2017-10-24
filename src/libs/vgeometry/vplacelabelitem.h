@@ -77,7 +77,7 @@ public:
     PlaceLabelType GetLabelType() const;
     void           SetLabelType(PlaceLabelType type);
 
-    PlaceLabelImg LabelShape(const VContainer *data) const;
+    PlaceLabelImg LabelShape() const;
 
 private:
     QSharedDataPointer<VPlaceLabelItemData> d;

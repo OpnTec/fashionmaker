@@ -174,27 +174,25 @@ VPlaceLabelItem &VPlaceLabelItem::operator=(const VPlaceLabelItem &item)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-PlaceLabelImg VPlaceLabelItem::LabelShape(const VContainer *data) const
+PlaceLabelImg VPlaceLabelItem::LabelShape() const
 {
-    const auto center = data->GeometricObject<VPointF>(d->centerPoint);
-
     QTransform t;
-    t.translate(center->x(), center->y());
+    t.translate(x(), y());
     t.rotate(-(d->aValue+d->correctionAngle));
-    t.translate(-center->x(), -center->y());
+    t.translate(-x(), -y());
 
-    auto SegmentShape = [center, t, this]()
+    auto SegmentShape = [t, this]()
     {
         QPolygonF shape;
-        shape << QPointF(center->x(), center->y() - d->hValue/2.0) << QPointF(center->x(), center->y() + d->hValue/2.0);
+        shape << QPointF(x(), y() - d->hValue/2.0) << QPointF(x(), y() + d->hValue/2.0);
 
         return PlaceLabelImg({t.map(shape)});
     };
 
-    auto RectangleShape = [center, t, this]()
+    auto RectangleShape = [t, this]()
     {
-        QRectF rect(QPointF(center->x() - d->wValue/2.0, center->y() - d->hValue/2.0),
-                    QPointF(center->x() + d->wValue/2.0, center->y() + d->hValue/2.0));
+        QRectF rect(QPointF(x() - d->wValue/2.0, y() - d->hValue/2.0),
+                    QPointF(x() + d->wValue/2.0, y() + d->hValue/2.0));
 
         QPolygonF shape;
         shape << rect.topLeft() << rect.topRight() << rect.bottomRight() << rect.bottomLeft() << rect.topLeft();
@@ -202,25 +200,25 @@ PlaceLabelImg VPlaceLabelItem::LabelShape(const VContainer *data) const
         return PlaceLabelImg({t.map(shape)});
     };
 
-    auto CrossShape = [center, t, this]()
+    auto CrossShape = [t, this]()
     {
         QPolygonF shape1;
-        shape1 << QPointF(center->x(), center->y() - d->hValue/2.0)
-               << QPointF(center->x(), center->y() + d->hValue/2.0);
+        shape1 << QPointF(x(), y() - d->hValue/2.0)
+               << QPointF(x(), y() + d->hValue/2.0);
 
         QPolygonF shape2;
-        shape2 << QPointF(center->x() - d->wValue/2.0, center->y())
-               << QPointF(center->x() + d->wValue/2.0, center->y());
+        shape2 << QPointF(x() - d->wValue/2.0, y())
+               << QPointF(x() + d->wValue/2.0, y());
 
         return PlaceLabelImg({t.map(shape1), t.map(shape2)});
     };
 
-    auto TshapedShape = [center, t, this]()
+    auto TshapedShape = [t, this]()
     {
-        QPointF center2(center->x(), center->y() + d->hValue/2.0);
+        QPointF center2(x(), y() + d->hValue/2.0);
 
         QPolygonF shape1;
-        shape1 << QPointF(center->x(), center->y()) << center2;
+        shape1 << QPointF(x(), y()) << center2;
 
         QPolygonF shape2;
         shape2 << QPointF(center2.x() - d->wValue/2.0, center2.y())
@@ -229,10 +227,10 @@ PlaceLabelImg VPlaceLabelItem::LabelShape(const VContainer *data) const
         return PlaceLabelImg({t.map(shape1), t.map(shape2)});
     };
 
-    auto DoubletreeShape = [center, t, this]()
+    auto DoubletreeShape = [t, this]()
     {
-        QRectF rect(QPointF(center->x() - d->wValue/2.0, center->y() - d->hValue/2.0),
-                    QPointF(center->x() + d->wValue/2.0, center->y() + d->hValue/2.0));
+        QRectF rect(QPointF(x() - d->wValue/2.0, y() - d->hValue/2.0),
+                    QPointF(x() + d->wValue/2.0, y() + d->hValue/2.0));
 
         QPolygonF shape1;
         shape1 << rect.topLeft() << rect.bottomRight();
@@ -243,21 +241,21 @@ PlaceLabelImg VPlaceLabelItem::LabelShape(const VContainer *data) const
         return PlaceLabelImg({t.map(shape1), t.map(shape2)});
     };
 
-    auto CornerShape = [center, t, this]()
+    auto CornerShape = [t, this]()
     {
         QPolygonF shape1;
-        shape1 << QPointF(center->x(), center->y()) << QPointF(center->x(), center->y() + d->hValue/2.0);
+        shape1 << QPointF(x(), y()) << QPointF(x(), y() + d->hValue/2.0);
 
         QPolygonF shape2;
-        shape2 << QPointF(center->x() - d->wValue/2.0, center->y()) << QPointF(center->x(), center->y());
+        shape2 << QPointF(x() - d->wValue/2.0, y()) << QPointF(x(), y());
 
         return PlaceLabelImg({t.map(shape1), t.map(shape2)});
     };
 
-    auto TriangleShape = [center, t, this]()
+    auto TriangleShape = [t, this]()
     {
-        QRectF rect(QPointF(center->x() - d->wValue/2.0, center->y() - d->hValue/2.0),
-                    QPointF(center->x() + d->wValue/2.0, center->y() + d->hValue/2.0));
+        QRectF rect(QPointF(x() - d->wValue/2.0, y() - d->hValue/2.0),
+                    QPointF(x() + d->wValue/2.0, y() + d->hValue/2.0));
 
         QPolygonF shape;
         shape << rect.topLeft() << rect.topRight() << rect.bottomRight() << rect.topLeft();
@@ -265,10 +263,10 @@ PlaceLabelImg VPlaceLabelItem::LabelShape(const VContainer *data) const
         return PlaceLabelImg({t.map(shape)});
     };
 
-    auto HshapedShape = [center, t, this]()
+    auto HshapedShape = [t, this]()
     {
-        const QPointF center1 (center->x(), center->y() - d->hValue/2.0);
-        const QPointF center2 (center->x(), center->y() + d->hValue/2.0);
+        const QPointF center1 (x(), y() - d->hValue/2.0);
+        const QPointF center2 (x(), y() + d->hValue/2.0);
 
         QPolygonF shape1;
         shape1 << center1 << center2;
@@ -284,19 +282,19 @@ PlaceLabelImg VPlaceLabelItem::LabelShape(const VContainer *data) const
         return PlaceLabelImg({t.map(shape1), t.map(shape2), t.map(shape3)});
     };
 
-    auto ButtonShape = [center, t, this]()
+    auto ButtonShape = [t, this]()
     {
         const qreal radius = qMin(d->wValue/2.0, d->hValue/2.0);
         QPolygonF shape1;
-        shape1 << QPointF(center->x(), center->y() - radius)
-               << QPointF(center->x(), center->y() + radius);
+        shape1 << QPointF(x(), y() - radius)
+               << QPointF(x(), y() + radius);
 
         QPolygonF shape2;
-        shape2 << QPointF(center->x() - radius, center->y())
-               << QPointF(center->x() + radius, center->y());
+        shape2 << QPointF(x() - radius, y())
+               << QPointF(x() + radius, y());
 
         const qreal circleSize = 0.85;
-        VArc arc(*center, radius*circleSize, 0, 360);
+        VArc arc(*this, radius*circleSize, 0, 360);
         arc.SetApproximationScale(10);
         QPolygonF shape3(arc.GetPoints());
         if (not shape3.isClosed() && not shape3.isEmpty())
