@@ -28,6 +28,7 @@
 - [#657] Improve feature: Allow more paper formats for printing tiled PDF
 - [#768] New feature. Custom curve approximation scale.
 - [#759] Add place label tool.
+- [#771] Improve tool Point at intersection of arc and line.
 
 # Version 0.5.1
 - [#683] Tool Seam allowance's dialog is off screen on small resolutions.
