@@ -40,6 +40,7 @@
 #include "../vgeometry/vpointf.h"
 #include "../vpatterndb/vcontainer.h"
 #include "../visualization.h"
+#include "../vwidgets/scalesceneitems.h"
 #include "vispath.h"
 
 //---------------------------------------------------------------------------------------------------------------------

@@ -54,14 +54,14 @@ public:
     enum { Type = UserType + static_cast<int>(Vis::ToolPointOfContact)};
 private:
     Q_DISABLE_COPY(VisToolPointOfContact)
-    quint32         lineP2Id;
-    quint32         radiusId;
-    VScaledEllipse *point;
-    VScaledEllipse *lineP1;
-    VScaledEllipse *lineP2;
-    VScaledEllipse *arc_point;
-    VScaledEllipse *circle;
-    qreal           radius;
+    quint32               lineP2Id;
+    quint32               radiusId;
+    VScaledEllipse       *point;
+    VScaledEllipse       *lineP1;
+    VScaledEllipse       *lineP2;
+    VScaledEllipse       *arc_point;
+    QGraphicsEllipseItem *circle;
+    qreal                 radius;
 
 };
 

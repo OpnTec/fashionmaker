@@ -192,7 +192,7 @@ qreal Visualization::FindValFromUser(const QString &expression,
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void Visualization::DrawPoint(VScaledEllipse *point, const QPointF &pos, const QColor &color, Qt::PenStyle style)
+void Visualization::DrawPoint(QGraphicsEllipseItem *point, const QPointF &pos, const QColor &color, Qt::PenStyle style)
 {
     SCASSERT (point != nullptr)
 

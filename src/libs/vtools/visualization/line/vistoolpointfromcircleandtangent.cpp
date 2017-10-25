@@ -47,7 +47,7 @@ VisToolPointFromCircleAndTangent::VisToolPointFromCircleAndTangent(const VContai
     : VisLine(data, parent), object2Id(NULL_ID), cRadius(0), crossPoint(CrossCirclesPoint::FirstPoint),
       point(nullptr), tangent(nullptr), cCenter(nullptr), cPath(nullptr), tangent2(nullptr)
 {
-    cPath = InitItem<VScaledEllipse>(Qt::darkGreen, this);
+    cPath = InitItem<QGraphicsEllipseItem>(Qt::darkGreen, this);
     point = InitPoint(mainColor, this);
     tangent = InitPoint(supportColor, this);
     cCenter = InitPoint(supportColor, this); //-V656

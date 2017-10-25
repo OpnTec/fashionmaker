@@ -58,14 +58,14 @@ public:
     enum { Type = UserType + static_cast<int>(Vis::ToolPointFromCircleAndTangent)};
 private:
     Q_DISABLE_COPY(VisToolPointFromCircleAndTangent)
-    quint32            object2Id;
-    qreal              cRadius;
-    CrossCirclesPoint  crossPoint;
-    VScaledEllipse    *point;
-    VScaledEllipse    *tangent;
-    VScaledEllipse    *cCenter;
-    VScaledEllipse    *cPath;
-    VScaledLine       *tangent2;
+    quint32               object2Id;
+    qreal                 cRadius;
+    CrossCirclesPoint     crossPoint;
+    VScaledEllipse       *point;
+    VScaledEllipse       *tangent;
+    VScaledEllipse       *cCenter;
+    QGraphicsEllipseItem *cPath;
+    VScaledLine          *tangent2;
 
     void FindRays(const QPointF &p, const QPointF &center, qreal radius);
 };

@@ -41,6 +41,7 @@
 #include "../vgeometry/vspline.h"
 #include "../vpatterndb/vcontainer.h"
 #include "../vwidgets/vcontrolpointspline.h"
+#include "../vwidgets/scalesceneitems.h"
 #include "../visualization.h"
 #include "vispath.h"
 

@@ -41,6 +41,7 @@
 #include "../vmisc/vabstractapplication.h"
 #include "../vpatterndb/vcontainer.h"
 #include "../vwidgets/vmaingraphicsscene.h"
+#include "../vwidgets/scalesceneitems.h"
 #include "../visualization.h"
 #include "visualization/path/vispath.h"
 

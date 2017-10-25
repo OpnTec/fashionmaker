@@ -94,7 +94,7 @@ protected:
     virtual void AddOnScene()=0;
 
     VScaledEllipse *InitPoint(const QColor &color, QGraphicsItem *parent, qreal z = 0) const;
-    void         DrawPoint(VScaledEllipse *point, const QPointF &pos, const QColor &color,
+    void         DrawPoint(QGraphicsEllipseItem *point, const QPointF &pos, const QColor &color,
                            Qt::PenStyle style = Qt::SolidLine);
     virtual void DrawLine(VScaledLine *lineItem, const QLineF &line, const QColor &color,
                           Qt::PenStyle style = Qt::SolidLine);
