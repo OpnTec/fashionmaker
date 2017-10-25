@@ -195,7 +195,7 @@ protected:
     static bool       IsEkvPointOnLine(const QPointF &iPoint, const QPointF &prevPoint, const QPointF &nextPoint);
     static bool       IsEkvPointOnLine(const VSAPoint &iPoint, const VSAPoint &prevPoint, const VSAPoint &nextPoint);
 
-    QPainterPath PlaceLabelImgPath(const PlaceLabelImg &img) const;
+    static QPainterPath PlaceLabelImgPath(const PlaceLabelImg &img);
 
 private:
     QSharedDataPointer<VAbstractPieceData> d;
