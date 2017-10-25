@@ -135,7 +135,6 @@ void AddPiece::redo()
     else
     {
         qCDebug(vUndo, "Can't find tag %s.", qUtf8Printable(VAbstractPattern::TagDetails));
-        return;
     }
 }
 
