@@ -191,42 +191,6 @@ QString VToolPointFromCircleAndTangent::CircleCenterPointName() const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-quint32 VToolPointFromCircleAndTangent::GetTangentPointId() const
-{
-    return tangentPointId;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void VToolPointFromCircleAndTangent::SetTangentPointId(const quint32 &value)
-{
-    if (value != NULL_ID)
-    {
-        tangentPointId = value;
-
-        QSharedPointer<VGObject> obj = VAbstractTool::data.GetGObject(m_id);
-        SaveOption(obj);
-    }
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-quint32 VToolPointFromCircleAndTangent::GetCircleCenterId() const
-{
-    return circleCenterId;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void VToolPointFromCircleAndTangent::SetCircleCenterId(const quint32 &value)
-{
-    if (value != NULL_ID)
-    {
-        circleCenterId = value;
-
-        QSharedPointer<VGObject> obj = VAbstractTool::data.GetGObject(m_id);
-        SaveOption(obj);
-    }
-}
-
-//---------------------------------------------------------------------------------------------------------------------
 VFormula VToolPointFromCircleAndTangent::GetCircleRadius() const
 {
     VFormula radius(circleRadius, getData());
@@ -296,11 +260,18 @@ void VToolPointFromCircleAndTangent::RemoveReferens()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VToolPointFromCircleAndTangent::SaveDialog(QDomElement &domElement)
+void VToolPointFromCircleAndTangent::SaveDialog(QDomElement &domElement, QList<quint32> &oldDependencies,
+                                                QList<quint32> &newDependencies)
 {
     SCASSERT(not m_dialog.isNull())
     QSharedPointer<DialogPointFromCircleAndTangent> dialogTool = m_dialog.objectCast<DialogPointFromCircleAndTangent>();
     SCASSERT(not dialogTool.isNull())
+
+    AddDependence(oldDependencies, circleCenterId);
+    AddDependence(oldDependencies, tangentPointId);
+    AddDependence(newDependencies, dialogTool->GetTangentPointId());
+    AddDependence(newDependencies, dialogTool->GetCircleCenterId());
+
     doc->SetAttribute(domElement, AttrName, dialogTool->getPointName());
     doc->SetAttribute(domElement, AttrCCenter, QString().setNum(dialogTool->GetCircleCenterId()));
     doc->SetAttribute(domElement, AttrTangent, QString().setNum(dialogTool->GetTangentPointId()));

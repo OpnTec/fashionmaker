@@ -55,8 +55,8 @@
         <rect>
          <x>0</x>
          <y>0</y>
-         <width>127</width>
-         <height>358</height>
+         <width>126</width>
+         <height>351</height>
         </rect>
        </property>
        <property name="sizePolicy">
@@ -402,7 +402,7 @@
          <x>0</x>
          <y>0</y>
          <width>140</width>
-         <height>110</height>
+         <height>108</height>
         </rect>
        </property>
        <property name="sizePolicy">
@@ -511,7 +511,7 @@
          <x>0</x>
          <y>0</y>
          <width>140</width>
-         <height>248</height>
+         <height>243</height>
         </rect>
        </property>
        <property name="sizePolicy">
@@ -773,7 +773,7 @@
          <x>0</x>
          <y>0</y>
          <width>140</width>
-         <height>248</height>
+         <height>243</height>
         </rect>
        </property>
        <property name="sizePolicy">
@@ -1038,7 +1038,7 @@
          <x>0</x>
          <y>0</y>
          <width>140</width>
-         <height>104</height>
+         <height>102</height>
         </rect>
        </property>
        <property name="sizePolicy">
@@ -1121,7 +1121,7 @@
          <x>0</x>
          <y>0</y>
          <width>140</width>
-         <height>328</height>
+         <height>324</height>
         </rect>
        </property>
        <attribute name="icon">
@@ -1325,7 +1325,7 @@
          <x>0</x>
          <y>0</y>
          <width>140</width>
-         <height>196</height>
+         <height>237</height>
         </rect>
        </property>
        <property name="sizePolicy">
@@ -1527,6 +1527,32 @@
           </property>
          </widget>
         </item>
+        <item row="4" column="0">
+         <widget class="QToolButton" name="toolButtonPlaceLabel">
+          <property name="enabled">
+           <bool>false</bool>
+          </property>
+          <property name="toolTip">
+           <string>Place label tool</string>
+          </property>
+          <property name="text">
+           <string notr="true">...</string>
+          </property>
+          <property name="icon">
+           <iconset resource="share/resources/toolicon.qrc">
+            <normaloff>:/toolicon/32x32/place_label.png</normaloff>:/toolicon/32x32/place_label.png</iconset>
+          </property>
+          <property name="iconSize">
+           <size>
+            <width>32</width>
+            <height>32</height>
+           </size>
+          </property>
+          <property name="checkable">
+           <bool>true</bool>
+          </property>
+         </widget>
+        </item>
        </layout>
       </widget>
       <widget class="QWidget" name="layoutPage">
@@ -1535,7 +1561,7 @@
          <x>0</x>
          <y>0</y>
          <width>140</width>
-         <height>328</height>
+         <height>324</height>
         </rect>
        </property>
        <attribute name="icon">
@@ -1635,7 +1661,7 @@
      <x>0</x>
      <y>0</y>
      <width>1100</width>
-     <height>25</height>
+     <height>22</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuFile">
@@ -2737,8 +2763,8 @@
   </customwidget>
  </customwidgets>
  <resources>
-  <include location="../../libs/vmisc/share/resources/icon.qrc"/>
   <include location="share/resources/toolicon.qrc"/>
+  <include location="../../libs/vmisc/share/resources/icon.qrc"/>
  </resources>
  <connections/>
 </ui>

@@ -457,10 +457,10 @@ VSpline DialogSpline::CurrentSpline() const
 
     const QHash<QString, QSharedPointer<VInternalVariable> > *vars = data->DataVariables();
 
-    const qreal angle1 = Visualization::FindVal(angle1F, vars);
-    const qreal angle2 = Visualization::FindVal(angle2F, vars);
-    const qreal length1 = Visualization::FindLength(length1F, vars);
-    const qreal length2 = Visualization::FindLength(length2F, vars);
+    const qreal angle1 = Visualization::FindValFromUser(angle1F, vars);
+    const qreal angle2 = Visualization::FindValFromUser(angle2F, vars);
+    const qreal length1 = Visualization::FindLengthFromUser(length1F, vars);
+    const qreal length2 = Visualization::FindLengthFromUser(length2F, vars);
 
     const bool separator = qApp->Settings()->GetOsSeparator();
 

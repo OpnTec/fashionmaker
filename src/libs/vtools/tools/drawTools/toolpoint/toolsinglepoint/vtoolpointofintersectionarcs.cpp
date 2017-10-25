@@ -239,42 +239,6 @@ QString VToolPointOfIntersectionArcs::SecondArcName() const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-quint32 VToolPointOfIntersectionArcs::GetFirstArcId() const
-{
-    return firstArcId;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void VToolPointOfIntersectionArcs::SetFirstArcId(const quint32 &value)
-{
-    if (value != NULL_ID)
-    {
-        firstArcId = value;
-
-        QSharedPointer<VGObject> obj = VAbstractTool::data.GetGObject(m_id);
-        SaveOption(obj);
-    }
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-quint32 VToolPointOfIntersectionArcs::GetSecondArcId() const
-{
-    return secondArcId;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void VToolPointOfIntersectionArcs::SetSecondArcId(const quint32 &value)
-{
-    if (value != NULL_ID)
-    {
-        secondArcId = value;
-
-        QSharedPointer<VGObject> obj = VAbstractTool::data.GetGObject(m_id);
-        SaveOption(obj);
-    }
-}
-
-//---------------------------------------------------------------------------------------------------------------------
 CrossCirclesPoint VToolPointOfIntersectionArcs::GetCrossCirclesPoint() const
 {
     return crossPoint;
@@ -320,11 +284,18 @@ void VToolPointOfIntersectionArcs::RemoveReferens()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VToolPointOfIntersectionArcs::SaveDialog(QDomElement &domElement)
+void VToolPointOfIntersectionArcs::SaveDialog(QDomElement &domElement, QList<quint32> &oldDependencies,
+                                              QList<quint32> &newDependencies)
 {
     SCASSERT(not m_dialog.isNull())
     QSharedPointer<DialogPointOfIntersectionArcs> dialogTool = m_dialog.objectCast<DialogPointOfIntersectionArcs>();
     SCASSERT(not dialogTool.isNull())
+
+    AddDependence(oldDependencies, firstArcId);
+    AddDependence(oldDependencies, secondArcId);
+    AddDependence(newDependencies, dialogTool->GetFirstArcId());
+    AddDependence(newDependencies, dialogTool->GetSecondArcId());
+
     doc->SetAttribute(domElement, AttrName, dialogTool->getPointName());
     doc->SetAttribute(domElement, AttrFirstArc, QString().setNum(dialogTool->GetFirstArcId()));
     doc->SetAttribute(domElement, AttrSecondArc, QString().setNum(dialogTool->GetSecondArcId()));

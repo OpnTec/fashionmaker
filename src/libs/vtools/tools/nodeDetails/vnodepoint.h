@@ -57,6 +57,8 @@ public:
     enum { Type = UserType + static_cast<int>(Tool::NodePoint)};
     virtual QString getTagName() const Q_DECL_OVERRIDE;
 
+    virtual void ChangeLabelPosition(quint32 id, const QPointF &pos) Q_DECL_OVERRIDE;
+
 signals:
     /**
      * @brief ShowContextMenu emit when need show tool context menu.
@@ -77,7 +79,6 @@ protected:
     virtual void AddToFile() Q_DECL_OVERRIDE;
     virtual void mousePressEvent(QGraphicsSceneMouseEvent *event) Q_DECL_OVERRIDE;
     virtual void mouseReleaseEvent ( QGraphicsSceneMouseEvent * event ) Q_DECL_OVERRIDE;
-    virtual void UpdateNamePosition(qreal mx, qreal my);
     virtual void ShowNode() Q_DECL_OVERRIDE;
     virtual void HideNode() Q_DECL_OVERRIDE;
     virtual void contextMenuEvent(QGraphicsSceneContextMenuEvent *event) Q_DECL_OVERRIDE;

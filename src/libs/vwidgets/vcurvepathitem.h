@@ -50,6 +50,7 @@ public:
 
     void SetDirectionArrows(const QVector<QPair<QLineF, QLineF>> &arrows);
     void SetPoints(const QVector<QPointF> &points);
+    void SetWidth(qreal width);
 protected:
     virtual void ScalePenWidth();
 private:
@@ -57,6 +58,7 @@ private:
 
     QVector<QPair<QLineF, QLineF>> m_directionArrows;
     QVector<QPointF> m_points;
+    qreal m_defaultWidth;
 };
 
 #endif // VCURVEPATHITEM_H

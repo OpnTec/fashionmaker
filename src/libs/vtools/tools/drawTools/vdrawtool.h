@@ -69,7 +69,6 @@ public:
 
     virtual bool IsLabelVisible(quint32 id) const;
     virtual void SetLabelVisible(quint32 id, bool visible);
-    virtual void DoChangePosition(quint32 id, const QPointF &pos);
 
 signals:
     void ChangedToolSelection(bool selected, quint32 object, quint32 tool);
@@ -94,11 +93,13 @@ protected:
     /** @brief typeLine line type. */
     QString      m_lineType;
 
-    void         AddToCalculation(const QDomElement &domElement);
+    void AddToCalculation(const QDomElement &domElement);
+    void AddDependence(QList<quint32> &list, quint32 objectId) const;
 
     /** @brief SaveDialog save options into file after change in dialog. */
-    virtual void    SaveDialog(QDomElement &domElement)=0;
-    virtual void    SaveDialogChange() Q_DECL_FINAL;
+    virtual void    SaveDialog(QDomElement &domElement, QList<quint32> &oldDependencies,
+                               QList<quint32> &newDependencies)=0;
+    virtual void    SaveDialogChange(const QString &undoText = QString()) Q_DECL_FINAL;
     virtual void    AddToFile() Q_DECL_OVERRIDE;
     void            SaveOption(QSharedPointer<VGObject> &obj);
     virtual void    SaveOptions(QDomElement &tag, QSharedPointer<VGObject> &obj);

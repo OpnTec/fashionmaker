@@ -170,6 +170,7 @@ enum class Tool : ToolVisHolderType
     EllipticalArc,
     Pin,
     InsertNode,
+    PlaceLabel,
     LAST_ONE_DO_NOT_USE //add new stuffs above this, this constant must be last and never used
 };
 
@@ -219,13 +220,15 @@ enum class Vis : ToolVisHolderType
     ToolEllipticalArc,
     ToolPiece,
     ToolPiecePath,
-    ToolPin,
-    PiecePins,
+    ToolSpecialPoint,
+    ToolPlaceLabel,
+    PieceSpecialPoints,
     NoBrush,
     CurvePathItem,
     GrainlineItem,
     PieceItem,
     TextGraphicsItem,
+    ScenePoint,
     LAST_ONE_DO_NOT_USE //add new stuffs above this, this constant must be last and never used
 };
 
@@ -478,7 +481,6 @@ struct CustomSARecord
 
 Q_DECLARE_METATYPE(CustomSARecord)
 Q_DECLARE_TYPEINFO(CustomSARecord, Q_MOVABLE_TYPE);
-
 /****************************************************************************
 ** This file is derived from code bearing the following notice:
 ** The sole author of this file, Adam Higerd, has explicitly disclaimed all

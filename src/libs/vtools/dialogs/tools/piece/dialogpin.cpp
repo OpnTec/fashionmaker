@@ -28,9 +28,8 @@
 
 #include "dialogpin.h"
 #include "ui_dialogpin.h"
-#include "visualization/line/vistoolpin.h"
-#include "../../tools/vabstracttool.h"
-#include "../../tools/vtoolseamallowance.h"
+#include "visualization/line/vistoolspecialpoint.h"
+#include "../../../tools/vabstracttool.h"
 
 //---------------------------------------------------------------------------------------------------------------------
 DialogPin::DialogPin(const VContainer *data, quint32 toolId, QWidget *parent)
@@ -52,7 +51,7 @@ DialogPin::DialogPin(const VContainer *data, quint32 toolId, QWidget *parent)
         CheckPieces();
     });
 
-    vis = new VisToolPin(data);
+    vis = new VisToolSpecialPoint(data);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -106,7 +105,7 @@ void DialogPin::SetPointId(quint32 id)
 {
     setCurrentPointId(ui->comboBoxPoint, id);
 
-    VisToolPin *point = qobject_cast<VisToolPin *>(vis);
+    VisToolSpecialPoint *point = qobject_cast<VisToolSpecialPoint *>(vis);
     SCASSERT(point != nullptr)
     point->setObject1Id(id);
 
@@ -148,16 +147,7 @@ void DialogPin::CheckState()
 //---------------------------------------------------------------------------------------------------------------------
 void DialogPin::ShowVisualization()
 {
-    AddVisualization<VisToolPin>();
-
-    if (m_showMode)
-    {
-        VToolSeamAllowance *tool = qobject_cast<VToolSeamAllowance*>(VAbstractPattern::getTool(GetPieceId()));
-        SCASSERT(tool != nullptr);
-        auto visPoint = qobject_cast<VisToolPin *>(vis);
-        SCASSERT(visPoint != nullptr);
-        visPoint->setParentItem(tool);
-    }
+    AddVisualization<VisToolSpecialPoint>();
 }
 
 //---------------------------------------------------------------------------------------------------------------------

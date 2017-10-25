@@ -197,42 +197,6 @@ QString VToolPointOfIntersectionCircles::SecondCircleCenterPointName() const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-quint32 VToolPointOfIntersectionCircles::GetFirstCircleCenterId() const
-{
-    return firstCircleCenterId;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void VToolPointOfIntersectionCircles::SetFirstCircleCenterId(const quint32 &value)
-{
-    if (value != NULL_ID)
-    {
-        firstCircleCenterId = value;
-
-        QSharedPointer<VGObject> obj = VAbstractTool::data.GetGObject(m_id);
-        SaveOption(obj);
-    }
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-quint32 VToolPointOfIntersectionCircles::GetSecondCircleCenterId() const
-{
-    return secondCircleCenterId;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void VToolPointOfIntersectionCircles::SetSecondCircleCenterId(const quint32 &value)
-{
-    if (value != NULL_ID)
-    {
-        secondCircleCenterId = value;
-
-        QSharedPointer<VGObject> obj = VAbstractTool::data.GetGObject(m_id);
-        SaveOption(obj);
-    }
-}
-
-//---------------------------------------------------------------------------------------------------------------------
 VFormula VToolPointOfIntersectionCircles::GetFirstCircleRadius() const
 {
     VFormula radius(firstCircleRadius, getData());
@@ -326,12 +290,19 @@ void VToolPointOfIntersectionCircles::RemoveReferens()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VToolPointOfIntersectionCircles::SaveDialog(QDomElement &domElement)
+void VToolPointOfIntersectionCircles::SaveDialog(QDomElement &domElement, QList<quint32> &oldDependencies,
+                                                 QList<quint32> &newDependencies)
 {
     SCASSERT(not m_dialog.isNull())
     QSharedPointer<DialogPointOfIntersectionCircles> dialogTool =
             m_dialog.objectCast<DialogPointOfIntersectionCircles>();
     SCASSERT(not dialogTool.isNull())
+
+    AddDependence(oldDependencies, firstCircleCenterId);
+    AddDependence(oldDependencies, secondCircleCenterId);
+    AddDependence(newDependencies, dialogTool->GetFirstCircleCenterId());
+    AddDependence(newDependencies, dialogTool->GetSecondCircleCenterId());
+
     doc->SetAttribute(domElement, AttrName, dialogTool->getPointName());
     doc->SetAttribute(domElement, AttrC1Center, QString().setNum(dialogTool->GetFirstCircleCenterId()));
     doc->SetAttribute(domElement, AttrC2Center, QString().setNum(dialogTool->GetSecondCircleCenterId()));

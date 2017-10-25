@@ -54,6 +54,7 @@ public:
           m_customSARecords(),
           m_internalPaths(),
           m_pins(),
+          m_placeLabels(),
           m_ppData(),
           m_piPatternInfo(),
           m_glGrainline(),
@@ -68,6 +69,7 @@ public:
           m_customSARecords(detail.m_customSARecords),
           m_internalPaths(detail.m_internalPaths),
           m_pins(detail.m_pins),
+          m_placeLabels(detail.m_placeLabels),
           m_ppData(detail.m_ppData),
           m_piPatternInfo(detail.m_piPatternInfo),
           m_glGrainline(detail.m_glGrainline),
@@ -85,6 +87,7 @@ public:
     QVector<CustomSARecord> m_customSARecords;
     QVector<quint32>        m_internalPaths;
     QVector<quint32>        m_pins;
+    QVector<quint32>        m_placeLabels;
 
     /** @brief Pattern piece data */
     VPieceLabelData m_ppData;

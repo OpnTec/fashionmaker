@@ -137,7 +137,7 @@ QString VisToolMove::Angle() const
 //---------------------------------------------------------------------------------------------------------------------
 void VisToolMove::SetAngle(const QString &expression)
 {
-    angle = FindVal(expression, Visualization::data->DataVariables());
+    angle = FindValFromUser(expression, Visualization::data->DataVariables());
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -155,7 +155,7 @@ qreal VisToolMove::LengthValue() const
 //---------------------------------------------------------------------------------------------------------------------
 void VisToolMove::SetLength(const QString &expression)
 {
-    length = FindLength(expression, Visualization::data->DataVariables());
+    length = FindLengthFromUser(expression, Visualization::data->DataVariables());
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -224,7 +224,7 @@ QVector<QGraphicsItem *> VisToolMove::CreateOriginObjects(int &iPoint, int &iCur
         const QSharedPointer<VGObject> obj = Visualization::data->GetGObject(id);
 
         // This check helps to find missed objects in the switch
-        Q_STATIC_ASSERT_X(static_cast<int>(GOType::Unknown) == 7, "Not all objects were handled.");
+        Q_STATIC_ASSERT_X(static_cast<int>(GOType::Unknown) == 8, "Not all objects were handled.");
 
         switch(static_cast<GOType>(obj->getType()))
         {
@@ -258,6 +258,8 @@ QVector<QGraphicsItem *> VisToolMove::CreateOriginObjects(int &iPoint, int &iCur
                 originObjects.append(AddOriginCurve<VCubicBezierPath>(id, iCurve));
                 break;
             case GOType::Unknown:
+            case GOType::PlaceLabel:
+                Q_UNREACHABLE();
                 break;
         }
     }
@@ -279,7 +281,7 @@ void VisToolMove::CreateMovedObjects(int &iPoint, int &iCurve, qreal length, qre
         const QSharedPointer<VGObject> obj = Visualization::data->GetGObject(id);
 
         // This check helps to find missed objects in the switch
-        Q_STATIC_ASSERT_X(static_cast<int>(GOType::Unknown) == 7, "Not all objects was handled.");
+        Q_STATIC_ASSERT_X(static_cast<int>(GOType::Unknown) == 8, "Not all objects was handled.");
 
         switch(static_cast<GOType>(obj->getType()))
         {
@@ -311,6 +313,8 @@ void VisToolMove::CreateMovedObjects(int &iPoint, int &iCurve, qreal length, qre
                 iCurve = AddMovedCurve<VCubicBezierPath>(angle, length, id, iCurve);
                 break;
             case GOType::Unknown:
+            case GOType::PlaceLabel:
+                Q_UNREACHABLE();
                 break;
         }
     }

@@ -307,7 +307,7 @@ void DialogSplinePath::Angle1Changed()
         VSplinePoint p = qvariant_cast<VSplinePoint>(item->data(Qt::UserRole));
 
         const QString angle1F = ui->plainTextEditAngle1F->toPlainText().replace("\n", " ");
-        const qreal angle1 = Visualization::FindVal(angle1F, data->DataVariables());
+        const qreal angle1 = Visualization::FindValFromUser(angle1F, data->DataVariables());
         p.SetAngle1(angle1, VTranslateVars::TryFormulaFromUser(angle1F, qApp->Settings()->GetOsSeparator()));
 
         item->setData(Qt::UserRole, QVariant::fromValue(p));
@@ -341,7 +341,7 @@ void DialogSplinePath::Angle2Changed()
         VSplinePoint p = qvariant_cast<VSplinePoint>(item->data(Qt::UserRole));
 
         const QString angle2F = ui->plainTextEditAngle2F->toPlainText().replace("\n", " ");
-        const qreal angle2 = Visualization::FindVal(angle2F, data->DataVariables());
+        const qreal angle2 = Visualization::FindValFromUser(angle2F, data->DataVariables());
         p.SetAngle2(angle2, VTranslateVars::TryFormulaFromUser(angle2F, qApp->Settings()->GetOsSeparator()));
 
         item->setData(Qt::UserRole, QVariant::fromValue(p));
@@ -375,7 +375,7 @@ void DialogSplinePath::Length1Changed()
         VSplinePoint p = qvariant_cast<VSplinePoint>(item->data(Qt::UserRole));
 
         const QString length1F = ui->plainTextEditLength1F->toPlainText().replace("\n", " ");
-        const qreal length1 = Visualization::FindLength(length1F, data->DataVariables());
+        const qreal length1 = Visualization::FindLengthFromUser(length1F, data->DataVariables());
         p.SetLength1(length1, VTranslateVars::TryFormulaFromUser(length1F, qApp->Settings()->GetOsSeparator()));
 
         item->setData(Qt::UserRole, QVariant::fromValue(p));
@@ -400,7 +400,7 @@ void DialogSplinePath::Length2Changed()
         VSplinePoint p = qvariant_cast<VSplinePoint>(item->data(Qt::UserRole));
 
         const QString length2F = ui->plainTextEditLength2F->toPlainText().replace("\n", " ");
-        const qreal length2 = Visualization::FindLength(length2F, data->DataVariables());
+        const qreal length2 = Visualization::FindLengthFromUser(length2F, data->DataVariables());
         p.SetLength2(length2, VTranslateVars::TryFormulaFromUser(length2F, qApp->Settings()->GetOsSeparator()));
 
         item->setData(Qt::UserRole, QVariant::fromValue(p));

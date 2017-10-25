@@ -1,8 +1,8 @@
 /************************************************************************
  **
- **  @file
+ **  @file   dialoginsertnode.h
  **  @author Roman Telezhynskyi <dismine(at)gmail.com>
- **  @date   31 1, 2017
+ **  @date   21 3, 2017
  **
  **  @brief
  **  @copyright
@@ -26,26 +26,48 @@
  **
  *************************************************************************/
 
-#ifndef VISTOOLPIN_H
-#define VISTOOLPIN_H
+#ifndef DIALOGINSERTNODE_H
+#define DIALOGINSERTNODE_H
 
-#include "visline.h"
+#include "../dialogtool.h"
+#include "../vpatterndb/vpiecenode.h"
 
-class VSimplePoint;
+namespace Ui
+{
+    class DialogInsertNode;
+}
 
-class VisToolPin : public VisLine
+class DialogInsertNode : public DialogTool
 {
     Q_OBJECT
-public:
-    explicit VisToolPin(const VContainer *data, QGraphicsItem *parent = nullptr);
-    virtual ~VisToolPin();
 
-    virtual void RefreshGeometry() Q_DECL_OVERRIDE;
-    virtual int  type() const Q_DECL_OVERRIDE {return Type;}
-    enum { Type = UserType + static_cast<int>(Vis::ToolPin)};
+public:
+    explicit DialogInsertNode(const VContainer *data, quint32 toolId, QWidget *parent = nullptr);
+    virtual ~DialogInsertNode();
+
+    virtual void SetPiecesList(const QVector<quint32> &list) Q_DECL_OVERRIDE;
+
+    quint32 GetPieceId() const;
+    void    SetPieceId(quint32 id);
+
+    VPieceNode GetNode() const;
+    void       SetNode(const VPieceNode &node);
+
+public slots:
+    virtual void ChosenObject(quint32 id, const SceneObject &type) Q_DECL_OVERRIDE;
+
+protected:
+    virtual void CheckState() Q_DECL_FINAL;
+
 private:
-    Q_DISABLE_COPY(VisToolPin)
-    QPointer<VSimplePoint> m_point;
+    Q_DISABLE_COPY(DialogInsertNode)
+    Ui::DialogInsertNode *ui;
+
+    VPieceNode m_node;
+    bool m_flagItem;
+
+    void CheckPieces();
+    void CheckItem();
 };
 
-#endif // VISTOOLPIN_H
+#endif // DIALOGINSERTNODE_H

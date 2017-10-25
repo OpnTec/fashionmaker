@@ -313,13 +313,19 @@ void VToolSpline::RemoveReferens()
 /**
  * @brief SaveDialog save options into file after change in dialog.
  */
-void VToolSpline::SaveDialog(QDomElement &domElement)
+void VToolSpline::SaveDialog(QDomElement &domElement, QList<quint32> &oldDependencies, QList<quint32> &newDependencies)
 {
     SCASSERT(not m_dialog.isNull())
     auto dialogTool = qobject_cast<DialogSpline*>(m_dialog);
     SCASSERT(dialogTool != nullptr)
 
+    const auto oldSpl = VAbstractTool::data.GeometricObject<VSpline>(m_id);
+    AddDependence(oldDependencies, oldSpl->GetP1().id());
+    AddDependence(oldDependencies, oldSpl->GetP4().id());
+
     const VSpline spl = dialogTool->GetSpline();
+    AddDependence(newDependencies, spl.GetP1().id());
+    AddDependence(newDependencies, spl.GetP4().id());
 
     controlPoints[0]->blockSignals(true);
     controlPoints[1]->blockSignals(true);

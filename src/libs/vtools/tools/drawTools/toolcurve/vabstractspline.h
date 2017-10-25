@@ -238,4 +238,15 @@ void VAbstractSpline::InitElArcToolConnections(VMainGraphicsScene *scene, T *too
     QObject::connect(scene, &VMainGraphicsScene::EnableElArcItemSelection, tool, &T::AllowSelecting);
 }
 
+class VToolAbstractArc:public VAbstractSpline
+{
+public:
+    VToolAbstractArc(VAbstractPattern *doc, VContainer *data, quint32 id, QGraphicsItem *parent = nullptr);
+    virtual ~VToolAbstractArc() = default;
+
+    QString CenterPointName() const;
+private:
+    Q_DISABLE_COPY(VToolAbstractArc)
+};
+
 #endif // VABSTRACTSPLINE_H

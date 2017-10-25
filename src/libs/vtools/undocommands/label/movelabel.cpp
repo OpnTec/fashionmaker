@@ -37,7 +37,8 @@
 #include "../vmisc/vabstractapplication.h"
 #include "../vundocommand.h"
 #include "moveabstractlabel.h"
-#include "../vtools/tools/drawTools/vdrawtool.h"
+#include "../vtools/tools/vabstracttool.h"
+#include "../vwidgets/vmaingraphicsview.h"
 
 //---------------------------------------------------------------------------------------------------------------------
 MoveLabel::MoveLabel(VAbstractPattern *doc, const QPointF &pos, const quint32 &id, QUndoCommand *parent)
@@ -97,9 +98,9 @@ void MoveLabel::Do(const QPointF &pos)
         doc->SetAttribute(domElement, AttrMx, QString().setNum(qApp->fromPixel(pos.x())));
         doc->SetAttribute(domElement, AttrMy, QString().setNum(qApp->fromPixel(pos.y())));
 
-        if (VDrawTool *tool = qobject_cast<VDrawTool *>(VAbstractPattern::getTool(nodeId)))
+        if (VAbstractTool *tool = qobject_cast<VAbstractTool *>(VAbstractPattern::getTool(nodeId)))
         {
-            tool->DoChangePosition(nodeId, pos);
+            tool->ChangeLabelPosition(nodeId, pos);
         }
         VMainGraphicsView::NewSceneRect(m_scene, qApp->getSceneView());
     }

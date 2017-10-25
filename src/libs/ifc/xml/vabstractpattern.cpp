@@ -124,7 +124,6 @@ const QString VAbstractPattern::AttrStart             = QStringLiteral("start");
 const QString VAbstractPattern::AttrPath              = QStringLiteral("path");
 const QString VAbstractPattern::AttrEnd               = QStringLiteral("end");
 const QString VAbstractPattern::AttrIncludeAs         = QStringLiteral("includeAs");
-const QString VAbstractPattern::AttrWidth             = QStringLiteral("width");
 const QString VAbstractPattern::AttrRotation          = QStringLiteral("rotation");
 const QString VAbstractPattern::AttrNumber            = QStringLiteral("number");
 
@@ -678,7 +677,7 @@ QVector<quint32> VAbstractPattern::ParsePieceInternalPaths(const QDomElement &do
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QVector<quint32> VAbstractPattern::ParsePiecePins(const QDomElement &domElement)
+QVector<quint32> VAbstractPattern::ParsePiecePointRecords(const QDomElement &domElement)
 {
     QVector<quint32> records;
     const QDomNodeList nodeList = domElement.childNodes();
@@ -1772,7 +1771,7 @@ QVector<VFormulaField> VAbstractPattern::ListPointExpressions() const
     // Check if new tool doesn't bring new attribute with a formula.
     // If no just increment a number.
     // If new tool bring absolutely new type and has formula(s) create new method to cover it.
-    Q_STATIC_ASSERT(static_cast<int>(Tool::LAST_ONE_DO_NOT_USE) == 53);
+    Q_STATIC_ASSERT(static_cast<int>(Tool::LAST_ONE_DO_NOT_USE) == 54);
 
     QVector<VFormulaField> expressions;
     const QDomNodeList list = elementsByTagName(TagPoint);
@@ -1787,6 +1786,8 @@ QVector<VFormulaField> VAbstractPattern::ListPointExpressions() const
         ReadExpressionAttribute(expressions, dom, AttrC2Radius);
         ReadExpressionAttribute(expressions, dom, AttrCRadius);
         ReadExpressionAttribute(expressions, dom, AttrRadius);
+        ReadExpressionAttribute(expressions, dom, AttrWidth);
+        ReadExpressionAttribute(expressions, dom, AttrHeight);
     }
 
     return expressions;
@@ -1798,7 +1799,7 @@ QVector<VFormulaField> VAbstractPattern::ListArcExpressions() const
     // Check if new tool doesn't bring new attribute with a formula.
     // If no just increment number.
     // If new tool bring absolutely new type and has formula(s) create new method to cover it.
-    Q_STATIC_ASSERT(static_cast<int>(Tool::LAST_ONE_DO_NOT_USE) == 53);
+    Q_STATIC_ASSERT(static_cast<int>(Tool::LAST_ONE_DO_NOT_USE) == 54);
 
     QVector<VFormulaField> expressions;
     const QDomNodeList list = elementsByTagName(TagArc);
@@ -1822,7 +1823,7 @@ QVector<VFormulaField> VAbstractPattern::ListElArcExpressions() const
     // Check if new tool doesn't bring new attribute with a formula.
     // If no just increment number.
     // If new tool bring absolutely new type and has formula(s) create new method to cover it.
-    Q_STATIC_ASSERT(static_cast<int>(Tool::LAST_ONE_DO_NOT_USE) == 53);
+    Q_STATIC_ASSERT(static_cast<int>(Tool::LAST_ONE_DO_NOT_USE) == 54);
 
     QVector<VFormulaField> expressions;
     const QDomNodeList list = elementsByTagName(TagElArc);
@@ -1855,7 +1856,7 @@ QVector<VFormulaField> VAbstractPattern::ListPathPointExpressions() const
     // Check if new tool doesn't bring new attribute with a formula.
     // If no just increment number.
     // If new tool bring absolutely new type and has formula(s) create new method to cover it.
-    Q_STATIC_ASSERT(static_cast<int>(Tool::LAST_ONE_DO_NOT_USE) == 53);
+    Q_STATIC_ASSERT(static_cast<int>(Tool::LAST_ONE_DO_NOT_USE) == 54);
 
     QVector<VFormulaField> expressions;
     const QDomNodeList list = elementsByTagName(AttrPathPoint);
@@ -1893,7 +1894,7 @@ QVector<VFormulaField> VAbstractPattern::ListOperationExpressions() const
     // Check if new tool doesn't bring new attribute with a formula.
     // If no just increment number.
     // If new tool bring absolutely new type and has formula(s) create new method to cover it.
-    Q_STATIC_ASSERT(static_cast<int>(Tool::LAST_ONE_DO_NOT_USE) == 53);
+    Q_STATIC_ASSERT(static_cast<int>(Tool::LAST_ONE_DO_NOT_USE) == 54);
 
     QVector<VFormulaField> expressions;
     const QDomNodeList list = elementsByTagName(TagOperation);
@@ -1915,7 +1916,7 @@ QVector<VFormulaField> VAbstractPattern::ListNodesExpressions(const QDomElement 
     // Check if new tool doesn't bring new attribute with a formula.
     // If no just increment number.
     // If new tool bring absolutely new type and has formula(s) create new method to cover it.
-    Q_STATIC_ASSERT(static_cast<int>(Tool::LAST_ONE_DO_NOT_USE) == 53);
+    Q_STATIC_ASSERT(static_cast<int>(Tool::LAST_ONE_DO_NOT_USE) == 54);
 
     QVector<VFormulaField> expressions;
 
@@ -1938,7 +1939,7 @@ QVector<VFormulaField> VAbstractPattern::ListPathExpressions() const
     // Check if new tool doesn't bring new attribute with a formula.
     // If no just increment number.
     // If new tool bring absolutely new type and has formula(s) create new method to cover it.
-    Q_STATIC_ASSERT(static_cast<int>(Tool::LAST_ONE_DO_NOT_USE) == 53);
+    Q_STATIC_ASSERT(static_cast<int>(Tool::LAST_ONE_DO_NOT_USE) == 54);
 
     QVector<VFormulaField> expressions;
     const QDomNodeList list = elementsByTagName(TagPath);
@@ -1976,7 +1977,7 @@ QVector<VFormulaField> VAbstractPattern::ListPieceExpressions() const
     // Check if new tool doesn't bring new attribute with a formula.
     // If no just increment number.
     // If new tool bring absolutely new type and has formula(s) create new method to cover it.
-    Q_STATIC_ASSERT(static_cast<int>(Tool::LAST_ONE_DO_NOT_USE) == 53);
+    Q_STATIC_ASSERT(static_cast<int>(Tool::LAST_ONE_DO_NOT_USE) == 54);
 
     QVector<VFormulaField> expressions;
     const QDomNodeList list = elementsByTagName(TagDetail);

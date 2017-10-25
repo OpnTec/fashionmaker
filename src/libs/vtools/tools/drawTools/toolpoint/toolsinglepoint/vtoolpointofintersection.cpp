@@ -189,11 +189,18 @@ void VToolPointOfIntersection::RemoveReferens()
 /**
  * @brief SaveDialog save options into file after change in dialog.
  */
-void VToolPointOfIntersection::SaveDialog(QDomElement &domElement)
+void VToolPointOfIntersection::SaveDialog(QDomElement &domElement, QList<quint32> &oldDependencies,
+                                          QList<quint32> &newDependencies)
 {
     SCASSERT(not m_dialog.isNull())
     QSharedPointer<DialogPointOfIntersection> dialogTool = m_dialog.objectCast<DialogPointOfIntersection>();
     SCASSERT(not dialogTool.isNull())
+
+    AddDependence(oldDependencies, firstPointId);
+    AddDependence(oldDependencies, secondPointId);
+    AddDependence(newDependencies, dialogTool->GetFirstPointId());
+    AddDependence(newDependencies, dialogTool->GetSecondPointId());
+
     doc->SetAttribute(domElement, AttrName, dialogTool->getPointName());
     doc->SetAttribute(domElement, AttrFirstPoint, QString().setNum(dialogTool->GetFirstPointId()));
     doc->SetAttribute(domElement, AttrSecondPoint, QString().setNum(dialogTool->GetSecondPointId()));
@@ -245,43 +252,7 @@ void VToolPointOfIntersection::ShowContextMenu(QGraphicsSceneContextMenuEvent *e
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-quint32 VToolPointOfIntersection::GetSecondPointId() const
-{
-    return secondPointId;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void VToolPointOfIntersection::SetSecondPointId(const quint32 &value)
-{
-    if (value != NULL_ID)
-    {
-        secondPointId = value;
-
-        QSharedPointer<VGObject> obj = VAbstractTool::data.GetGObject(m_id);
-        SaveOption(obj);
-    }
-}
-
-//---------------------------------------------------------------------------------------------------------------------
 void VToolPointOfIntersection::ShowVisualization(bool show)
 {
     ShowToolVisualization<VisToolPointOfIntersection>(show);
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-quint32 VToolPointOfIntersection::GetFirstPointId() const
-{
-    return firstPointId;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void VToolPointOfIntersection::SetFirstPointId(const quint32 &value)
-{
-    if (value != NULL_ID)
-    {
-        firstPointId = value;
-
-        QSharedPointer<VGObject> obj = VAbstractTool::data.GetGObject(m_id);
-        SaveOption(obj);
-    }
 }

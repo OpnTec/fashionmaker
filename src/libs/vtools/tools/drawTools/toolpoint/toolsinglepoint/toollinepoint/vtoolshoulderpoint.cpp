@@ -258,11 +258,20 @@ void VToolShoulderPoint::RemoveReferens()
 /**
  * @brief SaveDialog save options into file after change in dialog.
  */
-void VToolShoulderPoint::SaveDialog(QDomElement &domElement)
+void VToolShoulderPoint::SaveDialog(QDomElement &domElement, QList<quint32> &oldDependencies,
+                                    QList<quint32> &newDependencies)
 {
     SCASSERT(not m_dialog.isNull())
     QSharedPointer<DialogShoulderPoint> dialogTool = m_dialog.objectCast<DialogShoulderPoint>();
     SCASSERT(not dialogTool.isNull())
+
+    AddDependence(oldDependencies, basePointId);
+    AddDependence(oldDependencies, p2Line);
+    AddDependence(oldDependencies, pShoulder);
+    AddDependence(newDependencies, dialogTool->GetP1Line());
+    AddDependence(newDependencies, dialogTool->GetP2Line());
+    AddDependence(newDependencies, dialogTool->GetP3());
+
     doc->SetAttribute(domElement, AttrName, dialogTool->getPointName());
     doc->SetAttribute(domElement, AttrTypeLine, dialogTool->GetTypeLine());
     doc->SetAttribute(domElement, AttrLineColor, dialogTool->GetLineColor());
@@ -355,45 +364,7 @@ void VToolShoulderPoint::ShowContextMenu(QGraphicsSceneContextMenuEvent *event, 
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-// cppcheck-suppress unusedFunction
-quint32 VToolShoulderPoint::getPShoulder() const
-{
-    return pShoulder;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-// cppcheck-suppress unusedFunction
-void VToolShoulderPoint::setPShoulder(const quint32 &value)
-{
-    if (value != NULL_ID)
-    {
-        pShoulder = value;
-
-        QSharedPointer<VGObject> obj = VAbstractTool::data.GetGObject(m_id);
-        SaveOption(obj);
-    }
-}
-
-//---------------------------------------------------------------------------------------------------------------------
 void VToolShoulderPoint::ShowVisualization(bool show)
 {
     ShowToolVisualization<VisToolShoulderPoint>(show);
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-quint32 VToolShoulderPoint::GetP2Line() const
-{
-    return p2Line;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void VToolShoulderPoint::SetP2Line(const quint32 &value)
-{
-    if (value != NULL_ID)
-    {
-        p2Line = value;
-
-        QSharedPointer<VGObject> obj = VAbstractTool::data.GetGObject(m_id);
-        SaveOption(obj);
-    }
 }

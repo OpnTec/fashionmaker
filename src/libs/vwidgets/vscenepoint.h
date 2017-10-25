@@ -32,6 +32,8 @@
 #include <QtGlobal>
 #include <QGraphicsEllipseItem>
 
+#include "../vmisc/def.h"
+
 class VGraphicsSimpleTextItem;
 class VPointF;
 class VScaledLine;
@@ -42,9 +44,14 @@ public:
     explicit VScenePoint(QGraphicsItem *parent = nullptr);
     virtual ~VScenePoint() = default;
 
+    virtual int  type() const Q_DECL_OVERRIDE {return Type;}
+    enum { Type = UserType + static_cast<int>(Vis::ScenePoint)};
+
     virtual void paint(QPainter *painter, const QStyleOptionGraphicsItem *option,
                        QWidget *widget = nullptr) Q_DECL_OVERRIDE;
     virtual void RefreshPointGeometry(const VPointF &point);
+
+    void RefreshLine();
 
 protected:
     /** @brief namePoint point label. */
@@ -62,8 +69,6 @@ protected:
 
     virtual void hoverEnterEvent(QGraphicsSceneHoverEvent *event) Q_DECL_OVERRIDE;
     virtual void hoverLeaveEvent(QGraphicsSceneHoverEvent *event) Q_DECL_OVERRIDE;
-
-    void RefreshLine();
 
     void SetOnlyPoint(bool value);
     bool IsOnlyPoint() const;

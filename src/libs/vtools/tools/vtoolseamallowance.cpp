@@ -65,17 +65,16 @@
 // Current version of seam allowance tag need for backward compatibility
 const quint8 VToolSeamAllowance::pieceVersion = 2;
 
-const QString VToolSeamAllowance::TagCSA     = QStringLiteral("csa");
-const QString VToolSeamAllowance::TagRecord  = QStringLiteral("record");
-const QString VToolSeamAllowance::TagIPaths  = QStringLiteral("iPaths");
-const QString VToolSeamAllowance::TagPins    = QStringLiteral("pins");
+const QString VToolSeamAllowance::TagCSA         = QStringLiteral("csa");
+const QString VToolSeamAllowance::TagRecord      = QStringLiteral("record");
+const QString VToolSeamAllowance::TagIPaths      = QStringLiteral("iPaths");
+const QString VToolSeamAllowance::TagPins        = QStringLiteral("pins");
+const QString VToolSeamAllowance::TagPlaceLabels = QStringLiteral("placeLabels");
 
-const QString VToolSeamAllowance::AttrVersion              = QStringLiteral("version");
 const QString VToolSeamAllowance::AttrForbidFlipping       = QStringLiteral("forbidFlipping");
 const QString VToolSeamAllowance::AttrSeamAllowance        = QStringLiteral("seamAllowance");
 const QString VToolSeamAllowance::AttrHideMainPath         = QStringLiteral("hideMainPath");
 const QString VToolSeamAllowance::AttrSeamAllowanceBuiltIn = QStringLiteral("seamAllowanceBuiltIn");
-const QString VToolSeamAllowance::AttrHeight               = QStringLiteral("height");
 const QString VToolSeamAllowance::AttrUnited               = QStringLiteral("united");
 const QString VToolSeamAllowance::AttrFont                 = QStringLiteral("fontSize");
 const QString VToolSeamAllowance::AttrTopLeftPin           = QStringLiteral("topLeftPin");
@@ -232,7 +231,7 @@ void VToolSeamAllowance::AddAttributes(VAbstractPattern *doc, QDomElement &domEl
         domElement.removeAttribute(AttrSeamAllowanceBuiltIn);
     }
 
-    doc->SetAttribute(domElement, VAbstractPattern::AttrWidth, piece.GetFormulaSAWidth());
+    doc->SetAttribute(domElement, AttrWidth, piece.GetFormulaSAWidth());
     doc->SetAttribute(domElement, AttrUnited, piece.IsUnited());
 }
 
@@ -284,17 +283,14 @@ void VToolSeamAllowance::AddInternalPaths(VAbstractPattern *doc, QDomElement &do
 //---------------------------------------------------------------------------------------------------------------------
 void VToolSeamAllowance::AddPins(VAbstractPattern *doc, QDomElement &domElement, const QVector<quint32> &pins)
 {
-    if (pins.size() > 0)
-    {
-        QDomElement pinsElement = doc->createElement(VToolSeamAllowance::TagPins);
-        for (int i = 0; i < pins.size(); ++i)
-        {
-            QDomElement recordNode = doc->createElement(VToolSeamAllowance::TagRecord);
-            recordNode.appendChild(doc->createTextNode(QString().setNum(pins.at(i))));
-            pinsElement.appendChild(recordNode);
-        }
-        domElement.appendChild(pinsElement);
-    }
+    AddPointRecords(doc, domElement, pins, VToolSeamAllowance::TagPins);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VToolSeamAllowance::AddPlaceLabels(VAbstractPattern *doc, QDomElement &domElement,
+                                        const QVector<quint32> &placeLabels)
+{
+    AddPointRecords(doc, domElement, placeLabels, VToolSeamAllowance::TagPlaceLabels);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -313,7 +309,7 @@ void VToolSeamAllowance::AddPatternPieceData(VAbstractPattern *doc, QDomElement 
     doc->SetAttribute(domData, VAbstractPattern::AttrOnFold, data.IsOnFold());
     doc->SetAttribute(domData, AttrMx, data.GetPos().x());
     doc->SetAttribute(domData, AttrMy, data.GetPos().y());
-    doc->SetAttribute(domData, VAbstractPattern::AttrWidth, data.GetLabelWidth());
+    doc->SetAttribute(domData, AttrWidth, data.GetLabelWidth());
     doc->SetAttribute(domData, AttrHeight, data.GetLabelHeight());
     doc->SetAttribute(domData, AttrFont, data.GetFontSize());
     doc->SetAttribute(domData, VAbstractPattern::AttrRotation, data.GetRotation());
@@ -358,7 +354,7 @@ void VToolSeamAllowance::AddPatternInfo(VAbstractPattern *doc, QDomElement &domE
     doc->SetAttribute(domData, VAbstractPattern::AttrVisible, geom.IsVisible());
     doc->SetAttribute(domData, AttrMx, geom.GetPos().x());
     doc->SetAttribute(domData, AttrMy, geom.GetPos().y());
-    doc->SetAttribute(domData, VAbstractPattern::AttrWidth, geom.GetLabelWidth());
+    doc->SetAttribute(domData, AttrWidth, geom.GetLabelWidth());
     doc->SetAttribute(domData, AttrHeight, geom.GetLabelHeight());
     doc->SetAttribute(domData, AttrFont, geom.GetFontSize());
     doc->SetAttribute(domData, VAbstractPattern::AttrRotation, geom.GetRotation());
@@ -514,7 +510,8 @@ void VToolSeamAllowance::ReinitInternals(const VPiece &detail, VMainGraphicsScen
     InitNodes(detail, scene);
     InitCSAPaths(detail);
     InitInternalPaths(detail);
-    InitPins(detail);
+    InitSpecialPoints(detail.GetPins());
+    InitSpecialPoints(detail.GetPlaceLabels());
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -865,6 +862,7 @@ void VToolSeamAllowance::paint(QPainter *painter, const QStyleOptionGraphicsItem
     setPen(toolPen);
     m_seamAllowance->setPen(toolPen);
     m_passmarks->setPen(toolPen);
+    m_placeLabels->setPen(toolPen);
 
     if ((m_dataLabel->IsIdle() == false
             || m_patternInfo->IsIdle() == false
@@ -902,6 +900,12 @@ QPainterPath VToolSeamAllowance::shape() const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void VToolSeamAllowance::FullUpdateFromGuiApply()
+{
+    SaveDialogChange(tr("apply save detail options"));
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 void VToolSeamAllowance::AddToFile()
 {
     const VPiece piece = VAbstractTool::data.GetPiece(m_id);
@@ -919,6 +923,7 @@ void VToolSeamAllowance::AddToFile()
     AddCSARecords(doc, domElement, piece.GetCustomSARecords());
     AddInternalPaths(doc, domElement, piece.GetInternalPaths());
     AddPins(doc, domElement, piece.GetPins());
+    AddPlaceLabels(doc, domElement, piece.GetPlaceLabels());
 
     qApp->getUndoStack()->push(new AddPiece(domElement, doc, VAbstractTool::data, m_sceneDetails, m_drawName));
 }
@@ -935,7 +940,7 @@ void VToolSeamAllowance::RefreshDataInFile()
             Q_STATIC_ASSERT_X(VPatternConverter::PatternMinVer < CONVERTER_VERSION_CHECK(0, 4, 0),
                               "Time to refactor the code.");
 
-            const uint version = doc->GetParametrUInt(domElement, VToolSeamAllowance::AttrVersion, "1");
+            const uint version = doc->GetParametrUInt(domElement, AttrVersion, "1");
             if (version == 1)
             {
                 const VPiece piece = VAbstractTool::data.GetPiece(m_id);
@@ -1058,7 +1063,7 @@ void VToolSeamAllowance::mousePressEvent(QGraphicsSceneMouseEvent *event)
 //---------------------------------------------------------------------------------------------------------------------
 void VToolSeamAllowance::mouseReleaseEvent(QGraphicsSceneMouseEvent *event)
 {
-    if (event->button() == Qt::LeftButton)
+    if (event->button() == Qt::LeftButton && (flags() & QGraphicsItem::ItemIsMovable))
     {
         SetItemOverrideCursor(this, cursorArrowOpenHand, 1, 1);
     }
@@ -1071,6 +1076,16 @@ void VToolSeamAllowance::hoverEnterEvent(QGraphicsSceneHoverEvent *event)
     if (flags() & QGraphicsItem::ItemIsMovable)
     {
         SetItemOverrideCursor(this, cursorArrowOpenHand, 1, 1);
+    }
+    else
+    {
+        if (QGraphicsScene *scene = this->scene())
+        {
+            if (QGraphicsView *view = scene->views().at(0))
+            {
+                setCursor(view->viewport()->cursor());
+            }
+        }
     }
     QGraphicsPathItem::hoverEnterEvent(event);
 }
@@ -1203,7 +1218,8 @@ VToolSeamAllowance::VToolSeamAllowance(const VToolSeamAllowanceInitData &initDat
       m_dataLabel(new VTextGraphicsItem(this)),
       m_patternInfo(new VTextGraphicsItem(this)),
       m_grainLine(new VGrainlineItem(this)),
-      m_passmarks(new QGraphicsPathItem(this))
+      m_passmarks(new QGraphicsPathItem(this)),
+      m_placeLabels(new QGraphicsPathItem(this))
 {
     VPiece detail = initData.data->GetPiece(initData.id);
     ReinitInternals(detail, m_sceneDetails);
@@ -1220,10 +1236,6 @@ VToolSeamAllowance::VToolSeamAllowance(const VToolSeamAllowanceInitData &initDat
     connect(this, &VToolSeamAllowance::ChoosedTool, m_sceneDetails, &VMainGraphicsScene::ChoosedItem);
 
     ConnectOutsideSignals();
-
-    UpdateDetailLabel();
-    UpdatePatternInfo();
-    UpdateGrainline();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -1291,6 +1303,8 @@ void VToolSeamAllowance::RefreshGeometry()
         m_seamAllowance->setPath(QPainterPath());
     }
 
+    m_placeLabels->setPath(detail.PlaceLabelPath(this->getData()));
+
     UpdateDetailLabel();
     UpdatePatternInfo();
     UpdateGrainline();
@@ -1299,7 +1313,7 @@ void VToolSeamAllowance::RefreshGeometry()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VToolSeamAllowance::SaveDialogChange()
+void VToolSeamAllowance::SaveDialogChange(const QString &undoText)
 {
     SCASSERT(not m_dialog.isNull());
     DialogSeamAllowance *dialogTool = qobject_cast<DialogSeamAllowance*>(m_dialog.data());
@@ -1307,8 +1321,28 @@ void VToolSeamAllowance::SaveDialogChange()
     const VPiece newDet = dialogTool->GetPiece();
     const VPiece oldDet = VAbstractTool::data.GetPiece(m_id);
 
-    qApp->getUndoStack()->push(new SavePieceOptions(oldDet, newDet, doc, m_id));
-    UpdateDetailLabel();
+    QVector<QUndoCommand*> &undocommands = dialogTool->UndoStack();
+    const bool groupChange = not undocommands.isEmpty();
+
+    SavePieceOptions *saveCommand = new SavePieceOptions(oldDet, newDet, doc, m_id);
+
+    if (groupChange)
+    {
+        qApp->getUndoStack()->beginMacro(undoText.isEmpty() ? saveCommand->text(): undoText);
+
+        foreach (QUndoCommand* command, undocommands)
+        {
+            qApp->getUndoStack()->push(command);
+        }
+        undocommands.clear();
+    }
+
+    qApp->getUndoStack()->push(saveCommand);
+
+    if (groupChange)
+    {
+        qApp->getUndoStack()->endMacro();
+    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -1549,7 +1583,7 @@ void VToolSeamAllowance::InitNode(const VPieceNode &node, VMainGraphicsScene *sc
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VToolSeamAllowance::InitCSAPaths(const VPiece &detail)
+void VToolSeamAllowance::InitCSAPaths(const VPiece &detail) const
 {
     for (int i = 0; i < detail.GetCustomSARecords().size(); ++i)
     {
@@ -1576,11 +1610,11 @@ void VToolSeamAllowance::InitInternalPaths(const VPiece &detail)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VToolSeamAllowance::InitPins(const VPiece &detail)
+void VToolSeamAllowance::InitSpecialPoints(const QVector<quint32> &points) const
 {
-    for (int i = 0; i < detail.GetPins().size(); ++i)
+    for (int i = 0; i < points.size(); ++i)
     {
-        doc->IncrementReferens(detail.GetPins().at(i));
+        doc->IncrementReferens(points.at(i));
     }
 }
 
@@ -1689,4 +1723,21 @@ QList<VToolSeamAllowance *> VToolSeamAllowance::SelectedTools() const
     }
 
     return tools;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VToolSeamAllowance::AddPointRecords(VAbstractPattern *doc, QDomElement &domElement,
+                                         const QVector<quint32> &records, const QString &tag)
+{
+    if (records.size() > 0)
+    {
+        QDomElement pinsElement = doc->createElement(tag);
+        for (int i = 0; i < records.size(); ++i)
+        {
+            QDomElement recordNode = doc->createElement(VToolSeamAllowance::TagRecord);
+            recordNode.appendChild(doc->createTextNode(QString().setNum(records.at(i))));
+            pinsElement.appendChild(recordNode);
+        }
+        domElement.appendChild(pinsElement);
+    }
 }

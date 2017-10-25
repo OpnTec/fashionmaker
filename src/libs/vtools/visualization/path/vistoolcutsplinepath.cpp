@@ -91,5 +91,5 @@ void VisToolCutSplinePath::RefreshGeometry()
 //---------------------------------------------------------------------------------------------------------------------
 void VisToolCutSplinePath::setLength(const QString &expression)
 {
-    length = FindLength(expression, Visualization::data->DataVariables());
+    length = FindLengthFromUser(expression, Visualization::data->DataVariables());
 }

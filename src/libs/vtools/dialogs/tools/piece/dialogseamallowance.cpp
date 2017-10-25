@@ -33,23 +33,27 @@
 #include "ui_tabgrainline.h"
 #include "ui_tabpins.h"
 #include "ui_tabpassmarks.h"
+#include "ui_tabplacelabels.h"
 #include "../vwidgets/fancytabbar/fancytabbar.h"
 #include "../vpatterndb/vpiecenode.h"
 #include "../vpatterndb/vpiecepath.h"
 #include "../vpatterndb/calculator.h"
 #include "visualization/path/vistoolpiece.h"
-#include "visualization/path/vispiecepins.h"
+#include "visualization/path/vispiecespecialpoints.h"
 #include "dialogpiecepath.h"
+#include "dialogplacelabel.h"
 #include "../../../undocommands/savepiecepathoptions.h"
+#include "../../../undocommands/saveplacelabeloptions.h"
 #include "../../support/dialogeditwrongformula.h"
 #include "../../support/dialogeditlabel.h"
 #include "../../../tools/vtoolseamallowance.h"
+#include "../vgeometry/vplacelabelitem.h"
 
 #include <QMenu>
 #include <QTimer>
 #include <QtNumeric>
 
-enum TabOrder {Paths=0, Pins=1, Labels=2, Grainline=3,  Passmarks=4, Count=5};
+enum TabOrder {Paths=0, Pins=1, Labels=2, Grainline=3,  Passmarks=4, PlaceLabels=5, Count=6};
 
 namespace
 {
@@ -84,11 +88,13 @@ DialogSeamAllowance::DialogSeamAllowance(const VContainer *data, const quint32 &
       uiTabGrainline(new Ui::TabGrainline),
       uiTabPins(new Ui::TabPins),
       uiTabPassmarks(new Ui::TabPassmarks),
+      uiTabPlaceLabels(new Ui::TabPlaceLabels),
       m_tabPaths(new QWidget),
       m_tabLabels(new QWidget),
       m_tabGrainline(new QWidget),
       m_tabPins(new QWidget),
       m_tabPassmarks(new QWidget),
+      m_tabPlaceLabels(new QWidget),
       m_ftb(new FancyTabBar(FancyTabBar::Left, this)),
       applyAllowed(false),// By default disabled
       flagGPin(true),
@@ -103,7 +109,7 @@ DialogSeamAllowance::DialogSeamAllowance(const VContainer *data, const quint32 &
       m_mx(0),
       m_my(0),
       m_dialog(),
-      m_visPins(),
+      m_visSpecialPoints(),
       m_oldData(),
       m_oldGeom(),
       m_oldGrainline(),
@@ -122,7 +128,10 @@ DialogSeamAllowance::DialogSeamAllowance(const VContainer *data, const quint32 &
       m_timerWidthBefore(nullptr),
       m_timerWidthAfter(nullptr),
       m_saWidth(0),
-      m_templateLines()
+      m_templateLines(),
+      m_undoStack(),
+      m_newPlaceLabels(),
+      m_newPaths()
 {
     ui->setupUi(this);
 
@@ -138,6 +147,7 @@ DialogSeamAllowance::DialogSeamAllowance(const VContainer *data, const quint32 &
     InitGrainlineTab();
     InitPinsTab();
     InitPassmarksTab();
+    InitPlaceLabelsTab();
 
     flagName = true;//We have default name of piece.
     ChangeColor(uiTabLabels->labelEditName, okColor);
@@ -155,7 +165,8 @@ DialogSeamAllowance::DialogSeamAllowance(const VContainer *data, const quint32 &
 //---------------------------------------------------------------------------------------------------------------------
 DialogSeamAllowance::~DialogSeamAllowance()
 {
-    delete m_visPins;
+    delete m_visSpecialPoints;
+    delete m_tabPlaceLabels;
     delete m_tabPassmarks;
     delete m_tabPins;
     delete m_tabGrainline;
@@ -182,6 +193,7 @@ void DialogSeamAllowance::EnableApply(bool enable)
     m_ftb->SetTabEnabled(TabOrder::Labels, applyAllowed);
     m_ftb->SetTabEnabled(TabOrder::Grainline, applyAllowed);
     m_ftb->SetTabEnabled(TabOrder::Passmarks, applyAllowed);
+    m_ftb->SetTabEnabled(TabOrder::PlaceLabels, applyAllowed);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -204,23 +216,75 @@ void DialogSeamAllowance::SetPiece(const VPiece &piece)
     uiTabPaths->listWidgetCustomSA->clear();
     for (int i = 0; i < piece.GetCustomSARecords().size(); ++i)
     {
-        NewCustomSA(piece.GetCustomSARecords().at(i));
+        const CustomSARecord &record = piece.GetCustomSARecords().at(i);
+        if (record.path > NULL_ID)
+        {
+            const QString name = GetPathName(record.path, record.reverse);
+
+            QListWidgetItem *item = new QListWidgetItem(name);
+            item->setFont(QFont("Times", 12, QFont::Bold));
+            item->setData(Qt::UserRole, QVariant::fromValue(record));
+            uiTabPaths->listWidgetCustomSA->addItem(item);
+            uiTabPaths->listWidgetCustomSA->setCurrentRow(uiTabPaths->listWidgetCustomSA->count()-1);
+        }
     }
     uiTabPaths->listWidgetCustomSA->blockSignals(false);
 
     uiTabPaths->listWidgetInternalPaths->clear();
     for (int i = 0; i < piece.GetInternalPaths().size(); ++i)
     {
-        NewInternalPath(piece.GetInternalPaths().at(i));
+        const quint32 path = piece.GetInternalPaths().at(i);
+        if (path > NULL_ID)
+        {
+            const QString name = GetPathName(path);
+
+            QListWidgetItem *item = new QListWidgetItem(name);
+            item->setFont(QFont("Times", 12, QFont::Bold));
+            item->setData(Qt::UserRole, QVariant::fromValue(path));
+            uiTabPaths->listWidgetInternalPaths->addItem(item);
+            uiTabPaths->listWidgetInternalPaths->setCurrentRow(uiTabPaths->listWidgetInternalPaths->count()-1);
+        }
     }
+
+    auto NewSpecialPoint = [this](QListWidget *listWidget, quint32 point)
+    {
+        if (point > NULL_ID)
+        {
+            try
+            {
+                const QSharedPointer<VGObject> p = data->GetGObject(point);
+
+                QListWidgetItem *item = new QListWidgetItem(p->name());
+                item->setFont(QFont("Times", 12, QFont::Bold));
+                item->setData(Qt::UserRole, QVariant::fromValue(point));
+                listWidget->addItem(item);
+                listWidget->setCurrentRow(uiTabPins->listWidgetPins->count()-1);
+            }
+            catch (const VExceptionBadId &e)
+            {
+                qWarning() << qUtf8Printable(e.ErrorMessage());
+            }
+        }
+    };
 
     uiTabPins->listWidgetPins->clear();
     for (int i = 0; i < piece.GetPins().size(); ++i)
     {
-        NewPin(piece.GetPins().at(i));
+        NewSpecialPoint(uiTabPins->listWidgetPins, piece.GetPins().at(i));
     }
 
     InitAllPinComboboxes();
+
+    uiTabPlaceLabels->listWidgetPlaceLabels->clear();
+    for (int i = 0; i < piece.GetPlaceLabels().size(); ++i)
+    {
+        NewSpecialPoint(uiTabPlaceLabels->listWidgetPlaceLabels, piece.GetPlaceLabels().at(i));
+    }
+
+    if (piece.GetPlaceLabels().size() > 0)
+    {
+        uiTabPlaceLabels->listWidgetPlaceLabels->setCurrentRow(0);
+    }
 
     uiTabPaths->comboBoxStartPoint->blockSignals(true);
     uiTabPaths->comboBoxStartPoint->clear();
@@ -469,7 +533,8 @@ void DialogSeamAllowance::NameDetailChanged()
             flagName = false;
             ChangeColor(uiTabLabels->labelEditName, Qt::red);
             m_ftb->SetTabText(TabOrder::Labels, tr("Labels") + QLatin1String("*"));
-            QIcon icon(":/icons/win.icon.theme/16x16/status/dialog-warning.png");
+            const QIcon icon = QIcon::fromTheme("dialog-warning",
+                                                QIcon(":/icons/win.icon.theme/16x16/status/dialog-warning.png"));
             uiTabLabels->tabWidget->setTabIcon(uiTabLabels->tabWidget->indexOf(uiTabLabels->tabPieceLabelData), icon);
         }
         else
@@ -585,7 +650,7 @@ void DialogSeamAllowance::ShowCustomSAContextMenu(const QPoint &pos)
     else if (selectedAction == actionOption)
     {
         auto *dialog = new DialogPiecePath(data, record.path, this);
-        dialog->SetPiecePath(data->GetPiecePath(record.path));
+        dialog->SetPiecePath(CurrentPath(record.path));
         dialog->SetPieceId(toolId);
         if (record.includeType == PiecePathIncludeType::AsMainPath)
         {
@@ -625,7 +690,7 @@ void DialogSeamAllowance::ShowInternalPathsContextMenu(const QPoint &pos)
         const quint32 pathId = qvariant_cast<quint32>(rowItem->data(Qt::UserRole));
 
         auto *dialog = new DialogPiecePath(data, pathId, this);
-        dialog->SetPiecePath(data->GetPiecePath(pathId));
+        dialog->SetPiecePath(CurrentPath(pathId));
         dialog->SetPieceId(toolId);
         dialog->EnbleShowMode(true);
         m_dialog = dialog;
@@ -653,6 +718,118 @@ void DialogSeamAllowance::ShowPinsContextMenu(const QPoint &pos)
         delete uiTabPins->listWidgetPins->item(row);
         FancyTabChanged(m_ftb->CurrentIndex());
         InitAllPinComboboxes();
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogSeamAllowance::ShowPlaceLabelsContextMenu(const QPoint &pos)
+{
+    const int row = uiTabPlaceLabels->listWidgetPlaceLabels->currentRow();
+    if (uiTabPlaceLabels->listWidgetPlaceLabels->count() == 0
+            || row == -1
+            || row >= uiTabPlaceLabels->listWidgetPlaceLabels->count())
+    {
+        return;
+    }
+
+    QListWidgetItem *rowItem = uiTabPlaceLabels->listWidgetPlaceLabels->item(row);
+    SCASSERT(rowItem != nullptr);
+    const quint32 labelId = qvariant_cast<quint32>(rowItem->data(Qt::UserRole));
+    VPlaceLabelItem currentLabel = CurrentPlaceLabel(labelId);
+
+    QScopedPointer<QMenu> menu(new QMenu());
+
+    auto InitAction = [currentLabel, &menu](const QString &text, PlaceLabelType type)
+    {
+        QAction *action = menu->addAction(text);
+        action->setCheckable(true);
+        action->setChecked(currentLabel.GetLabelType() == type);
+        return action;
+    };
+
+    auto SaveType = [this, currentLabel, labelId](PlaceLabelType type)
+    {
+        VPlaceLabelItem newLabel = VPlaceLabelItem(currentLabel);
+        newLabel.SetLabelType(type);
+        m_newPlaceLabels.insert(labelId, newLabel);
+
+        SavePlaceLabelOptions *saveCommand = new SavePlaceLabelOptions(toolId, currentLabel, newLabel,
+                                                                       qApp->getCurrentDocument(),
+                                                                       const_cast<VContainer *>(data), labelId);
+        m_undoStack.append(saveCommand);
+        UpdateCurrentPlaceLabelRecords();
+    };
+
+    QAction *actionOption = menu->addAction(QIcon::fromTheme("preferences-other"), tr("Options"));
+    menu->addSeparator();
+    QAction *actionSegment = InitAction(tr("Segment"), PlaceLabelType::Segment);
+    QAction *actionRectangle = InitAction(tr("Rectangle"), PlaceLabelType::Rectangle);
+    QAction *actionCross = InitAction(tr("Cross"), PlaceLabelType::Cross);
+    QAction *actionTshaped = InitAction(tr("T-shaped"), PlaceLabelType::Tshaped);
+    QAction *actionDoubletree = InitAction(tr("Doubletree"), PlaceLabelType::Doubletree);
+    QAction *actionCorner = InitAction(tr("Corner"), PlaceLabelType::Corner);
+    QAction *actionTriangle = InitAction(tr("Triangle"), PlaceLabelType::Triangle);
+    QAction *actionHshaped = InitAction(tr("H-shaped"), PlaceLabelType::Hshaped);
+    QAction *actionButton = InitAction(tr("Button"), PlaceLabelType::Button);
+    menu->addSeparator();
+    QAction *actionDelete = menu->addAction(QIcon::fromTheme("edit-delete"), tr("Delete"));
+
+    QAction *selectedAction = menu->exec(uiTabPlaceLabels->listWidgetPlaceLabels->viewport()->mapToGlobal(pos));
+    if (selectedAction == actionDelete)
+    {
+        delete uiTabPlaceLabels->listWidgetPlaceLabels->item(row);
+        FancyTabChanged(m_ftb->CurrentIndex());
+    }
+    else if (selectedAction == actionOption)
+    {
+        auto *dialog = new DialogPlaceLabel(data, labelId, this);
+        dialog->SetCenterPoint(labelId);
+        dialog->SetLabelType(currentLabel.GetLabelType());
+        dialog->SetWidth(currentLabel.GetWidthFormula());
+        dialog->SetHeight(currentLabel.GetHeightFormula());
+        dialog->SetAngle(currentLabel.GetAngleFormula());
+        dialog->SetPieceId(toolId);
+        dialog->EnbleShowMode(true);
+        m_dialog = dialog;
+        m_dialog->setModal(true);
+        connect(m_dialog.data(), &DialogTool::DialogClosed, this, &DialogSeamAllowance::PlaceLabelDialogClosed);
+        m_dialog->show();
+    }
+    else if (selectedAction == actionSegment)
+    {
+        SaveType(PlaceLabelType::Segment);
+    }
+    else if (selectedAction == actionRectangle)
+    {
+        SaveType(PlaceLabelType::Rectangle);
+    }
+    else if (selectedAction == actionCross)
+    {
+        SaveType(PlaceLabelType::Cross);
+    }
+    else if (selectedAction == actionTshaped)
+    {
+        SaveType(PlaceLabelType::Tshaped);
+    }
+    else if (selectedAction == actionDoubletree)
+    {
+        SaveType(PlaceLabelType::Doubletree);
+    }
+    else if (selectedAction == actionCorner)
+    {
+        SaveType(PlaceLabelType::Corner);
+    }
+    else if (selectedAction == actionTriangle)
+    {
+        SaveType(PlaceLabelType::Triangle);
+    }
+    else if (selectedAction == actionHshaped)
+    {
+        SaveType(PlaceLabelType::Hshaped);
+    }
+    else if (selectedAction == actionButton)
+    {
+        SaveType(PlaceLabelType::Button);
     }
 }
 
@@ -1009,15 +1186,67 @@ void DialogSeamAllowance::PathDialogClosed(int result)
         SCASSERT(dialogTool != nullptr);
         try
         {
-            const VPiecePath newPath = dialogTool->GetPiecePath();
-            const VPiecePath oldPath = data->GetPiecePath(dialogTool->GetToolId());
+            VPiecePath currentPath = CurrentPath(dialogTool->GetToolId());
+            VPiecePath newPath = dialogTool->GetPiecePath();
+            m_newPaths.insert(dialogTool->GetToolId(), newPath);
 
-            SavePiecePathOptions *saveCommand = new SavePiecePathOptions(oldPath, newPath, qApp->getCurrentDocument(),
+            SavePiecePathOptions *saveCommand = new SavePiecePathOptions(toolId, currentPath, newPath,
+                                                                         qApp->getCurrentDocument(),
                                                                          const_cast<VContainer *>(data),
                                                                          dialogTool->GetToolId());
-            qApp->getUndoStack()->push(saveCommand);
+            m_undoStack.append(saveCommand);
             UpdateCurrentCustomSARecord();
             UpdateCurrentInternalPathRecord();
+        }
+        catch (const VExceptionBadId &e)
+        {
+            qCritical("%s\n\n%s\n\n%s", qUtf8Printable(tr("Error. Can't save piece path.")),
+                       qUtf8Printable(e.ErrorMessage()), qUtf8Printable(e.DetailedInformation()));
+        }
+    }
+    delete m_dialog;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogSeamAllowance::PlaceLabelDialogClosed(int result)
+{
+    if (result == QDialog::Accepted)
+    {
+        SCASSERT(not m_dialog.isNull());
+        DialogPlaceLabel *dialogTool = qobject_cast<DialogPlaceLabel*>(m_dialog.data());
+        SCASSERT(dialogTool != nullptr);
+        try
+        {
+            VPlaceLabelItem currentLabel = CurrentPlaceLabel(dialogTool->GetToolId());
+
+            const QHash<QString, QSharedPointer<VInternalVariable> > *vars = data->DataVariables();
+
+            const qreal w = qAbs(Visualization::FindLengthFromUser(dialogTool->GetWidth(), vars, false));
+            const qreal h = qAbs(Visualization::FindLengthFromUser(dialogTool->GetHeight(), vars, false));
+            const qreal a = Visualization::FindValFromUser(dialogTool->GetAngle(), vars, false);
+            qDebug() << w << h << a;
+
+            VPlaceLabelItem newLabel =  VPlaceLabelItem();
+            newLabel.setName(currentLabel.name());
+            newLabel.setX(currentLabel.x());
+            newLabel.setY(currentLabel.y());
+            newLabel.setMx(currentLabel.mx());
+            newLabel.setMy(currentLabel.my());
+            newLabel.SetWidth(w, dialogTool->GetWidth());
+            newLabel.SetHeight(h, dialogTool->GetHeight());
+            newLabel.SetAngle(a, dialogTool->GetAngle());
+            newLabel.SetLabelType(dialogTool->GetLabelType());
+            newLabel.SetCenterPoint(currentLabel.GetCenterPoint());
+            newLabel.SetCorrectionAngle(currentLabel.GetCorrectionAngle());
+
+            m_newPlaceLabels.insert(dialogTool->GetToolId(), newLabel);
+
+            SavePlaceLabelOptions *saveCommand = new SavePlaceLabelOptions(toolId, currentLabel, newLabel,
+                                                                           qApp->getCurrentDocument(),
+                                                                           const_cast<VContainer *>(data),
+                                                                           dialogTool->GetToolId());
+            m_undoStack.append(saveCommand);
+            UpdateCurrentPlaceLabelRecords();
         }
         catch (const VExceptionBadId &e)
         {
@@ -1041,6 +1270,7 @@ void DialogSeamAllowance::FancyTabChanged(int index)
     m_tabGrainline->hide();
     m_tabPins->hide();
     m_tabPassmarks->hide();
+    m_tabPlaceLabels->hide();
 
 QT_WARNING_PUSH
 QT_WARNING_DISABLE_GCC("-Wswitch-default")
@@ -1061,20 +1291,28 @@ QT_WARNING_DISABLE_GCC("-Wswitch-default")
         case TabOrder::Passmarks:
             m_tabPassmarks->show();
             break;
+        case TabOrder::PlaceLabels:
+            m_tabPlaceLabels->show();
+            break;
     }
 QT_WARNING_POP
 
-    if (index == TabOrder::Pins || index == TabOrder::Grainline
+    if (index == TabOrder::Pins
+            || index == TabOrder::Grainline
             || (index == TabOrder::Labels &&
                 uiTabLabels->tabWidget->currentIndex() == uiTabLabels->tabWidget->indexOf(uiTabLabels->tabLabels)))
     {
-        ShowPins();
+        ShowPieceSpecialPointsWithRect(uiTabPins->listWidgetPins, false);
+    }
+    else if (index == TabOrder::PlaceLabels)
+    {
+        ShowPieceSpecialPointsWithRect(uiTabPlaceLabels->listWidgetPlaceLabels, true);
     }
     else
     {
-        if (not m_visPins.isNull())
+        if (not m_visSpecialPoints.isNull())
         {
-            delete m_visPins;
+            delete m_visSpecialPoints;
         }
     }
 }
@@ -1084,13 +1322,13 @@ void DialogSeamAllowance::TabChanged(int index)
 {
     if (index == uiTabLabels->tabWidget->indexOf(uiTabLabels->tabLabels))
     {
-        ShowPins();
+        ShowPieceSpecialPointsWithRect(uiTabPins->listWidgetPins, false);
     }
     else
     {
-        if (not m_visPins.isNull())
+        if (not m_visSpecialPoints.isNull())
         {
-            delete m_visPins;
+            delete m_visSpecialPoints;
         }
     }
 }
@@ -1346,7 +1584,8 @@ void DialogSeamAllowance::UpdateDetailLabelValues()
     if (not flagDLAngle || not (flagDLFormulas || flagDPin) || not flagPLAngle || not (flagPLFormulas || flagPPin))
     {
         m_ftb->SetTabText(TabOrder::Labels, tr("Labels") + QLatin1String("*"));
-        QIcon icon(":/icons/win.icon.theme/16x16/status/dialog-warning.png");
+        const QIcon icon = QIcon::fromTheme("dialog-warning",
+                                            QIcon(":/icons/win.icon.theme/16x16/status/dialog-warning.png"));
         uiTabLabels->tabWidget->setTabIcon(uiTabLabels->tabWidget->indexOf(uiTabLabels->tabLabels), icon);
     }
     else
@@ -1431,7 +1670,8 @@ void DialogSeamAllowance::UpdatePatternLabelValues()
     if (not flagDLAngle || not (flagDLFormulas || flagDPin) || not flagPLAngle || not (flagPLFormulas || flagPPin))
     {
         m_ftb->SetTabText(TabOrder::Labels, tr("Labels") + QLatin1String("*"));
-        QIcon icon(":/icons/win.icon.theme/16x16/status/dialog-warning.png");
+        const QIcon icon = QIcon::fromTheme("dialog-warning",
+                                            QIcon(":/icons/win.icon.theme/16x16/status/dialog-warning.png"));
         uiTabLabels->tabWidget->setTabIcon(uiTabLabels->tabWidget->indexOf(uiTabLabels->tabLabels), icon);
     }
     else
@@ -1923,7 +2163,8 @@ void DialogSeamAllowance::DetailPinPointChanged()
         topPinId == NULL_ID && bottomPinId == NULL_ID ? color = okColor : color = errorColor;
 
         m_ftb->SetTabText(TabOrder::Labels, tr("Labels") + QLatin1String("*"));
-        QIcon icon(":/icons/win.icon.theme/16x16/status/dialog-warning.png");
+        const QIcon icon = QIcon::fromTheme("dialog-warning",
+                                            QIcon(":/icons/win.icon.theme/16x16/status/dialog-warning.png"));
         uiTabLabels->tabWidget->setTabIcon(uiTabLabels->tabWidget->indexOf(uiTabLabels->tabLabels), icon);
     }
     UpdateDetailLabelValues();
@@ -1955,7 +2196,8 @@ void DialogSeamAllowance::PatternPinPointChanged()
         topPinId == NULL_ID && bottomPinId == NULL_ID ? color = okColor : color = errorColor;
 
         m_ftb->SetTabText(TabOrder::Labels, tr("Labels") + QLatin1String("*"));
-        QIcon icon(":/icons/win.icon.theme/16x16/status/dialog-warning.png");
+        const QIcon icon = QIcon::fromTheme("dialog-warning",
+                                            QIcon(":/icons/win.icon.theme/16x16/status/dialog-warning.png"));
         uiTabLabels->tabWidget->setTabIcon(uiTabLabels->tabWidget->indexOf(uiTabLabels->tabLabels), icon);
     }
     UpdatePatternLabelValues();
@@ -1985,6 +2227,7 @@ VPiece DialogSeamAllowance::CreatePiece() const
     piece.SetCustomSARecords(GetListInternals<CustomSARecord>(uiTabPaths->listWidgetCustomSA));
     piece.SetInternalPaths(GetListInternals<quint32>(uiTabPaths->listWidgetInternalPaths));
     piece.SetPins(GetListInternals<quint32>(uiTabPins->listWidgetPins));
+    piece.SetPlaceLabels(GetListInternals<quint32>(uiTabPlaceLabels->listWidgetPlaceLabels));
     piece.SetForbidFlipping(uiTabPaths->checkBoxForbidFlipping->isChecked());
     piece.SetSeamAllowance(uiTabPaths->checkBoxSeams->isChecked());
     piece.SetSeamAllowanceBuiltIn(uiTabPaths->checkBoxBuiltIn->isChecked());
@@ -2040,58 +2283,13 @@ void DialogSeamAllowance::NewMainPathItem(const VPieceNode &node)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void DialogSeamAllowance::NewCustomSA(const CustomSARecord &record)
-{
-    if (record.path > NULL_ID)
-    {
-        const QString name = GetPathName(record.path, record.reverse);
-
-        QListWidgetItem *item = new QListWidgetItem(name);
-        item->setFont(QFont("Times", 12, QFont::Bold));
-        item->setData(Qt::UserRole, QVariant::fromValue(record));
-        uiTabPaths->listWidgetCustomSA->addItem(item);
-        uiTabPaths->listWidgetCustomSA->setCurrentRow(uiTabPaths->listWidgetCustomSA->count()-1);
-    }
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void DialogSeamAllowance::NewInternalPath(quint32 path)
-{
-    if (path > NULL_ID)
-    {
-        const QString name = GetPathName(path);
-
-        QListWidgetItem *item = new QListWidgetItem(name);
-        item->setFont(QFont("Times", 12, QFont::Bold));
-        item->setData(Qt::UserRole, QVariant::fromValue(path));
-        uiTabPaths->listWidgetInternalPaths->addItem(item);
-        uiTabPaths->listWidgetInternalPaths->setCurrentRow(uiTabPaths->listWidgetInternalPaths->count()-1);
-    }
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void DialogSeamAllowance::NewPin(quint32 pinPoint)
-{
-    if (pinPoint > NULL_ID)
-    {
-        const QSharedPointer<VGObject> pin = data->GetGObject(pinPoint);
-
-        QListWidgetItem *item = new QListWidgetItem(pin->name());
-        item->setFont(QFont("Times", 12, QFont::Bold));
-        item->setData(Qt::UserRole, QVariant::fromValue(pinPoint));
-        uiTabPins->listWidgetPins->addItem(item);
-        uiTabPins->listWidgetPins->setCurrentRow(uiTabPins->listWidgetPins->count()-1);
-    }
-}
-
-//---------------------------------------------------------------------------------------------------------------------
 QString DialogSeamAllowance::GetPathName(quint32 path, bool reverse) const
 {
     QString name;
 
     if (path > NULL_ID)
     {
-        name = data->GetPiecePath(path).GetName();
+        name = CurrentPath(path).GetName();
 
         if (reverse)
         {
@@ -2340,6 +2538,7 @@ void DialogSeamAllowance::InitFancyTabBar()
     m_ftb->InsertTab(TabOrder::Labels, QIcon("://icon/32x32/labels.png"), tr("Labels"));
     m_ftb->InsertTab(TabOrder::Grainline, QIcon("://icon/32x32/grainline.png"), tr("Grainline"));
     m_ftb->InsertTab(TabOrder::Passmarks, QIcon("://icon/32x32/passmark.png"), tr("Passmarks"));
+    m_ftb->InsertTab(TabOrder::PlaceLabels, QIcon("://icon/32x32/button.png"), tr("Place label"));
 
     ui->horizontalLayout->addWidget(m_ftb, 0, Qt::AlignLeft);
 
@@ -2364,6 +2563,10 @@ void DialogSeamAllowance::InitFancyTabBar()
     m_tabPassmarks->hide();
     uiTabPassmarks->setupUi(m_tabPassmarks);
     ui->horizontalLayout->addWidget(m_tabPassmarks, 1);
+
+    m_tabPlaceLabels->hide();
+    uiTabPlaceLabels->setupUi(m_tabPlaceLabels);
+    ui->horizontalLayout->addWidget(m_tabPlaceLabels, 1);
 
     connect(m_ftb, &FancyTabBar::CurrentChanged, this, &DialogSeamAllowance::FancyTabChanged);
     connect(uiTabLabels->tabWidget, &QTabWidget::currentChanged, this, &DialogSeamAllowance::TabChanged);
@@ -2667,6 +2870,23 @@ void DialogSeamAllowance::InitPassmarksTab()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void DialogSeamAllowance::InitPlaceLabelsTab()
+{
+    uiTabPlaceLabels->listWidgetPlaceLabels->setContextMenuPolicy(Qt::CustomContextMenu);
+    connect(uiTabPlaceLabels->listWidgetPlaceLabels, &QListWidget::currentRowChanged, this, [this]()
+    {
+        if (not m_visSpecialPoints.isNull())
+        {
+            m_visSpecialPoints->SetShowRect(true);
+            m_visSpecialPoints->SetRect(CurrentRect());
+            m_visSpecialPoints->RefreshGeometry();
+        }
+    });
+    connect(uiTabPlaceLabels->listWidgetPlaceLabels, &QListWidget::customContextMenuRequested, this,
+            &DialogSeamAllowance::ShowPlaceLabelsContextMenu);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 void DialogSeamAllowance::InitAllPinComboboxes()
 {
     InitPinPoint(uiTabGrainline->comboBoxGrainlineCenterPin);
@@ -2688,6 +2908,12 @@ QString DialogSeamAllowance::GetFormulaSAWidth() const
     QString width = uiTabPaths->plainTextEditFormulaWidth->toPlainText();
     width.replace("\n", " ");
     return qApp->TrVars()->TryFormulaFromUser(width, qApp->Settings()->GetOsSeparator());
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QVector<QUndoCommand *> &DialogSeamAllowance::UndoStack()
+{
+    return m_undoStack;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -2737,6 +2963,21 @@ void DialogSeamAllowance::UpdateCurrentInternalPathRecord()
     SCASSERT(item != nullptr);
     const quint32 path = qvariant_cast<quint32>(item->data(Qt::UserRole));
     item->setText(GetPathName(path));
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogSeamAllowance::UpdateCurrentPlaceLabelRecords()
+{
+    const int row = uiTabPlaceLabels->listWidgetPlaceLabels->currentRow();
+    if (uiTabPlaceLabels->listWidgetPlaceLabels->count() == 0 || row == -1)
+    {
+        return;
+    }
+
+    QListWidgetItem *item = uiTabPlaceLabels->listWidgetPlaceLabels->item(row);
+    SCASSERT(item != nullptr);
+    const quint32 labelId = qvariant_cast<quint32>(item->data(Qt::UserRole));
+    item->setText(CurrentPlaceLabel(labelId).name());
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -2899,25 +3140,53 @@ void DialogSeamAllowance::SetPLAngle(QString angleFormula)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void DialogSeamAllowance::ShowPins()
+QRectF DialogSeamAllowance::CurrentRect() const
 {
-    if (m_visPins.isNull())
+    QRectF rect;
+    if (QListWidgetItem *item = uiTabPlaceLabels->listWidgetPlaceLabels->currentItem())
     {
-        m_visPins = new VisPiecePins(data);
+        VPlaceLabelItem label = CurrentPlaceLabel(qvariant_cast<quint32>(item->data(Qt::UserRole)));
+        rect = QRectF(QPointF(label.x() - label.GetWidth()/2.0, label.y() - label.GetHeight()/2.0),
+                      QPointF(label.x() + label.GetWidth()/2.0, label.y() + label.GetHeight()/2.0));
+    }
+    return rect;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogSeamAllowance::ShowPieceSpecialPointsWithRect(const QListWidget *list, bool showRect)
+{
+    SCASSERT(list != nullptr)
+    if (m_visSpecialPoints.isNull())
+    {
+        m_visSpecialPoints = new VisPieceSpecialPoints(data);
     }
 
-    m_visPins->SetPins(GetListInternals<quint32>(uiTabPins->listWidgetPins));
+    m_visSpecialPoints->SetPoints(GetListInternals<quint32>(list));
+    m_visSpecialPoints->SetShowRect(showRect);
+    m_visSpecialPoints->SetRect(CurrentRect());
 
-    if (not qApp->getCurrentScene()->items().contains(m_visPins))
+    if (not qApp->getCurrentScene()->items().contains(m_visSpecialPoints))
     {
-        m_visPins->VisualMode(NULL_ID);
-        m_visPins->setZValue(10); // pins should be on top
+        m_visSpecialPoints->VisualMode(NULL_ID);
+        m_visSpecialPoints->setZValue(10); // pins should be on top
         VToolSeamAllowance *tool = qobject_cast<VToolSeamAllowance*>(VAbstractPattern::getTool(toolId));
         SCASSERT(tool != nullptr);
-        m_visPins->setParentItem(tool);
+        m_visSpecialPoints->setParentItem(tool);
     }
     else
     {
-        m_visPins->RefreshGeometry();
+        m_visSpecialPoints->RefreshGeometry();
     }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+VPiecePath DialogSeamAllowance::CurrentPath(quint32 id) const
+{
+    return m_newPaths.contains(id) ? m_newPaths.value(id) : data->GetPiecePath(id);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+VPlaceLabelItem DialogSeamAllowance::CurrentPlaceLabel(quint32 id) const
+{
+    return m_newPlaceLabels.contains(id) ? m_newPlaceLabels.value(id) : *data->GeometricObject<VPlaceLabelItem>(id);
 }

@@ -436,6 +436,17 @@ VSAPoint VPiecePath::EndSegment(const VContainer *data, const QVector<VPieceNode
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+QList<quint32> VPiecePath::Dependencies() const
+{
+    QList<quint32> list;
+    foreach (const VPieceNode &node, d->m_nodes)
+    {
+        list.append(node.GetId());
+    }
+    return list;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 QVector<quint32> VPiecePath::MissingNodes(const VPiecePath &path) const
 {
     if (d->m_nodes.size() == path.CountNodes()) //-V807

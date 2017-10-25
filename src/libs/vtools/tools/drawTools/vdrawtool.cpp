@@ -103,16 +103,20 @@ void VDrawTool::ChangedNameDraw(const QString &oldName, const QString &newName)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VDrawTool::SaveDialogChange()
+void VDrawTool::SaveDialogChange(const QString &undoText)
 {
+    Q_UNUSED(undoText)
     qCDebug(vTool, "Saving tool options after using dialog");
     QDomElement oldDomElement = doc->elementById(m_id, getTagName());
     if (oldDomElement.isElement())
     {
         QDomElement newDomElement = oldDomElement.cloneNode().toElement();
-        SaveDialog(newDomElement);
+        QList<quint32> oldDependencies;
+        QList<quint32> newDependencies;
+        SaveDialog(newDomElement, oldDependencies, newDependencies);
 
-        SaveToolOptions *saveOptions = new SaveToolOptions(oldDomElement, newDomElement, doc, m_id);
+        SaveToolOptions *saveOptions = new SaveToolOptions(oldDomElement, newDomElement, oldDependencies,
+                                                           newDependencies, doc, m_id);
         connect(saveOptions, &SaveToolOptions::NeedLiteParsing, doc, &VAbstractPattern::LiteParseTree);
         qApp->getUndoStack()->push(saveOptions);
     }
@@ -145,7 +149,8 @@ void VDrawTool::SaveOption(QSharedPointer<VGObject> &obj)
 
         SaveOptions(newDomElement, obj);
 
-        SaveToolOptions *saveOptions = new SaveToolOptions(oldDomElement, newDomElement, doc, m_id);
+        SaveToolOptions *saveOptions = new SaveToolOptions(oldDomElement, newDomElement, QList<quint32>(),
+                                                           QList<quint32>(), doc, m_id);
         connect(saveOptions, &SaveToolOptions::NeedLiteParsing, doc, &VAbstractPattern::LiteParseTree);
         qApp->getUndoStack()->push(saveOptions);
     }
@@ -230,6 +235,13 @@ void VDrawTool::AddToCalculation(const QDomElement &domElement)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void VDrawTool::AddDependence(QList<quint32> &list, quint32 objectId) const
+{
+    auto originPoint = VAbstractTool::data.GetGObject(objectId);
+    list.append(originPoint->getIdTool());
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 QString VDrawTool::getLineType() const
 {
     return m_lineType;
@@ -256,11 +268,4 @@ void VDrawTool::SetLabelVisible(quint32 id, bool visible)
 {
     Q_UNUSED(id)
     Q_UNUSED(visible)
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void VDrawTool::DoChangePosition(quint32 id, const QPointF &pos)
-{
-    Q_UNUSED(id)
-    Q_UNUSED(pos)
 }

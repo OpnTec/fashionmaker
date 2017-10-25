@@ -80,7 +80,14 @@ void VUndoCommand::IncrementReferences(const QVector<quint32> &nodes) const
 {
     for (qint32 i = 0; i < nodes.size(); ++i)
     {
-        doc->IncrementReferens(nodes.at(i));
+        try
+        {
+            doc->IncrementReferens(nodes.at(i));
+        }
+        catch (const VExceptionBadId &e)
+        { // ignoring
+            Q_UNUSED(e);
+        }
     }
 }
 
@@ -89,7 +96,14 @@ void VUndoCommand::DecrementReferences(const QVector<quint32> &nodes) const
 {
     for (qint32 i = 0; i < nodes.size(); ++i)
     {
-        doc->DecrementReferens(nodes.at(i));
+        try
+        {
+            doc->DecrementReferens(nodes.at(i));
+        }
+        catch (const VExceptionBadId &e)
+        { // ignoring
+            Q_UNUSED(e);
+        }
     }
 }
 

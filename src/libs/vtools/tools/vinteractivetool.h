@@ -46,8 +46,8 @@ public:
     static bool m_suppressContextMenu;
 
 public slots:
-    void FullUpdateFromGuiOk(int result);
-    void FullUpdateFromGuiApply();
+    virtual void FullUpdateFromGuiOk(int result);
+    virtual void FullUpdateFromGuiApply();
 
 protected:
     /** @brief m_dialog tool's dialog options.*/
@@ -55,7 +55,7 @@ protected:
 
     /** @brief setDialog set dialog when user want change tool option. */
     virtual void setDialog() {/*do nothing by default*/}
-    virtual void SaveDialogChange()=0;
+    virtual void SaveDialogChange(const QString &undoText = QString())=0;
 
 private:
     Q_DISABLE_COPY(VInteractiveTool)

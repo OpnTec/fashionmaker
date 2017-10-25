@@ -213,11 +213,18 @@ void VToolNormal::RemoveReferens()
 /**
  * @brief SaveDialog save options into file after change in dialog.
  */
-void VToolNormal::SaveDialog(QDomElement &domElement)
+void VToolNormal::SaveDialog(QDomElement &domElement, QList<quint32> &oldDependencies,
+                             QList<quint32> &newDependencies)
 {
     SCASSERT(not m_dialog.isNull())
     QSharedPointer<DialogNormal> dialogTool = m_dialog.objectCast<DialogNormal>();
     SCASSERT(not dialogTool.isNull())
+
+    AddDependence(oldDependencies, basePointId);
+    AddDependence(oldDependencies, secondPointId);
+    AddDependence(newDependencies, dialogTool->GetFirstPointId());
+    AddDependence(newDependencies, dialogTool->GetSecondPointId());
+
     doc->SetAttribute(domElement, AttrName, dialogTool->getPointName());
     doc->SetAttribute(domElement, AttrTypeLine, dialogTool->GetTypeLine());
     doc->SetAttribute(domElement, AttrLineColor, dialogTool->GetLineColor());
@@ -264,24 +271,6 @@ void VToolNormal::SetVisualization()
         visual->SetAngle(angle);
         visual->setLineStyle(LineStyleToPenStyle(m_lineType));
         visual->RefreshGeometry();
-    }
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-quint32 VToolNormal::GetSecondPointId() const
-{
-    return secondPointId;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void VToolNormal::SetSecondPointId(const quint32 &value)
-{
-    if (value != NULL_ID)
-    {
-        secondPointId = value;
-
-        QSharedPointer<VGObject> obj = VAbstractTool::data.GetGObject(m_id);
-        SaveOption(obj);
     }
 }
 

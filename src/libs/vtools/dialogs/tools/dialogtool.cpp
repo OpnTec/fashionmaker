@@ -111,7 +111,7 @@ DialogTool::DialogTool(const VContainer *data, const quint32 &toolId, QWidget *p
       flagName(true),
       flagFormula(true),
       flagError(true),
-      timerFormula(nullptr),
+      timerFormula(new QTimer(this)),
       bOk(nullptr),
       bApply(nullptr),
       spinBoxAngle(nullptr),
@@ -129,7 +129,6 @@ DialogTool::DialogTool(const VContainer *data, const quint32 &toolId, QWidget *p
       vis(nullptr)
 {
     SCASSERT(data != nullptr)
-    timerFormula = new QTimer(this);
     connect(timerFormula, &QTimer::timeout, this, &DialogTool::EvalFormula);
 }
 

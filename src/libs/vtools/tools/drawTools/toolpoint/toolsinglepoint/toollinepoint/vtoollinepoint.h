@@ -76,9 +76,6 @@ public:
 
     QString BasePointName() const;
 
-    quint32 GetBasePointId() const;
-    void    SetBasePointId(const quint32 &value);
-
     qreal   GetAngle() const;
     void    SetAngle(const qreal &value);
 

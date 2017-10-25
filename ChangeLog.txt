@@ -27,6 +27,7 @@
 - [#765] New feature. Free curve mode.
 - [#657] Improve feature: Allow more paper formats for printing tiled PDF
 - [#768] New feature. Custom curve approximation scale.
+- [#759] Add place label tool.
 
 # Version 0.5.1
 - [#683] Tool Seam allowance's dialog is off screen on small resolutions.

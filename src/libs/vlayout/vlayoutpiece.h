@@ -46,6 +46,7 @@
 #include "../vpatterndb/floatItemData/vpiecelabeldata.h"
 #include "../vpatterndb/vcontainer.h"
 #include "vabstractpiece.h"
+#include "../vgeometry/vgeometrydef.h"
 
 class VLayoutPieceData;
 class VLayoutPiecePath;
@@ -84,6 +85,9 @@ public:
 
     QVector<QLineF> GetPassmarks() const;
     void SetPassmarks(const QVector<QLineF> &passmarks);
+
+    QVector<VLayoutPlaceLabel> GetPlaceLabels() const;
+    void SetPlaceLabels(const QVector<VLayoutPlaceLabel> &labels);
 
     QVector<QVector<QPointF>> InternalPathsForCut(bool cut) const;
     QVector<VLayoutPiecePath> GetInternalPaths() const;
@@ -142,7 +146,6 @@ private:
     Q_REQUIRED_RESULT QGraphicsPathItem *GetMainItem() const;
     Q_REQUIRED_RESULT QGraphicsPathItem *GetMainPathItem() const;
 
-    void CreateInternalPathItem(int i, QGraphicsItem *parent) const;
     void CreateLabelStrings(QGraphicsItem *parent, const QVector<QPointF> &labelShape, const VTextManager &tm,
                             bool textAsPaths) const;
     void CreateGrainlineItem(QGraphicsItem *parent) const;

@@ -51,7 +51,7 @@ SavePieceOptions::SavePieceOptions(const VPiece &oldDet, const VPiece &newDet, V
       m_oldDet(oldDet),
       m_newDet(newDet)
 {
-    setText(tr("save detail option"));
+    setText(tr("save detail options"));
     nodeId = id;
 }
 
@@ -72,6 +72,7 @@ void SavePieceOptions::undo()
         VToolSeamAllowance::AddCSARecords(doc, domElement, m_oldDet.GetCustomSARecords());
         VToolSeamAllowance::AddInternalPaths(doc, domElement, m_oldDet.GetInternalPaths());
         VToolSeamAllowance::AddPins(doc, domElement, m_oldDet.GetPins());
+        VToolSeamAllowance::AddPlaceLabels(doc, domElement, m_oldDet.GetPlaceLabels());
 
         DecrementReferences(m_newDet.MissingNodes(m_oldDet));
         IncrementReferences(m_oldDet.MissingNodes(m_newDet));
@@ -85,6 +86,9 @@ void SavePieceOptions::undo()
         DecrementReferences(m_newDet.MissingPins(m_oldDet));
         IncrementReferences(m_oldDet.MissingPins(m_newDet));
 
+        DecrementReferences(m_newDet.MissingPlaceLabels(m_oldDet));
+        IncrementReferences(m_oldDet.MissingPlaceLabels(m_newDet));
+        
         if (VToolSeamAllowance *tool = qobject_cast<VToolSeamAllowance *>(VAbstractPattern::getTool(nodeId)))
         {
             tool->Update(m_oldDet);
@@ -113,6 +117,7 @@ void SavePieceOptions::redo()
         VToolSeamAllowance::AddCSARecords(doc, domElement, m_newDet.GetCustomSARecords());
         VToolSeamAllowance::AddInternalPaths(doc, domElement, m_newDet.GetInternalPaths());
         VToolSeamAllowance::AddPins(doc, domElement, m_newDet.GetPins());
+        VToolSeamAllowance::AddPlaceLabels(doc, domElement, m_newDet.GetPlaceLabels());
 
         DecrementReferences(m_oldDet.MissingNodes(m_newDet));
         IncrementReferences(m_newDet.MissingNodes(m_oldDet));
@@ -126,6 +131,9 @@ void SavePieceOptions::redo()
         DecrementReferences(m_oldDet.MissingPins(m_newDet));
         IncrementReferences(m_newDet.MissingPins(m_oldDet));
 
+        DecrementReferences(m_oldDet.MissingPlaceLabels(m_newDet));
+        IncrementReferences(m_newDet.MissingPlaceLabels(m_oldDet));
+
         if (VToolSeamAllowance *tool = qobject_cast<VToolSeamAllowance *>(VAbstractPattern::getTool(nodeId)))
         {
             tool->Update(m_newDet);
@@ -135,4 +143,39 @@ void SavePieceOptions::redo()
     {
         qCDebug(vUndo, "Can't find detail with id = %u.", nodeId);
     }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+bool SavePieceOptions::mergeWith(const QUndoCommand *command)
+{
+    const SavePieceOptions *saveCommand = static_cast<const SavePieceOptions *>(command);
+    SCASSERT(saveCommand != nullptr);
+
+    if (saveCommand->DetId() != nodeId)
+    {
+        return false;
+    }
+    else
+    {
+        const QSet<quint32> currentSet;
+        currentSet.fromList(m_newDet.Dependencies());
+
+        const VPiece candidate = saveCommand->NewDet();
+        const QSet<quint32> candidateSet;
+        candidateSet.fromList(candidate.Dependencies());
+
+        if (currentSet != candidateSet)
+        {
+            return false;
+        }
+    }
+
+    m_newDet = saveCommand->NewDet();
+    return true;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+int SavePieceOptions::id() const
+{
+    return static_cast<int>(UndoCommand::SavePieceOptions);
 }

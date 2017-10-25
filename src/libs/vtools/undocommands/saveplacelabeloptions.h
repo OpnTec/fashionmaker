@@ -1,8 +1,8 @@
 /************************************************************************
  **
- **  @file
+ **  @file   saveplacelabeloptions.h
  **  @author Roman Telezhynskyi <dismine(at)gmail.com>
- **  @date   31 1, 2017
+ **  @date   16 10, 2017
  **
  **  @brief
  **  @copyright
@@ -25,46 +25,52 @@
  **  along with Valentina.  If not, see <http://www.gnu.org/licenses/>.
  **
  *************************************************************************/
+#ifndef SAVEPLACELABELOPTIONS_H
+#define SAVEPLACELABELOPTIONS_H
 
-#include "vistoolpin.h"
-#include "../vwidgets/vsimplepoint.h"
-#include "../vgeometry/vpointf.h"
-#include "../vpatterndb/vcontainer.h"
+#include "vundocommand.h"
+#include "../vgeometry/vplacelabelitem.h"
+
+class SavePlaceLabelOptions : public VUndoCommand
+{
+public:
+    SavePlaceLabelOptions(quint32 pieceId, const VPlaceLabelItem &oldLabel, const VPlaceLabelItem &newLabel,
+                          VAbstractPattern *doc, VContainer *data, quint32 id, QUndoCommand *parent = nullptr);
+    virtual ~SavePlaceLabelOptions()=default;
+
+    virtual void undo() Q_DECL_OVERRIDE;
+    virtual void redo() Q_DECL_OVERRIDE;
+    virtual bool mergeWith(const QUndoCommand *command) Q_DECL_OVERRIDE;
+    virtual int  id() const Q_DECL_OVERRIDE;
+
+    quint32         LabelId() const;
+    VPlaceLabelItem NewLabel() const;
+private:
+    Q_DISABLE_COPY(SavePlaceLabelOptions)
+
+    const VPlaceLabelItem m_oldLabel;
+    VPlaceLabelItem       m_newLabel;
+
+    VContainer *m_data;
+    quint32 m_pieceId;
+};
 
 //---------------------------------------------------------------------------------------------------------------------
-VisToolPin::VisToolPin(const VContainer *data, QGraphicsItem *parent)
-    : VisLine(data, parent),
-      m_point()
+inline int SavePlaceLabelOptions::id() const
 {
-    this->mainColor = Qt::red;
-    this->setZValue(2);// Show on top real tool
-
-    m_point = new VSimplePoint(NULL_ID, mainColor);
-    m_point->SetPointHighlight(true);
-    m_point->setParentItem(this);
-    m_point->SetVisualizationMode(true);
-    m_point->setVisible(false);
+    return static_cast<int>(UndoCommand::SavePlaceLabelOptions);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-VisToolPin::~VisToolPin()
+inline quint32 SavePlaceLabelOptions::LabelId() const
 {
-    if (not m_point.isNull())
-    {
-        delete m_point;
-    }
+    return nodeId;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VisToolPin::RefreshGeometry()
+inline VPlaceLabelItem SavePlaceLabelOptions::NewLabel() const
 {
-    if (object1Id > NULL_ID)
-    {
-        const QSharedPointer<VPointF> point = Visualization::data->GeometricObject<VPointF>(object1Id);
-
-        m_point->SetOnlyPoint(mode == Mode::Creation);
-        m_point->RefreshPointGeometry(*point);
-        m_point->setVisible(true);
-    }
+    return m_newLabel;
 }
 
+#endif // SAVEPLACELABELOPTIONS_H

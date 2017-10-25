@@ -1,6 +1,6 @@
 /************************************************************************
  **
- **  @file   dialogpin.h
+ **  @file
  **  @author Roman Telezhynskyi <dismine(at)gmail.com>
  **  @date   31 1, 2017
  **
@@ -26,48 +26,26 @@
  **
  *************************************************************************/
 
-#ifndef DIALOGPIN_H
-#define DIALOGPIN_H
+#ifndef VISTOOLSPECIALPOINT_H
+#define VISTOOLSPECIALPOINT_H
 
-#include "dialogtool.h"
+#include "visline.h"
 
-namespace Ui
-{
-    class DialogPin;
-}
+class VSimplePoint;
 
-class DialogPin : public DialogTool
+class VisToolSpecialPoint : public VisLine
 {
     Q_OBJECT
 public:
-    explicit DialogPin(const VContainer *data, quint32 toolId, QWidget *parent = nullptr);
-    virtual ~DialogPin();
+    explicit VisToolSpecialPoint(const VContainer *data, QGraphicsItem *parent = nullptr);
+    virtual ~VisToolSpecialPoint();
 
-    void EnbleShowMode(bool disable);
-
-    quint32 GetPieceId() const;
-    void    SetPieceId(quint32 id);
-
-    quint32 GetPointId() const;
-    void    SetPointId(quint32 id);
-
-    virtual void SetPiecesList(const QVector<quint32> &list) Q_DECL_OVERRIDE;
-
-public slots:
-    virtual void ChosenObject(quint32 id, const SceneObject &type) Q_DECL_OVERRIDE;
-
-protected:
-    virtual void CheckState() Q_DECL_FINAL;
-    virtual void ShowVisualization() Q_DECL_OVERRIDE;
-
+    virtual void RefreshGeometry() Q_DECL_OVERRIDE;
+    virtual int  type() const Q_DECL_OVERRIDE {return Type;}
+    enum { Type = UserType + static_cast<int>(Vis::ToolSpecialPoint)};
 private:
-    Q_DISABLE_COPY(DialogPin)
-    Ui::DialogPin *ui;
-    bool  m_showMode;
-    bool  m_flagPoint;
-
-    void CheckPieces();
-    void CheckPoint();
+    Q_DISABLE_COPY(VisToolSpecialPoint)
+    QPointer<VSimplePoint> m_point;
 };
 
-#endif // DIALOGPIN_H
+#endif // VISTOOLSPECIALPOINT_H

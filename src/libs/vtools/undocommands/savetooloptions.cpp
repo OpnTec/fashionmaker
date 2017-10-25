@@ -36,17 +36,18 @@
 #include "vundocommand.h"
 
 //---------------------------------------------------------------------------------------------------------------------
-SaveToolOptions::SaveToolOptions(const QDomElement &oldXml, const QDomElement &newXml, VAbstractPattern *doc,
-                                 const quint32 &id, QUndoCommand *parent)
-    : VUndoCommand(QDomElement(), doc, parent), oldXml(oldXml), newXml(newXml)
+SaveToolOptions::SaveToolOptions(const QDomElement &oldXml, const QDomElement &newXml,
+                                 const QList<quint32> &oldDependencies, const QList<quint32> &newDependencies,
+                                 VAbstractPattern *doc, const quint32 &id, QUndoCommand *parent)
+    : VUndoCommand(QDomElement(), doc, parent),
+      oldXml(oldXml),
+      newXml(newXml),
+      oldDependencies(oldDependencies),
+      newDependencies(newDependencies)
 {
     setText(tr("save tool option"));
     nodeId = id;
 }
-
-//---------------------------------------------------------------------------------------------------------------------
-SaveToolOptions::~SaveToolOptions()
-{}
 
 //---------------------------------------------------------------------------------------------------------------------
 void SaveToolOptions::undo()
@@ -57,6 +58,9 @@ void SaveToolOptions::undo()
     if (domElement.isElement())
     {
         domElement.parentNode().replaceChild(oldXml, domElement);
+
+        DecrementReferences(Missing(newDependencies, oldDependencies));
+        IncrementReferences(Missing(oldDependencies, newDependencies));
 
         emit NeedLiteParsing(Document::LiteParse);
     }
@@ -76,6 +80,9 @@ void SaveToolOptions::redo()
     {
         domElement.parentNode().replaceChild(newXml, domElement);
 
+        DecrementReferences(Missing(oldDependencies, newDependencies));
+        IncrementReferences(Missing(newDependencies, oldDependencies));
+
         emit NeedLiteParsing(Document::LiteParse);
     }
     else
@@ -85,23 +92,37 @@ void SaveToolOptions::redo()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+QVector<quint32> SaveToolOptions::Missing(const QList<quint32> &list1, const QList<quint32> &list2) const
+{
+    QSet<quint32> set1 = QSet<quint32>::fromList(list1);
+    QSet<quint32> set2 = QSet<quint32>::fromList(list2);
+    return set1.subtract(set2).toList().toVector();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 bool SaveToolOptions::mergeWith(const QUndoCommand *command)
 {
     const SaveToolOptions *saveCommand = static_cast<const SaveToolOptions *>(command);
     SCASSERT(saveCommand != nullptr)
-    const quint32 id = saveCommand->getToolId();
 
-    if (id != nodeId)
+    if (saveCommand->getToolId() != nodeId)
     {
         return false;
+    }
+    else
+    {
+        const QSet<quint32> currentSet;
+        currentSet.fromList(newDependencies);
+
+        const QSet<quint32> candidateSet;
+        candidateSet.fromList(saveCommand->NewDependencies());
+
+        if (currentSet != candidateSet)
+        {
+            return false;
+        }
     }
 
     newXml = saveCommand->getNewXml();
     return true;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-int SaveToolOptions::id() const
-{
-    return static_cast<int>(UndoCommand::SaveToolOptions);
 }

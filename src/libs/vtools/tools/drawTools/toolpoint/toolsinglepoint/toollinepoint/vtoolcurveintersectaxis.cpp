@@ -238,24 +238,6 @@ QString VToolCurveIntersectAxis::CurveName() const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-quint32 VToolCurveIntersectAxis::getCurveId() const
-{
-    return curveId;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void VToolCurveIntersectAxis::setCurveId(const quint32 &value)
-{
-    if (value != NULL_ID)
-    {
-        curveId = value;
-
-        QSharedPointer<VGObject> obj = VAbstractTool::data.GetGObject(m_id);
-        SaveOption(obj);
-    }
-}
-
-//---------------------------------------------------------------------------------------------------------------------
 void VToolCurveIntersectAxis::ShowVisualization(bool show)
 {
     ShowToolVisualization<VisToolCurveIntersectAxis>(show);
@@ -276,11 +258,18 @@ void VToolCurveIntersectAxis::ShowContextMenu(QGraphicsSceneContextMenuEvent *ev
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VToolCurveIntersectAxis::SaveDialog(QDomElement &domElement)
+void VToolCurveIntersectAxis::SaveDialog(QDomElement &domElement, QList<quint32> &oldDependencies,
+                                         QList<quint32> &newDependencies)
 {
     SCASSERT(not m_dialog.isNull())
     QSharedPointer<DialogCurveIntersectAxis> dialogTool = m_dialog.objectCast<DialogCurveIntersectAxis>();
     SCASSERT(not dialogTool.isNull())
+
+    AddDependence(oldDependencies, basePointId);
+    AddDependence(oldDependencies, curveId);
+    AddDependence(newDependencies, dialogTool->GetBasePointId());
+    AddDependence(newDependencies, dialogTool->getCurveId());
+
     doc->SetAttribute(domElement, AttrName, dialogTool->getPointName());
     doc->SetAttribute(domElement, AttrTypeLine, dialogTool->GetTypeLine());
     doc->SetAttribute(domElement, AttrLineColor, dialogTool->GetLineColor());
@@ -471,6 +460,7 @@ void VToolCurveIntersectAxis::InitSegments(const GOType &curveType, qreal segLen
             break;
         }
         case GOType::Point:
+        case GOType::PlaceLabel:
         case GOType::Unknown:
             Q_UNREACHABLE();
             break;

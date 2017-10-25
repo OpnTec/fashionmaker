@@ -39,7 +39,7 @@
 #include "../vpatterndb/floatItemData/vgrainlinedata.h"
 #include "../vmisc/diagnostic.h"
 #include "vlayoutpiecepath.h"
-
+#include "../vgeometry/vgeometrydef.h"
 #include "vtextmanager.h"
 
 QT_WARNING_PUSH
@@ -62,7 +62,8 @@ public:
           patternInfo(),
           grainlinePoints(),
           m_tmDetail(),
-          m_tmPattern()
+          m_tmPattern(),
+          m_placeLabels()
     {}
 
     VLayoutPieceData(const VLayoutPieceData &detail)
@@ -79,7 +80,8 @@ public:
           patternInfo(detail.patternInfo),
           grainlinePoints(detail.grainlinePoints),
           m_tmDetail(detail.m_tmDetail),
-          m_tmPattern(detail.m_tmPattern)
+          m_tmPattern(detail.m_tmPattern),
+          m_placeLabels(detail.m_placeLabels)
     {}
 
     ~VLayoutPieceData() {}
@@ -121,6 +123,9 @@ public:
 
     /** @brief m_tmPattern text manager for laying out pattern info */
     VTextManager              m_tmPattern;
+
+    /** @brief m_placeLabels list of place labels. */
+    QVector<VLayoutPlaceLabel> m_placeLabels;
 
 private:
     VLayoutPieceData &operator=(const VLayoutPieceData &) Q_DECL_EQ_DELETE;

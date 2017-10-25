@@ -26,48 +26,66 @@
  **
  *************************************************************************/
 
-#include "vispiecepins.h"
+#include "vispiecespecialpoints.h"
 #include "../vwidgets/vsimplepoint.h"
 #include "../vgeometry/vpointf.h"
 #include "../vpatterndb/vcontainer.h"
 
-//---------------------------------------------------------------------------------------------------------------------
-VisPiecePins::VisPiecePins(const VContainer *data, QGraphicsItem *parent)
-    : VisPath(data, parent),
-      m_points(),
-      m_pins()
+namespace
 {
+QPainterPath RectPath(const QRectF &rect)
+{
+    QPainterPath path;
+    if (not rect.isNull())
+    {
+        path.addRect(rect);
+    }
+    return path;
+}
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VisPiecePins::RefreshGeometry()
+VisPieceSpecialPoints::VisPieceSpecialPoints(const VContainer *data, QGraphicsItem *parent)
+    : VisPath(data, parent),
+      m_points(),
+      m_spoints(),
+      m_showRect(false),
+      m_placeLabelRect(),
+      m_rectItem(nullptr),
+      supportColor2(Qt::darkGreen)
+{
+    m_rectItem = InitItem<VCurvePathItem>(supportColor2, this);
+    m_rectItem->SetWidth(widthHairLine);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VisPieceSpecialPoints::RefreshGeometry()
 {
     HideAllItems();
 
-    for (int i = 0; i < m_pins.size(); ++i)
+    for (int i = 0; i < m_spoints.size(); ++i)
     {
         VSimplePoint *point = GetPoint(static_cast<quint32>(i), supportColor);
         point->SetOnlyPoint(false);
-        const QSharedPointer<VPointF> p = Visualization::data->GeometricObject<VPointF>(m_pins.at(i));
+        const QSharedPointer<VPointF> p = Visualization::data->GeometricObject<VPointF>(m_spoints.at(i));
         point->RefreshPointGeometry(*p);
         point->setVisible(true);
+
+        if (m_showRect)
+        {
+            DrawPath(m_rectItem, RectPath(m_placeLabelRect), supportColor2, Qt::SolidLine, Qt::RoundCap);
+        }
     }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VisPiecePins::SetPins(const QVector<quint32> &pins)
-{
-    m_pins = pins;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-VSimplePoint *VisPiecePins::GetPoint(quint32 i, const QColor &color)
+VSimplePoint *VisPieceSpecialPoints::GetPoint(quint32 i, const QColor &color)
 {
     return VisPath::GetPoint(m_points, i, color);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VisPiecePins::HideAllItems()
+void VisPieceSpecialPoints::HideAllItems()
 {
     for (int i=0; i < m_points.size(); ++i)
     {

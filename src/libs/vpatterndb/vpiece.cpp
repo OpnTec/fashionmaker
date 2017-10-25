@@ -30,6 +30,7 @@
 #include "vpiece_p.h"
 #include "../vgeometry/vpointf.h"
 #include "../vgeometry/vabstractcurve.h"
+#include "../vgeometry/vplacelabelitem.h"
 #include "vcontainer.h"
 #include "../vmisc/vabstractapplication.h"
 
@@ -441,6 +442,25 @@ QVector<QLineF> VPiece::PassmarksLines(const VContainer *data, const QVector<QPo
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+QVector<PlaceLabelImg> VPiece::PlaceLabelPoints(const VContainer *data) const
+{
+    QVector<PlaceLabelImg> points;
+    for(int i=0; i < d->m_placeLabels.size(); ++i)
+    {
+        try
+        {
+            const auto label = data->GeometricObject<VPlaceLabelItem>(d->m_placeLabels.at(i));
+            points.append(label->LabelShape());
+        }
+        catch (const VExceptionBadId &e)
+        {
+            qWarning() << e.ErrorMessage();
+        }
+    }
+    return points;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 QPainterPath VPiece::MainPathPath(const VContainer *data) const
 {
     const QVector<QPointF> points = MainPathPoints(data);
@@ -508,6 +528,25 @@ QPainterPath VPiece::PassmarksPath(const VContainer *data, const QVector<QPointF
 
             path.setFillRule(Qt::WindingFill);
         }
+    }
+
+    return path;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QPainterPath VPiece::PlaceLabelPath(const VContainer *data) const
+{
+    const QVector<PlaceLabelImg> points = PlaceLabelPoints(data);
+    QPainterPath path;
+
+    if (not points.isEmpty())
+    {
+        for (qint32 i = 0; i < points.count(); ++i)
+        {
+            path.addPath(PlaceLabelImgPath(points.at(i)));
+        }
+
+        path.setFillRule(Qt::WindingFill);
     }
 
     return path;
@@ -606,6 +645,52 @@ void VPiece::SetPins(const QVector<quint32> &pins)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+QVector<quint32> VPiece::GetPlaceLabels() const
+{
+    return d->m_placeLabels;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QVector<quint32> &VPiece::GetPlaceLabels()
+{
+    return d->m_placeLabels;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VPiece::SetPlaceLabels(const QVector<quint32> &labels)
+{
+    d->m_placeLabels = labels;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QList<quint32> VPiece::Dependencies() const
+{
+    QList<quint32> list = d->m_path.Dependencies();
+
+    foreach (const CustomSARecord &record, d->m_customSARecords)
+    {
+        list.append(record.path);
+    }
+
+    foreach (const quint32 &value, d->m_internalPaths)
+    {
+        list.append(value);
+    }
+
+    foreach (const quint32 &value, d->m_pins)
+    {
+        list.append(value);
+    }
+
+    foreach (const quint32 &value, d->m_placeLabels)
+    {
+        list.append(value);
+    }
+
+    return list;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 /**
  * @brief MissingNodes find missing nodes in detail. When we deleted object in detail and return this detail need
  * understand, what nodes need make invisible.
@@ -645,6 +730,12 @@ QVector<quint32> VPiece::MissingInternalPaths(const VPiece &det) const
 QVector<quint32> VPiece::MissingPins(const VPiece &det) const
 {
     return PieceMissingNodes(d->m_pins, det.GetPins());
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QVector<quint32> VPiece::MissingPlaceLabels(const VPiece &det) const
+{
+    return PieceMissingNodes(d->m_placeLabels, det.GetPlaceLabels());
 }
 
 //---------------------------------------------------------------------------------------------------------------------

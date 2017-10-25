@@ -194,11 +194,16 @@ void VToolCutSpline::ShowContextMenu(QGraphicsSceneContextMenuEvent *event, quin
 /**
  * @brief SaveDialog save options into file after change in dialog.
  */
-void VToolCutSpline::SaveDialog(QDomElement &domElement)
+void VToolCutSpline::SaveDialog(QDomElement &domElement, QList<quint32> &oldDependencies,
+                                QList<quint32> &newDependencies)
 {
     SCASSERT(not m_dialog.isNull())
     QSharedPointer<DialogCutSpline> dialogTool = m_dialog.objectCast<DialogCutSpline>();
     SCASSERT(not dialogTool.isNull())
+
+    AddDependence(oldDependencies, curveCutId);
+    AddDependence(newDependencies, dialogTool->getSplineId());
+
     doc->SetAttribute(domElement, AttrName, dialogTool->getPointName());
     doc->SetAttribute(domElement, AttrLength, dialogTool->GetFormula());
     doc->SetAttribute(domElement, AttrSpline, QString().setNum(dialogTool->getSplineId()));
@@ -245,7 +250,7 @@ QString VToolCutSpline::MakeToolTip() const
     const auto spl = VAbstractTool::data.GeometricObject<VAbstractCubicBezier>(curveCutId);
 
     const QString expression = qApp->TrVars()->FormulaToUser(formula, qApp->Settings()->GetOsSeparator());
-    const qreal length = Visualization::FindVal(expression, VAbstractTool::data.DataVariables());
+    const qreal length = Visualization::FindValFromUser(expression, VAbstractTool::data.DataVariables());
 
     QPointF spl1p2, spl1p3, spl2p2, spl2p3;
     QPointF point = spl->CutSpline(qApp->toPixel(length), spl1p2, spl1p3, spl2p2, spl2p3);

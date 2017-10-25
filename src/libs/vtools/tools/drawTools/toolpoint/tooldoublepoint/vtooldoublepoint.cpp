@@ -220,14 +220,13 @@ void VToolDoublePoint::FullUpdateFromFile()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VToolDoublePoint::DoChangePosition(quint32 id, const QPointF &pos)
+void VToolDoublePoint::ChangeLabelPosition(quint32 id, const QPointF &pos)
 {
     if (id == p1id)
     {
         QSharedPointer<VPointF> point = VAbstractTool::data.GeometricObject<VPointF>(p1id);
         point->setMx(pos.x());
         point->setMy(pos.y());
-        VAbstractTool::data.UpdateGObject(p1id, point);
         firstPoint->RefreshPointGeometry(*(point.data()));
     }
     else if (id == p2id)
@@ -235,7 +234,6 @@ void VToolDoublePoint::DoChangePosition(quint32 id, const QPointF &pos)
         QSharedPointer<VPointF> point = VAbstractTool::data.GeometricObject<VPointF>(p2id);
         point->setMx(pos.x());
         point->setMy(pos.y());
-        VAbstractTool::data.UpdateGObject(p2id, point);
         secondPoint->RefreshPointGeometry(*(point.data()));
     }
 }

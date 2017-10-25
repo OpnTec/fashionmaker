@@ -60,7 +60,8 @@ HEADERS += \
     $$PWD/vtoolseamallowance.h \
     $$PWD/nodeDetails/vtoolpiecepath.h \
     $$PWD/nodeDetails/vtoolpin.h \
-    $$PWD/vinteractivetool.h
+    $$PWD/vinteractivetool.h \
+    $$PWD/nodeDetails/vtoolplacelabel.h
 
 SOURCES += \
     $$PWD/vdatatool.cpp \
@@ -118,4 +119,5 @@ SOURCES += \
     $$PWD/vtoolseamallowance.cpp \
     $$PWD/nodeDetails/vtoolpiecepath.cpp \
     $$PWD/nodeDetails/vtoolpin.cpp \
-    $$PWD/vinteractivetool.cpp
+    $$PWD/vinteractivetool.cpp \
+    $$PWD/nodeDetails/vtoolplacelabel.cpp

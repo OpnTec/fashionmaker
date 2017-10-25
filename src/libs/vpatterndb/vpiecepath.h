@@ -87,6 +87,7 @@ public:
 
     QPainterPath PainterPath(const VContainer *data) const;
 
+    QList<quint32> Dependencies() const;
     QVector<quint32> MissingNodes(const VPiecePath &path) const;
 
     int  indexOfNode(quint32 id) const;

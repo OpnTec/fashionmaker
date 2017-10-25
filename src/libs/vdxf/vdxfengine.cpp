@@ -643,6 +643,7 @@ bool VDxfEngine::ExportToAAMA(const QVector<VLayoutPiece> &details)
         ExportAAMANotch(detailBlock, detail);
         ExportAAMAGrainline(detailBlock, detail);
         ExportAAMAText(detailBlock, detail);
+        ExportAAMADrill(detailBlock, detail);
 
         input->AddBlock(detailBlock);
 
@@ -688,11 +689,7 @@ void VDxfEngine::ExportAAMADraw(dx_ifaceBlock *detailBlock, const VLayoutPiece &
             detailBlock->ent.push_back(e);
         }
     }
-}
 
-//---------------------------------------------------------------------------------------------------------------------
-void VDxfEngine::ExportAAMAIntcut(dx_ifaceBlock *detailBlock, const VLayoutPiece &detail)
-{
     QVector<QVector<QPointF>> drawIntCut = detail.InternalPathsForCut(false);
     for(int j = 0; j < drawIntCut.size(); ++j)
     {
@@ -703,7 +700,27 @@ void VDxfEngine::ExportAAMAIntcut(dx_ifaceBlock *detailBlock, const VLayoutPiece
         }
     }
 
-    drawIntCut = detail.InternalPathsForCut(true);
+    const QVector<VLayoutPlaceLabel> labels = detail.GetPlaceLabels();
+    foreach(const VLayoutPlaceLabel &label, labels)
+    {
+        if (label.type != PlaceLabelType::Doubletree && label.type != PlaceLabelType::Button)
+        {
+            foreach(const QPolygonF &p, label.shape)
+            {
+                DRW_Entity *e = AAMAPolygon(p, "8", false);
+                if (e)
+                {
+                    detailBlock->ent.push_back(e);
+                }
+            }
+        }
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VDxfEngine::ExportAAMAIntcut(dx_ifaceBlock *detailBlock, const VLayoutPiece &detail)
+{
+    QVector<QVector<QPointF>> drawIntCut = detail.InternalPathsForCut(true);
     for(int j = 0; j < drawIntCut.size(); ++j)
     {
         DRW_Entity *e = AAMAPolygon(drawIntCut.at(j), "11", false);
@@ -772,6 +789,25 @@ void VDxfEngine::ExportAAMAGlobalText(const QSharedPointer<dx_iface> &input, con
                 input->AddEntity(AAMAText(pos, strings.at(j), "1"));
             }
             return;
+        }
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VDxfEngine::ExportAAMADrill(dx_ifaceBlock *detailBlock, const VLayoutPiece &detail)
+{
+    const QVector<VLayoutPlaceLabel> labels = detail.GetPlaceLabels();
+
+    foreach(const VLayoutPlaceLabel &label, labels)
+    {
+        if (label.type == PlaceLabelType::Doubletree || label.type == PlaceLabelType::Button)
+        {
+            DRW_Point *point = new DRW_Point();
+            point->basePoint = DRW_Coord(FromPixel(label.center.x(), varInsunits),
+                                         FromPixel(getSize().height() - label.center.y(), varInsunits), 0);
+            point->layer = "13";
+
+            detailBlock->ent.push_back(point);
         }
     }
 }

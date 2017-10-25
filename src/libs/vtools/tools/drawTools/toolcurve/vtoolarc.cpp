@@ -64,7 +64,7 @@ const QString VToolArc::ToolType = QStringLiteral("simple");
  * @param initData init data
  */
 VToolArc::VToolArc(const VToolArcInitData &initData, QGraphicsItem *parent)
-    : VAbstractSpline(initData.doc, initData.data, initData.id, parent)
+    : VToolAbstractArc(initData.doc, initData.data, initData.id, parent)
 {
     sceneType = SceneObject::Arc;
 
@@ -181,35 +181,6 @@ VToolArc* VToolArc::Create(VToolArcInitData &initData)
 QString VToolArc::getTagName() const
 {
     return VAbstractPattern::TagArc;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-QString VToolArc::CenterPointName() const
-{
-    return VAbstractTool::data.GetGObject(getCenter())->name();
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-quint32 VToolArc::getCenter() const
-{
-    QSharedPointer<VArc> arc = VAbstractTool::data.GeometricObject<VArc>(m_id);
-    SCASSERT(arc.isNull() == false)
-
-    return arc->GetCenter().id();
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void VToolArc::setCenter(const quint32 &value)
-{
-    if (value != NULL_ID)
-    {
-        QSharedPointer<VGObject> obj = VAbstractTool::data.GetGObject(m_id);
-        QSharedPointer<VArc> arc = qSharedPointerDynamicCast<VArc>(obj);
-
-        QSharedPointer<VPointF> point = VAbstractTool::data.GeometricObject<VPointF>(value);
-        arc->SetCenter(*point.data());
-        SaveOption(obj);
-    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -350,11 +321,17 @@ void VToolArc::RemoveReferens()
 /**
  * @brief SaveDialog save options into file after change in dialog.
  */
-void VToolArc::SaveDialog(QDomElement &domElement)
+void VToolArc::SaveDialog(QDomElement &domElement, QList<quint32> &oldDependencies, QList<quint32> &newDependencies)
 {
     SCASSERT(not m_dialog.isNull())
     QSharedPointer<DialogArc> dialogTool = m_dialog.objectCast<DialogArc>();
     SCASSERT(not dialogTool.isNull())
+
+    QSharedPointer<VArc> arc = VAbstractTool::data.GeometricObject<VArc>(m_id);
+    SCASSERT(arc.isNull() == false)
+    AddDependence(oldDependencies, arc->GetCenter().id());
+    AddDependence(newDependencies, dialogTool->GetCenter());
+
     doc->SetAttribute(domElement, AttrCenter, QString().setNum(dialogTool->GetCenter()));
     doc->SetAttribute(domElement, AttrRadius, dialogTool->GetRadius());
     doc->SetAttribute(domElement, AttrAngle1, dialogTool->GetF1());

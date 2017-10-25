@@ -39,15 +39,31 @@ class SavePieceOptions : public VUndoCommand
 public:
     SavePieceOptions(const VPiece &oldDet, const VPiece &newDet, VAbstractPattern *doc, quint32 id,
                      QUndoCommand *parent = nullptr);
-    virtual ~SavePieceOptions() =default;
+    virtual ~SavePieceOptions() = default;
 
     virtual void undo() Q_DECL_OVERRIDE;
     virtual void redo() Q_DECL_OVERRIDE;
+    virtual bool mergeWith(const QUndoCommand *command) Q_DECL_OVERRIDE;
+    virtual int  id() const Q_DECL_OVERRIDE;
+    quint32      DetId() const;
+    VPiece       NewDet() const;
 private:
     Q_DISABLE_COPY(SavePieceOptions)
 
     const VPiece    m_oldDet;
     VPiece          m_newDet;
 };
+
+//---------------------------------------------------------------------------------------------------------------------
+inline quint32 SavePieceOptions::DetId() const
+{
+    return nodeId;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+inline VPiece SavePieceOptions::NewDet() const
+{
+    return m_newDet;
+}
 
 #endif // SAVEPIECEOPTIONS_H

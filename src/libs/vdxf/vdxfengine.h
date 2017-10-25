@@ -116,6 +116,7 @@ private:
     void ExportAAMAGrainline(dx_ifaceBlock *detailBlock, const VLayoutPiece &detail);
     void ExportAAMAText(dx_ifaceBlock *detailBlock, const VLayoutPiece &detail);
     void ExportAAMAGlobalText(const QSharedPointer<dx_iface> &input, const QVector<VLayoutPiece> &details);
+    void ExportAAMADrill(dx_ifaceBlock *detailBlock, const VLayoutPiece &detail);
 
     Q_REQUIRED_RESULT DRW_Entity *AAMAPolygon(const QVector<QPointF> &polygon, const QString &layer, bool forceClosed);
     Q_REQUIRED_RESULT DRW_Entity *AAMALine(const QLineF &line, const QString &layer);

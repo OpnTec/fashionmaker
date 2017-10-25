@@ -27,7 +27,7 @@
  *************************************************************************/
 
 #include "vtoolpin.h"
-#include "../../dialogs/tools/dialogpin.h"
+#include "../../dialogs/tools/piece/dialogpin.h"
 #include "../../undocommands/savepieceoptions.h"
 #include "../vtoolseamallowance.h"
 #include "../vgeometry/vpointf.h"

@@ -283,11 +283,16 @@ void VToolCutSplinePath::ShowContextMenu(QGraphicsSceneContextMenuEvent *event, 
 /**
  * @brief SaveDialog save options into file after change in dialog.
  */
-void VToolCutSplinePath::SaveDialog(QDomElement &domElement)
+void VToolCutSplinePath::SaveDialog(QDomElement &domElement, QList<quint32> &oldDependencies,
+                                    QList<quint32> &newDependencies)
 {
     SCASSERT(not m_dialog.isNull())
     QSharedPointer<DialogCutSplinePath> dialogTool = m_dialog.objectCast<DialogCutSplinePath>();
     SCASSERT(not dialogTool.isNull())
+
+    AddDependence(oldDependencies, curveCutId);
+    AddDependence(newDependencies, dialogTool->getSplinePathId());
+
     doc->SetAttribute(domElement, AttrName, dialogTool->getPointName());
     doc->SetAttribute(domElement, AttrLength, dialogTool->GetFormula());
     doc->SetAttribute(domElement, AttrSplinePath, QString().setNum(dialogTool->getSplinePathId()));
@@ -334,7 +339,7 @@ QString VToolCutSplinePath::MakeToolTip() const
     const auto splPath = VAbstractTool::data.GeometricObject<VAbstractCubicBezierPath>(curveCutId);
 
     const QString expression = qApp->TrVars()->FormulaToUser(formula, qApp->Settings()->GetOsSeparator());
-    const qreal length = Visualization::FindVal(expression, VAbstractTool::data.DataVariables());
+    const qreal length = Visualization::FindValFromUser(expression, VAbstractTool::data.DataVariables());
 
     VSplinePath *splPath1 = nullptr;
     VSplinePath *splPath2 = nullptr;

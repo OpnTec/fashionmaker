@@ -65,29 +65,29 @@ void VisToolEllipticalArc::RefreshGeometry()
 //---------------------------------------------------------------------------------------------------------------------
 void VisToolEllipticalArc::setRadius1(const QString &expression)
 {
-    radius1 = FindLength(expression, Visualization::data->DataVariables());
+    radius1 = FindLengthFromUser(expression, Visualization::data->DataVariables());
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void VisToolEllipticalArc::setRadius2(const QString &expression)
 {
-    radius2 = FindLength(expression, Visualization::data->DataVariables());
+    radius2 = FindLengthFromUser(expression, Visualization::data->DataVariables());
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void VisToolEllipticalArc::setF1(const QString &expression)
 {
-    f1 = FindVal(expression, Visualization::data->DataVariables());
+    f1 = FindValFromUser(expression, Visualization::data->DataVariables());
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void VisToolEllipticalArc::setF2(const QString &expression)
 {
-    f2 = FindVal(expression, Visualization::data->DataVariables());
+    f2 = FindValFromUser(expression, Visualization::data->DataVariables());
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void VisToolEllipticalArc::setRotationAngle(const QString &expression)
 {
-    rotationAngle = FindVal(expression, Visualization::data->DataVariables());
+    rotationAngle = FindValFromUser(expression, Visualization::data->DataVariables());
 }

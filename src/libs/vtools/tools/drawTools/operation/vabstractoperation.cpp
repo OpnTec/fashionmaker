@@ -86,7 +86,7 @@ void VAbstractOperation::paint(QPainter *painter, const QStyleOptionGraphicsItem
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VAbstractOperation::DoChangePosition(quint32 id, const QPointF &pos)
+void VAbstractOperation::ChangeLabelPosition(quint32 id, const QPointF &pos)
 {
     if (operatedObjects.contains(id))
     {
@@ -98,7 +98,6 @@ void VAbstractOperation::DoChangePosition(quint32 id, const QPointF &pos)
             QSharedPointer<VPointF> point = VAbstractTool::data.GeometricObject<VPointF>(id);
             point->setMx(pos.x());
             point->setMy(pos.y());
-            VAbstractTool::data.UpdateGObject(id, point);
             item->RefreshPointGeometry(*(point.data()));
         }
     }
@@ -607,7 +606,7 @@ void VAbstractOperation::InitOperatedObjects()
         const QSharedPointer<VGObject> obj = VAbstractTool::data.GetGObject(object.id);
 
         // This check helps to find missed objects in the switch
-        Q_STATIC_ASSERT_X(static_cast<int>(GOType::Unknown) == 7, "Not all objects were handled.");
+        Q_STATIC_ASSERT_X(static_cast<int>(GOType::Unknown) == 8, "Not all objects were handled.");
 
 QT_WARNING_PUSH
 QT_WARNING_DISABLE_GCC("-Wswitch-default")
@@ -650,6 +649,8 @@ QT_WARNING_DISABLE_GCC("-Wswitch-default")
                 InitCurve(object.id, &(VAbstractTool::data), obj->getType(), SceneObject::SplinePath);
                 break;
             case GOType::Unknown:
+            case GOType::PlaceLabel:
+                Q_UNREACHABLE();
                 break;
         }
 QT_WARNING_POP

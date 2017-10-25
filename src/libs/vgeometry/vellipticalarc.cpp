@@ -266,8 +266,16 @@ QVector<QPointF> VEllipticalArc::GetPoints() const
 
     path = t.map(path);
 
-    QPolygonF polygon = path.toSubpathPolygons().first();
-    polygon.removeFirst(); // remove point (0;0)
+    QPolygonF polygon;
+    const QList<QPolygonF> sub = path.toSubpathPolygons();
+    if (not sub.isEmpty())
+    {
+        polygon = path.toSubpathPolygons().first();
+        if (not polygon.isEmpty())
+        {
+            polygon.removeFirst(); // remove point (0;0)
+        }
+    }
 
     return polygon;
 }

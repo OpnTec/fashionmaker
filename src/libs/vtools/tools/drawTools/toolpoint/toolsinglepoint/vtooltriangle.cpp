@@ -265,11 +265,22 @@ void VToolTriangle::RemoveReferens()
 /**
  * @brief SaveDialog save options into file after change in dialog.
  */
-void VToolTriangle::SaveDialog(QDomElement &domElement)
+void VToolTriangle::SaveDialog(QDomElement &domElement, QList<quint32> &oldDependencies,
+                               QList<quint32> &newDependencies)
 {
     SCASSERT(not m_dialog.isNull())
     QSharedPointer<DialogTriangle> dialogTool = m_dialog.objectCast<DialogTriangle>();
     SCASSERT(not dialogTool.isNull())
+
+    AddDependence(oldDependencies, axisP1Id);
+    AddDependence(oldDependencies, axisP2Id);
+    AddDependence(oldDependencies, firstPointId);
+    AddDependence(oldDependencies, secondPointId);
+    AddDependence(newDependencies, dialogTool->GetAxisP1Id());
+    AddDependence(newDependencies, dialogTool->GetAxisP2Id());
+    AddDependence(newDependencies, dialogTool->GetFirstPointId());
+    AddDependence(newDependencies, dialogTool->GetSecondPointId());
+
     doc->SetAttribute(domElement, AttrName, dialogTool->getPointName());
     doc->SetAttribute(domElement, AttrAxisP1, QString().setNum(dialogTool->GetAxisP1Id()));
     doc->SetAttribute(domElement, AttrAxisP2, QString().setNum(dialogTool->GetAxisP2Id()));
@@ -329,79 +340,7 @@ void VToolTriangle::ShowContextMenu(QGraphicsSceneContextMenuEvent *event, quint
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-quint32 VToolTriangle::GetSecondPointId() const
-{
-    return secondPointId;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void VToolTriangle::SetSecondPointId(const quint32 &value)
-{
-    if (value != NULL_ID)
-    {
-        secondPointId = value;
-
-        QSharedPointer<VGObject> obj = VAbstractTool::data.GetGObject(m_id);
-        SaveOption(obj);
-    }
-}
-
-//---------------------------------------------------------------------------------------------------------------------
 void VToolTriangle::ShowVisualization(bool show)
 {
     ShowToolVisualization<VisToolTriangle>(show);
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-quint32 VToolTriangle::GetFirstPointId() const
-{
-    return firstPointId;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void VToolTriangle::SetFirstPointId(const quint32 &value)
-{
-    if (value != NULL_ID)
-    {
-        firstPointId = value;
-
-        QSharedPointer<VGObject> obj = VAbstractTool::data.GetGObject(m_id);
-        SaveOption(obj);
-    }
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-quint32 VToolTriangle::GetAxisP2Id() const
-{
-    return axisP2Id;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void VToolTriangle::SetAxisP2Id(const quint32 &value)
-{
-    if (value != NULL_ID)
-    {
-        axisP2Id = value;
-
-        QSharedPointer<VGObject> obj = VAbstractTool::data.GetGObject(m_id);
-        SaveOption(obj);
-    }
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-quint32 VToolTriangle::GetAxisP1Id() const
-{
-    return axisP1Id;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void VToolTriangle::SetAxisP1Id(const quint32 &value)
-{
-    if (value != NULL_ID)
-    {
-        axisP1Id = value;
-
-        QSharedPointer<VGObject> obj = VAbstractTool::data.GetGObject(m_id);
-        SaveOption(obj);
-    }
 }

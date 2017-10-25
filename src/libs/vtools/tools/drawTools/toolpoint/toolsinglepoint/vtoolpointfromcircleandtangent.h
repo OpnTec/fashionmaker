@@ -77,12 +77,6 @@ public:
     QString TangentPointName() const;
     QString CircleCenterPointName() const;
 
-    quint32 GetTangentPointId() const;
-    void    SetTangentPointId(const quint32 &value);
-
-    quint32 GetCircleCenterId() const;
-    void    SetCircleCenterId(const quint32 &value);
-
     VFormula GetCircleRadius() const;
     void     SetCircleRadius(const VFormula &value);
 
@@ -94,7 +88,8 @@ protected slots:
     virtual void ShowContextMenu(QGraphicsSceneContextMenuEvent *event, quint32 id=NULL_ID) Q_DECL_OVERRIDE;
 protected:
     virtual void RemoveReferens() Q_DECL_OVERRIDE;
-    virtual void SaveDialog(QDomElement &domElement) Q_DECL_OVERRIDE;
+    virtual void SaveDialog(QDomElement &domElement, QList<quint32> &oldDependencies,
+                            QList<quint32> &newDependencies) Q_DECL_OVERRIDE;
     virtual void SaveOptions(QDomElement &tag, QSharedPointer<VGObject> &obj) Q_DECL_OVERRIDE;
     virtual void ReadToolAttributes(const QDomElement &domElement) Q_DECL_OVERRIDE;
     virtual void SetVisualization() Q_DECL_OVERRIDE;

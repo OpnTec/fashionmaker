@@ -447,7 +447,7 @@ void VToolSplinePath::AddPathPoint(VAbstractPattern *doc, QDomElement &domElemen
 void VToolSplinePath::RemoveReferens()
 {
     const QSharedPointer<VSplinePath> splPath = VAbstractTool::data.GeometricObject<VSplinePath>(m_id);
-    for (qint32 i = 0; i < splPath->CountSubSpl(); ++i)
+    for (qint32 i = 0; i < splPath->CountPoints(); ++i)
     {
         doc->DecrementReferens(splPath->at(i).P().getIdTool());
     }
@@ -457,13 +457,25 @@ void VToolSplinePath::RemoveReferens()
 /**
  * @brief SaveDialog save options into file after change in dialog.
  */
-void VToolSplinePath::SaveDialog(QDomElement &domElement)
+void VToolSplinePath::SaveDialog(QDomElement &domElement, QList<quint32> &oldDependencies,
+                                 QList<quint32> &newDependencies)
 {
     SCASSERT(not m_dialog.isNull())
     QSharedPointer<DialogSplinePath> dialogTool = m_dialog.objectCast<DialogSplinePath>();
     SCASSERT(not dialogTool.isNull())
 
+    const auto oldSplPath = VAbstractTool::data.GeometricObject<VSplinePath>(m_id);
+    for (qint32 i = 0; i < oldSplPath->CountPoints(); ++i)
+    {
+        AddDependence(oldDependencies, oldSplPath->at(i).P().id());
+    }
+
     const VSplinePath splPath = dialogTool->GetPath();
+    for (qint32 i = 0; i < splPath.CountPoints(); ++i)
+    {
+        AddDependence(newDependencies, splPath.at(i).P().id());
+    }
+
     for (qint32 i = 1; i <= splPath.CountSubSpl(); ++i)
     {
         VSpline spl = splPath.GetSpline(i);

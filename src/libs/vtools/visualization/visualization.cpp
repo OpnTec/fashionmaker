@@ -143,15 +143,15 @@ VScaledEllipse *Visualization::InitPoint(const QColor &color, QGraphicsItem *par
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-qreal Visualization::FindLength(const QString &expression,
-                                const QHash<QString, QSharedPointer<VInternalVariable> > *vars)
+qreal Visualization::FindLengthFromUser(const QString &expression,
+                                        const QHash<QString, QSharedPointer<VInternalVariable> > *vars, bool fromUser)
 {
-    return qApp->toPixel(FindVal(expression, vars));
+    return qApp->toPixel(FindValFromUser(expression, vars, fromUser));
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-qreal Visualization::FindVal(const QString &expression,
-                             const QHash<QString, QSharedPointer<VInternalVariable> > *vars)
+qreal Visualization::FindValFromUser(const QString &expression,
+                                     const QHash<QString, QSharedPointer<VInternalVariable> > *vars, bool fromUser)
 {
     qreal val = 0;
     if (expression.isEmpty())
@@ -165,7 +165,11 @@ qreal Visualization::FindVal(const QString &expression,
             // Replace line return with spaces for calc if exist
             QString formula = expression;
             formula.replace("\n", " ");
-            formula = qApp->TrVars()->FormulaFromUser(formula, qApp->Settings()->GetOsSeparator());
+            if (fromUser)
+            {
+                formula = qApp->TrVars()->FormulaFromUser(formula, qApp->Settings()->GetOsSeparator());
+            }
+
             QScopedPointer<Calculator> cal(new Calculator());
             val = cal->EvalFormula(vars, formula);
 

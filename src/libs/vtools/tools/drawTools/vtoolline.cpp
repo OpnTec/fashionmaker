@@ -364,11 +364,18 @@ void VToolLine::keyReleaseEvent(QKeyEvent *event)
 /**
  * @brief SaveDialog save options into file after change in dialog.
  */
-void VToolLine::SaveDialog(QDomElement &domElement)
+void VToolLine::SaveDialog(QDomElement &domElement, QList<quint32> &oldDependencies,
+                           QList<quint32> &newDependencies)
 {
     SCASSERT(not m_dialog.isNull())
     QSharedPointer<DialogLine> dialogTool = m_dialog.objectCast<DialogLine>();
     SCASSERT(not dialogTool.isNull())
+
+    AddDependence(oldDependencies, firstPoint);
+    AddDependence(oldDependencies, secondPoint);
+    AddDependence(newDependencies, dialogTool->GetFirstPoint());
+    AddDependence(newDependencies, dialogTool->GetSecondPoint());
+
     doc->SetAttribute(domElement, AttrFirstPoint, QString().setNum(dialogTool->GetFirstPoint()));
     doc->SetAttribute(domElement, AttrSecondPoint, QString().setNum(dialogTool->GetSecondPoint()));
     doc->SetAttribute(domElement, AttrTypeLine, dialogTool->GetTypeLine());
@@ -431,24 +438,6 @@ QString VToolLine::MakeToolTip() const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-quint32 VToolLine::GetSecondPoint() const
-{
-    return secondPoint;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void VToolLine::SetSecondPoint(const quint32 &value)
-{
-    if (value != NULL_ID)
-    {
-        secondPoint = value;
-
-        QSharedPointer<VGObject> obj;//We don't have object for line in data container. Just will send empty object.
-        SaveOption(obj);
-    }
-}
-
-//---------------------------------------------------------------------------------------------------------------------
 void VToolLine::ShowVisualization(bool show)
 {
     if (show)
@@ -502,24 +491,6 @@ void VToolLine::GroupVisibility(quint32 object, bool visible)
 {
     Q_UNUSED(object)
     setVisible(visible);
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-quint32 VToolLine::GetFirstPoint() const
-{
-    return firstPoint;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void VToolLine::SetFirstPoint(const quint32 &value)
-{
-    if (value != NULL_ID)
-    {
-        firstPoint = value;
-
-        QSharedPointer<VGObject> obj;//We don't have object for line in data container. Just will send empty object.
-        SaveOption(obj);
-    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------

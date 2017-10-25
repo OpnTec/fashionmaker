@@ -59,9 +59,6 @@ public:
 
     QString CurveName() const;
 
-    quint32 getCurveCutId() const;
-    void    setCurveCutId(const quint32 &value);
-
 public slots:
     virtual void    Disable(bool disable, const QString &namePP) Q_DECL_OVERRIDE;
     virtual void    DetailsMode(bool mode) Q_DECL_OVERRIDE;

@@ -185,8 +185,15 @@ quint32 VContainer::AddGObject(VGObject *obj)
 {
     SCASSERT(obj != nullptr)
     QSharedPointer<VGObject> pointer(obj);
+    return AddGObject(pointer);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+quint32 VContainer::AddGObject(const QSharedPointer<VGObject> &obj)
+{
+    SCASSERT(not obj.isNull())
     uniqueNames.insert(obj->name());
-    return AddObject(d->gObjects, pointer);
+    return AddObject(d->gObjects, obj);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -240,22 +247,6 @@ void VContainer::UpdateId(quint32 newId)
     {
        _id = newId;
     }
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-/**
- * @brief UpdateObject update object in container
- * @param id id of existing object
- * @param point object
- */
-template <typename val>
-void VContainer::UpdateObject(const quint32 &id, val point)
-{
-    Q_ASSERT_X(id != NULL_ID, Q_FUNC_INFO, "id == 0"); //-V654 //-V712
-    SCASSERT(point.isNull() == false)
-    point->setId(id);
-    d->gObjects.insert(id, point);
-    UpdateId(id);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -488,27 +479,6 @@ quint32 VContainer::AddObject(QHash<key, val> &obj, val value)
     value->setId(id);
     obj[id] = value;
     return id;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-/**
- * @brief UpdateGObject update GObject by id
- * @param id id of existing GObject
- * @param obj object
- */
-void VContainer::UpdateGObject(quint32 id, VGObject* obj)
-{
-    SCASSERT(obj != nullptr)
-    QSharedPointer<VGObject> pointer(obj);
-    UpdateGObject(id, pointer);
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void VContainer::UpdateGObject(quint32 id, const QSharedPointer<VGObject> &obj)
-{
-    SCASSERT(not obj.isNull())
-    UpdateObject(id, obj);
-    uniqueNames.insert(obj->name());
 }
 
 //---------------------------------------------------------------------------------------------------------------------

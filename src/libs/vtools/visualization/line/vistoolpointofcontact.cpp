@@ -108,5 +108,5 @@ void VisToolPointOfContact::setRadiusId(const quint32 &value)
 //---------------------------------------------------------------------------------------------------------------------
 void VisToolPointOfContact::setRadius(const QString &expression)
 {
-    radius = FindLength(expression, Visualization::data->DataVariables());
+    radius = FindLengthFromUser(expression, Visualization::data->DataVariables());
 }

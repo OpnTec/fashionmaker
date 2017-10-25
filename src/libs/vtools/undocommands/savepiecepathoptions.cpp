@@ -35,15 +35,17 @@
 #include "../ifc/xml/vabstractpattern.h"
 #include "../vmisc/logging.h"
 #include "../tools/nodeDetails/vtoolpiecepath.h"
+#include "../tools/vtoolseamallowance.h"
 
 //---------------------------------------------------------------------------------------------------------------------
-SavePiecePathOptions::SavePiecePathOptions(const VPiecePath &oldPath, const VPiecePath &newPath,
+SavePiecePathOptions::SavePiecePathOptions(quint32 pieceId, const VPiecePath &oldPath, const VPiecePath &newPath,
                                            VAbstractPattern *doc, VContainer *data, quint32 id,
                                            QUndoCommand *parent)
     : VUndoCommand(QDomElement(), doc, parent),
       m_oldPath(oldPath),
       m_newPath(newPath),
-      m_data(data)
+      m_data(data),
+      m_pieceId(pieceId)
 {
     setText(tr("save path options"));
     nodeId = id;
@@ -66,6 +68,14 @@ void SavePiecePathOptions::undo()
 
         SCASSERT(m_data);
         m_data->UpdatePiecePath(nodeId, m_oldPath);
+
+        if (m_pieceId != NULL_ID)
+        {
+            if (VToolSeamAllowance *tool = qobject_cast<VToolSeamAllowance *>(VAbstractPattern::getTool(m_pieceId)))
+            {
+                tool->RefreshGeometry();
+            }
+        }
     }
     else
     {
@@ -90,9 +100,46 @@ void SavePiecePathOptions::redo()
 
         SCASSERT(m_data);
         m_data->UpdatePiecePath(nodeId, m_newPath);
+
+        if (m_pieceId != NULL_ID)
+        {
+            if (VToolSeamAllowance *tool = qobject_cast<VToolSeamAllowance *>(VAbstractPattern::getTool(m_pieceId)))
+            {
+                tool->RefreshGeometry();
+            }
+        }
     }
     else
     {
         qCDebug(vUndo, "Can't find path with id = %u.", nodeId);
     }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+bool SavePiecePathOptions::mergeWith(const QUndoCommand *command)
+{
+    const SavePiecePathOptions *saveCommand = static_cast<const SavePiecePathOptions *>(command);
+    SCASSERT(saveCommand != nullptr);
+
+    if (saveCommand->PathId() != nodeId)
+    {
+        return false;
+    }
+    else
+    {
+        const QSet<quint32> currentSet;
+        currentSet.fromList(m_newPath.Dependencies());
+
+        const VPiecePath candidate = saveCommand->NewPath();
+        const QSet<quint32> candidateSet;
+        candidateSet.fromList(candidate.Dependencies());
+
+        if (currentSet != candidateSet)
+        {
+            return false;
+        }
+    }
+
+    m_newPath = saveCommand->NewPath();
+    return true;
 }

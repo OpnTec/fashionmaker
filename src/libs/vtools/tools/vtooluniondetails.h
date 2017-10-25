@@ -47,6 +47,8 @@
 
 class DialogTool;
 
+#define UNION_VERSSION 2
+
 struct VToolUnionDetailsInitData : VAbstractToolInitData
 {
     VToolUnionDetailsInitData()
@@ -55,7 +57,8 @@ struct VToolUnionDetailsInitData : VAbstractToolInitData
           d2id(NULL_ID),
           indexD1(NULL_ID),
           indexD2(NULL_ID),
-          retainPieces(false)
+          retainPieces(false),
+          version(UNION_VERSSION)
     {}
 
     quint32 d1id;
@@ -63,6 +66,7 @@ struct VToolUnionDetailsInitData : VAbstractToolInitData
     quint32 indexD1;
     quint32 indexD2;
     bool retainPieces;
+    uint version;
 };
 
 /**
@@ -87,6 +91,8 @@ public:
     static const QString AttrNodeType;
     static const QString NodeTypeContour;
     static const QString NodeTypeModeling;
+
+    static const quint8 unionVersion;
 
     virtual QString getTagName() const Q_DECL_OVERRIDE;
     virtual void ShowVisualization(bool show) Q_DECL_OVERRIDE;
@@ -119,6 +125,8 @@ private:
 
     /** @brief indexD2 index edge in second detail. */
     quint32 indexD2;
+
+    uint version;
 
     VToolUnionDetails(const VToolUnionDetailsInitData &initData, QObject *parent = nullptr);
 
