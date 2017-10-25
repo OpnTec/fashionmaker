@@ -42,7 +42,8 @@ HEADERS += \
     $$PWD/path/vistoolpiece.h \
     $$PWD/path/vistoolpiecepath.h \
     $$PWD/path/vispiecespecialpoints.h \
-    $$PWD/line/vistoolspecialpoint.h
+    $$PWD/line/vistoolspecialpoint.h \
+    $$PWD/path/vistoolduplicatedetail.h
 
 SOURCES += \
     $$PWD/visualization.cpp \
@@ -85,4 +86,5 @@ SOURCES += \
     $$PWD/path/vistoolpiece.cpp \
     $$PWD/path/vistoolpiecepath.cpp \
     $$PWD/path/vispiecespecialpoints.cpp \
-    $$PWD/line/vistoolspecialpoint.cpp
+    $$PWD/line/vistoolspecialpoint.cpp \
+    $$PWD/path/vistoolduplicatedetail.cpp

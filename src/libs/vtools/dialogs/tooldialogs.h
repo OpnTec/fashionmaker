@@ -70,6 +70,7 @@
 #include "tools/piece/dialogpin.h"
 #include "tools/piece/dialoginsertnode.h"
 #include "tools/piece/dialogplacelabel.h"
+#include "tools/piece/dialogduplicatedetail.h"
 
 #include "support/dialogeditwrongformula.h"
 #include "support/dialogundo.h"

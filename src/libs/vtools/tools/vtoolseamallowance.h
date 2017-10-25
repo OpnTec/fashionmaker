@@ -64,6 +64,9 @@ public:
     static VToolSeamAllowance* Create(QSharedPointer<DialogTool> dialog, VMainGraphicsScene *scene,
                                       VAbstractPattern *doc, VContainer *data);
     static VToolSeamAllowance* Create(VToolSeamAllowanceInitData &initData);
+    static VToolSeamAllowance* Duplicate(QSharedPointer<DialogTool> dialog, VMainGraphicsScene *scene,
+                                         VAbstractPattern *doc, VContainer *data);
+    static VToolSeamAllowance* Duplicate(VToolSeamAllowanceInitData &initData);
 
     static const quint8 pieceVersion;
 

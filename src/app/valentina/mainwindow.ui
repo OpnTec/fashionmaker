@@ -48,7 +48,7 @@
        <string>Export details skiping the Layout stage</string>
       </property>
       <property name="currentIndex">
-       <number>7</number>
+       <number>6</number>
       </property>
       <widget class="QWidget" name="page">
        <property name="geometry">
@@ -1538,6 +1538,32 @@
           <property name="icon">
            <iconset resource="share/resources/toolicon.qrc">
             <normaloff>:/toolicon/32x32/place_label.png</normaloff>:/toolicon/32x32/place_label.png</iconset>
+          </property>
+          <property name="iconSize">
+           <size>
+            <width>32</width>
+            <height>32</height>
+           </size>
+          </property>
+          <property name="checkable">
+           <bool>true</bool>
+          </property>
+         </widget>
+        </item>
+        <item row="4" column="1">
+         <widget class="QToolButton" name="toolButtonDuplicateDetail">
+          <property name="enabled">
+           <bool>false</bool>
+          </property>
+          <property name="toolTip">
+           <string>Duplicate detail tool</string>
+          </property>
+          <property name="text">
+           <string notr="true">...</string>
+          </property>
+          <property name="icon">
+           <iconset resource="share/resources/toolicon.qrc">
+            <normaloff>:/toolicon/32x32/duplicate_detail.png</normaloff>:/toolicon/32x32/duplicate_detail.png</iconset>
           </property>
           <property name="iconSize">
            <size>

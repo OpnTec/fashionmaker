@@ -28,6 +28,7 @@
 
 #include "vtoolseamallowance.h"
 #include "../dialogs/tools/piece/dialogseamallowance.h"
+#include "../dialogs/tools/piece/dialogduplicatedetail.h"
 #include "../vpatterndb/vpiecenode.h"
 #include "../vpatterndb/vpiecepath.h"
 #include "../vpatterndb/calculator.h"
@@ -149,6 +150,35 @@ VToolSeamAllowance *VToolSeamAllowance::Create(VToolSeamAllowanceInitData &initD
     //Very important to delete it. Only this tool need this special variable.
     initData.data->RemoveVariable(currentSeamAllowance);
     return piece;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+VToolSeamAllowance *VToolSeamAllowance::Duplicate(QSharedPointer<DialogTool> dialog, VMainGraphicsScene *scene,
+                                                  VAbstractPattern *doc, VContainer *data)
+{
+    SCASSERT(not dialog.isNull());
+    QSharedPointer<DialogDuplicateDetail> dialogTool = dialog.objectCast<DialogDuplicateDetail>();
+    SCASSERT(not dialogTool.isNull())
+
+    VToolSeamAllowanceInitData initData;
+    initData.scene = scene;
+    initData.doc = doc;
+    initData.data = data;
+    initData.parse = Document::FullParse;
+    initData.typeCreation = Source::FromGui;
+
+//    initData.detail = dialogTool->GetPiece();
+    initData.width = initData.detail.GetFormulaSAWidth();
+
+//    initData.detail.GetPath().SetNodes(PrepareNodes(initData.detail.GetPath(), scene, doc, data));
+
+    return Duplicate(initData);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+VToolSeamAllowance *VToolSeamAllowance::Duplicate(VToolSeamAllowanceInitData &initData)
+{
+    return nullptr;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -1005,11 +1035,6 @@ QVariant VToolSeamAllowance::itemChange(QGraphicsItem::GraphicsItemChange change
                     }
                 }
             }
-            // Don't forget to update geometry, because first change never call full parse
-            VPiece detail = VAbstractTool::data.GetPiece(m_id);
-            detail.SetMx(newPos.x());
-            detail.SetMy(newPos.y());
-            VAbstractTool::data.UpdatePiece(m_id, detail);
 
             changeFinished = true;
         }
