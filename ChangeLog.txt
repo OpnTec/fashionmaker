@@ -29,6 +29,7 @@
 - [#768] New feature. Custom curve approximation scale.
 - [#759] Add place label tool.
 - [#771] Improve tool Point at intersection of arc and line.
+- [#772] New tool Duplicate detail.
 
 # Version 0.5.1
 - [#683] Tool Seam allowance's dialog is off screen on small resolutions.
