@@ -1538,19 +1538,38 @@ void CreateUnitedDetail(const VToolUnionDetailsInitData &initData, qreal dx, qre
 
     VToolSeamAllowance::Create(pieceInitData);
 
-    auto RemoveDetail = [initData](quint32 id)
+    auto DuplicateDetail = [initData](quint32 id)
+    {
+        VToolSeamAllowanceInitData initPieceData;
+        initPieceData.scene = initData.scene;
+        initPieceData.doc = initData.doc;
+        initPieceData.parse = Document::FullParse;
+        initPieceData.typeCreation = Source::FromGui;
+        initPieceData.drawName = initData.doc->PieceDrawName(id);
+
+        VContainer toolData = VAbstractPattern::getTool(id)->getData();
+        initPieceData.data = &toolData;
+
+        initPieceData.detail = initData.data->GetPiece(id);
+        initPieceData.width = initPieceData.detail.GetFormulaSAWidth();
+        VToolSeamAllowance::Duplicate(initPieceData);
+    };
+
+    if (initData.retainPieces)
+    {
+        DuplicateDetail(initData.d1id);
+        DuplicateDetail(initData.d2id);
+    }
+
+    auto RemoveDetail = [](quint32 id)
     {
         VToolSeamAllowance *toolDet = qobject_cast<VToolSeamAllowance*>(VAbstractPattern::getTool(id));
         SCASSERT(toolDet != nullptr);
-        bool ask = false;
-        toolDet->RemoveWithConfirm(ask);
+        toolDet->RemoveWithConfirm(false);
     };
 
-    if (not initData.retainPieces)
-    {
-        RemoveDetail(initData.d1id);
-        RemoveDetail(initData.d2id);
-    }
+    RemoveDetail(initData.d1id);
+    RemoveDetail(initData.d2id);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
