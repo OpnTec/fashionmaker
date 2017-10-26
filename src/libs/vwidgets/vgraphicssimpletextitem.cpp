@@ -48,8 +48,6 @@
 #include "global.h"
 #include "vscenepoint.h"
 
-#define DEFAULT_SCALE 0.01
-
 //---------------------------------------------------------------------------------------------------------------------
 /**
  * @brief VGraphicsSimpleTextItem default constructor.
@@ -57,7 +55,7 @@
  */
 VGraphicsSimpleTextItem::VGraphicsSimpleTextItem(QGraphicsItem * parent)
     :QGraphicsSimpleTextItem(parent), m_fontSize(0), selectionType(SelectionType::ByMouseRelease),
-      m_oldScale(DEFAULT_SCALE)
+      m_oldScale(VMainGraphicsView::MinScale())
 {
     this->setFlag(QGraphicsItem::ItemIsMovable, true);
     this->setFlag(QGraphicsItem::ItemIsSelectable, true);
@@ -79,7 +77,7 @@ VGraphicsSimpleTextItem::VGraphicsSimpleTextItem(QGraphicsItem * parent)
  */
 VGraphicsSimpleTextItem::VGraphicsSimpleTextItem( const QString & text, QGraphicsItem * parent )
     :QGraphicsSimpleTextItem(text, parent), m_fontSize(0), selectionType(SelectionType::ByMouseRelease),
-      m_oldScale(DEFAULT_SCALE)
+      m_oldScale(VMainGraphicsView::MinScale())
 {
     this->setFlag(QGraphicsItem::ItemIsMovable, true);
     this->setFlag(QGraphicsItem::ItemIsSelectable, true);
@@ -118,7 +116,7 @@ void VGraphicsSimpleTextItem::paint(QPainter *painter, const QStyleOptionGraphic
         m_oldScale = 1;
     }
 
-    if (scene)
+    if (scene && not scene->sceneRect().contains(sceneBoundingRect()))
     {
         if (QGraphicsView *view = scene->views().at(0))
         {
