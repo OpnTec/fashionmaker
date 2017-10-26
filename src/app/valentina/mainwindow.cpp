@@ -260,7 +260,7 @@ void MainWindow::AddPP(const QString &PPName)
     comboBoxDraws->blockSignals(true);
     comboBoxDraws->addItem(PPName);
 
-    pattern->ClearGObjects();
+    pattern->ClearCalculationGObjects();
     //Create single point
     ui->view->itemClicked(nullptr);//hide options previous tool
     const QString label = doc->GenerateLabel(LabelType::NewPatternPiece);

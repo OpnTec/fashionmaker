@@ -103,10 +103,7 @@ VContainer::VContainer(const VContainer &data)
 
 //---------------------------------------------------------------------------------------------------------------------
 VContainer::~VContainer()
-{
-    ClearGObjects();
-    ClearVariables();
-}
+{}
 
 //---------------------------------------------------------------------------------------------------------------------
 /**
@@ -115,9 +112,20 @@ VContainer::~VContainer()
  * @return point
  */
 // cppcheck-suppress unusedFunction
-const QSharedPointer<VGObject> VContainer::GetGObject(quint32 id)const
+const QSharedPointer<VGObject> VContainer::GetGObject(quint32 id) const
 {
-    return GetObject(d->gObjects, id);
+    if (d->calculationObjects.contains(id))
+    {
+        return d->calculationObjects.value(id);
+    }
+    else if (d->modelingObjects->contains(id))
+    {
+        return d->modelingObjects->value(id);
+    }
+    else
+    {
+        throw VExceptionBadId(tr("Can't find object"), id);
+    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -127,26 +135,6 @@ const QSharedPointer<VGObject> VContainer::GetFakeGObject(quint32 id)
     obj->setId(id);
     QSharedPointer<VGObject> pointer(obj);
     return pointer;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-/**
- * @brief GetObject return object from container
- * @param obj container
- * @param id id of object
- * @return Object
- */
-template <typename key, typename val>
-const val VContainer::GetObject(const QHash<key, val> &obj, key id) const
-{
-    if (obj.contains(id))
-    {
-        return obj.value(id);
-    }
-    else
-    {
-        throw VExceptionBadId(tr("Can't find object"), id);
-    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -192,8 +180,27 @@ quint32 VContainer::AddGObject(VGObject *obj)
 quint32 VContainer::AddGObject(const QSharedPointer<VGObject> &obj)
 {
     SCASSERT(not obj.isNull())
+
+    if (obj->getMode() == Draw::Layout)
+    {
+        qWarning("Can't add an object with mode 'Layout'");
+        return NULL_ID;
+    }
+
     uniqueNames.insert(obj->name());
-    return AddObject(d->gObjects, obj);
+    const quint32 id = getNextId();
+    obj->setId(id);
+
+    if (obj->getMode() == Draw::Calculation)
+    {
+        d->calculationObjects.insert(id, obj);
+    }
+    else if (obj->getMode() == Draw::Modeling)
+    {
+        d->modelingObjects->insert(id, obj);
+    }
+
+    return id;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -290,33 +297,14 @@ void VContainer::ClearForFullParse()
  */
 void VContainer::ClearGObjects()
 {
-    d->gObjects.clear();
+    d->calculationObjects.clear();
+    d->modelingObjects->clear();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void VContainer::ClearCalculationGObjects()
 {
-    if (not d->gObjects.isEmpty()) //-V807
-    {
-        QVector<quint32> keys;
-        QHash<quint32, QSharedPointer<VGObject> >::iterator i;
-        for (i = d->gObjects.begin(); i != d->gObjects.end(); ++i)
-        {
-            if (i.value()->getMode() == Draw::Calculation)
-            {
-                i.value().clear();
-                keys.append(i.key());
-            }
-        }
-        // We can't delete objects in previous loop it will destroy the iterator.
-        if (not keys.isEmpty())
-        {
-            for (int i = 0; i < keys.size(); ++i)
-            {
-                d->gObjects.remove(keys.at(i));
-            }
-        }
-    }
+    d->calculationObjects.clear();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -462,23 +450,6 @@ void VContainer::RemoveVariable(const QString &name)
 void VContainer::RemovePiece(quint32 id)
 {
     d->pieces->remove(id);
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-/**
- * @brief AddObject add object to container
- * @param obj container
- * @param value object
- * @return id of object in container
- */
-template <typename key, typename val>
-quint32 VContainer::AddObject(QHash<key, val> &obj, val value)
-{
-    SCASSERT(value != nullptr)
-    const quint32 id = getNextId();
-    value->setId(id);
-    obj[id] = value;
-    return id;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -678,9 +649,9 @@ qreal *VContainer::rheight()
  * @brief data container with datagObjects return container of gObjects
  * @return pointer on container of gObjects
  */
-const QHash<quint32, QSharedPointer<VGObject> > *VContainer::DataGObjects() const
+const QHash<quint32, QSharedPointer<VGObject> > *VContainer::CalculationGObjects() const
 {
-    return &d->gObjects;
+    return &d->calculationObjects;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
