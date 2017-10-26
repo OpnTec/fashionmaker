@@ -48,7 +48,7 @@
 #include "global.h"
 #include "vscenepoint.h"
 
-#define DEFAULT_SCALE 0.001
+#define DEFAULT_SCALE 0.01
 
 //---------------------------------------------------------------------------------------------------------------------
 /**
