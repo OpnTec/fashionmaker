@@ -28,17 +28,13 @@
 
 #include "vtoolseamallowance.h"
 #include "../dialogs/tools/piece/dialogseamallowance.h"
+#include "../dialogs/tools/piece/dialogduplicatedetail.h"
 #include "../vpatterndb/vpiecenode.h"
 #include "../vpatterndb/vpiecepath.h"
 #include "../vpatterndb/calculator.h"
 #include "../vpatterndb/floatItemData/vpatternlabeldata.h"
 #include "../vpatterndb/floatItemData/vpiecelabeldata.h"
-#include "nodeDetails/vnodearc.h"
-#include "nodeDetails/vnodeellipticalarc.h"
-#include "nodeDetails/vnodepoint.h"
-#include "nodeDetails/vnodespline.h"
-#include "nodeDetails/vnodesplinepath.h"
-#include "nodeDetails/vtoolpiecepath.h"
+#include "nodeDetails/nodedetails.h"
 #include "../vgeometry/varc.h"
 #include "../vgeometry/vellipticalarc.h"
 #include "../vgeometry/vcubicbezier.h"
@@ -46,6 +42,7 @@
 #include "../vgeometry/vpointf.h"
 #include "../vgeometry/vspline.h"
 #include "../vgeometry/vsplinepath.h"
+#include "../vgeometry/vplacelabelitem.h"
 #include "../ifc/xml/vpatternconverter.h"
 #include "../undocommands/addpiece.h"
 #include "../undocommands/deletepiece.h"
@@ -149,6 +146,50 @@ VToolSeamAllowance *VToolSeamAllowance::Create(VToolSeamAllowanceInitData &initD
     //Very important to delete it. Only this tool need this special variable.
     initData.data->RemoveVariable(currentSeamAllowance);
     return piece;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+VToolSeamAllowance *VToolSeamAllowance::Duplicate(QSharedPointer<DialogTool> dialog, VMainGraphicsScene *scene,
+                                                  VAbstractPattern *doc)
+{
+    SCASSERT(not dialog.isNull());
+    QSharedPointer<DialogDuplicateDetail> dialogTool = dialog.objectCast<DialogDuplicateDetail>();
+    SCASSERT(not dialogTool.isNull())
+
+    VToolSeamAllowanceInitData initData;
+    initData.scene = scene;
+    initData.doc = doc;
+    initData.parse = Document::FullParse;
+    initData.typeCreation = Source::FromGui;
+    initData.drawName = doc->PieceDrawName(dialogTool->Duplicate());
+
+    VContainer toolData = VAbstractPattern::getTool(dialogTool->Duplicate())->getData();
+    initData.data = &toolData;
+
+    VPiece detail = initData.data->GetPiece(dialogTool->Duplicate());
+    detail.SetMx(dialogTool->MoveDuplicateX());
+    detail.SetMy(dialogTool->MoveDuplicateY());
+    initData.detail = detail;
+    initData.width = initData.detail.GetFormulaSAWidth();
+
+    return Duplicate(initData);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+VToolSeamAllowance *VToolSeamAllowance::Duplicate(VToolSeamAllowanceInitData &initData)
+{
+    VPiece dupDetail = initData.detail;
+
+    QMap<quint32, quint32> replacements;
+    dupDetail.GetPath().SetNodes(DuplicateNodes(initData.detail.GetPath(), initData, replacements));
+    dupDetail.SetCustomSARecords(DuplicateCustomSARecords(initData.detail.GetCustomSARecords(), initData,
+                                                          replacements));
+    dupDetail.SetInternalPaths(DuplicateInternalPaths(initData.detail.GetInternalPaths(), initData));
+    dupDetail.SetPins(DuplicatePins(initData.detail.GetPins(), initData));
+    dupDetail.SetPlaceLabels(DuplicatePlaceLabels(initData.detail.GetPlaceLabels(), initData));
+
+    initData.detail = dupDetail;
+    return VToolSeamAllowance::Create(initData);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -1005,11 +1046,6 @@ QVariant VToolSeamAllowance::itemChange(QGraphicsItem::GraphicsItemChange change
                     }
                 }
             }
-            // Don't forget to update geometry, because first change never call full parse
-            VPiece detail = VAbstractTool::data.GetPiece(m_id);
-            detail.SetMx(newPos.x());
-            detail.SetMy(newPos.y());
-            VAbstractTool::data.UpdatePiece(m_id, detail);
 
             changeFinished = true;
         }
@@ -1740,4 +1776,180 @@ void VToolSeamAllowance::AddPointRecords(VAbstractPattern *doc, QDomElement &dom
         }
         domElement.appendChild(pinsElement);
     }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+quint32 VToolSeamAllowance::DuplicateNode(const VPieceNode &node, const VToolSeamAllowanceInitData &initData)
+{
+    SCASSERT(initData.scene != nullptr)
+    SCASSERT(initData.doc != nullptr)
+    SCASSERT(initData.data != nullptr)
+
+    const QSharedPointer<VGObject> gobj = initData.data->GetGObject(node.GetId());
+
+    VAbstractNodeInitData initNodeData;
+    initNodeData.idObject = gobj->getIdObject();
+    initNodeData.doc = initData.doc;
+    initNodeData.data = initData.data;
+    initNodeData.parse = Document::FullParse;
+    initNodeData.typeCreation = Source::FromGui;
+    initNodeData.scene = initData.scene;
+    initNodeData.drawName = initData.drawName;
+
+    switch (node.GetTypeTool())
+    {
+        case (Tool::NodePoint):
+            initNodeData.id = VAbstractTool::CreateNode<VPointF>(initData.data, gobj->getIdObject());
+            VNodePoint::Create(initNodeData);
+            break;
+        case (Tool::NodeArc):
+            initNodeData.id = VAbstractTool::CreateNode<VArc>(initData.data, gobj->getIdObject());
+            VNodeArc::Create(initNodeData);
+            break;
+        case (Tool::NodeElArc):
+            initNodeData.id = VAbstractTool::CreateNode<VEllipticalArc>(initData.data, gobj->getIdObject());
+            VNodeEllipticalArc::Create(initNodeData);
+            break;
+        case (Tool::NodeSpline):
+            initNodeData.id = VAbstractTool::CreateNodeSpline(initData.data, gobj->getIdObject());
+            VNodeSpline::Create(initNodeData);
+            break;
+        case (Tool::NodeSplinePath):
+            initNodeData.id = VAbstractTool::CreateNodeSplinePath(initData.data, gobj->getIdObject());
+            VNodeSplinePath::Create(initNodeData);
+            break;
+        default:
+            qDebug()<<"May be wrong tool type!!! Ignoring."<<Q_FUNC_INFO;
+            break;
+    }
+    return initNodeData.id;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+quint32 VToolSeamAllowance::DuplicatePiecePath(quint32 id, const VToolSeamAllowanceInitData &initData)
+{
+    VPiecePath path = initData.data->GetPiecePath(id);
+    VPiecePath newPath = path;
+    QMap<quint32, quint32> recordReplacements; // Not used
+    newPath.SetNodes(DuplicateNodes(path, initData, recordReplacements));
+
+    const quint32 idPath = initData.data->AddPiecePath(newPath);
+
+    VToolPiecePathInitData initNodeData;
+    initNodeData.id = idPath;
+    initNodeData.idObject = NULL_ID; // piece id
+    initNodeData.scene = initData.scene;
+    initNodeData.doc = initData.doc;
+    initNodeData.data = initData.data;
+    initNodeData.parse = Document::FullParse;
+    initNodeData.typeCreation = Source::FromTool;
+    initNodeData.drawName = initData.drawName;
+    initNodeData.path = newPath;
+
+    VToolPiecePath::Create(initNodeData);
+    return idPath;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QVector<CustomSARecord> VToolSeamAllowance::DuplicateCustomSARecords(const QVector<CustomSARecord> &records,
+                                                                     const VToolSeamAllowanceInitData &initData,
+                                                                     const QMap<quint32, quint32> &replacements)
+{
+    QVector<CustomSARecord> newRecords;
+    for(int i=0; i < records.size(); ++i)
+    {
+        CustomSARecord record = records.at(i);
+        record.path = DuplicatePiecePath(record.path, initData);
+        record.startPoint = replacements.value(record.startPoint, NULL_ID);
+        record.endPoint = replacements.value(record.endPoint, NULL_ID);
+        newRecords.append(record);
+    }
+    return newRecords;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QVector<quint32> VToolSeamAllowance::DuplicateInternalPaths(const QVector<quint32> &iPaths,
+                                                            const VToolSeamAllowanceInitData &initData)
+{
+    QVector<quint32> newPaths;
+    for(int i=0; i < iPaths.size(); ++i)
+    {
+        newPaths.append(DuplicatePiecePath(iPaths.at(i), initData));
+    }
+    return newPaths;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QVector<quint32> VToolSeamAllowance::DuplicatePins(const QVector<quint32> &pins,
+                                                   const VToolSeamAllowanceInitData &initData)
+{
+    QVector<quint32> newPins;
+    for(int i=0; i < pins.size(); ++i)
+    {
+        QSharedPointer<VPointF> pin = initData.data->GeometricObject<VPointF>(pins.at(i));
+
+        VToolPinInitData initNodeData;
+        initNodeData.id = initData.data->AddGObject(new VPointF(*pin));
+        initNodeData.pointId = pin->getIdObject();
+        initNodeData.idObject = NULL_ID; // piece id
+        initNodeData.doc = initData.doc;
+        initNodeData.data = initData.data;
+        initNodeData.parse = Document::FullParse;
+        initNodeData.typeCreation = Source::FromTool;
+        initNodeData.drawName = initData.drawName;
+
+        VToolPin::Create(initNodeData);
+        newPins.append(initNodeData.id);
+    }
+    return newPins;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QVector<quint32> VToolSeamAllowance::DuplicatePlaceLabels(const QVector<quint32> &placeLabels,
+                                                          const VToolSeamAllowanceInitData &initData)
+{
+    QVector<quint32> newPlaceLabels;
+    for(int i=0; i < placeLabels.size(); ++i)
+    {
+        QSharedPointer<VPlaceLabelItem> label = initData.data->GeometricObject<VPlaceLabelItem>(placeLabels.at(i));
+
+        VToolPlaceLabelInitData initNodeData;
+        initNodeData.idObject = NULL_ID; // piece id
+        initNodeData.doc = initData.doc;
+        initNodeData.data = initData.data;
+        initNodeData.parse = Document::FullParse;
+        initNodeData.typeCreation = Source::FromTool;
+        initNodeData.drawName = initData.drawName;
+        initNodeData.width = label->GetWidthFormula();
+        initNodeData.height = label->GetHeightFormula();
+        initNodeData.angle = label->GetAngleFormula();
+        initNodeData.type = label->GetLabelType();
+        initNodeData.centerPoint = label->GetCenterPoint();
+        initNodeData.id = initNodeData.data->AddGObject(new VPlaceLabelItem(*label));
+
+        VToolPlaceLabel::Create(initNodeData);
+        newPlaceLabels.append(initNodeData.id);
+    }
+    return newPlaceLabels;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QVector<VPieceNode> VToolSeamAllowance::DuplicateNodes(const VPiecePath &path,
+                                                       const VToolSeamAllowanceInitData &initData,
+                                                       QMap<quint32, quint32> &replacements)
+{
+    QVector<VPieceNode> nodes;
+    for (int i = 0; i< path.CountNodes(); ++i)
+    {
+        VPieceNode nodeD = path.at(i);
+        const quint32 oldId = nodeD.GetId();
+        const quint32 id = DuplicateNode(nodeD, initData);
+        if (id > NULL_ID)
+        {
+            nodeD.SetId(id);
+            nodes.append(nodeD);
+            replacements.insert(oldId, id);
+        }
+    }
+    return nodes;
 }

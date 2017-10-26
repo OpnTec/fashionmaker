@@ -212,7 +212,7 @@ QT_WARNING_DISABLE_GCC("-Wswitch-default")
 QString DialogHistory::Record(const VToolRecord &tool)
 {
     // This check helps to find missed tools in the switch
-    Q_STATIC_ASSERT_X(static_cast<int>(Tool::LAST_ONE_DO_NOT_USE) == 54, "Not all tools were used in history.");
+    Q_STATIC_ASSERT_X(static_cast<int>(Tool::LAST_ONE_DO_NOT_USE) == 55, "Not all tools were used in history.");
 
     const QDomElement domElem = doc->elementById(tool.getId());
     if (domElem.isElement() == false)
@@ -408,6 +408,7 @@ QString DialogHistory::Record(const VToolRecord &tool)
             case Tool::Pin:
             case Tool::PlaceLabel:
             case Tool::InsertNode:
+            case Tool::DuplicateDetail:
                 return QString();
         }
     }

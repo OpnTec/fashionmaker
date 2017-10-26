@@ -215,7 +215,7 @@ void DialogTool::FillComboBoxSplines(QComboBox *box) const
     SCASSERT(box != nullptr)
     box->blockSignals(true);
 
-    const auto objs = data->DataGObjects();
+    const auto objs = data->CalculationGObjects();
     QHash<quint32, QSharedPointer<VGObject> >::const_iterator i;
     QMap<QString, quint32> list;
     for (i = objs->constBegin(); i != objs->constEnd(); ++i)
@@ -239,7 +239,7 @@ void DialogTool::FillComboBoxSplinesPath(QComboBox *box) const
     SCASSERT(box != nullptr)
     box->blockSignals(true);
 
-    const auto objs = data->DataGObjects();
+    const auto objs = data->CalculationGObjects();
     QHash<quint32, QSharedPointer<VGObject> >::const_iterator i;
     QMap<QString, quint32> list;
     for (i = objs->constBegin(); i != objs->constEnd(); ++i)
@@ -261,7 +261,7 @@ void DialogTool::FillComboBoxSplinesPath(QComboBox *box) const
 void DialogTool::FillComboBoxCurves(QComboBox *box) const
 {
     SCASSERT(box != nullptr)
-    const auto objs = data->DataGObjects();
+    const auto objs = data->CalculationGObjects();
     QMap<QString, quint32> list;
     QHash<quint32, QSharedPointer<VGObject> >::const_iterator i;
     for (i = objs->constBegin(); i != objs->constEnd(); ++i)
@@ -269,12 +269,12 @@ void DialogTool::FillComboBoxCurves(QComboBox *box) const
         if (i.key() != toolId)
         {
             QSharedPointer<VGObject> obj = i.value();
-            if ((obj->getType() == GOType::Arc
-                 || obj->getType() == GOType::EllipticalArc
-                 || obj->getType() == GOType::Spline
-                 || obj->getType() == GOType::SplinePath
-                 || obj->getType() == GOType::CubicBezier
-                 || obj->getType() == GOType::CubicBezierPath) && obj->getMode() == Draw::Calculation)
+            if (obj->getType() == GOType::Arc
+                || obj->getType() == GOType::EllipticalArc
+                || obj->getType() == GOType::Spline
+                || obj->getType() == GOType::SplinePath
+                || obj->getType() == GOType::CubicBezier
+                || obj->getType() == GOType::CubicBezierPath)
             {
                 PrepareList<VAbstractCurve>(list, i.key());
             }
@@ -683,8 +683,7 @@ void DialogTool::InitNodeAngles(QComboBox *box)
 //---------------------------------------------------------------------------------------------------------------------
 bool DialogTool::IsSplinePath(const QSharedPointer<VGObject> &obj) const
 {
-    return (obj->getType() == GOType::SplinePath || obj->getType() == GOType::CubicBezierPath) &&
-            obj->getMode() == Draw::Calculation;
+    return obj->getType() == GOType::SplinePath || obj->getType() == GOType::CubicBezierPath;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -1010,8 +1009,7 @@ void DialogTool::PrepareList(QMap<QString, quint32> &list, quint32 id) const
 //---------------------------------------------------------------------------------------------------------------------
 bool DialogTool::IsSpline(const QSharedPointer<VGObject> &obj) const
 {
-    return (obj->getType() == GOType::Spline || obj->getType() == GOType::CubicBezier) &&
-            obj->getMode() == Draw::Calculation;
+    return obj->getType() == GOType::Spline || obj->getType() == GOType::CubicBezier;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -1290,7 +1288,7 @@ void DialogTool::FillCombo(QComboBox *box, GOType gType, FillComboBox rule, cons
     SCASSERT(box != nullptr)
     box->blockSignals(true);
 
-    const QHash<quint32, QSharedPointer<VGObject> > *objs = data->DataGObjects();
+    const QHash<quint32, QSharedPointer<VGObject> > *objs = data->CalculationGObjects();
     QHash<quint32, QSharedPointer<VGObject> >::const_iterator i;
     QMap<QString, quint32> list;
     for (i = objs->constBegin(); i != objs->constEnd(); ++i)
@@ -1300,7 +1298,7 @@ void DialogTool::FillCombo(QComboBox *box, GOType gType, FillComboBox rule, cons
             if (i.key() != toolId && i.key() != ch1 && i.key() != ch2)
             {
                 QSharedPointer<VGObject> obj = i.value();
-                if (obj->getType() == gType && obj->getMode() == Draw::Calculation)
+                if (obj->getType() == gType)
                 {
                     PrepareList<GObject>(list, i.key());
                 }

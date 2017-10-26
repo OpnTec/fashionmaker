@@ -47,7 +47,7 @@ class VNodeSplinePath : public VAbstractNode
 {
     Q_OBJECT
 public:
-    static void Create(VAbstractNodeInitData initData);
+    static void Create(const VAbstractNodeInitData &initData);
 
     static const QString ToolType;
     virtual QString getTagName() const Q_DECL_OVERRIDE;

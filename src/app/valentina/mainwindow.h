@@ -150,6 +150,7 @@ private slots:
     void ToolTriangle(bool checked);
     void ToolPointOfIntersection(bool checked);
     void ToolUnionDetails(bool checked);
+    void ToolDuplicateDetail(bool checked);
     void ToolGroup(bool checked);
     void ToolRotation(bool checked);
     void ToolFlippingByLine(bool checked);
@@ -178,6 +179,7 @@ private slots:
     void Open();
 
     void ClosedDialogUnionDetails(int result);
+    void ClosedDialogDuplicateDetail(int result);
     void ClosedDialogGroup(int result);
     void ClosedDialogPiecePath(int result);
     void ClosedDialogPin(int result);

@@ -260,7 +260,7 @@ void MainWindow::AddPP(const QString &PPName)
     comboBoxDraws->blockSignals(true);
     comboBoxDraws->addItem(PPName);
 
-    pattern->ClearGObjects();
+    pattern->ClearCalculationGObjects();
     //Create single point
     ui->view->itemClicked(nullptr);//hide options previous tool
     const QString label = doc->GenerateLabel(LabelType::NewPatternPiece);
@@ -613,7 +613,7 @@ void MainWindow::SetToolButton(bool checked, Tool t, const QString &cursor, cons
         dialogTool = QSharedPointer<Dialog>(new Dialog(pattern, 0, this));
 
         // This check helps to find missed tools in the switch
-        Q_STATIC_ASSERT_X(static_cast<int>(Tool::LAST_ONE_DO_NOT_USE) == 54, "Check if need to extend.");
+        Q_STATIC_ASSERT_X(static_cast<int>(Tool::LAST_ONE_DO_NOT_USE) == 55, "Check if need to extend.");
 
         switch(t)
         {
@@ -1107,8 +1107,31 @@ void MainWindow::ToolUnionDetails(bool checked)
  */
 void MainWindow::ClosedDialogUnionDetails(int result)
 {
-    ClosedDialog<VToolUnionDetails>(result);
-    doc->LiteParseTree(Document::LiteParse);
+    ClosedDialog<VToolUnionDetails>(result);// Avoid error: Template function as signal or slot
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void MainWindow::ToolDuplicateDetail(bool checked)
+{
+    ToolSelectDetail();
+    SetToolButton<DialogDuplicateDetail>(checked, Tool::DuplicateDetail, ":/cursor/duplicate_detail_cursor.png",
+                                      tr("Select detail"), &MainWindow::ClosedDialogDuplicateDetail);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void MainWindow::ClosedDialogDuplicateDetail(int result)
+{
+    SCASSERT(not dialogTool.isNull())
+    if (result == QDialog::Accepted)
+    {
+        VMainGraphicsScene *scene = qobject_cast<VMainGraphicsScene *>(currentScene);
+        SCASSERT(scene != nullptr)
+
+        QGraphicsItem *tool = dynamic_cast<QGraphicsItem *>(VToolSeamAllowance::Duplicate(dialogTool, scene, doc));
+        // Do not check for nullptr! See issue #719.
+        ui->view->itemClicked(tool);
+    }
+    ArrowTool();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -1985,7 +2008,7 @@ void MainWindow::InitToolButtons()
     }
 
     // This check helps to find missed tools
-    Q_STATIC_ASSERT_X(static_cast<int>(Tool::LAST_ONE_DO_NOT_USE) == 54, "Check if all tools were connected.");
+    Q_STATIC_ASSERT_X(static_cast<int>(Tool::LAST_ONE_DO_NOT_USE) == 55, "Check if all tools were connected.");
 
     connect(ui->toolButtonEndLine, &QToolButton::clicked, this, &MainWindow::ToolEndLine);
     connect(ui->toolButtonLine, &QToolButton::clicked, this, &MainWindow::ToolLine);
@@ -2008,6 +2031,7 @@ void MainWindow::InitToolButtons()
     connect(ui->toolButtonSplineCutPoint, &QToolButton::clicked, this, &MainWindow::ToolCutSpline);
     connect(ui->toolButtonSplinePathCutPoint, &QToolButton::clicked, this, &MainWindow::ToolCutSplinePath);
     connect(ui->toolButtonUnionDetails, &QToolButton::clicked, this, &MainWindow::ToolUnionDetails);
+    connect(ui->toolButtonDuplicateDetail, &QToolButton::clicked, this, &MainWindow::ToolDuplicateDetail);
     connect(ui->toolButtonArcCutPoint, &QToolButton::clicked, this, &MainWindow::ToolCutArc);
     connect(ui->toolButtonLineIntersectAxis, &QToolButton::clicked, this, &MainWindow::ToolLineIntersectAxis);
     connect(ui->toolButtonCurveIntersectAxis, &QToolButton::clicked, this, &MainWindow::ToolCurveIntersectAxis);
@@ -2062,7 +2086,7 @@ QT_WARNING_DISABLE_GCC("-Wswitch-default")
 void MainWindow::CancelTool()
 {
     // This check helps to find missed tools in the switch
-    Q_STATIC_ASSERT_X(static_cast<int>(Tool::LAST_ONE_DO_NOT_USE) == 54, "Not all tools were handled.");
+    Q_STATIC_ASSERT_X(static_cast<int>(Tool::LAST_ONE_DO_NOT_USE) == 55, "Not all tools were handled.");
 
     qCDebug(vMainWindow, "Canceling tool.");
     dialogTool.clear();
@@ -2171,6 +2195,9 @@ void MainWindow::CancelTool()
             break;
         case Tool::UnionDetails:
             ui->toolButtonUnionDetails->setChecked(false);
+            break;
+        case Tool::DuplicateDetail:
+            ui->toolButtonDuplicateDetail->setChecked(false);
             break;
         case Tool::CutArc:
             ui->toolButtonArcCutPoint->setChecked(false);
@@ -3424,7 +3451,7 @@ QT_WARNING_DISABLE_GCC("-Wswitch-default")
 QT_WARNING_POP
 
     // This check helps to find missed tools
-    Q_STATIC_ASSERT_X(static_cast<int>(Tool::LAST_ONE_DO_NOT_USE) == 54, "Not all tools were handled.");
+    Q_STATIC_ASSERT_X(static_cast<int>(Tool::LAST_ONE_DO_NOT_USE) == 55, "Not all tools were handled.");
 
     //Drawing Tools
     ui->toolButtonEndLine->setEnabled(drawTools);
@@ -3480,6 +3507,7 @@ QT_WARNING_POP
     //Modeling Tools
     ui->toolButtonUnionDetails->setEnabled(modelingTools);
     ui->toolButtonDetailExportAs->setEnabled(modelingTools);
+    ui->toolButtonDuplicateDetail->setEnabled(modelingTools);
 
     //Layout tools
     ui->toolButtonLayoutSettings->setEnabled(layoutTools);
@@ -3752,7 +3780,7 @@ QT_WARNING_DISABLE_GCC("-Wswitch-default")
 void MainWindow::LastUsedTool()
 {
     // This check helps to find missed tools in the switch
-    Q_STATIC_ASSERT_X(static_cast<int>(Tool::LAST_ONE_DO_NOT_USE) == 54, "Not all tools were handled.");
+    Q_STATIC_ASSERT_X(static_cast<int>(Tool::LAST_ONE_DO_NOT_USE) == 55, "Not all tools were handled.");
 
     if (currentTool == lastUsedTool)
     {
@@ -3874,6 +3902,10 @@ void MainWindow::LastUsedTool()
         case Tool::UnionDetails:
             ui->toolButtonUnionDetails->setChecked(true);
             ToolUnionDetails(true);
+            break;
+        case Tool::DuplicateDetail:
+            ui->toolButtonDuplicateDetail->setChecked(true);
+            ToolDuplicateDetail(true);
             break;
         case Tool::CutArc:
             ui->toolButtonArcCutPoint->setChecked(true);

@@ -83,35 +83,6 @@ template <class T> class QSharedPointer;
 
 const QString VAbstractTool::AttrInUse = QStringLiteral("inUse");
 
-namespace
-{
-//---------------------------------------------------------------------------------------------------------------------
-quint32 CreateNodeSpline(VContainer *data, quint32 id)
-{
-    if (data->GetGObject(id)->getType() == GOType::Spline)
-    {
-        return VAbstractTool::CreateNode<VSpline>(data, id);
-    }
-    else
-    {
-        return VAbstractTool::CreateNode<VCubicBezier>(data, id);
-    }
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-quint32 CreateNodeSplinePath(VContainer *data, quint32 id)
-{
-    if (data->GetGObject(id)->getType() == GOType::SplinePath)
-    {
-        return VAbstractTool::CreateNode<VSplinePath>(data, id);
-    }
-    else
-    {
-        return VAbstractTool::CreateNode<VCubicBezierPath>(data, id);
-    }
-}
-}//static functions
-
 //---------------------------------------------------------------------------------------------------------------------
 /**
  * @brief VAbstractTool container.
@@ -379,7 +350,7 @@ QMap<QString, QString> VAbstractTool::ColorsList()
 // cppcheck-suppress unusedFunction
 QMap<QString, quint32> VAbstractTool::PointsList() const
 {
-    const QHash<quint32, QSharedPointer<VGObject> > *objs = data.DataGObjects();
+    const QHash<quint32, QSharedPointer<VGObject> > *objs = data.CalculationGObjects();
     QMap<QString, quint32> list;
     QHash<quint32, QSharedPointer<VGObject> >::const_iterator i;
     for (i = objs->constBegin(); i != objs->constEnd(); ++i)
@@ -387,7 +358,7 @@ QMap<QString, quint32> VAbstractTool::PointsList() const
         if (i.key() != m_id)
         {
             QSharedPointer<VGObject> obj = i.value();
-            if (obj->getType() == GOType::Point && obj->getMode() == Draw::Calculation)
+            if (obj->getType() == GOType::Point)
             {
                 const QSharedPointer<VPointF> point = data.GeometricObject<VPointF>(i.key());
                 list[point->name()] = i.key();
@@ -693,4 +664,30 @@ quint32 VAbstractTool::PrepareNode(const VPieceNode &node, VMainGraphicsScene *s
             break;
     }
     return initData.id;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+quint32 VAbstractTool::CreateNodeSpline(VContainer *data, quint32 id)
+{
+    if (data->GetGObject(id)->getType() == GOType::Spline)
+    {
+        return VAbstractTool::CreateNode<VSpline>(data, id);
+    }
+    else
+    {
+        return VAbstractTool::CreateNode<VCubicBezier>(data, id);
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+quint32 VAbstractTool::CreateNodeSplinePath(VContainer *data, quint32 id)
+{
+    if (data->GetGObject(id)->getType() == GOType::SplinePath)
+    {
+        return VAbstractTool::CreateNode<VSplinePath>(data, id);
+    }
+    else
+    {
+        return VAbstractTool::CreateNode<VCubicBezierPath>(data, id);
+    }
 }

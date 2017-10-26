@@ -85,7 +85,7 @@ VNodePoint::VNodePoint(const VAbstractNodeInitData &initData, QObject *qoParent,
  * @brief Create help create tool.
  * @param initData init data.
  */
-void VNodePoint::Create(VAbstractNodeInitData initData)
+void VNodePoint::Create(const VAbstractNodeInitData &initData)
 {
     if (initData.parse == Document::FullParse)
     {

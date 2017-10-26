@@ -110,8 +110,6 @@ public:
     virtual void            ShowVisualization(bool show) =0;
     virtual void            ChangeLabelPosition(quint32 id, const QPointF &pos);
 
-    template<typename T>
-    static quint32 CreateNode(VContainer *data, quint32 id);
 public slots:
     /**
      * @brief FullUpdateFromFile update tool data form file.
@@ -161,6 +159,11 @@ protected:
     virtual void            RemoveReferens() {}
     virtual void            DeleteToolWithConfirm(bool ask = true);
     static int              ConfirmDeletion();
+
+    template<typename T>
+    static quint32 CreateNode(VContainer *data, quint32 id);
+    static quint32 CreateNodeSpline(VContainer *data, quint32 id);
+    static quint32 CreateNodeSplinePath(VContainer *data, quint32 id);
 
     template <typename T>
     void AddVisualization();

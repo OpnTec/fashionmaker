@@ -59,7 +59,7 @@ VNodeSplinePath::VNodeSplinePath(const VAbstractNodeInitData &initData, QObject 
  * @brief Create help create tool.
  * @param initData init data.
  */
-void VNodeSplinePath::Create(VAbstractNodeInitData initData)
+void VNodeSplinePath::Create(const VAbstractNodeInitData &initData)
 {
     if (initData.parse == Document::FullParse)
     {

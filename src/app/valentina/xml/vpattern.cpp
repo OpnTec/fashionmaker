@@ -4166,7 +4166,7 @@ QT_WARNING_DISABLE_GCC("-Wswitch-default")
 QRectF VPattern::ActiveDrawBoundingRect() const
 {
     // This check helps to find missed tools in the switch
-    Q_STATIC_ASSERT_X(static_cast<int>(Tool::LAST_ONE_DO_NOT_USE) == 54, "Not all tools were used.");
+    Q_STATIC_ASSERT_X(static_cast<int>(Tool::LAST_ONE_DO_NOT_USE) == 55, "Not all tools were used.");
 
     QRectF rec;
 
@@ -4247,6 +4247,7 @@ QRectF VPattern::ActiveDrawBoundingRect() const
                 case Tool::Pin:
                 case Tool::InsertNode:
                 case Tool::PlaceLabel:
+                case Tool::DuplicateDetail:
                     break;
             }
         }
