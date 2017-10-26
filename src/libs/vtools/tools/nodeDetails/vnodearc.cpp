@@ -59,7 +59,7 @@ VNodeArc::VNodeArc(const VAbstractNodeInitData &initData, QObject *qoParent)
  * @brief Create help create tool.
  * @param initData init data.
  */
-void VNodeArc::Create(VAbstractNodeInitData initData)
+void VNodeArc::Create(const VAbstractNodeInitData &initData)
 {
     if (initData.parse == Document::FullParse)
     {

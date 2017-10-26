@@ -198,6 +198,8 @@ public:
     bool           GetGroupVisivility(quint32 id);
     void           SetGroupVisivility(quint32 id, bool visible);
 
+    QString PieceDrawName(quint32 id);
+
     static const QString TagPattern;
     static const QString TagCalculation;
     static const QString TagModeling;

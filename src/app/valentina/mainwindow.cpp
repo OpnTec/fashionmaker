@@ -1127,8 +1127,7 @@ void MainWindow::ClosedDialogDuplicateDetail(int result)
         VMainGraphicsScene *scene = qobject_cast<VMainGraphicsScene *>(currentScene);
         SCASSERT(scene != nullptr)
 
-        QGraphicsItem *tool = dynamic_cast<QGraphicsItem *>(VToolSeamAllowance::Duplicate(dialogTool, scene, doc,
-                                                                                          pattern));
+        QGraphicsItem *tool = dynamic_cast<QGraphicsItem *>(VToolSeamAllowance::Duplicate(dialogTool, scene, doc));
         // Do not check for nullptr! See issue #719.
         ui->view->itemClicked(tool);
     }

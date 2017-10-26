@@ -60,7 +60,7 @@ VNodeSpline::VNodeSpline(const VAbstractNodeInitData &initData, QObject *qoParen
  * @param initData init data.
  * @return pointer to node.
  */
-VNodeSpline *VNodeSpline::Create(VAbstractNodeInitData initData)
+VNodeSpline *VNodeSpline::Create(const VAbstractNodeInitData &initData)
 {
     VNodeSpline *spl = nullptr;
     if (initData.parse == Document::FullParse)

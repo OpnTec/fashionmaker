@@ -50,7 +50,7 @@ class VNodePoint: public VAbstractNode, public VScenePoint
 {
     Q_OBJECT
 public:
-    static void Create(VAbstractNodeInitData initData);
+    static void Create(const VAbstractNodeInitData &initData);
 
     static const QString ToolType;
     virtual int  type() const Q_DECL_OVERRIDE {return Type;}

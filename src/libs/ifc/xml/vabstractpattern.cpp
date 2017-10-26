@@ -2420,3 +2420,21 @@ void VAbstractPattern::SetGroupVisivility(quint32 id, bool visible)
         qDebug("Can't get group by id = %u.", id);
     }
 }
+
+//---------------------------------------------------------------------------------------------------------------------
+QString VAbstractPattern::PieceDrawName(quint32 id)
+{
+    const QDomElement detail = elementById(id, VAbstractPattern::TagDetail);
+    if (detail.isNull())
+    {
+        return QString();
+    }
+
+    const QDomElement draw = detail.parentNode().parentNode().toElement();
+    if (draw.isNull() || not draw.hasAttribute(VAbstractPattern::AttrName))
+    {
+        return QString();
+    }
+
+    return  draw.attribute(VAbstractPattern::AttrName);
+}

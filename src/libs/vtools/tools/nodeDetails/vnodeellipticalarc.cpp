@@ -42,7 +42,7 @@
 const QString VNodeEllipticalArc::ToolType = QStringLiteral("modeling");
 
 //---------------------------------------------------------------------------------------------------------------------
-void VNodeEllipticalArc::Create(VAbstractNodeInitData initData)
+void VNodeEllipticalArc::Create(const VAbstractNodeInitData &initData)
 {
     if (initData.parse == Document::FullParse)
     {

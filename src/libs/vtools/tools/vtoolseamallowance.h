@@ -65,7 +65,7 @@ public:
                                       VAbstractPattern *doc, VContainer *data);
     static VToolSeamAllowance* Create(VToolSeamAllowanceInitData &initData);
     static VToolSeamAllowance* Duplicate(QSharedPointer<DialogTool> dialog, VMainGraphicsScene *scene,
-                                         VAbstractPattern *doc, VContainer *data);
+                                         VAbstractPattern *doc);
     static VToolSeamAllowance* Duplicate(VToolSeamAllowanceInitData &initData);
 
     static const quint8 pieceVersion;
@@ -200,6 +200,22 @@ private:
 
     static void AddPointRecords(VAbstractPattern *doc, QDomElement &domElement, const QVector<quint32> &records,
                                 const QString &tag);
+
+    static QVector<VPieceNode> DuplicateNodes(const VPiecePath &path, const VToolSeamAllowanceInitData &initData,
+                                              QMap<quint32, quint32> &replacements);
+    static quint32             DuplicateNode(const VPieceNode &node, const VToolSeamAllowanceInitData &initData);
+
+    static quint32 DuplicatePiecePath(quint32 id, const VToolSeamAllowanceInitData &initData);
+
+    static QVector<CustomSARecord> DuplicateCustomSARecords(const QVector<CustomSARecord> &records,
+                                                            const VToolSeamAllowanceInitData &initData,
+                                                            const QMap<quint32, quint32> &replacements);
+
+    static QVector<quint32> DuplicateInternalPaths(const QVector<quint32> &iPaths,
+                                                   const VToolSeamAllowanceInitData &initData);
+    static QVector<quint32> DuplicatePins(const QVector<quint32> &pins, const VToolSeamAllowanceInitData &initData);
+    static QVector<quint32> DuplicatePlaceLabels(const QVector<quint32> &placeLabels,
+                                                 const VToolSeamAllowanceInitData &initData);
 };
 
 #endif // VTOOLSEAMALLOWANCE_H
