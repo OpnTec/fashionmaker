@@ -4437,7 +4437,8 @@ bool MainWindow::LoadPattern(QString fileName, const QString& customMeasureFile)
 
             if (not LoadMeasurements(newPath))
             {
-                qCCritical(vMainWindow, "%s", qUtf8Printable(tr("The measurements file '%1' could not be found.")
+                qCCritical(vMainWindow, "%s", qUtf8Printable(tr("The measurements file '%1' could not be found or "
+                                                                "provides not enough information.")
                                                              .arg(newPath)));
                 qApp->setOpeningPattern();// End opening file
                 Clear();
