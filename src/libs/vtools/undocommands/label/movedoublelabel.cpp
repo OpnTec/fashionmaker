@@ -148,7 +148,6 @@ void MoveDoubleLabel::Do(const QPointF &pos)
         {
             tool->ChangeLabelPosition(nodeId, pos);
         }
-        VMainGraphicsView::NewSceneRect(m_scene, qApp->getSceneView());
     }
     else
     {

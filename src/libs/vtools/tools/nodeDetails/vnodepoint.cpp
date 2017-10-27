@@ -51,6 +51,7 @@
 #include "../vmisc/vabstractapplication.h"
 #include "../vpatterndb/vcontainer.h"
 #include "../vwidgets/vmaingraphicsscene.h"
+#include "../vwidgets/vmaingraphicsview.h"
 #include "../vabstracttool.h"
 #include "../vdatatool.h"
 #include "vabstractnode.h"
@@ -139,6 +140,10 @@ void VNodePoint::ChangeLabelPosition(quint32 id, const QPointF &pos)
         m_namePoint->setPos(pos);
         m_namePoint->blockSignals(false);
         RefreshLine();
+        if (QGraphicsScene *sc = scene())
+        {
+            VMainGraphicsView::NewSceneRect(sc, qApp->getSceneView(), this);
+        }
     }
 }
 

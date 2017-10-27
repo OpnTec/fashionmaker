@@ -228,6 +228,11 @@ void VToolDoublePoint::ChangeLabelPosition(quint32 id, const QPointF &pos)
         point->setMx(pos.x());
         point->setMy(pos.y());
         firstPoint->RefreshPointGeometry(*(point.data()));
+
+        if (QGraphicsScene *sc = scene())
+        {
+            VMainGraphicsView::NewSceneRect(sc, qApp->getSceneView(), firstPoint);
+        }
     }
     else if (id == p2id)
     {
@@ -235,6 +240,11 @@ void VToolDoublePoint::ChangeLabelPosition(quint32 id, const QPointF &pos)
         point->setMx(pos.x());
         point->setMy(pos.y());
         secondPoint->RefreshPointGeometry(*(point.data()));
+
+        if (QGraphicsScene *sc = scene())
+        {
+            VMainGraphicsView::NewSceneRect(sc, qApp->getSceneView(), secondPoint);
+        }
     }
 }
 

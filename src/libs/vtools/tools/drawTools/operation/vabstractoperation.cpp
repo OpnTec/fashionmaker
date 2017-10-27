@@ -99,6 +99,11 @@ void VAbstractOperation::ChangeLabelPosition(quint32 id, const QPointF &pos)
             point->setMx(pos.x());
             point->setMy(pos.y());
             item->RefreshPointGeometry(*(point.data()));
+
+            if (QGraphicsScene *sc = scene())
+            {
+                VMainGraphicsView::NewSceneRect(sc, qApp->getSceneView(), item);
+            }
         }
     }
 }

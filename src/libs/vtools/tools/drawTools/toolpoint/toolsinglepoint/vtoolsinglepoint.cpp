@@ -335,6 +335,11 @@ void VToolSinglePoint::ChangeLabelPosition(quint32 id, const QPointF &pos)
         m_namePoint->setPos(pos);
         m_namePoint->blockSignals(false);
         RefreshLine();
+
+        if (QGraphicsScene *sc = scene())
+        {
+            VMainGraphicsView::NewSceneRect(sc, qApp->getSceneView(), this);
+        }
     }
 }
 
