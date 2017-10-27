@@ -69,46 +69,14 @@ MovePiece::MovePiece(VAbstractPattern *doc, const double &x, const double &y, co
 void MovePiece::undo()
 {
     qCDebug(vUndo, "Undo.");
-
-    QDomElement domElement = doc->elementById(nodeId, VAbstractPattern::TagDetail);
-    if (domElement.isElement())
-    {
-        SaveCoordinates(domElement, m_oldX, m_oldY);
-        VToolSeamAllowance *tool = qobject_cast<VToolSeamAllowance *>(VAbstractPattern::getTool(nodeId));
-        if (tool)
-        {
-            tool->Move(m_oldX, m_oldY);
-        }
-        VMainGraphicsView::NewSceneRect(m_scene, qApp->getSceneView(), tool);
-    }
-    else
-    {
-        qCDebug(vUndo, "Can't find detail with id = %u.", nodeId);
-    }
+    Do(m_oldX, m_oldY);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void MovePiece::redo()
 {
     qCDebug(vUndo, "Redo.");
-
-    QDomElement domElement = doc->elementById(nodeId, VAbstractPattern::TagDetail);
-    if (domElement.isElement())
-    {
-        SaveCoordinates(domElement, m_newX, m_newY);
-
-        VToolSeamAllowance *tool = qobject_cast<VToolSeamAllowance *>(VAbstractPattern::getTool(nodeId));
-        if (redoFlag && tool)
-        {
-            tool->Move(m_newX, m_newY);
-        }
-        VMainGraphicsView::NewSceneRect(m_scene, qApp->getSceneView(), tool);
-        redoFlag = true;
-    }
-    else
-    {
-        qCDebug(vUndo, "Can't find detail with id = %u.", nodeId);
-    }
+    Do(m_newX, m_newY);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -133,6 +101,29 @@ bool MovePiece::mergeWith(const QUndoCommand *command)
 int MovePiece::id() const
 {
     return static_cast<int>(UndoCommand::MovePiece);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void MovePiece::Do(qreal x, qreal y)
+{
+    qCDebug(vUndo, "Do.");
+
+    QDomElement domElement = doc->elementById(nodeId, VAbstractPattern::TagDetail);
+    if (domElement.isElement())
+    {
+        SaveCoordinates(domElement, x, y);
+
+        VToolSeamAllowance *tool = qobject_cast<VToolSeamAllowance *>(VAbstractPattern::getTool(nodeId));
+        if (tool)
+        {
+            tool->Move(x, y);
+        }
+        VMainGraphicsView::NewSceneRect(m_scene, qApp->getSceneView(), tool);
+    }
+    else
+    {
+        qCDebug(vUndo, "Can't find detail with id = %u.", nodeId);
+    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------

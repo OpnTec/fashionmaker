@@ -52,6 +52,9 @@ public:
     // cppcheck-suppress unusedFunction
     virtual bool mergeWith(const QUndoCommand *command) Q_DECL_OVERRIDE;
     virtual int  id() const Q_DECL_OVERRIDE;
+
+    void Do(qreal x, qreal y);
+
     quint32      getDetId() const;
     double       getNewX() const;
     double       getNewY() const;
