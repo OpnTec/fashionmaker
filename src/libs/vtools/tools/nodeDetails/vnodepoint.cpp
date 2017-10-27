@@ -280,6 +280,8 @@ void VNodePoint::contextMenuEvent(QGraphicsSceneContextMenuEvent *event)
         actionShowLabel->setCheckable(true);
         actionShowLabel->setChecked(VAbstractTool::data.GeometricObject<VPointF>(m_id)->IsShowLabel());
 
+        QAction *actionExclude = menu.addAction(tr("Exclude"));
+
         QAction *actionRemove = menu.addAction(QIcon::fromTheme("edit-delete"), tr("Delete"));
         piece->referens() > 1 ? actionRemove->setEnabled(false) : actionRemove->setEnabled(true);
 
@@ -308,6 +310,10 @@ void VNodePoint::contextMenuEvent(QGraphicsSceneContextMenuEvent *event)
         else if (selectedAction == actionShowLabel)
         {
             qApp->getUndoStack()->push(new ShowLabel(doc, m_id, selectedAction->isChecked()));
+        }
+        else if (selectedAction == actionExclude)
+        {
+            emit ToggleExcludeState(m_id);
         }
     }
 }

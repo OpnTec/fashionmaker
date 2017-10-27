@@ -63,6 +63,7 @@ signals:
     void ShowOptions();
     void ToggleInLayout(bool checked);
     void Delete();
+    void ToggleExcludeState(quint32 id);
 public slots:
     virtual void FullUpdateFromFile() Q_DECL_OVERRIDE;
     void         NameChangePosition(const QPointF &pos);

@@ -168,6 +168,19 @@ bool SavePieceOptions::mergeWith(const QUndoCommand *command)
         {
             return false;
         }
+
+        const QVector<VPieceNode> nodes = m_newDet.GetPath().GetNodes();
+        const QVector<VPieceNode> candidateNodes = candidate.GetPath().GetNodes();
+
+        SCASSERT(nodes.size() == candidateNodes.size())
+
+        for (int i = 0; i < nodes.size(); ++i)
+        {
+            if (nodes.at(i).IsExcluded() != candidateNodes.at(i).IsExcluded())
+            {
+                return false;
+            }
+        }
     }
 
     m_newDet = saveCommand->NewDet();

@@ -163,6 +163,7 @@ private slots:
     void ShowOptions();
     void ToggleInLayout(bool checked);
     void DeleteFromMenu();
+    void ToggleExcludeState(quint32 id);
 
 private:
     Q_DISABLE_COPY(VToolSeamAllowance)

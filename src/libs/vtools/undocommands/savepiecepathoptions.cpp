@@ -36,6 +36,7 @@
 #include "../vmisc/logging.h"
 #include "../tools/nodeDetails/vtoolpiecepath.h"
 #include "../tools/vtoolseamallowance.h"
+#include "../vpatterndb/vpiecenode.h"
 
 //---------------------------------------------------------------------------------------------------------------------
 SavePiecePathOptions::SavePiecePathOptions(quint32 pieceId, const VPiecePath &oldPath, const VPiecePath &newPath,
@@ -137,6 +138,19 @@ bool SavePiecePathOptions::mergeWith(const QUndoCommand *command)
         if (currentSet != candidateSet)
         {
             return false;
+        }
+
+        const QVector<VPieceNode> nodes = m_newPath.GetNodes();
+        const QVector<VPieceNode> candidateNodes = candidate.GetNodes();
+
+        SCASSERT(nodes.size() == candidateNodes.size())
+
+        for (int i = 0; i < nodes.size(); ++i)
+        {
+            if (nodes.at(i).IsExcluded() != candidateNodes.at(i).IsExcluded())
+            {
+                return false;
+            }
         }
     }
 

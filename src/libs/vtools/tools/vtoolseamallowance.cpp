@@ -1399,6 +1399,26 @@ void VToolSeamAllowance::DeleteFromMenu()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void VToolSeamAllowance::ToggleExcludeState(quint32 id)
+{
+    const VPiece oldDet = VAbstractTool::data.GetPiece(m_id);
+    VPiece newDet = oldDet;
+
+    for (int i = 0; i< oldDet.GetPath().CountNodes(); ++i)
+    {
+        VPieceNode node = oldDet.GetPath().at(i);
+        if (node.GetId() == id && node.GetTypeTool() == Tool::NodePoint)
+        {
+            node.SetExcluded(not node.IsExcluded());
+            newDet.GetPath()[i] = node;
+
+            qApp->getUndoStack()->push(new SavePieceOptions(oldDet, newDet, doc, m_id));
+            return;
+        }
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 VPieceItem::MoveTypes VToolSeamAllowance::FindLabelGeometry(const VPatternLabelData& labelData, qreal &rotationAngle,
                                                             qreal &labelWidth, qreal &labelHeight, QPointF &pos)
 {
@@ -1617,6 +1637,8 @@ void VToolSeamAllowance::InitNode(const VPieceNode &node, VMainGraphicsScene *sc
                 connect(tool, &VNodePoint::ToggleInLayout, parent, &VToolSeamAllowance::ToggleInLayout,
                         Qt::UniqueConnection);
                 connect(tool, &VNodePoint::Delete, parent, &VToolSeamAllowance::DeleteFromMenu, Qt::UniqueConnection);
+                connect(tool, &VNodePoint::ToggleExcludeState, parent, &VToolSeamAllowance::ToggleExcludeState,
+                        Qt::UniqueConnection);
                 connect(tool, &VNodePoint::ChoosedTool, scene, &VMainGraphicsScene::ChoosedItem, Qt::UniqueConnection);
                 tool->setParentItem(parent);
                 tool->SetParentType(ParentType::Item);
