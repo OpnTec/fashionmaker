@@ -577,7 +577,6 @@ void VToolSeamAllowance::GroupVisibility(quint32 object, bool visible)
 //---------------------------------------------------------------------------------------------------------------------
 void VToolSeamAllowance::FullUpdateFromFile()
 {
-    UpdateExcludeState();
     RefreshGeometry();
 }
 
@@ -1333,6 +1332,7 @@ void VToolSeamAllowance::RefreshGeometry()
     UpdateDetailLabel();
     UpdatePatternInfo();
     UpdateGrainline();
+    UpdateExcludeState();
 
     this->setFlag(QGraphicsItem::ItemSendsGeometryChanges, true);
 }
