@@ -287,7 +287,7 @@ void VToolSpline::ControlPointChangePosition(const qint32 &indexSpline, const Sp
 
         if (QGraphicsScene *sc = scene())
         {
-            VMainGraphicsView::NewSceneRect(sc, qApp->getSceneView());
+            VMainGraphicsView::NewSceneRect(sc, qApp->getSceneView(), this);
         }
     }
 }
@@ -454,7 +454,7 @@ void VToolSpline::mouseMoveEvent(QGraphicsSceneMouseEvent *event)
 
             if (QGraphicsScene *sc = scene())
             {
-                VMainGraphicsView::NewSceneRect(sc, qApp->getSceneView());
+                VMainGraphicsView::NewSceneRect(sc, qApp->getSceneView(), this);
             }
         }
 

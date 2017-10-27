@@ -103,9 +103,8 @@ void DeletePiece::undo()
     m_scene->addItem(m_tool);
     m_tool->ConnectOutsideSignals();
     m_tool->show();
+    VMainGraphicsView::NewSceneRect(m_scene, qApp->getSceneView(), m_tool);
     m_tool.clear();
-
-    VMainGraphicsView::NewSceneRect(m_scene, qApp->getSceneView());
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -133,8 +132,6 @@ void DeletePiece::redo()
         DecrementReferences(m_detail.GetCustomSARecords());
         DecrementReferences(m_detail.GetInternalPaths());
         DecrementReferences(m_detail.GetPins());
-
-        VMainGraphicsView::NewSceneRect(m_scene, qApp->getSceneView());
     }
     else
     {

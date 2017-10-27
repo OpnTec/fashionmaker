@@ -74,11 +74,12 @@ void MovePiece::undo()
     if (domElement.isElement())
     {
         SaveCoordinates(domElement, m_oldX, m_oldY);
-        if (VToolSeamAllowance *tool = qobject_cast<VToolSeamAllowance *>(VAbstractPattern::getTool(nodeId)))
+        VToolSeamAllowance *tool = qobject_cast<VToolSeamAllowance *>(VAbstractPattern::getTool(nodeId));
+        if (tool)
         {
             tool->Move(m_oldX, m_oldY);
         }
-        VMainGraphicsView::NewSceneRect(m_scene, qApp->getSceneView());
+        VMainGraphicsView::NewSceneRect(m_scene, qApp->getSceneView(), tool);
     }
     else
     {
@@ -96,14 +97,12 @@ void MovePiece::redo()
     {
         SaveCoordinates(domElement, m_newX, m_newY);
 
-        if (redoFlag)
+        VToolSeamAllowance *tool = qobject_cast<VToolSeamAllowance *>(VAbstractPattern::getTool(nodeId));
+        if (redoFlag && tool)
         {
-            if (VToolSeamAllowance *tool = qobject_cast<VToolSeamAllowance *>(VAbstractPattern::getTool(nodeId)))
-            {
-                tool->Move(m_newX, m_newY);
-            }
+            tool->Move(m_newX, m_newY);
         }
-        VMainGraphicsView::NewSceneRect(m_scene, qApp->getSceneView());
+        VMainGraphicsView::NewSceneRect(m_scene, qApp->getSceneView(), tool);
         redoFlag = true;
     }
     else

@@ -492,7 +492,7 @@ void VToolSeamAllowance::Update(const VPiece &piece)
     setFlag(QGraphicsItem::ItemSendsGeometryChanges, false);
     VAbstractTool::data.UpdatePiece(m_id, piece);
     RefreshGeometry();
-    VMainGraphicsView::NewSceneRect(m_sceneDetails, qApp->getSceneView());
+    VMainGraphicsView::NewSceneRect(m_sceneDetails, qApp->getSceneView(), this);
     setFlag(QGraphicsItem::ItemSendsGeometryChanges, true);
 }
 

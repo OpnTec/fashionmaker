@@ -63,7 +63,6 @@ void MoveSplinePath::undo()
     qCDebug(vUndo, "Undo.");
 
     Do(oldSplinePath);
-    VMainGraphicsView::NewSceneRect(scene, qApp->getSceneView());
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -72,7 +71,6 @@ void MoveSplinePath::redo()
     qCDebug(vUndo, "Redo.");
 
     Do(newSplinePath);
-    VMainGraphicsView::NewSceneRect(scene, qApp->getSceneView());
 }
 
 //---------------------------------------------------------------------------------------------------------------------

@@ -118,7 +118,7 @@ public:
     void setShowToolOptions(bool value);
     void AllowRubberBand(bool value);
 
-    static void NewSceneRect(QGraphicsScene *sc, QGraphicsView *view);
+    static void NewSceneRect(QGraphicsScene *sc, QGraphicsView *view, QGraphicsItem *item = nullptr);
     static QRectF SceneVisibleArea(QGraphicsView *view);
 
     static qreal MinScale();

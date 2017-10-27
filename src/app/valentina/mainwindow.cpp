@@ -295,7 +295,7 @@ void MainWindow::AddPP(const QString &PPName)
     comboBoxDraws->blockSignals(false);
 
     // Show best for new PP
-    VMainGraphicsView::NewSceneRect(ui->view->scene(), ui->view);
+    VMainGraphicsView::NewSceneRect(ui->view->scene(), ui->view, spoint);
     //ZoomFitBestCurrent();
     QApplication::postEvent(this, new FitBestCurrentEvent());
 

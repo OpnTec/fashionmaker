@@ -89,8 +89,6 @@ void AddPiece::undo()
             DecrementReferences(m_detail.GetCustomSARecords());
             DecrementReferences(m_detail.GetInternalPaths());
             DecrementReferences(m_detail.GetPins());
-
-            VMainGraphicsView::NewSceneRect(m_scene, qApp->getSceneView());
         }
         else
         {
@@ -127,10 +125,14 @@ void AddPiece::redo()
             m_scene->addItem(m_tool);
             m_tool->ConnectOutsideSignals();
             m_tool->show();
+            VMainGraphicsView::NewSceneRect(m_scene, qApp->getSceneView(), m_tool);
             m_tool.clear();
         }
-
-        VMainGraphicsView::NewSceneRect(m_scene, qApp->getSceneView());
+        else
+        {
+            VMainGraphicsView::NewSceneRect(m_scene, qApp->getSceneView(),
+                                            qobject_cast<VToolSeamAllowance*>(VAbstractPattern::getTool(nodeId)));
+        }
     }
     else
     {

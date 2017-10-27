@@ -116,12 +116,9 @@ void VGraphicsSimpleTextItem::paint(QPainter *painter, const QStyleOptionGraphic
         m_oldScale = 1;
     }
 
-    if (scene && not scene->sceneRect().contains(sceneBoundingRect()))
+    if (QGraphicsView *view = scene->views().at(0))
     {
-        if (QGraphicsView *view = scene->views().at(0))
-        {
-            VMainGraphicsView::NewSceneRect(scene, view);
-        }
+        VMainGraphicsView::NewSceneRect(scene, view, this);
     }
     QGraphicsSimpleTextItem::paint(painter, option, widget);
 }
