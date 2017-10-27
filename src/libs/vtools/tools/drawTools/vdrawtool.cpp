@@ -262,10 +262,3 @@ bool VDrawTool::IsLabelVisible(quint32 id) const
     Q_UNUSED(id)
     return false;
 }
-
-//---------------------------------------------------------------------------------------------------------------------
-void VDrawTool::SetLabelVisible(quint32 id, bool visible)
-{
-    Q_UNUSED(id)
-    Q_UNUSED(visible)
-}

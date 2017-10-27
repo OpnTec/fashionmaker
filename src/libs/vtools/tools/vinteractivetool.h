@@ -43,8 +43,6 @@ public:
 
     void DialogLinkDestroy();
 
-    static bool m_suppressContextMenu;
-
 public slots:
     virtual void FullUpdateFromGuiOk(int result);
     virtual void FullUpdateFromGuiApply();

@@ -81,6 +81,7 @@
 
 template <class T> class QSharedPointer;
 
+bool VAbstractTool::m_suppressContextMenu = false;
 const QString VAbstractTool::AttrInUse = QStringLiteral("inUse");
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -373,6 +374,13 @@ void VAbstractTool::ChangeLabelPosition(quint32 id, const QPointF &pos)
 {
     Q_UNUSED(id)
     Q_UNUSED(pos)
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VAbstractTool::SetLabelVisible(quint32 id, bool visible)
+{
+    Q_UNUSED(id)
+    Q_UNUSED(visible)
 }
 
 //---------------------------------------------------------------------------------------------------------------------

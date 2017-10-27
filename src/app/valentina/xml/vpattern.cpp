@@ -1665,9 +1665,12 @@ void VPattern::ParseNodePoint(const QDomElement &domElement, const Document &par
             Q_UNUSED(e)
             return;// Just ignore
         }
-        initData.data->UpdateGObject(initData.id,
-                                     new VPointF(static_cast<QPointF>(*point), point->name(), mx, my, initData.idObject,
-                                     Draw::Modeling));
+
+        QSharedPointer<VPointF> p(new VPointF(static_cast<QPointF>(*point), point->name(), mx, my, initData.idObject,
+                                              Draw::Modeling));
+        p->SetShowLabel(GetParametrBool(domElement, AttrShowLabel, trueStr));
+
+        initData.data->UpdateGObject(initData.id, p);
         VNodePoint::Create(initData);
     }
     catch (const VExceptionBadId &e)

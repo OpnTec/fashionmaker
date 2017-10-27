@@ -100,7 +100,7 @@ void VAbstractOperation::ChangeLabelPosition(quint32 id, const QPointF &pos)
             point->setMy(pos.y());
             item->RefreshPointGeometry(*(point.data()));
 
-            if (QGraphicsScene *sc = scene())
+            if (QGraphicsScene *sc = item->scene())
             {
                 VMainGraphicsView::NewSceneRect(sc, qApp->getSceneView(), item);
             }
@@ -136,6 +136,10 @@ void VAbstractOperation::SetLabelVisible(quint32 id, bool visible)
             const QSharedPointer<VPointF> point = VAbstractTool::data.GeometricObject<VPointF>(id);
             point->SetShowLabel(visible);
             item->RefreshPointGeometry(*point);
+            if (QGraphicsScene *sc = item->scene())
+            {
+                VMainGraphicsView::NewSceneRect(sc, qApp->getSceneView(), item);
+            }
         }
     }
 }

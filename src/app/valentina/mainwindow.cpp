@@ -2110,7 +2110,7 @@ void MainWindow::CancelTool()
             // https://bitbucket.org/dismine/valentina/issues/454/crash-using-crtl-z-while-using-line-tool
             undoAction->setEnabled(false);
             redoAction->setEnabled(false);
-            VInteractiveTool::m_suppressContextMenu = true;
+            VAbstractTool::m_suppressContextMenu = true;
             return;
         case Tool::BasePoint:
         case Tool::SinglePoint:
@@ -2282,7 +2282,7 @@ void  MainWindow::ArrowTool()
     currentTool = Tool::Arrow;
     emit EnableItemMove(true);
     emit ItemsSelection(SelectionType::ByMouseRelease);
-    VInteractiveTool::m_suppressContextMenu = false;
+    VAbstractTool::m_suppressContextMenu = false;
 
     // Only true for rubber band selection
     emit EnableLabelSelection(true);

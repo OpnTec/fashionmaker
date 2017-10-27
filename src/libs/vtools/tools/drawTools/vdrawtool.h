@@ -68,7 +68,6 @@ public:
     virtual void SetTypeLine(const QString &value);
 
     virtual bool IsLabelVisible(quint32 id) const;
-    virtual void SetLabelVisible(quint32 id, bool visible);
 
 signals:
     void ChangedToolSelection(bool selected, quint32 object, quint32 tool);

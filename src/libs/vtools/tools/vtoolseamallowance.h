@@ -159,6 +159,11 @@ protected:
     virtual void       SetDialog() Q_DECL_FINAL;
     virtual void       SaveDialogChange(const QString &undoText = QString()) Q_DECL_FINAL;
 
+private slots:
+    void ShowOptions();
+    void ToggleInLayout(bool checked);
+    void DeleteFromMenu();
+
 private:
     Q_DISABLE_COPY(VToolSeamAllowance)
 

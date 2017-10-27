@@ -147,12 +147,20 @@ void VToolDoublePoint::SetLabelVisible(quint32 id, bool visible)
         const QSharedPointer<VPointF> point = VAbstractTool::data.GeometricObject<VPointF>(p1id);
         point->SetShowLabel(visible);
         firstPoint->RefreshPointGeometry(*point);
+        if (QGraphicsScene *sc = firstPoint->scene())
+        {
+            VMainGraphicsView::NewSceneRect(sc, qApp->getSceneView(), firstPoint);
+        }
     }
     else if (p2id == id)
     {
         const QSharedPointer<VPointF> point = VAbstractTool::data.GeometricObject<VPointF>(p2id);
         point->SetShowLabel(visible);
         secondPoint->RefreshPointGeometry(*point);
+        if (QGraphicsScene *sc = secondPoint->scene())
+        {
+            VMainGraphicsView::NewSceneRect(sc, qApp->getSceneView(), secondPoint);
+        }
     }
 }
 
@@ -229,7 +237,7 @@ void VToolDoublePoint::ChangeLabelPosition(quint32 id, const QPointF &pos)
         point->setMy(pos.y());
         firstPoint->RefreshPointGeometry(*(point.data()));
 
-        if (QGraphicsScene *sc = scene())
+        if (QGraphicsScene *sc = firstPoint->scene())
         {
             VMainGraphicsView::NewSceneRect(sc, qApp->getSceneView(), firstPoint);
         }
@@ -241,7 +249,7 @@ void VToolDoublePoint::ChangeLabelPosition(quint32 id, const QPointF &pos)
         point->setMy(pos.y());
         secondPoint->RefreshPointGeometry(*(point.data()));
 
-        if (QGraphicsScene *sc = scene())
+        if (QGraphicsScene *sc = secondPoint->scene())
         {
             VMainGraphicsView::NewSceneRect(sc, qApp->getSceneView(), secondPoint);
         }

@@ -137,6 +137,10 @@ void VToolSinglePoint::SetLabelVisible(quint32 id, bool visible)
         const QSharedPointer<VPointF> point = VAbstractTool::data.GeometricObject<VPointF>(id);
         point->SetShowLabel(visible);
         RefreshPointGeometry(*point);
+        if (QGraphicsScene *sc = scene())
+        {
+            VMainGraphicsView::NewSceneRect(sc, qApp->getSceneView(), this);
+        }
     }
 }
 

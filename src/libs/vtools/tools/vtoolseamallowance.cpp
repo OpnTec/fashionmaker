@@ -1159,28 +1159,17 @@ void VToolSeamAllowance::contextMenuEvent(QGraphicsSceneContextMenuEvent *event)
     QAction *selectedAction = menu.exec(event->screenPos());
     if (selectedAction == actionOption)
     {
-        QSharedPointer<DialogSeamAllowance> dialog =
-                QSharedPointer<DialogSeamAllowance>(new DialogSeamAllowance(getData(), m_id, qApp->getMainWindow()));
-        dialog->EnableApply(true);
-        m_dialog = dialog;
-        m_dialog->setModal(true);
-        connect(m_dialog.data(), &DialogTool::DialogClosed, this, &VToolSeamAllowance::FullUpdateFromGuiOk);
-        connect(m_dialog.data(), &DialogTool::DialogApplied, this, &VToolSeamAllowance::FullUpdateFromGuiApply);
-        SetDialog();
-        m_dialog->show();
+        ShowOptions();
     }
     else if (selectedAction == inLayoutOption)
     {
-        TogglePieceInLayout *togglePrint = new TogglePieceInLayout(m_id, selectedAction->isChecked(),
-                                                                   &(VAbstractTool::data), doc);
-        connect(togglePrint, &TogglePieceInLayout::UpdateList, doc, &VAbstractPattern::CheckInLayoutList);
-        qApp->getUndoStack()->push(togglePrint);
+        ToggleInLayout(selectedAction->isChecked());
     }
     else if (selectedAction == actionRemove)
     {
         try
         {
-            DeleteToolWithConfirm();
+            DeleteFromMenu();
         }
         catch(const VExceptionToolWasDeleted &e)
         {
@@ -1379,6 +1368,34 @@ void VToolSeamAllowance::SaveDialogChange(const QString &undoText)
     {
         qApp->getUndoStack()->endMacro();
     }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VToolSeamAllowance::ShowOptions()
+{
+    QSharedPointer<DialogSeamAllowance> dialog =
+            QSharedPointer<DialogSeamAllowance>(new DialogSeamAllowance(getData(), m_id, qApp->getMainWindow()));
+    dialog->EnableApply(true);
+    m_dialog = dialog;
+    m_dialog->setModal(true);
+    connect(m_dialog.data(), &DialogTool::DialogClosed, this, &VToolSeamAllowance::FullUpdateFromGuiOk);
+    connect(m_dialog.data(), &DialogTool::DialogApplied, this, &VToolSeamAllowance::FullUpdateFromGuiApply);
+    SetDialog();
+    m_dialog->show();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VToolSeamAllowance::ToggleInLayout(bool checked)
+{
+    TogglePieceInLayout *togglePrint = new TogglePieceInLayout(m_id, checked, &(VAbstractTool::data), doc);
+    connect(togglePrint, &TogglePieceInLayout::UpdateList, doc, &VAbstractPattern::CheckInLayoutList);
+    qApp->getUndoStack()->push(togglePrint);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VToolSeamAllowance::DeleteFromMenu()
+{
+    DeleteToolWithConfirm();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -1596,8 +1613,11 @@ void VToolSeamAllowance::InitNode(const VPieceNode &node, VMainGraphicsScene *sc
 
             if (tool->parent() != parent)
             {
-                connect(tool, &VNodePoint::ShowContextMenu, parent, &VToolSeamAllowance::contextMenuEvent);
-                connect(tool, &VNodePoint::ChoosedTool, scene, &VMainGraphicsScene::ChoosedItem);
+                connect(tool, &VNodePoint::ShowOptions, parent, &VToolSeamAllowance::ShowOptions, Qt::UniqueConnection);
+                connect(tool, &VNodePoint::ToggleInLayout, parent, &VToolSeamAllowance::ToggleInLayout,
+                        Qt::UniqueConnection);
+                connect(tool, &VNodePoint::Delete, parent, &VToolSeamAllowance::DeleteFromMenu, Qt::UniqueConnection);
+                connect(tool, &VNodePoint::ChoosedTool, scene, &VMainGraphicsScene::ChoosedItem, Qt::UniqueConnection);
                 tool->setParentItem(parent);
                 tool->SetParentType(ParentType::Item);
                 tool->SetExluded(node.IsExcluded());

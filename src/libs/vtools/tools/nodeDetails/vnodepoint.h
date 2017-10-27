@@ -58,14 +58,11 @@ public:
     virtual QString getTagName() const Q_DECL_OVERRIDE;
 
     virtual void ChangeLabelPosition(quint32 id, const QPointF &pos) Q_DECL_OVERRIDE;
-
+    virtual void SetLabelVisible(quint32 id, bool visible) Q_DECL_OVERRIDE;
 signals:
-    /**
-     * @brief ShowContextMenu emit when need show tool context menu.
-     * @param event context menu event.
-     */
-    void         ShowContextMenu(QGraphicsSceneContextMenuEvent *event);
-
+    void ShowOptions();
+    void ToggleInLayout(bool checked);
+    void Delete();
 public slots:
     virtual void FullUpdateFromFile() Q_DECL_OVERRIDE;
     void         NameChangePosition(const QPointF &pos);

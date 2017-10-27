@@ -89,6 +89,7 @@ public:
     virtual ~VAbstractTool() Q_DECL_OVERRIDE;
     quint32                 getId() const;
 
+    static bool m_suppressContextMenu;
     static const QString AttrInUse;
 
     static qreal CheckFormula(const quint32 &toolId, QString &formula, VContainer *data);
@@ -109,7 +110,7 @@ public:
     virtual QString         getTagName() const =0;
     virtual void            ShowVisualization(bool show) =0;
     virtual void            ChangeLabelPosition(quint32 id, const QPointF &pos);
-
+    virtual void            SetLabelVisible(quint32 id, bool visible);
 public slots:
     /**
      * @brief FullUpdateFromFile update tool data form file.

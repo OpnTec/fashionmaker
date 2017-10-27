@@ -82,11 +82,10 @@ void ShowLabel::Do(bool visible)
     {
         doc->SetAttribute<bool>(domElement, AttrShowLabel, visible);
 
-        if (VDrawTool *tool = qobject_cast<VDrawTool *>(VAbstractPattern::getTool(nodeId)))
+        if (VAbstractTool *tool = qobject_cast<VAbstractTool *>(VAbstractPattern::getTool(nodeId)))
         {
             tool->SetLabelVisible(nodeId, visible);
         }
-        VMainGraphicsView::NewSceneRect(m_scene, qApp->getSceneView());
     }
     else
     {

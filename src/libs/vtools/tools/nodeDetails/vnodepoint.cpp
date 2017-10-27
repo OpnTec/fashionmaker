@@ -34,6 +34,8 @@
 #include <QGraphicsLineItem>
 #include <QGraphicsScene>
 #include <QGraphicsSceneMouseEvent>
+#include <QIcon>
+#include <QMenu>
 #include <QPen>
 #include <QPoint>
 #include <QRectF>
@@ -56,6 +58,8 @@
 #include "../vdatatool.h"
 #include "vabstractnode.h"
 #include "../../undocommands/label/movelabel.h"
+#include "../../undocommands/label/showlabel.h"
+#include "../vtoolseamallowance.h"
 
 const QString VNodePoint::ToolType = QStringLiteral("modeling");
 
@@ -75,7 +79,7 @@ VNodePoint::VNodePoint(const VAbstractNodeInitData &initData, QObject *qoParent,
     connect(m_namePoint, &VGraphicsSimpleTextItem::ShowContextMenu,
             this, [this](QGraphicsSceneContextMenuEvent *event)
     {
-        emit ShowContextMenu(event);
+        contextMenuEvent(event);
     });
     RefreshPointGeometry(*VAbstractTool::data.GeometricObject<VPointF>(initData.id));
     ToolCreation(initData.typeCreation);
@@ -148,6 +152,21 @@ void VNodePoint::ChangeLabelPosition(quint32 id, const QPointF &pos)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void VNodePoint::SetLabelVisible(quint32 id, bool visible)
+{
+    if (m_id == id)
+    {
+        const QSharedPointer<VPointF> point = VAbstractTool::data.GeometricObject<VPointF>(id);
+        point->SetShowLabel(visible);
+        RefreshPointGeometry(*point);
+        if (QGraphicsScene *sc = scene())
+        {
+            VMainGraphicsView::NewSceneRect(sc, qApp->getSceneView(), this);
+        }
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 void VNodePoint::PointChoosed()
 {
     emit ChoosedTool(m_id, SceneObject::Point);
@@ -176,6 +195,7 @@ void VNodePoint::AddToFile()
     doc->SetAttribute(domElement, AttrIdObject, idNode);
     doc->SetAttribute(domElement, AttrMx, qApp->fromPixel(point->mx()));
     doc->SetAttribute(domElement, AttrMy, qApp->fromPixel(point->my()));
+    doc->SetAttribute<bool>(domElement, AttrShowLabel, point->IsShowLabel());
     if (idTool != NULL_ID)
     {
         doc->SetAttribute(domElement, AttrIdTool, idTool);
@@ -241,7 +261,55 @@ void VNodePoint::HideNode()
 //---------------------------------------------------------------------------------------------------------------------
 void VNodePoint::contextMenuEvent(QGraphicsSceneContextMenuEvent *event)
 {
-    emit ShowContextMenu(event);
+    if (m_suppressContextMenu)
+    {
+        return;
+    }
+
+    if (VToolSeamAllowance *piece = qgraphicsitem_cast<VToolSeamAllowance *>(parentItem()))
+    {
+        QMenu menu;
+        QAction *actionOption = menu.addAction(QIcon::fromTheme("preferences-other"), tr("Options"));
+
+        QAction *inLayoutOption = menu.addAction(tr("In layout"));
+        inLayoutOption->setCheckable(true);
+        const VPiece detail = VAbstractTool::data.GetPiece(piece->getId());
+        inLayoutOption->setChecked(detail.IsInLayout());
+
+        QAction *actionShowLabel = menu.addAction(tr("Show label"));
+        actionShowLabel->setCheckable(true);
+        actionShowLabel->setChecked(VAbstractTool::data.GeometricObject<VPointF>(m_id)->IsShowLabel());
+
+        QAction *actionRemove = menu.addAction(QIcon::fromTheme("edit-delete"), tr("Delete"));
+        piece->referens() > 1 ? actionRemove->setEnabled(false) : actionRemove->setEnabled(true);
+
+        QAction *selectedAction = menu.exec(event->screenPos());
+        if (selectedAction == actionOption)
+        {
+            emit ShowOptions();
+        }
+        else if (selectedAction == inLayoutOption)
+        {
+            emit ToggleInLayout(selectedAction->isChecked());
+        }
+        else if (selectedAction == actionRemove)
+        {
+            try
+            {
+                emit Delete();
+            }
+            catch(const VExceptionToolWasDeleted &e)
+            {
+                Q_UNUSED(e);
+                return;//Leave this method immediately!!!
+            }
+            //Leave this method immediately after call!!!
+        }
+        else if (selectedAction == actionShowLabel)
+        {
+            qApp->getUndoStack()->push(new ShowLabel(doc, m_id, selectedAction->isChecked()));
+        }
+    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
