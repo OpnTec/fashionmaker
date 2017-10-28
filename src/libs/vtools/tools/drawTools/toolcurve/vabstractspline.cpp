@@ -61,7 +61,8 @@ VAbstractSpline::VAbstractSpline(VAbstractPattern *doc, VContainer *data, quint3
       controlPoints(),
       sceneType(SceneObject::Unknown),
       m_isHovered(false),
-      detailsMode(false)
+      detailsMode(false),
+      m_parentRefresh(false)
 {
     InitDefShape();
     setAcceptHoverEvents(true);
@@ -98,26 +99,39 @@ void VAbstractSpline::paint(QPainter *painter, const QStyleOptionGraphicsItem *o
     const QSharedPointer<VAbstractCurve> curve = VAbstractTool::data.GeometricObject<VAbstractCurve>(m_id);
     setPen(QPen(CorrectColor(this, curve->GetColor()), width, LineStyleToPenStyle(curve->GetPenStyle()), Qt::RoundCap));
 
-    RefreshCtrlPoints();
-
-    if (m_isHovered || detailsMode)
+    auto PaintSpline = [this, curve](QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
     {
-        painter->save();
+        if (m_isHovered || detailsMode)
+        {
+            painter->save();
 
-        QPen arrowPen(pen());
-        arrowPen.setStyle(Qt::SolidLine);
+            QPen arrowPen(pen());
+            arrowPen.setStyle(Qt::SolidLine);
 
-        painter->setPen(arrowPen);
-        painter->setBrush(brush());
+            painter->setPen(arrowPen);
+            painter->setBrush(brush());
 
-        painter->drawPath(VAbstractCurve::ShowDirection(curve->DirectionArrows(),
-                                                        ScaleWidth(VAbstractCurve::lengthCurveDirectionArrow,
-                                                                   SceneScale(scene()))));
+            painter->drawPath(VAbstractCurve::ShowDirection(curve->DirectionArrows(),
+                                                            ScaleWidth(VAbstractCurve::lengthCurveDirectionArrow,
+                                                                       SceneScale(scene()))));
 
-        painter->restore();
+            painter->restore();
+        }
+
+        QGraphicsPathItem::paint(painter, option, widget);
+    };
+
+    if (not m_parentRefresh)
+    {
+        RefreshCtrlPoints();
+        m_parentRefresh = true;
+        PaintSpline(painter, option, widget);
     }
-
-    QGraphicsPathItem::paint(painter, option, widget);
+    else
+    {
+        m_parentRefresh = false;
+        PaintSpline(painter, option, widget);
+    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -156,12 +170,22 @@ void VAbstractSpline::DetailsMode(bool mode)
 void VAbstractSpline::AllowHover(bool enabled)
 {
     setAcceptHoverEvents(enabled);
+
+    foreach (auto *point, controlPoints)
+    {
+        point->setAcceptHoverEvents(enabled);
+    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void VAbstractSpline::AllowSelecting(bool enabled)
 {
     setFlag(QGraphicsItem::ItemIsSelectable, enabled);
+
+    foreach (auto *point, controlPoints)
+    {
+        point->setFlag(QGraphicsItem::ItemIsSelectable, enabled);
+    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------

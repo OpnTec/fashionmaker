@@ -296,6 +296,11 @@ void VToolSpline::ControlPointChangePosition(const qint32 &indexSpline, const Sp
 void VToolSpline::EnableToolMove(bool move)
 {
     this->setFlag(QGraphicsItem::ItemIsMovable, move);
+
+    foreach (auto *point, controlPoints)
+    {
+        point->setFlag(QGraphicsItem::ItemIsMovable, move);
+    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
