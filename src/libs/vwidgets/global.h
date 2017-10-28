@@ -33,6 +33,7 @@
 
 extern const qreal widthMainLine;
 extern const qreal widthHairLine;
+extern const qreal minVisibleFontSize;
 
 class QGraphicsScene;
 class QGraphicsItem;

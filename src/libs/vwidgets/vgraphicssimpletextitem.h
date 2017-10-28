@@ -88,6 +88,8 @@ private:
     qint32        m_fontSize;
     SelectionType selectionType;
     qreal         m_oldScale;
+
+    void Init();
 };
 
 //---------------------------------------------------------------------------------------------------------------------

@@ -36,6 +36,7 @@
 static const qreal defPointRadiusPixel = (2./*mm*/ / 25.4) * PrintDPI;
 const qreal widthMainLine = (1.2/*mm*/ / 25.4) * PrintDPI;
 const qreal widthHairLine = widthMainLine/3.0;
+const qreal minVisibleFontSize = 5;
 
 qreal SceneScale(QGraphicsScene *scene)
 {

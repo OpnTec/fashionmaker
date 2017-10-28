@@ -54,19 +54,12 @@
  * @param parent parent object.
  */
 VGraphicsSimpleTextItem::VGraphicsSimpleTextItem(QGraphicsItem * parent)
-    :QGraphicsSimpleTextItem(parent), m_fontSize(0), selectionType(SelectionType::ByMouseRelease),
-      m_oldScale(VMainGraphicsView::MinScale())
+    : QGraphicsSimpleTextItem(parent),
+      m_fontSize(0),
+      selectionType(SelectionType::ByMouseRelease),
+      m_oldScale(1)
 {
-    this->setFlag(QGraphicsItem::ItemIsMovable, true);
-    this->setFlag(QGraphicsItem::ItemIsSelectable, true);
-    this->setFlag(QGraphicsItem::ItemSendsGeometryChanges, true);
-    this->setFlag(QGraphicsItem::ItemIsFocusable, true);// For keyboard input focus
-    this->setAcceptHoverEvents(true);
-    QFont font = this->font();
-    font.setPointSize(font.pointSize()+20);
-    m_fontSize = font.pointSize();
-    this->setFont(font);
-    setScale(m_oldScale);
+    Init();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -76,14 +69,12 @@ VGraphicsSimpleTextItem::VGraphicsSimpleTextItem(QGraphicsItem * parent)
  * @param parent parent object.
  */
 VGraphicsSimpleTextItem::VGraphicsSimpleTextItem( const QString & text, QGraphicsItem * parent )
-    :QGraphicsSimpleTextItem(text, parent), m_fontSize(0), selectionType(SelectionType::ByMouseRelease),
-      m_oldScale(VMainGraphicsView::MinScale())
+    : QGraphicsSimpleTextItem(text, parent),
+      m_fontSize(0),
+      selectionType(SelectionType::ByMouseRelease),
+      m_oldScale(1)
 {
-    this->setFlag(QGraphicsItem::ItemIsMovable, true);
-    this->setFlag(QGraphicsItem::ItemIsSelectable, true);
-    this->setFlag(QGraphicsItem::ItemSendsGeometryChanges, true);
-    this->setAcceptHoverEvents(true);
-    setScale(m_oldScale);
+    Init();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -318,4 +309,20 @@ void VGraphicsSimpleTextItem::keyReleaseEvent(QKeyEvent *event)
             break;
     }
     QGraphicsSimpleTextItem::keyReleaseEvent ( event );
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VGraphicsSimpleTextItem::Init()
+{
+    this->setFlag(QGraphicsItem::ItemIsMovable, true);
+    this->setFlag(QGraphicsItem::ItemIsSelectable, true);
+    this->setFlag(QGraphicsItem::ItemSendsGeometryChanges, true);
+    this->setFlag(QGraphicsItem::ItemIsFocusable, true);// For keyboard input focus
+    this->setAcceptHoverEvents(true);
+    QFont font = this->font();
+    font.setPointSize(font.pointSize()+20);
+    m_fontSize = font.pointSize();
+    this->setFont(font);
+    m_oldScale = minVisibleFontSize / m_fontSize;
+    setScale(m_oldScale);
 }
