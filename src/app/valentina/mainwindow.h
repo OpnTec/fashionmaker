@@ -124,7 +124,7 @@ private slots:
     void ExportLayoutAs();
     void ExportDetailsAs();
 
-    void ArrowTool();
+    void ArrowTool(bool checked);
     void ToolEndLine(bool checked);
     void ToolLine(bool checked);
     void ToolAlongLine(bool checked);

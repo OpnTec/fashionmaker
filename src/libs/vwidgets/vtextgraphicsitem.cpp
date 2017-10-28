@@ -375,7 +375,8 @@ int VTextGraphicsItem::GetFontSize() const
  */
 void VTextGraphicsItem::mousePressEvent(QGraphicsSceneMouseEvent *pME)
 {
-    if (pME->button() == Qt::LeftButton && pME->type() != QEvent::GraphicsSceneMouseDoubleClick)
+    if (pME->button() == Qt::LeftButton && pME->type() != QEvent::GraphicsSceneMouseDoubleClick
+            && (flags() & QGraphicsItem::ItemIsMovable))
     {
         if (m_moveType == NotMovable)
         {
@@ -454,6 +455,10 @@ void VTextGraphicsItem::mousePressEvent(QGraphicsSceneMouseEvent *pME)
         {
             pME->ignore();
         }
+    }
+    else
+    {
+        pME->ignore();
     }
 }
 
@@ -552,7 +557,7 @@ void VTextGraphicsItem::mouseReleaseEvent(QGraphicsSceneMouseEvent* pME)
     if (pME->button() == Qt::LeftButton)
     {
         // restore the cursor
-        if (m_eMode == mMove || m_eMode == mRotate || m_eMode == mResize)
+        if ((m_eMode == mMove || m_eMode == mRotate || m_eMode == mResize) && (flags() & QGraphicsItem::ItemIsMovable))
         {
             SetItemOverrideCursor(this, cursorArrowOpenHand, 1, 1);
         }
@@ -621,13 +626,26 @@ void VTextGraphicsItem::hoverMoveEvent(QGraphicsSceneHoverEvent* pHE)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void VTextGraphicsItem::hoverEnterEvent(QGraphicsSceneHoverEvent *pME)
+{
+    if (flags() & QGraphicsItem::ItemIsMovable)
+    {
+        SetItemOverrideCursor(this, cursorArrowOpenHand, 1, 1);
+    }
+    VPieceItem::hoverEnterEvent(pME);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 /**
  * @brief VTextGraphicsItem::hoverLeaveEvent tries to restore normal mouse cursor
  * @param pHE not used
  */
 void VTextGraphicsItem::hoverLeaveEvent(QGraphicsSceneHoverEvent* pHE)
 {
-    setCursor(QCursor());
+    if (flags() & QGraphicsItem::ItemIsMovable)
+    {
+        setCursor(QCursor());
+    }
     VPieceItem::hoverLeaveEvent(pHE);
 }
 

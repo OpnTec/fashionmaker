@@ -596,9 +596,21 @@ void VMainGraphicsView::NewSceneRect(QGraphicsScene *sc, QGraphicsView *view, QG
         //Unite two rects
         sc->setSceneRect(itemsRect.united(viewRect));
     }
-    else if (not sc->sceneRect().contains(item->sceneBoundingRect()))
+    else
     {
-        sc->setSceneRect(sc->sceneRect().united(item->sceneBoundingRect()));
+        QRectF rect = item->sceneBoundingRect();
+        foreach(QGraphicsItem *child, item->childItems())
+        {
+            if(child->isVisible())
+            {
+                rect = rect.united(child->sceneBoundingRect());
+            }
+        }
+
+        if (not sc->sceneRect().contains(rect))
+        {
+            sc->setSceneRect(sc->sceneRect().united(rect));
+        }
     }
 }
 

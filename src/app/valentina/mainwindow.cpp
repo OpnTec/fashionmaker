@@ -694,7 +694,7 @@ void MainWindow::ClosedDialog(int result)
         // Do not check for nullptr! See issue #719.
         ui->view->itemClicked(tool);
     }
-    ArrowTool();
+    ArrowTool(true);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -718,7 +718,7 @@ void MainWindow::ClosedDialogWithApply(int result, VMainGraphicsScene *scene)
         vtool->DialogLinkDestroy();
         connect(vtool, &DrawTool::ToolTip, this, &MainWindow::ShowToolTip);
     }
-    ArrowTool();
+    ArrowTool(true);
     ui->view->itemClicked(vtool);// Don't check for nullptr here
     // If insert not to the end of file call lite parse
     if (doc->getCursor() > 0)
@@ -1131,7 +1131,7 @@ void MainWindow::ClosedDialogDuplicateDetail(int result)
         // Do not check for nullptr! See issue #719.
         ui->view->itemClicked(tool);
     }
-    ArrowTool();
+    ArrowTool(true);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -1209,7 +1209,7 @@ void MainWindow::ClosedDialogGroup(int result)
             qApp->getUndoStack()->push(addGroup);
         }
     }
-    ArrowTool();
+    ArrowTool(true);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -1220,7 +1220,7 @@ void MainWindow::ClosedDialogPiecePath(int result)
     {
         VToolPiecePath::Create(dialogTool, sceneDetails, doc, pattern);
     }
-    ArrowTool();
+    ArrowTool(true);
     doc->LiteParseTree(Document::LiteParse);
 }
 
@@ -1232,7 +1232,7 @@ void MainWindow::ClosedDialogPin(int result)
     {
         VToolPin::Create(dialogTool, doc, pattern);
     }
-    ArrowTool();
+    ArrowTool(true);
     doc->LiteParseTree(Document::LiteParse);
 }
 
@@ -1244,7 +1244,7 @@ void MainWindow::ClosedDialogPlaceLabel(int result)
     {
         VToolPlaceLabel::Create(dialogTool, doc, pattern);
     }
-    ArrowTool();
+    ArrowTool(true);
     doc->LiteParseTree(Document::LiteParse);
 }
 
@@ -1258,7 +1258,7 @@ void MainWindow::ClosedDialogInsertNode(int result)
         SCASSERT(dTool != nullptr)
         VToolSeamAllowance::InsertNode(dTool->GetNode(), dTool->GetPieceId(), sceneDetails, pattern, doc);
     }
-    ArrowTool();
+    ArrowTool(true);
     doc->LiteParseTree(Document::LiteParse);
 }
 
@@ -2271,49 +2271,58 @@ QT_WARNING_POP
 /**
  * @brief ArrowTool enable arrow tool.
  */
-void  MainWindow::ArrowTool()
+void  MainWindow::ArrowTool(bool checked)
 {
-    qCDebug(vMainWindow, "Arrow tool.");
-    CancelTool();
-    for (auto pointer : toolButtonPointerList)
+    if (checked)
     {
-        pointer->setChecked(true);
+        qCDebug(vMainWindow, "Arrow tool.");
+        CancelTool();
+        for (auto pointer : toolButtonPointerList)
+        {
+            pointer->setChecked(true);
+        }
+        currentTool = Tool::Arrow;
+        emit EnableItemMove(true);
+        emit ItemsSelection(SelectionType::ByMouseRelease);
+        VAbstractTool::m_suppressContextMenu = false;
+
+        // Only true for rubber band selection
+        emit EnableLabelSelection(true);
+        emit EnablePointSelection(false);
+        emit EnableLineSelection(false);
+        emit EnableArcSelection(false);
+        emit EnableElArcSelection(false);
+        emit EnableSplineSelection(false);
+        emit EnableSplinePathSelection(false);
+        emit EnableNodeLabelSelection(true);
+        emit EnableNodePointSelection(true);
+        emit EnableDetailSelection(true);// Disable when done visualization details
+
+        // Hovering
+        emit EnableLabelHover(true);
+        emit EnablePointHover(true);
+        emit EnableLineHover(true);
+        emit EnableArcHover(true);
+        emit EnableElArcHover(true);
+        emit EnableSplineHover(true);
+        emit EnableSplinePathHover(true);
+        emit EnableNodeLabelHover(true);
+        emit EnableNodePointHover(true);
+        emit EnableDetailHover(true);
+
+        ui->view->AllowRubberBand(true);
+        ui->view->viewport()->setCursor(QCursor(Qt::ArrowCursor));
+        helpLabel->setText("");
+        ui->view->setShowToolOptions(true);
+        qCDebug(vMainWindow, "Enabled arrow tool.");
     }
-    currentTool = Tool::Arrow;
-    emit EnableItemMove(true);
-    emit ItemsSelection(SelectionType::ByMouseRelease);
-    VAbstractTool::m_suppressContextMenu = false;
-
-    // Only true for rubber band selection
-    emit EnableLabelSelection(true);
-    emit EnablePointSelection(false);
-    emit EnableLineSelection(false);
-    emit EnableArcSelection(false);
-    emit EnableElArcSelection(false);
-    emit EnableSplineSelection(false);
-    emit EnableSplinePathSelection(false);
-    emit EnableNodeLabelSelection(true);
-    emit EnableNodePointSelection(true);
-    emit EnableDetailSelection(true);// Disable when done visualization details
-
-    // Hovering
-    emit EnableLabelHover(true);
-    emit EnablePointHover(true);
-    emit EnableLineHover(true);
-    emit EnableArcHover(true);
-    emit EnableElArcHover(true);
-    emit EnableSplineHover(true);
-    emit EnableSplinePathHover(true);
-    emit EnableNodeLabelHover(true);
-    emit EnableNodePointHover(true);
-    emit EnableDetailHover(true);
-
-    ui->view->AllowRubberBand(true);
-
-    ui->view->viewport()->unsetCursor();
-    helpLabel->setText("");
-    ui->view->setShowToolOptions(true);
-    qCDebug(vMainWindow, "Enabled arrow tool.");
+    else
+    {
+        for (auto pointer : toolButtonPointerList)
+        {
+            pointer->setChecked(true);
+        }
+    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -2326,7 +2335,7 @@ void MainWindow::keyPressEvent ( QKeyEvent * event )
     switch (event->key())
     {
         case Qt::Key_Escape:
-            ArrowTool();
+            ArrowTool(true);
             break;
         case Qt::Key_Return:
         case Qt::Key_Enter:
@@ -2387,7 +2396,7 @@ void MainWindow::ActionDraw(bool checked)
     if (checked)
     {
         qCDebug(vMainWindow, "Show draw scene");
-        ArrowTool();
+        ArrowTool(true);
 
         leftGoToStage->setPixmap(QPixmap("://icon/24x24/fast_forward_left_to_right_arrow.png"));
         rightGoToStage->setPixmap(QPixmap("://icon/24x24/left_to_right_arrow.png"));
@@ -2437,7 +2446,7 @@ void MainWindow::ActionDetails(bool checked)
 {
     if (checked)
     {
-        ArrowTool();
+        ArrowTool(true);
 
         if(drawMode)
         {
@@ -2514,7 +2523,7 @@ void MainWindow::ActionLayout(bool checked)
 {
     if (checked)
     {
-        ArrowTool();
+        ArrowTool(true);
 
         if(drawMode)
         {
@@ -2879,7 +2888,7 @@ void MainWindow::Clear()
     qCDebug(vMainWindow, "Clearing scenes.");
     sceneDraw->clear();
     sceneDetails->clear();
-    ArrowTool();
+    ArrowTool(true);
     comboBoxDraws->clear();
     ui->actionDraw->setEnabled(false);
     ui->actionDetails->setEnabled(false);
@@ -3151,7 +3160,7 @@ void MainWindow::SetEnabledGUI(bool enabled)
     {
         if (enabled == false)
         {
-            ArrowTool();
+            ArrowTool(true);
             qApp->getUndoStack()->clear();
         }
         SetEnableWidgets(enabled);
@@ -3794,7 +3803,7 @@ void MainWindow::LastUsedTool()
             {
                 pointer->setChecked(true);
             }
-            ArrowTool();
+            ArrowTool(true);
             break;
         case Tool::BasePoint:
         case Tool::SinglePoint:
@@ -4912,7 +4921,7 @@ void MainWindow::ChangePP(int index, bool zoomBestFit)
         emit RefreshHistory();
         if (drawMode)
         {
-            ArrowTool();
+            ArrowTool(true);
             if (zoomBestFit)
             {
                 ZoomFitBestCurrent();

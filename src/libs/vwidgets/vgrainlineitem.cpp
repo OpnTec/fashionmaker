@@ -271,7 +271,8 @@ bool VGrainlineItem::IsContained(const QPointF& pt, qreal dRot, qreal &dX, qreal
  */
 void VGrainlineItem::mousePressEvent(QGraphicsSceneMouseEvent* pME)
 {
-    if (pME->button() == Qt::LeftButton && pME->type() != QEvent::GraphicsSceneMouseDoubleClick)
+    if (pME->button() == Qt::LeftButton && pME->type() != QEvent::GraphicsSceneMouseDoubleClick
+            && (flags() & QGraphicsItem::ItemIsMovable))
     {
         if (m_moveType == NotMovable)
         {
@@ -457,7 +458,7 @@ void VGrainlineItem::mouseReleaseEvent(QGraphicsSceneMouseEvent* pME)
 {
     if (pME->button() == Qt::LeftButton)
     {
-        if (m_eMode == mMove || m_eMode == mRotate || m_eMode == mResize)
+        if ((m_eMode == mMove || m_eMode == mRotate || m_eMode == mResize) && (flags() & QGraphicsItem::ItemIsMovable))
         {
             SetItemOverrideCursor(this, cursorArrowOpenHand, 1, 1);
         }
@@ -508,14 +509,22 @@ void VGrainlineItem::mouseReleaseEvent(QGraphicsSceneMouseEvent* pME)
 //---------------------------------------------------------------------------------------------------------------------
 void VGrainlineItem::hoverEnterEvent(QGraphicsSceneHoverEvent *pME)
 {
-    m_penWidth = LINE_PEN_WIDTH + 1;
+    if (flags() & QGraphicsItem::ItemIsMovable)
+    {
+        SetItemOverrideCursor(this, cursorArrowOpenHand, 1, 1);
+        m_penWidth = LINE_PEN_WIDTH + 1;
+    }
     VPieceItem::hoverEnterEvent(pME);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void VGrainlineItem::hoverLeaveEvent(QGraphicsSceneHoverEvent *pME)
 {
-    m_penWidth = LINE_PEN_WIDTH;
+    if (flags() & QGraphicsItem::ItemIsMovable)
+    {
+        setCursor(QCursor());
+        m_penWidth = LINE_PEN_WIDTH;
+    }
     VPieceItem::hoverLeaveEvent(pME);
 }
 

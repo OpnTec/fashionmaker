@@ -45,10 +45,12 @@ void VisToolDuplicateDetail::RefreshGeometry()
     {
         m_start = Visualization::scenePos;
         m_started = true;
+        setPos(QPointF(piece.GetMx(), piece.GetMy()));
     }
     else
     {
         m_diff = Visualization::scenePos - m_start;
+        m_diff = QPointF(m_diff.x() + piece.GetMx(), m_diff.y() + piece.GetMy());
         setPos(m_diff);
     }
 

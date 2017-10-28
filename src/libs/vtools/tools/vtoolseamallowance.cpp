@@ -141,6 +141,7 @@ VToolSeamAllowance *VToolSeamAllowance::Create(VToolSeamAllowanceInitData &initD
         VAbstractTool::AddRecord(initData.id, Tool::Piece, initData.doc);
         piece = new VToolSeamAllowance(initData);
         initData.scene->addItem(piece);
+        VMainGraphicsView::NewSceneRect(initData.scene, qApp->getSceneView(), piece);
         VAbstractPattern::AddTool(initData.id, piece);
     }
     //Very important to delete it. Only this tool need this special variable.
@@ -584,12 +585,19 @@ void VToolSeamAllowance::FullUpdateFromFile()
 void VToolSeamAllowance::EnableToolMove(bool move)
 {
     setFlag(QGraphicsItem::ItemIsMovable, move);
+
+    m_dataLabel->setFlag(QGraphicsItem::ItemIsMovable, move);
+    m_patternInfo->setFlag(QGraphicsItem::ItemIsMovable, move);
+    m_grainLine->setFlag(QGraphicsItem::ItemIsMovable, move);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void VToolSeamAllowance::AllowHover(bool enabled)
 {
     setAcceptHoverEvents(enabled);
+    m_dataLabel->setAcceptHoverEvents(enabled);
+    m_patternInfo->setAcceptHoverEvents(enabled);
+    m_grainLine->setAcceptHoverEvents(enabled);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -1086,13 +1094,18 @@ void VToolSeamAllowance::mousePressEvent(QGraphicsSceneMouseEvent *event)
         }
     }
 
-    if (event->button() == Qt::LeftButton && event->type() != QEvent::GraphicsSceneMouseDoubleClick)
+    if (selectionType == SelectionType::ByMouseRelease)
     {
-        doc->SelectedDetail(m_id);
-        emit ChoosedTool(m_id, SceneObject::Detail);
+        event->accept();// Special for not selectable item first need to call standard mousePressEvent then accept event
     }
-
-    event->accept();// Special for not selectable item first need to call standard mousePressEvent then accept event
+    else
+    {
+        if (event->button() == Qt::LeftButton && event->type() != QEvent::GraphicsSceneMouseDoubleClick)
+        {
+            doc->SelectedDetail(m_id);
+            emit ChoosedTool(m_id, SceneObject::Detail);
+        }
+    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -1101,6 +1114,15 @@ void VToolSeamAllowance::mouseReleaseEvent(QGraphicsSceneMouseEvent *event)
     if (event->button() == Qt::LeftButton && (flags() & QGraphicsItem::ItemIsMovable))
     {
         SetItemOverrideCursor(this, cursorArrowOpenHand, 1, 1);
+    }
+
+    if (selectionType == SelectionType::ByMouseRelease)
+    {
+        if (event->button() == Qt::LeftButton && contains(event->pos()))
+        {
+            doc->SelectedDetail(m_id);
+            emit ChoosedTool(m_id, SceneObject::Detail);
+        }
     }
     QGraphicsPathItem::mouseReleaseEvent(event);
 }
@@ -1111,16 +1133,6 @@ void VToolSeamAllowance::hoverEnterEvent(QGraphicsSceneHoverEvent *event)
     if (flags() & QGraphicsItem::ItemIsMovable)
     {
         SetItemOverrideCursor(this, cursorArrowOpenHand, 1, 1);
-    }
-    else
-    {
-        if (QGraphicsScene *scene = this->scene())
-        {
-            if (QGraphicsView *view = scene->views().at(0))
-            {
-                setCursor(view->viewport()->cursor());
-            }
-        }
     }
     QGraphicsPathItem::hoverEnterEvent(event);
 }
@@ -1258,6 +1270,8 @@ VToolSeamAllowance::VToolSeamAllowance(const VToolSeamAllowanceInitData &initDat
     setAcceptHoverEvents(true);
 
     connect(this, &VToolSeamAllowance::ChoosedTool, m_sceneDetails, &VMainGraphicsScene::ChoosedItem);
+    connect(m_sceneDetails, &VMainGraphicsScene::EnableToolMove, this, &VToolSeamAllowance::EnableToolMove);
+    connect(m_sceneDetails, &VMainGraphicsScene::ItemSelection, this, &VToolSeamAllowance::ToolSelectionType);
 
     ConnectOutsideSignals();
 }

@@ -289,7 +289,7 @@ void VGraphicsSimpleTextItem::mouseReleaseEvent(QGraphicsSceneMouseEvent *event)
         }
     }
 
-    if (selectionType == SelectionType::ByMouseRelease)
+    if (selectionType == SelectionType::ByMouseRelease && contains(event->pos()))
     {
         emit PointChoosed();
     }

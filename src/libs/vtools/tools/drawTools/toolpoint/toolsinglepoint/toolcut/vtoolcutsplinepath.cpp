@@ -210,7 +210,9 @@ VPointF *VToolCutSplinePath::CutSplinePath(qreal length, const QSharedPointer<VA
     spl2.SetApproximationScale(splPath->GetApproximationScale());
 
     *splPath1 = new VSplinePath();
+    (*splPath1)->SetApproximationScale(splPath->GetApproximationScale());
     *splPath2 = new VSplinePath();
+    (*splPath2)->SetApproximationScale(splPath->GetApproximationScale());
 
     for (qint32 i = 0; i < points.size(); i++)
     {
