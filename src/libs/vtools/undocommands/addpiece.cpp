@@ -128,11 +128,6 @@ void AddPiece::redo()
             VMainGraphicsView::NewSceneRect(m_scene, qApp->getSceneView(), m_tool);
             m_tool.clear();
         }
-        else
-        {
-            VMainGraphicsView::NewSceneRect(m_scene, qApp->getSceneView(),
-                                            qobject_cast<VToolSeamAllowance*>(VAbstractPattern::getTool(nodeId)));
-        }
     }
     else
     {
