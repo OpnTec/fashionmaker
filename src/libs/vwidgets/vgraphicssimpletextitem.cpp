@@ -47,6 +47,7 @@
 #include "vmaingraphicsview.h"
 #include "global.h"
 #include "vscenepoint.h"
+#include "../vmisc/vmath.h"
 
 //---------------------------------------------------------------------------------------------------------------------
 /**
@@ -161,15 +162,9 @@ QVariant VGraphicsSimpleTextItem::itemChange(GraphicsItemChange change, const QV
                 {
                     if (VMainGraphicsView *view = qobject_cast<VMainGraphicsView *>(viewList.at(0)))
                     {
-                        int xmargin = 50;
-                        int ymargin = 50;
-
-                        const int scale = qRound(SceneScale(scene()));
-                        if (scale > 1)
-                        {
-                            xmargin /= scale;
-                            ymargin /= scale;
-                        }
+                        const qreal scale = SceneScale(scene());
+                        int xmargin = qCeil(50/scale);
+                        int ymargin = qCeil(50/scale);
 
                         const QRectF viewRect = VMainGraphicsView::SceneVisibleArea(view);
                         const QRectF itemRect = mapToScene(boundingRect()).boundingRect();
@@ -187,7 +182,8 @@ QVariant VGraphicsSimpleTextItem::itemChange(GraphicsItemChange change, const QV
                             SCASSERT(currentScene)
                             const QPointF cursorPosition = currentScene->getScenePos();
 
-                            view->EnsureVisibleWithDelay(QRectF(cursorPosition.x()-5, cursorPosition.y()-5, 10, 10),
+                            view->EnsureVisibleWithDelay(QRectF(cursorPosition.x()-5/scale, cursorPosition.y()-5/scale,
+                                                                10/scale, 10/scale),
                                                          VMainGraphicsView::scrollDelay);
                         }
                     }

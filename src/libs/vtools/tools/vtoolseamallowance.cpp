@@ -1030,8 +1030,9 @@ QVariant VToolSeamAllowance::itemChange(QGraphicsItem::GraphicsItemChange change
             {
                 if (VMainGraphicsView *view = qobject_cast<VMainGraphicsView *>(viewList.at(0)))
                 {
-                    const int xmargin = 50;
-                    const int ymargin = 50;
+                    const qreal scale = SceneScale(scene());
+                    const int xmargin = qCeil(50/scale);
+                    const int ymargin = qCeil(50/scale);
 
                     const QRectF viewRect = VMainGraphicsView::SceneVisibleArea(view);
                     const QRectF itemRect = mapToScene(boundingRect()|childrenBoundingRect()).boundingRect();
@@ -1048,7 +1049,8 @@ QVariant VToolSeamAllowance::itemChange(QGraphicsItem::GraphicsItemChange change
                         VMainGraphicsScene *currentScene = qobject_cast<VMainGraphicsScene *>(scene());
                         SCASSERT(currentScene);
                         const QPointF cursorPosition = currentScene->getScenePos();
-                        view->EnsureVisibleWithDelay(QRectF(cursorPosition.x()-5, cursorPosition.y()-5, 10, 10),
+                        view->EnsureVisibleWithDelay(QRectF(cursorPosition.x()-5/scale, cursorPosition.y()-5/scale,
+                                                            10/scale, 10/scale),
                                                      VMainGraphicsView::scrollDelay);
                     }
                 }

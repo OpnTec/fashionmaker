@@ -478,7 +478,9 @@ void VToolSpline::mouseMoveEvent(QGraphicsSceneMouseEvent *event)
                    VMainGraphicsScene *currentScene = qobject_cast<VMainGraphicsScene *>(scene());
                    SCASSERT(currentScene)
                    const QPointF cursorPosition = currentScene->getScenePos();
-                   view->EnsureVisibleWithDelay(QRectF(cursorPosition.x()-5, cursorPosition.y()-5, 10, 10),
+                   const qreal scale = SceneScale(scene());
+                   view->EnsureVisibleWithDelay(QRectF(cursorPosition.x()-5/scale, cursorPosition.y()-5/scale, 10/scale,
+                                                       10/scale),
                                                 VMainGraphicsView::scrollDelay);
                }
            }
