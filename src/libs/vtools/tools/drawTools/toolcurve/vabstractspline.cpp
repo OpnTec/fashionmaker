@@ -432,6 +432,7 @@ void VAbstractSpline::ShowHandles(bool show)
     {
         controlPoints.at(i)->setVisible(show);
     }
+    update();// Show direction
 }
 
 //---------------------------------------------------------------------------------------------------------------------
