@@ -225,6 +225,12 @@ void VControlPointSpline::mousePressEvent(QGraphicsSceneMouseEvent *event)
         {
             SetItemOverrideCursor(this, cursorArrowCloseHand, 1, 1);
         }
+
+        // Somehow clicking on notselectable object do not clean previous selections.
+        if (not (flags() & ItemIsSelectable) && scene())
+        {
+            scene()->clearSelection();
+        }
     }
     VScenePoint::mousePressEvent(event);
 }
@@ -301,8 +307,4 @@ void VControlPointSpline::setEnabledPoint(bool enable)
 {
     setEnabled(enable);
     controlLine->setEnabled(enable);
-
-    setFlag(QGraphicsItem::ItemIsSelectable, enable);
-    setFlag(QGraphicsItem::ItemIsMovable, enable);
-    setAcceptHoverEvents(enable);
 }
