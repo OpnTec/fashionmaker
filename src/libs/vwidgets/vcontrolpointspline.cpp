@@ -266,6 +266,7 @@ void VControlPointSpline::Init()
     controlLine = new VScaledLine(this);
     controlLine->SetBasicWidth(widthHairLine);
     controlLine->setFlag(QGraphicsItem::ItemStacksBehindParent, true);
+    controlLine->setVisible(false);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -274,7 +275,9 @@ void VControlPointSpline::SetCtrlLine(const QPointF &controlPoint, const QPointF
     QPointF p1, p2;
     VGObject::LineIntersectCircle(QPointF(), ScaledRadius(SceneScale(scene())),
                                   QLineF( QPointF(), splinePoint-controlPoint), p1, p2);
-    controlLine->setLine(QLineF(splinePoint-controlPoint, p1));
+    QLineF line(splinePoint-controlPoint, p1);
+    controlLine->setLine(line);
+    controlLine->setVisible(not line.isNull());
 }
 
 //---------------------------------------------------------------------------------------------------------------------
