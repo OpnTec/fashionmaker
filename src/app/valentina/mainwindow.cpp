@@ -4208,10 +4208,12 @@ void MainWindow::CreateActions()
         }
     });
 
+    ui->actionShowCurveDetails->setChecked(qApp->ValentinaSettings()->IsShowCurveDetails());
     connect(ui->actionShowCurveDetails, &QAction::triggered, this, [this](bool checked)
     {
         ui->view->itemClicked(nullptr);
         sceneDraw->EnableDetailsMode(checked);
+        qApp->ValentinaSettings()->SetShowCurveDetails(checked);
     });
 
     connect(ui->actionLoadIndividual, &QAction::triggered, this, &MainWindow::LoadIndividual);

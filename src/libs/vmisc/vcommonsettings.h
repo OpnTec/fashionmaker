@@ -189,6 +189,8 @@ public:
     qreal GetCurveApproximationScale() const;
     void  SetCurveApproximationScale(qreal value);
 
+    bool IsShowCurveDetails() const;
+    void SetShowCurveDetails(bool value);
 private:
     Q_DISABLE_COPY(VCommonSettings)
 };

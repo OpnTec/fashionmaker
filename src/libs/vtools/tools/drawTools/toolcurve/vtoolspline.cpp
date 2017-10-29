@@ -118,7 +118,7 @@ VToolSpline::VToolSpline(VToolSplineInitData initData, QGraphicsItem *parent)
                                                   freeAngle2, freeLength2, this);
     InitControlPoint(controlPoint2);
 
-    ShowHandles(false);
+    ShowHandles(detailsMode);
 
     ToolCreation(initData.typeCreation);
 }

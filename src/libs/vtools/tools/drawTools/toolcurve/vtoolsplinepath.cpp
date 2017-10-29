@@ -126,7 +126,7 @@ VToolSplinePath::VToolSplinePath(const VToolSplinePathInitData &initData, QGraph
         InitControlPoint(controlPoint);
     }
 
-    ShowHandles(false);
+    ShowHandles(detailsMode);
 
     ToolCreation(initData.typeCreation);
 }

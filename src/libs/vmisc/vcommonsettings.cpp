@@ -70,6 +70,7 @@ const QString settingDoublePassmark                 = QStringLiteral("pattern/do
 const QString settingPatternDefaultSeamAllowance    = QStringLiteral("pattern/defaultSeamAllowance");
 const QString settingPatternLabelFont               = QStringLiteral("pattern/labelFont");
 const QString settingPatternCurveApproximationScale = QStringLiteral("pattern/curveApproximationScale");
+const QString settingPatternShowCurveDetails        = QStringLiteral("pattern/showCurveDetails");
 
 const QString settingGeneralRecentFileList       = QStringLiteral("recentFileList");
 const QString settingGeneralRestoreFileList      = QStringLiteral("restoreFileList");
@@ -985,4 +986,16 @@ void VCommonSettings::SetCurveApproximationScale(qreal value)
     {
         setValue(settingPatternCurveApproximationScale, value);
     }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+bool VCommonSettings::IsShowCurveDetails() const
+{
+    return value(settingPatternShowCurveDetails, false).toBool();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VCommonSettings::SetShowCurveDetails(bool value)
+{
+    setValue(settingPatternShowCurveDetails, value);
 }

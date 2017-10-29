@@ -61,7 +61,7 @@ VAbstractSpline::VAbstractSpline(VAbstractPattern *doc, VContainer *data, quint3
       controlPoints(),
       sceneType(SceneObject::Unknown),
       m_isHovered(false),
-      detailsMode(false),
+      detailsMode(qApp->Settings()->IsShowCurveDetails()),
       m_parentRefresh(false)
 {
     InitDefShape();
