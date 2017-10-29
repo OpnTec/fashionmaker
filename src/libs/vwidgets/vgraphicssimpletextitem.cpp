@@ -111,7 +111,7 @@ void VGraphicsSimpleTextItem::paint(QPainter *painter, const QStyleOptionGraphic
     {
         VMainGraphicsView::NewSceneRect(scene, view, this);
     }
-    QGraphicsSimpleTextItem::paint(painter, option, widget);
+    PaintWithFixItemHighlightSelected<QGraphicsSimpleTextItem>(this, painter, option, widget);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

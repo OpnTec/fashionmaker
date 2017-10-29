@@ -118,7 +118,7 @@ void VAbstractSpline::paint(QPainter *painter, const QStyleOptionGraphicsItem *o
             painter->restore();
         }
 
-        QGraphicsPathItem::paint(painter, option, widget);
+        PaintWithFixItemHighlightSelected<QGraphicsPathItem>(this, painter, option, widget);
     };
 
     if (not m_parentRefresh)

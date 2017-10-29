@@ -35,7 +35,10 @@
 
 #include <QBrush>
 #include <QFont>
+#include <QPainter>
 #include <QPen>
+#include <QStyle>
+#include <QStyleOptionGraphicsItem>
 
 //---------------------------------------------------------------------------------------------------------------------
 VScenePoint::VScenePoint(QGraphicsItem *parent)
@@ -87,7 +90,7 @@ void VScenePoint::paint(QPainter *painter, const QStyleOptionGraphicsItem *optio
         }
     }
 
-    QGraphicsEllipseItem::paint(painter, option, widget);
+    PaintWithFixItemHighlightSelected<QGraphicsEllipseItem>(this, painter, option, widget);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

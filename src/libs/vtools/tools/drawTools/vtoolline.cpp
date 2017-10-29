@@ -185,7 +185,7 @@ void VToolLine::paint(QPainter *painter, const QStyleOptionGraphicsItem *option,
 
     setPen(QPen(CorrectColor(this, lineColor), width, LineStyleToPenStyle(m_lineType)));
 
-    QGraphicsLineItem::paint(painter, option, widget);
+    PaintWithFixItemHighlightSelected<QGraphicsLineItem>(this, painter, option, widget);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

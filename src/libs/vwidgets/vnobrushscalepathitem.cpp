@@ -27,6 +27,7 @@
  *************************************************************************/
 
 #include "vnobrushscalepathitem.h"
+#include "global.h"
 
 #include <QBrush>
 #include <QMatrix>
@@ -56,5 +57,5 @@ void VNoBrushScalePathItem::paint(QPainter *painter, const QStyleOptionGraphicsI
     QBrush brush = this->brush();
     brush.setMatrix(painter->combinedMatrix().inverted());
     this->setBrush(brush);
-    QGraphicsPathItem::paint(painter, option, widget);
+    PaintWithFixItemHighlightSelected<QGraphicsPathItem>(this, painter, option, widget);
 }

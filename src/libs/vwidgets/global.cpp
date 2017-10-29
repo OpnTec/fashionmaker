@@ -133,3 +133,38 @@ QPainterPath ItemShapeFromPath(const QPainterPath &path, const QPen &pen)
     p.addPath(path);
     return p;
 }
+
+//---------------------------------------------------------------------------------------------------------------------
+void GraphicsItemHighlightSelected(const QRectF &boundingRect, qreal itemPenWidth, QPainter *painter,
+                                    const QStyleOptionGraphicsItem *option)
+{
+    const QRectF murect = painter->transform().mapRect(QRectF(0, 0, 1, 1));
+    if (qFuzzyIsNull(qMax(murect.width(), murect.height())))
+    {
+        return;
+    }
+
+    const QRectF mbrect = painter->transform().mapRect(boundingRect);
+    if (qMin(mbrect.width(), mbrect.height()) < qreal(1.0))
+    {
+        return;
+    }
+
+    const qreal pad = itemPenWidth / 2;
+
+    const qreal penWidth = 0; // cosmetic pen
+
+    const QColor fgcolor = option->palette.windowText().color();
+    const QColor bgcolor( // ensure good contrast against fgcolor
+                          fgcolor.red()   > 127 ? 0 : 255,
+                          fgcolor.green() > 127 ? 0 : 255,
+                          fgcolor.blue()  > 127 ? 0 : 255);
+
+    painter->setPen(QPen(bgcolor, penWidth, Qt::SolidLine));
+    painter->setBrush(Qt::NoBrush);
+    painter->drawRect(boundingRect.adjusted(pad, pad, -pad, -pad));
+
+    painter->setPen(QPen(option->palette.windowText(), 0, Qt::DashLine));
+    painter->setBrush(Qt::NoBrush);
+    painter->drawRect(boundingRect.adjusted(pad, pad, -pad, -pad));
+}

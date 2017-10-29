@@ -918,7 +918,7 @@ void VToolSeamAllowance::paint(QPainter *painter, const QStyleOptionGraphicsItem
     {
         setSelected(true);
     }
-    QGraphicsPathItem::paint(painter, option, widget);
+    PaintWithFixItemHighlightSelected<QGraphicsPathItem>(this, painter, option, widget);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

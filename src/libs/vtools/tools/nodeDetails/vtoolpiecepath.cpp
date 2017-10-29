@@ -133,7 +133,7 @@ void VToolPiecePath::paint(QPainter *painter, const QStyleOptionGraphicsItem *op
 
     setPen(toolPen);
 
-    QGraphicsPathItem::paint(painter, option, widget);
+    PaintWithFixItemHighlightSelected<QGraphicsPathItem>(this, painter, option, widget);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

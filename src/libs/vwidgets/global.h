@@ -30,6 +30,7 @@
 #define GLOBAL_H
 
 #include <QtGlobal>
+#include <QStyleOptionGraphicsItem>
 
 extern const qreal widthMainLine;
 extern const qreal widthHairLine;
@@ -54,5 +55,29 @@ void   ScaleCircleSize(QGraphicsEllipseItem *item, qreal scale);
 qreal  ScaleWidth(qreal width, qreal scale);
 
 QPainterPath ItemShapeFromPath(const QPainterPath &path, const QPen &pen);
+
+void GraphicsItemHighlightSelected(const QRectF &boundingRect, qreal itemPenWidth, QPainter *painter,
+                                   const QStyleOptionGraphicsItem *option);
+
+/* Helps fix bug with item highlight selected.
+ * Unfortunatelly qt_graphicsItem_highlightSelected was designed in way that doesn't support custom QGraphicsItem
+ * classes. Such classes always get pen width 1.0. This make imposible to draw selection rect around very small objects.
+ */
+template<class Parent, class Item>
+void PaintWithFixItemHighlightSelected(Item *item, QPainter *painter, const QStyleOptionGraphicsItem *option,
+                                       QWidget *widget)
+{
+    QStyleOptionGraphicsItem myoption = (*option);
+    if (myoption.state & QStyle::State_Selected)
+    {
+        myoption.state &= !QStyle::State_Selected;
+    }
+    item->Parent::paint(painter, &myoption, widget);
+
+    if (option->state & QStyle::State_Selected)
+    {
+        GraphicsItemHighlightSelected(item->boundingRect(), item->pen().widthF(), painter, option);
+    }
+}
 
 #endif // GLOBAL_H

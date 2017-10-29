@@ -93,7 +93,7 @@ void VCurvePathItem::paint(QPainter *painter, const QStyleOptionGraphicsItem *op
         painter->restore();
     }
 
-    QGraphicsPathItem::paint(painter, option, widget);
+    PaintWithFixItemHighlightSelected<QGraphicsPathItem>(this, painter, option, widget);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

@@ -52,7 +52,7 @@ void VScaledLine::paint(QPainter *painter, const QStyleOptionGraphicsItem *optio
     qRound(width) < 1 ? lPen.setWidthF(width) : lPen.setWidth(qRound(width));
     setPen(lPen);
 
-    QGraphicsLineItem::paint(painter, option, widget);
+    PaintWithFixItemHighlightSelected<QGraphicsLineItem>(this, painter, option, widget);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -84,5 +84,5 @@ void VScaledEllipse::paint(QPainter *painter, const QStyleOptionGraphicsItem *op
     setPen(visPen);
     ScaleCircleSize(this, scale);
 
-    QGraphicsEllipseItem::paint(painter, option, widget);
+    PaintWithFixItemHighlightSelected<QGraphicsEllipseItem>(this, painter, option, widget);
 }
