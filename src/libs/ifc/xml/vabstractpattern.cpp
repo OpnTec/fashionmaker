@@ -808,6 +808,9 @@ void VAbstractPattern::SetMPath(const QString &path)
 //---------------------------------------------------------------------------------------------------------------------
 quint32 VAbstractPattern::SiblingNodeId(const quint32 &nodeId) const
 {
+    // This check helps to find missed tools in the switch
+    Q_STATIC_ASSERT_X(static_cast<int>(Tool::LAST_ONE_DO_NOT_USE) == 55, "Check if need to ignore modeling tools.");
+
     quint32 siblingId = NULL_ID;
 
     const QVector<VToolRecord> history = getLocalHistory();
@@ -827,6 +830,7 @@ quint32 VAbstractPattern::SiblingNodeId(const quint32 &nodeId) const
                     const VToolRecord tool = history.at(j-1);
                     switch ( tool.getTypeTool() )
                     {
+                        case Tool::Arrow:
                         case Tool::Piece:
                         case Tool::UnionDetails:
                         case Tool::NodeArc:
@@ -834,6 +838,11 @@ quint32 VAbstractPattern::SiblingNodeId(const quint32 &nodeId) const
                         case Tool::NodePoint:
                         case Tool::NodeSpline:
                         case Tool::NodeSplinePath:
+                        case Tool::PlaceLabel:
+                        case Tool::Pin:
+                        case Tool::PiecePath:
+                        case Tool::InsertNode:
+                        case Tool::DuplicateDetail:
                             continue;
                         default:
                             siblingId = tool.getId();

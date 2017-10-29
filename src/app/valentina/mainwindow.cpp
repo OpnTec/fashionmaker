@@ -3079,6 +3079,9 @@ void MainWindow::GlobalChangePP(const QString &patternPiece)
         if ( index != -1 )
         { // -1 for not found
             ChangePP(index, false);
+            comboBoxDraws->blockSignals(true);
+            comboBoxDraws->setCurrentIndex(index);
+            comboBoxDraws->blockSignals(false);
         }
         else
         {

@@ -82,7 +82,7 @@ void DeletePatternPiece::undo()
     }
 
     emit NeedFullParsing();
-    doc->ChangeActivPP(namePP);
+    emit doc->SetCurrentPP(namePP);//Without this user will not see this change
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -90,6 +90,7 @@ void DeletePatternPiece::redo()
 {
     qCDebug(vUndo, "Redo.");
 
+    emit doc->SetCurrentPP(namePP);//Without this user will not see this change
     QDomElement rootElement = doc->documentElement();
     const QDomElement patternPiece = doc->GetPPElement(namePP);
     rootElement.removeChild(patternPiece);
