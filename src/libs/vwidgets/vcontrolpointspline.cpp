@@ -116,12 +116,6 @@ void VControlPointSpline::hoverEnterEvent(QGraphicsSceneHoverEvent *event)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VControlPointSpline::hoverLeaveEvent(QGraphicsSceneHoverEvent *event)
-{
-    VScenePoint::hoverLeaveEvent(event);
-}
-
-//---------------------------------------------------------------------------------------------------------------------
 /**
  * @brief itemChange handle item change.
  * @param change change.

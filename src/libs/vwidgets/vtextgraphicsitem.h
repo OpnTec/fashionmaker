@@ -75,7 +75,6 @@ protected:
     virtual void mouseReleaseEvent(QGraphicsSceneMouseEvent* pME) Q_DECL_OVERRIDE;
     virtual void hoverEnterEvent(QGraphicsSceneHoverEvent *pME) Q_DECL_OVERRIDE;
     virtual void hoverMoveEvent(QGraphicsSceneHoverEvent* pHE) Q_DECL_OVERRIDE;
-    virtual void hoverLeaveEvent(QGraphicsSceneHoverEvent* pHE) Q_DECL_OVERRIDE;
 
     void UpdateBox();
     void CorrectLabel();

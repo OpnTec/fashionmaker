@@ -637,16 +637,6 @@ void VTextGraphicsItem::hoverEnterEvent(QGraphicsSceneHoverEvent *pME)
 
 //---------------------------------------------------------------------------------------------------------------------
 /**
- * @brief VTextGraphicsItem::hoverLeaveEvent tries to restore normal mouse cursor
- * @param pHE not used
- */
-void VTextGraphicsItem::hoverLeaveEvent(QGraphicsSceneHoverEvent* pHE)
-{
-    VPieceItem::hoverLeaveEvent(pHE);
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-/**
  * @brief VTextGraphicsItem::UpdateBox redraws the label content
  */
 void VTextGraphicsItem::UpdateBox()

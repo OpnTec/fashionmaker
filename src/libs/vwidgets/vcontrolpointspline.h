@@ -85,7 +85,6 @@ protected:
     VScaledLine      *controlLine;
 
     virtual void      hoverEnterEvent ( QGraphicsSceneHoverEvent * event ) Q_DECL_OVERRIDE;
-    virtual void      hoverLeaveEvent ( QGraphicsSceneHoverEvent * event ) Q_DECL_OVERRIDE;
     QVariant          itemChange ( GraphicsItemChange change, const QVariant &value ) Q_DECL_OVERRIDE;
     virtual void      mousePressEvent( QGraphicsSceneMouseEvent * event ) Q_DECL_OVERRIDE;
     virtual void      mouseReleaseEvent ( QGraphicsSceneMouseEvent * event ) Q_DECL_OVERRIDE;

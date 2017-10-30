@@ -316,12 +316,6 @@ void VToolBasePoint::hoverEnterEvent(QGraphicsSceneHoverEvent *event)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VToolBasePoint::hoverLeaveEvent(QGraphicsSceneHoverEvent *event)
-{
-    VToolSinglePoint::hoverLeaveEvent(event);
-}
-
-//---------------------------------------------------------------------------------------------------------------------
 void VToolBasePoint::mousePressEvent(QGraphicsSceneMouseEvent *event)
 {
     if (flags() & QGraphicsItem::ItemIsMovable)
