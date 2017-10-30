@@ -522,7 +522,6 @@ void VGrainlineItem::hoverLeaveEvent(QGraphicsSceneHoverEvent *pME)
 {
     if (flags() & QGraphicsItem::ItemIsMovable)
     {
-        setCursor(QCursor());
         m_penWidth = LINE_PEN_WIDTH;
     }
     VPieceItem::hoverLeaveEvent(pME);

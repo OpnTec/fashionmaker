@@ -352,7 +352,8 @@ VMainGraphicsView::VMainGraphicsView(QWidget *parent)
       zoom(new GraphicsViewZoom(this)),
       showToolOptions(true),
       isAllowRubberBand(true),
-      m_ptStartPos()
+      m_ptStartPos(),
+      m_oldCursor()
 {
     this->setResizeAnchor(QGraphicsView::AnchorUnderMouse);
     this->setTransformationAnchor(QGraphicsView::AnchorUnderMouse);
@@ -469,6 +470,7 @@ void VMainGraphicsView::mousePressEvent(QMouseEvent *event)
             if (list.size() == 0)
             {// Only when the user clicks on the scene background
                 m_ptStartPos = event->pos();
+                m_oldCursor = viewport()->cursor();
                 QGraphicsView::setDragMode(QGraphicsView::ScrollHandDrag);
                 event->accept();
                 viewport()->setCursor(Qt::ClosedHandCursor);
@@ -508,6 +510,10 @@ void VMainGraphicsView::mouseReleaseEvent(QMouseEvent *event)
 {
     QGraphicsView::mouseReleaseEvent ( event ); // First because need to hide a rubber band
     QGraphicsView::setDragMode( QGraphicsView::NoDrag );
+    if (event->button() == Qt::MiddleButton)
+    {
+        viewport()->setCursor(m_oldCursor);
+    }
     if (event->button() == Qt::LeftButton)
     {
         emit MouseRelease();

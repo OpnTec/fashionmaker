@@ -493,29 +493,39 @@ void VToolSpline::mouseMoveEvent(QGraphicsSceneMouseEvent *event)
 //---------------------------------------------------------------------------------------------------------------------
 void VToolSpline::hoverEnterEvent(QGraphicsSceneHoverEvent *event)
 {
-    if (flags() & QGraphicsItem::ItemIsMovable)
+    if (m_acceptHoverEvents)
     {
-        if (IsMovable())
+        if (flags() & QGraphicsItem::ItemIsMovable)
         {
-            SetItemOverrideCursor(this, cursorArrowOpenHand, 1, 1);
+            if (IsMovable())
+            {
+                SetItemOverrideCursor(this, cursorArrowOpenHand, 1, 1);
+            }
+            else
+            {
+                setCursor(qApp->getSceneView()->viewport()->cursor());
+            }
         }
-    }
+        else
+        {
+            setCursor(qApp->getSceneView()->viewport()->cursor());
+        }
 
-    VAbstractSpline::hoverEnterEvent(event);
+        VAbstractSpline::hoverEnterEvent(event);
+    }
+    else
+    {
+        setCursor(qApp->getSceneView()->viewport()->cursor());
+    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void VToolSpline::hoverLeaveEvent(QGraphicsSceneHoverEvent *event)
 {
-    if (flags() & QGraphicsItem::ItemIsMovable)
+    if (m_acceptHoverEvents)
     {
-        if (IsMovable())
-        {
-            setCursor(QCursor());
-        }
+        VAbstractSpline::hoverLeaveEvent(event);
     }
-
-    VAbstractSpline::hoverLeaveEvent(event);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

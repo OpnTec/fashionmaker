@@ -113,6 +113,7 @@ protected:
     SceneObject      sceneType;
     bool             m_isHovered;
     bool             detailsMode;
+    bool             m_acceptHoverEvents;
     /**
      * @brief RefreshGeometry  refresh item on scene.
      */

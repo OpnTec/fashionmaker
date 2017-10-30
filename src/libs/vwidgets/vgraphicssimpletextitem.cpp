@@ -228,10 +228,6 @@ void VGraphicsSimpleTextItem::hoverEnterEvent(QGraphicsSceneHoverEvent *event)
  */
 void VGraphicsSimpleTextItem::hoverLeaveEvent(QGraphicsSceneHoverEvent *event)
 {
-    if (flags() & QGraphicsItem::ItemIsMovable)
-    {
-        setCursor(QCursor());
-    }
     this->setBrush(Qt::black);
     QGraphicsSimpleTextItem::hoverLeaveEvent(event);
 }

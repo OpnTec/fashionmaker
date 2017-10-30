@@ -654,30 +654,42 @@ void VToolSplinePath::mouseMoveEvent(QGraphicsSceneMouseEvent *event)
 //---------------------------------------------------------------------------------------------------------------------
 void VToolSplinePath::hoverEnterEvent(QGraphicsSceneHoverEvent *event)
 {
-    if (flags() & QGraphicsItem::ItemIsMovable)
+    if (m_acceptHoverEvents)
     {
-        oldPosition = event->scenePos();
-        const auto splPath = VAbstractTool::data.GeometricObject<VSplinePath>(m_id);
-        splIndex = splPath->Segment(oldPosition);
-        if (IsMovable(splIndex))
+        if (flags() & QGraphicsItem::ItemIsMovable)
         {
-            SetItemOverrideCursor(this, cursorArrowOpenHand, 1, 1);
+            oldPosition = event->scenePos();
+            const auto splPath = VAbstractTool::data.GeometricObject<VSplinePath>(m_id);
+            splIndex = splPath->Segment(oldPosition);
+            if (IsMovable(splIndex))
+            {
+                SetItemOverrideCursor(this, cursorArrowOpenHand, 1, 1);
+            }
+            else
+            {
+                setCursor(qApp->getSceneView()->viewport()->cursor());
+            }
         }
-    }
+        else
+        {
+            setCursor(qApp->getSceneView()->viewport()->cursor());
+        }
 
-    VAbstractSpline::hoverEnterEvent(event);
+        VAbstractSpline::hoverEnterEvent(event);
+    }
+    else
+    {
+        setCursor(qApp->getSceneView()->viewport()->cursor());
+    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void VToolSplinePath::hoverLeaveEvent(QGraphicsSceneHoverEvent *event)
 {
-    if (flags() & QGraphicsItem::ItemIsMovable)
+    if (m_acceptHoverEvents)
     {
-        oldPosition = event->scenePos();
-        setCursor(QCursor());
+        VAbstractSpline::hoverLeaveEvent(event);
     }
-
-    VAbstractSpline::hoverLeaveEvent(event);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

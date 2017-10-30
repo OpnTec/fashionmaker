@@ -182,6 +182,8 @@ private:
     QGraphicsPathItem     *m_passmarks;
     QGraphicsPathItem     *m_placeLabels;
 
+    bool m_acceptHoverEvents;
+
     VToolSeamAllowance(const VToolSeamAllowanceInitData &initData, QGraphicsItem * parent = nullptr);
 
     void UpdateExcludeState();

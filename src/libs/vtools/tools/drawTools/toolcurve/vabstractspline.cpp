@@ -62,10 +62,11 @@ VAbstractSpline::VAbstractSpline(VAbstractPattern *doc, VContainer *data, quint3
       sceneType(SceneObject::Unknown),
       m_isHovered(false),
       detailsMode(qApp->Settings()->IsShowCurveDetails()),
+      m_acceptHoverEvents(true),
       m_parentRefresh(false)
 {
     InitDefShape();
-    setAcceptHoverEvents(true);
+    setAcceptHoverEvents(m_acceptHoverEvents);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -169,11 +170,17 @@ void VAbstractSpline::DetailsMode(bool mode)
 //---------------------------------------------------------------------------------------------------------------------
 void VAbstractSpline::AllowHover(bool enabled)
 {
-    setAcceptHoverEvents(enabled);
+    // Manually handle hover events. Need for setting cursor for not selectable paths.
+    m_acceptHoverEvents = enabled;
 
     foreach (auto *point, controlPoints)
     {
         point->setAcceptHoverEvents(enabled);
+    }
+
+    if (not enabled)
+    {
+        setCursor(qApp->getSceneView()->viewport()->cursor());
     }
 }
 

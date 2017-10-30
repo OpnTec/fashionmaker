@@ -152,6 +152,7 @@ private:
     bool              showToolOptions;
     bool              isAllowRubberBand;
     QPoint            m_ptStartPos;
+    QCursor           m_oldCursor;
 };
 
 #endif // VMAINGRAPHICSVIEW_H

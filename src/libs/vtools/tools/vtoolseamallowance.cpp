@@ -594,7 +594,8 @@ void VToolSeamAllowance::EnableToolMove(bool move)
 //---------------------------------------------------------------------------------------------------------------------
 void VToolSeamAllowance::AllowHover(bool enabled)
 {
-    setAcceptHoverEvents(enabled);
+    // Manually handle hover events. Need for setting cursor for not selectable paths.
+    m_acceptHoverEvents = enabled;
     m_dataLabel->setAcceptHoverEvents(enabled);
     m_patternInfo->setAcceptHoverEvents(enabled);
     m_grainLine->setAcceptHoverEvents(enabled);
@@ -1132,22 +1133,31 @@ void VToolSeamAllowance::mouseReleaseEvent(QGraphicsSceneMouseEvent *event)
 //---------------------------------------------------------------------------------------------------------------------
 void VToolSeamAllowance::hoverEnterEvent(QGraphicsSceneHoverEvent *event)
 {
-    if (flags() & QGraphicsItem::ItemIsMovable)
+    if (m_acceptHoverEvents)
     {
-        SetItemOverrideCursor(this, cursorArrowOpenHand, 1, 1);
+        if (flags() & QGraphicsItem::ItemIsMovable)
+        {
+            SetItemOverrideCursor(this, cursorArrowOpenHand, 1, 1);
+        }
+        else
+        {
+            setCursor(qApp->getSceneView()->viewport()->cursor());
+        }
+        QGraphicsPathItem::hoverEnterEvent(event);
     }
-    QGraphicsPathItem::hoverEnterEvent(event);
+    else
+    {
+        setCursor(qApp->getSceneView()->viewport()->cursor());
+    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void VToolSeamAllowance::hoverLeaveEvent(QGraphicsSceneHoverEvent *event)
 {
-    //Disable cursor-arrow-openhand
-    if (flags() & QGraphicsItem::ItemIsMovable)
+    if (m_acceptHoverEvents)
     {
-        setCursor(QCursor());
+        QGraphicsPathItem::hoverLeaveEvent(event);
     }
-    QGraphicsPathItem::hoverLeaveEvent(event);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -1257,7 +1267,8 @@ VToolSeamAllowance::VToolSeamAllowance(const VToolSeamAllowanceInitData &initDat
       m_patternInfo(new VTextGraphicsItem(this)),
       m_grainLine(new VGrainlineItem(this)),
       m_passmarks(new QGraphicsPathItem(this)),
-      m_placeLabels(new QGraphicsPathItem(this))
+      m_placeLabels(new QGraphicsPathItem(this)),
+      m_acceptHoverEvents(true)
 {
     VPiece detail = initData.data->GetPiece(initData.id);
     ReinitInternals(detail, m_sceneDetails);
@@ -1269,7 +1280,7 @@ VToolSeamAllowance::VToolSeamAllowance(const VToolSeamAllowanceInitData &initDat
     this->setFlag(QGraphicsItem::ItemIsFocusable, true);// For keyboard input focus
 
     ToolCreation(initData.typeCreation);
-    setAcceptHoverEvents(true);
+    setAcceptHoverEvents(m_acceptHoverEvents);
 
     connect(this, &VToolSeamAllowance::ChoosedTool, m_sceneDetails, &VMainGraphicsScene::ChoosedItem);
     connect(m_sceneDetails, &VMainGraphicsScene::EnableToolMove, this, &VToolSeamAllowance::EnableToolMove);

@@ -642,10 +642,6 @@ void VTextGraphicsItem::hoverEnterEvent(QGraphicsSceneHoverEvent *pME)
  */
 void VTextGraphicsItem::hoverLeaveEvent(QGraphicsSceneHoverEvent* pHE)
 {
-    if (flags() & QGraphicsItem::ItemIsMovable)
-    {
-        setCursor(QCursor());
-    }
     VPieceItem::hoverLeaveEvent(pHE);
 }
 

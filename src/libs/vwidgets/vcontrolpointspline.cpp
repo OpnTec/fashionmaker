@@ -108,7 +108,7 @@ void VControlPointSpline::paint(QPainter *painter, const QStyleOptionGraphicsIte
  */
 void VControlPointSpline::hoverEnterEvent(QGraphicsSceneHoverEvent *event)
 {
-    if (freeAngle || freeLength)
+    if ((flags() & QGraphicsItem::ItemIsMovable) && (freeAngle || freeLength))
     {
         SetItemOverrideCursor(this, cursorArrowOpenHand, 1, 1);
     }
@@ -118,10 +118,6 @@ void VControlPointSpline::hoverEnterEvent(QGraphicsSceneHoverEvent *event)
 //---------------------------------------------------------------------------------------------------------------------
 void VControlPointSpline::hoverLeaveEvent(QGraphicsSceneHoverEvent *event)
 {
-    if (freeAngle || freeLength)
-    {
-        setCursor(QCursor());
-    }
     VScenePoint::hoverLeaveEvent(event);
 }
 
