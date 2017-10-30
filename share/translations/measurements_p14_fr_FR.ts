@@ -1382,73 +1382,73 @@ A partir du point de Sur-Poitrine sur le Côté à l&apos;autre Côté du point 
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="802"/>
         <source>rib_arc_b</source>
         <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
-        <translation>demi_thorax_dos</translation>
+        <translation>tour_thorax_dos</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="804"/>
         <source>Rib arc, back</source>
         <comment>Full measurement name.</comment>
-        <translation>Demi-thorax, dos</translation>
+        <translation>Tour de thorax, dos</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="805"/>
         <source>From Rib Side to Rib side across back. (&apos;Rib circumference&apos; - &apos;Rib arc, front&apos;).</source>
         <comment>Full measurement description.</comment>
-        <translation>D&apos;un coté à l&apos;autre de la cage thoracique, dos. (&apos;Tour thorax&apos; - &apos;Demi-thorax, devant&apos;).</translation>
+        <translation>D&apos;un Coté à l&apos;autre de la cage thoracique (diaphragme), dos. (&apos;Tour thorax&apos; - &apos;Arc du thorax, devant&apos;).</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="810"/>
         <source>waist_arc_b</source>
         <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
-        <translation>demi_taille_dos</translation>
+        <translation>tour_taille_dos</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="812"/>
         <source>Waist arc, back</source>
         <comment>Full measurement name.</comment>
-        <translation>Demi-taille, dos</translation>
+        <translation>Tour de Taille, dos</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="813"/>
         <source>From Waist Side to Waist Side across back. (&apos;Waist circumference&apos; - &apos;Waist arc, front&apos;).</source>
         <comment>Full measurement description.</comment>
-        <translation>D&apos;un coté à l&apos;autre de la taille par le dos (&apos;Tour de taille&apos; - &apos;Demi-taille, devant&apos;).</translation>
+        <translation>D&apos;un Coté à l&apos;autre de la Taille par le dos (&apos;Tour de taille&apos; - &apos;Tour de Taille, devant&apos;).</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="818"/>
         <source>highhip_arc_b</source>
         <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
-        <translation>demi_bassin_dos</translation>
+        <translation>tour_bassin_dos</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="820"/>
         <source>Highhip arc, back</source>
         <comment>Full measurement name.</comment>
-        <translation>Demi tour de bassin, dos</translation>
+        <translation>Tour de Bassin, dos</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="821"/>
         <source>From Highhip Side to Highhip Side across back. (&apos;Highhip circumference&apos; - &apos;Highhip arc, front&apos;).</source>
         <comment>Full measurement description.</comment>
-        <translation>D&apos;un coté à l&apos;autre du bassin par le dos. (&apos;Tour de bassin&apos; - &apos;Demi_tour de bassin, devant&apos;).</translation>
+        <translation>D&apos;un Coté à l&apos;autre du Bassin par le dos. (&apos;Tour de Bassin&apos; - &apos;tour de Bassin, devant&apos;).</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="826"/>
         <source>hip_arc_b</source>
         <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
-        <translation>demi_hanches_dos</translation>
+        <translation>tour_hanches_dos</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="828"/>
         <source>Hip arc, back</source>
         <comment>Full measurement name.</comment>
-        <translation>Demi tour de hanches, dos</translation>
+        <translation>Tour de Hanches, dos</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="829"/>
         <source>From Hip Side to Hip Side across back. (&apos;Hip circumference&apos; - &apos;Hip arc, front&apos;).</source>
         <comment>Full measurement description.</comment>
-        <translation>D&apos;un coté à l&apos;autres des hanches par le dos. (&apos;Tour de hanches&apos; - &apos;Demi tour de hanches, devant&apos;).</translation>
+        <translation>D&apos;un Coté à l&apos;autre des Hanches par le dos. (&apos;Tour de Hanches&apos; - &apos;Tour de Hanches, devant&apos;).</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="834"/>

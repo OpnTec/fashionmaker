@@ -385,7 +385,7 @@
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="338"/>
         <source>height_neck_back_to_waist_side</source>
         <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
-        <translation type="unfinished"></translation>
+        <translation>dlugosc_plecow</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="340"/>

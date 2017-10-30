@@ -1565,6 +1565,17 @@
     </message>
 </context>
 <context>
+    <name>DialogDuplicateDetail</name>
+    <message>
+        <source>Dialog duplicate detail</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Click to place duplicate</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>DialogEditLabel</name>
     <message>
         <source>Edit label template</source>
@@ -4363,6 +4374,101 @@ Apply settings anyway?</source>
     </message>
 </context>
 <context>
+    <name>DialogPlaceLabel</name>
+    <message>
+        <source>Dialog</source>
+        <translation type="unfinished">Dialog</translation>
+    </message>
+    <message>
+        <source>Width:</source>
+        <translation type="unfinished">Breite:</translation>
+    </message>
+    <message>
+        <source>Formula wizard</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Value</source>
+        <translation type="unfinished">Wert</translation>
+    </message>
+    <message>
+        <source>Calculation</source>
+        <translation type="unfinished">Berechnung</translation>
+    </message>
+    <message>
+        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Height:</source>
+        <translation type="unfinished">Höhe:</translation>
+    </message>
+    <message>
+        <source>Angle:</source>
+        <translation type="unfinished">Winkel:</translation>
+    </message>
+    <message>
+        <source>0</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Point:</source>
+        <translation type="unfinished">Punkt:</translation>
+    </message>
+    <message>
+        <source>Piece:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Type:</source>
+        <translation type="unfinished">Typ:</translation>
+    </message>
+    <message>
+        <source>Edit rectangle width</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Edit angle</source>
+        <translation type="unfinished">Winkel bearbeiten</translation>
+    </message>
+    <message>
+        <source>Segment</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Rectangle</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Cross</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>T-shaped</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Doubletree</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Corner</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Triangle</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>H-shaped</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Button</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>DialogPointFromArcAndTangent</name>
     <message>
         <source>Point from arc and tangent</source>
@@ -5259,6 +5365,46 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Workpiece tool</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Segment</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Rectangle</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Cross</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>T-shaped</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Doubletree</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Corner</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Triangle</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>H-shaped</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Button</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Place label</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -6690,7 +6836,7 @@ Sollen die Änderungen gespeichert werden?</translation>
     </message>
     <message>
         <source>Point at intersection of arc and line</source>
-        <translation>Laufender Schnittpunkt auf Kreisbogen</translation>
+        <translation type="vanished">Laufender Schnittpunkt auf Kreisbogen</translation>
     </message>
     <message>
         <source>Point from X and Y of two other points</source>
@@ -7533,6 +7679,26 @@ Sollen die Änderungen gespeichert werden?</translation>
         <source>Ctrl+PgUp</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Point from tangent circle and segment</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Place label tool</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Duplicate detail tool</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Select placelabel center point</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>The measurements file &apos;%1&apos; could not be found or provides not enough information.</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>MainWindowsNoGUI</name>
@@ -8152,7 +8318,7 @@ Sollen die Änderungen gespeichert werden?</translation>
     </message>
     <message>
         <source>add node</source>
-        <translation>Knoten hinzufügen</translation>
+        <translation type="vanished">Knoten hinzufügen</translation>
     </message>
     <message>
         <source>move detail</source>
@@ -8443,14 +8609,21 @@ Sollen die Änderungen gespeichert werden?</translation>
 <context>
     <name>SavePieceOptions</name>
     <message>
-        <source>save detail option</source>
-        <translation type="unfinished">Detailoption speichern</translation>
+        <source>save detail options</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>SavePiecePathOptions</name>
     <message>
         <source>save path options</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>SavePlaceLabelOptions</name>
+    <message>
+        <source>save place label options</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -9499,6 +9672,13 @@ Do you want to save your changes?</source>
     </message>
 </context>
 <context>
+    <name>TabPlaceLabels</name>
+    <message>
+        <source>Dialog</source>
+        <translation type="unfinished">Dialog</translation>
+    </message>
+</context>
+<context>
     <name>TapeConfigDialog</name>
     <message>
         <source>Apply</source>
@@ -10485,6 +10665,10 @@ Do you want to save your changes?</source>
         <source>Can&apos;t create a curve with type &apos;%1&apos;</source>
         <translation>Kurve vom Typ &apos;%1&apos; kann nicht erstellt werden</translation>
     </message>
+    <message>
+        <source>Can&apos;t cast object.</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>VCubicBezierPath</name>
@@ -10631,6 +10815,29 @@ Do you want to save your changes?</source>
     <message>
         <source>The measurement name is empty!</source>
         <translation>Name des Maßes ist leer!</translation>
+    </message>
+</context>
+<context>
+    <name>VNodePoint</name>
+    <message>
+        <source>Options</source>
+        <translation type="unfinished">Optionen</translation>
+    </message>
+    <message>
+        <source>In layout</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Show label</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Exclude</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Delete</source>
+        <translation type="unfinished">Löschen</translation>
     </message>
 </context>
 <context>
@@ -10899,6 +11106,10 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Error creating or updating pin point</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Error creating or updating place lavel</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -11821,6 +12032,14 @@ Do you want to save your changes?</source>
     <message>
         <source>Delete</source>
         <translation type="unfinished">Löschen</translation>
+    </message>
+    <message>
+        <source>apply save detail options</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>multi deletion</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
