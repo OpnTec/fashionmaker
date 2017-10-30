@@ -67,6 +67,8 @@ protected:
     /** @brief m_baseColor base color of point. */
     QColor m_baseColor;
 
+    bool m_selectedFromChild;
+
     virtual void hoverEnterEvent(QGraphicsSceneHoverEvent *event) Q_DECL_OVERRIDE;
     virtual void hoverLeaveEvent(QGraphicsSceneHoverEvent *event) Q_DECL_OVERRIDE;
 

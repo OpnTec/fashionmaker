@@ -103,6 +103,8 @@ signals:
      * @param enable enable or diasable points.
      */
     void             setEnabledPoint(bool enable);
+protected slots:
+    void CurveSelected(bool selected);
 protected:
     /**
      * @brief controlPoints list pointers of control points.

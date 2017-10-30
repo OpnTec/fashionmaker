@@ -97,6 +97,7 @@ VToolSpline::VToolSpline(VToolSplineInitData initData, QGraphicsItem *parent)
         connect(this, &VToolSpline::setEnabledPoint, cPoint, &VControlPointSpline::setEnabledPoint);
         connect(cPoint, &VControlPointSpline::ShowContextMenu, this, &VToolSpline::contextMenuEvent);
         connect(cPoint, &VControlPointSpline::Released, this, &VToolSpline::CurveReleased);
+        connect(cPoint, &VControlPointSpline::Selected, this, &VToolSpline::CurveSelected);
         controlPoints.append(cPoint);
     };
 

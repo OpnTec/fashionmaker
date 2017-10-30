@@ -1060,7 +1060,7 @@ QVariant VToolSeamAllowance::itemChange(QGraphicsItem::GraphicsItemChange change
         }
     }
 
-    if (change == QGraphicsItem::ItemSelectedChange)
+    if (change == QGraphicsItem::ItemSelectedHasChanged)
     {
         if (value == true)
         {

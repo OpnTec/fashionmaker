@@ -220,7 +220,7 @@ void VSimplePoint::keyReleaseEvent(QKeyEvent *event)
 //---------------------------------------------------------------------------------------------------------------------
 QVariant VSimplePoint::itemChange(QGraphicsItem::GraphicsItemChange change, const QVariant &value)
 {
-    if (change == QGraphicsItem::ItemSelectedChange)
+    if (change == QGraphicsItem::ItemSelectedHasChanged)
     {
         m_namePoint->blockSignals(true);
         m_namePoint->setSelected(value.toBool());

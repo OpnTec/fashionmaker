@@ -75,6 +75,7 @@ signals:
      */
     void              ShowContextMenu(QGraphicsSceneContextMenuEvent *event);
     void              Released();
+    void              Selected(bool selected);
 public slots:
     void              RefreshCtrlPoint(const qint32 &indexSpline, SplinePointPosition pos, const QPointF &controlPoint,
                                        const QPointF &splinePoint, bool freeAngle = true, bool freeLength = true);

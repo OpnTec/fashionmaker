@@ -192,11 +192,12 @@ QVariant VGraphicsSimpleTextItem::itemChange(GraphicsItemChange change, const QV
             changeFinished = true;
          }
      }
-     if (change == QGraphicsItem::ItemSelectedChange)
+     if (change == QGraphicsItem::ItemSelectedHasChanged)
      {
+         setFlag(QGraphicsItem::ItemIsFocusable, value.toBool());
          emit PointSelected(value.toBool());
      }
-     return QGraphicsItem::itemChange(change, value);
+     return QGraphicsSimpleTextItem::itemChange(change, value);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

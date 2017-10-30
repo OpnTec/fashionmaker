@@ -210,6 +210,9 @@ QVariant VControlPointSpline::itemChange(QGraphicsItem::GraphicsItemChange chang
             }
             break;
         }
+        case QGraphicsItem::ItemSelectedHasChanged:
+            emit Selected(value.toBool());
+            break;
         default:
             break;
     }

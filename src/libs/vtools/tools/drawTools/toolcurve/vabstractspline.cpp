@@ -258,7 +258,7 @@ void VAbstractSpline::hoverLeaveEvent(QGraphicsSceneHoverEvent *event)
  */
 QVariant VAbstractSpline::itemChange(QGraphicsItem::GraphicsItemChange change, const QVariant &value)
 {
-    if (change == QGraphicsItem::ItemSelectedChange)
+    if (change == QGraphicsItem::ItemSelectedHasChanged)
     {
         emit ChangedToolSelection(value.toBool(), m_id, m_id);
     }
@@ -416,6 +416,19 @@ VSpline VAbstractSpline::CorrectedSpline(const VSpline &spline, const SplinePoin
     }
 
     return spl;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VAbstractSpline::CurveSelected(bool selected)
+{
+    setSelected(selected);
+
+    foreach (auto *point, controlPoints)
+    {
+        point->blockSignals(true);
+        point->setSelected(selected);
+        point->blockSignals(false);
+    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------

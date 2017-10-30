@@ -48,7 +48,8 @@ VScenePoint::VScenePoint(QGraphicsItem *parent)
       m_onlyPoint(false),
       m_isHovered(false),
       m_showLabel(true),
-      m_baseColor(Qt::black)
+      m_baseColor(Qt::black),
+      m_selectedFromChild(false)
 {
     m_namePoint = new VGraphicsSimpleTextItem(this);
     m_lineName = new VScaledLine(this);

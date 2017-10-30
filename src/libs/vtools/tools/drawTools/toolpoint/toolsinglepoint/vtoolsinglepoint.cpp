@@ -214,7 +214,9 @@ void VToolSinglePoint::PointChoosed()
 //---------------------------------------------------------------------------------------------------------------------
 void VToolSinglePoint::PointSelected(bool selected)
 {
+    m_selectedFromChild = true;
     setSelected(selected);
+    m_selectedFromChild = false;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -261,11 +263,15 @@ void VToolSinglePoint::hoverEnterEvent(QGraphicsSceneHoverEvent *event)
  */
 QVariant VToolSinglePoint::itemChange(QGraphicsItem::GraphicsItemChange change, const QVariant &value)
 {
-    if (change == QGraphicsItem::ItemSelectedChange)
+    if (change == QGraphicsItem::ItemSelectedHasChanged)
     {
-        m_namePoint->blockSignals(true);
-        m_namePoint->setSelected(value.toBool());
-        m_namePoint->blockSignals(false);
+        if (not m_selectedFromChild)
+        {
+            m_namePoint->blockSignals(true);
+            m_namePoint->setSelected(value.toBool());
+            m_namePoint->blockSignals(false);
+        }
+
         emit ChangedToolSelection(value.toBool(), m_id, m_id);
     }
 

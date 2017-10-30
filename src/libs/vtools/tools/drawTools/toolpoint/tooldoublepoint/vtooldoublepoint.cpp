@@ -314,7 +314,7 @@ void VToolDoublePoint::UpdateNamePosition(quint32 id, const QPointF &pos)
  */
 QVariant VToolDoublePoint::itemChange(QGraphicsItem::GraphicsItemChange change, const QVariant &value)
 {
-    if (change == QGraphicsItem::ItemSelectedChange)
+    if (change == QGraphicsItem::ItemSelectedHasChanged)
     {
         if (value == true)
         {

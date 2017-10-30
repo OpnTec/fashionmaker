@@ -102,6 +102,7 @@ VToolSplinePath::VToolSplinePath(const VToolSplinePathInitData &initData, QGraph
         connect(this, &VToolSplinePath::setEnabledPoint, cPoint, &VControlPointSpline::setEnabledPoint);
         connect(cPoint, &VControlPointSpline::ShowContextMenu, this, &VToolSplinePath::contextMenuEvent);
         connect(cPoint, &VControlPointSpline::Released, this, &VToolSplinePath::CurveReleased);
+        connect(cPoint, &VControlPointSpline::Selected, this, &VToolSplinePath::CurveSelected);
         controlPoints.append(cPoint);
     };
 

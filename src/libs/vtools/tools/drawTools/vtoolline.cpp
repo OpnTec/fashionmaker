@@ -326,7 +326,7 @@ void VToolLine::RemoveReferens()
  */
 QVariant VToolLine::itemChange(QGraphicsItem::GraphicsItemChange change, const QVariant &value)
 {
-    if (change == QGraphicsItem::ItemSelectedChange)
+    if (change == QGraphicsItem::ItemSelectedHasChanged)
     {
         emit ChangedToolSelection(value.toBool(), m_id, m_id);
     }
