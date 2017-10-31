@@ -31,6 +31,7 @@
 
 #include <QGraphicsItem>
 #include <QGraphicsScene>
+#include <QGraphicsSceneMouseEvent>
 #include <QGraphicsView>
 
 static const qreal defPointRadiusPixel = (2./*mm*/ / 25.4) * PrintDPI;
@@ -167,4 +168,12 @@ void GraphicsItemHighlightSelected(const QRectF &boundingRect, qreal itemPenWidt
     painter->setPen(QPen(option->palette.windowText(), 0, Qt::DashLine));
     painter->setBrush(Qt::NoBrush);
     painter->drawRect(boundingRect.adjusted(pad, pad, -pad, -pad));
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+bool IsSelectedByReleaseEvent(QGraphicsItem *item, QGraphicsSceneMouseEvent *event)
+{
+    SCASSERT(item != nullptr)
+    return event->button() == Qt::LeftButton && event->type() != QEvent::GraphicsSceneMouseDoubleClick
+            && item->contains(event->pos());
 }

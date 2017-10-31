@@ -184,9 +184,10 @@ void VToolSinglePoint::mousePressEvent(QGraphicsSceneMouseEvent *event)
     }
     else
     {
-        if (event->button() == Qt::LeftButton)
+        if (event->button() == Qt::LeftButton && event->type() != QEvent::GraphicsSceneMouseDoubleClick)
         {
             PointChoosed();
+            event->accept();
         }
     }
 }
@@ -239,7 +240,7 @@ void VToolSinglePoint::mouseReleaseEvent(QGraphicsSceneMouseEvent *event)
 {
     if (selectionType == SelectionType::ByMouseRelease)
     {
-        if (event->button() == Qt::LeftButton && contains(event->pos()))
+        if (IsSelectedByReleaseEvent(this, event))
         {
             PointChoosed();
         }

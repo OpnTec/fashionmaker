@@ -321,7 +321,7 @@ void VAbstractSpline::mousePressEvent(QGraphicsSceneMouseEvent *event)
  */
 void VAbstractSpline::mouseReleaseEvent(QGraphicsSceneMouseEvent *event)
 {
-    if (event->button() == Qt::LeftButton)
+    if (IsSelectedByReleaseEvent(this, event))
     {
         emit ChoosedTool(m_id, sceneType);
     }

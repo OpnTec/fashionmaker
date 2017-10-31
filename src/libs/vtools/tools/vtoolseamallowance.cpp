@@ -1107,6 +1107,7 @@ void VToolSeamAllowance::mousePressEvent(QGraphicsSceneMouseEvent *event)
         {
             doc->SelectedDetail(m_id);
             emit ChoosedTool(m_id, SceneObject::Detail);
+            event->accept();
         }
     }
 }
@@ -1121,7 +1122,7 @@ void VToolSeamAllowance::mouseReleaseEvent(QGraphicsSceneMouseEvent *event)
 
     if (selectionType == SelectionType::ByMouseRelease)
     {
-        if (event->button() == Qt::LeftButton && contains(event->pos()))
+        if (IsSelectedByReleaseEvent(this, event))
         {
             doc->SelectedDetail(m_id);
             emit ChoosedTool(m_id, SceneObject::Detail);

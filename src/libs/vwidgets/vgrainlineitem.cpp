@@ -280,6 +280,8 @@ void VGrainlineItem::mousePressEvent(QGraphicsSceneMouseEvent* pME)
             return;
         }
 
+        pME->accept();
+
         m_ptStartPos = pos();
         m_ptStartMove = pME->scenePos();
         m_dStartLength = m_dLength;

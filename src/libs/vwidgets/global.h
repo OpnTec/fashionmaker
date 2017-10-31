@@ -44,6 +44,9 @@ class QColor;
 class QRectF;
 class QPainterPath;
 class QPen;
+class QGraphicsSceneMouseEvent;
+
+bool IsSelectedByReleaseEvent(QGraphicsItem *item, QGraphicsSceneMouseEvent *event);
 
 qreal SceneScale(QGraphicsScene *scene);
 

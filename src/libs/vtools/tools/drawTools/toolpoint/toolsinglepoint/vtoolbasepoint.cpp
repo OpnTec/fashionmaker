@@ -323,6 +323,7 @@ void VToolBasePoint::mousePressEvent(QGraphicsSceneMouseEvent *event)
         if (event->button() == Qt::LeftButton && event->type() != QEvent::GraphicsSceneMouseDoubleClick)
         {
             SetItemOverrideCursor(this, cursorArrowCloseHand, 1, 1);
+            event->accept();
         }
     }
     VToolSinglePoint::mousePressEvent(event);

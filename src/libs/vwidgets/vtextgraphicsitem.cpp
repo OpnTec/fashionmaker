@@ -384,6 +384,7 @@ void VTextGraphicsItem::mousePressEvent(QGraphicsSceneMouseEvent *pME)
             return;
         }
 
+        pME->accept();
         // record the parameters of the mouse press. Specially record the position
         // of the press as the origin for the following operations
         m_ptStartPos = pos();

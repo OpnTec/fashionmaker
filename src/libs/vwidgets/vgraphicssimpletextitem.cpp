@@ -259,6 +259,7 @@ void VGraphicsSimpleTextItem::mousePressEvent(QGraphicsSceneMouseEvent *event)
         if (event->button() == Qt::LeftButton && event->type() != QEvent::GraphicsSceneMouseDoubleClick)
         {
             SetItemOverrideCursor(this, cursorArrowCloseHand, 1, 1);
+            event->accept();
         }
     }
     if (selectionType == SelectionType::ByMouseRelease)
@@ -267,7 +268,11 @@ void VGraphicsSimpleTextItem::mousePressEvent(QGraphicsSceneMouseEvent *event)
     }
     else
     {
-        emit PointChoosed();
+        if (event->button() == Qt::LeftButton && event->type() != QEvent::GraphicsSceneMouseDoubleClick)
+        {
+            emit PointChoosed();
+            event->accept();
+        }
     }
 }
 
@@ -282,7 +287,7 @@ void VGraphicsSimpleTextItem::mouseReleaseEvent(QGraphicsSceneMouseEvent *event)
         }
     }
 
-    if (selectionType == SelectionType::ByMouseRelease && contains(event->pos()))
+    if (selectionType == SelectionType::ByMouseRelease && IsSelectedByReleaseEvent(this, event))
     {
         emit PointChoosed();
     }

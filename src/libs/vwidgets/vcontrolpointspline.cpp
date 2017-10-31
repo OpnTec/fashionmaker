@@ -217,6 +217,7 @@ void VControlPointSpline::mousePressEvent(QGraphicsSceneMouseEvent *event)
         if (freeAngle || freeLength)
         {
             SetItemOverrideCursor(this, cursorArrowCloseHand, 1, 1);
+            event->accept();
         }
 
         // Somehow clicking on notselectable object do not clean previous selections.

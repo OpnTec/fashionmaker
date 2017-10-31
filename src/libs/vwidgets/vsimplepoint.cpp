@@ -162,9 +162,10 @@ void VSimplePoint::mousePressEvent(QGraphicsSceneMouseEvent *event)
         }
         else
         {
-            if (event->button() == Qt::LeftButton)
+            if (event->button() == Qt::LeftButton && event->type() != QEvent::GraphicsSceneMouseDoubleClick)
             {
                 emit Choosed(id);
+                event->accept();
             }
         }
     }
@@ -175,12 +176,9 @@ void VSimplePoint::mouseReleaseEvent(QGraphicsSceneMouseEvent *event)
 {
     if (not m_visualizationMode)
     {
-        if (selectionType == SelectionType::ByMouseRelease)
+        if (selectionType == SelectionType::ByMouseRelease && IsSelectedByReleaseEvent(this, event))
         {
-            if (event->button() == Qt::LeftButton && contains(event->pos()))
-            {
-                emit Choosed(id);
-            }
+            emit Choosed(id);
         }
         VScenePoint::mouseReleaseEvent(event);
     }
