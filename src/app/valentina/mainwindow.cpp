@@ -720,7 +720,10 @@ void MainWindow::ClosedDialogWithApply(int result, VMainGraphicsScene *scene)
     }
     ArrowTool(true);
     ui->view->itemClicked(vtool);// Don't check for nullptr here
-    vtool->setFocus();
+    if (vtool)
+    {
+       vtool->setFocus();
+    }
     // If insert not to the end of file call lite parse
     if (doc->getCursor() > 0)
     {
