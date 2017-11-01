@@ -184,6 +184,9 @@ private:
     bool   flagDLFormulas;
     bool   flagPLAngle;
     bool   flagPLFormulas;
+    bool   flagFormulaBefore;
+    bool   flagFormulaAfter;
+    bool   flagMainPathIsValid;
     bool   m_bAddMode;
     qreal  m_mx;
     qreal  m_my;

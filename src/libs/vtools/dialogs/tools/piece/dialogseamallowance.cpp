@@ -105,6 +105,9 @@ DialogSeamAllowance::DialogSeamAllowance(const VContainer *data, const quint32 &
       flagDLFormulas(true),
       flagPLAngle(true),
       flagPLFormulas(true),
+      flagFormulaBefore(true),
+      flagFormulaAfter(true),
+      flagMainPathIsValid(true),
       m_bAddMode(true),
       m_mx(0),
       m_my(0),
@@ -151,7 +154,7 @@ DialogSeamAllowance::DialogSeamAllowance(const VContainer *data, const quint32 &
 
     flagName = true;//We have default name of piece.
     ChangeColor(uiTabLabels->labelEditName, okColor);
-    flagError = MainPathIsValid();
+    flagMainPathIsValid = MainPathIsValid();
     CheckState();
 
     if (not applyAllowed)
@@ -465,13 +468,56 @@ void DialogSeamAllowance::SaveData()
 void DialogSeamAllowance::CheckState()
 {
     SCASSERT(bOk != nullptr);
-    bOk->setEnabled(flagName && flagError && flagFormula && (flagGFormulas || flagGPin)
-                    && flagDLAngle && (flagDLFormulas || flagDPin) && flagPLAngle && (flagPLFormulas || flagPPin));
+    bOk->setEnabled(flagName && flagMainPathIsValid && flagFormula && flagFormulaBefore && flagFormulaAfter
+                    && (flagGFormulas || flagGPin) && flagDLAngle && (flagDLFormulas || flagDPin) && flagPLAngle
+                    && (flagPLFormulas || flagPPin));
     // In case dialog hasn't apply button
     if ( bApply != nullptr && applyAllowed)
     {
         bApply->setEnabled(bOk->isEnabled());
     }
+
+    if (flagFormula && flagFormulaBefore && flagFormulaAfter)
+    {
+        if (flagMainPathIsValid)
+        {
+            m_ftb->SetTabText(TabOrder::Paths, tr("Paths"));
+        }
+
+        uiTabPaths->tabWidget->setTabIcon(uiTabPaths->tabWidget->indexOf(uiTabPaths->tabSeamAllowance), QIcon());
+    }
+    else
+    {
+        m_ftb->SetTabText(TabOrder::Paths, tr("Paths") + QLatin1String("*"));
+        const QIcon icon = QIcon::fromTheme("dialog-warning",
+                                            QIcon(":/icons/win.icon.theme/16x16/status/dialog-warning.png"));
+        uiTabPaths->tabWidget->setTabIcon(uiTabPaths->tabWidget->indexOf(uiTabPaths->tabSeamAllowance), icon);
+    }
+
+    if (flagMainPathIsValid)
+    {
+        if (flagFormula && flagFormulaBefore && flagFormulaAfter)
+        {
+            m_ftb->SetTabText(TabOrder::Paths, tr("Paths"));
+        }
+        QString tooltip = tr("Ready!");
+        if (not applyAllowed)
+        {
+            tooltip = tooltip + QLatin1String("  <b>") +
+                    tr("To open all detail's features complete creating the main path.") + QLatin1String("</b>");
+        }
+        uiTabPaths->helpLabel->setText(tooltip);
+        uiTabPaths->tabWidget->setTabIcon(uiTabPaths->tabWidget->indexOf(uiTabPaths->tabMainPath), QIcon());
+    }
+    else
+    {
+        m_ftb->SetTabText(TabOrder::Paths, tr("Paths") + QLatin1String("*"));
+        const QIcon icon = QIcon::fromTheme("dialog-warning",
+                                            QIcon(":/icons/win.icon.theme/16x16/status/dialog-warning.png"));
+        uiTabPaths->tabWidget->setTabIcon(uiTabPaths->tabWidget->indexOf(uiTabPaths->tabMainPath), icon);
+    }
+
+    uiTabPaths->comboBoxNodes->setEnabled(flagFormulaBefore && flagFormulaAfter);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -1995,8 +2041,7 @@ void DialogSeamAllowance::EvalWidthBefore()
     labelEditFormula = uiTabPaths->labelEditBefore;
     const QString postfix = UnitsToStr(qApp->patternUnit(), true);
     const QString formula = uiTabPaths->plainTextEditFormulaWidthBefore->toPlainText();
-    bool flagFormula = false; // fake flag
-    Eval(formula, flagFormula, uiTabPaths->labelResultBefore, postfix, false, true);
+    Eval(formula, flagFormulaBefore, uiTabPaths->labelResultBefore, postfix, false, true);
 
     const QString formulaSABefore = GetFormulaFromUser(uiTabPaths->plainTextEditFormulaWidthBefore);
     UpdateNodeSABefore(formulaSABefore);
@@ -2009,8 +2054,7 @@ void DialogSeamAllowance::EvalWidthAfter()
     labelEditFormula = uiTabPaths->labelEditAfter;
     const QString postfix = UnitsToStr(qApp->patternUnit(), true);
     const QString formula = uiTabPaths->plainTextEditFormulaWidthAfter->toPlainText();
-    bool flagFormula = false; // fake flag
-    Eval(formula, flagFormula, uiTabPaths->labelResultAfter, postfix, false, true);
+    Eval(formula, flagFormulaAfter, uiTabPaths->labelResultAfter, postfix, false, true);
 
     const QString formulaSAAfter = GetFormulaFromUser(uiTabPaths->plainTextEditFormulaWidthAfter);
     UpdateNodeSAAfter(formulaSAAfter);
@@ -2077,8 +2121,7 @@ void DialogSeamAllowance::WidthBeforeChanged()
     labelEditFormula = uiTabPaths->labelEditBefore;
     labelResultCalculation = uiTabPaths->labelResultBefore;
     const QString postfix = UnitsToStr(qApp->patternUnit(), true);
-    bool flagFormula = false;
-    ValFormulaChanged(flagFormula, uiTabPaths->plainTextEditFormulaWidthBefore, m_timerWidthBefore, postfix);
+    ValFormulaChanged(flagFormulaBefore, uiTabPaths->plainTextEditFormulaWidthBefore, m_timerWidthBefore, postfix);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -2087,8 +2130,7 @@ void DialogSeamAllowance::WidthAfterChanged()
     labelEditFormula = uiTabPaths->labelEditAfter;
     labelResultCalculation = uiTabPaths->labelResultAfter;
     const QString postfix = UnitsToStr(qApp->patternUnit(), true);
-    bool flagFormula = false;
-    ValFormulaChanged(flagFormula, uiTabPaths->plainTextEditFormulaWidthAfter, m_timerWidthAfter, postfix);
+    ValFormulaChanged(flagFormulaAfter, uiTabPaths->plainTextEditFormulaWidthAfter, m_timerWidthAfter, postfix);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -2340,29 +2382,13 @@ bool DialogSeamAllowance::MainPathIsValid() const
         }
     }
 
-    if (valid)
-    {
-        m_ftb->SetTabText(TabOrder::Paths, tr("Paths"));
-        QString tooltip = tr("Ready!");
-        if (not applyAllowed)
-        {
-            tooltip = tooltip + QLatin1String("  <b>") +
-                    tr("To open all detail's features complete creating the main path.") + QLatin1String("</b>");
-        }
-        uiTabPaths->helpLabel->setText(tooltip);
-    }
-    else
-    {
-        m_ftb->SetTabText(TabOrder::Paths, tr("Paths") + QLatin1String("*"));
-    }
-
     return valid;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void DialogSeamAllowance::ValidObjects(bool value)
 {
-    flagError = value;
+    flagMainPathIsValid = value;
     CheckState();
 }
 
