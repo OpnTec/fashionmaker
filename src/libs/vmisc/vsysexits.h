@@ -83,6 +83,7 @@ static const auto V_UNUSED V_EX_CONFIG = 78;      /*Something was found in an un
 inline QTextStream& vStdErr()
 {
     static QTextStream ts( stderr );
+    ts.setCodec("UTF-8");
     ts.flush();
     return ts;
 }
@@ -91,6 +92,7 @@ inline QTextStream& vStdErr()
 inline QTextStream& vStdOut()
 {
     static QTextStream ts( stdout );
+    ts.setCodec("UTF-8");
     ts.flush();
     return ts;
 }
