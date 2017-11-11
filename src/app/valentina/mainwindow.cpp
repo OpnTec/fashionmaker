@@ -2277,7 +2277,7 @@ QT_WARNING_POP
  */
 void  MainWindow::ArrowTool(bool checked)
 {
-    if (checked)
+    if (checked && currentTool != Tool::Arrow)
     {
         qCDebug(vMainWindow, "Arrow tool.");
         CancelTool();
