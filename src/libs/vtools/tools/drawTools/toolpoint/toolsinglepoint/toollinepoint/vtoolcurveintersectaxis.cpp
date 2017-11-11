@@ -133,7 +133,7 @@ VToolCurveIntersectAxis *VToolCurveIntersectAxis::Create(VToolCurveIntersectAxis
     const qreal angle = CheckFormula(initData.id, initData.formulaAngle, initData.data);
     const QSharedPointer<VAbstractCurve> curve = initData.data->GeometricObject<VAbstractCurve>(initData.curveId);
 
-    const QPointF fPoint = FindPoint(static_cast<QPointF>(*basePoint), angle, curve);
+    const QPointF fPoint = FindPoint(static_cast<QPointF>(*basePoint), angle, curve->GetPoints());
     const qreal segLength = curve->GetLengthByPoint(fPoint);
 
     VPointF *p = new VPointF(fPoint, initData.name, initData.mx, initData.my);
@@ -177,13 +177,13 @@ VToolCurveIntersectAxis *VToolCurveIntersectAxis::Create(VToolCurveIntersectAxis
 
 //---------------------------------------------------------------------------------------------------------------------
 QPointF VToolCurveIntersectAxis::FindPoint(const QPointF &point, qreal angle,
-                                           const QSharedPointer<VAbstractCurve> &curve)
+                                           const QVector<QPointF> &curvePoints)
 {
     QRectF rec = QRectF(0, 0, INT_MAX, INT_MAX);
     rec.translate(-INT_MAX/2.0, -INT_MAX/2.0);
 
     const QLineF axis = VGObject::BuildAxis(point, angle, rec);
-    QVector<QPointF> points = curve->IntersectLine(axis);
+    const QVector<QPointF> points = VAbstractCurve::CurveIntersectLine(curvePoints, axis);
 
     if (points.size() > 0)
     {
@@ -192,17 +192,35 @@ QPointF VToolCurveIntersectAxis::FindPoint(const QPointF &point, qreal angle,
             return points.at(0);
         }
 
-        QMap<qreal, int> lengths;
+        QMap<qreal, int> forward;
+        QMap<qreal, int> backward;
 
         for ( qint32 i = 0; i < points.size(); ++i )
         {
-            lengths.insert(QLineF(points.at(i), point).length(), i);
+            if (points.at(i) == point)
+            { // Always seek unique intersection
+                continue;
+            }
+
+            const QLineF length(point, points.at(i));
+            if (qAbs(length.angle()-angle) < 0.1)
+            {
+                forward.insert(length.length(), i);
+            }
+            else
+            {
+                backward.insert(length.length(), i);
+            }
         }
 
-        QMap<qreal, int>::const_iterator i = lengths.constBegin();
-        if (i != lengths.constEnd())
+        // Closest point is not always want we need. First return point in forward direction if exists.
+        if (not forward.isEmpty())
         {
-            return points.at(i.value());
+            return points.at(forward.first());
+        }
+        else if (not backward.isEmpty())
+        {
+            return points.at(backward.first());
         }
     }
 

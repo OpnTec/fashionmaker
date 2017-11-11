@@ -52,6 +52,9 @@ private slots:
 
     void TestShoulderPoint_data();
     void TestShoulderPoint();
+
+    void TestCurveIntersectAxis_data();
+    void TestCurveIntersectAxis();
 };
 
 #endif // TST_FINDPOINT_H

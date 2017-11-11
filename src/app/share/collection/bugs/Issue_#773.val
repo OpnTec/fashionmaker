@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<pattern>
+    <!--Pattern created with Valentina (http://www.valentina-project.org/).-->
+    <version>0.4.8</version>
+    <unit>cm</unit>
+    <author/>
+    <description/>
+    <notes/>
+    <measurements/>
+    <increments/>
+    <draw name="Pattern piece 1">
+        <calculation>
+            <point id="1" mx="0.132292" my="0.264583" name="А" type="single" x="0.79375" y="1.05833"/>
+            <point angle="270" basePoint="1" id="2" length="9.25633" lineColor="black" mx="0.132292" my="0.264583" name="А1" type="endLine" typeLine="hair"/>
+            <point angle="0" basePoint="1" id="3" length="13.4676" lineColor="black" mx="0.132292" my="0.264583" name="А2" type="endLine" typeLine="hair"/>
+            <point angle="270" basePoint="3" id="4" length="9.18807" lineColor="black" mx="0.132292" my="0.264583" name="А3" type="endLine" typeLine="hair"/>
+            <point firstPoint="1" id="5" length="CurrentLength/2" lineColor="black" mx="0.132292" my="0.264583" name="А4" secondPoint="3" type="alongLine" typeLine="none"/>
+            <spline color="black" id="6" type="pathInteractive">
+                <pathPoint angle1="254.498" angle2="74.498" length1="0" length2="3.55524" pSpline="2"/>
+                <pathPoint angle1="180.757" angle2="0.757" length1="4.20115" length2="4.20115" pSpline="5"/>
+                <pathPoint angle1="90.4704" angle2="270.47" length1="4.79568" length2="4.79568" pSpline="4"/>
+            </spline>
+            <point angle="30.7714" basePoint="2" id="7" length="7.80411" lineColor="black" mx="0.132292" my="0.264583" name="А5" type="endLine" typeLine="hair"/>
+            <point angle="180" basePoint="7" curve="6" id="8" lineColor="black" mx="-3.79169" my="0.613381" name="А6" type="curveIntersectAxis" typeLine="hair"/>
+            <point angle="25.6259" basePoint="8" curve="6" id="9" lineColor="black" mx="0.132292" my="0.264583" name="А7" type="curveIntersectAxis" typeLine="hair"/>
+        </calculation>
+        <modeling/>
+        <details/>
+        <groups/>
+    </draw>
+</pattern>

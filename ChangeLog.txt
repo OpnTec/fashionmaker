@@ -69,6 +69,7 @@
 - [#753] Elliptical arc tool is broken.
 - [#767] Valentina produces wrong main path.
 - Fix issue. Curves look too wavy.
+- [#773] Tool Point intersection curve and axis cannot find desired intersection point.
 
 # Version 0.5.0 May 9, 2017
 - [#581] User can now filter input lists by keyword in function wizard.

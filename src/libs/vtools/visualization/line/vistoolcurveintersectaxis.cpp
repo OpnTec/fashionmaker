@@ -83,7 +83,8 @@ void VisToolCurveIntersectAxis::RefreshGeometry()
             DrawPoint(basePoint, static_cast<QPointF>(*first), mainColor);
             DrawLine(axisLine, axis, supportColor, Qt::DashLine);
 
-            QPointF p = VToolCurveIntersectAxis::FindPoint(static_cast<QPointF>(*first), axis.angle(), curve);
+            QPointF p = VToolCurveIntersectAxis::FindPoint(static_cast<QPointF>(*first), axis.angle(),
+                                                           curve->GetPoints());
             QLineF axis_line(static_cast<QPointF>(*first), p);
             DrawLine(this, axis_line, mainColor, lineStyle);
 
