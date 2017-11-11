@@ -45,8 +45,14 @@
 
 //---------------------------------------------------------------------------------------------------------------------
 VisToolAlongLine::VisToolAlongLine(const VContainer *data, QGraphicsItem *parent)
-    : VisLine(data, parent), object2Id(NULL_ID), point(nullptr), lineP1(nullptr), lineP2(nullptr), line(nullptr),
-      length(0)
+    : VisLine(data, parent),
+      object2Id(NULL_ID),
+      point(nullptr),
+      lineP1(nullptr),
+      lineP2(nullptr),
+      line(nullptr),
+      length(0),
+      m_midPointMode(false)
 {
     this->mainColor = Qt::red;
     this->setZValue(2);// Show on top real tool
@@ -70,6 +76,12 @@ void VisToolAlongLine::setLength(const QString &expression)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void VisToolAlongLine::setMidPointMode(bool midPointMode)
+{
+    m_midPointMode = midPointMode;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 void VisToolAlongLine::RefreshGeometry()
 {
     if (object1Id > NULL_ID)
@@ -79,7 +91,14 @@ void VisToolAlongLine::RefreshGeometry()
 
         if (object2Id <= NULL_ID)
         {
-            DrawLine(line, QLineF(static_cast<QPointF>(*first), Visualization::scenePos), supportColor);
+            QLineF cursorLine (static_cast<QPointF>(*first), Visualization::scenePos);
+            DrawLine(line, cursorLine, supportColor);
+
+            if (m_midPointMode)
+            {
+                cursorLine.setLength(cursorLine.length()/2.0);
+                DrawPoint(lineP2,  cursorLine.p2(), supportColor);
+            }
         }
         else
         {

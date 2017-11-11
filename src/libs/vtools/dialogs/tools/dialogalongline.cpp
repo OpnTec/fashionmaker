@@ -189,11 +189,11 @@ void DialogAlongLine::ChosenObject(quint32 id, const SceneObject &type)
                         if (flagError)
                         {
                             line->setObject2Id(id);
-                            line->RefreshGeometry();
                             if (buildMidpoint)
                             {
                                 SetFormula(currentLength + QLatin1String("/2"));
                             }
+                            line->RefreshGeometry();
                             prepare = true;
                             this->setModal(true);
                             this->show();
@@ -270,6 +270,9 @@ void DialogAlongLine::Build(const Tool &type)
     if (type == Tool::Midpoint)
     {
         buildMidpoint = true;
+        VisToolAlongLine *line = qobject_cast<VisToolAlongLine *>(vis);
+        SCASSERT(line != nullptr)
+        line->setMidPointMode(buildMidpoint);
     }
 }
 

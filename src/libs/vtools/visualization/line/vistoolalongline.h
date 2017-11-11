@@ -49,6 +49,7 @@ public:
     virtual void RefreshGeometry() Q_DECL_OVERRIDE;
     void         setObject2Id(const quint32 &value);
     void         setLength(const QString &expression);
+    void         setMidPointMode(bool midPointMode);
     virtual int  type() const Q_DECL_OVERRIDE {return Type;}
     enum { Type = UserType + static_cast<int>(Vis::ToolAlongLine)};
 private:
@@ -59,6 +60,7 @@ private:
     VScaledEllipse *lineP2;
     VScaledLine    *line;
     qreal           length;
+    bool            m_midPointMode;
 };
 
 #endif // VISTOOLALONGLINE_H
