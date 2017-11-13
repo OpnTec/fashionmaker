@@ -178,7 +178,14 @@ void VNodePoint::PointChoosed()
  */
 void VNodePoint::FullUpdateFromFile()
 {
-    RefreshPointGeometry(*VAbstractTool::data.GeometricObject<VPointF>(m_id));
+    try
+    {
+        RefreshPointGeometry(*VAbstractTool::data.GeometricObject<VPointF>(m_id));
+    }
+    catch (const VExceptionBadId &)
+    {
+        // ignore
+    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
