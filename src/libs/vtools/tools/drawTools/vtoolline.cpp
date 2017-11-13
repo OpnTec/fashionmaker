@@ -66,14 +66,15 @@ VToolLine::VToolLine(const VToolLineInitData &initData, QGraphicsItem *parent)
       firstPoint(initData.firstPoint),
       secondPoint(initData.secondPoint),
       lineColor(initData.lineColor),
-      m_isHovered(false)
+      m_isHovered(false),
+      m_acceptHoverEvents(true)
 {
     this->m_lineType = initData.typeLine;
     //Line
     RefreshGeometry();
     this->setFlag(QGraphicsItem::ItemStacksBehindParent, true);
     this->setFlag(QGraphicsItem::ItemIsFocusable, true);// For keyboard input focus
-    this->setAcceptHoverEvents(true);
+    this->setAcceptHoverEvents(m_acceptHoverEvents);
 
     ToolCreation(initData.typeCreation);
 }
@@ -232,7 +233,8 @@ void VToolLine::Disable(bool disable, const QString &namePP)
 //---------------------------------------------------------------------------------------------------------------------
 void VToolLine::AllowHover(bool enabled)
 {
-    setAcceptHoverEvents(enabled);
+    // Manually handle hover events. Need for setting cursor for not selectable paths.
+    m_acceptHoverEvents = enabled;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -285,9 +287,16 @@ void VToolLine::AddToFile()
  */
 void VToolLine::hoverEnterEvent(QGraphicsSceneHoverEvent *event)
 {
-    m_isHovered = true;
-    setToolTip(MakeToolTip());
-    QGraphicsLineItem::hoverEnterEvent(event);
+    if (m_acceptHoverEvents)
+    {
+        m_isHovered = true;
+        setToolTip(MakeToolTip());
+        QGraphicsLineItem::hoverEnterEvent(event);
+    }
+    else
+    {
+        setCursor(qApp->getSceneView()->viewport()->cursor());
+    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -297,7 +306,7 @@ void VToolLine::hoverEnterEvent(QGraphicsSceneHoverEvent *event)
  */
 void VToolLine::hoverLeaveEvent(QGraphicsSceneHoverEvent *event)
 {
-    if (vis.isNull())
+    if (m_acceptHoverEvents && vis.isNull())
     {
         m_isHovered = false;
         QGraphicsLineItem::hoverLeaveEvent(event);

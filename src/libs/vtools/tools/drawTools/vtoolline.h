@@ -125,6 +125,7 @@ private:
     QString           lineColor;
 
     bool m_isHovered;
+    bool m_acceptHoverEvents;
 
     VToolLine(const VToolLineInitData &initData, QGraphicsItem *parent = nullptr);
 
