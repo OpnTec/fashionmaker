@@ -90,6 +90,8 @@ const QString sqrt_F  = QStringLiteral("sqrt");
 const QString sign_F  = QStringLiteral("sign");
 const QString rint_F  = QStringLiteral("rint");
 const QString r2cm_F  = QStringLiteral("r2cm");
+const QString csrCm_F = QStringLiteral("csrCm");
+const QString csrInch_F = QStringLiteral("csrInch");
 const QString abs_F   = QStringLiteral("abs");
 const QString min_F   = QStringLiteral("min");
 const QString max_F   = QStringLiteral("max");
@@ -126,6 +128,8 @@ const QStringList builInFunctions = QStringList() << degTorad_F
                                                   << sign_F
                                                   << rint_F
                                                   << r2cm_F
+                                                  << csrCm_F
+                                                  << csrInch_F
                                                   << abs_F
                                                   << min_F
                                                   << max_F
@@ -235,7 +239,7 @@ void SetItemOverrideCursor(QGraphicsItem *item, const QString &pixmapPath, int h
 #endif
 }
 
-const qreal PrintDPI = 96.0;
+const qreal PrintDPI = PRINTDPI;
 
 //---------------------------------------------------------------------------------------------------------------------
 double ToPixel(double val, const Unit &unit)

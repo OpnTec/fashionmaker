@@ -346,6 +346,8 @@ extern const QString sqrt_F;
 extern const QString sign_F;
 extern const QString rint_F;
 extern const QString r2cm_F;
+extern const QString csrCm_F;
+extern const QString csrInch_F;
 extern const QString abs_F;
 extern const QString min_F;
 extern const QString max_F;
@@ -419,6 +421,7 @@ extern const QString unitPX;
 
 void SetItemOverrideCursor(QGraphicsItem *item, const QString & pixmapPath, int hotX = -1, int hotY = -1);
 
+#define PRINTDPI 96.0
 extern const qreal PrintDPI;
 
 Q_REQUIRED_RESULT double ToPixel(double val, const Unit &unit);

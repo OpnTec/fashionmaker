@@ -22,6 +22,7 @@
 #include "qmuparser.h"
 
 #include <QCoreApplication>
+#include <QLineF>
 #include <QStaticStringData>
 #include <QStringData>
 #include <QStringDataPtr>
@@ -32,11 +33,93 @@
 #include "qmuparserdef.h"
 #include "qmuparsererror.h"
 #include "../vmisc/vmath.h"
+#include "../vmisc/def.h"
 
 /**
  * @file
  * @brief Implementation of the standard floating point QmuParser.
  */
+
+namespace
+{
+//---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief CSR calcs special modeling case.
+ * According to case we cut a piece on @param length, split up on distance @param split and splited piece rotate on
+ * angle that will create arc with length @param arcLength.
+ * @param length length of cut line
+ * @param split distance between two pieces
+ * @param arcLength length of arc that create two pieces after rotation
+ * @return an angle the second piece should be rotated
+ */
+qreal CSR(qreal length, qreal split, qreal arcLength)
+{
+    length = qAbs(length);
+    arcLength = qAbs(arcLength);
+
+    if (qFuzzyIsNull(length) || qFuzzyIsNull(split) || qFuzzyIsNull(arcLength))
+    {
+        return 0;
+    }
+    const qreal sign = std::copysign(1.0, split);
+
+    const QLineF line(QPointF(0, 0), QPointF(0, length));
+
+    QLineF tmp = line;
+    tmp.setAngle(tmp.angle()+90.0*sign);
+    tmp.setLength(split);
+
+    QPointF p1 = tmp.p2();
+
+    tmp = QLineF(QPointF(0, length), QPointF(0, 0));
+    tmp.setAngle(tmp.angle()-90.0*sign);
+    tmp.setLength(split);
+
+    QPointF p2 = tmp.p2();
+
+    const QLineF line2(p1, p2);
+
+    qreal angle = 180;
+    qreal arcL = INT_MAX;
+    do
+    {
+        if (arcL > arcLength)
+        {
+            angle = angle - angle/2.0;
+        }
+        else if (arcL < arcLength)
+        {
+            angle = angle + angle/2.0;
+        }
+        else
+        {
+            return angle;
+        }
+
+        if (angle < 0 || angle >= 360)
+        {
+            return 0;
+        }
+
+        tmp = line2;
+        tmp.setAngle(tmp.angle()+angle*sign);
+
+        QPointF crosPoint;
+        const auto type = line.intersect(tmp, &crosPoint);
+        if (type == QLineF::NoIntersection)
+        {
+            return 0;
+        }
+
+        QLineF radius(crosPoint, tmp.p2());
+        const qreal arcAngle = sign > 0 ? line.angleTo(radius): radius.angleTo(line);
+        arcL = (M_PI*radius.length())/180.0 * arcAngle;
+    }
+    while(qAbs(arcL - arcLength) > (0.5/*mm*/ / 25.4) * PRINTDPI);
+
+    return angle;
+}
+}
 
 /**
  * @brief Namespace for mathematical applications.
@@ -174,6 +257,26 @@ qreal QmuParser::Rint(qreal v)
 qreal QmuParser::R2CM(qreal v)
 {
     return Rint(v*10.0)/10.0;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+qreal QmuParser::CSRCm(qreal length, qreal split, qreal arcLength)
+{
+    length = ((length * 10.0) / 25.4) * PRINTDPI;
+    split = ((split * 10.0) / 25.4) * PRINTDPI;
+    arcLength = ((arcLength * 10.0) / 25.4) * PRINTDPI;
+
+    return CSR(length, split, arcLength);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+qreal QmuParser::CSRInch(qreal length, qreal split, qreal arcLength)
+{
+    length = length * PRINTDPI;
+    split = split * PRINTDPI;
+    arcLength = arcLength * PRINTDPI;
+
+    return CSR(length, split, arcLength);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -372,6 +475,8 @@ void QmuParser::InitFun()
     DefineFun("sign",  Sign);
     DefineFun("rint",  Rint);
     DefineFun("r2cm",  R2CM);
+    DefineFun("csrCm", CSRCm);
+    DefineFun("csrInch", CSRInch);
     DefineFun("abs",   Abs);
     DefineFun("fmod",  FMod);
     // Functions with variable number of arguments
