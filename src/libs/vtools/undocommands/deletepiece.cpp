@@ -105,6 +105,7 @@ void DeletePiece::undo()
     m_tool->show();
     VMainGraphicsView::NewSceneRect(m_scene, qApp->getSceneView(), m_tool);
     m_tool.clear();
+    emit doc->UpdateInLayoutList();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -132,6 +133,8 @@ void DeletePiece::redo()
         DecrementReferences(m_detail.GetCustomSARecords());
         DecrementReferences(m_detail.GetInternalPaths());
         DecrementReferences(m_detail.GetPins());
+
+        emit doc->UpdateInLayoutList();
     }
     else
     {
