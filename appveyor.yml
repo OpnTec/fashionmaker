@@ -44,6 +44,12 @@ environment:
     MINGW_PATH: C:\Qt\Tools\mingw530_32\bin
     PLATFORM: x86
     DEPLOY: true
+-   QT5: Qt\5.6\mingw49_32
+    QT_VERSION: Qt5.6
+    QMAKE_GENERATOR: "MinGW Makefiles"
+    MINGW_PATH: C:\Qt\Tools\mingw492_32\bin
+    PLATFORM: x86
+    DEPLOY: true
   - QT5: Qt\5.9\msvc2015_64
     QMAKE_GENERATOR: "NMake Makefiles JOM"
     VSVER: 14
@@ -90,12 +96,6 @@ environment:
     VSVER: 14
     PLATFORM: x86
     DEPLOY: false
-  - QT5: Qt\5.6\mingw49_32
-    QT_VERSION: Qt5.6
-    QMAKE_GENERATOR: "MinGW Makefiles"
-    MINGW_PATH: C:\Qt\Tools\mingw492_32\bin
-    PLATFORM: x86
-    DEPLOY: true
   - QT5: Qt\5.6\msvc2015_64
     QT_VERSION: Qt5.6
     QMAKE_GENERATOR: "NMake Makefiles JOM"
