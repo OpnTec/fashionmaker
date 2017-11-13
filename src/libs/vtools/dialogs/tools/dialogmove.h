@@ -59,6 +59,9 @@ public:
     QString GetLength() const;
     void    SetLength(const QString &value);
 
+    QString GetRotationAngle() const;
+    void    SetRotationAngle(const QString &value);
+
     QString GetSuffix() const;
     void    SetSuffix(const QString &value);
 
@@ -73,12 +76,15 @@ public slots:
 private slots:
     /** @brief DeployAngleTextEdit grow or shrink formula input */
     void DeployAngleTextEdit();
+    void DeployRotationAngleTextEdit();
     void DeployLengthTextEdit();
 
     void AngleChanged();
+    void RotationAngleChanged();
     void LengthChanged();
 
     void FXAngle();
+    void FXRotationAngle();
     void FXLength();
 
     void SuffixChanged();
@@ -97,31 +103,33 @@ private:
 
     /** @brief flagAngle true if value of angle is correct */
     bool    flagAngle;
-
+    bool    flagRotationAngle;
     bool    flagLength;
 
     /** @brief timerAngle timer of check formula of angle */
     QTimer  *timerAngle;
-
+    QTimer  *timerRotationAngle;
     QTimer  *timerLength;
 
     /** @brief angle formula of angle */
     QString formulaAngle;
-
+    QString formulaRotationAngle;
     QString formulaLength;
 
     /** @brief formulaBaseHeightAngle base height defined by dialogui */
     int     formulaBaseHeightAngle;
-
+    int     formulaBaseHeightRotationAngle;
     int     formulaBaseHeightLength;
 
     QList<quint32> objects;
 
     bool stage1;
+    bool stage2;
 
     QString m_suffix;
 
     void EvalAngle();
+    void EvalRotationAngle();
     void EvalLength();
 };
 

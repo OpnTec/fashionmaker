@@ -51,6 +51,7 @@
 #include "../vgeometry/vpointf.h"
 #include "../vgeometry/vspline.h"
 #include "../vgeometry/vsplinepath.h"
+#include "../vgeometry/varc.h"
 #include "../vmisc/vabstractapplication.h"
 #include "../vpatterndb/vcontainer.h"
 #include "../vwidgets/vmaingraphicsscene.h"
@@ -60,17 +61,19 @@
 VisToolMove::VisToolMove(const VContainer *data, QGraphicsItem *parent)
     : VisOperation(data, parent),
       angle(0),
+      rotationAngle(INT_MIN),
       length(0),
       pointOrigin(nullptr),
-      pointFinish(nullptr)
+      pointFinish(nullptr),
+      angleArc(nullptr),
+      rotationLine(nullptr),
+      xAxis(nullptr)
 {
     pointOrigin = InitPoint(supportColor2, this);
     pointFinish = InitPoint(supportColor, this);
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-VisToolMove::~VisToolMove()
-{
+    angleArc = InitItem<VCurvePathItem>(supportColor3, this);
+    rotationLine = InitItem<VScaledLine>(supportColor3, this);
+    xAxis = InitItem<VScaledLine>(supportColor3, this);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -91,6 +94,7 @@ void VisToolMove::RefreshGeometry()
 
     qreal tempAngle = 0;
     qreal tempLength = 0;
+    qreal tempRoationAngle = 0;
 
     QLineF line;
     if (qFuzzyIsNull(length))
@@ -113,19 +117,67 @@ void VisToolMove::RefreshGeometry()
         line = VGObject::BuildLine(origin, length, angle);
         tempAngle = angle;
         tempLength = length;
+
+        QLineF rLine;
+        if (VFuzzyComparePossibleNulls(rotationAngle, INT_MIN))
+        {
+            rLine = QLineF(line.p2(), Visualization::scenePos);
+
+            if (QGuiApplication::keyboardModifiers() == Qt::ShiftModifier)
+            {
+                rLine.setAngle(CorrectAngle(rLine.angle()));
+            }
+
+            qreal cursorLength = rLine.length();
+            rLine.setP2(Ray(line.p2(), rLine.angle()));
+            //Radius of point circle, but little bigger. Need handle with hover sizes.
+            qreal minL = ScaledRadius(SceneScale(qApp->getCurrentScene()))*1.5;
+            if (cursorLength > minL)
+            {
+               tempRoationAngle = rLine.angle();
+            }
+            else
+            {
+                rLine.setAngle(0);
+            }
+        }
+        else
+        {
+            rLine = QLineF(line.p2(), Ray(line.p2(), rotationAngle));
+            tempRoationAngle = rotationAngle;
+        }
+
+        DrawLine(rotationLine, rLine, supportColor3, Qt::DashLine);
+        DrawLine(xAxis, QLineF(line.p2(), Ray(line.p2(), 0)), supportColor3, Qt::DashLine);
+
+        VArc arc(VPointF(line.p2()), ScaledRadius(SceneScale(qApp->getCurrentScene()))*2, 0, tempRoationAngle);
+        DrawPath(angleArc, arc.GetPath(), supportColor3, Qt::SolidLine, Qt::RoundCap);
     }
     DrawLine(this, line, supportColor2, Qt::DashLine);
     DrawPoint(pointFinish, line.p2(), supportColor);
 
     static const QString prefix = UnitsToStr(qApp->patternUnit(), true);
-    Visualization::toolTip = tr("Length = %1%2, angle = %3°, <b>Shift</b> - sticking angle, "
-                                "<b>Mouse click</b> - finish creation")
-            .arg(qApp->TrVars()->FormulaToUser(QString::number(qApp->fromPixel(tempLength)),
-                                               qApp->Settings()->GetOsSeparator()))
-            .arg(prefix)
-            .arg(tempAngle);
+    if (qFuzzyIsNull(length))
+    {
+        Visualization::toolTip = tr("Length = %1%2, angle = %3°, <b>Shift</b> - sticking angle, "
+                                    "<b>Mouse click</b> - finish selecting a position")
+                .arg(qApp->TrVars()->FormulaToUser(QString::number(qApp->fromPixel(tempLength)),
+                                                   qApp->Settings()->GetOsSeparator()))
+                .arg(prefix)
+                .arg(tempAngle);
+    }
+    else
+    {
+        Visualization::toolTip = tr("Length = %1%2, angle = %3°, rotation angle = %4°, <b>Shift</b> - sticking angle, "
+                                    "<b>Mouse click</b> - finish creating")
+                .arg(qApp->TrVars()->FormulaToUser(QString::number(qApp->fromPixel(tempLength)),
+                                                   qApp->Settings()->GetOsSeparator()))
+                .arg(prefix)
+                .arg(tempAngle)
+                .arg(tempRoationAngle);
+    }
 
-    CreateMovedObjects(iPoint, iCurve, tempLength, tempAngle);
+    CreateMovedRotatedObjects(iPoint, iCurve, tempLength, tempAngle, tempRoationAngle, line.p2());
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -138,6 +190,18 @@ QString VisToolMove::Angle() const
 void VisToolMove::SetAngle(const QString &expression)
 {
     angle = FindValFromUser(expression, Visualization::data->DataVariables());
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QString VisToolMove::RotationAngle() const
+{
+    return QString::number(rotationLine->line().angle());
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VisToolMove::SetRotationAngle(const QString &expression)
+{
+    rotationAngle = FindValFromUser(expression, Visualization::data->DataVariables());
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -173,13 +237,14 @@ QGraphicsPathItem *VisToolMove::AddOriginCurve(quint32 id, int &i)
 
 //---------------------------------------------------------------------------------------------------------------------
 template <class Item>
-int VisToolMove::AddMovedCurve(qreal angle, qreal length, quint32 id, int i)
+int VisToolMove::AddMovedRotatedCurve(qreal angle, qreal length, quint32 id, int i, qreal rotationAngle,
+                                      const QPointF &rotationOrigin)
 {
     const QSharedPointer<Item> curve = Visualization::data->template GeometricObject<Item>(id);
 
     ++i;
     VCurvePathItem *path = GetCurve(static_cast<quint32>(i), supportColor);
-    const Item moved = curve->Move(length, angle);
+    const Item moved = curve->Move(length, angle).Rotate(rotationOrigin, rotationAngle);
     DrawPath(path, moved.GetPath(), moved.DirectionArrows(), supportColor, Qt::SolidLine, Qt::RoundCap);
 
     return i;
@@ -273,7 +338,8 @@ QT_WARNING_POP
 QT_WARNING_PUSH
 QT_WARNING_DISABLE_GCC("-Wswitch-default")
 
-void VisToolMove::CreateMovedObjects(int &iPoint, int &iCurve, qreal length, qreal angle)
+void VisToolMove::CreateMovedRotatedObjects(int &iPoint, int &iCurve, qreal length, qreal angle, qreal rotationAngle,
+                                            const QPointF &rotationOrigin)
 {
     for (int i = 0; i < objects.size(); ++i)
     {
@@ -291,26 +357,28 @@ void VisToolMove::CreateMovedObjects(int &iPoint, int &iCurve, qreal length, qre
 
                 ++iPoint;
                 VScaledEllipse *point = GetPoint(static_cast<quint32>(iPoint), supportColor);
-                DrawPoint(point, static_cast<QPointF>(p->Move(length, angle)), supportColor);
+                DrawPoint(point, static_cast<QPointF>(p->Move(length, angle).Rotate(rotationOrigin, rotationAngle)),
+                          supportColor);
                 break;
             }
             case GOType::Arc:
-                iCurve = AddMovedCurve<VArc>(angle, length, id, iCurve);
+                iCurve = AddMovedRotatedCurve<VArc>(angle, length, id, iCurve, rotationAngle, rotationOrigin);
                 break;
             case GOType::EllipticalArc:
-                iCurve = AddMovedCurve<VEllipticalArc>(angle, length, id, iCurve);
+                iCurve = AddMovedRotatedCurve<VEllipticalArc>(angle, length, id, iCurve, rotationAngle, rotationOrigin);
                 break;
             case GOType::Spline:
-                iCurve = AddMovedCurve<VSpline>(angle, length, id, iCurve);
+                iCurve = AddMovedRotatedCurve<VSpline>(angle, length, id, iCurve, rotationAngle, rotationOrigin);
                 break;
             case GOType::SplinePath:
-                iCurve = AddMovedCurve<VSplinePath>(angle, length, id, iCurve);
+                iCurve = AddMovedRotatedCurve<VSplinePath>(angle, length, id, iCurve, rotationAngle, rotationOrigin);
                 break;
             case GOType::CubicBezier:
-                iCurve = AddMovedCurve<VCubicBezier>(angle, length, id, iCurve);
+                iCurve = AddMovedRotatedCurve<VCubicBezier>(angle, length, id, iCurve, rotationAngle, rotationOrigin);
                 break;
             case GOType::CubicBezierPath:
-                iCurve = AddMovedCurve<VCubicBezierPath>(angle, length, id, iCurve);
+                iCurve = AddMovedRotatedCurve<VCubicBezierPath>(angle, length, id, iCurve, rotationAngle,
+                                                                rotationOrigin);
                 break;
             case GOType::Unknown:
             case GOType::PlaceLabel:

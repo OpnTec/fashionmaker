@@ -43,6 +43,7 @@ VisOperation::VisOperation(const VContainer *data, QGraphicsItem *parent)
     : VisLine(data, parent),
       objects(),
       supportColor2(Qt::darkGreen),
+      supportColor3(Qt::darkBlue),
       points(),
       curves()
 {

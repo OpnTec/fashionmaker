@@ -1849,6 +1849,9 @@ void VToolOptionsPropertyBrowser::ChangeDataToolMove(VPE::VProperty *property)
         case 4: // AttrLength
             i->SetFormulaLength(value.value<VFormula>());
             break;
+        case 42: // AttrRotationAngle
+            i->SetFormulaRotationAngle(value.value<VFormula>());
+            break;
         default:
             qWarning()<<"Unknown property type. id = "<<id;
             break;
@@ -2416,6 +2419,7 @@ void VToolOptionsPropertyBrowser::ShowOptionsToolMove(QGraphicsItem *item)
     AddPropertyOperationSuffix(i, tr("Suffix:"));
     AddPropertyFormula(tr("Angle:"), i->GetFormulaAngle(), AttrAngle);
     AddPropertyFormula(tr("Length:"), i->GetFormulaLength(), AttrLength);
+    AddPropertyFormula(tr("Rotation angle:"), i->GetFormulaRotationAngle(), AttrRotationAngle);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -3232,6 +3236,10 @@ void VToolOptionsPropertyBrowser::UpdateOptionsToolMove()
     QVariant valueLength;
     valueLength.setValue(i->GetFormulaLength());
     idToProperty[AttrLength]->setValue(valueLength);
+
+    QVariant valueRotationAngle;
+    valueRotationAngle.setValue(i->GetFormulaRotationAngle());
+    idToProperty[AttrRotationAngle]->setValue(valueRotationAngle);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

@@ -50,6 +50,7 @@ public:
 protected:
     QVector<quint32> objects;
     QColor           supportColor2;
+    QColor           supportColor3;
 
     QVector<VScaledEllipse *> points;
     QVector<VCurvePathItem *> curves;

@@ -3157,6 +3157,8 @@ void VPattern::ParseToolMove(VMainGraphicsScene *scene, QDomElement &domElement,
         ToolsCommonAttributes(domElement, initData.id);
         initData.formulaAngle = GetParametrString(domElement, AttrAngle, "0");
         const QString a = initData.formulaAngle;//need for saving fixed formula;
+        initData.formulaRotationAngle = GetParametrString(domElement, AttrRotationAngle, "0");
+        const QString r = initData.formulaRotationAngle;//need for saving fixed formula;
         initData.formulaLength = GetParametrString(domElement, AttrLength, "0");
         const QString len = initData.formulaLength;//need for saving fixed formula;
         initData.suffix = GetParametrString(domElement, AttrSuffix, "");
@@ -3165,9 +3167,10 @@ void VPattern::ParseToolMove(VMainGraphicsScene *scene, QDomElement &domElement,
 
         VToolMove::Create(initData);
         //Rewrite attribute formula. Need for situation when we have wrong formula.
-        if (a != initData.formulaAngle || len != initData.formulaLength)
+        if (a != initData.formulaAngle || r != initData.formulaRotationAngle || len != initData.formulaLength)
         {
             SetAttribute(domElement, AttrAngle, initData.formulaAngle);
+            SetAttribute(domElement, AttrRotationAngle, initData.formulaRotationAngle);
             SetAttribute(domElement, AttrLength, initData.formulaLength);
             modified = true;
             haveLiteChange();

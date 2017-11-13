@@ -76,6 +76,8 @@ public:
                                     QSharedPointer<VInternalVariable> > *vars, bool fromUser = true);
     static qreal FindValFromUser(const QString &expression, const QHash<QString,
                                  QSharedPointer<VInternalVariable> > *vars, bool fromUser = true);
+
+    QString CurrentToolTip() const {return toolTip;}
 signals:
     void         ToolTip(const QString &toolTip);
 public slots:
