@@ -45,8 +45,8 @@ namespace
 //---------------------------------------------------------------------------------------------------------------------
 /**
  * @brief CSR calcs special modeling case.
- * According to case we cut a piece on @param length, split up on distance @param split and splited piece rotate on
- * angle that will create arc with length @param arcLength.
+ * According to case we cut a piece with @p length, split up on distance @p split and rotate splited piece on
+ * angle that will create arc with length @p arcLength.
  * @param length length of cut line
  * @param split distance between two pieces
  * @param arcLength length of arc that create two pieces after rotation
