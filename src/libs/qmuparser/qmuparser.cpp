@@ -33,7 +33,7 @@
 #include "qmuparserdef.h"
 #include "qmuparsererror.h"
 #include "../vmisc/vmath.h"
-#include "../vmisc/def.h"
+#include "../vmisc/defglobal.h"
 
 /**
  * @file

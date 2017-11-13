@@ -41,6 +41,7 @@
 #endif /* Q_OS_WIN */
 
 #include "debugbreak.h"
+#include "defglobal.h"
 
 template <class T> class QSharedPointer;
 
@@ -420,9 +421,6 @@ extern const QString unitINCH;
 extern const QString unitPX;
 
 void SetItemOverrideCursor(QGraphicsItem *item, const QString & pixmapPath, int hotX = -1, int hotY = -1);
-
-#define PRINTDPI 96.0
-extern const qreal PrintDPI;
 
 Q_REQUIRED_RESULT double ToPixel(double val, const Unit &unit);
 Q_REQUIRED_RESULT double FromPixel(double pix, const Unit &unit);

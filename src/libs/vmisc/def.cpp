@@ -239,8 +239,6 @@ void SetItemOverrideCursor(QGraphicsItem *item, const QString &pixmapPath, int h
 #endif
 }
 
-const qreal PrintDPI = PRINTDPI;
-
 //---------------------------------------------------------------------------------------------------------------------
 double ToPixel(double val, const Unit &unit)
 {
