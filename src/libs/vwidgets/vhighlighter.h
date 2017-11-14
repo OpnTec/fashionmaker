@@ -55,7 +55,7 @@ private:
 class VHighlighter : public QSyntaxHighlighter
 {
 public:
-    VHighlighter(QTextDocument *document);
+    explicit VHighlighter(QTextDocument *document);
 
 protected:
     virtual void highlightBlock(const QString &text);
