@@ -227,7 +227,7 @@
            <item row="5" column="1">
             <layout class="QHBoxLayout" name="horizontalLayoutValue">
              <item>
-              <widget class="QPlainTextEdit" name="plainTextEditFormula">
+              <widget class="VPlainTextEdit" name="plainTextEditFormula">
                <property name="enabled">
                 <bool>false</bool>
                </property>
@@ -340,7 +340,7 @@
             </widget>
            </item>
            <item row="10" column="1">
-            <widget class="QPlainTextEdit" name="plainTextEditDescription">
+            <widget class="VPlainTextEdit" name="plainTextEditDescription">
              <property name="enabled">
               <bool>false</bool>
              </property>
@@ -803,7 +803,7 @@
          </widget>
         </item>
         <item row="9" column="1">
-         <widget class="QPlainTextEdit" name="plainTextEditNotes">
+         <widget class="VPlainTextEdit" name="plainTextEditNotes">
           <property name="enabled">
            <bool>false</bool>
           </property>
@@ -827,7 +827,7 @@
      <x>0</x>
      <y>0</y>
      <width>835</width>
-     <height>25</height>
+     <height>22</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuFile">
@@ -1184,6 +1184,13 @@
   </action>
  </widget>
  <layoutdefault spacing="6" margin="11"/>
+ <customwidgets>
+  <customwidget>
+   <class>VPlainTextEdit</class>
+   <extends>QPlainTextEdit</extends>
+   <header location="global">vplaintextedit.h</header>
+  </customwidget>
+ </customwidgets>
  <resources>
   <include location="share/resources/tapeicon.qrc"/>
  </resources>

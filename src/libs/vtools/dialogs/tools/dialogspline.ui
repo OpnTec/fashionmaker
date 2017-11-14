@@ -182,7 +182,7 @@
             <item>
              <layout class="QHBoxLayout" name="horizontalLayout_6">
               <item>
-               <widget class="QPlainTextEdit" name="plainTextEditLength1F">
+               <widget class="VPlainTextEdit" name="plainTextEditLength1F">
                 <property name="sizePolicy">
                  <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
                   <horstretch>0</horstretch>
@@ -362,7 +362,7 @@
             <item>
              <layout class="QHBoxLayout" name="horizontalLayout_7">
               <item>
-               <widget class="QPlainTextEdit" name="plainTextEditAngle1F">
+               <widget class="VPlainTextEdit" name="plainTextEditAngle1F">
                 <property name="sizePolicy">
                  <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
                   <horstretch>0</horstretch>
@@ -580,7 +580,7 @@
             <item>
              <layout class="QHBoxLayout" name="horizontalLayout_9">
               <item>
-               <widget class="QPlainTextEdit" name="plainTextEditLength2F">
+               <widget class="VPlainTextEdit" name="plainTextEditLength2F">
                 <property name="sizePolicy">
                  <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
                   <horstretch>0</horstretch>
@@ -760,7 +760,7 @@
             <item>
              <layout class="QHBoxLayout" name="horizontalLayout_12">
               <item>
-               <widget class="QPlainTextEdit" name="plainTextEditAngle2F">
+               <widget class="VPlainTextEdit" name="plainTextEditAngle2F">
                 <property name="sizePolicy">
                  <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
                   <horstretch>0</horstretch>
@@ -929,6 +929,13 @@
    </item>
   </layout>
  </widget>
+ <customwidgets>
+  <customwidget>
+   <class>VPlainTextEdit</class>
+   <extends>QPlainTextEdit</extends>
+   <header location="global">vplaintextedit.h</header>
+  </customwidget>
+ </customwidgets>
  <tabstops>
   <tabstop>comboBoxP1</tabstop>
   <tabstop>comboBoxP4</tabstop>

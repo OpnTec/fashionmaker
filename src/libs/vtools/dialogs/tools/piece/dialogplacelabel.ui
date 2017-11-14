@@ -88,7 +88,7 @@
         <string notr="true">...</string>
        </property>
        <property name="icon">
-        <iconset resource="../../../vmisc/share/resources/icon.qrc">
+        <iconset resource="../../../../vmisc/share/resources/icon.qrc">
          <normaloff>:/icon/24x24/fx.png</normaloff>:/icon/24x24/fx.png</iconset>
        </property>
        <property name="iconSize">
@@ -105,7 +105,7 @@
         <string/>
        </property>
        <property name="pixmap">
-        <pixmap resource="../../../vmisc/share/resources/icon.qrc">:/icon/24x24/equal.png</pixmap>
+        <pixmap resource="../../../../vmisc/share/resources/icon.qrc">:/icon/24x24/equal.png</pixmap>
        </property>
       </widget>
      </item>
@@ -139,7 +139,7 @@
    <item>
     <layout class="QHBoxLayout" name="horizontalLayout_formula">
      <item>
-      <widget class="QPlainTextEdit" name="plainTextEditFormulaWidth">
+      <widget class="VPlainTextEdit" name="plainTextEditFormulaWidth">
        <property name="sizePolicy">
         <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
          <horstretch>0</horstretch>
@@ -271,7 +271,7 @@
         <string notr="true">...</string>
        </property>
        <property name="icon">
-        <iconset resource="../../../vmisc/share/resources/icon.qrc">
+        <iconset resource="../../../../vmisc/share/resources/icon.qrc">
          <normaloff>:/icon/24x24/fx.png</normaloff>:/icon/24x24/fx.png</iconset>
        </property>
        <property name="iconSize">
@@ -288,7 +288,7 @@
         <string/>
        </property>
        <property name="pixmap">
-        <pixmap resource="../../../vmisc/share/resources/icon.qrc">:/icon/24x24/equal.png</pixmap>
+        <pixmap resource="../../../../vmisc/share/resources/icon.qrc">:/icon/24x24/equal.png</pixmap>
        </property>
       </widget>
      </item>
@@ -322,7 +322,7 @@
    <item>
     <layout class="QHBoxLayout" name="horizontalLayout_formula_2">
      <item>
-      <widget class="QPlainTextEdit" name="plainTextEditFormulaHeight">
+      <widget class="VPlainTextEdit" name="plainTextEditFormulaHeight">
        <property name="sizePolicy">
         <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
          <horstretch>0</horstretch>
@@ -454,7 +454,7 @@
         <string notr="true">...</string>
        </property>
        <property name="icon">
-        <iconset resource="../../../vmisc/share/resources/icon.qrc">
+        <iconset resource="../../../../vmisc/share/resources/icon.qrc">
          <normaloff>:/icon/24x24/fx.png</normaloff>:/icon/24x24/fx.png</iconset>
        </property>
        <property name="iconSize">
@@ -471,7 +471,7 @@
         <string/>
        </property>
        <property name="pixmap">
-        <pixmap resource="../../../vmisc/share/resources/icon.qrc">:/icon/24x24/equal.png</pixmap>
+        <pixmap resource="../../../../vmisc/share/resources/icon.qrc">:/icon/24x24/equal.png</pixmap>
        </property>
       </widget>
      </item>
@@ -505,7 +505,7 @@
    <item>
     <layout class="QHBoxLayout" name="horizontalLayout_formula_3">
      <item>
-      <widget class="QPlainTextEdit" name="plainTextEditFormulaAngle">
+      <widget class="VPlainTextEdit" name="plainTextEditFormulaAngle">
        <property name="sizePolicy">
         <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
          <horstretch>0</horstretch>
@@ -615,8 +615,15 @@
    </item>
   </layout>
  </widget>
+ <customwidgets>
+  <customwidget>
+   <class>VPlainTextEdit</class>
+   <extends>QPlainTextEdit</extends>
+   <header location="global">vplaintextedit.h</header>
+  </customwidget>
+ </customwidgets>
  <resources>
-  <include location="../../../vmisc/share/resources/icon.qrc"/>
+  <include location="../../../../vmisc/share/resources/icon.qrc"/>
  </resources>
  <connections>
   <connection>

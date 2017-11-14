@@ -173,7 +173,7 @@
           <item>
            <layout class="QHBoxLayout" name="horizontalLayout_12">
             <item>
-             <widget class="QPlainTextEdit" name="lineEditRotFormula">
+             <widget class="VPlainTextEdit" name="lineEditRotFormula">
               <property name="sizePolicy">
                <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
                 <horstretch>0</horstretch>
@@ -362,7 +362,7 @@
           <item>
            <layout class="QHBoxLayout" name="horizontalLayout_14">
             <item>
-             <widget class="QPlainTextEdit" name="lineEditLenFormula">
+             <widget class="VPlainTextEdit" name="lineEditLenFormula">
               <property name="sizePolicy">
                <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
                 <horstretch>0</horstretch>
@@ -526,6 +526,13 @@
    </item>
   </layout>
  </widget>
+ <customwidgets>
+  <customwidget>
+   <class>VPlainTextEdit</class>
+   <extends>QPlainTextEdit</extends>
+   <header location="global">vplaintextedit.h</header>
+  </customwidget>
+ </customwidgets>
  <resources>
   <include location="../../../../../vmisc/share/resources/icon.qrc"/>
  </resources>

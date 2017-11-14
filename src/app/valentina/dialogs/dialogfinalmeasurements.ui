@@ -247,7 +247,7 @@
       <item row="5" column="1">
        <layout class="QHBoxLayout" name="horizontalLayoutValue">
         <item>
-         <widget class="QPlainTextEdit" name="plainTextEditFormula">
+         <widget class="VPlainTextEdit" name="plainTextEditFormula">
           <property name="enabled">
            <bool>false</bool>
           </property>
@@ -354,7 +354,7 @@
        </widget>
       </item>
       <item row="7" column="1">
-       <widget class="QPlainTextEdit" name="plainTextEditDescription">
+       <widget class="VPlainTextEdit" name="plainTextEditDescription">
         <property name="enabled">
          <bool>false</bool>
         </property>
@@ -432,9 +432,16 @@
    </item>
   </layout>
  </widget>
+ <customwidgets>
+  <customwidget>
+   <class>VPlainTextEdit</class>
+   <extends>QPlainTextEdit</extends>
+   <header location="global">vplaintextedit.h</header>
+  </customwidget>
+ </customwidgets>
  <resources>
-  <include location="../../../libs/vmisc/share/resources/icon.qrc"/>
   <include location="../../../libs/vmisc/share/resources/theme.qrc"/>
+  <include location="../../../libs/vmisc/share/resources/icon.qrc"/>
  </resources>
  <connections>
   <connection>

@@ -31,6 +31,7 @@
 - [#771] Improve tool Point at intersection of arc and line.
 - [#772] New tool Duplicate detail.
 - [#726] Improve Move tool. Add optional rotate option.
+- [#774] New feature. Matching Parentheses.
 
 # Version 0.5.1
 - [#683] Tool Seam allowance's dialog is off screen on small resolutions.

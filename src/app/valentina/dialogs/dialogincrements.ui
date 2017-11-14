@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>960</width>
-    <height>497</height>
+    <height>517</height>
    </rect>
   </property>
   <property name="minimumSize">
@@ -39,7 +39,7 @@
       <enum>QTabWidget::North</enum>
      </property>
      <property name="currentIndex">
-      <number>1</number>
+      <number>0</number>
      </property>
      <widget class="QWidget" name="tabIncrements">
       <attribute name="title">
@@ -174,12 +174,6 @@
             <horstretch>0</horstretch>
             <verstretch>4</verstretch>
            </sizepolicy>
-          </property>
-          <property name="minimumSize">
-           <size>
-            <width>0</width>
-            <height>236</height>
-           </size>
           </property>
           <property name="toolTip">
            <string>Details</string>
@@ -331,7 +325,7 @@
            <item row="5" column="1">
             <layout class="QHBoxLayout" name="horizontalLayoutValue">
              <item>
-              <widget class="QPlainTextEdit" name="plainTextEditFormula">
+              <widget class="VPlainTextEdit" name="plainTextEditFormula">
                <property name="enabled">
                 <bool>false</bool>
                </property>
@@ -359,12 +353,6 @@
               <widget class="QPushButton" name="pushButtonGrow">
                <property name="enabled">
                 <bool>false</bool>
-               </property>
-               <property name="maximumSize">
-                <size>
-                 <width>18</width>
-                 <height>18</height>
-                </size>
                </property>
                <property name="sizeIncrement">
                 <size>
@@ -432,7 +420,7 @@
             </widget>
            </item>
            <item row="7" column="1">
-            <widget class="QPlainTextEdit" name="plainTextEditDescription">
+            <widget class="VPlainTextEdit" name="plainTextEditDescription">
              <property name="enabled">
               <bool>false</bool>
              </property>
@@ -441,6 +429,12 @@
                <horstretch>0</horstretch>
                <verstretch>1</verstretch>
               </sizepolicy>
+             </property>
+             <property name="maximumSize">
+              <size>
+               <width>16777215</width>
+               <height>28</height>
+              </size>
              </property>
             </widget>
            </item>
@@ -609,12 +603,6 @@
            <verstretch>4</verstretch>
           </sizepolicy>
          </property>
-         <property name="minimumSize">
-          <size>
-           <width>0</width>
-           <height>236</height>
-          </size>
-         </property>
          <property name="toolTip">
           <string>Details</string>
          </property>
@@ -765,7 +753,7 @@
           <item row="5" column="1">
            <layout class="QHBoxLayout" name="horizontalLayoutValue_2">
             <item>
-             <widget class="QPlainTextEdit" name="plainTextEditFormulaPC">
+             <widget class="VPlainTextEdit" name="plainTextEditFormulaPC">
               <property name="enabled">
                <bool>false</bool>
               </property>
@@ -793,12 +781,6 @@
              <widget class="QPushButton" name="pushButtonGrowPC">
               <property name="enabled">
                <bool>false</bool>
-              </property>
-              <property name="maximumSize">
-               <size>
-                <width>18</width>
-                <height>18</height>
-               </size>
               </property>
               <property name="sizeIncrement">
                <size>
@@ -866,7 +848,7 @@
            </widget>
           </item>
           <item row="7" column="1">
-           <widget class="QPlainTextEdit" name="plainTextEditDescriptionPC">
+           <widget class="VPlainTextEdit" name="plainTextEditDescriptionPC">
             <property name="enabled">
              <bool>false</bool>
             </property>
@@ -875,6 +857,12 @@
               <horstretch>0</horstretch>
               <verstretch>1</verstretch>
              </sizepolicy>
+            </property>
+            <property name="maximumSize">
+             <size>
+              <width>16777215</width>
+              <height>28</height>
+             </size>
             </property>
            </widget>
           </item>
@@ -1148,6 +1136,13 @@
    </item>
   </layout>
  </widget>
+ <customwidgets>
+  <customwidget>
+   <class>VPlainTextEdit</class>
+   <extends>QPlainTextEdit</extends>
+   <header location="global">vplaintextedit.h</header>
+  </customwidget>
+ </customwidgets>
  <tabstops>
   <tabstop>tableWidgetIncrement</tabstop>
   <tabstop>toolButtonAdd</tabstop>
@@ -1156,8 +1151,8 @@
   <tabstop>tableWidgetSplines</tabstop>
  </tabstops>
  <resources>
-  <include location="../../../libs/vmisc/share/resources/icon.qrc"/>
   <include location="../../../libs/vmisc/share/resources/theme.qrc"/>
+  <include location="../../../libs/vmisc/share/resources/icon.qrc"/>
  </resources>
  <connections/>
 </ui>

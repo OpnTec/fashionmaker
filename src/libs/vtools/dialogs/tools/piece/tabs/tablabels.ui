@@ -400,7 +400,7 @@
                <item>
                 <layout class="QHBoxLayout" name="horizontalLayout_19">
                  <item>
-                  <widget class="QPlainTextEdit" name="lineEditDLWidthFormula">
+                  <widget class="VPlainTextEdit" name="lineEditDLWidthFormula">
                    <property name="sizePolicy">
                     <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
                      <horstretch>0</horstretch>
@@ -602,7 +602,7 @@
                <item>
                 <layout class="QHBoxLayout" name="horizontalLayout_21">
                  <item>
-                  <widget class="QPlainTextEdit" name="lineEditDLHeightFormula">
+                  <widget class="VPlainTextEdit" name="lineEditDLHeightFormula">
                    <property name="sizePolicy">
                     <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
                      <horstretch>0</horstretch>
@@ -888,7 +888,7 @@
                <item>
                 <layout class="QHBoxLayout" name="horizontalLayout_23">
                  <item>
-                  <widget class="QPlainTextEdit" name="lineEditDLAngleFormula">
+                  <widget class="VPlainTextEdit" name="lineEditDLAngleFormula">
                    <property name="sizePolicy">
                     <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
                      <horstretch>0</horstretch>
@@ -1106,7 +1106,7 @@
                <item>
                 <layout class="QHBoxLayout" name="horizontalLayout_26">
                  <item>
-                  <widget class="QPlainTextEdit" name="lineEditPLWidthFormula">
+                  <widget class="VPlainTextEdit" name="lineEditPLWidthFormula">
                    <property name="sizePolicy">
                     <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
                      <horstretch>0</horstretch>
@@ -1308,7 +1308,7 @@
                <item>
                 <layout class="QHBoxLayout" name="horizontalLayout_27">
                  <item>
-                  <widget class="QPlainTextEdit" name="lineEditPLHeightFormula">
+                  <widget class="VPlainTextEdit" name="lineEditPLHeightFormula">
                    <property name="sizePolicy">
                     <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
                      <horstretch>0</horstretch>
@@ -1594,7 +1594,7 @@
                <item>
                 <layout class="QHBoxLayout" name="horizontalLayout_28">
                  <item>
-                  <widget class="QPlainTextEdit" name="lineEditPLAngleFormula">
+                  <widget class="VPlainTextEdit" name="lineEditPLAngleFormula">
                    <property name="sizePolicy">
                     <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
                      <horstretch>0</horstretch>
@@ -1683,6 +1683,11 @@
   </layout>
  </widget>
  <customwidgets>
+  <customwidget>
+   <class>VPlainTextEdit</class>
+   <extends>QPlainTextEdit</extends>
+   <header location="global">vplaintextedit.h</header>
+  </customwidget>
   <customwidget>
    <class>VLineEdit</class>
    <extends>QLineEdit</extends>

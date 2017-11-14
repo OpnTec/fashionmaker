@@ -150,7 +150,7 @@
           <number>0</number>
          </property>
          <item>
-          <widget class="QPlainTextEdit" name="plainTextEditRadius1">
+          <widget class="VPlainTextEdit" name="plainTextEditRadius1">
            <property name="sizePolicy">
             <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
              <horstretch>0</horstretch>
@@ -336,7 +336,7 @@
           <number>0</number>
          </property>
          <item>
-          <widget class="QPlainTextEdit" name="plainTextEditRadius2">
+          <widget class="VPlainTextEdit" name="plainTextEditRadius2">
            <property name="sizePolicy">
             <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
              <horstretch>0</horstretch>
@@ -522,7 +522,7 @@
           <number>0</number>
          </property>
          <item>
-          <widget class="QPlainTextEdit" name="plainTextEditF1">
+          <widget class="VPlainTextEdit" name="plainTextEditF1">
            <property name="sizePolicy">
             <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
              <horstretch>0</horstretch>
@@ -708,7 +708,7 @@
           <number>0</number>
          </property>
          <item>
-          <widget class="QPlainTextEdit" name="plainTextEditF2">
+          <widget class="VPlainTextEdit" name="plainTextEditF2">
            <property name="sizePolicy">
             <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
              <horstretch>0</horstretch>
@@ -894,7 +894,7 @@
           <number>0</number>
          </property>
          <item>
-          <widget class="QPlainTextEdit" name="plainTextEditRotationAngle">
+          <widget class="VPlainTextEdit" name="plainTextEditRotationAngle">
            <property name="sizePolicy">
             <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
              <horstretch>0</horstretch>
@@ -1038,6 +1038,13 @@
    </item>
   </layout>
  </widget>
+ <customwidgets>
+  <customwidget>
+   <class>VPlainTextEdit</class>
+   <extends>QPlainTextEdit</extends>
+   <header location="global">vplaintextedit.h</header>
+  </customwidget>
+ </customwidgets>
  <resources>
   <include location="../../../vmisc/share/resources/icon.qrc"/>
  </resources>

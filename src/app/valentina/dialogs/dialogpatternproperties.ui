@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>655</width>
-    <height>532</height>
+    <height>547</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -21,7 +21,7 @@
    <item>
     <widget class="QTabWidget" name="tabWidget">
      <property name="currentIndex">
-      <number>3</number>
+      <number>0</number>
      </property>
      <widget class="QWidget" name="tab">
       <attribute name="title">
@@ -107,7 +107,7 @@
             </widget>
            </item>
            <item>
-            <widget class="QPlainTextEdit" name="plainTextEditDescription">
+            <widget class="VPlainTextEdit" name="plainTextEditDescription">
              <property name="documentTitle">
               <string/>
              </property>
@@ -174,7 +174,7 @@
           </widget>
          </item>
          <item>
-          <widget class="QPlainTextEdit" name="plainTextEditTechNotes"/>
+          <widget class="VPlainTextEdit" name="plainTextEditTechNotes"/>
          </item>
         </layout>
        </item>
@@ -1381,6 +1381,11 @@
   </layout>
  </widget>
  <customwidgets>
+  <customwidget>
+   <class>VPlainTextEdit</class>
+   <extends>QPlainTextEdit</extends>
+   <header location="global">vplaintextedit.h</header>
+  </customwidget>
   <customwidget>
    <class>VLineEdit</class>
    <extends>QLineEdit</extends>

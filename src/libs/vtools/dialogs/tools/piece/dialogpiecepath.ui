@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>480</width>
-    <height>490</height>
+    <height>511</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -260,7 +260,7 @@
        <item>
         <layout class="QHBoxLayout" name="horizontalLayout_6">
          <item>
-          <widget class="QPlainTextEdit" name="plainTextEditFormulaWidth">
+          <widget class="VPlainTextEdit" name="plainTextEditFormulaWidth">
            <property name="sizePolicy">
             <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
              <horstretch>0</horstretch>
@@ -496,7 +496,7 @@
           <item>
            <layout class="QHBoxLayout" name="horizontalLayout_7">
             <item>
-             <widget class="QPlainTextEdit" name="plainTextEditFormulaWidthBefore">
+             <widget class="VPlainTextEdit" name="plainTextEditFormulaWidthBefore">
               <property name="sizePolicy">
                <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
                 <horstretch>0</horstretch>
@@ -695,7 +695,7 @@
           <item>
            <layout class="QHBoxLayout" name="horizontalLayout_17">
             <item>
-             <widget class="QPlainTextEdit" name="plainTextEditFormulaWidthAfter">
+             <widget class="VPlainTextEdit" name="plainTextEditFormulaWidthAfter">
               <property name="sizePolicy">
                <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
                 <horstretch>0</horstretch>
@@ -1016,6 +1016,13 @@
    </item>
   </layout>
  </widget>
+ <customwidgets>
+  <customwidget>
+   <class>VPlainTextEdit</class>
+   <extends>QPlainTextEdit</extends>
+   <header location="global">vplaintextedit.h</header>
+  </customwidget>
+ </customwidgets>
  <resources>
   <include location="../../../../vmisc/share/resources/icon.qrc"/>
  </resources>
@@ -1054,7 +1061,7 @@
   </connection>
  </connections>
  <buttongroups>
-  <buttongroup name="buttonGroupMarkType"/>
   <buttongroup name="buttonGroupAngleType"/>
+  <buttongroup name="buttonGroupMarkType"/>
  </buttongroups>
 </ui>

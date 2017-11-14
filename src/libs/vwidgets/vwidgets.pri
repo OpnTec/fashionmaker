@@ -22,7 +22,9 @@ SOURCES += \
     $$PWD/global.cpp \
     $$PWD/vscenepoint.cpp \
     $$PWD/scalesceneitems.cpp \
-    $$PWD/vlineedit.cpp
+    $$PWD/vlineedit.cpp \
+    $$PWD/vplaintextedit.cpp \
+    $$PWD/vhighlighter.cpp
 
 *msvc*:SOURCES += $$PWD/stable.cpp
 
@@ -48,4 +50,6 @@ HEADERS += \
     $$PWD/global.h \
     $$PWD/vscenepoint.h \
     $$PWD/scalesceneitems.h \
-    $$PWD/vlineedit.h
+    $$PWD/vlineedit.h \
+    $$PWD/vplaintextedit.h \
+    $$PWD/vhighlighter.h
