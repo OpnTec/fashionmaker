@@ -3597,6 +3597,14 @@ Apply settings anyway?</source>
         <source>Move</source>
         <translation>Переместить</translation>
     </message>
+    <message>
+        <source>Rotation angle:</source>
+        <translation type="unfinished">Угол поворота:</translation>
+    </message>
+    <message>
+        <source>Edit rotation angle</source>
+        <translation type="unfinished">Изменить угол поворота</translation>
+    </message>
 </context>
 <context>
     <name>DialogNewMeasurements</name>
@@ -8729,10 +8737,6 @@ Do you want to save your changes?</source>
 <context>
     <name>SavePieceOptions</name>
     <message>
-        <source>save detail option</source>
-        <translation type="vanished">сохранить параметры детали</translation>
-    </message>
-    <message>
         <source>save detail options</source>
         <translation type="unfinished"></translation>
     </message>
@@ -13665,6 +13669,16 @@ Do you want to save your changes?</source>
         <comment>round to up to 1 decimal</comment>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>csrCm</source>
+        <comment>cut, split and rotate modeling operation. Takes cm units.</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>csrInch</source>
+        <comment>cut, split and rotate modeling operation. Takes inch units.</comment>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>VVITConverter</name>
@@ -13783,7 +13797,15 @@ Do you want to save your changes?</source>
     <name>VisToolMove</name>
     <message>
         <source>Length = %1%2, angle = %3°, &lt;b&gt;Shift&lt;/b&gt; - sticking angle, &lt;b&gt;Mouse click&lt;/b&gt; - finish creation</source>
-        <translation>Длина = %1%2, угол = %3°, &lt;b&gt;Shift&lt;/b&gt; - фиксация угла, &lt;b&gt;Mouse click&lt;/b&gt; - создание</translation>
+        <translation type="vanished">Длина = %1%2, угол = %3°, &lt;b&gt;Shift&lt;/b&gt; - фиксация угла, &lt;b&gt;Mouse click&lt;/b&gt; - создание</translation>
+    </message>
+    <message>
+        <source>Length = %1%2, angle = %3°, &lt;b&gt;Shift&lt;/b&gt; - sticking angle, &lt;b&gt;Mouse click&lt;/b&gt; - finish selecting a position</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Length = %1%2, angle = %3°, rotation angle = %4°, &lt;b&gt;Shift&lt;/b&gt; - sticking angle, &lt;b&gt;Mouse click&lt;/b&gt; - finish creating</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

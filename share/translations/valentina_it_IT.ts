@@ -3509,6 +3509,14 @@ Apply settings anyway?</source>
         <source>Move</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Rotation angle:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Edit rotation angle</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>DialogNewMeasurements</name>
@@ -13325,6 +13333,16 @@ Vuoi salvare le tue modifiche?</translation>
         <comment>round to up to 1 decimal</comment>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>csrCm</source>
+        <comment>cut, split and rotate modeling operation. Takes cm units.</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>csrInch</source>
+        <comment>cut, split and rotate modeling operation. Takes inch units.</comment>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>VVITConverter</name>
@@ -13425,7 +13443,11 @@ Vuoi salvare le tue modifiche?</translation>
 <context>
     <name>VisToolMove</name>
     <message>
-        <source>Length = %1%2, angle = %3°, &lt;b&gt;Shift&lt;/b&gt; - sticking angle, &lt;b&gt;Mouse click&lt;/b&gt; - finish creation</source>
+        <source>Length = %1%2, angle = %3°, &lt;b&gt;Shift&lt;/b&gt; - sticking angle, &lt;b&gt;Mouse click&lt;/b&gt; - finish selecting a position</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Length = %1%2, angle = %3°, rotation angle = %4°, &lt;b&gt;Shift&lt;/b&gt; - sticking angle, &lt;b&gt;Mouse click&lt;/b&gt; - finish creating</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
