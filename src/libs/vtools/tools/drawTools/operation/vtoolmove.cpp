@@ -101,8 +101,18 @@ QPointF GetOriginPoint(const QVector<quint32> objects, const VContainer *data, q
             case GOType::SplinePath:
             case GOType::CubicBezier:
             case GOType::CubicBezierPath:
+            {
+#if QT_VERSION >= QT_VERSION_CHECK(5, 5, 0)
                 originObjects.append(data->GeometricObject<VAbstractCurve>(id)->GetPoints());
+#else
+                const QVector<QPointF> points = data->GeometricObject<VAbstractCurve>(id)->GetPoints();
+                foreach (const QPointF &point, points)
+                {
+                    originObjects.append(point);
+                }
+#endif // QT_VERSION >= QT_VERSION_CHECK(5, 5, 0)
                 break;
+            }
             case GOType::Unknown:
             case GOType::PlaceLabel:
                 Q_UNREACHABLE();
