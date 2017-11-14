@@ -586,7 +586,7 @@ void VToolMove::UpdateItem(quint32 idTool, quint32 idItem, qreal angle, qreal le
                            const QPointF &rotationOrigin, const QString &suffix, VContainer *data, quint32 id)
 {
     const QSharedPointer<Item> i = data->GeometricObject<Item>(idItem);
-    Item moved = i->Move(length, angle, suffix).Rotate(rotationOrigin, rotationAngle);;
+    Item moved = i->Move(length, angle, suffix).Rotate(rotationOrigin, rotationAngle);
     moved.setIdObject(idTool);
     data->UpdateGObject(id, new Item(moved));
 }
