@@ -170,7 +170,6 @@ private:
 
     void          EvalRadiuses();
     void          EvalAngles();
-    void          CheckAngles();
 };
 
 #endif // DIALOGELLIPTICALARC_H

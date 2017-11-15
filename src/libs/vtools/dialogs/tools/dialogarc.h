@@ -139,7 +139,6 @@ private:
 
     void          EvalRadius();
     void          EvalF();
-    void          CheckAngles();
 };
 
 #endif // DIALOGARC_H

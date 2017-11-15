@@ -408,32 +408,6 @@ void DialogEllipticalArc::EvalAngles()
     labelEditFormula = ui->labelEditRotationAngle;
     angleRotation = Eval(ui->plainTextEditRotationAngle->toPlainText(), flagRotationAngle,
                          ui->labelResultRotationAngle, degreeSymbol, false);
-
-    CheckAngles();
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void DialogEllipticalArc::CheckAngles()
-{
-    if (static_cast<int>(angleF1) == INT_MIN || static_cast<int>(angleF2) == INT_MIN)
-    {
-        return;
-    }
-
-    if (VFuzzyComparePossibleNulls(angleF1, angleF2))
-    {
-        flagF1 = false;
-        ChangeColor(ui->labelEditF1, Qt::red);
-        ui->labelResultF1->setText(tr("Error"));
-        ui->labelResultF1->setToolTip(tr("Angles equal"));
-
-        flagF2 = false;
-        ChangeColor(ui->labelEditF2, Qt::red);
-        ui->labelResultF2->setText(tr("Error"));
-        ui->labelResultF2->setToolTip(tr("Angles equal"));
-    }
-
-    DialogEllipticalArc::CheckState();
 }
 
 //---------------------------------------------------------------------------------------------------------------------

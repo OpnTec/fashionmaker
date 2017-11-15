@@ -423,32 +423,6 @@ void DialogArc::EvalF()
 
     labelEditFormula = ui->labelEditF2;
     angleF2 = Eval(ui->plainTextEditF2->toPlainText(), flagF2, ui->labelResultF2, degreeSymbol, false);
-
-    CheckAngles();
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void DialogArc::CheckAngles()
-{
-    if (static_cast<int>(angleF1) == INT_MIN || static_cast<int>(angleF2) == INT_MIN)
-    {
-        return;
-    }
-
-    if (VFuzzyComparePossibleNulls(angleF1, angleF2))
-    {
-        flagF1 = false;
-        ChangeColor(ui->labelEditF1, Qt::red);
-        ui->labelResultF1->setText(tr("Error"));
-        ui->labelResultF1->setToolTip(tr("Angles equal"));
-
-        flagF2 = false;
-        ChangeColor(ui->labelEditF2, Qt::red);
-        ui->labelResultF2->setText(tr("Error"));
-        ui->labelResultF2->setToolTip(tr("Angles equal"));
-    }
-
-    DialogArc::CheckState();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
