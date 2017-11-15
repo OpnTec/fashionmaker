@@ -37,7 +37,11 @@ VisToolPiece::VisToolPiece(const VContainer *data, QGraphicsItem *parent)
       m_points(),
       m_line1(nullptr),
       m_line2(nullptr),
-      m_piece()
+      m_piece(),
+      m_pieceCached(false),
+      m_cachedMainPath(),
+      m_cachedNodes(),
+      m_cachedMainPathPoints()
 {
     m_line1 = InitItem<VScaledLine>(supportColor, this);
     m_line2 = InitItem<VScaledLine>(supportColor, this);
@@ -50,24 +54,34 @@ void VisToolPiece::RefreshGeometry()
 
     if (m_piece.GetPath().CountNodes() > 0)
     {
-        DrawPath(this, m_piece.MainPathPath(Visualization::data), mainColor, Qt::SolidLine, Qt::RoundCap);
+        if (not m_pieceCached)
+        {
+            m_cachedMainPath = m_piece.MainPathPath(Visualization::data);
+            m_cachedNodes = m_piece.MainPathNodePoints(Visualization::data);
+            if (mode == Mode::Creation)
+            {
+                m_cachedMainPathPoints = m_piece.MainPathPoints(Visualization::data);
+            }
+            m_pieceCached = true;
+        }
 
-        const QVector<VPointF> nodes = m_piece.MainPathNodePoints(Visualization::data);
+        DrawPath(this, m_cachedMainPath, mainColor, Qt::SolidLine, Qt::RoundCap);
 
-        for (int i = 0; i < nodes.size(); ++i)
+        for (int i = 0; i < m_cachedNodes.size(); ++i)
         {
             VScaledEllipse *point = GetPoint(static_cast<quint32>(i), supportColor);
-            DrawPoint(point, nodes.at(i).toQPointF(), supportColor);
+            DrawPoint(point, m_cachedNodes.at(i).toQPointF(), supportColor);
         }
 
         if (mode == Mode::Creation)
         {
-            const QVector<QPointF> points = m_piece.MainPathPoints(Visualization::data);
-            DrawLine(m_line1, QLineF(points.first(), Visualization::scenePos), supportColor, Qt::DashLine);
+            DrawLine(m_line1, QLineF(m_cachedMainPathPoints.first(), Visualization::scenePos), supportColor,
+                     Qt::DashLine);
 
-            if (points.size() > 1)
+            if (m_cachedMainPathPoints.size() > 1)
             {
-                DrawLine(m_line2, QLineF(points.last(), Visualization::scenePos), supportColor, Qt::DashLine);
+                DrawLine(m_line2, QLineF(m_cachedMainPathPoints.last(), Visualization::scenePos), supportColor,
+                         Qt::DashLine);
             }
         }
     }
@@ -77,6 +91,7 @@ void VisToolPiece::RefreshGeometry()
 void VisToolPiece::SetPiece(const VPiece &piece)
 {
     m_piece = piece;
+    m_pieceCached = false;
 }
 
 //---------------------------------------------------------------------------------------------------------------------

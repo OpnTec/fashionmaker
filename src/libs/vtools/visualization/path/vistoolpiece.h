@@ -34,6 +34,7 @@
 
 #include "vispath.h"
 #include "../vpatterndb/vpiece.h"
+#include "../vgeometry/vpointf.h"
 
 class VisToolPiece : public VisPath
 {
@@ -53,6 +54,10 @@ private:
     VScaledLine *m_line1;
     VScaledLine *m_line2;
     VPiece m_piece;
+    bool m_pieceCached;
+    QPainterPath m_cachedMainPath;
+    QVector<VPointF> m_cachedNodes;
+    QVector<QPointF> m_cachedMainPathPoints;
 
     VScaledEllipse* GetPoint(quint32 i, const QColor &color);
 
