@@ -441,7 +441,7 @@ void DialogSeamAllowance::ChosenObject(quint32 id, const SceneObject &type)
 //---------------------------------------------------------------------------------------------------------------------
 void DialogSeamAllowance::ShowDialog(bool click)
 {
-    if (click == false)
+    if (click == false && uiTabPaths->listWidgetMainPath->count() > 0)
     {
         emit ToolTip("");
         prepare = true;
