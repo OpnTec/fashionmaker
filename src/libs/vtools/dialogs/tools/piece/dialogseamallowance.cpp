@@ -969,8 +969,8 @@ void DialogSeamAllowance::NodeChanged(int index)
     }
     else
     {
-        uiTabPaths->plainTextEditFormulaWidthBefore->setPlainText("");
-        uiTabPaths->plainTextEditFormulaWidthAfter->setPlainText("");
+        uiTabPaths->plainTextEditFormulaWidthBefore->setPlainText(currentSeamAllowance);
+        uiTabPaths->plainTextEditFormulaWidthAfter->setPlainText(currentSeamAllowance);
         uiTabPaths->comboBoxAngle->setCurrentIndex(-1);
     }
     uiTabPaths->comboBoxAngle->blockSignals(false);
@@ -2038,27 +2038,33 @@ void DialogSeamAllowance::EvalWidth()
 //---------------------------------------------------------------------------------------------------------------------
 void DialogSeamAllowance::EvalWidthBefore()
 {
-    labelEditFormula = uiTabPaths->labelEditBefore;
-    const QString postfix = UnitsToStr(qApp->patternUnit(), true);
-    const QString formula = uiTabPaths->plainTextEditFormulaWidthBefore->toPlainText();
-    Eval(formula, flagFormulaBefore, uiTabPaths->labelResultBefore, postfix, false, true);
+    if (uiTabPaths->checkBoxSeams->isChecked())
+    {
+        labelEditFormula = uiTabPaths->labelEditBefore;
+        const QString postfix = UnitsToStr(qApp->patternUnit(), true);
+        const QString formula = uiTabPaths->plainTextEditFormulaWidthBefore->toPlainText();
+        Eval(formula, flagFormulaBefore, uiTabPaths->labelResultBefore, postfix, false, true);
 
-    const QString formulaSABefore = GetFormulaFromUser(uiTabPaths->plainTextEditFormulaWidthBefore);
-    UpdateNodeSABefore(formulaSABefore);
-    EnableDefButton(uiTabPaths->pushButtonDefBefore, formulaSABefore);
+        const QString formulaSABefore = GetFormulaFromUser(uiTabPaths->plainTextEditFormulaWidthBefore);
+        UpdateNodeSABefore(formulaSABefore);
+        EnableDefButton(uiTabPaths->pushButtonDefBefore, formulaSABefore);
+    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void DialogSeamAllowance::EvalWidthAfter()
 {
-    labelEditFormula = uiTabPaths->labelEditAfter;
-    const QString postfix = UnitsToStr(qApp->patternUnit(), true);
-    const QString formula = uiTabPaths->plainTextEditFormulaWidthAfter->toPlainText();
-    Eval(formula, flagFormulaAfter, uiTabPaths->labelResultAfter, postfix, false, true);
+    if (uiTabPaths->checkBoxSeams->isChecked())
+    {
+        labelEditFormula = uiTabPaths->labelEditAfter;
+        const QString postfix = UnitsToStr(qApp->patternUnit(), true);
+        const QString formula = uiTabPaths->plainTextEditFormulaWidthAfter->toPlainText();
+        Eval(formula, flagFormulaAfter, uiTabPaths->labelResultAfter, postfix, false, true);
 
-    const QString formulaSAAfter = GetFormulaFromUser(uiTabPaths->plainTextEditFormulaWidthAfter);
-    UpdateNodeSAAfter(formulaSAAfter);
-    EnableDefButton(uiTabPaths->pushButtonDefAfter, formulaSAAfter);
+        const QString formulaSAAfter = GetFormulaFromUser(uiTabPaths->plainTextEditFormulaWidthAfter);
+        UpdateNodeSAAfter(formulaSAAfter);
+        EnableDefButton(uiTabPaths->pushButtonDefAfter, formulaSAAfter);
+    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -2118,19 +2124,25 @@ void DialogSeamAllowance::WidthChanged()
 //---------------------------------------------------------------------------------------------------------------------
 void DialogSeamAllowance::WidthBeforeChanged()
 {
-    labelEditFormula = uiTabPaths->labelEditBefore;
-    labelResultCalculation = uiTabPaths->labelResultBefore;
-    const QString postfix = UnitsToStr(qApp->patternUnit(), true);
-    ValFormulaChanged(flagFormulaBefore, uiTabPaths->plainTextEditFormulaWidthBefore, m_timerWidthBefore, postfix);
+    if (uiTabPaths->checkBoxSeams->isChecked())
+    {
+        labelEditFormula = uiTabPaths->labelEditBefore;
+        labelResultCalculation = uiTabPaths->labelResultBefore;
+        const QString postfix = UnitsToStr(qApp->patternUnit(), true);
+        ValFormulaChanged(flagFormulaBefore, uiTabPaths->plainTextEditFormulaWidthBefore, m_timerWidthBefore, postfix);
+    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void DialogSeamAllowance::WidthAfterChanged()
 {
-    labelEditFormula = uiTabPaths->labelEditAfter;
-    labelResultCalculation = uiTabPaths->labelResultAfter;
-    const QString postfix = UnitsToStr(qApp->patternUnit(), true);
-    ValFormulaChanged(flagFormulaAfter, uiTabPaths->plainTextEditFormulaWidthAfter, m_timerWidthAfter, postfix);
+    if (uiTabPaths->checkBoxSeams->isChecked())
+    {
+        labelEditFormula = uiTabPaths->labelEditAfter;
+        labelResultCalculation = uiTabPaths->labelResultAfter;
+        const QString postfix = UnitsToStr(qApp->patternUnit(), true);
+        ValFormulaChanged(flagFormulaAfter, uiTabPaths->plainTextEditFormulaWidthAfter, m_timerWidthAfter, postfix);
+    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
