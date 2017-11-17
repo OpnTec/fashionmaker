@@ -138,6 +138,7 @@ void VToolMove::setDialog()
     dialogTool->SetRotationAngle(formulaRotationAngle);
     dialogTool->SetLength(formulaLength);
     dialogTool->SetSuffix(suffix);
+    dialogTool->SetRotationOrigPointId(origPointId);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -179,7 +180,18 @@ VToolMove *VToolMove::Create(VToolMoveInitData &initData)
     calcRotationAngle = CheckFormula(initData.id, initData.formulaRotationAngle, initData.data);
     calcLength = qApp->toPixel(CheckFormula(initData.id, initData.formulaLength, initData.data));
 
-    const QPointF rotationOrigin = GetOriginPoint(initData.source, initData.data, calcLength, calcAngle);
+    QPointF rotationOrigin;
+    QSharedPointer<VPointF> originPoint;
+
+    if (initData.rotationOrigin == NULL_ID)
+    {
+        rotationOrigin = GetOriginPoint(initData.source, initData.data, calcLength, calcAngle);
+    }
+    else
+    {
+        originPoint = initData.data->GeometricObject<VPointF>(initData.rotationOrigin);
+        rotationOrigin = static_cast<QPointF>(*originPoint);
+    }
 
     if (initData.typeCreation == Source::FromGui)
     {
@@ -313,6 +325,12 @@ QT_WARNING_POP
         initData.scene->addItem(tool);
         InitOperationToolConnections(initData.scene, tool);
         VAbstractPattern::AddTool(initData.id, tool);
+
+        if (not originPoint.isNull())
+        {
+            initData.doc->IncrementReferens(originPoint->getIdTool());
+        }
+
         for (int i = 0; i < initData.source.size(); ++i)
         {
             initData.doc->IncrementReferens(initData.data->GetGObject(initData.source.at(i))->getIdTool());
@@ -389,6 +407,19 @@ void VToolMove::SetFormulaLength(const VFormula &value)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+QString VToolMove::OriginPointName() const
+{
+    try
+    {
+    return VAbstractTool::data.GetGObject(origPointId)->name();
+    }
+    catch (const VExceptionBadId &)
+    {
+        return tr("Center point");
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 void VToolMove::ShowVisualization(bool show)
 {
     ShowToolVisualization<VisToolMove>(show);
@@ -421,6 +452,7 @@ void VToolMove::SetVisualization()
         visual->SetRotationAngle(qApp->TrVars()->FormulaToUser(formulaRotationAngle,
                                                                qApp->Settings()->GetOsSeparator()));
         visual->SetLength(qApp->TrVars()->FormulaToUser(formulaLength, qApp->Settings()->GetOsSeparator()));
+        visual->SetRotationOriginPointId(origPointId);
         visual->RefreshGeometry();
     }
 }
@@ -432,18 +464,19 @@ void VToolMove::SaveDialog(QDomElement &domElement, QList<quint32> &oldDependenc
     QSharedPointer<DialogMove> dialogTool = m_dialog.objectCast<DialogMove>();
     SCASSERT(not dialogTool.isNull())
 
-    Q_UNUSED(oldDependencies);
-    Q_UNUSED(newDependencies)
+    AddDependence(oldDependencies, origPointId);
+    AddDependence(newDependencies, dialogTool->GetRotationOrigPointId());
 
     doc->SetAttribute(domElement, AttrAngle, dialogTool->GetAngle());
-    QString length = dialogTool->GetLength();
-    doc->SetAttribute(domElement, AttrLength, length);
+    doc->SetAttribute(domElement, AttrLength, dialogTool->GetLength());
     doc->SetAttribute(domElement, AttrSuffix, dialogTool->GetSuffix());
+    doc->SetAttribute(domElement, AttrCenter, QString().setNum(dialogTool->GetRotationOrigPointId()));
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void VToolMove::ReadToolAttributes(const QDomElement &domElement)
 {
+    origPointId = doc->GetParametrUInt(domElement, AttrCenter, NULL_ID_STR);
     formulaAngle = doc->GetParametrString(domElement, AttrAngle, "0");
     formulaRotationAngle = doc->GetParametrString(domElement, AttrRotationAngle, "0");
     formulaLength = doc->GetParametrString(domElement, AttrLength, "0");
@@ -460,6 +493,7 @@ void VToolMove::SaveOptions(QDomElement &tag, QSharedPointer<VGObject> &obj)
     doc->SetAttribute(tag, AttrRotationAngle, formulaRotationAngle);
     doc->SetAttribute(tag, AttrLength, formulaLength);
     doc->SetAttribute(tag, AttrSuffix, suffix);
+    doc->SetAttribute(tag, AttrCenter, QString().setNum(origPointId));
 
     SaveSourceDestination(tag);
 }
@@ -468,12 +502,18 @@ void VToolMove::SaveOptions(QDomElement &tag, QSharedPointer<VGObject> &obj)
 QString VToolMove::MakeToolTip() const
 {
     const QString toolTip = QString("<tr> <td><b>%1:</b> %2°</td> </tr>"
-                                    "<tr> <td><b>%3:</b> %4 %5</td> </tr>")
-            .arg(tr("Rotation angle"))
-            .arg(GetFormulaAngle().getDoubleValue())
-            .arg(tr("Length"))
-            .arg(GetFormulaLength().getDoubleValue())
-            .arg(UnitsToStr(qApp->patternUnit(), true));
+                                    "<tr> <td><b>%3:</b> %4 %5</td> </tr>"
+                                    "<tr> <td><b>%6:</b> %7°</td> </tr>"
+                                    "<tr> <td><b>%8:</b> %9</td> </tr>")
+            .arg(tr("Angle"))                                // 1
+            .arg(GetFormulaAngle().getDoubleValue())         // 2
+            .arg(tr("Length"))                               // 3
+            .arg(GetFormulaLength().getDoubleValue())        // 4
+            .arg(UnitsToStr(qApp->patternUnit(), true))      // 5
+            .arg(tr("Rotation angle"))                       // 6
+            .arg(GetFormulaRotationAngle().getDoubleValue()) // 7
+            .arg(tr("Rotation origin point"))                // 8
+            .arg(OriginPointName());                         // 9
     return toolTip;
 }
 
@@ -483,7 +523,8 @@ VToolMove::VToolMove(const VToolMoveInitData &initData, QGraphicsItem *parent)
                          initData.destination, parent),
       formulaAngle(initData.formulaAngle),
       formulaRotationAngle(initData.formulaRotationAngle),
-      formulaLength(initData.formulaLength)
+      formulaLength(initData.formulaLength),
+      origPointId(initData.rotationOrigin)
 {
     InitOperatedObjects();
     ToolCreation(initData.typeCreation);

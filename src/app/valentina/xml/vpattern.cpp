@@ -3162,6 +3162,7 @@ void VPattern::ParseToolMove(VMainGraphicsScene *scene, QDomElement &domElement,
         initData.formulaLength = GetParametrString(domElement, AttrLength, "0");
         const QString len = initData.formulaLength;//need for saving fixed formula;
         initData.suffix = GetParametrString(domElement, AttrSuffix, "");
+        initData.rotationOrigin = GetParametrUInt(domElement, AttrCenter, NULL_ID_STR);
 
         VAbstractOperation::ExtractData(domElement, initData);
 

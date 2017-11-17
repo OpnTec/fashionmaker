@@ -58,8 +58,8 @@ class QDomElement;
  */
 
 const QString VPatternConverter::PatternMinVerStr = QStringLiteral("0.1.0");
-const QString VPatternConverter::PatternMaxVerStr = QStringLiteral("0.7.2");
-const QString VPatternConverter::CurrentSchema    = QStringLiteral("://schema/pattern/v0.7.2.xsd");
+const QString VPatternConverter::PatternMaxVerStr = QStringLiteral("0.7.3");
+const QString VPatternConverter::CurrentSchema    = QStringLiteral("://schema/pattern/v0.7.3.xsd");
 
 //VPatternConverter::PatternMinVer; // <== DON'T FORGET TO UPDATE TOO!!!!
 //VPatternConverter::PatternMaxVer; // <== DON'T FORGET TO UPDATE TOO!!!!
@@ -173,98 +173,62 @@ VPatternConverter::VPatternConverter(const QString &fileName)
 //---------------------------------------------------------------------------------------------------------------------
 QString VPatternConverter::XSDSchema(int ver) const
 {
-    switch (ver)
+    QHash <int, QString> schemas =
     {
-        case (0x000100):
-            return QStringLiteral("://schema/pattern/v0.1.0.xsd");
-        case (0x000101):
-            return QStringLiteral("://schema/pattern/v0.1.1.xsd");
-        case (0x000102):
-            return QStringLiteral("://schema/pattern/v0.1.2.xsd");
-        case (0x000103):
-            return QStringLiteral("://schema/pattern/v0.1.3.xsd");
-        case (0x000104):
-            return QStringLiteral("://schema/pattern/v0.1.4.xsd");
-        case (0x000200):
-            return QStringLiteral("://schema/pattern/v0.2.0.xsd");
-        case (0x000201):
-            return QStringLiteral("://schema/pattern/v0.2.1.xsd");
-        case (0x000202):
-            return QStringLiteral("://schema/pattern/v0.2.2.xsd");
-        case (0x000203):
-            return QStringLiteral("://schema/pattern/v0.2.3.xsd");
-        case (0x000204):
-            return QStringLiteral("://schema/pattern/v0.2.4.xsd");
-        case (0x000205):
-            return QStringLiteral("://schema/pattern/v0.2.5.xsd");
-        case (0x000206):
-            return QStringLiteral("://schema/pattern/v0.2.6.xsd");
-        case (0x000207):
-            return QStringLiteral("://schema/pattern/v0.2.7.xsd");
-        case (0x000300):
-            return QStringLiteral("://schema/pattern/v0.3.0.xsd");
-        case (0x000301):
-            return QStringLiteral("://schema/pattern/v0.3.1.xsd");
-        case (0x000302):
-            return QStringLiteral("://schema/pattern/v0.3.2.xsd");
-        case (0x000303):
-            return QStringLiteral("://schema/pattern/v0.3.3.xsd");
-        case (0x000304):
-            return QStringLiteral("://schema/pattern/v0.3.4.xsd");
-        case (0x000305):
-            return QStringLiteral("://schema/pattern/v0.3.5.xsd");
-        case (0x000306):
-            return QStringLiteral("://schema/pattern/v0.3.6.xsd");
-        case (0x000307):
-            return QStringLiteral("://schema/pattern/v0.3.7.xsd");
-        case (0x000308):
-            return QStringLiteral("://schema/pattern/v0.3.8.xsd");
-        case (0x000309):
-            return QStringLiteral("://schema/pattern/v0.3.9.xsd");
-        case (0x000400):
-            return QStringLiteral("://schema/pattern/v0.4.0.xsd");
-        case (0x000401):
-            return QStringLiteral("://schema/pattern/v0.4.1.xsd");
-        case (0x000402):
-            return QStringLiteral("://schema/pattern/v0.4.2.xsd");
-        case (0x000403):
-            return QStringLiteral("://schema/pattern/v0.4.3.xsd");
-        case (0x000404):
-            return QStringLiteral("://schema/pattern/v0.4.4.xsd");
-        case (0x000405):
-            return QStringLiteral("://schema/pattern/v0.4.5.xsd");
-        case (0x000406):
-            return QStringLiteral("://schema/pattern/v0.4.6.xsd");
-        case (0x000407):
-            return QStringLiteral("://schema/pattern/v0.4.7.xsd");
-        case (0x000408):
-            return QStringLiteral("://schema/pattern/v0.4.8.xsd");
-        case (0x000500):
-            return QStringLiteral("://schema/pattern/v0.5.0.xsd");
-        case (0x000501):
-            return QStringLiteral("://schema/pattern/v0.5.1.xsd");
-        case (0x000600):
-            return QStringLiteral("://schema/pattern/v0.6.0.xsd");
-        case (0x000601):
-            return QStringLiteral("://schema/pattern/v0.6.1.xsd");
-        case (0x000602):
-            return QStringLiteral("://schema/pattern/v0.6.2.xsd");
-        case (0x000603):
-            return QStringLiteral("://schema/pattern/v0.6.3.xsd");
-        case (0x000604):
-            return QStringLiteral("://schema/pattern/v0.6.4.xsd");
-        case (0x000605):
-            return QStringLiteral("://schema/pattern/v0.6.5.xsd");
-        case (0x000606):
-            return QStringLiteral("://schema/pattern/v0.6.6.xsd");
-        case (0x000700):
-            return QStringLiteral("://schema/pattern/v0.7.0.xsd");
-        case (0x000701):
-            return QStringLiteral("://schema/pattern/v0.7.1.xsd");
-        case (0x000702):
-            return CurrentSchema;
-        default:
-            InvalidVersion(ver);
+        std::make_pair(0x000100, QStringLiteral("://schema/pattern/v0.1.0.xsd")),
+        std::make_pair(0x000101, QStringLiteral("://schema/pattern/v0.1.1.xsd")),
+        std::make_pair(0x000102, QStringLiteral("://schema/pattern/v0.1.2.xsd")),
+        std::make_pair(0x000103, QStringLiteral("://schema/pattern/v0.1.3.xsd")),
+        std::make_pair(0x000104, QStringLiteral("://schema/pattern/v0.1.4.xsd")),
+        std::make_pair(0x000200, QStringLiteral("://schema/pattern/v0.2.0.xsd")),
+        std::make_pair(0x000201, QStringLiteral("://schema/pattern/v0.2.1.xsd")),
+        std::make_pair(0x000202, QStringLiteral("://schema/pattern/v0.2.2.xsd")),
+        std::make_pair(0x000203, QStringLiteral("://schema/pattern/v0.2.3.xsd")),
+        std::make_pair(0x000204, QStringLiteral("://schema/pattern/v0.2.4.xsd")),
+        std::make_pair(0x000205, QStringLiteral("://schema/pattern/v0.2.5.xsd")),
+        std::make_pair(0x000206, QStringLiteral("://schema/pattern/v0.2.6.xsd")),
+        std::make_pair(0x000207, QStringLiteral("://schema/pattern/v0.2.7.xsd")),
+        std::make_pair(0x000300, QStringLiteral("://schema/pattern/v0.3.0.xsd")),
+        std::make_pair(0x000301, QStringLiteral("://schema/pattern/v0.3.1.xsd")),
+        std::make_pair(0x000302, QStringLiteral("://schema/pattern/v0.3.2.xsd")),
+        std::make_pair(0x000303, QStringLiteral("://schema/pattern/v0.3.3.xsd")),
+        std::make_pair(0x000304, QStringLiteral("://schema/pattern/v0.3.4.xsd")),
+        std::make_pair(0x000305, QStringLiteral("://schema/pattern/v0.3.5.xsd")),
+        std::make_pair(0x000306, QStringLiteral("://schema/pattern/v0.3.6.xsd")),
+        std::make_pair(0x000307, QStringLiteral("://schema/pattern/v0.3.7.xsd")),
+        std::make_pair(0x000308, QStringLiteral("://schema/pattern/v0.3.8.xsd")),
+        std::make_pair(0x000309, QStringLiteral("://schema/pattern/v0.3.9.xsd")),
+        std::make_pair(0x000400, QStringLiteral("://schema/pattern/v0.4.0.xsd")),
+        std::make_pair(0x000401, QStringLiteral("://schema/pattern/v0.4.1.xsd")),
+        std::make_pair(0x000402, QStringLiteral("://schema/pattern/v0.4.2.xsd")),
+        std::make_pair(0x000403, QStringLiteral("://schema/pattern/v0.4.3.xsd")),
+        std::make_pair(0x000404, QStringLiteral("://schema/pattern/v0.4.4.xsd")),
+        std::make_pair(0x000405, QStringLiteral("://schema/pattern/v0.4.5.xsd")),
+        std::make_pair(0x000406, QStringLiteral("://schema/pattern/v0.4.6.xsd")),
+        std::make_pair(0x000407, QStringLiteral("://schema/pattern/v0.4.7.xsd")),
+        std::make_pair(0x000408, QStringLiteral("://schema/pattern/v0.4.8.xsd")),
+        std::make_pair(0x000500, QStringLiteral("://schema/pattern/v0.5.0.xsd")),
+        std::make_pair(0x000501, QStringLiteral("://schema/pattern/v0.5.1.xsd")),
+        std::make_pair(0x000600, QStringLiteral("://schema/pattern/v0.6.0.xsd")),
+        std::make_pair(0x000601, QStringLiteral("://schema/pattern/v0.6.1.xsd")),
+        std::make_pair(0x000602, QStringLiteral("://schema/pattern/v0.6.2.xsd")),
+        std::make_pair(0x000603, QStringLiteral("://schema/pattern/v0.6.3.xsd")),
+        std::make_pair(0x000604, QStringLiteral("://schema/pattern/v0.6.4.xsd")),
+        std::make_pair(0x000605, QStringLiteral("://schema/pattern/v0.6.5.xsd")),
+        std::make_pair(0x000606, QStringLiteral("://schema/pattern/v0.6.6.xsd")),
+        std::make_pair(0x000700, QStringLiteral("://schema/pattern/v0.7.0.xsd")),
+        std::make_pair(0x000701, QStringLiteral("://schema/pattern/v0.7.1.xsd")),
+        std::make_pair(0x000702, QStringLiteral("://schema/pattern/v0.7.2.xsd")),
+        std::make_pair(0x000703, CurrentSchema)
+    };
+
+    if (schemas.contains(ver))
+    {
+        return schemas.value(ver);
+    }
+    else
+    {
+        InvalidVersion(ver);
     }
 }
 
@@ -446,6 +410,10 @@ void VPatternConverter::ApplyPatches()
             ValidateXML(XSDSchema(0x000702), m_convertedFileName);
             V_FALLTHROUGH
         case (0x000702):
+            ToV0_7_3();
+            ValidateXML(XSDSchema(0x000703), m_convertedFileName);
+            V_FALLTHROUGH
+        case (0x000703):
             break;
         default:
             InvalidVersion(m_ver);
@@ -463,7 +431,7 @@ void VPatternConverter::DowngradeToCurrentMaxVersion()
 bool VPatternConverter::IsReadOnly() const
 {
     // Check if attribute readOnly was not changed in file format
-    Q_STATIC_ASSERT_X(VPatternConverter::PatternMaxVer == CONVERTER_VERSION_CHECK(0, 7, 2),
+    Q_STATIC_ASSERT_X(VPatternConverter::PatternMaxVer == CONVERTER_VERSION_CHECK(0, 7, 3),
                       "Check attribute readOnly.");
 
     // Possibly in future attribute readOnly will change position etc.
@@ -954,6 +922,16 @@ void VPatternConverter::ToV0_7_2()
     Q_STATIC_ASSERT_X(VPatternConverter::PatternMinVer < CONVERTER_VERSION_CHECK(0, 7, 2),
                       "Time to refactor the code.");
     SetVersion(QStringLiteral("0.7.2"));
+    Save();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VPatternConverter::ToV0_7_3()
+{
+    // TODO. Delete if minimal supported version is 0.7.3
+    Q_STATIC_ASSERT_X(VPatternConverter::PatternMinVer < CONVERTER_VERSION_CHECK(0, 7, 3),
+                      "Time to refactor the code.");
+    SetVersion(QStringLiteral("0.7.3"));
     Save();
 }
 

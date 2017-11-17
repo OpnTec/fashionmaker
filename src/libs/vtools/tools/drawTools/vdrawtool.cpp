@@ -237,8 +237,11 @@ void VDrawTool::AddToCalculation(const QDomElement &domElement)
 //---------------------------------------------------------------------------------------------------------------------
 void VDrawTool::AddDependence(QList<quint32> &list, quint32 objectId) const
 {
-    auto originPoint = VAbstractTool::data.GetGObject(objectId);
-    list.append(originPoint->getIdTool());
+    if (objectId != NULL_ID)
+    {
+        auto originPoint = VAbstractTool::data.GetGObject(objectId);
+        list.append(originPoint->getIdTool());
+    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------

@@ -51,12 +51,14 @@ struct VToolMoveInitData : VAbstractOperationInitData
         : VAbstractOperationInitData(),
           formulaAngle(),
           formulaRotationAngle(),
-          formulaLength()
+          formulaLength(),
+          rotationOrigin(NULL_ID)
     {}
 
     QString formulaAngle;
     QString formulaRotationAngle;
     QString formulaLength;
+    quint32 rotationOrigin;
 };
 
 class VToolMove : public VAbstractOperation
@@ -83,6 +85,8 @@ public:
     VFormula GetFormulaLength() const;
     void     SetFormulaLength(const VFormula &value);
 
+    QString OriginPointName() const;
+
     virtual void ShowVisualization(bool show) Q_DECL_OVERRIDE;
 protected slots:
     virtual void ShowContextMenu(QGraphicsSceneContextMenuEvent *event, quint32 id=NULL_ID) Q_DECL_OVERRIDE;
@@ -98,6 +102,7 @@ private:
     QString formulaAngle;
     QString formulaRotationAngle;
     QString formulaLength;
+    quint32 origPointId;
 
     VToolMove(const VToolMoveInitData &initData, QGraphicsItem *parent = nullptr);
 

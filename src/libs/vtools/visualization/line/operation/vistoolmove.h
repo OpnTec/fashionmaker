@@ -62,6 +62,8 @@ public:
     qreal   LengthValue() const;
     void    SetLength(const QString &expression);
 
+    void SetRotationOriginPointId(quint32 value);
+
     virtual int type() const Q_DECL_OVERRIDE {return Type;}
     enum { Type = UserType + static_cast<int>(Vis::ToolMove)};
 private:
@@ -70,6 +72,7 @@ private:
     qreal           rotationAngle;
     qreal           length;
     VScaledEllipse *pointOrigin;
+    VScaledEllipse *pointRotationOrigin;
     VScaledEllipse *pointFinish;
     VCurvePathItem *angleArc;
     VScaledLine    *rotationLine;

@@ -65,6 +65,9 @@ public:
     QString GetSuffix() const;
     void    SetSuffix(const QString &value);
 
+    quint32 GetRotationOrigPointId() const;
+    void    SetRotationOrigPointId(const quint32 &value);
+
     QVector<quint32> GetObjects() const;
 
     virtual void ShowDialog(bool click) Q_DECL_OVERRIDE;
@@ -127,6 +130,8 @@ private:
     bool stage2;
 
     QString m_suffix;
+
+    bool optionalRotationOrigin;
 
     void EvalAngle();
     void EvalRotationAngle();

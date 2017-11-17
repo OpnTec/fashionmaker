@@ -81,7 +81,8 @@ DialogMove::DialogMove(const VContainer *data, quint32 toolId, QWidget *parent)
       objects(),
       stage1(true),
       stage2(false),
-      m_suffix()
+      m_suffix(),
+      optionalRotationOrigin(false)
 {
     ui->setupUi(this);
 
@@ -107,6 +108,12 @@ DialogMove::DialogMove(const VContainer *data, quint32 toolId, QWidget *parent)
 
     InitOkCancelApply(ui);
 
+    FillComboBoxPoints(ui->comboBoxRotationOriginPoint);
+
+    ui->comboBoxRotationOriginPoint->blockSignals(true);
+    ui->comboBoxRotationOriginPoint->addItem(tr("Center point"), NULL_ID);
+    ui->comboBoxRotationOriginPoint->blockSignals(false);
+
     flagName = true;
     CheckState();
 
@@ -122,6 +129,8 @@ DialogMove::DialogMove(const VContainer *data, quint32 toolId, QWidget *parent)
     connect(ui->pushButtonGrowLength, &QPushButton::clicked, this, &DialogMove::DeployLengthTextEdit);
 
     vis = new VisToolMove(data);
+
+    SetRotationOrigPointId(NULL_ID);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -216,6 +225,21 @@ void DialogMove::SetSuffix(const QString &value)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+quint32 DialogMove::GetRotationOrigPointId() const
+{
+    return getCurrentObjectId(ui->comboBoxRotationOriginPoint);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogMove::SetRotationOrigPointId(const quint32 &value)
+{
+    ChangeCurrentData(ui->comboBoxRotationOriginPoint, value);
+    VisToolMove *operation = qobject_cast<VisToolMove *>(vis);
+    SCASSERT(operation != nullptr)
+    operation->SetRotationOriginPointId(value);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 QVector<quint32> DialogMove::GetObjects() const
 {
     return objects.toVector();
@@ -278,24 +302,49 @@ void DialogMove::ShowDialog(bool click)
         VisToolMove *operation = qobject_cast<VisToolMove *>(vis);
         SCASSERT(operation != nullptr)
 
-        SetAngle(qApp->TrVars()->FormulaFromUser(formulaAngle, qApp->Settings()->GetOsSeparator()));
-        SetLength(qApp->TrVars()->FormulaFromUser(formulaLength, qApp->Settings()->GetOsSeparator()));
-        SetRotationAngle(operation->RotationAngle());
-        setModal(true);
-        emit ToolTip("");
-        timerAngle->start();
-        timerRotationAngle->start();
-        timerLength->start();
-        show();
+        if (QGuiApplication::keyboardModifiers() == Qt::ControlModifier)
+        {
+            if (not optionalRotationOrigin)
+            {
+                operation->SetRotationOriginPointId(NULL_ID);
+                SetObject(NULL_ID, ui->comboBoxRotationOriginPoint, "");
+                operation->RefreshGeometry();
+            }
+            optionalRotationOrigin = false; // Handled, next click on empty filed will disable selection
+        }
+        else
+        {
+            SetAngle(qApp->TrVars()->FormulaFromUser(formulaAngle, qApp->Settings()->GetOsSeparator()));
+            SetLength(qApp->TrVars()->FormulaFromUser(formulaLength, qApp->Settings()->GetOsSeparator()));
+            SetRotationAngle(operation->RotationAngle());
+            setModal(true);
+            emit ToolTip("");
+            timerAngle->start();
+            timerRotationAngle->start();
+            timerLength->start();
+            show();
+        }
     }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void DialogMove::ChosenObject(quint32 id, const SceneObject &type)
 {
-    Q_UNUSED(id)
-    Q_UNUSED(type)
-    // do nothing
+    if (not stage1 && stage2 && prepare)// After first choose we ignore all objects
+    {
+        if (type == SceneObject::Point && QGuiApplication::keyboardModifiers() == Qt::ControlModifier)
+        {
+            if (SetObject(id, ui->comboBoxRotationOriginPoint, ""))
+            {
+                VisToolMove *operation = qobject_cast<VisToolMove *>(vis);
+                SCASSERT(operation != nullptr)
+
+                operation->SetRotationOriginPointId(id);
+                operation->RefreshGeometry();
+                optionalRotationOrigin = true;
+            }
+        }
+    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -478,6 +527,7 @@ void DialogMove::SaveData()
     operation->SetAngle(formulaAngle);
     operation->SetLength(formulaLength);
     operation->SetRotationAngle(formulaRotationAngle);
+    operation->SetRotationOriginPointId(GetRotationOrigPointId());
     operation->RefreshGeometry();
 }
 

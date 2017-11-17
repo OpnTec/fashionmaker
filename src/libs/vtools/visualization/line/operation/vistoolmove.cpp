@@ -64,12 +64,14 @@ VisToolMove::VisToolMove(const VContainer *data, QGraphicsItem *parent)
       rotationAngle(INT_MIN),
       length(0),
       pointOrigin(nullptr),
+      pointRotationOrigin(nullptr),
       pointFinish(nullptr),
       angleArc(nullptr),
       rotationLine(nullptr),
       xAxis(nullptr)
 {
     pointOrigin = InitPoint(supportColor2, this);
+    pointRotationOrigin = InitPoint(supportColor2, this);
     pointFinish = InitPoint(supportColor, this);
     angleArc = InitItem<VCurvePathItem>(supportColor3, this);
     rotationLine = InitItem<VScaledLine>(supportColor3, this);
@@ -89,7 +91,7 @@ void VisToolMove::RefreshGeometry()
 
     const QVector<QGraphicsItem *> originObjects = CreateOriginObjects(iPoint, iCurve);
 
-    const QPointF origin = GetOriginPoint(originObjects);
+    QPointF origin = GetOriginPoint(originObjects);
     DrawPoint(pointOrigin, origin, supportColor2);
 
     qreal tempAngle = 0;
@@ -118,10 +120,21 @@ void VisToolMove::RefreshGeometry()
         tempAngle = angle;
         tempLength = length;
 
+        if (object1Id != NULL_ID)
+        {
+            origin = Visualization::data->GeometricObject<VPointF>(object1Id)->toQPointF();
+            DrawPoint(pointRotationOrigin, origin, supportColor2);
+        }
+        else
+        {
+            origin = line.p2();
+            pointRotationOrigin->setVisible(false);
+        }
+
         QLineF rLine;
         if (VFuzzyComparePossibleNulls(rotationAngle, INT_MIN))
         {
-            rLine = QLineF(line.p2(), Visualization::scenePos);
+            rLine = QLineF(origin, Visualization::scenePos);
 
             if (QGuiApplication::keyboardModifiers() == Qt::ShiftModifier)
             {
@@ -129,7 +142,7 @@ void VisToolMove::RefreshGeometry()
             }
 
             qreal cursorLength = rLine.length();
-            rLine.setP2(Ray(line.p2(), rLine.angle()));
+            rLine.setP2(Ray(origin, rLine.angle()));
             //Radius of point circle, but little bigger. Need handle with hover sizes.
             qreal minL = ScaledRadius(SceneScale(qApp->getCurrentScene()))*1.5;
             if (cursorLength > minL)
@@ -143,14 +156,14 @@ void VisToolMove::RefreshGeometry()
         }
         else
         {
-            rLine = QLineF(line.p2(), Ray(line.p2(), rotationAngle));
+            rLine = QLineF(origin, Ray(origin, rotationAngle));
             tempRoationAngle = rotationAngle;
         }
 
         DrawLine(rotationLine, rLine, supportColor3, Qt::DashLine);
-        DrawLine(xAxis, QLineF(line.p2(), Ray(line.p2(), 0)), supportColor3, Qt::DashLine);
+        DrawLine(xAxis, QLineF(origin, Ray(origin, 0)), supportColor3, Qt::DashLine);
 
-        VArc arc(VPointF(line.p2()), ScaledRadius(SceneScale(qApp->getCurrentScene()))*2, 0, tempRoationAngle);
+        VArc arc(VPointF(origin), ScaledRadius(SceneScale(qApp->getCurrentScene()))*2, 0, tempRoationAngle);
         DrawPath(angleArc, arc.GetPath(), supportColor3, Qt::SolidLine, Qt::RoundCap);
     }
     DrawLine(this, line, supportColor2, Qt::DashLine);
@@ -169,7 +182,7 @@ void VisToolMove::RefreshGeometry()
     else
     {
         Visualization::toolTip = tr("Length = %1%2, angle = %3°, rotation angle = %4°, <b>Shift</b> - sticking angle, "
-                                    "<b>Mouse click</b> - finish creating")
+                                    "<b>Ctrl</b> - change rotation origin point, <b>Mouse click</b> - finish creating")
                 .arg(qApp->TrVars()->FormulaToUser(QString::number(qApp->fromPixel(tempLength)),
                                                    qApp->Settings()->GetOsSeparator()))
                 .arg(prefix)
@@ -177,7 +190,7 @@ void VisToolMove::RefreshGeometry()
                 .arg(tempRoationAngle);
     }
 
-    CreateMovedRotatedObjects(iPoint, iCurve, tempLength, tempAngle, tempRoationAngle, line.p2());
+    CreateMovedRotatedObjects(iPoint, iCurve, tempLength, tempAngle, tempRoationAngle, origin);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -220,6 +233,12 @@ qreal VisToolMove::LengthValue() const
 void VisToolMove::SetLength(const QString &expression)
 {
     length = FindLengthFromUser(expression, Visualization::data->DataVariables());
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VisToolMove::SetRotationOriginPointId(quint32 value)
+{
+    object1Id = value;
 }
 
 //---------------------------------------------------------------------------------------------------------------------

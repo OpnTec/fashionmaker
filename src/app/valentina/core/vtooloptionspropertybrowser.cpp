@@ -1852,6 +1852,8 @@ void VToolOptionsPropertyBrowser::ChangeDataToolMove(VPE::VProperty *property)
         case 42: // AttrRotationAngle
             i->SetFormulaRotationAngle(value.value<VFormula>());
             break;
+        case 11: // AttrCenter (read only)
+            break;
         default:
             qWarning()<<"Unknown property type. id = "<<id;
             break;
@@ -2420,6 +2422,7 @@ void VToolOptionsPropertyBrowser::ShowOptionsToolMove(QGraphicsItem *item)
     AddPropertyFormula(tr("Angle:"), i->GetFormulaAngle(), AttrAngle);
     AddPropertyFormula(tr("Length:"), i->GetFormulaLength(), AttrLength);
     AddPropertyFormula(tr("Rotation angle:"), i->GetFormulaRotationAngle(), AttrRotationAngle);
+    AddPropertyParentPointName(i->OriginPointName(), tr("Rotation origin point:"), AttrCenter);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -3240,6 +3243,10 @@ void VToolOptionsPropertyBrowser::UpdateOptionsToolMove()
     QVariant valueRotationAngle;
     valueRotationAngle.setValue(i->GetFormulaRotationAngle());
     idToProperty[AttrRotationAngle]->setValue(valueRotationAngle);
+
+    QVariant valueRotationOriginPoint;
+    valueRotationOriginPoint.setValue(i->OriginPointName());
+    idToProperty[AttrCenter]->setValue(valueRotationOriginPoint);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
