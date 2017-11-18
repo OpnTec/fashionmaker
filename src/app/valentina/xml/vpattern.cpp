@@ -2871,6 +2871,7 @@ void VPattern::ParseToolEllipticalArc(VMainGraphicsScene *scene, QDomElement &do
         const QString frotationFix = initData.rotationAngle;//need for saving fixed formula;
         initData.color = GetParametrString(domElement, AttrColor, ColorBlack);
         initData.penStyle = GetParametrString(domElement, AttrPenStyle, TypeLineLine);
+        initData.approximationScale = GetParametrDouble(domElement, AttrAScale, "0");
 
         VToolEllipticalArc::Create(initData);
         //Rewrite attribute formula. Need for situation when we have wrong formula.

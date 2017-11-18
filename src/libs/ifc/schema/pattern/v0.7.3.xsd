@@ -311,6 +311,7 @@
                           <xs:attribute name="color" type="colors"/>
                           <xs:attribute name="penStyle" type="curvePenStyle"/>
                           <xs:attribute name="length" type="xs:string"/>
+                          <xs:attribute name="aScale" type="ApproximationScaleType"/>
                         </xs:complexType>
                       </xs:element>
                       <xs:element name="spline" minOccurs="0" maxOccurs="unbounded">

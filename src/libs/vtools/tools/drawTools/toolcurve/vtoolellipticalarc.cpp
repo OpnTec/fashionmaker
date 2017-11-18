@@ -123,6 +123,7 @@ VToolEllipticalArc* VToolEllipticalArc::Create(QSharedPointer<DialogTool> dialog
     initData.data = data;
     initData.parse = Document::FullParse;
     initData.typeCreation = Source::FromGui;
+    //initData.approximationScale = dialogTool->GetApproximationScale(); // For future use
 
     VToolEllipticalArc* point = Create(initData);
     if (point != nullptr)
@@ -155,6 +156,7 @@ VToolEllipticalArc* VToolEllipticalArc::Create(VToolEllipticalArcInitData &initD
                                                initData.rotationAngle);
     elArc->SetColor(initData.color);
     elArc->SetPenStyle(initData.penStyle);
+    elArc->SetApproximationScale(initData.approximationScale);
 
     if (initData.typeCreation == Source::FromGui)
     {
