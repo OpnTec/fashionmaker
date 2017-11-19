@@ -153,6 +153,7 @@ VToolMove *VToolMove::Create(QSharedPointer<DialogTool> dialog, VMainGraphicsSce
     initData.formulaAngle = dialogTool->GetAngle();
     initData.formulaRotationAngle = dialogTool->GetRotationAngle();
     initData.formulaLength = dialogTool->GetLength();
+    initData.rotationOrigin = dialogTool->GetRotationOrigPointId();
     initData.suffix = dialogTool->GetSuffix();
     initData.source = dialogTool->GetObjects();
     initData.scene = scene;
