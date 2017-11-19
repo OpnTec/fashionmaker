@@ -4151,6 +4151,7 @@ void VPattern::PrepareForParse(const Document &parse)
     else if (parse == Document::LiteParse)
     {
         VContainer::ClearUniqueNames();
+        Q_STATIC_ASSERT_X(static_cast<int>(VarType::Unknown) == 8, "Check that you used all types");
         data->ClearVariables(VarType::Increment);
         data->ClearVariables(VarType::LineAngle);
         data->ClearVariables(VarType::LineLength);

@@ -280,6 +280,7 @@ void VContainer::ClearForFullParse()
 
     d->pieces->clear();
     d->piecePaths->clear();
+    Q_STATIC_ASSERT_X(static_cast<int>(VarType::Unknown) == 8, "Check that you used all types");
     ClearVariables(VarType::Increment);
     ClearVariables(VarType::LineAngle);
     ClearVariables(VarType::LineLength);
