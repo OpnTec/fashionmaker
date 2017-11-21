@@ -96,7 +96,7 @@ qreal CSR(qreal length, qreal split, qreal arcLength)
             return angle;
         }
 
-        if (angle < 0 || angle >= 360)
+        if (angle < 0.00001 || angle >= 360)
         {
             return 0;
         }
