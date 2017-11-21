@@ -63,6 +63,8 @@ public:
     virtual void incrementReferens() Q_DECL_OVERRIDE;
     virtual void decrementReferens() Q_DECL_OVERRIDE;
 
+    void RefreshGeometry();
+
     static void AddAttributes(VAbstractPattern *doc, QDomElement &domElement, quint32 id, const VPiecePath &path);
 public slots:
     virtual void FullUpdateFromFile () Q_DECL_OVERRIDE;
@@ -80,8 +82,6 @@ private:
 
     VToolPiecePath(const VToolPiecePathInitData &initData, QObject *qoParent = nullptr,
                    QGraphicsItem *parent = nullptr);
-
-    void RefreshGeometry();
 
     void IncrementNodes(const VPiecePath &path) const;
     void DecrementNodes(const VPiecePath &path) const;

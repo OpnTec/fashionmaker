@@ -578,7 +578,8 @@ void VToolSeamAllowance::GroupVisibility(quint32 object, bool visible)
 //---------------------------------------------------------------------------------------------------------------------
 void VToolSeamAllowance::FullUpdateFromFile()
 {
-    RefreshGeometry();
+    const bool updateChildren = false;// Chilren have their own signals. Avoid double refresh.
+    RefreshGeometry(updateChildren);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -1309,7 +1310,27 @@ void VToolSeamAllowance::UpdateExcludeState()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VToolSeamAllowance::RefreshGeometry()
+void VToolSeamAllowance::UpdateInternalPaths()
+{
+    const VPiece detail = VAbstractTool::data.GetPiece(m_id);
+    for (int i = 0; i < detail.GetInternalPaths().size(); ++i)
+    {
+        try
+        {
+            if (auto *tool = qobject_cast<VToolPiecePath*>(VAbstractPattern::getTool(detail.GetInternalPaths().at(i))))
+            {
+                tool->RefreshGeometry();
+            }
+        }
+        catch(const VExceptionBadId &)
+        {
+            // ignore
+        }
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VToolSeamAllowance::RefreshGeometry(bool updateChildren)
 {
     this->setFlag(QGraphicsItem::ItemSendsGeometryChanges, false);
 
@@ -1361,6 +1382,10 @@ void VToolSeamAllowance::RefreshGeometry()
     UpdatePatternInfo();
     UpdateGrainline();
     UpdateExcludeState();
+    if (updateChildren)
+    {
+        UpdateInternalPaths();
+    }
 
     this->setFlag(QGraphicsItem::ItemSendsGeometryChanges, true);
 }
