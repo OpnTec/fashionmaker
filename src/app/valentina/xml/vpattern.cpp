@@ -3337,8 +3337,7 @@ void VPattern::MoveUpIncrement(const QString &type, const QString &name)
         const QDomElement prSibling = node.previousSiblingElement(TagIncrement);
         if (not prSibling.isNull())
         {
-            const QDomNodeList list = elementsByTagName(type);
-            list.at(0).insertBefore(node, prSibling);
+            elementsByTagName(type).at(0).insertBefore(node, prSibling);
         }
     }
     emit patternChanged(false);
@@ -3353,8 +3352,7 @@ void VPattern::MoveDownIncrement(const QString &type, const QString &name)
         const QDomElement nextSibling = node.nextSiblingElement(TagIncrement);
         if (not nextSibling.isNull())
         {
-            const QDomNodeList list = elementsByTagName(type);
-            list.at(0).insertAfter(node, nextSibling);
+            elementsByTagName(type).at(0).insertAfter(node, nextSibling);
         }
     }
     emit patternChanged(false);
@@ -3751,7 +3749,7 @@ void VPattern::MoveUpPreviewCalculation(const QString &name)
 //---------------------------------------------------------------------------------------------------------------------
 void VPattern::MoveDownIncrement(const QString &name)
 {
-    MoveDownIncrement(TagIncrement, name);
+    MoveDownIncrement(TagIncrements, name);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
