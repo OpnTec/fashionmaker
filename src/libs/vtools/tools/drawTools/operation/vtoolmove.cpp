@@ -472,6 +472,7 @@ void VToolMove::SaveDialog(QDomElement &domElement, QList<quint32> &oldDependenc
     doc->SetAttribute(domElement, AttrLength, dialogTool->GetLength());
     doc->SetAttribute(domElement, AttrSuffix, dialogTool->GetSuffix());
     doc->SetAttribute(domElement, AttrCenter, QString().setNum(dialogTool->GetRotationOrigPointId()));
+    doc->SetAttribute(domElement, AttrRotationAngle, dialogTool->GetRotationAngle());
 }
 
 //---------------------------------------------------------------------------------------------------------------------
