@@ -1274,8 +1274,9 @@ VToolSeamAllowance::VToolSeamAllowance(const VToolSeamAllowanceInitData &initDat
 {
     VPiece detail = initData.data->GetPiece(initData.id);
     ReinitInternals(detail, m_sceneDetails);
-    this->setFlag(QGraphicsItem::ItemIsMovable, true);
-    this->setFlag(QGraphicsItem::ItemIsSelectable, true);
+    AllowSelecting(true);
+    EnableToolMove(true);
+    AllowHover(true);
     RefreshGeometry();
 
     this->setFlag(QGraphicsItem::ItemSendsGeometryChanges, true);
