@@ -150,9 +150,25 @@ void SymlinkCopyDirRecursive(const QString &fromDir, const QString &toDir, bool 
         to = to + QLatin1String(".lnk");
 #endif
 
-        if (QFile::exists(to))
+        QFileInfo fileTo(to);
+        if (not fileTo.isSymLink() && fileTo.exists())
         {
             if (replaceOnConflit)
+            {
+                QFile::remove(to);
+            }
+            else
+            {
+                continue;
+            }
+        }
+        else if (fileTo.isSymLink())
+        {
+            if (not fileTo.exists())
+            { // automatically fix broken symlink
+                QFile::remove(to);
+            }
+            else if (replaceOnConflit)
             {
                 QFile::remove(to);
             }
