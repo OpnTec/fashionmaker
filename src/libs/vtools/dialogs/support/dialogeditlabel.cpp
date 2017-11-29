@@ -337,7 +337,7 @@ void DialogEditLabel::ImportTemplate()
         }
     }
 
-    QString filter(tr("Label template") + QLatin1String("(*.xml)"));
+    QString filter(tr("Label template") + QLatin1String(" (*.xml)"));
     //Use standard path to label templates
     const QString path = VCommonSettings::PrepareLabelTemplates(qApp->Settings()->GetPathLabelTemplate());
     const QString fileName = QFileDialog::getOpenFileName(this, tr("Import template"), path, filter, nullptr,
