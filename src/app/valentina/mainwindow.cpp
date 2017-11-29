@@ -2847,7 +2847,7 @@ bool MainWindow::Save()
 void MainWindow::Open()
 {
     qCDebug(vMainWindow, "Openning new file.");
-    const QString filter(tr("Pattern files (*.val)"));
+    const QString filter(tr("Pattern files") + QLatin1String(" (*.val)"));
     //Get list last open files
     const QStringList files = qApp->ValentinaSettings()->GetRecentFileList();
     QString dir;
