@@ -24,7 +24,7 @@
   </xs:element>
   <xs:simpleType name="formatVersion">
     <xs:restriction base="xs:string">
-      <xs:pattern value="^(0|([1-9][0-9]*))\.(0|([1-9][0-9]*))\.(0|([1-9][0-9]*))$"/>
+      <xs:pattern value="[0-9]{1,}\.[0-9]{1,}\.[0-9]{1,}"/>
     </xs:restriction>
   </xs:simpleType>
   <xs:simpleType name="alignmentType">
