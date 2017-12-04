@@ -53,8 +53,10 @@ QmuTokenParser::QmuTokenParser()
  *
  * @param formula string with formula.
  * @param fromUser true if we parse formula from user
+ * @param translatedFunctions
  */
-QmuTokenParser::QmuTokenParser(const QString &formula, bool osSeparator, bool fromUser)
+QmuTokenParser::QmuTokenParser(const QString &formula, bool osSeparator,
+                               bool fromUser, const QMap<QString, QString> &translatedFunctions)
     :QmuFormulaBase()
 {
     InitCharSets();
@@ -63,14 +65,24 @@ QmuTokenParser::QmuTokenParser(const QString &formula, bool osSeparator, bool fr
 
     SetSepForTr(osSeparator, fromUser);
 
+    // Fix for issue #776. Valentina cannot recognize translated functions.
+    QMap<QString, QString>::const_iterator i = translatedFunctions.constBegin();
+    while (i != translatedFunctions.constEnd())
+    {
+        if (i.key() != i.value())
+        {
+            auto search = m_FunDef.find(i.value());
+            if(search != m_FunDef.end())
+            {
+                AddCallback(i.key(), search->second, m_FunDef, ValidNameChars());
+            }
+        }
+        ++i;
+    }
+
     SetExpr(formula);
     //Need run for making tokens. Don't catch exception here, because we want know if formula has error.
     Eval();
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-QmuTokenParser::~QmuTokenParser()
-{
 }
 
 //---------------------------------------------------------------------------------------------------------------------

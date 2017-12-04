@@ -86,7 +86,6 @@ QmuParserCallback::QmuParserCallback ( fun_type3 a_pFun, bool a_bAllowOpti )
       m_iCode ( cmFUNC ), m_iType ( tpDBL ), m_bAllowOpti ( a_bAllowOpti )
 {}
 
-
 //---------------------------------------------------------------------------------------------------------------------
 #ifdef __GNUC__
 __extension__
@@ -95,7 +94,6 @@ QmuParserCallback::QmuParserCallback ( fun_type4 a_pFun, bool a_bAllowOpti )
     : m_pFun ( reinterpret_cast<void*> ( a_pFun ) ), m_iArgc ( 4 ), m_iPri ( -1 ), m_eOprtAsct ( oaNONE ),
       m_iCode ( cmFUNC ), m_iType ( tpDBL ), m_bAllowOpti ( a_bAllowOpti )
 {}
-
 
 //---------------------------------------------------------------------------------------------------------------------
 #ifdef __GNUC__

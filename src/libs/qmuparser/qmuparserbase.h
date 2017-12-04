@@ -138,8 +138,11 @@ protected:
     QLocale m_locale;///< The locale used by the parser
     QChar m_decimalPoint;
     QChar m_thousandsSeparator;
+    funmap_type  m_FunDef;         ///< Map of function names and pointers.
     static bool g_DbgDumpCmdCode;
     static bool g_DbgDumpStack;
+    void AddCallback(const QString &a_strName, const QmuParserCallback &a_Callback, funmap_type &a_Storage,
+                     const QString &a_szCharSet );
     void Init();
     virtual void InitCharSets() = 0;
     virtual void InitFun() = 0;
@@ -228,7 +231,6 @@ private:
 
     std::unique_ptr<token_reader_type> m_pTokenReader; ///< Managed pointer to the token reader object.
 
-    funmap_type  m_FunDef;         ///< Map of function names and pointers.
     funmap_type  m_PostOprtDef;    ///< Postfix operator callbacks
     funmap_type  m_InfixOprtDef;   ///< unary infix operator.
     funmap_type  m_OprtDef;        ///< Binary operator callbacks
@@ -255,8 +257,6 @@ private:
     void               Assign(const QmuParserBase &a_Parser);
     void               InitTokenReader();
     void               ReInit() const;
-    void               AddCallback(const QString &a_strName, const QmuParserCallback &a_Callback,
-                                   funmap_type &a_Storage, const QString &a_szCharSet );
     void               ApplyRemainingOprt(QStack<token_type> &a_stOpt, QStack<token_type> &a_stVal) const;
     void               ApplyBinOprt(QStack<token_type> &a_stOpt, QStack<token_type> &a_stVal) const;
     void               ApplyIfElse(QStack<token_type> &a_stOpt, QStack<token_type> &a_stVal) const;
