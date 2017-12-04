@@ -53,7 +53,8 @@ QmuTokenParser::QmuTokenParser()
  *
  * @param formula string with formula.
  * @param fromUser true if we parse formula from user
- * @param translatedFunctions
+ * @param translatedFunctions relations between translated function names and original. Contains only translated unique
+ * names.
  */
 QmuTokenParser::QmuTokenParser(const QString &formula, bool osSeparator,
                                bool fromUser, const QMap<QString, QString> &translatedFunctions)
