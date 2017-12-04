@@ -1056,7 +1056,7 @@
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="672"/>
         <source>size</source>
         <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
-        <translation type="unfinished"></translation>
+        <translation>Grösse</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="674"/>
@@ -1068,7 +1068,7 @@
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="675"/>
         <source>Same as bust_arc_f.</source>
         <comment>Full measurement description.</comment>
-        <translation type="unfinished"></translation>
+        <translation>Gleich wie brust_umfang_v</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="679"/>

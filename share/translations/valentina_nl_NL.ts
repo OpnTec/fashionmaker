@@ -599,7 +599,7 @@
     </message>
     <message>
         <source>Angles equal</source>
-        <translation>Gelijke zijden</translation>
+        <translation type="vanished">Gelijke zijden</translation>
     </message>
     <message>
         <source>Color</source>
@@ -2091,7 +2091,7 @@
     </message>
     <message>
         <source>Angles equal</source>
-        <translation>Gelijke hoeken</translation>
+        <translation type="vanished">Gelijke hoeken</translation>
     </message>
     <message>
         <source>Edit radius1</source>
@@ -3599,11 +3599,19 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Rotation angle:</source>
-        <translation type="unfinished">Hoek van draaiing:</translation>
+        <translation>Hoek van draaiing:</translation>
     </message>
     <message>
         <source>Edit rotation angle</source>
-        <translation type="unfinished">Bewerk de grootte van de hoek</translation>
+        <translation>Bewerk de grootte van de hoek</translation>
+    </message>
+    <message>
+        <source>Rotation origin point:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Center point</source>
+        <translation type="unfinished">Middelste punt</translation>
     </message>
 </context>
 <context>
@@ -5199,20 +5207,20 @@ Apply settings anyway?</source>
         <translation type="unfinished">Papier Formaat</translation>
     </message>
     <message>
-        <source>Templates: </source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Orientation: </source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Browse…</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <source>cm</source>
         <translation type="unfinished">cm</translation>
+    </message>
+    <message>
+        <source>Templates:</source>
+        <translation type="unfinished">Sjablonen:</translation>
+    </message>
+    <message>
+        <source>Orientation:</source>
+        <translation type="unfinished">Orientatie:</translation>
     </message>
 </context>
 <context>
@@ -6807,7 +6815,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Pattern files (*.val)</source>
-        <translation>Patroon bestanden (*.val)</translation>
+        <translation type="vanished">Patroon bestanden (*.val)</translation>
     </message>
     <message>
         <source>pattern</source>
@@ -11649,6 +11657,18 @@ Wil je deze veranderingen opslaan?</translation>
         <source>Length</source>
         <translation type="unfinished">Lengte</translation>
     </message>
+    <message>
+        <source>Center point</source>
+        <translation type="unfinished">Middelste punt</translation>
+    </message>
+    <message>
+        <source>Angle</source>
+        <translation type="unfinished">Hoek</translation>
+    </message>
+    <message>
+        <source>Rotation origin point</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>VToolOptionsPropertyBrowser</name>
@@ -12178,6 +12198,10 @@ Wil je deze veranderingen opslaan?</translation>
     </message>
     <message>
         <source>Approximation scale:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Rotation origin point:</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -13306,17 +13330,17 @@ Wil je deze veranderingen opslaan?</translation>
     <message>
         <source>cm</source>
         <comment>centimeter</comment>
-        <translation>cm</translation>
+        <translation type="vanished">cm</translation>
     </message>
     <message>
         <source>mm</source>
         <comment>millimeter</comment>
-        <translation>mm</translation>
+        <translation type="vanished">mm</translation>
     </message>
     <message>
         <source>in</source>
         <comment>inch</comment>
-        <translation>in</translation>
+        <translation type="vanished">in</translation>
     </message>
     <message>
         <source>Line_</source>
@@ -13797,7 +13821,7 @@ Wil je deze veranderingen opslaan?</translation>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Length = %1%2, angle = %3°, rotation angle = %4°, &lt;b&gt;Shift&lt;/b&gt; - sticking angle, &lt;b&gt;Mouse click&lt;/b&gt; - finish creating</source>
+        <source>Length = %1%2, angle = %3°, rotation angle = %4°, &lt;b&gt;Shift&lt;/b&gt; - sticking angle, &lt;b&gt;Ctrl&lt;/b&gt; - change rotation origin point, &lt;b&gt;Mouse click&lt;/b&gt; - finish creating</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

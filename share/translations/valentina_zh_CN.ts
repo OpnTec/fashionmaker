@@ -425,10 +425,6 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Angles equal</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Color</source>
         <translation type="vanished">颜色</translation>
     </message>
@@ -1482,10 +1478,6 @@
     </message>
     <message>
         <source>Radius can&apos;t be negative</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Angles equal</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -2773,6 +2765,14 @@ Apply settings anyway?</source>
         <source>Edit rotation angle</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Rotation origin point:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Center point</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>DialogNewMeasurements</name>
@@ -3964,19 +3964,19 @@ Apply settings anyway?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Templates: </source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Orientation: </source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Browse…</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <source>cm</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Templates:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Orientation:</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -5316,10 +5316,6 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>About Qt</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Pattern files (*.val)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -9342,6 +9338,18 @@ Do you want to save your changes?</source>
         <source>Length</source>
         <translation type="unfinished">长度</translation>
     </message>
+    <message>
+        <source>Center point</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Angle</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Rotation origin point</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>VToolOptionsPropertyBrowser</name>
@@ -9775,6 +9783,10 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Approximation scale:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Rotation origin point:</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -10802,21 +10814,6 @@ Do you want to save your changes?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>cm</source>
-        <comment>centimeter</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>mm</source>
-        <comment>millimeter</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>in</source>
-        <comment>inch</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Line_</source>
         <comment>Left symbol _ in the name</comment>
         <translation type="unfinished"></translation>
@@ -11261,7 +11258,7 @@ Do you want to save your changes?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Length = %1%2, angle = %3°, rotation angle = %4°, &lt;b&gt;Shift&lt;/b&gt; - sticking angle, &lt;b&gt;Mouse click&lt;/b&gt; - finish creating</source>
+        <source>Length = %1%2, angle = %3°, rotation angle = %4°, &lt;b&gt;Shift&lt;/b&gt; - sticking angle, &lt;b&gt;Ctrl&lt;/b&gt; - change rotation origin point, &lt;b&gt;Mouse click&lt;/b&gt; - finish creating</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

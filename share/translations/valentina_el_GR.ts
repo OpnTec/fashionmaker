@@ -587,7 +587,7 @@
     </message>
     <message>
         <source>Angles equal</source>
-        <translation>Ίσες γωνίες</translation>
+        <translation type="vanished">Ίσες γωνίες</translation>
     </message>
     <message>
         <source>Color</source>
@@ -2047,7 +2047,7 @@
     </message>
     <message>
         <source>Angles equal</source>
-        <translation>Ίσες γωνίες</translation>
+        <translation type="vanished">Ίσες γωνίες</translation>
     </message>
     <message>
         <source>Edit radius1</source>
@@ -3528,11 +3528,19 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Rotation angle:</source>
-        <translation type="unfinished">Γωνία περιστροφής:</translation>
+        <translation>Γωνία περιστροφής:</translation>
     </message>
     <message>
         <source>Edit rotation angle</source>
-        <translation type="unfinished">Αλλαγή γωνίας περιστροφής</translation>
+        <translation>Αλλαγή γωνίας περιστροφής</translation>
+    </message>
+    <message>
+        <source>Rotation origin point:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Center point</source>
+        <translation type="unfinished">Κεντρικό σημείο</translation>
     </message>
 </context>
 <context>
@@ -5116,20 +5124,20 @@ Apply settings anyway?</source>
         <translation type="unfinished">Μορφή χαρτιού</translation>
     </message>
     <message>
-        <source>Templates: </source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Orientation: </source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Browse…</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <source>cm</source>
         <translation type="unfinished">εκ</translation>
+    </message>
+    <message>
+        <source>Templates:</source>
+        <translation type="unfinished">Πρότυπα:</translation>
+    </message>
+    <message>
+        <source>Orientation:</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -6712,7 +6720,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Pattern files (*.val)</source>
-        <translation>Αρχεία πατρόν (*.val)</translation>
+        <translation type="vanished">Αρχεία πατρόν (*.val)</translation>
     </message>
     <message>
         <source>pattern</source>
@@ -11261,6 +11269,18 @@ Do you want to save your changes?</source>
         <source>Length</source>
         <translation type="unfinished">Μήκος</translation>
     </message>
+    <message>
+        <source>Center point</source>
+        <translation type="unfinished">Κεντρικό σημείο</translation>
+    </message>
+    <message>
+        <source>Angle</source>
+        <translation type="unfinished">Γωνία</translation>
+    </message>
+    <message>
+        <source>Rotation origin point</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>VToolOptionsPropertyBrowser</name>
@@ -11786,6 +11806,10 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Approximation scale:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Rotation origin point:</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -12840,17 +12864,17 @@ Do you want to save your changes?</source>
     <message>
         <source>cm</source>
         <comment>centimeter</comment>
-        <translation>εκ</translation>
+        <translation type="vanished">εκ</translation>
     </message>
     <message>
         <source>mm</source>
         <comment>millimeter</comment>
-        <translation>χιλ</translation>
+        <translation type="vanished">χιλ</translation>
     </message>
     <message>
         <source>in</source>
         <comment>inch</comment>
-        <translation>ίντσες</translation>
+        <translation type="vanished">ίντσες</translation>
     </message>
     <message>
         <source>Line_</source>
@@ -13327,7 +13351,7 @@ Do you want to save your changes?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Length = %1%2, angle = %3°, rotation angle = %4°, &lt;b&gt;Shift&lt;/b&gt; - sticking angle, &lt;b&gt;Mouse click&lt;/b&gt; - finish creating</source>
+        <source>Length = %1%2, angle = %3°, rotation angle = %4°, &lt;b&gt;Shift&lt;/b&gt; - sticking angle, &lt;b&gt;Ctrl&lt;/b&gt; - change rotation origin point, &lt;b&gt;Mouse click&lt;/b&gt; - finish creating</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
