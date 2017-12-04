@@ -197,6 +197,7 @@ void VToolPlaceLabel::AddToFile()
         VPiece newDet = oldDet;
 
         newDet.GetPlaceLabels().append(m_id);
+        incrementReferens(); // Manually increment reference since in this case a piece tool will not do this for us
         qApp->getUndoStack()->push(new SavePieceOptions(oldDet, newDet, doc, m_pieceId));
     }
 }
