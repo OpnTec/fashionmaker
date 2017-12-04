@@ -143,7 +143,10 @@ bool SavePiecePathOptions::mergeWith(const QUndoCommand *command)
         const QVector<VPieceNode> nodes = m_newPath.GetNodes();
         const QVector<VPieceNode> candidateNodes = candidate.GetNodes();
 
-        SCASSERT(nodes.size() == candidateNodes.size())
+        if (nodes.size() == candidateNodes.size())
+        {
+            return false;
+        }
 
         for (int i = 0; i < nodes.size(); ++i)
         {
