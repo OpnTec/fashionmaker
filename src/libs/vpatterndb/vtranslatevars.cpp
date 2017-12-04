@@ -801,8 +801,7 @@ QString VTranslateVars::FormulaFromUser(const QString &formula, bool osSeparator
     QString newFormula = formula;// Local copy for making changes
 
     // Eval formula
-    QScopedPointer<qmu::QmuTokenParser> cal(new qmu::QmuTokenParser(formula, osSeparator, true,
-                                                                    qApp->TrVars()->GetTranslatedFunctions()));
+    QScopedPointer<qmu::QmuTokenParser> cal(new qmu::QmuTokenParser(formula, osSeparator, true, GetTranslatedFunctions()));
     QMap<int, QString> tokens = cal->GetTokens();// Tokens (variables, measurements)
     QMap<int, QString> numbers = cal->GetNumbers();// All numbers in expression for changing decimal separator
     delete cal.take();
