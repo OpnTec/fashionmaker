@@ -137,15 +137,6 @@ const QStringList builInFunctions = QStringList() << degTorad_F
                                                   << avg_F
                                                   << fmod_F;
 
-// Postfix operators
-const QString cm_Oprt = QStringLiteral("cm");
-const QString mm_Oprt = QStringLiteral("mm");
-const QString in_Oprt = QStringLiteral("in");
-
-const QStringList builInPostfixOperators = QStringList() << cm_Oprt
-                                                         << mm_Oprt
-                                                         << in_Oprt;
-
 const QString pl_size          = QStringLiteral("size");
 const QString pl_height        = QStringLiteral("height");
 const QString pl_date          = QStringLiteral("date");

@@ -450,7 +450,6 @@ private:
     QVector<VFormulaField> ListFinalMeasurementsExpressions() const;
 
     bool IsVariable(const QString& token) const;
-    bool IsPostfixOperator(const QString& token) const;
     bool IsFunction(const QString& token) const;
 
     QPair<bool, QMap<quint32, quint32> > ParseItemElement(const QDomElement &domElement);

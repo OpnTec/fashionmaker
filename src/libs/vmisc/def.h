@@ -358,13 +358,6 @@ extern const QString fmod_F;
 
 extern const QStringList builInFunctions;
 
-// Postfix operators
-extern const QString cm_Oprt;
-extern const QString mm_Oprt;
-extern const QString in_Oprt;
-
-extern const QStringList builInPostfixOperators;
-
 // Placeholders
 extern const QString pl_size;
 extern const QString pl_height;

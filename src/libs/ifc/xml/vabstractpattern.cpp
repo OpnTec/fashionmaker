@@ -274,7 +274,7 @@ QStringList VAbstractPattern::ListMeasurements() const
                 continue;
             }
 
-            if (IsVariable(tValues.at(j)) || IsPostfixOperator(tValues.at(j)) || IsFunction(tValues.at(j)))
+            if (IsVariable(tValues.at(j)) || IsFunction(tValues.at(j)))
             {
                 others.insert(tValues.at(j));
             }
@@ -2043,20 +2043,6 @@ bool VAbstractPattern::IsVariable(const QString &token) const
             {
                 return true;
             }
-        }
-    }
-
-    return false;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-bool VAbstractPattern::IsPostfixOperator(const QString &token) const
-{
-    for (int i = 0; i < builInPostfixOperators.size(); ++i)
-    {
-        if (token.indexOf( builInPostfixOperators.at(i) ) == 0)
-        {
-            return true;
         }
     }
 

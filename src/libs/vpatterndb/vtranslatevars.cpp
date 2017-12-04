@@ -53,7 +53,6 @@ VTranslateVars::VTranslateVars()
       PMSystemBooks(QMap<QString, qmu::QmuTranslation>()),
       variables(QMap<QString, qmu::QmuTranslation>()),
       functions(QMap<QString, qmu::QmuTranslation>()),
-      postfixOperators(QMap<QString, qmu::QmuTranslation>()),
       placeholders(QMap<QString, qmu::QmuTranslation>()),
       stDescriptions(QMap<QString, qmu::QmuTranslation>()),
       translatedFunctions(QMap<QString, QString>())
@@ -61,15 +60,10 @@ VTranslateVars::VTranslateVars()
     InitPatternMakingSystems();
     InitVariables();
     InitFunctions();
-    InitPostfixOperators();
     InitPlaceholder();
 
     PrepareFunctionTranslations();
 }
-
-//---------------------------------------------------------------------------------------------------------------------
-VTranslateVars::~VTranslateVars()
-{}
 
 #define translate(context, source, disambiguation) qmu::QmuTranslation::translate((context), (source), (disambiguation))
 
@@ -455,14 +449,6 @@ void VTranslateVars::InitFunctions()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VTranslateVars::InitPostfixOperators()
-{
-    postfixOperators.insert(cm_Oprt, translate("VTranslateVars", "cm", "centimeter"));
-    postfixOperators.insert(mm_Oprt, translate("VTranslateVars", "mm", "millimeter"));
-    postfixOperators.insert(in_Oprt, translate("VTranslateVars", "in", "inch"));
-}
-
-//---------------------------------------------------------------------------------------------------------------------
 void VTranslateVars::InitPlaceholder()
 {
     placeholders.insert(pl_size,          translate("VTranslateVars", "size",          "placeholder"));
@@ -614,31 +600,6 @@ bool VTranslateVars::VariablesFromUser(QString &newFormula, int position, const 
 
 //---------------------------------------------------------------------------------------------------------------------
 /**
- * @brief PostfixOperatorsFromUser translate postfix operator to internal look.
- * @param newFormula [in|out] expression to translate
- * @param position token position
- * @param token token to translate
- * @param bias hold change of length between translated and origin token string
- * @return true if was found postfix operator with same name.
- */
-bool VTranslateVars::PostfixOperatorsFromUser(QString &newFormula, int position, const QString &token, int &bias) const
-{
-    QMap<QString, qmu::QmuTranslation>::const_iterator i = postfixOperators.constBegin();
-    while (i != postfixOperators.constEnd())
-    {
-        if (token == i.value().translate())
-        {
-            newFormula.replace(position, token.length(), i.key());
-            bias = token.length() - i.key().length();
-            return true;
-        }
-        ++i;
-    }
-    return false;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-/**
  * @brief FunctionsFromUser translate function name to internal look.
  * @param newFormula [in|out] expression to translate
  * @param position token position
@@ -780,11 +741,6 @@ QString VTranslateVars::VarToUser(const QString &var) const
         return functions.value(var).translate();
     }
 
-    if (postfixOperators.contains(var))
-    {
-        return postfixOperators.value(var).translate();
-    }
-
     return InternalVarToUser(var);
 }
 
@@ -799,11 +755,6 @@ QString VTranslateVars::VarFromUser(const QString &var) const
     }
 
     if (VariablesFromUser(newVar, 0, var, bias))
-    {
-        return newVar;
-    }
-
-    if (PostfixOperatorsFromUser(newVar, 0, var, bias))
     {
         return newVar;
     }
@@ -831,13 +782,6 @@ QString VTranslateVars::PMSystemAuthor(const QString &code) const
 QString VTranslateVars::PMSystemBook(const QString &code) const
 {
     return PMSystemBooks.value(code).translate();
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-// cppcheck-suppress unusedFunction
-QString VTranslateVars::PostfixOperator(const QString &name) const
-{
-    return postfixOperators.value(name).translate();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -880,17 +824,6 @@ QString VTranslateVars::FormulaFromUser(const QString &formula, bool osSeparator
         }
 
         if (VariablesFromUser(newFormula, tKeys.at(i), tValues.at(i), bias))
-        {
-            if (bias != 0)
-            {// Translated token has different length than original. Position next tokens need to be corrected.
-                CorrectionsPositions(tKeys.at(i), bias, tokens, numbers);
-                tKeys = tokens.keys();
-                tValues = tokens.values();
-            }
-            continue;
-        }
-
-        if (PostfixOperatorsFromUser(newFormula, tKeys.at(i), tValues.at(i), bias))
         {
             if (bias != 0)
             {// Translated token has different length than original. Position next tokens need to be corrected.
@@ -1029,19 +962,6 @@ QString VTranslateVars::FormulaToUser(const QString &formula, bool osSeparator) 
             continue;
         }
 
-        if (postfixOperators.contains(tValues.at(i)))
-        {
-            newFormula.replace(tKeys.at(i), tValues.at(i).length(), postfixOperators.value(tValues.at(i)).translate());
-            int bias = tValues.at(i).length() - postfixOperators.value(tValues.at(i)).translate().length();
-            if (bias != 0)
-            {// Translated token has different length than original. Position next tokens need to be corrected.
-                CorrectionsPositions(tKeys.at(i), bias, tokens, numbers);
-                tKeys = tokens.keys();
-                tValues = tokens.values();
-            }
-            continue;
-        }
-
         int bias = 0;
         if (VariablesToUser(newFormula, tKeys.at(i), tValues.at(i), bias))
         {
@@ -1120,13 +1040,11 @@ void VTranslateVars::Retranslate()
     PMSystemBooks.clear();
     variables.clear();
     functions.clear();
-    postfixOperators.clear();
     stDescriptions.clear();
 
     InitPatternMakingSystems();
     InitVariables();
     InitFunctions();
-    InitPostfixOperators();
     InitPlaceholder();
 
     PrepareFunctionTranslations();

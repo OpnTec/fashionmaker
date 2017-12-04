@@ -38,10 +38,9 @@ class VTranslateVars : public VTranslateMeasurements
 {
 public:
     explicit VTranslateVars();
-    virtual ~VTranslateVars() Q_DECL_OVERRIDE;
+    virtual ~VTranslateVars() = default;
 
     bool VariablesFromUser(QString &newFormula, int position, const QString &token, int &bias) const;
-    bool PostfixOperatorsFromUser(QString &newFormula, int position, const QString &token, int &bias) const;
     bool FunctionsFromUser(QString &newFormula, int position, const QString &token, int &bias) const;
     bool VariablesToUser(QString &newFormula, int position, const QString &token, int &bias) const;
 
@@ -57,8 +56,6 @@ public:
     QString PMSystemName(const QString &code) const;
     QString PMSystemAuthor(const QString &code) const;
     QString PMSystemBook(const QString &code) const;
-
-    QString PostfixOperator(const QString &name) const;
 
     QString FormulaFromUser(const QString &formula, bool osSeparator) const;
     static QString TryFormulaFromUser(const QString &formula, bool osSeparator);
@@ -80,7 +77,6 @@ private:
     QMap<QString, qmu::QmuTranslation> PMSystemBooks;
     QMap<QString, qmu::QmuTranslation> variables;
     QMap<QString, qmu::QmuTranslation> functions;
-    QMap<QString, qmu::QmuTranslation> postfixOperators;
     QMap<QString, qmu::QmuTranslation> placeholders;
     QMap<QString, qmu::QmuTranslation> stDescriptions;
     QMap<QString, QString> translatedFunctions;
@@ -88,7 +84,6 @@ private:
     void InitPatternMakingSystems();
     void InitVariables();
     void InitFunctions();
-    void InitPostfixOperators();
     void InitPlaceholder();
 
     void PrepareFunctionTranslations();
