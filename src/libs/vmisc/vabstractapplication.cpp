@@ -246,7 +246,9 @@ void VAbstractApplication::WinAttachConsole()
     auto stdout_type = GetFileType(GetStdHandle(STD_OUTPUT_HANDLE));
     if (stdout_type == FILE_TYPE_UNKNOWN && AttachConsole(ATTACH_PARENT_PROCESS))
     {
+        // cppcheck-suppress ignoredReturnValue
         freopen("CONOUT$", "w", stdout);
+        // cppcheck-suppress ignoredReturnValue
         freopen("CONOUT$", "w", stderr);
     }
 }
