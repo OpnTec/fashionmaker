@@ -43,6 +43,10 @@ int main(int argc, char *argv[])
 
     QT_REQUIRE_VERSION(argc, argv, "5.2.0")
 
+#if defined(Q_OS_WIN)
+    VAbstractApplication::WinAttachConsole();
+#endif
+
 #ifndef Q_OS_MAC // supports natively
     InitHighDpiScaling(argc, argv);
 #endif //Q_OS_MAC

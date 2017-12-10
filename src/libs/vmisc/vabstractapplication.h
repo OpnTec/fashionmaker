@@ -111,6 +111,10 @@ public:
     QString         GetPPath() const;
     void            SetPPath(const QString &value);
 
+#if defined(Q_OS_WIN)
+    static void WinAttachConsole();
+#endif
+
 protected:
     QUndoStack         *undoStack;
 

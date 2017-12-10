@@ -235,6 +235,24 @@ QUndoStack *VAbstractApplication::getUndoStack() const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+#if defined(Q_OS_WIN)
+void VAbstractApplication::WinAttachConsole()
+{
+    /* Windows does not really support dual mode applications.
+     * To see console output we need to attach console.
+     * For case of using pipeline we check std output handler.
+     * Original idea: https://stackoverflow.com/a/41701133/3045403
+     */
+    auto stdout_type = GetFileType(GetStdHandle(STD_OUTPUT_HANDLE));
+    if (stdout_type == FILE_TYPE_UNKNOWN && AttachConsole(ATTACH_PARENT_PROCESS))
+    {
+        freopen("CONOUT$", "w", stdout);
+        freopen("CONOUT$", "w", stderr);
+    }
+}
+#endif
+
+//---------------------------------------------------------------------------------------------------------------------
 Unit VAbstractApplication::patternUnit() const
 {
     return _patternUnit;
