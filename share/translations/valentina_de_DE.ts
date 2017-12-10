@@ -3606,7 +3606,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Center point</source>
-        <translation type="unfinished">Mittelpunkt</translation>
+        <translation>Mittelpunkt</translation>
     </message>
 </context>
 <context>
@@ -5195,7 +5195,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Templates:</source>
-        <translation type="unfinished">Vorlagen:</translation>
+        <translation>Vorlagen:</translation>
     </message>
     <message>
         <source>Orientation:</source>
@@ -10111,6 +10111,18 @@ Do you want to save your changes?</source>
         <source>Custom</source>
         <translation type="unfinished">Benutzerdefiniert</translation>
     </message>
+    <message>
+        <source>Roll 48in</source>
+        <translation type="unfinished">Rolle 44 Zoll {48i?}</translation>
+    </message>
+    <message>
+        <source>Roll 62in</source>
+        <translation type="unfinished">Rolle 44 Zoll {62i?}</translation>
+    </message>
+    <message>
+        <source>Roll 72in</source>
+        <translation type="unfinished">Rolle 44 Zoll {72i?}</translation>
+    </message>
 </context>
 <context>
     <name>VAbstractOperation</name>
@@ -11559,11 +11571,11 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Center point</source>
-        <translation type="unfinished">Mittelpunkt</translation>
+        <translation>Mittelpunkt</translation>
     </message>
     <message>
         <source>Angle</source>
-        <translation type="unfinished">Winkel</translation>
+        <translation>Winkel</translation>
     </message>
     <message>
         <source>Rotation origin point</source>

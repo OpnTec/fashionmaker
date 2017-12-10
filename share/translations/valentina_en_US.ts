@@ -2090,10 +2090,6 @@
         <translation>Radius can&apos;t be negative</translation>
     </message>
     <message>
-        <source>Angles equal</source>
-        <translation type="vanished">Angles equal</translation>
-    </message>
-    <message>
         <source>Edit radius1</source>
         <translation>Edit radius1</translation>
     </message>
@@ -3611,7 +3607,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Center point</source>
-        <translation type="unfinished">Center point</translation>
+        <translation>Center point</translation>
     </message>
 </context>
 <context>
@@ -5216,7 +5212,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Templates:</source>
-        <translation type="unfinished">Templates:</translation>
+        <translation>Templates:</translation>
     </message>
     <message>
         <source>Orientation:</source>
@@ -10175,6 +10171,18 @@ Do you want to save your changes?</translation>
         <source>Custom</source>
         <translation type="unfinished">Custom</translation>
     </message>
+    <message>
+        <source>Roll 48in</source>
+        <translation type="unfinished">Roll 44in {48i?}</translation>
+    </message>
+    <message>
+        <source>Roll 62in</source>
+        <translation type="unfinished">Roll 44in {62i?}</translation>
+    </message>
+    <message>
+        <source>Roll 72in</source>
+        <translation type="unfinished">Roll 44in {72i?}</translation>
+    </message>
 </context>
 <context>
     <name>VAbstractOperation</name>
@@ -11660,11 +11668,11 @@ Do you want to save your changes?</translation>
     </message>
     <message>
         <source>Center point</source>
-        <translation type="unfinished">Center point</translation>
+        <translation>Center point</translation>
     </message>
     <message>
         <source>Angle</source>
-        <translation type="unfinished">Angle</translation>
+        <translation>Angle</translation>
     </message>
     <message>
         <source>Rotation origin point</source>

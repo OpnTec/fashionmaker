@@ -3519,7 +3519,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Center point</source>
-        <translation type="unfinished">Punto centrale</translation>
+        <translation>Punto centrale</translation>
     </message>
 </context>
 <context>
@@ -4276,7 +4276,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Angle</source>
-        <translation type="unfinished">Angolo</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Straightforward</source>
@@ -5112,7 +5112,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Templates:</source>
-        <translation type="unfinished">Modelli:</translation>
+        <translation>Modelli:</translation>
     </message>
     <message>
         <source>Orientation:</source>
@@ -9534,7 +9534,7 @@ Vuoi salvare le tue modifiche?</translation>
     </message>
     <message>
         <source>Angle</source>
-        <translation type="unfinished">Angolo</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Straightforward</source>
@@ -10046,6 +10046,18 @@ Vuoi salvare le tue modifiche?</translation>
     <message>
         <source>Custom</source>
         <translation type="unfinished">Personalizzato</translation>
+    </message>
+    <message>
+        <source>Roll 48in</source>
+        <translation type="unfinished">Rotolo 44pollici {48i?}</translation>
+    </message>
+    <message>
+        <source>Roll 62in</source>
+        <translation type="unfinished">Rotolo 44pollici {62i?}</translation>
+    </message>
+    <message>
+        <source>Roll 72in</source>
+        <translation type="unfinished">Rotolo 44pollici {72i?}</translation>
     </message>
 </context>
 <context>
@@ -11159,7 +11171,7 @@ Vuoi salvare le tue modifiche?</translation>
     </message>
     <message>
         <source>Angle</source>
-        <translation type="unfinished">Angolo</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Label</source>
@@ -11343,7 +11355,7 @@ Vuoi salvare le tue modifiche?</translation>
     </message>
     <message>
         <source>Angle</source>
-        <translation type="unfinished">Angolo</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Label</source>
@@ -11358,7 +11370,7 @@ Vuoi salvare le tue modifiche?</translation>
     </message>
     <message>
         <source>Angle</source>
-        <translation type="unfinished">Angolo</translation>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -11376,7 +11388,7 @@ Vuoi salvare le tue modifiche?</translation>
     </message>
     <message>
         <source>Angle</source>
-        <translation type="unfinished">Angolo</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Label</source>
@@ -11391,7 +11403,7 @@ Vuoi salvare le tue modifiche?</translation>
     </message>
     <message>
         <source>Angle</source>
-        <translation type="unfinished">Angolo</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Label</source>
@@ -11410,11 +11422,11 @@ Vuoi salvare le tue modifiche?</translation>
     </message>
     <message>
         <source>Center point</source>
-        <translation type="unfinished">Punto centrale</translation>
+        <translation>Punto centrale</translation>
     </message>
     <message>
         <source>Angle</source>
-        <translation type="unfinished">Angolo</translation>
+        <translation>Angol</translation>
     </message>
     <message>
         <source>Rotation origin point</source>
@@ -11928,7 +11940,7 @@ Vuoi salvare le tue modifiche?</translation>
     </message>
     <message>
         <source>Angle</source>
-        <translation type="unfinished">Angolo</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Label</source>
@@ -12017,7 +12029,7 @@ Vuoi salvare le tue modifiche?</translation>
     </message>
     <message>
         <source>Angle</source>
-        <translation type="unfinished">Angolo</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Label</source>

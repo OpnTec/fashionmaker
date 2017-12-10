@@ -10434,6 +10434,18 @@ Do you want to save your changes?</translation>
         <source>Custom</source>
         <translation type="unfinished">Custom</translation>
     </message>
+    <message>
+        <source>Roll 48in</source>
+        <translation type="unfinished">Roll 44in {48i?}</translation>
+    </message>
+    <message>
+        <source>Roll 62in</source>
+        <translation type="unfinished">Roll 44in {62i?}</translation>
+    </message>
+    <message>
+        <source>Roll 72in</source>
+        <translation type="unfinished">Roll 44in {72i?}</translation>
+    </message>
 </context>
 <context>
     <name>VAbstractOperation</name>

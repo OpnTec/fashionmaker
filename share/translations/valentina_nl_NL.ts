@@ -2090,10 +2090,6 @@
         <translation>Straal mag niet negatief zijn</translation>
     </message>
     <message>
-        <source>Angles equal</source>
-        <translation type="vanished">Gelijke hoeken</translation>
-    </message>
-    <message>
         <source>Edit radius1</source>
         <translation>Bewerk straal1</translation>
     </message>
@@ -3611,7 +3607,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Center point</source>
-        <translation type="unfinished">Middelste punt</translation>
+        <translation>Middelste punt</translation>
     </message>
 </context>
 <context>
@@ -5216,11 +5212,11 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Templates:</source>
-        <translation type="unfinished">Sjablonen:</translation>
+        <translation>Sjablonen:</translation>
     </message>
     <message>
         <source>Orientation:</source>
-        <translation type="unfinished">Orientatie:</translation>
+        <translation>Orientatie:</translation>
     </message>
 </context>
 <context>
@@ -10174,6 +10170,18 @@ Wil je deze veranderingen opslaan?</translation>
         <source>Custom</source>
         <translation type="unfinished">Op maat</translation>
     </message>
+    <message>
+        <source>Roll 48in</source>
+        <translation type="unfinished">Papierrol 44 inches = 111,76 cm {48i?}</translation>
+    </message>
+    <message>
+        <source>Roll 62in</source>
+        <translation type="unfinished">Papierrol 44 inches = 111,76 cm {62i?}</translation>
+    </message>
+    <message>
+        <source>Roll 72in</source>
+        <translation type="unfinished">Papierrol 44 inches = 111,76 cm {72i?}</translation>
+    </message>
 </context>
 <context>
     <name>VAbstractOperation</name>
@@ -11659,11 +11667,11 @@ Wil je deze veranderingen opslaan?</translation>
     </message>
     <message>
         <source>Center point</source>
-        <translation type="unfinished">Middelste punt</translation>
+        <translation>Middelste punt</translation>
     </message>
     <message>
         <source>Angle</source>
-        <translation type="unfinished">Hoek</translation>
+        <translation>Hoek</translation>
     </message>
     <message>
         <source>Rotation origin point</source>

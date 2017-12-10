@@ -2091,10 +2091,6 @@
         <translation>El radio no puede ser negativo</translation>
     </message>
     <message>
-        <source>Angles equal</source>
-        <translation type="vanished">Ángulos iguales</translation>
-    </message>
-    <message>
         <source>Edit radius1</source>
         <translation>Editar radio1</translation>
     </message>
@@ -3611,7 +3607,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Center point</source>
-        <translation type="unfinished">Punto central</translation>
+        <translation>Punto central</translation>
     </message>
 </context>
 <context>
@@ -5216,7 +5212,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Templates:</source>
-        <translation type="unfinished">Plantillas:</translation>
+        <translation>Plantillas:</translation>
     </message>
     <message>
         <source>Orientation:</source>
@@ -10174,6 +10170,18 @@ Do you want to save your changes?</source>
         <source>Custom</source>
         <translation type="unfinished">Personalizado</translation>
     </message>
+    <message>
+        <source>Roll 48in</source>
+        <translation type="unfinished">Roll 44in {48i?}</translation>
+    </message>
+    <message>
+        <source>Roll 62in</source>
+        <translation type="unfinished">Roll 44in {62i?}</translation>
+    </message>
+    <message>
+        <source>Roll 72in</source>
+        <translation type="unfinished">Roll 44in {72i?}</translation>
+    </message>
 </context>
 <context>
     <name>VAbstractOperation</name>
@@ -11659,11 +11667,11 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Center point</source>
-        <translation type="unfinished">Punto central</translation>
+        <translation>Punto central</translation>
     </message>
     <message>
         <source>Angle</source>
-        <translation type="unfinished">Ángulo</translation>
+        <translation>Ángulo</translation>
     </message>
     <message>
         <source>Rotation origin point</source>

@@ -2090,10 +2090,6 @@
         <translation>O raio não pode ser negativo</translation>
     </message>
     <message>
-        <source>Angles equal</source>
-        <translation type="vanished">Ângulos iguais</translation>
-    </message>
-    <message>
         <source>Edit radius1</source>
         <translation>Editar raio1</translation>
     </message>
@@ -3609,11 +3605,11 @@ Aplicar configurações de qualquer forma?</translation>
     </message>
     <message>
         <source>Rotation origin point:</source>
-        <translation type="unfinished"></translation>
+        <translation>Rotação do ponto de origem:</translation>
     </message>
     <message>
         <source>Center point</source>
-        <translation type="unfinished">Ponto central</translation>
+        <translation>Ponto central</translation>
     </message>
 </context>
 <context>
@@ -5205,14 +5201,6 @@ Aplicar configurações de qualquer forma?</translation>
         <translation>Formato do papel</translation>
     </message>
     <message>
-        <source>Templates: </source>
-        <translation type="vanished">Modelos:</translation>
-    </message>
-    <message>
-        <source>Orientation: </source>
-        <translation type="vanished">Orientação:</translation>
-    </message>
-    <message>
         <source>Browse…</source>
         <translation>Navegar…</translation>
     </message>
@@ -5222,11 +5210,11 @@ Aplicar configurações de qualquer forma?</translation>
     </message>
     <message>
         <source>Templates:</source>
-        <translation type="unfinished">Modelos:</translation>
+        <translation>Modelos:</translation>
     </message>
     <message>
         <source>Orientation:</source>
-        <translation type="unfinished"></translation>
+        <translation>Orientação:</translation>
     </message>
 </context>
 <context>
@@ -5508,7 +5496,7 @@ Aplicar configurações de qualquer forma?</translation>
     </message>
     <message>
         <source>Place label</source>
-        <translation type="unfinished"></translation>
+        <translation>Colocar rótulo</translation>
     </message>
 </context>
 <context>
@@ -6745,7 +6733,7 @@ Aplicar configurações de qualquer forma?</translation>
     </message>
     <message>
         <source>Select first point</source>
-        <translation type="unfinished">Selecione o primeiro ponto</translation>
+        <translation>Selecione o primeiro ponto</translation>
     </message>
     <message>
         <source>Select first point of line</source>
@@ -6753,19 +6741,19 @@ Aplicar configurações de qualquer forma?</translation>
     </message>
     <message>
         <source>Select first point of angle</source>
-        <translation type="unfinished"></translation>
+        <translation>Selecionar o primeiro ponto do ângulo</translation>
     </message>
     <message>
         <source>Select first point of first line</source>
-        <translation type="unfinished"></translation>
+        <translation>Selecionar o primeiro ponto da primeira linha</translation>
     </message>
     <message>
         <source>Select first point curve</source>
-        <translation type="unfinished"></translation>
+        <translation>Selecionar a curva do primeiro ponto</translation>
     </message>
     <message>
         <source>Select simple curve</source>
-        <translation type="unfinished"></translation>
+        <translation>Selecionar a curva simples</translation>
     </message>
     <message>
         <source>Select point of center of arc</source>
@@ -6777,31 +6765,35 @@ Aplicar configurações de qualquer forma?</translation>
     </message>
     <message>
         <source>Select curve path</source>
-        <translation type="unfinished"></translation>
+        <translation>Selecionar caminho de curva</translation>
+    </message>
+    <message>
+        <source>Select points, arcs, curves clockwise.</source>
+        <translation type="vanished">Selecionar pontos, arcos, curvas no sentido horário.</translation>
     </message>
     <message>
         <source>Select base point</source>
-        <translation type="unfinished"></translation>
+        <translation>Selecionar ponto base</translation>
     </message>
     <message>
         <source>Select first point of axis</source>
-        <translation type="unfinished"></translation>
+        <translation>Selecionar primeiro ponto do eixo</translation>
     </message>
     <message>
         <source>Select detail</source>
-        <translation type="unfinished"></translation>
+        <translation>Selecionar detalhe</translation>
     </message>
     <message>
         <source>Select arc</source>
-        <translation type="unfinished"></translation>
+        <translation>Selecionar arco</translation>
     </message>
     <message>
         <source>Select curve</source>
-        <translation type="unfinished"></translation>
+        <translation>Selecionar curva</translation>
     </message>
     <message>
         <source>About Qt</source>
-        <translation type="unfinished"></translation>
+        <translation>Sobre Qt</translation>
     </message>
     <message>
         <source>Height: </source>
@@ -6812,12 +6804,20 @@ Aplicar configurações de qualquer forma?</translation>
         <translation type="vanished">Tamanho:</translation>
     </message>
     <message>
+        <source>Pattern Piece: </source>
+        <translation type="vanished">Peça de Modelagem:</translation>
+    </message>
+    <message>
+        <source>Pattern files (*.val)</source>
+        <translation type="vanished">Arquivo de molde (*.val)</translation>
+    </message>
+    <message>
         <source>pattern</source>
-        <translation type="unfinished"></translation>
+        <translation>molde</translation>
     </message>
     <message>
         <source>Save as</source>
-        <translation type="unfinished"></translation>
+        <translation>Salvar como</translation>
     </message>
     <message>
         <source>Could not save file</source>
@@ -6833,15 +6833,15 @@ Aplicar configurações de qualquer forma?</translation>
     </message>
     <message>
         <source>Error can&apos;t convert value.</source>
-        <translation type="unfinished"></translation>
+        <translation>Erro impossível converter o valor.</translation>
     </message>
     <message>
         <source>Error empty parameter.</source>
-        <translation type="unfinished"></translation>
+        <translation>Erro de parâmetro vazio.</translation>
     </message>
     <message>
         <source>Error wrong id.</source>
-        <translation type="unfinished"></translation>
+        <translation>Erro identificação incorreta.</translation>
     </message>
     <message>
         <source>Error parsing file (std::bad_alloc).</source>
@@ -6849,7 +6849,7 @@ Aplicar configurações de qualquer forma?</translation>
     </message>
     <message>
         <source>Bad id.</source>
-        <translation type="unfinished"></translation>
+        <translation>Identificação deficiente.</translation>
     </message>
     <message>
         <source>File saved</source>
@@ -6857,7 +6857,7 @@ Aplicar configurações de qualquer forma?</translation>
     </message>
     <message>
         <source>untitled.val</source>
-        <translation type="unfinished"></translation>
+        <translation>sem título.val</translation>
     </message>
     <message>
         <source>The pattern has been modified.
@@ -8657,7 +8657,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Save as</source>
-        <translation type="unfinished"></translation>
+        <translation>Salvar como</translation>
     </message>
     <message>
         <source>&amp;New Window</source>
@@ -8726,7 +8726,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Pattern files (*.val)</source>
-        <translation type="unfinished"></translation>
+        <translation>Arquivo de molde (*.val)</translation>
     </message>
     <message>
         <source>Pattern unit:</source>
@@ -8849,7 +8849,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>About Qt</source>
-        <translation type="unfinished"></translation>
+        <translation>Sobre Qt</translation>
     </message>
     <message>
         <source>File was not saved yet.</source>
@@ -9155,7 +9155,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Orientation:</source>
-        <translation type="unfinished"></translation>
+        <translation>Orientação:</translation>
     </message>
     <message>
         <source>Rotation:</source>
@@ -9675,6 +9675,18 @@ Do you want to save your changes?</source>
     <message>
         <source>Custom</source>
         <translation type="unfinished">Personalizado</translation>
+    </message>
+    <message>
+        <source>Roll 48in</source>
+        <translation type="unfinished">Rolo de 44&quot; {48i?}</translation>
+    </message>
+    <message>
+        <source>Roll 62in</source>
+        <translation type="unfinished">Rolo de 44&quot; {62i?}</translation>
+    </message>
+    <message>
+        <source>Roll 72in</source>
+        <translation type="unfinished">Rolo de 44&quot; {72i?}</translation>
     </message>
 </context>
 <context>
@@ -10394,15 +10406,15 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Error can&apos;t convert value.</source>
-        <translation type="unfinished"></translation>
+        <translation>Erro impossível converter o valor.</translation>
     </message>
     <message>
         <source>Error empty parameter.</source>
-        <translation type="unfinished"></translation>
+        <translation>Erro de parâmetro vazio.</translation>
     </message>
     <message>
         <source>Error wrong id.</source>
-        <translation type="unfinished"></translation>
+        <translation>Erro identificação incorreta.</translation>
     </message>
     <message>
         <source>Error parsing file (std::bad_alloc).</source>
@@ -10951,11 +10963,11 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Center point</source>
-        <translation type="unfinished">Ponto central</translation>
+        <translation>Ponto central</translation>
     </message>
     <message>
         <source>Angle</source>
-        <translation type="unfinished">Ângulo</translation>
+        <translation>Ângulo</translation>
     </message>
     <message>
         <source>Rotation origin point</source>
@@ -11430,7 +11442,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Rotation origin point:</source>
-        <translation type="unfinished"></translation>
+        <translation>Rotação do ponto de origem:</translation>
     </message>
 </context>
 <context>

@@ -2046,10 +2046,6 @@
         <translation>Η τιμή της ακτίνας δε μπορεί να είναι αρνητική</translation>
     </message>
     <message>
-        <source>Angles equal</source>
-        <translation type="vanished">Ίσες γωνίες</translation>
-    </message>
-    <message>
         <source>Edit radius1</source>
         <translation>Επεξεργασία ακτίνας1</translation>
     </message>
@@ -3540,7 +3536,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Center point</source>
-        <translation type="unfinished">Κεντρικό σημείο</translation>
+        <translation>Κεντρικό σημείο</translation>
     </message>
 </context>
 <context>
@@ -5133,7 +5129,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Templates:</source>
-        <translation type="unfinished">Πρότυπα:</translation>
+        <translation>Πρότυπα:</translation>
     </message>
     <message>
         <source>Orientation:</source>
@@ -9932,6 +9928,18 @@ Do you want to save your changes?</source>
         <source>Custom</source>
         <translation type="unfinished">Προσαρμογή</translation>
     </message>
+    <message>
+        <source>Roll 48in</source>
+        <translation type="unfinished">Ρολό 44 ιντσών {48i?}</translation>
+    </message>
+    <message>
+        <source>Roll 62in</source>
+        <translation type="unfinished">Ρολό 44 ιντσών {62i?}</translation>
+    </message>
+    <message>
+        <source>Roll 72in</source>
+        <translation type="unfinished">Ρολό 44 ιντσών {72i?}</translation>
+    </message>
 </context>
 <context>
     <name>VAbstractOperation</name>
@@ -11271,11 +11279,11 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Center point</source>
-        <translation type="unfinished">Κεντρικό σημείο</translation>
+        <translation>Κεντρικό σημείο</translation>
     </message>
     <message>
         <source>Angle</source>
-        <translation type="unfinished">Γωνία</translation>
+        <translation>Γωνία</translation>
     </message>
     <message>
         <source>Rotation origin point</source>

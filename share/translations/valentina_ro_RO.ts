@@ -3297,7 +3297,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Center point</source>
-        <translation type="unfinished">Punct central</translation>
+        <translation>Punct central</translation>
     </message>
 </context>
 <context>
@@ -4662,7 +4662,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Templates:</source>
-        <translation type="unfinished">Șabloane:</translation>
+        <translation>Șabloane:</translation>
     </message>
     <message>
         <source>Orientation:</source>
@@ -8985,6 +8985,18 @@ Do you want to save your changes?</source>
         <source>Custom</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Roll 48in</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Roll 62in</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Roll 72in</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>VAbstractOperation</name>
@@ -10234,11 +10246,11 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Center point</source>
-        <translation type="unfinished">Punct central</translation>
+        <translation>Punct central</translation>
     </message>
     <message>
         <source>Angle</source>
-        <translation type="unfinished">Unghi</translation>
+        <translation>Unghi</translation>
     </message>
     <message>
         <source>Rotation origin point</source>

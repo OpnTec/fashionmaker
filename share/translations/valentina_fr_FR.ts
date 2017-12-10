@@ -2090,10 +2090,6 @@
         <translation>Le rayon ne peut pas être négatif</translation>
     </message>
     <message>
-        <source>Angles equal</source>
-        <translation type="vanished">Les angles se valent</translation>
-    </message>
-    <message>
         <source>Edit radius1</source>
         <translation>Modifier rayon1</translation>
     </message>
@@ -3608,7 +3604,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Center point</source>
-        <translation type="unfinished">Point central</translation>
+        <translation>Point central</translation>
     </message>
 </context>
 <context>
@@ -5213,7 +5209,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Templates:</source>
-        <translation type="unfinished">Modèles:</translation>
+        <translation>Modèles:</translation>
     </message>
     <message>
         <source>Orientation:</source>
@@ -10156,6 +10152,18 @@ Voulez-vous enregistrer les changements?</translation>
         <source>Custom</source>
         <translation type="unfinished">Personnalisé</translation>
     </message>
+    <message>
+        <source>Roll 48in</source>
+        <translation type="unfinished">Rouleau de 44po {48i?}</translation>
+    </message>
+    <message>
+        <source>Roll 62in</source>
+        <translation type="unfinished">Rouleau de 44po {62i?}</translation>
+    </message>
+    <message>
+        <source>Roll 72in</source>
+        <translation type="unfinished">Rouleau de 44po {72i?}</translation>
+    </message>
 </context>
 <context>
     <name>VAbstractOperation</name>
@@ -11624,11 +11632,11 @@ Voulez-vous enregistrer les changements?</translation>
     </message>
     <message>
         <source>Center point</source>
-        <translation type="unfinished">Point central</translation>
+        <translation>Point central</translation>
     </message>
     <message>
         <source>Angle</source>
-        <translation type="unfinished">Angle</translation>
+        <translation>Angle</translation>
     </message>
     <message>
         <source>Rotation origin point</source>
