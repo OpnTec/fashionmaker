@@ -355,7 +355,6 @@ void DialogLayoutSettings::FindTemplate()
 {
     const qreal width = ui->doubleSpinBoxPaperWidth->value();
     const qreal height = ui->doubleSpinBoxPaperHeight->value();
-    QSizeF size(width, height);
 
     const Unit paperUnit = PaperUnit();
 
@@ -363,7 +362,7 @@ void DialogLayoutSettings::FindTemplate()
     for (int i=0; i < max; ++i)
     {
         const QSizeF tmplSize = GetTemplateSize(static_cast<PaperSizeTemplate>(i), paperUnit);
-        if (size == tmplSize)
+        if (QSizeF(width, height) == tmplSize || QSizeF(height, width) == tmplSize)
         {
             ui->comboBoxTemplates->blockSignals(true);
             const int index = ui->comboBoxTemplates->findData(i);
