@@ -48,8 +48,11 @@ public:
                                           Roll30in,     // Used also for showing icon
                                           Roll36in,
                                           Roll42in,
-                                          Roll44in = 11,
-                                          Custom = 12};
+                                          Roll44in,
+                                          Roll48in,
+                                          Roll62in,
+                                          Roll72in,
+                                          Custom = 15};
 
     explicit VAbstractLayoutDialog(QWidget *parent = nullptr);
 

@@ -43,13 +43,15 @@ const VAbstractLayoutDialog::FormatsVector VAbstractLayoutDialog::pageFormatName
                                                 << QApplication::translate("VAbstractLayoutDialog", "Roll 36in")
                                                 << QApplication::translate("VAbstractLayoutDialog", "Roll 42in")
                                                 << QApplication::translate("VAbstractLayoutDialog", "Roll 44in")
+                                                << QApplication::translate("VAbstractLayoutDialog", "Roll 48in")
+                                                << QApplication::translate("VAbstractLayoutDialog", "Roll 62in")
+                                                << QApplication::translate("VAbstractLayoutDialog", "Roll 72in")
                                                 << QApplication::translate("VAbstractLayoutDialog", "Custom");
 
 //---------------------------------------------------------------------------------------------------------------------
 VAbstractLayoutDialog::VAbstractLayoutDialog(QWidget *parent)
     : QDialog(parent)
-{
-}
+{}
 
 //---------------------------------------------------------------------------------------------------------------------
 void VAbstractLayoutDialog::InitTemplates(QComboBox *comboBoxTemplates)
@@ -66,7 +68,7 @@ void VAbstractLayoutDialog::InitTemplates(QComboBox *comboBoxTemplates)
         {
             comboBoxTemplates->addItem(icoPaper, v+" "+pdi, QVariant(cntr++));
         }
-        else if (cntr <= static_cast<int>(PaperSizeTemplate::Roll44in))
+        else if (cntr <= static_cast<int>(PaperSizeTemplate::Roll72in))
         {
             comboBoxTemplates->addItem(icoRoll, v+" "+pdi, QVariant(cntr++));
         }
@@ -132,6 +134,18 @@ QSizeF VAbstractLayoutDialog::GetTemplateSize(const PaperSizeTemplate &tmpl, con
             return RoundTemplateSize(width, height, unit);
         case PaperSizeTemplate::Roll44in:
             width = UnitConvertor(44, Unit::Inch, unit);
+            height = UnitConvertor(QIMAGE_MAX, Unit::Px, unit);
+            return RoundTemplateSize(width, height, unit);
+        case PaperSizeTemplate::Roll48in:
+            width = UnitConvertor(48, Unit::Inch, unit);
+            height = UnitConvertor(QIMAGE_MAX, Unit::Px, unit);
+            return RoundTemplateSize(width, height, unit);
+        case PaperSizeTemplate::Roll62in:
+            width = UnitConvertor(62, Unit::Inch, unit);
+            height = UnitConvertor(QIMAGE_MAX, Unit::Px, unit);
+            return RoundTemplateSize(width, height, unit);
+        case PaperSizeTemplate::Roll72in:
+            width = UnitConvertor(72, Unit::Inch, unit);
             height = UnitConvertor(QIMAGE_MAX, Unit::Px, unit);
             return RoundTemplateSize(width, height, unit);
         default:

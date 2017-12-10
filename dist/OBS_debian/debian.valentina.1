@@ -1,6 +1,6 @@
 .\" Manpage for valentina.
 .\" Contact dismine@gmail.com to correct errors.
-.TH valentina 1 "28 September, 2017" "valentina man page"
+.TH valentina 1 "10 December, 2017" "valentina man page"
 .SH NAME
 Valentina \- Pattern making program.
 .SH SYNOPSIS
@@ -113,7 +113,7 @@ The path to output destination folder. By default the directory at which the app
 .IP "-e, --gheight <The height value>"
 .RB "Set height value a pattern file, that was opened with multisize measurements (" "export mode" "). Valid values: 92, 98, 104, 110, 116, 122, 128, 134, 140, 146, 152, 158, 164, 170, 176, 182, 188, 194, 200cm."
 .IP "-p, --pageformat <Template number>"
-.RB "Number corresponding to page  template (default = 0, " "export mode" "):"
+.RB "Number corresponding to layout page template (default = 0, " "export mode" "):"
 .RS
 .BR "*" " A0 = 0,"
 .RE
@@ -148,24 +148,33 @@ The path to output destination folder. By default the directory at which the app
 .BR "*" " Roll 42in = 10,"
 .RE
 .RS
-.BR "*" " Roll 44in = 11."
+.BR "*" " Roll 44in = 11,"
+.RE
+.RS
+.BR "*" " Roll 48in = 12,"
+.RE
+.RS
+.BR "*" " Roll 62in = 13,"
+.RE
+.RS
+.BR "*" " Roll 72in = 14."
 .RE
 .IP "-W, --pagew <The page width>"
 .RB "Page width in current units like 12.0 (cannot be used with \*(lqpageformat\*(rq, " "export mode" ")."
 .IP "-H, --pageh <The page height>"
 .RB "Page height in current units like 12.0 (cannot be used with \*(lqpageformat\*(rq, " "export mode" ")."
 .IP "-U, --pageunits <The measure unit>"
-.RB "Page height/width measure units (cannot be used with \*(lqpageformat\*(rq, " "export mode" "). Valid values: mm, cm, inch, px."
+.RB "Page measure units (" "export mode" "). Valid values: mm, cm, inch, px."
 .IP "-i, --ignoremargins"
-.RB "Ignore margins printing (" "export mode" "). Disable value keys: \*(lqlmargin", \*(lqrmargin\*(rq, \*(lqtmargin\*(rq, \*(lqbmargin\*(rq. Set all margins to 0."
+.RB "Ignore margins printing (" "export mode" "). Use if need full paper space. In case of later printing you must account for the margins himself."
 .IP "-L, --lmargin <The left margin>"
-.RB "Page left margin in current units like 3.0 (" "export mode" "). If not set will be used value from default printer. Or 0 if none printers was found. Value will be ignored if key \*(lqignoremargins\*(rq is used."
+.RB "Page left margin in current units like 3.0 (" "export mode" "). If not set will be used value from default printer. Or 0 if none printers was found."
 .IP "-R, --rmargin <The right margin>"
-.RB "Page right margin in current units like 3.0 (" "export mode" "). If not set will be used value from default printer. Or 0 if none printers was found. Value will be ignored if key \*(lqignoremargins\*(rq is used."
+.RB "Page right margin in current units like 3.0 (" "export mode" "). If not set will be used value from default printer. Or 0 if none printers was found."
 .IP "-T, --tmargin <The top margin>"
-.RB "Page top margin in current units like 3.0 (" "export mode" "). If not set will be used value from default printer. Or 0 if none printers was found. Value will be ignored if key \*(lqignoremargins\*(rq is used."
+.RB "Page top margin in current units like 3.0 (" "export mode" "). If not set will be used value from default printer. Or 0 if none printers was found."
 .IP "-B, --bmargin <The bottom margin>"
-.RB "Page bottom margin in current units like 3.0 (" "export mode" "). If not set will be used value from default printer. Or 0 if none printers was found. Value will be ignored if key \*(lqignoremargins\*(rq is used."
+.RB "Page bottom margin in current units like 3.0 (" "export mode" "). If not set will be used value from default printer. Or 0 if none printers was found."
 .IP "-r, --rotate <Angle>"
 .RB "Rotation in degrees (one of predefined, " "export mode" "). Default value is " "180" ". 0 is no-rotate. Valid values: 0, 1, 2, 3, 4, 5, 6, 8, 9, 10, 12, 15, 18, 20, 24, 30, 36, 40, 45, 60, 72, 90, 180. Each value show how many times details will be rotated. For example 180 mean two times (360/180=2) by 180 degree."
 .IP "-c, --crop"
@@ -551,6 +560,39 @@ Run the program in a test mode. The program in this mode loads a single pattern 
 .RE
 .IP "--csvExportFM <Path to csv file>"
 .RB "Calling this command enable exporting final measurements. Specify path to csv file with final measurements. The path must contain path to directory and name of file. It can be absolute or relatetive. In case of relative path will be used current working directory to calc a destination path."
+.IP "--tiledPageformat <Template number>"              
+.RB "Number corresponding to tiled pdf page template (default = 0, " "export mode with tiled pdf format" "):"
+.RS
+.BR "*" " A0 = 0,"
+.RE
+.RS
+.BR "*" " A1 = 1,"
+.RE
+.RS
+.BR "*" " A2 = 2,"
+.RE
+.RS
+.BR "*" " A3 = 3,"
+.RE
+.RS
+.BR "*" " A4 = 4,"
+.RE
+.RS
+.BR "*" " Letter = 5,"
+.RE
+.RS
+.BR "*" " Legal = 6."
+.RE
+.IP "--tiledlmargin <The left margin>"               
+.RB "Tiled page left margin in current units like 3.0 (" "export mode" "). If not set will be used default value 1 cm."
+.IP "--tiledrmargin <The right margin>"              
+.RB "Tiled page right margin in current units like 3.0 (" "export mode" "). If not set will be used default value 1 cm."
+.IP "--tiledtmargin <The top margin>"                
+.RB "Tiled page top margin in current units like 3.0 (" "export mode" "). If not set will be used value default value 1 cm."
+.IP "--tiledbmargin <The bottom margin>"             
+.RB "Tiled page bottom margin in current units like 3.0 (" "export mode" "). If not set will be used value default value 1 cm."
+.IP "--tiledLandscape"                               
+.RB "Set tiled page orienatation to landscape (" "export mode" "). Default value if not set portrait."
 .IP Arguments: 
 .I filename
 \- a pattern file.

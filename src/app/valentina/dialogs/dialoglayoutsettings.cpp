@@ -792,11 +792,11 @@ QString DialogLayoutSettings::MakeHelpTemplateList()
     auto cntr = static_cast<VIndexType>(PaperSizeTemplate::A0);
     for (int i = 0; i < VAbstractLayoutDialog::pageFormatNames.size(); ++i)
     {
-        if (cntr <= static_cast<int>(PaperSizeTemplate::Roll44in))// Don't include custom template
+        if (cntr < static_cast<int>(PaperSizeTemplate::Custom))// Don't include custom template
         {
             out += "\t* "+VAbstractLayoutDialog::pageFormatNames.at(i)+" = "+ QString::number(cntr++);
 
-            if (i < VAbstractLayoutDialog::pageFormatNames.size() - 1)
+            if (i < VAbstractLayoutDialog::pageFormatNames.size() - 2)
             {
                out += ",\n";
             }
@@ -854,6 +854,9 @@ QSizeF DialogLayoutSettings::Template()
         case PaperSizeTemplate::Roll36in:
         case PaperSizeTemplate::Roll42in:
         case PaperSizeTemplate::Roll44in:
+        case PaperSizeTemplate::Roll48in:
+        case PaperSizeTemplate::Roll62in:
+        case PaperSizeTemplate::Roll72in:
             SetAdditionalOptions(true);
             return GetTemplateSize(temp, paperUnit);
         case PaperSizeTemplate::Custom:
