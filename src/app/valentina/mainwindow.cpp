@@ -4143,13 +4143,14 @@ void MainWindow::CreateActions()
         if (dialogFMeasurements.isNull())
         {
             dialogFMeasurements = new DialogFinalMeasurements(doc, this);
+            dialogFMeasurements->setAttribute(Qt::WA_DeleteOnClose);
             connect(dialogFMeasurements.data(), &DialogFinalMeasurements::finished, this, [this](int result)
             {
                 if (result == QDialog::Accepted)
                 {
                     doc->SetFinalMeasurements(dialogFMeasurements->FinalMeasurements());
                 }
-                delete dialogFMeasurements;
+                dialogFMeasurements->close();
             });
             dialogFMeasurements->show();
         }
