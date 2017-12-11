@@ -138,6 +138,8 @@ public:
     QPainterPath LayoutAllowancePath() const;
     Q_REQUIRED_RESULT QGraphicsItem *GetItem(bool textAsPaths) const;
 
+    bool IsLayoutAllowanceValid() const;
+
 private:
     QSharedDataPointer<VLayoutPieceData> d;
 

@@ -1056,6 +1056,21 @@ QGraphicsItem *VLayoutPiece::GetItem(bool textAsPaths) const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+bool VLayoutPiece::IsLayoutAllowanceValid() const
+{
+    QVector<QPointF> piecePath;
+    if (IsSeamAllowance() && not IsSeamAllowanceBuiltIn())
+    {
+        piecePath = d->seamAllowance;
+    }
+    else
+    {
+        piecePath = d->contour;
+    }
+    return qFloor(qAbs(SumTrapezoids(d->layoutAllowance)/2.0)) >= qFloor(qAbs(SumTrapezoids(piecePath)/2.0));
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 void VLayoutPiece::CreateLabelStrings(QGraphicsItem *parent, const QVector<QPointF> &labelShape,
                                       const VTextManager &tm, bool textAsPaths) const
 {
