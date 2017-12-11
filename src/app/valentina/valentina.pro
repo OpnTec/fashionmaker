@@ -89,6 +89,10 @@ CONFIG(release, debug|release){
             QMAKE_LFLAGS_RELEASE =
         }
     }
+} else {
+# Breakpoints do not work if debug the app inside of bundle. In debug mode we turn off creating a bundle.
+# Probably it will breake some dependencies. Version for Mac designed to work inside an app bundle.
+    CONFIG -= app_bundle
 }
 
 DVCS_HESH=$$FindBuildRevision()
