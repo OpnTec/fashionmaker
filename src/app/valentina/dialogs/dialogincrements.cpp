@@ -623,6 +623,74 @@ void DialogIncrements::CacheRename(const QString &name, const QString &newName)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void DialogIncrements::ShowTableIncrementDetails(QTableWidget *table)
+{
+    QLineEdit *lineEditName = nullptr;
+    QPlainTextEdit *plainTextEditDescription = nullptr;
+    QPlainTextEdit *plainTextEditFormula = nullptr;
+    QLabel *labelCalculatedValue = nullptr;
+
+    if (table == ui->tableWidgetIncrement)
+    {
+        lineEditName = ui->lineEditName;
+        plainTextEditDescription = ui->plainTextEditDescription;
+        plainTextEditFormula = ui->plainTextEditFormula;
+        labelCalculatedValue = ui->labelCalculatedValue;
+    }
+    else if (table == ui->tableWidgetPC)
+    {
+        lineEditName = ui->lineEditNamePC;
+        plainTextEditDescription = ui->plainTextEditDescriptionPC;
+        plainTextEditFormula = ui->plainTextEditFormulaPC;
+        labelCalculatedValue = ui->labelCalculatedValuePC;
+    }
+    else
+    {
+        return;
+    }
+
+    if (table->rowCount() > 0 && table->currentRow() != -1)
+    {
+        EnableDetails(table, true);
+
+        // name
+        const QTableWidgetItem *nameField = table->item(table->currentRow(), 0);
+        QSharedPointer<VIncrement> incr;
+
+        try
+        {
+            incr = data->GetVariable<VIncrement>(nameField->text());
+        }
+        catch(const VExceptionBadId &e)
+        {
+            Q_UNUSED(e)
+            EnableDetails(table, false);
+            return;
+        }
+
+        lineEditName->blockSignals(true);
+        lineEditName->setText(ClearIncrementName(incr->GetName()));
+        lineEditName->blockSignals(false);
+
+        plainTextEditDescription->blockSignals(true);
+        plainTextEditDescription->setPlainText(incr->GetDescription());
+        plainTextEditDescription->blockSignals(false);
+
+        EvalIncrementFormula(incr->GetFormula(), false, incr->GetData(), labelCalculatedValue);
+        plainTextEditFormula->blockSignals(true);
+
+        QString formula = VTranslateVars::TryFormulaToUser(incr->GetFormula(), qApp->Settings()->GetOsSeparator());
+
+        plainTextEditFormula->setPlainText(formula);
+        plainTextEditFormula->blockSignals(false);
+    }
+    else
+    {
+        EnableDetails(table, false);
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 /**
  * @brief FullUpdateFromFile update information in tables form file
  */
@@ -1229,6 +1297,7 @@ void DialogIncrements::Fx()
         LocalUpdateTree();
 
         table->selectRow(row);
+        ShowTableIncrementDetails(table);
     }
 }
 
@@ -1330,71 +1399,7 @@ void DialogIncrements::resizeEvent(QResizeEvent *event)
 //---------------------------------------------------------------------------------------------------------------------
 void DialogIncrements::ShowIncrementDetails()
 {
-    QTableWidget *table = qobject_cast<QTableWidget *>(sender());
-
-    QLineEdit *lineEditName = nullptr;
-    QPlainTextEdit *plainTextEditDescription = nullptr;
-    QPlainTextEdit *plainTextEditFormula = nullptr;
-    QLabel *labelCalculatedValue = nullptr;
-
-    if (table == ui->tableWidgetIncrement)
-    {
-        lineEditName = ui->lineEditName;
-        plainTextEditDescription = ui->plainTextEditDescription;
-        plainTextEditFormula = ui->plainTextEditFormula;
-        labelCalculatedValue = ui->labelCalculatedValue;
-    }
-    else if (table == ui->tableWidgetPC)
-    {
-        lineEditName = ui->lineEditNamePC;
-        plainTextEditDescription = ui->plainTextEditDescriptionPC;
-        plainTextEditFormula = ui->plainTextEditFormulaPC;
-        labelCalculatedValue = ui->labelCalculatedValuePC;
-    }
-    else
-    {
-        return;
-    }
-
-    if (table->rowCount() > 0)
-    {
-        EnableDetails(table, true);
-
-        // name
-        const QTableWidgetItem *nameField = table->item(table->currentRow(), 0);
-        QSharedPointer<VIncrement> incr;
-
-        try
-        {
-            incr = data->GetVariable<VIncrement>(nameField->text());
-        }
-        catch(const VExceptionBadId &e)
-        {
-            Q_UNUSED(e)
-            EnableDetails(table, false);
-            return;
-        }
-
-        lineEditName->blockSignals(true);
-        lineEditName->setText(ClearIncrementName(incr->GetName()));
-        lineEditName->blockSignals(false);
-
-        plainTextEditDescription->blockSignals(true);
-        plainTextEditDescription->setPlainText(incr->GetDescription());
-        plainTextEditDescription->blockSignals(false);
-
-        EvalIncrementFormula(incr->GetFormula(), false, incr->GetData(), labelCalculatedValue);
-        plainTextEditFormula->blockSignals(true);
-
-        QString formula = VTranslateVars::TryFormulaToUser(incr->GetFormula(), qApp->Settings()->GetOsSeparator());
-
-        plainTextEditFormula->setPlainText(formula);
-        plainTextEditFormula->blockSignals(false);
-    }
-    else
-    {
-        EnableDetails(table, false);
-    }
+    ShowTableIncrementDetails(qobject_cast<QTableWidget *>(sender()));
 }
 
 //---------------------------------------------------------------------------------------------------------------------

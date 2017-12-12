@@ -133,6 +133,8 @@ private:
     bool IncrementUsed(const QString &name) const;
 
     void CacheRename(const QString &name, const QString &newName);
+
+    void ShowTableIncrementDetails(QTableWidget *table);
 };
 
 #endif // DIALOGINCREMENTS_H
