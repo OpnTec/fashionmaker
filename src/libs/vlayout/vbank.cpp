@@ -190,6 +190,11 @@ bool VBank::Prepare()
     {
         details[i].SetLayoutWidth(layoutWidth);
         details[i].SetLayoutAllowancePoints();
+        if (not details[i].IsLayoutAllowanceValid())
+        {
+            qWarning()<< QObject::tr("Piece '%1' may broke a layout. Please, check seam allowance to check how seam "
+                                     "allowance behave.").arg(details[i].GetName());
+        }
 
         const qreal d = details.at(i).Diagonal();
         if (d > diagonal)

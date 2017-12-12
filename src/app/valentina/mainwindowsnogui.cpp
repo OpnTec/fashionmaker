@@ -742,13 +742,7 @@ QVector<VLayoutPiece> MainWindowsNoGUI::PrepareDetailsForLayout(const QHash<quin
         {
             VAbstractTool *tool = qobject_cast<VAbstractTool*>(VAbstractPattern::getTool(i.key()));
             SCASSERT(tool != nullptr)
-            const VLayoutPiece piece = VLayoutPiece::Create(i.value(), tool->getData());
-            if (not piece.IsLayoutAllowanceValid())
-            {
-                qWarning()<< tr("Piece '%1' may broke a layout. Please, check seam allowance to check how seam "
-                                "allowance behave.").arg(piece.GetName());
-            }
-            listDetails.append(piece);
+            listDetails.append(VLayoutPiece::Create(i.value(), tool->getData()));
             ++i;
         }
     }
