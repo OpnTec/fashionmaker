@@ -45,10 +45,10 @@
        </font>
       </property>
       <property name="toolTip">
-       <string>Export details skiping the Layout stage</string>
+       <string>Use these tools to create a pattern</string>
       </property>
       <property name="currentIndex">
-       <number>6</number>
+       <number>0</number>
       </property>
       <widget class="QWidget" name="page">
        <property name="geometry">
@@ -1505,6 +1505,9 @@
          <widget class="QToolButton" name="toolButtonDetailExportAs">
           <property name="enabled">
            <bool>false</bool>
+          </property>
+          <property name="toolTip">
+           <string>Export details skiping the Layout stage</string>
           </property>
           <property name="text">
            <string notr="true">...</string>
