@@ -300,6 +300,7 @@ void DialogSeamAllowance::SetPiece(const VPiece &piece)
     CustomSAChanged(0);
 
     uiTabPaths->checkBoxForbidFlipping->setChecked(piece.IsForbidFlipping());
+    uiTabPaths->checkBoxForceFlipping->setChecked(piece.IsForceFlipping());
     uiTabPaths->checkBoxSeams->setChecked(piece.IsSeamAllowance());
     uiTabPaths->checkBoxBuiltIn->setChecked(piece.IsSeamAllowanceBuiltIn());
     uiTabLabels->lineEditName->setText(piece.GetName());
@@ -2283,6 +2284,7 @@ VPiece DialogSeamAllowance::CreatePiece() const
     piece.SetPins(GetListInternals<quint32>(uiTabPins->listWidgetPins));
     piece.SetPlaceLabels(GetListInternals<quint32>(uiTabPlaceLabels->listWidgetPlaceLabels));
     piece.SetForbidFlipping(uiTabPaths->checkBoxForbidFlipping->isChecked());
+    piece.SetForceFlipping(uiTabPaths->checkBoxForceFlipping->isChecked());
     piece.SetSeamAllowance(uiTabPaths->checkBoxSeams->isChecked());
     piece.SetSeamAllowanceBuiltIn(uiTabPaths->checkBoxBuiltIn->isChecked());
     piece.SetHideMainPath(uiTabPaths->checkBoxHideMainPath->isChecked());
@@ -2613,7 +2615,24 @@ void DialogSeamAllowance::InitFancyTabBar()
 //---------------------------------------------------------------------------------------------------------------------
 void DialogSeamAllowance::InitMainPathTab()
 {
+    connect(uiTabPaths->checkBoxForbidFlipping, &QCheckBox::stateChanged, this, [this](int state)
+    {
+        if (state == Qt::Checked)
+        {
+            uiTabPaths->checkBoxForceFlipping->setChecked(false);
+        }
+    });
+
+    connect(uiTabPaths->checkBoxForceFlipping, &QCheckBox::stateChanged, this, [this](int state)
+    {
+        if (state == Qt::Checked)
+        {
+            uiTabPaths->checkBoxForbidFlipping->setChecked(false);
+        }
+    });
+
     uiTabPaths->checkBoxForbidFlipping->setChecked(qApp->Settings()->GetForbidWorkpieceFlipping());
+    uiTabPaths->checkBoxForceFlipping->setChecked(qApp->Settings()->GetForceWorkpieceFlipping());
     uiTabPaths->checkBoxHideMainPath->setChecked(qApp->Settings()->IsHideMainPath());
 
     uiTabPaths->listWidgetMainPath->setContextMenuPolicy(Qt::CustomContextMenu);

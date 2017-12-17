@@ -65,6 +65,7 @@ const QString settingConfigurationFreeCurveMode          = QStringLiteral("confi
 
 const QString settingPatternUndo                    = QStringLiteral("pattern/undo");
 const QString settingPatternForbidFlipping          = QStringLiteral("pattern/forbidFlipping");
+const QString settingPatternForceFlipping           = QStringLiteral("pattern/forceFlipping");
 const QString settingPatternHideMainPath            = QStringLiteral("pattern/hideMainPath");
 const QString settingDoublePassmark                 = QStringLiteral("pattern/doublePassmark");
 const QString settingPatternDefaultSeamAllowance    = QStringLiteral("pattern/defaultSeamAllowance");
@@ -700,6 +701,28 @@ bool VCommonSettings::GetForbidWorkpieceFlipping() const
 void VCommonSettings::SetForbidWorkpieceFlipping(bool value)
 {
     setValue(settingPatternForbidFlipping, value);
+
+    if (value)
+    {
+        SetForceWorkpieceFlipping(not value);
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+bool VCommonSettings::GetForceWorkpieceFlipping() const
+{
+    return value(settingPatternForceFlipping, false).toBool();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VCommonSettings::SetForceWorkpieceFlipping(bool value)
+{
+    setValue(settingPatternForceFlipping, value);
+
+    if (value)
+    {
+        SetForbidWorkpieceFlipping(not value);
+    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------

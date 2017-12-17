@@ -33,6 +33,7 @@
 - [#726] Improve Move tool. Add optional rotate option.
 - [#774] New feature. Matching Parentheses.
 - [#779] Add more roll paper size templates.
+- [#783] Flipping control.
 
 # Version 0.5.1
 - [#683] Tool Seam allowance's dialog is off screen on small resolutions.

@@ -69,6 +69,7 @@ const QString VToolSeamAllowance::TagPins        = QStringLiteral("pins");
 const QString VToolSeamAllowance::TagPlaceLabels = QStringLiteral("placeLabels");
 
 const QString VToolSeamAllowance::AttrForbidFlipping       = QStringLiteral("forbidFlipping");
+const QString VToolSeamAllowance::AttrForceFlipping        = QStringLiteral("forceFlipping");
 const QString VToolSeamAllowance::AttrSeamAllowance        = QStringLiteral("seamAllowance");
 const QString VToolSeamAllowance::AttrHideMainPath         = QStringLiteral("hideMainPath");
 const QString VToolSeamAllowance::AttrSeamAllowanceBuiltIn = QStringLiteral("seamAllowanceBuiltIn");
@@ -260,6 +261,7 @@ void VToolSeamAllowance::AddAttributes(VAbstractPattern *doc, QDomElement &domEl
     doc->SetAttribute(domElement, AttrMy, qApp->fromPixel(piece.GetMy()));
     doc->SetAttribute(domElement, AttrInLayout, piece.IsInLayout());
     doc->SetAttribute(domElement, AttrForbidFlipping, piece.IsForbidFlipping());
+    doc->SetAttribute(domElement, AttrForceFlipping, piece.IsForceFlipping());
     doc->SetAttribute(domElement, AttrSeamAllowance, piece.IsSeamAllowance());
     doc->SetAttribute(domElement, AttrHideMainPath, piece.IsHideMainPath());
 

@@ -429,6 +429,7 @@ VLayoutPiece VLayoutPiece::Create(const VPiece &piece, const VContainer *pattern
 
     det.SetSAWidth(qApp->toPixel(piece.GetSAWidth()));
     det.SetForbidFlipping(piece.IsForbidFlipping());
+    det.SetForceFlipping(piece.IsForceFlipping());
 
     return det;
 }

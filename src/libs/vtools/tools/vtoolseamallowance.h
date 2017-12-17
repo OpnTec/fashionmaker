@@ -77,6 +77,7 @@ public:
     static const QString TagPlaceLabels;
 
     static const QString AttrForbidFlipping;
+    static const QString AttrForceFlipping;
     static const QString AttrSeamAllowance;
     static const QString AttrHideMainPath;
     static const QString AttrSeamAllowanceBuiltIn;

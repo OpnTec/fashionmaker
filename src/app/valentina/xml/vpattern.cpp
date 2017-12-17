@@ -844,7 +844,9 @@ void VPattern::ParseDetailElement(QDomElement &domElement, const Document &parse
                                                                 VToolSeamAllowance::AttrSeamAllowanceBuiltIn,
                                                                 falseStr));
         initData.detail.SetForbidFlipping(GetParametrBool(domElement, VToolSeamAllowance::AttrForbidFlipping,
-                                           QString().setNum(qApp->ValentinaSettings()->GetForbidWorkpieceFlipping())));
+                                          QString().setNum(qApp->ValentinaSettings()->GetForbidWorkpieceFlipping())));
+        initData.detail.SetForceFlipping(GetParametrBool(domElement, VToolSeamAllowance::AttrForceFlipping,
+                                         QString().setNum(qApp->ValentinaSettings()->GetForceWorkpieceFlipping())));
         initData.detail.SetInLayout(GetParametrBool(domElement, AttrInLayout, trueStr));
         initData.detail.SetUnited(GetParametrBool(domElement, VToolSeamAllowance::AttrUnited, falseStr));
 

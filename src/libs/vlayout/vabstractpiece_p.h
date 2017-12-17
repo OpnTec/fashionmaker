@@ -46,6 +46,7 @@ public:
     VAbstractPieceData()
         : m_name(tr("Detail")),
           m_forbidFlipping(false),
+          m_forceFlipping(false),
           m_seamAllowance(false),
           m_seamAllowanceBuiltIn(false),
           m_hideMainPath(false),
@@ -58,6 +59,7 @@ public:
         : QSharedData(piece),
           m_name(piece.m_name),
           m_forbidFlipping(piece.m_forbidFlipping),
+          m_forceFlipping(piece.m_forceFlipping),
           m_seamAllowance(piece.m_seamAllowance),
           m_seamAllowanceBuiltIn(piece.m_seamAllowanceBuiltIn),
           m_hideMainPath(piece.m_hideMainPath),
@@ -71,6 +73,7 @@ public:
     QString m_name;
     /** @brief forbidFlipping forbid piece be mirrored in a layout. */
     bool    m_forbidFlipping;
+    bool    m_forceFlipping;
     bool    m_seamAllowance;
     bool    m_seamAllowanceBuiltIn;
     bool    m_hideMainPath;

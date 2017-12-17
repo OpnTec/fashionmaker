@@ -160,6 +160,9 @@ public:
     bool IsForbidFlipping() const;
     void SetForbidFlipping(bool value);
 
+    bool IsForceFlipping() const;
+    void SetForceFlipping(bool value);
+
     bool IsSeamAllowance() const;
     void SetSeamAllowance(bool value);
 

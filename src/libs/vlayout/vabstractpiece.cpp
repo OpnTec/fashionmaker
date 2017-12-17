@@ -85,6 +85,28 @@ bool VAbstractPiece::IsForbidFlipping() const
 void VAbstractPiece::SetForbidFlipping(bool value)
 {
     d->m_forbidFlipping = value;
+
+    if (value)
+    {
+        SetForceFlipping(not value);
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+bool VAbstractPiece::IsForceFlipping() const
+{
+    return d->m_forceFlipping;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VAbstractPiece::SetForceFlipping(bool value)
+{
+    d->m_forceFlipping = value;
+
+    if (value)
+    {
+        SetForbidFlipping(not value);
+    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------

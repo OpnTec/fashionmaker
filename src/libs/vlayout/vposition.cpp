@@ -278,7 +278,7 @@ bool VPosition::CheckCombineEdges(VLayoutPiece &detail, int j, int &dEdge)
 #endif
 
     CrossingType type = CrossingType::Intersection;
-    if (SheetContains(detail.DetailBoundingRect()))
+    if (not detail.IsForceFlipping() && SheetContains(detail.DetailBoundingRect()))
     {
         if (not gContour.GetContour().isEmpty())
         {
@@ -355,6 +355,11 @@ bool VPosition::CheckRotationEdges(VLayoutPiece &detail, int j, int dEdge, int a
 {
     const QLineF globalEdge = gContour.GlobalEdge(j);
     bool flagSquare = false;
+
+    if (detail.IsForceFlipping())
+    {
+        detail.Mirror(globalEdge);
+    }
 
     RotateEdges(detail, globalEdge, dEdge, angle);
 
