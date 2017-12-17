@@ -2016,7 +2016,7 @@
     </message>
     <message>
         <source>Lengths to control points</source>
-        <translation type="unfinished"></translation>
+        <translation>Extensão para controle de pontos</translation>
     </message>
     <message>
         <source>Filter list by keyword</source>
@@ -2862,7 +2862,7 @@
     </message>
     <message>
         <source>Curves control point lengths</source>
-        <translation type="unfinished"></translation>
+        <translation>Comprimentos das curvas do pontos de controle</translation>
     </message>
     <message>
         <source>Invalid result. Value is infinite or NaN. Please, check your calculations.</source>
@@ -8186,6 +8186,10 @@ Do you want to save your changes?</source>
     <message>
         <source>on fold</source>
         <translation type="unfinished">na dobra</translation>
+    </message>
+    <message>
+        <source>Piece &apos;%1&apos; may broke a layout. Please, check seam allowance to check how seam allowance behave.</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

@@ -8505,6 +8505,10 @@ Quiere guardar los cambios?</translation>
         <source>on fold</source>
         <translation type="unfinished">en pliegue</translation>
     </message>
+    <message>
+        <source>Piece &apos;%1&apos; may broke a layout. Please, check seam allowance to check how seam allowance behave.</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>QSaveFile</name>
