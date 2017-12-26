@@ -76,6 +76,7 @@
 - [#773] Tool Point intersection curve and axis cannot find desired intersection point.
 - [#776] Valentina cannot recognize translated functions.
 - [#778] Calling Valentina with "-h" option opens information dialog instead of writing to console.
+- [#788] Unhardcode icon path in GNU/Linux launcher.
 
 # Version 0.5.0 May 9, 2017
 - [#581] User can now filter input lists by keyword in function wizard.
