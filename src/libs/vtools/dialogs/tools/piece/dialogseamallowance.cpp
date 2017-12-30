@@ -2863,6 +2863,8 @@ void DialogSeamAllowance::InitLabelsTab()
     connect(uiTabLabels->pushButtonShowPLHeight, &QPushButton::clicked, this, &DialogSeamAllowance::DeployPLHeight);
     connect(uiTabLabels->pushButtonShowPLAngle, &QPushButton::clicked, this, &DialogSeamAllowance::DeployPLAngle);
 
+    uiTabLabels->lineEditName->setText(GetDefaultPieceName());
+
     EnabledPatternLabel();
 }
 
@@ -3246,4 +3248,26 @@ VPiecePath DialogSeamAllowance::CurrentPath(quint32 id) const
 VPlaceLabelItem DialogSeamAllowance::CurrentPlaceLabel(quint32 id) const
 {
     return m_newPlaceLabels.contains(id) ? m_newPlaceLabels.value(id) : *data->GeometricObject<VPlaceLabelItem>(id);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QString DialogSeamAllowance::GetDefaultPieceName() const
+{
+    QList<VPiece> pieces = data->DataPieces()->values();
+    QSet<QString> names;
+
+    for (int i = 0; i < pieces.size(); ++i)
+    {
+        names.insert(pieces.at(i).GetName());
+    }
+
+    const QString defName = tr("Detail");
+    QString name = defName;
+    int i = 0;
+
+    while(names.contains(name))
+    {
+        name = defName + QString("_%1").arg(++i);
+    }
+    return name;
 }

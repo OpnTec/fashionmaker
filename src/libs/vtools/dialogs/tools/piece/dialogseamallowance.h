@@ -276,6 +276,8 @@ private:
 
     VPiecePath      CurrentPath(quint32 id) const;
     VPlaceLabelItem CurrentPlaceLabel(quint32 id) const;
+
+    QString GetDefaultPieceName() const;
 };
 
 #endif // DIALOGSEAMALLOWANCE_H
