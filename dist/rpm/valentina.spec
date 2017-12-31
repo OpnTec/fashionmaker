@@ -6,8 +6,7 @@ Requires(postun): /sbin/ldconfig
 Requires(post): desktop-file-utils
 Requires(postun): desktop-file-utils
 
-# Fedora specifics
-%if 0%{?fedora_version} > 0 
+%if 0%{?fedora_version} > 0 || 0%{?rhel_version} >= 700 || 0%{?centos_version} >= 700
 BuildRequires: qt5-qtbase-devel >= 5.2.0
 BuildRequires: pkgconfig(Qt5Svg)
 BuildRequires: pkgconfig(Qt5Core)
@@ -41,7 +40,7 @@ BuildRequires: libqt5-linguist-devel
 BuildRequires: libqt5-qtxmlpatterns-devel
 %endif
 
-%endif
+%endif # %if 0%{?suse_version} > 0
 
 Requires:   poppler-utils
 
