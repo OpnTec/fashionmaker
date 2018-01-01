@@ -48,6 +48,7 @@
 #include "global.h"
 #include "vscenepoint.h"
 #include "../vmisc/vmath.h"
+#include "../vmisc/vabstractapplication.h"
 
 //---------------------------------------------------------------------------------------------------------------------
 /**
@@ -211,6 +212,11 @@ void VGraphicsSimpleTextItem::hoverEnterEvent(QGraphicsSceneHoverEvent *event)
     {
         SetItemOverrideCursor(this, cursorArrowOpenHand, 1, 1);
     }
+    else
+    {
+        setCursor(qApp->getSceneView()->viewport()->cursor());
+    }
+
     this->setBrush(Qt::green);
 
     if(QGraphicsItem *parent = parentItem())

@@ -358,12 +358,14 @@ void VToolSinglePoint::ChangeLabelPosition(quint32 id, const QPointF &pos)
 void VToolSinglePoint::AllowHover(bool enabled)
 {
     setAcceptHoverEvents(enabled);
+    AllowLabelHover(enabled);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void VToolSinglePoint::AllowSelecting(bool enabled)
 {
     setFlag(QGraphicsItem::ItemIsSelectable, enabled);
+    AllowLabelSelecting(enabled);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

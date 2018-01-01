@@ -608,6 +608,7 @@ void MainWindow::SetToolButton(bool checked, Tool t, const QString &cursor, cons
         QPixmap pixmap(cursorResource);
         QCursor cur(pixmap, 2, 2);
         ui->view->viewport()->setCursor(cur);
+        ui->view->setCurrentCursorShape(); // Hack to fix problem with a cursor
         helpLabel->setText(toolTip);
         ui->view->setShowToolOptions(false);
         dialogTool = QSharedPointer<Dialog>(new Dialog(pattern, 0, this));
@@ -2315,7 +2316,9 @@ void  MainWindow::ArrowTool(bool checked)
         emit EnableDetailHover(true);
 
         ui->view->AllowRubberBand(true);
+        ui->view->viewport()->unsetCursor();
         ui->view->viewport()->setCursor(QCursor(Qt::ArrowCursor));
+        ui->view->setCurrentCursorShape(); // Hack to fix problem with a cursor
         helpLabel->setText("");
         ui->view->setShowToolOptions(true);
         qCDebug(vMainWindow, "Enabled arrow tool.");

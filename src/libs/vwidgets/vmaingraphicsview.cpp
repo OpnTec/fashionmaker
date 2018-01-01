@@ -353,7 +353,8 @@ VMainGraphicsView::VMainGraphicsView(QWidget *parent)
       showToolOptions(true),
       isAllowRubberBand(true),
       m_ptStartPos(),
-      m_oldCursor()
+      m_oldCursor(),
+      m_currentCursor(Qt::ArrowCursor)
 {
     this->setResizeAnchor(QGraphicsView::AnchorUnderMouse);
     this->setTransformationAnchor(QGraphicsView::AnchorUnderMouse);
@@ -486,6 +487,16 @@ void VMainGraphicsView::mousePressEvent(QMouseEvent *event)
 //---------------------------------------------------------------------------------------------------------------------
 void VMainGraphicsView::mouseMoveEvent(QMouseEvent *event)
 {
+    // Hack to fix problem with mouse cursor. Looks like after we switch cursor back it is rewrited back by a dialog.
+    // Because no real way to catch this call we will check state for each move and compare to excpected state.
+    if (dragMode() != QGraphicsView::ScrollHandDrag &&
+            // No way to restore bitmap from shape and we really don't need this for now.
+            m_currentCursor != Qt::BitmapCursor &&
+            m_currentCursor != viewport()->cursor().shape())
+    {
+        viewport()->setCursor(m_currentCursor);
+    }
+
     if (dragMode() == QGraphicsView::ScrollHandDrag)
     {
         QScrollBar *hBar = horizontalScrollBar();
@@ -564,6 +575,12 @@ void VMainGraphicsView::EnsureVisibleWithDelay(const QGraphicsItem *item, unsign
     {
         QThread::msleep(msecs);
     }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VMainGraphicsView::setCurrentCursorShape()
+{
+    m_currentCursor = viewport()->cursor().shape();
 }
 
 //---------------------------------------------------------------------------------------------------------------------

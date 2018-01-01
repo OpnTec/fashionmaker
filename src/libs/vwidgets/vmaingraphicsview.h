@@ -129,6 +129,8 @@ public:
 
     static const unsigned long scrollDelay;
 
+    void setCurrentCursorShape();
+
 signals:
     /**
      * @brief MouseRelease help catch mouse release event.
@@ -153,6 +155,7 @@ private:
     bool              isAllowRubberBand;
     QPoint            m_ptStartPos;
     QCursor           m_oldCursor;
+    Qt::CursorShape   m_currentCursor;
 };
 
 #endif // VMAINGRAPHICSVIEW_H
