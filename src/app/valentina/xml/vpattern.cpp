@@ -3644,6 +3644,11 @@ void VPattern::ParsePathElement(VMainGraphicsScene *scene, QDomElement &domEleme
         initData.path.SetPenType(LineStyleToPenStyle(GetParametrString(domElement, AttrTypeLine, TypeLineLine)));
         initData.path.SetCutPath(GetParametrBool(domElement, AttrCut, falseStr));
 
+        if (initData.path.GetType() == PiecePathType::InternalPath)
+        {
+            initData.path.SetVisibilityTrigger(GetParametrString(domElement, AttrVisible, "1"));
+        }
+
         VToolPiecePath::Create(initData);
     }
     catch (const VExceptionBadId &e)

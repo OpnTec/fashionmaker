@@ -43,12 +43,17 @@ DialogPiecePath::DialogPiecePath(const VContainer *data, quint32 toolId, QWidget
       ui(new Ui::DialogPiecePath),
       m_showMode(false),
       m_saWidth(0),
-      m_timerWidth(nullptr),
-      m_timerWidthBefore(nullptr),
-      m_timerWidthAfter(nullptr),
+      m_timerWidth(new QTimer(this)),
+      m_timerWidthBefore(new QTimer(this)),
+      m_timerWidthAfter(new QTimer(this)),
+      m_timerVisible(new QTimer(this)),
       m_formulaBaseWidth(0),
       m_formulaBaseWidthBefore(0),
-      m_formulaBaseWidthAfter(0)
+      m_formulaBaseWidthAfter(0),
+      m_formulaBaseVisible(0),
+      m_flagFormulaBefore(true),
+      m_flagFormulaAfter(true),
+      m_flagFormulaVisible(true)
 {
     ui->setupUi(this);
     InitOkCancel(ui);
@@ -56,6 +61,9 @@ DialogPiecePath::DialogPiecePath(const VContainer *data, quint32 toolId, QWidget
     InitPathTab();
     InitSeamAllowanceTab();
     InitPassmarksTab();
+    InitControlTab();
+
+    EvalVisible();
 
     flagName = true;//We have default name of piece.
     flagError = PathIsValid();
@@ -189,7 +197,37 @@ void DialogPiecePath::ShowDialog(bool click)
 void DialogPiecePath::CheckState()
 {
     SCASSERT(bOk != nullptr);
-    bOk->setEnabled(flagName && flagError);
+    if (GetType() != PiecePathType::InternalPath)
+    {// Works only for internal paths
+        m_flagFormulaVisible = true;
+    }
+
+    bOk->setEnabled(flagName && flagError && flagFormula && m_flagFormulaBefore && m_flagFormulaAfter
+                    && m_flagFormulaVisible);
+
+    const int tabSeamAllowanceIndex = ui->tabWidget->indexOf(ui->tabSeamAllowance);
+    if (flagFormula && m_flagFormulaBefore && m_flagFormulaAfter)
+    {
+        ui->tabWidget->setTabIcon(tabSeamAllowanceIndex, QIcon());
+    }
+    else
+    {
+        const QIcon icon = QIcon::fromTheme("dialog-warning",
+                                            QIcon(":/icons/win.icon.theme/16x16/status/dialog-warning.png"));
+        ui->tabWidget->setTabIcon(tabSeamAllowanceIndex, icon);
+    }
+
+    const int tabControlIndex = ui->tabWidget->indexOf(ui->tabControl);
+    if (m_flagFormulaVisible)
+    {
+        ui->tabWidget->setTabIcon(tabControlIndex, QIcon());
+    }
+    else
+    {
+        const QIcon icon = QIcon::fromTheme("dialog-warning",
+                                            QIcon(":/icons/win.icon.theme/16x16/status/dialog-warning.png"));
+        ui->tabWidget->setTabIcon(tabControlIndex, icon);
+    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -213,6 +251,7 @@ void DialogPiecePath::closeEvent(QCloseEvent *event)
     ui->plainTextEditFormulaWidth->blockSignals(true);
     ui->plainTextEditFormulaWidthBefore->blockSignals(true);
     ui->plainTextEditFormulaWidthAfter->blockSignals(true);
+    ui->plainTextEditFormulaVisible->blockSignals(true);
     DialogTool::closeEvent(event);
 }
 
@@ -594,8 +633,7 @@ void DialogPiecePath::EvalWidthBefore()
     labelEditFormula = ui->labelEditBefore;
     const QString postfix = UnitsToStr(qApp->patternUnit(), true);
     QString formula = ui->plainTextEditFormulaWidthBefore->toPlainText();
-    bool flagFormula = false; // fake flag
-    Eval(formula, flagFormula, ui->labelResultBefore, postfix, false, true);
+    Eval(formula, m_flagFormulaBefore, ui->labelResultBefore, postfix, false, true);
 
     formula = GetFormulaSAWidthBefore();
     if (formula != currentSeamAllowance)
@@ -612,8 +650,7 @@ void DialogPiecePath::EvalWidthAfter()
     labelEditFormula = ui->labelEditAfter;
     const QString postfix = UnitsToStr(qApp->patternUnit(), true);
     QString formula = ui->plainTextEditFormulaWidthAfter->toPlainText();
-    bool flagFormula = false; // fake flag
-    Eval(formula, flagFormula, ui->labelResultAfter, postfix, false, true);
+    Eval(formula, m_flagFormulaAfter, ui->labelResultAfter, postfix, false, true);
 
     formula = GetFormulaSAWidthAfter();
     if (formula != currentSeamAllowance)
@@ -625,9 +662,17 @@ void DialogPiecePath::EvalWidthAfter()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void DialogPiecePath::EvalVisible()
+{
+    labelEditFormula = ui->labelEditVisible;
+    QString formula = ui->plainTextEditFormulaVisible->toPlainText();
+    Eval(formula, m_flagFormulaVisible, ui->labelResultVisible, "", false, true);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 void DialogPiecePath::FXWidth()
 {
-    DialogEditWrongFormula *dialog = new DialogEditWrongFormula(data, toolId, this);
+    QScopedPointer<DialogEditWrongFormula> dialog(new DialogEditWrongFormula(data, toolId, this));
     dialog->setWindowTitle(tr("Edit seam allowance width"));
     dialog->SetFormula(GetFormulaSAWidth());
     dialog->setCheckLessThanZero(true);
@@ -636,13 +681,12 @@ void DialogPiecePath::FXWidth()
     {
         SetFormulaSAWidth(dialog->GetFormula());
     }
-    delete dialog;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void DialogPiecePath::FXWidthBefore()
 {
-    DialogEditWrongFormula *dialog = new DialogEditWrongFormula(data, toolId, this);
+    QScopedPointer<DialogEditWrongFormula> dialog(new DialogEditWrongFormula(data, toolId, this));
     dialog->setWindowTitle(tr("Edit seam allowance width before"));
     dialog->SetFormula(GetFormulaSAWidthBefore());
     dialog->setCheckLessThanZero(true);
@@ -651,13 +695,12 @@ void DialogPiecePath::FXWidthBefore()
     {
         SetCurrentSABefore(dialog->GetFormula());
     }
-    delete dialog;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void DialogPiecePath::FXWidthAfter()
 {
-    DialogEditWrongFormula *dialog = new DialogEditWrongFormula(data, toolId, this);
+    QScopedPointer<DialogEditWrongFormula> dialog(new DialogEditWrongFormula(data, toolId, this));
     dialog->setWindowTitle(tr("Edit seam allowance width after"));
     dialog->SetFormula(GetFormulaSAWidthAfter());
     dialog->setCheckLessThanZero(true);
@@ -666,7 +709,18 @@ void DialogPiecePath::FXWidthAfter()
     {
         SetCurrentSAAfter(dialog->GetFormula());
     }
-    delete dialog;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogPiecePath::FXVisible()
+{
+    QScopedPointer<DialogEditWrongFormula> dialog(new DialogEditWrongFormula(data, toolId, this));
+    dialog->setWindowTitle(tr("Control visibility"));
+    dialog->SetFormula(GetFormulaVisible());
+    if (dialog->exec() == QDialog::Accepted)
+    {
+        SetFormulaVisible(dialog->GetFormula());
+    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -684,8 +738,7 @@ void DialogPiecePath::WidthBeforeChanged()
     labelEditFormula = ui->labelEditBefore;
     labelResultCalculation = ui->labelResultBefore;
     const QString postfix = UnitsToStr(qApp->patternUnit(), true);
-    bool flagFormula = false;
-    ValFormulaChanged(flagFormula, ui->plainTextEditFormulaWidthBefore, m_timerWidthBefore, postfix);
+    ValFormulaChanged(m_flagFormulaBefore, ui->plainTextEditFormulaWidthBefore, m_timerWidthBefore, postfix);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -694,8 +747,15 @@ void DialogPiecePath::WidthAfterChanged()
     labelEditFormula = ui->labelEditAfter;
     labelResultCalculation = ui->labelResultAfter;
     const QString postfix = UnitsToStr(qApp->patternUnit(), true);
-    bool flagFormula = false;
-    ValFormulaChanged(flagFormula, ui->plainTextEditFormulaWidthAfter, m_timerWidthAfter, postfix);
+    ValFormulaChanged(m_flagFormulaAfter, ui->plainTextEditFormulaWidthAfter, m_timerWidthAfter, postfix);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogPiecePath::VisibleChanged()
+{
+    labelEditFormula = ui->labelEditVisible;
+    labelResultCalculation = ui->labelResultVisible;
+    ValFormulaChanged(m_flagFormulaVisible, ui->plainTextEditFormulaVisible, m_timerVisible, "");
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -717,6 +777,12 @@ void DialogPiecePath::DeployWidthAfterFormulaTextEdit()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void DialogPiecePath::DeployVisibleFormulaTextEdit()
+{
+    DeployFormula(ui->plainTextEditFormulaVisible, ui->pushButtonGrowVisible, m_formulaBaseVisible);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 void DialogPiecePath::InitPathTab()
 {
     ui->lineEditName->setClearButtonEnabled(true);
@@ -731,6 +797,7 @@ void DialogPiecePath::InitPathTab()
     {
         ui->comboBoxPenType->setEnabled(GetType() == PiecePathType::InternalPath);
         ui->checkBoxCut->setEnabled(GetType() == PiecePathType::InternalPath);
+        ui->tabControl->setEnabled(GetType() == PiecePathType::InternalPath);
         ValidObjects(PathIsValid());
     });
 
@@ -750,13 +817,8 @@ void DialogPiecePath::InitSeamAllowanceTab()
     ui->plainTextEditFormulaWidthBefore->installEventFilter(this);
     ui->plainTextEditFormulaWidthAfter->installEventFilter(this);
 
-    m_timerWidth = new QTimer(this);
     connect(m_timerWidth, &QTimer::timeout, this, &DialogPiecePath::EvalWidth);
-
-    m_timerWidthBefore = new QTimer(this);
     connect(m_timerWidthBefore, &QTimer::timeout, this, &DialogPiecePath::EvalWidthBefore);
-
-    m_timerWidthAfter = new QTimer(this);
     connect(m_timerWidthAfter, &QTimer::timeout, this, &DialogPiecePath::EvalWidthAfter);
 
     // Default value for seam allowence is 1 cm. But pattern have different units, so just set 1 in dialog not enough.
@@ -802,6 +864,20 @@ void DialogPiecePath::InitPassmarksTab()
             this, &DialogPiecePath::PassmarkLineTypeChanged);
     connect(ui->buttonGroupAngleType, static_cast<void(QButtonGroup::*)(int)>(&QButtonGroup::buttonClicked),
             this, &DialogPiecePath::PassmarkAngleTypeChanged);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogPiecePath::InitControlTab()
+{
+    this->m_formulaBaseVisible = ui->plainTextEditFormulaVisible->height();
+
+    ui->plainTextEditFormulaVisible->installEventFilter(this);
+
+    connect(m_timerVisible, &QTimer::timeout, this, &DialogPiecePath::EvalVisible);
+    connect(ui->toolButtonExprVisible, &QPushButton::clicked, this, &DialogPiecePath::FXVisible);
+    connect(ui->plainTextEditFormulaVisible, &QPlainTextEdit::textChanged, this, &DialogPiecePath::VisibleChanged);
+    connect(ui->pushButtonGrowVisible, &QPushButton::clicked, this,
+            &DialogPiecePath::DeployVisibleFormulaTextEdit);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -924,6 +1000,15 @@ void DialogPiecePath::SetPiecePath(const VPiecePath &path)
     visPath->SetPath(path);
     SetPenType(path.GetPenType());
     SetCutPath(path.IsCutPath());
+
+    if (path.GetType() == PiecePathType::InternalPath)
+    {
+        SetFormulaVisible(path.GetVisibilityTrigger());
+    }
+    else
+    {
+        ui->plainTextEditFormulaVisible->setPlainText("1");
+    }
 
     ValidObjects(PathIsValid());
 
@@ -1141,6 +1226,15 @@ VPiecePath DialogPiecePath::CreatePath() const
     path.SetPenType(GetType() == PiecePathType::InternalPath ? GetPenType() : Qt::SolidLine);
     path.SetCutPath(GetType() == PiecePathType::InternalPath ? IsCutPath() : false);
 
+    if (GetType() == PiecePathType::InternalPath)
+    {
+        path.SetVisibilityTrigger(GetFormulaVisible());
+    }
+    else
+    {
+        path.SetVisibilityTrigger("1");
+    }
+
     return path;
 }
 
@@ -1221,4 +1315,25 @@ QString DialogPiecePath::GetFormulaSAWidthAfter() const
     QString width = ui->plainTextEditFormulaWidthAfter->toPlainText();
     width.replace("\n", " ");
     return qApp->TrVars()->TryFormulaFromUser(width, qApp->Settings()->GetOsSeparator());
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QString DialogPiecePath::GetFormulaVisible() const
+{
+    QString formula = ui->plainTextEditFormulaVisible->toPlainText();
+    formula.replace("\n", " ");
+    return qApp->TrVars()->TryFormulaFromUser(formula, qApp->Settings()->GetOsSeparator());
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogPiecePath::SetFormulaVisible(const QString &formula)
+{
+    const QString f = qApp->TrVars()->FormulaToUser(formula, qApp->Settings()->GetOsSeparator());
+    // increase height if needed.
+    if (f.length() > 80)
+    {
+        this->DeployVisibleFormulaTextEdit();
+    }
+    ui->plainTextEditFormulaVisible->setPlainText(f);
+    MoveCursorToEnd(ui->plainTextEditFormulaVisible);
 }

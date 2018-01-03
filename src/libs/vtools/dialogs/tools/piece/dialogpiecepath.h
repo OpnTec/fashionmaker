@@ -79,18 +79,22 @@ private slots:
     void EvalWidth();
     void EvalWidthBefore();
     void EvalWidthAfter();
+    void EvalVisible();
 
     void FXWidth();
     void FXWidthBefore();
     void FXWidthAfter();
+    void FXVisible();
 
     void WidthChanged();
     void WidthBeforeChanged();
     void WidthAfterChanged();
+    void VisibleChanged();
 
     void DeployWidthFormulaTextEdit();
     void DeployWidthBeforeFormulaTextEdit();
     void DeployWidthAfterFormulaTextEdit();
+    void DeployVisibleFormulaTextEdit();
 
 private:
     Q_DISABLE_COPY(DialogPiecePath)
@@ -101,14 +105,21 @@ private:
     QTimer *m_timerWidth;
     QTimer *m_timerWidthBefore;
     QTimer *m_timerWidthAfter;
+    QTimer *m_timerVisible;
 
     int m_formulaBaseWidth;
     int m_formulaBaseWidthBefore;
     int m_formulaBaseWidthAfter;
+    int m_formulaBaseVisible;
+
+    bool m_flagFormulaBefore;
+    bool m_flagFormulaAfter;
+    bool m_flagFormulaVisible;
 
     void InitPathTab();
     void InitSeamAllowanceTab();
     void InitPassmarksTab();
+    void InitControlTab();
     void InitPathTypes();
     void InitNodesList();
     void InitPassmarksList();
@@ -141,6 +152,9 @@ private:
 
     QString GetFormulaSAWidthBefore() const;
     QString GetFormulaSAWidthAfter() const;
+
+    QString GetFormulaVisible() const;
+    void    SetFormulaVisible(const QString &formula);
 };
 
 #endif // DIALOGPIECEPATH_H

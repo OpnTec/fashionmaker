@@ -41,6 +41,7 @@ class VContainer;
 class QPainterPath;
 class VPointF;
 class VPieceNode;
+class VInternalVariable;
 
 class VPiecePath
 {
@@ -81,6 +82,9 @@ public:
     bool IsCutPath() const;
     void SetCutPath(bool cut);
 
+    QString GetVisibilityTrigger() const;
+    void    SetVisibilityTrigger(const QString &formula);
+
     QVector<QPointF>  PathPoints(const VContainer *data) const;
     QVector<VPointF>  PathNodePoints(const VContainer *data, bool showExcluded = true) const;
     QVector<VSAPoint> SeamAllowancePoints(const VContainer *data, qreal width, bool reverse) const;
@@ -105,6 +109,8 @@ public:
 
     QPointF NodePreviousPoint(const VContainer *data, int i) const;
     QPointF NodeNextPoint(const VContainer *data, int i) const;
+
+    bool IsVisible(const QHash<QString, QSharedPointer<VInternalVariable> > *vars) const;
 
     static int indexOfNode(const QVector<VPieceNode> &nodes, quint32 id);
 

@@ -58,8 +58,8 @@ class QDomElement;
  */
 
 const QString VPatternConverter::PatternMinVerStr = QStringLiteral("0.1.0");
-const QString VPatternConverter::PatternMaxVerStr = QStringLiteral("0.7.4");
-const QString VPatternConverter::CurrentSchema    = QStringLiteral("://schema/pattern/v0.7.4.xsd");
+const QString VPatternConverter::PatternMaxVerStr = QStringLiteral("0.7.5");
+const QString VPatternConverter::CurrentSchema    = QStringLiteral("://schema/pattern/v0.7.5.xsd");
 
 //VPatternConverter::PatternMinVer; // <== DON'T FORGET TO UPDATE TOO!!!!
 //VPatternConverter::PatternMaxVer; // <== DON'T FORGET TO UPDATE TOO!!!!
@@ -220,7 +220,8 @@ QString VPatternConverter::XSDSchema(int ver) const
         std::make_pair(0x000701, QStringLiteral("://schema/pattern/v0.7.1.xsd")),
         std::make_pair(0x000702, QStringLiteral("://schema/pattern/v0.7.2.xsd")),
         std::make_pair(0x000703, QStringLiteral("://schema/pattern/v0.7.3.xsd")),
-        std::make_pair(0x000704, CurrentSchema)
+        std::make_pair(0x000704, QStringLiteral("://schema/pattern/v0.7.4.xsd")),
+        std::make_pair(0x000705, CurrentSchema)
     };
 
     if (schemas.contains(ver))
@@ -419,6 +420,10 @@ void VPatternConverter::ApplyPatches()
             ValidateXML(XSDSchema(0x000704), m_convertedFileName);
             V_FALLTHROUGH
         case (0x000704):
+            ToV0_7_5();
+            ValidateXML(XSDSchema(0x000705), m_convertedFileName);
+            V_FALLTHROUGH
+        case (0x000705):
             break;
         default:
             InvalidVersion(m_ver);
@@ -436,7 +441,7 @@ void VPatternConverter::DowngradeToCurrentMaxVersion()
 bool VPatternConverter::IsReadOnly() const
 {
     // Check if attribute readOnly was not changed in file format
-    Q_STATIC_ASSERT_X(VPatternConverter::PatternMaxVer == CONVERTER_VERSION_CHECK(0, 7, 4),
+    Q_STATIC_ASSERT_X(VPatternConverter::PatternMaxVer == CONVERTER_VERSION_CHECK(0, 7, 5),
                       "Check attribute readOnly.");
 
     // Possibly in future attribute readOnly will change position etc.
@@ -947,6 +952,16 @@ void VPatternConverter::ToV0_7_4()
     Q_STATIC_ASSERT_X(VPatternConverter::PatternMinVer < CONVERTER_VERSION_CHECK(0, 7, 4),
                       "Time to refactor the code.");
     SetVersion(QStringLiteral("0.7.4"));
+    Save();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VPatternConverter::ToV0_7_5()
+{
+    // TODO. Delete if minimal supported version is 0.7.5
+    Q_STATIC_ASSERT_X(VPatternConverter::PatternMinVer < CONVERTER_VERSION_CHECK(0, 7, 5),
+                      "Time to refactor the code.");
+    SetVersion(QStringLiteral("0.7.5"));
     Save();
 }
 

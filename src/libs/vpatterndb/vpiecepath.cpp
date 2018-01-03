@@ -31,6 +31,7 @@
 #include "vcontainer.h"
 #include "../vgeometry/vpointf.h"
 #include "../vlayout/vabstractpiece.h"
+#include "calculator.h"
 
 #include <QPainterPath>
 
@@ -247,6 +248,18 @@ bool VPiecePath::IsCutPath() const
 void VPiecePath::SetCutPath(bool cut)
 {
     d->m_cut = cut;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QString VPiecePath::GetVisibilityTrigger() const
+{
+    return d->m_visibilityTrigger;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VPiecePath::SetVisibilityTrigger(const QString &formula)
+{
+    d->m_visibilityTrigger = formula;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -778,6 +791,39 @@ QPointF VPiecePath::NodeNextPoint(const VContainer *data, int i) const
     }
 
     return point;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+bool VPiecePath::IsVisible(const QHash<QString, QSharedPointer<VInternalVariable>> *vars) const
+{
+    SCASSERT(vars != nullptr)
+    bool visible = true;
+    try
+    {
+        QString formula  = GetVisibilityTrigger();
+        // Replace line return character with spaces for calc if exist
+        formula.replace("\n", " ");
+        qDebug() << "Formula: " << formula;
+        QScopedPointer<Calculator> cal(new Calculator());
+        const qreal result = cal->EvalFormula(vars, formula);
+        qDebug() << "Result: " << result;
+
+        if (qIsInf(result) || qIsNaN(result))
+        {
+            qWarning() << QObject::tr("Visibility trigger contains error and will be ignored");
+        }
+
+        if (qFuzzyIsNull(result))
+        {
+            visible = false;
+        }
+    }
+    catch (qmu::QmuParserError &e)
+    {
+        qDebug() << "Parser error: " << e.GetMsg();
+        qWarning() << QObject::tr("Visibility trigger contains error and will be ignored");
+    }
+    return visible;
 }
 
 //---------------------------------------------------------------------------------------------------------------------

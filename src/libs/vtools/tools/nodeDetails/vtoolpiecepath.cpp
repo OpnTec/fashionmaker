@@ -192,6 +192,7 @@ void VToolPiecePath::AddAttributes(VAbstractPattern *doc, QDomElement &domElemen
 
     if (path.GetType() == PiecePathType::InternalPath)
     {
+        doc->SetAttribute(domElement, VAbstractPattern::AttrVisible, path.GetVisibilityTrigger());
         doc->SetAttribute(domElement, AttrCut, path.IsCutPath());
     }
 }
@@ -308,6 +309,8 @@ void VToolPiecePath::RefreshGeometry()
         QPen pen = this->pen();
         pen.setStyle(path.GetPenType());
         this->setPen(pen);
+
+        setVisible(path.IsVisible(this->getData()->DataVariables()));
     }
 }
 
