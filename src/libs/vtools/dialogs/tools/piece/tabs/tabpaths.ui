@@ -74,6 +74,30 @@
             </layout>
            </item>
            <item>
+            <layout class="QHBoxLayout" name="horizontalLayout">
+             <item>
+              <widget class="QLabel" name="labelEditName">
+               <property name="text">
+                <string>Name of detail:</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="VLineEdit" name="lineEditName">
+               <property name="text">
+                <string>Detail</string>
+               </property>
+               <property name="maxLength">
+                <number>30</number>
+               </property>
+               <property name="placeholderText">
+                <string>Name can't be empty</string>
+               </property>
+              </widget>
+             </item>
+            </layout>
+           </item>
+           <item>
             <widget class="QCheckBox" name="checkBoxForbidFlipping">
              <property name="toolTip">
               <string>Forbid piece be mirrored in a layout.</string>
@@ -944,6 +968,11 @@
    <class>VPlainTextEdit</class>
    <extends>QPlainTextEdit</extends>
    <header location="global">vplaintextedit.h</header>
+  </customwidget>
+  <customwidget>
+   <class>VLineEdit</class>
+   <extends>QLineEdit</extends>
+   <header>vlineedit.h</header>
   </customwidget>
  </customwidgets>
  <resources>

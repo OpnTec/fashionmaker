@@ -153,7 +153,7 @@ DialogSeamAllowance::DialogSeamAllowance(const VContainer *data, const quint32 &
     InitPlaceLabelsTab();
 
     flagName = true;//We have default name of piece.
-    ChangeColor(uiTabLabels->labelEditName, okColor);
+    ChangeColor(uiTabPaths->labelEditName, okColor);
     flagMainPathIsValid = MainPathIsValid();
     CheckState();
 
@@ -303,7 +303,7 @@ void DialogSeamAllowance::SetPiece(const VPiece &piece)
     uiTabPaths->checkBoxForceFlipping->setChecked(piece.IsForceFlipping());
     uiTabPaths->checkBoxSeams->setChecked(piece.IsSeamAllowance());
     uiTabPaths->checkBoxBuiltIn->setChecked(piece.IsSeamAllowanceBuiltIn());
-    uiTabLabels->lineEditName->setText(piece.GetName());
+    uiTabPaths->lineEditName->setText(piece.GetName());
 
     const QString width = qApp->TrVars()->FormulaToUser(piece.GetFormulaSAWidth(), qApp->Settings()->GetOsSeparator());
     uiTabPaths->plainTextEditFormulaWidth->setPlainText(width);
@@ -480,7 +480,7 @@ void DialogSeamAllowance::CheckState()
 
     if (flagFormula && flagFormulaBefore && flagFormulaAfter)
     {
-        if (flagMainPathIsValid)
+        if (flagMainPathIsValid && flagName)
         {
             m_ftb->SetTabText(TabOrder::Paths, tr("Paths"));
         }
@@ -495,7 +495,7 @@ void DialogSeamAllowance::CheckState()
         uiTabPaths->tabWidget->setTabIcon(uiTabPaths->tabWidget->indexOf(uiTabPaths->tabSeamAllowance), icon);
     }
 
-    if (flagMainPathIsValid)
+    if (flagMainPathIsValid && flagName)
     {
         if (flagFormula && flagFormulaBefore && flagFormulaAfter)
         {
@@ -578,19 +578,12 @@ void DialogSeamAllowance::NameDetailChanged()
         if (edit->text().isEmpty())
         {
             flagName = false;
-            ChangeColor(uiTabLabels->labelEditName, Qt::red);
-            m_ftb->SetTabText(TabOrder::Labels, tr("Labels") + QLatin1String("*"));
-            const QIcon icon = QIcon::fromTheme("dialog-warning",
-                                                QIcon(":/icons/win.icon.theme/16x16/status/dialog-warning.png"));
-            uiTabLabels->tabWidget->setTabIcon(uiTabLabels->tabWidget->indexOf(uiTabLabels->tabPieceLabelData), icon);
+            ChangeColor(uiTabPaths->labelEditName, Qt::red);
         }
         else
         {
             flagName = true;
-            ChangeColor(uiTabLabels->labelEditName, okColor);
-            m_ftb->SetTabText(TabOrder::Labels, tr("Labels"));
-            uiTabLabels->tabWidget->setTabIcon(uiTabLabels->tabWidget->indexOf(uiTabLabels->tabPieceLabelData),
-                                               QIcon());
+            ChangeColor(uiTabPaths->labelEditName, okColor);
         }
     }
     CheckState();
@@ -2288,7 +2281,7 @@ VPiece DialogSeamAllowance::CreatePiece() const
     piece.SetSeamAllowance(uiTabPaths->checkBoxSeams->isChecked());
     piece.SetSeamAllowanceBuiltIn(uiTabPaths->checkBoxBuiltIn->isChecked());
     piece.SetHideMainPath(uiTabPaths->checkBoxHideMainPath->isChecked());
-    piece.SetName(uiTabLabels->lineEditName->text());
+    piece.SetName(uiTabPaths->lineEditName->text());
     piece.SetMx(m_mx);
     piece.SetMy(m_my);
     piece.SetFormulaSAWidth(GetFormulaFromUser(uiTabPaths->plainTextEditFormulaWidth), m_saWidth);
@@ -2615,6 +2608,11 @@ void DialogSeamAllowance::InitFancyTabBar()
 //---------------------------------------------------------------------------------------------------------------------
 void DialogSeamAllowance::InitMainPathTab()
 {
+    connect(uiTabPaths->lineEditName, &QLineEdit::textChanged, this, &DialogSeamAllowance::NameDetailChanged);
+
+    uiTabPaths->lineEditName->setClearButtonEnabled(true);
+    uiTabPaths->lineEditName->setText(GetDefaultPieceName());
+
     connect(uiTabPaths->checkBoxForbidFlipping, &QCheckBox::stateChanged, this, [this](int state)
     {
         if (state == Qt::Checked)
@@ -2784,7 +2782,6 @@ void DialogSeamAllowance::InitInternalPathsTab()
 //---------------------------------------------------------------------------------------------------------------------
 void DialogSeamAllowance::InitPatternPieceDataTab()
 {
-    uiTabLabels->lineEditName->setClearButtonEnabled(true);
     uiTabLabels->lineEditLetter->setClearButtonEnabled(true);
     uiTabLabels->lineEditAnnotation->setClearButtonEnabled(true);
     uiTabLabels->lineEditOrientation->setClearButtonEnabled(true);
@@ -2792,7 +2789,6 @@ void DialogSeamAllowance::InitPatternPieceDataTab()
     uiTabLabels->lineEditTilt->setClearButtonEnabled(true);
     uiTabLabels->lineEditFoldPosition->setClearButtonEnabled(true);
 
-    connect(uiTabLabels->lineEditName, &QLineEdit::textChanged, this, &DialogSeamAllowance::NameDetailChanged);
     connect(uiTabLabels->pushButtonEditPieceLabel, &QPushButton::clicked, this, &DialogSeamAllowance::EditLabel);
 }
 
@@ -2862,8 +2858,6 @@ void DialogSeamAllowance::InitLabelsTab()
     connect(uiTabLabels->pushButtonShowPLWidth, &QPushButton::clicked, this, &DialogSeamAllowance::DeployPLWidth);
     connect(uiTabLabels->pushButtonShowPLHeight, &QPushButton::clicked, this, &DialogSeamAllowance::DeployPLHeight);
     connect(uiTabLabels->pushButtonShowPLAngle, &QPushButton::clicked, this, &DialogSeamAllowance::DeployPLAngle);
-
-    uiTabLabels->lineEditName->setText(GetDefaultPieceName());
 
     EnabledPatternLabel();
 }
