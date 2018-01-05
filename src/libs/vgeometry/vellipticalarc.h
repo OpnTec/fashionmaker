@@ -61,7 +61,7 @@ public:
     VEllipticalArc (qreal length, const VPointF &center, qreal radius1, qreal radius2, qreal f1, qreal rotationAngle);
     VEllipticalArc(const VEllipticalArc &arc);
 
-    VEllipticalArc Rotate(const QPointF &originPoint, qreal degrees, const QString &prefix = QString()) const;
+    VEllipticalArc Rotate(QPointF originPoint, qreal degrees, const QString &prefix = QString()) const;
     VEllipticalArc Flip(const QLineF &axis, const QString &prefix = QString()) const;
     VEllipticalArc Move(qreal length, qreal angle, const QString &prefix = QString()) const;
 
@@ -92,10 +92,18 @@ public:
     QPointF GetP1() const;
     QPointF GetP2() const;
 
+    QTransform GetTransform() const;
+    void       SetTransform(const QTransform &matrix, bool combine = false);
+
+    virtual VPointF GetCenter () const Q_DECL_OVERRIDE;
     virtual QVector<QPointF> GetPoints () const Q_DECL_OVERRIDE;
+    virtual qreal GetStartAngle () const Q_DECL_OVERRIDE;
+    virtual qreal GetEndAngle () const Q_DECL_OVERRIDE;
 
     QPointF CutArc (const qreal &length, VEllipticalArc &arc1, VEllipticalArc &arc2) const;
     QPointF CutArc (const qreal &length) const;
+
+    static qreal OptimizeAngle(qreal angle);
 protected:
     virtual void CreateName() Q_DECL_OVERRIDE;
     virtual void FindF2(qreal length) Q_DECL_OVERRIDE;
@@ -103,9 +111,17 @@ private:
     QSharedDataPointer<VEllipticalArcData> d;
 
     qreal MaxLength() const;
+
+    QPointF GetP(qreal angle) const;
 };
 
 Q_DECLARE_METATYPE(VEllipticalArc)
 Q_DECLARE_TYPEINFO(VEllipticalArc, Q_MOVABLE_TYPE);
+
+//---------------------------------------------------------------------------------------------------------------------
+inline qreal VEllipticalArc::OptimizeAngle(qreal angle)
+{
+    return angle - 360.*qFloor(angle/360.);
+}
 
 #endif // VELLIPTICALARC_H

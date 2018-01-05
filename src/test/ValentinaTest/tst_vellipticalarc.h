@@ -49,6 +49,8 @@ private slots:
     void TestGetPoints2();
     void TestGetPoints3();
     void TestGetPoints4();
+    void TestGetPoints5_data();
+    void TestGetPoints5();
     void TestRotation_data();
     void TestRotation();
     void TestFlip_data();

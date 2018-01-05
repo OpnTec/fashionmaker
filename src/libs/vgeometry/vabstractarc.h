@@ -72,7 +72,7 @@ public:
     void          SetFormulaF2 (const QString &formula, qreal value);
     virtual qreal GetEndAngle () const Q_DECL_OVERRIDE;
 
-    VPointF GetCenter () const;
+    virtual VPointF GetCenter () const;
     void    SetCenter (const VPointF &point);
 
     QString GetFormulaLength () const;
