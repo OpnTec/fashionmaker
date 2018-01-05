@@ -431,19 +431,22 @@ QString VToolEllipticalArc::MakeToolTip() const
                                     "<tr> <td><b>%6:</b> %7 %3</td> </tr>"
                                     "<tr> <td><b>%8:</b> %9°</td> </tr>"
                                     "<tr> <td><b>%10:</b> %11°</td> </tr>"
+                                    "<tr> <td><b>%14:</b> %15°</td> </tr>"
                                     "</table>")
-            .arg(tr("Length"))
-            .arg(qApp->fromPixel(elArc->GetLength()))
-            .arg(UnitsToStr(qApp->patternUnit(), true))
-            .arg(tr("Radius") + QLatin1String("1"))
-            .arg(qApp->fromPixel(elArc->GetRadius1()))
-            .arg(tr("Radius") + QLatin1String("2"))
-            .arg(qApp->fromPixel(elArc->GetRadius2()))
-            .arg(tr("Start angle"))
-            .arg(elArc->GetStartAngle())
-            .arg(tr("End angle"))
-            .arg(elArc->GetEndAngle())
-            .arg(tr("Label"))
-            .arg(elArc->name());
+            .arg(tr("Length"))                          // 1
+            .arg(qApp->fromPixel(elArc->GetLength()))   // 2
+            .arg(UnitsToStr(qApp->patternUnit(), true)) // 3
+            .arg(tr("Radius") + QLatin1String("1"))     // 4
+            .arg(qApp->fromPixel(elArc->GetRadius1()))  // 5
+            .arg(tr("Radius") + QLatin1String("2"))     // 6
+            .arg(qApp->fromPixel(elArc->GetRadius2()))  // 7
+            .arg(tr("Start angle"))                     // 8
+            .arg(elArc->GetStartAngle())                // 9
+            .arg(tr("End angle"))                       // 10
+            .arg(elArc->GetEndAngle())                  // 11
+            .arg(tr("Label"))                           // 12
+            .arg(elArc->name())                         // 13
+            .arg(tr("Rotation"))                        // 14
+            .arg(elArc->GetRotationAngle());            // 15
     return toolTip;
 }
