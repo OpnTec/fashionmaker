@@ -376,6 +376,9 @@ void VContainer::AddArc(const QSharedPointer<VAbstractCurve> &arc, const quint32
 
         VArcRadius *radius2 = new VArcRadius(id, parentId, casted.data(), 2, *GetPatternUnit());
         AddVariable(radius2->GetName(), radius2);
+
+        VEllipticalArcRotation *rotation = new VEllipticalArcRotation(id, parentId, casted.data());
+        AddVariable(rotation->GetName(), rotation);
     }
 }
 

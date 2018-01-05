@@ -219,6 +219,8 @@ extern const QString angle2SplPath;
 extern const QString seg_;
 extern const QString currentLength;
 extern const QString currentSeamAllowance;
+extern const QString rotation_V;
+extern const QString rotationElArc_;
 
 extern const QStringList builInVariables;
 

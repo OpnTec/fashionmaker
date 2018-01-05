@@ -283,6 +283,8 @@ const QString angle2SplPath        = angle2_V + splPath;
 const QString seg_                 = QStringLiteral("Seg_");
 const QString currentLength        = QStringLiteral("CurrentLength");
 const QString currentSeamAllowance = QStringLiteral("CurrentSeamAllowance");
+const QString rotation_V           = QStringLiteral("Rotation");
+const QString rotationElArc_       = rotation_V + elarc_;
 
 const QStringList builInVariables = QStringList() << measurement_
                                                   << increment_
@@ -309,4 +311,5 @@ const QStringList builInVariables = QStringList() << measurement_
                                                   << c1LengthSpl_
                                                   << c2LengthSpl_
                                                   << c1LengthSplPath
-                                                  << c2LengthSplPath;
+                                                  << c2LengthSplPath
+                                                  << rotationElArc_;

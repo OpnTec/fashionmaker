@@ -401,6 +401,7 @@ void VTranslateVars::InitVariables()
                                                 "Do not add symbol _ to the end of the name"));
     variables.insert(c2LengthSplPath, translate("VTranslateVars", "C2LengthSplPath",
                                                 "Do not add symbol _ to the end of the name"));
+    variables.insert(rotationElArc_, translate("VTranslateVars", "RotationElArc_", "Left symbol _ in the name"));
 }
 
 //---------------------------------------------------------------------------------------------------------------------

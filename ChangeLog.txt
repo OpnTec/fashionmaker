@@ -36,6 +36,7 @@
 - [#783] Flipping control.
 - [#790] Generate unique name for each detail.
 - [#792] New feature. Visibility trigger for internal path.
+- New internal variable RotationElArc.
 
 # Version 0.5.1
 - [#683] Tool Seam allowance's dialog is off screen on small resolutions.
