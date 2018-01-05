@@ -55,6 +55,7 @@
 #include "../vpatterndb/vcontainer.h"
 #include "../vwidgets/vabstractmainwindow.h"
 #include "../vwidgets/vmaingraphicsscene.h"
+#include "../vwidgets/vmaingraphicsview.h"
 #include "ui_dialogflippingbyline.h"
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -173,6 +174,8 @@ void DialogFlippingByLine::ShowDialog(bool click)
         scene->ToggleElArcHover(false);
         scene->ToggleSplineHover(false);
         scene->ToggleSplinePathHover(false);
+
+        qApp->getSceneView()->AllowRubberBand(false);
 
         emit ToolTip(tr("Select first line point"));
     }

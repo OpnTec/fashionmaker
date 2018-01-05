@@ -60,6 +60,7 @@
 #include "../vpatterndb/vtranslatevars.h"
 #include "../vwidgets/vabstractmainwindow.h"
 #include "../vwidgets/vmaingraphicsscene.h"
+#include "../vwidgets/vmaingraphicsview.h"
 #include "ui_dialogmove.h"
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -280,6 +281,8 @@ void DialogMove::ShowDialog(bool click)
         scene->ToggleElArcHover(false);
         scene->ToggleSplineHover(false);
         scene->ToggleSplinePathHover(false);
+
+        qApp->getSceneView()->AllowRubberBand(false);
     }
     else if (not stage2 && not stage1 && prepare && click)
     {
