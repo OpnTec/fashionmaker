@@ -177,11 +177,6 @@ void VAbstractSpline::AllowHover(bool enabled)
     {
         point->setAcceptHoverEvents(enabled);
     }
-
-    if (not enabled)
-    {
-        setCursor(qApp->getSceneView()->viewport()->cursor());
-    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
