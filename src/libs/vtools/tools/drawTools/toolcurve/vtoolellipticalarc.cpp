@@ -268,12 +268,8 @@ void VToolEllipticalArc::SetFormulaF1(const VFormula &value)
     {
         QSharedPointer<VGObject> obj = VAbstractTool::data.GetGObject(m_id);
         QSharedPointer<VEllipticalArc> elArc = qSharedPointerDynamicCast<VEllipticalArc>(obj);
-
-        if (not VFuzzyComparePossibleNulls(value.getDoubleValue(), elArc->GetEndAngle()))// Angles can't be equal
-        {
-            elArc->SetFormulaF1(value.GetFormula(FormulaType::FromUser), value.getDoubleValue());
-            SaveOption(obj);
-        }
+        elArc->SetFormulaF1(value.GetFormula(FormulaType::FromUser), value.getDoubleValue());
+        SaveOption(obj);
     }
 }
 
@@ -297,11 +293,8 @@ void VToolEllipticalArc::SetFormulaF2(const VFormula &value)
     {
         QSharedPointer<VGObject> obj = VAbstractTool::data.GetGObject(m_id);
         QSharedPointer<VEllipticalArc> elArc = qSharedPointerDynamicCast<VEllipticalArc>(obj);
-        if (not VFuzzyComparePossibleNulls(value.getDoubleValue(), elArc->GetStartAngle()))// Angles can't be equal
-        {
-            elArc->SetFormulaF2(value.GetFormula(FormulaType::FromUser), value.getDoubleValue());
-            SaveOption(obj);
-        }
+        elArc->SetFormulaF2(value.GetFormula(FormulaType::FromUser), value.getDoubleValue());
+        SaveOption(obj);
     }
 }
 
