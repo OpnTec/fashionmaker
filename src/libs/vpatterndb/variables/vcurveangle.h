@@ -48,7 +48,6 @@ public:
     VCurveAngle(const quint32 &id, const quint32 &parentId, const VAbstractCurve *curve, CurveAngle angle);
     VCurveAngle(const quint32 &id, const quint32 &parentId, const QString &baseCurveName, const VSpline &spl,
                 CurveAngle angle, qint32 segment);
-    virtual ~VCurveAngle() =default;
 protected:
     VCurveAngle(const quint32 &id, const quint32 &parentId);
 };
@@ -58,7 +57,6 @@ class VEllipticalArcRotation : public VCurveAngle
 public:
     VEllipticalArcRotation();
     VEllipticalArcRotation(const quint32 &id, const quint32 &parentId, const VEllipticalArc *elArc);
-    virtual ~VEllipticalArcRotation() =default;
 };
 
 #endif // VCURVEANGLE_H
