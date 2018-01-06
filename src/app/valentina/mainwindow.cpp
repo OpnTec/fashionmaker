@@ -2884,6 +2884,7 @@ void MainWindow::Clear()
     qCDebug(vMainWindow, "Unlocked pattern file.");
     ActionDraw(true);
     qCDebug(vMainWindow, "Returned to Draw mode.");
+    setCurrentFile(QString());// Keep before cleaning a pattern data to prevent a crash
     pattern->Clear();
     qCDebug(vMainWindow, "Clearing pattern.");
     if (not qApp->GetPPath().isEmpty() && not doc->MPath().isEmpty())
@@ -2891,7 +2892,6 @@ void MainWindow::Clear()
         watcher->removePath(AbsoluteMPath(qApp->GetPPath(), doc->MPath()));
     }
     doc->clear();
-    setCurrentFile(QString());
     qCDebug(vMainWindow, "Clearing scenes.");
     sceneDraw->clear();
     sceneDetails->clear();
