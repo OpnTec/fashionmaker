@@ -4442,6 +4442,26 @@ Apply settings anyway?</source>
         <source>Intersection (only right)</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Control</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Visible</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Create a formula that regulates visibility. Values different from &quot;0&quot; make a path visible.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Control visibility</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>DialogPin</name>
@@ -5307,6 +5327,10 @@ Apply settings anyway?</source>
     <message>
         <source>Value</source>
         <translation>Значение</translation>
+    </message>
+    <message>
+        <source>Detail</source>
+        <translation type="unfinished">Деталь</translation>
     </message>
     <message>
         <source>Grainline</source>
@@ -7796,6 +7820,10 @@ Do you want to save your changes?</source>
         <source>The measurements file &apos;%1&apos; could not be found or provides not enough information.</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Use these tools to create a pattern</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>MainWindowsNoGUI</name>
@@ -8507,6 +8535,10 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Piece &apos;%1&apos; may broke a layout. Please, check seam allowance to check how seam allowance behave.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Visibility trigger contains error and will be ignored</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -9515,15 +9547,15 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Name of detail:</source>
-        <translation>Имя детали:</translation>
+        <translation type="vanished">Имя детали:</translation>
     </message>
     <message>
         <source>Detail</source>
-        <translation>Деталь</translation>
+        <translation type="vanished">Деталь</translation>
     </message>
     <message>
         <source>Name can&apos;t be empty</source>
-        <translation>Имя не может быть пустым</translation>
+        <translation type="vanished">Имя не может быть пустым</translation>
     </message>
     <message>
         <source>Placement:</source>
@@ -9818,6 +9850,26 @@ Do you want to save your changes?</source>
     <message>
         <source>Hide main path</source>
         <translation>Прятать главный контур</translation>
+    </message>
+    <message>
+        <source>Name of detail:</source>
+        <translation type="unfinished">Имя детали:</translation>
+    </message>
+    <message>
+        <source>Detail</source>
+        <translation type="unfinished">Деталь</translation>
+    </message>
+    <message>
+        <source>Name can&apos;t be empty</source>
+        <translation type="unfinished">Имя не может быть пустым</translation>
+    </message>
+    <message>
+        <source>Force piece to be always flipped in a layout.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Force flipping</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -11577,6 +11629,10 @@ Do you want to save your changes?</source>
     <message>
         <source>Label</source>
         <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Rotation</source>
+        <translation type="unfinished">Поворот</translation>
     </message>
 </context>
 <context>
@@ -13713,6 +13769,11 @@ Do you want to save your changes?</source>
     <message>
         <source>csrInch</source>
         <comment>cut, split and rotate modeling operation. Takes inch units.</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>RotationElArc_</source>
+        <comment>Left symbol _ in the name</comment>
         <translation type="unfinished"></translation>
     </message>
 </context>
