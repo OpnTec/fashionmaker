@@ -5330,7 +5330,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Detail</source>
-        <translation type="unfinished">Деталь</translation>
+        <translation>Деталь</translation>
     </message>
     <message>
         <source>Grainline</source>
@@ -9546,18 +9546,6 @@ Do you want to save your changes?</source>
         <translation>Обозначение выкройки</translation>
     </message>
     <message>
-        <source>Name of detail:</source>
-        <translation type="vanished">Имя детали:</translation>
-    </message>
-    <message>
-        <source>Detail</source>
-        <translation type="vanished">Деталь</translation>
-    </message>
-    <message>
-        <source>Name can&apos;t be empty</source>
-        <translation type="vanished">Имя не может быть пустым</translation>
-    </message>
-    <message>
         <source>Placement:</source>
         <translation>Размещение:</translation>
     </message>
@@ -9853,15 +9841,15 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Name of detail:</source>
-        <translation type="unfinished">Имя детали:</translation>
+        <translation>Имя детали:</translation>
     </message>
     <message>
         <source>Detail</source>
-        <translation type="unfinished">Деталь</translation>
+        <translation>Деталь</translation>
     </message>
     <message>
         <source>Name can&apos;t be empty</source>
-        <translation type="unfinished">Имя не может быть пустым</translation>
+        <translation>Имя не может быть пустым</translation>
     </message>
     <message>
         <source>Force piece to be always flipped in a layout.</source>
@@ -11632,7 +11620,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Rotation</source>
-        <translation type="unfinished">Поворот</translation>
+        <translation>Поворот</translation>
     </message>
 </context>
 <context>

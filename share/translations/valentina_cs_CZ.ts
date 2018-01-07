@@ -5195,7 +5195,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Detail</source>
-        <translation type="unfinished">Detail</translation>
+        <translation>Detail</translation>
     </message>
     <message>
         <source>Grainline</source>
@@ -9089,18 +9089,6 @@ Do you want to save your changes?</source>
         <translation>Písmeno dílu střihu</translation>
     </message>
     <message>
-        <source>Name of detail:</source>
-        <translation type="vanished">Název detailu:</translation>
-    </message>
-    <message>
-        <source>Detail</source>
-        <translation type="vanished">Detail</translation>
-    </message>
-    <message>
-        <source>Name can&apos;t be empty</source>
-        <translation type="vanished">Název nemůže být prázdný</translation>
-    </message>
-    <message>
         <source>Placement:</source>
         <translation>Umístění:</translation>
     </message>
@@ -9396,15 +9384,15 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Name of detail:</source>
-        <translation type="unfinished">Název detailu:</translation>
+        <translation>Název detailu:</translation>
     </message>
     <message>
         <source>Detail</source>
-        <translation type="unfinished">Detail</translation>
+        <translation>Detail</translation>
     </message>
     <message>
         <source>Name can&apos;t be empty</source>
-        <translation type="unfinished">Název nemůže být prázdný</translation>
+        <translation>Název nemůže být prázdný</translation>
     </message>
     <message>
         <source>Force piece to be always flipped in a layout.</source>
@@ -11016,7 +11004,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Rotation</source>
-        <translation type="unfinished">Otáčení</translation>
+        <translation>Otáčení</translation>
     </message>
 </context>
 <context>

@@ -5330,7 +5330,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Detail</source>
-        <translation type="unfinished">Detail</translation>
+        <translation>Detail</translation>
     </message>
     <message>
         <source>Grainline</source>
@@ -9546,18 +9546,6 @@ Do you want to save your changes?</translation>
         <translation>Letter of pattern piece</translation>
     </message>
     <message>
-        <source>Name of detail:</source>
-        <translation type="vanished">Name of detail:</translation>
-    </message>
-    <message>
-        <source>Detail</source>
-        <translation type="vanished">Detail</translation>
-    </message>
-    <message>
-        <source>Name can&apos;t be empty</source>
-        <translation type="vanished">Name can&apos;t be empty</translation>
-    </message>
-    <message>
         <source>Placement:</source>
         <translation>Placement:</translation>
     </message>
@@ -9853,15 +9841,15 @@ Do you want to save your changes?</translation>
     </message>
     <message>
         <source>Name of detail:</source>
-        <translation type="unfinished">Name of detail:</translation>
+        <translation>Name of detail:</translation>
     </message>
     <message>
         <source>Detail</source>
-        <translation type="unfinished">Detail</translation>
+        <translation>Detail</translation>
     </message>
     <message>
         <source>Name can&apos;t be empty</source>
-        <translation type="unfinished">Name can&apos;t be empty</translation>
+        <translation>Name can&apos;t be empty</translation>
     </message>
     <message>
         <source>Force piece to be always flipped in a layout.</source>
@@ -11632,7 +11620,7 @@ Do you want to save your changes?</translation>
     </message>
     <message>
         <source>Rotation</source>
-        <translation type="unfinished">Rotation</translation>
+        <translation>Rotation</translation>
     </message>
 </context>
 <context>

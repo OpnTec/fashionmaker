@@ -5243,7 +5243,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Detail</source>
-        <translation type="unfinished">Λεπτομέρεια</translation>
+        <translation>Λεπτομέρεια</translation>
     </message>
     <message>
         <source>Grainline</source>
@@ -9322,10 +9322,6 @@ Do you want to save your changes?</source>
         <translation>Γράμμα του κομματιού πατρόν</translation>
     </message>
     <message>
-        <source>Name can&apos;t be empty</source>
-        <translation type="vanished">Το όνομα δε μπορεί να είναι κενό</translation>
-    </message>
-    <message>
         <source>Placement:</source>
         <translation type="unfinished">Τοποθέτηση:</translation>
     </message>
@@ -9621,15 +9617,15 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Name of detail:</source>
-        <translation type="unfinished">Όνομα της λεπτομέρειας:</translation>
+        <translation>Όνομα της λεπτομέρειας:</translation>
     </message>
     <message>
         <source>Detail</source>
-        <translation type="unfinished">Λεπτομέρεια</translation>
+        <translation>Λεπτομέρεια</translation>
     </message>
     <message>
         <source>Name can&apos;t be empty</source>
-        <translation type="unfinished">Το όνομα δε μπορεί να είναι κενό</translation>
+        <translation>Το όνομα δε μπορεί να είναι κενό</translation>
     </message>
     <message>
         <source>Force piece to be always flipped in a layout.</source>
@@ -11235,7 +11231,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Rotation</source>
-        <translation type="unfinished">Περιστροφή</translation>
+        <translation>Περιστροφή</translation>
     </message>
 </context>
 <context>

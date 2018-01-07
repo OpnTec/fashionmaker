@@ -4748,7 +4748,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Detail</source>
-        <translation type="unfinished">Detalii</translation>
+        <translation>Detalii</translation>
     </message>
     <message>
         <source>Grainline</source>
@@ -8714,11 +8714,11 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Name of detail:</source>
-        <translation type="unfinished">Nume detaliu:</translation>
+        <translation>Nume detaliu:</translation>
     </message>
     <message>
         <source>Detail</source>
-        <translation type="unfinished">Detalii</translation>
+        <translation>Detalii</translation>
     </message>
     <message>
         <source>Name can&apos;t be empty</source>

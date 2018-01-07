@@ -667,7 +667,7 @@
     </message>
     <message>
         <source>Set approximation scale for this curve, 0 - use global value</source>
-        <translation>Bepaal de schaal bij benadering voor deze kromming, 0 - gebruik algemene waarde.</translation>
+        <translation>Bepaal de schaal bij benadering voor deze kromming, 0 - gebruik algemene waarde</translation>
     </message>
 </context>
 <context>
@@ -960,7 +960,7 @@
     </message>
     <message>
         <source>Approximation Scale:</source>
-        <translation>Schaal bij benadering: </translation>
+        <translation>Schaal bij benadering:</translation>
     </message>
     <message>
         <source>Set approximation scale for this curve, 0 - use global value</source>
@@ -1877,7 +1877,7 @@
     </message>
     <message>
         <source>Insert…</source>
-        <translation>Voeg in..</translation>
+        <translation>Voeg in…</translation>
     </message>
 </context>
 <context>
@@ -5226,7 +5226,7 @@ Toch de instellingen aanpassen?</translation>
     </message>
     <message>
         <source>Browse…</source>
-        <translation>Doorbladeren..</translation>
+        <translation>Doorbladeren…</translation>
     </message>
     <message>
         <source>cm</source>
@@ -5332,7 +5332,7 @@ Toch de instellingen aanpassen?</translation>
     </message>
     <message>
         <source>Detail</source>
-        <translation type="unfinished">Detail</translation>
+        <translation>Detail</translation>
     </message>
     <message>
         <source>Grainline</source>
@@ -7751,19 +7751,19 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Save &amp;As…</source>
-        <translation>Sla op &amp; als..</translation>
+        <translation>Sla op &amp; als…</translation>
     </message>
     <message>
         <source>Report Bug…</source>
-        <translation>Rapporteer fout..</translation>
+        <translation>Rapporteer fout…</translation>
     </message>
     <message>
         <source>Export As…</source>
-        <translation>Exporteer als...</translation>
+        <translation>Exporteer als…</translation>
     </message>
     <message>
         <source>Save…</source>
-        <translation>Opslaan..</translation>
+        <translation>Opslaan…</translation>
     </message>
     <message>
         <source>Final measurements</source>
@@ -7815,7 +7815,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Select placelabel center point</source>
-        <translation>Selecteer middenpunt labelplaats  </translation>
+        <translation>Selecteer middenpunt labelplaats</translation>
     </message>
     <message>
         <source>The measurements file &apos;%1&apos; could not be found or provides not enough information.</source>
@@ -9466,23 +9466,23 @@ Wil je deze veranderingen opslaan?</translation>
     </message>
     <message>
         <source>Open individual …</source>
-        <translation>Open individueel...</translation>
+        <translation>Open individueel …</translation>
     </message>
     <message>
         <source>Save As …</source>
-        <translation>Opslaan als...</translation>
+        <translation>Opslaan als …</translation>
     </message>
     <message>
         <source>Open multisize …</source>
-        <translation>Open multimaten...</translation>
+        <translation>Open multimaten …</translation>
     </message>
     <message>
         <source>Create from existing …</source>
-        <translation>Creer van bestaande...</translation>
+        <translation>Creer van bestaande …</translation>
     </message>
     <message>
         <source>Save…</source>
-        <translation>Opslaan..</translation>
+        <translation>Opslaan…</translation>
     </message>
 </context>
 <context>
@@ -9545,18 +9545,6 @@ Wil je deze veranderingen opslaan?</translation>
     <message>
         <source>Letter of pattern piece</source>
         <translation>Letter van patroondeel</translation>
-    </message>
-    <message>
-        <source>Name of detail:</source>
-        <translation type="vanished">Detailnaam:</translation>
-    </message>
-    <message>
-        <source>Detail</source>
-        <translation type="vanished">Detail</translation>
-    </message>
-    <message>
-        <source>Name can&apos;t be empty</source>
-        <translation type="vanished">Naam mag niet leeg zijn</translation>
     </message>
     <message>
         <source>Placement:</source>
@@ -9854,15 +9842,15 @@ Wil je deze veranderingen opslaan?</translation>
     </message>
     <message>
         <source>Name of detail:</source>
-        <translation type="unfinished">Detailnaam:</translation>
+        <translation>Detailnaam:</translation>
     </message>
     <message>
         <source>Detail</source>
-        <translation type="unfinished">Detail</translation>
+        <translation>Detail</translation>
     </message>
     <message>
         <source>Name can&apos;t be empty</source>
-        <translation type="unfinished">Naam mag niet leeg zijn</translation>
+        <translation>Naam mag niet leeg zijn</translation>
     </message>
     <message>
         <source>Force piece to be always flipped in a layout.</source>
@@ -11633,7 +11621,7 @@ Wil je deze veranderingen opslaan?</translation>
     </message>
     <message>
         <source>Rotation</source>
-        <translation type="unfinished">Rotatie</translation>
+        <translation>Rotatie</translation>
     </message>
 </context>
 <context>

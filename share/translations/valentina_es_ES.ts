@@ -5330,7 +5330,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Detail</source>
-        <translation type="unfinished">Detalle</translation>
+        <translation>Detalle</translation>
     </message>
     <message>
         <source>Grainline</source>
@@ -9840,15 +9840,15 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Name of detail:</source>
-        <translation type="unfinished">Nombre del detalle:</translation>
+        <translation>Nombre del detalle:</translation>
     </message>
     <message>
         <source>Detail</source>
-        <translation type="unfinished">Detalle</translation>
+        <translation>Detalle</translation>
     </message>
     <message>
         <source>Name can&apos;t be empty</source>
-        <translation type="unfinished">El nombre no puede estar vacío</translation>
+        <translation>El nombre no puede estar vacío</translation>
     </message>
     <message>
         <source>Force piece to be always flipped in a layout.</source>
@@ -11619,7 +11619,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Rotation</source>
-        <translation type="unfinished">Rotación</translation>
+        <translation>Rotación</translation>
     </message>
 </context>
 <context>

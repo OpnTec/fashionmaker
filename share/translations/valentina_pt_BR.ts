@@ -5328,7 +5328,7 @@ Aplicar configurações de qualquer forma?</translation>
     </message>
     <message>
         <source>Detail</source>
-        <translation type="unfinished">Detalhe</translation>
+        <translation>Detalhe</translation>
     </message>
     <message>
         <source>Grainline</source>
@@ -7642,19 +7642,19 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Save &amp;As…</source>
-        <translation>Salvar &amp;Como...</translation>
+        <translation>Salvar &amp;Como…</translation>
     </message>
     <message>
         <source>Report Bug…</source>
-        <translation>Reportar erro...</translation>
+        <translation>Reportar erro…</translation>
     </message>
     <message>
         <source>Export As…</source>
-        <translation>Exportar Como...</translation>
+        <translation>Exportar Como…</translation>
     </message>
     <message>
         <source>Save…</source>
-        <translation>Salvar...</translation>
+        <translation>Salvar…</translation>
     </message>
     <message>
         <source>Final measurements</source>
@@ -9081,7 +9081,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Save…</source>
-        <translation>Salvar...</translation>
+        <translation>Salvar…</translation>
     </message>
 </context>
 <context>
@@ -9144,14 +9144,6 @@ Do you want to save your changes?</source>
     <message>
         <source>Letter of pattern piece</source>
         <translation>Letra do molde</translation>
-    </message>
-    <message>
-        <source>Detail</source>
-        <translation type="vanished">Detalhe</translation>
-    </message>
-    <message>
-        <source>Name can&apos;t be empty</source>
-        <translation type="vanished">Nome não pode ficar vazio</translation>
     </message>
     <message>
         <source>Placement:</source>
@@ -9449,15 +9441,15 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Name of detail:</source>
-        <translation type="unfinished">Nome do detalhe:</translation>
+        <translation>Nome do detalhe:</translation>
     </message>
     <message>
         <source>Detail</source>
-        <translation type="unfinished">Detalhe</translation>
+        <translation>Detalhe</translation>
     </message>
     <message>
         <source>Name can&apos;t be empty</source>
-        <translation type="unfinished">Nome não pode ficar vazio</translation>
+        <translation>Nome não pode ficar vazio</translation>
     </message>
     <message>
         <source>Force piece to be always flipped in a layout.</source>
@@ -11047,7 +11039,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Rotation</source>
-        <translation type="unfinished">Rotação</translation>
+        <translation>Rotação</translation>
     </message>
 </context>
 <context>

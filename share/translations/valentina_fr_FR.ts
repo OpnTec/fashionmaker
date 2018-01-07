@@ -5327,7 +5327,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Detail</source>
-        <translation type="unfinished">Pièce de patron</translation>
+        <translation>Pièce de patron</translation>
     </message>
     <message>
         <source>Grainline</source>
@@ -9826,15 +9826,15 @@ Voulez-vous enregistrer les changements?</translation>
     </message>
     <message>
         <source>Name of detail:</source>
-        <translation type="unfinished">Nom de la pièce de patron:</translation>
+        <translation>Nom de la pièce de patron:</translation>
     </message>
     <message>
         <source>Detail</source>
-        <translation type="unfinished">Pièce de patron</translation>
+        <translation>Pièce de patron</translation>
     </message>
     <message>
         <source>Name can&apos;t be empty</source>
-        <translation type="unfinished">La valeur Nom ne peut pas être vide</translation>
+        <translation>La valeur Nom ne peut pas être vide</translation>
     </message>
     <message>
         <source>Force piece to be always flipped in a layout.</source>
@@ -11584,7 +11584,7 @@ Voulez-vous enregistrer les changements?</translation>
     </message>
     <message>
         <source>Rotation</source>
-        <translation type="unfinished">Rotation</translation>
+        <translation>Rotation</translation>
     </message>
 </context>
 <context>

@@ -4597,7 +4597,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Detail</source>
-        <translation type="unfinished">Detal</translation>
+        <translation>Detal</translation>
     </message>
     <message>
         <source>Grainline</source>
@@ -8298,10 +8298,6 @@ Do you want to save your changes?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Detail</source>
-        <translation type="vanished">Detal</translation>
-    </message>
-    <message>
         <source>Placement:</source>
         <translation type="unfinished"></translation>
     </message>
@@ -8601,7 +8597,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Detail</source>
-        <translation type="unfinished">Detal</translation>
+        <translation>Detal</translation>
     </message>
     <message>
         <source>Name can&apos;t be empty</source>

@@ -4699,7 +4699,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Detail</source>
-        <translation type="unfinished">Yksityiskohta</translation>
+        <translation>Yksityiskohta</translation>
     </message>
     <message>
         <source>Grainline</source>
@@ -8753,7 +8753,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Detail</source>
-        <translation type="unfinished">Yksityiskohta</translation>
+        <translation>Yksityiskohta</translation>
     </message>
     <message>
         <source>Name can&apos;t be empty</source>

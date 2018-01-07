@@ -5313,7 +5313,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Detail</source>
-        <translation type="unfinished">Detail</translation>
+        <translation>Detail</translation>
     </message>
     <message>
         <source>Grainline</source>
@@ -9497,10 +9497,6 @@ Do you want to save your changes?</source>
         <translation>Buchstabe des Schnitteils</translation>
     </message>
     <message>
-        <source>Name can&apos;t be empty</source>
-        <translation type="vanished">Name kann nicht leer sein</translation>
-    </message>
-    <message>
         <source>Placement:</source>
         <translation type="unfinished">Platzierung:</translation>
     </message>
@@ -9796,15 +9792,15 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Name of detail:</source>
-        <translation type="unfinished">Name des Details:</translation>
+        <translation>Name des Details:</translation>
     </message>
     <message>
         <source>Detail</source>
-        <translation type="unfinished">Detail</translation>
+        <translation>Detail</translation>
     </message>
     <message>
         <source>Name can&apos;t be empty</source>
-        <translation type="unfinished">Name kann nicht leer sein</translation>
+        <translation>Name kann nicht leer sein</translation>
     </message>
     <message>
         <source>Force piece to be always flipped in a layout.</source>
@@ -11527,7 +11523,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Rotation</source>
-        <translation type="unfinished">Drehung</translation>
+        <translation>Drehung</translation>
     </message>
 </context>
 <context>

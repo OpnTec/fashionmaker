@@ -5230,7 +5230,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Detail</source>
-        <translation type="unfinished">Dettaglio</translation>
+        <translation>Dettaglio</translation>
     </message>
     <message>
         <source>Grainline</source>
@@ -9721,11 +9721,11 @@ Vuoi salvare le tue modifiche?</translation>
     </message>
     <message>
         <source>Name of detail:</source>
-        <translation type="unfinished">Nome del dettaglio:</translation>
+        <translation>Nome del dettaglio:</translation>
     </message>
     <message>
         <source>Detail</source>
-        <translation type="unfinished">Dettaglio</translation>
+        <translation>Dettaglio</translation>
     </message>
     <message>
         <source>Name can&apos;t be empty</source>
@@ -11374,7 +11374,7 @@ Vuoi salvare le tue modifiche?</translation>
     </message>
     <message>
         <source>Rotation</source>
-        <translation type="unfinished">Rotazione</translation>
+        <translation>Rotazione</translation>
     </message>
 </context>
 <context>
