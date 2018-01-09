@@ -1931,8 +1931,8 @@ void MainWindow::ToolBarOption()
     doubleSpinBoxScale->setDecimals(1);
     doubleSpinBoxScale->setSuffix("%");
     ScaleChanged(ui->view->transform().m11());
-    connect(doubleSpinBoxScale, static_cast<void (QDoubleSpinBox::*)(double)>(&QDoubleSpinBox::valueChanged), this,
-            [this](double d){ui->view->Zoom(d/100.0);});
+    connect(doubleSpinBoxScale.data(), static_cast<void (QDoubleSpinBox::*)(double)>(&QDoubleSpinBox::valueChanged),
+            this, [this](double d){ui->view->Zoom(d/100.0);});
     ui->toolBarOption->addWidget(doubleSpinBoxScale);
 
     ui->toolBarOption->addSeparator();
