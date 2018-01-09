@@ -85,6 +85,7 @@
 #include <QFileSystemWatcher>
 #include <QComboBox>
 #include <QTextCodec>
+#include <QDoubleSpinBox>
 
 #if defined(Q_OS_MAC)
 #include <QMimeData>
@@ -126,7 +127,12 @@ MainWindow::MainWindow(QWidget *parent)
       drawMode(true), recentFileActs(),
       separatorAct(nullptr),
       leftGoToStage(nullptr), rightGoToStage(nullptr), autoSaveTimer(nullptr), guiEnabled(true),
-      gradationHeights(nullptr), gradationSizes(nullptr), gradationHeightsLabel(nullptr), gradationSizesLabel(nullptr),
+      gradationHeights(nullptr),
+      gradationSizes(nullptr),
+      gradationHeightsLabel(nullptr),
+      gradationSizesLabel(nullptr),
+      zoomScale(nullptr),
+      doubleSpinBoxScale(nullptr),
       toolOptions(nullptr),
       groupsWidget(nullptr),
       detailsWidget(nullptr),
@@ -373,6 +379,7 @@ void MainWindow::InitScenes()
     sceneDetails->setTransform(ui->view->transform());
 
     connect(ui->view, &VMainGraphicsView::MouseRelease, this, [this](){EndVisualization(true);});
+    connect(ui->view, &VMainGraphicsView::ScaleChanged, this, &MainWindow::ScaleChanged);
     QSizePolicy policy(QSizePolicy::Expanding, QSizePolicy::Expanding);
     policy.setHorizontalStretch(12);
     ui->view->setSizePolicy(policy);
@@ -1593,6 +1600,17 @@ void MainWindow::ExportToCSVData(const QString &fileName, bool withHeader, int m
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void MainWindow::ScaleChanged(qreal scale)
+{
+    doubleSpinBoxScale->blockSignals(true);
+    doubleSpinBoxScale->setMaximum(qFloor(VMainGraphicsView::MaxScale()*1000)/10.0);
+    doubleSpinBoxScale->setMinimum(qFloor(VMainGraphicsView::MinScale()*1000)/10.0);
+    doubleSpinBoxScale->setValue(qFloor(scale*1000)/10.0);
+    doubleSpinBoxScale->setSingleStep(1);
+    doubleSpinBoxScale->blockSignals(false);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 void MainWindow::LoadIndividual()
 {
     const QString filter = tr("Individual measurements") + QLatin1String(" (*.vit);;") + tr("Multisize measurements") +
@@ -1869,6 +1887,14 @@ void MainWindow::ToolBarOption()
     {
         delete gradationSizesLabel;
     }
+    if (not zoomScale.isNull())
+    {
+        delete zoomScale;
+    }
+    if (not doubleSpinBoxScale.isNull())
+    {
+        delete doubleSpinBoxScale;
+    }
 
     if (qApp->patternType() == MeasurementsType::Multisize)
     {
@@ -1897,6 +1923,19 @@ void MainWindow::ToolBarOption()
 
         ui->toolBarOption->addSeparator();
     }
+
+    zoomScale = new QLabel(tr("Scale:"), this);
+    ui->toolBarOption->addWidget(zoomScale);
+
+    doubleSpinBoxScale = new QDoubleSpinBox(this);
+    doubleSpinBoxScale->setDecimals(1);
+    doubleSpinBoxScale->setSuffix("%");
+    ScaleChanged(ui->view->transform().m11());
+    connect(doubleSpinBoxScale, static_cast<void (QDoubleSpinBox::*)(double)>(&QDoubleSpinBox::valueChanged), this,
+            [this](double d){ui->view->Zoom(d/100.0);});
+    ui->toolBarOption->addWidget(doubleSpinBoxScale);
+
+    ui->toolBarOption->addSeparator();
 
     mouseCoordinate = new QLabel(QString("0, 0 (%1)").arg(UnitsToStr(qApp->patternUnit(), true)));
     ui->toolBarOption->addWidget(mouseCoordinate);

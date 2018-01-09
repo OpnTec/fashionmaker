@@ -51,6 +51,7 @@ class DialogFinalMeasurements;
 class VWidgetGroups;
 class VWidgetDetails;
 class QToolButton;
+class QDoubleSpinBox;
 
 /**
  * @brief The MainWindow class main windows.
@@ -106,6 +107,7 @@ protected:
     virtual void ExportToCSVData(const QString &fileName, bool withHeader, int mib,
                                  const QChar &separator) Q_DECL_FINAL;
 private slots:
+    void ScaleChanged(qreal scale);
     void MouseMove(const QPointF &scenePos);
     void Clear();
     void PatternChangesWereSaved(bool saved);
@@ -269,6 +271,8 @@ private:
     QPointer<QComboBox> gradationSizes;
     QPointer<QLabel>   gradationHeightsLabel;
     QPointer<QLabel>   gradationSizesLabel;
+    QPointer<QLabel>   zoomScale;
+    QPointer<QDoubleSpinBox> doubleSpinBoxScale;
     VToolOptionsPropertyBrowser *toolOptions;
     VWidgetGroups *groupsWidget;
     VWidgetDetails *detailsWidget;

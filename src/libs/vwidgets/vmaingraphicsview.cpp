@@ -360,6 +360,20 @@ VMainGraphicsView::VMainGraphicsView(QWidget *parent)
     this->setTransformationAnchor(QGraphicsView::AnchorUnderMouse);
     this->setRenderHints(QPainter::Antialiasing | QPainter::SmoothPixmapTransform);
     this->setInteractive(true);
+
+    connect(zoom, &GraphicsViewZoom::zoomed, this,  [this](){emit ScaleChanged(transform().m11());});
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VMainGraphicsView::Zoom(qreal scale)
+{
+    qreal factor = qBound(MinScale(), scale, MaxScale());
+    QTransform transform = this->transform();
+    transform.setMatrix(factor, transform.m12(), transform.m13(), transform.m21(), factor, transform.m23(),
+                        transform.m31(), transform.m32(), transform.m33());
+    this->setTransform(transform);
+    VMainGraphicsView::NewSceneRect(this->scene(), this);
+    emit ScaleChanged(this->transform().m11());
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -371,6 +385,7 @@ void VMainGraphicsView::ZoomIn()
     {
         scale(1.1, 1.1);
         VMainGraphicsView::NewSceneRect(this->scene(), this);
+        emit ScaleChanged(transform().m11());
     }
 }
 
@@ -383,6 +398,7 @@ void VMainGraphicsView::ZoomOut()
     {
         scale(1.0/1.1, 1.0/1.1);
         VMainGraphicsView::NewSceneRect(this->scene(), this);
+        emit ScaleChanged(transform().m11());
     }
 }
 
@@ -394,6 +410,7 @@ void VMainGraphicsView::ZoomOriginal()
                     trans.m33());
     this->setTransform(trans);
     VMainGraphicsView::NewSceneRect(this->scene(), this);
+    emit ScaleChanged(transform().m11());
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -412,15 +429,13 @@ void VMainGraphicsView::ZoomFitBest()
     this->fitInView(rect, Qt::KeepAspectRatio);
     QTransform transform = this->transform();
 
-    qreal factor = transform.m11();
-    factor = qMax(factor, MinScale());
-    factor = qMin(factor, MaxScale());
-
+    const qreal factor = qBound(MinScale(), transform.m11(), MaxScale());
     transform.setMatrix(factor, transform.m12(), transform.m13(), transform.m21(), factor, transform.m23(),
                         transform.m31(), transform.m32(), transform.m33());
     this->setTransform(transform);
 
     VMainGraphicsView::NewSceneRect(scene(), this);
+    emit ScaleChanged(this->transform().m11());
 }
 
 //---------------------------------------------------------------------------------------------------------------------
