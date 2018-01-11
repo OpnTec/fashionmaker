@@ -11,7 +11,6 @@
 ; Appstatus: "" = release, "b" = beta, "a" = alpha
 ; this only modifies the resulting exe name of the installer package ;-)
 #define MyAppStatus "a"
-#define ConflictingAppId "{7081AEC7-38FC-479F-B712-DB073BB76513}"
 
 [Setup]
 ; NOTE: The value of AppId uniquely identifies this application.
@@ -417,37 +416,29 @@ var
  InstallationCanceledMessage : String;
 
  begin
-  if RegKeyExists(HKEY_LOCAL_MACHINE, 'SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\{#ConflictingAppId}_is1') or
-     RegKeyExists(HKEY_CURRENT_USER, 'SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\{#ConflictingAppId}_is1') then
-  begin
-    MsgBox('Detected conflicting application. Please, uninstall Seamly2D before proceeding installation.', mbError, MB_OK);
+  // Create a mutex for the installer and if it's already running then show a message and stop installation
+  if CheckForMutexes(installer_mutex_name) then begin
+    SuppressibleMsgBox(ExpandConstant('{cm:SetupIsRunningWarning}'), mbError, MB_OK, MB_OK);
     Result := False;
   end
   else begin
-    // Create a mutex for the installer and if it's already running then show a message and stop installation
-    if CheckForMutexes(installer_mutex_name) then begin
-      SuppressibleMsgBox(ExpandConstant('{cm:SetupIsRunningWarning}'), mbError, MB_OK, MB_OK);
-      Result := False;
-    end
-    else begin
-      Result := True;
-      CreateMutex(installer_mutex_name);
-    
-      ProgramRunningOnInstallMessage := ExpandConstant('{cm:WarnRunningOnUnInstall1}') + #13 + #13 + ExpandConstant('{cm:WarnRunningOnUnInstall2}');
-      InstallationCanceledMessage := ExpandConstant('{cm:WarnCancelInstall}');
-    
-      Result := PromptUntilProgramClosedOrInstallationCanceled( ProgramExeName1, ProgramName1 + ProgramRunningOnInstallMessage)
-      If Result Then
-      begin
-        Result := PromptUntilProgramClosedOrInstallationCanceled( ProgramExeName2, ProgramName2 + ProgramRunningOnInstallMessage)
-      end;
-    
-      if Not Result then
-      begin
-        MsgBox( InstallationCanceledMessage, mbInformation, MB_OK );
-      end else begin
-          Result := VersionCompareAndUninstall
-      end;
+    Result := True;
+    CreateMutex(installer_mutex_name);
+  
+    ProgramRunningOnInstallMessage := ExpandConstant('{cm:WarnRunningOnUnInstall1}') + #13 + #13 + ExpandConstant('{cm:WarnRunningOnUnInstall2}');
+    InstallationCanceledMessage := ExpandConstant('{cm:WarnCancelInstall}');
+  
+    Result := PromptUntilProgramClosedOrInstallationCanceled( ProgramExeName1, ProgramName1 + ProgramRunningOnInstallMessage)
+    If Result Then
+    begin
+      Result := PromptUntilProgramClosedOrInstallationCanceled( ProgramExeName2, ProgramName2 + ProgramRunningOnInstallMessage)
+    end;
+  
+    if Not Result then
+    begin
+      MsgBox( InstallationCanceledMessage, mbInformation, MB_OK );
+    end else begin
+        Result := VersionCompareAndUninstall
     end;
   end;
 end;
