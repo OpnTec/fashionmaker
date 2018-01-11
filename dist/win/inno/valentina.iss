@@ -105,7 +105,7 @@ Name: "full_italian"; Description: "System language"; Languages: italian;
 ;Name: "full_japanese"; Description: "System language"; Languages: japanese;
 ;Name: "full_nepali"; Description: "System language"; Languages: nepali;
 ;Name: "full_norwegian"; Description: "System language"; Languages: norwegian;
-;Name: "full_polish"; Description: "System language"; Languages: polish;
+Name: "full_polish"; Description: "System language"; Languages: polish;
 Name: "full_portuguese"; Description: "System language"; Languages: portuguese;
 Name: "full_russian"; Description: "System language"; Languages: russian;
 ;Name: "full_scottishgaelic"; Description: "System language"; Languages: scottishgaelic;
@@ -141,8 +141,8 @@ Name: "lang_files\italian"; Description: "Italian"; Types: full full_italian cus
 ;Name: "lang_files\japanese"; Description: "Japanese"; Types: full full_japanese custom; Flags: disablenouninstallwarning
 ;Name: "lang_files\nepali"; Description: "Nepali"; Types: full full_nepali custom; Flags: disablenouninstallwarning
 ;Name: "lang_files\norwegian"; Description: "Norwegian"; Types: full full_norwegian custom; Flags: disablenouninstallwarning
-;Name: "lang_files\polish"; Description: "Polish"; Types: full full_polish custom; Flags: disablenouninstallwarning
-;Name: "lang_files\portuguese"; Description: "Portuguese"; Types: full full_portuguese custom; Flags: disablenouninstallwarning
+Name: "lang_files\polish"; Description: "Polish"; Types: full full_polish custom; Flags: disablenouninstallwarning
+Name: "lang_files\portuguese"; Description: "Portuguese"; Types: full full_portuguese custom; Flags: disablenouninstallwarning
 Name: "lang_files\russian"; Description: "Russian"; Types: full full_russian custom; Flags: disablenouninstallwarning
 ;Name: "lang_files\scottishgaelic"; Description: "Scottish gaelic"; Types: full full_scottishgaelic custom; Flags: disablenouninstallwarning
 ;Name: "lang_files\serbiancyrillic"; Description: "Serbian cyrillic"; Types: full full_serbiancyrillic custom; Flags: disablenouninstallwarning
