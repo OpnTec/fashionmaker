@@ -6,6 +6,8 @@ Requires(postun): /sbin/ldconfig
 Requires(post): desktop-file-utils
 Requires(postun): desktop-file-utils
 
+Conflicts: seamly2d
+
 %if 0%{?fedora_version} > 0 || 0%{?rhel_version} >= 700 || 0%{?centos_version} >= 700
 BuildRequires: qt5-qtbase-devel >= 5.2.0
 BuildRequires: pkgconfig(Qt5Svg)
