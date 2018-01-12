@@ -65,9 +65,9 @@ DialogPointOfIntersection::DialogPointOfIntersection(const VContainer *data, con
     FillComboBoxPoints(ui->comboBoxSecondPoint);
 
     connect(ui->lineEditNamePoint, &QLineEdit::textChanged, this, &DialogPointOfIntersection::NamePointChanged);
-    connect(ui->comboBoxFirstPoint, static_cast<void (QComboBox::*)(const QString &)>(&QComboBox::currentIndexChanged),
+    connect(ui->comboBoxFirstPoint, QOverload<const QString &>::of(&QComboBox::currentIndexChanged),
             this, &DialogPointOfIntersection::PointNameChanged);
-    connect(ui->comboBoxSecondPoint, static_cast<void (QComboBox::*)(const QString &)>(&QComboBox::currentIndexChanged),
+    connect(ui->comboBoxSecondPoint, QOverload<const QString &>::of(&QComboBox::currentIndexChanged),
             this, &DialogPointOfIntersection::PointNameChanged);
 
     vis = new VisToolPointOfIntersection(data);

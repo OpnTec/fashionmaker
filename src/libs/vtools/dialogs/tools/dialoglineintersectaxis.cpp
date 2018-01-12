@@ -91,13 +91,11 @@ DialogLineIntersectAxis::DialogLineIntersectAxis(const VContainer *data, const q
     connect(ui->plainTextEditFormula, &QPlainTextEdit::textChanged, this, &DialogLineIntersectAxis::AngleTextChanged);
     connect(ui->pushButtonGrowLengthAngle, &QPushButton::clicked, this, &DialogLineIntersectAxis::DeployAngleTextEdit);
     connect(timerFormula, &QTimer::timeout, this, &DialogLineIntersectAxis::EvalAngle);
-    connect(ui->comboBoxFirstLinePoint,
-            static_cast<void (QComboBox::*)(const QString &)>(&QComboBox::currentIndexChanged),
+    connect(ui->comboBoxFirstLinePoint, QOverload<const QString &>::of(&QComboBox::currentIndexChanged),
             this, &DialogLineIntersectAxis::PointNameChanged);
-    connect(ui->comboBoxSecondLinePoint,
-            static_cast<void (QComboBox::*)(const QString &)>(&QComboBox::currentIndexChanged),
+    connect(ui->comboBoxSecondLinePoint, QOverload<const QString &>::of(&QComboBox::currentIndexChanged),
             this, &DialogLineIntersectAxis::PointNameChanged);
-    connect(ui->comboBoxAxisPoint, static_cast<void (QComboBox::*)(const QString &)>(&QComboBox::currentIndexChanged),
+    connect(ui->comboBoxAxisPoint, QOverload<const QString &>::of(&QComboBox::currentIndexChanged),
             this, &DialogLineIntersectAxis::PointNameChanged);
 
     vis = new VisToolLineIntersectAxis(data);

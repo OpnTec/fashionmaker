@@ -156,10 +156,8 @@ DialogPatternProperties::DialogPatternProperties(VPattern *doc,  VContainer *pat
 
     ui->radioButtonDefFromP->setChecked(doc->IsDefCustom());
 
-    connect(ui->comboBoxHeight, static_cast<void (QComboBox::*)(int)>(&QComboBox::currentIndexChanged),
-            this, DefValueChanged);
-    connect(ui->comboBoxSize, static_cast<void (QComboBox::*)(int)>(&QComboBox::currentIndexChanged),
-            this, DefValueChanged);
+    connect(ui->comboBoxHeight, QOverload<int>::of(&QComboBox::currentIndexChanged), this, DefValueChanged);
+    connect(ui->comboBoxSize, QOverload<int>::of(&QComboBox::currentIndexChanged), this, DefValueChanged);
 
     const bool readOnly = doc->IsReadOnly();
     ui->checkBoxPatternReadOnly->setChecked(readOnly);
@@ -207,9 +205,9 @@ DialogPatternProperties::DialogPatternProperties(VPattern *doc,  VContainer *pat
                         VCommonSettings::PredefinedTimeFormats() + settings->GetUserDefinedTimeFormats(),
                         doc->GetLabelTimeFormat());
 
-    connect(ui->comboBoxDateFormat, static_cast<void (QComboBox::*)(int)>(&QComboBox::currentIndexChanged),
+    connect(ui->comboBoxDateFormat, QOverload<int>::of(&QComboBox::currentIndexChanged),
             this, &DialogPatternProperties::LabelDataChanged);
-    connect(ui->comboBoxTimeFormat, static_cast<void (QComboBox::*)(int)>(&QComboBox::currentIndexChanged),
+    connect(ui->comboBoxTimeFormat, QOverload<int>::of(&QComboBox::currentIndexChanged),
             this, &DialogPatternProperties::LabelDataChanged);
 }
 

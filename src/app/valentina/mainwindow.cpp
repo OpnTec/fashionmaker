@@ -1907,8 +1907,7 @@ void MainWindow::ToolBarOption()
         // set default height
         SetDefaultHeight();
 
-        connect(gradationHeights.data(),
-                static_cast<void (QComboBox::*)(const QString &)>(&QComboBox::currentIndexChanged),
+        connect(gradationHeights.data(), QOverload<const QString &>::of(&QComboBox::currentIndexChanged),
                 this, &MainWindow::ChangedHeight);
 
         gradationSizesLabel = new QLabel(tr("Size:"), this);
@@ -1917,8 +1916,7 @@ void MainWindow::ToolBarOption()
         // set default size
         SetDefaultSize();
 
-        connect(gradationSizes.data(),
-                static_cast<void (QComboBox::*)(const QString &)>(&QComboBox::currentIndexChanged),
+        connect(gradationSizes.data(), QOverload<const QString &>::of(&QComboBox::currentIndexChanged),
                 this, &MainWindow::ChangedSize);
 
         ui->toolBarOption->addSeparator();
@@ -1931,7 +1929,7 @@ void MainWindow::ToolBarOption()
     doubleSpinBoxScale->setDecimals(1);
     doubleSpinBoxScale->setSuffix("%");
     ScaleChanged(ui->view->transform().m11());
-    connect(doubleSpinBoxScale.data(), static_cast<void (QDoubleSpinBox::*)(double)>(&QDoubleSpinBox::valueChanged),
+    connect(doubleSpinBoxScale.data(), QOverload<double>::of(&QDoubleSpinBox::valueChanged),
             this, [this](double d){ui->view->Zoom(d/100.0);});
     ui->toolBarOption->addWidget(doubleSpinBoxScale);
 
@@ -1979,7 +1977,7 @@ void MainWindow::ToolBarDraws()
     ui->toolBarDraws->addWidget(comboBoxDraws);
     comboBoxDraws->setSizeAdjustPolicy(QComboBox::AdjustToContents);
     comboBoxDraws->setEnabled(false);
-    connect(comboBoxDraws,  static_cast<void (QComboBox::*)(int)>(&QComboBox::currentIndexChanged),
+    connect(comboBoxDraws, QOverload<int>::of(&QComboBox::currentIndexChanged),
             this, [this](int index){ChangePP(index);});
 
     connect(ui->actionOptionDraw, &QAction::triggered, this, [this]()

@@ -97,7 +97,7 @@ DialogRotation::DialogRotation(const VContainer *data, const quint32 &toolId, QW
     connect(ui->toolButtonExprAngle, &QPushButton::clicked, this, &DialogRotation::FXAngle);
     connect(ui->plainTextEditFormula, &QPlainTextEdit::textChanged, this, &DialogRotation::AngleChanged);
     connect(ui->pushButtonGrowLength, &QPushButton::clicked, this, &DialogRotation::DeployAngleTextEdit);
-    connect(ui->comboBoxOriginPoint, static_cast<void (QComboBox::*)(const QString &)>(&QComboBox::currentIndexChanged),
+    connect(ui->comboBoxOriginPoint, QOverload<const QString &>::of(&QComboBox::currentIndexChanged),
             this, &DialogRotation::PointChanged);
 
     vis = new VisToolRotation(data);

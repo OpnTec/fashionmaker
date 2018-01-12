@@ -30,6 +30,8 @@
 
 #include <QtGlobal>
 
+#include "backport/qoverload.h"
+
 #define PRINTDPI 96.0
 extern const qreal PrintDPI;
 

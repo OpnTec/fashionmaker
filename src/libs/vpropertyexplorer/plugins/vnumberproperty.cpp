@@ -62,8 +62,7 @@ QWidget* VPE::VIntegerProperty::createEditor(QWidget * parent, const QStyleOptio
     tmpEditor->setSingleStep(static_cast<int>(singleStep));
     tmpEditor->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
     tmpEditor->setValue(VProperty::d_ptr->VariantValue.toInt());
-    connect(tmpEditor, static_cast<void (QSpinBox::*)(int)>(&QSpinBox::valueChanged), this,
-                     &VIntegerProperty::valueChanged);
+    connect(tmpEditor, QOverload<int>::of(&QSpinBox::valueChanged), this, &VIntegerProperty::valueChanged);
 
     VProperty::d_ptr->editor = tmpEditor;
     return VProperty::d_ptr->editor;
@@ -170,8 +169,7 @@ QWidget* VPE::VDoubleProperty::createEditor(QWidget * parent, const QStyleOption
     tmpEditor->setSingleStep(singleStep);
     tmpEditor->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
     tmpEditor->setValue(VProperty::d_ptr->VariantValue.toDouble());
-    connect(tmpEditor, static_cast<void (QDoubleSpinBox::*)(double)>(&QDoubleSpinBox::valueChanged), this,
-                     &VIntegerProperty::valueChanged);
+    connect(tmpEditor, QOverload<double>::of(&QDoubleSpinBox::valueChanged), this, &VIntegerProperty::valueChanged);
 
     VProperty::d_ptr->editor = tmpEditor;
     return VProperty::d_ptr->editor;

@@ -64,10 +64,10 @@ DialogNewMeasurements::DialogNewMeasurements(QWidget *parent)
         ui->comboBoxBaseSize->setCurrentIndex(index);
     }
 
-    connect(ui->comboBoxMType, static_cast<void (QComboBox::*)(int)>(&QComboBox::currentIndexChanged), this,
+    connect(ui->comboBoxMType, QOverload<int>::of(&QComboBox::currentIndexChanged), this,
             &DialogNewMeasurements::CurrentTypeChanged);
 
-    connect(ui->comboBoxUnit, static_cast<void (QComboBox::*)(int)>(&QComboBox::currentIndexChanged), this,
+    connect(ui->comboBoxUnit, QOverload<int>::of(&QComboBox::currentIndexChanged), this,
             &DialogNewMeasurements::CurrentUnitChanged);
 }
 

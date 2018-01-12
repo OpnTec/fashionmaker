@@ -111,9 +111,9 @@ DialogSpline::DialogSpline(const VContainer *data, const quint32 &toolId, QWidge
 
     CheckState();
 
-    connect(ui->comboBoxP1, static_cast<void (QComboBox::*)(const QString &)>(&QComboBox::currentIndexChanged),
+    connect(ui->comboBoxP1, QOverload<const QString &>::of(&QComboBox::currentIndexChanged),
             this, &DialogSpline::PointNameChanged);
-    connect(ui->comboBoxP4, static_cast<void (QComboBox::*)(const QString &)>(&QComboBox::currentIndexChanged),
+    connect(ui->comboBoxP4, QOverload<const QString &>::of(&QComboBox::currentIndexChanged),
             this, &DialogSpline::PointNameChanged);
 
     connect(ui->toolButtonExprAngle1, &QPushButton::clicked, this, &DialogSpline::FXAngle1);

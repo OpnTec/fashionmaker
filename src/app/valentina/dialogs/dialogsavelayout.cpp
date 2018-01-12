@@ -105,7 +105,7 @@ DialogSaveLayout::DialogSaveLayout(int count, Draw mode, const QString &fileName
 
     connect(bOk, &QPushButton::clicked, this, &DialogSaveLayout::Save);
     connect(ui->lineEditFileName, &QLineEdit::textChanged, this, &DialogSaveLayout::ShowExample);
-    connect(ui->comboBoxFormat, static_cast<void (QComboBox::*)(int)>(&QComboBox::currentIndexChanged),
+    connect(ui->comboBoxFormat, QOverload<int>::of(&QComboBox::currentIndexChanged),
             this, &DialogSaveLayout::ShowExample);
     connect(ui->pushButtonBrowse, &QPushButton::clicked, this, [this]()
     {
@@ -141,17 +141,17 @@ DialogSaveLayout::DialogSaveLayout(int count, Draw mode, const QString &fileName
     ReadSettings();
 
     // connect for the template drop down box of the tiled pds
-    connect(ui->comboBoxTemplates, static_cast<void (QComboBox::*)(int)>(&QComboBox::currentIndexChanged),
+    connect(ui->comboBoxTemplates, QOverload<int>::of(&QComboBox::currentIndexChanged),
             this, &DialogSaveLayout::WriteSettings);
 
     // connects for the margins of the tiled pdf
-    connect(ui->doubleSpinBoxLeftField, static_cast<void (QDoubleSpinBox::*)(double)>(&QDoubleSpinBox::valueChanged),
+    connect(ui->doubleSpinBoxLeftField, QOverload<double>::of(&QDoubleSpinBox::valueChanged),
             this, &DialogSaveLayout::WriteSettings);
-    connect(ui->doubleSpinBoxTopField, static_cast<void (QDoubleSpinBox::*)(double)>(&QDoubleSpinBox::valueChanged),
+    connect(ui->doubleSpinBoxTopField, QOverload<double>::of(&QDoubleSpinBox::valueChanged),
             this, &DialogSaveLayout::WriteSettings);
-    connect(ui->doubleSpinBoxRightField, static_cast<void (QDoubleSpinBox::*)(double)>(&QDoubleSpinBox::valueChanged),
+    connect(ui->doubleSpinBoxRightField, QOverload<double>::of(&QDoubleSpinBox::valueChanged),
             this, &DialogSaveLayout::WriteSettings);
-    connect(ui->doubleSpinBoxBottomField, static_cast<void (QDoubleSpinBox::*)(double)>(&QDoubleSpinBox::valueChanged),
+    connect(ui->doubleSpinBoxBottomField, QOverload<double>::of(&QDoubleSpinBox::valueChanged),
             this, &DialogSaveLayout::WriteSettings);
 
     // connects for the orientation buttons for the tiled pdf

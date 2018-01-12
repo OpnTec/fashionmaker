@@ -71,34 +71,34 @@ DialogLayoutSettings::DialogLayoutSettings(VLayoutGenerator *generator, QWidget 
         RestoreDefaults();
     }
 
-    connect(ui->comboBoxPrinter, static_cast<void (QComboBox::*)(int)>(&QComboBox::currentIndexChanged),
+    connect(ui->comboBoxPrinter, QOverload<int>::of(&QComboBox::currentIndexChanged),
             this, &DialogLayoutSettings::PrinterMargins);
 
-    connect(ui->comboBoxTemplates, static_cast<void (QComboBox::*)(int)>(&QComboBox::currentIndexChanged),
+    connect(ui->comboBoxTemplates, QOverload<int>::of(&QComboBox::currentIndexChanged),
             this, &DialogLayoutSettings::TemplateSelected);
-    connect(ui->comboBoxPaperSizeUnit, static_cast<void (QComboBox::*)(int)>(&QComboBox::currentIndexChanged),
+    connect(ui->comboBoxPaperSizeUnit, QOverload<int>::of(&QComboBox::currentIndexChanged),
             this, &DialogLayoutSettings::ConvertPaperSize);
 
-    connect(ui->doubleSpinBoxPaperWidth, static_cast<void (QDoubleSpinBox::*)(double)>(&QDoubleSpinBox::valueChanged),
+    connect(ui->doubleSpinBoxPaperWidth, QOverload<double>::of(&QDoubleSpinBox::valueChanged),
             this, &DialogLayoutSettings::PaperSizeChanged);
-    connect(ui->doubleSpinBoxPaperHeight, static_cast<void (QDoubleSpinBox::*)(double)>(&QDoubleSpinBox::valueChanged),
+    connect(ui->doubleSpinBoxPaperHeight, QOverload<double>::of(&QDoubleSpinBox::valueChanged),
             this, &DialogLayoutSettings::PaperSizeChanged);
 
-    connect(ui->doubleSpinBoxPaperWidth, static_cast<void (QDoubleSpinBox::*)(double)>(&QDoubleSpinBox::valueChanged),
+    connect(ui->doubleSpinBoxPaperWidth, QOverload<double>::of(&QDoubleSpinBox::valueChanged),
             this, &DialogLayoutSettings::FindTemplate);
-    connect(ui->doubleSpinBoxPaperHeight, static_cast<void (QDoubleSpinBox::*)(double)>(&QDoubleSpinBox::valueChanged),
+    connect(ui->doubleSpinBoxPaperHeight, QOverload<double>::of(&QDoubleSpinBox::valueChanged),
             this, &DialogLayoutSettings::FindTemplate);
 
-    connect(ui->doubleSpinBoxPaperWidth, static_cast<void (QDoubleSpinBox::*)(double)>(&QDoubleSpinBox::valueChanged),
+    connect(ui->doubleSpinBoxPaperWidth, QOverload<double>::of(&QDoubleSpinBox::valueChanged),
             this, &DialogLayoutSettings::CorrectMaxFileds);
-    connect(ui->doubleSpinBoxPaperHeight, static_cast<void (QDoubleSpinBox::*)(double)>(&QDoubleSpinBox::valueChanged),
+    connect(ui->doubleSpinBoxPaperHeight, QOverload<double>::of(&QDoubleSpinBox::valueChanged),
             this, &DialogLayoutSettings::CorrectMaxFileds);
 
     connect(ui->checkBoxIgnoreFileds, &QCheckBox::stateChanged, this, &DialogLayoutSettings::IgnoreAllFields);
 
     connect(ui->toolButtonPortrait, &QToolButton::toggled, this, &DialogLayoutSettings::Swap);
     connect(ui->toolButtonLandscape, &QToolButton::toggled, this, &DialogLayoutSettings::Swap);
-    connect(ui->comboBoxLayoutUnit,  static_cast<void (QComboBox::*)(int)>(&QComboBox::currentIndexChanged),
+    connect(ui->comboBoxLayoutUnit,  QOverload<int>::of(&QComboBox::currentIndexChanged),
             this, &DialogLayoutSettings::ConvertLayoutSize);
 
     QPushButton *bOk = ui->buttonBox->button(QDialogButtonBox::Ok);

@@ -74,7 +74,7 @@ DialogPiecePath::DialogPiecePath(const VContainer *data, quint32 toolId, QWidget
     ui->tabWidget->removeTab(ui->tabWidget->indexOf(ui->tabSeamAllowance));
     ui->tabWidget->removeTab(ui->tabWidget->indexOf(ui->tabPassmarks));
 
-    connect(ui->comboBoxPiece, static_cast<void (QComboBox::*)(int)>(&QComboBox::currentIndexChanged), this, [this]()
+    connect(ui->comboBoxPiece, QOverload<int>::of(&QComboBox::currentIndexChanged), this, [this]()
     {
         ValidObjects(PathIsValid());
     });
@@ -792,7 +792,7 @@ void DialogPiecePath::InitPathTab()
     connect(ui->lineEditName, &QLineEdit::textChanged, this, &DialogPiecePath::NameChanged);
 
     InitPathTypes();
-    connect(ui->comboBoxType, static_cast<void (QComboBox::*)(int)>(&QComboBox::currentIndexChanged),
+    connect(ui->comboBoxType, QOverload<int>::of(&QComboBox::currentIndexChanged),
             [this]()
     {
         ui->comboBoxPenType->setEnabled(GetType() == PiecePathType::InternalPath);
@@ -826,14 +826,14 @@ void DialogPiecePath::InitSeamAllowanceTab()
     ui->plainTextEditFormulaWidth->setPlainText(qApp->LocaleToString(m_saWidth));
 
     InitNodesList();
-    connect(ui->comboBoxNodes, static_cast<void (QComboBox::*)(int)>(&QComboBox::currentIndexChanged), this,
+    connect(ui->comboBoxNodes, QOverload<int>::of(&QComboBox::currentIndexChanged), this,
             &DialogPiecePath::NodeChanged);
 
     connect(ui->pushButtonDefBefore, &QPushButton::clicked, this, &DialogPiecePath::ReturnDefBefore);
     connect(ui->pushButtonDefAfter, &QPushButton::clicked, this, &DialogPiecePath::ReturnDefAfter);
 
     InitNodeAngles(ui->comboBoxAngle);
-    connect(ui->comboBoxAngle, static_cast<void (QComboBox::*)(int)>(&QComboBox::currentIndexChanged), this,
+    connect(ui->comboBoxAngle, QOverload<int>::of(&QComboBox::currentIndexChanged), this,
             &DialogPiecePath::NodeAngleChanged);
 
     connect(ui->toolButtonExprWidth, &QPushButton::clicked, this, &DialogPiecePath::FXWidth);
@@ -857,12 +857,12 @@ void DialogPiecePath::InitSeamAllowanceTab()
 void DialogPiecePath::InitPassmarksTab()
 {
     InitPassmarksList();
-    connect(ui->comboBoxPassmarks, static_cast<void (QComboBox::*)(int)>(&QComboBox::currentIndexChanged),
+    connect(ui->comboBoxPassmarks, QOverload<int>::of(&QComboBox::currentIndexChanged),
             this, &DialogPiecePath::PassmarkChanged);
 
-    connect(ui->buttonGroupMarkType, static_cast<void(QButtonGroup::*)(int)>(&QButtonGroup::buttonClicked),
+    connect(ui->buttonGroupMarkType, QOverload<int>::of(&QButtonGroup::buttonClicked),
             this, &DialogPiecePath::PassmarkLineTypeChanged);
-    connect(ui->buttonGroupAngleType, static_cast<void(QButtonGroup::*)(int)>(&QButtonGroup::buttonClicked),
+    connect(ui->buttonGroupAngleType, QOverload<int>::of(&QButtonGroup::buttonClicked),
             this, &DialogPiecePath::PassmarkAngleTypeChanged);
 }
 

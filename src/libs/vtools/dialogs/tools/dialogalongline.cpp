@@ -89,9 +89,9 @@ DialogAlongLine::DialogAlongLine(const VContainer *data, const quint32 &toolId, 
     connect(ui->lineEditNamePoint, &QLineEdit::textChanged, this, &DialogAlongLine::NamePointChanged);
     connect(ui->plainTextEditFormula, &QPlainTextEdit::textChanged, this, &DialogAlongLine::FormulaTextChanged);
     connect(ui->pushButtonGrowLength, &QPushButton::clicked, this, &DialogAlongLine::DeployFormulaTextEdit);
-    connect(ui->comboBoxFirstPoint, static_cast<void (QComboBox::*)(const QString &)>(&QComboBox::currentIndexChanged),
+    connect(ui->comboBoxFirstPoint, QOverload<const QString &>::of(&QComboBox::currentIndexChanged),
             this, &DialogAlongLine::PointChanged);
-    connect(ui->comboBoxSecondPoint, static_cast<void (QComboBox::*)(const QString &)>(&QComboBox::currentIndexChanged),
+    connect(ui->comboBoxSecondPoint, QOverload<const QString &>::of(&QComboBox::currentIndexChanged),
             this, &DialogAlongLine::PointChanged);
 
     vis = new VisToolAlongLine(data);

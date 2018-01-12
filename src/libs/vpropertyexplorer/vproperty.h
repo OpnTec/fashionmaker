@@ -36,6 +36,7 @@
 #include <QtGlobal>
 
 #include "vpropertyexplorer_global.h"
+#include "../vmisc/backport/qoverload.h"
 
 template <typename T> class QList;
 

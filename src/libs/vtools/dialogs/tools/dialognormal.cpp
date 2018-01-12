@@ -84,9 +84,9 @@ DialogNormal::DialogNormal(const VContainer *data, const quint32 &toolId, QWidge
     connect(ui->lineEditNamePoint, &QLineEdit::textChanged, this, &DialogNormal::NamePointChanged);
     connect(ui->plainTextEditFormula, &QPlainTextEdit::textChanged, this, &DialogNormal::FormulaTextChanged);
     connect(ui->pushButtonGrowLength, &QPushButton::clicked, this, &DialogNormal::DeployFormulaTextEdit);
-    connect(ui->comboBoxFirstPoint, static_cast<void (QComboBox::*)(const QString &)>(&QComboBox::currentIndexChanged),
+    connect(ui->comboBoxFirstPoint, QOverload<const QString &>::of(&QComboBox::currentIndexChanged),
             this, &DialogNormal::PointNameChanged);
-    connect(ui->comboBoxSecondPoint, static_cast<void (QComboBox::*)(const QString &)>(&QComboBox::currentIndexChanged),
+    connect(ui->comboBoxSecondPoint, QOverload<const QString &>::of(&QComboBox::currentIndexChanged),
             this, &DialogNormal::PointNameChanged);
 
     vis = new VisToolNormal(data);

@@ -76,7 +76,7 @@ DialogCubicBezierPath::DialogCubicBezierPath(const VContainer *data, const quint
     ui->doubleSpinBoxApproximationScale->setMaximum(maxCurveApproximationScale);
 
     connect(ui->listWidget, &QListWidget::currentRowChanged, this, &DialogCubicBezierPath::PointChanged);
-    connect(ui->comboBoxPoint,  static_cast<void (QComboBox::*)(int)>(&QComboBox::currentIndexChanged),
+    connect(ui->comboBoxPoint, QOverload<int>::of(&QComboBox::currentIndexChanged),
             this, &DialogCubicBezierPath::currentPointChanged);
 
     vis = new VisToolCubicBezierPath(data);

@@ -44,7 +44,7 @@ TapePreferencesConfigurationPage::TapePreferencesConfigurationPage(QWidget *pare
     ui->setupUi(this);
 
     InitLanguages(ui->langCombo);
-    connect(ui->langCombo, static_cast<void (QComboBox::*)(int)>(&QComboBox::currentIndexChanged), this, [this]()
+    connect(ui->langCombo, QOverload<int>::of(&QComboBox::currentIndexChanged), this, [this]()
     {
         m_langChanged = true;
     });
@@ -56,7 +56,7 @@ TapePreferencesConfigurationPage::TapePreferencesConfigurationPage(QWidget *pare
     //---------------------- Pattern making system
     InitPMSystems(ui->systemCombo);
     ui->systemBookValueLabel->setFixedHeight(4 * QFontMetrics(ui->systemBookValueLabel->font()).lineSpacing());
-    connect(ui->systemCombo, static_cast<void (QComboBox::*)(int)>(&QComboBox::currentIndexChanged), this, [this]()
+    connect(ui->systemCombo, QOverload<int>::of(&QComboBox::currentIndexChanged), this, [this]()
     {
         m_systemChanged = true;
         QString text = qApp->TrVars()->PMSystemAuthor(ui->systemCombo->currentData().toString());
@@ -98,8 +98,7 @@ TapePreferencesConfigurationPage::TapePreferencesConfigurationPage(QWidget *pare
         m_defGradationChanged = true;
     };
 
-    connect(ui->defHeightCombo, static_cast<void (QComboBox::*)(int)>(&QComboBox::currentIndexChanged), this,
-            DefGradationChanged);
+    connect(ui->defHeightCombo, QOverload<int>::of(&QComboBox::currentIndexChanged), this, DefGradationChanged);
 
     ui->defSizeCombo->addItems(VMeasurement::WholeListSizes(Unit::Cm));
     index = ui->defSizeCombo->findText(QString().setNum(qApp->TapeSettings()->GetDefSize()));
@@ -107,8 +106,7 @@ TapePreferencesConfigurationPage::TapePreferencesConfigurationPage(QWidget *pare
     {
         ui->defSizeCombo->setCurrentIndex(index);
     }
-    connect(ui->defHeightCombo, static_cast<void (QComboBox::*)(int)>(&QComboBox::currentIndexChanged), this,
-            DefGradationChanged);
+    connect(ui->defHeightCombo, QOverload<int>::of(&QComboBox::currentIndexChanged), this, DefGradationChanged);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

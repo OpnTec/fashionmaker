@@ -2014,23 +2014,20 @@ void TMainWindow::InitWindow()
         labelGradationHeights = new QLabel(tr("Height:"));
         gradationHeights = SetGradationList(labelGradationHeights, listHeights);
         SetDefaultHeight(static_cast<int>(VContainer::height()));
-        connect(gradationHeights, static_cast<void (QComboBox::*)(const QString &)>(&QComboBox::currentIndexChanged),
+        connect(gradationHeights, QOverload<const QString &>::of(&QComboBox::currentIndexChanged),
                 this, &TMainWindow::ChangedHeight);
 
         labelGradationSizes = new QLabel(tr("Size:"));
         gradationSizes = SetGradationList(labelGradationSizes, listSizes);
         SetDefaultSize(static_cast<int>(VContainer::size()));
-        connect(gradationSizes, static_cast<void (QComboBox::*)(const QString &)>(&QComboBox::currentIndexChanged),
+        connect(gradationSizes, QOverload<const QString &>::of(&QComboBox::currentIndexChanged),
                 this, &TMainWindow::ChangedSize);
 
-        connect(ui->doubleSpinBoxBaseValue,
-                static_cast<void (QDoubleSpinBox::*)(double)>(&QDoubleSpinBox::valueChanged),
+        connect(ui->doubleSpinBoxBaseValue, QOverload<double>::of(&QDoubleSpinBox::valueChanged),
                 this, &TMainWindow::SaveMBaseValue);
-        connect(ui->doubleSpinBoxInSizes,
-                static_cast<void (QDoubleSpinBox::*)(double)>(&QDoubleSpinBox::valueChanged),
+        connect(ui->doubleSpinBoxInSizes, QOverload<double>::of(&QDoubleSpinBox::valueChanged),
                 this, &TMainWindow::SaveMSizeIncrease);
-        connect(ui->doubleSpinBoxInHeights,
-                static_cast<void (QDoubleSpinBox::*)(double)>(&QDoubleSpinBox::valueChanged),
+        connect(ui->doubleSpinBoxInHeights, QOverload<double>::of(&QDoubleSpinBox::valueChanged),
                 this, &TMainWindow::SaveMHeightIncrease);
 
         SetDecimals();
@@ -2076,7 +2073,7 @@ void TMainWindow::InitWindow()
 
         connect(ui->lineEditCustomerName, &QLineEdit::editingFinished, this, &TMainWindow::SaveCustomerName);
         connect(ui->lineEditEmail, &QLineEdit::editingFinished, this, &TMainWindow::SaveEmail);
-        connect(ui->comboBoxGender, static_cast<void (QComboBox::*)(int)>(&QComboBox::currentIndexChanged), this,
+        connect(ui->comboBoxGender, QOverload<int>::of(&QComboBox::currentIndexChanged), this,
                 &TMainWindow::SaveGender);
         connect(ui->dateEditBirthDate, &QDateEdit::dateChanged, this, &TMainWindow::SaveBirthDate);
         connect(ui->pushButtonGrow, &QPushButton::clicked, this, &TMainWindow::DeployFormula);
@@ -2093,7 +2090,7 @@ void TMainWindow::InitWindow()
     InitPMSystems(ui->comboBoxPMSystem);
     const qint32 index = ui->comboBoxPMSystem->findData(QLatin1Char('p')+m->PMSystem());
     ui->comboBoxPMSystem->setCurrentIndex(index);
-    connect(ui->comboBoxPMSystem, static_cast<void (QComboBox::*)(int)>(&QComboBox::currentIndexChanged), this,
+    connect(ui->comboBoxPMSystem, QOverload<int>::of(&QComboBox::currentIndexChanged), this,
             &TMainWindow::SavePMSystem);
 
     connect(ui->lineEditFind, &QLineEdit::textChanged, [this] (const QString &term){search->Find(term);});
@@ -3078,8 +3075,7 @@ void TMainWindow::InitUnits()
         comboBoxUnits->setCurrentIndex(indexUnit);
     }
 
-    connect(comboBoxUnits, static_cast<void (QComboBox::*)(int)>(&QComboBox::currentIndexChanged), this,
-            &TMainWindow::PatternUnitChanged);
+    connect(comboBoxUnits, QOverload<int>::of(&QComboBox::currentIndexChanged), this, &TMainWindow::PatternUnitChanged);
 
     ui->toolBarGradation->addWidget(comboBoxUnits);
 }

@@ -43,7 +43,7 @@ DialogInsertNode::DialogInsertNode(const VContainer *data, quint32 toolId, QWidg
     CheckPieces();
     CheckItem();
 
-    connect(ui->comboBoxPiece, static_cast<void (QComboBox::*)(int)>(&QComboBox::currentIndexChanged), this, [this]()
+    connect(ui->comboBoxPiece, QOverload<int>::of(&QComboBox::currentIndexChanged), this, [this]()
     {
         CheckPieces();
     });

@@ -85,11 +85,9 @@ DialogPointOfIntersectionCircles::DialogPointOfIntersectionCircles(const VContai
     FillComboBoxCrossCirclesPoints(ui->comboBoxResult);
 
     connect(ui->lineEditNamePoint, &QLineEdit::textChanged, this, &DialogPointOfIntersectionCircles::NamePointChanged);
-    connect(ui->comboBoxCircle1Center,
-            static_cast<void (QComboBox::*)(const QString &)>(&QComboBox::currentIndexChanged),
+    connect(ui->comboBoxCircle1Center, QOverload<const QString &>::of(&QComboBox::currentIndexChanged),
             this, &DialogPointOfIntersectionCircles::PointChanged);
-    connect(ui->comboBoxCircle2Center,
-            static_cast<void (QComboBox::*)(const QString &)>(&QComboBox::currentIndexChanged),
+    connect(ui->comboBoxCircle2Center, QOverload<const QString &>::of(&QComboBox::currentIndexChanged),
             this, &DialogPointOfIntersectionCircles::PointChanged);
 
     connect(ui->toolButtonExprCircle1Radius, &QPushButton::clicked, this,

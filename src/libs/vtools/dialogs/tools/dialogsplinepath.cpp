@@ -108,7 +108,7 @@ DialogSplinePath::DialogSplinePath(const VContainer *data, const quint32 &toolId
     ui->doubleSpinBoxApproximationScale->setMaximum(maxCurveApproximationScale);
 
     connect(ui->listWidget, &QListWidget::currentRowChanged, this, &DialogSplinePath::PointChanged);
-    connect(ui->comboBoxPoint,  static_cast<void (QComboBox::*)(int)>(&QComboBox::currentIndexChanged),
+    connect(ui->comboBoxPoint, QOverload<int>::of(&QComboBox::currentIndexChanged),
             this, &DialogSplinePath::currentPointChanged);
 
     connect(ui->toolButtonExprAngle1, &QPushButton::clicked, this, &DialogSplinePath::FXAngle1);

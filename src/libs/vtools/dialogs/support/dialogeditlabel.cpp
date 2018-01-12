@@ -68,7 +68,7 @@ DialogEditLabel::DialogEditLabel(VAbstractPattern *doc, QWidget *parent)
     connect(ui->toolButtonNewLabel, &QToolButton::clicked, this, &DialogEditLabel::NewTemplate);
     connect(ui->toolButtonExportLabel, &QToolButton::clicked, this, &DialogEditLabel::ExportTemplate);
     connect(ui->toolButtonImportLabel, &QToolButton::clicked, this, &DialogEditLabel::ImportTemplate);
-    connect(ui->spinBoxFontSize, static_cast<void (QSpinBox::*)(int)>(&QSpinBox::valueChanged), this,
+    connect(ui->spinBoxFontSize, QOverload<int>::of(&QSpinBox::valueChanged), this,
             &DialogEditLabel::SaveAdditionalFontSize);
 
     InitPlaceholders();

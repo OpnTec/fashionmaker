@@ -2670,14 +2670,14 @@ void DialogSeamAllowance::InitSeamAllowanceTab()
     uiTabPaths->plainTextEditFormulaWidth->setPlainText(qApp->LocaleToString(m_saWidth));
 
     InitNodesList();
-    connect(uiTabPaths->comboBoxNodes, static_cast<void (QComboBox::*)(int)>(&QComboBox::currentIndexChanged), this,
+    connect(uiTabPaths->comboBoxNodes, QOverload<int>::of(&QComboBox::currentIndexChanged), this,
             &DialogSeamAllowance::NodeChanged);
 
     connect(uiTabPaths->pushButtonDefBefore, &QPushButton::clicked, this, &DialogSeamAllowance::ReturnDefBefore);
     connect(uiTabPaths->pushButtonDefAfter, &QPushButton::clicked, this, &DialogSeamAllowance::ReturnDefAfter);
 
     InitNodeAngles(uiTabPaths->comboBoxAngle);
-    connect(uiTabPaths->comboBoxAngle, static_cast<void (QComboBox::*)(int)>(&QComboBox::currentIndexChanged), this,
+    connect(uiTabPaths->comboBoxAngle, QOverload<int>::of(&QComboBox::currentIndexChanged), this,
             &DialogSeamAllowance::NodeAngleChanged);
 
     uiTabPaths->listWidgetCustomSA->setContextMenuPolicy(Qt::CustomContextMenu);
@@ -2685,11 +2685,11 @@ void DialogSeamAllowance::InitSeamAllowanceTab()
             &DialogSeamAllowance::ShowCustomSAContextMenu);
     connect(uiTabPaths->listWidgetCustomSA, &QListWidget::currentRowChanged, this,
             &DialogSeamAllowance::CustomSAChanged);
-    connect(uiTabPaths->comboBoxStartPoint, static_cast<void (QComboBox::*)(int)>(&QComboBox::currentIndexChanged),
+    connect(uiTabPaths->comboBoxStartPoint, QOverload<int>::of(&QComboBox::currentIndexChanged),
             this, &DialogSeamAllowance::CSAStartPointChanged);
-    connect(uiTabPaths->comboBoxEndPoint, static_cast<void (QComboBox::*)(int)>(&QComboBox::currentIndexChanged), this,
+    connect(uiTabPaths->comboBoxEndPoint, QOverload<int>::of(&QComboBox::currentIndexChanged), this,
             &DialogSeamAllowance::CSAEndPointChanged);
-    connect(uiTabPaths->comboBoxIncludeType, static_cast<void (QComboBox::*)(int)>(&QComboBox::currentIndexChanged),
+    connect(uiTabPaths->comboBoxIncludeType, QOverload<int>::of(&QComboBox::currentIndexChanged),
             this, &DialogSeamAllowance::CSAIncludeTypeChanged);
 
     connect(uiTabPaths->toolButtonExprWidth, &QPushButton::clicked, this, &DialogSeamAllowance::FXWidth);
@@ -2804,11 +2804,9 @@ void DialogSeamAllowance::InitLabelsTab()
     InitPinPoint(uiTabLabels->comboBoxDLTopLeftPin);
     InitPinPoint(uiTabLabels->comboBoxDLBottomRightPin);
 
-    connect(uiTabLabels->comboBoxDLTopLeftPin,
-            static_cast<void (QComboBox::*)(const QString &)>(&QComboBox::currentIndexChanged),
+    connect(uiTabLabels->comboBoxDLTopLeftPin, QOverload<const QString &>::of(&QComboBox::currentIndexChanged),
             this, &DialogSeamAllowance::DetailPinPointChanged);
-    connect(uiTabLabels->comboBoxDLBottomRightPin,
-            static_cast<void (QComboBox::*)(const QString &)>(&QComboBox::currentIndexChanged),
+    connect(uiTabLabels->comboBoxDLBottomRightPin, QOverload<const QString &>::of(&QComboBox::currentIndexChanged),
             this, &DialogSeamAllowance::DetailPinPointChanged);
 
     connect(uiTabLabels->pushButtonDLWidth, &QPushButton::clicked, this, &DialogSeamAllowance::EditDLFormula);
@@ -2837,11 +2835,9 @@ void DialogSeamAllowance::InitLabelsTab()
     InitPinPoint(uiTabLabels->comboBoxPLTopLeftPin);
     InitPinPoint(uiTabLabels->comboBoxPLBottomRightPin);
 
-    connect(uiTabLabels->comboBoxPLTopLeftPin,
-            static_cast<void (QComboBox::*)(const QString &)>(&QComboBox::currentIndexChanged),
+    connect(uiTabLabels->comboBoxPLTopLeftPin, QOverload<const QString &>::of(&QComboBox::currentIndexChanged),
             this, &DialogSeamAllowance::PatternPinPointChanged);
-    connect(uiTabLabels->comboBoxPLBottomRightPin,
-            static_cast<void (QComboBox::*)(const QString &)>(&QComboBox::currentIndexChanged),
+    connect(uiTabLabels->comboBoxPLBottomRightPin, QOverload<const QString &>::of(&QComboBox::currentIndexChanged),
             this, &DialogSeamAllowance::PatternPinPointChanged);
 
     connect(uiTabLabels->pushButtonPLWidth, &QPushButton::clicked, this, &DialogSeamAllowance::EditPLFormula);
@@ -2891,11 +2887,9 @@ void DialogSeamAllowance::InitGrainlineTab()
     InitPinPoint(uiTabGrainline->comboBoxGrainlineTopPin);
     InitPinPoint(uiTabGrainline->comboBoxGrainlineBottomPin);
 
-    connect(uiTabGrainline->comboBoxGrainlineTopPin,
-            static_cast<void (QComboBox::*)(const QString &)>(&QComboBox::currentIndexChanged),
+    connect(uiTabGrainline->comboBoxGrainlineTopPin, QOverload<const QString &>::of(&QComboBox::currentIndexChanged),
             this, &DialogSeamAllowance::GrainlinePinPointChanged);
-    connect(uiTabGrainline->comboBoxGrainlineBottomPin,
-            static_cast<void (QComboBox::*)(const QString &)>(&QComboBox::currentIndexChanged),
+    connect(uiTabGrainline->comboBoxGrainlineBottomPin, QOverload<const QString &>::of(&QComboBox::currentIndexChanged),
             this, &DialogSeamAllowance::GrainlinePinPointChanged);
 }
 
@@ -2911,12 +2905,12 @@ void DialogSeamAllowance::InitPinsTab()
 void DialogSeamAllowance::InitPassmarksTab()
 {
     InitPassmarksList();
-    connect(uiTabPassmarks->comboBoxPassmarks, static_cast<void (QComboBox::*)(int)>(&QComboBox::currentIndexChanged),
+    connect(uiTabPassmarks->comboBoxPassmarks, QOverload<int>::of(&QComboBox::currentIndexChanged),
             this, &DialogSeamAllowance::PassmarkChanged);
 
-    connect(uiTabPassmarks->buttonGroupLineType, static_cast<void(QButtonGroup::*)(int)>(&QButtonGroup::buttonClicked),
+    connect(uiTabPassmarks->buttonGroupLineType, QOverload<int>::of(&QButtonGroup::buttonClicked),
             this, &DialogSeamAllowance::PassmarkLineTypeChanged);
-    connect(uiTabPassmarks->buttonGroupAngleType, static_cast<void(QButtonGroup::*)(int)>(&QButtonGroup::buttonClicked),
+    connect(uiTabPassmarks->buttonGroupAngleType, QOverload<int>::of(&QButtonGroup::buttonClicked),
             this, &DialogSeamAllowance::PassmarkAngleTypeChanged);
     connect(uiTabPassmarks->checkBoxShowSecondPassmark, &QCheckBox::stateChanged, this,
             &DialogSeamAllowance::PassmarkShowSecondChanged);

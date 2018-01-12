@@ -94,8 +94,8 @@ QWidget *VPE::VLineTypeProperty::createEditor(QWidget *parent, const QStyleOptio
     }
 
     tmpEditor->setCurrentIndex(VProperty::d_ptr->VariantValue.toInt());
-    connect(tmpEditor, static_cast<void (QComboBox::*)(int)>(&QComboBox::currentIndexChanged), this,
-                     &VLineTypeProperty::currentIndexChanged);
+    connect(tmpEditor, QOverload<int>::of(&QComboBox::currentIndexChanged), this,
+            &VLineTypeProperty::currentIndexChanged);
 
     VProperty::d_ptr->editor = tmpEditor;
     return VProperty::d_ptr->editor;

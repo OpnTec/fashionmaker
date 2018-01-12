@@ -46,7 +46,7 @@ DialogPin::DialogPin(const VContainer *data, quint32 toolId, QWidget *parent)
     flagError = false;
     CheckState();
 
-    connect(ui->comboBoxPiece, static_cast<void (QComboBox::*)(int)>(&QComboBox::currentIndexChanged), this, [this]()
+    connect(ui->comboBoxPiece, QOverload<int>::of(&QComboBox::currentIndexChanged), this, [this]()
     {
         CheckPieces();
     });

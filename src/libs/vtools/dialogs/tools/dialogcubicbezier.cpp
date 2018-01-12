@@ -64,13 +64,13 @@ DialogCubicBezier::DialogCubicBezier(const VContainer *data, const quint32 &tool
 
     DialogTool::CheckState();
 
-    connect(ui->comboBoxP1, static_cast<void (QComboBox::*)(const QString &)>(&QComboBox::currentIndexChanged),
+    connect(ui->comboBoxP1, QOverload<const QString &>::of(&QComboBox::currentIndexChanged),
             this, &DialogCubicBezier::PointNameChanged);
-    connect(ui->comboBoxP2, static_cast<void (QComboBox::*)(const QString &)>(&QComboBox::currentIndexChanged),
+    connect(ui->comboBoxP2, QOverload<const QString &>::of(&QComboBox::currentIndexChanged),
             this, &DialogCubicBezier::PointNameChanged);
-    connect(ui->comboBoxP3, static_cast<void (QComboBox::*)(const QString &)>(&QComboBox::currentIndexChanged),
+    connect(ui->comboBoxP3, QOverload<const QString &>::of(&QComboBox::currentIndexChanged),
             this, &DialogCubicBezier::PointNameChanged);
-    connect(ui->comboBoxP4, static_cast<void (QComboBox::*)(const QString &)>(&QComboBox::currentIndexChanged),
+    connect(ui->comboBoxP4, QOverload<const QString &>::of(&QComboBox::currentIndexChanged),
             this, &DialogCubicBezier::PointNameChanged);
 
     vis = new VisToolCubicBezier(data);

@@ -89,7 +89,7 @@ DialogPlaceLabel::DialogPlaceLabel(const VContainer *data, quint32 toolId, QWidg
     connect(timerHeight, &QTimer::timeout, this, &DialogPlaceLabel::EvalHeight);
     connect(timerAngle, &QTimer::timeout, this, &DialogPlaceLabel::EvalAngle);
 
-    connect(ui->comboBoxPiece, static_cast<void (QComboBox::*)(int)>(&QComboBox::currentIndexChanged), this, [this]()
+    connect(ui->comboBoxPiece, QOverload<int>::of(&QComboBox::currentIndexChanged), this, [this]()
     {
         CheckPieces();
     });

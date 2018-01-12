@@ -49,7 +49,7 @@ PreferencesConfigurationPage::PreferencesConfigurationPage(QWidget *parent)
     ui->autoSaveCheck->setChecked(qApp->ValentinaSettings()->GetAutosaveState());
 
     InitLanguages(ui->langCombo);
-    connect(ui->langCombo, static_cast<void (QComboBox::*)(int)>(&QComboBox::currentIndexChanged), this, [this]()
+    connect(ui->langCombo, QOverload<int>::of(&QComboBox::currentIndexChanged), this, [this]()
     {
         m_langChanged = true;
     });
@@ -60,7 +60,7 @@ PreferencesConfigurationPage::PreferencesConfigurationPage(QWidget *parent)
 
     //----------------------- Unit setup
     InitUnits();
-    connect(ui->unitCombo, static_cast<void (QComboBox::*)(int)>(&QComboBox::currentIndexChanged), this, [this]()
+    connect(ui->unitCombo, QOverload<int>::of(&QComboBox::currentIndexChanged), this, [this]()
     {
         m_unitChanged = true;
     });
@@ -73,7 +73,7 @@ PreferencesConfigurationPage::PreferencesConfigurationPage(QWidget *parent)
     {
         ui->labelCombo->setCurrentIndex(index);
     }
-    connect(ui->labelCombo, static_cast<void (QComboBox::*)(int)>(&QComboBox::currentIndexChanged), this, [this]()
+    connect(ui->labelCombo, QOverload<int>::of(&QComboBox::currentIndexChanged), this, [this]()
     {
         m_labelLangChanged = true;
     });
@@ -81,7 +81,7 @@ PreferencesConfigurationPage::PreferencesConfigurationPage(QWidget *parent)
     //---------------------- Pattern making system
     InitPMSystems(ui->systemCombo);
     ui->systemBookValueLabel->setFixedHeight(4 * QFontMetrics(ui->systemBookValueLabel->font()).lineSpacing());
-    connect(ui->systemCombo, static_cast<void (QComboBox::*)(int)>(&QComboBox::currentIndexChanged), this, [this]()
+    connect(ui->systemCombo, QOverload<int>::of(&QComboBox::currentIndexChanged), this, [this]()
     {
         m_systemChanged = true;
         QString text = qApp->TrVars()->PMSystemAuthor(ui->systemCombo->currentData().toString());

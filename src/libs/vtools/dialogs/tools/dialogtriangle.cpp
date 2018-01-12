@@ -67,13 +67,13 @@ DialogTriangle::DialogTriangle(const VContainer *data, const quint32 &toolId, QW
     FillComboBoxPoints(ui->comboBoxSecondPoint);
 
     connect(ui->lineEditNamePoint, &QLineEdit::textChanged, this, &DialogTriangle::NamePointChanged);
-    connect(ui->comboBoxFirstPoint, static_cast<void (QComboBox::*)(const QString &)>(&QComboBox::currentIndexChanged),
+    connect(ui->comboBoxFirstPoint, QOverload<const QString &>::of(&QComboBox::currentIndexChanged),
             this, &DialogTriangle::PointNameChanged);
-    connect(ui->comboBoxSecondPoint, static_cast<void (QComboBox::*)(const QString &)>(&QComboBox::currentIndexChanged),
+    connect(ui->comboBoxSecondPoint, QOverload<const QString &>::of(&QComboBox::currentIndexChanged),
             this, &DialogTriangle::PointNameChanged);
-    connect(ui->comboBoxAxisP1, static_cast<void (QComboBox::*)(const QString &)>(&QComboBox::currentIndexChanged),
+    connect(ui->comboBoxAxisP1, QOverload<const QString &>::of(&QComboBox::currentIndexChanged),
             this, &DialogTriangle::PointNameChanged);
-    connect(ui->comboBoxAxisP2, static_cast<void (QComboBox::*)(const QString &)>(&QComboBox::currentIndexChanged),
+    connect(ui->comboBoxAxisP2, QOverload<const QString &>::of(&QComboBox::currentIndexChanged),
             this, &DialogTriangle::PointNameChanged);
 
     vis = new VisToolTriangle(data);

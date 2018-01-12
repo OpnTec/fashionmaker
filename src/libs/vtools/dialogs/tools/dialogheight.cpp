@@ -76,11 +76,11 @@ DialogHeight::DialogHeight(const VContainer *data, const quint32 &toolId, QWidge
     FillComboBoxLineColors(ui->comboBoxLineColor);
 
     connect(ui->lineEditNamePoint, &QLineEdit::textChanged, this, &DialogHeight::NamePointChanged);
-    connect(ui->comboBoxBasePoint, static_cast<void (QComboBox::*)(const QString &)>(&QComboBox::currentIndexChanged),
+    connect(ui->comboBoxBasePoint, QOverload<const QString &>::of(&QComboBox::currentIndexChanged),
             this, &DialogHeight::PointNameChanged);
-    connect(ui->comboBoxP1Line, static_cast<void (QComboBox::*)(const QString &)>(&QComboBox::currentIndexChanged),
+    connect(ui->comboBoxP1Line, QOverload<const QString &>::of(&QComboBox::currentIndexChanged),
             this, &DialogHeight::PointNameChanged);
-    connect(ui->comboBoxP2Line, static_cast<void (QComboBox::*)(const QString &)>(&QComboBox::currentIndexChanged),
+    connect(ui->comboBoxP2Line, QOverload<const QString &>::of(&QComboBox::currentIndexChanged),
             this, &DialogHeight::PointNameChanged);
 
     vis = new VisToolHeight(data);
