@@ -95,10 +95,6 @@ DialogPlaceLabel::DialogPlaceLabel(const VContainer *data, quint32 toolId, QWidg
     });
 
     vis = new VisToolSpecialPoint(data);
-
-    FormulaWidthChanged();
-    FormulaHeightChanged();
-    FormulaAngleChanged();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -275,6 +271,11 @@ void DialogPlaceLabel::ChosenObject(quint32 id, const SceneObject &type)
                 vis->VisualMode(id);
                 CheckPoint();
                 prepare = true;
+
+                FormulaWidthChanged();
+                FormulaHeightChanged();
+                FormulaAngleChanged();
+
                 this->setModal(true);
                 this->show();
             }
