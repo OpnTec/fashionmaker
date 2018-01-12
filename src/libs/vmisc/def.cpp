@@ -208,11 +208,8 @@ const QString unitINCH = QStringLiteral("inch");
 const QString unitPX   = QStringLiteral("px");
 
 //---------------------------------------------------------------------------------------------------------------------
-void SetItemOverrideCursor(QGraphicsItem *item, const QString &pixmapPath, int hotX, int hotY)
+QPixmap QPixmapFromCache(const QString &pixmapPath)
 {
-#ifndef QT_NO_CURSOR
-    SCASSERT(item != nullptr)
-
     QPixmap pixmap;
 
     if (not QPixmapCache::find(pixmapPath, pixmap))
@@ -220,8 +217,15 @@ void SetItemOverrideCursor(QGraphicsItem *item, const QString &pixmapPath, int h
         pixmap = QPixmap(pixmapPath);
         QPixmapCache::insert(pixmapPath, pixmap);
     }
+    return pixmap;
+}
 
-    item->setCursor(QCursor(pixmap, hotX, hotY));
+//---------------------------------------------------------------------------------------------------------------------
+void SetItemOverrideCursor(QGraphicsItem *item, const QString &pixmapPath, int hotX, int hotY)
+{
+#ifndef QT_NO_CURSOR
+    SCASSERT(item != nullptr)
+    item->setCursor(QCursor(QPixmapFromCache(pixmapPath), hotX, hotY));
 #else
     Q_UNUSED(item)
     Q_UNUSED(pixmapPath)

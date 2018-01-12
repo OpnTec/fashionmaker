@@ -413,6 +413,7 @@ extern const QString unitCM;
 extern const QString unitINCH;
 extern const QString unitPX;
 
+QPixmap QPixmapFromCache(const QString &pixmapPath);
 void SetItemOverrideCursor(QGraphicsItem *item, const QString & pixmapPath, int hotX = -1, int hotY = -1);
 
 Q_REQUIRED_RESULT double ToPixel(double val, const Unit &unit);

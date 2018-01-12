@@ -504,12 +504,17 @@ void VMainGraphicsView::mouseMoveEvent(QMouseEvent *event)
 {
     // Hack to fix problem with mouse cursor. Looks like after we switch cursor back it is rewrited back by a dialog.
     // Because no real way to catch this call we will check state for each move and compare to excpected state.
-    if (dragMode() != QGraphicsView::ScrollHandDrag &&
-            // No way to restore bitmap from shape and we really don't need this for now.
-            m_currentCursor != Qt::BitmapCursor &&
-            m_currentCursor != viewport()->cursor().shape())
+    if (dragMode() != QGraphicsView::ScrollHandDrag)
     {
-        viewport()->setCursor(m_currentCursor);
+        QCursor cur = viewport()->cursor();
+        // No way to restore bitmap from shape and we really don't need this for now.
+        if (m_currentCursor != Qt::BitmapCursor
+                && cur.shape() == Qt::BitmapCursor
+                && cur.pixmap().cacheKey() != QPixmapFromCache(cursorArrowOpenHand).cacheKey()
+                && cur.pixmap().cacheKey() != QPixmapFromCache(cursorArrowCloseHand).cacheKey())
+        {
+            viewport()->setCursor(m_currentCursor);
+        }
     }
 
     if (dragMode() == QGraphicsView::ScrollHandDrag)
