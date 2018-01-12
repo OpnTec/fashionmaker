@@ -33,6 +33,11 @@
 #if QT_VERSION < QT_VERSION_CHECK(5, 7, 0)
 #if defined(Q_COMPILER_VARIADIC_TEMPLATES)
 
+#include "../diagnostic.h"
+
+QT_WARNING_PUSH
+QT_WARNING_DISABLE_GCC("-Weffc++")
+
 template <typename... Args>
 struct QNonConstOverload
 {
@@ -79,6 +84,8 @@ template <typename... Args> Q_CONSTEXPR Q_DECL_UNUSED QOverload<Args...> qOverlo
 template <typename... Args> Q_CONSTEXPR Q_DECL_UNUSED QConstOverload<Args...> qConstOverload = {};
 template <typename... Args> Q_CONSTEXPR Q_DECL_UNUSED QNonConstOverload<Args...> qNonConstOverload = {};
 #endif
+
+QT_WARNING_POP
 
 #endif // Q_COMPILER_VARIADIC_TEMPLATES
 #endif // QT_VERSION < QT_VERSION_CHECK(5, 7, 0)
