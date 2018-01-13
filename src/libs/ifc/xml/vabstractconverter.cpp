@@ -243,13 +243,13 @@ Q_NORETURN void VAbstractConverter::InvalidVersion(int ver) const
 {
     if (ver < MinVer())
     {
-        const QString errorMsg(tr("Invalid version. Minimum supported version is %1").arg(MinVerStr()));
+        const QString errorMsg(tr("Invalid version. Minimum supported format version is %1").arg(MinVerStr()));
         throw VException(errorMsg);
     }
 
     if (ver > MaxVer())
     {
-        const QString errorMsg(tr("Invalid version. Maximum supported version is %1").arg(MaxVerStr()));
+        const QString errorMsg(tr("Invalid version. Maximum supported format version is %1").arg(MaxVerStr()));
         throw VException(errorMsg);
     }
 
