@@ -7536,6 +7536,10 @@ Chcete uložit své změny?</translation>
         <source>Use these tools to create a pattern</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Scale:</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>MainWindowsNoGUI</name>
@@ -9150,7 +9154,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Edit pattern label</source>
-        <translation>Upravit označení vzoru střihu</translation>
+        <translation type="vanished">Upravit označení vzoru střihu</translation>
     </message>
     <message>
         <source>Edit template</source>
@@ -9191,6 +9195,18 @@ Do you want to save your changes?</source>
     <message>
         <source>Fold position:</source>
         <translation>Poloha záhybu:</translation>
+    </message>
+    <message>
+        <source>Edit piece label template</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Options to control position a detail label. &lt;b&gt;Not available if a detail label template is empty&lt;/b&gt;.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Options to control position a pattern label. &lt;b&gt;Not available if a pattern label template is empty&lt;/b&gt;.</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -9675,11 +9691,11 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Invalid version. Minimum supported version is %1</source>
-        <translation>Neplatná verze. Nejnižší podporovaná verze je %1</translation>
+        <translation type="vanished">Neplatná verze. Nejnižší podporovaná verze je %1</translation>
     </message>
     <message>
         <source>Invalid version. Maximum supported version is %1</source>
-        <translation>Neplatná verze. Nejvyšší podporovaná verze je %1</translation>
+        <translation type="vanished">Neplatná verze. Nejvyšší podporovaná verze je %1</translation>
     </message>
     <message>
         <source>Error no unique id.</source>
@@ -9699,6 +9715,14 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Error openning a temp file: %1.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Invalid version. Minimum supported format version is %1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Invalid version. Maximum supported format version is %1</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

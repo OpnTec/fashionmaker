@@ -1505,11 +1505,11 @@
     </message>
     <message>
         <source>Detail label visible</source>
-        <translation type="vanished">Отображение названий деталей</translation>
+        <translation type="vanished">Отображение метки детали</translation>
     </message>
     <message>
         <source>Pattern label visible</source>
-        <translation type="vanished">Отображение названия выкройки</translation>
+        <translation type="vanished">Отображение метки лекала</translation>
     </message>
     <message>
         <source>Fabric</source>
@@ -7824,6 +7824,10 @@ Do you want to save your changes?</source>
         <source>Use these tools to create a pattern</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Scale:</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>MainWindowsNoGUI</name>
@@ -9599,14 +9603,10 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Pattern label visible</source>
-        <translation>Отображение метки детали</translation>
+        <translation>Отображение метки лекала</translation>
     </message>
     <message>
         <source>Label template:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Edit pattern label</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -9647,6 +9647,18 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Fold position:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Edit piece label template</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Options to control position a detail label. &lt;b&gt;Not available if a detail label template is empty&lt;/b&gt;.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Options to control position a pattern label. &lt;b&gt;Not available if a pattern label template is empty&lt;/b&gt;.</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -10139,11 +10151,11 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Invalid version. Minimum supported version is %1</source>
-        <translation>Недействительная версия. Минимально поддерживаемая %1</translation>
+        <translation type="vanished">Недействительная версия. Минимально поддерживаемая %1</translation>
     </message>
     <message>
         <source>Invalid version. Maximum supported version is %1</source>
-        <translation>Недействительная версия. Максимально поддерживаемая %1</translation>
+        <translation type="vanished">Недействительная версия. Максимально поддерживаемая %1</translation>
     </message>
     <message>
         <source>Error no unique id.</source>
@@ -10172,6 +10184,14 @@ Do you want to save your changes?</source>
     <message>
         <source>Error openning a temp file: %1.</source>
         <translation>Ошибка открытия временного файла: %1.</translation>
+    </message>
+    <message>
+        <source>Invalid version. Minimum supported format version is %1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Invalid version. Maximum supported format version is %1</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
