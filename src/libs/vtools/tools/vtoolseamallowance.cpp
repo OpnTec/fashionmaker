@@ -1430,7 +1430,7 @@ void VToolSeamAllowance::SaveDialogChange(const QString &undoText)
 void VToolSeamAllowance::ShowOptions()
 {
     QSharedPointer<DialogSeamAllowance> dialog =
-            QSharedPointer<DialogSeamAllowance>(new DialogSeamAllowance(getData(), m_id, qApp->getMainWindow()));
+            QSharedPointer<DialogSeamAllowance>(new DialogSeamAllowance(getData(), doc, m_id, qApp->getMainWindow()));
     dialog->EnableApply(true);
     m_dialog = dialog;
     m_dialog->setModal(true);

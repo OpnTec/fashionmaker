@@ -55,7 +55,7 @@
              <item>
               <widget class="QPushButton" name="pushButtonEditPieceLabel">
                <property name="toolTip">
-                <string>Edit pattern label</string>
+                <string>Edit piece label template</string>
                </property>
                <property name="text">
                 <string>Edit template</string>
@@ -237,7 +237,10 @@
              </property>
              <widget class="QGroupBox" name="groupBoxDetailLabel">
               <property name="enabled">
-               <bool>true</bool>
+               <bool>false</bool>
+              </property>
+              <property name="toolTip">
+               <string>Options to control position a detail label. &lt;b&gt;Not available if a detail label template is empty&lt;/b&gt;.</string>
               </property>
               <property name="title">
                <string>Detail label visible</string>
@@ -946,7 +949,10 @@
              </widget>
              <widget class="QGroupBox" name="groupBoxPatternLabel">
               <property name="enabled">
-               <bool>true</bool>
+               <bool>false</bool>
+              </property>
+              <property name="toolTip">
+               <string>Options to control position a pattern label. &lt;b&gt;Not available if a pattern label template is empty&lt;/b&gt;.</string>
               </property>
               <property name="title">
                <string>Pattern label visible</string>

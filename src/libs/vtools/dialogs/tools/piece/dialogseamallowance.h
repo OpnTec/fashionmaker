@@ -56,6 +56,8 @@ class DialogSeamAllowance : public DialogTool
     Q_OBJECT
 
 public:
+    DialogSeamAllowance(const VContainer *data, const VAbstractPattern *doc, const quint32 &toolId,
+                        QWidget *parent = nullptr);
     DialogSeamAllowance(const VContainer *data, const quint32 &toolId, QWidget *parent = nullptr);
     virtual ~DialogSeamAllowance();
 

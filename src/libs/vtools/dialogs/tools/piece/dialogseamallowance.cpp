@@ -80,6 +80,15 @@ QString GetFormulaFromUser(QPlainTextEdit *textEdit)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+DialogSeamAllowance::DialogSeamAllowance(const VContainer *data, const VAbstractPattern *doc, const quint32 &toolId,
+                                         QWidget *parent)
+    : DialogSeamAllowance(data, toolId, parent)
+{
+    SCASSERT(doc != nullptr)
+    uiTabLabels->groupBoxPatternLabel->setEnabled(not doc->GetPatternLabelTemplate().isEmpty());
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 DialogSeamAllowance::DialogSeamAllowance(const VContainer *data, const quint32 &toolId, QWidget *parent)
     : DialogTool(data, toolId, parent),
       ui(new Ui::DialogSeamAllowance),
@@ -322,6 +331,8 @@ void DialogSeamAllowance::SetPiece(const VPiece &piece)
     uiTabLabels->spinBoxQuantity->setValue(m_oldData.GetQuantity());
     uiTabLabels->checkBoxFold->setChecked(m_oldData.IsOnFold());
     m_templateLines = m_oldData.GetLabelTemplate();
+
+    uiTabLabels->groupBoxDetailLabel->setEnabled(not m_templateLines.isEmpty());
 
     uiTabGrainline->comboBoxArrow->setCurrentIndex(int(piece.GetGrainlineGeometry().GetArrowType()));
 
@@ -2264,6 +2275,7 @@ void DialogSeamAllowance::EditLabel()
     if (QDialog::Accepted == editor.exec())
     {
         m_templateLines = editor.GetTemplate();
+        uiTabLabels->groupBoxDetailLabel->setEnabled(not m_templateLines.isEmpty());
     }
 }
 
