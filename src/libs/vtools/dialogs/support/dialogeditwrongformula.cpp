@@ -169,59 +169,55 @@ void DialogEditWrongFormula::ValChanged(int row)
         return;
     }
     QTableWidgetItem *item = ui->tableWidget->item( row, ColumnName );
-    if (ui->radioButtonStandardTable->isChecked())
+    const QString name = qApp->TrVars()->VarFromUser(item->text());
+
+    try
     {
-        const QString name = qApp->TrVars()->VarFromUser(item->text());
-        const QSharedPointer<VMeasurement> stable = data->GetVariable<VMeasurement>(name);
-        SetDescription(item->text(), *data->DataVariables()->value(name)->GetValue(),
-                       UnitsToStr(qApp->patternUnit(), true), stable->GetGuiText());
-        return;
+        if (ui->radioButtonStandardTable->isChecked())
+        {
+            const QSharedPointer<VMeasurement> stable = data->GetVariable<VMeasurement>(name);
+            SetDescription(item->text(), *stable->GetValue(), UnitsToStr(qApp->patternUnit(), true),
+                           stable->GetGuiText());
+        }
+        else if (ui->radioButtonIncrements->isChecked())
+        {
+            const QSharedPointer<VIncrement> incr = data->GetVariable<VIncrement>(name);
+            SetDescription(item->text(), *incr->GetValue(), UnitsToStr(qApp->patternUnit(), true),
+                           incr->GetDescription());
+        }
+        else if (ui->radioButtonLengthLine->isChecked())
+        {
+            SetDescription(item->text(), *data->GetVariable<VLengthLine>(name)->GetValue(),
+                           UnitsToStr(qApp->patternUnit(), true), tr("Line length"));
+        }
+        else if (ui->radioButtonLengthSpline->isChecked())
+        {
+            SetDescription(item->text(), *data->GetVariable<VCurveLength>(name)->GetValue(),
+                           UnitsToStr(qApp->patternUnit(), true), tr("Curve length"));
+        }
+        else if (ui->radioButtonAngleLine->isChecked())
+        {
+            SetDescription(item->text(), *data->GetVariable<VLineAngle>(name)->GetValue(), degreeSymbol,
+                           tr("Line Angle"));
+        }
+        else if (ui->radioButtonRadiusesArcs->isChecked())
+        {
+            SetDescription(item->text(), *data->GetVariable<VArcRadius>(name)->GetValue(),
+                           UnitsToStr(qApp->patternUnit(), true), tr("Arc radius"));
+        }
+        else if (ui->radioButtonAnglesCurves->isChecked())
+        {
+            SetDescription(item->text(), *data->GetVariable<VCurveAngle>(name)->GetValue(), degreeSymbol,
+                           tr("Curve angle"));
+        }
+        else if (ui->radioButtonFunctions->isChecked())
+        {
+            ui->labelDescription->setText(item->toolTip());
+        }
     }
-    if (ui->radioButtonIncrements->isChecked())
+    catch (const VExceptionBadId &e)
     {
-        const QSharedPointer<VIncrement> incr = data->GetVariable<VIncrement>(item->text());
-        SetDescription(item->text(), *data->DataVariables()->value(item->text())->GetValue(),
-                       UnitsToStr(qApp->patternUnit(), true), incr->GetDescription());
-        return;
-    }
-    if (ui->radioButtonLengthLine->isChecked())
-    {
-        SetDescription(item->text(),
-                       *data->GetVariable<VLengthLine>(qApp->TrVars()->VarFromUser(item->text()))->GetValue(),
-                       UnitsToStr(qApp->patternUnit(), true), tr("Line length"));
-        return;
-    }
-    if (ui->radioButtonLengthSpline->isChecked())
-    {
-        SetDescription(item->text(),
-                       *data->GetVariable<VCurveLength>(qApp->TrVars()->VarFromUser(item->text()))->GetValue(),
-                       UnitsToStr(qApp->patternUnit(), true), tr("Curve length"));
-        return;
-    }
-    if (ui->radioButtonAngleLine->isChecked())
-    {
-        SetDescription(item->text(),
-                       *data->GetVariable<VLineAngle>(qApp->TrVars()->VarFromUser(item->text()))->GetValue(),
-                       degreeSymbol, tr("Line Angle"));
-        return;
-    }
-    if (ui->radioButtonRadiusesArcs->isChecked())
-    {
-        SetDescription(item->text(),
-                       *data->GetVariable<VArcRadius>(qApp->TrVars()->VarFromUser(item->text()))->GetValue(),
-                       UnitsToStr(qApp->patternUnit(), true), tr("Arc radius"));
-        return;
-    }
-    if (ui->radioButtonAnglesCurves->isChecked())
-    {
-        SetDescription(item->text(),
-                       *data->GetVariable<VCurveAngle>(qApp->TrVars()->VarFromUser(item->text()))->GetValue(),
-                       degreeSymbol, tr("Curve angle"));
-        return;
-    }
-    if (ui->radioButtonFunctions->isChecked())
-    {
-        ui->labelDescription->setText(item->toolTip());
+        qCritical() << qUtf8Printable(e.ErrorMessage());
     }
 }
 

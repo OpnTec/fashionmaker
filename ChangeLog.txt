@@ -82,6 +82,7 @@
 - [#778] Calling Valentina with "-h" option opens information dialog instead of writing to console.
 - [#788] Unhardcode icon path in GNU/Linux launcher.
 - [#797] Custom seam allowance ignored in some cases.
+- [#798] Formula Wizard crashes with translated increments.
 
 # Version 0.5.0 May 9, 2017
 - [#581] User can now filter input lists by keyword in function wizard.
