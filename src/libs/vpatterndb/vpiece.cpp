@@ -837,7 +837,7 @@ QVector<VPieceNode> VPiece::GetUnitedPath(const VContainer *data) const
             }
 
             const QVector<VPieceNode> midBefore = united.mid(0, indexStartPoint+1);
-            const QVector<VPieceNode> midAfter = united.mid(indexEndPoint);
+            const QVector<VPieceNode> midAfter = united.mid(indexEndPoint, united.size() - midBefore.size());
 
             QVector<VPieceNode> customNodes = data->GetPiecePath(records.at(i).path).GetNodes();
             if (records.at(i).reverse)
@@ -887,8 +887,7 @@ QVector<CustomSARecord> VPiece::GetValidRecords() const
                 && indexStartPoint != -1
                 && not d->m_path.at(indexStartPoint).IsExcluded()
                 && indexEndPoint != -1
-                && not d->m_path.at(indexEndPoint).IsExcluded()
-                && indexStartPoint < indexEndPoint)
+                && not d->m_path.at(indexEndPoint).IsExcluded())
         {
             records.append(record);
         }
