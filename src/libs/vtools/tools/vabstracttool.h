@@ -229,6 +229,7 @@ quint32 VAbstractTool::CreateNode(VContainer *data, quint32 id)
     //We can't use exist object. Need create new.
     T *node = new T(*data->GeometricObject<T>(id).data());
     node->setMode(Draw::Modeling);
+    node->setIdObject(id);
     return data->AddGObject(node);
 }
 

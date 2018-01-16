@@ -72,6 +72,7 @@ VToolPin *VToolPin::Create(VToolPinInitData initData)
             return nullptr;// Just ignore
         }
         VPointF *pinPoint = new VPointF(*point);
+        pinPoint->setIdObject(initData.pointId);
         pinPoint->setMode(Draw::Modeling);
         initData.data->UpdateGObject(initData.id, pinPoint);
         if (initData.parse != Document::FullParse)
