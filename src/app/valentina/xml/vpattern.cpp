@@ -3679,17 +3679,7 @@ void VPattern::ParseIncrementsElement(const QDomNode &node)
                 if (domElement.tagName() == TagIncrement)
                 {
                     const QString name = GetParametrString(domElement, AttrName, "");
-
-                    QString desc;
-                    try
-                    {
-                        desc = GetParametrString(domElement, AttrDescription);
-                    }
-                    catch (VExceptionEmptyParameter &e)
-                    {
-                        Q_UNUSED(e)
-                    }
-
+                    const QString desc = GetParametrEmptyString(domElement, AttrDescription);
                     const QString formula = GetParametrString(domElement, AttrFormula, "0");
                     bool ok = false;
                     const qreal value = EvalFormula(data, formula, &ok);

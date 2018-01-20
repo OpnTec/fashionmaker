@@ -269,26 +269,8 @@ void VMeasurements::ReadMeasurements() const
         const QDomElement dom = list.at(i).toElement();
 
         const QString name = GetParametrString(dom, AttrName);
-
-        QString description;
-        try
-        {
-            description = GetParametrString(dom, AttrDescription);
-        }
-        catch (VExceptionEmptyParameter &e)
-        {
-            Q_UNUSED(e)
-        }
-
-        QString fullName;
-        try
-        {
-            fullName = GetParametrString(dom, AttrFullName);
-        }
-        catch (VExceptionEmptyParameter &e)
-        {
-            Q_UNUSED(e)
-        }
+        const QString description = GetParametrEmptyString(dom, AttrDescription);
+        const QString fullName = GetParametrEmptyString(dom, AttrFullName);
 
         QSharedPointer<VMeasurement> meash;
         QSharedPointer<VMeasurement> tempMeash;

@@ -456,16 +456,9 @@ QString VDomDocument::GetParametrString(const QDomElement &domElement, const QSt
 //---------------------------------------------------------------------------------------------------------------------
 QString VDomDocument::GetParametrEmptyString(const QDomElement &domElement, const QString &name)
 {
-    QString result;
-    try
-    {
-        result = GetParametrString(domElement, name, "");
-    }
-    catch(const VExceptionEmptyParameter &)
-    {
-        // do nothing
-    }
-    return result;
+    Q_ASSERT_X(not name.isEmpty(), Q_FUNC_INFO, "name of parametr is empty");
+    Q_ASSERT_X(not domElement.isNull(), Q_FUNC_INFO, "domElement is null");
+    return domElement.attribute(name);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

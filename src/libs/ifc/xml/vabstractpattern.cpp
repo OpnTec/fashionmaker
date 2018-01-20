@@ -207,13 +207,10 @@ namespace
 void ReadExpressionAttribute(QVector<VFormulaField> &expressions, const QDomElement &element, const QString &attribute)
 {
     VFormulaField formula;
-    try
+    formula.expression = VDomDocument::GetParametrEmptyString(element, attribute);
+
+    if (formula.expression.isEmpty())
     {
-        formula.expression = VDomDocument::GetParametrString(element, attribute);
-    }
-    catch (VExceptionEmptyParameter &e)
-    {
-        Q_UNUSED(e)
         return;
     }
 
