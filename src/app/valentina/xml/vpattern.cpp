@@ -4148,13 +4148,13 @@ void VPattern::PrepareForParse(const Document &parse)
     {
         VContainer::ClearUniqueNames();
         Q_STATIC_ASSERT_X(static_cast<int>(VarType::Unknown) == 8, "Check that you used all types");
-        data->ClearVariables(VarType::Increment);
-        data->ClearVariables(VarType::LineAngle);
-        data->ClearVariables(VarType::LineLength);
-        data->ClearVariables(VarType::CurveLength);
-        data->ClearVariables(VarType::CurveCLength);
-        data->ClearVariables(VarType::ArcRadius);
-        data->ClearVariables(VarType::CurveAngle);
+        data->ClearVariables(QVector<VarType>({VarType::Increment,
+                                               VarType::LineAngle,
+                                               VarType::LineLength,
+                                               VarType::CurveLength,
+                                               VarType::CurveCLength,
+                                               VarType::ArcRadius,
+                                               VarType::CurveAngle}));
     }
 }
 

@@ -61,12 +61,12 @@ public:
         // When we create an increment in the dialog it will get neccesary data. Such data must be removed because will
         // confuse a user. Increment should not know nothing about internal variables.
         Q_STATIC_ASSERT_X(static_cast<int>(VarType::Unknown) == 8, "Check that you used all types");
-        this->data.ClearVariables(VarType::LineAngle);
-        this->data.ClearVariables(VarType::LineLength);
-        this->data.ClearVariables(VarType::CurveLength);
-        this->data.ClearVariables(VarType::CurveCLength);
-        this->data.ClearVariables(VarType::ArcRadius);
-        this->data.ClearVariables(VarType::CurveAngle);
+        this->data.ClearVariables(QVector<VarType>({VarType::LineAngle,
+                                                    VarType::LineLength,
+                                                    VarType::CurveLength,
+                                                    VarType::CurveCLength,
+                                                    VarType::ArcRadius,
+                                                    VarType::CurveAngle}));
     }
 
     VIncrementData(const VIncrementData &incr)

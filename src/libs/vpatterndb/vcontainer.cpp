@@ -281,13 +281,13 @@ void VContainer::ClearForFullParse()
     d->pieces->clear();
     d->piecePaths->clear();
     Q_STATIC_ASSERT_X(static_cast<int>(VarType::Unknown) == 8, "Check that you used all types");
-    ClearVariables(VarType::Increment);
-    ClearVariables(VarType::LineAngle);
-    ClearVariables(VarType::LineLength);
-    ClearVariables(VarType::CurveLength);
-    ClearVariables(VarType::CurveCLength);
-    ClearVariables(VarType::ArcRadius);
-    ClearVariables(VarType::CurveAngle);
+    ClearVariables(QVector<VarType>({VarType::Increment,
+                                     VarType::LineAngle,
+                                     VarType::LineLength,
+                                     VarType::CurveLength,
+                                     VarType::CurveCLength,
+                                     VarType::ArcRadius,
+                                     VarType::CurveAngle}));
     ClearGObjects();
     ClearUniqueNames();
 }
@@ -311,27 +311,31 @@ void VContainer::ClearCalculationGObjects()
 //---------------------------------------------------------------------------------------------------------------------
 void VContainer::ClearVariables(const VarType &type)
 {
-    if (d->variables.size()>0) //-V807
+    ClearVariables(QVector<VarType>({type}));
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VContainer::ClearVariables(const QVector<VarType> &types)
+{
+    if (not d->variables.isEmpty()) //-V807
     {
-        if (type == VarType::Unknown)
+        if (types.isEmpty() || types.contains(VarType::Unknown))
         {
             d->variables.clear();
         }
         else
         {
-            QVector<QString> keys;
             QHash<QString, QSharedPointer<VInternalVariable> >::iterator i;
-            for (i = d->variables.begin(); i != d->variables.end(); ++i)
+            for (i = d->variables.begin(); i != d->variables.end();)
             {
-                if (i.value()->GetType() == type)
+                if (types.contains(i.value()->GetType()))
                 {
-                    keys.append(i.key());
+                    i = d->variables.erase(i);
                 }
-            }
-
-            for (int i = 0; i < keys.size(); ++i)
-            {
-                d->variables.remove(keys.at(i));
+                else
+                {
+                    ++i;
+                }
             }
         }
     }

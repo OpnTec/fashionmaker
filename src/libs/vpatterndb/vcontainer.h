@@ -172,6 +172,7 @@ public:
     void               ClearGObjects();
     void               ClearCalculationGObjects();
     void               ClearVariables(const VarType &type = VarType::Unknown);
+    void               ClearVariables(const QVector<VarType> &types);
     static void        ClearUniqueNames();
     static void        ClearUniqueIncrementNames();
 
