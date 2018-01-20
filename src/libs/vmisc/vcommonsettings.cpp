@@ -95,6 +95,9 @@ const QString settingLabelUserDateFormats = QStringLiteral("label/userDateFormat
 const QString settingLabelTimeFormat      = QStringLiteral("label/timeFormat");
 const QString settingLabelUserTimeFormats = QStringLiteral("label/userTimeFormats");
 
+// Reading settings file is very expensive, cache curve approximation to speed up getting value
+qreal curveApproximationCached = -1;
+
 //---------------------------------------------------------------------------------------------------------------------
 QStringList ClearFormats(const QStringList &predefinedFormats, QStringList formats)
 {
@@ -1006,16 +1009,21 @@ void VCommonSettings::SetUserDefinedTimeFormats(const QStringList &formats)
 //---------------------------------------------------------------------------------------------------------------------
 qreal VCommonSettings::GetCurveApproximationScale() const
 {
-    bool ok = false;
-    const qreal scale = value(settingPatternCurveApproximationScale, defCurveApproximationScale).toDouble(&ok);
-    if (ok && scale >= minCurveApproximationScale && scale <= maxCurveApproximationScale)
+    if (curveApproximationCached < 0)
     {
-        return scale;
+        bool ok = false;
+        const qreal scale = value(settingPatternCurveApproximationScale, defCurveApproximationScale).toDouble(&ok);
+        if (ok && scale >= minCurveApproximationScale && scale <= maxCurveApproximationScale)
+        {
+            curveApproximationCached = scale;
+        }
+        else
+        {
+            curveApproximationCached = defCurveApproximationScale;
+        }
     }
-    else
-    {
-        return defCurveApproximationScale;
-    }
+
+    return curveApproximationCached;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -1024,6 +1032,7 @@ void VCommonSettings::SetCurveApproximationScale(qreal value)
     if (value >= minCurveApproximationScale && value <= maxCurveApproximationScale)
     {
         setValue(settingPatternCurveApproximationScale, value);
+        curveApproximationCached = value;
     }
 }
 
