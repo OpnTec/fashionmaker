@@ -45,8 +45,10 @@ void TST_QmuTokenParser::IsSingle_data()
     QTest::addColumn<QString>("formula");
     QTest::addColumn<bool>("result");
 
+    QTest::newRow("Empty string") << "" << false;
     QTest::newRow("Single value") << "15.5" << true;
     QTest::newRow("Two digits") << "2+2" << false;
+    QTest::newRow("Two digits") << "2-2" << false;
     QTest::newRow("Negative single value") << "-2" << true;
     QTest::newRow("Digit and variable") << "2+a" << false;
     QTest::newRow("One variable twice") << "a+a" << false;
@@ -54,6 +56,7 @@ void TST_QmuTokenParser::IsSingle_data()
     QTest::newRow("Empty string") << "" << false;
     QTest::newRow("Several spaces") << "   " << false;
     QTest::newRow("Invalid formula") << "2*)))" << false;
+    QTest::newRow("Invalid formula") << "2*" << false;
     QTest::newRow("Incorrect thousand separator 15 500") << "15 500" << false;
     QTest::newRow("Correct C locale 15500") << "15500" << true;
     QTest::newRow("Correct C locale 15,500") << "15,500" << true;
