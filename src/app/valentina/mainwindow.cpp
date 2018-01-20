@@ -3357,6 +3357,8 @@ void MainWindow::New()
 
         m_curFileFormatVersion = VPatternConverter::PatternMaxVer;
         m_curFileFormatVersionStr = VPatternConverter::PatternMaxVerStr;
+
+        ToolBarOption();
     }
     else
     {
