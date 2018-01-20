@@ -193,6 +193,7 @@ VFormula VToolArc::GetFormulaRadius() const
     radius.setCheckZero(true);
     radius.setToolId(m_id);
     radius.setPostfix(UnitsToStr(qApp->patternUnit()));
+    radius.Eval();
     return radius;
 }
 
@@ -221,6 +222,7 @@ VFormula VToolArc::GetFormulaF1() const
     f1.setCheckZero(false);
     f1.setToolId(m_id);
     f1.setPostfix(degreeSymbol);
+    f1.Eval();
     return f1;
 }
 
@@ -247,6 +249,7 @@ VFormula VToolArc::GetFormulaF2() const
     f2.setCheckZero(false);
     f2.setToolId(m_id);
     f2.setPostfix(degreeSymbol);
+    f2.Eval();
     return f2;
 }
 

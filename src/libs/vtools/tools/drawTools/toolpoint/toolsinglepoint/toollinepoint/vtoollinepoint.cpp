@@ -220,6 +220,7 @@ VFormula VToolLinePoint::GetFormulaLength() const
     fLength.setCheckZero(true);
     fLength.setToolId(m_id);
     fLength.setPostfix(UnitsToStr(qApp->patternUnit()));
+    fLength.Eval();
 
     return fLength;
 }

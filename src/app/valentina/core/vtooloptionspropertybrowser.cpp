@@ -2286,24 +2286,28 @@ void VToolOptionsPropertyBrowser::ShowOptionsToolSpline(QGraphicsItem *item)
     angle1.setCheckZero(false);
     angle1.setToolId(i->getId());
     angle1.setPostfix(degreeSymbol);
+    angle1.Eval();
     AddPropertyFormula(tr("C1: angle:"), angle1, AttrAngle1);
 
     VFormula length1(spl.GetC1LengthFormula(), i->getData());
     length1.setCheckZero(false);
     length1.setToolId(i->getId());
     length1.setPostfix(UnitsToStr(qApp->patternUnit()));
+    length1.Eval();
     AddPropertyFormula(tr("C1: length:"), length1, AttrLength1);
 
     VFormula angle2(spl.GetEndAngleFormula(), i->getData());
     angle2.setCheckZero(false);
     angle2.setToolId(i->getId());
     angle2.setPostfix(degreeSymbol);
+    angle2.Eval();
     AddPropertyFormula(tr("C2: angle:"), angle2, AttrAngle2);
 
     VFormula length2(spl.GetC2LengthFormula(), i->getData());
     length2.setCheckZero(false);
     length2.setToolId(i->getId());
     length2.setPostfix(UnitsToStr(qApp->patternUnit()));
+    length2.Eval();
     AddPropertyFormula(tr("C2: length:"), length2, AttrLength2);
 
     AddPropertyCurvePenStyle(i, tr("Pen style:"), CurvePenStylesPics());
@@ -3008,6 +3012,7 @@ void VToolOptionsPropertyBrowser::UpdateOptionsToolSpline()
     angle1F.setCheckZero(false);
     angle1F.setToolId(i->getId());
     angle1F.setPostfix(degreeSymbol);
+    angle1F.Eval();
     QVariant angle1;
     angle1.setValue(angle1F);
     idToProperty[AttrAngle1]->setValue(angle1);
@@ -3016,6 +3021,7 @@ void VToolOptionsPropertyBrowser::UpdateOptionsToolSpline()
     length1F.setCheckZero(false);
     length1F.setToolId(i->getId());
     length1F.setPostfix(UnitsToStr(qApp->patternUnit()));
+    length1F.Eval();
     QVariant length1;
     length1.setValue(length1F);
     idToProperty[AttrLength1]->setValue(length1);
@@ -3024,6 +3030,7 @@ void VToolOptionsPropertyBrowser::UpdateOptionsToolSpline()
     angle2F.setCheckZero(false);
     angle2F.setToolId(i->getId());
     angle2F.setPostfix(degreeSymbol);
+    angle2F.Eval();
     QVariant angle2;
     angle2.setValue(angle2F);
     idToProperty[AttrAngle2]->setValue(angle2);
@@ -3032,6 +3039,7 @@ void VToolOptionsPropertyBrowser::UpdateOptionsToolSpline()
     length2F.setCheckZero(false);
     length2F.setToolId(i->getId());
     length2F.setPostfix(UnitsToStr(qApp->patternUnit()));
+    length2F.Eval();
     QVariant length2;
     length2.setValue(length2F);
     idToProperty[AttrLength2]->setValue(length2);

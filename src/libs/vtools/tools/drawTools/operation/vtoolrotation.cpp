@@ -281,6 +281,7 @@ VFormula VToolRotation::GetFormulaAngle() const
     fAngle.setCheckZero(false);
     fAngle.setToolId(m_id);
     fAngle.setPostfix(degreeSymbol);
+    fAngle.Eval();
     return fAngle;
 }
 

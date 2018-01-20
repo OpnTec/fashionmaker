@@ -202,6 +202,7 @@ VFormula VToolEllipticalArc::GetFormulaRadius1() const
     radius1.setCheckZero(true);
     radius1.setToolId(m_id);
     radius1.setPostfix(UnitsToStr(qApp->patternUnit()));
+    radius1.Eval();
     return radius1;
 }
 
@@ -230,6 +231,7 @@ VFormula VToolEllipticalArc::GetFormulaRadius2() const
     radius2.setCheckZero(true);
     radius2.setToolId(m_id);
     radius2.setPostfix(UnitsToStr(qApp->patternUnit()));
+    radius2.Eval();
     return radius2;
 }
 
@@ -258,6 +260,7 @@ VFormula VToolEllipticalArc::GetFormulaF1() const
     f1.setCheckZero(false);
     f1.setToolId(m_id);
     f1.setPostfix(degreeSymbol);
+    f1.Eval();
     return f1;
 }
 
@@ -283,6 +286,7 @@ VFormula VToolEllipticalArc::GetFormulaF2() const
     f2.setCheckZero(false);
     f2.setToolId(m_id);
     f2.setPostfix(degreeSymbol);
+    f2.Eval();
     return f2;
 }
 
@@ -308,6 +312,7 @@ VFormula VToolEllipticalArc::GetFormulaRotationAngle() const
     rotationAngle.setCheckZero(false);
     rotationAngle.setToolId(m_id);
     rotationAngle.setPostfix(degreeSymbol);
+    rotationAngle.Eval();
     return rotationAngle;
 }
 

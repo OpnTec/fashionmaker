@@ -197,6 +197,7 @@ VFormula VToolPointFromCircleAndTangent::GetCircleRadius() const
     radius.setCheckZero(true);
     radius.setToolId(m_id);
     radius.setPostfix(UnitsToStr(qApp->patternUnit()));
+    radius.Eval();
     return radius;
 }
 

@@ -348,6 +348,7 @@ VFormula VToolMove::GetFormulaAngle() const
     fAngle.setCheckZero(false);
     fAngle.setToolId(m_id);
     fAngle.setPostfix(degreeSymbol);
+    fAngle.Eval();
     return fAngle;
 }
 
@@ -370,6 +371,7 @@ VFormula VToolMove::GetFormulaRotationAngle() const
     fAngle.setCheckZero(false);
     fAngle.setToolId(m_id);
     fAngle.setPostfix(degreeSymbol);
+    fAngle.Eval();
     return fAngle;
 }
 
@@ -392,6 +394,7 @@ VFormula VToolMove::GetFormulaLength() const
     fLength.setCheckZero(true);
     fLength.setToolId(m_id);
     fLength.setPostfix(UnitsToStr(qApp->patternUnit()));
+    fLength.Eval();
     return fLength;
 }
 

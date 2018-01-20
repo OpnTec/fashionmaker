@@ -70,6 +70,8 @@ public:
     bool error() const;
 
     static int FormulaTypeId();
+
+    void Eval();
 private:
     QString formula;
     QString value;
@@ -79,8 +81,6 @@ private:
     QString postfix;
     bool _error;
     qreal dValue;
-
-    void Eval();
 };
 Q_DECLARE_METATYPE(VFormula)
 
