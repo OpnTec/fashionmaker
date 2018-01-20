@@ -1251,13 +1251,13 @@ bool DialogPiecePath::PathIsValid() const
     }
     else
     {
-        if (GetType() == PiecePathType::CustomSeamAllowance && FirstPointEqualLast(ui->listWidget))
+        if (GetType() == PiecePathType::CustomSeamAllowance && FirstPointEqualLast(ui->listWidget, data))
         {
             url += tr("First point of <b>custom seam allowance</b> cannot be equal to the last point!");
             ui->helpLabel->setText(url);
             return false;
         }
-        else if (DoublePoints(ui->listWidget))
+        else if (DoublePoints(ui->listWidget, data))
         {
             url += tr("You have double points!");
             ui->helpLabel->setText(url);

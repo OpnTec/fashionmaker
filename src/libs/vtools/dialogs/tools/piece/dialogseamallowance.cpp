@@ -2381,13 +2381,13 @@ bool DialogSeamAllowance::MainPathIsValid() const
             uiTabPaths->helpLabel->setText(url);
             valid = false;
         }
-        if (FirstPointEqualLast(uiTabPaths->listWidgetMainPath))
+        if (FirstPointEqualLast(uiTabPaths->listWidgetMainPath, data))
         {
             url += tr("First point cannot be equal to the last point!");
             uiTabPaths->helpLabel->setText(url);
             valid = false;
         }
-        else if (DoublePoints(uiTabPaths->listWidgetMainPath))
+        else if (DoublePoints(uiTabPaths->listWidgetMainPath, data))
         {
             url += tr("You have double points!");
             uiTabPaths->helpLabel->setText(url);

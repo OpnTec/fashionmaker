@@ -82,19 +82,18 @@ Q_LOGGING_CATEGORY(vDialog, "v.dialog")
 namespace
 {
 //---------------------------------------------------------------------------------------------------------------------
-quint32 RowId(QListWidget *listWidget, int i)
+VPieceNode RowNode(QListWidget *listWidget, int i)
 {
     SCASSERT(listWidget != nullptr);
 
     if (i < 0 || i >= listWidget->count())
     {
-        return NULL_ID;
+        return VPieceNode();
     }
 
     const QListWidgetItem *rowItem = listWidget->item(i);
     SCASSERT(rowItem != nullptr);
-    const VPieceNode rowNode = qvariant_cast<VPieceNode>(rowItem->data(Qt::UserRole));
-    return rowNode.GetId();
+    return qvariant_cast<VPieceNode>(rowItem->data(Qt::UserRole));
 }
 }
 
@@ -506,29 +505,56 @@ int DialogTool::FindNotExcludedNodeUp(QListWidget *listWidget, int candidate)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-bool DialogTool::FirstPointEqualLast(QListWidget *listWidget)
+bool DialogTool::FirstPointEqualLast(QListWidget *listWidget, const VContainer *data)
 {
     SCASSERT(listWidget != nullptr);
     if (listWidget->count() > 1)
     {
-        const quint32 topId = RowId(listWidget, FindNotExcludedNodeDown(listWidget, 0));
-        const quint32 bottomId = RowId(listWidget, FindNotExcludedNodeUp(listWidget, listWidget->count()-1));
-        return topId == bottomId;
+        const VPieceNode topNode = RowNode(listWidget, FindNotExcludedNodeDown(listWidget, 0));
+        const VPieceNode bottomNode = RowNode(listWidget, FindNotExcludedNodeUp(listWidget, listWidget->count()-1));
+
+        QSharedPointer<VPointF> firstPoint;
+        if (topNode.GetTypeTool() == Tool::NodePoint)
+        {
+            firstPoint = data->GeometricObject<VPointF>(topNode.GetId());
+        }
+
+        QSharedPointer<VPointF> secondPoint;
+        if (bottomNode.GetTypeTool() == Tool::NodePoint)
+        {
+            secondPoint = data->GeometricObject<VPointF>(bottomNode.GetId());
+        }
+
+        return topNode.GetId() == bottomNode.GetId() || (not firstPoint.isNull() && not secondPoint.isNull()
+                                                         && firstPoint->toQPointF() == secondPoint->toQPointF());
     }
     return false;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-bool DialogTool::DoublePoints(QListWidget *listWidget)
+bool DialogTool::DoublePoints(QListWidget *listWidget, const VContainer *data)
 {
     SCASSERT(listWidget != nullptr);
     for (int i=0, sz = listWidget->count()-1; i<sz; ++i)
     {
         const int firstIndex = FindNotExcludedNodeDown(listWidget, i);
-        const quint32 firstId = RowId(listWidget, firstIndex);
-        const quint32 secondId = RowId(listWidget, FindNotExcludedNodeDown(listWidget, firstIndex+1));
+        const VPieceNode firstNode = RowNode(listWidget, firstIndex);
+        const VPieceNode secondNode = RowNode(listWidget, FindNotExcludedNodeDown(listWidget, firstIndex+1));
 
-        if (firstId == secondId)
+        QSharedPointer<VPointF> firstPoint;
+        if (firstNode.GetTypeTool() == Tool::NodePoint)
+        {
+            firstPoint = data->GeometricObject<VPointF>(firstNode.GetId());
+        }
+
+        QSharedPointer<VPointF> secondPoint;
+        if (secondNode.GetTypeTool() == Tool::NodePoint)
+        {
+            secondPoint = data->GeometricObject<VPointF>(secondNode.GetId());
+        }
+
+        if (firstNode.GetId() == secondNode.GetId() || (not firstPoint.isNull() && not secondPoint.isNull()
+                                                        && firstPoint->toQPointF() == secondPoint->toQPointF()))
         {
             return true;
         }
@@ -650,7 +676,7 @@ void DialogTool::NewNodeItem(QListWidget *listWidget, const VPieceNode &node)
     }
     else
     {
-        if(RowId(listWidget, listWidget->count()-1) != node.GetId())
+        if(RowNode(listWidget, listWidget->count()-1).GetId() != node.GetId())
         {
             canAddNewPoint = true;
         }
