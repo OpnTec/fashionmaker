@@ -53,6 +53,8 @@
 #include "../vwidgets/vnobrushscalepathitem.h"
 #include "../qmuparser/qmutokenparser.h"
 
+#include <QFuture>
+#include <QtConcurrent/QtConcurrentRun>
 #include <QGraphicsSceneMouseEvent>
 #include <QGraphicsView>
 #include <QKeyEvent>
@@ -1338,35 +1340,47 @@ void VToolSeamAllowance::RefreshGeometry(bool updateChildren)
     this->setFlag(QGraphicsItem::ItemSendsGeometryChanges, false);
 
     const VPiece detail = VAbstractTool::data.GetPiece(m_id);
-    QPainterPath path = detail.MainPathPath(this->getData());
+    QFuture<QPainterPath > futurePath = QtConcurrent::run(detail, &VPiece::MainPathPath, this->getData());
+    QFuture<QVector<QPointF> > futureSeamAllowance;
+
+    if (detail.IsSeamAllowance())
+    {
+        futureSeamAllowance = QtConcurrent::run(detail, &VPiece::SeamAllowancePoints, this->getData());
+    }
+
+    this->setPos(detail.GetMx(), detail.GetMy());
+
+    QPainterPath path;
 
     if (not detail.IsHideMainPath() || not detail.IsSeamAllowance() || detail.IsSeamAllowanceBuiltIn())
     {
         m_mainPath = QPainterPath();
         m_mainPathRect = QRectF();
         m_seamAllowance->setBrush(QBrush(Qt::Dense7Pattern));
+        path = futurePath.result();
     }
     else
     {
         m_seamAllowance->setBrush(QBrush(Qt::NoBrush)); // Disable if the main path was hidden
         // need for returning a bounding rect when main path is not visible
-        m_mainPath = path;
+        m_mainPath = futurePath.result();
         m_mainPathRect = m_mainPath.controlPointRect();
         path = QPainterPath();
     }
 
     this->setPath(path);
 
+    m_placeLabels->setPath(detail.PlaceLabelPath(this->getData()));
+
     QVector<QPointF> seamAllowancePoints;
 
     if (detail.IsSeamAllowance())
     {
-        seamAllowancePoints = detail.SeamAllowancePoints(this->getData());
+        seamAllowancePoints = futureSeamAllowance.result();
     }
 
-    m_passmarks->setPath(detail.PassmarksPath(this->getData(), seamAllowancePoints));
-
-    this->setPos(detail.GetMx(), detail.GetMy());
+    QFuture<QPainterPath > futurePassmarks = QtConcurrent::run(detail, &VPiece::PassmarksPath, this->getData(),
+                                                               seamAllowancePoints);
 
     if (detail.IsSeamAllowance() && not detail.IsSeamAllowanceBuiltIn())
     {
@@ -1379,8 +1393,6 @@ void VToolSeamAllowance::RefreshGeometry(bool updateChildren)
         m_seamAllowance->setPath(QPainterPath());
     }
 
-    m_placeLabels->setPath(detail.PlaceLabelPath(this->getData()));
-
     UpdateDetailLabel();
     UpdatePatternInfo();
     UpdateGrainline();
@@ -1389,6 +1401,8 @@ void VToolSeamAllowance::RefreshGeometry(bool updateChildren)
     {
         UpdateInternalPaths();
     }
+
+    m_passmarks->setPath(futurePassmarks.result());
 
     this->setFlag(QGraphicsItem::ItemSendsGeometryChanges, true);
 }
