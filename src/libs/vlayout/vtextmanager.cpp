@@ -350,7 +350,6 @@ void VTextManager::FitFontSize(qreal fW, qreal fH)
         while (lineLength > fW && iFS > MIN_FONT_SIZE);
     }
     SetFontSize(iFS);
-    qDebug() << "Font size" << GetSourceLinesCount() << iFS;
 }
 
 //---------------------------------------------------------------------------------------------------------------------

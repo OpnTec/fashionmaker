@@ -62,7 +62,6 @@ public:
     {
         if (VFuzzyComparePossibleNulls(angle1, angle2) || not qFuzzyCompare(qAbs(angle1-angle2), 180) )
         {
-            qDebug()<<"Make angle1 and angle2 correct.";
             this->angle2 = this->angle1 + 180;
         }
     }
@@ -174,8 +173,6 @@ VSplinePointData::VSplinePointData(VPointF pSpline, qreal angle1, const QString 
 {
     if (not VFuzzyComparePossibleNulls(qAbs(angle1-angle2), 180))
     {
-        qDebug()<<"Make angle1 and angle2 correct.";
-
         QLineF line (0, 0, 100, 0);
 
         if (not qmu::QmuTokenParser::IsSingle(angle1F) || qmu::QmuTokenParser::IsSingle(angle2F))

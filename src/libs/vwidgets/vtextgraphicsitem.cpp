@@ -244,7 +244,6 @@ void VTextGraphicsItem::paint(QPainter *painter, const QStyleOptionGraphicsItem 
  */
 void VTextGraphicsItem::SetSize(qreal fW, qreal fH)
 {
-    qDebug() << "Setting size to" << fW << parentItem()->boundingRect().width();
     // don't allow resize under specific size
     if (fW > parentItem()->boundingRect().width())
     {
@@ -264,7 +263,6 @@ void VTextGraphicsItem::SetSize(qreal fW, qreal fH)
     }
 
     prepareGeometryChange();
-    qDebug() << "Actual size set to" << fW;
     m_rectBoundingBox.setTopLeft(QPointF(0, 0));
     m_rectBoundingBox.setWidth(fW);
     m_rectBoundingBox.setHeight(fH);
