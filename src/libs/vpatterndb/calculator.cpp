@@ -89,7 +89,6 @@ qreal Calculator::EvalFormula(const QHash<QString, QSharedPointer<VInternalVaria
 
     SetExpr(formula);
 
-    result = 0;
     result = Eval();
 
     QMap<int, QString> tokens = this->GetTokens();
