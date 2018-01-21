@@ -53,7 +53,7 @@
 
 #include "../vmisc/def.h"
 #include "../qmuparser/qmudef.h"
-#include "testvapplication.h"
+#include "../vmisc/testvapplication.h"
 
 //---------------------------------------------------------------------------------------------------------------------
 int main(int argc, char** argv)

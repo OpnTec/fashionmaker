@@ -36,7 +36,8 @@ HEADERS += \
     $$PWD/dialogs/dialogexporttocsv.h \
     $$PWD/customevents.h \
     $$PWD/defglobal.h \
-    $$PWD/backport/qoverload.h
+    $$PWD/backport/qoverload.h \
+    $$PWD/testvapplication.h
 
 # Qt's versions
 # 5.2.0, 5.2.1

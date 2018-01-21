@@ -34,10 +34,11 @@
 #include "tst_tstranslation.h"
 
 #include "../vmisc/def.h"
+#include "../vmisc/testvapplication.h"
 
 int main(int argc, char** argv)
 {
-    QApplication app( argc, argv );// For translation
+    TestVApplication app( argc, argv );// For QPrinter
 
     int status = 0;
     auto ASSERT_TEST = [&status, argc, argv](QObject* obj)

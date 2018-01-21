@@ -29,8 +29,8 @@
 #ifndef TESTVAPPLICATION_H
 #define TESTVAPPLICATION_H
 
-#include "../vmisc/vabstractapplication.h"
-#include "../vmisc/projectversion.h"
+#include "vabstractapplication.h"
+#include "projectversion.h"
 
 #if defined(qApp)
 #undef qApp
