@@ -30,11 +30,14 @@
 #define TESTVAPPLICATION_H
 
 #include "../vmisc/vabstractapplication.h"
+#include "../vmisc/projectversion.h"
 
 #if defined(qApp)
 #undef qApp
 #endif
 #define qApp (static_cast<TestVApplication*>(QCoreApplication::instance()))
+
+class VTestSettings;
 
 class TestVApplication : public VAbstractApplication
 {
@@ -42,7 +45,12 @@ public:
     TestVApplication(int &argc, char ** argv)
         : VAbstractApplication(argc, argv),
           m_trVars(nullptr)
-    {}
+    {
+        setApplicationName("ValentinaTest");
+        setOrganizationName(VER_COMPANYNAME_STR);
+
+        OpenSettings();
+    }
 
     virtual ~TestVApplication() Q_DECL_EQ_DEFAULT;
 
@@ -52,7 +60,10 @@ public:
     }
 
     virtual void OpenSettings() Q_DECL_OVERRIDE
-    {}
+    {
+        settings = new VSettings(QSettings::IniFormat, QSettings::UserScope, QCoreApplication::organizationName(),
+                                 QCoreApplication::applicationName(), this);
+    }
 
     virtual bool IsAppInGUIMode() const Q_DECL_OVERRIDE
     {
@@ -71,5 +82,16 @@ private:
     VTranslateVars *m_trVars;
 };
 
-#endif // TESTVAPPLICATION_H
+class VTestSettings : public VCommonSettings
+{
+    Q_OBJECT
+public:
+    VTestSettings(Format format, Scope scope, const QString &organization, const QString &application = QString(),
+                  QObject *parent = nullptr)
+        : VCommonSettings(format, scope, organization, application, parent)
+    {
+        qRegisterMetaTypeStreamOperators<QMarginsF>("QMarginsF");
+    }
+};
 
+#endif // TESTVAPPLICATION_H
