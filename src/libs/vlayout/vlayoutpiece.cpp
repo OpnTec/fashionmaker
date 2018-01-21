@@ -32,6 +32,8 @@
 #include <QFlags>
 #include <QFont>
 #include <QFontMetrics>
+#include <QFuture>
+#include <QtConcurrent/QtConcurrentRun>
 #include <QGraphicsPathItem>
 #include <QList>
 #include <QMatrix>
@@ -388,19 +390,29 @@ VLayoutPiece::~VLayoutPiece()
 //---------------------------------------------------------------------------------------------------------------------
 VLayoutPiece VLayoutPiece::Create(const VPiece &piece, const VContainer *pattern)
 {
+    QFuture<QVector<QPointF> > futureSeamAllowance = QtConcurrent::run(piece, &VPiece::SeamAllowancePoints, pattern);
+    QFuture<QVector<QPointF> > futureMainPath = QtConcurrent::run(piece, &VPiece::MainPathPoints, pattern);
+    QFuture<QVector<VLayoutPiecePath> > futureInternalPaths = QtConcurrent::run(ConvertInternalPaths, piece, pattern);
+    QFuture<QVector<QLineF> > futurePassmarksLines = QtConcurrent::run(piece, &VPiece::PassmarksLines, pattern,
+                                                                       QVector<QPointF>());
+    QFuture<QVector<VLayoutPlaceLabel> > futurePlaceLabels = QtConcurrent::run(ConvertPlaceLabels, piece, pattern);
+
     VLayoutPiece det;
 
     det.SetMx(piece.GetMx());
     det.SetMy(piece.GetMy());
 
-    det.SetCountourPoints(piece.MainPathPoints(pattern), piece.IsHideMainPath());
-    det.SetSeamAllowancePoints(piece.SeamAllowancePoints(pattern), piece.IsSeamAllowance(),
-                               piece.IsSeamAllowanceBuiltIn());
-    det.SetInternalPaths(ConvertInternalPaths(piece, pattern));
-    det.SetPassmarks(piece.PassmarksLines(pattern));
-    det.SetPlaceLabels(ConvertPlaceLabels(piece, pattern));
-
     det.SetName(piece.GetName());
+
+    det.SetSAWidth(qApp->toPixel(piece.GetSAWidth()));
+    det.SetForbidFlipping(piece.IsForbidFlipping());
+    det.SetForceFlipping(piece.IsForceFlipping());
+
+    det.SetCountourPoints(futureMainPath.result(), piece.IsHideMainPath());
+    det.SetSeamAllowancePoints(futureSeamAllowance.result(), piece.IsSeamAllowance(), piece.IsSeamAllowanceBuiltIn());
+    det.SetInternalPaths(futureInternalPaths.result());
+    det.SetPassmarks(futurePassmarksLines.result());
+    det.SetPlaceLabels(futurePlaceLabels.result());
 
     // Very important to set main path first!
     if (det.ContourPath().isEmpty())
@@ -426,10 +438,6 @@ VLayoutPiece VLayoutPiece::Create(const VPiece &piece, const VContainer *pattern
     {
         det.SetGrainline(grainlineGeom, pattern);
     }
-
-    det.SetSAWidth(qApp->toPixel(piece.GetSAWidth()));
-    det.SetForbidFlipping(piece.IsForbidFlipping());
-    det.SetForceFlipping(piece.IsForceFlipping());
 
     return det;
 }
