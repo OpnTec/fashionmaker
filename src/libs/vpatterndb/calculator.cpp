@@ -73,6 +73,15 @@ Calculator::Calculator()
  */
 qreal Calculator::EvalFormula(const QHash<QString, QSharedPointer<VInternalVariable>> *vars, const QString &formula)
 {
+    // Converting with locale is much faster in case of single numerical value.
+    QLocale c(QLocale::C);
+    bool ok = false;
+    qreal result = c.toDouble(formula, &ok);
+    if (ok)
+    {
+        return result;
+    }
+
     // Parser doesn't know any variable on this stage. So, we just use variable factory that for each unknown variable
     // set value to 0.
     SetVarFactory(AddVariable, this);
@@ -80,7 +89,7 @@ qreal Calculator::EvalFormula(const QHash<QString, QSharedPointer<VInternalVaria
 
     SetExpr(formula);
 
-    qreal result = 0;
+    result = 0;
     result = Eval();
 
     QMap<int, QString> tokens = this->GetTokens();
