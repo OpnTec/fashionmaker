@@ -1602,12 +1602,15 @@ void MainWindow::ExportToCSVData(const QString &fileName, bool withHeader, int m
 //---------------------------------------------------------------------------------------------------------------------
 void MainWindow::ScaleChanged(qreal scale)
 {
-    doubleSpinBoxScale->blockSignals(true);
-    doubleSpinBoxScale->setMaximum(qFloor(VMainGraphicsView::MaxScale()*1000)/10.0);
-    doubleSpinBoxScale->setMinimum(qFloor(VMainGraphicsView::MinScale()*1000)/10.0);
-    doubleSpinBoxScale->setValue(qFloor(scale*1000)/10.0);
-    doubleSpinBoxScale->setSingleStep(1);
-    doubleSpinBoxScale->blockSignals(false);
+    if (not doubleSpinBoxScale.isNull())
+    {
+        doubleSpinBoxScale->blockSignals(true);
+        doubleSpinBoxScale->setMaximum(qFloor(VMainGraphicsView::MaxScale()*1000)/10.0);
+        doubleSpinBoxScale->setMinimum(qFloor(VMainGraphicsView::MinScale()*1000)/10.0);
+        doubleSpinBoxScale->setValue(qFloor(scale*1000)/10.0);
+        doubleSpinBoxScale->setSingleStep(1);
+        doubleSpinBoxScale->blockSignals(false);
+    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
