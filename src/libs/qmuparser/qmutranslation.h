@@ -58,7 +58,7 @@ public:
                    int n = -1);
     QmuTranslation &operator=(const QmuTranslation &tr);
     QmuTranslation(const QmuTranslation &tr);
-    QString translate() const;
+    QString translate(const QString &locale) const;
     static QmuTranslation translate(const QString &context, const QString &sourceText,
                                     const QString &disambiguation = nullptr, int n = -1);
     QString getMcontext() const;
@@ -70,6 +70,8 @@ private:
     QString msourceText;
     QString mdisambiguation;
     int     mn;
+    mutable QString localeName;
+    mutable QString cachedTranslation;
 };
 
 //---------------------------------------------------------------------------------------------------------------------

@@ -97,6 +97,7 @@ const QString settingLabelUserTimeFormats = QStringLiteral("label/userTimeFormat
 
 // Reading settings file is very expensive, cache curve approximation to speed up getting value
 qreal curveApproximationCached = -1;
+QString localeCached = QString();
 
 //---------------------------------------------------------------------------------------------------------------------
 QStringList ClearFormats(const QStringList &predefinedFormats, QStringList formats)
@@ -431,13 +432,18 @@ void VCommonSettings::SetAutosaveTime(const int &value)
 //---------------------------------------------------------------------------------------------------------------------
 QString VCommonSettings::GetLocale() const
 {
-    return value(settingConfigurationLocale, QLocale().name()).toString();
+    if (localeCached.isEmpty())
+    {
+        localeCached = value(settingConfigurationLocale, QLocale().name()).toString();
+    }
+    return localeCached;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void VCommonSettings::SetLocale(const QString &value)
 {
     setValue(settingConfigurationLocale, value);
+    localeCached = value;
 }
 
 //---------------------------------------------------------------------------------------------------------------------

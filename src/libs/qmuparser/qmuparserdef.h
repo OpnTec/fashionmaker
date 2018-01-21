@@ -32,8 +32,8 @@
     @brief This file contains standard definitions used by the parser.
 */
 
-#define QMUP_VERSION "2.5.0"
-#define QMUP_VERSION_DATE "20170101; GC"
+#define QMUP_VERSION "2.6.0"
+#define QMUP_VERSION_DATE "20180121; GC"
 
 #define QMUP_CHARS "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
 

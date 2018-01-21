@@ -23,6 +23,7 @@
 
 #include <QByteArray>
 #include <QCoreApplication>
+#include <QLocale>
 
 namespace qmu
 {
@@ -41,12 +42,17 @@ QmuTranslation QmuTranslation::translate(const QString &context, const QString &
 
 //---------------------------------------------------------------------------------------------------------------------
 QmuTranslation::QmuTranslation()
-    :mcontext(QString()), msourceText(QString()), mdisambiguation(QString()), mn(-1)
+    : mcontext(), msourceText(), mdisambiguation(), mn(-1), localeName(), cachedTranslation()
 {}
 
 //---------------------------------------------------------------------------------------------------------------------
 QmuTranslation::QmuTranslation(const QString &context, const QString &sourceText, const QString &disambiguation, int n)
-    :mcontext(context), msourceText(sourceText), mdisambiguation(disambiguation), mn(n)
+    : mcontext(context),
+      msourceText(sourceText),
+      mdisambiguation(disambiguation),
+      mn(n),
+      localeName(),
+      cachedTranslation()
 {}
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -60,20 +66,35 @@ QmuTranslation &QmuTranslation::operator=(const QmuTranslation &tr)
     this->msourceText = tr.getMsourceText();
     this->mdisambiguation = tr.getMdisambiguation();
     this->mn = tr.getN();
+    this->localeName.clear();
+    this->cachedTranslation.clear();
     return *this;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 QmuTranslation::QmuTranslation(const QmuTranslation &tr)
-    :mcontext(tr.getMcontext()), msourceText(tr.getMsourceText()), mdisambiguation(tr.getMdisambiguation()),
-      mn(tr.getN())
+    : mcontext(tr.mcontext),
+      msourceText(tr.msourceText),
+      mdisambiguation(tr.mdisambiguation),
+      mn(tr.mn),
+      localeName(),
+      cachedTranslation()
 {}
 
 //---------------------------------------------------------------------------------------------------------------------
-QString QmuTranslation::translate() const
+QString QmuTranslation::translate(const QString &locale) const
 {
-    return QCoreApplication::translate(mcontext.toUtf8().constData(), msourceText.toUtf8().constData(),
-                                       mdisambiguation.toUtf8().constData(), mn);
+    if (cachedTranslation.isEmpty() || locale.isEmpty() || localeName != locale)
+    {
+        if (not locale.isEmpty())
+        {
+            localeName = locale;
+        }
+
+        cachedTranslation = QCoreApplication::translate(mcontext.toUtf8().constData(), msourceText.toUtf8().constData(),
+                                                        mdisambiguation.toUtf8().constData(), mn);
+    }
+    return cachedTranslation;
 }
 
 } // namespace qmu

@@ -490,7 +490,7 @@ void VTranslateVars::PrepareFunctionTranslations()
     QMap<QString, qmu::QmuTranslation>::const_iterator i = functions.constBegin();
     while (i != functions.constEnd())
     {
-        const QString translated = i.value().translate();
+        const QString translated = i.value().translate(qApp->Settings()->GetLocale());
         if (i.key() != translated)
         {
             translatedFunctions.insert(translated, i.key());
@@ -571,14 +571,15 @@ void VTranslateVars::BiasTokens(int position, int bias, QMap<int, QString> &toke
  */
 bool VTranslateVars::VariablesFromUser(QString &newFormula, int position, const QString &token, int &bias) const
 {
-    const QString currentLengthTr = variables.value(currentLength).translate();
-    const QString currentSeamAllowanceTr = variables.value(currentSeamAllowance).translate();
+    const QString currentLengthTr = variables.value(currentLength).translate(qApp->Settings()->GetLocale());
+    const QString currentSeamAllowanceTr = variables.value(currentSeamAllowance)
+            .translate(qApp->Settings()->GetLocale());
 
     QMap<QString, qmu::QmuTranslation>::const_iterator i = variables.constBegin();
     while (i != variables.constEnd())
     {
         const qmu::QmuTranslation &var = i.value();
-        const QString varTr = var.translate();
+        const QString varTr = var.translate(qApp->Settings()->GetLocale());
 
         if (token.indexOf(varTr) == 0)
         {
@@ -613,7 +614,7 @@ bool VTranslateVars::FunctionsFromUser(QString &newFormula, int position, const 
     QMap<QString, qmu::QmuTranslation>::const_iterator i = functions.constBegin();
     while (i != functions.constEnd())
     {
-        if (token == i.value().translate())
+        if (token == i.value().translate(qApp->Settings()->GetLocale()))
         {
             newFormula.replace(position, token.length(), i.key());
             bias = token.length() - i.key().length();
@@ -646,10 +647,10 @@ bool VTranslateVars::VariablesToUser(QString &newFormula, int position, const QS
                 continue;
             }
 
-            newFormula.replace(position, i.key().length(), i.value().translate());
+            newFormula.replace(position, i.key().length(), i.value().translate(qApp->Settings()->GetLocale()));
 
             QString newToken = token;
-            newToken.replace(0, i.key().length(), i.value().translate());
+            newToken.replace(0, i.key().length(), i.value().translate(qApp->Settings()->GetLocale()));
             bias = token.length() - newToken.length();
             return true;
         }
@@ -685,7 +686,7 @@ QString VTranslateVars::PlaceholderToUser(QString var) const
 
     if (placeholders.contains(var))
     {
-        return placeholders.value(var).translate() + number;
+        return placeholders.value(var).translate(qApp->Settings()->GetLocale()) + number;
     }
 
     return var;
@@ -698,7 +699,7 @@ QString VTranslateVars::PlaceholderToUserText(QString text) const
     auto i = placeholders.constBegin();
     while (i != placeholders.constEnd())
     {
-        const QString translated = per + i.value().translate() + per;
+        const QString translated = per + i.value().translate(qApp->Settings()->GetLocale()) + per;
         const QString original = per + i.key() + per;
 
         if (translated != original)
@@ -717,7 +718,7 @@ QString VTranslateVars::PlaceholderFromUserText(QString text) const
     auto i = placeholders.constBegin();
     while (i != placeholders.constEnd())
     {
-        const QString translated = per + i.value().translate() + per;
+        const QString translated = per + i.value().translate(qApp->Settings()->GetLocale()) + per;
         const QString original = per + i.key() + per;
 
         if (translated != original)
@@ -734,12 +735,12 @@ QString VTranslateVars::VarToUser(const QString &var) const
 {
     if (measurements.contains(var))
     {
-        return measurements.value(var).translate();
+        return measurements.value(var).translate(qApp->Settings()->GetLocale());
     }
 
     if (functions.contains(var))
     {
-        return functions.value(var).translate();
+        return functions.value(var).translate(qApp->Settings()->GetLocale());
     }
 
     return InternalVarToUser(var);
@@ -770,19 +771,19 @@ QString VTranslateVars::VarFromUser(const QString &var) const
 //---------------------------------------------------------------------------------------------------------------------
 QString VTranslateVars::PMSystemName(const QString &code) const
 {
-    return PMSystemNames.value(code).translate();
+    return PMSystemNames.value(code).translate(qApp->Settings()->GetLocale());
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 QString VTranslateVars::PMSystemAuthor(const QString &code) const
 {
-    return PMSystemAuthors.value(code).translate();
+    return PMSystemAuthors.value(code).translate(qApp->Settings()->GetLocale());
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 QString VTranslateVars::PMSystemBook(const QString &code) const
 {
-    return PMSystemBooks.value(code).translate();
+    return PMSystemBooks.value(code).translate(qApp->Settings()->GetLocale());
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -938,8 +939,10 @@ QString VTranslateVars::FormulaToUser(const QString &formula, bool osSeparator) 
     {
         if (measurements.contains(tValues.at(i)))
         {
-            newFormula.replace(tKeys.at(i), tValues.at(i).length(), measurements.value(tValues.at(i)).translate());
-            int bias = tValues.at(i).length() - measurements.value(tValues.at(i)).translate().length();
+            newFormula.replace(tKeys.at(i), tValues.at(i).length(),
+                               measurements.value(tValues.at(i)).translate(qApp->Settings()->GetLocale()));
+            int bias = tValues.at(i).length() - measurements.value(tValues.at(i))
+                    .translate(qApp->Settings()->GetLocale()).length();
             if (bias != 0)
             {// Translated token has different length than original. Position next tokens need to be corrected.
                 CorrectionsPositions(tKeys.at(i), bias, tokens, numbers);
@@ -951,8 +954,10 @@ QString VTranslateVars::FormulaToUser(const QString &formula, bool osSeparator) 
 
         if (functions.contains(tValues.at(i)))
         {
-            newFormula.replace(tKeys.at(i), tValues.at(i).length(), functions.value(tValues.at(i)).translate());
-            int bias = tValues.at(i).length() - functions.value(tValues.at(i)).translate().length();
+            newFormula.replace(tKeys.at(i), tValues.at(i).length(),
+                               functions.value(tValues.at(i)).translate(qApp->Settings()->GetLocale()));
+            int bias = tValues.at(i).length() - functions.value(tValues.at(i))
+                    .translate(qApp->Settings()->GetLocale()).length();
             if (bias != 0)
             {// Translated token has different length than original. Position next tokens need to be corrected.
                 CorrectionsPositions(tKeys.at(i), bias, tokens, numbers);

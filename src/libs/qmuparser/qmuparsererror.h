@@ -126,7 +126,7 @@ inline const QmuParserErrorMsg& QmuParserErrorMsg::Instance()
 //---------------------------------------------------------------------------------------------------------------------
 inline QString QmuParserErrorMsg::operator[] ( int a_iIdx ) const
 {
-    return m_vErrMsg.value(a_iIdx).translate();
+    return m_vErrMsg.value(a_iIdx).translate(QString());
 }
 
 //---------------------------------------------------------------------------

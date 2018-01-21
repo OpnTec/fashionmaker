@@ -30,6 +30,7 @@
 
 #include "../qmuparser/qmutranslation.h"
 #include "measurements.h"
+#include "../vmisc/vabstractapplication.h"
 
 //---------------------------------------------------------------------------------------------------------------------
 VTranslateMeasurements::VTranslateMeasurements()
@@ -61,7 +62,7 @@ bool VTranslateMeasurements::MeasurementsFromUser(QString &newFormula, int posit
     QMap<QString, qmu::QmuTranslation>::const_iterator i = measurements.constBegin();
     while (i != measurements.constEnd())
     {
-        if (token == i.value().translate())
+        if (token == i.value().translate(qApp->Settings()->GetLocale()))
         {
             newFormula.replace(position, token.length(), i.key());
             bias = token.length() - i.key().length();
@@ -77,7 +78,7 @@ QString VTranslateMeasurements::MToUser(const QString &measurement) const
 {
     if (measurements.contains(measurement))
     {
-        return measurements.value(measurement).translate();
+        return measurements.value(measurement).translate(qApp->Settings()->GetLocale());
     }
     else
     {
@@ -109,7 +110,7 @@ QString VTranslateMeasurements::GuiText(const QString &measurement) const
 {
     if (guiTexts.contains(measurement))
     {
-        return guiTexts.value(measurement).translate();
+        return guiTexts.value(measurement).translate(qApp->Settings()->GetLocale());
     }
     else
     {
@@ -122,7 +123,7 @@ QString VTranslateMeasurements::Description(const QString &measurement) const
 {
     if (descriptions.contains(measurement))
     {
-        return descriptions.value(measurement).translate();
+        return descriptions.value(measurement).translate(qApp->Settings()->GetLocale());
     }
     else
     {

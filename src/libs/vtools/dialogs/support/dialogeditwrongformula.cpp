@@ -574,7 +574,7 @@ void DialogEditWrongFormula::ShowFunctions()
     while (i != qApp->TrVars()->GetFunctions().constEnd())
     {
         ui->tableWidget->setRowCount(ui->tableWidget->rowCount() + 1);
-        QTableWidgetItem *item = new QTableWidgetItem(i.value().translate());
+        QTableWidgetItem *item = new QTableWidgetItem(i.value().translate(qApp->Settings()->GetLocale()));
         item->setFont(QFont("Times", 12, QFont::Bold));
         ui->tableWidget->setItem(ui->tableWidget->rowCount()-1, ColumnName, item);
         item->setToolTip(i.value().getMdisambiguation());
