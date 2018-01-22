@@ -9153,10 +9153,6 @@ Do you want to save your changes?</source>
         <translation>Předloha označení:</translation>
     </message>
     <message>
-        <source>Edit pattern label</source>
-        <translation type="vanished">Upravit označení vzoru střihu</translation>
-    </message>
-    <message>
         <source>Edit template</source>
         <translation>Upravit předlohu</translation>
     </message>

@@ -9611,10 +9611,6 @@ Wil je deze veranderingen opslaan?</translation>
         <translation>Sjabloon label:</translation>
     </message>
     <message>
-        <source>Edit pattern label</source>
-        <translation type="vanished">Verander patroon label</translation>
-    </message>
-    <message>
         <source>Edit template</source>
         <translation>Verander sjabloon</translation>
     </message>

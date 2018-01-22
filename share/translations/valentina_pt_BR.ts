@@ -9210,10 +9210,6 @@ Do you want to save your changes?</source>
         <translation>Modelo de rótulo:</translation>
     </message>
     <message>
-        <source>Edit pattern label</source>
-        <translation type="vanished">Editar o rótulo do molde</translation>
-    </message>
-    <message>
         <source>Edit template</source>
         <translation>Editar modelo</translation>
     </message>
