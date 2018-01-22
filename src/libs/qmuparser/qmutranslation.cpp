@@ -20,6 +20,7 @@
  ******************************************************************************************************/
 
 #include "qmutranslation.h"
+#include "qmuparserdef.h"
 
 #include <QByteArray>
 #include <QCoreApplication>
