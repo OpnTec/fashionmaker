@@ -187,7 +187,7 @@ void VPattern::Parse(const Document &parse)
                         break;
                     case 1: // TagIncrements
                         qCDebug(vXML, "Tag increments.");
-                        ParseIncrementsElement(domElement);
+                        ParseIncrementsElement(domElement, parse);
                         break;
                     case 2: // TagDescription
                         qCDebug(vXML, "Tag description.");
@@ -230,7 +230,7 @@ void VPattern::Parse(const Document &parse)
                         break;
                     case 15: // TagPreviewCalculations
                         qCDebug(vXML, "Tag prewiew calculations.");
-                        ParseIncrementsElement(domElement);
+                        ParseIncrementsElement(domElement, parse);
                         break;
                     case 16: // TagFinalMeasurements
                         qCDebug(vXML, "Tag final measurements.");
@@ -452,7 +452,7 @@ void VPattern::LiteParseIncrements()
             const QDomNode domElement = tags.at(0);
             if (not domElement.isNull())
             {
-                ParseIncrementsElement(domElement);
+                ParseIncrementsElement(domElement, Document::LiteParse);
             }
         }
 
@@ -462,7 +462,7 @@ void VPattern::LiteParseIncrements()
             const QDomNode domElement = tags.at(0);
             if (not domElement.isNull())
             {
-                ParseIncrementsElement(domElement);
+                ParseIncrementsElement(domElement, Document::LiteParse);
             }
         }
     }
@@ -529,6 +529,22 @@ void VPattern::RefreshCurves()
         }
         ++i;
     }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+int VPattern::ElementsToParse() const
+{
+    int count = elementsByTagName(TagArc).length();
+    count += elementsByTagName(TagDetail).length();
+    count += elementsByTagName(TagElArc).length();
+    count += elementsByTagName(TagLine).length();
+    count += elementsByTagName(TagSpline).length();
+    count += elementsByTagName(TagOperation).length();
+    count += elementsByTagName(TagPath).length();
+    count += elementsByTagName(TagPoint).length();
+    count += elementsByTagName(TagTools).length();
+    count += elementsByTagName(TagIncrement).length();
+    return count;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -817,6 +833,11 @@ void VPattern::ParseDrawMode(const QDomNode &node, const Document &parse, const 
                     VException e(tr("Wrong tag name '%1'.").arg(domElement.tagName()));
                     throw e;
             }
+
+            if (parse == Document::FullParse)
+            {
+                emit MadeProgress();
+            }
         }
     }
 }
@@ -1027,6 +1048,11 @@ void VPattern::ParseDetails(const QDomElement &domElement, const Document &parse
                 if (domElement.tagName() == TagDetail)
                 {
                     ParseDetailElement(domElement, parse);
+
+                    if (parse == Document::FullParse)
+                    {
+                        emit MadeProgress();
+                    }
                 }
             }
         }
@@ -3664,8 +3690,9 @@ void VPattern::ParsePathElement(VMainGraphicsScene *scene, QDomElement &domEleme
 /**
  * @brief ParseIncrementsElement parse increments tag.
  * @param node tag in xml tree.
+ * @param parse parser file mode.
  */
-void VPattern::ParseIncrementsElement(const QDomNode &node)
+void VPattern::ParseIncrementsElement(const QDomNode &node, const Document &parse)
 {
     int index = 0;
     QDomNode domNode = node.firstChild();
@@ -3689,6 +3716,11 @@ void VPattern::ParseIncrementsElement(const QDomNode &node)
                     increment->SetPreviewCalculation(node.toElement().tagName() == TagPreviewCalculations);
                     data->AddVariable(name, increment);
                     ++index;
+
+                    if (parse == Document::FullParse)
+                    {
+                        emit MadeProgress();
+                    }
                 }
             }
         }

@@ -38,6 +38,7 @@
 - [#792] New feature. Visibility trigger for internal path.
 - New internal variable RotationElArc.
 - [#794] Better control over scale value.
+- [#392] Improve feature: Show progress bar while opening pattern file.
 
 # Version 0.5.1
 - [#683] Tool Seam allowance's dialog is off screen on small resolutions.

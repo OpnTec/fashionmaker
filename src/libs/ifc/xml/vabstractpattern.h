@@ -383,6 +383,7 @@ signals:
     void           UpdateInLayoutList();
     void           ShowDetail(quint32 id);
     void           SetCurrentPP(const QString &patterPiece);
+    void           MadeProgress();
 
 public slots:
     virtual void   LiteParseTree(const Document &parse)=0;

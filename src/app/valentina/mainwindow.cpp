@@ -86,6 +86,7 @@
 #include <QComboBox>
 #include <QTextCodec>
 #include <QDoubleSpinBox>
+#include <QProgressBar>
 
 #if defined(Q_OS_MAC)
 #include <QMimeData>
@@ -114,7 +115,7 @@ const QString strCtrl        = QStringLiteral("Ctrl"); // String
 MainWindow::MainWindow(QWidget *parent)
     :MainWindowsNoGUI(parent), ui(new Ui::MainWindow), watcher(new QFileSystemWatcher(this)), currentTool(Tool::Arrow),
       lastUsedTool(Tool::Arrow), sceneDraw(nullptr), sceneDetails(nullptr),
-      mouseCoordinate(nullptr), helpLabel(nullptr), isInitialized(false), mChanges(false), mChangesAsked(true),
+      mouseCoordinate(nullptr), isInitialized(false), mChanges(false), mChangesAsked(true),
       patternReadOnly(false),
       dialogTable(nullptr),
       dialogTool(),
@@ -137,7 +138,9 @@ MainWindow::MainWindow(QWidget *parent)
       groupsWidget(nullptr),
       detailsWidget(nullptr),
       lock(nullptr),
-      toolButtonPointerList()
+      toolButtonPointerList(),
+      m_progressBar(new QProgressBar(this)),
+      m_statusLabel(new QLabel(this))
 {
     for (int i = 0; i < MaxRecentFiles; ++i)
     {
@@ -163,6 +166,7 @@ MainWindow::MainWindow(QWidget *parent)
         }
     });
     connect(doc, &VPattern::SetCurrentPP, this, &MainWindow::GlobalChangePP);
+    connect(doc, &VPattern::MadeProgress, this, &MainWindow::ShowProgress);
     qApp->setCurrentDocument(doc);
 
     InitDocksContain();
@@ -171,8 +175,10 @@ MainWindow::MainWindow(QWidget *parent)
     ToolBarStages();
     InitToolButtons();
 
-    helpLabel = new QLabel(QObject::tr("Create new pattern piece to start working."));
-    ui->statusBar->addWidget(helpLabel);
+    m_progressBar->setVisible(false);
+    m_statusLabel->setText(tr("Create new pattern piece to start working."));
+    statusBar()->addPermanentWidget(m_statusLabel, 1);
+    statusBar()->addPermanentWidget(m_progressBar, 1);
 
     ToolBarTools();
 
@@ -306,7 +312,7 @@ void MainWindow::AddPP(const QString &PPName)
     QApplication::postEvent(this, new FitBestCurrentEvent());
 
     ui->actionNewDraw->setEnabled(true);
-    helpLabel->setText("");
+    m_statusLabel->setText("");
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -616,7 +622,7 @@ void MainWindow::SetToolButton(bool checked, Tool t, const QString &cursor, cons
         QCursor cur(pixmap, 2, 2);
         ui->view->viewport()->setCursor(cur);
         ui->view->setCurrentCursorShape(); // Hack to fix problem with a cursor
-        helpLabel->setText(toolTip);
+        m_statusLabel->setText(toolTip);
         ui->view->setShowToolOptions(false);
         dialogTool = QSharedPointer<Dialog>(new Dialog(pattern, 0, this));
 
@@ -1434,7 +1440,7 @@ void MainWindow::ToolInsertNode(bool checked)
  */
 void MainWindow::ShowToolTip(const QString &toolTip)
 {
-    helpLabel->setText(toolTip);
+    m_statusLabel->setText(toolTip);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -1470,7 +1476,7 @@ void MainWindow::changeEvent(QEvent *event)
         ui->retranslateUi(this);
         undoAction->setText(tr("&Undo"));
         redoAction->setText(tr("&Redo"));
-        helpLabel->setText(QObject::tr("Changes applied."));
+        statusBar()->showMessage(tr("Changes applied."), 5000);
         patternPieceLabel->setText(tr("Pattern Piece:"));
         UpdateWindowTitle();
         emit sceneDetails->LanguageChanged();
@@ -1644,7 +1650,7 @@ void MainWindow::LoadIndividual()
             watcher->addPath(mPath);
             PatternChangesWereSaved(false);
             ui->actionEditCurrent->setEnabled(true);
-            helpLabel->setText(tr("Measurements loaded"));
+            statusBar()->showMessage(tr("Measurements loaded"), 5000);
             doc->LiteParseTree(Document::LiteParse);
 
             UpdateWindowTitle();
@@ -1693,7 +1699,7 @@ void MainWindow::LoadMultisize()
             watcher->addPath(mPath);
             PatternChangesWereSaved(false);
             ui->actionEditCurrent->setEnabled(true);
-            helpLabel->setText(tr("Measurements loaded"));
+            statusBar()->showMessage(tr("Measurements loaded"), 5000);
             doc->LiteParseTree(Document::LiteParse);
 
             UpdateWindowTitle();
@@ -1736,7 +1742,7 @@ void MainWindow::UnloadMeasurements()
         PatternChangesWereSaved(false);
         ui->actionEditCurrent->setEnabled(false);
         ui->actionUnloadMeasurements->setDisabled(true);
-        helpLabel->setText(tr("Measurements unloaded"));
+        statusBar()->showMessage(tr("Measurements unloaded"), 5000);
 
         UpdateWindowTitle();
     }
@@ -1833,7 +1839,7 @@ void MainWindow::SyncMeasurements()
             }
             const QString msg = tr("Measurements have been synced");
             qCDebug(vMainWindow, "%s", qUtf8Printable(msg));
-            helpLabel->setText(msg);
+            statusBar()->showMessage(msg, 5000);
             VWidgetPopup::PopupMessage(this, msg);
             doc->LiteParseTree(Document::LiteParse);
             mChanges = false;
@@ -2148,7 +2154,7 @@ void MainWindow::CancelTool()
             {
                 pointer->setChecked(false);
             }
-            helpLabel->setText("");
+            m_statusLabel->setText("");
 
             // Crash: using CRTL+Z while using line tool.
             // related bug report:
@@ -2359,7 +2365,7 @@ void  MainWindow::ArrowTool(bool checked)
         ui->view->viewport()->unsetCursor();
         ui->view->viewport()->setCursor(QCursor(Qt::ArrowCursor));
         ui->view->setCurrentCursorShape(); // Hack to fix problem with a cursor
-        helpLabel->setText("");
+        m_statusLabel->setText("");
         ui->view->setShowToolOptions(true);
         qCDebug(vMainWindow, "Enabled arrow tool.");
     }
@@ -2553,7 +2559,7 @@ void MainWindow::ActionDetails(bool checked)
         ui->dockWidgetGroups->setVisible(isDockGroupsVisible);
         ui->dockWidgetGroups->setToolTip(tr("Show which details will go in layout"));
 
-        helpLabel->setText("");
+        m_statusLabel->setText("");
     }
     else
     {
@@ -2678,7 +2684,7 @@ void MainWindow::ActionLayout(bool checked)
             ui->toolButtonLayoutSettings->click();
         }
 
-        helpLabel->setText("");
+        m_statusLabel->setText("");
     }
     else
     {
@@ -2975,6 +2981,8 @@ void MainWindow::Clear()
     qApp->getUndoStack()->clear();
     toolOptions->ClearPropertyBrowser();
     toolOptions->itemClicked(nullptr);
+    m_progressBar->setVisible(false);
+    m_statusLabel->setVisible(true);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -3445,6 +3453,16 @@ void MainWindow::ChangedHeight(const QString &text)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void MainWindow::ShowProgress()
+{
+    if (m_progressBar->isVisible() && m_progressBar->value() + 1 <= m_progressBar->maximum())
+    {
+        m_progressBar->setValue(m_progressBar->value() + 1);
+        qApp->processEvents();
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 void MainWindow::SetDefaultHeight()
 {
     const QString defHeight = QString().setNum(doc->GetDefCustomHeight());
@@ -3622,7 +3640,7 @@ bool MainWindow::SavePattern(const QString &fileName, QString &error)
         if (tempInfo.suffix() != QLatin1String("autosave"))
         {
             setCurrentFile(fileName);
-            helpLabel->setText(tr("File saved"));
+            statusBar()->showMessage(tr("File saved"), 5000);
             qCDebug(vMainWindow, "File %s saved.", qUtf8Printable(fileName));
             PatternChangesWereSaved(result);
         }
@@ -4538,14 +4556,18 @@ bool MainWindow::LoadPattern(QString fileName, const QString& customMeasureFile)
         return false;
     }
 
+    m_progressBar->setVisible(true);
+    m_statusLabel->setVisible(false);
+    m_progressBar->setMaximum(doc->ElementsToParse());
     FullParseFile();
+    m_progressBar->setVisible(false);
+    m_statusLabel->setVisible(true);
 
     if (guiEnabled)
     { // No errors occurred
         patternReadOnly = doc->IsReadOnly();
         SetEnableWidgets(true);
         setCurrentFile(fileName);
-        helpLabel->setText(tr("File loaded"));
         qCDebug(vMainWindow, "File loaded.");
 
         //Fit scene size to best size for first show

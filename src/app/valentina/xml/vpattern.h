@@ -111,6 +111,8 @@ public:
 
     static const QString AttrReadOnly;
 
+    int ElementsToParse() const;
+
 public slots:
     virtual void LiteParseTree(const Document &parse) Q_DECL_OVERRIDE;
 
@@ -157,7 +159,7 @@ private:
 
     void           ParsePathElement(VMainGraphicsScene *scene, QDomElement &domElement, const Document &parse);
 
-    void           ParseIncrementsElement(const QDomNode& node);
+    void           ParseIncrementsElement(const QDomNode& node, const Document &parse);
     void           PrepareForParse(const Document &parse);
     void           ToolsCommonAttributes(const QDomElement &domElement, quint32 &id);
     void           PointsWithLineCommonAttributes(const QDomElement &domElement, VToolLinePointInitData &initData);

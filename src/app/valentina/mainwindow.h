@@ -52,6 +52,7 @@ class VWidgetGroups;
 class VWidgetDetails;
 class QToolButton;
 class QDoubleSpinBox;
+class QProgressBar;
 
 /**
  * @brief The MainWindow class main windows.
@@ -202,6 +203,8 @@ private slots:
     void ChangedSize(const QString &text);
     void ChangedHeight(const QString &text);
 
+    void ShowProgress();
+
 private:
     Q_DISABLE_COPY(MainWindow)
     /** @brief ui keeps information about user interface */
@@ -223,9 +226,6 @@ private:
 
     /** @brief mouseCoordinate pointer to label who show mouse coordinate. */
     QPointer<QLabel>    mouseCoordinate;
-
-    /** @brief helpLabel help show tooltip. */
-    QLabel             *helpLabel;
 
     /** @brief isInitialized true after first show window. */
     bool               isInitialized;
@@ -279,6 +279,9 @@ private:
     std::shared_ptr<VLockGuard<char>> lock;
 
     QList<QToolButton*> toolButtonPointerList;
+
+    QProgressBar *m_progressBar;
+    QLabel       *m_statusLabel;
 
     void               SetDefaultHeight();
     void               SetDefaultSize();
