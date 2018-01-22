@@ -185,6 +185,12 @@ void DialogEditWrongFormula::ValChanged(int row)
             SetDescription(item->text(), *incr->GetValue(), UnitsToStr(qApp->patternUnit(), true),
                            incr->GetDescription());
         }
+        else if (ui->radioButtonPC->isChecked())
+        {
+            const QSharedPointer<VIncrement> incr = data->GetVariable<VIncrement>(name);
+            SetDescription(item->text(), *incr->GetValue(), UnitsToStr(qApp->patternUnit(), true),
+                           incr->GetDescription());
+        }
         else if (ui->radioButtonLengthLine->isChecked())
         {
             SetDescription(item->text(), *data->GetVariable<VLengthLine>(name)->GetValue(),
