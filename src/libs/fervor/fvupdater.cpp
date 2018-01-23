@@ -41,6 +41,7 @@
 #include <QVariant>
 #include <QXmlStreamAttributes>
 #include <QtDebug>
+#include <QSslConfiguration>
 
 #include "../ifc/exception/vexception.h"
 #include "../ifc/xml/vabstractconverter.h"
