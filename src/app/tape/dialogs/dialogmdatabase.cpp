@@ -68,6 +68,7 @@ DialogMDataBase::DialogMDataBase(const QStringList &list, QWidget *parent)
     connect(ui->treeWidget, &QTreeWidget::itemChanged, this, &DialogMDataBase::UpdateChecks);
     connect(ui->treeWidget, &QTreeWidget::itemClicked, this, &DialogMDataBase::ShowDescription);
     connect(ui->treeWidget, &QTreeWidget::customContextMenuRequested, this, &DialogMDataBase::TreeMenu);
+    connect(ui->lineEditSearch, &QLineEdit::textChanged, this, &DialogMDataBase::FilterMeasurements);
 
     ReadSettings();
 }
@@ -105,6 +106,7 @@ DialogMDataBase::DialogMDataBase(QWidget *parent)
     connect(ui->treeWidget, &QTreeWidget::itemClicked, this, &DialogMDataBase::ShowDescription);
     connect(ui->treeWidget, &QTreeWidget::customContextMenuRequested, this, &DialogMDataBase::TreeMenu);
     connect(ui->treeWidget, &QTreeWidget::itemActivated, this, &DialogMDataBase::ShowDescription);
+    connect(ui->lineEditSearch, &QLineEdit::textChanged, this, &DialogMDataBase::FilterMeasurements);
 
     ReadSettings();
 }
@@ -307,19 +309,7 @@ void DialogMDataBase::UpdateChecks(QTreeWidgetItem *item, int column)
 //---------------------------------------------------------------------------------------------------------------------
 void DialogMDataBase::ShowDescription(QTreeWidgetItem *item, int column)
 {
-    if (column != 0 && column != -1)
-    {
-        ui->textEdit->clear();
-        return;
-    }
-
-    if (item == nullptr)
-    {
-        ui->textEdit->clear();
-        return;
-    }
-
-    if (item->childCount() != 0)
+    if ((column != 0 && column != -1) || item == nullptr || item->childCount() != 0)
     {
         ui->textEdit->clear();
         return;
@@ -400,6 +390,31 @@ void DialogMDataBase::Recheck()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void DialogMDataBase::FilterMeasurements(const QString &search)
+{
+    FilterGroup(groupA, search);
+    FilterGroup(groupB, search);
+    FilterGroup(groupC, search);
+    FilterGroup(groupD, search);
+    FilterGroup(groupE, search);
+    FilterGroup(groupF, search);
+    FilterGroup(groupG, search);
+    FilterGroup(groupH, search);
+    FilterGroup(groupI, search);
+    FilterGroup(groupJ, search);
+    FilterGroup(groupK, search);
+    FilterGroup(groupL, search);
+    FilterGroup(groupM, search);
+    FilterGroup(groupN, search);
+    FilterGroup(groupO, search);
+    FilterGroup(groupP, search);
+    FilterGroup(groupQ, search);
+
+    const QList<QTreeWidgetItem *> list = ui->treeWidget->selectedItems();
+    list.isEmpty() ? ShowDescription(nullptr, -1) : ShowDescription(list.first(), 0);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 void DialogMDataBase::InitDataBase(const QStringList &list)
 {
     InitGroup(&groupA, "A. " + tr("Direct Height", "Measurement section"),              ListGroupA(), list);
@@ -430,6 +445,29 @@ void DialogMDataBase::InitGroup(QTreeWidgetItem **group, const QString &groupNam
     {
         AddMeasurement(*group, mList.at(i), list);
     }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogMDataBase::FilterGroup(QTreeWidgetItem *group, const QString &search)
+{
+    SCASSERT(group != nullptr)
+
+    bool match = false;
+    for (int i=0; i < group->childCount(); ++i)
+    {
+        QTreeWidgetItem *childItem = group->child(i);
+        const bool hidden = (not childItem->isSelected()
+                             && not childItem->text(0).contains(search, Qt::CaseInsensitive))
+                || (childItem->isSelected() && not ui->textEdit->toPlainText().contains(search, Qt::CaseInsensitive)
+                    && not childItem->text(0).contains(search, Qt::CaseInsensitive));
+        childItem->setHidden(hidden);
+        if (not hidden)
+        {
+            match = true;
+        }
+    }
+
+    group->setHidden(not group->text(0).contains(search, Qt::CaseInsensitive) && not match);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

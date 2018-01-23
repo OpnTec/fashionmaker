@@ -62,6 +62,7 @@ private slots:
     void ShowDescription(QTreeWidgetItem *item, int column);
     void TreeMenu(const QPoint &pos);
     void Recheck();
+    void FilterMeasurements(const QString &search);
 
 private:
     Q_DISABLE_COPY(DialogMDataBase)
@@ -90,6 +91,7 @@ private:
     void InitDataBase(const QStringList &list = QStringList());
     void InitGroup(QTreeWidgetItem **group, const QString &groupName, const QStringList &mList,
                    const QStringList &list = QStringList());
+    void FilterGroup(QTreeWidgetItem *group, const QString &search);
 
     Q_REQUIRED_RESULT QTreeWidgetItem *AddGroup(const QString &text);
 
