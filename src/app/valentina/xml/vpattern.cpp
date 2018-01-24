@@ -64,6 +64,7 @@
 #include <QtNumeric>
 #include <QDebug>
 #include <QFileInfo>
+#include <QtConcurrentMap>
 
 const QString VPattern::AttrReadOnly = QStringLiteral("readOnly");
 
@@ -73,6 +74,12 @@ namespace
 QString FileComment()
 {
     return QString("Pattern created with Valentina v%1 (https://valentinaproject.bitbucket.io/).").arg(APP_VERSION_STR);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void GatherCount(int &count, const int nodes)
+{
+    count += nodes;
 }
 }
 
@@ -534,17 +541,16 @@ void VPattern::RefreshCurves()
 //---------------------------------------------------------------------------------------------------------------------
 int VPattern::ElementsToParse() const
 {
-    int count = elementsByTagName(TagArc).length();
-    count += elementsByTagName(TagDetail).length();
-    count += elementsByTagName(TagElArc).length();
-    count += elementsByTagName(TagLine).length();
-    count += elementsByTagName(TagSpline).length();
-    count += elementsByTagName(TagOperation).length();
-    count += elementsByTagName(TagPath).length();
-    count += elementsByTagName(TagPoint).length();
-    count += elementsByTagName(TagTools).length();
-    count += elementsByTagName(TagIncrement).length();
-    return count;
+    QVector<QString> tags({TagArc, TagDetail, TagElArc, TagLine, TagSpline, TagOperation, TagPath, TagPoint,
+                           TagTools, TagIncrement
+                          });
+
+    std::function<int (const QString &tagName)> TagsCount = [this](const QString &tagName)
+    {
+        return elementsByTagName(tagName).length();
+    };
+
+    return QtConcurrent::blockingMappedReduced(tags, TagsCount, GatherCount);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
