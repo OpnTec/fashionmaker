@@ -47,8 +47,6 @@ qreal EvalFormula(const VContainer *data, QString formula)
     {
         try
         {
-            // Replace line return character with spaces for calc if exist
-            formula.replace("\n", " ");
             QScopedPointer<Calculator> cal(new Calculator());
             const qreal result = cal->EvalFormula(data->DataVariables(), formula);
 

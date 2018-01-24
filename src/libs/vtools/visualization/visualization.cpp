@@ -164,7 +164,6 @@ qreal Visualization::FindValFromUser(const QString &expression,
         {
             // Replace line return with spaces for calc if exist
             QString formula = expression;
-            formula.replace("\n", " ");
             if (fromUser)
             {
                 formula = qApp->TrVars()->FormulaFromUser(formula, qApp->Settings()->GetOsSeparator());

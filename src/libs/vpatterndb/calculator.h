@@ -64,11 +64,12 @@ public:
     virtual ~Calculator() Q_DECL_EQ_DEFAULT;
 
     qreal EvalFormula(const QHash<QString, QSharedPointer<VInternalVariable> > *vars, const QString &formula);
+protected:
+    static qreal* VarFactory(const QString &a_szName, void *a_pUserData);
 private:
     Q_DISABLE_COPY(Calculator)
-
-    void InitVariables(const QHash<QString, QSharedPointer<VInternalVariable> > *vars, const QMap<int, QString> &tokens,
-                       const QString &formula);
+    QVector<QSharedPointer<qreal>> m_varsValues;
+    const QHash<QString, QSharedPointer<VInternalVariable> > *m_vars;
 };
 
 #endif // CALCULATOR_H

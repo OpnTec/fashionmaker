@@ -224,7 +224,6 @@ void DialogShoulderPoint::SaveData()
 {
     pointName = ui->lineEditNamePoint->text();
     formula = ui->plainTextEditFormula->toPlainText();
-    formula.replace("\n", " ");
 
     VisToolShoulderPoint *line = qobject_cast<VisToolShoulderPoint *>(vis);
     SCASSERT(line != nullptr)

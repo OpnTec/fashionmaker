@@ -129,7 +129,6 @@ DialogEditWrongFormula::~DialogEditWrongFormula()
 void DialogEditWrongFormula::DialogAccepted()
 {
     formula = ui->plainTextEditFormula->toPlainText();
-    formula.replace("\n", " ");
     emit DialogClosed(QDialog::Accepted);
     accepted();
 }

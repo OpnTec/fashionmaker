@@ -72,10 +72,7 @@ void EnableDefButton(QPushButton *defButton, const QString &formula)
 QString GetFormulaFromUser(QPlainTextEdit *textEdit)
 {
     SCASSERT(textEdit != nullptr)
-
-    QString formula = textEdit->toPlainText();
-    formula.replace("\n", " ");
-    return qApp->TrVars()->TryFormulaFromUser(formula, qApp->Settings()->GetOsSeparator());
+    return qApp->TrVars()->TryFormulaFromUser(textEdit->toPlainText(), qApp->Settings()->GetOsSeparator());
 }
 }
 
@@ -1515,7 +1512,6 @@ void DialogSeamAllowance::UpdateGrainlineValues()
         QString qsVal;
         try
         {
-            qsFormula.replace("\n", " ");
             qsFormula = qApp->TrVars()->FormulaFromUser(qsFormula, qApp->Settings()->GetOsSeparator());
             Calculator cal;
             qreal dVal = cal.EvalFormula(data->DataVariables(), qsFormula);
@@ -1597,7 +1593,7 @@ void DialogSeamAllowance::UpdateDetailLabelValues()
         QString qsVal;
         try
         {
-            qsFormula.replace("\n", " ");
+
             qsFormula = qApp->TrVars()->FormulaFromUser(qsFormula, qApp->Settings()->GetOsSeparator());
             Calculator cal;
             qreal dVal = cal.EvalFormula(data->DataVariables(), qsFormula);
@@ -1683,7 +1679,6 @@ void DialogSeamAllowance::UpdatePatternLabelValues()
         QString qsVal;
         try
         {
-            qsFormula.replace("\n", " ");
             qsFormula = qApp->TrVars()->FormulaFromUser(qsFormula, qApp->Settings()->GetOsSeparator());
             Calculator cal;
             qreal dVal = cal.EvalFormula(data->DataVariables(), qsFormula);
@@ -1814,7 +1809,6 @@ void DialogSeamAllowance::EditGrainlineFormula()
     if (dlg.exec() == QDialog::Accepted)
     {
         QString qsFormula = dlg.GetFormula();
-        qsFormula.replace("\n", " ");
 
         if (sender() == uiTabGrainline->pushButtonLen)
         {
@@ -1871,7 +1865,6 @@ void DialogSeamAllowance::EditDLFormula()
     if (dlg.exec() == QDialog::Accepted)
     {
         QString qsFormula = dlg.GetFormula();
-        qsFormula.replace("\n", " ");
         if (sender() == uiTabLabels->pushButtonDLHeight)
         {
             SetDLHeight(qsFormula);
@@ -1931,7 +1924,6 @@ void DialogSeamAllowance::EditPLFormula()
     if (dlg.exec() == QDialog::Accepted)
     {
         QString qsFormula = dlg.GetFormula();
-        qsFormula.replace("\n", " ");
         if (sender() == uiTabLabels->pushButtonPLHeight)
         {
             SetPLHeight(qsFormula);
@@ -2965,7 +2957,6 @@ void DialogSeamAllowance::InitAllPinComboboxes()
 QString DialogSeamAllowance::GetFormulaSAWidth() const
 {
     QString width = uiTabPaths->plainTextEditFormulaWidth->toPlainText();
-    width.replace("\n", " ");
     return qApp->TrVars()->TryFormulaFromUser(width, qApp->Settings()->GetOsSeparator());
 }
 

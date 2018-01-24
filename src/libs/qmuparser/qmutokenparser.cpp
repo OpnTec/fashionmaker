@@ -83,6 +83,7 @@ QmuTokenParser::QmuTokenParser(const QString &formula, bool osSeparator,
 
     SetExpr(formula);
     //Need run for making tokens. Don't catch exception here, because we want know if formula has error.
+    m_pTokenReader->IgnoreUndefVar(true);
     Eval();
 }
 

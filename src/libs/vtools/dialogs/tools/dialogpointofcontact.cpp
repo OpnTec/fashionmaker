@@ -220,7 +220,6 @@ void DialogPointOfContact::SaveData()
 {
     pointName = ui->lineEditNamePoint->text();
     radius = ui->plainTextEditFormula->toPlainText();
-    radius.replace("\n", " ");
 
     VisToolPointOfContact *line = qobject_cast<VisToolPointOfContact *>(vis);
     SCASSERT(line != nullptr)

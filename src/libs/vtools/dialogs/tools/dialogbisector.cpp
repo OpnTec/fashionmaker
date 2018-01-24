@@ -319,9 +319,7 @@ void DialogBisector::SetLineColor(const QString &value)
 void DialogBisector::SaveData()
 {
     pointName = ui->lineEditNamePoint->text();
-
     formula = ui->plainTextEditFormula->toPlainText();
-    formula.replace("\n", " ");
 
     VisToolBisector *line = qobject_cast<VisToolBisector *>(vis);
     SCASSERT(line != nullptr)

@@ -357,7 +357,6 @@ bool DialogIncrements::EvalIncrementFormula(const QString &formula, bool fromUse
             {
                 f = formula;
             }
-            f.replace("\n", " ");
             QScopedPointer<Calculator> cal(new Calculator());
             const qreal result = cal->EvalFormula(data->DataVariables(), f);
 
@@ -1138,9 +1137,7 @@ void DialogIncrements::SaveIncrFormula()
 
     const QTableWidgetItem *nameField = table->item(row, 0);
 
-    // Replace line return character with spaces for calc if exist
     QString text = textEdit->toPlainText();
-    text.replace("\n", " ");
 
     QTableWidgetItem *formulaField = table->item(row, 2);
     if (formulaField->text() == text)
@@ -1286,7 +1283,7 @@ void DialogIncrements::Fx()
     dialog->setWindowTitle(tr("Edit increment"));
     incrementMode ? dialog->SetIncrementsMode() : dialog->SetPreviewCalculationsMode();
 
-    dialog->SetFormula(qApp->TrVars()->TryFormulaFromUser(plainTextEditFormula->toPlainText().replace("\n", " "),
+    dialog->SetFormula(qApp->TrVars()->TryFormulaFromUser(plainTextEditFormula->toPlainText(),
                                                           qApp->Settings()->GetOsSeparator()));
     const QString postfix = UnitsToStr(qApp->patternUnit(), true);
     dialog->setPostfix(postfix);//Show unit in dialog lable (cm, mm or inch)

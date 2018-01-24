@@ -160,7 +160,6 @@ void DialogCutSpline::SaveData()
 {
     pointName = ui->lineEditNamePoint->text();
     formula = ui->plainTextEditFormula->toPlainText();
-    formula.replace("\n", " ");
 
     VisToolCutSpline *path = qobject_cast<VisToolCutSpline *>(vis);
     SCASSERT(path != nullptr)

@@ -344,12 +344,8 @@ void DialogEndLine::ShowVisualization()
 void DialogEndLine::SaveData()
 {
     pointName = ui->lineEditNamePoint->text();
-
     formulaLength = ui->plainTextEditFormula->toPlainText();
-    formulaLength.replace("\n", " ");
-
     formulaAngle = ui->plainTextEditAngle->toPlainText();
-    formulaAngle.replace("\n", " ");
 
     VisToolEndLine *line = qobject_cast<VisToolEndLine *>(vis);
     SCASSERT(line != nullptr)

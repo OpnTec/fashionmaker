@@ -77,7 +77,7 @@ template <class T> class QSharedPointer;
 
 Q_LOGGING_CATEGORY(vDialog, "v.dialog")
 
-#define DIALOG_MAX_FORMULA_HEIGHT 64
+#define DIALOG_MAX_FORMULA_HEIGHT 80
 
 namespace
 {
@@ -401,12 +401,7 @@ bool DialogTool::eventFilter(QObject *object, QEvent *event)
         if (event->type() == QEvent::KeyPress)
         {
             QKeyEvent *keyEvent = static_cast<QKeyEvent *>(event);
-            if ((keyEvent->key() == Qt::Key_Enter) || (keyEvent->key() == Qt::Key_Return))
-            {
-                // Ignore Enter key
-                return true;
-            }
-            else if ((keyEvent->key() == Qt::Key_Period) && (keyEvent->modifiers() & Qt::KeypadModifier))
+            if ((keyEvent->key() == Qt::Key_Period) && (keyEvent->modifiers() & Qt::KeypadModifier))
             {
                 if (qApp->Settings()->GetOsSeparator())
                 {
@@ -799,11 +794,8 @@ qreal DialogTool::Eval(const QString &text, bool &flag, QLabel *label, const QSt
     {
         try
         {
-            // Replace line return character with spaces for calc if exist
-            QString formula = text;
-            formula.replace("\n", " ");
             // Translate to internal look.
-            formula = qApp->TrVars()->FormulaFromUser(formula, qApp->Settings()->GetOsSeparator());
+            QString formula = qApp->TrVars()->FormulaFromUser(text, qApp->Settings()->GetOsSeparator());
             QScopedPointer<Calculator> cal(new Calculator());
             result = cal->EvalFormula(data->DataVariables(), formula);
 

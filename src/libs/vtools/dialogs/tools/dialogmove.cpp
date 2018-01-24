@@ -513,15 +513,9 @@ void DialogMove::ShowVisualization()
 void DialogMove::SaveData()
 {
     m_suffix = ui->lineEditSuffix->text();
-
     formulaAngle = ui->plainTextEditAngle->toPlainText();
-    formulaAngle.replace("\n", " ");
-
     formulaRotationAngle = ui->plainTextEditRotationAngle->toPlainText();
-    formulaRotationAngle.replace("\n", " ");
-
     formulaLength = ui->plainTextEditLength->toPlainText();
-    formulaLength.replace("\n", " ");
 
     VisToolMove *operation = qobject_cast<VisToolMove *>(vis);
     SCASSERT(operation != nullptr)

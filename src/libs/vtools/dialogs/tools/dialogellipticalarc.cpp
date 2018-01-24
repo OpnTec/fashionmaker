@@ -612,15 +612,10 @@ void DialogEllipticalArc::ShowVisualization()
 void DialogEllipticalArc::SaveData()
 {
     radius1 = ui->plainTextEditRadius1->toPlainText();
-    radius1.replace("\n", " ");
     radius2 = ui->plainTextEditRadius2->toPlainText();
-    radius2.replace("\n", " ");
     f1 = ui->plainTextEditF1->toPlainText();
-    f1.replace("\n", " ");
     f2 = ui->plainTextEditF2->toPlainText();
-    f2.replace("\n", " ");
     rotationAngle = ui->plainTextEditRotationAngle->toPlainText();
-    rotationAngle.replace("\n", " ");
 
     VisToolEllipticalArc *path = qobject_cast<VisToolEllipticalArc *>(vis);
     SCASSERT(path != nullptr)

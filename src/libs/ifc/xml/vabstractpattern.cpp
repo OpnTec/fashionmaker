@@ -2036,6 +2036,11 @@ bool VAbstractPattern::IsVariable(const QString &token) const
         }
     }
 
+    if (token.startsWith('#'))
+    {
+        return true;
+    }
+
     return false;
 }
 

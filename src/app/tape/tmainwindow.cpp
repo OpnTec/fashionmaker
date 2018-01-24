@@ -615,12 +615,7 @@ bool TMainWindow::eventFilter(QObject *object, QEvent *event)
         if (event->type() == QEvent::KeyPress)
         {
             QKeyEvent *keyEvent = static_cast<QKeyEvent *>(event);
-            if ((keyEvent->key() == Qt::Key_Enter) || (keyEvent->key() == Qt::Key_Return))
-            {
-                // Ignore Enter key
-                return true;
-            }
-            else if ((keyEvent->key() == Qt::Key_Period) && (keyEvent->modifiers() & Qt::KeypadModifier))
+            if ((keyEvent->key() == Qt::Key_Period) && (keyEvent->modifiers() & Qt::KeypadModifier))
             {
                 if (qApp->Settings()->GetOsSeparator())
                 {
@@ -1225,8 +1220,7 @@ void TMainWindow::Fx()
     DialogEditWrongFormula *dialog = new DialogEditWrongFormula(meash->GetData(), NULL_ID, this);
     dialog->setWindowTitle(tr("Edit measurement"));
     dialog->SetMeasurementsMode();
-    dialog->SetFormula(qApp->TrVars()->TryFormulaFromUser(ui->plainTextEditFormula->toPlainText().replace("\n", " "),
-                                                          true));
+    dialog->SetFormula(qApp->TrVars()->TryFormulaFromUser(ui->plainTextEditFormula->toPlainText(), true));
     const QString postfix = UnitsToStr(mUnit, true);//Show unit in dialog lable (cm, mm or inch)
     dialog->setPostfix(postfix);
 
@@ -1650,9 +1644,7 @@ void TMainWindow::SaveMValue()
 
     const QTableWidgetItem *nameField = ui->tableWidget->item(row, ColumnName);
 
-    // Replace line return character with spaces for calc if exist
     QString text = ui->plainTextEditFormula->toPlainText();
-    text.replace("\n", " ");
 
     QTableWidgetItem *formulaField = ui->tableWidget->item(row, ColumnFormula);
     if (formulaField->text() == text)
@@ -2639,7 +2631,6 @@ bool TMainWindow::EvalFormula(const QString &formula, bool fromUser, VContainer 
             {
                 f = formula;
             }
-            f.replace("\n", " ");
             QScopedPointer<Calculator> cal(new Calculator());
             qreal result = cal->EvalFormula(data->DataVariables(), f);
 

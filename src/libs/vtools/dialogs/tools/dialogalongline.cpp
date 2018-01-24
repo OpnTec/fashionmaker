@@ -217,7 +217,6 @@ void DialogAlongLine::SaveData()
     pointName = ui->lineEditNamePoint->text();
 
     formula = ui->plainTextEditFormula->toPlainText();
-    formula.replace("\n", " ");
 
     VisToolAlongLine *line = qobject_cast<VisToolAlongLine *>(vis);
     SCASSERT(line != nullptr)

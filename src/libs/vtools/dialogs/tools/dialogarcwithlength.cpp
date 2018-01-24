@@ -354,13 +354,8 @@ void DialogArcWithLength::ShowVisualization()
 void DialogArcWithLength::SaveData()
 {
     radius = ui->plainTextEditRadius->toPlainText();
-    radius.replace("\n", " ");
-
     f1 = ui->plainTextEditF1->toPlainText();
-    f1.replace("\n", " ");
-
     length = ui->plainTextEditLength->toPlainText();
-    length.replace("\n", " ");
 
     VisToolArcWithLength *path = qobject_cast<VisToolArcWithLength *>(vis);
     SCASSERT(path != nullptr)

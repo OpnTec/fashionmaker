@@ -444,16 +444,9 @@ void DialogSpline::EvalLength2()
 VSpline DialogSpline::CurrentSpline() const
 {
     QString angle1F = ui->plainTextEditAngle1F->toPlainText();
-    angle1F.replace("\n", " ");
-
     QString angle2F = ui->plainTextEditAngle2F->toPlainText();
-    angle2F.replace("\n", " ");
-
     QString length1F = ui->plainTextEditLength1F->toPlainText();
-    length1F.replace("\n", " ");
-
     QString length2F = ui->plainTextEditLength2F->toPlainText();
-    length2F.replace("\n", " ");
 
     const QHash<QString, QSharedPointer<VInternalVariable> > *vars = data->DataVariables();
 

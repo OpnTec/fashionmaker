@@ -1654,11 +1654,8 @@ bool MainWindowsNoGUI::ExportFMeasurementsToCSVData(const QString &fileName, boo
         {
             try
             {
-                QString f = m.formula;
-                // Replace line return character with spaces for calc if exist
-                f.replace("\n", " ");
                 QScopedPointer<Calculator> cal(new Calculator());
-                const qreal result = cal->EvalFormula(completeData.DataVariables(), f);
+                const qreal result = cal->EvalFormula(completeData.DataVariables(), m.formula);
 
                 csv.setText(i, 1, qApp->LocaleToString(result)); // value
 

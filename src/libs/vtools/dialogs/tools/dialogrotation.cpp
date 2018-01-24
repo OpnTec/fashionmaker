@@ -372,9 +372,7 @@ void DialogRotation::ShowVisualization()
 void DialogRotation::SaveData()
 {
     m_suffix = ui->lineEditSuffix->text();
-
     formulaAngle = ui->plainTextEditFormula->toPlainText();
-    formulaAngle.replace("\n", " ");
 
     VisToolRotation *operation = qobject_cast<VisToolRotation *>(vis);
     SCASSERT(operation != nullptr)

@@ -277,11 +277,8 @@ void DialogArc::ShowVisualization()
 void DialogArc::SaveData()
 {
     radius = ui->plainTextEditFormula->toPlainText();
-    radius.replace("\n", " ");
     f1 = ui->plainTextEditF1->toPlainText();
-    f1.replace("\n", " ");
     f2 = ui->plainTextEditF2->toPlainText();
-    f2.replace("\n", " ");
 
     VisToolArc *path = qobject_cast<VisToolArc *>(vis);
     SCASSERT(path != nullptr)

@@ -151,7 +151,7 @@ void DialogPlaceLabel::SetLabelType(PlaceLabelType type)
 //---------------------------------------------------------------------------------------------------------------------
 QString DialogPlaceLabel::GetWidth() const
 {
-    return qApp->TrVars()->TryFormulaFromUser(ui->plainTextEditFormulaWidth->toPlainText().replace("\n", " "),
+    return qApp->TrVars()->TryFormulaFromUser(ui->plainTextEditFormulaWidth->toPlainText(),
                                               qApp->Settings()->GetOsSeparator());
 }
 
@@ -177,7 +177,7 @@ void DialogPlaceLabel::SetWidth(const QString &value)
 //---------------------------------------------------------------------------------------------------------------------
 QString DialogPlaceLabel::GetHeight() const
 {
-    return qApp->TrVars()->TryFormulaFromUser(ui->plainTextEditFormulaHeight->toPlainText().replace("\n", " "),
+    return qApp->TrVars()->TryFormulaFromUser(ui->plainTextEditFormulaHeight->toPlainText(),
                                               qApp->Settings()->GetOsSeparator());
 }
 
@@ -203,7 +203,7 @@ void DialogPlaceLabel::SetHeight(const QString &value)
 //---------------------------------------------------------------------------------------------------------------------
 QString DialogPlaceLabel::GetAngle() const
 {
-    return qApp->TrVars()->TryFormulaFromUser(ui->plainTextEditFormulaAngle->toPlainText().replace("\n", " "),
+    return qApp->TrVars()->TryFormulaFromUser(ui->plainTextEditFormulaAngle->toPlainText(),
                                               qApp->Settings()->GetOsSeparator());
 }
 

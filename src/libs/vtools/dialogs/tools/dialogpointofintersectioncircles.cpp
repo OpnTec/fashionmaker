@@ -389,19 +389,13 @@ void DialogPointOfIntersectionCircles::SaveData()
 {
     pointName = ui->lineEditNamePoint->text();
 
-    QString c1Radius = ui->plainTextEditCircle2Radius->toPlainText();
-    c1Radius.replace("\n", " ");
-
-    QString c2Radius = ui->plainTextEditCircle2Radius->toPlainText();
-    c2Radius.replace("\n", " ");
-
     VisToolPointOfIntersectionCircles *point = qobject_cast<VisToolPointOfIntersectionCircles *>(vis);
     SCASSERT(point != nullptr)
 
     point->setObject1Id(GetFirstCircleCenterId());
     point->setObject2Id(GetSecondCircleCenterId());
-    point->setC1Radius(c1Radius);
-    point->setC2Radius(c2Radius);
+    point->setC1Radius(ui->plainTextEditCircle2Radius->toPlainText());
+    point->setC2Radius(ui->plainTextEditCircle2Radius->toPlainText());
     point->setCrossPoint(GetCrossCirclesPoint());
     point->RefreshGeometry();
 }

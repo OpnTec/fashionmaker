@@ -375,9 +375,7 @@ void DialogLineIntersectAxis::ShowVisualization()
 void DialogLineIntersectAxis::SaveData()
 {
     pointName = ui->lineEditNamePoint->text();
-
     formulaAngle = ui->plainTextEditFormula->toPlainText();
-    formulaAngle.replace("\n", " ");
 
     VisToolLineIntersectAxis *line = qobject_cast<VisToolLineIntersectAxis *>(vis);
     SCASSERT(line != nullptr)

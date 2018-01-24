@@ -932,17 +932,25 @@ bool QmuParserTokenReader::IsUndefVarTok ( token_type &a_Tok )
     // If a factory is available implicitely create new variables
     if ( m_pFactory )
     {
-        qreal *fVar = m_pFactory ( strTok, m_pFactoryData );
-        a_Tok.SetVar ( fVar, strTok );
+        try
+        {
+            qreal *fVar = m_pFactory ( strTok, m_pFactoryData );
+            a_Tok.SetVar ( fVar, strTok );
 
-        // Do not use m_pParser->DefineVar( strTok, fVar );
-        // in order to define the new variable, it will clear the
-        // m_UsedVar array which will kill previousely defined variables
-        // from the list
-        // This is safe because the new variable can never override an existing one
-        // because they are checked first!
-        ( *m_pVarDef ) [strTok] = fVar;
-        m_UsedVar[strTok] = fVar;  // Add variable to used-var-list
+            // Do not use m_pParser->DefineVar( strTok, fVar );
+            // in order to define the new variable, it will clear the
+            // m_UsedVar array which will kill previousely defined variables
+            // from the list
+            // This is safe because the new variable can never override an existing one
+            // because they are checked first!
+            ( *m_pVarDef ) [strTok] = fVar;
+            m_UsedVar[strTok] = fVar;  // Add variable to used-var-list
+        }
+        catch (const qmu::QmuParserError &e)
+        {
+            Q_UNUSED(e)
+            return false;
+        }
     }
     else
     {

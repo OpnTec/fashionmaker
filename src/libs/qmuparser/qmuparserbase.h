@@ -134,11 +134,17 @@ public:
     void  setThousandsSeparator(const QChar &c);
 
 protected:
+    /**
+     * @brief Typedef for the token reader.
+     */
+    typedef QmuParserTokenReader token_reader_type;
+
     static const QStringList c_DefaultOprt;
     QLocale m_locale;///< The locale used by the parser
     QChar m_decimalPoint;
     QChar m_thousandsSeparator;
     funmap_type  m_FunDef;         ///< Map of function names and pointers.
+    std::unique_ptr<token_reader_type> m_pTokenReader; ///< Managed pointer to the token reader object.
     static bool g_DbgDumpCmdCode;
     static bool g_DbgDumpStack;
     void AddCallback(const QString &a_strName, const QmuParserCallback &a_Callback, funmap_type &a_Storage,
@@ -205,11 +211,6 @@ private:
     typedef QVector<QString> stringbuf_type;
 
     /**
-     * @brief Typedef for the token reader.
-     */
-    typedef QmuParserTokenReader token_reader_type;
-
-    /**
      * @brief Type used for parser tokens.
      */
     typedef QmuParserToken<qreal, QString> token_type;
@@ -228,8 +229,6 @@ private:
     mutable QmuParserByteCode m_vRPN;        ///< The Bytecode class.
     mutable stringbuf_type    m_vStringBuf; ///< String buffer, used for storing string function arguments
     stringbuf_type            m_vStringVarBuf;
-
-    std::unique_ptr<token_reader_type> m_pTokenReader; ///< Managed pointer to the token reader object.
 
     funmap_type  m_PostOprtDef;    ///< Postfix operator callbacks
     funmap_type  m_InfixOprtDef;   ///< unary infix operator.

@@ -65,9 +65,7 @@ VFormula::VFormula(const QString &formula, const VContainer *container)
       postfix(QString()),
       _error(true),
       dValue(0)
-{
-    this->formula.replace("\n", " ");// Replace line return with spaces for calc if exist
-}
+{}
 
 //---------------------------------------------------------------------------------------------------------------------
 VFormula &VFormula::operator=(const VFormula &formula)
@@ -145,7 +143,6 @@ void VFormula::SetFormula(const QString &value, FormulaType type)
         {
             formula = value;
         }
-        formula.replace("\n", " ");// Replace line return with spaces for calc if exist
     }
 }
 

@@ -392,7 +392,6 @@ void DialogFinalMeasurements::SaveFormula()
 
     // Replace line return character with spaces for calc if exist
     QString text = ui->plainTextEditFormula->toPlainText();
-    text.replace("\n", " ");
 
     QTableWidgetItem *formulaField = ui->tableWidget->item(row, 2);
     if (formulaField->text() == text)
@@ -479,7 +478,7 @@ void DialogFinalMeasurements::Fx()
 
     QScopedPointer<DialogEditWrongFormula> dialog(new DialogEditWrongFormula(&m_data, NULL_ID, this));
     dialog->setWindowTitle(tr("Edit measurement"));
-    dialog->SetFormula(qApp->TrVars()->TryFormulaFromUser(ui->plainTextEditFormula->toPlainText().replace("\n", " "),
+    dialog->SetFormula(qApp->TrVars()->TryFormulaFromUser(ui->plainTextEditFormula->toPlainText(),
                                                           qApp->Settings()->GetOsSeparator()));
     const QString postfix = UnitsToStr(qApp->patternUnit(), true);
     dialog->setPostfix(postfix);//Show unit in dialog lable (cm, mm or inch)
@@ -600,7 +599,6 @@ bool DialogFinalMeasurements::EvalUserFormula(const QString &formula, bool fromU
             {
                 f = formula;
             }
-            f.replace("\n", " ");
             QScopedPointer<Calculator> cal(new Calculator());
             const qreal result = cal->EvalFormula(m_data.DataVariables(), f);
 
@@ -719,11 +717,9 @@ qreal DialogFinalMeasurements::EvalFormula(const QString &formula, bool &ok)
     {
         try
         {
-            QString f = formula;
             // Replace line return character with spaces for calc if exist
-            f.replace("\n", " ");
             QScopedPointer<Calculator> cal(new Calculator());
-            result = cal->EvalFormula(m_data.DataVariables(), f);
+            result = cal->EvalFormula(m_data.DataVariables(), formula);
 
             if (qIsInf(result) || qIsNaN(result))
             {

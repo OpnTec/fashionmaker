@@ -800,11 +800,8 @@ bool VPiecePath::IsVisible(const QHash<QString, QSharedPointer<VInternalVariable
     bool visible = true;
     try
     {
-        QString formula  = GetVisibilityTrigger();
-        // Replace line return character with spaces for calc if exist
-        formula.replace("\n", " ");
         QScopedPointer<Calculator> cal(new Calculator());
-        const qreal result = cal->EvalFormula(vars, formula);
+        const qreal result = cal->EvalFormula(vars, GetVisibilityTrigger());
 
         if (qIsInf(result) || qIsNaN(result))
         {

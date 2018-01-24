@@ -1201,7 +1201,6 @@ void DialogPiecePath::SetPieceId(quint32 id)
 QString DialogPiecePath::GetFormulaSAWidth() const
 {
     QString width = ui->plainTextEditFormulaWidth->toPlainText();
-    width.replace("\n", " ");
     return qApp->TrVars()->TryFormulaFromUser(width, qApp->Settings()->GetOsSeparator());
 }
 
@@ -1305,7 +1304,6 @@ void DialogPiecePath::NewItem(const VPieceNode &node)
 QString DialogPiecePath::GetFormulaSAWidthBefore() const
 {
     QString width = ui->plainTextEditFormulaWidthBefore->toPlainText();
-    width.replace("\n", " ");
     return qApp->TrVars()->TryFormulaFromUser(width, qApp->Settings()->GetOsSeparator());
 }
 
@@ -1313,7 +1311,6 @@ QString DialogPiecePath::GetFormulaSAWidthBefore() const
 QString DialogPiecePath::GetFormulaSAWidthAfter() const
 {
     QString width = ui->plainTextEditFormulaWidthAfter->toPlainText();
-    width.replace("\n", " ");
     return qApp->TrVars()->TryFormulaFromUser(width, qApp->Settings()->GetOsSeparator());
 }
 
@@ -1321,7 +1318,6 @@ QString DialogPiecePath::GetFormulaSAWidthAfter() const
 QString DialogPiecePath::GetFormulaVisible() const
 {
     QString formula = ui->plainTextEditFormulaVisible->toPlainText();
-    formula.replace("\n", " ");
     return qApp->TrVars()->TryFormulaFromUser(formula, qApp->Settings()->GetOsSeparator());
 }
 

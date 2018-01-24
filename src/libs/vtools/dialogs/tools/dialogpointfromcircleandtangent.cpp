@@ -302,15 +302,12 @@ void DialogPointFromCircleAndTangent::SaveData()
 {
     pointName = ui->lineEditNamePoint->text();
 
-    QString radius = ui->plainTextEditRadius->toPlainText();
-    radius.replace("\n", " ");
-
     VisToolPointFromCircleAndTangent *point = qobject_cast<VisToolPointFromCircleAndTangent *>(vis);
     SCASSERT(point != nullptr)
 
     point->setObject1Id(GetTangentPointId());
     point->setObject2Id(GetCircleCenterId());
-    point->setCRadius(radius);
+    point->setCRadius(ui->plainTextEditRadius->toPlainText());
     point->setCrossPoint(GetCrossCirclesPoint());
     point->RefreshGeometry();
 }
