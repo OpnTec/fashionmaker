@@ -423,6 +423,31 @@ void DialogEditWrongFormula::setPostfix(const QString &value)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void DialogEditWrongFormula::SetMeasurementsMode()
+{
+    ui->radioButtonIncrements->setDisabled(true);
+    SetIncrementsMode();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogEditWrongFormula::SetIncrementsMode()
+{
+    ui->radioButtonPC->setDisabled(true);
+    SetPreviewCalculationsMode();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogEditWrongFormula::SetPreviewCalculationsMode()
+{
+    ui->radioButtonLengthLine->setDisabled(true);
+    ui->radioButtonLengthSpline->setDisabled(true);
+    ui->radioButtonAngleLine->setDisabled(true);
+    ui->radioButtonRadiusesArcs->setDisabled(true);
+    ui->radioButtonAnglesCurves->setDisabled(true);
+    ui->radioButtonCLength->setDisabled(true);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 QString DialogEditWrongFormula::GetFormula() const
 {
     return qApp->TrVars()->TryFormulaFromUser(formula, qApp->Settings()->GetOsSeparator());

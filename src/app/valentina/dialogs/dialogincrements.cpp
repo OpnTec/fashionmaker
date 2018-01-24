@@ -1254,13 +1254,16 @@ void DialogIncrements::Fx()
     QTableWidget *table = nullptr;
     QPlainTextEdit *plainTextEditFormula = nullptr;
 
+    bool incrementMode = true;
     if (button == ui->toolButtonExpr)
     {
+        incrementMode = true;
         table = ui->tableWidgetIncrement;
         plainTextEditFormula = ui->plainTextEditFormula;
     }
     else if (button == ui->toolButtonExprPC)
     {
+        incrementMode = false;
         table = ui->tableWidgetPC;
         plainTextEditFormula = ui->plainTextEditFormulaPC;
     }
@@ -1281,6 +1284,8 @@ void DialogIncrements::Fx()
 
     QScopedPointer<DialogEditWrongFormula> dialog(new DialogEditWrongFormula(incr->GetData(), NULL_ID, this));
     dialog->setWindowTitle(tr("Edit increment"));
+    incrementMode ? dialog->SetIncrementsMode() : dialog->SetPreviewCalculationsMode();
+
     dialog->SetFormula(qApp->TrVars()->TryFormulaFromUser(plainTextEditFormula->toPlainText().replace("\n", " "),
                                                           qApp->Settings()->GetOsSeparator()));
     const QString postfix = UnitsToStr(qApp->patternUnit(), true);

@@ -1224,6 +1224,7 @@ void TMainWindow::Fx()
 
     DialogEditWrongFormula *dialog = new DialogEditWrongFormula(meash->GetData(), NULL_ID, this);
     dialog->setWindowTitle(tr("Edit measurement"));
+    dialog->SetMeasurementsMode();
     dialog->SetFormula(qApp->TrVars()->TryFormulaFromUser(ui->plainTextEditFormula->toPlainText().replace("\n", " "),
                                                           true));
     const QString postfix = UnitsToStr(mUnit, true);//Show unit in dialog lable (cm, mm or inch)

@@ -67,6 +67,9 @@ public:
     void         setCheckZero(bool value);
     void         setCheckLessThanZero(bool value);
     void         setPostfix(const QString &value);
+    void         SetMeasurementsMode();
+    void         SetIncrementsMode();
+    void         SetPreviewCalculationsMode();
 public slots:
     virtual void DialogAccepted() Q_DECL_OVERRIDE;
     virtual void DialogRejected() Q_DECL_OVERRIDE;
