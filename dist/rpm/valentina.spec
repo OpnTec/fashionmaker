@@ -17,6 +17,7 @@ BuildRequires: pkgconfig(Qt5Network)
 BuildRequires: pkgconfig(Qt5PrintSupport)
 BuildRequires: pkgconfig(Qt5Widgets)
 BuildRequires: pkgconfig(Qt5Xml)
+BuildRequires: pkgconfig(Qt5Concurrent)
 BuildRequires: qt5-qtxmlpatterns-devel  >= 5.2.0
 BuildRequires: qt5-qtsvg-devel >= 5.2.0
 BuildRequires: qt5-qttools-devel >= 5.2.0

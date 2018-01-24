@@ -34,6 +34,7 @@ CDEPEND="
 		dev-qt/qtxmlpatterns:5
 		dev-qt/qtprintsupport:5
 		dev-qt/qtnetwork:5
+		dev-qt/qtconcurrent:5
 		app-text/poppler"
 RDEPEND="${CDEPEND}"
 DEPEND="${CDEPEND}

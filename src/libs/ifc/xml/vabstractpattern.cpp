@@ -38,6 +38,9 @@
 #include <QStringData>
 #include <QStringDataPtr>
 #include <QtDebug>
+#include <QtConcurrentMap>
+#include <QFuture>
+#include <QtConcurrentRun>
 
 #include "../exception/vexceptionemptyparameter.h"
 #include "../exception/vexceptionobjecterror.h"
@@ -219,6 +222,19 @@ void ReadExpressionAttribute(QVector<VFormulaField> &expressions, const QDomElem
 
     expressions.append(formula);
 }
+
+//---------------------------------------------------------------------------------------------------------------------
+QList<QString> GetTokens(const VFormulaField &formula)
+{
+    QScopedPointer<qmu::QmuTokenParser> cal(new qmu::QmuTokenParser(formula.expression, false, false));
+    return cal->GetTokens().values();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void GatherTokens(QSet<QString> &tokens, const QList<QString> &tokenList)
+{
+    tokens = tokens.unite(tokenList.toSet());
+}
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -236,50 +252,22 @@ VAbstractPattern::VAbstractPattern(QObject *parent)
 //---------------------------------------------------------------------------------------------------------------------
 QStringList VAbstractPattern::ListMeasurements() const
 {
+    const QFuture<QStringList> futureIncrements = QtConcurrent::run(this, &VAbstractPattern::ListIncrements);
+
+    const QList<QString> tokens = QtConcurrent::blockingMappedReduced(ListExpressions(), GetTokens,
+                                                                      GatherTokens).toList();
+
     QSet<QString> measurements;
-    QSet<QString> others;
+    QSet<QString> others = futureIncrements.result().toSet();
 
-    const QStringList increments = ListIncrements();
-    for (int i=0; i < increments.size(); ++i)
+    foreach (const QString &token, tokens)
     {
-        others.insert(increments.at(i));
-    }
-
-    const QVector<VFormulaField> expressions = ListExpressions();
-    for (int i=0; i < expressions.size(); ++i)
-    {
-        // Eval formula
-        QScopedPointer<qmu::QmuTokenParser> cal(new qmu::QmuTokenParser(expressions.at(i).expression, false, false));
-        const QMap<int, QString> tokens = cal->GetTokens();// Tokens (variables, measurements)
-        delete cal.take();
-
-        const QList<QString> tValues = tokens.values();
-        for (int j = 0; j < tValues.size(); ++j)
+        if (token == QChar('-') || measurements.contains(token) || others.contains(token))
         {
-            if (tValues.at(j) == QChar('-'))
-            {
-                continue;
-            }
-
-            if (measurements.contains(tValues.at(j)))
-            {
-                continue;
-            }
-
-            if (others.contains(tValues.at(j)))
-            {
-                continue;
-            }
-
-            if (IsVariable(tValues.at(j)) || IsFunction(tValues.at(j)))
-            {
-                others.insert(tValues.at(j));
-            }
-            else
-            {
-                measurements.insert(tValues.at(j));
-            }
+            continue;
         }
+
+        IsVariable(token) || IsFunction(token) ? others.insert(token) : measurements.insert(token);
     }
 
     return QStringList(measurements.toList());
@@ -1731,15 +1719,10 @@ QStringList VAbstractPattern::ListIncrements() const
         const QDomNodeList list = elementsByTagName(type);
         for (int i=0; i < list.size(); ++i)
         {
-            const QDomElement dom = list.at(i).toElement();
-
-            try
+            const QString name = GetParametrEmptyString(list.at(i).toElement(), AttrName);
+            if (not name.isEmpty())
             {
-                increments.append(GetParametrString(dom, AttrName));
-            }
-            catch (VExceptionEmptyParameter &e)
-            {
-                Q_UNUSED(e)
+                increments.append(name);
             }
         }
     };
@@ -1753,20 +1736,30 @@ QStringList VAbstractPattern::ListIncrements() const
 //---------------------------------------------------------------------------------------------------------------------
 QVector<VFormulaField> VAbstractPattern::ListExpressions() const
 {
-    QVector<VFormulaField> list;
-
     // If new tool bring absolutely new type and has formula(s) create new method to cover it.
     // Note. Tool Union Details also contains formulas, but we don't use them for union and keep only to simplifying
     // working with nodes. Same code for saving reading.
-    list << ListPointExpressions();
-    list << ListArcExpressions();
-    list << ListElArcExpressions();
-    list << ListSplineExpressions();
-    list << ListIncrementExpressions();
-    list << ListOperationExpressions();
-    list << ListPathExpressions();
-    list << ListPieceExpressions();
-    list << ListFinalMeasurementsExpressions();
+    auto futurePointExpressions = QtConcurrent::run(this, &VAbstractPattern::ListPointExpressions);
+    auto futureArcExpressions = QtConcurrent::run(this, &VAbstractPattern::ListArcExpressions);
+    auto futureElArcExpressions = QtConcurrent::run(this, &VAbstractPattern::ListElArcExpressions);
+    auto futureSplineExpressions = QtConcurrent::run(this, &VAbstractPattern::ListSplineExpressions);
+    auto futureIncrementExpressions = QtConcurrent::run(this, &VAbstractPattern::ListIncrementExpressions);
+    auto futureOperationExpressions = QtConcurrent::run(this, &VAbstractPattern::ListOperationExpressions);
+    auto futurePathExpressions = QtConcurrent::run(this, &VAbstractPattern::ListPathExpressions);
+    auto futurePieceExpressions = QtConcurrent::run(this, &VAbstractPattern::ListPieceExpressions);
+    auto futureFinalMeasurementsExpressions = QtConcurrent::run(this,
+                                                                &VAbstractPattern::ListFinalMeasurementsExpressions);
+
+    QVector<VFormulaField> list;
+    list << futurePointExpressions.result();
+    list << futureArcExpressions.result();
+    list << futureElArcExpressions.result();
+    list << futureSplineExpressions.result();
+    list << futureIncrementExpressions.result();
+    list << futureOperationExpressions.result();
+    list << futurePathExpressions.result();
+    list << futurePieceExpressions.result();
+    list << futureFinalMeasurementsExpressions.result();
 
     return list;
 }

@@ -11,7 +11,7 @@ include(../../../common.pri)
 
 # Here we don't see "network" library, but, i think, "printsupport" depend on this library, so we still need this
 # library in installer.
-QT       += core gui widgets xml svg printsupport xmlpatterns
+QT       += core gui widgets xml svg printsupport xmlpatterns concurrent
 
 # We want create executable file
 TEMPLATE = app
@@ -292,6 +292,7 @@ win32:*g++* {
         $$[QT_INSTALL_BINS]/icuin*.dll \ # Different name for different Qt releases
         $$[QT_INSTALL_BINS]/icuuc*.dll \ # Different name for different Qt releases
         $$[QT_INSTALL_BINS]/Qt5Core.dll \
+        $$[QT_INSTALL_BINS]/Qt5Concurrent.dll \
         $$[QT_INSTALL_BINS]/Qt5Gui.dll \
         $$[QT_INSTALL_BINS]/Qt5Network.dll \
         $$[QT_INSTALL_BINS]/Qt5PrintSupport.dll \
