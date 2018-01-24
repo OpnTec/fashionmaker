@@ -94,7 +94,6 @@ DialogEditWrongFormula::DialogEditWrongFormula(const VContainer *data, const qui
     connect(ui->tableWidget, &QTableWidget::itemDoubleClicked, this, &DialogEditWrongFormula::PutVal);
 
     connect(ui->plainTextEditFormula, &QPlainTextEdit::textChanged, this, &DialogEditWrongFormula::FormulaChanged);
-    connect(ui->pushButtonGrowLength, &QPushButton::clicked, this, &DialogEditWrongFormula::DeployFormulaTextEdit);
 
     //Disable Qt::WaitCursor
 #ifndef QT_NO_CURSOR
@@ -138,12 +137,6 @@ void DialogEditWrongFormula::DialogRejected()
 {
     emit DialogClosed(QDialog::Rejected);
     rejected();
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void DialogEditWrongFormula::DeployFormulaTextEdit()
-{
-    DeployFormula(ui->plainTextEditFormula, ui->pushButtonGrowLength, formulaBaseHeight);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

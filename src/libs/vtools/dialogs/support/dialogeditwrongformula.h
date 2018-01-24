@@ -73,10 +73,6 @@ public:
 public slots:
     virtual void DialogAccepted() Q_DECL_OVERRIDE;
     virtual void DialogRejected() Q_DECL_OVERRIDE;
-    /**
-     * @brief DeployFormulaTextEdit grow or shrink formula input
-     */
-    void         DeployFormulaTextEdit();
     virtual void EvalFormula() Q_DECL_OVERRIDE;
     void         ValChanged(int row);
     void         PutHere();
