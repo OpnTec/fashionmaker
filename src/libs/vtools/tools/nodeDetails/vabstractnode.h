@@ -73,6 +73,8 @@ public:
     ParentType GetParentType() const;
     void       SetParentType(const ParentType &value);
 
+    quint32 GetIdTool() const;
+
     virtual void GroupVisibility(quint32 object, bool visible) Q_DECL_OVERRIDE;
 
     bool IsExluded() const;
@@ -100,5 +102,11 @@ protected:
 private:
     Q_DISABLE_COPY(VAbstractNode)
 };
+
+//---------------------------------------------------------------------------------------------------------------------
+inline quint32 VAbstractNode::GetIdTool() const
+{
+    return idTool;
+}
 
 #endif // VABSTRACTNODE_H

@@ -61,7 +61,7 @@ public:
     /** @brief type type of graphical object */
     GOType  type;
 
-    /** @brief idObject id of parent object. Only for modeling. All another return 0. */
+    /** @brief idObject id of parent object. */
     quint32 idObject;
 
     /** @brief _name object name */

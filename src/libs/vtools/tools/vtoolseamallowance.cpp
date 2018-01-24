@@ -1898,6 +1898,8 @@ quint32 VToolSeamAllowance::DuplicateNode(const VPieceNode &node, const VToolSea
     SCASSERT(initData.data != nullptr)
 
     const QSharedPointer<VGObject> gobj = initData.data->GetGObject(node.GetId());
+    VAbstractNode *tool = qobject_cast<VAbstractNode *>(VAbstractPattern::getTool(node.GetId()));
+    SCASSERT(tool != nullptr)
 
     VAbstractNodeInitData initNodeData;
     initNodeData.idObject = gobj->getIdObject();
@@ -1907,6 +1909,7 @@ quint32 VToolSeamAllowance::DuplicateNode(const VPieceNode &node, const VToolSea
     initNodeData.typeCreation = Source::FromGui;
     initNodeData.scene = initData.scene;
     initNodeData.drawName = initData.drawName;
+    initNodeData.idTool = tool->GetIdTool();
 
     switch (node.GetTypeTool())
     {
@@ -1940,12 +1943,15 @@ quint32 VToolSeamAllowance::DuplicateNode(const VPieceNode &node, const VToolSea
 //---------------------------------------------------------------------------------------------------------------------
 quint32 VToolSeamAllowance::DuplicatePiecePath(quint32 id, const VToolSeamAllowanceInitData &initData)
 {
-    VPiecePath path = initData.data->GetPiecePath(id);
+    const VPiecePath path = initData.data->GetPiecePath(id);
     VPiecePath newPath = path;
     QMap<quint32, quint32> recordReplacements; // Not used
     newPath.SetNodes(DuplicateNodes(path, initData, recordReplacements));
 
     const quint32 idPath = initData.data->AddPiecePath(newPath);
+
+    VAbstractNode *tool = qobject_cast<VAbstractNode *>(VAbstractPattern::getTool(id));
+    SCASSERT(tool != nullptr)
 
     VToolPiecePathInitData initNodeData;
     initNodeData.id = idPath;
@@ -1956,6 +1962,7 @@ quint32 VToolSeamAllowance::DuplicatePiecePath(quint32 id, const VToolSeamAllowa
     initNodeData.parse = Document::FullParse;
     initNodeData.typeCreation = Source::FromTool;
     initNodeData.drawName = initData.drawName;
+    initNodeData.idTool = tool->GetIdTool();
     initNodeData.path = newPath;
 
     VToolPiecePath::Create(initNodeData);
