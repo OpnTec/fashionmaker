@@ -699,3 +699,15 @@ quint32 VAbstractTool::CreateNodeSplinePath(VContainer *data, quint32 id)
         return VAbstractTool::CreateNode<VCubicBezierPath>(data, id);
     }
 }
+
+//---------------------------------------------------------------------------------------------------------------------
+quint32 VAbstractTool::CreateNodePoint(VContainer *data, quint32 id, const QSharedPointer<VPointF> &point)
+{
+    const quint32 pointId = CreateNode<VPointF>(data, id);
+    QSharedPointer<VPointF> p = data->GeometricObject<VPointF>(pointId);
+    p->SetShowLabel(point->IsShowLabel());
+    p->setMx(point->mx());
+    p->setMy(point->my());
+    data->UpdateGObject(pointId, point);
+    return pointId;
+}

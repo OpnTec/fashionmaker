@@ -165,6 +165,7 @@ protected:
     static quint32 CreateNode(VContainer *data, quint32 id);
     static quint32 CreateNodeSpline(VContainer *data, quint32 id);
     static quint32 CreateNodeSplinePath(VContainer *data, quint32 id);
+    static quint32 CreateNodePoint(VContainer *data, quint32 id, const QSharedPointer<VPointF> &point);
 
     template <typename T>
     void AddVisualization();

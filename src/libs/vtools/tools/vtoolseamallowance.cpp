@@ -1914,9 +1914,12 @@ quint32 VToolSeamAllowance::DuplicateNode(const VPieceNode &node, const VToolSea
     switch (node.GetTypeTool())
     {
         case (Tool::NodePoint):
-            initNodeData.id = VAbstractTool::CreateNode<VPointF>(initData.data, gobj->getIdObject());
+        {
+            const QSharedPointer<VPointF> point = qSharedPointerDynamicCast<VPointF>(gobj);
+            initNodeData.id = VAbstractTool::CreateNodePoint(initData.data, gobj->getIdObject(), point);
             VNodePoint::Create(initNodeData);
             break;
+        }
         case (Tool::NodeArc):
             initNodeData.id = VAbstractTool::CreateNode<VArc>(initData.data, gobj->getIdObject());
             VNodeArc::Create(initNodeData);
