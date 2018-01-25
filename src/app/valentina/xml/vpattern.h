@@ -136,10 +136,11 @@ private:
     void           ParseDrawElement(const QDomNode& node, const Document &parse);
     void           ParseDrawMode(const QDomNode& node, const Document &parse, const Draw &mode);
     void           ParseDetailElement(QDomElement &domElement, const Document &parse);
-    void           ParseDetailNodes(const QDomElement &domElement, VPiece &detail, qreal width, bool closed) const;
-    void           ParsePieceDataTag(const QDomElement &domElement, VPiece &detail) const;
-    void           ParsePiecePatternInfo(const QDomElement &domElement, VPiece &detail) const;
-    void           ParsePieceGrainline(const QDomElement &domElement, VPiece &detail) const;
+    void           ParseDetailInternals(const QDomElement &domElement, VPiece &detail) const;
+    QVector<VPieceNode> ParseDetailNodes(const QDomElement &domElement, qreal width, bool closed) const;
+    VPieceLabelData ParsePieceDataTag(const QDomElement &domElement, VPieceLabelData ppData) const;
+    VPatternLabelData ParsePiecePatternInfo(const QDomElement &domElement, VPatternLabelData patternInfo) const;
+    VGrainlineData ParsePieceGrainline(const QDomElement &domElement, VGrainlineData gGeometry) const;
     void           ParseDetails(const QDomElement &domElement, const Document &parse);
 
     void           ParsePointElement(VMainGraphicsScene *scene, QDomElement &domElement,

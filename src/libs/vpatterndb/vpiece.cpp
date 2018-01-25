@@ -791,6 +791,12 @@ const VPatternLabelData &VPiece::GetPatternInfo() const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void VPiece::SetGrainlineGeometry(const VGrainlineData &data)
+{
+    d->m_glGrainline = data;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 /**
  * @brief VDetail::GetGrainlineGeometry full access to the grainline geometry object
  * @return reference to grainline geometry object

@@ -121,6 +121,7 @@ public:
     VPatternLabelData&       GetPatternInfo();
     const VPatternLabelData& GetPatternInfo() const;
 
+    void                    SetGrainlineGeometry(const VGrainlineData &data);
     VGrainlineData&         GetGrainlineGeometry();
     const VGrainlineData&   GetGrainlineGeometry() const;
 
