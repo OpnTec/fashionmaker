@@ -66,6 +66,10 @@
 #include <QFileInfo>
 #include <QtConcurrentMap>
 
+#ifdef Q_CC_MSVC
+    #include <functional>
+#endif /* Q_CC_MSVC */
+
 const QString VPattern::AttrReadOnly = QStringLiteral("readOnly");
 
 namespace
