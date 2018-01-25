@@ -537,13 +537,13 @@ bool DialogTool::DoublePoints(QListWidget *listWidget, const VContainer *data)
         const VPieceNode secondNode = RowNode(listWidget, FindNotExcludedNodeDown(listWidget, firstIndex+1));
 
         QSharedPointer<VPointF> firstPoint;
-        if (firstNode.GetTypeTool() == Tool::NodePoint)
+        if (firstNode.GetTypeTool() == Tool::NodePoint && not (firstNode.GetId() == NULL_ID))
         {
             firstPoint = data->GeometricObject<VPointF>(firstNode.GetId());
         }
 
         QSharedPointer<VPointF> secondPoint;
-        if (secondNode.GetTypeTool() == Tool::NodePoint)
+        if (secondNode.GetTypeTool() == Tool::NodePoint && not (secondNode.GetId() == NULL_ID))
         {
             secondPoint = data->GeometricObject<VPointF>(secondNode.GetId());
         }
