@@ -2007,6 +2007,9 @@ QVector<quint32> VToolSeamAllowance::DuplicatePins(const QVector<quint32> &pins,
     {
         QSharedPointer<VPointF> pin = initData.data->GeometricObject<VPointF>(pins.at(i));
 
+        VAbstractNode *tool = qobject_cast<VAbstractNode *>(VAbstractPattern::getTool(i));
+        SCASSERT(tool != nullptr)
+
         VToolPinInitData initNodeData;
         initNodeData.id = initData.data->AddGObject(new VPointF(*pin));
         initNodeData.pointId = pin->getIdObject();
@@ -2016,6 +2019,7 @@ QVector<quint32> VToolSeamAllowance::DuplicatePins(const QVector<quint32> &pins,
         initNodeData.parse = Document::FullParse;
         initNodeData.typeCreation = Source::FromTool;
         initNodeData.drawName = initData.drawName;
+        initNodeData.idTool = tool->GetIdTool();
 
         VToolPin::Create(initNodeData);
         newPins.append(initNodeData.id);
@@ -2031,6 +2035,8 @@ QVector<quint32> VToolSeamAllowance::DuplicatePlaceLabels(const QVector<quint32>
     for(int i=0; i < placeLabels.size(); ++i)
     {
         QSharedPointer<VPlaceLabelItem> label = initData.data->GeometricObject<VPlaceLabelItem>(placeLabels.at(i));
+        VAbstractNode *tool = qobject_cast<VAbstractNode *>(VAbstractPattern::getTool(placeLabels.at(i)));
+        SCASSERT(tool != nullptr)
 
         VToolPlaceLabelInitData initNodeData;
         initNodeData.idObject = NULL_ID; // piece id
@@ -2045,6 +2051,7 @@ QVector<quint32> VToolSeamAllowance::DuplicatePlaceLabels(const QVector<quint32>
         initNodeData.type = label->GetLabelType();
         initNodeData.centerPoint = label->GetCenterPoint();
         initNodeData.id = initNodeData.data->AddGObject(new VPlaceLabelItem(*label));
+        initNodeData.idTool = tool->GetIdTool();
 
         VToolPlaceLabel::Create(initNodeData);
         newPlaceLabels.append(initNodeData.id);
