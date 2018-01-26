@@ -59,6 +59,9 @@
 #include <QXmlSchemaValidator>
 #include <QtDebug>
 #include <QXmlStreamWriter>
+#include <QTimer>
+#include <QtConcurrentRun>
+#include <QFutureWatcher>
 
 namespace
 {
@@ -190,10 +193,20 @@ const QString VDomDocument::TagUnit    = QStringLiteral("unit");
 const QString VDomDocument::TagLine    = QStringLiteral("line");
 
 //---------------------------------------------------------------------------------------------------------------------
-VDomDocument::VDomDocument()
-    : QDomDocument(),
-      map()
-{}
+VDomDocument::VDomDocument(QObject *parent)
+    : QObject(parent),
+      QDomDocument(),
+      m_elementIdCache(),
+      m_refreshCacheTimer(new QTimer(this)),
+      m_watcher(new QFutureWatcher<QHash<quint32, QDomElement>>(this))
+{
+    m_refreshCacheTimer->setTimerType(Qt::VeryCoarseTimer);
+    m_refreshCacheTimer->setInterval(10000);
+    m_refreshCacheTimer->setSingleShot(true);
+    connect(m_refreshCacheTimer, &QTimer::timeout, this, &VDomDocument::RefreshElementIdCache);
+    connect(m_watcher, &QFutureWatcher<QHash<quint32, QDomElement>>::finished, this, &VDomDocument::CacheRefreshed);
+    m_refreshCacheTimer->start();
+}
 
 //---------------------------------------------------------------------------------------------------------------------
 QDomElement VDomDocument::elementById(quint32 id, const QString &tagName)
@@ -203,21 +216,21 @@ QDomElement VDomDocument::elementById(quint32 id, const QString &tagName)
         return QDomElement();
     }
 
-    if (map.contains(id))
+    if (m_elementIdCache.contains(id))
     {
-       const QDomElement e = map[id];
+       const QDomElement e = m_elementIdCache.value(id);
        if (e.parentNode().nodeType() != QDomNode::BaseNode)
        {
            return e;
        }
-       map.remove(id);
+       m_elementIdCache.remove(id);
     }
 
     if (tagName.isEmpty())
     {
-        if (this->find(this->documentElement(), id))
+        if (VDomDocument::find(m_elementIdCache, this->documentElement(), id))
         {
-           return map[id];
+           return m_elementIdCache.value(id);
         }
     }
     else
@@ -228,19 +241,12 @@ QDomElement VDomDocument::elementById(quint32 id, const QString &tagName)
             const QDomElement domElement = list.at(i).toElement();
             if (not domElement.isNull() && domElement.hasAttribute(AttrId))
             {
-                try
-                {
-                    const quint32 elementId = GetParametrUInt(domElement, AttrId, NULL_ID_STR);
+                const quint32 elementId = GetParametrUInt(domElement, AttrId, NULL_ID_STR);
 
-                    this->map[elementId] = domElement;
-                    if (elementId == id)
-                    {
-                        return domElement;
-                    }
-                }
-                catch (const VExceptionConversionError &)
+                m_elementIdCache.insert(elementId, domElement);
+                if (elementId == id)
                 {
-                    // do nothing
+                    return domElement;
                 }
             }
         }
@@ -252,27 +258,21 @@ QDomElement VDomDocument::elementById(quint32 id, const QString &tagName)
 //---------------------------------------------------------------------------------------------------------------------
 /**
  * @brief Find element by id.
+ * @param cache cache with element ids
  * @param node node
  * @param id id value
  * @return true if found
  */
-bool VDomDocument::find(const QDomElement &node, quint32 id)
+bool VDomDocument::find(QHash<quint32, QDomElement> &cache, const QDomElement &node, quint32 id)
 {
     if (node.hasAttribute(AttrId))
     {
-        try
-        {
-            const quint32 elementId = GetParametrUInt(node, AttrId, NULL_ID_STR);
+        const quint32 elementId = GetParametrUInt(node, AttrId, NULL_ID_STR);
 
-            this->map[elementId] = node;
-            if (elementId == id)
-            {
-                return true;
-            }
-        }
-        catch (const VExceptionConversionError &)
+        cache.insert(elementId, node);
+        if (elementId == id)
         {
-            // do nothing
+            return true;
         }
     }
 
@@ -281,13 +281,22 @@ bool VDomDocument::find(const QDomElement &node, quint32 id)
         const QDomNode n = node.childNodes().at(i);
         if (n.isElement())
         {
-            if (this->find(n.toElement(), id))
+            if (VDomDocument::find(cache, n.toElement(), id))
             {
                 return true;
             }
         }
     }
     return false;
+}
+
+
+//---------------------------------------------------------------------------------------------------------------------
+QHash<quint32, QDomElement> VDomDocument::RefreshCache(const QDomElement &root) const
+{
+    QHash<quint32, QDomElement> cache;
+    VDomDocument::find(cache, root, NULL_ID);
+    return cache;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -603,6 +612,19 @@ void VDomDocument::CollectId(const QDomElement &node, QVector<quint32> &vector) 
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void VDomDocument::RefreshElementIdCache()
+{
+    m_watcher->setFuture(QtConcurrent::run(this, &VDomDocument::RefreshCache, documentElement()));
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VDomDocument::CacheRefreshed()
+{
+    m_elementIdCache = m_watcher->future().result();
+    m_refreshCacheTimer->start();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 /**
  * @brief ValidateXML validate xml file by xsd schema.
  * @param schema path to schema file.
@@ -690,6 +712,8 @@ void VDomDocument::setXMLContent(const QString &fileName)
                              .arg(fileName));
         throw e;
     }
+
+    RefreshElementIdCache();
 }
 
 //---------------------------------------------------------------------------------------------------------------------

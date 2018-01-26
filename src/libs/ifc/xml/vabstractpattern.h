@@ -79,7 +79,7 @@ struct VFinalMeasurement
 
 QT_WARNING_POP
 
-class VAbstractPattern : public QObject, public VDomDocument
+class VAbstractPattern : public VDomDocument
 {
     Q_OBJECT
 public:

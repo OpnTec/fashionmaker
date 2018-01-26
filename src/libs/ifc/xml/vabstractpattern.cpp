@@ -239,13 +239,12 @@ void GatherTokens(QSet<QString> &tokens, const QList<QString> &tokenList)
 
 //---------------------------------------------------------------------------------------------------------------------
 VAbstractPattern::VAbstractPattern(QObject *parent)
-    : QObject(parent),
-      VDomDocument(),
-      nameActivPP(QString()),
+    : VDomDocument(parent),
+      nameActivPP(),
       cursor(0),
       toolsOnRemove(QVector<VDataTool*>()),
       history(QVector<VToolRecord>()),
-      patternPieces(QStringList()),
+      patternPieces(),
       modified(false)
 {}
 

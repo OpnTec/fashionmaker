@@ -50,6 +50,7 @@
 class QDomElement;
 class QDomNode;
 template <typename T> class QVector;
+template <typename T> class QFutureWatcher;
 
 Q_DECLARE_LOGGING_CATEGORY(vXML)
 
@@ -78,9 +79,9 @@ QT_WARNING_DISABLE_GCC("-Wnon-virtual-dtor")
  * Of these, 2) and 3) are visible in the final pattern (draw mode 'Modeling'),
  * 1) is only displayed when editing (draw mode 'Calculation') the pattern.
  */
-class VDomDocument : public QDomDocument
+class VDomDocument : public QObject, public QDomDocument
 {
-    Q_DECLARE_TR_FUNCTIONS(VDomDocument)
+    Q_OBJECT
 public:
     static const QString AttrId;
     static const QString AttrText;
@@ -93,7 +94,7 @@ public:
     static const QString TagUnit;
     static const QString TagLine;
 
-    VDomDocument();
+    VDomDocument(QObject *parent = nullptr);
     virtual ~VDomDocument() Q_DECL_EQ_DEFAULT;
     QDomElement elementById(quint32 id, const QString &tagName = QString());
 
@@ -141,12 +142,19 @@ protected:
     void           TestUniqueId() const;
     void           CollectId(const QDomElement &node, QVector<quint32> &vector)const;
 
+private slots:
+    void RefreshElementIdCache();
+    void CacheRefreshed();
+
 private:
     Q_DISABLE_COPY(VDomDocument)
     /** @brief Map used for finding element by id. */
-    QHash<quint32, QDomElement> map;
+    QHash<quint32, QDomElement>  m_elementIdCache;
+    QTimer                      *m_refreshCacheTimer;
+    QFutureWatcher<QHash<quint32, QDomElement>> *m_watcher;
 
-    bool           find(const QDomElement &node, quint32 id);
+    static bool find(QHash<quint32, QDomElement> &cache, const QDomElement &node, quint32 id);
+    QHash<quint32, QDomElement> RefreshCache(const QDomElement &root) const;
 
     bool SaveCanonicalXML(QIODevice *file, int indent, QString &error) const;
 };
