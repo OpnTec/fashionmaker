@@ -94,7 +94,7 @@ public:
     static const QString TagUnit;
     static const QString TagLine;
 
-    VDomDocument(QObject *parent = nullptr);
+    explicit VDomDocument(QObject *parent = nullptr);
     virtual ~VDomDocument() Q_DECL_EQ_DEFAULT;
     QDomElement elementById(quint32 id, const QString &tagName = QString());
 
