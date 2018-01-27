@@ -82,11 +82,33 @@ QSize FancyTabBar::TabSizeHint(bool minimum) const
     int maxLabelwidth = 0;
     for (int tab=0 ; tab<Count() ;++tab)
     {
-        int width = fm.width(TabText(tab));
-        if (width > maxLabelwidth)
+        QString tabText = TabText(tab).simplified();
+        const QStringList words = tabText.split(QLatin1Char(' '));
+
+        if (words.size() > 1)
         {
-            maxLabelwidth = width;
+            QString sentence;
+            foreach(const QString & word, words)
+            {
+                sentence = sentence.isEmpty() ? sentence = word : sentence + QLatin1Char(' ') + word;
+
+                const int width = fm.width(sentence);
+                if (maxLabelwidth < width)
+                {
+                    maxLabelwidth = width;
+                    sentence.clear();
+                }
+            }
         }
+        else
+        {
+            const int width = fm.width(tabText);
+            if (width > maxLabelwidth)
+            {
+                maxLabelwidth = width;
+            }
+        }
+
     }
     int iconHeight = minimum ? 0 : 32;
 
@@ -600,6 +622,7 @@ QString FancyTabBar::TabText(int index) const
 void FancyTabBar::SetTabText(int index, QString text)
 {
     m_attachedTabs.at(index)->m_text=text;
+    setMaximumWidth(TabSizeHint(false).width());
     update();
 }
 
@@ -643,6 +666,8 @@ void FancyTabBar::InsertTab(int index, const QIcon &icon, const QString &label)
     tab->m_icon = icon;
     tab->m_text = label;
     m_attachedTabs.insert(index, tab);
+
+    setMaximumWidth(TabSizeHint(false).width());
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -650,4 +675,6 @@ void FancyTabBar::RemoveTab(int index)
 {
     FancyTab *tab = m_attachedTabs.takeAt(index);
     delete tab;
+
+    setMaximumWidth(TabSizeHint(false).width());
 }
