@@ -197,15 +197,9 @@ VDomDocument::VDomDocument(QObject *parent)
     : QObject(parent),
       QDomDocument(),
       m_elementIdCache(),
-      m_refreshCacheTimer(new QTimer(this)),
       m_watcher(new QFutureWatcher<QHash<quint32, QDomElement>>(this))
 {
-    m_refreshCacheTimer->setTimerType(Qt::VeryCoarseTimer);
-    m_refreshCacheTimer->setInterval(10000);
-    m_refreshCacheTimer->setSingleShot(true);
-    connect(m_refreshCacheTimer, &QTimer::timeout, this, &VDomDocument::RefreshElementIdCache);
     connect(m_watcher, &QFutureWatcher<QHash<quint32, QDomElement>>::finished, this, &VDomDocument::CacheRefreshed);
-    m_refreshCacheTimer->start();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -225,6 +219,9 @@ QDomElement VDomDocument::elementById(quint32 id, const QString &tagName)
        }
        m_elementIdCache.remove(id);
     }
+
+    // Cached missed
+    RefreshElementIdCache();
 
     if (tagName.isEmpty())
     {
@@ -621,7 +618,6 @@ void VDomDocument::RefreshElementIdCache()
 void VDomDocument::CacheRefreshed()
 {
     m_elementIdCache = m_watcher->future().result();
-    m_refreshCacheTimer->start();
 }
 
 //---------------------------------------------------------------------------------------------------------------------

@@ -150,7 +150,6 @@ private:
     Q_DISABLE_COPY(VDomDocument)
     /** @brief Map used for finding element by id. */
     QHash<quint32, QDomElement>  m_elementIdCache;
-    QTimer                      *m_refreshCacheTimer;
     QFutureWatcher<QHash<quint32, QDomElement>> *m_watcher;
 
     static bool find(QHash<quint32, QDomElement> &cache, const QDomElement &node, quint32 id);
