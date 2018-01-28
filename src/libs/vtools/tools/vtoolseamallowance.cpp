@@ -2010,7 +2010,7 @@ QVector<quint32> VToolSeamAllowance::DuplicatePins(const QVector<quint32> &pins,
     {
         QSharedPointer<VPointF> pin = initData.data->GeometricObject<VPointF>(pins.at(i));
 
-        VAbstractNode *tool = qobject_cast<VAbstractNode *>(VAbstractPattern::getTool(i));
+        VAbstractNode *tool = qobject_cast<VAbstractNode *>(VAbstractPattern::getTool(pins.at(i)));
         SCASSERT(tool != nullptr)
 
         VToolPinInitData initNodeData;
