@@ -1884,7 +1884,7 @@
     </message>
     <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Ukázat celý výpočet v okně se zprávami&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+        <translation type="vanished">&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Ukázat celý výpočet v okně se zprávami&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <source>Input data</source>
@@ -3482,6 +3482,18 @@ Apply settings anyway?</source>
     <message>
         <source>Uncheck all</source>
         <translation>Odznačit vše</translation>
+    </message>
+    <message>
+        <source>Search:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Search</source>
+        <translation type="unfinished">Hledání</translation>
+    </message>
+    <message>
+        <source>Select measurement</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -6750,7 +6762,7 @@ Chcete uložit své změny?</translation>
     </message>
     <message>
         <source>File loaded</source>
-        <translation>Soubor nahrán</translation>
+        <translation type="vanished">Soubor nahrán</translation>
     </message>
     <message>
         <source>Valentina didn&apos;t shut down correctly. Do you want reopen files (%1) you had open?</source>
@@ -7540,6 +7552,14 @@ Chcete uložit své změny?</translation>
         <source>Scale:</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Create new pattern piece to start working.</source>
+        <translation type="unfinished">Začněte vytvořením nového dílu střihu.</translation>
+    </message>
+    <message>
+        <source>Changes applied.</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>MainWindowsNoGUI</name>
@@ -8094,7 +8114,7 @@ Chcete uložit své změny?</translation>
     <name>QObject</name>
     <message>
         <source>Create new pattern piece to start working.</source>
-        <translation>Začněte vytvořením nového dílu střihu.</translation>
+        <translation type="vanished">Začněte vytvořením nového dílu střihu.</translation>
     </message>
     <message>
         <source>mm</source>
@@ -8124,10 +8144,6 @@ Chcete uložit své změny?</translation>
     </message>
     <message>
         <source>move detail</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Changes applied.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>

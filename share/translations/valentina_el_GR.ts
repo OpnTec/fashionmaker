@@ -1856,7 +1856,7 @@
     </message>
     <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Εμφάνιση πλήρους υπολογισμού στ πλαίσιο μηνύματος&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+        <translation type="vanished">&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Εμφάνιση πλήρους υπολογισμού στ πλαίσιο μηνύματος&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <source>Input data</source>
@@ -3474,6 +3474,18 @@ Apply settings anyway?</source>
     <message>
         <source>Uncheck all</source>
         <translation>Αποεπιλογή όλων</translation>
+    </message>
+    <message>
+        <source>Search:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Search</source>
+        <translation type="unfinished">Αναζήτηση</translation>
+    </message>
+    <message>
+        <source>Select measurement</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -6830,7 +6842,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>File loaded</source>
-        <translation>Το αρχείο φορτώθηκε</translation>
+        <translation type="vanished">Το αρχείο φορτώθηκε</translation>
     </message>
     <message>
         <source>Valentina didn&apos;t shut down correctly. Do you want reopen files (%1) you had open?</source>
@@ -7709,6 +7721,14 @@ Do you want to save your changes?</source>
         <source>Scale:</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Create new pattern piece to start working.</source>
+        <translation type="unfinished">Δημιουργήστε νέο κομμάτι πατρόν για να ξεκινήσετε να δουλεύετε.</translation>
+    </message>
+    <message>
+        <source>Changes applied.</source>
+        <translation type="unfinished">Οι αλλαγές εφαρμόστηκαν.</translation>
+    </message>
 </context>
 <context>
     <name>MainWindowsNoGUI</name>
@@ -8267,7 +8287,7 @@ Do you want to save your changes?</source>
     <name>QObject</name>
     <message>
         <source>Create new pattern piece to start working.</source>
-        <translation>Δημιουργήστε νέο κομμάτι πατρόν για να ξεκινήσετε να δουλεύετε.</translation>
+        <translation type="vanished">Δημιουργήστε νέο κομμάτι πατρόν για να ξεκινήσετε να δουλεύετε.</translation>
     </message>
     <message>
         <source>mm</source>
@@ -8305,7 +8325,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Changes applied.</source>
-        <translation>Οι αλλαγές εφαρμόστηκαν.</translation>
+        <translation type="vanished">Οι αλλαγές εφαρμόστηκαν.</translation>
     </message>
     <message>
         <source>Wrong tag name &apos;%1&apos;.</source>

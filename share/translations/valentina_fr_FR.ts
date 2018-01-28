@@ -1900,7 +1900,7 @@
     </message>
     <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Voir le calcul entier dans une boite de dialogue&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+        <translation type="vanished">&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Voir le calcul entier dans une boite de dialogue&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <source>Input data</source>
@@ -3542,6 +3542,18 @@ Apply settings anyway?</source>
     <message>
         <source>Uncheck all</source>
         <translation>Tout décocher</translation>
+    </message>
+    <message>
+        <source>Search:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Search</source>
+        <translation type="unfinished">Rechercher</translation>
+    </message>
+    <message>
+        <source>Select measurement</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -6922,7 +6934,7 @@ Voulez-vous sauvegarder les changements?</translation>
     </message>
     <message>
         <source>File loaded</source>
-        <translation>Fichier chargé</translation>
+        <translation type="vanished">Fichier chargé</translation>
     </message>
     <message>
         <source>Valentina didn&apos;t shut down correctly. Do you want reopen files (%1) you had open?</source>
@@ -7825,6 +7837,14 @@ Voulez-vous sauvegarder les changements?</translation>
         <source>Scale:</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Create new pattern piece to start working.</source>
+        <translation type="unfinished">créer un nouvel élément de patron pour commencer.</translation>
+    </message>
+    <message>
+        <source>Changes applied.</source>
+        <translation type="unfinished">Changements appliqués.</translation>
+    </message>
 </context>
 <context>
     <name>MainWindowsNoGUI</name>
@@ -8430,7 +8450,7 @@ Voulez-vous sauvegarder les changements?</translation>
     <name>QObject</name>
     <message>
         <source>Create new pattern piece to start working.</source>
-        <translation>créer un nouvel élément de patron pour commencer.</translation>
+        <translation type="vanished">créer un nouvel élément de patron pour commencer.</translation>
     </message>
     <message>
         <source>mm</source>
@@ -8468,7 +8488,7 @@ Voulez-vous sauvegarder les changements?</translation>
     </message>
     <message>
         <source>Changes applied.</source>
-        <translation>Changements appliqués.</translation>
+        <translation type="vanished">Changements appliqués.</translation>
     </message>
     <message>
         <source>Wrong tag name &apos;%1&apos;.</source>

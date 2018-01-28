@@ -1824,7 +1824,7 @@
     </message>
     <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Mostra calcolo completo nella finestra di dialogo&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+        <translation type="vanished">&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Mostra calcolo completo nella finestra di dialogo&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <source>Input data</source>
@@ -3461,6 +3461,18 @@ Apply settings anyway?</source>
     <message>
         <source>Uncheck all</source>
         <translation>Deseleziona tutto</translation>
+    </message>
+    <message>
+        <source>Search:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Search</source>
+        <translation type="unfinished">Cerca</translation>
+    </message>
+    <message>
+        <source>Select measurement</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -6825,7 +6837,7 @@ Vuoi salvare i cambiamenti?</translation>
     </message>
     <message>
         <source>File loaded</source>
-        <translation>File caricato</translation>
+        <translation type="vanished">File caricato</translation>
     </message>
     <message>
         <source>Valentina didn&apos;t shut down correctly. Do you want reopen files (%1) you had open?</source>
@@ -7728,6 +7740,14 @@ Vuoi salvare i cambiamenti?</translation>
         <source>Scale:</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Create new pattern piece to start working.</source>
+        <translation type="unfinished">Crea nuovo pezzo di cartamodello per iniziare a lavorare.</translation>
+    </message>
+    <message>
+        <source>Changes applied.</source>
+        <translation type="unfinished">Modifiche applicate.</translation>
+    </message>
 </context>
 <context>
     <name>MainWindowsNoGUI</name>
@@ -8325,7 +8345,7 @@ Vuoi salvare i cambiamenti?</translation>
     <name>QObject</name>
     <message>
         <source>Create new pattern piece to start working.</source>
-        <translation>Crea nuovo pezzo di cartamodello per iniziare a lavorare.</translation>
+        <translation type="vanished">Crea nuovo pezzo di cartamodello per iniziare a lavorare.</translation>
     </message>
     <message>
         <source>mm</source>
@@ -8363,7 +8383,7 @@ Vuoi salvare i cambiamenti?</translation>
     </message>
     <message>
         <source>Changes applied.</source>
-        <translation>Modifiche applicate.</translation>
+        <translation type="vanished">Modifiche applicate.</translation>
     </message>
     <message>
         <source>Wrong tag name &apos;%1&apos;.</source>

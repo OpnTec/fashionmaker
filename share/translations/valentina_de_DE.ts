@@ -1900,7 +1900,7 @@
     </message>
     <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Zeige die ganze Berechnung in der Nachrichtenbox&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+        <translation type="vanished">&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Zeige die ganze Berechnung in der Nachrichtenbox&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <source>Input data</source>
@@ -3544,6 +3544,18 @@ Apply settings anyway?</source>
     <message>
         <source>Uncheck all</source>
         <translation>Alle deaktivieren</translation>
+    </message>
+    <message>
+        <source>Search:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Search</source>
+        <translation type="unfinished">Suche</translation>
+    </message>
+    <message>
+        <source>Select measurement</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -6908,7 +6920,7 @@ Sollen die Änderungen gespeichert werden?</translation>
     </message>
     <message>
         <source>File loaded</source>
-        <translation>Datei geladen</translation>
+        <translation type="vanished">Datei geladen</translation>
     </message>
     <message>
         <source>Valentina didn&apos;t shut down correctly. Do you want reopen files (%1) you had open?</source>
@@ -7807,6 +7819,14 @@ Sollen die Änderungen gespeichert werden?</translation>
         <source>Scale:</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Create new pattern piece to start working.</source>
+        <translation type="unfinished">Erstellen Sie ein neues Schnittteil, um fortzufahren.</translation>
+    </message>
+    <message>
+        <source>Changes applied.</source>
+        <translation type="unfinished">Änderungen angewendet.</translation>
+    </message>
 </context>
 <context>
     <name>MainWindowsNoGUI</name>
@@ -8412,7 +8432,7 @@ Sollen die Änderungen gespeichert werden?</translation>
     <name>QObject</name>
     <message>
         <source>Create new pattern piece to start working.</source>
-        <translation>Erstellen Sie ein neues Schnittteil, um fortzufahren.</translation>
+        <translation type="vanished">Erstellen Sie ein neues Schnittteil, um fortzufahren.</translation>
     </message>
     <message>
         <source>mm</source>
@@ -8450,7 +8470,7 @@ Sollen die Änderungen gespeichert werden?</translation>
     </message>
     <message>
         <source>Changes applied.</source>
-        <translation>Änderungen angewendet.</translation>
+        <translation type="vanished">Änderungen angewendet.</translation>
     </message>
     <message>
         <source>Wrong tag name &apos;%1&apos;.</source>

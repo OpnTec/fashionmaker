@@ -1900,7 +1900,7 @@
     </message>
     <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Toont volledige berekening in berichten box &lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+        <translation type="vanished">&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Toont volledige berekening in berichten box &lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <source>Input data</source>
@@ -3547,6 +3547,18 @@ Toch de instellingen aanpassen?</translation>
     <message>
         <source>Uncheck all</source>
         <translation>Alles uitvinken</translation>
+    </message>
+    <message>
+        <source>Search:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Search</source>
+        <translation type="unfinished">Zoek</translation>
+    </message>
+    <message>
+        <source>Select measurement</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -6926,7 +6938,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>File loaded</source>
-        <translation>Bestand geladen</translation>
+        <translation type="vanished">Bestand geladen</translation>
     </message>
     <message>
         <source>Valentina didn&apos;t shut down correctly. Do you want reopen files (%1) you had open?</source>
@@ -7829,6 +7841,14 @@ Do you want to save your changes?</source>
         <source>Scale:</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Create new pattern piece to start working.</source>
+        <translation type="unfinished">Maak een nieuw patroon deel om te gaan werken.</translation>
+    </message>
+    <message>
+        <source>Changes applied.</source>
+        <translation type="unfinished">Wijzigingen zijn toegepast.</translation>
+    </message>
 </context>
 <context>
     <name>MainWindowsNoGUI</name>
@@ -8446,7 +8466,7 @@ Do you want to save your changes?</source>
     <name>QObject</name>
     <message>
         <source>Create new pattern piece to start working.</source>
-        <translation>Maak een nieuw patroon deel om te gaan werken.</translation>
+        <translation type="vanished">Maak een nieuw patroon deel om te gaan werken.</translation>
     </message>
     <message>
         <source>mm</source>
@@ -8484,7 +8504,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Changes applied.</source>
-        <translation>Wijzigingen zijn toegepast.</translation>
+        <translation type="vanished">Wijzigingen zijn toegepast.</translation>
     </message>
     <message>
         <source>Wrong tag name &apos;%1&apos;.</source>
