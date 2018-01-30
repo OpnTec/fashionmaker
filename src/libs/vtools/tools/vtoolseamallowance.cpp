@@ -1862,7 +1862,7 @@ QList<VToolSeamAllowance *> VToolSeamAllowance::SelectedTools() const
             for(int i=0; i < list.size(); ++i)
             {
                 VToolSeamAllowance *tool = qgraphicsitem_cast<VToolSeamAllowance *>(list.at(i));
-                if (tool->getId() != m_id)
+                if (tool != nullptr && tool->getId() != m_id)
                 {
                     tools.append(tool);
                 }
