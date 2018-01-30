@@ -4852,7 +4852,7 @@ QString MainWindow::CheckPathToMeasurements(const QString &patternPath, const QS
         return path;
     }
 
-    auto FindLocation = [this](const QString &filter, const QString &dirPath)
+    auto FindLocation = [this](const QString &filter, const QString &dirPath, const QString &selectedName)
     {
         VCommonSettings::PrepareMultisizeTables(VCommonSettings::GetDefPathMultisizeMeasurements());
 
@@ -4863,8 +4863,18 @@ QString MainWindow::CheckPathToMeasurements(const QString &patternPath, const QS
             usedNotExistedDir = directory.mkpath(".");
         }
 
-        const QString mPath = QFileDialog::getOpenFileName(this, tr("Open file"), dirPath, filter, nullptr,
-                                                           QFileDialog::DontUseNativeDialog);
+        QString mPath;
+
+        QFileDialog dialog(this, tr("Open file"), dirPath, filter);
+        dialog.selectFile(selectedName);
+        dialog.setFileMode(QFileDialog::ExistingFile);
+        if (dialog.exec() == QDialog::Accepted)
+        {
+            mPath = dialog.selectedFiles().value(0);
+        }
+
+//        const QString mPath = QFileDialog::getOpenFileName(this, tr("Open file"), dirPath, filter, nullptr,
+//                                                           QFileDialog::DontUseNativeDialog);
 
         if (usedNotExistedDir)
         {
@@ -4905,12 +4915,13 @@ QString MainWindow::CheckPathToMeasurements(const QString &patternPath, const QS
                     patternType = MeasurementsType::Individual; // or Unknown
                 }
 
-                auto DirPath = [patternPath, table](const QString &defPath)
+                auto DirPath = [patternPath, table](const QString &defPath, QString &selectedName)
                 {
                     QString dirPath;
                     const QDir patternDir = QFileInfo(patternPath).absoluteDir();
                     if (patternDir.exists(table.fileName()))
                     {
+                        selectedName = table.fileName();
                         dirPath = patternDir.absolutePath();
                     }
                     else
@@ -4927,16 +4938,20 @@ QString MainWindow::CheckPathToMeasurements(const QString &patternPath, const QS
                     const QString filter = tr("Multisize measurements") + QLatin1String(" (*.vst);;") +
                                            tr("Individual measurements") + QLatin1String(" (*.vit)");
                     //Use standard path to multisize measurements
-                    const QString dirPath = DirPath(qApp->ValentinaSettings()->GetPathMultisizeMeasurements());
-                    mPath = FindLocation(filter, dirPath);
+                    QString selectedName;
+                    const QString dirPath = DirPath(qApp->ValentinaSettings()->GetPathMultisizeMeasurements(),
+                                                    selectedName);
+                    mPath = FindLocation(filter, dirPath, selectedName);
                 }
                 else
                 {
                     const QString filter = tr("Individual measurements") + QLatin1String(" (*.vit);;") +
                                            tr("Multisize measurements") + QLatin1String(" (*.vst)");
                     //Use standard path to individual measurements
-                    const QString dirPath = DirPath(qApp->ValentinaSettings()->GetPathIndividualMeasurements());
-                    mPath = FindLocation(filter, dirPath);
+                    QString selectedName;
+                    const QString dirPath = DirPath(qApp->ValentinaSettings()->GetPathIndividualMeasurements(),
+                                                    selectedName);
+                    mPath = FindLocation(filter, dirPath, selectedName);
                 }
 
                 if (mPath.isEmpty())
