@@ -4873,9 +4873,6 @@ QString MainWindow::CheckPathToMeasurements(const QString &patternPath, const QS
             mPath = dialog.selectedFiles().value(0);
         }
 
-//        const QString mPath = QFileDialog::getOpenFileName(this, tr("Open file"), dirPath, filter, nullptr,
-//                                                           QFileDialog::DontUseNativeDialog);
-
         if (usedNotExistedDir)
         {
             QDir directory(dirPath);
