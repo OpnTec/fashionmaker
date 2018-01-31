@@ -679,7 +679,7 @@ void TMainWindow::ExportToCSVData(const QString &fileName, bool withHeader, int 
         {
             if (not ui->tableWidget->isColumnHidden(column))
             {
-                QTableWidgetItem *header = ui->tableWidget->horizontalHeaderItem(colCount);
+                QTableWidgetItem *header = ui->tableWidget->horizontalHeaderItem(column);
                 csv.setHeaderText(colCount, header->text());
                 ++colCount;
             }
