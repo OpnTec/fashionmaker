@@ -35,7 +35,6 @@ namespace qmu
 QmuTokenParser::QmuTokenParser()
 {
     InitCharSets();
-    setAllowSubexpressions(false);//Only one expression per time
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -61,9 +60,7 @@ QmuTokenParser::QmuTokenParser(const QString &formula, bool osSeparator,
     :QmuFormulaBase()
 {
     InitCharSets();
-    setAllowSubexpressions(false);//Only one expression per time
     SetVarFactory(AddVariable, this);
-
     SetSepForTr(osSeparator, fromUser);
 
     // Fix for issue #776. Valentina cannot recognize translated functions.
