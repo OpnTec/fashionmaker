@@ -78,11 +78,11 @@ QxtCsvModel::QxtCsvModel(QObject *parent) : QAbstractTableModel(parent)
 
   \sa setSource
   */
-QxtCsvModel::QxtCsvModel(QIODevice *file, QObject *parent, bool withHeader, QChar separator)
+QxtCsvModel::QxtCsvModel(QIODevice *file, QObject *parent, bool withHeader, QChar separator, QTextCodec* codec)
     : QAbstractTableModel(parent)
 {
     QXT_INIT_PRIVATE(QxtCsvModel)
-    setSource(file, withHeader, separator);
+    setSource(file, withHeader, separator, codec);
 }
 
 /*!
@@ -95,12 +95,12 @@ QxtCsvModel::QxtCsvModel(QIODevice *file, QObject *parent, bool withHeader, QCha
 
   \sa setSource
   */
-QxtCsvModel::QxtCsvModel(const QString &filename, QObject *parent, bool withHeader, QChar separator)
+QxtCsvModel::QxtCsvModel(const QString &filename, QObject *parent, bool withHeader, QChar separator, QTextCodec* codec)
     : QAbstractTableModel(parent)
 {
     QXT_INIT_PRIVATE(QxtCsvModel)
     QFile src(filename);
-    setSource(&src, withHeader, separator);
+    setSource(&src, withHeader, separator, codec);
 }
 
 QT_WARNING_POP
@@ -214,14 +214,7 @@ void QxtCsvModel::setSource(QIODevice *file, bool withHeader, QChar separator, Q
     QChar ch, buffer(0);
     bool readCR = false;
     QTextStream stream(file);
-    if (codec)
-    {
-        stream.setCodec(codec);
-    }
-    else
-    {
-        stream.setAutoDetectUnicode(true);
-    }
+    codec ? stream.setCodec(codec) : stream.setAutoDetectUnicode(true);
     while (not stream.atEnd())
     {
         if (buffer != QChar(0))

@@ -74,6 +74,22 @@ bool VTranslateMeasurements::MeasurementsFromUser(QString &newFormula, int posit
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+QString VTranslateMeasurements::MFromUser(const QString &measurement) const
+{
+    QMap<QString, qmu::QmuTranslation>::const_iterator i = measurements.constBegin();
+    while (i != measurements.constEnd())
+    {
+        const QString translated = i.value().translate(qApp->Settings()->GetLocale());
+        if (measurement == translated)
+        {
+            return i.key();
+        }
+        ++i;
+    }
+    return measurement;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 QString VTranslateMeasurements::MToUser(const QString &measurement) const
 {
     if (measurements.contains(measurement))

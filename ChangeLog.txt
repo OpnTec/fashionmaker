@@ -40,6 +40,7 @@
 - [#794] Better control over scale value.
 - [#392] Improve feature: Show progress bar while opening pattern file.
 - [#732] Tape app. Improve Database dialog.
+- [#804] New feature. Import measurements from CSV file in Tape app.
 
 # Version 0.5.1
 - [#683] Tool Seam allowance's dialog is off screen on small resolutions.

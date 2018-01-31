@@ -55,9 +55,10 @@ class QxtCsvModel : public QAbstractTableModel
     Q_OBJECT
 public:
     explicit QxtCsvModel(QObject *parent = nullptr);
-    explicit QxtCsvModel(QIODevice *file, QObject *parent = nullptr, bool withHeader = false, QChar separator = ',');
+    explicit QxtCsvModel(QIODevice *file, QObject *parent = nullptr, bool withHeader = false, QChar separator = ',',
+                         QTextCodec *codec = nullptr);
     explicit QxtCsvModel(const QString &filename, QObject *parent = nullptr, bool withHeader = false,
-                         QChar separator = ',');
+                         QChar separator = ',', QTextCodec *codec = nullptr);
     virtual ~QxtCsvModel() Q_DECL_EQ_DEFAULT;
 
     virtual int      rowCount(const QModelIndex& parent = QModelIndex()) const Q_DECL_OVERRIDE;

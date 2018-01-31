@@ -43,6 +43,7 @@ namespace Ui
 }
 
 class QLabel;
+class QxtCsvModel;
 
 class TMainWindow : public VAbstractMainWindow
 {
@@ -86,6 +87,7 @@ private slots:
     bool FileSaveAs();
     void AboutToShowWindowMenu();
     void ShowWindow() const;
+    void ImportDataFromCSV();
 
 #if defined(Q_OS_MAC)
     void AboutToShowDockMenu();
@@ -213,6 +215,13 @@ private:
 
     template <class T>
     void HackWidget(T **widget);
+
+    QString CheckMName(const QString &name) const;
+    void ShowError(const QString &text);
+    void RefreshDataAfterImport();
+
+    void ImportIndividualMeasurements(const QxtCsvModel &csv);
+    void ImportMultisizeMeasurements(const QxtCsvModel &csv);
 };
 
 #endif // TMAINWINDOW_H

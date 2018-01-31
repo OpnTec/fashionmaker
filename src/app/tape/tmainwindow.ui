@@ -844,6 +844,7 @@
     <addaction name="actionSave"/>
     <addaction name="actionSaveAs"/>
     <addaction name="actionExportToCSV"/>
+    <addaction name="actionImportFromCSV"/>
     <addaction name="separator"/>
     <addaction name="actionReadOnly"/>
     <addaction name="separator"/>
@@ -1180,6 +1181,17 @@
    </property>
    <property name="menuRole">
     <enum>QAction::NoRole</enum>
+   </property>
+  </action>
+  <action name="actionImportFromCSV">
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
+   <property name="text">
+    <string>Import from CSV</string>
+   </property>
+   <property name="toolTip">
+    <string>Import from CSV</string>
    </property>
   </action>
  </widget>

@@ -811,14 +811,7 @@ QDomElement VMeasurements::MakeEmpty(const QString &name, const QString &formula
     }
     else
     {
-        if (formula.isEmpty())
-        {
-            SetAttribute(element, AttrValue, QString("0"));
-        }
-        else
-        {
-            SetAttribute(element, AttrValue, formula);
-        }
+        SetAttribute(element, AttrValue, formula.isEmpty() ? QString("0") : formula);
     }
 
     return element;

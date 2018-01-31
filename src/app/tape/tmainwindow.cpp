@@ -34,6 +34,7 @@
 #include "dialogs/dialogtapepreferences.h"
 #include "../vpatterndb/calculator.h"
 #include "../vpatterndb/pmsystems.h"
+#include "../vpatterndb/measurements.h"
 #include "../ifc/ifcdef.h"
 #include "../ifc/xml/vvitconverter.h"
 #include "../ifc/xml/vvstconverter.h"
@@ -41,6 +42,7 @@
 #include "../vmisc/vlockguard.h"
 #include "../vmisc/vsysexits.h"
 #include "../vmisc/qxtcsvmodel.h"
+#include "../vmisc/dialogs/dialogexporttocsv.h"
 #include "vlitepattern.h"
 #include "../qmuparser/qmudef.h"
 #include "../vtools/dialogs/support/dialogeditwrongformula.h"
@@ -308,6 +310,8 @@ bool TMainWindow::LoadFile(const QString &path)
             }
 
             MeasurementGUI();
+
+            ui->actionImportFromCSV->setEnabled(true);
         }
         catch (VException &e)
         {
@@ -387,6 +391,8 @@ void TMainWindow::FileNew()
         InitWindow();
 
         MeasurementGUI();
+
+        ui->actionImportFromCSV->setEnabled(true);
     }
     else
     {
@@ -947,6 +953,56 @@ void TMainWindow::ShowWindow() const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void TMainWindow::ImportDataFromCSV()
+{
+    if (m == nullptr || m->Type() == MeasurementsType::Unknown)
+    {
+        return;
+    }
+
+    const QString filters = tr("Comma-Separated Values") + QLatin1String(" (*.csv)");
+    const QString suffix("csv");
+
+    QString fileName = QFileDialog::getOpenFileName(this, tr("Import from CSV"), QDir::homePath(), filters, nullptr,
+                                                    QFileDialog::DontUseNativeDialog);
+
+    if (fileName.isEmpty())
+    {
+        return;
+    }
+
+    QFileInfo f( fileName );
+    if (f.suffix().isEmpty() && f.suffix() != suffix)
+    {
+        fileName += QLatin1String(".") + suffix;
+    }
+
+    DialogExportToCSV dialog(this);
+    dialog.SetWithHeader(qApp->Settings()->GetCSVWithHeader());
+    dialog.SetSelectedMib(qApp->Settings()->GetCSVCodec());
+    dialog.SetSeparator(qApp->Settings()->GetCSVSeparator());
+
+    if (dialog.exec() == QDialog::Accepted)
+    {
+        qApp->Settings()->SetCSVSeparator(dialog.GetSeparator());
+        qApp->Settings()->SetCSVCodec(dialog.GetSelectedMib());
+        qApp->Settings()->SetCSVWithHeader(dialog.IsWithHeader());
+
+        QxtCsvModel csv(fileName, nullptr, dialog.IsWithHeader(), dialog.GetSeparator(),
+                        QTextCodec::codecForMib(dialog.GetSelectedMib()));
+
+        if (m->Type() == MeasurementsType::Individual)
+        {
+            ImportIndividualMeasurements(csv);
+        }
+        else
+        {
+            ImportMultisizeMeasurements(csv);
+        }
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 #if defined(Q_OS_MAC)
 void TMainWindow::AboutToShowDockMenu()
 {
@@ -1074,7 +1130,7 @@ void TMainWindow::Remove()
     {
         MFields(false);
 
-        ui->actionExportToCSV->setEnabled(false);
+        ui->actionExportToCSV->setEnabled(false); 
 
         ui->lineEditName->blockSignals(true);
         ui->lineEditName->setText("");
@@ -1880,6 +1936,7 @@ void TMainWindow::SetupMenu()
     ui->actionSaveAs->setShortcuts(QKeySequence::SaveAs);
 
     connect(ui->actionExportToCSV, &QAction::triggered, this, &TMainWindow::ExportDataToCSV);
+    connect(ui->actionImportFromCSV, &QAction::triggered, this, &TMainWindow::ImportDataFromCSV);
     connect(ui->actionReadOnly, &QAction::triggered, this, [this](bool ro)
     {
         if (not mIsReadOnly)
@@ -2440,10 +2497,7 @@ void TMainWindow::RefreshTable(bool freshCall)
     ui->tableWidget->horizontalHeader()->setStretchLastSection(true);
     ui->tableWidget->blockSignals(false);
 
-    if (ui->tableWidget->rowCount() > 0)
-    {
-        ui->actionExportToCSV->setEnabled(true);
-    }
+    ui->actionExportToCSV->setEnabled(ui->tableWidget->rowCount() > 0);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -3009,6 +3063,243 @@ bool TMainWindow::IgnoreLocking(int error, const QString &path)
         return false;
     }
     return true;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QString TMainWindow::CheckMName(const QString &name) const
+{
+    if (name.isEmpty())
+    {
+        throw VException(tr("Measurement name in is empty."));
+    }
+
+    if (name.indexOf(CustomMSign) == 0)
+    {
+        QRegularExpression rx(NameRegExp());
+        if (not rx.match(name).hasMatch())
+        {
+            throw VException(tr("Merasurement '%1' doesn't match regex pattern.").arg(name));
+        }
+
+        if (not data->IsUnique(name))
+        {
+            throw VException(tr("Merasurement '%1' already used in file.").arg(name));
+        }
+    }
+    else
+    {
+        if (not AllGroupNames().toSet().contains(name))
+        {
+            throw VException(tr("Measurement '%1' is not one of known measurements.").arg(name));
+        }
+
+        if (not data->IsUnique(name))
+        {
+            throw VException(tr("Merasurement '%1' already used in file.").arg(name));
+        }
+    }
+
+    return name;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void TMainWindow::ShowError(const QString &text)
+{
+    QMessageBox messageBox(this);
+    messageBox.setIcon(QMessageBox::Critical);
+    messageBox.setText(text);
+    messageBox.setStandardButtons(QMessageBox::Ok);
+    messageBox.setDefaultButton(QMessageBox::Ok);
+    messageBox.exec();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void TMainWindow::RefreshDataAfterImport()
+{
+    const int currentRow = ui->tableWidget->currentRow();
+    search->AddRow(currentRow);
+    RefreshData();
+    search->RefreshList(ui->lineEditFind->text());
+
+    ui->tableWidget->selectRow(currentRow);
+    ui->actionExportToCSV->setEnabled(true);
+    MeasurementsWasSaved(false);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void TMainWindow::ImportIndividualMeasurements(const QxtCsvModel &csv)
+{
+    const int columns = csv.columnCount();
+    const int rows = csv.rowCount();
+
+    if (columns < 2)
+    {
+        ShowError(tr("Individual measurements require at least 2 columns."));
+        return;
+    }
+
+    struct IndividualMeasurement
+    {
+        IndividualMeasurement()
+            : name(),
+              value("0"),
+              fullName(),
+              description()
+        {}
+
+        QString name;
+        QString value;
+        QString fullName;
+        QString description;
+    };
+
+    QVector<IndividualMeasurement> measurements;
+
+    for(int i=0; i < rows; ++i)
+    {
+        try
+        {
+            IndividualMeasurement measurement;
+            measurement.name = CheckMName(qApp->TrVars()->MFromUser(csv.text(i, 0).simplified()));
+            measurement.value = VTranslateVars::TryFormulaFromUser(csv.text(i, 1), qApp->Settings()->GetOsSeparator());
+
+            if (columns >= 3)
+            {
+                measurement.fullName = csv.text(i, 2).simplified();
+            }
+
+            if (columns >= 4)
+            {
+                measurement.description = csv.text(i, 3).simplified();
+            }
+
+            measurements.append(measurement);
+        }
+        catch (VException &e)
+        {
+            ShowError(tr("Error in row %1.").arg(i) + QLatin1Char(' ') + e.ErrorMessage());
+            return;
+        }
+    }
+
+    for(int i=0; i < measurements.size(); ++i)
+    {
+        m->AddEmpty(measurements.at(i).name, measurements.at(i).value);
+
+        if (not measurements.at(i).fullName.isEmpty())
+        {
+            m->SetMFullName(measurements.at(i).name, measurements.at(i).fullName);
+        }
+
+        if (not measurements.at(i).description.isEmpty())
+        {
+            m->SetMDescription(measurements.at(i).name, measurements.at(i).description);
+        }
+    }
+
+    RefreshDataAfterImport();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void TMainWindow::ImportMultisizeMeasurements(const QxtCsvModel &csv)
+{
+    const int columns = csv.columnCount();
+    const int rows = csv.rowCount();
+
+    if (columns < 4)
+    {
+        ShowError(tr("Multisize measurements require at least 4 columns."));
+        return;
+    }
+
+    auto ConverToDouble = [this](QString text, const QString &error)
+    {
+        text = VTranslateVars::TryFormulaFromUser(text, qApp->Settings()->GetOsSeparator());
+        bool ok = false;
+        QLocale::c();
+        const qreal value = QLocale::c().toDouble(text, &ok);
+        if (not ok)
+        {
+            throw VException(error);
+        }
+        return value;
+    };
+
+    struct MultisizeMeasurement
+    {
+        MultisizeMeasurement()
+            : name(),
+              base(0),
+              heightIncrease(0),
+              sizeIncrease(0),
+              fullName(),
+              description()
+        {}
+
+        QString name;
+        qreal base;
+        qreal heightIncrease;
+        qreal sizeIncrease;
+        QString fullName;
+        QString description;
+    };
+
+    QVector<MultisizeMeasurement> measurements;
+
+    for(int i=0; i < rows; ++i)
+    {
+        try
+        {
+            MultisizeMeasurement measurement;
+            measurement.name = CheckMName(qApp->TrVars()->MFromUser(csv.text(i, 0).simplified()));
+
+            measurement.base = ConverToDouble(csv.text(i, 1),
+                                              tr("Cannot convert base size value to double in column 2."));
+
+            measurement.heightIncrease = ConverToDouble(csv.text(i, 2),
+                                                     tr("Cannot convert height increase value to double in column 3."));
+
+            measurement.sizeIncrease = ConverToDouble(csv.text(i, 3),
+                                                      tr("Cannot convert size increase value to double in column 4."));
+
+            if (columns >= 5)
+            {
+                measurement.fullName = csv.text(i, 4).simplified();
+            }
+
+            if (columns >= 6)
+            {
+                measurement.description = csv.text(i, 5).simplified();
+            }
+
+            measurements.append(measurement);
+        }
+        catch (VException &e)
+        {
+            ShowError(tr("Error in row %1.").arg(i) + QLatin1Char(' ') + e.ErrorMessage());
+            return;
+        }
+    }
+
+    for(int i=0; i < measurements.size(); ++i)
+    {
+        m->AddEmpty(measurements.at(i).name);
+        m->SetMBaseValue(measurements.at(i).name, measurements.at(i).base);
+        m->SetMSizeIncrease(measurements.at(i).name, measurements.at(i).sizeIncrease);
+        m->SetMHeightIncrease(measurements.at(i).name, measurements.at(i).heightIncrease);
+
+        if (not measurements.at(i).fullName.isEmpty())
+        {
+            m->SetMFullName(measurements.at(i).name, measurements.at(i).fullName);
+        }
+
+        if (not measurements.at(i).description.isEmpty())
+        {
+            m->SetMDescription(measurements.at(i).name, measurements.at(i).description);
+        }
+    }
+
+    RefreshDataAfterImport();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
