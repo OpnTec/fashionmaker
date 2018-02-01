@@ -87,6 +87,7 @@
 - [#797] Custom seam allowance ignored in some cases.
 - [#798] Formula Wizard crashes with translated increments.
 - [#803] Bug in FancyTabBar widget. Wrongly calculated widget width.
+- [#805] Invalid regular expression for validation layout output filename mask.
 
 # Version 0.5.0 May 9, 2017
 - [#581] User can now filter input lists by keyword in function wizard.
