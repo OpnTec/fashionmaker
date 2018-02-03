@@ -97,5 +97,11 @@ private:
 
     void Clean();
 };
+//---------------------------------------------------------------------------------------------------------------------
+
+inline const VTranslateVars *MApplication::TrVars()
+{
+    return trVars;
+}
 
 #endif // MAPPLICATION_H

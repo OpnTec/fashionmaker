@@ -100,6 +100,8 @@ private:
     void ReadSettings();
     void WriteSettings();
 
+    QString ItemFullDescription(QTreeWidgetItem *item, bool showImage = true) const;
+
     void RetranslateGroup(QTreeWidgetItem *group, const QString &groupText, const QStringList &list);
     void RetranslateMeasurement(QTreeWidgetItem *group, int index, const QString &name);
 

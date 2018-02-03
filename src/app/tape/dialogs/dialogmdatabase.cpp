@@ -315,20 +315,7 @@ void DialogMDataBase::ShowDescription(QTreeWidgetItem *item, int column)
         return;
     }
 
-    const QString name = item->data(0, Qt::UserRole).toString();
-    const VTranslateVars *trv = qApp->TrVars();
-    const QString number = trv->MNumber(name);
-
-    const QString text = QString("<p align=\"center\" style=\"font-variant: normal; font-style: normal; font-weight: "
-                                 "normal\"> %1 <br clear=\"left\"><b>%2</b>. <i>%3</i></p>"
-                                 "<p align=\"left\" style=\"font-variant: normal; font-style: normal; font-weight: "
-                                 "normal\">%4</p>")
-            .arg(ImgTag(number))
-            .arg(number)
-            .arg(trv->GuiText(name))
-            .arg(trv->Description(name));
-
-    ui->textEdit->setHtml(text);
+    ui->textEdit->setHtml(ItemFullDescription(item));
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -456,10 +443,12 @@ void DialogMDataBase::FilterGroup(QTreeWidgetItem *group, const QString &search)
     for (int i=0; i < group->childCount(); ++i)
     {
         QTreeWidgetItem *childItem = group->child(i);
-        const bool hidden = (not childItem->isSelected()
-                             && not childItem->text(0).contains(search, Qt::CaseInsensitive))
-                || (childItem->isSelected() && not ui->textEdit->toPlainText().contains(search, Qt::CaseInsensitive)
-                    && not childItem->text(0).contains(search, Qt::CaseInsensitive));
+        const QString description = QTextDocumentFragment::fromHtml(ItemFullDescription(childItem, false))
+                .toPlainText();
+
+        const bool hidden = not childItem->text(0).contains(search, Qt::CaseInsensitive)
+                && not description.contains(search, Qt::CaseInsensitive);
+
         childItem->setHidden(hidden);
         if (not hidden)
         {
@@ -525,6 +514,40 @@ void DialogMDataBase::ReadSettings()
 void DialogMDataBase::WriteSettings()
 {
     qApp->TapeSettings()->SetDataBaseGeometry(saveGeometry());
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QString DialogMDataBase::ItemFullDescription(QTreeWidgetItem *item, bool showImage) const
+{
+    if (item == nullptr || item->childCount() != 0)
+    {
+        return QString();
+    }
+
+    const QString name = item->data(0, Qt::UserRole).toString();
+    if (name.isEmpty())
+    {
+        return QString();
+    }
+
+    const QString number = qApp->TrVars()->MNumber(name);
+
+    QString imgTag;
+    if (showImage)
+    {
+        imgTag = ImgTag(number);
+    }
+
+    const QString text = QString("<p align=\"center\" style=\"font-variant: normal; font-style: normal; font-weight: "
+                                 "normal\"> %1 <br clear=\"left\"><b>%2</b>. <i>%3</i></p>"
+                                 "<p align=\"left\" style=\"font-variant: normal; font-style: normal; font-weight: "
+                                 "normal\">%4</p>")
+            .arg(imgTag)
+            .arg(number)
+            .arg(qApp->TrVars()->GuiText(name))
+            .arg(qApp->TrVars()->Description(name));
+
+    return text;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
