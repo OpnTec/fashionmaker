@@ -58,6 +58,11 @@
 #include <QPrintDialog>
 #include <QPrinterInfo>
 
+#if defined(Q_OS_WIN32) && QT_VERSION >= QT_VERSION_CHECK(5, 7, 0)
+#include <QWinTaskbarButton>
+#include <QWinTaskbarProgress>
+#endif
+
 #ifdef Q_OS_WIN
 #   define PDFTOPS "pdftops.exe"
 #else
@@ -134,12 +139,22 @@ MainWindowsNoGUI::MainWindowsNoGUI(QWidget *parent)
       margins(),
       paperSize(),
       m_dialogSaveLayout(),
+#if defined(Q_OS_WIN32) && QT_VERSION >= QT_VERSION_CHECK(5, 7, 0)
+      m_taskbarButton(new QWinTaskbarButton(this)),
+      m_taskbarProgress(nullptr),
+#endif
       isTiled(false),
       isAutoCrop(false),
       isUnitePages(false),
       layoutPrinterName()
 {
     InitTempLayoutScene();
+
+#if defined(Q_OS_WIN32) && QT_VERSION >= QT_VERSION_CHECK(5, 7, 0)
+    m_taskbarButton->setWindow(this->windowHandle());
+    m_taskbarProgress = m_taskbarButton->progress();
+    m_taskbarProgress->setMinimum(0);
+#endif
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -182,6 +197,12 @@ bool MainWindowsNoGUI::LayoutSettings(VLayoutGenerator& lGenerator)
     DialogLayoutProgress progress(listDetails.count(), this);
     if (VApplication::IsGUIMode())
     {
+#if defined(Q_OS_WIN32) && QT_VERSION >= QT_VERSION_CHECK(5, 7, 0)
+        m_taskbarProgress->setVisible(true);
+        m_taskbarProgress->setValue(0);
+        m_taskbarProgress->setMaximum(listDetails.count());
+        connect(&lGenerator, &VLayoutGenerator::Arranged, m_taskbarProgress, &QWinTaskbarProgress::setValue);
+#endif
         connect(&lGenerator, &VLayoutGenerator::Start, &progress, &DialogLayoutProgress::Start);
         connect(&lGenerator, &VLayoutGenerator::Arranged, &progress, &DialogLayoutProgress::Arranged);
         connect(&lGenerator, &VLayoutGenerator::Error, &progress, &DialogLayoutProgress::Error);
@@ -193,6 +214,13 @@ bool MainWindowsNoGUI::LayoutSettings(VLayoutGenerator& lGenerator)
         connect(&lGenerator, &VLayoutGenerator::Error, this, &MainWindowsNoGUI::ErrorConsoleMode);
     }
     lGenerator.Generate();
+
+#if defined(Q_OS_WIN32) && QT_VERSION >= QT_VERSION_CHECK(5, 7, 0)
+    if (VApplication::IsGUIMode())
+    {
+        m_taskbarProgress->setVisible(false);
+    }
+#endif
 
     switch (lGenerator.State())
     {

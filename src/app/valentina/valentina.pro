@@ -13,6 +13,11 @@ include(../../../common.pri)
 # library in installer.
 QT       += core gui widgets xml svg printsupport xmlpatterns concurrent
 
+# Use winextras only for Windows 7+
+win32:greaterThan(QT_MAJOR_VERSION, 4):greaterThan(QT_MINOR_VERSION, 6) {
+    QT += winextras
+}
+
 # We want create executable file
 TEMPLATE = app
 
@@ -303,6 +308,11 @@ win32:*g++* {
         $$[QT_INSTALL_BINS]/libgcc_s_dw2-1.dll \
         $$[QT_INSTALL_BINS]/libstdc++-6.dll \
         $$[QT_INSTALL_BINS]/libwinpthread-1.dll
+
+    # For support Windows 7+
+    greaterThan(QT_MAJOR_VERSION, 4):greaterThan(QT_MINOR_VERSION, 6) {
+        package.files += $$[QT_INSTALL_BINS]/Qt5WinExtras.dll
+    }
 
     package.CONFIG = no_check_exist
     INSTALLS += package

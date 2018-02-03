@@ -88,6 +88,11 @@
 #include <QDoubleSpinBox>
 #include <QProgressBar>
 
+#if defined(Q_OS_WIN32) && QT_VERSION >= QT_VERSION_CHECK(5, 7, 0)
+#include <QWinTaskbarButton>
+#include <QWinTaskbarProgress>
+#endif
+
 #if defined(Q_OS_MAC)
 #include <QMimeData>
 #include <QDrag>
@@ -176,6 +181,9 @@ MainWindow::MainWindow(QWidget *parent)
     InitToolButtons();
 
     m_progressBar->setVisible(false);
+#if defined(Q_OS_WIN32) && QT_VERSION >= QT_VERSION_CHECK(5, 7, 0)
+    m_taskbarProgress->setVisible(false);
+#endif
     m_statusLabel->setText(tr("Create new pattern piece to start working."));
     statusBar()->addPermanentWidget(m_statusLabel, 1);
     statusBar()->addPermanentWidget(m_progressBar, 1);
@@ -1455,6 +1463,10 @@ void MainWindow::showEvent( QShowEvent *event )
     {
         return;
     }
+
+#if defined(Q_OS_WIN32) && QT_VERSION >= QT_VERSION_CHECK(5, 7, 0)
+    m_taskbarButton->setWindow(windowHandle());
+#endif
 
     if (isInitialized)
     {
@@ -2982,6 +2994,9 @@ void MainWindow::Clear()
     toolOptions->ClearPropertyBrowser();
     toolOptions->itemClicked(nullptr);
     m_progressBar->setVisible(false);
+#if defined(Q_OS_WIN32) && QT_VERSION >= QT_VERSION_CHECK(5, 7, 0)
+    m_taskbarProgress->setVisible(false);
+#endif
     m_statusLabel->setVisible(true);
 }
 
@@ -3457,7 +3472,11 @@ void MainWindow::ShowProgress()
 {
     if (m_progressBar->isVisible() && m_progressBar->value() + 1 <= m_progressBar->maximum())
     {
-        m_progressBar->setValue(m_progressBar->value() + 1);
+        const int newValue = m_progressBar->value() + 1;
+        m_progressBar->setValue(newValue);
+#if defined(Q_OS_WIN32) && QT_VERSION >= QT_VERSION_CHECK(5, 7, 0)
+        m_taskbarProgress->setValue(newValue);
+#endif
         qApp->processEvents();
     }
 }
@@ -4558,9 +4577,19 @@ bool MainWindow::LoadPattern(QString fileName, const QString& customMeasureFile)
 
     m_progressBar->setVisible(true);
     m_statusLabel->setVisible(false);
-    m_progressBar->setMaximum(doc->ElementsToParse());
+    const int elements = doc->ElementsToParse();
+    m_progressBar->setMaximum(elements);
+#if defined(Q_OS_WIN32) && QT_VERSION >= QT_VERSION_CHECK(5, 7, 0)
+    m_taskbarProgress->setVisible(true);
+    m_taskbarProgress->setMaximum(elements);
+#endif
+    
     FullParseFile();
+
     m_progressBar->setVisible(false);
+#if defined(Q_OS_WIN32) && QT_VERSION >= QT_VERSION_CHECK(5, 7, 0)
+    m_taskbarProgress->setVisible(false);
+#endif
     m_statusLabel->setVisible(true);
 
     if (guiEnabled)

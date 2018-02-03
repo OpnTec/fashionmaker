@@ -42,6 +42,11 @@ class QGraphicsScene;
 struct PosterData;
 class QGraphicsRectItem;
 
+#if defined(Q_OS_WIN32) && QT_VERSION >= QT_VERSION_CHECK(5, 7, 0)
+class QWinTaskbarButton;
+class QWinTaskbarProgress;
+#endif
+
 class MainWindowsNoGUI : public VAbstractMainWindow
 {
     Q_OBJECT
@@ -91,6 +96,11 @@ protected:
     QSizeF paperSize;
 
     QSharedPointer<DialogSaveLayout> m_dialogSaveLayout;
+
+#if defined(Q_OS_WIN32) && QT_VERSION >= QT_VERSION_CHECK(5, 7, 0)
+    QWinTaskbarButton *m_taskbarButton;
+    QWinTaskbarProgress *m_taskbarProgress;
+#endif
 
     static QVector<VLayoutPiece> PrepareDetailsForLayout(const QHash<quint32, VPiece> &details);
 
