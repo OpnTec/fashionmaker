@@ -66,6 +66,7 @@
 
 namespace
 {
+//---------------------------------------------------------------------------------------------------------------------
 bool CreateLayoutPath(const QString &path)
 {
     bool usedNotExistedDir = true;
@@ -78,6 +79,7 @@ bool CreateLayoutPath(const QString &path)
     return usedNotExistedDir;
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void RemoveLayoutPath(const QString &path, bool usedNotExistedDir)
 {
     if (usedNotExistedDir)
@@ -85,6 +87,27 @@ void RemoveLayoutPath(const QString &path, bool usedNotExistedDir)
         QDir dir(path);
         dir.rmpath(".");
     }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+Q_REQUIRED_RESULT QGraphicsItem *ExportOriginalDetail(VLayoutPiece piece, bool textAsPaths)
+{
+    if (piece.IsForceFlipping())
+    {
+        piece.Mirror();
+    }
+
+    QGraphicsItem *item = piece.GetItem(textAsPaths);
+
+    if (piece.IsForceFlipping())
+    {
+        item->setPos(piece.GetMx()-item->boundingRect().width(), piece.GetMy());
+    }
+    else
+    {
+        item->setPos(piece.GetMx(), piece.GetMy());
+    }
+    return item;
 }
 }
 
@@ -344,9 +367,7 @@ void MainWindowsNoGUI::ExportDetailsAsFlatLayout(const QVector<VLayoutPiece> &li
     QList<QGraphicsItem *> list;
     for (int i=0; i < listDetails.count(); ++i)
     {
-        QGraphicsItem *item = listDetails.at(i).GetItem(m_dialogSaveLayout->IsTextAsPaths());
-        item->setPos(listDetails.at(i).GetMx(), listDetails.at(i).GetMy());
-        list.append(item);
+        list.append(ExportOriginalDetail(listDetails.at(i), m_dialogSaveLayout->IsTextAsPaths()));
     }
 
     for (int i=0; i < list.size(); ++i)
@@ -464,9 +485,7 @@ void MainWindowsNoGUI::ExportDetailsAsApparelLayout(QVector<VLayoutPiece> listDe
     QList<QGraphicsItem *> list;
     for (int i=0; i < listDetails.count(); ++i)
     {
-        QGraphicsItem *item = listDetails.at(i).GetItem(m_dialogSaveLayout->IsTextAsPaths());
-        item->setPos(listDetails.at(i).GetMx(), listDetails.at(i).GetMy());
-        list.append(item);
+        list.append(ExportOriginalDetail(listDetails.at(i), m_dialogSaveLayout->IsTextAsPaths()));
     }
 
     for (int i=0; i < list.size(); ++i)

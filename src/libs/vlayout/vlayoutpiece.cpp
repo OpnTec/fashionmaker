@@ -778,6 +778,15 @@ void VLayoutPiece::Mirror(const QLineF &edge)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void VLayoutPiece::Mirror()
+{
+    QTransform m;
+    m.scale(-1, 1);
+    d->matrix *= m;
+    d->mirror = !d->mirror;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 int VLayoutPiece::DetailEdgesCount() const
 {
     return DetailPath().count();

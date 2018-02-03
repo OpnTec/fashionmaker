@@ -117,6 +117,7 @@ public:
     void Translate(qreal dx, qreal dy);
     void Rotate(const QPointF &originPoint, qreal degrees);
     void Mirror(const QLineF &edge);
+    void Mirror();
 
     int    DetailEdgesCount() const;
     int    LayoutEdgesCount() const;
