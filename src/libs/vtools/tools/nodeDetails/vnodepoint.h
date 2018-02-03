@@ -62,6 +62,8 @@ public:
 signals:
     void ShowOptions();
     void ToggleInLayout(bool checked);
+    void ToggleForbidFlipping(bool checked);
+    void ToggleForceFlipping(bool checked);
     void Delete();
     void ToggleExcludeState(quint32 id);
 public slots:

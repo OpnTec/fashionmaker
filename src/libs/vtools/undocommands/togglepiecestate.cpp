@@ -26,7 +26,7 @@
  **
  *************************************************************************/
 
-#include "togglepieceinlayout.h"
+#include "togglepiecestate.h"
 
 #include <QDomElement>
 #include <QHash>
@@ -42,26 +42,19 @@
 #include "vundocommand.h"
 
 //---------------------------------------------------------------------------------------------------------------------
-TogglePieceInLayout::TogglePieceInLayout(quint32 id, bool state, VContainer *data, VAbstractPattern *doc,
-                                           QUndoCommand *parent)
+TogglePieceState::TogglePieceState(quint32 id, bool state, VContainer *data, VAbstractPattern *doc,
+                                   QUndoCommand *parent)
     : VUndoCommand(QDomElement(), doc, parent),
       m_id(id),
       m_data(data),
-      m_oldState(m_data->DataPieces()->value(m_id).IsInLayout()),
+      m_oldState(not state),
       m_newState(state)
-{
-    setText(tr("detail in layout list"));
-}
+{}
 
 //---------------------------------------------------------------------------------------------------------------------
-TogglePieceInLayout::~TogglePieceInLayout()
+void TogglePieceState::undo()
 {
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void TogglePieceInLayout::undo()
-{
-    qCDebug(vUndo, "ToggleDetailInLayout::undo().");
+    qCDebug(vUndo, "TogglePieceState::undo().");
 
     if (m_newState != m_oldState)
     {
@@ -70,9 +63,9 @@ void TogglePieceInLayout::undo()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void TogglePieceInLayout::redo()
+void TogglePieceState::redo()
 {
-    qCDebug(vUndo, "ToggleDetailInLayout::redo().");
+    qCDebug(vUndo, "TogglePieceState::redo().");
 
     if (m_newState != m_oldState)
     {
@@ -81,21 +74,12 @@ void TogglePieceInLayout::redo()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-int TogglePieceInLayout::id() const
+TogglePieceInLayout::TogglePieceInLayout(quint32 id, bool state, VContainer *data, VAbstractPattern *doc,
+                                         QUndoCommand *parent)
+    : TogglePieceState(id, state, data, doc, parent)
 {
-    return static_cast<int>(UndoCommand::TogglePieceInLayout);
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-quint32 TogglePieceInLayout::getDetId() const
-{
-    return m_id;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-bool TogglePieceInLayout::getNewState() const
-{
-    return m_newState;
+    setText(tr("detail in layout list"));
+    m_oldState = m_data->DataPieces()->value(m_id).IsInLayout();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -117,6 +101,60 @@ void TogglePieceInLayout::Do(bool state)
         det.SetInLayout(state);
         m_data->UpdatePiece(m_id, det);
         emit UpdateList();
+    }
+    else
+    {
+        qDebug("Can't get detail by id = %u.", m_id);
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+TogglePieceForbidFlipping::TogglePieceForbidFlipping(quint32 id, bool state, VContainer *data, VAbstractPattern *doc,
+                                                     QUndoCommand *parent)
+    : TogglePieceState(id, state, data, doc, parent)
+{
+    setText(tr("forbid flipping"));
+    m_oldState = m_data->DataPieces()->value(m_id).IsForbidFlipping();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void TogglePieceForbidFlipping::Do(bool state)
+{
+    QDomElement detail = doc->elementById(m_id, VAbstractPattern::TagDetail);
+    if (detail.isElement())
+    {
+        doc->SetAttribute(detail, AttrForbidFlipping, state);
+
+        VPiece det = m_data->DataPieces()->value(m_id);
+        det.SetForbidFlipping(state);
+        m_data->UpdatePiece(m_id, det);
+    }
+    else
+    {
+        qDebug("Can't get detail by id = %u.", m_id);
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+TogglePieceForceFlipping::TogglePieceForceFlipping(quint32 id, bool state, VContainer *data, VAbstractPattern *doc,
+                                                   QUndoCommand *parent)
+    : TogglePieceState(id, state, data, doc, parent)
+{
+    setText(tr("force flipping"));
+    m_oldState = m_data->DataPieces()->value(m_id).IsForceFlipping();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void TogglePieceForceFlipping::Do(bool state)
+{
+    QDomElement detail = doc->elementById(m_id, VAbstractPattern::TagDetail);
+    if (detail.isElement())
+    {
+        doc->SetAttribute(detail, AttrForceFlipping, state);
+
+        VPiece det = m_data->DataPieces()->value(m_id);
+        det.SetForceFlipping(state);
+        m_data->UpdatePiece(m_id, det);
     }
     else
     {

@@ -76,8 +76,7 @@ public:
     static const QString TagPins;
     static const QString TagPlaceLabels;
 
-    static const QString AttrForbidFlipping;
-    static const QString AttrForceFlipping;
+
     static const QString AttrSeamAllowance;
     static const QString AttrHideMainPath;
     static const QString AttrSeamAllowanceBuiltIn;
@@ -163,6 +162,8 @@ protected:
 private slots:
     void ShowOptions();
     void ToggleInLayout(bool checked);
+    void ToggleForbidFlipping(bool checked);
+    void ToggleForceFlipping(bool checked);
     void DeleteFromMenu();
     void ToggleExcludeState(quint32 id);
 

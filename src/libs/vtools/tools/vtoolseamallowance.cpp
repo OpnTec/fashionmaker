@@ -48,7 +48,7 @@
 #include "../undocommands/deletepiece.h"
 #include "../undocommands/movepiece.h"
 #include "../undocommands/savepieceoptions.h"
-#include "../undocommands/togglepieceinlayout.h"
+#include "../undocommands/togglepiecestate.h"
 #include "../vwidgets/vmaingraphicsview.h"
 #include "../vwidgets/vnobrushscalepathitem.h"
 #include "../qmuparser/qmutokenparser.h"
@@ -70,8 +70,6 @@ const QString VToolSeamAllowance::TagIPaths      = QStringLiteral("iPaths");
 const QString VToolSeamAllowance::TagPins        = QStringLiteral("pins");
 const QString VToolSeamAllowance::TagPlaceLabels = QStringLiteral("placeLabels");
 
-const QString VToolSeamAllowance::AttrForbidFlipping       = QStringLiteral("forbidFlipping");
-const QString VToolSeamAllowance::AttrForceFlipping        = QStringLiteral("forceFlipping");
 const QString VToolSeamAllowance::AttrSeamAllowance        = QStringLiteral("seamAllowance");
 const QString VToolSeamAllowance::AttrHideMainPath         = QStringLiteral("hideMainPath");
 const QString VToolSeamAllowance::AttrSeamAllowanceBuiltIn = QStringLiteral("seamAllowanceBuiltIn");
@@ -1177,10 +1175,19 @@ void VToolSeamAllowance::contextMenuEvent(QGraphicsSceneContextMenuEvent *event)
     QMenu menu;
     QAction *actionOption = menu.addAction(QIcon::fromTheme("preferences-other"), tr("Options"));
 
+    const VPiece detail = VAbstractTool::data.GetPiece(m_id);
+
     QAction *inLayoutOption = menu.addAction(tr("In layout"));
     inLayoutOption->setCheckable(true);
-    const VPiece detail = VAbstractTool::data.GetPiece(m_id);
     inLayoutOption->setChecked(detail.IsInLayout());
+
+    QAction *forbidFlippingOption = menu.addAction(tr("Forbid flipping"));
+    forbidFlippingOption->setCheckable(true);
+    forbidFlippingOption->setChecked(detail.IsForbidFlipping());
+
+    QAction *forceFlippingOption = menu.addAction(tr("Force flipping"));
+    forceFlippingOption->setCheckable(true);
+    forceFlippingOption->setChecked(detail.IsForceFlipping());
 
     QAction *actionRemove = menu.addAction(QIcon::fromTheme("edit-delete"), tr("Delete"));
     _referens > 1 ? actionRemove->setEnabled(false) : actionRemove->setEnabled(true);
@@ -1193,6 +1200,14 @@ void VToolSeamAllowance::contextMenuEvent(QGraphicsSceneContextMenuEvent *event)
     else if (selectedAction == inLayoutOption)
     {
         ToggleInLayout(selectedAction->isChecked());
+    }
+    else if (selectedAction == forbidFlippingOption)
+    {
+        ToggleForbidFlipping(selectedAction->isChecked());
+    }
+    else if (selectedAction == forceFlippingOption)
+    {
+        ToggleForceFlipping(selectedAction->isChecked());
     }
     else if (selectedAction == actionRemove)
     {
@@ -1463,6 +1478,18 @@ void VToolSeamAllowance::ToggleInLayout(bool checked)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void VToolSeamAllowance::ToggleForbidFlipping(bool checked)
+{
+    qApp->getUndoStack()->push(new TogglePieceForbidFlipping(m_id, checked, &(VAbstractTool::data), doc));
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VToolSeamAllowance::ToggleForceFlipping(bool checked)
+{
+    qApp->getUndoStack()->push(new TogglePieceForceFlipping(m_id, checked, &(VAbstractTool::data), doc));
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 void VToolSeamAllowance::DeleteFromMenu()
 {
     DeleteToolWithConfirm();
@@ -1705,6 +1732,10 @@ void VToolSeamAllowance::InitNode(const VPieceNode &node, VMainGraphicsScene *sc
             {
                 connect(tool, &VNodePoint::ShowOptions, parent, &VToolSeamAllowance::ShowOptions, Qt::UniqueConnection);
                 connect(tool, &VNodePoint::ToggleInLayout, parent, &VToolSeamAllowance::ToggleInLayout,
+                        Qt::UniqueConnection);
+                connect(tool, &VNodePoint::ToggleForbidFlipping, parent, &VToolSeamAllowance::ToggleForbidFlipping,
+                        Qt::UniqueConnection);
+                connect(tool, &VNodePoint::ToggleForceFlipping, parent, &VToolSeamAllowance::ToggleForceFlipping,
                         Qt::UniqueConnection);
                 connect(tool, &VNodePoint::Delete, parent, &VToolSeamAllowance::DeleteFromMenu, Qt::UniqueConnection);
                 connect(tool, &VNodePoint::ToggleExcludeState, parent, &VToolSeamAllowance::ToggleExcludeState,

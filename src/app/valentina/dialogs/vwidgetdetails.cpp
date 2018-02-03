@@ -31,7 +31,7 @@
 #include "../ifc/xml/vabstractpattern.h"
 #include "../vpatterndb/vcontainer.h"
 #include "../vmisc/vabstractapplication.h"
-#include "../vtools/undocommands/togglepieceinlayout.h"
+#include "../vtools/undocommands/togglepiecestate.h"
 
 #include <QMenu>
 #include <QUndoStack>

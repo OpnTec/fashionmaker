@@ -288,10 +288,19 @@ void VNodePoint::contextMenuEvent(QGraphicsSceneContextMenuEvent *event)
 
         QAction *actionOption = menu.addAction(QIcon::fromTheme("preferences-other"), tr("Options"));
 
+        const VPiece detail = VAbstractTool::data.GetPiece(piece->getId());
+
         QAction *inLayoutOption = menu.addAction(tr("In layout"));
         inLayoutOption->setCheckable(true);
-        const VPiece detail = VAbstractTool::data.GetPiece(piece->getId());
         inLayoutOption->setChecked(detail.IsInLayout());
+
+        QAction *forbidFlippingOption = menu.addAction(tr("Forbid flipping"));
+        forbidFlippingOption->setCheckable(true);
+        forbidFlippingOption->setChecked(detail.IsForbidFlipping());
+
+        QAction *forceFlippingOption = menu.addAction(tr("Force flipping"));
+        forceFlippingOption->setCheckable(true);
+        forceFlippingOption->setChecked(detail.IsForceFlipping());
 
         QAction *actionRemove = menu.addAction(QIcon::fromTheme("edit-delete"), tr("Delete"));
         piece->referens() > 1 ? actionRemove->setEnabled(false) : actionRemove->setEnabled(true);
@@ -304,6 +313,14 @@ void VNodePoint::contextMenuEvent(QGraphicsSceneContextMenuEvent *event)
         else if (selectedAction == inLayoutOption)
         {
             emit ToggleInLayout(selectedAction->isChecked());
+        }
+        else if (selectedAction == forbidFlippingOption)
+        {
+            emit ToggleForbidFlipping(selectedAction->isChecked());
+        }
+        else if (selectedAction == forceFlippingOption)
+        {
+            emit ToggleForceFlipping(selectedAction->isChecked());
         }
         else if (selectedAction == actionRemove)
         {

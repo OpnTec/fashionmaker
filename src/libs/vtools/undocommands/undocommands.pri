@@ -22,12 +22,12 @@ HEADERS += \
     $$PWD/deletepiece.h \
     $$PWD/movepiece.h \
     $$PWD/savepieceoptions.h \
-    $$PWD/togglepieceinlayout.h \
     $$PWD/savepiecepathoptions.h \
     $$PWD/label/showlabel.h \
     $$PWD/label/showdoublelabel.h \
     $$PWD/label/operationshowlabel.h \
-    $$PWD/saveplacelabeloptions.h
+    $$PWD/saveplacelabeloptions.h \
+    $$PWD/togglepiecestate.h
 
 SOURCES += \
     $$PWD/addtocalc.cpp \
@@ -50,9 +50,9 @@ SOURCES += \
     $$PWD/deletepiece.cpp \
     $$PWD/movepiece.cpp \
     $$PWD/savepieceoptions.cpp \
-    $$PWD/togglepieceinlayout.cpp \
     $$PWD/savepiecepathoptions.cpp \
     $$PWD/label/showlabel.cpp \
     $$PWD/label/showdoublelabel.cpp \
     $$PWD/label/operationshowlabel.cpp \
-    $$PWD/saveplacelabeloptions.cpp
+    $$PWD/saveplacelabeloptions.cpp \
+    $$PWD/togglepiecestate.cpp
