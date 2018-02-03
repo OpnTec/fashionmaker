@@ -276,18 +276,22 @@ void VNodePoint::contextMenuEvent(QGraphicsSceneContextMenuEvent *event)
     if (VToolSeamAllowance *piece = qgraphicsitem_cast<VToolSeamAllowance *>(parentItem()))
     {
         QMenu menu;
+        QAction *actionShowLabel = menu.addAction(tr("Show label"));
+        actionShowLabel->setCheckable(true);
+        actionShowLabel->setChecked(VAbstractTool::data.GeometricObject<VPointF>(m_id)->IsShowLabel());
+
+        QAction *actionExclude = menu.addAction(tr("Exclude"));
+
+        QAction *separatorAct = new QAction(this);
+        separatorAct->setSeparator(true);
+        menu.addAction(separatorAct);
+
         QAction *actionOption = menu.addAction(QIcon::fromTheme("preferences-other"), tr("Options"));
 
         QAction *inLayoutOption = menu.addAction(tr("In layout"));
         inLayoutOption->setCheckable(true);
         const VPiece detail = VAbstractTool::data.GetPiece(piece->getId());
         inLayoutOption->setChecked(detail.IsInLayout());
-
-        QAction *actionShowLabel = menu.addAction(tr("Show label"));
-        actionShowLabel->setCheckable(true);
-        actionShowLabel->setChecked(VAbstractTool::data.GeometricObject<VPointF>(m_id)->IsShowLabel());
-
-        QAction *actionExclude = menu.addAction(tr("Exclude"));
 
         QAction *actionRemove = menu.addAction(QIcon::fromTheme("edit-delete"), tr("Delete"));
         piece->referens() > 1 ? actionRemove->setEnabled(false) : actionRemove->setEnabled(true);
