@@ -430,6 +430,9 @@ void DialogPiecePath::PassmarkChanged(int index)
     ui->radioButtonIntersection->setDisabled(true);
     ui->radioButtonIntersectionOnlyLeft->setDisabled(true);
     ui->radioButtonIntersectionOnlyRight->setDisabled(true);
+    ui->radioButtonIntersection2->setDisabled(true);
+    ui->radioButtonIntersection2OnlyLeft->setDisabled(true);
+    ui->radioButtonIntersection2OnlyRight->setDisabled(true);
 
     ui->groupBoxMarkType->blockSignals(true);
     ui->groupBoxAngleType->blockSignals(true);
@@ -476,6 +479,9 @@ void DialogPiecePath::PassmarkChanged(int index)
             ui->radioButtonIntersection->setEnabled(true);
             ui->radioButtonIntersectionOnlyLeft->setEnabled(true);
             ui->radioButtonIntersectionOnlyRight->setEnabled(true);
+            ui->radioButtonIntersection2->setEnabled(true);
+            ui->radioButtonIntersection2OnlyLeft->setEnabled(true);
+            ui->radioButtonIntersection2OnlyRight->setEnabled(true);
 
             switch(node.GetPassmarkAngleType())
             {
@@ -493,6 +499,15 @@ void DialogPiecePath::PassmarkChanged(int index)
                     break;
                 case PassmarkAngleType::IntersectionOnlyRight:
                     ui->radioButtonIntersectionOnlyRight->setChecked(true);
+                    break;
+                case PassmarkAngleType::Intersection2:
+                    ui->radioButtonIntersection2->setChecked(true);
+                    break;
+                case PassmarkAngleType::Intersection2OnlyLeft:
+                    ui->radioButtonIntersection2OnlyLeft->setChecked(true);
+                    break;
+                case PassmarkAngleType::Intersection2OnlyRight:
+                    ui->radioButtonIntersection2OnlyRight->setChecked(true);
                     break;
                 default:
                     break;
@@ -596,6 +611,18 @@ void DialogPiecePath::PassmarkAngleTypeChanged(int id)
             else if (id == ui->buttonGroupAngleType->id(ui->radioButtonIntersectionOnlyRight))
             {
                 angleType = PassmarkAngleType::IntersectionOnlyRight;
+            }
+            else if (id == ui->buttonGroupAngleType->id(ui->radioButtonIntersection2))
+            {
+                angleType = PassmarkAngleType::Intersection2;
+            }
+            else if (id == ui->buttonGroupAngleType->id(ui->radioButtonIntersection2OnlyLeft))
+            {
+                angleType = PassmarkAngleType::Intersection2OnlyLeft;
+            }
+            else if (id == ui->buttonGroupAngleType->id(ui->radioButtonIntersection2OnlyRight))
+            {
+                angleType = PassmarkAngleType::Intersection2OnlyRight;
             }
 
             rowNode.SetPassmarkAngleType(angleType);

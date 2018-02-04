@@ -205,7 +205,10 @@ QVector<QLineF> CreatePassmarkLines(PassmarkLineType lineType, PassmarkAngleType
     if (angleType == PassmarkAngleType::Straightforward
             || angleType == PassmarkAngleType::Intersection
             || angleType == PassmarkAngleType::IntersectionOnlyLeft
-            || angleType == PassmarkAngleType::IntersectionOnlyRight)
+            || angleType == PassmarkAngleType::IntersectionOnlyRight
+            || angleType == PassmarkAngleType::Intersection2
+            || angleType == PassmarkAngleType::Intersection2OnlyLeft
+            || angleType == PassmarkAngleType::Intersection2OnlyRight)
     {
         switch (lineType)
         {
@@ -1191,6 +1194,9 @@ QVector<QLineF> VPiece::CreatePassmark(const QVector<VPieceNode> &path, int prev
                 && path.at(passmarkIndex).GetPassmarkAngleType() != PassmarkAngleType::Intersection
                 && path.at(passmarkIndex).GetPassmarkAngleType() != PassmarkAngleType::IntersectionOnlyLeft
                 && path.at(passmarkIndex).GetPassmarkAngleType() != PassmarkAngleType::IntersectionOnlyRight
+                && path.at(passmarkIndex).GetPassmarkAngleType() != PassmarkAngleType::Intersection2
+                && path.at(passmarkIndex).GetPassmarkAngleType() != PassmarkAngleType::Intersection2OnlyLeft
+                && path.at(passmarkIndex).GetPassmarkAngleType() != PassmarkAngleType::Intersection2OnlyRight
                 && path.at(passmarkIndex).IsShowSecondPassmark())
         {
             lines += BuiltInSAPassmark(path, previousSAPoint, passmarkSAPoint, nextSAPoint, data, passmarkIndex);
@@ -1221,6 +1227,22 @@ QVector<QLineF> VPiece::SAPassmark(const QVector<VPieceNode> &path, VSAPoint &pr
     qreal passmarkLength = VAbstractPiece::MaxLocalSA(passmarkSAPoint, width) * passmarkFactor;
     passmarkLength = qMin(passmarkLength, maxPassmarkLength);
     const VPieceNode &node = path.at(passmarkIndex);
+
+    auto PassmarkIntersection = [&passmarksLines, passmarkSAPoint, node](QLineF line,
+            const QVector<QPointF> &seamPoints, qreal width)
+    {
+        line.setLength(line.length()*100); // Hope 100 is enough
+
+        const QVector<QPointF> intersections = VAbstractCurve::CurveIntersectLine(seamPoints, line);
+        if (not intersections.isEmpty())
+        {
+            line = QLineF(intersections.last(), passmarkSAPoint);
+            line.setLength(qMin(width * passmarkFactor, maxPassmarkLength));
+
+            passmarksLines += CreatePassmarkLines(node.GetPassmarkLineType(), node.GetPassmarkAngleType(), line);
+        }
+    };
+
     if (node.GetPassmarkAngleType() == PassmarkAngleType::Straightforward)
     {
         QLineF line = QLineF(seamPassmarkSAPoint, passmarkSAPoint);
@@ -1251,39 +1273,41 @@ QVector<QLineF> VPiece::SAPassmark(const QVector<VPieceNode> &path, VSAPoint &pr
                 || node.GetPassmarkAngleType() == PassmarkAngleType::IntersectionOnlyRight)
         {
             // first passmark
-            QLineF line(previousSAPoint, passmarkSAPoint);
-            line.setLength(line.length()*100); // Hope 100 is enough
-
-            const QVector<QPointF> intersections = VAbstractCurve::CurveIntersectLine(seamPoints, line);
-            if (intersections.isEmpty())
-            {
-                return QVector<QLineF>(); // Something wrong
-            }
-
-            line = QLineF(intersections.first(), passmarkSAPoint);
-            line.setLength(qMin(passmarkSAPoint.GetSAAfter(width) * passmarkFactor, maxPassmarkLength));
-
-            passmarksLines += CreatePassmarkLines(node.GetPassmarkLineType(), node.GetPassmarkAngleType(), line);
+            PassmarkIntersection(QLineF(previousSAPoint, passmarkSAPoint), seamPoints,
+                                 passmarkSAPoint.GetSAAfter(width));
         }
 
         if (node.GetPassmarkAngleType() == PassmarkAngleType::Intersection
                 || node.GetPassmarkAngleType() == PassmarkAngleType::IntersectionOnlyLeft)
         {
             // second passmark
-            QLineF line(nextSAPoint, passmarkSAPoint);
-            line.setLength(line.length()*100); // Hope 100 is enough
+            PassmarkIntersection(QLineF(nextSAPoint, passmarkSAPoint), seamPoints,
+                                 passmarkSAPoint.GetSABefore(width));
+        }
+    }
+    else if (node.GetPassmarkAngleType() == PassmarkAngleType::Intersection2
+             || node.GetPassmarkAngleType() == PassmarkAngleType::Intersection2OnlyLeft
+             || node.GetPassmarkAngleType() == PassmarkAngleType::Intersection2OnlyRight)
+    {
+        QVector<QPointF> seamPoints;
+        seamAllowance.isEmpty() ? seamPoints = SeamAllowancePoints(data) : seamPoints = seamAllowance;
 
-            const QVector<QPointF> intersections = VAbstractCurve::CurveIntersectLine(seamPoints, line);
+        if (node.GetPassmarkAngleType() == PassmarkAngleType::Intersection2
+                || node.GetPassmarkAngleType() == PassmarkAngleType::Intersection2OnlyRight)
+        {
+            // first passmark
+            QLineF line(passmarkSAPoint, nextSAPoint);
+            line.setAngle(line.angle()+90);
+            PassmarkIntersection(line, seamPoints, passmarkSAPoint.GetSAAfter(width));
+        }
 
-            if (intersections.isEmpty())
-            {
-                return QVector<QLineF>(); // Something wrong
-            }
-
-            line = QLineF(intersections.last(), passmarkSAPoint);
-            line.setLength(qMin(passmarkSAPoint.GetSABefore(width) * passmarkFactor, maxPassmarkLength));
-
-            passmarksLines += CreatePassmarkLines(node.GetPassmarkLineType(), node.GetPassmarkAngleType(), line);
+        if (node.GetPassmarkAngleType() == PassmarkAngleType::Intersection2
+                || node.GetPassmarkAngleType() == PassmarkAngleType::Intersection2OnlyLeft)
+        {
+            // second passmark
+            QLineF line(passmarkSAPoint, previousSAPoint);
+            line.setAngle(line.angle()-90);
+            PassmarkIntersection(line, seamPoints, passmarkSAPoint.GetSABefore(width));
         }
     }
 

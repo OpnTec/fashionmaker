@@ -674,6 +674,9 @@ const QString strBisector              = QStringLiteral("bisector");
 const QString strIntersection          = QStringLiteral("intersection");
 const QString strIntersectionOnlyLeft  = QStringLiteral("intersectionLeft");
 const QString strIntersectionOnlyRight = QStringLiteral("intersectionRight");
+const QString strIntersection2          = QStringLiteral("intersection2");
+const QString strIntersection2OnlyLeft  = QStringLiteral("intersection2Left");
+const QString strIntersection2OnlyRight = QStringLiteral("intersection2Right");
 
 //---------------------------------------------------------------------------------------------------------------------
 QString PassmarkAngleTypeToString(PassmarkAngleType type)
@@ -690,6 +693,12 @@ QString PassmarkAngleTypeToString(PassmarkAngleType type)
             return strIntersectionOnlyLeft;
         case PassmarkAngleType::IntersectionOnlyRight:
             return strIntersectionOnlyRight;
+        case PassmarkAngleType::Intersection2:
+            return strIntersection2;
+        case PassmarkAngleType::Intersection2OnlyLeft:
+            return strIntersection2OnlyLeft;
+        case PassmarkAngleType::Intersection2OnlyRight:
+            return strIntersection2OnlyRight;
         default:
             break;
     }
@@ -704,7 +713,10 @@ PassmarkAngleType StringToPassmarkAngleType(const QString &value)
                                              << strBisector
                                              << strIntersection
                                              << strIntersectionOnlyLeft
-                                             << strIntersectionOnlyRight;
+                                             << strIntersectionOnlyRight
+                                             << strIntersection2
+                                             << strIntersection2OnlyLeft
+                                             << strIntersection2OnlyRight;
 
     switch(values.indexOf(value))
     {
@@ -718,6 +730,12 @@ PassmarkAngleType StringToPassmarkAngleType(const QString &value)
             return PassmarkAngleType::IntersectionOnlyLeft;
         case 4:
             return PassmarkAngleType::IntersectionOnlyRight;
+        case 5:
+            return PassmarkAngleType::Intersection2;
+        case 6:
+            return PassmarkAngleType::Intersection2OnlyLeft;
+        case 7:
+            return PassmarkAngleType::Intersection2OnlyRight;
         default:
             break;
     }

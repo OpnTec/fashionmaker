@@ -992,6 +992,9 @@ void DialogSeamAllowance::PassmarkChanged(int index)
     uiTabPassmarks->radioButtonIntersection->setDisabled(true);
     uiTabPassmarks->radioButtonIntersectionOnlyLeft->setDisabled(true);
     uiTabPassmarks->radioButtonIntersectionOnlyRight->setDisabled(true);
+    uiTabPassmarks->radioButtonIntersection2->setDisabled(true);
+    uiTabPassmarks->radioButtonIntersection2OnlyLeft->setDisabled(true);
+    uiTabPassmarks->radioButtonIntersection2OnlyRight->setDisabled(true);
 
     uiTabPassmarks->checkBoxShowSecondPassmark->setDisabled(true);
     uiTabPassmarks->checkBoxShowSecondPassmark->blockSignals(true);
@@ -1041,6 +1044,9 @@ void DialogSeamAllowance::PassmarkChanged(int index)
             uiTabPassmarks->radioButtonIntersection->setEnabled(true);
             uiTabPassmarks->radioButtonIntersectionOnlyLeft->setEnabled(true);
             uiTabPassmarks->radioButtonIntersectionOnlyRight->setEnabled(true);
+            uiTabPassmarks->radioButtonIntersection2->setEnabled(true);
+            uiTabPassmarks->radioButtonIntersection2OnlyLeft->setEnabled(true);
+            uiTabPassmarks->radioButtonIntersection2OnlyRight->setEnabled(true);
 
             switch(node.GetPassmarkAngleType())
             {
@@ -1058,6 +1064,15 @@ void DialogSeamAllowance::PassmarkChanged(int index)
                     break;
                 case PassmarkAngleType::IntersectionOnlyRight:
                     uiTabPassmarks->radioButtonIntersectionOnlyRight->setChecked(true);
+                    break;
+                case PassmarkAngleType::Intersection2:
+                    uiTabPassmarks->radioButtonIntersection2->setChecked(true);
+                    break;
+                case PassmarkAngleType::Intersection2OnlyLeft:
+                    uiTabPassmarks->radioButtonIntersection2OnlyLeft->setChecked(true);
+                    break;
+                case PassmarkAngleType::Intersection2OnlyRight:
+                    uiTabPassmarks->radioButtonIntersection2OnlyRight->setChecked(true);
                     break;
                 default:
                     break;
@@ -1454,6 +1469,18 @@ void DialogSeamAllowance::PassmarkAngleTypeChanged(int id)
             else if (id == uiTabPassmarks->buttonGroupAngleType->id(uiTabPassmarks->radioButtonIntersectionOnlyRight))
             {
                 angleType = PassmarkAngleType::IntersectionOnlyRight;
+            }
+            else if (id == uiTabPassmarks->buttonGroupAngleType->id(uiTabPassmarks->radioButtonIntersection2))
+            {
+                angleType = PassmarkAngleType::Intersection2;
+            }
+            else if (id == uiTabPassmarks->buttonGroupAngleType->id(uiTabPassmarks->radioButtonIntersection2OnlyLeft))
+            {
+                angleType = PassmarkAngleType::Intersection2OnlyLeft;
+            }
+            else if (id == uiTabPassmarks->buttonGroupAngleType->id(uiTabPassmarks->radioButtonIntersection2OnlyRight))
+            {
+                angleType = PassmarkAngleType::Intersection2OnlyRight;
             }
 
             rowNode.SetPassmarkAngleType(angleType);
