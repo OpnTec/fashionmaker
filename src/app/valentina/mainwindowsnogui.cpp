@@ -375,16 +375,19 @@ void MainWindowsNoGUI::ExportDetailsAsFlatLayout(const QVector<VLayoutPiece> &li
     for (int i=0; i < listDetails.count(); ++i)
     {
         VLayoutPiece piece = listDetails.at(i);
+        QGraphicsItem *item = piece.GetItem(m_dialogSaveLayout->IsTextAsPaths());
+        qreal diff = 0;
         if (piece.IsForceFlipping())
         {
+            const qreal x = item->boundingRect().x();
             piece.Mirror();
+            item = piece.GetItem(m_dialogSaveLayout->IsTextAsPaths());
+            diff = item->boundingRect().x() - x;
         }
 
-        QGraphicsItem *item = piece.GetItem(m_dialogSaveLayout->IsTextAsPaths());
-
         if (piece.IsForceFlipping())
         {
-            item->setPos(piece.GetMx()-item->boundingRect().width(), piece.GetMy());
+            item->setPos(piece.GetMx()-diff, piece.GetMy());
         }
         else
         {
@@ -509,18 +512,21 @@ void MainWindowsNoGUI::ExportDetailsAsApparelLayout(QVector<VLayoutPiece> listDe
     for (int i=0; i < listDetails.count(); ++i)
     {
         VLayoutPiece piece = listDetails.at(i);
+        QGraphicsItem *item = piece.GetItem(m_dialogSaveLayout->IsTextAsPaths());
+        qreal diff = 0;
         if (piece.IsForceFlipping())
         {
+            const qreal x = item->boundingRect().x();
             piece.Mirror();
+            item = piece.GetItem(m_dialogSaveLayout->IsTextAsPaths());
+            diff = item->boundingRect().x() - x;
         }
-
-        QGraphicsItem *item = piece.GetItem(m_dialogSaveLayout->IsTextAsPaths());
 
         QTransform moveMatrix = piece.GetMatrix();
         if (piece.IsForceFlipping())
         {
-            item->setPos(piece.GetMx()-item->boundingRect().width(), piece.GetMy());
-            moveMatrix = moveMatrix.translate(-piece.GetMx()+item->boundingRect().width(), piece.GetMy());
+            item->setPos(piece.GetMx()-diff, piece.GetMy());
+            moveMatrix = moveMatrix.translate(-piece.GetMx()+diff, piece.GetMy());
         }
         else
         {
@@ -554,7 +560,14 @@ void MainWindowsNoGUI::ExportDetailsAsApparelLayout(QVector<VLayoutPiece> listDe
     for (int i=0; i < listDetails.count(); ++i)
     {
         QTransform moveMatrix = listDetails.at(i).GetMatrix();
-        moveMatrix = moveMatrix.translate(-mx, -my);
+        if (listDetails.at(i).IsForceFlipping())
+        {
+            moveMatrix = moveMatrix.translate(mx, -my);
+        }
+        else
+        {
+            moveMatrix = moveMatrix.translate(-mx, -my);
+        }
         listDetails[i].SetMatrix(moveMatrix);
     }
 
