@@ -93,27 +93,6 @@ void RemoveLayoutPath(const QString &path, bool usedNotExistedDir)
         dir.rmpath(".");
     }
 }
-
-//---------------------------------------------------------------------------------------------------------------------
-Q_REQUIRED_RESULT QGraphicsItem *ExportOriginalDetail(VLayoutPiece piece, bool textAsPaths)
-{
-    if (piece.IsForceFlipping())
-    {
-        piece.Mirror();
-    }
-
-    QGraphicsItem *item = piece.GetItem(textAsPaths);
-
-    if (piece.IsForceFlipping())
-    {
-        item->setPos(piece.GetMx()-item->boundingRect().width(), piece.GetMy());
-    }
-    else
-    {
-        item->setPos(piece.GetMx(), piece.GetMy());
-    }
-    return item;
-}
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -395,7 +374,23 @@ void MainWindowsNoGUI::ExportDetailsAsFlatLayout(const QVector<VLayoutPiece> &li
     QList<QGraphicsItem *> list;
     for (int i=0; i < listDetails.count(); ++i)
     {
-        list.append(ExportOriginalDetail(listDetails.at(i), m_dialogSaveLayout->IsTextAsPaths()));
+        VLayoutPiece piece = listDetails.at(i);
+        if (piece.IsForceFlipping())
+        {
+            piece.Mirror();
+        }
+
+        QGraphicsItem *item = piece.GetItem(m_dialogSaveLayout->IsTextAsPaths());
+
+        if (piece.IsForceFlipping())
+        {
+            item->setPos(piece.GetMx()-item->boundingRect().width(), piece.GetMy());
+        }
+        else
+        {
+            item->setPos(piece.GetMx(), piece.GetMy());
+        }
+        list.append(item);
     }
 
     for (int i=0; i < list.size(); ++i)
@@ -513,7 +508,27 @@ void MainWindowsNoGUI::ExportDetailsAsApparelLayout(QVector<VLayoutPiece> listDe
     QList<QGraphicsItem *> list;
     for (int i=0; i < listDetails.count(); ++i)
     {
-        list.append(ExportOriginalDetail(listDetails.at(i), m_dialogSaveLayout->IsTextAsPaths()));
+        VLayoutPiece piece = listDetails.at(i);
+        if (piece.IsForceFlipping())
+        {
+            piece.Mirror();
+        }
+
+        QGraphicsItem *item = piece.GetItem(m_dialogSaveLayout->IsTextAsPaths());
+
+        QTransform moveMatrix = piece.GetMatrix();
+        if (piece.IsForceFlipping())
+        {
+            item->setPos(piece.GetMx()-item->boundingRect().width(), piece.GetMy());
+            moveMatrix = moveMatrix.translate(-piece.GetMx()+item->boundingRect().width(), piece.GetMy());
+        }
+        else
+        {
+            item->setPos(piece.GetMx(), piece.GetMy());
+            moveMatrix = moveMatrix.translate(piece.GetMx(), piece.GetMy());
+        }
+        listDetails[i].SetMatrix(moveMatrix);
+        list.append(item);
     }
 
     for (int i=0; i < list.size(); ++i)
@@ -538,8 +553,7 @@ void MainWindowsNoGUI::ExportDetailsAsApparelLayout(QVector<VLayoutPiece> listDe
 
     for (int i=0; i < listDetails.count(); ++i)
     {
-        QTransform moveMatrix = listDetails[i].GetMatrix();
-        moveMatrix = moveMatrix.translate(listDetails.at(i).GetMx(), listDetails.at(i).GetMy());
+        QTransform moveMatrix = listDetails.at(i).GetMatrix();
         moveMatrix = moveMatrix.translate(-mx, -my);
         listDetails[i].SetMatrix(moveMatrix);
     }
