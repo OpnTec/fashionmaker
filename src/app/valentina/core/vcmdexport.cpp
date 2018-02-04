@@ -163,7 +163,7 @@ void VCommandLine::InitOptions(VCommandLineOptions &options, QMap<QString, int> 
     optionsIndex.insert(LONG_OPTION_PAGEUNITS, index++);
     options.append(new QCommandLineOption(QStringList() << SINGLE_OPTION_PAGEUNITS << LONG_OPTION_PAGEUNITS,
                                           translate("VCommandLine",
-                                                    "Page measure units (export mode). Valid values: %2.")
+                                                    "Page measure units (export mode). Valid values: %1.")
                                                     .arg(VDomDocument::UnitsHelpString()),
                                           translate("VCommandLine", "The measure unit")));
 

@@ -4486,6 +4486,18 @@ Apply settings anyway?</source>
         <source>Control visibility</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Intersection 2</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Intersection 2 (only left)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Intersection 2 (only right)</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>DialogPin</name>
@@ -9625,7 +9637,7 @@ Do you want to save your changes?</translation>
     </message>
     <message>
         <source>Comma-Separated Values</source>
-        <translation type="vanished">Comma-Separated Values</translation>
+        <translation>Comma-Separated Values</translation>
     </message>
     <message>
         <source>Customer&apos;s name</source>
@@ -9709,6 +9721,50 @@ Do you want to save your changes?</translation>
     </message>
     <message>
         <source>Save…</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Import from CSV</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Measurement name in is empty.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Merasurement &apos;%1&apos; doesn&apos;t match regex pattern.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Merasurement &apos;%1&apos; already used in file.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Measurement &apos;%1&apos; is not one of known measurements.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Individual measurements require at least 2 columns.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Error in row %1.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Multisize measurements require at least 4 columns.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Cannot convert base size value to double in column 2.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Cannot convert height increase value to double in column 3.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Cannot convert size increase value to double in column 4.</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -10014,6 +10070,18 @@ Do you want to save your changes?</translation>
     </message>
     <message>
         <source>Intersection (only right)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Intersection 2</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Intersection 2 (only left)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Intersection 2 (only right)</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -10398,6 +10466,20 @@ Do you want to save your changes?</translation>
     <message>
         <source>detail in layout list</source>
         <translation type="vanished">detail in layout list</translation>
+    </message>
+</context>
+<context>
+    <name>TogglePieceForbidFlipping</name>
+    <message>
+        <source>forbid flipping</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>TogglePieceForceFlipping</name>
+    <message>
+        <source>force flipping</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -11083,10 +11165,6 @@ Do you want to save your changes?</translation>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Page measure units (export mode). Valid values: %2.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Ignore printer margins (export mode). Use if need full paper space. In case of later printing you must account for the margins himself.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -11148,6 +11226,10 @@ Do you want to save your changes?</translation>
     </message>
     <message>
         <source>Tiled bottom margin must be used together with page units.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Page measure units (export mode). Valid values: %1.</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -11370,6 +11452,14 @@ Do you want to save your changes?</translation>
     <message>
         <source>Delete</source>
         <translation type="unfinished">Delete</translation>
+    </message>
+    <message>
+        <source>Forbid flipping</source>
+        <translation type="unfinished">Forbid flipping</translation>
+    </message>
+    <message>
+        <source>Force flipping</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -12666,6 +12756,14 @@ Do you want to save your changes?</translation>
     </message>
     <message>
         <source>multi deletion</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Forbid flipping</source>
+        <translation type="unfinished">Forbid flipping</translation>
+    </message>
+    <message>
+        <source>Force flipping</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
