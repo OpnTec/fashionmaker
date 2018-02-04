@@ -699,7 +699,9 @@ void DialogFinalMeasurements::UpdateTree()
 {
     int row = ui->tableWidget->currentRow();
     FillFinalMeasurements();
+    ui->tableWidget->blockSignals(true);
     ui->tableWidget->selectRow(row);
+    ui->tableWidget->blockSignals(false);
 
     m_search->RefreshList(ui->lineEditFind->text());
 }
