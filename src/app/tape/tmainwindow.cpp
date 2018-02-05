@@ -3163,12 +3163,13 @@ void TMainWindow::ImportIndividualMeasurements(const QxtCsvModel &csv)
             measurement.name = CheckMName(qApp->TrVars()->MFromUser(csv.text(i, 0).simplified()));
             measurement.value = VTranslateVars::TryFormulaFromUser(csv.text(i, 1), qApp->Settings()->GetOsSeparator());
 
-            if (columns >= 3)
+            const bool custom = csv.text(i, 0).simplified().startsWith(CustomMSign);
+            if (columns >= 3 && not custom)
             {
                 measurement.fullName = csv.text(i, 2).simplified();
             }
 
-            if (columns >= 4)
+            if (columns >= 4 && not custom)
             {
                 measurement.description = csv.text(i, 3).simplified();
             }
@@ -3262,12 +3263,13 @@ void TMainWindow::ImportMultisizeMeasurements(const QxtCsvModel &csv)
             measurement.sizeIncrease = ConverToDouble(csv.text(i, 3),
                                                       tr("Cannot convert size increase value to double in column 4."));
 
-            if (columns >= 5)
+            const bool custom = csv.text(i, 0).simplified().startsWith(CustomMSign);
+            if (columns >= 5 && not custom)
             {
                 measurement.fullName = csv.text(i, 4).simplified();
             }
 
-            if (columns >= 6)
+            if (columns >= 6 && not custom)
             {
                 measurement.description = csv.text(i, 5).simplified();
             }
