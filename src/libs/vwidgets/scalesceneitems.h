@@ -49,10 +49,11 @@ public:
     bool IsBoldLine() const;
     void SetBoldLine(bool bold);
 
+protected:
+    bool m_isBoldLine;
+
 private:
     Q_DISABLE_COPY(VScaledLine)
-
-    bool m_isBoldLine;
 };
 
 class VScaledEllipse : public QGraphicsEllipseItem

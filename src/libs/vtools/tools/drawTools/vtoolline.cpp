@@ -62,13 +62,14 @@ template <class T> class QSharedPointer;
  */
 VToolLine::VToolLine(const VToolLineInitData &initData, QGraphicsItem *parent)
     :VDrawTool(initData.doc, initData.data, initData.id),
-      QGraphicsLineItem(parent),
+      VScaledLine(parent),
       firstPoint(initData.firstPoint),
       secondPoint(initData.secondPoint),
       lineColor(initData.lineColor),
       m_isHovered(false),
       m_acceptHoverEvents(true)
 {
+    m_isBoldLine = false;
     this->m_lineType = initData.typeLine;
     //Line
     RefreshGeometry();
@@ -187,7 +188,7 @@ void VToolLine::paint(QPainter *painter, const QStyleOptionGraphicsItem *option,
 
     setPen(QPen(CorrectColor(this, lineColor), width, LineStyleToPenStyle(m_lineType)));
 
-    PaintWithFixItemHighlightSelected<QGraphicsLineItem>(this, painter, option, widget);
+    PaintWithFixItemHighlightSelected<VScaledLine>(this, painter, option, widget);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -291,8 +292,9 @@ void VToolLine::hoverEnterEvent(QGraphicsSceneHoverEvent *event)
     if (m_acceptHoverEvents)
     {
         m_isHovered = true;
+        m_isBoldLine = true;
         setToolTip(MakeToolTip());
-        QGraphicsLineItem::hoverEnterEvent(event);
+        VScaledLine::hoverEnterEvent(event);
     }
     else
     {
@@ -310,7 +312,8 @@ void VToolLine::hoverLeaveEvent(QGraphicsSceneHoverEvent *event)
     if (m_acceptHoverEvents && vis.isNull())
     {
         m_isHovered = false;
-        QGraphicsLineItem::hoverLeaveEvent(event);
+        m_isBoldLine = false;
+        VScaledLine::hoverLeaveEvent(event);
     }
 }
 

@@ -48,8 +48,9 @@ VScaledLine::VScaledLine(const QLineF &line, QGraphicsItem *parent)
 void VScaledLine::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
 {
     QPen lPen = pen();
-    lPen.setWidthF(ScaleWidth(m_isBoldLine ? qApp->Settings()->WidthMainLine() : qApp->Settings()->WidthHairLine(),
-                              SceneScale(scene())));
+    const qreal width = ScaleWidth(m_isBoldLine ? qApp->Settings()->WidthMainLine() : qApp->Settings()->WidthHairLine(),
+                                   SceneScale(scene()));
+    lPen.setWidthF(qRound(width*100.)/100.);
     setPen(lPen);
 
     PaintWithFixItemHighlightSelected<QGraphicsLineItem>(this, painter, option, widget);

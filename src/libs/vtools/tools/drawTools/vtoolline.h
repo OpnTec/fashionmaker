@@ -31,8 +31,6 @@
 
 #include <qcompilerdetection.h>
 #include <QDomElement>
-#include <QGraphicsItem>
-#include <QGraphicsLineItem>
 #include <QMetaObject>
 #include <QObject>
 #include <QString>
@@ -42,6 +40,7 @@
 #include "../ifc/xml/vabstractpattern.h"
 #include "../vmisc/def.h"
 #include "vdrawtool.h"
+#include "../vwidgets/scalesceneitems.h"
 
 template <class T> class QSharedPointer;
 
@@ -64,7 +63,7 @@ struct VToolLineInitData : VAbstractToolInitData
 /**
  * @brief The VToolLine class tool for creation line.
  */
-class VToolLine: public VDrawTool, public QGraphicsLineItem
+class VToolLine: public VDrawTool, public VScaledLine
 {
     Q_OBJECT
 public:
