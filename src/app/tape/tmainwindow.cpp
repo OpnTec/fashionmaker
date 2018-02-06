@@ -981,6 +981,7 @@ void TMainWindow::ImportDataFromCSV()
     dialog.SetWithHeader(qApp->Settings()->GetCSVWithHeader());
     dialog.SetSelectedMib(qApp->Settings()->GetCSVCodec());
     dialog.SetSeparator(qApp->Settings()->GetCSVSeparator());
+    dialog.ShowFilePreview(fileName);
 
     if (dialog.exec() == QDialog::Accepted)
     {
@@ -3159,17 +3160,24 @@ void TMainWindow::ImportIndividualMeasurements(const QxtCsvModel &csv)
     {
         try
         {
+            const QString name = csv.text(i, 0).simplified();
+            if (name.isEmpty())
+            {
+                ShowError(tr("Error in row %1. Measurement name is empty.").arg(i));
+                continue;
+            }
+
             IndividualMeasurement measurement;
-            measurement.name = CheckMName(qApp->TrVars()->MFromUser(csv.text(i, 0).simplified()));
+            measurement.name = CheckMName(qApp->TrVars()->MFromUser(name));
             measurement.value = VTranslateVars::TryFormulaFromUser(csv.text(i, 1), qApp->Settings()->GetOsSeparator());
 
             const bool custom = csv.text(i, 0).simplified().startsWith(CustomMSign);
-            if (columns >= 3 && not custom)
+            if (columns > 2 && custom)
             {
                 measurement.fullName = csv.text(i, 2).simplified();
             }
 
-            if (columns >= 4 && not custom)
+            if (columns > 3 && custom)
             {
                 measurement.description = csv.text(i, 3).simplified();
             }
@@ -3251,8 +3259,15 @@ void TMainWindow::ImportMultisizeMeasurements(const QxtCsvModel &csv)
     {
         try
         {
+            const QString name = csv.text(i, 0).simplified();
+            if (name.isEmpty())
+            {
+                ShowError(tr("Error in row %1. Measurement name is empty.").arg(i));
+                continue;
+            }
+
             MultisizeMeasurement measurement;
-            measurement.name = CheckMName(qApp->TrVars()->MFromUser(csv.text(i, 0).simplified()));
+            measurement.name = CheckMName(qApp->TrVars()->MFromUser(name));
 
             measurement.base = ConverToDouble(csv.text(i, 1),
                                               tr("Cannot convert base size value to double in column 2."));
@@ -3264,12 +3279,12 @@ void TMainWindow::ImportMultisizeMeasurements(const QxtCsvModel &csv)
                                                       tr("Cannot convert size increase value to double in column 4."));
 
             const bool custom = csv.text(i, 0).simplified().startsWith(CustomMSign);
-            if (columns >= 5 && not custom)
+            if (columns > 4 && custom)
             {
                 measurement.fullName = csv.text(i, 4).simplified();
             }
 
-            if (columns >= 6 && not custom)
+            if (columns > 5 && custom)
             {
                 measurement.description = csv.text(i, 5).simplified();
             }

@@ -53,6 +53,8 @@ public:
     QChar GetSeparator() const;
     void  SetSeparator(const QChar &separator);
 
+    void ShowFilePreview(const QString &fileName);
+
     static QString MakeHelpCodecsList();
     static QString MakeHelpSeparatorList();
 
@@ -64,6 +66,9 @@ private:
     Q_DISABLE_COPY(DialogExportToCSV)
     Ui::DialogExportToCSV *ui;
     bool isInitialized;
+    QString m_fileName;
+
+    void ShowPreview();
 };
 
 #endif // DIALOGEXPORTTOCSV_H

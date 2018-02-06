@@ -9,25 +9,25 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>333</width>
-    <height>292</height>
+    <width>326</width>
+    <height>383</height>
    </rect>
   </property>
   <property name="windowTitle">
-   <string>Export options</string>
+   <string>Options</string>
   </property>
   <property name="windowIcon">
-   <iconset resource="../share/resources/tapeicon.qrc">
+   <iconset resource="../../../app/tape/share/resources/tapeicon.qrc">
     <normaloff>:/tapeicon/64x64/logo.png</normaloff>:/tapeicon/64x64/logo.png</iconset>
   </property>
   <property name="modal">
    <bool>true</bool>
   </property>
-  <layout class="QVBoxLayout" name="verticalLayout_3">
+  <layout class="QVBoxLayout" name="verticalLayout_4">
    <item>
-    <widget class="QGroupBox" name="groupBoxExport">
+    <widget class="QGroupBox" name="groupBoxGlobal">
      <property name="title">
-      <string>Export</string>
+      <string>Global</string>
      </property>
      <layout class="QVBoxLayout" name="verticalLayout">
       <item>
@@ -53,7 +53,27 @@
          </widget>
         </item>
         <item>
-         <widget class="QComboBox" name="comboBoxCodec"/>
+         <widget class="QComboBox" name="comboBoxCodec">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <spacer name="horizontalSpacer">
+          <property name="orientation">
+           <enum>Qt::Horizontal</enum>
+          </property>
+          <property name="sizeHint" stdset="0">
+           <size>
+            <width>40</width>
+            <height>20</height>
+           </size>
+          </property>
+         </spacer>
         </item>
        </layout>
       </item>
@@ -62,12 +82,36 @@
    </item>
    <item>
     <widget class="QGroupBox" name="groupBoxSeparator">
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+       <horstretch>0</horstretch>
+       <verstretch>0</verstretch>
+      </sizepolicy>
+     </property>
      <property name="title">
       <string>Separator</string>
      </property>
-     <layout class="QVBoxLayout" name="verticalLayout_2">
-      <item>
+     <property name="alignment">
+      <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+     </property>
+     <layout class="QFormLayout" name="formLayout">
+      <property name="fieldGrowthPolicy">
+       <enum>QFormLayout::ExpandingFieldsGrow</enum>
+      </property>
+      <property name="labelAlignment">
+       <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+      </property>
+      <property name="formAlignment">
+       <set>Qt::AlignHCenter|Qt::AlignTop</set>
+      </property>
+      <item row="0" column="0">
        <widget class="QRadioButton" name="radioButtonTab">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
         <property name="text">
          <string>Tab</string>
         </property>
@@ -76,8 +120,30 @@
         </attribute>
        </widget>
       </item>
-      <item>
+      <item row="2" column="0">
+       <widget class="QRadioButton" name="radioButtonSemicolon">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
+        <property name="text">
+         <string>Semicolon</string>
+        </property>
+        <attribute name="buttonGroup">
+         <string notr="true">buttonGroup</string>
+        </attribute>
+       </widget>
+      </item>
+      <item row="0" column="1">
        <widget class="QRadioButton" name="radioButtonComma">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
         <property name="text">
          <string>Comma</string>
         </property>
@@ -89,23 +155,53 @@
         </attribute>
        </widget>
       </item>
-      <item>
-       <widget class="QRadioButton" name="radioButtonSemicolon">
+      <item row="2" column="1">
+       <widget class="QRadioButton" name="radioButtonSpace">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
         <property name="text">
-         <string>Semicolon</string>
+         <string>Space</string>
         </property>
         <attribute name="buttonGroup">
          <string notr="true">buttonGroup</string>
         </attribute>
        </widget>
       </item>
+     </layout>
+    </widget>
+   </item>
+   <item>
+    <widget class="QGroupBox" name="groupBoxPreview">
+     <property name="title">
+      <string>Preview</string>
+     </property>
+     <layout class="QVBoxLayout" name="verticalLayout_2">
       <item>
-       <widget class="QRadioButton" name="radioButtonSpace">
-        <property name="text">
-         <string>Space</string>
+       <widget class="QTableWidget" name="tableWidget">
+        <property name="editTriggers">
+         <set>QAbstractItemView::NoEditTriggers</set>
         </property>
-        <attribute name="buttonGroup">
-         <string notr="true">buttonGroup</string>
+        <property name="tabKeyNavigation">
+         <bool>false</bool>
+        </property>
+        <property name="showDropIndicator" stdset="0">
+         <bool>false</bool>
+        </property>
+        <property name="dragDropOverwriteMode">
+         <bool>false</bool>
+        </property>
+        <property name="alternatingRowColors">
+         <bool>true</bool>
+        </property>
+        <property name="selectionMode">
+         <enum>QAbstractItemView::NoSelection</enum>
+        </property>
+        <attribute name="verticalHeaderVisible">
+         <bool>false</bool>
         </attribute>
        </widget>
       </item>
@@ -125,7 +221,7 @@
   </layout>
  </widget>
  <resources>
-  <include location="../share/resources/tapeicon.qrc"/>
+  <include location="../../../app/tape/share/resources/tapeicon.qrc"/>
  </resources>
  <connections>
   <connection>

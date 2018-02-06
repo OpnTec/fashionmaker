@@ -29,7 +29,8 @@
 #include "dialogexporttocsv.h"
 #include "ui_dialogexporttocsv.h"
 
-#include "../vmisc/vcommonsettings.h"
+#include "../vcommonsettings.h"
+#include "../qxtcsvmodel.h"
 #include "../vabstractapplication.h"
 
 #include <QPushButton>
@@ -40,7 +41,8 @@
 DialogExportToCSV::DialogExportToCSV(QWidget *parent)
     : QDialog(parent),
       ui(new Ui::DialogExportToCSV),
-      isInitialized(false)
+      isInitialized(false),
+      m_fileName()
 {
     ui->setupUi(this);
 
@@ -57,11 +59,27 @@ DialogExportToCSV::DialogExportToCSV(QWidget *parent)
     SCASSERT(bDefaults != nullptr)
     connect(bDefaults, &QPushButton::clicked, this, [this]()
     {
+        ui->comboBoxCodec->blockSignals(true);
+        ui->checkBoxWithHeader->blockSignals(true);
+        ui->buttonGroup->blockSignals(true);
+
         ui->checkBoxWithHeader->setChecked(qApp->Settings()->GetDefCSVWithHeader());
         ui->comboBoxCodec->setCurrentIndex(ui->comboBoxCodec->findData(VCommonSettings::GetDefCSVCodec()));
 
         SetSeparator(VCommonSettings::GetDefCSVSeparator());
+
+        ui->comboBoxCodec->blockSignals(false);
+        ui->checkBoxWithHeader->blockSignals(false);
+        ui->buttonGroup->blockSignals(false);
+
+        ShowPreview();
     });
+
+    ui->groupBoxPreview->setVisible(false);
+
+    connect(ui->comboBoxCodec, QOverload<int>::of(&QComboBox::currentIndexChanged), this, [this](){ShowPreview();});
+    connect(ui->checkBoxWithHeader, &QCheckBox::stateChanged, this, [this](){ShowPreview();});
+    connect(ui->buttonGroup, QOverload<int>::of(&QButtonGroup::buttonClicked), this, [this](){ShowPreview();});
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -158,10 +176,69 @@ void DialogExportToCSV::showEvent(QShowEvent *event)
     }
     // do your init stuff here
 
-    setMaximumSize(size());
-    setMinimumSize(size());
+    resize(1, 1);
+    adjustSize();
+    if (not m_fileName.isEmpty())
+    {
+        ShowPreview();
+    }
+    else
+    {
+        setMaximumSize(size());
+        setMinimumSize(size());
+    }
 
     isInitialized = true;//first show windows are held
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogExportToCSV::ShowPreview()
+{
+    if (m_fileName.isEmpty())
+    {
+        return;
+    }
+
+    ui->groupBoxPreview->setVisible(true);
+
+    QxtCsvModel csv(m_fileName, nullptr, IsWithHeader(), GetSeparator(), QTextCodec::codecForMib(GetSelectedMib()));
+
+    const int columns = csv.columnCount();
+    const int rows = csv.rowCount();
+
+    ui->tableWidget->clear();
+    ui->tableWidget->setColumnCount(columns);
+    ui->tableWidget->setRowCount(rows);
+
+    ui->tableWidget->horizontalHeader()->setVisible(IsWithHeader());
+    if (IsWithHeader())
+    {
+        for(int column=0; column<columns; ++column)
+        {
+            QTableWidgetItem *header = new QTableWidgetItem(csv.headerText(column));
+            ui->tableWidget->setHorizontalHeaderItem(column, header);
+        }
+        ui->tableWidget->horizontalHeader()->setStretchLastSection(true);
+    }
+
+    for (int row=0; row < rows; ++row)
+    {
+        for(int column=0; column<columns; ++column)
+        {
+            QTableWidgetItem *item = new QTableWidgetItem(csv.text(row, column));
+            item->setToolTip(csv.text(row, column));
+
+            // set the item non-editable (view only), and non-selectable
+            Qt::ItemFlags flags = item->flags();
+            flags &= ~(Qt::ItemIsEditable); // reset/clear the flag
+            item->setFlags(flags);
+
+            ui->tableWidget->setItem(row, column, item);
+        }
+    }
+
+    ui->tableWidget->resizeColumnsToContents();
+    ui->tableWidget->resizeRowsToContents();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -183,6 +260,12 @@ void DialogExportToCSV::SetSeparator(const QChar &separator)
             ui->radioButtonComma->setChecked(true);
             break;
     }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogExportToCSV::ShowFilePreview(const QString &fileName)
+{
+    m_fileName = fileName;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
