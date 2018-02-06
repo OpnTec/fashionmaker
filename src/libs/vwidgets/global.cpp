@@ -28,15 +28,21 @@
 
 #include "global.h"
 #include "../vmisc/def.h"
+#include "../vmisc/vabstractapplication.h"
 
 #include <QGraphicsItem>
 #include <QGraphicsScene>
 #include <QGraphicsSceneMouseEvent>
 #include <QGraphicsView>
 
-static const qreal defPointRadiusPixel = (2./*mm*/ / 25.4) * PrintDPI;
 const qreal minVisibleFontSize = 5;
 
+inline qreal DefPointRadiusPixel()
+{
+    return (qApp->Settings()->GetLineWidth() + 0.8) / 25.4 * PrintDPI;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 qreal SceneScale(QGraphicsScene *scene)
 {
     qreal scale = 1;
@@ -79,10 +85,10 @@ QRectF PointRect(qreal radius)
 //---------------------------------------------------------------------------------------------------------------------
 qreal ScaledRadius(qreal scale)
 {
-    qreal scaledRadius = defPointRadiusPixel;
+    qreal scaledRadius = DefPointRadiusPixel();
     if (scale > 1)
     {
-        scaledRadius = qMax(defPointRadiusPixel/96, defPointRadiusPixel/scale);
+        scaledRadius = qMax(DefPointRadiusPixel()/96, DefPointRadiusPixel()/scale);
     }
     return scaledRadius;
 }
