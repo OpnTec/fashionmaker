@@ -52,7 +52,7 @@ class VControlPointSpline : public QObject, public VScenePoint
 public:
     VControlPointSpline(const qint32 &indexSpline, SplinePointPosition position, QGraphicsItem * parent = nullptr);
     VControlPointSpline(const qint32 &indexSpline, SplinePointPosition position, const QPointF &controlPoint,
-                        const QPointF &splinePoint, bool freeAngle, bool freeLength, QGraphicsItem * parent = nullptr);
+                        bool freeAngle, bool freeLength, QGraphicsItem * parent = nullptr);
     virtual ~VControlPointSpline() =default;
 
     virtual int  type() const Q_DECL_OVERRIDE {return Type;}

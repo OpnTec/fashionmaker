@@ -105,18 +105,14 @@ VToolSpline::VToolSpline(VToolSplineInitData initData, QGraphicsItem *parent)
     const bool freeLength1 = qmu::QmuTokenParser::IsSingle(spl->GetC1LengthFormula());
 
     auto *controlPoint1 = new VControlPointSpline(1, SplinePointPosition::FirstPoint,
-                                                  static_cast<QPointF>(spl->GetP2()),
-                                                  static_cast<QPointF>(spl->GetP1()),
-                                                  freeAngle1, freeLength1, this);
+                                                  static_cast<QPointF>(spl->GetP2()), freeAngle1, freeLength1, this);
     InitControlPoint(controlPoint1);
 
     const bool freeAngle2 = qmu::QmuTokenParser::IsSingle(spl->GetEndAngleFormula());
     const bool freeLength2 = qmu::QmuTokenParser::IsSingle(spl->GetC2LengthFormula());
 
     auto *controlPoint2 = new VControlPointSpline(1, SplinePointPosition::LastPoint,
-                                                  static_cast<QPointF>(spl->GetP3()),
-                                                  static_cast<QPointF>(spl->GetP4()),
-                                                  freeAngle2, freeLength2, this);
+                                                  static_cast<QPointF>(spl->GetP3()), freeAngle2, freeLength2, this);
     InitControlPoint(controlPoint2);
 
     ShowHandles(detailsMode);

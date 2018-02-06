@@ -115,16 +115,14 @@ VToolSplinePath::VToolSplinePath(const VToolSplinePathInitData &initData, QGraph
         const bool freeLength1 = qmu::QmuTokenParser::IsSingle(spl.GetC1LengthFormula());
 
         auto *controlPoint = new VControlPointSpline(i, SplinePointPosition::FirstPoint,
-                                                     static_cast<QPointF>(spl.GetP2()),
-                                                     static_cast<QPointF>(spl.GetP1()),
-                                                     freeAngle1, freeLength1, this);
+                                                     static_cast<QPointF>(spl.GetP2()), freeAngle1, freeLength1, this);
         InitControlPoint(controlPoint);
 
         const bool freeAngle2 = qmu::QmuTokenParser::IsSingle(spl.GetEndAngleFormula());
         const bool freeLength2 = qmu::QmuTokenParser::IsSingle(spl.GetC2LengthFormula());
 
         controlPoint = new VControlPointSpline(i, SplinePointPosition::LastPoint, static_cast<QPointF>(spl.GetP3()),
-                                               static_cast<QPointF>(spl.GetP4()), freeAngle2, freeLength2, this);
+                                               freeAngle2, freeLength2, this);
         InitControlPoint(controlPoint);
     }
 
