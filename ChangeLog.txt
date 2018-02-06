@@ -43,6 +43,7 @@
 - [#804] New feature. Import measurements from CSV file in Tape app.
 - [#414] Add features from Qt Windows Extras.
 - [#807] Issue with "Intersection" passmark.
+- [#667] Check for updates - Test version.
 
 # Version 0.5.1
 - [#683] Tool Seam allowance's dialog is off screen on small resolutions.
