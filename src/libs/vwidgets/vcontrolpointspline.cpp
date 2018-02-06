@@ -61,7 +61,6 @@ VControlPointSpline::VControlPointSpline(const qint32 &indexSpline, SplinePointP
       freeLength(true)
 {
     Init();
-    setVisible(false);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -89,7 +88,6 @@ VControlPointSpline::VControlPointSpline(const qint32 &indexSpline, SplinePointP
     this->setFlag(QGraphicsItem::ItemSendsGeometryChanges, true);
     this->setAcceptHoverEvents(true);
     this->setPos(controlPoint);
-    setVisible(false);
 
     // Do not draw control point in constructor. It creates artefacts if they enabled from start.
 }
