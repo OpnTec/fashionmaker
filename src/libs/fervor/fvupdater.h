@@ -35,8 +35,6 @@
 #include "fvavailableupdate.h"
 #include "fvupdatewindow.h"
 
-extern const QString defaultFeedURL;
-
 class FvUpdater : public QObject
 {
     Q_OBJECT
@@ -45,6 +43,9 @@ public:
     // Singleton
     static FvUpdater* sharedUpdater();
     static void drop();
+    static QString CurrentFeedURL();
+    static int CurrentVersion();
+    static bool IsTestBuild();
 
     // Set / get feed URL
     void SetFeedURL(const QUrl &feedURL);

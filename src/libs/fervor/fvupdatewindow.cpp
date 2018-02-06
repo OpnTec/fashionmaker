@@ -67,9 +67,18 @@ bool FvUpdateWindow::UpdateWindowWithCurrentProposedUpdate()
         return false;
     }
 
-    const QString downloadString = m_ui->wouldYouLikeToDownloadLabel->text()
-            .arg(QGuiApplication::applicationDisplayName(), proposedUpdate->GetEnclosureVersion(),
-                 QCoreApplication::applicationVersion());
+    QString downloadString;
+    if (FvUpdater::IsTestBuild())
+    {
+        downloadString = QString("New %1 test build is now available. Would you like to download it now?")
+                .arg(QGuiApplication::applicationDisplayName());
+    }
+    else
+    {
+        downloadString = m_ui->wouldYouLikeToDownloadLabel->text()
+                .arg(QGuiApplication::applicationDisplayName(), proposedUpdate->GetEnclosureVersion(),
+                     QCoreApplication::applicationVersion());
+    }
     m_ui->wouldYouLikeToDownloadLabel->setText(downloadString);
 
     return true;
