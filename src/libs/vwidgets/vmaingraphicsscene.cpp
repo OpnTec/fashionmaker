@@ -118,7 +118,7 @@ void VMainGraphicsScene::InitOrigins()
 {
     origins.clear();
 
-    QPen originsPen(Qt::green, qApp->Settings()->WidthHairLine(), Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin);
+    QPen originsPen(Qt::green, (1.2 / 3.0) /*mm*/ / 25.4 * PrintDPI, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin);
     QBrush axisTextBrush(Qt::green);
     const qreal arrowAngle = 35.0;
     const qreal arrowLength = 12.0;
@@ -160,7 +160,7 @@ void VMainGraphicsScene::InitOrigins()
         xOrigin->setBrush(axisTextBrush);
         xOrigin->setFlag(QGraphicsItem::ItemIgnoresTransformations);
         xOrigin->setZValue(-1.0);
-        xOrigin->setPos(25, -(xOrigin->boundingRect().height()/2));
+        xOrigin->setPos(30, -(xOrigin->boundingRect().height()/2));
         origins.append(xOrigin);
     }
 
@@ -201,7 +201,7 @@ void VMainGraphicsScene::InitOrigins()
         yOrigin->setBrush(axisTextBrush);
         yOrigin->setFlag(QGraphicsItem::ItemIgnoresTransformations);
         yOrigin->setZValue(-1.0);
-        yOrigin->setPos(-(yOrigin->boundingRect().width()/2), 25);
+        yOrigin->setPos(-(yOrigin->boundingRect().width()/2), 30);
         origins.append(yOrigin);
     }
 }
