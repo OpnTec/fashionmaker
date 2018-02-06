@@ -100,7 +100,7 @@ public:
     virtual QVector<DirectionArrow> DirectionArrows() const;
     static QPainterPath      ShowDirection(const QVector<DirectionArrow> &arrows, qreal width);
 
-    static const qreal lengthCurveDirectionArrow;
+    static qreal LengthCurveDirectionArrow();
 protected:
     virtual void             CreateName() =0;
 private:

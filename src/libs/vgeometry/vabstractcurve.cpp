@@ -36,8 +36,7 @@
 #include <QtDebug>
 
 #include "vabstractcurve_p.h"
-
-const qreal VAbstractCurve::lengthCurveDirectionArrow = 14;
+#include "../vmisc/vabstractapplication.h"
 
 VAbstractCurve::VAbstractCurve(const GOType &type, const quint32 &idObject, const Draw &mode)
     :VGObject(type, idObject, mode), d (new VAbstractCurveData())
@@ -357,7 +356,7 @@ QVector<DirectionArrow> VAbstractCurve::DirectionArrows() const
         //Reverse line because we want start arrow from this point
         arrow = QLineF(arrow.p2(), arrow.p1());
         const qreal angle = arrow.angle();//we each time change line angle, better save original angle value
-        arrow.setLength(lengthCurveDirectionArrow);//arrow length in pixels
+        arrow.setLength(VAbstractCurve::LengthCurveDirectionArrow());
 
         DirectionArrow dArrow;
 
@@ -398,6 +397,12 @@ QPainterPath VAbstractCurve::ShowDirection(const QVector<DirectionArrow> &arrows
         }
     }
     return path;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+qreal VAbstractCurve::LengthCurveDirectionArrow()
+{
+    return qApp->Settings()->GetLineWidth() * 8.0;
 }
 
 //---------------------------------------------------------------------------------------------------------------------

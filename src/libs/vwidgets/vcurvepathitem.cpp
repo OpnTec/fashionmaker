@@ -60,7 +60,7 @@ QPainterPath VCurvePathItem::shape() const
     }
 
     const QPainterPath arrowsPath = VAbstractCurve::ShowDirection(m_directionArrows,
-                                                                  ScaleWidth(VAbstractCurve::lengthCurveDirectionArrow,
+                                                                 ScaleWidth(VAbstractCurve::LengthCurveDirectionArrow(),
                                                                              SceneScale(scene())));
     if (arrowsPath != QPainterPath())
     {
@@ -76,7 +76,7 @@ void VCurvePathItem::paint(QPainter *painter, const QStyleOptionGraphicsItem *op
     ScalePenWidth();
 
     const QPainterPath arrowsPath = VAbstractCurve::ShowDirection(m_directionArrows,
-                                                                  ScaleWidth(VAbstractCurve::lengthCurveDirectionArrow,
+                                                                 ScaleWidth(VAbstractCurve::LengthCurveDirectionArrow(),
                                                                              SceneScale(scene())));
 
     if (arrowsPath != QPainterPath())

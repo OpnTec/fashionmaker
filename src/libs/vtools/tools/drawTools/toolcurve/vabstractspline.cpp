@@ -85,7 +85,7 @@ QPainterPath VAbstractSpline::shape() const
     if (m_isHovered || detailsMode)
     {
         path.addPath(VAbstractCurve::ShowDirection(curve->DirectionArrows(),
-                                                   ScaleWidth(VAbstractCurve::lengthCurveDirectionArrow,
+                                                   ScaleWidth(VAbstractCurve::LengthCurveDirectionArrow(),
                                                               SceneScale(scene()))));
     }
     path.setFillRule(Qt::WindingFill);
@@ -114,7 +114,7 @@ void VAbstractSpline::paint(QPainter *painter, const QStyleOptionGraphicsItem *o
             painter->setBrush(brush());
 
             painter->drawPath(VAbstractCurve::ShowDirection(curve->DirectionArrows(),
-                                                            ScaleWidth(VAbstractCurve::lengthCurveDirectionArrow,
+                                                            ScaleWidth(VAbstractCurve::LengthCurveDirectionArrow(),
                                                                        SceneScale(scene()))));
 
             painter->restore();
