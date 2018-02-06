@@ -30,6 +30,7 @@
 #define PREFERENCESPATTERNPAGE_H
 
 #include <QWidget>
+#include "../vmisc/def.h"
 
 namespace Ui
 {
@@ -57,9 +58,11 @@ private:
     Q_DISABLE_COPY(PreferencesPatternPage)
     Ui::PreferencesPatternPage *ui;
     QStringList m_knownMaterials;
+    Unit m_oldLineUnit;
 
     void InitLabelDateTimeFormats();
     void InitComboBoxFormats(QComboBox *box, const QStringList &items, const QString &currentFormat);
+    void InitUnits();
 
     template <typename T>
     void CallDateTimeFormatEditor(const T &type, const QStringList &predefinedFormats,

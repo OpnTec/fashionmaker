@@ -531,20 +531,6 @@ void VPattern::LiteParseIncrements()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VPattern::RefreshCurves()
-{
-    QHash<quint32, VDataTool*>::const_iterator i = tools.constBegin();
-    while (i != tools.constEnd())
-    {
-        if (VAbstractSpline *vTool = qobject_cast<VAbstractSpline *>(i.value()))
-        {
-            vTool->FullUpdateFromFile();
-        }
-        ++i;
-    }
-}
-
-//---------------------------------------------------------------------------------------------------------------------
 int VPattern::ElementsToParse() const
 {
     QVector<QString> tags({TagArc, TagDetail, TagElArc, TagLine, TagSpline, TagOperation, TagPath, TagPoint,

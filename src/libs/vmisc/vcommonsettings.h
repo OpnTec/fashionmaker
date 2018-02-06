@@ -194,8 +194,34 @@ public:
 
     bool IsShowCurveDetails() const;
     void SetShowCurveDetails(bool value);
+
+    static qreal DefaultLineWidth();
+    static qreal MinimalLineWidth();
+    static qreal MaximalLineWidth();
+    qreal GetLineWidth() const;
+    void  SetLineWidth(qreal width);
+    qreal WidthMainLine() const;
+    qreal WidthHairLine() const;
 private:
     Q_DISABLE_COPY(VCommonSettings)
 };
+
+//---------------------------------------------------------------------------------------------------------------------
+inline qreal VCommonSettings::DefaultLineWidth()
+{
+    return 1.2; // mm
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+inline qreal VCommonSettings::MinimalLineWidth()
+{
+    return 0.5; // mm
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+inline qreal VCommonSettings::MaximalLineWidth()
+{
+    return 5.0; // mm
+}
 
 #endif // VCOMMONSETTINGS_H

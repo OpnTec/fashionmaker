@@ -32,8 +32,6 @@
 #include <QtGlobal>
 #include <QStyleOptionGraphicsItem>
 
-extern const qreal widthMainLine;
-extern const qreal widthHairLine;
 extern const qreal minVisibleFontSize;
 
 class QGraphicsScene;

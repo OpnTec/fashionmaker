@@ -46,13 +46,13 @@ public:
     virtual void paint(QPainter *painter, const QStyleOptionGraphicsItem *option,
                        QWidget *widget = nullptr) Q_DECL_OVERRIDE;
 
-    qreal GetBasicWidth() const;
-    void  SetBasicWidth(const qreal &value);
+    bool IsBoldLine() const;
+    void SetBoldLine(bool bold);
 
 private:
     Q_DISABLE_COPY(VScaledLine)
 
-    qreal basicWidth;
+    bool m_isBoldLine;
 };
 
 class VScaledEllipse : public QGraphicsEllipseItem

@@ -45,6 +45,7 @@
 
 #include "../vwidgets/global.h"
 #include "../vgeometry/vgobject.h"
+#include "../vmisc/vabstractapplication.h"
 #include "vmaingraphicsscene.h"
 #include "vmaingraphicsview.h"
 #include "vgraphicssimpletextitem.h"
@@ -258,7 +259,7 @@ void VControlPointSpline::Init()
     this->setZValue(100);
 
     controlLine = new VScaledLine(this);
-    controlLine->SetBasicWidth(widthHairLine);
+    controlLine->SetBoldLine(false);
     controlLine->setFlag(QGraphicsItem::ItemStacksBehindParent, true);
     controlLine->setVisible(false);
 }

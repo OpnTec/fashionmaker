@@ -597,7 +597,7 @@ void MainWindowsNoGUI::PrintPages(QPrinter *printer)
 
     painter.setFont( QFont( "Arial", 8, QFont::Normal ) );
     painter.setRenderHint(QPainter::Antialiasing, true);
-    painter.setPen(QPen(Qt::black, widthMainLine, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin));
+    painter.setPen(QPen(Qt::black, qApp->Settings()->WidthMainLine(), Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin));
     painter.setBrush ( QBrush ( Qt::NoBrush ) );
 
     int count = 0;
@@ -787,25 +787,6 @@ void MainWindowsNoGUI::PrintTiled()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-/**
- * @brief RefreshDetailsLabel call to ecalculate piece labels. For example after changing a font.
- */
-void MainWindowsNoGUI::RefreshDetailsLabel()
-{
-    const QHash<quint32, VPiece> *list = pattern->DataPieces();
-    QHash<quint32, VPiece>::const_iterator i = list->constBegin();
-    while (i != list->constEnd())
-    {
-        if (VToolSeamAllowance *tool = qobject_cast<VToolSeamAllowance*>(VAbstractPattern::getTool(i.key())))
-        {
-            tool->UpdatePatternInfo();
-            tool->UpdateDetailLabel();
-        }
-        ++i;
-    }
-}
-
-//---------------------------------------------------------------------------------------------------------------------
 QVector<VLayoutPiece> MainWindowsNoGUI::PrepareDetailsForLayout(const QHash<quint32, VPiece> &details)
 {
     QVector<VLayoutPiece> listDetails;
@@ -848,7 +829,8 @@ QIcon MainWindowsNoGUI::ScenePreview(int i) const
             QPainter painter(&image);
             painter.setFont( QFont( "Arial", 8, QFont::Normal ) );
             painter.setRenderHint(QPainter::Antialiasing, true);
-            painter.setPen(QPen(Qt::black, widthMainLine, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin));
+            painter.setPen(QPen(Qt::black, qApp->Settings()->WidthMainLine(), Qt::SolidLine, Qt::RoundCap,
+                                Qt::RoundJoin));
             painter.setBrush ( QBrush ( Qt::NoBrush ) );
             scenes.at(i)->render(&painter, r, r, Qt::IgnoreAspectRatio);
             painter.end();
@@ -934,7 +916,7 @@ void MainWindowsNoGUI::SvgFile(const QString &name, QGraphicsRectItem *paper, QG
     painter.begin(&generator);
     painter.setFont( QFont( "Arial", 8, QFont::Normal ) );
     painter.setRenderHint(QPainter::Antialiasing, true);
-    painter.setPen(QPen(Qt::black, widthHairLine, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin));
+    painter.setPen(QPen(Qt::black, qApp->Settings()->WidthHairLine(), Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin));
     painter.setBrush ( QBrush ( Qt::NoBrush ) );
     scene->render(&painter, paper->rect(), paper->rect(), Qt::IgnoreAspectRatio);
     painter.end();
@@ -954,7 +936,7 @@ void MainWindowsNoGUI::PngFile(const QString &name, QGraphicsRectItem *paper, QG
     QPainter painter(&image);
     painter.setFont( QFont( "Arial", 8, QFont::Normal ) );
     painter.setRenderHint(QPainter::Antialiasing, true);
-    painter.setPen(QPen(Qt::black, widthMainLine, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin));
+    painter.setPen(QPen(Qt::black, qApp->Settings()->WidthMainLine(), Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin));
     painter.setBrush ( QBrush ( Qt::NoBrush ) );
     scene->render(&painter, r, r, Qt::IgnoreAspectRatio);
     image.save(name);
@@ -1004,7 +986,7 @@ void MainWindowsNoGUI::PdfFile(const QString &name, QGraphicsRectItem *paper, QG
     }
     painter.setFont( QFont( "Arial", 8, QFont::Normal ) );
     painter.setRenderHint(QPainter::Antialiasing, true);
-    painter.setPen(QPen(Qt::black, widthMainLine, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin));
+    painter.setPen(QPen(Qt::black, qApp->Settings()->WidthMainLine(), Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin));
     painter.setBrush ( QBrush ( Qt::NoBrush ) );
     scene->render(&painter, r, r, Qt::IgnoreAspectRatio);
     painter.end();
@@ -1460,7 +1442,8 @@ bool MainWindowsNoGUI::IsLayoutGrayscale() const
             QImage image(target.size(), QImage::Format_RGB32);
             image.fill(Qt::white);
             QPainter painter(&image);
-            painter.setPen(QPen(Qt::black, widthMainLine, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin));
+            painter.setPen(QPen(Qt::black, qApp->Settings()->WidthMainLine(), Qt::SolidLine, Qt::RoundCap,
+                                Qt::RoundJoin));
             painter.setBrush ( QBrush ( Qt::NoBrush ) );
             scenes.at(i)->render(&painter, target, paper->rect(), Qt::KeepAspectRatio);
             painter.end();

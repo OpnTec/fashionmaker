@@ -29,6 +29,7 @@
 #include "vcurvepathitem.h"
 #include "../vwidgets/global.h"
 #include "../vgeometry/vabstractcurve.h"
+#include "../vmisc/vabstractapplication.h"
 
 #include <QPainter>
 
@@ -37,9 +38,8 @@ VCurvePathItem::VCurvePathItem(QGraphicsItem *parent)
     : QGraphicsPathItem(parent),
       m_directionArrows(),
       m_points(),
-      m_defaultWidth(widthMainLine)
-{
-}
+      m_defaultWidth(qApp->Settings()->WidthMainLine())
+{}
 
 //---------------------------------------------------------------------------------------------------------------------
 QPainterPath VCurvePathItem::shape() const

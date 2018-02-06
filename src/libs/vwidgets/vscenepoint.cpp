@@ -28,6 +28,7 @@
 
 #include "vscenepoint.h"
 #include "../vmisc/def.h"
+#include "../vmisc/vabstractapplication.h"
 #include "../vgeometry/vpointf.h"
 #include "global.h"
 #include "vgraphicssimpletextitem.h"
@@ -53,7 +54,7 @@ VScenePoint::VScenePoint(QGraphicsItem *parent)
 {
     m_namePoint = new VGraphicsSimpleTextItem(this);
     m_lineName = new VScaledLine(this);
-    m_lineName->SetBasicWidth(widthHairLine);
+    m_lineName->SetBoldLine(false);
     m_lineName->setLine(QLineF(0, 0, 1, 0));
     m_lineName->setVisible(false);
 
@@ -173,7 +174,8 @@ void VScenePoint::RefreshLine()
 //---------------------------------------------------------------------------------------------------------------------
 void VScenePoint::ScaleMainPenWidth(qreal scale)
 {
-    const qreal width = ScaleWidth(m_isHovered ? widthMainLine : widthHairLine, scale);
+    const qreal width = ScaleWidth(m_isHovered ? qApp->Settings()->WidthMainLine() : qApp->Settings()->WidthHairLine(),
+                                   scale);
 
     setPen(QPen(CorrectColor(this, m_baseColor), width));
 }

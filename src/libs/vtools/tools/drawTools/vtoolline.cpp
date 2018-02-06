@@ -182,7 +182,8 @@ QString VToolLine::getTagName() const
 //---------------------------------------------------------------------------------------------------------------------
 void VToolLine::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
 {
-    const qreal width = ScaleWidth(m_isHovered ? widthMainLine : widthHairLine, SceneScale(scene()));
+    const qreal width = ScaleWidth(m_isHovered ? qApp->Settings()->WidthMainLine() : qApp->Settings()->WidthHairLine(),
+                                   SceneScale(scene()));
 
     setPen(QPen(CorrectColor(this, lineColor), width, LineStyleToPenStyle(m_lineType)));
 

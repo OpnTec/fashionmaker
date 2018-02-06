@@ -120,7 +120,7 @@ QString VToolPiecePath::getTagName() const
 //---------------------------------------------------------------------------------------------------------------------
 void VToolPiecePath::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
 {
-    qreal width = widthHairLine;
+    qreal width = qApp->Settings()->WidthHairLine();
 
     const qreal scale = SceneScale(scene());
     if (scale > 1)

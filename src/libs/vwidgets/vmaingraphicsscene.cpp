@@ -42,6 +42,7 @@
 #include <Qt>
 
 #include "global.h"
+#include "../vmisc/vabstractapplication.h"
 
 //---------------------------------------------------------------------------------------------------------------------
 /**
@@ -117,7 +118,7 @@ void VMainGraphicsScene::InitOrigins()
 {
     origins.clear();
 
-    QPen originsPen(Qt::green, widthHairLine, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin);
+    QPen originsPen(Qt::green, qApp->Settings()->WidthHairLine(), Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin);
     QBrush axisTextBrush(Qt::green);
     const qreal arrowAngle = 35.0;
     const qreal arrowLength = 12.0;

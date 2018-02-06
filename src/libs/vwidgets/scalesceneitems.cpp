@@ -28,41 +28,43 @@
 
 #include "scalesceneitems.h"
 #include "global.h"
+#include "../vmisc/vabstractapplication.h"
 
 #include <QPen>
 
 //---------------------------------------------------------------------------------------------------------------------
 VScaledLine::VScaledLine(QGraphicsItem *parent)
     : QGraphicsLineItem(parent),
-      basicWidth(widthMainLine)
+      m_isBoldLine(true)
 {}
 
 //---------------------------------------------------------------------------------------------------------------------
 VScaledLine::VScaledLine(const QLineF &line, QGraphicsItem *parent)
     : QGraphicsLineItem(line, parent),
-      basicWidth(widthMainLine)
+      m_isBoldLine(true)
 {}
 
 //---------------------------------------------------------------------------------------------------------------------
 void VScaledLine::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
 {
     QPen lPen = pen();
-    lPen.setWidthF(ScaleWidth(basicWidth, SceneScale(scene())));
+    lPen.setWidthF(ScaleWidth(m_isBoldLine ? qApp->Settings()->WidthMainLine() : qApp->Settings()->WidthHairLine(),
+                              SceneScale(scene())));
     setPen(lPen);
 
     PaintWithFixItemHighlightSelected<QGraphicsLineItem>(this, painter, option, widget);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-qreal VScaledLine::GetBasicWidth() const
+bool VScaledLine::IsBoldLine() const
 {
-    return basicWidth;
+    return m_isBoldLine;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VScaledLine::SetBasicWidth(const qreal &value)
+void VScaledLine::SetBoldLine(bool bold)
 {
-    basicWidth = value;
+    m_isBoldLine = bold;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -74,7 +76,7 @@ VScaledEllipse::VScaledEllipse(QGraphicsItem *parent)
 void VScaledEllipse::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
 {
     const qreal scale = SceneScale(scene());
-    const qreal width = ScaleWidth(widthMainLine, scale);
+    const qreal width = ScaleWidth(qApp->Settings()->WidthMainLine(), scale);
 
     QPen visPen = pen();
     visPen.setWidthF(width);

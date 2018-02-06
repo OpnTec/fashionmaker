@@ -95,7 +95,8 @@ QPainterPath VAbstractSpline::shape() const
 //---------------------------------------------------------------------------------------------------------------------
 void VAbstractSpline::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
 {
-    const qreal width = ScaleWidth(m_isHovered ? widthMainLine : widthHairLine, SceneScale(scene()));
+    const qreal width = ScaleWidth(m_isHovered ? qApp->Settings()->WidthMainLine() : qApp->Settings()->WidthHairLine(),
+                                   SceneScale(scene()));
 
     const QSharedPointer<VAbstractCurve> curve = VAbstractTool::data.GeometricObject<VAbstractCurve>(m_id);
     setPen(QPen(CorrectColor(this, curve->GetColor()), width, LineStyleToPenStyle(curve->GetPenStyle()), Qt::RoundCap));

@@ -909,7 +909,7 @@ void VToolSeamAllowance::SaveRotateGrainline(qreal dRot, const QPointF& ptPos)
 void VToolSeamAllowance::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
 {
     QPen toolPen = pen();
-    toolPen.setWidthF(ScaleWidth(widthHairLine, SceneScale(scene())));
+    toolPen.setWidthF(ScaleWidth(qApp->Settings()->WidthHairLine(), SceneScale(scene())));
 
     setPen(toolPen);
     m_seamAllowance->setPen(toolPen);

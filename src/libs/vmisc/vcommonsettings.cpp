@@ -70,6 +70,7 @@ const QString settingPatternHideMainPath            = QStringLiteral("pattern/hi
 const QString settingDoublePassmark                 = QStringLiteral("pattern/doublePassmark");
 const QString settingPatternDefaultSeamAllowance    = QStringLiteral("pattern/defaultSeamAllowance");
 const QString settingPatternLabelFont               = QStringLiteral("pattern/labelFont");
+const QString settingPatternLineWidth               = QStringLiteral("pattern/lineWidth");
 const QString settingPatternCurveApproximationScale = QStringLiteral("pattern/curveApproximationScale");
 const QString settingPatternShowCurveDetails        = QStringLiteral("pattern/showCurveDetails");
 
@@ -98,6 +99,7 @@ const QString settingLabelUserTimeFormats = QStringLiteral("label/userTimeFormat
 // Reading settings file is very expensive, cache curve approximation to speed up getting value
 qreal curveApproximationCached = -1;
 QString localeCached = QString();
+qreal lineWidthCached = 0;
 
 //---------------------------------------------------------------------------------------------------------------------
 QStringList ClearFormats(const QStringList &predefinedFormats, QStringList formats)
@@ -1052,4 +1054,35 @@ bool VCommonSettings::IsShowCurveDetails() const
 void VCommonSettings::SetShowCurveDetails(bool value)
 {
     setValue(settingPatternShowCurveDetails, value);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+qreal VCommonSettings::GetLineWidth() const
+{
+    if (lineWidthCached <= 0)
+    {
+        lineWidthCached = qBound(VCommonSettings::MinimalLineWidth(), value(settingPatternLineWidth, 1.2).toDouble(),
+                                 VCommonSettings::MaximalLineWidth());
+    }
+
+    return lineWidthCached;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VCommonSettings::SetLineWidth(qreal width)
+{
+    lineWidthCached = qBound(VCommonSettings::MinimalLineWidth(), width, VCommonSettings::MaximalLineWidth());
+    setValue(settingPatternLineWidth, lineWidthCached);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+qreal VCommonSettings::WidthMainLine() const
+{
+    return GetLineWidth() / 25.4 * PrintDPI;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+qreal VCommonSettings::WidthHairLine() const
+{
+    return WidthMainLine()/3.0;
 }

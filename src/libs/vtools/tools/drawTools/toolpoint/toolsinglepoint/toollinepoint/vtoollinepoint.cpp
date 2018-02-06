@@ -76,7 +76,7 @@ VToolLinePoint::VToolLinePoint(VAbstractPattern *doc, VContainer *data, const qu
     QPointF point1 = static_cast<QPointF>(*data->GeometricObject<VPointF>(basePointId));
     QPointF point2 = static_cast<QPointF>(*data->GeometricObject<VPointF>(id));
     mainLine = new VScaledLine(QLineF(point1 - point2, QPointF()), this);
-    mainLine->SetBasicWidth(widthHairLine);
+    mainLine->SetBoldLine(false);
     mainLine->setFlag(QGraphicsItem::ItemStacksBehindParent, true);
 }
 
@@ -132,14 +132,14 @@ void VToolLinePoint::SaveOptions(QDomElement &tag, QSharedPointer<VGObject> &obj
 //---------------------------------------------------------------------------------------------------------------------
 void VToolLinePoint::hoverEnterEvent(QGraphicsSceneHoverEvent *event)
 {
-    mainLine->SetBasicWidth(widthMainLine);
+    mainLine->SetBoldLine(true);
     VToolSinglePoint::hoverEnterEvent(event);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void VToolLinePoint::hoverLeaveEvent(QGraphicsSceneHoverEvent *event)
 {
-    mainLine->SetBasicWidth(widthHairLine);
+    mainLine->SetBoldLine(false);
     VToolSinglePoint::hoverLeaveEvent(event);
 }
 
