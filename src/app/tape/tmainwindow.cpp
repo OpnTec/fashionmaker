@@ -3067,11 +3067,16 @@ bool TMainWindow::IgnoreLocking(int error, const QString &path)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QString TMainWindow::CheckMName(const QString &name) const
+QString TMainWindow::CheckMName(const QString &name, const QSet<QString> &importedNames) const
 {
     if (name.isEmpty())
     {
         throw VException(tr("Measurement name in is empty."));
+    }
+
+    if (importedNames.contains(name))
+    {
+        throw VException(tr("Imported file must not contain the same name twice."));
     }
 
     if (name.indexOf(CustomMSign) == 0)
@@ -3155,6 +3160,7 @@ void TMainWindow::ImportIndividualMeasurements(const QxtCsvModel &csv)
     };
 
     QVector<IndividualMeasurement> measurements;
+    QSet<QString> importedNames;
 
     for(int i=0; i < rows; ++i)
     {
@@ -3168,7 +3174,9 @@ void TMainWindow::ImportIndividualMeasurements(const QxtCsvModel &csv)
             }
 
             IndividualMeasurement measurement;
-            measurement.name = CheckMName(qApp->TrVars()->MFromUser(name));
+            const QString mName = CheckMName(qApp->TrVars()->MFromUser(name), importedNames);
+            importedNames.insert(mName);
+            measurement.name = mName;
             measurement.value = VTranslateVars::TryFormulaFromUser(csv.text(i, 1), qApp->Settings()->GetOsSeparator());
 
             const bool custom = csv.text(i, 0).simplified().startsWith(CustomMSign);
@@ -3254,6 +3262,7 @@ void TMainWindow::ImportMultisizeMeasurements(const QxtCsvModel &csv)
     };
 
     QVector<MultisizeMeasurement> measurements;
+    QSet<QString> importedNames;
 
     for(int i=0; i < rows; ++i)
     {
@@ -3267,7 +3276,9 @@ void TMainWindow::ImportMultisizeMeasurements(const QxtCsvModel &csv)
             }
 
             MultisizeMeasurement measurement;
-            measurement.name = CheckMName(qApp->TrVars()->MFromUser(name));
+            const QString mName = CheckMName(qApp->TrVars()->MFromUser(name), importedNames);
+            importedNames.insert(mName);
+            measurement.name = mName;
 
             measurement.base = ConverToDouble(csv.text(i, 1),
                                               tr("Cannot convert base size value to double in column 2."));

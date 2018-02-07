@@ -216,7 +216,7 @@ private:
     template <class T>
     void HackWidget(T **widget);
 
-    QString CheckMName(const QString &name) const;
+    QString CheckMName(const QString &name, const QSet<QString> &importedNames) const;
     void ShowError(const QString &text);
     void RefreshDataAfterImport();
 
