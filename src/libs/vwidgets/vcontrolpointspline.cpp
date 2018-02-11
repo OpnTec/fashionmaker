@@ -69,7 +69,6 @@ VControlPointSpline::VControlPointSpline(const qint32 &indexSpline, SplinePointP
  * @param indexSpline index spline in list.
  * @param position position point in spline.
  * @param controlPoint control point.
- * @param splinePoint spline point.
  * @param parent parent object.
  */
 VControlPointSpline::VControlPointSpline(const qint32 &indexSpline, SplinePointPosition position,
