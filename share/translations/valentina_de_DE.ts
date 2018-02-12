@@ -2225,11 +2225,11 @@
     <name>DialogExportToCSV</name>
     <message>
         <source>Export options</source>
-        <translation>Exportoptionen</translation>
+        <translation type="vanished">Exportoptionen</translation>
     </message>
     <message>
         <source>Export</source>
-        <translation>Export</translation>
+        <translation type="vanished">Export</translation>
     </message>
     <message>
         <source>With header</source>
@@ -2258,6 +2258,18 @@
     <message>
         <source>Space</source>
         <translation>Leertaste</translation>
+    </message>
+    <message>
+        <source>Options</source>
+        <translation type="unfinished">Optionen</translation>
+    </message>
+    <message>
+        <source>Global</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Preview</source>
+        <translation type="unfinished">Vorschau</translation>
     </message>
 </context>
 <context>
@@ -6318,7 +6330,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>A new version of %1 is available!</source>
-        <translation>Eine neue Version von %1 ist verfügbar!</translation>
+        <translation type="vanished">Eine neue Version von %1 ist verfügbar!</translation>
     </message>
     <message>
         <source>%1 %2 is now available - you have %3. Would you like to download it now?</source>
@@ -6335,6 +6347,10 @@ Apply settings anyway?</source>
     <message>
         <source>Get Update</source>
         <translation>Update herunterladen</translation>
+    </message>
+    <message>
+        <source>%1 update is available!</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -6361,11 +6377,11 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Error</source>
-        <translation>Fehler</translation>
+        <translation type="vanished">Fehler</translation>
     </message>
     <message>
         <source>Information</source>
-        <translation>Information</translation>
+        <translation type="vanished">Information</translation>
     </message>
 </context>
 <context>
@@ -8378,6 +8394,22 @@ Sollen die Änderungen gespeichert werden?</translation>
         <source>Set default curve approximation scale</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Bold line width</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Line width:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Millimiters</source>
+        <translation type="unfinished">Millimeter</translation>
+    </message>
+    <message>
+        <source>Inches</source>
+        <translation type="unfinished">Zoll</translation>
+    </message>
 </context>
 <context>
     <name>QApplication</name>
@@ -9516,6 +9548,14 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Cannot convert size increase value to double in column 4.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Imported file must not contain the same name twice.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Error in row %1. Measurement name is empty.</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -11119,7 +11159,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Forbid flipping</source>
-        <translation type="unfinished">Umdrehen verhindern</translation>
+        <translation>Umdrehen verhindern</translation>
     </message>
     <message>
         <source>Force flipping</source>
@@ -12381,7 +12421,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Forbid flipping</source>
-        <translation type="unfinished">Umdrehen verhindern</translation>
+        <translation>Umdrehen verhindern</translation>
     </message>
     <message>
         <source>Force flipping</source>

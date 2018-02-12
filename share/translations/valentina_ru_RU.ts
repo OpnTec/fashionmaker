@@ -2024,7 +2024,7 @@
     </message>
     <message>
         <source>Preview calculations</source>
-        <translation type="unfinished"></translation>
+        <translation>Предварительные расчёты</translation>
     </message>
 </context>
 <context>
@@ -2225,11 +2225,11 @@
     <name>DialogExportToCSV</name>
     <message>
         <source>Export options</source>
-        <translation>Экспорт настроек</translation>
+        <translation type="vanished">Экспорт настроек</translation>
     </message>
     <message>
         <source>Export</source>
-        <translation>Экспорт</translation>
+        <translation type="vanished">Экспорт</translation>
     </message>
     <message>
         <source>With header</source>
@@ -2258,6 +2258,18 @@
     <message>
         <source>Space</source>
         <translation>Пробел</translation>
+    </message>
+    <message>
+        <source>Options</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Global</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Preview</source>
+        <translation type="unfinished">Предварительный просмотр</translation>
     </message>
 </context>
 <context>
@@ -2878,7 +2890,7 @@
     </message>
     <message>
         <source>Preview calculations</source>
-        <translation type="unfinished"></translation>
+        <translation>Предварительные расчёты</translation>
     </message>
     <message>
         <source>Unique variable name</source>
@@ -3558,7 +3570,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Select measurement</source>
-        <translation type="unfinished"></translation>
+        <translation>Выберите мерку</translation>
     </message>
 </context>
 <context>
@@ -3668,7 +3680,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Multisize</source>
-        <translation type="unfinished"></translation>
+        <translation>Мультиразмерные</translation>
     </message>
 </context>
 <context>
@@ -4478,15 +4490,15 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Intersection 2</source>
-        <translation type="unfinished"></translation>
+        <translation>Пересечение 2</translation>
     </message>
     <message>
         <source>Intersection 2 (only left)</source>
-        <translation type="unfinished"></translation>
+        <translation>Пересечение 2 (только слева)</translation>
     </message>
     <message>
         <source>Intersection 2 (only right)</source>
-        <translation type="unfinished"></translation>
+        <translation>Пересечение 2 (только справа)</translation>
     </message>
 </context>
 <context>
@@ -4560,47 +4572,47 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Edit rectangle width</source>
-        <translation type="unfinished"></translation>
+        <translation>Редактировать ширину прямоугольника</translation>
     </message>
     <message>
         <source>Edit angle</source>
-        <translation type="unfinished"></translation>
+        <translation>Редактировать угол</translation>
     </message>
     <message>
         <source>Segment</source>
-        <translation type="unfinished"></translation>
+        <translation>Отрезок</translation>
     </message>
     <message>
         <source>Rectangle</source>
-        <translation type="unfinished"></translation>
+        <translation>Прямоугольник</translation>
     </message>
     <message>
         <source>Cross</source>
-        <translation type="unfinished"></translation>
+        <translation>Крест</translation>
     </message>
     <message>
         <source>T-shaped</source>
-        <translation type="unfinished"></translation>
+        <translation>Т-образная</translation>
     </message>
     <message>
         <source>Doubletree</source>
-        <translation type="unfinished"></translation>
+        <translation>Х-образная</translation>
     </message>
     <message>
         <source>Corner</source>
-        <translation type="unfinished"></translation>
+        <translation>Угол</translation>
     </message>
     <message>
         <source>Triangle</source>
-        <translation type="unfinished"></translation>
+        <translation>Треугольник</translation>
     </message>
     <message>
         <source>H-shaped</source>
-        <translation type="unfinished"></translation>
+        <translation>Н-образная</translation>
     </message>
     <message>
         <source>Button</source>
-        <translation type="unfinished"></translation>
+        <translation>Кнопка</translation>
     </message>
 </context>
 <context>
@@ -5512,39 +5524,39 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Segment</source>
-        <translation type="unfinished"></translation>
+        <translation>Отрезок</translation>
     </message>
     <message>
         <source>Rectangle</source>
-        <translation type="unfinished"></translation>
+        <translation>Прямоугольник</translation>
     </message>
     <message>
         <source>Cross</source>
-        <translation type="unfinished"></translation>
+        <translation>Крест</translation>
     </message>
     <message>
         <source>T-shaped</source>
-        <translation type="unfinished"></translation>
+        <translation>Т-образная</translation>
     </message>
     <message>
         <source>Doubletree</source>
-        <translation type="unfinished"></translation>
+        <translation>Х-образная</translation>
     </message>
     <message>
         <source>Corner</source>
-        <translation type="unfinished"></translation>
+        <translation>Угол</translation>
     </message>
     <message>
         <source>Triangle</source>
-        <translation type="unfinished"></translation>
+        <translation>Треугольник</translation>
     </message>
     <message>
         <source>H-shaped</source>
-        <translation type="unfinished"></translation>
+        <translation>Н-образная</translation>
     </message>
     <message>
         <source>Button</source>
-        <translation type="unfinished"></translation>
+        <translation>Кнопка</translation>
     </message>
     <message>
         <source>Place label</source>
@@ -6337,7 +6349,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>A new version of %1 is available!</source>
-        <translation>Доступна новая версия программы: %1!</translation>
+        <translation type="vanished">Доступна новая версия программы: %1!</translation>
     </message>
     <message>
         <source>%1 %2 is now available - you have %3. Would you like to download it now?</source>
@@ -6354,6 +6366,10 @@ Apply settings anyway?</source>
     <message>
         <source>Get Update</source>
         <translation>Получить обновления</translation>
+    </message>
+    <message>
+        <source>%1 update is available!</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -6380,11 +6396,11 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Error</source>
-        <translation>Ошибка</translation>
+        <translation type="vanished">Ошибка</translation>
     </message>
     <message>
         <source>Information</source>
-        <translation>Информация</translation>
+        <translation type="vanished">Информация</translation>
     </message>
 </context>
 <context>
@@ -6930,7 +6946,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Enter a new label for the pattern piece.</source>
-        <translation>Введите новую метку для детали выкройки.</translation>
+        <translation>Введите новую метку для детали чертежа.</translation>
     </message>
     <message>
         <source>This file already opened in another window.</source>
@@ -7780,7 +7796,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Report Bug…</source>
-        <translation type="unfinished"></translation>
+        <translation>Сообщить об ошибке…</translation>
     </message>
     <message>
         <source>Export As…</source>
@@ -7816,7 +7832,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Ctrl+PgDown</source>
-        <translation type="unfinished"></translation>
+        <translation>Ctrl+PgDown</translation>
     </message>
     <message>
         <source>Previous pattern piece</source>
@@ -7824,11 +7840,11 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Ctrl+PgUp</source>
-        <translation type="unfinished"></translation>
+        <translation>Ctrl+PgUp</translation>
     </message>
     <message>
         <source>Point from tangent circle and segment</source>
-        <translation type="unfinished"></translation>
+        <translation>Точка пересечения круга и отрезка</translation>
     </message>
     <message>
         <source>Place label tool</source>
@@ -8249,7 +8265,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Update a pattern only after a curve release</source>
-        <translation type="unfinished"></translation>
+        <translation>Обновить выкройку только после редакции кривой</translation>
     </message>
     <message>
         <source>Free curve mode</source>
@@ -8412,6 +8428,22 @@ Do you want to save your changes?</source>
     <message>
         <source>Set default curve approximation scale</source>
         <translation>Установить масштаб аппроксимации кривой по умолчанию</translation>
+    </message>
+    <message>
+        <source>Bold line width</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Line width:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Millimiters</source>
+        <translation type="unfinished">Миллиметры</translation>
+    </message>
+    <message>
+        <source>Inches</source>
+        <translation type="unfinished">Дюймы</translation>
     </message>
 </context>
 <context>
@@ -8816,7 +8848,7 @@ Do you want to save your changes?</source>
     <name>SavePieceOptions</name>
     <message>
         <source>save detail options</source>
-        <translation type="unfinished"></translation>
+        <translation>сохранить параметры детали</translation>
     </message>
 </context>
 <context>
@@ -9523,46 +9555,54 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Import from CSV</source>
-        <translation type="unfinished"></translation>
+        <translation>Импорт из CSV</translation>
     </message>
     <message>
         <source>Measurement name in is empty.</source>
-        <translation type="unfinished"></translation>
+        <translation>Пустое название мерки.</translation>
     </message>
     <message>
         <source>Merasurement &apos;%1&apos; doesn&apos;t match regex pattern.</source>
-        <translation type="unfinished"></translation>
+        <translation>Мерка &apos;%1&apos; не соответствует образцу регулярного выражения.</translation>
     </message>
     <message>
         <source>Merasurement &apos;%1&apos; already used in file.</source>
-        <translation type="unfinished"></translation>
+        <translation>Мерка &apos;%1&apos; уже используется в файле.</translation>
     </message>
     <message>
         <source>Measurement &apos;%1&apos; is not one of known measurements.</source>
-        <translation type="unfinished"></translation>
+        <translation>Мерка &apos;%1&apos; не одна из известных мерок.</translation>
     </message>
     <message>
         <source>Individual measurements require at least 2 columns.</source>
-        <translation type="unfinished"></translation>
+        <translation>Индивидуальные мерки требуют как минимум 2 колонки.</translation>
     </message>
     <message>
         <source>Error in row %1.</source>
-        <translation type="unfinished"></translation>
+        <translation>Ошибка в строке %1.</translation>
     </message>
     <message>
         <source>Multisize measurements require at least 4 columns.</source>
-        <translation type="unfinished"></translation>
+        <translation>Мультиразмерные мерки требуют как минимум 4 колонки.</translation>
     </message>
     <message>
         <source>Cannot convert base size value to double in column 2.</source>
-        <translation type="unfinished"></translation>
+        <translation>Невозможно конвертировать значение базового размера для дублирования в колонку 2.</translation>
     </message>
     <message>
         <source>Cannot convert height increase value to double in column 3.</source>
-        <translation type="unfinished"></translation>
+        <translation>Невозможно конвертировать значение увеличения роста для дублирования в колонку 3.</translation>
     </message>
     <message>
         <source>Cannot convert size increase value to double in column 4.</source>
+        <translation>Невозможно конвертировать значение увеличения размера для дублирования в колонку 4.</translation>
+    </message>
+    <message>
+        <source>Imported file must not contain the same name twice.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Error in row %1. Measurement name is empty.</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -9816,15 +9856,15 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Intersection 2</source>
-        <translation type="unfinished"></translation>
+        <translation>Пересечение 2</translation>
     </message>
     <message>
         <source>Intersection 2 (only left)</source>
-        <translation type="unfinished"></translation>
+        <translation>Пересечение 2 (только слева)</translation>
     </message>
     <message>
         <source>Intersection 2 (only right)</source>
-        <translation type="unfinished"></translation>
+        <translation>Пересечение 2 (только справа)</translation>
     </message>
 </context>
 <context>
@@ -9927,7 +9967,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>The seam allowance is part of main path</source>
-        <translation>Припуски на швы - часть основного контура</translation>
+        <translation>Когда припуски на швы являются частью основного контура</translation>
     </message>
     <message>
         <source>Built in</source>
@@ -10203,14 +10243,14 @@ Do you want to save your changes?</source>
     <name>TogglePieceForbidFlipping</name>
     <message>
         <source>forbid flipping</source>
-        <translation type="unfinished"></translation>
+        <translation>запретить переворачивание</translation>
     </message>
 </context>
 <context>
     <name>TogglePieceForceFlipping</name>
     <message>
         <source>force flipping</source>
-        <translation type="unfinished"></translation>
+        <translation>форсировать переворачивание</translation>
     </message>
 </context>
 <context>
@@ -10857,11 +10897,11 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Export only details that match a piece name regex.</source>
-        <translation type="unfinished"></translation>
+        <translation>Экспортировать только те детали, которые соответствуют имени регулярного выражения.</translation>
     </message>
     <message>
         <source>The name regex</source>
-        <translation type="unfinished"></translation>
+        <translation>Имя регулярного выражения</translation>
     </message>
     <message>
         <source>Export to csv with header. By default disabled.</source>
@@ -10894,10 +10934,6 @@ Do you want to save your changes?</source>
     <message>
         <source>Number corresponding to layout page template (default = 0, export mode):</source>
         <translation>Число, соответствующее шаблону страницы раскладки (по умолчанию = 0, режим экспорта):</translation>
-    </message>
-    <message>
-        <source>Page measure units (export mode). Valid values: %2.</source>
-        <translation type="vanished">Единицы измерения страницы (режим экспорта). Допустимые значения: %2.</translation>
     </message>
     <message>
         <source>Ignore printer margins (export mode). Use if need full paper space. In case of later printing you must account for the margins himself.</source>
@@ -10965,7 +11001,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Page measure units (export mode). Valid values: %1.</source>
-        <translation type="unfinished">Единицы измерения страницы (режим экспорта). Допустимые значения: %2. {1.?}</translation>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -11190,11 +11226,11 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Forbid flipping</source>
-        <translation type="unfinished">Запретить переворачивание</translation>
+        <translation>Запретить переворачивание</translation>
     </message>
     <message>
         <source>Force flipping</source>
-        <translation type="unfinished">Форсировать переворачивание</translation>
+        <translation>Форсировать переворачивание</translation>
     </message>
 </context>
 <context>
@@ -11467,7 +11503,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Error creating or updating place lavel</source>
-        <translation type="unfinished"></translation>
+        <translation>Ошибка создания или обновления метки места</translation>
     </message>
 </context>
 <context>
@@ -12480,7 +12516,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>apply save detail options</source>
-        <translation type="unfinished"></translation>
+        <translation>Применить &quot;сохранить параметры детали&quot;</translation>
     </message>
     <message>
         <source>multi deletion</source>
@@ -12488,11 +12524,11 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Forbid flipping</source>
-        <translation type="unfinished">Запретить переворачивание</translation>
+        <translation>Запретить переворачивание</translation>
     </message>
     <message>
         <source>Force flipping</source>
-        <translation type="unfinished">Форсировать переворачивание</translation>
+        <translation>Форсировать переворачивание</translation>
     </message>
 </context>
 <context>

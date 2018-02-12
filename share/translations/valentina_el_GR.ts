@@ -2181,11 +2181,11 @@
     <name>DialogExportToCSV</name>
     <message>
         <source>Export options</source>
-        <translation>Επιλογές εξαγωγής</translation>
+        <translation type="vanished">Επιλογές εξαγωγής</translation>
     </message>
     <message>
         <source>Export</source>
-        <translation>Εξαγωγή</translation>
+        <translation type="vanished">Εξαγωγή</translation>
     </message>
     <message>
         <source>With header</source>
@@ -2214,6 +2214,18 @@
     <message>
         <source>Space</source>
         <translation>Κενό</translation>
+    </message>
+    <message>
+        <source>Options</source>
+        <translation type="unfinished">Επιλογές</translation>
+    </message>
+    <message>
+        <source>Global</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Preview</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -6244,7 +6256,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>A new version of %1 is available!</source>
-        <translation>Μια νέα έκδοση του %1 είναι διαθέσιμη!</translation>
+        <translation type="vanished">Μια νέα έκδοση του %1 είναι διαθέσιμη!</translation>
     </message>
     <message>
         <source>%1 %2 is now available - you have %3. Would you like to download it now?</source>
@@ -6261,6 +6273,10 @@ Apply settings anyway?</source>
     <message>
         <source>Get Update</source>
         <translation>Λήψη ενημέρωσης</translation>
+    </message>
+    <message>
+        <source>%1 update is available!</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -6287,11 +6303,11 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Error</source>
-        <translation>Σφάλμα</translation>
+        <translation type="vanished">Σφάλμα</translation>
     </message>
     <message>
         <source>Information</source>
-        <translation>Πληροφορίες</translation>
+        <translation type="vanished">Πληροφορίες</translation>
     </message>
 </context>
 <context>
@@ -8256,6 +8272,22 @@ Do you want to save your changes?</source>
         <source>Set default curve approximation scale</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Bold line width</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Line width:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Millimiters</source>
+        <translation type="unfinished">Χιλιοστά</translation>
+    </message>
+    <message>
+        <source>Inches</source>
+        <translation type="unfinished">Ίντσες</translation>
+    </message>
 </context>
 <context>
     <name>QCommandLineParser</name>
@@ -9337,6 +9369,14 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Cannot convert size increase value to double in column 4.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Imported file must not contain the same name twice.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Error in row %1. Measurement name is empty.</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -10811,7 +10851,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Forbid flipping</source>
-        <translation type="unfinished"></translation>
+        <translation>Αποτροπή αντιστροφής</translation>
     </message>
     <message>
         <source>Force flipping</source>
@@ -12089,7 +12129,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Forbid flipping</source>
-        <translation type="unfinished"></translation>
+        <translation>Αποτροπή αντιστροφής</translation>
     </message>
     <message>
         <source>Force flipping</source>

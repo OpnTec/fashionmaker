@@ -2209,11 +2209,11 @@
     <name>DialogExportToCSV</name>
     <message>
         <source>Export options</source>
-        <translation>Volby pro vyvedení</translation>
+        <translation type="vanished">Volby pro vyvedení</translation>
     </message>
     <message>
         <source>Export</source>
-        <translation>Vyvést</translation>
+        <translation type="vanished">Vyvést</translation>
     </message>
     <message>
         <source>With header</source>
@@ -2242,6 +2242,18 @@
     <message>
         <source>Space</source>
         <translation>Mezera</translation>
+    </message>
+    <message>
+        <source>Options</source>
+        <translation type="unfinished">Volby</translation>
+    </message>
+    <message>
+        <source>Global</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Preview</source>
+        <translation type="unfinished">Náhled</translation>
     </message>
 </context>
 <context>
@@ -6163,10 +6175,6 @@ Apply settings anyway?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>A new version of %1 is available!</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>%1 %2 is now available - you have %3. Would you like to download it now?</source>
         <translation type="unfinished"></translation>
     </message>
@@ -6180,6 +6188,10 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Get Update</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>%1 update is available!</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -6207,11 +6219,11 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Error</source>
-        <translation>Chyba</translation>
+        <translation type="vanished">Chyba</translation>
     </message>
     <message>
         <source>Information</source>
-        <translation>Informace</translation>
+        <translation type="vanished">Informace</translation>
     </message>
 </context>
 <context>
@@ -8071,6 +8083,22 @@ Chcete uložit své změny?</translation>
         <source>Set default curve approximation scale</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Bold line width</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Line width:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Millimiters</source>
+        <translation type="unfinished">Milimetry</translation>
+    </message>
+    <message>
+        <source>Inches</source>
+        <translation type="unfinished">Palce</translation>
+    </message>
 </context>
 <context>
     <name>QCommandLineParser</name>
@@ -9104,6 +9132,14 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Cannot convert size increase value to double in column 4.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Imported file must not contain the same name twice.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Error in row %1. Measurement name is empty.</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -10608,7 +10644,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Forbid flipping</source>
-        <translation type="unfinished">Zakázat přetočení</translation>
+        <translation>Zakázat přetočení</translation>
     </message>
     <message>
         <source>Force flipping</source>
@@ -11814,7 +11850,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Forbid flipping</source>
-        <translation type="unfinished">Zakázat přetočení</translation>
+        <translation>Zakázat přetočení</translation>
     </message>
     <message>
         <source>Force flipping</source>

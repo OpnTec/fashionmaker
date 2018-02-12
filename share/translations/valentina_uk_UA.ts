@@ -2225,11 +2225,11 @@
     <name>DialogExportToCSV</name>
     <message>
         <source>Export options</source>
-        <translation>Властивості експорту</translation>
+        <translation type="vanished">Властивості експорту</translation>
     </message>
     <message>
         <source>Export</source>
-        <translation>Експорт</translation>
+        <translation type="vanished">Експорт</translation>
     </message>
     <message>
         <source>With header</source>
@@ -2258,6 +2258,18 @@
     <message>
         <source>Space</source>
         <translation>Пробіл</translation>
+    </message>
+    <message>
+        <source>Options</source>
+        <translation type="unfinished">Параметри</translation>
+    </message>
+    <message>
+        <source>Global</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Preview</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -6335,7 +6347,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>A new version of %1 is available!</source>
-        <translation>Нова версія %1 доступна!</translation>
+        <translation type="vanished">Нова версія %1 доступна!</translation>
     </message>
     <message>
         <source>%1 %2 is now available - you have %3. Would you like to download it now?</source>
@@ -6352,6 +6364,10 @@ Apply settings anyway?</source>
     <message>
         <source>Get Update</source>
         <translation>Отримати оновлення</translation>
+    </message>
+    <message>
+        <source>%1 update is available!</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -6378,11 +6394,11 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Error</source>
-        <translation>Помилка</translation>
+        <translation type="vanished">Помилка</translation>
     </message>
     <message>
         <source>Information</source>
-        <translation>Інформація</translation>
+        <translation type="vanished">Інформація</translation>
     </message>
 </context>
 <context>
@@ -8410,6 +8426,22 @@ Do you want to save your changes?</source>
         <source>Set default curve approximation scale</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Bold line width</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Line width:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Millimiters</source>
+        <translation type="unfinished">Міліметри</translation>
+    </message>
+    <message>
+        <source>Inches</source>
+        <translation type="unfinished">Дюйми</translation>
+    </message>
 </context>
 <context>
     <name>QApplication</name>
@@ -9560,6 +9592,14 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Cannot convert size increase value to double in column 4.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Imported file must not contain the same name twice.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Error in row %1. Measurement name is empty.</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -11182,7 +11222,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Forbid flipping</source>
-        <translation type="unfinished">Заборонити відзеркалення</translation>
+        <translation>Заборонити відзеркалення</translation>
     </message>
     <message>
         <source>Force flipping</source>
@@ -12480,7 +12520,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Forbid flipping</source>
-        <translation type="unfinished">Заборонити відзеркалення</translation>
+        <translation>Заборонити відзеркалення</translation>
     </message>
     <message>
         <source>Force flipping</source>

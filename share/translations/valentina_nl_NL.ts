@@ -2225,11 +2225,11 @@
     <name>DialogExportToCSV</name>
     <message>
         <source>Export options</source>
-        <translation>Export opties</translation>
+        <translation type="vanished">Export opties</translation>
     </message>
     <message>
         <source>Export</source>
-        <translation>Export</translation>
+        <translation type="vanished">Export</translation>
     </message>
     <message>
         <source>With header</source>
@@ -2258,6 +2258,18 @@
     <message>
         <source>Space</source>
         <translation>Spatie</translation>
+    </message>
+    <message>
+        <source>Options</source>
+        <translation type="unfinished">Opties</translation>
+    </message>
+    <message>
+        <source>Global</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Preview</source>
+        <translation type="unfinished">Voorbeeld</translation>
     </message>
 </context>
 <context>
@@ -6337,7 +6349,7 @@ Toch de instellingen aanpassen?</translation>
     </message>
     <message>
         <source>A new version of %1 is available!</source>
-        <translation>Een nieuwe versie van %1 is verkrijgbaar!</translation>
+        <translation type="vanished">Een nieuwe versie van %1 is verkrijgbaar!</translation>
     </message>
     <message>
         <source>%1 %2 is now available - you have %3. Would you like to download it now?</source>
@@ -6354,6 +6366,10 @@ Toch de instellingen aanpassen?</translation>
     <message>
         <source>Get Update</source>
         <translation>Krijg opwaardering</translation>
+    </message>
+    <message>
+        <source>%1 update is available!</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -6380,11 +6396,11 @@ Toch de instellingen aanpassen?</translation>
     </message>
     <message>
         <source>Error</source>
-        <translation>Fout</translation>
+        <translation type="vanished">Fout</translation>
     </message>
     <message>
         <source>Information</source>
-        <translation>Informatie</translation>
+        <translation type="vanished">Informatie</translation>
     </message>
 </context>
 <context>
@@ -8412,6 +8428,22 @@ Do you want to save your changes?</source>
         <source>Set default curve approximation scale</source>
         <translation>Stel standaard krommingsbenadering schaal in</translation>
     </message>
+    <message>
+        <source>Bold line width</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Line width:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Millimiters</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Inches</source>
+        <translation type="unfinished">Inches</translation>
+    </message>
 </context>
 <context>
     <name>QApplication</name>
@@ -9562,6 +9594,14 @@ Wil je deze veranderingen opslaan?</translation>
     </message>
     <message>
         <source>Cannot convert size increase value to double in column 4.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Imported file must not contain the same name twice.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Error in row %1. Measurement name is empty.</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -11185,7 +11225,7 @@ Wil je deze veranderingen opslaan?</translation>
     </message>
     <message>
         <source>Forbid flipping</source>
-        <translation type="unfinished">Kantelen niet toegestaan</translation>
+        <translation>Kantelen niet toegestaan</translation>
     </message>
     <message>
         <source>Force flipping</source>
@@ -12483,7 +12523,7 @@ Wil je deze veranderingen opslaan?</translation>
     </message>
     <message>
         <source>Forbid flipping</source>
-        <translation type="unfinished">Kantelen niet toegestaan</translation>
+        <translation>Kantelen niet toegestaan</translation>
     </message>
     <message>
         <source>Force flipping</source>

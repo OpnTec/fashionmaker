@@ -1852,14 +1852,6 @@
 <context>
     <name>DialogExportToCSV</name>
     <message>
-        <source>Export options</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Export</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>With header</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1885,6 +1877,18 @@
     </message>
     <message>
         <source>Space</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Options</source>
+        <translation type="unfinished">Asetukset</translation>
+    </message>
+    <message>
+        <source>Global</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Preview</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -5647,10 +5651,6 @@ Apply settings anyway?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>A new version of %1 is available!</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>%1 %2 is now available - you have %3. Would you like to download it now?</source>
         <translation type="unfinished"></translation>
     </message>
@@ -5664,6 +5664,10 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Get Update</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>%1 update is available!</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -5687,14 +5691,6 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Feed error: invalid &quot;enclosure&quot; with the download link</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Error</source>
-        <translation type="unfinished">Virhe</translation>
-    </message>
-    <message>
-        <source>Information</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -7503,6 +7499,22 @@ Haluatko tallentaa muutokset?</translation>
         <source>Set default curve approximation scale</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Bold line width</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Line width:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Millimiters</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Inches</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>QCoreApplication</name>
@@ -8469,6 +8481,14 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Cannot convert size increase value to double in column 4.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Imported file must not contain the same name twice.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Error in row %1. Measurement name is empty.</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
