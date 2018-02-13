@@ -432,7 +432,7 @@
                           <xs:attribute name="name" type="xs:string"/>
                           <xs:attribute name="typeLine" type="curvePenStyle"/>
                           <xs:attribute name="cut" type="xs:boolean"/>
-                          <xs:attribute name="visible" type="xs:boolean"/> 
+                          <xs:attribute name="visible" type="xs:string"/> 
                         </xs:complexType>
                       </xs:element>
                       <xs:element name="tools" minOccurs="0" maxOccurs="unbounded">
