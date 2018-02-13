@@ -92,6 +92,7 @@ void DialogPiecePath::EnbleShowMode(bool disable)
     m_showMode = disable;
     ui->comboBoxType->setDisabled(m_showMode);
     ui->comboBoxPiece->setDisabled(m_showMode);
+    ValidObjects(PathIsValid());
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -199,7 +200,13 @@ void DialogPiecePath::CheckState()
     SCASSERT(bOk != nullptr);
     if (GetType() != PiecePathType::InternalPath)
     {// Works only for internal paths
-        m_flagFormulaVisible = true;
+        m_flagFormulaVisible = true; 
+    }
+    else
+    {
+        flagFormula = true;
+        m_flagFormulaBefore = true;
+        m_flagFormulaAfter = true;
     }
 
     bOk->setEnabled(flagName && flagError && flagFormula && m_flagFormulaBefore && m_flagFormulaAfter
