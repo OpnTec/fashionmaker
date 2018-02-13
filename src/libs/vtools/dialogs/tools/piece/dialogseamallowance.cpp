@@ -704,6 +704,7 @@ void DialogSeamAllowance::ShowCustomSAContextMenu(const QPoint &pos)
         {
             dialog->SetFormulaSAWidth(GetFormulaSAWidth());
         }
+        dialog->HideVisibilityTrigger();
         dialog->EnbleShowMode(true);
         m_dialog = dialog;
         m_dialog->setModal(true);

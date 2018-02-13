@@ -96,6 +96,12 @@ void DialogPiecePath::EnbleShowMode(bool disable)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void DialogPiecePath::HideVisibilityTrigger()
+{
+    ui->tabWidget->removeTab(ui->tabWidget->indexOf(ui->tabControl));
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 void DialogPiecePath::ChosenObject(quint32 id, const SceneObject &type)
 {
     if (not prepare)

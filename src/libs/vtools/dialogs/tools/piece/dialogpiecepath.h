@@ -44,6 +44,7 @@ public:
     virtual ~DialogPiecePath();
 
     void EnbleShowMode(bool disable);
+    void HideVisibilityTrigger();
 
     VPiecePath GetPiecePath() const;
     void       SetPiecePath(const VPiecePath &path);
