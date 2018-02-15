@@ -36,13 +36,17 @@
 VScaledLine::VScaledLine(QGraphicsItem *parent)
     : QGraphicsLineItem(parent),
       m_isBoldLine(true)
-{}
+{
+    QGraphicsItem::setCacheMode(QGraphicsItem::DeviceCoordinateCache); // Fix problem with constant redraw
+}
 
 //---------------------------------------------------------------------------------------------------------------------
 VScaledLine::VScaledLine(const QLineF &line, QGraphicsItem *parent)
     : QGraphicsLineItem(line, parent),
       m_isBoldLine(true)
-{}
+{
+    QGraphicsItem::setCacheMode(QGraphicsItem::DeviceCoordinateCache); // Fix problem with constant redraw
+}
 
 //---------------------------------------------------------------------------------------------------------------------
 void VScaledLine::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)

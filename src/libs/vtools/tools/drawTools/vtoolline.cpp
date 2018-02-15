@@ -66,7 +66,6 @@ VToolLine::VToolLine(const VToolLineInitData &initData, QGraphicsItem *parent)
       firstPoint(initData.firstPoint),
       secondPoint(initData.secondPoint),
       lineColor(initData.lineColor),
-      m_isHovered(false),
       m_acceptHoverEvents(true)
 {
     m_isBoldLine = false;
@@ -183,10 +182,11 @@ QString VToolLine::getTagName() const
 //---------------------------------------------------------------------------------------------------------------------
 void VToolLine::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
 {
-    const qreal width = ScaleWidth(m_isHovered ? qApp->Settings()->WidthMainLine() : qApp->Settings()->WidthHairLine(),
-                                   SceneScale(scene()));
-
-    setPen(QPen(CorrectColor(this, lineColor), width, LineStyleToPenStyle(m_lineType)));
+    // Don't set pen width. Parent should take care of it.
+    QPen lPen = pen();
+    lPen.setColor(CorrectColor(this, lineColor));
+    lPen.setStyle(LineStyleToPenStyle(m_lineType));
+    setPen(lPen);
 
     PaintWithFixItemHighlightSelected<VScaledLine>(this, painter, option, widget);
 }
@@ -291,7 +291,6 @@ void VToolLine::hoverEnterEvent(QGraphicsSceneHoverEvent *event)
 {
     if (m_acceptHoverEvents)
     {
-        m_isHovered = true;
         m_isBoldLine = true;
         setToolTip(MakeToolTip());
         VScaledLine::hoverEnterEvent(event);
@@ -311,7 +310,6 @@ void VToolLine::hoverLeaveEvent(QGraphicsSceneHoverEvent *event)
 {
     if (m_acceptHoverEvents && vis.isNull())
     {
-        m_isHovered = false;
         m_isBoldLine = false;
         VScaledLine::hoverLeaveEvent(event);
     }
