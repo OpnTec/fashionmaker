@@ -27,6 +27,7 @@
  *************************************************************************/
 #include "tst_abstracttranslation.h"
 
+#include <QtGlobal>
 #include <QtTest>
 
 const QString TST_AbstractTranslation::TagName           = QStringLiteral("name");
