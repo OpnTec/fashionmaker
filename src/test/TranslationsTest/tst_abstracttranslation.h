@@ -1,14 +1,14 @@
 /************************************************************************
  **
- **  @file   tst_tstranslation.h
+ **  @file   tst_abstracttranslation.h
  **  @author Roman Telezhynskyi <dismine(at)gmail.com>
- **  @date   13 12, 2015
+ **  @date   17 2, 2018
  **
  **  @brief
  **  @copyright
  **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
- **  Copyright (C) 2015 Valentina project
+ **  Copyright (C) 2018 Valentina project
  **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
  **
  **  Valentina is free software: you can redistribute it and/or modify
@@ -25,30 +25,38 @@
  **  along with Valentina.  If not, see <http://www.gnu.org/licenses/>.
  **
  *************************************************************************/
+#ifndef TST_ABSTRACTTRANSLATION_H
+#define TST_ABSTRACTTRANSLATION_H
 
-#ifndef TST_TSTRANSLATION_H
-#define TST_TSTRANSLATION_H
+#include <QObject>
+#include <QFile>
+#include <QSharedPointer>
+#include <QDomDocument>
 
-#include "tst_abstracttranslation.h"
-
-class TST_TSTranslation : public TST_AbstractTranslation
+class TST_AbstractTranslation : public QObject
 {
     Q_OBJECT
 public:
-    explicit TST_TSTranslation(QObject *parent = nullptr);
+    explicit TST_AbstractTranslation(QObject *parent = nullptr);
 
-private slots:
-    void CheckEnglishLocalization_data();
-    void CheckEnglishLocalization();
-    void CheckEmptyToolButton_data();
-    void CheckEmptyToolButton();
-    void CheckEllipsis_data();
-    void CheckEllipsis();
+protected:
+    QDomNodeList LoadTSFile(const QString &filename);
+
+    static const QString TagName;
+    static const QString TagMessage;
+    static const QString TagSource;
+    static const QString TagTranslation;
+
+    static const QString AttrType;
+    static const QString AttrValVanished;
+    static const QString AttrValUnfinished;
+    static const QString AttrValObsolete;
 
 private:
-    Q_DISABLE_COPY(TST_TSTranslation)
+    Q_DISABLE_COPY(TST_AbstractTranslation)
 
-    void PrepareOriginalStrings();
+    QSharedPointer<QFile> tsFile;
+    QSharedPointer<QDomDocument> tsXML;
 };
 
-#endif // TST_TSTRANSLATION_H
+#endif // TST_ABSTRACTTRANSLATION_H

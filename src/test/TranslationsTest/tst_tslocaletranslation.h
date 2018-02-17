@@ -1,14 +1,14 @@
 /************************************************************************
  **
- **  @file   tst_tstranslation.h
+ **  @file   tst_tslocaletranslation.h
  **  @author Roman Telezhynskyi <dismine(at)gmail.com>
- **  @date   13 12, 2015
+ **  @date   17 2, 2018
  **
  **  @brief
  **  @copyright
  **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
- **  Copyright (C) 2015 Valentina project
+ **  Copyright (C) 2018 Valentina project
  **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
  **
  **  Valentina is free software: you can redistribute it and/or modify
@@ -25,30 +25,29 @@
  **  along with Valentina.  If not, see <http://www.gnu.org/licenses/>.
  **
  *************************************************************************/
-
-#ifndef TST_TSTRANSLATION_H
-#define TST_TSTRANSLATION_H
+#ifndef TST_TSLOCALETRANSLATION_H
+#define TST_TSLOCALETRANSLATION_H
 
 #include "tst_abstracttranslation.h"
 
-class TST_TSTranslation : public TST_AbstractTranslation
+class TST_TSLocaleTranslation : public TST_AbstractTranslation
 {
     Q_OBJECT
 public:
-    explicit TST_TSTranslation(QObject *parent = nullptr);
+    explicit TST_TSLocaleTranslation(const QString &locale, QObject *parent = nullptr);
 
 private slots:
-    void CheckEnglishLocalization_data();
-    void CheckEnglishLocalization();
-    void CheckEmptyToolButton_data();
-    void CheckEmptyToolButton();
-    void CheckEllipsis_data();
-    void CheckEllipsis();
+    void CheckPlaceMarkerExist_data();
+    void CheckPlaceMarkerExist();
+    void TestPunctuation_data();
+    void TestPunctuation();
+    void TestHTMLTags_data();
+    void TestHTMLTags();
 
 private:
-    Q_DISABLE_COPY(TST_TSTranslation)
+    Q_DISABLE_COPY(TST_TSLocaleTranslation)
 
-    void PrepareOriginalStrings();
+    QString m_locale;
 };
 
-#endif // TST_TSTRANSLATION_H
+#endif // TST_TSLOCALETRANSLATION_H

@@ -48,7 +48,9 @@ SOURCES += \
     tst_qmuparsererrormsg.cpp \
     tst_tstranslation.cpp \
     tst_buitinregexp.cpp \
-    tst_abstractregexp.cpp
+    tst_abstractregexp.cpp \
+    tst_tslocaletranslation.cpp \
+    tst_abstracttranslation.cpp
 
 *msvc*:SOURCES += stable.cpp
 
@@ -58,7 +60,9 @@ HEADERS += \
     tst_qmuparsererrormsg.h \
     tst_tstranslation.h \
     tst_buitinregexp.h \
-    tst_abstractregexp.h
+    tst_abstractregexp.h \
+    tst_tslocaletranslation.h \
+    tst_abstracttranslation.h
 
 # Set using ccache. Function enable_ccache() defined in common.pri.
 $$enable_ccache()
