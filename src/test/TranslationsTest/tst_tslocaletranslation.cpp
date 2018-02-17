@@ -27,8 +27,9 @@
  *************************************************************************/
 #include "tst_tslocaletranslation.h"
 
-#include <QtGlobal>
 #include <QtTest>
+
+#include "../vmisc/logging.h"
 
 //---------------------------------------------------------------------------------------------------------------------
 TST_TSLocaleTranslation::TST_TSLocaleTranslation(const QString &locale, QObject *parent)
