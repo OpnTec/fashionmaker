@@ -1769,7 +1769,7 @@
     </message>
     <message>
         <source>Options</source>
-        <translation type="unfinished">pilihan</translation>
+        <translation>pilihan</translation>
     </message>
     <message>
         <source>Global</source>
@@ -6876,11 +6876,11 @@ Apakah anda ingin menyimpan perubahan anda?</translation>
     </message>
     <message>
         <source>Millimiters</source>
-        <translation type="unfinished">Milimeter</translation>
+        <translation>Milimeter</translation>
     </message>
     <message>
         <source>Inches</source>
-        <translation type="unfinished">Inchi</translation>
+        <translation>Inchi</translation>
     </message>
 </context>
 <context>

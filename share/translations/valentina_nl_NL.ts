@@ -2261,7 +2261,7 @@
     </message>
     <message>
         <source>Options</source>
-        <translation type="unfinished">Opties</translation>
+        <translation>Opties</translation>
     </message>
     <message>
         <source>Global</source>
@@ -2269,7 +2269,7 @@
     </message>
     <message>
         <source>Preview</source>
-        <translation type="unfinished">Voorbeeld</translation>
+        <translation>Voorbeeld</translation>
     </message>
 </context>
 <context>
@@ -8438,11 +8438,11 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Millimiters</source>
-        <translation type="unfinished"></translation>
+        <translation>Millimeters</translation>
     </message>
     <message>
         <source>Inches</source>
-        <translation type="unfinished">Inches</translation>
+        <translation>Inches</translation>
     </message>
 </context>
 <context>

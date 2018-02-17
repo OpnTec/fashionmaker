@@ -2217,7 +2217,7 @@
     </message>
     <message>
         <source>Options</source>
-        <translation type="unfinished">Επιλογές</translation>
+        <translation>Επιλογές</translation>
     </message>
     <message>
         <source>Global</source>
@@ -8282,11 +8282,11 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Millimiters</source>
-        <translation type="unfinished">Χιλιοστά</translation>
+        <translation>Χιλιοστά</translation>
     </message>
     <message>
         <source>Inches</source>
-        <translation type="unfinished">Ίντσες</translation>
+        <translation>Ίντσες</translation>
     </message>
 </context>
 <context>

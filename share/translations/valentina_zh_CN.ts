@@ -6620,11 +6620,11 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Millimiters</source>
-        <translation type="unfinished">毫米</translation>
+        <translation>毫米</translation>
     </message>
     <message>
         <source>Inches</source>
-        <translation type="unfinished">英寸</translation>
+        <translation>英寸</translation>
     </message>
 </context>
 <context>

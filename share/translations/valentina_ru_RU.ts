@@ -2261,7 +2261,7 @@
     </message>
     <message>
         <source>Options</source>
-        <translation type="unfinished"></translation>
+        <translation>Опции</translation>
     </message>
     <message>
         <source>Global</source>
@@ -2269,7 +2269,7 @@
     </message>
     <message>
         <source>Preview</source>
-        <translation type="unfinished">Предварительный просмотр</translation>
+        <translation>Предварительный просмотр</translation>
     </message>
 </context>
 <context>
@@ -8439,11 +8439,11 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Millimiters</source>
-        <translation type="unfinished">Миллиметры</translation>
+        <translation>Миллиметры</translation>
     </message>
     <message>
         <source>Inches</source>
-        <translation type="unfinished">Дюймы</translation>
+        <translation>Дюймы</translation>
     </message>
 </context>
 <context>

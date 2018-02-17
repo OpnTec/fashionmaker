@@ -2261,7 +2261,7 @@
     </message>
     <message>
         <source>Options</source>
-        <translation type="unfinished">Opções</translation>
+        <translation>Opções</translation>
     </message>
     <message>
         <source>Global</source>
@@ -2269,7 +2269,7 @@
     </message>
     <message>
         <source>Preview</source>
-        <translation type="unfinished">Visualização</translation>
+        <translation>Visualização</translation>
     </message>
 </context>
 <context>
@@ -8415,11 +8415,11 @@ Você quer salvar suas mudanças?</translation>
     </message>
     <message>
         <source>Millimiters</source>
-        <translation type="unfinished"></translation>
+        <translation>Milímetros</translation>
     </message>
     <message>
         <source>Inches</source>
-        <translation type="unfinished">Polegadas</translation>
+        <translation>Polegadas</translation>
     </message>
 </context>
 <context>
@@ -12014,6 +12014,22 @@ Deseja salvar suas mudanças?</translation>
     <message>
         <source>Name</source>
         <translation type="vanished">Nome</translation>
+    </message>
+    <message>
+        <source>C1: angle</source>
+        <translation type="vanished">C1: ângulo</translation>
+    </message>
+    <message>
+        <source>C1: length</source>
+        <translation type="vanished">C1: comprimento</translation>
+    </message>
+    <message>
+        <source>C2: angle</source>
+        <translation type="vanished">C2: ângulo</translation>
+    </message>
+    <message>
+        <source>C2: length</source>
+        <translation type="vanished">C2: comprimento</translation>
     </message>
     <message>
         <source>Cubic bezier curve</source>

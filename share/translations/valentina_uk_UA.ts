@@ -2261,7 +2261,7 @@
     </message>
     <message>
         <source>Options</source>
-        <translation type="unfinished">Параметри</translation>
+        <translation>Параметри</translation>
     </message>
     <message>
         <source>Global</source>
@@ -8436,11 +8436,11 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Millimiters</source>
-        <translation type="unfinished">Міліметри</translation>
+        <translation>Міліметри</translation>
     </message>
     <message>
         <source>Inches</source>
-        <translation type="unfinished">Дюйми</translation>
+        <translation>Дюйми</translation>
     </message>
 </context>
 <context>

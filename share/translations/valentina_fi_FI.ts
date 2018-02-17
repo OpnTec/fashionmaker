@@ -1881,7 +1881,7 @@
     </message>
     <message>
         <source>Options</source>
-        <translation type="unfinished">Asetukset</translation>
+        <translation>Asetukset</translation>
     </message>
     <message>
         <source>Global</source>
@@ -7509,11 +7509,11 @@ Haluatko tallentaa muutokset?</translation>
     </message>
     <message>
         <source>Millimiters</source>
-        <translation type="unfinished"></translation>
+        <translation>Millimetriä</translation>
     </message>
     <message>
         <source>Inches</source>
-        <translation type="unfinished"></translation>
+        <translation>Tuumaa</translation>
     </message>
 </context>
 <context>

@@ -2262,7 +2262,7 @@
     </message>
     <message>
         <source>Options</source>
-        <translation type="unfinished">Opciones</translation>
+        <translation>Opciones</translation>
     </message>
     <message>
         <source>Global</source>
@@ -8437,11 +8437,11 @@ Quiere guardar los cambios?</translation>
     </message>
     <message>
         <source>Millimiters</source>
-        <translation type="unfinished">Milímetros</translation>
+        <translation>Milímetros</translation>
     </message>
     <message>
         <source>Inches</source>
-        <translation type="unfinished"></translation>
+        <translation>Pulgadas</translation>
     </message>
 </context>
 <context>

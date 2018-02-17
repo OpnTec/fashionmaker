@@ -2245,7 +2245,7 @@
     </message>
     <message>
         <source>Options</source>
-        <translation type="unfinished">Volby</translation>
+        <translation>Volby</translation>
     </message>
     <message>
         <source>Global</source>
@@ -2253,7 +2253,7 @@
     </message>
     <message>
         <source>Preview</source>
-        <translation type="unfinished">Náhled</translation>
+        <translation>Náhled</translation>
     </message>
 </context>
 <context>
@@ -8093,11 +8093,11 @@ Chcete uložit své změny?</translation>
     </message>
     <message>
         <source>Millimiters</source>
-        <translation type="unfinished">Milimetry</translation>
+        <translation>Milimetry</translation>
     </message>
     <message>
         <source>Inches</source>
-        <translation type="unfinished">Palce</translation>
+        <translation>Palce</translation>
     </message>
 </context>
 <context>

@@ -1959,7 +1959,7 @@
     </message>
     <message>
         <source>Options</source>
-        <translation type="unfinished">Opcje</translation>
+        <translation>Opcje</translation>
     </message>
     <message>
         <source>Global</source>
@@ -7322,11 +7322,11 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Millimiters</source>
-        <translation type="unfinished">Milimetry</translation>
+        <translation>Milimetry</translation>
     </message>
     <message>
         <source>Inches</source>
-        <translation type="unfinished">Cale</translation>
+        <translation>Cale</translation>
     </message>
 </context>
 <context>

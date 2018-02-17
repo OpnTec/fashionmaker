@@ -1498,7 +1498,7 @@
     </message>
     <message>
         <source>Options</source>
-        <translation type="unfinished">אפשרויות</translation>
+        <translation>אפשרויות</translation>
     </message>
     <message>
         <source>Global</source>
@@ -6528,7 +6528,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Millimiters</source>
-        <translation type="unfinished">מילימטר</translation>
+        <translation>מילימטר</translation>
     </message>
     <message>
         <source>Inches</source>

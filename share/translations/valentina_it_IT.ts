@@ -2185,7 +2185,7 @@
     </message>
     <message>
         <source>Options</source>
-        <translation type="unfinished">Opzioni</translation>
+        <translation>Opzioni</translation>
     </message>
     <message>
         <source>Global</source>
@@ -8313,11 +8313,11 @@ Vuoi salvare i cambiamenti?</translation>
     </message>
     <message>
         <source>Millimiters</source>
-        <translation type="unfinished">Millimetri</translation>
+        <translation>Millimetri</translation>
     </message>
     <message>
         <source>Inches</source>
-        <translation type="unfinished">Pollici</translation>
+        <translation>Pollici</translation>
     </message>
 </context>
 <context>

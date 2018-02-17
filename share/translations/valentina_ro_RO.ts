@@ -2046,7 +2046,7 @@
     </message>
     <message>
         <source>Options</source>
-        <translation type="unfinished">Opțiuni</translation>
+        <translation>Opțiuni</translation>
     </message>
     <message>
         <source>Global</source>
@@ -7478,11 +7478,11 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Millimiters</source>
-        <translation type="unfinished">Milimetrii</translation>
+        <translation>Milimetrii</translation>
     </message>
     <message>
         <source>Inches</source>
-        <translation type="unfinished">Inci</translation>
+        <translation>Inci</translation>
     </message>
 </context>
 <context>
