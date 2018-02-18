@@ -33,6 +33,10 @@
 #include <QSharedPointer>
 #include <QDomDocument>
 
+#ifdef Q_CC_MSVC
+#include <ciso646>
+#endif /* Q_CC_MSVC */
+
 class TST_AbstractTranslation : public QObject
 {
     Q_OBJECT
