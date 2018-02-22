@@ -234,53 +234,35 @@ void VFormula::Eval()
     {
         return;
     }
-    if (formula.isEmpty())
-    {
-        value = tr("Error");
-        _error = true;
-        dValue = 0;
-    }
-    else
+
+    value = tr("Error");
+    _error = true;
+    dValue = 0;
+    qreal result = 0;
+
+    if (not formula.isEmpty())
     {
         try
         {
             QScopedPointer<Calculator> cal(new Calculator());
-            QString expression = qApp->TrVars()->FormulaFromUser(formula, qApp->Settings()->GetOsSeparator());
-            const qreal result = cal->EvalFormula(data->DataVariables(), expression);
-
-            if (qIsInf(result) || qIsNaN(result))
-            {
-                value = tr("Error");
-                _error = true;
-                dValue = 0;
-            }
-            else
-            {
-                //if result equal 0
-                if (checkZero && qFuzzyIsNull(result))
-                {
-                    value = QString("0");
-                    _error = true;
-                    dValue = 0;
-                }
-                else
-                {
-                    dValue = result;
-                    value = QString(qApp->LocaleToString(result) + " " + postfix);
-                    _error = false;
-                }
-            }
+            const QString expression = qApp->TrVars()->FormulaFromUser(formula, qApp->Settings()->GetOsSeparator());
+            result = cal->EvalFormula(data->DataVariables(), expression);
         }
         catch (qmu::QmuParserError &e)
         {
-            value = tr("Error");
-            _error = true;
-            dValue = 0;
             qDebug() << "\nMath parser error:\n"
                      << "--------------------------------------\n"
                      << "Message:     " << e.GetMsg()  << "\n"
                      << "Expression:  " << e.GetExpr() << "\n"
                      << "--------------------------------------";
+            return;
+        }
+
+        if (not qIsInf(result) && not qIsNaN(result) && not (checkZero && qFuzzyIsNull(result)))
+        {
+            dValue = result;
+            value = qApp->LocaleToString(result) + QLatin1Char(' ') + postfix;
+            _error = false;
         }
     }
 }
