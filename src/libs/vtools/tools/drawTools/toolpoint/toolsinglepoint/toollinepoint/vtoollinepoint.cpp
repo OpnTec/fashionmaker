@@ -217,7 +217,7 @@ void VToolLinePoint::SetLineColor(const QString &value)
 VFormula VToolLinePoint::GetFormulaLength() const
 {
     VFormula fLength(formulaLength, this->getData());
-    fLength.setCheckZero(true);
+    fLength.setCheckZero(false);
     fLength.setToolId(m_id);
     fLength.setPostfix(UnitsToStr(qApp->patternUnit()));
     fLength.Eval();

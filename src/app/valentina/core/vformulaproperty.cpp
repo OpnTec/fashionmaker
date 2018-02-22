@@ -198,10 +198,12 @@ void VFormulaProperty::SetFormula(const VFormula &formula)
     }
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void VFormulaProperty::ValueChildChanged(const QVariant &value, int typeForParent)
 {
     Q_UNUSED(typeForParent)
     VFormula newFormula = GetFormula();
     newFormula.SetFormula(value.toString(), FormulaType::FromUser);
+    newFormula.Eval();
     SetFormula(newFormula);
 }
