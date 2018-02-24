@@ -13502,7 +13502,7 @@ Deseja salvar suas mudanças?</translation>
     <message>
         <source>size</source>
         <comment>placeholder</comment>
-        <translation type="unfinished"></translation>
+        <translation>tamanho</translation>
     </message>
     <message>
         <source>height</source>
