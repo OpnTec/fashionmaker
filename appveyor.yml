@@ -38,8 +38,8 @@ shallow_clone: false                 # default is "false"
 
 environment:
   matrix:
-  - QT5: Qt\5.9\mingw53_32
-    QT_VERSION: Qt5.9
+  - QT5: Qt\5.10.0\mingw53_32
+    QT_VERSION: Qt5.10
     QMAKE_GENERATOR: "MinGW Makefiles"
     MINGW_PATH: C:\Qt\Tools\mingw530_32\bin
     PLATFORM: x86
@@ -50,6 +50,22 @@ environment:
     MINGW_PATH: C:\Qt\Tools\mingw492_32\bin
     PLATFORM: x86
     DEPLOY: true
+  - QT5: Qt\5.10.0\msvc2015_64
+    QMAKE_GENERATOR: "NMake Makefiles JOM"
+    VSVER: 14
+    PLATFORM: x64
+    DEPLOY: false
+  - QT5: Qt\5.10.0\msvc2015
+    QMAKE_GENERATOR: "NMake Makefiles JOM"
+    VSVER: 14
+    PLATFORM: x86
+    DEPLOY: false
+  - QT5: Qt\5.9\mingw53_32
+    QT_VERSION: Qt5.9
+    QMAKE_GENERATOR: "MinGW Makefiles"
+    MINGW_PATH: C:\Qt\Tools\mingw530_32\bin
+    PLATFORM: x86
+    DEPLOY: false
   - QT5: Qt\5.9\msvc2015_64
     QMAKE_GENERATOR: "NMake Makefiles JOM"
     VSVER: 14
