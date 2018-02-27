@@ -489,6 +489,7 @@ void DialogFinalMeasurements::Fx()
         UpdateTree();
 
         ui->tableWidget->selectRow(row);
+        ShowFinalMeasurementDetails();
     }
 }
 
