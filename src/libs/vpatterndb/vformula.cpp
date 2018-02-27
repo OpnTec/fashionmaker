@@ -89,7 +89,7 @@ VFormula &VFormula::operator=(const VFormula &formula)
 VFormula::VFormula(const VFormula &formula)
     : formula(formula.formula),
       value(formula.value),
-      checkZero(formula.data),
+      checkZero(formula.checkZero),
       data(formula.getData()),
       toolId(formula.toolId),
       postfix(formula.postfix),
