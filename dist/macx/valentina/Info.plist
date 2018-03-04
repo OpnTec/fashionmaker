@@ -82,7 +82,7 @@
 			<key>UTTypeIconFile</key>
 			<string>pattern</string>
 			<key>UTTypeIdentifier</key>
-			<string>org.valentinaproject.val</string>
+			<string>io.bitbucket.valentinaproject.val</string>
 			<key>UTTypeTagSpecification</key>
 			<dict>
 				<key>public.filename-extension</key>
@@ -122,7 +122,7 @@
 				<string>public.xml</string>
 			</array>
 			<key>UTTypeDescription</key>
-                        <string>Valentina multisize measurements</string>
+            <string>Valentina multisize measurements</string>
 			<key>UTTypeIconFile</key>
 			<string>s-measurements.icns</string>
 			<key>UTTypeIdentifier</key>
