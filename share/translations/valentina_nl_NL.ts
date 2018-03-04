@@ -5167,7 +5167,7 @@ Toch de instellingen aanpassen?</translation>
     </message>
     <message>
         <source>Select origin point that is not part of the list of objects</source>
-        <translation>Selecteer een draaipunt dat geen onderdeel is van de gekozen objecten</translation>
+        <translation type="vanished">Selecteer een draaipunt dat geen onderdeel is van de gekozen objecten</translation>
     </message>
     <message>
         <source>Calculation</source>

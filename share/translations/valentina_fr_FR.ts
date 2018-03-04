@@ -5162,7 +5162,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Select origin point that is not part of the list of objects</source>
-        <translation>Sélectionnez un point d&apos;origine qui n&apos;est pas dans la liste d&apos;objets</translation>
+        <translation type="vanished">Sélectionnez un point d&apos;origine qui n&apos;est pas dans la liste d&apos;objets</translation>
     </message>
     <message>
         <source>Calculation</source>

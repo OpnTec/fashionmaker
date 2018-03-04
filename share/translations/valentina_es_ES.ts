@@ -5165,7 +5165,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Select origin point that is not part of the list of objects</source>
-        <translation>Seleccionar el punto de origen que no es parte de la lista de objetos</translation>
+        <translation type="vanished">Seleccionar el punto de origen que no es parte de la lista de objetos</translation>
     </message>
     <message>
         <source>Calculation</source>

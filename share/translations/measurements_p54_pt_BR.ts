@@ -1482,7 +1482,7 @@
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="861"/>
         <source>Half of &apos;Highbust arc, back&apos;. From Highbust Back to Highbust Side. (&apos;Highbust arc, back&apos; / 2).</source>
         <comment>Full measurement description.</comment>
-        <translation type="unfinished"></translation>
+        <translation>Metade do &apos;Busto alto arco, costa&apos;. De Busto alto Costa para Busto alto Lado. (&apos;Busto alto arco, costa&apos; / 2).</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="866"/>

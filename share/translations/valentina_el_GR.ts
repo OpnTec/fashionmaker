@@ -5082,7 +5082,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Select origin point that is not part of the list of objects</source>
-        <translation>Επιλέξτε σημείο προέλευσης που δεν είναι μέρος της λίστας αντικειμένων</translation>
+        <translation type="vanished">Επιλέξτε σημείο προέλευσης που δεν είναι μέρος της λίστας αντικειμένων</translation>
     </message>
     <message>
         <source>Calculation</source>

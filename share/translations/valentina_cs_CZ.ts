@@ -5046,7 +5046,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Select origin point that is not part of the list of objects</source>
-        <translation>Vyberte původní bod, který není částí seznamu předmětů</translation>
+        <translation type="vanished">Vyberte původní bod, který není částí seznamu předmětů</translation>
     </message>
     <message>
         <source>Calculation</source>

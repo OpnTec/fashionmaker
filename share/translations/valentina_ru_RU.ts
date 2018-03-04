@@ -5167,7 +5167,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Select origin point that is not part of the list of objects</source>
-        <translation>Выбор начальной точки (точка не должна принадлежать какому-либо объекту)</translation>
+        <translation type="vanished">Выбор начальной точки (точка не должна принадлежать какому-либо объекту)</translation>
     </message>
     <message>
         <source>Calculation</source>

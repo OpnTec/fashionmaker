@@ -5151,10 +5151,6 @@ Apply settings anyway?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Select origin point that is not part of the list of objects</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Calculation</source>
         <translation>Berechnung</translation>
     </message>
