@@ -242,16 +242,19 @@ void DialogRotation::ChosenObject(quint32 id, const SceneObject &type)
     {
         if (type == SceneObject::Point)
         {
+            VisToolRotation *operation = qobject_cast<VisToolRotation *>(vis);
+            SCASSERT(operation != nullptr)
+
             if (objects.contains(id))
             {
-                emit ToolTip(tr("Select origin point that is not part of the list of objects"));
-                return;
+                // It's not really logical for a user that a center of rotation no need to select.
+                // To fix this issue we just silently remove it from the list.
+                objects.removeOne(id);
+                operation->SetObjects(objects.toVector());
             }
 
             if (SetObject(id, ui->comboBoxOriginPoint, ""))
             {
-                VisToolRotation *operation = qobject_cast<VisToolRotation *>(vis);
-                SCASSERT(operation != nullptr)
                 VAbstractMainWindow *window = qobject_cast<VAbstractMainWindow *>(qApp->getMainWindow());
                 SCASSERT(window != nullptr)
                 connect(operation, &Visualization::ToolTip, window, &VAbstractMainWindow::ShowToolTip);
