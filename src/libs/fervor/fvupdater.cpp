@@ -353,7 +353,9 @@ void FvUpdater::startDownloadFeed(const QUrl &url)
     request.setHeader(QNetworkRequest::ContentTypeHeader, QStringLiteral("application/xml"));
     request.setHeader(QNetworkRequest::UserAgentHeader, QCoreApplication::applicationName());
     request.setUrl(url);
+#ifndef QT_NO_SSL
     request.setSslConfiguration(QSslConfiguration::defaultConfiguration());
+#endif
 
     m_reply = m_qnam.get(request);
 
