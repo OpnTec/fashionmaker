@@ -53,7 +53,8 @@ public:
           m_angleType(PieceNodeAngle::ByLength),
           m_passmarkLineType(PassmarkLineType::OneLine),
           m_passmarkAngleType(PassmarkAngleType::Straightforward),
-          m_isShowSecondPassmark(true)
+          m_isShowSecondPassmark(true),
+          m_checkUniqueness(true)
     {}
 
     VPieceNodeData(quint32 id, Tool typeTool, bool reverse)
@@ -68,7 +69,8 @@ public:
           m_angleType(PieceNodeAngle::ByLength),
           m_passmarkLineType(PassmarkLineType::OneLine),
           m_passmarkAngleType(PassmarkAngleType::Straightforward),
-          m_isShowSecondPassmark(true)
+          m_isShowSecondPassmark(true),
+          m_checkUniqueness(true)
     {
         if (m_typeTool == Tool::NodePoint)
         {
@@ -89,7 +91,8 @@ public:
           m_angleType(node.m_angleType),
           m_passmarkLineType(node.m_passmarkLineType),
           m_passmarkAngleType(node.m_passmarkAngleType),
-          m_isShowSecondPassmark(node.m_isShowSecondPassmark)
+          m_isShowSecondPassmark(node.m_isShowSecondPassmark),
+          m_checkUniqueness(node.m_checkUniqueness)
     {}
 
     ~VPieceNodeData() Q_DECL_EQ_DEFAULT;
@@ -125,6 +128,11 @@ public:
     PassmarkAngleType m_passmarkAngleType;
 
     bool m_isShowSecondPassmark;
+
+    /** @brief m_checkUniqueness need in cases where different points have the same coordinates, become one point.
+     * By default the check enabled. Disable it only if in a path cannot be used just one point. For example if
+     * gradation change a piece shape and the seond point should be remaind.*/
+    bool m_checkUniqueness;
 
 private:
     VPieceNodeData &operator=(const VPieceNodeData &) Q_DECL_EQ_DELETE;

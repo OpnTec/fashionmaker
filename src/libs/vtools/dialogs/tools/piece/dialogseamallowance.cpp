@@ -613,6 +613,7 @@ void DialogSeamAllowance::ShowMainPathContextMenu(const QPoint &pos)
     VPieceNode rowNode = qvariant_cast<VPieceNode>(rowItem->data(Qt::UserRole));
 
     QAction *actionPassmark = nullptr;
+    QAction *actionUniqueness = nullptr;
     QAction *actionReverse = nullptr;
     if (rowNode.GetTypeTool() != Tool::NodePoint)
     {
@@ -625,6 +626,10 @@ void DialogSeamAllowance::ShowMainPathContextMenu(const QPoint &pos)
         actionPassmark = menu->addAction(tr("Passmark"));
         actionPassmark->setCheckable(true);
         actionPassmark->setChecked(rowNode.IsPassmark());
+
+        actionUniqueness = menu->addAction(tr("Check uniqueness"));
+        actionUniqueness->setCheckable(true);
+        actionUniqueness->setChecked(rowNode.IsCheckUniqueness());
     }
 
     QAction *actionExcluded = menu->addAction(tr("Excluded"));
@@ -654,6 +659,12 @@ void DialogSeamAllowance::ShowMainPathContextMenu(const QPoint &pos)
     else if (selectedAction == actionPassmark)
     {
         rowNode.SetPassmark(not rowNode.IsPassmark());
+        rowItem->setData(Qt::UserRole, QVariant::fromValue(rowNode));
+        rowItem->setText(GetNodeName(rowNode, true));
+    }
+    else if (selectedAction == actionUniqueness)
+    {
+        rowNode.SetCheckUniqueness(not rowNode.IsCheckUniqueness());
         rowItem->setData(Qt::UserRole, QVariant::fromValue(rowNode));
         rowItem->setText(GetNodeName(rowNode, true));
     }

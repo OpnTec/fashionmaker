@@ -312,6 +312,18 @@ void VPieceNode::SetShowSecondPassmark(bool value)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+bool VPieceNode::IsCheckUniqueness() const
+{
+    return d->m_checkUniqueness;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VPieceNode::SetCheckUniqueness(bool value)
+{
+    d->m_checkUniqueness = (d->m_typeTool == Tool::NodePoint ? value : true);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 bool VPieceNode::IsExcluded() const
 {
     return d->m_excluded;

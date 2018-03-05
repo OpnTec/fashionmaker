@@ -99,6 +99,9 @@ public:
 
     bool IsShowSecondPassmark() const;
     void SetShowSecondPassmark(bool value);
+
+    bool IsCheckUniqueness() const;
+    void SetCheckUniqueness(bool value);
 private:
     QSharedDataPointer<VPieceNodeData> d;
 };

@@ -271,6 +271,7 @@ public:
     static const QString AttrIncludeAs;
     static const QString AttrRotation;
     static const QString AttrNumber;
+    static const QString AttrCheckUniqueness;
 
     static const QString AttrAll;
 

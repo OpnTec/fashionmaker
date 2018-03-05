@@ -95,6 +95,40 @@ VPieceNode RowNode(QListWidget *listWidget, int i)
     SCASSERT(rowItem != nullptr);
     return qvariant_cast<VPieceNode>(rowItem->data(Qt::UserRole));
 }
+
+//---------------------------------------------------------------------------------------------------------------------
+bool DoublePoint(const VPieceNode &firstNode, const VPieceNode &secondNode, const VContainer *data)
+{
+    if (firstNode.GetTypeTool() == Tool::NodePoint && not (firstNode.GetId() == NULL_ID)
+            && secondNode.GetTypeTool() == Tool::NodePoint && not (secondNode.GetId() == NULL_ID))
+    {
+        // don't ignore the same point twice
+        if (firstNode.GetId() == secondNode.GetId())
+        {
+            return true;
+        }
+
+        // But ignore the same coordinate if a user wants
+        if (not firstNode.IsCheckUniqueness() || not secondNode.IsCheckUniqueness())
+        {
+            return false;
+        }
+
+        try
+        {
+            const QSharedPointer<VPointF> firstPoint = data->GeometricObject<VPointF>(firstNode.GetId());
+            const QSharedPointer<VPointF> secondPoint = data->GeometricObject<VPointF>(secondNode.GetId());
+
+            return firstPoint->toQPointF() == secondPoint->toQPointF();
+        }
+        catch(const VExceptionBadId &)
+        {
+            return true;
+        }
+    }
+
+    return false;
+}
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -508,20 +542,7 @@ bool DialogTool::FirstPointEqualLast(QListWidget *listWidget, const VContainer *
         const VPieceNode topNode = RowNode(listWidget, FindNotExcludedNodeDown(listWidget, 0));
         const VPieceNode bottomNode = RowNode(listWidget, FindNotExcludedNodeUp(listWidget, listWidget->count()-1));
 
-        QSharedPointer<VPointF> firstPoint;
-        if (topNode.GetTypeTool() == Tool::NodePoint)
-        {
-            firstPoint = data->GeometricObject<VPointF>(topNode.GetId());
-        }
-
-        QSharedPointer<VPointF> secondPoint;
-        if (bottomNode.GetTypeTool() == Tool::NodePoint)
-        {
-            secondPoint = data->GeometricObject<VPointF>(bottomNode.GetId());
-        }
-
-        return topNode.GetId() == bottomNode.GetId() || (not firstPoint.isNull() && not secondPoint.isNull()
-                                                         && firstPoint->toQPointF() == secondPoint->toQPointF());
+        return DoublePoint(topNode, bottomNode, data);
     }
     return false;
 }
@@ -536,20 +557,7 @@ bool DialogTool::DoublePoints(QListWidget *listWidget, const VContainer *data)
         const VPieceNode firstNode = RowNode(listWidget, firstIndex);
         const VPieceNode secondNode = RowNode(listWidget, FindNotExcludedNodeDown(listWidget, firstIndex+1));
 
-        QSharedPointer<VPointF> firstPoint;
-        if (firstNode.GetTypeTool() == Tool::NodePoint && not (firstNode.GetId() == NULL_ID))
-        {
-            firstPoint = data->GeometricObject<VPointF>(firstNode.GetId());
-        }
-
-        QSharedPointer<VPointF> secondPoint;
-        if (secondNode.GetTypeTool() == Tool::NodePoint && not (secondNode.GetId() == NULL_ID))
-        {
-            secondPoint = data->GeometricObject<VPointF>(secondNode.GetId());
-        }
-
-        if (firstNode.GetId() == secondNode.GetId() || (not firstPoint.isNull() && not secondPoint.isNull()
-                                                        && firstPoint->toQPointF() == secondPoint->toQPointF()))
+        if (DoublePoint(firstNode, secondNode, data))
         {
             return true;
         }
@@ -616,27 +624,35 @@ QString DialogTool::GetNodeName(const VPieceNode &node, bool showPassmark) const
             name = QLatin1String("- ") + name;
         }
     }
-    else if (showPassmark && node.IsPassmark())
+    else
     {
-        switch(node.GetPassmarkLineType())
+        if (showPassmark && node.IsPassmark())
         {
-            case PassmarkLineType::OneLine:
-                name += QLatin1Char('|');
-                break;
-            case PassmarkLineType::TwoLines:
-                name += QLatin1Literal("||");
-                break;
-            case PassmarkLineType::ThreeLines:
-                name += QLatin1Literal("|||");
-                break;
-            case PassmarkLineType::TMark:
-                name += QString("┴");
-                break;
-            case PassmarkLineType::VMark:
-                name += QLatin1Char('^');
-                break;
-            default:
-                break;
+            switch(node.GetPassmarkLineType())
+            {
+                case PassmarkLineType::OneLine:
+                    name += QLatin1Char('|');
+                    break;
+                case PassmarkLineType::TwoLines:
+                    name += QLatin1Literal("||");
+                    break;
+                case PassmarkLineType::ThreeLines:
+                    name += QLatin1Literal("|||");
+                    break;
+                case PassmarkLineType::TMark:
+                    name += QString("┴");
+                    break;
+                case PassmarkLineType::VMark:
+                    name += QLatin1Char('^');
+                    break;
+                default:
+                    break;
+            }
+        }
+
+        if (not node.IsCheckUniqueness())
+        {
+            name = QLatin1Char('[') + name + QLatin1Char(']');
         }
     }
 

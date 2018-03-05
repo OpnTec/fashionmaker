@@ -46,6 +46,7 @@
 - [#667] Check for updates - Test version.
 - [#808] New feature. Global line width option.
 - [#814] Make "\" valid character.
+- [#818] Improve Piece path validation. Check uniqueness.
 
 # Version 0.5.1
 - [#683] Tool Seam allowance's dialog is off screen on small resolutions.

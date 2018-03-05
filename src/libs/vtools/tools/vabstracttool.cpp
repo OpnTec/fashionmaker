@@ -535,6 +535,18 @@ QDomElement VAbstractTool::AddSANode(VAbstractPattern *doc, const QString &tagNa
         }
     }
 
+    {
+        const bool uniqueness = node.IsCheckUniqueness();
+        if (not uniqueness)
+        {
+            doc->SetAttribute(nod, VAbstractPattern::AttrCheckUniqueness, uniqueness);
+        }
+        else
+        { // For backward compatebility.
+            nod.removeAttribute(VAbstractPattern::AttrCheckUniqueness);
+        }
+    }
+
     switch (type)
     {
         case (Tool::NodeArc):

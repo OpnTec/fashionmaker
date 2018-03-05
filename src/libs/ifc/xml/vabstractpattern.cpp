@@ -129,6 +129,7 @@ const QString VAbstractPattern::AttrEnd               = QStringLiteral("end");
 const QString VAbstractPattern::AttrIncludeAs         = QStringLiteral("includeAs");
 const QString VAbstractPattern::AttrRotation          = QStringLiteral("rotation");
 const QString VAbstractPattern::AttrNumber            = QStringLiteral("number");
+const QString VAbstractPattern::AttrCheckUniqueness   = QStringLiteral("checkUniqueness");
 
 const QString VAbstractPattern::AttrAll             = QStringLiteral("all");
 
@@ -686,6 +687,7 @@ VPieceNode VAbstractPattern::ParseSANode(const QDomElement &domElement)
     const quint32 id = VDomDocument::GetParametrUInt(domElement, AttrIdObject, NULL_ID_STR);
     const bool reverse = VDomDocument::GetParametrUInt(domElement, VAbstractPattern::AttrNodeReverse, "0");
     const bool excluded = VDomDocument::GetParametrBool(domElement, VAbstractPattern::AttrNodeExcluded, falseStr);
+    const bool uniqeness = VDomDocument::GetParametrBool(domElement, VAbstractPattern::AttrCheckUniqueness, trueStr);
     const QString saBefore = VDomDocument::GetParametrString(domElement, VAbstractPattern::AttrSABefore,
                                                              currentSeamAllowance);
     const QString saAfter = VDomDocument::GetParametrString(domElement, VAbstractPattern::AttrSAAfter,
@@ -738,6 +740,7 @@ VPieceNode VAbstractPattern::ParseSANode(const QDomElement &domElement)
     node.SetFormulaSAAfter(saAfter);
     node.SetAngleType(angle);
     node.SetExcluded(excluded);
+    node.SetCheckUniqueness(uniqeness);
     node.SetShowSecondPassmark(showSecond);
     node.SetPassmark(passmark);
     node.SetPassmarkLineType(passmarkLine);
