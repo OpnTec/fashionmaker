@@ -271,6 +271,7 @@ void DialogFinalMeasurements::Add()
 
     UpdateTree();
     ui->tableWidget->selectRow(currentRow);
+    ui->tableWidget->repaint(); // Force repain to fix paint artifacts on Mac OS X
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -295,6 +296,7 @@ void DialogFinalMeasurements::Remove()
     {
         EnableDetails(false);
     }
+    ui->tableWidget->repaint(); // Force repain to fix paint artifacts on Mac OS X
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -316,6 +318,7 @@ void DialogFinalMeasurements::MoveUp()
     UpdateTree();
 
     ui->tableWidget->selectRow(row-1);
+    ui->tableWidget->repaint(); // Force repain to fix paint artifacts on Mac OS X
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -337,6 +340,7 @@ void DialogFinalMeasurements::MoveDown()
     UpdateTree();
 
     ui->tableWidget->selectRow(row+1);
+    ui->tableWidget->repaint(); // Force repain to fix paint artifacts on Mac OS X
 }
 
 //---------------------------------------------------------------------------------------------------------------------

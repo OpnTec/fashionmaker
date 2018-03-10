@@ -1173,6 +1173,8 @@ void TMainWindow::Remove()
             ui->plainTextEditFormula->blockSignals(false);
         }
     }
+
+    ui->tableWidget->repaint(); // Force repain to fix paint artifacts on Mac OS X
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -1191,6 +1193,7 @@ void TMainWindow::MoveTop()
     RefreshData();
     search->RefreshList(ui->lineEditFind->text());
     ui->tableWidget->selectRow(0);
+    ui->tableWidget->repaint(); // Force repain to fix paint artifacts on Mac OS X
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -1209,6 +1212,7 @@ void TMainWindow::MoveUp()
     RefreshData();
     search->RefreshList(ui->lineEditFind->text());
     ui->tableWidget->selectRow(row-1);
+    ui->tableWidget->repaint(); // Force repain to fix paint artifacts on Mac OS X
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -1227,6 +1231,7 @@ void TMainWindow::MoveDown()
     RefreshData();
     search->RefreshList(ui->lineEditFind->text());
     ui->tableWidget->selectRow(row+1);
+    ui->tableWidget->repaint(); // Force repain to fix paint artifacts on Mac OS X
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -1245,6 +1250,7 @@ void TMainWindow::MoveBottom()
     RefreshData();
     search->RefreshList(ui->lineEditFind->text());
     ui->tableWidget->selectRow(ui->tableWidget->rowCount()-1);
+    ui->tableWidget->repaint(); // Force repain to fix paint artifacts on Mac OS X
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -1326,6 +1332,7 @@ void TMainWindow::AddCustom()
     ui->actionExportToCSV->setEnabled(true);
 
     MeasurementsWasSaved(false);
+    ui->tableWidget->repaint(); // Force repain to fix paint artifacts on Mac OS X
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -1383,6 +1390,7 @@ void TMainWindow::AddKnown()
 
         MeasurementsWasSaved(false);
     }
+    ui->tableWidget->repaint(); // Force repain to fix paint artifacts on Mac OS X
 }
 
 //---------------------------------------------------------------------------------------------------------------------

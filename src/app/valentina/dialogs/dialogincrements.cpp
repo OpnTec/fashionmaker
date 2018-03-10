@@ -855,6 +855,7 @@ void DialogIncrements::AddIncrement()
     LocalUpdateTree();
 
     table->selectRow(currentRow);
+    table->repaint(); // Force repain to fix paint artifacts on Mac OS X
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -909,6 +910,8 @@ void DialogIncrements::RemoveIncrement()
     {
         EnableDetails(table, false);
     }
+
+    table->repaint(); // Force repain to fix paint artifacts on Mac OS X
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -953,6 +956,7 @@ void DialogIncrements::MoveUp()
     LocalUpdateTree();
 
     table->selectRow(row-1);
+    table->repaint(); // Force repain to fix paint artifacts on Mac OS X
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -997,6 +1001,7 @@ void DialogIncrements::MoveDown()
     LocalUpdateTree();
 
     table->selectRow(row+1);
+    table->repaint(); // Force repain to fix paint artifacts on Mac OS X
 }
 
 //---------------------------------------------------------------------------------------------------------------------
