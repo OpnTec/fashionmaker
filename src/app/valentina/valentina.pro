@@ -207,65 +207,67 @@ unix{
             }
         }
 
-        QMAKE_RPATHDIR += @executable_path/../Frameworks
+        CONFIG(release, debug|release){
+            QMAKE_RPATHDIR += @executable_path/../Frameworks
 
-        # Path to resources in app bundle
-        #RESOURCES_DIR = "Contents/Resources" defined in translation.pri
-        FRAMEWORKS_DIR = "Contents/Frameworks"
-        MACOS_DIR = "Contents/MacOS"
-        # On macx we will use app bundle. Bundle doesn't need bin directory inside.
-        # See issue #166: Creating OSX Homebrew (Mac OS X package manager) formula.
-        target.path = $$MACOS_DIR
+            # Path to resources in app bundle
+            #RESOURCES_DIR = "Contents/Resources" defined in translation.pri
+            FRAMEWORKS_DIR = "Contents/Frameworks"
+            MACOS_DIR = "Contents/MacOS"
+            # On macx we will use app bundle. Bundle doesn't need bin directory inside.
+            # See issue #166: Creating OSX Homebrew (Mac OS X package manager) formula.
+            target.path = $$MACOS_DIR
 
-        #languages added inside translations.pri
+            #languages added inside translations.pri
 
-        # Symlinks also good names for copying. Make will take origin file and copy them with using symlink name.
-        # For bundle this names more then enough. We don't need care much about libraries versions.
-        libraries.path = $$FRAMEWORKS_DIR
-        libraries.files += $${OUT_PWD}/../../libs/qmuparser/$${DESTDIR}/libqmuparser.2.dylib
-        libraries.files += $${OUT_PWD}/../../libs/vpropertyexplorer/$${DESTDIR}/libvpropertyexplorer.1.dylib
+            # Symlinks also good names for copying. Make will take origin file and copy them with using symlink name.
+            # For bundle this names more then enough. We don't need care much about libraries versions.
+            libraries.path = $$FRAMEWORKS_DIR
+            libraries.files += $${OUT_PWD}/../../libs/qmuparser/$${DESTDIR}/libqmuparser.2.dylib
+            libraries.files += $${OUT_PWD}/../../libs/vpropertyexplorer/$${DESTDIR}/libvpropertyexplorer.1.dylib
 
-        tape.path = $$MACOS_DIR
-        tape.files += $${OUT_PWD}/../tape/$${DESTDIR}/tape.app/$$MACOS_DIR/tape
+            tape.path = $$MACOS_DIR
+            tape.files += $${OUT_PWD}/../tape/$${DESTDIR}/tape.app/$$MACOS_DIR/tape
 
-        # Utility pdftops need for saving a layout image to PS and EPS formates.
-        xpdf.path = $$MACOS_DIR
-        xpdf.files += $${PWD}/../../../dist/macx/bin64/pdftops
+            # Utility pdftops need for saving a layout image to PS and EPS formates.
+            xpdf.path = $$MACOS_DIR
+            xpdf.files += $${PWD}/../../../dist/macx/bin64/pdftops
 
-        # logo on macx.
-        ICON = ../../../dist/Valentina.icns
+            # logo on macx.
+            ICON = ../../../dist/Valentina.icns
 
-        QMAKE_INFO_PLIST = $$PWD/../../../dist/macx/valentina/Info.plist
+            QMAKE_INFO_PLIST = $$PWD/../../../dist/macx/valentina/Info.plist
 
-        # Copy to bundle multisize measurements files
-        multisize.path = $$RESOURCES_DIR/tables/multisize/
-        multisize.files = $$INSTALL_MULTISIZE_MEASUREMENTS
+            # Copy to bundle multisize measurements files
+            multisize.path = $$RESOURCES_DIR/tables/multisize/
+            multisize.files = $$INSTALL_MULTISIZE_MEASUREMENTS
 
-        # Copy to bundle templates files
-        templates.path = $$RESOURCES_DIR/tables/templates/
-        templates.files = $$INSTALL_STANDARD_TEMPLATES
+            # Copy to bundle templates files
+            templates.path = $$RESOURCES_DIR/tables/templates/
+            templates.files = $$INSTALL_STANDARD_TEMPLATES
 
-        # Path to label templates after installation
-        label.path = $$RESOURCES_DIR/labels/
-        label.files = $$INSTALL_LABEL_TEMPLATES
+            # Path to label templates after installation
+            label.path = $$RESOURCES_DIR/labels/
+            label.files = $$INSTALL_LABEL_TEMPLATES
 
-        icns_resources.path = $$RESOURCES_DIR/
-        icns_resources.files += $$PWD/../../../dist/macx/i-measurements.icns
-        icns_resources.files += $$PWD/../../../dist/macx/s-measurements.icns
-        icns_resources.files += $$PWD/../../../dist/macx/pattern.icns
+            icns_resources.path = $$RESOURCES_DIR/
+            icns_resources.files += $$PWD/../../../dist/macx/i-measurements.icns
+            icns_resources.files += $$PWD/../../../dist/macx/s-measurements.icns
+            icns_resources.files += $$PWD/../../../dist/macx/pattern.icns
 
-        # Copy to bundle multisize measurements files
-        # We cannot add none exist files to bundle through QMAKE_BUNDLE_DATA. That's why we must do this manually.
-        QMAKE_POST_LINK += $$VCOPY $$quote($${OUT_PWD}/../tape/$${DESTDIR}/tape.app/$$RESOURCES_DIR/diagrams.rcc) $$quote($$shell_path($${OUT_PWD}/$$DESTDIR/$${TARGET}.app/$$RESOURCES_DIR/)) $$escape_expand(\\n\\t)
+            # Copy to bundle multisize measurements files
+            # We cannot add none exist files to bundle through QMAKE_BUNDLE_DATA. That's why we must do this manually.
+            QMAKE_POST_LINK += $$VCOPY $$quote($${OUT_PWD}/../tape/$${DESTDIR}/tape.app/$$RESOURCES_DIR/diagrams.rcc) $$quote($$shell_path($${OUT_PWD}/$$DESTDIR/$${TARGET}.app/$$RESOURCES_DIR/)) $$escape_expand(\\n\\t)
 
-        QMAKE_BUNDLE_DATA += \
-            templates \
-            multisize \
-            label \
-            libraries \
-            tape \
-            xpdf \
-            icns_resources
+            QMAKE_BUNDLE_DATA += \
+                templates \
+                multisize \
+                label \
+                libraries \
+                tape \
+                xpdf \
+                icns_resources
+        }
     }
 }
 
@@ -607,7 +609,9 @@ noDebugSymbols{ # For enable run qmake with CONFIG+=noDebugSymbols
     }
 }
 
-macx{
-   # run macdeployqt to include all qt libraries in packet
-   QMAKE_POST_LINK += $$[QT_INSTALL_BINS]/macdeployqt $${OUT_PWD}/$${DESTDIR}/$${TARGET}.app
+CONFIG(release, debug|release){
+    macx{
+       # run macdeployqt to include all qt libraries in packet
+       QMAKE_POST_LINK += $$[QT_INSTALL_BINS]/macdeployqt $${OUT_PWD}/$${DESTDIR}/$${TARGET}.app
+    }
 }
