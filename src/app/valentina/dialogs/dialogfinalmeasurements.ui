@@ -154,6 +154,9 @@
        <string>Details</string>
       </property>
       <layout class="QFormLayout" name="formLayout">
+       <property name="fieldGrowthPolicy">
+        <enum>QFormLayout::ExpandingFieldsGrow</enum>
+       </property>
        <item row="0" column="1">
         <layout class="QHBoxLayout" name="horizontalLayout_3">
          <property name="spacing">
@@ -443,8 +446,8 @@
   </customwidget>
  </customwidgets>
  <resources>
-  <include location="../../../libs/vmisc/share/resources/icon.qrc"/>
   <include location="../../../libs/vmisc/share/resources/theme.qrc"/>
+  <include location="../../../libs/vmisc/share/resources/icon.qrc"/>
  </resources>
  <connections>
   <connection>

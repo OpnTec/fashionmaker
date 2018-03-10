@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>960</width>
-    <height>517</height>
+    <height>576</height>
    </rect>
   </property>
   <property name="minimumSize">
@@ -39,7 +39,7 @@
       <enum>QTabWidget::North</enum>
      </property>
      <property name="currentIndex">
-      <number>1</number>
+      <number>0</number>
      </property>
      <widget class="QWidget" name="tabIncrements">
       <attribute name="title">
@@ -182,6 +182,9 @@
            <string>Details</string>
           </property>
           <layout class="QFormLayout" name="formLayout">
+           <property name="fieldGrowthPolicy">
+            <enum>QFormLayout::ExpandingFieldsGrow</enum>
+           </property>
            <item row="0" column="0">
             <layout class="QHBoxLayout" name="horizontalLayout">
              <item alignment="Qt::AlignLeft">
@@ -612,6 +615,9 @@
            <string>Details</string>
           </property>
           <layout class="QFormLayout" name="formLayout_2">
+           <property name="fieldGrowthPolicy">
+            <enum>QFormLayout::ExpandingFieldsGrow</enum>
+           </property>
            <item row="0" column="0">
             <layout class="QHBoxLayout" name="horizontalLayout_2">
              <item alignment="Qt::AlignLeft">
@@ -1154,8 +1160,8 @@
   <tabstop>tableWidgetSplines</tabstop>
  </tabstops>
  <resources>
-  <include location="../../../libs/vmisc/share/resources/icon.qrc"/>
   <include location="../../../libs/vmisc/share/resources/theme.qrc"/>
+  <include location="../../../libs/vmisc/share/resources/icon.qrc"/>
  </resources>
  <connections/>
 </ui>
