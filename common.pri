@@ -372,7 +372,7 @@ CLANG_DEBUG_CXXFLAGS += \
     -Wauto-var-id \
     -Wavailability \
     -Wbackslash-newline-escape \
-    -Wbad-array-new-length \
+#    -Wbad-array-new-length \
     -Wbad-function-cast \
     -Wbind-to-temporary-copy \
         -Wno-c++98-compat-bind-to-temporary-copy \
