@@ -65,6 +65,7 @@ PreferencesPatternPage::PreferencesPatternPage(QWidget *parent)
     VSettings *settings = qApp->ValentinaSettings();
 
     ui->graphOutputCheck->setChecked(settings->GetGraphicalOutput());
+    ui->checkBoxOpenGLRender->setChecked(settings->IsOpenGLRender());
     ui->doubleSpinBoxCurveApproximation->setValue(settings->GetCurveApproximationScale());
     ui->doubleSpinBoxCurveApproximation->setMinimum(minCurveApproximationScale);
     ui->doubleSpinBoxCurveApproximation->setMaximum(maxCurveApproximationScale);
@@ -118,10 +119,10 @@ void PreferencesPatternPage::Apply()
 
     // Scene antialiasing
     settings->SetGraphicalOutput(ui->graphOutputCheck->isChecked());
+    settings->SetOpenGLRender(ui->checkBoxOpenGLRender->isChecked());
     settings->SetCurveApproximationScale(ui->doubleSpinBoxCurveApproximation->value());
     settings->SetLineWidth(UnitConvertor(ui->doubleSpinBoxLineWidth->value(), m_oldLineUnit, Unit::Mm));
-    qApp->getSceneView()->setRenderHint(QPainter::Antialiasing, ui->graphOutputCheck->isChecked());
-    qApp->getSceneView()->setRenderHint(QPainter::SmoothPixmapTransform, ui->graphOutputCheck->isChecked());
+    qApp->getSceneView()->SetAntialiasing(ui->graphOutputCheck->isChecked());
 
     /* Maximum number of commands in undo stack may only be set when the undo stack is empty, since setting it on a
      * non-empty stack might delete the command at the current index. Calling setUndoLimit() on a non-empty stack

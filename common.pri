@@ -228,7 +228,8 @@ ISYSTEM += \
     -isystem "$$[QT_INSTALL_HEADERS]/QtSvg" \
     -isystem "$$[QT_INSTALL_HEADERS]/QtNetwork" \
     -isystem "$$[QT_INSTALL_HEADERS]/QtTest" \
-    -isystem "$$[QT_INSTALL_HEADERS]/QtConcurrent"
+    -isystem "$$[QT_INSTALL_HEADERS]/QtConcurrent" \
+    -isystem "$$[QT_INSTALL_HEADERS]/QtOpenGL"
 } else {
 ISYSTEM += \
     -isystem "$$[QT_INSTALL_LIBS]/QtWidgets.framework/Headers/" \
@@ -250,7 +251,9 @@ ISYSTEM += \
     -isystem "$$[QT_INSTALL_LIBS]/QtTest.framework/Headers/" \
     -isystem "$$[QT_INSTALL_LIBS]/QtTest.framework/Versions/5/Headers/" \
     -isystem "$$[QT_INSTALL_LIBS]/QtConcurrent.framework/Headers/" \
-    -isystem "$$[QT_INSTALL_LIBS]/QtConcurrent.framework/Versions/5/Headers/"
+    -isystem "$$[QT_INSTALL_LIBS]/QtConcurrent.framework/Versions/5/Headers/" \
+    -isystem "$$[QT_INSTALL_LIBS]/QtOpenGL.framework/Headers/" \
+    -isystem "$$[QT_INSTALL_LIBS]/QtOpenGL.framework/Versions/5/Headers/"
 }
 
 # Usefull GCC warnings keys.

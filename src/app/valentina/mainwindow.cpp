@@ -3741,9 +3741,7 @@ void MainWindow::ReadSettings()
     restoreState(settings->GetToolbarsState(), APP_VERSION);
 
     // Scene antialiasing
-    const bool graphOutputValue = settings->GetGraphicalOutput();
-    ui->view->setRenderHint(QPainter::Antialiasing, graphOutputValue);
-    ui->view->setRenderHint(QPainter::SmoothPixmapTransform, graphOutputValue);
+    ui->view->SetAntialiasing(settings->GetGraphicalOutput());
 
     // Stack limit
     qApp->getUndoStack()->setUndoLimit(settings->GetUndoCount());

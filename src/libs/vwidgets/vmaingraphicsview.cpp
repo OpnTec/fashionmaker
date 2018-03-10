@@ -48,10 +48,18 @@
 #include <QDesktopWidget>
 #include <QThread>
 
+#if QT_VERSION >= QT_VERSION_CHECK(5, 4, 0)
+#   include <QOpenGLWidget>
+#else
+#   include <QGLWidget>
+#endif
+
 #include "../vmisc/def.h"
 #include "../vmisc/vmath.h"
 #include "vmaingraphicsscene.h"
 #include "vsimplecurve.h"
+#include "../vmisc/vabstractapplication.h"
+#include "../vmisc/vsettings.h"
 
 const int GraphicsViewZoom::duration = 300;
 const int GraphicsViewZoom::updateInterval = 40;
@@ -349,17 +357,34 @@ const unsigned long VMainGraphicsView::scrollDelay = 80;
  */
 VMainGraphicsView::VMainGraphicsView(QWidget *parent)
     : QGraphicsView(parent),
-      zoom(new GraphicsViewZoom(this)),
+      zoom(nullptr),
       showToolOptions(true),
       isAllowRubberBand(true),
       m_ptStartPos(),
       m_oldCursor(),
       m_currentCursor(Qt::ArrowCursor)
 {
+    VSettings *settings = qobject_cast<VSettings *>(qApp->Settings());
+    if (settings && settings->IsOpenGLRender())
+    {
+    #if QT_VERSION >= QT_VERSION_CHECK(5, 4, 0)
+        QOpenGLWidget *viewport = new QOpenGLWidget();
+        QSurfaceFormat fmt;
+        fmt.setSamples(settings->GetGraphicalOutput() ? 10 : 0);
+        viewport->setFormat(fmt);
+
+        setViewport(viewport);
+    #else
+        setViewport(new QGLWidget(QGLFormat(QGL::DoubleBuffer|QGL::SampleBuffers)));
+    #endif          
+    }
+
+    zoom = new GraphicsViewZoom(this);
+
     this->setResizeAnchor(QGraphicsView::AnchorUnderMouse);
     this->setTransformationAnchor(QGraphicsView::AnchorUnderMouse);
-    this->setRenderHints(QPainter::Antialiasing | QPainter::SmoothPixmapTransform);
     this->setInteractive(true);
+    SetAntialiasing(true);
 
     connect(zoom, &GraphicsViewZoom::zoomed, this,  [this](){emit ScaleChanged(transform().m11());});
 }
@@ -601,6 +626,15 @@ void VMainGraphicsView::EnsureVisibleWithDelay(const QGraphicsItem *item, unsign
 void VMainGraphicsView::setCurrentCursorShape()
 {
     m_currentCursor = viewport()->cursor().shape();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VMainGraphicsView::SetAntialiasing(bool value)
+{
+    setRenderHint(QPainter::Antialiasing, value);
+    setRenderHint(QPainter::SmoothPixmapTransform, value);
+
+
 }
 
 //---------------------------------------------------------------------------------------------------------------------

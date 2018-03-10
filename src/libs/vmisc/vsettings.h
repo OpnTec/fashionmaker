@@ -68,6 +68,9 @@ public:
     bool GetGraphicalOutput() const;
     void SetGraphicalOutput(const bool &value);
 
+    bool IsOpenGLRender() const;
+    void SetOpenGLRender(bool value);
+
     // Layout settings
     qreal GetLayoutPaperHeight() const;
     void SetLayoutPaperHeight(qreal value);

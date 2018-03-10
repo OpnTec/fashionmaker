@@ -113,7 +113,6 @@ class VMainGraphicsView : public QGraphicsView
 {
     Q_OBJECT
 public:
-
     explicit VMainGraphicsView(QWidget *parent = nullptr);
     void setShowToolOptions(bool value);
     void AllowRubberBand(bool value);
@@ -130,6 +129,8 @@ public:
     static const unsigned long scrollDelay;
 
     void setCurrentCursorShape();
+
+    void SetAntialiasing(bool value);
 
 signals:
     /**

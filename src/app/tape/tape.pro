@@ -7,7 +7,7 @@
 # File with common stuff for whole project
 include(../../../common.pri)
 
-QT       += core gui widgets network xml xmlpatterns printsupport svg concurrent
+QT       += core gui widgets network xml xmlpatterns printsupport svg concurrent opengl
 
 # Name of binary file
 TARGET = tape

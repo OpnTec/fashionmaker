@@ -7,23 +7,37 @@
     <x>0</x>
     <y>0</y>
     <width>381</width>
-    <height>705</height>
+    <height>727</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string notr="true">Pattern</string>
   </property>
-  <layout class="QVBoxLayout" name="verticalLayout_3">
+  <layout class="QVBoxLayout" name="verticalLayout_2">
    <item>
     <widget class="QGroupBox" name="groupBox_2">
      <property name="title">
       <string>Graphical output</string>
      </property>
-     <layout class="QVBoxLayout" name="verticalLayout_2">
+     <layout class="QVBoxLayout" name="verticalLayout_3">
       <item>
        <widget class="QCheckBox" name="graphOutputCheck">
         <property name="text">
          <string>Use antialiasing</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QCheckBox" name="checkBoxOpenGLRender">
+        <property name="toolTip">
+         <string>Use OpenGL to render a scene.
+This option will take an affect after restart.</string>
+        </property>
+        <property name="text">
+         <string>Use OpenGL render</string>
+        </property>
+        <property name="tristate">
+         <bool>false</bool>
         </property>
        </widget>
       </item>

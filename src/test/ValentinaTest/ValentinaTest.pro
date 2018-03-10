@@ -4,7 +4,7 @@
 #
 #-------------------------------------------------
 
-QT       += core testlib gui printsupport xml xmlpatterns concurrent
+QT       += core testlib gui printsupport xml xmlpatterns concurrent opengl
 
 TARGET = ValentinaTests
 

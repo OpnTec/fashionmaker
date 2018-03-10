@@ -11,7 +11,7 @@ include(../../../common.pri)
 
 # Here we don't see "network" library, but, i think, "printsupport" depend on this library, so we still need this
 # library in installer.
-QT       += core gui widgets xml svg printsupport xmlpatterns concurrent
+QT       += core gui widgets xml svg printsupport xmlpatterns concurrent opengl
 
 # Use winextras only for Windows 7+
 win32:greaterThan(QT_MAJOR_VERSION, 4):greaterThan(QT_MINOR_VERSION, 6) {
@@ -300,6 +300,7 @@ win32:*g++* {
         $$[QT_INSTALL_BINS]/icuuc*.dll \ # Different name for different Qt releases
         $$[QT_INSTALL_BINS]/Qt5Core.dll \
         $$[QT_INSTALL_BINS]/Qt5Concurrent.dll \
+        $$[QT_INSTALL_BINS]/Qt5OpenGL.dll \
         $$[QT_INSTALL_BINS]/Qt5Gui.dll \
         $$[QT_INSTALL_BINS]/Qt5Network.dll \
         $$[QT_INSTALL_BINS]/Qt5PrintSupport.dll \

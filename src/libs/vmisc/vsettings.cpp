@@ -53,6 +53,7 @@ const QString settingPathsPattern = QStringLiteral("paths/pattern");
 const QString settingPathsLayout  = QStringLiteral("paths/layout");
 
 const QString settingPatternGraphicalOutput   = QStringLiteral("pattern/graphicalOutput");
+const QString settingPatternUseOpenGLRender   = QStringLiteral("pattern/useOpenGLRender");
 const QString settingPatternKnownMaterials    = QStringLiteral("pattern/knownMaterials");
 const QString settingPatternRememberMaterials = QStringLiteral("pattern/rememberMaterials");
 
@@ -150,6 +151,18 @@ bool VSettings::GetGraphicalOutput() const
 void VSettings::SetGraphicalOutput(const bool &value)
 {
     setValue(settingPatternGraphicalOutput, value);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+bool VSettings::IsOpenGLRender() const
+{
+    return value(settingPatternUseOpenGLRender, 0).toBool();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VSettings::SetOpenGLRender(bool value)
+{
+    setValue(settingPatternUseOpenGLRender, value);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
