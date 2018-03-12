@@ -15,6 +15,7 @@ matrix:
   - os: osx
     compiler: clang
     env: DEPLOY=true
+    osx_image: xcode9
 before_install:
 - |
   if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then
