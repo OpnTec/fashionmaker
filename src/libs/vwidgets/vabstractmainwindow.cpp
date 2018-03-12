@@ -35,6 +35,11 @@
 #include <QToolBar>
 #include <QFileDialog>
 
+#if defined(Q_OS_MAC)
+#include "../vwidgets/vmaingraphicsview.h"
+#include <QStyleFactory>
+#endif
+
 VAbstractMainWindow::VAbstractMainWindow(QWidget *parent)
     : QMainWindow(parent),
       m_curFileFormatVersion(0x0),
@@ -84,6 +89,14 @@ void VAbstractMainWindow::ToolBarStyle(QToolBar *bar)
     {
         bar->setToolButtonStyle(Qt::ToolButtonIconOnly);
     }
+
+#if defined(Q_OS_MAC)
+    // Temporary fix issue with toolbar black background on mac with OpenGL render
+    if (qApp->getSceneView() && qApp->getSceneView()->IsOpenGLRender())
+    {
+        bar->setStyle(QStyleFactory::create("fusion"));
+    }
+#endif
 }
 
 //---------------------------------------------------------------------------------------------------------------------
