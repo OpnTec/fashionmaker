@@ -3616,6 +3616,10 @@ Apply settings anyway?</source>
         <source>Intersection 2 (only right)</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Check uniqueness</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>DialogPin</name>
@@ -4154,6 +4158,12 @@ Apply settings anyway?</source>
         <source>Paths</source>
         <translation type="unfinished"></translation>
     </message>
+    <message numerus="yes">
+        <source>Followed %n option(s) require restart to take effect: %1.</source>
+        <translation type="unfinished">
+            <numerusform></numerusform>
+        </translation>
+    </message>
 </context>
 <context>
     <name>DialogRotation</name>
@@ -4532,6 +4542,10 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Place label</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Check uniqueness</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -6681,10 +6695,6 @@ Apakah anda ingin menyimpan perubahan anda?</translation>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>The Default unit has been updated and will be used as the default for the next pattern you create.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Centimeters</source>
         <translation type="unfinished">Centimeter</translation>
     </message>
@@ -6702,6 +6712,10 @@ Apakah anda ingin menyimpan perubahan anda?</translation>
     </message>
     <message>
         <source>Free curve mode</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>default unit</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -6877,6 +6891,23 @@ Apakah anda ingin menyimpan perubahan anda?</translation>
     <message>
         <source>Inches</source>
         <translation>Inchi</translation>
+    </message>
+    <message>
+        <source>Use OpenGL to render a scene.
+This option will take an affect after restart.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Use OpenGL render</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>antialiasing</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>scene render</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

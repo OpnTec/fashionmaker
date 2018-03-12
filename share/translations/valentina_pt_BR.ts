@@ -4500,6 +4500,10 @@ Aplicar configurações de qualquer forma?</translation>
         <source>Intersection 2 (only right)</source>
         <translation>Interseção 2 (apenas à direita)</translation>
     </message>
+    <message>
+        <source>Check uniqueness</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>DialogPin</name>
@@ -5122,6 +5126,13 @@ Aplicar configurações de qualquer forma?</translation>
         <source>Paths</source>
         <translation>Caminhos</translation>
     </message>
+    <message numerus="yes">
+        <source>Followed %n option(s) require restart to take effect: %1.</source>
+        <translation type="unfinished">
+            <numerusform></numerusform>
+            <numerusform></numerusform>
+        </translation>
+    </message>
 </context>
 <context>
     <name>DialogRotation</name>
@@ -5557,6 +5568,10 @@ Aplicar configurações de qualquer forma?</translation>
     <message>
         <source>Place label</source>
         <translation>Colocar rótulo</translation>
+    </message>
+    <message>
+        <source>Check uniqueness</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -8225,7 +8240,7 @@ Você quer salvar suas mudanças?</translation>
     </message>
     <message>
         <source>The Default unit has been updated and will be used as the default for the next pattern you create.</source>
-        <translation>A unidade padrão foi atualizada e será usada como padrão para o próximo molde criado.</translation>
+        <translation type="vanished">A unidade padrão foi atualizada e será usada como padrão para o próximo molde criado.</translation>
     </message>
     <message>
         <source>Centimeters</source>
@@ -8246,6 +8261,10 @@ Você quer salvar suas mudanças?</translation>
     <message>
         <source>Free curve mode</source>
         <translation>Modo de curva livre</translation>
+    </message>
+    <message>
+        <source>default unit</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -8407,7 +8426,7 @@ Você quer salvar suas mudanças?</translation>
     </message>
     <message>
         <source>Bold line width</source>
-        <translation type="unfinished"></translation>
+        <translation>Largura de linha em negrito</translation>
     </message>
     <message>
         <source>Line width:</source>
@@ -8420,6 +8439,23 @@ Você quer salvar suas mudanças?</translation>
     <message>
         <source>Inches</source>
         <translation>Polegadas</translation>
+    </message>
+    <message>
+        <source>Use OpenGL to render a scene.
+This option will take an affect after restart.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Use OpenGL render</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>antialiasing</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>scene render</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

@@ -4500,6 +4500,10 @@ Toch de instellingen aanpassen?</translation>
         <source>Intersection 2 (only right)</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Check uniqueness</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>DialogPin</name>
@@ -5122,6 +5126,13 @@ Toch de instellingen aanpassen?</translation>
         <source>Paths</source>
         <translation>Paden</translation>
     </message>
+    <message numerus="yes">
+        <source>Followed %n option(s) require restart to take effect: %1.</source>
+        <translation type="unfinished">
+            <numerusform></numerusform>
+            <numerusform></numerusform>
+        </translation>
+    </message>
 </context>
 <context>
     <name>DialogRotation</name>
@@ -5561,6 +5572,10 @@ Toch de instellingen aanpassen?</translation>
     <message>
         <source>Place label</source>
         <translation>Plaats label</translation>
+    </message>
+    <message>
+        <source>Check uniqueness</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -8248,7 +8263,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>The Default unit has been updated and will be used as the default for the next pattern you create.</source>
-        <translation>De standaardwaarde van de eenheid is opgewaardeerd en zal worden gebruikt  als de standaardbasis voor uw volgende patrooncreatie.</translation>
+        <translation type="vanished">De standaardwaarde van de eenheid is opgewaardeerd en zal worden gebruikt  als de standaardbasis voor uw volgende patrooncreatie.</translation>
     </message>
     <message>
         <source>Centimeters</source>
@@ -8269,6 +8284,10 @@ Do you want to save your changes?</source>
     <message>
         <source>Free curve mode</source>
         <translation>Laat krommings mode los</translation>
+    </message>
+    <message>
+        <source>default unit</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -8443,6 +8462,23 @@ Do you want to save your changes?</source>
     <message>
         <source>Inches</source>
         <translation>Inches</translation>
+    </message>
+    <message>
+        <source>Use OpenGL to render a scene.
+This option will take an affect after restart.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Use OpenGL render</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>antialiasing</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>scene render</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

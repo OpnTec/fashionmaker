@@ -4500,6 +4500,10 @@ Apply settings anyway?</source>
         <source>Intersection 2 (only right)</source>
         <translation>Пересечение 2 (только справа)</translation>
     </message>
+    <message>
+        <source>Check uniqueness</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>DialogPin</name>
@@ -5122,6 +5126,14 @@ Apply settings anyway?</source>
         <source>Paths</source>
         <translation>Контуры</translation>
     </message>
+    <message numerus="yes">
+        <source>Followed %n option(s) require restart to take effect: %1.</source>
+        <translation type="unfinished">
+            <numerusform></numerusform>
+            <numerusform></numerusform>
+            <numerusform></numerusform>
+        </translation>
+    </message>
 </context>
 <context>
     <name>DialogRotation</name>
@@ -5561,6 +5573,10 @@ Apply settings anyway?</source>
     <message>
         <source>Place label</source>
         <translation>Метка места</translation>
+    </message>
+    <message>
+        <source>Check uniqueness</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -8249,7 +8265,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>The Default unit has been updated and will be used as the default for the next pattern you create.</source>
-        <translation>Единицы измерения обновлены и будут применены при следующем создании выкройки.</translation>
+        <translation type="vanished">Единицы измерения обновлены и будут применены при следующем создании выкройки.</translation>
     </message>
     <message>
         <source>Centimeters</source>
@@ -8269,6 +8285,10 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Free curve mode</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>default unit</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -8444,6 +8464,23 @@ Do you want to save your changes?</source>
     <message>
         <source>Inches</source>
         <translation>Дюймы</translation>
+    </message>
+    <message>
+        <source>Use OpenGL to render a scene.
+This option will take an affect after restart.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Use OpenGL render</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>antialiasing</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>scene render</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
