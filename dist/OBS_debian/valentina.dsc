@@ -13,7 +13,8 @@ Build-Depends: debhelper (>= 8.0.0),
                g++ (>= 4.7.0), 
                qt5-default (>= 5.2.0), 
                qttools5-dev-tools (>= 5.2.0), 
-               libqt5xmlpatterns5-dev (>= 5.2.0)
+               libqt5xmlpatterns5-dev (>= 5.2.0),
+               libqt5opengl5-dev (>= 5.2.0) 
 Package-List: 
  valentina deb graphics optional
 Files: 
