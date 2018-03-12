@@ -78,6 +78,11 @@ DialogEditWrongFormula::DialogEditWrongFormula(const VContainer *data, const qui
       checkZero(false), checkLessThanZero(false), postfix(QString()), restoreCursor(false)
 {
     ui->setupUi(this);
+
+#if defined(Q_OS_MAC)
+    setWindowFlags(Qt::Window);
+#endif
+
     InitVariables();
     InitFormulaUI(ui);
     this->formulaBaseHeight = ui->plainTextEditFormula->height();

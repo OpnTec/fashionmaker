@@ -45,6 +45,9 @@
       <attribute name="title">
        <string>Increments</string>
       </attribute>
+      <attribute name="toolTip">
+       <string>Increments</string>
+      </attribute>
       <layout class="QVBoxLayout" name="verticalLayout_4">
        <item>
         <layout class="QHBoxLayout" name="horizontalLayout_4">
@@ -482,6 +485,9 @@
      </widget>
      <widget class="QWidget" name="tabPreviewCalculations">
       <attribute name="title">
+       <string>Preview calculations</string>
+      </attribute>
+      <attribute name="toolTip">
        <string>Preview calculations</string>
       </attribute>
       <layout class="QVBoxLayout" name="verticalLayout_2">
@@ -923,6 +929,9 @@
       <attribute name="title">
        <string>Lines</string>
       </attribute>
+      <attribute name="toolTip">
+       <string>Lines</string>
+      </attribute>
       <layout class="QGridLayout" name="gridLayout_3">
        <item row="0" column="0">
         <widget class="QTableWidget" name="tableWidgetLines">
@@ -960,6 +969,9 @@
      </widget>
      <widget class="QWidget" name="tab">
       <attribute name="title">
+       <string>Lines angles</string>
+      </attribute>
+      <attribute name="toolTip">
        <string>Lines angles</string>
       </attribute>
       <layout class="QGridLayout" name="gridLayout_6">
@@ -1001,6 +1013,9 @@
       <attribute name="title">
        <string>Lengths curves</string>
       </attribute>
+      <attribute name="toolTip">
+       <string>Lengths curves</string>
+      </attribute>
       <layout class="QGridLayout" name="gridLayout_4">
        <item row="0" column="0">
         <widget class="QTableWidget" name="tableWidgetSplines">
@@ -1038,6 +1053,9 @@
      </widget>
      <widget class="QWidget" name="tab_5">
       <attribute name="title">
+       <string>Curves control point lengths</string>
+      </attribute>
+      <attribute name="toolTip">
        <string>Curves control point lengths</string>
       </attribute>
       <layout class="QVBoxLayout" name="verticalLayout_3">
@@ -1079,6 +1097,9 @@
       <attribute name="title">
        <string>Angles curves</string>
       </attribute>
+      <attribute name="toolTip">
+       <string>Angles curves</string>
+      </attribute>
       <layout class="QGridLayout" name="gridLayout_8">
        <item row="0" column="0">
         <widget class="QTableWidget" name="tableWidgetAnglesCurves">
@@ -1116,6 +1137,9 @@
      </widget>
      <widget class="QWidget" name="tab_2">
       <attribute name="title">
+       <string>Radiuses arcs</string>
+      </attribute>
+      <attribute name="toolTip">
        <string>Radiuses arcs</string>
       </attribute>
       <layout class="QGridLayout" name="gridLayout_7">

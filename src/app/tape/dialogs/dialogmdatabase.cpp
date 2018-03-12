@@ -61,6 +61,11 @@ DialogMDataBase::DialogMDataBase(const QStringList &list, QWidget *parent)
       groupQ(nullptr)
 {
     ui->setupUi(this);
+
+#if defined(Q_OS_MAC)
+    setWindowFlags(Qt::Window);
+#endif
+
     InitDataBase(list);
 
     ui->treeWidget->installEventFilter(this);
@@ -99,6 +104,11 @@ DialogMDataBase::DialogMDataBase(QWidget *parent)
 
 {
     ui->setupUi(this);
+
+#if defined(Q_OS_MAC)
+    setWindowFlags(Qt::Window);
+#endif
+
     InitDataBase();
 
     ui->treeWidget->installEventFilter(this);

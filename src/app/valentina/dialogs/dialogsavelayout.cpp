@@ -61,6 +61,10 @@ DialogSaveLayout::DialogSaveLayout(int count, Draw mode, const QString &fileName
 {
     ui->setupUi(this);
 
+#if defined(Q_OS_MAC)
+    setWindowFlags(Qt::Window);
+#endif
+
     ui->lineEditPath->setClearButtonEnabled(true);
     ui->lineEditFileName->setClearButtonEnabled(true);
 

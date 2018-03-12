@@ -45,6 +45,10 @@ DialogTapePreferences::DialogTapePreferences(QWidget *parent)
 {
     ui->setupUi(this);
 
+#if defined(Q_OS_MAC)
+    setWindowFlags(Qt::Window);
+#endif
+
     qApp->Settings()->GetOsSeparator() ? setLocale(QLocale()) : setLocale(QLocale::c());
 
     QPushButton *bOk = ui->buttonBox->button(QDialogButtonBox::Ok);

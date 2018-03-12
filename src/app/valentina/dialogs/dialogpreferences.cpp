@@ -46,6 +46,11 @@ DialogPreferences::DialogPreferences(QWidget *parent)
       m_pathPage(new PreferencesPathPage)
 {
     ui->setupUi(this);
+
+#if defined(Q_OS_MAC)
+    setWindowFlags(Qt::Window);
+#endif
+
     qApp->Settings()->GetOsSeparator() ? setLocale(QLocale()) : setLocale(QLocale::c());
 
     QPushButton *bOk = ui->buttonBox->button(QDialogButtonBox::Ok);

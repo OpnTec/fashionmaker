@@ -69,6 +69,10 @@ DialogIncrements::DialogIncrements(VContainer *data, VPattern *doc, QWidget *par
 {
     ui->setupUi(this);
 
+#if defined(Q_OS_MAC)
+    setWindowFlags(Qt::Window);
+#endif
+
     ui->lineEditName->setClearButtonEnabled(true);
     ui->lineEditFind->setClearButtonEnabled(true);
     ui->lineEditNamePC->setClearButtonEnabled(true);

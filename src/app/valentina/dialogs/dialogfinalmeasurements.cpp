@@ -75,6 +75,10 @@ DialogFinalMeasurements::DialogFinalMeasurements(VPattern *doc, QWidget *parent)
 {
     ui->setupUi(this);
 
+#if defined(Q_OS_MAC)
+    setWindowFlags(Qt::Window);
+#endif
+
     ui->lineEditName->setClearButtonEnabled(true);
     ui->lineEditFind->setClearButtonEnabled(true);
 

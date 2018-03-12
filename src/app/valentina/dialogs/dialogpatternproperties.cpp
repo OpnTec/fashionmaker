@@ -75,6 +75,10 @@ DialogPatternProperties::DialogPatternProperties(VPattern *doc,  VContainer *pat
 {
     ui->setupUi(this);
 
+#if defined(Q_OS_MAC)
+    setWindowFlags(Qt::Window);
+#endif
+
     SCASSERT(doc != nullptr)
 
     VSettings *settings = qApp->ValentinaSettings();
