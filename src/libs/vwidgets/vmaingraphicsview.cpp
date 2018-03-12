@@ -376,7 +376,7 @@ VMainGraphicsView::VMainGraphicsView(QWidget *parent)
         setViewport(viewport);
     #else
         setViewport(new QGLWidget(QGLFormat(QGL::DoubleBuffer|QGL::SampleBuffers)));
-    #endif          
+    #endif
     }
 
     zoom = new GraphicsViewZoom(this);
@@ -633,8 +633,24 @@ void VMainGraphicsView::SetAntialiasing(bool value)
 {
     setRenderHint(QPainter::Antialiasing, value);
     setRenderHint(QPainter::SmoothPixmapTransform, value);
+}
 
-
+//---------------------------------------------------------------------------------------------------------------------
+bool VMainGraphicsView::IsOpenGLRender() const
+{
+#if QT_VERSION >= QT_VERSION_CHECK(5, 4, 0)
+    QOpenGLWidget *viewport = qobject_cast<QOpenGLWidget *>(this->viewport());
+#else
+    QGLWidget *viewport = qobject_cast<QGLWidget *>(this->viewport());
+#endif
+    if (viewport)
+    {
+        return true;
+    }
+    else
+    {
+        return false;
+    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------

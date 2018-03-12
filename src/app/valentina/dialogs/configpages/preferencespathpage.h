@@ -44,7 +44,7 @@ public:
     explicit PreferencesPathPage(QWidget *parent = nullptr);
     virtual ~PreferencesPathPage();
 
-    void Apply();
+    QStringList Apply();
 
 private slots:
     void DefaultPath();

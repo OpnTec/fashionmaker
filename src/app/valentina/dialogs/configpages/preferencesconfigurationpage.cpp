@@ -33,7 +33,6 @@
 
 #include <QDir>
 #include <QDirIterator>
-#include <QMessageBox>
 #include <QTimer>
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -121,8 +120,9 @@ PreferencesConfigurationPage::~PreferencesConfigurationPage()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void PreferencesConfigurationPage::Apply()
+QStringList PreferencesConfigurationPage::Apply()
 {
+    QStringList preferences;
     VSettings *settings = qApp->ValentinaSettings();
     settings->SetAutosaveState(ui->autoSaveCheck->isChecked());
     settings->SetAutosaveTime(ui->autoTime->value());
@@ -153,9 +153,7 @@ void PreferencesConfigurationPage::Apply()
         const QString unit = qvariant_cast<QString>(ui->unitCombo->currentData());
         settings->SetUnit(unit);
         m_unitChanged = false;
-        const QString text = tr("The Default unit has been updated and will be used as the default for the next "
-                                "pattern you create.");
-        QMessageBox::information(this, QCoreApplication::applicationName(), text);
+        preferences.append(tr("default unit"));
     }
     if (m_labelLangChanged)
     {
@@ -163,6 +161,7 @@ void PreferencesConfigurationPage::Apply()
         settings->SetLabelLanguage(locale);
         m_labelLangChanged = false;
     }
+    return preferences;
 }
 
 //---------------------------------------------------------------------------------------------------------------------

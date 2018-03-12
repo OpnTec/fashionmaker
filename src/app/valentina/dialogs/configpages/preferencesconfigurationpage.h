@@ -44,7 +44,7 @@ public:
     explicit PreferencesConfigurationPage(QWidget *parent = nullptr);
     virtual ~PreferencesConfigurationPage();
 
-    void Apply();
+    QStringList Apply();
 protected:
     virtual void changeEvent(QEvent* event) Q_DECL_OVERRIDE;
 private:

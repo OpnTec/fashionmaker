@@ -113,13 +113,29 @@ PreferencesPatternPage::~PreferencesPatternPage()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void PreferencesPatternPage::Apply()
+QStringList PreferencesPatternPage::Apply()
 {
+    QStringList preferences;
+
     VSettings *settings = qApp->ValentinaSettings();
 
     // Scene antialiasing
-    settings->SetGraphicalOutput(ui->graphOutputCheck->isChecked());
-    settings->SetOpenGLRender(ui->checkBoxOpenGLRender->isChecked());
+    if (settings->GetGraphicalOutput() != ui->graphOutputCheck->isChecked())
+    {
+        if (qApp->getSceneView()->IsOpenGLRender())
+        {
+            preferences.append(tr("antialiasing"));
+        }
+
+        settings->SetGraphicalOutput(ui->graphOutputCheck->isChecked());
+    }
+
+    if (settings->IsOpenGLRender() != ui->checkBoxOpenGLRender->isChecked())
+    {
+        preferences.append(tr("scene render"));
+        settings->SetOpenGLRender(ui->checkBoxOpenGLRender->isChecked());
+    }
+
     settings->SetCurveApproximationScale(ui->doubleSpinBoxCurveApproximation->value());
     settings->SetLineWidth(UnitConvertor(ui->doubleSpinBoxLineWidth->value(), m_oldLineUnit, Unit::Mm));
     qApp->getSceneView()->SetAntialiasing(ui->graphOutputCheck->isChecked());
@@ -149,6 +165,8 @@ void PreferencesPatternPage::Apply()
 
     settings->SetKnownMaterials(m_knownMaterials);
     settings->SetRememberPatternMaterials(ui->checkBoxRemeberPatternMaterials->isChecked());
+
+    return preferences;
 }
 
 //---------------------------------------------------------------------------------------------------------------------

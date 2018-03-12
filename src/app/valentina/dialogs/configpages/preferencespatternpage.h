@@ -47,7 +47,7 @@ public:
     explicit PreferencesPatternPage(QWidget *parent = nullptr);
     virtual ~PreferencesPatternPage();
 
-    void Apply();
+    QStringList Apply();
     void InitDefaultSeamAllowance();
 
 private slots:

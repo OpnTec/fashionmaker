@@ -132,6 +132,8 @@ public:
 
     void SetAntialiasing(bool value);
 
+    bool IsOpenGLRender() const;
+
 signals:
     /**
      * @brief MouseRelease help catch mouse release event.

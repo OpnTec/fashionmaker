@@ -55,7 +55,7 @@ PreferencesPathPage::~PreferencesPathPage()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void PreferencesPathPage::Apply()
+QStringList PreferencesPathPage::Apply()
 {
     VSettings *settings = qApp->ValentinaSettings();
     settings->SetPathIndividualMeasurements(ui->pathTable->item(0, 1)->text());
@@ -64,6 +64,8 @@ void PreferencesPathPage::Apply()
     settings->SetPathLayout(ui->pathTable->item(3, 1)->text());
     settings->SetPathTemplate(ui->pathTable->item(4, 1)->text());
     settings->SetPathLabelTemplate(ui->pathTable->item(5, 1)->text());
+
+    return QStringList(); // No changes those require restart.
 }
 
 //---------------------------------------------------------------------------------------------------------------------

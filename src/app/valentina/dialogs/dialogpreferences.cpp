@@ -33,6 +33,7 @@
 #include "configpages/preferencespatternpage.h"
 #include "configpages/preferencespathpage.h"
 
+#include <QMessageBox>
 #include <QPushButton>
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -122,9 +123,19 @@ void DialogPreferences::PageChanged(QListWidgetItem *current, QListWidgetItem *p
 //---------------------------------------------------------------------------------------------------------------------
 void DialogPreferences::Apply()
 {
-    m_configurePage->Apply();
-    m_patternPage->Apply();
-    m_pathPage->Apply();
+    QStringList preferences;
+
+    preferences += m_configurePage->Apply();
+    preferences += m_patternPage->Apply();
+    preferences += m_pathPage->Apply();
+
+    if (not preferences.isEmpty())
+    {
+        const QString text = tr("Followed %n option(s) require restart to take effect: %1.", "",
+                                preferences.size()).arg(preferences.join(", "));
+        QMessageBox::information(this, QCoreApplication::applicationName(), text);
+    }
+
 
     m_patternPage->InitDefaultSeamAllowance();
 
