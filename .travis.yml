@@ -88,6 +88,8 @@ before_deploy:
     tar -C $TRAVIS_BUILD_DIR/build/src/app/valentina/bin --exclude "*.DS_Store" -cvzf valentina-osx-${TRAVIS_COMMIT}.tar.gz Valentina.app/;
   fi
 deploy:
+  edge:
+    branch: v1.8.47
   provider: bintray
   skip_cleanup: true
   file: ../share/bintray.json
