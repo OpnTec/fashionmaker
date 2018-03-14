@@ -579,7 +579,7 @@ void DialogEllipticalArc::ChosenObject(quint32 id, const SceneObject &type)
     {
         if (type == SceneObject::Point)
         {
-            if (SetObject(id, ui->comboBoxBasePoint, ""))
+            if (SetObject(id, ui->comboBoxBasePoint, QString()))
             {
                 vis->VisualMode(id);
                 prepare = true;

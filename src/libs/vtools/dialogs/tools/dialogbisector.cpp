@@ -199,7 +199,7 @@ void DialogBisector::ChosenObject(quint32 id, const SceneObject &type)
 
                     if (set.size() == 3)
                     {
-                        if (SetObject(id, ui->comboBoxThirdPoint, ""))
+                        if (SetObject(id, ui->comboBoxThirdPoint, QString()))
                         {
                             line->setObject3Id(id);
                             line->RefreshGeometry();

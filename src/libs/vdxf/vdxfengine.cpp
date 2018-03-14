@@ -373,7 +373,7 @@ void VDxfEngine::drawTextItem(const QPointF & p, const QTextItem & textItem)
 
     if (foundEndOfString)
     {
-        t.replace(endStringPlaceholder, "");
+        t.replace(endStringPlaceholder, QString());
     }
 
     textBuffer->text += t.toStdString();

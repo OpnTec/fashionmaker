@@ -1229,7 +1229,7 @@ void MainWindowsNoGUI::RestoreTextAfterDXF(const QString &placeholder,
                     if(QGraphicsSimpleTextItem *textItem = qgraphicsitem_cast<QGraphicsSimpleTextItem *>(item))
                     {
                         QString text = textItem->text();
-                        text.replace(placeholder, "");
+                        text.replace(placeholder, QString());
                         textItem->setText(text);
                     }
                 }
@@ -1412,7 +1412,7 @@ void MainWindowsNoGUI::SetPrinterSettings(QPrinter *printer, const PrintType &pr
             break;
         }
         case PrintType::PrintNative:
-            printer->setOutputFileName("");//Disable printing to file if was enabled.
+            printer->setOutputFileName(QString());//Disable printing to file if was enabled.
             printer->setOutputFormat(QPrinter::NativeFormat);
             break;
         case PrintType::PrintPreview: /*do nothing*/

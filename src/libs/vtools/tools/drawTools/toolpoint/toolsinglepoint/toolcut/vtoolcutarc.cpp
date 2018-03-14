@@ -223,7 +223,7 @@ void VToolCutArc::SaveOptions(QDomElement &tag, QSharedPointer<VGObject> &obj)
 //---------------------------------------------------------------------------------------------------------------------
 void VToolCutArc::ReadToolAttributes(const QDomElement &domElement)
 {
-    formula = doc->GetParametrString(domElement, AttrLength, "");
+    formula = doc->GetParametrString(domElement, AttrLength, QString());
     curveCutId = doc->GetParametrUInt(domElement, AttrArc, NULL_ID_STR);
 }
 

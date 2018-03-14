@@ -385,7 +385,7 @@ void TMainWindow::FileNew()
         mIsReadOnly = m->IsReadOnly();
         UpdatePadlock(mIsReadOnly);
 
-        SetCurrentFile("");
+        SetCurrentFile(QString());
         MeasurementsWasSaved(false);
 
         InitWindow();
@@ -449,7 +449,7 @@ void TMainWindow::OpenTemplate()
 
     if (m != nullptr)
     {// The file was opened.
-        SetCurrentFile(""); // Force user to to save new file
+        SetCurrentFile(QString()); // Force user to to save new file
         lock.reset();// remove lock from template
     }
 }
@@ -1134,15 +1134,15 @@ void TMainWindow::Remove()
         ui->actionExportToCSV->setEnabled(false); 
 
         ui->lineEditName->blockSignals(true);
-        ui->lineEditName->setText("");
+        ui->lineEditName->setText(QString());
         ui->lineEditName->blockSignals(false);
 
         ui->plainTextEditDescription->blockSignals(true);
-        ui->plainTextEditDescription->setPlainText("");
+        ui->plainTextEditDescription->setPlainText(QString());
         ui->plainTextEditDescription->blockSignals(false);
 
         ui->lineEditFullName->blockSignals(true);
-        ui->lineEditFullName->setText("");
+        ui->lineEditFullName->setText(QString());
         ui->lineEditFullName->blockSignals(false);
 
         if (mType == MeasurementsType::Multisize)
@@ -1152,7 +1152,7 @@ void TMainWindow::Remove()
             ui->doubleSpinBoxInSizes->blockSignals(true);
             ui->doubleSpinBoxInHeights->blockSignals(true);
 
-            ui->labelCalculatedValue->setText("");
+            ui->labelCalculatedValue->setText(QString());
             ui->doubleSpinBoxBaseValue->setValue(0);
             ui->doubleSpinBoxInSizes->setValue(0);
             ui->doubleSpinBoxInHeights->setValue(0);
@@ -1165,11 +1165,11 @@ void TMainWindow::Remove()
         else
         {
             ui->labelCalculatedValue->blockSignals(true);
-            ui->labelCalculatedValue->setText("");
+            ui->labelCalculatedValue->setText(QString());
             ui->labelCalculatedValue->blockSignals(false);
 
             ui->plainTextEditFormula->blockSignals(true);
-            ui->plainTextEditFormula->setPlainText("");
+            ui->plainTextEditFormula->setPlainText(QString());
             ui->plainTextEditFormula->blockSignals(false);
         }
     }
@@ -2994,7 +2994,7 @@ void TMainWindow::CreateWindowMenu(QMenu *menu)
         const int index = title.lastIndexOf("[*]");
         if (index != -1)
         {
-            window->isWindowModified() ? title.replace(index, 3, "*") : title.replace(index, 3, "");
+            window->isWindowModified() ? title.replace(index, 3, "*") : title.replace(index, 3, QString());
         }
 
         QAction *action = menu->addAction(title, this, SLOT(ShowWindow()));

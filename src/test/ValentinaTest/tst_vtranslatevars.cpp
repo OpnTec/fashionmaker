@@ -132,7 +132,7 @@ void TST_VTranslateVars::PrepareValToUser(double d, const QLocale &locale)
     QString formulaToUser = locale.toString(d);
     if (locale.groupSeparator().isSpace())
     {
-        formulaToUser.replace(locale.groupSeparator(), "");
+        formulaToUser.replace(locale.groupSeparator(), QString());
     }
 
     PrepareVal(formulaFromSystem, formulaToUser, locale);

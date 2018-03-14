@@ -606,7 +606,7 @@ bool QxtCsvModel::toCSV(QIODevice* dest, QString &error, bool withHeader, QChar 
     }
     if (withHeader)
     {
-        data = "";
+        data = QString();
         for (col = 0; col < cols; ++col)
         {
             if (col > 0)
@@ -620,7 +620,7 @@ bool QxtCsvModel::toCSV(QIODevice* dest, QString &error, bool withHeader, QChar 
     for (row = 0; row < rows; ++row)
     {
         const QStringList& rowData = d_ptr.csvData[row];
-        data = "";
+        data = QString();
         for (col = 0; col < cols; ++col)
         {
             if (col > 0)

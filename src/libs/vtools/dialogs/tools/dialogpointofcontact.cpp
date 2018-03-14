@@ -197,7 +197,7 @@ void DialogPointOfContact::ChosenObject(quint32 id, const SceneObject &type)
 
                     if (set.size() == 3)
                     {
-                        if (SetObject(id, ui->comboBoxCenter, ""))
+                        if (SetObject(id, ui->comboBoxCenter, QString()))
                         {
                             line->setRadiusId(id);
                             line->RefreshGeometry();

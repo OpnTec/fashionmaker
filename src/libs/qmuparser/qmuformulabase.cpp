@@ -76,10 +76,10 @@ void QmuFormulaBase::InitCharSets()
 
     // Defining identifier character sets
     const QString nameChars = QString() + sign0 + sign1 + sign2 + sign3 + sign4 + sign5 + sign6 + sign7 + sign8 +
-            sign9 + QLatin1String("\\_@#'") + symbols.join("");
+            sign9 + QLatin1String("\\_@#'") + symbols.join(QString());
     DefineNameChars(nameChars);
 
-    const QString oprtChars = symbols.join("") + positiveSign + negativeSign + QLatin1String("*^/?<>=!$%&|~'_");
+    const QString oprtChars = symbols.join(QString()) + positiveSign + negativeSign + QLatin1String("*^/?<>=!$%&|~'_");
     DefineOprtChars(oprtChars);
 
     const QString infixOprtChars = QString() + positiveSign + negativeSign + QLatin1String("*^/?<>=!$%&|~'_");

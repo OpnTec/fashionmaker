@@ -89,7 +89,7 @@ QWidget *VPE::VLineTypeProperty::createEditor(QWidget *parent, const QStyleOptio
     QMap<QString, QIcon>::const_iterator i = styles.constBegin();
     while (i != styles.constEnd())
     {
-        tmpEditor->addItem(i.value(), "", QVariant(i.key()));
+        tmpEditor->addItem(i.value(), QString(), QVariant(i.key()));
         ++i;
     }
 

@@ -498,7 +498,7 @@ void DialogHistory::RetranslateUi()
 
     QTableWidgetItem *item = ui->tableWidget->item(cursorRow, 0);
     SCASSERT(item != nullptr)
-    item->setIcon(QIcon(""));
+    item->setIcon(QIcon(QString()));
 
     cursorRow = currentRow;
     cellClicked(cursorRow, 0);

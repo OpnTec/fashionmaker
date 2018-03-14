@@ -452,7 +452,7 @@ void DialogSeamAllowance::ShowDialog(bool click)
 {
     if (click == false && uiTabPaths->listWidgetMainPath->count() > 0)
     {
-        emit ToolTip("");
+        emit ToolTip(QString());
         prepare = true;
 
         if (not applyAllowed)

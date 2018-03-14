@@ -496,7 +496,7 @@ void VToolOptionsPropertyBrowser::itemClicked(QGraphicsItem *item)
     currentItem = item;
     if (currentItem == nullptr)
     {
-        formView->setTitle("");
+        formView->setTitle(QString());
         return;
     }
 

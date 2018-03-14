@@ -687,7 +687,7 @@ void DialogSplinePath::ShowDialog(bool click)
     {
         if (path.CountPoints() >= 3)
         {
-            emit ToolTip("");
+            emit ToolTip(QString());
 
             if (not data->IsUnique(path.name()))
             {

@@ -264,8 +264,8 @@ QDomElement VVSTConverter::AddMV0_4_0(const QString &name, qreal value, qreal si
     SetAttribute(element, QStringLiteral("base"), QString().setNum(value));
     SetAttribute(element, QStringLiteral("size_increase"), QString().setNum(sizeIncrease));
     SetAttribute(element, QStringLiteral("height_increase"), QString().setNum(heightIncrease));
-    SetAttribute(element, QStringLiteral("description"), QString(""));
-    SetAttribute(element, QStringLiteral("full_name"), QString(""));
+    SetAttribute(element, QStringLiteral("description"),QString());
+    SetAttribute(element, QStringLiteral("full_name"), QString());
 
     return element;
 }

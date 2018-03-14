@@ -244,7 +244,7 @@ void DialogLineIntersectAxis::ShowDialog(bool click)
         SCASSERT(line != nullptr)
 
         this->SetAngle(line->Angle());//Show in dialog angle what user choose
-        emit ToolTip("");
+        emit ToolTip(QString());
 
         DialogAccepted();// Just set default values and don't show dialog
     }
@@ -292,7 +292,7 @@ void DialogLineIntersectAxis::ChosenObject(quint32 id, const SceneObject &type)
 
                     if (set.size() == 3)
                     {
-                        if (SetObject(id, ui->comboBoxAxisPoint, ""))
+                        if (SetObject(id, ui->comboBoxAxisPoint, QString()))
                         {
                             line->setAxisPointId(id);
                             line->RefreshGeometry();

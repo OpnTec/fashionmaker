@@ -371,7 +371,7 @@ int VMeasurements::BaseHeight() const
 //---------------------------------------------------------------------------------------------------------------------
 QString VMeasurements::Notes() const
 {
-    return UniqueTagText(TagNotes, "");
+    return UniqueTagText(TagNotes, QString());
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -386,7 +386,7 @@ void VMeasurements::SetNotes(const QString &text)
 //---------------------------------------------------------------------------------------------------------------------
 QString VMeasurements::Customer() const
 {
-    return UniqueTagText(TagCustomer, "");
+    return UniqueTagText(TagCustomer, QString());
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -446,7 +446,7 @@ void VMeasurements::SetPMSystem(const QString &system)
 //---------------------------------------------------------------------------------------------------------------------
 QString VMeasurements::Email() const
 {
-    return UniqueTagText(TagEmail, "");
+    return UniqueTagText(TagEmail, QString());
 }
 
 //---------------------------------------------------------------------------------------------------------------------

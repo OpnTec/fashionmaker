@@ -2134,7 +2134,7 @@ void VPatternConverter::TagDetailToV0_4_0()
                                 tagNode.setAttribute(*strMy, element.attribute(*strMy, "0"));
                             }
 
-                            tagNode.setAttribute(*strType, element.attribute(*strType, ""));
+                            tagNode.setAttribute(*strType, element.attribute(*strType, QString()));
 
                             tagNodes.appendChild(tagNode);
 
@@ -2187,7 +2187,7 @@ QDomElement VPatternConverter::GetUnionDetailNodesV0_4_0(const QDomElement &deta
                     tagNode.setAttribute(*strReverse, node.attribute(*strReverse, "0"));
                 }
 
-                tagNode.setAttribute(*strType, node.attribute(*strType, ""));
+                tagNode.setAttribute(*strType, node.attribute(*strType, QString()));
 
                 tagNodes.appendChild(tagNode);
             }
@@ -2395,7 +2395,7 @@ void VPatternConverter::PortPieceLabelstoV0_6_0()
         const int count = nodeListMCP.count();
         try
         {
-            if (not GetParametrString(dataTag, *strLetter, "").isEmpty())
+            if (not GetParametrString(dataTag, *strLetter, QString()).isEmpty())
             {
                 AddLabelTemplateLineV0_6_0(dataTag, "%pLetter%", true, false, Qt::AlignHCenter, 6);
             }

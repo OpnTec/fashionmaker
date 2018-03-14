@@ -183,7 +183,7 @@ void DialogFlippingByAxis::ShowDialog(bool click)
     else if (not stage1 && prepare && click)
     {
         setModal(true);
-        emit ToolTip("");
+        emit ToolTip(QString());
         show();
     }
 }
@@ -201,7 +201,7 @@ void DialogFlippingByAxis::ChosenObject(quint32 id, const SceneObject &type)
                 return;
             }
 
-            if (SetObject(id, ui->comboBoxOriginPoint, ""))
+            if (SetObject(id, ui->comboBoxOriginPoint, QString()))
             {
                 VisToolFlippingByAxis *operation = qobject_cast<VisToolFlippingByAxis *>(vis);
                 SCASSERT(operation != nullptr)

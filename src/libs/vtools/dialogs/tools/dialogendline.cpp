@@ -184,7 +184,7 @@ void DialogEndLine::ChosenObject(quint32 id, const SceneObject &type)
     {
         if (type == SceneObject::Point)
         {
-            if (SetObject(id, ui->comboBoxBasePoint, ""))
+            if (SetObject(id, ui->comboBoxBasePoint, QString()))
             {
                 vis->VisualMode(id);
                 VAbstractMainWindow *window = qobject_cast<VAbstractMainWindow *>(qApp->getMainWindow());
@@ -328,7 +328,7 @@ void DialogEndLine::ShowDialog(bool click)
 
         this->SetAngle(line->Angle());//Show in dialog angle what user choose
         this->SetFormula(line->Length());
-        emit ToolTip("");
+        emit ToolTip(QString());
         timerFormula->start();
         this->show();
     }

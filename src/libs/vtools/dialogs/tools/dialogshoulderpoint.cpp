@@ -201,7 +201,7 @@ void DialogShoulderPoint::ChosenObject(quint32 id, const SceneObject &type)
 
                     if (set.size() == 3)
                     {
-                        if (SetObject(id, ui->comboBoxP2Line, ""))
+                        if (SetObject(id, ui->comboBoxP2Line, QString()))
                         {
                             line->setLineP2Id(id);
                             line->RefreshGeometry();

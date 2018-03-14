@@ -153,7 +153,7 @@ void DialogCubicBezier::ChosenObject(quint32 id, const SceneObject &type)
                 case 3:
                     if (getCurrentObjectId(ui->comboBoxP1) != id)
                     {
-                        if (SetObject(id, ui->comboBoxP4, ""))
+                        if (SetObject(id, ui->comboBoxP4, QString()))
                         {
                             ++number;
 

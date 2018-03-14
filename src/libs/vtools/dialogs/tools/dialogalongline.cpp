@@ -184,7 +184,7 @@ void DialogAlongLine::ChosenObject(quint32 id, const SceneObject &type)
                     }
                     break;
                 case 1:
-                    if (SetObject(id, ui->comboBoxSecondPoint, ""))
+                    if (SetObject(id, ui->comboBoxSecondPoint, QString()))
                     {
                         if (flagError)
                         {

@@ -250,7 +250,7 @@ QString VDrawTool::ObjectName(quint32 id) const
         qCDebug(vTool, "Error! Couldn't get object name by id = %s. %s %s", qUtf8Printable(QString().setNum(id)),
                 qUtf8Printable(e.ErrorMessage()),
                 qUtf8Printable(e.DetailedInformation()));
-        return QString("");// Return empty string for property browser
+        return QString(QString());// Return empty string for property browser
     }
 }
 

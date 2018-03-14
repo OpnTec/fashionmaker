@@ -76,7 +76,7 @@ void DialogGroup::ShowDialog(bool click)
         SetName(tr("New group"));
 
         setModal(true);
-        emit ToolTip("");
+        emit ToolTip(QString());
         show();
     }
 }

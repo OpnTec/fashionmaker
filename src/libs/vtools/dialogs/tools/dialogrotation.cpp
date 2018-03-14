@@ -229,7 +229,7 @@ void DialogRotation::ShowDialog(bool click)
 
         SetAngle(operation->Angle());//Show in dialog angle that a user choose
         setModal(true);
-        emit ToolTip("");
+        emit ToolTip(QString());
         timerAngle->start();
         show();
     }
@@ -253,7 +253,7 @@ void DialogRotation::ChosenObject(quint32 id, const SceneObject &type)
                 operation->SetObjects(objects.toVector());
             }
 
-            if (SetObject(id, ui->comboBoxOriginPoint, ""))
+            if (SetObject(id, ui->comboBoxOriginPoint, QString()))
             {
                 VAbstractMainWindow *window = qobject_cast<VAbstractMainWindow *>(qApp->getMainWindow());
                 SCASSERT(window != nullptr)

@@ -145,7 +145,7 @@ void DialogLineIntersect::ChosenObject(quint32 id, const SceneObject &type)
 
                     if (set.size() >= 3)
                     {
-                        if (SetObject(id, ui->comboBoxP2Line2, ""))
+                        if (SetObject(id, ui->comboBoxP2Line2, QString()))
                         {
                             line->setLine2P2Id(id);
                             line->RefreshGeometry();

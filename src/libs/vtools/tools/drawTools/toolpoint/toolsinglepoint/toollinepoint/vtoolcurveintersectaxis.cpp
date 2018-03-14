@@ -315,7 +315,7 @@ void VToolCurveIntersectAxis::ReadToolAttributes(const QDomElement &domElement)
     lineColor = doc->GetParametrString(domElement, AttrLineColor, ColorBlack);
     basePointId = doc->GetParametrUInt(domElement, AttrBasePoint, NULL_ID_STR);
     curveId = doc->GetParametrUInt(domElement, AttrCurve, NULL_ID_STR);
-    formulaAngle = doc->GetParametrString(domElement, AttrAngle, "");
+    formulaAngle = doc->GetParametrString(domElement, AttrAngle, QString());
 }
 
 //---------------------------------------------------------------------------------------------------------------------

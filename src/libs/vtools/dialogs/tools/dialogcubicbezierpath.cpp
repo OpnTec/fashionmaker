@@ -165,7 +165,7 @@ void DialogCubicBezierPath::ShowDialog(bool click)
         {
             if (size - VCubicBezierPath::SubSplPointsCount(path.CountSubSpl()) == 0)
             {// Accept only if all subpaths are completed
-                emit ToolTip("");
+                emit ToolTip(QString());
 
                 if (not data->IsUnique(path.name()))
                 {

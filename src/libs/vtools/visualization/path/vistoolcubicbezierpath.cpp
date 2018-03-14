@@ -295,7 +295,7 @@ void VisToolCubicBezierPath::RefreshToolTip()
 
         if (mode == Mode::Show)
         {
-            Visualization::toolTip = "";
+            Visualization::toolTip = QString();
         }
         emit ToolTip(Visualization::toolTip);
     }

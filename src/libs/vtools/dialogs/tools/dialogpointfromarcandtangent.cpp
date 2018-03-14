@@ -152,7 +152,7 @@ void DialogPointFromArcAndTangent::ChosenObject(quint32 id, const SceneObject &t
                 case 1:
                     if (type == SceneObject::Arc)
                     {
-                        if (SetObject(id, ui->comboBoxArc, ""))
+                        if (SetObject(id, ui->comboBoxArc, QString()))
                         {
                             number = 0;
                             point->setArcId(id);

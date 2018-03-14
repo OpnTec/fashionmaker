@@ -184,7 +184,7 @@ void DialogPiecePath::ShowDialog(bool click)
     {
         if (CreatePath().CountNodes() > 0)
         {
-            emit ToolTip("");
+            emit ToolTip(QString());
             prepare = true;
 
             if (not m_showMode)
@@ -432,8 +432,8 @@ void DialogPiecePath::NodeChanged(int index)
     }
     else
     {
-        ui->plainTextEditFormulaWidthBefore->setPlainText("");
-        ui->plainTextEditFormulaWidthAfter->setPlainText("");
+        ui->plainTextEditFormulaWidthBefore->setPlainText(QString());
+        ui->plainTextEditFormulaWidthAfter->setPlainText(QString());
         ui->comboBoxAngle->setCurrentIndex(-1);
     }
 
@@ -717,7 +717,7 @@ void DialogPiecePath::EvalVisible()
 {
     labelEditFormula = ui->labelEditVisible;
     QString formula = ui->plainTextEditFormulaVisible->toPlainText();
-    Eval(formula, m_flagFormulaVisible, ui->labelResultVisible, "", false, true);
+    Eval(formula, m_flagFormulaVisible, ui->labelResultVisible, QString(), false, true);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -806,7 +806,7 @@ void DialogPiecePath::VisibleChanged()
 {
     labelEditFormula = ui->labelEditVisible;
     labelResultCalculation = ui->labelResultVisible;
-    ValFormulaChanged(m_flagFormulaVisible, ui->plainTextEditFormulaVisible, m_timerVisible, "");
+    ValFormulaChanged(m_flagFormulaVisible, ui->plainTextEditFormulaVisible, m_timerVisible, QString());
 }
 
 //---------------------------------------------------------------------------------------------------------------------

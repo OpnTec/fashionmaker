@@ -126,15 +126,15 @@ QMap<QString, QString> PreparePlaceholders(const VAbstractPattern *doc)
     }
 
     // Piece tags
-    placeholders.insert(pl_pLetter, "");
-    placeholders.insert(pl_pAnnotation, "");
-    placeholders.insert(pl_pOrientation, "");
-    placeholders.insert(pl_pRotation, "");
-    placeholders.insert(pl_pTilt, "");
-    placeholders.insert(pl_pFoldPosition, "");
-    placeholders.insert(pl_pName, "");
-    placeholders.insert(pl_pQuantity, "");
-    placeholders.insert(pl_wOnFold, "");
+    placeholders.insert(pl_pLetter, QString());
+    placeholders.insert(pl_pAnnotation, QString());
+    placeholders.insert(pl_pOrientation, QString());
+    placeholders.insert(pl_pRotation, QString());
+    placeholders.insert(pl_pTilt, QString());
+    placeholders.insert(pl_pFoldPosition, QString());
+    placeholders.insert(pl_pName, QString());
+    placeholders.insert(pl_pQuantity, QString());
+    placeholders.insert(pl_wOnFold, QString());
     placeholders.insert(pl_mFabric, QObject::tr("Fabric"));
     placeholders.insert(pl_mLining, QObject::tr("Lining"));
     placeholders.insert(pl_mInterfacing, QObject::tr("Interfacing"));

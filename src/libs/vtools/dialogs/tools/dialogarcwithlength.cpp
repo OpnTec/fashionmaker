@@ -235,7 +235,7 @@ void DialogArcWithLength::ChosenObject(quint32 id, const SceneObject &type)
     {
         if (type == SceneObject::Point)
         {
-            if (SetObject(id, ui->comboBoxCenter, ""))
+            if (SetObject(id, ui->comboBoxCenter, QString()))
             {
                 vis->VisualMode(id);
                 prepare = true;

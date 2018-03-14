@@ -285,7 +285,7 @@ void VToolLineIntersectAxis::ReadToolAttributes(const QDomElement &domElement)
     basePointId = doc->GetParametrUInt(domElement, AttrBasePoint, NULL_ID_STR);
     firstPointId = doc->GetParametrUInt(domElement, AttrP1Line, NULL_ID_STR);
     secondPointId = doc->GetParametrUInt(domElement, AttrP2Line, NULL_ID_STR);
-    formulaAngle = doc->GetParametrString(domElement, AttrAngle, "");
+    formulaAngle = doc->GetParametrString(domElement, AttrAngle, QString());
 }
 
 //---------------------------------------------------------------------------------------------------------------------

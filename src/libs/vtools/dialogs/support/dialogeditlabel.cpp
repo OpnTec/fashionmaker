@@ -512,20 +512,20 @@ void DialogEditLabel::InitPlaceholders()
     }
 
     // Piece tags
-    m_placeholders.insert(pl_pLetter, qMakePair(tr("Piece letter"), QString("")));
-    m_placeholders.insert(pl_pAnnotation, qMakePair(tr("Piece annotation"), QString("")));
-    m_placeholders.insert(pl_pOrientation, qMakePair(tr("Piece orientation"), QString("")));
-    m_placeholders.insert(pl_pRotation, qMakePair(tr("Piece rotation"), QString("")));
-    m_placeholders.insert(pl_pTilt, qMakePair(tr("Piece tilt"), QString("")));
-    m_placeholders.insert(pl_pFoldPosition, qMakePair(tr("Piece fold position"), QString("")));
-    m_placeholders.insert(pl_pName, qMakePair(tr("Piece name"), QString("")));
-    m_placeholders.insert(pl_pQuantity, qMakePair(tr("Quantity"), QString("")));
+    m_placeholders.insert(pl_pLetter, qMakePair(tr("Piece letter"), QString(QString())));
+    m_placeholders.insert(pl_pAnnotation, qMakePair(tr("Piece annotation"), QString(QString())));
+    m_placeholders.insert(pl_pOrientation, qMakePair(tr("Piece orientation"), QString(QString())));
+    m_placeholders.insert(pl_pRotation, qMakePair(tr("Piece rotation"), QString(QString())));
+    m_placeholders.insert(pl_pTilt, qMakePair(tr("Piece tilt"), QString(QString())));
+    m_placeholders.insert(pl_pFoldPosition, qMakePair(tr("Piece fold position"), QString(QString())));
+    m_placeholders.insert(pl_pName, qMakePair(tr("Piece name"), QString(QString())));
+    m_placeholders.insert(pl_pQuantity, qMakePair(tr("Quantity"), QString(QString())));
     m_placeholders.insert(pl_mFabric, qMakePair(tr("Material: Fabric"), tr("Fabric")));
     m_placeholders.insert(pl_mLining, qMakePair(tr("Material: Lining"), tr("Lining")));
     m_placeholders.insert(pl_mInterfacing, qMakePair(tr("Material: Interfacing"), tr("Interfacing")));
     m_placeholders.insert(pl_mInterlining, qMakePair(tr("Material: Interlining"), tr("Interlining")));
     m_placeholders.insert(pl_wCut, qMakePair(tr("Word: Cut"), tr("Cut")));
-    m_placeholders.insert(pl_wOnFold, qMakePair(tr("Word: on fold"), QString("")));// By default should be empty
+    m_placeholders.insert(pl_wOnFold, qMakePair(tr("Word: on fold"), QString(QString())));// By default should be empty
 }
 
 //---------------------------------------------------------------------------------------------------------------------

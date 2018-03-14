@@ -290,7 +290,7 @@ void DialogTrueDarts::ChosenObject(quint32 id, const SceneObject &type)
 
                     if (set.size() == 5)
                     {
-                        if (SetObject(id, ui->comboBoxThirdDartPoint, ""))
+                        if (SetObject(id, ui->comboBoxThirdDartPoint, QString()))
                         {
                             points->setD3PointId(id);
                             points->RefreshGeometry();

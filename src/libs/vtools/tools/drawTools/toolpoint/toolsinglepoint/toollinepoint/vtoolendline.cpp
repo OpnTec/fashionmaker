@@ -208,9 +208,9 @@ void VToolEndLine::ReadToolAttributes(const QDomElement &domElement)
 {
     m_lineType = doc->GetParametrString(domElement, AttrTypeLine, TypeLineLine);
     lineColor = doc->GetParametrString(domElement, AttrLineColor, ColorBlack);
-    formulaLength = doc->GetParametrString(domElement, AttrLength, "");
+    formulaLength = doc->GetParametrString(domElement, AttrLength, QString());
     basePointId = doc->GetParametrUInt(domElement, AttrBasePoint, NULL_ID_STR);
-    formulaAngle = doc->GetParametrString(domElement, AttrAngle, "");
+    formulaAngle = doc->GetParametrString(domElement, AttrAngle, QString());
 }
 
 //---------------------------------------------------------------------------------------------------------------------

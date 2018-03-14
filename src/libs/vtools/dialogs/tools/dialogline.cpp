@@ -190,7 +190,7 @@ void DialogLine::ChosenObject(quint32 id, const SceneObject &type)
                 case 1:
                     if (getCurrentObjectId(ui->comboBoxFirstPoint) != id)
                     {
-                        if (SetObject(id, ui->comboBoxSecondPoint, ""))
+                        if (SetObject(id, ui->comboBoxSecondPoint, QString()))
                         {
                             if (flagError)
                             {

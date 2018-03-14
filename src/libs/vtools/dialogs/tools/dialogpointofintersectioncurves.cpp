@@ -181,7 +181,7 @@ void DialogPointOfIntersectionCurves::ChosenObject(quint32 id, const SceneObject
                 case 1:
                     if (getCurrentObjectId(ui->comboBoxCurve1) != id)
                     {
-                        if (SetObject(id, ui->comboBoxCurve2, ""))
+                        if (SetObject(id, ui->comboBoxCurve2, QString()))
                         {
                             number = 0;
                             point->setObject2Id(id);

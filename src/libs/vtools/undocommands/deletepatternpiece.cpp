@@ -47,7 +47,7 @@ DeletePatternPiece::DeletePatternPiece(VAbstractPattern *doc, const QString &nam
     const QDomElement previousPP = patternP.previousSibling().toElement();//find previous pattern piece
     if (not previousPP.isNull() && previousPP.tagName() == VAbstractPattern::TagDraw)
     {
-        previousPPName = doc->GetParametrString(previousPP, VAbstractPattern::AttrName, "");
+        previousPPName = doc->GetParametrString(previousPP, VAbstractPattern::AttrName, QString());
     }
 }
 

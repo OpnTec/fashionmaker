@@ -202,7 +202,7 @@ MainWindow::MainWindow(QWidget *parent)
 
     ReadSettings();
 
-    setCurrentFile("");
+    setCurrentFile(QString());
     WindowsLocale();
 
     connect(ui->listWidget, &QListWidget::currentRowChanged, this, &MainWindow::ShowPaper);
@@ -324,7 +324,7 @@ void MainWindow::AddPP(const QString &PPName)
     QApplication::postEvent(this, new FitBestCurrentEvent());
 
     ui->actionNewDraw->setEnabled(true);
-    m_statusLabel->setText("");
+    m_statusLabel->setText(QString());
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -2170,7 +2170,7 @@ void MainWindow::CancelTool()
             {
                 pointer->setChecked(false);
             }
-            m_statusLabel->setText("");
+            m_statusLabel->setText(QString());
 
             // Crash: using CRTL+Z while using line tool.
             // related bug report:
@@ -2381,7 +2381,7 @@ void  MainWindow::ArrowTool(bool checked)
         ui->view->viewport()->unsetCursor();
         ui->view->viewport()->setCursor(QCursor(Qt::ArrowCursor));
         ui->view->setCurrentCursorShape(); // Hack to fix problem with a cursor
-        m_statusLabel->setText("");
+        m_statusLabel->setText(QString());
         ui->view->setShowToolOptions(true);
         qCDebug(vMainWindow, "Enabled arrow tool.");
     }
@@ -2575,7 +2575,7 @@ void MainWindow::ActionDetails(bool checked)
         ui->dockWidgetGroups->setVisible(isDockGroupsVisible);
         ui->dockWidgetGroups->setToolTip(tr("Show which details will go in layout"));
 
-        m_statusLabel->setText("");
+        m_statusLabel->setText(QString());
     }
     else
     {
@@ -2676,7 +2676,7 @@ void MainWindow::ActionLayout(bool checked)
         SetEnableWidgets(true);
         ui->toolBox->setCurrentIndex(ui->toolBox->indexOf(ui->layoutPage));
 
-        mouseCoordinate->setText("");
+        mouseCoordinate->setText(QString());
 
         if (qApp->patternType() == MeasurementsType::Multisize)
         {
@@ -2700,7 +2700,7 @@ void MainWindow::ActionLayout(bool checked)
             ui->toolButtonLayoutSettings->click();
         }
 
-        m_statusLabel->setText("");
+        m_statusLabel->setText(QString());
     }
     else
     {
@@ -5442,7 +5442,7 @@ QString MainWindow::GetMeasurementFileName()
 {
     if(doc->MPath().isEmpty())
     {
-        return "";
+        return QString();
     }
     else
     {

@@ -63,7 +63,7 @@ VisToolSplinePath::VisToolSplinePath(const VContainer *data, QGraphicsItem *pare
 //---------------------------------------------------------------------------------------------------------------------
 VisToolSplinePath::~VisToolSplinePath()
 {
-    emit ToolTip("");
+    emit ToolTip(QString());
 }
 
 //---------------------------------------------------------------------------------------------------------------------

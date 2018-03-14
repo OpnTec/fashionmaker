@@ -310,7 +310,7 @@ void DialogMove::ShowDialog(bool click)
             if (not optionalRotationOrigin)
             {
                 operation->SetRotationOriginPointId(NULL_ID);
-                SetObject(NULL_ID, ui->comboBoxRotationOriginPoint, "");
+                SetObject(NULL_ID, ui->comboBoxRotationOriginPoint, QString());
                 operation->RefreshGeometry();
             }
             optionalRotationOrigin = false; // Handled, next click on empty filed will disable selection
@@ -321,7 +321,7 @@ void DialogMove::ShowDialog(bool click)
             SetLength(qApp->TrVars()->FormulaFromUser(formulaLength, qApp->Settings()->GetOsSeparator()));
             SetRotationAngle(operation->RotationAngle());
             setModal(true);
-            emit ToolTip("");
+            emit ToolTip(QString());
             timerAngle->start();
             timerRotationAngle->start();
             timerLength->start();
@@ -337,7 +337,7 @@ void DialogMove::ChosenObject(quint32 id, const SceneObject &type)
     {
         if (type == SceneObject::Point && QGuiApplication::keyboardModifiers() == Qt::ControlModifier)
         {
-            if (SetObject(id, ui->comboBoxRotationOriginPoint, ""))
+            if (SetObject(id, ui->comboBoxRotationOriginPoint, QString()))
             {
                 VisToolMove *operation = qobject_cast<VisToolMove *>(vis);
                 SCASSERT(operation != nullptr)

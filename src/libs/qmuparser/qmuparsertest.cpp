@@ -721,7 +721,7 @@ int QmuParserTester::TestInfixOprt()
     iStat += EqnTest ( "(-3)^2", 9, true );
     iStat += EqnTest ( "-(-2^2)", 4, true );
     iStat += EqnTest ( "3+-3^2", -6, true );
-    // The following assumes use of sqr as postfix operator ("") together
+    // The following assumes use of sqr as postfix operator (QString()) together
     // with a sign operator of low priority:
     iStat += EqnTest ( "-2'", -4, true );
     iStat += EqnTest ( "-(1+1)'", -4, true );

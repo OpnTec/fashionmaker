@@ -148,7 +148,7 @@ void DialogTriangle::ChosenObject(quint32 id, const SceneObject &type)
 
                     if (set.size() == 4)
                     {
-                        if (SetObject(id, ui->comboBoxSecondPoint, ""))
+                        if (SetObject(id, ui->comboBoxSecondPoint, QString()))
                         {
                             line->setHypotenuseP2Id(id);
                             line->RefreshGeometry();

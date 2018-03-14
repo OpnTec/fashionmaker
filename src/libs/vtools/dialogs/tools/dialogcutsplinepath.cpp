@@ -144,7 +144,7 @@ void DialogCutSplinePath::ChosenObject(quint32 id, const SceneObject &type)
     {
         if (type == SceneObject::SplinePath)
         {
-            if (SetObject(id, ui->comboBoxSplinePath, ""))
+            if (SetObject(id, ui->comboBoxSplinePath, QString()))
             {
                 vis->VisualMode(id);
                 prepare = true;

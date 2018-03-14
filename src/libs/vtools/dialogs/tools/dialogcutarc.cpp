@@ -128,7 +128,7 @@ void DialogCutArc::ChosenObject(quint32 id, const SceneObject &type)
     {
         if (type == SceneObject::Arc)
         {
-            if (SetObject(id, ui->comboBoxArc, ""))
+            if (SetObject(id, ui->comboBoxArc, QString()))
             {
                 vis->VisualMode(id);
                 prepare = true;

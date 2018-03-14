@@ -55,18 +55,18 @@ void TST_Misc::TestRelativeFilePath_data()
             << "/home/user/patterns/pattern.val" << "/home/user/patterns/m.vit" << "m.vit";
 
     QTest::newRow("Path to measurements is empty")
-            << "/home/user/patterns/pattern.val" << "" << "";
+            << "/home/user/patterns/pattern.val" << QString() << QString();
 
     QTest::newRow("Path to a pattern file is empty. Ablosute measurements path.")
-            << "" << "/home/user/patterns/m.vit" << "/home/user/patterns/m.vit";
+            << QString() << "/home/user/patterns/m.vit" << "/home/user/patterns/m.vit";
 
     QTest::newRow("Path to a pattern file is empty. Relative measurements path.")
-            << "" << "measurements/m.vit" << "measurements/m.vit";
+            << QString() << "measurements/m.vit" << "measurements/m.vit";
 
     QTest::newRow("Relative measurements path.")
             << "/home/user/patterns/pattern.val" << "../measurements/m.vit" << "../measurements/m.vit";
 
-    QTest::newRow("Both paths are empty") << "" << "" << "";
+    QTest::newRow("Both paths are empty") << QString() << QString() << QString();
 
     QTest::newRow("Path to measurements is relative")
             << "/home/user/patterns/pattern.val" << "m.vit" << "m.vit";
@@ -114,15 +114,15 @@ void TST_Misc::TestAbsoluteFilePath_data()
 
     QTest::newRow("Path to measurements is empty")
             << QCoreApplication::applicationDirPath() + QStringLiteral("/home/user/patterns/pattern.val")
-            << "" << "";
+            << QString() << QString();
 
     QTest::newRow("Path to a pattern file is empty. Ablosute measurements path.")
-            << ""
+            << QString()
             << QCoreApplication::applicationDirPath() + QStringLiteral("/home/user/patterns/m.vit")
             << QCoreApplication::applicationDirPath() + QStringLiteral("/home/user/patterns/m.vit");
 
     QTest::newRow("Path to a pattern file is empty. Relative measurements path.")
-            << ""
+            << QString()
             << "measurements/m.vit"
             << "measurements/m.vit";
 
@@ -131,7 +131,7 @@ void TST_Misc::TestAbsoluteFilePath_data()
             << "../measurements/m.vit"
             << QCoreApplication::applicationDirPath() + QStringLiteral("/home/user/measurements/m.vit");
 
-    QTest::newRow("Both paths are empty") << "" << "" << "";
+    QTest::newRow("Both paths are empty") << QString() << QString() << QString();
 
     QTest::newRow("Path to measurements is relative")
             << QCoreApplication::applicationDirPath() + QStringLiteral("/home/user/patterns/pattern.val")
@@ -153,18 +153,18 @@ void TST_Misc::TestAbsoluteFilePath_data()
             << "/home/user/patterns/pattern.val" << "m.vit" << "/home/user/patterns/m.vit";
 
     QTest::newRow("Path to measurements is empty")
-            << "/home/user/patterns/pattern.val" << "" << "";
+            << "/home/user/patterns/pattern.val" << QString() << QString();
 
     QTest::newRow("Path to a pattern file is empty. Ablosute measurements path.")
-            << "" << "/home/user/patterns/m.vit" << "/home/user/patterns/m.vit";
+            << QString() << "/home/user/patterns/m.vit" << "/home/user/patterns/m.vit";
 
     QTest::newRow("Path to a pattern file is empty. Relative measurements path.")
-            << "" << "measurements/m.vit" << "measurements/m.vit";
+            << QString() << "measurements/m.vit" << "measurements/m.vit";
 
     QTest::newRow("Relative measurements path.")
             << "/home/user/patterns/pattern.val" << "../measurements/m.vit" << "/home/user/measurements/m.vit";
 
-    QTest::newRow("Both paths are empty") << "" << "" << "";
+    QTest::newRow("Both paths are empty") << QString() << QString() << QString();
 
     QTest::newRow("Path to measurements is relative")
             << "/home/user/patterns/pattern.val" << "m.vit" << "/home/user/patterns/m.vit";

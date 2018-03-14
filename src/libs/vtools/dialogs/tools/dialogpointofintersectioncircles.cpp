@@ -245,7 +245,7 @@ void DialogPointOfIntersectionCircles::ChosenObject(quint32 id, const SceneObjec
                 case 1:
                     if (getCurrentObjectId(ui->comboBoxCircle1Center) != id)
                     {
-                        if (SetObject(id, ui->comboBoxCircle2Center, ""))
+                        if (SetObject(id, ui->comboBoxCircle2Center, QString()))
                         {
                             number = 0;
                             point->setObject2Id(id);

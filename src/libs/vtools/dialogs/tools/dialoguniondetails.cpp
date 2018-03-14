@@ -174,7 +174,7 @@ void DialogUnionDetails::ChoosedDetail(const quint32 &id, const SceneObject &typ
                 if (numberD > 1)
                 {
                     ++numberP;
-                    emit ToolTip("");
+                    emit ToolTip(QString());
                     this->setModal(true);
                     this->show();
                 }

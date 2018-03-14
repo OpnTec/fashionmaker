@@ -242,8 +242,8 @@ QDomElement VVITConverter::AddMV0_3_0(const QString &name, qreal value)
 
     SetAttribute(element, QStringLiteral("name"), name);
     SetAttribute(element, QStringLiteral("value"), QString().setNum(value));
-    SetAttribute(element, QStringLiteral("description"), QString(""));
-    SetAttribute(element, QStringLiteral("full_name"), QString(""));
+    SetAttribute(element, QStringLiteral("description"), QString());
+    SetAttribute(element, QStringLiteral("full_name"), QString());
 
     return element;
 }

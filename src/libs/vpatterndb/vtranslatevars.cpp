@@ -1005,7 +1005,7 @@ QString VTranslateVars::FormulaToUser(const QString &formula, bool osSeparator) 
             QString dStr = loc.toString(d);// Number string in user locale
             if (loc.groupSeparator().isSpace())
             {
-                dStr.replace(loc.groupSeparator(), "");
+                dStr.replace(loc.groupSeparator(), QString());
             }
             newFormula.replace(nKeys.at(i), nValues.at(i).length(), dStr);
             const int bias = nValues.at(i).length() - dStr.length();

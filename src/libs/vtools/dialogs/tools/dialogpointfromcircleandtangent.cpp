@@ -206,7 +206,7 @@ void DialogPointFromCircleAndTangent::ChosenObject(quint32 id, const SceneObject
                 case 1:
                     if (getCurrentObjectId(ui->comboBoxTangentPoint) != id)
                     {
-                        if (SetObject(id, ui->comboBoxCircleCenter, ""))
+                        if (SetObject(id, ui->comboBoxCircleCenter, QString()))
                         {
                             number = 0;
                             point->setObject2Id(id);

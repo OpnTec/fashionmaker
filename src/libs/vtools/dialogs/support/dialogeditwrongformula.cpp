@@ -162,7 +162,7 @@ void DialogEditWrongFormula::ValChanged(int row)
 {
     if (ui->tableWidget->rowCount() == 0)
     {
-        ui->labelDescription->setText("");
+        ui->labelDescription->setText(QString());
         return;
     }
     QTableWidgetItem *item = ui->tableWidget->item( row, ColumnName );
@@ -508,7 +508,7 @@ void DialogEditWrongFormula::ShowVariable(const QMap<key, val> &var)
     ui->tableWidget->clearContents();
     ui->tableWidget->setRowCount(0);
     ui->tableWidget->setColumnHidden(ColumnFullName, true);
-    ui->labelDescription->setText("");
+    ui->labelDescription->setText(QString());
 
     QMapIterator<key, val> iMap(var);
     while (iMap.hasNext())
@@ -542,7 +542,7 @@ void DialogEditWrongFormula::ShowMeasurements(const QMap<QString, QSharedPointer
     ui->tableWidget->clearContents();
     ui->tableWidget->setRowCount(0);
     ui->tableWidget->setColumnHidden(ColumnFullName, false);
-    ui->labelDescription->setText("");
+    ui->labelDescription->setText(QString());
 
     QMapIterator<QString, QSharedPointer<VMeasurement>> iMap(var);
     while (iMap.hasNext())
@@ -590,7 +590,7 @@ void DialogEditWrongFormula::ShowFunctions()
     ui->tableWidget->clearContents();
     ui->tableWidget->setRowCount(0);
     ui->tableWidget->setColumnHidden(ColumnFullName, true);
-    ui->labelDescription->setText("");
+    ui->labelDescription->setText(QString());
 
     const QMap<QString, qmu::QmuTranslation> functions = qApp->TrVars()->GetFunctions();
     QMap<QString, qmu::QmuTranslation>::const_iterator i = functions.constBegin();

@@ -383,7 +383,7 @@ quint32 VPattern::SPointActiveDraw()
             const QDomElement domElement = domNode.toElement();
             if (domElement.isNull() == false)
             {
-                if (domElement.tagName() == TagPoint && domElement.attribute(AttrType, "") == VToolBasePoint::ToolType)
+                if (domElement.tagName() == TagPoint && domElement.attribute(AttrType, QString()) == VToolBasePoint::ToolType)
                 {
                     return GetParametrId(domElement);
                 }
@@ -797,7 +797,7 @@ void VPattern::ParseDrawMode(const QDomNode &node, const Document &parse, const 
             {
                 case 0: // TagPoint
                     qCDebug(vXML, "Tag point.");
-                    ParsePointElement(scene, domElement, parse, domElement.attribute(AttrType, ""));
+                    ParsePointElement(scene, domElement, parse, domElement.attribute(AttrType, QString()));
                     break;
                 case 1: // TagLine
                     qCDebug(vXML, "Tag line.");
@@ -805,23 +805,23 @@ void VPattern::ParseDrawMode(const QDomNode &node, const Document &parse, const 
                     break;
                 case 2: // TagSpline
                     qCDebug(vXML, "Tag spline.");
-                    ParseSplineElement(scene, domElement, parse, domElement.attribute(AttrType, ""));
+                    ParseSplineElement(scene, domElement, parse, domElement.attribute(AttrType, QString()));
                     break;
                 case 3: // TagArc
                     qCDebug(vXML, "Tag arc.");
-                    ParseArcElement(scene, domElement, parse, domElement.attribute(AttrType, ""));
+                    ParseArcElement(scene, domElement, parse, domElement.attribute(AttrType, QString()));
                     break;
                 case 4: // TagTools
                     qCDebug(vXML, "Tag tools.");
-                    ParseToolsElement(scene, domElement, parse, domElement.attribute(AttrType, ""));
+                    ParseToolsElement(scene, domElement, parse, domElement.attribute(AttrType, QString()));
                     break;
                 case 5: // TagOperation
                     qCDebug(vXML, "Tag operation.");
-                    ParseOperationElement(scene, domElement, parse, domElement.attribute(AttrType, ""));
+                    ParseOperationElement(scene, domElement, parse, domElement.attribute(AttrType, QString()));
                     break;
                 case 6: // TagElArc
                     qCDebug(vXML, "Tag elliptical arc.");
-                    ParseEllipticalArcElement(scene, domElement, parse, domElement.attribute(AttrType, ""));
+                    ParseEllipticalArcElement(scene, domElement, parse, domElement.attribute(AttrType, QString()));
                     break;
                 case 7: // TagPath
                     qCDebug(vXML, "Tag path.");
@@ -3140,7 +3140,7 @@ void VPattern::ParseToolRotation(VMainGraphicsScene *scene, QDomElement &domElem
         initData.origin = GetParametrUInt(domElement, AttrCenter, NULL_ID_STR);
         initData.angle = GetParametrString(domElement, AttrAngle, "10");
         const QString a = initData.angle;//need for saving fixed formula;
-        initData.suffix = GetParametrString(domElement, AttrSuffix, "");
+        initData.suffix = GetParametrString(domElement, AttrSuffix, QString());
 
         VAbstractOperation::ExtractData(domElement, initData);
 
@@ -3185,7 +3185,7 @@ void VPattern::ParseToolFlippingByLine(VMainGraphicsScene *scene, QDomElement &d
         ToolsCommonAttributes(domElement, initData.id);
         initData.firstLinePointId = GetParametrUInt(domElement, AttrP1Line, NULL_ID_STR);
         initData.secondLinePointId = GetParametrUInt(domElement, AttrP2Line, NULL_ID_STR);
-        initData.suffix = GetParametrString(domElement, AttrSuffix, "");
+        initData.suffix = GetParametrString(domElement, AttrSuffix, QString());
 
         VAbstractOperation::ExtractData(domElement, initData);
 
@@ -3217,7 +3217,7 @@ void VPattern::ParseToolFlippingByAxis(VMainGraphicsScene *scene, QDomElement &d
         ToolsCommonAttributes(domElement, initData.id);
         initData.originPointId = GetParametrUInt(domElement, AttrCenter, NULL_ID_STR);
         initData.axisType = static_cast<AxisType>(GetParametrUInt(domElement, AttrAxisType, "1"));
-        initData.suffix = GetParametrString(domElement, AttrSuffix, "");
+        initData.suffix = GetParametrString(domElement, AttrSuffix, QString());
 
         VAbstractOperation::ExtractData(domElement, initData);
 
@@ -3253,7 +3253,7 @@ void VPattern::ParseToolMove(VMainGraphicsScene *scene, QDomElement &domElement,
         const QString r = initData.formulaRotationAngle;//need for saving fixed formula;
         initData.formulaLength = GetParametrString(domElement, AttrLength, "0");
         const QString len = initData.formulaLength;//need for saving fixed formula;
-        initData.suffix = GetParametrString(domElement, AttrSuffix, "");
+        initData.suffix = GetParametrString(domElement, AttrSuffix, QString());
         initData.rotationOrigin = GetParametrUInt(domElement, AttrCenter, NULL_ID_STR);
 
         VAbstractOperation::ExtractData(domElement, initData);
@@ -3316,7 +3316,7 @@ QDomElement VPattern::MakeEmptyIncrement(const QString &name)
     QDomElement element = createElement(TagIncrement);
     SetAttribute(element, AttrName, name);
     SetAttribute(element, AttrFormula, QString("0"));
-    SetAttribute(element, AttrDescription, QString(""));
+    SetAttribute(element, AttrDescription, QString(QString()));
     return element;
 }
 
@@ -3764,7 +3764,7 @@ void VPattern::ParseIncrementsElement(const QDomNode &node, const Document &pars
             {
                 if (domElement.tagName() == TagIncrement)
                 {
-                    const QString name = GetParametrString(domElement, AttrName, "");
+                    const QString name = GetParametrString(domElement, AttrName, QString());
                     const QString desc = GetParametrEmptyString(domElement, AttrDescription);
                     const QString formula = GetParametrString(domElement, AttrFormula, "0");
                     bool ok = false;

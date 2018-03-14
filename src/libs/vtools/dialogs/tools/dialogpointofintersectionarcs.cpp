@@ -155,7 +155,7 @@ void DialogPointOfIntersectionArcs::ChosenObject(quint32 id, const SceneObject &
                 case 1:
                     if (getCurrentObjectId(ui->comboBoxArc1) != id)
                     {
-                        if (SetObject(id, ui->comboBoxArc2, ""))
+                        if (SetObject(id, ui->comboBoxArc2, QString()))
                         {
                             number = 0;
                             point->setArc2Id(id);

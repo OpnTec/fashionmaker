@@ -280,7 +280,7 @@ void VToolBisector::ReadToolAttributes(const QDomElement &domElement)
 {
     m_lineType = doc->GetParametrString(domElement, AttrTypeLine, TypeLineLine);
     lineColor = doc->GetParametrString(domElement, AttrLineColor, ColorBlack);
-    formulaLength = doc->GetParametrString(domElement, AttrLength, "");
+    formulaLength = doc->GetParametrString(domElement, AttrLength, QString());
     firstPointId = doc->GetParametrUInt(domElement, AttrFirstPoint, NULL_ID_STR);
     basePointId = doc->GetParametrUInt(domElement, AttrSecondPoint, NULL_ID_STR);
     thirdPointId = doc->GetParametrUInt(domElement, AttrThirdPoint, NULL_ID_STR);

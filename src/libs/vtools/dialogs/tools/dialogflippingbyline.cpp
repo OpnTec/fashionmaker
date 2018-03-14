@@ -180,7 +180,7 @@ void DialogFlippingByLine::ShowDialog(bool click)
     else if (not stage1 && prepare && click)
     {
         setModal(true);
-        emit ToolTip("");
+        emit ToolTip(QString());
         show();
     }
 }
@@ -219,7 +219,7 @@ void DialogFlippingByLine::ChosenObject(quint32 id, const SceneObject &type)
 
                     if (getCurrentObjectId(ui->comboBoxFirstLinePoint) != id)
                     {
-                        if (SetObject(id, ui->comboBoxSecondLinePoint, ""))
+                        if (SetObject(id, ui->comboBoxSecondLinePoint, QString()))
                         {
                             if (flagError)
                             {

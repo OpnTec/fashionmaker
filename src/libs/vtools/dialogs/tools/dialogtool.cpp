@@ -168,7 +168,7 @@ DialogTool::DialogTool(const VContainer *data, const quint32 &toolId, QWidget *p
 //---------------------------------------------------------------------------------------------------------------------
 DialogTool::~DialogTool()
 {
-    emit ToolTip("");
+    emit ToolTip(QString());
 
     if (not vis.isNull())
     {
@@ -327,7 +327,7 @@ void DialogTool::FillComboBoxTypeLine(QComboBox *box, const QMap<QString, QIcon>
     QMap<QString, QIcon>::const_iterator i = stylesPics.constBegin();
     while (i != stylesPics.constEnd())
     {
-        box->addItem(i.value(), "", QVariant(i.key()));
+        box->addItem(i.value(), QString(), QVariant(i.key()));
         ++i;
     }
 
@@ -845,7 +845,7 @@ qreal DialogTool::Eval(const QString &text, bool &flag, QLabel *label, const QSt
                     flag = true;
                     ChangeColor(labelEditFormula, okColor);
                     label->setToolTip(tr("Value"));
-                    emit ToolTip("");
+                    emit ToolTip(QString());
                 }
             }
         }

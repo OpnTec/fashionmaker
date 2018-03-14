@@ -176,7 +176,7 @@ void DialogNormal::ChosenObject(quint32 id, const SceneObject &type)
                 case 1:
                     if (getCurrentObjectId(ui->comboBoxFirstPoint) != id)
                     {
-                        if (SetObject(id, ui->comboBoxSecondPoint, ""))
+                        if (SetObject(id, ui->comboBoxSecondPoint, QString()))
                         {
                             line->setObject2Id(id);
                             line->RefreshGeometry();

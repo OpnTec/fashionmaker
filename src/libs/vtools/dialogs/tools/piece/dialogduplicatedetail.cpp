@@ -71,7 +71,7 @@ void DialogDuplicateDetail::ShowDialog(bool click)
 
             m_mx = piece->Mx();
             m_my = piece->My();
-            emit ToolTip("");
+            emit ToolTip(QString());
             DialogAccepted();
         }
     }

@@ -704,8 +704,8 @@ void TST_VSpline::CompareThreeWays()
     VSpline spl2(spl1.GetP1(), static_cast<QPointF>(spl1.GetP2()), static_cast<QPointF>(spl1.GetP3()), spl1.GetP4(), 1);
     spl2.SetApproximationScale(10);
 
-    VSpline spl3(spl1.GetP1(), spl1.GetP4(), spl1.GetStartAngle(), "", spl2.GetEndAngle(), "", spl2.GetC1Length(), "",
-                 spl2.GetC2Length(), "", 1);
+    VSpline spl3(spl1.GetP1(), spl1.GetP4(), spl1.GetStartAngle(), QString(), spl2.GetEndAngle(), QString(), spl2.GetC1Length(), QString(),
+                 spl2.GetC2Length(), QString(), 1);
     spl3.SetApproximationScale(10);
 
     QWARN("Comparing first and second splines.");
