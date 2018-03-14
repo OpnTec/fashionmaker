@@ -193,7 +193,7 @@ void VDrawTool::ContextMenu(QGraphicsSceneContextMenuEvent *event, quint32 itemI
     if (selectedAction == actionOption)
     {
         qCDebug(vTool, "Show options.");
-        qApp->getSceneView()->itemClicked(nullptr);
+        emit qApp->getSceneView()->itemClicked(nullptr);
         m_dialog = QSharedPointer<Dialog>(new Dialog(getData(), m_id, qApp->getMainWindow()));
         m_dialog->setModal(true);
 

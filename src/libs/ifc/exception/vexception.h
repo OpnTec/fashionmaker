@@ -58,7 +58,6 @@ public:
     QString         WhatUtf8() const V_NOEXCEPT_EXPR (true);
     void            AddMoreInformation(const QString &info);
     QString         MoreInformation() const;
-    virtual const char* what() const V_NOEXCEPT_EXPR (true) Q_DECL_OVERRIDE;
 
 protected:
     /** @brief error string with error */

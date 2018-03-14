@@ -215,7 +215,7 @@ bool TMainWindow::LoadFile(const QString &path)
 {
     if (m == nullptr)
     {
-        if (not QFileInfo(path).exists())
+        if (not QFileInfo::exists(path))
         {
             qCCritical(tMainWindow, "%s", qUtf8Printable(tr("File '%1' doesn't exist!").arg(path)));
             if (qApp->IsTestMode())
@@ -876,7 +876,7 @@ bool TMainWindow::FileSaveAs()
         fileName += QLatin1String(".") + suffix;
     }
 
-    if (QFileInfo(fileName).exists())
+    if (QFileInfo::exists(fileName))
     {
         // Temporary try to lock the file before saving
         VLockGuard<char> tmp(fileName);
@@ -1595,7 +1595,7 @@ void TMainWindow::ShowMDiagram(const QString &name)
     {
         ui->labelDiagram->setText(QString("<html><head/><body><p align=\"center\">%1</p>"
                                           "<p align=\"center\"><b>%2</b>. <i>%3</i></p></body></html>")
-                                          .arg(DialogMDataBase::ImgTag(number)).arg(number).arg(trv->GuiText(name)));
+                                          .arg(DialogMDataBase::ImgTag(number), number, trv->GuiText(name)));
     }
     // This part is very ugly, can't find better way to resize dockWidget.
     ui->labelDiagram->adjustSize();
@@ -2152,9 +2152,9 @@ void TMainWindow::InitWindow()
     connect(ui->comboBoxPMSystem, QOverload<int>::of(&QComboBox::currentIndexChanged), this,
             &TMainWindow::SavePMSystem);
 
-    connect(ui->lineEditFind, &QLineEdit::textChanged, [this] (const QString &term){search->Find(term);});
-    connect(ui->toolButtonFindPrevious, &QToolButton::clicked, [this] (){search->FindPrevious();});
-    connect(ui->toolButtonFindNext, &QToolButton::clicked, [this] (){search->FindNext();});
+    connect(ui->lineEditFind, &QLineEdit::textChanged, this, [this] (const QString &term){search->Find(term);});
+    connect(ui->toolButtonFindPrevious, &QToolButton::clicked, this, [this] (){search->FindPrevious();});
+    connect(ui->toolButtonFindNext, &QToolButton::clicked, this, [this] (){search->FindNext();});
 
     connect(search.data(), &VTableSearch::HasResult, this, [this] (bool state)
     {
@@ -2243,7 +2243,7 @@ void TMainWindow::ShowHeaderUnits(QTableWidget *table, int column, const QString
     {
         header.remove(index-1, 100);
     }
-    const QString unitHeader = QString("%1 (%2)").arg(header).arg(unit);
+    const QString unitHeader = QString("%1 (%2)").arg(header, unit);
     table->horizontalHeaderItem(column)->setText(unitHeader);
 }
 
@@ -2825,7 +2825,7 @@ bool TMainWindow::LoadFromExistingFile(const QString &path)
 {
     if (m == nullptr)
     {
-        if (not QFileInfo(path).exists())
+        if (not QFileInfo::exists(path))
         {
             qCCritical(tMainWindow, "%s", qUtf8Printable(tr("File '%1' doesn't exist!").arg(path)));
             if (qApp->IsTestMode())

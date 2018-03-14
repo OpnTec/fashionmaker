@@ -83,7 +83,7 @@ QString VExceptionBadId::ErrorMessage() const
     }
     else
     {
-        error = QString("ExceptionBadId: %1, id = %2").arg(this->error).arg(key);
+        error = QString("ExceptionBadId: %1, id = %2").arg(this->error, key);
     }
     return error;
 }

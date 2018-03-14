@@ -39,6 +39,7 @@
 #include <QVariant>
 #include <QPrinterInfo>
 #include <QtDebug>
+#include <QGlobalStatic>
 
 #include "../vmisc/def.h"
 #include "../vmisc/vmath.h"
@@ -47,36 +48,37 @@ Q_DECLARE_METATYPE(QMarginsF)
 
 namespace
 {
-const QString settingConfigurationLabelLanguage = QStringLiteral("configuration/label_language");
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingConfigurationLabelLanguage,
+                          (QLatin1String("configuration/label_language")))
 
-const QString settingPathsPattern = QStringLiteral("paths/pattern");
-const QString settingPathsLayout  = QStringLiteral("paths/layout");
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingPathsPattern, (QLatin1String("paths/pattern")))
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingPathsLayout, (QLatin1String("paths/layout")))
 
-const QString settingPatternGraphicalOutput   = QStringLiteral("pattern/graphicalOutput");
-const QString settingPatternUseOpenGLRender   = QStringLiteral("pattern/useOpenGLRender");
-const QString settingPatternKnownMaterials    = QStringLiteral("pattern/knownMaterials");
-const QString settingPatternRememberMaterials = QStringLiteral("pattern/rememberMaterials");
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingPatternGraphicalOutput, (QLatin1String("pattern/graphicalOutput")))
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingPatternUseOpenGLRender, (QLatin1String("pattern/useOpenGLRender")))
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingPatternKnownMaterials, (QLatin1String("pattern/knownMaterials")))
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingPatternRememberMaterials, (QLatin1String("pattern/rememberMaterials")))
 
-const QString settingLayoutWidth            = QStringLiteral("layout/width");
-const QString settingLayoutSorting          = QStringLiteral("layout/sorting");
-const QString settingLayoutPaperHeight      = QStringLiteral("layout/paperHeight");
-const QString settingLayoutPaperWidth       = QStringLiteral("layout/paperWidth");
-const QString settingLayoutShift            = QStringLiteral("layout/shift");
-const QString settingLayoutRotate           = QStringLiteral("layout/Rotate");
-const QString settingLayoutRotationIncrease = QStringLiteral("layout/rotationIncrease");
-const QString settingLayoutAutoCrop         = QStringLiteral("layout/autoCrop");
-const QString settingLayoutSaveLength       = QStringLiteral("layout/saveLength");
-const QString settingLayoutUnitePages       = QStringLiteral("layout/unitePages");
-const QString settingFields                 = QStringLiteral("layout/fields");
-const QString settingIgnoreFields           = QStringLiteral("layout/ignoreFields");
-const QString settingStripOptimization      = QStringLiteral("layout/stripOptimization");
-const QString settingMultiplier             = QStringLiteral("layout/multiplier");
-const QString settingTextAsPaths            = QStringLiteral("layout/textAsPaths");
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingLayoutWidth, (QLatin1String("layout/width")))
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingLayoutSorting, (QLatin1String("layout/sorting")))
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingLayoutPaperHeight, (QLatin1String("layout/paperHeight")))
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingLayoutPaperWidth, (QLatin1String("layout/paperWidth")))
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingLayoutShift, (QLatin1String("layout/shift")))
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingLayoutRotate, (QLatin1String("layout/Rotate")))
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingLayoutRotationIncrease, (QLatin1String("layout/rotationIncrease")))
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingLayoutAutoCrop, (QLatin1String("layout/autoCrop")))
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingLayoutSaveLength, (QLatin1String("layout/saveLength")))
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingLayoutUnitePages, (QLatin1String("layout/unitePages")))
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingFields, (QLatin1String("layout/fields")))
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingIgnoreFields, (QLatin1String("layout/ignoreFields")))
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingStripOptimization, (QLatin1String("layout/stripOptimization")))
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingMultiplier, (QLatin1String("layout/multiplier")))
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingTextAsPaths, (QLatin1String("layout/textAsPaths")))
 
-const QString settingTiledPDFMargins        = QStringLiteral("tiledPDF/margins");
-const QString settingTiledPDFPaperHeight    = QStringLiteral("tiledPDF/paperHeight");
-const QString settingTiledPDFPaperWidth     = QStringLiteral("tiledPDF/paperWidth");
-const QString settingTiledPDFOrientation    = QStringLiteral("tiledPDF/orientation");
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingTiledPDFMargins, (QLatin1String("tiledPDF/margins")))
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingTiledPDFPaperHeight, (QLatin1String("tiledPDF/paperHeight")))
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingTiledPDFPaperWidth, (QLatin1String("tiledPDF/paperWidth")))
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingTiledPDFOrientation, (QLatin1String("tiledPDF/orientation")))
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -90,13 +92,13 @@ VSettings::VSettings(Format format, Scope scope, const QString &organization, co
 //---------------------------------------------------------------------------------------------------------------------
 QString VSettings::GetLabelLanguage() const
 {
-    return value(settingConfigurationLabelLanguage, QLocale().bcp47Name()).toString();
+    return value(*settingConfigurationLabelLanguage, QLocale().bcp47Name()).toString();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void VSettings::SetLabelLanguage(const QString &value)
 {
-    setValue(settingConfigurationLabelLanguage, value);
+    setValue(*settingConfigurationLabelLanguage, value);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -109,14 +111,14 @@ QString VSettings::GetDefPathPattern()
 QString VSettings::GetPathPattern() const
 {
     QSettings settings(this->format(), this->scope(), this->organizationName(), this->applicationName());
-    return settings.value(settingPathsPattern, GetDefPathPattern()).toString();
+    return settings.value(*settingPathsPattern, GetDefPathPattern()).toString();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void VSettings::SetPathPattern(const QString &value)
 {
     QSettings settings(this->format(), this->scope(), this->organizationName(), this->applicationName());
-    settings.setValue(settingPathsPattern, value);
+    settings.setValue(*settingPathsPattern, value);
     settings.sync();
 }
 
@@ -130,39 +132,39 @@ QString VSettings::GetDefPathLayout()
 QString VSettings::GetPathLayout() const
 {
     QSettings settings(this->format(), this->scope(), this->organizationName(), this->applicationName());
-    return settings.value(settingPathsLayout, GetDefPathLayout()).toString();
+    return settings.value(*settingPathsLayout, GetDefPathLayout()).toString();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void VSettings::SetPathLayout(const QString &value)
 {
     QSettings settings(this->format(), this->scope(), this->organizationName(), this->applicationName());
-    settings.setValue(settingPathsLayout, value);
+    settings.setValue(*settingPathsLayout, value);
     settings.sync();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 bool VSettings::GetGraphicalOutput() const
 {
-    return value(settingPatternGraphicalOutput, 1).toBool();
+    return value(*settingPatternGraphicalOutput, 1).toBool();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void VSettings::SetGraphicalOutput(const bool &value)
 {
-    setValue(settingPatternGraphicalOutput, value);
+    setValue(*settingPatternGraphicalOutput, value);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 bool VSettings::IsOpenGLRender() const
 {
-    return value(settingPatternUseOpenGLRender, 0).toBool();
+    return value(*settingPatternUseOpenGLRender, 0).toBool();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void VSettings::SetOpenGLRender(bool value)
 {
-    setValue(settingPatternUseOpenGLRender, value);
+    setValue(*settingPatternUseOpenGLRender, value);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -170,7 +172,7 @@ qreal VSettings::GetLayoutPaperHeight() const
 {
     const qreal def = UnitConvertor(1189/*A0*/, Unit::Mm, Unit::Px);
     bool ok = false;
-    const qreal height = value(settingLayoutPaperHeight, def).toDouble(&ok);
+    const qreal height = value(*settingLayoutPaperHeight, def).toDouble(&ok);
     if (ok)
     {
         return height;
@@ -184,7 +186,7 @@ qreal VSettings::GetLayoutPaperHeight() const
 //---------------------------------------------------------------------------------------------------------------------
 void VSettings::SetLayoutPaperHeight(qreal value)
 {
-    setValue(settingLayoutPaperHeight, value);
+    setValue(*settingLayoutPaperHeight, value);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -192,7 +194,7 @@ qreal VSettings::GetLayoutPaperWidth() const
 {
     const qreal def = UnitConvertor(841/*A0*/, Unit::Mm, Unit::Px);
     bool ok = false;
-    const qreal width = value(settingLayoutPaperWidth, def).toDouble(&ok);
+    const qreal width = value(*settingLayoutPaperWidth, def).toDouble(&ok);
     if (ok)
     {
         return width;
@@ -206,7 +208,7 @@ qreal VSettings::GetLayoutPaperWidth() const
 //---------------------------------------------------------------------------------------------------------------------
 void VSettings::SetLayoutPaperWidth(qreal value)
 {
-    setValue(settingLayoutPaperWidth, value);
+    setValue(*settingLayoutPaperWidth, value);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -214,7 +216,7 @@ qreal VSettings::GetLayoutShift() const
 {
     const qreal def = GetDefLayoutShift();
     bool ok = false;
-    const qreal shift = value(settingLayoutShift, def).toDouble(&ok);
+    const qreal shift = value(*settingLayoutShift, def).toDouble(&ok);
     if (ok)
     {
         return shift;
@@ -234,7 +236,7 @@ qreal VSettings::GetDefLayoutShift()
 //---------------------------------------------------------------------------------------------------------------------
 void VSettings::SetLayoutShift(qreal value)
 {
-    setValue(settingLayoutShift, value);
+    setValue(*settingLayoutShift, value);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -242,7 +244,7 @@ qreal VSettings::GetLayoutWidth() const
 {
     const qreal def = GetDefLayoutWidth();
     bool ok = false;
-    const qreal lWidth = value(settingLayoutWidth, def).toDouble(&ok);
+    const qreal lWidth = value(*settingLayoutWidth, def).toDouble(&ok);
     if (ok)
     {
         return lWidth;
@@ -262,13 +264,13 @@ qreal VSettings::GetDefLayoutWidth()
 //---------------------------------------------------------------------------------------------------------------------
 void VSettings::SetLayoutWidth(qreal value)
 {
-    setValue(settingLayoutWidth, value);
+    setValue(*settingLayoutWidth, value);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 QMarginsF VSettings::GetFields(const QMarginsF &def) const
 {
-    const QVariant val = value(settingFields, QVariant::fromValue(def));
+    const QVariant val = value(*settingFields, QVariant::fromValue(def));
     if (val.canConvert<QMarginsF>())
     {
         return val.value<QMarginsF>();
@@ -279,7 +281,7 @@ QMarginsF VSettings::GetFields(const QMarginsF &def) const
 //---------------------------------------------------------------------------------------------------------------------
 void VSettings::SetFields(const QMarginsF &value)
 {
-    setValue(settingFields, QVariant::fromValue(value));
+    setValue(*settingFields, QVariant::fromValue(value));
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -287,7 +289,7 @@ Cases VSettings::GetLayoutGroup() const
 {
     const Cases def = GetDefLayoutGroup();
     bool ok = false;
-    const int g = value(settingLayoutSorting, static_cast<int>(def)).toInt(&ok);
+    const int g = value(*settingLayoutSorting, static_cast<int>(def)).toInt(&ok);
     if (ok)
     {
         if (g >= static_cast<int>(Cases::UnknownCase))
@@ -314,13 +316,13 @@ Cases VSettings::GetDefLayoutGroup()
 //---------------------------------------------------------------------------------------------------------------------
 void VSettings::SetLayoutGroup(const Cases &value)
 {
-    setValue(settingLayoutSorting, static_cast<int>(value));
+    setValue(*settingLayoutSorting, static_cast<int>(value));
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 bool VSettings::GetLayoutRotate() const
 {
-    return value(settingLayoutRotate, GetDefLayoutRotate()).toBool();
+    return value(*settingLayoutRotate, GetDefLayoutRotate()).toBool();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -332,7 +334,7 @@ bool VSettings::GetDefLayoutRotate()
 //---------------------------------------------------------------------------------------------------------------------
 void VSettings::SetLayoutRotate(bool value)
 {
-    setValue(settingLayoutRotate, value);
+    setValue(*settingLayoutRotate, value);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -340,7 +342,7 @@ int VSettings::GetLayoutRotationIncrease() const
 {
     const int def = GetDefLayoutRotationIncrease();
     bool ok = false;
-    const int r = value(settingLayoutRotationIncrease, def).toInt(&ok);
+    const int r = value(*settingLayoutRotationIncrease, def).toInt(&ok);
     if (ok)
     {
         if (not (r >= 1 && r <= 180 && 360 % r == 0))
@@ -367,13 +369,13 @@ int VSettings::GetDefLayoutRotationIncrease()
 //---------------------------------------------------------------------------------------------------------------------
 void VSettings::SetLayoutRotationIncrease(int value)
 {
-    setValue(settingLayoutRotationIncrease, value);
+    setValue(*settingLayoutRotationIncrease, value);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 bool VSettings::GetLayoutAutoCrop() const
 {
-    return value(settingLayoutAutoCrop, GetDefLayoutAutoCrop()).toBool();
+    return value(*settingLayoutAutoCrop, GetDefLayoutAutoCrop()).toBool();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -385,13 +387,13 @@ bool VSettings::GetDefLayoutAutoCrop()
 //---------------------------------------------------------------------------------------------------------------------
 void VSettings::SetLayoutAutoCrop(bool value)
 {
-    setValue(settingLayoutAutoCrop, value);
+    setValue(*settingLayoutAutoCrop, value);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 bool VSettings::GetLayoutSaveLength() const
 {
-    return value(settingLayoutSaveLength, GetDefLayoutSaveLength()).toBool();
+    return value(*settingLayoutSaveLength, GetDefLayoutSaveLength()).toBool();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -403,13 +405,13 @@ bool VSettings::GetDefLayoutSaveLength()
 //---------------------------------------------------------------------------------------------------------------------
 void VSettings::SetLayoutSaveLength(bool value)
 {
-    setValue(settingLayoutSaveLength, value);
+    setValue(*settingLayoutSaveLength, value);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 bool VSettings::GetLayoutUnitePages() const
 {
-    return value(settingLayoutUnitePages, GetDefLayoutUnitePages()).toBool();
+    return value(*settingLayoutUnitePages, GetDefLayoutUnitePages()).toBool();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -421,13 +423,13 @@ bool VSettings::GetDefLayoutUnitePages()
 //---------------------------------------------------------------------------------------------------------------------
 void VSettings::SetLayoutUnitePages(bool value)
 {
-    setValue(settingLayoutUnitePages, value);
+    setValue(*settingLayoutUnitePages, value);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 bool VSettings::GetIgnoreAllFields() const
 {
-    return value(settingIgnoreFields, GetDefIgnoreAllFields()).toBool();
+    return value(*settingIgnoreFields, GetDefIgnoreAllFields()).toBool();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -439,13 +441,13 @@ bool VSettings::GetDefIgnoreAllFields()
 //---------------------------------------------------------------------------------------------------------------------
 void VSettings::SetIgnoreAllFields(bool value)
 {
-    setValue(settingIgnoreFields, value);
+    setValue(*settingIgnoreFields, value);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 bool VSettings::GetStripOptimization() const
 {
-    return value(settingStripOptimization, GetDefStripOptimization()).toBool();
+    return value(*settingStripOptimization, GetDefStripOptimization()).toBool();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -457,13 +459,13 @@ bool VSettings::GetDefStripOptimization()
 //---------------------------------------------------------------------------------------------------------------------
 void VSettings::SetStripOptimization(bool value)
 {
-    setValue(settingStripOptimization, value);
+    setValue(*settingStripOptimization, value);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 quint8 VSettings::GetMultiplier() const
 {
-    return static_cast<quint8>(value(settingMultiplier, GetDefMultiplier()).toUInt());
+    return static_cast<quint8>(value(*settingMultiplier, GetDefMultiplier()).toUInt());
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -475,13 +477,13 @@ quint8 VSettings::GetDefMultiplier()
 //---------------------------------------------------------------------------------------------------------------------
 void VSettings::SetMultiplier(quint8 value)
 {
-    setValue(settingMultiplier, value);
+    setValue(*settingMultiplier, value);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 bool VSettings::GetTextAsPaths() const
 {
-    return value(settingTextAsPaths, GetDefTextAsPaths()).toBool();
+    return value(*settingTextAsPaths, GetDefTextAsPaths()).toBool();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -493,31 +495,31 @@ bool VSettings::GetDefTextAsPaths()
 //---------------------------------------------------------------------------------------------------------------------
 void VSettings::SetTextAsPaths(bool value)
 {
-    setValue(settingTextAsPaths, value);
+    setValue(*settingTextAsPaths, value);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 QStringList VSettings::GetKnownMaterials() const
 {
-    return value(settingPatternKnownMaterials, QStringList()).toStringList();
+    return value(*settingPatternKnownMaterials, QStringList()).toStringList();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void VSettings::SetKnownMaterials(const QStringList &list)
 {
-    setValue(settingPatternKnownMaterials, list);
+    setValue(*settingPatternKnownMaterials, list);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 bool VSettings::IsRememberPatternMaterials() const
 {
-    return value(settingPatternRememberMaterials, true).toBool();
+    return value(*settingPatternRememberMaterials, true).toBool();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void VSettings::SetRememberPatternMaterials(bool value)
 {
-    setValue(settingPatternRememberMaterials, value);
+    setValue(*settingPatternRememberMaterials, value);
 }
 
 // settings for the tiled PDFs
@@ -534,7 +536,7 @@ QMarginsF VSettings::GetTiledPDFMargins(const Unit &unit) const
     // default value is 10mm. We save the margins in mm in the setting.
     const QMarginsF def = QMarginsF(10, 10, 10, 10);
 
-    const QVariant val = value(settingTiledPDFMargins, QVariant::fromValue(def));
+    const QVariant val = value(*settingTiledPDFMargins, QVariant::fromValue(def));
 
     if (val.canConvert<QMarginsF>())
     {
@@ -552,7 +554,7 @@ QMarginsF VSettings::GetTiledPDFMargins(const Unit &unit) const
  */
 void VSettings::SetTiledPDFMargins(const QMarginsF &value, const Unit &unit)
 {
-    setValue(settingTiledPDFMargins, QVariant::fromValue(UnitConvertor(value, unit, Unit::Mm)));
+    setValue(*settingTiledPDFMargins, QVariant::fromValue(UnitConvertor(value, unit, Unit::Mm)));
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -566,7 +568,7 @@ qreal VSettings::GetTiledPDFPaperHeight(const Unit &unit) const
 {
     const qreal def = 297 /*A4*/;
     bool ok = false;
-    const qreal height = value(settingTiledPDFPaperHeight, def).toDouble(&ok);
+    const qreal height = value(*settingTiledPDFPaperHeight, def).toDouble(&ok);
     if (ok)
     {
         return UnitConvertor(height, Unit::Mm, unit);
@@ -585,7 +587,7 @@ qreal VSettings::GetTiledPDFPaperHeight(const Unit &unit) const
  */
 void VSettings::SetTiledPDFPaperHeight(qreal value, const Unit &unit)
 {
-    setValue(settingTiledPDFPaperHeight, UnitConvertor(value, unit, Unit::Mm));
+    setValue(*settingTiledPDFPaperHeight, UnitConvertor(value, unit, Unit::Mm));
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -600,7 +602,7 @@ qreal VSettings::GetTiledPDFPaperWidth(const Unit &unit) const
 
     const qreal def = 210 /*A4*/;
     bool ok = false;
-    const qreal width = value(settingTiledPDFPaperWidth, def).toDouble(&ok);
+    const qreal width = value(*settingTiledPDFPaperWidth, def).toDouble(&ok);
     if (ok)
     {
         return UnitConvertor(width, Unit::Mm, unit);
@@ -619,20 +621,20 @@ qreal VSettings::GetTiledPDFPaperWidth(const Unit &unit) const
  */
 void VSettings::SetTiledPDFPaperWidth(qreal value, const Unit &unit)
 {
-    setValue(settingTiledPDFPaperWidth, UnitConvertor(value,unit, Unit::Mm));
+    setValue(*settingTiledPDFPaperWidth, UnitConvertor(value,unit, Unit::Mm));
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 PageOrientation VSettings::GetTiledPDFOrientation() const
 {
     bool defaultValue = static_cast<bool>(PageOrientation::Portrait);
-    bool result = value(settingTiledPDFOrientation, defaultValue).toBool();
+    bool result = value(*settingTiledPDFOrientation, defaultValue).toBool();
     return static_cast<PageOrientation>(result);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void VSettings::SetTiledPDFOrientation(PageOrientation value)
 {
-    setValue(settingTiledPDFOrientation, static_cast<bool> (value));
+    setValue(*settingTiledPDFOrientation, static_cast<bool> (value));
 }
 

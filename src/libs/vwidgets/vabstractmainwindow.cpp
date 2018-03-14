@@ -57,7 +57,7 @@ bool VAbstractMainWindow::ContinueFormatRewrite(const QString &currentFormatVers
         msgBox.setText(tr("This file is using previous format version v%1. The current is v%2. "
                           "Saving the file with this app version will update the format version for this "
                           "file. This may prevent you from be able to open the file with older app versions. "
-                          "Do you really want to continue?").arg(currentFormatVersion).arg(maxFormatVersion));
+                          "Do you really want to continue?").arg(currentFormatVersion, maxFormatVersion));
         msgBox.setStandardButtons(QDialogButtonBox::Yes | QDialogButtonBox::No);
         msgBox.setDefaultButton(QDialogButtonBox::No);
         msgBox.setIconPixmap(QApplication::style()->standardIcon(QStyle::SP_MessageBoxQuestion).pixmap(32, 32));

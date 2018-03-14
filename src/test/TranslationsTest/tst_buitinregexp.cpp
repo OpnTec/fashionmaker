@@ -156,7 +156,7 @@ void TST_BuitInRegExp::TestCheckUnderlineExists_data()
     auto i = data.constBegin();
     while (i != data.constEnd())
     {
-        const QString tag = QString("Locale: '%1'. Name '%2'").arg(m_locale).arg(i.key());
+        const QString tag = QString("Locale: '%1'. Name '%2'").arg(m_locale, i.key());
         QTest::newRow(qUtf8Printable(tag)) << i.key() << i.value();
         ++i;
     }
@@ -172,7 +172,7 @@ void TST_BuitInRegExp::TestCheckUnderlineExists()
     if ((translated.right(1) == QLatin1String("_")) != exists)
     {
         const QString message = QString("String '%1' doesn't contain underline. Original string is '%2'")
-                .arg(translated).arg(name);
+                .arg(translated, name);
         QFAIL(qUtf8Printable(message));
     }
 }
@@ -185,7 +185,7 @@ void TST_BuitInRegExp::TestCheckInternalVaribleRegExp_data()
 
     foreach(const QString &var, builInVariables)
     {
-        const QString tag = QString("Locale: '%1'. Var '%2'").arg(m_locale).arg(var);
+        const QString tag = QString("Locale: '%1'. Var '%2'").arg(m_locale, var);
         const QStringList originalNames = AllNames();
         foreach(const QString &str, originalNames)
         {
@@ -256,7 +256,7 @@ void TST_BuitInRegExp::PrepareData()
 
     foreach(const QString &str, originalNames)
     {
-        const QString tag = QString("Locale: '%1'. Name '%2'").arg(m_locale).arg(str);
+        const QString tag = QString("Locale: '%1'. Name '%2'").arg(m_locale, str);
         QTest::newRow(qUtf8Printable(tag)) << str;
     }
 }

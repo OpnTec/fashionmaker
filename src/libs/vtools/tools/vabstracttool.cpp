@@ -214,7 +214,7 @@ void VAbstractTool::DeleteToolWithConfirm(bool ask)
     if (_referens <= 1)
     {
         qCDebug(vTool, "No children.");
-        qApp->getSceneView()->itemClicked(nullptr);
+        emit qApp->getSceneView()->itemClicked(nullptr);
         if (ask)
         {
             qCDebug(vTool, "Asking.");

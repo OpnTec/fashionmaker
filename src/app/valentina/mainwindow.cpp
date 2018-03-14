@@ -87,6 +87,7 @@
 #include <QTextCodec>
 #include <QDoubleSpinBox>
 #include <QProgressBar>
+#include <QGlobalStatic>
 
 #if defined(Q_OS_WIN32) && QT_VERSION >= QT_VERSION_CHECK(5, 7, 0)
 #include <QWinTaskbarButton>
@@ -106,11 +107,14 @@ Q_LOGGING_CATEGORY(vMainWindow, "v.mainwindow")
 
 QT_WARNING_POP
 
-const QString autosavePrefix = QStringLiteral(".autosave");
+namespace
+{
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, autosavePrefix, (QLatin1String(".autosave")))
 
 // String below need for getting translation for key Ctrl
-const QString strQShortcut   = QStringLiteral("QShortcut"); // Context
-const QString strCtrl        = QStringLiteral("Ctrl"); // String
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, strQShortcut, (QLatin1String("QShortcut"))) // Context
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, strCtrl, (QLatin1String("Ctrl"))) // String
+}
 
 //---------------------------------------------------------------------------------------------------------------------
 /**
@@ -282,7 +286,7 @@ void MainWindow::AddPP(const QString &PPName)
 
     pattern->ClearCalculationGObjects();
     //Create single point
-    ui->view->itemClicked(nullptr);//hide options previous tool
+    emit ui->view->itemClicked(nullptr);//hide options previous tool
     const QString label = doc->GenerateLabel(LabelType::NewPatternPiece);
     const QPointF startPosition = StartPositionNewPP();
 
@@ -298,7 +302,7 @@ void MainWindow::AddPP(const QString &PPName)
     initData.nameActivPP = PPName;
 
     auto spoint = VToolBasePoint::Create(initData);
-    ui->view->itemClicked(spoint);
+    emit ui->view->itemClicked(spoint);
 
     SetEnableTool(true);
     SetEnableWidgets(true);
@@ -621,7 +625,7 @@ void MainWindow::SetToolButton(bool checked, Tool t, const QString &cursor, cons
         {
             // Try to load HiDPI versions of the cursors if availible
             auto cursorHidpiResource = QString(cursor).replace(".png", "@2x.png");
-            if (QFileInfo(cursorResource).exists())
+            if (QFileInfo::exists(cursorResource))
             {
                 cursorResource = cursorHidpiResource;
             }
@@ -659,7 +663,7 @@ void MainWindow::SetToolButton(bool checked, Tool t, const QString &cursor, cons
         connect(scene, &VMainGraphicsScene::SelectedObject, dialogTool.data(), &DialogTool::SelectedObject);
         connect(dialogTool.data(), &DialogTool::DialogClosed, this, closeDialogSlot);
         connect(dialogTool.data(), &DialogTool::ToolTip, this, &MainWindow::ShowToolTip);
-        ui->view->itemClicked(nullptr);
+        emit ui->view->itemClicked(nullptr);
     }
     else
     {
@@ -714,7 +718,7 @@ void MainWindow::ClosedDialog(int result)
 
         QGraphicsItem *tool = dynamic_cast<QGraphicsItem *>(DrawTool::Create(dialogTool, scene, doc, pattern));
         // Do not check for nullptr! See issue #719.
-        ui->view->itemClicked(tool);
+        emit ui->view->itemClicked(tool);
     }
     ArrowTool(true);
 }
@@ -1155,7 +1159,7 @@ void MainWindow::ClosedDialogDuplicateDetail(int result)
 
         QGraphicsItem *tool = dynamic_cast<QGraphicsItem *>(VToolSeamAllowance::Duplicate(dialogTool, scene, doc));
         // Do not check for nullptr! See issue #719.
-        ui->view->itemClicked(tool);
+        emit ui->view->itemClicked(tool);
     }
     ArrowTool(true);
 }
@@ -1166,7 +1170,7 @@ void MainWindow::ToolGroup(bool checked)
     ToolSelectGroupObjects();
     const QString tooltip = tr("Select one or more objects, hold <b>%1</b> - for multiple selection, "
                                "<b>Enter</b> - finish creation")
-            .arg(QCoreApplication::translate(strQShortcut.toUtf8().constData(), strCtrl.toUtf8().constData()));
+            .arg(QCoreApplication::translate(strQShortcut->toUtf8().constData(), strCtrl->toUtf8().constData()));
     SetToolButton<DialogGroup>(checked, Tool::Group, ":/cursor/group_plus_cursor.png", tooltip,
                                &MainWindow::ClosedDialogGroup);
 }
@@ -1177,7 +1181,7 @@ void MainWindow::ToolRotation(bool checked)
     ToolSelectOperationObjects();
     const QString tooltip = tr("Select one or more objects, hold <b>%1</b> - for multiple selection, "
                                "<b>Enter</b> - confirm selection")
-            .arg(QCoreApplication::translate(strQShortcut.toUtf8().constData(), strCtrl.toUtf8().constData()));
+            .arg(QCoreApplication::translate(strQShortcut->toUtf8().constData(), strCtrl->toUtf8().constData()));
     SetToolButtonWithApply<DialogRotation>(checked, Tool::Rotation, ":/cursor/rotation_cursor.png", tooltip,
                                            &MainWindow::ClosedDrawDialogWithApply<VToolRotation>,
                                            &MainWindow::ApplyDrawDialog<VToolRotation>);
@@ -1189,7 +1193,7 @@ void MainWindow::ToolFlippingByLine(bool checked)
     ToolSelectOperationObjects();
     const QString tooltip = tr("Select one or more objects, hold <b>%1</b> - for multiple selection, "
                                "<b>Enter</b> - confirm selection")
-            .arg(QCoreApplication::translate(strQShortcut.toUtf8().constData(), strCtrl.toUtf8().constData()));
+            .arg(QCoreApplication::translate(strQShortcut->toUtf8().constData(), strCtrl->toUtf8().constData()));
     SetToolButtonWithApply<DialogFlippingByLine>(checked, Tool::FlippingByLine, ":/cursor/flipping_line_cursor.png",
                                                  tooltip, &MainWindow::ClosedDrawDialogWithApply<VToolFlippingByLine>,
                                                  &MainWindow::ApplyDrawDialog<VToolFlippingByLine>);
@@ -1201,7 +1205,7 @@ void MainWindow::ToolFlippingByAxis(bool checked)
     ToolSelectOperationObjects();
     const QString tooltip = tr("Select one or more objects, hold <b>%1</b> - for multiple selection, "
                                "<b>Enter</b> - confirm selection")
-            .arg(QCoreApplication::translate(strQShortcut.toUtf8().constData(), strCtrl.toUtf8().constData()));
+            .arg(QCoreApplication::translate(strQShortcut->toUtf8().constData(), strCtrl->toUtf8().constData()));
     SetToolButtonWithApply<DialogFlippingByAxis>(checked, Tool::FlippingByAxis, ":/cursor/flipping_axis_cursor.png",
                                                  tooltip, &MainWindow::ClosedDrawDialogWithApply<VToolFlippingByAxis>,
                                                  &MainWindow::ApplyDrawDialog<VToolFlippingByAxis>);
@@ -1213,7 +1217,7 @@ void MainWindow::ToolMove(bool checked)
     ToolSelectOperationObjects();
     const QString tooltip = tr("Select one or more objects, hold <b>%1</b> - for multiple selection, "
                                "<b>Enter</b> - confirm selection")
-            .arg(QCoreApplication::translate(strQShortcut.toUtf8().constData(), strCtrl.toUtf8().constData()));
+            .arg(QCoreApplication::translate(strQShortcut->toUtf8().constData(), strCtrl->toUtf8().constData()));
     SetToolButtonWithApply<DialogMove>(checked, Tool::Move, ":/cursor/move_cursor.png", tooltip,
                                        &MainWindow::ClosedDrawDialogWithApply<VToolMove>,
                                        &MainWindow::ApplyDrawDialog<VToolMove>);
@@ -2065,7 +2069,7 @@ void MainWindow::InitToolButtons()
     toolButtonPointerList.append(ui->toolButtonPointerOperations);
     toolButtonPointerList.append(ui->toolButtonPointerEllipticalArc);
 
-    for (auto pointer : toolButtonPointerList)
+    for (auto pointer : qAsConst(toolButtonPointerList))
     {
         connect(pointer, &QToolButton::clicked, this, &MainWindow::ArrowTool);
     }
@@ -2157,12 +2161,12 @@ void MainWindow::CancelTool()
 
     currentScene->setFocus(Qt::OtherFocusReason);
     currentScene->clearSelection();
-    ui->view->itemClicked(nullptr); // Hide visualization to avoid a crash
+    emit ui->view->itemClicked(nullptr); // Hide visualization to avoid a crash
 
     switch ( currentTool )
     {
         case Tool::Arrow:
-            for (auto pointer : toolButtonPointerList)
+            for (auto pointer : qAsConst(toolButtonPointerList))
             {
                 pointer->setChecked(false);
             }
@@ -2340,7 +2344,7 @@ void  MainWindow::ArrowTool(bool checked)
     {
         qCDebug(vMainWindow, "Arrow tool.");
         CancelTool();
-        for (auto pointer : toolButtonPointerList)
+        for (auto pointer : qAsConst(toolButtonPointerList))
         {
             pointer->setChecked(true);
         }
@@ -2383,7 +2387,7 @@ void  MainWindow::ArrowTool(bool checked)
     }
     else
     {
-        for (auto pointer : toolButtonPointerList)
+        for (auto pointer : qAsConst(toolButtonPointerList))
         {
             pointer->setChecked(true);
         }
@@ -2545,7 +2549,7 @@ void MainWindow::ActionDetails(bool checked)
         SaveCurrentScene();
 
         currentScene = sceneDetails;
-        ui->view->itemClicked(nullptr);
+        emit ui->view->itemClicked(nullptr);
         ui->view->setScene(currentScene);
         RestoreCurrentScene();
 
@@ -2660,7 +2664,7 @@ void MainWindow::ActionLayout(bool checked)
         }
 
         currentScene = tempSceneLayout;
-        ui->view->itemClicked(nullptr);
+        emit ui->view->itemClicked(nullptr);
         ui->view->setScene(currentScene);
 
         if (mode == Draw::Calculation)
@@ -2883,7 +2887,7 @@ bool MainWindow::Save()
         bool result = SavePattern(qApp->GetPPath(), error);
         if (result)
         {
-            QFile::remove(qApp->GetPPath() + autosavePrefix);
+            QFile::remove(qApp->GetPPath() + *autosavePrefix);
             m_curFileFormatVersion = VPatternConverter::PatternMaxVer;
             m_curFileFormatVersionStr = VPatternConverter::PatternMaxVerStr;
         }
@@ -3011,7 +3015,7 @@ void MainWindow::FileClosedCorrect()
     qApp->ValentinaSettings()->SetRestoreFileList(restoreFiles);
 
     // Remove autosave file
-    QFile autofile(qApp->GetPPath() + autosavePrefix);
+    QFile autofile(qApp->GetPPath() + *autosavePrefix);
     if (autofile.exists())
     {
         autofile.remove();
@@ -3596,7 +3600,7 @@ QT_WARNING_POP
 
     ui->actionLast_tool->setEnabled(drawTools);
 
-    for (auto pointer : toolButtonPointerList)
+    for (auto pointer : qAsConst(toolButtonPointerList))
     {
         pointer->setEnabled(drawTools || modelingTools);
         pointer->setChecked(drawTools || modelingTools);
@@ -3683,7 +3687,7 @@ void MainWindow::AutoSavePattern()
 
     if (qApp->GetPPath().isEmpty() == false && this->isWindowModified() == true)
     {
-        QString autofile = qApp->GetPPath() + autosavePrefix;
+        QString autofile = qApp->GetPPath() + *autosavePrefix;
         QString error;
         SavePattern(autofile, error);
     }
@@ -3886,7 +3890,7 @@ void MainWindow::LastUsedTool()
     switch ( lastUsedTool )
     {
         case Tool::Arrow:
-            for (auto pointer : toolButtonPointerList)
+            for (auto pointer : qAsConst(toolButtonPointerList))
             {
                 pointer->setChecked(true);
             }
@@ -4299,7 +4303,7 @@ void MainWindow::CreateActions()
     ui->actionShowCurveDetails->setChecked(qApp->ValentinaSettings()->IsShowCurveDetails());
     connect(ui->actionShowCurveDetails, &QAction::triggered, this, [this](bool checked)
     {
-        ui->view->itemClicked(nullptr);
+        emit ui->view->itemClicked(nullptr);
         sceneDraw->EnableDetailsMode(checked);
         qApp->ValentinaSettings()->SetShowCurveDetails(checked);
     });
@@ -4640,7 +4644,7 @@ QStringList MainWindow::GetUnlokedRestoreFileList() const
         QStringList filtered;
         for (int i = 0; i < files.size(); ++i)
         {
-            if (QFileInfo(files.at(i)).exists())
+            if (QFileInfo::exists(files.at(i)))
             {
                 filtered.append(files.at(i));
             }
@@ -4830,7 +4834,7 @@ void MainWindow::ReopenFilesAfterCrash(QStringList &args)
         QStringList restoreFiles;
         for (int i = 0; i < files.size(); ++i)
         {
-            QFile file(files.at(i) + autosavePrefix);
+            QFile file(files.at(i) + *autosavePrefix);
             if (file.exists())
             {
                 restoreFiles.append(files.at(i));
@@ -4851,9 +4855,9 @@ void MainWindow::ReopenFilesAfterCrash(QStringList &args)
                 for (int i = 0; i < restoreFiles.size(); ++i)
                 {
                     QString error;
-                    if (VDomDocument::SafeCopy(restoreFiles.at(i) + autosavePrefix, restoreFiles.at(i), error))
+                    if (VDomDocument::SafeCopy(restoreFiles.at(i) + *autosavePrefix, restoreFiles.at(i), error))
                     {
-                        QFile autoFile(restoreFiles.at(i) + autosavePrefix);
+                        QFile autoFile(restoreFiles.at(i) + *autosavePrefix);
                         autoFile.remove();
                         LoadPattern(restoreFiles.at(i));
                         args.removeAll(restoreFiles.at(i));// Do not open file twice after we restore him.
@@ -4861,7 +4865,7 @@ void MainWindow::ReopenFilesAfterCrash(QStringList &args)
                     else
                     {
                         qCDebug(vMainWindow, "Could not copy %s%s to %s %s",
-                                qUtf8Printable(restoreFiles.at(i)), qUtf8Printable(autosavePrefix),
+                                qUtf8Printable(restoreFiles.at(i)), qUtf8Printable(*autosavePrefix),
                                 qUtf8Printable(restoreFiles.at(i)), qUtf8Printable(error));
                     }
                 }
@@ -5574,7 +5578,7 @@ bool MainWindow::IgnoreLocking(int error, const QString &path)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void MainWindow::ToolSelectPoint() const
+void MainWindow::ToolSelectPoint()
 {
     // Only true for rubber band selection
     emit EnableLabelSelection(false);
@@ -5598,21 +5602,21 @@ void MainWindow::ToolSelectPoint() const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void MainWindow::ToolSelectPointByRelease() const
+void MainWindow::ToolSelectPointByRelease()
 {
     ToolSelectPoint();
     emit ItemsSelection(SelectionType::ByMouseRelease);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void MainWindow::ToolSelectPointByPress() const
+void MainWindow::ToolSelectPointByPress()
 {
     ToolSelectPoint();
     emit ItemsSelection(SelectionType::ByMousePress);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void MainWindow::ToolSelectSpline() const
+void MainWindow::ToolSelectSpline()
 {
     // Only true for rubber band selection
     emit EnableLabelSelection(false);
@@ -5638,7 +5642,7 @@ void MainWindow::ToolSelectSpline() const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void MainWindow::ToolSelectSplinePath() const
+void MainWindow::ToolSelectSplinePath()
 {
     // Only true for rubber band selection
     emit EnableLabelSelection(false);
@@ -5664,7 +5668,7 @@ void MainWindow::ToolSelectSplinePath() const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void MainWindow::ToolSelectArc() const
+void MainWindow::ToolSelectArc()
 {
     // Only true for rubber band selection
     emit EnableLabelSelection(false);
@@ -5690,7 +5694,7 @@ void MainWindow::ToolSelectArc() const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void MainWindow::ToolSelectPointArc() const
+void MainWindow::ToolSelectPointArc()
 {
     // Only true for rubber band selection
     emit EnableLabelSelection(false);
@@ -5716,7 +5720,7 @@ void MainWindow::ToolSelectPointArc() const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void MainWindow::ToolSelectCurve() const
+void MainWindow::ToolSelectCurve()
 {
     // Only true for rubber band selection
     emit EnableLabelSelection(false);
@@ -5742,7 +5746,7 @@ void MainWindow::ToolSelectCurve() const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void MainWindow::ToolSelectAllDrawObjects() const
+void MainWindow::ToolSelectAllDrawObjects()
 {
     // Only true for rubber band selection
     emit EnableLabelSelection(false);
@@ -5768,7 +5772,7 @@ void MainWindow::ToolSelectAllDrawObjects() const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void MainWindow::ToolSelectOperationObjects() const
+void MainWindow::ToolSelectOperationObjects()
 {
     // Only true for rubber band selection
     emit EnableLabelSelection(true);
@@ -5794,7 +5798,7 @@ void MainWindow::ToolSelectOperationObjects() const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void MainWindow::ToolSelectGroupObjects() const
+void MainWindow::ToolSelectGroupObjects()
 {
     ToolSelectOperationObjects();
     // Only true for rubber band selection
@@ -5805,7 +5809,7 @@ void MainWindow::ToolSelectGroupObjects() const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void MainWindow::ToolSelectDetail() const
+void MainWindow::ToolSelectDetail()
 {
     // Only true for rubber band selection
     emit EnableNodeLabelSelection(false);

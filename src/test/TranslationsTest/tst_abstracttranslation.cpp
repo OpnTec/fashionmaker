@@ -52,17 +52,17 @@ TST_AbstractTranslation::TST_AbstractTranslation(QObject *parent)
 QDomNodeList TST_AbstractTranslation::LoadTSFile(const QString &filename)
 {
     tsFile.reset();
-    tsFile = QSharedPointer<QFile>(new QFile(QString("%1/%2").arg(TS_DIR).arg(filename)));
+    tsFile = QSharedPointer<QFile>(new QFile(QString("%1/%2").arg(TS_DIR, filename)));
     if (not tsFile->exists())
     {
-        const QString message = QString("Can't find '%1'.\n%2.").arg(filename).arg(tsFile->errorString());
+        const QString message = QString("Can't find '%1'.\n%2.").arg(filename, tsFile->errorString());
         QWARN(qUtf8Printable(message));
         return QDomNodeList();
     }
 
     if (tsFile->open(QIODevice::ReadOnly) == false)
     {
-        const QString message = QString("Can't open file '%1'.\n%2.").arg(filename).arg(tsFile->errorString());
+        const QString message = QString("Can't open file '%1'.\n%2.").arg(filename, tsFile->errorString());
         QWARN(qUtf8Printable(message));
         return QDomNodeList();
     }

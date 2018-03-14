@@ -281,15 +281,13 @@ QString VToolHeight::MakeToolTip() const
                                     "</table>")
             .arg(tr("Length"))
             .arg(qApp->fromPixel(curLine.length()))
-            .arg(UnitsToStr(qApp->patternUnit(), true))
-            .arg(tr("Angle"))
+            .arg(UnitsToStr(qApp->patternUnit(), true), tr("Angle"))
             .arg(curLine.angle())
             .arg(QString("%1->%2").arg(p1Line->name(), current->name()))
             .arg(qApp->fromPixel(p1ToCur.length()))
             .arg(QString("%1->%2").arg(p2Line->name(), current->name()))
             .arg(qApp->fromPixel(p2ToCur.length()))
-            .arg(tr("Label"))
-            .arg(current->name());
+            .arg(tr("Label"), current->name());
     return toolTip;
 }
 

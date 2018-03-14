@@ -75,7 +75,7 @@ TapePreferencesConfigurationPage::TapePreferencesConfigurationPage(QWidget *pare
     }
 
     //----------------------------- Measurements Editing
-    connect(ui->resetWarningsButton, &QPushButton::released, []()
+    connect(ui->resetWarningsButton, &QPushButton::released, this, []()
     {
         VTapeSettings *settings = qApp->TapeSettings();
 

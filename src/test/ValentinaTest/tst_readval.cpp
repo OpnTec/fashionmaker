@@ -125,7 +125,7 @@ void TST_ReadVal::PrepareVal(qreal val, const QLocale &locale)
 //---------------------------------------------------------------------------------------------------------------------
 void TST_ReadVal::PrepareString(const QString &str, const QLocale &locale, qreal val,  int count)
 {
-    const QString tag = QString("%1. String '%2'").arg(locale.name()).arg(str);
+    const QString tag = QString("%1. String '%2'").arg(locale.name(), str);
     QTest::newRow(qUtf8Printable(tag)) << str << count << val << locale;
 }
 

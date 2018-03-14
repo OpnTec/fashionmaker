@@ -365,14 +365,12 @@ QString VToolArcWithLength::MakeToolTip() const
                                     "</table>")
             .arg(tr("Length"))
             .arg(qApp->fromPixel(arc->GetLength()))
-            .arg(UnitsToStr(qApp->patternUnit(), true))
-            .arg(tr("Radius"))
+            .arg(UnitsToStr(qApp->patternUnit(), true), tr("Radius"))
             .arg(qApp->fromPixel(arc->GetRadius()))
             .arg(tr("Start angle"))
             .arg(qApp->fromPixel(arc->GetStartAngle()))
             .arg(tr("End angle"))
             .arg(qApp->fromPixel(arc->GetEndAngle()))
-            .arg(tr("Label"))
-            .arg(arc->name());
+            .arg(tr("Label"), arc->name());
     return toolTip;
 }

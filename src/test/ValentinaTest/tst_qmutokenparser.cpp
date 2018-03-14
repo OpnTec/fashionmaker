@@ -115,19 +115,19 @@ void TST_QmuTokenParser::PrepareVal(qreal val, const QLocale &locale)
 {
     const QString formula = locale.toString(val);
     QString string = formula;
-    QString tag = QString("%1. String '%2'").arg(locale.name()).arg(string);
+    QString tag = QString("%1. String '%2'").arg(locale.name(), string);
     QTest::newRow(qUtf8Printable(tag)) << string << true << locale;
 
     string = formula+QLatin1String("+");
-    tag = QString("%1. String '%2'").arg(locale.name()).arg(string);
+    tag = QString("%1. String '%2'").arg(locale.name(), string);
     QTest::newRow(qUtf8Printable(tag)) << string << false << locale;
 
     string = formula+QLatin1String("+")+formula;
-    tag = QString("%1. String '%2'").arg(locale.name()).arg(string);
+    tag = QString("%1. String '%2'").arg(locale.name(), string);
     QTest::newRow(qUtf8Printable(tag)) << string << false << locale;
 
     string = formula+QString("+б");
-    tag = QString("%1. String '%2'").arg(locale.name()).arg(string);
+    tag = QString("%1. String '%2'").arg(locale.name(), string);
     QTest::newRow(qUtf8Printable(tag)) << string << false << locale;
 }
 

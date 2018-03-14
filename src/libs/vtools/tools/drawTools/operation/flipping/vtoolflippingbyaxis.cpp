@@ -236,8 +236,7 @@ void VToolFlippingByAxis::SaveOptions(QDomElement &tag, QSharedPointer<VGObject>
 QString VToolFlippingByAxis::MakeToolTip() const
 {
     const QString toolTip = QString("<tr> <td><b>%1:</b> %2</td> </tr>")
-            .arg(tr("Origin point"))
-            .arg(OriginPointName());
+            .arg(tr("Origin point"), OriginPointName());
     return toolTip;
 }
 

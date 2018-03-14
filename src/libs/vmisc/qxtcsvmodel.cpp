@@ -399,7 +399,7 @@ bool QxtCsvModel::insertRows(int row, int count, const QModelIndex& parent)
     {
         return false;
     }
-    emit beginInsertRows(parent, row, row + count);
+    beginInsertRows(parent, row, row + count);
     QxtCsvModelPrivate& d_ptr = qxt_d();
     if (row >= rowCount())
     {
@@ -415,7 +415,7 @@ bool QxtCsvModel::insertRows(int row, int count, const QModelIndex& parent)
             d_ptr.csvData.insert(row, QStringList());
         }
     }
-    emit endInsertRows();
+    endInsertRows();
     return true;
 }
 
@@ -444,13 +444,13 @@ bool QxtCsvModel::removeRows(int row, int count, const QModelIndex& parent)
     {
         count = rowCount() - row;
     }
-    emit beginRemoveRows(parent, row, row + count);
+    beginRemoveRows(parent, row, row + count);
     QxtCsvModelPrivate& d_ptr = qxt_d();
     for (int i = 0;i < count;i++)
     {
         d_ptr.csvData.removeAt(row);
     }
-    emit endRemoveRows();
+    endRemoveRows();
     return true;
 }
 
@@ -519,7 +519,7 @@ bool QxtCsvModel::removeColumns(int col, int count, const QModelIndex& parent)
     {
         count = columnCount() - col;
     }
-    emit beginRemoveColumns(parent, col, col + count);
+    beginRemoveColumns(parent, col, col + count);
     QxtCsvModelPrivate& d_ptr = qxt_d();
     for (int i = 0; i < rowCount(); i++)
     {
@@ -532,7 +532,7 @@ bool QxtCsvModel::removeColumns(int col, int count, const QModelIndex& parent)
     {
         d_ptr.header.removeAt(col);
     }
-    emit endRemoveColumns();
+    endRemoveColumns();
     return true;
 }
 

@@ -224,10 +224,7 @@ QString VToolFlippingByLine::MakeToolTip() const
 {
     const QString toolTip = QString("<tr> <td><b>%1:</b> %2</td> </tr>"
                                     "<tr> <td><b>%3:</b> %4</td> </tr>")
-            .arg(tr("First line point"))
-            .arg(FirstLinePointName())
-            .arg(tr("Second line point"))
-            .arg(SecondLinePointName());
+            .arg(tr("First line point"), FirstLinePointName(), tr("Second line point"), SecondLinePointName());
     return toolTip;
 }
 

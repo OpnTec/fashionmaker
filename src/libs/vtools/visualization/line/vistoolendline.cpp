@@ -83,8 +83,7 @@ void VisToolEndLine::RefreshGeometry()
                                 "<b>Shift</b> - sticking angle, <b>Enter</b> - finish creation")
             .arg(this->line().angle())
             .arg(qApp->TrVars()->FormulaToUser(QString::number(qApp->fromPixel(this->line().length())),
-                                               qApp->Settings()->GetOsSeparator()))
-            .arg(prefix);
+                                               qApp->Settings()->GetOsSeparator()), prefix);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

@@ -178,10 +178,7 @@ void VAbstractConverter::ReserveFile() const
     QString error;
     QFileInfo info(m_convertedFileName);
     const QString reserveFileName = QString("%1/%2(v%3).%4.bak")
-            .arg(info.absoluteDir().absolutePath())
-            .arg(info.baseName())
-            .arg(GetVersionStr())
-            .arg(info.completeSuffix());
+            .arg(info.absoluteDir().absolutePath(), info.baseName(), GetVersionStr(), info.completeSuffix());
     if (not SafeCopy(m_convertedFileName, reserveFileName, error))
     {
 #ifdef Q_OS_WIN32

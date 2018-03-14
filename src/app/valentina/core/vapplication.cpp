@@ -142,28 +142,28 @@ inline void noisyFailureMsgHandler(QtMsgType type, const QMessageLogContext &con
         {
             case QtDebugMsg:
                 debugdate += QString(":DEBUG:%1(%2)] %3: %4: %5").arg(context.file).arg(context.line)
-                             .arg(context.function).arg(context.category).arg(msg);
+                             .arg(context.function, context.category, msg);
                 vStdOut() << QApplication::translate("vNoisyHandler", "DEBUG:") << msg << "\n";
                 break;
             case QtWarningMsg:
                 debugdate += QString(":WARNING:%1(%2)] %3: %4: %5").arg(context.file).arg(context.line)
-                             .arg(context.function).arg(context.category).arg(msg);
+                             .arg(context.function, context.category, msg);
                 vStdErr() << QApplication::translate("vNoisyHandler", "WARNING:") << msg << "\n";
                 break;
             case QtCriticalMsg:
                 debugdate += QString(":CRITICAL:%1(%2)] %3: %4: %5").arg(context.file).arg(context.line)
-                             .arg(context.function).arg(context.category).arg(msg);
+                             .arg(context.function, context.category, msg);
                 vStdErr() << QApplication::translate("vNoisyHandler", "CRITICAL:") << msg << "\n";
                 break;
             case QtFatalMsg:
                 debugdate += QString(":FATAL:%1(%2)] %3: %4: %5").arg(context.file).arg(context.line)
-                             .arg(context.function).arg(context.category).arg(msg);
+                             .arg(context.function, context.category, msg);
                 vStdErr() << QApplication::translate("vNoisyHandler", "FATAL:") << msg << "\n";
                 break;
             #if QT_VERSION > QT_VERSION_CHECK(5, 4, 2)
             case QtInfoMsg:
                 debugdate += QString(":INFO:%1(%2)] %3: %4: %5").arg(context.file).arg(context.line)
-                             .arg(context.function).arg(context.category).arg(msg);
+                             .arg(context.function, context.category, msg);
                 vStdOut() << QApplication::translate("vNoisyHandler", "INFO:") << msg << "\n";
                 break;
             #endif
@@ -306,7 +306,7 @@ void VApplication::NewValentina(const QString &fileName)
     }
     else
     {
-        const QString run = QString("\"%1\" \"%2\"").arg(QCoreApplication::applicationFilePath()).arg(fileName);
+        const QString run = QString("\"%1\" \"%2\"").arg(QCoreApplication::applicationFilePath(), fileName);
         qCDebug(vApp, "New process with arguments. program = %s", qUtf8Printable(run));
         if (QProcess::startDetached(run))
         {

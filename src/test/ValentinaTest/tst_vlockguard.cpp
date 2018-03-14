@@ -49,8 +49,8 @@ void TST_VLockGuard::TryLock() const
     VlpCreateLock(lock, fileName);
 
     fileName = lock->GetLockFile();
-    QVERIFY2(QFileInfo(fileName).exists(), "Lock file doesn't exist!");
+    QVERIFY2(QFileInfo::exists(fileName), "Lock file doesn't exist!");
 
     lock.reset();
-    QVERIFY2(not QFileInfo(fileName).exists(), "Lock file still exists!");
+    QVERIFY2(not QFileInfo::exists(fileName), "Lock file still exists!");
 }

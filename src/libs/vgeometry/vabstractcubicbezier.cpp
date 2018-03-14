@@ -136,7 +136,7 @@ QPointF VAbstractCubicBezier::CutSpline(qreal length, QPointF &spl1p2, QPointF &
 //---------------------------------------------------------------------------------------------------------------------
 QString VAbstractCubicBezier::NameForHistory(const QString &toolName) const
 {
-    QString name = toolName + QString(" %1_%2").arg(GetP1().name()).arg(GetP4().name());
+    QString name = toolName + QString(" %1_%2").arg(GetP1().name(), GetP4().name());
     if (GetDuplicate() > 0)
     {
         name += QString("_%1").arg(GetDuplicate());
@@ -173,7 +173,7 @@ qreal VAbstractCubicBezier::GetParmT(qreal length) const
 //---------------------------------------------------------------------------------------------------------------------
 void VAbstractCubicBezier::CreateName()
 {
-    QString name = SPL_ + QString("%1_%2").arg(GetP1().name()).arg(GetP4().name());
+    QString name = SPL_ + QString("%1_%2").arg(GetP1().name(), GetP4().name());
     if (GetDuplicate() > 0)
     {
         name += QString("_%1").arg(GetDuplicate());

@@ -134,14 +134,14 @@ void DialogEditWrongFormula::DialogAccepted()
 {
     formula = ui->plainTextEditFormula->toPlainText();
     emit DialogClosed(QDialog::Accepted);
-    accepted();
+    emit accepted();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void DialogEditWrongFormula::DialogRejected()
 {
     emit DialogClosed(QDialog::Rejected);
-    rejected();
+    emit rejected();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -492,7 +492,7 @@ void DialogEditWrongFormula::InitVariables()
 void DialogEditWrongFormula::SetDescription(const QString &name, qreal value, const QString &unit,
                                             const QString &description)
 {
-    const QString desc = QString("%1(%2 %3) - %4").arg(name).arg(value).arg(unit).arg(description);
+    const QString desc = QString("%1(%2 %3) - %4").arg(name).arg(value).arg(unit, description);
     ui->labelDescription->setText(desc);
 }
 
@@ -592,8 +592,9 @@ void DialogEditWrongFormula::ShowFunctions()
     ui->tableWidget->setColumnHidden(ColumnFullName, true);
     ui->labelDescription->setText("");
 
-    QMap<QString, qmu::QmuTranslation>::const_iterator i = qApp->TrVars()->GetFunctions().constBegin();
-    while (i != qApp->TrVars()->GetFunctions().constEnd())
+    const QMap<QString, qmu::QmuTranslation> functions = qApp->TrVars()->GetFunctions();
+    QMap<QString, qmu::QmuTranslation>::const_iterator i = functions.constBegin();
+    while (i != functions.constEnd())
     {
         ui->tableWidget->setRowCount(ui->tableWidget->rowCount() + 1);
         QTableWidgetItem *item = new QTableWidgetItem(i.value().translate(qApp->Settings()->GetLocale()));
@@ -653,7 +654,8 @@ void DialogEditWrongFormula::FilterVariablesEdited(const QString &filter)
         }
 
         // show rows with matched filter
-        for (auto item : ui->tableWidget->findItems(filter, Qt::MatchContains))
+        const QList<QTableWidgetItem*> items = ui->tableWidget->findItems(filter, Qt::MatchContains);
+        for (auto item : items)
         {
             // If filter is empty findItems() for unknown reason returns nullptr items.
             if (item)

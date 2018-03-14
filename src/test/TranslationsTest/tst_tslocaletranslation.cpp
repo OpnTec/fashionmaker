@@ -77,8 +77,7 @@ void TST_TSLocaleTranslation::CheckPlaceMarkerExist_data()
                 continue;
             }
 
-            const QString message = QString("File '%1'. Check place holder source message '%2'").arg(filename)
-                    .arg(source);
+            const QString message = QString("File '%1'. Check place holder source message '%2'").arg(filename, source);
             QTest::newRow(qUtf8Printable(message)) << source << translation;
         }
         else

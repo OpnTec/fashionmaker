@@ -40,11 +40,12 @@
 #include <QtDebug>
 #include <QRegularExpression>
 #include <QtDebug>
+#include <QGlobalStatic>
 
 #ifndef Q_OS_WIN
-    const QString baseFilenameRegExp = QStringLiteral("^[^/]+$");
+    Q_GLOBAL_STATIC_WITH_ARGS(const QString, baseFilenameRegExp, (QLatin1String("^[^/]+$")))
 #else
-    const QString baseFilenameRegExp = QStringLiteral("^[^\\:?\"*|/<>]+$");
+    Q_GLOBAL_STATIC_WITH_ARGS(const QString, baseFilenameRegExp, (QLatin1String("^[^\\:?\"*|/<>]+$")))
 #endif
 
 bool DialogSaveLayout::havePdf = false;
@@ -74,7 +75,7 @@ DialogSaveLayout::DialogSaveLayout(int count, Draw mode, const QString &fileName
     SCASSERT(bOk != nullptr)
     bOk->setEnabled(false);
 
-    ui->lineEditFileName->setValidator( new QRegularExpressionValidator(QRegularExpression(baseFilenameRegExp), this));
+    ui->lineEditFileName->setValidator( new QRegularExpressionValidator(QRegularExpression(*baseFilenameRegExp), this));
 
     const QString mask = fileName+QLatin1String("_");
     if (VApplication::IsGUIMode())
@@ -83,7 +84,7 @@ DialogSaveLayout::DialogSaveLayout(int count, Draw mode, const QString &fileName
     }
     else
     {
-        if (QRegularExpression(baseFilenameRegExp).match(mask).hasMatch())
+        if (QRegularExpression(*baseFilenameRegExp).match(mask).hasMatch())
         {
             ui->lineEditFileName->setText(mask);
         }

@@ -273,15 +273,13 @@ QString VToolCutArc::MakeToolTip() const
                            "<tr> <td><b>%8:</b> %9°</td> </tr>")
                     .arg(arcStr + arcNumber + QLatin1String(" ") + lengthStr)
                     .arg(qApp->fromPixel(arc.GetLength()))
-                    .arg(UnitsToStr(qApp->patternUnit(), true))
-                    .arg(arcStr + arcNumber + QLatin1String(" ") + radiusStr)
+                    .arg(UnitsToStr(qApp->patternUnit(), true), arcStr + arcNumber + QLatin1String(" ") + radiusStr)
                     .arg(qApp->fromPixel(arc.GetRadius()))
                     .arg(arcStr + arcNumber + QLatin1String(" ") + startAngleStr)
                     .arg(qApp->fromPixel(arc.GetStartAngle()))
                     .arg(arcStr + arcNumber + QLatin1String(" ") + endAngleStr)
                     .arg(qApp->fromPixel(arc.GetEndAngle()))
-                    .arg(arcStr + arcNumber + QLatin1String(" ") + tr("label"))
-                    .arg(arc.name());
+                    .arg(arcStr + arcNumber + QLatin1String(" ") + tr("label"), arc.name());
         return toolTip;
     };
 

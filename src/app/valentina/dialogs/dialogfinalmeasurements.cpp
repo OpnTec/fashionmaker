@@ -551,14 +551,14 @@ void DialogFinalMeasurements::ShowUnits()
     {
         // calculated value
         const QString header = ui->tableWidget->horizontalHeaderItem(1)->text();
-        const QString unitHeader = QString("%1 (%2)").arg(header).arg(unit);
+        const QString unitHeader = QString("%1 (%2)").arg(header, unit);
         ui->tableWidget->horizontalHeaderItem(1)->setText(unitHeader);
     }
 
     {
         // formula
         const QString header = ui->tableWidget->horizontalHeaderItem(2)->text();
-        const QString unitHeader = QString("%1 (%2)").arg(header).arg(unit);
+        const QString unitHeader = QString("%1 (%2)").arg(header, unit);
         ui->tableWidget->horizontalHeaderItem(2)->setText(unitHeader);
     }
 }

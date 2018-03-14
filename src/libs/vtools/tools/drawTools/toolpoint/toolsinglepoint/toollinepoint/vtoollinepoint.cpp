@@ -158,11 +158,9 @@ QString VToolLinePoint::MakeToolTip() const
                                     "</table>")
             .arg(tr("Length"))
             .arg(qApp->fromPixel(line.length()))
-            .arg(UnitsToStr(qApp->patternUnit(), true))
-            .arg(tr("Angle"))
+            .arg(UnitsToStr(qApp->patternUnit(), true), tr("Angle"))
             .arg(line.angle())
-            .arg(tr("Label"))
-            .arg(second->name());
+            .arg(tr("Label"), second->name());
     return toolTip;
 }
 

@@ -269,13 +269,10 @@ QString VToolCutSpline::MakeToolTip() const
                                     "</table>")
             .arg(curveStr + QLatin1String("1 ") + lengthStr)
             .arg(qApp->fromPixel(spline1.GetLength()))
-            .arg(UnitsToStr(qApp->patternUnit(), true))
-            .arg(curveStr + QLatin1String("2 ") + lengthStr)
+            .arg(UnitsToStr(qApp->patternUnit(), true), curveStr + QLatin1String("2 ") + lengthStr)
             .arg(qApp->fromPixel(spline2.GetLength()))
-            .arg(curveStr + QLatin1String(" 1") + tr("label"))
-            .arg(spline1.name())
-            .arg(curveStr + QLatin1String(" 2") + tr("label"))
-            .arg(spline2.name());
+            .arg(curveStr + QLatin1String(" 1") + tr("label"), spline1.name(),
+                 curveStr + QLatin1String(" 2") + tr("label"), spline2.name());
 
     return toolTip;
 }

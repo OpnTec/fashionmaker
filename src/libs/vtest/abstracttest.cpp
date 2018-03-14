@@ -105,7 +105,7 @@ QString AbstractTest::TranslationsPath() const
 //---------------------------------------------------------------------------------------------------------------------
 int AbstractTest::Run(int exit, const QString &program, const QStringList &arguments, QString &error, int msecs)
 {
-    const QString parameters = QString("Program: %1 \nArguments: %2.").arg(program).arg(arguments.join(", "));
+    const QString parameters = QString("Program: %1 \nArguments: %2.").arg(program, arguments.join(", "));
 
     QFileInfo info(program);
     if (not info.exists())
@@ -134,7 +134,7 @@ int AbstractTest::Run(int exit, const QString &program, const QStringList &argum
 
     if (process->exitStatus() == QProcess::CrashExit)
     {
-        error = QString("Program crashed.\n%1\n%2").arg(parameters).arg(QString(process->readAllStandardError()));
+        error = QString("Program crashed.\n%1\n%2").arg(parameters, QString(process->readAllStandardError()));
         return TST_EX_CRASH;
     }
 
@@ -177,7 +177,7 @@ bool AbstractTest::CopyRecursively(const QString &srcFilePath, const QString &tg
     }
     else
     {
-        if (QFileInfo(tgtFilePath).exists())
+        if (QFileInfo::exists(tgtFilePath))
         {
             const QString msg = QString("File '%1' exists.").arg(srcFilePath);
             QWARN(qUtf8Printable(msg));
@@ -197,7 +197,7 @@ bool AbstractTest::CopyRecursively(const QString &srcFilePath, const QString &tg
         QFile srcFile(srcFilePath);
         if (not srcFile.open(QFile::ReadOnly))
         {
-            const QString msg = QString("Can't copy file '%1'. Error: %2").arg(srcFilePath).arg(srcFile.errorString());
+            const QString msg = QString("Can't copy file '%1'. Error: %2").arg(srcFilePath, srcFile.errorString());
             QWARN(qUtf8Printable(msg));
             return false;
         }
@@ -205,8 +205,8 @@ bool AbstractTest::CopyRecursively(const QString &srcFilePath, const QString &tg
 
         if (not srcFile.copy(tgtFilePath))
         {
-            const QString msg = QString("Can't copy file '%1' to '%2'. Error: %3").arg(srcFilePath).arg(tgtFilePath)
-                    .arg(srcFile.errorString());
+            const QString msg = QString("Can't copy file '%1' to '%2'. Error: %3")
+                    .arg(srcFilePath, tgtFilePath, srcFile.errorString());
             QWARN(qUtf8Printable(msg));
             return false;
         }

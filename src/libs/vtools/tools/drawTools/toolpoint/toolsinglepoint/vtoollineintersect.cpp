@@ -312,15 +312,13 @@ QString VToolLineIntersect::MakeToolTip() const
                                     "</table>")
             .arg(QString("%1->%2").arg(p1L1->name(), current->name()))
             .arg(qApp->fromPixel(p1L1ToCur.length()))
-            .arg(UnitsToStr(qApp->patternUnit(), true))
-            .arg(QString("%1->%2").arg(current->name(), p2L1->name()))
+            .arg(UnitsToStr(qApp->patternUnit(), true), QString("%1->%2").arg(current->name(), p2L1->name()))
             .arg(qApp->fromPixel(curToP2L1.length()))
             .arg(QString("%1->%2").arg(p1L2->name(), current->name()))
             .arg(qApp->fromPixel(p1L2ToCur.length()))
             .arg(QString("%1->%2").arg(current->name(), p2L2->name()))
             .arg(qApp->fromPixel(curToP2L2.length()))
-            .arg(tr("Label"))
-            .arg(current->name());
+            .arg(tr("Label"), current->name());
     return toolTip;
 }
 

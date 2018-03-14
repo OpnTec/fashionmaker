@@ -46,7 +46,7 @@ int main(int argc, char *argv[])
     Q_INIT_RESOURCE(icons);
     Q_INIT_RESOURCE(toolicon);
 
-    QT_REQUIRE_VERSION(argc, argv, "5.2.0")
+    QT_REQUIRE_VERSION(argc, argv, "5.2.0")// clazy:exclude=qstring-arg
 
 #if defined(Q_OS_WIN)
     VAbstractApplication::WinAttachConsole();

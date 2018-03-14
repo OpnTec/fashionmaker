@@ -328,7 +328,11 @@ qreal VSplinePath::GetStartAngle() const
 {
     if (CountPoints() > 0)
     {
-        return GetSplinePath().first().Angle2();
+#if QT_VERSION >= QT_VERSION_CHECK(5, 6, 0)
+        return GetSplinePath().constFirst().Angle2();
+#else
+        return GetSplinePath().first().Angle2(); // clazy:exclude=detaching-temporary
+#endif
     }
     else
     {
@@ -341,7 +345,11 @@ qreal VSplinePath::GetEndAngle() const
 {
     if (CountPoints() > 0)
     {
-        return GetSplinePath().last().Angle1();
+#if QT_VERSION >= QT_VERSION_CHECK(5, 6, 0)
+        return GetSplinePath().constLast().Angle1();
+#else
+        return GetSplinePath().last().Angle1(); // clazy:exclude=detaching-temporary
+#endif
     }
     else
     {
@@ -354,7 +362,11 @@ qreal VSplinePath::GetC1Length() const
 {
     if (CountPoints() > 0)
     {
-        return GetSplinePath().first().Length2();
+#if QT_VERSION >= QT_VERSION_CHECK(5, 6, 0)
+        return GetSplinePath().constFirst().Length2();
+#else
+        return GetSplinePath().first().Length2(); // clazy:exclude=detaching-temporary
+#endif
     }
     else
     {
@@ -367,7 +379,11 @@ qreal VSplinePath::GetC2Length() const
 {
     if (CountPoints() > 0)
     {
-        return GetSplinePath().last().Length1();
+#if QT_VERSION >= QT_VERSION_CHECK(5, 6, 0)
+        return GetSplinePath().constLast().Length1();
+#else
+        return GetSplinePath().last().Length1(); // clazy:exclude=detaching-temporary
+#endif
     }
     else
     {
@@ -380,7 +396,11 @@ VPointF VSplinePath::FirstPoint() const
 {
     if (not d->path.isEmpty())
     {
-        return d->path.first().P();
+#if QT_VERSION >= QT_VERSION_CHECK(5, 6, 0)
+        return d->path.constFirst().P();
+#else
+        return d->path.first().P(); // clazy:exclude=detaching-temporary
+#endif
     }
     else
     {

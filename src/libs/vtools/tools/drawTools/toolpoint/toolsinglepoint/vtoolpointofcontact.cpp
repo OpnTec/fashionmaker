@@ -353,15 +353,13 @@ QString VToolPointOfContact::MakeToolTip() const
                                     "</table>")
             .arg(QString("%1->%2").arg(p1->name(), current->name()))
             .arg(qApp->fromPixel(p1ToCur.length()))
-            .arg(UnitsToStr(qApp->patternUnit(), true))
-            .arg(QString("%1->%2").arg(p2->name(), current->name()))
+            .arg(UnitsToStr(qApp->patternUnit(), true), QString("%1->%2").arg(p2->name(), current->name()))
             .arg(qApp->fromPixel(p2ToCur.length()))
             .arg(QString("%1 %2->%3").arg(tr("Length"), centerP->name(), current->name()))
             .arg(qApp->fromPixel(centerToCur.length()))
             .arg(QString("%1 %2->%3").arg(tr("Angle"), centerP->name(), current->name()))
             .arg(centerToCur.angle())
-            .arg(tr("Label"))
-            .arg(current->name());
+            .arg(tr("Label"), current->name());
     return toolTip;
 }
 

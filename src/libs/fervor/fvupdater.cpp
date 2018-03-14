@@ -43,6 +43,7 @@
 #include <QtDebug>
 #include <QSslConfiguration>
 #include <QDir>
+#include <QGlobalStatic>
 
 #include "../ifc/exception/vexception.h"
 #include "../ifc/xml/vabstractconverter.h"
@@ -54,8 +55,10 @@
 
 namespace
 {
-const QString defaultFeedURL = QStringLiteral("https://valentinaproject.bitbucket.io/Appcast.xml");
-const QString testFeedURL = QStringLiteral("https://valentinaproject.bitbucket.io/Appcast_testing.xml");
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, defaultFeedURL,
+                          (QLatin1String("https://valentinaproject.bitbucket.io/Appcast.xml")))
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, testFeedURL,
+                          (QLatin1String("https://valentinaproject.bitbucket.io/Appcast_testing.xml")))
 }
 
 QPointer<FvUpdater> FvUpdater::m_Instance;
@@ -86,7 +89,7 @@ void FvUpdater::drop()
 //---------------------------------------------------------------------------------------------------------------------
 QString FvUpdater::CurrentFeedURL()
 {
-    return FvUpdater::IsTestBuild() ? testFeedURL : defaultFeedURL;
+    return FvUpdater::IsTestBuild() ? *testFeedURL : *defaultFeedURL;
 }
 
 //---------------------------------------------------------------------------------------------------------------------

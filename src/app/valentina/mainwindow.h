@@ -74,29 +74,29 @@ public slots:
 signals:
     void RefreshHistory();
     void EnableItemMove(bool move);
-    void ItemsSelection(SelectionType type) const;
+    void ItemsSelection(SelectionType type);
 
-    void EnableLabelSelection(bool enable) const;
-    void EnablePointSelection(bool enable) const;
-    void EnableLineSelection(bool enable) const;
-    void EnableArcSelection(bool enable) const;
-    void EnableElArcSelection(bool enable) const;
-    void EnableSplineSelection(bool enable) const;
-    void EnableSplinePathSelection(bool enable) const;
-    void EnableNodeLabelSelection(bool enable) const;
-    void EnableNodePointSelection(bool enable) const;
-    void EnableDetailSelection(bool enable) const;
+    void EnableLabelSelection(bool enable);
+    void EnablePointSelection(bool enable);
+    void EnableLineSelection(bool enable);
+    void EnableArcSelection(bool enable);
+    void EnableElArcSelection(bool enable);
+    void EnableSplineSelection(bool enable);
+    void EnableSplinePathSelection(bool enable);
+    void EnableNodeLabelSelection(bool enable);
+    void EnableNodePointSelection(bool enable);
+    void EnableDetailSelection(bool enable);
 
-    void EnableLabelHover(bool enable) const;
-    void EnablePointHover(bool enable) const;
-    void EnableLineHover(bool enable) const;
-    void EnableArcHover(bool enable) const;
-    void EnableElArcHover(bool enable) const;
-    void EnableSplineHover(bool enable) const;
-    void EnableSplinePathHover(bool enable) const;
-    void EnableNodeLabelHover(bool enable) const;
-    void EnableNodePointHover(bool enable) const;
-    void EnableDetailHover(bool enable) const;
+    void EnableLabelHover(bool enable);
+    void EnablePointHover(bool enable);
+    void EnableLineHover(bool enable);
+    void EnableArcHover(bool enable);
+    void EnableElArcHover(bool enable);
+    void EnableSplineHover(bool enable);
+    void EnableSplinePathHover(bool enable);
+    void EnableNodeLabelHover(bool enable);
+    void EnableNodePointHover(bool enable);
+    void EnableDetailHover(bool enable);
 protected:
     virtual void keyPressEvent(QKeyEvent *event) Q_DECL_OVERRIDE;
     virtual void showEvent(QShowEvent *event) Q_DECL_OVERRIDE;
@@ -377,18 +377,18 @@ private:
 
     bool               IgnoreLocking(int error, const QString &path);
 
-    void ToolSelectPoint() const;
-    void ToolSelectPointByPress() const;
-    void ToolSelectPointByRelease() const;
-    void ToolSelectSpline() const;
-    void ToolSelectSplinePath() const;
-    void ToolSelectArc() const;
-    void ToolSelectPointArc() const;
-    void ToolSelectCurve() const;
-    void ToolSelectAllDrawObjects() const;
-    void ToolSelectOperationObjects() const;
-    void ToolSelectGroupObjects() const;
-    void ToolSelectDetail() const;
+    void ToolSelectPoint();
+    void ToolSelectPointByPress();
+    void ToolSelectPointByRelease();
+    void ToolSelectSpline();
+    void ToolSelectSplinePath();
+    void ToolSelectArc();
+    void ToolSelectPointArc();
+    void ToolSelectCurve();
+    void ToolSelectAllDrawObjects();
+    void ToolSelectOperationObjects();
+    void ToolSelectGroupObjects();
+    void ToolSelectDetail();
 };
 
 #endif // MAINWINDOW_H

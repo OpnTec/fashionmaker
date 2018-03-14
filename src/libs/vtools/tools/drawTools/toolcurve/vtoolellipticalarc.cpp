@@ -440,8 +440,8 @@ QString VToolEllipticalArc::MakeToolTip() const
                                     "</table>")
             .arg(tr("Length"))                          // 1
             .arg(qApp->fromPixel(elArc->GetLength()))   // 2
-            .arg(UnitsToStr(qApp->patternUnit(), true)) // 3
-            .arg(tr("Radius") + QLatin1String("1"))     // 4
+            .arg(UnitsToStr(qApp->patternUnit(), true), // 3
+                 tr("Radius") + QLatin1String("1"))     // 4
             .arg(qApp->fromPixel(elArc->GetRadius1()))  // 5
             .arg(tr("Radius") + QLatin1String("2"))     // 6
             .arg(qApp->fromPixel(elArc->GetRadius2()))  // 7
@@ -449,9 +449,9 @@ QString VToolEllipticalArc::MakeToolTip() const
             .arg(elArc->GetStartAngle())                // 9
             .arg(tr("End angle"))                       // 10
             .arg(elArc->GetEndAngle())                  // 11
-            .arg(tr("Label"))                           // 12
-            .arg(elArc->name())                         // 13
-            .arg(tr("Rotation"))                        // 14
+            .arg(tr("Label"),                           // 12
+                 elArc->name(),                         // 13
+                 tr("Rotation"))                        // 14
             .arg(elArc->GetRotationAngle());            // 15
     return toolTip;
 }

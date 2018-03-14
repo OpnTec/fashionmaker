@@ -166,7 +166,7 @@ void TST_VMeasurements::ValidPMCodesMultisizeFile()
             QString error;
             const bool result = m->SaveDocument(fileName, error);
 
-            const QString message = QString("Error: %1 for code=%2").arg(error).arg(listSystems.at(i));
+            const QString message = QString("Error: %1 for code=%2").arg(error, listSystems.at(i));
             QVERIFY2(result, qUtf8Printable(message));
         }
         else
@@ -180,7 +180,7 @@ void TST_VMeasurements::ValidPMCodesMultisizeFile()
         }
         catch (VException &e)
         {
-            const QString message = QString("Error: %1 for code=%2").arg(e.ErrorMessage()).arg(listSystems.at(i));
+            const QString message = QString("Error: %1 for code=%2").arg(e.ErrorMessage(), listSystems.at(i));
             QFAIL(qUtf8Printable(message));
         }
     }
@@ -217,7 +217,7 @@ void TST_VMeasurements::ValidPMCodesIndividualFile()
             QString error;
             const bool result = m->SaveDocument(fileName, error);
 
-            const QString message = QString("Error: %1 for code=%2").arg(error).arg(listSystems.at(i));
+            const QString message = QString("Error: %1 for code=%2").arg(error, listSystems.at(i));
             QVERIFY2(result, qUtf8Printable(message));
         }
         else
@@ -231,7 +231,7 @@ void TST_VMeasurements::ValidPMCodesIndividualFile()
         }
         catch (VException &e)
         {
-            const QString message = QString("Error: %1 for code=%2").arg(e.ErrorMessage()).arg(listSystems.at(i));
+            const QString message = QString("Error: %1 for code=%2").arg(e.ErrorMessage(), listSystems.at(i));
             QFAIL(qUtf8Printable(message));
         }
     }

@@ -134,12 +134,6 @@ Q_NORETURN void VException::raise() const
     throw *this;
 }
 
-//---------------------------------------------------------------------------------------------------------------------
-const char* VException::what() const V_NOEXCEPT_EXPR (true)
-{
-    return error.toUtf8().constData();
-}
-
 //-----------------------------------------VExceptionToolWasDeleted----------------------------------------------------
 VExceptionToolWasDeleted::VExceptionToolWasDeleted(const QString &error)
     :VException(error)

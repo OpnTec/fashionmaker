@@ -339,13 +339,11 @@ QString VToolShoulderPoint::MakeToolTip() const
                                     "</table>")
             .arg(tr("Length"))
             .arg(qApp->fromPixel(firstToCur.length()))
-            .arg(UnitsToStr(qApp->patternUnit(), true))
-            .arg(tr("Angle"))
+            .arg(UnitsToStr(qApp->patternUnit(), true), tr("Angle"))
             .arg(firstToCur.angle())
             .arg(QString("%1->%2").arg(second->name(), current->name()))
             .arg(qApp->fromPixel(secondToCur.length()))
-            .arg(tr("Label"))
-            .arg(current->name());
+            .arg(tr("Label"), current->name());
     return toolTip;
 }
 

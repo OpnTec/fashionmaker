@@ -39,6 +39,7 @@
 #include <QStaticStringData>
 #include <QStringData>
 #include <QStringDataPtr>
+#include <QGlobalStatic>
 
 #include "../exception/vexception.h"
 #include "../vmisc/def.h"
@@ -59,7 +60,10 @@ const QString VVSTConverter::CurrentSchema        = QStringLiteral("://schema/st
 //VVSTConverter::MeasurementMinVer; // <== DON'T FORGET TO UPDATE TOO!!!!
 //VVSTConverter::MeasurementMaxVer; // <== DON'T FORGET TO UPDATE TOO!!!!
 
-static const QString strTagRead_Only = QStringLiteral("read-only");
+namespace
+{
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, strTagRead_Only, (QLatin1String("read-only")))
+}
 
 //---------------------------------------------------------------------------------------------------------------------
 VVSTConverter::VVSTConverter(const QString &fileName)
@@ -143,7 +147,7 @@ bool VVSTConverter::IsReadOnly() const
     // For now position is the same for all supported format versions.
     // But don't forget to keep all versions of attribute until we support that format versions
 
-    return UniqueTagText(strTagRead_Only, falseStr) == trueStr;
+    return UniqueTagText(*strTagRead_Only, falseStr) == trueStr;
 }
 
 //---------------------------------------------------------------------------------------------------------------------

@@ -262,7 +262,7 @@ void VToolBasePoint::SetBasePointPos(const QPointF &pos)
 void VToolBasePoint::DeleteToolWithConfirm(bool ask)
 {
     qCDebug(vTool, "Deleting base point.");
-    qApp->getSceneView()->itemClicked(nullptr);
+    emit qApp->getSceneView()->itemClicked(nullptr);
     if (ask)
     {
         qCDebug(vTool, "Asking.");
@@ -370,8 +370,7 @@ QString VToolBasePoint::MakeToolTip() const
     const QString toolTip = QString("<table>"
                                     "<tr> <td><b>%1:</b> %2</td> </tr>"
                                     "</table>")
-            .arg(tr("Label"))
-            .arg(point->name());
+            .arg(tr("Label"), point->name());
     return toolTip;
 }
 

@@ -689,11 +689,8 @@ QString VAbstractOperation::ComplexCurveToolTip(quint32 itemId) const
                                     "<tr> <td><b>%3:</b> %4 %5</td> </tr>"
                                     "%6"
                                     "</table>")
-            .arg(tr("Label"))
-            .arg(curve->name())
-            .arg(tr("Length"))
+            .arg(tr("Label"), curve->name(), tr("Length"))
             .arg(qApp->fromPixel(curve->GetLength()))
-            .arg(UnitsToStr(qApp->patternUnit(), true))
-            .arg(MakeToolTip());
+            .arg(UnitsToStr(qApp->patternUnit(), true), MakeToolTip());
     return toolTip;
 }

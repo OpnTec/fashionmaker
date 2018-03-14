@@ -32,11 +32,15 @@
 #include <QStringData>
 #include <QStringDataPtr>
 #include <QVariant>
+#include <QGlobalStatic>
 
-const QString settingDataBaseGeometry = QStringLiteral("database/geometry");
+namespace
+{
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingDataBaseGeometry, (QLatin1String("database/geometry")))
 
-const QString settingDefHeight = QStringLiteral("gradation/defHeight");
-const QString settingDefSize   = QStringLiteral("gradation/defSize");
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingDefHeight, (QLatin1String("gradation/defHeight")))
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingDefSize, (QLatin1String("gradation/defSize")))
+}
 
 //---------------------------------------------------------------------------------------------------------------------
 VTapeSettings::VTapeSettings(Format format, Scope scope, const QString &organization, const QString &application,
@@ -48,35 +52,35 @@ VTapeSettings::VTapeSettings(Format format, Scope scope, const QString &organiza
 //---------------------------------------------------------------------------------------------------------------------
 QByteArray VTapeSettings::GetDataBaseGeometry() const
 {
-    return value(settingDataBaseGeometry).toByteArray();
+    return value(*settingDataBaseGeometry).toByteArray();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void VTapeSettings::SetDataBaseGeometry(const QByteArray &value)
 {
-    setValue(settingDataBaseGeometry, value);
+    setValue(*settingDataBaseGeometry, value);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void VTapeSettings::SetDefHeight(int value)
 {
-    setValue(settingDefHeight, value);
+    setValue(*settingDefHeight, value);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 int VTapeSettings::GetDefHeight() const
 {
-    return value(settingDefHeight, 176).toInt();
+    return value(*settingDefHeight, 176).toInt();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void VTapeSettings::SetDefSize(int value)
 {
-    setValue(settingDefSize, value);
+    setValue(*settingDefSize, value);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 int VTapeSettings::GetDefSize() const
 {
-    return value(settingDefSize, 50).toInt();
+    return value(*settingDefSize, 50).toInt();
 }

@@ -182,7 +182,7 @@ QString DialogMDataBase::ImgTag(const QString &number)
 {
     QString imgUrl("<img src=\"wrong.png\" align=\"center\"/>"); // In case of error
     const QString filePath = QString("://diagrams/%1.svg").arg(MapDiagrams(qApp->TrVars(), number));
-    if (QFileInfo(filePath).exists())
+    if (QFileInfo::exists(filePath))
     {
         // Load your SVG
         QSvgRenderer renderer;
@@ -552,10 +552,7 @@ QString DialogMDataBase::ItemFullDescription(QTreeWidgetItem *item, bool showIma
                                  "normal\"> %1 <br clear=\"left\"><b>%2</b>. <i>%3</i></p>"
                                  "<p align=\"left\" style=\"font-variant: normal; font-style: normal; font-weight: "
                                  "normal\">%4</p>")
-            .arg(imgTag)
-            .arg(number)
-            .arg(qApp->TrVars()->GuiText(name))
-            .arg(qApp->TrVars()->Description(name));
+            .arg(imgTag, number, qApp->TrVars()->GuiText(name), qApp->TrVars()->Description(name));
 
     return text;
 }

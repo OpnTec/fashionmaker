@@ -323,7 +323,7 @@ QString NameRegExp()
         // \p{Zs} - \p{Space_Separator}
         regex = QString("^([^\\p{Nd}\\p{Zs}*/&|!<>^\\()%1%2%3%4=?:;'\"]){1,1}"
                         "([^\\p{Zs}*/&|!<>^\\()%1%2%3%4=?:;\"]){0,}$")
-                .arg(negativeSigns).arg(positiveSigns).arg(decimalPoints).arg(groupSeparators);
+                .arg(negativeSigns, positiveSigns, decimalPoints, groupSeparators);
     }
 
     return regex;

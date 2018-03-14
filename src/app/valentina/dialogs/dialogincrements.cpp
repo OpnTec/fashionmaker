@@ -285,7 +285,7 @@ void DialogIncrements::ShowHeaderUnits(QTableWidget *table, int column, const QS
     SCASSERT(table != nullptr)
 
     const QString header = table->horizontalHeaderItem(column)->text();
-    const QString unitHeader = QString("%1 (%2)").arg(header).arg(unit);
+    const QString unitHeader = QString("%1 (%2)").arg(header, unit);
     table->horizontalHeaderItem(column)->setText(unitHeader);
 }
 

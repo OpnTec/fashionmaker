@@ -53,6 +53,7 @@
 #include <QtDebug>
 #include <QPixmapCache>
 #include <QGraphicsItem>
+#include <QGlobalStatic>
 
 #include "vabstractapplication.h"
 
@@ -621,8 +622,9 @@ void InitHighDpiScaling(int argc, char *argv[])
 const QString strOne   = QStringLiteral("one");
 const QString strTwo   = QStringLiteral("two");
 const QString strThree = QStringLiteral("three");
-const QString strTMark = QStringLiteral("tMark");
-const QString strVMark = QStringLiteral("vMark");
+
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, strTMark, (QLatin1String("tMark")))
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, strVMark, (QLatin1String("vMark")))
 
 //---------------------------------------------------------------------------------------------------------------------
 QString PassmarkLineTypeToString(PassmarkLineType type)
@@ -636,9 +638,9 @@ QString PassmarkLineTypeToString(PassmarkLineType type)
         case PassmarkLineType::ThreeLines:
             return strThree;
         case PassmarkLineType::TMark:
-            return strTMark;
+            return *strTMark;
         case PassmarkLineType::VMark:
-            return strVMark;
+            return *strVMark;
         default:
             break;
     }
@@ -649,7 +651,7 @@ QString PassmarkLineTypeToString(PassmarkLineType type)
 //---------------------------------------------------------------------------------------------------------------------
 PassmarkLineType StringToPassmarkLineType(const QString &value)
 {
-    const QStringList values = QStringList() << strOne << strTwo << strThree << strTMark << strVMark;
+    const QStringList values = QStringList() << strOne << strTwo << strThree << *strTMark << *strVMark;
 
     switch(values.indexOf(value))
     {
@@ -830,7 +832,7 @@ void InitLanguages(QComboBox *combobox)
 
         QLocale loc = QLocale(locale);
         QString lang = loc.nativeLanguageName();
-        QIcon ico(QString("%1/%2.png").arg("://flags").arg(QLocale::countryToString(loc.country())));
+        QIcon ico(QString("%1/%2.png").arg("://flags", QLocale::countryToString(loc.country())));
 
         combobox->addItem(ico, lang, locale);
     }
@@ -838,7 +840,7 @@ void InitLanguages(QComboBox *combobox)
     if (combobox->count() == 0 || not englishUS)
     {
         // English language is internal and doens't have own *.qm file.
-        QIcon ico(QString("%1/%2.png").arg("://flags").arg(QLocale::countryToString(QLocale::UnitedStates)));
+        QIcon ico(QString("%1/%2.png").arg("://flags", QLocale::countryToString(QLocale::UnitedStates)));
         QString lang = QLocale(en_US).nativeLanguageName();
         combobox->addItem(ico, lang, en_US);
     }

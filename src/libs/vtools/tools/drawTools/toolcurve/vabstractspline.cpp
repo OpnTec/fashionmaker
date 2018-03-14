@@ -202,9 +202,7 @@ QString VAbstractSpline::MakeToolTip() const
                                     "</table>")
             .arg(tr("Length"))
             .arg(qApp->fromPixel(curve->GetLength()))
-            .arg(UnitsToStr(qApp->patternUnit(), true))
-            .arg(tr("Label"))
-            .arg(curve->name());
+            .arg(UnitsToStr(qApp->patternUnit(), true), tr("Label"), curve->name());
     return toolTip;
 }
 

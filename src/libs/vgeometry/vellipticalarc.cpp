@@ -277,7 +277,11 @@ QVector<QPointF> VEllipticalArc::GetPoints() const
     const QList<QPolygonF> sub = path.toSubpathPolygons();
     if (not sub.isEmpty())
     {
-        polygon = path.toSubpathPolygons().first();
+#if QT_VERSION >= QT_VERSION_CHECK(5, 6, 0)
+        polygon = path.toSubpathPolygons().constFirst();
+#else
+        polygon = path.toSubpathPolygons().first(); // clazy:exclude=detaching-temporary
+#endif
         if (not polygon.isEmpty())
         {
             polygon.removeFirst(); // remove point (0;0)

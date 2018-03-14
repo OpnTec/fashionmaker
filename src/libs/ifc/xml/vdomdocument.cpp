@@ -633,7 +633,7 @@ void VDomDocument::ValidateXML(const QString &schema, const QString &fileName)
     // cppcheck-suppress ConfigurationNotChecked
     if (pattern.open(QIODevice::ReadOnly) == false)
     {
-        const QString errorMsg(tr("Can't open file %1:\n%2.").arg(fileName).arg(pattern.errorString()));
+        const QString errorMsg(tr("Can't open file %1:\n%2.").arg(fileName, pattern.errorString()));
         throw VException(errorMsg);
     }
 
@@ -642,7 +642,7 @@ void VDomDocument::ValidateXML(const QString &schema, const QString &fileName)
     if (fileSchema.open(QIODevice::ReadOnly) == false)
     {
         pattern.close();
-        const QString errorMsg(tr("Can't open schema file %1:\n%2.").arg(schema).arg(fileSchema.errorString()));
+        const QString errorMsg(tr("Can't open schema file %1:\n%2.").arg(schema, fileSchema.errorString()));
         throw VException(errorMsg);
     }
 
@@ -693,7 +693,7 @@ void VDomDocument::setXMLContent(const QString &fileName)
     // cppcheck-suppress ConfigurationNotChecked
     if (file.open(QIODevice::ReadOnly) == false)
     {
-        const QString errorMsg(tr("Can't open file %1:\n%2.").arg(fileName).arg(file.errorString()));
+        const QString errorMsg(tr("Can't open file %1:\n%2.").arg(fileName, file.errorString()));
         throw VException(errorMsg);
     }
 

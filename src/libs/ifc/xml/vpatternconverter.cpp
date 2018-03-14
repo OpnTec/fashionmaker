@@ -40,6 +40,7 @@
 #include <QStringData>
 #include <QStringDataPtr>
 #include <algorithm>
+#include <QGlobalStatic>
 
 #include "../exception/vexception.h"
 #include "../exception/vexceptionemptyparameter.h"
@@ -64,104 +65,107 @@ const QString VPatternConverter::CurrentSchema    = QStringLiteral("://schema/pa
 //VPatternConverter::PatternMinVer; // <== DON'T FORGET TO UPDATE TOO!!!!
 //VPatternConverter::PatternMaxVer; // <== DON'T FORGET TO UPDATE TOO!!!!
 
+namespace
+{
 // The list of all string we use for conversion
 // Better to use global variables because repeating QStringLiteral blows up code size
-static const QString strUnit                      = QStringLiteral("unit");
-static const QString strVersion                   = QStringLiteral("version");
-static const QString strName                      = QStringLiteral("name");
-static const QString strBase                      = QStringLiteral("base");
-static const QString strFormula                   = QStringLiteral("formula");
-static const QString strId                        = QStringLiteral("id");
-static const QString strKGrowth                   = QStringLiteral("kgrowth");
-static const QString strKSize                     = QStringLiteral("ksize");
-static const QString strPoint                     = QStringLiteral("point");
-static const QString strLength                    = QStringLiteral("length");
-static const QString strAngle                     = QStringLiteral("angle");
-static const QString strC1Radius                  = QStringLiteral("c1Radius");
-static const QString strC2Radius                  = QStringLiteral("c2Radius");
-static const QString strCRadius                   = QStringLiteral("cRadius");
-static const QString strArc                       = QStringLiteral("arc");
-static const QString strAngle1                    = QStringLiteral("angle1");
-static const QString strAngle2                    = QStringLiteral("angle2");
-static const QString strRadius                    = QStringLiteral("radius");
-static const QString strPathPoint                 = QStringLiteral("pathPoint");
-static const QString strKAsm1                     = QStringLiteral("kAsm1");
-static const QString strKAsm2                     = QStringLiteral("kAsm2");
-static const QString strPath                      = QStringLiteral("path");
-static const QString strType                      = QStringLiteral("type");
-static const QString strCutArc                    = QStringLiteral("cutArc");
-static const QString strSpline                    = QStringLiteral("spline");
-static const QString strSplinePath                = QStringLiteral("splinePath");
-static const QString strCutSpline                 = QStringLiteral("cutSpline");
-static const QString strCutSplinePath             = QStringLiteral("cutSplinePath");
-static const QString strColor                     = QStringLiteral("color");
-static const QString strMeasurements              = QStringLiteral("measurements");
-static const QString strIncrement                 = QStringLiteral("increment");
-static const QString strIncrements                = QStringLiteral("increments");
-static const QString strPreviewCalculations       = QStringLiteral("previewCalculations");
-static const QString strModeling                  = QStringLiteral("modeling");
-static const QString strTools                     = QStringLiteral("tools");
-static const QString strIdTool                    = QStringLiteral("idTool");
-static const QString strIdObject                  = QStringLiteral("idObject");
-static const QString strChildren                  = QStringLiteral("children");
-static const QString strChild                     = QStringLiteral("child");
-static const QString strPointOfIntersectionCurves = QStringLiteral("pointOfIntersectionCurves");
-static const QString strCurveIntersectAxis        = QStringLiteral("curveIntersectAxis");
-static const QString strCurve                     = QStringLiteral("curve");
-static const QString strCurve1                    = QStringLiteral("curve1");
-static const QString strCurve2                    = QStringLiteral("curve2");
-static const QString strModelingPath              = QStringLiteral("modelingPath");
-static const QString strModelingSpline            = QStringLiteral("modelingSpline");
-static const QString strPointFromArcAndTangent    = QStringLiteral("pointFromArcAndTangent");
-static const QString strPointOfIntersectionArcs   = QStringLiteral("pointOfIntersectionArcs");
-static const QString strFirstArc                  = QStringLiteral("firstArc");
-static const QString strSecondArc                 = QStringLiteral("secondArc");
-static const QString strDetail                    = QStringLiteral("detail");
-static const QString strSupplement                = QStringLiteral("supplement");
-static const QString strClosed                    = QStringLiteral("closed");
-static const QString strWidth                     = QStringLiteral("width");
-static const QString strHeight                    = QStringLiteral("height");
-static const QString strNode                      = QStringLiteral("node");
-static const QString strNodes                     = QStringLiteral("nodes");
-static const QString strData                      = QStringLiteral("data");
-static const QString strPatternInfo               = QStringLiteral("patternInfo");
-static const QString strGrainline                 = QStringLiteral("grainline");
-static const QString strReverse                   = QStringLiteral("reverse");
-static const QString strMx                        = QStringLiteral("mx");
-static const QString strMy                        = QStringLiteral("my");
-static const QString strForbidFlipping            = QStringLiteral("forbidFlipping");
-static const QString strInLayout                  = QStringLiteral("inLayout");
-static const QString strSeamAllowance             = QStringLiteral("seamAllowance");
-static const QString strNodeType                  = QStringLiteral("nodeType");
-static const QString strDet                       = QStringLiteral("det");
-static const QString strTypeObject                = QStringLiteral("typeObject");
-static const QString strReadOnly                  = QStringLiteral("readOnly");
-static const QString strPatternLabel              = QStringLiteral("patternLabel");
-static const QString strImage                     = QStringLiteral("image");
-static const QString strAuthor                    = QStringLiteral("author");
-static const QString strDescription               = QStringLiteral("description");
-static const QString strNotes                     = QStringLiteral("notes");
-static const QString strGradation                 = QStringLiteral("gradation");
-static const QString strPatternName               = QStringLiteral("patternName");
-static const QString strPatternNum                = QStringLiteral("patternNumber");
-static const QString strCompanyName               = QStringLiteral("company");
-static const QString strCustomerName              = QStringLiteral("customer");
-static const QString strLine                      = QStringLiteral("line");
-static const QString strText                      = QStringLiteral("text");
-static const QString strBold                      = QStringLiteral("bold");
-static const QString strItalic                    = QStringLiteral("italic");
-static const QString strAlignment                 = QStringLiteral("alignment");
-static const QString strFSIncrement               = QStringLiteral("sfIncrement");
-static const QString strShowDate                  = QStringLiteral("showDate");
-static const QString strShowMeasurements          = QStringLiteral("showMeasurements");
-static const QString strSize                      = QStringLiteral("size");
-static const QString strMCP                       = QStringLiteral("mcp");
-static const QString strLetter                    = QStringLiteral("letter");
-static const QString strMaterial                  = QStringLiteral("material");
-static const QString strUserDefined               = QStringLiteral("userDef");
-static const QString strPlacement                 = QStringLiteral("placement");
-static const QString strCutNumber                 = QStringLiteral("cutNumber");
-static const QString strQuantity                  = QStringLiteral("quantity");
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, strUnit, (QLatin1String("unit")))
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, strVersion, (QLatin1String("version")))
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, strName, (QLatin1String("name")))
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, strBase, (QLatin1String("base")))
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, strFormula, (QLatin1String("formula")))
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, strId, (QLatin1String("id")))
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, strKGrowth , (QLatin1String("kgrowth")))
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, strKSize, (QLatin1String("ksize")))
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, strPoint, (QLatin1String("point")))
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, strLength, (QLatin1String("length")))
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, strAngle, (QLatin1String("angle")))
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, strC1Radius, (QLatin1String("c1Radius")))
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, strC2Radius, (QLatin1String("c2Radius")))
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, strCRadius, (QLatin1String("cRadius")))
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, strArc, (QLatin1String("arc")))
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, strAngle1, (QLatin1String("angle1")))
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, strAngle2, (QLatin1String("angle2")))
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, strRadius, (QLatin1String("radius")))
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, strPathPoint, (QLatin1String("pathPoint")))
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, strKAsm1, (QLatin1String("kAsm1")))
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, strKAsm2, (QLatin1String("kAsm2")))
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, strPath, (QLatin1String("path")))
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, strType, (QLatin1String("type")))
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, strCutArc, (QLatin1String("cutArc")))
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, strSpline, (QLatin1String("spline")))
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, strSplinePath, (QLatin1String("splinePath")))
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, strCutSpline, (QLatin1String("cutSpline")))
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, strCutSplinePath, (QLatin1String("cutSplinePath")))
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, strColor, (QLatin1String("color")))
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, strMeasurements, (QLatin1String("measurements")))
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, strIncrement, (QLatin1String("increment")))
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, strIncrements, (QLatin1String("increments")))
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, strPreviewCalculations, (QLatin1String("previewCalculations")))
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, strModeling, (QLatin1String("modeling")))
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, strTools, (QLatin1String("tools")))
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, strIdTool, (QLatin1String("idTool")))
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, strIdObject, (QLatin1String("idObject")))
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, strChildren, (QLatin1String("children")))
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, strChild, (QLatin1String("child")))
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, strPointOfIntersectionCurves, (QLatin1String("pointOfIntersectionCurves")))
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, strCurveIntersectAxis, (QLatin1String("curveIntersectAxis")))
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, strCurve, (QLatin1String("curve")))
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, strCurve1, (QLatin1String("curve1")))
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, strCurve2, (QLatin1String("curve2")))
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, strModelingPath, (QLatin1String("modelingPath")))
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, strModelingSpline, (QLatin1String("modelingSpline")))
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, strPointFromArcAndTangent, (QLatin1String("pointFromArcAndTangent")))
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, strPointOfIntersectionArcs, (QLatin1String("pointOfIntersectionArcs")))
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, strFirstArc, (QLatin1String("firstArc")))
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, strSecondArc, (QLatin1String("secondArc")))
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, strDetail, (QLatin1String("detail")))
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, strSupplement, (QLatin1String("supplement")))
+//Q_GLOBAL_STATIC_WITH_ARGS(const QString, strClosed, (QLatin1String("closed")))
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, strWidth, (QLatin1String("width")))
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, strHeight, (QLatin1String("height")))
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, strNode, (QLatin1String("node")))
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, strNodes, (QLatin1String("nodes")))
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, strData, (QLatin1String("data")))
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, strPatternInfo, (QLatin1String("patternInfo")))
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, strGrainline, (QLatin1String("grainline")))
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, strReverse, (QLatin1String("reverse")))
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, strMx, (QLatin1String("mx")))
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, strMy, (QLatin1String("my")))
+//Q_GLOBAL_STATIC_WITH_ARGS(const QString, strForbidFlipping, (QLatin1String("forbidFlipping")))
+//Q_GLOBAL_STATIC_WITH_ARGS(const QString, strInLayout, (QLatin1String("inLayout")))
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, strSeamAllowance, (QLatin1String("seamAllowance")))
+//Q_GLOBAL_STATIC_WITH_ARGS(const QString, strNodeType, (QLatin1String("nodeType")))
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, strDet, (QLatin1String("det")))
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, strTypeObject, (QLatin1String("typeObject")))
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, strReadOnly, (QLatin1String("readOnly")))
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, strPatternLabel, (QLatin1String("patternLabel")))
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, strImage, (QLatin1String("image")))
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, strAuthor, (QLatin1String("author")))
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, strDescription, (QLatin1String("description")))
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, strNotes, (QLatin1String("notes")))
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, strGradation, (QLatin1String("gradation")))
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, strPatternName, (QLatin1String("patternName")))
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, strPatternNum, (QLatin1String("patternNumber")))
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, strCompanyName, (QLatin1String("company")))
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, strCustomerName, (QLatin1String("customer")))
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, strLine, (QLatin1String("line")))
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, strText, (QLatin1String("text")))
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, strBold, (QLatin1String("bold")))
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, strItalic, (QLatin1String("italic")))
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, strAlignment, (QLatin1String("alignment")))
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, strFSIncrement, (QLatin1String("sfIncrement")))
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, strShowDate, (QLatin1String("showDate")))
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, strShowMeasurements, (QLatin1String("showMeasurements")))
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, strSize, (QLatin1String("size")))
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, strMCP, (QLatin1String("mcp")))
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, strLetter, (QLatin1String("letter")))
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, strMaterial , (QLatin1String("material")))
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, strUserDefined, (QLatin1String("userDef")))
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, strPlacement, (QLatin1String("placement")))
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, strCutNumber, (QLatin1String("cutNumber")))
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, strQuantity, (QLatin1String("quantity")))
+}
 
 //---------------------------------------------------------------------------------------------------------------------
 VPatternConverter::VPatternConverter(const QString &fileName)
@@ -465,7 +469,7 @@ bool VPatternConverter::IsReadOnly() const
         return false;
     }
 
-    return GetParametrBool(pattern, strReadOnly, falseStr);
+    return GetParametrBool(pattern, *strReadOnly, falseStr);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -775,8 +779,8 @@ void VPatternConverter::ToV0_4_4()
                       "Time to refactor the code.");
 
     SetVersion(QStringLiteral("0.4.4"));
-    LabelTagToV0_4_4(strData);
-    LabelTagToV0_4_4(strPatternInfo);
+    LabelTagToV0_4_4(*strData);
+    LabelTagToV0_4_4(*strPatternInfo);
     Save();
 }
 
@@ -1002,12 +1006,12 @@ void VPatternConverter::TagUnitToV0_2_0()
     Q_STATIC_ASSERT_X(VPatternConverter::PatternMinVer < CONVERTER_VERSION_CHECK(0, 2, 0),
                       "Time to refactor the code.");
 
-    QDomElement unit = createElement(strUnit);
+    QDomElement unit = createElement(*strUnit);
     QDomText newNodeText = createTextNode(MUnitV0_1_4());
     unit.appendChild(newNodeText);
 
     QDomElement patternElement = documentElement();
-    patternElement.insertAfter(unit, patternElement.firstChildElement(strVersion));
+    patternElement.insertAfter(unit, patternElement.firstChildElement(*strVersion));
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -1054,16 +1058,16 @@ QSet<QString> VPatternConverter::FixIncrementsToV0_2_0()
             QDomElement domElement = domNode.toElement();
             if (domElement.isNull() == false)
             {
-                if (domElement.tagName() == strIncrement)
+                if (domElement.tagName() == *strIncrement)
                 {
                     try
                     {
-                        const QString name = GetParametrString(domElement, strName);
+                        const QString name = GetParametrString(domElement, *strName);
                         names.insert(name);
-                        domElement.setAttribute(strName, QLatin1String("#")+name);
+                        domElement.setAttribute(*strName, QLatin1String("#")+name);
 
-                        const QString base = GetParametrString(domElement, strBase);
-                        domElement.setAttribute(strFormula, base);
+                        const QString base = GetParametrString(domElement, *strBase);
+                        domElement.setAttribute(*strFormula, base);
                     }
                     catch (VExceptionEmptyParameter &e)
                     {
@@ -1071,10 +1075,10 @@ QSet<QString> VPatternConverter::FixIncrementsToV0_2_0()
                         excep.AddMoreInformation(e.ErrorMessage());
                         throw excep;
                     }
-                    domElement.removeAttribute(strId);
-                    domElement.removeAttribute(strKGrowth);
-                    domElement.removeAttribute(strKSize);
-                    domElement.removeAttribute(strBase);
+                    domElement.removeAttribute(*strId);
+                    domElement.removeAttribute(*strKGrowth);
+                    domElement.removeAttribute(*strKSize);
+                    domElement.removeAttribute(*strBase);
                 }
             }
         }
@@ -1091,15 +1095,15 @@ void VPatternConverter::FixPointExpressionsToV0_2_0(const QSet<QString> &names)
                       "Time to refactor the code.");
 
     QString formula;
-    const QDomNodeList list = elementsByTagName(strPoint);
+    const QDomNodeList list = elementsByTagName(*strPoint);
     for (int i=0; i < list.size(); ++i)
     {
         QDomElement dom = list.at(i).toElement();
 
         try
         {
-            formula = GetParametrString(dom, strLength);
-            dom.setAttribute(strLength, FixIncrementInFormulaToV0_2_0(formula, names));
+            formula = GetParametrString(dom, *strLength);
+            dom.setAttribute(*strLength, FixIncrementInFormulaToV0_2_0(formula, names));
         }
         catch (VExceptionEmptyParameter &e)
         {
@@ -1108,8 +1112,8 @@ void VPatternConverter::FixPointExpressionsToV0_2_0(const QSet<QString> &names)
 
         try
         {
-            formula = GetParametrString(dom, strAngle);
-            dom.setAttribute(strAngle, FixIncrementInFormulaToV0_2_0(formula, names));
+            formula = GetParametrString(dom, *strAngle);
+            dom.setAttribute(*strAngle, FixIncrementInFormulaToV0_2_0(formula, names));
         }
         catch (VExceptionEmptyParameter &e)
         {
@@ -1117,18 +1121,8 @@ void VPatternConverter::FixPointExpressionsToV0_2_0(const QSet<QString> &names)
         }
         try
         {
-            formula = GetParametrString(dom, strC1Radius);
-            dom.setAttribute(strC1Radius, FixIncrementInFormulaToV0_2_0(formula, names));
-        }
-        catch (VExceptionEmptyParameter &e)
-        {
-            Q_UNUSED(e)
-        }
-
-        try
-        {
-            formula = GetParametrString(dom, strC2Radius);
-            dom.setAttribute(strC2Radius, FixIncrementInFormulaToV0_2_0(formula, names));
+            formula = GetParametrString(dom, *strC1Radius);
+            dom.setAttribute(*strC1Radius, FixIncrementInFormulaToV0_2_0(formula, names));
         }
         catch (VExceptionEmptyParameter &e)
         {
@@ -1137,8 +1131,18 @@ void VPatternConverter::FixPointExpressionsToV0_2_0(const QSet<QString> &names)
 
         try
         {
-            formula = GetParametrString(dom, strCRadius);
-            dom.setAttribute(strCRadius, FixIncrementInFormulaToV0_2_0(formula, names));
+            formula = GetParametrString(dom, *strC2Radius);
+            dom.setAttribute(*strC2Radius, FixIncrementInFormulaToV0_2_0(formula, names));
+        }
+        catch (VExceptionEmptyParameter &e)
+        {
+            Q_UNUSED(e)
+        }
+
+        try
+        {
+            formula = GetParametrString(dom, *strCRadius);
+            dom.setAttribute(*strCRadius, FixIncrementInFormulaToV0_2_0(formula, names));
         }
         catch (VExceptionEmptyParameter &e)
         {
@@ -1155,15 +1159,15 @@ void VPatternConverter::FixArcExpressionsToV0_2_0(const QSet<QString> &names)
                       "Time to refactor the code.");
 
     QString formula;
-    const QDomNodeList list = elementsByTagName(strArc);
+    const QDomNodeList list = elementsByTagName(*strArc);
     for (int i=0; i < list.size(); ++i)
     {
         QDomElement dom = list.at(i).toElement();
 
         try
         {
-            formula = GetParametrString(dom, strAngle1);
-            dom.setAttribute(strAngle1, FixIncrementInFormulaToV0_2_0(formula, names));
+            formula = GetParametrString(dom, *strAngle1);
+            dom.setAttribute(*strAngle1, FixIncrementInFormulaToV0_2_0(formula, names));
         }
         catch (VExceptionEmptyParameter &e)
         {
@@ -1172,8 +1176,8 @@ void VPatternConverter::FixArcExpressionsToV0_2_0(const QSet<QString> &names)
 
         try
         {
-            formula = GetParametrString(dom, strAngle2);
-            dom.setAttribute(strAngle2, FixIncrementInFormulaToV0_2_0(formula, names));
+            formula = GetParametrString(dom, *strAngle2);
+            dom.setAttribute(*strAngle2, FixIncrementInFormulaToV0_2_0(formula, names));
         }
         catch (VExceptionEmptyParameter &e)
         {
@@ -1182,8 +1186,8 @@ void VPatternConverter::FixArcExpressionsToV0_2_0(const QSet<QString> &names)
 
         try
         {
-            formula = GetParametrString(dom, strRadius);
-            dom.setAttribute(strRadius, FixIncrementInFormulaToV0_2_0(formula, names));
+            formula = GetParametrString(dom, *strRadius);
+            dom.setAttribute(*strRadius, FixIncrementInFormulaToV0_2_0(formula, names));
         }
         catch (VExceptionEmptyParameter &e)
         {
@@ -1192,8 +1196,8 @@ void VPatternConverter::FixArcExpressionsToV0_2_0(const QSet<QString> &names)
 
         try
         {
-            formula = GetParametrString(dom, strLength);
-            dom.setAttribute(strLength, FixIncrementInFormulaToV0_2_0(formula, names));
+            formula = GetParametrString(dom, *strLength);
+            dom.setAttribute(*strLength, FixIncrementInFormulaToV0_2_0(formula, names));
         }
         catch (VExceptionEmptyParameter &e)
         {
@@ -1210,15 +1214,15 @@ void VPatternConverter::FixPathPointExpressionsToV0_2_0(const QSet<QString> &nam
                       "Time to refactor the code.");
 
     QString formula;
-    const QDomNodeList list = elementsByTagName(strPathPoint);
+    const QDomNodeList list = elementsByTagName(*strPathPoint);
     for (int i=0; i < list.size(); ++i)
     {
         QDomElement dom = list.at(i).toElement();
 
         try
         {
-            formula = GetParametrString(dom, strKAsm1);
-            dom.setAttribute(strKAsm1, FixIncrementInFormulaToV0_2_0(formula, names));
+            formula = GetParametrString(dom, *strKAsm1);
+            dom.setAttribute(*strKAsm1, FixIncrementInFormulaToV0_2_0(formula, names));
         }
         catch (VExceptionEmptyParameter &e)
         {
@@ -1227,8 +1231,8 @@ void VPatternConverter::FixPathPointExpressionsToV0_2_0(const QSet<QString> &nam
 
         try
         {
-            formula = GetParametrString(dom, strKAsm2);
-            dom.setAttribute(strKAsm2, FixIncrementInFormulaToV0_2_0(formula, names));
+            formula = GetParametrString(dom, *strKAsm2);
+            dom.setAttribute(*strKAsm2, FixIncrementInFormulaToV0_2_0(formula, names));
         }
         catch (VExceptionEmptyParameter &e)
         {
@@ -1237,8 +1241,8 @@ void VPatternConverter::FixPathPointExpressionsToV0_2_0(const QSet<QString> &nam
 
         try
         {
-            formula = GetParametrString(dom, strAngle);
-            dom.setAttribute(strAngle, FixIncrementInFormulaToV0_2_0(formula, names));
+            formula = GetParametrString(dom, *strAngle);
+            dom.setAttribute(*strAngle, FixIncrementInFormulaToV0_2_0(formula, names));
         }
         catch (VExceptionEmptyParameter &e)
         {
@@ -1255,15 +1259,15 @@ void VPatternConverter::ConvertPointExpressionsToV0_2_0(const QMap<QString, QStr
                       "Time to refactor the code.");
 
     QString formula;
-    const QDomNodeList list = elementsByTagName(strPoint);
+    const QDomNodeList list = elementsByTagName(*strPoint);
     for (int i=0; i < list.size(); ++i)
     {
         QDomElement dom = list.at(i).toElement();
 
         try
         {
-            formula = GetParametrString(dom, strLength);
-            dom.setAttribute(strLength, FixMeasurementInFormulaToV0_2_0(formula, names));
+            formula = GetParametrString(dom, *strLength);
+            dom.setAttribute(*strLength, FixMeasurementInFormulaToV0_2_0(formula, names));
         }
         catch (VExceptionEmptyParameter &e)
         {
@@ -1272,8 +1276,8 @@ void VPatternConverter::ConvertPointExpressionsToV0_2_0(const QMap<QString, QStr
 
         try
         {
-            formula = GetParametrString(dom, strAngle);
-            dom.setAttribute(strAngle, FixMeasurementInFormulaToV0_2_0(formula, names));
+            formula = GetParametrString(dom, *strAngle);
+            dom.setAttribute(*strAngle, FixMeasurementInFormulaToV0_2_0(formula, names));
         }
         catch (VExceptionEmptyParameter &e)
         {
@@ -1281,18 +1285,8 @@ void VPatternConverter::ConvertPointExpressionsToV0_2_0(const QMap<QString, QStr
         }
         try
         {
-            formula = GetParametrString(dom, strC1Radius);
-            dom.setAttribute(strC1Radius, FixMeasurementInFormulaToV0_2_0(formula, names));
-        }
-        catch (VExceptionEmptyParameter &e)
-        {
-            Q_UNUSED(e)
-        }
-
-        try
-        {
-            formula = GetParametrString(dom, strC2Radius);
-            dom.setAttribute(strC2Radius, FixMeasurementInFormulaToV0_2_0(formula, names));
+            formula = GetParametrString(dom, *strC1Radius);
+            dom.setAttribute(*strC1Radius, FixMeasurementInFormulaToV0_2_0(formula, names));
         }
         catch (VExceptionEmptyParameter &e)
         {
@@ -1301,8 +1295,18 @@ void VPatternConverter::ConvertPointExpressionsToV0_2_0(const QMap<QString, QStr
 
         try
         {
-            formula = GetParametrString(dom, strCRadius);
-            dom.setAttribute(strCRadius, FixMeasurementInFormulaToV0_2_0(formula, names));
+            formula = GetParametrString(dom, *strC2Radius);
+            dom.setAttribute(*strC2Radius, FixMeasurementInFormulaToV0_2_0(formula, names));
+        }
+        catch (VExceptionEmptyParameter &e)
+        {
+            Q_UNUSED(e)
+        }
+
+        try
+        {
+            formula = GetParametrString(dom, *strCRadius);
+            dom.setAttribute(*strCRadius, FixMeasurementInFormulaToV0_2_0(formula, names));
         }
         catch (VExceptionEmptyParameter &e)
         {
@@ -1319,15 +1323,15 @@ void VPatternConverter::ConvertArcExpressionsToV0_2_0(const QMap<QString, QStrin
                       "Time to refactor the code.");
 
     QString formula;
-    const QDomNodeList list = elementsByTagName(strArc);
+    const QDomNodeList list = elementsByTagName(*strArc);
     for (int i=0; i < list.size(); ++i)
     {
         QDomElement dom = list.at(i).toElement();
 
         try
         {
-            formula = GetParametrString(dom, strAngle1);
-            dom.setAttribute(strAngle1, FixMeasurementInFormulaToV0_2_0(formula, names));
+            formula = GetParametrString(dom, *strAngle1);
+            dom.setAttribute(*strAngle1, FixMeasurementInFormulaToV0_2_0(formula, names));
         }
         catch (VExceptionEmptyParameter &e)
         {
@@ -1336,8 +1340,8 @@ void VPatternConverter::ConvertArcExpressionsToV0_2_0(const QMap<QString, QStrin
 
         try
         {
-            formula = GetParametrString(dom, strAngle2);
-            dom.setAttribute(strAngle2, FixMeasurementInFormulaToV0_2_0(formula, names));
+            formula = GetParametrString(dom, *strAngle2);
+            dom.setAttribute(*strAngle2, FixMeasurementInFormulaToV0_2_0(formula, names));
         }
         catch (VExceptionEmptyParameter &e)
         {
@@ -1346,8 +1350,8 @@ void VPatternConverter::ConvertArcExpressionsToV0_2_0(const QMap<QString, QStrin
 
         try
         {
-            formula = GetParametrString(dom, strRadius);
-            dom.setAttribute(strRadius, FixMeasurementInFormulaToV0_2_0(formula, names));
+            formula = GetParametrString(dom, *strRadius);
+            dom.setAttribute(*strRadius, FixMeasurementInFormulaToV0_2_0(formula, names));
         }
         catch (VExceptionEmptyParameter &e)
         {
@@ -1356,8 +1360,8 @@ void VPatternConverter::ConvertArcExpressionsToV0_2_0(const QMap<QString, QStrin
 
         try
         {
-            formula = GetParametrString(dom, strLength);
-            dom.setAttribute(strLength, FixMeasurementInFormulaToV0_2_0(formula, names));
+            formula = GetParametrString(dom, *strLength);
+            dom.setAttribute(*strLength, FixMeasurementInFormulaToV0_2_0(formula, names));
         }
         catch (VExceptionEmptyParameter &e)
         {
@@ -1374,15 +1378,15 @@ void VPatternConverter::ConvertPathPointExpressionsToV0_2_0(const QMap<QString, 
                       "Time to refactor the code.");
 
     QString formula;
-    const QDomNodeList list = elementsByTagName(strPathPoint);
+    const QDomNodeList list = elementsByTagName(*strPathPoint);
     for (int i=0; i < list.size(); ++i)
     {
         QDomElement dom = list.at(i).toElement();
 
         try
         {
-            formula = GetParametrString(dom, strKAsm1);
-            dom.setAttribute(strKAsm1, FixMeasurementInFormulaToV0_2_0(formula, names));
+            formula = GetParametrString(dom, *strKAsm1);
+            dom.setAttribute(*strKAsm1, FixMeasurementInFormulaToV0_2_0(formula, names));
         }
         catch (VExceptionEmptyParameter &e)
         {
@@ -1391,8 +1395,8 @@ void VPatternConverter::ConvertPathPointExpressionsToV0_2_0(const QMap<QString, 
 
         try
         {
-            formula = GetParametrString(dom, strKAsm2);
-            dom.setAttribute(strKAsm2, FixMeasurementInFormulaToV0_2_0(formula, names));
+            formula = GetParametrString(dom, *strKAsm2);
+            dom.setAttribute(*strKAsm2, FixMeasurementInFormulaToV0_2_0(formula, names));
         }
         catch (VExceptionEmptyParameter &e)
         {
@@ -1401,8 +1405,8 @@ void VPatternConverter::ConvertPathPointExpressionsToV0_2_0(const QMap<QString, 
 
         try
         {
-            formula = GetParametrString(dom, strAngle);
-            dom.setAttribute(strAngle, FixMeasurementInFormulaToV0_2_0(formula, names));
+            formula = GetParametrString(dom, *strAngle);
+            dom.setAttribute(*strAngle, FixMeasurementInFormulaToV0_2_0(formula, names));
         }
         catch (VExceptionEmptyParameter &e)
         {
@@ -1487,11 +1491,11 @@ void VPatternConverter::TagMeasurementsToV0_2_0()
                       "Time to refactor the code.");
 
     QDomElement ms = TagMeasurementsV0_1_4();
-    const QString path = GetParametrString(ms, strPath);
+    const QString path = GetParametrString(ms, *strPath);
 
-    ms.removeAttribute(strUnit);
-    ms.removeAttribute(strType);
-    ms.removeAttribute(strPath);
+    ms.removeAttribute(*strUnit);
+    ms.removeAttribute(*strType);
+    ms.removeAttribute(*strPath);
 
     QDomText newNodeText = createTextNode(QFileInfo(m_convertedFileName).absoluteDir().relativeFilePath(path));
     ms.appendChild(newNodeText);
@@ -1519,16 +1523,16 @@ void VPatternConverter::RemoveColorToolCutV0_3_1()
     Q_STATIC_ASSERT_X(VPatternConverter::PatternMinVer < CONVERTER_VERSION_CHECK(0, 3, 1),
                       "Time to refactor the code.");
 
-    const QDomNodeList list = elementsByTagName(strPoint);
+    const QDomNodeList list = elementsByTagName(*strPoint);
     for (int i=0; i < list.size(); ++i)
     {
         QDomElement element = list.at(i).toElement();
         if (not element.isNull())
         {
-            const QString type = element.attribute(strType);
-            if (type == strCutArc || type == strCutSpline || type == strCutSplinePath)
+            const QString type = element.attribute(*strType);
+            if (type == *strCutArc || type == *strCutSpline || type == *strCutSplinePath)
             {
-                element.removeAttribute(strColor);
+                element.removeAttribute(*strColor);
             }
         }
     }
@@ -1544,7 +1548,7 @@ QString VPatternConverter::MUnitV0_1_4() const
     const QDomElement element = TagMeasurementsV0_1_4();
     try
     {
-        return GetParametrString(element, strUnit);
+        return GetParametrString(element, *strUnit);
     }
     catch (VExceptionEmptyParameter &e)
     {
@@ -1561,7 +1565,7 @@ QDomElement VPatternConverter::TagMeasurementsV0_1_4() const
     Q_STATIC_ASSERT_X(VPatternConverter::PatternMinVer < CONVERTER_VERSION_CHECK(0, 1, 4),
                       "Time to refactor the code.");
 
-    const QDomNodeList list = elementsByTagName(strMeasurements);
+    const QDomNodeList list = elementsByTagName(*strMeasurements);
     const QDomElement element = list.at(0).toElement();
     if (not element.isElement())
     {
@@ -1578,7 +1582,7 @@ QDomElement VPatternConverter::TagIncrementsV0_1_4() const
     Q_STATIC_ASSERT_X(VPatternConverter::PatternMinVer < CONVERTER_VERSION_CHECK(0, 1, 4),
                       "Time to refactor the code.");
 
-    const QDomNodeList list = elementsByTagName(strIncrements);
+    const QDomNodeList list = elementsByTagName(*strIncrements);
     const QDomElement element = list.at(0).toElement();
     if (not element.isElement())
     {
@@ -1596,7 +1600,7 @@ void VPatternConverter::FixToolUnionToV0_2_4()
                       "Time to refactor the code.");
 
     QDomElement root = documentElement();
-    const QDomNodeList modelings = root.elementsByTagName(strModeling);
+    const QDomNodeList modelings = root.elementsByTagName(*strModeling);
     for (int i=0; i<modelings.size(); ++i)
     {
         ParseModelingToV0_2_4(modelings.at(i).toElement());
@@ -1613,16 +1617,16 @@ void VPatternConverter::ParseModelingToV0_2_4(const QDomElement &modeling)
     QDomElement node = modeling.firstChild().toElement();
     while (not node.isNull())
     {
-        if (node.tagName() == strTools)
+        if (node.tagName() == *strTools)
         {
-            const quint32 toolId = node.attribute(strId).toUInt();
+            const quint32 toolId = node.attribute(*strId).toUInt();
             QVector<quint32> children;
             QDomElement childNode = node.nextSibling().toElement();
             while (not childNode.isNull())
             {
-                if (childNode.hasAttribute(strIdTool) && childNode.attribute(strIdTool).toUInt() == toolId)
+                if (childNode.hasAttribute(*strIdTool) && childNode.attribute(*strIdTool).toUInt() == toolId)
                 {
-                    children.append(childNode.attribute(strIdObject).toUInt());
+                    children.append(childNode.attribute(*strIdObject).toUInt());
                 }
                 else
                 {
@@ -1655,11 +1659,11 @@ void VPatternConverter::SaveChildrenToolUnionToV0_2_4(quint32 id, const QVector<
         return;
     }
 
-    QDomElement tagChildren = createElement(strChildren);
+    QDomElement tagChildren = createElement(*strChildren);
 
     for (int i=0; i<children.size(); ++i)
     {
-        QDomElement tagChild = createElement(strChild);
+        QDomElement tagChild = createElement(*strChild);
         tagChild.appendChild(createTextNode(QString().setNum(children.at(i))));
         tagChildren.appendChild(tagChild);
     }
@@ -1866,37 +1870,37 @@ QMap<QString, QString> VPatternConverter::OldNamesToNewNames_InV0_2_1()
 //---------------------------------------------------------------------------------------------------------------------
 void VPatternConverter::FixCutPoint()
 {
-    const QStringList types = QStringList() << strCutSplinePath
-                                            << strCutSpline
-                                            << strCutArc;
+    const QStringList types = QStringList() << *strCutSplinePath
+                                            << *strCutSpline
+                                            << *strCutArc;
 
-    const QDomNodeList list = elementsByTagName(strPoint);
+    const QDomNodeList list = elementsByTagName(*strPoint);
     for (int i=0; i < list.size(); ++i)
     {
         QDomElement element = list.at(i).toElement();
         if (not element.isNull())
         {
-            const QString type = element.attribute(strType);
+            const QString type = element.attribute(*strType);
             switch(types.indexOf(type))
             {
                 case 0: //strCutSplinePath
                 {
-                    const quint32 id = element.attribute(strId).toUInt();
-                    quint32 curve = element.attribute(strSplinePath).toUInt();
+                    const quint32 id = element.attribute(*strId).toUInt();
+                    quint32 curve = element.attribute(*strSplinePath).toUInt();
                     FixSubPaths(i, id, curve);
                     break;
                 }
                 case 1: //strCutSpline
                 {
-                    const quint32 id = element.attribute(strId).toUInt();
-                    quint32 curve = element.attribute(strSpline).toUInt();
+                    const quint32 id = element.attribute(*strId).toUInt();
+                    quint32 curve = element.attribute(*strSpline).toUInt();
                     FixSubPaths(i, id, curve);
                     break;
                 }
                 case 2: //strCutArc
                 {
-                    const quint32 id = element.attribute(strId).toUInt();
-                    quint32 curve = element.attribute(strArc).toUInt();
+                    const quint32 id = element.attribute(*strId).toUInt();
+                    quint32 curve = element.attribute(*strArc).toUInt();
                     FixSubPaths(i, id, curve);
                     break;
                 }
@@ -1910,85 +1914,85 @@ void VPatternConverter::FixCutPoint()
 //---------------------------------------------------------------------------------------------------------------------
 void VPatternConverter::FixSubPaths(int i, quint32 id, quint32 baseCurve)
 {
-    const QStringList pointTypes = QStringList() << strCutSplinePath
-                                                 << strCutSpline
-                                                 << strPointOfIntersectionCurves
-                                                 << strCurveIntersectAxis
-                                                 << strPointFromArcAndTangent
-                                                 << strPointOfIntersectionArcs;
+    const QStringList pointTypes = QStringList() << *strCutSplinePath
+                                                 << *strCutSpline
+                                                 << *strPointOfIntersectionCurves
+                                                 << *strCurveIntersectAxis
+                                                 << *strPointFromArcAndTangent
+                                                 << *strPointOfIntersectionArcs;
 
-    const QDomNodeList listPoints = elementsByTagName(strPoint);
+    const QDomNodeList listPoints = elementsByTagName(*strPoint);
     for (int j = i+1; j < listPoints.size(); ++j)
     {
         QDomElement element = listPoints.at(j).toElement();
         if (not element.isNull())
         {
-            const QString type = element.attribute(strType);
+            const QString type = element.attribute(*strType);
             switch(pointTypes.indexOf(type))
             {
                 case 0: //strCutSplinePath
                 {
-                    const quint32 spl = element.attribute(strSplinePath).toUInt();
+                    const quint32 spl = element.attribute(*strSplinePath).toUInt();
                     if (spl == id+1 || spl == id+2)
                     {
-                        element.setAttribute(strSplinePath, baseCurve);
+                        element.setAttribute(*strSplinePath, baseCurve);
                     }
                     break;
                 }
                 case 1: //strCutSpline
                 {
-                    const quint32 spl = element.attribute(strSpline).toUInt();
+                    const quint32 spl = element.attribute(*strSpline).toUInt();
                     if (spl == id+1 || spl == id+2)
                     {
-                        element.setAttribute(strSpline, baseCurve);
+                        element.setAttribute(*strSpline, baseCurve);
                     }
                     break;
                 }
                 case 2: //strPointOfIntersectionCurves
                 {
-                    quint32 spl = element.attribute(strCurve1).toUInt();
+                    quint32 spl = element.attribute(*strCurve1).toUInt();
                     if (spl == id+1 || spl == id+2)
                     {
-                        element.setAttribute(strCurve1, baseCurve);
+                        element.setAttribute(*strCurve1, baseCurve);
                     }
 
-                    spl = element.attribute(strCurve2).toUInt();
+                    spl = element.attribute(*strCurve2).toUInt();
                     if (spl == id+1 || spl == id+2)
                     {
-                        element.setAttribute(strCurve2, baseCurve);
+                        element.setAttribute(*strCurve2, baseCurve);
                     }
                     break;
                 }
                 case 3: //strCurveIntersectAxis
                 {
-                    const quint32 spl = element.attribute(strCurve).toUInt();
+                    const quint32 spl = element.attribute(*strCurve).toUInt();
                     if (spl == id+1 || spl == id+2)
                     {
-                        element.setAttribute(strCurve, baseCurve);
+                        element.setAttribute(*strCurve, baseCurve);
                     }
                     break;
                 }
                 case 4: //strPointFromArcAndTangent
                 {
-                    const quint32 spl = element.attribute(strArc).toUInt();
+                    const quint32 spl = element.attribute(*strArc).toUInt();
                     if (spl == id+1 || spl == id+2)
                     {
-                        element.setAttribute(strArc, baseCurve);
+                        element.setAttribute(*strArc, baseCurve);
                     }
                     break;
                 }
                 case 5: //strPointOfIntersectionArcs
                 {
-                    quint32 arc = element.attribute(strFirstArc).toUInt();
+                    quint32 arc = element.attribute(*strFirstArc).toUInt();
                     if (arc == id+1 || arc == id+2)
                     {
-                        element.setAttribute(strFirstArc, baseCurve);
+                        element.setAttribute(*strFirstArc, baseCurve);
                     }
 
-                    arc = element.attribute(strSecondArc).toUInt();
+                    arc = element.attribute(*strSecondArc).toUInt();
                     if (arc == id+1 || arc == id+2)
                     {
-                        element.setAttribute(strSecondArc, baseCurve);
+                        element.setAttribute(*strSecondArc, baseCurve);
                     }
                     break;
                 }
@@ -1998,25 +2002,25 @@ void VPatternConverter::FixSubPaths(int i, quint32 id, quint32 baseCurve)
         }
     }
 
-    const QStringList splTypes = QStringList() << strModelingPath
-                                               << strModelingSpline;
+    const QStringList splTypes = QStringList() << *strModelingPath
+                                               << *strModelingSpline;
 
-    const QDomNodeList listSplines = elementsByTagName(strSpline);
+    const QDomNodeList listSplines = elementsByTagName(*strSpline);
     for (int j = 0; j < listSplines.size(); ++j)
     {
         QDomElement element = listSplines.at(j).toElement();
         if (not element.isNull())
         {
-            const QString type = element.attribute(strType);
+            const QString type = element.attribute(*strType);
             switch(splTypes.indexOf(type))
             {
                 case 0: //strModelingPath
                 case 1: //strModelingSpline
                 {
-                    const quint32 spl = element.attribute(strIdObject).toUInt();
+                    const quint32 spl = element.attribute(*strIdObject).toUInt();
                     if (spl == id+1 || spl == id+2)
                     {
-                        element.setAttribute(strIdObject, baseCurve);
+                        element.setAttribute(*strIdObject, baseCurve);
                     }
                     break;
                 }
@@ -2026,19 +2030,19 @@ void VPatternConverter::FixSubPaths(int i, quint32 id, quint32 baseCurve)
         }
     }
 
-    const QDomNodeList listArcs = elementsByTagName(strArc);
+    const QDomNodeList listArcs = elementsByTagName(*strArc);
     for (int j = 0; j < listArcs.size(); ++j)
     {
         QDomElement element = listArcs.at(j).toElement();
         if (not element.isNull())
         {
-            const QString type = element.attribute(strType);
-            if (type == strModeling)
+            const QString type = element.attribute(*strType);
+            if (type == *strModeling)
             {
-                const quint32 arc = element.attribute(strIdObject).toUInt();
+                const quint32 arc = element.attribute(*strIdObject).toUInt();
                 if (arc == id+1 || arc == id+2)
                 {
-                    element.setAttribute(strIdObject, baseCurve);
+                    element.setAttribute(*strIdObject, baseCurve);
                 }
             }
         }
@@ -2052,7 +2056,7 @@ void VPatternConverter::TagRemoveAttributeTypeObjectInV0_4_0()
     Q_STATIC_ASSERT_X(VPatternConverter::PatternMinVer < CONVERTER_VERSION_CHECK(0, 4, 0),
                       "Time to refactor the code.");
 
-    const QDomNodeList list = elementsByTagName(strModeling);
+    const QDomNodeList list = elementsByTagName(*strModeling);
     for (int i = 0; i < list.size(); ++i)
     {
         QDomElement modeling = list.at(i).toElement();
@@ -2064,9 +2068,9 @@ void VPatternConverter::TagRemoveAttributeTypeObjectInV0_4_0()
                 QDomElement domElement = domNode.toElement();
                 if (not domElement.isNull())
                 {
-                    if (domElement.hasAttribute(strTypeObject))
+                    if (domElement.hasAttribute(*strTypeObject))
                     {
-                        domElement.removeAttribute(strTypeObject);
+                        domElement.removeAttribute(*strTypeObject);
                     }
                 }
                 domNode = domNode.nextSibling();
@@ -2082,24 +2086,24 @@ void VPatternConverter::TagDetailToV0_4_0()
     Q_STATIC_ASSERT_X(VPatternConverter::PatternMinVer < CONVERTER_VERSION_CHECK(0, 4, 0),
                       "Time to refactor the code.");
 
-    const QDomNodeList list = elementsByTagName(strDetail);
+    const QDomNodeList list = elementsByTagName(*strDetail);
     for (int i=0; i < list.size(); ++i)
     {
         QDomElement dom = list.at(i).toElement();
 
         if (not dom.isNull())
         {
-            dom.setAttribute(strSeamAllowance, dom.attribute(strSupplement, "0"));
-            dom.removeAttribute(strSupplement);
+            dom.setAttribute(*strSeamAllowance, dom.attribute(*strSupplement, "0"));
+            dom.removeAttribute(*strSupplement);
 
-            dom.setAttribute(strVersion, "1");
+            dom.setAttribute(*strVersion, "1");
 
-            const QStringList tags = QStringList() << strNode << strData << strPatternInfo << strGrainline;
+            const QStringList tags = QStringList() << *strNode << *strData << *strPatternInfo << *strGrainline;
 
             QDomElement tagData;
             QDomElement tagPatternInfo;
             QDomElement tagGrainline;
-            QDomElement tagNodes = createElement(strNodes);
+            QDomElement tagNodes = createElement(*strNodes);
 
             const QDomNodeList childList = dom.childNodes();
             for (qint32 i = 0; i < childList.size(); ++i)
@@ -2111,26 +2115,26 @@ void VPatternConverter::TagDetailToV0_4_0()
                     {
                         case 0://strNode
                         {
-                            QDomElement tagNode = createElement(strNode);
+                            QDomElement tagNode = createElement(*strNode);
 
-                            tagNode.setAttribute(strIdObject, element.attribute(strIdObject, NULL_ID_STR));
+                            tagNode.setAttribute(*strIdObject, element.attribute(*strIdObject, NULL_ID_STR));
 
-                            if (element.hasAttribute(strReverse))
+                            if (element.hasAttribute(*strReverse))
                             {
-                                tagNode.setAttribute(strReverse, element.attribute(strReverse, "0"));
+                                tagNode.setAttribute(*strReverse, element.attribute(*strReverse, "0"));
                             }
 
-                            if (element.hasAttribute(strMx))
+                            if (element.hasAttribute(*strMx))
                             {
-                                tagNode.setAttribute(strMx, element.attribute(strMx, "0"));
+                                tagNode.setAttribute(*strMx, element.attribute(*strMx, "0"));
                             }
 
-                            if (element.hasAttribute(strMy))
+                            if (element.hasAttribute(*strMy))
                             {
-                                tagNode.setAttribute(strMy, element.attribute(strMy, "0"));
+                                tagNode.setAttribute(*strMy, element.attribute(*strMy, "0"));
                             }
 
-                            tagNode.setAttribute(strType, element.attribute(strType, ""));
+                            tagNode.setAttribute(*strType, element.attribute(*strType, ""));
 
                             tagNodes.appendChild(tagNode);
 
@@ -2164,7 +2168,7 @@ void VPatternConverter::TagDetailToV0_4_0()
 //---------------------------------------------------------------------------------------------------------------------
 QDomElement VPatternConverter::GetUnionDetailNodesV0_4_0(const QDomElement &detail)
 {
-    QDomElement tagNodes = createElement(strNodes);
+    QDomElement tagNodes = createElement(*strNodes);
 
     if (not detail.isNull())
     {
@@ -2174,16 +2178,16 @@ QDomElement VPatternConverter::GetUnionDetailNodesV0_4_0(const QDomElement &deta
             const QDomElement node = childList.at(i).toElement();
             if (not node.isNull())
             {
-                QDomElement tagNode = createElement(strNode);
+                QDomElement tagNode = createElement(*strNode);
 
-                tagNode.setAttribute(strIdObject, node.attribute(strIdObject, NULL_ID_STR));
+                tagNode.setAttribute(*strIdObject, node.attribute(*strIdObject, NULL_ID_STR));
 
-                if (node.hasAttribute(strReverse))
+                if (node.hasAttribute(*strReverse))
                 {
-                    tagNode.setAttribute(strReverse, node.attribute(strReverse, "0"));
+                    tagNode.setAttribute(*strReverse, node.attribute(*strReverse, "0"));
                 }
 
-                tagNode.setAttribute(strType, node.attribute(strType, ""));
+                tagNode.setAttribute(*strType, node.attribute(*strType, ""));
 
                 tagNodes.appendChild(tagNode);
             }
@@ -2196,7 +2200,7 @@ QDomElement VPatternConverter::GetUnionDetailNodesV0_4_0(const QDomElement &deta
 //---------------------------------------------------------------------------------------------------------------------
 QDomElement VPatternConverter::GetUnionChildrenNodesV0_4_0(const QDomElement &detail)
 {
-    QDomElement tagNodes = createElement(strNodes);
+    QDomElement tagNodes = createElement(*strNodes);
 
     if (not detail.isNull())
     {
@@ -2224,7 +2228,7 @@ void VPatternConverter::LabelTagToV0_4_4(const QString &tagName)
 
     Unit unit = Unit::Cm;
     const QStringList units = QStringList() << "mm" << "cm" << "inch";
-    switch (units.indexOf(UniqueTagText(strUnit)))
+    switch (units.indexOf(UniqueTagText(*strUnit)))
     {
         case 0:// mm
             unit = Unit::Mm;
@@ -2261,8 +2265,8 @@ void VPatternConverter::LabelTagToV0_4_4(const QString &tagName)
 
         if (not dom.isNull())
         {
-            ConvertData(dom, strWidth);
-            ConvertData(dom, strHeight);
+            ConvertData(dom, *strWidth);
+            ConvertData(dom, *strHeight);
         }
     }
 }
@@ -2274,22 +2278,22 @@ QDomElement VPatternConverter::AddTagPatternLabelV0_5_1()
     Q_STATIC_ASSERT_X(VPatternConverter::PatternMinVer < CONVERTER_VERSION_CHECK(0, 6, 0),
                       "Time to refactor the code.");
 
-    const QDomNodeList list = elementsByTagName(strPatternLabel);
+    const QDomNodeList list = elementsByTagName(*strPatternLabel);
     if (list.isEmpty())
     {
-        const QStringList tags = QStringList() << strUnit
-                                               << strImage
-                                               << strAuthor
-                                               << strDescription
-                                               << strNotes
-                                               << strGradation
-                                               << strPatternName
-                                               << strPatternNum
-                                               << strCompanyName
-                                               << strCustomerName
-                                               << strPatternLabel;
+        const QStringList tags = QStringList() << *strUnit
+                                               << *strImage
+                                               << *strAuthor
+                                               << *strDescription
+                                               << *strNotes
+                                               << *strGradation
+                                               << *strPatternName
+                                               << *strPatternNum
+                                               << *strCompanyName
+                                               << *strCustomerName
+                                               << *strPatternLabel;
 
-        QDomElement element = createElement(strPatternLabel);
+        QDomElement element = createElement(*strPatternLabel);
         QDomElement pattern = documentElement();
         for (int i = tags.indexOf(element.tagName())-1; i >= 0; --i)
         {
@@ -2312,46 +2316,46 @@ void VPatternConverter::PortPatternLabeltoV0_6_0(QDomElement &label)
     Q_STATIC_ASSERT_X(VPatternConverter::PatternMinVer < CONVERTER_VERSION_CHECK(0, 6, 0),
                       "Time to refactor the code.");
 
-    if (not UniqueTagText(strCompanyName).isEmpty())
+    if (not UniqueTagText(*strCompanyName).isEmpty())
     {
         AddLabelTemplateLineV0_6_0(label, "%author%", true, false, 0, 4);
     }
     else
     {
-        const QString author = UniqueTagText(strAuthor);
+        const QString author = UniqueTagText(*strAuthor);
         if (not author.isEmpty())
         {
             AddLabelTemplateLineV0_6_0(label, author, true, false, 0, 4);
         }
     }
 
-    if (not UniqueTagText(strPatternName).isEmpty())
+    if (not UniqueTagText(*strPatternName).isEmpty())
     {
         AddLabelTemplateLineV0_6_0(label, "%patternName%", false, false, 0, 2);
     }
 
-    if (not UniqueTagText(strPatternNum).isEmpty())
+    if (not UniqueTagText(*strPatternNum).isEmpty())
     {
         AddLabelTemplateLineV0_6_0(label, "%patternNumber%", false, false, 0, 0);
     }
 
-    if (not UniqueTagText(strCustomerName).isEmpty())
+    if (not UniqueTagText(*strCustomerName).isEmpty())
     {
         AddLabelTemplateLineV0_6_0(label, "%customer%", false, true, 0, 0);
     }
 
-    const QString sizeField = UniqueTagText(strSize);
+    const QString sizeField = UniqueTagText(*strSize);
     if (not sizeField.isEmpty())
     {
         AddLabelTemplateLineV0_6_0(label, sizeField, false, false, 0, 0);
     }
 
-    if (UniqueTagText(strShowMeasurements) == trueStr)
+    if (UniqueTagText(*strShowMeasurements) == trueStr)
     {
         AddLabelTemplateLineV0_6_0(label, "%mFileName%.%mExt%", false, false, 0, 0);
     }
 
-    if (UniqueTagText(strShowDate) == trueStr)
+    if (UniqueTagText(*strShowDate) == trueStr)
     {
         AddLabelTemplateLineV0_6_0(label, "%date%", false, true, 0, 0);
     }
@@ -2365,13 +2369,13 @@ void VPatternConverter::AddLabelTemplateLineV0_6_0(QDomElement &label, const QSt
     Q_STATIC_ASSERT_X(VPatternConverter::PatternMinVer < CONVERTER_VERSION_CHECK(0, 6, 0),
                       "Time to refactor the code.");
 
-    QDomElement tagLine = createElement(strLine);
+    QDomElement tagLine = createElement(*strLine);
 
-    SetAttribute(tagLine, strText, text);
-    SetAttribute(tagLine, strBold, bold);
-    SetAttribute(tagLine, strItalic, italic);
-    SetAttribute(tagLine, strAlignment, alignment);
-    SetAttribute(tagLine, strFSIncrement, fontSizeIncrement);
+    SetAttribute(tagLine, *strText, text);
+    SetAttribute(tagLine, *strBold, bold);
+    SetAttribute(tagLine, *strItalic, italic);
+    SetAttribute(tagLine, *strAlignment, alignment);
+    SetAttribute(tagLine, *strFSIncrement, fontSizeIncrement);
 
     label.appendChild(tagLine);
 }
@@ -2383,7 +2387,7 @@ void VPatternConverter::PortPieceLabelstoV0_6_0()
     Q_STATIC_ASSERT_X(VPatternConverter::PatternMinVer < CONVERTER_VERSION_CHECK(0, 6, 0),
                       "Time to refactor the code.");
 
-    const QDomNodeList nodeList = elementsByTagName(strData);
+    const QDomNodeList nodeList = elementsByTagName(*strData);
     for (int i = 0; i < nodeList.size(); ++i)
     {
         QDomElement dataTag = nodeList.at(i).toElement();
@@ -2391,7 +2395,7 @@ void VPatternConverter::PortPieceLabelstoV0_6_0()
         const int count = nodeListMCP.count();
         try
         {
-            if (not GetParametrString(dataTag, strLetter, "").isEmpty())
+            if (not GetParametrString(dataTag, *strLetter, "").isEmpty())
             {
                 AddLabelTemplateLineV0_6_0(dataTag, "%pLetter%", true, false, Qt::AlignHCenter, 6);
             }
@@ -2410,7 +2414,7 @@ void VPatternConverter::PortPieceLabelstoV0_6_0()
 
             QString line;
 
-            const int material = static_cast<int>(GetParametrUInt(domMCP, strMaterial, "0"));
+            const int material = static_cast<int>(GetParametrUInt(domMCP, *strMaterial, "0"));
             switch(material)
             {
                 case 0:
@@ -2427,18 +2431,18 @@ void VPatternConverter::PortPieceLabelstoV0_6_0()
                     break;
                 case 4:
                 default:
-                    line.append(GetParametrString(domMCP, strUserDefined, "User material"));
+                    line.append(GetParametrString(domMCP, *strUserDefined, "User material"));
                     break;
             }
 
             line.append(", %wCut% ");
 
-            const int cutNumber = static_cast<int>(GetParametrUInt(domMCP, strCutNumber, "1"));
+            const int cutNumber = static_cast<int>(GetParametrUInt(domMCP, *strCutNumber, "1"));
 
             if (firstLine)
             {
                 firstLineCutNumber = cutNumber;
-                dataTag.setAttribute(strQuantity, cutNumber);
+                dataTag.setAttribute(*strQuantity, cutNumber);
                 line.append("%pQuantity%");
                 firstLine = false;
             }
@@ -2454,7 +2458,7 @@ void VPatternConverter::PortPieceLabelstoV0_6_0()
                 }
             }
 
-            if (GetParametrUInt(domMCP, strPlacement, "0") == 1)
+            if (GetParametrUInt(domMCP, *strPlacement, "0") == 1)
             {
                 line.append(" %wOnFold%");
             }
@@ -2471,19 +2475,19 @@ void VPatternConverter::RemoveUnusedTagsV0_6_0()
     Q_STATIC_ASSERT_X(VPatternConverter::PatternMinVer < CONVERTER_VERSION_CHECK(0, 6, 0),
                       "Time to refactor the code.");
 
-    RemoveUniqueTagV0_6_0(strAuthor);
-    RemoveUniqueTagV0_6_0(strSize);
-    RemoveUniqueTagV0_6_0(strShowDate);
-    RemoveUniqueTagV0_6_0(strShowMeasurements);
+    RemoveUniqueTagV0_6_0(*strAuthor);
+    RemoveUniqueTagV0_6_0(*strSize);
+    RemoveUniqueTagV0_6_0(*strShowDate);
+    RemoveUniqueTagV0_6_0(*strShowMeasurements);
 
-    QDomNodeList nodeList = elementsByTagName(strData);
+    QDomNodeList nodeList = elementsByTagName(*strData);
     for (int i = 0; i < nodeList.size(); ++i)
     {
-        QDomElement child = nodeList.at(i).firstChildElement(strMCP);
+        QDomElement child = nodeList.at(i).firstChildElement(*strMCP);
         while (not child.isNull())
         {
             nodeList.at(i).removeChild(child);
-            child = nodeList.at(i).firstChildElement(strMCP);
+            child = nodeList.at(i).firstChildElement(*strMCP);
         }
     }
 }
@@ -2512,11 +2516,11 @@ void VPatternConverter::AddTagPreviewCalculationsV0_6_2()
     Q_STATIC_ASSERT_X(VPatternConverter::PatternMinVer < CONVERTER_VERSION_CHECK(0, 6, 2),
                       "Time to refactor the code.");
 
-    const QDomNodeList list = elementsByTagName(strIncrements);
+    const QDomNodeList list = elementsByTagName(*strIncrements);
     if (not list.isEmpty())
     {
         QDomElement pattern = documentElement();
-        pattern.insertAfter(createElement(strPreviewCalculations), list.at(0));
+        pattern.insertAfter(createElement(*strPreviewCalculations), list.at(0));
     }
 }
 
@@ -2527,17 +2531,17 @@ void VPatternConverter::TagUnionDetailsToV0_4_0()
     Q_STATIC_ASSERT_X(VPatternConverter::PatternMinVer < CONVERTER_VERSION_CHECK(0, 4, 0),
                       "Time to refactor the code.");
 
-    const QDomNodeList list = elementsByTagName(strTools);
+    const QDomNodeList list = elementsByTagName(*strTools);
     for (int i=0; i < list.size(); ++i)
     {
         // Tag 'tools' used only for union details, so no need to check any additional attributes
         QDomElement toolDOM = list.at(i).toElement();
         if (not toolDOM.isNull())
         {
-            const QStringList tags = QStringList() << strDet << strChildren;
+            const QStringList tags = QStringList() << *strDet << *strChildren;
 
             QVector<QDomElement> nodes;
-            QDomElement tagChildrenNodes = createElement(strChildren);
+            QDomElement tagChildrenNodes = createElement(*strChildren);
 
             const QDomNodeList childList = toolDOM.childNodes();
             for (qint32 i = 0; i < childList.size(); ++i)
@@ -2563,7 +2567,7 @@ void VPatternConverter::TagUnionDetailsToV0_4_0()
 
             for (int i = 0; i < nodes.size(); ++i)
             {
-                QDomElement tagDet = createElement(strDet);
+                QDomElement tagDet = createElement(*strDet);
                 tagDet.appendChild(nodes.at(i));
                 toolDOM.appendChild(tagDet);
             }

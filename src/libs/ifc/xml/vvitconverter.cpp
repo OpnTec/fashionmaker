@@ -39,6 +39,7 @@
 #include <QStaticStringData>
 #include <QStringData>
 #include <QStringDataPtr>
+#include <QGlobalStatic>
 
 #include "../exception/vexception.h"
 #include "../vmisc/def.h"
@@ -59,13 +60,16 @@ const QString VVITConverter::CurrentSchema        = QStringLiteral("://schema/in
 //VVITConverter::MeasurementMinVer; // <== DON'T FORGET TO UPDATE TOO!!!!
 //VVITConverter::MeasurementMaxVer; // <== DON'T FORGET TO UPDATE TOO!!!!
 
+namespace
+{
 // The list of all string we use for conversion
 // Better to use global variables because repeating QStringLiteral blows up code size
-static const QString strTagRead_Only = QStringLiteral("read-only");
-static const QString strGivenName    = QStringLiteral("given-name");
-static const QString strFamilyName   = QStringLiteral("family-name");
-static const QString strCustomer     = QStringLiteral("customer");
-static const QString strPersonal     = QStringLiteral("personal");
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, strTagRead_Only, (QLatin1String("read-only")))
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, strGivenName, (QLatin1String("given-name")))
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, strFamilyName, (QLatin1String("family-name")))
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, strCustomer, (QLatin1String("customer")))
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, strPersonal, (QLatin1String("personal")))
+}
 
 //---------------------------------------------------------------------------------------------------------------------
 VVITConverter::VVITConverter(const QString &fileName)
@@ -149,7 +153,7 @@ bool VVITConverter::IsReadOnly() const
     // For now position is the same for all supported format versions.
     // But don't forget to keep all versions of attribute until we support that format versions
 
-    return UniqueTagText(strTagRead_Only, falseStr) == trueStr;
+    return UniqueTagText(*strTagRead_Only, falseStr) == trueStr;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -315,7 +319,7 @@ void VVITConverter::ConvertMeasurementsToV0_3_3()
 void VVITConverter::ConverCustomerNameToV0_4_0()
 {
     // Find root tag
-    const QDomNodeList personalList = this->elementsByTagName(strPersonal);
+    const QDomNodeList personalList = this->elementsByTagName(*strPersonal);
     if (personalList.isEmpty())
     {
         return;
@@ -325,7 +329,7 @@ void VVITConverter::ConverCustomerNameToV0_4_0()
 
     // Given name
     QString givenName;
-    const QDomNodeList givenNameList = this->elementsByTagName(strGivenName);
+    const QDomNodeList givenNameList = this->elementsByTagName(*strGivenName);
     if (not givenNameList.isEmpty())
     {
         QDomNode givenNameNode = givenNameList.at(0);
@@ -335,7 +339,7 @@ void VVITConverter::ConverCustomerNameToV0_4_0()
 
     // Family name
     QString familyName;
-    const QDomNodeList familyNameList = this->elementsByTagName(strFamilyName);
+    const QDomNodeList familyNameList = this->elementsByTagName(*strFamilyName);
     if (not familyNameList.isEmpty())
     {
         QDomNode familyNameNode = familyNameList.at(0);
@@ -343,7 +347,7 @@ void VVITConverter::ConverCustomerNameToV0_4_0()
         personal.removeChild(familyNameNode);
     }
 
-    QDomElement customer = createElement(strCustomer);
+    QDomElement customer = createElement(*strCustomer);
 
     QString customerName;
     if (not givenName.isEmpty() && not familyName.isEmpty())

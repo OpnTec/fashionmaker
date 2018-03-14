@@ -130,7 +130,7 @@ void DialogAboutTape::RetranslateUi()
     ui->label_QT_Version->setText(buildCompatibilityString());
 
     const QDate date = QLocale::c().toDate(QString(__DATE__).simplified(), QLatin1String("MMM d yyyy"));
-    ui->label_Tape_Built->setText(tr("Built on %1 at %2").arg(date.toString()).arg(__TIME__));
+    ui->label_Tape_Built->setText(tr("Built on %1 at %2").arg(date.toString(), __TIME__));
 
     ui->label_Legal_Stuff->setText(QApplication::translate("InternalStrings",
                                                            "The program is provided AS IS with NO WARRANTY OF ANY "

@@ -79,8 +79,7 @@ void TST_TSTranslation::CheckEnglishLocalization_data()
                 continue;
             }
 
-            const QString message = QString("File '%1'. Check modification source message '%2'.").arg(fileName)
-                    .arg(source);
+            const QString message = QString("File '%1'. Check modification source message '%2'.").arg(fileName, source);
             QTest::newRow(qUtf8Printable(message)) << source << translation;
         }
         else
@@ -197,8 +196,7 @@ void TST_TSTranslation::PrepareOriginalStrings()
                 continue;
             }
 
-            const QString tag = QString("File '%1'. Check modification source message '%2'.").arg(fileName)
-                    .arg(source);
+            const QString tag = QString("File '%1'. Check modification source message '%2'.").arg(fileName, source);
             QTest::newRow(qUtf8Printable(tag)) << source << message;
         }
         else

@@ -99,7 +99,7 @@ PreferencesConfigurationPage::PreferencesConfigurationPage(QWidget *parent)
     }
 
     //----------------------------- Pattern Editing
-    connect(ui->resetWarningsButton, &QPushButton::released, []()
+    connect(ui->resetWarningsButton, &QPushButton::released, this, []()
     {
         VSettings *settings = qApp->ValentinaSettings();
 

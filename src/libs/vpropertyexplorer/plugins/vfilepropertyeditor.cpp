@@ -213,11 +213,13 @@ bool VPE::VFileEditWidget::checkMimeData(const QMimeData* data, QString& file) c
         QList<QUrl> tmpUrlList = data->urls();
         QFileInfo tmpFileInfo;
 
-        foreach(QUrl tmpUrl, tmpUrlList)
+        for(const QUrl &tmpUrl : tmpUrlList)
+        {
             if (QFile::exists(tmpUrl.toLocalFile()))
             {
                 tmpFileInfo = QFileInfo(tmpUrl.toLocalFile()); break;
             }
+        }
 
         if (checkFileFilter(tmpFileInfo.fileName()))
         {

@@ -374,9 +374,7 @@ QString VToolRotation::MakeToolTip() const
 {
     const QString toolTip = QString("<tr> <td><b>%1:</b> %2</td> </tr>"
                                     "<tr> <td><b>%3:</b> %4°</td> </tr>")
-            .arg(tr("Origin point"))
-            .arg(OriginPointName())
-            .arg(tr("Rotation angle"))
+            .arg(tr("Origin point"), OriginPointName(), tr("Rotation angle"))
             .arg(GetFormulaAngle().getDoubleValue());
     return toolTip;
 }

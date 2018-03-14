@@ -41,6 +41,7 @@
 #include <QStringData>
 #include <QStringDataPtr>
 #include <QtDebug>
+#include <QGlobalStatic>
 
 #include "../ifc/exception/vexceptionemptyparameter.h"
 #include "../ifc/xml/vvitconverter.h"
@@ -82,10 +83,10 @@ const QString VMeasurements::GenderMale    = QStringLiteral("male");
 const QString VMeasurements::GenderFemale  = QStringLiteral("female");
 const QString VMeasurements::GenderUnknown = QStringLiteral("unknown");
 
-const QString defBirthDate = QStringLiteral("1800-01-01");
-
 namespace
 {
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, defBirthDate, (QLatin1String("1800-01-01")))
+
 //---------------------------------------------------------------------------------------------------------------------
 QString FileComment()
 {
@@ -400,7 +401,7 @@ void VMeasurements::SetCustomer(const QString &text)
 //---------------------------------------------------------------------------------------------------------------------
 QDate VMeasurements::BirthDate() const
 {
-    return QDate::fromString(UniqueTagText(TagBirthDate, defBirthDate), "yyyy-MM-dd");
+    return QDate::fromString(UniqueTagText(TagBirthDate, *defBirthDate), "yyyy-MM-dd");
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -755,7 +756,7 @@ void VMeasurements::CreateEmptyIndividualFile(Unit unit)
     personal.appendChild(createElement(TagCustomer));
 
     QDomElement date = createElement(TagBirthDate);
-    date.appendChild(createTextNode(defBirthDate));
+    date.appendChild(createTextNode(*defBirthDate));
     personal.appendChild(date);
 
     QDomElement gender = createElement(TagGender);

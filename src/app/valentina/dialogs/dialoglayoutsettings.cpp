@@ -636,7 +636,7 @@ void DialogLayoutSettings::DialogAccepted()
     {
         WriteSettings();
     }
-    accepted();
+    emit accepted();
 }
 
 //---------------------------------------------------------------------------------------------------------------------

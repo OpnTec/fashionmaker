@@ -147,28 +147,33 @@ defineReplace(set_PCH){
 }
 
 defineReplace(enable_ccache){
-    no_ccache{ # For enable run qmake with CONFIG+=no_ccache
-        $$set_PCH()
+    *clang*:clazy {
+        QMAKE_CXX = clazy
+        export(QMAKE_CXX) # export value to global variable.
     } else {
-        # ccache support only Unix systems.
-        unix:{
-            # This need for turn on ccache.
-            *g++*{
-                QMAKE_CC = ccache gcc
-                export(QMAKE_CC) # export value to global variable.
-
-                QMAKE_CXX = ccache g++
-                export(QMAKE_CXX) # export value to global variable.
-            }
-            *clang*{
-                QMAKE_CC = ccache clang
-                export(QMAKE_CC) # export value to global variable.
-
-                QMAKE_CXX = ccache clang++
-                export(QMAKE_CXX) # export value to global variable.
-            }
-        } else {
+        no_ccache{ # For enable run qmake with CONFIG+=no_ccache
             $$set_PCH()
+        } else {
+            # ccache support only Unix systems.
+            unix:{
+                # This need for turn on ccache.
+                *g++*{
+                    QMAKE_CC = ccache gcc
+                    export(QMAKE_CC) # export value to global variable.
+
+                    QMAKE_CXX = ccache g++
+                    export(QMAKE_CXX) # export value to global variable.
+                }
+                *clang*{
+                    QMAKE_CC = ccache clang
+                    export(QMAKE_CC) # export value to global variable.
+
+                    QMAKE_CXX = ccache clang++
+                    export(QMAKE_CXX) # export value to global variable.
+                }
+            } else {
+                $$set_PCH()
+            }
         }
     }
     return(true)

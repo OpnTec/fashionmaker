@@ -843,8 +843,7 @@ void DialogPiecePath::InitPathTab()
     connect(ui->lineEditName, &QLineEdit::textChanged, this, &DialogPiecePath::NameChanged);
 
     InitPathTypes();
-    connect(ui->comboBoxType, QOverload<int>::of(&QComboBox::currentIndexChanged),
-            [this]()
+    connect(ui->comboBoxType, QOverload<int>::of(&QComboBox::currentIndexChanged), this, [this]()
     {
         ui->comboBoxPenType->setEnabled(GetType() == PiecePathType::InternalPath);
         ui->checkBoxCut->setEnabled(GetType() == PiecePathType::InternalPath);
