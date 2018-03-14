@@ -88,14 +88,12 @@ before_deploy:
     tar -C $TRAVIS_BUILD_DIR/build/src/app/valentina/bin --exclude "*.DS_Store" -cvzf valentina-osx-${TRAVIS_COMMIT}.tar.gz Valentina.app/;
   fi
 deploy:
-  edge:
-    branch: v1.8.47
   provider: bintray
   skip_cleanup: true
   file: ../share/bintray.json
   user: dismine
   key:
-    secure: gpoZl9H6JQP8NAXSUHXx8SDT34G3998Nwa14ymaAbQlmpWbswyoTYSvLj4sMkYhOSiPd+OXUrXX5bbB5xEOnlYMDR4krOez+Hj73KHwAOxGTIDucZ5PweXuqNOQjrSygqwLnjsKyzn8RbazTLHtioR9OMcHZD9Ou3ShIS27IZHLrEfPByhi5GYiTVQwKUUVqzLF/enqpNEK2w96+PeRBjeD3si2bds5tEaj2QY3OgW9V2FjOrdV4GY5v1jHiJgENFXtEEuo7wJtOdf7uDqWJnbA/YRFw8Ait6YKYyqBfWksfjudr9odPyKGasMO4v/CfTPIoXCNzbislNj0YdqMrg1agrfuem5Qdr5lqWNwVArAW5rBKEdZUwDNxkrSxZXEQ9maxaAiQzfB5EyXk+gITxMFAzv+WBfS8nMMG9slMENJ8f+z9PDzCgCQucdmlJjKntwKtrh76Oz7V5z6WoOl1IX7Ia9Hee8xCc33zWWDER12C+K+5sSifK/FBE4EdXi+BvL/J7dyE4rOzYpfim1v9oQtWGw2KSr5dwj4pZUMtUbxi2Te8yzMxm7K85av2TpzaWAyi5Q7hRr92E5DP6Z3YLfF0Ne6AZ/arcqTJRD2f+81VNQ3ZH26kb4SR0G72HwP2xOw3xCyEAGz8HOd17EUo6ScQi9+GYozrCohn/vkiPn0=
+    secure: uffn23TzTrsW053VN7HbcURs6w16zRbM1RUUF579uRMOu+DxwiFQlOVcNifzK/CAARDSgi0xvNzGPlePXBXTkzA5r3KSWnHGbw0DJTllFIBNwkWPoDzCwAONK3ZtCq+FI3iJy+fLh2rhqXpJXD713O09PmO+TTiNBRdLCyO5BP1ndykLFdhdCR0knDpyaIYYLGvGS4SR4/LqtuHniDT9ydkhhkcmms/Bw+k8hcdrDhhk1v6jPv4qAm8QfydDeh+X9AVNrJjB0Oz2rtvYpBdY6hqVnrb77V1mdc4dU3WKxw+IkMYTTH1oq6ywdMv/Y+S9sch5h/af6O8su4ipGEp240cc7sVB+k4FE9fDVqXuOgl0LLFVqf2XbzRFAQbShmxIJ64XS43TM7s98qTCacAaiMfQvKPNSHCmCKRM3e5f5ASBcwn6UtFqdREZO/lsl+Bgdah3KCn8hw9PBTloLSnRpUQGheh/xnWwV5LTHVlSDu0FiyC6ncTI+xghNSDJWAhH2dZNX+yIjVolJ27/5qS5m3BG1x0yMGEP5Fok15sX2tP70s8FklqNtn2+xqUGEz+YJMGW0GbmFuFFhnCu2ls0BhyT68Pvz4YQWvG30SaO8EkZtYx7RNy3muuq1O2TXcctcK8xX7DNJTlFFCzCDSz6xqiO4IiQIQE1F2Td6Hru8cs=
   dry-run: false
   on:
     all_branches: true
