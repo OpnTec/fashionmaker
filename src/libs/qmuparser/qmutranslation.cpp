@@ -30,8 +30,8 @@ namespace qmu
 {
 
 //---------------------------------------------------------------------------------------------------------------------
-QmuTranslation QmuTranslation::translate(const QString &context, const QString &sourceText,
-                                         const QString &disambiguation, int n)
+QmuTranslation QmuTranslation::translate(const char *context, const char *sourceText,
+                                         const char *disambiguation, int n)
 {
     if (n < 0)
     {
