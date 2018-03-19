@@ -8262,10 +8262,6 @@ Do you want to save your changes?</source>
         <translation>Met OS optiies</translation>
     </message>
     <message>
-        <source>The Default unit has been updated and will be used as the default for the next pattern you create.</source>
-        <translation type="vanished">De standaardwaarde van de eenheid is opgewaardeerd en zal worden gebruikt  als de standaardbasis voor uw volgende patrooncreatie.</translation>
-    </message>
-    <message>
         <source>Centimeters</source>
         <translation>Centimeters</translation>
     </message>

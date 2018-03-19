@@ -8264,10 +8264,6 @@ Do you want to save your changes?</source>
         <translation>С опций ОС</translation>
     </message>
     <message>
-        <source>The Default unit has been updated and will be used as the default for the next pattern you create.</source>
-        <translation type="vanished">Единицы измерения обновлены и будут применены при следующем создании выкройки.</translation>
-    </message>
-    <message>
         <source>Centimeters</source>
         <translation>Сантиметры</translation>
     </message>

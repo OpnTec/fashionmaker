@@ -3142,7 +3142,7 @@
     </message>
     <message>
         <source>Export text as paths</source>
-        <translation type="unfinished"></translation>
+        <translation>Vyvést text jako cesty</translation>
     </message>
     <message>
         <source>Margins</source>
@@ -3497,7 +3497,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Search:</source>
-        <translation type="unfinished"></translation>
+        <translation>Hledat:</translation>
     </message>
     <message>
         <source>Search</source>
@@ -7916,10 +7916,6 @@ Chcete uložit své změny?</translation>
     <message>
         <source>With OS options</source>
         <translation>S volbami OS</translation>
-    </message>
-    <message>
-        <source>The Default unit has been updated and will be used as the default for the next pattern you create.</source>
-        <translation type="vanished">Výchozí jednotka byla aktualizována a bude jako výchozí použita pro příští vámi vytvořený vzor.</translation>
     </message>
     <message>
         <source>Centimeters</source>

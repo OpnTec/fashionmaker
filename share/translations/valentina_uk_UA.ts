@@ -8261,10 +8261,6 @@ Do you want to save your changes?</source>
         <translation>З параметрами ОС</translation>
     </message>
     <message>
-        <source>The Default unit has been updated and will be used as the default for the next pattern you create.</source>
-        <translation type="vanished">Одиниці вимірювання по замовчуванню були оновлені і будуть використанні як основні наступного разу при створенні нової викрійки.</translation>
-    </message>
-    <message>
         <source>Centimeters</source>
         <translation>Сантиметри</translation>
     </message>

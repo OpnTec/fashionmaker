@@ -1350,7 +1350,7 @@
     </message>
     <message>
         <source>&lt;empty&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;empty&gt;</translation>
     </message>
 </context>
 <context>
@@ -1705,7 +1705,7 @@
     </message>
     <message>
         <source>&lt;empty&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;empty&gt;</translation>
     </message>
     <message>
         <source>Create new template</source>
@@ -2265,7 +2265,7 @@
     </message>
     <message>
         <source>Global</source>
-        <translation type="unfinished"></translation>
+        <translation>Global</translation>
     </message>
     <message>
         <source>Preview</source>
@@ -3472,7 +3472,7 @@ Aplicar configurações de qualquer forma?</translation>
     <message>
         <source>Indentation</source>
         <comment>Measurement section</comment>
-        <translation>Indentação</translation>
+        <translation>Recuo</translation>
     </message>
     <message>
         <source>Circumference and Arc</source>
@@ -3497,7 +3497,7 @@ Aplicar configurações de qualquer forma?</translation>
     <message>
         <source>Balance</source>
         <comment>Measurement section</comment>
-        <translation>Equilibrar</translation>
+        <translation>Equilíbrio</translation>
     </message>
     <message>
         <source>Arm</source>
@@ -3512,7 +3512,7 @@ Aplicar configurações de qualquer forma?</translation>
     <message>
         <source>Crotch and Rise</source>
         <comment>Measurement section</comment>
-        <translation type="unfinished"></translation>
+        <translation>Gancho e Altura</translation>
     </message>
     <message>
         <source>Hand</source>
@@ -3562,7 +3562,7 @@ Aplicar configurações de qualquer forma?</translation>
     </message>
     <message>
         <source>Search:</source>
-        <translation type="unfinished"></translation>
+        <translation>Buscar:</translation>
     </message>
     <message>
         <source>Search</source>
@@ -3570,7 +3570,7 @@ Aplicar configurações de qualquer forma?</translation>
     </message>
     <message>
         <source>Select measurement</source>
-        <translation type="unfinished"></translation>
+        <translation>Selecionar medida</translation>
     </message>
 </context>
 <context>
@@ -3680,7 +3680,7 @@ Aplicar configurações de qualquer forma?</translation>
     </message>
     <message>
         <source>Multisize</source>
-        <translation type="unfinished"></translation>
+        <translation>Multisize</translation>
     </message>
 </context>
 <context>
@@ -3845,7 +3845,7 @@ Aplicar configurações de qualquer forma?</translation>
     </message>
     <message>
         <source>Placeholder</source>
-        <translation type="unfinished"></translation>
+        <translation>Espaço Reservado</translation>
     </message>
     <message>
         <source>Value</source>
@@ -4028,7 +4028,7 @@ Aplicar configurações de qualquer forma?</translation>
     </message>
     <message>
         <source>From multisize measurements</source>
-        <translation type="unfinished"></translation>
+        <translation>De medidas multisize</translation>
     </message>
     <message>
         <source>Pattern</source>
@@ -4470,19 +4470,19 @@ Aplicar configurações de qualquer forma?</translation>
     </message>
     <message>
         <source>Control</source>
-        <translation type="unfinished"></translation>
+        <translation>Controle</translation>
     </message>
     <message>
         <source>Visible</source>
-        <translation type="unfinished"></translation>
+        <translation>Visibilidade</translation>
     </message>
     <message>
         <source>Create a formula that regulates visibility. Values different from &quot;0&quot; make a path visible.</source>
-        <translation type="unfinished"></translation>
+        <translation>Crie uma fórmula que regule a visibilidade. Valores diferentes de &quot;0&quot; tornam visível um caminho.</translation>
     </message>
     <message>
         <source>1</source>
-        <translation type="unfinished">1</translation>
+        <translation>1</translation>
     </message>
     <message>
         <source>Control visibility</source>
@@ -4502,7 +4502,7 @@ Aplicar configurações de qualquer forma?</translation>
     </message>
     <message>
         <source>Check uniqueness</source>
-        <translation type="unfinished"></translation>
+        <translation>Verificar a singularidade</translation>
     </message>
 </context>
 <context>
@@ -5571,7 +5571,7 @@ Aplicar configurações de qualquer forma?</translation>
     </message>
     <message>
         <source>Check uniqueness</source>
-        <translation type="unfinished"></translation>
+        <translation>Verificar a singularidade</translation>
     </message>
 </context>
 <context>
@@ -6380,7 +6380,7 @@ Aplicar configurações de qualquer forma?</translation>
     </message>
     <message>
         <source>%1 update is available!</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 atualização está disponível!</translation>
     </message>
 </context>
 <context>
@@ -7470,6 +7470,10 @@ Você quer salvar suas mudanças?</translation>
         <translation>Selecione o pornto do caminho de bézier cúbico</translation>
     </message>
     <message>
+        <source>Toolbar pointer</source>
+        <translation type="vanished">Barra de ferramentas ponteiro</translation>
+    </message>
+    <message>
         <source>Operations</source>
         <translation>Operações</translation>
     </message>
@@ -7499,7 +7503,7 @@ Você quer salvar suas mudanças?</translation>
     </message>
     <message>
         <source>Tool pointer</source>
-        <translation type="unfinished"></translation>
+        <translation>Ponteiro da ferramenta</translation>
     </message>
     <message>
         <source>Midpoint between two points</source>
@@ -7631,11 +7635,11 @@ Você quer salvar suas mudanças?</translation>
     </message>
     <message>
         <source>Load Multisize</source>
-        <translation type="unfinished"></translation>
+        <translation>Carregar Multisize</translation>
     </message>
     <message>
         <source>Load multisize measurements file</source>
-        <translation type="unfinished"></translation>
+        <translation>Carregar arquivos de medidas multisize</translation>
     </message>
     <message>
         <source>Open Tape</source>
@@ -7671,7 +7675,7 @@ Você quer salvar suas mudanças?</translation>
     </message>
     <message>
         <source>Multisize measurements</source>
-        <translation type="unfinished"></translation>
+        <translation>Medidas multizise</translation>
     </message>
     <message>
         <source>Pattern files</source>
@@ -7747,19 +7751,19 @@ Você quer salvar suas mudanças?</translation>
     </message>
     <message>
         <source>Zoom fit best current</source>
-        <translation type="unfinished"></translation>
+        <translation>Zoom para o melhor ajuste</translation>
     </message>
     <message>
         <source>zoom fit best current pattern piece</source>
-        <translation type="unfinished"></translation>
+        <translation>zoom para o melhor ajuste da peça de modelagem</translation>
     </message>
     <message>
         <source>Export details skiping the Layout stage</source>
-        <translation type="unfinished"></translation>
+        <translation>Exportar detalhes ignorando o estágio de Layout</translation>
     </message>
     <message>
         <source>Application doesn&apos;t support multisize table with inches.</source>
-        <translation type="unfinished"></translation>
+        <translation>A aplicação não suporta tabela multisize com polegadas.</translation>
     </message>
     <message>
         <source>You don&apos;t have enough details to export. Please, include at least one detail in layout.</source>
@@ -7775,11 +7779,11 @@ Você quer salvar suas mudanças?</translation>
     </message>
     <message>
         <source>Couldn&apos;t set size. Need a file with multisize measurements.</source>
-        <translation type="unfinished"></translation>
+        <translation>Não foi possível definir o tamanho. Precisa de um arquivo com medidas multisize.</translation>
     </message>
     <message>
         <source>Couldn&apos;t set height. Need a file with multisize measurements.</source>
-        <translation type="unfinished"></translation>
+        <translation>Não foi possível definir a altura. Precisa de um arquivo com medidas multisize.</translation>
     </message>
     <message>
         <source>Please, additionally provide: %1</source>
@@ -7888,6 +7892,10 @@ Você quer salvar suas mudanças?</translation>
 </context>
 <context>
     <name>MainWindowsNoGUI</name>
+    <message>
+        <source>For saving multypage document all sheet should have the same size. Use export function instead.</source>
+        <translation type="vanished">Para salvar o documento multypage, todas as folhas devem ter o mesmo tamanho. Use a função de exportação.</translation>
+    </message>
     <message>
         <source>Creating file &apos;%1&apos; failed! %2</source>
         <translation>Criação do arquivo &apos;%1&apos; falhou! %2</translation>
@@ -8237,10 +8245,6 @@ Você quer salvar suas mudanças?</translation>
     <message>
         <source>With OS options</source>
         <translation>Com opções de OS</translation>
-    </message>
-    <message>
-        <source>The Default unit has been updated and will be used as the default for the next pattern you create.</source>
-        <translation type="vanished">A unidade padrão foi atualizada e será usada como padrão para o próximo molde criado.</translation>
     </message>
     <message>
         <source>Centimeters</source>
@@ -9505,7 +9509,7 @@ Deseja salvar suas mudanças?</translation>
     </message>
     <message>
         <source>Multisize measurements</source>
-        <translation type="unfinished"></translation>
+        <translation>Medidas multizise</translation>
     </message>
     <message>
         <source>Invalid result. Value is infinite or NaN. Please, check your calculations.</source>
@@ -11091,7 +11095,7 @@ Deseja salvar suas mudanças?</translation>
     </message>
     <message>
         <source>&lt;empty&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;empty&gt;</translation>
     </message>
 </context>
 <context>

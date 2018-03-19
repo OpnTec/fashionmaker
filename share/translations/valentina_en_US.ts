@@ -8261,10 +8261,6 @@ Do you want to save your changes?</translation>
         <translation>With OS options</translation>
     </message>
     <message>
-        <source>The Default unit has been updated and will be used as the default for the next pattern you create.</source>
-        <translation type="vanished">The Default unit has been updated and will be used as the default for the next pattern you create.</translation>
-    </message>
-    <message>
         <source>Centimeters</source>
         <translation>Centimeters</translation>
     </message>
