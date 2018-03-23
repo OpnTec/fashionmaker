@@ -296,7 +296,7 @@ VSplinePath &VSplinePath::operator =(const VSplinePath &path)
     {
         return *this;
     }
-    VAbstractCurve::operator=(path);
+    VAbstractCubicBezierPath::operator=(path);
     d = path.d;
     return *this;
 }

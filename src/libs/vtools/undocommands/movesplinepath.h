@@ -46,7 +46,7 @@ class MoveSplinePath : public VUndoCommand
 public:
     MoveSplinePath(VAbstractPattern *doc, const VSplinePath &oldSplPath, const VSplinePath &newSplPath,
                    const quint32 &id, QUndoCommand *parent = nullptr);
-    virtual ~MoveSplinePath() Q_DECL_OVERRIDE;
+    virtual ~MoveSplinePath() =default;
     virtual void undo() Q_DECL_OVERRIDE;
     virtual void redo() Q_DECL_OVERRIDE;
     virtual bool mergeWith(const QUndoCommand *command) Q_DECL_OVERRIDE;

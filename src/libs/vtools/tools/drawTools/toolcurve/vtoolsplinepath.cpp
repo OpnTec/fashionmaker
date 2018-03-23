@@ -316,8 +316,8 @@ void VToolSplinePath::ShowContextMenu(QGraphicsSceneContextMenuEvent *event, qui
 
 //---------------------------------------------------------------------------------------------------------------------
 /**
- * @brief UpdateControlPoints update position points control points in file.
- * @param spl spline what was changed.
+ * @brief UpdateControlPoints update position control points in file.
+ * @param spl spline that was changed.
  * @param splPath spline path.
  * @param indexSpline index spline in spline path.
  */

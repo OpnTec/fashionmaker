@@ -54,10 +54,6 @@ MoveSplinePath::MoveSplinePath(VAbstractPattern *doc, const VSplinePath &oldSplP
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-MoveSplinePath::~MoveSplinePath()
-{}
-
-//---------------------------------------------------------------------------------------------------------------------
 void MoveSplinePath::undo()
 {
     qCDebug(vUndo, "Undo.");
