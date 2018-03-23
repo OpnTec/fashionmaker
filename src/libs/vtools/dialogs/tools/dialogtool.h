@@ -282,6 +282,11 @@ protected:
     void             NewNodeItem(QListWidget *listWidget, const VPieceNode &node);
 
     void             InitNodeAngles(QComboBox *box);
+
+    void MoveListRowTop(QListWidget *list);
+    void MoveListRowUp(QListWidget *list);
+    void MoveListRowDown(QListWidget *list);
+    void MoveListRowBottom(QListWidget *list);
 private:
     void FillList(QComboBox *box, const QMap<QString, quint32> &list)const;
 

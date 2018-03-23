@@ -156,6 +156,7 @@ private slots:
     void PatternPinPointChanged();
 
     void EditLabel();
+    void SetMoveControls();
 
 private:
     Q_DISABLE_COPY(DialogSeamAllowance)

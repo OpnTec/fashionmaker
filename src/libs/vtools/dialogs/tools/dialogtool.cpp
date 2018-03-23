@@ -718,6 +718,62 @@ void DialogTool::InitNodeAngles(QComboBox *box)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void DialogTool::MoveListRowTop(QListWidget *list)
+{
+    SCASSERT(list != nullptr)
+    const int currentIndex = list->currentRow();
+    if (QListWidgetItem *currentItem = list->takeItem(currentIndex))
+    {
+        list->insertItem(0, currentItem);
+        list->setCurrentRow(0);
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogTool::MoveListRowUp(QListWidget *list)
+{
+    SCASSERT(list != nullptr)
+    int currentIndex = list->currentRow();
+    if (QListWidgetItem *currentItem = list->takeItem(currentIndex--))
+    {
+        if (currentIndex < 0)
+        {
+            currentIndex = 0;
+        }
+        list->insertItem(currentIndex, currentItem);
+        list->setCurrentRow(currentIndex);
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogTool::MoveListRowDown(QListWidget *list)
+{
+    SCASSERT(list != nullptr)
+    int currentIndex = list->currentRow();
+    if (QListWidgetItem *currentItem = list->takeItem(currentIndex++))
+    {
+        if (currentIndex > list->count())
+        {
+            currentIndex = list->count();
+        }
+        list->insertItem(currentIndex, currentItem);
+        list->setCurrentRow(currentIndex);
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogTool::MoveListRowBottom(QListWidget *list)
+{
+    SCASSERT(list != nullptr)
+    const int currentIndex = list->currentRow();
+    if (QListWidgetItem *currentItem = list->takeItem(currentIndex))
+    {
+        list->insertItem(list->count(), currentItem);
+        list->setCurrentRow(list->count()-1);
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 bool DialogTool::IsSplinePath(const QSharedPointer<VGObject> &obj) const
 {
     return obj->getType() == GOType::SplinePath || obj->getType() == GOType::CubicBezierPath;

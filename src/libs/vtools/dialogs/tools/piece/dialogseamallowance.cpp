@@ -906,6 +906,7 @@ void DialogSeamAllowance::ListChanged()
     InitNodesList();
     InitPassmarksList();
     CustomSAChanged(uiTabPaths->listWidgetCustomSA->currentRow());
+    SetMoveControls();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -2681,6 +2682,17 @@ void DialogSeamAllowance::InitMainPathTab()
             &DialogSeamAllowance::ShowMainPathContextMenu);
     connect(uiTabPaths->listWidgetMainPath->model(), &QAbstractItemModel::rowsMoved, this,
             &DialogSeamAllowance::ListChanged);
+    connect(uiTabPaths->listWidgetMainPath, &QListWidget::itemSelectionChanged, this,
+            &DialogSeamAllowance::SetMoveControls);
+
+    connect(uiTabPaths->toolButtonTop, &QToolButton::clicked, this,
+            [this](){MoveListRowTop(uiTabPaths->listWidgetMainPath);});
+    connect(uiTabPaths->toolButtonUp, &QToolButton::clicked, this,
+            [this](){MoveListRowUp(uiTabPaths->listWidgetMainPath);});
+    connect(uiTabPaths->toolButtonDown, &QToolButton::clicked, this,
+            [this](){MoveListRowDown(uiTabPaths->listWidgetMainPath);});
+    connect(uiTabPaths->toolButtonBottom, &QToolButton::clicked, this,
+            [this](){MoveListRowBottom(uiTabPaths->listWidgetMainPath);});
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -3300,4 +3312,34 @@ QString DialogSeamAllowance::GetDefaultPieceName() const
         name = defName + QString("_%1").arg(++i);
     }
     return name;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogSeamAllowance::SetMoveControls()
+{
+    uiTabPaths->toolButtonTop->setEnabled(false);
+    uiTabPaths->toolButtonUp->setEnabled(false);
+    uiTabPaths->toolButtonDown->setEnabled(false);
+    uiTabPaths->toolButtonBottom->setEnabled(false);
+
+    if (uiTabPaths->listWidgetMainPath->count() >= 2)
+    {
+        if (uiTabPaths->listWidgetMainPath->currentRow() == 0)
+        {
+            uiTabPaths->toolButtonDown->setEnabled(true);
+            uiTabPaths->toolButtonBottom->setEnabled(true);
+        }
+        else if (uiTabPaths->listWidgetMainPath->currentRow() == uiTabPaths->listWidgetMainPath->count()-1)
+        {
+            uiTabPaths->toolButtonTop->setEnabled(true);
+            uiTabPaths->toolButtonUp->setEnabled(true);
+        }
+        else
+        {
+            uiTabPaths->toolButtonTop->setEnabled(true);
+            uiTabPaths->toolButtonUp->setEnabled(true);
+            uiTabPaths->toolButtonDown->setEnabled(true);
+            uiTabPaths->toolButtonBottom->setEnabled(true);
+        }
+    }
 }

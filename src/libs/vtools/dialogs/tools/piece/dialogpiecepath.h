@@ -97,6 +97,8 @@ private slots:
     void DeployWidthAfterFormulaTextEdit();
     void DeployVisibleFormulaTextEdit();
 
+    void SetMoveControls();
+
 private:
     Q_DISABLE_COPY(DialogPiecePath)
     Ui::DialogPiecePath *ui;

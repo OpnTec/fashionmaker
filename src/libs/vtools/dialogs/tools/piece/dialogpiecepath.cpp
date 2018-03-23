@@ -346,6 +346,7 @@ void DialogPiecePath::ListChanged()
 
     InitPassmarksList();
     InitNodesList();
+    SetMoveControls();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -834,6 +835,36 @@ void DialogPiecePath::DeployVisibleFormulaTextEdit()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void DialogPiecePath::SetMoveControls()
+{
+    ui->toolButtonTop->setEnabled(false);
+    ui->toolButtonUp->setEnabled(false);
+    ui->toolButtonDown->setEnabled(false);
+    ui->toolButtonBottom->setEnabled(false);
+
+    if (ui->listWidget->count() >= 2)
+    {
+        if (ui->listWidget->currentRow() == 0)
+        {
+            ui->toolButtonDown->setEnabled(true);
+            ui->toolButtonBottom->setEnabled(true);
+        }
+        else if (ui->listWidget->currentRow() == ui->listWidget->count()-1)
+        {
+            ui->toolButtonTop->setEnabled(true);
+            ui->toolButtonUp->setEnabled(true);
+        }
+        else
+        {
+            ui->toolButtonTop->setEnabled(true);
+            ui->toolButtonUp->setEnabled(true);
+            ui->toolButtonDown->setEnabled(true);
+            ui->toolButtonBottom->setEnabled(true);
+        }
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 void DialogPiecePath::InitPathTab()
 {
     ui->lineEditName->setClearButtonEnabled(true);
@@ -853,6 +884,13 @@ void DialogPiecePath::InitPathTab()
 
     ui->listWidget->setContextMenuPolicy(Qt::CustomContextMenu);
     connect(ui->listWidget, &QListWidget::customContextMenuRequested, this, &DialogPiecePath::ShowContextMenu);
+    connect(ui->listWidget->model(), &QAbstractItemModel::rowsMoved, this, &DialogPiecePath::ListChanged);
+    connect(ui->listWidget, &QListWidget::itemSelectionChanged, this, &DialogPiecePath::SetMoveControls);
+
+    connect(ui->toolButtonTop, &QToolButton::clicked, this, [this](){MoveListRowTop(ui->listWidget);});
+    connect(ui->toolButtonUp, &QToolButton::clicked, this, [this](){MoveListRowUp(ui->listWidget);});
+    connect(ui->toolButtonDown, &QToolButton::clicked, this, [this](){MoveListRowDown(ui->listWidget);});
+    connect(ui->toolButtonBottom, &QToolButton::clicked, this, [this](){MoveListRowBottom(ui->listWidget);});
 }
 
 //---------------------------------------------------------------------------------------------------------------------
