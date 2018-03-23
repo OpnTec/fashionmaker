@@ -262,11 +262,11 @@ void VToolSplinePath::ControlPointChangePosition(const qint32 &indexSpline, cons
 
     if (qApp->Settings()->IsFreeCurveMode() && not moved)
     {
-        oldMoveSplinePath = oldSplPath;
+        oldMoveSplinePath = QSharedPointer<VSplinePath>::create(*oldSplPath);
         moved = true;
     }
 
-    QSharedPointer<VSplinePath> newSplPath = oldSplPath;
+    QSharedPointer<VSplinePath> newSplPath = QSharedPointer<VSplinePath>::create(*oldSplPath);
     const VSpline spl = CorrectedSpline(newSplPath->GetSpline(indexSpline), position, pos);
 
     UpdateControlPoints(spl, newSplPath, indexSpline);
@@ -559,11 +559,11 @@ void VToolSplinePath::mouseMoveEvent(QGraphicsSceneMouseEvent *event)
 
         if (qApp->Settings()->IsFreeCurveMode() && not moved)
         {
-            oldMoveSplinePath = oldSplPath;
+            oldMoveSplinePath = QSharedPointer<VSplinePath>::create(*oldSplPath);
             moved = true;
         }
 
-        newMoveSplinePath = oldSplPath;
+        newMoveSplinePath = QSharedPointer<VSplinePath>::create(*oldSplPath);
 
         VSpline spline = newMoveSplinePath->GetSpline(splIndex);
         const qreal t = spline.ParamT(oldPosition);

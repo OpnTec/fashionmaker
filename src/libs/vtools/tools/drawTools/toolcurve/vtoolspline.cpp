@@ -266,7 +266,7 @@ void VToolSpline::ControlPointChangePosition(const qint32 &indexSpline, const Sp
 
     if (qApp->Settings()->IsFreeCurveMode() && not moved)
     {
-        oldMoveSpline = spline;
+        oldMoveSpline = QSharedPointer<VSpline>::create(*spline);
         moved = true;
     }
 
@@ -278,7 +278,7 @@ void VToolSpline::ControlPointChangePosition(const qint32 &indexSpline, const Sp
     }
     else
     {
-        newMoveSpline = QSharedPointer<VSpline>(new VSpline(spl));
+        newMoveSpline = QSharedPointer<VSpline>::create(spl);
         VAbstractTool::data.UpdateGObject(m_id, newMoveSpline);
         RefreshGeometry();
 
@@ -404,7 +404,7 @@ void VToolSpline::mouseMoveEvent(QGraphicsSceneMouseEvent *event)
 
         if (qApp->Settings()->IsFreeCurveMode() && not moved)
         {
-            oldMoveSpline = spline;
+            oldMoveSpline = QSharedPointer<VSpline>::create(*spline);
             moved = true;
         }
 
@@ -443,7 +443,7 @@ void VToolSpline::mouseMoveEvent(QGraphicsSceneMouseEvent *event)
 
         oldPosition = event->scenePos(); // Now mouse here
 
-        newMoveSpline = QSharedPointer<VSpline>(new VSpline(spline->GetP1(), p2, p3, spline->GetP4()));
+        newMoveSpline = QSharedPointer<VSpline>::create(spline->GetP1(), p2, p3, spline->GetP4());
 
         if (not qApp->Settings()->IsFreeCurveMode())
         {
