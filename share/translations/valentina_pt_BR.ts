@@ -4504,6 +4504,22 @@ Aplicar configurações de qualquer forma?</translation>
         <source>Check uniqueness</source>
         <translation>Verificar a singularidade</translation>
     </message>
+    <message>
+        <source>Move on top</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Move up</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Move down</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Move on bottom</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>DialogPin</name>
@@ -8268,7 +8284,7 @@ Você quer salvar suas mudanças?</translation>
     </message>
     <message>
         <source>default unit</source>
-        <translation type="unfinished"></translation>
+        <translation>unidade padrão</translation>
     </message>
 </context>
 <context>
@@ -8303,7 +8319,7 @@ Você quer salvar suas mudanças?</translation>
     </message>
     <message>
         <source>My Multisize Measurements</source>
-        <translation type="unfinished"></translation>
+        <translation>Minhas Medidas Mutisize</translation>
     </message>
     <message>
         <source>My Patterns</source>
@@ -8350,11 +8366,11 @@ Você quer salvar suas mudanças?</translation>
     </message>
     <message>
         <source>Show a passmark both in the seam allowance and on the seam line.</source>
-        <translation type="unfinished"></translation>
+        <translation>Mostrar o pique tanto na margem de costura quanto na linha de costura.</translation>
     </message>
     <message>
         <source>Show second passmark on seam line</source>
-        <translation type="unfinished"></translation>
+        <translation>Mostrar segundo pique na linha de costura</translation>
     </message>
     <message>
         <source>By default forbid flipping for all new created workpieces</source>
@@ -8362,7 +8378,7 @@ Você quer salvar suas mudanças?</translation>
     </message>
     <message>
         <source>By default hide the main path if the seam allowance was enabled</source>
-        <translation type="unfinished"></translation>
+        <translation>Por padrão, ocultar o caminho principal se a margem de costura estiver ativada</translation>
     </message>
     <message>
         <source>Hide main path</source>
@@ -8370,7 +8386,7 @@ Você quer salvar suas mudanças?</translation>
     </message>
     <message>
         <source>Label font:</source>
-        <translation type="unfinished"></translation>
+        <translation>Fonte do Rótulo:</translation>
     </message>
     <message>
         <source>Seam allowance</source>
@@ -8378,11 +8394,11 @@ Você quer salvar suas mudanças?</translation>
     </message>
     <message>
         <source>Default value:</source>
-        <translation type="unfinished"></translation>
+        <translation>Valor padrão:</translation>
     </message>
     <message>
         <source>Label data/time format</source>
-        <translation type="unfinished"></translation>
+        <translation>Formato de data/hora do rótulo</translation>
     </message>
     <message>
         <source>Date:</source>
@@ -8434,7 +8450,7 @@ Você quer salvar suas mudanças?</translation>
     </message>
     <message>
         <source>Line width:</source>
-        <translation type="unfinished"></translation>
+        <translation>Espessura da linha:</translation>
     </message>
     <message>
         <source>Millimiters</source>
@@ -8447,23 +8463,39 @@ Você quer salvar suas mudanças?</translation>
     <message>
         <source>Use OpenGL to render a scene.
 This option will take an affect after restart.</source>
-        <translation type="unfinished"></translation>
+        <translation>Use o OpenGL para renderizar uma cena.
+Esta opção terá um efeito após o reinício.</translation>
     </message>
     <message>
         <source>Use OpenGL render</source>
-        <translation type="unfinished"></translation>
+        <translation>Usar renderização OpenGL</translation>
     </message>
     <message>
         <source>antialiasing</source>
-        <translation type="unfinished"></translation>
+        <translation>antisserrilhamento</translation>
     </message>
     <message>
         <source>scene render</source>
-        <translation type="unfinished"></translation>
+        <translation>cena renderizada</translation>
+    </message>
+</context>
+<context>
+    <name>QApplication</name>
+    <message>
+        <source>The path to the measurments is already relative.</source>
+        <translation type="vanished">O caminho para as medidas já é relativo.</translation>
+    </message>
+    <message>
+        <source>The path to the measurments is already absolute.</source>
+        <translation type="vanished">O caminho para as medidas já é absoluto.</translation>
     </message>
 </context>
 <context>
     <name>QCommandLineParser</name>
+    <message>
+        <source>Displays version information.</source>
+        <translation type="vanished">Exibe informações da versão.</translation>
+    </message>
     <message>
         <source>Displays this help.</source>
         <translation type="vanished">Exibir este ajuda.</translation>
@@ -8638,7 +8670,7 @@ This option will take an affect after restart.</source>
     <message>
         <source>too few arguments for function min.</source>
         <comment>parser error message</comment>
-        <translation type="unfinished"></translation>
+        <translation>Poucos argumentos para a função min.</translation>
     </message>
 </context>
 <context>
@@ -8656,7 +8688,7 @@ This option will take an affect after restart.</source>
     <message>
         <source>Invalid function-, variable- or constant name: &quot;$TOK$&quot;.</source>
         <comment>Math parser error messages. Left untouched &quot;$TOK$&quot;</comment>
-        <translation type="unfinished"></translation>
+        <translation>Função inválida-, variável- ou nome constante: &quot;$TOK$&quot;.</translation>
     </message>
     <message>
         <source>Invalid binary operator identifier: &quot;$TOK$&quot;.</source>
@@ -8796,17 +8828,17 @@ This option will take an affect after restart.</source>
     <message>
         <source>Function result is a string.</source>
         <comment>Math parser error messages.</comment>
-        <translation type="unfinished"></translation>
+        <translation>Resultado da função é uma string.</translation>
     </message>
     <message>
         <source>Parser error.</source>
         <comment>Math parser error messages.</comment>
-        <translation type="unfinished"></translation>
+        <translation>Erro de análise.</translation>
     </message>
     <message>
         <source>Decimal separator is identic to function argument separator.</source>
         <comment>Math parser error messages.</comment>
-        <translation type="unfinished"></translation>
+        <translation>O separador decimal é idêntico ao separador de argumentos da função.</translation>
     </message>
     <message>
         <source>The &quot;$TOK$&quot; operator must be preceeded by a closing bracket.</source>
@@ -8828,7 +8860,7 @@ This option will take an affect after restart.</source>
     <name>RenamePP</name>
     <message>
         <source>rename pattern piece</source>
-        <translation type="unfinished"></translation>
+        <translation>renomear peça de modelagem</translation>
     </message>
 </context>
 <context>
@@ -8839,17 +8871,24 @@ This option will take an affect after restart.</source>
     </message>
 </context>
 <context>
+    <name>SaveDetailOptions</name>
+    <message>
+        <source>save detail option</source>
+        <translation type="vanished">salvar opção de detalhe</translation>
+    </message>
+</context>
+<context>
     <name>SavePieceOptions</name>
     <message>
         <source>save detail options</source>
-        <translation type="unfinished"></translation>
+        <translation>salvar opções de detalhes</translation>
     </message>
 </context>
 <context>
     <name>SavePiecePathOptions</name>
     <message>
         <source>save path options</source>
-        <translation type="unfinished"></translation>
+        <translation>salvar opções de caminho</translation>
     </message>
 </context>
 <context>
@@ -8863,7 +8902,7 @@ This option will take an affect after restart.</source>
     <name>SaveToolOptions</name>
     <message>
         <source>save tool option</source>
-        <translation type="unfinished"></translation>
+        <translation>salvar opções de ferramenta</translation>
     </message>
 </context>
 <context>
@@ -8888,7 +8927,7 @@ This option will take an affect after restart.</source>
     <name>TMainWindow</name>
     <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:18pt;&quot;&gt;Select New for creation measurement file.&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:18pt;&quot;&gt;Selecionar Novo para o arquivo de criação de medida.&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <source>Name</source>
@@ -8896,7 +8935,7 @@ This option will take an affect after restart.</source>
     </message>
     <message>
         <source>Calculated value</source>
-        <translation type="unfinished"></translation>
+        <translation>Valor calculado</translation>
     </message>
     <message>
         <source>Formula</source>
@@ -8904,15 +8943,15 @@ This option will take an affect after restart.</source>
     </message>
     <message>
         <source>Base value</source>
-        <translation type="unfinished"></translation>
+        <translation>Valor base</translation>
     </message>
     <message>
         <source>In sizes</source>
-        <translation type="unfinished"></translation>
+        <translation>Em tamanhos</translation>
     </message>
     <message>
         <source>In heights</source>
-        <translation type="unfinished"></translation>
+        <translation>Em alturas</translation>
     </message>
     <message>
         <source>Details</source>
@@ -8932,15 +8971,15 @@ This option will take an affect after restart.</source>
     </message>
     <message>
         <source>Base value:</source>
-        <translation type="unfinished"></translation>
+        <translation>Valor base:</translation>
     </message>
     <message>
         <source>In sizes:</source>
-        <translation type="unfinished"></translation>
+        <translation>Em tamanhos:</translation>
     </message>
     <message>
         <source>In heights:</source>
-        <translation type="unfinished"></translation>
+        <translation>Em alturas:</translation>
     </message>
     <message>
         <source>Description:</source>
@@ -8960,7 +8999,7 @@ This option will take an affect after restart.</source>
     </message>
     <message>
         <source>Full name:</source>
-        <translation type="unfinished"></translation>
+        <translation>Nome completo:</translation>
     </message>
     <message>
         <source>Information</source>
@@ -8972,7 +9011,7 @@ This option will take an affect after restart.</source>
     </message>
     <message>
         <source>Measurement type</source>
-        <translation type="unfinished"></translation>
+        <translation>Tipo de medida</translation>
     </message>
     <message>
         <source>Path:</source>
@@ -9593,11 +9632,11 @@ Deseja salvar suas mudanças?</translation>
     </message>
     <message>
         <source>Imported file must not contain the same name twice.</source>
-        <translation type="unfinished"></translation>
+        <translation>O arquivo importado não poderá conter duas vezes o mesmo nome.</translation>
     </message>
     <message>
         <source>Error in row %1. Measurement name is empty.</source>
-        <translation type="unfinished"></translation>
+        <translation>Erro na linha %1. O nome da medida está vazio.</translation>
     </message>
 </context>
 <context>
@@ -9995,6 +10034,22 @@ Deseja salvar suas mudanças?</translation>
         <source>Force flipping</source>
         <translation>Forçar  giro</translation>
     </message>
+    <message>
+        <source>Move on top</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Move up</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Move down</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Move on bottom</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>TabPlaceLabels</name>
@@ -10219,7 +10274,7 @@ Deseja salvar suas mudanças?</translation>
     </message>
     <message>
         <source>My Multisize Measurements</source>
-        <translation type="unfinished"></translation>
+        <translation>Minhas Medidas Multisize</translation>
     </message>
     <message>
         <source>My Templates</source>
@@ -11079,7 +11134,7 @@ Deseja salvar suas mudanças?</translation>
     </message>
     <message>
         <source>Couldn&apos;t get node</source>
-        <translation type="unfinished"></translation>
+        <translation>Não foi possível obter o nó</translation>
     </message>
     <message>
         <source>Got wrong parameter id. Need only id &gt; 0.</source>
@@ -12013,7 +12068,7 @@ Deseja salvar suas mudanças?</translation>
     </message>
     <message>
         <source>Tool to make point from intersection two arcs</source>
-        <translation type="unfinished"></translation>
+        <translation>Ferramenta para fazer um ponto de interseção dois arcos</translation>
     </message>
     <message>
         <source>Take</source>
@@ -12021,15 +12076,27 @@ Deseja salvar suas mudanças?</translation>
     </message>
     <message>
         <source>Tool to make point from intersection two circles</source>
-        <translation type="unfinished"></translation>
+        <translation>Ferramenta para fazer um ponto de interseção dois círculos</translation>
+    </message>
+    <message>
+        <source>First circle radius</source>
+        <translation type="vanished">Raio do primeiro círculo</translation>
+    </message>
+    <message>
+        <source>Second circle radius</source>
+        <translation type="vanished">Raio do segundo círculo</translation>
     </message>
     <message>
         <source>Tool to make point from circle and tangent</source>
-        <translation type="unfinished"></translation>
+        <translation>Ferramenta para fazer ponto a partir do círculo e tangente</translation>
+    </message>
+    <message>
+        <source>Circle radius</source>
+        <translation type="vanished">Raio do círculo</translation>
     </message>
     <message>
         <source>Tool to make point from arc and tangent</source>
-        <translation type="unfinished"></translation>
+        <translation>Ferramenta para fazer ponto a partir do arco e tangente</translation>
     </message>
     <message>
         <source>Highest point</source>

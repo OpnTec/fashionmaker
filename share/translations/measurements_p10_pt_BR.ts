@@ -1662,7 +1662,7 @@
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="934"/>
         <source>Circumference around torso from mid-shoulder around crotch back up to mid-shoulder.</source>
         <comment>Full measurement description.</comment>
-        <translation type="unfinished"></translation>
+        <translation>Circunferência em torno do tronco através do meio do ombro em volta da virilha de volta ao meio do ombro.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="939"/>
@@ -1866,7 +1866,7 @@
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1030"/>
         <source>lowbust_to_waist_f</source>
         <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
-        <translation type="unfinished"></translation>
+        <translation>baixo_busto_para_cintura_f</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1032"/>
@@ -2532,7 +2532,7 @@
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1300"/>
         <source>across_chest_half_f</source>
         <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
-        <translation type="unfinished"></translation>
+        <translation>sobre_peito_metade_f</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1302"/>
@@ -3354,7 +3354,7 @@
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1654"/>
         <source>Arm circumference where lower arm is widest.</source>
         <comment>Full measurement description.</comment>
-        <translation type="unfinished"></translation>
+        <translation>Circunferência do Braço onde o braço inferior é mais largo.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1658"/>
@@ -3885,7 +3885,7 @@
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1873"/>
         <source>Rise length, diagonal</source>
         <comment>Full measurement name.</comment>
-        <translation type="unfinished"></translation>
+        <translation>Comprimento da altura, diagonal</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1874"/>
@@ -4039,7 +4039,7 @@
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1954"/>
         <source>waist_to_natural_waist_b</source>
         <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
-        <translation type="unfinished"></translation>
+        <translation>cintura_para_cintura_natural_c</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1956"/>
@@ -4069,7 +4069,7 @@
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1964"/>
         <source>Bend Arm with Elbow out, hand in front. Measure from Neck Back to Elbow Tip.</source>
         <comment>Full measurement description.</comment>
-        <translation type="unfinished"></translation>
+        <translation>Curvar o Braço com o Cotovelo levantado, mão para frente. Medida a partir do Pescoço Costas até a Ponta do Cotovelo.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1969"/>
@@ -4339,7 +4339,7 @@
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="2090"/>
         <source>Measure in a curve from Armfold Left Front through Bust Front curved back up to Armfold Right Front.</source>
         <comment>Full measurement description.</comment>
-        <translation type="unfinished"></translation>
+        <translation>Medida da curva da Dobra do Braço Frontal Esquerda através da parte Frontal do Busto voltando em curva para a Dobra do Braço Frontal Direita.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="2094"/>
@@ -4424,7 +4424,7 @@
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="2139"/>
         <source>Dart Width: Bust</source>
         <comment>Full measurement name.</comment>
-        <translation type="unfinished"></translation>
+        <translation>Largura da Pence: Busto</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="2145"/>

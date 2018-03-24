@@ -4419,6 +4419,22 @@ Apply settings anyway?</source>
         <source>Check uniqueness</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Move on top</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Move up</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Move down</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Move on bottom</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>DialogPin</name>
@@ -9805,6 +9821,22 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Force flipping</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Move on top</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Move up</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Move down</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Move on bottom</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
