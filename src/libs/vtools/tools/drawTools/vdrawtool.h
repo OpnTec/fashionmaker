@@ -150,6 +150,39 @@ void VDrawTool::ContextMenu(QGraphicsSceneContextMenuEvent *event, quint32 itemI
     QMenu menu;
     QAction *actionOption = menu.addAction(QIcon::fromTheme("preferences-other"), tr("Options"));
 
+    // add the menu "add to group" to the context menu
+    QMap<quint32,QString> groupsNotContainingItem =  doc->GetGroupsContainingItem(this->getId(), itemId, false);
+    QActionGroup* actionsAddToGroup = new QActionGroup(this);
+    if(not groupsNotContainingItem.empty())
+    {
+        QMenu *menuAddToGroup = menu.addMenu(QIcon::fromTheme("list-add"), tr("Add to group"));
+
+        QMap<quint32,QString>::iterator i;
+        for(i = groupsNotContainingItem.begin();i != groupsNotContainingItem.end(); ++i)
+        {
+            QAction *actionAddToGroup = menuAddToGroup->addAction(i.value());
+            actionsAddToGroup->addAction(actionAddToGroup);
+            actionAddToGroup->setData(i.key());
+        }
+    }
+
+    // add the menu "remove from group" to the context menu
+    QMap<quint32,QString> groupsContainingItem =  doc->GetGroupsContainingItem(this->getId(), itemId, true);
+    QActionGroup* actionsRemoveFromGroup = new QActionGroup(this);
+    if(not groupsContainingItem.empty())
+    {
+        QMenu *menuRemoveFromGroup = menu.addMenu(QIcon::fromTheme("list-remove"), tr("Remove from group"));
+
+        QMap<quint32,QString>::iterator i;
+        for(i = groupsContainingItem.begin();i != groupsContainingItem.end(); ++i)
+        {
+            QAction *actionRemoveFromGroup = menuRemoveFromGroup->addAction(i.value());
+            actionsRemoveFromGroup->addAction(actionRemoveFromGroup);
+            actionRemoveFromGroup->setData(i.key());
+        }
+    }
+
+
     QAction *actionShowLabel = menu.addAction(tr("Show label"));
     actionShowLabel->setCheckable(true);
     if (itemId != NULL_ID)
@@ -190,7 +223,12 @@ void VDrawTool::ContextMenu(QGraphicsSceneContextMenuEvent *event, quint32 itemI
     }
 
     QAction *selectedAction = menu.exec(event->screenPos());
-    if (selectedAction == actionOption)
+
+    if(selectedAction == nullptr)
+    {
+        return;
+    }
+    else if (selectedAction == actionOption)
     {
         qCDebug(vTool, "Show options.");
         emit qApp->getSceneView()->itemClicked(nullptr);
@@ -213,6 +251,16 @@ void VDrawTool::ContextMenu(QGraphicsSceneContextMenuEvent *event, quint32 itemI
     else if (selectedAction == actionShowLabel)
     {
         ChangeLabelVisibility(itemId, selectedAction->isChecked());
+    }
+    else if (selectedAction->actionGroup() == actionsAddToGroup)
+    {
+        quint32 groupId = selectedAction->data().toUInt();
+        doc->AddItemToGroup(this->getId(), itemId, groupId);
+    }
+    else if (selectedAction->actionGroup() == actionsRemoveFromGroup)
+    {
+        quint32 groupId = selectedAction->data().toUInt();
+        doc->RemoveItemFromGroup(this->getId(), itemId, groupId);
     }
 }
 
