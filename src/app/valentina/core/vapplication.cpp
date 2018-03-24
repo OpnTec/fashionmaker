@@ -517,7 +517,12 @@ void VApplication::ClearOldLogs() const
         {
             auto fn = allFiles.at(i);
             QFileInfo info(fn);
-            if (info.created().daysTo(QDateTime::currentDateTime()) >= DAYS_TO_KEEP_LOGS)
+#if QT_VERSION >= QT_VERSION_CHECK(5, 10, 0)
+            const QDateTime created = info.birthTime();
+#else
+            const QDateTime created = info.created();
+#endif
+            if (created.daysTo(QDateTime::currentDateTime()) >= DAYS_TO_KEEP_LOGS)
             {
                 VLockGuard<QFile> tmp(info.absoluteFilePath(), [&fn](){return new QFile(fn);});
                 if (tmp.GetProtected() != nullptr)
