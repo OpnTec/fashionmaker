@@ -164,7 +164,12 @@ void VDrawTool::ContextMenu(QGraphicsSceneContextMenuEvent *event, quint32 itemI
         {
             QAction *actionAddToGroup = menuAddToGroup->addAction(list[i]);
             actionsAddToGroup->addAction(actionAddToGroup);
-            actionAddToGroup->setData(groupsNotContainingItem.key(list[i]));
+            const quint32 groupId = groupsNotContainingItem.key(list[i]);
+            actionAddToGroup->setData(groupId);
+
+            // removes the group we just treated, because we can have several group
+            // with the same name. Otherwise the groupId would always be the same
+            groupsNotContainingItem.remove(groupId);
         }
     }
 
@@ -182,7 +187,9 @@ void VDrawTool::ContextMenu(QGraphicsSceneContextMenuEvent *event, quint32 itemI
         {
             QAction *actionRemoveFromGroup = menuRemoveFromGroup->addAction(list[i]);
             actionsRemoveFromGroup->addAction(actionRemoveFromGroup);
-            actionRemoveFromGroup->setData(groupsContainingItem.key(list[i]));
+            const quint32 groupId = groupsContainingItem.key(list[i]);
+            actionRemoveFromGroup->setData(groupId);
+            groupsContainingItem.remove(groupId);
         }
     }
 
