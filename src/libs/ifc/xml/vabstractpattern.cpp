@@ -2377,11 +2377,11 @@ QMap<quint32, QPair<QString, bool> > VAbstractPattern::GetGroups()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-
 /**
  * @brief Returns the groups that contain or do not contain the item identified by the toolid and the objectid
- * @param id
- * @param containItem | true if the groups have to contain the given item, false if they musn't contain the item
+ * @param toolId
+ * @param objectId
+ * @param containItem |true if the groups have to contain the given item, false if they musn't contain the item
  * @return
  */
 QMap<quint32, QString> VAbstractPattern::GetGroupsContainingItem(quint32 toolId, quint32 objectId, bool containItem)
@@ -2406,7 +2406,7 @@ QMap<quint32, QString> VAbstractPattern::GetGroupsContainingItem(quint32 toolId,
                 const QDomElement group = domNode.toElement();
                 if (group.isNull() == false)
                 {
-                    if (group.tagName() == TagGroup && group.hasChildNodes())
+                    if (group.tagName() == TagGroup)
                     {
                         bool groupHasItem = GroupHasItem(group, toolId, objectId);
                         if((containItem && groupHasItem) || (not containItem && not groupHasItem))
@@ -2431,7 +2431,7 @@ QMap<quint32, QString> VAbstractPattern::GetGroupsContainingItem(quint32 toolId,
 //---------------------------------------------------------------------------------------------------------------------
 /**
  * @brief Checks if the given group has the item with the given toolId and objectId
- * @param domElement
+ * @param groupDomElement
  * @param toolId
  * @param objectId
  * @return
@@ -2474,15 +2474,24 @@ void VAbstractPattern::AddItemToGroup(quint32 toolId, quint32 objectId, quint32 
 {
     QDomElement group = elementById(groupId, TagGroup);
 
-    if(objectId == 0)
+    if (group.isNull() == false)
     {
-        objectId = toolId;
-    }
+        if(objectId == 0)
+        {
+            objectId = toolId;
+        }
 
-    QDomElement item = createElement(TagGroupItem);
-    item.setAttribute(AttrTool, toolId);
-    item.setAttribute(AttrObject, objectId);
-    group.appendChild(item);
+        QDomElement item = createElement(TagGroupItem);
+        item.setAttribute(AttrTool, toolId);
+        item.setAttribute(AttrObject, objectId);
+        group.appendChild(item);
+
+        emit UpdateGroups();
+    }
+    else
+    {
+        qDebug() << "The group of id " << groupId << " doesn't exist";
+    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -2496,35 +2505,60 @@ void VAbstractPattern::RemoveItemFromGroup(quint32 toolId, quint32 objectId, qui
 {
     QDomElement group = elementById(groupId, TagGroup);
 
-    if(objectId == 0)
+    if (group.isNull() == false)
     {
-        objectId = toolId;
-    }
-
-    QDomNode itemNode = group.firstChild();
-    while (itemNode.isNull() == false) // iterate through the items of the group
-    {
-        if (itemNode.isElement())
+        if(objectId == 0)
         {
-            const QDomElement item = itemNode.toElement();
-            if (item.isNull() == false)
-            {
-                quint32 toolIdIterate= GetParametrUInt(item, AttrTool, "0");
-                quint32 objectIdIterate= GetParametrUInt(item, AttrObject, "0");
+            objectId = toolId;
+        }
 
-                if(toolIdIterate == toolId && objectIdIterate == objectId)
+        QDomNode itemNode = group.firstChild();
+        while (itemNode.isNull() == false) // iterate through the items of the group
+        {
+            if (itemNode.isElement())
+            {
+                const QDomElement item = itemNode.toElement();
+                if (item.isNull() == false)
                 {
-                    group.removeChild(itemNode);
-                    break;
+                    quint32 toolIdIterate= GetParametrUInt(item, AttrTool, "0");
+                    quint32 objectIdIterate= GetParametrUInt(item, AttrObject, "0");
+
+                    if(toolIdIterate == toolId && objectIdIterate == objectId)
+                    {
+                        group.removeChild(itemNode);
+                        emit UpdateGroups();
+                        break;
+                    }
                 }
             }
+            itemNode = itemNode.nextSibling();
         }
-        itemNode = itemNode.nextSibling();
     }
+    else
+    {
+        qDebug() << "The group of id " << groupId << " doesn't exist";
+    }
+}
 
-    // Handling when removing the last child:
-    // - automatically removes the group?
-    // - or allow a group to be empty?
+//---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief Returns true if the given group is empty
+ * @param id
+ * @return
+ */
+bool VAbstractPattern::GroupIsEmpty(quint32 id)
+{
+    QDomElement group = elementById(id, TagGroup);
+
+    if (group.isNull() == false)
+    {
+        return not group.hasChildNodes();
+    }
+    else
+    {
+        qDebug() << "The group of id " << id << " doesn't exist";
+        return true;
+    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------

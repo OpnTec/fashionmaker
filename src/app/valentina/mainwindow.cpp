@@ -4123,6 +4123,8 @@ void MainWindow::InitDocksContain()
     qCDebug(vMainWindow, "Initialization groups dock.");
     groupsWidget = new VWidgetGroups(doc, this);
     ui->dockWidgetGroups->setWidget(groupsWidget);
+    connect(doc,&VAbstractPattern::UpdateGroups , groupsWidget, &VWidgetGroups::UpdateGroups);
+    connect(doc,&VAbstractPattern::UpdateGroups , groupsWidget, &VWidgetGroups::UpdateGroups);
 
     detailsWidget = new VWidgetDetails(pattern, doc, this);
     connect(doc, &VPattern::FullUpdateFromFile, detailsWidget, &VWidgetDetails::UpdateList);

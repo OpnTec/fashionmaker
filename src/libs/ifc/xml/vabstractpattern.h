@@ -198,6 +198,7 @@ public:
     QMap<quint32, QString> GetGroupsContainingItem(quint32 toolId, quint32 objectId, bool containItem);
     void           AddItemToGroup(quint32 toolId, quint32 objectId, quint32 groupId);
     void           RemoveItemFromGroup(quint32 toolId, quint32 objectId, quint32 groupId);
+    bool           GroupIsEmpty(quint32 id);
     bool           GetGroupVisivility(quint32 id);
     void           SetGroupVisivility(quint32 id, bool visible);
 
@@ -388,6 +389,10 @@ signals:
     void           ShowDetail(quint32 id);
     void           SetCurrentPP(const QString &patterPiece);
     void           MadeProgress();
+    /**
+     * @brief UpdateGroups emit if the groups have been updated
+     */
+    void            UpdateGroups();
 
 public slots:
     virtual void   LiteParseTree(const Document &parse)=0;
