@@ -174,6 +174,14 @@ void VWidgetGroups::FillTable(const QMap<quint32, QPair<QString, bool> > &groups
 
         item = new QTableWidgetItem(data.first);
         item->setTextAlignment(Qt::AlignLeft | Qt::AlignVCenter);
+
+        if(doc->GroupIsEmpty(i.key()))
+        {
+            QFont font;
+            font.setStrikeOut(true);
+            item->setFont(font);
+        }
+
         ui->tableWidget->setItem(currentRow, 1, item);
         ++i;
     }
