@@ -157,12 +157,14 @@ void VDrawTool::ContextMenu(QGraphicsSceneContextMenuEvent *event, quint32 itemI
     {
         QMenu *menuAddToGroup = menu.addMenu(QIcon::fromTheme("list-add"), tr("Add to group"));
 
-        QMap<quint32,QString>::iterator i;
-        for(i = groupsNotContainingItem.begin();i != groupsNotContainingItem.end(); ++i)
+        QStringList list = QStringList(groupsNotContainingItem.values());
+        list.sort(Qt::CaseInsensitive);
+
+        for(int i=0; i<list.count(); ++i)
         {
-            QAction *actionAddToGroup = menuAddToGroup->addAction(i.value());
+            QAction *actionAddToGroup = menuAddToGroup->addAction(list[i]);
             actionsAddToGroup->addAction(actionAddToGroup);
-            actionAddToGroup->setData(i.key());
+            actionAddToGroup->setData(groupsNotContainingItem.key(list[i]));
         }
     }
 
@@ -173,12 +175,14 @@ void VDrawTool::ContextMenu(QGraphicsSceneContextMenuEvent *event, quint32 itemI
     {
         QMenu *menuRemoveFromGroup = menu.addMenu(QIcon::fromTheme("list-remove"), tr("Remove from group"));
 
-        QMap<quint32,QString>::iterator i;
-        for(i = groupsContainingItem.begin();i != groupsContainingItem.end(); ++i)
+        QStringList list = QStringList(groupsContainingItem.values());
+        list.sort(Qt::CaseInsensitive);
+
+        for(int i=0; i<list.count(); ++i)
         {
-            QAction *actionRemoveFromGroup = menuRemoveFromGroup->addAction(i.value());
+            QAction *actionRemoveFromGroup = menuRemoveFromGroup->addAction(list[i]);
             actionsRemoveFromGroup->addAction(actionRemoveFromGroup);
-            actionRemoveFromGroup->setData(i.key());
+            actionRemoveFromGroup->setData(groupsContainingItem.key(list[i]));
         }
     }
 
