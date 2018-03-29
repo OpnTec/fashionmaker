@@ -146,6 +146,13 @@ void VDrawTool::ContextMenu(QGraphicsSceneContextMenuEvent *event, quint32 itemI
         return;
     }
 
+    GOType itemType =  GOType::Unknown;
+    if(itemId != NULL_ID)
+    {
+        const auto obj = data.GetGObject(itemId);
+        itemType = obj->getType();
+    }
+
     qCDebug(vTool, "Creating tool context menu.");
     QMenu menu;
     QAction *actionOption = menu.addAction(QIcon::fromTheme("preferences-other"), tr("Options"));
@@ -193,10 +200,10 @@ void VDrawTool::ContextMenu(QGraphicsSceneContextMenuEvent *event, quint32 itemI
         }
     }
 
-
     QAction *actionShowLabel = menu.addAction(tr("Show label"));
     actionShowLabel->setCheckable(true);
-    if (itemId != NULL_ID)
+
+    if (itemType == GOType::Point)
     {
         actionShowLabel->setChecked(IsLabelVisible(itemId));
     }
