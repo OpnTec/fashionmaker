@@ -2486,9 +2486,19 @@ void VAbstractPattern::AddItemToGroup(quint32 toolId, quint32 objectId, quint32 
         item.setAttribute(AttrObject, objectId);
         group.appendChild(item);
 
+        // to signalised that the pattern was changed and need to be saved
         modified = true;
         emit patternChanged(false);
+
+        // to update the group table of the gui
         emit UpdateGroups();
+
+        // parse the groups to update the drawing, in case the item was added to an invisible group
+        QDomElement groups = CreateGroups();
+        if (not groups.isNull())
+        {
+            ParseGroups(groups);
+        }
     }
     else
     {
@@ -2529,9 +2539,20 @@ void VAbstractPattern::RemoveItemFromGroup(quint32 toolId, quint32 objectId, qui
                     {
                         group.removeChild(itemNode);
 
+                        // to signalised that the pattern was changed and need to be saved
                         modified = true;
                         emit patternChanged(false);
+
+                        // to update the group table of the gui
                         emit UpdateGroups();
+
+                        // parse the groups to update the drawing, in case the item was removed from an invisible group
+                        QDomElement groups = CreateGroups();
+                        if (not groups.isNull())
+                        {
+                            ParseGroups(groups);
+                        }
+
                         break;
                     }
                 }
