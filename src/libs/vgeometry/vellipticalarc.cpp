@@ -130,7 +130,7 @@ VEllipticalArc VEllipticalArc::Rotate(QPointF originPoint, qreal degrees, const 
 
     QTransform t = d->m_transform;
     t.translate(originPoint.x(), originPoint.y());
-    t.rotate(-degrees);
+    t.rotate(IsFlipped() ? degrees : -degrees);
     t.translate(-originPoint.x(), -originPoint.y());
 
     VEllipticalArc elArc(VAbstractArc::GetCenter(), GetRadius1(), GetRadius2(), VAbstractArc::GetStartAngle(),
