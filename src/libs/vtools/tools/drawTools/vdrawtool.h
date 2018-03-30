@@ -149,8 +149,14 @@ void VDrawTool::ContextMenu(QGraphicsSceneContextMenuEvent *event, quint32 itemI
     GOType itemType =  GOType::Unknown;
     if(itemId != NULL_ID)
     {
-        const auto obj = data.GetGObject(itemId);
-        itemType = obj->getType();
+        try
+        {
+            itemType = data.GetGObject(itemId)->getType();
+        }
+        catch (const VExceptionBadId &e)
+        { // Possible case. Parent was deleted, but the node object is still here.
+            qWarning() << qUtf8Printable(e.ErrorMessage());
+        }
     }
 
     qCDebug(vTool, "Creating tool context menu.");

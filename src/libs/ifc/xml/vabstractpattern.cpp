@@ -2486,6 +2486,8 @@ void VAbstractPattern::AddItemToGroup(quint32 toolId, quint32 objectId, quint32 
         item.setAttribute(AttrObject, objectId);
         group.appendChild(item);
 
+        modified = true;
+        emit patternChanged(false);
         emit UpdateGroups();
     }
     else
@@ -2526,6 +2528,9 @@ void VAbstractPattern::RemoveItemFromGroup(quint32 toolId, quint32 objectId, qui
                     if(toolIdIterate == toolId && objectIdIterate == objectId)
                     {
                         group.removeChild(itemNode);
+
+                        modified = true;
+                        emit patternChanged(false);
                         emit UpdateGroups();
                         break;
                     }
