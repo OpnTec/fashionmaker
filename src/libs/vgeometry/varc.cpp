@@ -293,7 +293,7 @@ QVector<QPointF> VArc::GetPoints() const
         points << splPoints;
         pStart = lineP4P3.p1();
     }
-    return points;
+    return IsFlipped() ? VGObject::GetReversePoints(points) : points;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
