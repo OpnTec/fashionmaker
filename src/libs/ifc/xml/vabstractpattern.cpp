@@ -2470,7 +2470,7 @@ bool VAbstractPattern::GroupHasItem(const QDomElement &groupDomElement, quint32 
  * @param objectId
  * @param groupId
  */
-void VAbstractPattern::AddItemToGroup(quint32 toolId, quint32 objectId, quint32 groupId)
+QDomElement VAbstractPattern::AddItemToGroup(quint32 toolId, quint32 objectId, quint32 groupId)
 {
     QDomElement group = elementById(groupId, TagGroup);
 
@@ -2499,6 +2499,8 @@ void VAbstractPattern::AddItemToGroup(quint32 toolId, quint32 objectId, quint32 
         {
             ParseGroups(groups);
         }
+
+        return item;
     }
     else
     {
@@ -2513,7 +2515,7 @@ void VAbstractPattern::AddItemToGroup(quint32 toolId, quint32 objectId, quint32 
  * @param objectId
  * @param groupId
  */
-void VAbstractPattern::RemoveItemFromGroup(quint32 toolId, quint32 objectId, quint32 groupId)
+QDomElement VAbstractPattern::RemoveItemFromGroup(quint32 toolId, quint32 objectId, quint32 groupId)
 {
     QDomElement group = elementById(groupId, TagGroup);
 
@@ -2553,7 +2555,7 @@ void VAbstractPattern::RemoveItemFromGroup(quint32 toolId, quint32 objectId, qui
                             ParseGroups(groups);
                         }
 
-                        break;
+                        return itemNode;
                     }
                 }
             }

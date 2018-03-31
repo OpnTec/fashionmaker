@@ -50,6 +50,7 @@
 #include "../vwidgets/vmaingraphicsview.h"
 #include "../vdatatool.h"
 #include "../vgeometry/vpointf.h"
+#include "../vtools/undocommands/addgroup.h"
 
 template <class T> class QSharedPointer;
 
@@ -279,7 +280,14 @@ void VDrawTool::ContextMenu(QGraphicsSceneContextMenuEvent *event, quint32 itemI
     else if (selectedAction->actionGroup() == actionsAddToGroup)
     {
         quint32 groupId = selectedAction->data().toUInt();
-        doc->AddItemToGroup(this->getId(), itemId, groupId);
+        QDomElement item = doc->AddItemToGroup(this->getId(), itemId, groupId);
+
+        AddItemToGroup *addItemToGroup = new AddItemToGroup(item, doc);
+
+        // where should the signal be connected to? should we have a central "UpdateGroup" slot, like in the mainWindow?
+        // connect(addItemToGroup, &AddItemToGroup::UpdateGroups, , &VWidgetGroups::UpdateGroups);
+        qApp->getUndoStack()->push(addGroup);
+
     }
     else if (selectedAction->actionGroup() == actionsRemoveFromGroup)
     {

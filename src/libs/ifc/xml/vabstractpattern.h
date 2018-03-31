@@ -196,8 +196,8 @@ public:
     void           SetGroupName(quint32 id, const QString &name);
     QMap<quint32, QPair<QString, bool> > GetGroups();
     QMap<quint32, QString> GetGroupsContainingItem(quint32 toolId, quint32 objectId, bool containItem);
-    void           AddItemToGroup(quint32 toolId, quint32 objectId, quint32 groupId);
-    void           RemoveItemFromGroup(quint32 toolId, quint32 objectId, quint32 groupId);
+    QDomElement           AddItemToGroup(quint32 toolId, quint32 objectId, quint32 groupId);
+    QDomElement           RemoveItemFromGroup(quint32 toolId, quint32 objectId, quint32 groupId);
     bool           GroupIsEmpty(quint32 id);
     bool           GetGroupVisivility(quint32 id);
     void           SetGroupVisivility(quint32 id, bool visible);
