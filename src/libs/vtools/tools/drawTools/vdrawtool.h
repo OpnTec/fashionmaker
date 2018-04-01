@@ -48,11 +48,12 @@
 #include "../vmisc/def.h"
 #include "../vwidgets/vmaingraphicsscene.h"
 #include "../vwidgets/vmaingraphicsview.h"
+#include "../vwidgets/vabstractmainwindow.h"
 #include "../vdatatool.h"
 #include "../vgeometry/vpointf.h"
 #include "../vtools/undocommands/addgroup.h"
 #include "../vtools/undocommands/additemtogroup.h"
-#include "../../../../app/valentina/mainwindow.h"
+#include "../vtools/undocommands/removeitemfromgroup.h"
 
 template <class T> class QSharedPointer;
 
@@ -284,20 +285,28 @@ void VDrawTool::ContextMenu(QGraphicsSceneContextMenuEvent *event, quint32 itemI
         quint32 groupId = selectedAction->data().toUInt();
         QDomElement item = doc->AddItemToGroup(this->getId(), itemId, groupId);
 
-        MainWindow *window = qobject_cast<MainWindow *>(qApp->getMainWindow());
+        VAbstractMainWindow *window = qobject_cast<VAbstractMainWindow *>(qApp->getMainWindow());
 
         SCASSERT(window != nullptr)
         {
-            AddItemToGroup *addItemToGroup = new AddItemToGroup(item, doc);
-            connect(addItemToGroup, &AddItemToGroup::UpdateGroups, window, &MainWindow::UpdateGroups);
+            AddItemToGroup *addItemToGroup = new AddItemToGroup(item, doc, groupId);
+            connect(addItemToGroup, &AddItemToGroup::UpdateGroups, window, &VAbstractMainWindow::UpdateGroups);
             qApp->getUndoStack()->push(addItemToGroup);
         }
-
     }
     else if (selectedAction->actionGroup() == actionsRemoveFromGroup)
     {
         quint32 groupId = selectedAction->data().toUInt();
-        doc->RemoveItemFromGroup(this->getId(), itemId, groupId);
+        QDomElement item = doc->RemoveItemFromGroup(this->getId(), itemId, groupId);
+
+        VAbstractMainWindow *window = qobject_cast<VAbstractMainWindow *>(qApp->getMainWindow());
+
+        SCASSERT(window != nullptr)
+        {
+            RemoveItemFromGroup *removeItemFromGroup = new RemoveItemFromGroup(item, doc, groupId);
+            connect(removeItemFromGroup, &RemoveItemFromGroup::UpdateGroups, window, &VAbstractMainWindow::UpdateGroups);
+            qApp->getUndoStack()->push(removeItemFromGroup);
+        }
     }
 }
 

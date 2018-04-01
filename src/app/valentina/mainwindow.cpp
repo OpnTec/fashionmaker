@@ -1455,6 +1455,16 @@ void MainWindow::ShowToolTip(const QString &toolTip)
     m_statusLabel->setText(toolTip);
 }
 
+
+//---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief triggers the update of the groups
+ */
+void MainWindow::UpdateGroups()
+{
+    groupsWidget->UpdateGroups();
+}
+
 //---------------------------------------------------------------------------------------------------------------------
 /**
  * @brief showEvent handle after show window.
@@ -3483,12 +3493,6 @@ void MainWindow::ShowProgress()
 #endif
         qApp->processEvents();
     }
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void MainWindow::UpdateGroups()
-{
-    groupsWidget->UpdateGroups();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
