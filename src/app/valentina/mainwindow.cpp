@@ -3486,6 +3486,12 @@ void MainWindow::ShowProgress()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void MainWindow::UpdateGroups()
+{
+    groupsWidget->UpdateGroups();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 void MainWindow::SetDefaultHeight()
 {
     const QString defHeight = QString().setNum(doc->GetDefCustomHeight());
@@ -4123,7 +4129,7 @@ void MainWindow::InitDocksContain()
     qCDebug(vMainWindow, "Initialization groups dock.");
     groupsWidget = new VWidgetGroups(doc, this);
     ui->dockWidgetGroups->setWidget(groupsWidget);
-    connect(doc,&VAbstractPattern::UpdateGroups , groupsWidget, &VWidgetGroups::UpdateGroups);
+    connect(doc,&VAbstractPattern::UpdateGroups , this, &MainWindow::UpdateGroups);
 
     detailsWidget = new VWidgetDetails(pattern, doc, this);
     connect(doc, &VPattern::FullUpdateFromFile, detailsWidget, &VWidgetDetails::UpdateList);

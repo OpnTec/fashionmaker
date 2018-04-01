@@ -2506,6 +2506,8 @@ QDomElement VAbstractPattern::AddItemToGroup(quint32 toolId, quint32 objectId, q
     {
         qDebug() << "The group of id " << groupId << " doesn't exist";
     }
+
+    return QDomElement();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -2555,7 +2557,7 @@ QDomElement VAbstractPattern::RemoveItemFromGroup(quint32 toolId, quint32 object
                             ParseGroups(groups);
                         }
 
-                        return itemNode;
+                        return item;
                     }
                 }
             }
@@ -2566,6 +2568,8 @@ QDomElement VAbstractPattern::RemoveItemFromGroup(quint32 toolId, quint32 object
     {
         qDebug() << "The group of id " << groupId << " doesn't exist";
     }
+
+    return QDomElement();
 }
 
 //---------------------------------------------------------------------------------------------------------------------

@@ -1,6 +1,6 @@
 #include "removeitemfromgroup.h"
 
-RemoveItemFromGroup::RemoveItemFromGroup()
-{
+//RemoveItemFromGroup::RemoveItemFromGroup()
+//{
 
-}
+//}

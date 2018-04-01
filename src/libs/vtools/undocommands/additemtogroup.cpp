@@ -40,13 +40,18 @@
 
 //---------------------------------------------------------------------------------------------------------------------
 AddItemToGroup::AddItemToGroup(const QDomElement &xml, VAbstractPattern *doc, QUndoCommand *parent)
-    : VUndoCommand(xml, doc, parent), nameActivDraw(doc->GetNameActivPP())
+    : VUndoCommand(xml, doc, parent), nameActivDraw(doc->GetNameActivPP()), toolId(0), objectId(0)
 {
     setText(tr("add item to group"));
 
     objectId = doc->GetParametrUInt(xml,QString("object"),NULL_ID_STR);
     toolId = doc->GetParametrUInt(xml,QString("tool"),NULL_ID_STR);
-    nodeId = doc->GetParametrId(xml.parentNode()); // nodeId is the groupId
+    QDomNode parentNode = xml.parentNode();
+
+    if (parentNode.isElement())
+    {
+        nodeId = doc->GetParametrId(parentNode.toElement()); // nodeId is the groupId
+    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -73,7 +78,11 @@ void AddItemToGroup::undo()
                 return;
             }
 
+            doc->SetModified(true);
+            emit qApp->getCurrentDocument()->patternChanged(false);
+
             doc->ParseGroups(groups);
+
             emit UpdateGroups();
         }
         else
@@ -90,4 +99,9 @@ void AddItemToGroup::undo()
 
     VMainGraphicsView::NewSceneRect(qApp->getCurrentScene(), qApp->getSceneView());
     emit doc->SetCurrentPP(nameActivDraw);//Return current pattern piece after undo
+}
+
+void AddItemToGroup::redo()
+{
+
 }

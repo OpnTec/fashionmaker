@@ -43,7 +43,7 @@ class AddItemToGroup : public VUndoCommand
     Q_OBJECT
 public:
     AddItemToGroup(const QDomElement &xml, VAbstractPattern *doc, QUndoCommand *parent = nullptr);
-    virtual ~AddGroup();
+    virtual ~AddItemToGroup();
     virtual void undo() Q_DECL_OVERRIDE;
     virtual void redo() Q_DECL_OVERRIDE;
 protected:
