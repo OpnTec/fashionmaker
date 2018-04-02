@@ -1161,9 +1161,9 @@ void CreateUnitedDetailCSA(VPiece &newDetail, const VPiece &d, QVector<quint32> 
                            quint32 pRotate, qreal angle)
 {
     QVector<quint32> nodeChildren;
-    for(int i=0; i < d.GetCustomSARecords().size(); ++i)
+    const QVector<CustomSARecord> records = d.GetCustomSARecords();
+    for(auto record : records)
     {
-        CustomSARecord record = d.GetCustomSARecords().at(i);
         const VPiecePath path = initData.data->GetPiecePath(record.path);
         VPiecePath newPath = path;
         newPath.Clear();//Clear nodes
@@ -1220,9 +1220,10 @@ void CreateUnitedDetailInternalPaths(VPiece &newDetail, const VPiece &d, QVector
                                      qreal dy, quint32 pRotate, qreal angle)
 {
     QVector<quint32> nodeChildren;
-    for(int i=0; i < d.GetInternalPaths().size(); ++i)
+    const QVector<quint32> internalPaths = d.GetInternalPaths();
+    for(auto iPath : internalPaths)
     {
-        const VPiecePath path = initData.data->GetPiecePath(d.GetInternalPaths().at(i));
+        const VPiecePath path = initData.data->GetPiecePath(iPath);
         VPiecePath newPath = path;
         newPath.Clear();//Clear nodes
 
@@ -1280,9 +1281,10 @@ void CreateUnitedDetailPins(VPiece &newDetail, const VPiece &d, QVector<quint32>
                             quint32 pRotate, qreal angle)
 {
     QVector<quint32> nodeChildren;
-    for(int i=0; i < d.GetPins().size(); ++i)
+    const QVector<quint32> pins = d.GetPins();
+    for(auto pin : pins)
     {
-        const quint32 id = AddPin(d.GetPins().at(i), initData, children, drawName, dx, dy, pRotate, angle);
+        const quint32 id = AddPin(pin, initData, children, drawName, dx, dy, pRotate, angle);
         newDetail.GetPins().append(id);
     }
     children += nodeChildren;
@@ -1294,10 +1296,10 @@ void CreateUnitedDetailPlaceLabels(VPiece &newDetail, const VPiece &d, QVector<q
                                    qreal dy, quint32 pRotate, qreal angle)
 {
     QVector<quint32> nodeChildren;
-    for(int i=0; i < d.GetPlaceLabels().size(); ++i)
+    const QVector<quint32> placeLabels = d.GetPlaceLabels();
+    for(auto placeLabel : placeLabels)
     {
-        const quint32 id = AddPlaceLabel(d.GetPlaceLabels().at(i), initData, children, drawName, dx, dy, pRotate,
-                                         angle);
+        const quint32 id = AddPlaceLabel(placeLabel, initData, children, drawName, dx, dy, pRotate, angle);
         newDetail.GetPlaceLabels().append(id);
     }
     children += nodeChildren;
@@ -1645,9 +1647,9 @@ void VToolUnionDetails::incrementReferens()
     if (_referens == 1)
     {
         const QVector<quint32> objects = GetReferenceObjects();
-        for(int i = 0; i < objects.size(); ++i)
+        for(auto object : objects)
         {
-            doc->IncrementReferens(objects.at(i));
+            doc->IncrementReferens(object);
         }
 
         QDomElement domElement = doc->elementById(m_id, getTagName());
@@ -1665,9 +1667,9 @@ void VToolUnionDetails::decrementReferens()
     if (_referens == 0)
     {
         const QVector<quint32> objects = GetReferenceObjects();
-        for(int i = 0; i < objects.size(); ++i)
+        for(auto object : objects)
         {
-            doc->DecrementReferens(objects.at(i));
+            doc->DecrementReferens(object);
         }
 
         QDomElement domElement = doc->elementById(m_id, getTagName());

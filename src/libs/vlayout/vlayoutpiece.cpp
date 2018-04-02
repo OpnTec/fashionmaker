@@ -305,9 +305,9 @@ QVector<QPointF> CorrectPosition(const QRectF &parentBoundingRect, QVector<QPoin
 QVector<VSAPoint> PrepareAllowance(const QVector<QPointF> &points)
 {
     QVector<VSAPoint> allowancePoints;
-    for(int i = 0; i < points.size(); ++i)
+    for(auto point : points)
     {
-        allowancePoints.append(VSAPoint(points.at(i)));
+        allowancePoints.append(VSAPoint(point));
     }
     return allowancePoints;
 }
@@ -348,9 +348,10 @@ QStringList PieceLabelText(const QVector<QPointF> &labelShape, const VTextManage
 QVector<VLayoutPlaceLabel> ConvertPlaceLabels(const VPiece &piece, const VContainer *pattern)
 {
     QVector<VLayoutPlaceLabel> labels;
-    for(int i=0; i < piece.GetPlaceLabels().size(); ++i)
+    const QVector<quint32> placeLabels = piece.GetPlaceLabels();
+    for(auto placeLabel : placeLabels)
     {
-        const auto label = pattern->GeometricObject<VPlaceLabelItem>(piece.GetPlaceLabels().at(i));
+        const auto label = pattern->GeometricObject<VPlaceLabelItem>(placeLabel);
         VLayoutPlaceLabel layoutLabel;
         layoutLabel.shape = label->LabelShape();
         layoutLabel.center = label->toQPointF();

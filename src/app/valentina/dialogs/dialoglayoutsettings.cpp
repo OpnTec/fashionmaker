@@ -746,9 +746,9 @@ void DialogLayoutSettings::InitPrinter()
     QStringList printerNames;
 #if QT_VERSION < QT_VERSION_CHECK(5, 3, 0)
     const QList<QPrinterInfo> printers = QPrinterInfo::availablePrinters();
-    for(int i = 0; i < printers.size(); ++i)
+    for(auto printer : printers)
     {
-        const QString name = printers.at(i).printerName();
+        const QString name = printer.printerName();
         if (not name.isEmpty())
         {
             printerNames.append(name);

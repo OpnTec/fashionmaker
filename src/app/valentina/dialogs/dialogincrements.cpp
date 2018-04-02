@@ -585,15 +585,14 @@ bool DialogIncrements::IncrementUsed(const QString &name) const
 {
     const QVector<VFormulaField> expressions = doc->ListExpressions();
 
-    for(int i = 0; i < expressions.size(); ++i)
+    for(auto field : expressions)
     {
-        if (expressions.at(i).expression.indexOf(name) != -1)
+        if (field.expression.indexOf(name) != -1)
         {
             // Eval formula
             try
             {
-                QScopedPointer<qmu::QmuTokenParser> cal(new qmu::QmuTokenParser(expressions.at(i).expression, false,
-                                                                                false));
+                QScopedPointer<qmu::QmuTokenParser> cal(new qmu::QmuTokenParser(field.expression, false, false));
 
                 // Tokens (variables, measurements)
                 if (cal->GetTokens().values().contains(name))

@@ -448,11 +448,11 @@ QVector<QLineF> VPiece::PassmarksLines(const VContainer *data, const QVector<QPo
 QVector<PlaceLabelImg> VPiece::PlaceLabelPoints(const VContainer *data) const
 {
     QVector<PlaceLabelImg> points;
-    for(int i=0; i < d->m_placeLabels.size(); ++i)
+    for(auto placeLabel : d->m_placeLabels)
     {
         try
         {
-            const auto label = data->GeometricObject<VPlaceLabelItem>(d->m_placeLabels.at(i));
+            const auto label = data->GeometricObject<VPlaceLabelItem>(placeLabel);
             points.append(label->LabelShape());
         }
         catch (const VExceptionBadId &e)

@@ -622,10 +622,8 @@ bool VDxfEngine::ExportToAAMA(const QVector<VLayoutPiece> &details)
 
     ExportAAMAGlobalText(input, details);
 
-    for(int i = 0; i < details.size(); ++i)
+    for(auto &detail : details)
     {
-        const VLayoutPiece &detail = details.at(i);
-
         dx_ifaceBlock *detailBlock = new dx_ifaceBlock();
 
         QString blockName = detail.GetName();
@@ -736,11 +734,10 @@ void VDxfEngine::ExportAAMANotch(dx_ifaceBlock *detailBlock, const VLayoutPiece 
 {
     if (detail.IsSeamAllowance())
     {
-        QVector<QLineF> passmarks = detail.GetPassmarks();
-        for(int i = 0; i < passmarks.size(); ++i)
+        const QVector<QLineF> passmarks = detail.GetPassmarks();
+        for(auto passmark : passmarks)
         {
-            DRW_Entity *e = AAMALine(passmarks.at(i), "4");
-            if (e)
+            if (DRW_Entity *e = AAMALine(passmark, "4"))
             {
                 detailBlock->ent.push_back(e);
             }

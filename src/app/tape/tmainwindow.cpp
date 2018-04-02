@@ -3207,18 +3207,18 @@ void TMainWindow::ImportIndividualMeasurements(const QxtCsvModel &csv)
         }
     }
 
-    for(int i=0; i < measurements.size(); ++i)
+    for(auto im : qAsConst(measurements))
     {
-        m->AddEmpty(measurements.at(i).name, measurements.at(i).value);
+        m->AddEmpty(im.name, im.value);
 
-        if (not measurements.at(i).fullName.isEmpty())
+        if (not im.fullName.isEmpty())
         {
-            m->SetMFullName(measurements.at(i).name, measurements.at(i).fullName);
+            m->SetMFullName(im.name, im.fullName);
         }
 
-        if (not measurements.at(i).description.isEmpty())
+        if (not im.description.isEmpty())
         {
-            m->SetMDescription(measurements.at(i).name, measurements.at(i).description);
+            m->SetMDescription(im.name, im.description);
         }
     }
 
@@ -3317,21 +3317,21 @@ void TMainWindow::ImportMultisizeMeasurements(const QxtCsvModel &csv)
         }
     }
 
-    for(int i=0; i < measurements.size(); ++i)
+    for(auto mm : qAsConst(measurements))
     {
-        m->AddEmpty(measurements.at(i).name);
-        m->SetMBaseValue(measurements.at(i).name, measurements.at(i).base);
-        m->SetMSizeIncrease(measurements.at(i).name, measurements.at(i).sizeIncrease);
-        m->SetMHeightIncrease(measurements.at(i).name, measurements.at(i).heightIncrease);
+        m->AddEmpty(mm.name);
+        m->SetMBaseValue(mm.name, mm.base);
+        m->SetMSizeIncrease(mm.name, mm.sizeIncrease);
+        m->SetMHeightIncrease(mm.name, mm.heightIncrease);
 
-        if (not measurements.at(i).fullName.isEmpty())
+        if (not mm.fullName.isEmpty())
         {
-            m->SetMFullName(measurements.at(i).name, measurements.at(i).fullName);
+            m->SetMFullName(mm.name, mm.fullName);
         }
 
-        if (not measurements.at(i).description.isEmpty())
+        if (not mm.description.isEmpty())
         {
-            m->SetMDescription(measurements.at(i).name, measurements.at(i).description);
+            m->SetMDescription(mm.name, mm.description);
         }
     }
 

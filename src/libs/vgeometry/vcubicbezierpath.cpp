@@ -83,9 +83,9 @@ VCubicBezierPath VCubicBezierPath::Rotate(const QPointF &originPoint, qreal degr
 {
     const QVector<VPointF> points = GetCubicPath();
     VCubicBezierPath curve;
-    for(int i=0; i < points.size(); ++i)
+    for(auto &point : points)
     {
-        curve.append(points.at(i).Rotate(originPoint, degrees));
+        curve.append(point.Rotate(originPoint, degrees));
     }
     curve.setName(name() + prefix);
     curve.SetColor(GetColor());
@@ -99,9 +99,9 @@ VCubicBezierPath VCubicBezierPath::Flip(const QLineF &axis, const QString &prefi
 {
     const QVector<VPointF> points = GetCubicPath();
     VCubicBezierPath curve;
-    for(int i=0; i < points.size(); ++i)
+    for(auto &point : points)
     {
-        curve.append(points.at(i).Flip(axis));
+        curve.append(point.Flip(axis));
     }
     curve.setName(name() + prefix);
     curve.SetColor(GetColor());
@@ -115,9 +115,9 @@ VCubicBezierPath VCubicBezierPath::Move(qreal length, qreal angle, const QString
 {
     const QVector<VPointF> points = GetCubicPath();
     VCubicBezierPath curve;
-    for(int i=0; i < points.size(); ++i)
+    for(auto &point : points)
     {
-        curve.append(points.at(i).Move(length, angle));
+        curve.append(point.Move(length, angle));
     }
     curve.setName(name() + prefix);
     curve.SetColor(GetColor());
