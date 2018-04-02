@@ -464,9 +464,20 @@ QVector<PlaceLabelImg> VPiece::PlaceLabelPoints(const VContainer *data) const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+QVector<QPainterPath> VPiece::CurvesPainterPath(const VContainer *data) const
+{
+    return GetPath().CurvesPainterPath(data);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 QPainterPath VPiece::MainPathPath(const VContainer *data) const
 {
-    const QVector<QPointF> points = MainPathPoints(data);
+    return MainPathPath(MainPathPoints(data));
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QPainterPath VPiece::MainPathPath(const QVector<QPointF> &points) const
+{
     QPainterPath path;
 
     if (not points.isEmpty())

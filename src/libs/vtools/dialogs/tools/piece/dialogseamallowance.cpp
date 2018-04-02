@@ -163,11 +163,6 @@ DialogSeamAllowance::DialogSeamAllowance(const VContainer *data, const quint32 &
     flagMainPathIsValid = MainPathIsValid();
     CheckState();
 
-    if (not applyAllowed)
-    {
-        vis = new VisToolPiece(data);
-    }
-
     m_ftb->SetCurrentIndex(TabOrder::Paths);// Show always first tab active on start.
 }
 
@@ -203,6 +198,11 @@ void DialogSeamAllowance::EnableApply(bool enable)
     m_ftb->SetTabEnabled(TabOrder::Grainline, applyAllowed);
     m_ftb->SetTabEnabled(TabOrder::Passmarks, applyAllowed);
     m_ftb->SetTabEnabled(TabOrder::PlaceLabels, applyAllowed);
+
+    if (not applyAllowed && vis.isNull())
+    {
+        vis = new VisToolPiece(data);
+    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -3028,10 +3028,13 @@ void DialogSeamAllowance::SetFormulaSAWidth(const QString &formula)
     }
     uiTabPaths->plainTextEditFormulaWidth->setPlainText(width);
 
-    VisToolPiece *path = qobject_cast<VisToolPiece *>(vis);
-    SCASSERT(path != nullptr)
-    const VPiece p = CreatePiece();
-    path->SetPiece(p);
+    if (not applyAllowed)
+    {
+        VisToolPiece *path = qobject_cast<VisToolPiece *>(vis);
+        SCASSERT(path != nullptr)
+        const VPiece p = CreatePiece();
+        path->SetPiece(p);
+    }
 
     MoveCursorToEnd(uiTabPaths->plainTextEditFormulaWidth);
 }

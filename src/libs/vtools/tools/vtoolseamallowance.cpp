@@ -1355,7 +1355,9 @@ void VToolSeamAllowance::RefreshGeometry(bool updateChildren)
     this->setFlag(QGraphicsItem::ItemSendsGeometryChanges, false);
 
     const VPiece detail = VAbstractTool::data.GetPiece(m_id);
-    QFuture<QPainterPath > futurePath = QtConcurrent::run(detail, &VPiece::MainPathPath, this->getData());
+    QFuture<QPainterPath > futurePath = QtConcurrent::run(detail,
+                                                          QOverload<const VContainer *>::of(&VPiece::MainPathPath),
+                                                          this->getData());
     QFuture<QVector<QPointF> > futureSeamAllowance;
 
     if (detail.IsSeamAllowance())

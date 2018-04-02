@@ -128,6 +128,20 @@ int IndexOfNode(const QVector<VPieceNode> &list, quint32 id)
     qDebug()<<"Can't find node.";
     return -1;
 }
+
+//---------------------------------------------------------------------------------------------------------------------
+QPainterPath MakePainterPath(const QVector<QPointF> &points)
+{
+    QPainterPath path;
+
+    if (not points.isEmpty())
+    {
+        path.addPolygon(QPolygonF(points));
+        path.setFillRule(Qt::WindingFill);
+    }
+
+    return path;
+}
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -333,6 +347,41 @@ QVector<VPointF> VPiecePath::PathNodePoints(const VContainer *data, bool showExc
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+QVector<QVector<QPointF> > VPiecePath::PathCurvePoints(const VContainer *data) const
+{
+    QVector<QVector<QPointF> > curves;
+    for (int i = 0; i < CountNodes(); ++i)
+    {
+        if (at(i).IsExcluded())
+        {
+            continue;// skip excluded node
+        }
+
+        switch (at(i).GetTypeTool())
+        {
+            case (Tool::NodeArc):
+            case (Tool::NodeElArc):
+            case (Tool::NodeSpline):
+            case (Tool::NodeSplinePath):
+            {
+                const QSharedPointer<VAbstractCurve> curve = data->GeometricObject<VAbstractCurve>(at(i).GetId());
+
+                const QPointF begin = StartSegment(data, i, at(i).GetReverse());
+                const QPointF end = EndSegment(data, i, at(i).GetReverse());
+
+                curves.append(curve->GetSegmentPoints(begin, end, at(i).GetReverse()));
+                break;
+            }
+            case (Tool::NodePoint):
+            default:
+                break;
+        }
+    }
+
+    return curves;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 QVector<VSAPoint> VPiecePath::SeamAllowancePoints(const VContainer *data, qreal width, bool reverse) const
 {
     SCASSERT(data != nullptr);
@@ -374,16 +423,20 @@ QVector<VSAPoint> VPiecePath::SeamAllowancePoints(const VContainer *data, qreal 
 //---------------------------------------------------------------------------------------------------------------------
 QPainterPath VPiecePath::PainterPath(const VContainer *data) const
 {
-    const QVector<QPointF> points = PathPoints(data);
-    QPainterPath path;
+    return MakePainterPath(PathPoints(data));
+}
 
-    if (not points.isEmpty())
+//---------------------------------------------------------------------------------------------------------------------
+QVector<QPainterPath> VPiecePath::CurvesPainterPath(const VContainer *data) const
+{
+    const QVector<QVector<QPointF> > curves = PathCurvePoints(data);
+    QVector<QPainterPath> paths(curves.size());
+
+    for(auto &curve : curves)
     {
-        path.addPolygon(QPolygonF(points));
-        path.setFillRule(Qt::WindingFill);
+        paths.append(MakePainterPath(curve));
     }
-
-    return path;
+    return paths;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
