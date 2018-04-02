@@ -76,8 +76,9 @@ public:
 
     QVector<QPainterPath> CurvesPainterPath(const VContainer *data) const;
 
-    QPainterPath MainPathPath(const VContainer *data) const;
-    QPainterPath MainPathPath(const QVector<QPointF> &points) const;
+    QPainterPath        MainPathPath(const VContainer *data) const;
+    static QPainterPath MainPathPath(const QVector<QPointF> &points);
+
     QPainterPath SeamAllowancePath(const VContainer *data) const;
     QPainterPath SeamAllowancePath(const QVector<QPointF> &points) const;
     QPainterPath PassmarksPath(const VContainer *data,

@@ -63,7 +63,7 @@ void VisToolPiece::RefreshGeometry()
             {
                 m_cachedCurvesPath = m_piece.CurvesPainterPath(Visualization::data);
                 m_cachedMainPathPoints = m_piece.MainPathPoints(Visualization::data);
-                m_cachedMainPath = m_piece.MainPathPath(m_cachedMainPathPoints);
+                m_cachedMainPath = VPiece::MainPathPath(m_cachedMainPathPoints);
             }
             else
             {

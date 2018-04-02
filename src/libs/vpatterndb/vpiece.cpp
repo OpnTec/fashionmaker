@@ -472,11 +472,11 @@ QVector<QPainterPath> VPiece::CurvesPainterPath(const VContainer *data) const
 //---------------------------------------------------------------------------------------------------------------------
 QPainterPath VPiece::MainPathPath(const VContainer *data) const
 {
-    return MainPathPath(MainPathPoints(data));
+    return VPiece::MainPathPath(MainPathPoints(data));
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QPainterPath VPiece::MainPathPath(const QVector<QPointF> &points) const
+QPainterPath VPiece::MainPathPath(const QVector<QPointF> &points)
 {
     QPainterPath path;
 
