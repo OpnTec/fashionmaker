@@ -285,8 +285,11 @@ void VDrawTool::ContextMenu(QGraphicsSceneContextMenuEvent *event, quint32 itemI
         quint32 groupId = selectedAction->data().toUInt();
         QDomElement item = doc->AddItemToGroup(this->getId(), itemId, groupId);
 
-        VAbstractMainWindow *window = qobject_cast<VAbstractMainWindow *>(qApp->getMainWindow());
+        VMainGraphicsScene *scene = qobject_cast<VMainGraphicsScene *>(qApp->getCurrentScene());
+        SCASSERT(scene != nullptr)
+        scene->clearSelection();
 
+        VAbstractMainWindow *window = qobject_cast<VAbstractMainWindow *>(qApp->getMainWindow());
         SCASSERT(window != nullptr)
         {
             AddItemToGroup *addItemToGroup = new AddItemToGroup(item, doc, groupId);
@@ -300,7 +303,6 @@ void VDrawTool::ContextMenu(QGraphicsSceneContextMenuEvent *event, quint32 itemI
         QDomElement item = doc->RemoveItemFromGroup(this->getId(), itemId, groupId);
 
         VAbstractMainWindow *window = qobject_cast<VAbstractMainWindow *>(qApp->getMainWindow());
-
         SCASSERT(window != nullptr)
         {
             RemoveItemFromGroup *removeItemFromGroup = new RemoveItemFromGroup(item, doc, groupId);

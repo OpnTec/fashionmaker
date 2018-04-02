@@ -10,7 +10,7 @@
     <x>0</x>
     <y>0</y>
     <width>583</width>
-    <height>526</height>
+    <height>543</height>
    </rect>
   </property>
   <property name="sizePolicy">
@@ -224,7 +224,8 @@ Fritz Rometsch
 Felix Ulber
 Alex Zaharov
 Valentina Zhuravska
-Bettina Gatzlaff </string>
+Bettina Gatzlaff
+Ronan Le Tiec</string>
          </property>
         </widget>
        </item>

@@ -48,6 +48,7 @@
 - [#814] Make "\" valid character.
 - [#818] Improve Piece path validation. Check uniqueness.
 - [#819] Use OpenGL as render for view.
+- [#826] New Feature. Add and remove items to groups from the context menu.
 
 # Version 0.5.1
 - [#683] Tool Seam allowance's dialog is off screen on small resolutions.
