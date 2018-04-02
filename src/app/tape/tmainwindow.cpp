@@ -2977,7 +2977,7 @@ void TMainWindow::CreateWindowMenu(QMenu *menu)
     SCASSERT(menu != nullptr)
 
     QAction *action = menu->addAction(tr("&New Window"));
-    connect(action, &QAction::triggered, this, [this]()
+    connect(action, &QAction::triggered, this, []()
     {
         qApp->NewMainWindow();
         qApp->MainWindow()->activateWindow();
@@ -3237,7 +3237,7 @@ void TMainWindow::ImportMultisizeMeasurements(const QxtCsvModel &csv)
         return;
     }
 
-    auto ConverToDouble = [this](QString text, const QString &error)
+    auto ConverToDouble = [](QString text, const QString &error)
     {
         text = VTranslateVars::TryFormulaFromUser(text, qApp->Settings()->GetOsSeparator());
         bool ok = false;
