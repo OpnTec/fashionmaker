@@ -46,6 +46,7 @@ public:
 
 public slots:
     virtual void ShowToolTip(const QString &toolTip)=0;
+    virtual void UpdateGroups()=0;
 
 protected slots:
     void WindowsLocale();

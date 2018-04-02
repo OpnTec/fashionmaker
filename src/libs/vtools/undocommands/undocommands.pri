@@ -27,7 +27,9 @@ HEADERS += \
     $$PWD/label/showdoublelabel.h \
     $$PWD/label/operationshowlabel.h \
     $$PWD/saveplacelabeloptions.h \
-    $$PWD/togglepiecestate.h
+    $$PWD/togglepiecestate.h \
+    $$PWD/additemtogroup.h \
+    $$PWD/removeitemfromgroup.h
 
 SOURCES += \
     $$PWD/addtocalc.cpp \
@@ -55,4 +57,6 @@ SOURCES += \
     $$PWD/label/showdoublelabel.cpp \
     $$PWD/label/operationshowlabel.cpp \
     $$PWD/saveplacelabeloptions.cpp \
-    $$PWD/togglepiecestate.cpp
+    $$PWD/togglepiecestate.cpp \
+    $$PWD/additemtogroup.cpp \
+    $$PWD/removeitemfromgroup.cpp

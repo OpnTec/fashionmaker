@@ -48,8 +48,12 @@
 #include "../vmisc/def.h"
 #include "../vwidgets/vmaingraphicsscene.h"
 #include "../vwidgets/vmaingraphicsview.h"
+#include "../vwidgets/vabstractmainwindow.h"
 #include "../vdatatool.h"
 #include "../vgeometry/vpointf.h"
+#include "../vtools/undocommands/addgroup.h"
+#include "../vtools/undocommands/additemtogroup.h"
+#include "../vtools/undocommands/removeitemfromgroup.h"
 
 template <class T> class QSharedPointer;
 
@@ -146,13 +150,70 @@ void VDrawTool::ContextMenu(QGraphicsSceneContextMenuEvent *event, quint32 itemI
         return;
     }
 
+    GOType itemType =  GOType::Unknown;
+    if(itemId != NULL_ID)
+    {
+        try
+        {
+            itemType = data.GetGObject(itemId)->getType();
+        }
+        catch (const VExceptionBadId &e)
+        { // Possible case. Parent was deleted, but the node object is still here.
+            qWarning() << qUtf8Printable(e.ErrorMessage());
+        }
+    }
+
     qCDebug(vTool, "Creating tool context menu.");
     QMenu menu;
     QAction *actionOption = menu.addAction(QIcon::fromTheme("preferences-other"), tr("Options"));
 
+    // add the menu "add to group" to the context menu
+    QMap<quint32,QString> groupsNotContainingItem =  doc->GetGroupsContainingItem(this->getId(), itemId, false);
+    QActionGroup* actionsAddToGroup = new QActionGroup(this);
+    if(not groupsNotContainingItem.empty())
+    {
+        QMenu *menuAddToGroup = menu.addMenu(QIcon::fromTheme("list-add"), tr("Add to group"));
+
+        QStringList list = QStringList(groupsNotContainingItem.values());
+        list.sort(Qt::CaseInsensitive);
+
+        for(int i=0; i<list.count(); ++i)
+        {
+            QAction *actionAddToGroup = menuAddToGroup->addAction(list[i]);
+            actionsAddToGroup->addAction(actionAddToGroup);
+            const quint32 groupId = groupsNotContainingItem.key(list[i]);
+            actionAddToGroup->setData(groupId);
+
+            // removes the group we just treated, because we can have several group
+            // with the same name. Otherwise the groupId would always be the same
+            groupsNotContainingItem.remove(groupId);
+        }
+    }
+
+    // add the menu "remove from group" to the context menu
+    QMap<quint32,QString> groupsContainingItem =  doc->GetGroupsContainingItem(this->getId(), itemId, true);
+    QActionGroup* actionsRemoveFromGroup = new QActionGroup(this);
+    if(not groupsContainingItem.empty())
+    {
+        QMenu *menuRemoveFromGroup = menu.addMenu(QIcon::fromTheme("list-remove"), tr("Remove from group"));
+
+        QStringList list = QStringList(groupsContainingItem.values());
+        list.sort(Qt::CaseInsensitive);
+
+        for(int i=0; i<list.count(); ++i)
+        {
+            QAction *actionRemoveFromGroup = menuRemoveFromGroup->addAction(list[i]);
+            actionsRemoveFromGroup->addAction(actionRemoveFromGroup);
+            const quint32 groupId = groupsContainingItem.key(list[i]);
+            actionRemoveFromGroup->setData(groupId);
+            groupsContainingItem.remove(groupId);
+        }
+    }
+
     QAction *actionShowLabel = menu.addAction(tr("Show label"));
     actionShowLabel->setCheckable(true);
-    if (itemId != NULL_ID)
+
+    if (itemType == GOType::Point)
     {
         actionShowLabel->setChecked(IsLabelVisible(itemId));
     }
@@ -190,7 +251,12 @@ void VDrawTool::ContextMenu(QGraphicsSceneContextMenuEvent *event, quint32 itemI
     }
 
     QAction *selectedAction = menu.exec(event->screenPos());
-    if (selectedAction == actionOption)
+
+    if(selectedAction == nullptr)
+    {
+        return;
+    }
+    else if (selectedAction == actionOption)
     {
         qCDebug(vTool, "Show options.");
         emit qApp->getSceneView()->itemClicked(nullptr);
@@ -213,6 +279,36 @@ void VDrawTool::ContextMenu(QGraphicsSceneContextMenuEvent *event, quint32 itemI
     else if (selectedAction == actionShowLabel)
     {
         ChangeLabelVisibility(itemId, selectedAction->isChecked());
+    }
+    else if (selectedAction->actionGroup() == actionsAddToGroup)
+    {
+        quint32 groupId = selectedAction->data().toUInt();
+        QDomElement item = doc->AddItemToGroup(this->getId(), itemId, groupId);
+
+        VMainGraphicsScene *scene = qobject_cast<VMainGraphicsScene *>(qApp->getCurrentScene());
+        SCASSERT(scene != nullptr)
+        scene->clearSelection();
+
+        VAbstractMainWindow *window = qobject_cast<VAbstractMainWindow *>(qApp->getMainWindow());
+        SCASSERT(window != nullptr)
+        {
+            AddItemToGroup *addItemToGroup = new AddItemToGroup(item, doc, groupId);
+            connect(addItemToGroup, &AddItemToGroup::UpdateGroups, window, &VAbstractMainWindow::UpdateGroups);
+            qApp->getUndoStack()->push(addItemToGroup);
+        }
+    }
+    else if (selectedAction->actionGroup() == actionsRemoveFromGroup)
+    {
+        quint32 groupId = selectedAction->data().toUInt();
+        QDomElement item = doc->RemoveItemFromGroup(this->getId(), itemId, groupId);
+
+        VAbstractMainWindow *window = qobject_cast<VAbstractMainWindow *>(qApp->getMainWindow());
+        SCASSERT(window != nullptr)
+        {
+            RemoveItemFromGroup *removeItemFromGroup = new RemoveItemFromGroup(item, doc, groupId);
+            connect(removeItemFromGroup, &RemoveItemFromGroup::UpdateGroups, window, &VAbstractMainWindow::UpdateGroups);
+            qApp->getUndoStack()->push(removeItemFromGroup);
+        }
     }
 }
 

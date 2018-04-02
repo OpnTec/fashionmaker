@@ -1455,6 +1455,16 @@ void MainWindow::ShowToolTip(const QString &toolTip)
     m_statusLabel->setText(toolTip);
 }
 
+
+//---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief triggers the update of the groups
+ */
+void MainWindow::UpdateGroups()
+{
+    groupsWidget->UpdateGroups();
+}
+
 //---------------------------------------------------------------------------------------------------------------------
 /**
  * @brief showEvent handle after show window.
@@ -4123,6 +4133,7 @@ void MainWindow::InitDocksContain()
     qCDebug(vMainWindow, "Initialization groups dock.");
     groupsWidget = new VWidgetGroups(doc, this);
     ui->dockWidgetGroups->setWidget(groupsWidget);
+    connect(doc,&VAbstractPattern::UpdateGroups , this, &MainWindow::UpdateGroups);
 
     detailsWidget = new VWidgetDetails(pattern, doc, this);
     connect(doc, &VPattern::FullUpdateFromFile, detailsWidget, &VWidgetDetails::UpdateList);
