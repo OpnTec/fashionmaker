@@ -115,7 +115,7 @@ VPE::VProperty* VPE::QVector3DProperty::clone(bool include_children, VProperty* 
 
         if (!include_children)
         {
-            const QList<VProperty*> tmpChildren = container->getChildren();
+            const QList<VProperty*> &tmpChildren = container->getChildren();
             for (auto tmpChild : tmpChildren)
             {
                 container->removeChild(tmpChild);

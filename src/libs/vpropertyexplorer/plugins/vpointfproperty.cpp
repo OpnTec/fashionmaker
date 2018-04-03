@@ -114,7 +114,7 @@ VPE::VProperty *VPE::VPointFProperty::clone(bool include_children, VProperty *co
 
         if (!include_children)
         {
-            const QList<VProperty*> tmpChildren = container->getChildren();
+            const QList<VProperty*> &tmpChildren = container->getChildren();
             for(auto tmpChild : tmpChildren)
             {
                 container->removeChild(tmpChild);
