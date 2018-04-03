@@ -103,6 +103,7 @@ void VPE::VPropertyFormWidget::build()
     }
 
     QFormLayout* tmpFormLayout = new QFormLayout(this);
+    tmpFormLayout->setFieldGrowthPolicy(QFormLayout::ExpandingFieldsGrow);
     setLayout(tmpFormLayout);
 
     for (int i = 0; i < d_ptr->Properties.count(); ++i)
@@ -123,9 +124,11 @@ void VPE::VPropertyFormWidget::build()
                 tmpFormLayout->addRow(group);
 
                 QFormLayout* subFormLayout = new QFormLayout(group);
+                subFormLayout->setFieldGrowthPolicy(QFormLayout::ExpandingFieldsGrow);
                 QMargins margins = subFormLayout->contentsMargins();
                 margins.setTop(0);
-                margins.setLeft(14);
+                margins.setLeft(18);
+                margins.setRight(0);
                 subFormLayout->setContentsMargins(margins);
 
                 group->setLayout(subFormLayout);

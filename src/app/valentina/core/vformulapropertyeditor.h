@@ -33,7 +33,6 @@
 #include <QToolButton>
 #include <QLineEdit>
 #include <QLabel>
-#include <QSpacerItem>
 
 #include "../vpatterndb/vformula.h"
 
@@ -72,7 +71,6 @@ private:
     VFormula formula;
     QToolButton* ToolButton;
     QLabel* TextLabel;
-    QSpacerItem* Spacer;
 };
 
 
