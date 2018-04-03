@@ -209,7 +209,7 @@ void VMainGraphicsScene::InitOrigins()
 //---------------------------------------------------------------------------------------------------------------------
 void VMainGraphicsScene::SetOriginsVisible(bool visible)
 {
-    foreach (QGraphicsItem *item, origins)
+    for (auto item : qAsConst(origins))
     {
         item->setVisible(visible);
     }
@@ -225,7 +225,8 @@ QPointF VMainGraphicsScene::getScenePos() const
 QRectF VMainGraphicsScene::VisibleItemsBoundingRect() const
 {
     QRectF rect;
-    foreach(QGraphicsItem *item, items())
+    const QList<QGraphicsItem *> qItems = items();
+    for (auto item : qItems)
     {
         if(not item->isVisible())
         {

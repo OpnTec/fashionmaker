@@ -681,32 +681,29 @@ void VDxfEngine::ExportAAMADraw(dx_ifaceBlock *detailBlock, const VLayoutPiece &
     if (not detail.IsHideMainPath())
     {
         QVector<QPointF> poly = detail.GetContourPoints();
-        DRW_Entity *e = AAMAPolygon(poly, "8", true);
-        if (e)
+        if (DRW_Entity *e = AAMAPolygon(poly, "8", true))
         {
             detailBlock->ent.push_back(e);
         }
     }
 
-    QVector<QVector<QPointF>> drawIntCut = detail.InternalPathsForCut(false);
-    for(int j = 0; j < drawIntCut.size(); ++j)
+    const QVector<QVector<QPointF>> drawIntCut = detail.InternalPathsForCut(false);
+    for(auto &intCut : drawIntCut)
     {
-        DRW_Entity *e = AAMAPolygon(drawIntCut.at(j), "8", false);
-        if (e)
+        if (DRW_Entity *e = AAMAPolygon(intCut, "8", false))
         {
             detailBlock->ent.push_back(e);
         }
     }
 
     const QVector<VLayoutPlaceLabel> labels = detail.GetPlaceLabels();
-    foreach(const VLayoutPlaceLabel &label, labels)
+    for(auto &label : labels)
     {
         if (label.type != PlaceLabelType::Doubletree && label.type != PlaceLabelType::Button)
         {
-            foreach(const QPolygonF &p, label.shape)
+            for(auto &p : qAsConst(label.shape))
             {
-                DRW_Entity *e = AAMAPolygon(p, "8", false);
-                if (e)
+                if (DRW_Entity *e = AAMAPolygon(p, "8", false))
                 {
                     detailBlock->ent.push_back(e);
                 }
@@ -719,10 +716,9 @@ void VDxfEngine::ExportAAMADraw(dx_ifaceBlock *detailBlock, const VLayoutPiece &
 void VDxfEngine::ExportAAMAIntcut(dx_ifaceBlock *detailBlock, const VLayoutPiece &detail)
 {
     QVector<QVector<QPointF>> drawIntCut = detail.InternalPathsForCut(true);
-    for(int j = 0; j < drawIntCut.size(); ++j)
+    for(auto &intCut : drawIntCut)
     {
-        DRW_Entity *e = AAMAPolygon(drawIntCut.at(j), "11", false);
-        if (e)
+        if (DRW_Entity *e = AAMAPolygon(intCut, "11", false))
         {
             detailBlock->ent.push_back(e);
         }
@@ -751,8 +747,7 @@ void VDxfEngine::ExportAAMAGrainline(dx_ifaceBlock *detailBlock, const VLayoutPi
     const QVector<QPointF> grainline = detail.GetGrainline();
     if (grainline.count() > 1)
     {
-        DRW_Entity *e = AAMALine(QLineF(grainline.first(), grainline.last()), "7");
-        if (e)
+        if (DRW_Entity *e = AAMALine(QLineF(grainline.first(), grainline.last()), "7"))
         {
             detailBlock->ent.push_back(e);
         }
@@ -795,7 +790,7 @@ void VDxfEngine::ExportAAMADrill(dx_ifaceBlock *detailBlock, const VLayoutPiece 
 {
     const QVector<VLayoutPlaceLabel> labels = detail.GetPlaceLabels();
 
-    foreach(const VLayoutPlaceLabel &label, labels)
+    for(auto &label : labels)
     {
         if (label.type == PlaceLabelType::Doubletree || label.type == PlaceLabelType::Button)
         {

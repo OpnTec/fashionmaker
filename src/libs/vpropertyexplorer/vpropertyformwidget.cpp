@@ -268,8 +268,8 @@ void VPE::VPropertyFormWidget::setCommitBehaviour(bool auto_commit)
 {
     d_ptr->UpdateEditors = auto_commit;
 
-    QList<VPropertyFormWidget*> tmpChildFormWidgets = getChildPropertyFormWidgets();
-    foreach(VPropertyFormWidget* tmpChild, tmpChildFormWidgets)
+    const QList<VPropertyFormWidget*> tmpChildFormWidgets = getChildPropertyFormWidgets();
+    for (auto tmpChild : tmpChildFormWidgets)
     {
         if (tmpChild)
         {
@@ -281,7 +281,7 @@ void VPE::VPropertyFormWidget::setCommitBehaviour(bool auto_commit)
 QList<VPE::VPropertyFormWidget *> VPE::VPropertyFormWidget::getChildPropertyFormWidgets() const
 {
     QList<VPropertyFormWidget *> tmpResult;
-    foreach(const VPropertyFormWidgetPrivate::SEditorWidget& tmpEditorWidget, d_ptr->EditorWidgets)
+    for (auto &tmpEditorWidget : d_ptr->EditorWidgets)
     {
         if (tmpEditorWidget.FormWidget)
         {

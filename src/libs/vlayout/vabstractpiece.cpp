@@ -1017,7 +1017,7 @@ bool VAbstractPiece::IsEkvPointOnLine(const VSAPoint &iPoint, const VSAPoint &pr
 QPainterPath VAbstractPiece::PlaceLabelImgPath(const PlaceLabelImg &img)
 {
     QPainterPath path;
-    foreach(const QPolygonF &p, img)
+    for (auto &p : img)
     {
         if (not p.isEmpty())
         {

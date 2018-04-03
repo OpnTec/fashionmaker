@@ -260,7 +260,7 @@ QStringList VAbstractPattern::ListMeasurements() const
     QSet<QString> measurements;
     QSet<QString> others = futureIncrements.result().toSet();
 
-    foreach (const QString &token, tokens)
+    for (const auto &token : tokens)
     {
         if (token == QChar('-') || measurements.contains(token) || others.contains(token))
         {

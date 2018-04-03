@@ -505,7 +505,7 @@ VSAPoint VPiecePath::EndSegment(const VContainer *data, const QVector<VPieceNode
 QList<quint32> VPiecePath::Dependencies() const
 {
     QList<quint32> list;
-    foreach (const VPieceNode &node, d->m_nodes)
+    for (auto &node : d->m_nodes)
     {
         list.append(node.GetId());
     }

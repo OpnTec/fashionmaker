@@ -174,7 +174,7 @@ void VAbstractSpline::AllowHover(bool enabled)
     // Manually handle hover events. Need for setting cursor for not selectable paths.
     m_acceptHoverEvents = enabled;
 
-    foreach (auto *point, controlPoints)
+    for (auto point : qAsConst(controlPoints))
     {
         point->setAcceptHoverEvents(enabled);
     }
@@ -185,7 +185,7 @@ void VAbstractSpline::AllowSelecting(bool enabled)
 {
     setFlag(QGraphicsItem::ItemIsSelectable, enabled);
 
-    foreach (auto *point, controlPoints)
+    for (auto point : qAsConst(controlPoints))
     {
         point->setFlag(QGraphicsItem::ItemIsSelectable, enabled);
     }
@@ -424,7 +424,7 @@ void VAbstractSpline::CurveSelected(bool selected)
 {
     setSelected(selected);
 
-    foreach (auto *point, controlPoints)
+    for (auto point : qAsConst(controlPoints))
     {
         point->blockSignals(true);
         point->setSelected(selected);

@@ -470,12 +470,12 @@ template <>
 QVector<VLayoutPlaceLabel> VLayoutPiece::Map<VLayoutPlaceLabel>(const QVector<VLayoutPlaceLabel> &points) const
 {
     QVector<VLayoutPlaceLabel> p;
-    foreach (const VLayoutPlaceLabel &label, points)
+    for (auto &label : points)
     {
         VLayoutPlaceLabel mappedLabel;
         mappedLabel.type = label.type;
         mappedLabel.center = d->matrix.map(label.center);
-        foreach (const QPolygonF &p, label.shape)
+        for (const auto &p : label.shape)
         {
             mappedLabel.shape.append(d->matrix.map(p));
         }

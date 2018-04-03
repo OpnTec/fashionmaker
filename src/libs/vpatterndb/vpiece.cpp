@@ -681,22 +681,22 @@ QList<quint32> VPiece::Dependencies() const
 {
     QList<quint32> list = d->m_path.Dependencies();
 
-    foreach (const CustomSARecord &record, d->m_customSARecords)
+    for (auto &record : d->m_customSARecords)
     {
         list.append(record.path);
     }
 
-    foreach (const quint32 &value, d->m_internalPaths)
+    for (auto &value : d->m_internalPaths)
     {
         list.append(value);
     }
 
-    foreach (const quint32 &value, d->m_pins)
+    for (auto &value : d->m_pins)
     {
         list.append(value);
     }
 
-    foreach (const quint32 &value, d->m_placeLabels)
+    for (auto &value : d->m_placeLabels)
     {
         list.append(value);
     }

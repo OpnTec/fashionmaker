@@ -106,7 +106,7 @@ QPointF GetOriginPoint(const QVector<quint32> objects, const VContainer *data, q
                 originObjects.append(data->GeometricObject<VAbstractCurve>(id)->GetPoints());
 #else
                 const QVector<QPointF> points = data->GeometricObject<VAbstractCurve>(id)->GetPoints();
-                foreach (const QPointF &point, points)
+                for (auto &point : points)
                 {
                     originObjects.append(point);
                 }

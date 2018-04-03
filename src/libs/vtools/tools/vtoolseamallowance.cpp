@@ -1442,7 +1442,7 @@ void VToolSeamAllowance::SaveDialogChange(const QString &undoText)
     {
         qApp->getUndoStack()->beginMacro(undoText.isEmpty() ? saveCommand->text(): undoText);
 
-        foreach (QUndoCommand* command, undocommands)
+        for (auto command : undocommands)
         {
             qApp->getUndoStack()->push(command);
         }

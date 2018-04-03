@@ -245,7 +245,7 @@ bool VPE::VFileEditWidget::checkFileFilter(const QString& file) const
         return false;
     }
 
-    foreach(QString tmpFilter, FilterList)
+    for (auto &tmpFilter : FilterList)
     {
         QRegExp tmpRegExpFilter(tmpFilter, Qt::CaseInsensitive, QRegExp::Wildcard);
         if (tmpRegExpFilter.exactMatch(file))

@@ -183,11 +183,11 @@ void TST_BuitInRegExp::TestCheckInternalVaribleRegExp_data()
     QTest::addColumn<QString>("var");
     QTest::addColumn<QString>("originalName");
 
-    foreach(const QString &var, builInVariables)
+    for (auto &var : qAsConst(builInVariables))
     {
         const QString tag = QString("Locale: '%1'. Var '%2'").arg(m_locale, var);
         const QStringList originalNames = AllNames();
-        foreach(const QString &str, originalNames)
+        for (auto &str : originalNames)
         {
             QTest::newRow(qUtf8Printable(tag)) << var << str;
         }
@@ -254,7 +254,7 @@ void TST_BuitInRegExp::PrepareData()
 
     QTest::addColumn<QString>("originalName");
 
-    foreach(const QString &str, originalNames)
+    for (auto &str : originalNames)
     {
         const QString tag = QString("Locale: '%1'. Name '%2'").arg(m_locale, str);
         QTest::newRow(qUtf8Printable(tag)) << str;

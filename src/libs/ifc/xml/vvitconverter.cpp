@@ -207,7 +207,7 @@ void VVITConverter::ConvertMeasurementsToV0_3_0()
 
         // This has the same effect as a .values(), just isn't as elegant
         const QList<QString> list = names.values( keys.at(i) );
-        foreach(const QString &val, list )
+        for(const auto &val : list)
         {
             const QDomNodeList nodeList = this->elementsByTagName(val);
             if (nodeList.isEmpty())

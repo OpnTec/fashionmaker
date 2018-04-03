@@ -51,16 +51,16 @@ int main(int argc, char** argv)
     ASSERT_TEST(new TST_TSTranslation());
 
     const QStringList locales = SupportedLocales();
-    for(int l = 0, sz = locales.size(); l < sz; ++l)
+    for(auto &locale : locales)
     {
         for(quint32 s = 0; s < TST_MeasurementRegExp::systemCounts; ++s)
         {
-            ASSERT_TEST(new TST_MeasurementRegExp(s, locales.at(l)));
+            ASSERT_TEST(new TST_MeasurementRegExp(s, locale));
         }
 
-        ASSERT_TEST(new TST_TSLocaleTranslation(locales.at(l)));
-        ASSERT_TEST(new TST_BuitInRegExp(locales.at(l)));
-        ASSERT_TEST(new TST_QmuParserErrorMsg(locales.at(l)));
+        ASSERT_TEST(new TST_TSLocaleTranslation(locale));
+        ASSERT_TEST(new TST_BuitInRegExp(locale));
+        ASSERT_TEST(new TST_QmuParserErrorMsg(locale));
     }
 
     return status;
