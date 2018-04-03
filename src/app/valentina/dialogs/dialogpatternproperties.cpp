@@ -100,7 +100,7 @@ DialogPatternProperties::DialogPatternProperties(VPattern *doc,  VContainer *pat
     }
     ui->lineEditPathToFile->setCursorPosition(0);
 
-    connect(ui->pushButtonShowInExplorer, &QPushButton::clicked, this, [this]()
+    connect(ui->pushButtonShowInExplorer, &QPushButton::clicked, this, []()
     {
         ShowInGraphicalShell(qApp->GetPPath());
     });
