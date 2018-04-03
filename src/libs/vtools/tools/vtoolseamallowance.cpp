@@ -300,9 +300,9 @@ void VToolSeamAllowance::AddCSARecords(VAbstractPattern *doc, QDomElement &domEl
     if (records.size() > 0)
     {
         QDomElement csaRecordsElement = doc->createElement(VToolSeamAllowance::TagCSA);
-        for (int i = 0; i < records.size(); ++i)
+        for (auto record : records)
         {
-            AddCSARecord(doc, csaRecordsElement, records.at(i));
+            AddCSARecord(doc, csaRecordsElement, record);
         }
         domElement.appendChild(csaRecordsElement);
     }
@@ -314,10 +314,10 @@ void VToolSeamAllowance::AddInternalPaths(VAbstractPattern *doc, QDomElement &do
     if (paths.size() > 0)
     {
         QDomElement iPathsElement = doc->createElement(VToolSeamAllowance::TagIPaths);
-        for (int i = 0; i < paths.size(); ++i)
+        for (auto path : paths)
         {
             QDomElement recordNode = doc->createElement(VToolSeamAllowance::TagRecord);
-            doc->SetAttribute(recordNode, VAbstractPattern::AttrPath, paths.at(i));
+            doc->SetAttribute(recordNode, VAbstractPattern::AttrPath, path);
             iPathsElement.appendChild(recordNode);
         }
         domElement.appendChild(iPathsElement);
@@ -1332,12 +1332,12 @@ void VToolSeamAllowance::UpdateExcludeState()
 //---------------------------------------------------------------------------------------------------------------------
 void VToolSeamAllowance::UpdateInternalPaths()
 {
-    const VPiece detail = VAbstractTool::data.GetPiece(m_id);
-    for (int i = 0; i < detail.GetInternalPaths().size(); ++i)
+    const QVector<quint32> paths = VAbstractTool::data.GetPiece(m_id).GetInternalPaths();
+    for (auto path : paths)
     {
         try
         {
-            if (auto *tool = qobject_cast<VToolPiecePath*>(VAbstractPattern::getTool(detail.GetInternalPaths().at(i))))
+            if (auto *tool = qobject_cast<VToolPiecePath*>(VAbstractPattern::getTool(path)))
             {
                 tool->RefreshGeometry();
             }
@@ -1766,18 +1766,20 @@ void VToolSeamAllowance::InitNode(const VPieceNode &node, VMainGraphicsScene *sc
 //---------------------------------------------------------------------------------------------------------------------
 void VToolSeamAllowance::InitCSAPaths(const VPiece &detail) const
 {
-    for (int i = 0; i < detail.GetCustomSARecords().size(); ++i)
+    const QVector<CustomSARecord> records = detail.GetCustomSARecords();
+    for (auto record : records)
     {
-        doc->IncrementReferens(detail.GetCustomSARecords().at(i).path);
+        doc->IncrementReferens(record.path);
     }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void VToolSeamAllowance::InitInternalPaths(const VPiece &detail)
 {
-    for (int i = 0; i < detail.GetInternalPaths().size(); ++i)
+    const QVector<quint32> paths = detail.GetInternalPaths();
+    for (auto path : paths)
     {
-        auto *tool = qobject_cast<VToolPiecePath*>(VAbstractPattern::getTool(detail.GetInternalPaths().at(i)));
+        auto *tool = qobject_cast<VToolPiecePath*>(VAbstractPattern::getTool(path));
         SCASSERT(tool != nullptr);
 
         if (tool->parent() != this)
@@ -1786,16 +1788,16 @@ void VToolSeamAllowance::InitInternalPaths(const VPiece &detail)
             tool->SetParentType(ParentType::Item);
         }
         tool->show();
-        doc->IncrementReferens(detail.GetInternalPaths().at(i));
+        doc->IncrementReferens(path);
     }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void VToolSeamAllowance::InitSpecialPoints(const QVector<quint32> &points) const
 {
-    for (int i = 0; i < points.size(); ++i)
+    for (auto point : points)
     {
-        doc->IncrementReferens(points.at(i));
+        doc->IncrementReferens(point);
     }
 }
 
@@ -1913,10 +1915,10 @@ void VToolSeamAllowance::AddPointRecords(VAbstractPattern *doc, QDomElement &dom
     if (records.size() > 0)
     {
         QDomElement pinsElement = doc->createElement(tag);
-        for (int i = 0; i < records.size(); ++i)
+        for (auto record : records)
         {
             QDomElement recordNode = doc->createElement(VToolSeamAllowance::TagRecord);
-            recordNode.appendChild(doc->createTextNode(QString().setNum(records.at(i))));
+            recordNode.appendChild(doc->createTextNode(QString().setNum(record)));
             pinsElement.appendChild(recordNode);
         }
         domElement.appendChild(pinsElement);

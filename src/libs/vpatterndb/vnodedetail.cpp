@@ -224,9 +224,8 @@ QVector<VPieceNode> VNodeDetail::Convert(const VContainer *data, const QVector<V
     }
 
     VPiecePath path;
-    for (int i = 0; i < nodes.size(); ++i)
+    for (auto &node : nodes)
     {
-        const VNodeDetail &node = nodes.at(i);
         path.Append(VPieceNode(node.getId(), node.getTypeTool(), node.getReverse()));
     }
 

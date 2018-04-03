@@ -99,9 +99,9 @@ void VisToolPiecePath::HideAllItems()
         m_line->setVisible(false);
     }
 
-    for (int i=0; i < m_points.size(); ++i)
+    for (auto item : qAsConst(m_points))
     {
-        if (QGraphicsEllipseItem *item = m_points.at(i))
+        if (item)
         {
             item->setVisible(false);
         }

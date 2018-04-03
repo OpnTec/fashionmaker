@@ -214,14 +214,14 @@ void VVSTConverter::ConvertMeasurementsToV0_4_0()
 
     const QMultiMap<QString, QString> names = OldNamesToNewNames_InV0_3_0();
     const QList<QString> keys = names.uniqueKeys();
-    for (int i = 0; i < keys.size(); ++i)
+    for (auto &key : keys)
     {
         qreal resValue = 0;
         qreal resSizeIncrease = 0;
         qreal resHeightIncrease = 0;
 
         // This has the same effect as a .values(), just isn't as elegant
-        const QList<QString> list = names.values( keys.at(i) );
+        const QList<QString> list = names.values( key );
         for(const auto &val : list)
         {
             const QDomNodeList nodeList = this->elementsByTagName(val);
@@ -243,7 +243,7 @@ void VVSTConverter::ConvertMeasurementsToV0_4_0()
             }
         }
 
-        bm.appendChild(AddMV0_4_0(keys.at(i), resValue, resSizeIncrease, resHeightIncrease));
+        bm.appendChild(AddMV0_4_0(key, resValue, resSizeIncrease, resHeightIncrease));
     }
 
     QDomElement rootElement = this->documentElement();

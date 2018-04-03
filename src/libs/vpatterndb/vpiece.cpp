@@ -256,9 +256,8 @@ bool IsPassmarksPossible(const QVector<VPieceNode> &path)
     int countPointNodes = 0;
     int countOthers = 0;
 
-    for (int i = 0; i< path.size(); ++i)
+    for (auto &node : path)
     {
-        const VPieceNode &node = path.at(i);
         if (node.IsExcluded())
         {
             continue;// skip node
@@ -895,9 +894,8 @@ QVector<VPieceNode> VPiece::GetUnitedPath(const VContainer *data) const
 QVector<CustomSARecord> VPiece::GetValidRecords() const
 {
     QVector<CustomSARecord> records;
-    for (int i = 0; i < d->m_customSARecords.size(); ++i)
+    for (auto &record : d->m_customSARecords)
     {
-        const CustomSARecord &record = d->m_customSARecords.at(i);
         const int indexStartPoint = d->m_path.indexOfNode(record.startPoint);
         const int indexEndPoint = d->m_path.indexOfNode(record.endPoint);
 
@@ -948,13 +946,13 @@ QVector<CustomSARecord> VPiece::FilterRecords(QVector<CustomSARecord> records) c
     records.remove(startIndex);
 
     QVector<CustomSARecord> secondRound;
-    for (int i = 0; i < records.size(); ++i)
+    for (auto &record : records)
     {
-        const int indexStartPoint = d->m_path.indexOfNode(records.at(i).startPoint);
+        const int indexStartPoint = d->m_path.indexOfNode(record.startPoint);
         const int indexEndPoint = d->m_path.indexOfNode(filter.endPoint);
         if (indexStartPoint > indexEndPoint)
         {
-            secondRound.append(records.at(i));
+            secondRound.append(record);
         }
     }
 
@@ -1149,12 +1147,12 @@ bool VPiece::IsPassmarkVisible(const QVector<VPieceNode> &path, int passmarkInde
         return true;
     }
 
-    for (int i = 0; i < records.size(); ++i)
+    for (auto &record : records)
     {
-        if (records.at(i).includeType == PiecePathIncludeType::AsCustomSA)
+        if (record.includeType == PiecePathIncludeType::AsCustomSA)
         {
-            const int indexStartPoint = VPiecePath::indexOfNode(path, records.at(i).startPoint);
-            const int indexEndPoint = VPiecePath::indexOfNode(path, records.at(i).endPoint);
+            const int indexStartPoint = VPiecePath::indexOfNode(path, record.startPoint);
+            const int indexEndPoint = VPiecePath::indexOfNode(path, record.endPoint);
             if (passmarkIndex > indexStartPoint && passmarkIndex < indexEndPoint)
             {
                 return false;

@@ -442,9 +442,9 @@ void VAbstractSpline::InitDefShape()
 //---------------------------------------------------------------------------------------------------------------------
 void VAbstractSpline::ShowHandles(bool show)
 {
-    for (int i = 0; i < controlPoints.size(); ++i)
+    for (auto point : qAsConst(controlPoints))
     {
-        controlPoints.at(i)->setVisible(show);
+        point->setVisible(show);
     }
     update();// Show direction
 }

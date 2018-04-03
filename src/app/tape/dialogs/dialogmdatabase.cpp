@@ -438,9 +438,9 @@ void DialogMDataBase::InitGroup(QTreeWidgetItem **group, const QString &groupNam
                                 const QStringList &list)
 {
     *group = AddGroup(groupName);
-    for (int i=0; i < mList.size(); ++i)
+    for (auto &m : mList)
     {
-        AddMeasurement(*group, mList.at(i), list);
+        AddMeasurement(*group, m, list);
     }
 }
 

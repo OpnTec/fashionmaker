@@ -727,9 +727,9 @@ void DialogIncrements::RefreshPattern()
     if (hasChanges)
     {
         QVector<VFormulaField> expressions = doc->ListExpressions();
-        for (int i = 0; i < renameList.size(); ++i)
+        for (auto &item : renameList)
         {
-            doc->ReplaceNameInFormula(expressions, renameList.at(i).first, renameList.at(i).second);
+            doc->ReplaceNameInFormula(expressions, item.first, item.second);
         }
         renameList.clear();
 

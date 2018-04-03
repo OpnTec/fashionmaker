@@ -813,10 +813,10 @@ void SaveChildren(VAbstractPattern *doc, quint32 id, QDomElement section, const 
 {
     if (children.size() > 0)
     {
-        for (int i=0; i<children.size(); ++i)
+        for (auto child : children)
         {
             QDomElement tagChild = doc->createElement(VToolUnionDetails::TagChild);
-            tagChild.appendChild(doc->createTextNode(QString().setNum(children.at(i))));
+            tagChild.appendChild(doc->createTextNode(QString().setNum(child)));
             section.appendChild(tagChild);
         }
 
@@ -1131,21 +1131,20 @@ void CreateUnitedNodes(VPiece &newDetail, const VPiece &d1, const VPiece &d2, co
     const VPiecePath d1Path = d1.GetPath().RemoveEdge(initData.indexD1);
     const VPiecePath d2Path = d2.GetPath().RemoveEdge(initData.indexD2);
 
-    const QVector<QPair<bool, VPieceNode> > unitedPath = VToolUnionDetails::CalcUnitedPath(d1Path, d2Path,
-                                                                                           initData.indexD2, pRotate);
+    const auto unitedPath = VToolUnionDetails::CalcUnitedPath(d1Path, d2Path, initData.indexD2, pRotate);
 
     QVector<quint32> children;
     VPiecePath newPath;
 
-    for (int i=0; i < unitedPath.size(); ++i)
+    for (auto &path : unitedPath)
     {
-        if (unitedPath.at(i).first)
+        if (path.first)
         {// first piece
-            AddNodeToNewPath(initData, newPath, unitedPath.at(i).second, children, drawName);
+            AddNodeToNewPath(initData, newPath, path.second, children, drawName);
         }
         else
         {// second piece
-            AddNodeToNewPath(initData, newPath, unitedPath.at(i).second, children, drawName, dx, dy, pRotate, angle);
+            AddNodeToNewPath(initData, newPath, path.second, children, drawName, dx, dy, pRotate, angle);
         }
     }
 
@@ -1204,9 +1203,10 @@ void CreateUnitedDetailCSA(VPiece &newDetail, const VPiece &d, QVector<quint32> 
 void CreateUnitedCSA(VPiece &newDetail, const VPiece &d1, const VPiece &d2, const QString &drawName,
                      const VToolUnionDetailsInitData &initData, qreal dx, qreal dy, quint32 pRotate, qreal angle)
 {
-    for (int i = 0; i < d1.GetCustomSARecords().size(); ++i)
+    const QVector<CustomSARecord> records = d1.GetCustomSARecords();
+    for (auto record : records)
     {
-        newDetail.GetCustomSARecords().append(d1.GetCustomSARecords().at(i));
+        newDetail.GetCustomSARecords().append(record);
     }
 
     QVector<quint32> children;
@@ -1264,9 +1264,10 @@ void CreateUnitedInternalPaths(VPiece &newDetail, const VPiece &d1, const VPiece
                                const VToolUnionDetailsInitData &initData, qreal dx, qreal dy, quint32 pRotate,
                                qreal angle)
 {
-    for (int i = 0; i < d1.GetInternalPaths().size(); ++i)
+    const QVector<quint32> paths = d1.GetInternalPaths();
+    for (auto path : paths)
     {
-        newDetail.GetInternalPaths().append(d1.GetInternalPaths().at(i));
+        newDetail.GetInternalPaths().append(path);
     }
 
     QVector<quint32> children;
@@ -1309,9 +1310,10 @@ void CreateUnitedDetailPlaceLabels(VPiece &newDetail, const VPiece &d, QVector<q
 void CreateUnitedPins(VPiece &newDetail, const VPiece &d1, const VPiece &d2, const QString &drawName,
                       const VToolUnionDetailsInitData &initData, qreal dx, qreal dy, quint32 pRotate, qreal angle)
 {
-    for (int i = 0; i < d1.GetPins().size(); ++i)
+    const auto pins = d1.GetPins();
+    for (auto pin : pins)
     {
-        newDetail.GetPins().append(d1.GetPins().at(i));
+        newDetail.GetPins().append(pin);
     }
 
     QVector<quint32> children;
@@ -1324,9 +1326,10 @@ void CreateUnitedPlaceLabels(VPiece &newDetail, const VPiece &d1, const VPiece &
                              const VToolUnionDetailsInitData &initData, qreal dx, qreal dy, quint32 pRotate,
                              qreal angle)
 {
-    for (int i = 0; i < d1.GetPlaceLabels().size(); ++i)
+    const auto labels = d1.GetPlaceLabels();
+    for (auto label : labels)
     {
-        newDetail.GetPlaceLabels().append(d1.GetPlaceLabels().at(i));
+        newDetail.GetPlaceLabels().append(label);
     }
 
     QVector<quint32> children;
@@ -1352,19 +1355,17 @@ void UpdateUnitedNodes(const VToolUnionDetailsInitData &initData, qreal dx, qrea
                           "Time to refactor the code.");
         if (children.size() == countNodeD1 + countNodeD2-1)
         {
-            const QVector<QPair<bool, VPieceNode> > unitedPath = VToolUnionDetails::CalcUnitedPath(d1REPath, d2REPath,
-                                                                                                   initData.indexD2,
-                                                                                                   pRotate);
+            const auto unitedPath = VToolUnionDetails::CalcUnitedPath(d1REPath, d2REPath, initData.indexD2, pRotate);
 
-            for (int i=0; i < unitedPath.size(); ++i)
+            for (auto path : unitedPath)
             {
-                if (unitedPath.at(i).first)
+                if (path.first)
                 {// first piece
-                    UpdatePathNode(initData.data, unitedPath.at(i).second, children);
+                    UpdatePathNode(initData.data, path.second, children);
                 }
                 else
                 {// second piece
-                    UpdatePathNode(initData.data, unitedPath.at(i).second, children, dx, dy, pRotate, angle);
+                    UpdatePathNode(initData.data, path.second, children, dx, dy, pRotate, angle);
                 }
             }
         }
@@ -1402,9 +1403,9 @@ void UpdateUnitedNodes(const VToolUnionDetailsInitData &initData, qreal dx, qrea
 void UpdateUnitedDetailPaths(const VToolUnionDetailsInitData &initData, qreal dx, qreal dy, quint32 pRotate,
                              qreal angle, const QVector<quint32> &records, QVector<quint32> children)
 {
-    for (int i=0; i < records.size(); ++i)
+    for (auto record : records)
     {
-        const VPiecePath path = initData.data->GetPiecePath(records.at(i));
+        const VPiecePath path = initData.data->GetPiecePath(record);
 
         if (initData.version == 1)
         {
@@ -1444,9 +1445,9 @@ void UpdateUnitedDetailCSA(const VToolUnionDetailsInitData &initData, qreal dx, 
                            qreal angle, const QVector<CustomSARecord> &records)
 {
     QVector<quint32> idRecords;
-    for (int i = 0; i < records.size(); ++i)
+    for (auto record : records)
     {
-        idRecords.append(records.at(i).path);
+        idRecords.append(record.path);
     }
     UpdateUnitedDetailPaths(initData, dx, dy, pRotate, angle, idRecords, GetCSAChildren(initData.doc, initData.id));
 }
@@ -1465,9 +1466,9 @@ void UpdateUnitedDetailPins(const VToolUnionDetailsInitData &initData, qreal dx,
 {
     QVector<quint32> children = GetPinChildren(initData.doc, initData.id);
 
-    for (int i = 0; i < records.size(); ++i)
+    for (auto record : records)
     {
-        QScopedPointer<VPointF> point(new VPointF(*initData.data->GeometricObject<VPointF>(records.at(i))));
+        QScopedPointer<VPointF> point(new VPointF(*initData.data->GeometricObject<VPointF>(record)));
         point->setMode(Draw::Modeling);
         if (not qFuzzyIsNull(dx) || not qFuzzyIsNull(dy) || pRotate != NULL_ID)
         {
@@ -1484,9 +1485,9 @@ void UpdateUnitedDetailPlaceLabels(const VToolUnionDetailsInitData &initData, qr
 {
     QVector<quint32> children = GetPlaceLabelChildren(initData.doc, initData.id);
 
-    for (int i = 0; i < records.size(); ++i)
+    for (auto record : records)
     {
-        QSharedPointer<VPlaceLabelItem> parentLabel = initData.data->GeometricObject<VPlaceLabelItem>(records.at(i));
+        QSharedPointer<VPlaceLabelItem> parentLabel = initData.data->GeometricObject<VPlaceLabelItem>(record);
         if (not qFuzzyIsNull(dx) || not qFuzzyIsNull(dy) || pRotate != NULL_ID)
         {
             BiasRotatePoint(parentLabel.data(), dx, dy,

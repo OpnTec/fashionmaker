@@ -209,9 +209,9 @@ QMap<QString, QIcon> LineStylesPics()
     QMap<QString, QIcon> map;
     const QStringList styles = StylesList();
 
-    for (int i=0; i < styles.size(); ++i)
+    for (auto &s : styles)
     {
-        const Qt::PenStyle style = LineStyleToPenStyle(styles.at(i));
+        const Qt::PenStyle style = LineStyleToPenStyle(s);
         QPixmap pix(80, 14);
         pix.fill(Qt::white);
 
@@ -222,7 +222,7 @@ QMap<QString, QIcon> LineStylesPics()
         painter.setPen(pen);
         painter.drawLine(2, 7, 78, 7);
 
-        map.insert(styles.at(i), QIcon(pix));
+        map.insert(s, QIcon(pix));
     }
     return map;
 }

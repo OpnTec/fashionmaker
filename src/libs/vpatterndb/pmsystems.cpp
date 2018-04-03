@@ -159,9 +159,9 @@ void InitPMSystems(QComboBox *systemCombo)
 {
     const QStringList listSystems = ListPMSystems();
     QMap<QString, QString> systems;
-    for (int i = 0; i < listSystems.size()-1; ++i)
+    for (auto &sys : listSystems)
     {
-        systems.insert(qApp->TrVars()->PMSystemName(listSystems.at(i)) + " ("+listSystems.at(i)+")", listSystems.at(i));
+        systems.insert(qApp->TrVars()->PMSystemName(sys) + QLatin1String(" (") + sys + QLatin1String(")"), sys);
     }
 
 // * The default option (blank field or 'None') should appear at the top of the list.

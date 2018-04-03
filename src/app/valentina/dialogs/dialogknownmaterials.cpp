@@ -62,12 +62,11 @@ void DialogKnownMaterials::SetList(const QStringList &list)
 
     int row = -1;
 
-    for (int i=0; i<list.size(); ++i)
+    for (auto &m : list)
     {
-        if (not list.at(i).isEmpty())
+        if (not m.isEmpty())
         {
-            QListWidgetItem *item = new QListWidgetItem(list.at(i));
-            ui->listWidget->insertItem(++row, item);
+            ui->listWidget->insertItem(++row, new QListWidgetItem(m));
         }
     }
 

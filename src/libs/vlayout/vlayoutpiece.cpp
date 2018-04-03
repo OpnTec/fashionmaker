@@ -66,9 +66,9 @@ QVector<VLayoutPiecePath> ConvertInternalPaths(const VPiece &piece, const VConta
 
     QVector<VLayoutPiecePath> paths;
     const QVector<quint32> pathsId = piece.GetInternalPaths();
-    for (int i = 0; i < pathsId.size(); ++i)
+    for (auto id : pathsId)
     {
-        const VPiecePath path = pattern->GetPiecePath(pathsId.at(i));
+        const VPiecePath path = pattern->GetPiecePath(id);
         if (path.GetType() == PiecePathType::InternalPath && path.IsVisible(pattern->DataVariables()))
         {
             paths.append(VLayoutPiecePath(path.PathPoints(pattern), path.IsCutPath(), path.GetPenType()));
@@ -246,28 +246,28 @@ bool IsItemContained(const QRectF &parentBoundingRect, const QVector<QPointF> &s
     // single point differences
     bool bInside = true;
 
-    for (int i = 0; i < shape.size(); ++i)
+    for (auto p : shape)
     {
         qreal dPtX = 0;
         qreal dPtY = 0;
-        if (not parentBoundingRect.contains(shape.at(i)))
+        if (not parentBoundingRect.contains(p))
         {
-            if (shape.at(i).x() < parentBoundingRect.left())
+            if (p.x() < parentBoundingRect.left())
             {
-                dPtX = parentBoundingRect.left() - shape.at(i).x();
+                dPtX = parentBoundingRect.left() - p.x();
             }
-            else if (shape.at(i).x() > parentBoundingRect.right())
+            else if (p.x() > parentBoundingRect.right())
             {
-                dPtX = parentBoundingRect.right() - shape.at(i).x();
+                dPtX = parentBoundingRect.right() - p.x();
             }
 
-            if (shape.at(i).y() < parentBoundingRect.top())
+            if (p.y() < parentBoundingRect.top())
             {
-                dPtY = parentBoundingRect.top() - shape.at(i).y();
+                dPtY = parentBoundingRect.top() - p.y();
             }
-            else if (shape.at(i).y() > parentBoundingRect.bottom())
+            else if (p.y() > parentBoundingRect.bottom())
             {
-                dPtY = parentBoundingRect.bottom() - shape.at(i).y();
+                dPtY = parentBoundingRect.bottom() - p.y();
             }
 
             if (fabs(dPtX) > fabs(dX))
@@ -448,9 +448,9 @@ template <class T>
 QVector<T> VLayoutPiece::Map(const QVector<T> &points) const
 {
     QVector<T> p;
-    for (int i = 0; i < points.size(); ++i)
+    for (auto point : points)
     {
-        p.append(d->matrix.map(points.at(i)));
+        p.append(d->matrix.map(point));
     }
 
     if (d->mirror)
@@ -949,11 +949,11 @@ QVector<QVector<QPointF> > VLayoutPiece::InternalPathsForCut(bool cut) const
 {
     QVector<QVector<QPointF> > paths;
 
-    for (int i=0;i < d->m_internalPaths.count(); ++i)
+    for (auto &path : d->m_internalPaths)
     {
-        if (d->m_internalPaths.at(i).IsCutPath() == cut)
+        if (path.IsCutPath() == cut)
         {
-            paths.append(Map(d->m_internalPaths.at(i).Points()));
+            paths.append(Map(path.Points()));
         }
     }
 
@@ -1051,20 +1051,20 @@ QGraphicsItem *VLayoutPiece::GetItem(bool textAsPaths) const
 {
     QGraphicsPathItem *item = GetMainItem();
 
-    for (int i = 0; i < d->m_internalPaths.count(); ++i)
+    for (auto &path : d->m_internalPaths)
     {
         QGraphicsPathItem* pathItem = new QGraphicsPathItem(item);
-        pathItem->setPath(d->matrix.map(d->m_internalPaths.at(i).GetPainterPath()));
+        pathItem->setPath(d->matrix.map(path.GetPainterPath()));
 
         QPen pen = pathItem->pen();
-        pen.setStyle(d->m_internalPaths.at(i).PenStyle());
+        pen.setStyle(path.PenStyle());
         pathItem->setPen(pen);
     }
 
-    for (int i = 0; i < d->m_placeLabels.count(); ++i)
+    for (auto &label : d->m_placeLabels)
     {
         QGraphicsPathItem* pathItem = new QGraphicsPathItem(item);
-        pathItem->setPath(d->matrix.map(PlaceLabelImgPath(d->m_placeLabels.at(i).shape)));
+        pathItem->setPath(d->matrix.map(PlaceLabelImgPath(label.shape)));
     }
 
     CreateLabelStrings(item, d->detailLabel, d->m_tmDetail, textAsPaths);
@@ -1199,9 +1199,9 @@ void VLayoutPiece::CreateGrainlineItem(QGraphicsItem *parent) const
 
     QVector<QPointF> gPoints = GetGrainline();
     path.moveTo(gPoints.at(0));
-    for (int i = 1; i < gPoints.count(); ++i)
+    for (auto p : gPoints)
     {
-        path.lineTo(gPoints.at(i));
+        path.lineTo(p);
     }
     item->setPath(path);
 }

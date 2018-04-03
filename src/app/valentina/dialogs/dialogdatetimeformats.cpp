@@ -165,14 +165,14 @@ void DialogDateTimeFormats::SetFormatLines(const QStringList &predefined, const 
 
     int row = -1;
 
-    for (int i=0; i<predefined.size(); ++i)
+    for (auto &item : predefined)
     {
-        ui->listWidget->insertItem(++row, AddListLine(predefined.at(i)));
+        ui->listWidget->insertItem(++row, AddListLine(item));
     }
 
-    for (int i=0; i<userDefined.size(); ++i)
+    for (auto &item : userDefined)
     {
-        ui->listWidget->insertItem(++row, AddListLine(userDefined.at(i)));
+        ui->listWidget->insertItem(++row, AddListLine(item));
     }
 
     ui->listWidget->blockSignals(false);

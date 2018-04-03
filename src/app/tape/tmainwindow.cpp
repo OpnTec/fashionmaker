@@ -226,12 +226,12 @@ bool TMainWindow::LoadFile(const QString &path)
         }
 
         // Check if file already opened
-        QList<TMainWindow*>list = qApp->MainWindows();
-        for (int i = 0; i < list.size(); ++i)
+        const QList<TMainWindow*> list = qApp->MainWindows();
+        for (auto w : list)
         {
-            if (list.at(i)->CurrentFile() == path)
+            if (w->CurrentFile() == path)
             {
-                list.at(i)->activateWindow();
+                w->activateWindow();
                 close();
                 return false;
             }
@@ -1347,15 +1347,15 @@ void TMainWindow::AddKnown()
         if (ui->tableWidget->currentRow() == -1)
         {
             currentRow  = ui->tableWidget->rowCount() + list.size() - 1;
-            for (int i = 0; i < list.size(); ++i)
+            for (auto &name : list)
             {
                 if (mType == MeasurementsType::Individual)
                 {
-                    m->AddEmpty(list.at(i), qApp->TrVars()->MFormula(list.at(i)));
+                    m->AddEmpty(name, qApp->TrVars()->MFormula(name));
                 }
                 else
                 {
-                    m->AddEmpty(list.at(i));
+                    m->AddEmpty(name);
                 }
 
                 search->AddRow(currentRow);
@@ -1366,18 +1366,18 @@ void TMainWindow::AddKnown()
             currentRow  = ui->tableWidget->currentRow() + list.size();
             const QTableWidgetItem *nameField = ui->tableWidget->item(ui->tableWidget->currentRow(), ColumnName);
             QString after = nameField->data(Qt::UserRole).toString();
-            for (int i = 0; i < list.size(); ++i)
+            for (auto &name : list)
             {
                 if (mType == MeasurementsType::Individual)
                 {
-                    m->AddEmptyAfter(after, list.at(i), qApp->TrVars()->MFormula(list.at(i)));
+                    m->AddEmptyAfter(after, name, qApp->TrVars()->MFormula(name));
                 }
                 else
                 {
-                    m->AddEmptyAfter(after, list.at(i));
+                    m->AddEmptyAfter(after, name);
                 }
                 search->AddRow(currentRow);
-                after = list.at(i);
+                after = name;
             }
         }
 
@@ -1441,9 +1441,9 @@ void TMainWindow::ImportFromPattern()
     if (ui->tableWidget->currentRow() == -1)
     {
         currentRow  = ui->tableWidget->rowCount() + measurements.size() - 1;
-        for (int i = 0; i < measurements.size(); ++i)
+        for (auto &mName : measurements)
         {
-            m->AddEmpty(measurements.at(i));
+            m->AddEmpty(mName);
         }
     }
     else
@@ -1451,10 +1451,10 @@ void TMainWindow::ImportFromPattern()
         currentRow  = ui->tableWidget->currentRow() + measurements.size();
         const QTableWidgetItem *nameField = ui->tableWidget->item(ui->tableWidget->currentRow(), ColumnName);
         QString after = nameField->data(Qt::UserRole).toString();
-        for (int i = 0; i < measurements.size(); ++i)
+        for (auto &mName : measurements)
         {
-            m->AddEmptyAfter(after, measurements.at(i));
-            after = measurements.at(i);
+            m->AddEmptyAfter(after, mName);
+            after = mName;
         }
     }
 
@@ -2836,12 +2836,12 @@ bool TMainWindow::LoadFromExistingFile(const QString &path)
         }
 
         // Check if file already opened
-        QList<TMainWindow*>list = qApp->MainWindows();
-        for (int i = 0; i < list.size(); ++i)
+        const QList<TMainWindow*> list = qApp->MainWindows();
+        for (auto w : list)
         {
-            if (list.at(i)->CurrentFile() == path)
+            if (w->CurrentFile() == path)
             {
-                list.at(i)->activateWindow();
+                w->activateWindow();
                 close();
                 return false;
             }

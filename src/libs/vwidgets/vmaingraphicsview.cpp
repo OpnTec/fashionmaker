@@ -486,14 +486,13 @@ void VMainGraphicsView::mousePressEvent(QMouseEvent *event)
                     emit itemClicked(nullptr);
                     break;
                 }
-                for (int i = 0; i < list.size(); ++i)
+                for (auto item : list)
                 {
-                    if (this->scene()->items().contains(list.at(i)))
+                    if (this->scene()->items().contains(item))
                     {
-                        if (list.at(i)->type() > QGraphicsItem::UserType &&
-                            list.at(i)->type() <= VSimpleCurve::Type)
+                        if (item->type() > QGraphicsItem::UserType && item->type() <= VSimpleCurve::Type)
                         {
-                            emit itemClicked(list.at(i));
+                            emit itemClicked(item);
                             break;
                         }
                         else

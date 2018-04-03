@@ -574,16 +574,16 @@ void DialogEditLabel::SetTemplate(const QVector<VLabelTemplateLine> &lines)
 
     int row = -1;
 
-    for (int i=0; i<lines.size(); ++i)
+    for (auto &line : lines)
     {
-        QListWidgetItem *item = new QListWidgetItem(qApp->TrVars()->PlaceholderToUserText(lines.at(i).line));
-        item->setTextAlignment(lines.at(i).alignment);
-        item->setData(Qt::UserRole, lines.at(i).fontSizeIncrement);
+        QListWidgetItem *item = new QListWidgetItem(qApp->TrVars()->PlaceholderToUserText(line.line));
+        item->setTextAlignment(line.alignment);
+        item->setData(Qt::UserRole, line.fontSizeIncrement);
 
         QFont font = item->font();
-        font.setBold(lines.at(i).bold);
-        font.setItalic(lines.at(i).italic);
-        font.setPointSize(font.pointSize() + lines.at(i).fontSizeIncrement);
+        font.setBold(line.bold);
+        font.setItalic(line.italic);
+        font.setPointSize(font.pointSize() + line.fontSizeIncrement);
         item->setFont(font);
 
         ui->listWidgetEdit->insertItem(++row, item);
@@ -622,16 +622,16 @@ void DialogEditLabel::InitPreviewLines(const QVector<VLabelTemplateLine> &lines)
 
     int row = -1;
 
-    for (int i=0; i<lines.size(); ++i)
+    for (auto &line : lines)
     {
-        QListWidgetItem *item = new QListWidgetItem(ReplacePlaceholders(lines.at(i).line));
-        item->setTextAlignment(lines.at(i).alignment);
-        item->setData(Qt::UserRole, lines.at(i).fontSizeIncrement);
+        QListWidgetItem *item = new QListWidgetItem(ReplacePlaceholders(line.line));
+        item->setTextAlignment(line.alignment);
+        item->setData(Qt::UserRole, line.fontSizeIncrement);
 
         QFont font = item->font();
-        font.setBold(lines.at(i).bold);
-        font.setItalic(lines.at(i).italic);
-        font.setPointSize(font.pointSize() + lines.at(i).fontSizeIncrement);
+        font.setBold(line.bold);
+        font.setItalic(line.italic);
+        font.setPointSize(font.pointSize() + line.fontSizeIncrement);
         item->setFont(font);
 
         ui->listWidgetPreview->insertItem(++row, item);

@@ -144,9 +144,8 @@ VToolRotation *VToolRotation::Create(VToolRotationInitData &initData)
 
         initData.id = VContainer::getNextId();//Just reserve id for tool
 
-        for (int i = 0; i < initData.source.size(); ++i)
+        for (auto idObject : qAsConst(initData.source))
         {
-            const quint32 idObject = initData.source.at(i);
             const QSharedPointer<VGObject> obj = initData.data->GetGObject(idObject);
 
             // This check helps to find missed objects in the switch
@@ -259,9 +258,9 @@ QT_WARNING_POP
         InitOperationToolConnections(initData.scene, tool);
         VAbstractPattern::AddTool(initData.id, tool);
         initData.doc->IncrementReferens(originPoint.getIdTool());
-        for (int i = 0; i < initData.source.size(); ++i)
+        for (auto idObject : qAsConst(initData.source))
         {
-            initData.doc->IncrementReferens(initData.data->GetGObject(initData.source.at(i))->getIdTool());
+            initData.doc->IncrementReferens(initData.data->GetGObject(idObject)->getIdTool());
         }
         return tool;
     }

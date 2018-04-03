@@ -581,9 +581,9 @@ void VPiecePath::NodeOnEdge(quint32 index, VPieceNode &p1, VPieceNode &p2) const
 //---------------------------------------------------------------------------------------------------------------------
 bool VPiecePath::Contains(quint32 id) const
 {
-    for (int i = 0; i < d->m_nodes.size(); ++i)
+    for (auto &node : d->m_nodes)
     {
-        if (d->m_nodes.at(i).GetId() == id)
+        if (node.GetId() == id)
         {
             return true;
         }
@@ -676,11 +676,11 @@ int VPiecePath::Edge(quint32 p1, quint32 p2) const
 QVector<VPieceNode> VPiecePath::ListNodePoint() const
 {
     QVector<VPieceNode> list;
-    for (int i = 0; i < d->m_nodes.size(); ++i) //-V807
+    for (auto &node : d->m_nodes) //-V807
     {
-        if (d->m_nodes.at(i).GetTypeTool() == Tool::NodePoint)
+        if (node.GetTypeTool() == Tool::NodePoint)
         {
-            list.append(d->m_nodes.at(i));
+            list.append(node);
         }
     }
     return list;

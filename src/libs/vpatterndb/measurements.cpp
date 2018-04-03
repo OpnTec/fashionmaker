@@ -671,9 +671,9 @@ QStringList ListNumbers(const VTranslateMeasurements *trM, const QStringList &li
     SCASSERT(trM != nullptr)
 
     QStringList numbers;
-    for (int i=0; i < listMeasurements.size(); ++i)
+    for (auto &m : listMeasurements)
     {
-        numbers.append(trM->MNumber(listMeasurements.at(i)));
+        numbers.append(trM->MNumber(m));
     }
     return numbers;
 }

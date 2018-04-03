@@ -124,9 +124,9 @@ VToolFlippingByLine *VToolFlippingByLine::Create(VToolFlippingByLineInitData ini
         VAbstractPattern::AddTool(initData.id, tool);
         initData.doc->IncrementReferens(firstPoint.getIdTool());
         initData.doc->IncrementReferens(secondPoint.getIdTool());
-        for (int i = 0; i < initData.source.size(); ++i)
+        for (auto idObject : qAsConst(initData.source))
         {
-            initData.doc->IncrementReferens(initData.data->GetGObject(initData.source.at(i))->getIdTool());
+            initData.doc->IncrementReferens(initData.data->GetGObject(idObject)->getIdTool());
         }
         return tool;
     }

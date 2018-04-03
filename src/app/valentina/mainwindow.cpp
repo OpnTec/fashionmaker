@@ -4624,29 +4624,29 @@ QStringList MainWindow::GetUnlokedRestoreFileList() const
     QStringList files = qApp->ValentinaSettings()->GetRestoreFileList();
     if (files.size() > 0)
     {
-        for (int i = 0; i < files.size(); ++i)
+        for (auto &file : files)
         {
             // Seeking file that realy need reopen
-            VLockGuard<char> tmp(files.at(i));
+            VLockGuard<char> tmp(file);
             if (tmp.IsLocked())
             {
-                restoreFiles.append(files.at(i));
+                restoreFiles.append(file);
             }
         }
 
         // Clearing list after filtering
-        for (int i = 0; i < restoreFiles.size(); ++i)
+        for (auto &file : restoreFiles)
         {
-            files.removeAll(restoreFiles.at(i));
+            files.removeAll(file);
         }
 
         // Clear all files that do not exist.
         QStringList filtered;
-        for (int i = 0; i < files.size(); ++i)
+        for (auto &file : files)
         {
-            if (QFileInfo::exists(files.at(i)))
+            if (QFileInfo::exists(file))
             {
-                filtered.append(files.at(i));
+                filtered.append(file);
             }
         }
 
@@ -4852,21 +4852,21 @@ void MainWindow::ReopenFilesAfterCrash(QStringList &args)
             {
                 qCDebug(vMainWindow, "User said Yes.");
 
-                for (int i = 0; i < restoreFiles.size(); ++i)
+                for (auto &file : restoreFiles)
                 {
                     QString error;
-                    if (VDomDocument::SafeCopy(restoreFiles.at(i) + *autosavePrefix, restoreFiles.at(i), error))
+                    if (VDomDocument::SafeCopy(file + *autosavePrefix, file, error))
                     {
-                        QFile autoFile(restoreFiles.at(i) + *autosavePrefix);
+                        QFile autoFile(file + *autosavePrefix);
                         autoFile.remove();
-                        LoadPattern(restoreFiles.at(i));
-                        args.removeAll(restoreFiles.at(i));// Do not open file twice after we restore him.
+                        LoadPattern(file);
+                        args.removeAll(file);// Do not open file twice after we restore him.
                     }
                     else
                     {
                         qCDebug(vMainWindow, "Could not copy %s%s to %s %s",
-                                qUtf8Printable(restoreFiles.at(i)), qUtf8Printable(*autosavePrefix),
-                                qUtf8Printable(restoreFiles.at(i)), qUtf8Printable(error));
+                                qUtf8Printable(file), qUtf8Printable(*autosavePrefix),
+                                qUtf8Printable(file), qUtf8Printable(error));
                     }
                 }
             }
@@ -5369,9 +5369,9 @@ void MainWindow::ProcessCMD()
     {
         ReopenFilesAfterCrash(args);
 
-        for (int i=0, sz = args.size(); i < sz; ++i)
+        for (auto &arg : args)
         {
-            LoadPattern(args.at(i));
+            LoadPattern(arg);
         }
     }
     else

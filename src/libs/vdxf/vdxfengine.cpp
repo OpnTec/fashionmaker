@@ -143,9 +143,8 @@ void VDxfEngine::drawPath(const QPainterPath &path)
 {
     const QList<QPolygonF> subpaths = path.toSubpathPolygons(matrix);
 
-    for (int j=0; j < subpaths.size(); ++j)
+    for (auto polygon : subpaths)
     {
-        const QPolygonF polygon = subpaths.at(j);
         if (polygon.isEmpty())
         {
             continue;
@@ -166,10 +165,10 @@ void VDxfEngine::drawPath(const QPainterPath &path)
 
             poly->flags |= 0x80; // plinegen
 
-            for (int i=0; i < polygon.count(); ++i)
+            for (auto p : polygon)
             {
-                poly->addVertex(DRW_Vertex2D(FromPixel(polygon.at(i).x(), varInsunits),
-                                             FromPixel(getSize().height() - polygon.at(i).y(), varInsunits), 0));
+                poly->addVertex(DRW_Vertex2D(FromPixel(p.x(), varInsunits),
+                                             FromPixel(getSize().height() - p.y(), varInsunits), 0));
             }
 
             input->AddEntity(poly);
@@ -188,10 +187,10 @@ void VDxfEngine::drawPath(const QPainterPath &path)
 
             poly->flags |= 0x80; // plinegen
 
-            for (int i=0; i < polygon.count(); ++i)
+            for (auto p : polygon)
             {
-                poly->addVertex(DRW_Vertex(FromPixel(polygon.at(i).x(), varInsunits),
-                                           FromPixel(getSize().height() - polygon.at(i).y(), varInsunits), 0, 0));
+                poly->addVertex(DRW_Vertex(FromPixel(p.x(), varInsunits),
+                                           FromPixel(getSize().height() - p.y(), varInsunits), 0, 0));
             }
 
             input->AddEntity(poly);
@@ -770,9 +769,9 @@ void VDxfEngine::ExportAAMAText(dx_ifaceBlock *detailBlock, const VLayoutPiece &
 //---------------------------------------------------------------------------------------------------------------------
 void VDxfEngine::ExportAAMAGlobalText(const QSharedPointer<dx_iface> &input, const QVector<VLayoutPiece> &details)
 {
-    for(int i = 0; i < details.size(); ++i)
+    for(auto &detail : details)
     {
-        const QStringList strings = details.at(i).GetPatternText();
+        const QStringList strings = detail.GetPatternText();
         if (not strings.isEmpty())
         {
             for (int j = 0; j < strings.size(); ++j)
@@ -870,10 +869,10 @@ P *VDxfEngine::CreateAAMAPolygon(const QVector<QPointF> &polygon, const QString 
         }
     }
 
-    for (int i=0; i < polygon.count(); ++i)
+    for (auto p : polygon)
     {
-        poly->addVertex(V(FromPixel(polygon.at(i).x(), varInsunits),
-                          FromPixel(getSize().height() - polygon.at(i).y(), varInsunits)));
+        poly->addVertex(V(FromPixel(p.x(), varInsunits),
+                          FromPixel(getSize().height() - p.y(), varInsunits)));
     }
 
     return poly;

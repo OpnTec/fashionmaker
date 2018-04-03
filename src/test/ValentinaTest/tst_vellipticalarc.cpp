@@ -281,9 +281,8 @@ void TST_VEllipticalArc::TestGetPoints1()
     { // equation of ellipse will be different when rotation angle isn't 0 so we can't use this test in this case
         const qreal eps = 0.05;
 
-        for (int i=0; i < points.size(); ++i)
+        for (auto p : points)
         {
-            QPointF p = points.at(i);
             const qreal equationRes = p.rx()*p.rx()/(radius1*radius1) + p.ry()*p.ry()/(radius2*radius2);
             const qreal diff = qAbs(equationRes - 1);
             const QString errorMsg = QString("Broken the first rule. Any point must satisfy the equation of ellipse."

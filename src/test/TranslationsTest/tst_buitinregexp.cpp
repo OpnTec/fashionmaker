@@ -231,10 +231,10 @@ void TST_BuitInRegExp::TestTemplatePlaceholders()
     QSet<QString> originals;
     QSet<QString> translations;
 
-    for (int i = 0; i < labelTemplatePlaceholders.size(); ++i)
+    for (auto &placeholder : labelTemplatePlaceholders)
     {
-        originals.insert(labelTemplatePlaceholders.at(i));
-        translations.insert(m_trMs->PlaceholderToUser(labelTemplatePlaceholders.at(i)));
+        originals.insert(placeholder);
+        translations.insert(m_trMs->PlaceholderToUser(placeholder));
     }
 
     QCOMPARE(originals.size(), labelTemplatePlaceholders.size()); // All tags are unique

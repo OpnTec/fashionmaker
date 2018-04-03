@@ -87,9 +87,9 @@ VSimplePoint *VisPieceSpecialPoints::GetPoint(quint32 i, const QColor &color)
 //---------------------------------------------------------------------------------------------------------------------
 void VisPieceSpecialPoints::HideAllItems()
 {
-    for (int i=0; i < m_points.size(); ++i)
+    for (auto item : qAsConst(m_points))
     {
-        if (QGraphicsEllipseItem *item = m_points.at(i))
+        if (item)
         {
             item->setVisible(false);
         }

@@ -527,9 +527,8 @@ qreal VSpline::ParamT (const QPointF &pBt) const
 
     // In morst case we will have 6 result in interval [0; 1].
     // Here we try find closest to our point.
-    for (int i=0; i< ts.size(); ++i)
+    for (auto t : qAsConst(ts))
     {
-        const qreal t = ts.at(i);
         const QPointF p0 = static_cast<QPointF>(GetP1());
         const QPointF p1 = static_cast<QPointF>(GetP2());
         const QPointF p2 = static_cast<QPointF>(GetP3());

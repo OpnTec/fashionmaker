@@ -372,9 +372,8 @@ void MainWindowsNoGUI::ExportDetailsAsFlatLayout(const QVector<VLayoutPiece> &li
     QScopedPointer<QGraphicsScene> scene(new QGraphicsScene());
 
     QList<QGraphicsItem *> list;
-    for (int i=0; i < listDetails.count(); ++i)
+    for (auto piece : listDetails)
     {
-        VLayoutPiece piece = listDetails.at(i);
         QGraphicsItem *item = piece.GetItem(m_dialogSaveLayout->IsTextAsPaths());
         qreal diff = 0;
         if (piece.IsForceFlipping())
@@ -396,9 +395,9 @@ void MainWindowsNoGUI::ExportDetailsAsFlatLayout(const QVector<VLayoutPiece> &li
         list.append(item);
     }
 
-    for (int i=0; i < list.size(); ++i)
+    for (auto item : list)
     {
-        scene->addItem(list.at(i));
+        scene->addItem(item);
     }
 
     QList<QGraphicsItem *> papers;// Blank sheets
@@ -410,9 +409,9 @@ void MainWindowsNoGUI::ExportDetailsAsFlatLayout(const QVector<VLayoutPiece> &li
     QTransform matrix;
     matrix = matrix.translate(-mx, -my);
 
-    for (int i=0; i < list.size(); ++i)
+    for (auto item : list)
     {
-        list.at(i)->setTransform(matrix);
+        item->setTransform(matrix);
     }
 
     rect = scene->itemsBoundingRect().toRect();
@@ -537,9 +536,9 @@ void MainWindowsNoGUI::ExportDetailsAsApparelLayout(QVector<VLayoutPiece> listDe
         list.append(item);
     }
 
-    for (int i=0; i < list.size(); ++i)
+    for (auto item : list)
     {
-        scene->addItem(list.at(i));
+        scene->addItem(item);
     }
 
     QRect rect = scene->itemsBoundingRect().toRect();
@@ -550,9 +549,9 @@ void MainWindowsNoGUI::ExportDetailsAsApparelLayout(QVector<VLayoutPiece> listDe
     QTransform matrix;
     matrix = matrix.translate(-mx, -my);
 
-    for (int i=0; i < list.size(); ++i)
+    for (auto item : list)
     {
-        list.at(i)->setTransform(matrix);
+        item->setTransform(matrix);
     }
 
     rect = scene->itemsBoundingRect().toRect();
@@ -853,11 +852,10 @@ QList<QGraphicsItem *> MainWindowsNoGUI::CreateShadows(const QList<QGraphicsItem
 {
     QList<QGraphicsItem *> shadows;
 
-    for (int i=0; i< papers.size(); ++i)
+    for (auto paper : papers)
     {
         qreal x1=0, y1=0, x2=0, y2=0;
-        QGraphicsRectItem *item = qgraphicsitem_cast<QGraphicsRectItem *>(papers.at(i));
-        if (item)
+        if (QGraphicsRectItem *item = qgraphicsitem_cast<QGraphicsRectItem *>(paper))
         {
             item->rect().getCoords(&x1, &y1, &x2, &y2);
             QGraphicsRectItem *shadowPaper = new QGraphicsRectItem(QRectF(x1+4, y1+4, x2+4, y2+4));
@@ -886,10 +884,10 @@ QList<QGraphicsScene *> MainWindowsNoGUI::CreateScenes(const QList<QGraphicsItem
         scene->addItem(shadows.at(i));
         scene->addItem(papers.at(i));
 
-        QList<QGraphicsItem *> paperDetails = details.at(i);
-        for (int i=0; i < paperDetails.size(); ++i)
+        const QList<QGraphicsItem *> paperDetails = details.at(i);
+        for (auto &detail : paperDetails)
         {
-            scene->addItem(paperDetails.at(i));
+            scene->addItem(detail);
         }
 
         scenes.append(scene);
@@ -1182,18 +1180,16 @@ void MainWindowsNoGUI::RestorePaper(int index) const
 void MainWindowsNoGUI::PrepareTextForDXF(const QString &placeholder,
                                          const QList<QList<QGraphicsItem *> > &details) const
 {
-    for (int i = 0; i < details.size(); ++i)
+    for (auto &paperItems : details)
     {
-        const QList<QGraphicsItem *> &paperItems = details.at(i);
-        for (int j = 0; j < paperItems.size(); ++j)
+        for (auto item : paperItems)
         {
-            QList<QGraphicsItem *> pieceChildren = paperItems.at(j)->childItems();
-            for (int k = 0; k < pieceChildren.size(); ++k)
+            QList<QGraphicsItem *> pieceChildren = item->childItems();
+            for (auto child : pieceChildren)
             {
-                QGraphicsItem *item = pieceChildren.at(k);
-                if (item->type() == QGraphicsSimpleTextItem::Type)
+                if (child->type() == QGraphicsSimpleTextItem::Type)
                 {
-                    if(QGraphicsSimpleTextItem *textItem = qgraphicsitem_cast<QGraphicsSimpleTextItem *>(item))
+                    if(QGraphicsSimpleTextItem *textItem = qgraphicsitem_cast<QGraphicsSimpleTextItem *>(child))
                     {
                         textItem->setText(textItem->text() + placeholder);
                     }
@@ -1215,18 +1211,16 @@ void MainWindowsNoGUI::PrepareTextForDXF(const QString &placeholder,
 void MainWindowsNoGUI::RestoreTextAfterDXF(const QString &placeholder,
                                            const QList<QList<QGraphicsItem *> > &details) const
 {
-    for (int i = 0; i < details.size(); ++i)
+    for (auto &paperItems : details)
     {
-        const QList<QGraphicsItem *> &paperItems = details.at(i);
-        for (int j = 0; j < paperItems.size(); ++j)
+        for (auto item : paperItems)
         {
-            QList<QGraphicsItem *> pieceChildren = paperItems.at(i)->childItems();
-            for (int k = 0; k < pieceChildren.size(); ++k)
+            QList<QGraphicsItem *> pieceChildren = item->childItems();
+            for (auto child : pieceChildren)
             {
-                QGraphicsItem *item = pieceChildren.at(k);
-                if (item->type() == QGraphicsSimpleTextItem::Type)
+                if (child->type() == QGraphicsSimpleTextItem::Type)
                 {
-                    if(QGraphicsSimpleTextItem *textItem = qgraphicsitem_cast<QGraphicsSimpleTextItem *>(item))
+                    if(QGraphicsSimpleTextItem *textItem = qgraphicsitem_cast<QGraphicsSimpleTextItem *>(child))
                     {
                         QString text = textItem->text();
                         text.replace(placeholder, QString());
@@ -1432,8 +1426,7 @@ bool MainWindowsNoGUI::IsLayoutGrayscale() const
 
     for (int i=0; i < scenes.size(); ++i)
     {
-        auto *paper = qgraphicsitem_cast<QGraphicsRectItem *>(papers.at(i));
-        if (paper)
+        if (auto *paper = qgraphicsitem_cast<QGraphicsRectItem *>(papers.at(i)))
         {
             // Hide shadow and paper border
             PreparePaper(i);
@@ -1513,9 +1506,9 @@ bool MainWindowsNoGUI::isPagesUniform() const
     {
         auto *paper = qgraphicsitem_cast<QGraphicsRectItem *>(papers.at(0));
         SCASSERT(paper != nullptr)
-        for (int i=1; i < papers.size(); ++i)
+        for (auto paperItem : papers)
         {
-            auto *p = qgraphicsitem_cast<QGraphicsRectItem *>(papers.at(i));
+            auto *p = qgraphicsitem_cast<QGraphicsRectItem *>(paperItem);
             SCASSERT(p != nullptr)
             if (paper->rect() != p->rect())
             {
