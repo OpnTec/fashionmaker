@@ -837,8 +837,11 @@ void DialogPatternProperties::InitImage()
 void DialogPatternProperties::ChangeImage()
 {
     const QString filter = tr("Images") + QLatin1String(" (*.png *.jpg *.jpeg *.bmp)");
-    const QString fileName = QFileDialog::getOpenFileName(this, tr("Image for pattern"), QString(), filter, nullptr,
-                                                          QFileDialog::DontUseNativeDialog);
+    const QString fileName = QFileDialog::getOpenFileName(this, tr("Image for pattern"), QString(), filter, nullptr
+#ifdef Q_OS_LINUX
+                                                          , QFileDialog::DontUseNativeDialog
+#endif
+                                                          );
     if (not fileName.isEmpty())
     {
         QImage image;
@@ -879,8 +882,11 @@ void DialogPatternProperties::SaveImage()
     QByteArray ba = QByteArray::fromBase64(byteArray);
     const QString extension = QLatin1String(".") + doc->GetImageExtension();
     QString filter = tr("Images") + QLatin1String(" (*") + extension + QLatin1String(")");
-    QString filename = QFileDialog::getSaveFileName(this, tr("Save File"), tr("untitled"), filter, &filter,
-                                                    QFileDialog::DontUseNativeDialog);
+    QString filename = QFileDialog::getSaveFileName(this, tr("Save File"), tr("untitled"), filter, &filter
+#ifdef Q_OS_LINUX
+                                                    , QFileDialog::DontUseNativeDialog
+#endif
+                                                    );
     if (not filename.isEmpty())
     {
         if (not filename.endsWith(extension.toUpper()))

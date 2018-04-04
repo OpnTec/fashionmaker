@@ -972,8 +972,11 @@ void TMainWindow::ImportDataFromCSV()
     const QString filters = tr("Comma-Separated Values") + QLatin1String(" (*.csv)");
     const QString suffix("csv");
 
-    QString fileName = QFileDialog::getOpenFileName(this, tr("Import from CSV"), QDir::homePath(), filters, nullptr,
-                                                    QFileDialog::DontUseNativeDialog);
+    QString fileName = QFileDialog::getOpenFileName(this, tr("Import from CSV"), QDir::homePath(), filters, nullptr
+#ifdef Q_OS_LINUX
+                                                    , QFileDialog::DontUseNativeDialog
+#endif
+                                                    );
 
     if (fileName.isEmpty())
     {

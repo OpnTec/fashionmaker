@@ -1659,8 +1659,11 @@ void MainWindow::LoadIndividual()
         usedNotExistedDir = directory.mkpath(".");
     }
 
-    const QString mPath = QFileDialog::getOpenFileName(this, tr("Open file"), path, filter, nullptr,
-                                                       QFileDialog::DontUseNativeDialog);
+    const QString mPath = QFileDialog::getOpenFileName(this, tr("Open file"), path, filter, nullptr
+#ifdef Q_OS_LINUX
+                                                       , QFileDialog::DontUseNativeDialog
+#endif
+                                                       );
 
     if (not mPath.isEmpty())
     {
@@ -1697,8 +1700,11 @@ void MainWindow::LoadMultisize()
     //Use standard path to multisize measurements
     QString path = qApp->ValentinaSettings()->GetPathMultisizeMeasurements();
     path = VCommonSettings::PrepareMultisizeTables(path);
-    const QString mPath = QFileDialog::getOpenFileName(this, tr("Open file"), path, filter, nullptr,
-                                                       QFileDialog::DontUseNativeDialog);
+    const QString mPath = QFileDialog::getOpenFileName(this, tr("Open file"), path, filter, nullptr
+#ifdef Q_OS_LINUX
+                                                       , QFileDialog::DontUseNativeDialog
+#endif
+                                                       );
 
     if (not mPath.isEmpty())
     {
@@ -2744,7 +2750,11 @@ bool MainWindow::SaveAs()
 
     QString fileName = QFileDialog::getSaveFileName(this, tr("Save as"),
                                                     dir + QLatin1String("/") + tr("pattern") + QLatin1String(".val"),
-                                                    filters, nullptr, QFileDialog::DontUseNativeDialog);
+                                                    filters, nullptr
+#ifdef Q_OS_LINUX
+                                                    , QFileDialog::DontUseNativeDialog
+#endif
+                                                    );
 
     auto RemoveTempDir = [usedNotExistedDir, dir]()
     {
@@ -2935,8 +2945,11 @@ void MainWindow::Open()
         dir = QFileInfo(files.first()).absolutePath();
     }
     qCDebug(vMainWindow, "Run QFileDialog::getOpenFileName: dir = %s.", qUtf8Printable(dir));
-    const QString filePath = QFileDialog::getOpenFileName(this, tr("Open file"), dir, filter, nullptr,
-                                                          QFileDialog::DontUseNativeDialog);
+    const QString filePath = QFileDialog::getOpenFileName(this, tr("Open file"), dir, filter, nullptr
+#ifdef Q_OS_LINUX
+                                                          , QFileDialog::DontUseNativeDialog
+#endif
+                                                          );
     if (filePath.isEmpty())
     {
         return;
