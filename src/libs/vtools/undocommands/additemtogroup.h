@@ -1,7 +1,7 @@
 /************************************************************************
  **
  **  @file   addgroup.h
- **  @author Roman Telezhynskyi <dismine(at)gmail.com>
+ **  @author Ronan Le Tiec
  **  @date   31 3, 2018
  **
  **  @brief
@@ -43,11 +43,13 @@ class AddItemToGroup : public VUndoCommand
     Q_OBJECT
 public:
     AddItemToGroup(const QDomElement &xml, VAbstractPattern *doc, quint32 nodeId, QUndoCommand *parent = nullptr);
-    virtual ~AddItemToGroup();
+    virtual ~AddItemToGroup()=default;
     virtual void undo() Q_DECL_OVERRIDE;
     virtual void redo() Q_DECL_OVERRIDE;
 signals:
     void UpdateGroups();
+protected:
+    void performUndoRedo(bool isUndo);
 private:
     Q_DISABLE_COPY(AddItemToGroup)
     const QString nameActivDraw;

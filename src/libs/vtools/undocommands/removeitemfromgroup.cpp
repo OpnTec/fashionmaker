@@ -1,7 +1,7 @@
 /************************************************************************
  **
  **  @file   removeitemfromgroup.cpp
- **  @author Roman Telezhynskyi <dismine(at)gmail.com>
+ **  @author Ronan Le Tiec
  **  @date   1 4, 2018
  **
  **  @brief
@@ -49,74 +49,53 @@ RemoveItemFromGroup::RemoveItemFromGroup(const QDomElement &xml, VAbstractPatter
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-RemoveItemFromGroup::~RemoveItemFromGroup()
-{
-}
-
-//---------------------------------------------------------------------------------------------------------------------
 void RemoveItemFromGroup::undo()
 {
     qCDebug(vUndo, "Undo the remove item from group");
-    doc->ChangeActivPP(nameActivDraw);//Without this user will not see this change
-
-    QDomElement group = doc->elementById(nodeId, VAbstractPattern::TagGroup);
-    if (group.isElement())
-    {
-        if (group.appendChild(xml).isNull())
-        {
-            qCDebug(vUndo, "Can't add the item.");
-            return;
-        }
-
-        doc->SetModified(true);
-        emit qApp->getCurrentDocument()->patternChanged(false);
-
-        QDomElement groups = doc->CreateGroups();
-        if (not groups.isNull())
-        {
-            doc->ParseGroups(groups);
-        } else
-        {
-            qCDebug(vUndo, "Can't get tag Groups.");
-            return;
-        }
-
-        emit UpdateGroups();
-    }
-    else
-    {
-        qCDebug(vUndo, "Can't get group by id = %u.", nodeId);
-        return;
-    }
-
-    VMainGraphicsView::NewSceneRect(qApp->getCurrentScene(), qApp->getSceneView());
-    emit doc->SetCurrentPP(nameActivDraw);//Return current pattern piece after undo
+    performUndoRedo(true);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void RemoveItemFromGroup::redo()
 {
     qCDebug(vUndo, "Redo the add item to group");
+    performUndoRedo(false);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void RemoveItemFromGroup::performUndoRedo(bool isUndo)
+{
     doc->ChangeActivPP(nameActivDraw);//Without this user will not see this change
 
     QDomElement group = doc->elementById(nodeId, VAbstractPattern::TagGroup);
     if (group.isElement())
     {
-        if (group.removeChild(xml).isNull())
+        if(isUndo)
         {
-            qCDebug(vUndo, "Can't delete item.");
-            return;
+            if (group.appendChild(xml).isNull())
+            {
+                qCDebug(vUndo, "Can't add the item.");
+                return;
+            }
+        }
+        else // is redo
+        {
+            if (group.removeChild(xml).isNull())
+            {
+                qCDebug(vUndo, "Can't delete item.");
+                return;
+            }
+
+            // set the item visible. Because if the undo is done when unvisibile and it's not in any group after the
+            // undo, it stays unvisible until the entire drawing is completly rerendered.
+            quint32 objectId = doc->GetParametrUInt(xml,QString("object"),NULL_ID_STR);
+            quint32 toolId = doc->GetParametrUInt(xml,QString("tool"),NULL_ID_STR);
+            VDataTool* tool = doc->getTool(toolId);
+            tool->GroupVisibility(objectId,true);
         }
 
         doc->SetModified(true);
         emit qApp->getCurrentDocument()->patternChanged(false);
-
-        // set the item visible. Because if the undo is done when unvisibile and it's not in any group after the
-        // undo, it stays unvisible until the entire drawing is completly rerendered.
-        quint32 objectId = doc->GetParametrUInt(xml,QString("object"),NULL_ID_STR);
-        quint32 toolId = doc->GetParametrUInt(xml,QString("tool"),NULL_ID_STR);
-        VDataTool* tool = doc->getTool(toolId);
-        tool->GroupVisibility(objectId,true);
 
         QDomElement groups = doc->CreateGroups();
         if (not groups.isNull())

@@ -177,7 +177,7 @@ void VWidgetGroups::FillTable(const QMap<quint32, QPair<QString, bool> > &groups
 
         if(doc->GroupIsEmpty(i.key()))
         {
-            QFont font;
+            QFont font = item->font();
             font.setStrikeOut(true);
             item->setFont(font);
         }

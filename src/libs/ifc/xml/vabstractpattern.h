@@ -444,7 +444,7 @@ protected:
 
     QVector<VToolRecord> getLocalHistory(const QString &draw) const;
 
-   bool GroupHasItem(const QDomElement &domElement, quint32 toolId, quint32 objectId);
+   bool GroupHasItem(const QDomElement &groupDomElement, quint32 toolId, quint32 objectId);
 private:
     Q_DISABLE_COPY(VAbstractPattern)
 

@@ -153,3 +153,8 @@ void VAbstractMainWindow::ExportDataToCSV()
         qApp->Settings()->SetCSVWithHeader(dialog.IsWithHeader());
     }
 }
+
+//---------------------------------------------------------------------------------------------------------------------
+void VAbstractMainWindow::UpdateGroups()
+{
+}
