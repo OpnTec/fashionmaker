@@ -519,26 +519,26 @@ void VAbstractOperation::SaveSourceDestination(QDomElement &tag)
     doc->RemoveAllChildren(tag);
 
     QDomElement tagObjects = doc->createElement(TagSource);
-    for (int i = 0; i < source.size(); ++i)
+    for (auto id : qAsConst(source))
     {
         QDomElement item = doc->createElement(TagItem);
-        doc->SetAttribute(item, AttrIdObject, source.at(i));
+        doc->SetAttribute(item, AttrIdObject, id);
         tagObjects.appendChild(item);
     }
     tag.appendChild(tagObjects);
 
     tagObjects = doc->createElement(TagDestination);
-    for (int i = 0; i < destination.size(); ++i)
+    for (auto dItem : qAsConst(destination))
     {
         QDomElement item = doc->createElement(TagItem);
-        doc->SetAttribute(item, AttrIdObject, destination.at(i).id);
+        doc->SetAttribute(item, AttrIdObject, dItem.id);
 
-        if (not VFuzzyComparePossibleNulls(destination.at(i).mx, INT_MAX) &&
-            not VFuzzyComparePossibleNulls(destination.at(i).my, INT_MAX))
+        if (not VFuzzyComparePossibleNulls(dItem.mx, INT_MAX) &&
+            not VFuzzyComparePossibleNulls(dItem.my, INT_MAX))
         {
-            doc->SetAttribute(item, AttrMx, qApp->fromPixel(destination.at(i).mx));
-            doc->SetAttribute(item, AttrMy, qApp->fromPixel(destination.at(i).my));
-            doc->SetAttribute<bool>(item, AttrShowLabel, destination.at(i).showLabel);
+            doc->SetAttribute(item, AttrMx, qApp->fromPixel(dItem.mx));
+            doc->SetAttribute(item, AttrMy, qApp->fromPixel(dItem.my));
+            doc->SetAttribute<bool>(item, AttrShowLabel, dItem.showLabel);
         }
 
         tagObjects.appendChild(item);
@@ -609,9 +609,8 @@ void VAbstractOperation::AllowCurveSelecting(bool enabled, GOType type)
 //---------------------------------------------------------------------------------------------------------------------
 void VAbstractOperation::InitOperatedObjects()
 {
-    for (int i = 0; i < destination.size(); ++i)
+    for (auto object : qAsConst(destination))
     {
-        const DestinationItem object = destination.at(i);
         const QSharedPointer<VGObject> obj = VAbstractTool::data.GetGObject(object.id);
 
         // This check helps to find missed objects in the switch

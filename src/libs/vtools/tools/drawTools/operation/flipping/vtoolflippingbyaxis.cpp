@@ -130,9 +130,9 @@ VToolFlippingByAxis *VToolFlippingByAxis::Create(VToolFlippingByAxisInitData ini
         InitOperationToolConnections(initData.scene, tool);
         VAbstractPattern::AddTool(initData.id, tool);
         initData.doc->IncrementReferens(originPoint.getIdTool());
-        for (int i = 0; i < initData.source.size(); ++i)
+        for (auto idObject : qAsConst(initData.source))
         {
-            initData.doc->IncrementReferens(initData.data->GetGObject(initData.source.at(i))->getIdTool());
+            initData.doc->IncrementReferens(initData.data->GetGObject(idObject)->getIdTool());
         }
         return tool;
     }

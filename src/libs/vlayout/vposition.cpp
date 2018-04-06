@@ -571,9 +571,9 @@ QPainterPath VPosition::DrawDetails(const QVector<VLayoutPiece> &details)
     path.setFillRule(Qt::WindingFill);
     if (details.count() > 0)
     {
-        for (int i = 0; i < details.size(); ++i)
+        for (auto &detail : details)
         {
-            path.addPath(details.at(i).ContourPath());
+            path.addPath(detail.ContourPath());
         }
     }
     return path;

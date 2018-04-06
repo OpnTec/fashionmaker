@@ -350,9 +350,11 @@ QMap<QString, QVariant> VPE::VProperty::getSettings() const
 {
     QMap<QString, QVariant> tmpResult;
 
-    QStringList tmpKeyList = getSettingKeys();
-    foreach(const QString& tmpKey, tmpKeyList)
+    const QStringList tmpKeyList = getSettingKeys();
+    for(auto &tmpKey : tmpKeyList)
+    {
         tmpResult.insert(tmpKey, getSetting(tmpKey));
+    }
 
     return tmpResult;
 }
@@ -392,8 +394,11 @@ VPE::VProperty* VPE::VProperty::clone(bool include_children, VProperty* containe
 
     if (include_children)
     {
-        foreach(VProperty* tmpChild, d_ptr->Children)
+        const QList<VProperty*> children = d_ptr->Children;
+        for (auto tmpChild : children)
+        {
             container->addChild(tmpChild->clone(true));
+        }
     }
 
     return container;

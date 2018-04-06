@@ -474,9 +474,9 @@ void DialogMove::SuffixChanged()
             {
                 QRegularExpression rx(NameRegExp());
                 const QStringList uniqueNames = VContainer::AllUniqueNames();
-                for (int i=0; i < uniqueNames.size(); ++i)
+                for (auto &uniqueName : uniqueNames)
                 {
-                    const QString name = uniqueNames.at(i) + suffix;
+                    const QString name = uniqueName + suffix;
                     if (not rx.match(name).hasMatch() || not data->IsUnique(name))
                     {
                         flagName = false;

@@ -411,12 +411,12 @@ void VAbstractTool::ToolCreation(const Source &typeCreation)
 //---------------------------------------------------------------------------------------------------------------------
 VToolRecord VAbstractTool::GetRecord(const quint32 id, const Tool &toolType, VAbstractPattern *doc)
 {
-    QVector<VToolRecord> *history = doc->getHistory();
-    for(int i = 0; i < history->size(); ++i)
+    const QVector<VToolRecord> *history = doc->getHistory();
+    for(auto &record : *history)
     {
-        if (history->at(i).getId() == id && history->at(i).getTypeTool() == toolType)
+        if (record.getId() == id && record.getTypeTool() == toolType)
         {
-            return history->at(i);
+            return record;
         }
     }
     return VToolRecord();

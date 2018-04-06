@@ -104,9 +104,8 @@ void VisOperation::RefreshFlippedObjects(const QPointF &firstPoint, const QPoint
 {
     int iPoint = -1;
     int iCurve = -1;
-    for (int i = 0; i < objects.size(); ++i)
+    for (auto id : qAsConst(objects))
     {
-        const quint32 id = objects.at(i);
         const QSharedPointer<VGObject> obj = Visualization::data->GetGObject(id);
 
         // This check helps to find missed objects in the switch

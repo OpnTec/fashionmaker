@@ -62,7 +62,7 @@ void VAbstractLayoutDialog::InitTemplates(QComboBox *comboBoxTemplates)
     const QString pdi = QString("(%1ppi)").arg(PrintDPI);
 
     auto cntr = static_cast<VIndexType>(PaperSizeTemplate::A0);
-    foreach(const auto& v, pageFormatNames)
+    for(const auto& v : pageFormatNames)
     {
         if (cntr <= static_cast<int>(PaperSizeTemplate::Legal))
         {

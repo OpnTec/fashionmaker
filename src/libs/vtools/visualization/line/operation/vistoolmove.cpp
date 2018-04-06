@@ -271,9 +271,8 @@ int VisToolMove::AddMovedRotatedCurve(qreal angle, qreal length, quint32 id, int
 QPointF VisToolMove::GetOriginPoint(const QVector<QGraphicsItem *> &objects)
 {
     QRectF boundingRect;
-    for (int i=0; i < objects.size(); ++i)
+    for (auto object : qAsConst(objects))
     {
-        QGraphicsItem *object = objects.at(i);
         if (object)
         {
             QRectF childrenRect = object->childrenBoundingRect();
@@ -300,9 +299,8 @@ QVector<QGraphicsItem *> VisToolMove::CreateOriginObjects(int &iPoint, int &iCur
 {
     QVector<QGraphicsItem *> originObjects;
 
-    for (int i = 0; i < objects.size(); ++i)
+    for (auto id : qAsConst(objects))
     {
-        const quint32 id = objects.at(i);
         const QSharedPointer<VGObject> obj = Visualization::data->GetGObject(id);
 
         // This check helps to find missed objects in the switch
@@ -358,9 +356,8 @@ QT_WARNING_DISABLE_GCC("-Wswitch-default")
 void VisToolMove::CreateMovedRotatedObjects(int &iPoint, int &iCurve, qreal length, qreal angle, qreal rotationAngle,
                                             const QPointF &rotationOrigin)
 {
-    for (int i = 0; i < objects.size(); ++i)
+    for (auto id : qAsConst(objects))
     {
-        const quint32 id = objects.at(i);
         const QSharedPointer<VGObject> obj = Visualization::data->GetGObject(id);
 
         // This check helps to find missed objects in the switch

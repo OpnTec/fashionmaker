@@ -143,9 +143,8 @@ void VDxfEngine::drawPath(const QPainterPath &path)
 {
     const QList<QPolygonF> subpaths = path.toSubpathPolygons(matrix);
 
-    for (int j=0; j < subpaths.size(); ++j)
+    for (auto polygon : subpaths)
     {
-        const QPolygonF polygon = subpaths.at(j);
         if (polygon.isEmpty())
         {
             continue;
@@ -166,10 +165,10 @@ void VDxfEngine::drawPath(const QPainterPath &path)
 
             poly->flags |= 0x80; // plinegen
 
-            for (int i=0; i < polygon.count(); ++i)
+            for (auto p : polygon)
             {
-                poly->addVertex(DRW_Vertex2D(FromPixel(polygon.at(i).x(), varInsunits),
-                                             FromPixel(getSize().height() - polygon.at(i).y(), varInsunits), 0));
+                poly->addVertex(DRW_Vertex2D(FromPixel(p.x(), varInsunits),
+                                             FromPixel(getSize().height() - p.y(), varInsunits), 0));
             }
 
             input->AddEntity(poly);
@@ -188,10 +187,10 @@ void VDxfEngine::drawPath(const QPainterPath &path)
 
             poly->flags |= 0x80; // plinegen
 
-            for (int i=0; i < polygon.count(); ++i)
+            for (auto p : polygon)
             {
-                poly->addVertex(DRW_Vertex(FromPixel(polygon.at(i).x(), varInsunits),
-                                           FromPixel(getSize().height() - polygon.at(i).y(), varInsunits), 0, 0));
+                poly->addVertex(DRW_Vertex(FromPixel(p.x(), varInsunits),
+                                           FromPixel(getSize().height() - p.y(), varInsunits), 0, 0));
             }
 
             input->AddEntity(poly);
@@ -622,10 +621,8 @@ bool VDxfEngine::ExportToAAMA(const QVector<VLayoutPiece> &details)
 
     ExportAAMAGlobalText(input, details);
 
-    for(int i = 0; i < details.size(); ++i)
+    for(auto &detail : details)
     {
-        const VLayoutPiece &detail = details.at(i);
-
         dx_ifaceBlock *detailBlock = new dx_ifaceBlock();
 
         QString blockName = detail.GetName();
@@ -683,32 +680,29 @@ void VDxfEngine::ExportAAMADraw(dx_ifaceBlock *detailBlock, const VLayoutPiece &
     if (not detail.IsHideMainPath())
     {
         QVector<QPointF> poly = detail.GetContourPoints();
-        DRW_Entity *e = AAMAPolygon(poly, "8", true);
-        if (e)
+        if (DRW_Entity *e = AAMAPolygon(poly, "8", true))
         {
             detailBlock->ent.push_back(e);
         }
     }
 
-    QVector<QVector<QPointF>> drawIntCut = detail.InternalPathsForCut(false);
-    for(int j = 0; j < drawIntCut.size(); ++j)
+    const QVector<QVector<QPointF>> drawIntCut = detail.InternalPathsForCut(false);
+    for(auto &intCut : drawIntCut)
     {
-        DRW_Entity *e = AAMAPolygon(drawIntCut.at(j), "8", false);
-        if (e)
+        if (DRW_Entity *e = AAMAPolygon(intCut, "8", false))
         {
             detailBlock->ent.push_back(e);
         }
     }
 
     const QVector<VLayoutPlaceLabel> labels = detail.GetPlaceLabels();
-    foreach(const VLayoutPlaceLabel &label, labels)
+    for(auto &label : labels)
     {
         if (label.type != PlaceLabelType::Doubletree && label.type != PlaceLabelType::Button)
         {
-            foreach(const QPolygonF &p, label.shape)
+            for(auto &p : qAsConst(label.shape))
             {
-                DRW_Entity *e = AAMAPolygon(p, "8", false);
-                if (e)
+                if (DRW_Entity *e = AAMAPolygon(p, "8", false))
                 {
                     detailBlock->ent.push_back(e);
                 }
@@ -721,10 +715,9 @@ void VDxfEngine::ExportAAMADraw(dx_ifaceBlock *detailBlock, const VLayoutPiece &
 void VDxfEngine::ExportAAMAIntcut(dx_ifaceBlock *detailBlock, const VLayoutPiece &detail)
 {
     QVector<QVector<QPointF>> drawIntCut = detail.InternalPathsForCut(true);
-    for(int j = 0; j < drawIntCut.size(); ++j)
+    for(auto &intCut : drawIntCut)
     {
-        DRW_Entity *e = AAMAPolygon(drawIntCut.at(j), "11", false);
-        if (e)
+        if (DRW_Entity *e = AAMAPolygon(intCut, "11", false))
         {
             detailBlock->ent.push_back(e);
         }
@@ -736,11 +729,10 @@ void VDxfEngine::ExportAAMANotch(dx_ifaceBlock *detailBlock, const VLayoutPiece 
 {
     if (detail.IsSeamAllowance())
     {
-        QVector<QLineF> passmarks = detail.GetPassmarks();
-        for(int i = 0; i < passmarks.size(); ++i)
+        const QVector<QLineF> passmarks = detail.GetPassmarks();
+        for(auto passmark : passmarks)
         {
-            DRW_Entity *e = AAMALine(passmarks.at(i), "4");
-            if (e)
+            if (DRW_Entity *e = AAMALine(passmark, "4"))
             {
                 detailBlock->ent.push_back(e);
             }
@@ -754,8 +746,7 @@ void VDxfEngine::ExportAAMAGrainline(dx_ifaceBlock *detailBlock, const VLayoutPi
     const QVector<QPointF> grainline = detail.GetGrainline();
     if (grainline.count() > 1)
     {
-        DRW_Entity *e = AAMALine(QLineF(grainline.first(), grainline.last()), "7");
-        if (e)
+        if (DRW_Entity *e = AAMALine(QLineF(grainline.first(), grainline.last()), "7"))
         {
             detailBlock->ent.push_back(e);
         }
@@ -778,9 +769,9 @@ void VDxfEngine::ExportAAMAText(dx_ifaceBlock *detailBlock, const VLayoutPiece &
 //---------------------------------------------------------------------------------------------------------------------
 void VDxfEngine::ExportAAMAGlobalText(const QSharedPointer<dx_iface> &input, const QVector<VLayoutPiece> &details)
 {
-    for(int i = 0; i < details.size(); ++i)
+    for(auto &detail : details)
     {
-        const QStringList strings = details.at(i).GetPatternText();
+        const QStringList strings = detail.GetPatternText();
         if (not strings.isEmpty())
         {
             for (int j = 0; j < strings.size(); ++j)
@@ -798,7 +789,7 @@ void VDxfEngine::ExportAAMADrill(dx_ifaceBlock *detailBlock, const VLayoutPiece 
 {
     const QVector<VLayoutPlaceLabel> labels = detail.GetPlaceLabels();
 
-    foreach(const VLayoutPlaceLabel &label, labels)
+    for(auto &label : labels)
     {
         if (label.type == PlaceLabelType::Doubletree || label.type == PlaceLabelType::Button)
         {
@@ -878,10 +869,10 @@ P *VDxfEngine::CreateAAMAPolygon(const QVector<QPointF> &polygon, const QString 
         }
     }
 
-    for (int i=0; i < polygon.count(); ++i)
+    for (auto p : polygon)
     {
-        poly->addVertex(V(FromPixel(polygon.at(i).x(), varInsunits),
-                          FromPixel(getSize().height() - polygon.at(i).y(), varInsunits)));
+        poly->addVertex(V(FromPixel(p.x(), varInsunits),
+                          FromPixel(getSize().height() - p.y(), varInsunits)));
     }
 
     return poly;

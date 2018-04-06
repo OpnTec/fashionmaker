@@ -128,6 +128,20 @@ int IndexOfNode(const QVector<VPieceNode> &list, quint32 id)
     qDebug()<<"Can't find node.";
     return -1;
 }
+
+//---------------------------------------------------------------------------------------------------------------------
+QPainterPath MakePainterPath(const QVector<QPointF> &points)
+{
+    QPainterPath path;
+
+    if (not points.isEmpty())
+    {
+        path.addPolygon(QPolygonF(points));
+        path.setFillRule(Qt::WindingFill);
+    }
+
+    return path;
+}
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -333,6 +347,41 @@ QVector<VPointF> VPiecePath::PathNodePoints(const VContainer *data, bool showExc
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+QVector<QVector<QPointF> > VPiecePath::PathCurvePoints(const VContainer *data) const
+{
+    QVector<QVector<QPointF> > curves;
+    for (int i = 0; i < CountNodes(); ++i)
+    {
+        if (at(i).IsExcluded())
+        {
+            continue;// skip excluded node
+        }
+
+        switch (at(i).GetTypeTool())
+        {
+            case (Tool::NodeArc):
+            case (Tool::NodeElArc):
+            case (Tool::NodeSpline):
+            case (Tool::NodeSplinePath):
+            {
+                const QSharedPointer<VAbstractCurve> curve = data->GeometricObject<VAbstractCurve>(at(i).GetId());
+
+                const QPointF begin = StartSegment(data, i, at(i).GetReverse());
+                const QPointF end = EndSegment(data, i, at(i).GetReverse());
+
+                curves.append(curve->GetSegmentPoints(begin, end, at(i).GetReverse()));
+                break;
+            }
+            case (Tool::NodePoint):
+            default:
+                break;
+        }
+    }
+
+    return curves;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 QVector<VSAPoint> VPiecePath::SeamAllowancePoints(const VContainer *data, qreal width, bool reverse) const
 {
     SCASSERT(data != nullptr);
@@ -374,16 +423,20 @@ QVector<VSAPoint> VPiecePath::SeamAllowancePoints(const VContainer *data, qreal 
 //---------------------------------------------------------------------------------------------------------------------
 QPainterPath VPiecePath::PainterPath(const VContainer *data) const
 {
-    const QVector<QPointF> points = PathPoints(data);
-    QPainterPath path;
+    return MakePainterPath(PathPoints(data));
+}
 
-    if (not points.isEmpty())
+//---------------------------------------------------------------------------------------------------------------------
+QVector<QPainterPath> VPiecePath::CurvesPainterPath(const VContainer *data) const
+{
+    const QVector<QVector<QPointF> > curves = PathCurvePoints(data);
+    QVector<QPainterPath> paths(curves.size());
+
+    for(auto &curve : curves)
     {
-        path.addPolygon(QPolygonF(points));
-        path.setFillRule(Qt::WindingFill);
+        paths.append(MakePainterPath(curve));
     }
-
-    return path;
+    return paths;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -452,7 +505,7 @@ VSAPoint VPiecePath::EndSegment(const VContainer *data, const QVector<VPieceNode
 QList<quint32> VPiecePath::Dependencies() const
 {
     QList<quint32> list;
-    foreach (const VPieceNode &node, d->m_nodes)
+    for (auto &node : d->m_nodes)
     {
         list.append(node.GetId());
     }
@@ -528,9 +581,9 @@ void VPiecePath::NodeOnEdge(quint32 index, VPieceNode &p1, VPieceNode &p2) const
 //---------------------------------------------------------------------------------------------------------------------
 bool VPiecePath::Contains(quint32 id) const
 {
-    for (int i = 0; i < d->m_nodes.size(); ++i)
+    for (auto &node : d->m_nodes)
     {
-        if (d->m_nodes.at(i).GetId() == id)
+        if (node.GetId() == id)
         {
             return true;
         }
@@ -623,11 +676,11 @@ int VPiecePath::Edge(quint32 p1, quint32 p2) const
 QVector<VPieceNode> VPiecePath::ListNodePoint() const
 {
     QVector<VPieceNode> list;
-    for (int i = 0; i < d->m_nodes.size(); ++i) //-V807
+    for (auto &node : d->m_nodes) //-V807
     {
-        if (d->m_nodes.at(i).GetTypeTool() == Tool::NodePoint)
+        if (node.GetTypeTool() == Tool::NodePoint)
         {
-            list.append(d->m_nodes.at(i));
+            list.append(node);
         }
     }
     return list;
@@ -942,9 +995,9 @@ QVector<VSAPoint> VPiecePath::CurveSeamAllowanceSegment(const VContainer *data, 
     qreal w2 = end.GetSABefore();
     if (w1 < 0 && w2 < 0)
     {// no local widths
-        for(int i = 0; i < points.size(); ++i)
+        for(auto point : points)
         {
-            VSAPoint p(points.at(i));
+            VSAPoint p(point);
             if (i == 0)
             { // first point
                 p.SetSAAfter(begin.GetSAAfter());
@@ -983,9 +1036,9 @@ QVector<VSAPoint> VPiecePath::CurveSeamAllowanceSegment(const VContainer *data, 
 
         qreal length = 0; // how much we handle
 
-        for(int i = 1; i < points.size(); ++i)
+        for(auto point : points)
         {
-            p = VSAPoint(points.at(i));
+            p = VSAPoint(point);
 
             if (i == points.size() - 1)
             {// last point

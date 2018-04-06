@@ -113,10 +113,16 @@ void VPE::VFileEditWidget::onToolButtonClicked()
 {
     QString filepath = (Directory ? QFileDialog::getExistingDirectory(nullptr, tr("Directory"), CurrentFilePath,
                                                                       QFileDialog::ShowDirsOnly
-                                                                      | QFileDialog::DontUseNativeDialog)
+#ifdef Q_OS_LINUX
+                                                                      | QFileDialog::DontUseNativeDialog
+#endif
+                                                                      )
                                   : QFileDialog::getOpenFileName(nullptr, tr("Open File"), CurrentFilePath,
-                                                                 FileDialogFilter, nullptr,
-                                                                 QFileDialog::DontUseNativeDialog));
+                                                                 FileDialogFilter, nullptr
+#ifdef Q_OS_LINUX
+                                                                 , QFileDialog::DontUseNativeDialog
+#endif
+                                                                 ));
     if (filepath.isNull() == false)
     {
         setFile(filepath, true);
@@ -245,7 +251,7 @@ bool VPE::VFileEditWidget::checkFileFilter(const QString& file) const
         return false;
     }
 
-    foreach(QString tmpFilter, FilterList)
+    for (auto &tmpFilter : FilterList)
     {
         QRegExp tmpRegExpFilter(tmpFilter, Qt::CaseInsensitive, QRegExp::Wildcard);
         if (tmpRegExpFilter.exactMatch(file))

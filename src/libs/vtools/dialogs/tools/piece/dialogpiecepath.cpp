@@ -1022,9 +1022,8 @@ void DialogPiecePath::InitPassmarksList()
 
     const QVector<VPieceNode> nodes = GetListInternals<VPieceNode>(ui->listWidget);
 
-    for (int i = 0; i < nodes.size(); ++i)
+    for (auto &node : nodes)
     {
-        const VPieceNode node = nodes.at(i);
         if (node.GetTypeTool() == Tool::NodePoint && node.IsPassmark())
         {
             const QString name = GetNodeName(node);

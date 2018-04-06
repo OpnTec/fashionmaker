@@ -65,9 +65,9 @@ void TST_VPoster::BigPoster()
 
     QCOMPARE(poster.size(), 12);
 
-    for (int i=0; i < poster.size(); i++)
+    for (auto p : poster)
     {
-        QCOMPARE(poster.at(i).rect.size(), PageRect(printer).size());
+        QCOMPARE(p.rect.size(), PageRect(printer).size());
     }
 }
 

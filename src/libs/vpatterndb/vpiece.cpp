@@ -256,9 +256,8 @@ bool IsPassmarksPossible(const QVector<VPieceNode> &path)
     int countPointNodes = 0;
     int countOthers = 0;
 
-    for (int i = 0; i< path.size(); ++i)
+    for (auto &node : path)
     {
-        const VPieceNode &node = path.at(i);
         if (node.IsExcluded())
         {
             continue;// skip node
@@ -448,11 +447,11 @@ QVector<QLineF> VPiece::PassmarksLines(const VContainer *data, const QVector<QPo
 QVector<PlaceLabelImg> VPiece::PlaceLabelPoints(const VContainer *data) const
 {
     QVector<PlaceLabelImg> points;
-    for(int i=0; i < d->m_placeLabels.size(); ++i)
+    for(auto placeLabel : d->m_placeLabels)
     {
         try
         {
-            const auto label = data->GeometricObject<VPlaceLabelItem>(d->m_placeLabels.at(i));
+            const auto label = data->GeometricObject<VPlaceLabelItem>(placeLabel);
             points.append(label->LabelShape());
         }
         catch (const VExceptionBadId &e)
@@ -464,9 +463,20 @@ QVector<PlaceLabelImg> VPiece::PlaceLabelPoints(const VContainer *data) const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+QVector<QPainterPath> VPiece::CurvesPainterPath(const VContainer *data) const
+{
+    return GetPath().CurvesPainterPath(data);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 QPainterPath VPiece::MainPathPath(const VContainer *data) const
 {
-    const QVector<QPointF> points = MainPathPoints(data);
+    return VPiece::MainPathPath(MainPathPoints(data));
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QPainterPath VPiece::MainPathPath(const QVector<QPointF> &points)
+{
     QPainterPath path;
 
     if (not points.isEmpty())
@@ -670,22 +680,22 @@ QList<quint32> VPiece::Dependencies() const
 {
     QList<quint32> list = d->m_path.Dependencies();
 
-    foreach (const CustomSARecord &record, d->m_customSARecords)
+    for (auto &record : d->m_customSARecords)
     {
         list.append(record.path);
     }
 
-    foreach (const quint32 &value, d->m_internalPaths)
+    for (auto &value : d->m_internalPaths)
     {
         list.append(value);
     }
 
-    foreach (const quint32 &value, d->m_pins)
+    for (auto &value : d->m_pins)
     {
         list.append(value);
     }
 
-    foreach (const quint32 &value, d->m_placeLabels)
+    for (auto &value : d->m_placeLabels)
     {
         list.append(value);
     }
@@ -884,9 +894,8 @@ QVector<VPieceNode> VPiece::GetUnitedPath(const VContainer *data) const
 QVector<CustomSARecord> VPiece::GetValidRecords() const
 {
     QVector<CustomSARecord> records;
-    for (int i = 0; i < d->m_customSARecords.size(); ++i)
+    for (auto &record : d->m_customSARecords)
     {
-        const CustomSARecord &record = d->m_customSARecords.at(i);
         const int indexStartPoint = d->m_path.indexOfNode(record.startPoint);
         const int indexEndPoint = d->m_path.indexOfNode(record.endPoint);
 
@@ -937,13 +946,13 @@ QVector<CustomSARecord> VPiece::FilterRecords(QVector<CustomSARecord> records) c
     records.remove(startIndex);
 
     QVector<CustomSARecord> secondRound;
-    for (int i = 0; i < records.size(); ++i)
+    for (auto &record : records)
     {
-        const int indexStartPoint = d->m_path.indexOfNode(records.at(i).startPoint);
+        const int indexStartPoint = d->m_path.indexOfNode(record.startPoint);
         const int indexEndPoint = d->m_path.indexOfNode(filter.endPoint);
         if (indexStartPoint > indexEndPoint)
         {
-            secondRound.append(records.at(i));
+            secondRound.append(record);
         }
     }
 
@@ -1138,12 +1147,12 @@ bool VPiece::IsPassmarkVisible(const QVector<VPieceNode> &path, int passmarkInde
         return true;
     }
 
-    for (int i = 0; i < records.size(); ++i)
+    for (auto &record : records)
     {
-        if (records.at(i).includeType == PiecePathIncludeType::AsCustomSA)
+        if (record.includeType == PiecePathIncludeType::AsCustomSA)
         {
-            const int indexStartPoint = VPiecePath::indexOfNode(path, records.at(i).startPoint);
-            const int indexEndPoint = VPiecePath::indexOfNode(path, records.at(i).endPoint);
+            const int indexStartPoint = VPiecePath::indexOfNode(path, record.startPoint);
+            const int indexEndPoint = VPiecePath::indexOfNode(path, record.endPoint);
             if (passmarkIndex > indexStartPoint && passmarkIndex < indexEndPoint)
             {
                 return false;

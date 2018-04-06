@@ -260,7 +260,7 @@ QStringList VAbstractPattern::ListMeasurements() const
     QSet<QString> measurements;
     QSet<QString> others = futureIncrements.result().toSet();
 
-    foreach (const QString &token, tokens)
+    for (const auto &token : tokens)
     {
         if (token == QChar('-') || measurements.contains(token) || others.contains(token))
         {
@@ -2023,13 +2023,13 @@ QVector<VFormulaField> VAbstractPattern::ListFinalMeasurementsExpressions() cons
 //---------------------------------------------------------------------------------------------------------------------
 bool VAbstractPattern::IsVariable(const QString &token) const
 {
-    for (int i = 0; i < builInVariables.size(); ++i)
+    for (auto &var : builInVariables)
     {
-        if (token.indexOf( builInVariables.at(i) ) == 0)
+        if (token.indexOf( var ) == 0)
         {
-            if (builInVariables.at(i) == currentLength || builInVariables.at(i) == currentSeamAllowance)
+            if (var == currentLength || var == currentSeamAllowance)
             {
-                return token == builInVariables.at(i);
+                return token == var;
             }
             else
             {
@@ -2049,9 +2049,9 @@ bool VAbstractPattern::IsVariable(const QString &token) const
 //---------------------------------------------------------------------------------------------------------------------
 bool VAbstractPattern::IsFunction(const QString &token) const
 {
-    for (int i = 0; i < builInFunctions.size(); ++i)
+    for (auto &fn : builInFunctions)
     {
-        if (token.indexOf( builInFunctions.at(i) ) == 0)
+        if (token.indexOf(fn) == 0)
         {
             return true;
         }
@@ -2176,13 +2176,13 @@ void VAbstractPattern::SetFMeasurements(QDomElement &element, const QVector<VFin
 {
     if (not element.isNull())
     {
-        for (int i=0; i < measurements.size(); ++i)
+        for (auto &m : measurements)
         {
             QDomElement tagFMeasurement = createElement(TagFMeasurement);
 
-            SetAttribute(tagFMeasurement, AttrName, measurements.at(i).name);
-            SetAttribute(tagFMeasurement, AttrFormula, measurements.at(i).formula);
-            SetAttribute(tagFMeasurement, AttrDescription, measurements.at(i).description);
+            SetAttribute(tagFMeasurement, AttrName, m.name);
+            SetAttribute(tagFMeasurement, AttrFormula, m.formula);
+            SetAttribute(tagFMeasurement, AttrDescription, m.description);
 
             element.appendChild(tagFMeasurement);
         }

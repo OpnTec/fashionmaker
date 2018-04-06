@@ -105,7 +105,7 @@ void VTableSearch::Find(const QString &term)
 
         if (not searchList.isEmpty())
         {
-            foreach(QTableWidgetItem *item, searchList)
+            for (auto item : qAsConst(searchList))
             {
                 item->setBackground(Qt::yellow);
             }
@@ -158,7 +158,7 @@ void VTableSearch::RemoveRow(int row)
 
     if (row <= indexRow)
     {
-        foreach(QTableWidgetItem *item, searchList)
+        for (auto item : qAsConst(searchList))
         {
             if (item->row() == row)
             {
@@ -180,7 +180,7 @@ void VTableSearch::AddRow(int row)
 
     if (row <= indexRow)
     {
-        foreach(QTableWidgetItem *item, searchList)
+        for (auto item : qAsConst(searchList))
         {
             if (item->row() == row)
             {
@@ -202,7 +202,7 @@ void VTableSearch::RefreshList(const QString &term)
 
     searchList = table->findItems(term, Qt::MatchContains);
 
-    foreach(QTableWidgetItem *item, searchList)
+    for (auto item : qAsConst(searchList))
     {
         item->setBackground(Qt::yellow);
     }

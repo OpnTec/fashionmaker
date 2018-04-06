@@ -139,8 +139,8 @@ VPE::VProperty *VFormulaProperty::clone(bool include_children, VProperty *contai
 
         if (!include_children)
         {
-            QList<VProperty*> tmpChildren = container->getChildren();
-            foreach (VProperty* tmpChild, tmpChildren)
+            const QList<VProperty*> tmpChildren = container->getChildren();
+            for (auto tmpChild : tmpChildren)
             {
                 container->removeChild(tmpChild);
                 delete tmpChild;

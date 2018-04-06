@@ -58,10 +58,10 @@ void TST_VTranslateVars::TestFormulaFromUser_data()
 
     const QList<QLocale> allLocales =
             QLocale::matchingLocales(QLocale::AnyLanguage, QLocale::AnyScript, QLocale::AnyCountry);
-    for(int i = 0; i < allLocales.size(); ++i)
+    for(auto &locale : allLocales)
     {
-        PrepareValFromUser(1000.5, allLocales.at(i));
-        PrepareValFromUser(-1000.5, allLocales.at(i));
+        PrepareValFromUser(1000.5, locale);
+        PrepareValFromUser(-1000.5, locale);
     }
 }
 
@@ -88,10 +88,10 @@ void TST_VTranslateVars::TestFormulaToUser_data()
 
     const QList<QLocale> allLocales =
             QLocale::matchingLocales(QLocale::AnyLanguage, QLocale::AnyScript, QLocale::AnyCountry);
-    for(int i = 0; i < allLocales.size(); ++i)
+    for(auto &locale : allLocales)
     {
-        PrepareValToUser(1000.5, allLocales.at(i));
-        PrepareValToUser(-1000.5, allLocales.at(i));
+        PrepareValToUser(1000.5, locale);
+        PrepareValToUser(-1000.5, locale);
     }
 }
 

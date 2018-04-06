@@ -59,6 +59,44 @@ template <class K, class V> class QHash;
 
 Q_LOGGING_CATEGORY(vVis, "v.visualization")
 
+namespace
+{
+//---------------------------------------------------------------------------------------------------------------------
+VScaledEllipse *InitPointItem(const QColor &color, QGraphicsItem *parent, qreal z = 0)
+{
+    VScaledEllipse *point = new VScaledEllipse(parent);
+    point->setZValue(1);
+    point->setBrush(QBrush(Qt::NoBrush));
+
+    QPen visPen = point->pen();
+    visPen.setColor(color);
+
+    point->setPen(visPen);
+    point->setRect(PointRect(ScaledRadius(SceneScale(qApp->getCurrentScene()))));
+    point->setPos(QPointF());
+    point->setFlags(QGraphicsItem::ItemStacksBehindParent);
+    point->setZValue(z);
+    point->setVisible(false);
+    return point;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+VCurvePathItem *InitCurveItem(const QColor &color, QGraphicsItem *parent, qreal z = 0)
+{
+    VCurvePathItem *curve = new VCurvePathItem(parent);
+    curve->setBrush(QBrush(Qt::NoBrush));
+
+    QPen visPen = curve->pen();
+    visPen.setColor(color);
+    curve->setPen(visPen);
+
+    curve->setFlags(QGraphicsItem::ItemStacksBehindParent);
+    curve->setZValue(z);
+    curve->setVisible(false);
+    return curve;
+}
+}
+
 //---------------------------------------------------------------------------------------------------------------------
 Visualization::Visualization(const VContainer *data)
     :QObject(),
@@ -261,22 +299,19 @@ VScaledEllipse *Visualization::GetPointItem(QVector<VScaledEllipse *> &points, q
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-VScaledEllipse *Visualization::InitPointItem(const QColor &color, QGraphicsItem *parent, qreal z)
+VCurvePathItem *Visualization::GetCurveItem(QVector<VCurvePathItem *> &curves, quint32 i, const QColor &color,
+                                            QGraphicsItem *parent)
 {
-    VScaledEllipse *point = new VScaledEllipse(parent);
-    point->setZValue(1);
-    point->setBrush(QBrush(Qt::NoBrush));
-
-    QPen visPen = point->pen();
-    visPen.setColor(color);
-
-    point->setPen(visPen);
-    point->setRect(PointRect(ScaledRadius(SceneScale(qApp->getCurrentScene()))));
-    point->setPos(QPointF());
-    point->setFlags(QGraphicsItem::ItemStacksBehindParent);
-    point->setZValue(z);
-    point->setVisible(false);
-    return point;
+    if (not curves.isEmpty() && static_cast<quint32>(curves.size() - 1) >= i)
+    {
+        return curves.at(static_cast<int>(i));
+    }
+    else
+    {
+        auto point = InitCurveItem(color, parent);
+        curves.append(point);
+        return point;
+    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------

@@ -170,7 +170,7 @@ void TST_MeasurementRegExp::PrepareData()
 
     QTest::addColumn<QString>("originalName");
 
-    foreach(const QString &str, originalNames)
+    for (auto &str : originalNames)
     {
         const QString tag = QString("System: '%1', locale: '%2'. Name '%3'").arg(m_system, m_locale, str);
         QTest::newRow(qUtf8Printable(tag)) << str;

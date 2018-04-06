@@ -179,10 +179,9 @@ void PreferencesConfigurationPage::changeEvent(QEvent *event)
 //---------------------------------------------------------------------------------------------------------------------
 void PreferencesConfigurationPage::SetLabelComboBox(const QStringList &list)
 {
-    for (int i = 0; i < list.size(); ++i)
+    for (auto &name : list)
     {
-        QLocale loc = QLocale(list.at(i));
-        ui->labelCombo->addItem(loc.nativeLanguageName(), list.at(i));
+        ui->labelCombo->addItem(QLocale(name).nativeLanguageName(), name);
     }
 }
 

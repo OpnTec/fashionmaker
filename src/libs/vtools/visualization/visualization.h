@@ -114,10 +114,10 @@ protected:
 
     static VScaledEllipse *GetPointItem(QVector<VScaledEllipse *> &points, quint32 i, const QColor &color,
                                         QGraphicsItem *parent);
+    static VCurvePathItem *GetCurveItem(QVector<VCurvePathItem *> &curves, quint32 i, const QColor &color,
+                                        QGraphicsItem *parent);
 private:
     Q_DISABLE_COPY(Visualization)
-
-    static VScaledEllipse* InitPointItem(const QColor &color, QGraphicsItem *parent, qreal z = 0);
 };
 
 //---------------------------------------------------------------------------------------------------------------------

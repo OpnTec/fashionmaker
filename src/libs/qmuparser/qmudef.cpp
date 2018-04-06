@@ -292,26 +292,26 @@ QString NameRegExp()
         QString decimalPoints;
         QString groupSeparators;
 
-        for(int i = 0; i < allLocales.size(); ++i)
+        for(auto &locale : allLocales)
         {
-            if (not positiveSigns.contains(allLocales.at(i).positiveSign()))
+            if (not positiveSigns.contains(locale.positiveSign()))
             {
-                positiveSigns.append(allLocales.at(i).positiveSign());
+                positiveSigns.append(locale.positiveSign());
             }
 
-            if (not negativeSigns.contains(allLocales.at(i).negativeSign()))
+            if (not negativeSigns.contains(locale.negativeSign()))
             {
-                negativeSigns.append(allLocales.at(i).negativeSign());
+                negativeSigns.append(locale.negativeSign());
             }
 
-            if (not decimalPoints.contains(allLocales.at(i).decimalPoint()))
+            if (not decimalPoints.contains(locale.decimalPoint()))
             {
-                decimalPoints.append(allLocales.at(i).decimalPoint());
+                decimalPoints.append(locale.decimalPoint());
             }
 
-            if (not groupSeparators.contains(allLocales.at(i).groupSeparator()))
+            if (not groupSeparators.contains(locale.groupSeparator()))
             {
-                groupSeparators.append(allLocales.at(i).groupSeparator());
+                groupSeparators.append(locale.groupSeparator());
             }
         }
 
