@@ -148,7 +148,10 @@ void PreferencesPathPage::EditPath()
     const QString dir = QFileDialog::getExistingDirectory(this, tr("Open Directory"), path,
                                                           QFileDialog::ShowDirsOnly
                                                           | QFileDialog::DontResolveSymlinks
-                                                          | QFileDialog::DontUseNativeDialog);
+#ifdef Q_OS_LINUX
+                                                          | QFileDialog::DontUseNativeDialog
+#endif
+                                                          );
     if (dir.isEmpty())
     {
         if (usedNotExistedDir)

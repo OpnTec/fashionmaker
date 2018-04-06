@@ -44,11 +44,11 @@ QStringList PrepareKnowMaterials(const QStringList &patternMaterials, bool remem
 
     if (rememberPM)
     {
-        for(int i=0; i < patternMaterials.size(); ++i)
+        for(auto &patternMaterial : patternMaterials)
         {
-            if (not patternMaterials.at(i).isEmpty() && not knownMaterials.contains(patternMaterials.at(i)))
+            if (not patternMaterial.isEmpty() && not knownMaterials.contains(patternMaterial))
             {
-                knownMaterials.append(patternMaterials.at(i));
+                knownMaterials.append(patternMaterial);
             }
         }
     }

@@ -486,14 +486,13 @@ void VMainGraphicsView::mousePressEvent(QMouseEvent *event)
                     emit itemClicked(nullptr);
                     break;
                 }
-                for (int i = 0; i < list.size(); ++i)
+                for (auto item : list)
                 {
-                    if (this->scene()->items().contains(list.at(i)))
+                    if (this->scene()->items().contains(item))
                     {
-                        if (list.at(i)->type() > QGraphicsItem::UserType &&
-                            list.at(i)->type() <= VSimpleCurve::Type)
+                        if (item->type() > QGraphicsItem::UserType && item->type() <= VSimpleCurve::Type)
                         {
-                            emit itemClicked(list.at(i));
+                            emit itemClicked(item);
                             break;
                         }
                         else
@@ -692,7 +691,8 @@ void VMainGraphicsView::NewSceneRect(QGraphicsScene *sc, QGraphicsView *view, QG
     else
     {
         QRectF rect = item->sceneBoundingRect();
-        foreach(QGraphicsItem *child, item->childItems())
+        const QList<QGraphicsItem *> children = item->childItems();
+        for (auto child : children)
         {
             if(child->isVisible())
             {

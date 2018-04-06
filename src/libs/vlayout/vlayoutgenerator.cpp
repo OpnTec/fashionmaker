@@ -208,9 +208,9 @@ LayoutErrors VLayoutGenerator::State() const
 QList<QGraphicsItem *> VLayoutGenerator::GetPapersItems() const
 {
     QList<QGraphicsItem *> list;
-    for (int i=0; i < papers.count(); ++i)
+    for (auto &paper : papers)
     {
-        list.append(papers.at(i).GetPaperItem(autoCrop, IsTestAsPaths()));
+        list.append(paper.GetPaperItem(autoCrop, IsTestAsPaths()));
     }
     return list;
 }
@@ -219,9 +219,9 @@ QList<QGraphicsItem *> VLayoutGenerator::GetPapersItems() const
 QList<QList<QGraphicsItem *> > VLayoutGenerator::GetAllDetailsItems() const
 {
     QList<QList<QGraphicsItem *> > list;
-    for (int i=0; i < papers.count(); ++i)
+    for (auto &paper : papers)
     {
-        list.append(papers.at(i).GetItemDetails(IsTestAsPaths()));
+        list.append(paper.GetItemDetails(IsTestAsPaths()));
     }
     return list;
 }
@@ -230,9 +230,9 @@ QList<QList<QGraphicsItem *> > VLayoutGenerator::GetAllDetailsItems() const
 QVector<QVector<VLayoutPiece> > VLayoutGenerator::GetAllDetails() const
 {
     QVector<QVector<VLayoutPiece> > list;
-    for (int i=0; i < papers.count(); ++i)
+    for (auto &paper : papers)
     {
-        list.append(papers.at(i).GetDetails());
+        list.append(paper.GetDetails());
     }
     return list;
 }
@@ -458,9 +458,8 @@ QList<VLayoutPiece> VLayoutGenerator::MoveDetails(qreal length, const QVector<VL
     }
 
     QList<VLayoutPiece> newDetails;
-    for (int i = 0; i < details.size(); ++i)
+    for (auto d : details)
     {
-        VLayoutPiece d = details.at(i);
         d.Translate(0, length);
         newDetails.append(d);
     }

@@ -46,7 +46,8 @@ DialogExportToCSV::DialogExportToCSV(QWidget *parent)
 {
     ui->setupUi(this);
 
-    foreach (int mib, QTextCodec::availableMibs())
+    const QList<int> mibs = QTextCodec::availableMibs();
+    for (auto mib : mibs)
     {
         ui->comboBoxCodec->addItem(QTextCodec::codecForMib(mib)->name(), mib);
     }

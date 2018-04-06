@@ -658,13 +658,13 @@ bool VMeasurements::IsDefinedKnownNamesValid() const
     QStringList names = AllGroupNames();
 
     QSet<QString> set;
-    foreach (const QString &var, names)
+    for (const auto &var : names)
     {
         set.insert(var);
     }
 
     names = ListKnown();
-    foreach (const QString &var, names)
+    for (const auto &var : qAsConst(names))
     {
         if (not set.contains(var))
         {

@@ -41,6 +41,8 @@ win32 {
                        ../../../dist/win/msvcr120.dll
 }
 
+DEFINES += QT_NO_FOREACH
+
 macx{
     # QTBUG-31034 qmake doesn't allow override QMAKE_CXX
     CONFIG+=no_ccache

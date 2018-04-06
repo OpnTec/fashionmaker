@@ -300,9 +300,9 @@ void VToolSeamAllowance::AddCSARecords(VAbstractPattern *doc, QDomElement &domEl
     if (records.size() > 0)
     {
         QDomElement csaRecordsElement = doc->createElement(VToolSeamAllowance::TagCSA);
-        for (int i = 0; i < records.size(); ++i)
+        for (auto record : records)
         {
-            AddCSARecord(doc, csaRecordsElement, records.at(i));
+            AddCSARecord(doc, csaRecordsElement, record);
         }
         domElement.appendChild(csaRecordsElement);
     }
@@ -314,10 +314,10 @@ void VToolSeamAllowance::AddInternalPaths(VAbstractPattern *doc, QDomElement &do
     if (paths.size() > 0)
     {
         QDomElement iPathsElement = doc->createElement(VToolSeamAllowance::TagIPaths);
-        for (int i = 0; i < paths.size(); ++i)
+        for (auto path : paths)
         {
             QDomElement recordNode = doc->createElement(VToolSeamAllowance::TagRecord);
-            doc->SetAttribute(recordNode, VAbstractPattern::AttrPath, paths.at(i));
+            doc->SetAttribute(recordNode, VAbstractPattern::AttrPath, path);
             iPathsElement.appendChild(recordNode);
         }
         domElement.appendChild(iPathsElement);
@@ -1240,9 +1240,9 @@ void VToolSeamAllowance::keyReleaseEvent(QKeyEvent *event)
                     {
                         qApp->getUndoStack()->beginMacro(tr("multi deletion"));
 
-                        for(int i=0; i < toolList.size(); ++i)
+                        for(auto tool : toolList)
                         {
-                            toolList.at(i)->RemoveWithConfirm(false);
+                            tool->RemoveWithConfirm(false);
                         }
                     }
                     DeleteToolWithConfirm(false);
@@ -1332,12 +1332,12 @@ void VToolSeamAllowance::UpdateExcludeState()
 //---------------------------------------------------------------------------------------------------------------------
 void VToolSeamAllowance::UpdateInternalPaths()
 {
-    const VPiece detail = VAbstractTool::data.GetPiece(m_id);
-    for (int i = 0; i < detail.GetInternalPaths().size(); ++i)
+    const QVector<quint32> paths = VAbstractTool::data.GetPiece(m_id).GetInternalPaths();
+    for (auto path : paths)
     {
         try
         {
-            if (auto *tool = qobject_cast<VToolPiecePath*>(VAbstractPattern::getTool(detail.GetInternalPaths().at(i))))
+            if (auto *tool = qobject_cast<VToolPiecePath*>(VAbstractPattern::getTool(path)))
             {
                 tool->RefreshGeometry();
             }
@@ -1355,7 +1355,9 @@ void VToolSeamAllowance::RefreshGeometry(bool updateChildren)
     this->setFlag(QGraphicsItem::ItemSendsGeometryChanges, false);
 
     const VPiece detail = VAbstractTool::data.GetPiece(m_id);
-    QFuture<QPainterPath > futurePath = QtConcurrent::run(detail, &VPiece::MainPathPath, this->getData());
+    QFuture<QPainterPath > futurePath = QtConcurrent::run(detail,
+                                                          QOverload<const VContainer *>::of(&VPiece::MainPathPath),
+                                                          this->getData());
     QFuture<QVector<QPointF> > futureSeamAllowance;
 
     if (detail.IsSeamAllowance())
@@ -1440,7 +1442,7 @@ void VToolSeamAllowance::SaveDialogChange(const QString &undoText)
     {
         qApp->getUndoStack()->beginMacro(undoText.isEmpty() ? saveCommand->text(): undoText);
 
-        foreach (QUndoCommand* command, undocommands)
+        for (auto command : undocommands)
         {
             qApp->getUndoStack()->push(command);
         }
@@ -1764,18 +1766,20 @@ void VToolSeamAllowance::InitNode(const VPieceNode &node, VMainGraphicsScene *sc
 //---------------------------------------------------------------------------------------------------------------------
 void VToolSeamAllowance::InitCSAPaths(const VPiece &detail) const
 {
-    for (int i = 0; i < detail.GetCustomSARecords().size(); ++i)
+    const QVector<CustomSARecord> records = detail.GetCustomSARecords();
+    for (auto record : records)
     {
-        doc->IncrementReferens(detail.GetCustomSARecords().at(i).path);
+        doc->IncrementReferens(record.path);
     }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void VToolSeamAllowance::InitInternalPaths(const VPiece &detail)
 {
-    for (int i = 0; i < detail.GetInternalPaths().size(); ++i)
+    const QVector<quint32> paths = detail.GetInternalPaths();
+    for (auto path : paths)
     {
-        auto *tool = qobject_cast<VToolPiecePath*>(VAbstractPattern::getTool(detail.GetInternalPaths().at(i)));
+        auto *tool = qobject_cast<VToolPiecePath*>(VAbstractPattern::getTool(path));
         SCASSERT(tool != nullptr);
 
         if (tool->parent() != this)
@@ -1784,16 +1788,16 @@ void VToolSeamAllowance::InitInternalPaths(const VPiece &detail)
             tool->SetParentType(ParentType::Item);
         }
         tool->show();
-        doc->IncrementReferens(detail.GetInternalPaths().at(i));
+        doc->IncrementReferens(path);
     }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void VToolSeamAllowance::InitSpecialPoints(const QVector<quint32> &points) const
 {
-    for (int i = 0; i < points.size(); ++i)
+    for (auto point : points)
     {
-        doc->IncrementReferens(points.at(i));
+        doc->IncrementReferens(point);
     }
 }
 
@@ -1890,9 +1894,9 @@ QList<VToolSeamAllowance *> VToolSeamAllowance::SelectedTools() const
 
         if (not list.isEmpty())
         {
-            for(int i=0; i < list.size(); ++i)
+            for(auto item : list)
             {
-                VToolSeamAllowance *tool = qgraphicsitem_cast<VToolSeamAllowance *>(list.at(i));
+                VToolSeamAllowance *tool = qgraphicsitem_cast<VToolSeamAllowance *>(item);
                 if (tool != nullptr && tool->getId() != m_id)
                 {
                     tools.append(tool);
@@ -1911,10 +1915,10 @@ void VToolSeamAllowance::AddPointRecords(VAbstractPattern *doc, QDomElement &dom
     if (records.size() > 0)
     {
         QDomElement pinsElement = doc->createElement(tag);
-        for (int i = 0; i < records.size(); ++i)
+        for (auto record : records)
         {
             QDomElement recordNode = doc->createElement(VToolSeamAllowance::TagRecord);
-            recordNode.appendChild(doc->createTextNode(QString().setNum(records.at(i))));
+            recordNode.appendChild(doc->createTextNode(QString().setNum(record)));
             pinsElement.appendChild(recordNode);
         }
         domElement.appendChild(pinsElement);
@@ -2009,9 +2013,8 @@ QVector<CustomSARecord> VToolSeamAllowance::DuplicateCustomSARecords(const QVect
                                                                      const QMap<quint32, quint32> &replacements)
 {
     QVector<CustomSARecord> newRecords;
-    for(int i=0; i < records.size(); ++i)
+    for(auto record : records)
     {
-        CustomSARecord record = records.at(i);
         record.path = DuplicatePiecePath(record.path, initData);
         record.startPoint = replacements.value(record.startPoint, NULL_ID);
         record.endPoint = replacements.value(record.endPoint, NULL_ID);
@@ -2025,9 +2028,9 @@ QVector<quint32> VToolSeamAllowance::DuplicateInternalPaths(const QVector<quint3
                                                             const VToolSeamAllowanceInitData &initData)
 {
     QVector<quint32> newPaths;
-    for(int i=0; i < iPaths.size(); ++i)
+    for(auto iPath : iPaths)
     {
-        newPaths.append(DuplicatePiecePath(iPaths.at(i), initData));
+        newPaths.append(DuplicatePiecePath(iPath, initData));
     }
     return newPaths;
 }
@@ -2037,11 +2040,11 @@ QVector<quint32> VToolSeamAllowance::DuplicatePins(const QVector<quint32> &pins,
                                                    const VToolSeamAllowanceInitData &initData)
 {
     QVector<quint32> newPins;
-    for(int i=0; i < pins.size(); ++i)
+    for(auto p : pins)
     {
-        QSharedPointer<VPointF> pin = initData.data->GeometricObject<VPointF>(pins.at(i));
+        QSharedPointer<VPointF> pin = initData.data->GeometricObject<VPointF>(p);
 
-        VAbstractNode *tool = qobject_cast<VAbstractNode *>(VAbstractPattern::getTool(pins.at(i)));
+        VAbstractNode *tool = qobject_cast<VAbstractNode *>(VAbstractPattern::getTool(p));
         SCASSERT(tool != nullptr)
 
         VToolPinInitData initNodeData;
@@ -2066,10 +2069,10 @@ QVector<quint32> VToolSeamAllowance::DuplicatePlaceLabels(const QVector<quint32>
                                                           const VToolSeamAllowanceInitData &initData)
 {
     QVector<quint32> newPlaceLabels;
-    for(int i=0; i < placeLabels.size(); ++i)
+    for(auto placeLabel : placeLabels)
     {
-        QSharedPointer<VPlaceLabelItem> label = initData.data->GeometricObject<VPlaceLabelItem>(placeLabels.at(i));
-        VAbstractNode *tool = qobject_cast<VAbstractNode *>(VAbstractPattern::getTool(placeLabels.at(i)));
+        QSharedPointer<VPlaceLabelItem> label = initData.data->GeometricObject<VPlaceLabelItem>(placeLabel);
+        VAbstractNode *tool = qobject_cast<VAbstractNode *>(VAbstractPattern::getTool(placeLabel));
         SCASSERT(tool != nullptr)
 
         VToolPlaceLabelInitData initNodeData;

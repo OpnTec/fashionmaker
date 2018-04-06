@@ -218,9 +218,9 @@ void DialogTool::FillComboBoxPiecesList(QComboBox *box, const QVector<quint32> &
     SCASSERT(box != nullptr)
     box->blockSignals(true);
     box->clear();
-    for (int i=0; i < list.size(); ++i)
+    for (auto id : list)
     {
-        box->addItem(data->GetPiece(list.at(i)).GetName(), list.at(i));
+        box->addItem(data->GetPiece(id).GetName(), id);
     }
     box->blockSignals(false);
     box->setCurrentIndex(-1); // Force a user to choose

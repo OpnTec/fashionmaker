@@ -163,11 +163,6 @@ DialogSeamAllowance::DialogSeamAllowance(const VContainer *data, const quint32 &
     flagMainPathIsValid = MainPathIsValid();
     CheckState();
 
-    if (not applyAllowed)
-    {
-        vis = new VisToolPiece(data);
-    }
-
     m_ftb->SetCurrentIndex(TabOrder::Paths);// Show always first tab active on start.
 }
 
@@ -203,6 +198,11 @@ void DialogSeamAllowance::EnableApply(bool enable)
     m_ftb->SetTabEnabled(TabOrder::Grainline, applyAllowed);
     m_ftb->SetTabEnabled(TabOrder::Passmarks, applyAllowed);
     m_ftb->SetTabEnabled(TabOrder::PlaceLabels, applyAllowed);
+
+    if (not applyAllowed && vis.isNull())
+    {
+        vis = new VisToolPiece(data);
+    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -223,9 +223,9 @@ void DialogSeamAllowance::SetPiece(const VPiece &piece)
     uiTabPaths->checkBoxHideMainPath->setChecked(piece.IsHideMainPath());
     uiTabPaths->listWidgetCustomSA->blockSignals(true);
     uiTabPaths->listWidgetCustomSA->clear();
-    for (int i = 0; i < piece.GetCustomSARecords().size(); ++i)
+    QVector<CustomSARecord> records = piece.GetCustomSARecords();
+    for (auto record : records)
     {
-        const CustomSARecord &record = piece.GetCustomSARecords().at(i);
         if (record.path > NULL_ID)
         {
             const QString name = GetPathName(record.path, record.reverse);
@@ -240,9 +240,9 @@ void DialogSeamAllowance::SetPiece(const VPiece &piece)
     uiTabPaths->listWidgetCustomSA->blockSignals(false);
 
     uiTabPaths->listWidgetInternalPaths->clear();
-    for (int i = 0; i < piece.GetInternalPaths().size(); ++i)
+    const QVector<quint32> paths = piece.GetInternalPaths();
+    for (auto path : paths)
     {
-        const quint32 path = piece.GetInternalPaths().at(i);
         if (path > NULL_ID)
         {
             const QString name = GetPathName(path);
@@ -277,17 +277,19 @@ void DialogSeamAllowance::SetPiece(const VPiece &piece)
     };
 
     uiTabPins->listWidgetPins->clear();
-    for (int i = 0; i < piece.GetPins().size(); ++i)
+    const QVector<quint32> pins = piece.GetPins();
+    for (auto pin : pins)
     {
-        NewSpecialPoint(uiTabPins->listWidgetPins, piece.GetPins().at(i));
+        NewSpecialPoint(uiTabPins->listWidgetPins, pin);
     }
 
     InitAllPinComboboxes();
 
     uiTabPlaceLabels->listWidgetPlaceLabels->clear();
-    for (int i = 0; i < piece.GetPlaceLabels().size(); ++i)
+    const QVector<quint32> labels = piece.GetPlaceLabels();
+    for (auto label : labels)
     {
-        NewSpecialPoint(uiTabPlaceLabels->listWidgetPlaceLabels, piece.GetPlaceLabels().at(i));
+        NewSpecialPoint(uiTabPlaceLabels->listWidgetPlaceLabels, label);
     }
 
     if (piece.GetPlaceLabels().size() > 0)
@@ -2471,9 +2473,8 @@ void DialogSeamAllowance::InitNodesList()
 
     const QVector<VPieceNode> nodes = GetListInternals<VPieceNode>(uiTabPaths->listWidgetMainPath);
 
-    for (int i = 0; i < nodes.size(); ++i)
+    for (auto &node : nodes)
     {
-        const VPieceNode node = nodes.at(i);
         if (node.GetTypeTool() == Tool::NodePoint && not node.IsExcluded())
         {
             const QString name = GetNodeName(node);
@@ -2505,9 +2506,8 @@ void DialogSeamAllowance::InitPassmarksList()
 
     const QVector<VPieceNode> nodes = GetListInternals<VPieceNode>(uiTabPaths->listWidgetMainPath);
 
-    for (int i = 0; i < nodes.size(); ++i)
+    for (auto &node : nodes)
     {
-        const VPieceNode node = nodes.at(i);
         if (node.GetTypeTool() == Tool::NodePoint && node.IsPassmark())
         {
             const QString name = GetNodeName(node);
@@ -2775,9 +2775,8 @@ void DialogSeamAllowance::InitCSAPoint(QComboBox *box)
 
     const QVector<VPieceNode> nodes = GetListInternals<VPieceNode>(uiTabPaths->listWidgetMainPath);
 
-    for (int i = 0; i < nodes.size(); ++i)
+    for (auto &node : nodes)
     {
-        const VPieceNode &node = nodes.at(i);
         if (node.GetTypeTool() == Tool::NodePoint && not node.IsExcluded())
         {
             const QString name = GetNodeName(node);
@@ -2802,10 +2801,9 @@ void DialogSeamAllowance::InitPinPoint(QComboBox *box)
 
     const QVector<quint32> pins = GetListInternals<quint32>(uiTabPins->listWidgetPins);
 
-    for (int i = 0; i < pins.size(); ++i)
+    for (auto pin : pins)
     {
-        const QSharedPointer<VGObject> pin = data->GetGObject(pins.at(i));
-        box->addItem(pin->name(), pins.at(i));
+        box->addItem(data->GetGObject(pin)->name(), pin);
     }
 
     const int index = uiTabPaths->comboBoxNodes->findData(currentId);
@@ -3028,10 +3026,13 @@ void DialogSeamAllowance::SetFormulaSAWidth(const QString &formula)
     }
     uiTabPaths->plainTextEditFormulaWidth->setPlainText(width);
 
-    VisToolPiece *path = qobject_cast<VisToolPiece *>(vis);
-    SCASSERT(path != nullptr)
-    const VPiece p = CreatePiece();
-    path->SetPiece(p);
+    if (not applyAllowed)
+    {
+        VisToolPiece *path = qobject_cast<VisToolPiece *>(vis);
+        SCASSERT(path != nullptr)
+        const VPiece p = CreatePiece();
+        path->SetPiece(p);
+    }
 
     MoveCursorToEnd(uiTabPaths->plainTextEditFormulaWidth);
 }
@@ -3298,9 +3299,9 @@ QString DialogSeamAllowance::GetDefaultPieceName() const
     QList<VPiece> pieces = data->DataPieces()->values();
     QSet<QString> names;
 
-    for (int i = 0; i < pieces.size(); ++i)
+    for (auto &piece : pieces)
     {
-        names.insert(pieces.at(i).GetName());
+        names.insert(piece.GetName());
     }
 
     const QString defName = tr("Detail");

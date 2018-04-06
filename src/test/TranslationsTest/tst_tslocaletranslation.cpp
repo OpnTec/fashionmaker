@@ -299,19 +299,19 @@ void TST_TSLocaleTranslation::TestHTMLTags()
                                                   << QLatin1String("html")
                                                   << QLatin1String("body");
     static const QString pattern("{1}.*>");
-    for (int i=0; i < tags.size(); ++i)
+    for (auto &tag : tags)
     {
-        const QRegularExpression openRegex(QLatin1String("<") + tags.at(i) + pattern,
+        const QRegularExpression openRegex(QLatin1String("<") + tag + pattern,
                                            QRegularExpression::DotMatchesEverythingOption);
         if (source.contains(openRegex))
         {
             const int countOpenTag = source.count(openRegex);
-            const QRegularExpression closeRegex(QLatin1String("</") + tags.at(i) + pattern,
+            const QRegularExpression closeRegex(QLatin1String("</") + tag + pattern,
                                                 QRegularExpression::DotMatchesEverythingOption);
             const int countCloseTag = translation.count(closeRegex);
             if (not translation.contains(closeRegex) || countCloseTag != countOpenTag)
             {
-                const QString message = QString("Tag mismatch. Tag: '<%1>'. ").arg(tags.at(i)) +
+                const QString message = QString("Tag mismatch. Tag: '<%1>'. ").arg(tag) +
                         QString("Original name:'%1'").arg(source) + QString(", translated name:'%1'").arg(translation);
                 QFAIL(qUtf8Printable(message));
             }

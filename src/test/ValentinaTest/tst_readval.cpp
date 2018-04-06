@@ -50,9 +50,8 @@ void TST_ReadVal::TestReadVal_data()
 
     const QList<QLocale> allLocales =
             QLocale::matchingLocales(QLocale::AnyLanguage, QLocale::AnyScript, QLocale::AnyCountry);
-    for(int i = 0; i < allLocales.size(); ++i)
+    for(auto &locale : allLocales)
     {
-        const QLocale locale = allLocales.at(i);
         PrepareVal(1., locale);
         PrepareVal(1.0, locale);
         PrepareVal(-1.0, locale);

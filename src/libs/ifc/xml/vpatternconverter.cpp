@@ -1677,10 +1677,10 @@ void VPatternConverter::SaveChildrenToolUnionToV0_2_4(quint32 id, const QVector<
 
     QDomElement tagChildren = createElement(*strChildren);
 
-    for (int i=0; i<children.size(); ++i)
+    for (auto child : children)
     {
         QDomElement tagChild = createElement(*strChild);
-        tagChild.appendChild(createTextNode(QString().setNum(children.at(i))));
+        tagChild.appendChild(createTextNode(QString().setNum(child)));
         tagChildren.appendChild(tagChild);
     }
 
@@ -2581,10 +2581,10 @@ void VPatternConverter::TagUnionDetailsToV0_4_0()
 
             RemoveAllChildren(toolDOM);
 
-            for (int i = 0; i < nodes.size(); ++i)
+            for (auto &node : nodes)
             {
                 QDomElement tagDet = createElement(*strDet);
-                tagDet.appendChild(nodes.at(i));
+                tagDet.appendChild(node);
                 toolDOM.appendChild(tagDet);
             }
             toolDOM.appendChild(tagChildrenNodes);

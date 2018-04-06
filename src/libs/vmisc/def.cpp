@@ -817,11 +817,9 @@ void InitLanguages(QComboBox *combobox)
     bool englishUS = false;
     const QString en_US = QStringLiteral("en_US");
 
-    for (int i = 0; i < fileNames.size(); ++i)
+    for (auto locale : fileNames)
     {
-        // get locale extracted by filename
-        QString locale;
-        locale = fileNames.at(i);                  // "valentina_de_De.qm"
+        // get locale extracted by filename           "valentina_de_De.qm"
         locale.truncate(locale.lastIndexOf('.'));  // "valentina_de_De"
         locale.remove(0, locale.indexOf('_') + 1); // "de_De"
 

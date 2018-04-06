@@ -513,9 +513,8 @@ void VApplication::ClearOldLogs() const
     if (allFiles.isEmpty() == false)
     {
         qCDebug(vApp, "Clearing old logs");
-        for (int i = 0, sz = allFiles.size(); i < sz; ++i)
+        for (auto &fn : allFiles)
         {
-            auto fn = allFiles.at(i);
             QFileInfo info(fn);
 #if QT_VERSION >= QT_VERSION_CHECK(5, 10, 0)
             const QDateTime created = info.birthTime();

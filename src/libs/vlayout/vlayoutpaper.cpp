@@ -275,9 +275,9 @@ bool VLayoutPaper::AddToSheet(const VLayoutPiece &detail, std::atomic_bool &stop
         return false;
     }
 
-    for (int i=0; i < threads.size(); ++i)
+    for (auto thread : threads)
     {
-        bestResult.NewResult(threads.at(i)->getBestResult());
+        bestResult.NewResult(thread->getBestResult());
     }
 
     qDeleteAll(threads.begin(), threads.end());
@@ -322,9 +322,9 @@ QGraphicsRectItem *VLayoutPaper::GetPaperItem(bool autoCrop, bool textAsPaths) c
     {
         QScopedPointer<QGraphicsScene> scene(new QGraphicsScene());
         QList<QGraphicsItem *> list = GetItemDetails(textAsPaths);
-        for (int i=0; i < list.size(); ++i)
+        for (auto item : list)
         {
-            scene->addItem(list.at(i));
+            scene->addItem(item);
         }
         const int height = scene->itemsBoundingRect().toRect().height();
         if (d->globalContour.GetHeight() > height) //-V807
@@ -349,9 +349,9 @@ QGraphicsRectItem *VLayoutPaper::GetPaperItem(bool autoCrop, bool textAsPaths) c
 QList<QGraphicsItem *> VLayoutPaper::GetItemDetails(bool textAsPaths) const
 {
     QList<QGraphicsItem *> list;
-    for (int i=0; i < d->details.count(); ++i)
+    for (auto &detail : d->details)
     {
-        list.append(d->details.at(i).GetItem(textAsPaths));
+        list.append(detail.GetItem(textAsPaths));
     }
     return list;
 }
@@ -372,9 +372,9 @@ void VLayoutPaper::SetDetails(const QList<VLayoutPiece> &details)
 QRectF VLayoutPaper::DetailsBoundingRect() const
 {
     QRectF rec;
-    for (int i=0; i < d->details.count(); ++i)
+    for (auto &detail : d->details)
     {
-        rec = rec.united(d->details.at(i).DetailBoundingRect());
+        rec = rec.united(detail.DetailBoundingRect());
     }
 
     return rec;

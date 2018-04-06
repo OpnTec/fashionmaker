@@ -49,14 +49,14 @@ void TST_NameRegExp::TestNameRegExp_data()
     const QList<QLocale> allLocales =
             QLocale::matchingLocales(QLocale::AnyLanguage, QLocale::AnyScript, QLocale::AnyCountry);
 
-    for(int i = 0; i < allLocales.size(); ++i)
+    for(auto &locale : allLocales)
     {
-        INIT_LOCALE_VARIABLES(allLocales.at(i));
+        INIT_LOCALE_VARIABLES(locale);
         Q_UNUSED(positiveSign)
         Q_UNUSED(expUpper)
         Q_UNUSED(expLower)
 
-        const QString localeName = allLocales.at(i).name();
+        const QString localeName = locale.name();
         QString tag = localeName+QLatin1String(". First character can't be ")+sign0;
         QTest::newRow(qUtf8Printable(tag)) << sign0+QLatin1String("a") << false;
 
@@ -169,7 +169,7 @@ void TST_NameRegExp::TestOriginalMeasurementNamesRegExp_data()
     QTest::addColumn<QString>("str");
 
     const QStringList originalNames = AllGroupNames();
-    foreach(const QString &str, originalNames)
+    for (auto &str : originalNames)
     {
         const QString name = QString("Measurement '%1'").arg(str);
         QTest::newRow(qUtf8Printable(name)) << str;

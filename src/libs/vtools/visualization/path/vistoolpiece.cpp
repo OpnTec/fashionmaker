@@ -35,13 +35,15 @@
 VisToolPiece::VisToolPiece(const VContainer *data, QGraphicsItem *parent)
     : VisPath(data, parent),
       m_points(),
+      m_curves(),
       m_line1(nullptr),
       m_line2(nullptr),
       m_piece(),
       m_pieceCached(false),
       m_cachedMainPath(),
       m_cachedNodes(),
-      m_cachedMainPathPoints()
+      m_cachedMainPathPoints(),
+      m_cachedCurvesPath()
 {
     m_line1 = InitItem<VScaledLine>(supportColor, this);
     m_line2 = InitItem<VScaledLine>(supportColor, this);
@@ -56,11 +58,16 @@ void VisToolPiece::RefreshGeometry()
     {
         if (not m_pieceCached)
         {
-            m_cachedMainPath = m_piece.MainPathPath(Visualization::data);
             m_cachedNodes = m_piece.MainPathNodePoints(Visualization::data);
             if (mode == Mode::Creation)
             {
+                m_cachedCurvesPath = m_piece.CurvesPainterPath(Visualization::data);
                 m_cachedMainPathPoints = m_piece.MainPathPoints(Visualization::data);
+                m_cachedMainPath = VPiece::MainPathPath(m_cachedMainPathPoints);
+            }
+            else
+            {
+                m_cachedMainPath = m_piece.MainPathPath(Visualization::data);
             }
             m_pieceCached = true;
         }
@@ -75,6 +82,12 @@ void VisToolPiece::RefreshGeometry()
 
         if (mode == Mode::Creation)
         {
+            for (int i = 0; i < m_cachedCurvesPath.size(); ++i)
+            {
+                VCurvePathItem *path = GetCurve(static_cast<quint32>(i), supportColor);
+                DrawPath(path, m_cachedCurvesPath.at(i), supportColor);
+            }
+
             DrawLine(m_line1, QLineF(m_cachedMainPathPoints.first(), Visualization::scenePos), supportColor,
                      Qt::DashLine);
 
@@ -101,6 +114,12 @@ VScaledEllipse *VisToolPiece::GetPoint(quint32 i, const QColor &color)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+VCurvePathItem *VisToolPiece::GetCurve(quint32 i, const QColor &color)
+{
+    return GetCurveItem(m_curves, i, color, this);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 void VisToolPiece::HideAllItems()
 {
     if (m_line1)
@@ -113,9 +132,17 @@ void VisToolPiece::HideAllItems()
         m_line2->setVisible(false);
     }
 
-    for (int i=0; i < m_points.size(); ++i)
+    for(QGraphicsEllipseItem *item : qAsConst(m_points))
     {
-        if (QGraphicsEllipseItem *item = m_points.at(i))
+        if (item)
+        {
+            item->setVisible(false);
+        }
+    }
+
+    for(QGraphicsPathItem *item : qAsConst(m_curves))
+    {
+        if (item)
         {
             item->setVisible(false);
         }

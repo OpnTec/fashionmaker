@@ -48,7 +48,7 @@ void TST_VCommandLine::UniqueKeys()
     const QStringList options = AllKeys();
     QSet<QString> unique;
 
-    foreach(const QString &str, options)
+    for (auto &str : options)
     {
         const QString message = QString("Options '%1' is not unique!").arg(str);
         QVERIFY2(not unique.contains(str), qUtf8Printable(message));

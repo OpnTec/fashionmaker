@@ -226,12 +226,12 @@ bool TMainWindow::LoadFile(const QString &path)
         }
 
         // Check if file already opened
-        QList<TMainWindow*>list = qApp->MainWindows();
-        for (int i = 0; i < list.size(); ++i)
+        const QList<TMainWindow*> list = qApp->MainWindows();
+        for (auto w : list)
         {
-            if (list.at(i)->CurrentFile() == path)
+            if (w->CurrentFile() == path)
             {
-                list.at(i)->activateWindow();
+                w->activateWindow();
                 close();
                 return false;
             }
@@ -526,6 +526,15 @@ void TMainWindow::ToolBarStyles()
 //---------------------------------------------------------------------------------------------------------------------
 void TMainWindow::closeEvent(QCloseEvent *event)
 {
+#if defined(Q_OS_MAC)
+    // Workaround for Qt bug https://bugreports.qt.io/browse/QTBUG-43344
+    static int numCalled = 0;
+    if (numCalled++ >= 1)
+    {
+        return;
+    }
+#endif
+
     if (MaybeSave())
     {
         WriteSettings();
@@ -970,8 +979,11 @@ void TMainWindow::ImportDataFromCSV()
     const QString filters = tr("Comma-Separated Values") + QLatin1String(" (*.csv)");
     const QString suffix("csv");
 
-    QString fileName = QFileDialog::getOpenFileName(this, tr("Import from CSV"), QDir::homePath(), filters, nullptr,
-                                                    QFileDialog::DontUseNativeDialog);
+    QString fileName = QFileDialog::getOpenFileName(this, tr("Import from CSV"), QDir::homePath(), filters, nullptr
+#ifdef Q_OS_LINUX
+                                                    , QFileDialog::DontUseNativeDialog
+#endif
+                                                    );
 
     if (fileName.isEmpty())
     {
@@ -1354,15 +1366,15 @@ void TMainWindow::AddKnown()
         if (ui->tableWidget->currentRow() == -1)
         {
             currentRow  = ui->tableWidget->rowCount() + list.size() - 1;
-            for (int i = 0; i < list.size(); ++i)
+            for (auto &name : list)
             {
                 if (mType == MeasurementsType::Individual)
                 {
-                    m->AddEmpty(list.at(i), qApp->TrVars()->MFormula(list.at(i)));
+                    m->AddEmpty(name, qApp->TrVars()->MFormula(name));
                 }
                 else
                 {
-                    m->AddEmpty(list.at(i));
+                    m->AddEmpty(name);
                 }
 
                 search->AddRow(currentRow);
@@ -1373,18 +1385,18 @@ void TMainWindow::AddKnown()
             currentRow  = ui->tableWidget->currentRow() + list.size();
             const QTableWidgetItem *nameField = ui->tableWidget->item(ui->tableWidget->currentRow(), ColumnName);
             QString after = nameField->data(Qt::UserRole).toString();
-            for (int i = 0; i < list.size(); ++i)
+            for (auto &name : list)
             {
                 if (mType == MeasurementsType::Individual)
                 {
-                    m->AddEmptyAfter(after, list.at(i), qApp->TrVars()->MFormula(list.at(i)));
+                    m->AddEmptyAfter(after, name, qApp->TrVars()->MFormula(name));
                 }
                 else
                 {
-                    m->AddEmptyAfter(after, list.at(i));
+                    m->AddEmptyAfter(after, name);
                 }
                 search->AddRow(currentRow);
-                after = list.at(i);
+                after = name;
             }
         }
 
@@ -1448,9 +1460,9 @@ void TMainWindow::ImportFromPattern()
     if (ui->tableWidget->currentRow() == -1)
     {
         currentRow  = ui->tableWidget->rowCount() + measurements.size() - 1;
-        for (int i = 0; i < measurements.size(); ++i)
+        for (auto &mName : measurements)
         {
-            m->AddEmpty(measurements.at(i));
+            m->AddEmpty(mName);
         }
     }
     else
@@ -1458,10 +1470,10 @@ void TMainWindow::ImportFromPattern()
         currentRow  = ui->tableWidget->currentRow() + measurements.size();
         const QTableWidgetItem *nameField = ui->tableWidget->item(ui->tableWidget->currentRow(), ColumnName);
         QString after = nameField->data(Qt::UserRole).toString();
-        for (int i = 0; i < measurements.size(); ++i)
+        for (auto &mName : measurements)
         {
-            m->AddEmptyAfter(after, measurements.at(i));
-            after = measurements.at(i);
+            m->AddEmptyAfter(after, mName);
+            after = mName;
         }
     }
 
@@ -2843,12 +2855,12 @@ bool TMainWindow::LoadFromExistingFile(const QString &path)
         }
 
         // Check if file already opened
-        QList<TMainWindow*>list = qApp->MainWindows();
-        for (int i = 0; i < list.size(); ++i)
+        const QList<TMainWindow*> list = qApp->MainWindows();
+        for (auto w : list)
         {
-            if (list.at(i)->CurrentFile() == path)
+            if (w->CurrentFile() == path)
             {
-                list.at(i)->activateWindow();
+                w->activateWindow();
                 close();
                 return false;
             }
@@ -2984,7 +2996,7 @@ void TMainWindow::CreateWindowMenu(QMenu *menu)
     SCASSERT(menu != nullptr)
 
     QAction *action = menu->addAction(tr("&New Window"));
-    connect(action, &QAction::triggered, this, [this]()
+    connect(action, &QAction::triggered, this, []()
     {
         qApp->NewMainWindow();
         qApp->MainWindow()->activateWindow();
@@ -3214,18 +3226,18 @@ void TMainWindow::ImportIndividualMeasurements(const QxtCsvModel &csv)
         }
     }
 
-    for(int i=0; i < measurements.size(); ++i)
+    for(auto im : qAsConst(measurements))
     {
-        m->AddEmpty(measurements.at(i).name, measurements.at(i).value);
+        m->AddEmpty(im.name, im.value);
 
-        if (not measurements.at(i).fullName.isEmpty())
+        if (not im.fullName.isEmpty())
         {
-            m->SetMFullName(measurements.at(i).name, measurements.at(i).fullName);
+            m->SetMFullName(im.name, im.fullName);
         }
 
-        if (not measurements.at(i).description.isEmpty())
+        if (not im.description.isEmpty())
         {
-            m->SetMDescription(measurements.at(i).name, measurements.at(i).description);
+            m->SetMDescription(im.name, im.description);
         }
     }
 
@@ -3244,7 +3256,7 @@ void TMainWindow::ImportMultisizeMeasurements(const QxtCsvModel &csv)
         return;
     }
 
-    auto ConverToDouble = [this](QString text, const QString &error)
+    auto ConverToDouble = [](QString text, const QString &error)
     {
         text = VTranslateVars::TryFormulaFromUser(text, qApp->Settings()->GetOsSeparator());
         bool ok = false;
@@ -3324,21 +3336,21 @@ void TMainWindow::ImportMultisizeMeasurements(const QxtCsvModel &csv)
         }
     }
 
-    for(int i=0; i < measurements.size(); ++i)
+    for(auto mm : qAsConst(measurements))
     {
-        m->AddEmpty(measurements.at(i).name);
-        m->SetMBaseValue(measurements.at(i).name, measurements.at(i).base);
-        m->SetMSizeIncrease(measurements.at(i).name, measurements.at(i).sizeIncrease);
-        m->SetMHeightIncrease(measurements.at(i).name, measurements.at(i).heightIncrease);
+        m->AddEmpty(mm.name);
+        m->SetMBaseValue(mm.name, mm.base);
+        m->SetMSizeIncrease(mm.name, mm.sizeIncrease);
+        m->SetMHeightIncrease(mm.name, mm.heightIncrease);
 
-        if (not measurements.at(i).fullName.isEmpty())
+        if (not mm.fullName.isEmpty())
         {
-            m->SetMFullName(measurements.at(i).name, measurements.at(i).fullName);
+            m->SetMFullName(mm.name, mm.fullName);
         }
 
-        if (not measurements.at(i).description.isEmpty())
+        if (not mm.description.isEmpty())
         {
-            m->SetMDescription(measurements.at(i).name, measurements.at(i).description);
+            m->SetMDescription(mm.name, mm.description);
         }
     }
 

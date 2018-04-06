@@ -172,12 +172,12 @@ void VObjEngine::drawPath(const QPainterPath &path)
 
     quint32 num_points = 0;
 
-    for (int i=0; i < polygon.count(); i++)
+    for (auto &p : polygon)
     {
         if ( num_points < MAX_POINTS )
         {
-            points[num_points].x = polygon.at(i).x();
-            points[num_points].y = polygon.at(i).y();
+            points[num_points].x = p.x();
+            points[num_points].y = p.y();
             num_points++;
         }
     }
@@ -326,12 +326,12 @@ QPolygonF VObjEngine::MakePointsUnique(const QPolygonF &polygon) const
 {
     QVector<QPointF> set;
     QPolygonF uniquePolygon;
-    for (int i=0; i < polygon.count(); i++)
+    for (auto p : polygon)
     {
-        if (set.contains(polygon.at(i)) == false)
+        if (set.contains(p) == false)
         {
-            set.append(polygon.at(i));
-            uniquePolygon.append(polygon.at(i));
+            set.append(p);
+            uniquePolygon.append(p);
         }
     }
     return uniquePolygon;

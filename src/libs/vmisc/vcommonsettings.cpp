@@ -105,9 +105,9 @@ qreal lineWidthCached = 0;
 //---------------------------------------------------------------------------------------------------------------------
 QStringList ClearFormats(const QStringList &predefinedFormats, QStringList formats)
 {
-    for (int i = 0; i < predefinedFormats.size(); ++i)
+    for (auto &f : predefinedFormats)
     {
-        formats.removeAll(predefinedFormats.at(i));
+        formats.removeAll(f);
     }
     return formats;
 }
@@ -550,11 +550,11 @@ QStringList VCommonSettings::GetRecentFileList() const
     const QStringList files = value(*settingGeneralRecentFileList).toStringList();
     QStringList cleared;
 
-    for (int i = 0; i < files.size(); ++i)
+    for (auto &f : files)
     {
-        if (QFileInfo::exists(files.at(i)))
+        if (QFileInfo::exists(f))
         {
-            cleared.append(files.at(i));
+            cleared.append(f);
         }
     }
 

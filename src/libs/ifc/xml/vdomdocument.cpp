@@ -972,15 +972,15 @@ void VDomDocument::SetLabelTemplate(QDomElement &element, const QVector<VLabelTe
 {
     if (not element.isNull())
     {
-        for (int i=0; i < lines.size(); ++i)
+        for (auto &line : lines)
         {
             QDomElement tagLine = createElement(TagLine);
 
-            SetAttribute(tagLine, AttrText, lines.at(i).line);
-            SetAttribute(tagLine, AttrBold, lines.at(i).bold);
-            SetAttribute(tagLine, AttrItalic, lines.at(i).italic);
-            SetAttribute(tagLine, AttrAlignment, lines.at(i).alignment);
-            SetAttribute(tagLine, AttrFSIncrement, lines.at(i).fontSizeIncrement);
+            SetAttribute(tagLine, AttrText, line.line);
+            SetAttribute(tagLine, AttrBold, line.bold);
+            SetAttribute(tagLine, AttrItalic, line.italic);
+            SetAttribute(tagLine, AttrAlignment, line.alignment);
+            SetAttribute(tagLine, AttrFSIncrement, line.fontSizeIncrement);
 
             element.appendChild(tagLine);
         }

@@ -180,9 +180,9 @@ void TST_VArc::TestGetPoints()
     {
         const qreal epsRadius = 1.5; // computing error
 
-        for (int i=0; i < points.size(); ++i)
+        for (auto point : points)
         {
-            QLineF rLine(static_cast<QPointF>(center), points.at(i));
+            QLineF rLine(static_cast<QPointF>(center), point);
             const qreal value = qAbs(rLine.length() - radius);
             const QString errorMsg = QString("Broken the first rule. All points should be on the same distance from "
                                              "the center. Error ='%1'.").arg(value);

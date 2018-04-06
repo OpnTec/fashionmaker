@@ -1518,6 +1518,15 @@ void MainWindow::changeEvent(QEvent *event)
  */
 void MainWindow::closeEvent(QCloseEvent *event)
 {
+#if defined(Q_OS_MAC)
+    // Workaround for Qt bug https://bugreports.qt.io/browse/QTBUG-43344
+    static int numCalled = 0;
+    if (numCalled++ >= 1)
+    {
+        return;
+    }
+#endif
+
     qCDebug(vMainWindow, "Closing main window");
     if (MaybeSave())
     {
@@ -1660,8 +1669,11 @@ void MainWindow::LoadIndividual()
         usedNotExistedDir = directory.mkpath(".");
     }
 
-    const QString mPath = QFileDialog::getOpenFileName(this, tr("Open file"), path, filter, nullptr,
-                                                       QFileDialog::DontUseNativeDialog);
+    const QString mPath = QFileDialog::getOpenFileName(this, tr("Open file"), path, filter, nullptr
+#ifdef Q_OS_LINUX
+                                                       , QFileDialog::DontUseNativeDialog
+#endif
+                                                       );
 
     if (not mPath.isEmpty())
     {
@@ -1698,8 +1710,11 @@ void MainWindow::LoadMultisize()
     //Use standard path to multisize measurements
     QString path = qApp->ValentinaSettings()->GetPathMultisizeMeasurements();
     path = VCommonSettings::PrepareMultisizeTables(path);
-    const QString mPath = QFileDialog::getOpenFileName(this, tr("Open file"), path, filter, nullptr,
-                                                       QFileDialog::DontUseNativeDialog);
+    const QString mPath = QFileDialog::getOpenFileName(this, tr("Open file"), path, filter, nullptr
+#ifdef Q_OS_LINUX
+                                                       , QFileDialog::DontUseNativeDialog
+#endif
+                                                       );
 
     if (not mPath.isEmpty())
     {
@@ -2745,7 +2760,11 @@ bool MainWindow::SaveAs()
 
     QString fileName = QFileDialog::getSaveFileName(this, tr("Save as"),
                                                     dir + QLatin1String("/") + tr("pattern") + QLatin1String(".val"),
-                                                    filters, nullptr, QFileDialog::DontUseNativeDialog);
+                                                    filters, nullptr
+#ifdef Q_OS_LINUX
+                                                    , QFileDialog::DontUseNativeDialog
+#endif
+                                                    );
 
     auto RemoveTempDir = [usedNotExistedDir, dir]()
     {
@@ -2936,8 +2955,11 @@ void MainWindow::Open()
         dir = QFileInfo(files.first()).absolutePath();
     }
     qCDebug(vMainWindow, "Run QFileDialog::getOpenFileName: dir = %s.", qUtf8Printable(dir));
-    const QString filePath = QFileDialog::getOpenFileName(this, tr("Open file"), dir, filter, nullptr,
-                                                          QFileDialog::DontUseNativeDialog);
+    const QString filePath = QFileDialog::getOpenFileName(this, tr("Open file"), dir, filter, nullptr
+#ifdef Q_OS_LINUX
+                                                          , QFileDialog::DontUseNativeDialog
+#endif
+                                                          );
     if (filePath.isEmpty())
     {
         return;
@@ -4270,19 +4292,19 @@ void MainWindow::CreateActions()
     connect(ui->actionExit, &QAction::triggered, this, &MainWindow::close);
 
     connect(ui->actionPreferences, &QAction::triggered, this, &MainWindow::Preferences);
-    connect(ui->actionReportBug, &QAction::triggered, this, [this]()
+    connect(ui->actionReportBug, &QAction::triggered, this, []()
     {
         qCDebug(vMainWindow, "Reporting bug");
         QDesktopServices::openUrl(QUrl(QStringLiteral("https://bitbucket.org/dismine/valentina/issues/new")));
     });
 
-    connect(ui->actionWiki, &QAction::triggered, this, [this]()
+    connect(ui->actionWiki, &QAction::triggered, this, []()
     {
         qCDebug(vMainWindow, "Showing online help");
         QDesktopServices::openUrl(QUrl(QStringLiteral("https://wiki.valentinaproject.org/wiki/Main_Page")));
     });
 
-    connect(ui->actionForum, &QAction::triggered, this, [this]()
+    connect(ui->actionForum, &QAction::triggered, this, []()
     {
         qCDebug(vMainWindow, "Opening forum");
         QDesktopServices::openUrl(QUrl(QStringLiteral("http://valentinaproject.forumotion.me/")));
@@ -4635,29 +4657,29 @@ QStringList MainWindow::GetUnlokedRestoreFileList() const
     QStringList files = qApp->ValentinaSettings()->GetRestoreFileList();
     if (files.size() > 0)
     {
-        for (int i = 0; i < files.size(); ++i)
+        for (auto &file : files)
         {
             // Seeking file that realy need reopen
-            VLockGuard<char> tmp(files.at(i));
+            VLockGuard<char> tmp(file);
             if (tmp.IsLocked())
             {
-                restoreFiles.append(files.at(i));
+                restoreFiles.append(file);
             }
         }
 
         // Clearing list after filtering
-        for (int i = 0; i < restoreFiles.size(); ++i)
+        for (auto &file : restoreFiles)
         {
-            files.removeAll(restoreFiles.at(i));
+            files.removeAll(file);
         }
 
         // Clear all files that do not exist.
         QStringList filtered;
-        for (int i = 0; i < files.size(); ++i)
+        for (auto &file : files)
         {
-            if (QFileInfo::exists(files.at(i)))
+            if (QFileInfo::exists(file))
             {
-                filtered.append(files.at(i));
+                filtered.append(file);
             }
         }
 
@@ -4863,21 +4885,21 @@ void MainWindow::ReopenFilesAfterCrash(QStringList &args)
             {
                 qCDebug(vMainWindow, "User said Yes.");
 
-                for (int i = 0; i < restoreFiles.size(); ++i)
+                for (auto &file : restoreFiles)
                 {
                     QString error;
-                    if (VDomDocument::SafeCopy(restoreFiles.at(i) + *autosavePrefix, restoreFiles.at(i), error))
+                    if (VDomDocument::SafeCopy(file + *autosavePrefix, file, error))
                     {
-                        QFile autoFile(restoreFiles.at(i) + *autosavePrefix);
+                        QFile autoFile(file + *autosavePrefix);
                         autoFile.remove();
-                        LoadPattern(restoreFiles.at(i));
-                        args.removeAll(restoreFiles.at(i));// Do not open file twice after we restore him.
+                        LoadPattern(file);
+                        args.removeAll(file);// Do not open file twice after we restore him.
                     }
                     else
                     {
                         qCDebug(vMainWindow, "Could not copy %s%s to %s %s",
-                                qUtf8Printable(restoreFiles.at(i)), qUtf8Printable(*autosavePrefix),
-                                qUtf8Printable(restoreFiles.at(i)), qUtf8Printable(error));
+                                qUtf8Printable(file), qUtf8Printable(*autosavePrefix),
+                                qUtf8Printable(file), qUtf8Printable(error));
                     }
                 }
             }
@@ -5380,9 +5402,9 @@ void MainWindow::ProcessCMD()
     {
         ReopenFilesAfterCrash(args);
 
-        for (int i=0, sz = args.size(); i < sz; ++i)
+        for (auto &arg : args)
         {
-            LoadPattern(args.at(i));
+            LoadPattern(arg);
         }
     }
     else

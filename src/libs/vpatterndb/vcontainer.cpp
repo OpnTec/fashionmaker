@@ -591,11 +591,11 @@ void VContainer::ClearUniqueIncrementNames()
     const QList<QString> list = uniqueNames.toList();
     ClearUniqueNames();
 
-    for(int i = 0; i < list.size(); ++i)
+    for(auto &name : list)
     {
-        if (not list.at(i).startsWith('#'))
+        if (not name.startsWith('#'))
         {
-            uniqueNames.insert(list.at(i));
+            uniqueNames.insert(name);
         }
     }
 }

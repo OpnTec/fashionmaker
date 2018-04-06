@@ -252,11 +252,7 @@ MApplication::MApplication(int &argc, char **argv)
 //---------------------------------------------------------------------------------------------------------------------
 MApplication::~MApplication()
 {
-    for (int i = 0; i < mainWindows.size(); ++i)
-    {
-        TMainWindow *window = mainWindows.at(i);
-        delete window;
-    }
+    qDeleteAll(mainWindows);
 
     delete trVars;
     if (not dataBase.isNull())
@@ -368,9 +364,9 @@ QList<TMainWindow *> MApplication::MainWindows()
 {
     Clean();
     QList<TMainWindow*> list;
-    for (int i = 0; i < mainWindows.count(); ++i)
+    for (auto &w : mainWindows)
     {
-        list.append(mainWindows.at(i));
+        list.append(w);
     }
     return list;
 }
@@ -536,10 +532,10 @@ void MApplication::RetranslateGroups()
 //---------------------------------------------------------------------------------------------------------------------
 void MApplication::RetranslateTables()
 {
-    QList<TMainWindow*> list = MainWindows();
-    for (int i=0; i < list.size(); ++i)
+    const QList<TMainWindow*> list = MainWindows();
+    for (auto w : list)
     {
-        list.at(i)->RetranslateTable();
+        w->RetranslateTable();
     }
 }
 
@@ -689,10 +685,10 @@ void MApplication::ParseCommandLine(const SocketConnection &connection, const QS
             parser.showHelp(V_EX_USAGE);
         }
 
-        for (int i = 0; i < args.size(); ++i)
+        for (auto &arg : args)
         {
             NewMainWindow();
-            if (not MainWindow()->LoadFile(args.at(i)))
+            if (not MainWindow()->LoadFile(arg))
             {
                 if (testMode)
                 {

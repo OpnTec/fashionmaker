@@ -180,16 +180,16 @@ QList<TextLine> PrepareLines(const QVector<VLabelTemplateLine> &lines)
 {
     QList<TextLine> textLines;
 
-    for (int i=0; i < lines.size(); ++i)
+    for (auto &line : lines)
     {
-        if (not lines.at(i).line.isEmpty())
+        if (not line.line.isEmpty())
         {
             TextLine tl;
-            tl.m_qsText = lines.at(i).line;
-            tl.m_eAlign = static_cast<Qt::Alignment>(lines.at(i).alignment);
-            tl.m_iFontSize = lines.at(i).fontSizeIncrement;
-            tl.bold = lines.at(i).bold;
-            tl.italic = lines.at(i).italic;
+            tl.m_qsText = line.line;
+            tl.m_eAlign = static_cast<Qt::Alignment>(line.alignment);
+            tl.m_iFontSize = line.fontSizeIncrement;
+            tl.bold = line.bold;
+            tl.italic = line.italic;
 
             textLines << tl;
         }

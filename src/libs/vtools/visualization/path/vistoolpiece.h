@@ -50,6 +50,7 @@ public:
 private:
     Q_DISABLE_COPY(VisToolPiece)
     QVector<VScaledEllipse *> m_points;
+    QVector<VCurvePathItem *> m_curves;
 
     VScaledLine *m_line1;
     VScaledLine *m_line2;
@@ -58,8 +59,10 @@ private:
     QPainterPath m_cachedMainPath;
     QVector<VPointF> m_cachedNodes;
     QVector<QPointF> m_cachedMainPathPoints;
+    QVector<QPainterPath> m_cachedCurvesPath;
 
     VScaledEllipse* GetPoint(quint32 i, const QColor &color);
+    VCurvePathItem *GetCurve(quint32 i, const QColor &color);
 
     void HideAllItems();
 };

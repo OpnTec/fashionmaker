@@ -88,7 +88,7 @@ QSize FancyTabBar::TabSizeHint(bool minimum) const
         if (words.size() > 1)
         {
             QString sentence;
-            foreach(const QString & word, words)
+            for (auto &word : words)
             {
                 sentence = sentence.isEmpty() ? sentence = word : sentence + QLatin1Char(' ') + word;
 
