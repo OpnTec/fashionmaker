@@ -1913,9 +1913,17 @@ QVector<QPair<bool, VPieceNode> > VToolUnionDetails::CalcUnitedPath(const VPiece
     qint32 pointsD2 = 0; //Keeps number points the second detail, that we have already added.
     qint32 i = 0;
     const int det1P1Index = d1Path.indexOfNode(pRotate);
+    bool checkUniqueness = false;
     do
     {
-        path.append(qMakePair(true, d1Path.at(i)));
+        VPieceNode node = d1Path.at(i);
+        if (checkUniqueness)
+        {
+            // See issue #835. Union Tool - changes in workpiece tool can't be saved because of double points
+            node.SetCheckUniqueness(false);
+            checkUniqueness = false;
+        }
+        path.append(qMakePair(true, node));
         ++i;
         if (i > det1P1Index && pointsD2 < countNodeD2-1)
         {
@@ -1931,6 +1939,7 @@ QVector<QPair<bool, VPieceNode> > VToolUnionDetails::CalcUnitedPath(const VPiece
                 ++pointsD2;
                 ++j;
             } while (pointsD2 < countNodeD2-1);
+            checkUniqueness = true;
         }
     } while (i < countNodeD1);
 
