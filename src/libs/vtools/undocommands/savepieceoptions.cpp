@@ -93,6 +93,8 @@ void SavePieceOptions::undo()
         {
             tool->Update(m_oldDet);
         }
+
+        emit UpdateGroups();
     }
     else
     {
@@ -138,6 +140,8 @@ void SavePieceOptions::redo()
         {
             tool->Update(m_newDet);
         }
+
+        emit UpdateGroups();
     }
     else
     {

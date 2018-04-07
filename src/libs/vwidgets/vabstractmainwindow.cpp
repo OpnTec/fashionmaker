@@ -158,6 +158,13 @@ void VAbstractMainWindow::ExportDataToCSV()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VAbstractMainWindow::UpdateGroups()
+void VAbstractMainWindow::UpdateVisibilityGroups()
 {
+    // do nothing
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VAbstractMainWindow::UpdateDetailsList()
+{
+    // do nothing
 }

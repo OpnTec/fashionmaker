@@ -69,7 +69,8 @@ public:
 public slots:
     void ProcessCMD();
     virtual void ShowToolTip(const QString &toolTip) Q_DECL_OVERRIDE;
-    virtual void UpdateGroups() Q_DECL_OVERRIDE;
+    virtual void UpdateVisibilityGroups() Q_DECL_OVERRIDE;
+    virtual void UpdateDetailsList() Q_DECL_OVERRIDE;
 
 signals:
     void RefreshHistory();

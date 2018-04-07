@@ -51,6 +51,7 @@
 #include "../undocommands/togglepiecestate.h"
 #include "../vwidgets/vmaingraphicsview.h"
 #include "../vwidgets/vnobrushscalepathitem.h"
+#include "../vwidgets/vabstractmainwindow.h"
 #include "../qmuparser/qmutokenparser.h"
 
 #include <QFuture>
@@ -1437,6 +1438,10 @@ void VToolSeamAllowance::SaveDialogChange(const QString &undoText)
     const bool groupChange = not undocommands.isEmpty();
 
     SavePieceOptions *saveCommand = new SavePieceOptions(oldDet, newDet, doc, m_id);
+    if (VAbstractMainWindow *window = qobject_cast<VAbstractMainWindow *>(qApp->getMainWindow()))
+    { // Better not to crash here, just silently do not update list.
+        connect(saveCommand, &SavePieceOptions::UpdateGroups, window, &VAbstractMainWindow::UpdateDetailsList);
+    }
 
     if (groupChange)
     {

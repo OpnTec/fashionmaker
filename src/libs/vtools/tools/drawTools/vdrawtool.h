@@ -293,7 +293,7 @@ void VDrawTool::ContextMenu(QGraphicsSceneContextMenuEvent *event, quint32 itemI
         SCASSERT(window != nullptr)
         {
             AddItemToGroup *addItemToGroup = new AddItemToGroup(item, doc, groupId);
-            connect(addItemToGroup, &AddItemToGroup::UpdateGroups, window, &VAbstractMainWindow::UpdateGroups);
+            connect(addItemToGroup, &AddItemToGroup::UpdateGroups, window, &VAbstractMainWindow::UpdateVisibilityGroups);
             qApp->getUndoStack()->push(addItemToGroup);
         }
     }
@@ -306,7 +306,7 @@ void VDrawTool::ContextMenu(QGraphicsSceneContextMenuEvent *event, quint32 itemI
         SCASSERT(window != nullptr)
         {
             RemoveItemFromGroup *removeItemFromGroup = new RemoveItemFromGroup(item, doc, groupId);
-            connect(removeItemFromGroup, &RemoveItemFromGroup::UpdateGroups, window, &VAbstractMainWindow::UpdateGroups);
+            connect(removeItemFromGroup, &RemoveItemFromGroup::UpdateGroups, window, &VAbstractMainWindow::UpdateVisibilityGroups);
             qApp->getUndoStack()->push(removeItemFromGroup);
         }
     }

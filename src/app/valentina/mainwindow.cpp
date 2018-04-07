@@ -1458,11 +1458,20 @@ void MainWindow::ShowToolTip(const QString &toolTip)
 
 //---------------------------------------------------------------------------------------------------------------------
 /**
- * @brief triggers the update of the groups
+ * @brief triggers the update of the visibility groups
  */
-void MainWindow::UpdateGroups()
+void MainWindow::UpdateVisibilityGroups()
 {
     groupsWidget->UpdateGroups();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief triggers the update of the details list
+ */
+void MainWindow::UpdateDetailsList()
+{
+    detailsWidget->UpdateList();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -4155,7 +4164,7 @@ void MainWindow::InitDocksContain()
     qCDebug(vMainWindow, "Initialization groups dock.");
     groupsWidget = new VWidgetGroups(doc, this);
     ui->dockWidgetGroups->setWidget(groupsWidget);
-    connect(doc,&VAbstractPattern::UpdateGroups , this, &MainWindow::UpdateGroups);
+    connect(doc,&VAbstractPattern::UpdateGroups , this, &MainWindow::UpdateVisibilityGroups);
 
     detailsWidget = new VWidgetDetails(pattern, doc, this);
     connect(doc, &VPattern::FullUpdateFromFile, detailsWidget, &VWidgetDetails::UpdateList);

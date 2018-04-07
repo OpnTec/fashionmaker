@@ -36,6 +36,7 @@
 
 class SavePieceOptions : public VUndoCommand
 {
+    Q_OBJECT
 public:
     SavePieceOptions(const VPiece &oldDet, const VPiece &newDet, VAbstractPattern *doc, quint32 id,
                      QUndoCommand *parent = nullptr);
@@ -47,6 +48,8 @@ public:
     virtual int  id() const Q_DECL_OVERRIDE;
     quint32      DetId() const;
     VPiece       NewDet() const;
+signals:
+    void UpdateGroups();
 private:
     Q_DISABLE_COPY(SavePieceOptions)
 
