@@ -399,7 +399,7 @@ win32:*g++* {
         $$[QT_INSTALL_PLUGINS]/imageformats/qtga.dll \
         $$[QT_INSTALL_PLUGINS]/imageformats/qtiff.dll \
         $$[QT_INSTALL_PLUGINS]/imageformats/qwbmp.dll \
-        $$[QT_INSTALL_PLUGINS]/imageformats/qwebp.dll \
+        $$[QT_INSTALL_PLUGINS]/imageformats/qwebp.dll
     INSTALLS += package_imageformats
 
     package_platforms.path = $${OUT_PWD}/../../../package/valentina/platforms
