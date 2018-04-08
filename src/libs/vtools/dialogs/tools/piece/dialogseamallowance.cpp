@@ -2316,7 +2316,7 @@ void DialogSeamAllowance::EditLabel()
 //---------------------------------------------------------------------------------------------------------------------
 VPiece DialogSeamAllowance::CreatePiece() const
 {
-    VPiece piece;
+    VPiece piece = data->DataPieces()->value(toolId); // Get options we do not control with the dialog
     piece.GetPath().SetNodes(GetListInternals<VPieceNode>(uiTabPaths->listWidgetMainPath));
     piece.SetCustomSARecords(GetListInternals<CustomSARecord>(uiTabPaths->listWidgetCustomSA));
     piece.SetInternalPaths(GetListInternals<quint32>(uiTabPaths->listWidgetInternalPaths));
