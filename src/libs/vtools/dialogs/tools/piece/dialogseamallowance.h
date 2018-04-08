@@ -191,15 +191,10 @@ private:
     bool   flagFormulaAfter;
     bool   flagMainPathIsValid;
     bool   m_bAddMode;
-    qreal  m_mx;
-    qreal  m_my;
 
     QPointer<DialogTool>   m_dialog;
     QPointer<VisPieceSpecialPoints> m_visSpecialPoints;
 
-    VPieceLabelData   m_oldData;
-    VPatternLabelData m_oldGeom;
-    VGrainlineData    m_oldGrainline;
     int                  m_iRotBaseHeight;
     int                  m_iLenBaseHeight;
     int                  m_DLWidthBaseHeight;
