@@ -12,7 +12,8 @@ SOURCES += \
     $$PWD/qxtcsvmodel.cpp \
     $$PWD/vtablesearch.cpp \
     $$PWD/dialogs/dialogexporttocsv.cpp \
-    $$PWD/defglobal.cpp
+    $$PWD/defglobal.cpp \
+    $$PWD/literals.cpp
 
 *msvc*:SOURCES += $$PWD/stable.cpp
 
@@ -37,7 +38,8 @@ HEADERS += \
     $$PWD/customevents.h \
     $$PWD/defglobal.h \
     $$PWD/backport/qoverload.h \
-    $$PWD/testvapplication.h
+    $$PWD/testvapplication.h \
+    $$PWD/literals.h
 
 # Qt's versions
 # 5.2.0, 5.2.1

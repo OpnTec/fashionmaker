@@ -196,14 +196,17 @@ void TST_TSLocaleTranslation::TestPunctuation()
     QFETCH(QString, source);
     QFETCH(QString, translation);
 
-    static const QStringList punctuation = QStringList() << QLatin1String(".")
-                                                         << QLatin1String(":")
-                                                         << QLatin1String(" ")
-                                                         << QLatin1String("\n")
-                                                         << QLatin1String("!")
-                                                         << QLatin1String("?")
-                                                         << QLatin1String(";")
-                                                         << "…";
+    static const QStringList punctuation{
+        QChar('.'),
+        QChar(':'),
+        QChar(QChar::Space),
+        QChar('\n'),
+        QChar('!'),
+        QChar('?'),
+        QChar(';'),
+        QChar(0x2026)//…
+    };
+
     bool testFail = false;
     const QChar cSource = source.at(source.length()-1);
     QChar cPunctuation = cSource;

@@ -276,7 +276,7 @@ protected:
     static bool      DoublePoints(QListWidget *listWidget, const VContainer *data);
     static bool      EachPointLabelIsUnique(QListWidget *listWidget);
     static QString   DialogWarningIcon();
-    static QFont     NodeFont(bool nodeExcluded);
+    static QFont     NodeFont(QFont font, bool nodeExcluded = false);
 
     QString          GetNodeName(const VPieceNode &node, bool showPassmark = false) const;
     void             NewNodeItem(QListWidget *listWidget, const VPieceNode &node);

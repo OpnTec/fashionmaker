@@ -581,8 +581,6 @@ void ShowInGraphicalShell(const QString &filePath)
 
 }
 
-const QString LONG_OPTION_NO_HDPI_SCALING = QStringLiteral("no-scaling");
-
 //---------------------------------------------------------------------------------------------------------------------
 bool IsOptionSet(int argc, char *argv[], const char *option)
 {

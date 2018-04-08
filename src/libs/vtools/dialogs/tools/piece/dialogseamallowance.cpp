@@ -226,7 +226,7 @@ void DialogSeamAllowance::SetPiece(const VPiece &piece)
             const QString name = GetPathName(record.path, record.reverse);
 
             QListWidgetItem *item = new QListWidgetItem(name);
-            item->setFont(QFont("Times", 12, QFont::Bold));
+            item->setFont(NodeFont(item->font()));
             item->setData(Qt::UserRole, QVariant::fromValue(record));
             uiTabPaths->listWidgetCustomSA->addItem(item);
             uiTabPaths->listWidgetCustomSA->setCurrentRow(uiTabPaths->listWidgetCustomSA->count()-1);
@@ -243,7 +243,7 @@ void DialogSeamAllowance::SetPiece(const VPiece &piece)
             const QString name = GetPathName(path);
 
             QListWidgetItem *item = new QListWidgetItem(name);
-            item->setFont(QFont("Times", 12, QFont::Bold));
+            item->setFont(NodeFont(item->font()));
             item->setData(Qt::UserRole, QVariant::fromValue(path));
             uiTabPaths->listWidgetInternalPaths->addItem(item);
             uiTabPaths->listWidgetInternalPaths->setCurrentRow(uiTabPaths->listWidgetInternalPaths->count()-1);
@@ -259,7 +259,7 @@ void DialogSeamAllowance::SetPiece(const VPiece &piece)
                 const QSharedPointer<VGObject> p = data->GetGObject(point);
 
                 QListWidgetItem *item = new QListWidgetItem(p->name());
-                item->setFont(QFont("Times", 12, QFont::Bold));
+                item->setFont(NodeFont(item->font()));
                 item->setData(Qt::UserRole, QVariant::fromValue(point));
                 listWidget->addItem(item);
                 listWidget->setCurrentRow(uiTabPins->listWidgetPins->count()-1);
@@ -491,7 +491,7 @@ void DialogSeamAllowance::CheckState()
     }
     else
     {
-        m_ftb->SetTabText(TabOrder::Paths, tr("Paths") + QLatin1String("*"));
+        m_ftb->SetTabText(TabOrder::Paths, tr("Paths") + '*');
         const QIcon icon = QIcon::fromTheme("dialog-warning",
                                             QIcon(":/icons/win.icon.theme/16x16/status/dialog-warning.png"));
         uiTabPaths->tabWidget->setTabIcon(uiTabPaths->tabWidget->indexOf(uiTabPaths->tabSeamAllowance), icon);
@@ -506,15 +506,15 @@ void DialogSeamAllowance::CheckState()
         QString tooltip = tr("Ready!");
         if (not applyAllowed)
         {
-            tooltip = tooltip + QLatin1String("  <b>") +
-                    tr("To open all detail's features complete creating the main path.") + QLatin1String("</b>");
+            tooltip = tooltip + QStringLiteral("  <b>") +
+                    tr("To open all detail's features complete creating the main path.") + QStringLiteral("</b>");
         }
         uiTabPaths->helpLabel->setText(tooltip);
         uiTabPaths->tabWidget->setTabIcon(uiTabPaths->tabWidget->indexOf(uiTabPaths->tabMainPath), QIcon());
     }
     else
     {
-        m_ftb->SetTabText(TabOrder::Paths, tr("Paths") + QLatin1String("*"));
+        m_ftb->SetTabText(TabOrder::Paths, tr("Paths") + '*');
         const QIcon icon = QIcon::fromTheme("dialog-warning",
                                             QIcon(":/icons/win.icon.theme/16x16/status/dialog-warning.png"));
         uiTabPaths->tabWidget->setTabIcon(uiTabPaths->tabWidget->indexOf(uiTabPaths->tabMainPath), icon);
@@ -537,7 +537,7 @@ void DialogSeamAllowance::closeEvent(QCloseEvent *event)
 //---------------------------------------------------------------------------------------------------------------------
 void DialogSeamAllowance::showEvent(QShowEvent *event)
 {
-    QDialog::showEvent( event );
+    QDialog::showEvent( event ); // clazy:exclude=skipped-base-method
     if ( event->spontaneous() )
     {
         return;
@@ -630,7 +630,7 @@ void DialogSeamAllowance::ShowMainPathContextMenu(const QPoint &pos)
     actionExcluded->setCheckable(true);
     actionExcluded->setChecked(rowNode.IsExcluded());
 
-    QAction *actionDelete = menu->addAction(QIcon::fromTheme("edit-delete"), tr("Delete"));
+    QAction *actionDelete = menu->addAction(QIcon::fromTheme(editDeleteIcon), tr("Delete"));
 
     QAction *selectedAction = menu->exec(uiTabPaths->listWidgetMainPath->viewport()->mapToGlobal(pos));
     if (selectedAction == actionDelete)
@@ -648,7 +648,7 @@ void DialogSeamAllowance::ShowMainPathContextMenu(const QPoint &pos)
         rowNode.SetExcluded(not rowNode.IsExcluded());
         rowItem->setData(Qt::UserRole, QVariant::fromValue(rowNode));
         rowItem->setText(GetNodeName(rowNode, true));
-        rowItem->setFont(NodeFont(rowNode.IsExcluded()));
+        rowItem->setFont(NodeFont(rowItem->font(), rowNode.IsExcluded()));
     }
     else if (selectedAction == actionPassmark)
     {
@@ -677,7 +677,7 @@ void DialogSeamAllowance::ShowCustomSAContextMenu(const QPoint &pos)
     }
 
     QScopedPointer<QMenu> menu(new QMenu());
-    QAction *actionOption = menu->addAction(QIcon::fromTheme("preferences-other"), tr("Options"));
+    QAction *actionOption = menu->addAction(QIcon::fromTheme(preferencesOtherIcon), tr("Options"));
 
     QListWidgetItem *rowItem = uiTabPaths->listWidgetCustomSA->item(row);
     SCASSERT(rowItem != nullptr);
@@ -687,7 +687,7 @@ void DialogSeamAllowance::ShowCustomSAContextMenu(const QPoint &pos)
     actionReverse->setCheckable(true);
     actionReverse->setChecked(record.reverse);
 
-    QAction *actionDelete = menu->addAction(QIcon::fromTheme("edit-delete"), tr("Delete"));
+    QAction *actionDelete = menu->addAction(QIcon::fromTheme(editDeleteIcon), tr("Delete"));
 
     QAction *selectedAction = menu->exec(uiTabPaths->listWidgetCustomSA->viewport()->mapToGlobal(pos));
     if (selectedAction == actionDelete)
@@ -729,8 +729,8 @@ void DialogSeamAllowance::ShowInternalPathsContextMenu(const QPoint &pos)
     }
 
     QScopedPointer<QMenu> menu(new QMenu());
-    QAction *actionOption = menu->addAction(QIcon::fromTheme("preferences-other"), tr("Options"));
-    QAction *actionDelete = menu->addAction(QIcon::fromTheme("edit-delete"), tr("Delete"));
+    QAction *actionOption = menu->addAction(QIcon::fromTheme(preferencesOtherIcon), tr("Options"));
+    QAction *actionDelete = menu->addAction(QIcon::fromTheme(editDeleteIcon), tr("Delete"));
 
     QAction *selectedAction = menu->exec(uiTabPaths->listWidgetInternalPaths->viewport()->mapToGlobal(pos));
     if (selectedAction == actionDelete)
@@ -764,7 +764,7 @@ void DialogSeamAllowance::ShowPinsContextMenu(const QPoint &pos)
     }
 
     QScopedPointer<QMenu> menu(new QMenu());
-    QAction *actionDelete = menu->addAction(QIcon::fromTheme("edit-delete"), tr("Delete"));
+    QAction *actionDelete = menu->addAction(QIcon::fromTheme(editDeleteIcon), tr("Delete"));
 
     QAction *selectedAction = menu->exec(uiTabPins->listWidgetPins->viewport()->mapToGlobal(pos));
     if (selectedAction == actionDelete)
@@ -814,7 +814,7 @@ void DialogSeamAllowance::ShowPlaceLabelsContextMenu(const QPoint &pos)
         UpdateCurrentPlaceLabelRecords();
     };
 
-    QAction *actionOption = menu->addAction(QIcon::fromTheme("preferences-other"), tr("Options"));
+    QAction *actionOption = menu->addAction(QIcon::fromTheme(preferencesOtherIcon), tr("Options"));
     menu->addSeparator();
     QAction *actionSegment = InitAction(tr("Segment"), PlaceLabelType::Segment);
     QAction *actionRectangle = InitAction(tr("Rectangle"), PlaceLabelType::Rectangle);
@@ -826,7 +826,7 @@ void DialogSeamAllowance::ShowPlaceLabelsContextMenu(const QPoint &pos)
     QAction *actionHshaped = InitAction(tr("H-shaped"), PlaceLabelType::Hshaped);
     QAction *actionButton = InitAction(tr("Button"), PlaceLabelType::Button);
     menu->addSeparator();
-    QAction *actionDelete = menu->addAction(QIcon::fromTheme("edit-delete"), tr("Delete"));
+    QAction *actionDelete = menu->addAction(QIcon::fromTheme(editDeleteIcon), tr("Delete"));
 
     QAction *selectedAction = menu->exec(uiTabPlaceLabels->listWidgetPlaceLabels->viewport()->mapToGlobal(pos));
     if (selectedAction == actionDelete)
@@ -1537,7 +1537,7 @@ void DialogSeamAllowance::UpdateGrainlineValues()
         {
             plbVal = uiTabGrainline->labelLen;
             plbText = uiTabGrainline->labelEditLen;
-            qsUnit = QLatin1String(" ") + UnitsToStr(qApp->patternUnit());
+            qsUnit = QChar(QChar::Space) + UnitsToStr(qApp->patternUnit());
         }
 
         plbVal->setToolTip(tr("Value"));
@@ -1581,7 +1581,7 @@ void DialogSeamAllowance::UpdateGrainlineValues()
     flagGFormulas = bFormulasOK[0] && bFormulasOK[1];
     if (not flagGFormulas && not flagGPin)
     {
-        m_ftb->SetTabText(TabOrder::Grainline, tr("Grainline") + QLatin1String("*"));
+        m_ftb->SetTabText(TabOrder::Grainline, tr("Grainline") + '*');
     }
     else
     {
@@ -1606,13 +1606,13 @@ void DialogSeamAllowance::UpdateDetailLabelValues()
         {
             plbVal = uiTabLabels->labelDLWidth;
             plbText = uiTabLabels->labelEditDLWidth;
-            qsUnit = QLatin1String(" ") + UnitsToStr(qApp->patternUnit());
+            qsUnit = QChar(QChar::Space) + UnitsToStr(qApp->patternUnit());
         }
         else if (i == 1)
         {
             plbVal = uiTabLabels->labelDLHeight;
             plbText = uiTabLabels->labelEditDLHeight;
-            qsUnit = QLatin1String(" ") + UnitsToStr(qApp->patternUnit());
+            qsUnit = QChar(QChar::Space) + UnitsToStr(qApp->patternUnit());
         }
         else
         {
@@ -1664,7 +1664,7 @@ void DialogSeamAllowance::UpdateDetailLabelValues()
     flagDLFormulas = bFormulasOK[0] && bFormulasOK[1];
     if (not flagDLAngle || not (flagDLFormulas || flagDPin) || not flagPLAngle || not (flagPLFormulas || flagPPin))
     {
-        m_ftb->SetTabText(TabOrder::Labels, tr("Labels") + QLatin1String("*"));
+        m_ftb->SetTabText(TabOrder::Labels, tr("Labels") + '*');
         const QIcon icon = QIcon::fromTheme("dialog-warning",
                                             QIcon(":/icons/win.icon.theme/16x16/status/dialog-warning.png"));
         uiTabLabels->tabWidget->setTabIcon(uiTabLabels->tabWidget->indexOf(uiTabLabels->tabLabels), icon);
@@ -1692,13 +1692,13 @@ void DialogSeamAllowance::UpdatePatternLabelValues()
         {
             plbVal = uiTabLabels->labelPLWidth;
             plbText = uiTabLabels->labelEditPLWidth;
-            qsUnit = QLatin1String(" ") + UnitsToStr(qApp->patternUnit());
+            qsUnit = QChar(QChar::Space) + UnitsToStr(qApp->patternUnit());
         }
         else if (i == 1)
         {
             plbVal = uiTabLabels->labelPLHeight;
             plbText = uiTabLabels->labelEditPLHeight;
-            qsUnit = QLatin1String(" ") + UnitsToStr(qApp->patternUnit());
+            qsUnit = QChar(QChar::Space) + UnitsToStr(qApp->patternUnit());
         }
         else
         {
@@ -1749,7 +1749,7 @@ void DialogSeamAllowance::UpdatePatternLabelValues()
     flagPLFormulas = bFormulasOK[0] && bFormulasOK[1];
     if (not flagDLAngle || not (flagDLFormulas || flagDPin) || not flagPLAngle || not (flagPLFormulas || flagPPin))
     {
-        m_ftb->SetTabText(TabOrder::Labels, tr("Labels") + QLatin1String("*"));
+        m_ftb->SetTabText(TabOrder::Labels, tr("Labels") + '*');
         const QIcon icon = QIcon::fromTheme("dialog-warning",
                                             QIcon(":/icons/win.icon.theme/16x16/status/dialog-warning.png"));
         uiTabLabels->tabWidget->setTabIcon(uiTabLabels->tabWidget->indexOf(uiTabLabels->tabLabels), icon);
@@ -2247,7 +2247,7 @@ void DialogSeamAllowance::DetailPinPointChanged()
         flagDPin = false;
         topPinId == NULL_ID && bottomPinId == NULL_ID ? color = okColor : color = errorColor;
 
-        m_ftb->SetTabText(TabOrder::Labels, tr("Labels") + QLatin1String("*"));
+        m_ftb->SetTabText(TabOrder::Labels, tr("Labels") + '*');
         const QIcon icon = QIcon::fromTheme("dialog-warning",
                                             QIcon(":/icons/win.icon.theme/16x16/status/dialog-warning.png"));
         uiTabLabels->tabWidget->setTabIcon(uiTabLabels->tabWidget->indexOf(uiTabLabels->tabLabels), icon);
@@ -2280,7 +2280,7 @@ void DialogSeamAllowance::PatternPinPointChanged()
         flagPPin = false;
         topPinId == NULL_ID && bottomPinId == NULL_ID ? color = okColor : color = errorColor;
 
-        m_ftb->SetTabText(TabOrder::Labels, tr("Labels") + QLatin1String("*"));
+        m_ftb->SetTabText(TabOrder::Labels, tr("Labels") + '*');
         const QIcon icon = QIcon::fromTheme("dialog-warning",
                                             QIcon(":/icons/win.icon.theme/16x16/status/dialog-warning.png"));
         uiTabLabels->tabWidget->setTabIcon(uiTabLabels->tabWidget->indexOf(uiTabLabels->tabLabels), icon);
@@ -2374,7 +2374,7 @@ QString DialogSeamAllowance::GetPathName(quint32 path, bool reverse) const
 
         if (reverse)
         {
-            name = QLatin1String("- ") + name;
+            name = QStringLiteral("- ") + name;
         }
     }
 
@@ -2783,7 +2783,7 @@ void DialogSeamAllowance::InitPinPoint(QComboBox *box)
     }
 
     box->clear();
-    box->addItem(QLatin1String("<") + tr("no pin") + QLatin1String(">"), NULL_ID);
+    box->addItem('<' + tr("no pin") + '>', NULL_ID);
 
     const QVector<quint32> pins = GetListInternals<quint32>(uiTabPins->listWidgetPins);
 
@@ -3073,7 +3073,7 @@ void DialogSeamAllowance::SetGrainlineAngle(QString angleFormula)
 {
     if (angleFormula.isEmpty())
     {
-        angleFormula = QString("0");
+        angleFormula = '0';
     }
 
     const QString formula = qApp->TrVars()->FormulaToUser(angleFormula, qApp->Settings()->GetOsSeparator());
@@ -3152,7 +3152,7 @@ void DialogSeamAllowance::SetDLAngle(QString angleFormula)
 {
     if (angleFormula.isEmpty())
     {
-        angleFormula = QString("0");
+        angleFormula = '0';
     }
 
     const QString formula = qApp->TrVars()->FormulaToUser(angleFormula, qApp->Settings()->GetOsSeparator());
@@ -3212,7 +3212,7 @@ void DialogSeamAllowance::SetPLAngle(QString angleFormula)
 {
     if (angleFormula.isEmpty())
     {
-        angleFormula = QString("0");
+        angleFormula = '0';
     }
 
     const QString formula = qApp->TrVars()->FormulaToUser(angleFormula, qApp->Settings()->GetOsSeparator());
@@ -3296,7 +3296,7 @@ QString DialogSeamAllowance::GetDefaultPieceName() const
 
     while(names.contains(name))
     {
-        name = defName + QString("_%1").arg(++i);
+        name = defName + QStringLiteral("_%1").arg(++i);
     }
     return name;
 }

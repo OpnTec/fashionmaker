@@ -949,7 +949,7 @@ void MainWindowsNoGUI::PdfFile(const QString &name, QGraphicsRectItem *paper, QG
                                bool ignorePrinterFields, const QMarginsF &margins) const
 {
     QPrinter printer;
-    printer.setCreator(QGuiApplication::applicationDisplayName()+QLatin1String(" ")+
+    printer.setCreator(QGuiApplication::applicationDisplayName()+QChar(QChar::Space)+
                        QCoreApplication::applicationVersion());
     printer.setOutputFormat(QPrinter::PdfFormat);
     printer.setOutputFileName(name);

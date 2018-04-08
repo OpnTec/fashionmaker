@@ -40,6 +40,7 @@
     #include <windows.h>
 #endif /* Q_OS_WIN */
 
+#include "literals.h"
 #include "debugbreak.h"
 #include "defglobal.h"
 
@@ -316,7 +317,6 @@ enum class GSizes : unsigned char { ALL,
 #   define V_FALLTHROUGH
 #endif
 
-extern const QString LONG_OPTION_NO_HDPI_SCALING;
 bool IsOptionSet(int argc, char *argv[], const char *option);
 void InitHighDpiScaling(int argc, char *argv[]);
 

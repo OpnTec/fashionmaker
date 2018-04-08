@@ -601,9 +601,10 @@ QString DialogTool::DialogWarningIcon()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QFont DialogTool::NodeFont(bool nodeExcluded)
+QFont DialogTool::NodeFont(QFont font, bool nodeExcluded)
 {
-    QFont font("Times", 12, QFont::Bold);
+    font.setPointSize(12);
+    font.setWeight(QFont::Bold);
     font.setStrikeOut(nodeExcluded);
     return font;
 }
@@ -696,7 +697,7 @@ void DialogTool::NewNodeItem(QListWidget *listWidget, const VPieceNode &node)
     if(canAddNewPoint)
     {
         QListWidgetItem *item = new QListWidgetItem(name);
-        item->setFont(NodeFont(node.IsExcluded()));
+        item->setFont(NodeFont(item->font(), node.IsExcluded()));
         item->setData(Qt::UserRole, QVariant::fromValue(node));
         listWidget->addItem(item);
         listWidget->setCurrentRow(listWidget->count()-1);
