@@ -995,9 +995,9 @@ QVector<VSAPoint> VPiecePath::CurveSeamAllowanceSegment(const VContainer *data, 
     qreal w2 = end.GetSABefore();
     if (w1 < 0 && w2 < 0)
     {// no local widths
-        for(auto point : points)
+        for(int i = 0; i < points.size(); ++i)
         {
-            VSAPoint p(point);
+            VSAPoint p(points.at(i));
             if (i == 0)
             { // first point
                 p.SetSAAfter(begin.GetSAAfter());
@@ -1036,9 +1036,9 @@ QVector<VSAPoint> VPiecePath::CurveSeamAllowanceSegment(const VContainer *data, 
 
         qreal length = 0; // how much we handle
 
-        for(auto point : points)
+        for(int i = 1; i < points.size(); ++i)
         {
-            p = VSAPoint(point);
+            p = VSAPoint(points.at(i));
 
             if (i == points.size() - 1)
             {// last point
