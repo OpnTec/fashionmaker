@@ -2379,10 +2379,10 @@ QMap<quint32, QPair<QString, bool> > VAbstractPattern::GetGroups()
 //---------------------------------------------------------------------------------------------------------------------
 /**
  * @brief Returns the groups that contain or do not contain the item identified by the toolid and the objectid
- * @param toolId
- * @param objectId
+ * @param toolId tool id
+ * @param objectId object id
  * @param containItem |true if the groups have to contain the given item, false if they musn't contain the item
- * @return
+ * @return groups that contain or do not contain the item identified by the toolid and the objectid
  */
 QMap<quint32, QString> VAbstractPattern::GetGroupsContainingItem(quint32 toolId, quint32 objectId, bool containItem)
 {
@@ -2431,10 +2431,10 @@ QMap<quint32, QString> VAbstractPattern::GetGroupsContainingItem(quint32 toolId,
 //---------------------------------------------------------------------------------------------------------------------
 /**
  * @brief Checks if the given group has the item with the given toolId and objectId
- * @param groupDomElement
- * @param toolId
- * @param objectId
- * @return
+ * @param groupDomElement group dom element
+ * @param toolId tool id
+ * @param objectId object id
+ * @return true if the given group has the item with the given toolId and objectId
  */
 bool VAbstractPattern::GroupHasItem(const QDomElement &groupDomElement, quint32 toolId, quint32 objectId)
 {
@@ -2466,9 +2466,10 @@ bool VAbstractPattern::GroupHasItem(const QDomElement &groupDomElement, quint32 
 //---------------------------------------------------------------------------------------------------------------------
 /**
  * @brief Adds an item to the given group with the given toolId and objectId
- * @param toolId
- * @param objectId
- * @param groupId
+ * @param toolId tool id
+ * @param objectId object id
+ * @param groupId group id
+ * @return group element
  */
 QDomElement VAbstractPattern::AddItemToGroup(quint32 toolId, quint32 objectId, quint32 groupId)
 {
@@ -2513,9 +2514,10 @@ QDomElement VAbstractPattern::AddItemToGroup(quint32 toolId, quint32 objectId, q
 //---------------------------------------------------------------------------------------------------------------------
 /**
  * @brief Removes the item of given toolId and objectId from the group of given groupId
- * @param toolId
- * @param objectId
- * @param groupId
+ * @param toolId tool id
+ * @param objectId object id
+ * @param groupId group id
+ * @return item element or null element is none
  */
 QDomElement VAbstractPattern::RemoveItemFromGroup(quint32 toolId, quint32 objectId, quint32 groupId)
 {
@@ -2575,8 +2577,8 @@ QDomElement VAbstractPattern::RemoveItemFromGroup(quint32 toolId, quint32 object
 //---------------------------------------------------------------------------------------------------------------------
 /**
  * @brief Returns true if the given group is empty
- * @param id
- * @return
+ * @param id group id
+ * @return true if the given group is empty
  */
 bool VAbstractPattern::GroupIsEmpty(quint32 id)
 {
