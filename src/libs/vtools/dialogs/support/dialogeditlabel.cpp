@@ -36,6 +36,7 @@
 #include "../vpatterndb/vcontainer.h"
 #include "../vpatterndb/vpiece.h"
 #include "../vpatterndb/floatItemData/vpiecelabeldata.h"
+#include "../tools/dialogtool.h"
 
 #include <QDir>
 #include <QMessageBox>
@@ -70,6 +71,12 @@ DialogEditLabel::DialogEditLabel(VAbstractPattern *doc, QWidget *parent)
     connect(ui->toolButtonImportLabel, &QToolButton::clicked, this, &DialogEditLabel::ImportTemplate);
     connect(ui->spinBoxFontSize, QOverload<int>::of(&QSpinBox::valueChanged), this,
             &DialogEditLabel::SaveAdditionalFontSize);
+    connect(ui->toolButtonTop, &QToolButton::clicked, this, [this](){DialogTool::MoveListRowTop(ui->listWidgetEdit);});
+    connect(ui->toolButtonUp, &QToolButton::clicked, this, [this](){DialogTool::MoveListRowUp(ui->listWidgetEdit);});
+    connect(ui->toolButtonDown, &QToolButton::clicked, this,
+            [this](){DialogTool::MoveListRowDown(ui->listWidgetEdit);});
+    connect(ui->toolButtonBottom, &QToolButton::clicked, this,
+            [this](){DialogTool::MoveListRowBottom(ui->listWidgetEdit);});
 
     InitPlaceholders();
     InitPlaceholdersMenu();
@@ -433,6 +440,32 @@ void DialogEditLabel::SetupControls()
     ui->toolButtonExportLabel->setEnabled(enabled);
     ui->lineEditLine->setEnabled(enabled);
     ui->spinBoxFontSize->setEnabled(enabled);
+
+    ui->toolButtonTop->setEnabled(false);
+    ui->toolButtonUp->setEnabled(false);
+    ui->toolButtonDown->setEnabled(false);
+    ui->toolButtonBottom->setEnabled(false);
+
+    if (ui->listWidgetEdit->count() >= 2)
+    {
+        if (ui->listWidgetEdit->currentRow() == 0)
+        {
+            ui->toolButtonDown->setEnabled(true);
+            ui->toolButtonBottom->setEnabled(true);
+        }
+        else if (ui->listWidgetEdit->currentRow() == ui->listWidgetEdit->count()-1)
+        {
+            ui->toolButtonTop->setEnabled(true);
+            ui->toolButtonUp->setEnabled(true);
+        }
+        else
+        {
+            ui->toolButtonTop->setEnabled(true);
+            ui->toolButtonUp->setEnabled(true);
+            ui->toolButtonDown->setEnabled(true);
+            ui->toolButtonBottom->setEnabled(true);
+        }
+    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------

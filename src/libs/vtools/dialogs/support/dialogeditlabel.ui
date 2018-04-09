@@ -131,6 +131,91 @@
         </widget>
        </item>
        <item>
+        <layout class="QHBoxLayout" name="horizontalLayout_3">
+         <item alignment="Qt::AlignLeft">
+          <widget class="QToolButton" name="toolButtonTop">
+           <property name="enabled">
+            <bool>false</bool>
+           </property>
+           <property name="toolTip">
+            <string>Move on top</string>
+           </property>
+           <property name="text">
+            <string notr="true">...</string>
+           </property>
+           <property name="icon">
+            <iconset theme="go-top">
+             <normaloff>../../../../app/tape</normaloff>../../../../app/tape</iconset>
+           </property>
+          </widget>
+         </item>
+         <item alignment="Qt::AlignLeft">
+          <widget class="QToolButton" name="toolButtonUp">
+           <property name="enabled">
+            <bool>false</bool>
+           </property>
+           <property name="toolTip">
+            <string>Move up</string>
+           </property>
+           <property name="text">
+            <string notr="true">...</string>
+           </property>
+           <property name="icon">
+            <iconset theme="go-up">
+             <normaloff>../../../../app/tape</normaloff>../../../../app/tape</iconset>
+           </property>
+          </widget>
+         </item>
+         <item alignment="Qt::AlignLeft">
+          <widget class="QToolButton" name="toolButtonDown">
+           <property name="enabled">
+            <bool>false</bool>
+           </property>
+           <property name="toolTip">
+            <string>Move down</string>
+           </property>
+           <property name="text">
+            <string notr="true">...</string>
+           </property>
+           <property name="icon">
+            <iconset theme="go-down">
+             <normaloff>../../../../app/tape</normaloff>../../../../app/tape</iconset>
+           </property>
+          </widget>
+         </item>
+         <item alignment="Qt::AlignLeft">
+          <widget class="QToolButton" name="toolButtonBottom">
+           <property name="enabled">
+            <bool>false</bool>
+           </property>
+           <property name="toolTip">
+            <string>Move on bottom</string>
+           </property>
+           <property name="text">
+            <string notr="true">...</string>
+           </property>
+           <property name="icon">
+            <iconset theme="go-bottom">
+             <normaloff>../../../../app/tape</normaloff>../../../../app/tape</iconset>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <spacer name="horizontalSpacer_2">
+           <property name="orientation">
+            <enum>Qt::Horizontal</enum>
+           </property>
+           <property name="sizeHint" stdset="0">
+            <size>
+             <width>5000</width>
+             <height>20</height>
+            </size>
+           </property>
+          </spacer>
+         </item>
+        </layout>
+       </item>
+       <item>
         <layout class="QFormLayout" name="formLayout">
          <item row="0" column="1">
           <layout class="QHBoxLayout" name="horizontalLayout_11">

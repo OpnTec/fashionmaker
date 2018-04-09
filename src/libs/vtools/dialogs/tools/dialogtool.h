@@ -91,6 +91,11 @@ public:
     void             SetToolId(const quint32 &value);
 
     QString          getPointName() const;
+
+    static void MoveListRowTop(QListWidget *list);
+    static void MoveListRowUp(QListWidget *list);
+    static void MoveListRowDown(QListWidget *list);
+    static void MoveListRowBottom(QListWidget *list);
 signals:
     /**
      * @brief DialogClosed signal dialog closed
@@ -282,11 +287,6 @@ protected:
     void             NewNodeItem(QListWidget *listWidget, const VPieceNode &node);
 
     void             InitNodeAngles(QComboBox *box);
-
-    void MoveListRowTop(QListWidget *list);
-    void MoveListRowUp(QListWidget *list);
-    void MoveListRowDown(QListWidget *list);
-    void MoveListRowBottom(QListWidget *list);
 private:
     void FillList(QComboBox *box, const QMap<QString, quint32> &list)const;
 
