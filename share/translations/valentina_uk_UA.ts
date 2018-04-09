@@ -16,6 +16,13 @@
     </message>
 </context>
 <context>
+    <name>AddItemToGroup</name>
+    <message>
+        <source>Add item to group</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>AddPatternPiece</name>
     <message>
         <source>add pattern piece %1</source>
@@ -1877,6 +1884,22 @@
     </message>
     <message>
         <source>Insert…</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Move on top</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Move up</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Move down</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Move on bottom</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -8870,6 +8893,13 @@ This option will take an affect after restart.</source>
     </message>
 </context>
 <context>
+    <name>RemoveItemFromGroup</name>
+    <message>
+        <source>Remove item from group</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>RenamePP</name>
     <message>
         <source>rename pattern piece</source>
@@ -11217,6 +11247,14 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Show label</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Add to group</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Remove from group</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

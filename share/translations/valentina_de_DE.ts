@@ -16,6 +16,13 @@
     </message>
 </context>
 <context>
+    <name>AddItemToGroup</name>
+    <message>
+        <source>Add item to group</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>AddPatternPiece</name>
     <message>
         <source>add pattern piece %1</source>
@@ -1632,26 +1639,26 @@
     <name>DialogDuplicateDetail</name>
     <message>
         <source>Dialog duplicate detail</source>
-        <translation type="unfinished"></translation>
+        <translation>Dialog Detail duplizieren</translation>
     </message>
     <message>
         <source>Click to place duplicate</source>
-        <translation type="unfinished"></translation>
+        <translation>Klicken, um Duplikat zu platzieren</translation>
     </message>
 </context>
 <context>
     <name>DialogEditLabel</name>
     <message>
         <source>Edit label template</source>
-        <translation type="unfinished"></translation>
+        <translation>Labelvorlage bearbeiten</translation>
     </message>
     <message>
         <source>Clear current and begin new label</source>
-        <translation type="unfinished"></translation>
+        <translation>Aktuelles löschen und neues Label beginnen</translation>
     </message>
     <message>
         <source>Import from label template</source>
-        <translation type="unfinished"></translation>
+        <translation>Von Labelvorlage  importieren</translation>
     </message>
     <message>
         <source>Export label as template</source>
@@ -1877,6 +1884,22 @@
     </message>
     <message>
         <source>Insert…</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Move on top</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Move up</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Move down</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Move on bottom</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -8833,6 +8856,13 @@ This option will take an affect after restart.</source>
     </message>
 </context>
 <context>
+    <name>RemoveItemFromGroup</name>
+    <message>
+        <source>Remove item from group</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>RenamePP</name>
     <message>
         <source>rename pattern piece</source>
@@ -11149,6 +11179,14 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Show label</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Add to group</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Remove from group</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
