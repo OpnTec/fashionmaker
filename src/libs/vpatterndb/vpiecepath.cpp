@@ -991,6 +991,8 @@ QVector<VSAPoint> VPiecePath::CurveSeamAllowanceSegment(const VContainer *data, 
         return pointsEkv;
     }
 
+    pointsEkv.reserve(points.size());
+
     qreal w1 = begin.GetSAAfter();
     qreal w2 = end.GetSABefore();
     if (w1 < 0 && w2 < 0)
