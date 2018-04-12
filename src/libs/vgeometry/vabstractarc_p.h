@@ -102,7 +102,7 @@ VAbstractArcData::VAbstractArcData(const QString &formulaLength, const VPointF &
     : f1(f1),
       formulaF1(formulaF1),
       f2(0),
-      formulaF2("0"),
+      formulaF2('0'),
       center(center),
       isFlipped(false),
       formulaLength(formulaLength)
@@ -113,7 +113,7 @@ VAbstractArcData::VAbstractArcData(const VPointF &center, qreal f1)
     : f1(f1),
       formulaF1(QString().number(f1)),
       f2(0),
-      formulaF2("0"),
+      formulaF2('0'),
       center(center),
       isFlipped(false),
       formulaLength()

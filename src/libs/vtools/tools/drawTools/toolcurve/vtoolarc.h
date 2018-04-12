@@ -48,9 +48,9 @@ struct VToolArcInitData : VAbstractSplineInitData
     VToolArcInitData()
         : VAbstractSplineInitData(),
           center(NULL_ID),
-          radius("0"),
-          f1("0"),
-          f2("0")
+          radius('0'),
+          f1('0'),
+          f2('0')
     {}
 
     quint32 center;

@@ -351,7 +351,7 @@ void VToolRotation::SaveDialog(QDomElement &domElement, QList<quint32> &oldDepen
 void VToolRotation::ReadToolAttributes(const QDomElement &domElement)
 {
     origPointId = doc->GetParametrUInt(domElement, AttrCenter, NULL_ID_STR);
-    formulaAngle = doc->GetParametrString(domElement, AttrAngle, "0");
+    formulaAngle = doc->GetParametrString(domElement, AttrAngle, QChar('0'));
     suffix = doc->GetParametrString(domElement, AttrSuffix);
 }
 

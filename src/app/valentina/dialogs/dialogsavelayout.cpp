@@ -563,7 +563,7 @@ void DialogSaveLayout::PathChanged(const QString &text)
 void DialogSaveLayout::ShowExample()
 {
     const LayoutExportFormats currentFormat = Format();
-    ui->labelExample->setText(tr("Example:") + FileName() + QLatin1String("1") + ExportFromatSuffix(currentFormat));
+    ui->labelExample->setText(tr("Example:") + FileName() + QLatin1Char('1') + ExportFromatSuffix(currentFormat));
 
     ui->checkBoxBinaryDXF->setEnabled(false);
     ui->groupBoxPaperFormat->setEnabled(false);

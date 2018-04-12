@@ -1094,7 +1094,7 @@ void DialogPiecePath::SetPiecePath(const VPiecePath &path)
     }
     else
     {
-        ui->plainTextEditFormulaVisible->setPlainText("1");
+        ui->plainTextEditFormulaVisible->setPlainText(QChar('1'));
     }
 
     ValidObjects(PathIsValid());
@@ -1318,7 +1318,7 @@ VPiecePath DialogPiecePath::CreatePath() const
     }
     else
     {
-        path.SetVisibilityTrigger("1");
+        path.SetVisibilityTrigger(QChar('1'));
     }
 
     return path;

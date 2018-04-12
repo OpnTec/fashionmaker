@@ -600,7 +600,7 @@ void VPiece::SetFormulaSAWidth(const QString &formula, qreal value)
 {
     SetSAWidth(value);
     const qreal width = GetSAWidth();
-    width >= 0 ? d->m_formulaWidth = formula : d->m_formulaWidth = QLatin1String("0");
+    width >= 0 ? d->m_formulaWidth = formula : d->m_formulaWidth = QLatin1Char('0');
 }
 
 //---------------------------------------------------------------------------------------------------------------------

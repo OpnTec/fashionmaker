@@ -48,7 +48,7 @@ public:
           m_name(),
           m_penType(Qt::SolidLine),
           m_cut(false),
-          m_visibilityTrigger("1")
+          m_visibilityTrigger('1')
     {}
 
     explicit VPiecePathData(PiecePathType type)
@@ -57,7 +57,7 @@ public:
           m_name(),
           m_penType(Qt::SolidLine),
           m_cut(false),
-          m_visibilityTrigger("1")
+          m_visibilityTrigger('1')
     {}
 
     VPiecePathData(const VPiecePathData &path)

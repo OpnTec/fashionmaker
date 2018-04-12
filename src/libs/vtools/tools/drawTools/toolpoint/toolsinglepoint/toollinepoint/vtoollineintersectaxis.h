@@ -50,7 +50,7 @@ struct VToolLineIntersectAxisInitData : VToolLinePointInitData
 {
     VToolLineIntersectAxisInitData()
         : VToolLinePointInitData(),
-          formulaAngle("0"),
+          formulaAngle('0'),
           basePointId(NULL_ID),
           firstPointId(NULL_ID),
           secondPointId(NULL_ID)

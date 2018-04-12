@@ -48,11 +48,11 @@ struct VToolEllipticalArcInitData : VAbstractSplineInitData
     VToolEllipticalArcInitData()
         : VAbstractSplineInitData(),
           center(NULL_ID),
-          radius1("0"),
-          radius2("0"),
-          f1("0"),
-          f2("0"),
-          rotationAngle("0")
+          radius1('0'),
+          radius2('0'),
+          f1('0'),
+          f2('0'),
+          rotationAngle('0')
     {}
 
     quint32 center;

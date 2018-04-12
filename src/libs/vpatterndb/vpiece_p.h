@@ -58,7 +58,7 @@ public:
           m_ppData(),
           m_piPatternInfo(),
           m_glGrainline(),
-          m_formulaWidth("0")
+          m_formulaWidth('0')
     {}
 
     VPieceData(const VPieceData &detail)

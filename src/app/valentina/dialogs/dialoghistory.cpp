@@ -460,7 +460,7 @@ QString DialogHistory::PointName(quint32 pointId)
 //---------------------------------------------------------------------------------------------------------------------
 quint32 DialogHistory::AttrUInt(const QDomElement &domElement, const QString &name)
 {
-    return doc->GetParametrUInt(domElement, name, "0");
+    return doc->GetParametrUInt(domElement, name, QChar('0'));
 }
 
 //---------------------------------------------------------------------------------------------------------------------

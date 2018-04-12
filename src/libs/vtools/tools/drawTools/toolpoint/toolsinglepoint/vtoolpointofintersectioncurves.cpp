@@ -370,8 +370,8 @@ void VToolPointOfIntersectionCurves::ReadToolAttributes(const QDomElement &domEl
 {
     firstCurveId = doc->GetParametrUInt(domElement, AttrCurve1, NULL_ID_STR);
     secondCurveId = doc->GetParametrUInt(domElement, AttrCurve2, NULL_ID_STR);
-    vCrossPoint = static_cast<VCrossCurvesPoint>(doc->GetParametrUInt(domElement, AttrVCrossPoint, "1"));
-    hCrossPoint = static_cast<HCrossCurvesPoint>(doc->GetParametrUInt(domElement, AttrHCrossPoint, "1"));
+    vCrossPoint = static_cast<VCrossCurvesPoint>(doc->GetParametrUInt(domElement, AttrVCrossPoint, QChar('1')));
+    hCrossPoint = static_cast<HCrossCurvesPoint>(doc->GetParametrUInt(domElement, AttrHCrossPoint, QChar('1')));
 }
 
 //---------------------------------------------------------------------------------------------------------------------

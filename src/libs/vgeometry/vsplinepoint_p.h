@@ -107,13 +107,13 @@ public:
     VSplinePointData()
         : pSpline(),
           angle1(0),
-          angle1F("0"),
+          angle1F('0'),
           angle2(180),
           angle2F("180"),
           length1(0),
-          length1F("0"),
+          length1F('0'),
           length2(0),
-          length2F("0")
+          length2F('0')
     {}
 
     VSplinePointData(VPointF pSpline, qreal angle1, const QString &angle1F, qreal angle2, const QString &angle2F,

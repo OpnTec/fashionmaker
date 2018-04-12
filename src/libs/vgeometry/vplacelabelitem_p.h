@@ -43,7 +43,7 @@ public:
     VPlaceLabelItemData()
         : width(),
           height(),
-          angle("0"),
+          angle('0'),
           type(PlaceLabelType::Button),
           centerPoint(0),
           wValue(0),

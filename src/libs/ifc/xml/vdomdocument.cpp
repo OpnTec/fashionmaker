@@ -378,8 +378,8 @@ bool VDomDocument::GetParametrBool(const QDomElement &domElement, const QString 
 
         const QStringList bools = QStringList() << QLatin1String("true")
                                                 << QLatin1String("false")
-                                                << QLatin1String("1")
-                                                << QLatin1String("0");
+                                                << QChar('1')
+                                                << QChar('0');
         switch (bools.indexOf(parametr))
         {
             case 0: // true
@@ -956,8 +956,8 @@ QVector<VLabelTemplateLine> VDomDocument::GetLabelTemplate(const QDomElement &el
                 line.line = GetParametrString(tagLine, AttrText, tr("<empty>"));
                 line.bold = GetParametrBool(tagLine, AttrBold, falseStr);
                 line.italic = GetParametrBool(tagLine, AttrItalic, falseStr);
-                line.alignment = static_cast<int>(GetParametrUInt(tagLine, AttrAlignment, "0"));
-                line.fontSizeIncrement = static_cast<int>(GetParametrUInt(tagLine, AttrFSIncrement, "0"));
+                line.alignment = static_cast<int>(GetParametrUInt(tagLine, AttrAlignment, QChar('0')));
+                line.fontSizeIncrement = static_cast<int>(GetParametrUInt(tagLine, AttrFSIncrement, QChar('0')));
                 lines.append(line);
             }
             tagLine = tagLine.nextSiblingElement(TagLine);

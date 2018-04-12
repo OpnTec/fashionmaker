@@ -61,7 +61,7 @@ QString LocalWidth(const QLineF &line, const QLineF &movedLine)
     }
     else
     {// different direction means value is negative
-        return QString("0");
+        return QChar('0');
     }
 }
 
@@ -261,8 +261,8 @@ QVector<VPieceNode> VNodeDetail::Convert(const VContainer *data, const QVector<V
 
     if (not closed && path.CountNodes() > 1)
     {
-        path[0].SetFormulaSABefore("0");
-        path[path.CountNodes()-1].SetFormulaSAAfter("0");
+        path[0].SetFormulaSABefore(QChar('0'));
+        path[path.CountNodes()-1].SetFormulaSAAfter(QChar('0'));
     }
 
     return path.GetNodes();

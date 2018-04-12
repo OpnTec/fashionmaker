@@ -256,7 +256,7 @@ void VisToolSplinePath::Creating(const QPointF &pSpl, int size)
             }
             else
             {
-                path[size-1].SetLength2(0, "0");
+                path[size-1].SetLength2(0, QChar('0'));
             }
             emit PathChanged(path);
         }
@@ -273,8 +273,8 @@ void VisToolSplinePath::Creating(const QPointF &pSpl, int size)
             }
             else
             {
-                path[size-1].SetLength1(0, "0");
-                path[size-1].SetLength2(0, "0");
+                path[size-1].SetLength1(0, QChar('0'));
+                path[size-1].SetLength2(0, QChar('0'));
             }
             emit PathChanged(path);
         }
@@ -293,7 +293,7 @@ void VisToolSplinePath::Creating(const QPointF &pSpl, int size)
         }
         else
         {
-            path[size-1].SetLength2(0, "0");
+            path[size-1].SetLength2(0, QChar('0'));
         }
         emit PathChanged(path);
 

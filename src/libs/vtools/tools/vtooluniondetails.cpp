@@ -583,7 +583,7 @@ quint32 AddNodeElArc(const VPieceNode &node, const VToolUnionDetailsInitData &in
     QScopedPointer<VEllipticalArc> arc1(new VEllipticalArc (*tmpCenter, arc->GetRadius1(), arc->GetRadius2(),
                                                             arc->GetFormulaRadius1(), arc->GetFormulaRadius2(),
                                                             l1.angle(), QString().setNum(l1.angle()), l2.angle(),
-                                                            QString().setNum(l2.angle()), 0, "0"));
+                                                            QString().setNum(l2.angle()), 0, QChar('0')));
     arc1->setMode(Draw::Modeling);
 
     QScopedPointer<VEllipticalArc> arc2(new VEllipticalArc(*arc1));
@@ -687,13 +687,13 @@ quint32 AddNodeSplinePath(const VPieceNode &node, const VToolUnionDetailsInitDat
             const QString angle1F = QString().number(angle1);
 
             path->append(VSplinePoint(*p1, angle1, angle1F, spl.GetStartAngle(), spl.GetStartAngleFormula(),
-                                      0, "0", spline.GetC1Length(), spline.GetC1LengthFormula()));
+                                      0, QChar('0'), spline.GetC1Length(), spline.GetC1LengthFormula()));
         }
 
         const qreal angle2 = spl.GetEndAngle()+180;
         const QString angle2F = QString().number(angle2);
         qreal pL2 = 0;
-        QString pL2F("0");
+        QString pL2F('0');
         if (i+1 <= splinePath->CountSubSpl())
         {
             const VSpline nextSpline = splinePath->GetSpline(i+1);
@@ -997,7 +997,7 @@ void UpdateNodeElArc(VContainer *data, const VPieceNode &node, QVector<quint32> 
     QScopedPointer<VEllipticalArc> arc1(new VEllipticalArc (*center, arc->GetRadius1(), arc->GetRadius2(),
                                                             arc->GetFormulaRadius1(), arc->GetFormulaRadius2(),
                                                             l1.angle(), QString().setNum(l1.angle()), l2.angle(),
-                                                            QString().setNum(l2.angle()), 0, "0"));
+                                                            QString().setNum(l2.angle()), 0, QChar('0')));
     arc1->setMode(Draw::Modeling);
     data->UpdateGObject(TakeNextId(children), arc1.take());
 }
@@ -1064,14 +1064,14 @@ void UpdateNodeSplinePath(VContainer *data, const VPieceNode &node, QVector<quin
             const QString angle1F = QString().number(angle1);
 
             path->append(VSplinePoint(*p1, angle1, angle1F, spl.GetStartAngle(), spl.GetStartAngleFormula(),
-                                      0, "0", spline.GetC1Length(), spline.GetC1LengthFormula()));
+                                      0, QChar('0'), spline.GetC1Length(), spline.GetC1LengthFormula()));
         }
 
         const qreal angle2 = spl.GetEndAngle()+180;
         const QString angle2F = QString().number(angle2);
 
         qreal pL2 = 0;
-        QString pL2F("0");
+        QString pL2F('0');
         if (i+1 <= splinePath->CountSubSpl())
         {
             const VSpline nextSpline = splinePath->GetSpline(i+1);

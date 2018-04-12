@@ -183,6 +183,13 @@ inline void VDomDocument::SetAttribute<QString>(QDomElement &domElement, const Q
 
 //---------------------------------------------------------------------------------------------------------------------
 template <>
+inline void VDomDocument::SetAttribute<QChar>(QDomElement &domElement, const QString &name, const QChar &value) const
+{
+    domElement.setAttribute(name, value);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+template <>
 inline void VDomDocument::SetAttribute<bool>(QDomElement &domElement, const QString &name, const bool &value) const
 {
     domElement.setAttribute(name, value ? trueStr : falseStr);
@@ -191,7 +198,7 @@ inline void VDomDocument::SetAttribute<bool>(QDomElement &domElement, const QStr
 //---------------------------------------------------------------------------------------------------------------------
 template <>
 inline void VDomDocument::SetAttribute<MeasurementsType>(QDomElement &domElement, const QString &name,
-                                                              const MeasurementsType &value) const
+                                                         const MeasurementsType &value) const
 {
     domElement.setAttribute(name, value == MeasurementsType::Multisize ? QStringLiteral("multisize") :
                                                                         QStringLiteral("individual"));

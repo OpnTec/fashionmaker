@@ -677,7 +677,7 @@ VNodeDetail VPattern::ParseDetailNode(const QDomElement &domElement) const
     const quint32 id = GetParametrUInt(domElement, AttrIdObject, NULL_ID_STR);
     const qreal mx = GetParametrDouble(domElement, AttrMx, "0.0");
     const qreal my = GetParametrDouble(domElement, AttrMy, "0.0");
-    const bool reverse = GetParametrUInt(domElement, VAbstractPattern::AttrNodeReverse, "0");
+    const bool reverse = GetParametrUInt(domElement, VAbstractPattern::AttrNodeReverse, QChar('0'));
     const NodeDetail nodeType = NodeDetail::Contour;
 
     const QString t = GetParametrString(domElement, AttrType, "NodePoint");
@@ -900,7 +900,7 @@ void VPattern::ParseDetailElement(QDomElement &domElement, const Document &parse
 //---------------------------------------------------------------------------------------------------------------------
 void VPattern::ParseDetailInternals(const QDomElement &domElement, VPiece &detail) const
 {
-    const uint version = GetParametrUInt(domElement, AttrVersion, "1");
+    const uint version = GetParametrUInt(domElement, AttrVersion, QChar('1'));
 
     const QStringList tags = QStringList() << TagNodes
                                            << TagData
@@ -935,7 +935,7 @@ void VPattern::ParseDetailInternals(const QDomElement &domElement, VPiece &detai
                         // TODO. Delete if minimal supported version is 0.4.0
                         Q_STATIC_ASSERT_X(VPatternConverter::PatternMinVer < CONVERTER_VERSION_CHECK(0, 4, 0),
                                           "Time to refactor the code.");
-                        const bool closed = GetParametrUInt(domElement, AttrClosed, "1");
+                        const bool closed = GetParametrUInt(domElement, AttrClosed, QChar('1'));
                         const qreal width = GetParametrDouble(domElement, AttrWidth, "0.0");
                         futurePathV1 = QtConcurrent::run(this, &VPattern::ParseDetailNodes, element, width, closed);
                     }
@@ -1047,13 +1047,14 @@ VPieceLabelData VPattern::ParsePieceDataTag(const QDomElement &domElement, VPiec
     ppData.SetRotationWay(GetParametrEmptyString(domElement, AttrRotationWay));
     ppData.SetTilt(GetParametrEmptyString(domElement, AttrTilt));
     ppData.SetFoldPosition(GetParametrEmptyString(domElement, AttrFoldPosition));
-    ppData.SetQuantity(static_cast<int>(GetParametrUInt(domElement, AttrQuantity, "1")));
+    ppData.SetQuantity(static_cast<int>(GetParametrUInt(domElement, AttrQuantity, QChar('1'))));
     ppData.SetOnFold(GetParametrBool(domElement, AttrOnFold, falseStr));
-    ppData.SetPos(QPointF(GetParametrDouble(domElement, AttrMx, "0"), GetParametrDouble(domElement, AttrMy, "0")));
-    ppData.SetLabelWidth(GetParametrString(domElement, AttrWidth, "1"));
-    ppData.SetLabelHeight(GetParametrString(domElement, AttrHeight, "1"));
-    ppData.SetFontSize(static_cast<int>(GetParametrUInt(domElement, VToolSeamAllowance::AttrFont, "0")));
-    ppData.SetRotation(GetParametrString(domElement, AttrRotation, "0"));
+    ppData.SetPos(QPointF(GetParametrDouble(domElement, AttrMx, QChar('0')),
+                          GetParametrDouble(domElement, AttrMy, QChar('0'))));
+    ppData.SetLabelWidth(GetParametrString(domElement, AttrWidth, QChar('1')));
+    ppData.SetLabelHeight(GetParametrString(domElement, AttrHeight, QChar('1')));
+    ppData.SetFontSize(static_cast<int>(GetParametrUInt(domElement, VToolSeamAllowance::AttrFont, QChar('0'))));
+    ppData.SetRotation(GetParametrString(domElement, AttrRotation, QChar('0')));
     ppData.SetCenterPin(GetParametrUInt(domElement, VToolSeamAllowance::AttrCenterPin, NULL_ID_STR));
     ppData.SetTopLeftPin(GetParametrUInt(domElement, VToolSeamAllowance::AttrTopLeftPin, NULL_ID_STR));
     ppData.SetBottomRightPin(GetParametrUInt(domElement, VToolSeamAllowance::AttrBottomRightPin, NULL_ID_STR));
@@ -1065,11 +1066,12 @@ VPieceLabelData VPattern::ParsePieceDataTag(const QDomElement &domElement, VPiec
 VPatternLabelData VPattern::ParsePiecePatternInfo(const QDomElement &domElement, VPatternLabelData patternInfo) const
 {
     patternInfo.SetVisible(GetParametrBool(domElement, AttrVisible, trueStr));
-    patternInfo.SetPos(QPointF(GetParametrDouble(domElement, AttrMx, "0"), GetParametrDouble(domElement, AttrMy, "0")));
-    patternInfo.SetLabelWidth(GetParametrString(domElement, AttrWidth, "1"));
-    patternInfo.SetLabelHeight(GetParametrString(domElement, AttrHeight, "1"));
-    patternInfo.SetFontSize(static_cast<int>(GetParametrUInt(domElement, VToolSeamAllowance::AttrFont, "0")));
-    patternInfo.SetRotation(GetParametrString(domElement, AttrRotation, "0"));
+    patternInfo.SetPos(QPointF(GetParametrDouble(domElement, AttrMx, QChar('0')),
+                               GetParametrDouble(domElement, AttrMy, QChar('0'))));
+    patternInfo.SetLabelWidth(GetParametrString(domElement, AttrWidth, QChar('1')));
+    patternInfo.SetLabelHeight(GetParametrString(domElement, AttrHeight, QChar('1')));
+    patternInfo.SetFontSize(static_cast<int>(GetParametrUInt(domElement, VToolSeamAllowance::AttrFont, QChar('0'))));
+    patternInfo.SetRotation(GetParametrString(domElement, AttrRotation, QChar('0')));
     patternInfo.SetCenterPin(GetParametrUInt(domElement, VToolSeamAllowance::AttrCenterPin, NULL_ID_STR));
     patternInfo.SetTopLeftPin(GetParametrUInt(domElement, VToolSeamAllowance::AttrTopLeftPin, NULL_ID_STR));
     patternInfo.SetBottomRightPin(GetParametrUInt(domElement, VToolSeamAllowance::AttrBottomRightPin, NULL_ID_STR));
@@ -1080,10 +1082,11 @@ VPatternLabelData VPattern::ParsePiecePatternInfo(const QDomElement &domElement,
 VGrainlineData VPattern::ParsePieceGrainline(const QDomElement &domElement, VGrainlineData gGeometry) const
 {
     gGeometry.SetVisible(GetParametrBool(domElement, AttrVisible, falseStr));
-    gGeometry.SetPos(QPointF(GetParametrDouble(domElement, AttrMx, "0"), GetParametrDouble(domElement, AttrMy, "0")));
-    gGeometry.SetLength(GetParametrString(domElement, AttrLength, "1"));
+    gGeometry.SetPos(QPointF(GetParametrDouble(domElement, AttrMx, QChar('0')),
+                             GetParametrDouble(domElement, AttrMy, QChar('0'))));
+    gGeometry.SetLength(GetParametrString(domElement, AttrLength, QChar('1')));
     gGeometry.SetRotation(GetParametrString(domElement, AttrRotation, "90"));
-    gGeometry.SetArrowType(static_cast<ArrowType>(GetParametrUInt(domElement, AttrArrows, "0")));
+    gGeometry.SetArrowType(static_cast<ArrowType>(GetParametrUInt(domElement, AttrArrows, QChar('0'))));
     gGeometry.SetCenterPin(GetParametrUInt(domElement, VToolSeamAllowance::AttrCenterPin, NULL_ID_STR));
     gGeometry.SetTopPin(GetParametrUInt(domElement, VToolSeamAllowance::AttrTopPin, NULL_ID_STR));
     gGeometry.SetBottomPin(GetParametrUInt(domElement, VToolSeamAllowance::AttrBottomPin, NULL_ID_STR));
@@ -1696,7 +1699,7 @@ void VPattern::ParseToolPointOfContact(VMainGraphicsScene *scene, QDomElement &d
         initData.typeCreation = Source::FromFile;
 
         PointsCommonAttributes(domElement, initData);
-        initData.radius = GetParametrString(domElement, AttrRadius, "0");
+        initData.radius = GetParametrString(domElement, AttrRadius, QChar('0'));
         const QString f = initData.radius;//need for saving fixed formula;
         initData.center = GetParametrUInt(domElement, AttrCenter, NULL_ID_STR);
         initData.firstPointId = GetParametrUInt(domElement, AttrFirstPoint, NULL_ID_STR);
@@ -1824,7 +1827,7 @@ void VPattern::ParsePlaceLabel(QDomElement &domElement, const Document &parse)
         initData.angle = GetParametrString(domElement, AttrAngle, "0.0");
         const QString angle = initData.angle;//need for saving fixed formula;
 
-        initData.type = static_cast<PlaceLabelType>(GetParametrUInt(domElement, AttrPlaceLabelType, "0"));
+        initData.type = static_cast<PlaceLabelType>(GetParametrUInt(domElement, AttrPlaceLabelType, QChar('0')));
 
         VToolPlaceLabel::Create(initData);
 
@@ -1959,7 +1962,7 @@ void VPattern::ParseToolCutSpline(VMainGraphicsScene *scene, QDomElement &domEle
         initData.typeCreation = Source::FromFile;
 
         PointsCommonAttributes(domElement, initData);
-        initData.formula = GetParametrString(domElement, AttrLength, "0");
+        initData.formula = GetParametrString(domElement, AttrLength, QChar('0'));
         const QString f = initData.formula;//need for saving fixed formula;
         initData.splineId = GetParametrUInt(domElement, VToolCutSpline::AttrSpline, NULL_ID_STR);
 
@@ -2002,7 +2005,7 @@ void VPattern::ParseToolCutSplinePath(VMainGraphicsScene *scene, QDomElement &do
         initData.typeCreation = Source::FromFile;
 
         PointsCommonAttributes(domElement, initData);
-        initData.formula = GetParametrString(domElement, AttrLength, "0");
+        initData.formula = GetParametrString(domElement, AttrLength, QChar('0'));
         const QString f = initData.formula;//need for saving fixed formula;
         initData.splinePathId = GetParametrUInt(domElement, VToolCutSplinePath::AttrSplinePath, NULL_ID_STR);
 
@@ -2045,7 +2048,7 @@ void VPattern::ParseToolCutArc(VMainGraphicsScene *scene, QDomElement &domElemen
         initData.typeCreation = Source::FromFile;
 
         PointsCommonAttributes(domElement, initData);
-        initData.formula = GetParametrString(domElement, AttrLength, "0");
+        initData.formula = GetParametrString(domElement, AttrLength, QChar('0'));
         const QString f = initData.formula;//need for saving fixed formula;
         initData.arcId = GetParametrUInt(domElement, AttrArc, NULL_ID_STR);
 
@@ -2189,7 +2192,7 @@ void VPattern::ParseToolPointOfIntersectionArcs(VMainGraphicsScene *scene, const
         PointsCommonAttributes(domElement, initData);
         initData.firstArcId = GetParametrUInt(domElement, AttrFirstArc, NULL_ID_STR);
         initData.secondArcId = GetParametrUInt(domElement, AttrSecondArc, NULL_ID_STR);
-        initData.pType = static_cast<CrossCirclesPoint>(GetParametrUInt(domElement, AttrCrossPoint, "1"));
+        initData.pType = static_cast<CrossCirclesPoint>(GetParametrUInt(domElement, AttrCrossPoint, QChar('1')));
 
         VToolPointOfIntersectionArcs::Create(initData);
     }
@@ -2224,7 +2227,7 @@ void VPattern::ParseToolPointOfIntersectionCircles(VMainGraphicsScene *scene, QD
         const QString c1R = initData.firstCircleRadius;
         initData.secondCircleRadius = GetParametrString(domElement, AttrC2Radius);
         const QString c2R = initData.secondCircleRadius;
-        initData.crossPoint = static_cast<CrossCirclesPoint>(GetParametrUInt(domElement, AttrCrossPoint, "1"));
+        initData.crossPoint = static_cast<CrossCirclesPoint>(GetParametrUInt(domElement, AttrCrossPoint, QChar('1')));
 
         VToolPointOfIntersectionCircles::Create(initData);
         //Rewrite attribute formula. Need for situation when we have wrong formula.
@@ -2263,8 +2266,8 @@ void VPattern::ParseToolPointOfIntersectionCurves(VMainGraphicsScene *scene, QDo
         PointsCommonAttributes(domElement, initData);
         initData.firstCurveId = GetParametrUInt(domElement, AttrCurve1, NULL_ID_STR);
         initData.secondCurveId = GetParametrUInt(domElement, AttrCurve2, NULL_ID_STR);
-        initData.vCrossPoint = static_cast<VCrossCurvesPoint>(GetParametrUInt(domElement, AttrVCrossPoint, "1"));
-        initData.hCrossPoint = static_cast<HCrossCurvesPoint>(GetParametrUInt(domElement, AttrHCrossPoint, "1"));
+        initData.vCrossPoint = static_cast<VCrossCurvesPoint>(GetParametrUInt(domElement, AttrVCrossPoint, QChar('1')));
+        initData.hCrossPoint = static_cast<HCrossCurvesPoint>(GetParametrUInt(domElement, AttrHCrossPoint, QChar('1')));
 
         VToolPointOfIntersectionCurves::Create(initData);
     }
@@ -2297,7 +2300,7 @@ void VPattern::ParseToolPointFromCircleAndTangent(VMainGraphicsScene *scene, QDo
         initData.tangentPointId = GetParametrUInt(domElement, AttrTangent, NULL_ID_STR);
         initData.circleRadius = GetParametrString(domElement, AttrCRadius);
         const QString cR = initData.circleRadius;
-        initData.crossPoint = static_cast<CrossCirclesPoint>(GetParametrUInt(domElement, AttrCrossPoint, "1"));
+        initData.crossPoint = static_cast<CrossCirclesPoint>(GetParametrUInt(domElement, AttrCrossPoint, QChar('1')));
 
         VToolPointFromCircleAndTangent::Create(initData);
         //Rewrite attribute formula. Need for situation when we have wrong formula.
@@ -2335,7 +2338,7 @@ void VPattern::ParseToolPointFromArcAndTangent(VMainGraphicsScene *scene, const 
         PointsCommonAttributes(domElement, initData);
         initData.arcId = GetParametrUInt(domElement, AttrArc, NULL_ID_STR);
         initData.tangentPointId = GetParametrUInt(domElement, AttrTangent, NULL_ID_STR);
-        initData.crossPoint = static_cast<CrossCirclesPoint>(GetParametrUInt(domElement, AttrCrossPoint, "1"));
+        initData.crossPoint = static_cast<CrossCirclesPoint>(GetParametrUInt(domElement, AttrCrossPoint, QChar('1')));
 
         VToolPointFromArcAndTangent::Create(initData);
     }
@@ -2418,7 +2421,7 @@ void VPattern::ParseOldToolSpline(VMainGraphicsScene *scene, const QDomElement &
         const qreal kAsm2 = GetParametrDouble(domElement, AttrKAsm2, "1.0");
         const qreal kCurve = GetParametrDouble(domElement, AttrKCurve, "1.0");
         const QString color = GetParametrString(domElement, AttrColor, ColorBlack);
-        const quint32 duplicate = GetParametrUInt(domElement, AttrDuplicate, "0");
+        const quint32 duplicate = GetParametrUInt(domElement, AttrDuplicate, QChar('0'));
 
         const auto p1 = data->GeometricObject<VPointF>(point1);
         const auto p4 = data->GeometricObject<VPointF>(point4);
@@ -2459,22 +2462,22 @@ void VPattern::ParseToolSpline(VMainGraphicsScene *scene, QDomElement &domElemen
         initData.point1 = GetParametrUInt(domElement, AttrPoint1, NULL_ID_STR);
         initData.point4 = GetParametrUInt(domElement, AttrPoint4, NULL_ID_STR);
 
-        initData.a1 = GetParametrString(domElement, AttrAngle1, "0");
+        initData.a1 = GetParametrString(domElement, AttrAngle1, QChar('0'));
         const QString angle1 = initData.a1;//need for saving fixed formula;
 
-        initData.a2 = GetParametrString(domElement, AttrAngle2, "0");
+        initData.a2 = GetParametrString(domElement, AttrAngle2, QChar('0'));
         const QString angle2 = initData.a2;//need for saving fixed formula;
 
-        initData.l1 = GetParametrString(domElement, AttrLength1, "0");
+        initData.l1 = GetParametrString(domElement, AttrLength1, QChar('0'));
         const QString length1 = initData.l1;//need for saving fixed formula;
 
-        initData.l2 = GetParametrString(domElement, AttrLength2, "0");
+        initData.l2 = GetParametrString(domElement, AttrLength2, QChar('0'));
         const QString length2 = initData.l2;//need for saving fixed formula;
 
         initData.color = GetParametrString(domElement, AttrColor, ColorBlack);
         initData.penStyle = GetParametrString(domElement, AttrPenStyle, TypeLineLine);
-        initData.duplicate = GetParametrUInt(domElement, AttrDuplicate, "0");
-        initData.approximationScale = GetParametrDouble(domElement, AttrAScale, "0");
+        initData.duplicate = GetParametrUInt(domElement, AttrDuplicate, QChar('0'));
+        initData.approximationScale = GetParametrDouble(domElement, AttrAScale, QChar('0'));
 
         VToolSpline *spl = VToolSpline::Create(initData);
 
@@ -2534,8 +2537,8 @@ void VPattern::ParseToolCubicBezier(VMainGraphicsScene *scene, const QDomElement
 
         const QString color = GetParametrString(domElement, AttrColor, ColorBlack);
         const QString penStyle = GetParametrString(domElement, AttrPenStyle, TypeLineLine);
-        const quint32 duplicate = GetParametrUInt(domElement, AttrDuplicate, "0");
-        const qreal approximationScale = GetParametrDouble(domElement, AttrAScale, "0");
+        const quint32 duplicate = GetParametrUInt(domElement, AttrDuplicate, QChar('0'));
+        const qreal approximationScale = GetParametrDouble(domElement, AttrAScale, QChar('0'));
 
         auto p1 = data->GeometricObject<VPointF>(point1);
         auto p2 = data->GeometricObject<VPointF>(point2);
@@ -2580,8 +2583,8 @@ void VPattern::ParseOldToolSplinePath(VMainGraphicsScene *scene, const QDomEleme
         ToolsCommonAttributes(domElement, initData.id);
         const qreal kCurve = GetParametrDouble(domElement, AttrKCurve, "1.0");
         const QString color = GetParametrString(domElement, AttrColor, ColorBlack);
-        const quint32 duplicate = GetParametrUInt(domElement, AttrDuplicate, "0");
-        const qreal approximationScale = GetParametrDouble(domElement, AttrAScale, "0");
+        const quint32 duplicate = GetParametrUInt(domElement, AttrDuplicate, QChar('0'));
+        const qreal approximationScale = GetParametrDouble(domElement, AttrAScale, QChar('0'));
 
         QVector<VFSplinePoint> points;
 
@@ -2595,7 +2598,7 @@ void VPattern::ParseOldToolSplinePath(VMainGraphicsScene *scene, const QDomEleme
                 if (element.tagName() == AttrPathPoint)
                 {
                     const qreal kAsm1 = GetParametrDouble(element, AttrKAsm1, "1.0");
-                    const qreal angle = GetParametrDouble(element, AttrAngle, "0");
+                    const qreal angle = GetParametrDouble(element, AttrAngle, QChar('0'));
                     const qreal kAsm2 = GetParametrDouble(element, AttrKAsm2, "1.0");
                     const quint32 pSpline = GetParametrUInt(element, AttrPSpline, NULL_ID_STR);
                     const VPointF p = *data->GeometricObject<VPointF>(pSpline);
@@ -2649,8 +2652,8 @@ void VPattern::ParseToolSplinePath(VMainGraphicsScene *scene, const QDomElement 
         ToolsCommonAttributes(domElement, initData.id);
         initData.color = GetParametrString(domElement, AttrColor, ColorBlack);
         initData.penStyle = GetParametrString(domElement, AttrPenStyle, TypeLineLine);
-        initData.duplicate = GetParametrUInt(domElement, AttrDuplicate, "0");
-        initData.approximationScale = GetParametrDouble(domElement, AttrAScale, "0");
+        initData.duplicate = GetParametrUInt(domElement, AttrDuplicate, QChar('0'));
+        initData.approximationScale = GetParametrDouble(domElement, AttrAScale, QChar('0'));
 
         const QDomNodeList nodeList = domElement.childNodes();
         const qint32 num = nodeList.size();
@@ -2659,10 +2662,10 @@ void VPattern::ParseToolSplinePath(VMainGraphicsScene *scene, const QDomElement 
             const QDomElement element = nodeList.at(i).toElement();
             if (not element.isNull() && element.tagName() == AttrPathPoint)
             {
-                initData.a1.append(GetParametrString(element, AttrAngle1, "0"));
-                initData.a2.append(GetParametrString(element, AttrAngle2, "0"));
-                initData.l1.append(GetParametrString(element, AttrLength1, "0"));
-                initData.l2.append(GetParametrString(element, AttrLength2, "0"));
+                initData.a1.append(GetParametrString(element, AttrAngle1, QChar('0')));
+                initData.a2.append(GetParametrString(element, AttrAngle2, QChar('0')));
+                initData.l1.append(GetParametrString(element, AttrLength1, QChar('0')));
+                initData.l2.append(GetParametrString(element, AttrLength2, QChar('0')));
                 const quint32 pSpline = GetParametrUInt(element, AttrPSpline, NULL_ID_STR);
                 initData.points.append(pSpline);
 
@@ -2741,8 +2744,8 @@ void VPattern::ParseToolCubicBezierPath(VMainGraphicsScene *scene, const QDomEle
         ToolsCommonAttributes(domElement, initData.id);
         const QString color = GetParametrString(domElement, AttrColor, ColorBlack);
         const QString penStyle = GetParametrString(domElement, AttrPenStyle, TypeLineLine);
-        const quint32 duplicate = GetParametrUInt(domElement, AttrDuplicate, "0");
-        const qreal approximationScale = GetParametrDouble(domElement, AttrAScale, "0");
+        const quint32 duplicate = GetParametrUInt(domElement, AttrDuplicate, QChar('0'));
+        const qreal approximationScale = GetParametrDouble(domElement, AttrAScale, QChar('0'));
 
         QVector<VPointF> points;
 
@@ -2906,7 +2909,7 @@ void VPattern::ParseToolArc(VMainGraphicsScene *scene, QDomElement &domElement, 
         const QString f2Fix = initData.f2;//need for saving fixed formula;
         initData.color = GetParametrString(domElement, AttrColor, ColorBlack);
         initData.penStyle = GetParametrString(domElement, AttrPenStyle, TypeLineLine);
-        initData.approximationScale = GetParametrDouble(domElement, AttrAScale, "0");
+        initData.approximationScale = GetParametrDouble(domElement, AttrAScale, QChar('0'));
 
         VToolArc::Create(initData);
         //Rewrite attribute formula. Need for situation when we have wrong formula.
@@ -2958,11 +2961,11 @@ void VPattern::ParseToolEllipticalArc(VMainGraphicsScene *scene, QDomElement &do
         const QString f1Fix = initData.f1;//need for saving fixed formula;
         initData.f2 = GetParametrString(domElement, AttrAngle2, "270");
         const QString f2Fix = initData.f2;//need for saving fixed formula;
-        initData.rotationAngle = GetParametrString(domElement, AttrRotationAngle, "0");
+        initData.rotationAngle = GetParametrString(domElement, AttrRotationAngle, QChar('0'));
         const QString frotationFix = initData.rotationAngle;//need for saving fixed formula;
         initData.color = GetParametrString(domElement, AttrColor, ColorBlack);
         initData.penStyle = GetParametrString(domElement, AttrPenStyle, TypeLineLine);
-        initData.approximationScale = GetParametrDouble(domElement, AttrAScale, "0");
+        initData.approximationScale = GetParametrDouble(domElement, AttrAScale, QChar('0'));
 
         VToolEllipticalArc::Create(initData);
         //Rewrite attribute formula. Need for situation when we have wrong formula.
@@ -3216,7 +3219,7 @@ void VPattern::ParseToolFlippingByAxis(VMainGraphicsScene *scene, QDomElement &d
 
         ToolsCommonAttributes(domElement, initData.id);
         initData.originPointId = GetParametrUInt(domElement, AttrCenter, NULL_ID_STR);
-        initData.axisType = static_cast<AxisType>(GetParametrUInt(domElement, AttrAxisType, "1"));
+        initData.axisType = static_cast<AxisType>(GetParametrUInt(domElement, AttrAxisType, QChar('1')));
         initData.suffix = GetParametrString(domElement, AttrSuffix, QString());
 
         VAbstractOperation::ExtractData(domElement, initData);
@@ -3247,11 +3250,11 @@ void VPattern::ParseToolMove(VMainGraphicsScene *scene, QDomElement &domElement,
         initData.typeCreation = Source::FromFile;
 
         ToolsCommonAttributes(domElement, initData.id);
-        initData.formulaAngle = GetParametrString(domElement, AttrAngle, "0");
+        initData.formulaAngle = GetParametrString(domElement, AttrAngle, QChar('0'));
         const QString a = initData.formulaAngle;//need for saving fixed formula;
-        initData.formulaRotationAngle = GetParametrString(domElement, AttrRotationAngle, "0");
+        initData.formulaRotationAngle = GetParametrString(domElement, AttrRotationAngle, QChar('0'));
         const QString r = initData.formulaRotationAngle;//need for saving fixed formula;
-        initData.formulaLength = GetParametrString(domElement, AttrLength, "0");
+        initData.formulaLength = GetParametrString(domElement, AttrLength, QChar('0'));
         const QString len = initData.formulaLength;//need for saving fixed formula;
         initData.suffix = GetParametrString(domElement, AttrSuffix, QString());
         initData.rotationOrigin = GetParametrUInt(domElement, AttrCenter, NULL_ID_STR);
@@ -3315,8 +3318,8 @@ QDomElement VPattern::MakeEmptyIncrement(const QString &name)
 {
     QDomElement element = createElement(TagIncrement);
     SetAttribute(element, AttrName, name);
-    SetAttribute(element, AttrFormula, QString("0"));
-    SetAttribute(element, AttrDescription, QString(QString()));
+    SetAttribute(element, AttrFormula, QChar('0'));
+    SetAttribute(element, AttrDescription, QString());
     return element;
 }
 
@@ -3644,7 +3647,7 @@ void VPattern::ParseToolsElement(VMainGraphicsScene *scene, const QDomElement &d
                 VToolUnionDetailsInitData initData;
                 initData.indexD1 = GetParametrUInt(domElement, VToolUnionDetails::AttrIndexD1, "-1");
                 initData.indexD2 = GetParametrUInt(domElement, VToolUnionDetails::AttrIndexD2, "-1");
-                initData.version = GetParametrUInt(domElement, AttrVersion, "1");
+                initData.version = GetParametrUInt(domElement, AttrVersion, QChar('1'));
                 initData.scene = scene;
                 initData.doc = this;
                 initData.data = data;
@@ -3732,7 +3735,7 @@ void VPattern::ParsePathElement(VMainGraphicsScene *scene, QDomElement &domEleme
 
         if (initData.path.GetType() == PiecePathType::InternalPath)
         {
-            initData.path.SetVisibilityTrigger(GetParametrString(domElement, AttrVisible, "1"));
+            initData.path.SetVisibilityTrigger(GetParametrString(domElement, AttrVisible, QChar('1')));
         }
 
         VToolPiecePath::Create(initData);
@@ -3766,7 +3769,7 @@ void VPattern::ParseIncrementsElement(const QDomNode &node, const Document &pars
                 {
                     const QString name = GetParametrString(domElement, AttrName, QString());
                     const QString desc = GetParametrEmptyString(domElement, AttrDescription);
-                    const QString formula = GetParametrString(domElement, AttrFormula, "0");
+                    const QString formula = GetParametrString(domElement, AttrFormula, QChar('0'));
                     bool ok = false;
                     const qreal value = EvalFormula(data, formula, &ok);
 
@@ -4077,7 +4080,7 @@ int VPattern::GetDefCustomHeight() const
         const QDomElement domElement = domNode.toElement();
         if (domElement.isNull() == false)
         {
-            return static_cast<int>(GetParametrUInt(domElement, AttrDefHeight, QStringLiteral("0")));
+            return static_cast<int>(GetParametrUInt(domElement, AttrDefHeight, QChar('0')));
         }
         else
         {
@@ -4136,7 +4139,7 @@ int VPattern::GetDefCustomSize() const
         const QDomElement domElement = domNode.toElement();
         if (domElement.isNull() == false)
         {
-            return static_cast<int>(GetParametrUInt(domElement, AttrDefSize, QStringLiteral("0")));
+            return static_cast<int>(GetParametrUInt(domElement, AttrDefSize, QChar('0')));
         }
         else
         {

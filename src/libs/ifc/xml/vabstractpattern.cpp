@@ -634,7 +634,7 @@ QVector<CustomSARecord> VAbstractPattern::ParsePieceCSARecords(const QDomElement
             record.reverse = GetParametrBool(element, VAbstractPattern::AttrNodeReverse, falseStr);
             record.includeType = static_cast<PiecePathIncludeType>(GetParametrUInt(element,
                                                                                    VAbstractPattern::AttrIncludeAs,
-                                                                                   "1"));
+                                                                                   QChar('1')));
             records.append(record);
         }
     }
@@ -685,14 +685,15 @@ QVector<quint32> VAbstractPattern::ParsePiecePointRecords(const QDomElement &dom
 VPieceNode VAbstractPattern::ParseSANode(const QDomElement &domElement)
 {
     const quint32 id = VDomDocument::GetParametrUInt(domElement, AttrIdObject, NULL_ID_STR);
-    const bool reverse = VDomDocument::GetParametrUInt(domElement, VAbstractPattern::AttrNodeReverse, "0");
+    const bool reverse = VDomDocument::GetParametrUInt(domElement, VAbstractPattern::AttrNodeReverse, QChar('0'));
     const bool excluded = VDomDocument::GetParametrBool(domElement, VAbstractPattern::AttrNodeExcluded, falseStr);
     const bool uniqeness = VDomDocument::GetParametrBool(domElement, VAbstractPattern::AttrCheckUniqueness, trueStr);
     const QString saBefore = VDomDocument::GetParametrString(domElement, VAbstractPattern::AttrSABefore,
                                                              currentSeamAllowance);
     const QString saAfter = VDomDocument::GetParametrString(domElement, VAbstractPattern::AttrSAAfter,
                                                             currentSeamAllowance);
-    const PieceNodeAngle angle = static_cast<PieceNodeAngle>(VDomDocument::GetParametrUInt(domElement, AttrAngle, "0"));
+    const PieceNodeAngle angle = static_cast<PieceNodeAngle>(VDomDocument::GetParametrUInt(domElement, AttrAngle,
+                                                                                           QChar('0')));
 
     const bool passmark = VDomDocument::GetParametrBool(domElement, VAbstractPattern::AttrNodePassmark, falseStr);
     const PassmarkLineType passmarkLine = StringToPassmarkLineType(VDomDocument::GetParametrString(domElement,
@@ -2110,7 +2111,7 @@ QMap<int, QString> VAbstractPattern::GetMaterials(const QDomElement &element) co
         {
             if (tagMaterial.tagName() == TagMaterial)
             {
-                const int number = static_cast<int>(GetParametrUInt(tagMaterial, AttrNumber, "0"));
+                const int number = static_cast<int>(GetParametrUInt(tagMaterial, AttrNumber, QChar('0')));
                 const QString name = GetParametrEmptyString(tagMaterial, AttrName);
 
                 if (number > 0 && number <= userMaterialPlaceholdersQuantity)
@@ -2159,7 +2160,7 @@ QVector<VFinalMeasurement> VAbstractPattern::GetFMeasurements(const QDomElement 
                 VFinalMeasurement m;
 
                 m.name = GetParametrString(tagFMeasurement, AttrName, tr("measurement"));
-                m.formula = GetParametrString(tagFMeasurement, AttrFormula, "0");
+                m.formula = GetParametrString(tagFMeasurement, AttrFormula, QChar('0'));
                 m.description = GetParametrEmptyString(tagFMeasurement, AttrDescription);
 
                 measurements.append(m);
@@ -2352,7 +2353,7 @@ QMap<quint32, QPair<QString, bool> > VAbstractPattern::GetGroups()
                     {
                         if (group.tagName() == TagGroup)
                         {
-                            const quint32 id = GetParametrUInt(group, AttrId, "0");
+                            const quint32 id = GetParametrUInt(group, AttrId, QChar('0'));
                             const bool visible = GetParametrBool(group, AttrVisible, trueStr);
                             const QString name = GetParametrString(group, AttrName, tr("New group"));
 
@@ -2411,7 +2412,7 @@ QMap<quint32, QString> VAbstractPattern::GetGroupsContainingItem(quint32 toolId,
                         bool groupHasItem = GroupHasItem(group, toolId, objectId);
                         if((containItem && groupHasItem) || (not containItem && not groupHasItem))
                         {
-                            const quint32 groupId = GetParametrUInt(group, AttrId, "0");
+                            const quint32 groupId = GetParametrUInt(group, AttrId, QChar('0'));
                             const QString name = GetParametrString(group, AttrName, tr("New group"));
                             data.insert(groupId, name);
                         }
@@ -2448,8 +2449,8 @@ bool VAbstractPattern::GroupHasItem(const QDomElement &groupDomElement, quint32 
             const QDomElement item = itemNode.toElement();
             if (item.isNull() == false)
             {
-                quint32 toolIdIterate= GetParametrUInt(item, AttrTool, "0");
-                quint32 objectIdIterate= GetParametrUInt(item, AttrObject, "0");
+                quint32 toolIdIterate= GetParametrUInt(item, AttrTool, QChar('0'));
+                quint32 objectIdIterate= GetParametrUInt(item, AttrObject, QChar('0'));
 
                 if(toolIdIterate == toolId && objectIdIterate == objectId)
                 {
@@ -2538,8 +2539,8 @@ QDomElement VAbstractPattern::RemoveItemFromGroup(quint32 toolId, quint32 object
                 const QDomElement item = itemNode.toElement();
                 if (item.isNull() == false)
                 {
-                    quint32 toolIdIterate= GetParametrUInt(item, AttrTool, "0");
-                    quint32 objectIdIterate= GetParametrUInt(item, AttrObject, "0");
+                    quint32 toolIdIterate= GetParametrUInt(item, AttrTool, QChar('0'));
+                    quint32 objectIdIterate= GetParametrUInt(item, AttrObject, QChar('0'));
 
                     if(toolIdIterate == toolId && objectIdIterate == objectId)
                     {

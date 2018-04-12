@@ -993,7 +993,7 @@ void VToolSeamAllowance::RefreshDataInFile()
             Q_STATIC_ASSERT_X(VPatternConverter::PatternMinVer < CONVERTER_VERSION_CHECK(0, 4, 0),
                               "Time to refactor the code.");
 
-            const uint version = doc->GetParametrUInt(domElement, AttrVersion, "1");
+            const uint version = doc->GetParametrUInt(domElement, AttrVersion, QChar('1'));
             if (version == 1)
             {
                 const VPiece piece = VAbstractTool::data.GetPiece(m_id);

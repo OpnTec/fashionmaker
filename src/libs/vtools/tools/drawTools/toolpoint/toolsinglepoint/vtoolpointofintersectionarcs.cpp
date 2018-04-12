@@ -318,7 +318,7 @@ void VToolPointOfIntersectionArcs::ReadToolAttributes(const QDomElement &domElem
 {
     firstArcId = doc->GetParametrUInt(domElement, AttrFirstArc, NULL_ID_STR);
     secondArcId = doc->GetParametrUInt(domElement, AttrSecondArc, NULL_ID_STR);
-    crossPoint = static_cast<CrossCirclesPoint>(doc->GetParametrUInt(domElement, AttrCrossPoint, "1"));
+    crossPoint = static_cast<CrossCirclesPoint>(doc->GetParametrUInt(domElement, AttrCrossPoint, QChar('1')));
 }
 
 //---------------------------------------------------------------------------------------------------------------------

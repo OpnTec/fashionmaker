@@ -104,8 +104,8 @@ void TST_VPiece::ClearLoop()
     detail.GetPath().Append(VPieceNode(309, Tool::NodePoint));
     detail.GetPath().Append(VPieceNode(310, Tool::NodePoint));
     // Closed
-    detail.GetPath()[0].SetFormulaSABefore("0");
-    detail.GetPath()[detail.GetPath().CountNodes()-1].SetFormulaSAAfter("0");
+    detail.GetPath()[0].SetFormulaSABefore(QChar('0'));
+    detail.GetPath()[detail.GetPath().CountNodes()-1].SetFormulaSAAfter(QChar('0'));
 
     const QVector<QPointF> pointsEkv = detail.SeamAllowancePoints(data.data());
 
@@ -243,7 +243,7 @@ void TST_VPiece::Issue620()
     {
         const QSharedPointer<VPointF> point = data->GeometricObject<VPointF>(6);
         VSplinePoint p(*point.data(), 239.37700000000001, "239.377", 419.37700000000001, "59.3765",
-                       0, "0", 109.55943307086613, "2.89876");
+                       0, QChar('0'), 109.55943307086613, "2.89876");
         points.append(p);
     }
 

@@ -153,7 +153,7 @@ void VDxfEngine::drawPath(const QPainterPath &path)
         if (m_version > DRW::AC1009)
         { // Use lwpolyline
             DRW_LWPolyline *poly = new DRW_LWPolyline();
-            poly->layer = "0";
+            poly->layer = '0';
             poly->color = getPenColor();
             poly->lWeight = DRW_LW_Conv::widthByLayer;
             poly->lineType = getPenStyle();
@@ -176,7 +176,7 @@ void VDxfEngine::drawPath(const QPainterPath &path)
         else
         { // Use polyline
             DRW_Polyline *poly = new DRW_Polyline();
-            poly->layer = "0";
+            poly->layer = '0';
             poly->color = getPenColor();
             poly->lWeight = DRW_LW_Conv::widthByLayer;
             poly->lineType = getPenStyle();
@@ -211,7 +211,7 @@ void VDxfEngine::drawLines(const QLineF * lines, int lineCount)
                                     FromPixel(getSize().height() - p1.y(), varInsunits), 0);
         line->secPoint =  DRW_Coord(FromPixel(p2.x(), varInsunits),
                                     FromPixel(getSize().height() - p2.y(), varInsunits), 0);
-        line->layer = "0";
+        line->layer = '0';
         line->color = getPenColor();
         line->lWeight = DRW_LW_Conv::widthByLayer;
         line->lineType = getPenStyle();
@@ -239,7 +239,7 @@ void VDxfEngine::drawPolygon(const QPointF *points, int pointCount, PolygonDrawM
     if (m_version > DRW::AC1009)
     { // Use lwpolyline
         DRW_LWPolyline *poly = new DRW_LWPolyline();
-        poly->layer = "0";
+        poly->layer = '0';
         poly->color = getPenColor();
         poly->lWeight = DRW_LW_Conv::widthByLayer;
         poly->lineType = getPenStyle();
@@ -263,7 +263,7 @@ void VDxfEngine::drawPolygon(const QPointF *points, int pointCount, PolygonDrawM
     else
     { // Use polyline
         DRW_Polyline *poly = new DRW_Polyline();
-        poly->layer = "0";
+        poly->layer = '0';
         poly->color = getPenColor();
         poly->lWeight = DRW_LW_Conv::widthByLayer;
         poly->lineType = getPenStyle();
@@ -325,7 +325,7 @@ void VDxfEngine::drawEllipse(const QRectF & rect)
     ellipse->staparam = 0;
     ellipse->endparam = 2*M_PI;
 
-    ellipse->layer = "0";
+    ellipse->layer = '0';
     ellipse->color = getPenColor();
     ellipse->lWeight = DRW_LW_Conv::widthByLayer;
     ellipse->lineType = getPenStyle();
@@ -359,7 +359,7 @@ void VDxfEngine::drawTextItem(const QPointF & p, const QTextItem & textItem)
         textBuffer->style = fontStyle;
         textBuffer->angle = -rotationAngle;
 
-        textBuffer->layer = "0";
+        textBuffer->layer = '0';
         textBuffer->color = getPenColor();
         textBuffer->lWeight = DRW_LW_Conv::widthByLayer;
         textBuffer->lineType = getPenStyle();
@@ -632,7 +632,7 @@ bool VDxfEngine::ExportToAAMA(const QVector<VLayoutPiece> &details)
         }
 
         detailBlock->name = blockName.toStdString();
-        detailBlock->layer = "1";
+        detailBlock->layer = '1';
 
         ExportAAMAOutline(detailBlock, detail);
         ExportAAMADraw(detailBlock, detail);
@@ -646,7 +646,7 @@ bool VDxfEngine::ExportToAAMA(const QVector<VLayoutPiece> &details)
 
         DRW_Insert *insert = new DRW_Insert();
         insert->name = blockName.toStdString();
-        insert->layer = "1";
+        insert->layer = '1';
 
         input->AddEntity(insert);
     }
@@ -667,7 +667,7 @@ void VDxfEngine::ExportAAMAOutline(dx_ifaceBlock *detailBlock, const VLayoutPiec
         outline = detail.GetContourPoints();
     }
 
-    DRW_Entity *e = AAMAPolygon(outline, "1", true);
+    DRW_Entity *e = AAMAPolygon(outline, QChar('1'), true);
     if (e)
     {
         detailBlock->ent.push_back(e);
@@ -680,7 +680,7 @@ void VDxfEngine::ExportAAMADraw(dx_ifaceBlock *detailBlock, const VLayoutPiece &
     if (not detail.IsHideMainPath())
     {
         QVector<QPointF> poly = detail.GetContourPoints();
-        if (DRW_Entity *e = AAMAPolygon(poly, "8", true))
+        if (DRW_Entity *e = AAMAPolygon(poly, QChar('8'), true))
         {
             detailBlock->ent.push_back(e);
         }
@@ -689,7 +689,7 @@ void VDxfEngine::ExportAAMADraw(dx_ifaceBlock *detailBlock, const VLayoutPiece &
     const QVector<QVector<QPointF>> drawIntCut = detail.InternalPathsForCut(false);
     for(auto &intCut : drawIntCut)
     {
-        if (DRW_Entity *e = AAMAPolygon(intCut, "8", false))
+        if (DRW_Entity *e = AAMAPolygon(intCut, QChar('8'), false))
         {
             detailBlock->ent.push_back(e);
         }
@@ -702,7 +702,7 @@ void VDxfEngine::ExportAAMADraw(dx_ifaceBlock *detailBlock, const VLayoutPiece &
         {
             for(auto &p : qAsConst(label.shape))
             {
-                if (DRW_Entity *e = AAMAPolygon(p, "8", false))
+                if (DRW_Entity *e = AAMAPolygon(p, QChar('8'), false))
                 {
                     detailBlock->ent.push_back(e);
                 }
@@ -732,7 +732,7 @@ void VDxfEngine::ExportAAMANotch(dx_ifaceBlock *detailBlock, const VLayoutPiece 
         const QVector<QLineF> passmarks = detail.GetPassmarks();
         for(auto passmark : passmarks)
         {
-            if (DRW_Entity *e = AAMALine(passmark, "4"))
+            if (DRW_Entity *e = AAMALine(passmark, QChar('4')))
             {
                 detailBlock->ent.push_back(e);
             }
@@ -746,7 +746,7 @@ void VDxfEngine::ExportAAMAGrainline(dx_ifaceBlock *detailBlock, const VLayoutPi
     const QVector<QPointF> grainline = detail.GetGrainline();
     if (grainline.count() > 1)
     {
-        if (DRW_Entity *e = AAMALine(QLineF(grainline.first(), grainline.last()), "7"))
+        if (DRW_Entity *e = AAMALine(QLineF(grainline.first(), grainline.last()), QChar('7')))
         {
             detailBlock->ent.push_back(e);
         }
@@ -762,7 +762,7 @@ void VDxfEngine::ExportAAMAText(dx_ifaceBlock *detailBlock, const VLayoutPiece &
     for (int i = 0; i < list.size(); ++i)
     {
         QPointF pos(startPos.x(), startPos.y() - ToPixel(AAMATextHeight, varInsunits)*(list.size() - i-1));
-        detailBlock->ent.push_back(AAMAText(pos, list.at(i), "1"));
+        detailBlock->ent.push_back(AAMAText(pos, list.at(i), QChar('1')));
     }
 }
 
@@ -777,7 +777,7 @@ void VDxfEngine::ExportAAMAGlobalText(const QSharedPointer<dx_iface> &input, con
             for (int j = 0; j < strings.size(); ++j)
             {
                 QPointF pos(0, getSize().height() - ToPixel(AAMATextHeight, varInsunits)*(strings.size() - j-1));
-                input->AddEntity(AAMAText(pos, strings.at(j), "1"));
+                input->AddEntity(AAMAText(pos, strings.at(j), QChar('1')));
             }
             return;
         }

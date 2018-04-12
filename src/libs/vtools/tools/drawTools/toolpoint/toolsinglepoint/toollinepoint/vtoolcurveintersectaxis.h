@@ -50,7 +50,7 @@ struct VToolCurveIntersectAxisInitData : VToolLinePointInitData
 {
     VToolCurveIntersectAxisInitData()
         : VToolLinePointInitData(),
-          formulaAngle("0"),
+          formulaAngle('0'),
           basePointId(NULL_ID),
           curveId(NULL_ID)
     {}

@@ -39,9 +39,9 @@ struct VToolPlaceLabelInitData : VAbstractNodeInitData
 {
     VToolPlaceLabelInitData()
         : VAbstractNodeInitData(),
-          width("0"),
-          height("0"),
-          angle("0"),
+          width('0'),
+          height('0'),
+          angle('0'),
           type(PlaceLabelType::Button),
           centerPoint(NULL_ID)
     {}

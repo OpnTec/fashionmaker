@@ -88,8 +88,8 @@ void RemoveItemFromGroup::performUndoRedo(bool isUndo)
 
             // set the item visible. Because if the undo is done when unvisibile and it's not in any group after the
             // undo, it stays unvisible until the entire drawing is completly rerendered.
-            quint32 objectId = doc->GetParametrUInt(xml,QString("object"),NULL_ID_STR);
-            quint32 toolId = doc->GetParametrUInt(xml,QString("tool"),NULL_ID_STR);
+            quint32 objectId = doc->GetParametrUInt(xml, QStringLiteral("object"), NULL_ID_STR);
+            quint32 toolId = doc->GetParametrUInt(xml, QStringLiteral("tool"), NULL_ID_STR);
             VDataTool* tool = doc->getTool(toolId);
             tool->GroupVisibility(objectId,true);
         }

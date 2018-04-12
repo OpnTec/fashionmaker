@@ -100,7 +100,7 @@ void VCommandLine::InitOptions(VCommandLineOptions &options, QMap<QString, int> 
                                           translate("VCommandLine", "Number corresponding to output format (default = "
                                                                     "0, export mode):") +
                                                                     DialogSaveLayout::MakeHelpFormatList(),
-                                          translate("VCommandLine", "Format number"), "0"));
+                                          translate("VCommandLine", "Format number"), QChar('0')));
 
     optionsIndex.insert(LONG_OPTION_BINARYDXF, index++);
     options.append(new QCommandLineOption(QStringList() << LONG_OPTION_BINARYDXF,
@@ -144,7 +144,7 @@ void VCommandLine::InitOptions(VCommandLineOptions &options, QMap<QString, int> 
                                           translate("VCommandLine", "Number corresponding to layout page template "
                                                                     "(default = 0, export mode):") +
                                                                     DialogLayoutSettings::MakeHelpTemplateList(),
-                                          translate("VCommandLine", "Template number"), "0"));
+                                          translate("VCommandLine", "Template number"), QChar('0')));
 
     optionsIndex.insert(LONG_OPTION_PAGEW, index++);
     options.append(new QCommandLineOption(QStringList() << SINGLE_OPTION_PAGEW << LONG_OPTION_PAGEW,
@@ -259,7 +259,7 @@ void VCommandLine::InitOptions(VCommandLineOptions &options, QMap<QString, int> 
     options.append(new QCommandLineOption(QStringList() << SINGLE_OPTION_GROUPPING << LONG_OPTION_GROUPPING,
                                           translate("VCommandLine", "Sets layout groupping cases (export mode): %1.")
                                           .arg(DialogLayoutSettings::MakeGroupsHelp()),
-                                          translate("VCommandLine", "Grouping type"), "2"));
+                                          translate("VCommandLine", "Grouping type"), QChar('2')));
 
     optionsIndex.insert(LONG_OPTION_TEST, index++);
     options.append(new QCommandLineOption(QStringList() << SINGLE_OPTION_TEST << LONG_OPTION_TEST,
@@ -323,7 +323,7 @@ void VCommandLine::InitOptions(VCommandLineOptions &options, QMap<QString, int> 
                                                                     "(default = 0, export mode with tiled pdf "
                                                                     "format):") +
                                                                    DialogLayoutSettings::MakeHelpTiledPdfTemplateList(),
-                                          translate("VCommandLine", "Template number"), "0"));
+                                          translate("VCommandLine", "Template number"), QChar('0')));
 
     optionsIndex.insert(LONG_OPTION_TILED_PDF_LEFT_MARGIN, index++);
     options.append(new QCommandLineOption(QStringList() << LONG_OPTION_TILED_PDF_LEFT_MARGIN,

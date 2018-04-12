@@ -49,7 +49,7 @@ struct VToolPointOfContactInitData : VToolSinglePointInitData
 {
     VToolPointOfContactInitData()
         : VToolSinglePointInitData(),
-          radius("0"),
+          radius('0'),
           center(NULL_ID),
           firstPointId(NULL_ID),
           secondPointId(NULL_ID)

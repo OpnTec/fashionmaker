@@ -50,7 +50,7 @@ struct VToolPointFromCircleAndTangentInitData : VToolSinglePointInitData
     VToolPointFromCircleAndTangentInitData()
         : VToolSinglePointInitData(),
           circleCenterId(NULL_ID),
-          circleRadius("0"),
+          circleRadius('0'),
           tangentPointId(NULL_ID),
           crossPoint(CrossCirclesPoint::FirstPoint)
     {}

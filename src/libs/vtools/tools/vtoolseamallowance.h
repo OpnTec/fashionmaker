@@ -46,7 +46,7 @@ struct VToolSeamAllowanceInitData : VAbstractToolInitData
     VToolSeamAllowanceInitData()
         : VAbstractToolInitData(),
           detail(),
-          width("0"),
+          width('0'),
           drawName()
     {}
 

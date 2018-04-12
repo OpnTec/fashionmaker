@@ -1481,7 +1481,7 @@ bool dxfRW::writeTables() {
     iface->writeLayers();
     if (!wlayer0 && version > DRW::AC1009) {
         DRW_Layer lay0;
-        lay0.name = "0";
+        lay0.name = '0';
         writeLayer(&lay0);
     }
     writer->writeString(0, "ENDTAB");
@@ -1766,7 +1766,7 @@ bool dxfRW::writeObjects() {
         writer->writeString(0, "IMAGEDEF");
         writer->writeString(5, toHexStr(static_cast<int>(id->handle)) );
         if (version > DRW::AC1014) {
-//            writer->writeString(330, "0"); handle to DICTIONARY
+//            writer->writeString(330, '0'); handle to DICTIONARY
         }
         writer->writeString(102, "{ACAD_REACTORS");
         std::map<std::string, std::string>::iterator it;

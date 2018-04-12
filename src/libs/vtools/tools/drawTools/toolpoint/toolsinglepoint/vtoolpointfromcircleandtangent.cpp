@@ -299,7 +299,7 @@ void VToolPointFromCircleAndTangent::ReadToolAttributes(const QDomElement &domEl
     circleCenterId = doc->GetParametrUInt(domElement, AttrCCenter, NULL_ID_STR);
     tangentPointId = doc->GetParametrUInt(domElement, AttrTangent, NULL_ID_STR);
     circleRadius = doc->GetParametrString(domElement, AttrCRadius);
-    crossPoint = static_cast<CrossCirclesPoint>(doc->GetParametrUInt(domElement, AttrCrossPoint, "1"));
+    crossPoint = static_cast<CrossCirclesPoint>(doc->GetParametrUInt(domElement, AttrCrossPoint, QChar('1')));
 }
 
 //---------------------------------------------------------------------------------------------------------------------

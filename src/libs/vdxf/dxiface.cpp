@@ -239,19 +239,19 @@ void dx_iface::AddAAMALayers()
 {
     DRW_Layer layer;
 
-    layer.name = "1";// CUT, OUTLINE
+    layer.name = '1';// CUT, OUTLINE
     layer.color = DRW::black;
     cData.layers.push_back(layer);
 
-    layer.name = "8";// DRAW, INK
+    layer.name = '8';// DRAW, INK
     layer.color = DRW::black;
     cData.layers.push_back(layer);
 
-    layer.name = "7";// GRAINLINE
+    layer.name = '7';// GRAINLINE
     layer.color = DRW::black;
     cData.layers.push_back(layer);
 
-//    layer.name = "6";// MIRROR LINES
+//    layer.name = '6';// MIRROR LINES
 //    layer.color = DRW::black;
 //    cData.layers.push_back(layer);
 
@@ -263,7 +263,7 @@ void dx_iface::AddAAMALayers()
 //    layer.color = DRW::black;
 //    cData.layers.push_back(layer);
 
-    layer.name = "4";// NOTCH
+    layer.name = '4';// NOTCH
     layer.color = DRW::black;
     cData.layers.push_back(layer);
 
@@ -285,7 +285,7 @@ void dx_iface::AddAAMAHeaderData()
 void dx_iface::AddDefLayers()
 {
     DRW_Layer defLayer;
-    defLayer.name = "0";
+    defLayer.name = '0';
     defLayer.color = DRW::black;             // default color
     defLayer.lWeight = DRW_LW_Conv::width03; // default width
     cData.layers.push_back(defLayer);

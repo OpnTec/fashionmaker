@@ -2109,10 +2109,10 @@ void VPatternConverter::TagDetailToV0_4_0()
 
         if (not dom.isNull())
         {
-            dom.setAttribute(*strSeamAllowance, dom.attribute(*strSupplement, "0"));
+            dom.setAttribute(*strSeamAllowance, dom.attribute(*strSupplement, QChar('0')));
             dom.removeAttribute(*strSupplement);
 
-            dom.setAttribute(*strVersion, "1");
+            dom.setAttribute(*strVersion, '1');
 
             const QStringList tags = QStringList() << *strNode << *strData << *strPatternInfo << *strGrainline;
 
@@ -2137,17 +2137,17 @@ void VPatternConverter::TagDetailToV0_4_0()
 
                             if (element.hasAttribute(*strReverse))
                             {
-                                tagNode.setAttribute(*strReverse, element.attribute(*strReverse, "0"));
+                                tagNode.setAttribute(*strReverse, element.attribute(*strReverse, QChar('0')));
                             }
 
                             if (element.hasAttribute(*strMx))
                             {
-                                tagNode.setAttribute(*strMx, element.attribute(*strMx, "0"));
+                                tagNode.setAttribute(*strMx, element.attribute(*strMx, QChar('0')));
                             }
 
                             if (element.hasAttribute(*strMy))
                             {
-                                tagNode.setAttribute(*strMy, element.attribute(*strMy, "0"));
+                                tagNode.setAttribute(*strMy, element.attribute(*strMy, QChar('0')));
                             }
 
                             tagNode.setAttribute(*strType, element.attribute(*strType, QString()));
@@ -2200,7 +2200,7 @@ QDomElement VPatternConverter::GetUnionDetailNodesV0_4_0(const QDomElement &deta
 
                 if (node.hasAttribute(*strReverse))
                 {
-                    tagNode.setAttribute(*strReverse, node.attribute(*strReverse, "0"));
+                    tagNode.setAttribute(*strReverse, node.attribute(*strReverse, QChar('0')));
                 }
 
                 tagNode.setAttribute(*strType, node.attribute(*strType, QString()));
@@ -2263,7 +2263,7 @@ void VPatternConverter::LabelTagToV0_4_4(const QString &tagName)
     {
         if (dom.hasAttribute(attribute))
         {
-            QString valStr = dom.attribute(attribute, "1");
+            QString valStr = dom.attribute(attribute, QChar('1'));
             bool ok = false;
             qreal val = valStr.toDouble(&ok);
             if (not ok)
@@ -2430,7 +2430,7 @@ void VPatternConverter::PortPieceLabelstoV0_6_0()
 
             QString line;
 
-            const int material = static_cast<int>(GetParametrUInt(domMCP, *strMaterial, "0"));
+            const int material = static_cast<int>(GetParametrUInt(domMCP, *strMaterial, QChar('0')));
             switch(material)
             {
                 case 0:
@@ -2453,7 +2453,7 @@ void VPatternConverter::PortPieceLabelstoV0_6_0()
 
             line.append(", %wCut% ");
 
-            const int cutNumber = static_cast<int>(GetParametrUInt(domMCP, *strCutNumber, "1"));
+            const int cutNumber = static_cast<int>(GetParametrUInt(domMCP, *strCutNumber, QChar('1')));
 
             if (firstLine)
             {
@@ -2474,7 +2474,7 @@ void VPatternConverter::PortPieceLabelstoV0_6_0()
                 }
             }
 
-            if (GetParametrUInt(domMCP, *strPlacement, "0") == 1)
+            if (GetParametrUInt(domMCP, *strPlacement, QChar('0')) == 1)
             {
                 line.append(" %wOnFold%");
             }

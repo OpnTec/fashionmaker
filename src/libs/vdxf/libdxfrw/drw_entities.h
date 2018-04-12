@@ -516,7 +516,7 @@ public:
           flags(0)
     {
         eType = DRW::BLOCK;
-        layer = "0";
+        layer = '0';
     }
 
     virtual void applyExtrusion(){}

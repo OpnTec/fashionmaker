@@ -283,5 +283,5 @@ QString VToolCutArc::MakeToolTip() const
         return toolTip;
     };
 
-    return ArcToolTip(ArcToolTip("<table>", ar1, "1"), ar2, "2") + QLatin1String("</table>");
+    return ArcToolTip(ArcToolTip("<table>", ar1, QChar('1')), ar2, QChar('2')) + QLatin1String("</table>");
 }

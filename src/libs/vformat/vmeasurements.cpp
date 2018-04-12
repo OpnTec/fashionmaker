@@ -277,9 +277,9 @@ void VMeasurements::ReadMeasurements() const
         QSharedPointer<VMeasurement> tempMeash;
         if (type == MeasurementsType::Multisize)
         {
-            qreal base = GetParametrDouble(dom, AttrBase, "0");
-            qreal ksize = GetParametrDouble(dom, AttrSizeIncrease, "0");
-            qreal kheight = GetParametrDouble(dom, AttrHeightIncrease, "0");
+            qreal base = GetParametrDouble(dom, AttrBase, QChar('0'));
+            qreal ksize = GetParametrDouble(dom, AttrSizeIncrease, QChar('0'));
+            qreal kheight = GetParametrDouble(dom, AttrHeightIncrease, QChar('0'));
 
             tempMeash = QSharedPointer<VMeasurement>(new VMeasurement(static_cast<quint32>(i), name, BaseSize(),
                                                                       BaseHeight(), base, ksize, kheight));
@@ -302,7 +302,7 @@ void VMeasurements::ReadMeasurements() const
         }
         else
         {
-            const QString formula = GetParametrString(dom, AttrValue, "0");
+            const QString formula = GetParametrString(dom, AttrValue, QChar('0'));
             bool ok = false;
             qreal value = EvalFormula(tempData.data(), formula, &ok);
 
@@ -330,7 +330,7 @@ void VMeasurements::ClearForExport()
         {
             if (qmu::QmuTokenParser::IsSingle(domElement.attribute(AttrValue)))
             {
-                SetAttribute(domElement, AttrValue, QString("0"));
+                SetAttribute(domElement, AttrValue, QChar('0'));
             }
         }
     }
@@ -806,13 +806,13 @@ QDomElement VMeasurements::MakeEmpty(const QString &name, const QString &formula
 
     if (type == MeasurementsType::Multisize)
     {
-        SetAttribute(element, AttrBase, QString("0"));
-        SetAttribute(element, AttrSizeIncrease, QString("0"));
-        SetAttribute(element, AttrHeightIncrease, QString("0"));
+        SetAttribute(element, AttrBase, QChar('0'));
+        SetAttribute(element, AttrSizeIncrease, QChar('0'));
+        SetAttribute(element, AttrHeightIncrease, QChar('0'));
     }
     else
     {
-        SetAttribute(element, AttrValue, formula.isEmpty() ? QString("0") : formula);
+        SetAttribute(element, AttrValue, formula.isEmpty() ? QChar('0') : formula);
     }
 
     return element;

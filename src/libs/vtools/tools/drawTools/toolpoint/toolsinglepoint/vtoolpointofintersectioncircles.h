@@ -51,8 +51,8 @@ struct VToolPointOfIntersectionCirclesInitData : VToolSinglePointInitData
         : VToolSinglePointInitData(),
           firstCircleCenterId(NULL_ID),
           secondCircleCenterId(NULL_ID),
-          firstCircleRadius("0"),
-          secondCircleRadius("0"),
+          firstCircleRadius('0'),
+          secondCircleRadius('0'),
           crossPoint(CrossCirclesPoint::FirstPoint)
     {}
 

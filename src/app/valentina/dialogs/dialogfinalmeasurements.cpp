@@ -269,7 +269,7 @@ void DialogFinalMeasurements::Add()
 
     VFinalMeasurement m;
     m.name = tr("measurement");
-    m.formula = "0";
+    m.formula = QLatin1Char('0');
 
     m_measurements.append(m);
 

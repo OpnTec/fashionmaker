@@ -254,7 +254,7 @@ void VToolNormal::ReadToolAttributes(const QDomElement &domElement)
     formulaLength = doc->GetParametrString(domElement, AttrLength, QString());
     basePointId = doc->GetParametrUInt(domElement, AttrFirstPoint, NULL_ID_STR);
     secondPointId = doc->GetParametrUInt(domElement, AttrSecondPoint, NULL_ID_STR);
-    angle = doc->GetParametrDouble(domElement, AttrAngle, "0");
+    angle = doc->GetParametrDouble(domElement, AttrAngle, QChar('0'));
 }
 
 //---------------------------------------------------------------------------------------------------------------------

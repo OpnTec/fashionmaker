@@ -3168,7 +3168,7 @@ void TMainWindow::ImportIndividualMeasurements(const QxtCsvModel &csv)
     {
         IndividualMeasurement()
             : name(),
-              value("0"),
+              value('0'),
               fullName(),
               description()
         {}
