@@ -2112,7 +2112,7 @@ void VPatternConverter::TagDetailToV0_4_0()
             dom.setAttribute(*strSeamAllowance, dom.attribute(*strSupplement, QChar('0')));
             dom.removeAttribute(*strSupplement);
 
-            dom.setAttribute(*strVersion, '1');
+            dom.setAttribute(*strVersion, QChar('1'));
 
             const QStringList tags = QStringList() << *strNode << *strData << *strPatternInfo << *strGrainline;
 
