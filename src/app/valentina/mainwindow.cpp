@@ -4553,7 +4553,7 @@ bool MainWindow::LoadPattern(QString fileName, const QString& customMeasureFile)
     try
     {
         VPatternConverter converter(fileName);
-        m_curFileFormatVersion = converter.GetCurrentFormatVarsion();
+        m_curFileFormatVersion = converter.GetCurrentFormatVersion();
         m_curFileFormatVersionStr = converter.GetVersionStr();
         doc->setXMLContent(converter.Convert());
         if (!customMeasureFile.isEmpty())

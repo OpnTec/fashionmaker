@@ -267,14 +267,14 @@ bool TMainWindow::LoadFile(const QString &path)
             if (mType == MeasurementsType::Multisize)
             {
                 VVSTConverter converter(path);
-                m_curFileFormatVersion = converter.GetCurrentFormatVarsion();
+                m_curFileFormatVersion = converter.GetCurrentFormatVersion();
                 m_curFileFormatVersionStr = converter.GetVersionStr();
                 m->setXMLContent(converter.Convert());// Read again after conversion
             }
             else
             {
                 VVITConverter converter(path);
-                m_curFileFormatVersion = converter.GetCurrentFormatVarsion();
+                m_curFileFormatVersion = converter.GetCurrentFormatVersion();
                 m_curFileFormatVersionStr = converter.GetVersionStr();
                 m->setXMLContent(converter.Convert());// Read again after conversion
             }
@@ -2894,7 +2894,7 @@ bool TMainWindow::LoadFromExistingFile(const QString &path)
             else
             {
                 VVITConverter converter(path);
-                m_curFileFormatVersion = converter.GetCurrentFormatVarsion();
+                m_curFileFormatVersion = converter.GetCurrentFormatVersion();
                 m_curFileFormatVersionStr = converter.GetVersionStr();
                 m->setXMLContent(converter.Convert());// Read again after conversion
             }

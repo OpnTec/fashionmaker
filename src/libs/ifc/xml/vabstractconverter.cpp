@@ -87,7 +87,7 @@ QString VAbstractConverter::Convert()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-int VAbstractConverter::GetCurrentFormatVarsion() const
+int VAbstractConverter::GetCurrentFormatVersion() const
 {
     return m_ver;
 }

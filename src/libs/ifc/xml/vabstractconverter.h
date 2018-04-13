@@ -55,7 +55,7 @@ public:
 
     QString Convert();
 
-    int GetCurrentFormatVarsion() const;
+    int GetCurrentFormatVersion() const;
     QString GetVersionStr() const;
 
     static int GetVersion(const QString &version);
