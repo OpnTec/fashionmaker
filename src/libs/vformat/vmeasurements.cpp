@@ -695,7 +695,7 @@ void VMeasurements::CreateEmptyMultisizeFile(Unit unit, int baseSize, int baseHe
     mElement.appendChild(version);
 
     QDomElement ro = createElement(TagReadOnly);
-    const QDomText roNodeText = createTextNode("false");
+    const QDomText roNodeText = createTextNode(falseStr);
     ro.appendChild(roNodeText);
     mElement.appendChild(ro);
 
@@ -738,7 +738,7 @@ void VMeasurements::CreateEmptyIndividualFile(Unit unit)
     mElement.appendChild(version);
 
     QDomElement ro = createElement(TagReadOnly);
-    const QDomText roNodeText = createTextNode("false");
+    const QDomText roNodeText = createTextNode(falseStr);
     ro.appendChild(roNodeText);
     mElement.appendChild(ro);
 

@@ -397,10 +397,6 @@ extern const QStringList labelTemplatePlaceholders;
 extern const QString cursorArrowOpenHand;
 extern const QString cursorArrowCloseHand;
 
-extern const QString degreeSymbol;
-extern const QString trueStr;
-extern const QString falseStr;
-
 extern const QString strOne;
 extern const QString strTwo;
 extern const QString strThree;

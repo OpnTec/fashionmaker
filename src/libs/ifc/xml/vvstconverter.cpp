@@ -162,7 +162,7 @@ void VVSTConverter::AddNewTagsForV0_4_0()
 
     {
         QDomElement ro = createElement(QStringLiteral("read-only"));
-        const QDomText roNodeText = createTextNode("false");
+        const QDomText roNodeText = createTextNode(falseStr);
         ro.appendChild(roNodeText);
         refChild = rootElement.insertAfter(ro, refChild);
     }

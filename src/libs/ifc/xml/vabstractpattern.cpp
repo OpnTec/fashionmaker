@@ -1635,11 +1635,11 @@ QDomElement VAbstractPattern::CheckTagExists(const QString &tag)
                 element = createElement(TagGradation);
 
                 QDomElement heights = createElement(TagHeights);
-                heights.setAttribute(AttrAll, QLatin1String("true"));
+                heights.setAttribute(AttrAll, trueStr);
                 element.appendChild(heights);
 
                 QDomElement sizes = createElement(TagSizes);
-                sizes.setAttribute(AttrAll, QLatin1String("true"));
+                sizes.setAttribute(AttrAll, trueStr);
                 element.appendChild(sizes);
                 break;
             }

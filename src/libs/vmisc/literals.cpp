@@ -31,3 +31,6 @@ const QString LONG_OPTION_NO_HDPI_SCALING = QStringLiteral("no-scaling");
 
 const QString editDeleteIcon = QStringLiteral("edit-delete");
 const QString preferencesOtherIcon = QStringLiteral("preferences-other");
+const QString degreeSymbol = QStringLiteral("°");
+const QString trueStr = QStringLiteral("true");
+const QString falseStr = QStringLiteral("false");

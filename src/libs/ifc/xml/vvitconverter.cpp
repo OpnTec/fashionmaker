@@ -167,7 +167,7 @@ void VVITConverter::AddNewTagsForV0_3_0()
     QDomNode refChild = rootElement.firstChildElement("version");
 
     QDomElement ro = createElement(QStringLiteral("read-only"));
-    const QDomText roNodeText = createTextNode("false");
+    const QDomText roNodeText = createTextNode(falseStr);
     ro.appendChild(roNodeText);
     refChild = rootElement.insertAfter(ro, refChild);
 

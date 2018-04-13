@@ -30,9 +30,15 @@
 
 #include <QString>
 
+// From documantation: If you use QStringLiteral you should avoid declaring the same literal in multiple places: This
+// furthermore blows up the binary sizes.
+
 extern const QString LONG_OPTION_NO_HDPI_SCALING;
 
 extern const QString editDeleteIcon;
 extern const QString preferencesOtherIcon;
+extern const QString degreeSymbol;
+extern const QString trueStr;
+extern const QString falseStr;
 
 #endif // LITERALS_H
