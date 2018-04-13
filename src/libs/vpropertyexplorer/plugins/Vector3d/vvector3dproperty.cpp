@@ -129,7 +129,7 @@ VPE::VProperty* VPE::QVector3DProperty::clone(bool include_children, VProperty* 
 
 void VPE::QVector3DProperty::setValue(const QVariant &value)
 {
-    QStringList tmpStrings = value.toString().split(",");
+    QStringList tmpStrings = value.toString().split(QChar(','));
     if (tmpStrings.count() == 3)
     {
         setVector(tmpStrings[0].toDouble(), tmpStrings[1].toDouble(), tmpStrings[2].toDouble());

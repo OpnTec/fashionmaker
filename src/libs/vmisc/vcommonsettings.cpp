@@ -213,7 +213,7 @@ QString PrepareStandardFiles(const QString &currentPath, const QString &standard
     if ((currentPath == defPath || not currentPathDir.exists()) && standardPathDir.exists())
     {
         const QDir localdata (defPath);
-        if (localdata.mkpath("."))
+        if (localdata.mkpath(QChar('.')))
         {
             SymlinkCopyDirRecursive(standardPath, defPath, false);
         }
@@ -885,7 +885,7 @@ double VCommonSettings::GetDefaultSeamAllowance()
     {
         qDebug()<< "Could not convert value"<<value(*settingPatternDefaultSeamAllowance, 0)
                 << "to real. Return default value for default seam allowance is "
-                << defaultValue << ".";
+                << defaultValue << QChar('.');
         val = defaultValue;
     }
 

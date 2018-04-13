@@ -125,7 +125,7 @@ int VAbstractConverter::GetVersion(const QString &version)
 {
     ValidateVersion(version);
 
-    const QStringList ver = version.split(".");
+    const QStringList ver = version.split(QChar('.'));
 
     bool ok = false;
     const int major = ver.at(0).toInt(&ok);

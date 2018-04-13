@@ -1675,7 +1675,7 @@ void MainWindow::LoadIndividual()
     QDir directory(path);
     if (not directory.exists())
     {
-        usedNotExistedDir = directory.mkpath(".");
+        usedNotExistedDir = directory.mkpath(QChar('.'));
     }
 
     const QString mPath = QFileDialog::getOpenFileName(this, tr("Open file"), path, filter, nullptr
@@ -1707,7 +1707,7 @@ void MainWindow::LoadIndividual()
     if (usedNotExistedDir)
     {
         QDir directory(path);
-        directory.rmpath(".");
+        directory.rmpath(QChar('.'));
     }
 }
 
@@ -2764,7 +2764,7 @@ bool MainWindow::SaveAs()
     QDir directory(dir);
     if (not directory.exists())
     {
-        usedNotExistedDir = directory.mkpath(".");
+        usedNotExistedDir = directory.mkpath(QChar('.'));
     }
 
     QString fileName = QFileDialog::getSaveFileName(this, tr("Save as"),
@@ -2780,7 +2780,7 @@ bool MainWindow::SaveAs()
         if (usedNotExistedDir)
         {
             QDir directory(dir);
-            directory.rmpath(".");
+            directory.rmpath(QChar('.'));
         }
     };
 
@@ -4932,7 +4932,7 @@ QString MainWindow::CheckPathToMeasurements(const QString &patternPath, const QS
         QDir directory(dirPath);
         if (not directory.exists())
         {
-            usedNotExistedDir = directory.mkpath(".");
+            usedNotExistedDir = directory.mkpath(QChar('.'));
         }
 
         QString mPath;
@@ -4948,7 +4948,7 @@ QString MainWindow::CheckPathToMeasurements(const QString &patternPath, const QS
         if (usedNotExistedDir)
         {
             QDir directory(dirPath);
-            directory.rmpath(".");
+            directory.rmpath(QChar('.'));
         }
 
         return mPath;

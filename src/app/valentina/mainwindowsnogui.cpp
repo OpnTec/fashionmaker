@@ -79,7 +79,7 @@ bool CreateLayoutPath(const QString &path)
     dir.setPath(path);
     if (not dir.exists(path))
     {
-        usedNotExistedDir = dir.mkpath(".");
+        usedNotExistedDir = dir.mkpath(QChar('.'));
     }
     return usedNotExistedDir;
 }
@@ -90,7 +90,7 @@ void RemoveLayoutPath(const QString &path, bool usedNotExistedDir)
     if (usedNotExistedDir)
     {
         QDir dir(path);
-        dir.rmpath(".");
+        dir.rmpath(QChar('.'));
     }
 }
 }

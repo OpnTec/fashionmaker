@@ -471,7 +471,7 @@ bool VApplication::CreateLogDir() const
     QDir logDir(LogDirPath());
     if (logDir.exists() == false)
     {
-        return logDir.mkpath("."); // Create directory for log if need
+        return logDir.mkpath(QChar('.')); // Create directory for log if need
     }
     return true;
 }

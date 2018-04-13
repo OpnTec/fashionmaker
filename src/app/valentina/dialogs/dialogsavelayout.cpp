@@ -123,7 +123,7 @@ DialogSaveLayout::DialogSaveLayout(int count, Draw mode, const QString &fileName
         QDir directory(dirPath);
         if (not directory.exists())
         {
-            usedNotExistedDir = directory.mkpath(".");
+            usedNotExistedDir = directory.mkpath(QChar('.'));
         }
 
         const QString dir = QFileDialog::getExistingDirectory(this, tr("Select folder"), dirPath,
@@ -141,7 +141,7 @@ DialogSaveLayout::DialogSaveLayout(int count, Draw mode, const QString &fileName
         if (usedNotExistedDir)
         {
             QDir directory(dirPath);
-            directory.rmpath(".");
+            directory.rmpath(QChar('.'));
         }
     });
     connect(ui->lineEditPath, &QLineEdit::textChanged, this, &DialogSaveLayout::PathChanged);

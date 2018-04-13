@@ -483,7 +483,7 @@ qreal VDomDocument::GetParametrDouble(const QDomElement &domElement, const QStri
     try
     {
         QString parametr = GetParametrString(domElement, name, defValue);
-        param = parametr.replace(",", ".").toDouble(&ok);
+        param = parametr.replace(QChar(','), QChar('.')).toDouble(&ok);
         if (ok == false)
         {
             throw VExceptionConversionError(message, name);
@@ -764,7 +764,7 @@ bool VDomDocument::SaveDocument(const QString &fileName, QString &error)
 QString VDomDocument::Major() const
 {
     QString version = UniqueTagText(TagVersion, "0.0.0");
-    QStringList v = version.split(".");
+    QStringList v = version.split(QChar('.'));
     return v.at(0);
 }
 
@@ -773,7 +773,7 @@ QString VDomDocument::Major() const
 QString VDomDocument::Minor() const
 {
     QString version = UniqueTagText(TagVersion, "0.0.0");
-    QStringList v = version.split(".");
+    QStringList v = version.split(QChar('.'));
     return v.at(1);
 }
 
@@ -782,7 +782,7 @@ QString VDomDocument::Minor() const
 QString VDomDocument::Patch() const
 {
     QString version = UniqueTagText(TagVersion, "0.0.0");
-    QStringList v = version.split(".");
+    QStringList v = version.split(QChar('.'));
     return v.at(2);
 }
 

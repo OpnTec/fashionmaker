@@ -71,7 +71,7 @@ QString compilerString()
         iccVersion = QLatin1String(__INTEL_COMPILER);
     }
 #ifdef __INTEL_COMPILER_UPDATE
-    return QLatin1String("Intel(R) C++ ") + iccVersion + QLatin1String(".") + QLatin1String(__INTEL_COMPILER_UPDATE) +
+    return QLatin1String("Intel(R) C++ ") + iccVersion + QChar('.') + QLatin1String(__INTEL_COMPILER_UPDATE) +
            QLatin1String(" build ") + QLatin1String(__INTEL_COMPILER_BUILD_DATE) + QLatin1String(" [") +
            QLatin1String(iccCompact) + QLatin1String(" compatibility]");
 #else

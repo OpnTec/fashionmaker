@@ -104,7 +104,7 @@ QString VAbstractMainWindow::CSVFilePath()
 {
     const QString filters = tr("Comma-Separated Values") + QLatin1String(" (*.csv)");
     const QString suffix("csv");
-    const QString path = QDir::homePath()  + QLatin1String("/") + tr("values") + QLatin1String(".") + suffix;
+    const QString path = QDir::homePath() + QChar('/') + tr("values") + QChar('.') + suffix;
 
     QString fileName = QFileDialog::getSaveFileName(this, tr("Export to CSV"), path, filters, nullptr
 #ifdef Q_OS_LINUX
@@ -120,7 +120,7 @@ QString VAbstractMainWindow::CSVFilePath()
     QFileInfo f( fileName );
     if (f.suffix().isEmpty() && f.suffix() != suffix)
     {
-        fileName += QLatin1String(".") + suffix;
+        fileName += QChar('.') + suffix;
     }
 
     return fileName;

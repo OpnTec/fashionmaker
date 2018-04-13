@@ -96,8 +96,8 @@ void TST_ReadVal::TestInvalidData_data()
     PrepareString(QString("1,0,00.5"), locale);
     PrepareString(QString("1,,000.5"), locale);
     PrepareString(QString(",5"), locale);
-    PrepareString(QString(","), locale);
-    PrepareString(QString("."), locale);
+    PrepareString(QChar(','), locale);
+    PrepareString(QChar('.'), locale);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

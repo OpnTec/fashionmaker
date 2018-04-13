@@ -413,7 +413,7 @@ void TMainWindow::OpenIndividual()
     QDir directory(pathTo);
     if (not directory.exists())
     {
-        usedNotExistedDir = directory.mkpath(".");
+        usedNotExistedDir = directory.mkpath(QChar('.'));
     }
 
     Open(pathTo, filter);
@@ -421,7 +421,7 @@ void TMainWindow::OpenIndividual()
     if (usedNotExistedDir)
     {
         QDir directory(pathTo);
-        directory.rmpath(".");
+        directory.rmpath(QChar('.'));
     }
 }
 
@@ -465,7 +465,7 @@ void TMainWindow::CreateFromExisting()
     QDir directory(pathTo);
     if (not directory.exists())
     {
-        usedNotExistedDir = directory.mkpath(".");
+        usedNotExistedDir = directory.mkpath(QChar('.'));
     }
 
     const QString mPath = QFileDialog::getOpenFileName(this, tr("Select file"), pathTo, filter);
@@ -485,7 +485,7 @@ void TMainWindow::CreateFromExisting()
     if (usedNotExistedDir)
     {
         QDir directory(pathTo);
-        directory.rmpath(".");
+        directory.rmpath(QChar('.'));
     }
 }
 
@@ -828,13 +828,13 @@ bool TMainWindow::FileSaveAs()
     {
         filters = tr("Individual measurements") + QLatin1String(" (*.vit)");
         suffix = QLatin1String("vit");
-        fName += QLatin1String(".") + suffix;
+        fName += QChar('.') + suffix;
     }
     else
     {
         filters = tr("Multisize measurements") + QLatin1String(" (*.vst)");
         suffix = QLatin1String("vst");
-        fName += QLatin1String(".") + suffix;
+        fName += QChar('.') + suffix;
     }
 
     QString dir;
@@ -859,7 +859,7 @@ bool TMainWindow::FileSaveAs()
     QDir directory(dir);
     if (not directory.exists())
     {
-        usedNotExistedDir = directory.mkpath(".");
+        usedNotExistedDir = directory.mkpath(QChar('.'));
     }
 
     QString fileName = QFileDialog::getSaveFileName(this, tr("Save as"), dir + QLatin1String("/") + fName, filters);
@@ -869,7 +869,7 @@ bool TMainWindow::FileSaveAs()
         if (usedNotExistedDir)
         {
             QDir directory(dir);
-            directory.rmpath(".");
+            directory.rmpath(QChar('.'));
         }
     };
 
@@ -882,7 +882,7 @@ bool TMainWindow::FileSaveAs()
     QFileInfo f( fileName );
     if (f.suffix().isEmpty() && f.suffix() != suffix)
     {
-        fileName += QLatin1String(".") + suffix;
+        fileName += QChar('.') + suffix;
     }
 
     if (QFileInfo::exists(fileName))
@@ -986,7 +986,7 @@ void TMainWindow::ImportDataFromCSV()
     QFileInfo f( fileName );
     if (f.suffix().isEmpty() && f.suffix() != suffix)
     {
-        fileName += QLatin1String(".") + suffix;
+        fileName += QChar('.') + suffix;
     }
 
     DialogExportToCSV dialog(this);

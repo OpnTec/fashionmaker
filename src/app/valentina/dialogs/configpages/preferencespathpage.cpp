@@ -142,7 +142,7 @@ void PreferencesPathPage::EditPath()
     QDir directory(path);
     if (not directory.exists())
     {
-        usedNotExistedDir = directory.mkpath(".");
+        usedNotExistedDir = directory.mkpath(QChar('.'));
     }
 
     const QString dir = QFileDialog::getExistingDirectory(this, tr("Open Directory"), path,
@@ -157,7 +157,7 @@ void PreferencesPathPage::EditPath()
         if (usedNotExistedDir)
         {
             QDir directory(path);
-            directory.rmpath(".");
+            directory.rmpath(QChar('.'));
         }
         DefaultPath();
         return;
@@ -169,7 +169,7 @@ void PreferencesPathPage::EditPath()
     if (usedNotExistedDir)
     {
         QDir directory(path);
-        directory.rmpath(".");
+        directory.rmpath(QChar('.'));
     }
 }
 
