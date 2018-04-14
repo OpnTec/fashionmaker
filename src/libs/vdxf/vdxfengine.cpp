@@ -679,8 +679,7 @@ void VDxfEngine::ExportAAMADraw(dx_ifaceBlock *detailBlock, const VLayoutPiece &
 {
     if (not detail.IsHideMainPath() && not detail.IsSeamAllowanceBuiltIn())
     {
-        QVector<QPointF> poly = detail.GetContourPoints();
-        if (DRW_Entity *e = AAMAPolygon(poly, QChar('8'), true))
+        if (DRW_Entity *e = AAMAPolygon(detail.GetContourPoints(), QChar('8'), true))
         {
             detailBlock->ent.push_back(e);
         }
