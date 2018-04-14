@@ -1,4 +1,4 @@
-# Version 0.6.0
+# Version 0.6.0 (unreleased)
 - [#682] New feature. Export increments to Excel .csv.
 - [#681] Enhance feature: Dashed line options for curves, arcs, etc.
 - [#684] Proposal: Add option to only show outer edges on detail.
@@ -50,7 +50,7 @@
 - [#819] Use OpenGL as render for view.
 - [#826] New Feature. Add and remove items to groups from the context menu.
 
-# Version 0.5.1
+# Version 0.5.1 (unreleased)
 - [#683] Tool Seam allowance's dialog is off screen on small resolutions.
 - [#686] Seam allowance not placed correctly.
 - [#687] Wrong seam allowance.
