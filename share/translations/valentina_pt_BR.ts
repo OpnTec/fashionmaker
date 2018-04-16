@@ -1888,19 +1888,19 @@
     </message>
     <message>
         <source>Move on top</source>
-        <translation type="unfinished">Mover para o topo</translation>
+        <translation>Mover para o topo</translation>
     </message>
     <message>
         <source>Move up</source>
-        <translation type="unfinished">Subir</translation>
+        <translation>Subir</translation>
     </message>
     <message>
         <source>Move down</source>
-        <translation type="unfinished">Descer</translation>
+        <translation>Descer</translation>
     </message>
     <message>
         <source>Move on bottom</source>
-        <translation type="unfinished">Mover para a base</translation>
+        <translation>Mover para a base</translation>
     </message>
 </context>
 <context>
