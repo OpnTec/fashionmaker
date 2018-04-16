@@ -220,27 +220,32 @@ bool GraphicsViewZoom::eventFilter(QObject *object, QEvent *event)
     }
     else if (event->type() == QEvent::Wheel)
     {
-        QWheelEvent* wheel_event = static_cast<QWheelEvent*>(event);
-        SCASSERT(wheel_event != nullptr)
-        if (QGuiApplication::keyboardModifiers() == _modifiers)
+        if (QWheelEvent* wheel_event = static_cast<QWheelEvent*>(event))
         {
             if (wheel_event->orientation() == Qt::Vertical)
             {
-                const double angle = wheel_event->angleDelta().y();
-                const double factor = qPow(_zoom_factor_base, angle);
-                gentle_zoom(factor);
-                return true;
-            }
-        }
-        else
-        {
-            if (QGuiApplication::keyboardModifiers() == Qt::ShiftModifier)
-            {
-                return StartHorizontalScrollings(wheel_event);
+                if (QGuiApplication::keyboardModifiers() == _modifiers)
+                {
+                    gentle_zoom(qPow(_zoom_factor_base, wheel_event->angleDelta().y()));
+                    return true;
+                }
+                else if (QGuiApplication::keyboardModifiers() == Qt::ShiftModifier)
+                {
+                    return StartHorizontalScrollings(wheel_event);
+                }
+                else
+                {
+                    return StartVerticalScrollings(wheel_event);
+                }
             }
             else
             {
-                return StartVerticalScrollings(wheel_event);
+                if (QGuiApplication::keyboardModifiers() == _modifiers)
+                {
+                    return true; //ignore
+                }
+
+                return StartHorizontalScrollings(wheel_event);
             }
         }
     }
@@ -289,11 +294,11 @@ bool GraphicsViewZoom::StartVerticalScrollings(QWheelEvent *wheel_event)
 
     if (not numPixels.isNull())
     {
-        numSteps = numPixels.y();
+        numSteps = wheel_event->orientation() == Qt::Vertical ? numPixels.y() : numPixels.x();
     }
     else if (not numDegrees.isNull())
     {
-        numSteps = numDegrees.y() / 15;
+        numSteps = (wheel_event->orientation() == Qt::Vertical ? numDegrees.y() : numDegrees.x()) / 15;
     }
     else
     {
@@ -324,11 +329,11 @@ bool GraphicsViewZoom::StartHorizontalScrollings(QWheelEvent *wheel_event)
 
     if (not numPixels.isNull())
     {
-        numSteps = numPixels.y();
+        numSteps = wheel_event->orientation() == Qt::Vertical ? numPixels.y() : numPixels.x();
     }
     else if (not numDegrees.isNull())
     {
-        numSteps = numDegrees.y() / 15;
+        numSteps = (wheel_event->orientation() == Qt::Vertical ? numDegrees.y() : numDegrees.x()) / 15;
     }
     else
     {
