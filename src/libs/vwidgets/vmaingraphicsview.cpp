@@ -67,6 +67,29 @@ const int GraphicsViewZoom::updateInterval = 40;
 
 const qreal maxSceneSize = ((20.0 * 1000.0) / 25.4) * PrintDPI; // 20 meters in pixels
 
+namespace
+{
+int ScrollingSteps(QWheelEvent* wheel_event)
+{
+    SCASSERT(wheel_event != nullptr)
+
+    const QPoint numPixels = wheel_event->pixelDelta();
+    const QPoint numDegrees = wheel_event->angleDelta() / 8;
+    int numSteps = 0;
+
+    if (not numPixels.isNull())
+    {
+        numSteps = wheel_event->orientation() == Qt::Vertical ? numPixels.y() : numPixels.x();
+    }
+    else if (not numDegrees.isNull())
+    {
+        numSteps = (wheel_event->orientation() == Qt::Vertical ? numDegrees.y() : numDegrees.x()) / 15;
+    }
+
+    return numSteps;
+}
+}
+
 //---------------------------------------------------------------------------------------------------------------------
 GraphicsViewZoom::GraphicsViewZoom(QGraphicsView* view)
   : QObject(view),
@@ -292,21 +315,9 @@ void GraphicsViewZoom::FictiveSceneRect(QGraphicsScene *sc, QGraphicsView *view)
 //---------------------------------------------------------------------------------------------------------------------
 bool GraphicsViewZoom::StartVerticalScrollings(QWheelEvent *wheel_event)
 {
-    SCASSERT(wheel_event != nullptr)
+    const int numSteps = ScrollingSteps(wheel_event);
 
-    const QPoint numPixels = wheel_event->pixelDelta();
-    const QPoint numDegrees = wheel_event->angleDelta() / 8;
-    int numSteps;
-
-    if (not numPixels.isNull())
-    {
-        numSteps = wheel_event->orientation() == Qt::Vertical ? numPixels.y() : numPixels.x();
-    }
-    else if (not numDegrees.isNull())
-    {
-        numSteps = (wheel_event->orientation() == Qt::Vertical ? numDegrees.y() : numDegrees.x()) / 15;
-    }
-    else
+    if (numSteps == 0)
     {
         return true;//Just ignore
     }
@@ -327,21 +338,9 @@ bool GraphicsViewZoom::StartVerticalScrollings(QWheelEvent *wheel_event)
 //---------------------------------------------------------------------------------------------------------------------
 bool GraphicsViewZoom::StartHorizontalScrollings(QWheelEvent *wheel_event)
 {
-    SCASSERT(wheel_event != nullptr)
+    const int numSteps = ScrollingSteps(wheel_event);
 
-    const QPoint numPixels = wheel_event->pixelDelta();
-    const QPoint numDegrees = wheel_event->angleDelta() / 8;
-    int numSteps;
-
-    if (not numPixels.isNull())
-    {
-        numSteps = wheel_event->orientation() == Qt::Vertical ? numPixels.y() : numPixels.x();
-    }
-    else if (not numDegrees.isNull())
-    {
-        numSteps = (wheel_event->orientation() == Qt::Vertical ? numDegrees.y() : numDegrees.x()) / 15;
-    }
-    else
+    if (numSteps == 0)
     {
         return true;//Just ignore
     }
