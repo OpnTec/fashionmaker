@@ -47,6 +47,7 @@
 #include <QWidget>
 #include <QDesktopWidget>
 #include <QThread>
+#include <QGestureEvent>
 
 #if QT_VERSION >= QT_VERSION_CHECK(5, 4, 0)
 #   include <QOpenGLWidget>
@@ -80,6 +81,7 @@ GraphicsViewZoom::GraphicsViewZoom(QGraphicsView* view)
     _numScheduledHorizontalScrollings(0)
 {
   _view->viewport()->installEventFilter(this);
+  _view->viewport()->grabGesture(Qt::PinchGesture);
   _view->setMouseTracking(true);
 
   verticalScrollAnim->setUpdateInterval(updateInterval);
@@ -249,6 +251,10 @@ bool GraphicsViewZoom::eventFilter(QObject *object, QEvent *event)
             }
         }
     }
+    else if (event->type() == QEvent::Gesture)
+    {
+        return GestureEvent(static_cast<QGestureEvent*>(event));
+    }
 
     return QObject::eventFilter(object, event);
 }
@@ -351,6 +357,28 @@ bool GraphicsViewZoom::StartHorizontalScrollings(QWheelEvent *wheel_event)
         horizontalScrollAnim->start();
     }
     return true;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+bool GraphicsViewZoom::GestureEvent(QGestureEvent *event)
+{
+    if (QGesture *pinch = event->gesture(Qt::PinchGesture))
+    {
+        PinchTriggered(static_cast<QPinchGesture *>(pinch));
+        return true;
+    }
+    return false;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void GraphicsViewZoom::PinchTriggered(QPinchGesture *gesture)
+{
+    QPinchGesture::ChangeFlags changeFlags = gesture->changeFlags();
+    if (changeFlags & QPinchGesture::ScaleFactorChanged)
+    {
+        qreal currentStepScaleFactor = gesture->lastScaleFactor();
+        gentle_zoom(currentStepScaleFactor);
+    }
 }
 
 const unsigned long VMainGraphicsView::scrollDelay = 80;

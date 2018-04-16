@@ -66,6 +66,8 @@
  */
 
 class QTimeLine;
+class QGestureEvent;
+class QPinchGesture;
 
 class GraphicsViewZoom : public QObject
 {
@@ -104,6 +106,9 @@ private:
 
     bool StartVerticalScrollings(QWheelEvent* wheel_event);
     bool StartHorizontalScrollings(QWheelEvent* wheel_event);
+
+    bool GestureEvent(QGestureEvent *event);
+    void PinchTriggered(QPinchGesture* gesture);
 };
 
 /**
