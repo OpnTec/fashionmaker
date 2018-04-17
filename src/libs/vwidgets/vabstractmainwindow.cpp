@@ -168,3 +168,9 @@ void VAbstractMainWindow::UpdateDetailsList()
 {
     // do nothing
 }
+
+//---------------------------------------------------------------------------------------------------------------------
+void VAbstractMainWindow::ZoomFitBestCurrent()
+{
+    // do nothing
+}

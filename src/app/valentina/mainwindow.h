@@ -71,6 +71,7 @@ public slots:
     virtual void ShowToolTip(const QString &toolTip) Q_DECL_OVERRIDE;
     virtual void UpdateVisibilityGroups() Q_DECL_OVERRIDE;
     virtual void UpdateDetailsList() Q_DECL_OVERRIDE;
+    virtual void ZoomFitBestCurrent() Q_DECL_OVERRIDE;
 
 signals:
     void RefreshHistory();
@@ -190,7 +191,6 @@ private slots:
     void ClosedDialogPlaceLabel(int result);
     void ClosedDialogInsertNode(int result);
 
-    void ZoomFitBestCurrent();
     void LoadIndividual();
     void LoadMultisize();
     void UnloadMeasurements();

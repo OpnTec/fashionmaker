@@ -61,6 +61,7 @@
 #include "vsimplecurve.h"
 #include "../vmisc/vabstractapplication.h"
 #include "../vmisc/vsettings.h"
+#include "vabstractmainwindow.h"
 
 const int GraphicsViewZoom::duration = 300;
 const int GraphicsViewZoom::updateInterval = 40;
@@ -605,6 +606,20 @@ void VMainGraphicsView::mouseReleaseEvent(QMouseEvent *event)
     {
         emit MouseRelease();
     }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VMainGraphicsView::mouseDoubleClickEvent(QMouseEvent *event)
+{
+    if (event->button() == Qt::LeftButton)
+    {
+        if (VAbstractMainWindow *window = qobject_cast<VAbstractMainWindow *>(qApp->getMainWindow()))
+        {
+            window->ZoomFitBestCurrent();
+        }
+    }
+
+    QGraphicsView::mouseDoubleClickEvent(event);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

@@ -49,6 +49,7 @@
 - [#818] Improve Piece path validation. Check uniqueness.
 - [#819] Use OpenGL as render for view.
 - [#826] New Feature. Add and remove items to groups from the context menu.
+- Mouse double click zoom fit best current pattern piece.
 
 # Version 0.5.1 (unreleased)
 - [#683] Tool Seam allowance's dialog is off screen on small resolutions.

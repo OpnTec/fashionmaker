@@ -48,6 +48,7 @@ public slots:
     virtual void ShowToolTip(const QString &toolTip)=0;
     virtual void UpdateVisibilityGroups();
     virtual void UpdateDetailsList();
+    virtual void ZoomFitBestCurrent();
 
 protected slots:
     void WindowsLocale();
