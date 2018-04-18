@@ -90,7 +90,11 @@ int main(int argc, char *argv[])
         msec = 15; // set delay for correct the first fitbest zoom
     }
 
+#if QT_VERSION >= QT_VERSION_CHECK(5, 4, 0)
+    QTimer::singleShot(msec, &w, &MainWindow::ProcessCMD);
+#else
     QTimer::singleShot(msec, &w, SLOT(ProcessCMD()));
+#endif
 
     return app.exec();
 }

@@ -62,7 +62,7 @@ public:
 
     explicit QmuParserTester(QObject *parent = nullptr);
 
-private slots:
+public slots:
     void Run();
 
 private:

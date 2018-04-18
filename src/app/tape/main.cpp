@@ -54,7 +54,11 @@ int main(int argc, char *argv[])
     MApplication app(argc, argv);
     app.InitOptions();
 
+#if QT_VERSION >= QT_VERSION_CHECK(5, 4, 0)
+    QTimer::singleShot(0, &app, &MApplication::ProcessCMD);
+#else
     QTimer::singleShot(0, &app, SLOT(ProcessCMD()));
+#endif
 
     return app.exec();
 }
