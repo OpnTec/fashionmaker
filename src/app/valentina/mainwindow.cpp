@@ -1295,22 +1295,25 @@ void MainWindow::ClosedDialogInsertNode(int result)
 //---------------------------------------------------------------------------------------------------------------------
 void MainWindow::ZoomFitBestCurrent()
 {
-    const QRectF rect = doc->ActiveDrawBoundingRect();
-    if (rect.isEmpty())
+    if(drawMode)
     {
-        return;
+        const QRectF rect = doc->ActiveDrawBoundingRect();
+        if (rect.isEmpty())
+        {
+            return;
+        }
+
+        ui->view->fitInView(rect, Qt::KeepAspectRatio);
+        QTransform transform = ui->view->transform();
+
+        qreal factor = transform.m11();
+        factor = qMax(factor, VMainGraphicsView::MinScale());
+        factor = qMin(factor, VMainGraphicsView::MaxScale());
+
+        transform.setMatrix(factor, transform.m12(), transform.m13(), transform.m21(), factor, transform.m23(),
+                            transform.m31(), transform.m32(), transform.m33());
+        ui->view->setTransform(transform);
     }
-
-    ui->view->fitInView(rect, Qt::KeepAspectRatio);
-    QTransform transform = ui->view->transform();
-
-    qreal factor = transform.m11();
-    factor = qMax(factor, VMainGraphicsView::MinScale());
-    factor = qMin(factor, VMainGraphicsView::MaxScale());
-
-    transform.setMatrix(factor, transform.m12(), transform.m13(), transform.m21(), factor, transform.m23(),
-                        transform.m31(), transform.m32(), transform.m33());
-    ui->view->setTransform(transform);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
