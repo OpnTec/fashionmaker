@@ -32,4 +32,5 @@ HEADERS += \
     $$PWD/qmutranslation.h \
     $$PWD/qmudef.h \
     $$PWD/qmuformulabase.h \
-    $$PWD/qmutokenparser.h
+    $$PWD/qmutokenparser.h \
+    $$PWD/qmuparsercallback_p.h
