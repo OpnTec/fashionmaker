@@ -372,7 +372,7 @@
         <rect>
          <x>0</x>
          <y>0</y>
-         <width>140</width>
+         <width>126</width>
          <height>108</height>
         </rect>
        </property>
@@ -481,7 +481,7 @@
         <rect>
          <x>0</x>
          <y>0</y>
-         <width>140</width>
+         <width>126</width>
          <height>243</height>
         </rect>
        </property>
@@ -743,7 +743,7 @@
         <rect>
          <x>0</x>
          <y>0</y>
-         <width>140</width>
+         <width>126</width>
          <height>282</height>
         </rect>
        </property>
@@ -1034,7 +1034,7 @@
         <rect>
          <x>0</x>
          <y>0</y>
-         <width>140</width>
+         <width>126</width>
          <height>102</height>
         </rect>
        </property>
@@ -1321,7 +1321,7 @@
         <rect>
          <x>0</x>
          <y>0</y>
-         <width>140</width>
+         <width>126</width>
          <height>237</height>
         </rect>
        </property>
@@ -1724,7 +1724,6 @@
     <property name="title">
      <string>&amp;Help</string>
     </property>
-    <addaction name="actionWiki"/>
     <addaction name="actionForum"/>
     <addaction name="actionReportBug"/>
     <addaction name="actionAbout_Qt"/>
@@ -2441,24 +2440,6 @@
    </property>
    <property name="toolTip">
     <string>Close pattern</string>
-   </property>
-   <property name="shortcut">
-    <string notr="true"/>
-   </property>
-   <property name="menuRole">
-    <enum>QAction::NoRole</enum>
-   </property>
-  </action>
-  <action name="actionWiki">
-   <property name="icon">
-    <iconset theme="help-contents">
-     <normaloff>.</normaloff>.</iconset>
-   </property>
-   <property name="text">
-    <string>Wiki</string>
-   </property>
-   <property name="toolTip">
-    <string>Show online help</string>
    </property>
    <property name="shortcut">
     <string notr="true"/>
