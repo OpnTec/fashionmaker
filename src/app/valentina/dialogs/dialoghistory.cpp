@@ -422,7 +422,7 @@ QT_WARNING_POP
 void DialogHistory::InitialTable()
 {
     ui->tableWidget->setSortingEnabled(false);
-    ui->tableWidget->setHorizontalHeaderItem(0, new QTableWidgetItem(" "));
+    ui->tableWidget->setHorizontalHeaderItem(0, new QTableWidgetItem(QChar(QChar::Space)));
     ui->tableWidget->setHorizontalHeaderItem(1, new QTableWidgetItem(tr("Tool")));
 }
 

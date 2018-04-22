@@ -898,7 +898,7 @@ qreal DialogTool::Eval(const QString &text, bool &flag, QLabel *label, const QSt
                 }
                 else
                 {
-                    label->setText(qApp->LocaleToString(result) + " " +postfix);
+                    label->setText(qApp->LocaleToString(result) + QChar(QChar::Space) +postfix);
                     flag = true;
                     ChangeColor(labelEditFormula, okColor);
                     label->setToolTip(tr("Value"));

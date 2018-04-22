@@ -407,7 +407,7 @@ void DialogFinalMeasurements::SaveFormula()
         QTableWidgetItem *result = ui->tableWidget->item(row, 1);
         //Show unit in dialog lable (cm, mm or inch)
         const QString postfix = UnitsToStr(qApp->patternUnit());
-        ui->labelCalculatedValue->setText(result->text() + " " +postfix);
+        ui->labelCalculatedValue->setText(result->text() + QChar(QChar::Space) +postfix);
         return;
     }
 
@@ -619,7 +619,7 @@ bool DialogFinalMeasurements::EvalUserFormula(const QString &formula, bool fromU
                 return false;
             }
 
-            ui->labelCalculatedValue->setText(qApp->LocaleToString(result) + " " + postfix);
+            ui->labelCalculatedValue->setText(qApp->LocaleToString(result) + QChar(QChar::Space) + postfix);
             ui->labelCalculatedValue->setToolTip(tr("Value"));
             return true;
         }

@@ -1558,7 +1558,7 @@ void TMainWindow::ShowNewMData(bool fresh)
             const QString postfix = UnitsToStr(pUnit);//Show unit in dialog lable (cm, mm or inch)
             const qreal value = UnitConvertor(*data->DataVariables()->value(meash->GetName())->GetValue(), mUnit,
                                               pUnit);
-            ui->labelCalculatedValue->setText(qApp->LocaleToString(value) + " " +postfix);
+            ui->labelCalculatedValue->setText(qApp->LocaleToString(value) + QChar(QChar::Space) +postfix);
 
             if (fresh)
             {
@@ -1728,7 +1728,7 @@ void TMainWindow::SaveMValue()
     {
         QTableWidgetItem *result = ui->tableWidget->item(row, ColumnCalcValue);
         const QString postfix = UnitsToStr(mUnit);//Show unit in dialog lable (cm, mm or inch)
-        ui->labelCalculatedValue->setText(result->text() + " " +postfix);
+        ui->labelCalculatedValue->setText(result->text() + QChar(QChar::Space) +postfix);
         return;
     }
 
@@ -2055,9 +2055,9 @@ void TMainWindow::InitWindow()
     if (mType == MeasurementsType::Multisize)
     {
         ui->labelMType->setText(tr("Multisize measurements"));
-        ui->labelBaseSizeValue->setText(QString().setNum(m->BaseSize()) + " " +
+        ui->labelBaseSizeValue->setText(QString().setNum(m->BaseSize()) + QChar(QChar::Space) +
                                         UnitsToStr(m->MUnit(), true));
-        ui->labelBaseHeightValue->setText(QString().setNum(m->BaseHeight()) + " " +
+        ui->labelBaseHeightValue->setText(QString().setNum(m->BaseHeight()) + QChar(QChar::Space) +
                                           UnitsToStr(m->MUnit(), true));
 
         // Because Qt Designer doesn't know about our deleting we will create empty objects for correct
@@ -2718,7 +2718,7 @@ bool TMainWindow::EvalFormula(const QString &formula, bool fromUser, VContainer 
 
             result = UnitConvertor(result, mUnit, pUnit);
 
-            label->setText(qApp->LocaleToString(result) + " " +postfix);
+            label->setText(qApp->LocaleToString(result) + QChar(QChar::Space) +postfix);
             label->setToolTip(tr("Value"));
             return true;
         }

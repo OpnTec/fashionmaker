@@ -371,7 +371,7 @@ bool DialogIncrements::EvalIncrementFormula(const QString &formula, bool fromUse
                 return false;
             }
 
-            label->setText(qApp->LocaleToString(result) + " " + postfix);
+            label->setText(qApp->LocaleToString(result) + QChar(QChar::Space) + postfix);
             label->setToolTip(tr("Value"));
             return true;
         }
@@ -1153,7 +1153,7 @@ void DialogIncrements::SaveIncrFormula()
         QTableWidgetItem *result = table->item(row, 1);
         //Show unit in dialog lable (cm, mm or inch)
         const QString postfix = UnitsToStr(qApp->patternUnit());
-        labelCalculatedValue->setText(result->text() + " " +postfix);
+        labelCalculatedValue->setText(result->text() + QChar(QChar::Space) +postfix);
         return;
     }
 

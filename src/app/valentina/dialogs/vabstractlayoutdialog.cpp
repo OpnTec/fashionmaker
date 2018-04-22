@@ -66,15 +66,15 @@ void VAbstractLayoutDialog::InitTemplates(QComboBox *comboBoxTemplates)
     {
         if (cntr <= static_cast<int>(PaperSizeTemplate::Legal))
         {
-            comboBoxTemplates->addItem(icoPaper, v+" "+pdi, QVariant(cntr++));
+            comboBoxTemplates->addItem(icoPaper, v+QChar(QChar::Space)+pdi, QVariant(cntr++));
         }
         else if (cntr <= static_cast<int>(PaperSizeTemplate::Roll72in))
         {
-            comboBoxTemplates->addItem(icoRoll, v+" "+pdi, QVariant(cntr++));
+            comboBoxTemplates->addItem(icoRoll, v+QChar(QChar::Space)+pdi, QVariant(cntr++));
         }
         else
         {
-            comboBoxTemplates->addItem(v+" "+pdi, QVariant(cntr++));
+            comboBoxTemplates->addItem(v+QChar(QChar::Space)+pdi, QVariant(cntr++));
         }
     }
     comboBoxTemplates->setCurrentIndex(-1);

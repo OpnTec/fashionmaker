@@ -1303,7 +1303,8 @@ void MainWindowsNoGUI::LayoutPrint()
 void MainWindowsNoGUI::SetPrinterSettings(QPrinter *printer, const PrintType &printType)
 {
     SCASSERT(printer != nullptr)
-    printer->setCreator(QGuiApplication::applicationDisplayName()+" "+QCoreApplication::applicationVersion());
+    printer->setCreator(QGuiApplication::applicationDisplayName()+QChar(QChar::Space)+
+                        QCoreApplication::applicationVersion());
 
     printer->setOrientation(QPrinter::Portrait);
 
