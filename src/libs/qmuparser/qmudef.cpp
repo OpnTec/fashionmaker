@@ -328,3 +328,22 @@ QString NameRegExp()
 
     return regex;
 }
+
+//---------------------------------------------------------------------------------------------------------------------
+int FindFirstNotOf(const QString &string, const QString &chars, int pos)
+{
+    int chPos = pos;
+    QString::const_iterator it = string.constBegin() + pos;
+    QString::const_iterator end = string.constEnd();
+    while (it != end)
+    {
+        if (not chars.contains(*it))
+        {
+            return chPos;
+        }
+        ++it;
+        ++chPos;
+    }
+
+    return -1;
+}

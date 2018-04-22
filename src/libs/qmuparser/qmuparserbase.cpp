@@ -381,11 +381,8 @@ void QmuParserBase::AddCallback(const QString &a_strName, const QmuParserCallbac
 void QmuParserBase::CheckOprt(const QString &a_sName, const QmuParserCallback &a_Callback,
                               const QString &a_szCharSet) const
 {
-    const std::wstring a_sNameStd = a_sName.toStdWString();
-    const std::wstring a_szCharSetStd = a_szCharSet.toStdWString();
-
-    if ( a_sNameStd.length() == false || (a_sNameStd.find_first_not_of(a_szCharSetStd)!=string_type::npos) ||
-         (a_sNameStd.at(0)>='0' && a_sNameStd.at(0)<='9'))
+    if ( a_sName.isEmpty() || (FindFirstNotOf(a_sName, a_szCharSet) != -1) ||
+         (a_sName.at(0)>='0' && a_sName.at(0)<='9'))
     {
         switch (a_Callback.GetCode())
         {
@@ -410,11 +407,8 @@ void QmuParserBase::CheckOprt(const QString &a_sName, const QmuParserCallback &a
  */
 void QmuParserBase::CheckName(const QString &a_sName, const QString &a_szCharSet) const
 {
-    std::wstring a_sNameStd = a_sName.toStdWString();
-    std::wstring a_szCharSetStd = a_szCharSet.toStdWString();
-
-    if ( a_sNameStd.length() == false || (a_sNameStd.find_first_not_of(a_szCharSetStd)!=string_type::npos) ||
-         (a_sNameStd[0]>='0' && a_sNameStd[0]<='9'))
+    if ( a_sName.isEmpty() || (FindFirstNotOf(a_sName, a_szCharSet) != -1) ||
+         (a_sName.at(0)>='0' && a_sName.at(0)<='9'))
     {
         Error(ecINVALID_NAME);
     }

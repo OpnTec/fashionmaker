@@ -91,6 +91,7 @@ QT_WARNING_DISABLE_GCC("-Wattributes")
 
 class QLocale;
 class QChar;
+class QString;
 
 #define INIT_LOCALE_VARIABLES(locale)                          \
 const QChar positiveSign   = (locale).positiveSign();          \
@@ -133,5 +134,7 @@ static inline bool QmuFuzzyComparePossibleNulls(double p1, double p2)
 
 QMUPARSERSHARED_EXPORT int ReadVal(const QString &formula, qreal &val, const QLocale &locale, const QChar &decimal,
                                    const QChar &thousand);
+
+int FindFirstNotOf(const QString &string, const QString &chars, int pos = 0);
 
 #endif // QMUDEF_H
