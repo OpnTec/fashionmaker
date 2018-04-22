@@ -19,7 +19,7 @@
     <name>AddItemToGroup</name>
     <message>
         <source>Add item to group</source>
-        <translation type="unfinished"></translation>
+        <translation>Добавить объект в группу</translation>
     </message>
 </context>
 <context>
@@ -165,7 +165,7 @@
     </message>
     <message>
         <source>Paths</source>
-        <translation type="vanished">Контуры</translation>
+        <translation type="vanished">Пути</translation>
     </message>
 </context>
 <context>
@@ -1704,7 +1704,7 @@
     </message>
     <message>
         <source>Insert placeholders</source>
-        <translation type="unfinished"></translation>
+        <translation>Вставить заполнитель</translation>
     </message>
     <message>
         <source>Preview</source>
@@ -1864,15 +1864,15 @@
     </message>
     <message>
         <source>Word: Cut</source>
-        <translation type="unfinished"></translation>
+        <translation>Слово: вырезать</translation>
     </message>
     <message>
         <source>Cut</source>
-        <translation type="unfinished">Вырезать</translation>
+        <translation>Вырезать</translation>
     </message>
     <message>
         <source>Word: on fold</source>
-        <translation type="unfinished"></translation>
+        <translation>Слово: на сгибе</translation>
     </message>
     <message>
         <source>on fold</source>
@@ -1884,23 +1884,23 @@
     </message>
     <message>
         <source>Insert…</source>
-        <translation type="unfinished"></translation>
+        <translation>Вставить…</translation>
     </message>
     <message>
         <source>Move on top</source>
-        <translation type="unfinished"></translation>
+        <translation>Переместить на верх</translation>
     </message>
     <message>
         <source>Move up</source>
-        <translation type="unfinished"></translation>
+        <translation>Переместить вверх</translation>
     </message>
     <message>
         <source>Move down</source>
-        <translation type="unfinished"></translation>
+        <translation>Переместить вниз</translation>
     </message>
     <message>
         <source>Move on bottom</source>
-        <translation type="unfinished"></translation>
+        <translation>Переместить на низ</translation>
     </message>
 </context>
 <context>
@@ -2288,11 +2288,16 @@
     </message>
     <message>
         <source>Global</source>
-        <translation type="unfinished"></translation>
+        <translation type="vanished">Глобальные</translation>
     </message>
     <message>
         <source>Preview</source>
         <translation>Предварительный просмотр</translation>
+    </message>
+    <message>
+        <source>Global</source>
+        <comment>Options</comment>
+        <translation type="unfinished">Глобальные</translation>
     </message>
 </context>
 <context>
@@ -3228,7 +3233,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Export text as paths</source>
-        <translation type="unfinished"></translation>
+        <translation>Экспортировать текст как контуры</translation>
     </message>
     <message>
         <source>Margins</source>
@@ -3868,7 +3873,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Placeholder</source>
-        <translation type="unfinished"></translation>
+        <translation>Заполнитель</translation>
     </message>
     <message>
         <source>Value</source>
@@ -3983,7 +3988,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Path:</source>
-        <translation>Контур:</translation>
+        <translation>Путь:</translation>
     </message>
     <message>
         <source>Show in Explorer</source>
@@ -4493,11 +4498,11 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Control</source>
-        <translation type="unfinished"></translation>
+        <translation>Контроль</translation>
     </message>
     <message>
         <source>Visible</source>
-        <translation type="unfinished"></translation>
+        <translation>Видимый</translation>
     </message>
     <message>
         <source>Create a formula that regulates visibility. Values different from &quot;0&quot; make a path visible.</source>
@@ -4525,23 +4530,23 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Check uniqueness</source>
-        <translation type="unfinished"></translation>
+        <translation>Проверить уникальность</translation>
     </message>
     <message>
         <source>Move on top</source>
-        <translation type="unfinished"></translation>
+        <translation>Переместить на верх</translation>
     </message>
     <message>
         <source>Move up</source>
-        <translation type="unfinished"></translation>
+        <translation>Переместить вверх</translation>
     </message>
     <message>
         <source>Move down</source>
-        <translation type="unfinished"></translation>
+        <translation>Переместить вниз</translation>
     </message>
     <message>
         <source>Move on bottom</source>
-        <translation type="unfinished"></translation>
+        <translation>Переместить на низ</translation>
     </message>
 </context>
 <context>
@@ -4591,7 +4596,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Height:</source>
-        <translation type="unfinished">Высота:</translation>
+        <translation>Высота:</translation>
     </message>
     <message>
         <source>Angle:</source>
@@ -5163,14 +5168,14 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Paths</source>
-        <translation>Контуры</translation>
+        <translation>Пути</translation>
     </message>
     <message numerus="yes">
         <source>Followed %n option(s) require restart to take effect: %1.</source>
-        <translation type="unfinished">
-            <numerusform></numerusform>
-            <numerusform></numerusform>
-            <numerusform></numerusform>
+        <translation>
+            <numerusform>Следующий %n параметр требует перезапуск, чтобы вступить в силу: %1.</numerusform>
+            <numerusform>Следующие %n параметры требуют перезапуск, чтобы вступить в силу: %1.</numerusform>
+            <numerusform>Следующие %n параметров требуют перезапуск, чтобы вступить в силу: %1.</numerusform>
         </translation>
     </message>
 </context>
@@ -5237,7 +5242,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Path:</source>
-        <translation>Контур:</translation>
+        <translation>Путь:</translation>
     </message>
     <message>
         <source>File format:</source>
@@ -5281,11 +5286,11 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Binary form</source>
-        <translation type="unfinished"></translation>
+        <translation>Банарная форма</translation>
     </message>
     <message>
         <source>Text as paths</source>
-        <translation type="unfinished"></translation>
+        <translation>Текст как контуры</translation>
     </message>
     <message>
         <source>Margins</source>
@@ -5293,19 +5298,19 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Right:</source>
-        <translation type="unfinished">Правое:</translation>
+        <translation>Правое:</translation>
     </message>
     <message>
         <source>Left:</source>
-        <translation type="unfinished">Левое:</translation>
+        <translation>Левое:</translation>
     </message>
     <message>
         <source>Top:</source>
-        <translation type="unfinished">Верхнее:</translation>
+        <translation>Верхнее:</translation>
     </message>
     <message>
         <source>Bottom:</source>
-        <translation type="unfinished">Нижнее:</translation>
+        <translation>Нижнее:</translation>
     </message>
     <message>
         <source>Paper format</source>
@@ -5313,7 +5318,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Browse…</source>
-        <translation type="unfinished"></translation>
+        <translation>Обзор…</translation>
     </message>
     <message>
         <source>cm</source>
@@ -5400,11 +5405,11 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>(flat) files</source>
-        <translation type="unfinished"></translation>
+        <translation>(плоские) файлы</translation>
     </message>
     <message>
         <source>Image files</source>
-        <translation type="unfinished"></translation>
+        <translation>Файлы изображений</translation>
     </message>
 </context>
 <context>
@@ -5615,7 +5620,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Check uniqueness</source>
-        <translation type="unfinished"></translation>
+        <translation>Проверить уникальность</translation>
     </message>
 </context>
 <context>
@@ -6424,7 +6429,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>%1 update is available!</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 обновление доступно!</translation>
     </message>
 </context>
 <context>
@@ -6844,7 +6849,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Show online help</source>
-        <translation>Показать справку</translation>
+        <translation type="vanished">Показать справку</translation>
     </message>
     <message>
         <source>Pattern piece %1</source>
@@ -7743,7 +7748,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Wiki</source>
-        <translation>Вики</translation>
+        <translation type="vanished">Вики</translation>
     </message>
     <message>
         <source>Forum</source>
@@ -8115,7 +8120,7 @@ Do you want to save your changes?</source>
     <name>OperationShowLabel</name>
     <message>
         <source>toggle label</source>
-        <translation type="unfinished"></translation>
+        <translation>переключить метку</translation>
     </message>
 </context>
 <context>
@@ -8320,11 +8325,11 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Free curve mode</source>
-        <translation type="unfinished"></translation>
+        <translation>Режим свободной кривой</translation>
     </message>
     <message>
         <source>default unit</source>
-        <translation type="unfinished"></translation>
+        <translation>Единица измерения по умолчанию</translation>
     </message>
 </context>
 <context>
@@ -8486,11 +8491,11 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Bold line width</source>
-        <translation type="unfinished"></translation>
+        <translation>Ширина жирной линии</translation>
     </message>
     <message>
         <source>Line width:</source>
-        <translation type="unfinished"></translation>
+        <translation>Ширина линии:</translation>
     </message>
     <message>
         <source>Millimiters</source>
@@ -8503,19 +8508,20 @@ Do you want to save your changes?</source>
     <message>
         <source>Use OpenGL to render a scene.
 This option will take an affect after restart.</source>
-        <translation type="unfinished"></translation>
+        <translation>Использовать OpenGL для рендеринга сцены.
+Этот параметр будет действовать после перезапуска.</translation>
     </message>
     <message>
         <source>Use OpenGL render</source>
-        <translation type="unfinished"></translation>
+        <translation>Использовать OpenGL рендер</translation>
     </message>
     <message>
         <source>antialiasing</source>
-        <translation type="unfinished"></translation>
+        <translation>сглаживание</translation>
     </message>
     <message>
         <source>scene render</source>
-        <translation type="unfinished"></translation>
+        <translation>рендер сцены</translation>
     </message>
 </context>
 <context>
@@ -8669,7 +8675,7 @@ This option will take an affect after restart.</source>
     </message>
     <message>
         <source>Cut</source>
-        <translation type="unfinished">Вырезать</translation>
+        <translation>Вырезать</translation>
     </message>
     <message>
         <source>on fold</source>
@@ -8681,7 +8687,7 @@ This option will take an affect after restart.</source>
     </message>
     <message>
         <source>Visibility trigger contains error and will be ignored</source>
-        <translation type="unfinished"></translation>
+        <translation>Триггер видимости содержит ошибку и будет проигнорирован</translation>
     </message>
 </context>
 <context>
@@ -8899,7 +8905,7 @@ This option will take an affect after restart.</source>
     <name>RemoveItemFromGroup</name>
     <message>
         <source>Remove item from group</source>
-        <translation type="unfinished"></translation>
+        <translation>Удалить объект из группы</translation>
     </message>
 </context>
 <context>
@@ -8955,18 +8961,18 @@ This option will take an affect after restart.</source>
     <name>ShowDoubleLabel</name>
     <message>
         <source>toggle the first dart label</source>
-        <translation type="unfinished"></translation>
+        <translation>переключить первую метку вытачки</translation>
     </message>
     <message>
         <source>togggle the second dart label</source>
-        <translation type="unfinished"></translation>
+        <translation>переключить вторую метку вытачки</translation>
     </message>
 </context>
 <context>
     <name>ShowLabel</name>
     <message>
         <source>toggle label</source>
-        <translation type="unfinished"></translation>
+        <translation>переключить метку</translation>
     </message>
 </context>
 <context>
@@ -9678,11 +9684,11 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Imported file must not contain the same name twice.</source>
-        <translation type="unfinished"></translation>
+        <translation>Импортируемый файл не должен содержать то же самое имя дважды.</translation>
     </message>
     <message>
         <source>Error in row %1. Measurement name is empty.</source>
-        <translation type="unfinished"></translation>
+        <translation>Ошибка в строке %1. Имя мерки пустое.</translation>
     </message>
 </context>
 <context>
@@ -10082,19 +10088,19 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Move on top</source>
-        <translation type="unfinished"></translation>
+        <translation>Переместить на верх</translation>
     </message>
     <message>
         <source>Move up</source>
-        <translation type="unfinished"></translation>
+        <translation>Переместить вверх</translation>
     </message>
     <message>
         <source>Move down</source>
-        <translation type="unfinished"></translation>
+        <translation>Переместить вниз</translation>
     </message>
     <message>
         <source>Move on bottom</source>
-        <translation type="unfinished"></translation>
+        <translation>Переместить на низ</translation>
     </message>
 </context>
 <context>
@@ -10128,7 +10134,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Paths</source>
-        <translation type="vanished">Контуры</translation>
+        <translation type="vanished">Пути</translation>
     </message>
 </context>
 <context>
@@ -10426,11 +10432,11 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Invalid version. Minimum supported format version is %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Недействительная версия. Минимально поддерживаемая версия формата %1</translation>
     </message>
     <message>
         <source>Invalid version. Maximum supported format version is %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Недействительная версия. Максимально поддерживаемая версия формата %1</translation>
     </message>
 </context>
 <context>
@@ -10444,31 +10450,31 @@ Do you want to save your changes?</source>
     <name>VAbstractLayoutDialog</name>
     <message>
         <source>Letter</source>
-        <translation type="unfinished">Буква/символ</translation>
+        <translation>Letter</translation>
     </message>
     <message>
         <source>Legal</source>
-        <translation type="unfinished">Legal</translation>
+        <translation>Legal</translation>
     </message>
     <message>
         <source>Roll 24in</source>
-        <translation type="unfinished">Рулон 24 дюйма</translation>
+        <translation>Рулон 24 дюйма</translation>
     </message>
     <message>
         <source>Roll 30in</source>
-        <translation type="unfinished">Рулон 30 дюймов</translation>
+        <translation>Рулон 30 дюймов</translation>
     </message>
     <message>
         <source>Roll 36in</source>
-        <translation type="unfinished">Рулон 36 дюймов</translation>
+        <translation>Рулон 36 дюймов</translation>
     </message>
     <message>
         <source>Roll 42in</source>
-        <translation type="unfinished">Рулон 42 дюйма</translation>
+        <translation>Рулон 42 дюйма</translation>
     </message>
     <message>
         <source>Roll 44in</source>
-        <translation type="unfinished">Рулон 44 дюйма</translation>
+        <translation>Рулон 44 дюйма</translation>
     </message>
     <message>
         <source>Custom</source>
@@ -10972,23 +10978,15 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Export dxf in binary form.</source>
-        <translation type="unfinished"></translation>
+        <translation>Экспорт dxf в бинарной форме.</translation>
     </message>
     <message>
         <source>Export text as paths.</source>
-        <translation type="unfinished"></translation>
+        <translation>Экспортировать текст как контуры.</translation>
     </message>
     <message>
         <source>Export only details. Export details as they positioned in the details mode. Any layout related options will be ignored.</source>
         <translation>Экспортировать только детали. Экспортировать детали так, как они расположены в режиме &quot;Детали&quot;. Любая опция режима &quot;Раскладка&quot; будет проигнорирована.</translation>
-    </message>
-    <message>
-        <source>Set size value a pattern file, that was opened with multisize measurements (export mode). Valid values: %1cm.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Set height value a pattern file, that was opened with multisize measurements (export mode). Valid values: %1cm.</source>
-        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Export only details that match a piece name regex.</source>
@@ -11004,19 +11002,19 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Specify codec that will be used to save data. List of supported codecs provided by Qt. Default value depend from system. On Windows, the codec will be based on a system locale. On Unix systems, the codec will might fall back to using the iconv library if no builtin codec for the locale can be found. Valid values for this installation:</source>
-        <translation type="unfinished"></translation>
+        <translation>Укажите кодек, который будет использоваться для сохранения данных. Список поддерживаемых кодеков предоставляется Qt. Значение по умолчанию зависит от системы. В Windows кодек будет основан на локали системы. В системах Unix кодек может откатится к использованию библиотеки iconv, если встроенный кодек для локали не найден. Допустимые значения для этой установки:</translation>
     </message>
     <message>
         <source>Codec name</source>
-        <translation type="unfinished"></translation>
+        <translation>Имя кодека</translation>
     </message>
     <message>
         <source>Specify csv separator character. Default value is &apos;%1&apos;. Valid characters:</source>
-        <translation type="unfinished"></translation>
+        <translation>Укажите символ разделителя CSV. Значение по умолчанию - &quot;%1&quot;. Допустимые символы:</translation>
     </message>
     <message>
         <source>Separator character</source>
-        <translation type="unfinished"></translation>
+        <translation>Символ разделитель</translation>
     </message>
     <message>
         <source>Calling this command enable exporting final measurements. Specify path to csv file with final measurements. The path must contain path to directory and name of file. It can be absolute or relatetive. In case of relative path will be used current working directory to calc a destination path.</source>
@@ -11080,22 +11078,30 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Tiled left margin must be used together with page units.</source>
-        <translation type="unfinished"></translation>
+        <translation>Левое поле принтера для печати плиткой должно быть использовано вместе с единицами измерения страницы.</translation>
     </message>
     <message>
         <source>Tiled right margin must be used together with page units.</source>
-        <translation type="unfinished"></translation>
+        <translation>Правое поле принтера для печати плиткой должно быть использовано вместе с единицами измерения страницы.</translation>
     </message>
     <message>
         <source>Tiled top margin must be used together with page units.</source>
-        <translation type="unfinished"></translation>
+        <translation>Верхнее поле принтера для печати плиткой должно быть использовано вместе с единицами измерения страницы.</translation>
     </message>
     <message>
         <source>Tiled bottom margin must be used together with page units.</source>
-        <translation type="unfinished"></translation>
+        <translation>Нижнее поле принтера для печати плиткой должно быть использовано вместе с единицами измерения страницы.</translation>
     </message>
     <message>
         <source>Page measure units (export mode). Valid values: %1.</source>
+        <translation>Единицы измерения страницы (режим экспорта). Допустимые значения: %1.</translation>
+    </message>
+    <message>
+        <source>Set size value for pattern file, that was opened with multisize measurements (export mode). Valid values: %1cm.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Set height value for pattern file, that was opened with multisize measurements (export mode). Valid values: %1cm.</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -11146,7 +11152,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Can&apos;t cast object.</source>
-        <translation type="unfinished"></translation>
+        <translation>Не могу привести объект.</translation>
     </message>
 </context>
 <context>
@@ -11255,11 +11261,11 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Add to group</source>
-        <translation type="unfinished"></translation>
+        <translation>Добавить в группу</translation>
     </message>
     <message>
         <source>Remove from group</source>
-        <translation type="unfinished"></translation>
+        <translation>Удалить из группы</translation>
     </message>
 </context>
 <context>
@@ -13880,27 +13886,27 @@ Do you want to save your changes?</source>
     <message>
         <source>ElArc_</source>
         <comment>Left symbol _ in the name</comment>
-        <translation type="unfinished"></translation>
+        <translation>ЭлДуга_</translation>
     </message>
     <message>
         <source>Radius1ElArc_</source>
         <comment>Left symbol _ in the name</comment>
-        <translation type="unfinished"></translation>
+        <translation>Радиус1ЭлДуга_</translation>
     </message>
     <message>
         <source>Radius2ElArc_</source>
         <comment>Left symbol _ in the name</comment>
-        <translation type="unfinished"></translation>
+        <translation>Радиус2ЭлДуга_</translation>
     </message>
     <message>
         <source>Angle1ElArc_</source>
         <comment>Left symbol _ in the name</comment>
-        <translation type="unfinished"></translation>
+        <translation>Угол1ЭлДуга_</translation>
     </message>
     <message>
         <source>Angle2ElArc_</source>
         <comment>Left symbol _ in the name</comment>
-        <translation type="unfinished"></translation>
+        <translation>Угол2ЭлДуга_</translation>
     </message>
     <message>
         <source>date</source>
@@ -13915,12 +13921,12 @@ Do you want to save your changes?</source>
     <message>
         <source>patternName</source>
         <comment>placeholder</comment>
-        <translation type="unfinished"></translation>
+        <translation>названиеМодели</translation>
     </message>
     <message>
         <source>patternNumber</source>
         <comment>placeholder</comment>
-        <translation type="unfinished"></translation>
+        <translation>номерМодели</translation>
     </message>
     <message>
         <source>author</source>
@@ -13935,117 +13941,117 @@ Do you want to save your changes?</source>
     <message>
         <source>pExt</source>
         <comment>placeholder</comment>
-        <translation type="unfinished"></translation>
+        <translation>чРазширение</translation>
     </message>
     <message>
         <source>pFileName</source>
         <comment>placeholder</comment>
-        <translation type="unfinished"></translation>
+        <translation>чИмяФайла</translation>
     </message>
     <message>
         <source>mFileName</source>
         <comment>placeholder</comment>
-        <translation type="unfinished"></translation>
+        <translation>мИмяФайла</translation>
     </message>
     <message>
         <source>mExt</source>
         <comment>placeholder</comment>
-        <translation type="unfinished"></translation>
+        <translation>мРазширение</translation>
     </message>
     <message>
         <source>pLetter</source>
         <comment>placeholder</comment>
-        <translation type="unfinished"></translation>
+        <translation>дБуква</translation>
     </message>
     <message>
         <source>pAnnotation</source>
         <comment>placeholder</comment>
-        <translation type="unfinished"></translation>
+        <translation>дАннотация</translation>
     </message>
     <message>
         <source>pOrientation</source>
         <comment>placeholder</comment>
-        <translation type="unfinished"></translation>
+        <translation>дОриентация</translation>
     </message>
     <message>
         <source>pRotation</source>
         <comment>placeholder</comment>
-        <translation type="unfinished"></translation>
+        <translation>дВращение</translation>
     </message>
     <message>
         <source>pTilt</source>
         <comment>placeholder</comment>
-        <translation type="unfinished"></translation>
+        <translation>дНаклон</translation>
     </message>
     <message>
         <source>pFoldPosition</source>
         <comment>placeholder</comment>
-        <translation type="unfinished"></translation>
+        <translation>дРасположениеСгиба</translation>
     </message>
     <message>
         <source>pName</source>
         <comment>placeholder</comment>
-        <translation type="unfinished"></translation>
+        <translation>дИмя</translation>
     </message>
     <message>
         <source>pQuantity</source>
         <comment>placeholder</comment>
-        <translation type="unfinished"></translation>
+        <translation>дКоличество</translation>
     </message>
     <message>
         <source>mFabric</source>
         <comment>placeholder</comment>
-        <translation type="unfinished"></translation>
+        <translation>мТкань</translation>
     </message>
     <message>
         <source>mLining</source>
         <comment>placeholder</comment>
-        <translation type="unfinished"></translation>
+        <translation>мПодклад</translation>
     </message>
     <message>
         <source>mInterfacing</source>
         <comment>placeholder</comment>
-        <translation type="unfinished"></translation>
+        <translation>мКлееваяПодкладка</translation>
     </message>
     <message>
         <source>mInterlining</source>
         <comment>placeholder</comment>
-        <translation type="unfinished"></translation>
+        <translation>мМежподкладка</translation>
     </message>
     <message>
         <source>wCut</source>
         <comment>placeholder</comment>
-        <translation type="unfinished"></translation>
+        <translation>сВырезать</translation>
     </message>
     <message>
         <source>wOnFold</source>
         <comment>placeholder</comment>
-        <translation type="unfinished"></translation>
+        <translation>сНаСгиб</translation>
     </message>
     <message>
         <source>userMaterial</source>
         <comment>placeholder</comment>
-        <translation type="unfinished"></translation>
+        <translation>полМатериал</translation>
     </message>
     <message>
         <source>r2cm</source>
         <comment>round to up to 1 decimal</comment>
-        <translation type="unfinished"></translation>
+        <translation>r2cm</translation>
     </message>
     <message>
         <source>csrCm</source>
         <comment>cut, split and rotate modeling operation. Takes cm units.</comment>
-        <translation type="unfinished"></translation>
+        <translation>csrCm</translation>
     </message>
     <message>
         <source>csrInch</source>
         <comment>cut, split and rotate modeling operation. Takes inch units.</comment>
-        <translation type="unfinished"></translation>
+        <translation>csrInch</translation>
     </message>
     <message>
         <source>RotationElArc_</source>
         <comment>Left symbol _ in the name</comment>
-        <translation type="unfinished"></translation>
+        <translation>ВращениеЭлДуга_</translation>
     </message>
 </context>
 <context>

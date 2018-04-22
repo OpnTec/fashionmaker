@@ -2287,12 +2287,13 @@
         <translation>Opties</translation>
     </message>
     <message>
-        <source>Global</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Preview</source>
         <translation>Voorbeeld</translation>
+    </message>
+    <message>
+        <source>Global</source>
+        <comment>Options</comment>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -6843,7 +6844,7 @@ Toch de instellingen aanpassen?</translation>
     </message>
     <message>
         <source>Show online help</source>
-        <translation>Toon online help</translation>
+        <translation type="vanished">Toon online help</translation>
     </message>
     <message>
         <source>Pattern piece %1</source>
@@ -7741,7 +7742,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Wiki</source>
-        <translation>Wiki</translation>
+        <translation type="vanished">Wiki</translation>
     </message>
     <message>
         <source>Forum</source>
@@ -10982,11 +10983,11 @@ Wil je deze veranderingen opslaan?</translation>
     </message>
     <message>
         <source>Set size value a pattern file, that was opened with multisize measurements (export mode). Valid values: %1cm.</source>
-        <translation>Stel maat waarde van een patroon bestand vast, welke geopend zijn met meerdere maten metingen( exporteer modus). Geldige waardes: %1cm.</translation>
+        <translation type="vanished">Stel maat waarde van een patroon bestand vast, welke geopend zijn met meerdere maten metingen( exporteer modus). Geldige waardes: %1cm.</translation>
     </message>
     <message>
         <source>Set height value a pattern file, that was opened with multisize measurements (export mode). Valid values: %1cm.</source>
-        <translation>Stel hoogte waarde van een patroon bestand vast, welke geopend zijn met meerdere maten metingen (exporteer modus). Geldige waarde: %1cm.</translation>
+        <translation type="vanished">Stel hoogte waarde van een patroon bestand vast, welke geopend zijn met meerdere maten metingen (exporteer modus). Geldige waarde: %1cm.</translation>
     </message>
     <message>
         <source>Export only details that match a piece name regex.</source>
@@ -11094,6 +11095,14 @@ Wil je deze veranderingen opslaan?</translation>
     </message>
     <message>
         <source>Page measure units (export mode). Valid values: %1.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Set size value for pattern file, that was opened with multisize measurements (export mode). Valid values: %1cm.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Set height value for pattern file, that was opened with multisize measurements (export mode). Valid values: %1cm.</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

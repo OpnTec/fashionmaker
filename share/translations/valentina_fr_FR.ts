@@ -2288,11 +2288,16 @@
     </message>
     <message>
         <source>Global</source>
-        <translation>Global</translation>
+        <translation type="vanished">Global</translation>
     </message>
     <message>
         <source>Preview</source>
         <translation>Prévisualiser</translation>
+    </message>
+    <message>
+        <source>Global</source>
+        <comment>Options</comment>
+        <translation type="unfinished">Global</translation>
     </message>
 </context>
 <context>
@@ -6838,7 +6843,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Show online help</source>
-        <translation>Afficher l&apos;aide en ligne</translation>
+        <translation type="vanished">Afficher l&apos;aide en ligne</translation>
     </message>
     <message>
         <source>Pattern piece %1</source>
@@ -7733,10 +7738,6 @@ Voulez-vous sauvegarder les changements?</translation>
     </message>
     <message>
         <source>Select an item to insert</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Wiki</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -10957,14 +10958,6 @@ Voulez-vous enregistrer les changements?</translation>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Set size value a pattern file, that was opened with multisize measurements (export mode). Valid values: %1cm.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Set height value a pattern file, that was opened with multisize measurements (export mode). Valid values: %1cm.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Export only details that match a piece name regex.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -11070,6 +11063,14 @@ Voulez-vous enregistrer les changements?</translation>
     </message>
     <message>
         <source>Page measure units (export mode). Valid values: %1.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Set size value for pattern file, that was opened with multisize measurements (export mode). Valid values: %1cm.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Set height value for pattern file, that was opened with multisize measurements (export mode). Valid values: %1cm.</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
