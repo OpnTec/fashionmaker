@@ -39,8 +39,6 @@
 #define QMUP_VERSION "2.6.0"
 #define QMUP_VERSION_DATE "20180121; GC"
 
-#define QMUP_CHARS "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
-
 // Detect whether the compiler supports C++11 noexcept exception specifications.
 #  if   defined(__clang__)
 #    if __has_feature(cxx_noexcept)

@@ -180,21 +180,23 @@ int ReadVal(const QString &formula, qreal &val, const QLocale &locale, const QCh
     Q_UNUSED(decimalPoint)
     Q_UNUSED(groupSeparator)
 
-    QSet<QChar> reserved;
-    reserved << positiveSign
-             << negativeSign
-             << sign0
-             << sign1
-             << sign2
-             << sign3
-             << sign4
-             << sign5
-             << sign6
-             << sign7
-             << sign8
-             << sign9
-             << expUpper
-             << expLower;
+    QSet<QChar> reserved
+    {
+                positiveSign,
+                negativeSign,
+                sign0,
+                sign1,
+                sign2,
+                sign3,
+                sign4,
+                sign5,
+                sign6,
+                sign7,
+                sign8,
+                sign9,
+                expUpper,
+                expLower
+    };
 
     if (reserved.contains(decimal) || reserved.contains(thousand))
     {
@@ -244,7 +246,7 @@ int ReadVal(const QString &formula, qreal &val, const QLocale &locale, const QCh
             {
                 if (decimal == cThousand)
                 {// Handle reverse to C locale case: thousand '.', decimal ','
-                    const QChar tmpThousand = '@';
+                    const QChar tmpThousand = QLatin1Char('@');
                     buf.replace(thousand, tmpThousand);
                     buf.replace(decimal, cDecimal);
                     buf.replace(tmpThousand, cThousand);

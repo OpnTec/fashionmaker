@@ -368,7 +368,7 @@ int QmuParserTokenReader::ExtractOperatorToken ( QString &a_sTok, int a_iPos ) c
     {
         // There is still the chance of having to deal with an operator consisting exclusively
         // of alphabetic characters.
-        return ExtractToken ( QMUP_CHARS, a_sTok, a_iPos );
+        return ExtractToken (QStringLiteral("abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"), a_sTok, a_iPos );
     }
 }
 QT_WARNING_POP

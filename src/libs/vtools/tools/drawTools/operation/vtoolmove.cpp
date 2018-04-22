@@ -413,7 +413,7 @@ QString VToolMove::OriginPointName() const
 {
     try
     {
-    return VAbstractTool::data.GetGObject(origPointId)->name();
+        return VAbstractTool::data.GetGObject(origPointId)->name();
     }
     catch (const VExceptionBadId &)
     {
@@ -504,10 +504,10 @@ void VToolMove::SaveOptions(QDomElement &tag, QSharedPointer<VGObject> &obj)
 //---------------------------------------------------------------------------------------------------------------------
 QString VToolMove::MakeToolTip() const
 {
-    const QString toolTip = QString("<tr> <td><b>%1:</b> %2°</td> </tr>"
-                                    "<tr> <td><b>%3:</b> %4 %5</td> </tr>"
-                                    "<tr> <td><b>%6:</b> %7°</td> </tr>"
-                                    "<tr> <td><b>%8:</b> %9</td> </tr>")
+    return QStringLiteral("<tr> <td><b>%1:</b> %2°</td> </tr>"
+                          "<tr> <td><b>%3:</b> %4 %5</td> </tr>"
+                          "<tr> <td><b>%6:</b> %7°</td> </tr>"
+                          "<tr> <td><b>%8:</b> %9</td> </tr>")
             .arg(tr("Angle"))                                // 1
             .arg(GetFormulaAngle().getDoubleValue())         // 2
             .arg(tr("Length"))                               // 3
@@ -517,7 +517,6 @@ QString VToolMove::MakeToolTip() const
             .arg(GetFormulaRotationAngle().getDoubleValue()) // 7
             .arg(tr("Rotation origin point"),                // 8
                  OriginPointName());                         // 9
-    return toolTip;
 }
 
 //---------------------------------------------------------------------------------------------------------------------

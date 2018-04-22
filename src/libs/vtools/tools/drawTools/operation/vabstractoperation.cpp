@@ -668,14 +668,11 @@ QT_WARNING_POP
 //---------------------------------------------------------------------------------------------------------------------
 QString VAbstractOperation::ComplexPointToolTip(quint32 itemId) const
 {
-    const QSharedPointer<VPointF> point = VAbstractTool::data.GeometricObject<VPointF>(itemId);
-
-    const QString toolTip = QString("<table>"
-                                    "<tr> <td><b>%1:</b> %2</td> </tr>"
-                                    "%3"
-                                    "</table>")
-            .arg(tr("Label"), point->name(), MakeToolTip());
-    return toolTip;
+    return QStringLiteral("<table>"
+                          "<tr> <td><b>%1:</b> %2</td> </tr>"
+                          "%3"
+                          "</table>")
+            .arg(tr("Label"), VAbstractTool::data.GetGObject(itemId)->name(), MakeToolTip());
 }
 
 //---------------------------------------------------------------------------------------------------------------------

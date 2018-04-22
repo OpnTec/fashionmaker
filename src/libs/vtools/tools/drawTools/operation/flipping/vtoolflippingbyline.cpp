@@ -222,10 +222,9 @@ void VToolFlippingByLine::SaveOptions(QDomElement &tag, QSharedPointer<VGObject>
 //---------------------------------------------------------------------------------------------------------------------
 QString VToolFlippingByLine::MakeToolTip() const
 {
-    const QString toolTip = QString("<tr> <td><b>%1:</b> %2</td> </tr>"
-                                    "<tr> <td><b>%3:</b> %4</td> </tr>")
+    return QStringLiteral("<tr> <td><b>%1:</b> %2</td> </tr>"
+                          "<tr> <td><b>%3:</b> %4</td> </tr>")
             .arg(tr("First line point"), FirstLinePointName(), tr("Second line point"), SecondLinePointName());
-    return toolTip;
 }
 
 //---------------------------------------------------------------------------------------------------------------------

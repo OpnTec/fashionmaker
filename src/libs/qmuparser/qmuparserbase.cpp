@@ -436,7 +436,7 @@ void QmuParserBase::SetExpr(const QString &a_sExpr)
     // when calling tellg on a stringstream created from the expression after
     // reading a value at the end of an expression. (qmu::QmuParser::IsVal function)
     // (tellg returns -1 otherwise causing the parser to ignore the value)
-    QString sBuf(a_sExpr + " " );
+    QString sBuf(a_sExpr + QChar(' ') );
     m_pTokenReader->SetFormula(sBuf);
     ReInit();
 }

@@ -438,52 +438,52 @@ void QmuParser::InitCharSets()
 void QmuParser::InitFun()
 {
     // trigonometric helper functions
-    DefineFun("degTorad",   DegreeToRadian);
-    DefineFun("radTodeg",   RadianToDegree);
+    DefineFun(QStringLiteral("degTorad"),   DegreeToRadian);
+    DefineFun(QStringLiteral("radTodeg"),   RadianToDegree);
 
     // trigonometric functions
-    DefineFun("sin",   qSin);
-    DefineFun("cos",   qCos);
-    DefineFun("tan",   qTan);
-    DefineFun("sinD",   SinD);
-    DefineFun("cosD",   CosD);
-    DefineFun("tanD",   TanD);
+    DefineFun(QStringLiteral("sin"),   qSin);
+    DefineFun(QStringLiteral("cos"),   qCos);
+    DefineFun(QStringLiteral("tan"),   qTan);
+    DefineFun(QStringLiteral("sinD"),   SinD);
+    DefineFun(QStringLiteral("cosD"),   CosD);
+    DefineFun(QStringLiteral("tanD"),   TanD);
     // arcus functions
-    DefineFun("asin",  qAsin);
-    DefineFun("acos",  qAcos);
-    DefineFun("atan",  qAtan);
-    DefineFun("atan2", qAtan2);
-    DefineFun("asinD",  ASinD);
-    DefineFun("acosD",  ACosD);
-    DefineFun("atanD",  ATanD);
+    DefineFun(QStringLiteral("asin"),  qAsin);
+    DefineFun(QStringLiteral("acos"),  qAcos);
+    DefineFun(QStringLiteral("atan"),  qAtan);
+    DefineFun(QStringLiteral("atan2"), qAtan2);
+    DefineFun(QStringLiteral("asinD"),  ASinD);
+    DefineFun(QStringLiteral("acosD"),  ACosD);
+    DefineFun(QStringLiteral("atanD"),  ATanD);
     // hyperbolic functions
-    DefineFun("sinh",  Sinh);
-    DefineFun("cosh",  Cosh);
-    DefineFun("tanh",  Tanh);
+    DefineFun(QStringLiteral("sinh"),  Sinh);
+    DefineFun(QStringLiteral("cosh"),  Cosh);
+    DefineFun(QStringLiteral("tanh"),  Tanh);
     // arcus hyperbolic functions
-    DefineFun("asinh", ASinh);
-    DefineFun("acosh", ACosh);
-    DefineFun("atanh", ATanh);
+    DefineFun(QStringLiteral("asinh"), ASinh);
+    DefineFun(QStringLiteral("acosh"), ACosh);
+    DefineFun(QStringLiteral("atanh"), ATanh);
     // Logarithm functions
-    DefineFun("log2",  Log2);
-    DefineFun("log10", Log10);
-    DefineFun("log",   Log10);
-    DefineFun("ln",    qLn);
+    DefineFun(QStringLiteral("log2"),  Log2);
+    DefineFun(QStringLiteral("log10"), Log10);
+    DefineFun(QStringLiteral("log"),   Log10);
+    DefineFun(QStringLiteral("ln"),    qLn);
     // misc
-    DefineFun("exp",   qExp);
-    DefineFun("sqrt",  qSqrt);
-    DefineFun("sign",  Sign);
-    DefineFun("rint",  Rint);
-    DefineFun("r2cm",  R2CM);
-    DefineFun("csrCm", CSRCm);
-    DefineFun("csrInch", CSRInch);
-    DefineFun("abs",   Abs);
-    DefineFun("fmod",  FMod);
+    DefineFun(QStringLiteral("exp"),   qExp);
+    DefineFun(QStringLiteral("sqrt"),  qSqrt);
+    DefineFun(QStringLiteral("sign"),  Sign);
+    DefineFun(QStringLiteral("rint"),  Rint);
+    DefineFun(QStringLiteral("r2cm"),  R2CM);
+    DefineFun(QStringLiteral("csrCm"), CSRCm);
+    DefineFun(QStringLiteral("csrInch"), CSRInch);
+    DefineFun(QStringLiteral("abs"),   Abs);
+    DefineFun(QStringLiteral("fmod"),  FMod);
     // Functions with variable number of arguments
-    DefineFun("sum",   Sum);
-    DefineFun("avg",   Avg);
-    DefineFun("min",   Min);
-    DefineFun("max",   Max);
+    DefineFun(QStringLiteral("sum"),   Sum);
+    DefineFun(QStringLiteral("avg"),   Avg);
+    DefineFun(QStringLiteral("min"),   Min);
+    DefineFun(QStringLiteral("max"),   Max);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
