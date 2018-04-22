@@ -60,7 +60,7 @@ public:
     VPiece &operator=(VPiece &&piece) Q_DECL_NOTHROW { Swap(piece); return *this; }
 #endif
 
-    void Swap(VPiece &piece) Q_DECL_NOTHROW
+    inline void Swap(VPiece &piece) Q_DECL_NOTHROW
     { VAbstractPiece::Swap(piece); std::swap(d, piece.d); }
 
     VPiecePath GetPath() const;

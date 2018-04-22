@@ -60,7 +60,7 @@ public:
     VCubicBezier &operator=(VCubicBezier &&curve) Q_DECL_NOTHROW { Swap(curve); return *this; }
 #endif
 
-    void Swap(VCubicBezier &curve) Q_DECL_NOTHROW
+    inline void Swap(VCubicBezier &curve) Q_DECL_NOTHROW
     { VAbstractCubicBezier::Swap(curve); std::swap(d, curve.d); }
 
     virtual VPointF GetP1() const Q_DECL_OVERRIDE;

@@ -69,7 +69,7 @@ public:
     VArc &operator=(VArc &&arc) Q_DECL_NOTHROW { Swap(arc); return *this; }
 #endif
 
-    void Swap(VArc &arc) Q_DECL_NOTHROW
+    inline void Swap(VArc &arc) Q_DECL_NOTHROW
     { VAbstractArc::Swap(arc); std::swap(d, arc.d); }
 
     QString GetFormulaRadius () const;

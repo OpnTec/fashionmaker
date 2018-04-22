@@ -51,7 +51,7 @@ public:
     VInternalVariable &operator=(VInternalVariable &&var) Q_DECL_NOTHROW { Swap(var); return *this; }
 #endif
 
-    void Swap(VInternalVariable &var) Q_DECL_NOTHROW
+    inline void Swap(VInternalVariable &var) Q_DECL_NOTHROW
     { std::swap(d, var.d); }
 
     virtual qreal  GetValue() const;

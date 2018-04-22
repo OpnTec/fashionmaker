@@ -65,7 +65,7 @@ public:
     VPointF &operator=(VPointF &&point) Q_DECL_NOTHROW { Swap(point); return *this; }
 #endif
 
-    void Swap(VPointF &point) Q_DECL_NOTHROW
+    inline void Swap(VPointF &point) Q_DECL_NOTHROW
     { VGObject::Swap(point); std::swap(d, point.d); }
 
     explicit operator QPointF() const;

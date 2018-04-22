@@ -70,7 +70,7 @@ public:
     VSpline &operator=(VSpline &&spline) Q_DECL_NOTHROW { Swap(spline); return *this; }
 #endif
 
-    void Swap(VSpline &spline) Q_DECL_NOTHROW
+    inline void Swap(VSpline &spline) Q_DECL_NOTHROW
     { VAbstractCubicBezier::Swap(spline); std::swap(d, spline.d); }
 
     virtual VPointF GetP1 () const Q_DECL_OVERRIDE;

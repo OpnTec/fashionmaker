@@ -58,7 +58,7 @@ public:
     VIncrement &operator=(VIncrement &&incr) Q_DECL_NOTHROW { Swap(incr); return *this; }
 #endif
 
-    void Swap(VIncrement &incr) Q_DECL_NOTHROW
+    inline void Swap(VIncrement &incr) Q_DECL_NOTHROW
     { VVariable::Swap(incr); std::swap(d, incr.d); }
 
     quint32     getIndex() const;

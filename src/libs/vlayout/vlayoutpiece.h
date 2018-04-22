@@ -68,7 +68,7 @@ public:
     VLayoutPiece &operator=(VLayoutPiece &&detail) Q_DECL_NOTHROW { Swap(detail); return *this; }
 #endif
 
-    void Swap(VLayoutPiece &detail) Q_DECL_NOTHROW
+    inline void Swap(VLayoutPiece &detail) Q_DECL_NOTHROW
     { VAbstractPiece::Swap(detail); std::swap(d, detail.d); }
 
     static VLayoutPiece Create(const VPiece &piece, const VContainer *pattern);

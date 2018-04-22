@@ -61,7 +61,7 @@ public:
     VGObject &operator=(VGObject &&obj) Q_DECL_NOTHROW { Swap(obj); return *this; }
 #endif
 
-    void Swap(VGObject &obj) Q_DECL_NOTHROW
+    inline void Swap(VGObject &obj) Q_DECL_NOTHROW
     { std::swap(d, obj.d); }
 
     quint32         getIdObject() const;

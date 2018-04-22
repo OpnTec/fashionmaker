@@ -61,7 +61,7 @@ public:
     VAbstractArc &operator=(VAbstractArc &&arc) Q_DECL_NOTHROW { Swap(arc); return *this; }
 #endif
 
-    void Swap(VAbstractArc &arc) Q_DECL_NOTHROW
+    inline void Swap(VAbstractArc &arc) Q_DECL_NOTHROW
     { VAbstractCurve::Swap(arc); std::swap(d, arc.d); }
 
     QString       GetFormulaF1 () const;

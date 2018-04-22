@@ -65,7 +65,7 @@ public:
     VMeasurement &operator=(VMeasurement &&m) Q_DECL_NOTHROW { Swap(m); return *this; }
 #endif
 
-    void Swap(VMeasurement &m) Q_DECL_NOTHROW
+    inline void Swap(VMeasurement &m) Q_DECL_NOTHROW
     { VVariable::Swap(m); std::swap(d, m.d); }
 
     QString GetGuiText() const;

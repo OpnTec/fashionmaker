@@ -127,7 +127,7 @@ public:
     VContainer &operator=(VContainer &&data) Q_DECL_NOTHROW { Swap(data); return *this; }
 #endif
 
-    void Swap(VContainer &data) Q_DECL_NOTHROW
+    inline void Swap(VContainer &data) Q_DECL_NOTHROW
     { std::swap(d, data.d); }
 
     template <typename T>

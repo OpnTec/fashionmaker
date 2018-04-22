@@ -54,7 +54,7 @@ public:
     VPieceLabelData &operator=(VPieceLabelData &&data) Q_DECL_NOTHROW { Swap(data); return *this; }
 #endif
 
-    void Swap(VPieceLabelData &data) Q_DECL_NOTHROW
+    inline void Swap(VPieceLabelData &data) Q_DECL_NOTHROW
     { VPatternLabelData::Swap(data); std::swap(d, data.d); }
 
     void Clear();

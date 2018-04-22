@@ -50,7 +50,7 @@ public:
     VPlaceLabelItem &operator=(VPlaceLabelItem &&item) Q_DECL_NOTHROW { Swap(item); return *this; }
 #endif
 
-    void Swap(VPlaceLabelItem &item) Q_DECL_NOTHROW
+    inline void Swap(VPlaceLabelItem &item) Q_DECL_NOTHROW
     { VPointF::Swap(item); std::swap(d, item.d); }
 
     QString  GetWidthFormula() const;

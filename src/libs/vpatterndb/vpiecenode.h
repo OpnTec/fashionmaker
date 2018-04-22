@@ -52,7 +52,7 @@ public:
     VPieceNode &operator=(VPieceNode &&node) Q_DECL_NOTHROW { Swap(node); return *this; }
 #endif
 
-    void Swap(VPieceNode &node) Q_DECL_NOTHROW
+    inline void Swap(VPieceNode &node) Q_DECL_NOTHROW
     { std::swap(d, node.d); }
 
     friend QDataStream& operator<<(QDataStream& out, const VPieceNode& p);

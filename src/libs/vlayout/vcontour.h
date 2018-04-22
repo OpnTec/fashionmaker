@@ -58,7 +58,7 @@ public:
     VContour &operator=(VContour &&contour) Q_DECL_NOTHROW { Swap(contour); return *this; }
 #endif
 
-    void Swap(VContour &contour) Q_DECL_NOTHROW
+    inline void Swap(VContour &contour) Q_DECL_NOTHROW
     { std::swap(d, contour.d); }
 
     void             SetContour(const QVector<QPointF> &contour);

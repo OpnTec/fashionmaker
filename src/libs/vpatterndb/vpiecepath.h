@@ -57,7 +57,7 @@ public:
     VPiecePath &operator=(VPiecePath &&path) Q_DECL_NOTHROW { Swap(path); return *this; }
 #endif
 
-    void Swap(VPiecePath &path) Q_DECL_NOTHROW
+    inline void Swap(VPiecePath &path) Q_DECL_NOTHROW
     { std::swap(d, path.d); }
 
     void   Append(const VPieceNode &node);

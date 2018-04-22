@@ -56,7 +56,7 @@ public:
     VFSplinePoint &operator=(VFSplinePoint &&point) Q_DECL_NOTHROW { Swap(point); return *this; }
 #endif
 
-    void Swap(VFSplinePoint &point) Q_DECL_NOTHROW
+    inline void Swap(VFSplinePoint &point) Q_DECL_NOTHROW
     { std::swap(d, point.d); }
 
     VPointF P() const;
@@ -96,7 +96,7 @@ public:
     VSplinePoint &operator=(VSplinePoint &&point) Q_DECL_NOTHROW { Swap(point); return *this; }
 #endif
 
-    void Swap(VSplinePoint &point) Q_DECL_NOTHROW
+    inline void Swap(VSplinePoint &point) Q_DECL_NOTHROW
     { std::swap(d, point.d); }
 
     VPointF P() const;

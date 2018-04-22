@@ -49,7 +49,7 @@ public:
     VLayoutPiecePath &operator=(VLayoutPiecePath &&path) Q_DECL_NOTHROW { Swap(path); return *this; }
 #endif
 
-    void Swap(VLayoutPiecePath &path) Q_DECL_NOTHROW
+    inline void Swap(VLayoutPiecePath &path) Q_DECL_NOTHROW
     { std::swap(d, path.d); }
 
     QPainterPath GetPainterPath() const;

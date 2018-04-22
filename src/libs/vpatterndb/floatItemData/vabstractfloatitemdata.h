@@ -47,7 +47,7 @@ public:
     VAbstractFloatItemData &operator=(VAbstractFloatItemData &&data) Q_DECL_NOTHROW { Swap(data); return *this; }
 #endif
 
-    void Swap(VAbstractFloatItemData &data) Q_DECL_NOTHROW
+    inline void Swap(VAbstractFloatItemData &data) Q_DECL_NOTHROW
     { std::swap(d, data.d); }
 
     // methods, which set and return values of different parameters

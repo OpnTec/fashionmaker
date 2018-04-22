@@ -51,7 +51,7 @@ public:
     VPatternLabelData &operator=(VPatternLabelData &&data) Q_DECL_NOTHROW { Swap(data); return *this; }
 #endif
 
-    void Swap(VPatternLabelData &data) Q_DECL_NOTHROW
+    inline void Swap(VPatternLabelData &data) Q_DECL_NOTHROW
     { VAbstractFloatItemData::Swap(data); std::swap(d, data.d); }
 
     // methods, which set up label parameters

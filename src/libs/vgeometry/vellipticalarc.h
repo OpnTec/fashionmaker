@@ -72,7 +72,7 @@ public:
     VEllipticalArc &operator=(VEllipticalArc &&arc) Q_DECL_NOTHROW { Swap(arc); return *this; }
 #endif
 
-    void Swap(VEllipticalArc &arc) Q_DECL_NOTHROW
+    inline void Swap(VEllipticalArc &arc) Q_DECL_NOTHROW
     { VAbstractArc::Swap(arc); std::swap(d, arc.d); }
 
     QString GetFormulaRotationAngle () const;

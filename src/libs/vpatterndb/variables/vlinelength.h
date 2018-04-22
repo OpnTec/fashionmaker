@@ -55,7 +55,7 @@ public:
     VLengthLine &operator=(VLengthLine &&var) Q_DECL_NOTHROW { Swap(var); return *this; }
 #endif
 
-    void Swap(VLengthLine &var) Q_DECL_NOTHROW
+    inline void Swap(VLengthLine &var) Q_DECL_NOTHROW
     { VInternalVariable::Swap(var); std::swap(d, var.d); }
 
     virtual bool Filter(quint32 id) Q_DECL_OVERRIDE;

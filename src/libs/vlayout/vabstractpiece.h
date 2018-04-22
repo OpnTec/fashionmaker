@@ -151,7 +151,7 @@ public:
     VAbstractPiece &operator=(VAbstractPiece &&piece) Q_DECL_NOTHROW { Swap(piece); return *this; }
 #endif
 
-    void Swap(VAbstractPiece &piece) Q_DECL_NOTHROW
+    inline void Swap(VAbstractPiece &piece) Q_DECL_NOTHROW
     { std::swap(d, piece.d); }
 
     QString GetName() const;

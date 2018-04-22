@@ -54,7 +54,7 @@ public:
     VGrainlineData &operator=(VGrainlineData &&data) Q_DECL_NOTHROW { Swap(data); return *this; }
 #endif
 
-    void Swap(VGrainlineData &data) Q_DECL_NOTHROW
+    inline void Swap(VGrainlineData &data) Q_DECL_NOTHROW
     { VAbstractFloatItemData::Swap(data); std::swap(d, data.d); }
 
     // methods, which set and return values of different parameters

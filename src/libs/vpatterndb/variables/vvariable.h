@@ -55,7 +55,7 @@ public:
     VVariable &operator=(VVariable &&var) Q_DECL_NOTHROW { Swap(var); return *this; }
 #endif
 
-    void Swap(VVariable &var) Q_DECL_NOTHROW
+    inline void Swap(VVariable &var) Q_DECL_NOTHROW
     { VInternalVariable::Swap(var); std::swap(d, var.d); }
 
     QString GetDescription() const;

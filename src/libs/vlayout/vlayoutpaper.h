@@ -60,7 +60,7 @@ public:
     VLayoutPaper &operator=(VLayoutPaper &&paper) Q_DECL_NOTHROW { Swap(paper); return *this; }
 #endif
 
-    void Swap(VLayoutPaper &paper) Q_DECL_NOTHROW
+    inline void Swap(VLayoutPaper &paper) Q_DECL_NOTHROW
     { std::swap(d, paper.d); }
 
     int  GetHeight() const;

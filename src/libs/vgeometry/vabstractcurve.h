@@ -60,7 +60,7 @@ public:
     VAbstractCurve &operator=(VAbstractCurve &&curve) Q_DECL_NOTHROW { Swap(curve); return *this; }
 #endif
 
-    void Swap(VAbstractCurve &curve) Q_DECL_NOTHROW
+    inline void Swap(VAbstractCurve &curve) Q_DECL_NOTHROW
     { VGObject::Swap(curve); std::swap(d, curve.d); }
 
     virtual QVector<QPointF> GetPoints() const =0;

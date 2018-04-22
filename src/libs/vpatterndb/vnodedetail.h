@@ -77,7 +77,7 @@ public:
     VNodeDetail &operator=(VNodeDetail &&node) Q_DECL_NOTHROW { Swap(node); return *this; }
 #endif
 
-    void Swap(VNodeDetail &node) Q_DECL_NOTHROW
+    inline void Swap(VNodeDetail &node) Q_DECL_NOTHROW
     { std::swap(d, node.d); }
 
     /**
