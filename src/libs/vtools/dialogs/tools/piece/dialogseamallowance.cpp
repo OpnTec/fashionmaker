@@ -713,7 +713,7 @@ void DialogSeamAllowance::ShowCustomSAContextMenu(const QPoint &pos)
         dialog->EnbleShowMode(true);
         m_dialog = dialog;
         m_dialog->setModal(true);
-        connect(m_dialog.data(), &DialogTool::DialogClosed, this, &DialogSeamAllowance::PathDialogClosed);
+        connect(m_dialog.data(), &DialogTool::finished, this, &DialogSeamAllowance::PathDialogClosed);
         m_dialog->show();
     }
 }
@@ -749,7 +749,7 @@ void DialogSeamAllowance::ShowInternalPathsContextMenu(const QPoint &pos)
         dialog->EnbleShowMode(true);
         m_dialog = dialog;
         m_dialog->setModal(true);
-        connect(m_dialog.data(), &DialogTool::DialogClosed, this, &DialogSeamAllowance::PathDialogClosed);
+        connect(m_dialog.data(), &DialogTool::finished, this, &DialogSeamAllowance::PathDialogClosed);
         m_dialog->show();
     }
 }
@@ -846,7 +846,7 @@ void DialogSeamAllowance::ShowPlaceLabelsContextMenu(const QPoint &pos)
         dialog->EnbleShowMode(true);
         m_dialog = dialog;
         m_dialog->setModal(true);
-        connect(m_dialog.data(), &DialogTool::DialogClosed, this, &DialogSeamAllowance::PlaceLabelDialogClosed);
+        connect(m_dialog.data(), &DialogTool::finished, this, &DialogSeamAllowance::PlaceLabelDialogClosed);
         m_dialog->show();
     }
     else if (selectedAction == actionSegment)

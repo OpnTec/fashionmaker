@@ -98,11 +98,6 @@ public:
     static void MoveListRowBottom(QListWidget *list);
 signals:
     /**
-     * @brief DialogClosed signal dialog closed
-     * @param result keep result
-     */
-    void             DialogClosed(int result);
-    /**
      * @brief DialogApplied emit signal dialog apply changes
      */
     void             DialogApplied();
@@ -120,7 +115,6 @@ public slots:
      * @brief DialogApply save data and emit signal DialogApplied.
      */
     virtual void     DialogApply();
-    virtual void     DialogRejected();
     void             FormulaChanged();
     /**
      * @brief FormulaChangedPlainText check formula (plain text editor editor)
@@ -367,7 +361,7 @@ inline void DialogTool::InitOkCancel(T *ui)
 
     QPushButton *bCancel = ui->buttonBox->button(QDialogButtonBox::Cancel);
     SCASSERT(bCancel != nullptr)
-    connect(bCancel, &QPushButton::clicked, this, &DialogTool::DialogRejected);
+    connect(bCancel, &QPushButton::clicked, this, &DialogTool::reject);
 
     qApp->Settings()->GetOsSeparator() ? setLocale(QLocale()) : setLocale(QLocale::c());
 }

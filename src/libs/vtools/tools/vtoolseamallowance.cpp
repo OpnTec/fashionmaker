@@ -1470,7 +1470,7 @@ void VToolSeamAllowance::ShowOptions()
     dialog->EnableApply(true);
     m_dialog = dialog;
     m_dialog->setModal(true);
-    connect(m_dialog.data(), &DialogTool::DialogClosed, this, &VToolSeamAllowance::FullUpdateFromGuiOk);
+    connect(m_dialog.data(), &DialogTool::finished, this, &VToolSeamAllowance::FullUpdateFromGuiOk);
     connect(m_dialog.data(), &DialogTool::DialogApplied, this, &VToolSeamAllowance::FullUpdateFromGuiApply);
     SetDialog();
     m_dialog->show();
