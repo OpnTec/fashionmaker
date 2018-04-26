@@ -63,31 +63,57 @@
 #include "../vmisc/vsettings.h"
 #include "vabstractmainwindow.h"
 
-const int GraphicsViewZoom::duration = 300;
-const int GraphicsViewZoom::updateInterval = 40;
+const int GraphicsViewZoom::duration = 350;
+const int GraphicsViewZoom::updateInterval = 30;
 
 const qreal maxSceneSize = ((20.0 * 1000.0) / 25.4) * PrintDPI; // 20 meters in pixels
 
 namespace
 {
-int ScrollingSteps(QWheelEvent* wheel_event)
+qreal ScrollingSteps(QWheelEvent* wheel_event)
 {
     SCASSERT(wheel_event != nullptr)
 
     const QPoint numPixels = wheel_event->pixelDelta();
     const QPoint numDegrees = wheel_event->angleDelta() / 8;
-    int numSteps = 0;
+    qreal numSteps = 0;
 
     if (not numPixels.isNull())
     {
-        numSteps = wheel_event->orientation() == Qt::Vertical ? numPixels.y() : numPixels.x();
+        const qreal mouseScale = 2.;
+        numSteps = (wheel_event->orientation() == Qt::Vertical ? numPixels.y() : numPixels.x()) / mouseScale;
     }
     else if (not numDegrees.isNull())
     {
-        numSteps = (wheel_event->orientation() == Qt::Vertical ? numDegrees.y() : numDegrees.x()) / 15;
+        const qreal mouseScale = 45.;
+        numSteps = (wheel_event->orientation() == Qt::Vertical ? numDegrees.y() : numDegrees.x()) / 15. * mouseScale;
     }
 
     return numSteps;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+qreal PrepareScrolling(qreal scheduledScrollings, QWheelEvent *wheel_event)
+{
+    const qreal numSteps = ScrollingSteps(wheel_event);
+
+    if (qFuzzyIsNull(numSteps))
+    {
+        return scheduledScrollings;//Just ignore
+    }
+
+    if (std::signbit(scheduledScrollings) != std::signbit(numSteps))
+    {  // if user moved the wheel in another direction, we reset previously scheduled scalings
+        scheduledScrollings = numSteps;
+    }
+    else
+    {
+        scheduledScrollings += numSteps;
+    }
+
+    scheduledScrollings *= 1.3;
+
+    return scheduledScrollings;
 }
 }
 
@@ -163,52 +189,24 @@ void GraphicsViewZoom::set_zoom_factor_base(double value)
 //---------------------------------------------------------------------------------------------------------------------
 void GraphicsViewZoom::VerticalScrollingTime(qreal x)
 {
-    Q_UNUSED(x)
-    // Try to adapt scrolling to speed of rotating mouse wheel and scale factor
-    // Value of _numScheduledScrollings is too short, so we scale the value
-
-    qreal scroll = static_cast<qreal>(qAbs(_numScheduledVerticalScrollings))*(10. + 10./_view->transform().m22())
-            /(static_cast<qreal>(duration)/static_cast<qreal>(updateInterval));
-
-    if (qAbs(scroll) < 1)
-    {
-        scroll = 1;
-    }
-
-    if (_numScheduledVerticalScrollings > 0)
-    {
-        scroll = scroll * -1;
-    }
-    _view->verticalScrollBar()->setValue(qRound(_view->verticalScrollBar()->value() + scroll));
+    const qreal scroll = _numScheduledVerticalScrollings * x;
+    _numScheduledVerticalScrollings -= scroll;
+    _view->verticalScrollBar()->setValue(qRound(_view->verticalScrollBar()->value() - scroll));
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void GraphicsViewZoom::HorizontalScrollingTime(qreal x)
 {
-    Q_UNUSED(x)
-    // Try to adapt scrolling to speed of rotating mouse wheel and scale factor
-    // Value of _numScheduledScrollings is too short, so we scale the value
-
-    qreal scroll = static_cast<qreal>(qAbs(_numScheduledHorizontalScrollings))*(10. + 10./_view->transform().m11())
-            /(static_cast<qreal>(duration)/static_cast<qreal>(updateInterval));
-
-    if (qAbs(scroll) < 1)
-    {
-        scroll = 1;
-    }
-
-    if (_numScheduledHorizontalScrollings > 0)
-    {
-        scroll = scroll * -1;
-    }
-    _view->horizontalScrollBar()->setValue(qRound(_view->horizontalScrollBar()->value() + scroll));
+    const qreal scroll = _numScheduledHorizontalScrollings * x;
+    _numScheduledHorizontalScrollings -= scroll;
+    _view->horizontalScrollBar()->setValue(qRound(_view->horizontalScrollBar()->value() - scroll));
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void GraphicsViewZoom::animFinished()
 {
     _numScheduledVerticalScrollings = 0;
-    verticalScrollAnim->stop();
+    _numScheduledHorizontalScrollings = 0;
 
     /*
      * In moust cases cursor position on view doesn't change, but for scene after scrolling position will be different.
@@ -257,11 +255,13 @@ bool GraphicsViewZoom::eventFilter(QObject *object, QEvent *event)
                 }
                 else if (QGuiApplication::keyboardModifiers() == Qt::ShiftModifier)
                 {
-                    return StartHorizontalScrollings(wheel_event);
+                    StartHorizontalScrollings(wheel_event);
+                    return true;
                 }
                 else
                 {
-                    return StartVerticalScrollings(wheel_event);
+                    StartVerticalScrollings(wheel_event);
+                    return true;
                 }
             }
             else
@@ -271,7 +271,8 @@ bool GraphicsViewZoom::eventFilter(QObject *object, QEvent *event)
                     return true; //ignore
                 }
 
-                return StartHorizontalScrollings(wheel_event);
+                StartHorizontalScrollings(wheel_event);
+                return true;
             }
         }
     }
@@ -314,49 +315,42 @@ void GraphicsViewZoom::FictiveSceneRect(QGraphicsScene *sc, QGraphicsView *view)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-bool GraphicsViewZoom::StartVerticalScrollings(QWheelEvent *wheel_event)
+void GraphicsViewZoom::StartVerticalScrollings(QWheelEvent *wheel_event)
 {
-    const int numSteps = ScrollingSteps(wheel_event);
-
-    if (numSteps == 0)
+    if (not wheel_event->pixelDelta().isNull())
+    { // Native scrolling animation
+        _view->verticalScrollBar()->setValue(qCeil(_view->verticalScrollBar()->value() - ScrollingSteps(wheel_event)));
+        animFinished();
+    }
+    else
     {
-        return true;//Just ignore
-    }
+        _numScheduledVerticalScrollings = PrepareScrolling(_numScheduledVerticalScrollings, wheel_event);
 
-    _numScheduledVerticalScrollings += numSteps;
-    if (_numScheduledVerticalScrollings * numSteps < 0)
-    {  // if user moved the wheel in another direction, we reset previously scheduled scalings
-        _numScheduledVerticalScrollings = numSteps;
+        if (verticalScrollAnim->state() != QTimeLine::Running)
+        {
+            verticalScrollAnim->start();
+        }
     }
-
-    if (verticalScrollAnim->state() != QTimeLine::Running)
-    {
-        verticalScrollAnim->start();
-    }
-    return true;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-bool GraphicsViewZoom::StartHorizontalScrollings(QWheelEvent *wheel_event)
+void GraphicsViewZoom::StartHorizontalScrollings(QWheelEvent *wheel_event)
 {
-    const int numSteps = ScrollingSteps(wheel_event);
-
-    if (numSteps == 0)
+    if (not wheel_event->pixelDelta().isNull())
+    { // Native scrolling animation
+        _view->horizontalScrollBar()->setValue(qCeil(_view->horizontalScrollBar()->value() -
+                                                     ScrollingSteps(wheel_event)));
+        animFinished();
+    }
+    else
     {
-        return true;//Just ignore
-    }
+        _numScheduledHorizontalScrollings = PrepareScrolling(_numScheduledHorizontalScrollings, wheel_event);
 
-    _numScheduledHorizontalScrollings += numSteps;
-    if (_numScheduledHorizontalScrollings * numSteps < 0)
-    {  // if user moved the wheel in another direction, we reset previously scheduled scalings
-        _numScheduledHorizontalScrollings = numSteps;
+        if (horizontalScrollAnim->state() != QTimeLine::Running)
+        {
+            horizontalScrollAnim->start();
+        }
     }
-
-    if (horizontalScrollAnim->state() != QTimeLine::Running)
-    {
-        horizontalScrollAnim->start();
-    }
-    return true;
 }
 
 //---------------------------------------------------------------------------------------------------------------------

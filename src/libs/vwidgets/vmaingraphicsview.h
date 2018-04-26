@@ -94,18 +94,18 @@ private:
     QPointF               target_viewport_pos;
     QTimeLine            *verticalScrollAnim;
     /** @brief _numScheduledVerticalScrollings keep number scheduled vertical scrollings. */
-    qint32                _numScheduledVerticalScrollings;
+    qreal                _numScheduledVerticalScrollings;
     QTimeLine            *horizontalScrollAnim;
     /** @brief _numScheduledHorizontalScrollings keep number scheduled horizontal scrollings. */
-    qint32                _numScheduledHorizontalScrollings;
+    qreal                _numScheduledHorizontalScrollings;
 
     static const int duration;
     static const int updateInterval;
 
     void FictiveSceneRect(QGraphicsScene *sc, QGraphicsView *view);
 
-    bool StartVerticalScrollings(QWheelEvent* wheel_event);
-    bool StartHorizontalScrollings(QWheelEvent* wheel_event);
+    void StartVerticalScrollings(QWheelEvent* wheel_event);
+    void StartHorizontalScrollings(QWheelEvent* wheel_event);
 
     bool GestureEvent(QGestureEvent *event);
     void PinchTriggered(QPinchGesture* gesture);
