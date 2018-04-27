@@ -519,7 +519,7 @@ void TMainWindow::ToolBarStyles()
 //---------------------------------------------------------------------------------------------------------------------
 void TMainWindow::closeEvent(QCloseEvent *event)
 {
-#if defined(Q_OS_MAC)
+#if defined(Q_OS_MAC) && QT_VERSION < QT_VERSION_CHECK(5, 11, 1)
     // Workaround for Qt bug https://bugreports.qt.io/browse/QTBUG-43344
     static int numCalled = 0;
     if (numCalled++ >= 1)
