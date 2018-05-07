@@ -1145,7 +1145,7 @@ void DialogPiecePath::SetCutPath(bool value)
 //---------------------------------------------------------------------------------------------------------------------
 QListWidgetItem *DialogPiecePath::GetItemById(quint32 id)
 {
-    for (qint32 i = 0; i < ui->listWidget->count(); ++i)
+    for (qint32 i = ui->listWidget->count()-1; i >= 0; --i)
     {
         QListWidgetItem *item = ui->listWidget->item(i);
         const VPieceNode node = qvariant_cast<VPieceNode>(item->data(Qt::UserRole));
