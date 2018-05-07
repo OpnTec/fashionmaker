@@ -57,8 +57,8 @@ void VisToolPiecePath::RefreshGeometry()
         for (int i = 0; i < nodes.size(); ++i)
         {
             VSimplePoint *point = GetPoint(static_cast<quint32>(i), supportColor);
+            point->RefreshPointGeometry(nodes.at(i)); // Keep first, you can hide only objects those have shape
             point->SetOnlyPoint(mode == Mode::Creation);
-            point->RefreshPointGeometry(nodes.at(i));
             point->setVisible(true);
         }
 

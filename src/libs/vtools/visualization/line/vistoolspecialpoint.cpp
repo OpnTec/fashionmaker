@@ -61,10 +61,9 @@ void VisToolSpecialPoint::RefreshGeometry()
 {
     if (object1Id > NULL_ID)
     {
-        const QSharedPointer<VPointF> point = Visualization::data->GeometricObject<VPointF>(object1Id);
-
+        // Keep first, you can hide only objects those have shape
+        m_point->RefreshPointGeometry(*Visualization::data->GeometricObject<VPointF>(object1Id));
         m_point->SetOnlyPoint(mode == Mode::Creation);
-        m_point->RefreshPointGeometry(*point);
         m_point->setVisible(true);
     }
 }

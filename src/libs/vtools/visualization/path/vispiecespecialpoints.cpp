@@ -66,9 +66,9 @@ void VisPieceSpecialPoints::RefreshGeometry()
     for (int i = 0; i < m_spoints.size(); ++i)
     {
         VSimplePoint *point = GetPoint(static_cast<quint32>(i), supportColor);
+        // Keep first, you can hide only objects those have shape
+        point->RefreshPointGeometry(*Visualization::data->GeometricObject<VPointF>(m_spoints.at(i)));
         point->SetOnlyPoint(false);
-        const QSharedPointer<VPointF> p = Visualization::data->GeometricObject<VPointF>(m_spoints.at(i));
-        point->RefreshPointGeometry(*p);
         point->setVisible(true);
 
         if (m_showRect)
