@@ -2424,7 +2424,7 @@ void VPattern::ParseOldToolSpline(VMainGraphicsScene *scene, const QDomElement &
         const auto p1 = data->GeometricObject<VPointF>(point1);
         const auto p4 = data->GeometricObject<VPointF>(point4);
 
-        auto spline = new VSpline(*p1, *p4, angle1, angle2, kAsm1, kAsm2, kCurve);
+        auto* spline = new VSpline(*p1, *p4, angle1, angle2, kAsm1, kAsm2, kCurve);
         if (duplicate > 0)
         {
             spline->SetDuplicate(duplicate);
@@ -2614,7 +2614,7 @@ void VPattern::ParseOldToolSplinePath(VMainGraphicsScene *scene, const QDomEleme
             }
         }
 
-        auto path = new VSplinePath(points, kCurve);
+        auto* path = new VSplinePath(points, kCurve);
         if (duplicate > 0)
         {
             path->SetDuplicate(duplicate);

@@ -220,7 +220,7 @@ VToolSplinePath* VToolSplinePath::Create(VToolSplinePathInitData &initData,  VSp
 //---------------------------------------------------------------------------------------------------------------------
 VToolSplinePath *VToolSplinePath::Create(VToolSplinePathInitData &initData)
 {
-    auto path = new VSplinePath();
+    auto* path = new VSplinePath();
 
     if (initData.duplicate > 0)
     {

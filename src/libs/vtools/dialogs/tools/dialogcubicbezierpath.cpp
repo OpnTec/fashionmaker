@@ -265,7 +265,7 @@ void DialogCubicBezierPath::currentPointChanged(int index)
 //---------------------------------------------------------------------------------------------------------------------
 void DialogCubicBezierPath::NewItem(const VPointF &point)
 {
-    auto item = new QListWidgetItem(point.name());
+    auto* item = new QListWidgetItem(point.name());
     item->setFont(NodeFont(item->font()));
     item->setData(Qt::UserRole, QVariant::fromValue(point));
 

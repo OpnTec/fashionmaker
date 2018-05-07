@@ -93,7 +93,7 @@ VToolCubicBezier *VToolCubicBezier::Create(QSharedPointer<DialogTool> dialog, VM
     initData.typeCreation = Source::FromGui;
     initData.spline = new VCubicBezier(dialogTool->GetSpline());
 
-    auto spl = Create(initData);
+    auto* spl = Create(initData);
 
     if (spl != nullptr)
     {
@@ -123,7 +123,7 @@ VToolCubicBezier *VToolCubicBezier::Create(VToolCubicBezierInitData initData)
     if (initData.parse == Document::FullParse)
     {
         VAbstractTool::AddRecord(initData.id, Tool::CubicBezier, initData.doc);
-        auto _spl = new VToolCubicBezier(initData);
+        auto* _spl = new VToolCubicBezier(initData);
         initData.scene->addItem(_spl);
         InitSplineToolConnections(initData.scene, _spl);
         VAbstractPattern::AddTool(initData.id, _spl);

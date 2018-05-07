@@ -192,7 +192,7 @@ VToolSpline* VToolSpline::Create(VToolSplineInitData &initData, VSpline *spline)
     if (initData.parse == Document::FullParse)
     {
         VAbstractTool::AddRecord(initData.id, Tool::Spline, initData.doc);
-        auto _spl = new VToolSpline(initData);
+        auto* _spl = new VToolSpline(initData);
         initData.scene->addItem(_spl);
         InitSplineToolConnections(initData.scene, _spl);
         VAbstractPattern::AddTool(initData.id, _spl);
@@ -215,7 +215,7 @@ VToolSpline *VToolSpline::Create(VToolSplineInitData &initData)
     auto p1 = initData.data->GeometricObject<VPointF>(initData.point1);
     auto p4 = initData.data->GeometricObject<VPointF>(initData.point4);
 
-    auto spline = new VSpline(*p1, *p4, calcAngle1, initData.a1, calcAngle2, initData.a2, calcLength1, initData.l1,
+    auto* spline = new VSpline(*p1, *p4, calcAngle1, initData.a1, calcAngle2, initData.a2, calcLength1, initData.l1,
                               calcLength2, initData.l2);
     if (initData.duplicate > 0)
     {

@@ -137,7 +137,7 @@ VToolPointOfIntersectionCurves *VToolPointOfIntersectionCurves::Create(VToolPoin
     if (initData.parse == Document::FullParse)
     {
         VAbstractTool::AddRecord(initData.id, Tool::PointOfIntersectionCurves, initData.doc);
-        auto point = new VToolPointOfIntersectionCurves(initData);
+        auto* point = new VToolPointOfIntersectionCurves(initData);
         initData.scene->addItem(point);
         InitToolConnections(initData.scene, point);
         VAbstractPattern::AddTool(initData.id, point);
