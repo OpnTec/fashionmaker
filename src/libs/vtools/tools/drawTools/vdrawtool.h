@@ -263,7 +263,7 @@ void VDrawTool::ContextMenu(QGraphicsSceneContextMenuEvent *event, quint32 itemI
         m_dialog = QSharedPointer<Dialog>(new Dialog(getData(), m_id, qApp->getMainWindow()));
         m_dialog->setModal(true);
 
-        connect(m_dialog.data(), &DialogTool::finished, this, &VDrawTool::FullUpdateFromGuiOk);
+        connect(m_dialog.data(), &DialogTool::DialogClosed, this, &VDrawTool::FullUpdateFromGuiOk);
         connect(m_dialog.data(), &DialogTool::DialogApplied, this, &VDrawTool::FullUpdateFromGuiApply);
 
         this->setDialog();

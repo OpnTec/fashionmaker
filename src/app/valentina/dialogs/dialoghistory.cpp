@@ -86,7 +86,7 @@ void DialogHistory::DialogAccepted()
     QTableWidgetItem *item = ui->tableWidget->item(cursorToolRecordRow, 0);
     quint32 id = qvariant_cast<quint32>(item->data(Qt::UserRole));
     emit ShowHistoryTool(id, false);
-    accept();
+    emit DialogClosed(QDialog::Accepted);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

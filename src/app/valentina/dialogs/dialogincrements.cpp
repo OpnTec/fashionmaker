@@ -1321,7 +1321,7 @@ void DialogIncrements::closeEvent(QCloseEvent *event)
     ui->plainTextEditDescription->blockSignals(true);
 
     emit UpdateProperties();
-    accept();
+    emit DialogClosed(QDialog::Accepted);
     event->accept();
 }
 

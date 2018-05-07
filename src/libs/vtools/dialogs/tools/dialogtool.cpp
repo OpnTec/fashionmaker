@@ -183,7 +183,7 @@ DialogTool::~DialogTool()
  */
 void DialogTool::closeEvent(QCloseEvent *event)
 {
-    reject();
+    DialogRejected();
     event->accept();
 }
 
@@ -1181,7 +1181,7 @@ void DialogTool::ChangeColor(QWidget *widget, const QColor &color)
 void DialogTool::DialogAccepted()
 {
     SaveData();
-    accept();
+    emit DialogClosed(QDialog::Accepted);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -1189,6 +1189,15 @@ void DialogTool::DialogApply()
 {
     SaveData();
     emit DialogApplied();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief DialogRejected emit signal dialog rejected
+ */
+void DialogTool::DialogRejected()
+{
+    emit DialogClosed(QDialog::Rejected);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

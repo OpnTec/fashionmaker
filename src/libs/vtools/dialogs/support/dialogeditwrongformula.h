@@ -72,6 +72,7 @@ public:
     void         SetPreviewCalculationsMode();
 public slots:
     virtual void DialogAccepted() Q_DECL_OVERRIDE;
+    virtual void DialogRejected() Q_DECL_OVERRIDE;
     virtual void EvalFormula() Q_DECL_OVERRIDE;
     void         ValChanged(int row);
     void         PutHere();

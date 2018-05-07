@@ -661,7 +661,7 @@ void MainWindow::SetToolButton(bool checked, Tool t, const QString &cursor, cons
 
         connect(scene, &VMainGraphicsScene::ChoosedObject, dialogTool.data(), &DialogTool::ChosenObject);
         connect(scene, &VMainGraphicsScene::SelectedObject, dialogTool.data(), &DialogTool::SelectedObject);
-        connect(dialogTool.data(), &DialogTool::finished, this, closeDialogSlot);
+        connect(dialogTool.data(), &DialogTool::DialogClosed, this, closeDialogSlot);
         connect(dialogTool.data(), &DialogTool::ToolTip, this, &MainWindow::ShowToolTip);
         emit ui->view->itemClicked(nullptr);
     }
@@ -4205,7 +4205,7 @@ void MainWindow::CreateActions()
             dialogHistory = new DialogHistory(pattern, doc, this);
             dialogHistory->setWindowFlags(Qt::Window);
             connect(this, &MainWindow::RefreshHistory, dialogHistory.data(), &DialogHistory::UpdateHistory);
-            connect(dialogHistory.data(), &DialogHistory::finished, this, [this]()
+            connect(dialogHistory.data(), &DialogHistory::DialogClosed, this, [this]()
             {
                 ui->actionHistory->setChecked(false);
                 delete dialogHistory;
@@ -4253,7 +4253,7 @@ void MainWindow::CreateActions()
             dialogTable = new DialogIncrements(pattern, doc, this);
             connect(dialogTable.data(), &DialogIncrements::UpdateProperties, toolOptions,
                     &VToolOptionsPropertyBrowser::RefreshOptions);
-            connect(dialogTable.data(), &DialogIncrements::finished, this, [this]()
+            connect(dialogTable.data(), &DialogIncrements::DialogClosed, this, [this]()
             {
                 ui->actionTable->setChecked(false);
                 delete dialogTable;

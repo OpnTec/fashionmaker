@@ -133,7 +133,15 @@ DialogEditWrongFormula::~DialogEditWrongFormula()
 void DialogEditWrongFormula::DialogAccepted()
 {
     formula = ui->plainTextEditFormula->toPlainText();
-    accept();
+    emit DialogClosed(QDialog::Accepted);
+    emit accepted();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogEditWrongFormula::DialogRejected()
+{
+    emit DialogClosed(QDialog::Rejected);
+    emit rejected();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
