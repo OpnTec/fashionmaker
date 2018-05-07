@@ -106,11 +106,7 @@ void DialogPiecePath::ChosenObject(quint32 id, const SceneObject &type)
 {
     if (not prepare)
     {
-        bool reverse = false;
-        if (QGuiApplication::keyboardModifiers() == Qt::ShiftModifier)
-        {
-            reverse = true;
-        }
+        const bool reverse = QGuiApplication::keyboardModifiers() == Qt::ShiftModifier;
         if (id != GetLastId())
         {
             switch (type)
