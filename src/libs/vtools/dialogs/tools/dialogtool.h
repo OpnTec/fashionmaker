@@ -205,6 +205,7 @@ protected:
 
     virtual void     closeEvent ( QCloseEvent * event ) Q_DECL_OVERRIDE;
     virtual void     showEvent( QShowEvent *event ) Q_DECL_OVERRIDE;
+    virtual void     keyPressEvent(QKeyEvent *event) Q_DECL_OVERRIDE;
 
     void             FillComboBoxPiecesList(QComboBox *box, const QVector<quint32> &list);
     void             FillComboBoxPoints(QComboBox *box, FillComboBox rule = FillComboBox::Whole,

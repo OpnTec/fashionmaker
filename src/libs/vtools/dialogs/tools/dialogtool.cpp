@@ -213,6 +213,20 @@ void DialogTool::showEvent(QShowEvent *event)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void DialogTool::keyPressEvent(QKeyEvent *event)
+{
+    switch (event->key())
+    {
+        case Qt::Key_Escape:
+            DialogRejected();
+            return; // After reject the dialog will be destroyed, exit imidiately
+        default:
+            break;
+    }
+    QDialog::keyPressEvent ( event );
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 void DialogTool::FillComboBoxPiecesList(QComboBox *box, const QVector<quint32> &list)
 {
     SCASSERT(box != nullptr)
