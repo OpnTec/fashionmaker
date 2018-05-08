@@ -276,8 +276,10 @@ void VControlPointSpline::SetCtrlLine(const QPointF &controlPoint, const QPointF
     VGObject::LineIntersectCircle(QPointF(), ScaledRadius(SceneScale(scene())),
                                   QLineF( QPointF(), splinePoint-controlPoint), p1, p2);
     QLineF line(splinePoint-controlPoint, p1);
+    controlLine->setFlag(QGraphicsItem::ItemSendsGeometryChanges, false);
     controlLine->setLine(line);
     controlLine->setVisible(not line.isNull());
+    controlLine->setFlag(QGraphicsItem::ItemSendsGeometryChanges, true);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
