@@ -513,9 +513,11 @@ void VMainGraphicsView::mousePressEvent(QMouseEvent *event)
                     emit itemClicked(nullptr);
                     break;
                 }
+
+                const QList<QGraphicsItem *> sceneItems = this->scene()->items();
                 for (auto item : list)
                 {
-                    if (this->scene()->items().contains(item))
+                    if (sceneItems.contains(item))
                     {
                         if (item->type() > QGraphicsItem::UserType && item->type() <= VSimpleCurve::Type)
                         {
