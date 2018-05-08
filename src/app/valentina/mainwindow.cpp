@@ -2732,7 +2732,7 @@ void MainWindow::ActionLayout(bool checked)
 
         ShowPaper(ui->listWidget->currentRow());
 
-        if (scenes.isEmpty())
+        if (scenes.isEmpty() || isLayoutStale)
         {
             ui->toolButtonLayoutSettings->click();
         }
