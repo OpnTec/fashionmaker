@@ -142,8 +142,10 @@ protected:
     void           TestUniqueId() const;
     void           CollectId(const QDomElement &node, QVector<quint32> &vector)const;
 
-private slots:
+protected slots:
     void RefreshElementIdCache();
+
+private slots:
     void CacheRefreshed();
 
 private:

@@ -4221,6 +4221,7 @@ void VPattern::PrepareForParse(const Document &parse)
     if (parse == Document::FullParse)
     {
         TestUniqueId();
+        RefreshElementIdCache();
         sceneDraw->clear();
         sceneDraw->InitOrigins();
         sceneDetail->clear();
