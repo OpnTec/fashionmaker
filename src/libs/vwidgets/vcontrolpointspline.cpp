@@ -98,6 +98,12 @@ void VControlPointSpline::paint(QPainter *painter, const QStyleOptionGraphicsIte
     lPen.setColor(CorrectColor(controlLine, Qt::black));
     controlLine->setPen(lPen);
 
+    QPointF p1, p2;
+    VGObject::LineIntersectCircle(QPointF(), ScaledRadius(SceneScale(scene())),
+                                  QLineF( QPointF(), controlLine->line().p1()), p1, p2);
+    QLineF line(controlLine->line().p1(), p1);
+    controlLine->setLine(line);
+
     VScenePoint::paint(painter, option, widget);
 }
 
