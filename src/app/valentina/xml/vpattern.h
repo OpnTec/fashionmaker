@@ -53,6 +53,8 @@ public:
 
     void           Parse(const Document &parse);
 
+    void           GarbageCollector(bool commit = false);
+
     void           setCurrentData();
     virtual void   UpdateToolData(const quint32 &id, VContainer *data) Q_DECL_OVERRIDE;
     VContainer     GetCompleteData() const;
@@ -234,8 +236,6 @@ private:
 
     QDomElement MakeEmptyIncrement(const QString &name);
     QDomElement FindIncrement(const QString &name) const;
-
-    void GarbageCollector();
 
     void NewEmptyIncrement(const QString &type, const QString &name);
     void NewEmptyIncrementAfter(const QString &type, const QString &after, const QString &name);

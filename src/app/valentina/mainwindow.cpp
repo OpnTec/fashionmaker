@@ -4626,6 +4626,9 @@ bool MainWindow::LoadPattern(QString fileName, const QString& customMeasureFile)
 #endif
     
     FullParseFile();
+    /* Collect garbage only after successfully parse. This way wrongly accused items have one more time to restore
+     * a reference. */
+    doc->GarbageCollector(true);
 
     m_progressBar->setVisible(false);
 #if defined(Q_OS_WIN32) && QT_VERSION >= QT_VERSION_CHECK(5, 7, 0)

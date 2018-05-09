@@ -3343,8 +3343,10 @@ QDomElement VPattern::FindIncrement(const QString &name) const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VPattern::GarbageCollector()
+void VPattern::GarbageCollector(bool commit)
 {
+    bool cleared = false;
+
     QDomNodeList modelingList = elementsByTagName(TagModeling);
     for (int i=0; i < modelingList.size(); ++i)
     {
@@ -3366,7 +3368,11 @@ void VPattern::GarbageCollector()
                     }
                     else
                     { // Parent was deleted. We do not need this object anymore
-                        modElement.removeChild(modNode);
+                        if (commit)
+                        {
+                            modElement.removeChild(modNode);
+                            cleared = true;
+                        }
                     }
                 }
                 else
@@ -3377,6 +3383,11 @@ void VPattern::GarbageCollector()
                 modNode = nextSibling;
             }
         }
+    }
+
+    if (cleared)
+    {
+        RefreshElementIdCache();
     }
 }
 
