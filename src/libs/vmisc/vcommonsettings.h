@@ -102,6 +102,9 @@ public:
     bool IsFreeCurveMode() const;
     void SetFreeCurveMode(bool value);
 
+    bool IsDoubleClickZoomFitBestCurrentPP() const;
+    void SetDoubleClickZoomFitBestCurrentPP(bool value);
+
     int  GetUndoCount() const;
     void SetUndoCount(const int &value);
 

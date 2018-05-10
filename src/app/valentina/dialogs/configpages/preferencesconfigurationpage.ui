@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>501</width>
-    <height>582</height>
+    <height>611</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -194,6 +194,16 @@
         </property>
         <property name="text">
          <string>Free curve mode</string>
+        </property>
+        <property name="checked">
+         <bool>true</bool>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QCheckBox" name="checkBoxZoomFitBestCurrentPP">
+        <property name="text">
+         <string>Double click calls Zoom fit best for current pattern piece</string>
         </property>
         <property name="checked">
          <bool>true</bool>

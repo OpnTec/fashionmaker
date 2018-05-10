@@ -108,6 +108,7 @@ PreferencesConfigurationPage::PreferencesConfigurationPage(QWidget *parent)
     });
 
     ui->checkBoxFreeCurve->setChecked(qApp->ValentinaSettings()->IsFreeCurveMode());
+    ui->checkBoxZoomFitBestCurrentPP->setChecked(qApp->ValentinaSettings()->IsDoubleClickZoomFitBestCurrentPP());
 
     //----------------------- Toolbar
     ui->toolBarStyleCheck->setChecked(qApp->ValentinaSettings()->GetToolBarStyle());
@@ -135,6 +136,7 @@ QStringList PreferencesConfigurationPage::Apply()
     settings->SetOsSeparator(ui->osOptionCheck->isChecked());
     settings->SetToolBarStyle(ui->toolBarStyleCheck->isChecked());
     settings->SetFreeCurveMode(ui->checkBoxFreeCurve->isChecked());
+    settings->SetDoubleClickZoomFitBestCurrentPP(ui->checkBoxZoomFitBestCurrentPP->isChecked());
 
     if (m_langChanged || m_systemChanged)
     {

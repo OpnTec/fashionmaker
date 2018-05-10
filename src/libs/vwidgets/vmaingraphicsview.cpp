@@ -607,7 +607,7 @@ void VMainGraphicsView::mouseReleaseEvent(QMouseEvent *event)
 //---------------------------------------------------------------------------------------------------------------------
 void VMainGraphicsView::mouseDoubleClickEvent(QMouseEvent *event)
 {
-    if (event->button() == Qt::LeftButton)
+    if (event->button() == Qt::LeftButton && qApp->Settings()->IsDoubleClickZoomFitBestCurrentPP())
     {
         if (VAbstractMainWindow *window = qobject_cast<VAbstractMainWindow *>(qApp->getMainWindow()))
         {

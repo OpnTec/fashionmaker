@@ -63,6 +63,7 @@ Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingConfigurationConfirmItemDeletion
 Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingConfigurationConfirmFormatRewriting, (QLatin1String("configuration/confirm_format_rewriting")))
 Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingConfigurationToolBarStyle, (QLatin1String("configuration/tool_bar_style")))
 Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingConfigurationFreeCurveMode, (QLatin1String("configuration/freeCurveMode")))
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingConfigurationDoubleClickZoomFitBestCurrentPP, (QLatin1String("configuration/doubleClickZoomFitBestCurrentPP")))
 
 Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingPatternUndo, (QLatin1String("pattern/undo")))
 Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingPatternForbidFlipping, (QLatin1String("pattern/forbidFlipping")))
@@ -522,6 +523,18 @@ bool VCommonSettings::IsFreeCurveMode() const
 void VCommonSettings::SetFreeCurveMode(bool value)
 {
     setValue(*settingConfigurationFreeCurveMode, value);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+bool VCommonSettings::IsDoubleClickZoomFitBestCurrentPP() const
+{
+    return value(*settingConfigurationDoubleClickZoomFitBestCurrentPP, 1).toBool();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VCommonSettings::SetDoubleClickZoomFitBestCurrentPP(bool value)
+{
+    setValue(*settingConfigurationDoubleClickZoomFitBestCurrentPP, value);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
