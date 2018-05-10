@@ -250,6 +250,13 @@ VAbstractPattern::VAbstractPattern(QObject *parent)
 {}
 
 //---------------------------------------------------------------------------------------------------------------------
+VAbstractPattern::~VAbstractPattern()
+{
+    qDeleteAll(toolsOnRemove);
+    toolsOnRemove.clear();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 QStringList VAbstractPattern::ListMeasurements() const
 {
     const QFuture<QStringList> futureIncrements = QtConcurrent::run(this, &VAbstractPattern::ListIncrements);
