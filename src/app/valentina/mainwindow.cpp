@@ -4739,6 +4739,8 @@ void MainWindow::Preferences()
                 &VToolOptionsPropertyBrowser::RefreshOptions);
         connect(dlg.data(), &DialogPreferences::UpdateProperties, this, &MainWindow::ToolBarStyles);
         connect(dlg.data(), &DialogPreferences::UpdateProperties, this, [this](){emit doc->FullUpdateFromFile();});
+        connect(dlg.data(), &DialogPreferences::UpdateProperties, ui->view,
+                &VMainGraphicsView::ResetScrollingAnimation);
         QGuiApplication::restoreOverrideCursor();
 
         if (guard->exec() == QDialog::Accepted)

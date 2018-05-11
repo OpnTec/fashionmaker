@@ -148,8 +148,41 @@ public:
     PageOrientation GetTiledPDFOrientation() const;
     void            SetTiledPDFOrientation(PageOrientation value);
 
+    static const int defaultScrollingDuration;
+    static const int scrollingDurationMin;
+    static const int scrollingDurationMax;
+    int GetScrollingDuration() const;
+    void SetScrollingDuration(int duration);
+
+    static const int defaultScrollingUpdateInterval;
+    static const int scrollingUpdateIntervalMin;
+    static const int scrollingUpdateIntervalMax;
+    int GetScrollingUpdateInterval() const;
+    void SetScrollingUpdateInterval(int updateInterval);
+
+    static const qreal defaultSensorMouseScale;
+    static const qreal sensorMouseScaleMin;
+    static const qreal sensorMouseScaleMax;
+    qreal GetSensorMouseScale() const;
+    void SetSensorMouseScale(qreal scale);
+
+    static const qreal defaultWheelMouseScale;
+    static const qreal wheelMouseScaleMin;
+    static const qreal wheelMouseScaleMax;
+    qreal GetWheelMouseScale() const;
+    void SetWheelMouseScale(qreal scale);
+
+    static const qreal defaultScrollingAcceleration;
+    static const qreal scrollingAccelerationMin;
+    static const qreal scrollingAccelerationMax;
+    qreal GetScrollingAcceleration() const;
+    void SetScrollingAcceleration(qreal acceleration);
+
 private:
     Q_DISABLE_COPY(VSettings)
+
+    template <typename T>
+    T GetCachedValue(T &cache, const QString &setting, T defValue, T valueMin, T valueMax) const;
 };
 
 #endif // VSETTINGS_H

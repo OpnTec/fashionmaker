@@ -38,6 +38,7 @@
 #include <QString>
 #include <Qt>
 #include <QtGlobal>
+#include <QPointer>
 
 /*!
  * This class adds ability to zoom QGraphicsView using mouse wheel. The point under cursor
@@ -77,6 +78,7 @@ public:
     void gentle_zoom(double factor);
     void set_modifiers(Qt::KeyboardModifiers modifiers);
     void set_zoom_factor_base(double value);
+    void InitScrollingAnimation();
 signals:
     void zoomed();
 public slots:
@@ -92,15 +94,12 @@ private:
     double                _zoom_factor_base;
     QPointF               target_scene_pos;
     QPointF               target_viewport_pos;
-    QTimeLine            *verticalScrollAnim;
+    QPointer<QTimeLine>   verticalScrollAnim;
     /** @brief _numScheduledVerticalScrollings keep number scheduled vertical scrollings. */
     qreal                _numScheduledVerticalScrollings;
-    QTimeLine            *horizontalScrollAnim;
+    QPointer<QTimeLine>   horizontalScrollAnim;
     /** @brief _numScheduledHorizontalScrollings keep number scheduled horizontal scrollings. */
     qreal                _numScheduledHorizontalScrollings;
-
-    static const int duration;
-    static const int updateInterval;
 
     void FictiveSceneRect(QGraphicsScene *sc, QGraphicsView *view);
 
@@ -154,6 +153,7 @@ public slots:
     void     ZoomOut();
     void     ZoomOriginal();
     void     ZoomFitBest();
+    void     ResetScrollingAnimation();
 protected:
     virtual void mousePressEvent(QMouseEvent *event) Q_DECL_OVERRIDE;
     virtual void mouseMoveEvent(QMouseEvent *event) Q_DECL_OVERRIDE;

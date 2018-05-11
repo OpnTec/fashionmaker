@@ -63,9 +63,6 @@
 #include "../vmisc/vsettings.h"
 #include "vabstractmainwindow.h"
 
-const int GraphicsViewZoom::duration = 350;
-const int GraphicsViewZoom::updateInterval = 30;
-
 const qreal maxSceneSize = ((20.0 * 1000.0) / 25.4) * PrintDPI; // 20 meters in pixels
 
 namespace
@@ -77,15 +74,16 @@ qreal ScrollingSteps(QWheelEvent* wheel_event)
     const QPoint numPixels = wheel_event->pixelDelta();
     const QPoint numDegrees = wheel_event->angleDelta() / 8;
     qreal numSteps = 0;
+    VSettings *settings = qobject_cast<VSettings *>(qApp->Settings());
 
     if (not numPixels.isNull())
     {
-        const qreal mouseScale = 2.;
+        const qreal mouseScale = settings->GetSensorMouseScale();
         numSteps = (wheel_event->orientation() == Qt::Vertical ? numPixels.y() : numPixels.x()) / mouseScale;
     }
     else if (not numDegrees.isNull())
     {
-        const qreal mouseScale = 45.;
+        const qreal mouseScale = settings->GetWheelMouseScale();
         numSteps = (wheel_event->orientation() == Qt::Vertical ? numDegrees.y() : numDegrees.x()) / 15. * mouseScale;
     }
 
@@ -111,7 +109,7 @@ qreal PrepareScrolling(qreal scheduledScrollings, QWheelEvent *wheel_event)
         scheduledScrollings += numSteps;
     }
 
-    scheduledScrollings *= 1.3;
+    scheduledScrollings *= qobject_cast<VSettings *>(qApp->Settings())->GetScrollingAcceleration();
 
     return scheduledScrollings;
 }
@@ -123,24 +121,18 @@ GraphicsViewZoom::GraphicsViewZoom(QGraphicsView* view)
     _view(view),
     _modifiers(Qt::ControlModifier),
     _zoom_factor_base(1.0015),
-    target_scene_pos(QPointF()),
-    target_viewport_pos(QPointF()),
-    verticalScrollAnim(new QTimeLine(duration, this)),
+    target_scene_pos(),
+    target_viewport_pos(),
+    verticalScrollAnim(),
     _numScheduledVerticalScrollings(0),
-    horizontalScrollAnim(new QTimeLine(duration, this)),
+    horizontalScrollAnim(),
     _numScheduledHorizontalScrollings(0)
 {
   _view->viewport()->installEventFilter(this);
   _view->viewport()->grabGesture(Qt::PinchGesture);
   _view->setMouseTracking(true);
 
-  verticalScrollAnim->setUpdateInterval(updateInterval);
-  connect(verticalScrollAnim, &QTimeLine::valueChanged, this, &GraphicsViewZoom::VerticalScrollingTime);
-  connect(verticalScrollAnim, &QTimeLine::finished, this, &GraphicsViewZoom::animFinished);
-
-  horizontalScrollAnim->setUpdateInterval(updateInterval);
-  connect(horizontalScrollAnim, &QTimeLine::valueChanged, this, &GraphicsViewZoom::HorizontalScrollingTime);
-  connect(horizontalScrollAnim, &QTimeLine::finished, this, &GraphicsViewZoom::animFinished);
+  InitScrollingAnimation();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -184,6 +176,34 @@ void GraphicsViewZoom::set_modifiers(Qt::KeyboardModifiers modifiers)
 void GraphicsViewZoom::set_zoom_factor_base(double value)
 {
     _zoom_factor_base = value;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void GraphicsViewZoom::InitScrollingAnimation()
+{
+    VSettings *settings = qobject_cast<VSettings *>(qApp->Settings());
+
+    if (not verticalScrollAnim.isNull())
+    {
+        delete verticalScrollAnim;
+    }
+
+    verticalScrollAnim = new QTimeLine(settings->GetScrollingDuration(), this);
+    verticalScrollAnim->setUpdateInterval(settings->GetScrollingUpdateInterval());
+
+    connect(verticalScrollAnim, &QTimeLine::valueChanged, this, &GraphicsViewZoom::VerticalScrollingTime);
+    connect(verticalScrollAnim, &QTimeLine::finished, this, &GraphicsViewZoom::animFinished);
+
+    if (not horizontalScrollAnim.isNull())
+    {
+        delete horizontalScrollAnim;
+    }
+
+    horizontalScrollAnim = new QTimeLine(settings->GetScrollingDuration(), this);
+    horizontalScrollAnim->setUpdateInterval(settings->GetScrollingUpdateInterval());
+
+    connect(horizontalScrollAnim, &QTimeLine::valueChanged, this, &GraphicsViewZoom::HorizontalScrollingTime);
+    connect(horizontalScrollAnim, &QTimeLine::finished, this, &GraphicsViewZoom::animFinished);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -488,6 +508,12 @@ void VMainGraphicsView::ZoomFitBest()
 
     VMainGraphicsView::NewSceneRect(scene(), this);
     emit ScaleChanged(this->transform().m11());
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VMainGraphicsView::ResetScrollingAnimation()
+{
+    zoom->InitScrollingAnimation();
 }
 
 //---------------------------------------------------------------------------------------------------------------------

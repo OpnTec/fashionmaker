@@ -45,6 +45,10 @@ PreferencesConfigurationPage::PreferencesConfigurationPage(QWidget *parent)
       m_labelLangChanged(false)
 {
     ui->setupUi(this);
+
+    ui->tabWidget->setCurrentIndex(0);
+
+    // Tab General
     ui->autoSaveCheck->setChecked(qApp->ValentinaSettings()->GetAutosaveState());
 
     InitLanguages(ui->langCombo);
@@ -107,11 +111,34 @@ PreferencesConfigurationPage::PreferencesConfigurationPage(QWidget *parent)
         settings->SetConfirmFormatRewriting(true);
     });
 
-    ui->checkBoxFreeCurve->setChecked(qApp->ValentinaSettings()->IsFreeCurveMode());
-    ui->checkBoxZoomFitBestCurrentPP->setChecked(qApp->ValentinaSettings()->IsDoubleClickZoomFitBestCurrentPP());
+    VSettings *settings = qApp->ValentinaSettings();
+
+    ui->checkBoxFreeCurve->setChecked(settings->IsFreeCurveMode());
+    ui->checkBoxZoomFitBestCurrentPP->setChecked(settings->IsDoubleClickZoomFitBestCurrentPP());
 
     //----------------------- Toolbar
-    ui->toolBarStyleCheck->setChecked(qApp->ValentinaSettings()->GetToolBarStyle());
+    ui->toolBarStyleCheck->setChecked(settings->GetToolBarStyle());
+
+    // Tab Scrolling
+    ui->spinBoxDuration->setMinimum(VSettings::scrollingDurationMin);
+    ui->spinBoxDuration->setMaximum(VSettings::scrollingDurationMax);
+    ui->spinBoxDuration->setValue(settings->GetScrollingDuration());
+
+    ui->spinBoxUpdateInterval->setMinimum(VSettings::scrollingUpdateIntervalMin);
+    ui->spinBoxUpdateInterval->setMaximum(VSettings::scrollingUpdateIntervalMin);
+    ui->spinBoxUpdateInterval->setValue(settings->GetScrollingUpdateInterval());
+
+    ui->doubleSpinBoxSensor->setMinimum(VSettings::sensorMouseScaleMin);
+    ui->doubleSpinBoxSensor->setMaximum(VSettings::sensorMouseScaleMax);
+    ui->doubleSpinBoxSensor->setValue(settings->GetSensorMouseScale());
+
+    ui->doubleSpinBoxWheel->setMinimum(VSettings::wheelMouseScaleMin);
+    ui->doubleSpinBoxWheel->setMaximum(VSettings::wheelMouseScaleMax);
+    ui->doubleSpinBoxWheel->setValue(settings->GetWheelMouseScale());
+
+    ui->doubleSpinBoxAcceleration->setMinimum(VSettings::scrollingAccelerationMin);
+    ui->doubleSpinBoxAcceleration->setMaximum(VSettings::scrollingAccelerationMax);
+    ui->doubleSpinBoxAcceleration->setValue(settings->GetScrollingAcceleration());
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -123,6 +150,7 @@ PreferencesConfigurationPage::~PreferencesConfigurationPage()
 //---------------------------------------------------------------------------------------------------------------------
 QStringList PreferencesConfigurationPage::Apply()
 {
+    // Tab General
     QStringList preferences;
     VSettings *settings = qApp->ValentinaSettings();
     settings->SetAutosaveState(ui->autoSaveCheck->isChecked());
@@ -163,6 +191,14 @@ QStringList PreferencesConfigurationPage::Apply()
         settings->SetLabelLanguage(locale);
         m_labelLangChanged = false;
     }
+
+    // Tab Scrolling
+    settings->SetScrollingDuration(ui->spinBoxDuration->value());
+    settings->SetScrollingUpdateInterval(ui->spinBoxUpdateInterval->value());
+    settings->SetSensorMouseScale(ui->doubleSpinBoxSensor->value());
+    settings->SetWheelMouseScale(ui->doubleSpinBoxWheel->value());
+    settings->SetScrollingAcceleration(ui->doubleSpinBoxAcceleration->value());
+
     return preferences;
 }
 

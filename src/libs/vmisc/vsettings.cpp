@@ -46,6 +46,26 @@
 
 Q_DECLARE_METATYPE(QMarginsF)
 
+const int VSettings::defaultScrollingDuration = 300;
+const int VSettings::scrollingDurationMin = 100;
+const int VSettings::scrollingDurationMax = 1000;
+
+const int VSettings::defaultScrollingUpdateInterval = 30;
+const int VSettings::scrollingUpdateIntervalMin = 10;
+const int VSettings::scrollingUpdateIntervalMax = 100;
+
+const qreal VSettings::defaultSensorMouseScale = 2.0;
+const qreal VSettings::sensorMouseScaleMin = 1.0;
+const qreal VSettings::sensorMouseScaleMax = 10.0;
+
+const qreal VSettings::defaultWheelMouseScale = 45.0;
+const qreal VSettings::wheelMouseScaleMin = 1.0;
+const qreal VSettings::wheelMouseScaleMax = 100.0;
+
+const qreal VSettings::defaultScrollingAcceleration = 1.3;
+const qreal VSettings::scrollingAccelerationMin = 1.0;
+const qreal VSettings::scrollingAccelerationMax = 10.0;
+
 namespace
 {
 Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingConfigurationLabelLanguage,
@@ -79,6 +99,19 @@ Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingTiledPDFMargins, (QLatin1String(
 Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingTiledPDFPaperHeight, (QLatin1String("tiledPDF/paperHeight")))
 Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingTiledPDFPaperWidth, (QLatin1String("tiledPDF/paperWidth")))
 Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingTiledPDFOrientation, (QLatin1String("tiledPDF/orientation")))
+
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingScrollingDuration, (QLatin1String("scrolling/duration")))
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingScrollingUpdateInterval, (QLatin1String("scrolling/updateInterval")))
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingScrollingSensorMouseScale, (QLatin1String("scrolling/sensorMouseScale")))
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingScrollingWheelMouseScale, (QLatin1String("scrolling/wheelMouseScale")))
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingScrollingAcceleration, (QLatin1String("scrolling/acceleration")))
+
+// Reading settings file is very expensive, cache values to speed up getting a value
+int scrollingDurationCached = -1;
+int scrollingUpdateIntervalCached = -1;
+qreal scrollingSensorMouseScaleCached = -1;
+qreal scrollingWheelMouseScaleCached = -1;
+qreal scrollingAccelerationCached = -1;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -638,3 +671,85 @@ void VSettings::SetTiledPDFOrientation(PageOrientation value)
     setValue(*settingTiledPDFOrientation, static_cast<bool> (value));
 }
 
+//---------------------------------------------------------------------------------------------------------------------
+int VSettings::GetScrollingDuration() const
+{
+    return GetCachedValue(scrollingDurationCached, *settingScrollingDuration, defaultScrollingDuration,
+                          scrollingDurationMin, scrollingDurationMax);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VSettings::SetScrollingDuration(int duration)
+{
+    scrollingDurationCached = qBound(scrollingDurationMin, duration, scrollingDurationMax);
+    setValue(*settingScrollingDuration, scrollingDurationCached);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+int VSettings::GetScrollingUpdateInterval() const
+{
+    return GetCachedValue(scrollingUpdateIntervalCached, *settingScrollingUpdateInterval,
+                          defaultScrollingUpdateInterval, scrollingUpdateIntervalMin, scrollingUpdateIntervalMax);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VSettings::SetScrollingUpdateInterval(int updateInterval)
+{
+    scrollingUpdateIntervalCached = qBound(scrollingUpdateIntervalMin, updateInterval, scrollingUpdateIntervalMax);
+    setValue(*settingScrollingUpdateInterval, scrollingUpdateIntervalCached);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+qreal VSettings::GetSensorMouseScale() const
+{
+    return GetCachedValue(scrollingSensorMouseScaleCached, *settingScrollingSensorMouseScale, defaultSensorMouseScale,
+                          sensorMouseScaleMin, sensorMouseScaleMax);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VSettings::SetSensorMouseScale(qreal scale)
+{
+    scrollingSensorMouseScaleCached = qBound(sensorMouseScaleMin, scale, sensorMouseScaleMax);
+    setValue(*settingScrollingSensorMouseScale, scrollingSensorMouseScaleCached);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+qreal VSettings::GetWheelMouseScale() const
+{
+    return GetCachedValue(scrollingWheelMouseScaleCached, *settingScrollingWheelMouseScale, defaultWheelMouseScale,
+                          wheelMouseScaleMin, wheelMouseScaleMax);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VSettings::SetWheelMouseScale(qreal scale)
+{
+    scrollingWheelMouseScaleCached = qBound(wheelMouseScaleMin, scale, wheelMouseScaleMax);
+    setValue(*settingScrollingWheelMouseScale, scrollingWheelMouseScaleCached);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+qreal VSettings::GetScrollingAcceleration() const
+{
+    return GetCachedValue(scrollingAccelerationCached, *settingScrollingAcceleration, defaultScrollingAcceleration,
+                          scrollingAccelerationMin, scrollingAccelerationMax);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VSettings::SetScrollingAcceleration(qreal acceleration)
+{
+    scrollingAccelerationCached = qBound(scrollingAccelerationMin, acceleration, scrollingAccelerationMax);
+    setValue(*settingScrollingAcceleration, scrollingAccelerationCached);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+template<typename T>
+T VSettings::GetCachedValue(T &cache, const QString &setting, T defValue, T valueMin, T valueMax) const
+{
+    if (cache < 0)
+    {
+        const QVariant val = value(setting, defValue);
+        cache = val.canConvert<T>() ? qBound(valueMin, val.value<T>(), valueMax) : defValue;
+    }
+
+    return cache;
+}
