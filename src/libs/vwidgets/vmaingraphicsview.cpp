@@ -191,8 +191,8 @@ void GraphicsViewZoom::InitScrollingAnimation()
     verticalScrollAnim = new QTimeLine(settings->GetScrollingDuration(), this);
     verticalScrollAnim->setUpdateInterval(settings->GetScrollingUpdateInterval());
 
-    connect(verticalScrollAnim, &QTimeLine::valueChanged, this, &GraphicsViewZoom::VerticalScrollingTime);
-    connect(verticalScrollAnim, &QTimeLine::finished, this, &GraphicsViewZoom::animFinished);
+    connect(verticalScrollAnim.data(), &QTimeLine::valueChanged, this, &GraphicsViewZoom::VerticalScrollingTime);
+    connect(verticalScrollAnim.data(), &QTimeLine::finished, this, &GraphicsViewZoom::animFinished);
 
     if (not horizontalScrollAnim.isNull())
     {
@@ -202,8 +202,8 @@ void GraphicsViewZoom::InitScrollingAnimation()
     horizontalScrollAnim = new QTimeLine(settings->GetScrollingDuration(), this);
     horizontalScrollAnim->setUpdateInterval(settings->GetScrollingUpdateInterval());
 
-    connect(horizontalScrollAnim, &QTimeLine::valueChanged, this, &GraphicsViewZoom::HorizontalScrollingTime);
-    connect(horizontalScrollAnim, &QTimeLine::finished, this, &GraphicsViewZoom::animFinished);
+    connect(horizontalScrollAnim.data(), &QTimeLine::valueChanged, this, &GraphicsViewZoom::HorizontalScrollingTime);
+    connect(horizontalScrollAnim.data(), &QTimeLine::finished, this, &GraphicsViewZoom::animFinished);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
