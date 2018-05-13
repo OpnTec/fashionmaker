@@ -2287,17 +2287,13 @@
         <translation>Опции</translation>
     </message>
     <message>
-        <source>Global</source>
-        <translation type="vanished">Глобальные</translation>
-    </message>
-    <message>
         <source>Preview</source>
         <translation>Предварительный просмотр</translation>
     </message>
     <message>
         <source>Global</source>
         <comment>Options</comment>
-        <translation type="unfinished">Глобальные</translation>
+        <translation>Глобальные</translation>
     </message>
 </context>
 <context>
@@ -7747,10 +7743,6 @@ Do you want to save your changes?</source>
         <translation>Выберите объект для вставки</translation>
     </message>
     <message>
-        <source>Wiki</source>
-        <translation type="vanished">Вики</translation>
-    </message>
-    <message>
         <source>Forum</source>
         <translation>Форум</translation>
     </message>
@@ -8330,6 +8322,69 @@ Do you want to save your changes?</source>
     <message>
         <source>default unit</source>
         <translation>Единица измерения по умолчанию</translation>
+    </message>
+    <message>
+        <source>General</source>
+        <translation type="unfinished">Главная</translation>
+    </message>
+    <message>
+        <source>Double click calls Zoom fit best for current pattern piece</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Scrolling</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Animation</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Duration:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Scrolling animation duration</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>ms</source>
+        <comment>milliseconds</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Update interval:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Time in milliseconds between each animation update</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Mouse scale</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Sensor:</source>
+        <comment>sensor mouse</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Scale scrolling sensitivity for mouse with sensor</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Wheel:</source>
+        <comment>mouse wheel</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Scale scrolling sensitivity for mouse with wheel</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Acceleration:</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -11098,7 +11153,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Set size value for pattern file, that was opened with multisize measurements (export mode). Valid values: %1cm.</source>
-        <translation type="unfinished"></translation>
+        <translation>Задайте значение размера для файла шаблона, которое было открыто с помощью мультиразмерных мерок (export mode). Допустимые значения: %1 см.</translation>
     </message>
     <message>
         <source>Set height value for pattern file, that was opened with multisize measurements (export mode). Valid values: %1cm.</source>
