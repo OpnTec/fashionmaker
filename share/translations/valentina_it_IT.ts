@@ -8194,7 +8194,7 @@ Vuoi salvare i cambiamenti?</translation>
     </message>
     <message>
         <source>General</source>
-        <translation type="unfinished">Generale</translation>
+        <translation>Generale</translation>
     </message>
     <message>
         <source>Double click calls Zoom fit best for current pattern piece</source>

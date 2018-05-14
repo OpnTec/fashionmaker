@@ -8322,7 +8322,7 @@ Do you want to save your changes?</translation>
     </message>
     <message>
         <source>General</source>
-        <translation type="unfinished">General</translation>
+        <translation>General</translation>
     </message>
     <message>
         <source>Double click calls Zoom fit best for current pattern piece</source>

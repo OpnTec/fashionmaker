@@ -8285,7 +8285,7 @@ Sollen die Änderungen gespeichert werden?</translation>
     </message>
     <message>
         <source>General</source>
-        <translation type="unfinished">Allgemein</translation>
+        <translation>Allgemein</translation>
     </message>
     <message>
         <source>Double click calls Zoom fit best for current pattern piece</source>

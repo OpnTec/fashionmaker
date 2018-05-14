@@ -8325,66 +8325,66 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>General</source>
-        <translation type="unfinished">Главная</translation>
+        <translation>Главная</translation>
     </message>
     <message>
         <source>Double click calls Zoom fit best for current pattern piece</source>
-        <translation type="unfinished"></translation>
+        <translation>Двойной клик вызывает функцию Уместить текущий чертеж</translation>
     </message>
     <message>
         <source>Scrolling</source>
-        <translation type="unfinished"></translation>
+        <translation>Прокрутка</translation>
     </message>
     <message>
         <source>Animation</source>
-        <translation type="unfinished"></translation>
+        <translation>Анимация</translation>
     </message>
     <message>
         <source>Duration:</source>
-        <translation type="unfinished"></translation>
+        <translation>Продолжительность:</translation>
     </message>
     <message>
         <source>Scrolling animation duration</source>
-        <translation type="unfinished"></translation>
+        <translation>Продолжительность анимации прокрутки</translation>
     </message>
     <message>
         <source>ms</source>
         <comment>milliseconds</comment>
-        <translation type="unfinished"></translation>
+        <translation>мс</translation>
     </message>
     <message>
         <source>Update interval:</source>
-        <translation type="unfinished"></translation>
+        <translation>Интервал обновления:</translation>
     </message>
     <message>
         <source>Time in milliseconds between each animation update</source>
-        <translation type="unfinished"></translation>
+        <translation>Время в миллисекундах между каждым обновлением анимации</translation>
     </message>
     <message>
         <source>Mouse scale</source>
-        <translation type="unfinished"></translation>
+        <translation>Масштаб мыши</translation>
     </message>
     <message>
         <source>Sensor:</source>
         <comment>sensor mouse</comment>
-        <translation type="unfinished"></translation>
+        <translation>Сенсорная:</translation>
     </message>
     <message>
         <source>Scale scrolling sensitivity for mouse with sensor</source>
-        <translation type="unfinished"></translation>
+        <translation>Чувствительность прокрутки для мыши с датчиком</translation>
     </message>
     <message>
         <source>Wheel:</source>
         <comment>mouse wheel</comment>
-        <translation type="unfinished"></translation>
+        <translation>С колесом:</translation>
     </message>
     <message>
         <source>Scale scrolling sensitivity for mouse with wheel</source>
-        <translation type="unfinished"></translation>
+        <translation>Чувствительность прокрутки для мыши с колесом</translation>
     </message>
     <message>
         <source>Acceleration:</source>
-        <translation type="unfinished"></translation>
+        <translation>Ускорение:</translation>
     </message>
 </context>
 <context>
@@ -11157,7 +11157,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Set height value for pattern file, that was opened with multisize measurements (export mode). Valid values: %1cm.</source>
-        <translation type="unfinished"></translation>
+        <translation>Устанавливает значение роста для файла выкройки, который был открыт с помощью стандартных мерок (режим экспорта). Допустимые значения: %1 см.</translation>
     </message>
 </context>
 <context>
