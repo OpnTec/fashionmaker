@@ -125,7 +125,7 @@ PreferencesConfigurationPage::PreferencesConfigurationPage(QWidget *parent)
     ui->spinBoxDuration->setValue(settings->GetScrollingDuration());
 
     ui->spinBoxUpdateInterval->setMinimum(VSettings::scrollingUpdateIntervalMin);
-    ui->spinBoxUpdateInterval->setMaximum(VSettings::scrollingUpdateIntervalMin);
+    ui->spinBoxUpdateInterval->setMaximum(VSettings::scrollingUpdateIntervalMax);
     ui->spinBoxUpdateInterval->setValue(settings->GetScrollingUpdateInterval());
 
     ui->doubleSpinBoxSensor->setMinimum(VSettings::sensorMouseScaleMin);
