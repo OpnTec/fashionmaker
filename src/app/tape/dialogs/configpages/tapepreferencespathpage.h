@@ -45,6 +45,8 @@ public:
     virtual ~TapePreferencesPathPage();
 
     void Apply();
+protected:
+    virtual void changeEvent(QEvent* event) Q_DECL_OVERRIDE;
 private slots:
     void DefaultPath();
     void EditPath();

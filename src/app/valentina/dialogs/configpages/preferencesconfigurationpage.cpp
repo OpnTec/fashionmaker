@@ -45,6 +45,7 @@ PreferencesConfigurationPage::PreferencesConfigurationPage(QWidget *parent)
       m_labelLangChanged(false)
 {
     ui->setupUi(this);
+    RetranslateUi();
 
     ui->tabWidget->setCurrentIndex(0);
 
@@ -58,11 +59,16 @@ PreferencesConfigurationPage::PreferencesConfigurationPage(QWidget *parent)
     });
 
     //-------------------- Decimal separator setup
-    ui->osOptionCheck->setText(tr("With OS options") + QString(" (%1)").arg(QLocale().decimalPoint()));
     ui->osOptionCheck->setChecked(qApp->ValentinaSettings()->GetOsSeparator());
 
     //----------------------- Unit setup
-    InitUnits();
+    // set default unit
+    const qint32 indexUnit = ui->unitCombo->findData(qApp->ValentinaSettings()->GetUnit());
+    if (indexUnit != -1)
+    {
+        ui->unitCombo->setCurrentIndex(indexUnit);
+    }
+
     connect(ui->unitCombo, QOverload<int>::of(&QComboBox::currentIndexChanged), this, [this]()
     {
         m_unitChanged = true;
@@ -82,7 +88,6 @@ PreferencesConfigurationPage::PreferencesConfigurationPage(QWidget *parent)
     });
 
     //---------------------- Pattern making system
-    InitPMSystems(ui->systemCombo);
     ui->systemBookValueLabel->setFixedHeight(4 * QFontMetrics(ui->systemBookValueLabel->font()).lineSpacing());
     connect(ui->systemCombo, QOverload<int>::of(&QComboBox::currentIndexChanged), this, [this]()
     {
@@ -209,6 +214,7 @@ void PreferencesConfigurationPage::changeEvent(QEvent *event)
     {
         // retranslate designer form (single inheritance approach)
         RetranslateUi();
+        ui->retranslateUi(this);
     }
     // remember to call base class implementation
     QWidget::changeEvent(event);
@@ -229,17 +235,29 @@ void PreferencesConfigurationPage::InitUnits()
     ui->unitCombo->addItem(tr("Centimeters"), unitCM);
     ui->unitCombo->addItem(tr("Millimiters"), unitMM);
     ui->unitCombo->addItem(tr("Inches"), unitINCH);
-
-    // set default unit
-    const qint32 indexUnit = ui->unitCombo->findData(qApp->ValentinaSettings()->GetUnit());
-    if (indexUnit != -1)
-    {
-        ui->unitCombo->setCurrentIndex(indexUnit);
-    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void PreferencesConfigurationPage::RetranslateUi()
 {
-    ui->osOptionCheck->setText(tr("With OS options") + QString(" (%1)").arg(QLocale().decimalPoint()));
+    ui->osOptionCheck->setText(tr("With OS options") + QStringLiteral(" (%1)").arg(QLocale().decimalPoint()));
+
+    {
+    ui->unitCombo->blockSignals(true);
+    const QString unit = qvariant_cast<QString>(ui->unitCombo->currentData());
+    ui->unitCombo->clear();
+    InitUnits();
+    ui->unitCombo->setCurrentIndex(ui->unitCombo->findData(unit));
+    ui->unitCombo->blockSignals(false);
+    }
+
+    {
+    const QString code = qvariant_cast<QString>(ui->systemCombo->currentData());
+    ui->systemCombo->blockSignals(true);
+    ui->systemCombo->clear();
+    InitPMSystems(ui->systemCombo);
+    ui->systemCombo->setCurrentIndex(-1);
+    ui->systemCombo->blockSignals(false);
+    ui->systemCombo->setCurrentIndex(ui->systemCombo->findData(code));
+    }
 }

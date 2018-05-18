@@ -112,6 +112,18 @@ void DialogTapePreferences::resizeEvent(QResizeEvent *event)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void DialogTapePreferences::changeEvent(QEvent *event)
+{
+    if (event->type() == QEvent::LanguageChange)
+    {
+        // retranslate designer form (single inheritance approach)
+        ui->retranslateUi(this);
+    }
+    // remember to call base class implementation
+    QDialog::changeEvent(event);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 void DialogTapePreferences::Apply()
 {
     m_configurationPage->Apply();

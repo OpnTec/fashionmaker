@@ -50,6 +50,9 @@ public:
     QStringList Apply();
     void InitDefaultSeamAllowance();
 
+protected:
+    virtual void changeEvent(QEvent* event) Q_DECL_OVERRIDE;
+
 private slots:
     void EditDateTimeFormats();
     void ManageKnownMaterials();
@@ -63,6 +66,7 @@ private:
     void InitLabelDateTimeFormats();
     void InitComboBoxFormats(QComboBox *box, const QStringList &items, const QString &currentFormat);
     void InitUnits();
+    void RetranslateUi();
 
     template <typename T>
     void CallDateTimeFormatEditor(const T &type, const QStringList &predefinedFormats,

@@ -116,7 +116,14 @@ This option will take an affect after restart.</string>
          </widget>
         </item>
         <item>
-         <widget class="QComboBox" name="comboBoxLineWidthUnit"/>
+         <widget class="QComboBox" name="comboBoxLineWidthUnit">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
+         </widget>
         </item>
         <item>
          <spacer name="horizontalSpacer_3">
@@ -125,7 +132,7 @@ This option will take an affect after restart.</string>
           </property>
           <property name="sizeHint" stdset="0">
            <size>
-            <width>40</width>
+            <width>500</width>
             <height>20</height>
            </size>
           </property>

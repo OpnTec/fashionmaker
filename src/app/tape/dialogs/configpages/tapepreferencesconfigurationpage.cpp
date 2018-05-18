@@ -42,6 +42,7 @@ TapePreferencesConfigurationPage::TapePreferencesConfigurationPage(QWidget *pare
       m_defGradationChanged(false)
 {
     ui->setupUi(this);
+    RetranslateUi();
 
     InitLanguages(ui->langCombo);
     connect(ui->langCombo, QOverload<int>::of(&QComboBox::currentIndexChanged), this, [this]()
@@ -50,11 +51,9 @@ TapePreferencesConfigurationPage::TapePreferencesConfigurationPage(QWidget *pare
     });
 
     //-------------------- Decimal separator setup
-    ui->osOptionCheck->setText(tr("With OS options") + QString(" (%1)").arg(QLocale().decimalPoint()));
     ui->osOptionCheck->setChecked(qApp->TapeSettings()->GetOsSeparator());
 
     //---------------------- Pattern making system
-    InitPMSystems(ui->systemCombo);
     ui->systemBookValueLabel->setFixedHeight(4 * QFontMetrics(ui->systemBookValueLabel->font()).lineSpacing());
     connect(ui->systemCombo, QOverload<int>::of(&QComboBox::currentIndexChanged), this, [this]()
     {
@@ -77,15 +76,14 @@ TapePreferencesConfigurationPage::TapePreferencesConfigurationPage(QWidget *pare
     //----------------------------- Measurements Editing
     connect(ui->resetWarningsButton, &QPushButton::released, this, []()
     {
-        VTapeSettings *settings = qApp->TapeSettings();
-
-        settings->SetConfirmFormatRewriting(true);
+        qApp->TapeSettings()->SetConfirmFormatRewriting(true);
     });
 
     //----------------------- Toolbar
     ui->toolBarStyleCheck->setChecked(qApp->TapeSettings()->GetToolBarStyle());
 
     //---------------------------Default height and size
+    // If change units don't forget about the label
     ui->defHeightCombo->addItems(VMeasurement::WholeListHeights(Unit::Cm));
     index = ui->defHeightCombo->findText(QString().setNum(qApp->TapeSettings()->GetDefHeight()));
     if (index != -1)
@@ -100,13 +98,14 @@ TapePreferencesConfigurationPage::TapePreferencesConfigurationPage(QWidget *pare
 
     connect(ui->defHeightCombo, QOverload<int>::of(&QComboBox::currentIndexChanged), this, DefGradationChanged);
 
+    // If change units don't forget about the label
     ui->defSizeCombo->addItems(VMeasurement::WholeListSizes(Unit::Cm));
     index = ui->defSizeCombo->findText(QString().setNum(qApp->TapeSettings()->GetDefSize()));
     if (index != -1)
     {
         ui->defSizeCombo->setCurrentIndex(index);
     }
-    connect(ui->defHeightCombo, QOverload<int>::of(&QComboBox::currentIndexChanged), this, DefGradationChanged);
+    connect(ui->defSizeCombo, QOverload<int>::of(&QComboBox::currentIndexChanged), this, DefGradationChanged);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -156,6 +155,7 @@ void TapePreferencesConfigurationPage::changeEvent(QEvent *event)
     {
         // retranslate designer form (single inheritance approach)
         RetranslateUi();
+        ui->retranslateUi(this);
     }
     // remember to call base class implementation
     QWidget::changeEvent(event);
@@ -164,5 +164,18 @@ void TapePreferencesConfigurationPage::changeEvent(QEvent *event)
 //---------------------------------------------------------------------------------------------------------------------
 void TapePreferencesConfigurationPage::RetranslateUi()
 {
-    ui->osOptionCheck->setText(tr("With OS options") + QString(" (%1)").arg(QLocale().decimalPoint()));
+    ui->osOptionCheck->setText(tr("With OS options") + QStringLiteral(" (%1)").arg(QLocale().decimalPoint()));
+
+    {
+    const QString code = qvariant_cast<QString>(ui->systemCombo->currentData());
+    ui->systemCombo->blockSignals(true);
+    ui->systemCombo->clear();
+    InitPMSystems(ui->systemCombo);
+    ui->systemCombo->setCurrentIndex(-1);
+    ui->systemCombo->blockSignals(false);
+    ui->systemCombo->setCurrentIndex(ui->systemCombo->findData(code));
+    }
+
+    ui->labelHeightUnit->setText(UnitsToStr(Unit::Cm, true));
+    ui->labelSizeUnit->setText(UnitsToStr(Unit::Cm, true));
 }

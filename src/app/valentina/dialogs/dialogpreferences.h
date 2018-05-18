@@ -54,6 +54,7 @@ signals:
 protected:
     virtual void showEvent(QShowEvent *event) Q_DECL_OVERRIDE;
     virtual void resizeEvent(QResizeEvent *event) Q_DECL_OVERRIDE;
+    virtual void changeEvent(QEvent* event) Q_DECL_OVERRIDE;
 private slots:
     void PageChanged(QListWidgetItem *current, QListWidgetItem *previous);
 private:

@@ -115,6 +115,18 @@ void DialogPreferences::resizeEvent(QResizeEvent *event)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void DialogPreferences::changeEvent(QEvent *event)
+{
+    if (event->type() == QEvent::LanguageChange)
+    {
+        // retranslate designer form (single inheritance approach)
+        ui->retranslateUi(this);
+    }
+    // remember to call base class implementation
+    QDialog::changeEvent(event);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 void DialogPreferences::PageChanged(QListWidgetItem *current, QListWidgetItem *previous)
 {
     if (current == nullptr)

@@ -44,6 +44,15 @@ PreferencesPathPage::PreferencesPathPage(QWidget *parent)
 
     InitTable();
 
+    connect(ui->pathTable, &QTableWidget::itemSelectionChanged, this, [this]()
+    {
+        ui->defaultButton->setEnabled(not ui->pathTable->selectedItems().isEmpty());
+        ui->defaultButton->setDefault(false);
+
+        ui->editButton->setEnabled(not ui->pathTable->selectedItems().isEmpty());
+        ui->editButton->setDefault(true);
+    });
+
     connect(ui->defaultButton, &QPushButton::clicked, this, &PreferencesPathPage::DefaultPath);
     connect(ui->editButton, &QPushButton::clicked, this, &PreferencesPathPage::EditPath);
 }
@@ -66,6 +75,19 @@ QStringList PreferencesPathPage::Apply()
     settings->SetPathLabelTemplate(ui->pathTable->item(5, 1)->text());
 
     return QStringList(); // No changes those require restart.
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void PreferencesPathPage::changeEvent(QEvent *event)
+{
+    if (event->type() == QEvent::LanguageChange)
+    {
+        // retranslate designer form (single inheritance approach)
+        ui->retranslateUi(this);
+        InitTable();
+    }
+    // remember to call base class implementation
+    QWidget::changeEvent(event);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -176,6 +198,7 @@ void PreferencesPathPage::EditPath()
 //---------------------------------------------------------------------------------------------------------------------
 void PreferencesPathPage::InitTable()
 {
+    ui->pathTable->clearContents();
     ui->pathTable->setRowCount(6);
     ui->pathTable->setColumnCount(2);
 
@@ -226,13 +249,4 @@ void PreferencesPathPage::InitTable()
     ui->pathTable->verticalHeader()->setDefaultSectionSize(20);
     ui->pathTable->resizeColumnsToContents();
     ui->pathTable->resizeRowsToContents();
-
-    connect(ui->pathTable, &QTableWidget::itemSelectionChanged, this, [this]()
-    {
-        ui->defaultButton->setEnabled(true);
-        ui->defaultButton->setDefault(false);
-
-        ui->editButton->setEnabled(true);
-        ui->editButton->setDefault(true);
-    });
 }

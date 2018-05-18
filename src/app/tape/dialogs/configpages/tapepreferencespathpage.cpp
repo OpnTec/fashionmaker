@@ -43,6 +43,15 @@ TapePreferencesPathPage::TapePreferencesPathPage(QWidget *parent)
 
     InitTable();
 
+    connect(ui->pathTable, &QTableWidget::itemSelectionChanged, this, [this]()
+    {
+        ui->defaultButton->setEnabled(not ui->pathTable->selectedItems().isEmpty());
+        ui->defaultButton->setDefault(false);
+
+        ui->editButton->setEnabled(not ui->pathTable->selectedItems().isEmpty());
+        ui->editButton->setDefault(true);
+    });
+
     connect(ui->defaultButton, &QPushButton::clicked, this, &TapePreferencesPathPage::DefaultPath);
     connect(ui->editButton, &QPushButton::clicked, this, &TapePreferencesPathPage::EditPath);
 }
@@ -60,6 +69,19 @@ void TapePreferencesPathPage::Apply()
     settings->SetPathIndividualMeasurements(ui->pathTable->item(0, 1)->text());
     settings->SetPathMultisizeMeasurements(ui->pathTable->item(1, 1)->text());
     settings->SetPathTemplate(ui->pathTable->item(2, 1)->text());
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void TapePreferencesPathPage::changeEvent(QEvent *event)
+{
+    if (event->type() == QEvent::LanguageChange)
+    {
+        // retranslate designer form (single inheritance approach)
+        ui->retranslateUi(this);
+        InitTable();
+    }
+    // remember to call base class implementation
+    QWidget::changeEvent(event);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -141,6 +163,7 @@ void TapePreferencesPathPage::EditPath()
 //---------------------------------------------------------------------------------------------------------------------
 void TapePreferencesPathPage::InitTable()
 {
+    ui->pathTable->clearContents();
     ui->pathTable->setRowCount(3);
     ui->pathTable->setColumnCount(2);
 
@@ -171,13 +194,4 @@ void TapePreferencesPathPage::InitTable()
     ui->pathTable->resizeColumnsToContents();
     ui->pathTable->resizeRowsToContents();
     ui->pathTable->horizontalHeader()->setStretchLastSection(true);
-
-    connect(ui->pathTable, &QTableWidget::itemSelectionChanged, this, [this]()
-    {
-        ui->defaultButton->setEnabled(true);
-        ui->defaultButton->setDefault(false);
-
-        ui->editButton->setEnabled(true);
-        ui->editButton->setDefault(true);
-    });
 }

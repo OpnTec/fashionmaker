@@ -61,6 +61,7 @@ PreferencesPatternPage::PreferencesPatternPage(QWidget *parent)
       m_oldLineUnit(Unit::Mm)
 {
     ui->setupUi(this);
+    RetranslateUi();
 
     VSettings *settings = qApp->ValentinaSettings();
 
@@ -72,7 +73,14 @@ PreferencesPatternPage::PreferencesPatternPage(QWidget *parent)
     ui->undoCount->setValue(settings->GetUndoCount());
 
     //----------------------- Unit setup
-    InitUnits();
+    // set default unit
+    const Unit defUnit = QLocale().measurementSystem() == QLocale::MetricSystem ? Unit::Mm : Unit::Inch;
+    const qint32 indexUnit = ui->comboBoxLineWidthUnit->findData(static_cast<int>(defUnit));
+    if (indexUnit != -1)
+    {
+        ui->comboBoxLineWidthUnit->setCurrentIndex(indexUnit);
+    }
+
     connect(ui->comboBoxLineWidthUnit, QOverload<int>::of(&QComboBox::currentIndexChanged), this, [this]()
     {
         const Unit lineUnit = static_cast<Unit>(ui->comboBoxLineWidthUnit->currentData().toInt());
@@ -177,6 +185,19 @@ void PreferencesPatternPage::InitDefaultSeamAllowance()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void PreferencesPatternPage::changeEvent(QEvent *event)
+{
+    if (event->type() == QEvent::LanguageChange)
+    {
+        // retranslate designer form (single inheritance approach)
+        RetranslateUi();
+        ui->retranslateUi(this);
+    }
+    // remember to call base class implementation
+    QWidget::changeEvent(event);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 void PreferencesPatternPage::EditDateTimeFormats()
 {
     VSettings *settings = qApp->ValentinaSettings();
@@ -244,14 +265,17 @@ void PreferencesPatternPage::InitUnits()
 {
     ui->comboBoxLineWidthUnit->addItem(tr("Millimiters"), static_cast<int>(Unit::Mm));
     ui->comboBoxLineWidthUnit->addItem(tr("Inches"), static_cast<int>(Unit::Inch));
+}
 
-    // set default unit
-    const Unit defUnit = QLocale().measurementSystem() == QLocale::MetricSystem ? Unit::Mm : Unit::Inch;
-    const qint32 indexUnit = ui->comboBoxLineWidthUnit->findData(static_cast<int>(defUnit));
-    if (indexUnit != -1)
-    {
-        ui->comboBoxLineWidthUnit->setCurrentIndex(indexUnit);
-    }
+//---------------------------------------------------------------------------------------------------------------------
+void PreferencesPatternPage::RetranslateUi()
+{
+    ui->comboBoxLineWidthUnit->blockSignals(true);
+    const int unit = ui->comboBoxLineWidthUnit->currentData().toInt();
+    ui->comboBoxLineWidthUnit->clear();
+    InitUnits();
+    ui->comboBoxLineWidthUnit->setCurrentIndex(ui->comboBoxLineWidthUnit->findData(unit));
+    ui->comboBoxLineWidthUnit->blockSignals(false);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
