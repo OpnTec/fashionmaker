@@ -97,7 +97,7 @@ VMeasurement::~VMeasurement()
 {}
 
 //---------------------------------------------------------------------------------------------------------------------
-QStringList VMeasurement::ListHeights(QMap<GHeights, bool> heights, Unit patternUnit)
+QStringList VMeasurement::ListHeights(const QMap<GHeights, bool> &heights, Unit patternUnit)
 {
     QStringList list;
     if (patternUnit == Unit::Inch)
@@ -111,7 +111,7 @@ QStringList VMeasurement::ListHeights(QMap<GHeights, bool> heights, Unit pattern
     {
         if (i.value() && i.key() != GHeights::ALL)
         {
-            ListValue(list, static_cast<int>(i.key()), patternUnit);
+            list.append(QString::number(UnitConvertor(static_cast<int>(i.key()), Unit::Cm, patternUnit)));
         }
         ++i;
     }
@@ -124,7 +124,7 @@ QStringList VMeasurement::ListHeights(QMap<GHeights, bool> heights, Unit pattern
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QStringList VMeasurement::ListSizes(QMap<GSizes, bool> sizes, Unit patternUnit)
+QStringList VMeasurement::ListSizes(const QMap<GSizes, bool> &sizes, Unit patternUnit)
 {
     QStringList list;
     if (patternUnit == Unit::Inch)
@@ -138,7 +138,7 @@ QStringList VMeasurement::ListSizes(QMap<GSizes, bool> sizes, Unit patternUnit)
     {
         if (i.value() && i.key() != GSizes::ALL)
         {
-            ListValue(list, static_cast<int>(i.key()), patternUnit);
+            list.append(QString::number(UnitConvertor(static_cast<int>(i.key()), Unit::Cm, patternUnit)));
         }
         ++i;
     }
@@ -160,9 +160,10 @@ QStringList VMeasurement::WholeListHeights(Unit patternUnit)
         return list;
     }
 
+    list.reserve((static_cast<int>(GHeights::H200) - static_cast<int>(GHeights::H50))/heightStep);
     for (int i = static_cast<int>(GHeights::H50); i<= static_cast<int>(GHeights::H200); i = i+heightStep)
     {
-        ListValue(list, i, patternUnit);
+        list.append(QString::number(UnitConvertor(i, Unit::Cm, patternUnit)));
     }
 
     return list;
@@ -178,9 +179,10 @@ QStringList VMeasurement::WholeListSizes(Unit patternUnit)
         return list;
     }
 
+    list.reserve((static_cast<int>(GSizes::S72) - static_cast<int>(GSizes::S22))/sizeStep);
     for (int i = static_cast<int>(GSizes::S22); i<= static_cast<int>(GSizes::S72); i = i+sizeStep)
     {
-       ListValue(list, i, patternUnit);
+       list.append(QString::number(UnitConvertor(i, Unit::Cm, patternUnit)));
     }
 
     return list;
@@ -235,14 +237,6 @@ qreal VMeasurement::CalcValue() const
     const qreal k_size    = ( *d->currentSize - d->baseSize ) / sizeIncrement;
     const qreal k_height  = ( *d->currentHeight - d->baseHeight ) / heightIncrement;
     return d->base + k_size * d->ksize + k_height * d->kheight;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void VMeasurement::ListValue(QStringList &list, qreal value, Unit patternUnit)
-{
-    const qreal val = UnitConvertor(value, Unit::Cm, patternUnit);
-    const QString strVal = QString("%1").arg(val);
-    list.append(strVal);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

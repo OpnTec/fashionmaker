@@ -100,8 +100,8 @@ public:
     qreal   GetKheight() const;
     void    SetKheight(const qreal &value);
 
-    static QStringList ListHeights(QMap<GHeights, bool> heights, Unit patternUnit);
-    static QStringList ListSizes(QMap<GSizes, bool> sizes, Unit patternUnit);
+    static QStringList ListHeights(const QMap<GHeights, bool> &heights, Unit patternUnit);
+    static QStringList ListSizes(const QMap<GSizes, bool> &sizes, Unit patternUnit);
     static QStringList WholeListHeights(Unit patternUnit);
     static QStringList WholeListSizes(Unit patternUnit);
     static bool IsGradationSizeValid(const QString &size);
@@ -110,8 +110,6 @@ private:
     QSharedDataPointer<VMeasurementData> d;
 
     qreal CalcValue() const;
-
-    static void        ListValue(QStringList &list, qreal value, Unit patternUnit);
 };
 
 Q_DECLARE_TYPEINFO(VMeasurement, Q_MOVABLE_TYPE);
