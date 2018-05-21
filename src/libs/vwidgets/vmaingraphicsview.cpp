@@ -418,11 +418,16 @@ VMainGraphicsView::VMainGraphicsView(QWidget *parent)
         QOpenGLWidget *viewport = new QOpenGLWidget();
         QSurfaceFormat fmt;
         fmt.setSamples(settings->GetGraphicalOutput() ? 10 : 0);
+        fmt.setStencilBufferSize(8);
         viewport->setFormat(fmt);
 
         setViewport(viewport);
     #else
-        setViewport(new QGLWidget(QGLFormat(QGL::DoubleBuffer|QGL::SampleBuffers)));
+        QGLWidget *viewport = new QGLWidget();
+        QGLFormat fmt = QGLFormat(QGL::DoubleBuffer|QGL::SampleBuffers);
+        fmt.setStencilBufferSize(8);
+        viewport->setFormat(fmt);
+        setViewport(viewport);
     #endif
     }
 
