@@ -191,25 +191,25 @@ void TST_VArc::TestGetPoints()
     }
 
     {
-        qreal gSquere = 0.0;// geometry square
+        qreal gSquare = 0.0;// geometry square
 
         if (VFuzzyComparePossibleNulls(arc.AngleArc(), 360.0))
         {// circle square
-            gSquere = M_PI * radius * radius;
+            gSquare = M_PI * radius * radius;
         }
         else
         {// sector square
-            gSquere = (M_PI * radius * radius) / 360.0 * arc.AngleArc();
+            gSquare = (M_PI * radius * radius) / 360.0 * arc.AngleArc();
             points.append(static_cast<QPointF>(center));
         }
 
         // calculated square
         const qreal cSquare = qAbs(VAbstractPiece::SumTrapezoids(points)/2.0);
-        const qreal value = qAbs(gSquere - cSquare);
+        const qreal value = qAbs(gSquare - cSquare);
         const QString errorMsg =
                 QString("Broken the second rule. Interpolation has too big computing error. Error ='%1'.").arg(value);
-        const qreal epsSquere = gSquere * 0.24 / 100; // computing error 0.24 % from origin squere
-        QVERIFY2(value <= epsSquere, qUtf8Printable(errorMsg));
+        const qreal epsSquare = gSquare * 0.24 / 100; // computing error 0.24 % from origin square
+        QVERIFY2(value <= epsSquare, qUtf8Printable(errorMsg));
     }
 }
 

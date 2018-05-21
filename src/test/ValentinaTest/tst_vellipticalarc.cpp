@@ -381,7 +381,7 @@ void TST_VEllipticalArc::TestGetPoints3()
     if (VFuzzyComparePossibleNulls(arc.AngleArc(), 360.0))
     {// calculated full ellipse square
         const qreal ellipseSquare = M_PI * radius1 * radius2;
-        const qreal epsSquare = ellipseSquare * 1.7 / 100; // computing error 1.7 % from origin squere
+        const qreal epsSquare = ellipseSquare * 1.7 / 100; // computing error 1.7 % from origin square
         const qreal arcSquare = qAbs(VAbstractPiece::SumTrapezoids(points)/2.0);
         const qreal diffSquare = qAbs(ellipseSquare - arcSquare);
         const QString errorMsg1 = QString("Broken the second rule. Interpolation has too big computing error. "
