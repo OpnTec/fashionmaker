@@ -6055,7 +6055,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Paths</source>
-        <translation>Контуры</translation>
+        <translation>Пути</translation>
     </message>
 </context>
 <context>
