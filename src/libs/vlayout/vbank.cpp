@@ -205,7 +205,8 @@ bool VBank::Prepare()
         const qint64 square = details.at(i).Square();
         if (square <= 0)
         {
-            qCDebug(lBank, "Preparing data for layout error: Detail square <= 0");
+            qCDebug(lBank, "Preparing data for layout error: Detail '%s' square <= 0",
+                    qUtf8Printable(details.at(i).GetName()));
             prepare = false;
             return prepare;
         }
