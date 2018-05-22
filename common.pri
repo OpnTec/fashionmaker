@@ -25,6 +25,36 @@ win32{
     VCOPY = $$QMAKE_COPY /D
 }
 
+macx{
+    # Check which minimal OSX version supports current Qt version
+    # See page https://doc.qt.io/qt-5/supported-platforms-and-configurations.html
+    equals(QT_MAJOR_VERSION, 5):greaterThan(QT_MINOR_VERSION, 10) {# Qt 5.11
+        QMAKE_MACOSX_DEPLOYMENT_TARGET = 10.11
+    } else {
+        equals(QT_MAJOR_VERSION, 5):greaterThan(QT_MINOR_VERSION, 9) {# Qt 5.10
+            QMAKE_MACOSX_DEPLOYMENT_TARGET = 10.11
+        } else {
+            equals(QT_MAJOR_VERSION, 5):greaterThan(QT_MINOR_VERSION, 8) {# Qt 5.9
+                QMAKE_MACOSX_DEPLOYMENT_TARGET = 10.10
+            } else {
+                equals(QT_MAJOR_VERSION, 5):greaterThan(QT_MINOR_VERSION, 7) {# Qt 5.8
+                    QMAKE_MACOSX_DEPLOYMENT_TARGET = 10.9
+                } else {
+                    equals(QT_MAJOR_VERSION, 5):greaterThan(QT_MINOR_VERSION, 6) {# Qt 5.7
+                        QMAKE_MACOSX_DEPLOYMENT_TARGET = 10.8
+                    } else {
+                        equals(QT_MAJOR_VERSION, 5):greaterThan(QT_MINOR_VERSION, 3) {# Qt 5.4
+                            QMAKE_MACOSX_DEPLOYMENT_TARGET = 10.7
+                        } else {
+                            QMAKE_MACOSX_DEPLOYMENT_TARGET = 10.6
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
 # See question on StackOwerflow "QSslSocket error when SSL is NOT used" (http://stackoverflow.com/a/31277055/3045403)
 # Copy of answer:
 # We occasionally had customers getting very similar warning messages but the software was also crashing.
