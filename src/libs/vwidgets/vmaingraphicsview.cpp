@@ -536,30 +536,23 @@ void VMainGraphicsView::mousePressEvent(QMouseEvent *event)
             {
                 QGraphicsView::setDragMode(QGraphicsView::RubberBandDrag);
             }
+
             if (showToolOptions)
             {
-                QList<QGraphicsItem *> list = items(event->pos());
-                if (list.size() == 0)
-                {
-                    emit itemClicked(nullptr);
-                    break;
-                }
-
-                const QList<QGraphicsItem *> sceneItems = this->scene()->items();
+                bool success = false;
+                const QList<QGraphicsItem *> list = items(event->pos());
                 for (auto item : list)
                 {
-                    if (sceneItems.contains(item))
+                    if (item && item->type() > QGraphicsItem::UserType && item->type() <= VSimpleCurve::Type)
                     {
-                        if (item->type() > QGraphicsItem::UserType && item->type() <= VSimpleCurve::Type)
-                        {
-                            emit itemClicked(item);
-                            break;
-                        }
-                        else
-                        {
-                            emit itemClicked(nullptr);
-                        }
+                        emit itemClicked(item);
+                        success = true;
                     }
+                }
+
+                if (not success)
+                {
+                    emit itemClicked(nullptr);
                 }
             }
             break;
