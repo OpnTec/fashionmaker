@@ -235,6 +235,23 @@ QUndoStack *VAbstractApplication::getUndoStack() const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief ClearMessage helps to clear a message string from standard Qt function.
+ * @param msg the message that contains '"' at the start and at the end
+ * @return cleared string
+ */
+QString VAbstractApplication::ClearMessage(QString msg)
+{
+    if (msg.startsWith('"') && msg.endsWith('"'))
+    {
+        msg.remove(0, 1);
+        msg.chop(1);
+    }
+
+    return msg;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 #if defined(Q_OS_WIN)
 void VAbstractApplication::WinAttachConsole()
 {

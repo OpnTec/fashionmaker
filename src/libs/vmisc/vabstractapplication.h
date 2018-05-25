@@ -115,6 +115,8 @@ public:
     static void WinAttachConsole();
 #endif
 
+    static QString ClearMessage(QString msg);
+
 protected:
     QUndoStack         *undoStack;
 

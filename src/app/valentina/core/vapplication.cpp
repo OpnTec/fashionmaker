@@ -185,20 +185,20 @@ inline void noisyFailureMsgHandler(QtMsgType type, const QMessageLogContext &con
         switch (type)
         {
             case QtWarningMsg:
-                messageBox.setWindowTitle(QApplication::translate("vNoisyHandler", "Warning."));
+                messageBox.setWindowTitle(QApplication::translate("vNoisyHandler", "Warning"));
                 messageBox.setIcon(QMessageBox::Warning);
                 break;
             case QtCriticalMsg:
-                messageBox.setWindowTitle(QApplication::translate("vNoisyHandler", "Critical error."));
+                messageBox.setWindowTitle(QApplication::translate("vNoisyHandler", "Critical error"));
                 messageBox.setIcon(QMessageBox::Critical);
                 break;
             case QtFatalMsg:
-                messageBox.setWindowTitle(QApplication::translate("vNoisyHandler", "Fatal error."));
+                messageBox.setWindowTitle(QApplication::translate("vNoisyHandler", "Fatal error"));
                 messageBox.setIcon(QMessageBox::Critical);
                 break;
             #if QT_VERSION > QT_VERSION_CHECK(5, 4, 2)
             case QtInfoMsg:
-                messageBox.setWindowTitle(QApplication::translate("vNoisyHandler", "Information."));
+                messageBox.setWindowTitle(QApplication::translate("vNoisyHandler", "Information"));
                 messageBox.setIcon(QMessageBox::Information);
                 break;
             #endif
@@ -213,7 +213,7 @@ inline void noisyFailureMsgHandler(QtMsgType type, const QMessageLogContext &con
             {
                 if (topWinAllowsPop)
                 {
-                    messageBox.setText(msg);
+                    messageBox.setText(VAbstractApplication::ClearMessage(msg));
                     messageBox.setStandardButtons(QMessageBox::Ok);
                     messageBox.setWindowModality(Qt::ApplicationModal);
                     messageBox.setModal(true);
