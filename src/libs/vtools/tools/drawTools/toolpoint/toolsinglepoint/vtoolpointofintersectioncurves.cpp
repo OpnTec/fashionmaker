@@ -115,8 +115,15 @@ VToolPointOfIntersectionCurves *VToolPointOfIntersectionCurves::Create(VToolPoin
     auto curve1 = initData.data->GeometricObject<VAbstractCurve>(initData.firstCurveId);
     auto curve2 = initData.data->GeometricObject<VAbstractCurve>(initData.secondCurveId);
 
-    const QPointF point = VToolPointOfIntersectionCurves::FindPoint(curve1->GetPoints(), curve2->GetPoints(),
-                                                                    initData.vCrossPoint, initData.hCrossPoint);
+    QPointF point;
+    const bool success = VToolPointOfIntersectionCurves::FindPoint(curve1->GetPoints(), curve2->GetPoints(),
+                                                                   initData.vCrossPoint, initData.hCrossPoint, &point);
+
+    if (not success)
+    {
+        qWarning() << tr("Error calculating point '%1'. Curves '%2' and '%3' have no point of intersection")
+                      .arg(initData.name, curve1->name(), curve2->name());
+    }
 
     VPointF *p = new VPointF(point, initData.name, initData.mx, initData.my);
     p->SetShowLabel(initData.showLabel);
@@ -149,13 +156,16 @@ VToolPointOfIntersectionCurves *VToolPointOfIntersectionCurves::Create(VToolPoin
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QPointF VToolPointOfIntersectionCurves::FindPoint(const QVector<QPointF> &curve1Points,
-                                                  const QVector<QPointF> &curve2Points,
-                                                  VCrossCurvesPoint vCrossPoint, HCrossCurvesPoint hCrossPoint)
+bool VToolPointOfIntersectionCurves::FindPoint(const QVector<QPointF> &curve1Points,
+                                               const QVector<QPointF> &curve2Points,
+                                               VCrossCurvesPoint vCrossPoint, HCrossCurvesPoint hCrossPoint,
+                                               QPointF *intersectionPoint)
 {
+    SCASSERT(intersectionPoint != nullptr)
+
     if (curve1Points.isEmpty() || curve2Points.isEmpty())
     {
-        return QPointF();
+        return false;
     }
 
     QVector<QPointF> intersections;
@@ -167,12 +177,13 @@ QPointF VToolPointOfIntersectionCurves::FindPoint(const QVector<QPointF> &curve1
 
     if (intersections.isEmpty())
     {
-        return QPointF();
+        return false;
     }
 
     if (intersections.size() == 1)
     {
-        return intersections.at(0);
+        *intersectionPoint = intersections.at(0);
+        return true;
     }
 
     QVector<QPointF> vIntersections;
@@ -219,12 +230,13 @@ QPointF VToolPointOfIntersectionCurves::FindPoint(const QVector<QPointF> &curve1
 
     if (vIntersections.isEmpty())
     {
-        return QPointF();
+        return false;
     }
 
     if (vIntersections.size() == 1)
     {
-        return vIntersections.at(0);
+        *intersectionPoint = vIntersections.at(0);
+        return true;
     }
 
     QPointF crossPoint = vIntersections.at(0);
@@ -258,7 +270,8 @@ QPointF VToolPointOfIntersectionCurves::FindPoint(const QVector<QPointF> &curve1
         }
     }
 
-    return crossPoint;
+    *intersectionPoint = crossPoint;
+    return true;
 }
 
 //---------------------------------------------------------------------------------------------------------------------

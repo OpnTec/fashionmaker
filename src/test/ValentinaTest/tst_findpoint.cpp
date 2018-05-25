@@ -165,9 +165,10 @@ void TST_FindPoint::TestPointOfIntersectionCurves()
     QFETCH(int, hCross);
     QFETCH(QPointF, expect);
 
-    const QPointF result = VToolPointOfIntersectionCurves::FindPoint(curve1Points, curve2Points,
-                                                                     static_cast<VCrossCurvesPoint>(vCross),
-                                                                     static_cast<HCrossCurvesPoint>(hCross));
+    QPointF result;
+    VToolPointOfIntersectionCurves::FindPoint(curve1Points, curve2Points,
+                                              static_cast<VCrossCurvesPoint>(vCross),
+                                              static_cast<HCrossCurvesPoint>(hCross), &result);
     QCOMPARE(result.toPoint(), expect.toPoint());
 }
 

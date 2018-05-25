@@ -140,46 +140,49 @@ VToolLineIntersect* VToolLineIntersect::Create(VToolLineIntersectInitData initDa
     QLineF line1(static_cast<QPointF>(*p1Line1), static_cast<QPointF>(*p2Line1));
     QLineF line2(static_cast<QPointF>(*p1Line2), static_cast<QPointF>(*p2Line2));
     QPointF fPoint;
-    QLineF::IntersectType intersect = line1.intersect(line2, &fPoint);
-    if (intersect == QLineF::UnboundedIntersection || intersect == QLineF::BoundedIntersection)
+    const QLineF::IntersectType intersect = line1.intersect(line2, &fPoint);
+    if (intersect == QLineF::NoIntersection)
     {
-        VPointF *p = new VPointF(fPoint, initData.name, initData.mx, initData.my);
-        p->SetShowLabel(initData.showLabel);
+        qWarning() << tr("Error calculating point '%1'. Lines (%2;%3) and (%4;%5) have no point of intersection")
+                      .arg(initData.name, p1Line1->name(), p2Line1->name(), p1Line2->name(), p2Line2->name());
+    }
 
-        if (initData.typeCreation == Source::FromGui)
-        {
-            initData.id = initData.data->AddGObject(p);
-            initData.data->AddLine(initData.p1Line1Id, initData.id);
-            initData.data->AddLine(initData.id, initData.p2Line1Id);
-            initData.data->AddLine(initData.p1Line2Id, initData.id);
-            initData.data->AddLine(initData.id, initData.p2Line2Id);
-        }
-        else
-        {
-            initData.data->UpdateGObject(initData.id, p);
-            initData.data->AddLine(initData.p1Line1Id, initData.id);
-            initData.data->AddLine(initData.id, initData.p2Line1Id);
-            initData.data->AddLine(initData.p1Line2Id, initData.id);
-            initData.data->AddLine(initData.id, initData.p2Line2Id);
-            if (initData.parse != Document::FullParse)
-            {
-                initData.doc->UpdateToolData(initData.id, initData.data);
-            }
-        }
+    VPointF *p = new VPointF(fPoint, initData.name, initData.mx, initData.my);
+    p->SetShowLabel(initData.showLabel);
 
-        if (initData.parse == Document::FullParse)
+    if (initData.typeCreation == Source::FromGui)
+    {
+        initData.id = initData.data->AddGObject(p);
+        initData.data->AddLine(initData.p1Line1Id, initData.id);
+        initData.data->AddLine(initData.id, initData.p2Line1Id);
+        initData.data->AddLine(initData.p1Line2Id, initData.id);
+        initData.data->AddLine(initData.id, initData.p2Line2Id);
+    }
+    else
+    {
+        initData.data->UpdateGObject(initData.id, p);
+        initData.data->AddLine(initData.p1Line1Id, initData.id);
+        initData.data->AddLine(initData.id, initData.p2Line1Id);
+        initData.data->AddLine(initData.p1Line2Id, initData.id);
+        initData.data->AddLine(initData.id, initData.p2Line2Id);
+        if (initData.parse != Document::FullParse)
         {
-            VAbstractTool::AddRecord(initData.id, Tool::LineIntersect, initData.doc);
-            VToolLineIntersect *point = new VToolLineIntersect(initData);
-            initData.scene->addItem(point);
-            InitToolConnections(initData.scene, point);
-            VAbstractPattern::AddTool(initData.id, point);
-            initData.doc->IncrementReferens(p1Line1->getIdTool());
-            initData.doc->IncrementReferens(p2Line1->getIdTool());
-            initData.doc->IncrementReferens(p1Line2->getIdTool());
-            initData.doc->IncrementReferens(p2Line2->getIdTool());
-            return point;
+            initData.doc->UpdateToolData(initData.id, initData.data);
         }
+    }
+
+    if (initData.parse == Document::FullParse)
+    {
+        VAbstractTool::AddRecord(initData.id, Tool::LineIntersect, initData.doc);
+        VToolLineIntersect *point = new VToolLineIntersect(initData);
+        initData.scene->addItem(point);
+        InitToolConnections(initData.scene, point);
+        VAbstractPattern::AddTool(initData.id, point);
+        initData.doc->IncrementReferens(p1Line1->getIdTool());
+        initData.doc->IncrementReferens(p2Line1->getIdTool());
+        initData.doc->IncrementReferens(p1Line2->getIdTool());
+        initData.doc->IncrementReferens(p2Line2->getIdTool());
+        return point;
     }
     return nullptr;
 }

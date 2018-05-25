@@ -112,7 +112,14 @@ VToolPointOfIntersectionArcs *VToolPointOfIntersectionArcs::Create(VToolPointOfI
     const QSharedPointer<VArc> firstArc = initData.data->GeometricObject<VArc>(initData.firstArcId);
     const QSharedPointer<VArc> secondArc = initData.data->GeometricObject<VArc>(initData.secondArcId);
 
-    const QPointF point = FindPoint(firstArc.data(), secondArc.data(), initData.pType);
+    QPointF point;
+    const bool success = FindPoint(firstArc.data(), secondArc.data(), initData.pType, &point);
+
+    if (not success)
+    {
+        qWarning() << tr("Error calculating point '%1'. Arcs '%2' and '%3' have no point of intersection")
+                      .arg(initData.name, firstArc->name(), secondArc->name());
+    }
 
     VPointF *p = new VPointF(point, initData.name, initData.mx, initData.my);
     p->SetShowLabel(initData.showLabel);
@@ -145,8 +152,11 @@ VToolPointOfIntersectionArcs *VToolPointOfIntersectionArcs::Create(VToolPointOfI
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QPointF VToolPointOfIntersectionArcs::FindPoint(const VArc *arc1, const VArc *arc2, const CrossCirclesPoint pType)
+bool VToolPointOfIntersectionArcs::FindPoint(const VArc *arc1, const VArc *arc2, const CrossCirclesPoint pType,
+                                             QPointF *intersectionPoint)
 {
+    SCASSERT(intersectionPoint != nullptr)
+
     QPointF p1, p2;
     const QPointF centerArc1 = static_cast<QPointF>(arc1->GetCenter());
     const QPointF centerArc2 = static_cast<QPointF>(arc2->GetCenter());
@@ -187,24 +197,28 @@ QPointF VToolPointOfIntersectionArcs::FindPoint(const VArc *arc1, const VArc *ar
                 case 2:
                     if (pType == CrossCirclesPoint::FirstPoint)
                     {
-                        return p1;
+                        *intersectionPoint = p1;
+                        return true;
                     }
                     else
                     {
-                        return p2;
+                        *intersectionPoint = p2;
+                        return true;
                     }
                 case 1:
                     if (flagP1)
                     {
-                        return p1;
+                        *intersectionPoint = p1;
+                        return true;
                     }
                     else
                     {
-                        return p2;
+                        *intersectionPoint = p2;
+                        return true;
                     }
                 case 0:
                 default:
-                    return QPointF();
+                    return false;
             }
 
             break;
@@ -212,18 +226,20 @@ QPointF VToolPointOfIntersectionArcs::FindPoint(const VArc *arc1, const VArc *ar
         case 1:
             if (arc1->IsIntersectLine(r1Arc1) && arc2->IsIntersectLine(r1Arc2))
             {
-                return p1;
+                *intersectionPoint = p1;
+                return true;
             }
             else
             {
-                return QPointF();
+                return false;
             }
         case 3:
         case 0:
         default:
             break;
     }
-    return QPointF();
+
+    return false;
 }
 
 //---------------------------------------------------------------------------------------------------------------------

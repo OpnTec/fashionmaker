@@ -80,9 +80,10 @@ void VisToolPointOfIntersectionCircles::RefreshGeometry()
                 c2Path->setRect(PointRect(c2Radius));
                 DrawPoint(c2Path, static_cast<QPointF>(*second), Qt::darkRed, Qt::DashLine);
 
-                const QPointF fPoint = VToolPointOfIntersectionCircles::FindPoint(static_cast<QPointF>(*first),
-                                                                                  static_cast<QPointF>(*second),
-                                                                                  c1Radius, c2Radius, crossPoint);
+                QPointF fPoint;
+                VToolPointOfIntersectionCircles::FindPoint(static_cast<QPointF>(*first),
+                                                           static_cast<QPointF>(*second),
+                                                           c1Radius, c2Radius, crossPoint, &fPoint);
                 DrawPoint(point, fPoint, mainColor);
             }
         }

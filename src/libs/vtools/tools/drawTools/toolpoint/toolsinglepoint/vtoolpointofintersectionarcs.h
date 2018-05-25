@@ -67,7 +67,8 @@ public:
     static VToolPointOfIntersectionArcs *Create(QSharedPointer<DialogTool> dialog, VMainGraphicsScene  *scene,
                                                 VAbstractPattern *doc, VContainer *data);
     static VToolPointOfIntersectionArcs *Create(VToolPointOfIntersectionArcsInitData initData);
-    static QPointF FindPoint(const VArc *arc1, const VArc *arc2, const CrossCirclesPoint pType);
+    static bool FindPoint(const VArc *arc1, const VArc *arc2, const CrossCirclesPoint pType,
+                          QPointF *intersectionPoint);
     static const QString ToolType;
     virtual int  type() const Q_DECL_OVERRIDE {return Type;}
     enum { Type = UserType + static_cast<int>(Tool::PointOfIntersectionArcs) };

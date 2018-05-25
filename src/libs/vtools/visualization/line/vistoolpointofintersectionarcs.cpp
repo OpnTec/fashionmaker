@@ -78,7 +78,8 @@ void VisToolPointOfIntersectionArcs::RefreshGeometry()
             const QSharedPointer<VArc> arc2 = Visualization::data->GeometricObject<VArc>(arc2Id);
             DrawPath(arc2Path, arc2->GetPath(), arc2->DirectionArrows(), Qt::darkRed, Qt::SolidLine, Qt::RoundCap);
 
-            const QPointF fPoint = VToolPointOfIntersectionArcs::FindPoint(arc1.data(), arc2.data(), crossPoint);
+            QPointF fPoint;
+            VToolPointOfIntersectionArcs::FindPoint(arc1.data(), arc2.data(), crossPoint, &fPoint);
             DrawPoint(point, fPoint, mainColor);
         }
     }

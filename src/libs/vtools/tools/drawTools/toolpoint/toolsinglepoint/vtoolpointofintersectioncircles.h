@@ -71,8 +71,8 @@ public:
     static VToolPointOfIntersectionCircles *Create(QSharedPointer<DialogTool> dialog, VMainGraphicsScene  *scene,
                                                    VAbstractPattern *doc, VContainer *data);
     static VToolPointOfIntersectionCircles *Create(VToolPointOfIntersectionCirclesInitData &initData);
-    static QPointF FindPoint(const QPointF &c1Point, const QPointF &c2Point, qreal c1Radius, qreal c2Radius,
-                             const CrossCirclesPoint crossPoint);
+    static bool FindPoint(const QPointF &c1Point, const QPointF &c2Point, qreal c1Radius, qreal c2Radius,
+                             const CrossCirclesPoint crossPoint, QPointF *intersectionPoint);
     static const QString ToolType;
     virtual int  type() const Q_DECL_OVERRIDE {return Type;}
     enum { Type = UserType + static_cast<int>(Tool::PointOfIntersectionCircles) };

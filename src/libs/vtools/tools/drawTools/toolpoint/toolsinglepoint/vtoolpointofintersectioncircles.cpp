@@ -124,8 +124,15 @@ VToolPointOfIntersectionCircles::Create(VToolPointOfIntersectionCirclesInitData 
     const VPointF c1Point = *initData.data->GeometricObject<VPointF>(initData.firstCircleCenterId);
     const VPointF c2Point = *initData.data->GeometricObject<VPointF>(initData.secondCircleCenterId);
 
-    const QPointF point = FindPoint(static_cast<QPointF>(c1Point), static_cast<QPointF>(c2Point), calcC1Radius,
-                                    calcC2Radius, initData.crossPoint);
+    QPointF point;
+    const bool success = FindPoint(static_cast<QPointF>(c1Point), static_cast<QPointF>(c2Point), calcC1Radius,
+                                   calcC2Radius, initData.crossPoint, &point);
+
+    if (not success)
+    {
+        qWarning() << tr("Error calculating point '%1'. Circles with centers in points '%2' and '%3' have no point "
+                         "of intersection").arg(initData.name, c1Point.name(), c2Point.name());
+    }
 
     VPointF *p = new VPointF(point, initData.name, initData.mx, initData.my);
     p->SetShowLabel(initData.showLabel);
@@ -158,9 +165,12 @@ VToolPointOfIntersectionCircles::Create(VToolPointOfIntersectionCirclesInitData 
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QPointF VToolPointOfIntersectionCircles::FindPoint(const QPointF &c1Point, const QPointF &c2Point, qreal c1Radius,
-                                                   qreal c2Radius, const CrossCirclesPoint crossPoint)
+bool VToolPointOfIntersectionCircles::FindPoint(const QPointF &c1Point, const QPointF &c2Point, qreal c1Radius,
+                                                qreal c2Radius, const CrossCirclesPoint crossPoint,
+                                                QPointF *intersectionPoint)
 {
+    SCASSERT(intersectionPoint != nullptr)
+
     QPointF p1, p2;
     const int res = VGObject::IntersectionCircles(c1Point, c1Radius, c2Point, c2Radius, p1, p2);
 
@@ -169,18 +179,21 @@ QPointF VToolPointOfIntersectionCircles::FindPoint(const QPointF &c1Point, const
         case 2:
             if (crossPoint == CrossCirclesPoint::FirstPoint)
             {
-                return p1;
+                *intersectionPoint = p1;
+                return true;
             }
             else
             {
-                return p2;
+                *intersectionPoint = p2;
+                return true;
             }
         case 1:
-            return p1;
+            *intersectionPoint = p1;
+            return true;
         case 3:
         case 0:
         default:
-            return QPointF();
+            return false;
     }
 }
 
