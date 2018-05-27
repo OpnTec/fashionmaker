@@ -45,9 +45,9 @@
 #include <QTransform>
 #include <QWheelEvent>
 #include <QWidget>
-#include <QDesktopWidget>
 #include <QThread>
 #include <QGestureEvent>
+#include <QScreen>
 
 #if QT_VERSION >= QT_VERSION_CHECK(5, 4, 0)
 #   include <QOpenGLWidget>
@@ -645,7 +645,7 @@ void VMainGraphicsView::mouseDoubleClickEvent(QMouseEvent *event)
 //---------------------------------------------------------------------------------------------------------------------
 qreal VMainGraphicsView::MinScale()
 {
-    const QRect screenRect = QApplication::desktop()->availableGeometry();
+    const QRect screenRect = QGuiApplication::primaryScreen()->availableGeometry();
     const qreal screenSize = qMin(screenRect.width(), screenRect.height());
 
     return screenSize / maxSceneSize;
@@ -654,7 +654,7 @@ qreal VMainGraphicsView::MinScale()
 //---------------------------------------------------------------------------------------------------------------------
 qreal VMainGraphicsView::MaxScale()
 {
-    const QRect screenRect = QApplication::desktop()->availableGeometry();
+    const QRect screenRect = QGuiApplication::primaryScreen()->availableGeometry();
     const qreal screenSize = qMin(screenRect.width(), screenRect.height());
 
     return maxSceneSize / screenSize;
