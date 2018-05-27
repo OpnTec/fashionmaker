@@ -3748,31 +3748,31 @@
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1808"/>
         <source>From Crotch to Ankle. (&apos;Leg: Crotch to Floor&apos; - &apos;Height: Ankle&apos;).</source>
         <comment>Full measurement description.</comment>
-        <translation type="unfinished"></translation>
+        <translation>De la entrepierna al tobillo. (&apos;Pierna: de la entrepierna al suelo&apos; - &apos;Altura: tobillo&apos;).</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1812"/>
         <source>leg_waist_side_to_ankle</source>
         <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
-        <translation type="unfinished"></translation>
+        <translation>leg_waist_side_to_ankle</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1814"/>
         <source>Leg: Waist Side to Ankle</source>
         <comment>Full measurement name.</comment>
-        <translation type="unfinished"></translation>
+        <translation>Pierna: desde el lado de la cintura hasta el tobillo</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1815"/>
         <source>From Waist Side to Ankle. (&apos;Leg: Waist Side to Floor&apos; - &apos;Height: Ankle&apos;).</source>
         <comment>Full measurement description.</comment>
-        <translation type="unfinished"></translation>
+        <translation>Desde el lado de la cintura hasta el tobillo. (&apos;Pierna: desde el lado de la cintura hasta el suelo&apos; - &apos;Altura: tobillo&apos;).</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1819"/>
         <source>leg_waist_side_to_knee</source>
         <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
-        <translation type="unfinished"></translation>
+        <translation>leg_waist_side_to_knee</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1821"/>

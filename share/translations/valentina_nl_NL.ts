@@ -12006,6 +12006,10 @@ Wil je deze veranderingen opslaan?</translation>
         <source>Label</source>
         <translation>Label</translation>
     </message>
+    <message>
+        <source>Error calculating point &apos;%1&apos;. Lines (%2;%3) and (%4;%5) have no point of intersection</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>VToolLineIntersectAxis</name>
@@ -12608,6 +12612,27 @@ Wil je deze veranderingen opslaan?</translation>
     <message>
         <source>Label</source>
         <translation>Label</translation>
+    </message>
+</context>
+<context>
+    <name>VToolPointOfIntersectionArcs</name>
+    <message>
+        <source>Error calculating point &apos;%1&apos;. Arcs &apos;%2&apos; and &apos;%3&apos; have no point of intersection</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>VToolPointOfIntersectionCircles</name>
+    <message>
+        <source>Error calculating point &apos;%1&apos;. Circles with centers in points &apos;%2&apos; and &apos;%3&apos; have no point of intersection</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>VToolPointOfIntersectionCurves</name>
+    <message>
+        <source>Error calculating point &apos;%1&apos;. Curves &apos;%2&apos; and &apos;%3&apos; have no point of intersection</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -14336,19 +14361,35 @@ Wil je deze veranderingen opslaan?</translation>
     </message>
     <message>
         <source>Warning.</source>
-        <translation>Waarschuwing.</translation>
+        <translation type="vanished">Waarschuwing.</translation>
     </message>
     <message>
         <source>Critical error.</source>
-        <translation>Cruciale fout.</translation>
+        <translation type="vanished">Cruciale fout.</translation>
     </message>
     <message>
         <source>Fatal error.</source>
-        <translation>Fatale fout.</translation>
+        <translation type="vanished">Fatale fout.</translation>
     </message>
     <message>
         <source>Information.</source>
-        <translation>Informatie.</translation>
+        <translation type="vanished">Informatie.</translation>
+    </message>
+    <message>
+        <source>Warning</source>
+        <translation type="unfinished">Waarschuwing</translation>
+    </message>
+    <message>
+        <source>Critical error</source>
+        <translation type="unfinished">Cruciale fout</translation>
+    </message>
+    <message>
+        <source>Fatal error</source>
+        <translation type="unfinished">Fatale fout</translation>
+    </message>
+    <message>
+        <source>Information</source>
+        <translation type="unfinished">Informatie</translation>
     </message>
 </context>
 </TS>

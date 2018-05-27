@@ -11956,6 +11956,10 @@ Deseja salvar suas mudanças?</translation>
         <source>Label</source>
         <translation>Rótulo</translation>
     </message>
+    <message>
+        <source>Error calculating point &apos;%1&apos;. Lines (%2;%3) and (%4;%5) have no point of intersection</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>VToolLineIntersectAxis</name>
@@ -12558,6 +12562,27 @@ Deseja salvar suas mudanças?</translation>
     <message>
         <source>Label</source>
         <translation>Rótulo</translation>
+    </message>
+</context>
+<context>
+    <name>VToolPointOfIntersectionArcs</name>
+    <message>
+        <source>Error calculating point &apos;%1&apos;. Arcs &apos;%2&apos; and &apos;%3&apos; have no point of intersection</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>VToolPointOfIntersectionCircles</name>
+    <message>
+        <source>Error calculating point &apos;%1&apos;. Circles with centers in points &apos;%2&apos; and &apos;%3&apos; have no point of intersection</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>VToolPointOfIntersectionCurves</name>
+    <message>
+        <source>Error calculating point &apos;%1&apos;. Curves &apos;%2&apos; and &apos;%3&apos; have no point of intersection</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -14233,19 +14258,35 @@ Deseja salvar suas mudanças?</translation>
     </message>
     <message>
         <source>Warning.</source>
-        <translation>AVISO.</translation>
+        <translation type="vanished">AVISO.</translation>
     </message>
     <message>
         <source>Critical error.</source>
-        <translation>Erro crítico.</translation>
+        <translation type="vanished">Erro crítico.</translation>
     </message>
     <message>
         <source>Fatal error.</source>
-        <translation>Erro fatal.</translation>
+        <translation type="vanished">Erro fatal.</translation>
     </message>
     <message>
         <source>Information.</source>
-        <translation>Informação.</translation>
+        <translation type="vanished">Informação.</translation>
+    </message>
+    <message>
+        <source>Warning</source>
+        <translation type="unfinished">Atenção</translation>
+    </message>
+    <message>
+        <source>Critical error</source>
+        <translation type="unfinished">Erro crítico</translation>
+    </message>
+    <message>
+        <source>Fatal error</source>
+        <translation type="unfinished">Erro fatal</translation>
+    </message>
+    <message>
+        <source>Information</source>
+        <translation type="unfinished">Informação</translation>
     </message>
 </context>
 </TS>

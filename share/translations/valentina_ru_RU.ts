@@ -12009,6 +12009,10 @@ Do you want to save your changes?</source>
         <source>Label</source>
         <translation>Метка</translation>
     </message>
+    <message>
+        <source>Error calculating point &apos;%1&apos;. Lines (%2;%3) and (%4;%5) have no point of intersection</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>VToolLineIntersectAxis</name>
@@ -12611,6 +12615,27 @@ Do you want to save your changes?</source>
     <message>
         <source>Label</source>
         <translation>Метка</translation>
+    </message>
+</context>
+<context>
+    <name>VToolPointOfIntersectionArcs</name>
+    <message>
+        <source>Error calculating point &apos;%1&apos;. Arcs &apos;%2&apos; and &apos;%3&apos; have no point of intersection</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>VToolPointOfIntersectionCircles</name>
+    <message>
+        <source>Error calculating point &apos;%1&apos;. Circles with centers in points &apos;%2&apos; and &apos;%3&apos; have no point of intersection</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>VToolPointOfIntersectionCurves</name>
+    <message>
+        <source>Error calculating point &apos;%1&apos;. Curves &apos;%2&apos; and &apos;%3&apos; have no point of intersection</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -14345,19 +14370,35 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Warning.</source>
-        <translation>Предупреждение.</translation>
+        <translation type="vanished">Предупреждение.</translation>
     </message>
     <message>
         <source>Critical error.</source>
-        <translation>Критическая ошибка.</translation>
+        <translation type="vanished">Критическая ошибка.</translation>
     </message>
     <message>
         <source>Fatal error.</source>
-        <translation>Фатальная ошибка.</translation>
+        <translation type="vanished">Фатальная ошибка.</translation>
     </message>
     <message>
         <source>Information.</source>
-        <translation>Информация.</translation>
+        <translation type="vanished">Информация.</translation>
+    </message>
+    <message>
+        <source>Warning</source>
+        <translation type="unfinished">Внимание</translation>
+    </message>
+    <message>
+        <source>Critical error</source>
+        <translation type="unfinished">Критическая ошибка</translation>
+    </message>
+    <message>
+        <source>Fatal error</source>
+        <translation type="unfinished">Фатальная ошибка</translation>
+    </message>
+    <message>
+        <source>Information</source>
+        <translation type="unfinished">Информация</translation>
     </message>
 </context>
 </TS>

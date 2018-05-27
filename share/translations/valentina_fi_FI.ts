@@ -10663,6 +10663,10 @@ Do you want to save your changes?</source>
         <source>Label</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Error calculating point &apos;%1&apos;. Lines (%2;%3) and (%4;%5) have no point of intersection</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>VToolLineIntersectAxis</name>
@@ -11204,6 +11208,27 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Label</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>VToolPointOfIntersectionArcs</name>
+    <message>
+        <source>Error calculating point &apos;%1&apos;. Arcs &apos;%2&apos; and &apos;%3&apos; have no point of intersection</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>VToolPointOfIntersectionCircles</name>
+    <message>
+        <source>Error calculating point &apos;%1&apos;. Circles with centers in points &apos;%2&apos; and &apos;%3&apos; have no point of intersection</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>VToolPointOfIntersectionCurves</name>
+    <message>
+        <source>Error calculating point &apos;%1&apos;. Curves &apos;%2&apos; and &apos;%3&apos; have no point of intersection</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -12869,19 +12894,19 @@ Do you want to save your changes?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Warning.</source>
+        <source>Warning</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Critical error.</source>
+        <source>Critical error</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Fatal error.</source>
+        <source>Fatal error</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Information.</source>
+        <source>Information</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
