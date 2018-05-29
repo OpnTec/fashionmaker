@@ -141,7 +141,7 @@ DialogPatternMaterials::~DialogPatternMaterials()
 void DialogPatternMaterials::SetPatternMaterials(const QMap<int, QString> &list)
 {
     ui->tableWidget->setRowCount(userMaterialPlaceholdersQuantity);
-    QLatin1String per("%");
+    QChar per('%');
 
     for (int i = 0; i < userMaterialPlaceholdersQuantity; ++i)
     {

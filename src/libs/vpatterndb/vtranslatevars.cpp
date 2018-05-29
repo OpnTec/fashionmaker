@@ -699,12 +699,32 @@ QString VTranslateVars::PlaceholderToUserText(QString text) const
     auto i = placeholders.constBegin();
     while (i != placeholders.constEnd())
     {
-        const QString translated = per + i.value().translate(qApp->Settings()->GetLocale()) + per;
-        const QString original = per + i.key() + per;
-
-        if (translated != original)
+        if (i.key() != pl_userMaterial)
         {
-            text.replace(original, translated);
+            const QString translated = per + i.value().translate(qApp->Settings()->GetLocale()) + per;
+            const QString original = per + i.key() + per;
+
+            if (translated != original)
+            {
+                text.replace(original, translated);
+            }
+        }
+        else
+        {
+            const QString material_translated = i.value().translate(qApp->Settings()->GetLocale());
+            if (text.indexOf(i.key()) != -1)
+            {
+                for (int n = 0; n < userMaterialPlaceholdersQuantity; ++n)
+                {
+                    const QString number = QString::number(n + 1);
+                    const QString original = per + i.key() + number + per;
+                    const QString translated = per + material_translated + number + per;
+                    if (translated != original)
+                    {
+                        text.replace(original, translated);
+                    }
+                }
+            }
         }
         ++i;
     }
@@ -718,12 +738,31 @@ QString VTranslateVars::PlaceholderFromUserText(QString text) const
     auto i = placeholders.constBegin();
     while (i != placeholders.constEnd())
     {
-        const QString translated = per + i.value().translate(qApp->Settings()->GetLocale()) + per;
-        const QString original = per + i.key() + per;
-
-        if (translated != original)
+        if (i.key() != pl_userMaterial)
         {
-            text.replace(translated, original);
+            const QString original = per + i.key() + per;
+            const QString translated = per + i.value().translate(qApp->Settings()->GetLocale()) + per;
+            if (translated != original)
+            {
+                text.replace(translated, original);
+            }
+        }
+        else
+        {
+            const QString material_translated = i.value().translate(qApp->Settings()->GetLocale());
+            if (text.indexOf(material_translated) != -1)
+            {
+                for (int n = 0; n < userMaterialPlaceholdersQuantity; ++n)
+                {
+                    const QString number = QString::number(n + 1);
+                    const QString original = per + i.key() + number + per;
+                    const QString translated = per + material_translated + number + per;
+                    if (translated != original)
+                    {
+                        text.replace(translated, original);
+                    }
+                }
+            }
         }
         ++i;
     }
