@@ -14274,19 +14274,19 @@ Deseja salvar suas mudanças?</translation>
     </message>
     <message>
         <source>Warning</source>
-        <translation type="unfinished">Atenção</translation>
+        <translation>Atenção</translation>
     </message>
     <message>
         <source>Critical error</source>
-        <translation type="unfinished">Erro crítico</translation>
+        <translation>Erro crítico</translation>
     </message>
     <message>
         <source>Fatal error</source>
-        <translation type="unfinished">Erro fatal</translation>
+        <translation>Erro fatal</translation>
     </message>
     <message>
         <source>Information</source>
-        <translation type="unfinished">Informação</translation>
+        <translation>Informação</translation>
     </message>
 </context>
 </TS>

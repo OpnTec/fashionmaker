@@ -14332,19 +14332,19 @@ Voulez-vous enregistrer les changements?</translation>
     </message>
     <message>
         <source>Warning</source>
-        <translation type="unfinished">Attention</translation>
+        <translation>Attention</translation>
     </message>
     <message>
         <source>Critical error</source>
-        <translation type="unfinished">Erreur critique</translation>
+        <translation>Erreur critique</translation>
     </message>
     <message>
         <source>Fatal error</source>
-        <translation type="unfinished">Erreur fatale</translation>
+        <translation>Erreur fatale</translation>
     </message>
     <message>
         <source>Information</source>
-        <translation type="unfinished">Information</translation>
+        <translation>Information</translation>
     </message>
 </context>
 </TS>

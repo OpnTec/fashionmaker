@@ -14377,19 +14377,19 @@ Wil je deze veranderingen opslaan?</translation>
     </message>
     <message>
         <source>Warning</source>
-        <translation type="unfinished">Waarschuwing</translation>
+        <translation>Waarschuwing</translation>
     </message>
     <message>
         <source>Critical error</source>
-        <translation type="unfinished">Cruciale fout</translation>
+        <translation>Cruciale fout</translation>
     </message>
     <message>
         <source>Fatal error</source>
-        <translation type="unfinished">Fatale fout</translation>
+        <translation>Fatale fout</translation>
     </message>
     <message>
         <source>Information</source>
-        <translation type="unfinished">Informatie</translation>
+        <translation>Informatie</translation>
     </message>
 </context>
 </TS>

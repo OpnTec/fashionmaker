@@ -12664,11 +12664,11 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Warning</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Atenționare</translation>
     </message>
     <message>
         <source>Critical error</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Eroare critică</translation>
     </message>
     <message>
         <source>Fatal error</source>
@@ -12703,11 +12703,11 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Warning</source>
-        <translation type="unfinished"></translation>
+        <translation>Atenționare</translation>
     </message>
     <message>
         <source>Critical error</source>
-        <translation type="unfinished"></translation>
+        <translation>Eroare critică</translation>
     </message>
     <message>
         <source>Fatal error</source>

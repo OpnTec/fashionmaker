@@ -13950,11 +13950,11 @@ Vuoi salvare le tue modifiche?</translation>
     </message>
     <message>
         <source>Warning</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Avviso</translation>
     </message>
     <message>
         <source>Critical error</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Errore critico</translation>
     </message>
     <message>
         <source>Fatal error</source>
@@ -13993,11 +13993,11 @@ Vuoi salvare le tue modifiche?</translation>
     </message>
     <message>
         <source>Warning</source>
-        <translation type="unfinished"></translation>
+        <translation>Avviso</translation>
     </message>
     <message>
         <source>Critical error</source>
-        <translation type="unfinished"></translation>
+        <translation>Errore critico</translation>
     </message>
     <message>
         <source>Fatal error</source>
@@ -14005,7 +14005,7 @@ Vuoi salvare le tue modifiche?</translation>
     </message>
     <message>
         <source>Information</source>
-        <translation type="unfinished"></translation>
+        <translation>Informazioni</translation>
     </message>
 </context>
 </TS>

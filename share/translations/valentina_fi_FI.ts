@@ -12856,11 +12856,11 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Warning</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Varoitus</translation>
     </message>
     <message>
         <source>Critical error</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Kriittinen virhe</translation>
     </message>
     <message>
         <source>Fatal error</source>
@@ -12895,11 +12895,11 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Warning</source>
-        <translation type="unfinished"></translation>
+        <translation>Varoitus</translation>
     </message>
     <message>
         <source>Critical error</source>
-        <translation type="unfinished"></translation>
+        <translation>Kriittinen virhe</translation>
     </message>
     <message>
         <source>Fatal error</source>

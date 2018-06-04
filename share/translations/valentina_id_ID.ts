@@ -11946,7 +11946,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Warning</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">peringatan</translation>
     </message>
     <message>
         <source>Critical error</source>
@@ -11985,7 +11985,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Warning</source>
-        <translation type="unfinished"></translation>
+        <translation>peringatan</translation>
     </message>
     <message>
         <source>Critical error</source>

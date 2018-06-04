@@ -13672,19 +13672,19 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Warning</source>
-        <translation type="unfinished">Upozornění</translation>
+        <translation>Upozornění</translation>
     </message>
     <message>
         <source>Critical error</source>
-        <translation type="unfinished">Vážná chyba</translation>
+        <translation>Vážná chyba</translation>
     </message>
     <message>
         <source>Fatal error</source>
-        <translation type="unfinished">Zásadní chyba</translation>
+        <translation>Zásadní chyba</translation>
     </message>
     <message>
         <source>Information</source>
-        <translation type="unfinished">Informace</translation>
+        <translation>Informace</translation>
     </message>
 </context>
 </TS>

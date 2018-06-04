@@ -14375,19 +14375,19 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Warning</source>
-        <translation type="unfinished">Advertencia</translation>
+        <translation>Advertencia</translation>
     </message>
     <message>
         <source>Critical error</source>
-        <translation type="unfinished">Error crítico</translation>
+        <translation>Error crítico</translation>
     </message>
     <message>
         <source>Fatal error</source>
-        <translation type="unfinished">Error fatal</translation>
+        <translation>Error fatal</translation>
     </message>
     <message>
         <source>Information</source>
-        <translation type="unfinished">Información</translation>
+        <translation>Información</translation>
     </message>
 </context>
 </TS>

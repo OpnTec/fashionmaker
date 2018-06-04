@@ -14376,19 +14376,19 @@ Do you want to save your changes?</translation>
     </message>
     <message>
         <source>Warning</source>
-        <translation type="unfinished">Warning</translation>
+        <translation>Warning</translation>
     </message>
     <message>
         <source>Critical error</source>
-        <translation type="unfinished">Critical error</translation>
+        <translation>Critical error</translation>
     </message>
     <message>
         <source>Fatal error</source>
-        <translation type="unfinished">Fatal error</translation>
+        <translation>Fatal error</translation>
     </message>
     <message>
         <source>Information</source>
-        <translation type="unfinished">Information</translation>
+        <translation>Information</translation>
     </message>
 </context>
 </TS>

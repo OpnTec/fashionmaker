@@ -14263,19 +14263,19 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Warning</source>
-        <translation type="unfinished">Warnung</translation>
+        <translation>Warnung</translation>
     </message>
     <message>
         <source>Critical error</source>
-        <translation type="unfinished">Kritischer Fehler</translation>
+        <translation>Kritischer Fehler</translation>
     </message>
     <message>
         <source>Fatal error</source>
-        <translation type="unfinished">Fataler Fehler</translation>
+        <translation>Fataler Fehler</translation>
     </message>
     <message>
         <source>Information</source>
-        <translation type="unfinished">Information</translation>
+        <translation>Information</translation>
     </message>
 </context>
 </TS>

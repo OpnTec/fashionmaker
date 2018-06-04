@@ -11763,7 +11763,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Information</source>
-        <translation type="unfinished">信息</translation>
+        <translation>信息</translation>
     </message>
 </context>
 </TS>

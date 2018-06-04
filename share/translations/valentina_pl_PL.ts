@@ -12653,7 +12653,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Information</source>
-        <translation type="unfinished">Informacje</translation>
+        <translation>Informacje</translation>
     </message>
 </context>
 </TS>

@@ -13905,19 +13905,19 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Warning</source>
-        <translation type="unfinished">Προειδοποίηση</translation>
+        <translation>Προειδοποίηση</translation>
     </message>
     <message>
         <source>Critical error</source>
-        <translation type="unfinished">Κρίσιμο σφάλμα</translation>
+        <translation>Κρίσιμο σφάλμα</translation>
     </message>
     <message>
         <source>Fatal error</source>
-        <translation type="unfinished">Ανεπανόρθωτο σφάλμα</translation>
+        <translation>Ανεπανόρθωτο σφάλμα</translation>
     </message>
     <message>
         <source>Information</source>
-        <translation type="unfinished">Πληροφορίες</translation>
+        <translation>Πληροφορίες</translation>
     </message>
 </context>
 </TS>
