@@ -181,11 +181,12 @@ void VisToolMove::RefreshGeometry()
     else
     {
         Visualization::toolTip = tr("Length = %1%2, angle = %3°, rotation angle = %4°, <b>Shift</b> - sticking angle, "
-                                    "<b>Ctrl</b> - change rotation origin point, <b>Mouse click</b> - finish creating")
+                                    "<b>%5</b> - change rotation origin point, <b>Mouse click</b> - finish creating")
                 .arg(qApp->TrVars()->FormulaToUser(QString::number(qApp->fromPixel(tempLength)),
                                                    qApp->Settings()->GetOsSeparator()), prefix)
                 .arg(tempAngle)
-                .arg(tempRoationAngle);
+                .arg(tempRoationAngle)
+                .arg(QCoreApplication::translate("QShortcut", "Ctrl"));
     }
 
     CreateMovedRotatedObjects(iPoint, iCurve, tempLength, tempAngle, tempRoationAngle, origin);
