@@ -1187,14 +1187,6 @@ void CreateUnitedDetailCSA(VPiece &newDetail, const VPiece &d, QVector<quint32> 
         VToolPiecePath::Create(initNodeData);
         record.path = idPath;
         newDetail.GetCustomSARecords().append(record);
-
-        if (initData.version == 1)
-        {
-            // TODO. Delete if minimal supported version is 0.7.0
-            Q_STATIC_ASSERT_X(VPatternConverter::PatternMinVer < CONVERTER_VERSION_CHECK(0, 7, 0),
-                              "Time to refactor the code.");
-            nodeChildren.prepend(idPath);
-        }
     }
     children += nodeChildren;
 }
@@ -1247,14 +1239,6 @@ void CreateUnitedDetailInternalPaths(VPiece &newDetail, const VPiece &d, QVector
 
         VToolPiecePath::Create(initNodeData);
         newDetail.GetInternalPaths().append(idPath);
-
-        if (initData.version == 1)
-        {
-            // TODO. Delete if minimal supported version is 0.7.0
-            Q_STATIC_ASSERT_X(VPatternConverter::PatternMinVer < CONVERTER_VERSION_CHECK(0, 7, 0),
-                              "Time to refactor the code.");
-            nodeChildren.prepend(idPath);
-        }
     }
     children += nodeChildren;
 }
@@ -1400,9 +1384,58 @@ void UpdateUnitedNodes(const VToolUnionDetailsInitData &initData, qreal dx, qrea
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief FixChildren fix bug in first version of Union Details Tool.
+ *
+ * Bugged code produces incorrect order which breaks convention. This function fix the excpected order.
+ */
+QVector<quint32> FixChildren(QVector<quint32> records, QVector<quint32> children, VContainer *data)
+{
+    // TODO. Delete if minimal supported version is 0.7.0
+    Q_STATIC_ASSERT_X(VPatternConverter::PatternMinVer < CONVERTER_VERSION_CHECK(0, 7, 0),
+                      "Time to refactor the code.");
+    SCASSERT(data != nullptr)
+
+    if (records.isEmpty())
+    {
+        return children;
+    }
+
+    QVector<quint32> fixedChildren;
+    while(not records.isEmpty())
+    {
+        const qint32 childrenIndex = records.size()-1;
+        if (children.size() > childrenIndex)
+        {
+            fixedChildren.append(children.takeAt(childrenIndex));
+
+            const VPiecePath path = data->GetPiecePath(records.takeFirst());
+            for (int i=0; i < path.CountNodes(); ++i)
+            {
+                if (children.size() > childrenIndex)
+                {
+                    fixedChildren.append(children.takeAt(childrenIndex));
+                }
+            }
+        }
+    }
+
+    return fixedChildren;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 void UpdateUnitedDetailPaths(const VToolUnionDetailsInitData &initData, qreal dx, qreal dy, quint32 pRotate,
                              qreal angle, const QVector<quint32> &records, QVector<quint32> children)
 {
+    if (initData.version == 1)
+    {
+        // TODO. Delete if minimal supported version is 0.7.0
+        Q_STATIC_ASSERT_X(VPatternConverter::PatternMinVer < CONVERTER_VERSION_CHECK(0, 7, 0),
+                          "Time to refactor the code.");
+        // Fixing bug in first version of the tool. Mostly for backward compatibility.
+        children = FixChildren(records, children, initData.data);
+    }
+
     for (auto record : records)
     {
         const VPiecePath path = initData.data->GetPiecePath(record);
@@ -1422,14 +1455,13 @@ void UpdateUnitedDetailPaths(const VToolUnionDetailsInitData &initData, qreal dx
                 const VPieceNode &node = path.at(j);
                 const quint32 id = TakeNextId(children);
                 updatedPath.Append(VPieceNode(id, node.GetTypeTool(), node.GetReverse()));
-                QVector<quint32> nodeChildren = {id};
+                QVector<quint32> nodeChildren {id};
                 UpdatePathNode(initData.data, path.at(j), nodeChildren, dx, dy, pRotate, angle);
             }
             initData.data->UpdatePiecePath(updatedId, updatedPath);
         }
         else
         {
-
             for (int j=0; j < path.CountNodes(); ++j)
             {
                 const quint32 id = TakeNextId(children);
