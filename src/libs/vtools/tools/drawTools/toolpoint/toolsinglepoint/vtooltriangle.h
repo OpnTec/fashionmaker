@@ -72,8 +72,8 @@ public:
     static VToolTriangle *Create(QSharedPointer<DialogTool> dialog, VMainGraphicsScene  *scene, VAbstractPattern *doc,
                                  VContainer *data);
     static VToolTriangle *Create(VToolTriangleInitData initData);
-    static QPointF FindPoint(const QPointF &axisP1, const QPointF &axisP2, const QPointF &firstPoint,
-                             const QPointF &secondPoint);
+    static bool FindPoint(const QPointF &axisP1, const QPointF &axisP2, const QPointF &firstPoint,
+                          const QPointF &secondPoint, QPointF *intersectionPoint);
     static const QString ToolType;
     virtual int    type() const Q_DECL_OVERRIDE {return Type;}
     enum { Type = UserType + static_cast<int>(Tool::Triangle)};

@@ -94,7 +94,8 @@ void VisToolLineIntersectAxis::RefreshGeometry()
                 DrawPoint(basePoint, static_cast<QPointF>(*third), mainColor);
                 DrawLine(axisLine, axis, supportColor, Qt::DashLine);
 
-                QPointF p = VToolLineIntersectAxis::FindPoint(axis, base_line);
+                QPointF p;
+                VToolLineIntersectAxis::FindPoint(axis, base_line, &p);
                 QLineF axis_line(static_cast<QPointF>(*third), p);
                 DrawLine(this, axis_line, mainColor, lineStyle);
 

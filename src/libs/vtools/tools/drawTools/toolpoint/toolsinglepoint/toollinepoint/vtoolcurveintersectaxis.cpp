@@ -133,7 +133,16 @@ VToolCurveIntersectAxis *VToolCurveIntersectAxis::Create(VToolCurveIntersectAxis
     const qreal angle = CheckFormula(initData.id, initData.formulaAngle, initData.data);
     const QSharedPointer<VAbstractCurve> curve = initData.data->GeometricObject<VAbstractCurve>(initData.curveId);
 
-    const QPointF fPoint = FindPoint(static_cast<QPointF>(*basePoint), angle, curve->GetPoints());
+    QPointF fPoint;
+    const bool success = FindPoint(static_cast<QPointF>(*basePoint), angle, curve->GetPoints(), &fPoint);
+
+    if (not success)
+    {
+        qWarning() << tr("Error calculating point '%1'. There is no intersection with curve '%2' and axis through "
+                         "point '%3' with angle %4°")
+                      .arg(initData.name, curve->name(), basePoint->name()).arg(angle);
+    }
+
     const qreal segLength = curve->GetLengthByPoint(fPoint);
 
     VPointF *p = new VPointF(fPoint, initData.name, initData.mx, initData.my);
@@ -176,9 +185,11 @@ VToolCurveIntersectAxis *VToolCurveIntersectAxis::Create(VToolCurveIntersectAxis
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QPointF VToolCurveIntersectAxis::FindPoint(const QPointF &point, qreal angle,
-                                           const QVector<QPointF> &curvePoints)
+bool VToolCurveIntersectAxis::FindPoint(const QPointF &point, qreal angle, const QVector<QPointF> &curvePoints,
+                                        QPointF *intersectionPoint)
 {
+    SCASSERT(intersectionPoint != nullptr)
+
     QRectF rec = QRectF(0, 0, INT_MAX, INT_MAX);
     rec.translate(-INT_MAX/2.0, -INT_MAX/2.0);
 
@@ -189,7 +200,8 @@ QPointF VToolCurveIntersectAxis::FindPoint(const QPointF &point, qreal angle,
     {
         if (points.size() == 1)
         {
-            return points.at(0);
+            *intersectionPoint = points.at(0);
+            return true;
         }
 
         QMap<qreal, int> forward;
@@ -216,15 +228,17 @@ QPointF VToolCurveIntersectAxis::FindPoint(const QPointF &point, qreal angle,
         // Closest point is not always want we need. First return point in forward direction if exists.
         if (not forward.isEmpty())
         {
-            return points.at(forward.first());
+            *intersectionPoint = points.at(forward.first());
+            return true;
         }
         else if (not backward.isEmpty())
         {
-            return points.at(backward.first());
+            *intersectionPoint = points.at(backward.first());
+            return true;
         }
     }
 
-    return QPointF();
+    return false;
 }
 
 //---------------------------------------------------------------------------------------------------------------------

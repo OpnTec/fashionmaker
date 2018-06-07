@@ -91,9 +91,9 @@ void VisToolTriangle::RefreshGeometry()
                     DrawLine(this, QLineF(static_cast<QPointF>(*third), Visualization::scenePos), supportColor,
                              Qt::DashLine);
 
-                    QPointF trPoint = VToolTriangle::FindPoint(static_cast<QPointF>(*first),
-                                                               static_cast<QPointF>(*second),
-                                                               static_cast<QPointF>(*third), Visualization::scenePos);
+                    QPointF trPoint;
+                    VToolTriangle::FindPoint(static_cast<QPointF>(*first), static_cast<QPointF>(*second),
+                                             static_cast<QPointF>(*third), Visualization::scenePos, &trPoint);
                     DrawPoint(point, trPoint, mainColor);
 
                     DrawLine(foot1, QLineF(static_cast<QPointF>(*third), trPoint), supportColor, Qt::DashLine);
@@ -107,10 +107,9 @@ void VisToolTriangle::RefreshGeometry()
                     DrawLine(this, QLineF(static_cast<QPointF>(*third), static_cast<QPointF>(*forth)), supportColor,
                                           Qt::DashLine);
 
-                    QPointF trPoint = VToolTriangle::FindPoint(static_cast<QPointF>(*first),
-                                                               static_cast<QPointF>(*second),
-                                                               static_cast<QPointF>(*third),
-                                                               static_cast<QPointF>(*forth));
+                    QPointF trPoint;
+                    VToolTriangle::FindPoint(static_cast<QPointF>(*first), static_cast<QPointF>(*second),
+                                             static_cast<QPointF>(*third), static_cast<QPointF>(*forth), &trPoint);
                     DrawPoint(point, trPoint, mainColor);
 
                     DrawLine(foot1, QLineF(static_cast<QPointF>(*third), trPoint), supportColor, Qt::DashLine);

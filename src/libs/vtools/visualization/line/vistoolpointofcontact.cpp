@@ -80,9 +80,9 @@ void VisToolPointOfContact::RefreshGeometry()
 
                 if (not qFuzzyIsNull(radius))
                 {
-                    QPointF fPoint = VToolPointOfContact::FindPoint(radius, static_cast<QPointF>(*third),
-                                                                    static_cast<QPointF>(*first),
-                                                                    static_cast<QPointF>(*second));
+                    QPointF fPoint;
+                    VToolPointOfContact::FindPoint(radius, static_cast<QPointF>(*third), static_cast<QPointF>(*first),
+                                                   static_cast<QPointF>(*second), &fPoint);
                     DrawPoint(point, fPoint, mainColor);
 
                     circle->setRect(PointRect(radius));

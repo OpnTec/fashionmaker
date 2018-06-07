@@ -235,7 +235,8 @@ void TST_FindPoint::TestLineIntersectAxis()
     QFETCH(QLineF, line);
     QFETCH(QPointF, point);
 
-    QPointF resultPoint = VToolLineIntersectAxis::FindPoint(axis, line);
+    QPointF resultPoint;
+    VToolLineIntersectAxis::FindPoint(axis, line, &resultPoint);
     QCOMPARE(point, resultPoint);
 }
 
@@ -266,7 +267,8 @@ void TST_FindPoint::TestTriangle()
     QFETCH(QPointF, secondPoint);
     QFETCH(QPointF, point);
 
-    QPointF resultPoint = VToolTriangle::FindPoint(axisP1, axisP2, firstPoint, secondPoint);
+    QPointF resultPoint;
+    VToolTriangle::FindPoint(axisP1, axisP2, firstPoint, secondPoint, &resultPoint);
     QCOMPARE(point, resultPoint);
 }
 
@@ -544,7 +546,8 @@ void TST_FindPoint::TestCurveIntersectAxis()
     QFETCH(QVector<QPointF>, curvePoints);
     QFETCH(QPointF, result);
 
-    const QPointF resultPoint = VToolCurveIntersectAxis::FindPoint(basePoint, angle, curvePoints);
+    QPointF resultPoint;
+    VToolCurveIntersectAxis::FindPoint(basePoint, angle, curvePoints, &resultPoint);
 
     QCOMPARE(result, resultPoint);
 }

@@ -73,7 +73,7 @@ public:
                                           VAbstractPattern *doc, VContainer *data);
     static VToolLineIntersectAxis *Create(VToolLineIntersectAxisInitData &initData);
 
-    static QPointF FindPoint(const QLineF &axis, const QLineF &line);
+    static bool FindPoint(const QLineF &axis, const QLineF &line, QPointF *intersectionPoint);
 
     static const QString ToolType;
     virtual int       type() const Q_DECL_OVERRIDE {return Type;}

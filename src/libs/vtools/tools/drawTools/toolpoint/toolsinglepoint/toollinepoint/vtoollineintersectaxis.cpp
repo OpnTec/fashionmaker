@@ -124,7 +124,15 @@ VToolLineIntersectAxis *VToolLineIntersectAxis::Create(VToolLineIntersectAxisIni
     const QSharedPointer<VPointF> secondPoint = initData.data->GeometricObject<VPointF>(initData.secondPointId);
     QLineF line(static_cast<QPointF>(*firstPoint), static_cast<QPointF>(*secondPoint));
 
-    QPointF fPoint = FindPoint(axis, line);
+    QPointF fPoint;
+    const bool success = FindPoint(axis, line, &fPoint);
+
+    if (not success)
+    {
+        qWarning() << tr("Error calculating point '%1'. Line (%2;%3) doesn't have intersection with axis through "
+                         "point '%4' and angle %5°")
+                      .arg(initData.name, firstPoint->name(), secondPoint->name(), basePoint->name()).arg(axis.angle());
+    }
 
     VPointF *p = new VPointF(fPoint, initData.name, initData.mx, initData.my);
     p->SetShowLabel(initData.showLabel);
@@ -164,8 +172,10 @@ VToolLineIntersectAxis *VToolLineIntersectAxis::Create(VToolLineIntersectAxisIni
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QPointF VToolLineIntersectAxis::FindPoint(const QLineF &axis, const QLineF &line)
+bool VToolLineIntersectAxis::FindPoint(const QLineF &axis, const QLineF &line, QPointF *intersectionPoint)
 {
+    SCASSERT(intersectionPoint != nullptr)
+
     QPointF fPoint;
     QLineF::IntersectType intersect = axis.intersect(line, &fPoint);
     if (intersect == QLineF::UnboundedIntersection || intersect == QLineF::BoundedIntersection)
@@ -173,16 +183,17 @@ QPointF VToolLineIntersectAxis::FindPoint(const QLineF &axis, const QLineF &line
         if(VFuzzyComparePossibleNulls(axis.angle(), line.angle())
            || VFuzzyComparePossibleNulls(qAbs(axis.angle() - line.angle()), 180))
         {
-            return QPointF();
+            return false;
         }
         else
         {
-            return fPoint;
+            *intersectionPoint = fPoint;
+            return true;
         }
     }
     else
     {
-        return QPointF();
+        return false;
     }
 }
 

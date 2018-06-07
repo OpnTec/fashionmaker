@@ -112,8 +112,15 @@ VToolPointFromArcAndTangent *VToolPointFromArcAndTangent::Create(VToolPointFromA
     const VArc arc = *initData.data->GeometricObject<VArc>(initData.arcId);
     const VPointF tPoint = *initData.data->GeometricObject<VPointF>(initData.tangentPointId);
 
-    const QPointF point = VToolPointFromArcAndTangent::FindPoint(static_cast<QPointF>(tPoint), &arc,
-                                                                 initData.crossPoint);
+    QPointF point;
+    const bool success = VToolPointFromArcAndTangent::FindPoint(static_cast<QPointF>(tPoint), &arc,
+                                                                initData.crossPoint, &point);
+
+    if (not success)
+    {
+        qWarning() << tr("Error calculating point '%1'. Tangent to arc '%2' from point '%3' cannot be found")
+                      .arg(initData.name, arc.name(), tPoint.name());
+    }
 
     VPointF *p = new VPointF(point, initData.name, initData.mx, initData.my);
     p->SetShowLabel(initData.showLabel);
@@ -146,8 +153,11 @@ VToolPointFromArcAndTangent *VToolPointFromArcAndTangent::Create(VToolPointFromA
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QPointF VToolPointFromArcAndTangent::FindPoint(const QPointF &p, const VArc *arc, const CrossCirclesPoint pType)
+bool VToolPointFromArcAndTangent::FindPoint(const QPointF &p, const VArc *arc, const CrossCirclesPoint pType,
+                                            QPointF *intersectionPoint)
 {
+    SCASSERT(intersectionPoint != nullptr)
+
     QPointF p1, p2;
     const QPointF center = static_cast<QPointF>(arc->GetCenter());
     const qreal radius = arc->GetRadius();
@@ -180,26 +190,14 @@ QPointF VToolPointFromArcAndTangent::FindPoint(const QPointF &p, const VArc *arc
             switch(localRes)
             {
                 case 2:
-                    if (pType == CrossCirclesPoint::FirstPoint)
-                    {
-                        return p1;
-                    }
-                    else
-                    {
-                        return p2;
-                    }
+                    *intersectionPoint = (pType == CrossCirclesPoint::FirstPoint ? p1 : p2);
+                    return true;
                 case 1:
-                    if (flagP1)
-                    {
-                        return p1;
-                    }
-                    else
-                    {
-                        return p2;
-                    }
+                    *intersectionPoint = (flagP1 ? p1 : p2);
+                    return true;
                 case 0:
                 default:
-                    return QPointF();
+                    return false;
             }
 
             break;
@@ -207,18 +205,19 @@ QPointF VToolPointFromArcAndTangent::FindPoint(const QPointF &p, const VArc *arc
         case 1:
             if (arc->IsIntersectLine(r1Arc))
             {
-                return p1;
+                *intersectionPoint = p1;
+                return true;
             }
             else
             {
-                return QPointF();
+                return false;
             }
         case 3:
         case 0:
         default:
             break;
     }
-    return QPointF();
+    return false;
 }
 
 //---------------------------------------------------------------------------------------------------------------------

@@ -69,7 +69,8 @@ public:
     static VToolPointFromCircleAndTangent *Create(QSharedPointer<DialogTool> dialog, VMainGraphicsScene  *scene,
                                                   VAbstractPattern *doc, VContainer *data);
     static VToolPointFromCircleAndTangent *Create(VToolPointFromCircleAndTangentInitData &initData);
-    static QPointF FindPoint(const QPointF &p, const QPointF &center, qreal radius, const CrossCirclesPoint crossPoint);
+    static bool FindPoint(const QPointF &p, const QPointF &center, qreal radius, const CrossCirclesPoint crossPoint,
+                          QPointF *intersectionPoint);
     static const QString ToolType;
     virtual int  type() const Q_DECL_OVERRIDE {return Type;}
     enum { Type = UserType + static_cast<int>(Tool::PointFromCircleAndTangent) };

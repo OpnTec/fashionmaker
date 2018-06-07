@@ -117,9 +117,16 @@ VToolPointFromCircleAndTangent *VToolPointFromCircleAndTangent::Create(VToolPoin
     const VPointF cPoint = *initData.data->GeometricObject<VPointF>(initData.circleCenterId);
     const VPointF tPoint = *initData.data->GeometricObject<VPointF>(initData.tangentPointId);
 
-    const QPointF point = VToolPointFromCircleAndTangent::FindPoint(static_cast<QPointF>(tPoint),
-                                                                    static_cast<QPointF>(cPoint), radius,
-                                                                    initData.crossPoint);
+    QPointF point;
+    const bool success = VToolPointFromCircleAndTangent::FindPoint(static_cast<QPointF>(tPoint),
+                                                                   static_cast<QPointF>(cPoint), radius,
+                                                                   initData.crossPoint, &point);
+    if (not success)
+    {
+        qWarning() << tr("Error calculating point '%1'. Tangent to circle with center '%2' and radius '%3' from "
+                         "point '%4' cannot be found")
+                      .arg(initData.name, cPoint.name()).arg(radius).arg(tPoint.name());
+    }
 
     VPointF *p = new VPointF(point, initData.name, initData.mx, initData.my);
     p->SetShowLabel(initData.showLabel);
@@ -152,29 +159,26 @@ VToolPointFromCircleAndTangent *VToolPointFromCircleAndTangent::Create(VToolPoin
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QPointF VToolPointFromCircleAndTangent::FindPoint(const QPointF &p, const QPointF &center, qreal radius,
-                                                  const CrossCirclesPoint crossPoint)
+bool VToolPointFromCircleAndTangent::FindPoint(const QPointF &p, const QPointF &center, qreal radius,
+                                               const CrossCirclesPoint crossPoint, QPointF *intersectionPoint)
 {
+    SCASSERT(intersectionPoint != nullptr)
+
     QPointF p1, p2;
     const int res = VGObject::ContactPoints (p, center, radius, p1, p2);
 
     switch(res)
     {
         case 2:
-            if (crossPoint == CrossCirclesPoint::FirstPoint)
-            {
-                return p1;
-            }
-            else
-            {
-                return p2;
-            }
+            *intersectionPoint = (crossPoint == CrossCirclesPoint::FirstPoint ? p1 : p2);
+            return true;
         case 1:
-            return p1;
+            *intersectionPoint = p1;
+            return true;
         case 3:
         case 0:
         default:
-            return QPointF();
+            return false;
     }
 }
 

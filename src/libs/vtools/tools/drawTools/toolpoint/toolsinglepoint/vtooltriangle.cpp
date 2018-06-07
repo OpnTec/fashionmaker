@@ -126,7 +126,7 @@ VToolTriangle* VToolTriangle::Create(QSharedPointer<DialogTool> dialog, VMainGra
 
 //---------------------------------------------------------------------------------------------------------------------
 /**
- * @brief Create help create tool.
+ * @brief Create helps to create the tool.
  * @param initData init data.
  * @return the created tool
  */
@@ -137,8 +137,15 @@ VToolTriangle* VToolTriangle::Create(VToolTriangleInitData initData)
     const QSharedPointer<VPointF> firstPoint = initData.data->GeometricObject<VPointF>(initData.firstPointId);
     const QSharedPointer<VPointF> secondPoint = initData.data->GeometricObject<VPointF>(initData.secondPointId);
 
-    QPointF point = FindPoint(static_cast<QPointF>(*axisP1), static_cast<QPointF>(*axisP2),
-                              static_cast<QPointF>(*firstPoint), static_cast<QPointF>(*secondPoint));
+    QPointF point;
+    const bool success = FindPoint(static_cast<QPointF>(*axisP1), static_cast<QPointF>(*axisP2),
+                                   static_cast<QPointF>(*firstPoint), static_cast<QPointF>(*secondPoint), &point);
+
+    if (not success)
+    {
+        qWarning() << tr("Error calculating point '%1'. Point of intersection cannot be finded")
+                      .arg(initData.name);
+    }
 
     VPointF *p = new VPointF(point, initData.name, initData.mx, initData.my);
     p->SetShowLabel(initData.showLabel);
@@ -179,11 +186,14 @@ VToolTriangle* VToolTriangle::Create(VToolTriangleInitData initData)
  * @param axisP2 second axis point.
  * @param firstPoint first triangle point, what lies on the hypotenuse.
  * @param secondPoint second triangle point, what lies on the hypotenuse.
- * @return point intersection two foots right triangle.
+ * @param intersectionPoint point intersection two foots right triangle
+ * @return true if the intersection exists.
  */
-QPointF VToolTriangle::FindPoint(const QPointF &axisP1, const QPointF &axisP2, const QPointF &firstPoint,
-                                 const QPointF &secondPoint)
+bool VToolTriangle::FindPoint(const QPointF &axisP1, const QPointF &axisP2, const QPointF &firstPoint,
+                              const QPointF &secondPoint, QPointF *intersectionPoint)
 {
+    SCASSERT(intersectionPoint != nullptr)
+
     QLineF axis(axisP1, axisP2);
     QLineF hypotenuse(firstPoint, secondPoint);
 
@@ -191,12 +201,12 @@ QPointF VToolTriangle::FindPoint(const QPointF &axisP1, const QPointF &axisP2, c
     QLineF::IntersectType intersect = axis.intersect(hypotenuse, &startPoint);
     if (intersect != QLineF::UnboundedIntersection && intersect != QLineF::BoundedIntersection)
     {
-        return QPointF();
+        return false;
     }
     if (VFuzzyComparePossibleNulls(axis.angle(), hypotenuse.angle())
         || VFuzzyComparePossibleNulls(qAbs(axis.angle() - hypotenuse.angle()), 180))
     {
-        return QPointF();
+        return false;
     }
 
     qreal step = 1;
@@ -214,10 +224,11 @@ QPointF VToolTriangle::FindPoint(const QPointF &axisP1, const QPointF &axisP2, c
         qint64 b = qFloor(QLineF(line.p2(), secondPoint).length());
         if (c*c <= (a*a + b*b))
         {
-            return line.p2();
+            *intersectionPoint = line.p2();
+            return true;
         }
     }
-    return QPointF();
+    return false;
 }
 
 //---------------------------------------------------------------------------------------------------------------------

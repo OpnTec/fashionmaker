@@ -72,8 +72,8 @@ void VisToolPointFromArcAndTangent::RefreshGeometry()
 
             FindRays(static_cast<QPointF>(*tan), arc.data());
 
-            const QPointF fPoint = VToolPointFromArcAndTangent::FindPoint(static_cast<QPointF>(*tan), arc.data(),
-                                                                          crossPoint);
+            QPointF fPoint;
+            VToolPointFromArcAndTangent::FindPoint(static_cast<QPointF>(*tan), arc.data(),  crossPoint, &fPoint);
             DrawPoint(point, fPoint, mainColor);
         }
     }

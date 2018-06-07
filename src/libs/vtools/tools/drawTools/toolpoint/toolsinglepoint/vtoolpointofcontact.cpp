@@ -100,19 +100,23 @@ void VToolPointOfContact::setDialog()
  * @param center center arc point.
  * @param firstPoint first line point.
  * @param secondPoint second line point.
- * @return point intersection.
+ * @param intersectionPoint point of intersection.
+ * @return true if intersection exists.
  */
-QPointF VToolPointOfContact::FindPoint(const qreal &radius, const QPointF &center, const QPointF &firstPoint,
-                                       const QPointF &secondPoint)
+bool VToolPointOfContact::FindPoint(qreal radius, const QPointF &center, const QPointF &firstPoint,
+                                    const QPointF &secondPoint, QPointF *intersectionPoint)
 {
+    SCASSERT(intersectionPoint != nullptr)
+
     QPointF p1, p2;
     qint32 res = VGObject::LineIntersectCircle(center, radius, QLineF(firstPoint, secondPoint), p1, p2);
     switch (res)
     {
         case 0:
-            return QPointF();
+            return false;
         case 1:
-            return p1;
+            *intersectionPoint = p1;
+            return true;
         case 2:
         {
             const bool flagP1 = VGObject::IsPointOnLineSegment (p1, firstPoint, secondPoint);
@@ -123,22 +127,26 @@ QPointF VToolPointOfContact::FindPoint(const qreal &radius, const QPointF &cente
                 // We don't have options for choosing correct point. Use closest to segment first point.
                 if (QLineF(firstPoint, p1).length() <= QLineF(firstPoint, p2).length())
                 {
-                    return p1;
+                    *intersectionPoint = p1;
+                    return true;
                 }
                 else
                 {
-                    return p2;
+                    *intersectionPoint = p2;
+                    return true;
                 }
             }
             else
             { // In this case we have one real and one theoretical intersection.
                 if (flagP1)
                 {
-                    return p1;
+                    *intersectionPoint = p1;
+                    return true;
                 }
                 else
                 {
-                    return p2;
+                    *intersectionPoint = p2;
+                    return true;
                 }
             }
         }
@@ -146,7 +154,7 @@ QPointF VToolPointOfContact::FindPoint(const qreal &radius, const QPointF &cente
             qDebug() << "Unxpected value" << res;
             break;
     }
-    return QPointF();
+    return false;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -197,8 +205,17 @@ VToolPointOfContact* VToolPointOfContact::Create(VToolPointOfContactInitData &in
 
     const qreal result = CheckFormula(initData.id, initData.radius, initData.data);
 
-    QPointF fPoint = VToolPointOfContact::FindPoint(qApp->toPixel(result), static_cast<QPointF>(*centerP),
-                                                    static_cast<QPointF>(*firstP), static_cast<QPointF>(*secondP));
+    QPointF fPoint;
+    const bool success = VToolPointOfContact::FindPoint(qApp->toPixel(result), static_cast<QPointF>(*centerP),
+                                                        static_cast<QPointF>(*firstP), static_cast<QPointF>(*secondP),
+                                                        &fPoint);
+
+    if (not success)
+    {
+        qWarning() << tr("Error calculating point '%1'. Circle with center '%2' and radius '%3' doesn't have "
+                         "intersection with line (%4;%5)")
+                      .arg(initData.name, centerP->name()).arg(result).arg(firstP->name(), secondP->name());
+    }
 
     VPointF *p = new VPointF(fPoint, initData.name, initData.mx, initData.my);
     p->SetShowLabel(initData.showLabel);

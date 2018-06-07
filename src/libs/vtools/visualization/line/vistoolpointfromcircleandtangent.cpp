@@ -74,9 +74,9 @@ void VisToolPointFromCircleAndTangent::RefreshGeometry()
 
                 FindRays(static_cast<QPointF>(*tan), static_cast<QPointF>(*center), cRadius);
 
-                const QPointF fPoint = VToolPointFromCircleAndTangent::FindPoint(static_cast<QPointF>(*tan),
-                                                                                 static_cast<QPointF>(*center),
-                                                                                 cRadius, crossPoint);
+                QPointF fPoint;
+                VToolPointFromCircleAndTangent::FindPoint(static_cast<QPointF>(*tan), static_cast<QPointF>(*center),
+                                                          cRadius, crossPoint, &fPoint);
                 DrawPoint(point, fPoint, mainColor);
             }
         }
