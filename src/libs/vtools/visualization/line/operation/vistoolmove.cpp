@@ -180,13 +180,18 @@ void VisToolMove::RefreshGeometry()
     }
     else
     {
+        // String below need for getting translation for key Ctrl
+        // Translation comes from Qt library. Use variables to prevent adding to our translation files.
+        const QString strQShortcut = QStringLiteral("QShortcut"); // Context
+        const QString strCtrl = QStringLiteral("Ctrl"); // String
+
         Visualization::toolTip = tr("Length = %1%2, angle = %3°, rotation angle = %4°, <b>Shift</b> - sticking angle, "
                                     "<b>%5</b> - change rotation origin point, <b>Mouse click</b> - finish creating")
                 .arg(qApp->TrVars()->FormulaToUser(QString::number(qApp->fromPixel(tempLength)),
                                                    qApp->Settings()->GetOsSeparator()), prefix)
                 .arg(tempAngle)
                 .arg(tempRoationAngle)
-                .arg(QCoreApplication::translate("QShortcut", "Ctrl"));
+                .arg(QCoreApplication::translate(strQShortcut.toUtf8().constData(), strCtrl.toUtf8().constData()));
     }
 
     CreateMovedRotatedObjects(iPoint, iCurve, tempLength, tempAngle, tempRoationAngle, origin);
