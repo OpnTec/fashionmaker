@@ -42,14 +42,13 @@ BuildRequires: pkgconfig(Qt5Concurrent)
 BuildRequires: pkgconfig(Qt5OpenGL)
 BuildRequires: pkgconfig(Qt5XmlPatterns)
 BuildRequires: libproxy-pacrunner
+BuildRequires: qttools5
 
 %if 0%{?mageia} == 6
 BuildRequires: pkgconfig(openssl)
 %else
 BuildRequires: openssl-devel
 %endif
-
-
 
 %endif
 
