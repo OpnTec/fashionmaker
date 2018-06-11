@@ -11765,6 +11765,13 @@ Deseja salvar suas mudanças?</translation>
     </message>
 </context>
 <context>
+    <name>VToolCurveIntersectAxis</name>
+    <message>
+        <source>Error calculating point &apos;%1&apos;. There is no intersection with curve &apos;%2&apos; and axis through point &apos;%3&apos; with angle %4°</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>VToolCutArc</name>
     <message>
         <source>Arc</source>
@@ -11974,6 +11981,10 @@ Deseja salvar suas mudanças?</translation>
     <message>
         <source>Label</source>
         <translation>Rótulo</translation>
+    </message>
+    <message>
+        <source>Error calculating point &apos;%1&apos;. Line (%2;%3) doesn&apos;t have intersection with axis through point &apos;%4&apos; and angle %5°</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -12550,6 +12561,20 @@ Deseja salvar suas mudanças?</translation>
     </message>
 </context>
 <context>
+    <name>VToolPointFromArcAndTangent</name>
+    <message>
+        <source>Error calculating point &apos;%1&apos;. Tangent to arc &apos;%2&apos; from point &apos;%3&apos; cannot be found</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>VToolPointFromCircleAndTangent</name>
+    <message>
+        <source>Error calculating point &apos;%1&apos;. Tangent to circle with center &apos;%2&apos; and radius &apos;%3&apos; from point &apos;%4&apos; cannot be found</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>VToolPointOfContact</name>
     <message>
         <source>Length</source>
@@ -12562,6 +12587,10 @@ Deseja salvar suas mudanças?</translation>
     <message>
         <source>Label</source>
         <translation>Rótulo</translation>
+    </message>
+    <message>
+        <source>Error calculating point &apos;%1&apos;. Circle with center &apos;%2&apos; and radius &apos;%3&apos; doesn&apos;t have intersection with line (%4;%5)</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -12680,6 +12709,13 @@ Deseja salvar suas mudanças?</translation>
     <message>
         <source>Label</source>
         <translation>Rótulo</translation>
+    </message>
+</context>
+<context>
+    <name>VToolTriangle</name>
+    <message>
+        <source>Error calculating point &apos;%1&apos;. Point of intersection cannot be finded</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -14147,7 +14183,11 @@ Deseja salvar suas mudanças?</translation>
     </message>
     <message>
         <source>Length = %1%2, angle = %3°, rotation angle = %4°, &lt;b&gt;Shift&lt;/b&gt; - sticking angle, &lt;b&gt;Ctrl&lt;/b&gt; - change rotation origin point, &lt;b&gt;Mouse click&lt;/b&gt; - finish creating</source>
-        <translation>Comprimento = %1%2, ângulo = %3°, ângulo de rotação = %4°, &lt;b&gt;Shift&lt;/b&gt; - para travar o ângulo, &lt;b&gt;Ctrl&lt;/b&gt; - mudar o ponto de origem da rotação, &lt;b&gt;Mouse clique&lt;/b&gt; - finalizar criação</translation>
+        <translation type="vanished">Comprimento = %1%2, ângulo = %3°, ângulo de rotação = %4°, &lt;b&gt;Shift&lt;/b&gt; - para travar o ângulo, &lt;b&gt;Ctrl&lt;/b&gt; - mudar o ponto de origem da rotação, &lt;b&gt;Mouse clique&lt;/b&gt; - finalizar criação</translation>
+    </message>
+    <message>
+        <source>Length = %1%2, angle = %3°, rotation angle = %4°, &lt;b&gt;Shift&lt;/b&gt; - sticking angle, &lt;b&gt;%5&lt;/b&gt; - change rotation origin point, &lt;b&gt;Mouse click&lt;/b&gt; - finish creating</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

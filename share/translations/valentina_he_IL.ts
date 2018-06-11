@@ -9333,6 +9333,13 @@ Do you want to save your changes?</source>
     </message>
 </context>
 <context>
+    <name>VToolCurveIntersectAxis</name>
+    <message>
+        <source>Error calculating point &apos;%1&apos;. There is no intersection with curve &apos;%2&apos; and axis through point &apos;%3&apos; with angle %4°</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>VToolCutArc</name>
     <message>
         <source>Arc</source>
@@ -9501,6 +9508,10 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Label</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Error calculating point &apos;%1&apos;. Line (%2;%3) doesn&apos;t have intersection with axis through point &apos;%4&apos; and angle %5°</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -9982,6 +9993,20 @@ Do you want to save your changes?</source>
     </message>
 </context>
 <context>
+    <name>VToolPointFromArcAndTangent</name>
+    <message>
+        <source>Error calculating point &apos;%1&apos;. Tangent to arc &apos;%2&apos; from point &apos;%3&apos; cannot be found</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>VToolPointFromCircleAndTangent</name>
+    <message>
+        <source>Error calculating point &apos;%1&apos;. Tangent to circle with center &apos;%2&apos; and radius &apos;%3&apos; from point &apos;%4&apos; cannot be found</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>VToolPointOfContact</name>
     <message>
         <source>Length</source>
@@ -9993,6 +10018,10 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Label</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Error calculating point &apos;%1&apos;. Circle with center &apos;%2&apos; and radius &apos;%3&apos; doesn&apos;t have intersection with line (%4;%5)</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -10111,6 +10140,13 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Label</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>VToolTriangle</name>
+    <message>
+        <source>Error calculating point &apos;%1&apos;. Point of intersection cannot be finded</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -11483,7 +11519,7 @@ Do you want to save your changes?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Length = %1%2, angle = %3°, rotation angle = %4°, &lt;b&gt;Shift&lt;/b&gt; - sticking angle, &lt;b&gt;Ctrl&lt;/b&gt; - change rotation origin point, &lt;b&gt;Mouse click&lt;/b&gt; - finish creating</source>
+        <source>Length = %1%2, angle = %3°, rotation angle = %4°, &lt;b&gt;Shift&lt;/b&gt; - sticking angle, &lt;b&gt;%5&lt;/b&gt; - change rotation origin point, &lt;b&gt;Mouse click&lt;/b&gt; - finish creating</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
