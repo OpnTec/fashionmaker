@@ -29,7 +29,7 @@ Requires:      qt5-qtbase-gui >= 5.2.0
 Requires:      qt5-qtxmlpatterns >= 5.2.0
 %endif
 
-%if 0%{?mageia} >= 6
+%if 0%{?mageia} > 0
 BuildRequires: libqt5-devel >= 5.2.0
 BuildRequires: pkgconfig(Qt5Svg)
 BuildRequires: pkgconfig(Qt5Core)
@@ -42,7 +42,15 @@ BuildRequires: pkgconfig(Qt5Concurrent)
 BuildRequires: pkgconfig(Qt5OpenGL)
 BuildRequires: pkgconfig(Qt5XmlPatterns)
 BuildRequires: libproxy-pacrunner
+
+%if 0%{?mageia} == 6
 BuildRequires: pkgconfig(openssl)
+%else
+BuildRequires: openssl-devel
+%endif
+
+
+
 %endif
 
 # SUSE Specifics
@@ -100,6 +108,10 @@ a unique pattern making tool.
 qmake-qt5 PREFIX=%{_prefix} LRELEASE=lrelease-qt5 Valentina.pro -r "CONFIG += noTests noRunPath no_ccache noDebugSymbols"
 %else
 qmake-qt5 PREFIX=%{_prefix} Valentina.pro -r "CONFIG += noTests noRunPath no_ccache noDebugSymbols"
+%endif
+
+%if 0%{?mageia} >= 6
+qmake PREFIX=%{_prefix} Valentina.pro -r "CONFIG += noTests noRunPath no_ccache noDebugSymbols"
 %endif
 %{__make} %{?jobs:-j %jobs}
 
@@ -183,6 +195,6 @@ rm -f dist/debian/%{name}.1.gz dist/debian/tape.1.gz dist/debian/%{name}.xml dis
 
 
 %changelog
-* Fri Nov 27 2015 Roman Telezhynskyi
+* Mon Jun 11 2018 Roman Telezhynskyi
  - Auto build
 
