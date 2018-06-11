@@ -459,6 +459,11 @@ noRunPath{ # For enable run qmake with CONFIG+=noRunPath
     }
 }
 
+win32:greaterThan(QT_MAJOR_VERSION, 4) {
+    # Link with library uxtheme to enable new style since WindowsXP or later
+    LIBS += -luxtheme
+}
+
 # When the GNU linker sees a library, it discards all symbols that it doesn't need.
 # Dependent library go first.
 
