@@ -19,6 +19,7 @@ BuildRequires: pkgconfig(Qt5Widgets)
 BuildRequires: pkgconfig(Qt5Xml)
 BuildRequires: pkgconfig(Qt5Concurrent)
 BuildRequires: pkgconfig(Qt5OpenGL)
+BuildRequires: pkgconfig(Qt5XmlPatterns)
 BuildRequires: qt5-qtxmlpatterns-devel  >= 5.2.0
 BuildRequires: qt5-qtsvg-devel >= 5.2.0
 BuildRequires: qt5-qttools-devel >= 5.2.0
@@ -26,6 +27,20 @@ BuildRequires: qt5-qttools-devel >= 5.2.0
 Requires:      qt5-qtsvg >= 5.2.0
 Requires:      qt5-qtbase-gui >= 5.2.0
 Requires:      qt5-qtxmlpatterns >= 5.2.0
+%endif
+
+%if 0%{?mageia} >= 6
+BuildRequires: libqt5base5-devel >= 5.2.0
+BuildRequires: pkgconfig(Qt5Svg)
+BuildRequires: pkgconfig(Qt5Core)
+BuildRequires: pkgconfig(Qt5Gui)
+BuildRequires: pkgconfig(Qt5Network)
+BuildRequires: pkgconfig(Qt5PrintSupport)
+BuildRequires: pkgconfig(Qt5Widgets)
+BuildRequires: pkgconfig(Qt5Xml)
+BuildRequires: pkgconfig(Qt5Concurrent)
+BuildRequires: pkgconfig(Qt5OpenGL)
+BuildRequires: pkgconfig(Qt5XmlPatterns)
 %endif
 
 # SUSE Specifics
