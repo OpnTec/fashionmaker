@@ -107,12 +107,15 @@ a unique pattern making tool.
 %if 0%{?suse_version} >= 1315
 qmake-qt5 PREFIX=%{_prefix} LRELEASE=lrelease-qt5 Valentina.pro -r "CONFIG += noTests noRunPath no_ccache noDebugSymbols"
 %else
-qmake-qt5 PREFIX=%{_prefix} Valentina.pro -r "CONFIG += noTests noRunPath no_ccache noDebugSymbols"
-%endif
 
 %if 0%{?mageia} >= 6
 qmake PREFIX=%{_prefix} Valentina.pro -r "CONFIG += noTests noRunPath no_ccache noDebugSymbols"
+%else
+qmake-qt5 PREFIX=%{_prefix} Valentina.pro -r "CONFIG += noTests noRunPath no_ccache noDebugSymbols"
 %endif
+
+%endif
+
 %{__make} %{?jobs:-j %jobs}
 
 %install
