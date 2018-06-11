@@ -162,8 +162,8 @@ fi
 %files
 %defattr(-,root,root,-)
 %doc README.txt LICENSE_GPL.txt 
-%doc %{_mandir}/man1/%{name}.1.gz
-%doc %{_mandir}/man1/tape.1.gz
+%doc %{_mandir}/man1/%{name}.1*
+%doc %{_mandir}/man1/tape.1*
 %{_bindir}/valentina
 %{_bindir}/tape
 %{_libdir}/libvpropertyexplorer.so
