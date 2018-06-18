@@ -128,6 +128,8 @@ void TST_NameRegExp::TestNameRegExp_data()
     QTest::newRow("First character can't be \"<\"") << "<a" << false;
     QTest::newRow("First character can't be \">\"") << ">a" << false;
 
+    QTest::newRow("First character can be \"\\\"") << "\\a" << true;
+
     QTest::newRow("Any next character can't be \"+\"") << "a+" << false;
     QTest::newRow("Any next character can't be \"*\"") << "a*" << false;
     QTest::newRow("Any next character can't be \"/\"") << "a/" << false;
@@ -145,6 +147,8 @@ void TST_NameRegExp::TestNameRegExp_data()
     QTest::newRow("Any next character can't be \"!\"") << "a!" << false;
     QTest::newRow("Any next character can't be \"<\"") << "a<" << false;
     QTest::newRow("Any next character can't be \">\"") << "a>" << false;
+
+    QTest::newRow("Any next character can be \"\\\"") << "a\\" << true;
 
     QTest::newRow("Good name \"p12\"") << "p12" << true;
     QTest::newRow("Good name \"height\"") << "height" << true;
