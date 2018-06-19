@@ -59,6 +59,7 @@
 #include "../vmisc/vmath.h"
 #include "vmaingraphicsscene.h"
 #include "vsimplecurve.h"
+#include "vcontrolpointspline.h"
 #include "../vmisc/vabstractapplication.h"
 #include "../vmisc/vsettings.h"
 #include "vabstractmainwindow.h"
@@ -112,6 +113,26 @@ qreal PrepareScrolling(qreal scheduledScrollings, QWheelEvent *wheel_event)
     scheduledScrollings *= qobject_cast<VSettings *>(qApp->Settings())->GetScrollingAcceleration();
 
     return scheduledScrollings;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief PrioritizeItems helps prioritize some items over others.
+ *
+ * In some cases we want items like curve handle points to be selected over other items on scene.
+ * @param list list of scene items under a mouse pointer
+ * @return prioritized list where prioritized items goes first
+ */
+QList<QGraphicsItem *> PrioritizeItems(const QList<QGraphicsItem *> &list)
+{
+    QList<QGraphicsItem *> prioritized;
+    QList<QGraphicsItem *> nonPrioritized;
+    for (auto item : list)
+    {
+        item && item->type() == VControlPointSpline::Type ? prioritized.append(item) : nonPrioritized.append(item);
+    }
+
+    return prioritized + nonPrioritized;
 }
 }
 
@@ -540,13 +561,14 @@ void VMainGraphicsView::mousePressEvent(QMouseEvent *event)
             if (showToolOptions)
             {
                 bool success = false;
-                const QList<QGraphicsItem *> list = items(event->pos());
+                const QList<QGraphicsItem *> list = PrioritizeItems(items(event->pos()));
                 for (auto item : list)
                 {
                     if (item && item->type() > QGraphicsItem::UserType && item->type() <= VSimpleCurve::Type)
                     {
                         emit itemClicked(item);
                         success = true;
+                        break;
                     }
                 }
 
