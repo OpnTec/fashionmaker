@@ -108,8 +108,8 @@ public:
 
     virtual bool     IsAppInGUIMode()const =0;
 
-    QString         GetPPath() const;
-    void            SetPPath(const QString &value);
+    QString         GetPatternPath() const;
+    void            SetPatternPath(const QString &value);
 
 #if defined(Q_OS_WIN)
     static void WinAttachConsole();
@@ -173,13 +173,13 @@ inline void VAbstractApplication::SetCustomerName(const QString &name)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-inline QString VAbstractApplication::GetPPath() const
+inline QString VAbstractApplication::GetPatternPath() const
 {
     return patternFilePath;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-inline void VAbstractApplication::SetPPath(const QString &value)
+inline void VAbstractApplication::SetPatternPath(const QString &value)
 {
     patternFilePath = value;
 }

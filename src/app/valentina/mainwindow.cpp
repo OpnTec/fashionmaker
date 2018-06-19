@@ -1693,10 +1693,10 @@ void MainWindow::LoadIndividual()
         {
             if (not doc->MPath().isEmpty())
             {
-                watcher->removePath(AbsoluteMPath(qApp->GetPPath(), doc->MPath()));
+                watcher->removePath(AbsoluteMPath(qApp->GetPatternPath(), doc->MPath()));
             }
             ui->actionUnloadMeasurements->setEnabled(true);
-            doc->SetMPath(RelativeMPath(qApp->GetPPath(), mPath));
+            doc->SetMPath(RelativeMPath(qApp->GetPatternPath(), mPath));
             watcher->addPath(mPath);
             PatternChangesWereSaved(false);
             ui->actionEditCurrent->setEnabled(true);
@@ -1745,10 +1745,10 @@ void MainWindow::LoadMultisize()
         {
             if (not doc->MPath().isEmpty())
             {
-                watcher->removePath(AbsoluteMPath(qApp->GetPPath(), doc->MPath()));
+                watcher->removePath(AbsoluteMPath(qApp->GetPatternPath(), doc->MPath()));
             }
             ui->actionUnloadMeasurements->setEnabled(true);
-            doc->SetMPath(RelativeMPath(qApp->GetPPath(), mPath));
+            doc->SetMPath(RelativeMPath(qApp->GetPatternPath(), mPath));
             watcher->addPath(mPath);
             PatternChangesWereSaved(false);
             ui->actionEditCurrent->setEnabled(true);
@@ -1784,7 +1784,7 @@ void MainWindow::UnloadMeasurements()
 
     if (doc->ListMeasurements().isEmpty())
     {
-        watcher->removePath(AbsoluteMPath(qApp->GetPPath(), doc->MPath()));
+        watcher->removePath(AbsoluteMPath(qApp->GetPatternPath(), doc->MPath()));
         if (qApp->patternType() == MeasurementsType::Multisize)
         {
             ToolBarOption();
@@ -1811,7 +1811,7 @@ void MainWindow::ShowMeasurements()
 {
     if (not doc->MPath().isEmpty())
     {
-        const QString absoluteMPath = AbsoluteMPath(qApp->GetPPath(), doc->MPath());
+        const QString absoluteMPath = AbsoluteMPath(qApp->GetPatternPath(), doc->MPath());
 
         QStringList arguments;
         if (qApp->patternType() == MeasurementsType::Multisize)
@@ -1883,7 +1883,7 @@ void MainWindow::SyncMeasurements()
 {
     if (mChanges)
     {
-        const QString path = AbsoluteMPath(qApp->GetPPath(), doc->MPath());
+        const QString path = AbsoluteMPath(qApp->GetPatternPath(), doc->MPath());
         if(UpdateMeasurements(path, static_cast<int>(VContainer::size()), static_cast<int>(VContainer::height())))
         {
             if (not watcher->files().contains(path))
@@ -2754,13 +2754,13 @@ bool MainWindow::SaveAs()
 {
     QString filters(tr("Pattern files") + QLatin1String("(*.val)"));
     QString dir;
-    if (qApp->GetPPath().isEmpty())
+    if (qApp->GetPatternPath().isEmpty())
     {
         dir = qApp->ValentinaSettings()->GetPathPattern();
     }
     else
     {
-        dir = QFileInfo(qApp->GetPPath()).absolutePath();
+        dir = QFileInfo(qApp->GetPatternPath()).absolutePath();
     }
 
     bool usedNotExistedDir = false;
@@ -2867,7 +2867,7 @@ bool MainWindow::SaveAs()
  */
 bool MainWindow::Save()
 {
-    if (qApp->GetPPath().isEmpty() || patternReadOnly)
+    if (qApp->GetPatternPath().isEmpty() || patternReadOnly)
     {
         return SaveAs();
     }
@@ -2881,7 +2881,7 @@ bool MainWindow::Save()
 #ifdef Q_OS_WIN32
         qt_ntfs_permission_lookup++; // turn checking on
 #endif /*Q_OS_WIN32*/
-        const bool isFileWritable = QFileInfo(qApp->GetPPath()).isWritable();
+        const bool isFileWritable = QFileInfo(qApp->GetPatternPath()).isWritable();
 #ifdef Q_OS_WIN32
         qt_ntfs_permission_lookup--; // turn it off again
 #endif /*Q_OS_WIN32*/
@@ -2900,8 +2900,8 @@ bool MainWindow::Save()
 #ifdef Q_OS_WIN32
                 qt_ntfs_permission_lookup++; // turn checking on
 #endif /*Q_OS_WIN32*/
-                bool changed = QFile::setPermissions(qApp->GetPPath(),
-                                                    QFileInfo(qApp->GetPPath()).permissions() | QFileDevice::WriteUser);
+                bool changed = QFile::setPermissions(qApp->GetPatternPath(),
+                                                    QFileInfo(qApp->GetPatternPath()).permissions() | QFileDevice::WriteUser);
 #ifdef Q_OS_WIN32
                 qt_ntfs_permission_lookup--; // turn it off again
 #endif /*Q_OS_WIN32*/
@@ -2910,7 +2910,7 @@ bool MainWindow::Save()
                 {
                     QMessageBox messageBox(this);
                     messageBox.setIcon(QMessageBox::Warning);
-                    messageBox.setText(tr("Cannot set permissions for %1 to writable.").arg(qApp->GetPPath()));
+                    messageBox.setText(tr("Cannot set permissions for %1 to writable.").arg(qApp->GetPatternPath()));
                     messageBox.setInformativeText(tr("Could not save the file."));
                     messageBox.setDefaultButton(QMessageBox::Ok);
                     messageBox.setStandardButtons(QMessageBox::Ok);
@@ -2925,10 +2925,10 @@ bool MainWindow::Save()
         }
 
         QString error;
-        bool result = SavePattern(qApp->GetPPath(), error);
+        bool result = SavePattern(qApp->GetPatternPath(), error);
         if (result)
         {
-            QFile::remove(qApp->GetPPath() + *autosavePrefix);
+            QFile::remove(qApp->GetPatternPath() + *autosavePrefix);
             m_curFileFormatVersion = VPatternConverter::PatternMaxVer;
             m_curFileFormatVersionStr = VPatternConverter::PatternMaxVerStr;
         }
@@ -2993,9 +2993,9 @@ void MainWindow::Clear()
     setCurrentFile(QString());// Keep before cleaning a pattern data to prevent a crash
     pattern->Clear();
     qCDebug(vMainWindow, "Clearing pattern.");
-    if (not qApp->GetPPath().isEmpty() && not doc->MPath().isEmpty())
+    if (not qApp->GetPatternPath().isEmpty() && not doc->MPath().isEmpty())
     {
-        watcher->removePath(AbsoluteMPath(qApp->GetPPath(), doc->MPath()));
+        watcher->removePath(AbsoluteMPath(qApp->GetPatternPath(), doc->MPath()));
     }
     doc->clear();
     qCDebug(vMainWindow, "Clearing scenes.");
@@ -3055,16 +3055,16 @@ void MainWindow::FileClosedCorrect()
 
     //File was closed correct.
     QStringList restoreFiles = qApp->ValentinaSettings()->GetRestoreFileList();
-    restoreFiles.removeAll(qApp->GetPPath());
+    restoreFiles.removeAll(qApp->GetPatternPath());
     qApp->ValentinaSettings()->SetRestoreFileList(restoreFiles);
 
     // Remove autosave file
-    QFile autofile(qApp->GetPPath() + *autosavePrefix);
+    QFile autofile(qApp->GetPatternPath() + *autosavePrefix);
     if (autofile.exists())
     {
         autofile.remove();
     }
-    qCDebug(vMainWindow, "File %s closed correct.", qUtf8Printable(qApp->GetPPath()));
+    qCDebug(vMainWindow, "File %s closed correct.", qUtf8Printable(qApp->GetPatternPath()));
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -3463,7 +3463,7 @@ void MainWindow::PatternChangesWereSaved(bool saved)
 void MainWindow::ChangedSize(const QString & text)
 {
     const int size = static_cast<int>(VContainer::size());
-    if (UpdateMeasurements(AbsoluteMPath(qApp->GetPPath(), doc->MPath()), text.toInt(),
+    if (UpdateMeasurements(AbsoluteMPath(qApp->GetPatternPath(), doc->MPath()), text.toInt(),
                            static_cast<int>(VContainer::height())))
     {
         doc->LiteParseTree(Document::LiteParse);
@@ -3493,7 +3493,7 @@ void MainWindow::ChangedSize(const QString & text)
 void MainWindow::ChangedHeight(const QString &text)
 {
     const int height = static_cast<int>(VContainer::height());
-    if (UpdateMeasurements(AbsoluteMPath(qApp->GetPPath(), doc->MPath()), static_cast<int>(VContainer::size()),
+    if (UpdateMeasurements(AbsoluteMPath(qApp->GetPatternPath(), doc->MPath()), static_cast<int>(VContainer::size()),
                            text.toInt()))
     {
         doc->LiteParseTree(Document::LiteParse);
@@ -3695,8 +3695,8 @@ bool MainWindow::SavePattern(const QString &fileName, QString &error)
     qCDebug(vMainWindow, "Saving pattern file %s.", qUtf8Printable(fileName));
     QFileInfo tempInfo(fileName);
 
-    const QString mPath = AbsoluteMPath(qApp->GetPPath(), doc->MPath());
-    if (not mPath.isEmpty() && qApp->GetPPath() != fileName)
+    const QString mPath = AbsoluteMPath(qApp->GetPatternPath(), doc->MPath());
+    if (not mPath.isEmpty() && qApp->GetPatternPath() != fileName)
     {
         doc->SetMPath(RelativeMPath(fileName, mPath));
     }
@@ -3729,9 +3729,9 @@ void MainWindow::AutoSavePattern()
 {
     qCDebug(vMainWindow, "Autosaving pattern.");
 
-    if (qApp->GetPPath().isEmpty() == false && this->isWindowModified() == true)
+    if (qApp->GetPatternPath().isEmpty() == false && this->isWindowModified() == true)
     {
-        QString autofile = qApp->GetPPath() + *autosavePrefix;
+        QString autofile = qApp->GetPatternPath() + *autosavePrefix;
         QString error;
         SavePattern(autofile, error);
     }
@@ -3746,12 +3746,12 @@ void MainWindow::AutoSavePattern()
 void MainWindow::setCurrentFile(const QString &fileName)
 {
     qCDebug(vMainWindow, "Set current name to \"%s\"", qUtf8Printable(fileName));
-    qApp->SetPPath(fileName);
+    qApp->SetPatternPath(fileName);
     doc->SetPatternWasChanged(true);
     emit doc->UpdatePatternLabel();
     qApp->getUndoStack()->setClean();
 
-    if (not qApp->GetPPath().isEmpty() && VApplication::IsGUIMode())
+    if (not qApp->GetPatternPath().isEmpty() && VApplication::IsGUIMode())
     {
         qCDebug(vMainWindow, "Updating recent file list.");
         VSettings *settings = qApp->ValentinaSettings();
@@ -3834,7 +3834,7 @@ bool MainWindow::MaybeSave()
         messageBox->setEscapeButton(QMessageBox::Cancel);
 
         messageBox->setButtonText(QMessageBox::Yes,
-                                  qApp->GetPPath().isEmpty() || patternReadOnly ? tr("Save…") : tr("Save"));
+                                  qApp->GetPatternPath().isEmpty() || patternReadOnly ? tr("Save…") : tr("Save"));
         messageBox->setButtonText(QMessageBox::No, tr("Don't Save"));
 
         messageBox->setWindowModality(Qt::ApplicationModal);
@@ -4180,7 +4180,7 @@ void MainWindow::InitDocksContain()
 //---------------------------------------------------------------------------------------------------------------------
 bool MainWindow::OpenNewValentina(const QString &fileName) const
 {
-    if (this->isWindowModified() || qApp->GetPPath().isEmpty() == false)
+    if (this->isWindowModified() || qApp->GetPatternPath().isEmpty() == false)
     {
         VApplication::NewValentina(fileName);
         return true;
@@ -5320,7 +5320,7 @@ bool MainWindow::SetSize(const QString &text)
 {
     if (not VApplication::IsGUIMode())
     {
-        if (this->isWindowModified() || not qApp->GetPPath().isEmpty())
+        if (this->isWindowModified() || not qApp->GetPatternPath().isEmpty())
         {
             if (qApp->patternType() == MeasurementsType::Multisize)
             {
@@ -5363,7 +5363,7 @@ bool MainWindow::SetHeight(const QString &text)
 {
     if (not VApplication::IsGUIMode())
     {
-        if (this->isWindowModified() || not qApp->GetPPath().isEmpty())
+        if (this->isWindowModified() || not qApp->GetPatternPath().isEmpty())
         {
             if (qApp->patternType() == MeasurementsType::Multisize)
             {
@@ -5473,9 +5473,9 @@ void MainWindow::ProcessCMD()
 QString MainWindow::GetPatternFileName()
 {
     QString shownName = tr("untitled.val");
-    if(not qApp->GetPPath().isEmpty())
+    if(not qApp->GetPatternPath().isEmpty())
     {
-        shownName = StrippedName(qApp->GetPPath());
+        shownName = StrippedName(qApp->GetPatternPath());
     }
     shownName += QLatin1String("[*]");
     return shownName;
@@ -5491,7 +5491,7 @@ QString MainWindow::GetMeasurementFileName()
     else
     {
         QString shownName(" [");
-        shownName += StrippedName(AbsoluteMPath(qApp->GetPPath(), doc->MPath()));
+        shownName += StrippedName(AbsoluteMPath(qApp->GetPatternPath(), doc->MPath()));
 
         if(mChanges)
         {
@@ -5507,12 +5507,12 @@ QString MainWindow::GetMeasurementFileName()
 void MainWindow::UpdateWindowTitle()
 {
     bool isFileWritable = true;
-    if (not qApp->GetPPath().isEmpty())
+    if (not qApp->GetPatternPath().isEmpty())
     {
 #ifdef Q_OS_WIN32
         qt_ntfs_permission_lookup++; // turn checking on
 #endif /*Q_OS_WIN32*/
-        isFileWritable = QFileInfo(qApp->GetPPath()).isWritable();
+        isFileWritable = QFileInfo(qApp->GetPatternPath()).isWritable();
 #ifdef Q_OS_WIN32
         qt_ntfs_permission_lookup--; // turn it off again
 #endif /*Q_OS_WIN32*/
@@ -5527,7 +5527,7 @@ void MainWindow::UpdateWindowTitle()
         setWindowTitle(GetPatternFileName()+GetMeasurementFileName() + QLatin1String(" (") + tr("read only") +
                        QLatin1String(")"));
     }
-    setWindowFilePath(qApp->GetPPath());
+    setWindowFilePath(qApp->GetPatternPath());
 
 #if defined(Q_OS_MAC)
     static QIcon fileIcon = QIcon(QCoreApplication::applicationDirPath() +

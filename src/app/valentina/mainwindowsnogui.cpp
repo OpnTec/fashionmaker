@@ -1643,7 +1643,7 @@ void MainWindowsNoGUI::ExportScene(const QList<QGraphicsScene *> &scenes,
 QString MainWindowsNoGUI::FileName() const
 {
     QString fileName;
-    qApp->GetPPath().isEmpty() ? fileName = tr("unnamed") : fileName = qApp->GetPPath();
+    qApp->GetPatternPath().isEmpty() ? fileName = tr("unnamed") : fileName = qApp->GetPatternPath();
     return QFileInfo(fileName).baseName();
 }
 

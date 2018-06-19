@@ -88,7 +88,7 @@ QMap<QString, QString> PreparePlaceholders(const VAbstractPattern *doc)
     }
 
     placeholders.insert(pl_pExt, QString("val"));
-    placeholders.insert(pl_pFileName, QFileInfo(qApp->GetPPath()).baseName());
+    placeholders.insert(pl_pFileName, QFileInfo(qApp->GetPatternPath()).baseName());
     placeholders.insert(pl_mFileName, QFileInfo(doc->MPath()).baseName());
 
     QString curSize;

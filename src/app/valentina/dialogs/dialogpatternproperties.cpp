@@ -86,7 +86,7 @@ DialogPatternProperties::DialogPatternProperties(VPattern *doc,  VContainer *pat
 
     patternMaterials = doc->GetPatternMaterials();
 
-    if (qApp->GetPPath().isEmpty())
+    if (qApp->GetPatternPath().isEmpty())
     {
         ui->lineEditPathToFile->setText(tr("<Empty>"));
         ui->lineEditPathToFile->setToolTip(tr("File was not saved yet."));
@@ -94,15 +94,15 @@ DialogPatternProperties::DialogPatternProperties(VPattern *doc,  VContainer *pat
     }
     else
     {
-        ui->lineEditPathToFile->setText(QDir::toNativeSeparators(qApp->GetPPath()));
-        ui->lineEditPathToFile->setToolTip(QDir::toNativeSeparators(qApp->GetPPath()));
+        ui->lineEditPathToFile->setText(QDir::toNativeSeparators(qApp->GetPatternPath()));
+        ui->lineEditPathToFile->setToolTip(QDir::toNativeSeparators(qApp->GetPatternPath()));
         ui->pushButtonShowInExplorer->setEnabled(true);
     }
     ui->lineEditPathToFile->setCursorPosition(0);
 
     connect(ui->pushButtonShowInExplorer, &QPushButton::clicked, this, []()
     {
-        ShowInGraphicalShell(qApp->GetPPath());
+        ShowInGraphicalShell(qApp->GetPatternPath());
     });
 #if defined(Q_OS_MAC)
     ui->pushButtonShowInExplorer->setText(tr("Show in Finder"));
