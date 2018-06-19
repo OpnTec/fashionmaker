@@ -265,7 +265,7 @@ void VControlPointSpline::Init()
 
     controlLine = new VScaledLine(this);
     controlLine->SetBoldLine(false);
-    controlLine->setFlag(QGraphicsItem::ItemStacksBehindParent, true);
+    //controlLine->setFlag(QGraphicsItem::ItemStacksBehindParent, true);
     controlLine->setVisible(false);
 }
 

@@ -1911,8 +1911,8 @@ void MainWindow::SyncMeasurements()
 #if defined(Q_OS_MAC)
 void MainWindow::OpenAt(QAction *where)
 {
-    const QString path = qApp->GetPPath().left(qApp->GetPPath().indexOf(where->text())) + where->text();
-    if (path == qApp->GetPPath())
+    const QString path = qApp->GetPatternPath().left(qApp->GetPatternPath().indexOf(where->text())) + where->text();
+    if (path == qApp->GetPatternPath())
     {
         return;
     }
@@ -5533,7 +5533,7 @@ void MainWindow::UpdateWindowTitle()
     static QIcon fileIcon = QIcon(QCoreApplication::applicationDirPath() +
                                   QLatin1String("/../Resources/Valentina.icns"));
     QIcon icon;
-    if (not qApp->GetPPath().isEmpty())
+    if (not qApp->GetPatternPath().isEmpty())
     {
         if (not isWindowModified())
         {
