@@ -120,27 +120,27 @@ int AbstractTest::Run(int exit, const QString &program, const QStringList &argum
 
     if (not process->waitForStarted(msecs))
     {
-        error = QString("The start operation timed out or an error occurred.\n%1").arg(parameters);
+        error = QStringLiteral("The start operation timed out or an error occurred.\n%1").arg(parameters);
         process->kill();
         return TST_EX_START_TIME_OUT;
     }
 
     if (not process->waitForFinished(msecs))
     {
-        error = QString("The finish operation timed out or an error occurred.\n%1").arg(parameters);
+        error = QStringLiteral("The finish operation timed out or an error occurred.\n%1").arg(parameters);
         process->kill();
         return TST_EX_FINISH_TIME_OUT;
     }
 
     if (process->exitStatus() == QProcess::CrashExit)
     {
-        error = QString("Program crashed.\n%1\n%2").arg(parameters, QString(process->readAllStandardError()));
+        error = QStringLiteral("Program crashed.\n%1\n%2").arg(parameters, QString(process->readAllStandardError()));
         return TST_EX_CRASH;
     }
 
     if (process->exitCode() != exit)
     {
-        error = QString("Unexpected finish.\n%1").arg(QString(process->readAllStandardError()));
+        error = QStringLiteral("Unexpected finish.\n%1").arg(QString(process->readAllStandardError()));
         return process->exitCode();
     }
 
