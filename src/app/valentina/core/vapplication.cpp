@@ -170,6 +170,8 @@ inline void noisyFailureMsgHandler(QtMsgType type, const QMessageLogContext &con
             default:
                 break;
         }
+        vStdOut().flush();
+        vStdErr().flush();
 
         (*qApp->LogFile()) << debugdate <<  endl;
     }

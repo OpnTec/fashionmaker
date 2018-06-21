@@ -159,6 +159,9 @@ inline void noisyFailureMsgHandler(QtMsgType type, const QMessageLogContext &con
             break;
     }
 
+    vStdOut().flush();
+    vStdErr().flush();
+
     if (isGuiThread)
     {
         //fixme: trying to make sure there are no save/load dialogs are opened, because error message during them will

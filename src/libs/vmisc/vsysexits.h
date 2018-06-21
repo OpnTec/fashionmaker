@@ -82,18 +82,16 @@ static const auto V_UNUSED V_EX_CONFIG = 78;      /*Something was found in an un
 //---------------------------------------------------------------------------------------------------------------------
 inline QTextStream& vStdErr()
 {
-    static QTextStream ts( stderr );
+    static QTextStream ts(stderr, QIODevice::Unbuffered | QIODevice::WriteOnly);
     ts.setCodec("UTF-8");
-    ts.flush();
     return ts;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 inline QTextStream& vStdOut()
 {
-    static QTextStream ts( stdout );
+    static QTextStream ts(stdout, QIODevice::Unbuffered | QIODevice::WriteOnly);
     ts.setCodec("UTF-8");
-    ts.flush();
     return ts;
 }
 
