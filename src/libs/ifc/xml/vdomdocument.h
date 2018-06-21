@@ -95,7 +95,7 @@ public:
     static const QString TagLine;
 
     explicit VDomDocument(QObject *parent = nullptr);
-    virtual ~VDomDocument() Q_DECL_EQ_DEFAULT;
+    virtual ~VDomDocument();
     QDomElement elementById(quint32 id, const QString &tagName = QString());
 
     template <typename T>

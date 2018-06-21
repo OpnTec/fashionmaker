@@ -203,6 +203,12 @@ VDomDocument::VDomDocument(QObject *parent)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+VDomDocument::~VDomDocument()
+{
+    m_watcher->cancel();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 QDomElement VDomDocument::elementById(quint32 id, const QString &tagName)
 {
     if (id == 0)
@@ -608,7 +614,10 @@ void VDomDocument::CollectId(const QDomElement &node, QVector<quint32> &vector) 
 //---------------------------------------------------------------------------------------------------------------------
 void VDomDocument::RefreshElementIdCache()
 {
-    m_watcher->setFuture(QtConcurrent::run(this, &VDomDocument::RefreshCache, documentElement()));
+    if (m_watcher->isFinished())
+    {
+        m_watcher->setFuture(QtConcurrent::run(this, &VDomDocument::RefreshCache, documentElement()));
+    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
