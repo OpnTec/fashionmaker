@@ -87,9 +87,6 @@
                <property name="text">
                 <string>Detail</string>
                </property>
-               <property name="maxLength">
-                <number>30</number>
-               </property>
                <property name="placeholderText">
                 <string>Name can't be empty</string>
                </property>
