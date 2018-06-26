@@ -239,7 +239,7 @@ private:
     static qreal Rnd ( qreal v )
     {
 #if QT_VERSION >= QT_VERSION_CHECK(5, 10, 0)
-        return static_cast<qreal>( ( 1 + ( v * QRandomGenerator().bounded(RAND_MAX); / ( RAND_MAX + 1.0 ) ) ) );
+        return static_cast<qreal>( ( 1 + ( v * QRandomGenerator().bounded(RAND_MAX) / ( RAND_MAX + 1.0 ) ) ) );
 #else
         // cppcheck-suppress qrandCalled
         return static_cast<qreal>( ( 1 + ( v * qrand() / ( RAND_MAX + 1.0 ) ) ) );
