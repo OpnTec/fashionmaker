@@ -55,16 +55,16 @@ public:
     QString GetFormulaSAWidth() const;
     void    SetFormulaSAWidth(const QString &formula);
 
-    virtual void SetPiecesList(const QVector<quint32> &list) Q_DECL_OVERRIDE;
+    virtual void SetPiecesList(const QVector<quint32> &list) override;
 
 public slots:
-    virtual void ChosenObject(quint32 id, const SceneObject &type) Q_DECL_OVERRIDE;
-    virtual void ShowDialog(bool click) Q_DECL_OVERRIDE;
+    virtual void ChosenObject(quint32 id, const SceneObject &type) override;
+    virtual void ShowDialog(bool click) override;
 
 protected:
-    virtual void CheckState() Q_DECL_FINAL;
-    virtual void ShowVisualization() Q_DECL_OVERRIDE;
-    virtual void closeEvent(QCloseEvent *event) Q_DECL_OVERRIDE;
+    virtual void CheckState() final;
+    virtual void ShowVisualization() override;
+    virtual void closeEvent(QCloseEvent *event) override;
 
 private slots:
     void ShowContextMenu(const QPoint &pos);

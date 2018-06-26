@@ -43,7 +43,7 @@ class VPlaceLabelItem : public VPointF
 public:
     VPlaceLabelItem();
     VPlaceLabelItem(const VPlaceLabelItem &item);
-    virtual ~VPlaceLabelItem() Q_DECL_OVERRIDE;
+    virtual ~VPlaceLabelItem() override;
 
     VPlaceLabelItem &operator=(const VPlaceLabelItem &item);
 #ifdef Q_COMPILER_RVALUE_REFS

@@ -53,26 +53,26 @@ public:
     //! \delegate A pointer to the QAbstractItemDelegate requesting the editor. This can be used to connect signals and
     //! slots.
     virtual QWidget* createEditor(QWidget* parent, const QStyleOptionViewItem& options,
-                                  const QAbstractItemDelegate* delegate) Q_DECL_OVERRIDE;
+                                  const QAbstractItemDelegate* delegate) override;
 
     //! Gets the data from the widget
-    virtual QVariant getEditorData(const QWidget* editor) const Q_DECL_OVERRIDE;
+    virtual QVariant getEditorData(const QWidget* editor) const override;
 
     void         setReadOnly(bool readOnly);
     void         setOsSeparator(bool separator);
     void         setClearButtonEnable(bool value);
 
     //! Sets the settings.
-    virtual void setSetting(const QString& key, const QVariant& value) Q_DECL_OVERRIDE;
+    virtual void setSetting(const QString& key, const QVariant& value) override;
 
     //! Get the settings. This function has to be implemented in a subclass in order to have an effect
-    virtual QVariant getSetting(const QString& key) const Q_DECL_OVERRIDE;
+    virtual QVariant getSetting(const QString& key) const override;
 
     //! Returns the list of keys of the property's settings
-    virtual QStringList getSettingKeys() const Q_DECL_OVERRIDE;
+    virtual QStringList getSettingKeys() const override;
 
     //! Returns a string containing the type of the property
-    virtual QString type() const Q_DECL_OVERRIDE;
+    virtual QString type() const override;
 
     //! Clones this property
     //! \param include_children Indicates whether to also clone the children
@@ -80,9 +80,9 @@ public:
     //! to fill all the data into container. This can also be used when subclassing this function.
     //! \return Returns the newly created property (or container, if it was not NULL)
     Q_REQUIRED_RESULT virtual VProperty* clone(bool include_children = true,
-                                               VProperty* container = nullptr) const Q_DECL_OVERRIDE;
+                                               VProperty* container = nullptr) const override;
 
-    virtual void UpdateParent(const QVariant &value) Q_DECL_OVERRIDE;
+    virtual void UpdateParent(const QVariant &value) override;
 
     int getTypeForParent() const;
     void setTypeForParent(int value);
@@ -93,7 +93,7 @@ protected:
     bool clearButton;
     bool m_osSeparator;
 
-    virtual bool eventFilter(QObject *object, QEvent *event) Q_DECL_OVERRIDE;
+    virtual bool eventFilter(QObject *object, QEvent *event) override;
 
 private:
     Q_DISABLE_COPY(VStringProperty)

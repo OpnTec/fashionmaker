@@ -52,9 +52,9 @@ class VApplication : public VAbstractApplication
 public:
 
     VApplication(int &argc, char ** argv);
-    virtual ~VApplication() Q_DECL_OVERRIDE;
+    virtual ~VApplication() override;
     static void        NewValentina(const QString &fileName = QString());
-    virtual bool       notify(QObject * receiver, QEvent * event) Q_DECL_OVERRIDE;
+    virtual bool       notify(QObject * receiver, QEvent * event) override;
 
     void               InitOptions();
 
@@ -68,17 +68,17 @@ public:
     void               StartLogging();
     QTextStream       *LogFile();
 
-    virtual const VTranslateVars *TrVars() Q_DECL_OVERRIDE;
+    virtual const VTranslateVars *TrVars() override;
 
     bool static IsGUIMode();
-    virtual bool IsAppInGUIMode() const Q_DECL_OVERRIDE;
+    virtual bool IsAppInGUIMode() const override;
 
-    virtual void OpenSettings() Q_DECL_OVERRIDE;
+    virtual void OpenSettings() override;
     VSettings *ValentinaSettings();
 
 protected:
-    virtual void       InitTrVars() Q_DECL_OVERRIDE;
-    virtual bool	   event(QEvent *e) Q_DECL_OVERRIDE;
+    virtual void       InitTrVars() override;
+    virtual bool	   event(QEvent *e) override;
 
 private:
     Q_DISABLE_COPY(VApplication)

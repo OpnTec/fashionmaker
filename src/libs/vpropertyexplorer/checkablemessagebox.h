@@ -50,7 +50,7 @@ class VPROPERTYEXPLORERSHARED_EXPORT CheckableMessageBox : public QDialog
 
 public:
     explicit CheckableMessageBox(QWidget *parent);
-    virtual ~CheckableMessageBox() Q_DECL_OVERRIDE;
+    virtual ~CheckableMessageBox() override;
 
     static QDialogButtonBox::StandardButton
         question(QWidget *parent,

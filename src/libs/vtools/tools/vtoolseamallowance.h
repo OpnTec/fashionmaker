@@ -110,22 +110,22 @@ public:
     void ReinitInternals(const VPiece &detail, VMainGraphicsScene *scene);
     void RefreshGeometry(bool updateChildren = true);
 
-    virtual int        type() const Q_DECL_OVERRIDE {return Type;}
+    virtual int        type() const override {return Type;}
     enum { Type = UserType + static_cast<int>(Tool::Piece)};
 
-    virtual QString      getTagName() const Q_DECL_OVERRIDE;
-    virtual void         ShowVisualization(bool show) Q_DECL_OVERRIDE;
-    virtual void         GroupVisibility(quint32 object, bool visible) Q_DECL_OVERRIDE;
+    virtual QString      getTagName() const override;
+    virtual void         ShowVisualization(bool show) override;
+    virtual void         GroupVisibility(quint32 object, bool visible) override;
     virtual void         paint(QPainter *painter, const QStyleOptionGraphicsItem *option,
-                               QWidget *widget) Q_DECL_OVERRIDE;
-    virtual QRectF       boundingRect() const Q_DECL_OVERRIDE;
-    virtual QPainterPath shape() const Q_DECL_OVERRIDE;
+                               QWidget *widget) override;
+    virtual QRectF       boundingRect() const override;
+    virtual QPainterPath shape() const override;
 public slots:
-    virtual void FullUpdateFromGuiApply() Q_DECL_OVERRIDE;
-    virtual void FullUpdateFromFile () Q_DECL_OVERRIDE;
+    virtual void FullUpdateFromGuiApply() override;
+    virtual void FullUpdateFromFile () override;
     void         EnableToolMove(bool move);
-    virtual void AllowHover(bool enabled) Q_DECL_OVERRIDE;
-    virtual void AllowSelecting(bool enabled) Q_DECL_OVERRIDE;
+    virtual void AllowHover(bool enabled) override;
+    virtual void AllowSelecting(bool enabled) override;
     virtual void ResetChildren(QGraphicsItem* pItem);
     virtual void UpdateAll();
     virtual void retranslateUi();
@@ -144,20 +144,20 @@ protected slots:
     void SaveResizeGrainline(qreal dLength);
     void SaveRotateGrainline(qreal dRot, const QPointF& ptPos);
 protected:
-    virtual void       AddToFile () Q_DECL_OVERRIDE;
-    virtual void       RefreshDataInFile() Q_DECL_OVERRIDE;
-    virtual QVariant   itemChange ( GraphicsItemChange change, const QVariant &value ) Q_DECL_OVERRIDE;
-    virtual void       mousePressEvent( QGraphicsSceneMouseEvent * event) Q_DECL_OVERRIDE;
-    virtual void       mouseReleaseEvent ( QGraphicsSceneMouseEvent * event ) Q_DECL_OVERRIDE;
-    virtual void       hoverEnterEvent ( QGraphicsSceneHoverEvent * event ) Q_DECL_OVERRIDE;
-    virtual void       hoverLeaveEvent ( QGraphicsSceneHoverEvent * event ) Q_DECL_OVERRIDE;
-    virtual void       contextMenuEvent ( QGraphicsSceneContextMenuEvent * event ) Q_DECL_OVERRIDE;
-    virtual void       keyReleaseEvent(QKeyEvent * event) Q_DECL_OVERRIDE;
-    virtual void       SetVisualization() Q_DECL_OVERRIDE {}
-    virtual void       DeleteToolWithConfirm(bool ask = true) Q_DECL_OVERRIDE;
-    virtual void       ToolCreation(const Source &typeCreation) Q_DECL_OVERRIDE;
-    virtual void       SetDialog() Q_DECL_FINAL;
-    virtual void       SaveDialogChange(const QString &undoText = QString()) Q_DECL_FINAL;
+    virtual void       AddToFile () override;
+    virtual void       RefreshDataInFile() override;
+    virtual QVariant   itemChange ( GraphicsItemChange change, const QVariant &value ) override;
+    virtual void       mousePressEvent( QGraphicsSceneMouseEvent * event) override;
+    virtual void       mouseReleaseEvent ( QGraphicsSceneMouseEvent * event ) override;
+    virtual void       hoverEnterEvent ( QGraphicsSceneHoverEvent * event ) override;
+    virtual void       hoverLeaveEvent ( QGraphicsSceneHoverEvent * event ) override;
+    virtual void       contextMenuEvent ( QGraphicsSceneContextMenuEvent * event ) override;
+    virtual void       keyReleaseEvent(QKeyEvent * event) override;
+    virtual void       SetVisualization() override {}
+    virtual void       DeleteToolWithConfirm(bool ask = true) override;
+    virtual void       ToolCreation(const Source &typeCreation) override;
+    virtual void       SetDialog() final;
+    virtual void       SaveDialogChange(const QString &undoText = QString()) final;
 
 private slots:
     void ShowOptions();

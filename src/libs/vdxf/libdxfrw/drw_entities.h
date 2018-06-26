@@ -238,7 +238,7 @@ public:
         eType = DRW::POINT;
     }
 
-    virtual void applyExtrusion(){}
+    virtual void applyExtrusion() override{}
 
 protected:
     void parseCode(int code, dxfReader *reader);
@@ -265,7 +265,7 @@ public:
         eType = DRW::LINE;
     }
 
-    virtual void applyExtrusion(){}
+    virtual void applyExtrusion() override{}
 
 protected:
     void parseCode(int code, dxfReader *reader);
@@ -313,7 +313,7 @@ public:
         eType = DRW::CIRCLE;
     }
 
-    virtual void applyExtrusion();
+    virtual void applyExtrusion() override;
 
 protected:
     void parseCode(int code, dxfReader *reader);
@@ -338,7 +338,7 @@ public:
         eType = DRW::ARC;
     }
 
-    virtual void applyExtrusion();
+    virtual void applyExtrusion() override;
 
     //! center point in OCS
     const DRW_Coord & center() const { return basePoint; }
@@ -383,7 +383,7 @@ public:
     }
 
     void toPolyline(DRW_Polyline *pol, int parts = 128);
-    virtual void applyExtrusion();
+    virtual void applyExtrusion() override;
 
 protected:
     //! interpret code in dxf reading process or dispatch to inherited class
@@ -414,7 +414,7 @@ public:
         eType = DRW::TRACE;
     }
 
-    virtual void applyExtrusion();
+    virtual void applyExtrusion() override;
 
 protected:
     void parseCode(int code, dxfReader *reader);
@@ -481,7 +481,7 @@ public:
         eType = DRW::E3DFACE;
     }
 
-    virtual void applyExtrusion() {}
+    virtual void applyExtrusion() override {}
 
     //! first corner in WCS
     const DRW_Coord & firstCorner() const { return basePoint; }
@@ -519,7 +519,7 @@ public:
         layer = '0';
     }
 
-    virtual void applyExtrusion(){}
+    virtual void applyExtrusion() override {}
 
 protected:
     void parseCode(int code, dxfReader *reader);
@@ -607,7 +607,7 @@ public:
     ~DRW_LWPolyline() {
         for(DRW_Vertex2D *item : vertlist) delete item;
     }
-    virtual void applyExtrusion();
+    virtual void applyExtrusion() override;
     void addVertex (DRW_Vertex2D v) {
         DRW_Vertex2D *vert = new DRW_Vertex2D();
         vert->x = v.x;
@@ -682,7 +682,7 @@ public:
         eType = DRW::TEXT;
     }
 
-    virtual void applyExtrusion(){} //RLZ TODO
+    virtual void applyExtrusion() override {} //RLZ TODO
 
 protected:
     void parseCode(int code, dxfReader *reader);
@@ -943,7 +943,7 @@ public:
         for(DRW_Coord *item : controllist) delete item;
         for(DRW_Coord *item : fitlist) delete item;
     }
-    virtual void applyExtrusion(){}
+    virtual void applyExtrusion() override {}
 
 protected:
     void parseCode(int code, dxfReader *reader);
@@ -1057,7 +1057,7 @@ public:
         looplist.push_back(v);
     }
 
-    virtual void applyExtrusion(){}
+    virtual void applyExtrusion() override {}
 
 protected:
     void parseCode(int code, dxfReader *reader);
@@ -1238,7 +1238,7 @@ public:
     }
     virtual ~DRW_Dimension() = default;
 
-    virtual void applyExtrusion(){}
+    virtual void applyExtrusion() override {}
 
 protected:
     void parseCode(int code, dxfReader *reader);
@@ -1544,7 +1544,7 @@ public:
         for(DRW_Coord *item : vertexlist) delete item;
     }
 
-    virtual void applyExtrusion(){}
+    virtual void applyExtrusion() override {}
 
 protected:
     void parseCode(int code, dxfReader *reader);
@@ -1606,7 +1606,7 @@ public:
         eType = DRW::VIEWPORT;
     }
 
-    virtual void applyExtrusion(){}
+    virtual void applyExtrusion() override {}
 
 protected:
     void parseCode(int code, dxfReader *reader);

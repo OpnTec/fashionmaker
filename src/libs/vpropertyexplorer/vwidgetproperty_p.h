@@ -50,7 +50,7 @@ public:
         : VPropertyPrivate(), Widget(nullptr) {}
 
     //! Destructor
-    virtual ~VWidgetPropertyPrivate() Q_DECL_OVERRIDE
+    virtual ~VWidgetPropertyPrivate() override
     {
         if (Widget)
         {

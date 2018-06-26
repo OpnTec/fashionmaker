@@ -61,17 +61,17 @@ public:
     static VToolPlaceLabel* Create(VToolPlaceLabelInitData &initData);
 
     static const QString ToolType;
-    virtual QString getTagName() const Q_DECL_OVERRIDE;
+    virtual QString getTagName() const override;
 
     static void AddAttributes(VAbstractPattern *doc, QDomElement &domElement, quint32 id, const VPlaceLabelItem &label);
 public slots:
-    virtual void FullUpdateFromFile () Q_DECL_OVERRIDE {}
-    virtual void AllowHover(bool enabled) Q_DECL_OVERRIDE;
-    virtual void AllowSelecting(bool enabled) Q_DECL_OVERRIDE;
+    virtual void FullUpdateFromFile () override {}
+    virtual void AllowHover(bool enabled) override;
+    virtual void AllowSelecting(bool enabled) override;
 protected:
-    virtual void AddToFile() Q_DECL_OVERRIDE;
-    virtual void ShowNode() Q_DECL_OVERRIDE {}
-    virtual void HideNode() Q_DECL_OVERRIDE {}
+    virtual void AddToFile() override;
+    virtual void ShowNode() override {}
+    virtual void HideNode() override {}
 private:
     Q_DISABLE_COPY(VToolPlaceLabel)
 

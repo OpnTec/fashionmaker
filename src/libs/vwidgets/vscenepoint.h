@@ -44,11 +44,11 @@ public:
     explicit VScenePoint(QGraphicsItem *parent = nullptr);
     virtual ~VScenePoint() = default;
 
-    virtual int  type() const Q_DECL_OVERRIDE {return Type;}
+    virtual int  type() const override {return Type;}
     enum { Type = UserType + static_cast<int>(Vis::ScenePoint)};
 
     virtual void paint(QPainter *painter, const QStyleOptionGraphicsItem *option,
-                       QWidget *widget = nullptr) Q_DECL_OVERRIDE;
+                       QWidget *widget = nullptr) override;
     virtual void RefreshPointGeometry(const VPointF &point);
 
     void RefreshLine();
@@ -69,8 +69,8 @@ protected:
 
     bool m_selectedFromChild;
 
-    virtual void hoverEnterEvent(QGraphicsSceneHoverEvent *event) Q_DECL_OVERRIDE;
-    virtual void hoverLeaveEvent(QGraphicsSceneHoverEvent *event) Q_DECL_OVERRIDE;
+    virtual void hoverEnterEvent(QGraphicsSceneHoverEvent *event) override;
+    virtual void hoverLeaveEvent(QGraphicsSceneHoverEvent *event) override;
 
     void SetOnlyPoint(bool value);
     bool IsOnlyPoint() const;

@@ -39,8 +39,8 @@ public:
     ShowLabel(VAbstractPattern *doc, quint32 id, bool visible, QUndoCommand *parent = nullptr);
     virtual ~ShowLabel()=default;
 
-    virtual void undo() Q_DECL_OVERRIDE;
-    virtual void redo() Q_DECL_OVERRIDE;
+    virtual void undo() override;
+    virtual void redo() override;
 private:
     Q_DISABLE_COPY(ShowLabel)
     bool m_visible;

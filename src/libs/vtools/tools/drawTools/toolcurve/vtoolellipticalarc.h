@@ -70,14 +70,14 @@ class VToolEllipticalArc : public VToolAbstractArc
 {
     Q_OBJECT
 public:
-    virtual void     setDialog() Q_DECL_OVERRIDE;
+    virtual void     setDialog() override;
     static VToolEllipticalArc* Create(QSharedPointer<DialogTool> dialog, VMainGraphicsScene  *scene,
                                       VAbstractPattern *doc, VContainer *data);
     static VToolEllipticalArc* Create(VToolEllipticalArcInitData &initData);
     static const QString ToolType;
-    virtual int      type() const Q_DECL_OVERRIDE {return Type;}
+    virtual int      type() const override {return Type;}
     enum { Type = UserType + static_cast<int>(Tool::EllipticalArc)};
-    virtual QString  getTagName() const Q_DECL_OVERRIDE;
+    virtual QString  getTagName() const override;
 
     VFormula         GetFormulaRadius1() const;
     void             SetFormulaRadius1(const VFormula &value);
@@ -94,16 +94,16 @@ public:
     VFormula         GetFormulaRotationAngle() const;
     void             SetFormulaRotationAngle(const VFormula &value);
 
-    virtual void     ShowVisualization(bool show) Q_DECL_OVERRIDE;
+    virtual void     ShowVisualization(bool show) override;
 protected slots:
-    virtual void ShowContextMenu(QGraphicsSceneContextMenuEvent *event, quint32 id=NULL_ID) Q_DECL_OVERRIDE;
+    virtual void ShowContextMenu(QGraphicsSceneContextMenuEvent *event, quint32 id=NULL_ID) override;
 protected:
-    virtual void    RemoveReferens() Q_DECL_OVERRIDE;
+    virtual void    RemoveReferens() override;
     virtual void    SaveDialog(QDomElement &domElement, QList<quint32> &oldDependencies,
-                               QList<quint32> &newDependencies) Q_DECL_OVERRIDE;
-    virtual void    SaveOptions(QDomElement &tag, QSharedPointer<VGObject> &obj) Q_DECL_OVERRIDE;
-    virtual void    SetVisualization() Q_DECL_OVERRIDE;
-    virtual QString MakeToolTip() const Q_DECL_OVERRIDE;
+                               QList<quint32> &newDependencies) override;
+    virtual void    SaveOptions(QDomElement &tag, QSharedPointer<VGObject> &obj) override;
+    virtual void    SetVisualization() override;
+    virtual QString MakeToolTip() const override;
 
 private:
     Q_DISABLE_COPY(VToolEllipticalArc)

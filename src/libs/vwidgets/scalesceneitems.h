@@ -40,11 +40,11 @@ public:
     VScaledLine(const QLineF &line, QGraphicsItem * parent = nullptr);
     virtual ~VScaledLine() = default;
 
-    virtual int  type() const Q_DECL_OVERRIDE {return Type;}
+    virtual int  type() const override {return Type;}
     enum { Type = UserType + static_cast<int>(Vis::ScaledLine)};
 
     virtual void paint(QPainter *painter, const QStyleOptionGraphicsItem *option,
-                       QWidget *widget = nullptr) Q_DECL_OVERRIDE;
+                       QWidget *widget = nullptr) override;
 
     bool IsBoldLine() const;
     void SetBoldLine(bool bold);
@@ -62,11 +62,11 @@ public:
     explicit VScaledEllipse(QGraphicsItem * parent = nullptr);
     virtual ~VScaledEllipse() = default;
 
-    virtual int  type() const Q_DECL_OVERRIDE {return Type;}
+    virtual int  type() const override {return Type;}
     enum { Type = UserType + static_cast<int>(Vis::ScaledEllipse)};
 
     virtual void paint(QPainter *painter, const QStyleOptionGraphicsItem *option,
-                       QWidget *widget = nullptr) Q_DECL_OVERRIDE;
+                       QWidget *widget = nullptr) override;
 private:
     Q_DISABLE_COPY(VScaledEllipse)
 };

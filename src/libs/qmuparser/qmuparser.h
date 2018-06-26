@@ -51,11 +51,11 @@ namespace qmu
     {
     public:
         QmuParser();
-        virtual void InitCharSets() Q_DECL_OVERRIDE;
-        virtual void InitFun() Q_DECL_OVERRIDE;
-        virtual void InitConst() Q_DECL_OVERRIDE;
-        virtual void InitOprt() Q_DECL_OVERRIDE;
-        virtual void OnDetectVar(const QString &pExpr, int &nStart, int &nEnd) Q_DECL_OVERRIDE;
+        virtual void InitCharSets() override;
+        virtual void InitFun() override;
+        virtual void InitConst() override;
+        virtual void InitOprt() override;
+        virtual void OnDetectVar(const QString &pExpr, int &nStart, int &nEnd) override;
         qreal        Diff(qreal *a_Var, qreal a_fPos, qreal a_fEpsilon = 0) const;
     protected:
         static int   IsVal(const QString &a_szExpr, int *a_iPos, qreal *a_fVal, const QLocale &locale,

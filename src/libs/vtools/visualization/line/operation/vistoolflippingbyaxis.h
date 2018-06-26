@@ -41,12 +41,12 @@ public:
     explicit VisToolFlippingByAxis(const VContainer *data, QGraphicsItem *parent = nullptr);
     virtual ~VisToolFlippingByAxis() = default;
 
-    virtual void RefreshGeometry() Q_DECL_OVERRIDE;
+    virtual void RefreshGeometry() override;
 
     void SetOriginPointId(quint32 value);
     void SetAxisType(AxisType value);
 
-    virtual int type() const Q_DECL_OVERRIDE {return Type;}
+    virtual int type() const override {return Type;}
     enum { Type = UserType + static_cast<int>(Vis::ToolFlippingByAxis)};
 private:
     Q_DISABLE_COPY(VisToolFlippingByAxis)

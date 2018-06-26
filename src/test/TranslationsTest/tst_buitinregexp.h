@@ -44,8 +44,8 @@ public:
     virtual ~TST_BuitInRegExp() Q_DECL_EQ_DEFAULT;
 
 protected:
-    virtual void        PrepareData() Q_DECL_OVERRIDE;
-    virtual QStringList AllNames() Q_DECL_OVERRIDE;
+    virtual void        PrepareData() override;
+    virtual QStringList AllNames() override;
 
 private slots:
     void initTestCase();

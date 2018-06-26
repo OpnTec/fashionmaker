@@ -51,13 +51,13 @@ public:
 
     void setApproximationScale(qreal approximationScale);
 
-    virtual int  type() const Q_DECL_OVERRIDE {return Type;}
+    virtual int  type() const override {return Type;}
     enum { Type = UserType + static_cast<int>(Vis::Path)};
 protected:
     qreal m_approximationScale;
 
-    virtual void InitPen() Q_DECL_OVERRIDE;
-    virtual void AddOnScene() Q_DECL_OVERRIDE;
+    virtual void InitPen() override;
+    virtual void AddOnScene() override;
 
     VSimplePoint *GetPoint(QVector<VSimplePoint *> &points, quint32 i, const QColor &color);
 private:

@@ -44,9 +44,9 @@ class AddPatternPiece : public VUndoCommand
 public:
     AddPatternPiece(const QDomElement &xml, VAbstractPattern *doc, const QString &namePP,
                     QUndoCommand *parent = nullptr);
-    virtual ~AddPatternPiece() Q_DECL_OVERRIDE;
-    virtual void undo() Q_DECL_OVERRIDE;
-    virtual void redo() Q_DECL_OVERRIDE;
+    virtual ~AddPatternPiece() override;
+    virtual void undo() override;
+    virtual void redo() override;
 private:
     Q_DISABLE_COPY(AddPatternPiece)
     QString    namePP;

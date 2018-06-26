@@ -40,8 +40,8 @@ public:
     explicit VisToolSpecialPoint(const VContainer *data, QGraphicsItem *parent = nullptr);
     virtual ~VisToolSpecialPoint();
 
-    virtual void RefreshGeometry() Q_DECL_OVERRIDE;
-    virtual int  type() const Q_DECL_OVERRIDE {return Type;}
+    virtual void RefreshGeometry() override;
+    virtual int  type() const override {return Type;}
     enum { Type = UserType + static_cast<int>(Vis::ToolSpecialPoint)};
 private:
     Q_DISABLE_COPY(VisToolSpecialPoint)

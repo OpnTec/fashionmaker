@@ -67,7 +67,7 @@ public:
     }
 
     virtual QWidget *createEditor(QWidget *parent, const QStyleOptionViewItem &option,
-                                  const QModelIndex &index) const Q_DECL_OVERRIDE
+                                  const QModelIndex &index) const override
     {
         Q_UNUSED(option)
         Q_UNUSED(index)
@@ -78,7 +78,7 @@ public:
         return editor;
     }
 
-    virtual void setEditorData(QWidget *editor, const QModelIndex &index) const Q_DECL_OVERRIDE
+    virtual void setEditorData(QWidget *editor, const QModelIndex &index) const override
     {
         const QString value = index.model()->data(index, Qt::EditRole).toString();
 
@@ -92,7 +92,7 @@ public:
     }
 
     virtual void setModelData(QWidget *editor, QAbstractItemModel *model,
-                              const QModelIndex &index) const Q_DECL_OVERRIDE
+                              const QModelIndex &index) const override
     {
         QComboBox *comboBox = static_cast<QComboBox*>(editor);
         QString value;
@@ -107,7 +107,7 @@ public:
     }
 
     virtual void updateEditorGeometry(QWidget *editor, const QStyleOptionViewItem &option,
-                                      const QModelIndex &index) const Q_DECL_OVERRIDE
+                                      const QModelIndex &index) const override
     {
         Q_UNUSED(index)
         editor->setGeometry(option.rect);

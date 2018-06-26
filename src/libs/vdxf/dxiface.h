@@ -103,18 +103,18 @@ public:
 
 //reimplement virtual DRW_Interface functions
 //writer part, send all in class dx_data to writer
-    virtual void writeHeader(DRW_Header& data);
-    virtual void writeBlocks();
+    virtual void writeHeader(DRW_Header& data) override;
+    virtual void writeBlocks() override;
     //only send the name, needed by the reader to prepare handles of blocks & blockRecords
-    virtual void writeBlockRecords();
+    virtual void writeBlockRecords() override;
     //write entities of model space and first paper_space
-    virtual void writeEntities();
-    virtual void writeLTypes();
-    virtual void writeLayers();
-    virtual void writeTextstyles();
-    virtual void writeVports();
-    virtual void writeDimstyles();
-    virtual void writeAppId();
+    virtual void writeEntities() override;
+    virtual void writeLTypes() override;
+    virtual void writeLayers() override;
+    virtual void writeTextstyles() override;
+    virtual void writeVports() override;
+    virtual void writeDimstyles() override;
+    virtual void writeAppId() override;
 
     void AddEntity(DRW_Entity* e);
     UTF8STRING AddFont(const QFont &f);

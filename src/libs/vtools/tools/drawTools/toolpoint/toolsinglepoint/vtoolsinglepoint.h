@@ -70,7 +70,7 @@ public:
     VToolSinglePoint(VAbstractPattern *doc, VContainer *data, quint32 id, QGraphicsItem * parent = nullptr);
     virtual ~VToolSinglePoint() Q_DECL_EQ_DEFAULT;
 
-    virtual int type() const Q_DECL_OVERRIDE {return Type;}
+    virtual int type() const override {return Type;}
     enum { Type = UserType + static_cast<int>(Tool::SinglePoint)};
 
     QString name() const;
@@ -78,33 +78,33 @@ public:
 
     void SetEnabled(bool enabled);
 
-    virtual void GroupVisibility(quint32 object, bool visible) Q_DECL_OVERRIDE;
-    virtual void ChangeLabelPosition(quint32 id, const QPointF &pos) Q_DECL_OVERRIDE;
+    virtual void GroupVisibility(quint32 object, bool visible) override;
+    virtual void ChangeLabelPosition(quint32 id, const QPointF &pos) override;
 
-    virtual bool IsLabelVisible(quint32 id) const Q_DECL_OVERRIDE;
-    virtual void SetLabelVisible(quint32 id, bool visible) Q_DECL_OVERRIDE;
+    virtual bool IsLabelVisible(quint32 id) const override;
+    virtual void SetLabelVisible(quint32 id, bool visible) override;
 public slots:
     void         NameChangePosition(const QPointF &pos);
-    virtual void Disable(bool disable, const QString &namePP) Q_DECL_OVERRIDE;
-    virtual void EnableToolMove(bool move) Q_DECL_OVERRIDE;
+    virtual void Disable(bool disable, const QString &namePP) override;
+    virtual void EnableToolMove(bool move) override;
     void         PointChoosed();
     void         PointSelected(bool selected);
-    virtual void FullUpdateFromFile() Q_DECL_OVERRIDE;
-    virtual void AllowHover(bool enabled) Q_DECL_OVERRIDE;
-    virtual void AllowSelecting(bool enabled) Q_DECL_OVERRIDE;
+    virtual void FullUpdateFromFile() override;
+    virtual void AllowHover(bool enabled) override;
+    virtual void AllowSelecting(bool enabled) override;
     void         AllowLabelHover(bool enabled);
     void         AllowLabelSelecting(bool enabled);
-    virtual void ToolSelectionType(const SelectionType &type) Q_DECL_OVERRIDE;
+    virtual void ToolSelectionType(const SelectionType &type) override;
 protected:
-    virtual void     UpdateNamePosition(quint32 id, const QPointF &pos) Q_DECL_OVERRIDE;
-    virtual void     mousePressEvent(QGraphicsSceneMouseEvent *event) Q_DECL_OVERRIDE;
-    virtual void     mouseReleaseEvent ( QGraphicsSceneMouseEvent * event ) Q_DECL_OVERRIDE;
-    virtual void     hoverEnterEvent(QGraphicsSceneHoverEvent *event) Q_DECL_OVERRIDE;
-    virtual QVariant itemChange ( GraphicsItemChange change, const QVariant &value ) Q_DECL_OVERRIDE;
-    virtual void     keyReleaseEvent(QKeyEvent * event) Q_DECL_OVERRIDE;
-    virtual void     contextMenuEvent ( QGraphicsSceneContextMenuEvent * event ) Q_DECL_OVERRIDE;
-    virtual void     SaveOptions(QDomElement &tag, QSharedPointer<VGObject> &obj) Q_DECL_OVERRIDE;
-    virtual void     ChangeLabelVisibility(quint32 id, bool visible) Q_DECL_OVERRIDE;
+    virtual void     UpdateNamePosition(quint32 id, const QPointF &pos) override;
+    virtual void     mousePressEvent(QGraphicsSceneMouseEvent *event) override;
+    virtual void     mouseReleaseEvent ( QGraphicsSceneMouseEvent * event ) override;
+    virtual void     hoverEnterEvent(QGraphicsSceneHoverEvent *event) override;
+    virtual QVariant itemChange ( GraphicsItemChange change, const QVariant &value ) override;
+    virtual void     keyReleaseEvent(QKeyEvent * event) override;
+    virtual void     contextMenuEvent ( QGraphicsSceneContextMenuEvent * event ) override;
+    virtual void     SaveOptions(QDomElement &tag, QSharedPointer<VGObject> &obj) override;
+    virtual void     ChangeLabelVisibility(quint32 id, bool visible) override;
 private:
     Q_DISABLE_COPY(VToolSinglePoint)
 };

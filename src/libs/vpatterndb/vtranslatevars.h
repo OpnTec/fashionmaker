@@ -63,7 +63,7 @@ public:
     QString FormulaToUser(const QString &formula, bool osSeparator) const;
     static QString TryFormulaToUser(const QString &formula, bool osSeparator);
 
-    virtual void Retranslate() Q_DECL_OVERRIDE;
+    virtual void Retranslate() override;
 
     QMap<QString, QString> GetTranslatedFunctions() const;
     QMap<QString, qmu::QmuTranslation> GetFunctions() const;

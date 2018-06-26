@@ -47,15 +47,15 @@ public:
     explicit VisToolPointOfIntersectionCircles(const VContainer *data, QGraphicsItem *parent = nullptr);
     virtual ~VisToolPointOfIntersectionCircles() = default;
 
-    virtual void RefreshGeometry() Q_DECL_OVERRIDE;
-    virtual void VisualMode(const quint32 &id) Q_DECL_OVERRIDE;
+    virtual void RefreshGeometry() override;
+    virtual void VisualMode(const quint32 &id) override;
 
     void         setObject2Id(const quint32 &value);
     void         setC1Radius(const QString &value);
     void         setC2Radius(const QString &value);
     void         setCrossPoint(const CrossCirclesPoint &value);
 
-    virtual int  type() const Q_DECL_OVERRIDE {return Type;}
+    virtual int  type() const override {return Type;}
     enum { Type = UserType + static_cast<int>(Vis::ToolPointOfIntersectionCircles)};
 private:
     Q_DISABLE_COPY(VisToolPointOfIntersectionCircles)

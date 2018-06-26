@@ -51,7 +51,7 @@ class VToolCut : public VToolSinglePoint
 public:
     VToolCut(VAbstractPattern *doc, VContainer *data, const quint32 &id, const QString &formula,
              const quint32 &curveCutId, QGraphicsItem * parent = nullptr);
-    virtual int   type() const Q_DECL_OVERRIDE {return Type;}
+    virtual int   type() const override {return Type;}
     enum { Type = UserType + static_cast<int>(Tool::Cut)};
 
     VFormula GetFormula() const;
@@ -60,9 +60,9 @@ public:
     QString CurveName() const;
 
 public slots:
-    virtual void    Disable(bool disable, const QString &namePP) Q_DECL_OVERRIDE;
-    virtual void    DetailsMode(bool mode) Q_DECL_OVERRIDE;
-    virtual void    FullUpdateFromFile() Q_DECL_OVERRIDE;
+    virtual void    Disable(bool disable, const QString &namePP) override;
+    virtual void    DetailsMode(bool mode) override;
+    virtual void    FullUpdateFromFile() override;
 protected:
     /** @brief formula keep formula of length */
     QString       formula;
@@ -71,7 +71,7 @@ protected:
     bool          detailsMode;
 
     void          RefreshGeometry();
-    virtual void  RemoveReferens() Q_DECL_OVERRIDE;
+    virtual void  RemoveReferens() override;
 
     template <typename T>
     void ShowToolVisualization(bool show);

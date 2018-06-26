@@ -51,7 +51,7 @@ public:
     void InitDefaultSeamAllowance();
 
 protected:
-    virtual void changeEvent(QEvent* event) Q_DECL_OVERRIDE;
+    virtual void changeEvent(QEvent* event) override;
 
 private slots:
     void EditDateTimeFormats();

@@ -58,7 +58,7 @@ public:
              const Draw &mode = Draw::Calculation);
     VPointF (const QPointF &point, const QString &name, qreal mx, qreal my, quint32 idObject = 0,
              const Draw &mode = Draw::Calculation);
-    virtual ~VPointF() Q_DECL_OVERRIDE;
+    virtual ~VPointF() override;
 
     VPointF &operator=(const VPointF &point);
 #ifdef Q_COMPILER_RVALUE_REFS

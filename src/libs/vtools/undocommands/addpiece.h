@@ -49,9 +49,9 @@ public:
     virtual ~AddPiece();
 
     // cppcheck-suppress unusedFunction
-    virtual void undo() Q_DECL_OVERRIDE;
+    virtual void undo() override;
     // cppcheck-suppress unusedFunction
-    virtual void redo() Q_DECL_OVERRIDE;
+    virtual void redo() override;
 private:
     Q_DISABLE_COPY(AddPiece)
 

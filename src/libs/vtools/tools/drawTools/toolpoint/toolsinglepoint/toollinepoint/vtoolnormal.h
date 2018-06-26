@@ -67,28 +67,28 @@ class VToolNormal : public VToolLinePoint
 {
     Q_OBJECT
 public:
-    virtual void   setDialog() Q_DECL_OVERRIDE;
+    virtual void   setDialog() override;
     static VToolNormal* Create(QSharedPointer<DialogTool> dialog, VMainGraphicsScene  *scene, VAbstractPattern *doc,
                                VContainer *data);
     static VToolNormal* Create(VToolNormalInitData initData);
     static QPointF FindPoint(const QPointF &firstPoint, const QPointF &secondPoint, const qreal &length,
                              const qreal &angle = 0);
     static const QString ToolType;
-    virtual int    type() const Q_DECL_OVERRIDE {return Type;}
+    virtual int    type() const override {return Type;}
     enum { Type = UserType + static_cast<int>(Tool::Normal)};
 
     QString SecondPointName() const;
 
-    virtual void   ShowVisualization(bool show) Q_DECL_OVERRIDE;
+    virtual void   ShowVisualization(bool show) override;
 protected slots:
-    virtual void ShowContextMenu(QGraphicsSceneContextMenuEvent *event, quint32 id=NULL_ID) Q_DECL_OVERRIDE;
+    virtual void ShowContextMenu(QGraphicsSceneContextMenuEvent *event, quint32 id=NULL_ID) override;
 protected:
-    virtual void   RemoveReferens() Q_DECL_OVERRIDE;
+    virtual void   RemoveReferens() override;
     virtual void   SaveDialog(QDomElement &domElement, QList<quint32> &oldDependencies,
-                              QList<quint32> &newDependencies) Q_DECL_OVERRIDE;
-    virtual void   SaveOptions(QDomElement &tag, QSharedPointer<VGObject> &obj) Q_DECL_OVERRIDE;
-    virtual void   ReadToolAttributes(const QDomElement &domElement) Q_DECL_OVERRIDE;
-    virtual void   SetVisualization() Q_DECL_OVERRIDE;
+                              QList<quint32> &newDependencies) override;
+    virtual void   SaveOptions(QDomElement &tag, QSharedPointer<VGObject> &obj) override;
+    virtual void   ReadToolAttributes(const QDomElement &domElement) override;
+    virtual void   SetVisualization() override;
 private:
     Q_DISABLE_COPY(VToolNormal)
 

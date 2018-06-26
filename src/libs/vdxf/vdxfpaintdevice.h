@@ -45,8 +45,8 @@ class VDxfPaintDevice : public QPaintDevice
 {
 public:
     VDxfPaintDevice();
-    virtual ~VDxfPaintDevice() Q_DECL_OVERRIDE;
-    virtual QPaintEngine *paintEngine() const Q_DECL_OVERRIDE;
+    virtual ~VDxfPaintDevice() override;
+    virtual QPaintEngine *paintEngine() const override;
 
     QString getFileName() const;
     void setFileName(const QString &value);
@@ -69,7 +69,7 @@ public:
     bool ExportToAAMA(const QVector<VLayoutPiece> &details) const;
 
 protected:
-    virtual int metric(PaintDeviceMetric metric) const Q_DECL_OVERRIDE;
+    virtual int metric(PaintDeviceMetric metric) const override;
 private:
     Q_DISABLE_COPY(VDxfPaintDevice)
     VDxfEngine *engine;

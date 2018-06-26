@@ -46,8 +46,8 @@ public:
     static const quint32 systemCounts;
 
 protected:
-    virtual void        PrepareData() Q_DECL_OVERRIDE;
-    virtual QStringList AllNames() Q_DECL_OVERRIDE;
+    virtual void        PrepareData() override;
+    virtual QStringList AllNames() override;
 
 private slots:
     void initTestCase();

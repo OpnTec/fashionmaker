@@ -61,7 +61,7 @@ public:
     VLayoutPiece();
     VLayoutPiece(const VLayoutPiece &detail);
 
-    virtual ~VLayoutPiece() Q_DECL_OVERRIDE;
+    virtual ~VLayoutPiece() override;
 
     VLayoutPiece &operator=(const VLayoutPiece &detail);
 #ifdef Q_COMPILER_RVALUE_REFS

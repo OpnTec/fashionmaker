@@ -60,7 +60,7 @@ class DialogEditWrongFormula : public DialogTool
     Q_OBJECT
 public:
     DialogEditWrongFormula(const VContainer *data, const quint32 &toolId, QWidget *parent = nullptr);
-    virtual ~DialogEditWrongFormula() Q_DECL_OVERRIDE;
+    virtual ~DialogEditWrongFormula() override;
 
     QString      GetFormula() const;
     void         SetFormula(const QString &value);
@@ -71,9 +71,9 @@ public:
     void         SetIncrementsMode();
     void         SetPreviewCalculationsMode();
 public slots:
-    virtual void DialogAccepted() Q_DECL_OVERRIDE;
-    virtual void DialogRejected() Q_DECL_OVERRIDE;
-    virtual void EvalFormula() Q_DECL_OVERRIDE;
+    virtual void DialogAccepted() override;
+    virtual void DialogRejected() override;
+    virtual void EvalFormula() override;
     void         ValChanged(int row);
     void         PutHere();
     void         PutVal(QTableWidgetItem * item);
@@ -89,10 +89,10 @@ public slots:
     void         PreviewCalculations();
     void         Functions();
 protected:
-    virtual void CheckState() Q_DECL_FINAL;
-    virtual void closeEvent(QCloseEvent *event) Q_DECL_OVERRIDE;
-    virtual void showEvent( QShowEvent *event ) Q_DECL_OVERRIDE;
-    virtual void resizeEvent(QResizeEvent *event) Q_DECL_OVERRIDE;
+    virtual void CheckState() final;
+    virtual void closeEvent(QCloseEvent *event) override;
+    virtual void showEvent( QShowEvent *event ) override;
+    virtual void resizeEvent(QResizeEvent *event) override;
 private slots:
     void FilterVariablesEdited(const QString &filter);
 private:

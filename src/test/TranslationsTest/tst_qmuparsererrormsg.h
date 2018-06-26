@@ -40,7 +40,7 @@ class TST_QmuParserErrorMsg : public AbstractTest
     Q_OBJECT
 public:
     explicit TST_QmuParserErrorMsg(const QString &locale, QObject *parent = nullptr);
-    virtual ~TST_QmuParserErrorMsg() Q_DECL_OVERRIDE;
+    virtual ~TST_QmuParserErrorMsg() override;
 
 private slots:
     void initTestCase();

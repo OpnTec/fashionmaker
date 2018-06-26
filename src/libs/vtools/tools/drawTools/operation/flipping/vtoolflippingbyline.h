@@ -51,29 +51,29 @@ class VToolFlippingByLine : public VAbstractFlipping
     Q_OBJECT
 public:
     virtual ~VToolFlippingByLine() Q_DECL_EQ_DEFAULT;
-    virtual void setDialog() Q_DECL_OVERRIDE;
+    virtual void setDialog() override;
     static VToolFlippingByLine* Create(QSharedPointer<DialogTool> dialog, VMainGraphicsScene *scene,
                                        VAbstractPattern *doc, VContainer *data);
     static VToolFlippingByLine* Create(VToolFlippingByLineInitData initData);
 
     static const QString ToolType;
 
-    virtual int type() const Q_DECL_OVERRIDE {return Type;}
+    virtual int type() const override {return Type;}
     enum { Type = UserType + static_cast<int>(Tool::FlippingByLine)};
 
     QString FirstLinePointName() const;
     QString SecondLinePointName() const;
 
-    virtual void ShowVisualization(bool show) Q_DECL_OVERRIDE;
+    virtual void ShowVisualization(bool show) override;
 protected slots:
-    virtual void ShowContextMenu(QGraphicsSceneContextMenuEvent *event, quint32 id=NULL_ID) Q_DECL_OVERRIDE;
+    virtual void ShowContextMenu(QGraphicsSceneContextMenuEvent *event, quint32 id=NULL_ID) override;
 protected:
-    virtual void    SetVisualization() Q_DECL_OVERRIDE;
+    virtual void    SetVisualization() override;
     virtual void    SaveDialog(QDomElement &domElement, QList<quint32> &oldDependencies,
-                               QList<quint32> &newDependencies) Q_DECL_OVERRIDE;
-    virtual void    ReadToolAttributes(const QDomElement &domElement) Q_DECL_OVERRIDE;
-    virtual void    SaveOptions(QDomElement &tag, QSharedPointer<VGObject> &obj) Q_DECL_OVERRIDE;
-    virtual QString MakeToolTip() const Q_DECL_OVERRIDE;
+                               QList<quint32> &newDependencies) override;
+    virtual void    ReadToolAttributes(const QDomElement &domElement) override;
+    virtual void    SaveOptions(QDomElement &tag, QSharedPointer<VGObject> &obj) override;
+    virtual QString MakeToolTip() const override;
 private:
     Q_DISABLE_COPY(VToolFlippingByLine)
 

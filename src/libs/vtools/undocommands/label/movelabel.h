@@ -43,10 +43,10 @@ public:
     MoveLabel(VAbstractPattern *doc, const QPointF &pos, const quint32 &id, QUndoCommand *parent = nullptr);
     virtual ~MoveLabel()=default;
 
-    virtual bool mergeWith(const QUndoCommand *command) Q_DECL_OVERRIDE;
-    virtual int  id() const Q_DECL_OVERRIDE;
+    virtual bool mergeWith(const QUndoCommand *command) override;
+    virtual int  id() const override;
 protected:
-    virtual void Do(const QPointF &pos) Q_DECL_OVERRIDE;
+    virtual void Do(const QPointF &pos) override;
 private:
     Q_DISABLE_COPY(MoveLabel)
     //Need for resizing scene rect

@@ -51,7 +51,7 @@ class VPROPERTYEXPLORERSHARED_EXPORT UserChangeEvent : public QEvent
 {
 public:
     UserChangeEvent() : QEvent(static_cast<QEvent::Type>(MyCustomEventType)) {}
-    virtual ~UserChangeEvent() Q_DECL_OVERRIDE;
+    virtual ~UserChangeEvent() override;
 };
 
 class VPropertyPrivate;
@@ -70,7 +70,7 @@ public:
     explicit VProperty(const QString& name, QVariant::Type type = QVariant::String);
 
     //! Destructor
-    virtual ~VProperty() Q_DECL_OVERRIDE;
+    virtual ~VProperty() override;
 
     //! Returns a string containing the type of the property
     virtual QString type() const;

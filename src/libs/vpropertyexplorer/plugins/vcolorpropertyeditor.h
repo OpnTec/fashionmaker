@@ -48,7 +48,7 @@ public:
     explicit VColorPropertyEditor(QWidget *parent);
 
     //! Destructor
-    virtual ~VColorPropertyEditor() Q_DECL_OVERRIDE;
+    virtual ~VColorPropertyEditor() override;
 
 
     //! Returns the color currently set
@@ -66,7 +66,7 @@ public:
     static QString GetColorString(const QColor& color);
 
     //! Needed for proper event handling
-    virtual bool eventFilter(QObject *obj, QEvent *ev) Q_DECL_OVERRIDE;
+    virtual bool eventFilter(QObject *obj, QEvent *ev) override;
 
 signals:
     //! This is emitted, when the user changes the color

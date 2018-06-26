@@ -48,8 +48,8 @@ public:
     VExceptionWrongId(const VExceptionWrongId &e);
     VExceptionWrongId &operator=(const VExceptionWrongId &e);
     virtual ~VExceptionWrongId() V_NOEXCEPT_EXPR (true) Q_DECL_EQ_DEFAULT;
-    virtual QString ErrorMessage() const Q_DECL_OVERRIDE;
-    virtual QString DetailedInformation() const Q_DECL_OVERRIDE;
+    virtual QString ErrorMessage() const override;
+    virtual QString DetailedInformation() const override;
     QString         TagText() const;
     QString         TagName() const;
     qint32          LineNumber() const;

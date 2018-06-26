@@ -46,7 +46,7 @@ public:
     VFilePropertyPrivate()
         : VPropertyPrivate(), FileFilters(), Directory(false) {}
 
-    virtual ~VFilePropertyPrivate() Q_DECL_OVERRIDE;
+    virtual ~VFilePropertyPrivate() override;
 };
 
 VFilePropertyPrivate::~VFilePropertyPrivate()

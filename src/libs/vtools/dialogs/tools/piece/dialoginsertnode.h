@@ -45,7 +45,7 @@ public:
     explicit DialogInsertNode(const VContainer *data, quint32 toolId, QWidget *parent = nullptr);
     virtual ~DialogInsertNode();
 
-    virtual void SetPiecesList(const QVector<quint32> &list) Q_DECL_OVERRIDE;
+    virtual void SetPiecesList(const QVector<quint32> &list) override;
 
     quint32 GetPieceId() const;
     void    SetPieceId(quint32 id);
@@ -54,10 +54,10 @@ public:
     void       SetNode(const VPieceNode &node);
 
 public slots:
-    virtual void ChosenObject(quint32 id, const SceneObject &type) Q_DECL_OVERRIDE;
+    virtual void ChosenObject(quint32 id, const SceneObject &type) override;
 
 protected:
-    virtual void CheckState() Q_DECL_FINAL;
+    virtual void CheckState() final;
 
 private:
     Q_DISABLE_COPY(DialogInsertNode)

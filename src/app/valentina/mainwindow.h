@@ -62,16 +62,16 @@ class MainWindow : public MainWindowsNoGUI
     Q_OBJECT
 public:
     explicit MainWindow(QWidget *parent = nullptr);
-    virtual ~MainWindow() Q_DECL_OVERRIDE;
+    virtual ~MainWindow() override;
 
     bool LoadPattern(QString fileName, const QString &customMeasureFile = QString());
 
 public slots:
     void ProcessCMD();
-    virtual void ShowToolTip(const QString &toolTip) Q_DECL_OVERRIDE;
-    virtual void UpdateVisibilityGroups() Q_DECL_OVERRIDE;
-    virtual void UpdateDetailsList() Q_DECL_OVERRIDE;
-    virtual void ZoomFitBestCurrent() Q_DECL_OVERRIDE;
+    virtual void ShowToolTip(const QString &toolTip) override;
+    virtual void UpdateVisibilityGroups() override;
+    virtual void UpdateDetailsList() override;
+    virtual void ZoomFitBestCurrent() override;
 
 signals:
     void RefreshHistory();
@@ -100,15 +100,15 @@ signals:
     void EnableNodePointHover(bool enable);
     void EnableDetailHover(bool enable);
 protected:
-    virtual void keyPressEvent(QKeyEvent *event) Q_DECL_OVERRIDE;
-    virtual void showEvent(QShowEvent *event) Q_DECL_OVERRIDE;
-    virtual void changeEvent(QEvent* event) Q_DECL_OVERRIDE;
-    virtual void closeEvent(QCloseEvent *event) Q_DECL_OVERRIDE;
-    virtual void customEvent(QEvent * event) Q_DECL_OVERRIDE;
-    virtual void CleanLayout() Q_DECL_OVERRIDE;
-    virtual void PrepareSceneList() Q_DECL_OVERRIDE;
+    virtual void keyPressEvent(QKeyEvent *event) override;
+    virtual void showEvent(QShowEvent *event) override;
+    virtual void changeEvent(QEvent* event) override;
+    virtual void closeEvent(QCloseEvent *event) override;
+    virtual void customEvent(QEvent * event) override;
+    virtual void CleanLayout() override;
+    virtual void PrepareSceneList() override;
     virtual void ExportToCSVData(const QString &fileName, bool withHeader, int mib,
-                                 const QChar &separator) Q_DECL_FINAL;
+                                 const QChar &separator) final;
 private slots:
     void ScaleChanged(qreal scale);
     void MouseMove(const QPointF &scenePos);

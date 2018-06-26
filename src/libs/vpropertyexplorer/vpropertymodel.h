@@ -65,7 +65,7 @@ class VPROPERTYEXPLORERSHARED_EXPORT VPropertyModel : public QAbstractItemModel
     Q_OBJECT
 public:
     explicit VPropertyModel(QObject * parent = nullptr);
-    virtual ~VPropertyModel() Q_DECL_OVERRIDE;
+    virtual ~VPropertyModel() override;
 
     //! Adds the property to the model and attaches it to the parentid
     //! \param emitsignals If this is set to false, this function will not call beginInsertRows() and endInsertRows(),
@@ -81,29 +81,29 @@ public:
     virtual VProperty* getProperty(const QString& id);
 
     //! Returns the item flags for the given index
-    virtual Qt::ItemFlags flags (const QModelIndex& index) const Q_DECL_OVERRIDE;
+    virtual Qt::ItemFlags flags (const QModelIndex& index) const override;
 
     //! Sets the role data for the item at index to value
-    virtual bool setData (const QModelIndex& index, const QVariant& value, int role = Qt::EditRole) Q_DECL_OVERRIDE;
+    virtual bool setData (const QModelIndex& index, const QVariant& value, int role = Qt::EditRole) override;
 
     //! Returns the model index at row/column
-    virtual QModelIndex index (int row, int column, const QModelIndex & parent = QModelIndex() ) const Q_DECL_OVERRIDE;
+    virtual QModelIndex index (int row, int column, const QModelIndex & parent = QModelIndex() ) const override;
 
     //! Returns the parent of one model index
-    virtual QModelIndex parent (const QModelIndex& index) const Q_DECL_OVERRIDE;
+    virtual QModelIndex parent (const QModelIndex& index) const override;
 
     //! Returns the data of an model index
-    virtual QVariant data (const QModelIndex& index, int role = Qt::DisplayRole) const Q_DECL_OVERRIDE;
+    virtual QVariant data (const QModelIndex& index, int role = Qt::DisplayRole) const override;
 
     //! Returns the data for the given role and section in the header with the specified orientation.
     virtual QVariant headerData (int section, Qt::Orientation orientation,
-                                 int role = Qt::DisplayRole) const Q_DECL_OVERRIDE;
+                                 int role = Qt::DisplayRole) const override;
 
     //! Returns the number of rows
-    virtual int rowCount ( const QModelIndex & parent = QModelIndex() ) const Q_DECL_OVERRIDE;
+    virtual int rowCount ( const QModelIndex & parent = QModelIndex() ) const override;
 
     //! Returns the number of columns
-    virtual int columnCount ( const QModelIndex & parent = QModelIndex() ) const Q_DECL_OVERRIDE;
+    virtual int columnCount ( const QModelIndex & parent = QModelIndex() ) const override;
 
     //! Gets a property by its ModelIndex
     //! \param index The modelIndex of the property.

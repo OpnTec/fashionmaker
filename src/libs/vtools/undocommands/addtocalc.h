@@ -44,10 +44,10 @@ class AddToCalc : public VUndoCommand
 public:
     AddToCalc(const QDomElement &xml, VAbstractPattern *doc, QUndoCommand *parent = nullptr);
     virtual ~AddToCalc() =default;
-    virtual void undo() Q_DECL_OVERRIDE;
-    virtual void redo() Q_DECL_OVERRIDE;
+    virtual void undo() override;
+    virtual void redo() override;
 protected:
-    virtual void RedoFullParsing() Q_DECL_OVERRIDE;
+    virtual void RedoFullParsing() override;
 private:
     Q_DISABLE_COPY(AddToCalc)
     const QString     nameActivDraw;

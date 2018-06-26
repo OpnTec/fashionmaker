@@ -46,10 +46,10 @@ public:
                     const QList<quint32> &newDependencies, VAbstractPattern *doc, const quint32 &id,
                     QUndoCommand *parent = nullptr);
     virtual ~SaveToolOptions() = default;
-    virtual void undo() Q_DECL_OVERRIDE;
-    virtual void redo() Q_DECL_OVERRIDE;
-    virtual bool mergeWith(const QUndoCommand *command) Q_DECL_OVERRIDE;
-    virtual int  id() const Q_DECL_OVERRIDE;
+    virtual void undo() override;
+    virtual void redo() override;
+    virtual bool mergeWith(const QUndoCommand *command) override;
+    virtual int  id() const override;
 
     QDomElement    getNewXml() const;
     quint32        getToolId() const;

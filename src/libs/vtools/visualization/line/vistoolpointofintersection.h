@@ -48,10 +48,10 @@ public:
     explicit VisToolPointOfIntersection(const VContainer *data, QGraphicsItem *parent = nullptr);
     virtual ~VisToolPointOfIntersection() = default;
 
-    virtual void RefreshGeometry() Q_DECL_OVERRIDE;
+    virtual void RefreshGeometry() override;
 
     void         setPoint2Id(const quint32 &value);
-    virtual int  type() const Q_DECL_OVERRIDE {return Type;}
+    virtual int  type() const override {return Type;}
     enum { Type = UserType + static_cast<int>(Vis::ToolPointOfIntersection)};
 private:
     Q_DISABLE_COPY(VisToolPointOfIntersection)

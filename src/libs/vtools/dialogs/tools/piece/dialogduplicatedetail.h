@@ -47,9 +47,9 @@ public:
     qreal   MoveDuplicateX() const;
     qreal   MoveDuplicateY() const;
 
-    virtual void ShowDialog(bool click) Q_DECL_OVERRIDE;
+    virtual void ShowDialog(bool click) override;
 public slots:
-    virtual void ChosenObject(quint32 id, const SceneObject &type) Q_DECL_OVERRIDE;
+    virtual void ChosenObject(quint32 id, const SceneObject &type) override;
 private:
     Q_DISABLE_COPY(DialogDuplicateDetail)
     Ui::DialogDuplicateDetail *ui;

@@ -67,17 +67,17 @@ class VToolLine: public VDrawTool, public VScaledLine
 {
     Q_OBJECT
 public:
-    virtual void     setDialog() Q_DECL_OVERRIDE;
+    virtual void     setDialog() override;
     static VToolLine *Create(QSharedPointer<DialogTool> dialog, VMainGraphicsScene  *scene, VAbstractPattern *doc,
                              VContainer *data);
     static VToolLine *Create(VToolLineInitData initData);
 
-    virtual int      type() const Q_DECL_OVERRIDE {return Type;}
+    virtual int      type() const override {return Type;}
     enum { Type = UserType + static_cast<int>(Tool::Line)};
-    virtual QString  getTagName() const Q_DECL_OVERRIDE;
+    virtual QString  getTagName() const override;
 
     virtual void paint(QPainter *painter, const QStyleOptionGraphicsItem *option,
-                       QWidget *widget = nullptr) Q_DECL_OVERRIDE;
+                       QWidget *widget = nullptr) override;
 
     QString FirstPointName() const;
     QString SecondPointName() const;
@@ -85,32 +85,32 @@ public:
     QString GetLineColor() const;
     void    SetLineColor(const QString &value);
 
-    virtual void     ShowVisualization(bool show) Q_DECL_OVERRIDE;
+    virtual void     ShowVisualization(bool show) override;
 
-    virtual void     SetTypeLine(const QString &value) Q_DECL_OVERRIDE;
-    virtual void     GroupVisibility(quint32 object, bool visible) Q_DECL_OVERRIDE;
+    virtual void     SetTypeLine(const QString &value) override;
+    virtual void     GroupVisibility(quint32 object, bool visible) override;
 public slots:
-    virtual void     FullUpdateFromFile() Q_DECL_OVERRIDE;
-    virtual void     ShowTool(quint32 id, bool enable) Q_DECL_OVERRIDE;
-    virtual void     Disable(bool disable, const QString &namePP) Q_DECL_OVERRIDE;
-    virtual void     AllowHover(bool enabled) Q_DECL_OVERRIDE;
-    virtual void     AllowSelecting(bool enabled) Q_DECL_OVERRIDE;
+    virtual void     FullUpdateFromFile() override;
+    virtual void     ShowTool(quint32 id, bool enable) override;
+    virtual void     Disable(bool disable, const QString &namePP) override;
+    virtual void     AllowHover(bool enabled) override;
+    virtual void     AllowSelecting(bool enabled) override;
 protected slots:
-    virtual void ShowContextMenu(QGraphicsSceneContextMenuEvent *event, quint32 id=NULL_ID) Q_DECL_OVERRIDE;
+    virtual void ShowContextMenu(QGraphicsSceneContextMenuEvent *event, quint32 id=NULL_ID) override;
 protected:
-    virtual void     contextMenuEvent ( QGraphicsSceneContextMenuEvent * event ) Q_DECL_OVERRIDE;
-    virtual void     AddToFile() Q_DECL_OVERRIDE;
-    virtual void     hoverEnterEvent ( QGraphicsSceneHoverEvent * event ) Q_DECL_OVERRIDE;
-    virtual void     hoverLeaveEvent ( QGraphicsSceneHoverEvent * event ) Q_DECL_OVERRIDE;
-    virtual void     RemoveReferens() Q_DECL_OVERRIDE;
-    virtual QVariant itemChange ( GraphicsItemChange change, const QVariant &value ) Q_DECL_OVERRIDE;
-    virtual void     keyReleaseEvent(QKeyEvent * event) Q_DECL_OVERRIDE;
+    virtual void     contextMenuEvent ( QGraphicsSceneContextMenuEvent * event ) override;
+    virtual void     AddToFile() override;
+    virtual void     hoverEnterEvent ( QGraphicsSceneHoverEvent * event ) override;
+    virtual void     hoverLeaveEvent ( QGraphicsSceneHoverEvent * event ) override;
+    virtual void     RemoveReferens() override;
+    virtual QVariant itemChange ( GraphicsItemChange change, const QVariant &value ) override;
+    virtual void     keyReleaseEvent(QKeyEvent * event) override;
     virtual void     SaveDialog(QDomElement &domElement, QList<quint32> &oldDependencies,
-                                QList<quint32> &newDependencies) Q_DECL_OVERRIDE;
-    virtual void     SaveOptions(QDomElement &tag, QSharedPointer<VGObject> &obj) Q_DECL_OVERRIDE;
-    virtual void     ReadToolAttributes(const QDomElement &domElement) Q_DECL_OVERRIDE;
-    virtual void     SetVisualization() Q_DECL_OVERRIDE;
-    virtual QString  MakeToolTip() const Q_DECL_OVERRIDE;
+                                QList<quint32> &newDependencies) override;
+    virtual void     SaveOptions(QDomElement &tag, QSharedPointer<VGObject> &obj) override;
+    virtual void     ReadToolAttributes(const QDomElement &domElement) override;
+    virtual void     SetVisualization() override;
+    virtual QString  MakeToolTip() const override;
 private:
     Q_DISABLE_COPY(VToolLine)
 

@@ -42,10 +42,10 @@ public:
                      QUndoCommand *parent = nullptr);
     virtual ~SavePieceOptions() = default;
 
-    virtual void undo() Q_DECL_OVERRIDE;
-    virtual void redo() Q_DECL_OVERRIDE;
-    virtual bool mergeWith(const QUndoCommand *command) Q_DECL_OVERRIDE;
-    virtual int  id() const Q_DECL_OVERRIDE;
+    virtual void undo() override;
+    virtual void redo() override;
+    virtual bool mergeWith(const QUndoCommand *command) override;
+    virtual int  id() const override;
     quint32      DetId() const;
     VPiece       NewDet() const;
 signals:

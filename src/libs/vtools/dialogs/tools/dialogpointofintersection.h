@@ -51,7 +51,7 @@ class DialogPointOfIntersection : public DialogTool
     Q_OBJECT
 public:
     DialogPointOfIntersection(const VContainer *data, const quint32 &toolId, QWidget *parent = nullptr);
-    virtual ~DialogPointOfIntersection() Q_DECL_OVERRIDE;
+    virtual ~DialogPointOfIntersection() override;
 
     void           SetPointName(const QString &value);
 
@@ -61,14 +61,14 @@ public:
     quint32        GetSecondPointId() const;
     void           SetSecondPointId(const quint32 &value);
 public slots:
-    virtual void   ChosenObject(quint32 id, const SceneObject &type) Q_DECL_OVERRIDE;
-    virtual void   PointNameChanged() Q_DECL_OVERRIDE;
+    virtual void   ChosenObject(quint32 id, const SceneObject &type) override;
+    virtual void   PointNameChanged() override;
 protected:
-    virtual void   ShowVisualization() Q_DECL_OVERRIDE;
+    virtual void   ShowVisualization() override;
     /**
      * @brief SaveData Put dialog data in local variables
      */
-    virtual void   SaveData() Q_DECL_OVERRIDE;
+    virtual void   SaveData() override;
 private:
     Q_DISABLE_COPY(DialogPointOfIntersection)
 

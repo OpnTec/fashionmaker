@@ -51,12 +51,12 @@ public:
     explicit VisToolSplinePath(const VContainer *data, QGraphicsItem *parent = nullptr);
     virtual ~VisToolSplinePath();
 
-    virtual void RefreshGeometry() Q_DECL_OVERRIDE;
+    virtual void RefreshGeometry() override;
 
     void         setPath(const VSplinePath &value);
     VSplinePath  getPath();
 
-    virtual int  type() const Q_DECL_OVERRIDE {return Type;}
+    virtual int  type() const override {return Type;}
     enum { Type = UserType + static_cast<int>(Vis::ToolSplinePath)};
 signals:
     void PathChanged(const VSplinePath &path);

@@ -52,7 +52,7 @@ public:
     explicit VisLine(const VContainer *data, QGraphicsItem *parent = nullptr);
     virtual ~VisLine() = default;
 
-    virtual int  type() const Q_DECL_OVERRIDE {return Type;}
+    virtual int  type() const override {return Type;}
     enum { Type = UserType + static_cast<int>(Vis::Line)};
     static qreal CorrectAngle(const qreal &angle);
 protected:
@@ -60,8 +60,8 @@ protected:
     QPointF      Ray(const QPointF &firstPoint) const;
     QLineF       Axis(const QPointF &p, const qreal &angle) const;
     QLineF       Axis(const QPointF &p1, const QPointF &p2) const;
-    virtual void InitPen() Q_DECL_OVERRIDE;
-    virtual void AddOnScene() Q_DECL_OVERRIDE;
+    virtual void InitPen() override;
+    virtual void AddOnScene() override;
 
     void         DrawRay(VScaledLine *lineItem, const QPointF &p, const QPointF &pTangent,
                          const QColor &color, Qt::PenStyle style);

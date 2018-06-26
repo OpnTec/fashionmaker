@@ -42,9 +42,9 @@ public:
 
 protected:
     virtual void paint(QPainter * painter, const QStyleOptionGraphicsItem * option,
-                       QWidget * widget = nullptr) Q_DECL_OVERRIDE;
+                       QWidget * widget = nullptr) override;
 
-    virtual int  type() const Q_DECL_OVERRIDE {return Type;}
+    virtual int  type() const override {return Type;}
     enum { Type = UserType + static_cast<int>(Vis::NoBrush)};
 
 private:

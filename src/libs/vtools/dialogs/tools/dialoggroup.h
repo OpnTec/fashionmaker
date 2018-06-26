@@ -56,10 +56,10 @@ public:
 
     QMap<quint32, quint32> GetGroup() const;
 
-    virtual void ShowDialog(bool click) Q_DECL_OVERRIDE;
+    virtual void ShowDialog(bool click) override;
 
 public slots:
-    virtual void SelectedObject(bool selected, quint32 object, quint32 tool) Q_DECL_OVERRIDE;
+    virtual void SelectedObject(bool selected, quint32 object, quint32 tool) override;
 
 private slots:
     void NameChanged();

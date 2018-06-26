@@ -49,25 +49,25 @@ public:
     VPattern(VContainer *data, Draw *mode, VMainGraphicsScene *sceneDraw, VMainGraphicsScene *sceneDetail,
              QObject *parent = nullptr);
 
-    virtual void   CreateEmptyFile() Q_DECL_OVERRIDE;
+    virtual void   CreateEmptyFile() override;
 
     void           Parse(const Document &parse);
 
     void           GarbageCollector(bool commit = false);
 
     void           setCurrentData();
-    virtual void   UpdateToolData(const quint32 &id, VContainer *data) Q_DECL_OVERRIDE;
+    virtual void   UpdateToolData(const quint32 &id, VContainer *data) override;
     VContainer     GetCompleteData() const;
 
-    virtual void   IncrementReferens(quint32 id) const Q_DECL_OVERRIDE;
-    virtual void   DecrementReferens(quint32 id) const Q_DECL_OVERRIDE;
+    virtual void   IncrementReferens(quint32 id) const override;
+    virtual void   DecrementReferens(quint32 id) const override;
 
     quint32        SPointActiveDraw();
 
     QVector<quint32> GetActivePPPieces() const;
 
-    virtual void   setXMLContent(const QString &fileName) Q_DECL_OVERRIDE;
-    virtual bool   SaveDocument(const QString &fileName, QString &error) Q_DECL_OVERRIDE;
+    virtual void   setXMLContent(const QString &fileName) override;
+    virtual bool   SaveDocument(const QString &fileName, QString &error) override;
 
     QRectF         ActiveDrawBoundingRect() const;
 
@@ -92,8 +92,8 @@ public:
 
     void ReplaceNameInFormula(QVector<VFormulaField> &expressions, const QString &name, const QString &newName);
 
-    virtual QString GenerateLabel(const LabelType &type, const QString &reservedName = QString())const Q_DECL_OVERRIDE;
-    virtual QString GenerateSuffix() const Q_DECL_OVERRIDE;
+    virtual QString GenerateLabel(const LabelType &type, const QString &reservedName = QString())const override;
+    virtual QString GenerateSuffix() const override;
 
     bool IsDefCustom() const;
     void SetDefCustom(bool value);
@@ -114,10 +114,10 @@ public:
     int ElementsToParse() const;
 
 public slots:
-    virtual void LiteParseTree(const Document &parse) Q_DECL_OVERRIDE;
+    virtual void LiteParseTree(const Document &parse) override;
 
 protected:
-    virtual void   customEvent(QEvent * event) Q_DECL_OVERRIDE;
+    virtual void   customEvent(QEvent * event) override;
 
 private:
     Q_DISABLE_COPY(VPattern)

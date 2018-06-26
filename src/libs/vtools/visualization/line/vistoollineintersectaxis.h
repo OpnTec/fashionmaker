@@ -47,14 +47,14 @@ public:
     explicit VisToolLineIntersectAxis(const VContainer *data, QGraphicsItem *parent = nullptr);
     virtual ~VisToolLineIntersectAxis() = default;
 
-    virtual void RefreshGeometry() Q_DECL_OVERRIDE;
+    virtual void RefreshGeometry() override;
 
     QString      Angle() const;
     void         SetAngle(const QString &expression);
     void         setPoint2Id(const quint32 &value);
     void         setAxisPointId(const quint32 &value);
 
-    virtual int  type() const Q_DECL_OVERRIDE {return Type;}
+    virtual int  type() const override {return Type;}
     enum { Type = UserType + static_cast<int>(Vis::ToolLineIntersectAxis)};
 private:
     Q_DISABLE_COPY(VisToolLineIntersectAxis)

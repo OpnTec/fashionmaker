@@ -53,7 +53,7 @@ public:
     VSimpleCurve(quint32 id, const QSharedPointer<VAbstractCurve> &curve, QObject *parent = nullptr);
     virtual ~VSimpleCurve() Q_DECL_EQ_DEFAULT;
 
-    virtual int  type() const Q_DECL_OVERRIDE {return Type;}
+    virtual int  type() const override {return Type;}
     enum { Type = UserType + static_cast<int>(Vis::SimpleCurve)};
 
     void RefreshGeometry(const QSharedPointer<VAbstractCurve> &curve);
@@ -70,14 +70,14 @@ public slots:
     void CurveSelected(bool selected);
 
 protected:
-    virtual void     mousePressEvent( QGraphicsSceneMouseEvent * event ) Q_DECL_OVERRIDE;
-    virtual void     mouseReleaseEvent ( QGraphicsSceneMouseEvent * event ) Q_DECL_OVERRIDE;
-    virtual void     hoverEnterEvent ( QGraphicsSceneHoverEvent * event ) Q_DECL_OVERRIDE;
-    virtual void     hoverLeaveEvent ( QGraphicsSceneHoverEvent * event ) Q_DECL_OVERRIDE;
-    virtual QVariant itemChange ( GraphicsItemChange change, const QVariant &value ) Q_DECL_OVERRIDE;
-    virtual void     contextMenuEvent ( QGraphicsSceneContextMenuEvent * event ) Q_DECL_OVERRIDE;
-    virtual void     keyReleaseEvent ( QKeyEvent * event ) Q_DECL_OVERRIDE;
-    virtual void     ScalePenWidth() Q_DECL_OVERRIDE;
+    virtual void     mousePressEvent( QGraphicsSceneMouseEvent * event ) override;
+    virtual void     mouseReleaseEvent ( QGraphicsSceneMouseEvent * event ) override;
+    virtual void     hoverEnterEvent ( QGraphicsSceneHoverEvent * event ) override;
+    virtual void     hoverLeaveEvent ( QGraphicsSceneHoverEvent * event ) override;
+    virtual QVariant itemChange ( GraphicsItemChange change, const QVariant &value ) override;
+    virtual void     contextMenuEvent ( QGraphicsSceneContextMenuEvent * event ) override;
+    virtual void     keyReleaseEvent ( QKeyEvent * event ) override;
+    virtual void     ScalePenWidth() override;
 
 private:
     Q_DISABLE_COPY(VSimpleCurve)

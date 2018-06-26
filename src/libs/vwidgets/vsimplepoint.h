@@ -53,7 +53,7 @@ public:
     VSimplePoint(quint32 id, const QColor &currentColor, QObject *parent = nullptr);
     virtual ~VSimplePoint() = default;
 
-    virtual int  type() const Q_DECL_OVERRIDE {return Type;}
+    virtual int  type() const override {return Type;}
     enum { Type = UserType + static_cast<int>(Vis::SimplePoint)};
 
     using VScenePoint::SetOnlyPoint;
@@ -68,7 +68,7 @@ public:
     void EnableToolMove(bool move);
     void AllowLabelHover(bool enabled);
     void AllowLabelSelecting(bool enabled);
-    virtual void ToolSelectionType(const SelectionType &type) Q_DECL_OVERRIDE;
+    virtual void ToolSelectionType(const SelectionType &type) override;
 signals:
     /**
      * @brief Choosed send id when clicked.
@@ -85,13 +85,13 @@ public slots:
     void ChangedPosition(const QPointF &pos);
 
 protected:
-    virtual void     mousePressEvent( QGraphicsSceneMouseEvent * event ) Q_DECL_OVERRIDE;
-    virtual void     mouseReleaseEvent ( QGraphicsSceneMouseEvent * event ) Q_DECL_OVERRIDE;
-    virtual void     hoverEnterEvent(QGraphicsSceneHoverEvent *event) Q_DECL_OVERRIDE;
-    virtual void     hoverLeaveEvent(QGraphicsSceneHoverEvent *event) Q_DECL_OVERRIDE;
-    virtual void     keyReleaseEvent ( QKeyEvent * event ) Q_DECL_OVERRIDE;
-    virtual QVariant itemChange ( GraphicsItemChange change, const QVariant &value ) Q_DECL_OVERRIDE;
-    virtual void     contextMenuEvent ( QGraphicsSceneContextMenuEvent * event ) Q_DECL_OVERRIDE;
+    virtual void     mousePressEvent( QGraphicsSceneMouseEvent * event ) override;
+    virtual void     mouseReleaseEvent ( QGraphicsSceneMouseEvent * event ) override;
+    virtual void     hoverEnterEvent(QGraphicsSceneHoverEvent *event) override;
+    virtual void     hoverLeaveEvent(QGraphicsSceneHoverEvent *event) override;
+    virtual void     keyReleaseEvent ( QKeyEvent * event ) override;
+    virtual QVariant itemChange ( GraphicsItemChange change, const QVariant &value ) override;
+    virtual void     contextMenuEvent ( QGraphicsSceneContextMenuEvent * event ) override;
 
 private:
     Q_DISABLE_COPY(VSimplePoint)

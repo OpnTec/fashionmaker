@@ -62,7 +62,7 @@ public:
     VArc Rotate(const QPointF &originPoint, qreal degrees, const QString &prefix = QString()) const;
     VArc Flip(const QLineF &axis, const QString &prefix = QString()) const;
     VArc Move(qreal length, qreal angle, const QString &prefix = QString()) const;
-    virtual ~VArc() Q_DECL_OVERRIDE;
+    virtual ~VArc() override;
 
     VArc& operator= (const VArc &arc);
 #ifdef Q_COMPILER_RVALUE_REFS
@@ -76,18 +76,18 @@ public:
     void    SetFormulaRadius (const QString &formula, qreal value);
     qreal   GetRadius () const;
 
-    virtual qreal GetLength () const Q_DECL_OVERRIDE;
+    virtual qreal GetLength () const override;
 
     QPointF GetP1() const;
     QPointF GetP2 () const;
 
-    virtual QVector<QPointF> GetPoints () const Q_DECL_OVERRIDE;
+    virtual QVector<QPointF> GetPoints () const override;
 
     QPointF CutArc (const qreal &length, VArc &arc1, VArc &arc2) const;
     QPointF CutArc (const qreal &length) const;
 protected:
-    virtual void CreateName() Q_DECL_OVERRIDE;
-    virtual void FindF2(qreal length) Q_DECL_OVERRIDE;
+    virtual void CreateName() override;
+    virtual void FindF2(qreal length) override;
 private:
     QSharedDataPointer<VArcData> d;
 

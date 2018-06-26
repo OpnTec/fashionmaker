@@ -51,7 +51,7 @@ class TMainWindow : public VAbstractMainWindow
 
 public:
     explicit TMainWindow(QWidget *parent = nullptr);
-    virtual ~TMainWindow() Q_DECL_OVERRIDE;
+    virtual ~TMainWindow() override;
 
     QString CurrentFile() const;
 
@@ -64,15 +64,15 @@ public:
     bool LoadFile(const QString &path);
 
 public slots:
-    virtual void ShowToolTip(const QString &toolTip) Q_DECL_OVERRIDE;
+    virtual void ShowToolTip(const QString &toolTip) override;
 
 protected:
-    virtual void closeEvent(QCloseEvent *event) Q_DECL_OVERRIDE;
-    virtual void changeEvent(QEvent* event) Q_DECL_OVERRIDE;
-    virtual void showEvent(QShowEvent *event) Q_DECL_OVERRIDE;
-    virtual bool eventFilter(QObject *object, QEvent *event) Q_DECL_OVERRIDE;
+    virtual void closeEvent(QCloseEvent *event) override;
+    virtual void changeEvent(QEvent* event) override;
+    virtual void showEvent(QShowEvent *event) override;
+    virtual bool eventFilter(QObject *object, QEvent *event) override;
     virtual void ExportToCSVData(const QString &fileName, bool withHeader, int mib,
-                                 const QChar &separator) Q_DECL_FINAL;
+                                 const QChar &separator) final;
 
 private slots:
     void FileNew();

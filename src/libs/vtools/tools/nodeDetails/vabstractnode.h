@@ -66,16 +66,16 @@ public:
                   const QString &drawName = QString(), const quint32 &idTool = 0, QObject *parent = nullptr);
     virtual      ~VAbstractNode() Q_DECL_EQ_DEFAULT;
     static const QString AttrIdTool;
-    virtual void ShowVisualization(bool show) Q_DECL_OVERRIDE;
-    virtual void incrementReferens() Q_DECL_OVERRIDE;
-    virtual void decrementReferens() Q_DECL_OVERRIDE;
+    virtual void ShowVisualization(bool show) override;
+    virtual void incrementReferens() override;
+    virtual void decrementReferens() override;
 
     ParentType GetParentType() const;
     void       SetParentType(const ParentType &value);
 
     quint32 GetIdTool() const;
 
-    virtual void GroupVisibility(quint32 object, bool visible) Q_DECL_OVERRIDE;
+    virtual void GroupVisibility(quint32 object, bool visible) override;
 
     bool IsExluded() const;
     void SetExluded(bool exluded);
@@ -94,8 +94,8 @@ protected:
     bool          m_exluded;
 
     void         AddToModeling(const QDomElement &domElement);
-    virtual void ToolCreation(const Source &typeCreation) Q_DECL_OVERRIDE;
-    virtual void SetVisualization() Q_DECL_OVERRIDE {}
+    virtual void ToolCreation(const Source &typeCreation) override;
+    virtual void SetVisualization() override {}
 
     virtual void ShowNode()=0;
     virtual void HideNode()=0;

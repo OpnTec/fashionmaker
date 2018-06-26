@@ -48,12 +48,12 @@ public:
     explicit VisToolCubicBezierPath(const VContainer *data, QGraphicsItem *parent = nullptr);
     virtual ~VisToolCubicBezierPath();
 
-    virtual void RefreshGeometry() Q_DECL_OVERRIDE;
+    virtual void RefreshGeometry() override;
 
     void              setPath(const VCubicBezierPath &value);
     VCubicBezierPath  getPath();
 
-    virtual int  type() const Q_DECL_OVERRIDE {return Type;}
+    virtual int  type() const override {return Type;}
     enum { Type = UserType + static_cast<int>(Vis::ToolCubicBezierPath)};
 protected:
     Q_DISABLE_COPY(VisToolCubicBezierPath)

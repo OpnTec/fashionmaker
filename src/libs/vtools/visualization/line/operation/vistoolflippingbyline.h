@@ -40,12 +40,12 @@ public:
     explicit VisToolFlippingByLine(const VContainer *data, QGraphicsItem *parent = nullptr);
     virtual ~VisToolFlippingByLine() = default;
 
-    virtual void   RefreshGeometry() Q_DECL_OVERRIDE;
+    virtual void   RefreshGeometry() override;
 
     void SetFirstLinePointId(quint32 value);
     void SetSecondLinePointId(quint32 value);
 
-    virtual int type() const Q_DECL_OVERRIDE {return Type;}
+    virtual int type() const override {return Type;}
     enum { Type = UserType + static_cast<int>(Vis::ToolFlippingByLine)};
 private:
     Q_DISABLE_COPY(VisToolFlippingByLine)

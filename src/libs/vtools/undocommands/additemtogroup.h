@@ -44,8 +44,8 @@ class AddItemToGroup : public VUndoCommand
 public:
     AddItemToGroup(const QDomElement &xml, VAbstractPattern *doc, quint32 groupId, QUndoCommand *parent = nullptr);
     virtual ~AddItemToGroup()=default;
-    virtual void undo() Q_DECL_OVERRIDE;
-    virtual void redo() Q_DECL_OVERRIDE;
+    virtual void undo() override;
+    virtual void redo() override;
 signals:
     void UpdateGroups();
 protected:

@@ -40,12 +40,12 @@ public:
     explicit VCurvePathItem(QGraphicsItem *parent = nullptr);
     virtual ~VCurvePathItem() = default;
 
-    virtual QPainterPath shape() const Q_DECL_OVERRIDE;
+    virtual QPainterPath shape() const override;
 
     virtual void paint(QPainter *painter, const QStyleOptionGraphicsItem *option,
-                       QWidget *widget = nullptr) Q_DECL_OVERRIDE;
+                       QWidget *widget = nullptr) override;
 
-    virtual int  type() const Q_DECL_OVERRIDE {return Type;}
+    virtual int  type() const override {return Type;}
     enum { Type = UserType + static_cast<int>(Vis::CurvePathItem)};
 
     void SetDirectionArrows(const QVector<QPair<QLineF, QLineF>> &arrows);

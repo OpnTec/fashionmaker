@@ -46,11 +46,11 @@ public:
     explicit VisToolPointOfContact(const VContainer *data, QGraphicsItem *parent = nullptr);
     virtual ~VisToolPointOfContact() = default;
 
-    virtual void RefreshGeometry() Q_DECL_OVERRIDE;
+    virtual void RefreshGeometry() override;
     void         setLineP2Id(const quint32 &value);
     void         setRadiusId(const quint32 &value);
     void         setRadius(const QString &expression);
-    virtual int  type() const Q_DECL_OVERRIDE {return Type;}
+    virtual int  type() const override {return Type;}
     enum { Type = UserType + static_cast<int>(Vis::ToolPointOfContact)};
 private:
     Q_DISABLE_COPY(VisToolPointOfContact)

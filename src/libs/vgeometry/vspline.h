@@ -73,17 +73,17 @@ public:
     inline void Swap(VSpline &spline) Q_DECL_NOTHROW
     { VAbstractCubicBezier::Swap(spline); std::swap(d, spline.d); }
 
-    virtual VPointF GetP1 () const Q_DECL_OVERRIDE;
+    virtual VPointF GetP1 () const override;
     void            SetP1 (const VPointF &p);
 
-    virtual VPointF GetP2 () const Q_DECL_OVERRIDE;
-    virtual VPointF GetP3 () const Q_DECL_OVERRIDE;
+    virtual VPointF GetP2 () const override;
+    virtual VPointF GetP3 () const override;
 
-    virtual VPointF GetP4 () const Q_DECL_OVERRIDE;
+    virtual VPointF GetP4 () const override;
     void            SetP4 (const VPointF &p);
 
-    virtual qreal GetStartAngle () const Q_DECL_OVERRIDE;
-    virtual qreal GetEndAngle() const Q_DECL_OVERRIDE;
+    virtual qreal GetStartAngle () const override;
+    virtual qreal GetEndAngle() const override;
 
     QString GetStartAngleFormula () const;
     QString GetEndAngleFormula() const;
@@ -91,8 +91,8 @@ public:
     void    SetStartAngle(qreal angle, const QString &formula);
     void    SetEndAngle(qreal angle, const QString &formula);
 
-    virtual qreal GetC1Length() const Q_DECL_OVERRIDE;
-    virtual qreal GetC2Length() const Q_DECL_OVERRIDE;
+    virtual qreal GetC1Length() const override;
+    virtual qreal GetC2Length() const override;
 
     QString GetC1LengthFormula() const;
     QString GetC2LengthFormula() const;
@@ -100,7 +100,7 @@ public:
     void    SetC1Length(qreal length, const QString &formula);
     void    SetC2Length(qreal length, const QString &formula);
 
-    virtual qreal   GetLength () const Q_DECL_OVERRIDE;
+    virtual qreal   GetLength () const override;
     qreal   GetKasm1() const;
     qreal   GetKasm2() const;
     qreal   GetKcurve() const;
@@ -108,15 +108,15 @@ public:
     using VAbstractCubicBezier::CutSpline;
     QPointF CutSpline ( qreal length, VSpline &spl1, VSpline &spl2) const;
 
-    virtual QVector<QPointF> GetPoints () const Q_DECL_OVERRIDE;
+    virtual QVector<QPointF> GetPoints () const override;
     // cppcheck-suppress unusedFunction
     static QVector<QPointF> SplinePoints(const QPointF &p1, const QPointF &p4, qreal angle1, qreal angle2, qreal kAsm1,
                                          qreal kAsm2, qreal kCurve, qreal approximationScale);
     qreal   ParamT(const QPointF &pBt) const;
 
 protected:
-    virtual QPointF GetControlPoint1() const Q_DECL_OVERRIDE;
-    virtual QPointF GetControlPoint2() const Q_DECL_OVERRIDE;
+    virtual QPointF GetControlPoint1() const override;
+    virtual QPointF GetControlPoint2() const override;
 private:
     QSharedDataPointer<VSplineData> d;
     QVector<qreal> CalcT(qreal curveCoord1, qreal curveCoord2, qreal curveCoord3, qreal curveCoord4,

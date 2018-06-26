@@ -55,10 +55,10 @@ public:
     explicit VTextGraphicsItem(QGraphicsItem* pParent = nullptr);
     virtual ~VTextGraphicsItem() Q_DECL_EQ_DEFAULT;
 
-    virtual void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget) Q_DECL_OVERRIDE;
-    virtual void Update() Q_DECL_OVERRIDE;
+    virtual void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget) override;
+    virtual void Update() override;
 
-    virtual int  type() const Q_DECL_OVERRIDE {return Type;}
+    virtual int  type() const override {return Type;}
     enum { Type = UserType + static_cast<int>(Vis::TextGraphicsItem)};
 
     void SetFont(const QFont& fnt);
@@ -70,11 +70,11 @@ public:
     int  GetTextLines() const;
 
 protected:
-    virtual void mousePressEvent(QGraphicsSceneMouseEvent* pME) Q_DECL_OVERRIDE;
-    virtual void mouseMoveEvent(QGraphicsSceneMouseEvent* pME) Q_DECL_OVERRIDE;
-    virtual void mouseReleaseEvent(QGraphicsSceneMouseEvent* pME) Q_DECL_OVERRIDE;
-    virtual void hoverEnterEvent(QGraphicsSceneHoverEvent *pME) Q_DECL_OVERRIDE;
-    virtual void hoverMoveEvent(QGraphicsSceneHoverEvent* pHE) Q_DECL_OVERRIDE;
+    virtual void mousePressEvent(QGraphicsSceneMouseEvent* pME) override;
+    virtual void mouseMoveEvent(QGraphicsSceneMouseEvent* pME) override;
+    virtual void mouseReleaseEvent(QGraphicsSceneMouseEvent* pME) override;
+    virtual void hoverEnterEvent(QGraphicsSceneHoverEvent *pME) override;
+    virtual void hoverMoveEvent(QGraphicsSceneHoverEvent* pHE) override;
 
     void UpdateBox();
     void CorrectLabel();

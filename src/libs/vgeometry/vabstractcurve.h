@@ -53,7 +53,7 @@ public:
     explicit VAbstractCurve(const GOType &type, const quint32 &idObject = NULL_ID,
                             const Draw &mode = Draw::Calculation);
     explicit VAbstractCurve(const VAbstractCurve &curve);
-    virtual ~VAbstractCurve() Q_DECL_OVERRIDE;
+    virtual ~VAbstractCurve() override;
 
     VAbstractCurve& operator= (const VAbstractCurve &curve);
 #ifdef Q_COMPILER_RVALUE_REFS

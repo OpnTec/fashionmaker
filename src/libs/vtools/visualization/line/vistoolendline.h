@@ -46,7 +46,7 @@ public:
     explicit VisToolEndLine(const VContainer *data, QGraphicsItem *parent = nullptr);
     virtual ~VisToolEndLine() = default;
 
-    virtual void RefreshGeometry() Q_DECL_OVERRIDE;
+    virtual void RefreshGeometry() override;
 
     QString      Angle() const;
     void         SetAngle(const QString &expression);
@@ -54,7 +54,7 @@ public:
     QString      Length() const;
     void         setLength(const QString &expression);
 
-    virtual int  type() const Q_DECL_OVERRIDE {return Type;}
+    virtual int  type() const override {return Type;}
     enum { Type = UserType + static_cast<int>(Vis::ToolEndLine)};
 private:
     Q_DISABLE_COPY(VisToolEndLine)

@@ -47,11 +47,11 @@ public:
                QUndoCommand *parent = nullptr);
     virtual ~MovePiece()=default;
 
-    virtual void undo() Q_DECL_OVERRIDE;
-    virtual void redo() Q_DECL_OVERRIDE;
+    virtual void undo() override;
+    virtual void redo() override;
     // cppcheck-suppress unusedFunction
-    virtual bool mergeWith(const QUndoCommand *command) Q_DECL_OVERRIDE;
-    virtual int  id() const Q_DECL_OVERRIDE;
+    virtual bool mergeWith(const QUndoCommand *command) override;
+    virtual int  id() const override;
 
     void Do(qreal x, qreal y);
 

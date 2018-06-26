@@ -38,7 +38,7 @@ public:
     void setLevel(LEVEL lvl);
     LEVEL getLevel() const;
     static DRW_dbg *getInstance();
-    void print(std::string s);
+    void print(const std::string &s);
     void print(int i);
     void print(unsigned int i);
     void print(long long int i);

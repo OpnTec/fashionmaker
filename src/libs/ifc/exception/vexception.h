@@ -48,10 +48,10 @@ public:
     VException &operator=(const VException &e);
     virtual ~VException() V_NOEXCEPT_EXPR (true) Q_DECL_EQ_DEFAULT;
 
-    Q_NORETURN virtual void raise() const Q_DECL_OVERRIDE;
+    Q_NORETURN virtual void raise() const override;
 
     // cppcheck-suppress unusedFunction
-    Q_REQUIRED_RESULT virtual VException *clone() const Q_DECL_OVERRIDE;
+    Q_REQUIRED_RESULT virtual VException *clone() const override;
 
     virtual QString ErrorMessage() const;
     virtual QString DetailedInformation() const;
@@ -99,9 +99,9 @@ public:
     VExceptionToolWasDeleted &operator=(const VExceptionToolWasDeleted &e);
     virtual ~VExceptionToolWasDeleted() V_NOEXCEPT_EXPR (true) Q_DECL_EQ_DEFAULT;
 
-    Q_NORETURN virtual void raise() const Q_DECL_OVERRIDE;
+    Q_NORETURN virtual void raise() const override;
     // cppcheck-suppress unusedFunction
-    virtual VExceptionToolWasDeleted *clone() const Q_DECL_OVERRIDE;
+    virtual VExceptionToolWasDeleted *clone() const override;
 };
 
 #endif // VEXCEPTION_H

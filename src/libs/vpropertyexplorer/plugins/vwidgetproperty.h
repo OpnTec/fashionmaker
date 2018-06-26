@@ -47,7 +47,7 @@ public:
     explicit VWidgetProperty(const QString &name, QWidget* widget = nullptr);
 
     //! The destructor
-    virtual ~VWidgetProperty() Q_DECL_OVERRIDE;
+    virtual ~VWidgetProperty() override;
 
     //! Returns the widget held by this property
     QWidget* getWidget() const;
@@ -56,7 +56,7 @@ public:
     void setWidget(QWidget* widget);
 
     //! Returns a string containing the type of the property
-    virtual QString type() const Q_DECL_OVERRIDE;
+    virtual QString type() const override;
 
     //! Clones this property
     //! \param include_children Indicates whether to also clone the children
@@ -64,7 +64,7 @@ public:
     //! to fill all the data into container. This can also be used when subclassing this function.
     //! \return Returns the newly created property (or container, if it was not NULL)
     Q_REQUIRED_RESULT virtual VProperty* clone(bool include_children = true,
-                                               VProperty* container = nullptr) const Q_DECL_OVERRIDE;
+                                               VProperty* container = nullptr) const override;
 };
 
 }

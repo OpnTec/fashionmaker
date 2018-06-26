@@ -44,8 +44,8 @@ public:
     TogglePieceState(quint32 id, bool state, VContainer *data, VAbstractPattern *doc,
                      QUndoCommand *parent = nullptr);
     virtual ~TogglePieceState() = default;
-    virtual void undo() Q_DECL_OVERRIDE;
-    virtual void redo() Q_DECL_OVERRIDE;
+    virtual void undo() override;
+    virtual void redo() override;
     quint32 getDetId() const;
     bool    getNewState() const;
 
@@ -82,7 +82,7 @@ public:
     virtual ~TogglePieceInLayout() = default;
 
 protected:
-    virtual void Do(bool state) Q_DECL_OVERRIDE;
+    virtual void Do(bool state) override;
 
 signals:
     void UpdateList();
@@ -99,7 +99,7 @@ public:
     virtual ~TogglePieceForbidFlipping() = default;
 
 protected:
-    virtual void Do(bool state) Q_DECL_OVERRIDE;
+    virtual void Do(bool state) override;
 
 private:
     Q_DISABLE_COPY(TogglePieceForbidFlipping)
@@ -114,7 +114,7 @@ public:
     virtual ~TogglePieceForceFlipping() = default;
 
 protected:
-    virtual void Do(bool state) Q_DECL_OVERRIDE;
+    virtual void Do(bool state) override;
 
 private:
     Q_DISABLE_COPY(TogglePieceForceFlipping)

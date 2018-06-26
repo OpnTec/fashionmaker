@@ -50,7 +50,7 @@ public:
     explicit VisToolSpline(const VContainer *data, QGraphicsItem *parent = nullptr);
     virtual ~VisToolSpline();
 
-    virtual void RefreshGeometry() Q_DECL_OVERRIDE;
+    virtual void RefreshGeometry() override;
 
     void         setObject4Id(const quint32 &value);
     void         SetAngle1(const qreal &value);
@@ -62,7 +62,7 @@ public:
     QPointF      GetP2() const;
     QPointF      GetP3() const;
 
-    virtual int  type() const Q_DECL_OVERRIDE {return Type;}
+    virtual int  type() const override {return Type;}
     enum { Type = UserType + static_cast<int>(Vis::ToolSpline)};
 public slots:
     void MouseLeftPressed();

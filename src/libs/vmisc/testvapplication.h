@@ -54,23 +54,23 @@ public:
 
     virtual ~TestVApplication() Q_DECL_EQ_DEFAULT;
 
-    virtual const VTranslateVars *TrVars() Q_DECL_OVERRIDE
+    virtual const VTranslateVars *TrVars() override
     {
         return m_trVars;
     }
 
-    virtual void OpenSettings() Q_DECL_OVERRIDE
+    virtual void OpenSettings() override
     {
         settings = new VSettings(QSettings::IniFormat, QSettings::UserScope, QCoreApplication::organizationName(),
                                  QCoreApplication::applicationName(), this);
     }
 
-    virtual bool IsAppInGUIMode() const Q_DECL_OVERRIDE
+    virtual bool IsAppInGUIMode() const override
     {
         return false;
     }
 
-    virtual void InitTrVars() Q_DECL_OVERRIDE
+    virtual void InitTrVars() override
     {}
 
     void SetTrVars(VTranslateVars *trVars)

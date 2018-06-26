@@ -45,14 +45,14 @@ public:
     explicit VisToolEllipticalArc(const VContainer *data, QGraphicsItem *parent = nullptr);
     virtual ~VisToolEllipticalArc() Q_DECL_EQ_DEFAULT;
 
-    virtual void RefreshGeometry() Q_DECL_OVERRIDE;
+    virtual void RefreshGeometry() override;
     void setRadius1(const QString &expression);
     void setRadius2(const QString &expression);
     void setF1(const QString &expression);
     void setF2(const QString &expression);
     void setRotationAngle(const QString &expression);
 
-    virtual int type() const Q_DECL_OVERRIDE {return Type;}
+    virtual int type() const override {return Type;}
     enum { Type = UserType + static_cast<int>(Vis::ToolEllipticalArc)};
 private:
     Q_DISABLE_COPY(VisToolEllipticalArc)

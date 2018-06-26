@@ -66,11 +66,11 @@ public:
 
     QString       GetFormulaF1 () const;
     void          SetFormulaF1 (const QString &formula, qreal value);
-    virtual qreal GetStartAngle () const Q_DECL_OVERRIDE;
+    virtual qreal GetStartAngle () const override;
 
     QString       GetFormulaF2 () const;
     void          SetFormulaF2 (const QString &formula, qreal value);
-    virtual qreal GetEndAngle () const Q_DECL_OVERRIDE;
+    virtual qreal GetEndAngle () const override;
 
     virtual VPointF GetCenter () const;
     void    SetCenter (const VPointF &point);
@@ -78,8 +78,8 @@ public:
     QString GetFormulaLength () const;
     void    SetFormulaLength (const QString &formula, qreal value);
 
-    virtual void    setId(const quint32 &id) Q_DECL_OVERRIDE;
-    virtual QString NameForHistory(const QString &toolName) const Q_DECL_OVERRIDE;
+    virtual void    setId(const quint32 &id) override;
+    virtual QString NameForHistory(const QString &toolName) const override;
 
     bool IsFlipped() const;
     qreal AngleArc() const;

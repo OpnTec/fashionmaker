@@ -51,7 +51,7 @@ public:
                const QString &description = QString());
     VIncrement(const VIncrement &incr);
 
-    virtual ~VIncrement() Q_DECL_OVERRIDE;
+    virtual ~VIncrement() override;
 
     VIncrement &operator=(const VIncrement &incr);
 #ifdef Q_COMPILER_RVALUE_REFS

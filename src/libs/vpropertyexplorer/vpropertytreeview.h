@@ -49,7 +49,7 @@ public:
     explicit VPropertyTreeView(VPropertyModel* model, QWidget *parent = nullptr);
 
     //! Destructor
-    virtual ~VPropertyTreeView() Q_DECL_OVERRIDE;
+    virtual ~VPropertyTreeView() override;
 
     //! Sets the height for each row. Set this to 0 in order to let the standard delegate decide
     void setRowHeight(int height = 0, bool add_to_standard = false);

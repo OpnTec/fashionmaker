@@ -41,8 +41,8 @@ public:
     qreal Mx() const;
     qreal My() const;
 
-    virtual void RefreshGeometry() Q_DECL_OVERRIDE;
-    virtual int  type() const Q_DECL_OVERRIDE {return Type;}
+    virtual void RefreshGeometry() override;
+    virtual int  type() const override {return Type;}
     enum { Type = UserType + static_cast<int>(Vis::ToolDuplicateDetail)};
 private:
     Q_DISABLE_COPY(VisToolDuplicateDetail)

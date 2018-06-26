@@ -46,14 +46,14 @@ public:
     explicit VisToolTrueDarts(const VContainer *data, QGraphicsItem *parent = nullptr);
     virtual ~VisToolTrueDarts() = default;
 
-    virtual void RefreshGeometry() Q_DECL_OVERRIDE;
+    virtual void RefreshGeometry() override;
 
     void setObject2Id(const quint32 &value);
     void setD1PointId(const quint32 &value);
     void setD2PointId(const quint32 &value);
     void setD3PointId(const quint32 &value);
 
-    virtual int  type() const Q_DECL_OVERRIDE {return Type;}
+    virtual int  type() const override {return Type;}
     enum { Type = UserType + static_cast<int>(Vis::ToolTrueDarts)};
 private:
     Q_DISABLE_COPY(VisToolTrueDarts)

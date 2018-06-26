@@ -53,12 +53,12 @@ public:
     static void Create(const VAbstractNodeInitData &initData);
 
     static const QString ToolType;
-    virtual int  type() const Q_DECL_OVERRIDE {return Type;}
+    virtual int  type() const override {return Type;}
     enum { Type = UserType + static_cast<int>(Tool::NodePoint)};
-    virtual QString getTagName() const Q_DECL_OVERRIDE;
+    virtual QString getTagName() const override;
 
-    virtual void ChangeLabelPosition(quint32 id, const QPointF &pos) Q_DECL_OVERRIDE;
-    virtual void SetLabelVisible(quint32 id, bool visible) Q_DECL_OVERRIDE;
+    virtual void ChangeLabelPosition(quint32 id, const QPointF &pos) override;
+    virtual void SetLabelVisible(quint32 id, bool visible) override;
 signals:
     void ShowOptions();
     void ToggleInLayout(bool checked);
@@ -67,21 +67,21 @@ signals:
     void Delete();
     void ToggleExcludeState(quint32 id);
 public slots:
-    virtual void FullUpdateFromFile() Q_DECL_OVERRIDE;
+    virtual void FullUpdateFromFile() override;
     void         NameChangePosition(const QPointF &pos);
     void         PointChoosed();
     void         EnableToolMove(bool move);
-    virtual void AllowHover(bool enabled) Q_DECL_OVERRIDE;
-    virtual void AllowSelecting(bool enabled) Q_DECL_OVERRIDE;
+    virtual void AllowHover(bool enabled) override;
+    virtual void AllowSelecting(bool enabled) override;
     void         AllowLabelHover(bool enabled);
     void         AllowLabelSelecting(bool enabled);
 protected:
-    virtual void AddToFile() Q_DECL_OVERRIDE;
-    virtual void mousePressEvent(QGraphicsSceneMouseEvent *event) Q_DECL_OVERRIDE;
-    virtual void mouseReleaseEvent ( QGraphicsSceneMouseEvent * event ) Q_DECL_OVERRIDE;
-    virtual void ShowNode() Q_DECL_OVERRIDE;
-    virtual void HideNode() Q_DECL_OVERRIDE;
-    virtual void contextMenuEvent(QGraphicsSceneContextMenuEvent *event) Q_DECL_OVERRIDE;
+    virtual void AddToFile() override;
+    virtual void mousePressEvent(QGraphicsSceneMouseEvent *event) override;
+    virtual void mouseReleaseEvent ( QGraphicsSceneMouseEvent * event ) override;
+    virtual void ShowNode() override;
+    virtual void HideNode() override;
+    virtual void contextMenuEvent(QGraphicsSceneContextMenuEvent *event) override;
 private:
     Q_DISABLE_COPY(VNodePoint)
 

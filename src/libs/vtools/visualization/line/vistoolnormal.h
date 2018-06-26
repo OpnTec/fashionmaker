@@ -46,13 +46,13 @@ public:
     explicit VisToolNormal(const VContainer *data, QGraphicsItem *parent = nullptr);
     virtual ~VisToolNormal() = default;
 
-    virtual void RefreshGeometry() Q_DECL_OVERRIDE;
+    virtual void RefreshGeometry() override;
 
     void         setObject2Id(const quint32 &value);
     void         setLength(const QString &expression);
     qreal        GetAngle() const;
     void         SetAngle(const qreal &value);
-    virtual int  type() const Q_DECL_OVERRIDE {return Type;}
+    virtual int  type() const override {return Type;}
     enum { Type = UserType + static_cast<int>(Vis::ToolNormal)};
 
 private:

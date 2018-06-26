@@ -63,29 +63,29 @@ class VToolCubicBezierPath:public VAbstractSpline
     Q_OBJECT
 public:
     virtual ~VToolCubicBezierPath() Q_DECL_EQ_DEFAULT;
-    virtual void setDialog() Q_DECL_OVERRIDE;
+    virtual void setDialog() override;
     static VToolCubicBezierPath *Create(QSharedPointer<DialogTool> dialog, VMainGraphicsScene  *scene,
                                         VAbstractPattern *doc, VContainer *data);
     static VToolCubicBezierPath *Create(VToolCubicBezierPathInitData initData);
 
     static const QString ToolType;
     static void  UpdatePathPoints(VAbstractPattern *doc, QDomElement &element, const VCubicBezierPath &path);
-    virtual int  type() const Q_DECL_OVERRIDE {return Type;}
+    virtual int  type() const override {return Type;}
     enum { Type = UserType + static_cast<int>(Tool::CubicBezierPath)};
 
     VCubicBezierPath getSplinePath()const;
     void             setSplinePath(const VCubicBezierPath &splPath);
 
-    virtual void ShowVisualization(bool show) Q_DECL_OVERRIDE;
+    virtual void ShowVisualization(bool show) override;
 protected slots:
-    virtual void ShowContextMenu(QGraphicsSceneContextMenuEvent *event, quint32 id=NULL_ID) Q_DECL_OVERRIDE;
+    virtual void ShowContextMenu(QGraphicsSceneContextMenuEvent *event, quint32 id=NULL_ID) override;
 protected:
-    virtual void  RemoveReferens() Q_DECL_OVERRIDE;
+    virtual void  RemoveReferens() override;
     virtual void  SaveDialog(QDomElement &domElement, QList<quint32> &oldDependencies,
-                             QList<quint32> &newDependencies) Q_DECL_OVERRIDE;
-    virtual void  SaveOptions(QDomElement &tag, QSharedPointer<VGObject> &obj) Q_DECL_OVERRIDE;
-    virtual void  SetVisualization() Q_DECL_OVERRIDE;
-    virtual void  RefreshGeometry() Q_DECL_OVERRIDE;
+                             QList<quint32> &newDependencies) override;
+    virtual void  SaveOptions(QDomElement &tag, QSharedPointer<VGObject> &obj) override;
+    virtual void  SetVisualization() override;
+    virtual void  RefreshGeometry() override;
 private:
     Q_DISABLE_COPY(VToolCubicBezierPath)
 

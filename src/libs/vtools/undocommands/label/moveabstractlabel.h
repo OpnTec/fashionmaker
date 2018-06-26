@@ -45,8 +45,8 @@ public:
     MoveAbstractLabel(VAbstractPattern *doc, quint32 pointId, const QPointF &pos, QUndoCommand *parent = nullptr);
     virtual ~MoveAbstractLabel()=default;
 
-    virtual void undo() Q_DECL_OVERRIDE;
-    virtual void redo() Q_DECL_OVERRIDE;
+    virtual void undo() override;
+    virtual void redo() override;
 
     quint32 GetPointId() const;
     QPointF GetNewPos() const;

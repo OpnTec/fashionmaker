@@ -57,19 +57,19 @@ public:
     VDxfEngine();
     virtual ~VDxfEngine();
 
-    virtual bool begin(QPaintDevice *pdev) Q_DECL_OVERRIDE;
-    virtual bool end() Q_DECL_OVERRIDE;
-    virtual void updateState(const QPaintEngineState &state) Q_DECL_OVERRIDE;
-    virtual void drawPath(const QPainterPath &path) Q_DECL_OVERRIDE;
-    virtual void drawLines(const QLineF * lines, int lineCount) Q_DECL_OVERRIDE;
-    virtual void drawLines(const QLine * lines, int lineCount) Q_DECL_OVERRIDE;
-    virtual void drawPolygon(const QPointF *points, int pointCount, PolygonDrawMode mode) Q_DECL_OVERRIDE;
-    virtual void drawPolygon(const QPoint *points, int pointCount, PolygonDrawMode mode) Q_DECL_OVERRIDE;
-    virtual void drawEllipse(const QRectF & rect) Q_DECL_OVERRIDE;
-    virtual void drawEllipse(const QRect & rect) Q_DECL_OVERRIDE;
-    virtual void drawTextItem(const QPointF & p, const QTextItem & textItem) Q_DECL_OVERRIDE;
-    virtual Type type() const Q_DECL_OVERRIDE;
-    virtual void drawPixmap(const QRectF &r, const QPixmap &pm, const QRectF &sr) Q_DECL_OVERRIDE;
+    virtual bool begin(QPaintDevice *pdev) override;
+    virtual bool end() override;
+    virtual void updateState(const QPaintEngineState &state) override;
+    virtual void drawPath(const QPainterPath &path) override;
+    virtual void drawLines(const QLineF * lines, int lineCount) override;
+    virtual void drawLines(const QLine * lines, int lineCount) override;
+    virtual void drawPolygon(const QPointF *points, int pointCount, PolygonDrawMode mode) override;
+    virtual void drawPolygon(const QPoint *points, int pointCount, PolygonDrawMode mode) override;
+    virtual void drawEllipse(const QRectF & rect) override;
+    virtual void drawEllipse(const QRect & rect) override;
+    virtual void drawTextItem(const QPointF & p, const QTextItem & textItem) override;
+    virtual Type type() const override;
+    virtual void drawPixmap(const QRectF &r, const QPixmap &pm, const QRectF &sr) override;
 
     QSize getSize() const;
     void setSize(const QSize &value);

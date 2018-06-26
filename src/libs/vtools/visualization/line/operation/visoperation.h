@@ -43,9 +43,9 @@ public:
 
     void SetObjects(QVector<quint32> objects);
 
-    virtual void VisualMode(const quint32 &pointId = NULL_ID) Q_DECL_OVERRIDE;
+    virtual void VisualMode(const quint32 &pointId = NULL_ID) override;
 
-    virtual int type() const Q_DECL_OVERRIDE {return Type;}
+    virtual int type() const override {return Type;}
     enum { Type = UserType + static_cast<int>(Vis::ToolRotation)};
 protected:
     QVector<quint32> objects;

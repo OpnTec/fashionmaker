@@ -56,17 +56,17 @@ public:
     static Q_DECL_CONSTEXPR const int PatternMaxVer = CONVERTER_VERSION_CHECK(0, 7, 8);
 
 protected:
-    virtual int     MinVer() const Q_DECL_OVERRIDE;
-    virtual int     MaxVer() const Q_DECL_OVERRIDE;
+    virtual int     MinVer() const override;
+    virtual int     MaxVer() const override;
 
-    virtual QString MinVerStr() const Q_DECL_OVERRIDE;
-    virtual QString MaxVerStr() const Q_DECL_OVERRIDE;
+    virtual QString MinVerStr() const override;
+    virtual QString MaxVerStr() const override;
 
-    virtual QString XSDSchema(int ver) const Q_DECL_OVERRIDE;
-    virtual void    ApplyPatches() Q_DECL_OVERRIDE;
-    virtual void    DowngradeToCurrentMaxVersion() Q_DECL_OVERRIDE;
+    virtual QString XSDSchema(int ver) const override;
+    virtual void    ApplyPatches() override;
+    virtual void    DowngradeToCurrentMaxVersion() override;
 
-    virtual bool IsReadOnly() const Q_DECL_OVERRIDE;
+    virtual bool IsReadOnly() const override;
 
 private:
     Q_DISABLE_COPY(VPatternConverter)

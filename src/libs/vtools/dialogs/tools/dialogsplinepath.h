@@ -54,19 +54,19 @@ class DialogSplinePath : public DialogTool
     Q_OBJECT
 public:
     DialogSplinePath(const VContainer *data, const quint32 &toolId, QWidget *parent = nullptr);
-    virtual ~DialogSplinePath() Q_DECL_OVERRIDE;
+    virtual ~DialogSplinePath() override;
 
     VSplinePath GetPath() const;
     void        SetPath(const VSplinePath &value);
 public slots:
-    virtual void ChosenObject(quint32 id, const SceneObject &type) Q_DECL_OVERRIDE;
-    virtual void ShowDialog(bool click) Q_DECL_OVERRIDE;
+    virtual void ChosenObject(quint32 id, const SceneObject &type) override;
+    virtual void ShowDialog(bool click) override;
     void         PathUpdated(const VSplinePath &path);
 protected:
-    virtual void ShowVisualization() Q_DECL_OVERRIDE;
-    virtual void SaveData() Q_DECL_OVERRIDE;
-    virtual void CheckState() Q_DECL_FINAL;
-    virtual void closeEvent(QCloseEvent *event) Q_DECL_OVERRIDE;
+    virtual void ShowVisualization() override;
+    virtual void SaveData() override;
+    virtual void CheckState() final;
+    virtual void closeEvent(QCloseEvent *event) override;
 private slots:
     void PointChanged(int row);
     void currentPointChanged(int index);

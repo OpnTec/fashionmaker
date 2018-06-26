@@ -50,14 +50,14 @@ public:
     explicit VisToolRotation(const VContainer *data, QGraphicsItem *parent = nullptr);
     virtual ~VisToolRotation();
 
-    virtual void   RefreshGeometry() Q_DECL_OVERRIDE;
+    virtual void   RefreshGeometry() override;
 
     void SetOriginPointId(quint32 value);
 
     QString Angle() const;
     void    SetAngle(const QString &expression);
 
-    virtual int type() const Q_DECL_OVERRIDE {return Type;}
+    virtual int type() const override {return Type;}
     enum { Type = UserType + static_cast<int>(Vis::ToolRotation)};
 private:
     Q_DISABLE_COPY(VisToolRotation)

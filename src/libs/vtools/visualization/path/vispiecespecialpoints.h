@@ -40,13 +40,13 @@ public:
     VisPieceSpecialPoints(const VContainer *data, QGraphicsItem *parent = nullptr);
     virtual ~VisPieceSpecialPoints() Q_DECL_EQ_DEFAULT;
 
-    virtual void RefreshGeometry() Q_DECL_OVERRIDE;
+    virtual void RefreshGeometry() override;
 
     void SetPoints(const QVector<quint32> &pins);
     void SetShowRect(bool show);
     void SetRect(const QRectF &rect);
 
-    virtual int  type() const Q_DECL_OVERRIDE {return Type;}
+    virtual int  type() const override {return Type;}
     enum { Type = UserType + static_cast<int>(Vis::PieceSpecialPoints)};
 private:
     Q_DISABLE_COPY(VisPieceSpecialPoints)

@@ -58,7 +58,7 @@ public:
                  const QString &tagName = QString());
     VMeasurement(const VMeasurement &m);
 
-    virtual ~VMeasurement() Q_DECL_OVERRIDE;
+    virtual ~VMeasurement() override;
 
     VMeasurement &operator=(const VMeasurement &m);
 #ifdef Q_COMPILER_RVALUE_REFS
@@ -80,10 +80,10 @@ public:
     int     Index() const;
     bool    IsFormulaOk() const;
 
-    virtual bool IsNotUsed() const Q_DECL_OVERRIDE;
+    virtual bool IsNotUsed() const override;
 
-    virtual qreal  GetValue() const Q_DECL_OVERRIDE;
-    virtual qreal* GetValue() Q_DECL_OVERRIDE;
+    virtual qreal  GetValue() const override;
+    virtual qreal* GetValue() override;
 
     VContainer *GetData();
 

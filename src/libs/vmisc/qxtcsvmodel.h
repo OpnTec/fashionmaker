@@ -61,14 +61,14 @@ public:
                          QChar separator = ',', QTextCodec *codec = nullptr);
     virtual ~QxtCsvModel() Q_DECL_EQ_DEFAULT;
 
-    virtual int      rowCount(const QModelIndex& parent = QModelIndex()) const Q_DECL_OVERRIDE;
-    virtual int      columnCount(const QModelIndex& parent = QModelIndex()) const Q_DECL_OVERRIDE;
-    virtual QVariant data(const QModelIndex& index, int role = Qt::DisplayRole) const Q_DECL_OVERRIDE;
-    virtual bool     setData(const QModelIndex& index, const QVariant& data, int role = Qt::EditRole) Q_DECL_OVERRIDE;
+    virtual int      rowCount(const QModelIndex& parent = QModelIndex()) const override;
+    virtual int      columnCount(const QModelIndex& parent = QModelIndex()) const override;
+    virtual QVariant data(const QModelIndex& index, int role = Qt::DisplayRole) const override;
+    virtual bool     setData(const QModelIndex& index, const QVariant& data, int role = Qt::EditRole) override;
     virtual QVariant headerData(int section, Qt::Orientation orientation,
-                                int role = Qt::DisplayRole) const Q_DECL_OVERRIDE;
+                                int role = Qt::DisplayRole) const override;
     virtual bool     setHeaderData(int section, Qt::Orientation orientation, const QVariant& value,
-                                   int role = Qt::DisplayRole) Q_DECL_OVERRIDE;
+                                   int role = Qt::DisplayRole) override;
     void             setHeaderData(const QStringList& data);
 
     QString text(int row, int column) const;
@@ -79,16 +79,16 @@ public:
 
 
     bool insertRow(int row, const QModelIndex& parent = QModelIndex());
-    virtual bool insertRows(int row, int count, const QModelIndex& parent = QModelIndex()) Q_DECL_OVERRIDE;
+    virtual bool insertRows(int row, int count, const QModelIndex& parent = QModelIndex()) override;
 
     bool removeRow(int row, const QModelIndex& parent = QModelIndex());
-    virtual bool removeRows(int row, int count, const QModelIndex& parent = QModelIndex()) Q_DECL_OVERRIDE;
+    virtual bool removeRows(int row, int count, const QModelIndex& parent = QModelIndex()) override;
 
     bool insertColumn(int col, const QModelIndex& parent = QModelIndex());
-    virtual bool insertColumns(int col, int count, const QModelIndex& parent = QModelIndex()) Q_DECL_OVERRIDE;
+    virtual bool insertColumns(int col, int count, const QModelIndex& parent = QModelIndex()) override;
 
     bool removeColumn(int col, const QModelIndex& parent = QModelIndex());
-    virtual bool removeColumns(int col, int count, const QModelIndex& parent = QModelIndex()) Q_DECL_OVERRIDE;
+    virtual bool removeColumns(int col, int count, const QModelIndex& parent = QModelIndex()) override;
 
     void setSource(QIODevice *file, bool withHeader = false, QChar separator = ',', QTextCodec* codec = nullptr);
     void setSource(const QString &filename, bool withHeader = false, QChar separator = ',',
@@ -113,7 +113,7 @@ public:
     QuoteMode quoteMode() const;
     void setQuoteMode(QuoteMode mode);
 
-    virtual Qt::ItemFlags flags(const QModelIndex& index) const Q_DECL_OVERRIDE;
+    virtual Qt::ItemFlags flags(const QModelIndex& index) const override;
 
 private:
     Q_DISABLE_COPY(QxtCsvModel)

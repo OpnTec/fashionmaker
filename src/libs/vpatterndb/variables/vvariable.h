@@ -48,7 +48,7 @@ public:
     VVariable(const QString &name, const QString &description = QString());
     VVariable(const VVariable &var);
 
-    virtual ~VVariable() Q_DECL_OVERRIDE;
+    virtual ~VVariable() override;
 
     VVariable &operator=(const VVariable &var);
 #ifdef Q_COMPILER_RVALUE_REFS

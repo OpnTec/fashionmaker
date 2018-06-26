@@ -51,11 +51,11 @@ public:
     QVector<VFinalMeasurement> FinalMeasurements() const;
 
 protected:
-    virtual void closeEvent ( QCloseEvent * event ) Q_DECL_OVERRIDE;
-    virtual void changeEvent ( QEvent * event) Q_DECL_OVERRIDE;
-    virtual bool eventFilter(QObject *object, QEvent *event) Q_DECL_OVERRIDE;
-    virtual void showEvent( QShowEvent *event ) Q_DECL_OVERRIDE;
-    virtual void resizeEvent(QResizeEvent *event) Q_DECL_OVERRIDE;
+    virtual void closeEvent ( QCloseEvent * event ) override;
+    virtual void changeEvent ( QEvent * event) override;
+    virtual bool eventFilter(QObject *object, QEvent *event) override;
+    virtual void showEvent( QShowEvent *event ) override;
+    virtual void resizeEvent(QResizeEvent *event) override;
 private slots:
     void ShowFinalMeasurementDetails();
     void Add();

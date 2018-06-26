@@ -44,14 +44,14 @@ class VPROPERTYEXPLORERSHARED_EXPORT VFileEditWidget : public QWidget
 
 public:
     explicit VFileEditWidget(QWidget* parent, bool is_directory = false);
-    virtual ~VFileEditWidget() Q_DECL_OVERRIDE;
+    virtual ~VFileEditWidget() override;
 
 
     //! This function returns the file currently set to this editor
     QString getFile() const;
 
     //! Needed for proper event handling
-    virtual bool eventFilter(QObject* obj, QEvent* ev) Q_DECL_OVERRIDE;
+    virtual bool eventFilter(QObject* obj, QEvent* ev) override;
 
     //! Returns the directory/file setting
     //! \return True, if a directory dialog is being shown, false if a file dialog
@@ -88,10 +88,10 @@ private slots:
     void onToolButtonClicked();
 
 protected:
-    virtual void dragEnterEvent(QDragEnterEvent* event) Q_DECL_OVERRIDE;
-    virtual void dragMoveEvent(QDragMoveEvent* event) Q_DECL_OVERRIDE;
-    virtual void dragLeaveEvent(QDragLeaveEvent* event) Q_DECL_OVERRIDE;
-    virtual void dropEvent(QDropEvent* event) Q_DECL_OVERRIDE;
+    virtual void dragEnterEvent(QDragEnterEvent* event) override;
+    virtual void dragMoveEvent(QDragMoveEvent* event) override;
+    virtual void dragLeaveEvent(QDragLeaveEvent* event) override;
+    virtual void dropEvent(QDropEvent* event) override;
 
     //! This function checks the mime data, if it is compatible with the filters
     virtual bool checkMimeData(const QMimeData* data, QString& file) const;

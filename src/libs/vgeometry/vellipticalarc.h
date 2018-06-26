@@ -65,7 +65,7 @@ public:
     VEllipticalArc Flip(const QLineF &axis, const QString &prefix = QString()) const;
     VEllipticalArc Move(qreal length, qreal angle, const QString &prefix = QString()) const;
 
-    virtual ~VEllipticalArc() Q_DECL_OVERRIDE;
+    virtual ~VEllipticalArc() override;
 
     VEllipticalArc& operator= (const VEllipticalArc &arc);
 #ifdef Q_COMPILER_RVALUE_REFS
@@ -87,7 +87,7 @@ public:
     void    SetFormulaRadius2 (const QString &formula, qreal value);
     qreal   GetRadius2 () const;
 
-    virtual qreal GetLength () const Q_DECL_OVERRIDE;
+    virtual qreal GetLength () const override;
 
     QPointF GetP1() const;
     QPointF GetP2() const;
@@ -95,18 +95,18 @@ public:
     QTransform GetTransform() const;
     void       SetTransform(const QTransform &matrix, bool combine = false);
 
-    virtual VPointF GetCenter () const Q_DECL_OVERRIDE;
-    virtual QVector<QPointF> GetPoints () const Q_DECL_OVERRIDE;
-    virtual qreal GetStartAngle () const Q_DECL_OVERRIDE;
-    virtual qreal GetEndAngle () const Q_DECL_OVERRIDE;
+    virtual VPointF GetCenter () const override;
+    virtual QVector<QPointF> GetPoints () const override;
+    virtual qreal GetStartAngle () const override;
+    virtual qreal GetEndAngle () const override;
 
     QPointF CutArc (const qreal &length, VEllipticalArc &arc1, VEllipticalArc &arc2) const;
     QPointF CutArc (const qreal &length) const;
 
     static qreal OptimizeAngle(qreal angle);
 protected:
-    virtual void CreateName() Q_DECL_OVERRIDE;
-    virtual void FindF2(qreal length) Q_DECL_OVERRIDE;
+    virtual void CreateName() override;
+    virtual void FindF2(qreal length) override;
 private:
     QSharedDataPointer<VEllipticalArcData> d;
 

@@ -75,38 +75,38 @@ class VToolSpline:public VAbstractSpline
     Q_OBJECT
 public:
     virtual ~VToolSpline() =default;
-    virtual void setDialog() Q_DECL_OVERRIDE;
+    virtual void setDialog() override;
     static VToolSpline *Create(QSharedPointer<DialogTool> dialog, VMainGraphicsScene *scene, VAbstractPattern *doc,
                                VContainer *data);
     static VToolSpline *Create(VToolSplineInitData &initData, VSpline *spline);
     static VToolSpline *Create(VToolSplineInitData &initData);
     static const QString ToolType;
     static const QString OldToolType;
-    virtual int  type() const Q_DECL_OVERRIDE {return Type;}
+    virtual int  type() const override {return Type;}
     enum { Type = UserType + static_cast<int>(Tool::Spline)};
 
     VSpline getSpline()const;
     void    setSpline(const VSpline &spl);
 
-    virtual void ShowVisualization(bool show) Q_DECL_OVERRIDE;
+    virtual void ShowVisualization(bool show) override;
 public slots:
     void         ControlPointChangePosition (const qint32 &indexSpline, const SplinePointPosition &position,
                                              const QPointF &pos);
-    virtual void EnableToolMove(bool move) Q_DECL_OVERRIDE;
+    virtual void EnableToolMove(bool move) override;
 protected slots:
-    virtual void ShowContextMenu(QGraphicsSceneContextMenuEvent *event, quint32 id=NULL_ID) Q_DECL_OVERRIDE;
+    virtual void ShowContextMenu(QGraphicsSceneContextMenuEvent *event, quint32 id=NULL_ID) override;
 protected:
-    virtual void RemoveReferens() Q_DECL_OVERRIDE;
+    virtual void RemoveReferens() override;
     virtual void SaveDialog(QDomElement &domElement, QList<quint32> &oldDependencies,
-                            QList<quint32> &newDependencies) Q_DECL_OVERRIDE;
-    virtual void SaveOptions(QDomElement &tag, QSharedPointer<VGObject> &obj) Q_DECL_OVERRIDE;
-    virtual void mousePressEvent(QGraphicsSceneMouseEvent * event) Q_DECL_OVERRIDE;
-    virtual void mouseReleaseEvent ( QGraphicsSceneMouseEvent * event ) Q_DECL_OVERRIDE;
-    virtual void mouseMoveEvent(QGraphicsSceneMouseEvent * event) Q_DECL_OVERRIDE;
-    virtual void hoverEnterEvent ( QGraphicsSceneHoverEvent * event ) Q_DECL_OVERRIDE;
-    virtual void hoverLeaveEvent ( QGraphicsSceneHoverEvent * event ) Q_DECL_OVERRIDE;
-    virtual void SetVisualization() Q_DECL_OVERRIDE;
-    virtual void RefreshCtrlPoints() Q_DECL_OVERRIDE;
+                            QList<quint32> &newDependencies) override;
+    virtual void SaveOptions(QDomElement &tag, QSharedPointer<VGObject> &obj) override;
+    virtual void mousePressEvent(QGraphicsSceneMouseEvent * event) override;
+    virtual void mouseReleaseEvent ( QGraphicsSceneMouseEvent * event ) override;
+    virtual void mouseMoveEvent(QGraphicsSceneMouseEvent * event) override;
+    virtual void hoverEnterEvent ( QGraphicsSceneHoverEvent * event ) override;
+    virtual void hoverLeaveEvent ( QGraphicsSceneHoverEvent * event ) override;
+    virtual void SetVisualization() override;
+    virtual void RefreshCtrlPoints() override;
 private slots:
     void CurveReleased();
 private:

@@ -62,7 +62,7 @@ public:
           IgnoreDataChangedSignal(false)
     {}
 
-    virtual ~VPropertyFormViewPrivate() Q_DECL_OVERRIDE {}
+    virtual ~VPropertyFormViewPrivate() override {}
 
 private:
     Q_DISABLE_COPY(VPropertyFormViewPrivate)

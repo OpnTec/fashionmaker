@@ -86,7 +86,7 @@ public slots:
     void HorizontalScrollingTime(qreal x);
     void animFinished();
 protected:
-    virtual bool eventFilter(QObject* object, QEvent* event) Q_DECL_OVERRIDE;
+    virtual bool eventFilter(QObject* object, QEvent* event) override;
 private:
     Q_DISABLE_COPY(GraphicsViewZoom)
     QGraphicsView        *_view;
@@ -155,10 +155,10 @@ public slots:
     void     ZoomFitBest();
     void     ResetScrollingAnimation();
 protected:
-    virtual void mousePressEvent(QMouseEvent *event) Q_DECL_OVERRIDE;
-    virtual void mouseMoveEvent(QMouseEvent *event) Q_DECL_OVERRIDE;
-    virtual void mouseReleaseEvent(QMouseEvent *event) Q_DECL_OVERRIDE;
-    virtual void mouseDoubleClickEvent(QMouseEvent *event) Q_DECL_OVERRIDE;
+    virtual void mousePressEvent(QMouseEvent *event) override;
+    virtual void mouseMoveEvent(QMouseEvent *event) override;
+    virtual void mouseReleaseEvent(QMouseEvent *event) override;
+    virtual void mouseDoubleClickEvent(QMouseEvent *event) override;
 private:
     Q_DISABLE_COPY(VMainGraphicsView)
     GraphicsViewZoom* zoom;

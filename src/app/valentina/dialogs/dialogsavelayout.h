@@ -123,7 +123,7 @@ public:
     PageOrientation GetTiledPageOrientation() const;
 
 protected:
-    virtual void showEvent(QShowEvent *event) Q_DECL_OVERRIDE;
+    virtual void showEvent(QShowEvent *event) override;
     void InitTemplates(QComboBox *comboBoxTemplates);
 
 private slots:

@@ -45,7 +45,7 @@ class DialogMDataBase : public QDialog
 public:
     explicit DialogMDataBase(const QStringList &list, QWidget *parent = nullptr);
     explicit DialogMDataBase(QWidget *parent = nullptr);
-    virtual ~DialogMDataBase() Q_DECL_OVERRIDE;
+    virtual ~DialogMDataBase() override;
 
     QStringList GetNewNames() const;
 
@@ -54,8 +54,8 @@ public:
     static QString ImgTag(const QString &number);
 
 protected:
-    virtual void changeEvent(QEvent* event) Q_DECL_OVERRIDE;
-    virtual bool eventFilter(QObject *target, QEvent *event) Q_DECL_OVERRIDE;
+    virtual void changeEvent(QEvent* event) override;
+    virtual bool eventFilter(QObject *target, QEvent *event) override;
 
 private slots:
     void UpdateChecks(QTreeWidgetItem *item, int column);

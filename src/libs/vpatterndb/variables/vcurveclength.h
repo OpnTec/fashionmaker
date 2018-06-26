@@ -50,7 +50,7 @@ public:
                  CurveCLength cType, Unit patternUnit, qint32 segment);
     VCurveCLength(const VCurveCLength &var);
     VCurveCLength &operator=(const VCurveCLength &var);
-    virtual ~VCurveCLength() Q_DECL_OVERRIDE;
+    virtual ~VCurveCLength() override;
 };
 
 #endif // VCURVECLENGTH_H
