@@ -396,6 +396,14 @@ win32:*g++* {
     package_printsupport.files += $$[QT_INSTALL_PLUGINS]/printsupport/windowsprintersupport.dll
     INSTALLS += package_printsupport
 
+    # Since 5.10, platform styles such as QWindowsVistaStyle, QMacStyle, etc., are no longer embedded in the QtWidgets
+    # library.
+    greaterThan(QT_MAJOR_VERSION, 4):greaterThan(QT_MINOR_VERSION, 9) {
+        package_styles.path = $${OUT_PWD}/../../../package/valentina/styles
+        package_styles.files += $$[QT_INSTALL_PLUGINS]/styles/qwindowsvistastyle.dll
+        INSTALLS += package_styles
+    }
+
     noWindowsInstaller{ # For enable run qmake with CONFIG+=noWindowsInstaller
         #do nothing
     } else {
