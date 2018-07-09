@@ -1487,13 +1487,16 @@ void VToolSeamAllowance::ToggleInLayout(bool checked)
 //---------------------------------------------------------------------------------------------------------------------
 void VToolSeamAllowance::ToggleForbidFlipping(bool checked)
 {
-    qApp->getUndoStack()->push(new TogglePieceForbidFlipping(m_id, checked, &(VAbstractTool::data), doc));
+    qApp->getUndoStack()->push(new TogglePieceForceForbidFlipping(m_id, checked,
+                                                                  ForceForbidFlippingType::ForbidFlipping,
+                                                                  &(VAbstractTool::data), doc));
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void VToolSeamAllowance::ToggleForceFlipping(bool checked)
 {
-    qApp->getUndoStack()->push(new TogglePieceForceFlipping(m_id, checked, &(VAbstractTool::data), doc));
+    qApp->getUndoStack()->push(new TogglePieceForceForbidFlipping(m_id, checked, ForceForbidFlippingType::ForceFlipping,
+                                                                  &(VAbstractTool::data), doc));
 }
 
 //---------------------------------------------------------------------------------------------------------------------

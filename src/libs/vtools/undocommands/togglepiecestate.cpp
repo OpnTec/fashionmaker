@@ -40,46 +40,33 @@
 #include "../vpatterndb/vcontainer.h"
 #include "../vpatterndb/vpiece.h"
 #include "vundocommand.h"
+#include "../vtools/tools/vtoolseamallowance.h"
 
 //---------------------------------------------------------------------------------------------------------------------
-TogglePieceState::TogglePieceState(quint32 id, bool state, VContainer *data, VAbstractPattern *doc,
-                                   QUndoCommand *parent)
+TogglePieceInLayout::TogglePieceInLayout(quint32 id, bool state, VContainer *data, VAbstractPattern *doc,
+                                         QUndoCommand *parent)
     : VUndoCommand(QDomElement(), doc, parent),
       m_id(id),
       m_data(data),
       m_oldState(not state),
       m_newState(state)
-{}
-
-//---------------------------------------------------------------------------------------------------------------------
-void TogglePieceState::undo()
-{
-    qCDebug(vUndo, "TogglePieceState::undo().");
-
-    if (m_newState != m_oldState)
-    {
-        Do(m_oldState);
-    }
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void TogglePieceState::redo()
-{
-    qCDebug(vUndo, "TogglePieceState::redo().");
-
-    if (m_newState != m_oldState)
-    {
-        Do(m_newState);
-    }
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-TogglePieceInLayout::TogglePieceInLayout(quint32 id, bool state, VContainer *data, VAbstractPattern *doc,
-                                         QUndoCommand *parent)
-    : TogglePieceState(id, state, data, doc, parent)
 {
     setText(tr("detail in layout list"));
     m_oldState = m_data->DataPieces()->value(m_id).IsInLayout();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void TogglePieceInLayout::undo()
+{
+    qCDebug(vUndo, "TogglePieceState::undo().");
+    Do(m_oldState);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void TogglePieceInLayout::redo()
+{
+    qCDebug(vUndo, "TogglePieceState::redo().");
+    Do(m_newState);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -109,25 +96,60 @@ void TogglePieceInLayout::Do(bool state)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-TogglePieceForbidFlipping::TogglePieceForbidFlipping(quint32 id, bool state, VContainer *data, VAbstractPattern *doc,
-                                                     QUndoCommand *parent)
-    : TogglePieceState(id, state, data, doc, parent)
+TogglePieceForceForbidFlipping::TogglePieceForceForbidFlipping(quint32 id, bool state, ForceForbidFlippingType type,
+                                                               VContainer *data, VAbstractPattern *doc,
+                                                               QUndoCommand *parent)
+    : VUndoCommand(QDomElement(), doc, parent),
+      m_id(id),
+      m_data(data),
+      m_type(type),
+      m_oldForceState(false),
+      m_newForceState(false),
+      m_oldForbidState(false),
+      m_newForbidState(false)
 {
-    setText(tr("forbid flipping"));
-    m_oldState = m_data->DataPieces()->value(m_id).IsForbidFlipping();
+    setText(tr("piece flipping"));
+
+    VPiece det = m_data->DataPieces()->value(m_id);
+
+    m_oldForceState = det.IsForceFlipping();
+    m_oldForbidState = det.IsForbidFlipping();
+
+    if (m_type == ForceForbidFlippingType::ForceFlipping)
+    {
+        m_newForceState = state;
+        det.SetForbidFlipping(state);
+        m_newForbidState = det.IsForbidFlipping();
+    }
+    else
+    {
+        m_newForbidState = state;
+        det.SetForceFlipping(state);
+        m_newForceState = det.IsForceFlipping();
+    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void TogglePieceForbidFlipping::Do(bool state)
+void TogglePieceForceForbidFlipping::undo()
 {
     QDomElement detail = doc->elementById(m_id, VAbstractPattern::TagDetail);
     if (detail.isElement())
     {
-        doc->SetAttribute(detail, AttrForbidFlipping, state);
-
         VPiece det = m_data->DataPieces()->value(m_id);
-        det.SetForbidFlipping(state);
+        if (m_type == ForceForbidFlippingType::ForceFlipping)
+        {
+            det.SetForceFlipping(m_oldForceState);
+            det.SetForbidFlipping(m_oldForbidState);
+        }
+        else
+        {
+            det.SetForbidFlipping(m_oldForbidState);
+            det.SetForceFlipping(m_oldForceState);
+        }
         m_data->UpdatePiece(m_id, det);
+
+        // Probably overkill, but will help to avoid mistakes
+        VToolSeamAllowance::AddAttributes(doc, detail, m_id, det);
     }
     else
     {
@@ -136,25 +158,24 @@ void TogglePieceForbidFlipping::Do(bool state)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-TogglePieceForceFlipping::TogglePieceForceFlipping(quint32 id, bool state, VContainer *data, VAbstractPattern *doc,
-                                                   QUndoCommand *parent)
-    : TogglePieceState(id, state, data, doc, parent)
-{
-    setText(tr("force flipping"));
-    m_oldState = m_data->DataPieces()->value(m_id).IsForceFlipping();
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void TogglePieceForceFlipping::Do(bool state)
+void TogglePieceForceForbidFlipping::redo()
 {
     QDomElement detail = doc->elementById(m_id, VAbstractPattern::TagDetail);
     if (detail.isElement())
     {
-        doc->SetAttribute(detail, AttrForceFlipping, state);
-
         VPiece det = m_data->DataPieces()->value(m_id);
-        det.SetForceFlipping(state);
+        if (m_type == ForceForbidFlippingType::ForceFlipping)
+        {
+            det.SetForceFlipping(m_newForceState);
+        }
+        else
+        {
+            det.SetForbidFlipping(m_newForbidState);
+        }
         m_data->UpdatePiece(m_id, det);
+
+        // Probably overkill, but will help to avoid mistakes
+        VToolSeamAllowance::AddAttributes(doc, detail, m_id, det);
     }
     else
     {

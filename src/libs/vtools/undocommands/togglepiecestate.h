@@ -37,87 +37,47 @@
 
 #include "vundocommand.h"
 
-class TogglePieceState : public VUndoCommand
-{
-    Q_OBJECT
-public:
-    TogglePieceState(quint32 id, bool state, VContainer *data, VAbstractPattern *doc,
-                     QUndoCommand *parent = nullptr);
-    virtual ~TogglePieceState() = default;
-    virtual void undo() override;
-    virtual void redo() override;
-    quint32 getDetId() const;
-    bool    getNewState() const;
-
-protected:
-    quint32     m_id;
-    VContainer *m_data;
-    bool        m_oldState;
-    bool        m_newState;
-
-    virtual void Do(bool state)=0;
-
-private:
-    Q_DISABLE_COPY(TogglePieceState)
-};
-
-//---------------------------------------------------------------------------------------------------------------------
-inline quint32 TogglePieceState::getDetId() const
-{
-    return m_id;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-inline bool TogglePieceState::getNewState() const
-{
-    return m_newState;
-}
-
-class TogglePieceInLayout : public TogglePieceState
+class TogglePieceInLayout : public VUndoCommand
 {
     Q_OBJECT
 public:
     TogglePieceInLayout(quint32 id, bool state, VContainer *data, VAbstractPattern *doc,
                         QUndoCommand *parent = nullptr);
     virtual ~TogglePieceInLayout() = default;
-
-protected:
-    virtual void Do(bool state) override;
-
+    virtual void undo() override;
+    virtual void redo() override;
 signals:
     void UpdateList();
 private:
     Q_DISABLE_COPY(TogglePieceInLayout)
+    quint32     m_id;
+    VContainer *m_data;
+    bool        m_oldState;
+    bool        m_newState;
+
+    void Do(bool state);
 };
 
-class TogglePieceForbidFlipping : public TogglePieceState
+enum class ForceForbidFlippingType : qint8 {ForceFlipping, ForbidFlipping};
+
+class TogglePieceForceForbidFlipping : public VUndoCommand
 {
     Q_OBJECT
 public:
-    TogglePieceForbidFlipping(quint32 id, bool state, VContainer *data, VAbstractPattern *doc,
-                              QUndoCommand *parent = nullptr);
-    virtual ~TogglePieceForbidFlipping() = default;
-
-protected:
-    virtual void Do(bool state) override;
-
+    TogglePieceForceForbidFlipping(quint32 id, bool state, ForceForbidFlippingType type, VContainer *data,
+                                   VAbstractPattern *doc, QUndoCommand *parent = nullptr);
+    virtual ~TogglePieceForceForbidFlipping() = default;
+    virtual void undo() override;
+    virtual void redo() override;
 private:
-    Q_DISABLE_COPY(TogglePieceForbidFlipping)
-};
-
-class TogglePieceForceFlipping : public TogglePieceState
-{
-    Q_OBJECT
-public:
-    TogglePieceForceFlipping(quint32 id, bool state, VContainer *data, VAbstractPattern *doc,
-                              QUndoCommand *parent = nullptr);
-    virtual ~TogglePieceForceFlipping() = default;
-
-protected:
-    virtual void Do(bool state) override;
-
-private:
-    Q_DISABLE_COPY(TogglePieceForceFlipping)
+    Q_DISABLE_COPY(TogglePieceForceForbidFlipping)
+    quint32     m_id;
+    VContainer *m_data;
+    ForceForbidFlippingType m_type;
+    bool        m_oldForceState;
+    bool        m_newForceState;
+    bool        m_oldForbidState;
+    bool        m_newForbidState;
 };
 
 #endif // TOGGLEDETAILINLAYOUT_H
