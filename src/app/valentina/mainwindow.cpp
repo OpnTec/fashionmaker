@@ -4454,7 +4454,7 @@ QString MainWindow::PatternPieceName(const QString &text)
 MainWindow::~MainWindow()
 {
     CancelTool();
-    CleanLayout();
+    qDeleteAll (scenes);
 
     delete doc;
     delete ui;
