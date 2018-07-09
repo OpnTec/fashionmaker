@@ -35,6 +35,7 @@
 #include <QStringData>
 #include <QStringDataPtr>
 #include <QTranslator>
+#include <QUndoStack>
 #include <Qt>
 #include <QtDebug>
 
@@ -44,7 +45,7 @@
 //---------------------------------------------------------------------------------------------------------------------
 VAbstractApplication::VAbstractApplication(int &argc, char **argv)
     :QApplication(argc, argv),
-      undoStack(nullptr),
+      undoStack(new QUndoStack(this)),
       mainWindow(nullptr),
       settings(nullptr),
       qtTranslator(nullptr),

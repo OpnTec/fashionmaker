@@ -43,8 +43,6 @@
 #include <QDir>
 #include <QProcess>
 #include <QTemporaryFile>
-#include <QUndoStack>
-#include <QTemporaryFile>
 #include <QFile>
 #include <QStandardPaths>
 #include <QMessageBox>
@@ -266,13 +264,9 @@ VApplication::VApplication(int &argc, char **argv)
     // Setting the Application version
     setApplicationVersion(APP_VERSION_STR);
 
-    OpenSettings();
-
     // making sure will create new instance...just in case we will ever do 2 objects of VApplication
     VCommandLine::Reset();
-    LoadTranslation(QLocale().name());// By default the console version uses system locale
     VCommandLine::Get(*this);
-    undoStack = new QUndoStack(this);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -555,6 +549,8 @@ void VApplication::ClearOldLogs() const
 //---------------------------------------------------------------------------------------------------------------------
 void VApplication::InitOptions()
 {
+    OpenSettings();
+
     // Run creation log after sending crash report
     StartLogging();
 
@@ -564,6 +560,8 @@ void VApplication::InitOptions()
     qDebug()<<"Built on"<<__DATE__<<"at"<<__TIME__;
     qDebug()<<"Command-line arguments:"<<arguments();
     qDebug()<<"Process ID:"<<applicationPid();
+
+    LoadTranslation(QLocale().name());// By default the console version uses system locale
 
     if (VApplication::IsGUIMode())// By default console version uses system locale
     {
