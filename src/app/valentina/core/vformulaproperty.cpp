@@ -47,7 +47,8 @@ VFormulaProperty::VFormulaProperty(const QString &name)
     tmpFormula->setUpdateBehaviour(true, false);
     tmpFormula->setOsSeparator(qApp->Settings()->GetOsSeparator());
 
-    setValue(0);
+    // Cannot use virtual function setValue in constructor
+    SetFormula(QVariant(0).value<VFormula>());
 }
 
 //---------------------------------------------------------------------------------------------------------------------
