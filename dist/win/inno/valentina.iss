@@ -213,6 +213,7 @@ Source: ".\valentina\translations\*_lt.qm"; DestDir: "{app}\translations"; Flags
 ; Other files
 Source: ".\valentina\bearer\*"; DestDir: "{app}\bearer"; Flags: recursesubdirs createallsubdirs
 Source: ".\valentina\iconengines\*"; DestDir: "{app}\iconengines"; Flags: recursesubdirs createallsubdirs
+Source: ".\valentina\imageformats\*"; DestDir: "{app}\imageformats"; Flags: recursesubdirs createallsubdirs
 Source: ".\valentina\platforms\*"; DestDir: "{app}\platforms"; Flags: recursesubdirs createallsubdirs
 Source: ".\valentina\printsupport\*"; DestDir: "{app}\printsupport"; Flags: recursesubdirs createallsubdirs
 Source: ".\valentina\tables\*"; DestDir: "{app}\tables"; Flags: ignoreversion recursesubdirs createallsubdirs
