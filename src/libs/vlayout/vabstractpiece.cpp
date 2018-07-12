@@ -874,12 +874,12 @@ bool VAbstractPiece::CheckIntersection(const QVector<QPointF> &points, int i, in
 {
     QVector<QPointF> sub1 = SubPath(points, iNext, j);
     sub1.append(crossPoint);
-    sub1 = CheckLoops(CorrectEquidistantPoints(sub1, false));
+    sub1 = CorrectEquidistantPoints(sub1, false);
     const qreal sub1Sum = SumTrapezoids(sub1);
 
     QVector<QPointF> sub2 = SubPath(points, jNext, i);
     sub2.append(crossPoint);
-    sub2 = CheckLoops(CorrectEquidistantPoints(sub2, false));
+    sub2 = CorrectEquidistantPoints(sub2, false);
     const qreal sub2Sum = SumTrapezoids(sub2);
 
     if (sub1Sum < 0 && sub2Sum < 0)
