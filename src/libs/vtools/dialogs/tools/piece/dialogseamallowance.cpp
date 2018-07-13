@@ -507,7 +507,8 @@ void DialogSeamAllowance::CheckState()
         if (not applyAllowed)
         {
             tooltip = tooltip + QStringLiteral("  <b>") +
-                    tr("To open all detail's features complete creating the main path.") + QStringLiteral("</b>");
+                    tr("To open all detail's features complete creating the main path. Please, press OK.")
+                    + QStringLiteral("</b>");
         }
         uiTabPaths->helpLabel->setText(tooltip);
         uiTabPaths->tabWidget->setTabIcon(uiTabPaths->tabWidget->indexOf(uiTabPaths->tabMainPath), QIcon());
