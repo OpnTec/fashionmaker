@@ -40,6 +40,7 @@
 #include "../../../../visualization/visualization.h"
 #include "../../../../visualization/line/vistoolpointfromarcandtangent.h"
 #include "../ifc/exception/vexception.h"
+#include "../ifc/exception/vexceptionobjecterror.h"
 #include "../ifc/ifcdef.h"
 #include "../vgeometry/varc.h"
 #include "../vgeometry/vgobject.h"
@@ -118,8 +119,9 @@ VToolPointFromArcAndTangent *VToolPointFromArcAndTangent::Create(VToolPointFromA
 
     if (not success)
     {
-        qWarning() << tr("Error calculating point '%1'. Tangent to arc '%2' from point '%3' cannot be found")
-                      .arg(initData.name, arc.name(), tPoint.name());
+        const QString errorMsg = tr("Error calculating point '%1'. Tangent to arc '%2' from point '%3' cannot be found")
+                .arg(initData.name, arc.name(), tPoint.name());
+        qApp->IsPedantic() ? throw VExceptionObjectError(errorMsg) : qWarning() << errorMsg;
     }
 
     VPointF *p = new VPointF(point, initData.name, initData.mx, initData.my);

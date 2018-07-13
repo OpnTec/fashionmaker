@@ -87,6 +87,8 @@ extern const QString SINGLE_OPTION_GROUPPING;
 extern const QString LONG_OPTION_TEST;
 extern const QString SINGLE_OPTION_TEST;
 
+extern const QString LONG_OPTION_PENDANTIC;
+
 extern const QString LONG_OPTION_GRADATIONSIZE;
 extern const QString SINGLE_OPTION_GRADATIONSIZE;
 

@@ -38,6 +38,7 @@
 #include "../../../../dialogs/tools/dialogpointofintersectionarcs.h"
 #include "../../../../visualization/line/vistoolpointofintersectionarcs.h"
 #include "../ifc/exception/vexception.h"
+#include "../ifc/exception/vexceptionobjecterror.h"
 #include "../ifc/ifcdef.h"
 #include "../vgeometry/varc.h"
 #include "../vgeometry/vgobject.h"
@@ -117,8 +118,9 @@ VToolPointOfIntersectionArcs *VToolPointOfIntersectionArcs::Create(VToolPointOfI
 
     if (not success)
     {
-        qWarning() << tr("Error calculating point '%1'. Arcs '%2' and '%3' have no point of intersection")
+        const QString errorMsg = tr("Error calculating point '%1'. Arcs '%2' and '%3' have no point of intersection")
                       .arg(initData.name, firstArc->name(), secondArc->name());
+        qApp->IsPedantic() ? throw VExceptionObjectError(errorMsg) : qWarning() << errorMsg;
     }
 
     VPointF *p = new VPointF(point, initData.name, initData.mx, initData.my);

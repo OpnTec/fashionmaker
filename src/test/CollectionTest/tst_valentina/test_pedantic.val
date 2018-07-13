@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<pattern>
+    <!--Pattern created with Valentina v0.6.0.0a (https://valentinaproject.bitbucket.io/).-->
+    <version>0.7.8</version>
+    <unit>cm</unit>
+    <description/>
+    <notes/>
+    <measurements/>
+    <increments/>
+    <previewCalculations/>
+    <draw name="Выкройка 1">
+        <calculation>
+            <point id="1" mx="0.132292" my="0.264583" name="А" showLabel="true" type="single" x="0.79375" y="1.05833"/>
+            <point angle="0.0634838" basePoint="1" id="2" length="7.97917" lineColor="black" mx="0.132292" my="0.264583" name="А1" showLabel="true" type="endLine" typeLine="hair"/>
+            <arc aScale="0" angle1="270" angle2="90" center="1" color="black" id="3" penStyle="hair" radius="3" type="simple"/>
+            <arc aScale="0" angle1="0" angle2="250" center="2" color="black" id="4" penStyle="hair" radius="3" type="simple"/>
+            <point crossPoint="1" firstArc="3" id="5" mx="-3.69639" my="-1.1581" name="А2" secondArc="4" showLabel="true" type="pointOfIntersectionArcs"/>
+        </calculation>
+        <modeling/>
+        <details/>
+        <groups/>
+    </draw>
+</pattern>

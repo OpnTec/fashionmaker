@@ -41,6 +41,7 @@
 #include "../../../../visualization/visualization.h"
 #include "../../../../visualization/line/vistooltriangle.h"
 #include "../ifc/exception/vexception.h"
+#include "../ifc/exception/vexceptionobjecterror.h"
 #include "../ifc/ifcdef.h"
 #include "../vgeometry/vgobject.h"
 #include "../vgeometry/vpointf.h"
@@ -143,8 +144,9 @@ VToolTriangle* VToolTriangle::Create(VToolTriangleInitData initData)
 
     if (not success)
     {
-        qWarning() << tr("Error calculating point '%1'. Point of intersection cannot be finded")
+        const QString errorMsg = tr("Error calculating point '%1'. Point of intersection cannot be finded")
                       .arg(initData.name);
+        qApp->IsPedantic() ? throw VExceptionObjectError(errorMsg) : qWarning() << errorMsg;
     }
 
     VPointF *p = new VPointF(point, initData.name, initData.mx, initData.my);

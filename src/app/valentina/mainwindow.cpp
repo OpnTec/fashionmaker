@@ -3093,7 +3093,7 @@ void MainWindow::FullParseFile()
         SetEnabledGUI(false);
         if (not VApplication::IsGUIMode())
         {
-            qApp->exit(V_EX_NOINPUT);
+            qApp->exit(V_EX_DATAERR);
         }
         return;
     }
@@ -3104,7 +3104,7 @@ void MainWindow::FullParseFile()
         SetEnabledGUI(false);
         if (not VApplication::IsGUIMode())
         {
-            qApp->exit(V_EX_NOINPUT);
+            qApp->exit(V_EX_DATAERR);
         }
         return;
     }
@@ -3115,7 +3115,7 @@ void MainWindow::FullParseFile()
         SetEnabledGUI(false);
         if (not VApplication::IsGUIMode())
         {
-            qApp->exit(V_EX_NOINPUT);
+            qApp->exit(V_EX_DATAERR);
         }
         return;
     }
@@ -3126,7 +3126,7 @@ void MainWindow::FullParseFile()
         SetEnabledGUI(false);
         if (not VApplication::IsGUIMode())
         {
-            qApp->exit(V_EX_NOINPUT);
+            qApp->exit(V_EX_DATAERR);
         }
         return;
     }
@@ -3137,7 +3137,7 @@ void MainWindow::FullParseFile()
         SetEnabledGUI(false);
         if (not VApplication::IsGUIMode())
         {
-            qApp->exit(V_EX_NOINPUT);
+            qApp->exit(V_EX_DATAERR);
         }
         return;
     }
@@ -3147,7 +3147,7 @@ void MainWindow::FullParseFile()
         SetEnabledGUI(false);
         if (not VApplication::IsGUIMode())
         {
-            qApp->exit(V_EX_NOINPUT);
+            qApp->exit(V_EX_DATAERR);
         }
         return;
     }

@@ -107,6 +107,7 @@ public:
     QUndoStack      *getUndoStack() const;
 
     virtual bool     IsAppInGUIMode()const =0;
+    virtual bool     IsPedantic() const;
 
     QString         GetPatternPath() const;
     void            SetPatternPath(const QString &value);

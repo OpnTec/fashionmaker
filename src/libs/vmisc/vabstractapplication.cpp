@@ -236,6 +236,12 @@ QUndoStack *VAbstractApplication::getUndoStack() const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+bool VAbstractApplication::IsPedantic() const
+{
+    return false;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 /**
  * @brief ClearMessage helps to clear a message string from standard Qt function.
  * @param msg the message that contains '"' at the start and at the end

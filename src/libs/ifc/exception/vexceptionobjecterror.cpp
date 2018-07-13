@@ -50,6 +50,11 @@ VExceptionObjectError::VExceptionObjectError(const QString &what, const QDomElem
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+VExceptionObjectError::VExceptionObjectError(const QString &what)
+    :VException(what), tagText(QString()), tagName(QString()), lineNumber(-1)
+{}
+
+//---------------------------------------------------------------------------------------------------------------------
 /**
  * @brief VExceptionObjectError copy constructor
  * @param e exception

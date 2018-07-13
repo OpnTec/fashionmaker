@@ -140,7 +140,8 @@ int AbstractTest::Run(int exit, const QString &program, const QStringList &argum
 
     if (process->exitCode() != exit)
     {
-        error = QStringLiteral("Unexpected finish.\n%1").arg(QString(process->readAllStandardError()));
+        error = QStringLiteral("Unexpected finish. Exit code: %1\n%2").arg(process->exitCode())
+                .arg(QString(process->readAllStandardError()));
         return process->exitCode();
     }
 

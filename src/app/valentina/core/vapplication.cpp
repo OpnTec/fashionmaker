@@ -697,6 +697,12 @@ bool VApplication::IsAppInGUIMode() const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+bool VApplication::IsPedantic() const
+{
+    return (VCommandLine::instance != nullptr) && VCommandLine::instance->IsPedantic();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 const VCommandLinePtr VApplication::CommandLine() const
 {
     return VCommandLine::instance;

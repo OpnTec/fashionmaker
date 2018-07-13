@@ -90,6 +90,8 @@ const QString SINGLE_OPTION_GROUPPING       = QStringLiteral("g");
 const QString LONG_OPTION_TEST              = QStringLiteral("test");
 const QString SINGLE_OPTION_TEST            = QStringLiteral("t");
 
+const QString LONG_OPTION_PENDANTIC         = QStringLiteral("pedantic");
+
 const QString LONG_OPTION_GRADATIONSIZE     = QStringLiteral("gsize");
 const QString SINGLE_OPTION_GRADATIONSIZE   = QStringLiteral("x");
 

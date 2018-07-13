@@ -56,6 +56,10 @@ public:
     //case test mode enabled
     bool IsTestModeEnabled() const;
 
+    //@brief Make all parsing warnings into errors. Have effect only in console mode. Use to force Valentina to
+    //immediately terminate if a pattern contains a parsing warning.
+    bool IsPedantic() const;
+
     bool IsNoScalingEnabled() const;
 
     //@brief tests if user enabled export from cmd, throws exception if not exactly 1 input VAL file supplied in case

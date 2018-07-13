@@ -84,20 +84,29 @@ void TST_ValentinaCommandLine::initTestCase()
 void TST_ValentinaCommandLine::OpenPatterns_data() const
 {
     QTest::addColumn<QString>("file");
+    QTest::addColumn<QString>("arguments");
     QTest::addColumn<int>("exitCode");
 
     // The file doesn't exist!
     QTest::newRow("Send wrong path to a file")                                     << "wrongPath.val"
+                                                                                   << "--test"
                                                                                    << V_EX_NOINPUT;
 
     QTest::newRow("Measurement independent empty file")                            << "empty.val"
+                                                                                   << "--test"
                                                                                    << V_EX_OK;
 
     QTest::newRow("File with invalid object type")                                 << "wrong_obj_type.val"
+                                                                                   << "--test"
                                                                                    << V_EX_NOINPUT;
 
     QTest::newRow("Empty text VAL file")                                           << "txt.val"
+                                                                                   << "--test"
                                                                                    << V_EX_NOINPUT;
+
+    QTest::newRow("Pattern with a warning")                                        << "test_pedantic.val"
+                                                                                   << "--test;;--pedantic"
+                                                                                   << V_EX_DATAERR;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -105,11 +114,12 @@ void TST_ValentinaCommandLine::OpenPatterns_data() const
 void TST_ValentinaCommandLine::OpenPatterns()
 {
     QFETCH(QString, file);
+    QFETCH(QString, arguments);
     QFETCH(int, exitCode);
 
     QString error;
     const QString tmp = QCoreApplication::applicationDirPath() + QDir::separator() + *tmpTestFolder;
-    const int exit = Run(exitCode, ValentinaPath(), QStringList() << "--test"
+    const int exit = Run(exitCode, ValentinaPath(), QStringList() << arguments.split(";;")
                          << tmp + QDir::separator() + file, error);
 
     QVERIFY2(exit == exitCode, qUtf8Printable(error));

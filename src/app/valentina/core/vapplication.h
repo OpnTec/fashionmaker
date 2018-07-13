@@ -72,6 +72,7 @@ public:
 
     bool static IsGUIMode();
     virtual bool IsAppInGUIMode() const override;
+    virtual bool IsPedantic() const override;
 
     virtual void OpenSettings() override;
     VSettings *ValentinaSettings();

@@ -42,6 +42,7 @@
 #include "../../../../visualization/visualization.h"
 #include "../../../../visualization/line/vistoolpointofcontact.h"
 #include "../ifc/exception/vexception.h"
+#include "../ifc/exception/vexceptionobjecterror.h"
 #include "../ifc/xml/vdomdocument.h"
 #include "../ifc/ifcdef.h"
 #include "../vgeometry/vgobject.h"
@@ -212,9 +213,10 @@ VToolPointOfContact* VToolPointOfContact::Create(VToolPointOfContactInitData &in
 
     if (not success)
     {
-        qWarning() << tr("Error calculating point '%1'. Circle with center '%2' and radius '%3' doesn't have "
-                         "intersection with line (%4;%5)")
-                      .arg(initData.name, centerP->name()).arg(result).arg(firstP->name(), secondP->name());
+        const QString errorMsg = tr("Error calculating point '%1'. Circle with center '%2' and radius '%3' doesn't have "
+                                    "intersection with line (%4;%5)")
+                .arg(initData.name, centerP->name()).arg(result).arg(firstP->name(), secondP->name());
+        qApp->IsPedantic() ? throw VExceptionObjectError(errorMsg) : qWarning() << errorMsg;
     }
 
     VPointF *p = new VPointF(fPoint, initData.name, initData.mx, initData.my);

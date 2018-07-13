@@ -39,6 +39,7 @@
 #include "../../../../visualization/visualization.h"
 #include "../../../../visualization/line/vistoolpointfromcircleandtangent.h"
 #include "../ifc/exception/vexception.h"
+#include "../ifc/exception/vexceptionobjecterror.h"
 #include "../ifc/xml/vdomdocument.h"
 #include "../ifc/ifcdef.h"
 #include "../vgeometry/vgobject.h"
@@ -123,9 +124,11 @@ VToolPointFromCircleAndTangent *VToolPointFromCircleAndTangent::Create(VToolPoin
                                                                    initData.crossPoint, &point);
     if (not success)
     {
-        qWarning() << tr("Error calculating point '%1'. Tangent to circle with center '%2' and radius '%3' from "
-                         "point '%4' cannot be found")
-                      .arg(initData.name, cPoint.name()).arg(radius).arg(tPoint.name());
+        const QString errorMsg = tr("Error calculating point '%1'. Tangent to circle with center '%2' and radius '%3' "
+                                    "from point '%4' cannot be found")
+                .arg(initData.name, cPoint.name()).arg(radius).arg(tPoint.name());
+
+        qApp->IsPedantic() ? throw VExceptionObjectError(errorMsg) : qWarning() << errorMsg;
     }
 
     VPointF *p = new VPointF(point, initData.name, initData.mx, initData.my);

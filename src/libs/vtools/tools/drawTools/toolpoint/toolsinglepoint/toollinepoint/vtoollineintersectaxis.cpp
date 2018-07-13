@@ -40,6 +40,7 @@
 #include "../../../../../visualization/visualization.h"
 #include "../../../../../visualization/line/vistoollineintersectaxis.h"
 #include "../ifc/exception/vexception.h"
+#include "../ifc/exception/vexceptionobjecterror.h"
 #include "../ifc/ifcdef.h"
 #include "../vgeometry/vpointf.h"
 #include "../vmisc/vabstractapplication.h"
@@ -129,9 +130,10 @@ VToolLineIntersectAxis *VToolLineIntersectAxis::Create(VToolLineIntersectAxisIni
 
     if (not success)
     {
-        qWarning() << tr("Error calculating point '%1'. Line (%2;%3) doesn't have intersection with axis through "
-                         "point '%4' and angle %5°")
+        const QString errorMsg = tr("Error calculating point '%1'. Line (%2;%3) doesn't have intersection with axis "
+                                    "through point '%4' and angle %5°")
                       .arg(initData.name, firstPoint->name(), secondPoint->name(), basePoint->name()).arg(axis.angle());
+        qApp->IsPedantic() ? throw VExceptionObjectError(errorMsg) : qWarning() << errorMsg;
     }
 
     VPointF *p = new VPointF(fPoint, initData.name, initData.mx, initData.my);

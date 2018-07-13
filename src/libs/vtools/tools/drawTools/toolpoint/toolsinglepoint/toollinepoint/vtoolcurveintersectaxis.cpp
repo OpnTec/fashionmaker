@@ -43,6 +43,7 @@
 #include "../../../../../dialogs/tools/dialogcurveintersectaxis.h"
 #include "../ifc/ifcdef.h"
 #include "../ifc/exception/vexception.h"
+#include "../ifc/exception/vexceptionobjecterror.h"
 #include "../qmuparser/qmudef.h"
 #include "../toolcut/vtoolcutsplinepath.h"
 #include "../vgeometry/vabstractcubicbezier.h"
@@ -138,9 +139,10 @@ VToolCurveIntersectAxis *VToolCurveIntersectAxis::Create(VToolCurveIntersectAxis
 
     if (not success)
     {
-        qWarning() << tr("Error calculating point '%1'. There is no intersection with curve '%2' and axis through "
-                         "point '%3' with angle %4°")
-                      .arg(initData.name, curve->name(), basePoint->name()).arg(angle);
+        const QString errorMsg = tr("Error calculating point '%1'. There is no intersection with curve '%2' and axis"
+                                    " through point '%3' with angle %4°")
+                .arg(initData.name, curve->name(), basePoint->name()).arg(angle);
+        qApp->IsPedantic() ? throw VExceptionObjectError(errorMsg) : qWarning() << errorMsg;
     }
 
     const qreal segLength = curve->GetLengthByPoint(fPoint);

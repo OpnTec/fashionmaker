@@ -39,6 +39,7 @@
 #include "../../../../visualization/visualization.h"
 #include "../../../../visualization/line/vistoolpointofintersectioncircles.h"
 #include "../ifc/exception/vexception.h"
+#include "../ifc/exception/vexceptionobjecterror.h"
 #include "../ifc/xml/vdomdocument.h"
 #include "../ifc/ifcdef.h"
 #include "../vgeometry/vgobject.h"
@@ -130,8 +131,9 @@ VToolPointOfIntersectionCircles::Create(VToolPointOfIntersectionCirclesInitData 
 
     if (not success)
     {
-        qWarning() << tr("Error calculating point '%1'. Circles with centers in points '%2' and '%3' have no point "
-                         "of intersection").arg(initData.name, c1Point.name(), c2Point.name());
+        const QString errorMsg = tr("Error calculating point '%1'. Circles with centers in points '%2' and '%3' have "
+                                    "no point of intersection").arg(initData.name, c1Point.name(), c2Point.name());
+        qApp->IsPedantic() ? throw VExceptionObjectError(errorMsg) : qWarning() << errorMsg;
     }
 
     VPointF *p = new VPointF(point, initData.name, initData.mx, initData.my);

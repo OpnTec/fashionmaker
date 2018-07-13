@@ -268,6 +268,13 @@ void VCommandLine::InitOptions(VCommandLineOptions &options, QMap<QString, int> 
                                                     "showing the main window. The key have priority before key '%1'.")
                                                     .arg(LONG_OPTION_BASENAME)));
 
+    optionsIndex.insert(LONG_OPTION_PENDANTIC, index++);
+    options.append(new QCommandLineOption(QStringList() << LONG_OPTION_PENDANTIC,
+                                          translate("VCommandLine",
+                                                    "Make all parsing warnings into errors. Have effect only in "
+                                                    "console mode. Use to force Valentina to immediately terminate if "
+                                                    "a pattern contains a parsing warning.")));
+
     optionsIndex.insert(LONG_OPTION_NO_HDPI_SCALING, index++);
     options.append(new QCommandLineOption(QStringList() << LONG_OPTION_NO_HDPI_SCALING,
                                           translate("VCommandLine", "Disable high dpi scaling. Call this option if has "
@@ -597,6 +604,19 @@ bool VCommandLine::IsTestModeEnabled() const
         const_cast<VCommandLine*>(this)->parser.showHelp(V_EX_USAGE);
     }
     return r;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+bool VCommandLine::IsPedantic() const
+{
+    if (IsGuiEnabled())
+    {
+        return false; // Doesn't work in GUI mode
+    }
+    else
+    {
+        return parser.isSet(*optionsUsed.value(optionsIndex.value(LONG_OPTION_PENDANTIC)));
+    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------

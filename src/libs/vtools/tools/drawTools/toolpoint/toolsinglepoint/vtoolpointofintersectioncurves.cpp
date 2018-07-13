@@ -40,6 +40,7 @@
 #include "../../../../visualization/path/../visualization.h"
 #include "../../../../visualization/path/vistoolpointofintersectioncurves.h"
 #include "../ifc/exception/vexception.h"
+#include "../ifc/exception/vexceptionobjecterror.h"
 #include "../ifc/ifcdef.h"
 #include "../vgeometry/vabstractcurve.h"
 #include "../vgeometry/vgobject.h"
@@ -121,8 +122,9 @@ VToolPointOfIntersectionCurves *VToolPointOfIntersectionCurves::Create(VToolPoin
 
     if (not success)
     {
-        qWarning() << tr("Error calculating point '%1'. Curves '%2' and '%3' have no point of intersection")
-                      .arg(initData.name, curve1->name(), curve2->name());
+        const QString errorMsg = tr("Error calculating point '%1'. Curves '%2' and '%3' have no point of intersection")
+                .arg(initData.name, curve1->name(), curve2->name());
+        qApp->IsPedantic() ? throw VExceptionObjectError(errorMsg) : qWarning() << errorMsg;
     }
 
     VPointF *p = new VPointF(point, initData.name, initData.mx, initData.my);
