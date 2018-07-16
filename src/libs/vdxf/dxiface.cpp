@@ -280,7 +280,7 @@ void dx_iface::AddAAMALayers()
 
 void dx_iface::AddAAMAHeaderData()
 {
-    cData.headerC.addStr("$CLAYER", "1", 8);
+    cData.headerC.addStr("$CLAYER", "1", 8); // Current layer name
 }
 
 void dx_iface::AddDefLayers()
@@ -313,7 +313,7 @@ void dx_iface::InitVPorts()
 void dx_iface::InitAppId()
 {
     DRW_AppId ai;
-    ai.name ="Valentina";
+    ai.name = "Valentina";
     cData.appIds.push_back(ai);
 }
 
