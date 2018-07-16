@@ -466,7 +466,7 @@ public:
           viewDir(),
           viewTarget(),
           height(),
-          ratio(),
+          width(),
           lensHeight(),
           frontClip(),
           backClip(),
@@ -492,7 +492,7 @@ public:
         center.y = -0.16;
         viewDir.z = 1;
         height = 5.13732;
-        ratio = 2.4426877;
+        width = 2.4426877;
         lensHeight = 50;
         frontClip = backClip = snapAngle = twistAngle = 0.0;
         viewMode = snap = grid = snapStyle = snapIsopair = 0;
@@ -516,7 +516,7 @@ public:
     DRW_Coord viewDir;       /*!< view direction from target point, code 16, 26 & 36 */
     DRW_Coord viewTarget;    /*!< view target point, code 17, 27 & 37 */
     double height;           /*!< view height, code 40 */
-    double ratio;            /*!< viewport aspect ratio, code 41 */
+    double width;            /*!< view width, code 41 */
     double lensHeight;       /*!< lens height, code 42 */
     double frontClip;        /*!< front clipping plane, code 43 */
     double backClip;         /*!< back clipping plane, code 44 */

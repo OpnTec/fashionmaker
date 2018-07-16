@@ -358,7 +358,7 @@ bool dxfRW::writeVport(DRW_Vport *ent){
     writer->writeDouble(27, ent->viewTarget.z);
     writer->writeDouble(37, ent->viewTarget.z);
     writer->writeDouble(40, ent->height);
-    writer->writeDouble(41, ent->ratio);
+    writer->writeDouble(41, ent->width);
     writer->writeDouble(42, ent->lensHeight);
     writer->writeDouble(43, ent->frontClip);
     writer->writeDouble(44, ent->backClip);

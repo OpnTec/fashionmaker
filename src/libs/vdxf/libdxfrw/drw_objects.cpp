@@ -488,7 +488,7 @@ void DRW_Vport::parseCode(int code, dxfReader *reader){
         height = reader->getDouble();
         break;
     case 41:
-        ratio = reader->getDouble();
+        width = reader->getDouble();
         break;
     case 42:
         lensHeight = reader->getDouble();
