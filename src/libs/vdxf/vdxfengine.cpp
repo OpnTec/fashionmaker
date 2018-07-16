@@ -41,6 +41,7 @@
 #include <QPainterPath>
 #include <QPen>
 #include <QPolygonF>
+#include <QTextCodec>
 #include <QTextItem>
 #include <Qt>
 #include <QtDebug>
@@ -109,7 +110,8 @@ bool VDxfEngine::begin(QPaintDevice *pdev)
         return false;
     }
 
-    input = QSharedPointer<dx_iface>(new dx_iface(fileName.toStdString(), m_version, varMeasurement, varInsunits));
+    input = QSharedPointer<dx_iface>(new dx_iface(getFileNameForLocale(), m_version, varMeasurement,
+                                                  varInsunits));
     input->AddQtLTypes();
     input->AddDefLayers();
     return true;
@@ -611,7 +613,8 @@ bool VDxfEngine::ExportToAAMA(const QVector<VLayoutPiece> &details)
         return false;
     }
 
-    input = QSharedPointer<dx_iface>(new dx_iface(fileName.toStdString(), m_version, varMeasurement, varInsunits));
+    input = QSharedPointer<dx_iface>(new dx_iface(getFileNameForLocale(), m_version, varMeasurement,
+                                                  varInsunits));
     input->AddAAMAHeaderData();
     if (m_version > DRW::AC1009)
     {
@@ -847,6 +850,28 @@ DRW_Entity *VDxfEngine::AAMAText(const QPointF &pos, const QString &text, const 
     textLine->text = text.toStdString();
 
     return textLine;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+std::string VDxfEngine::FromUnicodeToCodec(const QString &str, QTextCodec *codec)
+{
+    const QByteArray encodedString = codec->fromUnicode(str);
+
+#if QT_VERSION >= QT_VERSION_CHECK(5, 4, 0)
+    return encodedString.toStdString();
+#else
+    return std::string(encodedString.constData(), static_cast<std::string::size_type>(encodedString.length()));
+#endif
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+std::string VDxfEngine::getFileNameForLocale() const
+{
+#if defined(Q_OS_WIN)
+    return VDxfEngine::FromUnicodeToCodec(fileName, QTextCodec::codecForLocale());
+#else
+    return fileName.toStdString();
+#endif
 }
 
 //---------------------------------------------------------------------------------------------------------------------

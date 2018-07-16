@@ -124,6 +124,9 @@ private:
 
     template<class P, class V>
     Q_REQUIRED_RESULT P *CreateAAMAPolygon(const QVector<QPointF> &polygon, const QString &layer, bool forceClosed);
+
+    static std::string FromUnicodeToCodec(const QString &str, QTextCodec *codec);
+    std::string getFileNameForLocale() const;
 };
 
 #endif // VDXFENGINE_H
