@@ -133,6 +133,7 @@ private:
 
     void InitHeader(VarMeasurement varMeasurement, VarInsunits varInsunits);
     void InitTextstyles();
+    void InitVPorts();
     void InitAppId();
 
     static std::string LocaleToISO();

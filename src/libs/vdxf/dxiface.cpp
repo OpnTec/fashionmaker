@@ -26,6 +26,7 @@ dx_iface::dx_iface(const std::string &file, DRW::Version v, VarMeasurement varMe
 {
     InitHeader(varMeasurement, varInsunits);
     InitTextstyles();
+    InitVPorts();
     InitAppId();
 }
 
@@ -299,6 +300,14 @@ void dx_iface::InitTextstyles()
     style.font = "txt";
 
     cData.textStyles.push_back(style);
+}
+
+void dx_iface::InitVPorts()
+{
+    DRW_Vport vport;
+    vport.name = "*ACTIVE";
+    vport.height = 297.0;
+    cData.VPorts.push_back(vport);
 }
 
 void dx_iface::InitAppId()
