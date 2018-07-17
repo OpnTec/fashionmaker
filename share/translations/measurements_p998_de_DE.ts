@@ -1,12 +1,10 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!DOCTYPE TS>
-<TS version="2.1" language="de_DE">
+<?xml version="1.0" ?><!DOCTYPE TS><TS language="de_DE" version="2.1">
 <context>
     <name>VTranslateMeasurements</name>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="207"/>
         <source>height</source>
-        <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
+        <comment>Name in a formula. Don't use math symbols and space in name!!!!</comment>
         <translation>höhe</translation>
     </message>
     <message>
@@ -24,7 +22,7 @@
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="214"/>
         <source>height_neck_back</source>
-        <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
+        <comment>Name in a formula. Don't use math symbols and space in name!!!!</comment>
         <translation>höhe_halswirbel</translation>
     </message>
     <message>
@@ -42,7 +40,7 @@
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="221"/>
         <source>height_scapula</source>
-        <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
+        <comment>Name in a formula. Don't use math symbols and space in name!!!!</comment>
         <translation>höhe_schulterblatt</translation>
     </message>
     <message>
@@ -60,7 +58,7 @@
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="228"/>
         <source>height_armpit</source>
-        <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
+        <comment>Name in a formula. Don't use math symbols and space in name!!!!</comment>
         <translation>höhe_achsel</translation>
     </message>
     <message>
@@ -78,7 +76,7 @@
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="235"/>
         <source>height_waist_side</source>
-        <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
+        <comment>Name in a formula. Don't use math symbols and space in name!!!!</comment>
         <translation>höhe_seitliche_taillie</translation>
     </message>
     <message>
@@ -96,7 +94,7 @@
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="242"/>
         <source>height_hip</source>
-        <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
+        <comment>Name in a formula. Don't use math symbols and space in name!!!!</comment>
         <translation>höhe_hüfte</translation>
     </message>
     <message>
@@ -114,7 +112,7 @@
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="249"/>
         <source>height_gluteal_fold</source>
-        <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
+        <comment>Name in a formula. Don't use math symbols and space in name!!!!</comment>
         <translation>höhe_gesäß</translation>
     </message>
     <message>
@@ -132,7 +130,7 @@
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="256"/>
         <source>height_knee</source>
-        <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
+        <comment>Name in a formula. Don't use math symbols and space in name!!!!</comment>
         <translation>höhe_knie</translation>
     </message>
     <message>
@@ -150,7 +148,7 @@
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="263"/>
         <source>height_calf</source>
-        <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
+        <comment>Name in a formula. Don't use math symbols and space in name!!!!</comment>
         <translation>höhe_wade</translation>
     </message>
     <message>
@@ -168,7 +166,7 @@
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="270"/>
         <source>height_ankle_high</source>
-        <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
+        <comment>Name in a formula. Don't use math symbols and space in name!!!!</comment>
         <translation>höhe_knöchel</translation>
     </message>
     <message>
@@ -186,7 +184,7 @@
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="277"/>
         <source>height_ankle</source>
-        <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
+        <comment>Name in a formula. Don't use math symbols and space in name!!!!</comment>
         <translation>höhe_spunggelenk</translation>
     </message>
     <message>
@@ -204,7 +202,7 @@
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="284"/>
         <source>height_highhip</source>
-        <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
+        <comment>Name in a formula. Don't use math symbols and space in name!!!!</comment>
         <translation>höhe_hohehüfte</translation>
     </message>
     <message>
@@ -227,7 +225,7 @@ Vertikalen Abstand von der hohen Hüfte Ebene, stärkste Stelle des  vorderen Ba
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="291"/>
         <source>height_waist_front</source>
-        <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
+        <comment>Name in a formula. Don't use math symbols and space in name!!!!</comment>
         <translation>höhe_vordere_taillie</translation>
     </message>
     <message>
@@ -245,7 +243,7 @@ Vertikalen Abstand von der hohen Hüfte Ebene, stärkste Stelle des  vorderen Ba
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="298"/>
         <source>height_bustpoint</source>
-        <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
+        <comment>Name in a formula. Don't use math symbols and space in name!!!!</comment>
         <translation>höhe_brustpunkt</translation>
     </message>
     <message>
@@ -263,7 +261,7 @@ Vertikalen Abstand von der hohen Hüfte Ebene, stärkste Stelle des  vorderen Ba
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="305"/>
         <source>height_shoulder_tip</source>
-        <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
+        <comment>Name in a formula. Don't use math symbols and space in name!!!!</comment>
         <translation>höhe_schulterspitze</translation>
     </message>
     <message>
@@ -281,7 +279,7 @@ Vertikalen Abstand von der hohen Hüfte Ebene, stärkste Stelle des  vorderen Ba
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="312"/>
         <source>height_neck_front</source>
-        <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
+        <comment>Name in a formula. Don't use math symbols and space in name!!!!</comment>
         <translation>höhe_hals_vorne</translation>
     </message>
     <message>
@@ -299,7 +297,7 @@ Vertikalen Abstand von der hohen Hüfte Ebene, stärkste Stelle des  vorderen Ba
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="319"/>
         <source>height_neck_side</source>
-        <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
+        <comment>Name in a formula. Don't use math symbols and space in name!!!!</comment>
         <translation>höhe_halsseite</translation>
     </message>
     <message>
@@ -317,7 +315,7 @@ Vertikalen Abstand von der hohen Hüfte Ebene, stärkste Stelle des  vorderen Ba
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="326"/>
         <source>height_neck_back_to_knee</source>
-        <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
+        <comment>Name in a formula. Don't use math symbols and space in name!!!!</comment>
         <translation>höhe_halswirbel_zu_den_knien</translation>
     </message>
     <message>
@@ -335,7 +333,7 @@ Vertikalen Abstand von der hohen Hüfte Ebene, stärkste Stelle des  vorderen Ba
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="333"/>
         <source>height_waist_side_to_knee</source>
-        <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
+        <comment>Name in a formula. Don't use math symbols and space in name!!!!</comment>
         <translation>höhe_seitliche_taillie_zu_den_knien</translation>
     </message>
     <message>
@@ -353,7 +351,7 @@ Vertikalen Abstand von der hohen Hüfte Ebene, stärkste Stelle des  vorderen Ba
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="341"/>
         <source>height_waist_side_to_hip</source>
-        <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
+        <comment>Name in a formula. Don't use math symbols and space in name!!!!</comment>
         <translation>höhe_seitliche_taillie_zu_der_hüfte</translation>
     </message>
     <message>
@@ -371,7 +369,7 @@ Vertikalen Abstand von der hohen Hüfte Ebene, stärkste Stelle des  vorderen Ba
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="348"/>
         <source>height_knee_to_ankle</source>
-        <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
+        <comment>Name in a formula. Don't use math symbols and space in name!!!!</comment>
         <translation>höhe_knie_zu_der_achsel</translation>
     </message>
     <message>
@@ -389,7 +387,7 @@ Vertikalen Abstand von der hohen Hüfte Ebene, stärkste Stelle des  vorderen Ba
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="355"/>
         <source>height_neck_back_to_waist_side</source>
-        <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
+        <comment>Name in a formula. Don't use math symbols and space in name!!!!</comment>
         <translation>höhe_halswirbel_zu_der_seitlichen_taillie</translation>
     </message>
     <message>
@@ -407,7 +405,7 @@ Vertikalen Abstand von der hohen Hüfte Ebene, stärkste Stelle des  vorderen Ba
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="362"/>
         <source>height_waist_back</source>
-        <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
+        <comment>Name in a formula. Don't use math symbols and space in name!!!!</comment>
         <translation>höhe_taille_hinten</translation>
     </message>
     <message>
@@ -425,7 +423,7 @@ Vertikalen Abstand von der hohen Hüfte Ebene, stärkste Stelle des  vorderen Ba
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="381"/>
         <source>width_shoulder</source>
-        <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
+        <comment>Name in a formula. Don't use math symbols and space in name!!!!</comment>
         <translation>breite_schulter</translation>
     </message>
     <message>
@@ -443,7 +441,7 @@ Vertikalen Abstand von der hohen Hüfte Ebene, stärkste Stelle des  vorderen Ba
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="388"/>
         <source>width_bust</source>
-        <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
+        <comment>Name in a formula. Don't use math symbols and space in name!!!!</comment>
         <translation>breite_brust</translation>
     </message>
     <message>
@@ -461,7 +459,7 @@ Vertikalen Abstand von der hohen Hüfte Ebene, stärkste Stelle des  vorderen Ba
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="395"/>
         <source>width_waist</source>
-        <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
+        <comment>Name in a formula. Don't use math symbols and space in name!!!!</comment>
         <translation>breite_taillie</translation>
     </message>
     <message>
@@ -479,7 +477,7 @@ Vertikalen Abstand von der hohen Hüfte Ebene, stärkste Stelle des  vorderen Ba
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="402"/>
         <source>width_hip</source>
-        <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
+        <comment>Name in a formula. Don't use math symbols and space in name!!!!</comment>
         <translation>breite_hüfte</translation>
     </message>
     <message>
@@ -497,7 +495,7 @@ Vertikalen Abstand von der hohen Hüfte Ebene, stärkste Stelle des  vorderen Ba
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="409"/>
         <source>width_abdomen_to_hip</source>
-        <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
+        <comment>Name in a formula. Don't use math symbols and space in name!!!!</comment>
         <translation>breite_bauch_zu_der_hüfte</translation>
     </message>
     <message>
@@ -515,7 +513,7 @@ Vertikalen Abstand von der hohen Hüfte Ebene, stärkste Stelle des  vorderen Ba
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="428"/>
         <source>indent_neck_back</source>
-        <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
+        <comment>Name in a formula. Don't use math symbols and space in name!!!!</comment>
         <translation>vertiefung_genick</translation>
     </message>
     <message>
@@ -533,7 +531,7 @@ Vertikalen Abstand von der hohen Hüfte Ebene, stärkste Stelle des  vorderen Ba
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="435"/>
         <source>indent_waist_back</source>
-        <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
+        <comment>Name in a formula. Don't use math symbols and space in name!!!!</comment>
         <translation>vertiefung_taille_hinten</translation>
     </message>
     <message>
@@ -551,7 +549,7 @@ Vertikalen Abstand von der hohen Hüfte Ebene, stärkste Stelle des  vorderen Ba
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="442"/>
         <source>indent_ankle_high</source>
-        <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
+        <comment>Name in a formula. Don't use math symbols and space in name!!!!</comment>
         <translation>Vertiefung_knöchel</translation>
     </message>
     <message>
@@ -574,7 +572,7 @@ Vertikalen Abstand von der hohen Hüfte Ebene, stärkste Stelle des  vorderen Ba
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="461"/>
         <source>hand_palm_length</source>
-        <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
+        <comment>Name in a formula. Don't use math symbols and space in name!!!!</comment>
         <translation>Handfläche_länge</translation>
     </message>
     <message>
@@ -593,7 +591,7 @@ Vertikalen Abstand von der hohen Hüfte Ebene, stärkste Stelle des  vorderen Ba
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="468"/>
         <source>hand_length</source>
-        <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
+        <comment>Name in a formula. Don't use math symbols and space in name!!!!</comment>
         <translation>hand_länge</translation>
     </message>
     <message>
@@ -611,7 +609,7 @@ Vertikalen Abstand von der hohen Hüfte Ebene, stärkste Stelle des  vorderen Ba
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="475"/>
         <source>hand_palm_width</source>
-        <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
+        <comment>Name in a formula. Don't use math symbols and space in name!!!!</comment>
         <translation>handfläche_weite</translation>
     </message>
     <message>
@@ -629,7 +627,7 @@ Vertikalen Abstand von der hohen Hüfte Ebene, stärkste Stelle des  vorderen Ba
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="481"/>
         <source>hand_palm_circ</source>
-        <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
+        <comment>Name in a formula. Don't use math symbols and space in name!!!!</comment>
         <translation>Handfläche_umfang</translation>
     </message>
     <message>
@@ -647,7 +645,7 @@ Vertikalen Abstand von der hohen Hüfte Ebene, stärkste Stelle des  vorderen Ba
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="487"/>
         <source>hand_circ</source>
-        <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
+        <comment>Name in a formula. Don't use math symbols and space in name!!!!</comment>
         <translation>hand_umfang</translation>
     </message>
     <message>
@@ -665,7 +663,7 @@ Vertikalen Abstand von der hohen Hüfte Ebene, stärkste Stelle des  vorderen Ba
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="506"/>
         <source>foot_width</source>
-        <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
+        <comment>Name in a formula. Don't use math symbols and space in name!!!!</comment>
         <translation>fuss_breite</translation>
     </message>
     <message>
@@ -683,7 +681,7 @@ Vertikalen Abstand von der hohen Hüfte Ebene, stärkste Stelle des  vorderen Ba
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="512"/>
         <source>foot_length</source>
-        <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
+        <comment>Name in a formula. Don't use math symbols and space in name!!!!</comment>
         <translation>fuss_länge</translation>
     </message>
     <message>
@@ -701,7 +699,7 @@ Vertikalen Abstand von der hohen Hüfte Ebene, stärkste Stelle des  vorderen Ba
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="519"/>
         <source>foot_circ</source>
-        <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
+        <comment>Name in a formula. Don't use math symbols and space in name!!!!</comment>
         <translation>fuss_umfang</translation>
     </message>
     <message>
@@ -719,7 +717,7 @@ Vertikalen Abstand von der hohen Hüfte Ebene, stärkste Stelle des  vorderen Ba
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="526"/>
         <source>foot_instep_circ</source>
-        <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
+        <comment>Name in a formula. Don't use math symbols and space in name!!!!</comment>
         <translation>fuss_spannumfang</translation>
     </message>
     <message>
@@ -738,7 +736,7 @@ Vertikalen Abstand von der hohen Hüfte Ebene, stärkste Stelle des  vorderen Ba
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="545"/>
         <source>head_circ</source>
-        <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
+        <comment>Name in a formula. Don't use math symbols and space in name!!!!</comment>
         <translation>kopf_umfang</translation>
     </message>
     <message>
@@ -756,7 +754,7 @@ Vertikalen Abstand von der hohen Hüfte Ebene, stärkste Stelle des  vorderen Ba
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="552"/>
         <source>head_length</source>
-        <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
+        <comment>Name in a formula. Don't use math symbols and space in name!!!!</comment>
         <translation>kopf_länge</translation>
     </message>
     <message>
@@ -775,7 +773,7 @@ Vertikalen Abstand von der hohen Hüfte Ebene, stärkste Stelle des  vorderen Ba
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="559"/>
         <source>head_depth</source>
-        <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
+        <comment>Name in a formula. Don't use math symbols and space in name!!!!</comment>
         <translation>kopf_tiefe</translation>
     </message>
     <message>
@@ -793,7 +791,7 @@ Vertikalen Abstand von der hohen Hüfte Ebene, stärkste Stelle des  vorderen Ba
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="566"/>
         <source>head_width</source>
-        <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
+        <comment>Name in a formula. Don't use math symbols and space in name!!!!</comment>
         <translation>kopf_breite</translation>
     </message>
     <message>
@@ -812,7 +810,7 @@ Vertikalen Abstand von der hohen Hüfte Ebene, stärkste Stelle des  vorderen Ba
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="573"/>
         <source>head_crown_to_neck_back</source>
-        <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
+        <comment>Name in a formula. Don't use math symbols and space in name!!!!</comment>
         <translation>kopf_scheitel_bis_zum_hinteren_halsansatz</translation>
     </message>
     <message>
@@ -830,7 +828,7 @@ Vertikalen Abstand von der hohen Hüfte Ebene, stärkste Stelle des  vorderen Ba
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="580"/>
         <source>head_chin_to_neck_back</source>
-        <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
+        <comment>Name in a formula. Don't use math symbols and space in name!!!!</comment>
         <translation>kopf_kinn_zum_hinteren_halsansatz</translation>
     </message>
     <message>
@@ -848,7 +846,7 @@ Vertikalen Abstand von der hohen Hüfte Ebene, stärkste Stelle des  vorderen Ba
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="600"/>
         <source>neck_mid_circ</source>
-        <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
+        <comment>Name in a formula. Don't use math symbols and space in name!!!!</comment>
         <translation>Halsumfang_Mitteilteil</translation>
     </message>
     <message>
@@ -866,7 +864,7 @@ Vertikalen Abstand von der hohen Hüfte Ebene, stärkste Stelle des  vorderen Ba
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="607"/>
         <source>neck_circ</source>
-        <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
+        <comment>Name in a formula. Don't use math symbols and space in name!!!!</comment>
         <translation>halsumfang</translation>
     </message>
     <message>
@@ -884,7 +882,7 @@ Vertikalen Abstand von der hohen Hüfte Ebene, stärkste Stelle des  vorderen Ba
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="615"/>
         <source>highbust_circ</source>
-        <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
+        <comment>Name in a formula. Don't use math symbols and space in name!!!!</comment>
         <translation>hohebrust_umfang</translation>
     </message>
     <message>
@@ -902,7 +900,7 @@ Vertikalen Abstand von der hohen Hüfte Ebene, stärkste Stelle des  vorderen Ba
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="622"/>
         <source>bust_circ</source>
-        <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
+        <comment>Name in a formula. Don't use math symbols and space in name!!!!</comment>
         <translation>brust_umfang</translation>
     </message>
     <message>
@@ -920,7 +918,7 @@ Vertikalen Abstand von der hohen Hüfte Ebene, stärkste Stelle des  vorderen Ba
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="629"/>
         <source>lowbust_circ</source>
-        <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
+        <comment>Name in a formula. Don't use math symbols and space in name!!!!</comment>
         <translation>unterbrust_umfang</translation>
     </message>
     <message>
@@ -938,7 +936,7 @@ Vertikalen Abstand von der hohen Hüfte Ebene, stärkste Stelle des  vorderen Ba
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="636"/>
         <source>rib_circ</source>
-        <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
+        <comment>Name in a formula. Don't use math symbols and space in name!!!!</comment>
         <translation>umfang_rippen</translation>
     </message>
     <message>
@@ -956,7 +954,7 @@ Vertikalen Abstand von der hohen Hüfte Ebene, stärkste Stelle des  vorderen Ba
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="644"/>
         <source>waist_circ</source>
-        <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
+        <comment>Name in a formula. Don't use math symbols and space in name!!!!</comment>
         <translation>taille_umfang</translation>
     </message>
     <message>
@@ -974,7 +972,7 @@ Vertikalen Abstand von der hohen Hüfte Ebene, stärkste Stelle des  vorderen Ba
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="652"/>
         <source>highhip_circ</source>
-        <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
+        <comment>Name in a formula. Don't use math symbols and space in name!!!!</comment>
         <translation>hohehüfte_umfang</translation>
     </message>
     <message>
@@ -993,7 +991,7 @@ Vertikalen Abstand von der hohen Hüfte Ebene, stärkste Stelle des  vorderen Ba
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="660"/>
         <source>hip_circ</source>
-        <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
+        <comment>Name in a formula. Don't use math symbols and space in name!!!!</comment>
         <translation>hüfte_umfang</translation>
     </message>
     <message>
@@ -1012,7 +1010,7 @@ Vertikalen Abstand von der hohen Hüfte Ebene, stärkste Stelle des  vorderen Ba
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="668"/>
         <source>neck_arc_f</source>
-        <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
+        <comment>Name in a formula. Don't use math symbols and space in name!!!!</comment>
         <translation>Hals_vorne</translation>
     </message>
     <message>
@@ -1030,7 +1028,7 @@ Vertikalen Abstand von der hohen Hüfte Ebene, stärkste Stelle des  vorderen Ba
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="675"/>
         <source>highbust_arc_f</source>
-        <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
+        <comment>Name in a formula. Don't use math symbols and space in name!!!!</comment>
         <translation>Oberbrustumfang_vorne</translation>
     </message>
     <message>
@@ -1048,7 +1046,7 @@ Vertikalen Abstand von der hohen Hüfte Ebene, stärkste Stelle des  vorderen Ba
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="682"/>
         <source>bust_arc_f</source>
-        <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
+        <comment>Name in a formula. Don't use math symbols and space in name!!!!</comment>
         <translation>Brustumfang_vorne</translation>
     </message>
     <message>
@@ -1066,7 +1064,7 @@ Vertikalen Abstand von der hohen Hüfte Ebene, stärkste Stelle des  vorderen Ba
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="689"/>
         <source>size</source>
-        <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
+        <comment>Name in a formula. Don't use math symbols and space in name!!!!</comment>
         <translation>Grösse</translation>
     </message>
     <message>
@@ -1084,7 +1082,7 @@ Vertikalen Abstand von der hohen Hüfte Ebene, stärkste Stelle des  vorderen Ba
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="696"/>
         <source>lowbust_arc_f</source>
-        <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
+        <comment>Name in a formula. Don't use math symbols and space in name!!!!</comment>
         <translation>Unterbrustumfang_vorne</translation>
     </message>
     <message>
@@ -1102,7 +1100,7 @@ Vertikalen Abstand von der hohen Hüfte Ebene, stärkste Stelle des  vorderen Ba
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="703"/>
         <source>rib_arc_f</source>
-        <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
+        <comment>Name in a formula. Don't use math symbols and space in name!!!!</comment>
         <translation>Rippenumfang_vorne</translation>
     </message>
     <message>
@@ -1120,7 +1118,7 @@ Vertikalen Abstand von der hohen Hüfte Ebene, stärkste Stelle des  vorderen Ba
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="710"/>
         <source>waist_arc_f</source>
-        <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
+        <comment>Name in a formula. Don't use math symbols and space in name!!!!</comment>
         <translation>taillenumfang_vorne</translation>
     </message>
     <message>
@@ -1138,7 +1136,7 @@ Vertikalen Abstand von der hohen Hüfte Ebene, stärkste Stelle des  vorderen Ba
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="717"/>
         <source>highhip_arc_f</source>
-        <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
+        <comment>Name in a formula. Don't use math symbols and space in name!!!!</comment>
         <translation>hohe_hüfte_umfang_vorne</translation>
     </message>
     <message>
@@ -1156,7 +1154,7 @@ Vertikalen Abstand von der hohen Hüfte Ebene, stärkste Stelle des  vorderen Ba
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="724"/>
         <source>hip_arc_f</source>
-        <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
+        <comment>Name in a formula. Don't use math symbols and space in name!!!!</comment>
         <translation>hüftumfang_vorne</translation>
     </message>
     <message>
@@ -1174,7 +1172,7 @@ Vertikalen Abstand von der hohen Hüfte Ebene, stärkste Stelle des  vorderen Ba
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="731"/>
         <source>neck_arc_half_f</source>
-        <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
+        <comment>Name in a formula. Don't use math symbols and space in name!!!!</comment>
         <translation>halsumfang_vorne_hälfte</translation>
     </message>
     <message>
@@ -1192,7 +1190,7 @@ Vertikalen Abstand von der hohen Hüfte Ebene, stärkste Stelle des  vorderen Ba
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="738"/>
         <source>highbust_arc_half_f</source>
-        <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
+        <comment>Name in a formula. Don't use math symbols and space in name!!!!</comment>
         <translation>hoher_brustumfang_vorne_hälfte</translation>
     </message>
     <message>
@@ -1210,7 +1208,7 @@ Vertikalen Abstand von der hohen Hüfte Ebene, stärkste Stelle des  vorderen Ba
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="746"/>
         <source>bust_arc_half_f</source>
-        <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
+        <comment>Name in a formula. Don't use math symbols and space in name!!!!</comment>
         <translation>brustumfang_vorne_hälfte</translation>
     </message>
     <message>
@@ -1228,7 +1226,7 @@ Vertikalen Abstand von der hohen Hüfte Ebene, stärkste Stelle des  vorderen Ba
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="753"/>
         <source>lowbust_arc_half_f</source>
-        <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
+        <comment>Name in a formula. Don't use math symbols and space in name!!!!</comment>
         <translation>unterbrustumfang_vorne_hälfte</translation>
     </message>
     <message>
@@ -1246,7 +1244,7 @@ Vertikalen Abstand von der hohen Hüfte Ebene, stärkste Stelle des  vorderen Ba
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="760"/>
         <source>rib_arc_half_f</source>
-        <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
+        <comment>Name in a formula. Don't use math symbols and space in name!!!!</comment>
         <translation>rippenumfang_vorne_hälfte</translation>
     </message>
     <message>
@@ -1264,7 +1262,7 @@ Vertikalen Abstand von der hohen Hüfte Ebene, stärkste Stelle des  vorderen Ba
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="767"/>
         <source>waist_arc_half_f</source>
-        <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
+        <comment>Name in a formula. Don't use math symbols and space in name!!!!</comment>
         <translation>taillenumfang_vorne_hälfte</translation>
     </message>
     <message>
@@ -1282,7 +1280,7 @@ Vertikalen Abstand von der hohen Hüfte Ebene, stärkste Stelle des  vorderen Ba
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="774"/>
         <source>highhip_arc_half_f</source>
-        <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
+        <comment>Name in a formula. Don't use math symbols and space in name!!!!</comment>
         <translation>hohehüfte_vorne_hälfte</translation>
     </message>
     <message>
@@ -1300,7 +1298,7 @@ Vertikalen Abstand von der hohen Hüfte Ebene, stärkste Stelle des  vorderen Ba
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="781"/>
         <source>hip_arc_half_f</source>
-        <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
+        <comment>Name in a formula. Don't use math symbols and space in name!!!!</comment>
         <translation>hüftumfang_vorne_hälfte</translation>
     </message>
     <message>
@@ -1318,7 +1316,7 @@ Vertikalen Abstand von der hohen Hüfte Ebene, stärkste Stelle des  vorderen Ba
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="788"/>
         <source>neck_arc_b</source>
-        <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
+        <comment>Name in a formula. Don't use math symbols and space in name!!!!</comment>
         <translation>halsumfang_hinten</translation>
     </message>
     <message>
@@ -1336,7 +1334,7 @@ Vertikalen Abstand von der hohen Hüfte Ebene, stärkste Stelle des  vorderen Ba
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="796"/>
         <source>highbust_arc_b</source>
-        <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
+        <comment>Name in a formula. Don't use math symbols and space in name!!!!</comment>
         <translation>hoherbrustumfang_hinten</translation>
     </message>
     <message>
@@ -1354,7 +1352,7 @@ Vertikalen Abstand von der hohen Hüfte Ebene, stärkste Stelle des  vorderen Ba
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="803"/>
         <source>bust_arc_b</source>
-        <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
+        <comment>Name in a formula. Don't use math symbols and space in name!!!!</comment>
         <translation>brustumfang_hinten</translation>
     </message>
     <message>
@@ -1372,7 +1370,7 @@ Vertikalen Abstand von der hohen Hüfte Ebene, stärkste Stelle des  vorderen Ba
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="811"/>
         <source>lowbust_arc_b</source>
-        <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
+        <comment>Name in a formula. Don't use math symbols and space in name!!!!</comment>
         <translation>unterbrustumfang_hinten</translation>
     </message>
     <message>
@@ -1390,7 +1388,7 @@ Vertikalen Abstand von der hohen Hüfte Ebene, stärkste Stelle des  vorderen Ba
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="819"/>
         <source>rib_arc_b</source>
-        <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
+        <comment>Name in a formula. Don't use math symbols and space in name!!!!</comment>
         <translation>rippenumfang_hinten</translation>
     </message>
     <message>
@@ -1408,7 +1406,7 @@ Vertikalen Abstand von der hohen Hüfte Ebene, stärkste Stelle des  vorderen Ba
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="827"/>
         <source>waist_arc_b</source>
-        <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
+        <comment>Name in a formula. Don't use math symbols and space in name!!!!</comment>
         <translation>taillenumfang_hinten</translation>
     </message>
     <message>
@@ -1426,7 +1424,7 @@ Vertikalen Abstand von der hohen Hüfte Ebene, stärkste Stelle des  vorderen Ba
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="835"/>
         <source>highhip_arc_b</source>
-        <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
+        <comment>Name in a formula. Don't use math symbols and space in name!!!!</comment>
         <translation>hohehüfte_hinten</translation>
     </message>
     <message>
@@ -1444,7 +1442,7 @@ Vertikalen Abstand von der hohen Hüfte Ebene, stärkste Stelle des  vorderen Ba
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="843"/>
         <source>hip_arc_b</source>
-        <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
+        <comment>Name in a formula. Don't use math symbols and space in name!!!!</comment>
         <translation>hüftumfang_hinten</translation>
     </message>
     <message>
@@ -1462,7 +1460,7 @@ Vertikalen Abstand von der hohen Hüfte Ebene, stärkste Stelle des  vorderen Ba
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="851"/>
         <source>neck_arc_half_b</source>
-        <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
+        <comment>Name in a formula. Don't use math symbols and space in name!!!!</comment>
         <translation>hälfte_hinterer_halsumfang</translation>
     </message>
     <message>
@@ -1480,7 +1478,7 @@ Vertikalen Abstand von der hohen Hüfte Ebene, stärkste Stelle des  vorderen Ba
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="858"/>
         <source>highbust_arc_half_b</source>
-        <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
+        <comment>Name in a formula. Don't use math symbols and space in name!!!!</comment>
         <translation>brustumfang_hälfte_rücken</translation>
     </message>
     <message>
@@ -1498,7 +1496,7 @@ Vertikalen Abstand von der hohen Hüfte Ebene, stärkste Stelle des  vorderen Ba
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="866"/>
         <source>bust_arc_half_b</source>
-        <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
+        <comment>Name in a formula. Don't use math symbols and space in name!!!!</comment>
         <translation>brustumfang_hälfte_hinten</translation>
     </message>
     <message>
@@ -1516,7 +1514,7 @@ Vertikalen Abstand von der hohen Hüfte Ebene, stärkste Stelle des  vorderen Ba
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="873"/>
         <source>lowbust_arc_half_b</source>
-        <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
+        <comment>Name in a formula. Don't use math symbols and space in name!!!!</comment>
         <translation>hälfte_unterbrustumfang_hinten</translation>
     </message>
     <message>
@@ -1534,7 +1532,7 @@ Vertikalen Abstand von der hohen Hüfte Ebene, stärkste Stelle des  vorderen Ba
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="880"/>
         <source>rib_arc_half_b</source>
-        <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
+        <comment>Name in a formula. Don't use math symbols and space in name!!!!</comment>
         <translation>hälfte_rippenumfang_hinten</translation>
     </message>
     <message>
@@ -1552,7 +1550,7 @@ Vertikalen Abstand von der hohen Hüfte Ebene, stärkste Stelle des  vorderen Ba
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="887"/>
         <source>waist_arc_half_b</source>
-        <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
+        <comment>Name in a formula. Don't use math symbols and space in name!!!!</comment>
         <translation>hälfte_taillenumfang_hinten</translation>
     </message>
     <message>
@@ -1570,7 +1568,7 @@ Vertikalen Abstand von der hohen Hüfte Ebene, stärkste Stelle des  vorderen Ba
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="894"/>
         <source>highhip_arc_half_b</source>
-        <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
+        <comment>Name in a formula. Don't use math symbols and space in name!!!!</comment>
         <translation>hälfte_hoher_hüftumfang_hinten</translation>
     </message>
     <message>
@@ -1588,7 +1586,7 @@ Vertikalen Abstand von der hohen Hüfte Ebene, stärkste Stelle des  vorderen Ba
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="902"/>
         <source>hip_arc_half_b</source>
-        <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
+        <comment>Name in a formula. Don't use math symbols and space in name!!!!</comment>
         <translation>hüfte_bogen_halb_b</translation>
     </message>
     <message>
@@ -1606,7 +1604,7 @@ Vertikalen Abstand von der hohen Hüfte Ebene, stärkste Stelle des  vorderen Ba
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="909"/>
         <source>hip_with_abdomen_arc_f</source>
-        <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
+        <comment>Name in a formula. Don't use math symbols and space in name!!!!</comment>
         <translation>vorne_hüftumfang_mit_bauch</translation>
     </message>
     <message>
@@ -1624,7 +1622,7 @@ Vertikalen Abstand von der hohen Hüfte Ebene, stärkste Stelle des  vorderen Ba
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="917"/>
         <source>body_armfold_circ</source>
-        <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
+        <comment>Name in a formula. Don't use math symbols and space in name!!!!</comment>
         <translation>körper_achsel_umfang</translation>
     </message>
     <message>
@@ -1642,7 +1640,7 @@ Vertikalen Abstand von der hohen Hüfte Ebene, stärkste Stelle des  vorderen Ba
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="924"/>
         <source>body_bust_circ</source>
-        <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
+        <comment>Name in a formula. Don't use math symbols and space in name!!!!</comment>
         <translation>körper_brustumfang</translation>
     </message>
     <message>
@@ -1660,7 +1658,7 @@ Vertikalen Abstand von der hohen Hüfte Ebene, stärkste Stelle des  vorderen Ba
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="931"/>
         <source>body_torso_circ</source>
-        <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
+        <comment>Name in a formula. Don't use math symbols and space in name!!!!</comment>
         <translation>Körper_Brustkorb_Umfang</translation>
     </message>
     <message>
@@ -1678,7 +1676,7 @@ Vertikalen Abstand von der hohen Hüfte Ebene, stärkste Stelle des  vorderen Ba
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="939"/>
         <source>hip_circ_with_abdomen</source>
-        <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
+        <comment>Name in a formula. Don't use math symbols and space in name!!!!</comment>
         <translation>hüftumfang_mit_bauch</translation>
     </message>
     <message>
@@ -1696,7 +1694,7 @@ Vertikalen Abstand von der hohen Hüfte Ebene, stärkste Stelle des  vorderen Ba
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="959"/>
         <source>neck_front_to_waist_f</source>
-        <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
+        <comment>Name in a formula. Don't use math symbols and space in name!!!!</comment>
         <translation>nacken_vorne_zur_taille_vorne</translation>
     </message>
     <message>
@@ -1714,7 +1712,7 @@ Vertikalen Abstand von der hohen Hüfte Ebene, stärkste Stelle des  vorderen Ba
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="966"/>
         <source>neck_front_to_waist_flat_f</source>
-        <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
+        <comment>Name in a formula. Don't use math symbols and space in name!!!!</comment>
         <translation>hals_vorne_zur_taille_vorne_flach</translation>
     </message>
     <message>
@@ -1732,7 +1730,7 @@ Vertikalen Abstand von der hohen Hüfte Ebene, stärkste Stelle des  vorderen Ba
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="973"/>
         <source>armpit_to_waist_side</source>
-        <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
+        <comment>Name in a formula. Don't use math symbols and space in name!!!!</comment>
         <translation>achsel_bis_taillenseite</translation>
     </message>
     <message>
@@ -1750,7 +1748,7 @@ Vertikalen Abstand von der hohen Hüfte Ebene, stärkste Stelle des  vorderen Ba
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="979"/>
         <source>shoulder_tip_to_waist_side_f</source>
-        <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
+        <comment>Name in a formula. Don't use math symbols and space in name!!!!</comment>
         <translation>schulterspitze_zur_taillenseite_vorne</translation>
     </message>
     <message>
@@ -1768,7 +1766,7 @@ Vertikalen Abstand von der hohen Hüfte Ebene, stärkste Stelle des  vorderen Ba
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="986"/>
         <source>neck_side_to_waist_f</source>
-        <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
+        <comment>Name in a formula. Don't use math symbols and space in name!!!!</comment>
         <translation>hals_seite_zur_taille_vorne</translation>
     </message>
     <message>
@@ -1786,7 +1784,7 @@ Vertikalen Abstand von der hohen Hüfte Ebene, stärkste Stelle des  vorderen Ba
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="993"/>
         <source>neck_side_to_waist_bustpoint_f</source>
-        <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
+        <comment>Name in a formula. Don't use math symbols and space in name!!!!</comment>
         <translation>hals_seite_zur_taille_über_brust_vorne</translation>
     </message>
     <message>
@@ -1804,7 +1802,7 @@ Vertikalen Abstand von der hohen Hüfte Ebene, stärkste Stelle des  vorderen Ba
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1000"/>
         <source>neck_front_to_highbust_f</source>
-        <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
+        <comment>Name in a formula. Don't use math symbols and space in name!!!!</comment>
         <translation>hals_vorne_zur_oberbrust_vorne</translation>
     </message>
     <message>
@@ -1822,7 +1820,7 @@ Vertikalen Abstand von der hohen Hüfte Ebene, stärkste Stelle des  vorderen Ba
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1006"/>
         <source>highbust_to_waist_f</source>
-        <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
+        <comment>Name in a formula. Don't use math symbols and space in name!!!!</comment>
         <translation>oberbrust_zur_taille_vorne</translation>
     </message>
     <message>
@@ -1840,7 +1838,7 @@ Vertikalen Abstand von der hohen Hüfte Ebene, stärkste Stelle des  vorderen Ba
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1014"/>
         <source>neck_front_to_bust_f</source>
-        <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
+        <comment>Name in a formula. Don't use math symbols and space in name!!!!</comment>
         <translation>hals_vorne_zur_brust_vorne</translation>
     </message>
     <message>
@@ -1858,7 +1856,7 @@ Vertikalen Abstand von der hohen Hüfte Ebene, stärkste Stelle des  vorderen Ba
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1022"/>
         <source>bust_to_waist_f</source>
-        <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
+        <comment>Name in a formula. Don't use math symbols and space in name!!!!</comment>
         <translation>brust_zur_taille_vorne</translation>
     </message>
     <message>
@@ -1876,7 +1874,7 @@ Vertikalen Abstand von der hohen Hüfte Ebene, stärkste Stelle des  vorderen Ba
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1030"/>
         <source>lowbust_to_waist_f</source>
-        <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
+        <comment>Name in a formula. Don't use math symbols and space in name!!!!</comment>
         <translation>unterbrust_zur_taille_vorne</translation>
     </message>
     <message>
@@ -1894,7 +1892,7 @@ Vertikalen Abstand von der hohen Hüfte Ebene, stärkste Stelle des  vorderen Ba
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1036"/>
         <source>rib_to_waist_side</source>
-        <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
+        <comment>Name in a formula. Don't use math symbols and space in name!!!!</comment>
         <translation>rippen_zur_taille_seite</translation>
     </message>
     <message>
@@ -1912,7 +1910,7 @@ Vertikalen Abstand von der hohen Hüfte Ebene, stärkste Stelle des  vorderen Ba
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1043"/>
         <source>shoulder_tip_to_armfold_f</source>
-        <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
+        <comment>Name in a formula. Don't use math symbols and space in name!!!!</comment>
         <translation>schulterspitze_zur_achsel_vorne</translation>
     </message>
     <message>
@@ -1930,7 +1928,7 @@ Vertikalen Abstand von der hohen Hüfte Ebene, stärkste Stelle des  vorderen Ba
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1050"/>
         <source>neck_side_to_bust_f</source>
-        <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
+        <comment>Name in a formula. Don't use math symbols and space in name!!!!</comment>
         <translation>hals_seite_zur_brust_vorne</translation>
     </message>
     <message>
@@ -1948,7 +1946,7 @@ Vertikalen Abstand von der hohen Hüfte Ebene, stärkste Stelle des  vorderen Ba
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1057"/>
         <source>neck_side_to_highbust_f</source>
-        <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
+        <comment>Name in a formula. Don't use math symbols and space in name!!!!</comment>
         <translation>hals_seite_zur_oberbrust_vorne</translation>
     </message>
     <message>
@@ -1966,7 +1964,7 @@ Vertikalen Abstand von der hohen Hüfte Ebene, stärkste Stelle des  vorderen Ba
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1064"/>
         <source>shoulder_center_to_highbust_f</source>
-        <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
+        <comment>Name in a formula. Don't use math symbols and space in name!!!!</comment>
         <translation>schultermitte_zur_oberbrusthöhe_vorne</translation>
     </message>
     <message>
@@ -1984,7 +1982,7 @@ Vertikalen Abstand von der hohen Hüfte Ebene, stärkste Stelle des  vorderen Ba
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1071"/>
         <source>shoulder_tip_to_waist_side_b</source>
-        <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
+        <comment>Name in a formula. Don't use math symbols and space in name!!!!</comment>
         <translation>schulterspitze_zur_taillenseite_hinten</translation>
     </message>
     <message>
@@ -2002,7 +2000,7 @@ Vertikalen Abstand von der hohen Hüfte Ebene, stärkste Stelle des  vorderen Ba
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1078"/>
         <source>neck_side_to_waist_b</source>
-        <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
+        <comment>Name in a formula. Don't use math symbols and space in name!!!!</comment>
         <translation>hals_seite_zur_taille_hinten</translation>
     </message>
     <message>
@@ -2020,7 +2018,7 @@ Vertikalen Abstand von der hohen Hüfte Ebene, stärkste Stelle des  vorderen Ba
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1085"/>
         <source>neck_back_to_waist_b</source>
-        <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
+        <comment>Name in a formula. Don't use math symbols and space in name!!!!</comment>
         <translation>nacken_hinten_bis_taille_h</translation>
     </message>
     <message>
@@ -2038,7 +2036,7 @@ Vertikalen Abstand von der hohen Hüfte Ebene, stärkste Stelle des  vorderen Ba
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1091"/>
         <source>neck_side_to_waist_scapula_b</source>
-        <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
+        <comment>Name in a formula. Don't use math symbols and space in name!!!!</comment>
         <translation>hals_seite_zur_taille_schulterblatt_hinten</translation>
     </message>
     <message>
@@ -2056,7 +2054,7 @@ Vertikalen Abstand von der hohen Hüfte Ebene, stärkste Stelle des  vorderen Ba
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1099"/>
         <source>neck_back_to_highbust_b</source>
-        <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
+        <comment>Name in a formula. Don't use math symbols and space in name!!!!</comment>
         <translation>nacken_zur_oberbrust_hinten</translation>
     </message>
     <message>
@@ -2074,7 +2072,7 @@ Vertikalen Abstand von der hohen Hüfte Ebene, stärkste Stelle des  vorderen Ba
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1105"/>
         <source>highbust_to_waist_b</source>
-        <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
+        <comment>Name in a formula. Don't use math symbols and space in name!!!!</comment>
         <translation>oberbrust_zur_taille_hinten</translation>
     </message>
     <message>
@@ -2092,7 +2090,7 @@ Vertikalen Abstand von der hohen Hüfte Ebene, stärkste Stelle des  vorderen Ba
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1113"/>
         <source>neck_back_to_bust_b</source>
-        <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
+        <comment>Name in a formula. Don't use math symbols and space in name!!!!</comment>
         <translation>nacken_zur_brust_hinten</translation>
     </message>
     <message>
@@ -2110,7 +2108,7 @@ Vertikalen Abstand von der hohen Hüfte Ebene, stärkste Stelle des  vorderen Ba
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1119"/>
         <source>bust_to_waist_b</source>
-        <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
+        <comment>Name in a formula. Don't use math symbols and space in name!!!!</comment>
         <translation>brust_hinten_zur_taille_hinten</translation>
     </message>
     <message>
@@ -2128,7 +2126,7 @@ Vertikalen Abstand von der hohen Hüfte Ebene, stärkste Stelle des  vorderen Ba
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1127"/>
         <source>lowbust_to_waist_b</source>
-        <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
+        <comment>Name in a formula. Don't use math symbols and space in name!!!!</comment>
         <translation>unterbrust_hinten_zur_taille_hinten</translation>
     </message>
     <message>
@@ -2146,7 +2144,7 @@ Vertikalen Abstand von der hohen Hüfte Ebene, stärkste Stelle des  vorderen Ba
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1133"/>
         <source>shoulder_tip_to_armfold_b</source>
-        <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
+        <comment>Name in a formula. Don't use math symbols and space in name!!!!</comment>
         <translation>schulterspitze_zur_achsel_rücken</translation>
     </message>
     <message>
@@ -2164,7 +2162,7 @@ Vertikalen Abstand von der hohen Hüfte Ebene, stärkste Stelle des  vorderen Ba
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1140"/>
         <source>neck_side_to_bust_b</source>
-        <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
+        <comment>Name in a formula. Don't use math symbols and space in name!!!!</comment>
         <translation>hals_seite_zur_brust_hinten</translation>
     </message>
     <message>
@@ -2182,7 +2180,7 @@ Vertikalen Abstand von der hohen Hüfte Ebene, stärkste Stelle des  vorderen Ba
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1147"/>
         <source>neck_side_to_highbust_b</source>
-        <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
+        <comment>Name in a formula. Don't use math symbols and space in name!!!!</comment>
         <translation>hals_seite_zur_oberbrust_hinten</translation>
     </message>
     <message>
@@ -2200,7 +2198,7 @@ Vertikalen Abstand von der hohen Hüfte Ebene, stärkste Stelle des  vorderen Ba
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1154"/>
         <source>shoulder_center_to_highbust_b</source>
-        <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
+        <comment>Name in a formula. Don't use math symbols and space in name!!!!</comment>
         <translation>schultermitte_zur_oberbrusthöhe_hinten</translation>
     </message>
     <message>
@@ -2218,7 +2216,7 @@ Vertikalen Abstand von der hohen Hüfte Ebene, stärkste Stelle des  vorderen Ba
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1161"/>
         <source>waist_to_highhip_f</source>
-        <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
+        <comment>Name in a formula. Don't use math symbols and space in name!!!!</comment>
         <translation>taille_zur_hohen_hüfte_vorne</translation>
     </message>
     <message>
@@ -2236,7 +2234,7 @@ Vertikalen Abstand von der hohen Hüfte Ebene, stärkste Stelle des  vorderen Ba
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1167"/>
         <source>waist_to_hip_f</source>
-        <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
+        <comment>Name in a formula. Don't use math symbols and space in name!!!!</comment>
         <translation>taille_zur_hüfte_vorne</translation>
     </message>
     <message>
@@ -2254,7 +2252,7 @@ Vertikalen Abstand von der hohen Hüfte Ebene, stärkste Stelle des  vorderen Ba
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1173"/>
         <source>waist_to_highhip_side</source>
-        <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
+        <comment>Name in a formula. Don't use math symbols and space in name!!!!</comment>
         <translation>taille_zur_hohen_hüfte_seite</translation>
     </message>
     <message>
@@ -2272,7 +2270,7 @@ Vertikalen Abstand von der hohen Hüfte Ebene, stärkste Stelle des  vorderen Ba
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1179"/>
         <source>waist_to_highhip_b</source>
-        <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
+        <comment>Name in a formula. Don't use math symbols and space in name!!!!</comment>
         <translation>taille_zur_hohen_hüfte_hinten</translation>
     </message>
     <message>
@@ -2290,7 +2288,7 @@ Vertikalen Abstand von der hohen Hüfte Ebene, stärkste Stelle des  vorderen Ba
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1185"/>
         <source>waist_to_hip_b</source>
-        <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
+        <comment>Name in a formula. Don't use math symbols and space in name!!!!</comment>
         <translation>taille_zur_hüfte_hinten</translation>
     </message>
     <message>
@@ -2308,7 +2306,7 @@ Vertikalen Abstand von der hohen Hüfte Ebene, stärkste Stelle des  vorderen Ba
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1193"/>
         <source>waist_to_hip_side</source>
-        <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
+        <comment>Name in a formula. Don't use math symbols and space in name!!!!</comment>
         <translation>taille_zur_hüftseite</translation>
     </message>
     <message>
@@ -2326,7 +2324,7 @@ Vertikalen Abstand von der hohen Hüfte Ebene, stärkste Stelle des  vorderen Ba
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1199"/>
         <source>shoulder_slope_neck_side_angle</source>
-        <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
+        <comment>Name in a formula. Don't use math symbols and space in name!!!!</comment>
         <translation>schulter_neigung_hals_seiten_winkel</translation>
     </message>
     <message>
@@ -2344,7 +2342,7 @@ Vertikalen Abstand von der hohen Hüfte Ebene, stärkste Stelle des  vorderen Ba
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1207"/>
         <source>shoulder_slope_neck_side_length</source>
-        <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
+        <comment>Name in a formula. Don't use math symbols and space in name!!!!</comment>
         <translation>schulter_neigung_hals_seite_länge</translation>
     </message>
     <message>
@@ -2362,7 +2360,7 @@ Vertikalen Abstand von der hohen Hüfte Ebene, stärkste Stelle des  vorderen Ba
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1214"/>
         <source>shoulder_slope_neck_back_angle</source>
-        <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
+        <comment>Name in a formula. Don't use math symbols and space in name!!!!</comment>
         <translation>schulter_neigung_nacken_winkel</translation>
     </message>
     <message>
@@ -2380,7 +2378,7 @@ Vertikalen Abstand von der hohen Hüfte Ebene, stärkste Stelle des  vorderen Ba
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1222"/>
         <source>shoulder_slope_neck_back_height</source>
-        <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
+        <comment>Name in a formula. Don't use math symbols and space in name!!!!</comment>
         <translation>schulter_neigung_nacken_länge</translation>
     </message>
     <message>
@@ -2398,7 +2396,7 @@ Vertikalen Abstand von der hohen Hüfte Ebene, stärkste Stelle des  vorderen Ba
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1229"/>
         <source>shoulder_slope_shoulder_tip_angle</source>
-        <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
+        <comment>Name in a formula. Don't use math symbols and space in name!!!!</comment>
         <translation>schulter_neigung_schulterspitze_winkel</translation>
     </message>
     <message>
@@ -2416,7 +2414,7 @@ Vertikalen Abstand von der hohen Hüfte Ebene, stärkste Stelle des  vorderen Ba
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1238"/>
         <source>neck_back_to_across_back</source>
-        <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
+        <comment>Name in a formula. Don't use math symbols and space in name!!!!</comment>
         <translation>nacken_zu_über_rücken</translation>
     </message>
     <message>
@@ -2434,7 +2432,7 @@ Vertikalen Abstand von der hohen Hüfte Ebene, stärkste Stelle des  vorderen Ba
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1245"/>
         <source>across_back_to_waist_b</source>
-        <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
+        <comment>Name in a formula. Don't use math symbols and space in name!!!!</comment>
         <translation>über_rücken_zur_taille_hinten</translation>
     </message>
     <message>
@@ -2452,7 +2450,7 @@ Vertikalen Abstand von der hohen Hüfte Ebene, stärkste Stelle des  vorderen Ba
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1264"/>
         <source>shoulder_length</source>
-        <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
+        <comment>Name in a formula. Don't use math symbols and space in name!!!!</comment>
         <translation>schulterbreite</translation>
     </message>
     <message>
@@ -2470,7 +2468,7 @@ Vertikalen Abstand von der hohen Hüfte Ebene, stärkste Stelle des  vorderen Ba
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1270"/>
         <source>shoulder_tip_to_shoulder_tip_f</source>
-        <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
+        <comment>Name in a formula. Don't use math symbols and space in name!!!!</comment>
         <translation>schulterspitze_zur_schulterspitze_vorne</translation>
     </message>
     <message>
@@ -2488,7 +2486,7 @@ Vertikalen Abstand von der hohen Hüfte Ebene, stärkste Stelle des  vorderen Ba
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1277"/>
         <source>across_chest_f</source>
-        <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
+        <comment>Name in a formula. Don't use math symbols and space in name!!!!</comment>
         <translation>über_die_brust</translation>
     </message>
     <message>
@@ -2506,7 +2504,7 @@ Vertikalen Abstand von der hohen Hüfte Ebene, stärkste Stelle des  vorderen Ba
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1284"/>
         <source>armfold_to_armfold_f</source>
-        <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
+        <comment>Name in a formula. Don't use math symbols and space in name!!!!</comment>
         <translation>achsel_zu_achsel_vorne</translation>
     </message>
     <message>
@@ -2524,7 +2522,7 @@ Vertikalen Abstand von der hohen Hüfte Ebene, stärkste Stelle des  vorderen Ba
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1292"/>
         <source>shoulder_tip_to_shoulder_tip_half_f</source>
-        <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
+        <comment>Name in a formula. Don't use math symbols and space in name!!!!</comment>
         <translation>schulterspitze_zur_schulterspitze_halb_vorne</translation>
     </message>
     <message>
@@ -2542,7 +2540,7 @@ Vertikalen Abstand von der hohen Hüfte Ebene, stärkste Stelle des  vorderen Ba
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1300"/>
         <source>across_chest_half_f</source>
-        <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
+        <comment>Name in a formula. Don't use math symbols and space in name!!!!</comment>
         <translation>über_die_brust_halb</translation>
     </message>
     <message>
@@ -2560,7 +2558,7 @@ Vertikalen Abstand von der hohen Hüfte Ebene, stärkste Stelle des  vorderen Ba
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1307"/>
         <source>shoulder_tip_to_shoulder_tip_b</source>
-        <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
+        <comment>Name in a formula. Don't use math symbols and space in name!!!!</comment>
         <translation>schulterspitze_zur_schulterspitze_rücken</translation>
     </message>
     <message>
@@ -2578,7 +2576,7 @@ Vertikalen Abstand von der hohen Hüfte Ebene, stärkste Stelle des  vorderen Ba
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1314"/>
         <source>across_back_b</source>
-        <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
+        <comment>Name in a formula. Don't use math symbols and space in name!!!!</comment>
         <translation>über_rücken_hinten</translation>
     </message>
     <message>
@@ -2596,7 +2594,7 @@ Vertikalen Abstand von der hohen Hüfte Ebene, stärkste Stelle des  vorderen Ba
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1321"/>
         <source>armfold_to_armfold_b</source>
-        <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
+        <comment>Name in a formula. Don't use math symbols and space in name!!!!</comment>
         <translation>achsel_zur_achsel_hinten</translation>
     </message>
     <message>
@@ -2614,7 +2612,7 @@ Vertikalen Abstand von der hohen Hüfte Ebene, stärkste Stelle des  vorderen Ba
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1328"/>
         <source>shoulder_tip_to_shoulder_tip_half_b</source>
-        <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
+        <comment>Name in a formula. Don't use math symbols and space in name!!!!</comment>
         <translation>schulterspitze_zur_schulterspitze_halb_hinten</translation>
     </message>
     <message>
@@ -2632,7 +2630,7 @@ Vertikalen Abstand von der hohen Hüfte Ebene, stärkste Stelle des  vorderen Ba
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1336"/>
         <source>across_back_half_b</source>
-        <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
+        <comment>Name in a formula. Don't use math symbols and space in name!!!!</comment>
         <translation>über_rücken_halb_hinten</translation>
     </message>
     <message>
@@ -2650,7 +2648,7 @@ Vertikalen Abstand von der hohen Hüfte Ebene, stärkste Stelle des  vorderen Ba
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1343"/>
         <source>neck_front_to_shoulder_tip_f</source>
-        <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
+        <comment>Name in a formula. Don't use math symbols and space in name!!!!</comment>
         <translation>hals_vorne_zur_schulterspitze_vorne</translation>
     </message>
     <message>
@@ -2668,7 +2666,7 @@ Vertikalen Abstand von der hohen Hüfte Ebene, stärkste Stelle des  vorderen Ba
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1349"/>
         <source>neck_back_to_shoulder_tip_b</source>
-        <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
+        <comment>Name in a formula. Don't use math symbols and space in name!!!!</comment>
         <translation>hals_hinten_zur_schulterspitze_hinten</translation>
     </message>
     <message>
@@ -2686,7 +2684,7 @@ Vertikalen Abstand von der hohen Hüfte Ebene, stärkste Stelle des  vorderen Ba
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1355"/>
         <source>neck_width</source>
-        <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
+        <comment>Name in a formula. Don't use math symbols and space in name!!!!</comment>
         <translation>Halsbreite</translation>
     </message>
     <message>
@@ -2704,7 +2702,7 @@ Vertikalen Abstand von der hohen Hüfte Ebene, stärkste Stelle des  vorderen Ba
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1375"/>
         <source>bustpoint_to_bustpoint</source>
-        <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
+        <comment>Name in a formula. Don't use math symbols and space in name!!!!</comment>
         <translation>brustpukt_zu_brustpunkt</translation>
     </message>
     <message>
@@ -2722,7 +2720,7 @@ Vertikalen Abstand von der hohen Hüfte Ebene, stärkste Stelle des  vorderen Ba
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1381"/>
         <source>bustpoint_to_neck_side</source>
-        <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
+        <comment>Name in a formula. Don't use math symbols and space in name!!!!</comment>
         <translation>brustpunkt_zur_halsseite</translation>
     </message>
     <message>
@@ -2740,7 +2738,7 @@ Vertikalen Abstand von der hohen Hüfte Ebene, stärkste Stelle des  vorderen Ba
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1387"/>
         <source>bustpoint_to_lowbust</source>
-        <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
+        <comment>Name in a formula. Don't use math symbols and space in name!!!!</comment>
         <translation>brustpunkt_zur_unterbrust</translation>
     </message>
     <message>
@@ -2758,7 +2756,7 @@ Vertikalen Abstand von der hohen Hüfte Ebene, stärkste Stelle des  vorderen Ba
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1394"/>
         <source>bustpoint_to_waist</source>
-        <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
+        <comment>Name in a formula. Don't use math symbols and space in name!!!!</comment>
         <translation>brustpunkt_zur_taille</translation>
     </message>
     <message>
@@ -2776,7 +2774,7 @@ Vertikalen Abstand von der hohen Hüfte Ebene, stärkste Stelle des  vorderen Ba
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1402"/>
         <source>bustpoint_to_bustpoint_half</source>
-        <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
+        <comment>Name in a formula. Don't use math symbols and space in name!!!!</comment>
         <translation>brustpunkt_zum_brustpunkt_hälfte</translation>
     </message>
     <message>
@@ -2794,7 +2792,7 @@ Vertikalen Abstand von der hohen Hüfte Ebene, stärkste Stelle des  vorderen Ba
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1409"/>
         <source>bustpoint_neck_side_to_waist</source>
-        <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
+        <comment>Name in a formula. Don't use math symbols and space in name!!!!</comment>
         <translation>brustpunkt_nacken_seite_zur_taille</translation>
     </message>
     <message>
@@ -2812,7 +2810,7 @@ Vertikalen Abstand von der hohen Hüfte Ebene, stärkste Stelle des  vorderen Ba
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1417"/>
         <source>bustpoint_to_shoulder_tip</source>
-        <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
+        <comment>Name in a formula. Don't use math symbols and space in name!!!!</comment>
         <translation>brustpunkt_zur_schulterspitze</translation>
     </message>
     <message>
@@ -2830,7 +2828,7 @@ Vertikalen Abstand von der hohen Hüfte Ebene, stärkste Stelle des  vorderen Ba
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1423"/>
         <source>bustpoint_to_waist_front</source>
-        <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
+        <comment>Name in a formula. Don't use math symbols and space in name!!!!</comment>
         <translation>brustpunkt_zur_taille_vorne</translation>
     </message>
     <message>
@@ -2848,7 +2846,7 @@ Vertikalen Abstand von der hohen Hüfte Ebene, stärkste Stelle des  vorderen Ba
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1431"/>
         <source>bustpoint_to_bustpoint_halter</source>
-        <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
+        <comment>Name in a formula. Don't use math symbols and space in name!!!!</comment>
         <translation>brustpunkt_zu_brustpunkt_träger</translation>
     </message>
     <message>
@@ -2866,7 +2864,7 @@ Vertikalen Abstand von der hohen Hüfte Ebene, stärkste Stelle des  vorderen Ba
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1438"/>
         <source>bustpoint_to_shoulder_center</source>
-        <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
+        <comment>Name in a formula. Don't use math symbols and space in name!!!!</comment>
         <translation>brustpunkt_zur_schultermitte</translation>
     </message>
     <message>
@@ -2884,7 +2882,7 @@ Vertikalen Abstand von der hohen Hüfte Ebene, stärkste Stelle des  vorderen Ba
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1456"/>
         <source>shoulder_tip_to_waist_front</source>
-        <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
+        <comment>Name in a formula. Don't use math symbols and space in name!!!!</comment>
         <translation>schulterspitze_zur_taille_vorne</translation>
     </message>
     <message>
@@ -2902,7 +2900,7 @@ Vertikalen Abstand von der hohen Hüfte Ebene, stärkste Stelle des  vorderen Ba
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1463"/>
         <source>neck_front_to_waist_side</source>
-        <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
+        <comment>Name in a formula. Don't use math symbols and space in name!!!!</comment>
         <translation>hals_vorne_zur_taille_seite</translation>
     </message>
     <message>
@@ -2920,7 +2918,7 @@ Vertikalen Abstand von der hohen Hüfte Ebene, stärkste Stelle des  vorderen Ba
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1470"/>
         <source>neck_side_to_waist_side_f</source>
-        <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
+        <comment>Name in a formula. Don't use math symbols and space in name!!!!</comment>
         <translation>hals_seite_zur_taillenseite_vorne</translation>
     </message>
     <message>
@@ -2938,7 +2936,7 @@ Vertikalen Abstand von der hohen Hüfte Ebene, stärkste Stelle des  vorderen Ba
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1477"/>
         <source>shoulder_tip_to_waist_back</source>
-        <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
+        <comment>Name in a formula. Don't use math symbols and space in name!!!!</comment>
         <translation>schulterspitze_zur_taille_hinten</translation>
     </message>
     <message>
@@ -2956,7 +2954,7 @@ Vertikalen Abstand von der hohen Hüfte Ebene, stärkste Stelle des  vorderen Ba
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1484"/>
         <source>shoulder_tip_to_waist_b_1in_offset</source>
-        <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
+        <comment>Name in a formula. Don't use math symbols and space in name!!!!</comment>
         <translation>schulterspitze_zur_taille_hinten_1zoll_abw</translation>
     </message>
     <message>
@@ -2974,7 +2972,7 @@ Vertikalen Abstand von der hohen Hüfte Ebene, stärkste Stelle des  vorderen Ba
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1492"/>
         <source>neck_back_to_waist_side</source>
-        <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
+        <comment>Name in a formula. Don't use math symbols and space in name!!!!</comment>
         <translation>hals_hinten_zur_taillenseite</translation>
     </message>
     <message>
@@ -2992,7 +2990,7 @@ Vertikalen Abstand von der hohen Hüfte Ebene, stärkste Stelle des  vorderen Ba
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1499"/>
         <source>neck_side_to_waist_side_b</source>
-        <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
+        <comment>Name in a formula. Don't use math symbols and space in name!!!!</comment>
         <translation>hals_seite_zur_taillenseite_hinten</translation>
     </message>
     <message>
@@ -3010,7 +3008,7 @@ Vertikalen Abstand von der hohen Hüfte Ebene, stärkste Stelle des  vorderen Ba
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1506"/>
         <source>neck_side_to_armfold_f</source>
-        <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
+        <comment>Name in a formula. Don't use math symbols and space in name!!!!</comment>
         <translation>hals_seite_zur_armfalte_vorne</translation>
     </message>
     <message>
@@ -3028,7 +3026,7 @@ Vertikalen Abstand von der hohen Hüfte Ebene, stärkste Stelle des  vorderen Ba
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1513"/>
         <source>neck_side_to_armpit_f</source>
-        <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
+        <comment>Name in a formula. Don't use math symbols and space in name!!!!</comment>
         <translation>hals_seite_zur_achsel_vorne</translation>
     </message>
     <message>
@@ -3046,7 +3044,7 @@ Vertikalen Abstand von der hohen Hüfte Ebene, stärkste Stelle des  vorderen Ba
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1520"/>
         <source>neck_side_to_bust_side_f</source>
-        <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
+        <comment>Name in a formula. Don't use math symbols and space in name!!!!</comment>
         <translation>hals_seite_zur_brust_seite_vorne</translation>
     </message>
     <message>
@@ -3064,7 +3062,7 @@ Vertikalen Abstand von der hohen Hüfte Ebene, stärkste Stelle des  vorderen Ba
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1527"/>
         <source>neck_side_to_armfold_b</source>
-        <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
+        <comment>Name in a formula. Don't use math symbols and space in name!!!!</comment>
         <translation>hals_seite_zur_achsel_hinten</translation>
     </message>
     <message>
@@ -3082,7 +3080,7 @@ Vertikalen Abstand von der hohen Hüfte Ebene, stärkste Stelle des  vorderen Ba
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1534"/>
         <source>neck_side_to_armpit_b</source>
-        <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
+        <comment>Name in a formula. Don't use math symbols and space in name!!!!</comment>
         <translation>hals_seite_zur_oberbrust_seite_hinten</translation>
     </message>
     <message>
@@ -3100,7 +3098,7 @@ Vertikalen Abstand von der hohen Hüfte Ebene, stärkste Stelle des  vorderen Ba
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1541"/>
         <source>neck_side_to_bust_side_b</source>
-        <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
+        <comment>Name in a formula. Don't use math symbols and space in name!!!!</comment>
         <translation>hals_seite_zur_brust_seite_hinten</translation>
     </message>
     <message>
@@ -3118,7 +3116,7 @@ Vertikalen Abstand von der hohen Hüfte Ebene, stärkste Stelle des  vorderen Ba
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1560"/>
         <source>arm_shoulder_tip_to_wrist_bent</source>
-        <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
+        <comment>Name in a formula. Don't use math symbols and space in name!!!!</comment>
         <translation>Arm_Schulterspitze_zum_Handgelenk_gebeugt</translation>
     </message>
     <message>
@@ -3136,7 +3134,7 @@ Vertikalen Abstand von der hohen Hüfte Ebene, stärkste Stelle des  vorderen Ba
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1567"/>
         <source>arm_shoulder_tip_to_elbow_bent</source>
-        <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
+        <comment>Name in a formula. Don't use math symbols and space in name!!!!</comment>
         <translation>Arm_Schulterspitze_zum_Ellbogen_gebeugt</translation>
     </message>
     <message>
@@ -3154,7 +3152,7 @@ Vertikalen Abstand von der hohen Hüfte Ebene, stärkste Stelle des  vorderen Ba
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1574"/>
         <source>arm_elbow_to_wrist_bent</source>
-        <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
+        <comment>Name in a formula. Don't use math symbols and space in name!!!!</comment>
         <translation>Arm_Ellbogen_zum_Handgelenk_gebeugt</translation>
     </message>
     <message>
@@ -3172,7 +3170,7 @@ Vertikalen Abstand von der hohen Hüfte Ebene, stärkste Stelle des  vorderen Ba
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1583"/>
         <source>arm_elbow_circ_bent</source>
-        <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
+        <comment>Name in a formula. Don't use math symbols and space in name!!!!</comment>
         <translation>Arm_Ellenbogen_Umfang_gebeugt</translation>
     </message>
     <message>
@@ -3190,7 +3188,7 @@ Vertikalen Abstand von der hohen Hüfte Ebene, stärkste Stelle des  vorderen Ba
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1589"/>
         <source>arm_shoulder_tip_to_wrist</source>
-        <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
+        <comment>Name in a formula. Don't use math symbols and space in name!!!!</comment>
         <translation>Arm_Schulterspitze_bis_Handgelenk</translation>
     </message>
     <message>
@@ -3208,7 +3206,7 @@ Vertikalen Abstand von der hohen Hüfte Ebene, stärkste Stelle des  vorderen Ba
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1596"/>
         <source>arm_shoulder_tip_to_elbow</source>
-        <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
+        <comment>Name in a formula. Don't use math symbols and space in name!!!!</comment>
         <translation>Arm_Schulterspitze_bis_Elllenbogen</translation>
     </message>
     <message>
@@ -3226,7 +3224,7 @@ Vertikalen Abstand von der hohen Hüfte Ebene, stärkste Stelle des  vorderen Ba
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1603"/>
         <source>arm_elbow_to_wrist</source>
-        <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
+        <comment>Name in a formula. Don't use math symbols and space in name!!!!</comment>
         <translation>Arm_Ellenbogen_zum_Handgelenk</translation>
     </message>
     <message>
@@ -3244,7 +3242,7 @@ Vertikalen Abstand von der hohen Hüfte Ebene, stärkste Stelle des  vorderen Ba
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1611"/>
         <source>arm_armpit_to_wrist</source>
-        <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
+        <comment>Name in a formula. Don't use math symbols and space in name!!!!</comment>
         <translation>arm_achsel_zum_handgelenk</translation>
     </message>
     <message>
@@ -3262,7 +3260,7 @@ Vertikalen Abstand von der hohen Hüfte Ebene, stärkste Stelle des  vorderen Ba
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1618"/>
         <source>arm_armpit_to_elbow</source>
-        <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
+        <comment>Name in a formula. Don't use math symbols and space in name!!!!</comment>
         <translation>arm_achsel_zum_ellenbogen</translation>
     </message>
     <message>
@@ -3280,7 +3278,7 @@ Vertikalen Abstand von der hohen Hüfte Ebene, stärkste Stelle des  vorderen Ba
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1625"/>
         <source>arm_elbow_to_wrist_inside</source>
-        <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
+        <comment>Name in a formula. Don't use math symbols and space in name!!!!</comment>
         <translation>arm_ellenbogen_zum_handgelenk_innen</translation>
     </message>
     <message>
@@ -3298,7 +3296,7 @@ Vertikalen Abstand von der hohen Hüfte Ebene, stärkste Stelle des  vorderen Ba
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1633"/>
         <source>arm_upper_circ</source>
-        <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
+        <comment>Name in a formula. Don't use math symbols and space in name!!!!</comment>
         <translation>arm_oberarm_umfang</translation>
     </message>
     <message>
@@ -3316,7 +3314,7 @@ Vertikalen Abstand von der hohen Hüfte Ebene, stärkste Stelle des  vorderen Ba
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1639"/>
         <source>arm_above_elbow_circ</source>
-        <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
+        <comment>Name in a formula. Don't use math symbols and space in name!!!!</comment>
         <translation>arm_über_ellenbogen_umfang</translation>
     </message>
     <message>
@@ -3334,7 +3332,7 @@ Vertikalen Abstand von der hohen Hüfte Ebene, stärkste Stelle des  vorderen Ba
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1645"/>
         <source>arm_elbow_circ</source>
-        <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
+        <comment>Name in a formula. Don't use math symbols and space in name!!!!</comment>
         <translation>Arm_Ellenbogen_Umfang</translation>
     </message>
     <message>
@@ -3352,7 +3350,7 @@ Vertikalen Abstand von der hohen Hüfte Ebene, stärkste Stelle des  vorderen Ba
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1651"/>
         <source>arm_lower_circ</source>
-        <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
+        <comment>Name in a formula. Don't use math symbols and space in name!!!!</comment>
         <translation>Unterarm_Umfang</translation>
     </message>
     <message>
@@ -3370,7 +3368,7 @@ Vertikalen Abstand von der hohen Hüfte Ebene, stärkste Stelle des  vorderen Ba
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1658"/>
         <source>arm_wrist_circ</source>
-        <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
+        <comment>Name in a formula. Don't use math symbols and space in name!!!!</comment>
         <translation>arm_handgelenk_umfang</translation>
     </message>
     <message>
@@ -3388,7 +3386,7 @@ Vertikalen Abstand von der hohen Hüfte Ebene, stärkste Stelle des  vorderen Ba
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1664"/>
         <source>arm_shoulder_tip_to_armfold_line</source>
-        <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
+        <comment>Name in a formula. Don't use math symbols and space in name!!!!</comment>
         <translation>arm_schulterspitze_zur_achsel</translation>
     </message>
     <message>
@@ -3406,7 +3404,7 @@ Vertikalen Abstand von der hohen Hüfte Ebene, stärkste Stelle des  vorderen Ba
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1670"/>
         <source>arm_neck_side_to_wrist</source>
-        <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
+        <comment>Name in a formula. Don't use math symbols and space in name!!!!</comment>
         <translation>arm_hals_seite_zum_handgelenk</translation>
     </message>
     <message>
@@ -3424,7 +3422,7 @@ Vertikalen Abstand von der hohen Hüfte Ebene, stärkste Stelle des  vorderen Ba
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1678"/>
         <source>arm_neck_side_to_finger_tip</source>
-        <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
+        <comment>Name in a formula. Don't use math symbols and space in name!!!!</comment>
         <translation>arm_hals_seite_zu_fingerspitzen</translation>
     </message>
     <message>
@@ -3442,7 +3440,7 @@ Vertikalen Abstand von der hohen Hüfte Ebene, stärkste Stelle des  vorderen Ba
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1687"/>
         <source>armscye_circ</source>
-        <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
+        <comment>Name in a formula. Don't use math symbols and space in name!!!!</comment>
         <translation>ärmelloch_umfang</translation>
     </message>
     <message>
@@ -3460,7 +3458,7 @@ Vertikalen Abstand von der hohen Hüfte Ebene, stärkste Stelle des  vorderen Ba
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1695"/>
         <source>armscye_length</source>
-        <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
+        <comment>Name in a formula. Don't use math symbols and space in name!!!!</comment>
         <translation>ärmelloch_länge</translation>
     </message>
     <message>
@@ -3478,7 +3476,7 @@ Vertikalen Abstand von der hohen Hüfte Ebene, stärkste Stelle des  vorderen Ba
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1702"/>
         <source>armscye_width</source>
-        <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
+        <comment>Name in a formula. Don't use math symbols and space in name!!!!</comment>
         <translation>ärmelloch_breite</translation>
     </message>
     <message>
@@ -3496,7 +3494,7 @@ Vertikalen Abstand von der hohen Hüfte Ebene, stärkste Stelle des  vorderen Ba
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1709"/>
         <source>arm_neck_side_to_outer_elbow</source>
-        <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
+        <comment>Name in a formula. Don't use math symbols and space in name!!!!</comment>
         <translation>arm_hals_seite_zum_ellenbogen_außen</translation>
     </message>
     <message>
@@ -3514,7 +3512,7 @@ Vertikalen Abstand von der hohen Hüfte Ebene, stärkste Stelle des  vorderen Ba
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1728"/>
         <source>leg_crotch_to_floor</source>
-        <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
+        <comment>Name in a formula. Don't use math symbols and space in name!!!!</comment>
         <translation>bein_schritt_bis_zum_boden</translation>
     </message>
     <message>
@@ -3533,7 +3531,7 @@ Vertikalen Abstand von der hohen Hüfte Ebene, stärkste Stelle des  vorderen Ba
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1736"/>
         <source>leg_waist_side_to_floor</source>
-        <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
+        <comment>Name in a formula. Don't use math symbols and space in name!!!!</comment>
         <translation>beine_taille_seite_bis_boden</translation>
     </message>
     <message>
@@ -3552,7 +3550,7 @@ Vertikalen Abstand von der hohen Hüfte Ebene, stärkste Stelle des  vorderen Ba
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1743"/>
         <source>leg_thigh_upper_circ</source>
-        <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
+        <comment>Name in a formula. Don't use math symbols and space in name!!!!</comment>
         <translation>beine_oberschenkel_umfang</translation>
     </message>
     <message>
@@ -3570,7 +3568,7 @@ Vertikalen Abstand von der hohen Hüfte Ebene, stärkste Stelle des  vorderen Ba
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1751"/>
         <source>leg_thigh_mid_circ</source>
-        <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
+        <comment>Name in a formula. Don't use math symbols and space in name!!!!</comment>
         <translation>beine_oberschenkel_umfang_mitte</translation>
     </message>
     <message>
@@ -3588,7 +3586,7 @@ Vertikalen Abstand von der hohen Hüfte Ebene, stärkste Stelle des  vorderen Ba
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1758"/>
         <source>leg_knee_circ</source>
-        <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
+        <comment>Name in a formula. Don't use math symbols and space in name!!!!</comment>
         <translation>beine_knieumfang</translation>
     </message>
     <message>
@@ -3607,7 +3605,7 @@ Vertikalen Abstand von der hohen Hüfte Ebene, stärkste Stelle des  vorderen Ba
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1764"/>
         <source>leg_knee_small_circ</source>
-        <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
+        <comment>Name in a formula. Don't use math symbols and space in name!!!!</comment>
         <translation>beine_kleinster_knieumfang</translation>
     </message>
     <message>
@@ -3625,7 +3623,7 @@ Vertikalen Abstand von der hohen Hüfte Ebene, stärkste Stelle des  vorderen Ba
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1770"/>
         <source>leg_calf_circ</source>
-        <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
+        <comment>Name in a formula. Don't use math symbols and space in name!!!!</comment>
         <translation>bein_wadenumfang</translation>
     </message>
     <message>
@@ -3643,7 +3641,7 @@ Vertikalen Abstand von der hohen Hüfte Ebene, stärkste Stelle des  vorderen Ba
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1777"/>
         <source>leg_ankle_high_circ</source>
-        <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
+        <comment>Name in a formula. Don't use math symbols and space in name!!!!</comment>
         <translation>bein_oberer_knöchelumfang</translation>
     </message>
     <message>
@@ -3661,7 +3659,7 @@ Vertikalen Abstand von der hohen Hüfte Ebene, stärkste Stelle des  vorderen Ba
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1785"/>
         <source>leg_ankle_circ</source>
-        <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
+        <comment>Name in a formula. Don't use math symbols and space in name!!!!</comment>
         <translation>bein_umfang_knöchel</translation>
     </message>
     <message>
@@ -3680,7 +3678,7 @@ Vertikalen Abstand von der hohen Hüfte Ebene, stärkste Stelle des  vorderen Ba
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1792"/>
         <source>leg_knee_circ_bent</source>
-        <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
+        <comment>Name in a formula. Don't use math symbols and space in name!!!!</comment>
         <translation>bein_umfang_gewinkeltes_knie</translation>
     </message>
     <message>
@@ -3698,7 +3696,7 @@ Vertikalen Abstand von der hohen Hüfte Ebene, stärkste Stelle des  vorderen Ba
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1798"/>
         <source>leg_ankle_diag_circ</source>
-        <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
+        <comment>Name in a formula. Don't use math symbols and space in name!!!!</comment>
         <translation>bein_diagonaler_umfang_knöchel</translation>
     </message>
     <message>
@@ -3716,7 +3714,7 @@ Vertikalen Abstand von der hohen Hüfte Ebene, stärkste Stelle des  vorderen Ba
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1805"/>
         <source>leg_crotch_to_ankle</source>
-        <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
+        <comment>Name in a formula. Don't use math symbols and space in name!!!!</comment>
         <translation>bein_schritt_zum_knöchel</translation>
     </message>
     <message>
@@ -3734,7 +3732,7 @@ Vertikalen Abstand von der hohen Hüfte Ebene, stärkste Stelle des  vorderen Ba
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1812"/>
         <source>leg_waist_side_to_ankle</source>
-        <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
+        <comment>Name in a formula. Don't use math symbols and space in name!!!!</comment>
         <translation>bein_taillenseite_zum_knöchel</translation>
     </message>
     <message>
@@ -3752,7 +3750,7 @@ Vertikalen Abstand von der hohen Hüfte Ebene, stärkste Stelle des  vorderen Ba
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1819"/>
         <source>leg_waist_side_to_knee</source>
-        <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
+        <comment>Name in a formula. Don't use math symbols and space in name!!!!</comment>
         <translation>bein_taillenseite_bis_knie</translation>
     </message>
     <message>
@@ -3770,7 +3768,7 @@ Vertikalen Abstand von der hohen Hüfte Ebene, stärkste Stelle des  vorderen Ba
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1839"/>
         <source>crotch_length</source>
-        <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
+        <comment>Name in a formula. Don't use math symbols and space in name!!!!</comment>
         <translation>schritt_länge</translation>
     </message>
     <message>
@@ -3788,7 +3786,7 @@ Vertikalen Abstand von der hohen Hüfte Ebene, stärkste Stelle des  vorderen Ba
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1846"/>
         <source>crotch_length_b</source>
-        <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
+        <comment>Name in a formula. Don't use math symbols and space in name!!!!</comment>
         <translation>schrittlänge_hinten</translation>
     </message>
     <message>
@@ -3806,7 +3804,7 @@ Vertikalen Abstand von der hohen Hüfte Ebene, stärkste Stelle des  vorderen Ba
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1854"/>
         <source>crotch_length_f</source>
-        <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
+        <comment>Name in a formula. Don't use math symbols and space in name!!!!</comment>
         <translation>schrittlänge_vorne</translation>
     </message>
     <message>
@@ -3824,7 +3822,7 @@ Vertikalen Abstand von der hohen Hüfte Ebene, stärkste Stelle des  vorderen Ba
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1862"/>
         <source>rise_length_side_sitting</source>
-        <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
+        <comment>Name in a formula. Don't use math symbols and space in name!!!!</comment>
         <translation>Leibhöhe_sitzend</translation>
     </message>
     <message>
@@ -3864,7 +3862,7 @@ Vertikalen Abstand von der hohen Hüfte Ebene, stärkste Stelle des  vorderen Ba
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1892"/>
         <source>rise_length_side</source>
-        <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
+        <comment>Name in a formula. Don't use math symbols and space in name!!!!</comment>
         <translation>Leibhöhe_Seite</translation>
     </message>
     <message>
@@ -3881,7 +3879,7 @@ Vertikalen Abstand von der hohen Hüfte Ebene, stärkste Stelle des  vorderen Ba
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1871"/>
         <source>rise_length_diag</source>
-        <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
+        <comment>Name in a formula. Don't use math symbols and space in name!!!!</comment>
         <translation>leibhöhe_diagonal</translation>
     </message>
     <message>
@@ -3899,7 +3897,7 @@ Vertikalen Abstand von der hohen Hüfte Ebene, stärkste Stelle des  vorderen Ba
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1878"/>
         <source>rise_length_b</source>
-        <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
+        <comment>Name in a formula. Don't use math symbols and space in name!!!!</comment>
         <translation>Leibhöhe_h</translation>
     </message>
     <message>
@@ -3916,7 +3914,7 @@ Vertikalen Abstand von der hohen Hüfte Ebene, stärkste Stelle des  vorderen Ba
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1885"/>
         <source>rise_length_f</source>
-        <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
+        <comment>Name in a formula. Don't use math symbols and space in name!!!!</comment>
         <translation>Leibhöhe_v</translation>
     </message>
     <message>
@@ -3939,7 +3937,7 @@ Vertikalen Abstand von der hohen Hüfte Ebene, stärkste Stelle des  vorderen Ba
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1911"/>
         <source>neck_back_to_waist_front</source>
-        <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
+        <comment>Name in a formula. Don't use math symbols and space in name!!!!</comment>
         <translation>nacken_zur_taille_vorne</translation>
     </message>
     <message>
@@ -3957,7 +3955,7 @@ Vertikalen Abstand von der hohen Hüfte Ebene, stärkste Stelle des  vorderen Ba
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1918"/>
         <source>waist_to_waist_halter</source>
-        <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
+        <comment>Name in a formula. Don't use math symbols and space in name!!!!</comment>
         <translation>taille_zur_taille_über_nacken</translation>
     </message>
     <message>
@@ -3975,7 +3973,7 @@ Vertikalen Abstand von der hohen Hüfte Ebene, stärkste Stelle des  vorderen Ba
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1925"/>
         <source>waist_natural_circ</source>
-        <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
+        <comment>Name in a formula. Don't use math symbols and space in name!!!!</comment>
         <translation>taille_natürlich_umfang</translation>
     </message>
     <message>
@@ -3994,7 +3992,7 @@ Vertikalen Abstand von der hohen Hüfte Ebene, stärkste Stelle des  vorderen Ba
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1933"/>
         <source>waist_natural_arc_f</source>
-        <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
+        <comment>Name in a formula. Don't use math symbols and space in name!!!!</comment>
         <translation>taille_natürlich_bogen_vorne</translation>
     </message>
     <message>
@@ -4012,7 +4010,7 @@ Vertikalen Abstand von der hohen Hüfte Ebene, stärkste Stelle des  vorderen Ba
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1940"/>
         <source>waist_natural_arc_b</source>
-        <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
+        <comment>Name in a formula. Don't use math symbols and space in name!!!!</comment>
         <translation>taille_natürlich_bogen_hinten</translation>
     </message>
     <message>
@@ -4030,7 +4028,7 @@ Vertikalen Abstand von der hohen Hüfte Ebene, stärkste Stelle des  vorderen Ba
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1947"/>
         <source>waist_to_natural_waist_f</source>
-        <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
+        <comment>Name in a formula. Don't use math symbols and space in name!!!!</comment>
         <translation>taille_zur_natürlichen_taille_vorne</translation>
     </message>
     <message>
@@ -4048,7 +4046,7 @@ Vertikalen Abstand von der hohen Hüfte Ebene, stärkste Stelle des  vorderen Ba
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1954"/>
         <source>waist_to_natural_waist_b</source>
-        <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
+        <comment>Name in a formula. Don't use math symbols and space in name!!!!</comment>
         <translation>taille_zur_natürlichen_taille_hinten</translation>
     </message>
     <message>
@@ -4066,7 +4064,7 @@ Vertikalen Abstand von der hohen Hüfte Ebene, stärkste Stelle des  vorderen Ba
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1961"/>
         <source>arm_neck_back_to_elbow_bent</source>
-        <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
+        <comment>Name in a formula. Don't use math symbols and space in name!!!!</comment>
         <translation>arm_hinterseite_nacken_bis_ellenbogen_gebeugt</translation>
     </message>
     <message>
@@ -4084,7 +4082,7 @@ Vertikalen Abstand von der hohen Hüfte Ebene, stärkste Stelle des  vorderen Ba
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1969"/>
         <source>arm_neck_back_to_wrist_bent</source>
-        <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
+        <comment>Name in a formula. Don't use math symbols and space in name!!!!</comment>
         <translation>arm_nacken_zum_handgelenk_hoch_gebeugt</translation>
     </message>
     <message>
@@ -4102,7 +4100,7 @@ Vertikalen Abstand von der hohen Hüfte Ebene, stärkste Stelle des  vorderen Ba
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1976"/>
         <source>arm_neck_side_to_elbow_bent</source>
-        <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
+        <comment>Name in a formula. Don't use math symbols and space in name!!!!</comment>
         <translation>arm_hals_seite_zum_ellenbogen_gebogen</translation>
     </message>
     <message>
@@ -4120,7 +4118,7 @@ Vertikalen Abstand von der hohen Hüfte Ebene, stärkste Stelle des  vorderen Ba
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1983"/>
         <source>arm_neck_side_to_wrist_bent</source>
-        <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
+        <comment>Name in a formula. Don't use math symbols and space in name!!!!</comment>
         <translation>arm_hals_seite_zum_handgelenk_gebogen</translation>
     </message>
     <message>
@@ -4138,7 +4136,7 @@ Vertikalen Abstand von der hohen Hüfte Ebene, stärkste Stelle des  vorderen Ba
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1991"/>
         <source>arm_across_back_center_to_elbow_bent</source>
-        <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
+        <comment>Name in a formula. Don't use math symbols and space in name!!!!</comment>
         <translation>arm_mitte_über_rücken_zum_ellenbogen_hoch_gebeugt</translation>
     </message>
     <message>
@@ -4156,7 +4154,7 @@ Vertikalen Abstand von der hohen Hüfte Ebene, stärkste Stelle des  vorderen Ba
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1999"/>
         <source>arm_across_back_center_to_wrist_bent</source>
-        <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
+        <comment>Name in a formula. Don't use math symbols and space in name!!!!</comment>
         <translation>arm_mitte_rücken_zum_handgelenk_hoch_gebeugt</translation>
     </message>
     <message>
@@ -4174,7 +4172,7 @@ Vertikalen Abstand von der hohen Hüfte Ebene, stärkste Stelle des  vorderen Ba
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="2007"/>
         <source>arm_armscye_back_center_to_wrist_bent</source>
-        <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
+        <comment>Name in a formula. Don't use math symbols and space in name!!!!</comment>
         <translation>Arm_ärmelloch_rücken_zum_handgelenk_gebeugt</translation>
     </message>
     <message>
@@ -4192,7 +4190,7 @@ Vertikalen Abstand von der hohen Hüfte Ebene, stärkste Stelle des  vorderen Ba
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="2027"/>
         <source>neck_back_to_bust_front</source>
-        <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
+        <comment>Name in a formula. Don't use math symbols and space in name!!!!</comment>
         <translation>hals_hinten_zur_brust_vorne</translation>
     </message>
     <message>
@@ -4210,7 +4208,7 @@ Vertikalen Abstand von der hohen Hüfte Ebene, stärkste Stelle des  vorderen Ba
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="2034"/>
         <source>neck_back_to_armfold_front</source>
-        <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
+        <comment>Name in a formula. Don't use math symbols and space in name!!!!</comment>
         <translation>nacken_zur_achsel_vorne</translation>
     </message>
     <message>
@@ -4228,7 +4226,7 @@ Vertikalen Abstand von der hohen Hüfte Ebene, stärkste Stelle des  vorderen Ba
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="2041"/>
         <source>neck_back_to_armfold_front_to_waist_side</source>
-        <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
+        <comment>Name in a formula. Don't use math symbols and space in name!!!!</comment>
         <translation>nacken_zur_achsel_vorne_zur_taillenseite</translation>
     </message>
     <message>
@@ -4246,7 +4244,7 @@ Vertikalen Abstand von der hohen Hüfte Ebene, stärkste Stelle des  vorderen Ba
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="2048"/>
         <source>highbust_back_over_shoulder_to_armfold_front</source>
-        <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
+        <comment>Name in a formula. Don't use math symbols and space in name!!!!</comment>
         <translation>oberbrust_hinten_über_schulter_zur_achsel_vorne</translation>
     </message>
     <message>
@@ -4264,7 +4262,7 @@ Vertikalen Abstand von der hohen Hüfte Ebene, stärkste Stelle des  vorderen Ba
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="2055"/>
         <source>highbust_back_over_shoulder_to_waist_front</source>
-        <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
+        <comment>Name in a formula. Don't use math symbols and space in name!!!!</comment>
         <translation>oberbrust_hinten_über_schulter_zur_taille_vorne</translation>
     </message>
     <message>
@@ -4282,7 +4280,7 @@ Vertikalen Abstand von der hohen Hüfte Ebene, stärkste Stelle des  vorderen Ba
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="2062"/>
         <source>neck_back_to_armfold_front_to_neck_back</source>
-        <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
+        <comment>Name in a formula. Don't use math symbols and space in name!!!!</comment>
         <translation>nacken_zur_achsel_vorne_zum_nacken</translation>
     </message>
     <message>
@@ -4300,7 +4298,7 @@ Vertikalen Abstand von der hohen Hüfte Ebene, stärkste Stelle des  vorderen Ba
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="2070"/>
         <source>across_back_center_to_armfold_front_to_across_back_center</source>
-        <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
+        <comment>Name in a formula. Don't use math symbols and space in name!!!!</comment>
         <translation>über_rücken_zentrum_zur_achsel_vorne_zu_über_rücken_zentrum</translation>
     </message>
     <message>
@@ -4318,7 +4316,7 @@ Vertikalen Abstand von der hohen Hüfte Ebene, stärkste Stelle des  vorderen Ba
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="2078"/>
         <source>neck_back_to_armfold_front_to_highbust_back</source>
-        <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
+        <comment>Name in a formula. Don't use math symbols and space in name!!!!</comment>
         <translation>nacken_zur_achsel_vorne_zur_oberbrust_hinten</translation>
     </message>
     <message>
@@ -4336,7 +4334,7 @@ Vertikalen Abstand von der hohen Hüfte Ebene, stärkste Stelle des  vorderen Ba
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="2086"/>
         <source>armfold_to_armfold_bust</source>
-        <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
+        <comment>Name in a formula. Don't use math symbols and space in name!!!!</comment>
         <translation>achsel_zur_achsel_über_brust</translation>
     </message>
     <message>
@@ -4354,7 +4352,7 @@ Vertikalen Abstand von der hohen Hüfte Ebene, stärkste Stelle des  vorderen Ba
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="2094"/>
         <source>armfold_to_bust_front</source>
-        <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
+        <comment>Name in a formula. Don't use math symbols and space in name!!!!</comment>
         <translation>achsel_zur_brust</translation>
     </message>
     <message>
@@ -4372,7 +4370,7 @@ Vertikalen Abstand von der hohen Hüfte Ebene, stärkste Stelle des  vorderen Ba
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="2101"/>
         <source>highbust_b_over_shoulder_to_highbust_f</source>
-        <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
+        <comment>Name in a formula. Don't use math symbols and space in name!!!!</comment>
         <translation>oberbrust_hinten_über_schulter_zur_oberbrust_vorne</translation>
     </message>
     <message>
@@ -4390,7 +4388,7 @@ Vertikalen Abstand von der hohen Hüfte Ebene, stärkste Stelle des  vorderen Ba
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="2110"/>
         <source>armscye_arc</source>
-        <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
+        <comment>Name in a formula. Don't use math symbols and space in name!!!!</comment>
         <translation>ärmelloch_bogen</translation>
     </message>
     <message>
@@ -4408,7 +4406,7 @@ Vertikalen Abstand von der hohen Hüfte Ebene, stärkste Stelle des  vorderen Ba
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="2129"/>
         <source>dart_width_shoulder</source>
-        <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
+        <comment>Name in a formula. Don't use math symbols and space in name!!!!</comment>
         <translation>abnäher_breite_schulter</translation>
     </message>
     <message>
@@ -4427,7 +4425,7 @@ Vertikalen Abstand von der hohen Hüfte Ebene, stärkste Stelle des  vorderen Ba
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="2137"/>
         <source>dart_width_bust</source>
-        <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
+        <comment>Name in a formula. Don't use math symbols and space in name!!!!</comment>
         <translation>abnäher_breite_brust</translation>
     </message>
     <message>
@@ -4439,7 +4437,7 @@ Vertikalen Abstand von der hohen Hüfte Ebene, stärkste Stelle des  vorderen Ba
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="2145"/>
         <source>dart_width_waist</source>
-        <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
+        <comment>Name in a formula. Don't use math symbols and space in name!!!!</comment>
         <translation>Abnäher_breite_hüfte</translation>
     </message>
     <message>
