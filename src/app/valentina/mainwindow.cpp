@@ -4246,24 +4246,22 @@ void MainWindow::CreateActions()
     connect(ui->actionExportIncrementsToCSV, &QAction::triggered, this, &MainWindow::ExportDataToCSV);
     connect(ui->actionExportFinalMeasurementsToCSV, &QAction::triggered, this, &MainWindow::ExportFMeasurementsToCSV);
 
-    connect(ui->actionTable, &QAction::triggered, this, [this](bool checked)
+    connect(ui->actionTable, &QAction::triggered, this, [this]()
     {
-        if (checked)
+        // Because of bug on Mac with Qt 5.11 closing this dialog causes a crash. Instead of closing we will keep
+        // dialog in memory.
+        if (dialogTable.isNull())
         {
             dialogTable = new DialogIncrements(pattern, doc, this);
             connect(dialogTable.data(), &DialogIncrements::UpdateProperties, toolOptions,
                     &VToolOptionsPropertyBrowser::RefreshOptions);
-            connect(dialogTable.data(), &DialogIncrements::DialogClosed, this, [this]()
-            {
-                ui->actionTable->setChecked(false);
-                delete dialogTable;
-            });
             dialogTable->show();
         }
         else
         {
-            ui->actionTable->setChecked(true);
-            dialogTable->activateWindow();
+            dialogTable->FullUpdateFromFile();
+            dialogTable->RestoreAfterClose(); // Redo some moves after close
+            dialogTable->isVisible() ? dialogTable->activateWindow() : dialogTable->show();
         }
     });
 

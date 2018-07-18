@@ -52,8 +52,13 @@ public:
     DialogIncrements(VContainer *data, VPattern *doc, QWidget *parent = nullptr);
     virtual ~DialogIncrements() override;
 
+    void RestoreAfterClose();
+
 signals:
     void UpdateProperties();
+
+public slots:
+    void FullUpdateFromFile();
 
 protected:
     virtual void closeEvent ( QCloseEvent * event ) override;
@@ -72,7 +77,6 @@ private slots:
     void SaveIncrFormula();
     void DeployFormula();
     void Fx();
-    void FullUpdateFromFile();
     void RefreshPattern();
 
 private:

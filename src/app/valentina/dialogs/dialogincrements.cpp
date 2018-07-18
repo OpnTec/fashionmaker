@@ -1320,6 +1320,8 @@ void DialogIncrements::closeEvent(QCloseEvent *event)
     ui->lineEditName->blockSignals(true);
     ui->plainTextEditDescription->blockSignals(true);
 
+    disconnect(this->doc, &VPattern::FullUpdateFromFile, this, &DialogIncrements::FullUpdateFromFile);
+
     emit UpdateProperties();
     emit DialogClosed(QDialog::Accepted);
     event->accept();
@@ -1416,4 +1418,25 @@ void DialogIncrements::ShowIncrementDetails()
 DialogIncrements::~DialogIncrements()
 {
     delete ui;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogIncrements::RestoreAfterClose()
+{
+    // Because of bug on Mac OS with Qt 5.11 closing this dialog causes a crash. Instead of closing we will keep
+    // dialog in memory and reuse it again. This function redo some moves made after close.
+
+    connect(this->doc, &VPattern::FullUpdateFromFile, this, &DialogIncrements::FullUpdateFromFile);
+
+    ui->tabWidget->setCurrentIndex(0);
+
+    if (ui->tableWidgetIncrement->rowCount() > 0)
+    {
+        ui->tableWidgetIncrement->selectRow(0);
+    }
+
+    if (ui->tableWidgetPC->rowCount() > 0)
+    {
+        ui->tableWidgetPC->selectRow(0);
+    }
 }
