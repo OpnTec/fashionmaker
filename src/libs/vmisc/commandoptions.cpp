@@ -98,6 +98,8 @@ const QString SINGLE_OPTION_GRADATIONSIZE   = QStringLiteral("x");
 const QString LONG_OPTION_GRADATIONHEIGHT   = QStringLiteral("gheight");
 const QString SINGLE_OPTION_GRADATIONHEIGHT = QStringLiteral("e");
 
+const QString LONG_OPTION_USER_MATERIAL     = QStringLiteral("userMaterial");
+
 const QString LONG_OPTION_IGNORE_MARGINS    = QStringLiteral("ignoremargins");
 const QString SINGLE_OPTION_IGNORE_MARGINS  = QStringLiteral("i");
 
@@ -126,6 +128,10 @@ const QString LONG_OPTION_TILED_PDF_BOTTOM_MARGIN = QStringLiteral("tiledbmargin
 const QString LONG_OPTION_TILED_PDF_LANDSCAPE     = QStringLiteral("tiledLandscape");
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief AllKeys return list with all command line keys (short and long forms). Used for testing on conflicts.
+ * @return list with all command line keys
+ */
 QStringList AllKeys()
 {
     QStringList list;
@@ -150,8 +156,10 @@ QStringList AllKeys()
          << LONG_OPTION_GAPWIDTH << SINGLE_OPTION_GAPWIDTH
          << LONG_OPTION_GROUPPING << SINGLE_OPTION_GROUPPING
          << LONG_OPTION_TEST << SINGLE_OPTION_TEST
+         << LONG_OPTION_PENDANTIC
          << LONG_OPTION_GRADATIONSIZE << SINGLE_OPTION_GRADATIONSIZE
          << LONG_OPTION_GRADATIONHEIGHT << SINGLE_OPTION_GRADATIONHEIGHT
+         << LONG_OPTION_USER_MATERIAL
          << LONG_OPTION_IGNORE_MARGINS << SINGLE_OPTION_IGNORE_MARGINS
          << LONG_OPTION_LEFT_MARGIN << SINGLE_OPTION_LEFT_MARGIN
          << LONG_OPTION_RIGHT_MARGIN << SINGLE_OPTION_RIGHT_MARGIN

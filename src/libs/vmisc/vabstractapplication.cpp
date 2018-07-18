@@ -60,6 +60,7 @@ VAbstractApplication::VAbstractApplication(int &argc, char **argv)
       sceneView(nullptr),
       doc(nullptr),
       m_customerName(),
+      m_userMaterials(),
       openingPattern(false)
 {
     QString rules;

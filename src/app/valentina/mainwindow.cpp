@@ -5425,6 +5425,8 @@ void MainWindow::ProcessCMD()
             return;
         }
 
+        qApp->SetUserMaterials(cmd->OptUserMaterials());
+
         const bool loaded = LoadPattern(args.first(), cmd->OptMeasurePath());
 
         if (not loaded)

@@ -100,6 +100,9 @@ public:
     //@brief returns the destination path for export final measurements or empty string if not set
     QString OptExportFMTo() const;
 
+    //@brief returns list of user defined materials
+    QMap<int, QString> OptUserMaterials() const;
+
     //generator creation is moved here ... because most options are for it only, so no need to create extra getters...
     //@brief creates VLayoutGenerator
     VLayoutGeneratorPtr DefaultGenerator() const;

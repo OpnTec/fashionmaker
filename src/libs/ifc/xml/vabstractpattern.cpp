@@ -236,6 +236,30 @@ void GatherTokens(QSet<QString> &tokens, const QList<QString> &tokenList)
 {
     tokens = tokens.unite(tokenList.toSet());
 }
+
+//---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief AdjustMaterials help function that combine user materials from pattern and cli.
+ * @param materials materials from pattern
+ * @return combined list
+ */
+QMap<int, QString> AdjustMaterials(QMap<int, QString> materials)
+{
+    const QMap<int, QString> cliMaterials = qApp->GetUserMaterials();
+    QMap<int, QString>::const_iterator i = cliMaterials.constBegin();
+    while (i != cliMaterials.constEnd())
+    {
+        if (not materials.contains(i.key()))
+        {
+            qWarning() << QObject::tr("User material number %1 was not defined in this pattern.").arg(i.key());
+        }
+
+        materials.insert(i.key(), i.value());
+        ++i;
+    }
+
+    return materials;
+}
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -1445,7 +1469,7 @@ QMap<int, QString> VAbstractPattern::GetPatternMaterials() const
         patternMaterials = GetMaterials(list.at(0).toElement());
     }
 
-    return patternMaterials;
+    return AdjustMaterials(patternMaterials);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

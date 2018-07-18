@@ -118,6 +118,9 @@ public:
 
     static QString ClearMessage(QString msg);
 
+    QMap<int, QString> GetUserMaterials() const;
+    void               SetUserMaterials(const QMap<int, QString> &userMaterials);
+
 protected:
     QUndoStack         *undoStack;
 
@@ -152,6 +155,8 @@ private:
     VAbstractPattern   *doc;
     QString            m_customerName;
 
+    QMap<int, QString> m_userMaterials;
+
     /**
      * @brief openingPattern true when we opening pattern. If something will be wrong in formula this help understand if
      * we can allow user use Undo option.
@@ -183,6 +188,18 @@ inline QString VAbstractApplication::GetPatternPath() const
 inline void VAbstractApplication::SetPatternPath(const QString &value)
 {
     patternFilePath = value;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+inline QMap<int, QString> VAbstractApplication::GetUserMaterials() const
+{
+    return m_userMaterials;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+inline void VAbstractApplication::SetUserMaterials(const QMap<int, QString> &userMaterials)
+{
+    m_userMaterials = userMaterials;
 }
 
 //---------------------------------------------------------------------------------------------------------------------

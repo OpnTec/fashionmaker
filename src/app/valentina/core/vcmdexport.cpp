@@ -138,6 +138,16 @@ void VCommandLine::InitOptions(VCommandLineOptions &options, QMap<QString, int> 
                                                               .arg(VMeasurement::WholeListHeights(Unit::Cm).join(", ")),
                                           translate("VCommandLine", "The height value")));
 
+    optionsIndex.insert(LONG_OPTION_USER_MATERIAL, index++);
+    options.append(new QCommandLineOption(QStringList() << LONG_OPTION_USER_MATERIAL,
+                                          translate("VCommandLine",
+                                                    "Use this option to override user material defined in pattern. The "
+                                                    "value must be in form <number>@<user matrial name>. The number "
+                                                    "should be in range from 1 to %1. For example, 1@Fabric2. The key "
+                                                    "can be used multiple times. Has no effect in GUI mode.")
+                                          .arg(userMaterialPlaceholdersQuantity),
+                                          translate("VCommandLine", "User material")));
+
     //=================================================================================================================
     optionsIndex.insert(LONG_OPTION_PAGETEMPLATE, index++);
     options.append(new QCommandLineOption(QStringList() << SINGLE_OPTION_PAGETEMPLATE << LONG_OPTION_PAGETEMPLATE,
@@ -794,6 +804,37 @@ QChar VCommandLine::OptCSVSeparator() const
 QString VCommandLine::OptExportFMTo() const
 {
     return parser.value(*optionsUsed.value(optionsIndex.value(LONG_OPTION_CSVEXPORTFM)));
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QMap<int, QString> VCommandLine::OptUserMaterials() const
+{
+    QMap<int, QString> userMaterials;
+    const QStringList values = parser.values(*optionsUsed.value(optionsIndex.value(LONG_OPTION_USER_MATERIAL)));
+    for(auto &value : values)
+    {
+        const QStringList parts = value.split('@');
+        if (parts.size() != 2)
+        {
+            qCritical() << translate("VCommandLine", "Invalid user material '%1'. Separator is missing.").arg(value)
+                        << "\n";
+            const_cast<VCommandLine*>(this)->parser.showHelp(V_EX_USAGE);
+        }
+
+        bool ok = false;
+        const int number = parts.first().toInt(&ok);
+
+        if (not ok or number < 1 or number > userMaterialPlaceholdersQuantity)
+        {
+            qCritical() << translate("VCommandLine", "Invalid user material '%1'. Wrong material number.").arg(value)
+                        << "\n";
+            const_cast<VCommandLine*>(this)->parser.showHelp(V_EX_USAGE);
+        }
+
+        userMaterials.insert(number, parts.last());
+    }
+
+    return userMaterials;
 }
 
 //---------------------------------------------------------------------------------------------------------------------

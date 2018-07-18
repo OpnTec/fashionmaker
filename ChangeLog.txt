@@ -51,6 +51,7 @@
 - [#826] New Feature. Add and remove items to groups from the context menu.
 - Mouse double click zoom fit best current pattern piece.
 - [#862] Force Valentina to immediately terminate if a pattern contains a parsing warning.
+- [#865] New feature. Dynamic Way to define Material in piece label.
 
 # Version 0.5.1 (unreleased)
 - [#683] Tool Seam allowance's dialog is off screen on small resolutions.
