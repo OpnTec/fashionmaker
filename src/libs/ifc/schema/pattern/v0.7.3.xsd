@@ -112,7 +112,7 @@
         <xs:element name="patternMaterials" minOccurs="0" maxOccurs="1">
           <xs:complexType>
             <xs:sequence>
-              <xs:element name="material" minOccurs="0" maxOccurs="9">
+              <xs:element name="material" minOccurs="0" maxOccurs="20">
                 <xs:complexType>
                   <xs:attribute name="number" type="userMaterialType" use="required"/>
                   <xs:attribute name="name" type="xs:string"/>

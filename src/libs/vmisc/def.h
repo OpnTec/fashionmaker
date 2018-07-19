@@ -390,6 +390,7 @@ extern const QString pl_mInterlining;
 extern const QString pl_wCut;
 extern const QString pl_wOnFold;
 
+// Don't forget to syncronize with XSD schema.
 const int userMaterialPlaceholdersQuantity = 20;
 
 extern const QStringList labelTemplatePlaceholders;
