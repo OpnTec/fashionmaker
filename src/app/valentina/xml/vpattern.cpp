@@ -1827,16 +1827,21 @@ void VPattern::ParsePlaceLabel(QDomElement &domElement, const Document &parse)
         initData.angle = GetParametrString(domElement, AttrAngle, "0.0");
         const QString angle = initData.angle;//need for saving fixed formula;
 
+        initData.visibilityTrigger = GetParametrString(domElement, VAbstractPattern::AttrVisible, "1.0");
+        const QString visibility = initData.visibilityTrigger;//need for saving fixed formula;
+
         initData.type = static_cast<PlaceLabelType>(GetParametrUInt(domElement, AttrPlaceLabelType, QChar('0')));
 
         VToolPlaceLabel::Create(initData);
 
         //Rewrite attribute formula. Need for situation when we have wrong formula.
-        if (w != initData.width || h != initData.height || angle != initData.angle)
+        if (w != initData.width || h != initData.height || angle != initData.angle
+                || visibility != initData.visibilityTrigger)
         {
             SetAttribute(domElement, AttrWidth, initData.width);
             SetAttribute(domElement, AttrHeight, initData.height);
             SetAttribute(domElement, AttrAngle, initData.angle);
+            SetAttribute(domElement, VAbstractPattern::AttrVisible, initData.visibilityTrigger);
             modified = true;
             haveLiteChange();
         }

@@ -68,6 +68,11 @@ public:
     qreal    GetAngle() const;
     void     SetAngle(qreal value, const QString &formula);
 
+    QString  GetVisibilityTrigger() const;
+    QString& GetVisibilityTrigger();
+    bool     IsVisible() const;
+    void     SetVisibilityTrigger(qreal visible, const QString &formula);
+
     qreal    GetCorrectionAngle() const;
     void     SetCorrectionAngle(qreal value);
 

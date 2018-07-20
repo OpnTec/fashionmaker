@@ -44,12 +44,14 @@ public:
         : width(),
           height(),
           angle('0'),
+          visibilityTrigger('1'),
           type(PlaceLabelType::Button),
           centerPoint(0),
           wValue(0),
           hValue(0),
           aValue(0),
-          correctionAngle(0)
+          correctionAngle(0),
+          isVisible(1)
     {}
 
     VPlaceLabelItemData(const VPlaceLabelItemData &item)
@@ -57,12 +59,14 @@ public:
           width(item.width),
           height(item.height),
           angle(item.angle),
+          visibilityTrigger(item.visibilityTrigger),
           type(item.type),
           centerPoint(item.centerPoint),
           wValue(item.wValue),
           hValue(item.hValue),
           aValue(item.aValue),
-          correctionAngle(item.correctionAngle)
+          correctionAngle(item.correctionAngle),
+          isVisible(item.isVisible)
     {}
 
     virtual ~VPlaceLabelItemData();
@@ -70,6 +74,7 @@ public:
     QString width;
     QString height;
     QString angle;
+    QString visibilityTrigger;
     PlaceLabelType type;
     quint32 centerPoint;
 
@@ -77,6 +82,7 @@ public:
     qreal hValue;
     qreal aValue;
     qreal correctionAngle;
+    qreal isVisible;
 
 private:
     VPlaceLabelItemData &operator=(const VPlaceLabelItemData &) Q_DECL_EQ_DELETE;

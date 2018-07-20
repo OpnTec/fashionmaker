@@ -352,11 +352,14 @@ QVector<VLayoutPlaceLabel> ConvertPlaceLabels(const VPiece &piece, const VContai
     for(auto placeLabel : placeLabels)
     {
         const auto label = pattern->GeometricObject<VPlaceLabelItem>(placeLabel);
-        VLayoutPlaceLabel layoutLabel;
-        layoutLabel.shape = label->LabelShape();
-        layoutLabel.center = label->toQPointF();
-        layoutLabel.type = label->GetLabelType();
-        labels.append(layoutLabel);
+        if (label->IsVisible())
+        {
+            VLayoutPlaceLabel layoutLabel;
+            layoutLabel.shape = label->LabelShape();
+            layoutLabel.center = label->toQPointF();
+            layoutLabel.type = label->GetLabelType();
+            labels.append(layoutLabel);
+        }
     }
     return labels;
 }

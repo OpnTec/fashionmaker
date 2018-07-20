@@ -452,7 +452,10 @@ QVector<PlaceLabelImg> VPiece::PlaceLabelPoints(const VContainer *data) const
         try
         {
             const auto label = data->GeometricObject<VPlaceLabelItem>(placeLabel);
-            points.append(label->LabelShape());
+            if (label->IsVisible())
+            {
+                points.append(label->LabelShape());
+            }
         }
         catch (const VExceptionBadId &e)
         {

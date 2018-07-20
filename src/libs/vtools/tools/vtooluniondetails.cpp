@@ -490,6 +490,7 @@ quint32 AddPlaceLabel(quint32 id, const VToolUnionDetailsInitData &initData, QVe
     initNodeData.width = label->GetWidthFormula();
     initNodeData.height = label->GetHeightFormula();
     initNodeData.angle = label->GetAngleFormula();
+    initNodeData.visibilityTrigger = label->GetVisibilityTrigger();
     initNodeData.type = label->GetLabelType();
 
     QScopedPointer<VPlaceLabelItem> label1(new VPlaceLabelItem(*label));

@@ -126,6 +126,41 @@ void VPlaceLabelItem::SetAngle(qreal value, const QString &formula)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+QString VPlaceLabelItem::GetVisibilityTrigger() const
+{
+    return d->visibilityTrigger;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QString &VPlaceLabelItem::GetVisibilityTrigger()
+{
+    return d->visibilityTrigger;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+bool VPlaceLabelItem::IsVisible() const
+{
+    bool visible = true;
+
+    if (qIsInf(d->isVisible) || qIsNaN(d->isVisible))
+    {
+        qWarning() << QObject::tr("Visibility trigger contains error and will be ignored");
+    }
+    else if (qFuzzyIsNull(d->isVisible))
+    {
+        visible = false;
+    }
+    return visible;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VPlaceLabelItem::SetVisibilityTrigger(qreal visible, const QString &formula)
+{
+    d->visibilityTrigger = formula;
+    d->isVisible = visible;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 qreal VPlaceLabelItem::GetCorrectionAngle() const
 {
     return d->correctionAngle;

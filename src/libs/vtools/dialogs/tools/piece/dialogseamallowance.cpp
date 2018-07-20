@@ -843,6 +843,7 @@ void DialogSeamAllowance::ShowPlaceLabelsContextMenu(const QPoint &pos)
         dialog->SetWidth(currentLabel.GetWidthFormula());
         dialog->SetHeight(currentLabel.GetHeightFormula());
         dialog->SetAngle(currentLabel.GetAngleFormula());
+        dialog->SetFormulaVisible(currentLabel.GetVisibilityTrigger());
         dialog->SetPieceId(toolId);
         dialog->EnbleShowMode(true);
         m_dialog = dialog;
@@ -1295,7 +1296,8 @@ void DialogSeamAllowance::PlaceLabelDialogClosed(int result)
             const qreal w = qAbs(Visualization::FindLengthFromUser(dialogTool->GetWidth(), vars, false));
             const qreal h = qAbs(Visualization::FindLengthFromUser(dialogTool->GetHeight(), vars, false));
             const qreal a = Visualization::FindValFromUser(dialogTool->GetAngle(), vars, false);
-            qDebug() << w << h << a;
+            const qreal v = Visualization::FindValFromUser(dialogTool->GetFormulaVisible(), vars, false);
+            qDebug() << w << h << a << v;
 
             VPlaceLabelItem newLabel =  VPlaceLabelItem();
             newLabel.setName(currentLabel.name());
@@ -1306,6 +1308,7 @@ void DialogSeamAllowance::PlaceLabelDialogClosed(int result)
             newLabel.SetWidth(w, dialogTool->GetWidth());
             newLabel.SetHeight(h, dialogTool->GetHeight());
             newLabel.SetAngle(a, dialogTool->GetAngle());
+            newLabel.SetVisibilityTrigger(v, dialogTool->GetFormulaVisible());
             newLabel.SetLabelType(dialogTool->GetLabelType());
             newLabel.SetCenterPoint(currentLabel.GetCenterPoint());
             newLabel.SetCorrectionAngle(currentLabel.GetCorrectionAngle());

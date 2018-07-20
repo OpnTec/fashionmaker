@@ -46,6 +46,7 @@ VToolPlaceLabel *VToolPlaceLabel::Create(QSharedPointer<DialogTool> dialog, VAbs
     initData.width = dialogTool->GetWidth();
     initData.height = dialogTool->GetHeight();
     initData.angle = dialogTool->GetAngle();
+    initData.visibilityTrigger = dialogTool->GetFormulaVisible();
     initData.type = dialogTool->GetLabelType();
     initData.centerPoint = dialogTool->GetCenterPoint();
     initData.idObject = dialogTool->GetPieceId();
@@ -63,11 +64,13 @@ VToolPlaceLabel *VToolPlaceLabel::Create(VToolPlaceLabelInitData &initData)
     const qreal w = qAbs(qApp->toPixel(CheckFormula(initData.id, initData.width, initData.data)));
     const qreal h = qAbs(qApp->toPixel(CheckFormula(initData.id, initData.height, initData.data)));
     const qreal a = CheckFormula(initData.id, initData.angle, initData.data);
+    const qreal v = CheckFormula(initData.id, initData.visibilityTrigger, initData.data);
 
     QSharedPointer<VPlaceLabelItem> node(new VPlaceLabelItem());
     node->SetWidth(w, initData.width);
     node->SetHeight(h, initData.height);
     node->SetAngle(a, initData.angle);
+    node->SetVisibilityTrigger(v, initData.visibilityTrigger);
     node->SetLabelType(initData.type);
     node->SetCenterPoint(initData.centerPoint);
 
@@ -159,6 +162,7 @@ void VToolPlaceLabel::AddAttributes(VAbstractPattern *doc, QDomElement &domEleme
     doc->SetAttribute(domElement, AttrWidth, label.GetWidthFormula());
     doc->SetAttribute(domElement, AttrHeight, label.GetHeightFormula());
     doc->SetAttribute(domElement, AttrAngle, label.GetAngleFormula());
+    doc->SetAttribute(domElement, VAbstractPattern::AttrVisible, label.GetVisibilityTrigger());
     doc->SetAttribute(domElement, AttrPlaceLabelType, static_cast<int>(label.GetLabelType()));
 }
 

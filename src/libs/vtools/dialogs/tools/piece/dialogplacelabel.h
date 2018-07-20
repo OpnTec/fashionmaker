@@ -65,6 +65,9 @@ public:
     quint32 GetPieceId() const;
     void    SetPieceId(quint32 id);
 
+    QString GetFormulaVisible() const;
+    void    SetFormulaVisible(const QString &formula);
+
     virtual void SetPiecesList(const QVector<quint32> &list) override;
 
 public slots:
@@ -79,18 +82,22 @@ private slots:
     void DeployFormulaWidthEdit();
     void DeployFormulaHeightEdit();
     void DeployFormulaAngleEdit();
+    void DeployVisibleFormulaTextEdit();
 
     void FormulaWidthChanged();
     void FormulaHeightChanged();
     void FormulaAngleChanged();
+    void VisibleChanged();
 
     void EvalWidth();
     void EvalHeight();
     void EvalAngle();
+    void EvalVisible();
 
     void FXWidth();
     void FXHeight();
     void FXAngle();
+    void FXVisible();
 
 private:
     Q_DISABLE_COPY(DialogPlaceLabel)
@@ -100,15 +107,21 @@ private:
     bool m_flagWidth;
     bool m_flagHeight;
     bool m_flagAngle;
+    bool m_flagFormulaVisible;
 
     /** @brief formulaBaseHeight base height defined by dialogui */
     int m_formulaBaseHeightWidth;
     int m_formulaBaseHeightHeight;
     int m_formulaBaseHeightAngle;
+    int m_formulaBaseVisible;
 
     QTimer *timerAngle;
     QTimer *timerWidth;
     QTimer *timerHeight;
+    QTimer *m_timerVisible;
+
+    void InitPlaceLabelTab();
+    void InitControlTab();
 
     void FillPlaceLabelTypes();
 

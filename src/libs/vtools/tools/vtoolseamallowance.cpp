@@ -2093,6 +2093,7 @@ QVector<quint32> VToolSeamAllowance::DuplicatePlaceLabels(const QVector<quint32>
         initNodeData.width = label->GetWidthFormula();
         initNodeData.height = label->GetHeightFormula();
         initNodeData.angle = label->GetAngleFormula();
+        initNodeData.visibilityTrigger = label->GetVisibilityTrigger();
         initNodeData.type = label->GetLabelType();
         initNodeData.centerPoint = label->GetCenterPoint();
         initNodeData.id = initNodeData.data->AddGObject(new VPlaceLabelItem(*label));

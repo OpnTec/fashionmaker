@@ -43,7 +43,8 @@ struct VToolPlaceLabelInitData : VAbstractNodeInitData
           height('0'),
           angle('0'),
           type(PlaceLabelType::Button),
-          centerPoint(NULL_ID)
+          centerPoint(NULL_ID),
+          visibilityTrigger('1')
     {}
 
     QString width;
@@ -51,6 +52,7 @@ struct VToolPlaceLabelInitData : VAbstractNodeInitData
     QString angle;
     PlaceLabelType type;
     quint32 centerPoint;
+    QString visibilityTrigger;
 };
 
 class VToolPlaceLabel : public VAbstractNode
