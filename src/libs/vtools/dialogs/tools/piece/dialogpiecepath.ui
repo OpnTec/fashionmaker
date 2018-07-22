@@ -190,7 +190,7 @@
        <item>
         <widget class="QCheckBox" name="checkBoxCut">
          <property name="toolTip">
-          <string>The path is a cut contour</string>
+          <string>The path is a cut contour. Use to control export to DXF-AAMA</string>
          </property>
          <property name="text">
           <string>Cut on fabric</string>
