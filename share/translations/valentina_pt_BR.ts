@@ -14338,12 +14338,12 @@ Deseja salvar suas mudanças?</translation>
     <message>
         <source>patternName</source>
         <comment>placeholder</comment>
-        <translation>nome do Molde</translation>
+        <translation>nomeDoMolde</translation>
     </message>
     <message>
         <source>patternNumber</source>
         <comment>placeholder</comment>
-        <translation>número do Molde</translation>
+        <translation>númeroDoMolde</translation>
     </message>
     <message>
         <source>author</source>

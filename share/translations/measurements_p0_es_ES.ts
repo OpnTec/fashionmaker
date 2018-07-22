@@ -4145,296 +4145,296 @@
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1999"/>
         <source>arm_across_back_center_to_wrist_bent</source>
         <comment>Name in a formula. Don't use math symbols and space in name!!!!</comment>
-        <translation type="unfinished"/>
+        <translation>brazo_atraves_espalda_centro_a_muñeca_doblado</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="2001"/>
         <source>Arm: Across Back Center to Wrist, high bend</source>
         <comment>Full measurement name.</comment>
-        <translation type="unfinished"/>
+        <translation>Brazo: Desde el centro de espalda a la muñeca, doblado alto</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="2002"/>
         <source>Bend Arm with Elbow out, hand in front. Measure from Middle of Back to Elbow Tip to Wrist bone.</source>
         <comment>Full measurement description.</comment>
-        <translation type="unfinished"/>
+        <translation>Brazo doblado con el codo hacia afuera, mano al frente. Mida desde la mitad de la espalda al codo y al huesito de la muñeca.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="2007"/>
         <source>arm_armscye_back_center_to_wrist_bent</source>
         <comment>Name in a formula. Don't use math symbols and space in name!!!!</comment>
-        <translation type="unfinished"/>
+        <translation>brazo_sisa_trasero_centro_a_muñeca_doblado</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="2009"/>
         <source>Arm: Armscye Back Center to Wrist, high bend</source>
         <comment>Full measurement name.</comment>
-        <translation type="unfinished"/>
+        <translation>Brazo: Sisa atrás a la muñeca, doblado alto</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="2010"/>
         <source>Bend Arm with Elbow out, hand in front. Measure from Armscye Back to Elbow Tip.</source>
         <comment>Full measurement description.</comment>
-        <translation type="unfinished"/>
+        <translation>Brazo doblado con el codo afuera, mano al frente. Mida desde la sisa espalda a la punta del codo.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="2027"/>
         <source>neck_back_to_bust_front</source>
         <comment>Name in a formula. Don't use math symbols and space in name!!!!</comment>
-        <translation type="unfinished"/>
+        <translation>cuello_atras_a_busto_frente</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="2029"/>
         <source>Neck Back to Bust Front</source>
         <comment>Full measurement name.</comment>
-        <translation type="unfinished"/>
+        <translation>Cuello trasero a busto frente</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="2030"/>
         <source>From Neck Back, over Shoulder, to Bust Front.</source>
         <comment>Full measurement description.</comment>
-        <translation type="unfinished"/>
+        <translation>Desde el cuello trasero, sobre el hombro, al busto frente.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="2034"/>
         <source>neck_back_to_armfold_front</source>
         <comment>Name in a formula. Don't use math symbols and space in name!!!!</comment>
-        <translation type="unfinished"/>
+        <translation>cuello_atras_a_doblezbrazo_frente</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="2036"/>
         <source>Neck Back to Armfold Front</source>
         <comment>Full measurement name.</comment>
-        <translation type="unfinished"/>
+        <translation>Cuello trasero a doblez del brazo frente</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="2037"/>
         <source>From Neck Back over Shoulder to Armfold Front.</source>
         <comment>Full measurement description.</comment>
-        <translation type="unfinished"/>
+        <translation>Desde el cuello trasero sobre el hombro al doblez del brazo frente.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="2041"/>
         <source>neck_back_to_armfold_front_to_waist_side</source>
         <comment>Name in a formula. Don't use math symbols and space in name!!!!</comment>
-        <translation type="unfinished"/>
+        <translation>cuello_trasero_a_doblezbrazo_frente_a_cintura_costado</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="2043"/>
         <source>Neck Back, over Shoulder, to Waist Side</source>
         <comment>Full measurement name.</comment>
-        <translation type="unfinished"/>
+        <translation>Cuello trasero, sobre el hombro, a cintura costado</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="2044"/>
         <source>From Neck Back, over Shoulder, down chest to Waist Side.</source>
         <comment>Full measurement description.</comment>
-        <translation type="unfinished"/>
+        <translation>Desde el cuello trasero, spbre el hombro, abajo al pecho y a la cintura en costado</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="2048"/>
         <source>highbust_back_over_shoulder_to_armfold_front</source>
         <comment>Name in a formula. Don't use math symbols and space in name!!!!</comment>
-        <translation type="unfinished"/>
+        <translation>bustoalto_trasero_sobre_hombro_a_doblezbrazo_frente</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="2050"/>
         <source>Highbust Back, over Shoulder, to Armfold Front</source>
         <comment>Full measurement name.</comment>
-        <translation type="unfinished"/>
+        <translation>Busto alto trasero, sobre el hombro, al dobles del brazo frente</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="2051"/>
         <source>From Highbust Back over Shoulder to Armfold Front.</source>
         <comment>Full measurement description.</comment>
-        <translation type="unfinished"/>
+        <translation>Desde el busto alto trasero sobre el hombro al doblez del brazo al frente.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="2055"/>
         <source>highbust_back_over_shoulder_to_waist_front</source>
         <comment>Name in a formula. Don't use math symbols and space in name!!!!</comment>
-        <translation type="unfinished"/>
+        <translation>bustoalto_trasero_sobre_hombro_a_cintura_frente</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="2057"/>
         <source>Highbust Back, over Shoulder, to Waist Front</source>
         <comment>Full measurement name.</comment>
-        <translation type="unfinished"/>
+        <translation>Busto alto trasero, sobre el hombro, a cintura frente</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="2058"/>
         <source>From Highbust Back, over Shoulder touching  Neck Side, to Waist Front.</source>
         <comment>Full measurement description.</comment>
-        <translation type="unfinished"/>
+        <translation>Desde el busto alto trasero, sobre el hombro tocando el costado del cuello, a cintura al frente.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="2062"/>
         <source>neck_back_to_armfold_front_to_neck_back</source>
         <comment>Name in a formula. Don't use math symbols and space in name!!!!</comment>
-        <translation type="unfinished"/>
+        <translation>cuello_trasero_a_doblezbrazo_frente_a_cuello_trasero</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="2064"/>
         <source>Neck Back, to Armfold Front, to Neck Back</source>
         <comment>Full measurement name.</comment>
-        <translation type="unfinished"/>
+        <translation>Cuello trasero, a doblez brazo frente, a cuello trasero</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="2065"/>
         <source>From Neck Back, over Shoulder to Armfold Front, under arm and return to start.</source>
         <comment>Full measurement description.</comment>
-        <translation type="unfinished"/>
+        <translation>Desde el cuello trasero, sobre el hombro al doblez del brazo al frente, bajo el brazo y retornar al inicio.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="2070"/>
         <source>across_back_center_to_armfold_front_to_across_back_center</source>
         <comment>Name in a formula. Don't use math symbols and space in name!!!!</comment>
-        <translation type="unfinished"/>
+        <translation>atraves_trasero_centro_a_doblezbrazo_frente_a_atraves_trasero_centro</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="2072"/>
         <source>Across Back Center, circled around Shoulder</source>
         <comment>Full measurement name.</comment>
-        <translation type="unfinished"/>
+        <translation>A través de espalda centro, circulado alrededor hombro</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="2073"/>
         <source>From center of Across Back, over Shoulder, under Arm, and return to start.</source>
         <comment>Full measurement description.</comment>
-        <translation type="unfinished"/>
+        <translation>Desde el centro y a través de la espalda, sobre el hombro, bajo el brazo, y retornar al inicio.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="2078"/>
         <source>neck_back_to_armfold_front_to_highbust_back</source>
         <comment>Name in a formula. Don't use math symbols and space in name!!!!</comment>
-        <translation type="unfinished"/>
+        <translation>cuello_trasero_a_doblezbrazo_frente_a_bustoalto_trasero</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="2080"/>
         <source>Neck Back, to Armfold Front, to Highbust Back</source>
         <comment>Full measurement name.</comment>
-        <translation type="unfinished"/>
+        <translation>Cuello trasero, al pliegue del brazo frente, al busto alto trasero</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="2081"/>
         <source>From Neck Back over Shoulder to Armfold Front, under arm to Highbust Back.</source>
         <comment>Full measurement description.</comment>
-        <translation type="unfinished"/>
+        <translation>Desde cuello trasero sobre el hombro al doblez del brazo frente, bajo brazo al busto alto trasero.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="2086"/>
         <source>armfold_to_armfold_bust</source>
         <comment>Name in a formula. Don't use math symbols and space in name!!!!</comment>
-        <translation type="unfinished"/>
+        <translation>doblezbrazo_a_doblezbrazo_busto</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="2088"/>
         <source>Armfold to Armfold, front, curved through Bust Front</source>
         <comment>Full measurement name.</comment>
-        <translation type="unfinished"/>
+        <translation>Doblez de brazo a doblez de brazo, frente, curvado mediante busto frente</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="2090"/>
         <source>Measure in a curve from Armfold Left Front through Bust Front curved back up to Armfold Right Front.</source>
         <comment>Full measurement description.</comment>
-        <translation type="unfinished"/>
+        <translation>Mida en una curva desde el doblez del brazo izquierdo a través del busto frente curvado atrás y arriba al doblez del brazo derecho frente.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="2094"/>
         <source>armfold_to_bust_front</source>
         <comment>Name in a formula. Don't use math symbols and space in name!!!!</comment>
-        <translation type="unfinished"/>
+        <translation>doblezbrazo_a_busto_frente</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="2096"/>
         <source>Armfold to Bust Front</source>
         <comment>Full measurement name.</comment>
-        <translation type="unfinished"/>
+        <translation>Doblez de brazo al busto frente</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="2097"/>
         <source>Measure from Armfold Front to Bust Front, shortest distance between the two, as straight as possible.</source>
         <comment>Full measurement description.</comment>
-        <translation type="unfinished"/>
+        <translation>Mida desde el doblez del brazo frente al busto frente, la distancia mas corta entre los dos, lo mas recto posible.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="2101"/>
         <source>highbust_b_over_shoulder_to_highbust_f</source>
         <comment>Name in a formula. Don't use math symbols and space in name!!!!</comment>
-        <translation type="unfinished"/>
+        <translation>bustoalto_b_sobre_hombro_a_bustoalto_f</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="2103"/>
         <source>Highbust Back, over Shoulder, to Highbust level</source>
         <comment>Full measurement name.</comment>
-        <translation type="unfinished"/>
+        <translation>Busto alto trasero, sobre hombro, al nivel de busto alto</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="2105"/>
         <source>From Highbust Back, over Shoulder, then aim at Bustpoint, stopping measurement at Highbust level.</source>
         <comment>Full measurement description.</comment>
-        <translation type="unfinished"/>
+        <translation>Desde busto alto trasero, sobre hombro, luego el objetivo en el punto del busto, parando la medida al nivel del busto alto.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="2110"/>
         <source>armscye_arc</source>
         <comment>Name in a formula. Don't use math symbols and space in name!!!!</comment>
-        <translation type="unfinished"/>
+        <translation>sisa_arco</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="2112"/>
         <source>Armscye: Arc</source>
         <comment>Full measurement name.</comment>
-        <translation type="unfinished"/>
+        <translation>Sisa: Arco</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="2113"/>
         <source>From Armscye at Across Chest over ShoulderTip  to Armscye at Across Back.</source>
         <comment>Full measurement description.</comment>
-        <translation type="unfinished"/>
+        <translation>Desde la sisa a través del pecho sobre la punta del hombro a la sisa a través de la espalda.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="2129"/>
         <source>dart_width_shoulder</source>
         <comment>Name in a formula. Don't use math symbols and space in name!!!!</comment>
-        <translation type="unfinished"/>
+        <translation>pinza_ancho_hombro</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="2131"/>
         <source>Dart Width: Shoulder</source>
         <comment>Full measurement name.</comment>
-        <translation type="unfinished"/>
+        <translation>Ancho de pinza: Hombro</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="2132"/>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="2140"/>
         <source>This information is pulled from pattern charts in some patternmaking systems, e.g. Winifred P. Aldrich&apos;s &quot;Metric Pattern Cutting&quot;.</source>
         <comment>Full measurement description.</comment>
-        <translation type="unfinished"/>
+        <translation>Esta información es extraída de gráficos de patrones en algunos sistemas de patronaje, ejemplo &quot;Metric Pattern Cutting&quot; de Winifred P. Aldrich.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="2137"/>
         <source>dart_width_bust</source>
         <comment>Name in a formula. Don't use math symbols and space in name!!!!</comment>
-        <translation type="unfinished"/>
+        <translation>pinza_ancho_busto</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="2139"/>
         <source>Dart Width: Bust</source>
         <comment>Full measurement name.</comment>
-        <translation type="unfinished"/>
+        <translation>Ancho de pinza: Busto</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="2145"/>
         <source>dart_width_waist</source>
         <comment>Name in a formula. Don't use math symbols and space in name!!!!</comment>
-        <translation type="unfinished"/>
+        <translation>pinza_ancho_cintura</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="2147"/>
         <source>Dart Width: Waist</source>
         <comment>Full measurement name.</comment>
-        <translation type="unfinished"/>
+        <translation>Ancho Pinza: Cintura</translation>
     </message>
 </context>
 </TS>
