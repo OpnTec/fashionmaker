@@ -675,7 +675,7 @@ QString DialogTool::GetNodeName(const VPieceNode &node, bool showPassmark) const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void DialogTool::NewNodeItem(QListWidget *listWidget, const VPieceNode &node)
+void DialogTool::NewNodeItem(QListWidget *listWidget, const VPieceNode &node, bool showPassmark)
 {
     SCASSERT(listWidget != nullptr);
     SCASSERT(node.GetId() > NULL_ID);
@@ -687,7 +687,7 @@ void DialogTool::NewNodeItem(QListWidget *listWidget, const VPieceNode &node)
         case (Tool::NodeElArc):
         case (Tool::NodeSpline):
         case (Tool::NodeSplinePath):
-            name = GetNodeName(node, true);
+            name = GetNodeName(node, showPassmark);
             break;
         default:
             qDebug()<<"Got wrong tools. Ignore.";

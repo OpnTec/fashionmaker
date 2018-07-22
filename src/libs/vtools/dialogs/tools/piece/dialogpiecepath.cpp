@@ -290,9 +290,12 @@ void DialogPiecePath::ShowContextMenu(const QPoint &pos)
     }
     else
     {
-        actionPassmark = menu->addAction(tr("Passmark"));
-        actionPassmark->setCheckable(true);
-        actionPassmark->setChecked(rowNode.IsPassmark());
+        if (GetType() == PiecePathType::CustomSeamAllowance)
+        {
+            actionPassmark = menu->addAction(tr("Passmark"));
+            actionPassmark->setCheckable(true);
+            actionPassmark->setChecked(rowNode.IsPassmark());
+        }
 
         actionUniqueness = menu->addAction(tr("Check uniqueness"));
         actionUniqueness->setCheckable(true);
@@ -310,19 +313,19 @@ void DialogPiecePath::ShowContextMenu(const QPoint &pos)
     {
         rowNode.SetReverse(not rowNode.GetReverse());
         rowItem->setData(Qt::UserRole, QVariant::fromValue(rowNode));
-        rowItem->setText(GetNodeName(rowNode, true));
+        rowItem->setText(GetNodeName(rowNode, GetType() == PiecePathType::CustomSeamAllowance));
     }
-    else if (selectedAction == actionPassmark)
+    else if (selectedAction == actionPassmark && GetType() == PiecePathType::CustomSeamAllowance)
     {
         rowNode.SetPassmark(not rowNode.IsPassmark());
         rowItem->setData(Qt::UserRole, QVariant::fromValue(rowNode));
-        rowItem->setText(GetNodeName(rowNode, true));
+        rowItem->setText(GetNodeName(rowNode, GetType() == PiecePathType::CustomSeamAllowance));
     }
     else if (selectedAction == actionUniqueness)
     {
         rowNode.SetCheckUniqueness(not rowNode.IsCheckUniqueness());
         rowItem->setData(Qt::UserRole, QVariant::fromValue(rowNode));
-        rowItem->setText(GetNodeName(rowNode, true));
+        rowItem->setText(GetNodeName(rowNode, GetType() == PiecePathType::CustomSeamAllowance));
     }
 
     ValidObjects(PathIsValid());
@@ -594,7 +597,7 @@ void DialogPiecePath::PassmarkLineTypeChanged(int id)
 
             rowNode.SetPassmarkLineType(lineType);
             rowItem->setData(Qt::UserRole, QVariant::fromValue(rowNode));
-            rowItem->setText(GetNodeName(rowNode, true));
+            rowItem->setText(GetNodeName(rowNode, GetType() == PiecePathType::CustomSeamAllowance));
 
             ListChanged();
         }
@@ -648,7 +651,7 @@ void DialogPiecePath::PassmarkAngleTypeChanged(int id)
 
             rowNode.SetPassmarkAngleType(angleType);
             rowItem->setData(Qt::UserRole, QVariant::fromValue(rowNode));
-            rowItem->setText(GetNodeName(rowNode, true));
+            rowItem->setText(GetNodeName(rowNode, GetType() == PiecePathType::CustomSeamAllowance));
 
             ListChanged();
         }
@@ -1380,7 +1383,7 @@ void DialogPiecePath::ValidObjects(bool value)
 //---------------------------------------------------------------------------------------------------------------------
 void DialogPiecePath::NewItem(const VPieceNode &node)
 {
-    NewNodeItem(ui->listWidget, node);
+    NewNodeItem(ui->listWidget, node, GetType() == PiecePathType::CustomSeamAllowance);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
