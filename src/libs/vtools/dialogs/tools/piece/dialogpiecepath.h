@@ -158,6 +158,13 @@ private:
 
     QString GetFormulaVisible() const;
     void    SetFormulaVisible(const QString &formula);
+
+    bool IsShowNotch() const;
 };
+
+inline bool DialogPiecePath::IsShowNotch() const
+{
+    return m_showMode && GetType() == PiecePathType::CustomSeamAllowance;
+}
 
 #endif // DIALOGPIECEPATH_H

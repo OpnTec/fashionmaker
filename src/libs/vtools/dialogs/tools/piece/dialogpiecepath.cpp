@@ -200,15 +200,21 @@ void DialogPiecePath::ShowDialog(bool click)
 void DialogPiecePath::CheckState()
 {
     SCASSERT(bOk != nullptr);
-    if (GetType() != PiecePathType::InternalPath)
-    {// Works only for internal paths
-        m_flagFormulaVisible = true; 
-    }
-    else
+    if (GetType() == PiecePathType::InternalPath)
     {
         flagFormula = true;
         m_flagFormulaBefore = true;
         m_flagFormulaAfter = true;
+    }
+    else
+    {
+        m_flagFormulaVisible = true; // Works only for internal paths
+        if (not m_showMode)
+        {
+            flagFormula = true;
+            m_flagFormulaBefore = true;
+            m_flagFormulaAfter = true;
+        }
     }
 
     bOk->setEnabled(flagName && flagError && flagFormula && m_flagFormulaBefore && m_flagFormulaAfter
@@ -290,7 +296,7 @@ void DialogPiecePath::ShowContextMenu(const QPoint &pos)
     }
     else
     {
-        if (GetType() == PiecePathType::CustomSeamAllowance)
+        if (m_showMode && GetType() == PiecePathType::CustomSeamAllowance)
         {
             actionPassmark = menu->addAction(tr("Passmark"));
             actionPassmark->setCheckable(true);
@@ -313,19 +319,19 @@ void DialogPiecePath::ShowContextMenu(const QPoint &pos)
     {
         rowNode.SetReverse(not rowNode.GetReverse());
         rowItem->setData(Qt::UserRole, QVariant::fromValue(rowNode));
-        rowItem->setText(GetNodeName(rowNode, GetType() == PiecePathType::CustomSeamAllowance));
+        rowItem->setText(GetNodeName(rowNode, IsShowNotch()));
     }
-    else if (selectedAction == actionPassmark && GetType() == PiecePathType::CustomSeamAllowance)
+    else if (m_showMode && selectedAction == actionPassmark && GetType() == PiecePathType::CustomSeamAllowance)
     {
         rowNode.SetPassmark(not rowNode.IsPassmark());
         rowItem->setData(Qt::UserRole, QVariant::fromValue(rowNode));
-        rowItem->setText(GetNodeName(rowNode, GetType() == PiecePathType::CustomSeamAllowance));
+        rowItem->setText(GetNodeName(rowNode, IsShowNotch()));
     }
     else if (selectedAction == actionUniqueness)
     {
         rowNode.SetCheckUniqueness(not rowNode.IsCheckUniqueness());
         rowItem->setData(Qt::UserRole, QVariant::fromValue(rowNode));
-        rowItem->setText(GetNodeName(rowNode, GetType() == PiecePathType::CustomSeamAllowance));
+        rowItem->setText(GetNodeName(rowNode, IsShowNotch()));
     }
 
     ValidObjects(PathIsValid());
@@ -597,7 +603,7 @@ void DialogPiecePath::PassmarkLineTypeChanged(int id)
 
             rowNode.SetPassmarkLineType(lineType);
             rowItem->setData(Qt::UserRole, QVariant::fromValue(rowNode));
-            rowItem->setText(GetNodeName(rowNode, GetType() == PiecePathType::CustomSeamAllowance));
+            rowItem->setText(GetNodeName(rowNode, IsShowNotch()));
 
             ListChanged();
         }
@@ -651,7 +657,7 @@ void DialogPiecePath::PassmarkAngleTypeChanged(int id)
 
             rowNode.SetPassmarkAngleType(angleType);
             rowItem->setData(Qt::UserRole, QVariant::fromValue(rowNode));
-            rowItem->setText(GetNodeName(rowNode, GetType() == PiecePathType::CustomSeamAllowance));
+            rowItem->setText(GetNodeName(rowNode, IsShowNotch()));
 
             ListChanged();
         }
