@@ -618,9 +618,12 @@ void DialogSeamAllowance::ShowMainPathContextMenu(const QPoint &pos)
     }
     else
     {
-        actionPassmark = menu->addAction(tr("Passmark"));
-        actionPassmark->setCheckable(true);
-        actionPassmark->setChecked(rowNode.IsPassmark());
+        if (applyAllowed)
+        {
+            actionPassmark = menu->addAction(tr("Passmark"));
+            actionPassmark->setCheckable(true);
+            actionPassmark->setChecked(rowNode.IsPassmark());
+        }
 
         actionUniqueness = menu->addAction(tr("Check uniqueness"));
         actionUniqueness->setCheckable(true);
@@ -651,7 +654,7 @@ void DialogSeamAllowance::ShowMainPathContextMenu(const QPoint &pos)
         rowItem->setText(GetNodeName(rowNode, true));
         rowItem->setFont(NodeFont(rowItem->font(), rowNode.IsExcluded()));
     }
-    else if (selectedAction == actionPassmark)
+    else if (applyAllowed && selectedAction == actionPassmark)
     {
         rowNode.SetPassmark(not rowNode.IsPassmark());
         rowItem->setData(Qt::UserRole, QVariant::fromValue(rowNode));
