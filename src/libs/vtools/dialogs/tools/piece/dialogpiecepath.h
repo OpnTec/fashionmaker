@@ -160,6 +160,8 @@ private:
     void    SetFormulaVisible(const QString &formula);
 
     bool IsShowNotch() const;
+
+    void RefreshPathList(const VPiecePath &path);
 };
 
 inline bool DialogPiecePath::IsShowNotch() const

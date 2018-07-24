@@ -92,6 +92,7 @@ void DialogPiecePath::EnbleShowMode(bool disable)
     m_showMode = disable;
     ui->comboBoxType->setDisabled(m_showMode);
     ui->comboBoxPiece->setDisabled(m_showMode);
+    RefreshPathList(GetPiecePath());
     ValidObjects(PathIsValid());
 }
 
@@ -1078,13 +1079,14 @@ VPiecePath DialogPiecePath::GetPiecePath() const
 //---------------------------------------------------------------------------------------------------------------------
 void DialogPiecePath::SetPiecePath(const VPiecePath &path)
 {
+    SetType(path.GetType()); // Set first to know path type
+
     ui->listWidget->clear();
     for (int i = 0; i < path.CountNodes(); ++i)
     {
         NewItem(path.at(i));
     }
 
-    SetType(path.GetType());
     ui->lineEditName->setText(path.GetName());
 
     VisToolPiecePath *visPath = qobject_cast<VisToolPiecePath *>(vis);
@@ -1389,7 +1391,7 @@ void DialogPiecePath::ValidObjects(bool value)
 //---------------------------------------------------------------------------------------------------------------------
 void DialogPiecePath::NewItem(const VPieceNode &node)
 {
-    NewNodeItem(ui->listWidget, node, GetType() == PiecePathType::CustomSeamAllowance);
+    NewNodeItem(ui->listWidget, node, IsShowNotch());
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -1424,4 +1426,16 @@ void DialogPiecePath::SetFormulaVisible(const QString &formula)
     }
     ui->plainTextEditFormulaVisible->setPlainText(f);
     MoveCursorToEnd(ui->plainTextEditFormulaVisible);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogPiecePath::RefreshPathList(const VPiecePath &path)
+{
+    ui->listWidget->blockSignals(true);
+    ui->listWidget->clear();
+    for (int i = 0; i < path.CountNodes(); ++i)
+    {
+        NewItem(path.at(i));
+    }
+    ui->listWidget->blockSignals(false);
 }
