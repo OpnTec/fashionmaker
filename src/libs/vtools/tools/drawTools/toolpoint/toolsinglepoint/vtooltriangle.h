@@ -69,7 +69,7 @@ class VToolTriangle : public VToolSinglePoint
     Q_OBJECT
 public:
     virtual void   setDialog() override;
-    static VToolTriangle *Create(QSharedPointer<DialogTool> dialog, VMainGraphicsScene  *scene, VAbstractPattern *doc,
+    static VToolTriangle *Create(const QPointer<DialogTool> &dialog, VMainGraphicsScene  *scene, VAbstractPattern *doc,
                                  VContainer *data);
     static VToolTriangle *Create(VToolTriangleInitData initData);
     static bool FindPoint(const QPointF &axisP1, const QPointF &axisP2, const QPointF &firstPoint,

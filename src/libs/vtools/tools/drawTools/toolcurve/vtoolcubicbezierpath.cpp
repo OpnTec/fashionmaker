@@ -80,11 +80,11 @@ void VToolCubicBezierPath::setDialog()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-VToolCubicBezierPath *VToolCubicBezierPath::Create(QSharedPointer<DialogTool> dialog, VMainGraphicsScene *scene,
+VToolCubicBezierPath *VToolCubicBezierPath::Create(const QPointer<DialogTool> &dialog, VMainGraphicsScene *scene,
                                                    VAbstractPattern *doc, VContainer *data)
 {
     SCASSERT(not dialog.isNull())
-    QSharedPointer<DialogCubicBezierPath> dialogTool = dialog.objectCast<DialogCubicBezierPath>();
+    const QPointer<DialogCubicBezierPath> dialogTool = qobject_cast<DialogCubicBezierPath *>(dialog);
     SCASSERT(not dialogTool.isNull())
 
     VToolCubicBezierPathInitData initData;
@@ -103,7 +103,7 @@ VToolCubicBezierPath *VToolCubicBezierPath::Create(QSharedPointer<DialogTool> di
     VToolCubicBezierPath* spl = Create(initData);
     if (spl != nullptr)
     {
-        spl->m_dialog = dialogTool;
+        spl->m_dialog = dialog;
     }
     return spl;
 }

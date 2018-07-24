@@ -86,7 +86,7 @@ void VToolCurveIntersectAxis::setDialog()
 {
     SCASSERT(not m_dialog.isNull())
     m_dialog->setModal(true);
-    QSharedPointer<DialogCurveIntersectAxis> dialogTool = m_dialog.objectCast<DialogCurveIntersectAxis>();
+    const QPointer<DialogCurveIntersectAxis> dialogTool = qobject_cast<DialogCurveIntersectAxis *>(m_dialog);
     SCASSERT(not dialogTool.isNull())
     const QSharedPointer<VPointF> p = VAbstractTool::data.GeometricObject<VPointF>(m_id);
     dialogTool->SetTypeLine(m_lineType);
@@ -98,12 +98,12 @@ void VToolCurveIntersectAxis::setDialog()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-VToolCurveIntersectAxis *VToolCurveIntersectAxis::Create(QSharedPointer<DialogTool> dialog, VMainGraphicsScene *scene,
+VToolCurveIntersectAxis *VToolCurveIntersectAxis::Create(const QPointer<DialogTool> &dialog, VMainGraphicsScene *scene,
                                                          VAbstractPattern *doc,
                                                          VContainer *data)
 {
     SCASSERT(not dialog.isNull())
-    QSharedPointer<DialogCurveIntersectAxis> dialogTool = dialog.objectCast<DialogCurveIntersectAxis>();
+    const QPointer<DialogCurveIntersectAxis> dialogTool = qobject_cast<DialogCurveIntersectAxis *>(dialog);
     SCASSERT(not dialogTool.isNull())
 
     VToolCurveIntersectAxisInitData initData;
@@ -122,7 +122,7 @@ VToolCurveIntersectAxis *VToolCurveIntersectAxis::Create(QSharedPointer<DialogTo
     VToolCurveIntersectAxis *point = Create(initData);
     if (point != nullptr)
     {
-        point->m_dialog = dialogTool;
+        point->m_dialog = dialog;
     }
     return point;
 }
@@ -297,7 +297,7 @@ void VToolCurveIntersectAxis::SaveDialog(QDomElement &domElement, QList<quint32>
                                          QList<quint32> &newDependencies)
 {
     SCASSERT(not m_dialog.isNull())
-    QSharedPointer<DialogCurveIntersectAxis> dialogTool = m_dialog.objectCast<DialogCurveIntersectAxis>();
+    const QPointer<DialogCurveIntersectAxis> dialogTool = qobject_cast<DialogCurveIntersectAxis *>(m_dialog);
     SCASSERT(not dialogTool.isNull())
 
     AddDependence(oldDependencies, basePointId);

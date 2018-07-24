@@ -94,7 +94,7 @@ void VToolTrueDarts::FindPoint(const QPointF &baseLineP1, const QPointF &baseLin
 void VToolTrueDarts::setDialog()
 {
     SCASSERT(not m_dialog.isNull())
-    QSharedPointer<DialogTrueDarts> dialogTool = m_dialog.objectCast<DialogTrueDarts>();
+    const QPointer<DialogTrueDarts> dialogTool = qobject_cast<DialogTrueDarts *>(m_dialog);
     SCASSERT(not dialogTool.isNull())
 
     const QSharedPointer<VPointF> p1 = VAbstractTool::data.GeometricObject<VPointF>(p1id);
@@ -110,11 +110,11 @@ void VToolTrueDarts::setDialog()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-VToolTrueDarts *VToolTrueDarts::Create(QSharedPointer<DialogTool> dialog, VMainGraphicsScene *scene,
+VToolTrueDarts *VToolTrueDarts::Create(const QPointer<DialogTool> &dialog, VMainGraphicsScene *scene,
                                        VAbstractPattern *doc, VContainer *data)
 {
     SCASSERT(not dialog.isNull())
-    QSharedPointer<DialogTrueDarts> dialogTool = dialog.objectCast<DialogTrueDarts>();
+    const QPointer<DialogTrueDarts> dialogTool = qobject_cast<DialogTrueDarts *>(dialog);
     SCASSERT(not dialogTool.isNull())
 
     VToolTrueDartsInitData initData;
@@ -134,7 +134,7 @@ VToolTrueDarts *VToolTrueDarts::Create(QSharedPointer<DialogTool> dialog, VMainG
     VToolTrueDarts *point = Create(initData);
     if (point != nullptr)
     {
-        point->m_dialog = dialogTool;
+        point->m_dialog = dialog;
     }
     return point;
 }
@@ -265,7 +265,7 @@ void VToolTrueDarts::SaveDialog(QDomElement &domElement, QList<quint32> &oldDepe
                                 QList<quint32> &newDependencies)
 {
     SCASSERT(not m_dialog.isNull())
-    QSharedPointer<DialogTrueDarts> dialogTool = m_dialog.objectCast<DialogTrueDarts>();
+    const QPointer<DialogTrueDarts> dialogTool = qobject_cast<DialogTrueDarts *>(m_dialog);
     SCASSERT(not dialogTool.isNull())
 
     AddDependence(oldDependencies, baseLineP1Id);

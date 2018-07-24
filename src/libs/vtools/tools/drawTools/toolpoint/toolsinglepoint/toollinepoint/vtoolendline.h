@@ -67,7 +67,7 @@ class VToolEndLine : public VToolLinePoint
 public:
     virtual ~VToolEndLine() Q_DECL_EQ_DEFAULT;
     virtual void setDialog() override;
-    static VToolEndLine *Create(QSharedPointer<DialogTool> dialog, VMainGraphicsScene  *scene, VAbstractPattern *doc,
+    static VToolEndLine *Create(const QPointer<DialogTool> &dialog, VMainGraphicsScene  *scene, VAbstractPattern *doc,
                                 VContainer *data);
     static VToolEndLine *Create(VToolEndLineInitData &initData);
     static const QString ToolType;

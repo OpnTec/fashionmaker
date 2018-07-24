@@ -63,7 +63,7 @@ class VToolPointOfIntersection : public VToolSinglePoint
     Q_OBJECT
 public:
     virtual void setDialog() override;
-    static VToolPointOfIntersection *Create(QSharedPointer<DialogTool> dialog, VMainGraphicsScene  *scene,
+    static VToolPointOfIntersection *Create(const QPointer<DialogTool> &dialog, VMainGraphicsScene  *scene,
                                             VAbstractPattern *doc, VContainer *data);
     static VToolPointOfIntersection *Create(VToolPointOfIntersectionInitData initData);
     static const QString ToolType;

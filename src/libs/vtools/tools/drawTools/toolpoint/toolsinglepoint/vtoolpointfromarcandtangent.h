@@ -63,7 +63,7 @@ class VToolPointFromArcAndTangent : public VToolSinglePoint
     Q_OBJECT
 public:
     virtual void setDialog() override;
-    static VToolPointFromArcAndTangent *Create(QSharedPointer<DialogTool> dialog, VMainGraphicsScene  *scene,
+    static VToolPointFromArcAndTangent *Create(const QPointer<DialogTool> &dialog, VMainGraphicsScene  *scene,
                                                VAbstractPattern *doc, VContainer *data);
     static VToolPointFromArcAndTangent *Create(VToolPointFromArcAndTangentInitData initData);
     static bool FindPoint(const QPointF &p, const VArc *arc, const CrossCirclesPoint pType, QPointF *intersectionPoint);

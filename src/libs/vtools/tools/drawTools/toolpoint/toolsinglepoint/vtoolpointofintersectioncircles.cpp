@@ -73,8 +73,8 @@ VToolPointOfIntersectionCircles::VToolPointOfIntersectionCircles(
 void VToolPointOfIntersectionCircles::setDialog()
 {
     SCASSERT(not m_dialog.isNull())
-    QSharedPointer<DialogPointOfIntersectionCircles> dialogTool =
-            m_dialog.objectCast<DialogPointOfIntersectionCircles>();
+    const QPointer<DialogPointOfIntersectionCircles> dialogTool =
+            qobject_cast<DialogPointOfIntersectionCircles *>(m_dialog);
     SCASSERT(not dialogTool.isNull())
     const QSharedPointer<VPointF> p = VAbstractTool::data.GeometricObject<VPointF>(m_id);
     dialogTool->SetFirstCircleCenterId(firstCircleCenterId);
@@ -86,12 +86,13 @@ void VToolPointOfIntersectionCircles::setDialog()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-VToolPointOfIntersectionCircles *VToolPointOfIntersectionCircles::Create(QSharedPointer<DialogTool> dialog,
+VToolPointOfIntersectionCircles *VToolPointOfIntersectionCircles::Create(const QPointer<DialogTool> &dialog,
                                                                          VMainGraphicsScene *scene,
                                                                          VAbstractPattern *doc, VContainer *data)
 {
     SCASSERT(not dialog.isNull())
-    QSharedPointer<DialogPointOfIntersectionCircles> dialogTool = dialog.objectCast<DialogPointOfIntersectionCircles>();
+    const QPointer<DialogPointOfIntersectionCircles> dialogTool =
+            qobject_cast<DialogPointOfIntersectionCircles *>(dialog);
     SCASSERT(not dialogTool.isNull())
 
     VToolPointOfIntersectionCirclesInitData initData;
@@ -110,7 +111,7 @@ VToolPointOfIntersectionCircles *VToolPointOfIntersectionCircles::Create(QShared
     VToolPointOfIntersectionCircles *point = Create(initData);
     if (point != nullptr)
     {
-        point->m_dialog = dialogTool;
+        point->m_dialog = dialog;
     }
     return point;
 }
@@ -311,8 +312,8 @@ void VToolPointOfIntersectionCircles::SaveDialog(QDomElement &domElement, QList<
                                                  QList<quint32> &newDependencies)
 {
     SCASSERT(not m_dialog.isNull())
-    QSharedPointer<DialogPointOfIntersectionCircles> dialogTool =
-            m_dialog.objectCast<DialogPointOfIntersectionCircles>();
+    const QPointer<DialogPointOfIntersectionCircles> dialogTool =
+            qobject_cast<DialogPointOfIntersectionCircles *>(m_dialog);
     SCASSERT(not dialogTool.isNull())
 
     AddDependence(oldDependencies, firstCircleCenterId);

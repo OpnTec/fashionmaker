@@ -66,7 +66,7 @@ class VToolPointOfIntersectionCurves : public VToolSinglePoint
     Q_OBJECT
 public:
     virtual void setDialog() override;
-    static VToolPointOfIntersectionCurves *Create(QSharedPointer<DialogTool> dialog, VMainGraphicsScene  *scene,
+    static VToolPointOfIntersectionCurves *Create(const QPointer<DialogTool> &dialog, VMainGraphicsScene  *scene,
                                                   VAbstractPattern *doc, VContainer *data);
     static VToolPointOfIntersectionCurves *Create(VToolPointOfIntersectionCurvesInitData initData);
     static bool FindPoint(const QVector<QPointF> &curve1Points, const QVector<QPointF> &curve2Points,

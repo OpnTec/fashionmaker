@@ -127,7 +127,7 @@ VToolSpline::VToolSpline(VToolSplineInitData initData, QGraphicsItem *parent)
 void VToolSpline::setDialog()
 {
     SCASSERT(not m_dialog.isNull())
-    QSharedPointer<DialogSpline> dialogTool = m_dialog.objectCast<DialogSpline>();
+    const QPointer<DialogSpline> dialogTool = qobject_cast<DialogSpline *>(m_dialog);
     SCASSERT(not dialogTool.isNull())
     const auto spl = VAbstractTool::data.GeometricObject<VSpline>(m_id);
     dialogTool->SetSpline(*spl);
@@ -142,11 +142,11 @@ void VToolSpline::setDialog()
  * @param data container with variables.
  * @return the created tool
  */
-VToolSpline* VToolSpline::Create(QSharedPointer<DialogTool> dialog, VMainGraphicsScene *scene, VAbstractPattern *doc,
+VToolSpline* VToolSpline::Create(const QPointer<DialogTool> &dialog, VMainGraphicsScene *scene, VAbstractPattern *doc,
                                  VContainer *data)
 {
     SCASSERT(not dialog.isNull())
-    QSharedPointer<DialogSpline> dialogTool = dialog.objectCast<DialogSpline>();
+    const QPointer<DialogSpline> dialogTool = qobject_cast<DialogSpline *>(dialog);
     SCASSERT(not dialogTool.isNull())
 
     VToolSplineInitData initData;
@@ -160,7 +160,7 @@ VToolSpline* VToolSpline::Create(QSharedPointer<DialogTool> dialog, VMainGraphic
 
     if (spl != nullptr)
     {
-        spl->m_dialog = dialogTool;
+        spl->m_dialog = dialog;
     }
     return spl;
 }

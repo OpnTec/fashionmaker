@@ -70,7 +70,7 @@ const QString VToolFlippingByLine::ToolType = QStringLiteral("flippingByLine");
 void VToolFlippingByLine::setDialog()
 {
     SCASSERT(not m_dialog.isNull())
-    QSharedPointer<DialogFlippingByLine> dialogTool = m_dialog.objectCast<DialogFlippingByLine>();
+    const QPointer<DialogFlippingByLine> dialogTool = qobject_cast<DialogFlippingByLine *>(m_dialog);
     SCASSERT(not dialogTool.isNull())
     dialogTool->SetFirstLinePointId(m_firstLinePointId);
     dialogTool->SetSecondLinePointId(m_secondLinePointId);
@@ -78,11 +78,11 @@ void VToolFlippingByLine::setDialog()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-VToolFlippingByLine *VToolFlippingByLine::Create(QSharedPointer<DialogTool> dialog, VMainGraphicsScene *scene,
+VToolFlippingByLine *VToolFlippingByLine::Create(const QPointer<DialogTool> &dialog, VMainGraphicsScene *scene,
                                                  VAbstractPattern *doc, VContainer *data)
 {
     SCASSERT(not dialog.isNull())
-    QSharedPointer<DialogFlippingByLine> dialogTool = dialog.objectCast<DialogFlippingByLine>();
+    const QPointer<DialogFlippingByLine> dialogTool = qobject_cast<DialogFlippingByLine *>(dialog);
     SCASSERT(not dialogTool.isNull())
 
     VToolFlippingByLineInitData initData;
@@ -99,7 +99,7 @@ VToolFlippingByLine *VToolFlippingByLine::Create(QSharedPointer<DialogTool> dial
     VToolFlippingByLine* operation = Create(initData);
     if (operation != nullptr)
     {
-        operation->m_dialog = dialogTool;
+        operation->m_dialog = dialog;
     }
     return operation;
 }
@@ -185,7 +185,7 @@ void VToolFlippingByLine::SaveDialog(QDomElement &domElement, QList<quint32> &ol
                                      QList<quint32> &newDependencies)
 {
     SCASSERT(not m_dialog.isNull())
-    QSharedPointer<DialogFlippingByLine> dialogTool = m_dialog.objectCast<DialogFlippingByLine>();
+    const QPointer<DialogFlippingByLine> dialogTool = qobject_cast<DialogFlippingByLine *>(m_dialog);
     SCASSERT(not dialogTool.isNull())
 
     AddDependence(oldDependencies, m_firstLinePointId);

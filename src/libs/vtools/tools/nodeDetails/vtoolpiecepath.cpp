@@ -34,11 +34,11 @@
 #include "../vtoolseamallowance.h"
 
 //---------------------------------------------------------------------------------------------------------------------
-VToolPiecePath *VToolPiecePath::Create(QSharedPointer<DialogTool> dialog, VMainGraphicsScene *scene,
+VToolPiecePath *VToolPiecePath::Create(const QPointer<DialogTool> &dialog, VMainGraphicsScene *scene,
                                        VAbstractPattern *doc, VContainer *data)
 {
     SCASSERT(not dialog.isNull());
-    QSharedPointer<DialogPiecePath> dialogTool = dialog.objectCast<DialogPiecePath>();
+    const QPointer<DialogPiecePath> dialogTool = qobject_cast<DialogPiecePath *>(dialog);
     SCASSERT(not dialogTool.isNull())
 
     VToolPiecePathInitData initData;

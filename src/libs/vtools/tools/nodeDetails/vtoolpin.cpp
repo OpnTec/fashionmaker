@@ -35,10 +35,10 @@
 const QString VToolPin::ToolType = QStringLiteral("pin");
 
 //---------------------------------------------------------------------------------------------------------------------
-VToolPin *VToolPin::Create(QSharedPointer<DialogTool> dialog, VAbstractPattern *doc, VContainer *data)
+VToolPin *VToolPin::Create(const QPointer<DialogTool> &dialog, VAbstractPattern *doc, VContainer *data)
 {
     SCASSERT(not dialog.isNull());
-    QSharedPointer<DialogPin> dialogTool = dialog.objectCast<DialogPin>();
+    const QPointer<DialogPin> dialogTool = qobject_cast<DialogPin *>(dialog);
     SCASSERT(not dialogTool.isNull())
 
     VToolPinInitData initData;

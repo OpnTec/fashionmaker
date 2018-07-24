@@ -70,7 +70,7 @@ VToolPointFromArcAndTangent::VToolPointFromArcAndTangent(const VToolPointFromArc
 void VToolPointFromArcAndTangent::setDialog()
 {
     SCASSERT(not m_dialog.isNull())
-    QSharedPointer<DialogPointFromArcAndTangent> dialogTool = m_dialog.objectCast<DialogPointFromArcAndTangent>();
+    const QPointer<DialogPointFromArcAndTangent> dialogTool = qobject_cast<DialogPointFromArcAndTangent *>(m_dialog);
     SCASSERT(not dialogTool.isNull())
     const QSharedPointer<VPointF> p = VAbstractTool::data.GeometricObject<VPointF>(m_id);
     dialogTool->SetArcId(arcId);
@@ -80,12 +80,12 @@ void VToolPointFromArcAndTangent::setDialog()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-VToolPointFromArcAndTangent *VToolPointFromArcAndTangent::Create(QSharedPointer<DialogTool> dialog,
+VToolPointFromArcAndTangent *VToolPointFromArcAndTangent::Create(const QPointer<DialogTool> &dialog,
                                                                  VMainGraphicsScene *scene,
                                                                  VAbstractPattern *doc, VContainer *data)
 {
     SCASSERT(not dialog.isNull())
-    QSharedPointer<DialogPointFromArcAndTangent> dialogTool = dialog.objectCast<DialogPointFromArcAndTangent>();
+    const QPointer<DialogPointFromArcAndTangent> dialogTool = qobject_cast<DialogPointFromArcAndTangent *>(dialog);
     SCASSERT(not dialogTool.isNull())
 
     VToolPointFromArcAndTangentInitData initData;
@@ -102,7 +102,7 @@ VToolPointFromArcAndTangent *VToolPointFromArcAndTangent::Create(QSharedPointer<
     VToolPointFromArcAndTangent *point = Create(initData);
     if (point != nullptr)
     {
-        point->m_dialog = dialogTool;
+        point->m_dialog = dialog;
     }
     return point;
 }
@@ -284,7 +284,7 @@ void VToolPointFromArcAndTangent::SaveDialog(QDomElement &domElement, QList<quin
                                              QList<quint32> &newDependencies)
 {
     SCASSERT(not m_dialog.isNull())
-    QSharedPointer<DialogPointFromArcAndTangent> dialogTool = m_dialog.objectCast<DialogPointFromArcAndTangent>();
+    const QPointer<DialogPointFromArcAndTangent> dialogTool = qobject_cast<DialogPointFromArcAndTangent *>(m_dialog);
     SCASSERT(not dialogTool.isNull())
 
     AddDependence(oldDependencies, arcId);

@@ -75,7 +75,7 @@ VToolPointOfIntersection::VToolPointOfIntersection(const VToolPointOfIntersectio
 void VToolPointOfIntersection::setDialog()
 {
     SCASSERT(not m_dialog.isNull())
-    QSharedPointer<DialogPointOfIntersection> dialogTool = m_dialog.objectCast<DialogPointOfIntersection>();
+    const QPointer<DialogPointOfIntersection> dialogTool = qobject_cast<DialogPointOfIntersection *>(m_dialog);
     SCASSERT(not dialogTool.isNull())
     const QSharedPointer<VPointF> p = VAbstractTool::data.GeometricObject<VPointF>(m_id);
     dialogTool->SetFirstPointId(firstPointId);
@@ -92,11 +92,12 @@ void VToolPointOfIntersection::setDialog()
  * @param data container with variables.
  * @return the created tool
  */
-VToolPointOfIntersection *VToolPointOfIntersection::Create(QSharedPointer<DialogTool> dialog, VMainGraphicsScene *scene,
-                                                           VAbstractPattern *doc, VContainer *data)
+VToolPointOfIntersection *VToolPointOfIntersection::Create(const QPointer<DialogTool> &dialog,
+                                                           VMainGraphicsScene *scene, VAbstractPattern *doc,
+                                                           VContainer *data)
 {
     SCASSERT(not dialog.isNull())
-    QSharedPointer<DialogPointOfIntersection> dialogTool = dialog.objectCast<DialogPointOfIntersection>();
+    const QPointer<DialogPointOfIntersection> dialogTool = qobject_cast<DialogPointOfIntersection *>(dialog);
     SCASSERT(not dialogTool.isNull())
 
     VToolPointOfIntersectionInitData initData;
@@ -112,7 +113,7 @@ VToolPointOfIntersection *VToolPointOfIntersection::Create(QSharedPointer<Dialog
     VToolPointOfIntersection *point = Create(initData);
     if (point != nullptr)
     {
-        point->m_dialog = dialogTool;
+        point->m_dialog = dialog;
     }
     return point;
 }
@@ -193,7 +194,7 @@ void VToolPointOfIntersection::SaveDialog(QDomElement &domElement, QList<quint32
                                           QList<quint32> &newDependencies)
 {
     SCASSERT(not m_dialog.isNull())
-    QSharedPointer<DialogPointOfIntersection> dialogTool = m_dialog.objectCast<DialogPointOfIntersection>();
+    const QPointer<DialogPointOfIntersection> dialogTool = qobject_cast<DialogPointOfIntersection *>(m_dialog);
     SCASSERT(not dialogTool.isNull())
 
     AddDependence(oldDependencies, firstPointId);

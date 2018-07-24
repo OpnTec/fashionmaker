@@ -71,7 +71,7 @@ public:
     virtual void   setDialog() override;
     static QPointF FindPoint(const QPointF &p1Line, const QPointF &p2Line, const QPointF &pShoulder,
                              const qreal &length);
-    static VToolShoulderPoint* Create(QSharedPointer<DialogTool> dialog, VMainGraphicsScene  *scene,
+    static VToolShoulderPoint* Create(const QPointer<DialogTool> &dialog, VMainGraphicsScene  *scene,
                                       VAbstractPattern *doc, VContainer *data);
     static VToolShoulderPoint* Create(VToolShoulderPointInitData &initData);
     static const QString ToolType;

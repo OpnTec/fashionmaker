@@ -636,7 +636,7 @@ void MainWindow::SetToolButton(bool checked, Tool t, const QString &cursor, cons
         ui->view->setCurrentCursorShape(); // Hack to fix problem with a cursor
         m_statusLabel->setText(toolTip);
         ui->view->setShowToolOptions(false);
-        dialogTool = QSharedPointer<Dialog>(new Dialog(pattern, 0, this));
+        dialogTool = new Dialog(pattern, 0, this);
 
         // This check helps to find missed tools in the switch
         Q_STATIC_ASSERT_X(static_cast<int>(Tool::LAST_ONE_DO_NOT_USE) == 55, "Check if need to extend.");
@@ -1229,8 +1229,8 @@ void MainWindow::ClosedDialogGroup(int result)
     SCASSERT(dialogTool != nullptr)
     if (result == QDialog::Accepted)
     {
-        QSharedPointer<DialogGroup> dialog = dialogTool.objectCast<DialogGroup>();
-        SCASSERT(dialog != nullptr)
+        const QPointer<DialogGroup> dialog = qobject_cast<DialogGroup *>(dialogTool);
+        SCASSERT(not dialog.isNull())
         const QDomElement group = doc->CreateGroup(VContainer::getNextId(), dialog->GetName(), dialog->GetGroup());
         if (not group.isNull())
         {
@@ -1284,8 +1284,8 @@ void MainWindow::ClosedDialogInsertNode(int result)
     SCASSERT(dialogTool != nullptr);
     if (result == QDialog::Accepted)
     {
-        QSharedPointer<DialogInsertNode> dTool = dialogTool.objectCast<DialogInsertNode>();
-        SCASSERT(dTool != nullptr)
+        const QPointer<DialogInsertNode> dTool = qobject_cast<DialogInsertNode *>(dialogTool);
+        SCASSERT(not dTool.isNull())
         VToolSeamAllowance::InsertNode(dTool->GetNode(), dTool->GetPieceId(), sceneDetails, pattern, doc);
     }
     ArrowTool(true);
@@ -2193,7 +2193,11 @@ void MainWindow::CancelTool()
     Q_STATIC_ASSERT_X(static_cast<int>(Tool::LAST_ONE_DO_NOT_USE) == 55, "Not all tools were handled.");
 
     qCDebug(vMainWindow, "Canceling tool.");
-    dialogTool.clear();
+    if(not dialogTool.isNull())
+    {
+        dialogTool->hide();
+        dialogTool->deleteLater();
+    }
     qCDebug(vMainWindow, "Dialog closed.");
 
     currentScene->setFocus(Qt::OtherFocusReason);

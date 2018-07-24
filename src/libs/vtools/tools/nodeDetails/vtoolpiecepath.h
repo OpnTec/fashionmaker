@@ -49,7 +49,7 @@ class VToolPiecePath : public VAbstractNode, public QGraphicsPathItem
 {
     Q_OBJECT
 public:
-    static VToolPiecePath* Create(QSharedPointer<DialogTool> dialog, VMainGraphicsScene *scene, VAbstractPattern *doc,
+    static VToolPiecePath* Create(const QPointer<DialogTool> &dialog, VMainGraphicsScene *scene, VAbstractPattern *doc,
                                   VContainer *data);
     static VToolPiecePath *Create(VToolPiecePathInitData initData);
 

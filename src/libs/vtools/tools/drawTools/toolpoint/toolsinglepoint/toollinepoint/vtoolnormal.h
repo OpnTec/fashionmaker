@@ -68,7 +68,7 @@ class VToolNormal : public VToolLinePoint
     Q_OBJECT
 public:
     virtual void   setDialog() override;
-    static VToolNormal* Create(QSharedPointer<DialogTool> dialog, VMainGraphicsScene  *scene, VAbstractPattern *doc,
+    static VToolNormal* Create(const QPointer<DialogTool> &dialog, VMainGraphicsScene  *scene, VAbstractPattern *doc,
                                VContainer *data);
     static VToolNormal* Create(VToolNormalInitData initData);
     static QPointF FindPoint(const QPointF &firstPoint, const QPointF &secondPoint, const qreal &length,

@@ -91,7 +91,7 @@ void VToolAlongLine::SaveDialog(QDomElement &domElement, QList<quint32> &oldDepe
                                 QList<quint32> &newDependencies)
 {
     SCASSERT(not m_dialog.isNull())
-    QSharedPointer<DialogAlongLine> dialogTool = m_dialog.objectCast<DialogAlongLine>();
+    const QPointer<DialogAlongLine> dialogTool = qobject_cast<DialogAlongLine *>(m_dialog);
     SCASSERT(not dialogTool.isNull())
 
     AddDependence(oldDependencies, basePointId);
@@ -198,7 +198,7 @@ void VToolAlongLine::ShowContextMenu(QGraphicsSceneContextMenuEvent *event, quin
 void VToolAlongLine::setDialog()
 {
     SCASSERT(not m_dialog.isNull())
-    QSharedPointer<DialogAlongLine> dialogTool = m_dialog.objectCast<DialogAlongLine>();
+    const QPointer<DialogAlongLine> dialogTool = qobject_cast<DialogAlongLine *>(m_dialog);
     SCASSERT(not dialogTool.isNull())
     const QSharedPointer<VPointF> p = VAbstractTool::data.GeometricObject<VPointF>(m_id);
     dialogTool->SetTypeLine(m_lineType);
@@ -217,11 +217,11 @@ void VToolAlongLine::setDialog()
  * @param doc dom document container.
  * @param data container with variables.
  */
-VToolAlongLine* VToolAlongLine::Create(QSharedPointer<DialogTool> dialog, VMainGraphicsScene *scene,
+VToolAlongLine* VToolAlongLine::Create(const QPointer<DialogTool> &dialog, VMainGraphicsScene *scene,
                                        VAbstractPattern *doc, VContainer *data)
 {
     SCASSERT(not dialog.isNull())
-    QSharedPointer<DialogAlongLine> dialogTool = dialog.objectCast<DialogAlongLine>();
+    const QPointer<DialogAlongLine> dialogTool = qobject_cast<DialogAlongLine *>(dialog);
     SCASSERT(not dialogTool.isNull())
 
     VToolAlongLineInitData initData;
@@ -240,7 +240,7 @@ VToolAlongLine* VToolAlongLine::Create(QSharedPointer<DialogTool> dialog, VMainG
     VToolAlongLine *point = Create(initData);
     if (point != nullptr)
     {
-        point->m_dialog = dialogTool;
+        point->m_dialog = dialog;
     }
     return point;
 }

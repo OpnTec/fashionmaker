@@ -68,7 +68,7 @@ class VToolLine: public VDrawTool, public VScaledLine
     Q_OBJECT
 public:
     virtual void     setDialog() override;
-    static VToolLine *Create(QSharedPointer<DialogTool> dialog, VMainGraphicsScene  *scene, VAbstractPattern *doc,
+    static VToolLine *Create(const QPointer<DialogTool> &dialog, VMainGraphicsScene  *scene, VAbstractPattern *doc,
                              VContainer *data);
     static VToolLine *Create(VToolLineInitData initData);
 

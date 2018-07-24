@@ -71,7 +71,7 @@ class VToolEllipticalArc : public VToolAbstractArc
     Q_OBJECT
 public:
     virtual void     setDialog() override;
-    static VToolEllipticalArc* Create(QSharedPointer<DialogTool> dialog, VMainGraphicsScene  *scene,
+    static VToolEllipticalArc* Create(const QPointer<DialogTool> &dialog, VMainGraphicsScene  *scene,
                                       VAbstractPattern *doc, VContainer *data);
     static VToolEllipticalArc* Create(VToolEllipticalArcInitData &initData);
     static const QString ToolType;

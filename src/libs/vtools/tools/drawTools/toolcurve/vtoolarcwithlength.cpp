@@ -73,7 +73,7 @@ VToolArcWithLength::VToolArcWithLength(const VToolArcWithLengthInitData &initDat
 void VToolArcWithLength::setDialog()
 {
     SCASSERT(not m_dialog.isNull())
-    QSharedPointer<DialogArcWithLength> dialogTool = m_dialog.objectCast<DialogArcWithLength>();
+    const QPointer<DialogArcWithLength> dialogTool = qobject_cast<DialogArcWithLength *>(m_dialog);
     SCASSERT(not dialogTool.isNull())
     const QSharedPointer<VArc> arc = VAbstractTool::data.GeometricObject<VArc>(m_id);
     dialogTool->SetCenter(arc->GetCenter().id());
@@ -86,11 +86,11 @@ void VToolArcWithLength::setDialog()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-VToolArcWithLength *VToolArcWithLength::Create(QSharedPointer<DialogTool> dialog, VMainGraphicsScene *scene,
+VToolArcWithLength *VToolArcWithLength::Create(const QPointer<DialogTool> &dialog, VMainGraphicsScene *scene,
                                                VAbstractPattern *doc, VContainer *data)
 {
     SCASSERT(not dialog.isNull())
-    QSharedPointer<DialogArcWithLength> dialogTool = dialog.objectCast<DialogArcWithLength>();
+    const QPointer<DialogArcWithLength> dialogTool = qobject_cast<DialogArcWithLength *>(dialog);
     SCASSERT(not dialogTool.isNull())
 
     VToolArcWithLengthInitData initData;
@@ -110,7 +110,7 @@ VToolArcWithLength *VToolArcWithLength::Create(QSharedPointer<DialogTool> dialog
     VToolArcWithLength* point = Create(initData);
     if (point != nullptr)
     {
-        point->m_dialog = dialogTool;
+        point->m_dialog = dialog;
     }
     return point;
 }
@@ -299,7 +299,7 @@ void VToolArcWithLength::SaveDialog(QDomElement &domElement, QList<quint32> &old
                                     QList<quint32> &newDependencies)
 {
     SCASSERT(not m_dialog.isNull())
-    QSharedPointer<DialogArcWithLength> dialogTool = m_dialog.objectCast<DialogArcWithLength>();
+    const QPointer<DialogArcWithLength> dialogTool = qobject_cast<DialogArcWithLength *>(m_dialog);
     SCASSERT(not dialogTool.isNull())
 
     QSharedPointer<VArc> arc = VAbstractTool::data.GeometricObject<VArc>(m_id);

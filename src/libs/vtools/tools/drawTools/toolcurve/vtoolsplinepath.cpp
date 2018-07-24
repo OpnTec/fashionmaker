@@ -138,7 +138,7 @@ VToolSplinePath::VToolSplinePath(const VToolSplinePathInitData &initData, QGraph
 void VToolSplinePath::setDialog()
 {
     SCASSERT(not m_dialog.isNull())
-    QSharedPointer<DialogSplinePath> dialogTool = m_dialog.objectCast<DialogSplinePath>();
+    const QPointer<DialogSplinePath> dialogTool = qobject_cast<DialogSplinePath *>(m_dialog);
     SCASSERT(not dialogTool.isNull())
     const QSharedPointer<VSplinePath> splPath = VAbstractTool::data.GeometricObject<VSplinePath>(m_id);
     dialogTool->SetPath(*splPath);
@@ -152,11 +152,11 @@ void VToolSplinePath::setDialog()
  * @param doc dom document container.
  * @param data container with variables.
  */
-VToolSplinePath* VToolSplinePath::Create(QSharedPointer<DialogTool> dialog, VMainGraphicsScene *scene,
+VToolSplinePath* VToolSplinePath::Create(const QPointer<DialogTool> &dialog, VMainGraphicsScene *scene,
                                          VAbstractPattern *doc, VContainer *data)
 {
     SCASSERT(not dialog.isNull())
-    QSharedPointer<DialogSplinePath> dialogTool = dialog.objectCast<DialogSplinePath>();
+    const QPointer<DialogSplinePath> dialogTool = qobject_cast<DialogSplinePath *>(dialog);
     SCASSERT(not dialogTool.isNull())
 
     VToolSplinePathInitData initData;
@@ -175,7 +175,7 @@ VToolSplinePath* VToolSplinePath::Create(QSharedPointer<DialogTool> dialog, VMai
     VToolSplinePath* spl = Create(initData, path);
     if (spl != nullptr)
     {
-        spl->m_dialog = dialogTool;
+        spl->m_dialog = dialog;
     }
     return spl;
 }
@@ -466,7 +466,7 @@ void VToolSplinePath::SaveDialog(QDomElement &domElement, QList<quint32> &oldDep
                                  QList<quint32> &newDependencies)
 {
     SCASSERT(not m_dialog.isNull())
-    QSharedPointer<DialogSplinePath> dialogTool = m_dialog.objectCast<DialogSplinePath>();
+    const QPointer<DialogSplinePath> dialogTool = qobject_cast<DialogSplinePath *>(m_dialog);
     SCASSERT(not dialogTool.isNull())
 
     const auto oldSplPath = VAbstractTool::data.GeometricObject<VSplinePath>(m_id);

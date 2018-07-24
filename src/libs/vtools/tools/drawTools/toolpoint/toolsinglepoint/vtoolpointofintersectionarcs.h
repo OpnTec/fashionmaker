@@ -64,7 +64,7 @@ class VToolPointOfIntersectionArcs : public VToolSinglePoint
 
 public:
     virtual void setDialog() override;
-    static VToolPointOfIntersectionArcs *Create(QSharedPointer<DialogTool> dialog, VMainGraphicsScene  *scene,
+    static VToolPointOfIntersectionArcs *Create(const QPointer<DialogTool> &dialog, VMainGraphicsScene  *scene,
                                                 VAbstractPattern *doc, VContainer *data);
     static VToolPointOfIntersectionArcs *Create(VToolPointOfIntersectionArcsInitData initData);
     static bool FindPoint(const VArc *arc1, const VArc *arc2, const CrossCirclesPoint pType,

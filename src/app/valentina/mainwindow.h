@@ -238,7 +238,7 @@ private:
     bool               patternReadOnly;
 
     QPointer<DialogIncrements>        dialogTable;
-    QSharedPointer<DialogTool>        dialogTool;
+    QPointer<DialogTool>              dialogTool;
     QPointer<DialogHistory>           dialogHistory;
     QPointer<DialogFinalMeasurements> dialogFMeasurements;
 

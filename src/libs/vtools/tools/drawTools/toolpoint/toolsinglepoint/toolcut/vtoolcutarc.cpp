@@ -75,7 +75,7 @@ VToolCutArc::VToolCutArc(const VToolCutArcInitData &initData, QGraphicsItem * pa
 void VToolCutArc::setDialog()
 {
     SCASSERT(not m_dialog.isNull())
-    QSharedPointer<DialogCutArc> dialogTool = m_dialog.objectCast<DialogCutArc>();
+    const QPointer<DialogCutArc> dialogTool = qobject_cast<DialogCutArc *>(m_dialog);
     SCASSERT(not dialogTool.isNull())
     const QSharedPointer<VPointF> point = VAbstractTool::data.GeometricObject<VPointF>(m_id);
     dialogTool->SetFormula(formula);
@@ -91,11 +91,11 @@ void VToolCutArc::setDialog()
  * @param doc dom document container.
  * @param data container with variables.
  */
-VToolCutArc* VToolCutArc::Create(QSharedPointer<DialogTool> dialog, VMainGraphicsScene *scene, VAbstractPattern *doc,
+VToolCutArc* VToolCutArc::Create(const QPointer<DialogTool> &dialog, VMainGraphicsScene *scene, VAbstractPattern *doc,
                                  VContainer *data)
 {
     SCASSERT(not dialog.isNull())
-    QSharedPointer<DialogCutArc> dialogTool = dialog.objectCast<DialogCutArc>();
+    const QPointer<DialogCutArc> dialogTool = qobject_cast<DialogCutArc *>(dialog);
     SCASSERT(not dialogTool.isNull())
 
     VToolCutArcInitData initData;
@@ -111,7 +111,7 @@ VToolCutArc* VToolCutArc::Create(QSharedPointer<DialogTool> dialog, VMainGraphic
     VToolCutArc* point = Create(initData);
     if (point != nullptr)
     {
-        point->m_dialog = dialogTool;
+        point->m_dialog = dialog;
     }
     return point;
 }
@@ -199,7 +199,7 @@ void VToolCutArc::SaveDialog(QDomElement &domElement, QList<quint32> &oldDepende
                              QList<quint32> &newDependencies)
 {
     SCASSERT(not m_dialog.isNull())
-    QSharedPointer<DialogCutArc> dialogTool = m_dialog.objectCast<DialogCutArc>();
+    const QPointer<DialogCutArc> dialogTool = qobject_cast<DialogCutArc *>(m_dialog);
     SCASSERT(not dialogTool.isNull())
 
     AddDependence(oldDependencies, curveCutId);

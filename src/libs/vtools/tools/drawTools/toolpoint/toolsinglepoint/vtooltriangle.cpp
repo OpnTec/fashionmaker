@@ -79,7 +79,7 @@ VToolTriangle::VToolTriangle(const VToolTriangleInitData &initData, QGraphicsIte
 void VToolTriangle::setDialog()
 {
     SCASSERT(not m_dialog.isNull())
-    QSharedPointer<DialogTriangle> dialogTool = m_dialog.objectCast<DialogTriangle>();
+    const QPointer<DialogTriangle> dialogTool = qobject_cast<DialogTriangle *>(m_dialog);
     SCASSERT(not dialogTool.isNull())
     const QSharedPointer<VPointF> p = VAbstractTool::data.GeometricObject<VPointF>(m_id);
     dialogTool->SetAxisP1Id(axisP1Id);
@@ -98,11 +98,11 @@ void VToolTriangle::setDialog()
  * @param data container with variables.
  * @return the created tool
  */
-VToolTriangle* VToolTriangle::Create(QSharedPointer<DialogTool> dialog, VMainGraphicsScene *scene,
+VToolTriangle* VToolTriangle::Create(const QPointer<DialogTool> &dialog, VMainGraphicsScene *scene,
                                      VAbstractPattern *doc, VContainer *data)
 {
     SCASSERT(not dialog.isNull())
-    QSharedPointer<DialogTriangle> dialogTool = dialog.objectCast<DialogTriangle>();
+    const QPointer<DialogTriangle> dialogTool = qobject_cast<DialogTriangle *>(dialog);
     SCASSERT(not dialogTool.isNull())
 
     VToolTriangleInitData initData;
@@ -120,7 +120,7 @@ VToolTriangle* VToolTriangle::Create(QSharedPointer<DialogTool> dialog, VMainGra
     VToolTriangle* point = Create(initData);
     if (point != nullptr)
     {
-        point->m_dialog = dialogTool;
+        point->m_dialog = dialog;
     }
     return point;
 }
@@ -282,7 +282,7 @@ void VToolTriangle::SaveDialog(QDomElement &domElement, QList<quint32> &oldDepen
                                QList<quint32> &newDependencies)
 {
     SCASSERT(not m_dialog.isNull())
-    QSharedPointer<DialogTriangle> dialogTool = m_dialog.objectCast<DialogTriangle>();
+    const QPointer<DialogTriangle> dialogTool = qobject_cast<DialogTriangle *>(m_dialog);
     SCASSERT(not dialogTool.isNull())
 
     AddDependence(oldDependencies, axisP1Id);

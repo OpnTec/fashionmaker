@@ -68,7 +68,7 @@ class VToolPointOfIntersectionCircles : public VToolSinglePoint
     Q_OBJECT
 public:
     virtual void setDialog() override;
-    static VToolPointOfIntersectionCircles *Create(QSharedPointer<DialogTool> dialog, VMainGraphicsScene  *scene,
+    static VToolPointOfIntersectionCircles *Create(const QPointer<DialogTool> &dialog, VMainGraphicsScene  *scene,
                                                    VAbstractPattern *doc, VContainer *data);
     static VToolPointOfIntersectionCircles *Create(VToolPointOfIntersectionCirclesInitData &initData);
     static bool FindPoint(const QPointF &c1Point, const QPointF &c2Point, qreal c1Radius, qreal c2Radius,

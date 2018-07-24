@@ -94,7 +94,7 @@ VToolRotation::VToolRotation(const VToolRotationInitData &initData, QGraphicsIte
 void VToolRotation::setDialog()
 {
     SCASSERT(not m_dialog.isNull())
-    QSharedPointer<DialogRotation> dialogTool = m_dialog.objectCast<DialogRotation>();
+    const QPointer<DialogRotation> dialogTool = qobject_cast<DialogRotation *>(m_dialog);
     SCASSERT(not dialogTool.isNull())
     dialogTool->SetOrigPointId(origPointId);
     dialogTool->SetAngle(formulaAngle);
@@ -102,11 +102,11 @@ void VToolRotation::setDialog()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-VToolRotation *VToolRotation::Create(QSharedPointer<DialogTool> dialog, VMainGraphicsScene *scene,
+VToolRotation *VToolRotation::Create(const QPointer<DialogTool> &dialog, VMainGraphicsScene *scene,
                                      VAbstractPattern *doc, VContainer *data)
 {
     SCASSERT(not dialog.isNull())
-    QSharedPointer<DialogRotation> dialogTool = dialog.objectCast<DialogRotation>();
+    const QPointer<DialogRotation> dialogTool = qobject_cast<DialogRotation *>(dialog);
     SCASSERT(not dialogTool.isNull())
 
     VToolRotationInitData initData;
@@ -123,7 +123,7 @@ VToolRotation *VToolRotation::Create(QSharedPointer<DialogTool> dialog, VMainGra
     VToolRotation* operation = Create(initData);
     if (operation != nullptr)
     {
-        operation->m_dialog = dialogTool;
+        operation->m_dialog = dialog;
     }
     return operation;
 }
@@ -336,7 +336,7 @@ void VToolRotation::SaveDialog(QDomElement &domElement, QList<quint32> &oldDepen
                                QList<quint32> &newDependencies)
 {
     SCASSERT(not m_dialog.isNull())
-    QSharedPointer<DialogRotation> dialogTool = m_dialog.objectCast<DialogRotation>();
+    const QPointer<DialogRotation> dialogTool = qobject_cast<DialogRotation *>(m_dialog);
     SCASSERT(not dialogTool.isNull())
 
     AddDependence(oldDependencies, origPointId);

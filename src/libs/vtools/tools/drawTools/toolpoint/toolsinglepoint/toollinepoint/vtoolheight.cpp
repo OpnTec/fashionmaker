@@ -74,7 +74,7 @@ VToolHeight::VToolHeight(const VToolHeightInitData &initData, QGraphicsItem * pa
 void VToolHeight::setDialog()
 {
     SCASSERT(not m_dialog.isNull())
-    QSharedPointer<DialogHeight> dialogTool = m_dialog.objectCast<DialogHeight>();
+    const QPointer<DialogHeight> dialogTool = qobject_cast<DialogHeight *>(m_dialog);
     SCASSERT(not dialogTool.isNull())
     const QSharedPointer<VPointF> p = VAbstractTool::data.GeometricObject<VPointF>(m_id);
     dialogTool->SetTypeLine(m_lineType);
@@ -94,11 +94,11 @@ void VToolHeight::setDialog()
  * @param data container with variables.
  * @return the created tool
  */
-VToolHeight* VToolHeight::Create(QSharedPointer<DialogTool> dialog, VMainGraphicsScene *scene, VAbstractPattern *doc,
+VToolHeight* VToolHeight::Create(const QPointer<DialogTool> &dialog, VMainGraphicsScene *scene, VAbstractPattern *doc,
                                  VContainer *data)
 {
     SCASSERT(not dialog.isNull())
-    QSharedPointer<DialogHeight> dialogTool = dialog.objectCast<DialogHeight>();
+    const QPointer<DialogHeight> dialogTool = qobject_cast<DialogHeight *>(dialog);
     SCASSERT(not dialogTool.isNull())
 
     VToolHeightInitData initData;
@@ -117,7 +117,7 @@ VToolHeight* VToolHeight::Create(QSharedPointer<DialogTool> dialog, VMainGraphic
     VToolHeight *point = Create(initData);
     if (point != nullptr)
     {
-        point->m_dialog = dialogTool;
+        point->m_dialog = dialog;
     }
     return point;
 }
@@ -205,7 +205,7 @@ void VToolHeight::SaveDialog(QDomElement &domElement, QList<quint32> &oldDepende
                              QList<quint32> &newDependencies)
 {
     SCASSERT(not m_dialog.isNull())
-    QSharedPointer<DialogHeight> dialogTool = m_dialog.objectCast<DialogHeight>();
+    const QPointer<DialogHeight> dialogTool = qobject_cast<DialogHeight *>(m_dialog);
     SCASSERT(not dialogTool.isNull())
 
     AddDependence(oldDependencies, basePointId);

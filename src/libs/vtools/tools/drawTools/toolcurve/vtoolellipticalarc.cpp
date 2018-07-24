@@ -81,7 +81,7 @@ VToolEllipticalArc::VToolEllipticalArc(const VToolEllipticalArcInitData &initDat
 void VToolEllipticalArc::setDialog()
 {
     SCASSERT(not m_dialog.isNull())
-    QSharedPointer<DialogEllipticalArc> dialogTool = m_dialog.objectCast<DialogEllipticalArc>();
+    const QPointer<DialogEllipticalArc> dialogTool = qobject_cast<DialogEllipticalArc *>(m_dialog);
     SCASSERT(not dialogTool.isNull())
     const QSharedPointer<VEllipticalArc> elArc = VAbstractTool::data.GeometricObject<VEllipticalArc>(m_id);
     dialogTool->SetCenter(elArc->GetCenter().id());
@@ -102,11 +102,11 @@ void VToolEllipticalArc::setDialog()
  * @param doc dom document container
  * @param data container with variables
  */
-VToolEllipticalArc* VToolEllipticalArc::Create(QSharedPointer<DialogTool> dialog, VMainGraphicsScene *scene,
+VToolEllipticalArc* VToolEllipticalArc::Create(const QPointer<DialogTool> &dialog, VMainGraphicsScene *scene,
                                                VAbstractPattern *doc, VContainer *data)
 {
     SCASSERT(not dialog.isNull())
-    QSharedPointer<DialogEllipticalArc> dialogTool = dialog.objectCast<DialogEllipticalArc>();
+    const QPointer<DialogEllipticalArc> dialogTool = qobject_cast<DialogEllipticalArc *>(dialog);
     SCASSERT(not dialogTool.isNull())
 
     VToolEllipticalArcInitData initData;
@@ -128,7 +128,7 @@ VToolEllipticalArc* VToolEllipticalArc::Create(QSharedPointer<DialogTool> dialog
     VToolEllipticalArc* point = Create(initData);
     if (point != nullptr)
     {
-        point->m_dialog = dialogTool;
+        point->m_dialog = dialog;
     }
     return point;
 }
@@ -367,7 +367,7 @@ void VToolEllipticalArc::SaveDialog(QDomElement &domElement, QList<quint32> &old
                                     QList<quint32> &newDependencies)
 {
     SCASSERT(not m_dialog.isNull())
-    QSharedPointer<DialogEllipticalArc> dialogTool = m_dialog.objectCast<DialogEllipticalArc>();
+    const QPointer<DialogEllipticalArc> dialogTool = qobject_cast<DialogEllipticalArc *>(m_dialog);
     SCASSERT(not dialogTool.isNull())
 
     const auto elArc = VAbstractTool::data.GeometricObject<VEllipticalArc>(m_id);

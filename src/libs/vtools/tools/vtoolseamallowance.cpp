@@ -83,11 +83,11 @@ const QString VToolSeamAllowance::AttrTopPin               = QStringLiteral("top
 const QString VToolSeamAllowance::AttrBottomPin            = QStringLiteral("bottomPin");
 
 //---------------------------------------------------------------------------------------------------------------------
-VToolSeamAllowance *VToolSeamAllowance::Create(QSharedPointer<DialogTool> dialog, VMainGraphicsScene *scene,
+VToolSeamAllowance *VToolSeamAllowance::Create(const QPointer<DialogTool> &dialog, VMainGraphicsScene *scene,
                                                VAbstractPattern *doc, VContainer *data)
 {
     SCASSERT(not dialog.isNull());
-    QSharedPointer<DialogSeamAllowance> dialogTool = dialog.objectCast<DialogSeamAllowance>();
+    const QPointer<DialogSeamAllowance> dialogTool = qobject_cast<DialogSeamAllowance*>(dialog);
     SCASSERT(not dialogTool.isNull())
 
     VToolSeamAllowanceInitData initData;
@@ -105,7 +105,7 @@ VToolSeamAllowance *VToolSeamAllowance::Create(QSharedPointer<DialogTool> dialog
 
     if (piece != nullptr)
     {
-        piece->m_dialog = dialogTool;
+        piece->m_dialog = dialog;
     }
     return piece;
 }
@@ -152,11 +152,11 @@ VToolSeamAllowance *VToolSeamAllowance::Create(VToolSeamAllowanceInitData &initD
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-VToolSeamAllowance *VToolSeamAllowance::Duplicate(QSharedPointer<DialogTool> dialog, VMainGraphicsScene *scene,
+VToolSeamAllowance *VToolSeamAllowance::Duplicate(const QPointer<DialogTool> &dialog, VMainGraphicsScene *scene,
                                                   VAbstractPattern *doc)
 {
     SCASSERT(not dialog.isNull());
-    QSharedPointer<DialogDuplicateDetail> dialogTool = dialog.objectCast<DialogDuplicateDetail>();
+    const QPointer<DialogDuplicateDetail> dialogTool = qobject_cast<DialogDuplicateDetail*>(dialog);
     SCASSERT(not dialogTool.isNull())
 
     VToolSeamAllowanceInitData initData;
@@ -1270,7 +1270,7 @@ void VToolSeamAllowance::keyReleaseEvent(QKeyEvent *event)
 void VToolSeamAllowance::SetDialog()
 {
     SCASSERT(not m_dialog.isNull());
-    QSharedPointer<DialogSeamAllowance> dialogTool = m_dialog.objectCast<DialogSeamAllowance>();
+    const QPointer<DialogSeamAllowance> dialogTool = qobject_cast<DialogSeamAllowance *>(m_dialog);
     SCASSERT(not dialogTool.isNull())
     dialogTool->SetPiece(VAbstractTool::data.GetPiece(m_id));
     dialogTool->EnableApply(true);
@@ -1465,8 +1465,7 @@ void VToolSeamAllowance::SaveDialogChange(const QString &undoText)
 //---------------------------------------------------------------------------------------------------------------------
 void VToolSeamAllowance::ShowOptions()
 {
-    QSharedPointer<DialogSeamAllowance> dialog =
-            QSharedPointer<DialogSeamAllowance>(new DialogSeamAllowance(getData(), doc, m_id, qApp->getMainWindow()));
+    QPointer<DialogSeamAllowance> dialog = new DialogSeamAllowance(getData(), doc, m_id, qApp->getMainWindow());
     dialog->EnableApply(true);
     m_dialog = dialog;
     m_dialog->setModal(true);

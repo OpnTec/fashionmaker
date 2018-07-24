@@ -71,7 +71,7 @@ public:
     virtual void   setDialog() override;
     static bool FindPoint(qreal radius, const QPointF &center, const QPointF &firstPoint,
                           const QPointF &secondPoint, QPointF *intersectionPoint);
-    static VToolPointOfContact* Create(QSharedPointer<DialogTool> dialog, VMainGraphicsScene  *scene,
+    static VToolPointOfContact* Create(const QPointer<DialogTool> &dialog, VMainGraphicsScene  *scene,
                                        VAbstractPattern *doc, VContainer *data);
     static VToolPointOfContact* Create(VToolPointOfContactInitData &initData);
     static const QString ToolType;

@@ -78,7 +78,7 @@ VToolLineIntersect::VToolLineIntersect(const VToolLineIntersectInitData &initDat
 void VToolLineIntersect::setDialog()
 {
     SCASSERT(not m_dialog.isNull())
-    QSharedPointer<DialogLineIntersect> dialogTool = m_dialog.objectCast<DialogLineIntersect>();
+    const QPointer<DialogLineIntersect> dialogTool = qobject_cast<DialogLineIntersect *>(m_dialog);
     SCASSERT(not dialogTool.isNull())     
     const QSharedPointer<VPointF> p = VAbstractTool::data.GeometricObject<VPointF>(m_id);
     dialogTool->SetP1Line1(p1Line1);
@@ -97,11 +97,11 @@ void VToolLineIntersect::setDialog()
  * @param data container with variables.
  * @return the created tool
  */
-VToolLineIntersect* VToolLineIntersect::Create(QSharedPointer<DialogTool> dialog, VMainGraphicsScene *scene,
+VToolLineIntersect* VToolLineIntersect::Create(const QPointer<DialogTool> &dialog, VMainGraphicsScene *scene,
                                                VAbstractPattern *doc, VContainer *data)
 {
     SCASSERT(not dialog.isNull())
-    QSharedPointer<DialogLineIntersect> dialogTool = dialog.objectCast<DialogLineIntersect>();
+    const QPointer<DialogLineIntersect> dialogTool = qobject_cast<DialogLineIntersect *>(dialog);
     SCASSERT(not dialogTool.isNull())
 
     VToolLineIntersectInitData initData;
@@ -119,7 +119,7 @@ VToolLineIntersect* VToolLineIntersect::Create(QSharedPointer<DialogTool> dialog
     VToolLineIntersect* point = Create(initData);
     if (point != nullptr)
     {
-        point->m_dialog = dialogTool;
+        point->m_dialog = dialog;
     }
     return point;
 }
@@ -236,7 +236,7 @@ void VToolLineIntersect::SaveDialog(QDomElement &domElement, QList<quint32> &old
                                     QList<quint32> &newDependencies)
 {
     SCASSERT(not m_dialog.isNull())
-    QSharedPointer<DialogLineIntersect> dialogTool = m_dialog.objectCast<DialogLineIntersect>();
+    const QPointer<DialogLineIntersect> dialogTool = qobject_cast<DialogLineIntersect *>(m_dialog);
     SCASSERT(not dialogTool.isNull())
 
     AddDependence(oldDependencies, p1Line1);

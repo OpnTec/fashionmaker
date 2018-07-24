@@ -67,7 +67,7 @@ class VToolMove : public VAbstractOperation
 public:
     virtual ~VToolMove() Q_DECL_EQ_DEFAULT;
     virtual void setDialog() override;
-    static VToolMove* Create(QSharedPointer<DialogTool> dialog, VMainGraphicsScene *scene, VAbstractPattern *doc,
+    static VToolMove* Create(const QPointer<DialogTool> &dialog, VMainGraphicsScene *scene, VAbstractPattern *doc,
                              VContainer *data);
     static VToolMove* Create(VToolMoveInitData &initData);
 

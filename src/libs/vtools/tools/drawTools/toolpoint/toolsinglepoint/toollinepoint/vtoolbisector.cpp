@@ -112,7 +112,7 @@ QPointF VToolBisector::FindPoint(const QPointF &firstPoint, const QPointF &secon
 void VToolBisector::setDialog()
 {
     SCASSERT(not m_dialog.isNull())
-    QSharedPointer<DialogBisector> dialogTool = m_dialog.objectCast<DialogBisector>();
+    const QPointer<DialogBisector> dialogTool = qobject_cast<DialogBisector *>(m_dialog);
     SCASSERT(not dialogTool.isNull())
     const QSharedPointer<VPointF> p = VAbstractTool::data.GeometricObject<VPointF>(m_id);
     dialogTool->SetTypeLine(m_lineType);
@@ -132,11 +132,11 @@ void VToolBisector::setDialog()
  * @param doc dom document container.
  * @param data container with variables.
  */
-VToolBisector* VToolBisector::Create(QSharedPointer<DialogTool> dialog, VMainGraphicsScene *scene,
+VToolBisector* VToolBisector::Create(const QPointer<DialogTool> &dialog, VMainGraphicsScene *scene,
                                      VAbstractPattern *doc, VContainer *data)
 {
     SCASSERT(not dialog.isNull())
-    QSharedPointer<DialogBisector> dialogTool = dialog.objectCast<DialogBisector>();
+    const QPointer<DialogBisector> dialogTool = qobject_cast<DialogBisector *>(dialog);
     SCASSERT(not dialogTool.isNull())
 
     VToolBisectorInitData initData;
@@ -156,7 +156,7 @@ VToolBisector* VToolBisector::Create(QSharedPointer<DialogTool> dialog, VMainGra
     VToolBisector *point = Create(initData);
     if (point != nullptr)
     {
-        point->m_dialog = dialogTool;
+        point->m_dialog = dialog;
     }
     return point;
 }
@@ -244,7 +244,7 @@ void VToolBisector::SaveDialog(QDomElement &domElement, QList<quint32> &oldDepen
                                QList<quint32> &newDependencies)
 {
     SCASSERT(not m_dialog.isNull())
-    QSharedPointer<DialogBisector> dialogTool = m_dialog.objectCast<DialogBisector>();
+    QPointer<DialogBisector> dialogTool = qobject_cast<DialogBisector *>(m_dialog);
     SCASSERT(not dialogTool.isNull())
 
     AddDependence(oldDependencies, firstPointId);

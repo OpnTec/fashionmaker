@@ -86,7 +86,7 @@ VToolLine::VToolLine(const VToolLineInitData &initData, QGraphicsItem *parent)
 void VToolLine::setDialog()
 {
     SCASSERT(not m_dialog.isNull())
-    QSharedPointer<DialogLine> dialogTool = m_dialog.objectCast<DialogLine>();
+    const QPointer<DialogLine> dialogTool = qobject_cast<DialogLine *>(m_dialog);
     SCASSERT(not dialogTool.isNull())
     dialogTool->SetFirstPoint(firstPoint);
     dialogTool->SetSecondPoint(secondPoint);
@@ -102,11 +102,11 @@ void VToolLine::setDialog()
  * @param doc dom document container.
  * @param data container with variables.
  */
-VToolLine *VToolLine::Create(QSharedPointer<DialogTool> dialog, VMainGraphicsScene *scene, VAbstractPattern *doc,
+VToolLine *VToolLine::Create(const QPointer<DialogTool> &dialog, VMainGraphicsScene *scene, VAbstractPattern *doc,
                              VContainer *data)
 {
     SCASSERT(not dialog.isNull())
-    QSharedPointer<DialogLine> dialogTool = dialog.objectCast<DialogLine>();
+    const QPointer<DialogLine> dialogTool = qobject_cast<DialogLine *>(dialog);
     SCASSERT(not dialogTool.isNull())
 
     VToolLineInitData initData;
@@ -123,7 +123,7 @@ VToolLine *VToolLine::Create(QSharedPointer<DialogTool> dialog, VMainGraphicsSce
     VToolLine *line = Create(initData);
     if (line != nullptr)
     {
-        line->m_dialog = dialogTool;
+        line->m_dialog = dialog;
     }
     return line;
 }
@@ -379,7 +379,7 @@ void VToolLine::SaveDialog(QDomElement &domElement, QList<quint32> &oldDependenc
                            QList<quint32> &newDependencies)
 {
     SCASSERT(not m_dialog.isNull())
-    QSharedPointer<DialogLine> dialogTool = m_dialog.objectCast<DialogLine>();
+    const QPointer<DialogLine> dialogTool = qobject_cast<DialogLine *>(m_dialog);
     SCASSERT(not dialogTool.isNull())
 
     AddDependence(oldDependencies, firstPoint);

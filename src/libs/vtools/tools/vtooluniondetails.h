@@ -76,7 +76,7 @@ class VToolUnionDetails : public VAbstractTool
 {
     Q_OBJECT
 public:
-    static VToolUnionDetails *Create(QSharedPointer<DialogTool> dialog, VMainGraphicsScene *scene,
+    static VToolUnionDetails *Create(const QPointer<DialogTool> &dialog, VMainGraphicsScene *scene,
                                      VAbstractPattern *doc, VContainer *data);
     static VToolUnionDetails *Create(VToolUnionDetailsInitData initData);
 

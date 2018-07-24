@@ -72,7 +72,8 @@ VToolPointFromCircleAndTangent::VToolPointFromCircleAndTangent(const VToolPointF
 void VToolPointFromCircleAndTangent::setDialog()
 {
     SCASSERT(not m_dialog.isNull())
-    QSharedPointer<DialogPointFromCircleAndTangent> dialogTool = m_dialog.objectCast<DialogPointFromCircleAndTangent>();
+    const QPointer<DialogPointFromCircleAndTangent> dialogTool =
+            qobject_cast<DialogPointFromCircleAndTangent *>(m_dialog);
     SCASSERT(not dialogTool.isNull())
     const QSharedPointer<VPointF> p = VAbstractTool::data.GeometricObject<VPointF>(m_id);
     dialogTool->SetCircleCenterId(circleCenterId);
@@ -83,12 +84,13 @@ void VToolPointFromCircleAndTangent::setDialog()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-VToolPointFromCircleAndTangent *VToolPointFromCircleAndTangent::Create(QSharedPointer<DialogTool> dialog,
+VToolPointFromCircleAndTangent *VToolPointFromCircleAndTangent::Create(const QPointer<DialogTool> &dialog,
                                                                        VMainGraphicsScene *scene,
                                                                        VAbstractPattern *doc, VContainer *data)
 {
     SCASSERT(not dialog.isNull())
-    QSharedPointer<DialogPointFromCircleAndTangent> dialogTool = dialog.objectCast<DialogPointFromCircleAndTangent>();
+    const QPointer<DialogPointFromCircleAndTangent> dialogTool =
+            qobject_cast<DialogPointFromCircleAndTangent *>(dialog);
     SCASSERT(not dialogTool.isNull())
 
     VToolPointFromCircleAndTangentInitData initData;
@@ -106,7 +108,7 @@ VToolPointFromCircleAndTangent *VToolPointFromCircleAndTangent::Create(QSharedPo
     VToolPointFromCircleAndTangent *point = Create(initData);
     if (point != nullptr)
     {
-        point->m_dialog = dialogTool;
+        point->m_dialog = dialog;
     }
     return point;
 }
@@ -272,7 +274,8 @@ void VToolPointFromCircleAndTangent::SaveDialog(QDomElement &domElement, QList<q
                                                 QList<quint32> &newDependencies)
 {
     SCASSERT(not m_dialog.isNull())
-    QSharedPointer<DialogPointFromCircleAndTangent> dialogTool = m_dialog.objectCast<DialogPointFromCircleAndTangent>();
+    const QPointer<DialogPointFromCircleAndTangent> dialogTool =
+            qobject_cast<DialogPointFromCircleAndTangent *>(m_dialog);
     SCASSERT(not dialogTool.isNull())
 
     AddDependence(oldDependencies, circleCenterId);

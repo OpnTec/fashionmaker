@@ -49,7 +49,7 @@ public slots:
 
 protected:
     /** @brief m_dialog tool's dialog options.*/
-    QSharedPointer<DialogTool> m_dialog;
+    QPointer<DialogTool> m_dialog;
 
     /** @brief setDialog set dialog when user want change tool option. */
     virtual void setDialog() {/*do nothing by default*/}

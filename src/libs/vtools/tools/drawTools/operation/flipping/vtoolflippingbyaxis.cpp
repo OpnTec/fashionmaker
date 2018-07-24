@@ -70,7 +70,7 @@ const QString VToolFlippingByAxis::ToolType = QStringLiteral("flippingByAxis");
 void VToolFlippingByAxis::setDialog()
 {
     SCASSERT(not m_dialog.isNull())
-    QSharedPointer<DialogFlippingByAxis> dialogTool = m_dialog.objectCast<DialogFlippingByAxis>();
+    const QPointer<DialogFlippingByAxis> dialogTool = qobject_cast<DialogFlippingByAxis *>(m_dialog);
     SCASSERT(not dialogTool.isNull())
     dialogTool->SetOriginPointId(m_originPointId);
     dialogTool->SetAxisType(m_axisType);
@@ -78,11 +78,11 @@ void VToolFlippingByAxis::setDialog()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-VToolFlippingByAxis *VToolFlippingByAxis::Create(QSharedPointer<DialogTool> dialog, VMainGraphicsScene *scene,
+VToolFlippingByAxis *VToolFlippingByAxis::Create(const QPointer<DialogTool> &dialog, VMainGraphicsScene *scene,
                                                  VAbstractPattern *doc, VContainer *data)
 {
     SCASSERT(not dialog.isNull())
-    QSharedPointer<DialogFlippingByAxis> dialogTool = dialog.objectCast<DialogFlippingByAxis>();
+    const QPointer<DialogFlippingByAxis> dialogTool = qobject_cast<DialogFlippingByAxis *>(dialog);
     SCASSERT(not dialogTool.isNull())
 
     VToolFlippingByAxisInitData initData;
@@ -99,7 +99,7 @@ VToolFlippingByAxis *VToolFlippingByAxis::Create(QSharedPointer<DialogTool> dial
     VToolFlippingByAxis* operation = Create(initData);
     if (operation != nullptr)
     {
-        operation->m_dialog = dialogTool;
+        operation->m_dialog = dialog;
     }
     return operation;
 }
@@ -200,7 +200,7 @@ void VToolFlippingByAxis::SaveDialog(QDomElement &domElement, QList<quint32> &ol
                                      QList<quint32> &newDependencies)
 {
     SCASSERT(not m_dialog.isNull())
-    QSharedPointer<DialogFlippingByAxis> dialogTool = m_dialog.objectCast<DialogFlippingByAxis>();
+    const QPointer<DialogFlippingByAxis> dialogTool = qobject_cast<DialogFlippingByAxis *>(m_dialog);
     SCASSERT(not dialogTool.isNull())
 
     AddDependence(oldDependencies, m_originPointId);

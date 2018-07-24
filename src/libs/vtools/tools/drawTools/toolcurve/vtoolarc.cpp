@@ -80,7 +80,7 @@ VToolArc::VToolArc(const VToolArcInitData &initData, QGraphicsItem *parent)
 void VToolArc::setDialog()
 {
     SCASSERT(not m_dialog.isNull())
-    QSharedPointer<DialogArc> dialogTool = m_dialog.objectCast<DialogArc>();
+    const QPointer<DialogArc> dialogTool = qobject_cast<DialogArc *>(m_dialog);
     SCASSERT(not dialogTool.isNull())
     const QSharedPointer<VArc> arc = VAbstractTool::data.GeometricObject<VArc>(m_id);
     dialogTool->SetCenter(arc->GetCenter().id());
@@ -100,11 +100,11 @@ void VToolArc::setDialog()
  * @param doc dom document container
  * @param data container with variables
  */
-VToolArc* VToolArc::Create(QSharedPointer<DialogTool> dialog, VMainGraphicsScene *scene, VAbstractPattern *doc,
+VToolArc* VToolArc::Create(const QPointer<DialogTool> &dialog, VMainGraphicsScene *scene, VAbstractPattern *doc,
                            VContainer *data)
 {
     SCASSERT(not dialog.isNull())
-    QSharedPointer<DialogArc> dialogTool = dialog.objectCast<DialogArc>();
+    const QPointer<DialogArc> dialogTool = qobject_cast<DialogArc *>(dialog);
     SCASSERT(not dialogTool.isNull())
 
     VToolArcInitData initData;
@@ -124,7 +124,7 @@ VToolArc* VToolArc::Create(QSharedPointer<DialogTool> dialog, VMainGraphicsScene
     VToolArc* point = Create(initData);
     if (point != nullptr)
     {
-        point->m_dialog = dialogTool;
+        point->m_dialog = dialog;
     }
     return point;
 }
@@ -321,7 +321,7 @@ void VToolArc::RemoveReferens()
 void VToolArc::SaveDialog(QDomElement &domElement, QList<quint32> &oldDependencies, QList<quint32> &newDependencies)
 {
     SCASSERT(not m_dialog.isNull())
-    QSharedPointer<DialogArc> dialogTool = m_dialog.objectCast<DialogArc>();
+    QPointer<DialogArc> dialogTool = qobject_cast<DialogArc *>(m_dialog);
     SCASSERT(not dialogTool.isNull())
 
     QSharedPointer<VArc> arc = VAbstractTool::data.GeometricObject<VArc>(m_id);

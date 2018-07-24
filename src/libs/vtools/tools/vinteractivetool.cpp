@@ -38,7 +38,7 @@ VInteractiveTool::VInteractiveTool(VAbstractPattern *doc, VContainer *data, quin
 //---------------------------------------------------------------------------------------------------------------------
 void VInteractiveTool::DialogLinkDestroy()
 {
-    m_dialog.clear();
+    m_dialog->deleteLater();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -52,7 +52,7 @@ void VInteractiveTool::FullUpdateFromGuiOk(int result)
     {
         SaveDialogChange();
     }
-    m_dialog.clear();
+    DialogLinkDestroy();
 }
 
 //---------------------------------------------------------------------------------------------------------------------

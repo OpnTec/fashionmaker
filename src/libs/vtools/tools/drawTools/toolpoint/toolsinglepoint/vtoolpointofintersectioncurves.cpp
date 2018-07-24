@@ -82,12 +82,13 @@ void VToolPointOfIntersectionCurves::setDialog()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-VToolPointOfIntersectionCurves *VToolPointOfIntersectionCurves::Create(QSharedPointer<DialogTool> dialog,
+VToolPointOfIntersectionCurves *VToolPointOfIntersectionCurves::Create(const QPointer<DialogTool> &dialog,
                                                                        VMainGraphicsScene *scene,
                                                                        VAbstractPattern *doc, VContainer *data)
 {
     SCASSERT(not dialog.isNull())
-    QSharedPointer<DialogPointOfIntersectionCurves> dialogTool = dialog.objectCast<DialogPointOfIntersectionCurves>();
+    const QPointer<DialogPointOfIntersectionCurves> dialogTool =
+            qobject_cast<DialogPointOfIntersectionCurves *>(dialog);
     SCASSERT(not dialogTool.isNull())
 
     VToolPointOfIntersectionCurvesInitData initData;
@@ -105,7 +106,7 @@ VToolPointOfIntersectionCurves *VToolPointOfIntersectionCurves::Create(QSharedPo
     VToolPointOfIntersectionCurves *point = Create(initData);
     if (point != nullptr)
     {
-        point->m_dialog = dialogTool;
+        point->m_dialog = dialog;
     }
     return point;
 }

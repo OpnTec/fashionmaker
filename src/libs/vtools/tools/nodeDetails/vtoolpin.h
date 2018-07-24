@@ -49,7 +49,7 @@ class VToolPin : public VAbstractNode
 {
     Q_OBJECT
 public:
-    static VToolPin* Create(QSharedPointer<DialogTool> dialog, VAbstractPattern *doc, VContainer *data);
+    static VToolPin* Create(const QPointer<DialogTool> &dialog, VAbstractPattern *doc, VContainer *data);
     static VToolPin *Create(VToolPinInitData initData);
 
     static const QString ToolType;

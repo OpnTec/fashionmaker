@@ -63,7 +63,7 @@ class VToolCutArc : public VToolCut
     Q_OBJECT
 public:
     virtual void setDialog() override;
-    static VToolCutArc*  Create(QSharedPointer<DialogTool> dialog, VMainGraphicsScene *scene, VAbstractPattern *doc,
+    static VToolCutArc*  Create(const QPointer<DialogTool> &dialog, VMainGraphicsScene *scene, VAbstractPattern *doc,
                                 VContainer *data);
     static VToolCutArc*  Create(VToolCutArcInitData &initData);
     static const QString ToolType;

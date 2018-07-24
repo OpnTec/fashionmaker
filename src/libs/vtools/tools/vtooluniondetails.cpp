@@ -1728,11 +1728,11 @@ void VToolUnionDetails::GroupVisibility(quint32 object, bool visible)
  * @param doc dom document container.
  * @param data container with variables.
  */
-VToolUnionDetails* VToolUnionDetails::Create(QSharedPointer<DialogTool> dialog, VMainGraphicsScene *scene,
+VToolUnionDetails* VToolUnionDetails::Create(const QPointer<DialogTool> &dialog, VMainGraphicsScene *scene,
                                              VAbstractPattern *doc, VContainer *data)
 {
     SCASSERT(not dialog.isNull())
-    QSharedPointer<DialogUnionDetails> dialogTool = dialog.objectCast<DialogUnionDetails>();
+    const QPointer<DialogUnionDetails> dialogTool = qobject_cast<DialogUnionDetails *>(dialog);
     SCASSERT(not dialogTool.isNull())
 
     VToolUnionDetailsInitData initData;

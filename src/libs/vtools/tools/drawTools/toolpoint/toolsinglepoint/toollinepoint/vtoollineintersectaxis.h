@@ -69,7 +69,7 @@ public:
     virtual ~VToolLineIntersectAxis() Q_DECL_EQ_DEFAULT;
     virtual void setDialog() override;
 
-    static VToolLineIntersectAxis *Create(QSharedPointer<DialogTool> dialog, VMainGraphicsScene *scene,
+    static VToolLineIntersectAxis *Create(const QPointer<DialogTool> &dialog, VMainGraphicsScene *scene,
                                           VAbstractPattern *doc, VContainer *data);
     static VToolLineIntersectAxis *Create(VToolLineIntersectAxisInitData &initData);
 

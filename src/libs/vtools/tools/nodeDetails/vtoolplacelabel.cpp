@@ -36,10 +36,10 @@
 const QString VToolPlaceLabel::ToolType = QStringLiteral("placeLabel");
 
 //---------------------------------------------------------------------------------------------------------------------
-VToolPlaceLabel *VToolPlaceLabel::Create(QSharedPointer<DialogTool> dialog, VAbstractPattern *doc, VContainer *data)
+VToolPlaceLabel *VToolPlaceLabel::Create(const QPointer<DialogTool> &dialog, VAbstractPattern *doc, VContainer *data)
 {
     SCASSERT(not dialog.isNull());
-    QSharedPointer<DialogPlaceLabel> dialogTool = dialog.objectCast<DialogPlaceLabel>();
+    const QPointer<DialogPlaceLabel> dialogTool = qobject_cast<DialogPlaceLabel *>(dialog);
     SCASSERT(not dialogTool.isNull())
 
     VToolPlaceLabelInitData initData;

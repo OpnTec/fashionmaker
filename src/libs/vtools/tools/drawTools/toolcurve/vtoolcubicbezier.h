@@ -64,7 +64,7 @@ class VToolCubicBezier : public VAbstractSpline
 public:
     virtual ~VToolCubicBezier() Q_DECL_EQ_DEFAULT;
     virtual void setDialog() override;
-    static VToolCubicBezier *Create(QSharedPointer<DialogTool> dialog, VMainGraphicsScene *scene,
+    static VToolCubicBezier *Create(const QPointer<DialogTool> &dialog, VMainGraphicsScene *scene,
                                     VAbstractPattern *doc, VContainer *data);
     static VToolCubicBezier *Create(VToolCubicBezierInitData initData);
     static const QString ToolType;

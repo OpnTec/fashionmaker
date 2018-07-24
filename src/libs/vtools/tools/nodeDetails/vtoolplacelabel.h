@@ -59,7 +59,7 @@ class VToolPlaceLabel : public VAbstractNode
 {
     Q_OBJECT
 public:
-    static VToolPlaceLabel* Create(QSharedPointer<DialogTool> dialog, VAbstractPattern *doc, VContainer *data);
+    static VToolPlaceLabel* Create(const QPointer<DialogTool> &dialog, VAbstractPattern *doc, VContainer *data);
     static VToolPlaceLabel* Create(VToolPlaceLabelInitData &initData);
 
     static const QString ToolType;

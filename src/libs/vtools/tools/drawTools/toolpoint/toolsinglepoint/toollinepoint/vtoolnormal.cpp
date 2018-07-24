@@ -78,7 +78,7 @@ VToolNormal::VToolNormal(const VToolNormalInitData &initData, QGraphicsItem *par
 void VToolNormal::setDialog()
 {
     SCASSERT(not m_dialog.isNull())
-    QSharedPointer<DialogNormal> dialogTool = m_dialog.objectCast<DialogNormal>();
+    const QPointer<DialogNormal> dialogTool = qobject_cast<DialogNormal *>(m_dialog);
     SCASSERT(not dialogTool.isNull())
     const QSharedPointer<VPointF> p = VAbstractTool::data.GeometricObject<VPointF>(m_id);
     dialogTool->SetTypeLine(m_lineType);
@@ -97,11 +97,11 @@ void VToolNormal::setDialog()
  * @param doc dom document container.
  * @param data container with variables.
  */
-VToolNormal* VToolNormal::Create(QSharedPointer<DialogTool> dialog, VMainGraphicsScene *scene, VAbstractPattern *doc,
+VToolNormal* VToolNormal::Create(const QPointer<DialogTool> &dialog, VMainGraphicsScene *scene, VAbstractPattern *doc,
                                  VContainer *data)
 {
     SCASSERT(not dialog.isNull())
-    QSharedPointer<DialogNormal> dialogTool = dialog.objectCast<DialogNormal>();
+    const QPointer<DialogNormal> dialogTool = qobject_cast<DialogNormal *>(dialog);
     SCASSERT(not dialogTool.isNull())
 
     VToolNormalInitData initData;
@@ -121,7 +121,7 @@ VToolNormal* VToolNormal::Create(QSharedPointer<DialogTool> dialog, VMainGraphic
     VToolNormal *point = Create(initData);
     if (point != nullptr)
     {
-        point->m_dialog = dialogTool;
+        point->m_dialog = dialog;
     }
     return point;
 }
@@ -217,7 +217,7 @@ void VToolNormal::SaveDialog(QDomElement &domElement, QList<quint32> &oldDepende
                              QList<quint32> &newDependencies)
 {
     SCASSERT(not m_dialog.isNull())
-    QSharedPointer<DialogNormal> dialogTool = m_dialog.objectCast<DialogNormal>();
+    const QPointer<DialogNormal> dialogTool = qobject_cast<DialogNormal *>(m_dialog);
     SCASSERT(not dialogTool.isNull())
 
     AddDependence(oldDependencies, basePointId);

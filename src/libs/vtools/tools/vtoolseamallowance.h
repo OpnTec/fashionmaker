@@ -61,10 +61,10 @@ class VToolSeamAllowance : public VInteractiveTool, public QGraphicsPathItem
 public:
     virtual ~VToolSeamAllowance() Q_DECL_EQ_DEFAULT;
 
-    static VToolSeamAllowance* Create(QSharedPointer<DialogTool> dialog, VMainGraphicsScene *scene,
+    static VToolSeamAllowance* Create(const QPointer<DialogTool> &dialog, VMainGraphicsScene *scene,
                                       VAbstractPattern *doc, VContainer *data);
     static VToolSeamAllowance* Create(VToolSeamAllowanceInitData &initData);
-    static VToolSeamAllowance* Duplicate(QSharedPointer<DialogTool> dialog, VMainGraphicsScene *scene,
+    static VToolSeamAllowance* Duplicate(const QPointer<DialogTool> &dialog, VMainGraphicsScene *scene,
                                          VAbstractPattern *doc);
     static VToolSeamAllowance* Duplicate(VToolSeamAllowanceInitData &initData);
 

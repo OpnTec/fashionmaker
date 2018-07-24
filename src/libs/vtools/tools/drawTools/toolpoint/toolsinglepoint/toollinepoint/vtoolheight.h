@@ -67,7 +67,7 @@ class VToolHeight: public VToolLinePoint
     Q_OBJECT
 public:
     virtual void   setDialog() override;
-    static VToolHeight *Create(QSharedPointer<DialogTool> dialog, VMainGraphicsScene  *scene, VAbstractPattern *doc,
+    static VToolHeight *Create(const QPointer<DialogTool> &dialog, VMainGraphicsScene  *scene, VAbstractPattern *doc,
                                VContainer *data);
     static VToolHeight *Create(VToolHeightInitData initData);
     static QPointF FindPoint(const QLineF &line, const QPointF &point);

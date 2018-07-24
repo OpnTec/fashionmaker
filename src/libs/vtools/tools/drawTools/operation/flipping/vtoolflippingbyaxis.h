@@ -51,7 +51,7 @@ class VToolFlippingByAxis : public VAbstractFlipping
 public:
     virtual ~VToolFlippingByAxis() Q_DECL_EQ_DEFAULT;
     virtual void setDialog() override;
-    static VToolFlippingByAxis* Create(QSharedPointer<DialogTool> dialog, VMainGraphicsScene *scene,
+    static VToolFlippingByAxis* Create(const QPointer<DialogTool> &dialog, VMainGraphicsScene *scene,
                                        VAbstractPattern *doc, VContainer *data);
     static VToolFlippingByAxis* Create(VToolFlippingByAxisInitData initData);
 
