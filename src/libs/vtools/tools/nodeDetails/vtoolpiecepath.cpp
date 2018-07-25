@@ -309,7 +309,7 @@ void VToolPiecePath::RefreshGeometry()
         QPen pen = this->pen();
         pen.setStyle(path.GetPenType());
         this->setPen(pen);
-        if (_referens > 0)
+        if (_referens > 0 && GetParentType() == ParentType::Item)
         {
             setVisible(path.IsVisible(this->getData()->DataVariables()));
         }
