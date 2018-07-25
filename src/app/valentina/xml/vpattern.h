@@ -46,7 +46,7 @@ class VPattern : public VAbstractPattern
 {
     Q_OBJECT
 public:
-    VPattern(VContainer *data, Draw *mode, VMainGraphicsScene *sceneDraw, VMainGraphicsScene *sceneDetail,
+    VPattern(VContainer *data, VMainGraphicsScene *sceneDraw, VMainGraphicsScene *sceneDetail,
              QObject *parent = nullptr);
 
     virtual void   CreateEmptyFile() override;
@@ -124,9 +124,6 @@ private:
 
     /** @brief data container with data. */
     VContainer     *data;
-
-    /** @brief mode current draw mode. */
-    Draw           *mode;
 
     VMainGraphicsScene *sceneDraw;
     VMainGraphicsScene *sceneDetail;

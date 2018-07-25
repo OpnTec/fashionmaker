@@ -32,7 +32,6 @@
 #include <QVector>
 #include <QPolygonF>
 
-enum class Draw : char { Calculation, Modeling, Layout };
 enum class GOType : char
 {
     Point,

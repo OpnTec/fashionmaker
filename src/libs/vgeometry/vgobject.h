@@ -36,6 +36,7 @@
 #include <QtGlobal>
 
 #include "vgeometrydef.h"
+#include "../vmisc/def.h"
 
 class QLineF;
 class QPoint;

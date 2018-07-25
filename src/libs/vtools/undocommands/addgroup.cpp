@@ -92,7 +92,10 @@ void AddGroup::undo()
     }
 
     VMainGraphicsView::NewSceneRect(qApp->getCurrentScene(), qApp->getSceneView());
-    emit doc->SetCurrentPP(nameActivDraw);//Return current pattern piece after undo
+    if (qApp->GetDrawMode() == Draw::Calculation)
+    {
+        emit doc->SetCurrentPP(nameActivDraw);//Return current pattern piece after undo
+    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------

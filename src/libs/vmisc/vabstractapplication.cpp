@@ -61,7 +61,8 @@ VAbstractApplication::VAbstractApplication(int &argc, char **argv)
       doc(nullptr),
       m_customerName(),
       m_userMaterials(),
-      openingPattern(false)
+      openingPattern(false),
+      mode(Draw::Calculation)
 {
     QString rules;
 
@@ -257,6 +258,18 @@ QString VAbstractApplication::ClearMessage(QString msg)
     }
 
     return msg;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+const Draw &VAbstractApplication::GetDrawMode() const
+{
+    return mode;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VAbstractApplication::SetDrawMode(const Draw &value)
+{
+    mode = value;
 }
 
 //---------------------------------------------------------------------------------------------------------------------

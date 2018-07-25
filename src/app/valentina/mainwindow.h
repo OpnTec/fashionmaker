@@ -246,9 +246,6 @@ private:
     QComboBox          *comboBoxDraws;
     QLabel             *patternPieceLabel;
 
-    /** @brief mode keep current draw mode. */
-    Draw               mode;
-
     /** @brief currentDrawIndex save current selected pattern peace. */
     qint32             currentDrawIndex;
 

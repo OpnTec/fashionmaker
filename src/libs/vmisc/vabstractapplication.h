@@ -121,6 +121,9 @@ public:
     QMap<int, QString> GetUserMaterials() const;
     void               SetUserMaterials(const QMap<int, QString> &userMaterials);
 
+    const Draw &GetDrawMode() const;
+    void        SetDrawMode(const Draw &value);
+
 protected:
     QUndoStack         *undoStack;
 
@@ -162,6 +165,9 @@ private:
      * we can allow user use Undo option.
      */
     bool               openingPattern;
+
+    /** @brief mode keep current draw mode. */
+    Draw               mode;
 
     void ClearTranslation();
 };

@@ -78,7 +78,10 @@ void AddToCalc::undo()
     }
     emit NeedFullParsing();
     VMainGraphicsView::NewSceneRect(qApp->getCurrentScene(), qApp->getSceneView());
-    emit doc->SetCurrentPP(nameActivDraw);//Return current pattern piece after undo
+    if (qApp->GetDrawMode() == Draw::Calculation)
+    {
+        emit doc->SetCurrentPP(nameActivDraw);//Return current pattern piece after undo
+    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -125,7 +128,10 @@ void AddToCalc::RedoFullParsing()
     if (redoFlag)
     {
         emit NeedFullParsing();
-        emit doc->SetCurrentPP(nameActivDraw);//Return current pattern piece after undo
+        if (qApp->GetDrawMode() == Draw::Calculation)
+        {
+            emit doc->SetCurrentPP(nameActivDraw);//Return current pattern piece after undo
+        }
     }
     else
     {

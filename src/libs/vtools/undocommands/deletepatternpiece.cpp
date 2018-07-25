@@ -32,6 +32,7 @@
 #include <QDomNodeList>
 
 #include "../vmisc/logging.h"
+#include "../vmisc/vabstractapplication.h"
 #include "../ifc/xml/vabstractpattern.h"
 #include "vundocommand.h"
 
@@ -82,7 +83,10 @@ void DeletePatternPiece::undo()
     }
 
     emit NeedFullParsing();
-    emit doc->SetCurrentPP(namePP);//Without this user will not see this change
+    if (qApp->GetDrawMode() == Draw::Calculation)
+    {
+        emit doc->SetCurrentPP(namePP);//Without this user will not see this change
+    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -90,7 +94,10 @@ void DeletePatternPiece::redo()
 {
     qCDebug(vUndo, "Redo.");
 
-    emit doc->SetCurrentPP(namePP);//Without this user will not see this change
+    if (qApp->GetDrawMode() == Draw::Calculation)
+    {
+        emit doc->SetCurrentPP(namePP);//Without this user will not see this change
+    }
     QDomElement rootElement = doc->documentElement();
     const QDomElement patternPiece = doc->GetPPElement(namePP);
     rootElement.removeChild(patternPiece);

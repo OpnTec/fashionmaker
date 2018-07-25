@@ -33,6 +33,7 @@
 #include "../ifc/ifcdef.h"
 #include "../ifc/xml/vabstractpattern.h"
 #include "../vmisc/logging.h"
+#include "../vmisc/vabstractapplication.h"
 #include "vundocommand.h"
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -58,8 +59,11 @@ void DelTool::undo()
 
     UndoDeleteAfterSibling(parentNode, siblingId);
     emit NeedFullParsing();
-    //Keep last!
-    emit doc->SetCurrentPP(nameActivDraw);//Without this user will not see this change
+
+    if (qApp->GetDrawMode() == Draw::Calculation)
+    {//Keep last!
+        emit doc->SetCurrentPP(nameActivDraw);//Without this user will not see this change
+    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -67,8 +71,10 @@ void DelTool::redo()
 {
     qCDebug(vUndo, "Redo.");
 
-    //Keep first!
-    emit doc->SetCurrentPP(nameActivDraw);//Without this user will not see this change
+    if (qApp->GetDrawMode() == Draw::Calculation)
+    {//Keep first!
+        emit doc->SetCurrentPP(nameActivDraw);//Without this user will not see this change
+    }
     QDomElement domElement = doc->NodeById(nodeId);
     parentNode.removeChild(domElement);
     emit NeedFullParsing();

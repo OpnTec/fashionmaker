@@ -130,7 +130,7 @@ MainWindow::MainWindow(QWidget *parent)
       dialogTool(),
       dialogHistory(nullptr),
       dialogFMeasurements(nullptr),
-      comboBoxDraws(nullptr), patternPieceLabel(nullptr), mode(Draw::Calculation),
+      comboBoxDraws(nullptr), patternPieceLabel(nullptr),
       currentDrawIndex(0), currentToolBoxIndex(0),
       isDockToolOptionsVisible(true),
       isDockGroupsVisible(true),
@@ -159,7 +159,7 @@ MainWindow::MainWindow(QWidget *parent)
     CreateActions();
     InitScenes();
 
-    doc = new VPattern(pattern, &mode, sceneDraw, sceneDetails);
+    doc = new VPattern(pattern, sceneDraw, sceneDetails);
     connect(doc, &VPattern::ClearMainWindow, this, &MainWindow::Clear);
     connect(doc, &VPattern::patternChanged, this, &MainWindow::PatternChangesWereSaved);
     connect(doc, &VPattern::UndoCommand, this, &MainWindow::FullParseFile);
@@ -2463,7 +2463,7 @@ void MainWindow::keyPressEvent ( QKeyEvent * event )
  */
 void MainWindow::SaveCurrentScene()
 {
-    if (mode == Draw::Calculation || mode == Draw::Modeling)
+    if (qApp->GetDrawMode() == Draw::Calculation || qApp->GetDrawMode() == Draw::Modeling)
     {
         VMainGraphicsScene *scene = qobject_cast<VMainGraphicsScene *>(currentScene);
         SCASSERT(scene != nullptr)
@@ -2520,7 +2520,7 @@ void MainWindow::ActionDraw(bool checked)
         ui->view->setScene(currentScene);
         RestoreCurrentScene();
 
-        mode = Draw::Calculation;
+        qApp->SetDrawMode(Draw::Calculation);
         comboBoxDraws->setCurrentIndex(currentDrawIndex);//restore current pattern peace
         drawMode = true;
 
@@ -2594,11 +2594,11 @@ void MainWindow::ActionDetails(bool checked)
         ui->view->setScene(currentScene);
         RestoreCurrentScene();
 
-        if (mode == Draw::Calculation)
+        if (qApp->GetDrawMode() == Draw::Calculation)
         {
             currentToolBoxIndex = ui->toolBox->currentIndex();
         }
-        mode = Draw::Modeling;
+        qApp->SetDrawMode(Draw::Modeling);
         SetEnableTool(true);
         SetEnableWidgets(true);
         ui->toolBox->setCurrentIndex(ui->toolBox->indexOf(ui->detailPage));
@@ -2678,7 +2678,7 @@ void MainWindow::ActionLayout(bool checked)
                     QMessageBox::information(this, tr("Layout mode"),  tr("You can't use Layout mode yet. Please, "
                                                                           "include at least one detail in layout."),
                                              QMessageBox::Ok, QMessageBox::Ok);
-                    mode == Draw::Calculation ? ActionDraw(true) : ActionDetails(true);
+                    qApp->GetDrawMode() == Draw::Calculation ? ActionDraw(true) : ActionDetails(true);
                     return;
                 }
             }
@@ -2700,7 +2700,7 @@ void MainWindow::ActionLayout(bool checked)
             QMessageBox::warning(this, tr("Layout mode"),
                                  tr("You can't use Layout mode yet.") + QLatin1String(" \n") + e.ErrorMessage(),
                                  QMessageBox::Ok, QMessageBox::Ok);
-            mode == Draw::Calculation ? ActionDraw(true) : ActionDetails(true);
+            qApp->GetDrawMode() == Draw::Calculation ? ActionDraw(true) : ActionDetails(true);
             return;
         }
 
@@ -2708,11 +2708,11 @@ void MainWindow::ActionLayout(bool checked)
         emit ui->view->itemClicked(nullptr);
         ui->view->setScene(currentScene);
 
-        if (mode == Draw::Calculation)
+        if (qApp->GetDrawMode() == Draw::Calculation)
         {
             currentToolBoxIndex = ui->toolBox->currentIndex();
         }
-        mode = Draw::Layout;
+        qApp->SetDrawMode(Draw::Layout);
         SetEnableTool(true);
         SetEnableWidgets(true);
         ui->toolBox->setCurrentIndex(ui->toolBox->indexOf(ui->layoutPage));
@@ -3307,8 +3307,8 @@ void MainWindow::SetEnabledGUI(bool enabled)
  */
 void MainWindow::SetEnableWidgets(bool enable)
 {
-    const bool drawStage = (mode == Draw::Calculation);
-    const bool designStage = (drawStage || mode == Draw::Modeling);
+    const bool drawStage = (qApp->GetDrawMode() == Draw::Calculation);
+    const bool designStage = (drawStage || qApp->GetDrawMode() == Draw::Modeling);
 
     comboBoxDraws->setEnabled(enable && drawStage);
     ui->actionOptionDraw->setEnabled(enable && drawStage);
@@ -3586,7 +3586,7 @@ void MainWindow::SetEnableTool(bool enable)
 
 QT_WARNING_PUSH
 QT_WARNING_DISABLE_GCC("-Wswitch-default")
-    switch (mode)
+    switch (qApp->GetDrawMode())
     {
         case Draw::Calculation:
             drawTools = enable;

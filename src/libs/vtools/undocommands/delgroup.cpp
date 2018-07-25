@@ -58,7 +58,10 @@ void DelGroup::undo()
 {
     qCDebug(vUndo, "Undo.");
 
-    emit doc->SetCurrentPP(nameActivDraw);//Without this user will not see this change
+    if (qApp->GetDrawMode() == Draw::Calculation)
+    {
+        emit doc->SetCurrentPP(nameActivDraw);//Without this user will not see this change
+    }
 
     QDomElement groups = doc->CreateGroups();
     if (not groups.isNull())
@@ -81,8 +84,10 @@ void DelGroup::redo()
 {
     qCDebug(vUndo, "Redo.");
 
-    //Keep first!
-    emit doc->SetCurrentPP(nameActivDraw);//Without this user will not see this change
+    if (qApp->GetDrawMode() == Draw::Calculation)
+    {//Keep first!
+        emit doc->SetCurrentPP(nameActivDraw);//Without this user will not see this change
+    }
     QDomElement groups = doc->CreateGroups();
     if (not groups.isNull())
     {
