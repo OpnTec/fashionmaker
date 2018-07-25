@@ -7,7 +7,7 @@
 # File with common stuff for whole project
 include(../../../common.pri)
 
-QT += testlib widgets
+QT += testlib widgets printsupport
 
 # Name of library
 TARGET = vtest
