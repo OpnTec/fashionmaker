@@ -58,7 +58,7 @@ class QDomElement;
  * 4. patch - little change.
  */
 
-const QString VPatternConverter::PatternMinVerStr = QStringLiteral("0.1.0");
+const QString VPatternConverter::PatternMinVerStr = QStringLiteral("0.1.4");
 const QString VPatternConverter::PatternMaxVerStr = QStringLiteral("0.7.10");
 const QString VPatternConverter::CurrentSchema    = QStringLiteral("://schema/pattern/v0.7.10.xsd");
 
@@ -179,10 +179,6 @@ QString VPatternConverter::XSDSchema(int ver) const
 {
     QHash <int, QString> schemas =
     {
-        std::make_pair(FORMAT_VERSION(0, 1, 0), QStringLiteral("://schema/pattern/v0.1.0.xsd")),
-        std::make_pair(FORMAT_VERSION(0, 1, 1), QStringLiteral("://schema/pattern/v0.1.1.xsd")),
-        std::make_pair(FORMAT_VERSION(0, 1, 2), QStringLiteral("://schema/pattern/v0.1.2.xsd")),
-        std::make_pair(FORMAT_VERSION(0, 1, 3), QStringLiteral("://schema/pattern/v0.1.3.xsd")),
         std::make_pair(FORMAT_VERSION(0, 1, 4), QStringLiteral("://schema/pattern/v0.1.4.xsd")),
         std::make_pair(FORMAT_VERSION(0, 2, 0), QStringLiteral("://schema/pattern/v0.2.0.xsd")),
         std::make_pair(FORMAT_VERSION(0, 2, 1), QStringLiteral("://schema/pattern/v0.2.1.xsd")),
@@ -248,22 +244,6 @@ void VPatternConverter::ApplyPatches()
 {
     switch (m_ver)
     {
-        case (FORMAT_VERSION(0, 1, 0)):
-            ToV0_1_1();
-            ValidateXML(XSDSchema(FORMAT_VERSION(0, 1, 1)), m_convertedFileName);
-            V_FALLTHROUGH
-        case (FORMAT_VERSION(0, 1, 1)):
-            ToV0_1_2();
-            ValidateXML(XSDSchema(FORMAT_VERSION(0, 1, 2)), m_convertedFileName);
-            V_FALLTHROUGH
-        case (FORMAT_VERSION(0, 1, 2)):
-            ToV0_1_3();
-            ValidateXML(XSDSchema(FORMAT_VERSION(0, 1, 3)), m_convertedFileName);
-            V_FALLTHROUGH
-        case (FORMAT_VERSION(0, 1, 3)):
-            ToV0_1_4();
-            ValidateXML(XSDSchema(FORMAT_VERSION(0, 1, 4)), m_convertedFileName);
-            V_FALLTHROUGH
         case (FORMAT_VERSION(0, 1, 4)):
             ToV0_2_0();
             ValidateXML(XSDSchema(FORMAT_VERSION(0, 2, 0)), m_convertedFileName);
@@ -485,50 +465,6 @@ bool VPatternConverter::IsReadOnly() const
     }
 
     return GetParametrBool(pattern, *strReadOnly, falseStr);
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void VPatternConverter::ToV0_1_1()
-{
-    // TODO. Delete if minimal supported version is 0.1.1
-    Q_STATIC_ASSERT_X(VPatternConverter::PatternMinVer < FORMAT_VERSION(0, 1, 1),
-                      "Time to refactor the code.");
-
-    SetVersion(QStringLiteral("0.1.1"));
-    Save();
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void VPatternConverter::ToV0_1_2()
-{
-    // TODO. Delete if minimal supported version is 0.1.2
-    Q_STATIC_ASSERT_X(VPatternConverter::PatternMinVer < FORMAT_VERSION(0, 1, 2),
-                      "Time to refactor the code.");
-
-    SetVersion(QStringLiteral("0.1.2"));
-    Save();
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void VPatternConverter::ToV0_1_3()
-{
-    // TODO. Delete if minimal supported version is 0.1.3
-    Q_STATIC_ASSERT_X(VPatternConverter::PatternMinVer < FORMAT_VERSION(0, 1, 3),
-                      "Time to refactor the code.");
-
-    SetVersion(QStringLiteral("0.1.3"));
-    Save();
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void VPatternConverter::ToV0_1_4()
-{
-    // TODO. Delete if minimal supported version is 0.1.4
-    Q_STATIC_ASSERT_X(VPatternConverter::PatternMinVer < FORMAT_VERSION(0, 1, 4),
-                      "Time to refactor the code.");
-
-    SetVersion(QStringLiteral("0.1.4"));
-    Save();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -1586,8 +1522,8 @@ void VPatternConverter::RemoveColorToolCutV0_3_1()
 //---------------------------------------------------------------------------------------------------------------------
 QString VPatternConverter::MUnitV0_1_4() const
 {
-    // TODO. Delete if minimal supported version is 0.1.4
-    Q_STATIC_ASSERT_X(VPatternConverter::PatternMinVer < FORMAT_VERSION(0, 1, 4),
+    // TODO. Delete if minimal supported version is 0.2.0
+    Q_STATIC_ASSERT_X(VPatternConverter::PatternMinVer < FORMAT_VERSION(0, 2, 0),
                       "Time to refactor the code.");
 
     const QDomElement element = TagMeasurementsV0_1_4();
@@ -1606,8 +1542,8 @@ QString VPatternConverter::MUnitV0_1_4() const
 //---------------------------------------------------------------------------------------------------------------------
 QDomElement VPatternConverter::TagMeasurementsV0_1_4() const
 {
-    // TODO. Delete if minimal supported version is 0.1.4
-    Q_STATIC_ASSERT_X(VPatternConverter::PatternMinVer < FORMAT_VERSION(0, 1, 4),
+    // TODO. Delete if minimal supported version is 0.2.0
+    Q_STATIC_ASSERT_X(VPatternConverter::PatternMinVer < FORMAT_VERSION(0, 2, 0),
                       "Time to refactor the code.");
 
     const QDomNodeList list = elementsByTagName(*strMeasurements);
@@ -1623,8 +1559,8 @@ QDomElement VPatternConverter::TagMeasurementsV0_1_4() const
 //---------------------------------------------------------------------------------------------------------------------
 QDomElement VPatternConverter::TagIncrementsV0_1_4() const
 {
-    // TODO. Delete if minimal supported version is 0.1.4
-    Q_STATIC_ASSERT_X(VPatternConverter::PatternMinVer < FORMAT_VERSION(0, 1, 4),
+    // TODO. Delete if minimal supported version is 0.2.0
+    Q_STATIC_ASSERT_X(VPatternConverter::PatternMinVer < FORMAT_VERSION(0, 2, 0),
                       "Time to refactor the code.");
 
     const QDomNodeList list = elementsByTagName(*strIncrements);

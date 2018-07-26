@@ -52,7 +52,7 @@ public:
 
     static const QString PatternMaxVerStr;
     static const QString CurrentSchema;
-    static Q_DECL_CONSTEXPR const int PatternMinVer = FORMAT_VERSION(0, 1, 0);
+    static Q_DECL_CONSTEXPR const int PatternMinVer = FORMAT_VERSION(0, 1, 4);
     static Q_DECL_CONSTEXPR const int PatternMaxVer = FORMAT_VERSION(0, 7, 10);
 
 protected:
@@ -72,10 +72,6 @@ private:
     Q_DISABLE_COPY(VPatternConverter)
     static const QString PatternMinVerStr;
 
-    void ToV0_1_1();
-    void ToV0_1_2();
-    void ToV0_1_3();
-    void ToV0_1_4();
     void ToV0_2_0();
     void ToV0_2_1();
     void ToV0_2_2();
