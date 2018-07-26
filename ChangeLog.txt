@@ -53,6 +53,7 @@
 - [#862] Force Valentina to immediately terminate if a pattern contains a parsing warning.
 - [#865] New feature. Dynamic Way to define Material in piece label.
 - [#867] Visibility control for place labels.
+- [#868] New feature. Connect internal path with cutting contour.
 
 # Version 0.5.1 (unreleased)
 - [#683] Tool Seam allowance's dialog is off screen on small resolutions.

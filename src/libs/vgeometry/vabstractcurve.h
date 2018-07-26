@@ -95,6 +95,8 @@ public:
     static qreal             PathLength(const QVector<QPointF> &path);
 
     static QVector<QPointF>  CurveIntersectLine(const QVector<QPointF> &points, const QLineF &line);
+    static bool              CurveIntersectAxis(const QPointF &point, qreal angle, const QVector<QPointF> &curvePoints,
+                                                QPointF *intersectionPoint);
 
     virtual QString          NameForHistory(const QString &toolName) const=0;
     virtual QVector<DirectionArrow> DirectionArrows() const;

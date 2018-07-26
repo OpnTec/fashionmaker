@@ -130,6 +130,8 @@ const QString AttrWidth       = QStringLiteral("width");
 const QString AttrHeight      = QStringLiteral("height");
 const QString AttrPlaceLabelType = QStringLiteral("placeLabelType");
 const QString AttrVersion     = QStringLiteral("version");
+const QString AttrFirstToCountour = QStringLiteral("firstToCountour");
+const QString AttrLastToCountour = QStringLiteral("lastToCountour");
 
 const QString TypeLineNone           = QStringLiteral("none");
 const QString TypeLineLine           = QStringLiteral("hair");

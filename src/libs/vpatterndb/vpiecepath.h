@@ -85,12 +85,19 @@ public:
     QString GetVisibilityTrigger() const;
     void    SetVisibilityTrigger(const QString &formula);
 
-    QVector<QPointF>          PathPoints(const VContainer *data) const;
+    void SetFirstToCuttingCountour(bool value);
+    bool IsFirstToCuttingCountour() const;
+
+    void SetLastToCuttingCountour(bool value);
+    bool IsLastToCuttingCountour() const;
+
+    QVector<QPointF>          PathPoints(const VContainer *data,
+                                         const QVector<QPointF> &cuttingPath = QVector<QPointF>()) const;
     QVector<VPointF>          PathNodePoints(const VContainer *data, bool showExcluded = true) const;
     QVector<QVector<QPointF> > PathCurvePoints(const VContainer *data) const;
     QVector<VSAPoint>         SeamAllowancePoints(const VContainer *data, qreal width, bool reverse) const;
 
-    QPainterPath          PainterPath(const VContainer *data) const;
+    QPainterPath          PainterPath(const VContainer *data, const QVector<QPointF> &cuttingPath) const;
     QVector<QPainterPath> CurvesPainterPath(const VContainer *data) const;
 
     QList<quint32> Dependencies() const;

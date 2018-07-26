@@ -37,6 +37,21 @@
 #include <QMenu>
 #include <QTimer>
 
+namespace
+{
+QVector<QPointF> CuttingPath(quint32 id, const VContainer *data)
+{
+    QVector<QPointF> path;
+    const quint32 pieceId = data->GetPieceForPiecePath(id);
+    if (pieceId > NULL_ID)
+    {
+        path = data->GetPiece(pieceId).CuttingPathPoints(data);
+    }
+
+    return path;
+}
+}
+
 //---------------------------------------------------------------------------------------------------------------------
 DialogPiecePath::DialogPiecePath(const VContainer *data, quint32 toolId, QWidget *parent)
     : DialogTool(data, toolId, parent),
@@ -151,6 +166,7 @@ void DialogPiecePath::ChosenObject(quint32 id, const SceneObject &type)
             SCASSERT(visPath != nullptr);
             const VPiecePath p = CreatePath();
             visPath->SetPath(p);
+            visPath->SetCuttingPath(CuttingPath(toolId, data));
 
             if (p.CountNodes() == 1)
             {
@@ -347,6 +363,7 @@ void DialogPiecePath::ListChanged()
         auto visPath = qobject_cast<VisToolPiecePath *>(vis);
         SCASSERT(visPath != nullptr);
         visPath->SetPath(CreatePath());
+        visPath->SetCuttingPath(CuttingPath(toolId, data));
         visPath->RefreshGeometry();
     }
 
@@ -882,9 +899,12 @@ void DialogPiecePath::InitPathTab()
     InitPathTypes();
     connect(ui->comboBoxType, QOverload<int>::of(&QComboBox::currentIndexChanged), this, [this]()
     {
-        ui->comboBoxPenType->setEnabled(GetType() == PiecePathType::InternalPath);
-        ui->checkBoxCut->setEnabled(GetType() == PiecePathType::InternalPath);
-        ui->tabControl->setEnabled(GetType() == PiecePathType::InternalPath);
+        const bool isInternalPath = GetType() == PiecePathType::InternalPath;
+        ui->comboBoxPenType->setEnabled(isInternalPath);
+        ui->checkBoxCut->setEnabled(isInternalPath);
+        ui->tabControl->setEnabled(isInternalPath);
+        ui->checkBoxFirstPointToCuttingContour->setEnabled(isInternalPath);
+        ui->checkBoxLastPointToCuttingContour->setEnabled(isInternalPath);
         ValidObjects(PathIsValid());
     });
 
@@ -1092,8 +1112,12 @@ void DialogPiecePath::SetPiecePath(const VPiecePath &path)
     VisToolPiecePath *visPath = qobject_cast<VisToolPiecePath *>(vis);
     SCASSERT(visPath != nullptr);
     visPath->SetPath(path);
+    visPath->SetCuttingPath(CuttingPath(toolId, data));
+
     SetPenType(path.GetPenType());
     SetCutPath(path.IsCutPath());
+    ui->checkBoxFirstPointToCuttingContour->setChecked(path.IsFirstToCuttingCountour());
+    ui->checkBoxLastPointToCuttingContour->setChecked(path.IsLastToCuttingCountour());
 
     if (path.GetType() == PiecePathType::InternalPath)
     {
@@ -1126,6 +1150,8 @@ void DialogPiecePath::SetType(PiecePathType type)
 
     ui->comboBoxPenType->setEnabled(type == PiecePathType::InternalPath);
     ui->checkBoxCut->setEnabled(type == PiecePathType::InternalPath);
+    ui->checkBoxFirstPointToCuttingContour->setEnabled(type == PiecePathType::InternalPath);
+    ui->checkBoxLastPointToCuttingContour->setEnabled(type == PiecePathType::InternalPath);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -1250,6 +1276,7 @@ void DialogPiecePath::SetFormulaSAWidth(const QString &formula)
     VisToolPiecePath *path = qobject_cast<VisToolPiecePath *>(vis);
     SCASSERT(path != nullptr)
     path->SetPath(CreatePath());
+    path->SetCuttingPath(CuttingPath(toolId, data));
 
     if (ui->tabWidget->indexOf(ui->tabSeamAllowance) == -1)
     {
@@ -1314,19 +1341,14 @@ VPiecePath DialogPiecePath::CreatePath() const
         path.Append(qvariant_cast<VPieceNode>(item->data(Qt::UserRole)));
     }
 
+    const bool isInternalPath = (GetType() == PiecePathType::InternalPath);
     path.SetType(GetType());
     path.SetName(ui->lineEditName->text());
-    path.SetPenType(GetType() == PiecePathType::InternalPath ? GetPenType() : Qt::SolidLine);
-    path.SetCutPath(GetType() == PiecePathType::InternalPath ? IsCutPath() : false);
-
-    if (GetType() == PiecePathType::InternalPath)
-    {
-        path.SetVisibilityTrigger(GetFormulaVisible());
-    }
-    else
-    {
-        path.SetVisibilityTrigger(QChar('1'));
-    }
+    path.SetPenType(isInternalPath ? GetPenType() : Qt::SolidLine);
+    path.SetCutPath(isInternalPath ? IsCutPath() : false);
+    path.SetFirstToCuttingCountour(isInternalPath ? ui->checkBoxFirstPointToCuttingContour->isChecked() : false);
+    path.SetLastToCuttingCountour(isInternalPath ? ui->checkBoxLastPointToCuttingContour->isChecked() : false);
+    path.SetVisibilityTrigger(isInternalPath ? GetFormulaVisible() : QChar('1'));
 
     return path;
 }

@@ -190,57 +190,7 @@ VToolCurveIntersectAxis *VToolCurveIntersectAxis::Create(VToolCurveIntersectAxis
 bool VToolCurveIntersectAxis::FindPoint(const QPointF &point, qreal angle, const QVector<QPointF> &curvePoints,
                                         QPointF *intersectionPoint)
 {
-    SCASSERT(intersectionPoint != nullptr)
-
-    QRectF rec = QRectF(0, 0, INT_MAX, INT_MAX);
-    rec.translate(-INT_MAX/2.0, -INT_MAX/2.0);
-
-    const QLineF axis = VGObject::BuildAxis(point, angle, rec);
-    const QVector<QPointF> points = VAbstractCurve::CurveIntersectLine(curvePoints, axis);
-
-    if (points.size() > 0)
-    {
-        if (points.size() == 1)
-        {
-            *intersectionPoint = points.at(0);
-            return true;
-        }
-
-        QMap<qreal, int> forward;
-        QMap<qreal, int> backward;
-
-        for ( qint32 i = 0; i < points.size(); ++i )
-        {
-            if (points.at(i) == point)
-            { // Always seek unique intersection
-                continue;
-            }
-
-            const QLineF length(point, points.at(i));
-            if (qAbs(length.angle()-angle) < 0.1)
-            {
-                forward.insert(length.length(), i);
-            }
-            else
-            {
-                backward.insert(length.length(), i);
-            }
-        }
-
-        // Closest point is not always want we need. First return point in forward direction if exists.
-        if (not forward.isEmpty())
-        {
-            *intersectionPoint = points.at(forward.first());
-            return true;
-        }
-        else if (not backward.isEmpty())
-        {
-            *intersectionPoint = points.at(backward.first());
-            return true;
-        }
-    }
-
-    return false;
+    return VAbstractCurve::CurveIntersectAxis(point, angle, curvePoints, intersectionPoint);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

@@ -164,6 +164,22 @@ VPiecePath VContainer::GetPiecePath(quint32 id) const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+quint32 VContainer::GetPieceForPiecePath(quint32 id) const
+{
+    auto i = d->pieces->constBegin();
+    while (i != d->pieces->constEnd())
+    {
+        if (i.value().GetInternalPaths().contains(id))
+        {
+            return i.key();
+        }
+        ++i;
+    }
+
+    return NULL_ID;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 /**
  * @brief AddGObject add new GObject to container
  * @param obj new object

@@ -46,6 +46,7 @@ public:
 
     virtual void RefreshGeometry() override;
     void         SetPath(const VPiecePath &path);
+    void         SetCuttingPath(const QVector<QPointF> &cuttingPath);
     virtual int  type() const override {return Type;}
     enum { Type = UserType + static_cast<int>(Vis::ToolPiecePath)};
 protected:
@@ -58,6 +59,8 @@ private:
     VScaledLine *m_line;
 
     VPiecePath m_path;
+
+    QVector<QPointF> m_cuttingPath;
 
     VSimplePoint *GetPoint(quint32 i, const QColor &color);
 

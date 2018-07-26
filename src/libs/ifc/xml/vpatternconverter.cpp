@@ -59,8 +59,8 @@ class QDomElement;
  */
 
 const QString VPatternConverter::PatternMinVerStr = QStringLiteral("0.1.0");
-const QString VPatternConverter::PatternMaxVerStr = QStringLiteral("0.7.9");
-const QString VPatternConverter::CurrentSchema    = QStringLiteral("://schema/pattern/v0.7.9.xsd");
+const QString VPatternConverter::PatternMaxVerStr = QStringLiteral("0.7.10");
+const QString VPatternConverter::CurrentSchema    = QStringLiteral("://schema/pattern/v0.7.10.xsd");
 
 //VPatternConverter::PatternMinVer; // <== DON'T FORGET TO UPDATE TOO!!!!
 //VPatternConverter::PatternMaxVer; // <== DON'T FORGET TO UPDATE TOO!!!!
@@ -229,7 +229,8 @@ QString VPatternConverter::XSDSchema(int ver) const
         std::make_pair(0x000706, QStringLiteral("://schema/pattern/v0.7.6.xsd")),
         std::make_pair(0x000707, QStringLiteral("://schema/pattern/v0.7.7.xsd")),
         std::make_pair(0x000708, QStringLiteral("://schema/pattern/v0.7.8.xsd")),
-        std::make_pair(0x000709, CurrentSchema)
+        std::make_pair(0x000709, QStringLiteral("://schema/pattern/v0.7.9.xsd")),
+        std::make_pair(0x00070A, CurrentSchema)
     };
 
     if (schemas.contains(ver))
@@ -448,6 +449,10 @@ void VPatternConverter::ApplyPatches()
             ValidateXML(XSDSchema(0x000709), m_convertedFileName);
             V_FALLTHROUGH
         case (0x000709):
+            ToV0_7_10();
+            ValidateXML(XSDSchema(0x00070A), m_convertedFileName);
+            V_FALLTHROUGH
+        case (0x00070A):
             break;
         default:
             InvalidVersion(m_ver);
@@ -465,7 +470,7 @@ void VPatternConverter::DowngradeToCurrentMaxVersion()
 bool VPatternConverter::IsReadOnly() const
 {
     // Check if attribute readOnly was not changed in file format
-    Q_STATIC_ASSERT_X(VPatternConverter::PatternMaxVer == CONVERTER_VERSION_CHECK(0, 7, 9),
+    Q_STATIC_ASSERT_X(VPatternConverter::PatternMaxVer == CONVERTER_VERSION_CHECK(0, 7, 10),
                       "Check attribute readOnly.");
 
     // Possibly in future attribute readOnly will change position etc.
@@ -1026,6 +1031,16 @@ void VPatternConverter::ToV0_7_9()
     Q_STATIC_ASSERT_X(VPatternConverter::PatternMinVer < CONVERTER_VERSION_CHECK(0, 7, 9),
                       "Time to refactor the code.");
     SetVersion(QStringLiteral("0.7.9"));
+    Save();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VPatternConverter::ToV0_7_10()
+{
+    // TODO. Delete if minimal supported version is 0.7.10
+    Q_STATIC_ASSERT_X(VPatternConverter::PatternMinVer < CONVERTER_VERSION_CHECK(0, 7, 10),
+                      "Time to refactor the code.");
+    SetVersion(QStringLiteral("0.7.10"));
     Save();
 }
 

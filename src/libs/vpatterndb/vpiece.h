@@ -70,6 +70,7 @@ public:
     QVector<QPointF>       MainPathPoints(const VContainer *data) const;
     QVector<VPointF>       MainPathNodePoints(const VContainer *data, bool showExcluded = false) const;
     QVector<QPointF>       SeamAllowancePoints(const VContainer *data) const;
+    QVector<QPointF>       CuttingPathPoints(const VContainer *data) const;
     QVector<QLineF>        PassmarksLines(const VContainer *data,
                                           const QVector<QPointF> &seamAllowance = QVector<QPointF>()) const;
     QVector<PlaceLabelImg> PlaceLabelPoints(const VContainer *data) const;

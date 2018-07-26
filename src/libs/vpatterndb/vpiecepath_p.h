@@ -48,7 +48,9 @@ public:
           m_name(),
           m_penType(Qt::SolidLine),
           m_cut(false),
-          m_visibilityTrigger('1')
+          m_visibilityTrigger('1'),
+          m_firstToCuttingCountour(false),
+          m_lastToCuttingCountour(false)
     {}
 
     explicit VPiecePathData(PiecePathType type)
@@ -57,7 +59,9 @@ public:
           m_name(),
           m_penType(Qt::SolidLine),
           m_cut(false),
-          m_visibilityTrigger('1')
+          m_visibilityTrigger('1'),
+          m_firstToCuttingCountour(false),
+          m_lastToCuttingCountour(false)
     {}
 
     VPiecePathData(const VPiecePathData &path)
@@ -67,7 +71,9 @@ public:
           m_name(path.m_name),
           m_penType(path.m_penType),
           m_cut(path.m_cut),
-          m_visibilityTrigger(path.m_visibilityTrigger)
+          m_visibilityTrigger(path.m_visibilityTrigger),
+          m_firstToCuttingCountour(path.m_firstToCuttingCountour),
+          m_lastToCuttingCountour(path.m_lastToCuttingCountour)
     {}
 
     ~VPiecePathData();
@@ -78,6 +84,8 @@ public:
     Qt::PenStyle m_penType;
     bool m_cut;
     QString m_visibilityTrigger;
+    bool m_firstToCuttingCountour;
+    bool m_lastToCuttingCountour;
 
 private:
     VPiecePathData &operator=(const VPiecePathData &) Q_DECL_EQ_DELETE;

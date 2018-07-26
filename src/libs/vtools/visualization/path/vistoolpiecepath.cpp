@@ -38,7 +38,8 @@ VisToolPiecePath::VisToolPiecePath(const VContainer *data, QGraphicsItem *parent
     : VisPath(data, parent),
       m_points(),
       m_line(nullptr),
-      m_path()
+      m_path(),
+      m_cuttingPath()
 {
     m_line = InitItem<VScaledLine>(supportColor, this);
 }
@@ -50,7 +51,8 @@ void VisToolPiecePath::RefreshGeometry()
 
     if (m_path.CountNodes() > 0)
     {
-        DrawPath(this, m_path.PainterPath(Visualization::data), mainColor, m_path.GetPenType(), Qt::RoundCap);
+        DrawPath(this, m_path.PainterPath(Visualization::data, m_cuttingPath), mainColor, m_path.GetPenType(),
+                 Qt::RoundCap);
 
         const QVector<VPointF> nodes = m_path.PathNodePoints(Visualization::data);
 
@@ -77,6 +79,12 @@ void VisToolPiecePath::RefreshGeometry()
 void VisToolPiecePath::SetPath(const VPiecePath &path)
 {
     m_path = path;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VisToolPiecePath::SetCuttingPath(const QVector<QPointF> &cuttingPath)
+{
+    m_cuttingPath = cuttingPath;
 }
 
 //---------------------------------------------------------------------------------------------------------------------

@@ -416,6 +416,19 @@ QVector<QPointF> VPiece::SeamAllowancePoints(const VContainer *data) const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+QVector<QPointF> VPiece::CuttingPathPoints(const VContainer *data) const
+{
+    if (IsSeamAllowance() and not IsSeamAllowanceBuiltIn())
+    {
+        return SeamAllowancePoints(data);
+    }
+    else
+    {
+        return MainPathPoints(data);
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 QVector<QLineF> VPiece::PassmarksLines(const VContainer *data, const QVector<QPointF> &seamAllowance) const
 {
     const QVector<VPieceNode> unitedPath = GetUnitedPath(data);

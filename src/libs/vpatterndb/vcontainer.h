@@ -136,6 +136,7 @@ public:
     static const QSharedPointer<VGObject> GetFakeGObject(quint32 id);
     VPiece             GetPiece(quint32 id) const;
     VPiecePath         GetPiecePath(quint32 id) const;
+    quint32            GetPieceForPiecePath(quint32 id) const;
     template <typename T>
     QSharedPointer<T>  GetVariable(QString name) const;
     static quint32     getId();

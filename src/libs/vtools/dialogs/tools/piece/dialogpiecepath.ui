@@ -96,6 +96,20 @@
         </layout>
        </item>
        <item>
+        <widget class="QCheckBox" name="checkBoxFirstPointToCuttingContour">
+         <property name="text">
+          <string>Continue the first point to the cutting contour</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QCheckBox" name="checkBoxLastPointToCuttingContour">
+         <property name="text">
+          <string>Continue the last point to the cutting contour</string>
+         </property>
+        </widget>
+       </item>
+       <item>
         <widget class="QListWidget" name="listWidget">
          <property name="dragDropMode">
           <enum>QAbstractItemView::InternalMove</enum>
@@ -1403,7 +1417,7 @@
   </connection>
  </connections>
  <buttongroups>
-  <buttongroup name="buttonGroupAngleType"/>
   <buttongroup name="buttonGroupMarkType"/>
+  <buttongroup name="buttonGroupAngleType"/>
  </buttongroups>
 </ui>

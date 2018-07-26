@@ -66,12 +66,13 @@ QVector<VLayoutPiecePath> ConvertInternalPaths(const VPiece &piece, const VConta
 
     QVector<VLayoutPiecePath> paths;
     const QVector<quint32> pathsId = piece.GetInternalPaths();
+    const QVector<QPointF> cuttingPath = piece.CuttingPathPoints(pattern);
     for (auto id : pathsId)
     {
         const VPiecePath path = pattern->GetPiecePath(id);
         if (path.GetType() == PiecePathType::InternalPath && path.IsVisible(pattern->DataVariables()))
         {
-            paths.append(VLayoutPiecePath(path.PathPoints(pattern), path.IsCutPath(), path.GetPenType()));
+            paths.append(VLayoutPiecePath(path.PathPoints(pattern, cuttingPath), path.IsCutPath(), path.GetPenType()));
         }
     }
     return paths;

@@ -32,6 +32,7 @@
 #include "../vpatterndb/vpiecenode.h"
 #include "../../undocommands/savepieceoptions.h"
 #include "../vtoolseamallowance.h"
+#include "../ifc/xml/vabstractpattern.h"
 
 //---------------------------------------------------------------------------------------------------------------------
 VToolPiecePath *VToolPiecePath::Create(const QPointer<DialogTool> &dialog, VMainGraphicsScene *scene,
@@ -194,6 +195,8 @@ void VToolPiecePath::AddAttributes(VAbstractPattern *doc, QDomElement &domElemen
     {
         doc->SetAttribute(domElement, VAbstractPattern::AttrVisible, path.GetVisibilityTrigger());
         doc->SetAttribute(domElement, AttrCut, path.IsCutPath());
+        doc->SetAttribute(domElement, AttrFirstToCountour, path.IsFirstToCuttingCountour());
+        doc->SetAttribute(domElement, AttrLastToCountour, path.IsLastToCuttingCountour());
     }
 }
 
@@ -302,7 +305,16 @@ void VToolPiecePath::RefreshGeometry()
     const VPiecePath path = VAbstractTool::data.GetPiecePath(m_id);
     if (path.GetType() == PiecePathType::InternalPath)
     {
-        QPainterPath p = path.PainterPath(this->getData());
+        QVector<QPointF> cuttingPath;
+        const quint32 pieceId = VAbstractTool::data.GetPieceForPiecePath(m_id);
+        if (pieceId > NULL_ID)
+        {
+            VPiece piece = VAbstractTool::data.GetPiece(pieceId);
+            // We cannot use current VContainer because it doesn't have current seam allowance value
+            const VContainer pData = VAbstractPattern::getTool(pieceId)->getData();
+            cuttingPath = piece.CuttingPathPoints(&pData);
+        }
+        QPainterPath p = path.PainterPath(this->getData(), cuttingPath);
         p.setFillRule(Qt::OddEvenFill);
 
         this->setPath(p);

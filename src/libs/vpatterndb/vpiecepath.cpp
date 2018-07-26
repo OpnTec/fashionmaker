@@ -32,6 +32,8 @@
 #include "../vgeometry/vpointf.h"
 #include "../vlayout/vabstractpiece.h"
 #include "calculator.h"
+#include "../vmisc/vabstractapplication.h"
+#include "../ifc/exception/vexceptionobjecterror.h"
 
 #include <QPainterPath>
 
@@ -141,6 +143,51 @@ QPainterPath MakePainterPath(const QVector<QPointF> &points)
     }
 
     return path;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+qreal FindTipDirection(const QVector<QPointF> &points)
+{
+    if (points.size() <= 1)
+    {
+        return 0;
+    }
+
+    const QPointF first = points.first();
+
+    for(int i = 1; i < points.size(); ++i)
+    {
+        if (first != points.at(i))
+        {
+            QLineF line(first, points.at(i));
+            line.setAngle(line.angle() + 180);
+            return line.angle();
+        }
+    }
+
+    return 0;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+bool IntersectionWithCuttingCountour(const QVector<QPointF> &cuttingPath, const QVector<QPointF> &points,
+                                     QPointF *firstConnection)
+{
+    if (points.size() <= 1)
+    {
+        return false;
+    }
+
+    const QPointF first = points.first();
+
+    if (VAbstractCurve::IsPointOnCurve(cuttingPath, first))
+    { // Point is already part of a cutting countour
+        *firstConnection = first;
+        return true;
+    }
+    else
+    {
+        return VAbstractCurve::CurveIntersectAxis(first, FindTipDirection(points), cuttingPath, firstConnection);
+    }
 }
 }
 
@@ -277,7 +324,31 @@ void VPiecePath::SetVisibilityTrigger(const QString &formula)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QVector<QPointF> VPiecePath::PathPoints(const VContainer *data) const
+void VPiecePath::SetFirstToCuttingCountour(bool value)
+{
+    d->m_firstToCuttingCountour = value;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+bool VPiecePath::IsFirstToCuttingCountour() const
+{
+    return d->m_firstToCuttingCountour;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VPiecePath::SetLastToCuttingCountour(bool value)
+{
+    d->m_lastToCuttingCountour = value;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+bool VPiecePath::IsLastToCuttingCountour() const
+{
+    return d->m_lastToCuttingCountour;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QVector<QPointF> VPiecePath::PathPoints(const VContainer *data, const QVector<QPointF> &cuttingPath) const
 {
     QVector<QPointF> points;
     for (int i = 0; i < CountNodes(); ++i)
@@ -312,6 +383,46 @@ QVector<QPointF> VPiecePath::PathPoints(const VContainer *data) const
                 qDebug()<<"Get wrong tool type. Ignore."<< static_cast<char>(at(i).GetTypeTool());
                 break;
         }
+    }
+
+    if (GetType() == PiecePathType::InternalPath && not cuttingPath.isEmpty() && points.size() > 1)
+    {
+        QVector<QPointF> extended = points;
+
+        if (IsFirstToCuttingCountour())
+        {
+            QPointF firstConnection;
+            if (IntersectionWithCuttingCountour(cuttingPath, points, &firstConnection))
+            {
+                extended.prepend(firstConnection);
+            }
+            else
+            {
+                const QString errorMsg = QObject::tr("Error in internal path '%1'. There is no intersection of first "
+                                                     "point with cutting countour")
+                        .arg(GetName());
+                qApp->IsPedantic() ? throw VExceptionObjectError(errorMsg) : qWarning() << errorMsg;
+            }
+        }
+
+        if (IsLastToCuttingCountour())
+        {
+            QPointF lastConnection;
+            if (IntersectionWithCuttingCountour(cuttingPath, VGObject::GetReversePoints(points),
+                                                &lastConnection))
+            {
+                extended.append(lastConnection);
+            }
+            else
+            {
+                const QString errorMsg = QObject::tr("Error in internal path '%1'. There is no intersection of last "
+                                                     "point with cutting countour")
+                        .arg(GetName());
+                qApp->IsPedantic() ? throw VExceptionObjectError(errorMsg) : qWarning() << errorMsg;
+            }
+        }
+
+        points = extended;
     }
 
     return points;
@@ -421,9 +532,9 @@ QVector<VSAPoint> VPiecePath::SeamAllowancePoints(const VContainer *data, qreal 
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QPainterPath VPiecePath::PainterPath(const VContainer *data) const
+QPainterPath VPiecePath::PainterPath(const VContainer *data, const QVector<QPointF> &cuttingPath) const
 {
-    return MakePainterPath(PathPoints(data));
+    return MakePainterPath(PathPoints(data, cuttingPath));
 }
 
 //---------------------------------------------------------------------------------------------------------------------
