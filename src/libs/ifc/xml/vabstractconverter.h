@@ -44,7 +44,7 @@
 
 template <class Key, class T> class QMap;
 
-#define CONVERTER_VERSION_CHECK(major, minor, patch) ((major<<16)|(minor<<8)|(patch))
+#define FORMAT_VERSION(major, minor, patch) ((major<<16)|(minor<<8)|(patch))
 
 class VAbstractConverter :public VDomDocument
 {

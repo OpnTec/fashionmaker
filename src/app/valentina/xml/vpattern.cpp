@@ -930,7 +930,7 @@ void VPattern::ParseDetailInternals(const QDomElement &domElement, VPiece &detai
                     if (version == 1)
                     {
                         // TODO. Delete if minimal supported version is 0.4.0
-                        Q_STATIC_ASSERT_X(VPatternConverter::PatternMinVer < CONVERTER_VERSION_CHECK(0, 4, 0),
+                        Q_STATIC_ASSERT_X(VPatternConverter::PatternMinVer < FORMAT_VERSION(0, 4, 0),
                                           "Time to refactor the code.");
                         const bool closed = GetParametrUInt(domElement, AttrClosed, QChar('1'));
                         const qreal width = GetParametrDouble(domElement, AttrWidth, "0.0");
