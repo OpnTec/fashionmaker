@@ -81,25 +81,24 @@ VVITConverter::VVITConverter(const QString &fileName)
 //---------------------------------------------------------------------------------------------------------------------
 QString VVITConverter::XSDSchema(int ver) const
 {
-    switch (ver)
+    QHash <int, QString> schemas =
     {
-        case (0x000200):
-            return QStringLiteral("://schema/individual_measurements/v0.2.0.xsd");
-        case (0x000300):
-            return QStringLiteral("://schema/individual_measurements/v0.3.0.xsd");
-        case (0x000301):
-            return QStringLiteral("://schema/individual_measurements/v0.3.1.xsd");
-        case (0x000302):
-            return QStringLiteral("://schema/individual_measurements/v0.3.2.xsd");
-        case (0x000303):
-            return QStringLiteral("://schema/individual_measurements/v0.3.3.xsd");
-        case (0x000400):
-            return CurrentSchema;
-        default:
-            InvalidVersion(ver);
-            break;
+        std::make_pair(FORMAT_VERSION(0, 2, 0), QStringLiteral("://schema/individual_measurements/v0.2.0.xsd")),
+        std::make_pair(FORMAT_VERSION(0, 3, 0), QStringLiteral("://schema/individual_measurements/v0.3.0.xsd")),
+        std::make_pair(FORMAT_VERSION(0, 3, 1), QStringLiteral("://schema/individual_measurements/v0.3.1.xsd")),
+        std::make_pair(FORMAT_VERSION(0, 3, 2), QStringLiteral("://schema/individual_measurements/v0.3.2.xsd")),
+        std::make_pair(FORMAT_VERSION(0, 3, 3), QStringLiteral("://schema/individual_measurements/v0.3.3.xsd")),
+        std::make_pair(FORMAT_VERSION(0, 4, 0), CurrentSchema),
+    };
+
+    if (schemas.contains(ver))
+    {
+        return schemas.value(ver);
     }
-    return QString();//unreachable code
+    else
+    {
+        InvalidVersion(ver);
+    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -107,27 +106,27 @@ void VVITConverter::ApplyPatches()
 {
     switch (m_ver)
     {
-        case (0x000200):
+        case (FORMAT_VERSION(0, 2, 0)):
             ToV0_3_0();
-            ValidateXML(XSDSchema(0x000300), m_convertedFileName);
+            ValidateXML(XSDSchema(FORMAT_VERSION(0, 3, 0)), m_convertedFileName);
             V_FALLTHROUGH
-        case (0x000300):
+        case (FORMAT_VERSION(0, 3, 0)):
             ToV0_3_1();
-            ValidateXML(XSDSchema(0x000301), m_convertedFileName);
+            ValidateXML(XSDSchema(FORMAT_VERSION(0, 3, 1)), m_convertedFileName);
             V_FALLTHROUGH
-        case (0x000301):
+        case (FORMAT_VERSION(0, 3, 1)):
             ToV0_3_2();
-            ValidateXML(XSDSchema(0x000302), m_convertedFileName);
+            ValidateXML(XSDSchema(FORMAT_VERSION(0, 3, 2)), m_convertedFileName);
             V_FALLTHROUGH
-        case (0x000302):
+        case (FORMAT_VERSION(0, 3, 2)):
             ToV0_3_3();
-            ValidateXML(XSDSchema(0x000303), m_convertedFileName);
+            ValidateXML(XSDSchema(FORMAT_VERSION(0, 3, 3)), m_convertedFileName);
             V_FALLTHROUGH
-        case (0x000303):
+        case (FORMAT_VERSION(0, 3, 3)):
             ToV0_4_0();
-            ValidateXML(XSDSchema(0x000400), m_convertedFileName);
+            ValidateXML(XSDSchema(FORMAT_VERSION(0, 4, 0)), m_convertedFileName);
             V_FALLTHROUGH
-        case (0x000400):
+        case (FORMAT_VERSION(0, 4, 0)):
             break;
         default:
             InvalidVersion(m_ver);
