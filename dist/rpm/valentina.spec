@@ -43,6 +43,7 @@ BuildRequires: pkgconfig(Qt5OpenGL)
 BuildRequires: pkgconfig(Qt5XmlPatterns)
 BuildRequires: libproxy-pacrunner
 BuildRequires: qttools5
+BuildRequires: qtbase5-common-devel >= 5.2.0
 
 %if 0%{?mageia} == 6
 BuildRequires: pkgconfig(openssl)
