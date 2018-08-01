@@ -244,24 +244,6 @@ void VTextGraphicsItem::paint(QPainter *painter, const QStyleOptionGraphicsItem 
  */
 void VTextGraphicsItem::SetSize(qreal fW, qreal fH)
 {
-    // don't allow resize under specific size
-    if (fW > parentItem()->boundingRect().width())
-    {
-        fW = parentItem()->boundingRect().width();
-    }
-    if (fW < minW)
-    {
-        fW = minW;
-    }
-    if (fH > parentItem()->boundingRect().height())
-    {
-        fH = parentItem()->boundingRect().height();
-    }
-    if (fH < minH)
-    {
-        fH = minH;
-    }
-
     prepareGeometryChange();
     m_rectBoundingBox.setTopLeft(QPointF(0, 0));
     m_rectBoundingBox.setWidth(fW);
@@ -388,8 +370,8 @@ void VTextGraphicsItem::mousePressEvent(QGraphicsSceneMouseEvent *pME)
         m_ptStartPos = pos();
         m_ptStart = pME->scenePos();
         m_szStart = m_rectBoundingBox.size();
-        m_ptRotCenter = mapToScene(m_rectBoundingBox.center());
-        m_dAngle = GetAngle(pME->scenePos());
+        m_ptRotCenter = mapToParent(m_rectBoundingBox.center());
+        m_dAngle = GetAngle(mapToParent(pME->pos()));
         m_dRotation = rotation();
         // in rotation mode, do not do any changes here, because user might want to
         // rotate the label more.
@@ -471,9 +453,9 @@ void VTextGraphicsItem::mouseMoveEvent(QGraphicsSceneMouseEvent* pME)
     qreal dX;
     qreal dY;
     QRectF rectBB;
-    const QPointF ptDiff = pME->scenePos() - m_ptStart;
     if (m_eMode == mMove && m_moveType & IsMovable)
     {
+        const QPointF ptDiff = pME->scenePos() - m_ptStart;
         // in move mode move the label along the mouse move from the origin
         QPointF pt = m_ptStartPos + ptDiff;
         rectBB.setTopLeft(pt);
@@ -490,33 +472,52 @@ void VTextGraphicsItem::mouseMoveEvent(QGraphicsSceneMouseEvent* pME)
     }
     else if (m_eMode == mResize && m_moveType & IsResizable)
     {
+        QLineF vectorDiff(m_ptStart, pME->scenePos());
+        vectorDiff.setAngle(vectorDiff.angle() + m_dRotation);
+        const QPointF ptDiff = vectorDiff.p2() - m_ptStart;
+
         // in resize mode, resize the label along the mouse move from the origin
         QPointF pt;
+        QSizeF sz;
 
         if (m_moveType & IsMovable)
         {
+            const qreal newWidth = m_szStart.width() + ptDiff.x();
+            const qreal newHeight = m_szStart.height() + ptDiff.y();
+            if (newWidth <= minW || newHeight <= minH)
+            {
+                return;
+            }
+
             pt = m_ptStartPos;
+            sz = QSizeF(newWidth, newHeight);
         }
         else
         {
-            pt = m_ptRotCenter - QRectF(0, 0, m_szStart.width() + ptDiff.x(),
-                                        m_szStart.height() + ptDiff.y()).center();
+            const qreal newWidth = m_szStart.width() + ptDiff.x()*2.0;
+            const qreal newHeight = m_szStart.height() + ptDiff.y()*2.0;
+            if (newWidth <= minW || newHeight <= minH)
+            {
+                return;
+            }
+
+            pt = QPointF(m_ptRotCenter.x() - newWidth/2.0, m_ptRotCenter.y() - newHeight/2.0);
+            sz = QSizeF(m_szStart.width() + ptDiff.x()*2.0, m_szStart.height() + ptDiff.y()*2.0);
         }
 
         rectBB.setTopLeft(pt);
-        QSizeF sz(m_szStart.width() + ptDiff.x(), m_szStart.height() + ptDiff.y());
         rectBB.setSize(sz);
         // before resizing the label to a new size, check if it will still be inside the parent item
-        if (IsContained(rectBB, rotation(), dX, dY) == false)
-        {
-            sz = QSizeF(sz.width()+dX, sz.height()+dY);
-        }
-        else
+        if (IsContained(rectBB, rotation(), dX, dY))
         {
             if (not (m_moveType & IsMovable))
             {
                 setPos(pt);
             }
+        }
+        else
+        {
+            return;
         }
 
         SetSize(sz.width(), sz.height());
@@ -529,11 +530,11 @@ void VTextGraphicsItem::mouseMoveEvent(QGraphicsSceneMouseEvent* pME)
         // new angle will be the starting angle for rotation
         if (fabs(m_dAngle) < 0.01)
         {
-            m_dAngle = GetAngle(pME->scenePos());
+            m_dAngle = GetAngle(mapToParent(pME->pos()));
             return;
         }
         // calculate the angle difference from the starting angle
-        double dAng =  qRadiansToDegrees(GetAngle(pME->scenePos()) - m_dAngle);
+        double dAng =  qRadiansToDegrees(GetAngle(mapToParent(pME->pos())) - m_dAngle);
         rectBB.setTopLeft(m_ptStartPos);
         rectBB.setWidth(m_rectBoundingBox.width());
         rectBB.setHeight(m_rectBoundingBox.height());
