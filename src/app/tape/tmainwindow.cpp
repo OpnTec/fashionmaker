@@ -386,7 +386,7 @@ void TMainWindow::FileNew()
         UpdatePadlock(mIsReadOnly);
 
         SetCurrentFile(QString());
-        MeasurementsWasSaved(false);
+        MeasurementsWereSaved(false);
 
         InitWindow();
 
@@ -1058,7 +1058,7 @@ void TMainWindow::SaveCustomerName()
     if (m->Customer() != ui->lineEditCustomerName->text())
     {
         m->SetCustomer(ui->lineEditCustomerName->text());
-        MeasurementsWasSaved(false);
+        MeasurementsWereSaved(false);
     }
 }
 
@@ -1068,7 +1068,7 @@ void TMainWindow::SaveEmail()
     if (m->Email() != ui->lineEditEmail->text())
     {
         m->SetEmail(ui->lineEditEmail->text());
-        MeasurementsWasSaved(false);
+        MeasurementsWereSaved(false);
     }
 }
 
@@ -1079,7 +1079,7 @@ void TMainWindow::SaveGender(int index)
     if (m->Gender() != type)
     {
         m->SetGender(type);
-        MeasurementsWasSaved(false);
+        MeasurementsWereSaved(false);
     }
 }
 
@@ -1089,7 +1089,7 @@ void TMainWindow::SaveBirthDate(const QDate &date)
     if (m->BirthDate() != date)
     {
         m->SetBirthDate(date);
-        MeasurementsWasSaved(false);
+        MeasurementsWereSaved(false);
     }
 }
 
@@ -1099,7 +1099,7 @@ void TMainWindow::SaveNotes()
     if (m->Notes() != ui->plainTextEditNotes->toPlainText())
     {
         m->SetNotes(ui->plainTextEditNotes->toPlainText());
-        MeasurementsWasSaved(false);
+        MeasurementsWereSaved(false);
     }
 }
 
@@ -1112,7 +1112,7 @@ void TMainWindow::SavePMSystem(int index)
     if (m->PMSystem() != system)
     {
         m->SetPMSystem(system);
-        MeasurementsWasSaved(false);
+        MeasurementsWereSaved(false);
     }
 }
 
@@ -1129,7 +1129,7 @@ void TMainWindow::Remove()
     const QTableWidgetItem *nameField = ui->tableWidget->item(ui->tableWidget->currentRow(), 0);
     m->Remove(nameField->data(Qt::UserRole).toString());
 
-    MeasurementsWasSaved(false);
+    MeasurementsWereSaved(false);
 
     search->RemoveRow(row);
     RefreshData();
@@ -1201,7 +1201,7 @@ void TMainWindow::MoveTop()
 
     const QTableWidgetItem *nameField = ui->tableWidget->item(row, ColumnName);
     m->MoveTop(nameField->data(Qt::UserRole).toString());
-    MeasurementsWasSaved(false);
+    MeasurementsWereSaved(false);
     RefreshData();
     search->RefreshList(ui->lineEditFind->text());
     ui->tableWidget->selectRow(0);
@@ -1220,7 +1220,7 @@ void TMainWindow::MoveUp()
 
     const QTableWidgetItem *nameField = ui->tableWidget->item(row, ColumnName);
     m->MoveUp(nameField->data(Qt::UserRole).toString());
-    MeasurementsWasSaved(false);
+    MeasurementsWereSaved(false);
     RefreshData();
     search->RefreshList(ui->lineEditFind->text());
     ui->tableWidget->selectRow(row-1);
@@ -1239,7 +1239,7 @@ void TMainWindow::MoveDown()
 
     const QTableWidgetItem *nameField = ui->tableWidget->item(row, ColumnName);
     m->MoveDown(nameField->data(Qt::UserRole).toString());
-    MeasurementsWasSaved(false);
+    MeasurementsWereSaved(false);
     RefreshData();
     search->RefreshList(ui->lineEditFind->text());
     ui->tableWidget->selectRow(row+1);
@@ -1258,7 +1258,7 @@ void TMainWindow::MoveBottom()
 
     const QTableWidgetItem *nameField = ui->tableWidget->item(row, ColumnName);
     m->MoveBottom(nameField->data(Qt::UserRole).toString());
-    MeasurementsWasSaved(false);
+    MeasurementsWereSaved(false);
     RefreshData();
     search->RefreshList(ui->lineEditFind->text());
     ui->tableWidget->selectRow(ui->tableWidget->rowCount()-1);
@@ -1306,7 +1306,7 @@ void TMainWindow::Fx()
         const QTableWidgetItem *nameField = ui->tableWidget->item(row, ColumnName);
         m->SetMValue(nameField->data(Qt::UserRole).toString(), dialog->GetFormula());
 
-        MeasurementsWasSaved(false);
+        MeasurementsWereSaved(false);
 
         RefreshData();
 
@@ -1343,7 +1343,7 @@ void TMainWindow::AddCustom()
 
     ui->actionExportToCSV->setEnabled(true);
 
-    MeasurementsWasSaved(false);
+    MeasurementsWereSaved(false);
     ui->tableWidget->repaint(); // Force repain to fix paint artifacts on Mac OS X
 }
 
@@ -1400,7 +1400,7 @@ void TMainWindow::AddKnown()
 
         ui->actionExportToCSV->setEnabled(true);
 
-        MeasurementsWasSaved(false);
+        MeasurementsWereSaved(false);
     }
     ui->tableWidget->repaint(); // Force repain to fix paint artifacts on Mac OS X
 }
@@ -1476,7 +1476,7 @@ void TMainWindow::ImportFromPattern()
 
     ui->tableWidget->selectRow(currentRow);
 
-    MeasurementsWasSaved(false);
+    MeasurementsWereSaved(false);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -1695,7 +1695,7 @@ void TMainWindow::SaveMName(const QString &text)
         }
 
         m->SetMName(nameField->text(), newName);
-        MeasurementsWasSaved(false);
+        MeasurementsWereSaved(false);
         RefreshData();
         search->RefreshList(ui->lineEditFind->text());
 
@@ -1769,7 +1769,7 @@ void TMainWindow::SaveMValue()
         return;
     }
 
-    MeasurementsWasSaved(false);
+    MeasurementsWereSaved(false);
 
     const QTextCursor cursor = ui->plainTextEditFormula->textCursor();
 
@@ -1796,7 +1796,7 @@ void TMainWindow::SaveMBaseValue(double value)
     const QTableWidgetItem *nameField = ui->tableWidget->item(ui->tableWidget->currentRow(), ColumnName);
     m->SetMBaseValue(nameField->data(Qt::UserRole).toString(), value);
 
-    MeasurementsWasSaved(false);
+    MeasurementsWereSaved(false);
 
     RefreshData();
     search->RefreshList(ui->lineEditFind->text());
@@ -1821,7 +1821,7 @@ void TMainWindow::SaveMSizeIncrease(double value)
     const QTableWidgetItem *nameField = ui->tableWidget->item(ui->tableWidget->currentRow(), ColumnName);
     m->SetMSizeIncrease(nameField->data(Qt::UserRole).toString(), value);
 
-    MeasurementsWasSaved(false);
+    MeasurementsWereSaved(false);
 
     RefreshData();
     search->RefreshList(ui->lineEditFind->text());
@@ -1846,7 +1846,7 @@ void TMainWindow::SaveMHeightIncrease(double value)
     const QTableWidgetItem *nameField = ui->tableWidget->item(ui->tableWidget->currentRow(), ColumnName);
     m->SetMHeightIncrease(nameField->data(Qt::UserRole).toString(), value);
 
-    MeasurementsWasSaved(false);
+    MeasurementsWereSaved(false);
 
     RefreshData();
     search->RefreshList(ui->lineEditFind->text());
@@ -1871,7 +1871,7 @@ void TMainWindow::SaveMDescription()
     const QTableWidgetItem *nameField = ui->tableWidget->item(ui->tableWidget->currentRow(), ColumnName);
     m->SetMDescription(nameField->data(Qt::UserRole).toString(), ui->plainTextEditDescription->toPlainText());
 
-    MeasurementsWasSaved(false);
+    MeasurementsWereSaved(false);
 
     const QTextCursor cursor = ui->plainTextEditDescription->textCursor();
 
@@ -1916,7 +1916,7 @@ void TMainWindow::SaveMFullName()
     {
         m->SetMFullName(nameField->data(Qt::UserRole).toString(), ui->lineEditFullName->text());
 
-        MeasurementsWasSaved(false);
+        MeasurementsWereSaved(false);
 
         RefreshData();
 
@@ -1963,7 +1963,7 @@ void TMainWindow::SetupMenu()
         if (not mIsReadOnly)
         {
             m->SetReadOnly(ro);
-            MeasurementsWasSaved(false);
+            MeasurementsWereSaved(false);
             UpdatePadlock(ro);
             UpdateWindowTitle();
         }
@@ -2260,7 +2260,7 @@ void TMainWindow::ShowHeaderUnits(QTableWidget *table, int column, const QString
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void TMainWindow::MeasurementsWasSaved(bool saved)
+void TMainWindow::MeasurementsWereSaved(bool saved)
 {
     setWindowModified(!saved);
     not mIsReadOnly ? ui->actionSave->setEnabled(!saved): ui->actionSave->setEnabled(false);
@@ -2305,7 +2305,7 @@ bool TMainWindow::SaveMeasurements(const QString &fileName, QString &error)
     if (result)
     {
         SetCurrentFile(fileName);
-        MeasurementsWasSaved(result);
+        MeasurementsWereSaved(result);
     }
     return result;
 }
@@ -3149,7 +3149,7 @@ void TMainWindow::RefreshDataAfterImport()
 
     ui->tableWidget->selectRow(currentRow);
     ui->actionExportToCSV->setEnabled(true);
-    MeasurementsWasSaved(false);
+    MeasurementsWereSaved(false);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
