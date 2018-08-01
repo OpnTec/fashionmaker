@@ -55,8 +55,6 @@
 - [#867] Visibility control for place labels.
 - [#868] New feature. Connect internal path with cutting contour.
 - [#869] Pattern piece label size limited.
-
-# Version 0.5.1 (unreleased)
 - [#683] Tool Seam allowance's dialog is off screen on small resolutions.
 - [#686] Seam allowance not placed correctly.
 - [#687] Wrong seam allowance.
