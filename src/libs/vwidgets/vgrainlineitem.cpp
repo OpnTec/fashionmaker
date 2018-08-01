@@ -384,6 +384,12 @@ void VGrainlineItem::mouseMoveEvent(QGraphicsSceneMouseEvent* pME)
         {
             dLen *= 2;
         }
+
+        if (m_dStartLength + dLen < ToPixel(5, Unit::Mm))
+        {
+            return;
+        }
+
         m_dLength = m_dStartLength + dLen;
 
         QPointF pos;
