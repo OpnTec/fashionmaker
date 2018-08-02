@@ -152,6 +152,7 @@ TMainWindow::~TMainWindow()
 {
     delete data;
     delete m;
+    qDeleteAll(hackedWidgets);
     delete ui;
 }
 
