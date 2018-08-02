@@ -1513,7 +1513,15 @@ void TMainWindow::ShowNewMData(bool fresh)
     {
         MFields(true);
 
+        if (ui->tableWidget->currentRow() == -1)
+        {
+            ui->tableWidget->blockSignals(true);
+            ui->tableWidget->selectRow(0);
+            ui->tableWidget->blockSignals(false);
+        }
+
         const QTableWidgetItem *nameField = ui->tableWidget->item(ui->tableWidget->currentRow(), ColumnName); // name
+        SCASSERT(nameField != nullptr)
         QSharedPointer<VMeasurement> meash;
 
         try
