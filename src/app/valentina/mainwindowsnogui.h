@@ -41,6 +41,7 @@
 class QGraphicsScene;
 struct PosterData;
 class QGraphicsRectItem;
+class VMeasurements;
 
 #if defined(Q_OS_WIN32) && QT_VERSION >= QT_VERSION_CHECK(5, 7, 0)
 class QWinTaskbarButton;
@@ -116,6 +117,10 @@ protected:
 
     bool ExportFMeasurementsToCSVData(const QString &fileName,
                                       bool withHeader, int mib, const QChar &separator) const;
+
+    QSharedPointer<VMeasurements> OpenMeasurementFile(const QString &path) const;
+
+    void CheckRequiredMeasurements(const VMeasurements *m) const;
 private slots:
     void PrintPages (QPrinter *printer);
     void ErrorConsoleMode(const LayoutErrors &state);

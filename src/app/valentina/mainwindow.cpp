@@ -100,6 +100,7 @@
 #endif //defined(Q_OS_MAC)
 
 QT_WARNING_PUSH
+QT_WARNING_DISABLE_GCC("-Wmissing-prototypes")
 QT_WARNING_DISABLE_CLANG("-Wmissing-prototypes")
 QT_WARNING_DISABLE_INTEL(1418)
 
@@ -405,76 +406,6 @@ void MainWindow::InitScenes()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QSharedPointer<VMeasurements> MainWindow::OpenMeasurementFile(const QString &path)
-{
-    QSharedPointer<VMeasurements> m;
-    if (path.isEmpty())
-    {
-        return m;
-    }
-
-    try
-    {
-        m = QSharedPointer<VMeasurements>(new VMeasurements(pattern));
-        m->SetSize(VContainer::rsize());
-        m->SetHeight(VContainer::rheight());
-        m->setXMLContent(path);
-
-        if (m->Type() == MeasurementsType::Unknown)
-        {
-            VException e(tr("Measurement file has unknown format."));
-            throw e;
-        }
-
-        if (m->Type() == MeasurementsType::Multisize)
-        {
-            VVSTConverter converter(path);
-            m->setXMLContent(converter.Convert());// Read again after conversion
-        }
-        else
-        {
-            VVITConverter converter(path);
-            m->setXMLContent(converter.Convert());// Read again after conversion
-        }
-
-        if (not m->IsDefinedKnownNamesValid())
-        {
-            VException e(tr("Measurement file contains invalid known measurement(s)."));
-            throw e;
-        }
-
-        CheckRequiredMeasurements(m.data());
-
-        if (m->Type() == MeasurementsType::Multisize)
-        {
-            if (m->MUnit() == Unit::Inch)
-            {
-                qCCritical(vMainWindow, "%s\n\n%s", qUtf8Printable(tr("Wrong units.")),
-                          qUtf8Printable(tr("Application doesn't support multisize table with inches.")));
-                m->clear();
-                if (not VApplication::IsGUIMode())
-                {
-                    qApp->exit(V_EX_DATAERR);
-                }
-                return m;
-            }
-        }
-    }
-    catch (VException &e)
-    {
-        qCCritical(vMainWindow, "%s\n\n%s\n\n%s", qUtf8Printable(tr("File error.")),
-                   qUtf8Printable(e.ErrorMessage()), qUtf8Printable(e.DetailedInformation()));
-        m->clear();
-        if (not VApplication::IsGUIMode())
-        {
-            qApp->exit(V_EX_NOINPUT);
-        }
-        return m;
-    }
-    return m;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
 bool MainWindow::LoadMeasurements(const QString &path)
 {
     QSharedPointer<VMeasurements> m = OpenMeasurementFile(path);
@@ -582,24 +513,6 @@ bool MainWindow::UpdateMeasurements(const QString &path, int size, int height)
     }
 
     return true;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void MainWindow::CheckRequiredMeasurements(const VMeasurements *m)
-{
-    const QSet<QString> match = doc->ListMeasurements().toSet().subtract(m->ListAll().toSet());
-    if (not match.isEmpty())
-    {
-        QList<QString> list = match.toList();
-        for (int i = 0; i < list.size(); ++i)
-        {
-            list[i] = qApp->TrVars()->MToUser(list.at(i));
-        }
-
-        VException e(tr("Measurement file doesn't include all required measurements."));
-        e.AddMoreInformation(tr("Please, additionally provide: %1").arg(QStringList(list).join(", ")));
-        throw e;
-    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
