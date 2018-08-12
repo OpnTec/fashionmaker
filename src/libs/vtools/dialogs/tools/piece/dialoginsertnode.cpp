@@ -59,6 +59,12 @@ DialogInsertNode::~DialogInsertNode()
 void DialogInsertNode::SetPiecesList(const QVector<quint32> &list)
 {
     FillComboBoxPiecesList(ui->comboBoxPiece, list);
+
+    if (list.isEmpty())
+    {
+        qWarning() << tr("The list of pieces is empty. Please, first create at least one piece for current pattern "
+                         "piece.");
+    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
