@@ -246,7 +246,7 @@
     </message>
     <message>
         <source>Confirm item deletion</source>
-        <translation type="vanished">Confirmar borrado de item</translation>
+        <translation type="vanished">Confirmar borrado de elemento</translation>
     </message>
     <message>
         <source>Toolbar</source>
@@ -274,11 +274,11 @@
     </message>
     <message>
         <source>Pattern making system</source>
-        <translation type="vanished">Sistema de creación de patrones</translation>
+        <translation type="vanished">Sistema de patronaje</translation>
     </message>
     <message>
         <source>Pattern making system:</source>
-        <translation type="vanished">Sistema de creación de patrones:</translation>
+        <translation type="vanished">Sistema de patronaje:</translation>
     </message>
     <message>
         <source>Author:</source>
@@ -316,14 +316,14 @@
     <name>DelTool</name>
     <message>
         <source>delete tool</source>
-        <translation>herramienta de borrar</translation>
+        <translation>herramienta borrar</translation>
     </message>
 </context>
 <context>
     <name>DeleteDetail</name>
     <message>
         <source>delete tool</source>
-        <translation type="vanished">herramienta de borrar</translation>
+        <translation type="vanished">herramienta borrar</translation>
     </message>
 </context>
 <context>
@@ -337,7 +337,7 @@
     <name>DeletePiece</name>
     <message>
         <source>delete tool</source>
-        <translation>herramienta borrador</translation>
+        <translation>herramienta borrar</translation>
     </message>
 </context>
 <context>
@@ -1386,7 +1386,7 @@
     </message>
     <message>
         <source>Seam allowance</source>
-        <translation type="vanished">Las costuras</translation>
+        <translation type="vanished">Margen de costura</translation>
     </message>
     <message>
         <source>Width</source>
@@ -1410,7 +1410,7 @@
     </message>
     <message>
         <source>Seam allowance tool</source>
-        <translation type="vanished">Herramienta para las costuras</translation>
+        <translation type="vanished">Herramienta para margen de costura</translation>
     </message>
     <message>
         <source>All objects in path should follow in clockwise direction.</source>
@@ -1478,7 +1478,7 @@
     </message>
     <message>
         <source>Material/Cut number/Placement</source>
-        <translation type="vanished">Material/Cortar número/Disposición</translation>
+        <translation type="vanished">Material/Numero Corte/Disposición</translation>
     </message>
     <message>
         <source>Material type:</source>
@@ -1486,8 +1486,7 @@
     </message>
     <message>
         <source>Cut number:</source>
-        <translation type="vanished">
-</translation>
+        <translation type="vanished">Numero de corte:</translation>
     </message>
     <message>
         <source>Placement:</source>
@@ -1579,11 +1578,11 @@
     </message>
     <message>
         <source>Grainline</source>
-        <translation type="vanished">Línea de la tela</translation>
+        <translation type="vanished">Linea hilo de tela</translation>
     </message>
     <message>
         <source>Grainline visible</source>
-        <translation type="vanished">Línea de la tela visible</translation>
+        <translation type="vanished">Linea hilo de tela visible</translation>
     </message>
     <message>
         <source>Rotation:</source>
@@ -1703,7 +1702,7 @@
     </message>
     <message>
         <source>Insert placeholders</source>
-        <translation>Insertar marcadores de posición</translation>
+        <translation>Insertar parámetros</translation>
     </message>
     <message>
         <source>Preview</source>
@@ -3542,7 +3541,7 @@ Aplicar características de todos modos?</translation>
     <message>
         <source>Crotch and Rise</source>
         <comment>Measurement section</comment>
-        <translation>Entrepierna y Rise</translation>
+        <translation>Entrepierna y Tiro</translation>
     </message>
     <message>
         <source>Hand</source>
@@ -3562,7 +3561,7 @@ Aplicar características de todos modos?</translation>
     <message>
         <source>Men &amp; Tailoring</source>
         <comment>Measurement section</comment>
-        <translation>Hombre y Confección</translation>
+        <translation>Hombre y Sastreria</translation>
     </message>
     <message>
         <source>Historical &amp; Specialty</source>
@@ -3615,7 +3614,7 @@ Aplicar características de todos modos?</translation>
     </message>
     <message>
         <source>Formula wizard</source>
-        <translation>Método de instalación</translation>
+        <translation>Asistente de formula</translation>
     </message>
     <message>
         <source>Value</source>
@@ -3875,7 +3874,7 @@ Aplicar características de todos modos?</translation>
     </message>
     <message>
         <source>Placeholder</source>
-        <translation>Marcador de posición</translation>
+        <translation>Parámetro</translation>
     </message>
     <message>
         <source>Value</source>
@@ -3906,7 +3905,7 @@ Aplicar características de todos modos?</translation>
     </message>
     <message>
         <source>Heights and Sizes</source>
-        <translation>Alturas y tamaños</translation>
+        <translation>Alturas y tallas</translation>
     </message>
     <message>
         <source>All heights (cm)</source>
@@ -3914,7 +3913,7 @@ Aplicar características de todos modos?</translation>
     </message>
     <message>
         <source>All sizes (cm)</source>
-        <translation>Todos los tamaños (cm)</translation>
+        <translation>Todos las tallas (cm)</translation>
     </message>
     <message>
         <source>Default height and size</source>
@@ -3998,7 +3997,7 @@ Aplicar características de todos modos?</translation>
     </message>
     <message>
         <source>&lt;Empty&gt;</source>
-        <translation>&lt;vacío&gt;</translation>
+        <translation>&lt;Empty&gt;</translation>
     </message>
     <message>
         <source>File was not saved yet.</source>
@@ -4030,15 +4029,15 @@ Aplicar características de todos modos?</translation>
     </message>
     <message>
         <source>Created:</source>
-        <translation type="vanished">Creación:</translation>
+        <translation type="vanished">Creado:</translation>
     </message>
     <message>
         <source>Pattern size:</source>
-        <translation type="vanished">Tamaño del Patrón:</translation>
+        <translation type="vanished">Talla del Patrón:</translation>
     </message>
     <message>
         <source>Show measurements</source>
-        <translation type="vanished">Mostra medidas</translation>
+        <translation type="vanished">Mostrar medidas</translation>
     </message>
     <message>
         <source>Show date of creation</source>
@@ -4046,7 +4045,7 @@ Aplicar características de todos modos?</translation>
     </message>
     <message>
         <source>Use %1 and %2 to insert pattern size and height</source>
-        <translation type="vanished">Usar %1 y %2 para insertar tamaño de patrón y altura</translation>
+        <translation type="vanished">Usar %1 y %2 para insertar talla y altura del patrón </translation>
     </message>
     <message>
         <source>Show date of layout creation (%1)</source>
@@ -4308,11 +4307,11 @@ Aplicar características de todos modos?</translation>
     </message>
     <message>
         <source>Seam allowance</source>
-        <translation>Las costuras</translation>
+        <translation>Margen de costura</translation>
     </message>
     <message>
         <source>Width:</source>
-        <translation>Anchura:</translation>
+        <translation>Ancho:</translation>
     </message>
     <message>
         <source>Formula wizard</source>
@@ -4372,19 +4371,19 @@ Aplicar características de todos modos?</translation>
     </message>
     <message>
         <source>Current seam aloowance</source>
-        <translation>Coste de costura actual</translation>
+        <translation>Margen de costura actual</translation>
     </message>
     <message>
         <source>Edit seam allowance width</source>
-        <translation>Editar el ancho de la costura</translation>
+        <translation>Editar el ancho del margen de costura</translation>
     </message>
     <message>
         <source>Edit seam allowance width before</source>
-        <translation>Editar el ancho de la costura antes</translation>
+        <translation>Editar el ancho del margen de costura antes</translation>
     </message>
     <message>
         <source>Edit seam allowance width after</source>
-        <translation>Editar el margen del ancho de la costura después de</translation>
+        <translation>Editar el ancho del margen de costura después</translation>
     </message>
     <message>
         <source>Internal path</source>
@@ -4392,7 +4391,7 @@ Aplicar características de todos modos?</translation>
     </message>
     <message>
         <source>Custom seam allowance</source>
-        <translation>Personalizar el margen de la costura</translation>
+        <translation>Personalizar el margen de costura</translation>
     </message>
     <message>
         <source>You need more points!</source>
@@ -4436,7 +4435,7 @@ Aplicar características de todos modos?</translation>
     </message>
     <message>
         <source>Straightforward</source>
-        <translation>Directo</translation>
+        <translation>Recto</translation>
     </message>
     <message>
         <source>Bisector</source>
@@ -4476,7 +4475,7 @@ Aplicar características de todos modos?</translation>
     </message>
     <message>
         <source>Each point in the &lt;b&gt;custom seam allowance&lt;/b&gt; path must be unique!</source>
-        <translation>¡Cada punto en el &lt;b&gt;margen de costura personalizado&lt;/b&gt; ruta deberá ser único!</translation>
+        <translation>¡Cada punto en el &lt;b&gt;margen de costura personalizado&lt;/b&gt; en la ruta deberá ser único!</translation>
     </message>
     <message>
         <source>The path is a cut contour</source>
@@ -4512,7 +4511,7 @@ Aplicar características de todos modos?</translation>
     </message>
     <message>
         <source>Create a formula that regulates visibility. Values different from &quot;0&quot; make a path visible.</source>
-        <translation>Crear una formula que regla la visibilidad. Los valores diferentes de &quot;0&quot; hacen una ruta visible.</translation>
+        <translation>Crear una formula que regule la visibilidad. Los valores diferentes de &quot;0&quot; hacen una ruta visible.</translation>
     </message>
     <message>
         <source>1</source>
@@ -4575,7 +4574,7 @@ Aplicar características de todos modos?</translation>
     </message>
     <message>
         <source>Pin</source>
-        <translation>Anclar</translation>
+        <translation>Anclaje</translation>
     </message>
 </context>
 <context>
@@ -5201,7 +5200,7 @@ Aplicar características de todos modos?</translation>
     </message>
     <message>
         <source>Value</source>
-        <translation>Valo</translation>
+        <translation>Valor</translation>
     </message>
     <message>
         <source>Calulation</source>
@@ -5256,7 +5255,7 @@ Aplicar características de todos modos?</translation>
     </message>
     <message>
         <source>Browse...</source>
-        <translation type="vanished">Hojear...</translation>
+        <translation type="vanished">Navegar...</translation>
     </message>
     <message>
         <source>TextLabel</source>
@@ -5546,7 +5545,7 @@ Aplicar características de todos modos?</translation>
     </message>
     <message>
         <source>Grainline</source>
-        <translation>Línea de la tela</translation>
+        <translation>Línea hilo de tela</translation>
     </message>
     <message>
         <source>Grainline visible</source>
@@ -5610,19 +5609,19 @@ Aplicar características de todos modos?</translation>
     </message>
     <message>
         <source>Current seam allowance</source>
-        <translation>Coste de costura actual</translation>
+        <translation>Margen de costura actual</translation>
     </message>
     <message>
         <source>Edit seam allowance width</source>
-        <translation>Editar el ancho de la costura</translation>
+        <translation>Editar el ancho del margen de costura</translation>
     </message>
     <message>
         <source>Edit seam allowance width before</source>
-        <translation>Editar el ancho de la costura antes</translation>
+        <translation>Editar el ancho del margen de costura antes</translation>
     </message>
     <message>
         <source>Edit seam allowance width after</source>
-        <translation>Editar el margen del ancho de la costura después de</translation>
+        <translation>Editar el ancho del margen de costura después</translation>
     </message>
     <message>
         <source>You need more points!</source>
@@ -5630,7 +5629,7 @@ Aplicar características de todos modos?</translation>
     </message>
     <message>
         <source>You have to choose points in a clockwise direction!</source>
-        <translation>¡Tiene que elegir los puntos en una dirección en sentido horario!</translation>
+        <translation>¡Tiene que elegir los puntos en una dirección en sentido del reloj!</translation>
     </message>
     <message>
         <source>First point cannot be equal to the last point!</source>
@@ -5650,7 +5649,7 @@ Aplicar características de todos modos?</translation>
     </message>
     <message>
         <source>custom seam allowance</source>
-        <translation>Personalizar el margen de la costura</translation>
+        <translation>Personalizar el margen de costura</translation>
     </message>
     <message>
         <source>None</source>
@@ -5674,11 +5673,11 @@ Aplicar características de todos modos?</translation>
     </message>
     <message>
         <source>Pins</source>
-        <translation>Alfileres</translation>
+        <translation>Anclajes</translation>
     </message>
     <message>
         <source>no pin</source>
-        <translation>Sin alfiler</translation>
+        <translation>Sin anclaje</translation>
     </message>
     <message>
         <source>Labels</source>
@@ -5754,7 +5753,7 @@ Aplicar características de todos modos?</translation>
     </message>
     <message>
         <source>Doubletree</source>
-        <translation>Doble arbol</translation>
+        <translation>Doble T</translation>
     </message>
     <message>
         <source>Corner</source>
@@ -6520,7 +6519,7 @@ Aplicar características de todos modos?</translation>
     <name>DialogUnionDetails</name>
     <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Do you really want union details?&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="vanished">&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Realmente quiere detalles de la unión?&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+        <translation type="vanished">&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;¿Realmente quiere unir los detalles?&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <source>Union tool</source>
@@ -6528,7 +6527,7 @@ Aplicar características de todos modos?</translation>
     </message>
     <message>
         <source>Select a first point</source>
-        <translation>Selección un primer punto</translation>
+        <translation>Seleccione un primer punto</translation>
     </message>
     <message>
         <source>Workpiece should have at least two points and three objects</source>
@@ -6536,15 +6535,15 @@ Aplicar características de todos modos?</translation>
     </message>
     <message>
         <source>Select a second point</source>
-        <translation>Selección un segundo punto</translation>
+        <translation>Seleccione un segundo punto</translation>
     </message>
     <message>
         <source>Select a unique point</source>
-        <translation>Selección un único punto</translation>
+        <translation>Seleccione un único punto</translation>
     </message>
     <message>
         <source>Select a detail</source>
-        <translation>Selección de un detalle</translation>
+        <translation>Seleccione un detalle</translation>
     </message>
     <message>
         <source>Select a point on edge</source>
@@ -6552,7 +6551,7 @@ Aplicar características de todos modos?</translation>
     </message>
     <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Do you really want to unite details?&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;¿Desea unir los detalles?&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;¿Desea realmente unir los detalles?&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <source>Retain original pieces</source>
@@ -6567,7 +6566,7 @@ Aplicar características de todos modos?</translation>
     </message>
     <message>
         <source>A new version of %1 is available!</source>
-        <translation type="vanished">Una nueva versión de %1 está disponible!</translation>
+        <translation type="vanished">¡Una nueva versión de %1 está disponible!</translation>
     </message>
     <message>
         <source>%1 %2 is now available - you have %3. Would you like to download it now?</source>
@@ -6575,7 +6574,7 @@ Aplicar características de todos modos?</translation>
     </message>
     <message>
         <source>Skip This Version</source>
-        <translation>Saltear esta versión</translation>
+        <translation>Saltar esta versión</translation>
     </message>
     <message>
         <source>Remind Me Later</source>
@@ -6610,7 +6609,7 @@ Aplicar características de todos modos?</translation>
     </message>
     <message>
         <source>Feed error: invalid &quot;enclosure&quot; with the download link</source>
-        <translation>Error de entrega: &quot;enclosure&quot; inválido con el enlace de descarga</translation>
+        <translation>Error de entrega: &quot;anexo&quot; inválido con el enlace de descarga</translation>
     </message>
     <message>
         <source>Error</source>
@@ -6692,11 +6691,11 @@ Aplicar características de todos modos?</translation>
     </message>
     <message>
         <source>Invalid base size argument. Must be cm, mm or inch.</source>
-        <translation>Argumento de talla base inválida. Deben ser cm, mm o inch.</translation>
+        <translation>Argumento de talla base inválida. Deben ser cm, mm o pulg.</translation>
     </message>
     <message>
         <source>Can&apos;t begin to listen for incoming connections on name &apos;%1&apos;</source>
-        <translation>No se puede comenzar la escucha de conexiones entrantes en &apos;%1&apos;</translation>
+        <translation>No se puede comenzar a escuchar por conexiones entrantes en el nombre &apos;%1&apos;</translation>
     </message>
     <message>
         <source>Test mode doesn&apos;t support openning several files.</source>
@@ -6704,7 +6703,7 @@ Aplicar características de todos modos?</translation>
     </message>
     <message>
         <source>Please, provide one input file.</source>
-        <translation>Por favor, proporcione un fichero de entrada.</translation>
+        <translation>Por favor, proporcione un archivo de entrada.</translation>
     </message>
     <message>
         <source>Open with the base size. Valid values: %1cm.</source>
@@ -6827,23 +6826,23 @@ Aplicar características de todos modos?</translation>
     </message>
     <message>
         <source>Toolbar files</source>
-        <translation>Archivos de la barra de herramientas</translation>
+        <translation>Barra de herramientas archivos</translation>
     </message>
     <message>
         <source>ToolBar modes</source>
-        <translation>Modos de la barra de herramientas</translation>
+        <translation>Barra de herramientas modos</translation>
     </message>
     <message>
         <source>Toolbar pattern</source>
-        <translation>Patrón de la barra de herramientas</translation>
+        <translation>Barra de herramientas patrón</translation>
     </message>
     <message>
         <source>Toolbar options</source>
-        <translation>Opciones de la barra de herramientas</translation>
+        <translation>Barra de herramientas opciones</translation>
     </message>
     <message>
         <source>Toolbar tools</source>
-        <translation>Herramientas de la barra de herramientas</translation>
+        <translation>Barra de herramientas de herramientas</translation>
     </message>
     <message>
         <source>Tool options</source>
@@ -6987,7 +6986,7 @@ Aplicar características de todos modos?</translation>
     </message>
     <message>
         <source>Stop using tool</source>
-        <translation type="vanished">Parar de usar herramienta</translation>
+        <translation type="vanished">Parar usando herramienta</translation>
     </message>
     <message>
         <source>Repot Bug...</source>
@@ -7051,11 +7050,11 @@ Aplicar características de todos modos?</translation>
     </message>
     <message>
         <source>Select curve path</source>
-        <translation>Seleccionar trazado cruzo</translation>
+        <translation>Seleccionar trazado curvo</translation>
     </message>
     <message>
         <source>Select points, arcs, curves clockwise.</source>
-        <translation type="vanished">Seleccionar puntos, arcos, curvas a la derecha.</translation>
+        <translation type="vanished">Seleccionar puntos, arcos, curvas en sentido del reloj.</translation>
     </message>
     <message>
         <source>Select base point</source>
@@ -7087,7 +7086,7 @@ Aplicar características de todos modos?</translation>
     </message>
     <message>
         <source>Size: </source>
-        <translation type="vanished">Tamaño:</translation>
+        <translation type="vanished">Talla:</translation>
     </message>
     <message>
         <source>Pattern Piece: </source>
@@ -7127,7 +7126,7 @@ Aplicar características de todos modos?</translation>
     </message>
     <message>
         <source>Error wrong id.</source>
-        <translation>Error en la identificación.</translation>
+        <translation>Error identificación equivocada.</translation>
     </message>
     <message>
         <source>Error parsing file (std::bad_alloc).</source>
@@ -7173,7 +7172,7 @@ Quiere guardar los cambios?</translation>
     </message>
     <message>
         <source>Wrong units.</source>
-        <translation>Unidades no válidas.</translation>
+        <translation>Unidades equivocadas.</translation>
     </message>
     <message>
         <source>Application doesn&apos;t support standard table with inches.</source>
@@ -7253,7 +7252,7 @@ Quiere guardar los cambios?</translation>
     </message>
     <message>
         <source>Seam allowance tool</source>
-        <translation type="vanished">Herramienta para las costuras</translation>
+        <translation type="vanished">Herramienta margen de costura</translation>
     </message>
     <message>
         <source>Union tool</source>
@@ -7341,7 +7340,7 @@ Quiere guardar los cambios?</translation>
     </message>
     <message>
         <source>Save as tiled PDF</source>
-        <translation type="vanished">Guardar como PDF en cuadrícula</translation>
+        <translation type="vanished">Guardar como PDF en mosaico</translation>
     </message>
     <message>
         <source>Split and save a layout into smaller pages</source>
@@ -7353,7 +7352,7 @@ Quiere guardar los cambios?</translation>
     </message>
     <message>
         <source>Print tiled PDF</source>
-        <translation>Imprimir PDF enlosado</translation>
+        <translation>Imprimir PDF en mosaico</translation>
     </message>
     <message>
         <source>Split and print a layout into smaller pages (for regular printers)</source>
@@ -7470,15 +7469,15 @@ Quiere guardar los cambios?</translation>
     </message>
     <message>
         <source>Failed to lock. This file already opened in another window.</source>
-        <translation>Error al bloquear. Este archivo ya está abierto en otra ventana.</translation>
+        <translation>Error al cerrar. Este archivo ya está abierto en otra ventana.</translation>
     </message>
     <message>
         <source>Failed to lock. This file already opened in another window. Expect collissions when run 2 copies of the program.</source>
-        <translation>Error al bloquear. Este archivo ya está abierto en otra ventana. Posibles colisiones al abrir 2 copias del programa.</translation>
+        <translation>Error al cerrar. Este archivo ya está abierto en otra ventana. Posibles colisiones al abrir 2 copias del programa.</translation>
     </message>
     <message>
         <source>Measurement file contains invalid known measurement(s).</source>
-        <translation>El archivo de medidas contiene medidas requeridas conocidas no válidas.</translation>
+        <translation>El archivo de medidas contiene medida(s) conocidas no válidas.</translation>
     </message>
     <message>
         <source>Measurement file has unknown format.</source>
@@ -7498,7 +7497,7 @@ Quiere guardar los cambios?</translation>
     </message>
     <message>
         <source>Measurements was synced</source>
-        <translation type="vanished">Medidas sincronizadas</translation>
+        <translation type="vanished">Las medidas fueron sincronizadas</translation>
     </message>
     <message>
         <source>Couldn&apos;t sync measurements.</source>
@@ -7526,11 +7525,11 @@ Quiere guardar los cambios?</translation>
     </message>
     <message>
         <source>Couldn&apos;t set size. Need a file with standard measurements.</source>
-        <translation type="vanished">No se pudo establecer el tamaño. Se necesita un archivo con medidas estándar.</translation>
+        <translation type="vanished">No se pudo establecer la talla. Se necesita un archivo con medidas estándar.</translation>
     </message>
     <message>
         <source>Couldn&apos;t set size. File wasn&apos;t opened.</source>
-        <translation>No se pudo establecer el tamaño. No se abrió el archivo.</translation>
+        <translation>No se pudo establecer la talla. No se abrió el archivo.</translation>
     </message>
     <message>
         <source>The method %1 does nothing in GUI mode</source>
@@ -7554,7 +7553,7 @@ Quiere guardar los cambios?</translation>
     </message>
     <message>
         <source>Please, provide one input file.</source>
-        <translation>Por favor, proporcione un fichero de entrada.</translation>
+        <translation>Por favor, proporcione un archivo de entrada.</translation>
     </message>
     <message>
         <source>Print an original layout</source>
@@ -7562,7 +7561,7 @@ Quiere guardar los cambios?</translation>
     </message>
     <message>
         <source>Preview tiled PDF</source>
-        <translation>Vista previa de PDF enlosado</translation>
+        <translation>Vista previa de PDF en mosaicos</translation>
     </message>
     <message>
         <source>Print preview tiled layout</source>
@@ -7586,7 +7585,7 @@ Quiere guardar los cambios?</translation>
     </message>
     <message>
         <source>Unload measurements if they was not used in a pattern file.</source>
-        <translation type="vanished">Descargar medidas si no se usan en un archivo de patrón.</translation>
+        <translation type="vanished">Descargar medidas si no fueron usadas en un archivo de patrón.</translation>
     </message>
     <message>
         <source>Measurements unloaded</source>
@@ -7594,7 +7593,8 @@ Quiere guardar los cambios?</translation>
     </message>
     <message>
         <source>Couldn&apos;t unload measurements. Some of them are used in the pattern.</source>
-        <translation>No se pudieron descargar las medidas. Algunas se estan usando en un patrón.</translation>
+        <translation>No se pudieron descargar las medidas. Algunas de ellas se están usando en 
+el patrón.</translation>
     </message>
     <message>
         <source>True darts</source>
@@ -7622,7 +7622,7 @@ Quiere guardar los cambios?</translation>
     </message>
     <message>
         <source>Locking file</source>
-        <translation>Archivo de bloqueo</translation>
+        <translation>Cerrando archivo</translation>
     </message>
     <message>
         <source>This file already opened in another window. Ignore if you want to continue (not recommended, can cause a data corruption).</source>
@@ -7662,11 +7662,11 @@ Quiere guardar los cambios?</translation>
     </message>
     <message>
         <source>Measurements was changed. Do you want to sync measurements now?</source>
-        <translation type="vanished">Las medida fueron modificadas. Quieres sincronizar las medidas?</translation>
+        <translation type="vanished">Las medidas fueron modificadas. Quieres sincronizar las medidas ahora?</translation>
     </message>
     <message>
         <source>Curve tool which uses point as control handle</source>
-        <translation>Herramienta curva que utiliza el punto como manejador de control</translation>
+        <translation>Herramienta curva que utiliza el punto como control de manejo</translation>
     </message>
     <message>
         <source>Select first curve point</source>
@@ -7758,7 +7758,7 @@ Quiere guardar los cambios?</translation>
     </message>
     <message>
         <source>The measurements file &lt;br/&gt;&lt;br/&gt; &lt;b&gt;%1&lt;/b&gt; &lt;br/&gt;&lt;br/&gt; could not be found. Do you want to update the file location?</source>
-        <translation>El archivo de medidas &lt;br/&gt;&lt;br/&gt; &lt;b&gt;%1&lt;/b&gt; &lt;br/&gt;&lt;br/&gt; podría no ser encontrado. ¿Quiere actualizar la ubicación del archivo?</translation>
+        <translation>El archivo de medidas &lt;br/&gt;&lt;br/&gt; &lt;b&gt;%1&lt;/b&gt; &lt;br/&gt;&lt;br/&gt; no pudo ser encontrado. ¿Quiere actualizar la ubicación del archivo?</translation>
     </message>
     <message>
         <source>Flipping objects by line</source>
@@ -7774,11 +7774,11 @@ Quiere guardar los cambios?</translation>
     </message>
     <message>
         <source>Measurements were changed. Do you want to sync measurements now?</source>
-        <translation>Las medidas estaban cambiadas. ¿Quiere sincronizar las medidas ahora?</translation>
+        <translation>Las medidas fueron modificadas. ¿Quiere sincronizar las medidas ahora?</translation>
     </message>
     <message>
         <source>Gradation doesn&apos;t support inches</source>
-        <translation>La gradación no spoorta pulgadas</translation>
+        <translation>La graduación no soporta pulgadas</translation>
     </message>
     <message>
         <source>Measurements have been synced</source>
@@ -8113,7 +8113,7 @@ Quiere guardar los cambios?</translation>
     </message>
     <message>
         <source>Critical error!</source>
-        <translation>Error crítico!!</translation>
+        <translation>¡Error crítico!</translation>
     </message>
     <message>
         <source>Print to pdf</source>
@@ -8340,7 +8340,7 @@ Quiere guardar los cambios?</translation>
     </message>
     <message>
         <source>Use antialiasing</source>
-        <translation type="vanished">Usar antialiasing</translation>
+        <translation type="vanished">Usar suavizado</translation>
     </message>
     <message>
         <source>Undo</source>
@@ -8732,7 +8732,7 @@ Quiere guardar los cambios?</translation>
     </message>
     <message>
         <source>Remeber pattern materials</source>
-        <translation>Recoradar materiales de patron</translation>
+        <translation>Recordar materiales de patron</translation>
     </message>
     <message>
         <source>Curve approximation:</source>
@@ -8912,7 +8912,7 @@ Esta opción surtirá efecto después de reiniciar.</translation>
     </message>
     <message>
         <source>Fabric</source>
-        <translation>Fabricar</translation>
+        <translation>Tela</translation>
     </message>
     <message>
         <source>Lining</source>
@@ -9256,7 +9256,7 @@ Esta opción surtirá efecto después de reiniciar.</translation>
     </message>
     <message>
         <source>In sizes</source>
-        <translation>En tamaños</translation>
+        <translation>En tallas</translation>
     </message>
     <message>
         <source>In heights</source>
@@ -9524,7 +9524,7 @@ Esta opción surtirá efecto después de reiniciar.</translation>
     </message>
     <message>
         <source>Size: </source>
-        <translation type="vanished">Tamaño:</translation>
+        <translation type="vanished">Talla:</translation>
     </message>
     <message>
         <source>Individual measurements</source>
@@ -9642,7 +9642,7 @@ Quieres guardar los cambios?</translation>
     </message>
     <message>
         <source>The size increase value of known measurement forbidden to change.</source>
-        <translation type="vanished">Esta prohibido cambiar el valor de incremento de talle de una medida conocida.</translation>
+        <translation type="vanished">Esta prohibido cambiar el valor de incremento de talla de una medida conocida.</translation>
     </message>
     <message>
         <source>The height increase value of known measurement forbidden to change.</source>
@@ -9662,11 +9662,11 @@ Quieres guardar los cambios?</translation>
     </message>
     <message>
         <source>Move measurement top</source>
-        <translation>Mover medida arriba del todo</translation>
+        <translation>Mover medida a parte superior</translation>
     </message>
     <message>
         <source>Move measurement bottom</source>
-        <translation>Mover medida abajo del todo</translation>
+        <translation>Mover medida parte inferior</translation>
     </message>
     <message>
         <source>Delete measurement</source>
@@ -9737,7 +9737,7 @@ Quieres guardar los cambios?</translation>
     </message>
     <message>
         <source>Measurement&apos;s name in a formula</source>
-        <translation>Nombre de la medida en una fórmula</translation>
+        <translation>Nombre de la medida en la fórmula</translation>
     </message>
     <message>
         <source>Measurement&apos;s name in a formula.</source>
@@ -9817,7 +9817,7 @@ Quieres guardar los cambios?</translation>
     </message>
     <message>
         <source>Customer&apos;s family name</source>
-        <translation type="vanished">Nombre de la familia del cliente</translation>
+        <translation type="vanished">Apellido del cliente</translation>
     </message>
     <message>
         <source>Customer&apos;s email address</source>
@@ -9829,7 +9829,7 @@ Quieres guardar los cambios?</translation>
     </message>
     <message>
         <source>Size:</source>
-        <translation>Tamaño:</translation>
+        <translation>Talla:</translation>
     </message>
     <message>
         <source>All files</source>
@@ -9956,7 +9956,7 @@ Quieres guardar los cambios?</translation>
     </message>
     <message>
         <source>Grainline visible</source>
-        <translation>Línea de la tela visible</translation>
+        <translation>Línea hilo de tela visible</translation>
     </message>
     <message>
         <source>Rotation:</source>
@@ -10501,7 +10501,7 @@ Quieres guardar los cambios?</translation>
     </message>
     <message>
         <source>Pattern making system:</source>
-        <translation type="vanished">Sistema de creación de patrones:</translation>
+        <translation type="vanished">Sistema de patronaje:</translation>
     </message>
     <message>
         <source>Default height and size</source>
@@ -10693,11 +10693,11 @@ Quieres guardar los cambios?</translation>
     </message>
     <message>
         <source>Do not &amp;ask again</source>
-        <translation>No preguntar de nuevo</translation>
+        <translation>No &amp;preguntar de nuevo</translation>
     </message>
     <message>
         <source>Do not &amp;show again</source>
-        <translation>No mostrar de nuevo</translation>
+        <translation>No &amp;mostrar de nuevo</translation>
     </message>
 </context>
 <context>
@@ -10748,7 +10748,7 @@ Quieres guardar los cambios?</translation>
     </message>
     <message>
         <source>Error replacing a symlink by real file: %1.</source>
-        <translation type="vanished">Error al reemplazar un symlink por la vida real: %1.</translation>
+        <translation type="vanished">Error al reemplazar un acceso directo por archivo real: %1.</translation>
     </message>
     <message>
         <source>Error openning a temp file: %1.</source>
@@ -10949,7 +10949,7 @@ Quieres guardar los cambios?</translation>
     </message>
     <message>
         <source>goldenrod</source>
-        <translation>vara de oro</translation>
+        <translation>vara dorada</translation>
     </message>
 </context>
 <context>
@@ -11018,7 +11018,7 @@ Quieres guardar los cambios?</translation>
     </message>
     <message>
         <source>Template number</source>
-        <translation>Formato numérico</translation>
+        <translation>Plantilla numérica</translation>
     </message>
     <message>
         <source>The page width</source>
@@ -11038,7 +11038,7 @@ Quieres guardar los cambios?</translation>
     </message>
     <message>
         <source>Auto crop unused length (export mode).</source>
-        <translation>Recortar automáticamente largo sin uso (modo de exportación).</translation>
+        <translation>Auto cortar largo sin uso (modo de exportación).</translation>
     </message>
     <message>
         <source>Unite pages if possible (export mode).</source>
@@ -11082,7 +11082,7 @@ Quieres guardar los cambios?</translation>
     </message>
     <message>
         <source>Cannot use pageformat and page explicit size/units together.</source>
-        <translation type="vanished">No se puede usar pageformat y tamaño/unidades de pagina explícitos en conjunto.</translation>
+        <translation type="vanished">No se puede usar formato de pagina y tamaño/unidades de pagina explícitos en conjunto.</translation>
     </message>
     <message>
         <source>Page height, width, units must be used all 3 at once.</source>
@@ -11162,15 +11162,15 @@ Quieres guardar los cambios?</translation>
     </message>
     <message>
         <source>Invalid gradation size value.</source>
-        <translation>Valor del talle de la gradación invalido.</translation>
+        <translation>Valor de talla de la graduación invalido.</translation>
     </message>
     <message>
         <source>Invalid gradation height value.</source>
-        <translation>Valor del altura de la gradación invalido.</translation>
+        <translation>Valor del altura de la graduación invalido.</translation>
     </message>
     <message>
         <source>Pattern making program.</source>
-        <translation>Programa generando patrón.</translation>
+        <translation>Programa patronaje.</translation>
     </message>
     <message>
         <source>Pattern file.</source>
@@ -11290,7 +11290,7 @@ Quieres guardar los cambios?</translation>
     </message>
     <message>
         <source>Number corresponding to output format (default = 0, export mode):</source>
-        <translation>Número correspondiente a formato de producción (predeterminado = 0, modo de exportación):</translation>
+        <translation>Número correspondiente a formato de salida (predeterminado = 0, modo de exportación):</translation>
     </message>
     <message>
         <source>Number corresponding to page template (default = 0, export mode):</source>
@@ -11502,7 +11502,7 @@ Quieres guardar los cambios?</translation>
     </message>
     <message>
         <source>Got empty parameter</source>
-        <translation type="vanished">se obtuvo un parámetro vacío</translation>
+        <translation type="vanished">Se obtuvo un parámetro vacío</translation>
     </message>
     <message>
         <source>Can&apos;t convert toDouble parameter</source>
@@ -12197,15 +12197,15 @@ Quieres guardar los cambios?</translation>
     </message>
     <message>
         <source>move grainline</source>
-        <translation type="vanished">mover línea de la tela</translation>
+        <translation type="vanished">mover línea hilo de tela</translation>
     </message>
     <message>
         <source>resize grainline</source>
-        <translation type="vanished">redimensionar línea de la tela</translation>
+        <translation type="vanished">redimensionar línea hilo de tela</translation>
     </message>
     <message>
         <source>rotate grainline</source>
-        <translation type="vanished">rotar línea de la tela</translation>
+        <translation type="vanished">rotar línea hilo de tela</translation>
     </message>
 </context>
 <context>
@@ -12986,15 +12986,15 @@ Quieres guardar los cambios?</translation>
     </message>
     <message>
         <source>move grainline</source>
-        <translation>mover línea de la tela</translation>
+        <translation>mover línea hilo de tela</translation>
     </message>
     <message>
         <source>resize grainline</source>
-        <translation>redimensionar línea de la tela</translation>
+        <translation>redimensionar línea hilo de tela</translation>
     </message>
     <message>
         <source>rotate grainline</source>
-        <translation>rotar línea de la tela</translation>
+        <translation>rotar línea hilo de tela</translation>
     </message>
     <message>
         <source>Options</source>
