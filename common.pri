@@ -746,6 +746,11 @@ CLANG_DEBUG_CXXFLAGS += \
     -fcolor-diagnostics \
     -fms-extensions # Need for pragma message
 
+freebsd-clang* {
+    # https://bitbucket.org/dismine/valentina/issues/877/lots-of-warnings-unknown-warning-option
+    CLANG_DEBUG_CXXFLAGS -= -Wextended-offsetof
+}
+
 ICC_DEBUG_CXXFLAGS += \
     $$ISYSTEM \ # Ignore warnings Qt headers.
     -Wcomment \
