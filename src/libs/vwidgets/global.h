@@ -71,7 +71,7 @@ void PaintWithFixItemHighlightSelected(Item *item, QPainter *painter, const QSty
     QStyleOptionGraphicsItem myoption = (*option);
     if (myoption.state & QStyle::State_Selected)
     {
-        myoption.state &= !QStyle::State_Selected;
+        myoption.state &= ~QStyle::State_Selected;
     }
     item->Parent::paint(painter, &myoption, widget);
 
