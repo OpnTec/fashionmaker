@@ -4507,7 +4507,7 @@ bool MainWindow::LoadPattern(QString fileName, const QString& customMeasureFile)
             else
             {
                 ui->actionUnloadMeasurements->setEnabled(true);
-                watcher->addPath(path);
+                watcher->addPath(newPath);
                 ui->actionEditCurrent->setEnabled(true);
             }
         }
