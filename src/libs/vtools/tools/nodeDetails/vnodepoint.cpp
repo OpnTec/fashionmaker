@@ -52,6 +52,7 @@
 #include "../ifc/ifcdef.h"
 #include "../vmisc/vabstractapplication.h"
 #include "../vpatterndb/vcontainer.h"
+#include "../vpatterndb/vpiecenode.h"
 #include "../vwidgets/vmaingraphicsscene.h"
 #include "../vwidgets/vmaingraphicsview.h"
 #include "../vabstracttool.h"
@@ -282,13 +283,46 @@ void VNodePoint::contextMenuEvent(QGraphicsSceneContextMenuEvent *event)
 
         QAction *actionExclude = menu.addAction(tr("Exclude"));
 
+        QMenu *angleTypeMenu = menu.addMenu(tr("Angle"));
+        PieceNodeAngle curType = PieceNodeAngle::ByLength;
+
+        const VPiece detail = VAbstractTool::data.GetPiece(piece->getId());
+        const int nodeIndex = detail.GetPath().indexOfNode(m_id);
+        if (nodeIndex != -1)
+        {
+            const VPieceNode &node = detail.GetPath().at(nodeIndex);
+            curType = node.GetAngleType();
+        }
+        else
+        {
+            angleTypeMenu->setVisible(false);
+        }
+
+        auto InitAngleAction = [angleTypeMenu, curType](const QString &name, PieceNodeAngle checkType)
+        {
+            QAction *action = angleTypeMenu->addAction(name);
+            action->setCheckable(true);
+            action->setChecked(curType == checkType);
+            return action;
+        };
+
+        QAction *actionByLength = InitAngleAction(tr("by length"), PieceNodeAngle::ByLength);
+        QAction *actionByPointsIntersection = InitAngleAction(tr("by points intersetions"),
+                                                              PieceNodeAngle::ByPointsIntersection);
+        QAction *actionByFirstEdgeSymmetry = InitAngleAction(tr("by first edge symmetry"),
+                                                             PieceNodeAngle::ByFirstEdgeSymmetry);
+        QAction *actionBySecondEdgeSymmetry = InitAngleAction(tr("by second edge symmetry"),
+                                                              PieceNodeAngle::BySecondEdgeSymmetry);
+        QAction *actionByFirstEdgeRightAngle = InitAngleAction(tr("by first edge right angle"),
+                                                               PieceNodeAngle::ByFirstEdgeRightAngle);
+        QAction *actionBySecondEdgeRightAngle = InitAngleAction(tr("by second edge right angle"),
+                                                                PieceNodeAngle::BySecondEdgeRightAngle);
+
         QAction *separatorAct = new QAction(this);
         separatorAct->setSeparator(true);
         menu.addAction(separatorAct);
 
         QAction *actionOption = menu.addAction(QIcon::fromTheme("preferences-other"), tr("Options"));
-
-        const VPiece detail = VAbstractTool::data.GetPiece(piece->getId());
 
         QAction *inLayoutOption = menu.addAction(tr("In layout"));
         inLayoutOption->setCheckable(true);
@@ -342,6 +376,30 @@ void VNodePoint::contextMenuEvent(QGraphicsSceneContextMenuEvent *event)
         else if (selectedAction == actionExclude)
         {
             emit ToggleExcludeState(m_id);
+        }
+        else if (selectedAction == actionByLength)
+        {
+            emit ToggleAngleType(m_id, PieceNodeAngle::ByLength);
+        }
+        else if (selectedAction == actionByPointsIntersection)
+        {
+            emit ToggleAngleType(m_id, PieceNodeAngle::ByPointsIntersection);
+        }
+        else if (selectedAction == actionByFirstEdgeSymmetry)
+        {
+            emit ToggleAngleType(m_id, PieceNodeAngle::ByFirstEdgeSymmetry);
+        }
+        else if (selectedAction == actionBySecondEdgeSymmetry)
+        {
+            emit ToggleAngleType(m_id, PieceNodeAngle::BySecondEdgeSymmetry);
+        }
+        else if (selectedAction == actionByFirstEdgeRightAngle)
+        {
+            emit ToggleAngleType(m_id, PieceNodeAngle::ByFirstEdgeRightAngle);
+        }
+        else if (selectedAction == actionBySecondEdgeRightAngle)
+        {
+            emit ToggleAngleType(m_id, PieceNodeAngle::BySecondEdgeRightAngle);
         }
     }
 }

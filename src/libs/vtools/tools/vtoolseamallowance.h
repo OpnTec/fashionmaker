@@ -166,6 +166,7 @@ private slots:
     void ToggleForceFlipping(bool checked);
     void DeleteFromMenu();
     void ToggleExcludeState(quint32 id);
+    void ToggleNodePointAngleType(quint32 id, PieceNodeAngle type);
 
 private:
     Q_DISABLE_COPY(VToolSeamAllowance)
