@@ -471,10 +471,10 @@ QT_WARNING_DISABLE_GCC("-Wswitch-default")
                                                      localWidth);
                     case PieceNodeAngle::ByFirstEdgeRightAngle:
                         return AngleByFirstRightAngle(p1Line1, p2Line1, bigLine1.p1(), CrosPoint, bigLine2.p2(),
-                                                      localWidth);
+                                                      p2Line1.GetSABefore(width), localWidth);
                     case PieceNodeAngle::BySecondEdgeRightAngle:
                         return AngleBySecondRightAngle(p2Line1, p1Line2, bigLine1.p1(), CrosPoint, bigLine2.p2(),
-                                                       localWidth);
+                                                       p2Line1.GetSAAfter(width), localWidth);
                 }
 QT_WARNING_POP
             }
@@ -705,77 +705,86 @@ QVector<QPointF> VAbstractPiece::AngleBySecondSymmetry(const QPointF &p2, const 
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QVector<QPointF> VAbstractPiece::AngleByFirstRightAngle(const QPointF &p1, const QPointF &p2,
-                                                        const QPointF &sp1, const QPointF &sp2, const QPointF &sp3,
-                                                        qreal width)
+QVector<QPointF> VAbstractPiece::AngleByFirstRightAngle(QPointF p1, QPointF p2, QPointF sp1, QPointF sp2, QPointF sp3,
+                                                        qreal width, qreal localWidth)
 {
-    QVector<QPointF> points;
-
-    QLineF edge1(p2, p1);
-    edge1.setAngle(edge1.angle()-90);
+    QLineF edge(p1, p2);
 
     QPointF px;
-    QLineF::IntersectType type = edge1.intersect(QLineF(sp1, sp2), &px);
+    QLineF::IntersectType type = edge.intersect(QLineF(sp2, sp3), &px);
     if (type == QLineF::NoIntersection)
     {
-        return AngleByLength(p2, sp1, sp2, sp3, width);
+        return AngleByLength(p2, sp1, sp2, sp3, localWidth);
     }
 
-    if (QLineF(p2, px).length() > width*maxL)
-    {
-        return AngleByLength(p2, sp1, sp2, sp3, width);
-    }
-    points.append(px);
+    QLineF seam(px, p1);
+    seam.setAngle(seam.angle()-90);
+    seam.setLength(width);
 
-    type = edge1.intersect(QLineF(sp2, sp3), &px);
-    if (type == QLineF::NoIntersection)
-    {
-        return AngleByLength(p2, sp1, sp2, sp3, width);
-    }
+    QLineF spLine1(sp2, sp1);
+    QLineF spLine2(sp2, sp3);
 
-    if (QLineF(p2, px).length() > width*maxL)
+    QVector<QPointF> points;
+    points.append(seam.p2());
+
+    if (spLine1.angleTo(spLine2) <= 90)
     {
-        return AngleByLength(p2, sp1, sp2, sp3, width);
+       points.append(seam.p1());
     }
-    points.append(px);
+    else
+    {
+        QLineF loopLine(px, sp2);
+        const qreal length = loopLine.length()*0.98;
+        loopLine.setLength(length);
+
+        QLineF tmp(seam.p2(), seam.p1());
+        tmp.setLength(tmp.length()+length);
+
+        points.append(tmp.p2());
+        points.append(loopLine.p2());
+    }
 
     return points;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QVector<QPointF> VAbstractPiece::AngleBySecondRightAngle(const QPointF &p2, const QPointF &p3,
-                                                         const QPointF &sp1, const QPointF &sp2, const QPointF &sp3,
-                                                         qreal width)
+QVector<QPointF> VAbstractPiece::AngleBySecondRightAngle(QPointF p2, QPointF p3, QPointF sp1, QPointF sp2, QPointF sp3,
+                                                         qreal width, qreal localWidth)
 {
-    QVector<QPointF> points;
-
-    QLineF edge2(p2, p3);
-    edge2.setAngle(edge2.angle()+90);
+    QLineF edge(p2, p3);
 
     QPointF px;
-    QLineF::IntersectType type = edge2.intersect(QLineF(sp1, sp2), &px);
+    QLineF::IntersectType type = edge.intersect(QLineF(sp1, sp2), &px);
     if (type == QLineF::NoIntersection)
     {
-        return AngleByLength(p2, sp1, sp2, sp3, width);
+        return AngleByLength(p2, sp1, sp2, sp3, localWidth);
     }
 
-    if (QLineF(p2, px).length() > width*maxL)
-    {
-        return AngleByLength(p2, sp1, sp2, sp3, width);
-    }
-    points.append(px);
+    QLineF seam(px, p2);
+    seam.setAngle(seam.angle()+90);
+    seam.setLength(width);
 
-    type = edge2.intersect(QLineF(sp2, sp3), &px);
-    if (type == QLineF::NoIntersection)
+    QLineF spLine1(sp2, sp1);
+    QLineF spLine2(sp2, sp3);
+
+    QVector<QPointF> points;
+    if (spLine1.angleTo(spLine2) <= 90)
     {
-        return AngleByLength(p2, sp1, sp2, sp3, width);
+        points.append(seam.p1());
+    }
+    else
+    {
+        QLineF loopLine(px, sp2);
+        const qreal length = loopLine.length()*0.98;
+        loopLine.setLength(length);
+        points.append(loopLine.p2());
+
+        QLineF tmp(seam.p2(), seam.p1());
+        tmp.setLength(tmp.length() + length);
+        points.append(tmp.p2());
     }
 
-    if (QLineF(p2, px).length() > width*maxL)
-    {
-        return AngleByLength(p2, sp1, sp2, sp3, width);
-    }
-    points.append(px);
+    points.append(seam.p2());
 
     return points;
 }

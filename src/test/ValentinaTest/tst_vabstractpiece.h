@@ -49,6 +49,8 @@ private slots:
     void PathLoopsCase() const;
     void BrokenDetailEquidistant_data() const;
     void BrokenDetailEquidistant() const;
+    void EquidistantAngleType_data() const;
+    void EquidistantAngleType() const;
     void CorrectEquidistantPoints_data() const;
     void CorrectEquidistantPoints() const;
     void TestCorrectEquidistantPoints_data();

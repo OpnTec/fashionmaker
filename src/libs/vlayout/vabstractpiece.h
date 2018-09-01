@@ -220,12 +220,10 @@ private:
     static QVector<QPointF> AngleBySecondSymmetry(const QPointF &p2, const QPointF &p3,
                                                   const QPointF &sp1, const QPointF &sp2, const QPointF &sp3,
                                                   qreal width);
-    static QVector<QPointF> AngleByFirstRightAngle(const QPointF &p1, const QPointF &p2,
-                                                   const QPointF &sp1, const QPointF &sp2, const QPointF &sp3,
-                                                   qreal width);
-    static QVector<QPointF> AngleBySecondRightAngle(const QPointF &p2, const QPointF &p3,
-                                                    const QPointF &sp1, const QPointF &sp2, const QPointF &sp3,
-                                                    qreal width);
+    static QVector<QPointF> AngleByFirstRightAngle(QPointF p1, QPointF p2, QPointF sp1, QPointF sp2, QPointF sp3,
+                                                   qreal width, qreal localWidth);
+    static QVector<QPointF> AngleBySecondRightAngle(QPointF p2, QPointF p3, QPointF sp1, QPointF sp2, QPointF sp3,
+                                                    qreal width, qreal localWidth);
     static QLineF           ParallelLine(const QPointF &p1, const QPointF &p2, qreal width);
     static QPointF          SingleParallelPoint(const QPointF &p1, const QPointF &p2, qreal angle, qreal width);
     static QLineF           BisectorLine(const QPointF &p1, const QPointF &p2, const QPointF &p3);

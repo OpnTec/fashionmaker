@@ -102,6 +102,7 @@
 - [#805] Invalid regular expression for validation layout output filename mask.
 - [#823] SVG Export - seam and cutting line of one piece missing.
 - Added submenu to quick access to piece node point angle type.
+- [#808] Fix broken seam allowance angle type.
 
 # Version 0.5.0 May 9, 2017
 - [#581] User can now filter input lists by keyword in function wizard.
