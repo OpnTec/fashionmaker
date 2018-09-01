@@ -162,3 +162,5 @@ $RECYCLE.BIN/
 
 # Understand IDE file
 *.udb
+
+__pycache__
