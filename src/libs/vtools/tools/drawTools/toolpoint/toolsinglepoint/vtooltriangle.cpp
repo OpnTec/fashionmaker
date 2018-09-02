@@ -144,7 +144,7 @@ VToolTriangle* VToolTriangle::Create(VToolTriangleInitData initData)
 
     if (not success)
     {
-        const QString errorMsg = tr("Error calculating point '%1'. Point of intersection cannot be finded")
+        const QString errorMsg = tr("Error calculating point '%1'. Point of intersection cannot be found")
                       .arg(initData.name);
         qApp->IsPedantic() ? throw VExceptionObjectError(errorMsg) : qWarning() << errorMsg;
     }
