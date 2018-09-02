@@ -379,27 +379,45 @@ void VNodePoint::contextMenuEvent(QGraphicsSceneContextMenuEvent *event)
         }
         else if (selectedAction == actionByLength)
         {
-            emit ToggleAngleType(m_id, PieceNodeAngle::ByLength);
+            if (curType != PieceNodeAngle::ByLength)
+            {
+                emit ToggleAngleType(m_id, PieceNodeAngle::ByLength);
+            }
         }
         else if (selectedAction == actionByPointsIntersection)
         {
-            emit ToggleAngleType(m_id, PieceNodeAngle::ByPointsIntersection);
+            if (curType != PieceNodeAngle::ByPointsIntersection)
+            {
+                emit ToggleAngleType(m_id, PieceNodeAngle::ByPointsIntersection);
+            }
         }
         else if (selectedAction == actionByFirstEdgeSymmetry)
         {
-            emit ToggleAngleType(m_id, PieceNodeAngle::ByFirstEdgeSymmetry);
+            if (curType != PieceNodeAngle::ByFirstEdgeSymmetry)
+            {
+                emit ToggleAngleType(m_id, PieceNodeAngle::ByFirstEdgeSymmetry);
+            }
         }
         else if (selectedAction == actionBySecondEdgeSymmetry)
         {
-            emit ToggleAngleType(m_id, PieceNodeAngle::BySecondEdgeSymmetry);
+            if (curType != PieceNodeAngle::BySecondEdgeSymmetry)
+            {
+                emit ToggleAngleType(m_id, PieceNodeAngle::BySecondEdgeSymmetry);
+            }
         }
         else if (selectedAction == actionByFirstEdgeRightAngle)
         {
-            emit ToggleAngleType(m_id, PieceNodeAngle::ByFirstEdgeRightAngle);
+            if (curType != PieceNodeAngle::ByFirstEdgeRightAngle)
+            {
+                emit ToggleAngleType(m_id, PieceNodeAngle::ByFirstEdgeRightAngle);
+            }
         }
         else if (selectedAction == actionBySecondEdgeRightAngle)
         {
-            emit ToggleAngleType(m_id, PieceNodeAngle::BySecondEdgeRightAngle);
+            if (curType != PieceNodeAngle::BySecondEdgeRightAngle)
+            {
+                emit ToggleAngleType(m_id, PieceNodeAngle::BySecondEdgeRightAngle);
+            }
         }
     }
 }
