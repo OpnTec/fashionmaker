@@ -1,6 +1,5 @@
 [Desktop Entry]
 Type=Application
-Encoding=UTF-8
 Name=Valentina
 Exec=valentina %F
 Version=1.0
@@ -11,4 +10,4 @@ Icon=valentina
 Terminal=false
 MimeType=application/x-valentina-pattern;
 Categories=Graphics;VectorGraphics;2DGraphics;Qt;Engineering;
-Name[uk]=valentina.desktop
+TryExec=valentina
