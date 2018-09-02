@@ -1,4 +1,6 @@
-<?xml version="1.0" ?><!DOCTYPE TS><TS language="nl" version="2.1">
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE TS>
+<TS version="2.1" language="nl">
 <context>
     <name>AddDet</name>
     <message>
@@ -17,7 +19,7 @@
     <name>AddItemToGroup</name>
     <message>
         <source>Add item to group</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -1886,19 +1888,19 @@
     </message>
     <message>
         <source>Move on top</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Move up</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Move down</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Move on bottom</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -2051,10 +2053,6 @@
 <context>
     <name>DialogEllipticalArc</name>
     <message>
-        <source>Dialog</source>
-        <translation type="unfinished"/>
-    </message>
-    <message>
         <source>Radius1:</source>
         <translation>Straal1:</translation>
     </message>
@@ -2113,10 +2111,6 @@
     <message>
         <source>Radius can&apos;t be negative</source>
         <translation>Straal mag niet negatief zijn</translation>
-    </message>
-    <message>
-        <source>Angles equal</source>
-        <translation type="unfinished"/>
     </message>
     <message>
         <source>Edit radius1</source>
@@ -2299,7 +2293,7 @@
     <message>
         <source>Global</source>
         <comment>Options</comment>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -2944,6 +2938,10 @@
     <message>
         <source>Uknown</source>
         <translation>Onbekend</translation>
+    </message>
+    <message>
+        <source>The list of pieces is empty. Please, first create at least one piece for current pattern piece.</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -3592,7 +3590,7 @@ Toch de instellingen aanpassen?</translation>
     </message>
     <message>
         <source>Search:</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Search</source>
@@ -3600,7 +3598,7 @@ Toch de instellingen aanpassen?</translation>
     </message>
     <message>
         <source>Select measurement</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -4415,10 +4413,6 @@ Toch de instellingen aanpassen?</translation>
         <translation>Pasmarkering:</translation>
     </message>
     <message>
-        <source>Lines</source>
-        <translation type="unfinished"/>
-    </message>
-    <message>
         <source>One line</source>
         <translation>Een lijn</translation>
     </message>
@@ -4480,7 +4474,7 @@ Toch de instellingen aanpassen?</translation>
     </message>
     <message>
         <source>The path is a cut contour</source>
-        <translation>Het pad is een gesneden lijn</translation>
+        <translation type="vanished">Het pad is een gesneden lijn</translation>
     </message>
     <message>
         <source>Cut on fabric</source>
@@ -4504,63 +4498,75 @@ Toch de instellingen aanpassen?</translation>
     </message>
     <message>
         <source>Control</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Visible</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Create a formula that regulates visibility. Values different from &quot;0&quot; make a path visible.</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>1</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">1</translation>
     </message>
     <message>
         <source>Control visibility</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Intersection 2</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Intersection 2 (only left)</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Intersection 2 (only right)</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Check uniqueness</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Move on top</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Move up</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Move down</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Move on bottom</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Continue the first point to the cutting contour</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Continue the last point to the cutting contour</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>The path is a cut contour. Use to control export to DXF-AAMA</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>The list of pieces is empty. Please, first create at least one piece for current pattern piece.</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>DialogPin</name>
-    <message>
-        <source>Dialog</source>
-        <translation type="unfinished"/>
-    </message>
     <message>
         <source>Pin tool</source>
         <translation>Pin gereedschap</translation>
@@ -4577,12 +4583,16 @@ Toch de instellingen aanpassen?</translation>
         <source>Pin</source>
         <translation>Pin</translation>
     </message>
+    <message>
+        <source>The list of pieces is empty. Please, first create at least one piece for current pattern piece.</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>DialogPlaceLabel</name>
     <message>
         <source>Dialog</source>
-        <translation>Dialoog</translation>
+        <translation type="vanished">Dialoog</translation>
     </message>
     <message>
         <source>Width:</source>
@@ -4654,7 +4664,7 @@ Toch de instellingen aanpassen?</translation>
     </message>
     <message>
         <source>Doubletree</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Corner</source>
@@ -4671,6 +4681,34 @@ Toch de instellingen aanpassen?</translation>
     <message>
         <source>Button</source>
         <translation>Knop</translation>
+    </message>
+    <message>
+        <source>Place label</source>
+        <translation type="unfinished">Plaats label</translation>
+    </message>
+    <message>
+        <source>Control</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Visible</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Create a formula that regulates visibility. Values different from &quot;0&quot; make a path visible.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>1</source>
+        <translation type="unfinished">1</translation>
+    </message>
+    <message>
+        <source>The list of pieces is empty. Please, first create at least one piece for current pattern piece.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Control visibility</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -5182,7 +5220,10 @@ Toch de instellingen aanpassen?</translation>
     </message>
     <message numerus="yes">
         <source>Followed %n option(s) require restart to take effect: %1.</source>
-        <translation type="unfinished"><numerusform></numerusform><numerusform></numerusform></translation>
+        <translation type="unfinished">
+            <numerusform></numerusform>
+            <numerusform></numerusform>
+        </translation>
     </message>
 </context>
 <context>
@@ -5323,10 +5364,6 @@ Toch de instellingen aanpassen?</translation>
         <translation>Papier formaat</translation>
     </message>
     <message>
-        <source>...</source>
-        <translation type="unfinished"/>
-    </message>
-    <message>
         <source>Browse…</source>
         <translation>Doorbladeren…</translation>
     </message>
@@ -5425,156 +5462,24 @@ Toch de instellingen aanpassen?</translation>
 <context>
     <name>DialogSeamAllowance</name>
     <message>
-        <source>Seam allowance tool</source>
-        <translation type="unfinished"/>
-    </message>
-    <message>
-        <source>All objects in path should follow in clockwise direction.</source>
-        <translation type="unfinished"/>
-    </message>
-    <message>
-        <source>Forbid piece be mirrored in a layout.</source>
-        <translation type="unfinished"/>
-    </message>
-    <message>
-        <source>Forbid flipping</source>
-        <translation type="unfinished"/>
-    </message>
-    <message>
         <source>Ready!</source>
         <translation>Klaar!</translation>
-    </message>
-    <message>
-        <source>Seam allowance</source>
-        <translation type="unfinished"/>
-    </message>
-    <message>
-        <source>Width:</source>
-        <translation type="unfinished"/>
-    </message>
-    <message>
-        <source>Formula wizard</source>
-        <translation type="unfinished"/>
     </message>
     <message>
         <source>Value</source>
         <translation>Waarde</translation>
     </message>
     <message>
-        <source>Calculation</source>
-        <translation type="unfinished"/>
-    </message>
-    <message>
-        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished"/>
-    </message>
-    <message>
-        <source>Default</source>
-        <translation type="unfinished"/>
-    </message>
-    <message>
-        <source>Angle:</source>
-        <translation type="unfinished"/>
-    </message>
-    <message>
-        <source>Custom</source>
-        <translation type="unfinished"/>
-    </message>
-    <message>
-        <source>Pattern piece data</source>
-        <translation type="unfinished"/>
-    </message>
-    <message>
-        <source>Letter:</source>
-        <translation type="unfinished"/>
-    </message>
-    <message>
-        <source>Letter of pattern piece</source>
-        <translation type="unfinished"/>
-    </message>
-    <message>
-        <source>Name of detail:</source>
-        <translation type="unfinished"/>
-    </message>
-    <message>
         <source>Detail</source>
         <translation>Detail</translation>
-    </message>
-    <message>
-        <source>Name can&apos;t be empty</source>
-        <translation type="unfinished"/>
-    </message>
-    <message>
-        <source>Material/Cut number/Placement</source>
-        <translation type="unfinished"/>
-    </message>
-    <message>
-        <source>Cut number:</source>
-        <translation type="unfinished"/>
-    </message>
-    <message>
-        <source>Material type:</source>
-        <translation type="unfinished"/>
-    </message>
-    <message>
-        <source>You can choose one of the predefined materials or enter a new one</source>
-        <translation type="unfinished"/>
-    </message>
-    <message>
-        <source>Placement:</source>
-        <translation type="unfinished"/>
-    </message>
-    <message>
-        <source>Add</source>
-        <translation type="unfinished"/>
-    </message>
-    <message>
-        <source>Cancel</source>
-        <translation type="unfinished"/>
-    </message>
-    <message>
-        <source>Remove</source>
-        <translation type="unfinished"/>
-    </message>
-    <message>
-        <source>Detail label visible</source>
-        <translation type="unfinished"/>
-    </message>
-    <message>
-        <source>Pattern label visible</source>
-        <translation type="unfinished"/>
     </message>
     <message>
         <source>Grainline</source>
         <translation>Recht van draad</translation>
     </message>
     <message>
-        <source>Grainline visible</source>
-        <translation type="unfinished"/>
-    </message>
-    <message>
-        <source>Rotation:</source>
-        <translation type="unfinished"/>
-    </message>
-    <message>
-        <source>Length:</source>
-        <translation type="unfinished"/>
-    </message>
-    <message>
-        <source>Arrows:</source>
-        <translation type="unfinished"/>
-    </message>
-    <message>
         <source>Select main path objects clockwise, &lt;b&gt;Shift&lt;/b&gt; - reverse direction curve, &lt;b&gt;Enter&lt;/b&gt; - finish creation</source>
         <translation>Selecteer hoofdpad-objecten met de klok mee,&lt;b&gt;Shift&lt;/b&gt; - draai richting kromming om, &lt;b&gt;Enter&lt;/b&gt; - einde creatie</translation>
-    </message>
-    <message>
-        <source>Cut %1 of %2%3</source>
-        <translation type="unfinished"/>
-    </message>
-    <message>
-        <source>on Fold</source>
-        <translation type="unfinished"/>
     </message>
     <message>
         <source>Reverse</source>
@@ -5603,10 +5508,6 @@ Toch de instellingen aanpassen?</translation>
     <message>
         <source>Parser error: %1</source>
         <translation>Verwerkingsfout: %1</translation>
-    </message>
-    <message>
-        <source>Update</source>
-        <translation type="unfinished"/>
     </message>
     <message>
         <source>Current seam allowance</source>
@@ -5653,14 +5554,6 @@ Toch de instellingen aanpassen?</translation>
         <translation>aangepaste naadtoeslag</translation>
     </message>
     <message>
-        <source>None</source>
-        <translation type="unfinished"/>
-    </message>
-    <message>
-        <source>Cut on fold</source>
-        <translation type="unfinished"/>
-    </message>
-    <message>
         <source>Both</source>
         <translation>Beide</translation>
     </message>
@@ -5683,10 +5576,6 @@ Toch de instellingen aanpassen?</translation>
     <message>
         <source>Labels</source>
         <translation>Labels</translation>
-    </message>
-    <message>
-        <source>Height:</source>
-        <translation type="unfinished"/>
     </message>
     <message>
         <source>Error</source>
@@ -5730,7 +5619,7 @@ Toch de instellingen aanpassen?</translation>
     </message>
     <message>
         <source>To open all detail&apos;s features complete creating the main path.</source>
-        <translation>Om alle functie details te openen maak het hoofdpad volledig af.</translation>
+        <translation type="vanished">Om alle functie details te openen maak het hoofdpad volledig af.</translation>
     </message>
     <message>
         <source>Workpiece tool</source>
@@ -5754,7 +5643,7 @@ Toch de instellingen aanpassen?</translation>
     </message>
     <message>
         <source>Doubletree</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Corner</source>
@@ -5778,7 +5667,11 @@ Toch de instellingen aanpassen?</translation>
     </message>
     <message>
         <source>Check uniqueness</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>To open all detail&apos;s features complete creating the main path. Please, press OK.</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -6587,7 +6480,7 @@ Toch de instellingen aanpassen?</translation>
     </message>
     <message>
         <source>%1 update is available!</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -7172,7 +7065,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Wrong units.</source>
-        <translation>Verkeerde eenheden.</translation>
+        <translation type="vanished">Verkeerde eenheden.</translation>
     </message>
     <message>
         <source>Application doesn&apos;t support standard table with inches.</source>
@@ -7485,7 +7378,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Measurement file doesn&apos;t include all required measurements.</source>
-        <translation>Maten bestand bevat niet alle benodigde maten.</translation>
+        <translation type="vanished">Maten bestand bevat niet alle benodigde maten.</translation>
     </message>
     <message>
         <source>Please, additionaly provide: %1</source>
@@ -7965,7 +7858,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Application doesn&apos;t support multisize table with inches.</source>
-        <translation>Applicatie ondersteunt niet het meerdere maten tabel met inches.</translation>
+        <translation type="vanished">Applicatie ondersteunt niet het meerdere maten tabel met inches.</translation>
     </message>
     <message>
         <source>You don&apos;t have enough details to export. Please, include at least one detail in layout.</source>
@@ -7989,7 +7882,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Please, additionally provide: %1</source>
-        <translation>Alstublieft, verstrek extra: %1</translation>
+        <translation type="vanished">Alstublieft, verstrek extra: %1</translation>
     </message>
     <message>
         <source>Label template editor</source>
@@ -8077,11 +7970,11 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Use these tools to create a pattern</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Scale:</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Create new pattern piece to start working.</source>
@@ -8221,6 +8114,34 @@ Do you want to save your changes?</source>
     <message>
         <source>Description</source>
         <translation>Beschrijving</translation>
+    </message>
+    <message>
+        <source>Measurement file has unknown format.</source>
+        <translation type="unfinished">Maten bestand heeft een onbekende indeling.</translation>
+    </message>
+    <message>
+        <source>Measurement file contains invalid known measurement(s).</source>
+        <translation type="unfinished">Maten bestand bevat ongeldige bekende ma(a)t(en).</translation>
+    </message>
+    <message>
+        <source>Wrong units.</source>
+        <translation type="unfinished">Verkeerde eenheden.</translation>
+    </message>
+    <message>
+        <source>Application doesn&apos;t support multisize table with inches.</source>
+        <translation type="unfinished">Applicatie ondersteunt niet het meerdere maten tabel met inches.</translation>
+    </message>
+    <message>
+        <source>File error.</source>
+        <translation type="unfinished">Bestandsfout.</translation>
+    </message>
+    <message>
+        <source>Measurement file doesn&apos;t include all required measurements.</source>
+        <translation type="unfinished">Maten bestand bevat niet alle benodigde maten.</translation>
+    </message>
+    <message>
+        <source>Please, additionally provide: %1</source>
+        <translation type="unfinished">Alstublieft, verstrek extra: %1</translation>
     </message>
 </context>
 <context>
@@ -8441,14 +8362,6 @@ Do you want to save your changes?</source>
         <translation>Boek:</translation>
     </message>
     <message>
-        <source>Send crash reports</source>
-        <translation type="unfinished"/>
-    </message>
-    <message>
-        <source>Send crash reports (recommended)</source>
-        <translation type="unfinished"/>
-    </message>
-    <message>
         <source>Pattern editing</source>
         <translation>Patroon verandering</translation>
     </message>
@@ -8467,14 +8380,6 @@ Do you want to save your changes?</source>
     <message>
         <source>With OS options</source>
         <translation>Met OS optiies</translation>
-    </message>
-    <message>
-        <source>After each crash Valentina collects information that may help us fix the problem. We do not collect any personal information. Find more about what %1kind of information%2 we collect.</source>
-        <translation type="unfinished"/>
-    </message>
-    <message>
-        <source>The Default unit has been updated and will be used as the default for the next pattern you create.</source>
-        <translation type="unfinished"/>
     </message>
     <message>
         <source>Centimeters</source>
@@ -8498,7 +8403,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>default unit</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>General</source>
@@ -8506,62 +8411,62 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Double click calls Zoom fit best for current pattern piece</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Scrolling</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Animation</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Duration:</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Scrolling animation duration</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>ms</source>
         <comment>milliseconds</comment>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Update interval:</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Time in milliseconds between each animation update</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Mouse scale</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Sensor:</source>
         <comment>sensor mouse</comment>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Scale scrolling sensitivity for mouse with sensor</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Wheel:</source>
         <comment>mouse wheel</comment>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Scale scrolling sensitivity for mouse with wheel</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Acceleration:</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -8618,14 +8523,6 @@ Do you want to save your changes?</source>
 <context>
     <name>PreferencesPatternPage</name>
     <message>
-        <source>User</source>
-        <translation type="unfinished"/>
-    </message>
-    <message>
-        <source>User name:</source>
-        <translation type="unfinished"/>
-    </message>
-    <message>
         <source>Graphical output</source>
         <translation>Grafische voltooiing</translation>
     </message>
@@ -8642,14 +8539,6 @@ Do you want to save your changes?</source>
         <translation>Tel stappen (0 - geen limiet):</translation>
     </message>
     <message>
-        <source>User defined materials</source>
-        <translation type="unfinished"/>
-    </message>
-    <message>
-        <source>Delete all</source>
-        <translation type="unfinished"/>
-    </message>
-    <message>
         <source>Workpiece</source>
         <translation>Werkstuk</translation>
     </message>
@@ -8664,10 +8553,6 @@ Do you want to save your changes?</source>
     <message>
         <source>Show second passmark on seam line</source>
         <translation>Toon tweede pasmarkering op de naadlijn</translation>
-    </message>
-    <message>
-        <source>All user defined materials have been deleted!</source>
-        <translation type="unfinished"/>
     </message>
     <message>
         <source>By default forbid flipping for all new created workpieces</source>
@@ -8743,11 +8628,11 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Bold line width</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Line width:</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Millimiters</source>
@@ -8760,19 +8645,19 @@ Do you want to save your changes?</source>
     <message>
         <source>Use OpenGL to render a scene.
 This option will take an affect after restart.</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Use OpenGL render</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>antialiasing</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>scene render</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -8938,7 +8823,19 @@ This option will take an affect after restart.</source>
     </message>
     <message>
         <source>Visibility trigger contains error and will be ignored</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>User material number %1 was not defined in this pattern.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Error in internal path &apos;%1&apos;. There is no intersection of first point with cutting countour</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Error in internal path &apos;%1&apos;. There is no intersection of last point with cutting countour</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -9156,7 +9053,7 @@ This option will take an affect after restart.</source>
     <name>RemoveItemFromGroup</name>
     <message>
         <source>Remove item from group</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -9182,10 +9079,6 @@ This option will take an affect after restart.</source>
 </context>
 <context>
     <name>SavePieceOptions</name>
-    <message>
-        <source>save detail option</source>
-        <translation type="unfinished"/>
-    </message>
     <message>
         <source>save detail options</source>
         <translation>sla details optie op</translation>
@@ -9895,63 +9788,59 @@ Wil je deze veranderingen opslaan?</translation>
     </message>
     <message>
         <source>Import from CSV</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Measurement name in is empty.</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Merasurement &apos;%1&apos; doesn&apos;t match regex pattern.</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Merasurement &apos;%1&apos; already used in file.</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Measurement &apos;%1&apos; is not one of known measurements.</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Individual measurements require at least 2 columns.</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Error in row %1.</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Multisize measurements require at least 4 columns.</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Cannot convert base size value to double in column 2.</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Cannot convert height increase value to double in column 3.</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Cannot convert size increase value to double in column 4.</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Imported file must not contain the same name twice.</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Error in row %1. Measurement name is empty.</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>TabGrainline</name>
-    <message>
-        <source>Form</source>
-        <translation type="unfinished"/>
-    </message>
     <message>
         <source>Grainline visible</source>
         <translation>Recht van draadlijn zichtbaar</translation>
@@ -10000,10 +9889,6 @@ Wil je deze veranderingen opslaan?</translation>
 <context>
     <name>TabLabels</name>
     <message>
-        <source>Form</source>
-        <translation type="unfinished"/>
-    </message>
-    <message>
         <source>Piece label data</source>
         <translation>Gegevens op label</translation>
     </message>
@@ -10016,48 +9901,8 @@ Wil je deze veranderingen opslaan?</translation>
         <translation>Letter van patroondeel</translation>
     </message>
     <message>
-        <source>Name of detail:</source>
-        <translation type="unfinished"/>
-    </message>
-    <message>
-        <source>Detail</source>
-        <translation type="unfinished"/>
-    </message>
-    <message>
-        <source>Name can&apos;t be empty</source>
-        <translation type="unfinished"/>
-    </message>
-    <message>
-        <source>Material/Cut number/Placement</source>
-        <translation type="unfinished"/>
-    </message>
-    <message>
-        <source>Cut number:</source>
-        <translation type="unfinished"/>
-    </message>
-    <message>
-        <source>Material type:</source>
-        <translation type="unfinished"/>
-    </message>
-    <message>
-        <source>You can choose one of the predefined materials or enter a new one</source>
-        <translation type="unfinished"/>
-    </message>
-    <message>
         <source>Placement:</source>
         <translation>Positie:</translation>
-    </message>
-    <message>
-        <source>Add</source>
-        <translation type="unfinished"/>
-    </message>
-    <message>
-        <source>Cancel</source>
-        <translation type="unfinished"/>
-    </message>
-    <message>
-        <source>Remove</source>
-        <translation type="unfinished"/>
     </message>
     <message>
         <source>Labels</source>
@@ -10157,30 +10002,22 @@ Wil je deze veranderingen opslaan?</translation>
     </message>
     <message>
         <source>Edit piece label template</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Options to control position a detail label. &lt;b&gt;Not available if a detail label template is empty&lt;/b&gt;.</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Options to control position a pattern label. &lt;b&gt;Not available if a pattern label template is empty&lt;/b&gt;.</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>TabPassmarks</name>
     <message>
-        <source>Form</source>
-        <translation type="unfinished"/>
-    </message>
-    <message>
         <source>Passmark:</source>
         <translation>Pasmarkering:</translation>
-    </message>
-    <message>
-        <source>Lines</source>
-        <translation type="unfinished"/>
     </message>
     <message>
         <source>One line</source>
@@ -10252,23 +10089,19 @@ Wil je deze veranderingen opslaan?</translation>
     </message>
     <message>
         <source>Intersection 2</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Intersection 2 (only left)</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Intersection 2 (only right)</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>TabPaths</name>
-    <message>
-        <source>Form</source>
-        <translation type="unfinished"/>
-    </message>
     <message>
         <source>Main path</source>
         <translation>Hoofdpad</translation>
@@ -10395,34 +10228,27 @@ Wil je deze veranderingen opslaan?</translation>
     </message>
     <message>
         <source>Force piece to be always flipped in a layout.</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Force flipping</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Move on top</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Move up</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Move down</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Move on bottom</source>
-        <translation type="unfinished"/>
-    </message>
-</context>
-<context>
-    <name>TabPins</name>
-    <message>
-        <source>Form</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -10663,17 +10489,10 @@ Wil je deze veranderingen opslaan?</translation>
     </message>
 </context>
 <context>
-    <name>TogglePieceForbidFlipping</name>
+    <name>TogglePieceForceForbidFlipping</name>
     <message>
-        <source>forbid flipping</source>
-        <translation type="unfinished"/>
-    </message>
-</context>
-<context>
-    <name>TogglePieceForceFlipping</name>
-    <message>
-        <source>force flipping</source>
-        <translation type="unfinished"/>
+        <source>piece flipping</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -10681,6 +10500,41 @@ Wil je deze veranderingen opslaan?</translation>
     <message>
         <source>detail in layout list</source>
         <translation>detail in de opmaak-lijst</translation>
+    </message>
+</context>
+<context>
+    <name>Tool</name>
+    <message>
+        <source>First point</source>
+        <translation type="unfinished">Eerste punt</translation>
+    </message>
+    <message>
+        <source>Second point</source>
+        <translation type="unfinished">Tweede punt</translation>
+    </message>
+    <message>
+        <source>Highest point</source>
+        <translation type="unfinished">Hoogste punt</translation>
+    </message>
+    <message>
+        <source>Lowest point</source>
+        <translation type="unfinished">Laagste punt</translation>
+    </message>
+    <message>
+        <source>Leftmost point</source>
+        <translation type="unfinished">Uiterst linkerpunt</translation>
+    </message>
+    <message>
+        <source>Rightmost point</source>
+        <translation type="unfinished">Uiterst rechterpunt</translation>
+    </message>
+    <message>
+        <source>Vertical axis</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Horizontal axis</source>
+        <translation type="unfinished">Horizontale as</translation>
     </message>
 </context>
 <context>
@@ -10754,11 +10608,11 @@ Wil je deze veranderingen opslaan?</translation>
     </message>
     <message>
         <source>Invalid version. Minimum supported format version is %1</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Invalid version. Maximum supported format version is %1</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -11312,11 +11166,11 @@ Wil je deze veranderingen opslaan?</translation>
     </message>
     <message>
         <source>Export only details that match a piece name regex.</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>The name regex</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Export to csv with header. By default disabled.</source>
@@ -11324,107 +11178,127 @@ Wil je deze veranderingen opslaan?</translation>
     </message>
     <message>
         <source>Specify codec that will be used to save data. List of supported codecs provided by Qt. Default value depend from system. On Windows, the codec will be based on a system locale. On Unix systems, the codec will might fall back to using the iconv library if no builtin codec for the locale can be found. Valid values for this installation:</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Codec name</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Specify csv separator character. Default value is &apos;%1&apos;. Valid characters:</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Separator character</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Calling this command enable exporting final measurements. Specify path to csv file with final measurements. The path must contain path to directory and name of file. It can be absolute or relatetive. In case of relative path will be used current working directory to calc a destination path.</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Path to csv file</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Number corresponding to layout page template (default = 0, export mode):</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Ignore printer margins (export mode). Use if need full paper space. In case of later printing you must account for the margins himself.</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Number corresponding to tiled pdf page template (default = 0, export mode with tiled pdf format):</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Tiled page left margin in current units like 3.0 (export mode). If not set will be used default value 1 cm.</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>The left margin</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Tiled page right margin in current units like 3.0 (export mode). If not set will be used default value 1 cm.</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>The right margin</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Tiled page top margin in current units like 3.0 (export mode). If not set will be used value default value 1 cm.</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>The top margin</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Tiled page bottom margin in current units like 3.0 (export mode). If not set will be used value default value 1 cm.</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>The bottom margin</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Set tiled page orienatation to landscape (export mode). Default value if not set portrait.</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Cannot use pageformat and page explicit size together.</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Tiled left margin must be used together with page units.</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Tiled right margin must be used together with page units.</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Tiled top margin must be used together with page units.</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Tiled bottom margin must be used together with page units.</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Page measure units (export mode). Valid values: %1.</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Set size value for pattern file, that was opened with multisize measurements (export mode). Valid values: %1cm.</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Set height value for pattern file, that was opened with multisize measurements (export mode). Valid values: %1cm.</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Use this option to override user material defined in pattern. The value must be in form &lt;number&gt;@&lt;user matrial name&gt;. The number should be in range from 1 to %1. For example, 1@Fabric2. The key can be used multiple times. Has no effect in GUI mode.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>User material</source>
+        <translation type="unfinished">Gebruikers materiaal</translation>
+    </message>
+    <message>
+        <source>Make all parsing warnings into errors. Have effect only in console mode. Use to force Valentina to immediately terminate if a pattern contains a parsing warning.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Invalid user material &apos;%1&apos;. Separator is missing.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Invalid user material &apos;%1&apos;. Wrong material number.</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -11474,7 +11348,7 @@ Wil je deze veranderingen opslaan?</translation>
     </message>
     <message>
         <source>Can&apos;t cast object.</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -11507,13 +11381,13 @@ Wil je deze veranderingen opslaan?</translation>
         <translation type="vanished">Kan niet omzetten naar toDouble parameter</translation>
     </message>
     <message>
-        <source>Can't open file %1:
+        <source>Can&apos;t open file %1:
 %2.</source>
         <translation>kan bestand niet openen %1:
 %2.</translation>
     </message>
     <message>
-        <source>Can't open schema file %1:
+        <source>Can&apos;t open schema file %1:
 %2.</source>
         <translation>Kan schema bestand niet openen %1:
 %2.</translation>
@@ -11579,15 +11453,15 @@ Wil je deze veranderingen opslaan?</translation>
     </message>
     <message>
         <source>Show label</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Add to group</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Remove from group</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -11637,23 +11511,23 @@ Wil je deze veranderingen opslaan?</translation>
     <name>VNodePoint</name>
     <message>
         <source>Options</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Opties</translation>
     </message>
     <message>
         <source>In layout</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Show label</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Exclude</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Delete</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Forbid flipping</source>
@@ -11661,7 +11535,35 @@ Wil je deze veranderingen opslaan?</translation>
     </message>
     <message>
         <source>Force flipping</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Angle</source>
+        <translation type="unfinished">Hoek</translation>
+    </message>
+    <message>
+        <source>by length</source>
+        <translation type="unfinished">op lengte</translation>
+    </message>
+    <message>
+        <source>by points intersetions</source>
+        <translation type="unfinished">op snijpunten</translation>
+    </message>
+    <message>
+        <source>by first edge symmetry</source>
+        <translation type="unfinished">op eerste lijn symmetrie-as</translation>
+    </message>
+    <message>
+        <source>by second edge symmetry</source>
+        <translation type="unfinished">op tweede lijn symmetrie-as</translation>
+    </message>
+    <message>
+        <source>by first edge right angle</source>
+        <translation type="unfinished">op eerste lijn rechte hoek</translation>
+    </message>
+    <message>
+        <source>by second edge right angle</source>
+        <translation type="unfinished">op tweede lijn rechte hoek</translation>
     </message>
 </context>
 <context>
@@ -11934,7 +11836,7 @@ Wil je deze veranderingen opslaan?</translation>
     </message>
     <message>
         <source>Error creating or updating place lavel</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -12088,14 +11990,7 @@ Wil je deze veranderingen opslaan?</translation>
     <name>VToolCurveIntersectAxis</name>
     <message>
         <source>Error calculating point &apos;%1&apos;. There is no intersection with curve &apos;%2&apos; and axis through point &apos;%3&apos; with angle %4°</source>
-        <translation type="unfinished"/>
-    </message>
-</context>
-<context>
-    <name>VToolCut</name>
-    <message>
-        <source>Length</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -12122,7 +12017,7 @@ Wil je deze veranderingen opslaan?</translation>
     </message>
     <message>
         <source>label</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -12137,7 +12032,7 @@ Wil je deze veranderingen opslaan?</translation>
     </message>
     <message>
         <source>label</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -12152,7 +12047,7 @@ Wil je deze veranderingen opslaan?</translation>
     </message>
     <message>
         <source>label</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -12244,18 +12139,18 @@ Wil je deze veranderingen opslaan?</translation>
     <name>VToolFlippingByAxis</name>
     <message>
         <source>Origin point</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>VToolFlippingByLine</name>
     <message>
         <source>First line point</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Eerste lijnpunt</translation>
     </message>
     <message>
         <source>Second line point</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Tweede lijnpunt</translation>
     </message>
 </context>
 <context>
@@ -12292,7 +12187,7 @@ Wil je deze veranderingen opslaan?</translation>
     </message>
     <message>
         <source>Error calculating point &apos;%1&apos;. Lines (%2;%3) and (%4;%5) have no point of intersection</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -12311,7 +12206,7 @@ Wil je deze veranderingen opslaan?</translation>
     </message>
     <message>
         <source>Error calculating point &apos;%1&apos;. Line (%2;%3) doesn&apos;t have intersection with axis through point &apos;%4&apos; and angle %5°</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -12333,7 +12228,7 @@ Wil je deze veranderingen opslaan?</translation>
     <name>VToolMove</name>
     <message>
         <source>Rotation angle</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Length</source>
@@ -12349,7 +12244,7 @@ Wil je deze veranderingen opslaan?</translation>
     </message>
     <message>
         <source>Rotation origin point</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -12484,11 +12379,11 @@ Wil je deze veranderingen opslaan?</translation>
     </message>
     <message>
         <source>First point</source>
-        <translation>Eerste punt</translation>
+        <translation type="vanished">Eerste punt</translation>
     </message>
     <message>
         <source>Second point</source>
-        <translation>Tweede punt</translation>
+        <translation type="vanished">Tweede punt</translation>
     </message>
     <message>
         <source>Arc with given length</source>
@@ -12540,19 +12435,19 @@ Wil je deze veranderingen opslaan?</translation>
     </message>
     <message>
         <source>Highest point</source>
-        <translation>Hoogste punt</translation>
+        <translation type="vanished">Hoogste punt</translation>
     </message>
     <message>
         <source>Lowest point</source>
-        <translation>Laagste punt</translation>
+        <translation type="vanished">Laagste punt</translation>
     </message>
     <message>
         <source>Leftmost point</source>
-        <translation>Uiterst linkerpunt</translation>
+        <translation type="vanished">Uiterst linkerpunt</translation>
     </message>
     <message>
         <source>Rightmost point</source>
-        <translation>Uiterst rechterpunt</translation>
+        <translation type="vanished">Uiterst rechterpunt</translation>
     </message>
     <message>
         <source>Tool to make point from intersection two curves</source>
@@ -12604,11 +12499,11 @@ Wil je deze veranderingen opslaan?</translation>
     </message>
     <message>
         <source>Vertical axis</source>
-        <translation>Verticale as</translation>
+        <translation type="vanished">Verticale as</translation>
     </message>
     <message>
         <source>Horizontal axis</source>
-        <translation>Horizontale as</translation>
+        <translation type="vanished">Horizontale as</translation>
     </message>
     <message>
         <source>Tool move</source>
@@ -12891,14 +12786,14 @@ Wil je deze veranderingen opslaan?</translation>
     <name>VToolPointFromArcAndTangent</name>
     <message>
         <source>Error calculating point &apos;%1&apos;. Tangent to arc &apos;%2&apos; from point &apos;%3&apos; cannot be found</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>VToolPointFromCircleAndTangent</name>
     <message>
         <source>Error calculating point &apos;%1&apos;. Tangent to circle with center &apos;%2&apos; and radius &apos;%3&apos; from point &apos;%4&apos; cannot be found</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -12917,39 +12812,39 @@ Wil je deze veranderingen opslaan?</translation>
     </message>
     <message>
         <source>Error calculating point &apos;%1&apos;. Circle with center &apos;%2&apos; and radius &apos;%3&apos; doesn&apos;t have intersection with line (%4;%5)</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>VToolPointOfIntersectionArcs</name>
     <message>
         <source>Error calculating point &apos;%1&apos;. Arcs &apos;%2&apos; and &apos;%3&apos; have no point of intersection</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>VToolPointOfIntersectionCircles</name>
     <message>
         <source>Error calculating point &apos;%1&apos;. Circles with centers in points &apos;%2&apos; and &apos;%3&apos; have no point of intersection</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>VToolPointOfIntersectionCurves</name>
     <message>
         <source>Error calculating point &apos;%1&apos;. Curves &apos;%2&apos; and &apos;%3&apos; have no point of intersection</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>VToolRotation</name>
     <message>
         <source>Origin point</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Rotation angle</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -13008,11 +12903,11 @@ Wil je deze veranderingen opslaan?</translation>
     </message>
     <message>
         <source>apply save detail options</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>multi deletion</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Forbid flipping</source>
@@ -13020,7 +12915,7 @@ Wil je deze veranderingen opslaan?</translation>
     </message>
     <message>
         <source>Force flipping</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -13041,8 +12936,8 @@ Wil je deze veranderingen opslaan?</translation>
 <context>
     <name>VToolTriangle</name>
     <message>
-        <source>Error calculating point &apos;%1&apos;. Point of intersection cannot be finded</source>
-        <translation type="unfinished"/>
+        <source>Error calculating point &apos;%1&apos;. Point of intersection cannot be found</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -14229,36 +14124,6 @@ Wil je deze veranderingen opslaan?</translation>
         <translation>atan</translation>
     </message>
     <message>
-        <source>sinh</source>
-        <comment>hyperbolic sine function working with radians</comment>
-        <translation type="unfinished"/>
-    </message>
-    <message>
-        <source>cosh</source>
-        <comment>hyperbolic cosine working with radians</comment>
-        <translation type="unfinished"/>
-    </message>
-    <message>
-        <source>tanh</source>
-        <comment>hyperbolic tangens function working with radians</comment>
-        <translation type="unfinished"/>
-    </message>
-    <message>
-        <source>asinh</source>
-        <comment>hyperbolic arcus sine function working with radians</comment>
-        <translation type="unfinished"/>
-    </message>
-    <message>
-        <source>acosh</source>
-        <comment>hyperbolic arcus cosine function working with radians</comment>
-        <translation type="unfinished"/>
-    </message>
-    <message>
-        <source>atanh</source>
-        <comment>hyperbolic arcur tangens function working with radians</comment>
-        <translation type="unfinished"/>
-    </message>
-    <message>
         <source>sinD</source>
         <comment>sine function working with degrees</comment>
         <translation>sinD</translation>
@@ -14451,22 +14316,22 @@ Wil je deze veranderingen opslaan?</translation>
     <message>
         <source>r2cm</source>
         <comment>round to up to 1 decimal</comment>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>csrCm</source>
         <comment>cut, split and rotate modeling operation. Takes cm units.</comment>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>csrInch</source>
         <comment>cut, split and rotate modeling operation. Takes inch units.</comment>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>RotationElArc_</source>
         <comment>Left symbol _ in the name</comment>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -14589,11 +14454,11 @@ Wil je deze veranderingen opslaan?</translation>
     </message>
     <message>
         <source>Length = %1%2, angle = %3°, &lt;b&gt;Shift&lt;/b&gt; - sticking angle, &lt;b&gt;Mouse click&lt;/b&gt; - finish selecting a position</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Length = %1%2, angle = %3°, rotation angle = %4°, &lt;b&gt;Shift&lt;/b&gt; - sticking angle, &lt;b&gt;%5&lt;/b&gt; - change rotation origin point, &lt;b&gt;Mouse click&lt;/b&gt; - finish creating</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

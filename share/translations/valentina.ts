@@ -2947,6 +2947,10 @@
         <source>Uknown</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>The list of pieces is empty. Please, first create at least one piece for current pattern piece.</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>DialogKnownMaterials</name>
@@ -4479,10 +4483,6 @@ Apply settings anyway?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>The path is a cut contour</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Cut on fabric</source>
         <translation type="unfinished"></translation>
     </message>
@@ -4554,6 +4554,22 @@ Apply settings anyway?</source>
         <source>Move on bottom</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Continue the first point to the cutting contour</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Continue the last point to the cutting contour</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>The path is a cut contour. Use to control export to DXF-AAMA</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>The list of pieces is empty. Please, first create at least one piece for current pattern piece.</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>DialogPin</name>
@@ -4577,12 +4593,16 @@ Apply settings anyway?</source>
         <source>Pin</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>The list of pieces is empty. Please, first create at least one piece for current pattern piece.</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>DialogPlaceLabel</name>
     <message>
         <source>Dialog</source>
-        <translation type="unfinished">Dialog</translation>
+        <translation type="obsolete">Dialog</translation>
     </message>
     <message>
         <source>Width:</source>
@@ -4670,6 +4690,34 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Button</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Place label</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Control</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Visible</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Create a formula that regulates visibility. Values different from &quot;0&quot; make a path visible.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>The list of pieces is empty. Please, first create at least one piece for current pattern piece.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Control visibility</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -5732,10 +5780,6 @@ Apply settings anyway?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>To open all detail&apos;s features complete creating the main path.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Workpiece tool</source>
         <translation type="unfinished"></translation>
     </message>
@@ -5781,6 +5825,10 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Check uniqueness</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>To open all detail&apos;s features complete creating the main path. Please, press OK.</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -7176,7 +7224,7 @@ Do you want to save your changes?</translation>
     </message>
     <message>
         <source>Wrong units.</source>
-        <translation>Wrong units.</translation>
+        <translation type="vanished">Wrong units.</translation>
     </message>
     <message>
         <source>Application doesn&apos;t support standard table with inches.</source>
@@ -7489,7 +7537,7 @@ Do you want to save your changes?</translation>
     </message>
     <message>
         <source>Measurement file doesn&apos;t include all required measurements.</source>
-        <translation>Measurement file doesn&apos;t include all required measurements.</translation>
+        <translation type="vanished">Measurement file doesn&apos;t include all required measurements.</translation>
     </message>
     <message>
         <source>Please, additionaly provide: %1</source>
@@ -7968,10 +8016,6 @@ Do you want to save your changes?</translation>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Application doesn&apos;t support multisize table with inches.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>You don&apos;t have enough details to export. Please, include at least one detail in layout.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -7989,10 +8033,6 @@ Do you want to save your changes?</translation>
     </message>
     <message>
         <source>Couldn&apos;t set height. Need a file with multisize measurements.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Please, additionally provide: %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -8225,6 +8265,34 @@ Do you want to save your changes?</translation>
     <message>
         <source>Description</source>
         <translation type="unfinished">Description</translation>
+    </message>
+    <message>
+        <source>Measurement file has unknown format.</source>
+        <translation type="unfinished">Measurement file has unknown format.</translation>
+    </message>
+    <message>
+        <source>Measurement file contains invalid known measurement(s).</source>
+        <translation type="unfinished">Measurement file contains invalid known measurement(s).</translation>
+    </message>
+    <message>
+        <source>Wrong units.</source>
+        <translation type="unfinished">Wrong units.</translation>
+    </message>
+    <message>
+        <source>Application doesn&apos;t support multisize table with inches.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>File error.</source>
+        <translation type="unfinished">File error.</translation>
+    </message>
+    <message>
+        <source>Measurement file doesn&apos;t include all required measurements.</source>
+        <translation type="unfinished">Measurement file doesn&apos;t include all required measurements.</translation>
+    </message>
+    <message>
+        <source>Please, additionally provide: %1</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -8942,6 +9010,18 @@ This option will take an affect after restart.</source>
     </message>
     <message>
         <source>Visibility trigger contains error and will be ignored</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>User material number %1 was not defined in this pattern.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Error in internal path &apos;%1&apos;. There is no intersection of first point with cutting countour</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Error in internal path &apos;%1&apos;. There is no intersection of last point with cutting countour</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -10667,16 +10747,9 @@ Do you want to save your changes?</translation>
     </message>
 </context>
 <context>
-    <name>TogglePieceForbidFlipping</name>
+    <name>TogglePieceForceForbidFlipping</name>
     <message>
-        <source>forbid flipping</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>TogglePieceForceFlipping</name>
-    <message>
-        <source>force flipping</source>
+        <source>piece flipping</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -10685,6 +10758,41 @@ Do you want to save your changes?</translation>
     <message>
         <source>detail in layout list</source>
         <translation type="unfinished">detail in layout list</translation>
+    </message>
+</context>
+<context>
+    <name>Tool</name>
+    <message>
+        <source>First point</source>
+        <translation type="unfinished">First point</translation>
+    </message>
+    <message>
+        <source>Second point</source>
+        <translation type="unfinished">Second point</translation>
+    </message>
+    <message>
+        <source>Highest point</source>
+        <translation type="unfinished">Highest point</translation>
+    </message>
+    <message>
+        <source>Lowest point</source>
+        <translation type="unfinished">Lowest point</translation>
+    </message>
+    <message>
+        <source>Leftmost point</source>
+        <translation type="unfinished">Leftmost point</translation>
+    </message>
+    <message>
+        <source>Rightmost point</source>
+        <translation type="unfinished">Rightmost point</translation>
+    </message>
+    <message>
+        <source>Vertical axis</source>
+        <translation type="unfinished">Vertical axis</translation>
+    </message>
+    <message>
+        <source>Horizontal axis</source>
+        <translation type="unfinished">Horizontal axis</translation>
     </message>
 </context>
 <context>
@@ -11430,6 +11538,26 @@ Do you want to save your changes?</translation>
         <source>Set height value for pattern file, that was opened with multisize measurements (export mode). Valid values: %1cm.</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Use this option to override user material defined in pattern. The value must be in form &lt;number&gt;@&lt;user matrial name&gt;. The number should be in range from 1 to %1. For example, 1@Fabric2. The key can be used multiple times. Has no effect in GUI mode.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>User material</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Make all parsing warnings into errors. Have effect only in console mode. Use to force Valentina to immediately terminate if a pattern contains a parsing warning.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Invalid user material &apos;%1&apos;. Separator is missing.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Invalid user material &apos;%1&apos;. Wrong material number.</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>VCommonSettings</name>
@@ -11665,6 +11793,34 @@ Do you want to save your changes?</translation>
     </message>
     <message>
         <source>Force flipping</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Angle</source>
+        <translation type="unfinished">Angle</translation>
+    </message>
+    <message>
+        <source>by length</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>by points intersetions</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>by first edge symmetry</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>by second edge symmetry</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>by first edge right angle</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>by second edge right angle</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -12488,11 +12644,11 @@ Do you want to save your changes?</translation>
     </message>
     <message>
         <source>First point</source>
-        <translation>First point</translation>
+        <translation type="vanished">First point</translation>
     </message>
     <message>
         <source>Second point</source>
-        <translation>Second point</translation>
+        <translation type="vanished">Second point</translation>
     </message>
     <message>
         <source>Arc with given length</source>
@@ -12544,19 +12700,19 @@ Do you want to save your changes?</translation>
     </message>
     <message>
         <source>Highest point</source>
-        <translation>Highest point</translation>
+        <translation type="vanished">Highest point</translation>
     </message>
     <message>
         <source>Lowest point</source>
-        <translation>Lowest point</translation>
+        <translation type="vanished">Lowest point</translation>
     </message>
     <message>
         <source>Leftmost point</source>
-        <translation>Leftmost point</translation>
+        <translation type="vanished">Leftmost point</translation>
     </message>
     <message>
         <source>Rightmost point</source>
-        <translation>Rightmost point</translation>
+        <translation type="vanished">Rightmost point</translation>
     </message>
     <message>
         <source>Tool to make point from intersection two curves</source>
@@ -12608,11 +12764,11 @@ Do you want to save your changes?</translation>
     </message>
     <message>
         <source>Vertical axis</source>
-        <translation>Vertical axis</translation>
+        <translation type="vanished">Vertical axis</translation>
     </message>
     <message>
         <source>Horizontal axis</source>
-        <translation>Horizontal axis</translation>
+        <translation type="vanished">Horizontal axis</translation>
     </message>
     <message>
         <source>Tool move</source>
@@ -13045,7 +13201,7 @@ Do you want to save your changes?</translation>
 <context>
     <name>VToolTriangle</name>
     <message>
-        <source>Error calculating point &apos;%1&apos;. Point of intersection cannot be finded</source>
+        <source>Error calculating point &apos;%1&apos;. Point of intersection cannot be found</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
