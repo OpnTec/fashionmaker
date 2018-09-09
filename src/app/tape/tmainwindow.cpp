@@ -2797,15 +2797,23 @@ void TMainWindow::MeasurementGUI()
 void TMainWindow::ReadSettings()
 {
     const VTapeSettings *settings = qApp->TapeSettings();
-    restoreGeometry(settings->GetGeometry());
-    restoreState(settings->GetWindowState());
-    restoreState(settings->GetToolbarsState(), APP_VERSION);
 
-    // Text under tool buton icon
-    ToolBarStyles();
+    if (settings->status() == QSettings::NoError)
+    {
+        restoreGeometry(settings->GetGeometry());
+        restoreState(settings->GetWindowState());
+        restoreState(settings->GetToolbarsState(), APP_VERSION);
 
-    // Stack limit
-    //qApp->getUndoStack()->setUndoLimit(settings->GetUndoCount());
+        // Text under tool buton icon
+        ToolBarStyles();
+
+        // Stack limit
+        //qApp->getUndoStack()->setUndoLimit(settings->GetUndoCount());
+    }
+    else
+    {
+        qWarning() << tr("Cannot read settings from a malformed INI file.");
+    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -2815,6 +2823,12 @@ void TMainWindow::WriteSettings()
     settings->SetGeometry(saveGeometry());
     settings->SetWindowState(saveState());
     settings->SetToolbarsState(saveState(APP_VERSION));
+
+    settings->sync();
+    if (settings->status() == QSettings::AccessError)
+    {
+        qWarning() << tr("Cannot save settings. Access denied.");
+    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------

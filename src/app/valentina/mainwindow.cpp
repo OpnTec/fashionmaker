@@ -3700,21 +3700,29 @@ void MainWindow::ReadSettings()
 {
     qCDebug(vMainWindow, "Reading settings.");
     const VSettings *settings = qApp->ValentinaSettings();
-    restoreGeometry(settings->GetGeometry());
-    restoreState(settings->GetWindowState());
-    restoreState(settings->GetToolbarsState(), APP_VERSION);
 
-    // Scene antialiasing
-    ui->view->SetAntialiasing(settings->GetGraphicalOutput());
+    if (settings->status() == QSettings::NoError)
+    {
+        restoreGeometry(settings->GetGeometry());
+        restoreState(settings->GetWindowState());
+        restoreState(settings->GetToolbarsState(), APP_VERSION);
 
-    // Stack limit
-    qApp->getUndoStack()->setUndoLimit(settings->GetUndoCount());
+        // Scene antialiasing
+        ui->view->SetAntialiasing(settings->GetGraphicalOutput());
 
-    // Text under tool buton icon
-    ToolBarStyles();
+        // Stack limit
+        qApp->getUndoStack()->setUndoLimit(settings->GetUndoCount());
 
-    isDockToolOptionsVisible = ui->dockWidgetToolOptions->isVisible();
-    isDockGroupsVisible = ui->dockWidgetGroups->isVisible();
+        // Text under tool buton icon
+        ToolBarStyles();
+
+        isDockToolOptionsVisible = ui->dockWidgetToolOptions->isVisible();
+        isDockGroupsVisible = ui->dockWidgetGroups->isVisible();
+    }
+    else
+    {
+        qWarning() << tr("Cannot read settings from a malformed INI file.");
+    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -3725,10 +3733,16 @@ void MainWindow::WriteSettings()
 {
     ActionDraw(true);
 
-    VSettings *setings = qApp->ValentinaSettings();
-    setings->SetGeometry(saveGeometry());
-    setings->SetWindowState(saveState());
-    setings->SetToolbarsState(saveState(APP_VERSION));
+    VSettings *settings = qApp->ValentinaSettings();
+    settings->SetGeometry(saveGeometry());
+    settings->SetWindowState(saveState());
+    settings->SetToolbarsState(saveState(APP_VERSION));
+
+    settings->sync();
+    if (settings->status() == QSettings::AccessError)
+    {
+        qWarning() << tr("Cannot save settings. Access denied.");
+    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
