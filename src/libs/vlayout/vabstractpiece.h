@@ -187,6 +187,7 @@ public:
     static QVector<QPointF> EkvPoint(QVector<QPointF> points, const VSAPoint &p1Line1, const VSAPoint &p2Line1,
                                      const VSAPoint &p1Line2, const VSAPoint &p2Line2, qreal width);
     static QLineF           ParallelLine(const VSAPoint &p1, const VSAPoint &p2, qreal width);
+    static qreal            MaxLocalSA(const VSAPoint &p, qreal width);
 
     template <class T>
     static QVector<T> CorrectEquidistantPoints(const QVector<T> &points, bool removeFirstAndLast = true);
@@ -194,7 +195,6 @@ public:
 protected:
     template <class T>
     static QVector<T> RemoveDublicates(const QVector<T> &points, bool removeFirstAndLast = true);
-    static qreal      MaxLocalSA(const VSAPoint &p, qreal width);
     static bool       IsEkvPointOnLine(const QPointF &iPoint, const QPointF &prevPoint, const QPointF &nextPoint);
     static bool       IsEkvPointOnLine(const VSAPoint &iPoint, const VSAPoint &prevPoint, const VSAPoint &nextPoint);
 
@@ -202,34 +202,6 @@ protected:
 
 private:
     QSharedDataPointer<VAbstractPieceData> d;
-
-    static bool             CheckIntersection(const QVector<QPointF> &points, int i, int iNext, int j, int jNext,
-                                              const QPointF &crossPoint);
-    static bool             ParallelCrossPoint(const QLineF &line1, const QLineF &line2, QPointF &point);
-    static bool             Crossing(const QVector<QPointF> &sub1, const QVector<QPointF> &sub2);
-    static QVector<QPointF> SubPath(const QVector<QPointF> &path, int startIndex, int endIndex);
-    static Q_DECL_CONSTEXPR qreal PointPosition(const QPointF &p, const QLineF &line);
-    static QVector<QPointF> AngleByLength(QVector<QPointF> points, QPointF p2, const QLineF &bigLine1, QPointF sp2,
-                                          const QLineF &bigLine2, const VSAPoint &p, qreal width);
-    static QVector<QPointF> AngleByIntersection(const QVector<QPointF> &points, QPointF p1, QPointF p2, QPointF p3,
-                                                const QLineF &bigLine1, QPointF sp2, const QLineF &bigLine2,
-                                                const VSAPoint &p, qreal width);
-    static QVector<QPointF> AngleByFirstSymmetry(const QVector<QPointF> &points, QPointF p1, QPointF p2,
-                                                 const QLineF &bigLine1, QPointF sp2, const QLineF &bigLine2,
-                                                 const VSAPoint &p, qreal width);
-    static QVector<QPointF> AngleBySecondSymmetry(const QVector<QPointF> &points, QPointF p2, QPointF p3,
-                                                  const QLineF &bigLine1, QPointF sp2, const QLineF &bigLine2,
-                                                  const VSAPoint &p, qreal width);
-    static QVector<QPointF> AngleByFirstRightAngle(const QVector<QPointF> &points, QPointF p1, QPointF p2,
-                                                   const QLineF &bigLine1, QPointF sp2, const QLineF &bigLine2,
-                                                   const VSAPoint &p, qreal width);
-    static QVector<QPointF> AngleBySecondRightAngle(QVector<QPointF> points, QPointF p2, QPointF p3,
-                                                    const QLineF &bigLine1, QPointF sp2, const QLineF &bigLine2,
-                                                    const VSAPoint &p, qreal width);
-    static QLineF           ParallelLine(const QPointF &p1, const QPointF &p2, qreal width);
-    static QPointF          SingleParallelPoint(const QPointF &p1, const QPointF &p2, qreal angle, qreal width);
-    static QLineF           BisectorLine(const QPointF &p1, const QPointF &p2, const QPointF &p3);
-    static qreal            AngleBetweenBisectors(const QLineF &b1, const QLineF &b2);
 };
 
 Q_DECLARE_TYPEINFO(VAbstractPiece, Q_MOVABLE_TYPE);
