@@ -36,7 +36,45 @@
 #include <QVector>
 #include <QPainterPath>
 
-const qreal maxL = 2.4;
+const qreal maxL = 2.5;
+
+namespace
+{
+// Do we create a point outside of a path?
+bool IsOutsidePoint(QPointF p1, QPointF p2, QPointF px)
+{
+    QLineF line(p1, p2);
+    QLineF ext(p1, px);
+    return VFuzzyComparePossibleNulls(line.angle(), ext.angle());
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+// Because artificial loop can lead to wrong clipping we must rollback current seam allowance points
+QVector<QPointF> RollbackSeamAllowance(QVector<QPointF> points, const QLineF &cuttingEdge, bool *success)
+{
+    *success = false;
+    QVector<QPointF> clipped;
+    clipped.reserve(points.count()+1);
+    for (int i = points.count()-1; i > 0; --i)
+    {
+        QLineF segment(points.at(i), points.at(i-1));
+        QPointF crosPoint;
+        const QLineF::IntersectType type = cuttingEdge.intersect(segment, &crosPoint);
+        if (type != QLineF::NoIntersection
+                && VGObject::IsPointOnLineSegment(crosPoint, segment.p1(), segment.p2()))
+        {
+            clipped.append(crosPoint);
+            for (int j=i-1; j>=0; --j)
+            {
+                clipped.append(points.at(j));
+            }
+            points = VGObject::GetReversePoints(clipped);
+            *success = true;
+        }
+    }
+    return points;
+}
+}
 
 //---------------------------------------------------------------------------------------------------------------------
 VAbstractPiece::VAbstractPiece()
@@ -158,7 +196,7 @@ void VAbstractPiece::SetSAWidth(qreal value)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QVector<QPointF> VAbstractPiece::Equidistant(const QVector<VSAPoint> &points, qreal width)
+QVector<QPointF> VAbstractPiece::Equidistant(QVector<VSAPoint> points, qreal width)
 {
     if (width < 0)
     {
@@ -166,29 +204,29 @@ QVector<QPointF> VAbstractPiece::Equidistant(const QVector<VSAPoint> &points, qr
         return QVector<QPointF>();
     }
 
-    QVector<VSAPoint> p = CorrectEquidistantPoints(points);
-    if ( p.size() < 3 )
+    points = CorrectEquidistantPoints(points);
+    if ( points.size() < 3 )
     {
         qDebug()<<"Not enough points for building the equidistant.";
         return QVector<QPointF>();
     }
 
-    if (p.last().toPoint() != p.first().toPoint())
+    if (points.last().toPoint() != points.first().toPoint())
     {
-        p.append(p.at(0));// Should be always closed
+        points.append(points.at(0));// Should be always closed
     }
 
     QVector<QPointF> ekvPoints;
-    for (qint32 i = 0; i < p.size(); ++i )
+    for (qint32 i = 0; i < points.size(); ++i )
     {
         if ( i == 0)
         {//first point
-            ekvPoints << EkvPoint(p.at(p.size()-2), p.at(p.size()-1),
-                                  p.at(1), p.at(0), width);
+            ekvPoints = EkvPoint(ekvPoints, points.at(points.size()-2), points.at(points.size()-1), points.at(1),
+                                 points.at(0), width);
             continue;
         }
 
-        if (i == p.size()-1)
+        if (i == points.size()-1)
         {//last point
             if (not ekvPoints.isEmpty())
             {
@@ -197,8 +235,7 @@ QVector<QPointF> VAbstractPiece::Equidistant(const QVector<VSAPoint> &points, qr
             continue;
         }
         //points in the middle of polyline
-        ekvPoints << EkvPoint(p.at(i-1), p.at(i),
-                              p.at(i+1), p.at(i), width);
+        ekvPoints = EkvPoint(ekvPoints, points.at(i-1), points.at(i), points.at(i+1), points.at(i), width);
     }
 
     const bool removeFirstAndLast = false;
@@ -414,7 +451,7 @@ qreal VAbstractPiece::MaxLocalSA(const VSAPoint &p, qreal width)
  * @param width global seam allowance width.
  * @return seam aloowance points.
  */
-QVector<QPointF> VAbstractPiece::EkvPoint(const VSAPoint &p1Line1, const VSAPoint &p2Line1,
+QVector<QPointF> VAbstractPiece::EkvPoint(QVector<QPointF> points, const VSAPoint &p1Line1, const VSAPoint &p2Line1,
                                           const VSAPoint &p1Line2, const VSAPoint &p2Line2, qreal width)
 {
     if (width < 0)
@@ -422,7 +459,6 @@ QVector<QPointF> VAbstractPiece::EkvPoint(const VSAPoint &p1Line1, const VSAPoin
         return QVector<QPointF>();
     }
 
-    QVector<QPointF> points;
     if (p2Line1 != p2Line2)
     {
         qDebug()<<"Last points of two lines must be equal.";
@@ -431,22 +467,31 @@ QVector<QPointF> VAbstractPiece::EkvPoint(const VSAPoint &p1Line1, const VSAPoin
 
     const QLineF bigLine1 = ParallelLine(p1Line1, p2Line1, width );
     const QLineF bigLine2 = ParallelLine(p2Line2, p1Line2, width );
-    QPointF CrosPoint;
-    const QLineF::IntersectType type = bigLine1.intersect( bigLine2, &CrosPoint );
+    QPointF crosPoint;
+    const QLineF::IntersectType type = bigLine1.intersect( bigLine2, &crosPoint );
     switch (type)
     {// There are at least three big cases
         case (QLineF::BoundedIntersection):
             // The easiest, real intersection
-            points.append(CrosPoint);
+            points.append(crosPoint);
             return points;
         case (QLineF::UnboundedIntersection):
         { // Most common case
+            /* Case when a path has point on line (both segments lie on the same line) and seam allowance creates
+             * prong. */
+            if (VGObject::IsPointOnLineSegment(p2Line1, p1Line1, p1Line2))
+            {
+                points.append(bigLine1.p2());
+                points.append(bigLine2.p1());
+                return points;
+            }
+
             const qreal localWidth = MaxLocalSA(p2Line1, width);
-            QLineF line( p2Line1, CrosPoint );
+            QLineF line( p2Line1, crosPoint );
 
             // Checking two subcases
             const QLineF b1 = BisectorLine(p1Line1, p2Line1, p1Line2);
-            const QLineF b2 = BisectorLine(bigLine1.p1(), CrosPoint, bigLine2.p2());
+            const QLineF b2 = BisectorLine(bigLine1.p1(), crosPoint, bigLine2.p2());
 
             const qreal angle = AngleBetweenBisectors(b1, b2);
 
@@ -459,22 +504,22 @@ QT_WARNING_DISABLE_GCC("-Wswitch-default")
                 switch (p2Line1.GetAngleType())
                 {
                     case PieceNodeAngle::ByLength:
-                        return AngleByLength(p2Line1, bigLine1.p1(), CrosPoint, bigLine2.p2(), localWidth);
+                        return AngleByLength(points, p2Line1, bigLine1, crosPoint, bigLine2, p2Line1, width);
                     case PieceNodeAngle::ByPointsIntersection:
-                        return AngleByIntersection(p1Line1, p2Line1, p1Line2, bigLine1.p1(), CrosPoint, bigLine2.p2(),
-                                                   localWidth);
+                        return AngleByIntersection(points, p1Line1, p2Line1, p1Line2, bigLine1, crosPoint, bigLine2,
+                                                   p2Line1, width);
                     case PieceNodeAngle::ByFirstEdgeSymmetry:
-                        return AngleByFirstSymmetry(p1Line1, p2Line1, bigLine1.p1(), CrosPoint, bigLine2.p2(),
-                                                    localWidth);
+                        return AngleByFirstSymmetry(points, p1Line1, p2Line1, bigLine1, crosPoint, bigLine2,
+                                                    p2Line1, width);
                     case PieceNodeAngle::BySecondEdgeSymmetry:
-                        return AngleBySecondSymmetry(p2Line1, p1Line2, bigLine1.p1(), CrosPoint,bigLine2.p2(),
-                                                     localWidth);
+                        return AngleBySecondSymmetry(points, p2Line1, p1Line2, bigLine1, crosPoint, bigLine2,
+                                                     p2Line1, width);
                     case PieceNodeAngle::ByFirstEdgeRightAngle:
-                        return AngleByFirstRightAngle(p1Line1, p2Line1, bigLine1.p1(), CrosPoint, bigLine2.p2(),
-                                                      p2Line1.GetSABefore(width), localWidth);
+                        return AngleByFirstRightAngle(points, p1Line1, p2Line1, bigLine1, crosPoint, bigLine2,
+                                                      p2Line1, width);
                     case PieceNodeAngle::BySecondEdgeRightAngle:
-                        return AngleBySecondRightAngle(p2Line1, p1Line2, bigLine1.p1(), CrosPoint, bigLine2.p2(),
-                                                       p2Line1.GetSAAfter(width), localWidth);
+                        return AngleBySecondRightAngle(points, p2Line1, p1Line2, bigLine1, crosPoint, bigLine2,
+                                                       p2Line1, width);
                 }
 QT_WARNING_POP
             }
@@ -497,21 +542,21 @@ QT_WARNING_POP
                     {
                         if (line.length() < QLineF(p2Line1, px).length())
                         {
-                            points.append(CrosPoint);
+                            points.append(crosPoint);
                             return points;
                         }
                     }
                 }
                 else
                 { // New subcase. This is not a dart. An angle is acute and bisector watch inside.
-                    const qreal result1 = PointPosition(CrosPoint, QLineF(p1Line1, p2Line1));
-                    const qreal result2 = PointPosition(CrosPoint, QLineF(p2Line2, p1Line2));
+                    const qreal result1 = PointPosition(crosPoint, QLineF(p1Line1, p2Line1));
+                    const qreal result2 = PointPosition(crosPoint, QLineF(p2Line2, p1Line2));
 
                     if ((result1 < 0 || qFuzzyIsNull(result1)) && (result2 < 0 || qFuzzyIsNull(result2)))
                     {// The cross point is still outside of a piece
                         if (line.length() >= localWidth)
                         {
-                            points.append(CrosPoint);
+                            points.append(crosPoint);
                             return points;
                         }
                         else
@@ -533,8 +578,9 @@ QT_WARNING_POP
             break;
         }
         case (QLineF::NoIntersection):
-            /*If we have correct lines this means lines lie on a line.*/
+            /*If we have correct lines this means lines lie on a line or parallel.*/
             points.append(bigLine1.p2());
+            points.append(bigLine2.p1()); // Second point for parallel line
             return points;
         default:
             break;
@@ -543,193 +589,294 @@ QT_WARNING_POP
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QVector<QPointF> VAbstractPiece::AngleByLength(const QPointF &p2, const QPointF &sp1, const QPointF &sp2,
-                                               const QPointF &sp3, qreal width)
+QVector<QPointF> VAbstractPiece::AngleByLength(QVector<QPointF> points, QPointF p2, const QLineF &bigLine1, QPointF sp2,
+                                               const QLineF &bigLine2, const VSAPoint &p, qreal width)
 {
-    QVector<QPointF> points;
+    const QPointF sp1 = bigLine1.p1();
+    const QPointF sp3 = bigLine2.p2();
+    const qreal localWidth = MaxLocalSA(p, width);
 
-    QLineF line(p2, sp2);
-    const qreal length = line.length();
-    if (length > width*maxL)
-    { // Cutting too long a cut angle
-        line.setLength(width);
-        QLineF cutLine(line.p2(), sp2); // Cut line is a perpendicular
-        cutLine.setLength(length); // Decided take this length
+    if (IsOutsidePoint(bigLine1.p1(), bigLine1.p2(), sp2) && IsOutsidePoint(bigLine2.p2(), bigLine2.p1(), sp2) )
+    {
+        QLineF line(p2, sp2);
+        const qreal length = line.length();
+        if (length > localWidth*maxL)
+        { // Cutting too long acut angle
+            line.setLength(localWidth);
+            QLineF cutLine(line.p2(), sp2); // Cut line is a perpendicular
+            cutLine.setLength(length); // Decided take this length
 
-        // We do not check intersection type because intersection must alwayse exist
-        QPointF px;
-        cutLine.setAngle(cutLine.angle()+90);
-        QLineF::IntersectType type = QLineF(sp1, sp2).intersect(cutLine, &px);
-        if (type == QLineF::NoIntersection)
-        {
-            qDebug()<<"Couldn't find intersection with cut line.";
+            // We do not check intersection type because intersection must alwayse exist
+            QPointF px;
+            cutLine.setAngle(cutLine.angle()+90);
+            QLineF::IntersectType type = QLineF(sp1, sp2).intersect(cutLine, &px);
+            if (type == QLineF::NoIntersection)
+            {
+                qDebug()<<"Couldn't find intersection with cut line.";
+            }
+            points.append(px);
+
+            cutLine.setAngle(cutLine.angle()-180);
+            type = QLineF(sp2, sp3).intersect(cutLine, &px);
+            if (type == QLineF::NoIntersection)
+            {
+                qDebug()<<"Couldn't find intersection with cut line.";
+            }
+            points.append(px);
         }
-        points.append(px);
-
-        cutLine.setAngle(cutLine.angle()-180);
-        type = QLineF(sp2, sp3).intersect(cutLine, &px);
-        if (type == QLineF::NoIntersection)
-        {
-            qDebug()<<"Couldn't find intersection with cut line.";
+        else
+        {// The point just fine
+            points.append(sp2);
         }
-        points.append(px);
     }
     else
-    { // The point just fine
-        points.append(sp2);
+    {
+        if (not IsOutsidePoint(bigLine1.p1(), bigLine1.p2(), sp2))
+        {
+            bool success = false;
+            points = RollbackSeamAllowance(points, bigLine2, &success);
+            if (not success)
+            {
+                // Cannot find clipping point.
+                // Show at least something.
+                points.append(sp2);
+            }
+        }
+        else
+        {
+            // Need to create artificial loop
+            QLineF loop1(sp2, sp1);
+            loop1.setLength(loop1.length()*0.1);
+
+            points.append(loop1.p2()); // Nedd for the main path rule
+
+            loop1.setAngle(loop1.angle() + 180);
+            loop1.setLength(localWidth * 3.);
+            points.append(loop1.p2());
+            points.append(bigLine2.p1());
+        }
     }
     return points;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QVector<QPointF> VAbstractPiece::AngleByIntersection(const QPointF &p1, const QPointF &p2, const QPointF &p3,
-                                                     const QPointF &sp1, const QPointF &sp2, const QPointF &sp3,
-                                                     qreal width)
+QVector<QPointF> VAbstractPiece::AngleByIntersection(const QVector<QPointF> &points, QPointF p1, QPointF p2, QPointF p3,
+                                                     const QLineF &bigLine1, QPointF sp2, const QLineF &bigLine2,
+                                                     const VSAPoint &p, qreal width)
 {
-    QVector<QPointF> points;
+    const qreal localWidth = MaxLocalSA(p, width);
+    QVector<QPointF> pointsIntr = points;
 
+    // First point
     QLineF edge2(p2, p3);
-    QLineF sEdge1(sp1, sp2);
 
     QPointF px;
-    QLineF::IntersectType type = edge2.intersect(sEdge1, &px);
+    QLineF::IntersectType type = edge2.intersect(bigLine1, &px);
     if (type == QLineF::NoIntersection)
     {
-        return AngleByLength(p2, sp1, sp2, sp3, width);
+        return AngleByLength(points, p2, bigLine1, sp2, bigLine2, p, width);
     }
 
-    if (QLineF(p2, px).length() > width*maxL)
+    if (IsOutsidePoint(bigLine1.p1(), bigLine1.p2(), px))
     {
-        return AngleByLength(p2, sp1, sp2, sp3, width);
+        if (QLineF(p2, px).length() > localWidth*maxL)
+        {
+            return AngleByLength(points, p2, bigLine1, sp2, bigLine2, p, width);
+        }
+        pointsIntr.append(px);
     }
-    points.append(px);
+    else
+    {// Because artificial loop can lead to wrong clipping we must rollback current seam allowance points
+        bool success = false;
+        pointsIntr = RollbackSeamAllowance(pointsIntr, edge2, &success);
+        if (not success)
+        {
+            // Cannot find clipping point.
+            // Show at least something.
+            pointsIntr.append(px);
+        }
+    }
 
+    // Second point
     QLineF edge1(p1, p2);
-    QLineF sEdge2(sp2, sp3);
 
-    type = edge1.intersect(sEdge2, &px);
+    type = edge1.intersect(bigLine2, &px);
     if (type == QLineF::NoIntersection)
     {
-        return AngleByLength(p2, sp1, sp2, sp3, width);
+        return AngleByLength(points, p2, bigLine1, sp2, bigLine2, p, width);
     }
 
-    if (QLineF(p2, px).length() > width*maxL)
+    if (IsOutsidePoint(bigLine2.p2(), bigLine2.p1(), px))
     {
-        return AngleByLength(p2, sp1, sp2, sp3, width);
+        pointsIntr.append(px);
     }
-    points.append(px);
+    else
+    {
+        QLineF allowance(p2, px);
+        pointsIntr.append(allowance.p2());
+        allowance.setLength(allowance.length() + localWidth * 3.);
+        pointsIntr.append(allowance.p2());
+        pointsIntr.append(bigLine2.p2());
+    }
 
-    return points;
+    return pointsIntr;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QVector<QPointF> VAbstractPiece::AngleByFirstSymmetry(const QPointF &p1, const QPointF &p2,
-                                                      const QPointF &sp1, const QPointF &sp2, const QPointF &sp3,
-                                                      qreal width)
+QVector<QPointF> VAbstractPiece::AngleByFirstSymmetry(const QVector<QPointF> &points, QPointF p1, QPointF p2,
+                                                      const QLineF &bigLine1, QPointF sp2, const QLineF &bigLine2,
+                                                      const VSAPoint &p, qreal width)
 {
-    QVector<QPointF> points;
+    const qreal localWidth = MaxLocalSA(p, width);
+    QVector<QPointF> pointsIntr = points;
 
-    QLineF sEdge2(sp2, sp3);
-    QPointF fp1 = VPointF::FlipPF(sEdge2, p1);
-    QPointF fp2 = VPointF::FlipPF(sEdge2, p2);
-    QLineF fEdge(fp1, fp2);
+    QLineF sEdge(VPointF::FlipPF(bigLine2, p1), VPointF::FlipPF(bigLine2, p2));
 
     QPointF px;
-    QLineF sEdge1(sp1, sp2);
-    QLineF::IntersectType type = fEdge.intersect(sEdge1, &px);
+    QLineF::IntersectType type = sEdge.intersect(bigLine1, &px);
     if (type == QLineF::NoIntersection)
     {
-        return AngleByLength(p2, sp1, sp2, sp3, width);
+        return AngleByLength(points, p2, bigLine1, sp2, bigLine2, p, width);
     }
 
-    if (QLineF(p2, px).length() > width*maxL)
+    if (IsOutsidePoint(bigLine1.p1(), bigLine1.p2(), px))
     {
-        return AngleByLength(p2, sp1, sp2, sp3, width);
+        if (QLineF(p2, px).length() > localWidth*maxL)
+        {
+            return AngleByLength(points, p2, bigLine1, sp2, bigLine2, p, width);
+        }
+        pointsIntr.append(px);
     }
-    points.append(px);
+    else
+    {// Because artificial loop can lead to wrong clipping we must rollback current seam allowance points
+        bool success = false;
+        pointsIntr = RollbackSeamAllowance(pointsIntr, bigLine2, &success);
+        if (not success)
+        {
+            // Cannot find clipping point.
+            // Show at least something.
+            pointsIntr.append(px);
+        }
+    }
 
-    type = fEdge.intersect(sEdge2, &px);
+    type = sEdge.intersect(bigLine2, &px);
     if (type == QLineF::NoIntersection)
     {
-        return AngleByLength(p2, sp1, sp2, sp3, width);
+        return AngleByLength(points, p2, bigLine1, sp2, bigLine2, p, width);
     }
 
-    if (QLineF(p2, px).length() > width*maxL)
+    if (IsOutsidePoint(bigLine2.p2(), bigLine2.p1(), px))
     {
-        return AngleByLength(p2, sp1, sp2, sp3, width);
+        if (QLineF(p2, px).length() > localWidth*maxL)
+        {
+            return AngleByLength(points, p2, bigLine1, sp2, bigLine2, p, width);
+        }
+        pointsIntr.append(px);
     }
-    points.append(px);
+    else
+    {
+        QLineF allowance(px, p2);
+        allowance.setAngle(allowance.angle() + 90);
+        pointsIntr.append(allowance.p2());
+        pointsIntr.append(bigLine2.p1());
+    }
 
-    return points;
+    return pointsIntr;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QVector<QPointF> VAbstractPiece::AngleBySecondSymmetry(const QPointF &p2, const QPointF &p3,
-                                                       const QPointF &sp1, const QPointF &sp2, const QPointF &sp3,
-                                                       qreal width)
+QVector<QPointF> VAbstractPiece::AngleBySecondSymmetry(const QVector<QPointF> &points, QPointF p2, QPointF p3,
+                                                       const QLineF &bigLine1, QPointF sp2, const QLineF &bigLine2,
+                                                       const VSAPoint &p, qreal width)
 {
-    QVector<QPointF> points;
+    const qreal localWidth = MaxLocalSA(p, width);
+    QVector<QPointF> pointsIntr = points;
 
-    QLineF sEdge1(sp1, sp2);
-    QPointF fp2 = VPointF::FlipPF(sEdge1, p2);
-    QPointF fp3 = VPointF::FlipPF(sEdge1, p3);
-    QLineF fEdge(fp2, fp3);
+    QLineF sEdge(VPointF::FlipPF(bigLine1, p2), VPointF::FlipPF(bigLine1, p3));
 
     QPointF px;
-    QLineF::IntersectType type = fEdge.intersect(sEdge1, &px);
+    QLineF::IntersectType type = sEdge.intersect(bigLine1, &px);
     if (type == QLineF::NoIntersection)
     {
-        return AngleByLength(p2, sp1, sp2, sp3, width);
+        return AngleByLength(points, p2, bigLine1, sp2, bigLine2, p, width);
     }
 
-    if (QLineF(p2, px).length() > width*maxL)
+    if (IsOutsidePoint(bigLine1.p1(), bigLine1.p2(), px))
     {
-        return AngleByLength(p2, sp1, sp2, sp3, width);
+        if (QLineF(p2, px).length() > localWidth*maxL)
+        {
+            return AngleByLength(points, p2, bigLine1, sp2, bigLine2, p, width);
+        }
+        pointsIntr.append(px);
     }
-    points.append(px);
+    else
+    {// Because artificial loop can lead to wrong clipping we must rollback current seam allowance points
+        bool success = false;
+        pointsIntr = RollbackSeamAllowance(pointsIntr, bigLine2, &success);
+        if (not success)
+        {
+            // Cannot find clipping point.
+            // Show at least something.
+            pointsIntr.append(px);
+        }
+    }
 
-    QLineF sEdge2(sp2, sp3);
-    type = fEdge.intersect(sEdge2, &px);
+    type = sEdge.intersect(bigLine2, &px);
     if (type == QLineF::NoIntersection)
     {
-        return AngleByLength(p2, sp1, sp2, sp3, width);
+        return AngleByLength(points, p2, bigLine1, sp2, bigLine2, p, width);
     }
 
-    if (QLineF(p2, px).length() > width*maxL)
+    if (IsOutsidePoint(bigLine2.p2(), bigLine2.p1(), px))
     {
-        return AngleByLength(p2, sp1, sp2, sp3, width);
+        if (QLineF(p2, px).length() > localWidth*maxL)
+        {
+            return AngleByLength(points, p2, bigLine1, sp2, bigLine2, p, width);
+        }
+        pointsIntr.append(px);
     }
-    points.append(px);
+    else
+    {
+        QLineF allowance(p2, px);
+        allowance.setLength(p.GetSAAfter(width)*0.98);
+        pointsIntr.append(allowance.p2());
+        allowance.setLength(allowance.length() + localWidth * 3.);
+        pointsIntr.append(allowance.p2());
+        pointsIntr.append(bigLine2.p2());
+    }
 
-    return points;
+    return pointsIntr;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QVector<QPointF> VAbstractPiece::AngleByFirstRightAngle(QPointF p1, QPointF p2, QPointF sp1, QPointF sp2, QPointF sp3,
-                                                        qreal width, qreal localWidth)
+QVector<QPointF> VAbstractPiece::AngleByFirstRightAngle(const QVector<QPointF> &points, QPointF p1, QPointF p2,
+                                                        const QLineF &bigLine1, QPointF sp2, const QLineF &bigLine2,
+                                                        const VSAPoint &p, qreal width)
 {
+    const qreal localWidth = MaxLocalSA(p, width);
+    QVector<QPointF> pointsRA = points;
     QLineF edge(p1, p2);
 
     QPointF px;
-    QLineF::IntersectType type = edge.intersect(QLineF(sp2, sp3), &px);
+    QLineF::IntersectType type = edge.intersect(bigLine2, &px);
     if (type == QLineF::NoIntersection)
     {
-        return AngleByLength(p2, sp1, sp2, sp3, localWidth);
+        return AngleByLength(points, p2, bigLine1, sp2, bigLine2, p, width);
     }
 
     QLineF seam(px, p1);
     seam.setAngle(seam.angle()-90);
-    seam.setLength(width);
+    seam.setLength(p.GetSABefore(width));
 
-    QLineF spLine1(sp2, sp1);
-    QLineF spLine2(sp2, sp3);
+    pointsRA.append(seam.p2());
 
-    QVector<QPointF> points;
-    points.append(seam.p2());
-
-    if (spLine1.angleTo(spLine2) <= 90)
+    if (IsOutsidePoint(bigLine2.p2(), bigLine2.p1(), seam.p1()))
     {
-       points.append(seam.p1());
+        if (QLineF(p2, px).length() > localWidth*maxL)
+        {
+            return AngleByLength(points, p2, bigLine1, sp2, bigLine2, p, width);
+        }
+        pointsRA.append(seam.p1());
     }
     else
     {
@@ -740,50 +887,58 @@ QVector<QPointF> VAbstractPiece::AngleByFirstRightAngle(QPointF p1, QPointF p2, 
         QLineF tmp(seam.p2(), seam.p1());
         tmp.setLength(tmp.length()+length);
 
-        points.append(tmp.p2());
-        points.append(loopLine.p2());
+        pointsRA.append(tmp.p2());
+        pointsRA.append(loopLine.p2());
     }
 
-    return points;
+    return pointsRA;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QVector<QPointF> VAbstractPiece::AngleBySecondRightAngle(QPointF p2, QPointF p3, QPointF sp1, QPointF sp2, QPointF sp3,
-                                                         qreal width, qreal localWidth)
+QVector<QPointF> VAbstractPiece::AngleBySecondRightAngle(QVector<QPointF> points, QPointF p2, QPointF p3,
+                                                         const QLineF &bigLine1,  QPointF sp2, const QLineF &bigLine2,
+                                                         const VSAPoint &p, qreal width)
 {
+    const qreal localWidth = MaxLocalSA(p, width);
     QLineF edge(p2, p3);
 
     QPointF px;
-    QLineF::IntersectType type = edge.intersect(QLineF(sp1, sp2), &px);
+    QLineF::IntersectType type = edge.intersect(bigLine1, &px);
     if (type == QLineF::NoIntersection)
     {
-        return AngleByLength(p2, sp1, sp2, sp3, localWidth);
+        return AngleByLength(points, p2, bigLine1, sp2, bigLine2, p, width);
     }
 
-    QLineF seam(px, p2);
-    seam.setAngle(seam.angle()+90);
-    seam.setLength(width);
 
-    QLineF spLine1(sp2, sp1);
-    QLineF spLine2(sp2, sp3);
 
-    QVector<QPointF> points;
-    if (spLine1.angleTo(spLine2) <= 90)
+    if (IsOutsidePoint(bigLine1.p1(), bigLine1.p2(), px))
     {
-        points.append(seam.p1());
+        if (QLineF(p2, px).length() > localWidth*maxL)
+        {
+            return AngleByLength(points, p2, bigLine1, sp2, bigLine2, p, width);
+        }
+        points.append(px);
     }
     else
     {
-        QLineF loopLine(px, sp2);
-        const qreal length = loopLine.length()*0.98;
-        loopLine.setLength(length);
-        points.append(loopLine.p2());
-
-        QLineF tmp(seam.p2(), seam.p1());
-        tmp.setLength(tmp.length() + length);
-        points.append(tmp.p2());
+        // Because artificial loop can lead to wrong clipping we must rollback current seam allowance points
+        bool success = false;
+        points = RollbackSeamAllowance(points, edge, &success);
+        if (not success)
+        {
+            // Cannot find clipping point.
+            // Show at least something.
+            points.append(px);
+        }
+        else
+        {
+            px = points.last();
+        }
     }
 
+    QLineF seam(px, p3);
+    seam.setAngle(seam.angle()+90);
+    seam.setLength(p.GetSAAfter(width));
     points.append(seam.p2());
 
     return points;

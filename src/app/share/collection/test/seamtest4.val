@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<pattern>
+    <!--Pattern created with Valentina v0.6.0.0b (https://valentinaproject.bitbucket.io/).-->
+    <version>0.7.10</version>
+    <unit>cm</unit>
+    <description/>
+    <notes/>
+    <measurements/>
+    <increments/>
+    <previewCalculations/>
+    <draw name="Выкройка 1">
+        <calculation>
+            <point id="1" mx="0.132292" my="0.264583" name="А" showLabel="true" type="single" x="0.79375" y="1.05833"/>
+            <point angle="242.551" basePoint="1" id="2" length="10" lineColor="black" mx="0.132292" my="0.264583" name="А1" showLabel="true" type="endLine" typeLine="hair"/>
+            <point angle="280.696" basePoint="1" id="3" length="11.4765" lineColor="black" mx="0.132292" my="0.264583" name="А2" showLabel="true" type="endLine" typeLine="hair"/>
+            <line firstPoint="2" id="4" lineColor="black" secondPoint="3" typeLine="hair"/>
+            <spline aScale="0" angle1="130.462" angle2="264.003" color="black" id="5" length1="3.65642" length2="3.88876" penStyle="hair" point1="2" point4="1" type="simpleInteractive"/>
+            <spline aScale="0" angle1="27.268" angle2="38.6591" color="black" id="6" length1="5.37972" length2="3.66743" penStyle="hair" point1="1" point4="3" type="simpleInteractive"/>
+        </calculation>
+        <modeling>
+            <point id="7" idObject="2" inUse="false" mx="0.132292" my="0.264583" showLabel="true" type="modeling"/>
+            <point id="8" idObject="1" inUse="false" mx="0.132292" my="0.264583" showLabel="true" type="modeling"/>
+            <point id="9" idObject="3" inUse="false" mx="0.132292" my="0.264583" showLabel="true" type="modeling"/>
+            <point id="11" idObject="1" inUse="false" mx="0.132292" my="0.264583" showLabel="true" type="modeling"/>
+            <point id="12" idObject="3" inUse="false" mx="0.132292" my="0.264583" showLabel="true" type="modeling"/>
+            <point id="13" idObject="2" inUse="false" mx="0.132292" my="0.264583" showLabel="true" type="modeling"/>
+            <spline id="14" idObject="5" inUse="false" type="modelingSpline"/>
+            <point id="16" idObject="2" inUse="false" mx="0.132292" my="0.264583" showLabel="true" type="modeling"/>
+            <point id="17" idObject="1" inUse="false" mx="0.132292" my="0.264583" showLabel="true" type="modeling"/>
+            <spline id="18" idObject="6" inUse="false" type="modelingSpline"/>
+            <point id="19" idObject="3" inUse="false" mx="0.132292" my="0.264583" showLabel="true" type="modeling"/>
+        </modeling>
+        <details>
+            <detail forbidFlipping="false" forceFlipping="false" hideMainPath="false" id="10" inLayout="true" mx="0" my="0" name="Деталь" seamAllowance="true" united="false" version="2" width="1">
+                <data annotation="" foldPosition="" fontSize="0" height="1" letter="" mx="0" my="0" onFold="false" orientation="" quantity="1" rotation="0" rotationWay="" tilt="" visible="false" width="1"/>
+                <patternInfo fontSize="0" height="1" mx="0" my="0" rotation="0" visible="false" width="1"/>
+                <grainline arrows="0" length="1" mx="0" my="0" rotation="90" visible="false"/>
+                <nodes>
+                    <node idObject="7" type="NodePoint"/>
+                    <node after="CurrentSeamAllowance*0" idObject="8" type="NodePoint"/>
+                    <node before="CurrentSeamAllowance*0" idObject="9" type="NodePoint"/>
+                </nodes>
+            </detail>
+            <detail forbidFlipping="false" forceFlipping="false" hideMainPath="false" id="15" inLayout="true" mx="20.6298" my="-0.389241" name="Деталь_1" seamAllowance="true" united="false" version="2" width="1">
+                <data annotation="" foldPosition="" fontSize="0" height="1" letter="" mx="0" my="0" onFold="false" orientation="" quantity="1" rotation="0" rotationWay="" tilt="" visible="false" width="1"/>
+                <patternInfo fontSize="0" height="1" mx="0" my="0" rotation="0" visible="false" width="1"/>
+                <grainline arrows="0" length="1" mx="0" my="0" rotation="90" visible="false"/>
+                <nodes>
+                    <node after="CurrentSeamAllowance*0" idObject="11" type="NodePoint"/>
+                    <node before="CurrentSeamAllowance*0" idObject="12" type="NodePoint"/>
+                    <node idObject="13" type="NodePoint"/>
+                    <node idObject="14" reverse="0" type="NodeSpline"/>
+                </nodes>
+            </detail>
+            <detail forbidFlipping="false" forceFlipping="false" hideMainPath="false" id="20" inLayout="true" mx="-22.4982" my="0.622786" name="Деталь_2" seamAllowance="true" united="false" version="2" width="1">
+                <data annotation="" foldPosition="" fontSize="0" height="1" letter="" mx="0" my="0" onFold="false" orientation="" quantity="1" rotation="0" rotationWay="" tilt="" visible="false" width="1"/>
+                <patternInfo fontSize="0" height="1" mx="0" my="0" rotation="0" visible="false" width="1"/>
+                <grainline arrows="0" length="1" mx="0" my="0" rotation="90" visible="false"/>
+                <nodes>
+                    <node before="CurrentSeamAllowance*0" idObject="17" type="NodePoint"/>
+                    <node idObject="18" reverse="0" type="NodeSpline"/>
+                    <node idObject="19" type="NodePoint"/>
+                    <node after="CurrentSeamAllowance*0" idObject="16" type="NodePoint"/>
+                </nodes>
+            </detail>
+        </details>
+        <groups/>
+    </draw>
+</pattern>

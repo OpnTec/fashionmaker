@@ -1117,7 +1117,7 @@ bool VPiece::GetSeamPassmarkSAPoint(const VSAPoint &previousSAPoint, const VSAPo
     }
     else
     {
-        ekvPoints = EkvPoint(previousSAPoint, passmarkSAPoint, nextSAPoint, passmarkSAPoint, width);
+        ekvPoints = EkvPoint(ekvPoints, previousSAPoint, passmarkSAPoint, nextSAPoint, passmarkSAPoint, width);
     }
 
     if (ekvPoints.isEmpty())

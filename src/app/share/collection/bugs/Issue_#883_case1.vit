@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<vit>
+    <!--Measurements created with Valentina v0.6.0.912b (https://valentinaproject.bitbucket.io/).-->
+    <version>0.5.0</version>
+    <read-only>false</read-only>
+    <notes/>
+    <unit>cm</unit>
+    <pm_system>998</pm_system>
+    <personal>
+        <customer/>
+        <birth-date>1800-01-01</birth-date>
+        <gender>unknown</gender>
+        <email/>
+    </personal>
+    <body-measurements>
+        <m name="waist_circ" value="65"/>
+        <m name="hip_circ" value="91"/>
+        <m description="Длина от талии до пола спереди." full_name=" Длина спереди" name="@Дсп" value="102"/>
+        <m description="Длина от талии до пола сбоку." full_name="Длина сбоку" name="@Дсб" value="104"/>
+        <m description="Длина от талии до пола сзади." full_name="Длина сзади" name="@Дсз" value="103"/>
+        <m description="Измеряется сзади от талии до выступающих точек ягодиц." full_name="Длина от талии до бедер." name="@Д_тб" value="19"/>
+        <m description="Измеряется сбоку." full_name="Длина юбки" name="@Дю" value="40"/>
+    </body-measurements>
+</vit>

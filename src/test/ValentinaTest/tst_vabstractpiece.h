@@ -61,14 +61,44 @@ private slots:
 #endif
 
 private:
-    QVector<VSAPoint> InputPointsCase1() const;
-    QVector<QPointF>  OutputPointsCase1() const;
+    QVector<VSAPoint> InputPointsSeamTest1PieceByAngle() const;
+    QVector<QPointF>  OutputPointsSeamTest1PieceByAngle() const;
+
+    QVector<VSAPoint> InputPointsSeamTest1PieceByIntersection() const;
+    QVector<QPointF>  OutputPointsSeamTest1PieceByIntersection() const;
+
+    QVector<VSAPoint> InputPointsSeamTest1PieceByFirstEdgeSymmerty() const;
+    QVector<QPointF>  OutputPointsSeamTest1PieceByFirstEdgeSymmerty() const;
+
+    QVector<VSAPoint> InputPointsSeamTest1PieceBySecondEdgeSymmerty() const;
+    QVector<QPointF>  OutputPointsSeamTest1PieceBySecondEdgeSymmerty() const;
+
+    QVector<VSAPoint> InputPointsSeamTest1PieceByFirstRightAngle() const;
+    QVector<QPointF>  OutputPointsSeamTest1PieceByFirstRightAngle() const;
+
+    QVector<VSAPoint> InputPointsSeamTest1PieceBySecondRightAngle() const;
+    QVector<QPointF>  OutputPointsSeamTest1PieceBySecondRightAngle() const;
 
     QVector<VSAPoint> InputPointsCase2() const;
     QVector<QPointF>  OutputPointsCase2() const;
 
     QVector<VSAPoint> InputPointsCase3() const;
     QVector<QPointF>  OutputPointsCase3() const;
+
+    QVector<VSAPoint> InputPointsIssue627() const;
+    QVector<QPointF>  OutputPointsIssue627() const;
+
+    QVector<VSAPoint> InputPointsIssue767_Fabric_TopCollar() const;
+    QVector<QPointF>  OutputPointsIssue767_Fabric_TopCollar() const;
+
+    QVector<VSAPoint> InputPointsIssue767_SkinFusing_TopCollar_Notch() const;
+    QVector<QPointF>  OutputPointsIssue767_SkinFusing_TopCollar_Notch() const;
+
+    QVector<VSAPoint> InputPointsIssue880_Piece_Detail() const;
+    QVector<QPointF>  OutputPointsIssue880_Piece_Detail() const;
+
+    QVector<VSAPoint> InputPointsIssue880_Piece_Detail_1() const;
+    QVector<QPointF>  OutputPointsIssue880_Piece_Detail_1() const;
 
     void Case3() const;
     void Case4() const;
