@@ -212,7 +212,7 @@ QVector<QPointF> AngleByLength(QVector<QPointF> points, QPointF p2, const QLineF
 {
     const QPointF sp1 = bigLine1.p1();
     const QPointF sp3 = bigLine2.p2();
-    const qreal localWidth = VAbstractPiece::MaxLocalSA(p, width);
+    const qreal localWidth = p.MaxLocalSA(width);
 
     if (IsOutsidePoint(bigLine1.p1(), bigLine1.p2(), sp2) && IsOutsidePoint(bigLine2.p2(), bigLine2.p1(), sp2) )
     {
@@ -282,7 +282,7 @@ QVector<QPointF> AngleByIntersection(const QVector<QPointF> &points, QPointF p1,
                                      const QLineF &bigLine1, QPointF sp2, const QLineF &bigLine2,
                                      const VSAPoint &p, qreal width)
 {
-    const qreal localWidth = VAbstractPiece::MaxLocalSA(p, width);
+    const qreal localWidth = p.MaxLocalSA(width);
     QVector<QPointF> pointsIntr = points;
 
     // First point
@@ -345,7 +345,7 @@ QVector<QPointF> AngleByFirstSymmetry(const QVector<QPointF> &points, QPointF p1
                                       const QLineF &bigLine1, QPointF sp2, const QLineF &bigLine2,
                                       const VSAPoint &p, qreal width)
 {
-    const qreal localWidth = VAbstractPiece::MaxLocalSA(p, width);
+    const qreal localWidth = p.MaxLocalSA(width);
     QVector<QPointF> pointsIntr = points;
 
     QLineF sEdge(VPointF::FlipPF(bigLine2, p1), VPointF::FlipPF(bigLine2, p2));
@@ -407,7 +407,7 @@ QVector<QPointF> AngleBySecondSymmetry(const QVector<QPointF> &points, QPointF p
                                        const QLineF &bigLine1, QPointF sp2, const QLineF &bigLine2,
                                        const VSAPoint &p, qreal width)
 {
-    const qreal localWidth = VAbstractPiece::MaxLocalSA(p, width);
+    const qreal localWidth = p.MaxLocalSA(width);
     QVector<QPointF> pointsIntr = points;
 
     QLineF sEdge(VPointF::FlipPF(bigLine1, p2), VPointF::FlipPF(bigLine1, p3));
@@ -471,7 +471,7 @@ QVector<QPointF> AngleByFirstRightAngle(const QVector<QPointF> &points, QPointF 
                                         const QLineF &bigLine1, QPointF sp2, const QLineF &bigLine2,
                                         const VSAPoint &p, qreal width)
 {
-    const qreal localWidth = VAbstractPiece::MaxLocalSA(p, width);
+    const qreal localWidth = p.MaxLocalSA(width);
     QVector<QPointF> pointsRA = points;
     QLineF edge(p1, p2);
 
@@ -517,7 +517,7 @@ QVector<QPointF> AngleBySecondRightAngle(QVector<QPointF> points, QPointF p2, QP
                                          const QLineF &bigLine1,  QPointF sp2, const QLineF &bigLine2,
                                          const VSAPoint &p, qreal width)
 {
-    const qreal localWidth = VAbstractPiece::MaxLocalSA(p, width);
+    const qreal localWidth = p.MaxLocalSA(width);
     QLineF edge(p2, p3);
 
     QPointF px;
@@ -975,24 +975,6 @@ QVector<QPointF> VAbstractPiece::CheckLoops(const QVector<QPointF> &points)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-qreal VAbstractPiece::MaxLocalSA(const VSAPoint &p, qreal width)
-{
-    qreal w1 = p.GetSAAfter();
-    if (w1 < 0)
-    {
-        w1 = width;
-    }
-
-    qreal w2 = p.GetSABefore();
-    if (w2 < 0)
-    {
-        w2 = width;
-    }
-
-    return qMax(w1, w2);
-}
-
-//---------------------------------------------------------------------------------------------------------------------
 /**
  * @brief EkvPoint return seam aloowance points in place of intersection two edges. Last points of two edges should be
  * equal.
@@ -1034,7 +1016,7 @@ QVector<QPointF> VAbstractPiece::EkvPoint(QVector<QPointF> points, const VSAPoin
                 return points;
             }
 
-            const qreal localWidth = MaxLocalSA(p2Line1, width);
+            const qreal localWidth = p2Line1.MaxLocalSA(width);
             QLineF line( p2Line1, crosPoint );
 
             // Checking two subcases
@@ -1233,4 +1215,22 @@ qreal VSAPoint::GetSAAfter(qreal width) const
         return width;
     }
     return m_after;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+qreal VSAPoint::MaxLocalSA(qreal width) const
+{
+    qreal w1 = GetSAAfter();
+    if (w1 < 0)
+    {
+        w1 = width;
+    }
+
+    qreal w2 = GetSABefore();
+    if (w2 < 0)
+    {
+        w2 = width;
+    }
+
+    return qMax(w1, w2);
 }

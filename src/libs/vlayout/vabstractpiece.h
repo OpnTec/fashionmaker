@@ -68,6 +68,8 @@ public:
     Q_DECL_CONSTEXPR PieceNodeAngle GetAngleType() const;
                      void           SetAngleType(PieceNodeAngle value);
 
+    qreal MaxLocalSA(qreal width) const;
+
 private:
     qreal          m_before;
     qreal          m_after;
@@ -187,7 +189,6 @@ public:
     static QVector<QPointF> EkvPoint(QVector<QPointF> points, const VSAPoint &p1Line1, const VSAPoint &p2Line1,
                                      const VSAPoint &p1Line2, const VSAPoint &p2Line2, qreal width);
     static QLineF           ParallelLine(const VSAPoint &p1, const VSAPoint &p2, qreal width);
-    static qreal            MaxLocalSA(const VSAPoint &p, qreal width);
 
     template <class T>
     static QVector<T> CorrectEquidistantPoints(const QVector<T> &points, bool removeFirstAndLast = true);

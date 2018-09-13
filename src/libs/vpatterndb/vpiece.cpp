@@ -1112,7 +1112,7 @@ bool VPiece::GetSeamPassmarkSAPoint(const VSAPoint &previousSAPoint, const VSAPo
     {
         QLineF line (passmarkSAPoint, nextSAPoint);
         line.setAngle(line.angle() + 90);
-        line.setLength(VAbstractPiece::MaxLocalSA(passmarkSAPoint, width));
+        line.setLength(passmarkSAPoint.MaxLocalSA(width));
         ekvPoints.append(line.p2());
     }
     else
@@ -1249,7 +1249,7 @@ QVector<QLineF> VPiece::SAPassmark(const QVector<VPieceNode> &path, VSAPoint &pr
 
     QVector<QLineF> passmarksLines;
 
-    qreal passmarkLength = VAbstractPiece::MaxLocalSA(passmarkSAPoint, width) * passmarkFactor;
+    qreal passmarkLength = passmarkSAPoint.MaxLocalSA(width) * passmarkFactor;
     passmarkLength = qMin(passmarkLength, maxPassmarkLength);
     const VPieceNode &node = path.at(passmarkIndex);
 
@@ -1347,7 +1347,7 @@ QVector<QLineF> VPiece::BuiltInSAPassmark(const QVector<VPieceNode> &path, const
     QVector<QLineF> passmarksLines;
 
     const qreal width = ToPixel(GetSAWidth(), *data->GetPatternUnit());
-    qreal passmarkLength = VAbstractPiece::MaxLocalSA(passmarkSAPoint, width) * passmarkFactor;
+    qreal passmarkLength = passmarkSAPoint.MaxLocalSA(width) * passmarkFactor;
     passmarkLength = qMin(passmarkLength, maxPassmarkLength);
 
     QLineF edge1 = QLineF(passmarkSAPoint, previousSAPoint);
