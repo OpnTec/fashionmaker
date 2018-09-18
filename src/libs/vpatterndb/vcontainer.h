@@ -68,14 +68,15 @@ class VContainerData : public QSharedData //-V690
 {
 public:
 
-    VContainerData(const VTranslateVars *trVars, const Unit *patternUnit)
+    VContainerData(const VTranslateVars *trVars, const Unit *patternUnit, const QString &nspace)
         : calculationObjects(QHash<quint32, QSharedPointer<VGObject> >()),
           modelingObjects(QSharedPointer<QHash<quint32, QSharedPointer<VGObject>>>::create()),
           variables(QHash<QString, QSharedPointer<VInternalVariable> > ()),
           pieces(QSharedPointer<QHash<quint32, VPiece>>::create()),
           piecePaths(QSharedPointer<QHash<quint32, VPiecePath>>::create()),
           trVars(trVars),
-          patternUnit(patternUnit)
+          patternUnit(patternUnit),
+          nspace(nspace)
     {}
 
     VContainerData(const VContainerData &data)
@@ -86,7 +87,8 @@ public:
           pieces(data.pieces),
           piecePaths(data.piecePaths),
           trVars(data.trVars),
-          patternUnit(data.patternUnit)
+          patternUnit(data.patternUnit),
+          nspace(data.nspace)
     {}
 
     virtual ~VContainerData();
@@ -105,6 +107,9 @@ public:
     const VTranslateVars *trVars;
     const Unit *patternUnit;
 
+    /** @brief nspace namespace for static variables */
+    QString nspace;
+
 private:
     VContainerData &operator=(const VContainerData &) Q_DECL_EQ_DELETE;
 };
@@ -118,9 +123,11 @@ class VContainer
 {
     Q_DECLARE_TR_FUNCTIONS(VContainer)
 public:
-    VContainer(const VTranslateVars *trVars, const Unit *patternUnit);
+    VContainer(const VTranslateVars *trVars, const Unit *patternUnit, const QString &nspace);
     VContainer(const VContainer &data);
     ~VContainer();
+
+    friend class VContainerData;
 
     VContainer &operator=(const VContainer &data);
 #ifdef Q_COMPILER_RVALUE_REFS
@@ -129,6 +136,8 @@ public:
 
     inline void Swap(VContainer &data) Q_DECL_NOTHROW
     { std::swap(d, data.d); }
+
+    static QString UniqueNamespace();
 
     template <typename T>
     const QSharedPointer<T> GeometricObject(const quint32 &id) const;
@@ -139,9 +148,10 @@ public:
     quint32            GetPieceForPiecePath(quint32 id) const;
     template <typename T>
     QSharedPointer<T>  GetVariable(QString name) const;
-    static quint32     getId();
-    static quint32     getNextId();
-    static void        UpdateId(quint32 newId);
+    quint32            getId() const;
+    quint32            getNextId() const;
+    void               UpdateId(quint32 newId) const;
+    static void        UpdateId(quint32 newId, const QString &nspace);
 
     quint32            AddGObject(VGObject *obj);
     quint32            AddGObject(const QSharedPointer<VGObject> &obj);
@@ -174,15 +184,15 @@ public:
     void               ClearCalculationGObjects();
     void               ClearVariables(const VarType &type = VarType::Unknown);
     void               ClearVariables(const QVector<VarType> &types);
-    static void        ClearUniqueNames();
-    static void        ClearUniqueIncrementNames();
+    void               ClearUniqueNames() const;
+    void               ClearUniqueIncrementNames() const;
 
-    static void        SetSize(qreal size);
-    static void        SetHeight(qreal height);
-    static qreal       size();
-    static qreal      *rsize();
-    static qreal       height();
-    static qreal      *rheight();
+    void               SetSize(qreal size) const;
+    void               SetHeight(qreal height) const;
+    qreal              size() const;
+    static qreal       size(const QString &nspace);
+    qreal              height() const;
+    static qreal       height(const QString &nspace);
 
     void               RemoveIncrement(const QString& name);
 
@@ -199,8 +209,11 @@ public:
     const QMap<QString, QSharedPointer<VArcRadius> >    DataRadiusesArcs() const;
     const QMap<QString, QSharedPointer<VCurveAngle> >   DataAnglesCurves() const;
 
-    static bool        IsUnique(const QString &name);
-    static QStringList AllUniqueNames();
+    bool        IsUnique(const QString &name) const;
+    static bool IsUnique(const QString &name, const QString &nspace);
+
+    QStringList        AllUniqueNames() const;
+    static QStringList AllUniqueNames(const QString &nspace);
 
     const Unit *GetPatternUnit() const;
     const VTranslateVars *GetTrVars() const;
@@ -209,10 +222,11 @@ private:
     /**
      * @brief _id current id. New object will have value +1. For empty class equal 0.
      */
-    static quint32 _id;
-    static qreal   _size;
-    static qreal   _height;
-    static QSet<QString> uniqueNames;
+    static QMap<QString, quint32> _id;
+    static QMap<QString, qreal>   _size;
+    static QMap<QString, qreal>   _height;
+    static QMap<QString, QSet<QString>> uniqueNames;
+    static QMap<QString, quint32> copyCounter;
 
     QSharedDataPointer<VContainerData> d;
 
@@ -226,6 +240,8 @@ private:
 
     template <typename T>
     const QMap<QString, QSharedPointer<T> > DataVar(const VarType &type) const;
+
+    static void ClearNamespace(const QString &nspace);
 };
 
 Q_DECLARE_TYPEINFO(VContainer, Q_MOVABLE_TYPE);
@@ -324,7 +340,7 @@ void VContainer::AddVariable(const QString& name, const QSharedPointer<T> &var)
         d->variables.insert(name, var);
     }
 
-    uniqueNames.insert(name);
+    uniqueNames[d->nspace].insert(name);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -353,7 +369,7 @@ void VContainer::UpdateGObject(quint32 id, const QSharedPointer<T> &obj)
 {
     SCASSERT(not obj.isNull())
     UpdateObject(id, obj);
-    uniqueNames.insert(obj->name());
+    uniqueNames[d->nspace].insert(obj->name());
 }
 
 //---------------------------------------------------------------------------------------------------------------------

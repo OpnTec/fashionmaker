@@ -49,7 +49,7 @@ void TST_VPiece::ClearLoop()
     // See file <root>/src/app/share/collection/jacketМ6_30-110.val
     // Check correct seam allowance
     const Unit unit = Unit::Mm;
-    QScopedPointer<VContainer> data(new VContainer(nullptr, &unit));
+    QScopedPointer<VContainer> data(new VContainer(nullptr, &unit, VContainer::UniqueNamespace()));
     qApp->setPatternUnit(unit);
 
     data->UpdateGObject(304, new VPointF(61.866708661417327, 446.92270866141735, "Ф1", 5.0000125984251973,
@@ -221,7 +221,7 @@ void TST_VPiece::Issue620()
     // See file <root>/src/app/share/collection/bugs/Issue_#620.vit
     // Check main path
     const Unit unit = Unit::Cm;
-    QScopedPointer<VContainer> data(new VContainer(nullptr, &unit));
+    QScopedPointer<VContainer> data(new VContainer(nullptr, &unit, VContainer::UniqueNamespace()));
     qApp->setPatternUnit(unit);
 
     data->UpdateGObject(1, new VPointF(30, 39.999874015748034, "A", 5.0000125984251973, 9.9999874015748045));

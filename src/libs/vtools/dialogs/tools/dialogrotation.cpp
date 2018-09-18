@@ -335,7 +335,7 @@ void DialogRotation::SuffixChanged()
             if (m_suffix != suffix)
             {
                 QRegularExpression rx(NameRegExp());
-                const QStringList uniqueNames = VContainer::AllUniqueNames();
+                const QStringList uniqueNames = data->AllUniqueNames();
                 for (auto &uniqueName : uniqueNames)
                 {
                     const QString name = uniqueName + suffix;

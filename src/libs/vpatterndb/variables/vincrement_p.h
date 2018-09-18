@@ -48,7 +48,7 @@ public:
           formula(QString()),
           formulaOk(false),
           previewCalculation(false),
-          data(VContainer(nullptr, nullptr))
+          data()
     {}
 
     VIncrementData(VContainer *data, quint32 index, const QString &formula, bool ok)
@@ -56,17 +56,17 @@ public:
           formula(formula),
           formulaOk(ok),
           previewCalculation(false),
-          data(*data)
+          data(QSharedPointer<VContainer>(new VContainer(*data)))
     {
         // When we create an increment in the dialog it will get neccesary data. Such data must be removed because will
         // confuse a user. Increment should not know nothing about internal variables.
         Q_STATIC_ASSERT_X(static_cast<int>(VarType::Unknown) == 8, "Check that you used all types");
-        this->data.ClearVariables(QVector<VarType>({VarType::LineAngle,
-                                                    VarType::LineLength,
-                                                    VarType::CurveLength,
-                                                    VarType::CurveCLength,
-                                                    VarType::ArcRadius,
-                                                    VarType::CurveAngle}));
+        this->data->ClearVariables(QVector<VarType>({VarType::LineAngle,
+                                                     VarType::LineLength,
+                                                     VarType::CurveLength,
+                                                     VarType::CurveCLength,
+                                                     VarType::ArcRadius,
+                                                     VarType::CurveAngle}));
     }
 
     VIncrementData(const VIncrementData &incr)
@@ -85,7 +85,7 @@ public:
     QString formula;
     bool    formulaOk;
     bool    previewCalculation;
-    VContainer data;
+    QSharedPointer<VContainer> data;
 
 private:
     VIncrementData &operator=(const VIncrementData &) Q_DECL_EQ_DELETE;

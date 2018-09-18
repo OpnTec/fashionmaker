@@ -53,7 +53,7 @@ void VAbstractFlipping::CreateDestination(VAbstractOperationInitData &initData, 
     {
         initData.destination.clear();// Try to avoid mistake, value must be empty
 
-        initData.id = VContainer::getNextId();//Just reserve id for tool
+        initData.id = initData.data->getNextId();//Just reserve id for tool
 
         for (auto idObject : qAsConst(initData.source))
         {

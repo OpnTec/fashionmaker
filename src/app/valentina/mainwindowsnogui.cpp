@@ -112,7 +112,7 @@ MainWindowsNoGUI::MainWindowsNoGUI(QWidget *parent)
       listDetails(),
       currentScene(nullptr),
       tempSceneLayout(nullptr),
-      pattern(new VContainer(qApp->TrVars(), qApp->patternUnitP())),
+      pattern(new VContainer(qApp->TrVars(), qApp->patternUnitP(), valentinaNamespace)),
       doc(nullptr),
       papers(),
       shadows(),
@@ -1665,20 +1665,20 @@ void MainWindowsNoGUI::SetSizeHeightForIndividualM() const
 
     if (vars->contains(size_M))
     {
-        VContainer::SetSize(*vars->value(size_M)->GetValue());
+        pattern->SetSize(*vars->value(size_M)->GetValue());
     }
     else
     {
-        VContainer::SetSize(0);
+        pattern->SetSize(0);
     }
 
     if (vars->contains(height_M))
     {
-        VContainer::SetHeight(*vars->value(height_M)->GetValue());
+        pattern->SetHeight(*vars->value(height_M)->GetValue());
     }
     else
     {
-        VContainer::SetHeight(0);
+        pattern->SetHeight(0);
     }
 
     doc->SetPatternWasChanged(true);
@@ -1776,8 +1776,6 @@ QSharedPointer<VMeasurements> MainWindowsNoGUI::OpenMeasurementFile(const QStrin
     try
     {
         m = QSharedPointer<VMeasurements>(new VMeasurements(pattern));
-        m->SetSize(VContainer::rsize());
-        m->SetHeight(VContainer::rheight());
         m->setXMLContent(path);
 
         if (m->Type() == MeasurementsType::Unknown)

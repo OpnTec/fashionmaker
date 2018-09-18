@@ -155,8 +155,8 @@ VToolCurveIntersectAxis *VToolCurveIntersectAxis::Create(VToolCurveIntersectAxis
         initData.id = initData.data->AddGObject(p);
         initData.data->AddLine(initData.basePointId, initData.id);
 
-        VContainer::getNextId();
-        VContainer::getNextId();
+        initData.data->getNextId();
+        initData.data->getNextId();
         InitSegments(curve->getType(), segLength, p, initData.curveId, initData.data);
     }
     else

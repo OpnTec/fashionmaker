@@ -444,8 +444,8 @@ bool MainWindow::LoadMeasurements(const QString &path)
 
     if (m->Type() == MeasurementsType::Multisize)
     {
-        VContainer::SetSize(UnitConvertor(m->BaseSize(), m->MUnit(), *m->GetData()->GetPatternUnit()));
-        VContainer::SetHeight(UnitConvertor(m->BaseHeight(), m->MUnit(), *m->GetData()->GetPatternUnit()));
+        pattern->SetSize(UnitConvertor(m->BaseSize(), m->MUnit(), *m->GetData()->GetPatternUnit()));
+        pattern->SetHeight(UnitConvertor(m->BaseHeight(), m->MUnit(), *m->GetData()->GetPatternUnit()));
 
         doc->SetPatternWasChanged(true);
         emit doc->UpdatePatternLabel();
@@ -500,8 +500,8 @@ bool MainWindow::UpdateMeasurements(const QString &path, int size, int height)
 
     if (m->Type() == MeasurementsType::Multisize)
     {
-        VContainer::SetSize(size);
-        VContainer::SetHeight(height);
+        pattern->SetSize(size);
+        pattern->SetHeight(height);
 
         doc->SetPatternWasChanged(true);
         emit doc->UpdatePatternLabel();
@@ -1143,7 +1143,7 @@ void MainWindow::ClosedDialogGroup(int result)
     {
         const QPointer<DialogGroup> dialog = qobject_cast<DialogGroup *>(dialogTool);
         SCASSERT(not dialog.isNull())
-        const QDomElement group = doc->CreateGroup(VContainer::getNextId(), dialog->GetName(), dialog->GetGroup());
+        const QDomElement group = doc->CreateGroup(pattern->getNextId(), dialog->GetName(), dialog->GetGroup());
         if (not group.isNull())
         {
             AddGroup *addGroup = new AddGroup(group, doc);
@@ -1733,9 +1733,9 @@ void MainWindow::ShowMeasurements()
                     << "-u"
                     << UnitsToStr(qApp->patternUnit())
                     << "-e"
-                    << QString().setNum(static_cast<int>(UnitConvertor(VContainer::height(), doc->MUnit(), Unit::Cm)))
+                    << QString().setNum(static_cast<int>(UnitConvertor(pattern->height(), doc->MUnit(), Unit::Cm)))
                     << "-s"
-                    << QString().setNum(static_cast<int>(UnitConvertor(VContainer::size(), doc->MUnit(), Unit::Cm)));
+                    << QString().setNum(static_cast<int>(UnitConvertor(pattern->size(), doc->MUnit(), Unit::Cm)));
         }
         else
         {
@@ -1796,7 +1796,7 @@ void MainWindow::SyncMeasurements()
     if (mChanges)
     {
         const QString path = AbsoluteMPath(qApp->GetPatternPath(), doc->MPath());
-        if(UpdateMeasurements(path, static_cast<int>(VContainer::size()), static_cast<int>(VContainer::height())))
+        if(UpdateMeasurements(path, static_cast<int>(pattern->size()), static_cast<int>(pattern->height())))
         {
             if (not watcher->files().contains(path))
             {
@@ -3378,9 +3378,9 @@ void MainWindow::PatternChangesWereSaved(bool saved)
  */
 void MainWindow::ChangedSize(const QString & text)
 {
-    const int size = static_cast<int>(VContainer::size());
+    const int size = static_cast<int>(pattern->size());
     if (UpdateMeasurements(AbsoluteMPath(qApp->GetPatternPath(), doc->MPath()), text.toInt(),
-                           static_cast<int>(VContainer::height())))
+                           static_cast<int>(pattern->height())))
     {
         doc->LiteParseTree(Document::LiteParse);
         emit sceneDetails->DimensionsChanged();
@@ -3408,8 +3408,8 @@ void MainWindow::ChangedSize(const QString & text)
  */
 void MainWindow::ChangedHeight(const QString &text)
 {
-    const int height = static_cast<int>(VContainer::height());
-    if (UpdateMeasurements(AbsoluteMPath(qApp->GetPatternPath(), doc->MPath()), static_cast<int>(VContainer::size()),
+    const int height = static_cast<int>(pattern->height());
+    if (UpdateMeasurements(AbsoluteMPath(qApp->GetPatternPath(), doc->MPath()), static_cast<int>(pattern->size()),
                            text.toInt()))
     {
         doc->LiteParseTree(Document::LiteParse);
@@ -3456,13 +3456,13 @@ void MainWindow::SetDefaultHeight()
     }
     else
     {
-        index = gradationHeights->findText(QString().setNum(VContainer::height()));
+        index = gradationHeights->findText(QString().setNum(pattern->height()));
         if (index != -1)
         {
             gradationHeights->setCurrentIndex(index);
         }
     }
-    VContainer::SetHeight(gradationHeights->currentText().toInt());
+    pattern->SetHeight(gradationHeights->currentText().toInt());
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -3476,13 +3476,13 @@ void MainWindow::SetDefaultSize()
     }
     else
     {
-        index = gradationSizes->findText(QString().setNum(VContainer::size()));
+        index = gradationSizes->findText(QString().setNum(pattern->size()));
         if (index != -1)
         {
             gradationSizes->setCurrentIndex(index);
         }
     }
-    VContainer::SetSize(gradationSizes->currentText().toInt());
+    pattern->SetSize(gradationSizes->currentText().toInt());
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -4423,8 +4423,6 @@ bool MainWindow::LoadPattern(QString fileName, const QString& customMeasureFile)
         // Here comes undocumented Valentina's feature.
         // Because app bundle in Mac OS X doesn't allow setup assosiation for Tape we must do this through Valentina
         VMeasurements m(pattern);
-        m.SetSize(VContainer::rsize());
-        m.SetHeight(VContainer::rheight());
         m.setXMLContent(fileName);
 
         if (m.Type() == MeasurementsType::Multisize || m.Type() == MeasurementsType::Individual)
@@ -4960,8 +4958,6 @@ QString MainWindow::CheckPathToMeasurements(const QString &patternPath, const QS
                 else
                 {
                     QScopedPointer<VMeasurements> m(new VMeasurements(pattern));
-                    m->SetSize(VContainer::rsize());
-                    m->SetHeight(VContainer::rheight());
                     m->setXMLContent(mPath);
 
                     patternType = m->Type();

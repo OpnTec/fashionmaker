@@ -677,7 +677,8 @@ void VToolOptionsPropertyBrowser::SetPointName(const QString &name)
         }
 
         QRegularExpression rx(NameRegExp());
-        if (name.isEmpty() || VContainer::IsUnique(name) == false || rx.match(name).hasMatch() == false)
+        if (name.isEmpty() || VContainer::IsUnique(name, valentinaNamespace) == false
+                || rx.match(name).hasMatch() == false)
         {
             idToProperty[AttrName]->setValue(i->name());
         }
@@ -704,7 +705,8 @@ void VToolOptionsPropertyBrowser::SetPointName1(const QString &name)
         }
 
         QRegularExpression rx(NameRegExp());
-        if (name.isEmpty() || VContainer::IsUnique(name) == false || rx.match(name).hasMatch() == false)
+        if (name.isEmpty() || VContainer::IsUnique(name, valentinaNamespace) == false
+                || rx.match(name).hasMatch() == false)
         {
             idToProperty[AttrName1]->setValue(i->nameP1());
         }
@@ -731,7 +733,8 @@ void VToolOptionsPropertyBrowser::SetPointName2(const QString &name)
         }
 
         QRegularExpression rx(NameRegExp());
-        if (name.isEmpty() || VContainer::IsUnique(name) == false || rx.match(name).hasMatch() == false)
+        if (name.isEmpty() || VContainer::IsUnique(name, valentinaNamespace) == false
+                || rx.match(name).hasMatch() == false)
         {
             idToProperty[AttrName2]->setValue(i->nameP2());
         }
@@ -764,11 +767,11 @@ void VToolOptionsPropertyBrowser::SetOperationSuffix(const QString &suffix)
         }
 
         QRegularExpression rx(NameRegExp());
-        const QStringList uniqueNames = VContainer::AllUniqueNames();
+        const QStringList uniqueNames = VContainer::AllUniqueNames(valentinaNamespace);
         for (auto &uniqueName : uniqueNames)
         {
             const QString name = uniqueName + suffix;
-            if (not rx.match(name).hasMatch() || not VContainer::IsUnique(name))
+            if (not rx.match(name).hasMatch() || not VContainer::IsUnique(name, valentinaNamespace))
             {
                 idToProperty[AttrSuffix]->setValue(item->Suffix());
                 return;

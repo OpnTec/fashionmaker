@@ -140,12 +140,12 @@ VToolLine * VToolLine::Create(VToolLineInitData initData)
     SCASSERT(initData.data != nullptr)
     if (initData.typeCreation == Source::FromGui)
     {
-        initData.id = VContainer::getNextId();
+        initData.id = initData.data->getNextId();
         initData.data->AddLine(initData.firstPoint, initData.secondPoint);
     }
     else
     {
-        VContainer::UpdateId(initData.id);
+        initData.data->UpdateId(initData.id);
         initData.data->AddLine(initData.firstPoint, initData.secondPoint);
         if (initData.parse != Document::FullParse)
         {

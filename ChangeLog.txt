@@ -103,6 +103,7 @@
 - [#823] SVG Export - seam and cutting line of one piece missing.
 - Added submenu to quick access to piece node point angle type.
 - [#880] Fix broken seam allowance angle type.
+- [#882] VContainer class doesn't support multi document mode.
 
 # Version 0.5.0 May 9, 2017
 - [#581] User can now filter input lists by keyword in function wizard.

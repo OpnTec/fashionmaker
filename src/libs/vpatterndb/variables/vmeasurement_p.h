@@ -44,7 +44,7 @@ public:
 
     VMeasurementData(quint32 index, const QString &gui_text, const QString &tagName, qreal baseSize, qreal baseHeight,
                      qreal base, qreal ksize, qreal kheight )
-        : data(VContainer(nullptr, nullptr)),
+        : data(),
           index(index),
           formula(),
           gui_text(gui_text),
@@ -62,7 +62,7 @@ public:
 
     VMeasurementData(VContainer *data, quint32 index, const QString &formula, bool ok, const QString &gui_text,
                      const QString &tagName, qreal base)
-        : data(*data),
+        : data(QSharedPointer<VContainer>(new VContainer(*data))),
           index(index),
           formula(formula),
           gui_text(gui_text),
@@ -98,7 +98,7 @@ public:
 
     virtual  ~VMeasurementData();
 
-    VContainer data;
+    QSharedPointer<VContainer> data;
     quint32 index;
     QString formula;
     QString gui_text;

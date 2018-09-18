@@ -250,11 +250,9 @@ bool TMainWindow::LoadFile(const QString &path)
 
         try
         {
-            data = new VContainer(qApp->TrVars(), &mUnit);
+            data = new VContainer(qApp->TrVars(), &mUnit, VContainer::UniqueNamespace());
 
             m = new VMeasurements(data);
-            m->SetSize(&currentSize);
-            m->SetHeight(&currentHeight);
             m->setXMLContent(path);
 
             mType = m->Type();
@@ -335,8 +333,7 @@ bool TMainWindow::LoadFile(const QString &path)
     }
     else
     {
-        qApp->NewMainWindow();
-        return qApp->MainWindow()->LoadFile(path);
+        return qApp->NewMainWindow()->LoadFile(path);
     }
 
     return true;
@@ -364,15 +361,13 @@ void TMainWindow::FileNew()
         pUnit = mUnit;
         mType = measurements.Type();
 
-        data = new VContainer(qApp->TrVars(), &mUnit);
+        data = new VContainer(qApp->TrVars(), &mUnit, VContainer::UniqueNamespace());
         currentHeight = measurements.BaseHeight();
         currentSize = measurements.BaseSize();
 
         if (mType == MeasurementsType::Multisize)
         {
             m = new VMeasurements(mUnit, measurements.BaseSize(), measurements.BaseHeight(), data);
-            m->SetSize(&currentSize);
-            m->SetHeight(&currentHeight);
             m_curFileFormatVersion = VVSTConverter::MeasurementMaxVer;
             m_curFileFormatVersionStr = VVSTConverter::MeasurementMaxVerStr;
         }
@@ -397,8 +392,7 @@ void TMainWindow::FileNew()
     }
     else
     {
-        qApp->NewMainWindow();
-        qApp->MainWindow()->FileNew();
+        qApp->NewMainWindow()->FileNew();
     }
 }
 
@@ -2093,13 +2087,13 @@ void TMainWindow::InitWindow()
 
         labelGradationHeights = new QLabel(tr("Height:"));
         gradationHeights = SetGradationList(labelGradationHeights, listHeights);
-        SetDefaultHeight(static_cast<int>(VContainer::height()));
+        SetDefaultHeight(static_cast<int>(data->height()));
         connect(gradationHeights, QOverload<const QString &>::of(&QComboBox::currentIndexChanged),
                 this, &TMainWindow::ChangedHeight);
 
         labelGradationSizes = new QLabel(tr("Size:"));
         gradationSizes = SetGradationList(labelGradationSizes, listSizes);
-        SetDefaultSize(static_cast<int>(VContainer::size()));
+        SetDefaultSize(static_cast<int>(data->size()));
         connect(gradationSizes, QOverload<const QString &>::of(&QComboBox::currentIndexChanged),
                 this, &TMainWindow::ChangedSize);
 
@@ -2433,7 +2427,7 @@ void TMainWindow::SetDefaultSize(int value)
 //---------------------------------------------------------------------------------------------------------------------
 void TMainWindow::RefreshData(bool freshCall)
 {
-    VContainer::ClearUniqueNames();
+    data->ClearUniqueNames();
     data->ClearVariables(VarType::Measurement);
     m->ReadMeasurements();
 
@@ -2894,11 +2888,9 @@ bool TMainWindow::LoadFromExistingFile(const QString &path)
 
         try
         {
-            data = new VContainer(qApp->TrVars(), &mUnit);
+            data = new VContainer(qApp->TrVars(), &mUnit, VContainer::UniqueNamespace());
 
             m = new VMeasurements(data);
-            m->SetSize(&currentSize);
-            m->SetHeight(&currentHeight);
             m->setXMLContent(path);
 
             mType = m->Type();
@@ -2975,8 +2967,7 @@ bool TMainWindow::LoadFromExistingFile(const QString &path)
     }
     else
     {
-        qApp->NewMainWindow();
-        return qApp->MainWindow()->LoadFile(path);
+        return qApp->NewMainWindow()->LoadFile(path);
     }
 
     return true;
@@ -3014,8 +3005,7 @@ void TMainWindow::CreateWindowMenu(QMenu *menu)
     QAction *action = menu->addAction(tr("&New Window"));
     connect(action, &QAction::triggered, this, []()
     {
-        qApp->NewMainWindow();
-        qApp->MainWindow()->activateWindow();
+        qApp->NewMainWindow()->activateWindow();
     });
     action->setMenuRole(QAction::NoRole);
     menu->addSeparator();

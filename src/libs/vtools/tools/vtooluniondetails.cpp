@@ -1763,7 +1763,7 @@ VToolUnionDetails* VToolUnionDetails::Create(VToolUnionDetailsInitData initData)
     VToolUnionDetails *unionDetails = nullptr;
     if (initData.typeCreation == Source::FromGui)
     {
-        initData.id = VContainer::getNextId();
+        initData.id = initData.data->getNextId();
     }
     else
     {

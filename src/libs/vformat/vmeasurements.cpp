@@ -99,9 +99,7 @@ QString FileComment()
 VMeasurements::VMeasurements(VContainer *data)
     :VDomDocument(),
       data(data),
-      type(MeasurementsType::Unknown),
-      m_currentSize(nullptr),
-      m_currentHeight(nullptr)
+      type(MeasurementsType::Unknown)
 {
     SCASSERT(data != nullptr)
 }
@@ -110,9 +108,7 @@ VMeasurements::VMeasurements(VContainer *data)
 VMeasurements::VMeasurements(Unit unit, VContainer *data)
     :VDomDocument(),
       data(data),
-      type(MeasurementsType::Individual),
-      m_currentSize(nullptr),
-      m_currentHeight(nullptr)
+      type(MeasurementsType::Individual)
 {
     SCASSERT(data != nullptr)
 
@@ -123,9 +119,7 @@ VMeasurements::VMeasurements(Unit unit, VContainer *data)
 VMeasurements::VMeasurements(Unit unit, int baseSize, int baseHeight, VContainer *data)
     :VDomDocument(),
       data(data),
-      type(MeasurementsType::Multisize),
-      m_currentSize(nullptr),
-      m_currentHeight(nullptr)
+      type(MeasurementsType::Multisize)
 {
     SCASSERT(data != nullptr)
 
@@ -262,7 +256,8 @@ void VMeasurements::ReadMeasurements() const
     // That's why we need two containers: one for converted values, second for real data.
 
     // Container for values in measurement file's unit
-    QScopedPointer<VContainer> tempData(new VContainer(data->GetTrVars(), data->GetPatternUnit()));
+    QScopedPointer<VContainer> tempData(new VContainer(data->GetTrVars(), data->GetPatternUnit(),
+                                                       VContainer::UniqueNamespace()));
 
     const QDomNodeList list = elementsByTagName(TagMeasurement);
     for (int i=0; i < list.size(); ++i)
@@ -283,8 +278,6 @@ void VMeasurements::ReadMeasurements() const
 
             tempMeash = QSharedPointer<VMeasurement>(new VMeasurement(static_cast<quint32>(i), name, BaseSize(),
                                                                       BaseHeight(), base, ksize, kheight));
-            tempMeash->SetSize(m_currentSize);
-            tempMeash->SetHeight(m_currentHeight);
             tempMeash->SetUnit(data->GetPatternUnit());
 
             base = UnitConvertor(base, MUnit(), *data->GetPatternUnit());
@@ -296,8 +289,6 @@ void VMeasurements::ReadMeasurements() const
 
             meash = QSharedPointer<VMeasurement>(new VMeasurement(static_cast<quint32>(i), name, baseSize, baseHeight,
                                                                   base, ksize, kheight, fullName, description));
-            meash->SetSize(m_currentSize);
-            meash->SetHeight(m_currentHeight);
             meash->SetUnit(data->GetPatternUnit());
         }
         else
@@ -475,18 +466,6 @@ void VMeasurements::SetReadOnly(bool ro)
     {
         setTagText(TagReadOnly, falseStr);
     }
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void VMeasurements::SetSize(qreal *size)
-{
-    m_currentSize = size;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void VMeasurements::SetHeight(qreal *height)
-{
-    m_currentHeight = height;
 }
 
 //---------------------------------------------------------------------------------------------------------------------

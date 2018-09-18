@@ -337,14 +337,14 @@ VContainer VPattern::GetCompleteData() const
     const int countPP = CountPP();
     if (countPP <= 0 || history.isEmpty() || tools.isEmpty())
     {
-        return (data != nullptr ? *data : VContainer(nullptr, nullptr));
+        return (data != nullptr ? *data : VContainer(nullptr, nullptr, VContainer::UniqueNamespace()));
     }
 
     const quint32 id = (countPP == 1 ? history.last().getId() : LastToolId());
 
     if (id == NULL_ID)
     {
-        return (data != nullptr ? *data : VContainer(nullptr, nullptr));
+        return (data != nullptr ? *data : VContainer(nullptr, nullptr, VContainer::UniqueNamespace()));
     }
 
     try
@@ -354,7 +354,7 @@ VContainer VPattern::GetCompleteData() const
     catch (VExceptionBadId &e)
     {
         Q_UNUSED(e)
-        return (data != nullptr ? *data : VContainer(nullptr, nullptr));
+        return (data != nullptr ? *data : VContainer(nullptr, nullptr, VContainer::UniqueNamespace()));
     }
 
     const VDataTool *vTool = tools.value(id);
@@ -455,7 +455,7 @@ void VPattern::LiteParseIncrements()
     {
         emit SetEnabledGUI(true);
 
-        VContainer::ClearUniqueIncrementNames();
+        data->ClearUniqueIncrementNames();
         data->ClearVariables(VarType::Increment);
 
         QDomNodeList tags = elementsByTagName(TagIncrements);
@@ -3998,7 +3998,7 @@ QString VPattern::GenerateLabel(const LabelType &type, const QString &reservedNa
 QString VPattern::GenerateSuffix() const
 {
     const QString suffixBase = GetLabelBase(static_cast<quint32>(GetIndexActivPP())).toLower();
-    const QStringList uniqueNames = VContainer::AllUniqueNames();
+    const QStringList uniqueNames = data->AllUniqueNames();
     qint32 num = 1;
     QString suffix;
     for (;;)
@@ -4258,7 +4258,7 @@ void VPattern::PrepareForParse(const Document &parse)
     }
     else if (parse == Document::LiteParse)
     {
-        VContainer::ClearUniqueNames();
+        data->ClearUniqueNames();
         Q_STATIC_ASSERT_X(static_cast<int>(VarType::Unknown) == 8, "Check that you used all types");
         data->ClearVariables(QVector<VarType>({VarType::Increment,
                                                VarType::LineAngle,

@@ -139,8 +139,8 @@ VToolCutArc* VToolCutArc::Create(VToolCutArcInitData &initData)
     if (initData.typeCreation == Source::FromGui)
     {
         initData.id = initData.data->AddGObject(p);
-        a1->setId(VContainer::getNextId());
-        a2->setId(VContainer::getNextId());
+        a1->setId(initData.data->getNextId());
+        a2->setId(initData.data->getNextId());
         initData.data->AddArc(a1, a1->id(), initData.id);
         initData.data->AddArc(a2, a2->id(), initData.id);
     }

@@ -112,7 +112,9 @@ void VWidgetGroups::CtxMenu(const QPoint &pos)
     QAction *selectedAction = menu->exec(ui->tableWidget->viewport()->mapToGlobal(pos));
     if (selectedAction == actionRename)
     {
-        DialogGroup *dialog = new DialogGroup(new VContainer(qApp->TrVars(), qApp->patternUnitP()), NULL_ID, this);
+        DialogGroup *dialog = new DialogGroup(new VContainer(qApp->TrVars(), qApp->patternUnitP(),
+                                                             VContainer::UniqueNamespace()),
+                                              NULL_ID, this);
         dialog->SetName(doc->GetGroupName(id));
         const int result = dialog->exec();
 

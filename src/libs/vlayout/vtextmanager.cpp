@@ -96,14 +96,14 @@ QMap<QString, QString> PreparePlaceholders(const VAbstractPattern *doc)
     QString mExt;
     if (qApp->patternType() == MeasurementsType::Multisize)
     {
-        curSize = QString::number(VContainer::size());
-        curHeight = QString::number(VContainer::height());
+        curSize = QString::number(VContainer::size(valentinaNamespace));
+        curHeight = QString::number(VContainer::height(valentinaNamespace));
         mExt = "vst";
     }
     else if (qApp->patternType() == MeasurementsType::Individual)
     {
-        curSize = QString::number(VContainer::size());
-        curHeight = QString::number(VContainer::height());
+        curSize = QString::number(VContainer::size(valentinaNamespace));
+        curHeight = QString::number(VContainer::height(valentinaNamespace));
         mExt = "vit";
     }
 

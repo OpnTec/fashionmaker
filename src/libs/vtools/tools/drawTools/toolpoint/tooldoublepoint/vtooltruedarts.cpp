@@ -162,7 +162,7 @@ VToolTrueDarts *VToolTrueDarts::Create(VToolTrueDartsInitData initData)
 
     if (initData.typeCreation == Source::FromGui)
     {
-        initData.id = VContainer::getNextId();//Just reserve id for tool
+        initData.id = initData.data->getNextId();//Just reserve id for tool
         initData.p1id = initData.data->AddGObject(p1);
         initData.p2id = initData.data->AddGObject(p2);
     }
