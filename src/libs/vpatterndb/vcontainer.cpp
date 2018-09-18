@@ -808,7 +808,7 @@ const QHash<QString, QSharedPointer<VInternalVariable> > *VContainer::DataVariab
 //---------------------------------------------------------------------------------------------------------------------
 VContainerData::~VContainerData()
 {
-    if (ref == 0)
+    if (ref.load() == 0)
     {
         --VContainer::copyCounter[nspace];
     }
