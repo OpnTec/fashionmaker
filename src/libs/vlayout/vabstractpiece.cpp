@@ -35,6 +35,7 @@
 #include <QSet>
 #include <QVector>
 #include <QPainterPath>
+#include <QTemporaryFile>
 
 const qreal maxL = 2.5;
 
@@ -618,13 +619,121 @@ qreal AngleBetweenBisectors(const QLineF &b1, const QLineF &b2)
         angle2 = 0;
     }
 
-    if (angle1 <= angle2)
+    return qMin(angle1, angle2);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+// Use for writing tests
+void DumpVector(const QVector<QPointF> &points)
+{
+    QTemporaryFile temp; // Go to tmp folder to find dump
+    temp.setAutoRemove(false); // Remove dump manually
+    if (temp.open())
     {
-        return angle1;
+        QTextStream out(&temp);
+        out << "QVector<QPointF> points;" << endl << endl;
+
+        for(auto point : points)
+        {
+            out << QString("points += QPointF(%1, %2);").arg(point.x()).arg(point.y()) << endl;
+        }
+
+        out << endl << "return points;";
     }
-    else
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+// Use for writing tests
+void DumpVector(const QVector<VSAPoint> &points)
+{
+    QTemporaryFile temp; // Go to tmp folder to find dump
+    temp.setAutoRemove(false); // Remove dump manually
+    if (temp.open())
     {
-        return angle2;
+        QTextStream out(&temp);
+
+        out << "QVector<VSAPoint> points;" << endl;
+
+        bool firstPoint = true;
+        enum PointType {Unknown, Default, Custom};
+        PointType type = Unknown;
+
+        for(auto point : points)
+        {
+            if (VFuzzyComparePossibleNulls(point.GetSAAfter(), -1)
+                    and VFuzzyComparePossibleNulls(point.GetSABefore(), -1)
+                    and point.GetAngleType() == PieceNodeAngle::ByLength)
+            {
+                if (type != Default)
+                {
+                    out << endl;
+                }
+                type = Default;
+                out << QString("points += VSAPoint(%1, %2);").arg(point.x()).arg(point.y()) << endl;
+            }
+            else
+            {
+                out << endl;
+                type = Custom;
+
+                if (firstPoint)
+                {
+                    out << "VSAPoint ";
+                    firstPoint = false;
+                }
+                out << QString("p = VSAPoint(%1, %2);").arg(point.x()).arg(point.y()) << endl;
+
+                if (not VFuzzyComparePossibleNulls(point.GetSABefore(), -1))
+                {
+                    out << QString("p.SetSABefore(%1);").arg(point.GetSABefore()) << endl;
+                }
+
+                if (not VFuzzyComparePossibleNulls(point.GetSAAfter(), -1))
+                {
+                    out << QString("p.SetSAAfter(%1);").arg(point.GetSAAfter()) << endl;
+                }
+
+                if (point.GetAngleType() != PieceNodeAngle::ByLength)
+                {
+QT_WARNING_PUSH
+QT_WARNING_DISABLE_GCC("-Wswitch-default")
+                    // This check helps to find missed angle types in the switch
+                    Q_STATIC_ASSERT_X(static_cast<int>(PieceNodeAngle::LAST_ONE_DO_NOT_USE) == 6,
+                                      "Not all types were handled.");
+
+                    QString typeStr;
+                    switch (point.GetAngleType())
+                    {
+                        case PieceNodeAngle::LAST_ONE_DO_NOT_USE:
+                        case PieceNodeAngle::ByLength:
+                            Q_UNREACHABLE(); //-V501
+                            break;
+                        case PieceNodeAngle::ByPointsIntersection:
+                            typeStr = "ByPointsIntersection";
+                            break;
+                        case PieceNodeAngle::ByFirstEdgeSymmetry:
+                            typeStr = "ByFirstEdgeSymmetry";
+                            break;
+                        case PieceNodeAngle::BySecondEdgeSymmetry:
+                            typeStr = "BySecondEdgeSymmetry";
+                            break;
+                        case PieceNodeAngle::ByFirstEdgeRightAngle:
+                            typeStr = "ByFirstEdgeRightAngle";
+                            break;
+                        case PieceNodeAngle::BySecondEdgeRightAngle:
+                            typeStr = "BySecondEdgeRightAngle";
+                            break;
+                    }
+QT_WARNING_POP
+
+                    out << QString("p.SetAngleType(PieceNodeAngle::%1);").arg(typeStr) << endl;
+                }
+
+                out << "points += p;" << endl;
+            }
+        }
+
+        out << endl << "return points;";
     }
 }
 }
@@ -757,6 +866,8 @@ QVector<QPointF> VAbstractPiece::Equidistant(QVector<VSAPoint> points, qreal wid
         return QVector<QPointF>();
     }
 
+//    DumpVector(points); // Uncomment for dumping test data
+
     points = CorrectEquidistantPoints(points);
     if ( points.size() < 3 )
     {
@@ -793,6 +904,7 @@ QVector<QPointF> VAbstractPiece::Equidistant(QVector<VSAPoint> points, qreal wid
 
     const bool removeFirstAndLast = false;
     ekvPoints = CheckLoops(CorrectEquidistantPoints(ekvPoints, removeFirstAndLast));//Result path can contain loops
+//    DumpVector(ekvPoints); // Uncomment for dumping test data
     return ekvPoints;
 }
 
@@ -1029,8 +1141,14 @@ QVector<QPointF> VAbstractPiece::EkvPoint(QVector<QPointF> points, const VSAPoin
             {//Regular equdistant case
 QT_WARNING_PUSH
 QT_WARNING_DISABLE_GCC("-Wswitch-default")
+                // This check helps to find missed angle types in the switch
+                Q_STATIC_ASSERT_X(static_cast<int>(PieceNodeAngle::LAST_ONE_DO_NOT_USE) == 6,
+                                  "Not all types were handled.");
                 switch (p2Line1.GetAngleType())
                 {
+                    case PieceNodeAngle::LAST_ONE_DO_NOT_USE:
+                        Q_UNREACHABLE(); //-V501
+                        break;
                     case PieceNodeAngle::ByLength:
                         return AngleByLength(points, p2Line1, bigLine1, crosPoint, bigLine2, p2Line1, width);
                     case PieceNodeAngle::ByPointsIntersection:

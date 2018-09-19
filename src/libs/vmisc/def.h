@@ -77,7 +77,8 @@ enum class PieceNodeAngle : unsigned char
     ByFirstEdgeSymmetry,
     BySecondEdgeSymmetry,
     ByFirstEdgeRightAngle,
-    BySecondEdgeRightAngle
+    BySecondEdgeRightAngle,
+    LAST_ONE_DO_NOT_USE
 };
 
 enum class PassmarkLineType : unsigned char
