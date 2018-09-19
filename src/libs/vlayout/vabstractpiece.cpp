@@ -41,11 +41,9 @@ const qreal maxL = 2.5;
 namespace
 {
 // Do we create a point outside of a path?
-bool IsOutsidePoint(QPointF p1, QPointF p2, QPointF px)
+inline bool IsOutsidePoint(QPointF p1, QPointF p2, QPointF px)
 {
-    QLineF line(p1, p2);
-    QLineF ext(p1, px);
-    return VFuzzyComparePossibleNulls(line.angle(), ext.angle());
+    return qAbs(QLineF(p1, p2).angle() - QLineF(p1, px).angle()) < 0.001;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
