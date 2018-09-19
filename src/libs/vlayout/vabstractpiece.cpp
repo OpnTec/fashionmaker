@@ -623,6 +623,8 @@ qreal AngleBetweenBisectors(const QLineF &b1, const QLineF &b2)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+QT_WARNING_PUSH
+QT_WARNING_DISABLE_GCC("-Wunused-function")
 // Use for writing tests
 void DumpVector(const QVector<QPointF> &points)
 {
@@ -736,6 +738,7 @@ QT_WARNING_POP
         out << endl << "return points;";
     }
 }
+QT_WARNING_POP
 }
 
 //---------------------------------------------------------------------------------------------------------------------
