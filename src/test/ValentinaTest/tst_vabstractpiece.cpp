@@ -3593,10 +3593,6 @@ QVector<VSAPoint> TST_VAbstractPiece::InputPointsIssue880_Piece_Detail() const
 {
     QVector<VSAPoint> points;
 
-    //    VSAPoint p = VSAPoint(30.0, 39.999874015748034);
-    //    p.SetAngleType(PieceNodeAngle::ByFirstEdgeRightAngle);
-    //    points.append(p);
-
     points += VSAPoint(239.15935115817035, 1727.8772840128854);
     points += VSAPoint(239.15935115817035, 1727.8772840128854);
     points += VSAPoint(229.26906627866828, 1672.003934630032);
