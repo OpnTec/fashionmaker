@@ -202,6 +202,19 @@ QVector<QPointF> RollbackSeamAllowance(QVector<QPointF> points, const QLineF &cu
             *success = true;
         }
     }
+
+    if (not *success && points.size() > 1)
+    {
+        QPointF crosPoint;
+        QLineF secondLast(points.at(points.size()-2), points.at(points.size()-1));
+        QLineF::IntersectType type = secondLast.intersect(cuttingEdge, &crosPoint);
+        if (type != QLineF::NoIntersection && IsOutsidePoint(secondLast.p1(), secondLast.p2(), crosPoint))
+        {
+            points.append(crosPoint);
+            *success = true;
+        }
+    }
+
     return points;
 }
 
@@ -252,12 +265,6 @@ QVector<QPointF> AngleByLength(QVector<QPointF> points, QPointF p2, const QLineF
         {
             bool success = false;
             points = RollbackSeamAllowance(points, bigLine2, &success);
-            if (not success)
-            {
-                // Cannot find clipping point.
-                // Show at least something.
-                points.append(sp2);
-            }
         }
         else
         {
@@ -306,12 +313,6 @@ QVector<QPointF> AngleByIntersection(const QVector<QPointF> &points, QPointF p1,
     {// Because artificial loop can lead to wrong clipping we must rollback current seam allowance points
         bool success = false;
         pointsIntr = RollbackSeamAllowance(pointsIntr, edge2, &success);
-        if (not success)
-        {
-            // Cannot find clipping point.
-            // Show at least something.
-            pointsIntr.append(px);
-        }
     }
 
     // Second point
@@ -368,12 +369,6 @@ QVector<QPointF> AngleByFirstSymmetry(const QVector<QPointF> &points, QPointF p1
     {// Because artificial loop can lead to wrong clipping we must rollback current seam allowance points
         bool success = false;
         pointsIntr = RollbackSeamAllowance(pointsIntr, bigLine2, &success);
-        if (not success)
-        {
-            // Cannot find clipping point.
-            // Show at least something.
-            pointsIntr.append(px);
-        }
     }
 
     type = sEdge.intersect(bigLine2, &px);
@@ -430,12 +425,6 @@ QVector<QPointF> AngleBySecondSymmetry(const QVector<QPointF> &points, QPointF p
     {// Because artificial loop can lead to wrong clipping we must rollback current seam allowance points
         bool success = false;
         pointsIntr = RollbackSeamAllowance(pointsIntr, bigLine2, &success);
-        if (not success)
-        {
-            // Cannot find clipping point.
-            // Show at least something.
-            pointsIntr.append(px);
-        }
     }
 
     type = sEdge.intersect(bigLine2, &px);
@@ -541,13 +530,7 @@ QVector<QPointF> AngleBySecondRightAngle(QVector<QPointF> points, QPointF p2, QP
         // Because artificial loop can lead to wrong clipping we must rollback current seam allowance points
         bool success = false;
         points = RollbackSeamAllowance(points, edge, &success);
-        if (not success)
-        {
-            // Cannot find clipping point.
-            // Show at least something.
-            points.append(px);
-        }
-        else
+        if (success)
         {
             px = points.last();
         }
