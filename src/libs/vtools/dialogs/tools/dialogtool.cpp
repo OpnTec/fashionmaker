@@ -624,7 +624,7 @@ QFont DialogTool::NodeFont(QFont font, bool nodeExcluded)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QString DialogTool::GetNodeName(const VPieceNode &node, bool showPassmark) const
+QString DialogTool::GetNodeName(const VPieceNode &node, bool showDetails) const
 {
     const QSharedPointer<VGObject> obj = data->GetGObject(node.GetId());
     QString name = obj->name();
@@ -634,14 +634,14 @@ QString DialogTool::GetNodeName(const VPieceNode &node, bool showPassmark) const
         int bias = 0;
         qApp->TrVars()->VariablesToUser(name, 0, obj->name(), bias);
 
-        if (node.GetReverse())
+        if (showDetails && node.GetReverse())
         {
             name = QLatin1String("- ") + name;
         }
     }
     else
     {
-        if (showPassmark && node.IsPassmark())
+        if (showDetails && node.IsPassmark())
         {
             switch(node.GetPassmarkLineType())
             {
@@ -665,7 +665,7 @@ QString DialogTool::GetNodeName(const VPieceNode &node, bool showPassmark) const
             }
         }
 
-        if (not node.IsCheckUniqueness())
+        if (showDetails && not node.IsCheckUniqueness())
         {
             name = QLatin1Char('[') + name + QLatin1Char(']');
         }

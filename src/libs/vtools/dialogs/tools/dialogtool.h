@@ -284,7 +284,7 @@ protected:
     static QString   DialogWarningIcon();
     static QFont     NodeFont(QFont font, bool nodeExcluded = false);
 
-    QString          GetNodeName(const VPieceNode &node, bool showPassmark = false) const;
+    QString          GetNodeName(const VPieceNode &node, bool showDetails = false) const;
     void             NewNodeItem(QListWidget *listWidget, const VPieceNode &node, bool showPassmark = true);
 
     void             InitNodeAngles(QComboBox *box);
