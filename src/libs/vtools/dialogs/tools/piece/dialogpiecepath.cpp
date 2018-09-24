@@ -313,7 +313,8 @@ void DialogPiecePath::ShowContextMenu(const QPoint &pos)
     }
     else
     {
-        if (m_showMode && GetType() == PiecePathType::CustomSeamAllowance)
+        if (m_showMode && GetType() == PiecePathType::CustomSeamAllowance
+                && ui->tabWidget->indexOf(ui->tabPassmarks) != -1)
         {
             actionPassmark = menu->addAction(tr("Passmark"));
             actionPassmark->setCheckable(true);
@@ -324,6 +325,10 @@ void DialogPiecePath::ShowContextMenu(const QPoint &pos)
         actionUniqueness->setCheckable(true);
         actionUniqueness->setChecked(rowNode.IsCheckUniqueness());
     }
+
+    QAction *actionExcluded = menu->addAction(tr("Excluded"));
+    actionExcluded->setCheckable(true);
+    actionExcluded->setChecked(rowNode.IsExcluded());
 
     QAction *actionDelete = menu->addAction(QIcon::fromTheme("edit-delete"), tr("Delete"));
 
@@ -338,13 +343,22 @@ void DialogPiecePath::ShowContextMenu(const QPoint &pos)
         rowItem->setData(Qt::UserRole, QVariant::fromValue(rowNode));
         rowItem->setText(GetNodeName(rowNode, IsShowNotch()));
     }
-    else if (m_showMode && selectedAction == actionPassmark && GetType() == PiecePathType::CustomSeamAllowance)
+    else if (m_showMode && rowNode.GetTypeTool() == Tool::NodePoint && selectedAction == actionPassmark
+             && GetType() == PiecePathType::CustomSeamAllowance
+             && ui->tabWidget->indexOf(ui->tabPassmarks) != -1)
     {
         rowNode.SetPassmark(not rowNode.IsPassmark());
         rowItem->setData(Qt::UserRole, QVariant::fromValue(rowNode));
         rowItem->setText(GetNodeName(rowNode, IsShowNotch()));
     }
-    else if (selectedAction == actionUniqueness)
+    else if (selectedAction == actionExcluded)
+    {
+        rowNode.SetExcluded(not rowNode.IsExcluded());
+        rowItem->setData(Qt::UserRole, QVariant::fromValue(rowNode));
+        rowItem->setText(GetNodeName(rowNode, true));
+        rowItem->setFont(NodeFont(rowItem->font(), rowNode.IsExcluded()));
+    }
+    else if (rowNode.GetTypeTool() == Tool::NodePoint && selectedAction == actionUniqueness)
     {
         rowNode.SetCheckUniqueness(not rowNode.IsCheckUniqueness());
         rowItem->setData(Qt::UserRole, QVariant::fromValue(rowNode));
