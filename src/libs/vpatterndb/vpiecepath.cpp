@@ -541,7 +541,8 @@ QPainterPath VPiecePath::PainterPath(const VContainer *data, const QVector<QPoin
 QVector<QPainterPath> VPiecePath::CurvesPainterPath(const VContainer *data) const
 {
     const QVector<QVector<QPointF> > curves = PathCurvePoints(data);
-    QVector<QPainterPath> paths(curves.size());
+    QVector<QPainterPath> paths;
+    paths.reserve(curves.size());
 
     for(auto &curve : curves)
     {
@@ -616,6 +617,7 @@ VSAPoint VPiecePath::EndSegment(const VContainer *data, const QVector<VPieceNode
 QList<quint32> VPiecePath::Dependencies() const
 {
     QList<quint32> list;
+    list.reserve(d->m_nodes.size());
     for (auto &node : d->m_nodes)
     {
         list.append(node.GetId());
@@ -645,6 +647,7 @@ QVector<quint32> VPiecePath::MissingNodes(const VPiecePath &path) const
 
     const QList<quint32> set3 = set1.subtract(set2).toList();
     QVector<quint32> nodes;
+    nodes.reserve(set3.size());
     for (qint32 i = 0; i < set3.size(); ++i)
     {
         const int index = indexOfNode(set3.at(i));
