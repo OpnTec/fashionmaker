@@ -684,7 +684,6 @@ void TST_VSpline::GetSegmentPoints_issue767()
     origPoints.append(QPointF(4191.718385429485, 2603.132565918948));
     origPoints.append(QPointF(4196.210386810242, 2581.2346986946964));
     origPoints.append(QPointF(4200.083592082314, 2559.5684873884893));
-    origPoints.append(QPointF(4200.023629188538, 2559.9039118110236));
 
     // Begin comparison
     Comparison(res, origPoints);

@@ -117,7 +117,7 @@ QVector<QPointF> VAbstractCurve::FromBegin(const QVector<QPointF> &points, const
                 {
                     theBegin = true;
 
-                    if (begin != points.at(i+1))
+                    if (not VFuzzyComparePoints(begin, points.at(i+1)))
                     {
                         segment.append(begin);
                     }
