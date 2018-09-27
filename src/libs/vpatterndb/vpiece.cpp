@@ -439,6 +439,10 @@ QVector<QLineF> VPiece::PassmarksLines(const VContainer *data, const QVector<QPo
 
     QVector<QLineF> passmarks;
 
+    QVector<QPointF> seamPoints;
+    seamAllowance.isEmpty() && not IsSeamAllowanceBuiltIn() ? seamPoints = SeamAllowancePoints(data) :
+            seamPoints = seamAllowance;
+
     for (int i = 0; i< unitedPath.size(); ++i)
     {
         const VPieceNode &node = unitedPath.at(i);
@@ -450,7 +454,7 @@ QVector<QLineF> VPiece::PassmarksLines(const VContainer *data, const QVector<QPo
         const int previousIndex = VPiecePath::FindInLoopNotExcludedUp(i, unitedPath);
         const int nextIndex = VPiecePath::FindInLoopNotExcludedDown(i, unitedPath);
 
-        passmarks += CreatePassmark(unitedPath, previousIndex, i, nextIndex, data, seamAllowance);
+        passmarks += CreatePassmark(unitedPath, previousIndex, i, nextIndex, data, seamPoints);
     }
 
     return passmarks;
@@ -1238,6 +1242,11 @@ QVector<QLineF> VPiece::SAPassmark(const QVector<VPieceNode> &path, VSAPoint &pr
                                    const VSAPoint &passmarkSAPoint, VSAPoint &nextSAPoint, const VContainer *data,
                                    int passmarkIndex, const QVector<QPointF> &seamAllowance) const
 {
+    if (seamAllowance.size() < 2)
+    {
+        return QVector<QLineF>(); // Something wrong
+    }
+
     QPointF seamPassmarkSAPoint;
     if (not GetSeamPassmarkSAPoint(previousSAPoint, passmarkSAPoint, nextSAPoint, data, seamPassmarkSAPoint))
     {
@@ -1290,14 +1299,11 @@ QVector<QLineF> VPiece::SAPassmark(const QVector<VPieceNode> &path, VSAPoint &pr
              || node.GetPassmarkAngleType() == PassmarkAngleType::IntersectionOnlyLeft
              || node.GetPassmarkAngleType() == PassmarkAngleType::IntersectionOnlyRight)
     {
-        QVector<QPointF> seamPoints;
-        seamAllowance.isEmpty() ? seamPoints = SeamAllowancePoints(data) : seamPoints = seamAllowance;
-
         if (node.GetPassmarkAngleType() == PassmarkAngleType::Intersection
                 || node.GetPassmarkAngleType() == PassmarkAngleType::IntersectionOnlyRight)
         {
             // first passmark
-            PassmarkIntersection(QLineF(previousSAPoint, passmarkSAPoint), seamPoints,
+            PassmarkIntersection(QLineF(previousSAPoint, passmarkSAPoint), seamAllowance,
                                  passmarkSAPoint.GetSAAfter(width));
         }
 
@@ -1305,7 +1311,7 @@ QVector<QLineF> VPiece::SAPassmark(const QVector<VPieceNode> &path, VSAPoint &pr
                 || node.GetPassmarkAngleType() == PassmarkAngleType::IntersectionOnlyLeft)
         {
             // second passmark
-            PassmarkIntersection(QLineF(nextSAPoint, passmarkSAPoint), seamPoints,
+            PassmarkIntersection(QLineF(nextSAPoint, passmarkSAPoint), seamAllowance,
                                  passmarkSAPoint.GetSABefore(width));
         }
     }
@@ -1313,16 +1319,13 @@ QVector<QLineF> VPiece::SAPassmark(const QVector<VPieceNode> &path, VSAPoint &pr
              || node.GetPassmarkAngleType() == PassmarkAngleType::Intersection2OnlyLeft
              || node.GetPassmarkAngleType() == PassmarkAngleType::Intersection2OnlyRight)
     {
-        QVector<QPointF> seamPoints;
-        seamAllowance.isEmpty() ? seamPoints = SeamAllowancePoints(data) : seamPoints = seamAllowance;
-
         if (node.GetPassmarkAngleType() == PassmarkAngleType::Intersection2
                 || node.GetPassmarkAngleType() == PassmarkAngleType::Intersection2OnlyRight)
         {
             // first passmark
             QLineF line(passmarkSAPoint, nextSAPoint);
             line.setAngle(line.angle()+90);
-            PassmarkIntersection(line, seamPoints, passmarkSAPoint.GetSAAfter(width));
+            PassmarkIntersection(line, seamAllowance, passmarkSAPoint.GetSAAfter(width));
         }
 
         if (node.GetPassmarkAngleType() == PassmarkAngleType::Intersection2
@@ -1331,7 +1334,7 @@ QVector<QLineF> VPiece::SAPassmark(const QVector<VPieceNode> &path, VSAPoint &pr
             // second passmark
             QLineF line(passmarkSAPoint, previousSAPoint);
             line.setAngle(line.angle()-90);
-            PassmarkIntersection(line, seamPoints, passmarkSAPoint.GetSABefore(width));
+            PassmarkIntersection(line, seamAllowance, passmarkSAPoint.GetSABefore(width));
         }
     }
 
