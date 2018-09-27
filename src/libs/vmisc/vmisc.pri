@@ -12,7 +12,6 @@ SOURCES += \
     $$PWD/qxtcsvmodel.cpp \
     $$PWD/vtablesearch.cpp \
     $$PWD/dialogs/dialogexporttocsv.cpp \
-    $$PWD/defglobal.cpp \
     $$PWD/literals.cpp
 
 *msvc*:SOURCES += $$PWD/stable.cpp

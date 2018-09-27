@@ -69,8 +69,7 @@ void AbstractTest::Comparison(const QVector<QPointF> &ekv, const QVector<QPointF
         const QString msg = QString("Index: %1. Got '%2;%3', Expected '%4;%5'.")
                 .arg(i).arg(p1.x()).arg(p1.y()).arg(p2.x()).arg(p2.y());
         // Check each point. Don't use comparison float values
-        QVERIFY2((qAbs(p1.x() - p2.x()) <= VGObject::accuracyPointOnLine)
-                 && (qAbs(p1.y() - p2.y()) <= VGObject::accuracyPointOnLine), qUtf8Printable(msg));
+        QVERIFY2(VFuzzyComparePoints(p1, p2), qUtf8Printable(msg));
     }
 }
 

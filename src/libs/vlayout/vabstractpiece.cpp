@@ -1256,7 +1256,7 @@ bool VAbstractPiece::IsEkvPointOnLine(const VSAPoint &iPoint, const VSAPoint &pr
     return (VGObject::IsPointOnLineviaPDP(iPoint, prevPoint, nextPoint)
             && VGObject::IsPointOnLineviaPDP(bigLine1.p2(), bigLine1.p1(), bigLine2.p2())
             && VGObject::IsPointOnLineviaPDP(bigLine2.p1(), bigLine1.p1(), bigLine2.p2())
-            && qAbs(prevPoint.GetSAAfter(tmpWidth) - nextPoint.GetSABefore(tmpWidth)) < VGObject::accuracyPointOnLine);
+            && qAbs(prevPoint.GetSAAfter(tmpWidth) - nextPoint.GetSABefore(tmpWidth)) < accuracyPointOnLine);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

@@ -279,8 +279,7 @@ QVector<T> VAbstractPiece::RemoveDublicates(const QVector<T> &points, bool remov
         {
             // Path can't be closed
             // See issue #686
-            if ((qAbs(p.first().x() - p.last().x()) < VGObject::accuracyPointOnLine)
-                 && (qAbs(p.first().y() - p.last().y()) < VGObject::accuracyPointOnLine))
+            if (VFuzzyComparePoints(p.first(), p.last()))
             {
                 p.removeLast();
             }
@@ -289,8 +288,7 @@ QVector<T> VAbstractPiece::RemoveDublicates(const QVector<T> &points, bool remov
 
     for (int i = 0; i < p.size()-1; ++i)
     {
-        if ((qAbs(p.at(i).x() - p.at(i+1).x()) < VGObject::accuracyPointOnLine)
-             && (qAbs(p.at(i).y() - p.at(i+1).y()) < VGObject::accuracyPointOnLine))
+        if (VFuzzyComparePoints(p.at(i), p.at(i+1)))
         {
             if (not removeFirstAndLast && (i == p.size()-1))
             {

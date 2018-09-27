@@ -1107,8 +1107,7 @@ bool VPiece::GetSeamPassmarkSAPoint(const VSAPoint &previousSAPoint, const VSAPo
     if (IsEkvPointOnLine(passmarkSAPoint, previousSAPoint, nextSAPoint)// see issue #665
         || (IsEkvPointOnLine(static_cast<QPointF>(passmarkSAPoint), static_cast<QPointF>(previousSAPoint),
                              static_cast<QPointF>(nextSAPoint))
-            && qAbs(passmarkSAPoint.GetSABefore(width)
-                    - passmarkSAPoint.GetSAAfter(width)) < VGObject::accuracyPointOnLine))
+            && qAbs(passmarkSAPoint.GetSABefore(width) - passmarkSAPoint.GetSAAfter(width)) < accuracyPointOnLine))
     {
         QLineF line (passmarkSAPoint, nextSAPoint);
         line.setAngle(line.angle() + 90);

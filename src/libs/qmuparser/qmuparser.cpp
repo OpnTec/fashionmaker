@@ -115,7 +115,7 @@ qreal CSR(qreal length, qreal split, qreal arcLength)
         const qreal arcAngle = sign > 0 ? line.angleTo(radius): radius.angleTo(line);
         arcL = (M_PI*radius.length())/180.0 * arcAngle;
     }
-    while(qAbs(arcL - arcLength) > (0.5/*mm*/ / 25.4) * PRINTDPI);
+    while(qAbs(arcL - arcLength) > (0.5/*mm*/ / 25.4) * PrintDPI);
 
     return angle;
 }
@@ -262,9 +262,9 @@ qreal QmuParser::R2CM(qreal v)
 //---------------------------------------------------------------------------------------------------------------------
 qreal QmuParser::CSRCm(qreal length, qreal split, qreal arcLength)
 {
-    length = ((length * 10.0) / 25.4) * PRINTDPI;
-    split = ((split * 10.0) / 25.4) * PRINTDPI;
-    arcLength = ((arcLength * 10.0) / 25.4) * PRINTDPI;
+    length = ((length * 10.0) / 25.4) * PrintDPI;
+    split = ((split * 10.0) / 25.4) * PrintDPI;
+    arcLength = ((arcLength * 10.0) / 25.4) * PrintDPI;
 
     return CSR(length, split, arcLength);
 }
@@ -272,9 +272,9 @@ qreal QmuParser::CSRCm(qreal length, qreal split, qreal arcLength)
 //---------------------------------------------------------------------------------------------------------------------
 qreal QmuParser::CSRInch(qreal length, qreal split, qreal arcLength)
 {
-    length = length * PRINTDPI;
-    split = split * PRINTDPI;
-    arcLength = arcLength * PRINTDPI;
+    length = length * PrintDPI;
+    split = split * PrintDPI;
+    arcLength = arcLength * PrintDPI;
 
     return CSR(length, split, arcLength);
 }
