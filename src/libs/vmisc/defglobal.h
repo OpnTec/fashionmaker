@@ -32,7 +32,7 @@
 
 #include "backport/qoverload.h"
 
-Q_DECL_CONSTEXPR qreal PrintDPI = 96.0;
+constexpr qreal PrintDPI = 96.0;
 
 #if QT_VERSION < QT_VERSION_CHECK(5, 7, 0)
 // this adds const to non-const objects (like std::as_const)

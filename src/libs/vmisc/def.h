@@ -463,7 +463,7 @@ static inline bool VFuzzyComparePossibleNulls(double p1, double p2)
     }
 }
 
-Q_DECL_CONSTEXPR qreal accuracyPointOnLine = (0.12/*mm*/ / 25.4) * PrintDPI;
+constexpr qreal accuracyPointOnLine = (0.12/*mm*/ / 25.4) * PrintDPI;
 
 Q_REQUIRED_RESULT Q_DECL_CONSTEXPR static inline bool VFuzzyComparePoints(const QPointF &p1, const QPointF &p2);
 Q_DECL_CONSTEXPR static inline bool VFuzzyComparePoints(const QPointF &p1, const QPointF &p2)
