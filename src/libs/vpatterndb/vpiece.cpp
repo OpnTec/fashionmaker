@@ -699,6 +699,8 @@ void VPiece::SetPlaceLabels(const QVector<quint32> &labels)
 QList<quint32> VPiece::Dependencies() const
 {
     QList<quint32> list = d->m_path.Dependencies();
+    list.reserve(list.size() + d->m_customSARecords.size() + d->m_internalPaths.size() + d->m_pins.size() +
+                 d->m_placeLabels.size());
 
     for (auto &record : d->m_customSARecords)
     {
@@ -914,6 +916,7 @@ QVector<VPieceNode> VPiece::GetUnitedPath(const VContainer *data) const
 QVector<CustomSARecord> VPiece::GetValidRecords() const
 {
     QVector<CustomSARecord> records;
+    records.reserve(d->m_customSARecords.size());
     for (auto &record : d->m_customSARecords)
     {
         const int indexStartPoint = d->m_path.indexOfNode(record.startPoint);
@@ -966,6 +969,7 @@ QVector<CustomSARecord> VPiece::FilterRecords(QVector<CustomSARecord> records) c
     records.remove(startIndex);
 
     QVector<CustomSARecord> secondRound;
+    secondRound.reserve(records.size());
     for (auto &record : records)
     {
         const int indexStartPoint = d->m_path.indexOfNode(record.startPoint);
