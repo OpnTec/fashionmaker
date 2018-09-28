@@ -268,6 +268,56 @@ bool IsPassmarksPossible(const QVector<VPieceNode> &path)
 
     return countPointNodes >= 3 || (countPointNodes >= 1 && countOthers >= 1);
 }
+
+//---------------------------------------------------------------------------------------------------------------------
+bool FixNotchPoint(const QVector<QPointF> &seamAllowance, const QPointF &notchBase, QPointF *notch)
+{
+    bool fixed = true;
+    if (not VAbstractCurve::IsPointOnCurve(seamAllowance, *notch))
+    {
+        fixed = false;
+        QLineF axis = QLineF(notchBase, *notch);
+        axis.setLength(ToPixel(50, Unit::Cm));
+        const QVector<QPointF> points = VAbstractCurve::CurveIntersectLine(seamAllowance, axis);
+
+        if (points.size() > 0)
+        {
+            if (points.size() == 1)
+            {
+                *notch = points.at(0);
+                fixed = true;
+            }
+            else
+            {
+                QMap<qreal, int> forward;
+
+                for ( qint32 i = 0; i < points.size(); ++i )
+                {
+                    if (points.at(i) == notchBase)
+                    { // Always seek unique intersection
+                        continue;
+                    }
+
+                    const QLineF length(notchBase, points.at(i));
+                    if (qAbs(length.angle() - axis.angle()) < 0.1)
+                    {
+                        forward.insert(length.length(), i);
+                    }
+                }
+
+
+                // Closest point is not always want we need. First return point in forward direction if exists.
+                if (not forward.isEmpty())
+                {
+                    *notch = points.at(forward.first());
+                    fixed = true;
+                }
+            }
+        }
+    }
+
+    return fixed;
+}
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -1255,6 +1305,11 @@ QVector<QLineF> VPiece::SAPassmark(const QVector<VPieceNode> &path, VSAPoint &pr
     if (not GetSeamPassmarkSAPoint(previousSAPoint, passmarkSAPoint, nextSAPoint, data, seamPassmarkSAPoint))
     {
         return QVector<QLineF>(); // Something wrong
+    }
+
+    if (not FixNotchPoint(seamAllowance, passmarkSAPoint, &seamPassmarkSAPoint))
+    {
+        // Show warning
     }
 
     const qreal width = ToPixel(GetSAWidth(), *data->GetPatternUnit());
