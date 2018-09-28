@@ -38,7 +38,8 @@ HEADERS += \
     $$PWD/defglobal.h \
     $$PWD/backport/qoverload.h \
     $$PWD/testvapplication.h \
-    $$PWD/literals.h
+    $$PWD/literals.h \
+    $$PWD/qt_dispatch/qt_dispatch.h
 
 # Qt's versions
 # 5.2.0, 5.2.1

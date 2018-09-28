@@ -39,6 +39,7 @@
 #include "../vmisc/vmath.h"
 #include "../qmuparser/qmuparsererror.h"
 #include "../mainwindow.h"
+#include "../vmisc/qt_dispatch/qt_dispatch.h"
 
 #include <QtDebug>
 #include <QDir>
@@ -65,6 +66,23 @@ Q_DECL_CONSTEXPR auto DAYS_TO_KEEP_LOGS = 3;
 //---------------------------------------------------------------------------------------------------------------------
 inline void noisyFailureMsgHandler(QtMsgType type, const QMessageLogContext &context, const QString &msg)
 {
+    // only the GUI thread should display message boxes.  If you are
+    // writing a multithreaded application and the error happens on
+    // a non-GUI thread, you'll have to queue the message to the GUI
+    QCoreApplication *instance = QCoreApplication::instance();
+    const bool isGuiThread = instance && (QThread::currentThread() == instance->thread());
+
+    if (not isGuiThread)
+    {
+        auto Handler = [](QtMsgType type, const QMessageLogContext &context, const QString &msg)
+        {
+            noisyFailureMsgHandler(type, context, msg);
+        };
+
+        q_dispatch_async_main(Handler, type, context, msg);
+        return;
+    }
+
     // Why on earth didn't Qt want to make failed signal/slot connections qWarning?
     if ((type == QtDebugMsg) && msg.contains(QStringLiteral("::connect")))
     {
@@ -127,12 +145,6 @@ inline void noisyFailureMsgHandler(QtMsgType type, const QMessageLogContext &con
     {
         type = QtDebugMsg;
     }
-
-    // only the GUI thread should display message boxes.  If you are
-    // writing a multithreaded application and the error happens on
-    // a non-GUI thread, you'll have to queue the message to the GUI
-    QCoreApplication *instance = QCoreApplication::instance();
-    const bool isGuiThread = instance && (QThread::currentThread() == instance->thread());
 
     {
         QString debugdate = "[" + QDateTime::currentDateTime().toString(QStringLiteral("yyyy.MM.dd hh:mm:ss"));
