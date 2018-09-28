@@ -8,7 +8,8 @@ HEADERS += \
     $$PWD/vexceptionbadid.h \
     $$PWD/vexception.h \
     $$PWD/vexceptionwrongid.h \
-    $$PWD/vexceptionundo.h
+    $$PWD/vexceptionundo.h \
+    $$PWD/vexceptioninvalidnotch.h
 
 SOURCES += \
     $$PWD/vexceptionobjecterror.cpp \
@@ -17,4 +18,5 @@ SOURCES += \
     $$PWD/vexceptionbadid.cpp \
     $$PWD/vexception.cpp \
     $$PWD/vexceptionwrongid.cpp \
-    $$PWD/vexceptionundo.cpp
+    $$PWD/vexceptionundo.cpp \
+    $$PWD/vexceptioninvalidnotch.cpp

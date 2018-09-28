@@ -103,6 +103,8 @@ public:
     QList<quint32> Dependencies() const;
     QVector<quint32> MissingNodes(const VPiecePath &path) const;
 
+    QString NodeName(int nodeIndex, const VContainer *data) const;
+
     int  indexOfNode(quint32 id) const;
     void NodeOnEdge(quint32 index, VPieceNode &p1, VPieceNode &p2) const;
     bool Contains(quint32 id) const;
@@ -134,6 +136,8 @@ public:
     static QVector<VSAPoint> CurveSeamAllowanceSegment(const VContainer *data, const QVector<VPieceNode> &nodes,
                                                        const QSharedPointer<VAbstractCurve> &curve,
                                                        int i, bool reverse, qreal width);
+
+    static QString NodeName(const QVector<VPieceNode> &nodes, int nodeIndex, const VContainer *data);
 
 private:
     QSharedDataPointer<VPiecePathData> d;

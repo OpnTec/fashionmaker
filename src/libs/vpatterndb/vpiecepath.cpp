@@ -661,6 +661,12 @@ QVector<quint32> VPiecePath::MissingNodes(const VPiecePath &path) const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+QString VPiecePath::NodeName(int nodeIndex, const VContainer *data) const
+{
+    return NodeName(d->m_nodes, nodeIndex, data);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 int VPiecePath::indexOfNode(quint32 id) const
 {
     return indexOfNode(d->m_nodes, id);
@@ -1177,4 +1183,23 @@ QVector<VSAPoint> VPiecePath::CurveSeamAllowanceSegment(const VContainer *data, 
     }
 
     return pointsEkv;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QString VPiecePath::NodeName(const QVector<VPieceNode> &nodes, int nodeIndex, const VContainer *data)
+{
+    if (not nodes.isEmpty() && (nodeIndex < 0 || nodeIndex >= nodes.size()))
+    {
+        return QString();
+    }
+
+    try
+    {
+        QSharedPointer<VGObject> obj = data->GetGObject(nodes.at(nodeIndex).GetId());
+        return obj->name();
+    }
+    catch (VExceptionBadId) {
+        // ignore
+    }
+    return QString();
 }

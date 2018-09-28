@@ -33,6 +33,7 @@
 #include "../vgeometry/vplacelabelitem.h"
 #include "vcontainer.h"
 #include "../vmisc/vabstractapplication.h"
+#include "../ifc/exception/vexceptioninvalidnotch.h"
 
 #include <QSharedPointer>
 #include <QDebug>
@@ -1250,19 +1251,28 @@ QVector<QLineF> VPiece::CreatePassmark(const QVector<VPieceNode> &path, int prev
     VSAPoint passmarkSAPoint;
     if (not GetPassmarkSAPoint(path, passmarkIndex, data, passmarkSAPoint))
     {
-        return QVector<QLineF>(); // Something wrong
+        const QString errorMsg = QObject::tr("Cannot calculate a notch for point '%1' in piece '%2'.")
+                .arg(VPiecePath::NodeName(path, passmarkIndex, data), GetName());
+        qApp->IsPedantic() ? throw VExceptionInvalidNotch(errorMsg) : qWarning() << errorMsg;
+        return QVector<QLineF>();
     }
 
     VSAPoint previousSAPoint;
     if (not GetPassmarkPreviousSAPoints(path, previousIndex, passmarkSAPoint, data,
                                         previousSAPoint))
     {
+        const QString errorMsg = QObject::tr("Cannot calculate a notch for point '%1' in piece '%2'.")
+                .arg(VPiecePath::NodeName(path, passmarkIndex, data), GetName());
+        qApp->IsPedantic() ? throw VExceptionInvalidNotch(errorMsg) : qWarning() << errorMsg;
         return QVector<QLineF>(); // Something wrong
     }
 
     VSAPoint nextSAPoint;
     if (not GetPassmarkNextSAPoints(path, nextIndex, passmarkSAPoint, data, nextSAPoint))
     {
+        const QString errorMsg = QObject::tr("Cannot calculate a notch for point '%1' in piece '%2'.")
+                .arg(VPiecePath::NodeName(path, passmarkIndex, data), GetName());
+        qApp->IsPedantic() ? throw VExceptionInvalidNotch(errorMsg) : qWarning() << errorMsg;
         return QVector<QLineF>(); // Something wrong
     }
 
@@ -1298,18 +1308,28 @@ QVector<QLineF> VPiece::SAPassmark(const QVector<VPieceNode> &path, VSAPoint &pr
 {
     if (seamAllowance.size() < 2)
     {
+        const QString errorMsg = QObject::tr("Cannot calculate a notch for point '%1' in piece '%2'. Seam allowance is "
+                                             "empty.").arg(VPiecePath::NodeName(path, passmarkIndex, data), GetName());
+        qApp->IsPedantic() ? throw VExceptionInvalidNotch(errorMsg) : qWarning() << errorMsg;
         return QVector<QLineF>(); // Something wrong
     }
 
     QPointF seamPassmarkSAPoint;
     if (not GetSeamPassmarkSAPoint(previousSAPoint, passmarkSAPoint, nextSAPoint, data, seamPassmarkSAPoint))
     {
+        const QString errorMsg = QObject::tr("Cannot calculate a notch for point '%1' in piece '%2'. Cannot find "
+                                             "position for a notch.")
+                .arg(VPiecePath::NodeName(path, passmarkIndex, data), GetName());
+        qApp->IsPedantic() ? throw VExceptionInvalidNotch(errorMsg) : qWarning() << errorMsg;
         return QVector<QLineF>(); // Something wrong
     }
 
     if (not FixNotchPoint(seamAllowance, passmarkSAPoint, &seamPassmarkSAPoint))
     {
-        // Show warning
+        const QString errorMsg = QObject::tr("Cannot calculate a notch for point '%1' in piece '%2'. Unable to fix a "
+                                             "notch position.")
+                .arg(VPiecePath::NodeName(path, passmarkIndex, data), GetName());
+        qApp->IsPedantic() ? throw VExceptionInvalidNotch(errorMsg) : qWarning() << errorMsg;
     }
 
     const qreal width = ToPixel(GetSAWidth(), *data->GetPatternUnit());

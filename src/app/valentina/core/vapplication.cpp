@@ -32,6 +32,7 @@
 #include "../ifc/exception/vexceptionconversionerror.h"
 #include "../ifc/exception/vexceptionemptyparameter.h"
 #include "../ifc/exception/vexceptionwrongid.h"
+#include "../ifc/exception/vexceptioninvalidnotch.h"
 #include "../vwidgets/vmaingraphicsview.h"
 #include "../version.h"
 #include "../vmisc/logging.h"
@@ -363,6 +364,12 @@ bool VApplication::notify(QObject *receiver, QEvent *event)
     {
         qCCritical(vApp, "%s\n\n%s\n\n%s",
                    qUtf8Printable("Unhadled deleting tool. Continue use object after deleting"),
+                   qUtf8Printable(e.ErrorMessage()), qUtf8Printable(e.DetailedInformation()));
+        exit(V_EX_DATAERR);
+    }
+    catch(const VExceptionInvalidNotch &e)
+    {
+        qCCritical(vApp, "%s\n\n%s\n\n%s", qUtf8Printable(tr("Invalid notch.")),
                    qUtf8Printable(e.ErrorMessage()), qUtf8Printable(e.DetailedInformation()));
         exit(V_EX_DATAERR);
     }
