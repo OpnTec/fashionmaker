@@ -1261,18 +1261,14 @@ QVector<QLineF> VPiece::CreatePassmark(const QVector<VPieceNode> &path, int prev
     if (not GetPassmarkPreviousSAPoints(path, previousIndex, passmarkSAPoint, data,
                                         previousSAPoint))
     {
-        const QString errorMsg = QObject::tr("Cannot calculate a notch for point '%1' in piece '%2'.")
-                .arg(VPiecePath::NodeName(path, passmarkIndex, data), GetName());
-        qApp->IsPedantic() ? throw VExceptionInvalidNotch(errorMsg) : qWarning() << errorMsg;
+        // No check here because it will cover valid cases
         return QVector<QLineF>(); // Something wrong
     }
 
     VSAPoint nextSAPoint;
     if (not GetPassmarkNextSAPoints(path, nextIndex, passmarkSAPoint, data, nextSAPoint))
     {
-        const QString errorMsg = QObject::tr("Cannot calculate a notch for point '%1' in piece '%2'.")
-                .arg(VPiecePath::NodeName(path, passmarkIndex, data), GetName());
-        qApp->IsPedantic() ? throw VExceptionInvalidNotch(errorMsg) : qWarning() << errorMsg;
+        // No check here because it will cover valid cases
         return QVector<QLineF>(); // Something wrong
     }
 
