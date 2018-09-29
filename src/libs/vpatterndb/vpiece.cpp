@@ -1085,7 +1085,7 @@ bool VPiece::GetPassmarkSAPoint(const QVector<VPieceNode> &path, int index, cons
 
 //---------------------------------------------------------------------------------------------------------------------
 bool VPiece::GetPassmarkPreviousSAPoints(const QVector<VPieceNode> &path, int index, const VSAPoint &passmarkSAPoint,
-                                         const VContainer *data, VSAPoint &point) const
+                                         const VContainer *data, VSAPoint &point, int passmarkIndex) const
 {
     SCASSERT(data != nullptr)
 
@@ -1093,6 +1093,9 @@ bool VPiece::GetPassmarkPreviousSAPoints(const QVector<VPieceNode> &path, int in
 
     if (points.isEmpty())
     {
+        const QString errorMsg = QObject::tr("Cannot calculate a notch for point '%1' in piece '%2'.")
+                .arg(VPiecePath::NodeName(path, passmarkIndex, data), GetName());
+        qApp->IsPedantic() ? throw VExceptionInvalidNotch(errorMsg) : qWarning() << errorMsg;
         return false; // Something wrong
     }
 
@@ -1111,6 +1114,7 @@ bool VPiece::GetPassmarkPreviousSAPoints(const QVector<VPieceNode> &path, int in
 
     if (not found)
     {
+        // No warning here because of valid case of passmark collapse
         return false; // Something wrong
     }
     return true;
@@ -1118,7 +1122,7 @@ bool VPiece::GetPassmarkPreviousSAPoints(const QVector<VPieceNode> &path, int in
 
 //---------------------------------------------------------------------------------------------------------------------
 int VPiece::GetPassmarkNextSAPoints(const QVector<VPieceNode> &path, int index, const VSAPoint &passmarkSAPoint,
-                                    const VContainer *data, VSAPoint &point) const
+                                    const VContainer *data, VSAPoint &point, int passmarkIndex) const
 {
     SCASSERT(data != nullptr)
 
@@ -1126,6 +1130,9 @@ int VPiece::GetPassmarkNextSAPoints(const QVector<VPieceNode> &path, int index, 
 
     if (points.isEmpty())
     {
+        const QString errorMsg = QObject::tr("Cannot calculate a notch for point '%1' in piece '%2'.")
+                .arg(VPiecePath::NodeName(path, passmarkIndex, data), GetName());
+        qApp->IsPedantic() ? throw VExceptionInvalidNotch(errorMsg) : qWarning() << errorMsg;
         return false; // Something wrong
     }
 
@@ -1145,6 +1152,7 @@ int VPiece::GetPassmarkNextSAPoints(const QVector<VPieceNode> &path, int index, 
 
     if (not found)
     {
+        // No warning here because of valid case of passmark collapse
         return false; // Something wrong
     }
     return true;
@@ -1258,15 +1266,14 @@ QVector<QLineF> VPiece::CreatePassmark(const QVector<VPieceNode> &path, int prev
     }
 
     VSAPoint previousSAPoint;
-    if (not GetPassmarkPreviousSAPoints(path, previousIndex, passmarkSAPoint, data,
-                                        previousSAPoint))
+    if (not GetPassmarkPreviousSAPoints(path, previousIndex, passmarkSAPoint, data, previousSAPoint, passmarkIndex))
     {
         // No check here because it will cover valid cases
         return QVector<QLineF>(); // Something wrong
     }
 
     VSAPoint nextSAPoint;
-    if (not GetPassmarkNextSAPoints(path, nextIndex, passmarkSAPoint, data, nextSAPoint))
+    if (not GetPassmarkNextSAPoints(path, nextIndex, passmarkSAPoint, data, nextSAPoint, passmarkIndex))
     {
         // No check here because it will cover valid cases
         return QVector<QLineF>(); // Something wrong
