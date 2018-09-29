@@ -14,6 +14,8 @@
 
 #include <functional>
 
+#include "logging.h"
+
 #ifdef __GNUC__
 #define V_UNUSED __attribute__ ((unused))
 #else
