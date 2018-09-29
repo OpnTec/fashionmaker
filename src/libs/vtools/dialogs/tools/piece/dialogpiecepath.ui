@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>436</width>
-    <height>598</height>
+    <height>627</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -1135,6 +1135,19 @@
         </widget>
        </item>
        <item>
+        <widget class="QCheckBox" name="checkBoxShowSecondPassmark">
+         <property name="enabled">
+          <bool>false</bool>
+         </property>
+         <property name="toolTip">
+          <string>This option has effect only if the second passmark on seam line enabled in global preferences. The option helps disable the second passmark for this passmark only.</string>
+         </property>
+         <property name="text">
+          <string>Show the second passmark on seam line</string>
+         </property>
+        </widget>
+       </item>
+       <item>
         <spacer name="verticalSpacer_2">
          <property name="orientation">
           <enum>Qt::Vertical</enum>
@@ -1417,7 +1430,7 @@
   </connection>
  </connections>
  <buttongroups>
-  <buttongroup name="buttonGroupMarkType"/>
   <buttongroup name="buttonGroupAngleType"/>
+  <buttongroup name="buttonGroupMarkType"/>
  </buttongroups>
 </ui>

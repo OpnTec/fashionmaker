@@ -76,6 +76,7 @@ private slots:
     void ReturnDefAfter();
     void PassmarkLineTypeChanged(int id);
     void PassmarkAngleTypeChanged(int id);
+    void PassmarkShowSecondChanged(int state);
 
     void EvalWidth();
     void EvalWidthBefore();

@@ -496,6 +496,9 @@ void DialogPiecePath::PassmarkChanged(int index)
     ui->radioButtonIntersection2OnlyLeft->setDisabled(true);
     ui->radioButtonIntersection2OnlyRight->setDisabled(true);
 
+    ui->checkBoxShowSecondPassmark->setDisabled(true);
+    ui->checkBoxShowSecondPassmark->blockSignals(true);
+
     ui->groupBoxMarkType->blockSignals(true);
     ui->groupBoxAngleType->blockSignals(true);
 
@@ -574,8 +577,15 @@ void DialogPiecePath::PassmarkChanged(int index)
                 default:
                     break;
             }
+
+            // Show the second option
+            ui->checkBoxShowSecondPassmark->setEnabled(true);
+            ui->checkBoxShowSecondPassmark->setChecked(node.IsShowSecondPassmark());
         }
     }
+
+    ui->checkBoxShowSecondPassmark->blockSignals(false);
+
     ui->groupBoxMarkType->blockSignals(false);
     ui->groupBoxAngleType->blockSignals(false);
 }
@@ -690,6 +700,24 @@ void DialogPiecePath::PassmarkAngleTypeChanged(int id)
             rowNode.SetPassmarkAngleType(angleType);
             rowItem->setData(Qt::UserRole, QVariant::fromValue(rowNode));
             rowItem->setText(GetNodeName(rowNode, IsShowNotch()));
+
+            ListChanged();
+        }
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogPiecePath::PassmarkShowSecondChanged(int state)
+{
+    const int i = ui->comboBoxPassmarks->currentIndex();
+    if (i != -1)
+    {
+        QListWidgetItem *rowItem = GetItemById(ui->comboBoxPassmarks->currentData().toUInt());
+        if (rowItem)
+        {
+            VPieceNode rowNode = qvariant_cast<VPieceNode>(rowItem->data(Qt::UserRole));
+            rowNode.SetShowSecondPassmark(state);
+            rowItem->setData(Qt::UserRole, QVariant::fromValue(rowNode));
 
             ListChanged();
         }
@@ -992,6 +1020,8 @@ void DialogPiecePath::InitPassmarksTab()
             this, &DialogPiecePath::PassmarkLineTypeChanged);
     connect(ui->buttonGroupAngleType, QOverload<int>::of(&QButtonGroup::buttonClicked),
             this, &DialogPiecePath::PassmarkAngleTypeChanged);
+    connect(ui->checkBoxShowSecondPassmark, &QCheckBox::stateChanged, this,
+            &DialogPiecePath::PassmarkShowSecondChanged);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
