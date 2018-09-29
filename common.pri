@@ -831,6 +831,7 @@ MSVC_DEBUG_CXXFLAGS += \
     # standard library headers, so it's impractical to leave them on.
     -wd4619 \ # there is no warning number 'XXXX'
     -wd4668 \ # XXX is not defined as a preprocessor macro
+    -wd5045 \ # Compiler will insert Spectre mitigation for memory load if /Qspectre switch specified
     # Because Microsoft doesn't provide a way to suppress warnings in headers we will suppress
     # all warnings we meet in headers globally
     -wd4548 \
