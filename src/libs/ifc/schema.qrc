@@ -49,6 +49,7 @@
         <file>schema/pattern/v0.7.9.xsd</file>
         <file>schema/pattern/v0.7.10.xsd</file>
         <file>schema/pattern/v0.7.11.xsd</file>
+        <file>schema/pattern/v0.7.12.xsd</file>
         <file>schema/standard_measurements/v0.3.0.xsd</file>
         <file>schema/standard_measurements/v0.4.0.xsd</file>
         <file>schema/standard_measurements/v0.4.1.xsd</file>
