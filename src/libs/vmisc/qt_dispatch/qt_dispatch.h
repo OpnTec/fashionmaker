@@ -13,6 +13,7 @@
 #include <QObject>
 
 #include <functional>
+#include <cassert>
 
 #include "logging.h"
 
@@ -73,6 +74,9 @@ public:
           m_function(context.function),
           m_category(context.category)
     {
+#ifndef V_NO_ASSERT
+        assert(context.version == 2);
+#endif
         moveToThread(thread);
         connect(QThread::currentThread(), &QThread::finished, this, &WorkerClass::deleteLater);
     }
