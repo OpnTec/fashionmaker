@@ -1,6 +1,6 @@
 PRGNAM="valentina"
 VERSION="0.5.0"
-HOMEPAGE="http://www.valentina-project.org/"
+HOMEPAGE="https://valentinaproject.bitbucket.io"
 DOWNLOAD="https://bitbucket.org/dismine/valentina/get/v0.5.0.tar.gz"
 MD5SUM="f23019c92e3209dbfa7699a1c13bb98b"
 DOWNLOAD_x86_64=""

@@ -1,4 +1,4 @@
-# Version 0.6.0 (unreleased)
+# Version 0.6.0 October 1, 2018
 - [#682] New feature. Export increments to Excel .csv.
 - [#681] Enhance feature: Dashed line options for curves, arcs, etc.
 - [#684] Proposal: Add option to only show outer edges on detail.
