@@ -6,7 +6,7 @@
  **
  **  @brief
  **  @copyright
- **  This source code is part of the Valentine project, a pattern making
+ **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2013-2015 Valentina project
  **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
@@ -53,9 +53,7 @@ DialogTriangle::DialogTriangle(const VContainer *data, const quint32 &toolId, QW
 {
     ui->setupUi(this);
 
-#if QT_VERSION >= QT_VERSION_CHECK(5, 2, 0)
     ui->lineEditNamePoint->setClearButtonEnabled(true);
-#endif
 
     ui->lineEditNamePoint->setText(qApp->getCurrentDocument()->GenerateLabel(LabelType::NewLabel));
     labelEditNamePoint = ui->labelEditNamePoint;
@@ -69,13 +67,13 @@ DialogTriangle::DialogTriangle(const VContainer *data, const quint32 &toolId, QW
     FillComboBoxPoints(ui->comboBoxSecondPoint);
 
     connect(ui->lineEditNamePoint, &QLineEdit::textChanged, this, &DialogTriangle::NamePointChanged);
-    connect(ui->comboBoxFirstPoint, static_cast<void (QComboBox::*)(const QString &)>(&QComboBox::currentIndexChanged),
+    connect(ui->comboBoxFirstPoint, QOverload<const QString &>::of(&QComboBox::currentIndexChanged),
             this, &DialogTriangle::PointNameChanged);
-    connect(ui->comboBoxSecondPoint, static_cast<void (QComboBox::*)(const QString &)>(&QComboBox::currentIndexChanged),
+    connect(ui->comboBoxSecondPoint, QOverload<const QString &>::of(&QComboBox::currentIndexChanged),
             this, &DialogTriangle::PointNameChanged);
-    connect(ui->comboBoxAxisP1, static_cast<void (QComboBox::*)(const QString &)>(&QComboBox::currentIndexChanged),
+    connect(ui->comboBoxAxisP1, QOverload<const QString &>::of(&QComboBox::currentIndexChanged),
             this, &DialogTriangle::PointNameChanged);
-    connect(ui->comboBoxAxisP2, static_cast<void (QComboBox::*)(const QString &)>(&QComboBox::currentIndexChanged),
+    connect(ui->comboBoxAxisP2, QOverload<const QString &>::of(&QComboBox::currentIndexChanged),
             this, &DialogTriangle::PointNameChanged);
 
     vis = new VisToolTriangle(data);
@@ -150,7 +148,7 @@ void DialogTriangle::ChosenObject(quint32 id, const SceneObject &type)
 
                     if (set.size() == 4)
                     {
-                        if (SetObject(id, ui->comboBoxSecondPoint, ""))
+                        if (SetObject(id, ui->comboBoxSecondPoint, QString()))
                         {
                             line->setHypotenuseP2Id(id);
                             line->RefreshGeometry();

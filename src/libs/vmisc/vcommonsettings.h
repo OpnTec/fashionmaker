@@ -6,7 +6,7 @@
  **
  **  @brief
  **  @copyright
- **  This source code is part of the Valentine project, a pattern making
+ **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2015 Valentina project
  **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
@@ -48,23 +48,29 @@ public:
               QObject *parent = nullptr);
 
     static QString SharePath(const QString &shareItem);
-    static QString StandardTablesPath();
+    static QString MultisizeTablesPath();
     static QString StandardTemplatesPath();
+    static QString LabelTemplatesPath();
 
-    static void PrepareStandardTemplates(const QString &currentPath);
-    static void PrepareStandardTables(const QString &currentPath);
+    static QString PrepareStandardTemplates(const QString &currentPath);
+    static QString PrepareMultisizeTables(const QString &currentPath);
+    static QString PrepareLabelTemplates(const QString &currentPath);
 
     static QString GetDefPathIndividualMeasurements();
     QString GetPathIndividualMeasurements() const;
     void SetPathIndividualMeasurements(const QString &value);
 
-    static QString GetDefPathStandardMeasurements();
-    QString GetPathStandardMeasurements() const;
-    void SetPathStandardMeasurements(const QString &value);
+    static QString GetDefPathMultisizeMeasurements();
+    QString GetPathMultisizeMeasurements() const;
+    void SetPathMultisizeMeasurements(const QString &value);
 
     static QString GetDefPathTemplate();
     QString GetPathTemplate() const;
     void SetPathTemplate(const QString &value);
+
+    static QString GetDefPathLabelTemplate();
+    QString GetPathLabelTemplate() const;
+    void SetPathLabelTemplate(const QString &value);
 
     bool GetOsSeparator() const;
     void SetOsSeparator(const bool &value);
@@ -74,9 +80,6 @@ public:
 
     int  GetAutosaveTime() const;
     void SetAutosaveTime(const int &value);
-
-    bool GetSendReportState() const;
-    void SetSendReportState(const bool &value);
 
     QString GetLocale() const;
     void SetLocale(const QString &value);
@@ -96,8 +99,11 @@ public:
     bool GetToolBarStyle() const;
     void SetToolBarStyle(const bool &value);
 
-    QString GetUser() const;
-    void SetUser(const QString &value);
+    bool IsFreeCurveMode() const;
+    void SetFreeCurveMode(bool value);
+
+    bool IsDoubleClickZoomFitBestCurrentPP() const;
+    void SetDoubleClickZoomFitBestCurrentPP(bool value);
 
     int  GetUndoCount() const;
     void SetUndoCount(const int &value);
@@ -120,28 +126,105 @@ public:
     QSize GetPreferenceDialogSize() const;
     void SetPreferenceDialogSize(const QSize& sz);
 
+    QSize GetToolSeamAllowanceDialogSize() const;
+    void  SetToolSeamAllowanceDialogSize(const QSize& sz);
+
+    QSize GetFormulaWizardDialogSize() const;
+    void  SetFormulaWizardDialogSize(const QSize& sz);
+
+    QSize GetIncrementsDialogSize() const;
+    void  SetIncrementsDialogSize(const QSize& sz);
+
+    QSize GetFinalMeasurementsDialogSize() const;
+    void  SetFinalMeasurementsDialogSize(const QSize& sz);
+
     int  GetLatestSkippedVersion() const;
     void SetLatestSkippedVersion(int value);
 
     QDate GetDateOfLastRemind() const;
     void  SetDateOfLastRemind(const QDate &date);
 
-    QStringList GetUserDefinedMaterials() const;
-    void AddUserDefinedMaterial(QString qsMaterial);
-    void ClearUserDefinedMaterial();
-
     bool GetForbidWorkpieceFlipping() const;
     void SetForbidWorkpieceFlipping(bool value);
 
+    bool GetForceWorkpieceFlipping() const;
+    void SetForceWorkpieceFlipping(bool value);
+
+    bool IsHideMainPath() const;
+    void SetHideMainPath(bool value);
+
     bool IsDoublePassmark() const;
     void SetDoublePassmark(bool value);
+
+    void SetCSVWithHeader(bool withHeader);
+    bool GetCSVWithHeader() const;
+    static bool GetDefCSVWithHeader();
+
+    void SetCSVCodec(int mib);
+    int  GetCSVCodec() const;
+    static int GetDefCSVCodec();
+
+    void  SetCSVSeparator(const QChar &separator);
+    QChar GetCSVSeparator() const;
+    static QChar GetDefCSVSeparator();
+
+    void SetDefaultSeamAllowance(double value);
+    double GetDefaultSeamAllowance();
+
+    QFont GetLabelFont() const;
+    void  SetLabelFont(const QFont &f);
 
 #if !defined(Q_OS_WIN)
     static const QString unixStandardSharePath;
 #endif
 
+    QString GetLabelDateFormat() const;
+    void    SetLabelDateFormat(const QString &format);
+
+    static QStringList PredefinedDateFormats();
+    QStringList GetUserDefinedDateFormats() const;
+    void        SetUserDefinedDateFormats(const QStringList &formats);
+
+    QString GetLabelTimeFormat() const;
+    void    SetLabelTimeFormat(const QString &format);
+
+    static QStringList PredefinedTimeFormats();
+    QStringList GetUserDefinedTimeFormats() const;
+    void        SetUserDefinedTimeFormats(const QStringList &formats);
+
+    qreal GetCurveApproximationScale() const;
+    void  SetCurveApproximationScale(qreal value);
+
+    bool IsShowCurveDetails() const;
+    void SetShowCurveDetails(bool value);
+
+    static qreal DefaultLineWidth();
+    static qreal MinimalLineWidth();
+    static qreal MaximalLineWidth();
+    qreal GetLineWidth() const;
+    void  SetLineWidth(qreal width);
+    qreal WidthMainLine() const;
+    qreal WidthHairLine() const;
 private:
     Q_DISABLE_COPY(VCommonSettings)
 };
+
+//---------------------------------------------------------------------------------------------------------------------
+inline qreal VCommonSettings::DefaultLineWidth()
+{
+    return 1.2; // mm
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+inline qreal VCommonSettings::MinimalLineWidth()
+{
+    return 0.5; // mm
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+inline qreal VCommonSettings::MaximalLineWidth()
+{
+    return 5.0; // mm
+}
 
 #endif // VCOMMONSETTINGS_H

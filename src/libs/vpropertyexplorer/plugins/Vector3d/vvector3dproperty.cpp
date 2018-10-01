@@ -21,7 +21,6 @@
 #include "vvector3dproperty.h"
 
 #include <QFlags>
-#include <QForeachContainer>
 #include <QList>
 #include <QStringList>
 
@@ -116,8 +115,8 @@ VPE::VProperty* VPE::QVector3DProperty::clone(bool include_children, VProperty* 
 
         if (!include_children)
         {
-            QList<VProperty*> tmpChildren = container->getChildren();
-            foreach (VProperty* tmpChild, tmpChildren)
+            const QList<VProperty*> &tmpChildren = container->getChildren();
+            for (auto tmpChild : tmpChildren)
             {
                 container->removeChild(tmpChild);
                 delete tmpChild;
@@ -130,7 +129,7 @@ VPE::VProperty* VPE::QVector3DProperty::clone(bool include_children, VProperty* 
 
 void VPE::QVector3DProperty::setValue(const QVariant &value)
 {
-    QStringList tmpStrings = value.toString().split(",");
+    QStringList tmpStrings = value.toString().split(QChar(','));
     if (tmpStrings.count() == 3)
     {
         setVector(tmpStrings[0].toDouble(), tmpStrings[1].toDouble(), tmpStrings[2].toDouble());

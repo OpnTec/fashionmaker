@@ -6,7 +6,7 @@
  **
  **  @brief
  **  @copyright
- **  This source code is part of the Valentine project, a pattern making
+ **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2013-2015 Valentina project
  **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
@@ -37,6 +37,7 @@
 #include "../vmisc/def.h"
 #include "../vwidgets/vmaingraphicsview.h"
 #include "vundocommand.h"
+#include "../tools/vtoolseamallowance.h"
 
 //---------------------------------------------------------------------------------------------------------------------
 MovePiece::MovePiece(VAbstractPattern *doc, const double &x, const double &y, const quint32 &id,
@@ -52,7 +53,7 @@ MovePiece::MovePiece(VAbstractPattern *doc, const double &x, const double &y, co
     nodeId = id;
 
     SCASSERT(scene != nullptr)
-    QDomElement domElement = doc->elementById(id);
+    QDomElement domElement = doc->elementById(id, VAbstractPattern::TagDetail);
     if (domElement.isElement())
     {
         m_oldX = qApp->toPixel(doc->GetParametrDouble(domElement, AttrMx, "0.0"));
@@ -61,58 +62,21 @@ MovePiece::MovePiece(VAbstractPattern *doc, const double &x, const double &y, co
     else
     {
         qCDebug(vUndo, "Can't find detail with id = %u.", nodeId);
-        return;
     }
 }
-
-//---------------------------------------------------------------------------------------------------------------------
-MovePiece::~MovePiece()
-{}
 
 //---------------------------------------------------------------------------------------------------------------------
 void MovePiece::undo()
 {
     qCDebug(vUndo, "Undo.");
-
-    QDomElement domElement = doc->elementById(nodeId);
-    if (domElement.isElement())
-    {
-        SaveCoordinates(domElement, m_oldX, m_oldY);
-
-        emit NeedLiteParsing(Document::LiteParse);
-    }
-    else
-    {
-        qCDebug(vUndo, "Can't find detail with id = %u.", nodeId);
-        return;
-    }
+    Do(m_oldX, m_oldY);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void MovePiece::redo()
 {
     qCDebug(vUndo, "Redo.");
-
-    QDomElement domElement = doc->elementById(nodeId);
-    if (domElement.isElement())
-    {
-        SaveCoordinates(domElement, m_newX, m_newY);
-
-        if (redoFlag)
-        {
-            emit NeedLiteParsing(Document::LiteParse);
-        }
-        else
-        {
-            VMainGraphicsView::NewSceneRect(m_scene, qApp->getSceneView());
-        }
-        redoFlag = true;
-    }
-    else
-    {
-        qCDebug(vUndo, "Can't find detail with id = %u.", nodeId);
-        return;
-    }
+    Do(m_newX, m_newY);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -137,6 +101,29 @@ bool MovePiece::mergeWith(const QUndoCommand *command)
 int MovePiece::id() const
 {
     return static_cast<int>(UndoCommand::MovePiece);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void MovePiece::Do(qreal x, qreal y)
+{
+    qCDebug(vUndo, "Do.");
+
+    QDomElement domElement = doc->elementById(nodeId, VAbstractPattern::TagDetail);
+    if (domElement.isElement())
+    {
+        SaveCoordinates(domElement, x, y);
+
+        VToolSeamAllowance *tool = qobject_cast<VToolSeamAllowance *>(VAbstractPattern::getTool(nodeId));
+        if (tool)
+        {
+            tool->Move(x, y);
+        }
+        VMainGraphicsView::NewSceneRect(m_scene, qApp->getSceneView(), tool);
+    }
+    else
+    {
+        qCDebug(vUndo, "Can't find detail with id = %u.", nodeId);
+    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------

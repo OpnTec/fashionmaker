@@ -6,7 +6,7 @@
  **
  **  @brief
  **  @copyright
- **  This source code is part of the Valentine project, a pattern making
+ **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2013-2015 Valentina project
  **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
@@ -30,7 +30,6 @@
 
 #include <QBrush>
 #include <QEvent>
-#include <QForeachContainer>
 #include <QGraphicsItem>
 #include <QGraphicsLineItem>
 #include <QGraphicsSceneMouseEvent>
@@ -42,7 +41,8 @@
 #include <QStringDataPtr>
 #include <Qt>
 
-#include "../ifc/ifcdef.h"
+#include "global.h"
+#include "../vmisc/vabstractapplication.h"
 
 //---------------------------------------------------------------------------------------------------------------------
 /**
@@ -52,7 +52,6 @@ VMainGraphicsScene::VMainGraphicsScene(QObject *parent)
     : QGraphicsScene(parent),
       horScrollBar(0),
       verScrollBar(0),
-      scaleFactor(1),
       _transform(QTransform()),
       scenePos(QPointF()),
       origins()
@@ -65,8 +64,12 @@ VMainGraphicsScene::VMainGraphicsScene(QObject *parent)
  * @param parent parent object.
  */
 VMainGraphicsScene::VMainGraphicsScene(const QRectF & sceneRect, QObject * parent)
-    :QGraphicsScene ( sceneRect, parent ), horScrollBar(0), verScrollBar(0), scaleFactor(1), _transform(QTransform()),
-      scenePos(QPointF()), origins()
+    :QGraphicsScene ( sceneRect, parent ),
+      horScrollBar(0),
+      verScrollBar(0),
+      _transform(QTransform()),
+      scenePos(),
+      origins()
 {}
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -115,7 +118,7 @@ void VMainGraphicsScene::InitOrigins()
 {
     origins.clear();
 
-    QPen originsPen(Qt::green, ToPixel(WidthHairLine(Unit::Mm), Unit::Mm), Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin);
+    QPen originsPen(Qt::green, (1.2 / 3.0) /*mm*/ / 25.4 * PrintDPI, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin);
     QBrush axisTextBrush(Qt::green);
     const qreal arrowAngle = 35.0;
     const qreal arrowLength = 12.0;
@@ -157,7 +160,7 @@ void VMainGraphicsScene::InitOrigins()
         xOrigin->setBrush(axisTextBrush);
         xOrigin->setFlag(QGraphicsItem::ItemIgnoresTransformations);
         xOrigin->setZValue(-1.0);
-        xOrigin->setPos(25, -(xOrigin->boundingRect().height()/2));
+        xOrigin->setPos(30, -(xOrigin->boundingRect().height()/2));
         origins.append(xOrigin);
     }
 
@@ -198,7 +201,7 @@ void VMainGraphicsScene::InitOrigins()
         yOrigin->setBrush(axisTextBrush);
         yOrigin->setFlag(QGraphicsItem::ItemIgnoresTransformations);
         yOrigin->setZValue(-1.0);
-        yOrigin->setPos(-(yOrigin->boundingRect().width()/2), 25);
+        yOrigin->setPos(-(yOrigin->boundingRect().width()/2), 30);
         origins.append(yOrigin);
     }
 }
@@ -206,7 +209,7 @@ void VMainGraphicsScene::InitOrigins()
 //---------------------------------------------------------------------------------------------------------------------
 void VMainGraphicsScene::SetOriginsVisible(bool visible)
 {
-    foreach (QGraphicsItem *item, origins)
+    for (auto item : qAsConst(origins))
     {
         item->setVisible(visible);
     }
@@ -222,7 +225,8 @@ QPointF VMainGraphicsScene::getScenePos() const
 QRectF VMainGraphicsScene::VisibleItemsBoundingRect() const
 {
     QRectF rect;
-    foreach(QGraphicsItem *item, items())
+    const QList<QGraphicsItem *> qItems = items();
+    for (auto item : qItems)
     {
         if(not item->isVisible())
         {
@@ -274,17 +278,6 @@ void VMainGraphicsScene::ChoosedItem(quint32 id, const SceneObject &type)
 void VMainGraphicsScene::SelectedItem(bool selected, quint32 object, quint32 tool)
 {
     emit SelectedObject(selected, object, tool);
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-/**
- * @brief SetFactor set current scale factor of scene.
- * @param factor scene scale factor. scene scale factor.
- */
-void VMainGraphicsScene::SetFactor(qreal factor)
-{
-    scaleFactor=scaleFactor*factor;
-    emit NewFactor(scaleFactor);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

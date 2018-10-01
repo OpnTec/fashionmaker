@@ -6,7 +6,7 @@
  **
  **  @brief
  **  @copyright
- **  This source code is part of the Valentine project, a pattern making
+ **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2013-2015 Valentina project
  **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
@@ -37,21 +37,45 @@
 
 QT_WARNING_PUSH
 QT_WARNING_DISABLE_GCC("-Weffc++")
+QT_WARNING_DISABLE_GCC("-Wnon-virtual-dtor")
 
 class VIncrementData : public QSharedData
 {
 public:
 
     VIncrementData()
-        :index(NULL_ID), formula(QString()), formulaOk(false), data(VContainer(nullptr, nullptr))
+        : index(NULL_ID),
+          formula(QString()),
+          formulaOk(false),
+          previewCalculation(false),
+          data()
     {}
 
     VIncrementData(VContainer *data, quint32 index, const QString &formula, bool ok)
-        :index(index), formula(formula), formulaOk(ok), data(*data)
-    {}
+        : index(index),
+          formula(formula),
+          formulaOk(ok),
+          previewCalculation(false),
+          data(QSharedPointer<VContainer>(new VContainer(*data)))
+    {
+        // When we create an increment in the dialog it will get neccesary data. Such data must be removed because will
+        // confuse a user. Increment should not know nothing about internal variables.
+        Q_STATIC_ASSERT_X(static_cast<int>(VarType::Unknown) == 8, "Check that you used all types");
+        this->data->ClearVariables(QVector<VarType>({VarType::LineAngle,
+                                                     VarType::LineLength,
+                                                     VarType::CurveLength,
+                                                     VarType::CurveCLength,
+                                                     VarType::ArcRadius,
+                                                     VarType::CurveAngle}));
+    }
 
     VIncrementData(const VIncrementData &incr)
-        :QSharedData(incr), index(incr.index), formula(incr.formula), formulaOk(incr.formulaOk), data(incr.data)
+        : QSharedData(incr),
+          index(incr.index),
+          formula(incr.formula),
+          formulaOk(incr.formulaOk),
+          previewCalculation(incr.previewCalculation),
+          data(incr.data)
     {}
 
     virtual  ~VIncrementData();
@@ -60,7 +84,8 @@ public:
     quint32 index;
     QString formula;
     bool    formulaOk;
-    VContainer data;
+    bool    previewCalculation;
+    QSharedPointer<VContainer> data;
 
 private:
     VIncrementData &operator=(const VIncrementData &) Q_DECL_EQ_DELETE;

@@ -6,7 +6,7 @@
  **
  **  @brief
  **  @copyright
- **  This source code is part of the Valentine project, a pattern making
+ **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2015 Valentina project
  **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
@@ -29,7 +29,7 @@
 #ifndef TST_QMUPARSERERRORMSG_H
 #define TST_QMUPARSERERRORMSG_H
 
-#include "../vmisc/abstracttest.h"
+#include "../vtest/abstracttest.h"
 #include "../qmuparser/qmuparsererror.h"
 
 #include <QTranslator>
@@ -40,7 +40,7 @@ class TST_QmuParserErrorMsg : public AbstractTest
     Q_OBJECT
 public:
     explicit TST_QmuParserErrorMsg(const QString &locale, QObject *parent = nullptr);
-    virtual ~TST_QmuParserErrorMsg() Q_DECL_OVERRIDE;
+    virtual ~TST_QmuParserErrorMsg() override;
 
 private slots:
     void initTestCase();

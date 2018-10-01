@@ -36,6 +36,7 @@
 #include <QtGlobal>
 
 #include "vpropertyexplorer_global.h"
+#include "../vmisc/backport/qoverload.h"
 
 template <typename T> class QList;
 
@@ -50,7 +51,7 @@ class VPROPERTYEXPLORERSHARED_EXPORT UserChangeEvent : public QEvent
 {
 public:
     UserChangeEvent() : QEvent(static_cast<QEvent::Type>(MyCustomEventType)) {}
-    virtual ~UserChangeEvent() Q_DECL_OVERRIDE;
+    virtual ~UserChangeEvent() override;
 };
 
 class VPropertyPrivate;
@@ -69,7 +70,7 @@ public:
     explicit VProperty(const QString& name, QVariant::Type type = QVariant::String);
 
     //! Destructor
-    virtual ~VProperty() Q_DECL_OVERRIDE;
+    virtual ~VProperty() override;
 
     //! Returns a string containing the type of the property
     virtual QString type() const;
@@ -199,7 +200,7 @@ public:
     //! \param container If a property is being passed here, no new VProperty is being created but instead it is tried
     //! to fill all the data into container. This can also be used when subclassing this function.
     //! \return Returns the newly created property (or container, if it was not NULL)
-    virtual VProperty* clone(bool include_children = true, VProperty* container = nullptr) const Q_REQUIRED_RESULT;
+    Q_REQUIRED_RESULT virtual VProperty* clone(bool include_children = true, VProperty* container = nullptr) const;
 
     Property propertyType() const;
     void     setPropertyType(const Property &type);

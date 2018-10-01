@@ -6,7 +6,7 @@
  **
  **  @brief
  **  @copyright
- **  This source code is part of the Valentine project, a pattern making
+ **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2013-2015 Valentina project
  **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
@@ -46,7 +46,11 @@ int main(int argc, char *argv[])
     Q_INIT_RESOURCE(icons);
     Q_INIT_RESOURCE(toolicon);
 
-    QT_REQUIRE_VERSION(argc, argv, "5.2.0")
+    QT_REQUIRE_VERSION(argc, argv, "5.2.0")// clazy:exclude=qstring-arg,qstring-allocations
+
+#if defined(Q_OS_WIN)
+    VAbstractApplication::WinAttachConsole();
+#endif
 
     // Need to internally move a node inside a piece main path
     qRegisterMetaTypeStreamOperators<VPieceNode>("VPieceNode");
@@ -59,18 +63,14 @@ int main(int argc, char *argv[])
 
     app.InitOptions();
 
-    // Due to unknown reasons version checker cause a crash. See issue #633.
-    // Before we will find what cause such crashes it will stay disabled in Release mode.
-#ifndef V_NO_ASSERT
     if (VApplication::IsGUIMode())
     {
         // Set feed URL before doing anything else
-        FvUpdater::sharedUpdater()->SetFeedURL(defaultFeedURL);
+        FvUpdater::sharedUpdater()->SetFeedURL(FvUpdater::CurrentFeedURL());
 
         // Check for updates automatically
         FvUpdater::sharedUpdater()->CheckForUpdatesSilent();
     }
-#endif // V_NO_ASSERT
 
     MainWindow w;
 #if !defined(Q_OS_MAC)
@@ -86,7 +86,11 @@ int main(int argc, char *argv[])
         msec = 15; // set delay for correct the first fitbest zoom
     }
 
+#if QT_VERSION >= QT_VERSION_CHECK(5, 4, 0)
+    QTimer::singleShot(msec, &w, &MainWindow::ProcessCMD);
+#else
     QTimer::singleShot(msec, &w, SLOT(ProcessCMD()));
+#endif
 
     return app.exec();
 }

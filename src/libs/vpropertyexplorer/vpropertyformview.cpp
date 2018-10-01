@@ -20,7 +20,6 @@
 
 #include "vpropertyformview.h"
 
-#include <QForeachContainer>
 #include <QList>
 #include <Qt>
 
@@ -136,10 +135,13 @@ void VPE::VPropertyFormView::dataChanged(const QModelIndex &top_left, const QMod
 {
     Q_UNUSED(top_left)
     Q_UNUSED(bottom_right)
-    if (static_cast<VPropertyFormViewPrivate*>(d_ptr)->IgnoreDataChangedSignal)
-    {
-        return;
-    }
+
+    // Ucomment when handle data changes
+//    if (static_cast<VPropertyFormViewPrivate*>(d_ptr)->IgnoreDataChangedSignal)
+//    {
+//        return;
+//    }
+
     // todo: handle data changes
 }
 
@@ -193,7 +195,7 @@ void VPE::VPropertyFormView::removeModelAndSet()
 {
     if (static_cast<VPropertyFormViewPrivate*>(d_ptr)->Model)
     {
-        disconnect(static_cast<VPropertyFormViewPrivate*>(d_ptr)->Model, 0, this, 0);
+        disconnect(static_cast<VPropertyFormViewPrivate*>(d_ptr)->Model, nullptr, this, nullptr);
         static_cast<VPropertyFormViewPrivate*>(d_ptr)->Model = nullptr;
     }
 
@@ -211,9 +213,9 @@ void VPE::VPropertyFormView::connectPropertyFormWidget(VPropertyFormWidget *widg
 
     connect(widget, &VPropertyFormWidget::propertyDataSubmitted, this, &VPropertyFormView::dataSubmitted,
             Qt::UniqueConnection);
-    QList<VPropertyFormWidget*> tmpList = widget->getChildPropertyFormWidgets();
+    const QList<VPropertyFormWidget*> tmpList = widget->getChildPropertyFormWidgets();
 
-    foreach(VPropertyFormWidget* tmpEditorWidget, tmpList)
+    for (auto tmpEditorWidget : tmpList)
     {
         connectPropertyFormWidget(tmpEditorWidget);
     }

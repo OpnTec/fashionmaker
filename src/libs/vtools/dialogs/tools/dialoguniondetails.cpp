@@ -6,7 +6,7 @@
  **
  **  @brief
  **  @copyright
- **  This source code is part of the Valentine project, a pattern making
+ **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2013-2015 Valentina project
  **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
@@ -174,10 +174,9 @@ void DialogUnionDetails::ChoosedDetail(const quint32 &id, const SceneObject &typ
                 if (numberD > 1)
                 {
                     ++numberP;
-                    emit ToolTip("");
+                    emit ToolTip(QString());
                     this->setModal(true);
                     this->show();
-                    return;
                 }
                 else
                 {
@@ -185,13 +184,11 @@ void DialogUnionDetails::ChoosedDetail(const quint32 &id, const SceneObject &typ
                     p1 = 0;
                     p2 = 0;
                     emit ToolTip(tr("Select a detail"));
-                    return;
                 }
             }
             else
             {
                 emit ToolTip(tr("Select a point on edge"));
-                return;
             }
         }
     }

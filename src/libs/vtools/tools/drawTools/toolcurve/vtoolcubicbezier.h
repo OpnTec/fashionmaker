@@ -6,7 +6,7 @@
  **
  **  @brief
  **  @copyright
- **  This source code is part of the Valentine project, a pattern making
+ **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2016 Valentina project
  **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
@@ -43,19 +43,32 @@
 class VCubicBezier;
 template <class T> class QSharedPointer;
 
+QT_WARNING_PUSH
+QT_WARNING_DISABLE_GCC("-Weffc++")
+
+struct VToolCubicBezierInitData : VAbstractToolInitData
+{
+    VToolCubicBezierInitData()
+        : VAbstractToolInitData(),
+          spline(nullptr)
+    {}
+
+    VCubicBezier *spline;
+};
+
+QT_WARNING_POP
+
 class VToolCubicBezier : public VAbstractSpline
 {
     Q_OBJECT
 public:
     virtual ~VToolCubicBezier() Q_DECL_EQ_DEFAULT;
-    virtual void setDialog() Q_DECL_OVERRIDE;
-    static VToolCubicBezier *Create(QSharedPointer<DialogTool> dialog, VMainGraphicsScene *scene,
+    virtual void setDialog() override;
+    static VToolCubicBezier *Create(const QPointer<DialogTool> &dialog, VMainGraphicsScene *scene,
                                     VAbstractPattern *doc, VContainer *data);
-    static VToolCubicBezier *Create(const quint32 _id, VCubicBezier *spline, const QString &color,
-                                    VMainGraphicsScene *scene, VAbstractPattern *doc, VContainer *data,
-                                    const Document &parse, const Source &typeCreation);
+    static VToolCubicBezier *Create(VToolCubicBezierInitData initData);
     static const QString ToolType;
-    virtual int  type() const Q_DECL_OVERRIDE {return Type;}
+    virtual int  type() const override {return Type;}
     enum { Type = UserType + static_cast<int>(Tool::CubicBezier)};
 
     QString FirstPointName() const;
@@ -66,20 +79,21 @@ public:
     VCubicBezier getSpline()const;
     void         setSpline(const VCubicBezier &spl);
 
-    virtual void ShowVisualization(bool show) Q_DECL_OVERRIDE;
+    virtual void ShowVisualization(bool show) override;
+protected slots:
+    virtual void ShowContextMenu(QGraphicsSceneContextMenuEvent *event, quint32 id=NULL_ID) override;
 protected:
-    virtual void contextMenuEvent ( QGraphicsSceneContextMenuEvent * event ) Q_DECL_OVERRIDE;
-    virtual void RemoveReferens() Q_DECL_OVERRIDE;
-    virtual void SaveDialog(QDomElement &domElement) Q_DECL_OVERRIDE;
-    virtual void SaveOptions(QDomElement &tag, QSharedPointer<VGObject> &obj) Q_DECL_OVERRIDE;
-    virtual void SetVisualization() Q_DECL_OVERRIDE;
+    virtual void RemoveReferens() override;
+    virtual void SaveDialog(QDomElement &domElement, QList<quint32> &oldDependencies,
+                            QList<quint32> &newDependencies) override;
+    virtual void SaveOptions(QDomElement &tag, QSharedPointer<VGObject> &obj) override;
+    virtual void SetVisualization() override;
+    virtual void RefreshGeometry() override;
 private:
     Q_DISABLE_COPY(VToolCubicBezier)
 
-    VToolCubicBezier(VAbstractPattern *doc, VContainer *data, quint32 id, const Source &typeCreation,
-                     QGraphicsItem * parent = nullptr);
+    VToolCubicBezier(const VToolCubicBezierInitData &initData, QGraphicsItem *parent = nullptr);
 
-    virtual void RefreshGeometry() Q_DECL_OVERRIDE;
     void SetSplineAttributes(QDomElement &domElement, const VCubicBezier &spl);
 };
 

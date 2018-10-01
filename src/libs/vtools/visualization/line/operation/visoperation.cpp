@@ -6,7 +6,7 @@
  **
  **  @brief
  **  @copyright
- **  This source code is part of the Valentine project, a pattern making
+ **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2016 Valentina project
  **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
@@ -43,10 +43,10 @@ VisOperation::VisOperation(const VContainer *data, QGraphicsItem *parent)
     : VisLine(data, parent),
       objects(),
       supportColor2(Qt::darkGreen),
+      supportColor3(Qt::darkBlue),
       points(),
       curves()
 {
-
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -76,13 +76,13 @@ void VisOperation::VisualMode(const quint32 &pointId)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QGraphicsEllipseItem *VisOperation::GetPoint(quint32 i, const QColor &color)
+VScaledEllipse *VisOperation::GetPoint(quint32 i, const QColor &color)
 {
-    return GetPointItem(Visualization::data, factor, points, i, color, this);
+    return GetPointItem(points, i, color, this);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QGraphicsPathItem *VisOperation::GetCurve(quint32 i, const QColor &color)
+VCurvePathItem *VisOperation::GetCurve(quint32 i, const QColor &color)
 {
     if (not curves.isEmpty() && static_cast<quint32>(curves.size() - 1) >= i)
     {
@@ -90,7 +90,7 @@ QGraphicsPathItem *VisOperation::GetCurve(quint32 i, const QColor &color)
     }
     else
     {
-        auto curve = InitItem<QGraphicsPathItem>(color, this);
+        auto curve = InitItem<VCurvePathItem>(color, this);
         curves.append(curve);
         return curve;
     }
@@ -104,13 +104,12 @@ void VisOperation::RefreshFlippedObjects(const QPointF &firstPoint, const QPoint
 {
     int iPoint = -1;
     int iCurve = -1;
-    for (int i = 0; i < objects.size(); ++i)
+    for (auto id : qAsConst(objects))
     {
-        const quint32 id = objects.at(i);
         const QSharedPointer<VGObject> obj = Visualization::data->GetGObject(id);
 
         // This check helps to find missed objects in the switch
-        Q_STATIC_ASSERT_X(static_cast<int>(GOType::Unknown) == 7, "Not all objects were handled.");
+        Q_STATIC_ASSERT_X(static_cast<int>(GOType::Unknown) == 8, "Not all objects were handled.");
 
         switch(static_cast<GOType>(obj->getType()))
         {
@@ -119,7 +118,7 @@ void VisOperation::RefreshFlippedObjects(const QPointF &firstPoint, const QPoint
                 const QSharedPointer<VPointF> p = Visualization::data->GeometricObject<VPointF>(id);
 
                 ++iPoint;
-                QGraphicsEllipseItem *point = GetPoint(static_cast<quint32>(iPoint), supportColor2);
+                VScaledEllipse *point = GetPoint(static_cast<quint32>(iPoint), supportColor2);
                 DrawPoint(point, static_cast<QPointF>(*p), supportColor2);
 
                 ++iPoint;
@@ -162,6 +161,8 @@ void VisOperation::RefreshFlippedObjects(const QPointF &firstPoint, const QPoint
                 break;
             }
             case GOType::Unknown:
+            case GOType::PlaceLabel:
+                Q_UNREACHABLE();
                 break;
         }
     }

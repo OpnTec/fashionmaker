@@ -44,7 +44,7 @@ public:
     explicit VPropertyFactoryManager(QObject* parent = nullptr);
 
     //! Destructor
-    virtual ~VPropertyFactoryManager() Q_DECL_OVERRIDE;
+    virtual ~VPropertyFactoryManager() override;
 
     //! Register a factory to the factory manager
     //! Note that the manager takes ownership of the factory, so don't delete it.

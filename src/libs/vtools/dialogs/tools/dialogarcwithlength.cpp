@@ -6,7 +6,7 @@
  **
  **  @brief
  **  @copyright
- **  This source code is part of the Valentine project, a pattern making
+ **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2015 Valentina project
  **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
@@ -77,6 +77,9 @@ DialogArcWithLength::DialogArcWithLength(const VContainer *data, const quint32 &
 
     FillComboBoxPoints(ui->comboBoxCenter);
     FillComboBoxLineColors(ui->comboBoxColor);
+    FillComboBoxTypeLine(ui->comboBoxPenStyle, CurvePenStylesPics());
+
+    ui->doubleSpinBoxApproximationScale->setMaximum(maxCurveApproximationScale);
 
     CheckState();
 
@@ -186,6 +189,18 @@ void DialogArcWithLength::SetLength(const QString &value)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+QString DialogArcWithLength::GetPenStyle() const
+{
+    return GetComboBoxCurrentData(ui->comboBoxPenStyle, TypeLineLine);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogArcWithLength::SetPenStyle(const QString &value)
+{
+    ChangeCurrentData(ui->comboBoxPenStyle, value);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 QString DialogArcWithLength::GetColor() const
 {
     return GetComboBoxCurrentData(ui->comboBoxColor, ColorBlack);
@@ -198,13 +213,29 @@ void DialogArcWithLength::SetColor(const QString &value)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+qreal DialogArcWithLength::GetApproximationScale() const
+{
+    return ui->doubleSpinBoxApproximationScale->value();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogArcWithLength::SetApproximationScale(qreal value)
+{
+    ui->doubleSpinBoxApproximationScale->setValue(value);
+
+    VisToolArcWithLength *path = qobject_cast<VisToolArcWithLength *>(vis);
+    SCASSERT(path != nullptr)
+    path->setApproximationScale(value);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 void DialogArcWithLength::ChosenObject(quint32 id, const SceneObject &type)
 {
     if (prepare == false)// After first choose we ignore all objects
     {
         if (type == SceneObject::Point)
         {
-            if (SetObject(id, ui->comboBoxCenter, ""))
+            if (SetObject(id, ui->comboBoxCenter, QString()))
             {
                 vis->VisualMode(id);
                 prepare = true;
@@ -238,7 +269,7 @@ void DialogArcWithLength::RadiusChanged()
 {
     labelEditFormula = ui->labelEditRadius;
     labelResultCalculation = ui->labelResultRadius;
-    const QString postfix = VDomDocument::UnitsToStr(qApp->patternUnit(), true);
+    const QString postfix = UnitsToStr(qApp->patternUnit(), true);
     ValFormulaChanged(flagRadius, ui->plainTextEditRadius, timerRadius, postfix);
 }
 
@@ -255,7 +286,7 @@ void DialogArcWithLength::LengthChanged()
 {
     labelEditFormula = ui->labelEditLength;
     labelResultCalculation = ui->labelResultLength;
-    const QString postfix = VDomDocument::UnitsToStr(qApp->patternUnit(), true);
+    const QString postfix = UnitsToStr(qApp->patternUnit(), true);
     ValFormulaChanged(flagLength, ui->plainTextEditLength, timerLength, postfix);
 }
 
@@ -265,7 +296,7 @@ void DialogArcWithLength::FXRadius()
     DialogEditWrongFormula *dialog = new DialogEditWrongFormula(data, toolId, this);
     dialog->setWindowTitle(tr("Edit radius"));
     dialog->SetFormula(GetRadius());
-    dialog->setPostfix(VDomDocument::UnitsToStr(qApp->patternUnit(), true));
+    dialog->setPostfix(UnitsToStr(qApp->patternUnit(), true));
     if (dialog->exec() == QDialog::Accepted)
     {
         SetRadius(dialog->GetFormula());
@@ -293,7 +324,7 @@ void DialogArcWithLength::FXLength()
     DialogEditWrongFormula *dialog = new DialogEditWrongFormula(data, toolId, this);
     dialog->setWindowTitle(tr("Edit the arc length"));
     dialog->SetFormula(GetLength());
-    dialog->setPostfix(VDomDocument::UnitsToStr(qApp->patternUnit(), true));
+    dialog->setPostfix(UnitsToStr(qApp->patternUnit(), true));
     if (dialog->exec() == QDialog::Accepted)
     {
         SetLength(dialog->GetFormula());
@@ -323,13 +354,8 @@ void DialogArcWithLength::ShowVisualization()
 void DialogArcWithLength::SaveData()
 {
     radius = ui->plainTextEditRadius->toPlainText();
-    radius.replace("\n", " ");
-
     f1 = ui->plainTextEditF1->toPlainText();
-    f1.replace("\n", " ");
-
     length = ui->plainTextEditLength->toPlainText();
-    length.replace("\n", " ");
 
     VisToolArcWithLength *path = qobject_cast<VisToolArcWithLength *>(vis);
     SCASSERT(path != nullptr)
@@ -338,6 +364,7 @@ void DialogArcWithLength::SaveData()
     path->setRadius(radius);
     path->setF1(f1);
     path->setLength(length);
+    path->setApproximationScale(ui->doubleSpinBoxApproximationScale->value());
     path->RefreshGeometry();
 }
 
@@ -354,7 +381,7 @@ void DialogArcWithLength::closeEvent(QCloseEvent *event)
 void DialogArcWithLength::Radius()
 {
     labelEditFormula = ui->labelEditRadius;
-    const QString postfix = VDomDocument::UnitsToStr(qApp->patternUnit(), true);
+    const QString postfix = UnitsToStr(qApp->patternUnit(), true);
     const qreal radius = Eval(ui->plainTextEditRadius->toPlainText(), flagRadius, ui->labelResultRadius, postfix);
 
     if (radius < 0)
@@ -372,7 +399,7 @@ void DialogArcWithLength::Radius()
 void DialogArcWithLength::Length()
 {
     labelEditFormula = ui->labelEditLength;
-    const QString postfix = VDomDocument::UnitsToStr(qApp->patternUnit(), true);
+    const QString postfix = UnitsToStr(qApp->patternUnit(), true);
     const qreal length = Eval(ui->plainTextEditLength->toPlainText(), flagLength, ui->labelResultLength, postfix);
 
     if (qFuzzyIsNull(length))

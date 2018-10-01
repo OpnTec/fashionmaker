@@ -6,7 +6,7 @@
  **
  **  @brief
  **  @copyright
- **  This source code is part of the Valentine project, a pattern making
+ **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2016 Valentina project
  **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
@@ -41,6 +41,7 @@
 #include "../vmisc/vabstractapplication.h"
 #include "../vpatterndb/vcontainer.h"
 #include "../vwidgets/vmaingraphicsscene.h"
+#include "../vwidgets/scalesceneitems.h"
 #include "../visualization.h"
 #include "visualization/path/vispath.h"
 
@@ -53,7 +54,7 @@ VisToolPointOfIntersectionCurves::VisToolPointOfIntersectionCurves(const VContai
       point(nullptr),
       visCurve2(nullptr)
 {
-    visCurve2 = InitItem<QGraphicsPathItem>(supportColor, this);
+    visCurve2 = InitItem<VCurvePathItem>(supportColor, this);
     point = InitPoint(mainColor, this);
 }
 
@@ -63,15 +64,17 @@ void VisToolPointOfIntersectionCurves::RefreshGeometry()
     if (object1Id > NULL_ID)
     {
         auto curve1 = Visualization::data->GeometricObject<VAbstractCurve>(object1Id);
-        DrawPath(this, curve1->GetPath(PathDirection::Show), supportColor, Qt::SolidLine, Qt::RoundCap);
+        DrawPath(this, curve1->GetPath(), curve1->DirectionArrows(), supportColor, Qt::SolidLine, Qt::RoundCap);
 
         if (object2Id > NULL_ID)
         {
             auto curve2 = Visualization::data->GeometricObject<VAbstractCurve>(object2Id);
-            DrawPath(visCurve2, curve2->GetPath(PathDirection::Show), supportColor, Qt::SolidLine, Qt::RoundCap);
+            DrawPath(visCurve2, curve2->GetPath(), curve2->DirectionArrows(), supportColor, Qt::SolidLine,
+                     Qt::RoundCap);
 
-            auto p = VToolPointOfIntersectionCurves::FindPoint(curve1->GetPoints(), curve2->GetPoints(), vCrossPoint,
-                                                               hCrossPoint);
+            QPointF p;
+            VToolPointOfIntersectionCurves::FindPoint(curve1->GetPoints(), curve2->GetPoints(), vCrossPoint,
+                                                      hCrossPoint, &p);
             DrawPoint(point, p, mainColor);
         }
     }

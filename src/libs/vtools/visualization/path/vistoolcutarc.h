@@ -6,7 +6,7 @@
  **
  **  @brief
  **  @copyright
- **  This source code is part of the Valentine project, a pattern making
+ **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2013-2015 Valentina project
  **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
@@ -46,16 +46,16 @@ public:
     explicit VisToolCutArc(const VContainer *data, QGraphicsItem *parent = nullptr);
     virtual ~VisToolCutArc() Q_DECL_EQ_DEFAULT;
 
-    virtual void RefreshGeometry() Q_DECL_OVERRIDE;
+    virtual void RefreshGeometry() override;
     void         setLength(const QString &expression);
-    virtual int  type() const Q_DECL_OVERRIDE {return Type;}
+    virtual int  type() const override {return Type;}
     enum { Type = UserType + static_cast<int>(Vis::ToolCutArc)};
 protected:
     Q_DISABLE_COPY(VisToolCutArc)
-    QGraphicsEllipseItem *point;
-    QGraphicsPathItem    *arc1;
-    QGraphicsPathItem    *arc2;
-    qreal                length;
+    VScaledEllipse *point;
+    VCurvePathItem *arc1;
+    VCurvePathItem *arc2;
+    qreal           length;
 };
 
 #endif // VISTOOLCUTARC_H

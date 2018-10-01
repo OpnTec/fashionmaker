@@ -6,7 +6,7 @@
  **
  **  @brief
  **  @copyright
- **  This source code is part of the Valentine project, a pattern making
+ **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2017 Valentina project
  **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
@@ -44,6 +44,15 @@ PreferencesPathPage::PreferencesPathPage(QWidget *parent)
 
     InitTable();
 
+    connect(ui->pathTable, &QTableWidget::itemSelectionChanged, this, [this]()
+    {
+        ui->defaultButton->setEnabled(not ui->pathTable->selectedItems().isEmpty());
+        ui->defaultButton->setDefault(false);
+
+        ui->editButton->setEnabled(not ui->pathTable->selectedItems().isEmpty());
+        ui->editButton->setDefault(true);
+    });
+
     connect(ui->defaultButton, &QPushButton::clicked, this, &PreferencesPathPage::DefaultPath);
     connect(ui->editButton, &QPushButton::clicked, this, &PreferencesPathPage::EditPath);
 }
@@ -55,14 +64,30 @@ PreferencesPathPage::~PreferencesPathPage()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void PreferencesPathPage::Apply()
+QStringList PreferencesPathPage::Apply()
 {
     VSettings *settings = qApp->ValentinaSettings();
     settings->SetPathIndividualMeasurements(ui->pathTable->item(0, 1)->text());
-    settings->SetPathStandardMeasurements(ui->pathTable->item(1, 1)->text());
+    settings->SetPathMultisizeMeasurements(ui->pathTable->item(1, 1)->text());
     settings->SetPathPattern(ui->pathTable->item(2, 1)->text());
     settings->SetPathLayout(ui->pathTable->item(3, 1)->text());
     settings->SetPathTemplate(ui->pathTable->item(4, 1)->text());
+    settings->SetPathLabelTemplate(ui->pathTable->item(5, 1)->text());
+
+    return QStringList(); // No changes those require restart.
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void PreferencesPathPage::changeEvent(QEvent *event)
+{
+    if (event->type() == QEvent::LanguageChange)
+    {
+        // retranslate designer form (single inheritance approach)
+        ui->retranslateUi(this);
+        InitTable();
+    }
+    // remember to call base class implementation
+    QWidget::changeEvent(event);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -76,8 +101,8 @@ void PreferencesPathPage::DefaultPath()
 
     switch (row)
     {
-        case 1: // standard measurements
-            path = VCommonSettings::GetDefPathStandardMeasurements();
+        case 1: // multisize measurements
+            path = VCommonSettings::GetDefPathMultisizeMeasurements();
             break;
         case 2: // pattern path
             path = VSettings::GetDefPathPattern();
@@ -90,6 +115,9 @@ void PreferencesPathPage::DefaultPath()
             break;
         case 4: // templates
             path = VCommonSettings::GetDefPathTemplate();
+            break;
+        case 5: // label templates
+            path = VCommonSettings::GetDefPathLabelTemplate();
             break;
         default:
             break;
@@ -112,9 +140,9 @@ void PreferencesPathPage::EditPath()
         case 0: // individual measurements
             path = qApp->ValentinaSettings()->GetPathIndividualMeasurements();
             break;
-        case 1: // standard measurements
-            path = qApp->ValentinaSettings()->GetPathStandardMeasurements();
-            VCommonSettings::PrepareStandardTables(path);
+        case 1: // multisize measurements
+            path = qApp->ValentinaSettings()->GetPathMultisizeMeasurements();
+            path = VCommonSettings::PrepareMultisizeTables(path);
             break;
         case 2: // pattern path
             path = qApp->ValentinaSettings()->GetPathPattern();
@@ -125,6 +153,9 @@ void PreferencesPathPage::EditPath()
         case 4: // templates
             path = qApp->ValentinaSettings()->GetPathTemplate();
             break;
+        case 5: // label templates
+            path = qApp->ValentinaSettings()->GetPathLabelTemplate();
+            break;
         default:
             break;
     }
@@ -133,17 +164,22 @@ void PreferencesPathPage::EditPath()
     QDir directory(path);
     if (not directory.exists())
     {
-        usedNotExistedDir = directory.mkpath(".");
+        usedNotExistedDir = directory.mkpath(QChar('.'));
     }
 
     const QString dir = QFileDialog::getExistingDirectory(this, tr("Open Directory"), path,
-                                                          QFileDialog::ShowDirsOnly | QFileDialog::DontResolveSymlinks);
+                                                          QFileDialog::ShowDirsOnly
+                                                          | QFileDialog::DontResolveSymlinks
+#ifdef Q_OS_LINUX
+                                                          | QFileDialog::DontUseNativeDialog
+#endif
+                                                          );
     if (dir.isEmpty())
     {
         if (usedNotExistedDir)
         {
             QDir directory(path);
-            directory.rmpath(".");
+            directory.rmpath(QChar('.'));
         }
         DefaultPath();
         return;
@@ -155,14 +191,15 @@ void PreferencesPathPage::EditPath()
     if (usedNotExistedDir)
     {
         QDir directory(path);
-        directory.rmpath(".");
+        directory.rmpath(QChar('.'));
     }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void PreferencesPathPage::InitTable()
 {
-    ui->pathTable->setRowCount(5);
+    ui->pathTable->clearContents();
+    ui->pathTable->setRowCount(6);
     ui->pathTable->setColumnCount(2);
 
     const VSettings *settings = qApp->ValentinaSettings();
@@ -176,8 +213,8 @@ void PreferencesPathPage::InitTable()
 
     {
         ui->pathTable->setItem(1, 0, new QTableWidgetItem(tr("My Multisize Measurements")));
-        QTableWidgetItem *item = new QTableWidgetItem(settings->GetPathStandardMeasurements());
-        item->setToolTip(settings->GetPathStandardMeasurements());
+        QTableWidgetItem *item = new QTableWidgetItem(settings->GetPathMultisizeMeasurements());
+        item->setToolTip(settings->GetPathMultisizeMeasurements());
         ui->pathTable->setItem(1, 1, item);
     }
 
@@ -202,16 +239,14 @@ void PreferencesPathPage::InitTable()
         ui->pathTable->setItem(4, 1, item);
     }
 
+    {
+        ui->pathTable->setItem(5, 0, new QTableWidgetItem(tr("My label templates")));
+        QTableWidgetItem *item = new QTableWidgetItem(settings->GetPathLabelTemplate());
+        item->setToolTip(settings->GetPathLabelTemplate());
+        ui->pathTable->setItem(5, 1, item);
+    }
+
     ui->pathTable->verticalHeader()->setDefaultSectionSize(20);
     ui->pathTable->resizeColumnsToContents();
     ui->pathTable->resizeRowsToContents();
-
-    connect(ui->pathTable, &QTableWidget::itemSelectionChanged, this, [this]()
-    {
-        ui->defaultButton->setEnabled(true);
-        ui->defaultButton->setDefault(false);
-
-        ui->editButton->setEnabled(true);
-        ui->editButton->setDefault(true);
-    });
 }

@@ -6,7 +6,7 @@
  **
  **  @brief
  **  @copyright
- **  This source code is part of the Valentine project, a pattern making
+ **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2013-2015 Valentina project
  **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
@@ -28,8 +28,9 @@
 
 #include "vwidgetpopup.h"
 
-#include <QDesktopWidget>
+#include <QScreen>
 #include <QFont>
+#include <QGuiApplication>
 #include <QLabel>
 #include <QLayout>
 #include <QMessageLogger>
@@ -66,7 +67,7 @@ void VWidgetPopup::SetWidget(QWidget *widget, bool own)
 
         if (mOwn)
         {
-            mWidget->setParent(0);
+            mWidget->setParent(nullptr);
             delete mWidget;
         }
         else
@@ -77,7 +78,7 @@ void VWidgetPopup::SetWidget(QWidget *widget, bool own)
 
     mWidget = widget;
     mOwn = own;
-    mOldParent = 0;
+    mOldParent = nullptr;
 
     if (mWidget)
     {
@@ -92,7 +93,7 @@ void VWidgetPopup::PopupMessage(QWidget *w, const QString &msg)
 {
     SCASSERT(w != nullptr)
 
-    VWidgetPopup *popup = new VWidgetPopup();
+    VWidgetPopup *popup = new VWidgetPopup(w);
     QLabel *label = new QLabel(msg);
     QFont f = label->font();
     f.setBold(true);
@@ -109,7 +110,7 @@ void VWidgetPopup::Show(QPoint coord)
     // important to do this before following adjustments!
     QFrame::show();
 
-    const QRect screen(QDesktopWidget().availableGeometry());
+    const QRect screen(QGuiApplication::primaryScreen()->availableGeometry());
     coord.setX(coord.x() - width()/2);
 
     if (coord.x() < screen.x())
@@ -135,6 +136,10 @@ void VWidgetPopup::Show(QPoint coord)
 
     if (lifeTime > 0)
     {
+#if QT_VERSION >= QT_VERSION_CHECK(5, 4, 0)
+        QTimer::singleShot(lifeTime, this, &QWidget::close);
+#else
         QTimer::singleShot(lifeTime, this, SLOT(close()));
+#endif
     }
 }

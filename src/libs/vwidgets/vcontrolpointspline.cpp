@@ -6,7 +6,7 @@
  **
  **  @brief
  **  @copyright
- **  This source code is part of the Valentine project, a pattern making
+ **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2013-2015 Valentina project
  **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
@@ -43,20 +43,20 @@
 #include <QRectF>
 #include <Qt>
 
-#include "../ifc/ifcdef.h"
+#include "../vwidgets/global.h"
 #include "../vgeometry/vgobject.h"
+#include "../vmisc/vabstractapplication.h"
 #include "vmaingraphicsscene.h"
 #include "vmaingraphicsview.h"
+#include "vgraphicssimpletextitem.h"
+#include "scalesceneitems.h"
 
 //---------------------------------------------------------------------------------------------------------------------
-VControlPointSpline::VControlPointSpline(const qint32 &indexSpline, SplinePointPosition position, Unit patternUnit,
-                                         QGraphicsItem *parent)
-    :QGraphicsEllipseItem(parent),
-      radius(CircleRadius()),
+VControlPointSpline::VControlPointSpline(const qint32 &indexSpline, SplinePointPosition position, QGraphicsItem *parent)
+    : VScenePoint(parent),
       controlLine(nullptr),
       indexSpline(indexSpline),
       position(position),
-      patternUnit(patternUnit),
       freeAngle(true),
       freeLength(true)
 {
@@ -69,18 +69,15 @@ VControlPointSpline::VControlPointSpline(const qint32 &indexSpline, SplinePointP
  * @param indexSpline index spline in list.
  * @param position position point in spline.
  * @param controlPoint control point.
- * @param splinePoint spline point.
  * @param parent parent object.
  */
 VControlPointSpline::VControlPointSpline(const qint32 &indexSpline, SplinePointPosition position,
-                                         const QPointF &controlPoint, const QPointF &splinePoint, Unit patternUnit,
-                                         bool freeAngle, bool freeLength, QGraphicsItem *parent)
-    :QGraphicsEllipseItem(parent),
-      radius(CircleRadius()),
+                                         const QPointF &controlPoint, bool freeAngle,
+                                         bool freeLength, QGraphicsItem *parent)
+    : VScenePoint(parent),
       controlLine(nullptr),
       indexSpline(indexSpline),
       position(position),
-      patternUnit(patternUnit),
       freeAngle(freeAngle),
       freeLength(freeLength)
 {
@@ -91,14 +88,23 @@ VControlPointSpline::VControlPointSpline(const qint32 &indexSpline, SplinePointP
     this->setAcceptHoverEvents(true);
     this->setPos(controlPoint);
 
-    SetCtrlLine(controlPoint, splinePoint);
+    // Do not draw control point in constructor. It creates artefacts if they enabled from start.
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-VControlPointSpline::~VControlPointSpline()
+void VControlPointSpline::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
 {
-    //Disable cursor-arrow-openhand
-    RestoreOverrideCursor(cursorArrowOpenHand);
+    QPen lPen = controlLine->pen();
+    lPen.setColor(CorrectColor(controlLine, Qt::black));
+    controlLine->setPen(lPen);
+
+    QPointF p1, p2;
+    VGObject::LineIntersectCircle(QPointF(), ScaledRadius(SceneScale(scene())),
+                                  QLineF( QPointF(), controlLine->line().p1()), p1, p2);
+    QLineF line(controlLine->line().p1(), p1);
+    controlLine->setLine(line);
+
+    VScenePoint::paint(painter, option, widget);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -108,24 +114,11 @@ VControlPointSpline::~VControlPointSpline()
  */
 void VControlPointSpline::hoverEnterEvent(QGraphicsSceneHoverEvent *event)
 {
-    this->setPen(QPen(Qt::black, ToPixel(WidthMainLine(patternUnit), patternUnit)));
-    if (freeAngle || freeLength)
+    if ((flags() & QGraphicsItem::ItemIsMovable) && (freeAngle || freeLength))
     {
-        SetOverrideCursor(cursorArrowOpenHand, 1, 1);
+        SetItemOverrideCursor(this, cursorArrowOpenHand, 1, 1);
     }
-    QGraphicsEllipseItem::hoverEnterEvent(event);
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void VControlPointSpline::hoverLeaveEvent(QGraphicsSceneHoverEvent *event)
-{
-    this->setPen(QPen(Qt::black, ToPixel(WidthHairLine(patternUnit), patternUnit)));
-    if (freeAngle || freeLength)
-    {
-        //Disable cursor-arrow-openhand
-        RestoreOverrideCursor(cursorArrowOpenHand);
-    }
-    QGraphicsEllipseItem::hoverLeaveEvent(event);
+    VScenePoint::hoverEnterEvent(event);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -179,27 +172,32 @@ QVariant VControlPointSpline::itemChange(QGraphicsItem::GraphicsItemChange chang
                     const QList<QGraphicsView *> viewList = scene()->views();
                     if (not viewList.isEmpty())
                     {
-                        if (QGraphicsView *view = viewList.at(0))
+                        if (VMainGraphicsView *view = qobject_cast<VMainGraphicsView *>(viewList.at(0)))
                         {
-                            const int xmargin = 50;
-                            const int ymargin = 50;
+                            const qreal scale = SceneScale(scene());
+                            const int xmargin = qCeil(50/scale);
+                            const int ymargin = qCeil(50/scale);
 
                             const QRectF viewRect = VMainGraphicsView::SceneVisibleArea(view);
-                            const QRectF itemRect = mapToScene(boundingRect()).boundingRect();
+                            const QRectF itemRect = sceneBoundingRect();
 
                             // If item's rect is bigger than view's rect ensureVisible works very unstable.
                             if (itemRect.height() + 2*ymargin < viewRect.height() &&
                                 itemRect.width() + 2*xmargin < viewRect.width())
                             {
-                                 view->ensureVisible(itemRect, xmargin, ymargin);
+                                 view->EnsureVisibleWithDelay(itemRect, VMainGraphicsView::scrollDelay, xmargin,
+                                                              ymargin);
                             }
                             else
                             {
                                 // Ensure visible only small rect around a cursor
                                 VMainGraphicsScene *currentScene = qobject_cast<VMainGraphicsScene *>(scene());
                                 SCASSERT(currentScene)
+
                                 const QPointF cursorPosition = currentScene->getScenePos();
-                                view->ensureVisible(QRectF(cursorPosition.x()-5, cursorPosition.y()-5, 10, 10));
+                                view->EnsureVisibleWithDelay(QRectF(cursorPosition.x()-5/scale,
+                                                                    cursorPosition.y()-5/scale, 10/scale, 10/scale),
+                                                             VMainGraphicsView::scrollDelay);
                             }
                         }
                     }
@@ -208,10 +206,13 @@ QVariant VControlPointSpline::itemChange(QGraphicsItem::GraphicsItemChange chang
             }
             break;
         }
+        case QGraphicsItem::ItemSelectedHasChanged:
+            emit Selected(value.toBool());
+            break;
         default:
             break;
     }
-    return QGraphicsItem::itemChange(change, value);
+    return VScenePoint::itemChange(change, value);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -221,10 +222,17 @@ void VControlPointSpline::mousePressEvent(QGraphicsSceneMouseEvent *event)
     {
         if (freeAngle || freeLength)
         {
-            SetOverrideCursor(cursorArrowCloseHand, 1, 1);
+            SetItemOverrideCursor(this, cursorArrowCloseHand, 1, 1);
+            event->accept();
+        }
+
+        // Somehow clicking on notselectable object do not clean previous selections.
+        if (not (flags() & ItemIsSelectable) && scene())
+        {
+            scene()->clearSelection();
         }
     }
-    QGraphicsEllipseItem::mousePressEvent(event);
+    VScenePoint::mousePressEvent(event);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -234,11 +242,11 @@ void VControlPointSpline::mouseReleaseEvent(QGraphicsSceneMouseEvent *event)
     {
         if (freeAngle || freeLength)
         {
-            //Disable cursor-arrow-closehand
-            RestoreOverrideCursor(cursorArrowCloseHand);
+            SetItemOverrideCursor(this, cursorArrowOpenHand, 1, 1);
+            emit Released();
         }
     }
-    QGraphicsEllipseItem::mouseReleaseEvent(event);
+    VScenePoint::mouseReleaseEvent(event);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -250,24 +258,37 @@ void VControlPointSpline::contextMenuEvent(QGraphicsSceneContextMenuEvent *event
 //---------------------------------------------------------------------------------------------------------------------
 void VControlPointSpline::Init()
 {
-    auto rec = QRectF(0, 0, radius*2, radius*2);
-    rec.translate(-rec.center().x(), -rec.center().y());
-    this->setRect(rec);
-    this->setPen(QPen(Qt::black, ToPixel(WidthHairLine(patternUnit), patternUnit)));
+    m_baseColor = Qt::red;
+    SetOnlyPoint(true);
     this->setBrush(QBrush(Qt::NoBrush));
     this->setZValue(100);
 
-    controlLine = new QGraphicsLineItem(this);
-    controlLine->setPen(QPen(Qt::red, ToPixel(WidthHairLine(patternUnit), patternUnit)));
-    controlLine->setFlag(QGraphicsItem::ItemStacksBehindParent, true);
+    controlLine = new VScaledLine(this);
+    controlLine->SetBoldLine(false);
+    //controlLine->setFlag(QGraphicsItem::ItemStacksBehindParent, true);
+    controlLine->setVisible(false);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void VControlPointSpline::SetCtrlLine(const QPointF &controlPoint, const QPointF &splinePoint)
 {
-    QPointF p1, p2;
-    VGObject::LineIntersectCircle(QPointF(), radius, QLineF( QPointF(), splinePoint-controlPoint), p1, p2);
-    controlLine->setLine(QLineF(splinePoint-controlPoint, p1));
+    QLineF circleLine (QPointF(), splinePoint-controlPoint);
+    const qreal radius = ScaledRadius(SceneScale(scene()));
+
+    if (circleLine.length() > radius)
+    {
+        QPointF p1, p2;
+        VGObject::LineIntersectCircle(QPointF(), radius, circleLine, p1, p2);
+        QLineF line(splinePoint-controlPoint, p1);
+        controlLine->setFlag(QGraphicsItem::ItemSendsGeometryChanges, false);
+        controlLine->setLine(line);
+        controlLine->setVisible(not line.isNull());
+        controlLine->setFlag(QGraphicsItem::ItemSendsGeometryChanges, true);
+    }
+    else
+    {
+        controlLine->setVisible(false);
+    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -298,18 +319,6 @@ void VControlPointSpline::RefreshCtrlPoint(const qint32 &indexSpline, SplinePoin
  */
 void VControlPointSpline::setEnabledPoint(bool enable)
 {
-    if (enable == true)
-    {
-        this->setPen(QPen(Qt::black, ToPixel(WidthHairLine(patternUnit), patternUnit)));
-        this->setFlag(QGraphicsItem::ItemIsSelectable, true);
-        this->setFlag(QGraphicsItem::ItemIsMovable, true);
-        this->setAcceptHoverEvents(true);
-    }
-    else
-    {
-        this->setPen(QPen(Qt::gray, ToPixel(WidthHairLine(patternUnit), patternUnit)));
-        this->setFlag(QGraphicsItem::ItemIsSelectable, false);
-        this->setFlag(QGraphicsItem::ItemIsMovable, false);
-        this->setAcceptHoverEvents(false);
-    }
+    setEnabled(enable);
+    controlLine->setEnabled(enable);
 }

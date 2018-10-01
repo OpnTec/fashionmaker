@@ -6,7 +6,7 @@
  **
  **  @brief
  **  @copyright
- **  This source code is part of the Valentine project, a pattern making
+ **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2013-2015 Valentina project
  **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
@@ -48,15 +48,16 @@ public:
     VException &operator=(const VException &e);
     virtual ~VException() V_NOEXCEPT_EXPR (true) Q_DECL_EQ_DEFAULT;
 
-    Q_NORETURN virtual void raise() const Q_DECL_OVERRIDE;
+    Q_NORETURN virtual void raise() const override;
+
     // cppcheck-suppress unusedFunction
-    virtual VException *clone() const Q_DECL_OVERRIDE Q_REQUIRED_RESULT;
+    Q_REQUIRED_RESULT virtual VException *clone() const override;
+
     virtual QString ErrorMessage() const;
     virtual QString DetailedInformation() const;
     QString         WhatUtf8() const V_NOEXCEPT_EXPR (true);
     void            AddMoreInformation(const QString &info);
     QString         MoreInformation() const;
-    virtual const char* what() const V_NOEXCEPT_EXPR (true) Q_DECL_OVERRIDE;
 
 protected:
     /** @brief error string with error */
@@ -98,9 +99,9 @@ public:
     VExceptionToolWasDeleted &operator=(const VExceptionToolWasDeleted &e);
     virtual ~VExceptionToolWasDeleted() V_NOEXCEPT_EXPR (true) Q_DECL_EQ_DEFAULT;
 
-    Q_NORETURN virtual void raise() const Q_DECL_OVERRIDE;
+    Q_NORETURN virtual void raise() const override;
     // cppcheck-suppress unusedFunction
-    virtual VExceptionToolWasDeleted *clone() const Q_DECL_OVERRIDE;
+    virtual VExceptionToolWasDeleted *clone() const override;
 };
 
 #endif // VEXCEPTION_H

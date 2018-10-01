@@ -6,7 +6,7 @@
  **
  **  @brief
  **  @copyright
- **  This source code is part of the Valentine project, a pattern making
+ **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2016 Valentina project
  **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
@@ -34,6 +34,7 @@
 
 #include "vispath.h"
 #include "../vpatterndb/vpiece.h"
+#include "../vgeometry/vpointf.h"
 
 class VisToolPiece : public VisPath
 {
@@ -42,19 +43,26 @@ public:
     VisToolPiece(const VContainer *data, QGraphicsItem *parent = nullptr);
     virtual ~VisToolPiece() Q_DECL_EQ_DEFAULT;
 
-    virtual void RefreshGeometry() Q_DECL_OVERRIDE;
+    virtual void RefreshGeometry() override;
     void         SetPiece(const VPiece &piece);
-    virtual int  type() const Q_DECL_OVERRIDE {return Type;}
+    virtual int  type() const override {return Type;}
     enum { Type = UserType + static_cast<int>(Vis::ToolPiece)};
 private:
     Q_DISABLE_COPY(VisToolPiece)
-    QVector<QGraphicsEllipseItem *> m_points;
+    QVector<VScaledEllipse *> m_points;
+    QVector<VCurvePathItem *> m_curves;
 
-    QGraphicsLineItem *m_line1;
-    QGraphicsLineItem *m_line2;
+    VScaledLine *m_line1;
+    VScaledLine *m_line2;
     VPiece m_piece;
+    bool m_pieceCached;
+    QPainterPath m_cachedMainPath;
+    QVector<VPointF> m_cachedNodes;
+    QVector<QPointF> m_cachedMainPathPoints;
+    QVector<QPainterPath> m_cachedCurvesPath;
 
-    QGraphicsEllipseItem* GetPoint(quint32 i, const QColor &color);
+    VScaledEllipse* GetPoint(quint32 i, const QColor &color);
+    VCurvePathItem *GetCurve(quint32 i, const QColor &color);
 
     void HideAllItems();
 };

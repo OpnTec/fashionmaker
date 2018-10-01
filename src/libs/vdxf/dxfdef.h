@@ -1,12 +1,12 @@
 /************************************************************************
  **
- **  @file   def.h
+ **  @file   dxfdef.h
  **  @author Roman Telezhynskyi <dismine(at)gmail.com>
  **  @date   31 8, 2015
  **
  **  @brief
  **  @copyright
- **  This source code is part of the Valentine project, a pattern making
+ **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2015 Valentina project
  **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
@@ -40,7 +40,10 @@ enum class VarMeasurement : unsigned char { English=0, Metric=1 };
 //Default drawing units for AutoCAD DesignCenter blocks:
 enum class VarInsunits : unsigned char { Inches=1, Millimeters=4, Centimeters=5 };
 
-static inline bool DL_FuzzyComparePossibleNulls(double p1, double p2) Q_REQUIRED_RESULT;
+// Helps mark end of string. See VDxfEngine::drawTextItem for more details
+extern const QString endStringPlaceholder;
+
+Q_REQUIRED_RESULT static inline bool DL_FuzzyComparePossibleNulls(double p1, double p2);
 static inline bool DL_FuzzyComparePossibleNulls(double p1, double p2)
 {
     if(qFuzzyIsNull(p1))

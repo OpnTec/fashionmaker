@@ -50,11 +50,13 @@
 class QDomElement;
 class QDomNode;
 template <typename T> class QVector;
+template <typename T> class QFutureWatcher;
 
 Q_DECLARE_LOGGING_CATEGORY(vXML)
 
 QT_WARNING_PUSH
 QT_WARNING_DISABLE_GCC("-Weffc++")
+QT_WARNING_DISABLE_GCC("-Wnon-virtual-dtor")
 
 /**
  * @brief The VDomDocument class represents a Valentina document (.val file).
@@ -67,7 +69,7 @@ QT_WARNING_DISABLE_GCC("-Weffc++")
  * or more pattern pieces.
  *
  * An increment is an auxiliary variable that is calculated from regular measurement
- * variables (that belong to the standard measurements table). Increments are used to
+ * variables (that belong to the multisize measurements table). Increments are used to
  * create a graduation schema for the sewing pattern.
  *
  * A pattern piece contains
@@ -77,22 +79,24 @@ QT_WARNING_DISABLE_GCC("-Weffc++")
  * Of these, 2) and 3) are visible in the final pattern (draw mode 'Modeling'),
  * 1) is only displayed when editing (draw mode 'Calculation') the pattern.
  */
-class VDomDocument : public QDomDocument
+class VDomDocument : public QObject, public QDomDocument
 {
-    Q_DECLARE_TR_FUNCTIONS(VDomDocument)
+    Q_OBJECT
 public:
     static const QString AttrId;
-    static const QString UnitMM;
-    static const QString UnitCM;
-    static const QString UnitINCH;
-    static const QString UnitPX;
+    static const QString AttrText;
+    static const QString AttrBold;
+    static const QString AttrItalic;
+    static const QString AttrAlignment;
+    static const QString AttrFSIncrement;
+
     static const QString TagVersion;
     static const QString TagUnit;
+    static const QString TagLine;
 
-    VDomDocument();
-    virtual ~VDomDocument() Q_DECL_EQ_DEFAULT;
-    QDomElement    elementById(const QString& id);
-    QDomElement    elementById(quint32 id);
+    explicit VDomDocument(QObject *parent = nullptr);
+    virtual ~VDomDocument();
+    QDomElement elementById(quint32 id, const QString &tagName = QString());
 
     template <typename T>
     void SetAttribute(QDomElement &domElement, const QString &name, const T &value) const;
@@ -105,6 +109,7 @@ public:
 
     static QString GetParametrString(const QDomElement& domElement, const QString &name,
                                      const QString &defValue = QString());
+    static QString GetParametrEmptyString(const QDomElement& domElement, const QString &name);
     static qreal   GetParametrDouble(const QDomElement& domElement, const QString &name, const QString &defValue);
     static quint32 GetParametrId(const QDomElement& domElement);
 
@@ -112,11 +117,9 @@ public:
 
     static void    ValidateXML(const QString &schema, const QString &fileName);
     virtual void   setXMLContent(const QString &fileName);
-    static Unit    StrToUnits(const QString &unit);
-    static QString UnitsToStr(const Unit &unit, const bool translate = false);
     static QString UnitsHelpString();
 
-    virtual bool   SaveDocument(const QString &fileName, QString &error) const;
+    virtual bool   SaveDocument(const QString &fileName, QString &error);
     QString        Major() const;
     QString        Minor() const;
     QString        Patch() const;
@@ -128,6 +131,9 @@ public:
 
     static bool    SafeCopy(const QString &source, const QString &destination, QString &error);
 
+    QVector<VLabelTemplateLine> GetLabelTemplate(const QDomElement &element) const;
+    void                        SetLabelTemplate(QDomElement &element, const QVector<VLabelTemplateLine> &lines);
+
 protected:
     bool           setTagText(const QString &tag, const QString &text);
     bool           setTagText(const QDomElement &domElement, const QString &text);
@@ -136,12 +142,20 @@ protected:
     void           TestUniqueId() const;
     void           CollectId(const QDomElement &node, QVector<quint32> &vector)const;
 
+protected slots:
+    void RefreshElementIdCache();
+
+private slots:
+    void CacheRefreshed();
+
 private:
     Q_DISABLE_COPY(VDomDocument)
     /** @brief Map used for finding element by id. */
-    QHash<QString, QDomElement> map;
+    QHash<quint32, QDomElement>  m_elementIdCache;
+    QFutureWatcher<QHash<quint32, QDomElement>> *m_watcher;
 
-    bool           find(const QDomElement &node, const QString& id);
+    static bool find(QHash<quint32, QDomElement> &cache, const QDomElement &node, quint32 id);
+    QHash<quint32, QDomElement> RefreshCache(const QDomElement &root) const;
 
     bool SaveCanonicalXML(QIODevice *file, int indent, QString &error) const;
 };
@@ -171,6 +185,13 @@ inline void VDomDocument::SetAttribute<QString>(QDomElement &domElement, const Q
 
 //---------------------------------------------------------------------------------------------------------------------
 template <>
+inline void VDomDocument::SetAttribute<QChar>(QDomElement &domElement, const QString &name, const QChar &value) const
+{
+    domElement.setAttribute(name, value);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+template <>
 inline void VDomDocument::SetAttribute<bool>(QDomElement &domElement, const QString &name, const bool &value) const
 {
     domElement.setAttribute(name, value ? trueStr : falseStr);
@@ -179,9 +200,9 @@ inline void VDomDocument::SetAttribute<bool>(QDomElement &domElement, const QStr
 //---------------------------------------------------------------------------------------------------------------------
 template <>
 inline void VDomDocument::SetAttribute<MeasurementsType>(QDomElement &domElement, const QString &name,
-                                                              const MeasurementsType &value) const
+                                                         const MeasurementsType &value) const
 {
-    domElement.setAttribute(name, value == MeasurementsType::Standard ? QStringLiteral("standard") :
+    domElement.setAttribute(name, value == MeasurementsType::Multisize ? QStringLiteral("multisize") :
                                                                         QStringLiteral("individual"));
 }
 

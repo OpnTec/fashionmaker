@@ -6,7 +6,7 @@
  **
  **  @brief
  **  @copyright
- **  This source code is part of the Valentine project, a pattern making
+ **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2013-2015 Valentina project
  **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
@@ -56,10 +56,6 @@ VisToolPointOfContact::VisToolPointOfContact(const VContainer *data, QGraphicsIt
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-VisToolPointOfContact::~VisToolPointOfContact()
-{}
-
-//---------------------------------------------------------------------------------------------------------------------
 void VisToolPointOfContact::RefreshGeometry()
 {
     if (object1Id > NULL_ID)
@@ -77,20 +73,16 @@ void VisToolPointOfContact::RefreshGeometry()
             DrawPoint(lineP2, static_cast<QPointF>(*second), supportColor);
             DrawLine(this, QLineF(static_cast<QPointF>(*first), static_cast<QPointF>(*second)), supportColor);
 
-            if (radiusId <= NULL_ID)
-            {
-                return;
-            }
-            else
+            if (radiusId > NULL_ID)
             {
                 const QSharedPointer<VPointF> third = Visualization::data->GeometricObject<VPointF>(radiusId);
                 DrawPoint(arc_point, static_cast<QPointF>(*third), supportColor);
 
                 if (not qFuzzyIsNull(radius))
                 {
-                    QPointF fPoint = VToolPointOfContact::FindPoint(radius, static_cast<QPointF>(*third),
-                                                                    static_cast<QPointF>(*first),
-                                                                    static_cast<QPointF>(*second));
+                    QPointF fPoint;
+                    VToolPointOfContact::FindPoint(radius, static_cast<QPointF>(*third), static_cast<QPointF>(*first),
+                                                   static_cast<QPointF>(*second), &fPoint);
                     DrawPoint(point, fPoint, mainColor);
 
                     circle->setRect(PointRect(radius));
@@ -116,5 +108,5 @@ void VisToolPointOfContact::setRadiusId(const quint32 &value)
 //---------------------------------------------------------------------------------------------------------------------
 void VisToolPointOfContact::setRadius(const QString &expression)
 {
-    radius = FindLength(expression, Visualization::data->PlainVariables());
+    radius = FindLengthFromUser(expression, Visualization::data->DataVariables());
 }

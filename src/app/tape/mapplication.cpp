@@ -6,7 +6,7 @@
  **
  **  @brief
  **  @copyright
- **  This source code is part of the Valentine project, a pattern making
+ **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2015 Valentina project
  **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
@@ -37,6 +37,7 @@
 #include "../vmisc/logging.h"
 #include "../vmisc/vsysexits.h"
 #include "../vmisc/diagnostic.h"
+#include "../vmisc/qt_dispatch/qt_dispatch.h"
 #include "../qmuparser/qmuparsererror.h"
 
 #include <QDir>
@@ -60,16 +61,27 @@ Q_LOGGING_CATEGORY(mApp, "m.application")
 
 QT_WARNING_POP
 
-#if QT_VERSION < QT_VERSION_CHECK(5, 2, 0)
-#   include "../vmisc/backport/qcommandlineparser.h"
-#else
-#   include <QCommandLineParser>
-#endif
+#include <QCommandLineParser>
 
 //---------------------------------------------------------------------------------------------------------------------
 inline void noisyFailureMsgHandler(QtMsgType type, const QMessageLogContext &context, const QString &msg)
 {
-    Q_UNUSED(context)
+    // only the GUI thread should display message boxes.  If you are
+    // writing a multithreaded application and the error happens on
+    // a non-GUI thread, you'll have to queue the message to the GUI
+    QCoreApplication *instance = QCoreApplication::instance();
+    const bool isGuiThread = instance && (QThread::currentThread() == instance->thread());
+
+    if (not isGuiThread)
+    {
+        auto Handler = [](QtMsgType type, const QMessageLogContext &context, const QString &msg)
+        {
+            noisyFailureMsgHandler(type, context, msg);
+        };
+
+        q_dispatch_async_main(Handler, type, context, msg);
+        return;
+    }
 
     // Why on earth didn't Qt want to make failed signal/slot connections qWarning?
     if ((type == QtDebugMsg) && msg.contains(QStringLiteral("::connect")))
@@ -134,12 +146,6 @@ inline void noisyFailureMsgHandler(QtMsgType type, const QMessageLogContext &con
         type = QtDebugMsg;
     }
 
-    // only the GUI thread should display message boxes.  If you are
-    // writing a multithreaded application and the error happens on
-    // a non-GUI thread, you'll have to queue the message to the GUI
-    QCoreApplication *instance = QCoreApplication::instance();
-    const bool isGuiThread = instance && (QThread::currentThread() == instance->thread());
-
     switch (type)
     {
         case QtDebugMsg:
@@ -162,6 +168,9 @@ inline void noisyFailureMsgHandler(QtMsgType type, const QMessageLogContext &con
         default:
             break;
     }
+
+    vStdOut().flush();
+    vStdErr().flush();
 
     if (isGuiThread)
     {
@@ -203,16 +212,16 @@ inline void noisyFailureMsgHandler(QtMsgType type, const QMessageLogContext &con
             {
                 if (topWinAllowsPop)
                 {
-                    messageBox.setText(msg);
+                    messageBox.setText(VAbstractApplication::ClearMessage(msg));
                     messageBox.setStandardButtons(QMessageBox::Ok);
                     messageBox.setWindowModality(Qt::ApplicationModal);
                     messageBox.setModal(true);
                 #ifndef QT_NO_CURSOR
-                    QApplication::setOverrideCursor(Qt::ArrowCursor);
+                    QGuiApplication::setOverrideCursor(Qt::ArrowCursor);
                 #endif
                     messageBox.exec();
                 #ifndef QT_NO_CURSOR
-                    QApplication::restoreOverrideCursor();
+                    QGuiApplication::restoreOverrideCursor();
                 #endif
                 }
             }
@@ -256,11 +265,7 @@ MApplication::MApplication(int &argc, char **argv)
 //---------------------------------------------------------------------------------------------------------------------
 MApplication::~MApplication()
 {
-    for (int i = 0; i < mainWindows.size(); ++i)
-    {
-        TMainWindow *window = mainWindows.at(i);
-        delete window;
-    }
+    qDeleteAll(mainWindows);
 
     delete trVars;
     if (not dataBase.isNull())
@@ -372,9 +377,9 @@ QList<TMainWindow *> MApplication::MainWindows()
 {
     Clean();
     QList<TMainWindow*> list;
-    for (int i = 0; i < mainWindows.count(); ++i)
+    for (auto &w : mainWindows)
     {
-        list.append(mainWindows.at(i));
+        list.append(w);
     }
     return list;
 }
@@ -406,12 +411,6 @@ void MApplication::InitOptions()
     }
 
     QResource::registerResource(diagramsPath());
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-const VTranslateVars *MApplication::TrVars()
-{
-    return trVars;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -486,16 +485,16 @@ QString MApplication::diagramsPath() const
 {
     const QString dPath = QStringLiteral("/diagrams.rcc");
 #ifdef Q_OS_WIN
-    return QApplication::applicationDirPath() + dPath;
+    return QCoreApplication::applicationDirPath() + dPath;
 #elif defined(Q_OS_MAC)
-    QFileInfo fileBundle(QApplication::applicationDirPath() + QStringLiteral("/../Resources") + dPath);
+    QFileInfo fileBundle(QCoreApplication::applicationDirPath() + QStringLiteral("/../Resources") + dPath);
     if (fileBundle.exists())
     {
         return fileBundle.absoluteFilePath();
     }
     else
     {
-        QFileInfo file(QApplication::applicationDirPath() + dPath);
+        QFileInfo file(QCoreApplication::applicationDirPath() + dPath);
         if (file.exists())
         {
             return file.absoluteFilePath();
@@ -506,7 +505,7 @@ QString MApplication::diagramsPath() const
         }
     }
 #else // Unix
-    QFileInfo file(QApplication::applicationDirPath() + dPath);
+    QFileInfo file(QCoreApplication::applicationDirPath() + dPath);
     if (file.exists())
     {
         return file.absoluteFilePath();
@@ -546,10 +545,10 @@ void MApplication::RetranslateGroups()
 //---------------------------------------------------------------------------------------------------------------------
 void MApplication::RetranslateTables()
 {
-    QList<TMainWindow*> list = MainWindows();
-    for (int i=0; i < list.size(); ++i)
+    const QList<TMainWindow*> list = MainWindows();
+    for (auto w : list)
     {
-        list.at(i)->RetranslateTable();
+        w->RetranslateTable();
     }
 }
 
@@ -636,13 +635,11 @@ void MApplication::ParseCommandLine(const SocketConnection &connection, const QS
     if (not unitValue.isEmpty())
     {
 
-        const QStringList units = QStringList() << VDomDocument::UnitMM
-                                                << VDomDocument::UnitCM
-                                                << VDomDocument::UnitINCH;
+        const QStringList units = QStringList() << unitMM << unitCM << unitINCH;
         if (units.contains(unitValue))
         {
             flagUnit = true;
-            unit = VDomDocument::StrToUnits(unitValue);
+            unit = StrToUnits(unitValue);
         }
         else
         {
@@ -701,10 +698,10 @@ void MApplication::ParseCommandLine(const SocketConnection &connection, const QS
             parser.showHelp(V_EX_USAGE);
         }
 
-        for (int i = 0; i < args.size(); ++i)
+        for (auto &arg : args)
         {
             NewMainWindow();
-            if (not MainWindow()->LoadFile(args.at(i)))
+            if (not MainWindow()->LoadFile(arg))
             {
                 if (testMode)
                 {

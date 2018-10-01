@@ -6,7 +6,7 @@
  **
  **  @brief
  **  @copyright
- **  This source code is part of the Valentine project, a pattern making
+ **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2013-2015 Valentina project
  **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
@@ -33,6 +33,7 @@
 #include "../ifc/ifcdef.h"
 #include "../ifc/xml/vabstractpattern.h"
 #include "../vmisc/logging.h"
+#include "../vmisc/vabstractapplication.h"
 #include "vundocommand.h"
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -58,8 +59,11 @@ void DelTool::undo()
 
     UndoDeleteAfterSibling(parentNode, siblingId);
     emit NeedFullParsing();
-    //Keep last!
-    doc->SetCurrentPP(nameActivDraw);//Without this user will not see this change
+
+    if (qApp->GetDrawMode() == Draw::Calculation)
+    {//Keep last!
+        emit doc->SetCurrentPP(nameActivDraw);//Without this user will not see this change
+    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -67,8 +71,10 @@ void DelTool::redo()
 {
     qCDebug(vUndo, "Redo.");
 
-    //Keep first!
-    doc->SetCurrentPP(nameActivDraw);//Without this user will not see this change
+    if (qApp->GetDrawMode() == Draw::Calculation)
+    {//Keep first!
+        emit doc->SetCurrentPP(nameActivDraw);//Without this user will not see this change
+    }
     QDomElement domElement = doc->NodeById(nodeId);
     parentNode.removeChild(domElement);
     emit NeedFullParsing();

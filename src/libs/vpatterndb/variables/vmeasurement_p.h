@@ -6,7 +6,7 @@
  **
  **  @brief
  **  @copyright
- **  This source code is part of the Valentine project, a pattern making
+ **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2013-2015 Valentina project
  **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
@@ -36,34 +36,90 @@
 
 QT_WARNING_PUSH
 QT_WARNING_DISABLE_GCC("-Weffc++")
+QT_WARNING_DISABLE_GCC("-Wnon-virtual-dtor")
 
 class VMeasurementData : public QSharedData
 {
 public:
 
-    VMeasurementData(quint32 index, const QString &gui_text, const QString &tagName)
-        :data(VContainer(nullptr, nullptr)), index(index), formula(), gui_text(gui_text), _tagName(tagName),
-          formulaOk(true)
+    VMeasurementData(quint32 index, const QString &gui_text, const QString &tagName, qreal baseSize, qreal baseHeight,
+                     qreal base, qreal ksize, qreal kheight )
+        : data(),
+          index(index),
+          formula(),
+          gui_text(gui_text),
+          _tagName(tagName),
+          formulaOk(true),
+          currentSize(nullptr),
+          currentHeight(nullptr),
+          currentUnit(nullptr),
+          base(base),
+          ksize(ksize),
+          kheight(kheight),
+          baseSize(baseSize),
+          baseHeight(baseHeight)
     {}
 
     VMeasurementData(VContainer *data, quint32 index, const QString &formula, bool ok, const QString &gui_text,
-                     const QString &tagName)
-        :data(*data), index(index), formula(formula), gui_text(gui_text), _tagName(tagName), formulaOk(ok)
+                     const QString &tagName, qreal base)
+        : data(QSharedPointer<VContainer>(new VContainer(*data))),
+          index(index),
+          formula(formula),
+          gui_text(gui_text),
+          _tagName(tagName),
+          formulaOk(ok),
+          currentSize(nullptr),
+          currentHeight(nullptr),
+          currentUnit(nullptr),
+          base(base),
+          ksize(0),
+          kheight(0),
+          baseSize(0),
+          baseHeight(0)
     {}
 
     VMeasurementData(const VMeasurementData &m)
-        :QSharedData(m), data(m.data), index(m.index), formula(m.formula), gui_text(m.gui_text), _tagName(m._tagName),
-          formulaOk(m.formulaOk)
+        : QSharedData(m),
+          data(m.data),
+          index(m.index),
+          formula(m.formula),
+          gui_text(m.gui_text),
+          _tagName(m._tagName),
+          formulaOk(m.formulaOk),
+          currentSize(m.currentSize),
+          currentHeight(m.currentHeight),
+          currentUnit(m.currentUnit),
+          base(m.base),
+          ksize(m.ksize),
+          kheight(m.kheight),
+          baseSize(m.baseSize),
+          baseHeight(m.baseHeight)
     {}
 
     virtual  ~VMeasurementData();
 
-    VContainer data;
+    QSharedPointer<VContainer> data;
     quint32 index;
     QString formula;
     QString gui_text;
     QString _tagName;
     bool formulaOk;
+
+    qreal *currentSize;
+    qreal *currentHeight;
+    const Unit *currentUnit;
+
+    /** @brief base value in base size and height */
+    qreal   base;
+
+    /** @brief ksize increment in sizes */
+    qreal   ksize;
+
+    /** @brief kgrowth increment in heights */
+    qreal   kheight;
+
+    qreal baseSize;
+    qreal baseHeight;
 
 private:
     VMeasurementData &operator=(const VMeasurementData &) Q_DECL_EQ_DELETE;

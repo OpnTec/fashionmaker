@@ -6,7 +6,7 @@
  **
  **  @brief
  **  @copyright
- **  This source code is part of the Valentine project, a pattern making
+ **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2016 Valentina project
  **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
@@ -44,21 +44,23 @@ public:
     VisToolPiecePath(const VContainer *data, QGraphicsItem *parent = nullptr);
     virtual ~VisToolPiecePath() Q_DECL_EQ_DEFAULT;
 
-    virtual void RefreshGeometry() Q_DECL_OVERRIDE;
+    virtual void RefreshGeometry() override;
     void         SetPath(const VPiecePath &path);
-    virtual int  type() const Q_DECL_OVERRIDE {return Type;}
+    void         SetCuttingPath(const QVector<QPointF> &cuttingPath);
+    virtual int  type() const override {return Type;}
     enum { Type = UserType + static_cast<int>(Vis::ToolPiecePath)};
-
 protected:
-    virtual void mousePressEvent( QGraphicsSceneMouseEvent * event ) Q_DECL_OVERRIDE;
+    virtual void mousePressEvent( QGraphicsSceneMouseEvent * event ) override;
 
 private:
     Q_DISABLE_COPY(VisToolPiecePath)
     QVector<VSimplePoint *> m_points;
 
-    QGraphicsLineItem *m_line;
+    VScaledLine *m_line;
 
     VPiecePath m_path;
+
+    QVector<QPointF> m_cuttingPath;
 
     VSimplePoint *GetPoint(quint32 i, const QColor &color);
 

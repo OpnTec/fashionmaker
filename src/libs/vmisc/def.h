@@ -6,7 +6,7 @@
  **
  **  @brief
  **  @copyright
- **  This source code is part of the Valentine project, a pattern making
+ **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2015 Valentina project
  **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
@@ -40,7 +40,9 @@
     #include <windows.h>
 #endif /* Q_OS_WIN */
 
+#include "literals.h"
 #include "debugbreak.h"
+#include "defglobal.h"
 
 template <class T> class QSharedPointer;
 
@@ -48,36 +50,25 @@ template <class T> class QSharedPointer;
     #include <ciso646>
 #endif /* Q_CC_MSVC */
 
-//There is no automatic disconnection when the 'receiver' is destroyed because it's a functor with no QObject. However,
-//since 5.2 there is an overload which adds a "context object". When that object is destroyed, the connection is broken
-//(the context is also used for the thread affinity: the lambda will be called in the thread of the event loop of the
-// object used as context).
-#if QT_VERSION >= QT_VERSION_CHECK(5, 2, 0)
-#define RECEIVER(obj) (obj),
-#else
-#define RECEIVER(obj)
-#endif
-
-#if QT_VERSION < QT_VERSION_CHECK(5, 2, 0)
-#define CURRENT_DATA(box) box->itemData(box->currentIndex())
-#else
-#define CURRENT_DATA(box) box->currentData()
-#endif
-
 class QComboBox;
 class QMarginsF;
 class VTranslateMeasurements;
+class QGraphicsItem;
 
-#define SceneSize 50000
-#define DefPointRadius 1.5//mm
+#define SceneSize 50000  
+extern const qreal   defCurveApproximationScale;
+extern const qreal   minCurveApproximationScale;
+extern const qreal   maxCurveApproximationScale;
 
 enum class NodeDetail : char { Contour, Modeling };
 enum class SceneObject : char { Point, Line, Spline, Arc, ElArc, SplinePath, Detail, Unknown };
-enum class MeasurementsType : char { Standard, Individual , Unknown};
+enum class MeasurementsType : char { Multisize, Individual , Unknown};
 enum class Unit : char { Mm = 0, Cm, Inch, Px, LAST_UNIT_DO_NOT_USE};
 enum class Source : char { FromGui, FromFile, FromTool };
 enum class NodeUsage : bool {NotInUse = false, InUse = true};
 enum class SelectionType : bool {ByMousePress, ByMouseRelease};
+enum class PageOrientation : bool {Portrait = true, Landscape = false};
+enum class Draw : char { Calculation, Modeling, Layout };
 
 enum class PieceNodeAngle : unsigned char
 {
@@ -86,7 +77,8 @@ enum class PieceNodeAngle : unsigned char
     ByFirstEdgeSymmetry,
     BySecondEdgeSymmetry,
     ByFirstEdgeRightAngle,
-    BySecondEdgeRightAngle
+    BySecondEdgeRightAngle,
+    LAST_ONE_DO_NOT_USE
 };
 
 enum class PassmarkLineType : unsigned char
@@ -105,11 +97,21 @@ enum class PassmarkAngleType : unsigned char
 {
     Straightforward = 0, // Default
     Bisector,
-    Intersection
+    Intersection,
+    IntersectionOnlyLeft,
+    IntersectionOnlyRight,
+    Intersection2,
+    Intersection2OnlyLeft,
+    Intersection2OnlyRight
 };
 
 QString           PassmarkAngleTypeToString(PassmarkAngleType type);
 PassmarkAngleType StringToPassmarkAngleType(const QString &value);
+
+
+Unit    StrToUnits(const QString &unit);
+QString UnitsToStr(const Unit &unit, const bool translate = false);
+
 
 enum class PiecePathIncludeType : unsigned char
 {
@@ -119,7 +121,7 @@ enum class PiecePathIncludeType : unsigned char
 
 enum class PiecePathType :  unsigned char {PiecePath = 0, CustomSeamAllowance = 1, InternalPath = 2, Unknown = 3};
 
-typedef unsigned char ToolVisHolderType;
+typedef int ToolVisHolderType;
 enum class Tool : ToolVisHolderType
 {
     Arrow,
@@ -175,6 +177,8 @@ enum class Tool : ToolVisHolderType
     EllipticalArc,
     Pin,
     InsertNode,
+    PlaceLabel,
+    DuplicateDetail,
     LAST_ONE_DO_NOT_USE //add new stuffs above this, this constant must be last and never used
 };
 
@@ -184,6 +188,8 @@ enum class Vis : ToolVisHolderType
     GraphicsSimpleTextItem,
     SimplePoint,
     SimpleCurve,
+    ScaledLine,
+    ScaledEllipse,
     Line,
     Path,
     Operation,
@@ -222,8 +228,17 @@ enum class Vis : ToolVisHolderType
     ToolEllipticalArc,
     ToolPiece,
     ToolPiecePath,
-    ToolPin,
-    PiecePins
+    ToolSpecialPoint,
+    ToolPlaceLabel,
+    ToolDuplicateDetail,
+    PieceSpecialPoints,
+    NoBrush,
+    CurvePathItem,
+    GrainlineItem,
+    PieceItem,
+    TextGraphicsItem,
+    ScenePoint,
+    LAST_ONE_DO_NOT_USE //add new stuffs above this, this constant must be last and never used
 };
 
 enum class VarType : char { Measurement, Increment, LineLength, CurveLength, CurveCLength, LineAngle, CurveAngle,
@@ -282,360 +297,30 @@ enum class GSizes : unsigned char { ALL,
 #define SCASSERT(cond) qt_noop();
 #endif /* V_NO_ASSERT */
 
-#ifdef Q_CC_CLANG
-#define V_FALLTHROUGH [[clang::fallthrough]];
-#else
-#define V_FALLTHROUGH
+#ifndef __has_cpp_attribute
+# define __has_cpp_attribute(x) 0
 #endif
 
-extern const QString LONG_OPTION_NO_HDPI_SCALING;
+#if __cplusplus > 201402L && __has_cpp_attribute(fallthrough)
+#   define V_FALLTHROUGH [[fallthrough]];
+#elif defined(Q_CC_CLANG) && __cplusplus >= 201103L
+    /* clang's fallthrough annotations are only available starting in C++11. */
+#   define V_FALLTHROUGH [[clang::fallthrough]];
+#elif defined(Q_CC_MSVC)
+   /*
+    * MSVC's __fallthrough annotations are checked by /analyze (Code Analysis):
+    * https://msdn.microsoft.com/en-us/library/ms235402%28VS.80%29.aspx
+    */
+#   include <sal.h>
+#   define V_FALLTHROUGH __fallthrough;
+#elif defined(Q_CC_GNU) && (__GNUC__ >= 7)
+#   define V_FALLTHROUGH [[gnu::fallthrough]];
+#else
+#   define V_FALLTHROUGH
+#endif
+
 bool IsOptionSet(int argc, char *argv[], const char *option);
 void InitHighDpiScaling(int argc, char *argv[]);
-
-// measurements
-// A
-extern const QString height_M;                    // A01
-extern const QString heightNeckBack_M;            // A02
-extern const QString heightScapula_M;             // A03
-extern const QString heightArmpit_M;              // A04
-extern const QString heightWaistSide_M;           // A05
-extern const QString heightHip_M;                 // A06
-extern const QString heightGlutealFold_M;         // A07
-extern const QString heightKnee_M;                // A08
-extern const QString heightCalf_M;                // A09
-extern const QString heightAnkleHigh_M;           // A10
-extern const QString heightAnkle_M;               // A11
-extern const QString heightHighhip_M;             // A12
-extern const QString heightWaistFront_M;          // A13
-extern const QString heightBustpoint_M;           // A14
-extern const QString heightShoulderTip_M;         // A15
-extern const QString heightNeckFront_M;           // A16
-extern const QString heightNeckSide_M;            // A17
-extern const QString heightNeckBackToKnee_M;      // A18
-extern const QString heightWaistSideToKnee_M;     // A19
-extern const QString heightWaistSideToHip_M;      // A20
-extern const QString heightKneeToAnkle_M;         // A21
-extern const QString heightNeckBackToWaistSide_M; // A22
-extern const QString heightWaistBack_M;           // A23
-// B
-extern const QString widthShoulder_M;     // B01
-extern const QString widthBust_M;         // B02
-extern const QString widthWaist_M;        // B03
-extern const QString widthHip_M;          // B04
-extern const QString widthAbdomenToHip_M; // B05
-// C
-extern const QString indentNeckBack_M;  // C01
-extern const QString indentWaistBack_M; // C02
-extern const QString indentAnkleHigh_M; // C03
-// D
-extern const QString handPalmLength_M; // D01
-extern const QString handLength_M;     // D02
-extern const QString handPalmWidth_M;  // D03
-extern const QString handPalmCirc_M;   // D04
-extern const QString handCirc_M;       // D05
-// E
-extern const QString footWidth_M;      // E01
-extern const QString footLength_M;     // E02
-extern const QString footCirc_M;       // E03
-extern const QString footInstepCirc_M; // E04
-// F
-extern const QString headCirc_M;	        // F01
-extern const QString headLength_M;          // F02
-extern const QString headDepth_M;	        // F03
-extern const QString headWidth_M;	        // F04
-extern const QString headCrownToNeckBack_M; // F05
-extern const QString headChinToNeckBack_M;  // F06
-// G
-extern const QString neckMidCirc_M;        // G01
-extern const QString neckCirc_M;           // G02
-extern const QString highbustCirc_M;       // G03
-extern const QString bustCirc_M;           // G04
-extern const QString lowbustCirc_M;        // G05
-extern const QString ribCirc_M;            // G06
-extern const QString waistCirc_M;          // G07
-extern const QString highhipCirc_M;        // G08
-extern const QString hipCirc_M;            // G09
-extern const QString neckArcF_M;           // G10
-extern const QString highbustArcF_M;       // G11
-extern const QString bustArcF_M;           // G12
-extern const QString lowbustArcF_M;        // G13
-extern const QString ribArcF_M;            // G14
-extern const QString waistArcF_M;          // G15
-extern const QString highhipArcF_M;        // G16
-extern const QString hipArcF_M;            // G17
-extern const QString neckArcHalfF_M;       // G18
-extern const QString highbustArcHalfF_M;   // G19
-extern const QString bustArcHalfF_M;       // G20
-extern const QString lowbustArcHalfF_M;    // G21
-extern const QString ribArcHalfF_M;        // G22
-extern const QString waistArcHalfF_M;      // G23
-extern const QString highhipArcHalfF_M;    // G24
-extern const QString hipArcHalfF_M;        // G25
-extern const QString neckArcB_M;           // G26
-extern const QString highbustArcB_M;       // G27
-extern const QString bustArcB_M;           // G28
-extern const QString lowbustArcB_M;        // G29
-extern const QString ribArcB_M;            // G30
-extern const QString waistArcB_M;          // G31
-extern const QString highhipArcB_M;        // G32
-extern const QString hipArcB_M;            // G33
-extern const QString neckArcHalfB_M;       // G34
-extern const QString highbustArcHalfB_M;   // G35
-extern const QString bustArcHalfB_M;       // G36
-extern const QString lowbustArcHalfB_M;    // G37
-extern const QString ribArcHalfB_M;        // G38
-extern const QString waistArcHalfB_M;      // G39
-extern const QString highhipArcHalfB_M;    // G40
-extern const QString hipArcHalfB_M;        // G41
-extern const QString hipWithAbdomenArcF_M; // G42
-extern const QString bodyArmfoldCirc_M;    // G43
-extern const QString bodyBustCirc_M;       // G44
-extern const QString bodyTorsoCirc_M;      // G45
-extern const QString hipCircWithAbdomen_M; // G46
-// H
-extern const QString neckFrontToWaistF_M;             // H01
-extern const QString neckFrontToWaistFlatF_M;         // H02
-extern const QString armpitToWaistSide_M;             // H03
-extern const QString shoulderTipToWaistSideF_M;       // H04
-extern const QString neckSideToWaistF_M;              // H05
-extern const QString neckSideToWaistBustpointF_M;     // H06
-extern const QString neckFrontToHighbustF_M;          // H07
-extern const QString highbustToWaistF_M;              // H08
-extern const QString neckFrontToBustF_M;              // H09
-extern const QString bustToWaistF_M;                  // H10
-extern const QString lowbustToWaistF_M;               // H11
-extern const QString ribToWaistSide_M;                // H12
-extern const QString shoulderTipToArmfoldF_M;         // H13
-extern const QString neckSideToBustF_M;               // H14
-extern const QString neckSideToHighbustF_M;           // H15
-extern const QString shoulderCenterToHighbustF_M;     // H16
-extern const QString shoulderTipToWaistSideB_M;       // H17
-extern const QString neckSideToWaistB_M;              // H18
-extern const QString neckBackToWaistB_M;              // H19
-extern const QString neckSideToWaistScapulaB_M;       // H20
-extern const QString neckBackToHighbustB_M;           // H21
-extern const QString highbustToWaistB_M;              // H22
-extern const QString neckBackToBustB_M;               // H23
-extern const QString bustToWaistB_M;                  // H24
-extern const QString lowbustToWaistB_M;               // H25
-extern const QString shoulderTipToArmfoldB_M;         // H26
-extern const QString neckSideToBustB_M;               // H27
-extern const QString neckSideToHighbustB_M;           // H28
-extern const QString shoulderCenterToHighbustB_M;     // H29
-extern const QString waistToHighhipF_M;               // H30
-extern const QString waistToHipF_M;                   // H31
-extern const QString waistToHighhipSide_M;            // H32
-extern const QString waistToHighhipB_M;               // H33
-extern const QString waistToHipB_M;                   // H34
-extern const QString waistToHipSide_M;                // H35
-extern const QString shoulderSlopeNeckSideAngle_M;    // H36
-extern const QString shoulderSlopeNeckSideLength_M;   // H37
-extern const QString shoulderSlopeNeckBackAngle_M;    // H38
-extern const QString shoulderSlopeNeckBackHeight_M;   // H39
-extern const QString shoulderSlopeShoulderTipAngle_M; // H40
-extern const QString neckBackToAcrossBack_M;          // H41
-extern const QString acrossBackToWaistB_M;            // H42
-// I
-extern const QString shoulderLength_M;                // I01
-extern const QString shoulderTipToShoulderTipF_M;     // I02
-extern const QString acrossChestF_M;                  // I03
-extern const QString armfoldToArmfoldF_M;             // I04
-extern const QString shoulderTipToShoulderTipHalfF_M; // I05
-extern const QString acrossChestHalfF_M;              // I06
-extern const QString shoulderTipToShoulderTipB_M;     // I07
-extern const QString acrossBackB_M;                   // I08
-extern const QString armfoldToArmfoldB_M;             // I09
-extern const QString shoulderTipToShoulderTipHalfB_M; // I10
-extern const QString acrossBackHalfB_M;               // I11
-extern const QString neckFrontToShoulderTipF_M;       // I12
-extern const QString neckBackToShoulderTipB_M;        // I13
-extern const QString neckWidth_M;                     // I14
-// J
-extern const QString bustpointToBustpoint_M;       // J01
-extern const QString bustpointToNeckSide_M;        // J02
-extern const QString bustpointToLowbust_M;         // J03
-extern const QString bustpointToWaist_M;           // J04
-extern const QString bustpointToBustpointHalf_M;   // J05
-extern const QString bustpointNeckSideToWaist_M;   // J06
-extern const QString bustpointToShoulderTip_M;     // J07
-extern const QString bustpointToWaistFront_M;      // J08
-extern const QString bustpointToBustpointHalter_M; // J09
-extern const QString bustpointToShoulderCenter_M;  // J10
-// K
-extern const QString shoulderTipToWaistFront_M;       // K01
-extern const QString neckFrontToWaistSide_M;          // K02
-extern const QString neckSideToWaistSideF_M;          // K03
-extern const QString shoulderTipToWaistBack_M;        // K04
-extern const QString shoulderTipToWaistB_1inOffset_M; // K05
-extern const QString neckBackToWaistSide_M;           // K06
-extern const QString neckSideToWaistSideB_M;          // K07
-extern const QString neckSideToArmfoldF_M;            // K08
-extern const QString neckSideToArmpitF_M;             // K09
-extern const QString neckSideToBustSideF_M;           // K10
-extern const QString neckSideToArmfoldB_M;            // K11
-extern const QString neckSideToArmpitB_M;             // K12
-extern const QString neckSideToBustSideB_M;           // K13
-// L
-extern const QString armShoulderTipToWristBent_M;   // L01
-extern const QString armShoulderTipToElbowBent_M;   // L02
-extern const QString armElbowToWristBent_M;         // L03
-extern const QString armElbowCircBent_M;            // L04
-extern const QString armShoulderTipToWrist_M;       // L05
-extern const QString armShoulderTipToElbow_M;       // L06
-extern const QString armElbowToWrist_M;             // L07
-extern const QString armArmpitToWrist_M;            // L08
-extern const QString armArmpitToElbow_M;            // L09
-extern const QString armElbowToWristInside_M;       // L10
-extern const QString armUpperCirc_M;                // L11
-extern const QString armAboveElbowCirc_M;           // L12
-extern const QString armElbowCirc_M;                // L13
-extern const QString armLowerCirc_M;                // L14
-extern const QString armWristCirc_M;                // L15
-extern const QString armShoulderTipToArmfoldLine_M; // L16
-extern const QString armNeckSideToWrist_M;          // L17
-extern const QString armNeckSideToFingerTip_M;      // L18
-extern const QString armscyeCirc_M;                 // L19
-extern const QString armscyeLength_M;               // L20
-extern const QString armscyeWidth_M;	            // L21
-extern const QString armNeckSideToOuterElbow_M;     // L22
-// M
-extern const QString legCrotchToFloor_M;    // M01
-extern const QString legWaistSideToFloor_M; // M02
-extern const QString legThighUpperCirc_M;	// M03
-extern const QString legThighMidCirc_M;     // M04
-extern const QString legKneeCirc_M;	        // M05
-extern const QString legKneeSmallCirc_M;    // M06
-extern const QString legCalfCirc_M;	        // M07
-extern const QString legAnkleHighCirc_M;    // M08
-extern const QString legAnkleCirc_M;        // M09
-extern const QString legKneeCircBent_M;	    // M10
-extern const QString legAnkleDiagCirc_M;    // M11
-extern const QString legCrotchToAnkle_M;    // M12
-extern const QString legWaistSideToAnkle_M; // M13
-extern const QString legWaistSideToKnee_M;  // M14
-// N
-extern const QString crotchLength_M;          // N01
-extern const QString crotchLengthB_M;         // N02
-extern const QString crotchLengthF_M;         // N03
-extern const QString riseLengthSideSitting_M; // N04
-extern const QString riseLengthDiag_M;        // N05
-extern const QString riseLengthB_M;           // N06
-extern const QString riseLengthF_M;           // N07
-extern const QString riseLengthSide_M;        // N08
-// O
-extern const QString neckBackToWaistFront_M;	        // O01
-extern const QString waistToWaistHalter_M;	            // O02
-extern const QString waistNaturalCirc_M;	            // O03
-extern const QString waistNaturalArcF_M;                // O04
-extern const QString waistNaturalArcB_M;                // O05
-extern const QString waistToNaturalWaistF_M;            // O06
-extern const QString waistToNaturalWaistB_M;            // O07
-extern const QString armNeckBackToElbowBent_M;          // O08
-extern const QString armNeckBackToWristBent_M;          // O09
-extern const QString armNeckSideToElbowBent_M;	        // O10
-extern const QString armNeckSideToWristBent_M;	        // O11
-extern const QString armAcrossBackCenterToElbowBent_M;  // O12
-extern const QString armAcrossBackCenterToWristBent_M;  // O13
-extern const QString armArmscyeBackCenterToWristBent_M; // O14
-// P
-extern const QString neckBackToBustFront_M;	                             // P01
-extern const QString neckBackToArmfoldFront_M;                           // P02
-extern const QString neckBackToArmfoldFrontToWaistSide_M;                // P03
-extern const QString highbustBackOverShoulderToArmfoldFront_M;           // P04
-extern const QString highbustBackOverShoulderToWaistFront_M;             // P05
-extern const QString neckBackToArmfoldFrontToNeckBack_M;                 // P06
-extern const QString acrossBackCenterToArmfoldFrontToAcrossBackCenter_M; // P07
-extern const QString neckBackToArmfoldFrontToHighbustBack_M;             // P08
-extern const QString armfoldToArmfoldBust_M;                             // P09
-extern const QString armfoldToBustFront_M;	                             // P10
-extern const QString highbustBOverShoulderToHighbustF_M;                 // P11
-extern const QString armscyeArc_M;	                                     // P12
-// Q
-extern const QString dartWidthShoulder_M; // Q01
-extern const QString dartWidthBust_M;	  // Q02
-extern const QString dartWidthWaist_M;    // Q03
-
-QStringList ListGroupA();
-QStringList ListGroupB();
-QStringList ListGroupC();
-QStringList ListGroupD();
-QStringList ListGroupE();
-QStringList ListGroupF();
-QStringList ListGroupG();
-QStringList ListGroupH();
-QStringList ListGroupI();
-QStringList ListGroupJ();
-QStringList ListGroupK();
-QStringList ListGroupL();
-QStringList ListGroupM();
-QStringList ListGroupN();
-QStringList ListGroupO();
-QStringList ListGroupP();
-QStringList ListGroupQ();
-
-QStringList ListNumbers(const VTranslateMeasurements *trM, const QStringList & listMeasurements);
-QString MapDiagrams(const VTranslateMeasurements *trM, const QString &number);
-
-// pattern making systems codes
-extern const QString p0_S;
-extern const QString p1_S;
-extern const QString p2_S;
-extern const QString p3_S;
-extern const QString p4_S;
-extern const QString p5_S;
-extern const QString p6_S;
-extern const QString p7_S;
-extern const QString p8_S;
-extern const QString p9_S;
-extern const QString p10_S;
-extern const QString p11_S;
-extern const QString p12_S;
-extern const QString p13_S;
-extern const QString p14_S;
-extern const QString p15_S;
-extern const QString p16_S;
-extern const QString p17_S;
-extern const QString p18_S;
-extern const QString p19_S;
-extern const QString p20_S;
-extern const QString p21_S;
-extern const QString p22_S;
-extern const QString p23_S;
-extern const QString p24_S;
-extern const QString p25_S;
-extern const QString p26_S;
-extern const QString p27_S;
-extern const QString p28_S;
-extern const QString p29_S;
-extern const QString p30_S;
-extern const QString p31_S;
-extern const QString p32_S;
-extern const QString p33_S;
-extern const QString p34_S;
-extern const QString p35_S;
-extern const QString p36_S;
-extern const QString p37_S;
-extern const QString p38_S;
-extern const QString p39_S;
-extern const QString p40_S;
-extern const QString p41_S;
-extern const QString p42_S;
-extern const QString p43_S;
-extern const QString p44_S;
-extern const QString p45_S;
-extern const QString p46_S;
-extern const QString p47_S;
-extern const QString p48_S;
-extern const QString p49_S;
-extern const QString p50_S;
-extern const QString p51_S;
-extern const QString p52_S;
-extern const QString p53_S;
-extern const QString p54_S;
-extern const QString p998_S;
-
-QStringList ListPMSystems();
-void InitPMSystems(QComboBox *systemCombo);
 
 // functions
 extern const QString degTorad_F;
@@ -666,6 +351,9 @@ extern const QString exp_F;
 extern const QString sqrt_F;
 extern const QString sign_F;
 extern const QString rint_F;
+extern const QString r2cm_F;
+extern const QString csrCm_F;
+extern const QString csrInch_F;
 extern const QString abs_F;
 extern const QString min_F;
 extern const QString max_F;
@@ -675,23 +363,42 @@ extern const QString fmod_F;
 
 extern const QStringList builInFunctions;
 
-// Postfix operators
-extern const QString cm_Oprt;
-extern const QString mm_Oprt;
-extern const QString in_Oprt;
-
-extern const QStringList builInPostfixOperators;
-
 // Placeholders
 extern const QString pl_size;
 extern const QString pl_height;
+extern const QString pl_date;
+extern const QString pl_time;
+extern const QString pl_patternName;
+extern const QString pl_patternNumber;
+extern const QString pl_author;
+extern const QString pl_customer;
+extern const QString pl_userMaterial;
+extern const QString pl_pExt;
+extern const QString pl_pFileName;
+extern const QString pl_mFileName;
+extern const QString pl_mExt;
+extern const QString pl_pLetter;
+extern const QString pl_pAnnotation;
+extern const QString pl_pOrientation;
+extern const QString pl_pRotation;
+extern const QString pl_pTilt;
+extern const QString pl_pFoldPosition;
+extern const QString pl_pName;
+extern const QString pl_pQuantity;
+extern const QString pl_mFabric;
+extern const QString pl_mLining;
+extern const QString pl_mInterfacing;
+extern const QString pl_mInterlining;
+extern const QString pl_wCut;
+extern const QString pl_wOnFold;
+
+// Don't forget to syncronize with XSD schema.
+const int userMaterialPlaceholdersQuantity = 20;
+
+extern const QStringList labelTemplatePlaceholders;
 
 extern const QString cursorArrowOpenHand;
 extern const QString cursorArrowCloseHand;
-
-extern const QString degreeSymbol;
-extern const QString trueStr;
-extern const QString falseStr;
 
 extern const QString strOne;
 extern const QString strTwo;
@@ -700,40 +407,46 @@ extern const QString strThree;
 extern const QString strStraightforward;
 extern const QString strBisector;
 extern const QString strIntersection;
+extern const QString strIntersectionOnlyLeft;
+extern const QString strIntersectionOnlyRight;
+extern const QString strIntersection2;
+extern const QString strIntersection2OnlyLeft;
+extern const QString strIntersection2OnlyRight;
 
-void SetOverrideCursor(const QString & pixmapPath, int hotX = -1, int hotY = -1);
-void SetOverrideCursor(Qt::CursorShape shape);
-void RestoreOverrideCursor(const QString & pixmapPath);
-void RestoreOverrideCursor(Qt::CursorShape shape);
+extern const QString unitMM;
+extern const QString unitCM;
+extern const QString unitINCH;
+extern const QString unitPX;
 
-extern const qreal PrintDPI;
+extern const QString valentinaNamespace;
 
-double ToPixel(double val, const Unit &unit) Q_REQUIRED_RESULT;
-double FromPixel(double pix, const Unit &unit) Q_REQUIRED_RESULT;
+QPixmap QPixmapFromCache(const QString &pixmapPath);
+void SetItemOverrideCursor(QGraphicsItem *item, const QString & pixmapPath, int hotX = -1, int hotY = -1);
 
-qreal UnitConvertor(qreal value, const Unit &from, const Unit &to) Q_REQUIRED_RESULT;
+Q_REQUIRED_RESULT double ToPixel(double val, const Unit &unit);
+Q_REQUIRED_RESULT double FromPixel(double pix, const Unit &unit);
 
-void CheckFactor(qreal &oldFactor, const qreal &Newfactor);
+Q_REQUIRED_RESULT qreal UnitConvertor(qreal value, const Unit &from, const Unit &to);
+Q_REQUIRED_RESULT QMarginsF UnitConvertor(const QMarginsF &margins, const Unit &from, const Unit &to);
 
 void InitLanguages(QComboBox *combobox);
-QStringList SupportedLocales() Q_REQUIRED_RESULT;
-QStringList AllGroupNames() Q_REQUIRED_RESULT;
+Q_REQUIRED_RESULT QStringList SupportedLocales();
 
-QString StrippedName(const QString &fullFileName) Q_REQUIRED_RESULT;
-QString RelativeMPath(const QString &patternPath, const QString &absoluteMPath) Q_REQUIRED_RESULT;
-QString AbsoluteMPath(const QString &patternPath, const QString &relativeMPath) Q_REQUIRED_RESULT;
+Q_REQUIRED_RESULT QString StrippedName(const QString &fullFileName);
+Q_REQUIRED_RESULT QString RelativeMPath(const QString &patternPath, const QString &absoluteMPath);
+Q_REQUIRED_RESULT QString AbsoluteMPath(const QString &patternPath, const QString &relativeMPath);
 
-QSharedPointer<QPrinter> PreparePrinter(const QPrinterInfo &info,
-                                        QPrinter::PrinterMode mode = QPrinter::ScreenResolution) Q_REQUIRED_RESULT;
+Q_REQUIRED_RESULT QSharedPointer<QPrinter> PreparePrinter(const QPrinterInfo &info,
+                                                          QPrinter::PrinterMode mode = QPrinter::ScreenResolution);
 
 QMarginsF GetMinPrinterFields(const QSharedPointer<QPrinter> &printer);
 QMarginsF GetPrinterFields(const QSharedPointer<QPrinter> &printer);
 
-QPixmap darkenPixmap(const QPixmap &pixmap) Q_REQUIRED_RESULT;
+Q_REQUIRED_RESULT QPixmap darkenPixmap(const QPixmap &pixmap);
 
 void ShowInGraphicalShell(const QString &filePath);
 
-static inline bool VFuzzyComparePossibleNulls(double p1, double p2) Q_REQUIRED_RESULT;
+Q_REQUIRED_RESULT static inline bool VFuzzyComparePossibleNulls(double p1, double p2);
 static inline bool VFuzzyComparePossibleNulls(double p1, double p2)
 {
     if(qFuzzyIsNull(p1))
@@ -748,6 +461,14 @@ static inline bool VFuzzyComparePossibleNulls(double p1, double p2)
     {
         return qFuzzyCompare(p1, p2);
     }
+}
+
+constexpr qreal accuracyPointOnLine = (0.12/*mm*/ / 25.4) * PrintDPI;
+
+Q_REQUIRED_RESULT Q_DECL_CONSTEXPR static inline bool VFuzzyComparePoints(const QPointF &p1, const QPointF &p2);
+Q_DECL_CONSTEXPR static inline bool VFuzzyComparePoints(const QPointF &p1, const QPointF &p2)
+{
+    return qAbs(p1.x() - p2.x()) <= accuracyPointOnLine && qAbs(p1.y() - p2.y()) <= accuracyPointOnLine;
 }
 
 /**
@@ -772,7 +493,6 @@ struct CustomSARecord
 
 Q_DECLARE_METATYPE(CustomSARecord)
 Q_DECLARE_TYPEINFO(CustomSARecord, Q_MOVABLE_TYPE);
-
 /****************************************************************************
 ** This file is derived from code bearing the following notice:
 ** The sole author of this file, Adam Higerd, has explicitly disclaimed all

@@ -6,7 +6,7 @@
  **
  **  @brief
  **  @copyright
- **  This source code is part of the Valentine project, a pattern making
+ **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2013-2015 Valentina project
  **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
@@ -41,10 +41,10 @@
 #include "vundocommand.h"
 
 //---------------------------------------------------------------------------------------------------------------------
-MoveSpline::MoveSpline(VAbstractPattern *doc, const VSpline *oldSpl, const VSpline &newSpl, const quint32 &id,
+MoveSpline::MoveSpline(VAbstractPattern *doc, const VSpline &oldSpl, const VSpline &newSpl, const quint32 &id,
                        QUndoCommand *parent)
     : VUndoCommand(QDomElement(), doc, parent),
-      oldSpline(*oldSpl),
+      oldSpline(oldSpl),
       newSpline(newSpl),
       scene(qApp->getCurrentScene())
 {
@@ -64,7 +64,6 @@ void MoveSpline::undo()
     qCDebug(vUndo, "Undo.");
 
     Do(oldSpline);
-    VMainGraphicsView::NewSceneRect(scene, qApp->getSceneView());
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -73,7 +72,6 @@ void MoveSpline::redo()
     qCDebug(vUndo, "Redo.");
 
     Do(newSpline);
-    VMainGraphicsView::NewSceneRect(scene, qApp->getSceneView());
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -101,7 +99,7 @@ int MoveSpline::id() const
 //---------------------------------------------------------------------------------------------------------------------
 void MoveSpline::Do(const VSpline &spl)
 {
-    QDomElement domElement = doc->elementById(nodeId);
+    QDomElement domElement = doc->elementById(nodeId, VAbstractPattern::TagSpline);
     if (domElement.isElement())
     {
         doc->SetAttribute(domElement, AttrPoint1,  spl.GetP1().id());
@@ -116,6 +114,5 @@ void MoveSpline::Do(const VSpline &spl)
     else
     {
         qCDebug(vUndo, "Can't find spline with id = %u.", nodeId);
-        return;
     }
 }

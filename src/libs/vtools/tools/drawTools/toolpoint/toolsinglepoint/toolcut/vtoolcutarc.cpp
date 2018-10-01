@@ -6,7 +6,7 @@
  **
  **  @brief
  **  @copyright
- **  This source code is part of the Valentine project, a pattern making
+ **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2013-2015 Valentina project
  **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
@@ -59,19 +59,13 @@ const QString VToolCutArc::ToolType = QStringLiteral("cutArc");
 //---------------------------------------------------------------------------------------------------------------------
 /**
  * @brief VToolCutArc constructor.
- * @param doc dom document container.
- * @param data container with variables.
- * @param id object id in container.
- * @param formula string with formula length first arc.
- * @param arcId id arc in data container.
- * @param typeCreation way we create this tool.
+ * @param initData init data.
  * @param parent parent object.
  */
-VToolCutArc::VToolCutArc(VAbstractPattern *doc, VContainer *data, const quint32 &id, const QString &formula,
-                         const quint32 &arcId, const Source &typeCreation, QGraphicsItem * parent)
-    :VToolCut(doc, data, id, formula, arcId, parent)
+VToolCutArc::VToolCutArc(const VToolCutArcInitData &initData, QGraphicsItem * parent)
+    :VToolCut(initData.doc, initData.data, initData.id, initData.formula, initData.arcId, parent)
 {
-    ToolCreation(typeCreation);
+    ToolCreation(initData.typeCreation);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -81,9 +75,9 @@ VToolCutArc::VToolCutArc(VAbstractPattern *doc, VContainer *data, const quint32 
 void VToolCutArc::setDialog()
 {
     SCASSERT(not m_dialog.isNull())
-    QSharedPointer<DialogCutArc> dialogTool = m_dialog.objectCast<DialogCutArc>();
+    const QPointer<DialogCutArc> dialogTool = qobject_cast<DialogCutArc *>(m_dialog);
     SCASSERT(not dialogTool.isNull())
-    const QSharedPointer<VPointF> point = VAbstractTool::data.GeometricObject<VPointF>(id);
+    const QSharedPointer<VPointF> point = VAbstractTool::data.GeometricObject<VPointF>(m_id);
     dialogTool->SetFormula(formula);
     dialogTool->setArcId(curveCutId);
     dialogTool->SetPointName(point->name());
@@ -97,20 +91,27 @@ void VToolCutArc::setDialog()
  * @param doc dom document container.
  * @param data container with variables.
  */
-VToolCutArc* VToolCutArc::Create(QSharedPointer<DialogTool> dialog, VMainGraphicsScene *scene, VAbstractPattern *doc,
+VToolCutArc* VToolCutArc::Create(const QPointer<DialogTool> &dialog, VMainGraphicsScene *scene, VAbstractPattern *doc,
                                  VContainer *data)
 {
     SCASSERT(not dialog.isNull())
-    QSharedPointer<DialogCutArc> dialogTool = dialog.objectCast<DialogCutArc>();
+    const QPointer<DialogCutArc> dialogTool = qobject_cast<DialogCutArc *>(dialog);
     SCASSERT(not dialogTool.isNull())
-    const QString pointName = dialogTool->getPointName();
-    QString formula = dialogTool->GetFormula();
-    const quint32 arcId = dialogTool->getArcId();
-    VToolCutArc* point = Create(0, pointName, formula, arcId, 5, 10, scene, doc, data, Document::FullParse,
-                                Source::FromGui);
+
+    VToolCutArcInitData initData;
+    initData.formula = dialogTool->GetFormula();
+    initData.arcId = dialogTool->getArcId();
+    initData.name = dialogTool->getPointName();
+    initData.scene = scene;
+    initData.doc = doc;
+    initData.data = data;
+    initData.parse = Document::FullParse;
+    initData.typeCreation = Source::FromGui;
+
+    VToolCutArc* point = Create(initData);
     if (point != nullptr)
     {
-        point->m_dialog = dialogTool;
+        point->m_dialog = dialog;
     }
     return point;
 }
@@ -118,64 +119,53 @@ VToolCutArc* VToolCutArc::Create(QSharedPointer<DialogTool> dialog, VMainGraphic
 //---------------------------------------------------------------------------------------------------------------------
 /**
  * @brief Create help create tool.
- * @param _id tool id, 0 if tool doesn't exist yet.
- * @param pointName point name.
- * @param formula string with formula length first arc.
- * @param arcId id arc in data container.
- * @param mx label bias x axis.
- * @param my label bias y axis.
- * @param scene pointer to scene.
- * @param doc dom document container.
- * @param data container with variables.
- * @param parse parser file mode.
- * @param typeCreation way we create this tool.
+ * @param initData init data.
  */
-VToolCutArc* VToolCutArc::Create(const quint32 _id, const QString &pointName, QString &formula, const quint32 &arcId,
-                                 const qreal &mx, const qreal &my, VMainGraphicsScene *scene, VAbstractPattern *doc,
-                                 VContainer *data, const Document &parse, const Source &typeCreation)
+VToolCutArc* VToolCutArc::Create(VToolCutArcInitData &initData)
 {
-    const QSharedPointer<VArc> arc = data->GeometricObject<VArc>(arcId);
+    const QSharedPointer<VArc> arc = initData.data->GeometricObject<VArc>(initData.arcId);
 
-    const qreal result = CheckFormula(_id, formula, data);
+    const qreal result = CheckFormula(initData.id, initData.formula, initData.data);
 
     VArc arc1;
     VArc arc2;
     QPointF point = arc->CutArc(qApp->toPixel(result), arc1, arc2);
 
-    quint32 id = _id;
-    VPointF *p = new VPointF(point, pointName, mx, my);
+    VPointF *p = new VPointF(point, initData.name, initData.mx, initData.my);
+    p->SetShowLabel(initData.showLabel);
+
     auto a1 = QSharedPointer<VArc>(new VArc(arc1));
     auto a2 = QSharedPointer<VArc>(new VArc(arc2));
-    if (typeCreation == Source::FromGui)
+    if (initData.typeCreation == Source::FromGui)
     {
-        id = data->AddGObject(p);
-        a1->setId(VContainer::getNextId());
-        a2->setId(VContainer::getNextId());
-        data->AddArc(a1, a1->id(), id);
-        data->AddArc(a2, a2->id(), id);
+        initData.id = initData.data->AddGObject(p);
+        a1->setId(initData.data->getNextId());
+        a2->setId(initData.data->getNextId());
+        initData.data->AddArc(a1, a1->id(), initData.id);
+        initData.data->AddArc(a2, a2->id(), initData.id);
     }
     else
     {
-        data->UpdateGObject(id, p);
-        a1->setId(id + 1);
-        a2->setId(id + 2);
-        data->AddArc(a1, a1->id(), id);
-        data->AddArc(a2, a2->id(), id);
+        initData.data->UpdateGObject(initData.id, p);
+        a1->setId(initData.id + 1);
+        a2->setId(initData.id + 2);
+        initData.data->AddArc(a1, a1->id(), initData.id);
+        initData.data->AddArc(a2, a2->id(), initData.id);
 
-        if (parse != Document::FullParse)
+        if (initData.parse != Document::FullParse)
         {
-            doc->UpdateToolData(id, data);
+            initData.doc->UpdateToolData(initData.id, initData.data);
         }
     }
 
-    if (parse == Document::FullParse)
+    if (initData.parse == Document::FullParse)
     {
-        VDrawTool::AddRecord(id, Tool::CutArc, doc);
-        VToolCutArc *point = new VToolCutArc(doc, data, id, formula, arcId, typeCreation);
-        scene->addItem(point);
-        InitToolConnections(scene, point);
-        VAbstractPattern::AddTool(id, point);
-        doc->IncrementReferens(arc->getIdTool());
+        VAbstractTool::AddRecord(initData.id, Tool::CutArc, initData.doc);
+        VToolCutArc *point = new VToolCutArc(initData);
+        initData.scene->addItem(point);
+        InitToolConnections(initData.scene, point);
+        VAbstractPattern::AddTool(initData.id, point);
+        initData.doc->IncrementReferens(arc->getIdTool());
         return point;
     }
     return nullptr;
@@ -188,15 +178,11 @@ void VToolCutArc::ShowVisualization(bool show)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-/**
- * @brief contextMenuEvent handle context menu events.
- * @param event context menu event.
- */
-void VToolCutArc::contextMenuEvent(QGraphicsSceneContextMenuEvent *event)
+void VToolCutArc::ShowContextMenu(QGraphicsSceneContextMenuEvent *event, quint32 id)
 {
     try
     {
-        ContextMenu<DialogCutArc>(this, event);
+        ContextMenu<DialogCutArc>(event, id);
     }
     catch(const VExceptionToolWasDeleted &e)
     {
@@ -209,11 +195,16 @@ void VToolCutArc::contextMenuEvent(QGraphicsSceneContextMenuEvent *event)
 /**
  * @brief SaveDialog save options into file after change in dialog.
  */
-void VToolCutArc::SaveDialog(QDomElement &domElement)
+void VToolCutArc::SaveDialog(QDomElement &domElement, QList<quint32> &oldDependencies,
+                             QList<quint32> &newDependencies)
 {
     SCASSERT(not m_dialog.isNull())
-    QSharedPointer<DialogCutArc> dialogTool = m_dialog.objectCast<DialogCutArc>();
+    const QPointer<DialogCutArc> dialogTool = qobject_cast<DialogCutArc *>(m_dialog);
     SCASSERT(not dialogTool.isNull())
+
+    AddDependence(oldDependencies, curveCutId);
+    AddDependence(newDependencies, dialogTool->getArcId());
+
     doc->SetAttribute(domElement, AttrName, dialogTool->getPointName());
     doc->SetAttribute(domElement, AttrLength, dialogTool->GetFormula());
     doc->SetAttribute(domElement, AttrArc, QString().setNum(dialogTool->getArcId()));
@@ -232,7 +223,7 @@ void VToolCutArc::SaveOptions(QDomElement &tag, QSharedPointer<VGObject> &obj)
 //---------------------------------------------------------------------------------------------------------------------
 void VToolCutArc::ReadToolAttributes(const QDomElement &domElement)
 {
-    formula = doc->GetParametrString(domElement, AttrLength, "");
+    formula = doc->GetParametrString(domElement, AttrLength, QString());
     curveCutId = doc->GetParametrUInt(domElement, AttrArc, NULL_ID_STR);
 }
 
@@ -246,6 +237,51 @@ void VToolCutArc::SetVisualization()
 
         visual->setObject1Id(curveCutId);
         visual->setLength(qApp->TrVars()->FormulaToUser(formula, qApp->Settings()->GetOsSeparator()));
+
+        const QSharedPointer<VAbstractCurve> curve = VAbstractTool::data.GeometricObject<VAbstractCurve>(curveCutId);
+        visual->setLineStyle(LineStyleToPenStyle(curve->GetPenStyle()));
+
         visual->RefreshGeometry();
     }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QString VToolCutArc::MakeToolTip() const
+{
+    const QSharedPointer<VArc> arc = VAbstractTool::data.GeometricObject<VArc>(curveCutId);
+
+    const QString expression = qApp->TrVars()->FormulaToUser(formula, qApp->Settings()->GetOsSeparator());
+    const qreal length = Visualization::FindValFromUser(expression, VAbstractTool::data.DataVariables());
+
+    const QString arcStr = tr("Arc");
+    const QString lengthStr = tr("length");
+    const QString startAngleStr = tr("start angle");
+    const QString endAngleStr = tr("end angle");
+    const QString radiusStr = tr("radius");
+
+    VArc ar1;
+    VArc ar2;
+    arc->CutArc(qApp->toPixel(length), ar1, ar2);
+
+    auto ArcToolTip = [arcStr, lengthStr, startAngleStr, endAngleStr, radiusStr](QString toolTip, const VArc &arc,
+            const QString &arcNumber)
+    {
+        toolTip += QString("<tr> <td><b>%10:</b> %11</td> </tr>"
+                           "<tr> <td><b>%1:</b> %2 %3</td> </tr>"
+                           "<tr> <td><b>%4:</b> %5 %3</td> </tr>"
+                           "<tr> <td><b>%6:</b> %7°</td> </tr>"
+                           "<tr> <td><b>%8:</b> %9°</td> </tr>")
+                    .arg(arcStr + arcNumber + QChar(QChar::Space) + lengthStr)
+                    .arg(qApp->fromPixel(arc.GetLength()))
+                    .arg(UnitsToStr(qApp->patternUnit(), true), arcStr + arcNumber + QChar(QChar::Space) + radiusStr)
+                    .arg(qApp->fromPixel(arc.GetRadius()))
+                    .arg(arcStr + arcNumber + QChar(QChar::Space) + startAngleStr)
+                    .arg(qApp->fromPixel(arc.GetStartAngle()))
+                    .arg(arcStr + arcNumber + QChar(QChar::Space) + endAngleStr)
+                    .arg(qApp->fromPixel(arc.GetEndAngle()))
+                    .arg(arcStr + arcNumber + QChar(QChar::Space) + tr("label"), arc.name());
+        return toolTip;
+    };
+
+    return ArcToolTip(ArcToolTip("<table>", ar1, QChar('1')), ar2, QChar('2')) + QLatin1String("</table>");
 }

@@ -6,7 +6,7 @@
  **
  **  @brief
  **  @copyright
- **  This source code is part of the Valentine project, a pattern making
+ **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2016 Valentina project
  **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
@@ -40,17 +40,23 @@
 #include "vundocommand.h"
 #include "../vpatterndb/vpiecenode.h"
 #include "../vpatterndb/vpiecepath.h"
+#include "../vwidgets/vmaingraphicsview.h"
 
 //---------------------------------------------------------------------------------------------------------------------
-DeletePiece::DeletePiece(VAbstractPattern *doc, quint32 id, const VPiece &detail, QUndoCommand *parent)
+DeletePiece::DeletePiece(VAbstractPattern *doc, quint32 id, VContainer data, VMainGraphicsScene *scene,
+                         QUndoCommand *parent)
     : VUndoCommand(QDomElement(), doc, parent),
       m_parentNode(),
       m_siblingId(NULL_ID),
-      m_detail(detail)
+      m_detail(data.GetPiece(id)),
+      m_data(data),
+      m_scene(scene),
+      m_tool(),
+      m_record(VAbstractTool::GetRecord(id, Tool::Piece, doc))
 {
     setText(tr("delete tool"));
     nodeId = id;
-    QDomElement domElement = doc->elementById(id);
+    QDomElement domElement = doc->elementById(id, VAbstractPattern::TagDetail);
     if (domElement.isElement())
     {
         xml = domElement.cloneNode().toElement();
@@ -63,19 +69,23 @@ DeletePiece::DeletePiece(VAbstractPattern *doc, quint32 id, const VPiece &detail
         else
         {
             // Better save id of previous detail instead of reference to node.
-            m_siblingId = doc->GetParametrUInt(previousDetail.toElement(), VAbstractPattern::AttrId, NULL_ID_STR);
+            m_siblingId = doc->GetParametrUInt(previousDetail.toElement(), VDomDocument::AttrId, NULL_ID_STR);
         }
     }
     else
     {
         qCDebug(vUndo, "Can't get detail by id = %u.", nodeId);
-        return;
     }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 DeletePiece::~DeletePiece()
-{}
+{
+    if (not m_tool.isNull())
+    {
+        delete m_tool;
+    }
+}
 
 //---------------------------------------------------------------------------------------------------------------------
 void DeletePiece::undo()
@@ -83,7 +93,19 @@ void DeletePiece::undo()
     qCDebug(vUndo, "Undo.");
 
     UndoDeleteAfterSibling(m_parentNode, m_siblingId);
-    emit NeedFullParsing();
+
+    VAbstractPattern::AddTool(nodeId, m_tool);
+    m_data.UpdatePiece(nodeId, m_detail);
+
+    m_tool->ReinitInternals(m_detail, m_scene);
+
+    VAbstractTool::AddRecord(m_record, doc);
+    m_scene->addItem(m_tool);
+    m_tool->ConnectOutsideSignals();
+    m_tool->show();
+    VMainGraphicsView::NewSceneRect(m_scene, qApp->getSceneView(), m_tool);
+    m_tool.clear();
+    emit doc->UpdateInLayoutList();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -91,26 +113,32 @@ void DeletePiece::redo()
 {
     qCDebug(vUndo, "Redo.");
 
-    QDomElement domElement = doc->elementById(nodeId);
+    QDomElement domElement = doc->elementById(nodeId, VAbstractPattern::TagDetail);
     if (domElement.isElement())
     {
         m_parentNode.removeChild(domElement);
 
-        // UnionDetails delete two old details and create one new.
-        // So when UnionDetail delete detail we can't use FullParsing. So we hide detail on scene directly.
-        VToolSeamAllowance *toolDet = qobject_cast<VToolSeamAllowance*>(VAbstractPattern::getTool(nodeId));
-        SCASSERT(toolDet != nullptr);
-        toolDet->hide();
+        m_tool = qobject_cast<VToolSeamAllowance*>(VAbstractPattern::getTool(nodeId));
+        SCASSERT(not m_tool.isNull());
+        m_tool->DisconnectOutsideSignals();
+        m_tool->EnableToolMove(true);
+        m_tool->hide();
+
+        m_scene->removeItem(m_tool);
+
+        VAbstractPattern::RemoveTool(nodeId);
+        m_data.RemovePiece(nodeId);
+        VAbstractTool::RemoveRecord(m_record, doc);
 
         DecrementReferences(m_detail.GetPath().GetNodes());
         DecrementReferences(m_detail.GetCustomSARecords());
         DecrementReferences(m_detail.GetInternalPaths());
         DecrementReferences(m_detail.GetPins());
-        emit NeedFullParsing(); // Doesn't work when UnionDetail delete detail.
+
+        emit doc->UpdateInLayoutList();
     }
     else
     {
         qCDebug(vUndo, "Can't get detail by id = %u.", nodeId);
-        return;
     }
 }

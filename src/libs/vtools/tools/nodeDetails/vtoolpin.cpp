@@ -6,7 +6,7 @@
  **
  **  @brief
  **  @copyright
- **  This source code is part of the Valentine project, a pattern making
+ **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2017 Valentina project
  **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
@@ -27,7 +27,7 @@
  *************************************************************************/
 
 #include "vtoolpin.h"
-#include "../../dialogs/tools/dialogpin.h"
+#include "../../dialogs/tools/piece/dialogpin.h"
 #include "../../undocommands/savepieceoptions.h"
 #include "../vtoolseamallowance.h"
 #include "../vgeometry/vpointf.h"
@@ -35,33 +35,36 @@
 const QString VToolPin::ToolType = QStringLiteral("pin");
 
 //---------------------------------------------------------------------------------------------------------------------
-VToolPin *VToolPin::Create(QSharedPointer<DialogTool> dialog, VAbstractPattern *doc, VContainer *data)
+VToolPin *VToolPin::Create(const QPointer<DialogTool> &dialog, VAbstractPattern *doc, VContainer *data)
 {
     SCASSERT(not dialog.isNull());
-    QSharedPointer<DialogPin> dialogTool = dialog.objectCast<DialogPin>();
+    const QPointer<DialogPin> dialogTool = qobject_cast<DialogPin *>(dialog);
     SCASSERT(not dialogTool.isNull())
-    const quint32 pointId = dialogTool->GetPointId();
-    const quint32 pieceId = dialogTool->GetPieceId();
 
-    return Create(0, pointId, pieceId, doc, data, Document::FullParse, Source::FromGui);
+    VToolPinInitData initData;
+    initData.pointId = dialogTool->GetPointId();
+    initData.idObject = dialogTool->GetPieceId();
+    initData.doc = doc;
+    initData.data = data;
+    initData.parse = Document::FullParse;
+    initData.typeCreation = Source::FromGui;
+
+    return Create(initData);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-VToolPin *VToolPin::Create(quint32 _id, quint32 pointId, quint32 pieceId, VAbstractPattern *doc, VContainer *data,
-                           const Document &parse, const Source &typeCreation, const QString &drawName,
-                           const quint32 &idTool)
+VToolPin *VToolPin::Create(VToolPinInitData initData)
 {
-    quint32 id = _id;
-    if (typeCreation == Source::FromGui)
+    if (initData.typeCreation == Source::FromGui)
     {
-        id = CreateNode<VPointF>(data, pointId);
+        initData.id = CreateNode<VPointF>(initData.data, initData.pointId);
     }
     else
     {
         QSharedPointer<VPointF> point;
         try
         {
-            point = data->GeometricObject<VPointF>(pointId);
+            point = initData.data->GeometricObject<VPointF>(initData.pointId);
         }
         catch (const VExceptionBadId &e)
         { // Possible case. Parent was deleted, but the node object is still here.
@@ -69,36 +72,37 @@ VToolPin *VToolPin::Create(quint32 _id, quint32 pointId, quint32 pieceId, VAbstr
             return nullptr;// Just ignore
         }
         VPointF *pinPoint = new VPointF(*point);
+        pinPoint->setIdObject(initData.pointId);
         pinPoint->setMode(Draw::Modeling);
-        data->UpdateGObject(id, pinPoint);
-        if (parse != Document::FullParse)
+        initData.data->UpdateGObject(initData.id, pinPoint);
+        if (initData.parse != Document::FullParse)
         {
-            doc->UpdateToolData(id, data);
+            initData.doc->UpdateToolData(initData.id, initData.data);
         }
     }
-    VAbstractTool::AddRecord(id, Tool::Pin, doc);
+    VAbstractTool::AddRecord(initData.id, Tool::Pin, initData.doc);
     VToolPin *point = nullptr;
-    if (parse == Document::FullParse)
+    if (initData.parse == Document::FullParse)
     {
-        point = new VToolPin(doc, data, id, pointId, pieceId, typeCreation, drawName, idTool, doc);
+        point = new VToolPin(initData);
 
-        VAbstractPattern::AddTool(id, point);
-        if (idTool != NULL_ID)
+        VAbstractPattern::AddTool(initData.id, point);
+        if (initData.idTool != NULL_ID)
         {
             //Some nodes we don't show on scene. Tool that create this nodes must free memory.
-            VDataTool *tool = VAbstractPattern::getTool(idTool);
+            VDataTool *tool = VAbstractPattern::getTool(initData.idTool);
             SCASSERT(tool != nullptr)
             point->setParent(tool);// Adopted by a tool
         }
         else
         {
             // Help to delete the node before each FullParse
-            doc->AddToolOnRemove(point);
+            initData.doc->AddToolOnRemove(point);
         }
     }
     else
     {
-        doc->UpdateToolData(id, data);
+        initData.doc->UpdateToolData(initData.id, initData.data);
     }
     return point;
 }
@@ -128,7 +132,7 @@ void VToolPin::AddToFile()
 {
     QDomElement domElement = doc->createElement(getTagName());
 
-    doc->SetAttribute(domElement, VDomDocument::AttrId, id);
+    doc->SetAttribute(domElement, VDomDocument::AttrId, m_id);
     doc->SetAttribute(domElement, AttrType, ToolType);
     doc->SetAttribute(domElement, AttrIdObject, idNode);
     if (idTool != NULL_ID)
@@ -143,26 +147,18 @@ void VToolPin::AddToFile()
         const VPiece oldDet = VAbstractTool::data.GetPiece(m_pieceId);
         VPiece newDet = oldDet;
 
-        newDet.GetPins().append(id);
+        newDet.GetPins().append(m_id);
+        incrementReferens(); // Manually increment reference since in this case a piece tool will not do this for us
 
-        SavePieceOptions *saveCommand = new SavePieceOptions(oldDet, newDet, doc, m_pieceId);
-        qApp->getUndoStack()->push(saveCommand);// First push then make a connect
-        VAbstractTool::data.UpdatePiece(m_pieceId, newDet);// Update piece because first save will not call lite update
-        connect(saveCommand, &SavePieceOptions::NeedLiteParsing, doc, &VAbstractPattern::LiteParseTree);
+        qApp->getUndoStack()->push(new SavePieceOptions(oldDet, newDet, doc, m_pieceId));
     }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VToolPin::RefreshDataInFile()
+VToolPin::VToolPin(const VToolPinInitData &initData, QObject *qoParent)
+    : VAbstractNode(initData.doc, initData.data, initData.id, initData.pointId, initData.drawName, initData.idTool,
+                    qoParent),
+      m_pieceId(initData.idObject)
 {
-    // do nothing
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-VToolPin::VToolPin(VAbstractPattern *doc, VContainer *data, quint32 id, quint32 pointId, quint32 pieceId,
-                   const Source &typeCreation, const QString &drawName, const quint32 &idTool, QObject *qoParent)
-    : VAbstractNode(doc, data, id, pointId, drawName, idTool, qoParent),
-      m_pieceId(pieceId)
-{
-    ToolCreation(typeCreation);
+    ToolCreation(initData.typeCreation);
 }

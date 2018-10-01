@@ -6,7 +6,7 @@
  **
  **  @brief
  **  @copyright
- **  This source code is part of the Valentine project, a pattern making
+ **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2016 Valentina project
  **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
@@ -61,7 +61,7 @@ void AddGroup::undo()
     QDomElement groups = doc->CreateGroups();
     if (not groups.isNull())
     {
-        QDomElement group = doc->elementById(nodeId);
+        QDomElement group = doc->elementById(nodeId, VAbstractPattern::TagGroup);
         if (group.isElement())
         {
             group.setAttribute(VAbstractPattern::AttrVisible, trueStr);
@@ -92,7 +92,10 @@ void AddGroup::undo()
     }
 
     VMainGraphicsView::NewSceneRect(qApp->getCurrentScene(), qApp->getSceneView());
-    doc->SetCurrentPP(nameActivDraw);//Return current pattern piece after undo
+    if (qApp->GetDrawMode() == Draw::Calculation)
+    {
+        emit doc->SetCurrentPP(nameActivDraw);//Return current pattern piece after undo
+    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------

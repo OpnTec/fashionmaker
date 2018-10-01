@@ -6,7 +6,7 @@
  **
  **  @brief
  **  @copyright
- **  This source code is part of the Valentine project, a pattern making
+ **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2013-2015 Valentina project
  **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
@@ -124,9 +124,15 @@ VArc VArc::Rotate(const QPointF &originPoint, qreal degrees, const QString &pref
     const QPointF p1 = VPointF::RotatePF(originPoint, GetP1(), degrees);
     const QPointF p2 = VPointF::RotatePF(originPoint, GetP2(), degrees);
 
-    VArc arc(center, GetRadius(), QLineF(static_cast<QPointF>(center), p1).angle(),
-             QLineF(static_cast<QPointF>(center), p2).angle());
+    const qreal f1 = QLineF(static_cast<QPointF>(center), p1).angle();
+    const qreal f2 = QLineF(static_cast<QPointF>(center), p2).angle();
+
+    VArc arc(center, GetRadius(), f1, f2);
     arc.setName(name() + prefix);
+    arc.SetColor(GetColor());
+    arc.SetPenStyle(GetPenStyle());
+    arc.SetFlipped(IsFlipped());
+    arc.SetApproximationScale(GetApproximationScale());
     return arc;
 }
 
@@ -138,10 +144,15 @@ VArc VArc::Flip(const QLineF &axis, const QString &prefix) const
     const QPointF p1 = VPointF::FlipPF(axis, GetP1());
     const QPointF p2 = VPointF::FlipPF(axis, GetP2());
 
-    VArc arc(center, GetRadius(), QLineF(static_cast<QPointF>(center), p1).angle(),
-             QLineF(static_cast<QPointF>(center), p2).angle());
+    const qreal f1 = QLineF(static_cast<QPointF>(center), p1).angle();
+    const qreal f2 = QLineF(static_cast<QPointF>(center), p2).angle();
+
+    VArc arc(center, GetRadius(), f1, f2);
     arc.setName(name() + prefix);
-    arc.SetFlipped(true);
+    arc.SetColor(GetColor());
+    arc.SetPenStyle(GetPenStyle());
+    arc.SetFlipped(not IsFlipped());
+    arc.SetApproximationScale(GetApproximationScale());
     return arc;
 }
 
@@ -153,9 +164,15 @@ VArc VArc::Move(qreal length, qreal angle, const QString &prefix) const
     const QPointF p1 = VPointF::MovePF(GetP1(), length, angle);
     const QPointF p2 = VPointF::MovePF(GetP2(), length, angle);
 
-    VArc arc(center, GetRadius(), QLineF(static_cast<QPointF>(center), p1).angle(),
-             QLineF(static_cast<QPointF>(center), p2).angle());
+    const qreal f1 = QLineF(static_cast<QPointF>(center), p1).angle();
+    const qreal f2 = QLineF(static_cast<QPointF>(center), p2).angle();
+
+    VArc arc(center, GetRadius(), f1, f2);
     arc.setName(name() + prefix);
+    arc.SetColor(GetColor());
+    arc.SetPenStyle(GetPenStyle());
+    arc.SetFlipped(IsFlipped());
+    arc.SetApproximationScale(GetApproximationScale());
     return arc;
 }
 
@@ -266,20 +283,17 @@ QVector<QPointF> VArc::GetPoints() const
         lineP4P3.setLength(lDistance);
 
         VSpline spl(VPointF(pStart), lineP1P2.p2(), lineP4P3.p2(), VPointF(lineP4P3.p1()), 1.0);
+        spl.SetApproximationScale(GetApproximationScale());
         QVector<QPointF> splPoints = spl.GetPoints();
         if (not splPoints.isEmpty() && i != sectionAngle.size() - 1)
         {
-#if QT_VERSION < QT_VERSION_CHECK(5, 1, 0)
-            splPoints.remove(splPoints.size() - 1);
-#else
             splPoints.removeLast();
-#endif
         }
 
         points << splPoints;
         pStart = lineP4P3.p1();
     }
-    return points;
+    return IsFlipped() ? VGObject::GetReversePoints(points) : points;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -326,9 +340,11 @@ QPointF VArc::CutArc(const qreal &length, VArc &arc1, VArc &arc2) const
 
     arc1 = VArc (GetCenter(), d->radius, d->formulaRadius, GetStartAngle(), GetFormulaF1(), line.angle(),
                  QString().setNum(line.angle()), getIdObject(), getMode());
+    arc1.SetApproximationScale(GetApproximationScale());
 
     arc2 = VArc (GetCenter(), d->radius, d->formulaRadius, line.angle(), QString().setNum(line.angle()), GetEndAngle(),
                  GetFormulaF2(), getIdObject(), getMode());
+    arc2.SetApproximationScale(GetApproximationScale());
     return line.p2();
 }
 

@@ -6,7 +6,7 @@
  **
  **  @brief
  **  @copyright
- **  This source code is part of the Valentine project, a pattern making
+ **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2013-2015 Valentina project
  **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
@@ -54,16 +54,11 @@ MoveSplinePath::MoveSplinePath(VAbstractPattern *doc, const VSplinePath &oldSplP
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-MoveSplinePath::~MoveSplinePath()
-{}
-
-//---------------------------------------------------------------------------------------------------------------------
 void MoveSplinePath::undo()
 {
     qCDebug(vUndo, "Undo.");
 
     Do(oldSplinePath);
-    VMainGraphicsView::NewSceneRect(scene, qApp->getSceneView());
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -72,7 +67,6 @@ void MoveSplinePath::redo()
     qCDebug(vUndo, "Redo.");
 
     Do(newSplinePath);
-    VMainGraphicsView::NewSceneRect(scene, qApp->getSceneView());
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -100,7 +94,7 @@ int MoveSplinePath::id() const
 //---------------------------------------------------------------------------------------------------------------------
 void MoveSplinePath::Do(const VSplinePath &splPath)
 {
-    QDomElement domElement = doc->elementById(nodeId);
+    QDomElement domElement = doc->elementById(nodeId, VAbstractPattern::TagSpline);
     if (domElement.isElement())
     {
         VToolSplinePath::UpdatePathPoints(doc, domElement, splPath);
@@ -110,6 +104,5 @@ void MoveSplinePath::Do(const VSplinePath &splPath)
     else
     {
         qCDebug(vUndo, "Can't find spline path with id = %u.", nodeId);
-        return;
     }
 }

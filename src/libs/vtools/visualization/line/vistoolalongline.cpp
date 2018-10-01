@@ -6,7 +6,7 @@
  **
  **  @brief
  **  @copyright
- **  This source code is part of the Valentine project, a pattern making
+ **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2013-2015 Valentina project
  **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
@@ -45,21 +45,23 @@
 
 //---------------------------------------------------------------------------------------------------------------------
 VisToolAlongLine::VisToolAlongLine(const VContainer *data, QGraphicsItem *parent)
-    : VisLine(data, parent), object2Id(NULL_ID), point(nullptr), lineP1(nullptr), lineP2(nullptr), line(nullptr),
-      length(0)
+    : VisLine(data, parent),
+      object2Id(NULL_ID),
+      point(nullptr),
+      lineP1(nullptr),
+      lineP2(nullptr),
+      line(nullptr),
+      length(0),
+      m_midPointMode(false)
 {
     this->mainColor = Qt::red;
     this->setZValue(2);// Show on top real tool
 
     lineP1 = InitPoint(supportColor, this);
     lineP2 = InitPoint(supportColor, this); //-V656
-    line = InitItem<QGraphicsLineItem>(supportColor, this);
+    line = InitItem<VScaledLine>(supportColor, this);
     point = InitPoint(mainColor, this);
 }
-
-//---------------------------------------------------------------------------------------------------------------------
-VisToolAlongLine::~VisToolAlongLine()
-{}
 
 //---------------------------------------------------------------------------------------------------------------------
 void VisToolAlongLine::setObject2Id(const quint32 &value)
@@ -70,7 +72,13 @@ void VisToolAlongLine::setObject2Id(const quint32 &value)
 //---------------------------------------------------------------------------------------------------------------------
 void VisToolAlongLine::setLength(const QString &expression)
 {
-    length = FindLength(expression, Visualization::data->PlainVariables());
+    length = FindLengthFromUser(expression, Visualization::data->DataVariables());
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VisToolAlongLine::setMidPointMode(bool midPointMode)
+{
+    m_midPointMode = midPointMode;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -83,7 +91,14 @@ void VisToolAlongLine::RefreshGeometry()
 
         if (object2Id <= NULL_ID)
         {
-            DrawLine(line, QLineF(static_cast<QPointF>(*first), Visualization::scenePos), supportColor);
+            QLineF cursorLine (static_cast<QPointF>(*first), Visualization::scenePos);
+            DrawLine(line, cursorLine, supportColor);
+
+            if (m_midPointMode)
+            {
+                cursorLine.setLength(cursorLine.length()/2.0);
+                DrawPoint(lineP2,  cursorLine.p2(), supportColor);
+            }
         }
         else
         {

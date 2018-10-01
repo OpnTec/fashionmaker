@@ -6,7 +6,7 @@
  **
  **  @brief
  **  @copyright
- **  This source code is part of the Valentine project, a pattern making
+ **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2013-2015 Valentina project
  **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
@@ -46,6 +46,7 @@
 #include "../vpatterndb/floatItemData/vpiecelabeldata.h"
 #include "../vpatterndb/vcontainer.h"
 #include "vabstractpiece.h"
+#include "../vgeometry/vgeometrydef.h"
 
 class VLayoutPieceData;
 class VLayoutPiecePath;
@@ -60,20 +61,20 @@ public:
     VLayoutPiece();
     VLayoutPiece(const VLayoutPiece &detail);
 
-    virtual ~VLayoutPiece() Q_DECL_OVERRIDE;
+    virtual ~VLayoutPiece() override;
 
     VLayoutPiece &operator=(const VLayoutPiece &detail);
 #ifdef Q_COMPILER_RVALUE_REFS
     VLayoutPiece &operator=(VLayoutPiece &&detail) Q_DECL_NOTHROW { Swap(detail); return *this; }
 #endif
 
-    void Swap(VLayoutPiece &detail) Q_DECL_NOTHROW
+    inline void Swap(VLayoutPiece &detail) Q_DECL_NOTHROW
     { VAbstractPiece::Swap(detail); std::swap(d, detail.d); }
 
     static VLayoutPiece Create(const VPiece &piece, const VContainer *pattern);
 
     QVector<QPointF> GetContourPoints() const;
-    void SetCountourPoints(const QVector<QPointF> &points);
+    void SetCountourPoints(const QVector<QPointF> &points, bool hideMainPath = false);
 
     QVector<QPointF> GetSeamAllowancePoints() const;
     void SetSeamAllowancePoints(const QVector<QPointF> &points, bool seamAllowance = true,
@@ -85,15 +86,24 @@ public:
     QVector<QLineF> GetPassmarks() const;
     void SetPassmarks(const QVector<QLineF> &passmarks);
 
+    QVector<VLayoutPlaceLabel> GetPlaceLabels() const;
+    void SetPlaceLabels(const QVector<VLayoutPlaceLabel> &labels);
+
+    QVector<QVector<QPointF>> InternalPathsForCut(bool cut) const;
     QVector<VLayoutPiecePath> GetInternalPaths() const;
     void SetInternalPaths(const QVector<VLayoutPiecePath> &internalPaths);
 
-    void SetDetail(const QString &qsName, const VPieceLabelData& data, const QFont& font, const VContainer *pattern);
+    QPointF GetPieceTextPosition() const;
+    QStringList GetPieceText() const;
+    void SetPieceText(const QString &qsName, const VPieceLabelData& data, const QFont& font, const VContainer *pattern);
 
-    void SetPatternInfo(const VAbstractPattern* pDoc, const VPatternLabelData& geom, const QFont& font,
-                        qreal dSize, qreal dHeight, const VContainer *pattern);
+    QPointF GetPatternTextPosition() const;
+    QStringList GetPatternText() const;
+    void SetPatternInfo(VAbstractPattern *pDoc, const VPatternLabelData& geom, const QFont& font,
+                        const VContainer *pattern);
 
     void SetGrainline(const VGrainlineData& geom, const VContainer *pattern);
+    QVector<QPointF> GetGrainline() const;
 
     QTransform GetMatrix() const;
     void    SetMatrix(const QTransform &matrix);
@@ -107,6 +117,7 @@ public:
     void Translate(qreal dx, qreal dy);
     void Rotate(const QPointF &originPoint, qreal degrees);
     void Mirror(const QLineF &edge);
+    void Mirror();
 
     int    DetailEdgesCount() const;
     int    LayoutEdgesCount() const;
@@ -126,18 +137,20 @@ public:
     QPainterPath ContourPath() const;
 
     QPainterPath LayoutAllowancePath() const;
-    QGraphicsItem *GetItem() const Q_REQUIRED_RESULT;
+    Q_REQUIRED_RESULT QGraphicsItem *GetItem(bool textAsPaths) const;
+
+    bool IsLayoutAllowanceValid() const;
 
 private:
     QSharedDataPointer<VLayoutPieceData> d;
 
     QVector<QPointF> DetailPath() const;
 
-    QGraphicsPathItem *GetMainItem() const Q_REQUIRED_RESULT;
+    Q_REQUIRED_RESULT QGraphicsPathItem *GetMainItem() const;
+    Q_REQUIRED_RESULT QGraphicsPathItem *GetMainPathItem() const;
 
-    QPainterPath CreateLabelText(const QVector<QPointF> &labelShape, const VTextManager &tm) const;
-
-    void CreateInternalPathItem(int i, QGraphicsItem *parent) const;
+    void CreateLabelStrings(QGraphicsItem *parent, const QVector<QPointF> &labelShape, const VTextManager &tm,
+                            bool textAsPaths) const;
     void CreateGrainlineItem(QGraphicsItem *parent) const;
 
     template <class T>

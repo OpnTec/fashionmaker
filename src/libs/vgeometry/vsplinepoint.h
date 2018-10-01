@@ -6,7 +6,7 @@
  **
  **  @brief
  **  @copyright
- **  This source code is part of the Valentine project, a pattern making
+ **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2013-2015 Valentina project
  **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
@@ -56,7 +56,7 @@ public:
     VFSplinePoint &operator=(VFSplinePoint &&point) Q_DECL_NOTHROW { Swap(point); return *this; }
 #endif
 
-    void Swap(VFSplinePoint &point) Q_DECL_NOTHROW
+    inline void Swap(VFSplinePoint &point) Q_DECL_NOTHROW
     { std::swap(d, point.d); }
 
     VPointF P() const;
@@ -96,7 +96,7 @@ public:
     VSplinePoint &operator=(VSplinePoint &&point) Q_DECL_NOTHROW { Swap(point); return *this; }
 #endif
 
-    void Swap(VSplinePoint &point) Q_DECL_NOTHROW
+    inline void Swap(VSplinePoint &point) Q_DECL_NOTHROW
     { std::swap(d, point.d); }
 
     VPointF P() const;

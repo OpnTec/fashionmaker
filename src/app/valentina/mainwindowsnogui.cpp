@@ -6,7 +6,7 @@
  **
  **  @brief
  **  @copyright
- **  This source code is part of the Valentine project, a pattern making
+ **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2015 Valentina project
  **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
@@ -33,6 +33,9 @@
 #include "../vdxf/vdxfpaintdevice.h"
 #include "dialogs/dialoglayoutsettings.h"
 #include "../vwidgets/vmaingraphicsscene.h"
+#include "../vmisc/dialogs/dialogexporttocsv.h"
+#include "../vmisc/qxtcsvmodel.h"
+#include "../vformat/vmeasurements.h"
 #include "../vlayout/vlayoutgenerator.h"
 #include "dialogs/dialoglayoutprogress.h"
 #include "dialogs/dialogsavelayout.h"
@@ -40,7 +43,12 @@
 #include "../vpatterndb/floatItemData/vpiecelabeldata.h"
 #include "../vpatterndb/floatItemData/vpatternlabeldata.h"
 #include "../vpatterndb/floatItemData/vgrainlinedata.h"
+#include "../vpatterndb/measurements.h"
+#include "../vpatterndb/calculator.h"
 #include "../vtools/tools/vabstracttool.h"
+#include "../vtools/tools/vtoolseamallowance.h"
+#include "../ifc/xml/vvstconverter.h"
+#include "../ifc/xml/vvitconverter.h"
 
 #include <QFileDialog>
 #include <QFileInfo>
@@ -53,11 +61,50 @@
 #include <QPrintDialog>
 #include <QPrinterInfo>
 
+#if defined(Q_OS_WIN32) && QT_VERSION >= QT_VERSION_CHECK(5, 7, 0)
+#include <QWinTaskbarButton>
+#include <QWinTaskbarProgress>
+#endif
+
+QT_WARNING_PUSH
+QT_WARNING_DISABLE_CLANG("-Wmissing-prototypes")
+QT_WARNING_DISABLE_INTEL(1418)
+
+Q_LOGGING_CATEGORY(vMainNoGUIWindow, "v.mainnoguiwindow")
+
+QT_WARNING_POP
+
 #ifdef Q_OS_WIN
 #   define PDFTOPS "pdftops.exe"
 #else
 #   define PDFTOPS "pdftops"
 #endif
+
+namespace
+{
+//---------------------------------------------------------------------------------------------------------------------
+bool CreateLayoutPath(const QString &path)
+{
+    bool usedNotExistedDir = true;
+    QDir dir(path);
+    dir.setPath(path);
+    if (not dir.exists(path))
+    {
+        usedNotExistedDir = dir.mkpath(QChar('.'));
+    }
+    return usedNotExistedDir;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void RemoveLayoutPath(const QString &path, bool usedNotExistedDir)
+{
+    if (usedNotExistedDir)
+    {
+        QDir dir(path);
+        dir.rmpath(QChar('.'));
+    }
+}
+}
 
 //---------------------------------------------------------------------------------------------------------------------
 MainWindowsNoGUI::MainWindowsNoGUI(QWidget *parent)
@@ -65,29 +112,39 @@ MainWindowsNoGUI::MainWindowsNoGUI(QWidget *parent)
       listDetails(),
       currentScene(nullptr),
       tempSceneLayout(nullptr),
-      pattern(new VContainer(qApp->TrVars(), qApp->patternUnitP())),
+      pattern(new VContainer(qApp->TrVars(), qApp->patternUnitP(), valentinaNamespace)),
       doc(nullptr),
       papers(),
       shadows(),
       scenes(),
       details(),
+      detailsOnLayout(),
       undoAction(nullptr),
       redoAction(nullptr),
       actionDockWidgetToolOptions(nullptr),
       actionDockWidgetGroups(nullptr),
-      curFile(),
       isNoScaling(false),
       isLayoutStale(true),
       ignorePrinterFields(false),
       margins(),
       paperSize(),
+      m_dialogSaveLayout(),
+#if defined(Q_OS_WIN32) && QT_VERSION >= QT_VERSION_CHECK(5, 7, 0)
+      m_taskbarButton(new QWinTaskbarButton(this)),
+      m_taskbarProgress(nullptr),
+#endif
       isTiled(false),
       isAutoCrop(false),
       isUnitePages(false),
       layoutPrinterName()
-
 {
     InitTempLayoutScene();
+
+#if defined(Q_OS_WIN32) && QT_VERSION >= QT_VERSION_CHECK(5, 7, 0)
+    m_taskbarButton->setWindow(this->windowHandle());
+    m_taskbarProgress = m_taskbarButton->progress();
+    m_taskbarProgress->setMinimum(0);
+#endif
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -130,6 +187,12 @@ bool MainWindowsNoGUI::LayoutSettings(VLayoutGenerator& lGenerator)
     DialogLayoutProgress progress(listDetails.count(), this);
     if (VApplication::IsGUIMode())
     {
+#if defined(Q_OS_WIN32) && QT_VERSION >= QT_VERSION_CHECK(5, 7, 0)
+        m_taskbarProgress->setVisible(true);
+        m_taskbarProgress->setValue(0);
+        m_taskbarProgress->setMaximum(listDetails.count());
+        connect(&lGenerator, &VLayoutGenerator::Arranged, m_taskbarProgress, &QWinTaskbarProgress::setValue);
+#endif
         connect(&lGenerator, &VLayoutGenerator::Start, &progress, &DialogLayoutProgress::Start);
         connect(&lGenerator, &VLayoutGenerator::Arranged, &progress, &DialogLayoutProgress::Arranged);
         connect(&lGenerator, &VLayoutGenerator::Error, &progress, &DialogLayoutProgress::Error);
@@ -142,14 +205,22 @@ bool MainWindowsNoGUI::LayoutSettings(VLayoutGenerator& lGenerator)
     }
     lGenerator.Generate();
 
+#if defined(Q_OS_WIN32) && QT_VERSION >= QT_VERSION_CHECK(5, 7, 0)
+    if (VApplication::IsGUIMode())
+    {
+        m_taskbarProgress->setVisible(false);
+    }
+#endif
+
     switch (lGenerator.State())
     {
         case LayoutErrors::NoError:
             CleanLayout();
             papers = lGenerator.GetPapersItems();// Blank sheets
-            details = lGenerator.GetAllDetails();// All details
-            CreateShadows();
-            CreateScenes();
+            details = lGenerator.GetAllDetailsItems();// All details items
+            detailsOnLayout = lGenerator.GetAllDetails();// All details items
+            shadows = CreateShadows(papers);
+            scenes = CreateScenes(papers, shadows, details);
             PrepareSceneList();
             ignorePrinterFields = not lGenerator.IsUsePrinterFields();
             margins = lGenerator.GetPrinterFields();
@@ -187,7 +258,8 @@ void MainWindowsNoGUI::ErrorConsoleMode(const LayoutErrors &state)
             qCritical() << tr("Couldn't prepare data for creation layout");
             break;
         case LayoutErrors::EmptyPaperError:
-            qCritical() << tr("Several workpieces left not arranged, but none of them match for paper");
+            qCritical() << tr("One or more pattern pieces are bigger than the paper format you selected. Please, "
+                              "select a bigger paper format.");
             break;
         case LayoutErrors::ProcessStoped:
         default:
@@ -198,88 +270,321 @@ void MainWindowsNoGUI::ErrorConsoleMode(const LayoutErrors &state)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void MainWindowsNoGUI::ExportLayout(const DialogSaveLayout &dialog)
+void MainWindowsNoGUI::ExportFMeasurementsToCSV()
 {
+    QString fileName = CSVFilePath();
 
-    const QString suf = dialog.Format().replace(".", "");
-    const QString path = dialog.Path();
-    QDir dir(path);
-    dir.setPath(path);
-    if (not dir.exists(path))
+    if (fileName.isEmpty())
     {
-        if (not dir.mkpath(path))
+        return;
+    }
+
+    DialogExportToCSV dialog(this);
+    dialog.SetWithHeader(qApp->Settings()->GetCSVWithHeader());
+    dialog.SetSelectedMib(qApp->Settings()->GetCSVCodec());
+    dialog.SetSeparator(qApp->Settings()->GetCSVSeparator());
+
+    if (dialog.exec() == QDialog::Accepted)
+    {
+        ExportFMeasurementsToCSVData(fileName, dialog.IsWithHeader(), dialog.GetSelectedMib(), dialog.GetSeparator());
+
+        qApp->Settings()->SetCSVSeparator(dialog.GetSeparator());
+        qApp->Settings()->SetCSVCodec(dialog.GetSelectedMib());
+        qApp->Settings()->SetCSVWithHeader(dialog.IsWithHeader());
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void MainWindowsNoGUI::ExportData(const QVector<VLayoutPiece> &listDetails)
+{
+    const LayoutExportFormats format = m_dialogSaveLayout->Format();
+
+    if (format == LayoutExportFormats::DXF_AC1006_AAMA ||
+        format == LayoutExportFormats::DXF_AC1009_AAMA ||
+        format == LayoutExportFormats::DXF_AC1012_AAMA ||
+        format == LayoutExportFormats::DXF_AC1014_AAMA ||
+        format == LayoutExportFormats::DXF_AC1015_AAMA ||
+        format == LayoutExportFormats::DXF_AC1018_AAMA ||
+        format == LayoutExportFormats::DXF_AC1021_AAMA ||
+        format == LayoutExportFormats::DXF_AC1024_AAMA ||
+        format == LayoutExportFormats::DXF_AC1027_AAMA)
+    {
+        if (m_dialogSaveLayout->Mode() == Draw::Layout)
         {
-            qCritical() << tr("Can't create path");
-            return;
+            for (int i = 0; i < detailsOnLayout.size(); ++i)
+            {
+                const QString name = m_dialogSaveLayout->Path() + QLatin1String("/") + m_dialogSaveLayout->FileName() +
+                        QString::number(i+1)
+                        + DialogSaveLayout::ExportFromatSuffix(m_dialogSaveLayout->Format());
+
+                QGraphicsRectItem *paper = qgraphicsitem_cast<QGraphicsRectItem *>(papers.at(i));
+                SCASSERT(paper != nullptr)
+
+                ExportApparelLayout(detailsOnLayout.at(i), name, paper->rect().size().toSize());
+            }
+        }
+        else
+        {
+            ExportDetailsAsApparelLayout(listDetails);
         }
     }
-    qApp->ValentinaSettings()->SetPathLayout(path);
-    const QString mask = dialog.FileName();
-
-    for (int i=0; i < scenes.size(); ++i)
+    else
     {
-        QGraphicsRectItem *paper = qgraphicsitem_cast<QGraphicsRectItem *>(papers.at(i));
-        if (paper)
+        if (m_dialogSaveLayout->Mode() == Draw::Layout)
         {
-            const QString name = path + QLatin1String("/") + mask+QString::number(i+1) + dialog.Format();
-            QBrush *brush = new QBrush();
-            brush->setColor( QColor( Qt::white ) );
-            scenes[i]->setBackgroundBrush( *brush );
-            shadows[i]->setVisible(false);
-            paper->setPen(QPen(QBrush(Qt::white, Qt::NoBrush), 0.1, Qt::NoPen));
-            const QStringList suffix = QStringList() << QLatin1String("svg")
-                                                     << QLatin1String("png")
-                                                     << QLatin1String("pdf")
-                                                     << QLatin1String("eps")
-                                                     << QLatin1String("ps")
-                                                     << QLatin1String("obj")
-                                                     << QLatin1String("dxf");
-            switch (suffix.indexOf(suf))
-            {
-                case 0: //svg
-                    paper->setVisible(false);
-                    SvgFile(name, i);
-                    paper->setVisible(true);
-                    break;
-                case 1: //png
-                    PngFile(name, i);
-                    break;
-                case 2: //pdf
-                    PdfFile(name, i);
-                    break;
-                case 3: //eps
-                    EpsFile(name, i);
-                    break;
-                case 4: //ps
-                    PsFile(name, i);
-                    break;
-                case 5: //obj
-                    paper->setVisible(false);
-                    ObjFile(name, i);
-                    paper->setVisible(true);
-                    break;
-                case 6: //dxf
-                    DxfFile(name, i);
-                    break;
-                default:
-                    qDebug() << "Can't recognize file suffix." << Q_FUNC_INFO;
-                    break;
-            }
-            paper->setPen(QPen(Qt::black, 1));
-            brush->setColor( QColor( Qt::gray ) );
-            brush->setStyle( Qt::SolidPattern );
-            scenes[i]->setBackgroundBrush( *brush );
-            shadows[i]->setVisible(true);
-            delete brush;
+            ExportFlatLayout(scenes, papers, shadows, details, ignorePrinterFields, margins);
+        }
+        else
+        {
+            ExportDetailsAsFlatLayout(listDetails);
         }
     }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void MainWindowsNoGUI::SaveAsTiledPDF()
+void MainWindowsNoGUI::ExportFlatLayout(const QList<QGraphicsScene *> &scenes,
+                                        const QList<QGraphicsItem *> &papers, const QList<QGraphicsItem *> &shadows,
+                                        const QList<QList<QGraphicsItem *> > &details, bool ignorePrinterFields,
+                                        const QMarginsF &margins)
 {
-    isTiled = true;
-    SaveLayoutAs();
+    const QString path = m_dialogSaveLayout->Path();
+    bool usedNotExistedDir = CreateLayoutPath(path);
+    if (not usedNotExistedDir)
+    {
+        qCritical() << tr("Can't create a path");
+        return;
+    }
+
+    qApp->ValentinaSettings()->SetPathLayout(path);
+    const LayoutExportFormats format = m_dialogSaveLayout->Format();
+
+    if (format == LayoutExportFormats::PDFTiled && m_dialogSaveLayout->Mode() == Draw::Layout)
+    {
+        const QString name = path + QLatin1String("/") + m_dialogSaveLayout->FileName() + QString::number(1)
+                + DialogSaveLayout::ExportFromatSuffix(m_dialogSaveLayout->Format());
+        PdfTiledFile(name);
+    }
+    else
+    {
+        ExportScene(scenes, papers, shadows, details, ignorePrinterFields, margins);
+    }
+
+    RemoveLayoutPath(path, usedNotExistedDir);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void MainWindowsNoGUI::ExportDetailsAsFlatLayout(const QVector<VLayoutPiece> &listDetails)
+{
+    if (listDetails.isEmpty())
+    {
+        return;
+    }
+
+    QScopedPointer<QGraphicsScene> scene(new QGraphicsScene());
+
+    QList<QGraphicsItem *> list;
+    for (auto piece : listDetails)
+    {
+        QGraphicsItem *item = piece.GetItem(m_dialogSaveLayout->IsTextAsPaths());
+        qreal diff = 0;
+        if (piece.IsForceFlipping())
+        {
+            const qreal x = item->boundingRect().x();
+            piece.Mirror();
+            item = piece.GetItem(m_dialogSaveLayout->IsTextAsPaths());
+            diff = item->boundingRect().x() - x;
+        }
+
+        if (piece.IsForceFlipping())
+        {
+            item->setPos(piece.GetMx()-diff, piece.GetMy());
+        }
+        else
+        {
+            item->setPos(piece.GetMx(), piece.GetMy());
+        }
+        list.append(item);
+    }
+
+    for (auto item : list)
+    {
+        scene->addItem(item);
+    }
+
+    QList<QGraphicsItem *> papers;// Blank sheets
+    QRect rect = scene->itemsBoundingRect().toRect();
+
+    const int mx = rect.x();
+    const int my = rect.y();
+
+    QTransform matrix;
+    matrix = matrix.translate(-mx, -my);
+
+    for (auto item : list)
+    {
+        item->setTransform(matrix);
+    }
+
+    rect = scene->itemsBoundingRect().toRect();
+
+    QGraphicsRectItem *paper = new QGraphicsRectItem(rect);
+    paper->setPen(QPen(Qt::black, 1));
+    paper->setBrush(QBrush(Qt::white));
+    papers.append(paper);
+
+    QList<QList<QGraphicsItem *> > details;// All details
+    details.append(list);
+
+    QList<QGraphicsItem *> shadows = CreateShadows(papers);
+    QList<QGraphicsScene *> scenes = CreateScenes(papers, shadows, details);
+
+    const bool ignorePrinterFields = false;
+    const qreal margin = ToPixel(1, Unit::Cm);
+    ExportFlatLayout(scenes, papers, shadows, details, ignorePrinterFields, QMarginsF(margin, margin, margin, margin));
+
+    qDeleteAll(scenes);//Scene will clear all other items
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void MainWindowsNoGUI::ExportApparelLayout(const QVector<VLayoutPiece> &details, const QString &name,
+                                           const QSize &size) const
+{
+    const QString path = m_dialogSaveLayout->Path();
+    bool usedNotExistedDir = CreateLayoutPath(path);
+    if (not usedNotExistedDir)
+    {
+        qCritical() << tr("Can't create a path");
+        return;
+    }
+
+    qApp->ValentinaSettings()->SetPathLayout(path);
+    const LayoutExportFormats format = m_dialogSaveLayout->Format();
+
+    switch (format)
+    {
+        case LayoutExportFormats::DXF_AC1006_ASTM:
+        case LayoutExportFormats::DXF_AC1009_ASTM:
+        case LayoutExportFormats::DXF_AC1012_ASTM:
+        case LayoutExportFormats::DXF_AC1014_ASTM:
+        case LayoutExportFormats::DXF_AC1015_ASTM:
+        case LayoutExportFormats::DXF_AC1018_ASTM:
+        case LayoutExportFormats::DXF_AC1021_ASTM:
+        case LayoutExportFormats::DXF_AC1024_ASTM:
+        case LayoutExportFormats::DXF_AC1027_ASTM:
+            Q_UNREACHABLE(); // For now not supported
+            break;
+        case LayoutExportFormats::DXF_AC1006_AAMA:
+            AAMADxfFile(name, DRW::AC1006, m_dialogSaveLayout->IsBinaryDXFFormat(), size, details);
+            break;
+        case LayoutExportFormats::DXF_AC1009_AAMA:
+            AAMADxfFile(name, DRW::AC1009, m_dialogSaveLayout->IsBinaryDXFFormat(), size, details);
+            break;
+        case LayoutExportFormats::DXF_AC1012_AAMA:
+            AAMADxfFile(name, DRW::AC1012, m_dialogSaveLayout->IsBinaryDXFFormat(), size, details);
+            break;
+        case LayoutExportFormats::DXF_AC1014_AAMA:
+            AAMADxfFile(name, DRW::AC1014, m_dialogSaveLayout->IsBinaryDXFFormat(), size, details);
+            break;
+        case LayoutExportFormats::DXF_AC1015_AAMA:
+            AAMADxfFile(name, DRW::AC1015, m_dialogSaveLayout->IsBinaryDXFFormat(), size, details);
+            break;
+        case LayoutExportFormats::DXF_AC1018_AAMA:
+            AAMADxfFile(name, DRW::AC1018, m_dialogSaveLayout->IsBinaryDXFFormat(), size, details);
+            break;
+        case LayoutExportFormats::DXF_AC1021_AAMA:
+            AAMADxfFile(name, DRW::AC1021, m_dialogSaveLayout->IsBinaryDXFFormat(), size, details);
+            break;
+        case LayoutExportFormats::DXF_AC1024_AAMA:
+            AAMADxfFile(name, DRW::AC1024, m_dialogSaveLayout->IsBinaryDXFFormat(), size, details);
+            break;
+        case LayoutExportFormats::DXF_AC1027_AAMA:
+            AAMADxfFile(name, DRW::AC1027, m_dialogSaveLayout->IsBinaryDXFFormat(), size, details);
+            break;
+        default:
+            qDebug() << "Can't recognize file type." << Q_FUNC_INFO;
+            break;
+    }
+
+    RemoveLayoutPath(path, usedNotExistedDir);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void MainWindowsNoGUI::ExportDetailsAsApparelLayout(QVector<VLayoutPiece> listDetails)
+{
+    if (listDetails.isEmpty())
+    {
+        return;
+    }
+
+    QScopedPointer<QGraphicsScene> scene(new QGraphicsScene());
+
+    QList<QGraphicsItem *> list;
+    for (int i=0; i < listDetails.count(); ++i)
+    {
+        VLayoutPiece piece = listDetails.at(i);
+        QGraphicsItem *item = piece.GetItem(m_dialogSaveLayout->IsTextAsPaths());
+        qreal diff = 0;
+        if (piece.IsForceFlipping())
+        {
+            const qreal x = item->boundingRect().x();
+            piece.Mirror();
+            item = piece.GetItem(m_dialogSaveLayout->IsTextAsPaths());
+            diff = item->boundingRect().x() - x;
+        }
+
+        QTransform moveMatrix = piece.GetMatrix();
+        if (piece.IsForceFlipping())
+        {
+            item->setPos(piece.GetMx()-diff, piece.GetMy());
+            moveMatrix = moveMatrix.translate(-piece.GetMx()+diff, piece.GetMy());
+        }
+        else
+        {
+            item->setPos(piece.GetMx(), piece.GetMy());
+            moveMatrix = moveMatrix.translate(piece.GetMx(), piece.GetMy());
+        }
+        listDetails[i].SetMatrix(moveMatrix);
+        list.append(item);
+    }
+
+    for (auto item : list)
+    {
+        scene->addItem(item);
+    }
+
+    QRect rect = scene->itemsBoundingRect().toRect();
+
+    const int mx = rect.x();
+    const int my = rect.y();
+
+    QTransform matrix;
+    matrix = matrix.translate(-mx, -my);
+
+    for (auto item : list)
+    {
+        item->setTransform(matrix);
+    }
+
+    rect = scene->itemsBoundingRect().toRect();
+
+    for (int i=0; i < listDetails.count(); ++i)
+    {
+        QTransform moveMatrix = listDetails.at(i).GetMatrix();
+        if (listDetails.at(i).IsForceFlipping())
+        {
+            moveMatrix = moveMatrix.translate(mx, -my);
+        }
+        else
+        {
+            moveMatrix = moveMatrix.translate(-mx, -my);
+        }
+        listDetails[i].SetMatrix(moveMatrix);
+    }
+
+    const QString name = m_dialogSaveLayout->Path() + QLatin1String("/") + m_dialogSaveLayout->FileName() +
+            QString::number(1) + DialogSaveLayout::ExportFromatSuffix(m_dialogSaveLayout->Format());
+
+    ExportApparelLayout(listDetails, name, rect.size());
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -302,8 +607,7 @@ void MainWindowsNoGUI::PrintPages(QPrinter *printer)
 
     painter.setFont( QFont( "Arial", 8, QFont::Normal ) );
     painter.setRenderHint(QPainter::Antialiasing, true);
-    painter.setPen(QPen(Qt::black, qApp->toPixel(WidthMainLine(*pattern->GetPatternUnit())), Qt::SolidLine,
-                        Qt::RoundCap, Qt::RoundJoin));
+    painter.setPen(QPen(Qt::black, qApp->Settings()->WidthMainLine(), Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin));
     painter.setBrush ( QBrush ( Qt::NoBrush ) );
 
     int count = 0;
@@ -312,6 +616,24 @@ void MainWindowsNoGUI::PrintPages(QPrinter *printer)
 
     if (isTiled)
     {
+        PageOrientation orientation;
+        if (not m_dialogSaveLayout.isNull())
+        {
+            orientation = m_dialogSaveLayout->GetTiledPageOrientation();
+        }
+        else
+        {
+            orientation = qApp->ValentinaSettings()->GetTiledPDFOrientation();
+        }
+
+        // when isTiled, the landscape tiles have to be rotated, because the pages
+        // stay portrait in the pdf
+        if(orientation == PageOrientation::Landscape)
+        {
+            painter.rotate(-90);
+            painter.translate(-ToPixel(printer->pageRect(QPrinter::Millimeter).height(), Unit::Mm), 0);
+        }
+
         poster = QSharedPointer<QVector<PosterData>>(new QVector<PosterData>());
         posterazor = QSharedPointer<VPoster>(new VPoster(printer));
 
@@ -320,7 +642,7 @@ void MainWindowsNoGUI::PrintPages(QPrinter *printer)
             auto *paper = qgraphicsitem_cast<QGraphicsRectItem *>(papers.at(i));
             if (paper)
             {
-                *poster += posterazor->Calc(paper->rect().toRect(), i);
+                *poster += posterazor->Calc(paper->rect().toRect(), i, orientation);
             }
         }
 
@@ -470,28 +792,27 @@ void MainWindowsNoGUI::PrintOrigin()
 //---------------------------------------------------------------------------------------------------------------------
 void MainWindowsNoGUI::PrintTiled()
 {
-    isTiled = false;
+    isTiled = true;
     LayoutPrint();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void MainWindowsNoGUI::PrepareDetailsForLayout(const QHash<quint32, VPiece> *details)
+QVector<VLayoutPiece> MainWindowsNoGUI::PrepareDetailsForLayout(const QHash<quint32, VPiece> &details)
 {
-    listDetails.clear();
-    SCASSERT(details != nullptr)
-    if (details->count() == 0)
+    QVector<VLayoutPiece> listDetails;
+    if (not details.isEmpty())
     {
-        return;
+        QHash<quint32, VPiece>::const_iterator i = details.constBegin();
+        while (i != details.constEnd())
+        {
+            VAbstractTool *tool = qobject_cast<VAbstractTool*>(VAbstractPattern::getTool(i.key()));
+            SCASSERT(tool != nullptr)
+            listDetails.append(VLayoutPiece::Create(i.value(), tool->getData()));
+            ++i;
+        }
     }
 
-    QHash<quint32, VPiece>::const_iterator i = details->constBegin();
-    while (i != details->constEnd())
-    {
-        VAbstractTool *tool = qobject_cast<VAbstractTool*>(VAbstractPattern::getTool(i.key()));
-        SCASSERT(tool != nullptr)
-        listDetails.append(VLayoutPiece::Create(i.value(), tool->getData()));
-        ++i;
-    }
+    return listDetails;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -518,8 +839,8 @@ QIcon MainWindowsNoGUI::ScenePreview(int i) const
             QPainter painter(&image);
             painter.setFont( QFont( "Arial", 8, QFont::Normal ) );
             painter.setRenderHint(QPainter::Antialiasing, true);
-            painter.setPen(QPen(Qt::black, qApp->toPixel(WidthMainLine(*pattern->GetPatternUnit())), Qt::SolidLine,
-                                Qt::RoundCap, Qt::RoundJoin));
+            painter.setPen(QPen(Qt::black, qApp->Settings()->WidthMainLine(), Qt::SolidLine, Qt::RoundCap,
+                                Qt::RoundJoin));
             painter.setBrush ( QBrush ( Qt::NoBrush ) );
             scenes.at(i)->render(&painter, r, r, Qt::IgnoreAspectRatio);
             painter.end();
@@ -538,13 +859,14 @@ QIcon MainWindowsNoGUI::ScenePreview(int i) const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void MainWindowsNoGUI::CreateShadows()
+QList<QGraphicsItem *> MainWindowsNoGUI::CreateShadows(const QList<QGraphicsItem *> &papers)
 {
-    for (int i=0; i< papers.size(); ++i)
+    QList<QGraphicsItem *> shadows;
+
+    for (auto paper : papers)
     {
         qreal x1=0, y1=0, x2=0, y2=0;
-        QGraphicsRectItem *item = qgraphicsitem_cast<QGraphicsRectItem *>(papers.at(i));
-        if (item)
+        if (QGraphicsRectItem *item = qgraphicsitem_cast<QGraphicsRectItem *>(paper))
         {
             item->rect().getCoords(&x1, &y1, &x2, &y2);
             QGraphicsRectItem *shadowPaper = new QGraphicsRectItem(QRectF(x1+4, y1+4, x2+4, y2+4));
@@ -556,11 +878,16 @@ void MainWindowsNoGUI::CreateShadows()
             shadows.append(nullptr);
         }
     }
+
+    return shadows;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void MainWindowsNoGUI::CreateScenes()
+QList<QGraphicsScene *> MainWindowsNoGUI::CreateScenes(const QList<QGraphicsItem *> &papers,
+                                                       const QList<QGraphicsItem *> &shadows,
+                                                       const QList<QList<QGraphicsItem *> > &details)
 {
+    QList<QGraphicsScene *> scenes;
     for (int i=0; i<papers.size(); ++i)
     {
         QGraphicsScene *scene = new VMainGraphicsScene();
@@ -568,14 +895,16 @@ void MainWindowsNoGUI::CreateScenes()
         scene->addItem(shadows.at(i));
         scene->addItem(papers.at(i));
 
-        QList<QGraphicsItem *> paperDetails = details.at(i);
-        for (int i=0; i < paperDetails.size(); ++i)
+        const QList<QGraphicsItem *> paperDetails = details.at(i);
+        for (auto &detail : paperDetails)
         {
-            scene->addItem(paperDetails.at(i));
+            scene->addItem(detail);
         }
 
         scenes.append(scene);
     }
+
+    return scenes;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -583,28 +912,23 @@ void MainWindowsNoGUI::CreateScenes()
  * @brief SvgFile save layout to svg file.
  * @param name name layout file.
  */
-void MainWindowsNoGUI::SvgFile(const QString &name, int i) const
+void MainWindowsNoGUI::SvgFile(const QString &name, QGraphicsRectItem *paper, QGraphicsScene *scene) const
 {
-    QGraphicsRectItem *paper = qgraphicsitem_cast<QGraphicsRectItem *>(papers.at(i));
-    if (paper)
-    {
-        QSvgGenerator generator;
-        generator.setFileName(name);
-        generator.setSize(paper->rect().size().toSize());
-        generator.setViewBox(paper->rect());
-        generator.setTitle("Valentina. Pattern layout");
-        generator.setDescription(doc->GetDescription());
-        generator.setResolution(static_cast<int>(PrintDPI));
-        QPainter painter;
-        painter.begin(&generator);
-        painter.setFont( QFont( "Arial", 8, QFont::Normal ) );
-        painter.setRenderHint(QPainter::Antialiasing, true);
-        painter.setPen(QPen(Qt::black, qApp->toPixel(WidthHairLine(*pattern->GetPatternUnit())), Qt::SolidLine,
-                            Qt::RoundCap, Qt::RoundJoin));
-        painter.setBrush ( QBrush ( Qt::NoBrush ) );
-        scenes.at(i)->render(&painter, paper->rect(), paper->rect(), Qt::IgnoreAspectRatio);
-        painter.end();
-    }
+    QSvgGenerator generator;
+    generator.setFileName(name);
+    generator.setSize(paper->rect().size().toSize());
+    generator.setViewBox(paper->rect());
+    generator.setTitle(tr("Pattern"));
+    generator.setDescription(doc->GetDescription().toHtmlEscaped());
+    generator.setResolution(static_cast<int>(PrintDPI));
+    QPainter painter;
+    painter.begin(&generator);
+    painter.setFont( QFont( "Arial", 8, QFont::Normal ) );
+    painter.setRenderHint(QPainter::Antialiasing, true);
+    painter.setPen(QPen(Qt::black, qApp->Settings()->WidthHairLine(), Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin));
+    painter.setBrush ( QBrush ( Qt::NoBrush ) );
+    scene->render(&painter, paper->rect(), paper->rect(), Qt::IgnoreAspectRatio);
+    painter.end();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -612,24 +936,19 @@ void MainWindowsNoGUI::SvgFile(const QString &name, int i) const
  * @brief PngFile save layout to png file.
  * @param name name layout file.
  */
-void MainWindowsNoGUI::PngFile(const QString &name, int i) const
+void MainWindowsNoGUI::PngFile(const QString &name, QGraphicsRectItem *paper, QGraphicsScene *scene) const
 {
-    QGraphicsRectItem *paper = qgraphicsitem_cast<QGraphicsRectItem *>(papers.at(i));
-    if (paper)
-    {
-        const QRectF r = paper->rect();
-        // Create the image with the exact size of the shrunk scene
-        QImage image(r.size().toSize(), QImage::Format_ARGB32);
-        image.fill(Qt::transparent);                                              // Start all pixels transparent
-        QPainter painter(&image);
-        painter.setFont( QFont( "Arial", 8, QFont::Normal ) );
-        painter.setRenderHint(QPainter::Antialiasing, true);
-        painter.setPen(QPen(Qt::black, qApp->toPixel(WidthMainLine(*pattern->GetPatternUnit())), Qt::SolidLine,
-                            Qt::RoundCap, Qt::RoundJoin));
-        painter.setBrush ( QBrush ( Qt::NoBrush ) );
-        scenes.at(i)->render(&painter, r, r, Qt::IgnoreAspectRatio);
-        image.save(name);
-    }
+    const QRectF r = paper->rect();
+    // Create the image with the exact size of the shrunk scene
+    QImage image(r.size().toSize(), QImage::Format_ARGB32);
+    image.fill(Qt::transparent);                                              // Start all pixels transparent
+    QPainter painter(&image);
+    painter.setFont( QFont( "Arial", 8, QFont::Normal ) );
+    painter.setRenderHint(QPainter::Antialiasing, true);
+    painter.setPen(QPen(Qt::black, qApp->Settings()->WidthMainLine(), Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin));
+    painter.setBrush ( QBrush ( Qt::NoBrush ) );
+    scene->render(&painter, r, r, Qt::IgnoreAspectRatio);
+    image.save(name);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -637,46 +956,75 @@ void MainWindowsNoGUI::PngFile(const QString &name, int i) const
  * @brief PdfFile save layout to pdf file.
  * @param name name layout file.
  */
-void MainWindowsNoGUI::PdfFile(const QString &name, int i) const
+void MainWindowsNoGUI::PdfFile(const QString &name, QGraphicsRectItem *paper, QGraphicsScene *scene,
+                               bool ignorePrinterFields, const QMarginsF &margins) const
 {
-    QGraphicsRectItem *paper = qgraphicsitem_cast<QGraphicsRectItem *>(papers.at(i));
-    if (paper)
+    QPrinter printer;
+    printer.setCreator(QGuiApplication::applicationDisplayName()+QChar(QChar::Space)+
+                       QCoreApplication::applicationVersion());
+    printer.setOutputFormat(QPrinter::PdfFormat);
+    printer.setOutputFileName(name);
+    printer.setDocName(FileName());
+    const QRectF r = paper->rect();
+    printer.setResolution(static_cast<int>(PrintDPI));
+    printer.setOrientation(QPrinter::Portrait);
+    printer.setFullPage(ignorePrinterFields);
+    printer.setPaperSize ( QSizeF(FromPixel(r.width() + margins.left() + margins.right(), Unit::Mm),
+                                  FromPixel(r.height() + margins.top() + margins.bottom(), Unit::Mm)),
+                           QPrinter::Millimeter );
+
+    const qreal left = FromPixel(margins.left(), Unit::Mm);
+    const qreal top = FromPixel(margins.top(), Unit::Mm);
+    const qreal right = FromPixel(margins.right(), Unit::Mm);
+    const qreal bottom = FromPixel(margins.bottom(), Unit::Mm);
+#if QT_VERSION >= QT_VERSION_CHECK(5, 3, 0)
+    const bool success = printer.setPageMargins(QMarginsF(left, top, right, bottom), QPageLayout::Millimeter);
+    if (not success)
     {
-        QPrinter printer;
-        printer.setCreator(QGuiApplication::applicationDisplayName()+QLatin1String(" ")+
-                           QCoreApplication::applicationVersion());
-        printer.setOutputFormat(QPrinter::PdfFormat);
-        printer.setOutputFileName(name);
-        printer.setDocName(FileName());
-        const QRectF r = paper->rect();
-        printer.setResolution(static_cast<int>(PrintDPI));
-        // Set orientation
-        if (paper->rect().height()>= paper->rect().width())
+        qWarning() << tr("Cannot set printer margins");
+    }
+#else
+    printer.setPageMargins(left, top, right, bottom, QPrinter::Millimeter);
+#endif //QT_VERSION >= QT_VERSION_CHECK(5, 3, 0)
+
+    QPainter painter;
+    if (painter.begin( &printer ) == false)
+    { // failed to open file
+        qCritical("%s", qUtf8Printable(tr("Can't open printer %1").arg(name)));
+        return;
+    }
+    painter.setFont( QFont( "Arial", 8, QFont::Normal ) );
+    painter.setRenderHint(QPainter::Antialiasing, true);
+    painter.setPen(QPen(Qt::black, qApp->Settings()->WidthMainLine(), Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin));
+    painter.setBrush ( QBrush ( Qt::NoBrush ) );
+    scene->render(&painter, r, r, Qt::IgnoreAspectRatio);
+    painter.end();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void MainWindowsNoGUI::PdfTiledFile(const QString &name)
+{
+    isTiled = true;
+
+    if (isLayoutStale)
+    {
+        if (ContinueIfLayoutStale() == QMessageBox::No)
         {
-            printer.setOrientation(QPrinter::Portrait);
-        }
-        else
-        {
-            printer.setOrientation(QPrinter::Landscape);
-        }
-        printer.setFullPage(ignorePrinterFields);
-        printer.setPaperSize ( QSizeF(FromPixel(r.width() + margins.left() + margins.right(), Unit::Mm),
-                                      FromPixel(r.height() + margins.top() + margins.bottom(), Unit::Mm)),
-                               QPrinter::Millimeter );
-        QPainter painter;
-        if (painter.begin( &printer ) == false)
-        { // failed to open file
-            qCritical("%s", qUtf8Printable(tr("Can't open printer %1").arg(name)));
             return;
         }
-        painter.setFont( QFont( "Arial", 8, QFont::Normal ) );
-        painter.setRenderHint(QPainter::Antialiasing, true);
-        painter.setPen(QPen(Qt::black, qApp->toPixel(WidthMainLine(*pattern->GetPatternUnit())), Qt::SolidLine,
-                            Qt::RoundCap, Qt::RoundJoin));
-        painter.setBrush ( QBrush ( Qt::NoBrush ) );
-        scenes.at(i)->render(&painter, r, r, Qt::IgnoreAspectRatio);
-        painter.end();
     }
+    QPrinter printer;
+    SetPrinterSettings(&printer, PrintType::PrintPDF);
+
+    // Call IsPagesFit after setting a printer settings and check if pages is not bigger than printer's paper size
+    if (not isTiled && not IsPagesFit(printer.paperRect().size()))
+    {
+        qWarning()<<tr("Pages will be cropped because they do not fit printer paper size.");
+    }
+
+    printer.setOutputFileName(name);
+    printer.setResolution(static_cast<int>(PrintDPI));
+    PrintPages(&printer);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -684,12 +1032,13 @@ void MainWindowsNoGUI::PdfFile(const QString &name, int i) const
  * @brief EpsFile save layout to eps file.
  * @param name name layout file.
  */
-void MainWindowsNoGUI::EpsFile(const QString &name, int i) const
+void MainWindowsNoGUI::EpsFile(const QString &name, QGraphicsRectItem *paper, QGraphicsScene *scene,
+                               bool ignorePrinterFields, const QMarginsF &margins) const
 {
     QTemporaryFile tmp;
     if (tmp.open())
     {
-        PdfFile(tmp.fileName(), i);
+        PdfFile(tmp.fileName(), paper, scene, ignorePrinterFields, margins);
         QStringList params = QStringList() << "-eps" << tmp.fileName() << name;
         PdfToPs(params);
     }
@@ -700,12 +1049,13 @@ void MainWindowsNoGUI::EpsFile(const QString &name, int i) const
  * @brief PsFile save layout to ps file.
  * @param name name layout file.
  */
-void MainWindowsNoGUI::PsFile(const QString &name, int i) const
+void MainWindowsNoGUI::PsFile(const QString &name, QGraphicsRectItem *paper, QGraphicsScene *scene, bool
+                              ignorePrinterFields, const QMarginsF &margins) const
 {
     QTemporaryFile tmp;
     if (tmp.open())
     {
-        PdfFile(tmp.fileName(), i);
+        PdfFile(tmp.fileName(), paper, scene, ignorePrinterFields, margins);
         QStringList params = QStringList() << tmp.fileName() << name;
         PdfToPs(params);
     }
@@ -720,7 +1070,7 @@ void MainWindowsNoGUI::PsFile(const QString &name, int i) const
 void MainWindowsNoGUI::PdfToPs(const QStringList &params) const
 {
 #ifndef QT_NO_CURSOR
-    QApplication::setOverrideCursor(Qt::WaitCursor);
+    QGuiApplication::setOverrideCursor(Qt::WaitCursor);
 #endif
     QProcess proc;
 #if defined(Q_OS_MAC)
@@ -735,73 +1085,68 @@ void MainWindowsNoGUI::PdfToPs(const QStringList &params) const
         proc.waitForFinished(15000);
     }
 #ifndef QT_NO_CURSOR
-    QApplication::restoreOverrideCursor();
+    QGuiApplication::restoreOverrideCursor();
 #endif
 
     QFile f(params.last());
     if (f.exists() == false)
     {
-        const QString msg = tr("Creating file '%1' failed! %2").arg(params.last()).arg(proc.errorString());
+        const QString msg = tr("Creating file '%1' failed! %2").arg(params.last(), proc.errorString());
         QMessageBox msgBox(QMessageBox::Critical, tr("Critical error!"), msg, QMessageBox::Ok | QMessageBox::Default);
         msgBox.exec();
     }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void MainWindowsNoGUI::ObjFile(const QString &name, int i) const
+void MainWindowsNoGUI::ObjFile(const QString &name, QGraphicsRectItem *paper, QGraphicsScene *scene) const
 {
-    QGraphicsRectItem *paper = qgraphicsitem_cast<QGraphicsRectItem *>(papers.at(i));
-    if (paper)
-    {
-        VObjPaintDevice generator;
-        generator.setFileName(name);
-        generator.setSize(paper->rect().size().toSize());
-        generator.setResolution(static_cast<int>(PrintDPI));
-        QPainter painter;
-        painter.begin(&generator);
-        scenes.at(i)->render(&painter, paper->rect(), paper->rect(), Qt::IgnoreAspectRatio);
-        painter.end();
-    }
+    VObjPaintDevice generator;
+    generator.setFileName(name);
+    generator.setSize(paper->rect().size().toSize());
+    generator.setResolution(static_cast<int>(PrintDPI));
+    QPainter painter;
+    painter.begin(&generator);
+    scene->render(&painter, paper->rect(), paper->rect(), Qt::IgnoreAspectRatio);
+    painter.end();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 QT_WARNING_PUSH
 QT_WARNING_DISABLE_GCC("-Wswitch-default")
 
-void MainWindowsNoGUI::DxfFile(const QString &name, int i) const
+void MainWindowsNoGUI::FlatDxfFile(const QString &name, int version, bool binary, QGraphicsRectItem *paper,
+                               QGraphicsScene *scene, const QList<QList<QGraphicsItem *> > &details) const
 {
-    QGraphicsRectItem *paper = qgraphicsitem_cast<QGraphicsRectItem *>(papers.at(i));
-    if (paper)
+    PrepareTextForDXF(endStringPlaceholder, details);
+    VDxfPaintDevice generator;
+    generator.setFileName(name);
+    generator.setSize(paper->rect().size().toSize());
+    generator.setResolution(PrintDPI);
+    generator.SetVersion(static_cast<DRW::Version>(version));
+    generator.SetBinaryFormat(binary);
+    generator.setInsunits(VarInsunits::Millimeters);// Decided to always use mm. See issue #745
+
+    QPainter painter;
+    if (painter.begin(&generator))
     {
-        VDxfPaintDevice generator;
-        generator.setFileName(name);
-        generator.setSize(paper->rect().size().toSize());
-        generator.setResolution(PrintDPI);
-
-        switch (*pattern->GetPatternUnit())
-        {
-            case Unit::Cm:
-                generator.setInsunits(VarInsunits::Centimeters);
-                break;
-            case Unit::Mm:
-                generator.setInsunits(VarInsunits::Millimeters);
-                break;
-            case Unit::Inch:
-                generator.setInsunits(VarInsunits::Inches);
-                break;
-            case Unit::Px:
-            case Unit::LAST_UNIT_DO_NOT_USE:
-                Q_UNREACHABLE();
-                break;
-        }
-
-        QPainter painter;
-        if (painter.begin(&generator))
-        {
-            scenes.at(i)->render(&painter, paper->rect(), paper->rect(), Qt::IgnoreAspectRatio);
-            painter.end();
-        }
+        scene->render(&painter, paper->rect(), paper->rect(), Qt::IgnoreAspectRatio);
+        painter.end();
     }
+    RestoreTextAfterDXF(endStringPlaceholder, details);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void MainWindowsNoGUI::AAMADxfFile(const QString &name, int version, bool binary, const QSize &size,
+                                   const QVector<VLayoutPiece> &details) const
+{
+    VDxfPaintDevice generator;
+    generator.setFileName(name);
+    generator.setSize(size);
+    generator.setResolution(PrintDPI);
+    generator.SetVersion(static_cast<DRW::Version>(version));
+    generator.SetBinaryFormat(binary);
+    generator.setInsunits(VarInsunits::Millimeters);// Decided to always use mm. See issue #745
+    generator.ExportToAAMA(details);
 }
 
 QT_WARNING_POP
@@ -827,7 +1172,7 @@ void MainWindowsNoGUI::RestorePaper(int index) const
     if (paper)
     {
         // Restore
-        paper->setPen(QPen(Qt::black, qApp->toPixel(WidthMainLine(*pattern->GetPatternUnit()))));
+        paper->setPen(QPen(Qt::black, 1));
         QBrush brush(Qt::gray);
         scenes.at(index)->setBackgroundBrush(brush);
         shadows.at(index)->setVisible(true);
@@ -835,54 +1180,66 @@ void MainWindowsNoGUI::RestorePaper(int index) const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void MainWindowsNoGUI::SaveLayoutAs()
+/**
+ * @brief PrepareTextForDXF prepare QGraphicsSimpleTextItem items for export to flat dxf.
+ *
+ * Because QPaintEngine::drawTextItem doesn't pass whole string per time we mark end of each string by adding special
+ * placholder. This method append it.
+ *
+ * @param placeholder placeholder that will be appended to each QGraphicsSimpleTextItem item's text string.
+ */
+void MainWindowsNoGUI::PrepareTextForDXF(const QString &placeholder,
+                                         const QList<QList<QGraphicsItem *> > &details) const
 {
-    if (isLayoutStale)
+    for (auto &paperItems : details)
     {
-        if (ContinueIfLayoutStale() == QMessageBox::No)
+        for (auto item : paperItems)
         {
-            return;
+            QList<QGraphicsItem *> pieceChildren = item->childItems();
+            for (auto child : pieceChildren)
+            {
+                if (child->type() == QGraphicsSimpleTextItem::Type)
+                {
+                    if(QGraphicsSimpleTextItem *textItem = qgraphicsitem_cast<QGraphicsSimpleTextItem *>(child))
+                    {
+                        textItem->setText(textItem->text() + placeholder);
+                    }
+                }
+            }
         }
     }
-    QPrinter printer;
-    SetPrinterSettings(&printer, PrintType::PrintPDF);
-    printer.setPageSize(QPrinter::A4);// Want to be sure that page size is correct.
+}
 
-    // Call IsPagesFit after setting a printer settings and check if pages is not bigger than printer's paper size
-    if (not isTiled && not IsPagesFit(printer.paperRect().size()))
+//---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief MainWindowsNoGUI::RestoreTextAfterDXF restore QGraphicsSimpleTextItem items after export to flat dxf.
+ *
+ * Because QPaintEngine::drawTextItem doesn't pass whole string per time we mark end of each string by adding special
+ * placholder. This method remove it.
+ *
+ * @param placeholder placeholder that will be removed from each QGraphicsSimpleTextItem item's text string.
+ */
+void MainWindowsNoGUI::RestoreTextAfterDXF(const QString &placeholder,
+                                           const QList<QList<QGraphicsItem *> > &details) const
+{
+    for (auto &paperItems : details)
     {
-        qWarning()<<tr("Pages will be cropped because they do not fit printer paper size.");
-    }
-
-    const QString dir = qApp->ValentinaSettings()->GetPathLayout();
-    bool usedNotExistedDir = false;
-    QDir directory(dir);
-    if (not directory.exists())
-    {
-        usedNotExistedDir = directory.mkpath(".");
-    }
-
-    QString fileName = QFileDialog::getSaveFileName(this, tr("Print to pdf"),
-                                                    dir + QLatin1String("/") + FileName() + QLatin1String(".pdf"),
-                                                    tr("PDF file (*.pdf)"));
-    if (not fileName.isEmpty())
-    {
-        QFileInfo f( fileName );
-        if(f.suffix().isEmpty())
+        for (auto item : paperItems)
         {
-            fileName.append(".pdf");
+            QList<QGraphicsItem *> pieceChildren = item->childItems();
+            for (auto child : pieceChildren)
+            {
+                if (child->type() == QGraphicsSimpleTextItem::Type)
+                {
+                    if(QGraphicsSimpleTextItem *textItem = qgraphicsitem_cast<QGraphicsSimpleTextItem *>(child))
+                    {
+                        QString text = textItem->text();
+                        text.replace(placeholder, QString());
+                        textItem->setText(text);
+                    }
+                }
+            }
         }
-        qApp->ValentinaSettings()->SetPathLayout(f.absolutePath());
-
-        printer.setOutputFileName(fileName);
-        printer.setResolution(static_cast<int>(PrintDPI));
-        PrintPages( &printer );
-    }
-
-    if (usedNotExistedDir)
-    {
-        QDir directory(dir);
-        directory.rmpath(".");
     }
 }
 
@@ -957,17 +1314,10 @@ void MainWindowsNoGUI::LayoutPrint()
 void MainWindowsNoGUI::SetPrinterSettings(QPrinter *printer, const PrintType &printType)
 {
     SCASSERT(printer != nullptr)
-    printer->setCreator(QGuiApplication::applicationDisplayName()+" "+QCoreApplication::applicationVersion());
+    printer->setCreator(QGuiApplication::applicationDisplayName()+QChar(QChar::Space)+
+                        QCoreApplication::applicationVersion());
 
-    // Set orientation
-    if (paperSize.height() >= paperSize.width())
-    {
-        printer->setOrientation(QPrinter::Portrait);
-    }
-    else
-    {
-        printer->setOrientation(QPrinter::Landscape);
-    }
+    printer->setOrientation(QPrinter::Portrait);
 
     if (not isTiled)
     {
@@ -982,7 +1332,7 @@ void MainWindowsNoGUI::SetPrinterSettings(QPrinter *printer, const PrintType &pr
             }
         }
 
-        const QPrinter::PageSize pSZ = FindTemplate(size);
+        const QPrinter::PageSize pSZ = FindQPrinterPageSize(size);
         if (pSZ == QPrinter::Custom)
         {
             printer->setPaperSize (size, QPrinter::Millimeter );
@@ -992,17 +1342,52 @@ void MainWindowsNoGUI::SetPrinterSettings(QPrinter *printer, const PrintType &pr
             printer->setPaperSize (pSZ);
         }
     }
-    else
-    {
-        printer->setPaperSize(QPrinter::A4);
-    }
 
     printer->setFullPage(ignorePrinterFields);
 
-    const qreal left = FromPixel(margins.left(), Unit::Mm);
-    const qreal top = FromPixel(margins.top(), Unit::Mm);
-    const qreal right = FromPixel(margins.right(), Unit::Mm);
-    const qreal bottom = FromPixel(margins.bottom(), Unit::Mm);
+    qreal left, top, right, bottom;
+
+    if (not isTiled)
+    {
+        QMarginsF pageMargin = QMarginsF(UnitConvertor(margins, Unit::Px, Unit::Mm));
+        left = pageMargin.left();
+        top = pageMargin.top();
+        right = pageMargin.right();
+        bottom = pageMargin.bottom();
+    }
+    else
+    {
+        QMarginsF pageMargin;
+        PageOrientation orientation;
+        if (not m_dialogSaveLayout.isNull())
+        {
+            pageMargin = m_dialogSaveLayout->GetTiledMargins();
+            orientation = m_dialogSaveLayout->GetTiledPageOrientation();
+        }
+        else
+        {
+            VSettings *settings = qApp->ValentinaSettings();
+            pageMargin = QMarginsF(settings->GetTiledPDFMargins(Unit::Mm));
+            orientation = settings->GetTiledPDFOrientation();
+        }
+
+        if(orientation == PageOrientation::Landscape)
+        {
+            // because when painting we have a -90rotation in landscape modus,
+            // see function PrintPages.
+            left = pageMargin.bottom();
+            top = pageMargin.left();
+            right = pageMargin.top();
+            bottom = pageMargin.right();
+        }
+        else
+        {
+            left = pageMargin.left();
+            top = pageMargin.top();
+            right = pageMargin.right();
+            bottom = pageMargin.bottom();
+        }
+    }
 #if QT_VERSION >= QT_VERSION_CHECK(5, 3, 0)
     const bool success = printer->setPageMargins(QMarginsF(left, top, right, bottom), QPageLayout::Millimeter);
 
@@ -1033,7 +1418,7 @@ void MainWindowsNoGUI::SetPrinterSettings(QPrinter *printer, const PrintType &pr
             break;
         }
         case PrintType::PrintNative:
-            printer->setOutputFileName("");//Disable printing to file if was enabled.
+            printer->setOutputFileName(QString());//Disable printing to file if was enabled.
             printer->setOutputFormat(QPrinter::NativeFormat);
             break;
         case PrintType::PrintPreview: /*do nothing*/
@@ -1053,8 +1438,7 @@ bool MainWindowsNoGUI::IsLayoutGrayscale() const
 
     for (int i=0; i < scenes.size(); ++i)
     {
-        auto *paper = qgraphicsitem_cast<QGraphicsRectItem *>(papers.at(i));
-        if (paper)
+        if (auto *paper = qgraphicsitem_cast<QGraphicsRectItem *>(papers.at(i)))
         {
             // Hide shadow and paper border
             PreparePaper(i);
@@ -1063,8 +1447,8 @@ bool MainWindowsNoGUI::IsLayoutGrayscale() const
             QImage image(target.size(), QImage::Format_RGB32);
             image.fill(Qt::white);
             QPainter painter(&image);
-            painter.setPen(QPen(Qt::black, qApp->toPixel(WidthMainLine(*pattern->GetPatternUnit())), Qt::SolidLine,
-                                Qt::RoundCap, Qt::RoundJoin));
+            painter.setPen(QPen(Qt::black, qApp->Settings()->WidthMainLine(), Qt::SolidLine, Qt::RoundCap,
+                                Qt::RoundJoin));
             painter.setBrush ( QBrush ( Qt::NoBrush ) );
             scenes.at(i)->render(&painter, target, paper->rect(), Qt::KeepAspectRatio);
             painter.end();
@@ -1083,39 +1467,39 @@ bool MainWindowsNoGUI::IsLayoutGrayscale() const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QPrinter::PaperSize MainWindowsNoGUI::FindTemplate(const QSizeF &size) const
+QPrinter::PaperSize MainWindowsNoGUI::FindQPrinterPageSize(const QSizeF &size) const
 {
-    if (size == QSizeF(841, 1189))
+    if (size == QSizeF(841, 1189) || size == QSizeF(1189, 841))
     {
         return QPrinter::A0;
     }
 
-    if (size == QSizeF(594, 841))
+    if (size == QSizeF(594, 841) || size == QSizeF(841, 594))
     {
         return QPrinter::A1;
     }
 
-    if (size == QSizeF(420, 594))
+    if (size == QSizeF(420, 594) || size == QSizeF(594, 420))
     {
         return QPrinter::A2;
     }
 
-    if (size == QSizeF(297, 420))
+    if (size == QSizeF(297, 420) || size == QSizeF(420, 297))
     {
         return QPrinter::A3;
     }
 
-    if (size == QSizeF(210, 297))
+    if (size == QSizeF(210, 297) || size == QSizeF(297, 210))
     {
         return QPrinter::A4;
     }
 
-    if (size == QSizeF(215.9, 355.6))
+    if (size == QSizeF(215.9, 355.6) || size == QSizeF(355.6, 215.9))
     {
         return QPrinter::Legal;
     }
 
-    if (size == QSizeF(215.9, 279.4))
+    if (size == QSizeF(215.9, 279.4) || size == QSizeF(279.4, 215.9))
     {
         return QPrinter::Letter;
     }
@@ -1134,9 +1518,9 @@ bool MainWindowsNoGUI::isPagesUniform() const
     {
         auto *paper = qgraphicsitem_cast<QGraphicsRectItem *>(papers.at(0));
         SCASSERT(paper != nullptr)
-        for (int i=1; i < papers.size(); ++i)
+        for (auto paperItem : papers)
         {
-            auto *p = qgraphicsitem_cast<QGraphicsRectItem *>(papers.at(i));
+            auto *p = qgraphicsitem_cast<QGraphicsRectItem *>(paperItem);
             SCASSERT(p != nullptr)
             if (paper->rect() != p->rect())
             {
@@ -1164,11 +1548,306 @@ bool MainWindowsNoGUI::IsPagesFit(const QSizeF &printPaper) const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void MainWindowsNoGUI::ExportScene(const QList<QGraphicsScene *> &scenes,
+                                   const QList<QGraphicsItem *> &papers, const QList<QGraphicsItem *> &shadows,
+                                   const QList<QList<QGraphicsItem *> > &details, bool ignorePrinterFields,
+                                   const QMarginsF &margins) const
+{
+    for (int i=0; i < scenes.size(); ++i)
+    {
+        QGraphicsRectItem *paper = qgraphicsitem_cast<QGraphicsRectItem *>(papers.at(i));
+        if (paper)
+        {
+            const QString name = m_dialogSaveLayout->Path() + QLatin1String("/") + m_dialogSaveLayout->FileName() +
+                    QString::number(i+1) + DialogSaveLayout::ExportFromatSuffix(m_dialogSaveLayout->Format());
+            QBrush *brush = new QBrush();
+            brush->setColor( QColor( Qt::white ) );
+            QGraphicsScene *scene = scenes.at(i);
+            scene->setBackgroundBrush( *brush );
+            shadows[i]->setVisible(false);
+            paper->setPen(QPen(QBrush(Qt::white, Qt::NoBrush), 0.1, Qt::NoPen));
+
+            switch (m_dialogSaveLayout->Format())
+            {
+                case LayoutExportFormats::SVG:
+                    paper->setVisible(false);
+                    SvgFile(name, paper, scene);
+                    paper->setVisible(true);
+                    break;
+                case LayoutExportFormats::PDF:
+                    PdfFile(name, paper, scene, ignorePrinterFields, margins);
+                    break;
+                case LayoutExportFormats::PNG:
+                    PngFile(name, paper, scene);
+                    break;
+                case LayoutExportFormats::OBJ:
+                    paper->setVisible(false);
+                    ObjFile(name, paper, scene);
+                    paper->setVisible(true);
+                    break;
+                case LayoutExportFormats::PS:
+                    PsFile(name, paper, scene, ignorePrinterFields, margins);
+                    break;
+                case LayoutExportFormats::EPS:
+                    EpsFile(name, paper, scene, ignorePrinterFields, margins);
+                    break;
+                case LayoutExportFormats::DXF_AC1006_Flat:
+                    paper->setVisible(false);
+                    FlatDxfFile(name, DRW::AC1006, m_dialogSaveLayout->IsBinaryDXFFormat(), paper, scene, details);
+                    paper->setVisible(true);
+                    break;
+                case LayoutExportFormats::DXF_AC1009_Flat:
+                    paper->setVisible(false);
+                    FlatDxfFile(name, DRW::AC1009, m_dialogSaveLayout->IsBinaryDXFFormat(), paper, scene, details);
+                    paper->setVisible(true);
+                    break;
+                case LayoutExportFormats::DXF_AC1012_Flat:
+                    paper->setVisible(false);
+                    FlatDxfFile(name, DRW::AC1012, m_dialogSaveLayout->IsBinaryDXFFormat(), paper, scene, details);
+                    paper->setVisible(true);
+                    break;
+                case LayoutExportFormats::DXF_AC1014_Flat:
+                    paper->setVisible(false);
+                    FlatDxfFile(name, DRW::AC1014, m_dialogSaveLayout->IsBinaryDXFFormat(), paper, scene, details);
+                    paper->setVisible(true);
+                    break;
+                case LayoutExportFormats::DXF_AC1015_Flat:
+                    paper->setVisible(false);
+                    FlatDxfFile(name, DRW::AC1015, m_dialogSaveLayout->IsBinaryDXFFormat(), paper, scene, details);
+                    paper->setVisible(true);
+                    break;
+                case LayoutExportFormats::DXF_AC1018_Flat:
+                    paper->setVisible(false);
+                    FlatDxfFile(name, DRW::AC1018, m_dialogSaveLayout->IsBinaryDXFFormat(), paper, scene, details);
+                    paper->setVisible(true);
+                    break;
+                case LayoutExportFormats::DXF_AC1021_Flat:
+                    paper->setVisible(false);
+                    FlatDxfFile(name, DRW::AC1021, m_dialogSaveLayout->IsBinaryDXFFormat(), paper, scene, details);
+                    paper->setVisible(true);
+                    break;
+                case LayoutExportFormats::DXF_AC1024_Flat:
+                    paper->setVisible(false);
+                    FlatDxfFile(name, DRW::AC1024, m_dialogSaveLayout->IsBinaryDXFFormat(), paper, scene, details);
+                    paper->setVisible(true);
+                    break;
+                case LayoutExportFormats::DXF_AC1027_Flat:
+                    paper->setVisible(false);
+                    FlatDxfFile(name, DRW::AC1027, m_dialogSaveLayout->IsBinaryDXFFormat(), paper, scene, details);
+                    paper->setVisible(true);
+                    break;
+                default:
+                    qDebug() << "Can't recognize file type." << Q_FUNC_INFO;
+                    break;
+            }
+            paper->setPen(QPen(Qt::black, 1));
+            brush->setColor( QColor( Qt::gray ) );
+            brush->setStyle( Qt::SolidPattern );
+            scenes[i]->setBackgroundBrush( *brush );
+            shadows[i]->setVisible(true);
+            delete brush;
+        }
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 QString MainWindowsNoGUI::FileName() const
 {
     QString fileName;
-    curFile.isEmpty() ? fileName = tr("unnamed") : fileName = curFile;
+    qApp->GetPatternPath().isEmpty() ? fileName = tr("unnamed") : fileName = qApp->GetPatternPath();
     return QFileInfo(fileName).baseName();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void MainWindowsNoGUI::SetSizeHeightForIndividualM() const
+{
+    const QHash<QString, QSharedPointer<VInternalVariable> > * vars = pattern->DataVariables();
+
+    if (vars->contains(size_M))
+    {
+        pattern->SetSize(*vars->value(size_M)->GetValue());
+    }
+    else
+    {
+        pattern->SetSize(0);
+    }
+
+    if (vars->contains(height_M))
+    {
+        pattern->SetHeight(*vars->value(height_M)->GetValue());
+    }
+    else
+    {
+        pattern->SetHeight(0);
+    }
+
+    doc->SetPatternWasChanged(true);
+    emit doc->UpdatePatternLabel();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+bool MainWindowsNoGUI::ExportFMeasurementsToCSVData(const QString &fileName, bool withHeader, int mib,
+                                                    const QChar &separator) const
+{
+    QxtCsvModel csv;
+
+    csv.insertColumn(0);
+    csv.insertColumn(1);
+    csv.insertColumn(2);
+
+    if (withHeader)
+    {
+        csv.setHeaderText(0, tr("Name"));
+        csv.setHeaderText(1, tr("Value"));
+        csv.setHeaderText(2, tr("Description"));
+    }
+
+    const QVector<VFinalMeasurement> measurements = doc->GetFinalMeasurements();
+    const VContainer completeData = doc->GetCompleteData();
+
+    for (int i=0; i < measurements.size(); ++i)
+    {
+        const VFinalMeasurement &m = measurements.at(i);
+
+        csv.insertRow(i);
+        csv.setText(i, 0, m.name); // name
+
+        if (not m.formula.isEmpty())
+        {
+            try
+            {
+                QScopedPointer<Calculator> cal(new Calculator());
+                const qreal result = cal->EvalFormula(completeData.DataVariables(), m.formula);
+
+                csv.setText(i, 1, qApp->LocaleToString(result)); // value
+
+                if (qIsInf(result) || qIsNaN(result))
+                {
+                    qCritical("%s\n\n%s", qUtf8Printable(tr("Export final measurements error.")),
+                              qUtf8Printable(tr("Value in line %1 is infinite or NaN. Please, check your calculations.")
+                                             .arg(i+1)));
+                    if (not VApplication::IsGUIMode())
+                    {
+                        qApp->exit(V_EX_DATAERR);
+                    }
+                    return false;
+                }
+            }
+            catch (qmu::QmuParserError &e)
+            {
+                qCritical("%s\n\n%s", qUtf8Printable(tr("Export final measurements error.")),
+                          qUtf8Printable(tr("Parser error at line %1: %2.").arg(i+1).arg(e.GetMsg())));
+                if (not VApplication::IsGUIMode())
+                {
+                    qApp->exit(V_EX_DATAERR);
+                }
+                return false;
+            }
+        }
+
+        csv.setText(i, 2, m.description); // description
+    }
+
+    QString error;
+    const bool success = csv.toCSV(fileName, error, withHeader, separator, QTextCodec::codecForMib(mib));
+
+    if (not success)
+    {
+        qCritical("%s\n\n%s", qUtf8Printable(tr("Export final measurements error.")),
+                  qUtf8Printable(tr("File error %1.").arg(error)));
+        if (not VApplication::IsGUIMode())
+        {
+            qApp->exit(V_EX_CANTCREAT);
+        }
+    }
+
+    return success;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QSharedPointer<VMeasurements> MainWindowsNoGUI::OpenMeasurementFile(const QString &path) const
+{
+    QSharedPointer<VMeasurements> m;
+    if (path.isEmpty())
+    {
+        return m;
+    }
+
+    try
+    {
+        m = QSharedPointer<VMeasurements>(new VMeasurements(pattern));
+        m->setXMLContent(path);
+
+        if (m->Type() == MeasurementsType::Unknown)
+        {
+            VException e(tr("Measurement file has unknown format."));
+            throw e;
+        }
+
+        if (m->Type() == MeasurementsType::Multisize)
+        {
+            VVSTConverter converter(path);
+            m->setXMLContent(converter.Convert());// Read again after conversion
+        }
+        else
+        {
+            VVITConverter converter(path);
+            m->setXMLContent(converter.Convert());// Read again after conversion
+        }
+
+        if (not m->IsDefinedKnownNamesValid())
+        {
+            VException e(tr("Measurement file contains invalid known measurement(s)."));
+            throw e;
+        }
+
+        CheckRequiredMeasurements(m.data());
+
+        if (m->Type() == MeasurementsType::Multisize)
+        {
+            if (m->MUnit() == Unit::Inch)
+            {
+                qCCritical(vMainNoGUIWindow, "%s\n\n%s", qUtf8Printable(tr("Wrong units.")),
+                          qUtf8Printable(tr("Application doesn't support multisize table with inches.")));
+                m->clear();
+                if (not VApplication::IsGUIMode())
+                {
+                    qApp->exit(V_EX_DATAERR);
+                }
+                return m;
+            }
+        }
+    }
+    catch (VException &e)
+    {
+        qCCritical(vMainNoGUIWindow, "%s\n\n%s\n\n%s", qUtf8Printable(tr("File error.")),
+                   qUtf8Printable(e.ErrorMessage()), qUtf8Printable(e.DetailedInformation()));
+        m->clear();
+        if (not VApplication::IsGUIMode())
+        {
+            qApp->exit(V_EX_NOINPUT);
+        }
+        return m;
+    }
+    return m;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void MainWindowsNoGUI::CheckRequiredMeasurements(const VMeasurements *m) const
+{
+    const QSet<QString> match = doc->ListMeasurements().toSet().subtract(m->ListAll().toSet());
+    if (not match.isEmpty())
+    {
+        QList<QString> list = match.toList();
+        for (int i = 0; i < list.size(); ++i)
+        {
+            list[i] = qApp->TrVars()->MToUser(list.at(i));
+        }
+
+        VException e(tr("Measurement file doesn't include all required measurements."));
+        e.AddMoreInformation(tr("Please, additionally provide: %1").arg(QStringList(list).join(", ")));
+        throw e;
+    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------

@@ -6,7 +6,7 @@
  **
  **  @brief
  **  @copyright
- **  This source code is part of the Valentine project, a pattern making
+ **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2013-2015 Valentina project
  **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
@@ -50,15 +50,11 @@ VisToolHeight::VisToolHeight(const VContainer *data, QGraphicsItem *parent)
     base_point = InitPoint(supportColor, this);
     lineP1 = InitPoint(supportColor, this);
     lineP2 = InitPoint(supportColor, this);
-    line = InitItem<QGraphicsLineItem>(supportColor, this);
-    line_intersection = InitItem<QGraphicsLineItem>(supportColor, this); //-V656
+    line = InitItem<VScaledLine>(supportColor, this);
+    line_intersection = InitItem<VScaledLine>(supportColor, this); //-V656
 
     point = InitPoint(mainColor, this);
 }
-
-//---------------------------------------------------------------------------------------------------------------------
-VisToolHeight::~VisToolHeight()
-{}
 
 //---------------------------------------------------------------------------------------------------------------------
 void VisToolHeight::RefreshGeometry()

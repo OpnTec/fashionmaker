@@ -6,7 +6,7 @@
  **
  **  @brief
  **  @copyright
- **  This source code is part of the Valentine project, a pattern making
+ **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2016 Valentina project
  **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
@@ -73,6 +73,9 @@ VCubicBezier VCubicBezier::Rotate(const QPointF &originPoint, qreal degrees, con
     const VPointF p4 = GetP4().Rotate(originPoint, degrees);
     VCubicBezier curve(p1, p2, p3, p4);
     curve.setName(name() + prefix);
+    curve.SetColor(GetColor());
+    curve.SetPenStyle(GetPenStyle());
+    curve.SetApproximationScale(GetApproximationScale());
     return curve;
 }
 
@@ -85,6 +88,9 @@ VCubicBezier VCubicBezier::Flip(const QLineF &axis, const QString &prefix) const
     const VPointF p4 = GetP4().Flip(axis);
     VCubicBezier curve(p1, p2, p3, p4);
     curve.setName(name() + prefix);
+    curve.SetColor(GetColor());
+    curve.SetPenStyle(GetPenStyle());
+    curve.SetApproximationScale(GetApproximationScale());
     return curve;
 }
 
@@ -97,6 +103,9 @@ VCubicBezier VCubicBezier::Move(qreal length, qreal angle, const QString &prefix
     const VPointF p4 = GetP4().Move(length, angle);
     VCubicBezier curve(p1, p2, p3, p4);
     curve.setName(name() + prefix);
+    curve.SetColor(GetColor());
+    curve.SetPenStyle(GetPenStyle());
+    curve.SetApproximationScale(GetApproximationScale());
     return curve;
 }
 
@@ -173,7 +182,7 @@ qreal VCubicBezier::GetEndAngle() const
 qreal VCubicBezier::GetLength() const
 {
     return LengthBezier (static_cast<QPointF>(GetP1()), static_cast<QPointF>(GetP2()),
-                         static_cast<QPointF>(GetP3()), static_cast<QPointF>(GetP4()));
+                         static_cast<QPointF>(GetP3()), static_cast<QPointF>(GetP4()), GetApproximationScale());
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -184,7 +193,7 @@ qreal VCubicBezier::GetLength() const
 QVector<QPointF> VCubicBezier::GetPoints() const
 {
     return GetCubicBezierPoints(static_cast<QPointF>(GetP1()), static_cast<QPointF>(GetP2()),
-                                static_cast<QPointF>(GetP3()), static_cast<QPointF>(GetP4()));
+                                static_cast<QPointF>(GetP3()), static_cast<QPointF>(GetP4()), GetApproximationScale());
 }
 
 //---------------------------------------------------------------------------------------------------------------------

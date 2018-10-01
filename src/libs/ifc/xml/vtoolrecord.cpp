@@ -6,7 +6,7 @@
  **
  **  @brief
  **  @copyright
- **  This source code is part of the Valentine project, a pattern making
+ **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2013-2015 Valentina project
  **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
@@ -47,17 +47,6 @@ VToolRecord::VToolRecord()
 VToolRecord::VToolRecord(const quint32 &id, const Tool &typeTool, const QString &nameDraw)
     :id(id), typeTool(typeTool), nameDraw(nameDraw)
 {}
-
-//---------------------------------------------------------------------------------------------------------------------
-bool VToolRecord::operator==(const VToolRecord &record) const
-{
-    bool isEqual = false;
-    if (id == record.getId() && typeTool == record.getTypeTool() && nameDraw == record.getNameDraw())
-    {
-        isEqual = true;
-    }
-    return isEqual;
-}
 
 //---------------------------------------------------------------------------------------------------------------------
 VToolRecord &VToolRecord::operator=(const VToolRecord &record)

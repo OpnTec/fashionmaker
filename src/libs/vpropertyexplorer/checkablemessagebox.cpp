@@ -20,7 +20,6 @@
 #include <QAbstractButton>
 #include <QApplication>
 #include <QCheckBox>
-#include <QForeachContainer>
 #include <QHBoxLayout>
 #include <QLabel>
 #include <QLatin1String>
@@ -223,7 +222,9 @@ QPushButton *CheckableMessageBox::addButton(const QString &text, QDialogButtonBo
 
 QDialogButtonBox::StandardButton CheckableMessageBox::defaultButton() const
 {
-    foreach (QAbstractButton *b, d->buttonBox->buttons())
+    const QList<QAbstractButton *> buttons = d->buttonBox->buttons();
+    for (auto b : buttons)
+    {
         if (QPushButton *pb = qobject_cast<QPushButton *>(b))
         {
             if (pb->isDefault())
@@ -231,6 +232,7 @@ QDialogButtonBox::StandardButton CheckableMessageBox::defaultButton() const
                return d->buttonBox->standardButton(pb);
             }
         }
+    }
     return QDialogButtonBox::NoButton;
 }
 
@@ -430,7 +432,7 @@ bool CheckableMessageBox::hasSuppressedQuestions(QSettings *settings)
     //Q_ASSERT(settings, return false);
     bool hasSuppressed = false;
     settings->beginGroup(QLatin1String(kDoNotAskAgainKey));
-    foreach (const QString &subKey, settings->childKeys())
+    for (auto &subKey : settings->childKeys())
     {
         if (settings->value(subKey, false).toBool())
         {

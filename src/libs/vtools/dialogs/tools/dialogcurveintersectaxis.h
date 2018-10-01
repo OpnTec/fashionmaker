@@ -6,7 +6,7 @@
  **
  **  @brief
  **  @copyright
- **  This source code is part of the Valentine project, a pattern making
+ **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2013-2015 Valentina project
  **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
@@ -49,7 +49,7 @@ class DialogCurveIntersectAxis : public DialogTool
 
 public:
     DialogCurveIntersectAxis(const VContainer *data, const quint32 &toolId, QWidget *parent = nullptr);
-    virtual ~DialogCurveIntersectAxis() Q_DECL_OVERRIDE;
+    virtual ~DialogCurveIntersectAxis() override;
 
     void         SetPointName(const QString &value);
 
@@ -68,20 +68,20 @@ public:
     QString      GetLineColor() const;
     void         SetLineColor(const QString &value);
 
-    virtual void ShowDialog(bool click) Q_DECL_OVERRIDE;
+    virtual void ShowDialog(bool click) override;
 public slots:
-    virtual void ChosenObject(quint32 id, const SceneObject &type) Q_DECL_OVERRIDE;
+    virtual void ChosenObject(quint32 id, const SceneObject &type) override;
     void         EvalAngle();
     void         AngleTextChanged();
     void         DeployAngleTextEdit();
     void         FXAngle();
 protected:
-    virtual void ShowVisualization() Q_DECL_OVERRIDE;
+    virtual void ShowVisualization() override;
     /**
      * @brief SaveData Put dialog data in local variables
      */
-    virtual void SaveData() Q_DECL_OVERRIDE;
-    virtual void closeEvent(QCloseEvent *event) Q_DECL_OVERRIDE;
+    virtual void SaveData() override;
+    virtual void closeEvent(QCloseEvent *event) override;
 private:
     Q_DISABLE_COPY(DialogCurveIntersectAxis)
     Ui::DialogCurveIntersectAxis *ui;

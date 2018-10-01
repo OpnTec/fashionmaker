@@ -6,7 +6,7 @@
  **
  **  @brief
  **  @copyright
- **  This source code is part of the Valentine project, a pattern making
+ **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2013-2015 Valentina project
  **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
@@ -31,7 +31,7 @@
 
 #include <qcompilerdetection.h>
 
-#if !defined(Q_OS_OSX) && !defined(Q_OS_WIN) && defined(Q_CC_GNU)
+#if !defined(Q_OS_OSX) && !defined(Q_OS_WIN) && !defined(Q_OS_FREEBSD) && defined(Q_CC_GNU)
 #include <sys/sysmacros.h>
 #endif
 
@@ -44,7 +44,7 @@
 
 template <class Key, class T> class QMap;
 
-#define CONVERTER_VERSION_CHECK(major, minor, patch) ((major<<16)|(minor<<8)|(patch))
+#define FORMAT_VERSION(major, minor, patch) ((major<<16)|(minor<<8)|(patch))
 
 class VAbstractConverter :public VDomDocument
 {
@@ -55,7 +55,7 @@ public:
 
     QString Convert();
 
-    int GetCurrentFormatVarsion() const;
+    int GetCurrentFormatVersion() const;
     QString GetVersionStr() const;
 
     static int GetVersion(const QString &version);

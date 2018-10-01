@@ -6,7 +6,7 @@
  **
  **  @brief
  **  @copyright
- **  This source code is part of the Valentine project, a pattern making
+ **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2017 Valentina project
  **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
@@ -44,7 +44,10 @@ public:
     explicit PreferencesPathPage(QWidget *parent = nullptr);
     virtual ~PreferencesPathPage();
 
-    void Apply();
+    QStringList Apply();
+
+protected:
+    virtual void changeEvent(QEvent* event) override;
 
 private slots:
     void DefaultPath();

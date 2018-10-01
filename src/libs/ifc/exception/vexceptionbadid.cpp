@@ -6,7 +6,7 @@
  **
  **  @brief
  **  @copyright
- **  This source code is part of the Valentine project, a pattern making
+ **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2013-2015 Valentina project
  **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
@@ -79,11 +79,11 @@ QString VExceptionBadId::ErrorMessage() const
     QString error;
     if (key.isEmpty())
     {
-        error = QString("ExceptionBadId: %1, id = %2").arg(error).arg(id);
+        error = QString("ExceptionBadId: %1, id = %2").arg(this->error).arg(id);
     }
     else
     {
-        error = QString("ExceptionBadId: %1, id = %2").arg(error).arg(key);
+        error = QString("ExceptionBadId: %1, id = %2").arg(this->error, key);
     }
     return error;
 }

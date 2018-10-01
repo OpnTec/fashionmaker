@@ -6,7 +6,7 @@
  **
  **  @brief
  **  @copyright
- **  This source code is part of the Valentine project, a pattern making
+ **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2016 Valentina project
  **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
@@ -33,23 +33,31 @@
 
 #include "vabstractflipping.h"
 
+struct VToolFlippingByAxisInitData : VAbstractOperationInitData
+{
+    VToolFlippingByAxisInitData()
+        : VAbstractOperationInitData(),
+          originPointId(NULL_ID),
+          axisType(AxisType::VerticalAxis)
+    {}
+
+    quint32 originPointId;
+    AxisType axisType;
+};
+
 class VToolFlippingByAxis : public VAbstractFlipping
 {
     Q_OBJECT
 public:
     virtual ~VToolFlippingByAxis() Q_DECL_EQ_DEFAULT;
-    virtual void setDialog() Q_DECL_OVERRIDE;
-    static VToolFlippingByAxis* Create(QSharedPointer<DialogTool> dialog, VMainGraphicsScene *scene,
+    virtual void setDialog() override;
+    static VToolFlippingByAxis* Create(const QPointer<DialogTool> &dialog, VMainGraphicsScene *scene,
                                        VAbstractPattern *doc, VContainer *data);
-    static VToolFlippingByAxis* Create(const quint32 _id, quint32 originPointId, AxisType axisType,
-                                       const QString &suffix, const QVector<quint32> &source,
-                                       const QVector<DestinationItem> &destination, VMainGraphicsScene *scene,
-                                       VAbstractPattern *doc, VContainer *data, const Document &parse,
-                                       const Source &typeCreation);
+    static VToolFlippingByAxis* Create(VToolFlippingByAxisInitData initData);
 
     static const QString ToolType;
 
-    virtual int type() const Q_DECL_OVERRIDE {return Type;}
+    virtual int type() const override {return Type;}
     enum { Type = UserType + static_cast<int>(Tool::FlippingByAxis)};
 
     AxisType GetAxisType() const;
@@ -57,23 +65,23 @@ public:
 
     QString OriginPointName() const;
 
-    virtual void ShowVisualization(bool show) Q_DECL_OVERRIDE;
+    virtual void ShowVisualization(bool show) override;
+protected slots:
+    virtual void ShowContextMenu(QGraphicsSceneContextMenuEvent *event, quint32 id=NULL_ID) override;
 protected:
-    virtual void SetVisualization() Q_DECL_OVERRIDE;
-    virtual void SaveDialog(QDomElement &domElement) Q_DECL_OVERRIDE;
-    virtual void ReadToolAttributes(const QDomElement &domElement) Q_DECL_OVERRIDE;
-    virtual void SaveOptions(QDomElement &tag, QSharedPointer<VGObject> &obj) Q_DECL_OVERRIDE;
-    virtual void contextMenuEvent ( QGraphicsSceneContextMenuEvent * event ) Q_DECL_OVERRIDE;
+    virtual void    SetVisualization() override;
+    virtual void    SaveDialog(QDomElement &domElement, QList<quint32> &oldDependencies,
+                               QList<quint32> &newDependencies) override;
+    virtual void    ReadToolAttributes(const QDomElement &domElement) override;
+    virtual void    SaveOptions(QDomElement &tag, QSharedPointer<VGObject> &obj) override;
+    virtual QString MakeToolTip() const override;
 private:
     Q_DISABLE_COPY(VToolFlippingByAxis)
 
     quint32  m_originPointId;
     AxisType m_axisType;
 
-    VToolFlippingByAxis(VAbstractPattern *doc, VContainer *data, quint32 id, quint32 originPointId,
-                        AxisType axisType, const QString &suffix, const QVector<quint32> &source,
-                        const QVector<DestinationItem> &destination, const Source &typeCreation,
-                        QGraphicsItem *parent = nullptr);
+    VToolFlippingByAxis(const VToolFlippingByAxisInitData &initData, QGraphicsItem *parent = nullptr);
 };
 
 #endif // VTOOLFLIPPINGBYAXIS_H

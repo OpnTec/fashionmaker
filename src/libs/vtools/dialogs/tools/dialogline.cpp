@@ -6,7 +6,7 @@
  **
  **  @brief
  **  @copyright
- **  This source code is part of the Valentine project, a pattern making
+ **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2013-2015 Valentina project
  **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
@@ -36,7 +36,6 @@
 #include <QPointer>
 #include <QVariant>
 
-#include "../../tools/vabstracttool.h"
 #include "../../visualization/visualization.h"
 #include "../../visualization/line/vistoolline.h"
 #include "../ifc/ifcdef.h"
@@ -59,15 +58,15 @@ DialogLine::DialogLine(const VContainer *data, const quint32 &toolId, QWidget *p
     FillComboBoxPoints(ui->comboBoxSecondPoint);
     FillComboBoxLineColors(ui->comboBoxLineColor);
 
-    QMap<QString, QIcon> stylesPics = VAbstractTool::LineStylesPics();
+    QMap<QString, QIcon> stylesPics = LineStylesPics();
     stylesPics.remove(TypeLineNone);// Prevent hiding line
     FillComboBoxTypeLine(ui->comboBoxLineType, stylesPics);
 
     number = 0;
 
-    connect(ui->comboBoxFirstPoint, static_cast<void (QComboBox::*)(const QString &)>(&QComboBox::currentIndexChanged),
+    connect(ui->comboBoxFirstPoint, QOverload<const QString &>::of(&QComboBox::currentIndexChanged),
             this, &DialogLine::PointNameChanged);
-    connect(ui->comboBoxSecondPoint, static_cast<void (QComboBox::*)(const QString &)>(&QComboBox::currentIndexChanged),
+    connect(ui->comboBoxSecondPoint, QOverload<const QString &>::of(&QComboBox::currentIndexChanged),
             this, &DialogLine::PointNameChanged);
 
     vis = new VisToolLine(data);
@@ -101,7 +100,7 @@ void DialogLine::SetSecondPoint(const quint32 &value)
 void DialogLine::SetTypeLine(const QString &value)
 {
     ChangeCurrentData(ui->comboBoxLineType, value);
-    vis->setLineStyle(VAbstractTool::LineStyleToPenStyle(value));
+    vis->setLineStyle(LineStyleToPenStyle(value));
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -163,7 +162,7 @@ void DialogLine::SaveData()
 
     line->setObject1Id(GetFirstPoint());
     line->setPoint2Id(GetSecondPoint());
-    line->setLineStyle(VAbstractTool::LineStyleToPenStyle(GetTypeLine()));
+    line->setLineStyle(LineStyleToPenStyle(GetTypeLine()));
     line->RefreshGeometry();
 }
 
@@ -191,7 +190,7 @@ void DialogLine::ChosenObject(quint32 id, const SceneObject &type)
                 case 1:
                     if (getCurrentObjectId(ui->comboBoxFirstPoint) != id)
                     {
-                        if (SetObject(id, ui->comboBoxSecondPoint, ""))
+                        if (SetObject(id, ui->comboBoxSecondPoint, QString()))
                         {
                             if (flagError)
                             {
@@ -216,7 +215,7 @@ void DialogLine::ChosenObject(quint32 id, const SceneObject &type)
  */
 quint32 DialogLine::GetFirstPoint() const
 {
-    return qvariant_cast<quint32>(CURRENT_DATA(ui->comboBoxFirstPoint));
+    return qvariant_cast<quint32>(ui->comboBoxFirstPoint->currentData());
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -226,7 +225,7 @@ quint32 DialogLine::GetFirstPoint() const
  */
 quint32 DialogLine::GetSecondPoint() const
 {
-    return qvariant_cast<quint32>(CURRENT_DATA(ui->comboBoxSecondPoint));
+    return qvariant_cast<quint32>(ui->comboBoxSecondPoint->currentData());
 }
 
 //---------------------------------------------------------------------------------------------------------------------

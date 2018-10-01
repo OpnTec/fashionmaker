@@ -6,7 +6,7 @@
  **
  **  @brief
  **  @copyright
- **  This source code is part of the Valentine project, a pattern making
+ **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2013-2015 Valentina project
  **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
@@ -45,7 +45,6 @@
 #include "../vpatterndb/vtranslatevars.h"
 #include "../vwidgets/vmaingraphicsscene.h"
 #include "../vwidgets/vabstractmainwindow.h"
-#include "../../tools/vabstracttool.h"
 #include "../../visualization/line/vistoolcurveintersectaxis.h"
 #include "../../visualization/visualization.h"
 #include "../ifc/xml/vabstractpattern.h"
@@ -64,9 +63,7 @@ DialogCurveIntersectAxis::DialogCurveIntersectAxis(const VContainer *data, const
 {
     ui->setupUi(this);
 
-#if QT_VERSION >= QT_VERSION_CHECK(5, 2, 0)
     ui->lineEditNamePoint->setClearButtonEnabled(true);
-#endif
 
     InitFormulaUI(ui);
     ui->lineEditNamePoint->setText(qApp->getCurrentDocument()->GenerateLabel(LabelType::NewLabel));
@@ -80,7 +77,7 @@ DialogCurveIntersectAxis::DialogCurveIntersectAxis(const VContainer *data, const
 
     FillComboBoxPoints(ui->comboBoxAxisPoint);
     FillComboBoxCurves(ui->comboBoxCurve);
-    FillComboBoxTypeLine(ui->comboBoxLineType, VAbstractTool::LineStylesPics());
+    FillComboBoxTypeLine(ui->comboBoxLineType, LineStylesPics());
     FillComboBoxLineColors(ui->comboBoxLineColor);
 
     connect(ui->toolButtonExprAngle, &QPushButton::clicked, this, &DialogCurveIntersectAxis::FXAngle);
@@ -115,7 +112,7 @@ QString DialogCurveIntersectAxis::GetTypeLine() const
 void DialogCurveIntersectAxis::SetTypeLine(const QString &value)
 {
     ChangeCurrentData(ui->comboBoxLineType, value);
-    vis->setLineStyle(VAbstractTool::LineStyleToPenStyle(value));
+    vis->setLineStyle(LineStyleToPenStyle(value));
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -209,8 +206,7 @@ void DialogCurveIntersectAxis::ShowDialog(bool click)
             QLineF line = QLineF(static_cast<QPointF>(*point), scene->getScenePos());
 
             //Radius of point circle, but little bigger. Need handle with hover sizes.
-            qreal radius = ToPixel(DefPointRadius/*mm*/, Unit::Mm)*1.5;
-            if (line.length() <= radius)
+            if (line.length() <= ScaledRadius(SceneScale(qApp->getCurrentScene()))*1.5)
             {
                 return;
             }
@@ -220,7 +216,7 @@ void DialogCurveIntersectAxis::ShowDialog(bool click)
         SCASSERT(line != nullptr)
 
         this->SetAngle(line->Angle());//Show in dialog angle what user choose
-        emit ToolTip("");
+        emit ToolTip(QString());
 
         DialogAccepted();// Just set default values and don't show dialog
     }
@@ -256,7 +252,7 @@ void DialogCurveIntersectAxis::ChosenObject(quint32 id, const SceneObject &type)
             case (1):
                 if (type == SceneObject::Point)
                 {
-                    if (SetObject(id, ui->comboBoxAxisPoint, ""))
+                    if (SetObject(id, ui->comboBoxAxisPoint, QString()))
                     {
                         line->setAxisPointId(id);
                         line->RefreshGeometry();
@@ -312,9 +308,7 @@ void DialogCurveIntersectAxis::ShowVisualization()
 void DialogCurveIntersectAxis::SaveData()
 {
     pointName = ui->lineEditNamePoint->text();
-
     formulaAngle = ui->plainTextEditFormula->toPlainText();
-    formulaAngle.replace("\n", " ");
 
     VisToolCurveIntersectAxis *line = qobject_cast<VisToolCurveIntersectAxis *>(vis);
     SCASSERT(line != nullptr)
@@ -322,7 +316,7 @@ void DialogCurveIntersectAxis::SaveData()
     line->setObject1Id(getCurveId());
     line->setAxisPointId(GetBasePointId());
     line->SetAngle(formulaAngle);
-    line->setLineStyle(VAbstractTool::LineStyleToPenStyle(GetTypeLine()));
+    line->setLineStyle(LineStyleToPenStyle(GetTypeLine()));
     line->RefreshGeometry();
 }
 

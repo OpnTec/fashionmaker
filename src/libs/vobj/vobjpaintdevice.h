@@ -6,7 +6,7 @@
  **
  **  @brief
  **  @copyright
- **  This source code is part of the Valentine project, a pattern making
+ **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2013-2015 Valentina project
  **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
@@ -43,8 +43,8 @@ class VObjPaintDevice : public QPaintDevice
 {
 public:
     VObjPaintDevice();
-    virtual ~VObjPaintDevice() Q_DECL_OVERRIDE;
-    virtual QPaintEngine *paintEngine() const Q_DECL_OVERRIDE;
+    virtual ~VObjPaintDevice() override;
+    virtual QPaintEngine *paintEngine() const override;
 
     QString getFileName() const;
     void setFileName(const QString &value);
@@ -59,7 +59,7 @@ public:
     void setResolution(int dpi);
 
 protected:
-    virtual int metric(PaintDeviceMetric metric) const Q_DECL_OVERRIDE;
+    virtual int metric(PaintDeviceMetric metric) const override;
 private:
     Q_DISABLE_COPY(VObjPaintDevice)
     QSharedPointer<VObjEngine> engine;

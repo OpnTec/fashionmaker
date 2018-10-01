@@ -6,7 +6,7 @@
  **
  **  @brief
  **  @copyright
- **  This source code is part of the Valentine project, a pattern making
+ **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2016 Valentina project
  **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
@@ -48,36 +48,48 @@ class VisToolMove : public VisOperation
     Q_OBJECT
 public:
     explicit VisToolMove(const VContainer *data, QGraphicsItem *parent = nullptr);
-    virtual ~VisToolMove();
+    virtual ~VisToolMove() = default;
 
-    virtual void RefreshGeometry() Q_DECL_OVERRIDE;
+    virtual void   RefreshGeometry() override;
 
     QString Angle() const;
     void    SetAngle(const QString &expression);
+
+    QString RotationAngle() const;
+    void    SetRotationAngle(const QString &expression);
 
     QString Length() const;
     qreal   LengthValue() const;
     void    SetLength(const QString &expression);
 
-    virtual int type() const Q_DECL_OVERRIDE {return Type;}
+    void SetRotationOriginPointId(quint32 value);
+
+    virtual int type() const override {return Type;}
     enum { Type = UserType + static_cast<int>(Vis::ToolMove)};
 private:
     Q_DISABLE_COPY(VisToolMove)
-    qreal                angle;
-    qreal                length;
-    QGraphicsEllipseItem *pointOrigin;
-    QGraphicsEllipseItem *pointFinish;
+    qreal           angle;
+    qreal           rotationAngle;
+    qreal           length;
+    VScaledEllipse *pointOrigin;
+    VScaledEllipse *pointRotationOrigin;
+    VScaledEllipse *pointFinish;
+    VCurvePathItem *angleArc;
+    VScaledLine    *rotationLine;
+    VScaledLine    *xAxis;
 
     template <class Item>
     QGraphicsPathItem *AddOriginCurve(quint32 id, int &i);
 
     template <class Item>
-    int AddMovedCurve(qreal angle, qreal length, quint32 id, int i);
+    int AddMovedRotatedCurve(qreal angle, qreal length, quint32 id, int i, qreal rotationAngle,
+                             const QPointF &rotationOrigin);
 
     static QPointF GetOriginPoint(const QVector<QGraphicsItem *> &objects);
 
     QVector<QGraphicsItem *> CreateOriginObjects(int &iPoint, int &iCurve);
-    void CreateMovedObjects(int &iPoint, int &iCurve, qreal length, qreal angle);
+    void CreateMovedRotatedObjects(int &iPoint, int &iCurve, qreal length, qreal angle, qreal rotationAngle,
+                                   const QPointF &rotationOrigin);
 };
 
 #endif // VISTOOLMOVE_H

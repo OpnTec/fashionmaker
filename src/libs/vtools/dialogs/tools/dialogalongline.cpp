@@ -6,7 +6,7 @@
  **
  **  @brief
  **  @copyright
- **  This source code is part of the Valentine project, a pattern making
+ **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2013-2015 Valentina project
  **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
@@ -41,7 +41,6 @@
 #include <QToolButton>
 #include <new>
 
-#include "../../tools/vabstracttool.h"
 #include "../../visualization/line/vistoolalongline.h"
 #include "../../visualization/visualization.h"
 #include "../ifc/xml/vabstractpattern.h"
@@ -68,9 +67,7 @@ DialogAlongLine::DialogAlongLine(const VContainer *data, const quint32 &toolId, 
 {
     ui->setupUi(this);
 
-#if QT_VERSION >= QT_VERSION_CHECK(5, 2, 0)
     ui->lineEditNamePoint->setClearButtonEnabled(true);
-#endif
 
     InitFormulaUI(ui);
     ui->lineEditNamePoint->setText(qApp->getCurrentDocument()->GenerateLabel(LabelType::NewLabel));
@@ -85,16 +82,16 @@ DialogAlongLine::DialogAlongLine(const VContainer *data, const quint32 &toolId, 
 
     FillComboBoxPoints(ui->comboBoxFirstPoint);
     FillComboBoxPoints(ui->comboBoxSecondPoint);
-    FillComboBoxTypeLine(ui->comboBoxLineType, VAbstractTool::LineStylesPics());
+    FillComboBoxTypeLine(ui->comboBoxLineType, LineStylesPics());
     FillComboBoxLineColors(ui->comboBoxLineColor);
 
     connect(ui->toolButtonExprLength, &QPushButton::clicked, this, &DialogAlongLine::FXLength);
     connect(ui->lineEditNamePoint, &QLineEdit::textChanged, this, &DialogAlongLine::NamePointChanged);
     connect(ui->plainTextEditFormula, &QPlainTextEdit::textChanged, this, &DialogAlongLine::FormulaTextChanged);
     connect(ui->pushButtonGrowLength, &QPushButton::clicked, this, &DialogAlongLine::DeployFormulaTextEdit);
-    connect(ui->comboBoxFirstPoint, static_cast<void (QComboBox::*)(const QString &)>(&QComboBox::currentIndexChanged),
+    connect(ui->comboBoxFirstPoint, QOverload<const QString &>::of(&QComboBox::currentIndexChanged),
             this, &DialogAlongLine::PointChanged);
-    connect(ui->comboBoxSecondPoint, static_cast<void (QComboBox::*)(const QString &)>(&QComboBox::currentIndexChanged),
+    connect(ui->comboBoxSecondPoint, QOverload<const QString &>::of(&QComboBox::currentIndexChanged),
             this, &DialogAlongLine::PointChanged);
 
     vis = new VisToolAlongLine(data);
@@ -135,7 +132,7 @@ void DialogAlongLine::FXLength()
     DialogEditWrongFormula *dialog = new DialogEditWrongFormula(data, toolId, this);
     dialog->setWindowTitle(tr("Edit length"));
     dialog->SetFormula(GetFormula());
-    dialog->setPostfix(VDomDocument::UnitsToStr(qApp->patternUnit(), true));
+    dialog->setPostfix(UnitsToStr(qApp->patternUnit(), true));
     if (dialog->exec() == QDialog::Accepted)
     {
         SetFormula(dialog->GetFormula());
@@ -187,16 +184,16 @@ void DialogAlongLine::ChosenObject(quint32 id, const SceneObject &type)
                     }
                     break;
                 case 1:
-                    if (SetObject(id, ui->comboBoxSecondPoint, ""))
+                    if (SetObject(id, ui->comboBoxSecondPoint, QString()))
                     {
                         if (flagError)
                         {
                             line->setObject2Id(id);
-                            line->RefreshGeometry();
                             if (buildMidpoint)
                             {
                                 SetFormula(currentLength + QLatin1String("/2"));
                             }
+                            line->RefreshGeometry();
                             prepare = true;
                             this->setModal(true);
                             this->show();
@@ -220,7 +217,6 @@ void DialogAlongLine::SaveData()
     pointName = ui->lineEditNamePoint->text();
 
     formula = ui->plainTextEditFormula->toPlainText();
-    formula.replace("\n", " ");
 
     VisToolAlongLine *line = qobject_cast<VisToolAlongLine *>(vis);
     SCASSERT(line != nullptr)
@@ -228,7 +224,7 @@ void DialogAlongLine::SaveData()
     line->setObject1Id(GetFirstPointId());
     line->setObject2Id(GetSecondPointId());
     line->setLength(formula);
-    line->setLineStyle(VAbstractTool::LineStyleToPenStyle(GetTypeLine()));
+    line->setLineStyle(LineStyleToPenStyle(GetTypeLine()));
     line->RefreshGeometry();
 }
 
@@ -273,6 +269,9 @@ void DialogAlongLine::Build(const Tool &type)
     if (type == Tool::Midpoint)
     {
         buildMidpoint = true;
+        VisToolAlongLine *line = qobject_cast<VisToolAlongLine *>(vis);
+        SCASSERT(line != nullptr)
+        line->setMidPointMode(buildMidpoint);
     }
 }
 
@@ -320,7 +319,7 @@ void DialogAlongLine::SetFormula(const QString &value)
 void DialogAlongLine::SetTypeLine(const QString &value)
 {
     ChangeCurrentData(ui->comboBoxLineType, value);
-    vis->setLineStyle(VAbstractTool::LineStyleToPenStyle(value));
+    vis->setLineStyle(LineStyleToPenStyle(value));
 }
 
 //---------------------------------------------------------------------------------------------------------------------

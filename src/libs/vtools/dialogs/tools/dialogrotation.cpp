@@ -6,7 +6,7 @@
  **
  **  @brief
  **  @copyright
- **  This source code is part of the Valentine project, a pattern making
+ **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2016 Valentina project
  **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
@@ -60,6 +60,7 @@
 #include "../vpatterndb/vtranslatevars.h"
 #include "../vwidgets/vabstractmainwindow.h"
 #include "../vwidgets/vmaingraphicsscene.h"
+#include "../vwidgets/vmaingraphicsview.h"
 #include "ui_dialogrotation.h"
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -96,7 +97,7 @@ DialogRotation::DialogRotation(const VContainer *data, const quint32 &toolId, QW
     connect(ui->toolButtonExprAngle, &QPushButton::clicked, this, &DialogRotation::FXAngle);
     connect(ui->plainTextEditFormula, &QPlainTextEdit::textChanged, this, &DialogRotation::AngleChanged);
     connect(ui->pushButtonGrowLength, &QPushButton::clicked, this, &DialogRotation::DeployAngleTextEdit);
-    connect(ui->comboBoxOriginPoint, static_cast<void (QComboBox::*)(const QString &)>(&QComboBox::currentIndexChanged),
+    connect(ui->comboBoxOriginPoint, QOverload<const QString &>::of(&QComboBox::currentIndexChanged),
             this, &DialogRotation::PointChanged);
 
     vis = new VisToolRotation(data);
@@ -197,6 +198,8 @@ void DialogRotation::ShowDialog(bool click)
         scene->ToggleSplineHover(false);
         scene->ToggleSplinePathHover(false);
 
+        qApp->getSceneView()->AllowRubberBand(false);
+
         emit ToolTip(tr("Select origin point"));
     }
     else if (not stage1 && prepare && click)
@@ -216,8 +219,7 @@ void DialogRotation::ShowDialog(bool click)
         const QLineF line = QLineF(static_cast<QPointF>(*point), scene->getScenePos());
 
         //Radius of point circle, but little bigger. Need handle with hover sizes.
-        const qreal radius = ToPixel(DefPointRadius/*mm*/, Unit::Mm)*1.5;
-        if (line.length() <= radius)
+        if (line.length() <= ScaledRadius(SceneScale(qApp->getCurrentScene()))*1.5)
         {
             return;
         }
@@ -227,7 +229,7 @@ void DialogRotation::ShowDialog(bool click)
 
         SetAngle(operation->Angle());//Show in dialog angle that a user choose
         setModal(true);
-        emit ToolTip("");
+        emit ToolTip(QString());
         timerAngle->start();
         show();
     }
@@ -240,16 +242,19 @@ void DialogRotation::ChosenObject(quint32 id, const SceneObject &type)
     {
         if (type == SceneObject::Point)
         {
+            VisToolRotation *operation = qobject_cast<VisToolRotation *>(vis);
+            SCASSERT(operation != nullptr)
+
             if (objects.contains(id))
             {
-                emit ToolTip(tr("Select origin point that is not part of the list of objects"));
-                return;
+                // It's not really logical for a user that a center of rotation no need to select.
+                // To fix this issue we just silently remove it from the list.
+                objects.removeOne(id);
+                operation->SetObjects(objects.toVector());
             }
 
-            if (SetObject(id, ui->comboBoxOriginPoint, ""))
+            if (SetObject(id, ui->comboBoxOriginPoint, QString()))
             {
-                VisToolRotation *operation = qobject_cast<VisToolRotation *>(vis);
-                SCASSERT(operation != nullptr)
                 VAbstractMainWindow *window = qobject_cast<VAbstractMainWindow *>(qApp->getMainWindow());
                 SCASSERT(window != nullptr)
                 connect(operation, &Visualization::ToolTip, window, &VAbstractMainWindow::ShowToolTip);
@@ -330,10 +335,10 @@ void DialogRotation::SuffixChanged()
             if (m_suffix != suffix)
             {
                 QRegularExpression rx(NameRegExp());
-                const QStringList uniqueNames = VContainer::AllUniqueNames();
-                for (int i=0; i < uniqueNames.size(); ++i)
+                const QStringList uniqueNames = data->AllUniqueNames();
+                for (auto &uniqueName : uniqueNames)
                 {
-                    const QString name = uniqueNames.at(i) + suffix;
+                    const QString name = uniqueName + suffix;
                     if (not rx.match(name).hasMatch() || not data->IsUnique(name))
                     {
                         flagName = false;
@@ -370,9 +375,7 @@ void DialogRotation::ShowVisualization()
 void DialogRotation::SaveData()
 {
     m_suffix = ui->lineEditSuffix->text();
-
     formulaAngle = ui->plainTextEditFormula->toPlainText();
-    formulaAngle.replace("\n", " ");
 
     VisToolRotation *operation = qobject_cast<VisToolRotation *>(vis);
     SCASSERT(operation != nullptr)

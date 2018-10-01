@@ -65,12 +65,12 @@ QmuParserBase::QmuParserBase()
     : m_locale(QLocale::c()),
       m_decimalPoint(QLocale::c().decimalPoint()),
       m_thousandsSeparator(QLocale::c().groupSeparator()),
+      m_FunDef(),
+      m_pTokenReader(),
       m_pParseFormula(&QmuParserBase::ParseString),
       m_vRPN(),
       m_vStringBuf(),
       m_vStringVarBuf(),
-      m_pTokenReader(),
-      m_FunDef(),
       m_PostOprtDef(),
       m_InfixOprtDef(),
       m_OprtDef(),
@@ -101,12 +101,12 @@ QmuParserBase::QmuParserBase(const QmuParserBase &a_Parser)
     : m_locale(a_Parser.getLocale()),
       m_decimalPoint(a_Parser.getDecimalPoint()),
       m_thousandsSeparator(a_Parser.getThousandsSeparator()),
+      m_FunDef(),
+      m_pTokenReader(),
       m_pParseFormula(&QmuParserBase::ParseString),
       m_vRPN(),
       m_vStringBuf(),
       m_vStringVarBuf(),
-      m_pTokenReader(),
-      m_FunDef(),
       m_PostOprtDef(),
       m_InfixOprtDef(),
       m_OprtDef(),
@@ -143,7 +143,10 @@ QmuParserBase::~QmuParserBase()
  */
 QmuParserBase& QmuParserBase::operator=(const QmuParserBase &a_Parser)
 {
-    Assign(a_Parser);
+    if (this != &a_Parser)
+    {
+        Assign(a_Parser);
+    }
     return *this;
 }
 
@@ -335,7 +338,7 @@ QString QmuParserBase::GetVersion(EParserVersionInfo eInfo)
 void QmuParserBase::AddCallback(const QString &a_strName, const QmuParserCallback &a_Callback,
                                 funmap_type &a_Storage, const QString &a_szCharSet )
 {
-    if (a_Callback.GetAddr()==0)
+    if (a_Callback.GetAddr() == nullptr)
     {
         Error(ecINVALID_FUN_PTR);
     }
@@ -378,11 +381,8 @@ void QmuParserBase::AddCallback(const QString &a_strName, const QmuParserCallbac
 void QmuParserBase::CheckOprt(const QString &a_sName, const QmuParserCallback &a_Callback,
                               const QString &a_szCharSet) const
 {
-    const std::wstring a_sNameStd = a_sName.toStdWString();
-    const std::wstring a_szCharSetStd = a_szCharSet.toStdWString();
-
-    if ( a_sNameStd.length() == false || (a_sNameStd.find_first_not_of(a_szCharSetStd)!=string_type::npos) ||
-         (a_sNameStd.at(0)>='0' && a_sNameStd.at(0)<='9'))
+    if ( a_sName.isEmpty() || (FindFirstNotOf(a_sName, a_szCharSet) != -1) ||
+         (a_sName.at(0)>='0' && a_sName.at(0)<='9'))
     {
         switch (a_Callback.GetCode())
         {
@@ -407,11 +407,8 @@ void QmuParserBase::CheckOprt(const QString &a_sName, const QmuParserCallback &a
  */
 void QmuParserBase::CheckName(const QString &a_sName, const QString &a_szCharSet) const
 {
-    std::wstring a_sNameStd = a_sName.toStdWString();
-    std::wstring a_szCharSetStd = a_szCharSet.toStdWString();
-
-    if ( a_sNameStd.length() == false || (a_sNameStd.find_first_not_of(a_szCharSetStd)!=string_type::npos) ||
-         (a_sNameStd[0]>='0' && a_sNameStd[0]<='9'))
+    if ( a_sName.isEmpty() || (FindFirstNotOf(a_sName, a_szCharSet) != -1) ||
+         (a_sName.at(0)>='0' && a_sName.at(0)<='9'))
     {
         Error(ecINVALID_NAME);
     }
@@ -439,7 +436,7 @@ void QmuParserBase::SetExpr(const QString &a_sExpr)
     // when calling tellg on a stringstream created from the expression after
     // reading a value at the end of an expression. (qmu::QmuParser::IsVal function)
     // (tellg returns -1 otherwise causing the parser to ignore the value)
-    QString sBuf(a_sExpr + " " );
+    QString sBuf(a_sExpr + QChar(' ') );
     m_pTokenReader->SetFormula(sBuf);
     ReInit();
 }
@@ -579,7 +576,7 @@ void QmuParserBase::DefineStrConst(const QString &a_strName, const QString &a_st
  */
 void QmuParserBase::DefineVar(const QString &a_sName, qreal *a_pVar)
 {
-    if (a_pVar==0)
+    if (a_pVar == nullptr)
     {
         Error(ecINVALID_VAR_PTR);
     }
@@ -784,7 +781,7 @@ void QmuParserBase::ApplyFunc( QStack<token_type> &a_stOpt, QStack<token_type> &
     assert(m_pTokenReader.get());
 
     // Operator stack empty or does not contain tokens with callback functions
-    if (a_stOpt.empty() || a_stOpt.top().GetFuncAddr()==0 )
+    if (a_stOpt.empty() || a_stOpt.top().GetFuncAddr() == nullptr)
     {
         return;
     }
@@ -1407,9 +1404,7 @@ void QmuParserBase::CreateRPN() const
                 }
                 ++stArgCount.top();
                 // fallthrough intentional (no break!)
-            #ifdef Q_CC_CLANG
-                [[clang::fallthrough]];
-            #endif
+                QMUP_FALLTHROUGH
             case cmEND:
                 ApplyRemainingOprt(stOpt, stVal);
                 break;
@@ -1450,7 +1445,7 @@ void QmuParserBase::CreateRPN() const
                     // The opening bracket was popped from the stack now check if there
                     // was a function before this bracket
                     if (stOpt.size() && stOpt.top().GetCode()!=cmOPRT_INFIX && stOpt.top().GetCode()!=cmOPRT_BIN &&
-                            stOpt.top().GetFuncAddr()!=0)
+                            stOpt.top().GetFuncAddr()!=nullptr)
                     {
                         ApplyFunc(stOpt, stVal, iArgCount);
                     }
@@ -1466,9 +1461,7 @@ void QmuParserBase::CreateRPN() const
             case cmIF:
                 m_nIfElseCounter++;
                 // fallthrough intentional (no break!)
-            #ifdef Q_CC_CLANG
-                [[clang::fallthrough]];
-            #endif
+                QMUP_FALLTHROUGH
             case cmLE:
             case cmGE:
             case cmNEQ:

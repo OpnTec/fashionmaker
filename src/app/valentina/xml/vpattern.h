@@ -6,7 +6,7 @@
  **
  **  @brief
  **  @copyright
- **  This source code is part of the Valentine project, a pattern making
+ **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2013-2015 Valentina project
  **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
@@ -36,6 +36,8 @@
 
 class VMainGraphicsScene;
 class VNodeDetail;
+struct VToolSinglePointInitData;
+struct VToolLinePointInitData;
 
 /**
  * @brief The VPattern class working with pattern file.
@@ -44,43 +46,54 @@ class VPattern : public VAbstractPattern
 {
     Q_OBJECT
 public:
-    VPattern(VContainer *data, Draw *mode, VMainGraphicsScene *sceneDraw, VMainGraphicsScene *sceneDetail,
+    VPattern(VContainer *data, VMainGraphicsScene *sceneDraw, VMainGraphicsScene *sceneDetail,
              QObject *parent = nullptr);
 
-    virtual void   CreateEmptyFile() Q_DECL_OVERRIDE;
+    virtual void   CreateEmptyFile() override;
 
     void           Parse(const Document &parse);
 
-    void           setCurrentData();
-    virtual void   UpdateToolData(const quint32 &id, VContainer *data) Q_DECL_OVERRIDE;
+    void           GarbageCollector(bool commit = false);
 
-    virtual void   IncrementReferens(quint32 id) const Q_DECL_OVERRIDE;
-    virtual void   DecrementReferens(quint32 id) const Q_DECL_OVERRIDE;
+    void           setCurrentData();
+    virtual void   UpdateToolData(const quint32 &id, VContainer *data) override;
+    VContainer     GetCompleteData() const;
+
+    virtual void   IncrementReferens(quint32 id) const override;
+    virtual void   DecrementReferens(quint32 id) const override;
 
     quint32        SPointActiveDraw();
 
     QVector<quint32> GetActivePPPieces() const;
 
-    virtual void   setXMLContent(const QString &fileName) Q_DECL_OVERRIDE;
-    virtual bool   SaveDocument(const QString &fileName, QString &error) const Q_DECL_OVERRIDE;
+    virtual void   setXMLContent(const QString &fileName) override;
+    virtual bool   SaveDocument(const QString &fileName, QString &error) override;
 
     QRectF         ActiveDrawBoundingRect() const;
 
-    QString        GetAuthor() const;
-    void           SetAuthor(const QString &text);
-
     void AddEmptyIncrement(const QString &name);
+    void AddEmptyPreviewCalculation(const QString &name);
+
     void AddEmptyIncrementAfter(const QString &after, const QString &name);
+    void AddEmptyPreviewCalculationAfter(const QString &after, const QString &name);
+
     void RemoveIncrement(const QString &name);
+    void RemovePreviewCalculation(const QString &name);
+
     void MoveUpIncrement(const QString &name);
+    void MoveUpPreviewCalculation(const QString &name);
+
     void MoveDownIncrement(const QString &name);
+    void MoveDownPreviewCalculation(const QString &name);
 
     void SetIncrementName(const QString &name, const QString &text);
     void SetIncrementFormula(const QString &name, const QString &text);
     void SetIncrementDescription(const QString &name, const QString &text);
 
-    virtual QString GenerateLabel(const LabelType &type, const QString &reservedName = QString())const Q_DECL_OVERRIDE;
-    virtual QString GenerateSuffix() const Q_DECL_OVERRIDE;
+    void ReplaceNameInFormula(QVector<VFormulaField> &expressions, const QString &name, const QString &newName);
+
+    virtual QString GenerateLabel(const LabelType &type, const QString &reservedName = QString())const override;
+    virtual QString GenerateSuffix() const override;
 
     bool IsDefCustom() const;
     void SetDefCustom(bool value);
@@ -94,22 +107,23 @@ public:
     bool IsReadOnly() const;
     void SetReadOnly(bool rOnly);
 
+    void LiteParseIncrements();
+
     static const QString AttrReadOnly;
 
+    int ElementsToParse() const;
+
 public slots:
-    virtual void LiteParseTree(const Document &parse) Q_DECL_OVERRIDE;
+    virtual void LiteParseTree(const Document &parse) override;
 
 protected:
-    virtual void   customEvent(QEvent * event) Q_DECL_OVERRIDE;
+    virtual void   customEvent(QEvent * event) override;
 
 private:
     Q_DISABLE_COPY(VPattern)
 
     /** @brief data container with data. */
     VContainer     *data;
-
-    /** @brief mode current draw mode. */
-    Draw           *mode;
 
     VMainGraphicsScene *sceneDraw;
     VMainGraphicsScene *sceneDetail;
@@ -119,10 +133,11 @@ private:
     void           ParseDrawElement(const QDomNode& node, const Document &parse);
     void           ParseDrawMode(const QDomNode& node, const Document &parse, const Draw &mode);
     void           ParseDetailElement(QDomElement &domElement, const Document &parse);
-    void           ParseDetailNodes(const QDomElement &domElement, VPiece &detail, qreal width, bool closed) const;
-    void           ParsePieceDataTag(const QDomElement &domElement, VPiece &detail) const;
-    void           ParsePiecePatternInfo(const QDomElement &domElement, VPiece &detail) const;
-    void           ParsePieceGrainline(const QDomElement &domElement, VPiece &detail) const;
+    void           ParseDetailInternals(const QDomElement &domElement, VPiece &detail) const;
+    QVector<VPieceNode> ParseDetailNodes(const QDomElement &domElement, qreal width, bool closed) const;
+    VPieceLabelData ParsePieceDataTag(const QDomElement &domElement, VPieceLabelData ppData) const;
+    VPatternLabelData ParsePiecePatternInfo(const QDomElement &domElement, VPatternLabelData patternInfo) const;
+    VGrainlineData ParsePieceGrainline(const QDomElement &domElement, VGrainlineData gGeometry) const;
     void           ParseDetails(const QDomElement &domElement, const Document &parse);
 
     void           ParsePointElement(VMainGraphicsScene *scene, QDomElement &domElement,
@@ -142,13 +157,11 @@ private:
 
     void           ParsePathElement(VMainGraphicsScene *scene, QDomElement &domElement, const Document &parse);
 
-    void           ParseIncrementsElement(const QDomNode& node);
+    void           ParseIncrementsElement(const QDomNode& node, const Document &parse);
     void           PrepareForParse(const Document &parse);
     void           ToolsCommonAttributes(const QDomElement &domElement, quint32 &id);
-    void           PointsCommonAttributes(const QDomElement &domElement, quint32 &id, QString &name, qreal &mx,
-                                          qreal &my, QString &typeLine, QString &lineColor);
-    void           PointsCommonAttributes(const QDomElement &domElement, quint32 &id, QString &name, qreal &mx,
-                                          qreal &my);
+    void           PointsWithLineCommonAttributes(const QDomElement &domElement, VToolLinePointInitData &initData);
+    void           PointsCommonAttributes(const QDomElement &domElement, VToolSinglePointInitData &initData);
     void           PointsCommonAttributes(const QDomElement &domElement, quint32 &id, qreal &mx, qreal &my);
     void           SplinesCommonAttributes(const QDomElement &domElement, quint32 &id, quint32 &idObject,
                                            quint32 &idTool);
@@ -167,6 +180,7 @@ private:
     void ParseToolPointOfContact(VMainGraphicsScene *scene, QDomElement &domElement, const Document &parse);
     void ParseNodePoint(const QDomElement &domElement, const Document &parse);
     void ParsePinPoint(const QDomElement &domElement, const Document &parse);
+    void ParsePlaceLabel(QDomElement &domElement, const Document &parse);
     void ParseToolHeight(VMainGraphicsScene *scene, const QDomElement &domElement, const Document &parse);
     void ParseToolTriangle(VMainGraphicsScene *scene, const QDomElement &domElement, const Document &parse);
     void ParseToolPointOfIntersection(VMainGraphicsScene *scene, const QDomElement &domElement, const Document &parse);
@@ -186,7 +200,7 @@ private:
     void ParseToolTrueDarts(VMainGraphicsScene *scene, const QDomElement &domElement, const Document &parse);
 
     // TODO. Delete if minimal supported version is 0.2.7
-    Q_STATIC_ASSERT_X(VPatternConverter::PatternMinVer < CONVERTER_VERSION_CHECK(0, 2, 7),
+    Q_STATIC_ASSERT_X(VPatternConverter::PatternMinVer < FORMAT_VERSION(0, 2, 7),
                       "Time to refactor the code.");
     void ParseOldToolSpline(VMainGraphicsScene *scene, const QDomElement &domElement, const Document &parse);
 
@@ -194,7 +208,7 @@ private:
     void ParseToolCubicBezier(VMainGraphicsScene *scene, const QDomElement &domElement, const Document &parse);
 
     // TODO. Delete if minimal supported version is 0.2.7
-    Q_STATIC_ASSERT_X(VPatternConverter::PatternMinVer < CONVERTER_VERSION_CHECK(0, 2, 7),
+    Q_STATIC_ASSERT_X(VPatternConverter::PatternMinVer < FORMAT_VERSION(0, 2, 7),
                       "Time to refactor the code.");
     void ParseOldToolSplinePath(VMainGraphicsScene *scene, const QDomElement &domElement, const Document &parse);
 
@@ -220,7 +234,16 @@ private:
     QDomElement MakeEmptyIncrement(const QString &name);
     QDomElement FindIncrement(const QString &name) const;
 
-    void GarbageCollector();
+    void NewEmptyIncrement(const QString &type, const QString &name);
+    void NewEmptyIncrementAfter(const QString &type, const QString &after, const QString &name);
+    void RemoveIncrement(const QString &type, const QString &name);
+    void MoveUpIncrement(const QString &type, const QString &name);
+    void MoveDownIncrement(const QString &type, const QString &name);
+
+    void SetIncrementAttribute(const QString &name, const QString &attr, const QString &text);
+
+    QString LastDrawName() const;
+    quint32 LastToolId() const;
 };
 
 #endif // VPATTERN_H

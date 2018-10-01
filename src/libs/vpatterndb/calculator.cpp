@@ -6,7 +6,7 @@
  **
  **  @brief
  **  @copyright
- **  This source code is part of the Valentine project, a pattern making
+ **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2013-2015 Valentina project
  **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
@@ -32,9 +32,11 @@
 #include <QStringData>
 #include <QStringDataPtr>
 #include <QStringList>
+#include <QSharedPointer>
 
 #include "../vmisc/def.h"
 #include "../qmuparser/qmuparsererror.h"
+#include "variables/vinternalvariable.h"
 
 //---------------------------------------------------------------------------------------------------------------------
 /**
@@ -51,11 +53,15 @@
  *
  */
 Calculator::Calculator()
-    :QmuFormulaBase()
+    : QmuFormulaBase(),
+      m_varsValues(),
+      m_vars(nullptr)
 {
     InitCharSets();
-    setAllowSubexpressions(false);//Only one expression per time
 
+    // Parser doesn't know any variable on this stage. So, we just use variable factory that for each unknown variable
+    // set value to 0.
+    SetVarFactory(VarFactory, this);
     SetSepForEval();
 }
 
@@ -69,74 +75,44 @@ Calculator::Calculator()
  * @param formula string of formula.
  * @return value of formula.
  */
-qreal Calculator::EvalFormula(const QHash<QString, qreal *> &vars, const QString &formula)
+qreal Calculator::EvalFormula(const QHash<QString, QSharedPointer<VInternalVariable>> *vars, const QString &formula)
 {
-    // Parser doesn't know any variable on this stage. So, we just use variable factory that for each unknown variable
-    // set value to 0.
-    SetVarFactory(AddVariable, this);
-    SetSepForEval();//Reset separators options
+    // Converting with locale is much faster in case of single numerical value.
+    QLocale c(QLocale::C);
+    bool ok = false;
+    qreal result = c.toDouble(formula, &ok);
+    if (ok)
+    {
+        return result;
+    }
 
+    SetSepForEval();//Reset separators options
+    m_vars = vars;
     SetExpr(formula);
 
-    qreal result = 0;
-    result = Eval();
-
-    QMap<int, QString> tokens = this->GetTokens();
-
-    // Remove "-" from tokens list if exist. If don't do that unary minus operation will broken.
-    RemoveAll(tokens, QStringLiteral("-"));
-
-    for (int i = 0; i < builInFunctions.size(); ++i)
-    {
-        if (tokens.isEmpty())
-        {
-            break;
-        }
-        RemoveAll(tokens, builInFunctions.at(i));
-    }
-
-    if (tokens.isEmpty())
-    {
-        return result; // We have found only numbers in expression.
-    }
-
-    // Add variables to parser because we have deal with expression with variables.
-    InitVariables(vars, tokens, formula);
+    m_pTokenReader->IgnoreUndefVar(true);
     return Eval();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-/**
- * @brief Calculator::InitVariables add variables to parser.
- *
- * For optimization purpose we try don't add variables that we don't need.
- *
- * @param vars list of variables.
- * @param tokens all tokens (measurements names, variables with lengths) that parser have found in expression.
- * @param formula expression, need for throwing better error message.
- */
-void Calculator::InitVariables(const QHash<QString, qreal *> &vars, const QMap<int, QString> &tokens,
-                               const QString &formula)
+qreal *Calculator::VarFactory(const QString &a_szName, void *a_pUserData)
 {
-    QMap<int, QString>::const_iterator i = tokens.constBegin();
-    while (i != tokens.constEnd())
+    Q_UNUSED(a_szName)
+    Calculator *calc = static_cast<Calculator *>(a_pUserData);
+
+    if (calc->m_vars != nullptr && calc->m_vars->contains(a_szName))
     {
-        bool found = false;
-        if (vars.contains(i.value()))
-        {
-            DefineVar(i.value(), vars.value(i.value()));
-            found = true;
-        }
-
-        if (found == false && builInFunctions.contains(i.value()))
-        {// We have found built-in function
-            found = true;
-        }
-
-        if (found == false)
-        {
-            throw qmu::QmuParserError (qmu::ecUNASSIGNABLE_TOKEN, i.value(), formula, i.key());
-        }
-        ++i;
+        QSharedPointer<qreal> val(new qreal(*calc->m_vars->value(a_szName)->GetValue()));
+        calc->m_varsValues.append(val);
+        return val.data();
     }
+
+    if (a_szName.startsWith('#'))
+    {
+        QSharedPointer<qreal> val(new qreal(0));
+        calc->m_varsValues.append(val);
+        return val.data();
+    }
+
+    throw qmu::QmuParserError (qmu::ecUNASSIGNABLE_TOKEN);
 }

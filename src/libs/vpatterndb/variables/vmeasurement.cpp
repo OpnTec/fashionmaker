@@ -6,7 +6,7 @@
  **
  **  @brief
  **  @copyright
- **  This source code is part of the Valentine project, a pattern making
+ **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2013-2015 Valentina project
  **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
@@ -38,7 +38,7 @@
 
 //---------------------------------------------------------------------------------------------------------------------
 /**
- * @brief VMeasurement create measurement for standard table
+ * @brief VMeasurement create measurement for multisize table
  * @param name measurement's name
  * @param base value in base size and height
  * @param ksize increment in sizes
@@ -50,10 +50,11 @@
 VMeasurement::VMeasurement(quint32 index, const QString &name, qreal baseSize, qreal baseHeight, const qreal &base,
                            const qreal &ksize, const qreal &kheight, const QString &gui_text,
                            const QString &description, const QString &tagName)
-    :VVariable(name, baseSize, baseHeight, base, ksize, kheight, description),
-      d(new VMeasurementData(index, gui_text, tagName))
+    :VVariable(name, description),
+      d(new VMeasurementData(index, gui_text, tagName, baseSize, baseHeight, base, ksize, kheight))
 {
     SetType(VarType::Measurement);
+    VInternalVariable::SetValue(d->base);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -68,9 +69,10 @@ VMeasurement::VMeasurement(quint32 index, const QString &name, qreal baseSize, q
 VMeasurement::VMeasurement(VContainer *data, quint32 index, const QString &name, const qreal &base,
                            const QString &formula, bool ok, const QString &gui_text, const QString &description,
                            const QString &tagName)
-    :VVariable(name, base, description), d(new VMeasurementData(data, index, formula, ok, gui_text, tagName))
+    :VVariable(name, description), d(new VMeasurementData(data, index, formula, ok, gui_text, tagName, base))
 {
     SetType(VarType::Measurement);
+    VInternalVariable::SetValue(base);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -95,12 +97,12 @@ VMeasurement::~VMeasurement()
 {}
 
 //---------------------------------------------------------------------------------------------------------------------
-QStringList VMeasurement::ListHeights(QMap<GHeights, bool> heights, Unit patternUnit)
+QStringList VMeasurement::ListHeights(const QMap<GHeights, bool> &heights, Unit patternUnit)
 {
     QStringList list;
     if (patternUnit == Unit::Inch)
     {
-        qWarning()<<"Standard table doesn't support inches.";
+        qWarning()<<"Multisize table doesn't support inches.";
         return list;
     }
 
@@ -109,7 +111,7 @@ QStringList VMeasurement::ListHeights(QMap<GHeights, bool> heights, Unit pattern
     {
         if (i.value() && i.key() != GHeights::ALL)
         {
-            ListValue(list, static_cast<int>(i.key()), patternUnit);
+            list.append(QString::number(UnitConvertor(static_cast<int>(i.key()), Unit::Cm, patternUnit)));
         }
         ++i;
     }
@@ -122,12 +124,12 @@ QStringList VMeasurement::ListHeights(QMap<GHeights, bool> heights, Unit pattern
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QStringList VMeasurement::ListSizes(QMap<GSizes, bool> sizes, Unit patternUnit)
+QStringList VMeasurement::ListSizes(const QMap<GSizes, bool> &sizes, Unit patternUnit)
 {
     QStringList list;
     if (patternUnit == Unit::Inch)
     {
-        qWarning()<<"Standard table doesn't support inches.";
+        qWarning()<<"Multisize table doesn't support inches.";
         return list;
     }
 
@@ -136,7 +138,7 @@ QStringList VMeasurement::ListSizes(QMap<GSizes, bool> sizes, Unit patternUnit)
     {
         if (i.value() && i.key() != GSizes::ALL)
         {
-            ListValue(list, static_cast<int>(i.key()), patternUnit);
+            list.append(QString::number(UnitConvertor(static_cast<int>(i.key()), Unit::Cm, patternUnit)));
         }
         ++i;
     }
@@ -154,13 +156,14 @@ QStringList VMeasurement::WholeListHeights(Unit patternUnit)
     QStringList list;
     if (patternUnit == Unit::Inch)
     {
-        qWarning()<<"Standard table doesn't support inches.";
+        qWarning()<<"Multisize table doesn't support inches.";
         return list;
     }
 
+    list.reserve((static_cast<int>(GHeights::H200) - static_cast<int>(GHeights::H50))/heightStep);
     for (int i = static_cast<int>(GHeights::H50); i<= static_cast<int>(GHeights::H200); i = i+heightStep)
     {
-        ListValue(list, i, patternUnit);
+        list.append(QString::number(UnitConvertor(i, Unit::Cm, patternUnit)));
     }
 
     return list;
@@ -172,13 +175,14 @@ QStringList VMeasurement::WholeListSizes(Unit patternUnit)
     QStringList list;
     if (patternUnit == Unit::Inch)
     {
-        qWarning()<<"Standard table doesn't support inches.";
+        qWarning()<<"Multisize table doesn't support inches.";
         return list;
     }
 
+    list.reserve((static_cast<int>(GSizes::S72) - static_cast<int>(GSizes::S22))/sizeStep);
     for (int i = static_cast<int>(GSizes::S22); i<= static_cast<int>(GSizes::S72); i = i+sizeStep)
     {
-       ListValue(list, i, patternUnit);
+       list.append(QString::number(UnitConvertor(i, Unit::Cm, patternUnit)));
     }
 
     return list;
@@ -213,11 +217,26 @@ bool VMeasurement::IsGradationHeightValid(const QString &height)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VMeasurement::ListValue(QStringList &list, qreal value, Unit patternUnit)
+qreal VMeasurement::CalcValue() const
 {
-    const qreal val = UnitConvertor(value, Unit::Cm, patternUnit);
-    const QString strVal = QString("%1").arg(val);
-    list.append(strVal);
+    if (d->currentUnit == nullptr || d->currentSize == nullptr || d->currentHeight == nullptr)
+    {
+        return VInternalVariable::GetValue();
+    }
+
+    if (*d->currentUnit == Unit::Inch)
+    {
+        qWarning("Gradation doesn't support inches");
+        return 0;
+    }
+
+    const qreal sizeIncrement = UnitConvertor(2.0, Unit::Cm, *d->currentUnit);
+    const qreal heightIncrement = UnitConvertor(6.0, Unit::Cm, *d->currentUnit);
+
+    // Formula for calculation gradation
+    const qreal k_size    = ( *d->currentSize - d->baseSize ) / sizeIncrement;
+    const qreal k_height  = ( *d->currentHeight - d->baseHeight ) / heightIncrement;
+    return d->base + k_size * d->ksize + k_height * d->kheight;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -251,14 +270,7 @@ QString VMeasurement::GetFormula() const
 //---------------------------------------------------------------------------------------------------------------------
 bool VMeasurement::IsCustom() const
 {
-    if (GetName().indexOf(CustomMSign) == 0)
-    {
-        return true;
-    }
-    else
-    {
-        return false;
-    }
+    return GetName().indexOf(CustomMSign) == 0;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -274,7 +286,82 @@ bool VMeasurement::IsFormulaOk() const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+bool VMeasurement::IsNotUsed() const
+{
+    return qFuzzyIsNull(d->base) && qFuzzyIsNull(d->ksize) && qFuzzyIsNull(d->kheight);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+qreal VMeasurement::GetValue() const
+{
+    return CalcValue();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+qreal *VMeasurement::GetValue()
+{
+    VInternalVariable::SetValue(CalcValue());
+    return VInternalVariable::GetValue();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 VContainer *VMeasurement::GetData()
 {
-    return &d->data;
+    return d->data.data();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VMeasurement::SetUnit(const Unit *unit)
+{
+    d->currentUnit = unit;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief GetBase return value in base size and height
+ * @return value
+ */
+qreal VMeasurement::GetBase() const
+{
+    return d->base;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VMeasurement::SetBase(const qreal &value)
+{
+    d->base = value;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief GetKsize return increment in sizes
+ * @return increment
+ */
+qreal VMeasurement::GetKsize() const
+{
+    return d->ksize;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+// cppcheck-suppress unusedFunction
+void VMeasurement::SetKsize(const qreal &value)
+{
+    d->ksize = value;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief GetKheight return increment in heights
+ * @return increment
+ */
+qreal VMeasurement::GetKheight() const
+{
+    return d->kheight;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+// cppcheck-suppress unusedFunction
+void VMeasurement::SetKheight(const qreal &value)
+{
+    d->kheight = value;
 }

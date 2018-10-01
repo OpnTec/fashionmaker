@@ -6,7 +6,7 @@
  **
  **  @brief
  **  @copyright
- **  This source code is part of the Valentine project, a pattern making
+ **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2013-2015 Valentina project
  **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
@@ -89,13 +89,13 @@ QWidget *VPE::VLineTypeProperty::createEditor(QWidget *parent, const QStyleOptio
     QMap<QString, QIcon>::const_iterator i = styles.constBegin();
     while (i != styles.constEnd())
     {
-        tmpEditor->addItem(i.value(), "", QVariant(i.key()));
+        tmpEditor->addItem(i.value(), QString(), QVariant(i.key()));
         ++i;
     }
 
     tmpEditor->setCurrentIndex(VProperty::d_ptr->VariantValue.toInt());
-    connect(tmpEditor, static_cast<void (QComboBox::*)(int)>(&QComboBox::currentIndexChanged), this,
-                     &VLineTypeProperty::currentIndexChanged);
+    connect(tmpEditor, QOverload<int>::of(&QComboBox::currentIndexChanged), this,
+            &VLineTypeProperty::currentIndexChanged);
 
     VProperty::d_ptr->editor = tmpEditor;
     return VProperty::d_ptr->editor;

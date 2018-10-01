@@ -6,7 +6,7 @@
  **
  **  @brief
  **  @copyright
- **  This source code is part of the Valentine project, a pattern making
+ **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2016 Valentina project
  **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
@@ -124,11 +124,16 @@ void TST_BuitInRegExp::TestCheckUnderlineExists_data()
     data.insert(line_, true);
     data.insert(angleLine_, true);
     data.insert(arc_, true);
+    data.insert(elarc_, true);
     data.insert(spl_, true);
     data.insert(splPath, false);
     data.insert(radiusArc_, true);
+    data.insert(radius1ElArc_, true);
+    data.insert(radius2ElArc_, true);
     data.insert(angle1Arc_, true);
     data.insert(angle2Arc_, true);
+    data.insert(angle1ElArc_, true);
+    data.insert(angle2ElArc_, true);
     data.insert(angle1Spl_, true);
     data.insert(angle2Spl_, true);
     data.insert(angle1SplPath, false);
@@ -140,6 +145,7 @@ void TST_BuitInRegExp::TestCheckUnderlineExists_data()
     data.insert(c2LengthSpl_, true);
     data.insert(c1LengthSplPath, false);
     data.insert(c2LengthSplPath, false);
+    data.insert(rotationElArc_, true);
 
     //Catch case when new internal variable appears.
     QCOMPARE(data.size(), builInVariables.size());
@@ -150,7 +156,7 @@ void TST_BuitInRegExp::TestCheckUnderlineExists_data()
     auto i = data.constBegin();
     while (i != data.constEnd())
     {
-        const QString tag = QString("Locale: '%1'. Name '%2'").arg(m_locale).arg(i.key());
+        const QString tag = QString("Locale: '%1'. Name '%2'").arg(m_locale, i.key());
         QTest::newRow(qUtf8Printable(tag)) << i.key() << i.value();
         ++i;
     }
@@ -166,7 +172,7 @@ void TST_BuitInRegExp::TestCheckUnderlineExists()
     if ((translated.right(1) == QLatin1String("_")) != exists)
     {
         const QString message = QString("String '%1' doesn't contain underline. Original string is '%2'")
-                .arg(translated).arg(name);
+                .arg(translated, name);
         QFAIL(qUtf8Printable(message));
     }
 }
@@ -177,11 +183,11 @@ void TST_BuitInRegExp::TestCheckInternalVaribleRegExp_data()
     QTest::addColumn<QString>("var");
     QTest::addColumn<QString>("originalName");
 
-    foreach(const QString &var, builInVariables)
+    for (auto &var : qAsConst(builInVariables))
     {
-        const QString tag = QString("Locale: '%1'. Var '%2'").arg(m_locale).arg(var);
+        const QString tag = QString("Locale: '%1'. Var '%2'").arg(m_locale, var);
         const QStringList originalNames = AllNames();
-        foreach(const QString &str, originalNames)
+        for (auto &str : originalNames)
         {
             QTest::newRow(qUtf8Printable(tag)) << var << str;
         }
@@ -220,6 +226,35 @@ void TST_BuitInRegExp::TestCheckInternalVaribleRegExp()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void TST_BuitInRegExp::TestTemplatePlaceholders()
+{
+    QSet<QString> originals;
+    QSet<QString> translations;
+    QStringList issue;
+
+    for (auto &placeholder : labelTemplatePlaceholders)
+    {
+        originals.insert(placeholder);
+        const QString translated = m_trMs->PlaceholderToUser(placeholder);
+
+        const QRegularExpression re(QLatin1String("^[^\\s]+$"));
+        if (re.match(translated).hasMatch())
+        {
+            translations.insert(translated);
+        }
+        else
+        {
+            issue << QString("Invalid translation '%1' for placeholder '%2' in locale '%3'.\n")
+                     .arg(translated, placeholder, m_locale);
+        }
+    }
+
+    QVERIFY2(issue.isEmpty(), qUtf8Printable(issue.join("")));
+    QCOMPARE(originals.size(), labelTemplatePlaceholders.size()); // All tags are unique
+    QCOMPARE(translations.size(), labelTemplatePlaceholders.size()); // All translated tags are unique
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 void TST_BuitInRegExp::cleanupTestCase()
 {
     RemoveTrVariables(m_locale);
@@ -232,9 +267,9 @@ void TST_BuitInRegExp::PrepareData()
 
     QTest::addColumn<QString>("originalName");
 
-    foreach(const QString &str, originalNames)
+    for (auto &str : originalNames)
     {
-        const QString tag = QString("Locale: '%1'. Name '%2'").arg(m_locale).arg(str);
+        const QString tag = QString("Locale: '%1'. Name '%2'").arg(m_locale, str);
         QTest::newRow(qUtf8Printable(tag)) << str;
     }
 }

@@ -6,7 +6,7 @@
  **
  **  @brief
  **  @copyright
- **  This source code is part of the Valentine project, a pattern making
+ **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2013-2015 Valentina project
  **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
@@ -36,16 +36,17 @@
 #include <QtGlobal>
 
 #include "dxfdef.h"
-#include "dxflib/../dxfdef.h"
+#include "libdxfrw/drw_base.h"
 
 class VDxfEngine;
+class VLayoutPiece;
 
 class VDxfPaintDevice : public QPaintDevice
 {
 public:
     VDxfPaintDevice();
-    virtual ~VDxfPaintDevice() Q_DECL_OVERRIDE;
-    virtual QPaintEngine *paintEngine() const Q_DECL_OVERRIDE;
+    virtual ~VDxfPaintDevice() override;
+    virtual QPaintEngine *paintEngine() const override;
 
     QString getFileName() const;
     void setFileName(const QString &value);
@@ -56,11 +57,19 @@ public:
     double getResolution() const;
     void   setResolution(double dpi);
 
+    DRW::Version GetVersion() const;
+    void         SetVersion(DRW::Version version);
+
+    void SetBinaryFormat(bool binary);
+    bool IsBinaryFromat() const;
+
     void setMeasurement(const VarMeasurement &var);
     void setInsunits(const VarInsunits &var);
 
+    bool ExportToAAMA(const QVector<VLayoutPiece> &details) const;
+
 protected:
-    virtual int metric(PaintDeviceMetric metric) const Q_DECL_OVERRIDE;
+    virtual int metric(PaintDeviceMetric metric) const override;
 private:
     Q_DISABLE_COPY(VDxfPaintDevice)
     VDxfEngine *engine;

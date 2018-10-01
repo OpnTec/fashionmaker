@@ -6,7 +6,7 @@
  **
  **  @brief
  **  @copyright
- **  This source code is part of the Valentine project, a pattern making
+ **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2015 Valentina project
  **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
@@ -28,40 +28,20 @@
 
 #include "ifcdef.h"
 
+#include <QBrush>
+#include <QIcon>
+#include <QMap>
+#include <QPainter>
+#include <QPen>
+#include <QPixmap>
 #include <QStaticStringData>
 #include <QStringData>
 #include <QStringDataPtr>
 
+#include "../vmisc/diagnostic.h"
+
 const QString CustomMSign    = QStringLiteral("@");
 const QString CustomIncrSign = QStringLiteral("#");
-
-#define DefWidth 1.2//mm
-
-//---------------------------------------------------------------------------------------------------------------------
-qreal WidthMainLine(Unit patternUnit)
-{
-    qreal _widthMainLine = DefWidth;
-    switch (patternUnit)
-    {
-        case Unit::Cm:
-            _widthMainLine = DefWidth/10.0;
-            break;
-        case Unit::Inch:
-            _widthMainLine = DefWidth/25.4;
-            break;
-        case Unit::Mm:
-        default:
-            _widthMainLine = DefWidth;
-            break;
-    }
-    return _widthMainLine;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-qreal WidthHairLine(Unit patternUnit)
-{
-    return WidthMainLine(patternUnit)/3.0;
-}
 
 const QString AttrType        = QStringLiteral("type");
 const QString AttrMx          = QStringLiteral("mx");
@@ -81,6 +61,7 @@ const QString AttrDartP3      = QStringLiteral("dartP3");
 const QString AttrX           = QStringLiteral("x");
 const QString AttrY           = QStringLiteral("y");
 const QString AttrTypeLine    = QStringLiteral("typeLine");
+const QString AttrCut         = QStringLiteral("cut");
 const QString AttrLength      = QStringLiteral("length");
 const QString AttrBasePoint   = QStringLiteral("basePoint");
 const QString AttrFirstPoint  = QStringLiteral("firstPoint");
@@ -110,6 +91,7 @@ const QString AttrKAsm1       = QStringLiteral("kAsm1");
 const QString AttrKAsm2       = QStringLiteral("kAsm2");
 const QString AttrKCurve      = QStringLiteral("kCurve");
 const QString AttrDuplicate   = QStringLiteral("duplicate");
+const QString AttrAScale      = QStringLiteral("aScale");
 const QString AttrPathPoint   = QStringLiteral("pathPoint");
 const QString AttrPSpline     = QStringLiteral("pSpline");
 const QString AttrAxisP1      = QStringLiteral("axisP1");
@@ -119,6 +101,7 @@ const QString AttrCurve1      = QStringLiteral("curve1");
 const QString AttrCurve2      = QStringLiteral("curve2");
 const QString AttrLineColor   = QStringLiteral("lineColor");
 const QString AttrColor       = QStringLiteral("color");
+const QString AttrPenStyle    = QStringLiteral("penStyle");
 const QString AttrFirstArc    = QStringLiteral("firstArc");
 const QString AttrSecondArc   = QStringLiteral("secondArc");
 const QString AttrCrossPoint  = QStringLiteral("crossPoint");
@@ -136,8 +119,19 @@ const QString AttrArc         = QStringLiteral("arc");
 const QString AttrSuffix      = QStringLiteral("suffix");
 const QString AttrIdObject    = QStringLiteral("idObject");
 const QString AttrInLayout    = QStringLiteral("inLayout");
+const QString AttrForbidFlipping = QStringLiteral("forbidFlipping");
+const QString AttrForceFlipping = QStringLiteral("forceFlipping");
 const QString AttrRotationAngle = QStringLiteral("rotationAngle");
 const QString AttrClosed      = QStringLiteral("closed");
+const QString AttrShowLabel   = QStringLiteral("showLabel");
+const QString AttrShowLabel1  = QStringLiteral("showLabel1");
+const QString AttrShowLabel2  = QStringLiteral("showLabel2");
+const QString AttrWidth       = QStringLiteral("width");
+const QString AttrHeight      = QStringLiteral("height");
+const QString AttrPlaceLabelType = QStringLiteral("placeLabelType");
+const QString AttrVersion     = QStringLiteral("version");
+const QString AttrFirstToCountour = QStringLiteral("firstToCountour");
+const QString AttrLastToCountour = QStringLiteral("lastToCountour");
 
 const QString TypeLineNone           = QStringLiteral("none");
 const QString TypeLineLine           = QStringLiteral("hair");
@@ -145,6 +139,103 @@ const QString TypeLineDashLine       = QStringLiteral("dashLine");
 const QString TypeLineDotLine        = QStringLiteral("dotLine");
 const QString TypeLineDashDotLine    = QStringLiteral("dashDotLine");
 const QString TypeLineDashDotDotLine = QStringLiteral("dashDotDotLine");
+
+//---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief Styles return list of all line styles.
+ * @return list of all line styles.
+ */
+QStringList StylesList()
+{
+    const QStringList styles = QStringList() << TypeLineNone    << TypeLineLine << TypeLineDashLine
+                                             << TypeLineDotLine << TypeLineDashDotLine
+                                             << TypeLineDashDotDotLine;
+    return styles;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief LineStyle return pen style for current line style.
+ * @return pen style.
+ */
+Qt::PenStyle LineStyleToPenStyle(const QString &typeLine)
+{
+    const QStringList styles = StylesList();
+    switch (styles.indexOf(typeLine))
+    {
+        case 0: // TypeLineNone
+            return Qt::NoPen;
+        case 2: // TypeLineDashLine
+            return Qt::DashLine;
+        case 3: // TypeLineDotLine
+            return Qt::DotLine;
+        case 4: // TypeLineDashDotLine
+            return Qt::DashDotLine;
+        case 5: // TypeLineDashDotDotLine
+            return Qt::DashDotDotLine;
+        default:
+            return Qt::SolidLine;
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QString PenStyleToLineStyle(Qt::PenStyle penStyle)
+{
+    QT_WARNING_PUSH
+    QT_WARNING_DISABLE_GCC("-Wswitch-default")
+
+    switch (penStyle)
+    {
+        case Qt::NoPen:
+            return TypeLineNone;
+        case Qt::DashLine:
+            return TypeLineDashLine;
+        case Qt::DotLine:
+            return TypeLineDotLine;
+        case Qt::DashDotLine:
+            return TypeLineDashDotLine;
+        case Qt::DashDotDotLine:
+            return TypeLineDashDotDotLine;
+        default:
+            break;
+    }
+
+    QT_WARNING_POP
+
+    return TypeLineLine;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QMap<QString, QIcon> LineStylesPics()
+{
+    QMap<QString, QIcon> map;
+    const QStringList styles = StylesList();
+
+    for (auto &s : styles)
+    {
+        const Qt::PenStyle style = LineStyleToPenStyle(s);
+        QPixmap pix(80, 14);
+        pix.fill(Qt::white);
+
+        QBrush brush(Qt::black);
+        QPen pen(brush, 2.5, style);
+
+        QPainter painter(&pix);
+        painter.setPen(pen);
+        painter.drawLine(2, 7, 78, 7);
+
+        map.insert(s, QIcon(pix));
+    }
+    return map;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QMap<QString, QIcon> CurvePenStylesPics()
+{
+    QMap<QString, QIcon> map = LineStylesPics();
+    map.remove(TypeLineNone);
+    return map;
+}
 
 const QString ColorBlack            = QStringLiteral("black");
 const QString ColorGreen            = QStringLiteral("green");
@@ -171,9 +262,12 @@ const QString line_                = QStringLiteral("Line_");
 const QString angleLine_           = QStringLiteral("AngleLine_");
 const QString spl_                 = QStringLiteral(SPL_);
 const QString arc_                 = QStringLiteral(ARC_);
+const QString elarc_               = QStringLiteral(ELARC_);
 const QString splPath              = QStringLiteral("SplPath");
 const QString radius_V             = QStringLiteral("Radius");
 const QString radiusArc_           = radius_V + arc_;
+const QString radius1ElArc_        = radius_V + QLatin1Char('1') + elarc_;
+const QString radius2ElArc_        = radius_V + QLatin1Char('2') + elarc_;
 const QString angle1_V             = QStringLiteral("Angle1");
 const QString angle2_V             = QStringLiteral("Angle2");
 const QString c1Length_V           = QStringLiteral("C1Length");
@@ -184,6 +278,8 @@ const QString c1LengthSplPath      = c1Length_V + splPath;
 const QString c2LengthSplPath      = c2Length_V + splPath;
 const QString angle1Arc_           = angle1_V + arc_;
 const QString angle2Arc_           = angle2_V + arc_;
+const QString angle1ElArc_         = angle1_V + elarc_;
+const QString angle2ElArc_         = angle2_V + elarc_;
 const QString angle1Spl_           = angle1_V + spl_;
 const QString angle2Spl_           = angle2_V + spl_;
 const QString angle1SplPath        = angle1_V + splPath;
@@ -191,17 +287,24 @@ const QString angle2SplPath        = angle2_V + splPath;
 const QString seg_                 = QStringLiteral("Seg_");
 const QString currentLength        = QStringLiteral("CurrentLength");
 const QString currentSeamAllowance = QStringLiteral("CurrentSeamAllowance");
+const QString rotation_V           = QStringLiteral("Rotation");
+const QString rotationElArc_       = rotation_V + elarc_;
 
 const QStringList builInVariables = QStringList() << measurement_
                                                   << increment_
                                                   << line_
                                                   << angleLine_
                                                   << arc_
+                                                  << elarc_
                                                   << spl_
                                                   << splPath
                                                   << radiusArc_
+                                                  << radius1ElArc_
+                                                  << radius2ElArc_
                                                   << angle1Arc_
                                                   << angle2Arc_
+                                                  << angle1ElArc_
+                                                  << angle2ElArc_
                                                   << angle1Spl_
                                                   << angle2Spl_
                                                   << angle1SplPath
@@ -212,4 +315,5 @@ const QStringList builInVariables = QStringList() << measurement_
                                                   << c1LengthSpl_
                                                   << c2LengthSpl_
                                                   << c1LengthSplPath
-                                                  << c2LengthSplPath;
+                                                  << c2LengthSplPath
+                                                  << rotationElArc_;

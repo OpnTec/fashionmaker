@@ -6,7 +6,7 @@
  **
  **  @brief
  **  @copyright
- **  This source code is part of the Valentine project, a pattern making
+ **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2016 Valentina project
  **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
@@ -41,9 +41,11 @@
 template <class T> class QVector;
 
 class VAbstractPieceData;
+class QPainterPath;
 
 QT_WARNING_PUSH
 QT_WARNING_DISABLE_GCC("-Weffc++")
+QT_WARNING_DISABLE_GCC("-Wnon-virtual-dtor")
 
 /**
  * @brief The VSAPoint class seam allowance point
@@ -65,6 +67,8 @@ public:
 
     Q_DECL_CONSTEXPR PieceNodeAngle GetAngleType() const;
                      void           SetAngleType(PieceNodeAngle value);
+
+    qreal MaxLocalSA(qreal width) const;
 
 private:
     qreal          m_before;
@@ -149,7 +153,7 @@ public:
     VAbstractPiece &operator=(VAbstractPiece &&piece) Q_DECL_NOTHROW { Swap(piece); return *this; }
 #endif
 
-    void Swap(VAbstractPiece &piece) Q_DECL_NOTHROW
+    inline void Swap(VAbstractPiece &piece) Q_DECL_NOTHROW
     { std::swap(d, piece.d); }
 
     QString GetName() const;
@@ -158,19 +162,31 @@ public:
     bool IsForbidFlipping() const;
     void SetForbidFlipping(bool value);
 
+    bool IsForceFlipping() const;
+    void SetForceFlipping(bool value);
+
     bool IsSeamAllowance() const;
     void SetSeamAllowance(bool value);
 
     bool IsSeamAllowanceBuiltIn() const;
     void SetSeamAllowanceBuiltIn(bool value);
 
+    bool IsHideMainPath() const;
+    void SetHideMainPath(bool value);
+
     qreal GetSAWidth() const;
     void  SetSAWidth(qreal value);
 
-    static QVector<QPointF> Equidistant(const QVector<VSAPoint> &points, qreal width);
+    qreal GetMx() const;
+    void  SetMx(qreal value);
+
+    qreal GetMy() const;
+    void  SetMy(qreal value);
+
+    static QVector<QPointF> Equidistant(QVector<VSAPoint> points, qreal width);
     static qreal            SumTrapezoids(const QVector<QPointF> &points);
     static QVector<QPointF> CheckLoops(const QVector<QPointF> &points);
-    static QVector<QPointF> EkvPoint(const VSAPoint &p1Line1, const VSAPoint &p2Line1,
+    static QVector<QPointF> EkvPoint(QVector<QPointF> points, const VSAPoint &p1Line1, const VSAPoint &p2Line1,
                                      const VSAPoint &p1Line2, const VSAPoint &p2Line2, qreal width);
     static QLineF           ParallelLine(const VSAPoint &p1, const VSAPoint &p2, qreal width);
 
@@ -180,40 +196,13 @@ public:
 protected:
     template <class T>
     static QVector<T> RemoveDublicates(const QVector<T> &points, bool removeFirstAndLast = true);
-    static qreal      MaxLocalSA(const VSAPoint &p, qreal width);
     static bool       IsEkvPointOnLine(const QPointF &iPoint, const QPointF &prevPoint, const QPointF &nextPoint);
     static bool       IsEkvPointOnLine(const VSAPoint &iPoint, const VSAPoint &prevPoint, const VSAPoint &nextPoint);
 
+    static QPainterPath PlaceLabelImgPath(const PlaceLabelImg &img);
+
 private:
     QSharedDataPointer<VAbstractPieceData> d;
-
-    static bool             CheckIntersection(const QVector<QPointF> &points, int i, int iNext, int j, int jNext,
-                                              const QPointF &crossPoint);
-    static bool             ParallelCrossPoint(const QLineF &line1, const QLineF &line2, QPointF &point);
-    static bool             Crossing(const QVector<QPointF> &sub1, const QVector<QPointF> &sub2);
-    static QVector<QPointF> SubPath(const QVector<QPointF> &path, int startIndex, int endIndex);
-    static Q_DECL_CONSTEXPR qreal PointPosition(const QPointF &p, const QLineF &line);
-    static QVector<QPointF> AngleByLength(const QPointF &p2, const QPointF &sp1, const QPointF &sp2, const QPointF &sp3,
-                                          qreal width);
-    static QVector<QPointF> AngleByIntersection(const QPointF &p1, const QPointF &p2, const QPointF &p3,
-                                                const QPointF &sp1, const QPointF &sp2, const QPointF &sp3,
-                                                qreal width);
-    static QVector<QPointF> AngleByFirstSymmetry(const QPointF &p1, const QPointF &p2,
-                                                 const QPointF &sp1, const QPointF &sp2, const QPointF &sp3,
-                                                 qreal width);
-    static QVector<QPointF> AngleBySecondSymmetry(const QPointF &p2, const QPointF &p3,
-                                                  const QPointF &sp1, const QPointF &sp2, const QPointF &sp3,
-                                                  qreal width);
-    static QVector<QPointF> AngleByFirstRightAngle(const QPointF &p1, const QPointF &p2,
-                                                   const QPointF &sp1, const QPointF &sp2, const QPointF &sp3,
-                                                   qreal width);
-    static QVector<QPointF> AngleBySecondRightAngle(const QPointF &p2, const QPointF &p3,
-                                                    const QPointF &sp1, const QPointF &sp2, const QPointF &sp3,
-                                                    qreal width);
-    static QLineF           ParallelLine(const QPointF &p1, const QPointF &p2, qreal width);
-    static QPointF          SingleParallelPoint(const QPointF &p1, const QPointF &p2, qreal angle, qreal width);
-    static QLineF           BisectorLine(const QPointF &p1, const QPointF &p2, const QPointF &p3);
-    static qreal            AngleBetweenBisectors(const QLineF &b1, const QLineF &b2);
 };
 
 Q_DECLARE_TYPEINFO(VAbstractPiece, Q_MOVABLE_TYPE);
@@ -289,20 +278,17 @@ QVector<T> VAbstractPiece::RemoveDublicates(const QVector<T> &points, bool remov
         if (not p.isEmpty() && p.size() > 1)
         {
             // Path can't be closed
-            if (p.first() == p.last())
+            // See issue #686
+            if (VFuzzyComparePoints(p.first(), p.last()))
             {
-            #if QT_VERSION < QT_VERSION_CHECK(5, 1, 0)
-                p.remove(p.size() - 1);
-            #else
                 p.removeLast();
-            #endif
             }
         }
     }
 
     for (int i = 0; i < p.size()-1; ++i)
     {
-        if (p.at(i) == p.at(i+1))
+        if (VFuzzyComparePoints(p.at(i), p.at(i+1)))
         {
             if (not removeFirstAndLast && (i == p.size()-1))
             {

@@ -6,7 +6,7 @@
  **
  **  @brief
  **  @copyright
- **  This source code is part of the Valentine project, a pattern making
+ **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2016 Valentina project
  **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
@@ -44,26 +44,22 @@ class VNodeEllipticalArc :public VAbstractNode
 {
     Q_OBJECT
 public:
-    static void  Create(VAbstractPattern *doc, VContainer *data, quint32 id, quint32 idArc, const Document &parse,
-                        const Source &typeCreation, const QString &drawName = QString(),
-                        const quint32 &idTool = NULL_ID);
+    static void  Create(const VAbstractNodeInitData &initData);
 
     static const QString ToolType;
-    virtual QString getTagName() const Q_DECL_OVERRIDE;
+    virtual QString getTagName() const override;
 public slots:
-    virtual void FullUpdateFromFile() Q_DECL_OVERRIDE {}
-    virtual void AllowHover(bool enabled) Q_DECL_OVERRIDE;
-    virtual void AllowSelecting(bool enabled) Q_DECL_OVERRIDE;
+    virtual void FullUpdateFromFile() override {}
+    virtual void AllowHover(bool enabled) override;
+    virtual void AllowSelecting(bool enabled) override;
 protected:
-    virtual void AddToFile() Q_DECL_OVERRIDE;
-    virtual void RefreshDataInFile() Q_DECL_OVERRIDE;
-    virtual void ShowNode() Q_DECL_OVERRIDE {}
-    virtual void HideNode() Q_DECL_OVERRIDE {}
+    virtual void AddToFile() override;
+    virtual void ShowNode() override {}
+    virtual void HideNode() override {}
 private:
     Q_DISABLE_COPY(VNodeEllipticalArc)
 
-    VNodeEllipticalArc(VAbstractPattern *doc, VContainer *data, quint32 id, quint32 idArc, const Source &typeCreation,
-                       const QString &drawName = QString(), const quint32 &idTool = 0, QObject *qoParent = nullptr);
+    VNodeEllipticalArc(const VAbstractNodeInitData &initData, QObject *qoParent = nullptr);
 };
 
 #endif // VNODEELLIPTICALARC_H

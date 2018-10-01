@@ -6,7 +6,7 @@
  **
  **  @brief
  **  @copyright
- **  This source code is part of the Valentine project, a pattern making
+ **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2013-2015 Valentina project
  **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
@@ -44,6 +44,18 @@
 class VSplinePath;
 template <class T> class QSharedPointer;
 
+struct VToolCutSplinePathInitData : VToolSinglePointInitData
+{
+    VToolCutSplinePathInitData()
+        : VToolSinglePointInitData(),
+          formula(),
+          splinePathId(NULL_ID)
+    {}
+
+    QString formula;
+    quint32 splinePathId;
+};
+
 /**
  * @brief The VToolCutSplinePath class for tool CutSplinePath. This tool find point on splinePath and cut splinePath on
  * two.
@@ -52,33 +64,33 @@ class VToolCutSplinePath : public VToolCut
 {
     Q_OBJECT
 public:
-    virtual void setDialog() Q_DECL_OVERRIDE;
-    static VToolCutSplinePath *Create(QSharedPointer<DialogTool> dialog, VMainGraphicsScene  *scene,
+    virtual void setDialog() override;
+    static VToolCutSplinePath *Create(const QPointer<DialogTool> &dialog, VMainGraphicsScene  *scene,
                                       VAbstractPattern *doc, VContainer *data);
-    static VToolCutSplinePath *Create(const quint32 _id, const QString &pointName, QString &formula,
-                                      const quint32 &splinePathId, const qreal &mx, const qreal &my,
-                                      VMainGraphicsScene *scene, VAbstractPattern *doc, VContainer *data,
-                                      const Document &parse, const Source &typeCreation);
+    static VToolCutSplinePath *Create(VToolCutSplinePathInitData &initData);
     static const QString ToolType;
     static const QString AttrSplinePath;
-    virtual int  type() const Q_DECL_OVERRIDE {return Type;}
+    virtual int  type() const override {return Type;}
     enum { Type = UserType + static_cast<int>(Tool::CutSplinePath)};
-    virtual void  ShowVisualization(bool show) Q_DECL_OVERRIDE;
+    virtual void  ShowVisualization(bool show) override;
 
-    static VPointF *CutSplinePath(qreal length, const QSharedPointer<VAbstractCubicBezierPath> &splPath,
-                                  const QString &pName, VSplinePath **splPath1,
-                                  VSplinePath **splPath2) Q_REQUIRED_RESULT;
+    Q_REQUIRED_RESULT static VPointF *CutSplinePath(qreal length,
+                                                    const QSharedPointer<VAbstractCubicBezierPath> &splPath,
+                                                    const QString &pName, VSplinePath **splPath1,
+                                                    VSplinePath **splPath2);
+protected slots:
+    virtual void ShowContextMenu(QGraphicsSceneContextMenuEvent *event, quint32 id=NULL_ID) override;
 protected:
-    virtual void  contextMenuEvent ( QGraphicsSceneContextMenuEvent * event ) Q_DECL_OVERRIDE;
-    virtual void  SaveDialog(QDomElement &domElement) Q_DECL_OVERRIDE;
-    virtual void  SaveOptions(QDomElement &tag, QSharedPointer<VGObject> &obj) Q_DECL_OVERRIDE;
-    virtual void  ReadToolAttributes(const QDomElement &domElement) Q_DECL_OVERRIDE;
-    virtual void  SetVisualization() Q_DECL_OVERRIDE;
+    virtual void    SaveDialog(QDomElement &domElement, QList<quint32> &oldDependencies,
+                               QList<quint32> &newDependencies) override;
+    virtual void    SaveOptions(QDomElement &tag, QSharedPointer<VGObject> &obj) override;
+    virtual void    ReadToolAttributes(const QDomElement &domElement) override;
+    virtual void    SetVisualization() override;
+    virtual QString MakeToolTip() const override;
 private:
     Q_DISABLE_COPY(VToolCutSplinePath)
 
-    VToolCutSplinePath(VAbstractPattern *doc, VContainer *data, const quint32 &id, const QString &formula,
-                       const quint32 &splinePathId, const Source &typeCreation, QGraphicsItem * parent = nullptr);
+    VToolCutSplinePath(const VToolCutSplinePathInitData &initData, QGraphicsItem *parent = nullptr);
 };
 
 #endif // VTOOLCUTSPLINEPATH_H

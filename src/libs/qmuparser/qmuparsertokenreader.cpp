@@ -325,21 +325,17 @@ QT_WARNING_PUSH
 QT_WARNING_DISABLE_MSVC(4309)
 int QmuParserTokenReader::ExtractToken ( const QString &a_szCharSet, QString &a_sTok, int a_iPos ) const
 {
-    const std::wstring m_strFormulaStd = m_strFormula.toStdWString();
-    const std::wstring a_szCharSetStd = a_szCharSet.toStdWString();
+    int iEnd = FindFirstNotOf(m_strFormula, a_szCharSet, a_iPos);
 
-    int iEnd = static_cast<int>(m_strFormulaStd.find_first_not_of ( a_szCharSetStd, static_cast<std::size_t>(a_iPos) ));
-
-    if ( iEnd == static_cast<int>(string_type::npos) )
+    if (iEnd == -1)
     {
-        iEnd = static_cast<int>(m_strFormulaStd.length());
+        iEnd = m_strFormula.length();
     }
 
     // Assign token string if there was something found
-    if ( a_iPos != iEnd )
+    if (a_iPos != iEnd)
     {
-        a_sTok = QString().fromStdWString ( std::wstring ( m_strFormulaStd.begin() + a_iPos,
-                                                           m_strFormulaStd.begin() + iEnd ) );
+        a_sTok = m_strFormula.mid(a_iPos, iEnd - a_iPos);
     }
 
     return iEnd;
@@ -355,28 +351,24 @@ int QmuParserTokenReader::ExtractToken ( const QString &a_szCharSet, QString &a_
  */
 int QmuParserTokenReader::ExtractOperatorToken ( QString &a_sTok, int a_iPos ) const
 {
-    const std::wstring m_strFormulaStd = m_strFormula.toStdWString();
-    // Changed as per Issue 6: https://code.google.com/p/muparser/issues/detail?id=6
-    const std::wstring oprtCharsStd = m_pParser->ValidOprtChars().toStdWString();
+    int iEnd = FindFirstNotOf(m_strFormula, m_pParser->ValidOprtChars(), a_iPos);
 
-    int iEnd = static_cast<int>( m_strFormulaStd.find_first_not_of ( oprtCharsStd, static_cast<std::size_t>(a_iPos) ) );
-    if ( iEnd == static_cast<int>( string_type::npos ) )
+    if ( iEnd == -1 )
     {
-        iEnd = static_cast<int>( m_strFormulaStd.length() );
+        iEnd = m_strFormula.length();
     }
 
     // Assign token string if there was something found
     if ( a_iPos != iEnd )
     {
-        a_sTok = QString().fromStdWString ( string_type ( m_strFormulaStd.begin() + a_iPos,
-                                            m_strFormulaStd.begin() + iEnd ) );
+        a_sTok = m_strFormula.mid(a_iPos, iEnd - a_iPos);
         return iEnd;
     }
     else
     {
         // There is still the chance of having to deal with an operator consisting exclusively
         // of alphabetic characters.
-        return ExtractToken ( QMUP_CHARS, a_sTok, a_iPos );
+        return ExtractToken (QStringLiteral("abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"), a_sTok, a_iPos );
     }
 }
 QT_WARNING_POP
@@ -932,22 +924,30 @@ bool QmuParserTokenReader::IsUndefVarTok ( token_type &a_Tok )
     // If a factory is available implicitely create new variables
     if ( m_pFactory )
     {
-        qreal *fVar = m_pFactory ( strTok, m_pFactoryData );
-        a_Tok.SetVar ( fVar, strTok );
+        try
+        {
+            qreal *fVar = m_pFactory ( strTok, m_pFactoryData );
+            a_Tok.SetVar ( fVar, strTok );
 
-        // Do not use m_pParser->DefineVar( strTok, fVar );
-        // in order to define the new variable, it will clear the
-        // m_UsedVar array which will kill previousely defined variables
-        // from the list
-        // This is safe because the new variable can never override an existing one
-        // because they are checked first!
-        ( *m_pVarDef ) [strTok] = fVar;
-        m_UsedVar[strTok] = fVar;  // Add variable to used-var-list
+            // Do not use m_pParser->DefineVar( strTok, fVar );
+            // in order to define the new variable, it will clear the
+            // m_UsedVar array which will kill previousely defined variables
+            // from the list
+            // This is safe because the new variable can never override an existing one
+            // because they are checked first!
+            ( *m_pVarDef ) [strTok] = fVar;
+            m_UsedVar[strTok] = fVar;  // Add variable to used-var-list
+        }
+        catch (const qmu::QmuParserError &e)
+        {
+            Q_UNUSED(e)
+            return false;
+        }
     }
     else
     {
         a_Tok.SetVar ( &m_fZero, strTok );
-        m_UsedVar[strTok] = 0;  // Add variable to used-var-list
+        m_UsedVar[strTok] = nullptr;  // Add variable to used-var-list
     }
 
     m_iPos = iEnd;

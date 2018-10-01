@@ -6,7 +6,7 @@
  **
  **  @brief
  **  @copyright
- **  This source code is part of the Valentine project, a pattern making
+ **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2016 Valentina project
  **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
@@ -29,17 +29,24 @@
 #include "vistoolpiece.h"
 #include "../vpatterndb/vpiecepath.h"
 #include "../vgeometry/vpointf.h"
+#include "../vwidgets/scalesceneitems.h"
 
 //---------------------------------------------------------------------------------------------------------------------
 VisToolPiece::VisToolPiece(const VContainer *data, QGraphicsItem *parent)
     : VisPath(data, parent),
       m_points(),
+      m_curves(),
       m_line1(nullptr),
       m_line2(nullptr),
-      m_piece()
+      m_piece(),
+      m_pieceCached(false),
+      m_cachedMainPath(),
+      m_cachedNodes(),
+      m_cachedMainPathPoints(),
+      m_cachedCurvesPath()
 {
-    m_line1 = InitItem<QGraphicsLineItem>(supportColor, this);
-    m_line2 = InitItem<QGraphicsLineItem>(supportColor, this);
+    m_line1 = InitItem<VScaledLine>(supportColor, this);
+    m_line2 = InitItem<VScaledLine>(supportColor, this);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -49,24 +56,45 @@ void VisToolPiece::RefreshGeometry()
 
     if (m_piece.GetPath().CountNodes() > 0)
     {
-        DrawPath(this, m_piece.MainPathPath(Visualization::data), mainColor, Qt::SolidLine, Qt::RoundCap);
-
-        const QVector<VPointF> nodes = m_piece.MainPathNodePoints(Visualization::data);
-
-        for (int i = 0; i < nodes.size(); ++i)
+        if (not m_pieceCached)
         {
-            QGraphicsEllipseItem *point = GetPoint(static_cast<quint32>(i), supportColor);
-            DrawPoint(point, nodes.at(i).toQPointF(), supportColor);
+            m_cachedNodes = m_piece.MainPathNodePoints(Visualization::data);
+            if (mode == Mode::Creation)
+            {
+                m_cachedCurvesPath = m_piece.CurvesPainterPath(Visualization::data);
+                m_cachedMainPathPoints = m_piece.MainPathPoints(Visualization::data);
+                m_cachedMainPath = VPiece::MainPathPath(m_cachedMainPathPoints);
+            }
+            else
+            {
+                m_cachedMainPath = m_piece.MainPathPath(Visualization::data);
+            }
+            m_pieceCached = true;
+        }
+
+        DrawPath(this, m_cachedMainPath, mainColor, Qt::SolidLine, Qt::RoundCap);
+
+        for (int i = 0; i < m_cachedNodes.size(); ++i)
+        {
+            VScaledEllipse *point = GetPoint(static_cast<quint32>(i), supportColor);
+            DrawPoint(point, m_cachedNodes.at(i).toQPointF(), supportColor);
         }
 
         if (mode == Mode::Creation)
         {
-            const QVector<QPointF> points = m_piece.MainPathPoints(Visualization::data);
-            DrawLine(m_line1, QLineF(points.first(), Visualization::scenePos), supportColor, Qt::DashLine);
-
-            if (points.size() > 1)
+            for (int i = 0; i < m_cachedCurvesPath.size(); ++i)
             {
-                DrawLine(m_line2, QLineF(points.last(), Visualization::scenePos), supportColor, Qt::DashLine);
+                VCurvePathItem *path = GetCurve(static_cast<quint32>(i), supportColor);
+                DrawPath(path, m_cachedCurvesPath.at(i), supportColor);
+            }
+
+            DrawLine(m_line1, QLineF(m_cachedMainPathPoints.first(), Visualization::scenePos), supportColor,
+                     Qt::DashLine);
+
+            if (m_cachedMainPathPoints.size() > 1)
+            {
+                DrawLine(m_line2, QLineF(m_cachedMainPathPoints.last(), Visualization::scenePos), supportColor,
+                         Qt::DashLine);
             }
         }
     }
@@ -76,12 +104,19 @@ void VisToolPiece::RefreshGeometry()
 void VisToolPiece::SetPiece(const VPiece &piece)
 {
     m_piece = piece;
+    m_pieceCached = false;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QGraphicsEllipseItem *VisToolPiece::GetPoint(quint32 i, const QColor &color)
+VScaledEllipse *VisToolPiece::GetPoint(quint32 i, const QColor &color)
 {
-    return GetPointItem(Visualization::data, factor, m_points, i, color, this);
+    return GetPointItem(m_points, i, color, this);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+VCurvePathItem *VisToolPiece::GetCurve(quint32 i, const QColor &color)
+{
+    return GetCurveItem(m_curves, i, color, this);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -97,9 +132,17 @@ void VisToolPiece::HideAllItems()
         m_line2->setVisible(false);
     }
 
-    for (int i=0; i < m_points.size(); ++i)
+    for(QGraphicsEllipseItem *item : qAsConst(m_points))
     {
-        if (QGraphicsEllipseItem *item = m_points.at(i))
+        if (item)
+        {
+            item->setVisible(false);
+        }
+    }
+
+    for(QGraphicsPathItem *item : qAsConst(m_curves))
+    {
+        if (item)
         {
             item->setVisible(false);
         }

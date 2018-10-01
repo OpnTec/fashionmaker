@@ -6,7 +6,7 @@
  **
  **  @brief
  **  @copyright
- **  This source code is part of the Valentine project, a pattern making
+ **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2013-2015 Valentina project
  **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
@@ -47,7 +47,7 @@ public:
     VExceptionBadId(const VExceptionBadId &e);
     VExceptionBadId &operator=(const VExceptionBadId &e);
     virtual         ~VExceptionBadId() V_NOEXCEPT_EXPR (true) Q_DECL_EQ_DEFAULT;
-    virtual QString ErrorMessage() const Q_DECL_OVERRIDE;
+    virtual QString ErrorMessage() const override;
     quint32         BadId() const;
     QString         BadKey() const;
 protected:

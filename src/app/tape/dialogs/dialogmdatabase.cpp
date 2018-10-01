@@ -6,7 +6,7 @@
  **
  **  @brief
  **  @copyright
- **  This source code is part of the Valentine project, a pattern making
+ **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2015 Valentina project
  **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
@@ -29,6 +29,7 @@
 #include "dialogmdatabase.h"
 #include "ui_dialogmdatabase.h"
 #include "../mapplication.h"
+#include "../vpatterndb/measurements.h"
 
 #include <QKeyEvent>
 #include <QMenu>
@@ -60,6 +61,11 @@ DialogMDataBase::DialogMDataBase(const QStringList &list, QWidget *parent)
       groupQ(nullptr)
 {
     ui->setupUi(this);
+
+#if defined(Q_OS_MAC)
+    setWindowFlags(Qt::Window);
+#endif
+
     InitDataBase(list);
 
     ui->treeWidget->installEventFilter(this);
@@ -67,6 +73,7 @@ DialogMDataBase::DialogMDataBase(const QStringList &list, QWidget *parent)
     connect(ui->treeWidget, &QTreeWidget::itemChanged, this, &DialogMDataBase::UpdateChecks);
     connect(ui->treeWidget, &QTreeWidget::itemClicked, this, &DialogMDataBase::ShowDescription);
     connect(ui->treeWidget, &QTreeWidget::customContextMenuRequested, this, &DialogMDataBase::TreeMenu);
+    connect(ui->lineEditSearch, &QLineEdit::textChanged, this, &DialogMDataBase::FilterMeasurements);
 
     ReadSettings();
 }
@@ -97,6 +104,11 @@ DialogMDataBase::DialogMDataBase(QWidget *parent)
 
 {
     ui->setupUi(this);
+
+#if defined(Q_OS_MAC)
+    setWindowFlags(Qt::Window);
+#endif
+
     InitDataBase();
 
     ui->treeWidget->installEventFilter(this);
@@ -104,6 +116,7 @@ DialogMDataBase::DialogMDataBase(QWidget *parent)
     connect(ui->treeWidget, &QTreeWidget::itemClicked, this, &DialogMDataBase::ShowDescription);
     connect(ui->treeWidget, &QTreeWidget::customContextMenuRequested, this, &DialogMDataBase::TreeMenu);
     connect(ui->treeWidget, &QTreeWidget::itemActivated, this, &DialogMDataBase::ShowDescription);
+    connect(ui->lineEditSearch, &QLineEdit::textChanged, this, &DialogMDataBase::FilterMeasurements);
 
     ReadSettings();
 }
@@ -169,14 +182,14 @@ QString DialogMDataBase::ImgTag(const QString &number)
 {
     QString imgUrl("<img src=\"wrong.png\" align=\"center\"/>"); // In case of error
     const QString filePath = QString("://diagrams/%1.svg").arg(MapDiagrams(qApp->TrVars(), number));
-    if (QFileInfo(filePath).exists())
+    if (QFileInfo::exists(filePath))
     {
         // Load your SVG
         QSvgRenderer renderer;
         const bool ok = renderer.load(filePath);
         if (ok)
         {
-            const QScreen *screen = QApplication::screens().at(0);
+            const QScreen *screen = QGuiApplication::screens().at(0);
             if (screen)
             {
                 const QSize defSize = renderer.defaultSize();
@@ -222,30 +235,27 @@ void DialogMDataBase::changeEvent(QEvent *event)
 //---------------------------------------------------------------------------------------------------------------------
 bool DialogMDataBase::eventFilter(QObject *target, QEvent *event)
 {
-    if (target == ui->treeWidget)
+    if (target == ui->treeWidget && event->type() == QEvent::KeyPress)
     {
-        if (event->type() == QEvent::KeyPress)
+        QKeyEvent *keyEvent = static_cast<QKeyEvent *>(event);
+        switch(keyEvent->key())
         {
-            QKeyEvent *keyEvent = static_cast<QKeyEvent *>(event);
-            switch(keyEvent->key())
+            case Qt::Key_Up:
             {
-                case Qt::Key_Up:
-                {
-                    const QModelIndex model = ui->treeWidget->indexAbove(ui->treeWidget->currentIndex());
-                    QTreeWidgetItem *item = ui->treeWidget->itemAbove(ui->treeWidget->currentItem());
-                    ShowDescription(item, model.column());
-                    break;
-                }
-                case Qt::Key_Down:
-                {
-                    const QModelIndex model = ui->treeWidget->indexBelow(ui->treeWidget->currentIndex());
-                    QTreeWidgetItem *item = ui->treeWidget->itemBelow(ui->treeWidget->currentItem());
-                    ShowDescription(item, model.column());
-                    break;
-                }
-                default:
-                    break;
+                const QModelIndex model = ui->treeWidget->indexAbove(ui->treeWidget->currentIndex());
+                QTreeWidgetItem *item = ui->treeWidget->itemAbove(ui->treeWidget->currentItem());
+                ShowDescription(item, model.column());
+                break;
             }
+            case Qt::Key_Down:
+            {
+                const QModelIndex model = ui->treeWidget->indexBelow(ui->treeWidget->currentIndex());
+                QTreeWidgetItem *item = ui->treeWidget->itemBelow(ui->treeWidget->currentItem());
+                ShowDescription(item, model.column());
+                break;
+            }
+            default:
+                break;
         }
     }
     return QDialog::eventFilter(target, event);
@@ -309,38 +319,13 @@ void DialogMDataBase::UpdateChecks(QTreeWidgetItem *item, int column)
 //---------------------------------------------------------------------------------------------------------------------
 void DialogMDataBase::ShowDescription(QTreeWidgetItem *item, int column)
 {
-    if (column != 0 && column != -1)
+    if ((column != 0 && column != -1) || item == nullptr || item->childCount() != 0)
     {
         ui->textEdit->clear();
         return;
     }
 
-    if (item == nullptr)
-    {
-        ui->textEdit->clear();
-        return;
-    }
-
-    if (item->childCount() != 0)
-    {
-        ui->textEdit->clear();
-        return;
-    }
-
-    const QString name = item->data(0, Qt::UserRole).toString();
-    const VTranslateVars *trv = qApp->TrVars();
-    const QString number = trv->MNumber(name);
-
-    const QString text = QString("<p align=\"center\" style=\"font-variant: normal; font-style: normal; font-weight: "
-                                 "normal\"> %1 <br clear=\"left\"><b>%2</b>. <i>%3</i></p>"
-                                 "<p align=\"left\" style=\"font-variant: normal; font-style: normal; font-weight: "
-                                 "normal\">%4</p>")
-            .arg(ImgTag(number))
-            .arg(number)
-            .arg(trv->GuiText(name))
-            .arg(trv->Description(name));
-
-    ui->textEdit->setHtml(text);
+    ui->textEdit->setHtml(ItemFullDescription(item));
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -402,6 +387,31 @@ void DialogMDataBase::Recheck()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void DialogMDataBase::FilterMeasurements(const QString &search)
+{
+    FilterGroup(groupA, search);
+    FilterGroup(groupB, search);
+    FilterGroup(groupC, search);
+    FilterGroup(groupD, search);
+    FilterGroup(groupE, search);
+    FilterGroup(groupF, search);
+    FilterGroup(groupG, search);
+    FilterGroup(groupH, search);
+    FilterGroup(groupI, search);
+    FilterGroup(groupJ, search);
+    FilterGroup(groupK, search);
+    FilterGroup(groupL, search);
+    FilterGroup(groupM, search);
+    FilterGroup(groupN, search);
+    FilterGroup(groupO, search);
+    FilterGroup(groupP, search);
+    FilterGroup(groupQ, search);
+
+    const QList<QTreeWidgetItem *> list = ui->treeWidget->selectedItems();
+    list.isEmpty() ? ShowDescription(nullptr, -1) : ShowDescription(list.first(), 0);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 void DialogMDataBase::InitDataBase(const QStringList &list)
 {
     InitGroup(&groupA, "A. " + tr("Direct Height", "Measurement section"),              ListGroupA(), list);
@@ -428,10 +438,35 @@ void DialogMDataBase::InitGroup(QTreeWidgetItem **group, const QString &groupNam
                                 const QStringList &list)
 {
     *group = AddGroup(groupName);
-    for (int i=0; i < mList.size(); ++i)
+    for (auto &m : mList)
     {
-        AddMeasurement(*group, mList.at(i), list);
+        AddMeasurement(*group, m, list);
     }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogMDataBase::FilterGroup(QTreeWidgetItem *group, const QString &search)
+{
+    SCASSERT(group != nullptr)
+
+    bool match = false;
+    for (int i=0; i < group->childCount(); ++i)
+    {
+        QTreeWidgetItem *childItem = group->child(i);
+        const QString description = QTextDocumentFragment::fromHtml(ItemFullDescription(childItem, false))
+                .toPlainText();
+
+        const bool hidden = not childItem->text(0).contains(search, Qt::CaseInsensitive)
+                && not description.contains(search, Qt::CaseInsensitive);
+
+        childItem->setHidden(hidden);
+        if (not hidden)
+        {
+            match = true;
+        }
+    }
+
+    group->setHidden(not group->text(0).contains(search, Qt::CaseInsensitive) && not match);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -489,6 +524,37 @@ void DialogMDataBase::ReadSettings()
 void DialogMDataBase::WriteSettings()
 {
     qApp->TapeSettings()->SetDataBaseGeometry(saveGeometry());
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QString DialogMDataBase::ItemFullDescription(QTreeWidgetItem *item, bool showImage) const
+{
+    if (item == nullptr || item->childCount() != 0)
+    {
+        return QString();
+    }
+
+    const QString name = item->data(0, Qt::UserRole).toString();
+    if (name.isEmpty())
+    {
+        return QString();
+    }
+
+    const QString number = qApp->TrVars()->MNumber(name);
+
+    QString imgTag;
+    if (showImage)
+    {
+        imgTag = ImgTag(number);
+    }
+
+    const QString text = QString("<p align=\"center\" style=\"font-variant: normal; font-style: normal; font-weight: "
+                                 "normal\"> %1 <br clear=\"left\"><b>%2</b>. <i>%3</i></p>"
+                                 "<p align=\"left\" style=\"font-variant: normal; font-style: normal; font-weight: "
+                                 "normal\">%4</p>")
+            .arg(imgTag, number, qApp->TrVars()->GuiText(name), qApp->TrVars()->Description(name));
+
+    return text;
 }
 
 //---------------------------------------------------------------------------------------------------------------------

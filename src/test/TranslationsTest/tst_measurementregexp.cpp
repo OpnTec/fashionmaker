@@ -6,7 +6,7 @@
  **
  **  @brief
  **  @copyright
- **  This source code is part of the Valentine project, a pattern making
+ **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2015 Valentina project
  **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
@@ -31,6 +31,7 @@
 
 #include "../vmisc/logging.h"
 #include "../vpatterndb/vtranslatevars.h"
+#include "../vpatterndb/measurements.h"
 #include "../ifc/ifcdef.h"
 
 #include <QtTest>
@@ -80,16 +81,14 @@ void TST_MeasurementRegExp::initTestCase()
     if (LoadMeasurements(m_system, m_locale) != NoError)
     {
         const QString message = QString("Couldn't load measurements. System = %1, locale = %2")
-                .arg(m_system)
-                .arg(m_locale);
+                .arg(m_system, m_locale);
         QSKIP(qUtf8Printable(message));
     }
 
     if (LoadVariables(m_locale) != NoError)
     {
         const QString message = QString("Couldn't load variables. System = %1, locale = %2")
-                .arg(m_system)
-                .arg(m_locale);
+                .arg(m_system, m_locale);
         QSKIP(qUtf8Printable(message));
     }
 
@@ -159,7 +158,9 @@ void TST_MeasurementRegExp::TestCombinations(int systemCounts, const QStringList
     QDir dir(TranslationsPath());
     const QStringList fileNames = dir.entryList(QStringList("measurements_p*_*.qm"));
 
-    QVERIFY2(combinations == fileNames.size(), "Unexpected count of files.");
+    const QString error = QString("Unexpected count of files. Excpected %1, got %2.")
+            .arg(combinations).arg(fileNames.size());
+    QVERIFY2(combinations == fileNames.size(), qUtf8Printable(error));
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -169,9 +170,9 @@ void TST_MeasurementRegExp::PrepareData()
 
     QTest::addColumn<QString>("originalName");
 
-    foreach(const QString &str, originalNames)
+    for (auto &str : originalNames)
     {
-        const QString tag = QString("System: '%1', locale: '%2'. Name '%3'").arg(m_system).arg(m_locale).arg(str);
+        const QString tag = QString("System: '%1', locale: '%2'. Name '%3'").arg(m_system, m_locale, str);
         QTest::newRow(qUtf8Printable(tag)) << str;
     }
 }
@@ -186,15 +187,12 @@ QStringList TST_MeasurementRegExp::AllNames()
 int TST_MeasurementRegExp::LoadMeasurements(const QString &checkedSystem, const QString &checkedLocale)
 {
     const QString path = TranslationsPath();
-    const QString file = QString("measurements_%1_%2.qm").arg(checkedSystem).arg(checkedLocale);
+    const QString file = QString("measurements_%1_%2.qm").arg(checkedSystem, checkedLocale);
 
     if (QFileInfo(path+QLatin1String("/")+file).size() <= 34)
     {
         const QString message = QString("Translation for system = %1 and locale = %2 is empty. \nFull path: %3/%4")
-                .arg(checkedSystem)
-                .arg(checkedLocale)
-                .arg(path)
-                .arg(file);
+                .arg(checkedSystem, checkedLocale, path, file);
         QWARN(qUtf8Printable(message));
 
         return ErrorSize;
@@ -206,10 +204,7 @@ int TST_MeasurementRegExp::LoadMeasurements(const QString &checkedSystem, const 
     if (not m_pmsTranslator->load(file, path))
     {
         const QString message = QString("Can't load translation for system = %1 and locale = %2. \nFull path: %3/%4")
-                .arg(checkedSystem)
-                .arg(checkedLocale)
-                .arg(path)
-                .arg(file);
+                .arg(checkedSystem, checkedLocale, path, file);
         QWARN(qUtf8Printable(message));
 
         delete m_pmsTranslator;
@@ -220,10 +215,7 @@ int TST_MeasurementRegExp::LoadMeasurements(const QString &checkedSystem, const 
     if (not QCoreApplication::installTranslator(m_pmsTranslator))
     {
         const QString message = QString("Can't install translation for system = %1 and locale = %2. \nFull path: %3/%4")
-                .arg(checkedSystem)
-                .arg(checkedLocale)
-                .arg(path)
-                .arg(file);
+                .arg(checkedSystem, checkedLocale, path, file);
         QWARN(qUtf8Printable(message));
 
         delete m_pmsTranslator;
@@ -244,8 +236,7 @@ void TST_MeasurementRegExp::RemoveTrMeasurements(const QString &checkedSystem, c
         if (result == false)
         {
             const QString message = QString("Can't remove translation for system = %1 and locale = %2")
-                    .arg(checkedSystem)
-                    .arg(checkedLocale);
+                    .arg(checkedSystem, checkedLocale);
             QWARN(qUtf8Printable(message));
         }
         delete m_pmsTranslator;

@@ -6,7 +6,7 @@
  **
  **  @brief
  **  @copyright
- **  This source code is part of the Valentine project, a pattern making
+ **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2013-2015 Valentina project
  **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
@@ -43,7 +43,7 @@ class DialogLayoutProgress : public QDialog
     Q_OBJECT
 
 public:
-    explicit DialogLayoutProgress(int count, QWidget *parent = 0);
+    explicit DialogLayoutProgress(int count, QWidget *parent = nullptr);
     ~DialogLayoutProgress();
 
 signals:
@@ -56,7 +56,7 @@ public slots:
     void Finished();
 
 protected:
-    virtual void showEvent(QShowEvent *event) Q_DECL_OVERRIDE;
+    virtual void showEvent(QShowEvent *event) override;
 
 private:
     Q_DISABLE_COPY(DialogLayoutProgress)

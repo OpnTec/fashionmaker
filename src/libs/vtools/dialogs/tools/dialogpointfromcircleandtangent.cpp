@@ -6,7 +6,7 @@
  **
  **  @brief
  **  @copyright
- **  This source code is part of the Valentine project, a pattern making
+ **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2015 Valentina project
  **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
@@ -58,9 +58,7 @@ DialogPointFromCircleAndTangent::DialogPointFromCircleAndTangent(const VContaine
 {
     ui->setupUi(this);
 
-#if QT_VERSION >= QT_VERSION_CHECK(5, 2, 0)
     ui->lineEditNamePoint->setClearButtonEnabled(true);
-#endif
 
     ui->lineEditNamePoint->setText(qApp->getCurrentDocument()->GenerateLabel(LabelType::NewLabel));
     labelEditNamePoint = ui->labelEditNamePoint;
@@ -81,8 +79,7 @@ DialogPointFromCircleAndTangent::DialogPointFromCircleAndTangent(const VContaine
     FillComboBoxCrossCirclesPoints(ui->comboBoxResult);
 
     connect(ui->lineEditNamePoint, &QLineEdit::textChanged, this, &DialogPointFromCircleAndTangent::NamePointChanged);
-    connect(ui->comboBoxCircleCenter,
-            static_cast<void (QComboBox::*)(const QString &)>(&QComboBox::currentIndexChanged),
+    connect(ui->comboBoxCircleCenter, QOverload<const QString &>::of(&QComboBox::currentIndexChanged),
             this, &DialogPointFromCircleAndTangent::PointChanged);
 
     connect(ui->toolButtonExprRadius, &QPushButton::clicked, this,
@@ -209,7 +206,7 @@ void DialogPointFromCircleAndTangent::ChosenObject(quint32 id, const SceneObject
                 case 1:
                     if (getCurrentObjectId(ui->comboBoxTangentPoint) != id)
                     {
-                        if (SetObject(id, ui->comboBoxCircleCenter, ""))
+                        if (SetObject(id, ui->comboBoxCircleCenter, QString()))
                         {
                             number = 0;
                             point->setObject2Id(id);
@@ -257,7 +254,7 @@ void DialogPointFromCircleAndTangent::CircleRadiusChanged()
 {
     labelEditFormula = ui->labelEditRadius;
     labelResultCalculation = ui->labelResultCircleRadius;
-    const QString postfix = VDomDocument::UnitsToStr(qApp->patternUnit(), true);
+    const QString postfix = UnitsToStr(qApp->patternUnit(), true);
     ValFormulaChanged(flagCircleRadius, ui->plainTextEditRadius, timerCircleRadius, postfix);
 }
 
@@ -267,7 +264,7 @@ void DialogPointFromCircleAndTangent::FXCircleRadius()
     DialogEditWrongFormula *dialog = new DialogEditWrongFormula(data, toolId, this);
     dialog->setWindowTitle(tr("Edit radius"));
     dialog->SetFormula(GetCircleRadius());
-    dialog->setPostfix(VDomDocument::UnitsToStr(qApp->patternUnit(), true));
+    dialog->setPostfix(UnitsToStr(qApp->patternUnit(), true));
     if (dialog->exec() == QDialog::Accepted)
     {
         SetCircleRadius(dialog->GetFormula());
@@ -279,7 +276,7 @@ void DialogPointFromCircleAndTangent::FXCircleRadius()
 void DialogPointFromCircleAndTangent::EvalCircleRadius()
 {
     labelEditFormula = ui->labelEditRadius;
-    const QString postfix = VDomDocument::UnitsToStr(qApp->patternUnit(), true);
+    const QString postfix = UnitsToStr(qApp->patternUnit(), true);
     const qreal radius = Eval(ui->plainTextEditRadius->toPlainText(), flagCircleRadius,
                               ui->labelResultCircleRadius, postfix);
 
@@ -305,15 +302,12 @@ void DialogPointFromCircleAndTangent::SaveData()
 {
     pointName = ui->lineEditNamePoint->text();
 
-    QString radius = ui->plainTextEditRadius->toPlainText();
-    radius.replace("\n", " ");
-
     VisToolPointFromCircleAndTangent *point = qobject_cast<VisToolPointFromCircleAndTangent *>(vis);
     SCASSERT(point != nullptr)
 
     point->setObject1Id(GetTangentPointId());
     point->setObject2Id(GetCircleCenterId());
-    point->setCRadius(radius);
+    point->setCRadius(ui->plainTextEditRadius->toPlainText());
     point->setCrossPoint(GetCrossCirclesPoint());
     point->RefreshGeometry();
 }

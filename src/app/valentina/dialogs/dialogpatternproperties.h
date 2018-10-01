@@ -6,7 +6,7 @@
  **
  **  @brief
  **  @copyright
- **  This source code is part of the Valentine project, a pattern making
+ **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2013-2015 Valentina project
  **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
@@ -46,14 +46,13 @@ class DialogPatternProperties : public QDialog
 {
     Q_OBJECT
 public:
-    explicit DialogPatternProperties(const QString &filePath, VPattern *doc, VContainer *pattern,
-                                     QWidget *parent = nullptr);
-    virtual ~DialogPatternProperties() Q_DECL_OVERRIDE;
+    explicit DialogPatternProperties(VPattern *doc, VContainer *pattern, QWidget *parent = nullptr);
+    virtual ~DialogPatternProperties() override;
 signals:
     void UpdateGradation();
 private slots:
     void DefValueChanged();
-    void GeneralInfoChanged();
+    void LabelDataChanged();
     void Apply();
     void Ok();
     void SelectAll(int state);
@@ -62,6 +61,8 @@ private slots:
     void DescEdited();
     void ChangeImage();
     void SaveImage();
+    void EditLabel();
+    void ManagePatternMaterials();
 private:
     Q_DISABLE_COPY(DialogPatternProperties)
     Ui::DialogPatternProperties *ui;
@@ -76,12 +77,17 @@ private:
     bool                   gradationChanged;
     bool                   defaultChanged;
     bool                   securityChanged;
-    bool                   generalInfoChanged;
+    bool                   labelDataChanged;
+    bool                   askSaveLabelData;
+    bool                   templateDataChanged;
+    bool                   patternMaterialsChanged;
     QAction                *deleteAction;
     QAction                *changeImageAction;
     QAction                *saveImageAction;
     QAction                *showImageAction;
-    const QString          &m_filePath;
+
+    QVector<VLabelTemplateLine> templateLines;
+    QMap<int, QString>          patternMaterials;
 
     void         SetHeightsChecked(bool enabled);
     void         SetSizesChecked(bool enabled);
@@ -93,11 +99,15 @@ private:
     void         SetOptions(const QMap<GVal, bool> &option);
     template<typename GVal>
     void         InitComboBox(QComboBox *box, const QMap<GVal, bool> &option);
+    void         InitComboBoxFormats(QComboBox *box, const QStringList &items, const QString &currentFormat);
     void         CheckApplyOk();
     void         SaveDescription();
     void         SaveGradation();
     void         SaveDefValues();
-    void         SaveGeneralInfo();
+    void         SaveLabelData();
+    void         SaveTemplateData();
+    void         SaveMaterialData();
+    void         SaveReadOnlyState();
 
     void         SetDefaultHeight(const QString &def);
     void         SetDefaultSize(const QString &def);

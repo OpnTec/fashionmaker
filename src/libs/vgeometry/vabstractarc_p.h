@@ -6,7 +6,7 @@
  **
  **  @brief
  **  @copyright
- **  This source code is part of the Valentine project, a pattern making
+ **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2016 Valentina project
  **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
@@ -37,6 +37,7 @@
 
 QT_WARNING_PUSH
 QT_WARNING_DISABLE_GCC("-Weffc++")
+QT_WARNING_DISABLE_GCC("-Wnon-virtual-dtor")
 
 class VAbstractArcData : public QSharedData
 {
@@ -101,7 +102,7 @@ VAbstractArcData::VAbstractArcData(const QString &formulaLength, const VPointF &
     : f1(f1),
       formulaF1(formulaF1),
       f2(0),
-      formulaF2("0"),
+      formulaF2('0'),
       center(center),
       isFlipped(false),
       formulaLength(formulaLength)
@@ -112,7 +113,7 @@ VAbstractArcData::VAbstractArcData(const VPointF &center, qreal f1)
     : f1(f1),
       formulaF1(QString().number(f1)),
       f2(0),
-      formulaF2("0"),
+      formulaF2('0'),
       center(center),
       isFlipped(false),
       formulaLength()

@@ -6,7 +6,7 @@
  **
  **  @brief
  **  @copyright
- **  This source code is part of the Valentine project, a pattern making
+ **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2015 Valentina project
  **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
@@ -45,15 +45,18 @@ void TST_QmuTokenParser::IsSingle_data()
     QTest::addColumn<QString>("formula");
     QTest::addColumn<bool>("result");
 
+    QTest::newRow("Empty string") << QString() << false;
     QTest::newRow("Single value") << "15.5" << true;
     QTest::newRow("Two digits") << "2+2" << false;
+    QTest::newRow("Two digits") << "2-2" << false;
     QTest::newRow("Negative single value") << "-2" << true;
     QTest::newRow("Digit and variable") << "2+a" << false;
     QTest::newRow("One variable twice") << "a+a" << false;
     QTest::newRow("Two variables") << "a+b" << false;
-    QTest::newRow("Empty string") << "" << false;
+    QTest::newRow("Empty string") << QString() << false;
     QTest::newRow("Several spaces") << "   " << false;
     QTest::newRow("Invalid formula") << "2*)))" << false;
+    QTest::newRow("Invalid formula") << "2*" << false;
     QTest::newRow("Incorrect thousand separator 15 500") << "15 500" << false;
     QTest::newRow("Correct C locale 15500") << "15500" << true;
     QTest::newRow("Correct C locale 15,500") << "15,500" << true;
@@ -81,9 +84,8 @@ void TST_QmuTokenParser::TokenFromUser_data()
 
     const QList<QLocale> allLocales =
             QLocale::matchingLocales(QLocale::AnyLanguage, QLocale::AnyScript, QLocale::AnyCountry);
-    for(int i = 0; i < allLocales.size(); ++i)
+    for(auto &locale : allLocales)
     {
-        const QLocale locale = allLocales.at(i);
         PrepareVal(1000.5, locale);
         PrepareVal(-1000.5, locale);
     }
@@ -112,19 +114,19 @@ void TST_QmuTokenParser::PrepareVal(qreal val, const QLocale &locale)
 {
     const QString formula = locale.toString(val);
     QString string = formula;
-    QString tag = QString("%1. String '%2'").arg(locale.name()).arg(string);
+    QString tag = QString("%1. String '%2'").arg(locale.name(), string);
     QTest::newRow(qUtf8Printable(tag)) << string << true << locale;
 
     string = formula+QLatin1String("+");
-    tag = QString("%1. String '%2'").arg(locale.name()).arg(string);
+    tag = QString("%1. String '%2'").arg(locale.name(), string);
     QTest::newRow(qUtf8Printable(tag)) << string << false << locale;
 
     string = formula+QLatin1String("+")+formula;
-    tag = QString("%1. String '%2'").arg(locale.name()).arg(string);
+    tag = QString("%1. String '%2'").arg(locale.name(), string);
     QTest::newRow(qUtf8Printable(tag)) << string << false << locale;
 
     string = formula+QString("+б");
-    tag = QString("%1. String '%2'").arg(locale.name()).arg(string);
+    tag = QString("%1. String '%2'").arg(locale.name(), string);
     QTest::newRow(qUtf8Printable(tag)) << string << false << locale;
 }
 

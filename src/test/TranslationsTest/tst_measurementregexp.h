@@ -6,7 +6,7 @@
  **
  **  @brief
  **  @copyright
- **  This source code is part of the Valentine project, a pattern making
+ **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2015 Valentina project
  **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
@@ -46,8 +46,8 @@ public:
     static const quint32 systemCounts;
 
 protected:
-    virtual void        PrepareData() Q_DECL_OVERRIDE;
-    virtual QStringList AllNames() Q_DECL_OVERRIDE;
+    virtual void        PrepareData() override;
+    virtual QStringList AllNames() override;
 
 private slots:
     void initTestCase();

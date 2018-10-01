@@ -6,7 +6,7 @@
  **
  **  @brief
  **  @copyright
- **  This source code is part of the Valentine project, a pattern making
+ **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2013-2015 Valentina project
  **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
@@ -46,16 +46,16 @@ class VisToolLine : public VisLine
 {
     Q_OBJECT
 public:
-    explicit VisToolLine(const VContainer *data, QGraphicsItem *parent = 0);
-    virtual ~VisToolLine() Q_DECL_OVERRIDE;
+    explicit VisToolLine(const VContainer *data, QGraphicsItem *parent = nullptr);
+    virtual ~VisToolLine() = default;
 
-    virtual void RefreshGeometry() Q_DECL_OVERRIDE;
+    virtual void RefreshGeometry() override;
     void         setPoint2Id(const quint32 &value);
-    virtual int  type() const Q_DECL_OVERRIDE {return Type;}
+    virtual int  type() const override {return Type;}
     enum { Type = UserType + static_cast<int>(Vis::ToolLine)};
 protected:
-    virtual void DrawLine(QGraphicsLineItem *lineItem, const QLineF &line, const QColor &color,
-                          Qt::PenStyle style = Qt::SolidLine) Q_DECL_OVERRIDE;
+    virtual void DrawLine(VScaledLine *lineItem, const QLineF &line, const QColor &color,
+                          Qt::PenStyle style = Qt::SolidLine) override;
 private:
     Q_DISABLE_COPY(VisToolLine)
     quint32      point2Id;

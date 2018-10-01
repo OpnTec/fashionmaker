@@ -6,7 +6,7 @@
  **
  **  @brief
  **  @copyright
- **  This source code is part of the Valentine project, a pattern making
+ **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2017 Valentina project
  **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
@@ -28,8 +28,6 @@
 
 #include "vinteractivetool.h"
 
-bool VInteractiveTool::m_suppressContextMenu = false;
-
 //---------------------------------------------------------------------------------------------------------------------
 VInteractiveTool::VInteractiveTool(VAbstractPattern *doc, VContainer *data, quint32 id, QObject *parent)
     : VAbstractTool(doc, data, id, parent),
@@ -40,7 +38,7 @@ VInteractiveTool::VInteractiveTool(VAbstractPattern *doc, VContainer *data, quin
 //---------------------------------------------------------------------------------------------------------------------
 void VInteractiveTool::DialogLinkDestroy()
 {
-    m_dialog.clear();
+    m_dialog->deleteLater();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -54,7 +52,7 @@ void VInteractiveTool::FullUpdateFromGuiOk(int result)
     {
         SaveDialogChange();
     }
-    m_dialog.clear();
+    DialogLinkDestroy();
 }
 
 //---------------------------------------------------------------------------------------------------------------------

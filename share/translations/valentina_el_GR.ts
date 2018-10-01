@@ -16,6 +16,13 @@
     </message>
 </context>
 <context>
+    <name>AddItemToGroup</name>
+    <message>
+        <source>Add item to group</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>AddPatternPiece</name>
     <message>
         <source>add pattern piece %1</source>
@@ -335,19 +342,19 @@
     <name>Detail</name>
     <message>
         <source>Fabric</source>
-        <translation>Ύφασμα</translation>
+        <translation type="vanished">Ύφασμα</translation>
     </message>
     <message>
         <source>Lining</source>
-        <translation>Φόδρα</translation>
+        <translation type="vanished">Φόδρα</translation>
     </message>
     <message>
         <source>Interfacing</source>
-        <translation>Ύφασμα ενίσχυσης</translation>
+        <translation type="vanished">Ύφασμα ενίσχυσης</translation>
     </message>
     <message>
         <source>Interlining</source>
-        <translation>Ύφασμα επένδυσης</translation>
+        <translation type="vanished">Ύφασμα επένδυσης</translation>
     </message>
 </context>
 <context>
@@ -587,7 +594,7 @@
     </message>
     <message>
         <source>Angles equal</source>
-        <translation>Ίσες γωνίες</translation>
+        <translation type="vanished">Ίσες γωνίες</translation>
     </message>
     <message>
         <source>Color</source>
@@ -644,6 +651,18 @@
     <message>
         <source>Color:</source>
         <translation>Χρώμα:</translation>
+    </message>
+    <message>
+        <source>Pen style:</source>
+        <translation>Στυλ μαρκαδόρου:</translation>
+    </message>
+    <message>
+        <source>Approximation scale:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Set approximation scale for this curve, 0 - use global value</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -747,6 +766,18 @@
     <message>
         <source>Color:</source>
         <translation>Χρώμα:</translation>
+    </message>
+    <message>
+        <source>Pen style:</source>
+        <translation>Στυλ μαρκαδόρου:</translation>
+    </message>
+    <message>
+        <source>Approximation scale:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Set approximation scale for this curve, 0 - use global value</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -914,6 +945,18 @@
         <source>Tool cubic bezier</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Pen Style:</source>
+        <translation>Στυλ μαρκαδόρου:</translation>
+    </message>
+    <message>
+        <source>Approximation Scale:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Set approximation scale for this curve, 0 - use global value</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>DialogCubicBezierPath</name>
@@ -939,6 +982,18 @@
     </message>
     <message>
         <source>Tool cubic bezier path</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Pen style:</source>
+        <translation>Στυλ μαρκαδόρου:</translation>
+    </message>
+    <message>
+        <source>Approximation scale:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Set approximation scale for this curve, 0 - use global value</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -1219,7 +1274,7 @@
     </message>
     <message>
         <source>Segment a curved path</source>
-        <translation type="unfinished"></translation>
+        <translation>Διαχωρίστε ένα καμπύλο μονοπάτι</translation>
     </message>
     <message>
         <source>Color</source>
@@ -1267,6 +1322,25 @@
     </message>
 </context>
 <context>
+    <name>DialogDateTimeFormats</name>
+    <message>
+        <source>Label date time editor</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Format:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Insert a format</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&lt;empty&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>DialogDetail</name>
     <message>
         <source>Detail</source>
@@ -1307,6 +1381,10 @@
     <message>
         <source>Seam allowance tool</source>
         <translation type="vanished">Εργαλείο περιθωρίου ραφής</translation>
+    </message>
+    <message>
+        <source>All objects in path should follow in clockwise direction.</source>
+        <translation type="vanished">Όλα τα αντικείμενα του μονοπατιού θα πρέπει να ακολουθούν ωρολογιακή φορά.</translation>
     </message>
     <message>
         <source>Scroll down the list</source>
@@ -1449,6 +1527,14 @@
         <translation type="vanished">Περιορισμός αντιστροφής</translation>
     </message>
     <message>
+        <source>Letter of pattern piece</source>
+        <translation type="vanished">Γράμμα του κομματιού πατρόν</translation>
+    </message>
+    <message>
+        <source>Name can&apos;t be empty</source>
+        <translation type="vanished">Το όνομα δε μπορεί να είναι κενό</translation>
+    </message>
+    <message>
         <source>Grainline</source>
         <translation type="vanished">Ισιάδα</translation>
     </message>
@@ -1473,8 +1559,16 @@
         <translation type="vanished">Υπολογισμός</translation>
     </message>
     <message>
+        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation type="vanished">&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Εμφάνιση πλήρους υπολογισμού σε πλαίσιο μηνύματος&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+    </message>
+    <message>
         <source>Length:</source>
         <translation type="vanished">Μήκος:</translation>
+    </message>
+    <message>
+        <source>Infinite/undefined result</source>
+        <translation type="vanished">Απεριόριστο/απροσδιόριστο αποτέλεσμα</translation>
     </message>
     <message>
         <source>Length should be positive</source>
@@ -1498,6 +1592,274 @@
     </message>
 </context>
 <context>
+    <name>DialogDuplicateDetail</name>
+    <message>
+        <source>Dialog duplicate detail</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Click to place duplicate</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>DialogEditLabel</name>
+    <message>
+        <source>Edit label template</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Clear current and begin new label</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Import from label template</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Export label as template</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Edit</source>
+        <translation type="unfinished">Επεξεργασία</translation>
+    </message>
+    <message>
+        <source>Bold</source>
+        <comment>Font formating</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Italic</source>
+        <comment>Font formating</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Aligns with the left edge</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Centers horizontally in the available space</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Aligns with the right edge</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Additional font size. Use to make a line bigger.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Text:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Line of text</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Insert placeholders</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Preview</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&lt;empty&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Create new template</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Creating new template will overwrite the current, do you want to continue?</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Label template</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Export label template</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>template</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Could not save file</source>
+        <translation type="unfinished">Δεν είναι δυνατή η αποθήκευση αρχείου</translation>
+    </message>
+    <message>
+        <source>Import template</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Import template will overwrite the current, do you want to continue?</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>File error.</source>
+        <translation type="unfinished">Σφάλμα στο αρχείο.</translation>
+    </message>
+    <message>
+        <source>Date</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Time</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Pattern name</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Pattern number</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Company name or designer name</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Customer name</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Pattern extension</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Pattern file name</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Measurments file name</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Size</source>
+        <translation type="unfinished">Μέγεθος</translation>
+    </message>
+    <message>
+        <source>Height</source>
+        <translation type="unfinished">Ύψος</translation>
+    </message>
+    <message>
+        <source>Measurments extension</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Piece letter</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Piece annotation</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Piece orientation</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Piece rotation</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Piece tilt</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Piece fold position</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Piece name</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Quantity</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Material: Fabric</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Fabric</source>
+        <translation type="unfinished">Ύφασμα</translation>
+    </message>
+    <message>
+        <source>Material: Lining</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Lining</source>
+        <translation type="unfinished">Φόδρα</translation>
+    </message>
+    <message>
+        <source>Material: Interfacing</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Interfacing</source>
+        <translation type="unfinished">Ύφασμα ενίσχυσης</translation>
+    </message>
+    <message>
+        <source>Material: Interlining</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Interlining</source>
+        <translation type="unfinished">Ύφασμα επένδυσης</translation>
+    </message>
+    <message>
+        <source>Word: Cut</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Cut</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Word: on fold</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>on fold</source>
+        <translation type="unfinished">στη δίπλωση</translation>
+    </message>
+    <message>
+        <source>User material</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Insert…</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Move on top</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Move up</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Move down</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Move on bottom</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>DialogEditWrongFormula</name>
     <message>
         <source>Edit formula</source>
@@ -1517,7 +1879,7 @@
     </message>
     <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Εμφάνιση πλήρους υπολογισμού στ πλαίσιο μηνύματος&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+        <translation type="vanished">&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Εμφάνιση πλήρους υπολογισμού στ πλαίσιο μηνύματος&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <source>Input data</source>
@@ -1637,6 +1999,10 @@
     </message>
     <message>
         <source>Filter list by keyword</source>
+        <translation>Φιλτράρισμα λίστας με λέξη κλειδί</translation>
+    </message>
+    <message>
+        <source>Preview calculations</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -1648,7 +2014,7 @@
     </message>
     <message>
         <source>Formula wizard</source>
-        <translation type="unfinished">Βοηθός φόρμουλας</translation>
+        <translation>Βοηθός φόρμουλας</translation>
     </message>
     <message>
         <source>Value</source>
@@ -1660,7 +2026,7 @@
     </message>
     <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Εμφάνιση πλήρους υπολογισμού σε πλαίσιο μηνύματος&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <source>Radius2:</source>
@@ -1703,10 +2069,6 @@
         <translation>Η τιμή της ακτίνας δε μπορεί να είναι αρνητική</translation>
     </message>
     <message>
-        <source>Angles equal</source>
-        <translation>Ίσες γωνίες</translation>
-    </message>
-    <message>
         <source>Edit radius1</source>
         <translation>Επεξεργασία ακτίνας1</translation>
     </message>
@@ -1716,19 +2078,23 @@
     </message>
     <message>
         <source>Edit first angle</source>
-        <translation type="unfinished">Επεξεργασία πρώτης γωνίας</translation>
+        <translation>Επεξεργασία πρώτης γωνίας</translation>
     </message>
     <message>
         <source>Edit second angle</source>
-        <translation type="unfinished">Επεξεργασία δεύτερης γωνίας</translation>
+        <translation>Επεξεργασία δεύτερης γωνίας</translation>
     </message>
     <message>
         <source>Edit rotation angle</source>
-        <translation type="unfinished"></translation>
+        <translation>Αλλαγή γωνίας περιστροφής</translation>
     </message>
     <message>
         <source>Elliptical arc</source>
         <translation>Ελλειπτικό τόξο</translation>
+    </message>
+    <message>
+        <source>Pen style:</source>
+        <translation>Στυλ μαρκαδόρου:</translation>
     </message>
 </context>
 <context>
@@ -1838,11 +2204,11 @@
     <name>DialogExportToCSV</name>
     <message>
         <source>Export options</source>
-        <translation>Επιλογές εξαγωγής</translation>
+        <translation type="vanished">Επιλογές εξαγωγής</translation>
     </message>
     <message>
         <source>Export</source>
-        <translation>Εξαγωγή</translation>
+        <translation type="vanished">Εξαγωγή</translation>
     </message>
     <message>
         <source>With header</source>
@@ -1854,7 +2220,7 @@
     </message>
     <message>
         <source>Separator</source>
-        <translation type="unfinished"></translation>
+        <translation>Διαχωριστής</translation>
     </message>
     <message>
         <source>Tab</source>
@@ -1871,6 +2237,118 @@
     <message>
         <source>Space</source>
         <translation>Κενό</translation>
+    </message>
+    <message>
+        <source>Options</source>
+        <translation>Επιλογές</translation>
+    </message>
+    <message>
+        <source>Preview</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Global</source>
+        <comment>Options</comment>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>DialogFinalMeasurements</name>
+    <message>
+        <source>Final measurements</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Find:</source>
+        <translation type="unfinished">Εύρεση:</translation>
+    </message>
+    <message>
+        <source>Search</source>
+        <translation type="unfinished">Αναζήτηση</translation>
+    </message>
+    <message>
+        <source>Name</source>
+        <translation type="unfinished">Όνομα</translation>
+    </message>
+    <message>
+        <source>The calculated value</source>
+        <translation type="unfinished">Η υπολογισμένη τιμή</translation>
+    </message>
+    <message>
+        <source>Formula</source>
+        <translation type="unfinished">Φόρμουλα</translation>
+    </message>
+    <message>
+        <source>Details</source>
+        <translation type="unfinished">Λεπτομέρειες</translation>
+    </message>
+    <message>
+        <source>Name:</source>
+        <translation type="unfinished">Όνομα:</translation>
+    </message>
+    <message>
+        <source>Calculated value:</source>
+        <translation type="unfinished">Υπολογισμένη τιμή:</translation>
+    </message>
+    <message>
+        <source>Formula:</source>
+        <translation type="unfinished">Φόρμουλα:</translation>
+    </message>
+    <message>
+        <source>Calculation</source>
+        <translation type="unfinished">Υπολογισμός</translation>
+    </message>
+    <message>
+        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Formula wizard</source>
+        <translation type="unfinished">Βοηθός φόρμουλας</translation>
+    </message>
+    <message>
+        <source>Description:</source>
+        <translation type="unfinished">Περιγραφή:</translation>
+    </message>
+    <message>
+        <source>Move measurement up</source>
+        <translation type="unfinished">Μετακίνηση μέτρησης προς τα πάνω</translation>
+    </message>
+    <message>
+        <source>Move measurement down</source>
+        <translation type="unfinished">Μετακίνηση μέτρησης προς τα κάτω</translation>
+    </message>
+    <message>
+        <source>measurement</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Error</source>
+        <translation type="unfinished">Σφάλμα</translation>
+    </message>
+    <message>
+        <source>Empty field.</source>
+        <translation type="unfinished">Κενό πεδίο.</translation>
+    </message>
+    <message>
+        <source>Edit measurement</source>
+        <translation type="unfinished">Επεξεργασία μέτρησης</translation>
+    </message>
+    <message>
+        <source>Empty field</source>
+        <translation type="unfinished">Κενό πεδίο</translation>
+    </message>
+    <message>
+        <source>Invalid result. Value is infinite or NaN. Please, check your calculations.</source>
+        <translation type="unfinished">Μη έγκυρο αποτέλεσμα. Η τιμή είναι άπειρη ή NaN. Παρακαλώ, ελέγξτε τους υπολογισμούς σας.</translation>
+    </message>
+    <message>
+        <source>Value</source>
+        <translation type="unfinished">Τιμή</translation>
+    </message>
+    <message>
+        <source>Parser error: %1</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -1897,7 +2375,7 @@
     </message>
     <message>
         <source>Select origin point that is not part of the list of objects</source>
-        <translation type="unfinished"></translation>
+        <translation>Επιλέξτε σημείο προέλευσης που δεν είναι μέρος της λίστας αντικειμένων</translation>
     </message>
     <message>
         <source>Vertical axis</source>
@@ -1909,7 +2387,7 @@
     </message>
     <message>
         <source>Flipping by axis</source>
-        <translation type="unfinished"></translation>
+        <translation>Αναστροφή κατά άξονα</translation>
     </message>
 </context>
 <context>
@@ -1936,7 +2414,7 @@
     </message>
     <message>
         <source>Select first line point that is not part of the list of objects</source>
-        <translation type="unfinished"></translation>
+        <translation>Επιλέξτε πρώτο σημείο γραμμής που δεν είναι μέρος της λίστας αντικειμένων</translation>
     </message>
     <message>
         <source>Select second line point</source>
@@ -1944,11 +2422,11 @@
     </message>
     <message>
         <source>Select second line point that is not part of the list of objects</source>
-        <translation type="unfinished"></translation>
+        <translation>Επιλέξτε δεύτερο σημείο γραμμής που δεν είναι μέρος της λίστας αντικειμένων</translation>
     </message>
     <message>
         <source>Flipping by line</source>
-        <translation type="unfinished"></translation>
+        <translation>Αναστροφή κατά γραμμή</translation>
     </message>
 </context>
 <context>
@@ -2372,6 +2850,22 @@
     </message>
     <message>
         <source>Invalid result. Value is infinite or NaN. Please, check your calculations.</source>
+        <translation>Μη έγκυρο αποτέλεσμα. Η τιμή είναι άπειρη ή NaN. Παρακαλώ, ελέγξτε τους υπολογισμούς σας.</translation>
+    </message>
+    <message>
+        <source>Refresh a pattern with all changes you made</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Refresh</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Preview calculations</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Unique variable name</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -2379,7 +2873,7 @@
     <name>DialogInsertNode</name>
     <message>
         <source>Insert node</source>
-        <translation type="unfinished"></translation>
+        <translation>Εισάγετε κόμβο</translation>
     </message>
     <message>
         <source>Item:</source>
@@ -2393,6 +2887,29 @@
         <source>Uknown</source>
         <translation>Άγνωστο</translation>
     </message>
+    <message>
+        <source>The list of pieces is empty. Please, first create at least one piece for current pattern piece.</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>DialogKnownMaterials</name>
+    <message>
+        <source>Known materials</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Material:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Name of material</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>User material</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>DialogLayoutProgress</name>
@@ -2402,19 +2919,23 @@
     </message>
     <message>
         <source>Several workpieces left not arranged, but none of them match for paper</source>
-        <translation>Μερικά κομμάτια δεν έχουν τοποθετηθεί, αλλά κανένα απο αυτά δε χωράει στο χαρτί</translation>
+        <translation type="vanished">Μερικά κομμάτια δεν έχουν τοποθετηθεί, αλλά κανένα απο αυτά δε χωράει στο χαρτί</translation>
     </message>
     <message>
         <source>Create a Layout</source>
         <translation>Δημιουργία σχεδίου</translation>
     </message>
     <message>
-        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Finding best position for worpieces. Please, wait.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <source>Arranged workpieces: %1 from %2</source>
+        <translation>Τοποθετημένα κομμάτια: %1 από %2</translation>
+    </message>
+    <message>
+        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Finding best position for workpieces. Please, wait.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Arranged workpieces: %1 from %2</source>
-        <translation>Τοποθετημένα κομμάτια: %1 από %2</translation>
+        <source>One or more pattern pieces are bigger than the paper format you selected. Please, select a bigger paper format.</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -2469,7 +2990,7 @@
     </message>
     <message>
         <source>Descending area</source>
-        <translation type="unfinished"></translation>
+        <translation>Σμίκρυνση περιοχής</translation>
     </message>
     <message>
         <source>Millimiters</source>
@@ -2509,31 +3030,31 @@
     </message>
     <message>
         <source>Letter</source>
-        <translation>Letter</translation>
+        <translation type="vanished">Letter</translation>
     </message>
     <message>
         <source>Legal</source>
-        <translation>Legal</translation>
+        <translation type="vanished">Legal</translation>
     </message>
     <message>
         <source>Roll 24in</source>
-        <translation>Ρολό 24 ιντσών</translation>
+        <translation type="vanished">Ρολό 24 ιντσών</translation>
     </message>
     <message>
         <source>Roll 30in</source>
-        <translation>Ρολό 30 ιντσών</translation>
+        <translation type="vanished">Ρολό 30 ιντσών</translation>
     </message>
     <message>
         <source>Roll 36in</source>
-        <translation>Ρολό 36 ιντσών</translation>
+        <translation type="vanished">Ρολό 36 ιντσών</translation>
     </message>
     <message>
         <source>Roll 42in</source>
-        <translation>Ρολό 42 ιντσών</translation>
+        <translation type="vanished">Ρολό 42 ιντσών</translation>
     </message>
     <message>
         <source>Roll 44in</source>
-        <translation>Ρολό 44 ιντσών</translation>
+        <translation type="vanished">Ρολό 44 ιντσών</translation>
     </message>
     <message>
         <source>Paper format</source>
@@ -2541,7 +3062,7 @@
     </message>
     <message>
         <source>Fields</source>
-        <translation>Πεδία</translation>
+        <translation type="vanished">Πεδία</translation>
     </message>
     <message>
         <source>Left:</source>
@@ -2561,11 +3082,11 @@
     </message>
     <message>
         <source>Ignore fileds</source>
-        <translation>Αγνόηση πεδίων</translation>
+        <translation type="vanished">Αγνόηση πεδίων</translation>
     </message>
     <message>
         <source>Custom</source>
-        <translation type="unfinished"></translation>
+        <translation type="vanished">Προσαρμογή</translation>
     </message>
     <message>
         <source>Wrong fields.</source>
@@ -2575,7 +3096,9 @@
         <source>Fields go beyond printing. 
 
 Apply settings anyway?</source>
-        <translation type="unfinished"></translation>
+        <translation type="vanished">Τα πεδία υπερβαίνουν την εκτύπωση. 
+
+Εφαρμογή των ρυθμίσεων ούτως ή άλλως;</translation>
     </message>
     <message>
         <source>
@@ -2628,6 +3151,32 @@ Apply settings anyway?</source>
         <source>None</source>
         <comment>Printer</comment>
         <translation>Κανένα</translation>
+    </message>
+    <message>
+        <source>Text</source>
+        <translation>Κείμενο</translation>
+    </message>
+    <message>
+        <source>Text will be converted to paths</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Export text as paths</source>
+        <translation>Εξαγωγή κειμένου ως μονοπάτια</translation>
+    </message>
+    <message>
+        <source>Margins</source>
+        <translation>Περιθώρια</translation>
+    </message>
+    <message>
+        <source>Ignore margins</source>
+        <translation>Αγνόηση περιθωρίων</translation>
+    </message>
+    <message>
+        <source>Margins go beyond printing. 
+
+Apply settings anyway?</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -2938,7 +3487,7 @@ Apply settings anyway?</source>
     <message>
         <source>Men &amp; Tailoring</source>
         <comment>Measurement section</comment>
-        <translation type="unfinished"></translation>
+        <translation>Άνδρες &amp; Ράψιμο</translation>
     </message>
     <message>
         <source>Historical &amp; Specialty</source>
@@ -2966,6 +3515,18 @@ Apply settings anyway?</source>
         <source>Uncheck all</source>
         <translation>Αποεπιλογή όλων</translation>
     </message>
+    <message>
+        <source>Search:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Search</source>
+        <translation>Αναζήτηση</translation>
+    </message>
+    <message>
+        <source>Select measurement</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>DialogMove</name>
@@ -2987,7 +3548,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Εμφάνιση πλήρους υπολογισμού σε πλαίσιο μηνύματος&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <source>Length:</source>
@@ -3012,6 +3573,22 @@ Apply settings anyway?</source>
     <message>
         <source>Move</source>
         <translation>Μετακίνηση</translation>
+    </message>
+    <message>
+        <source>Rotation angle:</source>
+        <translation>Γωνία περιστροφής:</translation>
+    </message>
+    <message>
+        <source>Edit rotation angle</source>
+        <translation>Αλλαγή γωνίας περιστροφής</translation>
+    </message>
+    <message>
+        <source>Rotation origin point:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Center point</source>
+        <translation>Κεντρικό σημείο</translation>
     </message>
 </context>
 <context>
@@ -3038,11 +3615,11 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Individual</source>
-        <translation type="unfinished"></translation>
+        <translation>Ατομικές</translation>
     </message>
     <message>
         <source>Standard</source>
-        <translation>Στάνταρ</translation>
+        <translation type="vanished">Στάνταρ</translation>
     </message>
     <message>
         <source>Centimeters</source>
@@ -3056,9 +3633,17 @@ Apply settings anyway?</source>
         <source>Inches</source>
         <translation>Ίντσες</translation>
     </message>
+    <message>
+        <source>Multisize</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>DialogNewPattern</name>
+    <message>
+        <source>Individual measurements</source>
+        <translation type="vanished">Ατομικές μετρήσεις</translation>
+    </message>
     <message>
         <source>Pattern piece name</source>
         <translation type="vanished">Όνομα κομματιού πατρόν</translation>
@@ -3208,6 +3793,21 @@ Apply settings anyway?</source>
     </message>
 </context>
 <context>
+    <name>DialogPatternMaterials</name>
+    <message>
+        <source>Dialog</source>
+        <translation type="unfinished">Διάλογος</translation>
+    </message>
+    <message>
+        <source>Placeholder</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Value</source>
+        <translation type="unfinished">Τιμή</translation>
+    </message>
+</context>
+<context>
     <name>DialogPatternProperties</name>
     <message>
         <source>Pattern properties</source>
@@ -3215,11 +3815,11 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Description</source>
-        <translation>Περιγραφή</translation>
+        <translation type="vanished">Περιγραφή</translation>
     </message>
     <message>
         <source>Author name</source>
-        <translation>Όνομα συγγραφέα</translation>
+        <translation type="vanished">Όνομα συγγραφέα</translation>
     </message>
     <message>
         <source>Pattern description</source>
@@ -3227,7 +3827,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>For technical notes.</source>
-        <translation>Για τεχνικές σημειώσεις.</translation>
+        <translation type="vanished">Για τεχνικές σημειώσεις.</translation>
     </message>
     <message>
         <source>Heights and Sizes</source>
@@ -3247,11 +3847,11 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>From standard measurements</source>
-        <translation>Απο στάνταρ μετρήσεις</translation>
+        <translation type="vanished">Απο στάνταρ μετρήσεις</translation>
     </message>
     <message>
         <source>Custom</source>
-        <translation type="unfinished"></translation>
+        <translation>Προσαρμογή</translation>
     </message>
     <message>
         <source>Height:</source>
@@ -3335,7 +3935,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>General info</source>
-        <translation>Γενικές πληροφορίες</translation>
+        <translation type="vanished">Γενικές πληροφορίες</translation>
     </message>
     <message>
         <source>Pattern name:</source>
@@ -3359,7 +3959,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Pattern size:</source>
-        <translation>Μέγεθος πατρόν:</translation>
+        <translation type="vanished">Μέγεθος πατρόν:</translation>
     </message>
     <message>
         <source>Show measurements</source>
@@ -3370,16 +3970,76 @@ Apply settings anyway?</source>
         <translation type="vanished">Εμφάνιση ημερομηνίας δημιουργίας</translation>
     </message>
     <message>
-        <source>Use %1 and %2 to insert pattern size and height</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Show date of layout creation (%1)</source>
-        <translation>Εμφάνιση ημερομηνίας της δημιουργίας τοποθέτησης (%1)</translation>
+        <translation type="vanished">Εμφάνιση ημερομηνίας της δημιουργίας τοποθέτησης (%1)</translation>
     </message>
     <message>
         <source>Show measurements file</source>
-        <translation>Εμφάνιση αρχείου μετρήσεων</translation>
+        <translation type="vanished">Εμφάνιση αρχείου μετρήσεων</translation>
+    </message>
+    <message>
+        <source>From multisize measurements</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Pattern</source>
+        <translation type="unfinished">Πατρόν</translation>
+    </message>
+    <message>
+        <source>For technical notes</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Label data</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Label template:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Edit pattern label</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Edit template</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Date format:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Time format:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Save label data.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Label data were changed. Do you want to save them before editing label template?</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Materials</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Pattern materials:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Manage list of pattern materials</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Manage</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>The customer name from individual measurements</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -3411,6 +4071,10 @@ Apply settings anyway?</source>
     <message>
         <source>Remove attribute</source>
         <translation type="vanished">Αφαίρεση ιδιότητας</translation>
+    </message>
+    <message>
+        <source>Remove node</source>
+        <translation type="vanished">Αφαίρεση κόμβου</translation>
     </message>
     <message>
         <source>Set</source>
@@ -3445,6 +4109,14 @@ Apply settings anyway?</source>
         <translation type="vanished">Χωρίς αλλαγές</translation>
     </message>
     <message>
+        <source>Cannot delete previously created node</source>
+        <translation type="vanished">Δεν μπορεί να γίνει διαγραφή του κόμβου που δημιουργήθηκε προηγουμένως</translation>
+    </message>
+    <message>
+        <source>No changes left</source>
+        <translation type="vanished">Δεν υπάρχουν άλλες αλλαγές</translation>
+    </message>
+    <message>
         <source>Cannot undo change</source>
         <translation type="vanished">Δεν είναι δυνατή η αναίρεση της αλλαγής</translation>
     </message>
@@ -3461,8 +4133,16 @@ Apply settings anyway?</source>
         <translation type="vanished">Δε μπορεί να γίνει διαγραφή της ιδιότητας που δημιουργήθηκε προηγουμένως</translation>
     </message>
     <message>
+        <source>Node Name</source>
+        <translation type="vanished">Όνομα Κόμβου</translation>
+    </message>
+    <message>
         <source>Name:</source>
         <translation type="vanished">Όνομα:</translation>
+    </message>
+    <message>
+        <source>Node Value (may be empty)</source>
+        <translation type="vanished">Τιμή Κόμβου (μπορεί να είναι κενό)</translation>
     </message>
     <message>
         <source>Value:</source>
@@ -3521,7 +4201,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Create name for your path</source>
-        <translation type="unfinished"></translation>
+        <translation>Δημιουργία ονόματος για το μονοπάτι σας</translation>
     </message>
     <message>
         <source>Type:</source>
@@ -3549,7 +4229,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Formula wizard</source>
-        <translation type="unfinished">Βοηθός φόρμουλας</translation>
+        <translation>Βοηθός φόρμουλας</translation>
     </message>
     <message>
         <source>Value</source>
@@ -3561,7 +4241,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Εμφάνιση πλήρους υπολογισμού σε πλαίσιο μηνύματος&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <source>Nodes</source>
@@ -3569,11 +4249,11 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Node:</source>
-        <translation type="unfinished"></translation>
+        <translation>Κόμβος:</translation>
     </message>
     <message>
         <source>Before:</source>
-        <translation type="unfinished"></translation>
+        <translation>Πριν:</translation>
     </message>
     <message>
         <source>Return to default width</source>
@@ -3585,7 +4265,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>After:</source>
-        <translation type="unfinished"></translation>
+        <translation>Μετά:</translation>
     </message>
     <message>
         <source>Angle:</source>
@@ -3625,7 +4305,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Custom seam allowance</source>
-        <translation type="unfinished"></translation>
+        <translation>Προσαρμοσμένο περιθώριο ραφής</translation>
     </message>
     <message>
         <source>You need more points!</source>
@@ -3633,7 +4313,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>First point of &lt;b&gt;custom seam allowance&lt;/b&gt; cannot be equal to the last point!</source>
-        <translation type="unfinished"></translation>
+        <translation>Το πρώτο σημείο του &lt;b&gt;προσαρμοσμένου περιθωρίου ραφής&lt;/b&gt; δεν μπορεί να είναι ίσο με το τελευταίο σημείο!</translation>
     </message>
     <message>
         <source>You have double points!</source>
@@ -3676,10 +4356,6 @@ Apply settings anyway?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Each point in the path must be unique!</source>
-        <translation>Κάθε σημείο στο μονοπάτι πρέπει να είναι μοναδικό!</translation>
-    </message>
-    <message>
         <source>Marks</source>
         <translation>Σημάδια</translation>
     </message>
@@ -3697,7 +4373,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>List of details is empty!</source>
-        <translation type="unfinished"></translation>
+        <translation>Η λίστα με τις λεπτομέρειες είναι άδεια!</translation>
     </message>
     <message>
         <source>Select if need designate the corner point as a passmark</source>
@@ -3705,7 +4381,111 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Intersection</source>
+        <translation>Διατομή</translation>
+    </message>
+    <message>
+        <source>Each point in the &lt;b&gt;custom seam allowance&lt;/b&gt; path must be unique!</source>
         <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Cut on fabric</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Select if need designate the corner point as a passmark. Show only left passmark.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Intersection (only left)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Select if need designate the corner point as a passmark. Show only right passmark.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Intersection (only right)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Control</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Visible</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Create a formula that regulates visibility. Values different from &quot;0&quot; make a path visible.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Control visibility</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Intersection 2</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Intersection 2 (only left)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Intersection 2 (only right)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Check uniqueness</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Move on top</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Move up</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Move down</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Move on bottom</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Continue the first point to the cutting contour</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Continue the last point to the cutting contour</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>The path is a cut contour. Use to control export to DXF-AAMA</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>The list of pieces is empty. Please, first create at least one piece for current pattern piece.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>This option has effect only if the second passmark on seam line enabled in global preferences. The option helps disable the second passmark for this passmark only.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Show the second passmark on seam line</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Excluded</source>
+        <translation type="unfinished">Εξαιρούμενο</translation>
     </message>
 </context>
 <context>
@@ -3725,6 +4505,129 @@ Apply settings anyway?</source>
     <message>
         <source>Pin</source>
         <translation>Πινέζα</translation>
+    </message>
+    <message>
+        <source>The list of pieces is empty. Please, first create at least one piece for current pattern piece.</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>DialogPlaceLabel</name>
+    <message>
+        <source>Width:</source>
+        <translation type="unfinished">Φάρδος:</translation>
+    </message>
+    <message>
+        <source>Formula wizard</source>
+        <translation type="unfinished">Βοηθός φόρμουλας</translation>
+    </message>
+    <message>
+        <source>Value</source>
+        <translation type="unfinished">Τιμή</translation>
+    </message>
+    <message>
+        <source>Calculation</source>
+        <translation type="unfinished">Υπολογισμός</translation>
+    </message>
+    <message>
+        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Height:</source>
+        <translation type="unfinished">Ύψος:</translation>
+    </message>
+    <message>
+        <source>Angle:</source>
+        <translation type="unfinished">Γωνία:</translation>
+    </message>
+    <message>
+        <source>0</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Point:</source>
+        <translation type="unfinished">Σημείο:</translation>
+    </message>
+    <message>
+        <source>Piece:</source>
+        <translation type="unfinished">Κομμάτι:</translation>
+    </message>
+    <message>
+        <source>Type:</source>
+        <translation type="unfinished">Τύπος:</translation>
+    </message>
+    <message>
+        <source>Edit rectangle width</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Edit angle</source>
+        <translation type="unfinished">Επεξεργασία γωνίας</translation>
+    </message>
+    <message>
+        <source>Segment</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Rectangle</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Cross</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>T-shaped</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Doubletree</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Corner</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Triangle</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>H-shaped</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Button</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Place label</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Control</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Visible</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Create a formula that regulates visibility. Values different from &quot;0&quot; make a path visible.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>The list of pieces is empty. Please, first create at least one piece for current pattern piece.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Control visibility</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -3748,6 +4651,10 @@ Apply settings anyway?</source>
     <message>
         <source>Select point of center of arc</source>
         <translation type="vanished">Επιλέξτε το κεντρικό σημείο του τόξου</translation>
+    </message>
+    <message>
+        <source>Take</source>
+        <translation type="vanished">Πάρε</translation>
     </message>
     <message>
         <source>Select an arc</source>
@@ -3775,7 +4682,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Take:</source>
-        <translation type="unfinished"></translation>
+        <translation>Πάρε:</translation>
     </message>
 </context>
 <context>
@@ -3807,6 +4714,10 @@ Apply settings anyway?</source>
     <message>
         <source>Tangent point</source>
         <translation type="vanished">Σημείο εφαπτομένης</translation>
+    </message>
+    <message>
+        <source>Take</source>
+        <translation type="vanished">Πάρε</translation>
     </message>
     <message>
         <source>Select a circle center</source>
@@ -3862,7 +4773,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Take:</source>
-        <translation type="unfinished"></translation>
+        <translation>Πάρε:</translation>
     </message>
 </context>
 <context>
@@ -4026,6 +4937,10 @@ Apply settings anyway?</source>
         <translation type="vanished">Δεύτερο τόξο</translation>
     </message>
     <message>
+        <source>Take</source>
+        <translation type="vanished">Πάρε</translation>
+    </message>
+    <message>
         <source>Select second an arc</source>
         <translation type="unfinished"></translation>
     </message>
@@ -4051,7 +4966,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Take:</source>
-        <translation type="unfinished"></translation>
+        <translation>Πάρε:</translation>
     </message>
     <message>
         <source>Tool point of intersetion arcs</source>
@@ -4091,6 +5006,10 @@ Apply settings anyway?</source>
     <message>
         <source>Center of the second circle</source>
         <translation type="vanished">Κέντρο του δεύτερου κύκλου</translation>
+    </message>
+    <message>
+        <source>Take</source>
+        <translation type="vanished">Πάρε</translation>
     </message>
     <message>
         <source>Select second circle center</source>
@@ -4154,7 +5073,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Take:</source>
-        <translation type="unfinished"></translation>
+        <translation>Πάρε:</translation>
     </message>
     <message>
         <source>Tool point of intersection circles</source>
@@ -4218,6 +5137,13 @@ Apply settings anyway?</source>
         <source>Paths</source>
         <translation>Μονοπάτια</translation>
     </message>
+    <message numerus="yes">
+        <source>Followed %n option(s) require restart to take effect: %1.</source>
+        <translation type="unfinished">
+            <numerusform></numerusform>
+            <numerusform></numerusform>
+        </translation>
+    </message>
 </context>
 <context>
     <name>DialogRotation</name>
@@ -4263,7 +5189,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Select origin point that is not part of the list of objects</source>
-        <translation type="unfinished"></translation>
+        <translation type="vanished">Επιλέξτε σημείο προέλευσης που δεν είναι μέρος της λίστας αντικειμένων</translation>
     </message>
     <message>
         <source>Calculation</source>
@@ -4290,7 +5216,11 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Browse...</source>
-        <translation>Περιήγηση...</translation>
+        <translation type="vanished">Περιήγηση...</translation>
+    </message>
+    <message>
+        <source>TextLabel</source>
+        <translation type="vanished">ΚείμενοΕτικέτας</translation>
     </message>
     <message>
         <source>Destination folder</source>
@@ -4306,11 +5236,67 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>File base name</source>
-        <translation type="unfinished"></translation>
+        <translation>Όνομα αρχείου βάσης</translation>
+    </message>
+    <message>
+        <source>File base name. </source>
+        <translation type="vanished">Όνομα αρχείου βάσης.</translation>
+    </message>
+    <message>
+        <source>File base name.</source>
+        <translation type="vanished">Όνομα αρχείου βάσης.</translation>
     </message>
     <message>
         <source>Path to destination folder</source>
         <translation>Διαδρομή για φάκελο προορισμού</translation>
+    </message>
+    <message>
+        <source>Binary form</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Text as paths</source>
+        <translation>Κείμενο ως μονοπάτια</translation>
+    </message>
+    <message>
+        <source>Margins</source>
+        <translation type="unfinished">Περιθώρια</translation>
+    </message>
+    <message>
+        <source>Right:</source>
+        <translation type="unfinished">Δεξιά:</translation>
+    </message>
+    <message>
+        <source>Left:</source>
+        <translation type="unfinished">Αριστερά:</translation>
+    </message>
+    <message>
+        <source>Top:</source>
+        <translation type="unfinished">Επάνω:</translation>
+    </message>
+    <message>
+        <source>Bottom:</source>
+        <translation type="unfinished">Κάτω:</translation>
+    </message>
+    <message>
+        <source>Paper format</source>
+        <translation type="unfinished">Μορφή χαρτιού</translation>
+    </message>
+    <message>
+        <source>Browse…</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>cm</source>
+        <translation type="unfinished">εκ</translation>
+    </message>
+    <message>
+        <source>Templates:</source>
+        <translation>Πρότυπα:</translation>
+    </message>
+    <message>
+        <source>Orientation:</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -4379,13 +5365,17 @@ Apply settings anyway?</source>
         <source>files</source>
         <translation>αρχεία</translation>
     </message>
+    <message>
+        <source>(flat) files</source>
+        <translation>(επίπεδα) αρχεία</translation>
+    </message>
+    <message>
+        <source>Image files</source>
+        <translation>Αρχεία εικόνων</translation>
+    </message>
 </context>
 <context>
     <name>DialogSeamAllowance</name>
-    <message>
-        <source>Seam allowance tool</source>
-        <translation>Εργαλείο περιθωρίου ραφής</translation>
-    </message>
     <message>
         <source>Ready!</source>
         <translation>Έτοιμο!</translation>
@@ -4395,8 +5385,8 @@ Apply settings anyway?</source>
         <translation>Τιμή</translation>
     </message>
     <message>
-        <source>Add</source>
-        <translation>Προσθήκη</translation>
+        <source>Detail</source>
+        <translation>Λεπτομέρεια</translation>
     </message>
     <message>
         <source>Grainline</source>
@@ -4405,14 +5395,6 @@ Apply settings anyway?</source>
     <message>
         <source>Select main path objects clockwise, &lt;b&gt;Shift&lt;/b&gt; - reverse direction curve, &lt;b&gt;Enter&lt;/b&gt; - finish creation</source>
         <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Cut %1 of %2%3</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>on Fold</source>
-        <translation>στη Δίπλωση</translation>
     </message>
     <message>
         <source>Reverse</source>
@@ -4432,7 +5414,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Infinite/undefined result</source>
-        <translation type="unfinished"></translation>
+        <translation>Απεριόριστο/απροσδιόριστο αποτέλεσμα</translation>
     </message>
     <message>
         <source>Length should be positive</source>
@@ -4441,10 +5423,6 @@ Apply settings anyway?</source>
     <message>
         <source>Parser error: %1</source>
         <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Update</source>
-        <translation>Ενημέρωση</translation>
     </message>
     <message>
         <source>Current seam allowance</source>
@@ -4484,31 +5462,23 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>main path</source>
-        <translation type="unfinished"></translation>
+        <translation>κύριο μονοπάτι</translation>
     </message>
     <message>
         <source>custom seam allowance</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>None</source>
-        <translation type="unfinished">Κανένα</translation>
-    </message>
-    <message>
-        <source>Cut on fold</source>
-        <translation type="unfinished">Κόψιμο στη δίπλωση</translation>
+        <translation>προσαρμοσμένο περιθώριο ραφής</translation>
     </message>
     <message>
         <source>Both</source>
-        <translation type="unfinished">Και τα δύο</translation>
+        <translation>Και τα δύο</translation>
     </message>
     <message>
         <source>Just front</source>
-        <translation type="unfinished">Μόνο μπροστά</translation>
+        <translation>Μόνο μπροστά</translation>
     </message>
     <message>
         <source>Just rear</source>
-        <translation type="unfinished">Μόνο πίσω</translation>
+        <translation>Μόνο πίσω</translation>
     </message>
     <message>
         <source>Pins</source>
@@ -4520,27 +5490,27 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Labels</source>
-        <translation type="unfinished"></translation>
+        <translation>Ετικέτες</translation>
     </message>
     <message>
         <source>Error</source>
-        <translation type="unfinished">Σφάλμα</translation>
+        <translation>Σφάλμα</translation>
     </message>
     <message>
         <source>Edit length</source>
-        <translation type="unfinished">Επεξεργασία μήκους</translation>
+        <translation>Επεξεργασία μήκους</translation>
     </message>
     <message>
         <source>Edit angle</source>
-        <translation type="unfinished">Επεξεργασία γωνίας</translation>
+        <translation>Επεξεργασία γωνίας</translation>
     </message>
     <message>
         <source>Edit height</source>
-        <translation type="unfinished"></translation>
+        <translation>Επεξεργασία ύψους</translation>
     </message>
     <message>
         <source>Edit width</source>
-        <translation type="unfinished"></translation>
+        <translation>Επεξεργασία πλάτους</translation>
     </message>
     <message>
         <source>Paths</source>
@@ -4548,7 +5518,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Excluded</source>
-        <translation type="unfinished"></translation>
+        <translation>Εξαιρούμενο</translation>
     </message>
     <message>
         <source>Passmark</source>
@@ -4563,7 +5533,55 @@ Apply settings anyway?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>To open all detail&apos;s features complete creating the main path.</source>
+        <source>Workpiece tool</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Segment</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Rectangle</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Cross</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>T-shaped</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Doubletree</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Corner</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Triangle</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>H-shaped</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Button</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Place label</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Check uniqueness</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>To open all detail&apos;s features complete creating the main path. Please, press OK.</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -4678,7 +5696,7 @@ Apply settings anyway?</source>
     <name>DialogSinglePoint</name>
     <message>
         <source>Single point</source>
-        <translation type="unfinished"></translation>
+        <translation>Μονό σημείο</translation>
     </message>
     <message>
         <source>Coordinates on the sheet</source>
@@ -4809,19 +5827,19 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Edit first control point angle</source>
-        <translation type="unfinished"></translation>
+        <translation>Επεξεργασία γωνίας του πρώτου σημείου ελέγχου</translation>
     </message>
     <message>
         <source>Edit second control point angle</source>
-        <translation type="unfinished"></translation>
+        <translation>Επεξεργασία γωνίας του δεύτερου σημείου ελέγχου</translation>
     </message>
     <message>
         <source>Edit first control point length</source>
-        <translation type="unfinished"></translation>
+        <translation>Επεξεργασία μήκους του πρώτου σημείου ελέγχου</translation>
     </message>
     <message>
         <source>Edit second control point length</source>
-        <translation type="unfinished"></translation>
+        <translation>Επεξεργασία μήκους του δεύτερου σημείου ελέγχου</translation>
     </message>
     <message>
         <source>Error</source>
@@ -4834,6 +5852,18 @@ Apply settings anyway?</source>
     <message>
         <source>Calculation</source>
         <translation>Υπολογισμός</translation>
+    </message>
+    <message>
+        <source>Pen style:</source>
+        <translation>Στυλ μαρκαδόρου:</translation>
+    </message>
+    <message>
+        <source>Approximation scale:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Set approximation scale for this curve, 0 - use global value</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -4936,19 +5966,19 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Edit first control point angle</source>
-        <translation type="unfinished"></translation>
+        <translation>Επεξεργασία γωνίας του πρώτου σημείου ελέγχου</translation>
     </message>
     <message>
         <source>Edit second control point angle</source>
-        <translation type="unfinished"></translation>
+        <translation>Επεξεργασία γωνίας του δεύτερου σημείου ελέγχου</translation>
     </message>
     <message>
         <source>Edit first control point length</source>
-        <translation type="unfinished"></translation>
+        <translation>Επεξεργασία μήκους του πρώτου σημείου ελέγχου</translation>
     </message>
     <message>
         <source>Edit second control point length</source>
-        <translation type="unfinished"></translation>
+        <translation>Επεξεργασία μήκους του δεύτερου σημείου ελέγχου</translation>
     </message>
     <message>
         <source>Error</source>
@@ -4960,11 +5990,23 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Not used</source>
-        <translation type="unfinished"></translation>
+        <translation>Δε χρησιμοποιείται</translation>
     </message>
     <message>
         <source>Calculation</source>
         <translation>Υπολογισμός</translation>
+    </message>
+    <message>
+        <source>Pen style:</source>
+        <translation>Στυλ μαρκαδόρου:</translation>
+    </message>
+    <message>
+        <source>Approximation scale:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Set approximation scale for this curve, 0 - use global value</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -4994,7 +6036,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Value can&apos;t be 0</source>
-        <translation type="unfinished"></translation>
+        <translation>Η τιμή δεν μπορεί να είναι 0</translation>
     </message>
     <message>
         <source>Value</source>
@@ -5034,7 +6076,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>by length</source>
-        <translation type="unfinished"></translation>
+        <translation>κατά μήκος</translation>
     </message>
     <message>
         <source>by points intersetions</source>
@@ -5058,11 +6100,11 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Invalid result. Value is infinite or NaN. Please, check your calculations.</source>
-        <translation type="unfinished"></translation>
+        <translation>Μη έγκυρο αποτέλεσμα. Η τιμή είναι άπειρη ή NaN. Παρακαλώ, ελέγξτε τους υπολογισμούς σας.</translation>
     </message>
     <message>
         <source>Value can&apos;t be less than 0</source>
-        <translation type="unfinished"></translation>
+        <translation>Η τιμή δεν μπορεί να είναι λιγότερο από 0</translation>
     </message>
 </context>
 <context>
@@ -5325,7 +6367,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>A new version of %1 is available!</source>
-        <translation>Μια νέα έκδοση του %1 είναι διαθέσιμη!</translation>
+        <translation type="vanished">Μια νέα έκδοση του %1 είναι διαθέσιμη!</translation>
     </message>
     <message>
         <source>%1 %2 is now available - you have %3. Would you like to download it now?</source>
@@ -5343,16 +6385,20 @@ Apply settings anyway?</source>
         <source>Get Update</source>
         <translation>Λήψη ενημέρωσης</translation>
     </message>
+    <message>
+        <source>%1 update is available!</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>FvUpdater</name>
     <message>
         <source>Cannot open your default browser.</source>
-        <translation type="unfinished"></translation>
+        <translation>Δεν είναι δυνατό το άνοιγμα του προεπιλεγμένου σας περιηγητή.</translation>
     </message>
     <message>
         <source>Feed download failed: %1.</source>
-        <translation type="unfinished"></translation>
+        <translation>Η λήψη της φόρτωσης απέτυχε: %1.</translation>
     </message>
     <message>
         <source>Feed parsing failed: %1 %2.</source>
@@ -5368,11 +6414,11 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Error</source>
-        <translation>Σφάλμα</translation>
+        <translation type="vanished">Σφάλμα</translation>
     </message>
     <message>
         <source>Information</source>
-        <translation>Πληροφορίες</translation>
+        <translation type="vanished">Πληροφορίες</translation>
     </message>
 </context>
 <context>
@@ -5390,7 +6436,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Error bad id. Program will be terminated.</source>
-        <translation type="unfinished"></translation>
+        <translation>Σφάλμα κακής ταυτότητας. Το πρόγραμμα θα τερματιστεί.</translation>
     </message>
     <message>
         <source>Error can&apos;t convert value. Program will be terminated.</source>
@@ -5438,7 +6484,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>The pattern unit</source>
-        <translation type="unfinished"></translation>
+        <translation>Η μονάδα του πατρόν</translation>
     </message>
     <message>
         <source>Invalid base size argument. Must be cm, mm or inch.</source>
@@ -5446,7 +6492,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Can&apos;t begin to listen for incoming connections on name &apos;%1&apos;</source>
-        <translation type="unfinished"></translation>
+        <translation>Δεν μπορεί να αρχίσει να ακούει τις εισερχόμενες συνδέσεις στο όνομα &apos;%1&apos;</translation>
     </message>
     <message>
         <source>Test mode doesn&apos;t support openning several files.</source>
@@ -5637,7 +6683,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Save &amp;As...</source>
-        <translation>Αποθήκευση &amp;ως...</translation>
+        <translation type="vanished">Αποθήκευση &amp;ως...</translation>
     </message>
     <message>
         <source>Save not yet saved pattern</source>
@@ -5757,7 +6803,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Show online help</source>
-        <translation>Εμφάνιση βοήθειας online</translation>
+        <translation type="vanished">Εμφάνιση βοήθειας online</translation>
     </message>
     <message>
         <source>Pattern piece %1</source>
@@ -5845,7 +6891,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Pattern files (*.val)</source>
-        <translation>Αρχεία πατρόν (*.val)</translation>
+        <translation type="vanished">Αρχεία πατρόν (*.val)</translation>
     </message>
     <message>
         <source>pattern</source>
@@ -5885,7 +6931,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Bad id.</source>
-        <translation type="unfinished"></translation>
+        <translation>Κακή ταυτότητα.</translation>
     </message>
     <message>
         <source>File saved</source>
@@ -5923,11 +6969,11 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Wrong units.</source>
-        <translation>Λανθασμένες μονάδες.</translation>
+        <translation type="vanished">Λανθασμένες μονάδες.</translation>
     </message>
     <message>
         <source>Application doesn&apos;t support standard table with inches.</source>
-        <translation>Η εφαρμογή δεν υποστηρίζει στάνταρ πίνακα με ίντσες.</translation>
+        <translation type="vanished">Η εφαρμογή δεν υποστηρίζει στάνταρ πίνακα με ίντσες.</translation>
     </message>
     <message>
         <source>File error.</source>
@@ -5935,7 +6981,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>File loaded</source>
-        <translation>Το αρχείο φορτώθηκε</translation>
+        <translation type="vanished">Το αρχείο φορτώθηκε</translation>
     </message>
     <message>
         <source>Valentina didn&apos;t shut down correctly. Do you want reopen files (%1) you had open?</source>
@@ -5963,7 +7009,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Point at intersection of arc and line</source>
-        <translation>Σημείο στην τομή τόξου και γραμμής</translation>
+        <translation type="vanished">Σημείο στην τομή τόξου και γραμμής</translation>
     </message>
     <message>
         <source>Point from X and Y of two other points</source>
@@ -5987,7 +7033,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Segment a curved path</source>
-        <translation type="unfinished"></translation>
+        <translation>Διαχωρίστε ένα καμπύλο μονοπάτι</translation>
     </message>
     <message>
         <source>Point intersect curve and axis</source>
@@ -6003,7 +7049,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Seam allowance tool</source>
-        <translation>Εργαλείο περιθωρίου ραφής</translation>
+        <translation type="vanished">Εργαλείο περιθωρίου ραφής</translation>
     </message>
     <message>
         <source>Union tool</source>
@@ -6051,7 +7097,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Tools</source>
-        <translation>Εργαλεία</translation>
+        <translation type="vanished">Εργαλεία</translation>
     </message>
     <message>
         <source>Point of intersection arcs</source>
@@ -6091,11 +7137,11 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Save as tiled PDF</source>
-        <translation>Αποθήκευση ως τεμαχισμένο PDF</translation>
+        <translation type="vanished">Αποθήκευση ως τεμαχισμένο PDF</translation>
     </message>
     <message>
         <source>Split and save a layout into smaller pages</source>
-        <translation>Διαχωρισμός και αποθήκευση της τοποθέτησης σε μικρότερες σελίδες</translation>
+        <translation type="vanished">Διαχωρισμός και αποθήκευση της τοποθέτησης σε μικρότερες σελίδες</translation>
     </message>
     <message>
         <source>Print</source>
@@ -6119,7 +7165,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Export As...</source>
-        <translation>Εξαγωγή ως...</translation>
+        <translation type="vanished">Εξαγωγή ως...</translation>
     </message>
     <message>
         <source>Export original layout</source>
@@ -6151,7 +7197,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>You can&apos;t use now the Detail mode. Please, create at least one workpiece.</source>
-        <translation>Δε μπορείτε ακόμα να χρησιμοποιήσετε τη λειτουργία λεπτομερειών. Παρακαλώ, δημιουργήστε τουλάχιστον ένα κομμάτι εργασίας.</translation>
+        <translation type="vanished">Δε μπορείτε ακόμα να χρησιμοποιήσετε τη λειτουργία λεπτομερειών. Παρακαλώ, δημιουργήστε τουλάχιστον ένα κομμάτι εργασίας.</translation>
     </message>
     <message>
         <source>Layout mode</source>
@@ -6159,7 +7205,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>You can&apos;t use now the Layout mode. Please, create at least one workpiece.</source>
-        <translation>Δε μπορείτε ακόμα να χρησιμοποιήσετε τη λειτουργία τοποθέτησης. Παρακαλώ, δημιουργήστε τουλάχιστον ένα κομμάτι εργασίας.</translation>
+        <translation type="vanished">Δε μπορείτε ακόμα να χρησιμοποιήσετε τη λειτουργία τοποθέτησης. Παρακαλώ, δημιουργήστε τουλάχιστον ένα κομμάτι εργασίας.</translation>
     </message>
     <message>
         <source>Unsaved changes</source>
@@ -6191,7 +7237,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Measurements loaded</source>
-        <translation type="unfinished"></translation>
+        <translation>Οι μετρήσεις φορτώθηκαν</translation>
     </message>
     <message>
         <source>Standard measurements (*.vst);;Individual measurements (*.vit)</source>
@@ -6236,11 +7282,11 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Measurement file doesn&apos;t include all required measurements.</source>
-        <translation>Το αρχείο μετρήσεων δεν περιλαμβάνει όλες τις απιτούμενες μετρήσεις.</translation>
+        <translation type="vanished">Το αρχείο μετρήσεων δεν περιλαμβάνει όλες τις απιτούμενες μετρήσεις.</translation>
     </message>
     <message>
         <source>Please, additionaly provide: %1</source>
-        <translation type="unfinished"></translation>
+        <translation type="vanished">Παρακαλώ, παρέχετε επιπλέον: %1</translation>
     </message>
     <message>
         <source>Measurement files types have not match.</source>
@@ -6263,6 +7309,10 @@ Do you want to save your changes?</source>
         <translation>Το αρχείο μετρήσεων &apos;%1&apos; δε βρέθηκε.</translation>
     </message>
     <message>
+        <source>The measurements file &lt;br/&gt;&lt;br/&gt; &lt;b&gt;%1&lt;/b&gt; &lt;br/&gt;&lt;br/&gt; could not be found. Do you want to update the file location</source>
+        <translation type="vanished">Το αρχείο μετρήσεων &lt;br/&gt;&lt;br/&gt; &lt;b&gt;%1&lt;/b&gt; &lt;br/&gt;&lt;br/&gt; δε βρέθηκε. Θέλετε να ενημερώσετε τη θέση του αρχείου</translation>
+    </message>
+    <message>
         <source>Loading measurements file</source>
         <translation>Φόρτωση αρχείου μετρήσεων</translation>
     </message>
@@ -6272,7 +7322,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Couldn&apos;t set size. Need a file with standard measurements.</source>
-        <translation>Δεν ήταν δυνατός ο ορισμός μεγέθους. Χρειάζεται ένα αρχείο με στάνταρ διαστάσεις.</translation>
+        <translation type="vanished">Δεν ήταν δυνατός ο ορισμός μεγέθους. Χρειάζεται ένα αρχείο με στάνταρ διαστάσεις.</translation>
     </message>
     <message>
         <source>Couldn&apos;t set size. File wasn&apos;t opened.</source>
@@ -6284,10 +7334,6 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Not supported height value &apos;%1&apos; for this pattern file.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Couldn&apos;t set height. Need a file with standard measurements.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -6304,7 +7350,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Print an original layout</source>
-        <translation type="unfinished"></translation>
+        <translation>Εκτύπωση μίας αρχικής διάταξης</translation>
     </message>
     <message>
         <source>Preview tiled PDF</source>
@@ -6312,7 +7358,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Print preview tiled layout</source>
-        <translation type="unfinished"></translation>
+        <translation>Προεπισκόπηση εκτύπωσης τεμαχισμένης διάταξης</translation>
     </message>
     <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Mode for working with pattern pieces. These pattern pieces are base for going to the next stage &amp;quot;Details mode&amp;quot;. Before you will be able to enable the &amp;quot;Details mode&amp;quot; need create at least one detail.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
@@ -6352,7 +7398,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Save...</source>
-        <translation>Αποθήκευση...</translation>
+        <translation type="vanished">Αποθήκευση...</translation>
     </message>
     <message>
         <source>Don&apos;t Save</source>
@@ -6380,11 +7426,11 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Unknown error happened, for instance a full partition prevented writing out the lock file.</source>
-        <translation type="unfinished"></translation>
+        <translation>Παρουσιάστηκε άγνωστο σφάλμα, για παράδειγμα μία πλήρης διχοτόμηση εμπόδισε την εγγραφή του αρχείου κλειδώματος.</translation>
     </message>
     <message>
         <source>Report Bug...</source>
-        <translation>Αναφορά σφάλματος...</translation>
+        <translation type="vanished">Αναφορά σφάλματος...</translation>
     </message>
     <message>
         <source>Point intersection curves</source>
@@ -6393,6 +7439,14 @@ Do you want to save your changes?</source>
     <message>
         <source>Select first curve</source>
         <translation>Επιλογή πρώτης καμπύλης</translation>
+    </message>
+    <message>
+        <source>(read only)</source>
+        <translation type="vanished">(μόνο για ανάγνωση)</translation>
+    </message>
+    <message>
+        <source>Measurements was changed. Do you want to sync measurements now?</source>
+        <translation type="vanished">Έγινε αλλαγή των μετρήσεων. Θέλετε να συγχρονίσετε τις μετρήσεις τώρα;</translation>
     </message>
     <message>
         <source>Curve tool which uses point as control handle</source>
@@ -6405,6 +7459,10 @@ Do you want to save your changes?</source>
     <message>
         <source>Select point of cubic bezier path</source>
         <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Toolbar pointer</source>
+        <translation type="vanished">Εργαλείο δείκτη</translation>
     </message>
     <message>
         <source>Operations</source>
@@ -6447,16 +7505,12 @@ Do you want to save your changes?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>You can&apos;t use now the Layout mode. Please, include at least one detail in layout.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Original zoom</source>
         <translation>Αρχικό zoom</translation>
     </message>
     <message>
         <source>Select first circle center</source>
-        <translation type="unfinished"></translation>
+        <translation>Επιλέξτε το κέντρο του πρώτου κύκλου</translation>
     </message>
     <message>
         <source>Select point on tangent</source>
@@ -6492,7 +7546,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Measurements were changed. Do you want to sync measurements now?</source>
-        <translation type="unfinished"></translation>
+        <translation>Έγινε αλλαγή των μετρήσεων. Θέλετε να συγχρονίσετε τις μετρήσεις τώρα;</translation>
     </message>
     <message>
         <source>Gradation doesn&apos;t support inches</source>
@@ -6515,10 +7569,6 @@ Do you want to save your changes?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Piece path tool</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Select main path objects clockwise.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -6536,15 +7586,15 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Could not save the file.</source>
-        <translation type="unfinished"></translation>
+        <translation>Could not save the file.</translation>
     </message>
     <message>
         <source>Could not save the file</source>
-        <translation type="unfinished"></translation>
+        <translation>Δεν ήταν δυνατή η αποθήκευση του αρχείου</translation>
     </message>
     <message>
         <source>read only</source>
-        <translation type="unfinished"></translation>
+        <translation>μόνο για ανάγνωση</translation>
     </message>
     <message>
         <source>Variables Table</source>
@@ -6556,11 +7606,11 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Load Individual</source>
-        <translation type="unfinished"></translation>
+        <translation>Φόρτωση Ατομικών</translation>
     </message>
     <message>
         <source>Load Individual measurements file</source>
-        <translation type="unfinished"></translation>
+        <translation>Φόρτωση φακέλου Ατομικών μετρήσεων</translation>
     </message>
     <message>
         <source>Load Multisize</source>
@@ -6576,7 +7626,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Edit Current</source>
-        <translation type="unfinished"></translation>
+        <translation>Επεξεργασία Τρέχοντος</translation>
     </message>
     <message>
         <source>Edit linked to the pattern measurements</source>
@@ -6600,7 +7650,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Individual measurements</source>
-        <translation type="unfinished"></translation>
+        <translation>Ατομικές μετρήσεις</translation>
     </message>
     <message>
         <source>Multisize measurements</source>
@@ -6620,19 +7670,15 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Insert node tool</source>
-        <translation type="unfinished"></translation>
+        <translation>Εισάγετε εργαλείο κόμβου</translation>
     </message>
     <message>
         <source>Select an item to insert</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Wiki</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Forum</source>
-        <translation type="unfinished"></translation>
+        <translation>Φόρουμ</translation>
     </message>
     <message>
         <source>Select one or more objects, hold &lt;b&gt;%1&lt;/b&gt; - for multiple selection, &lt;b&gt;Enter&lt;/b&gt; - finish creation</source>
@@ -6643,12 +7689,180 @@ Do you want to save your changes?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>You can&apos;t use now the Layout mode.</source>
+        <source>Open Tape app for creating or editing measurements file</source>
+        <translation>Ανοίξτε την εφαρμογή Tape για δημιουργία ή διόρθωση του αρχείου μετρήσεων</translation>
+    </message>
+    <message>
+        <source>Export increments to CSV</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Open Tape app for creating or editing measurements file</source>
-        <translation>Ανοίξτε την εφαρμογή Tape για δημιουργία ή διόρθωση του αρχείου μετρήσεων</translation>
+        <source>Name</source>
+        <translation>Όνομα</translation>
+    </message>
+    <message>
+        <source>The calculated value</source>
+        <translation type="unfinished">Η υπολογισμένη τιμή</translation>
+    </message>
+    <message>
+        <source>Formula</source>
+        <translation type="unfinished">Φόρμουλα</translation>
+    </message>
+    <message>
+        <source>You can&apos;t use Detail mode yet. Please, create at least one workpiece.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>You can&apos;t use Layout mode yet. Please, create at least one workpiece.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>You can&apos;t use Layout mode yet. Please, include at least one detail in layout.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>You can&apos;t use Layout mode yet.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Zoom fit best current</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>zoom fit best current pattern piece</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Export details skiping the Layout stage</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>You don&apos;t have enough details to export. Please, include at least one detail in layout.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Export details</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Can&apos;t export details.</source>
+        <translation>Δεν μπορεί να γίνει εξαγωγή λεπτομερειών.</translation>
+    </message>
+    <message>
+        <source>Couldn&apos;t set size. Need a file with multisize measurements.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Couldn&apos;t set height. Need a file with multisize measurements.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Label template editor</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Workpiece tool</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Internal path tool</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Save &amp;As…</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Report Bug…</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Export As…</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Save…</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Final measurements</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Export Final Measurements to CSV</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>You can&apos;t export empty scene. Please, include at least one detail in layout.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Export final measurements error.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Destination path is empty.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Next pattern piece</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Ctrl+PgDown</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Previous pattern piece</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Ctrl+PgUp</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Point from tangent circle and segment</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Place label tool</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Duplicate detail tool</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Select placelabel center point</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>The measurements file &apos;%1&apos; could not be found or provides not enough information.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Use these tools to create a pattern</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Scale:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Create new pattern piece to start working.</source>
+        <translation>Δημιουργήστε νέο κομμάτι πατρόν για να ξεκινήσετε να δουλεύετε.</translation>
+    </message>
+    <message>
+        <source>Changes applied.</source>
+        <translation>Οι αλλαγές εφαρμόστηκαν.</translation>
+    </message>
+    <message>
+        <source>Cannot read settings from a malformed INI file.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Cannot save settings. Access denied.</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -6675,11 +7889,11 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Print to pdf</source>
-        <translation>Εκτύπωση σε PDF</translation>
+        <translation type="vanished">Εκτύπωση σε PDF</translation>
     </message>
     <message>
         <source>PDF file (*.pdf)</source>
-        <translation>Αρχείο PDF (*.pdf)</translation>
+        <translation type="vanished">Αρχείο PDF (*.pdf)</translation>
     </message>
     <message>
         <source>Print error</source>
@@ -6707,7 +7921,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Several workpieces left not arranged, but none of them match for paper</source>
-        <translation>Μερικά κομμάτια δεν έχουν τοποθετηθεί, αλλά κανένα απο αυτά δε χωράει στο χαρτί</translation>
+        <translation type="vanished">Μερικά κομμάτια δεν έχουν τοποθετηθεί, αλλά κανένα απο αυτά δε χωράει στο χαρτί</translation>
     </message>
     <message>
         <source>Can&apos;t open printer %1</source>
@@ -6735,10 +7949,78 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Can&apos;t create path</source>
-        <translation type="unfinished"></translation>
+        <translation type="vanished">Δεν είναι δυνατή η δημιουργία μονοπατιού</translation>
     </message>
     <message>
         <source>Cannot set printer margins</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Can&apos;t create a path</source>
+        <translation>Δεν είναι δυνατή η δημιουργία μονοπατιού</translation>
+    </message>
+    <message>
+        <source>Pattern</source>
+        <translation>Πατρόν</translation>
+    </message>
+    <message>
+        <source>Name</source>
+        <translation type="unfinished">Όνομα</translation>
+    </message>
+    <message>
+        <source>Value</source>
+        <translation type="unfinished">Τιμή</translation>
+    </message>
+    <message>
+        <source>Export final measurements error.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Value in line %1 is infinite or NaN. Please, check your calculations.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Parser error at line %1: %2.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>File error %1.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>One or more pattern pieces are bigger than the paper format you selected. Please, select a bigger paper format.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Description</source>
+        <translation type="unfinished">Περιγραφή</translation>
+    </message>
+    <message>
+        <source>Measurement file has unknown format.</source>
+        <translation>Το αρχείο μετρήσεων είναι άγνωστης μορφής.</translation>
+    </message>
+    <message>
+        <source>Measurement file contains invalid known measurement(s).</source>
+        <translation>Το αρχείο μετρήσεων περιλαμβάνει μη έγκυρες γνωστές μετρήσεις.</translation>
+    </message>
+    <message>
+        <source>Wrong units.</source>
+        <translation>Λανθασμένες μονάδες.</translation>
+    </message>
+    <message>
+        <source>Application doesn&apos;t support multisize table with inches.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>File error.</source>
+        <translation>Σφάλμα στο αρχείο.</translation>
+    </message>
+    <message>
+        <source>Measurement file doesn&apos;t include all required measurements.</source>
+        <translation>Το αρχείο μετρήσεων δεν περιλαμβάνει όλες τις απιτούμενες μετρήσεις.</translation>
+    </message>
+    <message>
+        <source>Please, additionally provide: %1</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -6789,10 +8071,21 @@ Do you want to save your changes?</source>
     </message>
 </context>
 <context>
+    <name>OperationShowLabel</name>
+    <message>
+        <source>toggle label</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>PathPage</name>
     <message>
         <source>Open Directory</source>
         <translation type="vanished">Άνοιγμα φακέλου</translation>
+    </message>
+    <message>
+        <source>Path that use Valentina</source>
+        <translation type="vanished">Μονοπάτι που χρησιμοποιεί το Valentina</translation>
     </message>
     <message>
         <source>Default</source>
@@ -6803,8 +8096,16 @@ Do you want to save your changes?</source>
         <translation type="vanished">Επεξεργασία</translation>
     </message>
     <message>
+        <source>Type</source>
+        <translation type="vanished">Τύπος</translation>
+    </message>
+    <message>
         <source>Path</source>
         <translation type="vanished">Διαδρομή</translation>
+    </message>
+    <message>
+        <source>Individual measurements</source>
+        <translation type="vanished">Ατομικές μετρήσεις</translation>
     </message>
     <message>
         <source>Patterns</source>
@@ -6866,7 +8167,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>min</source>
-        <translation type="unfinished"></translation>
+        <translation>λεπτά</translation>
     </message>
     <message>
         <source>Language</source>
@@ -6886,7 +8187,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Label language:</source>
-        <translation type="unfinished">Γλώσσα ετικετών:</translation>
+        <translation>Γλώσσα ετικέτας:</translation>
     </message>
     <message>
         <source>Pattern making system</source>
@@ -6898,47 +8199,31 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Author:</source>
-        <translation type="unfinished">Συγγραφέας:</translation>
+        <translation>Συγγραφέας:</translation>
     </message>
     <message>
         <source>Book:</source>
-        <translation type="unfinished">Βιβλίο:</translation>
-    </message>
-    <message>
-        <source>Send crash reports</source>
-        <translation type="unfinished">Αποστολή αναφορών απότομης διακοπής</translation>
-    </message>
-    <message>
-        <source>Send crash reports (recommended)</source>
-        <translation type="unfinished">Αποστολή αναφορών απότομης διακοπής (προτείνεται)</translation>
+        <translation>Βιβλίο:</translation>
     </message>
     <message>
         <source>Pattern editing</source>
-        <translation type="unfinished"></translation>
+        <translation>Επεξεργασία πατρόν</translation>
     </message>
     <message>
         <source>Reset warnings</source>
-        <translation type="unfinished"></translation>
+        <translation>Επαναφορά προειδοποιήσεων</translation>
     </message>
     <message>
         <source>Toolbar</source>
-        <translation type="unfinished">Μπάρα εργαλείων</translation>
+        <translation>Γραμμή εργαλείων</translation>
     </message>
     <message>
         <source>The text appears under the icon (recommended for beginners).</source>
-        <translation type="unfinished">Το κείμενο εμφανίζεται κάτω απο το εικονίδιο (συνιστάται για τους αρχάριους).</translation>
+        <translation>Το κείμενο εμφανίζεται κάτω απο το εικονίδιο (συνιστάται για αρχάριους).</translation>
     </message>
     <message>
         <source>With OS options</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>After each crash Valentina collects information that may help us fix the problem. We do not collect any personal information. Find more about what %1kind of information%2 we collect.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>The Default unit has been updated and will be used as the default for the next pattern you create.</source>
-        <translation type="unfinished">Οι προεπιλεγμένες μονάδες έχουν ενημερωθεί και θα χρησιμοποιηθούν ως προεπιλογή για το επόμενο πατρόν που θα δημιουργήσετε.</translation>
+        <translation>Με επιλογές του λειτουργικού συστήματος</translation>
     </message>
     <message>
         <source>Centimeters</source>
@@ -6952,16 +8237,91 @@ Do you want to save your changes?</source>
         <source>Inches</source>
         <translation>Ίντσες</translation>
     </message>
+    <message>
+        <source>Update a pattern only after a curve release</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Free curve mode</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>default unit</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>General</source>
+        <translation>Γενικά</translation>
+    </message>
+    <message>
+        <source>Double click calls Zoom fit best for current pattern piece</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Scrolling</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Animation</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Duration:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Scrolling animation duration</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>ms</source>
+        <comment>milliseconds</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Update interval:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Time in milliseconds between each animation update</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Mouse scale</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Sensor:</source>
+        <comment>sensor mouse</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Scale scrolling sensitivity for mouse with sensor</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Wheel:</source>
+        <comment>mouse wheel</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Scale scrolling sensitivity for mouse with wheel</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Acceleration:</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>PreferencesPathPage</name>
     <message>
         <source>Paths that Valentina uses</source>
-        <translation type="unfinished"></translation>
+        <translation>Διαδρομές φακέλων που χρησιμοποιεί το Valentina</translation>
     </message>
     <message>
         <source>Type</source>
-        <translation type="unfinished"></translation>
+        <translation>Τύπος</translation>
     </message>
     <message>
         <source>Path</source>
@@ -6969,7 +8329,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Default</source>
-        <translation type="unfinished">Προεπιλογή</translation>
+        <translation>Προεπιλογή</translation>
     </message>
     <message>
         <source>Edit</source>
@@ -6989,27 +8349,23 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>My Patterns</source>
-        <translation type="unfinished"></translation>
+        <translation>Πατρόν μου</translation>
     </message>
     <message>
         <source>My Layouts</source>
-        <translation type="unfinished"></translation>
+        <translation>Διατάξεις μου</translation>
     </message>
     <message>
         <source>My Templates</source>
+        <translation>Πρότυπά μου</translation>
+    </message>
+    <message>
+        <source>My label templates</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>PreferencesPatternPage</name>
-    <message>
-        <source>User</source>
-        <translation type="unfinished">Χρήστης</translation>
-    </message>
-    <message>
-        <source>User name:</source>
-        <translation type="unfinished">Όνομα χρήστη:</translation>
-    </message>
     <message>
         <source>Graphical output</source>
         <translation type="unfinished"></translation>
@@ -7020,19 +8376,11 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Undo</source>
-        <translation type="unfinished">Αναίρεση</translation>
+        <translation>Αναίρεση</translation>
     </message>
     <message>
         <source>Count steps (0 - no limit):</source>
         <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>User defined materials</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Delete all</source>
-        <translation>Διαγραφή όλων</translation>
     </message>
     <message>
         <source>Workpiece</source>
@@ -7040,7 +8388,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Forbid flipping</source>
-        <translation type="unfinished">Περιορισμός αντιστροφής</translation>
+        <translation>Αποτροπή αντιστροφής</translation>
     </message>
     <message>
         <source>Show a passmark both in the seam allowance and on the seam line.</source>
@@ -7051,11 +8399,108 @@ Do you want to save your changes?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>All user defined materials have been deleted!</source>
+        <source>By default forbid flipping for all new created workpieces</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>By default forbid flipping for all new created workpieces</source>
+        <source>By default hide the main path if the seam allowance was enabled</source>
+        <translation>Από προεπιλογή, απόκρυψη του κύριου μονοπατιού αν το περιθώριο ραφής ήταν ενεργοποιημένο</translation>
+    </message>
+    <message>
+        <source>Hide main path</source>
+        <translation>Απόκρυψη κύριου μονοπατιού</translation>
+    </message>
+    <message>
+        <source>Label font:</source>
+        <translation>Γραμματοσειρά ετικέτας:</translation>
+    </message>
+    <message>
+        <source>Seam allowance</source>
+        <translation>Περιθώριο ραφής</translation>
+    </message>
+    <message>
+        <source>Default value:</source>
+        <translation>Προεπιλεγμένη τιμή:</translation>
+    </message>
+    <message>
+        <source>Label data/time format</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Date:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Edit formats</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Time:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Materials</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Known materials:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Manage list of known materials</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Manage</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>When manage pattern materials save them to known materials list</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Remeber pattern materials</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Curve approximation:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Set default curve approximation scale</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Bold line width</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Line width:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Millimiters</source>
+        <translation>Χιλιοστά</translation>
+    </message>
+    <message>
+        <source>Inches</source>
+        <translation>Ίντσες</translation>
+    </message>
+    <message>
+        <source>Use OpenGL to render a scene.
+This option will take an affect after restart.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Use OpenGL render</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>antialiasing</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>scene render</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -7063,43 +8508,31 @@ Do you want to save your changes?</source>
     <name>QCommandLineParser</name>
     <message>
         <source>Displays version information.</source>
-        <translation>Εμφάνιση πληροφοριών έκδοσης.</translation>
+        <translation type="vanished">Εμφάνιση πληροφοριών έκδοσης.</translation>
     </message>
     <message>
         <source>Displays this help.</source>
-        <translation>Εμφάνιση της βοήθειας.</translation>
+        <translation type="vanished">Εμφάνιση της βοήθειας.</translation>
     </message>
     <message>
         <source>Unknown option &apos;%1&apos;.</source>
-        <translation>Άγνωστη επιλογή &apos;%1&apos;.</translation>
+        <translation type="vanished">Άγνωστη επιλογή &apos;%1&apos;.</translation>
     </message>
     <message>
         <source>Unknown options: %1.</source>
-        <translation>Άγνωστες επιλογές: %1.</translation>
-    </message>
-    <message>
-        <source>Missing value after &apos;%1&apos;.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Unexpected value after &apos;%1&apos;.</source>
-        <translation type="unfinished"></translation>
+        <translation type="vanished">Άγνωστες επιλογές: %1.</translation>
     </message>
     <message>
         <source>[options]</source>
-        <translation>[επιλογές]</translation>
+        <translation type="vanished">[επιλογές]</translation>
     </message>
     <message>
         <source>Usage: %1</source>
-        <translation>Χρήση: %1</translation>
+        <translation type="vanished">Χρήση: %1</translation>
     </message>
     <message>
         <source>Options:</source>
-        <translation>Επιλογές:</translation>
-    </message>
-    <message>
-        <source>Arguments:</source>
-        <translation type="unfinished"></translation>
+        <translation type="vanished">Επιλογές:</translation>
     </message>
 </context>
 <context>
@@ -7113,7 +8546,7 @@ Do you want to save your changes?</source>
     <name>QObject</name>
     <message>
         <source>Create new pattern piece to start working.</source>
-        <translation>Δημιουργήστε νέο κομμάτι πατρόν για να ξεκινήσετε να δουλεύετε.</translation>
+        <translation type="vanished">Δημιουργήστε νέο κομμάτι πατρόν για να ξεκινήσετε να δουλεύετε.</translation>
     </message>
     <message>
         <source>mm</source>
@@ -7143,7 +8576,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>add node</source>
-        <translation type="unfinished"></translation>
+        <translation type="vanished">προσθήκη κόμβου</translation>
     </message>
     <message>
         <source>move detail</source>
@@ -7151,7 +8584,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Changes applied.</source>
-        <translation>Οι αλλαγές εφαρμόστηκαν.</translation>
+        <translation type="vanished">Οι αλλαγές εφαρμόστηκαν.</translation>
     </message>
     <message>
         <source>Wrong tag name &apos;%1&apos;.</source>
@@ -7175,10 +8608,70 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Got wrong parameter id. Need only id &gt; 0.</source>
-        <translation type="unfinished"></translation>
+        <translation>Λήψη λάθους παραμέτρου ταυτότητας. Χρειάζεται μόνο ταυτότητα &gt; 0.</translation>
     </message>
     <message>
         <source>United detail</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Fabric</source>
+        <translation type="unfinished">Ύφασμα</translation>
+    </message>
+    <message>
+        <source>Lining</source>
+        <translation type="unfinished">Φόδρα</translation>
+    </message>
+    <message>
+        <source>Interfacing</source>
+        <translation type="unfinished">Ύφασμα ενίσχυσης</translation>
+    </message>
+    <message>
+        <source>Interlining</source>
+        <translation type="unfinished">Ύφασμα επένδυσης</translation>
+    </message>
+    <message>
+        <source>Cut</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>on fold</source>
+        <translation type="unfinished">στη δίπλωση</translation>
+    </message>
+    <message>
+        <source>Piece &apos;%1&apos; may broke a layout. Please, check seam allowance to check how seam allowance behave.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Visibility trigger contains error and will be ignored</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>User material number %1 was not defined in this pattern.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Error in internal path &apos;%1&apos;. There is no intersection of first point with cutting countour</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Error in internal path &apos;%1&apos;. There is no intersection of last point with cutting countour</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Cannot calculate a notch for point &apos;%1&apos; in piece &apos;%2&apos;.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Cannot calculate a notch for point &apos;%1&apos; in piece &apos;%2&apos;. Seam allowance is empty.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Cannot calculate a notch for point &apos;%1&apos; in piece &apos;%2&apos;. Cannot find position for a notch.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Cannot calculate a notch for point &apos;%1&apos; in piece &apos;%2&apos;. Unable to fix a notch position.</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -7379,6 +8872,13 @@ Do you want to save your changes?</source>
     </message>
 </context>
 <context>
+    <name>RemoveItemFromGroup</name>
+    <message>
+        <source>Remove item from group</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>RenamePP</name>
     <message>
         <source>rename pattern piece</source>
@@ -7395,7 +8895,7 @@ Do you want to save your changes?</source>
 <context>
     <name>SavePieceOptions</name>
     <message>
-        <source>save detail option</source>
+        <source>save detail options</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -7407,9 +8907,34 @@ Do you want to save your changes?</source>
     </message>
 </context>
 <context>
+    <name>SavePlaceLabelOptions</name>
+    <message>
+        <source>save place label options</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>SaveToolOptions</name>
     <message>
         <source>save tool option</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>ShowDoubleLabel</name>
+    <message>
+        <source>toggle the first dart label</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>togggle the second dart label</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>ShowLabel</name>
+    <message>
+        <source>toggle label</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -7533,11 +9058,11 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Given name:</source>
-        <translation>Όνομα:</translation>
+        <translation type="vanished">Όνομα:</translation>
     </message>
     <message>
         <source>Family name:</source>
-        <translation>Επίθετο:</translation>
+        <translation type="vanished">Επίθετο:</translation>
     </message>
     <message>
         <source>Birth date:</source>
@@ -7580,16 +9105,12 @@ Do you want to save your changes?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Open individual ...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Save</source>
         <translation>Αποθήκευση</translation>
     </message>
     <message>
         <source>Save As ...</source>
-        <translation>Αποθήκευση ως ...</translation>
+        <translation type="vanished">Αποθήκευση ως ...</translation>
     </message>
     <message>
         <source>Quit</source>
@@ -7613,7 +9134,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Add custom</source>
-        <translation type="unfinished"></translation>
+        <translation>Προσθήκη προσαρμογής</translation>
     </message>
     <message>
         <source>Read only</source>
@@ -7621,7 +9142,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Open standard ...</source>
-        <translation>Άνοιγμα στάνταρ...</translation>
+        <translation type="vanished">Άνοιγμα στάνταρ...</translation>
     </message>
     <message>
         <source>Open template</source>
@@ -7709,7 +9230,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Individual measurements</source>
-        <translation type="unfinished"></translation>
+        <translation>Ατομικές μετρήσεις</translation>
     </message>
     <message>
         <source>untitled</source>
@@ -7858,7 +9379,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Create from existing ...</source>
-        <translation>Δημιουργία απο υπάρχον ...</translation>
+        <translation type="vanished">Δημιουργία απο υπάρχον ...</translation>
     </message>
     <message>
         <source>Create from existing file</source>
@@ -7922,7 +9443,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Save...</source>
-        <translation>Αποθήκευση...</translation>
+        <translation type="vanished">Αποθήκευση...</translation>
     </message>
     <message>
         <source>Don&apos;t Save</source>
@@ -7950,7 +9471,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Unknown error happened, for instance a full partition prevented writing out the lock file.</source>
-        <translation type="unfinished"></translation>
+        <translation>Παρουσιάστηκε άγνωστο σφάλμα, για παράδειγμα μία πλήρης διχοτόμηση εμπόδισε την εγγραφή του αρχείου κλειδώματος.</translation>
     </message>
     <message>
         <source>Export to CSV</source>
@@ -7978,7 +9499,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Customer&apos;s family name</source>
-        <translation>Επώνυμο πελάτη</translation>
+        <translation type="vanished">Επώνυμο πελάτη</translation>
     </message>
     <message>
         <source>Customer&apos;s email address</source>
@@ -8006,15 +9527,15 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Could not save the file.</source>
-        <translation type="unfinished"></translation>
+        <translation>Could not save the file.</translation>
     </message>
     <message>
         <source>Could not save the file</source>
-        <translation type="unfinished"></translation>
+        <translation>Δεν ήταν δυνατή η αποθήκευση του αρχείου</translation>
     </message>
     <message>
         <source>read only</source>
-        <translation type="unfinished"></translation>
+        <translation>μόνο για ανάγνωση</translation>
     </message>
     <message>
         <source>Multisize measurements</source>
@@ -8022,15 +9543,99 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Invalid result. Value is infinite or NaN. Please, check your calculations.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Export from standard measurements is not supported.</source>
-        <translation type="unfinished"></translation>
+        <translation>Μη έγκυρο αποτέλεσμα. Η τιμή είναι άπειρη ή NaN. Παρακαλώ, ελέγξτε τους υπολογισμούς σας.</translation>
     </message>
     <message>
         <source>Empty</source>
         <translation>Κενό</translation>
+    </message>
+    <message>
+        <source>Export from multisize measurements is not supported.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Customer name:</source>
+        <translation type="unfinished">Όνομα πελάτη:</translation>
+    </message>
+    <message>
+        <source>Open individual …</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Save As …</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Open multisize …</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Create from existing …</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Save…</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Import from CSV</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Measurement name in is empty.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Merasurement &apos;%1&apos; doesn&apos;t match regex pattern.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Merasurement &apos;%1&apos; already used in file.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Measurement &apos;%1&apos; is not one of known measurements.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Individual measurements require at least 2 columns.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Error in row %1.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Multisize measurements require at least 4 columns.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Cannot convert base size value to double in column 2.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Cannot convert height increase value to double in column 3.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Cannot convert size increase value to double in column 4.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Imported file must not contain the same name twice.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Error in row %1. Measurement name is empty.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Cannot read settings from a malformed INI file.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Cannot save settings. Access denied.</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -8045,7 +9650,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Formula wizard</source>
-        <translation type="unfinished">Βοηθός φόρμουλας</translation>
+        <translation>Βοηθός φόρμουλας</translation>
     </message>
     <message>
         <source>Value</source>
@@ -8057,7 +9662,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Εμφάνιση πλήρους υπολογισμού σε πλαίσιο μηνύματος&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <source>Length:</source>
@@ -8092,55 +9697,15 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Letter of pattern piece</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Name of detail:</source>
-        <translation type="unfinished">Όνομα της λεπτομέρειας:</translation>
-    </message>
-    <message>
-        <source>Detail</source>
-        <translation type="unfinished">Λεπτομέρεια</translation>
-    </message>
-    <message>
-        <source>Name can&apos;t be empty</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Material/Cut number/Placement</source>
-        <translation type="unfinished">Ύφασμα/Ποσότητα κοπής/Τοποθέτηση</translation>
-    </message>
-    <message>
-        <source>Cut number:</source>
-        <translation type="unfinished">Ποσότητα κοπής:</translation>
-    </message>
-    <message>
-        <source>Material type:</source>
-        <translation type="unfinished">Τύπος υφάσματος:</translation>
-    </message>
-    <message>
-        <source>You can choose one of the predefined materials or enter a new one</source>
-        <translation type="unfinished">Μπορείτε να επιλέξετε ένα απο τα προκαθορισμένα υφάσματα ή να εισάγετε ένα νέο</translation>
+        <translation>Γράμμα του κομματιού πατρόν</translation>
     </message>
     <message>
         <source>Placement:</source>
         <translation type="unfinished">Τοποθέτηση:</translation>
     </message>
     <message>
-        <source>Add</source>
-        <translation type="unfinished">Προσθήκη</translation>
-    </message>
-    <message>
-        <source>Cancel</source>
-        <translation type="unfinished">Ακύρωση</translation>
-    </message>
-    <message>
-        <source>Remove</source>
-        <translation type="unfinished">Αφαίρεση</translation>
-    </message>
-    <message>
         <source>Labels</source>
-        <translation type="unfinished"></translation>
+        <translation>Ετικέτες</translation>
     </message>
     <message>
         <source>Detail label visible</source>
@@ -8152,7 +9717,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Formula wizard</source>
-        <translation type="unfinished">Βοηθός φόρμουλας</translation>
+        <translation>Βοηθός φόρμουλας</translation>
     </message>
     <message>
         <source>Value</source>
@@ -8164,7 +9729,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Εμφάνιση πλήρους υπολογισμού σε πλαίσιο μηνύματος&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <source>Height:</source>
@@ -8189,6 +9754,62 @@ Do you want to save your changes?</source>
     <message>
         <source>Pattern label visible</source>
         <translation type="unfinished">Εμφάνιση ετικέτας πατρόν</translation>
+    </message>
+    <message>
+        <source>Label template:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Edit template</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Label data</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Quantity:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>on fold</source>
+        <translation type="unfinished">στη δίπλωση</translation>
+    </message>
+    <message>
+        <source>Annotation:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>A text field to add comments in</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Orientation:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Rotation:</source>
+        <translation type="unfinished">Περιστροφή:</translation>
+    </message>
+    <message>
+        <source>Tilt:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Fold position:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Edit piece label template</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Options to control position a detail label. &lt;b&gt;Not available if a detail label template is empty&lt;/b&gt;.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Options to control position a pattern label. &lt;b&gt;Not available if a pattern label template is empty&lt;/b&gt;.</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -8239,10 +9860,42 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Intersection</source>
-        <translation type="unfinished"></translation>
+        <translation>Διατομή</translation>
     </message>
     <message>
         <source>Show the second passmark on seam line</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>This option has effect only if the second passmark on seam line enabled in global preferences. The option helps disable the second passmark for this passmark only.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Select if need designate the corner point as a passmark. Show only left passmark.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Intersection (only left)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Select if need designate the corner point as a passmark. Show only right passmark.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Intersection (only right)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Intersection 2</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Intersection 2 (only left)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Intersection 2 (only right)</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -8254,7 +9907,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>All objects in path should follow in clockwise direction.</source>
-        <translation type="unfinished"></translation>
+        <translation>Όλα τα αντικείμενα του μονοπατιού θα πρέπει να ακολουθούν ωρολογιακή φορά.</translation>
     </message>
     <message>
         <source>Forbid piece be mirrored in a layout.</source>
@@ -8262,7 +9915,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Forbid flipping</source>
-        <translation type="unfinished">Περιορισμός αντιστροφής</translation>
+        <translation>Αποτροπή αντιστροφής</translation>
     </message>
     <message>
         <source>Ready!</source>
@@ -8282,7 +9935,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Formula wizard</source>
-        <translation type="unfinished">Βοηθός φόρμουλας</translation>
+        <translation>Βοηθός φόρμουλας</translation>
     </message>
     <message>
         <source>Value</source>
@@ -8294,7 +9947,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Εμφάνιση πλήρους υπολογισμού σε πλαίσιο μηνύματος&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <source>Nodes</source>
@@ -8302,11 +9955,11 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Node:</source>
-        <translation type="unfinished"></translation>
+        <translation>Κόμβος:</translation>
     </message>
     <message>
         <source>Before:</source>
-        <translation type="unfinished"></translation>
+        <translation>Πριν:</translation>
     </message>
     <message>
         <source>Return to default width</source>
@@ -8314,11 +9967,11 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Default</source>
-        <translation type="unfinished">Προεπιλογή</translation>
+        <translation>Προεπιλογή</translation>
     </message>
     <message>
         <source>After:</source>
-        <translation type="unfinished"></translation>
+        <translation>Μετά:</translation>
     </message>
     <message>
         <source>Angle:</source>
@@ -8326,15 +9979,15 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Custom</source>
-        <translation type="unfinished"></translation>
+        <translation>Προσαρμογή</translation>
     </message>
     <message>
         <source>Start point:</source>
-        <translation type="unfinished"></translation>
+        <translation>Αρχικό σημείο:</translation>
     </message>
     <message>
         <source>End point:</source>
-        <translation type="unfinished"></translation>
+        <translation>Τελικό σημείο:</translation>
     </message>
     <message>
         <source>Include as:</source>
@@ -8351,6 +10004,57 @@ Do you want to save your changes?</source>
     <message>
         <source>Built in</source>
         <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Hide the main path if the seam allowance is enabled</source>
+        <translation>Απόκρυψη του κύριου μονοπατιού αν το περιθώριο ραφής είναι ενεργοποιημένο</translation>
+    </message>
+    <message>
+        <source>Hide main path</source>
+        <translation>Απόκρυψη κύριου μονοπατιού</translation>
+    </message>
+    <message>
+        <source>Name of detail:</source>
+        <translation>Όνομα της λεπτομέρειας:</translation>
+    </message>
+    <message>
+        <source>Detail</source>
+        <translation>Λεπτομέρεια</translation>
+    </message>
+    <message>
+        <source>Name can&apos;t be empty</source>
+        <translation>Το όνομα δε μπορεί να είναι κενό</translation>
+    </message>
+    <message>
+        <source>Force piece to be always flipped in a layout.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Force flipping</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Move on top</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Move up</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Move down</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Move on bottom</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>TabPlaceLabels</name>
+    <message>
+        <source>Dialog</source>
+        <translation type="unfinished">Διάλογος</translation>
     </message>
 </context>
 <context>
@@ -8438,6 +10142,10 @@ Do you want to save your changes?</source>
         <translation type="vanished">Άνοιγμα φακέλου</translation>
     </message>
     <message>
+        <source>Path that use Valentina</source>
+        <translation type="vanished">Μονοπάτι που χρησιμοποιεί το Valentina</translation>
+    </message>
+    <message>
         <source>Default</source>
         <translation type="vanished">Προεπιλογή</translation>
     </message>
@@ -8446,8 +10154,16 @@ Do you want to save your changes?</source>
         <translation type="vanished">Επεξεργασία</translation>
     </message>
     <message>
+        <source>Type</source>
+        <translation type="vanished">Τύπος</translation>
+    </message>
+    <message>
         <source>Path</source>
         <translation type="vanished">Διαδρομή</translation>
+    </message>
+    <message>
+        <source>Individual measurements</source>
+        <translation type="vanished">Ατομικές μετρήσεις</translation>
     </message>
     <message>
         <source>Standard measurements</source>
@@ -8482,11 +10198,11 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Author:</source>
-        <translation type="unfinished">Συγγραφέας:</translation>
+        <translation>Συγγραφέας:</translation>
     </message>
     <message>
         <source>Book:</source>
-        <translation type="unfinished">Βιβλίο:</translation>
+        <translation>Βιβλίο:</translation>
     </message>
     <message>
         <source>Measurements editing</source>
@@ -8494,15 +10210,15 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Reset warnings</source>
-        <translation type="unfinished"></translation>
+        <translation>Επαναφορά προειδοποιήσεων</translation>
     </message>
     <message>
         <source>Toolbar</source>
-        <translation type="unfinished">Μπάρα εργαλείων</translation>
+        <translation>Γραμμή εργαλείων</translation>
     </message>
     <message>
         <source>The text appears under the icon (recommended for beginners).</source>
-        <translation type="unfinished">Το κείμενο εμφανίζεται κάτω απο το εικονίδιο (συνιστάται για τους αρχάριους).</translation>
+        <translation>Το κείμενο εμφανίζεται κάτω απο το εικονίδιο (συνιστάται για αρχάριους).</translation>
     </message>
     <message>
         <source>Default height and size</source>
@@ -8518,18 +10234,18 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>With OS options</source>
-        <translation type="unfinished"></translation>
+        <translation>Με επιλογές του λειτουργικού συστήματος</translation>
     </message>
 </context>
 <context>
     <name>TapePreferencesPathPage</name>
     <message>
         <source>Paths that Valentina uses</source>
-        <translation type="unfinished"></translation>
+        <translation>Διαδρομές φακέλων που χρησιμοποιεί το Valentina</translation>
     </message>
     <message>
         <source>Type</source>
-        <translation type="unfinished"></translation>
+        <translation>Τύπος</translation>
     </message>
     <message>
         <source>Path</source>
@@ -8537,7 +10253,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Default</source>
-        <translation type="unfinished">Προεπιλογή</translation>
+        <translation>Προεπιλογή</translation>
     </message>
     <message>
         <source>Edit</source>
@@ -8557,6 +10273,13 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>My Templates</source>
+        <translation>Πρότυπά μου</translation>
+    </message>
+</context>
+<context>
+    <name>TogglePieceForceForbidFlipping</name>
+    <message>
+        <source>piece flipping</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -8568,10 +10291,45 @@ Do you want to save your changes?</source>
     </message>
 </context>
 <context>
+    <name>Tool</name>
+    <message>
+        <source>First point</source>
+        <translation>Πρώτο σημείο</translation>
+    </message>
+    <message>
+        <source>Second point</source>
+        <translation>Δεύτερο σημείο</translation>
+    </message>
+    <message>
+        <source>Highest point</source>
+        <translation>Ψηλότερο σημείο</translation>
+    </message>
+    <message>
+        <source>Lowest point</source>
+        <translation>Χαμηλότερο σημείο</translation>
+    </message>
+    <message>
+        <source>Leftmost point</source>
+        <translation>Σημείο στην αριστερή ακρη</translation>
+    </message>
+    <message>
+        <source>Rightmost point</source>
+        <translation>Σημείο στη δεξιά άκρη</translation>
+    </message>
+    <message>
+        <source>Vertical axis</source>
+        <translation>Κάθετος άξονας</translation>
+    </message>
+    <message>
+        <source>Horizontal axis</source>
+        <translation>Οριζόντιος άξονας</translation>
+    </message>
+</context>
+<context>
     <name>Utils::CheckableMessageBox</name>
     <message>
         <source>Do not ask again</source>
-        <translation type="unfinished"></translation>
+        <translation>Να μη γίνει ερώτηση ξανά</translation>
     </message>
     <message>
         <source>Do not &amp;ask again</source>
@@ -8602,15 +10360,15 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Invalid version. Minimum supported version is %1</source>
-        <translation>Η έκδοση είναι άκυρη. Η ελάχιστη έκδοση που υποστηρίζεται είναι η %1</translation>
+        <translation type="vanished">Η έκδοση είναι άκυρη. Η ελάχιστη έκδοση που υποστηρίζεται είναι η %1</translation>
     </message>
     <message>
         <source>Invalid version. Maximum supported version is %1</source>
-        <translation>Η έκδοση είναι άκυρη. Η μέγιστη έκδοση που υποστηρίζεται είναι η %1</translation>
+        <translation type="vanished">Η έκδοση είναι άκυρη. Η μέγιστη έκδοση που υποστηρίζεται είναι η %1</translation>
     </message>
     <message>
         <source>Error no unique id.</source>
-        <translation type="unfinished"></translation>
+        <translation>Σφάλμα λόγω μη μοναδικής ταυτότητας.</translation>
     </message>
     <message>
         <source>Could not change version.</source>
@@ -8628,12 +10386,78 @@ Do you want to save your changes?</source>
         <source>Error openning a temp file: %1.</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Invalid version. Minimum supported format version is %1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Invalid version. Maximum supported format version is %1</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>VAbstractCubicBezierPath</name>
     <message>
         <source>Can&apos;t cut this spline</source>
         <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>VAbstractLayoutDialog</name>
+    <message>
+        <source>Letter</source>
+        <translation type="unfinished">Letter</translation>
+    </message>
+    <message>
+        <source>Legal</source>
+        <translation type="unfinished">Legal</translation>
+    </message>
+    <message>
+        <source>Roll 24in</source>
+        <translation type="unfinished">Ρολό 24 ιντσών</translation>
+    </message>
+    <message>
+        <source>Roll 30in</source>
+        <translation type="unfinished">Ρολό 30 ιντσών</translation>
+    </message>
+    <message>
+        <source>Roll 36in</source>
+        <translation type="unfinished">Ρολό 36 ιντσών</translation>
+    </message>
+    <message>
+        <source>Roll 42in</source>
+        <translation type="unfinished">Ρολό 42 ιντσών</translation>
+    </message>
+    <message>
+        <source>Roll 44in</source>
+        <translation type="unfinished">Ρολό 44 ιντσών</translation>
+    </message>
+    <message>
+        <source>Custom</source>
+        <translation type="unfinished">Προσαρμογή</translation>
+    </message>
+    <message>
+        <source>Roll 48in</source>
+        <translation type="unfinished">Ρολό 44 ιντσών {48i?}</translation>
+    </message>
+    <message>
+        <source>Roll 62in</source>
+        <translation type="unfinished">Ρολό 44 ιντσών {62i?}</translation>
+    </message>
+    <message>
+        <source>Roll 72in</source>
+        <translation type="unfinished">Ρολό 44 ιντσών {72i?}</translation>
+    </message>
+</context>
+<context>
+    <name>VAbstractOperation</name>
+    <message>
+        <source>Label</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Length</source>
+        <translation type="unfinished">Μήκος</translation>
     </message>
 </context>
 <context>
@@ -8650,12 +10474,27 @@ Do you want to save your changes?</source>
         <source>New group</source>
         <translation>Νέα ομάδα</translation>
     </message>
+    <message>
+        <source>measurement</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>VAbstractPieceData</name>
     <message>
         <source>Detail</source>
         <translation type="unfinished">Λεπτομέρεια</translation>
+    </message>
+</context>
+<context>
+    <name>VAbstractSpline</name>
+    <message>
+        <source>Length</source>
+        <translation type="unfinished">Μήκος</translation>
+    </message>
+    <message>
+        <source>Label</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -8749,7 +10588,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Error bad id. Program will be terminated.</source>
-        <translation type="unfinished"></translation>
+        <translation>Σφάλμα κακής ταυτότητας. Το πρόγραμμα θα τερματιστεί.</translation>
     </message>
     <message>
         <source>Error can&apos;t convert value. Program will be terminated.</source>
@@ -8773,6 +10612,17 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Exception thrown: %1. Program will be terminated.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Invalid notch.</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>VComboBoxDelegate</name>
+    <message>
+        <source>Select material</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -8827,10 +10677,6 @@ Do you want to save your changes?</source>
         <translation>Τύπος ομαδοποίησης</translation>
     </message>
     <message>
-        <source>Cannot use pageformat and page explicit size/units together.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Page height, width, units must be used all 3 at once.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -8875,16 +10721,8 @@ Do you want to save your changes?</source>
         <translation>Ο φάκελος προορισμού</translation>
     </message>
     <message>
-        <source>Set size value a pattern file, that was opened with standard measurements (export mode). Valid values: %1cm.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>The size value</source>
         <translation>Η τιμή μεγέθους</translation>
-    </message>
-    <message>
-        <source>Set height value a pattern file, that was opened with standard measurements (export mode). Valid values: %1cm.</source>
-        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>The height value</source>
@@ -8915,6 +10753,22 @@ Do you want to save your changes?</source>
         <translation>Αρχείο πατρόν.</translation>
     </message>
     <message>
+        <source>Page left margin in current units like 3.0 (export mode). If not set will be used value from default printer. Or 0 if none printers was found.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Page right margin in current units like 3.0 (export mode). If not set will be used value from default printer. Or 0 if none printers was found.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Page top margin in current units like 3.0 (export mode). If not set will be used value from default printer. Or 0 if none printers was found.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Page bottom margin in current units like 3.0 (export mode). If not set will be used value from default printer. Or 0 if none printers was found.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <source>Gap width must be used together with shift units.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -8936,30 +10790,6 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>The path to output destination folder. By default the directory at which the application was started.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Page height/width measure units (cannot be used with &quot;%1&quot;, export mode). Valid values: %2.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Ignore margins printing (export mode). Disable value keys: &quot;%1&quot;, &quot;%2&quot;, &quot;%3&quot;, &quot;%4&quot;. Set all margins to 0.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Page left margin in current units like 3.0 (export mode). If not set will be used value from default printer. Or 0 if none printers was found. Value will be ignored if key &quot;%1&quot; is used.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Page right margin in current units like 3.0 (export mode). If not set will be used value from default printer. Or 0 if none printers was found. Value will be ignored if key &quot;%1&quot; is used.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Page top margin in current units like 3.0 (export mode). If not set will be used value from default printer. Or 0 if none printers was found. Value will be ignored if key &quot;%1&quot; is used.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Page bottom margin in current units like 3.0 (export mode). If not set will be used value from default printer. Or 0 if none printers was found. Value will be ignored if key &quot;%1&quot; is used.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -9003,11 +10833,155 @@ Do you want to save your changes?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Number corresponding to page template (default = 0, export mode):</source>
+        <source>Disable high dpi scaling. Call this option if has problem with scaling (by default scaling enabled). Alternatively you can use the %1 environment variable.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Disable high dpi scaling. Call this option if has problem with scaling (by default scaling enabled). Alternatively you can use the %1 environment variable.</source>
+        <source>Export dxf in binary form.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Export text as paths.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Export only details. Export details as they positioned in the details mode. Any layout related options will be ignored.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Export only details that match a piece name regex.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>The name regex</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Export to csv with header. By default disabled.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Specify codec that will be used to save data. List of supported codecs provided by Qt. Default value depend from system. On Windows, the codec will be based on a system locale. On Unix systems, the codec will might fall back to using the iconv library if no builtin codec for the locale can be found. Valid values for this installation:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Codec name</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Specify csv separator character. Default value is &apos;%1&apos;. Valid characters:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Separator character</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Calling this command enable exporting final measurements. Specify path to csv file with final measurements. The path must contain path to directory and name of file. It can be absolute or relatetive. In case of relative path will be used current working directory to calc a destination path.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Path to csv file</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Number corresponding to layout page template (default = 0, export mode):</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Ignore printer margins (export mode). Use if need full paper space. In case of later printing you must account for the margins himself.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Number corresponding to tiled pdf page template (default = 0, export mode with tiled pdf format):</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Tiled page left margin in current units like 3.0 (export mode). If not set will be used default value 1 cm.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>The left margin</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Tiled page right margin in current units like 3.0 (export mode). If not set will be used default value 1 cm.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>The right margin</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Tiled page top margin in current units like 3.0 (export mode). If not set will be used value default value 1 cm.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>The top margin</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Tiled page bottom margin in current units like 3.0 (export mode). If not set will be used value default value 1 cm.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>The bottom margin</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Set tiled page orienatation to landscape (export mode). Default value if not set portrait.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Cannot use pageformat and page explicit size together.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Tiled left margin must be used together with page units.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Tiled right margin must be used together with page units.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Tiled top margin must be used together with page units.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Tiled bottom margin must be used together with page units.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Page measure units (export mode). Valid values: %1.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Set size value for pattern file, that was opened with multisize measurements (export mode). Valid values: %1cm.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Set height value for pattern file, that was opened with multisize measurements (export mode). Valid values: %1cm.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Use this option to override user material defined in pattern. The value must be in form &lt;number&gt;@&lt;user matrial name&gt;. The number should be in range from 1 to %1. For example, 1@Fabric2. The key can be used multiple times. Has no effect in GUI mode.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>User material</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Make all parsing warnings into errors. Have effect only in console mode. Use to force Valentina to immediately terminate if a pattern contains a parsing warning.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Invalid user material &apos;%1&apos;. Separator is missing.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Invalid user material &apos;%1&apos;. Wrong material number.</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -9027,6 +11001,10 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>templates</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>label templates</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -9050,6 +11028,10 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Can&apos;t create a curve with type &apos;%1&apos;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Can&apos;t cast object.</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -9089,8 +11071,8 @@ Do you want to save your changes?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>This id is not unique.</source>
-        <translation type="unfinished"></translation>
+        <source>Got wrong parameter id. Need only id &gt; 0.</source>
+        <translation type="vanished">Λήψη λάθους παραμέτρου ταυτότητας. Χρειάζεται μόνο ταυτότητα &gt; 0.</translation>
     </message>
     <message>
         <source>Could not copy temp file to document file</source>
@@ -9102,6 +11084,10 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Fail to write Canonical XML.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&lt;empty&gt;</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -9118,6 +11104,18 @@ Do you want to save your changes?</source>
     <message>
         <source>Delete</source>
         <translation>Διαγραφή</translation>
+    </message>
+    <message>
+        <source>Show label</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Add to group</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Remove from group</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -9164,6 +11162,65 @@ Do you want to save your changes?</source>
     </message>
 </context>
 <context>
+    <name>VNodePoint</name>
+    <message>
+        <source>Options</source>
+        <translation type="unfinished">Επιλογές</translation>
+    </message>
+    <message>
+        <source>In layout</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Show label</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Exclude</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Delete</source>
+        <translation type="unfinished">Διαγραφή</translation>
+    </message>
+    <message>
+        <source>Forbid flipping</source>
+        <translation>Αποτροπή αντιστροφής</translation>
+    </message>
+    <message>
+        <source>Force flipping</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Angle</source>
+        <translation>Γωνία</translation>
+    </message>
+    <message>
+        <source>by length</source>
+        <translation>κατά μήκος</translation>
+    </message>
+    <message>
+        <source>by points intersetions</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>by first edge symmetry</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>by second edge symmetry</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>by first edge right angle</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>by second edge right angle</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>VPE::VBoolProperty</name>
     <message>
         <source>True</source>
@@ -9187,6 +11244,10 @@ Do you want to save your changes?</source>
 </context>
 <context>
     <name>VPattern</name>
+    <message>
+        <source>Error no unique id.</source>
+        <translation type="vanished">Σφάλμα λόγω μη μοναδικής ταυτότητας.</translation>
+    </message>
     <message>
         <source>Error parsing file.</source>
         <translation>Σφάλμα κατά την ανάλυση του αρχείου.</translation>
@@ -9353,7 +11414,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Error not unique id.</source>
-        <translation type="unfinished"></translation>
+        <translation>Σφάλμα λόγω μη μοναδικής ταυτότητας.</translation>
     </message>
     <message>
         <source>Error creating or updating point of intersection curves</source>
@@ -9427,6 +11488,10 @@ Do you want to save your changes?</source>
         <source>Error creating or updating pin point</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Error creating or updating place lavel</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>VPatternConverter</name>
@@ -9491,12 +11556,140 @@ Do you want to save your changes?</source>
         <translation type="vanished">στη Δίπλωση</translation>
     </message>
     <message>
-        <source>cut</source>
+        <source>on fold</source>
+        <translation type="vanished">στη δίπλωση</translation>
+    </message>
+</context>
+<context>
+    <name>VToolAlongLine</name>
+    <message>
+        <source>Length</source>
+        <translation type="unfinished">Μήκος</translation>
+    </message>
+    <message>
+        <source>Angle</source>
+        <translation type="unfinished">Γωνία</translation>
+    </message>
+    <message>
+        <source>Label</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>VToolArc</name>
+    <message>
+        <source>Length</source>
+        <translation type="unfinished">Μήκος</translation>
+    </message>
+    <message>
+        <source>Radius</source>
+        <translation type="unfinished">Ακτίνα</translation>
+    </message>
+    <message>
+        <source>Start angle</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>on fold</source>
-        <translation>στη δίπλωση</translation>
+        <source>End angle</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Label</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>VToolArcWithLength</name>
+    <message>
+        <source>Length</source>
+        <translation type="unfinished">Μήκος</translation>
+    </message>
+    <message>
+        <source>Radius</source>
+        <translation type="unfinished">Ακτίνα</translation>
+    </message>
+    <message>
+        <source>Start angle</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>End angle</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Label</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>VToolBasePoint</name>
+    <message>
+        <source>Label</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>VToolCurveIntersectAxis</name>
+    <message>
+        <source>Error calculating point &apos;%1&apos;. There is no intersection with curve &apos;%2&apos; and axis through point &apos;%3&apos; with angle %4°</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>VToolCutArc</name>
+    <message>
+        <source>Arc</source>
+        <translation type="unfinished">Τόξο</translation>
+    </message>
+    <message>
+        <source>length</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>start angle</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>end angle</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>radius</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>label</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>VToolCutSpline</name>
+    <message>
+        <source>Curve</source>
+        <translation type="unfinished">Καμπύλη</translation>
+    </message>
+    <message>
+        <source>length</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>label</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>VToolCutSplinePath</name>
+    <message>
+        <source>Curve</source>
+        <translation type="unfinished">Καμπύλη</translation>
+    </message>
+    <message>
+        <source>length</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>label</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -9544,6 +11737,152 @@ Do you want to save your changes?</source>
     <message>
         <source>rotate grainline</source>
         <translation type="vanished">περιστροφή γραμμής ίσιου</translation>
+    </message>
+</context>
+<context>
+    <name>VToolDoublePoint</name>
+    <message>
+        <source>Label</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>VToolEllipticalArc</name>
+    <message>
+        <source>Length</source>
+        <translation type="unfinished">Μήκος</translation>
+    </message>
+    <message>
+        <source>Radius</source>
+        <translation type="unfinished">Ακτίνα</translation>
+    </message>
+    <message>
+        <source>Start angle</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>End angle</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Label</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Rotation</source>
+        <translation>Περιστροφή</translation>
+    </message>
+</context>
+<context>
+    <name>VToolFlippingByAxis</name>
+    <message>
+        <source>Origin point</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>VToolFlippingByLine</name>
+    <message>
+        <source>First line point</source>
+        <translation type="unfinished">Πρώτο σημείο γραμμής</translation>
+    </message>
+    <message>
+        <source>Second line point</source>
+        <translation type="unfinished">Δεύτερο σημείο γραμμής</translation>
+    </message>
+</context>
+<context>
+    <name>VToolHeight</name>
+    <message>
+        <source>Length</source>
+        <translation type="unfinished">Μήκος</translation>
+    </message>
+    <message>
+        <source>Angle</source>
+        <translation type="unfinished">Γωνία</translation>
+    </message>
+    <message>
+        <source>Label</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>VToolLine</name>
+    <message>
+        <source>Length</source>
+        <translation type="unfinished">Μήκος</translation>
+    </message>
+    <message>
+        <source>Angle</source>
+        <translation type="unfinished">Γωνία</translation>
+    </message>
+</context>
+<context>
+    <name>VToolLineIntersect</name>
+    <message>
+        <source>Label</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Error calculating point &apos;%1&apos;. Lines (%2;%3) and (%4;%5) have no point of intersection</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>VToolLineIntersectAxis</name>
+    <message>
+        <source>Length</source>
+        <translation type="unfinished">Μήκος</translation>
+    </message>
+    <message>
+        <source>Angle</source>
+        <translation type="unfinished">Γωνία</translation>
+    </message>
+    <message>
+        <source>Label</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Error calculating point &apos;%1&apos;. Line (%2;%3) doesn&apos;t have intersection with axis through point &apos;%4&apos; and angle %5°</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>VToolLinePoint</name>
+    <message>
+        <source>Length</source>
+        <translation type="unfinished">Μήκος</translation>
+    </message>
+    <message>
+        <source>Angle</source>
+        <translation type="unfinished">Γωνία</translation>
+    </message>
+    <message>
+        <source>Label</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>VToolMove</name>
+    <message>
+        <source>Rotation angle</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Length</source>
+        <translation type="unfinished">Μήκος</translation>
+    </message>
+    <message>
+        <source>Center point</source>
+        <translation>Κεντρικό σημείο</translation>
+    </message>
+    <message>
+        <source>Angle</source>
+        <translation>Γωνία</translation>
+    </message>
+    <message>
+        <source>Rotation origin point</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -9674,11 +12013,11 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>First point</source>
-        <translation>Πρώτο σημείο</translation>
+        <translation type="vanished">Πρώτο σημείο</translation>
     </message>
     <message>
         <source>Second point</source>
-        <translation>Δεύτερο σημείο</translation>
+        <translation type="vanished">Δεύτερο σημείο</translation>
     </message>
     <message>
         <source>Arc with given length</source>
@@ -9699,6 +12038,10 @@ Do you want to save your changes?</source>
     <message>
         <source>Tool to make point from intersection two arcs</source>
         <translation>Εργαλείο δημιουργίας σημείου στην τομή δυο τόξων</translation>
+    </message>
+    <message>
+        <source>Take</source>
+        <translation type="vanished">Πάρε</translation>
     </message>
     <message>
         <source>Tool to make point from intersection two circles</source>
@@ -9726,19 +12069,19 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Highest point</source>
-        <translation>Ψηλότερο σημείο</translation>
+        <translation type="vanished">Ψηλότερο σημείο</translation>
     </message>
     <message>
         <source>Lowest point</source>
-        <translation>Χαμηλότερο σημείο</translation>
+        <translation type="vanished">Χαμηλότερο σημείο</translation>
     </message>
     <message>
         <source>Leftmost point</source>
-        <translation>Σημείο στην αριστερή ακρη</translation>
+        <translation type="vanished">Σημείο στην αριστερή ακρη</translation>
     </message>
     <message>
         <source>Rightmost point</source>
-        <translation>Σημείο στη δεξιά άκρη</translation>
+        <translation type="vanished">Σημείο στη δεξιά άκρη</translation>
     </message>
     <message>
         <source>Tool to make point from intersection two curves</source>
@@ -9790,11 +12133,11 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Vertical axis</source>
-        <translation>Κάθετος άξονας</translation>
+        <translation type="vanished">Κάθετος άξονας</translation>
     </message>
     <message>
         <source>Horizontal axis</source>
-        <translation>Οριζόντιος άξονας</translation>
+        <translation type="vanished">Οριζόντιος άξονας</translation>
     </message>
     <message>
         <source>Tool move</source>
@@ -9962,7 +12305,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Take:</source>
-        <translation type="unfinished"></translation>
+        <translation>Πάρε:</translation>
     </message>
     <message>
         <source>Center of the first circle:</source>
@@ -10046,7 +12389,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Origin point:</source>
-        <translation type="unfinished">Σημείο αρχής:</translation>
+        <translation>Σημείο προέλευσης:</translation>
     </message>
     <message>
         <source>Axis type:</source>
@@ -10059,6 +12402,83 @@ Do you want to save your changes?</source>
     <message>
         <source>Fourth point:</source>
         <translation type="unfinished">Τέταρτο σημείο:</translation>
+    </message>
+    <message>
+        <source>Pen style:</source>
+        <translation>Στυλ μαρκαδόρου:</translation>
+    </message>
+    <message>
+        <source>Approximation scale:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Rotation origin point:</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>VToolPointFromArcAndTangent</name>
+    <message>
+        <source>Error calculating point &apos;%1&apos;. Tangent to arc &apos;%2&apos; from point &apos;%3&apos; cannot be found</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>VToolPointFromCircleAndTangent</name>
+    <message>
+        <source>Error calculating point &apos;%1&apos;. Tangent to circle with center &apos;%2&apos; and radius &apos;%3&apos; from point &apos;%4&apos; cannot be found</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>VToolPointOfContact</name>
+    <message>
+        <source>Length</source>
+        <translation type="unfinished">Μήκος</translation>
+    </message>
+    <message>
+        <source>Angle</source>
+        <translation type="unfinished">Γωνία</translation>
+    </message>
+    <message>
+        <source>Label</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Error calculating point &apos;%1&apos;. Circle with center &apos;%2&apos; and radius &apos;%3&apos; doesn&apos;t have intersection with line (%4;%5)</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>VToolPointOfIntersectionArcs</name>
+    <message>
+        <source>Error calculating point &apos;%1&apos;. Arcs &apos;%2&apos; and &apos;%3&apos; have no point of intersection</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>VToolPointOfIntersectionCircles</name>
+    <message>
+        <source>Error calculating point &apos;%1&apos;. Circles with centers in points &apos;%2&apos; and &apos;%3&apos; have no point of intersection</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>VToolPointOfIntersectionCurves</name>
+    <message>
+        <source>Error calculating point &apos;%1&apos;. Curves &apos;%2&apos; and &apos;%3&apos; have no point of intersection</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>VToolRotation</name>
+    <message>
+        <source>Origin point</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Rotation angle</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -10114,6 +12534,44 @@ Do you want to save your changes?</source>
     <message>
         <source>Delete</source>
         <translation>Διαγραφή</translation>
+    </message>
+    <message>
+        <source>apply save detail options</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>multi deletion</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Forbid flipping</source>
+        <translation>Αποτροπή αντιστροφής</translation>
+    </message>
+    <message>
+        <source>Force flipping</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>VToolShoulderPoint</name>
+    <message>
+        <source>Length</source>
+        <translation type="unfinished">Μήκος</translation>
+    </message>
+    <message>
+        <source>Angle</source>
+        <translation type="unfinished">Γωνία</translation>
+    </message>
+    <message>
+        <source>Label</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>VToolTriangle</name>
+    <message>
+        <source>Error calculating point &apos;%1&apos;. Point of intersection cannot be found</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -10946,6 +13404,11 @@ Do you want to save your changes?</source>
         <translation type="vanished">Γραμμή_</translation>
     </message>
     <message>
+        <source>Arc_</source>
+        <comment>Left symbol _ in name</comment>
+        <translation type="vanished">Τόξο_</translation>
+    </message>
+    <message>
         <source>sin</source>
         <comment>sine function</comment>
         <translation type="vanished">ημίτονο</translation>
@@ -11058,17 +13521,17 @@ Do you want to save your changes?</source>
     <message>
         <source>cm</source>
         <comment>centimeter</comment>
-        <translation>εκ</translation>
+        <translation type="vanished">εκ</translation>
     </message>
     <message>
         <source>mm</source>
         <comment>millimeter</comment>
-        <translation>χιλ</translation>
+        <translation type="vanished">χιλ</translation>
     </message>
     <message>
         <source>in</source>
         <comment>inch</comment>
-        <translation>ίντσες</translation>
+        <translation type="vanished">ίντσες</translation>
     </message>
     <message>
         <source>Line_</source>
@@ -11083,7 +13546,7 @@ Do you want to save your changes?</source>
     <message>
         <source>Arc_</source>
         <comment>Left symbol _ in the name</comment>
-        <translation type="unfinished"></translation>
+        <translation>Τόξο_</translation>
     </message>
     <message>
         <source>Spl_</source>
@@ -11138,7 +13601,7 @@ Do you want to save your changes?</source>
     <message>
         <source>CurrentLength</source>
         <comment>Do not add space between words</comment>
-        <translation type="unfinished"></translation>
+        <translation>ΤρέχονΜήκος</translation>
     </message>
     <message>
         <source>acosh</source>
@@ -11178,7 +13641,7 @@ Do you want to save your changes?</source>
     <message>
         <source>CurrentSeamAllowance</source>
         <comment>Do not add space between words</comment>
-        <translation type="unfinished"></translation>
+        <translation>ΤρέχονΠεριθώριοΡαφής</translation>
     </message>
     <message>
         <source>degTorad</source>
@@ -11193,7 +13656,7 @@ Do you want to save your changes?</source>
     <message>
         <source>sin</source>
         <comment>sine function working with radians</comment>
-        <translation type="unfinished">ημίτονο</translation>
+        <translation>ημίτονο</translation>
     </message>
     <message>
         <source>cos</source>
@@ -11257,6 +13720,176 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Increment_</source>
+        <comment>Left symbol _ in the name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>ElArc_</source>
+        <comment>Left symbol _ in the name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Radius1ElArc_</source>
+        <comment>Left symbol _ in the name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Radius2ElArc_</source>
+        <comment>Left symbol _ in the name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Angle1ElArc_</source>
+        <comment>Left symbol _ in the name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Angle2ElArc_</source>
+        <comment>Left symbol _ in the name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>date</source>
+        <comment>placeholder</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>time</source>
+        <comment>placeholder</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>patternName</source>
+        <comment>placeholder</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>patternNumber</source>
+        <comment>placeholder</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>author</source>
+        <comment>placeholder</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>customer</source>
+        <comment>placeholder</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>pExt</source>
+        <comment>placeholder</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>pFileName</source>
+        <comment>placeholder</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>mFileName</source>
+        <comment>placeholder</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>mExt</source>
+        <comment>placeholder</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>pLetter</source>
+        <comment>placeholder</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>pAnnotation</source>
+        <comment>placeholder</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>pOrientation</source>
+        <comment>placeholder</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>pRotation</source>
+        <comment>placeholder</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>pTilt</source>
+        <comment>placeholder</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>pFoldPosition</source>
+        <comment>placeholder</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>pName</source>
+        <comment>placeholder</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>pQuantity</source>
+        <comment>placeholder</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>mFabric</source>
+        <comment>placeholder</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>mLining</source>
+        <comment>placeholder</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>mInterfacing</source>
+        <comment>placeholder</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>mInterlining</source>
+        <comment>placeholder</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>wCut</source>
+        <comment>placeholder</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>wOnFold</source>
+        <comment>placeholder</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>userMaterial</source>
+        <comment>placeholder</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>r2cm</source>
+        <comment>round to up to 1 decimal</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>csrCm</source>
+        <comment>cut, split and rotate modeling operation. Takes cm units.</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>csrInch</source>
+        <comment>cut, split and rotate modeling operation. Takes inch units.</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>RotationElArc_</source>
         <comment>Left symbol _ in the name</comment>
         <translation type="unfinished"></translation>
     </message>
@@ -11373,7 +14006,15 @@ Do you want to save your changes?</source>
     <name>VisToolMove</name>
     <message>
         <source>Length = %1%2, angle = %3°, &lt;b&gt;Shift&lt;/b&gt; - sticking angle, &lt;b&gt;Mouse click&lt;/b&gt; - finish creation</source>
-        <translation>Μήκος = %1%2, γωνία = %3°, &lt;b&gt;Shift&lt;/b&gt; - σταθεροποίηση γωνίας, &lt;b&gt;κλικ ποντικιού&lt;/b&gt; - τέλος δημιουργίας</translation>
+        <translation type="vanished">Μήκος = %1%2, γωνία = %3°, &lt;b&gt;Shift&lt;/b&gt; - σταθεροποίηση γωνίας, &lt;b&gt;κλικ ποντικιού&lt;/b&gt; - τέλος δημιουργίας</translation>
+    </message>
+    <message>
+        <source>Length = %1%2, angle = %3°, &lt;b&gt;Shift&lt;/b&gt; - sticking angle, &lt;b&gt;Mouse click&lt;/b&gt; - finish selecting a position</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Length = %1%2, angle = %3°, rotation angle = %4°, &lt;b&gt;Shift&lt;/b&gt; - sticking angle, &lt;b&gt;%5&lt;/b&gt; - change rotation origin point, &lt;b&gt;Mouse click&lt;/b&gt; - finish creating</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -11484,19 +14125,35 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Warning.</source>
-        <translation>Προειδοποίηση.</translation>
+        <translation type="vanished">Προειδοποίηση.</translation>
     </message>
     <message>
         <source>Critical error.</source>
-        <translation>Κρίσιμο σφάλμα.</translation>
+        <translation type="vanished">Κρίσιμο σφάλμα.</translation>
     </message>
     <message>
         <source>Fatal error.</source>
-        <translation>Ανεπανόρθωτο σφάλμα.</translation>
+        <translation type="vanished">Ανεπανόρθωτο σφάλμα.</translation>
     </message>
     <message>
         <source>Information.</source>
-        <translation>Πληροφορίες.</translation>
+        <translation type="vanished">Πληροφορίες.</translation>
+    </message>
+    <message>
+        <source>Warning</source>
+        <translation>Προειδοποίηση</translation>
+    </message>
+    <message>
+        <source>Critical error</source>
+        <translation>Κρίσιμο σφάλμα</translation>
+    </message>
+    <message>
+        <source>Fatal error</source>
+        <translation>Ανεπανόρθωτο σφάλμα</translation>
+    </message>
+    <message>
+        <source>Information</source>
+        <translation>Πληροφορίες</translation>
     </message>
 </context>
 </TS>

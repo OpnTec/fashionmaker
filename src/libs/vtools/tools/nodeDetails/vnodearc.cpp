@@ -6,7 +6,7 @@
  **
  **  @brief
  **  @copyright
- **  This source code is part of the Valentine project, a pattern making
+ **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2013-2015 Valentina project
  **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
@@ -44,57 +44,45 @@ const QString VNodeArc::ToolType = QStringLiteral("modeling");
 //---------------------------------------------------------------------------------------------------------------------
 /**
  * @brief VNodeArc constructor.
- * @param doc dom document container.
- * @param data container with variables.
- * @param id object id in container.
- * @param idArc object id in containerArc.
- * @param typeCreation way we create this tool.
- * @param idTool tool id.
+ * @param initData init data.
  * @param qoParent QObject parent
  */
-VNodeArc::VNodeArc(VAbstractPattern *doc, VContainer *data, quint32 id, quint32 idArc, const Source &typeCreation,
-                   const QString &drawName, const quint32 &idTool, QObject *qoParent)
-    :VAbstractNode(doc, data, id, idArc, drawName, idTool, qoParent)
+VNodeArc::VNodeArc(const VAbstractNodeInitData &initData, QObject *qoParent)
+    :VAbstractNode(initData.doc, initData.data, initData.id, initData.idObject, initData.drawName, initData.idTool,
+                   qoParent)
 {
-    ToolCreation(typeCreation);
+    ToolCreation(initData.typeCreation);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 /**
  * @brief Create help create tool.
- * @param doc dom document container.
- * @param data container with variables.
- * @param id object id in container.
- * @param idArc object id in containerArc.
- * @param parse parser file mode.
- * @param typeCreation way we create this tool.
- * @param idTool tool id.
+ * @param initData init data.
  */
-void VNodeArc::Create(VAbstractPattern *doc, VContainer *data, quint32 id, quint32 idArc,
-                      const Document &parse, const Source &typeCreation, const QString &drawName, const quint32 &idTool)
+void VNodeArc::Create(const VAbstractNodeInitData &initData)
 {
-    if (parse == Document::FullParse)
+    if (initData.parse == Document::FullParse)
     {
-        VAbstractTool::AddRecord(id, Tool::NodeArc, doc);
-        VNodeArc *arc = new VNodeArc(doc, data, id, idArc, typeCreation, drawName, idTool, doc);
+        VAbstractTool::AddRecord(initData.id, Tool::NodeArc, initData.doc);
+        VNodeArc *arc = new VNodeArc(initData);
 
-        VAbstractPattern::AddTool(id, arc);
-        if (idTool != NULL_ID)
+        VAbstractPattern::AddTool(initData.id, arc);
+        if (initData.idTool != NULL_ID)
         {
             //Some nodes we don't show on scene. Tool that create this nodes must free memory.
-            VDataTool *tool = VAbstractPattern::getTool(idTool);
+            VDataTool *tool = VAbstractPattern::getTool(initData.idTool);
             SCASSERT(tool != nullptr)
             arc->setParent(tool);// Adopted by a tool
         }
         else
         {
             // Help to delete the node before each FullParse
-            doc->AddToolOnRemove(arc);
+            initData.doc->AddToolOnRemove(arc);
         }
     }
     else
     {
-        doc->UpdateToolData(id, data);
+        initData.doc->UpdateToolData(initData.id, initData.data);
     }
 }
 
@@ -126,7 +114,7 @@ void VNodeArc::AddToFile()
 {
     QDomElement domElement = doc->createElement(getTagName());
 
-    doc->SetAttribute(domElement, VDomDocument::AttrId, id);
+    doc->SetAttribute(domElement, VDomDocument::AttrId, m_id);
     doc->SetAttribute(domElement, AttrType, ToolType);
     doc->SetAttribute(domElement, AttrIdObject, idNode);
     if (idTool != NULL_ID)
@@ -135,21 +123,4 @@ void VNodeArc::AddToFile()
     }
 
     AddToModeling(domElement);
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-/**
- * @brief RefreshDataInFile refresh attributes in file. If attributes don't exist create them.
- */
-void VNodeArc::RefreshDataInFile()
-{
-    QDomElement domElement = doc->elementById(id);
-    if (domElement.isElement())
-    {
-        doc->SetAttribute(domElement, AttrIdObject, idNode);
-        if (idTool != NULL_ID)
-        {
-            doc->SetAttribute(domElement, AttrIdTool, idTool);
-        }
-    }
 }

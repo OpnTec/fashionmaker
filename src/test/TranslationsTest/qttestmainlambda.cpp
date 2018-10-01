@@ -6,7 +6,7 @@
  **
  **  @brief
  **  @copyright
- **  This source code is part of the Valentine project, a pattern making
+ **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2015 Valentina project
  **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
@@ -32,12 +32,14 @@
 #include "tst_buitinregexp.h"
 #include "tst_qmuparsererrormsg.h"
 #include "tst_tstranslation.h"
+#include "tst_tslocaletranslation.h"
 
 #include "../vmisc/def.h"
+#include "../vmisc/testvapplication.h"
 
 int main(int argc, char** argv)
 {
-    QApplication app( argc, argv );// For translation
+    TestVApplication app( argc, argv );// For QPrinter
 
     int status = 0;
     auto ASSERT_TEST = [&status, argc, argv](QObject* obj)
@@ -49,22 +51,16 @@ int main(int argc, char** argv)
     ASSERT_TEST(new TST_TSTranslation());
 
     const QStringList locales = SupportedLocales();
-    for(quint32 s = 0; s < TST_MeasurementRegExp::systemCounts; ++s)
+    for(auto &locale : locales)
     {
-        for(int l = 0, sz = locales.size(); l < sz; ++l)
+        for(quint32 s = 0; s < TST_MeasurementRegExp::systemCounts; ++s)
         {
-            ASSERT_TEST(new TST_MeasurementRegExp(s, locales.at(l)));
+            ASSERT_TEST(new TST_MeasurementRegExp(s, locale));
         }
-    }
 
-    for(int l = 0, sz = locales.size(); l < sz; ++l)
-    {
-        ASSERT_TEST(new TST_BuitInRegExp(locales.at(l)));
-    }
-
-    for(int l = 0, sz = locales.size(); l < sz; ++l)
-    {
-        ASSERT_TEST(new TST_QmuParserErrorMsg(locales.at(l)));
+        ASSERT_TEST(new TST_TSLocaleTranslation(locale));
+        ASSERT_TEST(new TST_BuitInRegExp(locale));
+        ASSERT_TEST(new TST_QmuParserErrorMsg(locale));
     }
 
     return status;

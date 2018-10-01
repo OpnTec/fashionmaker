@@ -6,7 +6,7 @@
  **
  **  @brief
  **  @copyright
- **  This source code is part of the Valentine project, a pattern making
+ **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2016 Valentina project
  **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
@@ -55,6 +55,7 @@
 #include "../vpatterndb/vcontainer.h"
 #include "../vwidgets/vabstractmainwindow.h"
 #include "../vwidgets/vmaingraphicsscene.h"
+#include "../vwidgets/vmaingraphicsview.h"
 #include "ui_dialogflippingbyaxis.h"
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -78,7 +79,7 @@ DialogFlippingByAxis::DialogFlippingByAxis(const VContainer *data, const quint32
     CheckState();
 
     connect(ui->lineEditSuffix, &QLineEdit::textChanged, this, &DialogFlippingByAxis::SuffixChanged);
-    connect(ui->comboBoxOriginPoint, static_cast<void (QComboBox::*)(const QString &)>(&QComboBox::currentIndexChanged),
+    connect(ui->comboBoxOriginPoint, QOverload<const QString &>::of(&QComboBox::currentIndexChanged),
             this, &DialogFlippingByAxis::PointChanged);
 
     vis = new VisToolFlippingByAxis(data);
@@ -175,12 +176,14 @@ void DialogFlippingByAxis::ShowDialog(bool click)
         scene->ToggleSplineHover(false);
         scene->ToggleSplinePathHover(false);
 
+        qApp->getSceneView()->AllowRubberBand(false);
+
         emit ToolTip(tr("Select origin point"));
     }
     else if (not stage1 && prepare && click)
     {
         setModal(true);
-        emit ToolTip("");
+        emit ToolTip(QString());
         show();
     }
 }
@@ -198,7 +201,7 @@ void DialogFlippingByAxis::ChosenObject(quint32 id, const SceneObject &type)
                 return;
             }
 
-            if (SetObject(id, ui->comboBoxOriginPoint, ""))
+            if (SetObject(id, ui->comboBoxOriginPoint, QString()))
             {
                 VisToolFlippingByAxis *operation = qobject_cast<VisToolFlippingByAxis *>(vis);
                 SCASSERT(operation != nullptr)
@@ -250,10 +253,10 @@ void DialogFlippingByAxis::SuffixChanged()
             if (m_suffix != suffix)
             {
                 QRegularExpression rx(NameRegExp());
-                const QStringList uniqueNames = VContainer::AllUniqueNames();
-                for (int i=0; i < uniqueNames.size(); ++i)
+                const QStringList uniqueNames = data->AllUniqueNames();
+                for (auto &uniqueName : uniqueNames)
                 {
-                    const QString name = uniqueNames.at(i) + suffix;
+                    const QString name = uniqueName + suffix;
                     if (not rx.match(name).hasMatch() || not data->IsUnique(name))
                     {
                         flagName = false;

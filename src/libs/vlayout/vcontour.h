@@ -6,7 +6,7 @@
  **
  **  @brief
  **  @copyright
- **  This source code is part of the Valentine project, a pattern making
+ **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2013-2015 Valentina project
  **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
@@ -58,7 +58,7 @@ public:
     VContour &operator=(VContour &&contour) Q_DECL_NOTHROW { Swap(contour); return *this; }
 #endif
 
-    void Swap(VContour &contour) Q_DECL_NOTHROW
+    inline void Swap(VContour &contour) Q_DECL_NOTHROW
     { std::swap(d, contour.d); }
 
     void             SetContour(const QVector<QPointF> &contour);

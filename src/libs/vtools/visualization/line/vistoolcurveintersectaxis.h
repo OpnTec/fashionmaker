@@ -6,7 +6,7 @@
  **
  **  @brief
  **  @copyright
- **  This source code is part of the Valentine project, a pattern making
+ **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2013-2015 Valentina project
  **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
@@ -43,26 +43,26 @@ class VisToolCurveIntersectAxis : public VisLine
 {
     Q_OBJECT
 public:
-    explicit VisToolCurveIntersectAxis(const VContainer *data, QGraphicsItem *parent = 0);
-    virtual ~VisToolCurveIntersectAxis() Q_DECL_OVERRIDE;
+    explicit VisToolCurveIntersectAxis(const VContainer *data, QGraphicsItem *parent = nullptr);
+    virtual ~VisToolCurveIntersectAxis() = default;
 
-    virtual void RefreshGeometry() Q_DECL_OVERRIDE;
+    virtual void RefreshGeometry() override;
 
     QString      Angle() const;
     void         SetAngle(const QString &expression);
     void         setAxisPointId(const quint32 &value);
 
-    virtual int  type() const Q_DECL_OVERRIDE {return Type;}
+    virtual int  type() const override {return Type;}
     enum { Type = UserType + static_cast<int>(Vis::ToolLineIntersectAxis)};
 private:
     Q_DISABLE_COPY(VisToolCurveIntersectAxis)
-    quint32              axisPointId;
-    qreal                angle;
-    QGraphicsEllipseItem *point;
-    QGraphicsEllipseItem *basePoint;
-    QGraphicsLineItem    *baseLine;
-    QGraphicsLineItem    *axisLine;
-    QGraphicsPathItem    *visCurve;
+    quint32         axisPointId;
+    qreal           angle;
+    VScaledEllipse *point;
+    VScaledEllipse *basePoint;
+    VScaledLine    *baseLine;
+    VScaledLine    *axisLine;
+    VCurvePathItem *visCurve;
 };
 
 #endif // VISTOOLCURVEINTERSECTAXIS_H

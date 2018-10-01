@@ -6,7 +6,7 @@
  **
  **  @brief
  **  @copyright
- **  This source code is part of the Valentine project, a pattern making
+ **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2013-2015 Valentina project
  **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
@@ -55,25 +55,26 @@ public:
     explicit VTextGraphicsItem(QGraphicsItem* pParent = nullptr);
     virtual ~VTextGraphicsItem() Q_DECL_EQ_DEFAULT;
 
-    virtual void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget) Q_DECL_OVERRIDE;
-    virtual void Update() Q_DECL_OVERRIDE;
+    virtual void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget) override;
+    virtual void Update() override;
+
+    virtual int  type() const override {return Type;}
+    enum { Type = UserType + static_cast<int>(Vis::TextGraphicsItem)};
 
     void SetFont(const QFont& fnt);
     int  GetFontSize() const;
-    void AddLine(const TextLine& tl);
-    void Clear();
     void SetSize(qreal fW, qreal fH);
     bool IsContained(QRectF rectBB, qreal dRot, qreal& dX, qreal& dY) const;
     void UpdateData(const QString& qsName, const VPieceLabelData& data);
-    void UpdateData(const VAbstractPattern* pDoc, qreal dSize, qreal dHeight);
+    void UpdateData(VAbstractPattern* pDoc);
     int  GetTextLines() const;
 
 protected:
-    virtual void mousePressEvent(QGraphicsSceneMouseEvent* pME) Q_DECL_OVERRIDE;
-    virtual void mouseMoveEvent(QGraphicsSceneMouseEvent* pME) Q_DECL_OVERRIDE;
-    virtual void mouseReleaseEvent(QGraphicsSceneMouseEvent* pME) Q_DECL_OVERRIDE;
-    virtual void hoverMoveEvent(QGraphicsSceneHoverEvent* pHE) Q_DECL_OVERRIDE;
-    virtual void hoverLeaveEvent(QGraphicsSceneHoverEvent* pHE) Q_DECL_OVERRIDE;
+    virtual void mousePressEvent(QGraphicsSceneMouseEvent* pME) override;
+    virtual void mouseMoveEvent(QGraphicsSceneMouseEvent* pME) override;
+    virtual void mouseReleaseEvent(QGraphicsSceneMouseEvent* pME) override;
+    virtual void hoverEnterEvent(QGraphicsSceneHoverEvent *pME) override;
+    virtual void hoverMoveEvent(QGraphicsSceneHoverEvent* pHE) override;
 
     void UpdateBox();
     void CorrectLabel();

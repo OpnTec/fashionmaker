@@ -6,7 +6,7 @@
  **
  **  @brief
  **  @copyright
- **  This source code is part of the Valentine project, a pattern making
+ **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2016 Valentina project
  **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
@@ -46,26 +46,25 @@ public:
     explicit VisToolCubicBezier(const VContainer *data, QGraphicsItem *parent = nullptr);
     virtual ~VisToolCubicBezier() Q_DECL_EQ_DEFAULT;
 
-    virtual void RefreshGeometry() Q_DECL_OVERRIDE;
+    virtual void RefreshGeometry() override;
 
     void         setObject2Id(const quint32 &value);
     void         setObject3Id(const quint32 &value);
     void         setObject4Id(const quint32 &value);
 
-    virtual int  type() const Q_DECL_OVERRIDE {return Type;}
+    virtual int  type() const override {return Type;}
     enum { Type = UserType + static_cast<int>(Vis::ToolCubicBezier)};
-
 protected:
     Q_DISABLE_COPY(VisToolCubicBezier)
-    quint32              object2Id;
-    quint32              object3Id;
-    quint32              object4Id;
-    QGraphicsEllipseItem *point1;
-    QGraphicsEllipseItem *point2;
-    QGraphicsEllipseItem *point3;
-    QGraphicsEllipseItem *point4;
-    QGraphicsLineItem    *helpLine1;
-    QGraphicsLineItem    *helpLine2;
+    quint32         object2Id;
+    quint32         object3Id;
+    quint32         object4Id;
+    VScaledEllipse *point1;
+    VScaledEllipse *point2;
+    VScaledEllipse *point3;
+    VScaledEllipse *point4;
+    VScaledLine    *helpLine1;
+    VScaledLine    *helpLine2;
 };
 
 #endif // VISTOOLCUBICBEZIER_H

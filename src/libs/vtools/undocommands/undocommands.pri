@@ -10,7 +10,6 @@ HEADERS += \
     $$PWD/savetooloptions.h \
     $$PWD/deltool.h \
     $$PWD/deletepatternpiece.h \
-    $$PWD/adddetnode.h \
     $$PWD/vundocommand.h \
     $$PWD/renamepp.h \
     $$PWD/label/movelabel.h \
@@ -23,8 +22,14 @@ HEADERS += \
     $$PWD/deletepiece.h \
     $$PWD/movepiece.h \
     $$PWD/savepieceoptions.h \
-    $$PWD/togglepieceinlayout.h \
-    $$PWD/savepiecepathoptions.h
+    $$PWD/savepiecepathoptions.h \
+    $$PWD/label/showlabel.h \
+    $$PWD/label/showdoublelabel.h \
+    $$PWD/label/operationshowlabel.h \
+    $$PWD/saveplacelabeloptions.h \
+    $$PWD/togglepiecestate.h \
+    $$PWD/additemtogroup.h \
+    $$PWD/removeitemfromgroup.h
 
 SOURCES += \
     $$PWD/addtocalc.cpp \
@@ -35,7 +40,6 @@ SOURCES += \
     $$PWD/savetooloptions.cpp \
     $$PWD/deltool.cpp \
     $$PWD/deletepatternpiece.cpp \
-    $$PWD/adddetnode.cpp \
     $$PWD/vundocommand.cpp \
     $$PWD/renamepp.cpp \
     $$PWD/label/movelabel.cpp \
@@ -48,5 +52,11 @@ SOURCES += \
     $$PWD/deletepiece.cpp \
     $$PWD/movepiece.cpp \
     $$PWD/savepieceoptions.cpp \
-    $$PWD/togglepieceinlayout.cpp \
-    $$PWD/savepiecepathoptions.cpp
+    $$PWD/savepiecepathoptions.cpp \
+    $$PWD/label/showlabel.cpp \
+    $$PWD/label/showdoublelabel.cpp \
+    $$PWD/label/operationshowlabel.cpp \
+    $$PWD/saveplacelabeloptions.cpp \
+    $$PWD/togglepiecestate.cpp \
+    $$PWD/additemtogroup.cpp \
+    $$PWD/removeitemfromgroup.cpp

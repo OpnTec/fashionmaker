@@ -41,6 +41,9 @@
 #include <QVariant>
 #include <QXmlStreamAttributes>
 #include <QtDebug>
+#include <QSslConfiguration>
+#include <QDir>
+#include <QGlobalStatic>
 
 #include "../ifc/exception/vexception.h"
 #include "../ifc/xml/vabstractconverter.h"
@@ -50,7 +53,13 @@
 #include "fvavailableupdate.h"
 #include "fvupdatewindow.h"
 
-const QString defaultFeedURL = QStringLiteral("https://valentinaproject.bitbucket.io/Appcast.xml");
+namespace
+{
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, defaultFeedURL,
+                          (QLatin1String("https://valentinaproject.bitbucket.io/Appcast.xml")))
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, testFeedURL,
+                          (QLatin1String("https://valentinaproject.bitbucket.io/Appcast_testing.xml")))
+}
 
 QPointer<FvUpdater> FvUpdater::m_Instance;
 
@@ -75,6 +84,52 @@ void FvUpdater::drop()
     mutex.lock();
     delete m_Instance;
     mutex.unlock();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QString FvUpdater::CurrentFeedURL()
+{
+    return FvUpdater::IsTestBuild() ? *testFeedURL : *defaultFeedURL;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+int FvUpdater::CurrentVersion()
+{
+#ifdef Q_OS_MAC
+    const QString path = QCoreApplication::applicationDirPath() + QLatin1String("/../Resources/VERSION");
+#else
+    const QString path = QApplication::applicationDirPath() + QDir::separator() + QLatin1String("VERSION");
+#endif
+
+    QFile file(path);
+    if (file.exists())
+    {
+        if (not file.open(QIODevice::ReadOnly | QIODevice::Text))
+        {
+            return APP_VERSION;
+        }
+
+        QTextStream in(&file);
+        try
+        {
+            return VAbstractConverter::GetVersion(in.read(15));
+        }
+        catch(const VException &)
+        {
+            return APP_VERSION;
+        }
+    }
+    else
+    {
+        return APP_VERSION;
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+bool FvUpdater::IsTestBuild()
+{
+    const int version = FvUpdater::CurrentVersion();
+    return (version != 0x0 && version != APP_VERSION);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -109,7 +164,7 @@ void FvUpdater::showUpdaterWindowUpdatedWithCurrentUpdateProposal()
     // Create a new window
     m_updaterWindow = new FvUpdateWindow(qApp->getMainWindow());
     m_updaterWindow->UpdateWindowWithCurrentProposedUpdate();
-    m_updaterWindow->show();
+    m_updaterWindow->exec();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -301,11 +356,13 @@ void FvUpdater::startDownloadFeed(const QUrl &url)
     request.setHeader(QNetworkRequest::ContentTypeHeader, QStringLiteral("application/xml"));
     request.setHeader(QNetworkRequest::UserAgentHeader, QCoreApplication::applicationName());
     request.setUrl(url);
+#ifndef QT_NO_SSL
     request.setSslConfiguration(QSslConfiguration::defaultConfiguration());
+#endif
 
     m_reply = m_qnam.get(request);
 
-    connect(m_reply.data(), &QNetworkReply::readyRead, RECEIVER(this)[this]()
+    connect(m_reply.data(), &QNetworkReply::readyRead, this, [this]()
     {
         // this slot gets called every time the QNetworkReply has new data.
         // We read all of its new data and write it into the file.
@@ -313,7 +370,7 @@ void FvUpdater::startDownloadFeed(const QUrl &url)
         // signal of the QNetworkReply
         m_xml.addData(m_reply->readAll());
     });
-    connect(m_reply.data(), &QNetworkReply::downloadProgress, RECEIVER(this)[this](qint64 bytesRead, qint64 totalBytes)
+    connect(m_reply.data(), &QNetworkReply::downloadProgress, this, [this](qint64 bytesRead, qint64 totalBytes)
     {
         Q_UNUSED(bytesRead)
         Q_UNUSED(totalBytes)
@@ -520,7 +577,7 @@ bool FvUpdater::VersionIsIgnored(const QString &version)
         return true; // Ignore invalid version
     }
 
-    if (decVersion == APP_VERSION)
+    if (decVersion == FvUpdater::CurrentVersion())
     {
         return true;
     }
@@ -535,7 +592,7 @@ bool FvUpdater::VersionIsIgnored(const QString &version)
         }
     }
 
-    if (decVersion > APP_VERSION)
+    if (decVersion > FvUpdater::CurrentVersion())
     {
         // Newer version - do not skip
         return false;
@@ -559,7 +616,7 @@ void FvUpdater::IgnoreVersion(const QString &version)
         return ; // Ignore invalid version
     }
 
-    if (decVersion == APP_VERSION)
+    if (decVersion == FvUpdater::CurrentVersion())
     {
         // Don't ignore the current version
         return;
@@ -617,8 +674,7 @@ void FvUpdater::showErrorDialog(const QString &message, bool showEvenInSilentMod
 
     QMessageBox dlFailedMsgBox;
     dlFailedMsgBox.setIcon(QMessageBox::Critical);
-    dlFailedMsgBox.setText(tr("Error"));
-    dlFailedMsgBox.setInformativeText(message);
+    dlFailedMsgBox.setText(message);
     dlFailedMsgBox.exec();
 }
 
@@ -636,7 +692,6 @@ void FvUpdater::showInformationDialog(const QString &message, bool showEvenInSil
 
     QMessageBox dlInformationMsgBox;
     dlInformationMsgBox.setIcon(QMessageBox::Information);
-    dlInformationMsgBox.setText(tr("Information"));
-    dlInformationMsgBox.setInformativeText(message);
+    dlInformationMsgBox.setText(message);
     dlInformationMsgBox.exec();
 }

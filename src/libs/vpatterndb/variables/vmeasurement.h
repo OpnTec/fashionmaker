@@ -6,7 +6,7 @@
  **
  **  @brief
  **  @copyright
- **  This source code is part of the Valentine project, a pattern making
+ **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2013-2015 Valentina project
  **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
@@ -26,8 +26,8 @@
  **
  *************************************************************************/
 
-#ifndef VSTANDARDTABLEROW_H
-#define VSTANDARDTABLEROW_H
+#ifndef VMULTISIZETABLEROW_H
+#define VMULTISIZETABLEROW_H
 
 #include <qcompilerdetection.h>
 #include <QMap>
@@ -45,7 +45,7 @@ class VContainer;
 class VMeasurementData;
 
 /**
- * @brief The VMeasurement class keep data row of standard table
+ * @brief The VMeasurement class keep data row of multisize table
  */
 class VMeasurement :public VVariable
 {
@@ -58,14 +58,14 @@ public:
                  const QString &tagName = QString());
     VMeasurement(const VMeasurement &m);
 
-    virtual ~VMeasurement() Q_DECL_OVERRIDE;
+    virtual ~VMeasurement() override;
 
     VMeasurement &operator=(const VMeasurement &m);
 #ifdef Q_COMPILER_RVALUE_REFS
     VMeasurement &operator=(VMeasurement &&m) Q_DECL_NOTHROW { Swap(m); return *this; }
 #endif
 
-    void Swap(VMeasurement &m) Q_DECL_NOTHROW
+    inline void Swap(VMeasurement &m) Q_DECL_NOTHROW
     { VVariable::Swap(m); std::swap(d, m.d); }
 
     QString GetGuiText() const;
@@ -80,10 +80,26 @@ public:
     int     Index() const;
     bool    IsFormulaOk() const;
 
+    virtual bool IsNotUsed() const override;
+
+    virtual qreal  GetValue() const override;
+    virtual qreal* GetValue() override;
+
     VContainer *GetData();
 
-    static QStringList ListHeights(QMap<GHeights, bool> heights, Unit patternUnit);
-    static QStringList ListSizes(QMap<GSizes, bool> sizes, Unit patternUnit);
+    void SetUnit(const Unit *unit);
+
+    qreal   GetBase() const;
+    void    SetBase(const qreal &value);
+
+    qreal   GetKsize() const;
+    void    SetKsize(const qreal &value);
+
+    qreal   GetKheight() const;
+    void    SetKheight(const qreal &value);
+
+    static QStringList ListHeights(const QMap<GHeights, bool> &heights, Unit patternUnit);
+    static QStringList ListSizes(const QMap<GSizes, bool> &sizes, Unit patternUnit);
     static QStringList WholeListHeights(Unit patternUnit);
     static QStringList WholeListSizes(Unit patternUnit);
     static bool IsGradationSizeValid(const QString &size);
@@ -91,9 +107,9 @@ public:
 private:
     QSharedDataPointer<VMeasurementData> d;
 
-    static void        ListValue(QStringList &list, qreal value, Unit patternUnit);
+    qreal CalcValue() const;
 };
 
 Q_DECLARE_TYPEINFO(VMeasurement, Q_MOVABLE_TYPE);
 
-#endif // VSTANDARDTABLEROW_H
+#endif // VMULTISIZETABLEROW_H

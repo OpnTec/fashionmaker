@@ -6,7 +6,7 @@
  **
  **  @brief
  **  @copyright
- **  This source code is part of the Valentine project, a pattern making
+ **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2015 Valentina project
  **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
@@ -155,9 +155,7 @@ int TST_QmuParserErrorMsg::LoadTranslation(const QString &checkedLocale)
     if (QFileInfo(path+QLatin1String("/")+file).size() <= 34)
     {
         const QString message = QString("Translation for locale = %1 is empty. \nFull path: %2/%3")
-                .arg(checkedLocale)
-                .arg(path)
-                .arg(file);
+                .arg(checkedLocale, path, file);
         QWARN(qUtf8Printable(message));
 
         return ErrorSize;
@@ -168,9 +166,7 @@ int TST_QmuParserErrorMsg::LoadTranslation(const QString &checkedLocale)
     if (not appTranslator->load(file, path))
     {
         const QString message = QString("Can't load translation for locale = %1. \nFull path: %2/%3")
-                .arg(checkedLocale)
-                .arg(path)
-                .arg(file);
+                .arg(checkedLocale, path, file);
         QWARN(qUtf8Printable(message));
 
         delete appTranslator;
@@ -181,9 +177,7 @@ int TST_QmuParserErrorMsg::LoadTranslation(const QString &checkedLocale)
     if (not QCoreApplication::installTranslator(appTranslator))
     {
         const QString message = QString("Can't install translation for locale = %1. \nFull path: %2/%3")
-                .arg(checkedLocale)
-                .arg(path)
-                .arg(file);
+                .arg(checkedLocale, path, file);
         QWARN(qUtf8Printable(message));
 
         delete appTranslator;

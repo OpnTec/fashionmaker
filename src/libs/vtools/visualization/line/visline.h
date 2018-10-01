@@ -6,7 +6,7 @@
  **
  **  @brief
  **  @copyright
- **  This source code is part of the Valentine project, a pattern making
+ **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2013-2015 Valentina project
  **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
@@ -43,15 +43,16 @@
 
 #include "../vtools/visualization/visualization.h"
 #include "../vmisc/def.h"
+#include "../vwidgets/scalesceneitems.h"
 
-class VisLine: public Visualization, public QGraphicsLineItem
+class VisLine: public Visualization, public VScaledLine
 {
     Q_OBJECT
 public:
-    explicit VisLine(const VContainer *data, QGraphicsItem *parent = 0);
-    virtual ~VisLine() Q_DECL_OVERRIDE;
+    explicit VisLine(const VContainer *data, QGraphicsItem *parent = nullptr);
+    virtual ~VisLine() = default;
 
-    virtual int  type() const Q_DECL_OVERRIDE {return Type;}
+    virtual int  type() const override {return Type;}
     enum { Type = UserType + static_cast<int>(Vis::Line)};
     static qreal CorrectAngle(const qreal &angle);
 protected:
@@ -59,10 +60,10 @@ protected:
     QPointF      Ray(const QPointF &firstPoint) const;
     QLineF       Axis(const QPointF &p, const qreal &angle) const;
     QLineF       Axis(const QPointF &p1, const QPointF &p2) const;
-    virtual void InitPen() Q_DECL_OVERRIDE;
-    virtual void AddOnScene() Q_DECL_OVERRIDE;
+    virtual void InitPen() override;
+    virtual void AddOnScene() override;
 
-    void         DrawRay(QGraphicsLineItem *lineItem, const QPointF &p, const QPointF &pTangent,
+    void         DrawRay(VScaledLine *lineItem, const QPointF &p, const QPointF &pTangent,
                          const QColor &color, Qt::PenStyle style);
 private:
     Q_DISABLE_COPY(VisLine)

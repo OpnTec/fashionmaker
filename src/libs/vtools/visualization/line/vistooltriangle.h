@@ -6,7 +6,7 @@
  **
  **  @brief
  **  @copyright
- **  This source code is part of the Valentine project, a pattern making
+ **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2013-2015 Valentina project
  **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
@@ -47,31 +47,31 @@ class VisToolTriangle : public VisLine
     Q_OBJECT
 public:
     explicit VisToolTriangle(const VContainer *data, QGraphicsItem *parent = nullptr);
-    virtual ~VisToolTriangle() Q_DECL_EQ_DEFAULT;
+    virtual ~VisToolTriangle() = default;
 
-    virtual void RefreshGeometry() Q_DECL_OVERRIDE;
+    virtual void RefreshGeometry() override;
 
     void         setObject2Id(const quint32 &value);
     void         setHypotenuseP1Id(const quint32 &value);
     void         setHypotenuseP2Id(const quint32 &value);
 
-    virtual int  type() const Q_DECL_OVERRIDE {return Type;}
+    virtual int  type() const override {return Type;}
     enum { Type = UserType + static_cast<int>(Vis::ToolTriangle)};
 private:
     Q_DISABLE_COPY(VisToolTriangle)
-    quint32              object2Id;//axis second point
-    quint32              hypotenuseP1Id;
-    quint32              hypotenuseP2Id;
-    QGraphicsEllipseItem *point;
-    QGraphicsEllipseItem *axisP1;
-    QGraphicsEllipseItem *axisP2;
-    QGraphicsPathItem    *axis;
-    QGraphicsEllipseItem *hypotenuseP1;
-    QGraphicsEllipseItem *hypotenuseP2;
-    QGraphicsLineItem    *foot1;
-    QGraphicsLineItem    *foot2;
+    quint32            object2Id;//axis second point
+    quint32            hypotenuseP1Id;
+    quint32            hypotenuseP2Id;
+    VScaledEllipse    *point;
+    VScaledEllipse    *axisP1;
+    VScaledEllipse    *axisP2;
+    VCurvePathItem    *axis;
+    VScaledEllipse    *hypotenuseP1;
+    VScaledEllipse    *hypotenuseP2;
+    VScaledLine       *foot1;
+    VScaledLine       *foot2;
 
-    void         DrawAimedAxis(QGraphicsPathItem *item, const QLineF &line, const QColor &color,
+    void         DrawAimedAxis(VCurvePathItem *item, const QLineF &line, const QColor &color,
                                Qt::PenStyle style = Qt::SolidLine);
     void         DrawArrow(const QLineF &axis, QPainterPath &path, const qreal &arrow_size);
 };

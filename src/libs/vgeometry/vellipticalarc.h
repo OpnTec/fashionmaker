@@ -6,7 +6,7 @@
  **
  **  @brief
  **  @copyright
- **  This source code is part of the Valentine project, a pattern making
+ **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2013-2015 Valentina project
  **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
@@ -61,18 +61,18 @@ public:
     VEllipticalArc (qreal length, const VPointF &center, qreal radius1, qreal radius2, qreal f1, qreal rotationAngle);
     VEllipticalArc(const VEllipticalArc &arc);
 
-    VEllipticalArc Rotate(const QPointF &originPoint, qreal degrees, const QString &prefix = QString()) const;
+    VEllipticalArc Rotate(QPointF originPoint, qreal degrees, const QString &prefix = QString()) const;
     VEllipticalArc Flip(const QLineF &axis, const QString &prefix = QString()) const;
     VEllipticalArc Move(qreal length, qreal angle, const QString &prefix = QString()) const;
 
-    virtual ~VEllipticalArc() Q_DECL_OVERRIDE;
+    virtual ~VEllipticalArc() override;
 
     VEllipticalArc& operator= (const VEllipticalArc &arc);
 #ifdef Q_COMPILER_RVALUE_REFS
     VEllipticalArc &operator=(VEllipticalArc &&arc) Q_DECL_NOTHROW { Swap(arc); return *this; }
 #endif
 
-    void Swap(VEllipticalArc &arc) Q_DECL_NOTHROW
+    inline void Swap(VEllipticalArc &arc) Q_DECL_NOTHROW
     { VAbstractArc::Swap(arc); std::swap(d, arc.d); }
 
     QString GetFormulaRotationAngle () const;
@@ -87,30 +87,41 @@ public:
     void    SetFormulaRadius2 (const QString &formula, qreal value);
     qreal   GetRadius2 () const;
 
-    virtual qreal GetLength () const Q_DECL_OVERRIDE;
+    virtual qreal GetLength () const override;
 
     QPointF GetP1() const;
     QPointF GetP2() const;
 
-    virtual QVector<QPointF> GetPoints () const Q_DECL_OVERRIDE;
+    QTransform GetTransform() const;
+    void       SetTransform(const QTransform &matrix, bool combine = false);
+
+    virtual VPointF GetCenter () const override;
+    virtual QVector<QPointF> GetPoints () const override;
+    virtual qreal GetStartAngle () const override;
+    virtual qreal GetEndAngle () const override;
 
     QPointF CutArc (const qreal &length, VEllipticalArc &arc1, VEllipticalArc &arc2) const;
     QPointF CutArc (const qreal &length) const;
+
+    static qreal OptimizeAngle(qreal angle);
 protected:
-    virtual void CreateName() Q_DECL_OVERRIDE;
-    virtual void FindF2(qreal length) Q_DECL_OVERRIDE;
+    virtual void CreateName() override;
+    virtual void FindF2(qreal length) override;
 private:
     QSharedDataPointer<VEllipticalArcData> d;
 
-    // cppcheck-suppress unusedPrivateFunction
-    QVector<qreal> GetAngles () const;
-    qreal          MaxLength() const;
-    QPointF        GetPoint (qreal angle) const;
+    qreal MaxLength() const;
 
-    static int GetQuadransRad(qreal &rad);
+    QPointF GetP(qreal angle) const;
 };
 
 Q_DECLARE_METATYPE(VEllipticalArc)
 Q_DECLARE_TYPEINFO(VEllipticalArc, Q_MOVABLE_TYPE);
+
+//---------------------------------------------------------------------------------------------------------------------
+inline qreal VEllipticalArc::OptimizeAngle(qreal angle)
+{
+    return angle - 360.*qFloor(angle/360.);
+}
 
 #endif // VELLIPTICALARC_H

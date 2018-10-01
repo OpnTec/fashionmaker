@@ -6,7 +6,7 @@
  **
  **  @brief
  **  @copyright
- **  This source code is part of the Valentine project, a pattern making
+ **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2013-2015 Valentina project
  **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
@@ -78,7 +78,7 @@ class DialogTool : public QDialog
     Q_OBJECT
 public:
     DialogTool(const VContainer *data, const quint32 &toolId, QWidget *parent = nullptr);
-    virtual          ~DialogTool() Q_DECL_OVERRIDE;
+    virtual          ~DialogTool() override;
 
     VAbstractTool*   GetAssociatedTool();
     void             SetAssociatedTool(VAbstractTool* tool);
@@ -91,6 +91,11 @@ public:
     void             SetToolId(const quint32 &value);
 
     QString          getPointName() const;
+
+    static void MoveListRowTop(QListWidget *list);
+    static void MoveListRowUp(QListWidget *list);
+    static void MoveListRowDown(QListWidget *list);
+    static void MoveListRowBottom(QListWidget *list);
 signals:
     /**
      * @brief DialogClosed signal dialog closed
@@ -198,8 +203,9 @@ protected:
 
     QPointer<Visualization> vis;
 
-    virtual void     closeEvent ( QCloseEvent * event ) Q_DECL_OVERRIDE;
-    virtual void     showEvent( QShowEvent *event ) Q_DECL_OVERRIDE;
+    virtual void     closeEvent ( QCloseEvent * event ) override;
+    virtual void     showEvent( QShowEvent *event ) override;
+    virtual void     keyPressEvent(QKeyEvent *event) override;
 
     void             FillComboBoxPiecesList(QComboBox *box, const QVector<quint32> &list);
     void             FillComboBoxPoints(QComboBox *box, FillComboBox rule = FillComboBox::Whole,
@@ -267,19 +273,19 @@ protected:
      */
     virtual void     SaveData() {}
     void             MoveCursorToEnd(QPlainTextEdit *plainTextEdit) const;
-    virtual bool     eventFilter(QObject *object, QEvent *event) Q_DECL_OVERRIDE;
+    virtual bool     eventFilter(QObject *object, QEvent *event) override;
     quint32          DNumber(const QString &baseName) const;
 
     static int       FindNotExcludedNodeDown(QListWidget *listWidget, int candidate);
     static int       FindNotExcludedNodeUp(QListWidget *listWidget, int candidate);
-    static bool      FirstPointEqualLast(QListWidget *listWidget);
-    static bool      DoublePoints(QListWidget *listWidget);
+    static bool      FirstPointEqualLast(QListWidget *listWidget, const VContainer *data);
+    static bool      DoublePoints(QListWidget *listWidget, const VContainer *data);
     static bool      EachPointLabelIsUnique(QListWidget *listWidget);
     static QString   DialogWarningIcon();
-    static QFont     NodeFont(bool nodeExcluded);
+    static QFont     NodeFont(QFont font, bool nodeExcluded = false);
 
-    QString          GetNodeName(const VPieceNode &node, bool showPassmark = false) const;
-    void             NewNodeItem(QListWidget *listWidget, const VPieceNode &node);
+    QString          GetNodeName(const VPieceNode &node, bool showDetails = false) const;
+    void             NewNodeItem(QListWidget *listWidget, const VPieceNode &node, bool showPassmark = true);
 
     void             InitNodeAngles(QComboBox *box);
 private:
@@ -394,7 +400,6 @@ inline void DialogTool::AddVisualization()
 
         if (not scene->items().contains(toolVis))
         {
-            connect(scene, &VMainGraphicsScene::NewFactor, toolVis, &Visualization::SetFactor);
             scene->addItem(toolVis);
         }
 
@@ -409,11 +414,8 @@ inline T DialogTool::getCurrentCrossPoint(QComboBox *box) const
 {
     int value;
     bool ok = false;
-#if QT_VERSION < QT_VERSION_CHECK(5, 2, 0)
-    value = box->itemData(box->currentIndex()).toInt(&ok);
-#else
     value = box->currentData().toInt(&ok);
-#endif
+
     if (not ok)
     {
         return static_cast<T>(1);

@@ -6,7 +6,7 @@
  **
  **  @brief
  **  @copyright
- **  This source code is part of the Valentine project, a pattern making
+ **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2013-2015 Valentina project
  **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
@@ -58,14 +58,14 @@ public:
              const Draw &mode = Draw::Calculation);
     VPointF (const QPointF &point, const QString &name, qreal mx, qreal my, quint32 idObject = 0,
              const Draw &mode = Draw::Calculation);
-    virtual ~VPointF() Q_DECL_OVERRIDE;
+    virtual ~VPointF() override;
 
     VPointF &operator=(const VPointF &point);
 #ifdef Q_COMPILER_RVALUE_REFS
     VPointF &operator=(VPointF &&point) Q_DECL_NOTHROW { Swap(point); return *this; }
 #endif
 
-    void Swap(VPointF &point) Q_DECL_NOTHROW
+    inline void Swap(VPointF &point) Q_DECL_NOTHROW
     { VGObject::Swap(point); std::swap(d, point.d); }
 
     explicit operator QPointF() const;
@@ -81,6 +81,9 @@ public:
     void    setX(const qreal &value);
     qreal   y() const;
     void    setY(const qreal &value);
+
+    bool IsShowLabel() const;
+    void SetShowLabel(bool hide);
 
     static QPointF RotatePF(const QPointF &originPoint, const QPointF &point, qreal degrees);
     static QPointF FlipPF(const QLineF &axis, const QPointF &point);

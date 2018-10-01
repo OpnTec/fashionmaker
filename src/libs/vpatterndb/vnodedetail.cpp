@@ -6,7 +6,7 @@
  **
  **  @brief
  **  @copyright
- **  This source code is part of the Valentine project, a pattern making
+ **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2013-2015 Valentina project
  **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
@@ -61,7 +61,7 @@ QString LocalWidth(const QLineF &line, const QLineF &movedLine)
     }
     else
     {// different direction means value is negative
-        return QString("0");
+        return QChar('0');
     }
 }
 
@@ -224,9 +224,8 @@ QVector<VPieceNode> VNodeDetail::Convert(const VContainer *data, const QVector<V
     }
 
     VPiecePath path;
-    for (int i = 0; i < nodes.size(); ++i)
+    for (auto &node : nodes)
     {
-        const VNodeDetail &node = nodes.at(i);
         path.Append(VPieceNode(node.getId(), node.getTypeTool(), node.getReverse()));
     }
 
@@ -262,8 +261,8 @@ QVector<VPieceNode> VNodeDetail::Convert(const VContainer *data, const QVector<V
 
     if (not closed && path.CountNodes() > 1)
     {
-        path[0].SetFormulaSABefore("0");
-        path[path.CountNodes()-1].SetFormulaSAAfter("0");
+        path[0].SetFormulaSABefore(QChar('0'));
+        path[path.CountNodes()-1].SetFormulaSAAfter(QChar('0'));
     }
 
     return path.GetNodes();

@@ -6,7 +6,7 @@
  **
  **  @brief
  **  @copyright
- **  This source code is part of the Valentine project, a pattern making
+ **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2016 Valentina project
  **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
@@ -47,10 +47,8 @@ qreal EvalFormula(const VContainer *data, QString formula)
     {
         try
         {
-            // Replace line return character with spaces for calc if exist
-            formula.replace("\n", " ");
             QScopedPointer<Calculator> cal(new Calculator());
-            const qreal result = cal->EvalFormula(data->PlainVariables(), formula);
+            const qreal result = cal->EvalFormula(data->DataVariables(), formula);
 
             if (qIsInf(result) || qIsNaN(result))
             {
@@ -311,6 +309,18 @@ bool VPieceNode::IsShowSecondPassmark() const
 void VPieceNode::SetShowSecondPassmark(bool value)
 {
     d->m_isShowSecondPassmark = value;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+bool VPieceNode::IsCheckUniqueness() const
+{
+    return d->m_checkUniqueness;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VPieceNode::SetCheckUniqueness(bool value)
+{
+    d->m_checkUniqueness = (d->m_typeTool == Tool::NodePoint ? value : true);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

@@ -7,7 +7,7 @@
 # File with common stuff for whole project
 include(../../../common.pri)
 
-QT       += core gui widgets network xml xmlpatterns printsupport svg
+QT       += core gui widgets network xml xmlpatterns printsupport svg concurrent opengl
 
 # Name of binary file
 TARGET = tape
@@ -18,8 +18,24 @@ TEMPLATE = app
 # Use out-of-source builds (shadow builds)
 CONFIG -= debug_and_release debug_and_release_target
 
-# We use C++11 standard
-CONFIG += c++11
+# Since Q5.4 available support C++14
+greaterThan(QT_MAJOR_VERSION, 4):greaterThan(QT_MINOR_VERSION, 3) {
+    CONFIG += c++14
+} else {
+    # We use C++11 standard
+    CONFIG += c++11
+}
+
+# The following define makes your compiler emit warnings if you use
+# any feature of Qt which has been marked as deprecated (the exact warnings
+# depend on your compiler). Please consult the documentation of the
+# deprecated API in order to know how to port your code away from it.
+DEFINES += QT_DEPRECATED_WARNINGS
+
+# You can also make your code fail to compile if you use deprecated APIs.
+# In order to do so, uncomment the following line.
+# You can also select to disable deprecated APIs only up to a certain version of Qt.
+#DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 # Since Qt 5.4.0 the source code location is recorded only in debug builds.
 # We need this information also in release builds. For this need define QT_MESSAGELOGCONTEXT.
@@ -169,7 +185,7 @@ QMAKE_EXTRA_COMPILERS += diagrams
 
 QMAKE_CLEAN += $${OUT_PWD}/$${DESTDIR}/diagrams.rcc
 
-# INSTALL_STANDARD_MEASUREMENTS and INSTALL_STANDARD_TEMPLATES inside tables.pri
+# INSTALL_MULTISIZE_MEASUREMENTS and INSTALL_STANDARD_TEMPLATES inside tables.pri
 include(../tables.pri)
 copyToDestdir($$INSTALL_STANDARD_TEMPLATES, $$shell_path($${OUT_PWD}/$${DESTDIR}/tables/templates))
 include(../translations.pri)
@@ -200,66 +216,54 @@ unix{
         # Some macx stuff
         QMAKE_MAC_SDK = macosx
 
-        # Check which minimal OSX version supports current Qt version
-        # See page https://doc.qt.io/qt-5/supported-platforms-and-configurations.html
-        equals(QT_MAJOR_VERSION, 5):greaterThan(QT_MINOR_VERSION, 7) {# Qt 5.8
-            QMAKE_MACOSX_DEPLOYMENT_TARGET = 10.9
-        } else {
-            equals(QT_MAJOR_VERSION, 5):greaterThan(QT_MINOR_VERSION, 6) {# Qt 5.7
-                QMAKE_MACOSX_DEPLOYMENT_TARGET = 10.8
-            } else {
-                equals(QT_MAJOR_VERSION, 5):greaterThan(QT_MINOR_VERSION, 3) {# Qt 5.4
-                    QMAKE_MACOSX_DEPLOYMENT_TARGET = 10.7
-                } else {
-                    QMAKE_MACOSX_DEPLOYMENT_TARGET = 10.6
-                }
-            }
+        # QMAKE_MACOSX_DEPLOYMENT_TARGET defined in common.pri
+
+        CONFIG(release, debug|release){
+            QMAKE_RPATHDIR += @executable_path/../Frameworks
+
+            # Path to resources in app bundle
+            #RESOURCES_DIR = "Contents/Resources" defined in translation.pri
+            FRAMEWORKS_DIR = "Contents/Frameworks"
+            MACOS_DIR = "Contents/MacOS"
+            # On macx we will use app bundle. Bundle doesn't need bin directory inside.
+            # See issue #166: Creating OSX Homebrew (Mac OS X package manager) formula.
+            target.path = $$MACOS_DIR
+
+            #languages added inside translations.pri
+
+            # Symlinks also good names for copying. Make will take origin file and copy them with using symlink name.
+            # For bundle this names more then enough. We don't need care much about libraries versions.
+            libraries.path = $$FRAMEWORKS_DIR
+            libraries.files += $${OUT_PWD}/../../libs/qmuparser/$${DESTDIR}/libqmuparser.2.dylib
+            libraries.files += $${OUT_PWD}/../../libs/vpropertyexplorer/$${DESTDIR}/libvpropertyexplorer.1.dylib
+
+            # logo on macx.
+            ICON = $$PWD/../../../dist/Tape.icns
+
+            QMAKE_INFO_PLIST = $$PWD/../../../dist/macx/tape/Info.plist
+
+            # Copy to bundle multisize measurements files
+            multisize.path = $$RESOURCES_DIR/tables/multisize/
+            multisize.files = $$INSTALL_MULTISIZE_MEASUREMENTS
+
+            # Copy to bundle templates files
+            templates.path = $$RESOURCES_DIR/tables/templates/
+            templates.files = $$INSTALL_STANDARD_TEMPLATES
+
+            # Copy to bundle multisize measurements files
+            # We cannot add none exist files to bundle through QMAKE_BUNDLE_DATA. That's why we must do this manually.
+            QMAKE_POST_LINK += $$VCOPY $$quote($${OUT_PWD}/$${DESTDIR}/diagrams.rcc) $$quote($$shell_path($${OUT_PWD}/$$DESTDIR/$${TARGET}.app/$$RESOURCES_DIR/)) $$escape_expand(\\n\\t)
+
+            format.path = $$RESOURCES_DIR/
+            format.files += $$PWD/../../../dist/macx/i-measurements.icns
+            format.files += $$PWD/../../../dist/macx/s-measurements.icns
+
+            QMAKE_BUNDLE_DATA += \
+                templates \
+                multisize \
+                libraries \
+                format
         }
-
-        QMAKE_RPATHDIR += @executable_path/../Frameworks
-
-        # Path to resources in app bundle
-        #RESOURCES_DIR = "Contents/Resources" defined in translation.pri
-        FRAMEWORKS_DIR = "Contents/Frameworks"
-        MACOS_DIR = "Contents/MacOS"
-        # On macx we will use app bundle. Bundle doesn't need bin directory inside.
-        # See issue #166: Creating OSX Homebrew (Mac OS X package manager) formula.
-        target.path = $$MACOS_DIR
-
-        #languages added inside translations.pri
-
-        # Symlinks also good names for copying. Make will take origin file and copy them with using symlink name.
-        # For bundle this names more then enough. We don't need care much about libraries versions.
-        libraries.path = $$FRAMEWORKS_DIR
-        libraries.files += $${OUT_PWD}/../../libs/qmuparser/$${DESTDIR}/libqmuparser.2.dylib
-        libraries.files += $${OUT_PWD}/../../libs/vpropertyexplorer/$${DESTDIR}/libvpropertyexplorer.1.dylib
-
-        # logo on macx.
-        ICON = $$PWD/../../../dist/Tape.icns
-
-        QMAKE_INFO_PLIST = $$PWD/../../../dist/macx/tape/Info.plist
-
-        # Copy to bundle standard measurements files
-        standard.path = $$RESOURCES_DIR/tables/standard/
-        standard.files = $$INSTALL_STANDARD_MEASUREMENTS
-
-        # Copy to bundle templates files
-        templates.path = $$RESOURCES_DIR/tables/templates/
-        templates.files = $$INSTALL_STANDARD_TEMPLATES
-
-        # Copy to bundle standard measurements files
-        # We cannot add none exist files to bundle through QMAKE_BUNDLE_DATA. That's why we must do this manually.
-        QMAKE_POST_LINK += $$VCOPY $$quote($${OUT_PWD}/$${DESTDIR}/diagrams.rcc) $$quote($$shell_path($${OUT_PWD}/$$DESTDIR/$${TARGET}.app/$$RESOURCES_DIR/)) $$escape_expand(\\n\\t)
-
-        format.path = $$RESOURCES_DIR/
-        format.files += $$PWD/../../../dist/macx/i-measurements.icns
-        format.files += $$PWD/../../../dist/macx/s-measurements.icns
-
-        QMAKE_BUNDLE_DATA += \
-            templates \
-            standard \
-            libraries \
-            format
     }
 }
 
@@ -284,26 +288,27 @@ include(warnings.pri)
 
 CONFIG(release, debug|release){
     # Release mode
-    !win32-msvc*:CONFIG += silent
+    !*msvc*:CONFIG += silent
     DEFINES += V_NO_ASSERT
-    !unix:*-g++{
+    !unix:*g++*{
         QMAKE_CXXFLAGS += -fno-omit-frame-pointer # Need for exchndl.dll
     }
 
     noDebugSymbols{ # For enable run qmake with CONFIG+=noDebugSymbols
         DEFINES += V_NO_DEBUG
     } else {
-        noCrashReports{
-            DEFINES += V_NO_DEBUG
-        }
         # Turn on debug symbols in release mode on Unix systems.
         # On Mac OS X temporarily disabled. Need find way how to strip binary file.
-        !macx:!win32-msvc*{
+        !macx:!*msvc*{
             QMAKE_CXXFLAGS_RELEASE += -g -gdwarf-3
             QMAKE_CFLAGS_RELEASE += -g -gdwarf-3
             QMAKE_LFLAGS_RELEASE =
         }
     }
+} else {
+# Breakpoints do not work if debug the app inside of bundle. In debug mode we turn off creating a bundle.
+# Probably it will breake some dependencies. Version for Mac designed to work inside an app bundle.
+    CONFIG -= app_bundle
 }
 
 DVCS_HESH=$$FindBuildRevision()
@@ -323,6 +328,11 @@ noRunPath{ # For enable run qmake with CONFIG+=noRunPath
         QMAKE_LFLAGS_RPATH =
         QMAKE_LFLAGS += "-Wl,-rpath,\'\$$ORIGIN\' -Wl,-rpath,$${OUT_PWD}/../../libs/qmuparser/$${DESTDIR} -Wl,-rpath,$${OUT_PWD}/../../libs/vpropertyexplorer/$${DESTDIR}"
     }
+}
+
+win32:greaterThan(QT_MAJOR_VERSION, 4) {
+    # Link with library uxtheme to enable new style since WindowsXP or later
+    LIBS += -luxtheme
 }
 
 # When the GNU linker sees a library, it discards all symbols that it doesn't need.
@@ -434,7 +444,7 @@ noDebugSymbols{ # For enable run qmake with CONFIG+=noDebugSymbols
     } else {
         # Strip after you link all libaries.
         CONFIG(release, debug|release){
-            win32:!win32-msvc*{
+            win32:!*msvc*{
                 # Strip debug symbols.
                 QMAKE_POST_LINK += objcopy --only-keep-debug bin/${TARGET} bin/${TARGET}.dbg &&
                 QMAKE_POST_LINK += objcopy --strip-debug bin/${TARGET} &&
@@ -448,14 +458,16 @@ noDebugSymbols{ # For enable run qmake with CONFIG+=noDebugSymbols
                 QMAKE_POST_LINK += objcopy --add-gnu-debuglink="${TARGET}.dbg" ${TARGET}
             }
 
-            !macx:!win32-msvc*{
+            !macx:!*msvc*{
                 QMAKE_DISTCLEAN += bin/${TARGET}.dbg
             }
         }
     }
 }
 
-macx{
-   # run macdeployqt to include all qt libraries in packet
-   QMAKE_POST_LINK += $$[QT_INSTALL_BINS]/macdeployqt $${OUT_PWD}/$${DESTDIR}/$${TARGET}.app
+CONFIG(release, debug|release){
+    macx{
+       # run macdeployqt to include all qt libraries in packet
+       QMAKE_POST_LINK += $$[QT_INSTALL_BINS]/macdeployqt $${OUT_PWD}/$${DESTDIR}/$${TARGET}.app
+    }
 }

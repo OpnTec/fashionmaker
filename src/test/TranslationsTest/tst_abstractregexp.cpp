@@ -6,7 +6,7 @@
  **
  **  @brief
  **  @copyright
- **  This source code is part of the Valentine project, a pattern making
+ **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2016 Valentina project
  **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
@@ -61,9 +61,7 @@ int TST_AbstractRegExp::LoadVariables(const QString &checkedLocale)
     if (QFileInfo(path+QLatin1String("/")+file).size() <= 34)
     {
         const QString message = QString("Translation variables for locale = %1 is empty. \nFull path: %2/%3")
-                .arg(checkedLocale)
-                .arg(path)
-                .arg(file);
+                .arg(checkedLocale, path, file);
         QWARN(qUtf8Printable(message));
 
         return ErrorSize;
@@ -74,9 +72,7 @@ int TST_AbstractRegExp::LoadVariables(const QString &checkedLocale)
     if (not m_vTranslator->load(file, path))
     {
         const QString message = QString("Can't load translation variables for locale = %1. \nFull path: %2/%3")
-                .arg(checkedLocale)
-                .arg(path)
-                .arg(file);
+                .arg(checkedLocale, path, file);
         QWARN(qUtf8Printable(message));
 
         delete m_vTranslator;
@@ -87,9 +83,7 @@ int TST_AbstractRegExp::LoadVariables(const QString &checkedLocale)
     if (not QCoreApplication::installTranslator(m_vTranslator))
     {
         const QString message = QString("Can't install translation variables for locale = %1. \nFull path: %2/%3")
-                .arg(checkedLocale)
-                .arg(path)
-                .arg(file);
+                .arg(checkedLocale, path, file);
         QWARN(qUtf8Printable(message));
 
         delete m_vTranslator;
@@ -153,7 +147,7 @@ void TST_AbstractRegExp::CallTestCheckRegExpNames()
     const QString translated = m_trMs->VarToUser(originalName);
     if (not re.match(translated).hasMatch())
     {
-        const QString message = QString("Original name:'%1', translated name:'%2'").arg(originalName).arg(translated);
+        const QString message = QString("Original name:'%1', translated name:'%2'").arg(originalName, translated);
         QFAIL(qUtf8Printable(message));
     }
 }
@@ -169,7 +163,7 @@ void TST_AbstractRegExp::CallTestCheckIsNamesUnique()
     if (names.contains(translated))
     {
         const QString message = QString("Name is not unique. Original name:'%1', translated name:'%2'")
-                .arg(originalName).arg(translated);
+                .arg(originalName, translated);
         QFAIL(qUtf8Printable(message));
     }
     names.insert(translated);
@@ -190,7 +184,7 @@ void TST_AbstractRegExp::CallTestCheckNoOriginalNamesInTranslation()
         {
             const QString message = QString("Translation repeat original name from other place. "
                                             "Original name:'%1', translated name:'%2'")
-                    .arg(originalName).arg(translated);
+                    .arg(originalName, translated);
             QFAIL(qUtf8Printable(message));
         }
     }

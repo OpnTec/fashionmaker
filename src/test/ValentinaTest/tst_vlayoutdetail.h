@@ -6,7 +6,7 @@
  **
  **  @brief
  **  @copyright
- **  This source code is part of the Valentine project, a pattern making
+ **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2015 Valentina project
  **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
@@ -29,7 +29,7 @@
 #ifndef TST_VLAYOUTDETAIL_H
 #define TST_VLAYOUTDETAIL_H
 
-#include "../vmisc/abstracttest.h"
+#include "../vtest/abstracttest.h"
 
 class TST_VLayoutDetail : public AbstractTest
 {

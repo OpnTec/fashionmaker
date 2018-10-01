@@ -6,7 +6,7 @@
  **
  **  @brief
  **  @copyright
- **  This source code is part of the Valentine project, a pattern making
+ **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2013-2015 Valentina project
  **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
@@ -30,7 +30,6 @@
 #define VCONTROLPOINTSPLINE_H
 
 #include <qcompilerdetection.h>
-#include <QGraphicsEllipseItem>
 #include <QGraphicsItem>
 #include <QMetaObject>
 #include <QObject>
@@ -42,23 +41,25 @@
 #include "../vgeometry/vgeometrydef.h"
 #include "../vgeometry/vsplinepath.h"
 #include "../vmisc/def.h"
+#include "vscenepoint.h"
 
 /**
  * @brief The VControlPointSpline class control spline point.
  */
-class VControlPointSpline : public QObject, public QGraphicsEllipseItem
+class VControlPointSpline : public QObject, public VScenePoint
 {
     Q_OBJECT
 public:
-    VControlPointSpline(const qint32 &indexSpline, SplinePointPosition position, Unit patternUnit,
-                        QGraphicsItem * parent = nullptr);
+    VControlPointSpline(const qint32 &indexSpline, SplinePointPosition position, QGraphicsItem * parent = nullptr);
     VControlPointSpline(const qint32 &indexSpline, SplinePointPosition position, const QPointF &controlPoint,
-                        const QPointF &splinePoint, Unit patternUnit, bool freeAngle, bool freeLength,
-                        QGraphicsItem * parent = nullptr);
-    virtual ~VControlPointSpline() Q_DECL_OVERRIDE;
+                        bool freeAngle, bool freeLength, QGraphicsItem * parent = nullptr);
+    virtual ~VControlPointSpline() =default;
 
-    virtual int       type() const Q_DECL_OVERRIDE {return Type;}
+    virtual int  type() const override {return Type;}
     enum { Type = UserType + static_cast<int>(Vis::ControlPointSpline)};
+
+    virtual void paint(QPainter *painter, const QStyleOptionGraphicsItem *option,
+                       QWidget *widget = nullptr) override;
 signals:
     /**
      * @brief ControlPointChangePosition emit when control point change position.
@@ -73,23 +74,21 @@ signals:
      * @param event context menu event.
      */
     void              ShowContextMenu(QGraphicsSceneContextMenuEvent *event);
+    void              Released();
+    void              Selected(bool selected);
 public slots:
     void              RefreshCtrlPoint(const qint32 &indexSpline, SplinePointPosition pos, const QPointF &controlPoint,
                                        const QPointF &splinePoint, bool freeAngle = true, bool freeLength = true);
     void              setEnabledPoint(bool enable);
 protected:
-    /** @brief radius radius circle. */
-    const qreal radius;
-
     /** @brief controlLine pointer to line control point. */
-    QGraphicsLineItem *controlLine;
+    VScaledLine      *controlLine;
 
-    virtual void      hoverEnterEvent ( QGraphicsSceneHoverEvent * event ) Q_DECL_OVERRIDE;
-    virtual void      hoverLeaveEvent ( QGraphicsSceneHoverEvent * event ) Q_DECL_OVERRIDE;
-    QVariant          itemChange ( GraphicsItemChange change, const QVariant &value ) Q_DECL_OVERRIDE;
-    virtual void      mousePressEvent( QGraphicsSceneMouseEvent * event ) Q_DECL_OVERRIDE;
-    virtual void      mouseReleaseEvent ( QGraphicsSceneMouseEvent * event ) Q_DECL_OVERRIDE;
-    virtual void      contextMenuEvent ( QGraphicsSceneContextMenuEvent *event ) Q_DECL_OVERRIDE;
+    virtual void      hoverEnterEvent ( QGraphicsSceneHoverEvent * event ) override;
+    QVariant          itemChange ( GraphicsItemChange change, const QVariant &value ) override;
+    virtual void      mousePressEvent( QGraphicsSceneMouseEvent * event ) override;
+    virtual void      mouseReleaseEvent ( QGraphicsSceneMouseEvent * event ) override;
+    virtual void      contextMenuEvent ( QGraphicsSceneContextMenuEvent *event ) override;
 private:
     Q_DISABLE_COPY(VControlPointSpline)
     /** @brief indexSpline index spline in list.. */
@@ -98,20 +97,11 @@ private:
     /** @brief position position point in spline. */
     SplinePointPosition position;
 
-    Unit              patternUnit;
-
     bool freeAngle;
     bool freeLength;
 
-    inline qreal CircleRadius() const;
     void  Init();
     void  SetCtrlLine(const QPointF &controlPoint, const QPointF &splinePoint);
 };
-
-//---------------------------------------------------------------------------------------------------------------------
-qreal VControlPointSpline::CircleRadius() const
-{
-    return (1.5/*mm*/ / 25.4) * PrintDPI;
-}
 
 #endif // VCONTROLPOINTSPLINE_H

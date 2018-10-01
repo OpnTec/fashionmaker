@@ -6,7 +6,7 @@
  **
  **  @brief
  **  @copyright
- **  This source code is part of the Valentine project, a pattern making
+ **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2016 Valentina project
  **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
@@ -29,9 +29,16 @@
 #include "vabstractmainwindow.h"
 #include "../vpropertyexplorer/checkablemessagebox.h"
 #include "../vmisc/vabstractapplication.h"
+#include "dialogs/dialogexporttocsv.h"
 
 #include <QStyle>
 #include <QToolBar>
+#include <QFileDialog>
+
+#if defined(Q_OS_MAC)
+#include "../vwidgets/vmaingraphicsview.h"
+#include <QStyleFactory>
+#endif
 
 VAbstractMainWindow::VAbstractMainWindow(QWidget *parent)
     : QMainWindow(parent),
@@ -50,7 +57,7 @@ bool VAbstractMainWindow::ContinueFormatRewrite(const QString &currentFormatVers
         msgBox.setText(tr("This file is using previous format version v%1. The current is v%2. "
                           "Saving the file with this app version will update the format version for this "
                           "file. This may prevent you from be able to open the file with older app versions. "
-                          "Do you really want to continue?").arg(currentFormatVersion).arg(maxFormatVersion));
+                          "Do you really want to continue?").arg(currentFormatVersion, maxFormatVersion));
         msgBox.setStandardButtons(QDialogButtonBox::Yes | QDialogButtonBox::No);
         msgBox.setDefaultButton(QDialogButtonBox::No);
         msgBox.setIconPixmap(QApplication::style()->standardIcon(QStyle::SP_MessageBoxQuestion).pixmap(32, 32));
@@ -82,10 +89,88 @@ void VAbstractMainWindow::ToolBarStyle(QToolBar *bar)
     {
         bar->setToolButtonStyle(Qt::ToolButtonIconOnly);
     }
+
+#if defined(Q_OS_MAC)
+    // Temporary fix issue with toolbar black background on mac with OpenGL render
+    if (qApp->getSceneView() && qApp->getSceneView()->IsOpenGLRender())
+    {
+        bar->setStyle(QStyleFactory::create("fusion"));
+    }
+#endif
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QString VAbstractMainWindow::CSVFilePath()
+{
+    const QString filters = tr("Comma-Separated Values") + QLatin1String(" (*.csv)");
+    const QString suffix("csv");
+    const QString path = QDir::homePath() + QChar('/') + tr("values") + QChar('.') + suffix;
+
+    QString fileName = QFileDialog::getSaveFileName(this, tr("Export to CSV"), path, filters, nullptr
+#ifdef Q_OS_LINUX
+                                                    , QFileDialog::DontUseNativeDialog
+#endif
+                                                    );
+
+    if (fileName.isEmpty())
+    {
+        return fileName;
+    }
+
+    QFileInfo f( fileName );
+    if (f.suffix().isEmpty() && f.suffix() != suffix)
+    {
+        fileName += QChar('.') + suffix;
+    }
+
+    return fileName;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void VAbstractMainWindow::WindowsLocale()
 {
     qApp->Settings()->GetOsSeparator() ? setLocale(QLocale()) : setLocale(QLocale::c());
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VAbstractMainWindow::ExportDataToCSV()
+{
+    QString fileName = CSVFilePath();
+
+    if (fileName.isEmpty())
+    {
+        return;
+    }
+
+    DialogExportToCSV dialog(this);
+    dialog.SetWithHeader(qApp->Settings()->GetCSVWithHeader());
+    dialog.SetSelectedMib(qApp->Settings()->GetCSVCodec());
+    dialog.SetSeparator(qApp->Settings()->GetCSVSeparator());
+
+    if (dialog.exec() == QDialog::Accepted)
+    {
+        ExportToCSVData(fileName, dialog.IsWithHeader(), dialog.GetSelectedMib(), dialog.GetSeparator());
+
+        qApp->Settings()->SetCSVSeparator(dialog.GetSeparator());
+        qApp->Settings()->SetCSVCodec(dialog.GetSelectedMib());
+        qApp->Settings()->SetCSVWithHeader(dialog.IsWithHeader());
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VAbstractMainWindow::UpdateVisibilityGroups()
+{
+    // do nothing
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VAbstractMainWindow::UpdateDetailsList()
+{
+    // do nothing
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VAbstractMainWindow::ZoomFitBestCurrent()
+{
+    // do nothing
 }

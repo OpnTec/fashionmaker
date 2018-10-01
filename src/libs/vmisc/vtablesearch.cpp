@@ -6,7 +6,7 @@
  **
  **  @brief
  **  @copyright
- **  This source code is part of the Valentine project, a pattern making
+ **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2015 Valentina project
  **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
@@ -28,7 +28,6 @@
 
 #include "vtablesearch.h"
 
-#include <QForeachContainer>
 #include <QPalette>
 #include <QTableWidget>
 #include <QTableWidgetItem>
@@ -106,7 +105,7 @@ void VTableSearch::Find(const QString &term)
 
         if (not searchList.isEmpty())
         {
-            foreach(QTableWidgetItem *item, searchList)
+            for (auto item : qAsConst(searchList))
             {
                 item->setBackground(Qt::yellow);
             }
@@ -159,7 +158,7 @@ void VTableSearch::RemoveRow(int row)
 
     if (row <= indexRow)
     {
-        foreach(QTableWidgetItem *item, searchList)
+        for (auto item : qAsConst(searchList))
         {
             if (item->row() == row)
             {
@@ -181,7 +180,7 @@ void VTableSearch::AddRow(int row)
 
     if (row <= indexRow)
     {
-        foreach(QTableWidgetItem *item, searchList)
+        for (auto item : qAsConst(searchList))
         {
             if (item->row() == row)
             {
@@ -203,7 +202,7 @@ void VTableSearch::RefreshList(const QString &term)
 
     searchList = table->findItems(term, Qt::MatchContains);
 
-    foreach(QTableWidgetItem *item, searchList)
+    for (auto item : qAsConst(searchList))
     {
         item->setBackground(Qt::yellow);
     }

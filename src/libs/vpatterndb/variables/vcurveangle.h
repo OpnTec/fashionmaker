@@ -6,7 +6,7 @@
  **
  **  @brief
  **  @copyright
- **  This source code is part of the Valentine project, a pattern making
+ **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2015 Valentina project
  **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
@@ -37,6 +37,7 @@
 
 class VAbstractCurve;
 class VSpline;
+class VEllipticalArc;
 
 enum class CurveAngle : char { StartAngle, EndAngle };
 
@@ -47,9 +48,15 @@ public:
     VCurveAngle(const quint32 &id, const quint32 &parentId, const VAbstractCurve *curve, CurveAngle angle);
     VCurveAngle(const quint32 &id, const quint32 &parentId, const QString &baseCurveName, const VSpline &spl,
                 CurveAngle angle, qint32 segment);
-    VCurveAngle(const VCurveAngle &var);
-    VCurveAngle &operator=(const VCurveAngle &var);
-    virtual ~VCurveAngle() Q_DECL_OVERRIDE;
+protected:
+    VCurveAngle(const quint32 &id, const quint32 &parentId);
+};
+
+class VEllipticalArcRotation : public VCurveAngle
+{
+public:
+    VEllipticalArcRotation();
+    VEllipticalArcRotation(const quint32 &id, const quint32 &parentId, const VEllipticalArc *elArc);
 };
 
 #endif // VCURVEANGLE_H

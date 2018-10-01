@@ -6,7 +6,7 @@
  **
  **  @brief
  **  @copyright
- **  This source code is part of the Valentine project, a pattern making
+ **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2015 Valentina project
  **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
@@ -33,15 +33,10 @@
 #include <vector>
 #include <QTextStream>
 #include <QCoreApplication>
+#include <QCommandLineParser>
 
 #include "../dialogs/dialoglayoutsettings.h"
 #include "../vmisc/vsysexits.h"
-
-#if QT_VERSION < QT_VERSION_CHECK(5, 2, 0)
-#   include "../vmisc/backport/qcommandlineparser.h"
-#else
-#   include <QCommandLineParser>
-#endif
 
 class VCommandLine;
 typedef std::shared_ptr<VCommandLine> VCommandLinePtr;
@@ -61,11 +56,19 @@ public:
     //case test mode enabled
     bool IsTestModeEnabled() const;
 
+    //@brief Make all parsing warnings into errors. Have effect only in console mode. Use to force Valentina to
+    //immediately terminate if a pattern contains a parsing warning.
+    bool IsPedantic() const;
+
     bool IsNoScalingEnabled() const;
 
     //@brief tests if user enabled export from cmd, throws exception if not exactly 1 input VAL file supplied in case
     //export enabled
     bool IsExportEnabled() const;
+
+    //@brief tests if user enabled export final measurements from cmd, throws exception if not exactly 1 input VAL
+    //file supplied in case export enabled
+    bool IsExportFMEnabled() const;
 
     //@brief returns path to custom measure file or empty string
     QString OptMeasurePath() const;
@@ -79,6 +82,26 @@ public:
 
     //@brief returns export type set, defaults 0 - svg
     int OptExportType() const;
+
+    int IsBinaryDXF() const;
+    int IsTextAsPaths() const;
+    int IsExportOnlyDetails() const;
+    int IsCSVWithHeader() const;
+
+    //@brief returns the piece name regex or empty string if not set
+    QString OptExportSuchDetails() const;
+
+    //@brief returns user selected csv codec or empty string if not set
+    QString OptCSVCodecName() const;
+
+    //@brief returns user selected csv separator or empty string if not set
+    QChar OptCSVSeparator() const;
+
+    //@brief returns the destination path for export final measurements or empty string if not set
+    QString OptExportFMTo() const;
+
+    //@brief returns list of user defined materials
+    QMap<int, QString> OptUserMaterials() const;
 
     //generator creation is moved here ... because most options are for it only, so no need to create extra getters...
     //@brief creates VLayoutGenerator
@@ -94,13 +117,17 @@ public:
 
     QString OptGradationSize() const;
     QString OptGradationHeight() const;
+    
+    QMarginsF TiledPageMargins() const;
+    VAbstractLayoutDialog::PaperSizeTemplate OptTiledPaperSize() const;
+    PageOrientation OptTiledPageOrientation();
 
 protected:
 
     VCommandLine();
 
-    //@brief returns DialogLayoutSettings::PaperSizeTemplate
-    DialogLayoutSettings::PaperSizeTemplate  OptPaperSize() const;
+    //@brief returns VAbstractLayoutDialog::PaperSizeTemplate
+    VAbstractLayoutDialog::PaperSizeTemplate OptPaperSize() const;
     //@brief returns rotation in degrees or 0 if not set
     int OptRotation() const;
 
@@ -125,6 +152,8 @@ private:
     static qreal Pg2Px(const QString& src, const DialogLayoutSettings& converter);
 
     static void InitOptions(VCommandLineOptions &options, QMap<QString, int> &optionsIndex);
+    
+    VAbstractLayoutDialog::PaperSizeTemplate FormatSize(const QString &key) const;
 };
 
 #endif // VCMDEXPORT_H

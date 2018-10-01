@@ -6,7 +6,7 @@
  **
  **  @brief
  **  @copyright
- **  This source code is part of the Valentine project, a pattern making
+ **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2017 Valentina project
  **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
@@ -39,7 +39,7 @@ class VLayoutPiecePath
 {
 public:
     VLayoutPiecePath();
-    VLayoutPiecePath(const QVector<QPointF> &points, Qt::PenStyle penStyle = Qt::SolidLine);
+    VLayoutPiecePath(const QVector<QPointF> &points, bool cut, Qt::PenStyle penStyle = Qt::SolidLine);
     VLayoutPiecePath(const VLayoutPiecePath &path);
 
     virtual ~VLayoutPiecePath();
@@ -49,7 +49,7 @@ public:
     VLayoutPiecePath &operator=(VLayoutPiecePath &&path) Q_DECL_NOTHROW { Swap(path); return *this; }
 #endif
 
-    void Swap(VLayoutPiecePath &path) Q_DECL_NOTHROW
+    inline void Swap(VLayoutPiecePath &path) Q_DECL_NOTHROW
     { std::swap(d, path.d); }
 
     QPainterPath GetPainterPath() const;
@@ -59,6 +59,9 @@ public:
 
     Qt::PenStyle PenStyle() const;
     void         SetPenStyle(const Qt::PenStyle &penStyle);
+
+    bool IsCutPath() const;
+    void SetCutPath(bool cut);
 
 private:
     QSharedDataPointer<VLayoutPiecePathData> d;

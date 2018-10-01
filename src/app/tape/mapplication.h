@@ -6,7 +6,7 @@
  **
  **  @brief
  **  @copyright
- **  This source code is part of the Valentine project, a pattern making
+ **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2015 Valentina project
  **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
@@ -52,21 +52,21 @@ class MApplication : public VAbstractApplication
 
 public:
     MApplication(int &argc, char **argv);
-    virtual ~MApplication() Q_DECL_OVERRIDE;
+    virtual ~MApplication() override;
 
-    virtual bool notify(QObject * receiver, QEvent * event) Q_DECL_OVERRIDE;
+    virtual bool notify(QObject * receiver, QEvent * event) override;
 
     bool IsTestMode() const;
-    virtual bool IsAppInGUIMode() const Q_DECL_OVERRIDE;
+    virtual bool IsAppInGUIMode() const override;
     TMainWindow *MainWindow();
     QList<TMainWindow*> MainWindows();
     TMainWindow *NewMainWindow();
 
     void InitOptions();
 
-    virtual const VTranslateVars *TrVars() Q_DECL_OVERRIDE;
+    virtual const VTranslateVars *TrVars() override;
 
-    virtual void  OpenSettings() Q_DECL_OVERRIDE;
+    virtual void  OpenSettings() override;
     VTapeSettings *TapeSettings();
 
     QString diagramsPath() const;
@@ -81,8 +81,8 @@ public slots:
     void ProcessCMD();
 
 protected:
-    virtual void InitTrVars() Q_DECL_OVERRIDE;
-    virtual bool event(QEvent *e) Q_DECL_OVERRIDE;
+    virtual void InitTrVars() override;
+    virtual bool event(QEvent *e) override;
 
 private slots:
     void NewLocalSocketConnection();
@@ -97,5 +97,11 @@ private:
 
     void Clean();
 };
+//---------------------------------------------------------------------------------------------------------------------
+
+inline const VTranslateVars *MApplication::TrVars()
+{
+    return trVars;
+}
 
 #endif // MAPPLICATION_H

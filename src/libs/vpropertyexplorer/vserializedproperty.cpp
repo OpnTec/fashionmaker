@@ -20,7 +20,6 @@
 
 #include "vserializedproperty.h"
 
-#include <QForeachContainer>
 #include <QtGlobal>
 
 #include "vproperty.h"
@@ -62,7 +61,7 @@ void VPE::VSerializedProperty::initChildren(const VProperty *property, const VPr
     if (property && set)
     {
         const QList<VProperty*>& tmpChildren = property->getChildren();
-        foreach(const VProperty* tmpChild, tmpChildren)
+        for (auto tmpChild : tmpChildren)
         {
             QString tmpChildID = set->getPropertyID(property);
             Children.append(VSerializedProperty(tmpChild, tmpChildID, set));

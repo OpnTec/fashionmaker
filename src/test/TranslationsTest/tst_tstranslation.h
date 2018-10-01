@@ -6,7 +6,7 @@
  **
  **  @brief
  **  @copyright
- **  This source code is part of the Valentine project, a pattern making
+ **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2015 Valentina project
  **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
@@ -29,12 +29,9 @@
 #ifndef TST_TSTRANSLATION_H
 #define TST_TSTRANSLATION_H
 
-#include <QDomDocument>
-#include <QFile>
-#include <QObject>
-#include <QSharedPointer>
+#include "tst_abstracttranslation.h"
 
-class TST_TSTranslation : public QObject
+class TST_TSTranslation : public TST_AbstractTranslation
 {
     Q_OBJECT
 public:
@@ -45,29 +42,13 @@ private slots:
     void CheckEnglishLocalization();
     void CheckEmptyToolButton_data();
     void CheckEmptyToolButton();
-    void CheckPlaceMarkerExist_data();
-    void CheckPlaceMarkerExist();
-    void TestPunctuation_data();
-    void TestPunctuation();
-    void TestHTMLTags_data();
-    void TestHTMLTags();
+    void CheckEllipsis_data();
+    void CheckEllipsis();
 
 private:
     Q_DISABLE_COPY(TST_TSTranslation)
-    QSharedPointer<QFile> tsFile;
-    QSharedPointer<QDomDocument> tsXML;
 
-    static const QString TagName;
-    static const QString TagMessage;
-    static const QString TagSource;
-    static const QString TagTranslation;
-
-    static const QString AttrType;
-    static const QString AttrValVanished;
-    static const QString AttrValUnfinished;
-    static const QString AttrValObsolete;
-
-    QDomNodeList LoadTSFile(const QString &filename);
+    void PrepareOriginalStrings();
 };
 
 #endif // TST_TSTRANSLATION_H

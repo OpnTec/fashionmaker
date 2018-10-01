@@ -6,7 +6,7 @@
  **
  **  @brief
  **  @copyright
- **  This source code is part of the Valentine project, a pattern making
+ **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2013-2015 Valentina project
  **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
@@ -98,19 +98,77 @@ double VDxfPaintDevice::getResolution() const
  //---------------------------------------------------------------------------------------------------------------------
 void VDxfPaintDevice::setResolution(double dpi)
 {
+    if (engine->isActive())
+    {
+        qWarning("VDxfPaintDevice::setResolution(), cannot set dpi while Dxf is being generated");
+        return;
+    }
     engine->setResolution(dpi);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+DRW::Version VDxfPaintDevice::GetVersion() const
+{
+    return engine->GetVersion();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VDxfPaintDevice::SetVersion(DRW::Version version)
+{
+    if (engine->isActive())
+    {
+        qWarning("VDxfPaintDevice::SetVersion(), cannot set version while Dxf is being generated");
+        return;
+    }
+    engine->SetVersion(version);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VDxfPaintDevice::SetBinaryFormat(bool binary)
+{
+    if (engine->isActive())
+    {
+        qWarning("VDxfPaintDevice::SetBinaryFormat(), cannot set binary format while Dxf is being generated");
+        return;
+    }
+    engine->SetBinaryFormat(binary);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+bool VDxfPaintDevice::IsBinaryFromat() const
+{
+    return engine->IsBinaryFormat();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void VDxfPaintDevice::setMeasurement(const VarMeasurement &var)
 {
+    if (engine->isActive())
+    {
+        qWarning("VDxfPaintDevice::setMeasurement(), cannot set measurements while Dxf is being generated");
+        return;
+    }
     engine->setMeasurement(var);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void VDxfPaintDevice::setInsunits(const VarInsunits &var)
 {
+    if (engine->isActive())
+    {
+        qWarning("VDxfPaintDevice::setInsunits(), cannot set units while Dxf is being generated");
+        return;
+    }
     engine->setInsunits(var);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+bool VDxfPaintDevice::ExportToAAMA(const QVector<VLayoutPiece> &details) const
+{
+    engine->setActive(true);
+    const bool res = engine->ExportToAAMA(details);
+    engine->setActive(false);
+    return res;
 }
 
  //---------------------------------------------------------------------------------------------------------------------
@@ -135,13 +193,11 @@ int VDxfPaintDevice::metric(QPaintDevice::PaintDeviceMetric metric) const
         case QPaintDevice::PdmDpiX:
         case QPaintDevice::PdmDpiY:
             return static_cast<int>(engine->getResolution());
-#if QT_VERSION > QT_VERSION_CHECK(5, 0, 2)
         case QPaintDevice::PdmDevicePixelRatio:
 #if QT_VERSION >= QT_VERSION_CHECK(5, 6, 0)
         case QPaintDevice::PdmDevicePixelRatioScaled:
 #endif
             return 1;
-#endif
         default:
             qWarning("VDxfPaintDevice::metric(), unhandled metric %d\n", metric);
             break;

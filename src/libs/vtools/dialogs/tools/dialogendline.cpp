@@ -6,7 +6,7 @@
  **
  **  @brief
  **  @copyright
- **  This source code is part of the Valentine project, a pattern making
+ **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2013-2015 Valentina project
  **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
@@ -72,9 +72,7 @@ DialogEndLine::DialogEndLine(const VContainer *data, const quint32 &toolId, QWid
 {
     ui->setupUi(this);
 
-#if QT_VERSION >= QT_VERSION_CHECK(5, 2, 0)
     ui->lineEditNamePoint->setClearButtonEnabled(true);
-#endif
 
     InitFormulaUI(ui);
     ui->lineEditNamePoint->setText(qApp->getCurrentDocument()->GenerateLabel(LabelType::NewLabel));
@@ -90,7 +88,7 @@ DialogEndLine::DialogEndLine(const VContainer *data, const quint32 &toolId, QWid
     DialogTool::CheckState();
 
     FillComboBoxPoints(ui->comboBoxBasePoint);
-    FillComboBoxTypeLine(ui->comboBoxLineType, VAbstractTool::LineStylesPics());
+    FillComboBoxTypeLine(ui->comboBoxLineType, LineStylesPics());
     FillComboBoxLineColors(ui->comboBoxLineColor);
 
     connect(ui->toolButtonExprLength, &QPushButton::clicked, this, &DialogEndLine::FXLength);
@@ -166,7 +164,7 @@ void DialogEndLine::FXLength()
     DialogEditWrongFormula *dialog = new DialogEditWrongFormula(data, toolId, this);
     dialog->setWindowTitle(tr("Edit length"));
     dialog->SetFormula(GetFormula());
-    dialog->setPostfix(VDomDocument::UnitsToStr(qApp->patternUnit(), true));
+    dialog->setPostfix(UnitsToStr(qApp->patternUnit(), true));
     if (dialog->exec() == QDialog::Accepted)
     {
         SetFormula(dialog->GetFormula());
@@ -186,7 +184,7 @@ void DialogEndLine::ChosenObject(quint32 id, const SceneObject &type)
     {
         if (type == SceneObject::Point)
         {
-            if (SetObject(id, ui->comboBoxBasePoint, ""))
+            if (SetObject(id, ui->comboBoxBasePoint, QString()))
             {
                 vis->VisualMode(id);
                 VAbstractMainWindow *window = qobject_cast<VAbstractMainWindow *>(qApp->getMainWindow());
@@ -217,7 +215,7 @@ void DialogEndLine::SetPointName(const QString &value)
 void DialogEndLine::SetTypeLine(const QString &value)
 {
     ChangeCurrentData(ui->comboBoxLineType, value);
-    vis->setLineStyle(VAbstractTool::LineStyleToPenStyle(value));
+    vis->setLineStyle(LineStyleToPenStyle(value));
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -318,8 +316,7 @@ void DialogEndLine::ShowDialog(bool click)
             QLineF line = QLineF(static_cast<QPointF>(*point), scene->getScenePos());
 
             //Radius of point circle, but little bigger. Need handle with hover sizes.
-            const qreal radius = ToPixel(DefPointRadius/*mm*/, Unit::Mm)*1.5;
-            if (line.length() <= radius)
+            if (line.length() <= ScaledRadius(SceneScale(qApp->getCurrentScene()))*1.5)
             {
                 return;
             }
@@ -331,7 +328,7 @@ void DialogEndLine::ShowDialog(bool click)
 
         this->SetAngle(line->Angle());//Show in dialog angle what user choose
         this->SetFormula(line->Length());
-        emit ToolTip("");
+        emit ToolTip(QString());
         timerFormula->start();
         this->show();
     }
@@ -347,12 +344,8 @@ void DialogEndLine::ShowVisualization()
 void DialogEndLine::SaveData()
 {
     pointName = ui->lineEditNamePoint->text();
-
     formulaLength = ui->plainTextEditFormula->toPlainText();
-    formulaLength.replace("\n", " ");
-
     formulaAngle = ui->plainTextEditAngle->toPlainText();
-    formulaAngle.replace("\n", " ");
 
     VisToolEndLine *line = qobject_cast<VisToolEndLine *>(vis);
     SCASSERT(line != nullptr)
@@ -360,7 +353,7 @@ void DialogEndLine::SaveData()
     line->setObject1Id(GetBasePointId());
     line->setLength(formulaLength);
     line->SetAngle(formulaAngle);
-    line->setLineStyle(VAbstractTool::LineStyleToPenStyle(GetTypeLine()));
+    line->setLineStyle(LineStyleToPenStyle(GetTypeLine()));
     line->RefreshGeometry();
 }
 

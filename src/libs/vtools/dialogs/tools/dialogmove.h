@@ -6,7 +6,7 @@
  **
  **  @brief
  **  @copyright
- **  This source code is part of the Valentine project, a pattern making
+ **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2016 Valentina project
  **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
@@ -59,37 +59,46 @@ public:
     QString GetLength() const;
     void    SetLength(const QString &value);
 
+    QString GetRotationAngle() const;
+    void    SetRotationAngle(const QString &value);
+
     QString GetSuffix() const;
     void    SetSuffix(const QString &value);
 
+    quint32 GetRotationOrigPointId() const;
+    void    SetRotationOrigPointId(const quint32 &value);
+
     QVector<quint32> GetObjects() const;
 
-    virtual void ShowDialog(bool click) Q_DECL_OVERRIDE;
+    virtual void ShowDialog(bool click) override;
 
 public slots:
-    virtual void ChosenObject(quint32 id, const SceneObject &type) Q_DECL_OVERRIDE;
-    virtual void SelectedObject(bool selected, quint32 object, quint32 tool) Q_DECL_OVERRIDE;
+    virtual void ChosenObject(quint32 id, const SceneObject &type) override;
+    virtual void SelectedObject(bool selected, quint32 object, quint32 tool) override;
 
 private slots:
     /** @brief DeployAngleTextEdit grow or shrink formula input */
     void DeployAngleTextEdit();
+    void DeployRotationAngleTextEdit();
     void DeployLengthTextEdit();
 
     void AngleChanged();
+    void RotationAngleChanged();
     void LengthChanged();
 
     void FXAngle();
+    void FXRotationAngle();
     void FXLength();
 
     void SuffixChanged();
 
 protected:
-    virtual void CheckState() Q_DECL_FINAL;
-    virtual void ShowVisualization() Q_DECL_OVERRIDE;
+    virtual void CheckState() final;
+    virtual void ShowVisualization() override;
 
     /** @brief SaveData Put dialog data in local variables */
-    virtual void SaveData() Q_DECL_OVERRIDE;
-    virtual void closeEvent(QCloseEvent *event) Q_DECL_OVERRIDE;
+    virtual void SaveData() override;
+    virtual void closeEvent(QCloseEvent *event) override;
 
 private:
     Q_DISABLE_COPY(DialogMove)
@@ -97,31 +106,35 @@ private:
 
     /** @brief flagAngle true if value of angle is correct */
     bool    flagAngle;
-
+    bool    flagRotationAngle;
     bool    flagLength;
 
     /** @brief timerAngle timer of check formula of angle */
     QTimer  *timerAngle;
-
+    QTimer  *timerRotationAngle;
     QTimer  *timerLength;
 
     /** @brief angle formula of angle */
     QString formulaAngle;
-
+    QString formulaRotationAngle;
     QString formulaLength;
 
     /** @brief formulaBaseHeightAngle base height defined by dialogui */
     int     formulaBaseHeightAngle;
-
+    int     formulaBaseHeightRotationAngle;
     int     formulaBaseHeightLength;
 
     QList<quint32> objects;
 
     bool stage1;
+    bool stage2;
 
     QString m_suffix;
 
+    bool optionalRotationOrigin;
+
     void EvalAngle();
+    void EvalRotationAngle();
     void EvalLength();
 };
 

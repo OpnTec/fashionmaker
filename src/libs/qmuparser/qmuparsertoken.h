@@ -67,8 +67,8 @@ public:
     * @sa ECmdCode
     */
     QmuParserToken()
-        : m_iCode ( cmUNKNOWN ), m_iType ( tpVOID ), m_pTok ( 0 ), m_iIdx ( -1 ), m_strTok(), m_strVal(), m_fVal(),
-          m_pCallback()
+        : m_iCode ( cmUNKNOWN ), m_iType ( tpVOID ), m_pTok ( nullptr ), m_iIdx ( -1 ), m_strTok(), m_strVal(),
+          m_fVal(), m_pCallback()
     {}
 
     //------------------------------------------------------------------------------
@@ -121,7 +121,7 @@ public:
         m_iType = a_Tok.m_iType;
         m_fVal = a_Tok.m_fVal;
         // create new callback object if a_Tok has one
-        m_pCallback.reset ( a_Tok.m_pCallback.get() ? a_Tok.m_pCallback->Clone() : 0 );
+        m_pCallback.reset ( a_Tok.m_pCallback.get() ? a_Tok.m_pCallback->Clone() : nullptr );
     }
 
     //------------------------------------------------------------------------------
@@ -145,7 +145,7 @@ public:
 
         m_iCode = a_iType;
         m_iType = tpVOID;
-        m_pTok = 0;
+        m_pTok = nullptr;
         m_strTok = a_strTok;
         m_iIdx = -1;
 
@@ -165,7 +165,7 @@ public:
         m_strTok = a_sTok;
         m_pCallback.reset ( new QmuParserCallback ( a_pCallback ) );
 
-        m_pTok = 0;
+        m_pTok = nullptr;
         m_iIdx = -1;
 
         return *this;
@@ -186,8 +186,8 @@ public:
         m_strTok = a_strTok;
         m_iIdx = -1;
 
-        m_pTok = 0;
-        m_pCallback.reset ( 0 );
+        m_pTok = nullptr;
+        m_pCallback.reset ( nullptr );
 
         return *this;
     }
@@ -206,7 +206,7 @@ public:
         m_strTok = a_strTok;
         m_iIdx = -1;
         m_pTok = reinterpret_cast<void*> ( a_pVar );
-        m_pCallback.reset ( 0 );
+        m_pCallback.reset ( nullptr );
         return *this;
     }
 
@@ -224,8 +224,8 @@ public:
         m_strTok = a_strTok;
         m_iIdx = a_iSize;
 
-        m_pTok = 0;
-        m_pCallback.reset ( 0 );
+        m_pTok = nullptr;
+        m_pCallback.reset ( nullptr );
         return *this;
     }
 
@@ -361,7 +361,7 @@ public:
     generic_fun_type GetFuncAddr() const
     {
         return ( union_cast<generic_fun_type>( m_pCallback.get() ) ) ?
-                    union_cast<generic_fun_type>( m_pCallback->GetAddr() ) : union_cast<generic_fun_type>(0);
+                    union_cast<generic_fun_type>( m_pCallback->GetAddr() ) : union_cast<generic_fun_type>(nullptr);
     }
 
     //------------------------------------------------------------------------------

@@ -6,7 +6,7 @@
  **
  **  @brief
  **  @copyright
- **  This source code is part of the Valentine project, a pattern making
+ **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2016 Valentina project
  **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
@@ -52,7 +52,7 @@ public:
     VPieceNode &operator=(VPieceNode &&node) Q_DECL_NOTHROW { Swap(node); return *this; }
 #endif
 
-    void Swap(VPieceNode &node) Q_DECL_NOTHROW
+    inline void Swap(VPieceNode &node) Q_DECL_NOTHROW
     { std::swap(d, node.d); }
 
     friend QDataStream& operator<<(QDataStream& out, const VPieceNode& p);
@@ -99,6 +99,9 @@ public:
 
     bool IsShowSecondPassmark() const;
     void SetShowSecondPassmark(bool value);
+
+    bool IsCheckUniqueness() const;
+    void SetCheckUniqueness(bool value);
 private:
     QSharedDataPointer<VPieceNodeData> d;
 };

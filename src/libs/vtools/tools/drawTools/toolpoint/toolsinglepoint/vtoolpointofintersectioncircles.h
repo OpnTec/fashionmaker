@@ -6,7 +6,7 @@
  **
  **  @brief
  **  @copyright
- **  This source code is part of the Valentine project, a pattern making
+ **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2015 Valentina project
  **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
@@ -45,34 +45,40 @@
 class VFormula;
 template <class T> class QSharedPointer;
 
+struct VToolPointOfIntersectionCirclesInitData : VToolSinglePointInitData
+{
+    VToolPointOfIntersectionCirclesInitData()
+        : VToolSinglePointInitData(),
+          firstCircleCenterId(NULL_ID),
+          secondCircleCenterId(NULL_ID),
+          firstCircleRadius('0'),
+          secondCircleRadius('0'),
+          crossPoint(CrossCirclesPoint::FirstPoint)
+    {}
+
+    quint32 firstCircleCenterId;
+    quint32 secondCircleCenterId;
+    QString firstCircleRadius;
+    QString secondCircleRadius;
+    CrossCirclesPoint crossPoint;
+};
+
 class VToolPointOfIntersectionCircles : public VToolSinglePoint
 {
     Q_OBJECT
 public:
-    virtual void setDialog() Q_DECL_OVERRIDE;
-    static VToolPointOfIntersectionCircles *Create(QSharedPointer<DialogTool> dialog, VMainGraphicsScene  *scene,
+    virtual void setDialog() override;
+    static VToolPointOfIntersectionCircles *Create(const QPointer<DialogTool> &dialog, VMainGraphicsScene  *scene,
                                                    VAbstractPattern *doc, VContainer *data);
-    static VToolPointOfIntersectionCircles *Create(const quint32 _id, const QString &pointName,
-                                                   quint32 firstCircleCenterId, quint32 secondCircleCenterId,
-                                                   QString &firstCircleRadius, QString &secondCircleRadius,
-                                                   CrossCirclesPoint crossPoint,
-                                                   const qreal &mx, const qreal &my, VMainGraphicsScene *scene,
-                                                   VAbstractPattern *doc, VContainer *data, const Document &parse,
-                                                   const Source &typeCreation);
-    static QPointF FindPoint(const QPointF &c1Point, const QPointF &c2Point, qreal c1Radius, qreal c2Radius,
-                             const CrossCirclesPoint crossPoint);
+    static VToolPointOfIntersectionCircles *Create(VToolPointOfIntersectionCirclesInitData &initData);
+    static bool FindPoint(const QPointF &c1Point, const QPointF &c2Point, qreal c1Radius, qreal c2Radius,
+                             const CrossCirclesPoint crossPoint, QPointF *intersectionPoint);
     static const QString ToolType;
-    virtual int  type() const Q_DECL_OVERRIDE {return Type;}
+    virtual int  type() const override {return Type;}
     enum { Type = UserType + static_cast<int>(Tool::PointOfIntersectionCircles) };
 
     QString FirstCircleCenterPointName() const;
     QString SecondCircleCenterPointName() const;
-
-    quint32 GetFirstCircleCenterId() const;
-    void    SetFirstCircleCenterId(const quint32 &value);
-
-    quint32 GetSecondCircleCenterId() const;
-    void    SetSecondCircleCenterId(const quint32 &value);
 
     VFormula GetFirstCircleRadius() const;
     void     SetFirstCircleRadius(const VFormula &value);
@@ -83,14 +89,16 @@ public:
     CrossCirclesPoint GetCrossCirclesPoint() const;
     void              SetCrossCirclesPoint(const CrossCirclesPoint &value);
 
-    virtual void ShowVisualization(bool show) Q_DECL_OVERRIDE;
+    virtual void ShowVisualization(bool show) override;
+protected slots:
+    virtual void ShowContextMenu(QGraphicsSceneContextMenuEvent *event, quint32 id=NULL_ID) override;
 protected:
-    virtual void RemoveReferens() Q_DECL_OVERRIDE;
-    virtual void contextMenuEvent ( QGraphicsSceneContextMenuEvent * event ) Q_DECL_OVERRIDE;
-    virtual void SaveDialog(QDomElement &domElement) Q_DECL_OVERRIDE;
-    virtual void SaveOptions(QDomElement &tag, QSharedPointer<VGObject> &obj) Q_DECL_OVERRIDE;
-    virtual void ReadToolAttributes(const QDomElement &domElement) Q_DECL_OVERRIDE;
-    virtual void SetVisualization() Q_DECL_OVERRIDE;
+    virtual void RemoveReferens() override;
+    virtual void SaveDialog(QDomElement &domElement, QList<quint32> &oldDependencies,
+                            QList<quint32> &newDependencies) override;
+    virtual void SaveOptions(QDomElement &tag, QSharedPointer<VGObject> &obj) override;
+    virtual void ReadToolAttributes(const QDomElement &domElement) override;
+    virtual void SetVisualization() override;
 private:
     Q_DISABLE_COPY(VToolPointOfIntersectionCircles)
 
@@ -102,10 +110,7 @@ private:
 
     CrossCirclesPoint crossPoint;
 
-    VToolPointOfIntersectionCircles(VAbstractPattern *doc, VContainer *data, const quint32 &id, const
-                                    quint32 firstCircleCenterId, quint32 secondCircleCenterId,
-                                    const QString &firstCircleRadius, const QString &secondCircleRadius,
-                                    CrossCirclesPoint crossPoint, const Source &typeCreation,
+    VToolPointOfIntersectionCircles(const VToolPointOfIntersectionCirclesInitData &initData,
                                     QGraphicsItem * parent = nullptr);
 };
 

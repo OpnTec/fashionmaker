@@ -6,7 +6,7 @@
  **
  **  @brief
  **  @copyright
- **  This source code is part of the Valentine project, a pattern making
+ **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2016 Valentina project
  **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
@@ -43,29 +43,41 @@
 class VFormula;
 template <class T> class QSharedPointer;
 
+struct VToolEllipticalArcInitData : VAbstractSplineInitData
+{
+    VToolEllipticalArcInitData()
+        : VAbstractSplineInitData(),
+          center(NULL_ID),
+          radius1('0'),
+          radius2('0'),
+          f1('0'),
+          f2('0'),
+          rotationAngle('0')
+    {}
+
+    quint32 center;
+    QString radius1;
+    QString radius2;
+    QString f1;
+    QString f2;
+    QString rotationAngle;
+};
+
 /**
  * @brief The VToolEllipticalArc class tool for creation elliptical arc.
  */
-class VToolEllipticalArc : public VAbstractSpline
+class VToolEllipticalArc : public VToolAbstractArc
 {
     Q_OBJECT
 public:
-    virtual void     setDialog() Q_DECL_OVERRIDE;
-    static VToolEllipticalArc* Create(QSharedPointer<DialogTool> dialog, VMainGraphicsScene  *scene,
+    virtual void     setDialog() override;
+    static VToolEllipticalArc* Create(const QPointer<DialogTool> &dialog, VMainGraphicsScene  *scene,
                                       VAbstractPattern *doc, VContainer *data);
-    static VToolEllipticalArc* Create(const quint32 _id, const quint32 &center, QString &radius1, QString &radius2,
-                                      QString &f1, QString &f2, QString &rotationAngle, const QString &color,
-                                      VMainGraphicsScene  *scene, VAbstractPattern *doc, VContainer *data,
-                            const Document &parse, const Source &typeCreation);
+    static VToolEllipticalArc* Create(VToolEllipticalArcInitData &initData);
     static const QString ToolType;
-    virtual int      type() const Q_DECL_OVERRIDE {return Type;}
+    virtual int      type() const override {return Type;}
     enum { Type = UserType + static_cast<int>(Tool::EllipticalArc)};
-    virtual QString  getTagName() const Q_DECL_OVERRIDE;
-
-    QString CenterPointName() const;
-
-    quint32          getCenter() const;
-    void             setCenter(const quint32 &value);
+    virtual QString  getTagName() const override;
 
     VFormula         GetFormulaRadius1() const;
     void             SetFormulaRadius1(const VFormula &value);
@@ -82,21 +94,21 @@ public:
     VFormula         GetFormulaRotationAngle() const;
     void             SetFormulaRotationAngle(const VFormula &value);
 
-    virtual void     ShowVisualization(bool show) Q_DECL_OVERRIDE;
-
+    virtual void     ShowVisualization(bool show) override;
+protected slots:
+    virtual void ShowContextMenu(QGraphicsSceneContextMenuEvent *event, quint32 id=NULL_ID) override;
 protected:
-    virtual void     contextMenuEvent ( QGraphicsSceneContextMenuEvent * event ) Q_DECL_OVERRIDE;
-    virtual void     RemoveReferens() Q_DECL_OVERRIDE;
-    virtual void     SaveDialog(QDomElement &domElement) Q_DECL_OVERRIDE;
-    virtual void     SaveOptions(QDomElement &tag, QSharedPointer<VGObject> &obj) Q_DECL_OVERRIDE;
-    virtual void     SetVisualization() Q_DECL_OVERRIDE;
+    virtual void    RemoveReferens() override;
+    virtual void    SaveDialog(QDomElement &domElement, QList<quint32> &oldDependencies,
+                               QList<quint32> &newDependencies) override;
+    virtual void    SaveOptions(QDomElement &tag, QSharedPointer<VGObject> &obj) override;
+    virtual void    SetVisualization() override;
+    virtual QString MakeToolTip() const override;
 
 private:
     Q_DISABLE_COPY(VToolEllipticalArc)
-    VToolEllipticalArc(VAbstractPattern *doc, VContainer *data, quint32 id, const Source &typeCreation,
-                       QGraphicsItem * parent = nullptr);
-
-    virtual void RefreshGeometry() Q_DECL_OVERRIDE;
+    VToolEllipticalArc(const VToolEllipticalArcInitData &initData, QGraphicsItem *parent = nullptr);
+    virtual ~VToolEllipticalArc()=default;
 };
 
 #endif // VTOOLELLIPTICALARC_H

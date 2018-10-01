@@ -6,7 +6,7 @@
  **
  **  @brief
  **  @copyright
- **  This source code is part of the Valentine project, a pattern making
+ **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2017 Valentina project
  **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
@@ -33,6 +33,7 @@
 #include "configpages/preferencespatternpage.h"
 #include "configpages/preferencespathpage.h"
 
+#include <QMessageBox>
 #include <QPushButton>
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -45,6 +46,11 @@ DialogPreferences::DialogPreferences(QWidget *parent)
       m_pathPage(new PreferencesPathPage)
 {
     ui->setupUi(this);
+
+#if defined(Q_OS_MAC)
+    setWindowFlags(Qt::Window);
+#endif
+
     qApp->Settings()->GetOsSeparator() ? setLocale(QLocale()) : setLocale(QLocale::c());
 
     QPushButton *bOk = ui->buttonBox->button(QDialogButtonBox::Ok);
@@ -109,6 +115,18 @@ void DialogPreferences::resizeEvent(QResizeEvent *event)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void DialogPreferences::changeEvent(QEvent *event)
+{
+    if (event->type() == QEvent::LanguageChange)
+    {
+        // retranslate designer form (single inheritance approach)
+        ui->retranslateUi(this);
+    }
+    // remember to call base class implementation
+    QDialog::changeEvent(event);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 void DialogPreferences::PageChanged(QListWidgetItem *current, QListWidgetItem *previous)
 {
     if (current == nullptr)
@@ -122,9 +140,21 @@ void DialogPreferences::PageChanged(QListWidgetItem *current, QListWidgetItem *p
 //---------------------------------------------------------------------------------------------------------------------
 void DialogPreferences::Apply()
 {
-    m_configurePage->Apply();
-    m_patternPage->Apply();
-    m_pathPage->Apply();
+    QStringList preferences;
+
+    preferences += m_configurePage->Apply();
+    preferences += m_patternPage->Apply();
+    preferences += m_pathPage->Apply();
+
+    if (not preferences.isEmpty())
+    {
+        const QString text = tr("Followed %n option(s) require restart to take effect: %1.", "",
+                                preferences.size()).arg(preferences.join(QStringLiteral(", ")));
+        QMessageBox::information(this, QCoreApplication::applicationName(), text);
+    }
+
+
+    m_patternPage->InitDefaultSeamAllowance();
 
     qApp->ValentinaSettings()->GetOsSeparator() ? setLocale(QLocale()) : setLocale(QLocale::c());
     emit UpdateProperties();

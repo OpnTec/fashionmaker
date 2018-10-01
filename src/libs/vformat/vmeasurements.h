@@ -6,7 +6,7 @@
  **
  **  @brief
  **  @copyright
- **  This source code is part of the Valentine project, a pattern making
+ **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2015 Valentina project
  **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
@@ -51,7 +51,8 @@ public:
     VMeasurements(Unit unit, int baseSize, int baseHeight, VContainer *data);
     virtual ~VMeasurements() Q_DECL_EQ_DEFAULT;
 
-    virtual void setXMLContent(const QString &fileName) Q_DECL_OVERRIDE;
+    virtual void setXMLContent(const QString &fileName) override;
+    virtual bool SaveDocument(const QString &fileName, QString &error) override;
 
     void AddEmpty(const QString &name, const QString &formula = QString());
     void AddEmptyAfter(const QString &after, const QString &name, const QString &formula = QString());
@@ -71,11 +72,8 @@ public:
     QString Notes() const;
     void    SetNotes(const QString &text);
 
-    QString FamilyName() const;
-    void    SetFamilyName(const QString &text);
-
-    QString GivenName() const;
-    void    SetGivenName(const QString &text);
+    QString Customer() const;
+    void    SetCustomer(const QString &text);
 
     QDate   BirthDate() const;
     void    SetBirthDate(const QDate &date);
@@ -107,8 +105,7 @@ public:
     static const QString TagSize;
     static const QString TagHeight;
     static const QString TagPersonal;
-    static const QString TagFamilyName;
-    static const QString TagGivenName;
+    static const QString TagCustomer;
     static const QString TagBirthDate;
     static const QString TagGender;
     static const QString TagPMSystem;
@@ -136,8 +133,7 @@ public:
 
     bool IsDefinedKnownNamesValid() const;
 
-    void SetDataSize();
-    void SetDataHeight();
+    VContainer *GetData() const;
 
 private:
     Q_DISABLE_COPY(VMeasurements)
@@ -146,7 +142,7 @@ private:
     VContainer     *data;
     MeasurementsType type;
 
-    void CreateEmptyStandardFile(Unit unit, int baseSize, int baseHeight);
+    void CreateEmptyMultisizeFile(Unit unit, int baseSize, int baseHeight);
     void CreateEmptyIndividualFile(Unit unit);
 
     qreal UniqueTagAttr(const QString &tag, const QString &attr, qreal defValue) const;

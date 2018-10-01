@@ -6,7 +6,7 @@
  **
  **  @brief
  **  @copyright
- **  This source code is part of the Valentine project, a pattern making
+ **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2013-2015 Valentina project
  **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
@@ -46,25 +46,36 @@
 
 template <class T> class QSharedPointer;
 
+struct VToolCurveIntersectAxisInitData : VToolLinePointInitData
+{
+    VToolCurveIntersectAxisInitData()
+        : VToolLinePointInitData(),
+          formulaAngle('0'),
+          basePointId(NULL_ID),
+          curveId(NULL_ID)
+    {}
+
+    QString formulaAngle;
+    quint32 basePointId;
+    quint32 curveId;
+};
+
 class VToolCurveIntersectAxis : public VToolLinePoint
 {
     Q_OBJECT
 public:
     virtual ~VToolCurveIntersectAxis() Q_DECL_EQ_DEFAULT;
-    virtual void setDialog() Q_DECL_OVERRIDE;
+    virtual void setDialog() override;
 
-    static VToolCurveIntersectAxis *Create(QSharedPointer<DialogTool> dialog, VMainGraphicsScene *scene,
+    static VToolCurveIntersectAxis *Create(const QPointer<DialogTool> &dialog, VMainGraphicsScene *scene,
                                            VAbstractPattern *doc, VContainer *data);
-    static VToolCurveIntersectAxis *Create(const quint32 _id, const QString &pointName, const QString &typeLine,
-                                           const QString &lineColor, QString &formulaAngle, const quint32 &basePointId,
-                                           const quint32 &curveId, const qreal &mx, const qreal &my,
-                                           VMainGraphicsScene  *scene, VAbstractPattern *doc, VContainer *data,
-                                           const Document &parse, const Source &typeCreation);
+    static VToolCurveIntersectAxis *Create(VToolCurveIntersectAxisInitData &initData);
 
-    static QPointF FindPoint(const QPointF &point, qreal angle, const QSharedPointer<VAbstractCurve> &curve);
+    static bool FindPoint(const QPointF &point, qreal angle, const QVector<QPointF> &curvePoints,
+                          QPointF *intersectionPoint);
 
     static const QString ToolType;
-    virtual int       type() const Q_DECL_OVERRIDE {return Type;}
+    virtual int       type() const override {return Type;}
     enum { Type = UserType + static_cast<int>(Tool::CurveIntersectAxis)};
 
     VFormula     GetFormulaAngle() const;
@@ -72,24 +83,21 @@ public:
 
     QString CurveName() const;
 
-    quint32      getCurveId() const;
-    void         setCurveId(const quint32 &value);
-
-    virtual void ShowVisualization(bool show) Q_DECL_OVERRIDE;
+    virtual void ShowVisualization(bool show) override;
+protected slots:
+    virtual void ShowContextMenu(QGraphicsSceneContextMenuEvent *event, quint32 id=NULL_ID) override;
 protected:
-    virtual void contextMenuEvent ( QGraphicsSceneContextMenuEvent * event ) Q_DECL_OVERRIDE;
-    virtual void SaveDialog(QDomElement &domElement) Q_DECL_OVERRIDE;
-    virtual void SaveOptions(QDomElement &tag, QSharedPointer<VGObject> &obj) Q_DECL_OVERRIDE;
-    virtual void ReadToolAttributes(const QDomElement &domElement) Q_DECL_OVERRIDE;
-    virtual void SetVisualization() Q_DECL_OVERRIDE;
+    virtual void SaveDialog(QDomElement &domElement, QList<quint32> &oldDependencies,
+                            QList<quint32> &newDependencies) override;
+    virtual void SaveOptions(QDomElement &tag, QSharedPointer<VGObject> &obj) override;
+    virtual void ReadToolAttributes(const QDomElement &domElement) override;
+    virtual void SetVisualization() override;
 private:
     Q_DISABLE_COPY(VToolCurveIntersectAxis)
     QString formulaAngle;
     quint32 curveId;
 
-    VToolCurveIntersectAxis(VAbstractPattern *doc, VContainer *data, const quint32 &id, const QString &typeLine,
-                            const QString &lineColor, const QString &formulaAngle, const quint32 &basePointId,
-                            const quint32 &curveId, const Source &typeCreation, QGraphicsItem * parent = nullptr);
+    VToolCurveIntersectAxis(const VToolCurveIntersectAxisInitData &initData, QGraphicsItem *parent = nullptr);
 
     template <class Item>
     static void InitArc(VContainer *data, qreal segLength, const VPointF *p, quint32 curveId);

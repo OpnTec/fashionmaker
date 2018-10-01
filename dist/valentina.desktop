@@ -1,14 +1,13 @@
 [Desktop Entry]
 Type=Application
-Encoding=UTF-8
 Name=Valentina
 Exec=valentina %F
 Version=1.0
 GenericName=Pattern making program
 Comment=Creating pattern of clothes
-Comment[ru]=Создание выкроек одежды
 Comment[uk]=Створеня викрійок одягу
-Icon=/usr/share/pixmaps/valentina.png
+Icon=valentina
 Terminal=false
 MimeType=application/x-valentina-pattern;
 Categories=Graphics;VectorGraphics;2DGraphics;Qt;Engineering;
+TryExec=valentina

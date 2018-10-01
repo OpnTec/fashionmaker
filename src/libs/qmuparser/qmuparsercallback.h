@@ -25,8 +25,11 @@
 #include <qcompilerdetection.h>
 #include <QString>
 #include <map>
+#include <QTypeInfo>
+#include <QSharedDataPointer>
 
 #include "qmuparserdef.h"
+#include "qmuparsercallback_p.h"
 
 /**
  * @file
@@ -82,7 +85,15 @@ public:
     QmuParserCallback(const QmuParserCallback &a_Fun);
     QmuParserCallback &operator=(const QmuParserCallback &a_Fun);
 
-    QmuParserCallback* Clone() const Q_REQUIRED_RESULT;
+#ifdef Q_COMPILER_RVALUE_REFS
+    QmuParserCallback &operator=(QmuParserCallback &&a_Fun) Q_DECL_NOTHROW { Swap(a_Fun); return *this; }
+#endif
+
+    inline void Swap(QmuParserCallback &a_Fun) Q_DECL_NOTHROW
+    { std::swap(d, a_Fun.d); }
+
+    Q_REQUIRED_RESULT QmuParserCallback* Clone() const;
+
     bool               IsOptimizable() const;
     void*              GetAddr() const;
     ECmdCode           GetCode() const;
@@ -91,20 +102,7 @@ public:
     EOprtAssociativity GetAssociativity() const;
     int                GetArgc() const;
 private:
-    void *m_pFun;                   ///< Pointer to the callback function, casted to void
-
-    /**
-     * @brief Number of numeric function arguments
-     *
-     * This number is negative for functions with variable number of arguments. in this cases
-     * they represent the actual number of arguments found.
-     */
-    int   m_iArgc;
-    int   m_iPri;                   ///< Valid only for binary and infix operators; Operator precedence.
-    EOprtAssociativity m_eOprtAsct; ///< Operator associativity; Valid only for binary operators
-    ECmdCode  m_iCode;
-    ETypeCode m_iType;
-    bool  m_bAllowOpti;             ///< Flag indication optimizeability
+    QSharedDataPointer<QmuParserCallbackData> d;
 };
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -122,81 +120,8 @@ inline QmuParserCallback* QmuParserCallback::Clone() const
     return new QmuParserCallback ( *this );
 }
 
-//---------------------------------------------------------------------------------------------------------------------
-/**
- * @brief Return true if the function is conservative.
- *
- * Conservative functions return always the same result for the same argument.
- * @throw nothrow
- */
-// cppcheck-suppress unusedFunction
-inline bool QmuParserCallback::IsOptimizable() const
-{
-    return m_bAllowOpti;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-/**
- * @brief Get the callback address for the parser function.
- *
- * The type of the address is void. It needs to be recasted according to the argument number to the right type.
- *
- * @throw nothrow
- * @return #pFun
- */
-inline void* QmuParserCallback::GetAddr() const
-{
-    return m_pFun;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-/**
- * @brief Return the callback code.
-*/
-inline ECmdCode  QmuParserCallback::GetCode() const
-{
-    return m_iCode;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-inline ETypeCode QmuParserCallback::GetType() const
-{
-    return m_iType;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-/**
- * @brief Return the operator precedence.
- * @throw nothrown
- *
- * Only valid if the callback token is an operator token (binary or infix).
- */
-inline int QmuParserCallback::GetPri()  const
-{
-    return m_iPri;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-/**
- * @brief Return the operators associativity.
- * @throw nothrown
- *
- * Only valid if the callback token is a binary operator token.
- */
-inline EOprtAssociativity QmuParserCallback::GetAssociativity() const
-{
-    return m_eOprtAsct;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-/**
- * @brief Returns the number of function Arguments.
- */
-inline int QmuParserCallback::GetArgc() const
-{
-    return m_iArgc;
-}
-
 } // namespace qmu
+
+Q_DECLARE_TYPEINFO(qmu::QmuParserCallback, Q_MOVABLE_TYPE);
 
 #endif

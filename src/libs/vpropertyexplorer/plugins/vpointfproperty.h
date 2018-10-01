@@ -42,13 +42,13 @@ class VPROPERTYEXPLORERSHARED_EXPORT VPointFProperty : public VProperty
 public:
     explicit VPointFProperty(const QString& name);
 
-    virtual ~VPointFProperty() Q_DECL_OVERRIDE {}
+    virtual ~VPointFProperty() override {}
 
     //! Get the data how it should be displayed
-    virtual QVariant data (int column = DPC_Name, int role = Qt::DisplayRole) const Q_DECL_OVERRIDE;
+    virtual QVariant data (int column = DPC_Name, int role = Qt::DisplayRole) const override;
 
     //! Returns item flags
-    Qt::ItemFlags flags(int column = DPC_Name) const Q_DECL_OVERRIDE;
+    Qt::ItemFlags flags(int column = DPC_Name) const override;
 
     //! Returns the QPointF
     virtual QPointF getPointF() const;
@@ -60,21 +60,21 @@ public:
     virtual void setPointF(qreal x, qreal y);
 
     //! Returns a string containing the type of the property
-    virtual QString type() const Q_DECL_OVERRIDE;
+    virtual QString type() const override;
 
     //! Clones this property
     //! \param include_children Indicates whether to also clone the children
     //! \param container If a property is being passed here, no new VProperty is being created but instead it is tried
     //! to fill all the data into container. This can also be used when subclassing this function.
     //! \return Returns the newly created property (or container, if it was not NULL)
-    virtual VProperty* clone(bool include_children = true,
-                             VProperty* container = nullptr) const Q_DECL_OVERRIDE Q_REQUIRED_RESULT;
+    Q_REQUIRED_RESULT virtual VProperty* clone(bool include_children = true,
+                                               VProperty* container = nullptr) const override;
 
     //! Sets the value of the property
-    virtual void setValue(const QVariant& value) Q_DECL_OVERRIDE;
+    virtual void setValue(const QVariant& value) override;
 
     //! Returns the value of the property as a QVariant
-    virtual QVariant getValue() const Q_DECL_OVERRIDE;
+    virtual QVariant getValue() const override;
 
 private:
     Q_DISABLE_COPY(VPointFProperty)

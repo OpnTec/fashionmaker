@@ -6,7 +6,7 @@
  **
  **  @brief
  **  @copyright
- **  This source code is part of the Valentine project, a pattern making
+ **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2015 Valentina project
  **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
@@ -43,9 +43,9 @@ class DialogMDataBase : public QDialog
     Q_OBJECT
 
 public:
-    explicit DialogMDataBase(const QStringList &list, QWidget *parent = 0);
-    explicit DialogMDataBase(QWidget *parent = 0);
-    virtual ~DialogMDataBase() Q_DECL_OVERRIDE;
+    explicit DialogMDataBase(const QStringList &list, QWidget *parent = nullptr);
+    explicit DialogMDataBase(QWidget *parent = nullptr);
+    virtual ~DialogMDataBase() override;
 
     QStringList GetNewNames() const;
 
@@ -54,14 +54,15 @@ public:
     static QString ImgTag(const QString &number);
 
 protected:
-    virtual void changeEvent(QEvent* event) Q_DECL_OVERRIDE;
-    virtual bool eventFilter(QObject *target, QEvent *event) Q_DECL_OVERRIDE;
+    virtual void changeEvent(QEvent* event) override;
+    virtual bool eventFilter(QObject *target, QEvent *event) override;
 
 private slots:
     void UpdateChecks(QTreeWidgetItem *item, int column);
     void ShowDescription(QTreeWidgetItem *item, int column);
     void TreeMenu(const QPoint &pos);
     void Recheck();
+    void FilterMeasurements(const QString &search);
 
 private:
     Q_DISABLE_COPY(DialogMDataBase)
@@ -90,12 +91,16 @@ private:
     void InitDataBase(const QStringList &list = QStringList());
     void InitGroup(QTreeWidgetItem **group, const QString &groupName, const QStringList &mList,
                    const QStringList &list = QStringList());
+    void FilterGroup(QTreeWidgetItem *group, const QString &search);
 
-    QTreeWidgetItem *AddGroup(const QString &text) Q_REQUIRED_RESULT;
+    Q_REQUIRED_RESULT QTreeWidgetItem *AddGroup(const QString &text);
+
     void AddMeasurement(QTreeWidgetItem *group, const QString &name, const QStringList &list);
 
     void ReadSettings();
     void WriteSettings();
+
+    QString ItemFullDescription(QTreeWidgetItem *item, bool showImage = true) const;
 
     void RetranslateGroup(QTreeWidgetItem *group, const QString &groupText, const QStringList &list);
     void RetranslateMeasurement(QTreeWidgetItem *group, int index, const QString &name);

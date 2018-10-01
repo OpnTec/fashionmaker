@@ -6,7 +6,7 @@
  **
  **  @brief
  **  @copyright
- **  This source code is part of the Valentine project, a pattern making
+ **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2015 Valentina project
  **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
@@ -43,6 +43,7 @@ public:
 
     bool MeasurementsFromUser(QString &newFormula, int position, const QString &token, int &bias) const;
 
+    QString MFromUser(const QString &measurement) const;
     QString MToUser(const QString &measurement) const;
     QString MNumber(const QString &measurement) const;
     QString MFormula(const QString &measurement) const;

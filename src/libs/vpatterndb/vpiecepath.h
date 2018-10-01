@@ -6,7 +6,7 @@
  **
  **  @brief
  **  @copyright
- **  This source code is part of the Valentine project, a pattern making
+ **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2016 Valentina project
  **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
@@ -41,6 +41,7 @@ class VContainer;
 class QPainterPath;
 class VPointF;
 class VPieceNode;
+class VInternalVariable;
 
 class VPiecePath
 {
@@ -56,7 +57,7 @@ public:
     VPiecePath &operator=(VPiecePath &&path) Q_DECL_NOTHROW { Swap(path); return *this; }
 #endif
 
-    void Swap(VPiecePath &path) Q_DECL_NOTHROW
+    inline void Swap(VPiecePath &path) Q_DECL_NOTHROW
     { std::swap(d, path.d); }
 
     void   Append(const VPieceNode &node);
@@ -78,13 +79,31 @@ public:
     Qt::PenStyle GetPenType() const;
     void         SetPenType(const Qt::PenStyle &type);
 
-    QVector<QPointF>  PathPoints(const VContainer *data) const;
-    QVector<VPointF>  PathNodePoints(const VContainer *data, bool showExcluded = true) const;
-    QVector<VSAPoint> SeamAllowancePoints(const VContainer *data, qreal width, bool reverse) const;
+    bool IsCutPath() const;
+    void SetCutPath(bool cut);
 
-    QPainterPath PainterPath(const VContainer *data) const;
+    QString GetVisibilityTrigger() const;
+    void    SetVisibilityTrigger(const QString &formula);
 
+    void SetFirstToCuttingCountour(bool value);
+    bool IsFirstToCuttingCountour() const;
+
+    void SetLastToCuttingCountour(bool value);
+    bool IsLastToCuttingCountour() const;
+
+    QVector<QPointF>          PathPoints(const VContainer *data,
+                                         const QVector<QPointF> &cuttingPath = QVector<QPointF>()) const;
+    QVector<VPointF>          PathNodePoints(const VContainer *data, bool showExcluded = true) const;
+    QVector<QVector<QPointF> > PathCurvePoints(const VContainer *data) const;
+    QVector<VSAPoint>         SeamAllowancePoints(const VContainer *data, qreal width, bool reverse) const;
+
+    QPainterPath          PainterPath(const VContainer *data, const QVector<QPointF> &cuttingPath) const;
+    QVector<QPainterPath> CurvesPainterPath(const VContainer *data) const;
+
+    QList<quint32> Dependencies() const;
     QVector<quint32> MissingNodes(const VPiecePath &path) const;
+
+    QString NodeName(int nodeIndex, const VContainer *data) const;
 
     int  indexOfNode(quint32 id) const;
     void NodeOnEdge(quint32 index, VPieceNode &p1, VPieceNode &p2) const;
@@ -102,6 +121,8 @@ public:
     QPointF NodePreviousPoint(const VContainer *data, int i) const;
     QPointF NodeNextPoint(const VContainer *data, int i) const;
 
+    bool IsVisible(const QHash<QString, QSharedPointer<VInternalVariable> > *vars) const;
+
     static int indexOfNode(const QVector<VPieceNode> &nodes, quint32 id);
 
     static int FindInLoopNotExcludedUp(int start, const QVector<VPieceNode> &nodes);
@@ -116,10 +137,13 @@ public:
                                                        const QSharedPointer<VAbstractCurve> &curve,
                                                        int i, bool reverse, qreal width);
 
+    static QString NodeName(const QVector<VPieceNode> &nodes, int nodeIndex, const VContainer *data);
+
 private:
     QSharedDataPointer<VPiecePathData> d;
 };
 
 Q_DECLARE_TYPEINFO(VPiecePath, Q_MOVABLE_TYPE);
+Q_DECLARE_METATYPE(VPiecePath)
 
 #endif // VPIECEPATH_H

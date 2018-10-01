@@ -6,7 +6,7 @@
  **
  **  @brief
  **  @copyright
- **  This source code is part of the Valentine project, a pattern making
+ **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2016 Valentina project
  **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
@@ -39,41 +39,39 @@
 #include <Qt>
 #include <QtDebug>
 
-#include "../ifc/ifcdef.h"
+#include "global.h"
 #include "../vgeometry/vabstractcurve.h"
+#include "../vmisc/vabstractapplication.h"
 
 template <class T> class QSharedPointer;
 
 //---------------------------------------------------------------------------------------------------------------------
-VSimpleCurve::VSimpleCurve(quint32 id, const QColor &currentColor, Unit patternUnit, qreal *factor, QObject *parent)
-    : VAbstractSimple(id, currentColor, patternUnit, factor, parent),
-      QGraphicsPathItem(),
-      m_curve(),
+VSimpleCurve::VSimpleCurve(quint32 id, const QSharedPointer<VAbstractCurve> &curve, QObject *parent)
+    : VAbstractSimple(id, parent),
+      VCurvePathItem(),
+      m_curve(curve),
       m_isHovered(false)
 {
     this->setBrush(QBrush(Qt::NoBrush));
-    SetPen(this, currentColor, WidthHairLine(patternUnit));
     this->setAcceptHoverEvents(true);
     this->setFlag(QGraphicsItem::ItemIsFocusable, true);// For keyboard input focus
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-VSimpleCurve::~VSimpleCurve()
-{
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void VSimpleCurve::RefreshGeometry(const QSharedPointer<VAbstractCurve> &curve)
 {
     m_curve = curve;
-    ShowPath();
-}
 
-//---------------------------------------------------------------------------------------------------------------------
-void VSimpleCurve::SetEnabled(bool enabled)
-{
-    VAbstractSimple::SetEnabled(enabled);
-    SetPen(this, currentColor, WidthHairLine(patternUnit));
+    if (not m_curve.isNull())
+    {
+        m_isHovered ? SetDirectionArrows(m_curve->DirectionArrows()) : SetDirectionArrows(QVector<DirectionArrow>());
+        setPath(m_curve->GetPath());
+        SetPoints(m_curve->GetPoints());
+    }
+    else
+    {
+        qWarning() << tr("VSimpleCurve::RefreshGeometry: pointer to curve is null.");
+    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -106,9 +104,10 @@ void VSimpleCurve::mousePressEvent(QGraphicsSceneMouseEvent *event)
     }
     else
     {
-        if (event->button() == Qt::LeftButton)
+        if (event->button() == Qt::LeftButton && event->type() != QEvent::GraphicsSceneMouseDoubleClick)
         {
             emit Choosed(id);
+            event->accept();
         }
     }
 }
@@ -116,12 +115,9 @@ void VSimpleCurve::mousePressEvent(QGraphicsSceneMouseEvent *event)
 //---------------------------------------------------------------------------------------------------------------------
 void VSimpleCurve::mouseReleaseEvent(QGraphicsSceneMouseEvent *event)
 {
-    if (selectionType == SelectionType::ByMouseRelease)
+    if (selectionType == SelectionType::ByMouseRelease && IsSelectedByReleaseEvent(this, event))
     {
-        if (event->button() == Qt::LeftButton)
-        {
-            emit Choosed(id);
-        }
+        emit Choosed(id);
     }
     QGraphicsPathItem::mouseReleaseEvent(event);
 }
@@ -130,8 +126,10 @@ void VSimpleCurve::mouseReleaseEvent(QGraphicsSceneMouseEvent *event)
 void VSimpleCurve::hoverEnterEvent(QGraphicsSceneHoverEvent *event)
 {
     m_isHovered = true;
-    SetPen(this, currentColor, WidthMainLine(patternUnit));
-    ShowPath();
+    if (not m_curve.isNull())
+    {
+        SetDirectionArrows(m_curve->DirectionArrows());
+    }
     QGraphicsPathItem::hoverEnterEvent(event);
 }
 
@@ -139,15 +137,14 @@ void VSimpleCurve::hoverEnterEvent(QGraphicsSceneHoverEvent *event)
 void VSimpleCurve::hoverLeaveEvent(QGraphicsSceneHoverEvent *event)
 {
     m_isHovered = false;
-    SetPen(this, currentColor, WidthHairLine(patternUnit));
-    ShowPath();
+    SetDirectionArrows(QVector<DirectionArrow>());
     QGraphicsPathItem::hoverLeaveEvent(event);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 QVariant VSimpleCurve::itemChange(QGraphicsItem::GraphicsItemChange change, const QVariant &value)
 {
-    if (change == QGraphicsItem::ItemSelectedChange)
+    if (change == QGraphicsItem::ItemSelectedHasChanged)
     {
         emit Selected(value.toBool(), id);
     }
@@ -158,7 +155,7 @@ QVariant VSimpleCurve::itemChange(QGraphicsItem::GraphicsItemChange change, cons
 //---------------------------------------------------------------------------------------------------------------------
 void VSimpleCurve::contextMenuEvent(QGraphicsSceneContextMenuEvent *event)
 {
-    emit ShowContextMenu(event);
+    emit ShowContextMenu(event, id);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -176,17 +173,9 @@ void VSimpleCurve::keyReleaseEvent(QKeyEvent *event)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VSimpleCurve::ShowPath()
+void VSimpleCurve::ScalePenWidth()
 {
-    if (not m_curve.isNull())
-    {
-        QPainterPath path;
-        m_isHovered ? path = m_curve->GetPath(PathDirection::Show) : path = m_curve->GetPath(PathDirection::Hide);
-        path.setFillRule( Qt::WindingFill );
-        setPath(path);
-    }
-    else
-    {
-        qWarning() << tr("VSimpleCurve::RefreshGeometry: pointer to curve is null.");
-    }
+    qreal width = m_isHovered ? qApp->Settings()->WidthMainLine() : qApp->Settings()->WidthHairLine();
+    width = ScaleWidth(width, SceneScale(scene()));
+    setPen(QPen(CorrectColor(this, m_curve->GetColor()), width, LineStyleToPenStyle(m_curve->GetPenStyle())));
 }

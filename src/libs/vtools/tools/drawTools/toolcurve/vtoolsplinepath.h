@@ -6,7 +6,7 @@
  **
  **  @brief
  **  @copyright
- **  This source code is part of the Valentine project, a pattern making
+ **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2013-2015 Valentina project
  **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
@@ -46,6 +46,26 @@
 class VSplinePath;
 template <class T> class QSharedPointer;
 
+struct VToolSplinePathInitData : VAbstractSplineInitData
+{
+    VToolSplinePathInitData()
+        : VAbstractSplineInitData(),
+          points(),
+          a1(),
+          a2(),
+          l1(),
+          l2(),
+          duplicate(0)
+    {}
+
+    QVector<quint32> points;
+    QVector<QString> a1;
+    QVector<QString> a2;
+    QVector<QString> l1;
+    QVector<QString> l2;
+    quint32 duplicate;
+};
+
 /**
  * @brief The VToolSplinePath class tool for creation spline path.
  */
@@ -53,28 +73,22 @@ class VToolSplinePath:public VAbstractSpline
 {
     Q_OBJECT
 public:
-    virtual ~VToolSplinePath() Q_DECL_OVERRIDE;
-    virtual void setDialog() Q_DECL_OVERRIDE;
-    static VToolSplinePath *Create(QSharedPointer<DialogTool> dialog, VMainGraphicsScene  *scene,
+    virtual ~VToolSplinePath() =default;
+    virtual void setDialog() override;
+    static VToolSplinePath *Create(const QPointer<DialogTool> &dialog, VMainGraphicsScene  *scene,
                                    VAbstractPattern *doc, VContainer *data);
-    static VToolSplinePath *Create(const quint32 _id, VSplinePath *path, const QString &color,
-                                   VMainGraphicsScene *scene, VAbstractPattern *doc, VContainer *data,
-                                   const Document &parse, const Source &typeCreation);
-    static VToolSplinePath *Create(const quint32 _id, const QVector<quint32> &points, QVector<QString> &a1,
-                                   QVector<QString> &a2, QVector<QString> &l1, QVector<QString> &l2,
-                                   const QString &color, quint32 duplicate, VMainGraphicsScene *scene,
-                                   VAbstractPattern *doc, VContainer *data, const Document &parse,
-                                   const Source &typeCreation);
+    static VToolSplinePath *Create(VToolSplinePathInitData &initData, VSplinePath *path);
+    static VToolSplinePath *Create(VToolSplinePathInitData &initData);
     static const QString ToolType;
     static const QString OldToolType;
     static void  UpdatePathPoints(VAbstractPattern *doc, QDomElement &element, const VSplinePath &path);
-    virtual int  type() const Q_DECL_OVERRIDE {return Type;}
+    virtual int  type() const override {return Type;}
     enum { Type = UserType + static_cast<int>(Tool::SplinePath)};
 
     VSplinePath getSplinePath()const;
     void        setSplinePath(const VSplinePath &splPath);
 
-    virtual void ShowVisualization(bool show) Q_DECL_OVERRIDE;
+    virtual void ShowVisualization(bool show) override;
 signals:
     /**
      * @brief RefreshLine refresh control line.
@@ -89,31 +103,41 @@ public slots:
 
     void          ControlPointChangePosition(const qint32 &indexSpline, const SplinePointPosition &position,
                                              const QPointF &pos);
-    virtual void  EnableToolMove(bool move) Q_DECL_OVERRIDE;
+    virtual void  EnableToolMove(bool move) override;
+protected slots:
+    virtual void ShowContextMenu(QGraphicsSceneContextMenuEvent *event, quint32 id=NULL_ID) override;
 protected:
-    virtual void  contextMenuEvent ( QGraphicsSceneContextMenuEvent * event ) Q_DECL_OVERRIDE;
-    virtual void  RemoveReferens() Q_DECL_OVERRIDE;
-    virtual void  SaveDialog(QDomElement &domElement) Q_DECL_OVERRIDE;
-    virtual void  SaveOptions(QDomElement &tag, QSharedPointer<VGObject> &obj) Q_DECL_OVERRIDE;
-    virtual void  mousePressEvent(QGraphicsSceneMouseEvent * event) Q_DECL_OVERRIDE;
-    virtual void  mouseReleaseEvent ( QGraphicsSceneMouseEvent * event ) Q_DECL_OVERRIDE;
-    virtual void  mouseMoveEvent(QGraphicsSceneMouseEvent * event) Q_DECL_OVERRIDE;
-    virtual void  hoverEnterEvent ( QGraphicsSceneHoverEvent * event ) Q_DECL_OVERRIDE;
-    virtual void  hoverLeaveEvent ( QGraphicsSceneHoverEvent * event ) Q_DECL_OVERRIDE;
-    virtual void  SetVisualization() Q_DECL_OVERRIDE;
+    virtual void RemoveReferens() override;
+    virtual void SaveDialog(QDomElement &domElement, QList<quint32> &oldDependencies,
+                            QList<quint32> &newDependencies) override;
+    virtual void SaveOptions(QDomElement &tag, QSharedPointer<VGObject> &obj) override;
+    virtual void mousePressEvent(QGraphicsSceneMouseEvent * event) override;
+    virtual void mouseReleaseEvent ( QGraphicsSceneMouseEvent * event ) override;
+    virtual void mouseMoveEvent(QGraphicsSceneMouseEvent * event) override;
+    virtual void hoverEnterEvent ( QGraphicsSceneHoverEvent * event ) override;
+    virtual void hoverLeaveEvent ( QGraphicsSceneHoverEvent * event ) override;
+    virtual void SetVisualization() override;
+    virtual void RefreshCtrlPoints() override;
+private slots:
+    void CurveReleased();
 private:
     Q_DISABLE_COPY(VToolSplinePath)
     QPointF oldPosition;
     int     splIndex;
 
-    VToolSplinePath(VAbstractPattern *doc, VContainer *data, quint32 id, const Source &typeCreation,
-                    QGraphicsItem *parent = nullptr);
+    bool moved;
+    QSharedPointer<VSplinePath> oldMoveSplinePath;
+    QSharedPointer<VSplinePath> newMoveSplinePath;
+
+    VToolSplinePath(const VToolSplinePathInitData &initData, QGraphicsItem *parent = nullptr);
 
     bool          IsMovable(int index) const;
-    virtual void  RefreshGeometry() Q_DECL_OVERRIDE;
     static void   AddPathPoint(VAbstractPattern *doc, QDomElement &domElement, const VSplinePoint &splPoint);
-    void          UpdateControlPoints(const VSpline &spl, VSplinePath &splPath, const qint32 &indexSpline) const;
+    void          UpdateControlPoints(const VSpline &spl, QSharedPointer<VSplinePath> &splPath,
+                                      qint32 indexSpline) const;
     void          SetSplinePathAttributes(QDomElement &domElement, const VSplinePath &path);
+
+    void UndoCommandMove(const VSplinePath &oldPath, const VSplinePath &newPath);
 };
 
 #endif // VTOOLSPLINEPATH_H

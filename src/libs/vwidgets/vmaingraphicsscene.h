@@ -6,7 +6,7 @@
  **
  **  @brief
  **  @copyright
- **  This source code is part of the Valentine project, a pattern making
+ **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2013-2015 Valentina project
  **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
@@ -66,7 +66,6 @@ public:
 public slots:
     void          ChoosedItem(quint32 id, const SceneObject &type);
     void          SelectedItem(bool selected, quint32 object, quint32 tool);
-    void          SetFactor(qreal factor);
     void          EnableItemMove(bool move);
     void          EnableDetailsMode(bool mode);
     void          ItemsSelection(const SelectionType &type);
@@ -94,9 +93,9 @@ public slots:
     void          ToggleNodePointHover(bool enabled);
     void          ToggleDetailHover(bool enabled);
 protected:
-    virtual void  mouseMoveEvent(QGraphicsSceneMouseEvent *event) Q_DECL_OVERRIDE;
-    virtual void  mousePressEvent(QGraphicsSceneMouseEvent *event) Q_DECL_OVERRIDE;
-    virtual void  mouseReleaseEvent(QGraphicsSceneMouseEvent *event) Q_DECL_OVERRIDE;
+    virtual void  mouseMoveEvent(QGraphicsSceneMouseEvent *event) override;
+    virtual void  mousePressEvent(QGraphicsSceneMouseEvent *event) override;
+    virtual void  mouseReleaseEvent(QGraphicsSceneMouseEvent *event) override;
 signals:
     /**
      * @brief mouseMove send new mouse position.
@@ -115,11 +114,6 @@ signals:
      */
     void          ChoosedObject(quint32 id, SceneObject type);
     void          SelectedObject(bool selected, quint32 object, quint32 tool);
-    /**
-     * @brief NewFactor send new scale factor.
-     * @param factor scene scale factor.
-     */
-    void          NewFactor(qreal factor);
     void          DisableItem(bool disable, const QString &namePP);
     void          EnableToolMove(bool move);
     void          CurveDetailsMode(bool mode);
@@ -156,9 +150,6 @@ private:
 
     /** @brief verScrollBar value vertical scroll bar. */
     qint32        verScrollBar;
-
-    /** @brief scaleFactor scale factor. */
-    qreal         scaleFactor;
 
     /** @brief _transform view transform value. */
     QTransform    _transform;

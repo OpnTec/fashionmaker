@@ -6,7 +6,7 @@
  **
  **  @brief
  **  @copyright
- **  This source code is part of the Valentine project, a pattern making
+ **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2013-2015 Valentina project
  **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
@@ -36,6 +36,7 @@
 #include <QtDebug>
 
 #include "vabstractcurve_p.h"
+#include "../vmisc/vabstractapplication.h"
 
 VAbstractCurve::VAbstractCurve(const GOType &type, const quint32 &idObject, const Draw &mode)
     :VGObject(type, idObject, mode), d (new VAbstractCurveData())
@@ -92,7 +93,6 @@ QVector<QPointF> VAbstractCurve::GetSegmentPoints(const QPointF &begin, const QP
     return GetSegmentPoints(GetPoints(), begin, end, reverse);
 }
 
-
 //---------------------------------------------------------------------------------------------------------------------
 QVector<QPointF> VAbstractCurve::FromBegin(const QVector<QPointF> &points, const QPointF &begin, bool *ok)
 {
@@ -116,12 +116,16 @@ QVector<QPointF> VAbstractCurve::FromBegin(const QVector<QPointF> &points, const
                 if (IsPointOnLineSegment(begin, points.at(i), points.at(i+1)))
                 {
                     theBegin = true;
-                    segment.append(begin);
+
+                    if (not VFuzzyComparePoints(begin, points.at(i+1)))
+                    {
+                        segment.append(begin);
+                    }
+
                     if (i == points.count()-2)
                     {
                          segment.append(points.at(i+1));
                     }
-                    continue;
                 }
             }
             else
@@ -170,23 +174,14 @@ QVector<QPointF> VAbstractCurve::ToEnd(const QVector<QPointF> &points, const QPo
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QPainterPath VAbstractCurve::GetPath(PathDirection direction) const
+QPainterPath VAbstractCurve::GetPath() const
 {
     QPainterPath path;
 
-    QVector<QPointF> points = GetPoints();
+    const QVector<QPointF> points = GetPoints();
     if (points.count() >= 2)
     {
-        for (qint32 i = 0; i < points.count()-1; ++i)
-        {
-            path.moveTo(points.at(i));
-            path.lineTo(points.at(i+1));
-        }
-
-        if (direction == PathDirection::Show && points.count() >= 3)
-        {
-            path.addPath(ShowDirection(points));
-        }
+        path.addPolygon(QPolygonF(points));
     }
     else
     {
@@ -293,6 +288,30 @@ void VAbstractCurve::SetColor(const QString &color)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+QString VAbstractCurve::GetPenStyle() const
+{
+    return d->penStyle;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VAbstractCurve::SetPenStyle(const QString &penStyle)
+{
+    d->penStyle = penStyle;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+qreal VAbstractCurve::GetApproximationScale() const
+{
+    return d->approximationScale;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VAbstractCurve::SetApproximationScale(qreal value)
+{
+    d->approximationScale = value;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 QVector<QPointF> VAbstractCurve::CurveIntersectLine(const QVector<QPointF> &points, const QLineF &line)
 {
     QVector<QPointF> intersections;
@@ -309,10 +328,68 @@ QVector<QPointF> VAbstractCurve::CurveIntersectLine(const QVector<QPointF> &poin
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QPainterPath VAbstractCurve::ShowDirection(const QVector<QPointF> &points) const
+bool VAbstractCurve::CurveIntersectAxis(const QPointF &point, qreal angle, const QVector<QPointF> &curvePoints,
+                                        QPointF *intersectionPoint)
 {
-    QPainterPath path;
+    SCASSERT(intersectionPoint != nullptr)
 
+    QRectF rec = QRectF(0, 0, INT_MAX, INT_MAX);
+    rec.translate(-INT_MAX/2.0, -INT_MAX/2.0);
+
+    const QLineF axis = VGObject::BuildAxis(point, angle, rec);
+    const QVector<QPointF> points = VAbstractCurve::CurveIntersectLine(curvePoints, axis);
+
+    if (points.size() > 0)
+    {
+        if (points.size() == 1)
+        {
+            *intersectionPoint = points.at(0);
+            return true;
+        }
+
+        QMap<qreal, int> forward;
+        QMap<qreal, int> backward;
+
+        for ( qint32 i = 0; i < points.size(); ++i )
+        {
+            if (points.at(i) == point)
+            { // Always seek unique intersection
+                continue;
+            }
+
+            const QLineF length(point, points.at(i));
+            if (qAbs(length.angle()-angle) < 0.1)
+            {
+                forward.insert(length.length(), i);
+            }
+            else
+            {
+                backward.insert(length.length(), i);
+            }
+        }
+
+        // Closest point is not always want we need. First return point in forward direction if exists.
+        if (not forward.isEmpty())
+        {
+            *intersectionPoint = points.at(forward.first());
+            return true;
+        }
+        else if (not backward.isEmpty())
+        {
+            *intersectionPoint = points.at(backward.first());
+            return true;
+        }
+    }
+
+    return false;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QVector<DirectionArrow> VAbstractCurve::DirectionArrows() const
+{
+    QVector<DirectionArrow> arrows;
+
+    const QVector<QPointF> points = GetPoints();
     if (points.count() >= 2)
     {
         /*Need find coordinate midle of curve.
@@ -336,17 +413,52 @@ QPainterPath VAbstractCurve::ShowDirection(const QVector<QPointF> &points) const
         //Reverse line because we want start arrow from this point
         arrow = QLineF(arrow.p2(), arrow.p1());
         const qreal angle = arrow.angle();//we each time change line angle, better save original angle value
-        arrow.setLength(14);//arrow length in pixels
+        arrow.setLength(VAbstractCurve::LengthCurveDirectionArrow());
+
+        DirectionArrow dArrow;
 
         arrow.setAngle(angle-35);
-        path.moveTo(arrow.p1());
-        path.lineTo(arrow.p2());
+        dArrow.first = arrow;
 
         arrow.setAngle(angle+35);
-        path.moveTo(arrow.p1());
-        path.lineTo(arrow.p2());
+        dArrow.second = arrow;
+
+        arrows.append(dArrow);
+    }
+    return arrows;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QPainterPath VAbstractCurve::ShowDirection(const QVector<DirectionArrow> &arrows, qreal width)
+{
+    QPainterPath path;
+
+    for (auto arrow : arrows)
+    {
+        if (not arrow.first.isNull() && not arrow.second.isNull())
+        {
+            QPainterPath arrowPath;
+
+            QLineF line = arrow.first;
+            line.setLength(width);
+            arrowPath.moveTo(line.p1());
+            arrowPath.lineTo(line.p2());
+
+            line = arrow.second;
+            line.setLength(width);
+            arrowPath.moveTo(line.p1());
+            arrowPath.lineTo(line.p2());
+
+            path.addPath(arrowPath);
+        }
     }
     return path;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+qreal VAbstractCurve::LengthCurveDirectionArrow()
+{
+    return qApp->Settings()->GetLineWidth() * 8.0;
 }
 
 //---------------------------------------------------------------------------------------------------------------------

@@ -6,7 +6,7 @@
  **
  **  @brief
  **  @copyright
- **  This source code is part of the Valentine project, a pattern making
+ **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2013-2015 Valentina project
  **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
@@ -52,14 +52,14 @@ enum class UndoCommand: char { AddPatternPiece,
                                SaveDetailOptions,
                                SavePieceOptions,
                                SavePiecePathOptions,
+                               SavePlaceLabelOptions,
                                MovePiece,
                                DeleteTool,
                                DeletePatternPiece,
                                RenamePP,
                                MoveLabel,
                                MoveDoubleLabel,
-                               RotationMoveLabel,
-                               TogglePieceInLayout
+                               RotationMoveLabel
                              };
 
 class VPattern;
@@ -68,8 +68,8 @@ class VUndoCommand : public QObject, public QUndoCommand
 {
     Q_OBJECT
 public:
-    VUndoCommand(const QDomElement &xml, VAbstractPattern *doc, QUndoCommand *parent = 0);
-    virtual ~VUndoCommand() Q_DECL_OVERRIDE;
+    VUndoCommand(const QDomElement &xml, VAbstractPattern *doc, QUndoCommand *parent = nullptr);
+    virtual ~VUndoCommand() =default;
 signals:
     void ClearScene();
     void NeedFullParsing();
@@ -90,6 +90,8 @@ protected:
 
     void         IncrementReferences(const QVector<VPieceNode> &nodes) const;
     void         DecrementReferences(const QVector<VPieceNode> &nodes) const;
+
+    QDomElement  GetDestinationObject(quint32 idTool, quint32 idPoint) const;
 private:
     Q_DISABLE_COPY(VUndoCommand)
 };

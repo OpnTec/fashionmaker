@@ -6,7 +6,7 @@
  **
  **  @brief
  **  @copyright
- **  This source code is part of the Valentine project, a pattern making
+ **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2016 Valentina project
  **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
@@ -60,32 +60,32 @@ public:
     VCubicBezier &operator=(VCubicBezier &&curve) Q_DECL_NOTHROW { Swap(curve); return *this; }
 #endif
 
-    void Swap(VCubicBezier &curve) Q_DECL_NOTHROW
+    inline void Swap(VCubicBezier &curve) Q_DECL_NOTHROW
     { VAbstractCubicBezier::Swap(curve); std::swap(d, curve.d); }
 
-    virtual VPointF GetP1() const Q_DECL_OVERRIDE;
+    virtual VPointF GetP1() const override;
     void            SetP1(const VPointF &p);
 
-    virtual VPointF GetP2() const Q_DECL_OVERRIDE;
+    virtual VPointF GetP2() const override;
     void    SetP2(const VPointF &p);
 
-    virtual VPointF GetP3() const Q_DECL_OVERRIDE;
+    virtual VPointF GetP3() const override;
     void    SetP3(const VPointF &p);
 
-    virtual VPointF GetP4() const Q_DECL_OVERRIDE;
+    virtual VPointF GetP4() const override;
     void            SetP4(const VPointF &p);
 
-    virtual qreal            GetStartAngle() const Q_DECL_OVERRIDE;
-    virtual qreal            GetEndAngle() const Q_DECL_OVERRIDE;
-    virtual qreal            GetLength() const Q_DECL_OVERRIDE;
-    virtual QVector<QPointF> GetPoints() const Q_DECL_OVERRIDE;
+    virtual qreal            GetStartAngle() const override;
+    virtual qreal            GetEndAngle() const override;
+    virtual qreal            GetLength() const override;
+    virtual QVector<QPointF> GetPoints() const override;
 
-    virtual qreal GetC1Length() const Q_DECL_OVERRIDE;
-    virtual qreal GetC2Length() const Q_DECL_OVERRIDE;
+    virtual qreal GetC1Length() const override;
+    virtual qreal GetC2Length() const override;
 
 protected:
-    virtual QPointF GetControlPoint1() const Q_DECL_OVERRIDE;
-    virtual QPointF GetControlPoint2() const Q_DECL_OVERRIDE;
+    virtual QPointF GetControlPoint1() const override;
+    virtual QPointF GetControlPoint2() const override;
 
 private:
     QSharedDataPointer<VCubicBezierData> d;

@@ -39,9 +39,9 @@ class QMUPARSERSHARED_EXPORT QmuFormulaBase : public QmuParser
 {
 public:
     QmuFormulaBase();
-    virtual ~QmuFormulaBase() Q_DECL_OVERRIDE;
+    virtual ~QmuFormulaBase() override;
 
-    virtual void InitCharSets() Q_DECL_OVERRIDE;
+    virtual void InitCharSets() override;
 
     static void RemoveAll(QMap<int, QString> &map, const QString &val);
 

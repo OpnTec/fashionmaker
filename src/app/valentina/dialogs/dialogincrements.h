@@ -6,7 +6,7 @@
  **
  **  @brief
  **  @copyright
- **  This source code is part of the Valentine project, a pattern making
+ **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2013-2015 Valentina project
  **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
@@ -33,6 +33,8 @@
 #include "../xml/vpattern.h"
 #include "../vmisc/vtablesearch.h"
 
+#include <QPair>
+
 class VIndividualMeasurements;
 
 namespace Ui
@@ -47,19 +49,23 @@ class DialogIncrements : public DialogTool
 {
     Q_OBJECT
 public:
-     DialogIncrements(VContainer *data, VPattern *doc, QWidget *parent = nullptr);
-     virtual ~DialogIncrements() Q_DECL_OVERRIDE;
+    DialogIncrements(VContainer *data, VPattern *doc, QWidget *parent = nullptr);
+    virtual ~DialogIncrements() override;
+
+    void RestoreAfterClose();
 
 signals:
-    /**
-     * @brief FullUpdateTree signal update data for dom document
-     */
-    void                 FullUpdateTree(const Document &parse);
+    void UpdateProperties();
+
+public slots:
+    void FullUpdateFromFile();
 
 protected:
-    virtual void closeEvent ( QCloseEvent * event ) Q_DECL_OVERRIDE;
-    virtual void changeEvent ( QEvent * event) Q_DECL_OVERRIDE;
-    virtual bool eventFilter(QObject *object, QEvent *event) Q_DECL_OVERRIDE;
+    virtual void closeEvent ( QCloseEvent * event ) override;
+    virtual void changeEvent ( QEvent * event) override;
+    virtual bool eventFilter(QObject *object, QEvent *event) override;
+    virtual void showEvent( QShowEvent *event ) override;
+    virtual void resizeEvent(QResizeEvent *event) override;
 private slots:
     void ShowIncrementDetails();
     void AddIncrement();
@@ -71,7 +77,7 @@ private slots:
     void SaveIncrFormula();
     void DeployFormula();
     void Fx();
-    void FullUpdateFromFile();
+    void RefreshPattern();
 
 private:
     Q_DISABLE_COPY(DialogIncrements)
@@ -85,14 +91,28 @@ private:
     /** @brief doc dom document container */
     VPattern             *doc;
 
+    /** @brief m_completeData need to show all internal variables */
+    VContainer           m_completeData;
+
     int                  formulaBaseHeight;
+    int                  formulaBaseHeightPC;
 
     QSharedPointer<VTableSearch> search;
+    QSharedPointer<VTableSearch> searchPC;
+
+    bool hasChanges;
+
+    QVector<QPair<QString, QString>> renameList;
 
     template <typename T>
     void                 FillTable(const QMap<QString, T> &varTable, QTableWidget *table);
 
+    void                 FillIncrementsTable(QTableWidget *table,
+                                             const QMap<QString, QSharedPointer<VIncrement> > &increments,
+                                             bool takePreviewCalculations, bool freshCall = false);
+
     void                 FillIncrements(bool freshCall = false);
+    void                 FillPreviewCalculations(bool freshCall = false);
     void                 FillLengthsLines();
     void                 FillLengthLinesAngles();
     void                 FillLengthsCurves();
@@ -109,8 +129,16 @@ private:
     QString ClearIncrementName(const QString &name) const;
 
     bool    EvalIncrementFormula(const QString &formula, bool fromUser, VContainer *data, QLabel *label);
-    void    Controls();
-    void    EnableDetails(bool enabled);
+    void    Controls(QTableWidget *table);
+    void    EnableDetails(QTableWidget *table, bool enabled);
+
+    void LocalUpdateTree();
+
+    bool IncrementUsed(const QString &name) const;
+
+    void CacheRename(const QString &name, const QString &newName);
+
+    void ShowTableIncrementDetails(QTableWidget *table);
 };
 
 #endif // DIALOGINCREMENTS_H

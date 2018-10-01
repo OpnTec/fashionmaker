@@ -25,6 +25,36 @@ win32{
     VCOPY = $$QMAKE_COPY /D
 }
 
+macx{
+    # Check which minimal OSX version supports current Qt version
+    # See page https://doc.qt.io/qt-5/supported-platforms-and-configurations.html
+    equals(QT_MAJOR_VERSION, 5):greaterThan(QT_MINOR_VERSION, 10) {# Qt 5.11
+        QMAKE_MACOSX_DEPLOYMENT_TARGET = 10.11
+    } else {
+        equals(QT_MAJOR_VERSION, 5):greaterThan(QT_MINOR_VERSION, 9) {# Qt 5.10
+            QMAKE_MACOSX_DEPLOYMENT_TARGET = 10.11
+        } else {
+            equals(QT_MAJOR_VERSION, 5):greaterThan(QT_MINOR_VERSION, 8) {# Qt 5.9
+                QMAKE_MACOSX_DEPLOYMENT_TARGET = 10.10
+            } else {
+                equals(QT_MAJOR_VERSION, 5):greaterThan(QT_MINOR_VERSION, 7) {# Qt 5.8
+                    QMAKE_MACOSX_DEPLOYMENT_TARGET = 10.9
+                } else {
+                    equals(QT_MAJOR_VERSION, 5):greaterThan(QT_MINOR_VERSION, 6) {# Qt 5.7
+                        QMAKE_MACOSX_DEPLOYMENT_TARGET = 10.8
+                    } else {
+                        equals(QT_MAJOR_VERSION, 5):greaterThan(QT_MINOR_VERSION, 3) {# Qt 5.4
+                            QMAKE_MACOSX_DEPLOYMENT_TARGET = 10.7
+                        } else {
+                            QMAKE_MACOSX_DEPLOYMENT_TARGET = 10.6
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
 # See question on StackOwerflow "QSslSocket error when SSL is NOT used" (http://stackoverflow.com/a/31277055/3045403)
 # Copy of answer:
 # We occasionally had customers getting very similar warning messages but the software was also crashing.
@@ -37,8 +67,11 @@ win32{
 win32 {
     INSTALL_OPENSSL += \
                        ../../../dist/win/libeay32.dll \
-                       ../../../dist/win/ssleay32.dll
+                       ../../../dist/win/ssleay32.dll \
+                       ../../../dist/win/msvcr120.dll
 }
+
+DEFINES += QT_NO_FOREACH
 
 macx{
     # QTBUG-31034 qmake doesn't allow override QMAKE_CXX
@@ -46,7 +79,7 @@ macx{
 }
 
 CONFIG(release, debug|release){
-    !noDebugSymbols:win32:!win32-msvc*{
+    !noDebugSymbols:win32:!*msvc*{
         unset(QMAKE_STRIP)
         QMAKE_STRIP = echo # we do striping manualy
     }
@@ -83,7 +116,9 @@ defineTest(copyToDestdir) {
 
     for(FILE, files) {
         unix{
-            QMAKE_POST_LINK += ln -s -f $$quote($$FILE) $$quote($$DDIR/$$basename(FILE)) $$escape_expand(\\n\\t)
+            !exists($$DDIR/$$basename(FILE)) {
+                QMAKE_POST_LINK += ln -s -f $$quote($$FILE) $$quote($$DDIR/$$basename(FILE)) & $$escape_expand(\\n\\t)
+            }
         } else {
             !exists($$DDIR/$$basename(FILE)) {
                 # Replace slashes in paths with backslashes for Windows
@@ -110,7 +145,7 @@ defineTest(forceCopyToDestdir) {
 
     for(FILE, files) {
         unix{
-            QMAKE_POST_LINK += ln -s -f $$quote($$FILE) $$quote($$DDIR/$$basename(FILE)) $$escape_expand(\\n\\t)
+            QMAKE_POST_LINK += ln -s -f $$quote($$FILE) $$quote($$DDIR/$$basename(FILE)) & $$escape_expand(\\n\\t)
         } else {
             # Replace slashes in paths with backslashes for Windows
             win32{
@@ -135,7 +170,7 @@ defineReplace(set_PCH){
         PRECOMPILED_HEADER = stable.h # Header file with all all static headers: libraries, static local headers.
         export(PRECOMPILED_HEADER) # export value to global variable
 
-        win32-msvc* {
+        *msvc* {
             PRECOMPILED_SOURCE = stable.cpp # MSVC need also cpp file.
             export(PRECOMPILED_SOURCE) # export value to global variable.
         }
@@ -144,28 +179,33 @@ defineReplace(set_PCH){
 }
 
 defineReplace(enable_ccache){
-    no_ccache{ # For enable run qmake with CONFIG+=no_ccache
-        $$set_PCH()
+    *clang*:clazy {
+        QMAKE_CXX = clazy
+        export(QMAKE_CXX) # export value to global variable.
     } else {
-        # ccache support only Unix systems.
-        unix:{
-            # This need for turn on ccache.
-            *-g++{
-                QMAKE_CC = ccache gcc
-                export(QMAKE_CC) # export value to global variable.
-
-                QMAKE_CXX = ccache g++
-                export(QMAKE_CXX) # export value to global variable.
-            }
-            clang*{
-                QMAKE_CC = ccache clang
-                export(QMAKE_CC) # export value to global variable.
-
-                QMAKE_CXX = ccache clang++
-                export(QMAKE_CXX) # export value to global variable.
-            }
-        } else {
+        no_ccache{ # For enable run qmake with CONFIG+=no_ccache
             $$set_PCH()
+        } else {
+            # ccache support only Unix systems.
+            unix:{
+                # This need for turn on ccache.
+                *g++*{
+                    QMAKE_CC = ccache gcc
+                    export(QMAKE_CC) # export value to global variable.
+
+                    QMAKE_CXX = ccache g++
+                    export(QMAKE_CXX) # export value to global variable.
+                }
+                *clang*{
+                    QMAKE_CC = ccache clang
+                    export(QMAKE_CC) # export value to global variable.
+
+                    QMAKE_CXX = ccache clang++
+                    export(QMAKE_CXX) # export value to global variable.
+                }
+            } else {
+                $$set_PCH()
+            }
         }
     }
     return(true)
@@ -224,7 +264,9 @@ ISYSTEM += \
     -isystem "$$[QT_INSTALL_HEADERS]/QtPrintSupport" \
     -isystem "$$[QT_INSTALL_HEADERS]/QtSvg" \
     -isystem "$$[QT_INSTALL_HEADERS]/QtNetwork" \
-    -isystem "$$[QT_INSTALL_HEADERS]/QtTest"
+    -isystem "$$[QT_INSTALL_HEADERS]/QtTest" \
+    -isystem "$$[QT_INSTALL_HEADERS]/QtConcurrent" \
+    -isystem "$$[QT_INSTALL_HEADERS]/QtOpenGL"
 } else {
 ISYSTEM += \
     -isystem "$$[QT_INSTALL_LIBS]/QtWidgets.framework/Headers/" \
@@ -244,7 +286,11 @@ ISYSTEM += \
     -isystem "$$[QT_INSTALL_LIBS]/QtNetwork.framework/Headers/" \
     -isystem "$$[QT_INSTALL_LIBS]/QtNetwork.framework/Versions/5/Headers/" \
     -isystem "$$[QT_INSTALL_LIBS]/QtTest.framework/Headers/" \
-    -isystem "$$[QT_INSTALL_LIBS]/QtTest.framework/Versions/5/Headers/"
+    -isystem "$$[QT_INSTALL_LIBS]/QtTest.framework/Versions/5/Headers/" \
+    -isystem "$$[QT_INSTALL_LIBS]/QtConcurrent.framework/Headers/" \
+    -isystem "$$[QT_INSTALL_LIBS]/QtConcurrent.framework/Versions/5/Headers/" \
+    -isystem "$$[QT_INSTALL_LIBS]/QtOpenGL.framework/Headers/" \
+    -isystem "$$[QT_INSTALL_LIBS]/QtOpenGL.framework/Versions/5/Headers/"
 }
 
 # Usefull GCC warnings keys.
@@ -264,7 +310,7 @@ GCC_DEBUG_CXXFLAGS += \
     -Wold-style-cast \
     -Wconversion \
     -Winit-self \
-    -Wstack-protector \
+#    -Wstack-protector \
     -Wunreachable-code \
     -Wcast-align \
     -Wcast-qual \
@@ -278,7 +324,7 @@ GCC_DEBUG_CXXFLAGS += \
 #    -Winline \
     -Winvalid-pch \
 #    -Wunsafe-loop-optimizations \
-    -Wlong-long \
+#    -Wlong-long \ We have been using C++11
     -Wmissing-format-attribute \
     -Wswitch-default \
     -Wuninitialized \
@@ -289,12 +335,13 @@ GCC_DEBUG_CXXFLAGS += \
     -Wpointer-arith \
     -Wstrict-null-sentinel \
     -Wstrict-overflow=5 \
+    -Wno-error=strict-overflow \
     -Wundef \
     -Wno-unused \
     -ftrapv
 
-# Good support Q_NULLPTR come later
-greaterThan(QT_MAJOR_VERSION, 4):greaterThan(QT_MINOR_VERSION, 4) {
+# Good support Q_NULLPTR came later
+greaterThan(QT_MAJOR_VERSION, 4):greaterThan(QT_MINOR_VERSION, 5) {
 GCC_DEBUG_CXXFLAGS += -Wzero-as-null-pointer-constant
 }
 
@@ -365,7 +412,7 @@ CLANG_DEBUG_CXXFLAGS += \
     -Wauto-var-id \
     -Wavailability \
     -Wbackslash-newline-escape \
-    -Wbad-array-new-length \
+#    -Wbad-array-new-length \
     -Wbad-function-cast \
     -Wbind-to-temporary-copy \
         -Wno-c++98-compat-bind-to-temporary-copy \
@@ -491,7 +538,6 @@ CLANG_DEBUG_CXXFLAGS += \
     -Wincomplete-implementation \
     -Wincomplete-module \
     -Wincomplete-umbrella \
-    -Winherited-variadic-ctor \
     -Winit-self \
     -Winitializer-overrides \
 #    -Winline \
@@ -517,7 +563,7 @@ CLANG_DEBUG_CXXFLAGS += \
         -Wno-c++98-compat-local-type-template-args \
     -Wlogical-not-parentheses \
     -Wlogical-op-parentheses \
-    -Wlong-long \
+#    -Wlong-long \ We have been using C++11
     -Wloop-analysis \
     -Wmain \
     -Wmain-return-type \
@@ -582,7 +628,6 @@ CLANG_DEBUG_CXXFLAGS += \
     -Wreadonly-iboutlet-property \
     -Wreceiver-expr \
     -Wreceiver-forward-class \
-    -Wreceiver-is-weak \
     -Wredundant-decls \
     -Wreinterpret-base-class \
     -Wreorder \
@@ -615,7 +660,7 @@ CLANG_DEBUG_CXXFLAGS += \
     -Wsizeof-pointer-memaccess \
     -Wsometimes-uninitialized \
     -Wsource-uses-openmp \
-    -Wstack-protector \
+#    -Wstack-protector \
     -Wstatic-float-init \
     -Wstatic-in-inline \
     -Wstatic-local-in-inline \
@@ -701,10 +746,9 @@ CLANG_DEBUG_CXXFLAGS += \
     -fcolor-diagnostics \
     -fms-extensions # Need for pragma message
 
-unix:!macx{
-    #Clang on MAC OS X doesn't support all options
-    CLANG_DEBUG_CXXFLAGS += \
-        -Warc-abi
+freebsd-clang* {
+    # https://bitbucket.org/dismine/valentina/issues/877/lots-of-warnings-unknown-warning-option
+    CLANG_DEBUG_CXXFLAGS -= -Wextended-offsetof
 }
 
 ICC_DEBUG_CXXFLAGS += \
@@ -737,6 +781,7 @@ ICC_DEBUG_CXXFLAGS += \
 GCC_DEBUG_CXXFLAGS += \
     -O0 \
     -Wall \
+    -Wno-error=strict-overflow \
     -Wextra \
     -fno-omit-frame-pointer # Need for exchndl.dll
 
@@ -786,6 +831,7 @@ MSVC_DEBUG_CXXFLAGS += \
     # standard library headers, so it's impractical to leave them on.
     -wd4619 \ # there is no warning number 'XXXX'
     -wd4668 \ # XXX is not defined as a preprocessor macro
+    -wd5045 \ # Compiler will insert Spectre mitigation for memory load if /Qspectre switch specified
     # Because Microsoft doesn't provide a way to suppress warnings in headers we will suppress
     # all warnings we meet in headers globally
     -wd4548 \

@@ -29,7 +29,7 @@
         </font>
        </property>
        <property name="text">
-        <string>A new version of %1 is available!</string>
+        <string>%1 update is available!</string>
        </property>
       </widget>
      </item>

@@ -6,7 +6,7 @@
  **
  **  @brief
  **  @copyright
- **  This source code is part of the Valentine project, a pattern making
+ **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2015 Valentina project
  **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
@@ -47,61 +47,28 @@ class VAbstractSimple : public QObject
 {
     Q_OBJECT
 public:
-    VAbstractSimple(quint32 id, const QColor &currentColor, Unit patternUnit, qreal *factor = nullptr,
-                    QObject *parent = nullptr);
-    virtual ~VAbstractSimple();
+    VAbstractSimple(quint32 id, QObject *parent = nullptr);
+    virtual ~VAbstractSimple() = default;
 
     virtual void ToolSelectionType(const SelectionType &type);
-
-    QColor GetCurrentColor() const;
-
-    virtual void SetEnabled(bool enabled);
 
     GOType GetType() const;
     void   SetType(const GOType &value);
 
 signals:
-    void ShowContextMenu(QGraphicsSceneContextMenuEvent * event);
+    void ShowContextMenu(QGraphicsSceneContextMenuEvent * event, quint32 id = NULL_ID);
     void Delete();
-
-public slots:
-    void ContextMenu(QGraphicsSceneContextMenuEvent * event);
 
 protected:
     /** @brief id spline id. */
     quint32 id;
 
-    /** @brief factor scale factor. */
-    qreal  *factor;
-
-    /** @brief currentColor current color. */
-    QColor  currentColor;
-
-    bool    enabled;
-
-    Unit    patternUnit;
-
     SelectionType selectionType;
 
     GOType  type;
 
-    QColor CorrectColor(const QColor &color) const;
-
-    template <class T>
-    void SetPen(T *item, const QColor &color, qreal width);
-
 private:
     Q_DISABLE_COPY(VAbstractSimple)
-
-    const static qreal m_defFactor;
 };
-
-//---------------------------------------------------------------------------------------------------------------------
-template <class T>
-void VAbstractSimple::SetPen(T *item, const QColor &color, qreal width)
-{
-    SCASSERT(item)
-    item->setPen(QPen(CorrectColor(color), ToPixel(width, patternUnit)/ *factor, Qt::SolidLine, Qt::RoundCap));
-}
 
 #endif // VABSTRACTSIMPLE_H

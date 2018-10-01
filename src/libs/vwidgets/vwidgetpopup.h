@@ -6,7 +6,7 @@
  **
  **  @brief
  **  @copyright
- **  This source code is part of the Valentine project, a pattern making
+ **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2013-2015 Valentina project
  **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
@@ -55,7 +55,7 @@ public:
         If \a parent not specified (default), then popup widget gets
         attribute Qt::WA_DeleteOnClose and will be deleted after close.
       */
-    explicit VWidgetPopup(QWidget *parent = 0);
+    explicit VWidgetPopup(QWidget *parent = nullptr);
 
     /** Sets widget to be popped up to \a widget.
         If \a own is true then the widget will be reparented to the popup widget.

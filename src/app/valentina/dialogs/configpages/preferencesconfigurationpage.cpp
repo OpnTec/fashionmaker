@@ -6,7 +6,7 @@
  **
  **  @brief
  **  @copyright
- **  This source code is part of the Valentine project, a pattern making
+ **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2017 Valentina project
  **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
@@ -29,10 +29,10 @@
 #include "preferencesconfigurationpage.h"
 #include "ui_preferencesconfigurationpage.h"
 #include "../../core/vapplication.h"
+#include "../vpatterndb/pmsystems.h"
 
 #include <QDir>
 #include <QDirIterator>
-#include <QMessageBox>
 #include <QTimer>
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -45,21 +45,31 @@ PreferencesConfigurationPage::PreferencesConfigurationPage(QWidget *parent)
       m_labelLangChanged(false)
 {
     ui->setupUi(this);
+    RetranslateUi();
+
+    ui->tabWidget->setCurrentIndex(0);
+
+    // Tab General
     ui->autoSaveCheck->setChecked(qApp->ValentinaSettings()->GetAutosaveState());
 
     InitLanguages(ui->langCombo);
-    connect(ui->langCombo, static_cast<void (QComboBox::*)(int)>(&QComboBox::currentIndexChanged), this, [this]()
+    connect(ui->langCombo, QOverload<int>::of(&QComboBox::currentIndexChanged), this, [this]()
     {
         m_langChanged = true;
     });
 
     //-------------------- Decimal separator setup
-    ui->osOptionCheck->setText(tr("With OS options") + QString(" (%1)").arg(QLocale().decimalPoint()));
     ui->osOptionCheck->setChecked(qApp->ValentinaSettings()->GetOsSeparator());
 
     //----------------------- Unit setup
-    InitUnits();
-    connect(ui->unitCombo, static_cast<void (QComboBox::*)(int)>(&QComboBox::currentIndexChanged), this, [this]()
+    // set default unit
+    const qint32 indexUnit = ui->unitCombo->findData(qApp->ValentinaSettings()->GetUnit());
+    if (indexUnit != -1)
+    {
+        ui->unitCombo->setCurrentIndex(indexUnit);
+    }
+
+    connect(ui->unitCombo, QOverload<int>::of(&QComboBox::currentIndexChanged), this, [this]()
     {
         m_unitChanged = true;
     });
@@ -72,22 +82,21 @@ PreferencesConfigurationPage::PreferencesConfigurationPage(QWidget *parent)
     {
         ui->labelCombo->setCurrentIndex(index);
     }
-    connect(ui->labelCombo, static_cast<void (QComboBox::*)(int)>(&QComboBox::currentIndexChanged), this, [this]()
+    connect(ui->labelCombo, QOverload<int>::of(&QComboBox::currentIndexChanged), this, [this]()
     {
         m_labelLangChanged = true;
     });
 
     //---------------------- Pattern making system
-    InitPMSystems(ui->systemCombo);
     ui->systemBookValueLabel->setFixedHeight(4 * QFontMetrics(ui->systemBookValueLabel->font()).lineSpacing());
-    connect(ui->systemCombo, static_cast<void (QComboBox::*)(int)>(&QComboBox::currentIndexChanged), this, [this]()
+    connect(ui->systemCombo, QOverload<int>::of(&QComboBox::currentIndexChanged), this, [this]()
     {
         m_systemChanged = true;
-        QString text = qApp->TrVars()->PMSystemAuthor(CURRENT_DATA(ui->systemCombo).toString());
+        QString text = qApp->TrVars()->PMSystemAuthor(ui->systemCombo->currentData().toString());
         ui->systemAuthorValueLabel->setText(text);
         ui->systemAuthorValueLabel->setToolTip(text);
 
-        text = qApp->TrVars()->PMSystemBook(CURRENT_DATA(ui->systemCombo).toString());
+        text = qApp->TrVars()->PMSystemBook(ui->systemCombo->currentData().toString());
         ui->systemBookValueLabel->setPlainText(text);
     });
 
@@ -97,16 +106,9 @@ PreferencesConfigurationPage::PreferencesConfigurationPage(QWidget *parent)
     {
         ui->systemCombo->setCurrentIndex(index);
     }
-    //---------------------- Send crash reports
-    ui->sendReportCheck->setChecked(qApp->ValentinaSettings()->GetSendReportState());
-    ui->description = new QLabel(tr("After each crash Valentina collects information that may help us fix the "
-                                    "problem. We do not collect any personal information. Find more about what %1"
-                                    "kind of information%2 we collect.")
-                                 .arg("<a href=\"https://wiki.valentinaproject.org/wiki/UserManual:Crash_reports\">")
-                                 .arg("</a>"));
 
     //----------------------------- Pattern Editing
-    connect(ui->resetWarningsButton, &QPushButton::released, []()
+    connect(ui->resetWarningsButton, &QPushButton::released, this, []()
     {
         VSettings *settings = qApp->ValentinaSettings();
 
@@ -114,8 +116,34 @@ PreferencesConfigurationPage::PreferencesConfigurationPage(QWidget *parent)
         settings->SetConfirmFormatRewriting(true);
     });
 
+    VSettings *settings = qApp->ValentinaSettings();
+
+    ui->checkBoxFreeCurve->setChecked(settings->IsFreeCurveMode());
+    ui->checkBoxZoomFitBestCurrentPP->setChecked(settings->IsDoubleClickZoomFitBestCurrentPP());
+
     //----------------------- Toolbar
-    ui->toolBarStyleCheck->setChecked(qApp->ValentinaSettings()->GetToolBarStyle());
+    ui->toolBarStyleCheck->setChecked(settings->GetToolBarStyle());
+
+    // Tab Scrolling
+    ui->spinBoxDuration->setMinimum(VSettings::scrollingDurationMin);
+    ui->spinBoxDuration->setMaximum(VSettings::scrollingDurationMax);
+    ui->spinBoxDuration->setValue(settings->GetScrollingDuration());
+
+    ui->spinBoxUpdateInterval->setMinimum(VSettings::scrollingUpdateIntervalMin);
+    ui->spinBoxUpdateInterval->setMaximum(VSettings::scrollingUpdateIntervalMax);
+    ui->spinBoxUpdateInterval->setValue(settings->GetScrollingUpdateInterval());
+
+    ui->doubleSpinBoxSensor->setMinimum(VSettings::sensorMouseScaleMin);
+    ui->doubleSpinBoxSensor->setMaximum(VSettings::sensorMouseScaleMax);
+    ui->doubleSpinBoxSensor->setValue(settings->GetSensorMouseScale());
+
+    ui->doubleSpinBoxWheel->setMinimum(VSettings::wheelMouseScaleMin);
+    ui->doubleSpinBoxWheel->setMaximum(VSettings::wheelMouseScaleMax);
+    ui->doubleSpinBoxWheel->setValue(settings->GetWheelMouseScale());
+
+    ui->doubleSpinBoxAcceleration->setMinimum(VSettings::scrollingAccelerationMin);
+    ui->doubleSpinBoxAcceleration->setMaximum(VSettings::scrollingAccelerationMax);
+    ui->doubleSpinBoxAcceleration->setValue(settings->GetScrollingAcceleration());
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -125,8 +153,10 @@ PreferencesConfigurationPage::~PreferencesConfigurationPage()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void PreferencesConfigurationPage::Apply()
+QStringList PreferencesConfigurationPage::Apply()
 {
+    // Tab General
+    QStringList preferences;
     VSettings *settings = qApp->ValentinaSettings();
     settings->SetAutosaveState(ui->autoSaveCheck->isChecked());
     settings->SetAutosaveTime(ui->autoTime->value());
@@ -137,8 +167,9 @@ void PreferencesConfigurationPage::Apply()
     ui->autoSaveCheck->isChecked() ? autoSaveTimer->start(ui->autoTime->value()*60000) : autoSaveTimer->stop();
 
     settings->SetOsSeparator(ui->osOptionCheck->isChecked());
-    settings->SetSendReportState(ui->sendReportCheck->isChecked());
     settings->SetToolBarStyle(ui->toolBarStyleCheck->isChecked());
+    settings->SetFreeCurveMode(ui->checkBoxFreeCurve->isChecked());
+    settings->SetDoubleClickZoomFitBestCurrentPP(ui->checkBoxZoomFitBestCurrentPP->isChecked());
 
     if (m_langChanged || m_systemChanged)
     {
@@ -157,9 +188,7 @@ void PreferencesConfigurationPage::Apply()
         const QString unit = qvariant_cast<QString>(ui->unitCombo->currentData());
         settings->SetUnit(unit);
         m_unitChanged = false;
-        const QString text = tr("The Default unit has been updated and will be used as the default for the next "
-                                "pattern you create.");
-        QMessageBox::information(this, QCoreApplication::applicationName(), text);
+        preferences.append(tr("default unit"));
     }
     if (m_labelLangChanged)
     {
@@ -167,6 +196,15 @@ void PreferencesConfigurationPage::Apply()
         settings->SetLabelLanguage(locale);
         m_labelLangChanged = false;
     }
+
+    // Tab Scrolling
+    settings->SetScrollingDuration(ui->spinBoxDuration->value());
+    settings->SetScrollingUpdateInterval(ui->spinBoxUpdateInterval->value());
+    settings->SetSensorMouseScale(ui->doubleSpinBoxSensor->value());
+    settings->SetWheelMouseScale(ui->doubleSpinBoxWheel->value());
+    settings->SetScrollingAcceleration(ui->doubleSpinBoxAcceleration->value());
+
+    return preferences;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -176,6 +214,7 @@ void PreferencesConfigurationPage::changeEvent(QEvent *event)
     {
         // retranslate designer form (single inheritance approach)
         RetranslateUi();
+        ui->retranslateUi(this);
     }
     // remember to call base class implementation
     QWidget::changeEvent(event);
@@ -184,35 +223,41 @@ void PreferencesConfigurationPage::changeEvent(QEvent *event)
 //---------------------------------------------------------------------------------------------------------------------
 void PreferencesConfigurationPage::SetLabelComboBox(const QStringList &list)
 {
-    for (int i = 0; i < list.size(); ++i)
+    for (auto &name : list)
     {
-        QLocale loc = QLocale(list.at(i));
-        ui->labelCombo->addItem(loc.nativeLanguageName(), list.at(i));
+        ui->labelCombo->addItem(QLocale(name).nativeLanguageName(), name);
     }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void PreferencesConfigurationPage::InitUnits()
 {
-    ui->unitCombo->addItem(tr("Centimeters"), "cm");
-    ui->unitCombo->addItem(tr("Millimiters"), "mm");
-    ui->unitCombo->addItem(tr("Inches"), "in");
-
-    // set default unit
-    const qint32 indexUnit = ui->unitCombo->findData(qApp->ValentinaSettings()->GetUnit());
-    if (indexUnit != -1)
-    {
-        ui->unitCombo->setCurrentIndex(indexUnit);
-    }
+    ui->unitCombo->addItem(tr("Centimeters"), unitCM);
+    ui->unitCombo->addItem(tr("Millimiters"), unitMM);
+    ui->unitCombo->addItem(tr("Inches"), unitINCH);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void PreferencesConfigurationPage::RetranslateUi()
 {
-    ui->osOptionCheck->setText(tr("With OS options") + QString(" (%1)").arg(QLocale().decimalPoint()));
-    ui->description->setText(tr("After each crash Valentina collects information that may help us fix the "
-                                "problem. We do not collect any personal information. Find more about what %1"
-                                "kind of information%2 we collect.")
-                             .arg("<a href=\"https://wiki.valentinaproject.org/wiki/UserManual:Crash_reports\">")
-                             .arg("</a>"));
+    ui->osOptionCheck->setText(tr("With OS options") + QStringLiteral(" (%1)").arg(QLocale().decimalPoint()));
+
+    {
+    ui->unitCombo->blockSignals(true);
+    const QString unit = qvariant_cast<QString>(ui->unitCombo->currentData());
+    ui->unitCombo->clear();
+    InitUnits();
+    ui->unitCombo->setCurrentIndex(ui->unitCombo->findData(unit));
+    ui->unitCombo->blockSignals(false);
+    }
+
+    {
+    const QString code = qvariant_cast<QString>(ui->systemCombo->currentData());
+    ui->systemCombo->blockSignals(true);
+    ui->systemCombo->clear();
+    InitPMSystems(ui->systemCombo);
+    ui->systemCombo->setCurrentIndex(-1);
+    ui->systemCombo->blockSignals(false);
+    ui->systemCombo->setCurrentIndex(ui->systemCombo->findData(code));
+    }
 }

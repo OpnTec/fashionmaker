@@ -6,7 +6,7 @@
  **
  **  @brief
  **  @copyright
- **  This source code is part of the Valentine project, a pattern making
+ **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2013-2015 Valentina project
  **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
@@ -56,10 +56,6 @@ VisToolEndLine::VisToolEndLine(const VContainer *data, QGraphicsItem *parent)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-VisToolEndLine::~VisToolEndLine()
-{}
-
-//---------------------------------------------------------------------------------------------------------------------
 void VisToolEndLine::RefreshGeometry()
 {
     const QSharedPointer<VPointF> first = Visualization::data->GeometricObject<VPointF>(object1Id);
@@ -82,13 +78,12 @@ void VisToolEndLine::RefreshGeometry()
         DrawPoint(point, line.p2(), mainColor);
     }
     DrawLine(this, line, mainColor, lineStyle);
-    static const QString prefix = VDomDocument::UnitsToStr(qApp->patternUnit(), true);
+    static const QString prefix = UnitsToStr(qApp->patternUnit(), true);
     Visualization::toolTip = tr("<b>Point at distance and angle</b>: angle = %1°, length = %2%3; "
                                 "<b>Shift</b> - sticking angle, <b>Enter</b> - finish creation")
             .arg(this->line().angle())
             .arg(qApp->TrVars()->FormulaToUser(QString::number(qApp->fromPixel(this->line().length())),
-                                               qApp->Settings()->GetOsSeparator()))
-            .arg(prefix);
+                                               qApp->Settings()->GetOsSeparator()), prefix);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -100,7 +95,7 @@ QString VisToolEndLine::Angle() const
 //---------------------------------------------------------------------------------------------------------------------
 void VisToolEndLine::SetAngle(const QString &expression)
 {
-    angle = FindVal(expression, Visualization::data->PlainVariables());
+    angle = FindValFromUser(expression, Visualization::data->DataVariables());
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -112,5 +107,5 @@ QString VisToolEndLine::Length() const
 //---------------------------------------------------------------------------------------------------------------------
 void VisToolEndLine::setLength(const QString &expression)
 {
-    length = FindLength(expression, Visualization::data->PlainVariables());
+    length = FindLengthFromUser(expression, Visualization::data->DataVariables());
 }

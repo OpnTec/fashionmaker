@@ -6,7 +6,7 @@
  **
  **  @brief
  **  @copyright
- **  This source code is part of the Valentine project, a pattern making
+ **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2013-2015 Valentina project
  **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
@@ -45,17 +45,17 @@ public:
     VCurveVariable(const quint32 &id, const quint32 &parentId);
     VCurveVariable(const VCurveVariable &var);
 
-    virtual ~VCurveVariable() Q_DECL_OVERRIDE;
+    virtual ~VCurveVariable() override;
 
     VCurveVariable &operator=(const VCurveVariable &var);
 #ifdef Q_COMPILER_RVALUE_REFS
     VCurveVariable &operator=(VCurveVariable &&var) Q_DECL_NOTHROW { Swap(var); return *this; }
 #endif
 
-    void Swap(VCurveVariable &var) Q_DECL_NOTHROW
+    inline void Swap(VCurveVariable &var) Q_DECL_NOTHROW
     { VInternalVariable::Swap(var); std::swap(d, var.d); }
 
-    virtual bool Filter(quint32 id) Q_DECL_OVERRIDE;
+    virtual bool Filter(quint32 id) override;
 
     quint32      GetId() const;
     void         SetId(const quint32 &id);

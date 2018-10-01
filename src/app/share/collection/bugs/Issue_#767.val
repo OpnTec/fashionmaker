@@ -1,0 +1,597 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<pattern>
+    <!--Pattern created with Valentina v0.6.0.0a (https://valentinaproject.bitbucket.io/).-->
+    <version>0.6.5</version>
+    <unit>cm</unit>
+    <description/>
+    <notes/>
+    <measurements>Issue_#767.vit</measurements>
+    <increments/>
+    <previewCalculations/>
+    <draw name="Dress">
+        <calculation>
+            <point id="1" mx="-0.989017" my="-0.482956" name="A" type="single" x="-9.11114" y="0.310791"/>
+            <point angle="270" basePoint="1" id="2" length="neck_back_to_waist_b+1.25" lineColor="black" mx="-1.99819" my="-0.819349" name="A1" type="endLine" typeLine="hair"/>
+            <point angle="0" basePoint="1" id="3" length="bust_circ/2+2.5" lineColor="black" mx="0.506062" my="-0.632464" name="A2" type="endLine" typeLine="hair"/>
+            <point firstPoint="3" id="4" mx="0.132292" my="0.264583" name="A3" secondPoint="2" type="pointOfIntersection"/>
+            <point firstPoint="1" id="5" length="1.25+2" lineColor="black" mx="-2.44931" my="-0.933762" name="A4" secondPoint="2" type="alongLine" typeLine="none"/>
+            <point firstPoint="5" id="6" length="armscye_length+1-2" lineColor="black" mx="-1.6618" my="-0.707218" name="A5" secondPoint="2" type="alongLine" typeLine="none"/>
+            <point firstPoint="3" id="7" mx="0.468685" my="-0.669841" name="A6" secondPoint="6" type="pointOfIntersection"/>
+            <point firstPoint="5" id="8" length="(CurrentLength-2)/2" lineColor="black" mx="-1.92344" my="-0.707218" name="A7" secondPoint="6" type="alongLine" typeLine="none"/>
+            <point firstPoint="1" id="9" length="armscye_length/4-2+1.25" lineColor="black" mx="-2.55863" my="-0.854772" name="A8" secondPoint="8" type="alongLine" typeLine="none"/>
+            <point firstPoint="1" id="10" length="neck_circ/5+0.2+2" lineColor="black" mx="-0.802132" my="-2.09016" name="A9" secondPoint="3" type="alongLine" typeLine="none"/>
+            <spline angle1="0" angle2="270" color="black" id="11" length1="Line_A_A9/2" length2="Line_A_A4" penStyle="hair" point1="5" point4="10" type="simpleInteractive"/>
+            <point firstPoint="6" id="12" length="across_back_b/2-0.5" lineColor="black" mx="-2.29336" my="0.224949" name="A10" secondPoint="7" type="alongLine" typeLine="none"/>
+            <point firstPoint="12" id="13" mx="-2.40426" my="-1.79637" name="A11" secondPoint="8" type="pointOfIntersection"/>
+            <arc angle1="270" angle2="0" center="10" color="black" id="14" penStyle="hair" radius="shoulder_length+0.3-2" type="simple"/>
+            <point angle="0" basePoint="9" curve="14" id="15" lineColor="black" mx="-0.898182" my="-1.87563" name="A12" type="curveIntersectAxis" typeLine="hair"/>
+            <line firstPoint="10" id="18" lineColor="black" secondPoint="15" typeLine="hair"/>
+            <point firstPoint="3" id="19" length="neck_circ/5+2" lineColor="black" mx="-0.858549" my="-1.79637" name="A13" secondPoint="1" type="alongLine" typeLine="none"/>
+            <point firstPoint="3" id="20" length="neck_circ/5+2.5" lineColor="black" mx="0.409727" my="-0.686624" name="A14" secondPoint="7" type="alongLine" typeLine="none"/>
+            <spline angle1="270" angle2="180" color="black" id="21" length1="Line_A2_A14/2" length2="Line_A2_A13/2" penStyle="hair" point1="19" point4="20" type="simpleInteractive"/>
+            <point angle="270" basePoint="15" id="22" length="0.5" lineColor="black" mx="0.132292" my="0.264583" name="A15" type="endLine" typeLine="hair"/>
+            <arc angle1="180" angle2="270" center="19" color="black" id="23" penStyle="hair" radius="shoulder_length-2" type="simple"/>
+            <point angle="0" basePoint="22" curve="23" id="24" lineColor="black" mx="-1.69085" my="-1.836" name="A16" type="curveIntersectAxis" typeLine="hair"/>
+            <line firstPoint="24" id="27" lineColor="black" secondPoint="19" typeLine="hair"/>
+            <point firstPoint="7" id="28" length="Line_A5_A10-0.7" lineColor="black" mx="0.132292" my="0.264583" name="A17" secondPoint="6" type="alongLine" typeLine="none"/>
+            <point angle="90" basePoint="28" id="29" length="(Line_A4_A5+2)/4" lineColor="black" mx="0.449361" my="-0.171387" name="A18" type="endLine" typeLine="hair"/>
+            <point firstPoint="28" id="30" length="CurrentLength/2+0.5" lineColor="black" mx="0.132292" my="0.264583" name="A19" secondPoint="12" type="alongLine" typeLine="none"/>
+            <point firstPoint="30" id="31" mx="0.171925" my="-1.63783" name="A20" secondPoint="2" type="pointOfIntersection"/>
+            <point angle="45" basePoint="12" id="32" length="2" lineColor="black" mx="0.251193" my="-1.55856" name="A21" type="endLine" typeLine="hair"/>
+            <point angle="135" basePoint="28" id="33" length="1.8" lineColor="black" mx="-1.69085" my="-1.91527" name="A22" type="endLine" typeLine="hair"/>
+            <line firstPoint="15" id="34" lineColor="black" secondPoint="13" typeLine="hair"/>
+            <line firstPoint="13" id="35" lineColor="black" secondPoint="32" typeLine="hair"/>
+            <line firstPoint="32" id="36" lineColor="black" secondPoint="30" typeLine="hair"/>
+            <line firstPoint="30" id="37" lineColor="black" secondPoint="33" typeLine="hair"/>
+            <line firstPoint="33" id="38" lineColor="black" secondPoint="29" typeLine="hair"/>
+            <line firstPoint="29" id="39" lineColor="black" secondPoint="24" typeLine="hair"/>
+            <line firstPoint="15" id="40" lineColor="black" secondPoint="32" typeLine="hair"/>
+            <point firstPoint="32" id="43" mx="0.132292" my="0.264583" name="a" secondPoint="30" type="pointOfIntersection"/>
+            <point firstPoint="33" id="44" mx="0.132292" my="0.264583" name="a1" secondPoint="30" type="pointOfIntersection"/>
+            <point firstPoint="29" id="45" mx="0.132292" my="0.264583" name="a2" secondPoint="33" type="pointOfIntersection"/>
+            <point firstPoint="13" id="46" mx="-1.80976" my="-0.290288" name="a4" secondPoint="32" type="pointOfIntersection"/>
+            <point firstPoint="13" id="47" mx="-3.11767" my="0.264583" name="a5" secondPoint="15" type="pointOfIntersection"/>
+            <point firstPoint="29" id="48" mx="0.132292" my="0.264583" name="a6" secondPoint="24" type="pointOfIntersection"/>
+            <line firstPoint="47" id="50" lineColor="black" secondPoint="13" typeLine="hair"/>
+            <line firstPoint="43" id="51" lineColor="black" secondPoint="30" typeLine="hair"/>
+            <line firstPoint="44" id="52" lineColor="black" secondPoint="30" typeLine="hair"/>
+            <line firstPoint="29" id="53" lineColor="black" secondPoint="48" typeLine="hair"/>
+            <line firstPoint="32" id="54" lineColor="black" secondPoint="46" typeLine="hair"/>
+            <line firstPoint="33" id="55" lineColor="black" secondPoint="45" typeLine="hair"/>
+            <spline color="blue" id="56" penStyle="hair" type="pathInteractive">
+                <pathPoint angle1="246.451" angle2="66.451" length1="0" length2="0" pSpline="15"/>
+                <pathPoint angle1="(AngleLine_A12_A11+AngleLine_A11_A21)/2-180" angle2="275.947" length1="Line_a5_A11/2" length2="0" pSpline="13"/>
+                <pathPoint angle1="(AngleLine_A11_A21+AngleLine_A21_A19)/2-180" angle2="303.165" length1="Line_A21_a4" length2="0" pSpline="32"/>
+                <pathPoint angle1="171.805" angle2="(AngleLine_A19_A22+AngleLine_A21_A19)/2+180" length1="Line_a_A19/2" length2="Line_a1_A19/2" pSpline="30"/>
+                <pathPoint angle1="218.803" angle2="(AngleLine_A22_A18+AngleLine_A19_A22)/2" length1="0" length2="Line_A22_a2" pSpline="33"/>
+                <pathPoint angle1="253.522" angle2="(AngleLine_A22_A18+AngleLine_A18_A16)/2" length1="0" length2="Line_A18_a6/2" pSpline="29"/>
+                <pathPoint angle1="300.576" angle2="120.576" length1="0" length2="1.46025" pSpline="24"/>
+            </spline>
+            <point angle="270" basePoint="4" id="57" length="1" lineColor="black" mx="0.132292" my="0.264583" name="A23" type="endLine" typeLine="hair"/>
+            <line firstPoint="31" id="58" lineColor="black" secondPoint="4" typeLine="hair"/>
+            <spline angle1="180" angle2="359.327" color="blue" id="59" length1="Line_A20_A3" length2="0" penStyle="hair" point1="57" point4="2" type="simpleInteractive"/>
+            <line firstPoint="20" id="60" lineColor="black" secondPoint="4" typeLine="hair"/>
+            <line firstPoint="30" id="61" lineColor="black" secondPoint="31" typeLine="hair"/>
+            <operation angle="270" id="62" length="35" suffix="a1" type="moving">
+                <source>
+                    <item idObject="5"/>
+                    <item idObject="10"/>
+                    <item idObject="1"/>
+                    <item idObject="9"/>
+                    <item idObject="8"/>
+                    <item idObject="6"/>
+                    <item idObject="2"/>
+                    <item idObject="31"/>
+                    <item idObject="30"/>
+                    <item idObject="43"/>
+                    <item idObject="12"/>
+                    <item idObject="32"/>
+                    <item idObject="13"/>
+                    <item idObject="47"/>
+                    <item idObject="15"/>
+                    <item idObject="46"/>
+                </source>
+                <destination>
+                    <item idObject="63" mx="-3.36424" my="-0.861225"/>
+                    <item idObject="64" mx="-0.802132" my="-2.09016"/>
+                    <item idObject="65" mx="-2.78715" my="-0.809889"/>
+                    <item idObject="66" mx="-3.57206" my="-0.232796"/>
+                    <item idObject="67" mx="-3.10857" my="-0.870685"/>
+                    <item idObject="68" mx="-3.54167" my="-0.666351"/>
+                    <item idObject="69" mx="-3.10159" my="-0.778482"/>
+                    <item idObject="70" mx="0.171925" my="-1.63783"/>
+                    <item idObject="71" mx="0.132292" my="0.264583"/>
+                    <item idObject="72" mx="0.132292" my="0.264583"/>
+                    <item idObject="73" mx="-2.24573" my="0.224949"/>
+                    <item idObject="74" mx="0.251193" my="-1.55856"/>
+                    <item idObject="75" mx="-2.40426" my="-1.79637"/>
+                    <item idObject="76" mx="-3.11767" my="0.264583"/>
+                    <item idObject="77" mx="-0.898182" my="-1.87563"/>
+                    <item idObject="78" mx="-1.80976" my="-0.290288"/>
+                </destination>
+            </operation>
+            <spline angle1="0" angle2="AngleLine_A9_A12-90" color="blue" id="79" length1="Line_A_A9/2" length2="Line_A_A4" penStyle="hair" point1="63" point4="64" type="simpleInteractive"/>
+            <line firstPoint="63" id="80" lineColor="black" secondPoint="69" typeLine="hair"/>
+            <line firstPoint="64" id="81" lineColor="black" secondPoint="77" typeLine="hair"/>
+            <line firstPoint="75" id="82" lineColor="yellow" secondPoint="76" typeLine="hair"/>
+            <line firstPoint="77" id="83" lineColor="yellow" secondPoint="75" typeLine="hair"/>
+            <line firstPoint="74" id="84" lineColor="yellow" secondPoint="78" typeLine="hair"/>
+            <line firstPoint="74" id="85" lineColor="yellow" secondPoint="75" typeLine="hair"/>
+            <line firstPoint="71" id="86" lineColor="yellow" secondPoint="72" typeLine="hair"/>
+            <line firstPoint="71" id="87" lineColor="yellow" secondPoint="74" typeLine="hair"/>
+            <line firstPoint="71" id="88" lineColor="yellow" secondPoint="70" typeLine="dotLine"/>
+            <line firstPoint="70" id="89" lineColor="yellow" secondPoint="69" typeLine="hair"/>
+            <spline color="blue" id="90" penStyle="hair" type="pathInteractive">
+                <pathPoint angle1="217.175" angle2="37.175" length1="0" length2="0" pSpline="77"/>
+                <pathPoint angle1="(AngleLine_A12a1_A11a1+AngleLine_A21a1_A11a1)/2-90" angle2="275.947" length1="Line_A11a1_a5a1/2" length2="0" pSpline="75"/>
+                <pathPoint angle1="(AngleLine_A21a1_A11a1+AngleLine_A19a1_A21a1)/2" angle2="303.165" length1="Line_A21a1_a4a1" length2="0" pSpline="74"/>
+                <pathPoint angle1="(AngleLine_A19_A22+AngleLine_A21_A19)/2" angle2="351.805" length1="Line_A19a1_aa1/2" length2="2.06972" pSpline="71"/>
+            </spline>
+            <operation angle="310" id="91" length="45" suffix="a2" type="moving">
+                <source>
+                    <item idObject="30"/>
+                    <item idObject="33"/>
+                    <item idObject="32"/>
+                    <item idObject="44"/>
+                    <item idObject="45"/>
+                    <item idObject="29"/>
+                    <item idObject="48"/>
+                    <item idObject="24"/>
+                    <item idObject="19"/>
+                    <item idObject="20"/>
+                    <item idObject="7"/>
+                    <item idObject="4"/>
+                    <item idObject="57"/>
+                    <item idObject="31"/>
+                </source>
+                <destination>
+                    <item idObject="92" mx="0.132292" my="0.264583"/>
+                    <item idObject="93" mx="-3.02163" my="-2.37154"/>
+                    <item idObject="94" mx="0.251193" my="-1.55856"/>
+                    <item idObject="95" mx="0.132292" my="0.264583"/>
+                    <item idObject="96" mx="0.132292" my="0.264583"/>
+                    <item idObject="97" mx="-6.94713" my="-2.83413"/>
+                    <item idObject="98" mx="0.132292" my="0.264583"/>
+                    <item idObject="99" mx="-1.69085" my="-1.836"/>
+                    <item idObject="100" mx="-0.858549" my="-1.79637"/>
+                    <item idObject="101" mx="0.409727" my="-0.686624"/>
+                    <item idObject="102" mx="0.468685" my="-0.669841"/>
+                    <item idObject="103" mx="0.132292" my="0.264583"/>
+                    <item idObject="104" mx="0.132292" my="0.264583"/>
+                    <item idObject="105" mx="0.171925" my="-1.63783"/>
+                </destination>
+            </operation>
+            <line firstPoint="101" id="106" lineColor="black" secondPoint="103" typeLine="hair"/>
+            <line firstPoint="105" id="107" lineColor="yellow" secondPoint="103" typeLine="hair"/>
+            <line firstPoint="105" id="108" lineColor="yellow" secondPoint="92" typeLine="hair"/>
+            <line firstPoint="99" id="109" lineColor="black" secondPoint="100" typeLine="hair"/>
+            <line firstPoint="92" id="110" lineColor="yellow" secondPoint="95" typeLine="hair"/>
+            <line firstPoint="94" id="111" lineColor="yellow" secondPoint="92" typeLine="hair"/>
+            <line firstPoint="92" id="112" lineColor="yellow" secondPoint="93" typeLine="hair"/>
+            <line firstPoint="93" id="113" lineColor="yellow" secondPoint="97" typeLine="hair"/>
+            <line firstPoint="97" id="114" lineColor="yellow" secondPoint="99" typeLine="hair"/>
+            <line firstPoint="93" id="115" lineColor="yellow" secondPoint="96" typeLine="hair"/>
+            <line firstPoint="97" id="116" lineColor="yellow" secondPoint="98" typeLine="hair"/>
+            <spline angle1="270" angle2="180" color="blue" id="117" length1="Line_A2_A14/2" length2="Line_A2_A13/2" penStyle="hair" point1="100" point4="101" type="simpleInteractive"/>
+            <spline color="blue" id="118" penStyle="hair" type="pathInteractive">
+                <pathPoint angle1="171.805" angle2="(AngleLine_A19a2_A22a2+AngleLine_A21a2_A19a2)/2+180" length1="0" length2="Line_A19a2_a1a2/2" pSpline="92"/>
+                <pathPoint angle1="218.803" angle2="(AngleLine_A22a2_A18a2+AngleLine_A19a2_A22a2)/2" length1="0" length2="Line_A22a2_a2a2" pSpline="93"/>
+                <pathPoint angle1="253.522" angle2="(AngleLine_A22a2_A18a2+AngleLine_A18a2_A16a2)/2" length1="0" length2="Line_A18a2_a6a2/2" pSpline="97"/>
+                <pathPoint angle1="276.745" angle2="96.745" length1="0" length2="1.27057" pSpline="99"/>
+            </spline>
+            <point angle="270" basePoint="69" id="119" length="leg_waist_side_to_knee" lineColor="black" mx="0.132292" my="0.264583" name="A24" type="endLine" typeLine="hair"/>
+            <point firstPoint="70" id="120" mx="0.132292" my="0.264583" name="A25" secondPoint="119" type="pointOfIntersection"/>
+            <point angle="0" basePoint="120" id="121" length="5" lineColor="yellow" mx="0.132292" my="0.264583" name="A26" type="endLine" typeLine="dotLine"/>
+            <line firstPoint="70" id="122" lineColor="yellow" secondPoint="120" typeLine="dashLine"/>
+            <point firstPoint="70" id="123" length="Line_A20a1_A25" lineColor="black" mx="0.376804" my="-1.52851" name="A27" secondPoint="121" type="alongLine" typeLine="none"/>
+            <line firstPoint="120" id="124" lineColor="black" secondPoint="119" typeLine="hair"/>
+            <spline angle1="270" angle2="112.193" color="blue" id="125" length1="Line_A27_A26" length2="0" penStyle="hair" point1="123" point4="120" type="simpleInteractive"/>
+            <point firstPoint="71" id="126" length="CurrentLength/2" lineColor="black" mx="0.132292" my="0.264583" name="A28" secondPoint="70" type="alongLine" typeLine="none"/>
+            <point angle="0" firstPoint="126" id="127" length="0.75" lineColor="black" mx="-2.88336" my="-0.38745" name="A29" secondPoint="71" type="normal" typeLine="hair"/>
+            <point firstPoint="69" id="129" length="waist_to_hip_b" lineColor="black" mx="0.132292" my="0.264583" name="A30" secondPoint="119" type="alongLine" typeLine="none"/>
+            <line firstPoint="70" id="130" lineColor="black" secondPoint="123" typeLine="hair"/>
+            <point angle="0" basePoint="129" id="131" lineColor="yellow" mx="0.132292" my="0.264583" name="A31" p1Line="70" p2Line="123" type="lineIntersectAxis" typeLine="hair"/>
+            <spline color="blue" id="132" penStyle="hair" type="pathInteractive">
+                <pathPoint angle1="157.459" angle2="337.459" length1="0" length2="0" pSpline="71"/>
+                <pathPoint angle1="90" angle2="270" length1="Line_A19a1_A28/2" length2="Line_A28_A20a1/2" pSpline="127"/>
+                <pathPoint angle1="(AngleLine_A20a1_A27+AngleLine_A28_A20a1)/2-180" angle2="273.764" length1="Line_A28_A29" length2="1.29711" pSpline="70"/>
+            </spline>
+            <point angle="270" basePoint="103" id="133" length="leg_waist_side_to_knee" lineColor="black" mx="0.132292" my="0.264583" name="A32" type="endLine" typeLine="hair"/>
+            <point firstPoint="105" id="134" mx="0.132292" my="0.264583" name="A33" secondPoint="133" type="pointOfIntersection"/>
+            <point angle="180" basePoint="134" id="135" length="5" lineColor="yellow" mx="0.132292" my="0.264583" name="A34" type="endLine" typeLine="hair"/>
+            <line firstPoint="105" id="136" lineColor="yellow" secondPoint="134" typeLine="hair"/>
+            <point firstPoint="105" id="137" length="Line_A20a2_A33" lineColor="black" mx="0.401255" my="-1.70782" name="A35" secondPoint="135" type="alongLine" typeLine="none"/>
+            <line firstPoint="105" id="138" lineColor="black" secondPoint="137" typeLine="hair"/>
+            <point angle="270" basePoint="133" id="139" length="Line_A3_A23" lineColor="black" mx="0.132292" my="0.264583" name="A36" type="endLine" typeLine="hair"/>
+            <line firstPoint="134" id="140" lineColor="yellow" secondPoint="133" typeLine="hair"/>
+            <line firstPoint="137" id="141" lineColor="yellow" secondPoint="134" typeLine="hair"/>
+            <line firstPoint="134" id="142" lineColor="yellow" secondPoint="139" typeLine="hair"/>
+            <spline angle1="180" angle2="AngleLine_A35_A34+90" color="blue" id="143" length1="Line_A33_A32/2" length2="Line_A35_A33/2" penStyle="hair" point1="139" point4="137" type="simpleInteractive"/>
+            <point firstPoint="103" id="144" length="waist_to_hip_b" lineColor="black" mx="0.132292" my="0.264583" name="A37" secondPoint="133" type="alongLine" typeLine="none"/>
+            <point angle="180" basePoint="144" id="145" lineColor="yellow" mx="0.132292" my="0.264583" name="A38" p1Line="105" p2Line="137" type="lineIntersectAxis" typeLine="hair"/>
+            <spline angle1="180" angle2="270" color="yellow" id="146" length1="Line_A20a2_A3a2/2" length2="Line_A3_A23/2" penStyle="hair" point1="104" point4="105" type="simpleInteractive"/>
+            <point firstPoint="68" id="147" length="CurrentLength/2" lineColor="black" mx="0.132292" my="0.264583" name="A39" secondPoint="73" type="alongLine" typeLine="none"/>
+            <point firstPoint="97" id="148" mx="0.849528" my="2.32664" name="A40" secondPoint="102" type="pointOfIntersection"/>
+            <point firstPoint="148" id="149" length="CurrentLength/2" lineColor="black" mx="0.132292" my="0.264583" name="A41" secondPoint="102" type="alongLine" typeLine="none"/>
+            <point angle="270" basePoint="147" id="150" lineColor="yellow" mx="0.132292" my="0.264583" name="A42" p1Line="69" p2Line="70" type="lineIntersectAxis" typeLine="hair"/>
+            <point angle="270" basePoint="149" curve="146" id="151" lineColor="yellow" mx="0.132292" my="0.264583" name="A43" type="curveIntersectAxis" typeLine="hair"/>
+            <point id="152" mx="0.132292" my="0.264583" name="A44" p1Line1="147" p1Line2="119" p2Line1="150" p2Line2="120" type="lineIntersect"/>
+            <point angle="270" basePoint="151" curve="143" id="153" lineColor="black" mx="0.132292" my="0.264583" name="A45" type="curveIntersectAxis" typeLine="hair"/>
+            <point firstPoint="75" id="154" mx="0.132292" my="0.264583" name="A46" secondPoint="150" type="pointOfIntersection"/>
+            <line firstPoint="150" id="155" lineColor="yellow" secondPoint="154" typeLine="hair"/>
+            <line firstPoint="75" id="156" lineColor="yellow" secondPoint="154" typeLine="hair"/>
+            <point firstPoint="97" id="157" mx="0.132292" my="0.264583" name="A47" secondPoint="151" type="pointOfIntersection"/>
+            <line firstPoint="97" id="158" lineColor="yellow" secondPoint="157" typeLine="hair"/>
+            <line firstPoint="151" id="159" lineColor="yellow" secondPoint="157" typeLine="hair"/>
+            <spline angle1="180" angle2="90" color="black" id="162" length1="Line_A42_A46/2" length2="Line_A11a1_A46/2" penStyle="hair" point1="75" point4="150" type="simpleInteractive"/>
+            <line firstPoint="150" id="163" lineColor="black" secondPoint="152" typeLine="hair"/>
+            <spline angle1="0" angle2="90" color="black" id="164" length1="Line_A43_A47/2" length2="Line_A18a2_A47/2" penStyle="hair" point1="97" point4="151" type="simpleInteractive"/>
+            <operation angle="0" id="165" length="85" suffix="a3" type="moving">
+                <source>
+                    <item idObject="63"/>
+                    <item idObject="65"/>
+                    <item idObject="64"/>
+                    <item idObject="79"/>
+                    <item idObject="77"/>
+                    <item idObject="76"/>
+                    <item idObject="75"/>
+                    <item idObject="162"/>
+                    <item idObject="150"/>
+                    <item idObject="152"/>
+                    <item idObject="119"/>
+                    <item idObject="129"/>
+                    <item idObject="69"/>
+                    <item idObject="68"/>
+                    <item idObject="67"/>
+                </source>
+                <destination>
+                    <item idObject="166" mx="-5.69526" my="0.124974"/>
+                    <item idObject="167" mx="-5.20782" my="-1.25816"/>
+                    <item idObject="168" mx="-0.802132" my="-2.89705"/>
+                    <item idObject="169"/>
+                    <item idObject="170" mx="-0.898182" my="-1.87563"/>
+                    <item idObject="171" mx="-5.98661" my="-0.273344"/>
+                    <item idObject="172" mx="-5.18355" my="-1.88602"/>
+                    <item idObject="173"/>
+                    <item idObject="174" mx="2.19435" my="-0.452653"/>
+                    <item idObject="175" mx="0.132292" my="0.264583"/>
+                    <item idObject="176" mx="-4.26078" my="-0.900925"/>
+                    <item idObject="177" mx="-4.97801" my="-0.631962"/>
+                    <item idObject="178" mx="-4.80503" my="-0.868136"/>
+                    <item idObject="179" mx="-5.69338" my="-0.487042"/>
+                    <item idObject="180" mx="-5.26028" my="-0.512067"/>
+                </destination>
+            </operation>
+            <line firstPoint="166" id="181" lineColor="black" secondPoint="176" typeLine="hair"/>
+            <line firstPoint="174" id="182" lineColor="yellow" secondPoint="175" typeLine="hair"/>
+            <line firstPoint="176" id="183" lineColor="yellow" secondPoint="175" typeLine="hair"/>
+            <line firstPoint="168" id="184" lineColor="black" secondPoint="170" typeLine="hair"/>
+            <spline angle1="40.7966" angle2="(AngleLine_A12a1_A11a1+AngleLine_A21a1_A11a1)/2-90" color="black" id="185" length1="0" length2="Line_A11a1_a5a1/2" penStyle="hair" point1="170" point4="172" type="simpleInteractive"/>
+            <arc angle1="270" angle2="270+47" center="178" color="yellow" id="186" penStyle="hair" radius="leg_waist_side_to_knee" type="simple"/>
+            <point angle="270+45+180" basePoint="178" curve="186" id="187" lineColor="yellow" mx="-4.28965" my="-1.23721" name="A48" type="curveIntersectAxis" typeLine="hair"/>
+            <point id="188" mx="0.132292" my="0.264583" name="A49" p1Line1="178" p1Line2="174" p2Line1="187" p2Line2="175" type="lineIntersect"/>
+            <line firstPoint="178" id="189" lineColor="black" secondPoint="177" typeLine="hair"/>
+            <spline angle1="270" angle2="AngleLine_A1a1a3_A48-180" color="black" id="190" length1="Line_A42a3_A49" length2="Line_A49_A48" penStyle="hair" point1="174" point4="187" type="simpleInteractive"/>
+            <operation angle="0" id="191" length="115" suffix="a4" type="moving">
+                <source>
+                    <item idObject="75"/>
+                    <item idObject="74"/>
+                    <item idObject="71"/>
+                    <item idObject="132"/>
+                    <item idObject="127"/>
+                    <item idObject="70"/>
+                    <item idObject="120"/>
+                    <item idObject="152"/>
+                    <item idObject="150"/>
+                    <item idObject="162"/>
+                </source>
+                <destination>
+                    <item idObject="192" mx="-2.40426" my="-1.79637"/>
+                    <item idObject="193" mx="0.251193" my="-1.55856"/>
+                    <item idObject="194" mx="0.132292" my="0.264583"/>
+                    <item idObject="195" mx="2.14748e+09" my="2.14748e+09"/>
+                    <item idObject="196" mx="-2.88336" my="-0.38745"/>
+                    <item idObject="197" mx="0.171925" my="-1.63783"/>
+                    <item idObject="198" mx="1.21711" my="0.264583"/>
+                    <item idObject="199" mx="0.132292" my="0.264583"/>
+                    <item idObject="200" mx="0.132292" my="0.264583"/>
+                    <item idObject="201" mx="2.14748e+09" my="2.14748e+09"/>
+                </destination>
+            </operation>
+            <spline color="black" id="202" penStyle="hair" type="pathInteractive">
+                <pathPoint angle1="207.62" angle2="27.62" length1="0" length2="0" pSpline="192"/>
+                <pathPoint angle1="(AngleLine_A21a1_A11a1+AngleLine_A19a1_A21a1)/2" angle2="303.165" length1="Line_A21a1_a4a1" length2="0" pSpline="193"/>
+                <pathPoint angle1="(AngleLine_A19_A22+AngleLine_A21_A19)/2" angle2="351.805" length1="Line_A19a1_aa1/2" length2="3.42638" pSpline="194"/>
+            </spline>
+            <point firstPoint="200" id="203" length="CurrentLength/2" lineColor="black" mx="0.132292" my="0.264583" name="A50" secondPoint="197" type="alongLine" typeLine="none"/>
+            <arc angle1="270-27" angle2="270+28" center="203" color="black" id="204" penStyle="hair" radius="leg_waist_side_to_knee" type="simple"/>
+            <point angle="270-22.5" basePoint="203" curve="204" id="205" lineColor="yellow" mx="0.132292" my="0.264583" name="A51" type="curveIntersectAxis" typeLine="hair"/>
+            <point angle="270+22.5" basePoint="203" curve="204" id="208" lineColor="yellow" mx="0.132292" my="0.264583" name="A52" type="curveIntersectAxis" typeLine="hair"/>
+            <point angle="270" basePoint="200" curve="204" id="210" lineColor="yellow" mx="-5.2918" my="0.757683" name="A53" type="curveIntersectAxis" typeLine="hair"/>
+            <point angle="270" basePoint="197" curve="204" id="213" lineColor="yellow" mx="-2.33321" my="0.264583" name="A54" type="curveIntersectAxis" typeLine="hair"/>
+            <point id="216" mx="0.132292" my="0.264583" name="A55" p1Line1="203" p1Line2="200" p2Line1="205" p2Line2="199" type="lineIntersect"/>
+            <point id="217" mx="-2.34635" my="0.520994" name="A56" p1Line1="197" p1Line2="203" p2Line1="198" p2Line2="208" type="lineIntersect"/>
+            <line firstPoint="196" id="219" lineColor="yellow" secondPoint="197" typeLine="hair"/>
+            <spline angle1="270" angle2="AngleLine_A56_A52-180" color="black" duplicate="1" id="220" length1="Line_A20a1a4_A56" length2="Line_A56_A52" penStyle="hair" point1="197" point4="208" type="simpleInteractive"/>
+            <spline angle1="AngleLine_A55_A51-180" angle2="270" color="black" id="221" length1="Line_A55_A51" length2="Line_A42a4_A55" penStyle="hair" point1="205" point4="200" type="simpleInteractive"/>
+            <point firstPoint="105" id="222" length="CurrentLength/2" lineColor="black" mx="-2.43183" my="-0.524376" name="A57" secondPoint="92" type="alongLine" typeLine="none"/>
+            <point angle="0" basePoint="222" id="223" length="0.75" lineColor="black" mx="1.61159" my="-0.327137" name="A58" type="endLine" typeLine="hair"/>
+            <spline color="black" id="224" penStyle="hair" type="pathInteractive">
+                <pathPoint angle1="266.236" angle2="(AngleLine_A20a2_A57+AngleLine_A20a2_A35)/2-90" length1="0" length2="Line_A57_A58" pSpline="105"/>
+                <pathPoint angle1="270" angle2="90" length1="Line_A20a2_A57/2" length2="Line_A20a2_A57/2" pSpline="223"/>
+                <pathPoint angle1="0" angle2="180" length1="0" length2="2.68879" pSpline="92"/>
+            </spline>
+            <spline angle1="90" angle2="180" color="black" id="235" length1="Line_A11a1_A46/2" length2="Line_A42_A46/2" penStyle="hair" point1="200" point4="192" type="simpleInteractive"/>
+            <operation angle="0" id="243" length="112" suffix="a5" type="moving">
+                <source>
+                    <item idObject="97"/>
+                    <item idObject="164"/>
+                    <item idObject="151"/>
+                    <item idObject="153"/>
+                    <item idObject="134"/>
+                    <item idObject="105"/>
+                    <item idObject="224"/>
+                    <item idObject="92"/>
+                    <item idObject="93"/>
+                </source>
+                <destination>
+                    <item idObject="244" mx="-2.50924" my="-2.63689"/>
+                    <item idObject="245" mx="2.14748e+09" my="2.14748e+09"/>
+                    <item idObject="246" mx="0.132292" my="0.264583"/>
+                    <item idObject="247" mx="0.132292" my="0.264583"/>
+                    <item idObject="248" mx="0.132292" my="0.264583"/>
+                    <item idObject="249" mx="0.171925" my="-1.63783"/>
+                    <item idObject="250" mx="2.14748e+09" my="2.14748e+09"/>
+                    <item idObject="251" mx="-6.57386" my="-1.1161"/>
+                    <item idObject="252" mx="-5.28989" my="-2.96326"/>
+                </destination>
+            </operation>
+            <operation angle="0" id="253" length="142" suffix="a6" type="moving">
+                <source>
+                    <item idObject="97"/>
+                    <item idObject="99"/>
+                    <item idObject="100"/>
+                    <item idObject="117"/>
+                    <item idObject="101"/>
+                    <item idObject="103"/>
+                    <item idObject="104"/>
+                    <item idObject="151"/>
+                    <item idObject="164"/>
+                    <item idObject="133"/>
+                    <item idObject="139"/>
+                    <item idObject="153"/>
+                </source>
+                <destination>
+                    <item idObject="254" mx="-6.94713" my="-2.83413"/>
+                    <item idObject="255" mx="-1.69085" my="-1.836"/>
+                    <item idObject="256" mx="-0.858549" my="-1.79637"/>
+                    <item idObject="257" mx="2.14748e+09" my="2.14748e+09"/>
+                    <item idObject="258" mx="0.409727" my="-0.686624"/>
+                    <item idObject="259" mx="0.575637" my="-0.622108"/>
+                    <item idObject="260" mx="0.132292" my="0.264583"/>
+                    <item idObject="261" mx="0.132292" my="0.264583"/>
+                    <item idObject="262" mx="2.14748e+09" my="2.14748e+09"/>
+                    <item idObject="263" mx="0.132292" my="0.264583"/>
+                    <item idObject="264" mx="0.132292" my="0.264583"/>
+                    <item idObject="265" mx="0.132292" my="0.264583"/>
+                </destination>
+            </operation>
+            <spline color="black" id="266" penStyle="hair" type="pathInteractive">
+                <pathPoint angle1="171.805" angle2="(AngleLine_A19a2_A22a2+AngleLine_A21a2_A19a2)/2+180" length1="0" length2="Line_A19a2_a1a2/2" pSpline="251"/>
+                <pathPoint angle1="218.803" angle2="(AngleLine_A22a2_A18a2+AngleLine_A19a2_A22a2)/2" length1="0" length2="Line_A22a2_a2a2" pSpline="252"/>
+                <pathPoint angle1="236.735" angle2="56.735" length1="0" length2="2.26277" pSpline="244"/>
+            </spline>
+            <point firstPoint="249" id="267" mx="0.132292" my="0.264583" name="A59" secondPoint="246" type="pointOfIntersection"/>
+            <point firstPoint="267" id="268" length="CurrentLength/2" lineColor="black" mx="0.132292" my="0.264583" name="A60" secondPoint="246" type="alongLine" typeLine="none"/>
+            <arc angle1="270-27" angle2="270+27" center="268" color="black" id="269" penStyle="hair" radius="leg_waist_side_to_knee" type="simple"/>
+            <point angle="270-22.5" basePoint="268" curve="269" id="270" lineColor="yellow" mx="0.132292" my="0.264583" name="A61" type="curveIntersectAxis" typeLine="hair"/>
+            <point angle="270+22.5" basePoint="268" curve="269" id="273" lineColor="yellow" mx="0.132292" my="0.264583" name="A62" type="curveIntersectAxis" typeLine="hair"/>
+            <point id="276" mx="0.132292" my="0.264583" name="A63" p1Line1="249" p1Line2="268" p2Line1="248" p2Line2="270" type="lineIntersect"/>
+            <point id="277" mx="0.132292" my="0.264583" name="A64" p1Line1="246" p1Line2="268" p2Line1="247" p2Line2="273" type="lineIntersect"/>
+            <line firstPoint="249" id="278" lineColor="yellow" secondPoint="276" typeLine="hair"/>
+            <line firstPoint="246" id="279" lineColor="yellow" secondPoint="277" typeLine="hair"/>
+            <spline angle1="AngleLine_A63_A61-180" angle2="270" color="black" id="280" length1="Line_A63_A61" length2="Line_A20a2a5_A63" penStyle="hair" point1="270" point4="249" type="simpleInteractive"/>
+            <spline angle1="270" angle2="AngleLine_A64_A62-180" color="black" id="281" length1="Line_A43a5_A64" length2="Line_A64_A62" penStyle="hair" point1="246" point4="273" type="simpleInteractive"/>
+            <line firstPoint="255" id="282" lineColor="black" secondPoint="256" typeLine="hair"/>
+            <line firstPoint="258" id="283" lineColor="black" secondPoint="264" typeLine="hair"/>
+            <spline angle1="(AngleLine_A22a2_A18a2+AngleLine_A18a2_A16a2)/2" angle2="258.797" color="black" id="284" length1="Line_A18a2_a6a2/2" length2="0" penStyle="hair" point1="254" point4="255" type="simpleInteractive"/>
+            <arc angle1="270-46" angle2="270" center="260" color="yellow" id="285" penStyle="hair" radius="leg_waist_side_to_knee" type="simple"/>
+            <point angle="270-45" basePoint="260" curve="285" id="286" lineColor="yellow" mx="0.132292" my="0.264583" name="A65" type="curveIntersectAxis" typeLine="hair"/>
+            <point id="289" mx="0.132292" my="0.264583" name="A66" p1Line1="261" p1Line2="260" p2Line1="265" p2Line2="286" type="lineIntersect"/>
+            <line firstPoint="261" id="290" lineColor="yellow" secondPoint="289" typeLine="hair"/>
+            <spline angle1="AngleLine_A66_A65-180" angle2="270" color="black" id="291" length1="Line_A66_A65" length2="Line_A43a6_A66" penStyle="hair" point1="286" point4="261" type="simpleInteractive"/>
+            <point angle="0" basePoint="177" curve="190" id="341" lineColor="yellow" mx="6.89552" my="1.86293" name="A67" type="curveIntersectAxis" typeLine="hair"/>
+            <point angle="270" basePoint="259" id="356" length="waist_to_hip_b" lineColor="black" mx="0.132292" my="0.264583" name="A72" type="endLine" typeLine="hair"/>
+            <point angle="180" basePoint="356" curve="291" id="357" lineColor="yellow" mx="0.132292" my="0.264583" name="A73" type="curveIntersectAxis" typeLine="hair"/>
+            <spline color="black" id="358" penStyle="hair" type="pathInteractive">
+                <pathPoint angle1="180" angle2="0" length1="0" length2="Line_A30a3_A67/6" pSpline="178"/>
+                <pathPoint angle1="131.611" angle2="311.611" length1="0" length2="0" pSpline="188"/>
+                <pathPoint angle1="180" angle2="0" length1="Line_A30a3_A67/4" length2="1.15644" pSpline="341"/>
+            </spline>
+            <spline color="black" id="359" penStyle="hair" type="pathInteractive">
+                <pathPoint angle1="0" angle2="180" length1="0" length2="Line_A72_A73/6" pSpline="260"/>
+                <pathPoint angle1="144.478" angle2="324.478" length1="0" length2="0" pSpline="289"/>
+                <pathPoint angle1="0" angle2="180" length1="Line_A72_A73/4" length2="1.65876" pSpline="357"/>
+            </spline>
+            <point angle="270" basePoint="200" id="360" length="waist_to_hip_b" lineColor="black" mx="0.474174" my="2.31587" name="A68" type="endLine" typeLine="hair"/>
+            <point angle="180" basePoint="360" curve="221" id="361" lineColor="yellow" mx="-3.62841" my="-2.55594" name="A69" type="curveIntersectAxis" typeLine="hair"/>
+            <point angle="0" basePoint="360" curve="220" id="364" lineColor="yellow" mx="0.132292" my="0.264583" name="A70" type="curveIntersectAxis" typeLine="hair"/>
+            <spline angle1="0" angle2="180" color="black" id="365" length1="(Line_A68_A69+Line_A68_A70)/6" length2="(Line_A68_A69+Line_A68_A70)/4" penStyle="hair" point1="361" point4="197" type="simpleInteractive"/>
+            <point angle="270" basePoint="246" id="366" length="waist_to_hip_b" lineColor="black" mx="1.92717" my="-1.44483" name="A71" type="endLine" typeLine="hair"/>
+            <point angle="0" basePoint="366" curve="281" id="367" lineColor="yellow" mx="2.01264" my="0.350053" name="A74" type="curveIntersectAxis" typeLine="hair"/>
+            <point angle="180" basePoint="366" curve="280" id="370" lineColor="yellow" mx="-3.03011" my="-2.04312" name="A75" type="curveIntersectAxis" typeLine="hair"/>
+            <spline angle1="0" angle2="180" color="black" id="373" length1="(Line_A71_A74+Line_A71_A75)/4" length2="(Line_A71_A74+Line_A71_A75)/6" penStyle="hair" point1="249" point4="367" type="simpleInteractive"/>
+            <point angle="180" basePoint="174" id="450" length="2" lineColor="black" mx="0.132292" my="0.264583" name="A76" type="endLine" typeLine="hair"/>
+            <point angle="0" basePoint="200" id="451" length="2" lineColor="black" mx="0.0488591" my="-3.32303" name="A77" type="endLine" typeLine="hair"/>
+            <point angle="180" basePoint="246" id="452" length="1" lineColor="black" mx="-3.15871" my="-2.54245" name="A78" type="endLine" typeLine="hair"/>
+            <point angle="0" basePoint="261" id="453" length="1" lineColor="black" mx="0.32588" my="-2.15527" name="A79" type="endLine" typeLine="hair"/>
+            <point angle="270-45" basePoint="341" id="478" length="2" lineColor="black" mx="-2.1204" my="0.848614" name="A80" type="endLine" typeLine="hair"/>
+            <point angle="315" basePoint="361" id="479" length="2" lineColor="black" mx="-1.74806" my="1.03382" name="A81" type="endLine" typeLine="hair"/>
+            <point firstPoint="28" id="490" length="(SplPath_A12_A16/3)/4" lineColor="black" mx="0.132292" my="0.264583" name="ABE" secondPoint="29" type="alongLine" typeLine="none"/>
+            <point angle="180" basePoint="490" curve="56" id="491" lineColor="black" mx="-2.70541" my="-3.10776" name="ABFP" type="curveIntersectAxis" typeLine="hair"/>
+            <point firstPoint="12" id="494" length="(SplPath_A12_A16/3)/2" lineColor="black" mx="-3.03442" my="-0.475686" name="A82" secondPoint="13" type="alongLine" typeLine="none"/>
+            <point angle="0" basePoint="494" curve="56" id="495" lineColor="black" mx="0.379048" my="-1.9151" name="ABBP" type="curveIntersectAxis" typeLine="hair"/>
+            <point angle="AngleLine_A49_A48" basePoint="187" id="647" length="Spl_A51_A42a4-Spl_A42a3_A48" lineColor="black" mx="-0.535172" my="1.09891" name="A83" type="endLine" typeLine="hair"/>
+            <point c1Center="176" c1Radius="Line_A1a1a3_A49+Line_A48_A83" c2Center="647" c2Radius="Line_A1a1a3_A49+Line_A48_A83" crossPoint="1" id="648" mx="0.132292" my="0.264583" name="A84" type="pointOfIntersectionCircles"/>
+            <point c1Center="176" c1Radius="Line_A1a1a3_A48+Line_A48_A83" c2Center="647" c2Radius="Line_A1a1a3_A48+Line_A48_A83" crossPoint="1" id="649" mx="0.132292" my="0.264583" name="A85" type="pointOfIntersectionCircles"/>
+            <arc angle1="125" angle2="135" center="647" color="yellow" id="650" penStyle="hair" radius="Line_A1a1a3_A48+Line_A48_A83" type="simple"/>
+            <arc angle1="80" angle2="90" center="176" color="yellow" id="651" penStyle="hair" radius="Line_A1a1a3_A48+Line_A48_A83" type="simple"/>
+            <point crossPoint="1" firstArc="650" id="652" mx="0.132292" my="0.264583" name="A86" secondArc="651" type="pointOfIntersectionArcs"/>
+            <arc angle1="260" angle2="315" center="652" color="black" id="653" penStyle="hair" radius="Line_A1a1a3_A48+Line_A48_A83" type="simple"/>
+            <point angle="AngleLine_A66_A65" basePoint="286" id="658" length="-(Spl_A65_A43a6-Spl_A43a5_A62)" lineColor="black" mx="0.132292" my="0.264583" name="A87" type="endLine" typeLine="hair"/>
+            <arc angle1="0" angle2="90" center="658" color="yellow" id="659" penStyle="hair" radius="Line_A23a2a6_A65+Line_A65_A87" type="simple"/>
+            <arc angle1="90" angle2="110" center="264" color="yellow" id="660" penStyle="hair" radius="Line_A23a2a6_A65+Line_A65_A87" type="simple"/>
+            <point crossPoint="1" firstArc="659" id="661" mx="0.132292" my="0.264583" name="A88" secondArc="660" type="pointOfIntersectionArcs"/>
+            <arc angle1="215" angle2="280" center="661" color="black" id="662" penStyle="hair" radius="Line_A23a2a6_A65+Line_A65_A87" type="simple"/>
+        </calculation>
+        <modeling>
+            <point id="424" idObject="361" inUse="true" mx="-3.62841" my="-2.55594" type="modeling"/>
+            <spline id="425" idObject="365" inUse="true" type="modelingSpline"/>
+            <point id="426" idObject="197" inUse="true" mx="0.171925" my="-1.63783" type="modeling"/>
+            <spline id="427" idObject="220" inUse="true" type="modelingSpline"/>
+            <point id="428" idObject="208" inUse="true" mx="0.132292" my="0.264583" type="modeling"/>
+            <arc id="429" idObject="204" inUse="true" type="modeling"/>
+            <point id="430" idObject="205" inUse="true" mx="0.132292" my="0.264583" type="modeling"/>
+            <spline id="431" idObject="221" inUse="true" type="modelingSpline"/>
+        </modeling>
+        <details>
+            <detail forbidFlipping="false" hideMainPath="false" id="432" inLayout="true" mx="-101.604" my="-59.2922" name="Side Back Skirt" seamAllowance="true" united="false" version="2" width="0.9525">
+                <data annotation="" foldPosition="" fontSize="0" height="1" letter="" mx="4314.24" my="2892.38" onFold="false" orientation="" quantity="1" rotation="0" rotationWay="" tilt="" visible="true" width="5">
+                    <line alignment="4" bold="true" italic="false" sfIncrement="0" text="%pName%"/>
+                </data>
+                <patternInfo fontSize="0" height="1" mx="0" my="0" rotation="0" visible="false" width="1"/>
+                <grainline arrows="0" length="10" mx="4373.6" my="3238.17" rotation="90" visible="true"/>
+                <nodes>
+                    <node idObject="431" reverse="0" type="NodeSpline"/>
+                    <node idObject="424" type="NodePoint"/>
+                    <node idObject="425" reverse="0" type="NodeSpline"/>
+                    <node idObject="426" type="NodePoint"/>
+                    <node idObject="427" reverse="0" type="NodeSpline"/>
+                    <node idObject="428" type="NodePoint"/>
+                    <node idObject="429" reverse="1" type="NodeArc"/>
+                    <node idObject="430" type="NodePoint"/>
+                </nodes>
+            </detail>
+        </details>
+        <groups/>
+    </draw>
+    <draw name="Sleeve">
+        <calculation>
+            <point id="486" mx="0.48476" my="-0.38014" name="B" type="single" x="55.7067" y="-1.58296"/>
+            <point angle="90" basePoint="486" id="487" length="SplPath_A12_A16/3" lineColor="yellow" mx="0.132292" my="0.264583" name="B1" type="endLine" typeLine="hair"/>
+            <point firstPoint="486" id="488" length="CurrentLength/2" lineColor="black" mx="0.132292" my="0.264583" name="B2" secondPoint="487" type="alongLine" typeLine="none"/>
+            <point firstPoint="486" id="489" length="CurrentLength/2" lineColor="black" mx="-1.75951" my="-0.393434" name="B3" secondPoint="488" type="alongLine" typeLine="none"/>
+            <arc angle1="90" angle2="180" center="489" color="yellow" id="498" penStyle="hair" radius="SplPath_A12_A16-SplPath_A12_ABFP+0.4" type="simple"/>
+            <point angle="180" basePoint="487" curve="498" id="499" lineColor="yellow" mx="0.132292" my="0.264583" name="B4" type="curveIntersectAxis" typeLine="hair"/>
+            <line firstPoint="499" id="502" lineColor="yellow" secondPoint="489" typeLine="hair"/>
+            <arc angle1="180" angle2="270" center="499" color="yellow" id="503" penStyle="hair" radius="SplPath_A12_ABBP+0.3" type="simple"/>
+            <point angle="180" basePoint="488" curve="503" id="504" lineColor="yellow" mx="0.132292" my="0.264583" name="B5" type="curveIntersectAxis" typeLine="hair"/>
+            <line firstPoint="499" id="507" lineColor="yellow" secondPoint="504" typeLine="hair"/>
+            <arc angle1="270" angle2="0" center="489" color="yellow" id="508" penStyle="hair" radius="SplPath_A12_ABFP-SplPath_A12_A16_Seg_1-SplPath_A12_A16_Seg_2-SplPath_A12_A16_Seg_3" type="simple"/>
+            <point angle="0" basePoint="486" curve="508" id="509" lineColor="yellow" mx="0.132292" my="0.264583" name="B6" type="curveIntersectAxis" typeLine="hair"/>
+            <line firstPoint="489" id="512" lineColor="yellow" secondPoint="509" typeLine="hair"/>
+            <arc angle1="180" angle2="270" center="504" color="yellow" id="513" penStyle="hair" radius="SplPath_ABBP_A16-SplPath_A12_A16_Seg_6-SplPath_A12_A16_Seg_5-SplPath_A12_A16_Seg_4" type="simple"/>
+            <point angle="180" basePoint="486" curve="513" id="514" lineColor="yellow" mx="0.132292" my="0.264583" name="B7" type="curveIntersectAxis" typeLine="hair"/>
+            <line firstPoint="504" id="517" lineColor="yellow" secondPoint="514" typeLine="hair"/>
+            <point angle="270" basePoint="499" id="518" length="arm_shoulder_tip_to_wrist_bent-3" lineColor="yellow" mx="0.132292" my="0.264583" name="B8" type="endLine" typeLine="hair"/>
+            <point firstPoint="509" id="519" mx="0.132292" my="0.264583" name="B9" secondPoint="518" type="pointOfIntersection"/>
+            <point firstPoint="514" id="520" mx="-1.13439" my="0.174106" name="B10" secondPoint="518" type="pointOfIntersection"/>
+            <point firstPoint="514" id="521" length="CurrentLength/2" lineColor="black" mx="-1.30712" my="-1.50383" name="b" secondPoint="504" type="alongLine" typeLine="none"/>
+            <point angle="AngleLine_B5_B7+90" basePoint="521" id="522" length="0.3" lineColor="yellow" mx="0.851454" my="0.609576" name="bb" type="endLine" typeLine="hair"/>
+            <point firstPoint="504" id="523" length="CurrentLength/2" lineColor="black" mx="0.132292" my="0.264583" name="b1" secondPoint="499" type="alongLine" typeLine="none"/>
+            <point angle="AngleLine_B4_B5-90" basePoint="523" id="524" length="0.8" lineColor="yellow" mx="-2.39657" my="-2.24814" name="bb1" type="endLine" typeLine="hair"/>
+            <point firstPoint="499" id="525" length="CurrentLength/3" lineColor="black" mx="-1.30712" my="0.305709" name="B11" secondPoint="489" type="alongLine" typeLine="none"/>
+            <point angle="AngleLine_B4_B3+90" basePoint="525" id="526" length="1.4" lineColor="yellow" mx="0.25567" my="-1.83285" name="b2" type="endLine" typeLine="hair"/>
+            <point firstPoint="489" id="527" length="CurrentLength/2" lineColor="black" mx="-0.114464" my="-1.58609" name="b3" secondPoint="509" type="alongLine" typeLine="none"/>
+            <point angle="AngleLine_B3_B6-90" basePoint="527" id="528" length="0.5" lineColor="yellow" mx="-0.196718" my="0.511339" name="bb3" type="endLine" typeLine="hair"/>
+            <point firstPoint="521" id="529" mx="-3.49127" my="0.376943" name="b4" secondPoint="514" type="pointOfIntersection"/>
+            <point firstPoint="504" id="530" mx="0.132292" my="0.264583" name="b5" secondPoint="524" type="pointOfIntersection"/>
+            <point firstPoint="499" id="531" mx="0.214544" my="0.0589526" name="b6" secondPoint="524" type="pointOfIntersection"/>
+            <point firstPoint="525" id="532" mx="0.132292" my="0.264583" name="b7" secondPoint="499" type="pointOfIntersection"/>
+            <point firstPoint="489" id="533" mx="0.132292" my="0.264583" name="b8" secondPoint="525" type="pointOfIntersection"/>
+            <point firstPoint="489" id="534" mx="-1.96514" my="0.0178265" name="b9" secondPoint="528" type="pointOfIntersection"/>
+            <point firstPoint="527" id="535" mx="-0.0733384" my="0.881474" name="b10" secondPoint="509" type="pointOfIntersection"/>
+            <point firstPoint="504" id="536" mx="0.413189" my="-0.184852" name="b4b" secondPoint="522" type="pointOfIntersection"/>
+            <line firstPoint="514" id="537" lineColor="yellow" secondPoint="529" typeLine="hair"/>
+            <line firstPoint="504" id="538" lineColor="yellow" secondPoint="536" typeLine="hair"/>
+            <line firstPoint="504" id="539" lineColor="yellow" secondPoint="530" typeLine="hair"/>
+            <line firstPoint="499" id="540" lineColor="yellow" secondPoint="531" typeLine="hair"/>
+            <line firstPoint="499" id="541" lineColor="yellow" secondPoint="532" typeLine="hair"/>
+            <line firstPoint="489" id="542" lineColor="yellow" secondPoint="533" typeLine="hair"/>
+            <line firstPoint="489" id="543" lineColor="yellow" secondPoint="534" typeLine="hair"/>
+            <line firstPoint="535" id="544" lineColor="yellow" secondPoint="509" typeLine="hair"/>
+            <line firstPoint="504" id="545" lineColor="deeppink" secondPoint="522" typeLine="hair"/>
+            <line firstPoint="504" id="546" lineColor="deeppink" secondPoint="524" typeLine="hair"/>
+            <line firstPoint="514" id="547" lineColor="deeppink" secondPoint="522" typeLine="hair"/>
+            <line firstPoint="524" id="548" lineColor="deeppink" secondPoint="499" typeLine="hair"/>
+            <line firstPoint="499" id="549" lineColor="deeppink" secondPoint="526" typeLine="hair"/>
+            <line firstPoint="526" id="550" lineColor="deeppink" secondPoint="489" typeLine="hair"/>
+            <line firstPoint="489" id="551" lineColor="deeppink" secondPoint="528" typeLine="hair"/>
+            <line firstPoint="528" id="552" lineColor="deeppink" secondPoint="509" typeLine="hair"/>
+            <point firstPoint="524" id="554" mx="0.30083" my="-1.56125" name="b11" secondPoint="499" type="pointOfIntersection"/>
+            <point firstPoint="524" id="555" mx="0.132292" my="0.264583" name="b12" secondPoint="504" type="pointOfIntersection"/>
+            <point firstPoint="522" id="556" mx="0.132292" my="0.264583" name="b13" secondPoint="514" type="pointOfIntersection"/>
+            <point firstPoint="526" id="557" mx="0.188471" my="-1.87023" name="b14" secondPoint="499" type="pointOfIntersection"/>
+            <point firstPoint="526" id="558" mx="0.132292" my="0.264583" name="b15" secondPoint="489" type="pointOfIntersection"/>
+            <point firstPoint="528" id="559" mx="-2.67667" my="0.798287" name="b16" secondPoint="509" type="pointOfIntersection"/>
+            <line firstPoint="499" id="560" lineColor="yellow" secondPoint="554" typeLine="hair"/>
+            <line firstPoint="524" id="561" lineColor="yellow" secondPoint="530" typeLine="hair"/>
+            <line firstPoint="522" id="562" lineColor="yellow" secondPoint="556" typeLine="hair"/>
+            <line firstPoint="499" id="563" lineColor="yellow" secondPoint="557" typeLine="hair"/>
+            <line firstPoint="526" id="564" lineColor="yellow" secondPoint="558" typeLine="hair"/>
+            <line firstPoint="489" id="565" lineColor="yellow" secondPoint="558" typeLine="hair"/>
+            <line firstPoint="489" id="566" lineColor="yellow" secondPoint="534" typeLine="hair"/>
+            <line firstPoint="528" id="567" lineColor="yellow" secondPoint="534" typeLine="hair"/>
+            <line firstPoint="528" id="568" lineColor="yellow" secondPoint="559" typeLine="hair"/>
+            <line firstPoint="559" id="569" lineColor="yellow" secondPoint="509" typeLine="hair"/>
+            <line firstPoint="514" id="570" lineColor="yellow" secondPoint="556" typeLine="hair"/>
+            <line firstPoint="522" id="571" lineColor="yellow" secondPoint="536" typeLine="hair"/>
+            <line firstPoint="524" id="572" lineColor="yellow" secondPoint="554" typeLine="hair"/>
+            <line firstPoint="526" id="573" lineColor="yellow" secondPoint="557" typeLine="hair"/>
+            <spline color="black" id="574" penStyle="hair" type="pathInteractive">
+                <pathPoint angle1="180" angle2="0" length1="0" length2="Line_B7_b13/4" pSpline="514"/>
+                <pathPoint angle1="280.913" angle2="100.913" length1="0" length2="0" pSpline="522"/>
+                <pathPoint angle1="242.65" angle2="(AngleLine_B5_bb1+AngleLine_B5_bb)/2-90+11.25" length1="Line_B5_b4b/2" length2="Line_B5_b5/2" pSpline="504"/>
+                <pathPoint angle1="196.062" angle2="16.062" length1="0" length2="0" pSpline="524"/>
+                <pathPoint angle1="180" angle2="0" length1="Line_B4_b11/2" length2="Line_B4_b14/2" pSpline="499"/>
+                <pathPoint angle1="212.572" angle2="32.572" length1="0" length2="0" pSpline="526"/>
+                <pathPoint angle1="(AngleLine_b2_B3+AngleLine_B3_bb3)/2-22.5-180" angle2="288.094" length1="Line_b2_b15/2" length2="Line_B3_b9/2" pSpline="489"/>
+                <pathPoint angle1="112.167" angle2="292.167" length1="0" length2="0" pSpline="528"/>
+                <pathPoint angle1="180" angle2="0" length1="Line_b16_B6/2" length2="1.39768" pSpline="509"/>
+            </spline>
+            <point firstPoint="509" id="575" length="CurrentLength/2" lineColor="black" mx="0.543553" my="-0.557939" name="B12" secondPoint="519" type="alongLine" typeLine="none"/>
+            <point firstPoint="519" id="576" length="CurrentLength/4" lineColor="yellow" mx="-1.71838" my="0.305709" name="B13" secondPoint="518" type="alongLine" typeLine="none"/>
+            <point firstPoint="520" id="577" length="CurrentLength/4" lineColor="black" mx="0.132292" my="0.264583" name="B14" secondPoint="518" type="alongLine" typeLine="none"/>
+            <line firstPoint="514" id="578" lineColor="black" secondPoint="577" typeLine="hair"/>
+            <line firstPoint="509" id="579" lineColor="black" secondPoint="576" typeLine="hair"/>
+            <line firstPoint="577" id="580" lineColor="black" secondPoint="576" typeLine="hair"/>
+            <point angle="180" basePoint="575" id="581" lineColor="black" mx="-2.41753" my="0.387961" name="B15" p1Line="509" p2Line="576" type="lineIntersectAxis" typeLine="hair"/>
+            <point angle="180" basePoint="575" id="582" lineColor="yellow" mx="-3.07966" my="0.309822" name="B16" p1Line="514" p2Line="577" type="lineIntersectAxis" typeLine="hair"/>
+            <point firstPoint="509" id="583" length="CurrentLength/8+1.27" lineColor="black" mx="0.132292" my="0.264583" name="B17" secondPoint="576" type="alongLine" typeLine="none"/>
+            <point firstPoint="514" id="584" length="Line_B6_B17" lineColor="black" mx="0.132292" my="0.264583" name="B18" secondPoint="577" type="alongLine" typeLine="none"/>
+            <line firstPoint="584" id="585" lineColor="black" secondPoint="583" typeLine="hair"/>
+            <point firstPoint="499" id="586" length="CurrentLength*3/4-2.5+1.27" lineColor="black" mx="0.132292" my="0.264583" name="B19" secondPoint="518" type="alongLine" typeLine="none"/>
+            <point angle="0" basePoint="586" id="587" lineColor="black" mx="0.132292" my="0.264583" name="B20" p1Line="509" p2Line="576" type="lineIntersectAxis" typeLine="hair"/>
+            <line firstPoint="509" id="588" lineColor="black" secondPoint="587" typeLine="hair"/>
+            <point firstPoint="514" id="589" length="Line_B6_B20" lineColor="black" mx="0.132292" my="0.264583" name="B21" secondPoint="577" type="alongLine" typeLine="none"/>
+            <line firstPoint="589" id="590" lineColor="black" secondPoint="587" typeLine="hair"/>
+            <line firstPoint="577" id="591" lineColor="black" secondPoint="576" typeLine="hair"/>
+            <point angle="270" basePoint="514" id="592" length="Line_B14_B13" lineColor="yellow" mx="-2.25302" my="-0.0232996" name="B22" type="endLine" typeLine="hair"/>
+            <line firstPoint="582" id="593" lineColor="yellow" secondPoint="581" typeLine="hair"/>
+            <point angle="270" basePoint="514" id="594" length="Line_B16_B15" lineColor="yellow" mx="0.132292" my="0.264583" name="B23" type="endLine" typeLine="hair"/>
+            <point angle="270" basePoint="514" id="595" length="Line_B18_B17" lineColor="yellow" mx="-2.3764" my="-0.105552" name="B24" type="endLine" typeLine="hair"/>
+            <point firstPoint="522" id="596" length="CurrentLength/2" lineColor="yellow" mx="0.132292" my="0.264583" name="B25" secondPoint="489" type="alongLine" typeLine="none"/>
+            <point angle="90" basePoint="596" id="597" length="1" lineColor="yellow" mx="0.132292" my="0.264583" name="B26" type="endLine" typeLine="hair"/>
+            <line firstPoint="522" id="598" lineColor="yellow" secondPoint="596" typeLine="hair"/>
+            <line firstPoint="596" id="599" lineColor="yellow" secondPoint="489" typeLine="hair"/>
+            <spline color="black" id="600" penStyle="hair" type="pathInteractive">
+                <pathPoint angle1="180" angle2="0" length1="0" length2="Line_bb_B25/4" pSpline="522"/>
+                <pathPoint angle1="180" angle2="0" length1="Line_bb_B25/2" length2="Line_B25_B3/2" pSpline="597"/>
+                <pathPoint angle1="180" angle2="0" length1="Line_B25_B3/4" length2="0.732622" pSpline="489"/>
+            </spline>
+        </calculation>
+        <modeling/>
+        <details/>
+        <groups/>
+    </draw>
+</pattern>

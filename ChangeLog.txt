@@ -1,3 +1,110 @@
+# Version 0.6.0 October 1, 2018
+- [#682] New feature. Export increments to Excel .csv.
+- [#681] Enhance feature: Dashed line options for curves, arcs, etc.
+- [#684] Proposal: Add option to only show outer edges on detail.
+- [#244] New feature: Adjust line and point thickness and label size.
+- [#637] Max scene size too small to fit all objects.
+- New feature Zoom Fit Best Current pattern piece.
+- [#693] New feature: Sort workpiece "Groups" by name.
+- [#712] Default seam allowance setting.
+- [#630] Improve export: upgrade to DXF r14 format.
+- [#669] Improve export: export labels as text in DXF.
+- [#716] Command line option to create *tiled* export.
+- [#660] New export: Export details without layout.
+- [#734] Optimization. Stop increments/variables table from updating immediately.
+- [#750] Info Box Beside Mouse.
+- [#634] New feature: Fabric manager.
+- [#731] Improve tab Increments. Separate the tab on two: Increments and Preview Calculation.
+- Removed crash sending system for Windows.
+- Added new language Polish (Poland).
+- [#755] New feature. Toggle point label.
+- Fixed bug. After full parse undocommand Move labe losts connection to tool.
+- [#756] New feature. Select pieces from command line.
+- [#761] New feature. Export final measurements.
+- [#758] Intersection Passmark - select which side is shown.
+- New math parser function "r2cm". Round to up to 1 decimal.
+- Two new shortcut sequences: Ctrl+PgDown and Ctrl+PgUp to switch to next and previous pattern piece.
+- [#765] New feature. Free curve mode.
+- [#657] Improve feature: Allow more paper formats for printing tiled PDF
+- [#768] New feature. Custom curve approximation scale.
+- [#759] Add place label tool.
+- [#771] Improve tool Point at intersection of arc and line.
+- [#772] New tool Duplicate detail.
+- [#726] Improve Move tool. Add optional rotate option.
+- [#774] New feature. Matching Parentheses.
+- [#779] Add more roll paper size templates.
+- [#783] Flipping control.
+- [#790] Generate unique name for each detail.
+- [#792] New feature. Visibility trigger for internal path.
+- New internal variable RotationElArc.
+- [#794] Better control over scale value.
+- [#392] Improve feature: Show progress bar while opening pattern file.
+- [#732] Tape app. Improve Database dialog.
+- [#804] New feature. Import measurements from CSV file in Tape app.
+- [#414] Add features from Qt Windows Extras.
+- [#807] Issue with "Intersection" passmark.
+- [#667] Check for updates - Test version.
+- [#808] New feature. Global line width option.
+- [#814] Make "\" valid character.
+- [#818] Improve Piece path validation. Check uniqueness.
+- [#819] Use OpenGL as render for view.
+- [#826] New Feature. Add and remove items to groups from the context menu.
+- Mouse double click zoom fit best current pattern piece.
+- [#862] Force Valentina to immediately terminate if a pattern contains a parsing warning.
+- [#865] New feature. Dynamic Way to define Material in piece label.
+- [#867] Visibility control for place labels.
+- [#868] New feature. Connect internal path with cutting contour.
+- [#869] Pattern piece label size limited.
+- [#683] Tool Seam allowance's dialog is off screen on small resolutions.
+- [#686] Seam allowance not placed correctly.
+- [#687] Wrong seam allowance.
+- [#689] Grainline default values swapped around.
+- [#688] Difficult to enter numbers in Tape.
+- Fixed bug in Tape app. Tape showed birth date in wrong locale.
+- Fixed bug in dialog Internal Piece Path. Value from the field After rewrited data in the field Before.
+- Tab Pins moved to be second in the list after tab Paths. 
+- Added tooltip for tab Passmark. Explained meaning of check box "Show the second passmark on seam line". 
+- [#696] Wrong grainline position on layout.
+- [#697] Incomplete Internal Path for Waist Dart.
+- [#698] Problem typing in new axis point for new piece.
+- [#702] Valentina produces broken shortcut (.lnk) files on Windows.
+- Changed default behaviour if path to multisize measurements or templates doesn't exist. 
+- [#703] Valentina warns about format rewriting for unsaved files.
+- [#704] Valentina crashes if click on detail.
+- [#706] Default unit in preferences not changing new file unit.
+- Fix bug. Valentina overrids exported file even if a user said no.
+- Fix bug. Date on label doesn't obey GUI language locale.
+- Tool Seam allowance's bounding box should not include passmarks.
+- Fix grainline position on layout.
+- [#719] Valentina crashes when unite pieces.
+- Fixed Valentina crash. Used way to avoid Qt's bug QTBUG-61213.
+- Fixed behaviour on Windows. Valentina asks about synchronization measurements twice.
+- Fixed bug. Tape app saved default size value in wrong place.
+- [#737] Valentina produces corrupted file if unite two pieces with pins.
+- [#738] Bug in transformation over arc and elliptical arc.
+- [#729] Moved Bezier curves can't be rotated.
+- [#742] Valentina produces wrong seam allowance.
+- [#743] Valentina doesn't update update pattern after adding item.
+- Fix translation variables.
+- [#744] Check for Updates button produces error.
+- Remove space as thousands separator when return formula to user.
+- [#752] Valentina produces corrupted file if unite two pieces.
+- [#753] Elliptical arc tool is broken.
+- [#767] Valentina produces wrong main path.
+- Fix issue. Curves look too wavy.
+- [#773] Tool Point intersection curve and axis cannot find desired intersection point.
+- [#776] Valentina cannot recognize translated functions.
+- [#778] Calling Valentina with "-h" option opens information dialog instead of writing to console.
+- [#788] Unhardcode icon path in GNU/Linux launcher.
+- [#797] Custom seam allowance ignored in some cases.
+- [#798] Formula Wizard crashes with translated increments.
+- [#803] Bug in FancyTabBar widget. Wrongly calculated widget width.
+- [#805] Invalid regular expression for validation layout output filename mask.
+- [#823] SVG Export - seam and cutting line of one piece missing.
+- Added submenu to quick access to piece node point angle type.
+- [#880] Fix broken seam allowance angle type.
+- [#882] VContainer class doesn't support multi document mode.
+
 # Version 0.5.0 May 9, 2017
 - [#581] User can now filter input lists by keyword in function wizard.
 - [#24] User can now add labels with different information on the detail

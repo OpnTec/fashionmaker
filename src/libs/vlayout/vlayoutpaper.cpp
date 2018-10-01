@@ -6,7 +6,7 @@
  **
  **  @brief
  **  @copyright
- **  This source code is part of the Valentine project, a pattern making
+ **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2013-2015 Valentina project
  **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
@@ -196,7 +196,7 @@ bool VLayoutPaper::ArrangeDetail(const VLayoutPiece &detail, std::atomic_bool &s
         return false;//Not enough edges
     }
 
-    if (detail.IsForbidFlipping() && not d->globalRotate)
+    if ((detail.IsForceFlipping() || detail.IsForbidFlipping()) && not d->globalRotate)
     { // Compensate forbidden flipping by rotating. 180 degree will be enough.
         d->localRotate = true;
         d->localRotationIncrease = 180;
@@ -275,9 +275,9 @@ bool VLayoutPaper::AddToSheet(const VLayoutPiece &detail, std::atomic_bool &stop
         return false;
     }
 
-    for (int i=0; i < threads.size(); ++i)
+    for (auto thread : threads)
     {
-        bestResult.NewResult(threads.at(i)->getBestResult());
+        bestResult.NewResult(thread->getBestResult());
     }
 
     qDeleteAll(threads.begin(), threads.end());
@@ -315,16 +315,16 @@ bool VLayoutPaper::SaveResult(const VBestSquare &bestResult, const VLayoutPiece 
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QGraphicsRectItem *VLayoutPaper::GetPaperItem(bool autoCrop) const
+QGraphicsRectItem *VLayoutPaper::GetPaperItem(bool autoCrop, bool textAsPaths) const
 {
     QGraphicsRectItem *paper;
     if (autoCrop)
     {
         QScopedPointer<QGraphicsScene> scene(new QGraphicsScene());
-        QList<QGraphicsItem *> list = GetItemDetails();
-        for (int i=0; i < list.size(); ++i)
+        QList<QGraphicsItem *> list = GetItemDetails(textAsPaths);
+        for (auto item : list)
         {
-            scene->addItem(list.at(i));
+            scene->addItem(item);
         }
         const int height = scene->itemsBoundingRect().toRect().height();
         if (d->globalContour.GetHeight() > height) //-V807
@@ -346,12 +346,12 @@ QGraphicsRectItem *VLayoutPaper::GetPaperItem(bool autoCrop) const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QList<QGraphicsItem *> VLayoutPaper::GetItemDetails() const
+QList<QGraphicsItem *> VLayoutPaper::GetItemDetails(bool textAsPaths) const
 {
     QList<QGraphicsItem *> list;
-    for (int i=0; i < d->details.count(); ++i)
+    for (auto &detail : d->details)
     {
-        list.append(d->details.at(i).GetItem());
+        list.append(detail.GetItem(textAsPaths));
     }
     return list;
 }
@@ -372,9 +372,9 @@ void VLayoutPaper::SetDetails(const QList<VLayoutPiece> &details)
 QRectF VLayoutPaper::DetailsBoundingRect() const
 {
     QRectF rec;
-    for (int i=0; i < d->details.count(); ++i)
+    for (auto &detail : d->details)
     {
-        rec = rec.united(d->details.at(i).DetailBoundingRect());
+        rec = rec.united(detail.DetailBoundingRect());
     }
 
     return rec;

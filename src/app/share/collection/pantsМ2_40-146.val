@@ -10,7 +10,7 @@
         <heights all="true"/>
         <sizes all="true"/>
     </gradation>
-    <measurements>../../../../../build-Valentina-Desktop-Debug/src/app/valentina/bin/tables/standard/GOST_man_ru.vst</measurements>
+    <measurements>../../../../../build-Valentina-Desktop-Debug/src/app/valentina/bin/tables/multisize/GOST_man_ru.vst</measurements>
     <increments>
         <increment name="#Диз" description="Длина брюк" formula="1120"/>
         <increment name="#Дсп" description="Растояние от талии до пола спереди" formula="1110"/>

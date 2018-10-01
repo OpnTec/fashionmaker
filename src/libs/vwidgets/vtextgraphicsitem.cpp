@@ -6,7 +6,7 @@
  **
  **  @brief
  **  @copyright
- **  This source code is part of the Valentine project, a pattern making
+ **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2013-2015 Valentina project
  **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
@@ -164,8 +164,8 @@ void VTextGraphicsItem::paint(QPainter *painter, const QStyleOptionGraphicsItem 
         const TextLine& tl = m_tm.GetSourceLine(i);
 
         fnt.setPixelSize(m_tm.GetFont().pixelSize() + tl.m_iFontSize);
-        fnt.setWeight(tl.m_eFontWeight);
-        fnt.setStyle(tl.m_eStyle);
+        fnt.setBold(tl.bold);
+        fnt.setItalic(tl.italic);
 
         QString qsText = tl.m_qsText;
         QFontMetrics fm(fnt);
@@ -182,7 +182,7 @@ void VTextGraphicsItem::paint(QPainter *painter, const QStyleOptionGraphicsItem 
         }
 
         painter->setFont(fnt);
-        painter->drawText(0, iY, iW, fm.height(), tl.m_eAlign, qsText);
+        painter->drawText(0, iY, iW, fm.height(), static_cast<int>(tl.m_eAlign), qsText);
         iY += fm.height() + m_tm.GetSpacing();
     }
 
@@ -237,25 +237,6 @@ void VTextGraphicsItem::paint(QPainter *painter, const QStyleOptionGraphicsItem 
 
 //---------------------------------------------------------------------------------------------------------------------
 /**
- * @brief VTextGraphicsItem::AddLine adds a line of text to the label list.
- * @param tl line of text to add
- */
-void VTextGraphicsItem::AddLine(const TextLine& tl)
-{
-    m_tm.AddSourceLine(tl);
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-/**
- * @brief VTextGraphicsItem::Clear deletes all the label texts
- */
-void VTextGraphicsItem::Clear()
-{
-    m_tm.ClearSourceLines();
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-/**
  * @brief VTextGraphicsItem::SetSize Tries to set the label size to (fW, fH). If any of those is too small, the label
  * size does not change.
  * @param fW label width
@@ -263,27 +244,7 @@ void VTextGraphicsItem::Clear()
  */
 void VTextGraphicsItem::SetSize(qreal fW, qreal fH)
 {
-    qDebug() << "Setting size to" << fW << parentItem()->boundingRect().width();
-    // don't allow resize under specific size
-    if (fW > parentItem()->boundingRect().width())
-    {
-        fW = parentItem()->boundingRect().width();
-    }
-    if (fW < minW)
-    {
-        fW = minW;
-    }
-    if (fH > parentItem()->boundingRect().height())
-    {
-        fH = parentItem()->boundingRect().height();
-    }
-    if (fH < minH)
-    {
-        fH = minH;
-    }
-
     prepareGeometryChange();
-    qDebug() << "Actual size set to" << fW;
     m_rectBoundingBox.setTopLeft(QPointF(0, 0));
     m_rectBoundingBox.setWidth(fW);
     m_rectBoundingBox.setHeight(fH);
@@ -362,9 +323,9 @@ void VTextGraphicsItem::UpdateData(const QString &qsName, const VPieceLabelData 
  * @brief VTextGraphicsItem::UpdateData Updates the pattern label
  * @param pDoc pointer to the pattern object
  */
-void VTextGraphicsItem::UpdateData(const VAbstractPattern* pDoc, qreal dSize, qreal dHeight)
+void VTextGraphicsItem::UpdateData(VAbstractPattern* pDoc)
 {
-    m_tm.Update(pDoc, dSize, dHeight);
+    m_tm.Update(pDoc);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -394,7 +355,8 @@ int VTextGraphicsItem::GetFontSize() const
  */
 void VTextGraphicsItem::mousePressEvent(QGraphicsSceneMouseEvent *pME)
 {
-    if (pME->button() == Qt::LeftButton && pME->type() != QEvent::GraphicsSceneMouseDoubleClick)
+    if (pME->button() == Qt::LeftButton && pME->type() != QEvent::GraphicsSceneMouseDoubleClick
+            && (flags() & QGraphicsItem::ItemIsMovable))
     {
         if (m_moveType == NotMovable)
         {
@@ -402,13 +364,14 @@ void VTextGraphicsItem::mousePressEvent(QGraphicsSceneMouseEvent *pME)
             return;
         }
 
+        pME->accept();
         // record the parameters of the mouse press. Specially record the position
         // of the press as the origin for the following operations
         m_ptStartPos = pos();
         m_ptStart = pME->scenePos();
         m_szStart = m_rectBoundingBox.size();
-        m_ptRotCenter = mapToScene(m_rectBoundingBox.center());
-        m_dAngle = GetAngle(pME->scenePos());
+        m_ptRotCenter = mapToParent(m_rectBoundingBox.center());
+        m_dAngle = GetAngle(mapToParent(pME->pos()));
         m_dRotation = rotation();
         // in rotation mode, do not do any changes here, because user might want to
         // rotate the label more.
@@ -432,7 +395,7 @@ void VTextGraphicsItem::mousePressEvent(QGraphicsSceneMouseEvent *pME)
             else
             {
                 m_eMode = mRotate;
-                SetOverrideCursor(cursorArrowCloseHand, 1, 1);
+                SetItemOverrideCursor(this, cursorArrowCloseHand, 1, 1);
             }
             setZValue(ACTIVE_Z);
             Update();
@@ -463,7 +426,7 @@ void VTextGraphicsItem::mousePressEvent(QGraphicsSceneMouseEvent *pME)
             else
             {
                 m_eMode = mMove;
-                SetOverrideCursor(cursorArrowCloseHand, 1, 1);
+                SetItemOverrideCursor(this, cursorArrowCloseHand, 1, 1);
             }
 
             setZValue(ACTIVE_Z);
@@ -472,8 +435,11 @@ void VTextGraphicsItem::mousePressEvent(QGraphicsSceneMouseEvent *pME)
         else
         {
             pME->ignore();
-            return;
         }
+    }
+    else
+    {
+        pME->ignore();
     }
 }
 
@@ -487,9 +453,9 @@ void VTextGraphicsItem::mouseMoveEvent(QGraphicsSceneMouseEvent* pME)
     qreal dX;
     qreal dY;
     QRectF rectBB;
-    const QPointF ptDiff = pME->scenePos() - m_ptStart;
     if (m_eMode == mMove && m_moveType & IsMovable)
     {
+        const QPointF ptDiff = pME->scenePos() - m_ptStart;
         // in move mode move the label along the mouse move from the origin
         QPointF pt = m_ptStartPos + ptDiff;
         rectBB.setTopLeft(pt);
@@ -506,33 +472,52 @@ void VTextGraphicsItem::mouseMoveEvent(QGraphicsSceneMouseEvent* pME)
     }
     else if (m_eMode == mResize && m_moveType & IsResizable)
     {
+        QLineF vectorDiff(m_ptStart, pME->scenePos());
+        vectorDiff.setAngle(vectorDiff.angle() + m_dRotation);
+        const QPointF ptDiff = vectorDiff.p2() - m_ptStart;
+
         // in resize mode, resize the label along the mouse move from the origin
         QPointF pt;
+        QSizeF sz;
 
         if (m_moveType & IsMovable)
         {
+            const qreal newWidth = m_szStart.width() + ptDiff.x();
+            const qreal newHeight = m_szStart.height() + ptDiff.y();
+            if (newWidth <= minW || newHeight <= minH)
+            {
+                return;
+            }
+
             pt = m_ptStartPos;
+            sz = QSizeF(newWidth, newHeight);
         }
         else
         {
-            pt = m_ptRotCenter - QRectF(0, 0, m_szStart.width() + ptDiff.x(),
-                                        m_szStart.height() + ptDiff.y()).center();
+            const qreal newWidth = m_szStart.width() + ptDiff.x()*2.0;
+            const qreal newHeight = m_szStart.height() + ptDiff.y()*2.0;
+            if (newWidth <= minW || newHeight <= minH)
+            {
+                return;
+            }
+
+            pt = QPointF(m_ptRotCenter.x() - newWidth/2.0, m_ptRotCenter.y() - newHeight/2.0);
+            sz = QSizeF(m_szStart.width() + ptDiff.x()*2.0, m_szStart.height() + ptDiff.y()*2.0);
         }
 
         rectBB.setTopLeft(pt);
-        QSizeF sz(m_szStart.width() + ptDiff.x(), m_szStart.height() + ptDiff.y());
         rectBB.setSize(sz);
         // before resizing the label to a new size, check if it will still be inside the parent item
-        if (IsContained(rectBB, rotation(), dX, dY) == false)
-        {
-            sz = QSizeF(sz.width()+dX, sz.height()+dY);
-        }
-        else
+        if (IsContained(rectBB, rotation(), dX, dY))
         {
             if (not (m_moveType & IsMovable))
             {
                 setPos(pt);
             }
+        }
+        else
+        {
+            return;
         }
 
         SetSize(sz.width(), sz.height());
@@ -545,11 +530,11 @@ void VTextGraphicsItem::mouseMoveEvent(QGraphicsSceneMouseEvent* pME)
         // new angle will be the starting angle for rotation
         if (fabs(m_dAngle) < 0.01)
         {
-            m_dAngle = GetAngle(pME->scenePos());
+            m_dAngle = GetAngle(mapToParent(pME->pos()));
             return;
         }
         // calculate the angle difference from the starting angle
-        double dAng =  qRadiansToDegrees(GetAngle(pME->scenePos()) - m_dAngle);
+        double dAng =  qRadiansToDegrees(GetAngle(mapToParent(pME->pos())) - m_dAngle);
         rectBB.setTopLeft(m_ptStartPos);
         rectBB.setWidth(m_rectBoundingBox.width());
         rectBB.setHeight(m_rectBoundingBox.height());
@@ -572,13 +557,9 @@ void VTextGraphicsItem::mouseReleaseEvent(QGraphicsSceneMouseEvent* pME)
     if (pME->button() == Qt::LeftButton)
     {
         // restore the cursor
-        if (m_eMode == mMove || m_eMode == mRotate)
+        if ((m_eMode == mMove || m_eMode == mRotate || m_eMode == mResize) && (flags() & QGraphicsItem::ItemIsMovable))
         {
-            RestoreOverrideCursor(cursorArrowCloseHand);
-        }
-        else if (m_eMode == mResize)
-        {
-            RestoreOverrideCursor(Qt::SizeFDiagCursor);
+            SetItemOverrideCursor(this, cursorArrowOpenHand, 1, 1);
         }
         double dDist = fabs(pME->scenePos().x() - m_ptStart.x()) + fabs(pME->scenePos().y() - m_ptStart.y());
         // determine if this was just press/release (bShort == true) or user did some operation between press and release
@@ -634,24 +615,24 @@ void VTextGraphicsItem::hoverMoveEvent(QGraphicsSceneHoverEvent* pHE)
     {
         if (m_rectResize.contains(pHE->pos()) == true)
         {
-            SetOverrideCursor(Qt::SizeFDiagCursor);
+            setCursor(Qt::SizeFDiagCursor);
         }
         else
         {
-            RestoreOverrideCursor(Qt::SizeFDiagCursor);
+            SetItemOverrideCursor(this, cursorArrowOpenHand, 1, 1);
         }
     }
+    VPieceItem::hoverMoveEvent(pHE);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-/**
- * @brief VTextGraphicsItem::hoverLeaveEvent tries to restore normal mouse cursor
- * @param pHE not used
- */
-void VTextGraphicsItem::hoverLeaveEvent(QGraphicsSceneHoverEvent* pHE)
+void VTextGraphicsItem::hoverEnterEvent(QGraphicsSceneHoverEvent *pME)
 {
-    Q_UNUSED(pHE)
-    RestoreOverrideCursor(Qt::SizeFDiagCursor);
+    if (flags() & QGraphicsItem::ItemIsMovable)
+    {
+        SetItemOverrideCursor(this, cursorArrowOpenHand, 1, 1);
+    }
+    VPieceItem::hoverEnterEvent(pME);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -693,7 +674,7 @@ void VTextGraphicsItem::AllUserModifications(const QPointF &pos)
     }
     else
     {
-        SetOverrideCursor(cursorArrowCloseHand, 1, 1);
+        SetItemOverrideCursor(this, cursorArrowCloseHand, 1, 1);
     }
 }
 
@@ -704,7 +685,7 @@ void VTextGraphicsItem::UserRotateAndMove()
     {
         m_eMode = mMove;
     }
-    SetOverrideCursor(cursorArrowCloseHand, 1, 1);
+    SetItemOverrideCursor(this, cursorArrowCloseHand, 1, 1);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -713,11 +694,11 @@ void VTextGraphicsItem::UserMoveAndResize(const QPointF &pos)
     if (m_rectResize.contains(pos) == true)
     {
         m_eMode = mResize;
-        SetOverrideCursor(Qt::SizeFDiagCursor);
+        setCursor(Qt::SizeFDiagCursor);
     }
     else
     {
         m_eMode = mMove; // block later if need
-        SetOverrideCursor(cursorArrowCloseHand, 1, 1);
+        SetItemOverrideCursor(this, cursorArrowCloseHand, 1, 1);
     }
 }

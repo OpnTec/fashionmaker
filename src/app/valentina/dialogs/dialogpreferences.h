@@ -6,7 +6,7 @@
  **
  **  @brief
  **  @copyright
- **  This source code is part of the Valentine project, a pattern making
+ **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2017 Valentina project
  **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
@@ -40,6 +40,7 @@ class PreferencesConfigurationPage;
 class PreferencesPatternPage;
 class PreferencesPathPage;
 class QListWidgetItem;
+class VPattern;
 
 class DialogPreferences : public QDialog
 {
@@ -51,8 +52,9 @@ public:
 signals:
     void UpdateProperties();
 protected:
-    virtual void showEvent(QShowEvent *event) Q_DECL_OVERRIDE;
-    virtual void resizeEvent(QResizeEvent *event) Q_DECL_OVERRIDE;
+    virtual void showEvent(QShowEvent *event) override;
+    virtual void resizeEvent(QResizeEvent *event) override;
+    virtual void changeEvent(QEvent* event) override;
 private slots:
     void PageChanged(QListWidgetItem *current, QListWidgetItem *previous);
 private:

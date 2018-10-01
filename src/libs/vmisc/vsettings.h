@@ -6,7 +6,7 @@
  **
  **  @brief
  **  @copyright
- **  This source code is part of the Valentine project, a pattern making
+ **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2013-2015 Valentina project
  **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
@@ -35,6 +35,7 @@
 #include <QString>
 #include <QtGlobal>
 
+#include "../vmisc/def.h"
 #include "../vlayout/vbank.h"
 #include "vcommonsettings.h"
 
@@ -51,7 +52,7 @@ class VSettings : public VCommonSettings
     Q_OBJECT
 public:
     VSettings(Format format, Scope scope, const QString &organization, const QString &application = QString(),
-              QObject *parent = 0);
+              QObject *parent = nullptr);
 
     QString GetLabelLanguage() const;
     void SetLabelLanguage(const QString &value);
@@ -67,35 +68,8 @@ public:
     bool GetGraphicalOutput() const;
     void SetGraphicalOutput(const bool &value);
 
-    QString GetServer() const;
-    void SetServer(const QString &value);
-
-    bool GetServerSecure() const;
-    void SetServerSecure(const bool &value);
-
-    bool GetProxy() const;
-    void SetProxy(const bool &value);
-
-    QString GetProxyAddress() const;
-    void SetProxyAddress(const QString &value);
-
-    QString GetProxyPort() const;
-    void SetProxyPort(const QString &value);
-
-    QString GetProxyUser() const;
-    void SetProxyUser(const QString &value);
-
-    QString GetProxyPass() const;
-    void SetProxyPass(const QString &value);
-
-    QString GetUsername() const;
-    void SetUsername(const QString &value);
-
-    bool GetSavePassword() const;
-    void SetSavePassword(const bool &value);
-
-    QString GetUserPassword() const;
-    void SetUserPassword(const QString &value);
+    bool IsOpenGLRender() const;
+    void SetOpenGLRender(bool value);
 
     // Layout settings
     qreal GetLayoutPaperHeight() const;
@@ -151,8 +125,64 @@ public:
     static quint8 GetDefMultiplier();
     void SetMultiplier(quint8 value);
 
+    bool GetTextAsPaths() const;
+    static bool GetDefTextAsPaths();
+    void SetTextAsPaths(bool value);
+
+    QStringList GetKnownMaterials() const;
+    void        SetKnownMaterials(const QStringList &list);
+
+    bool IsRememberPatternMaterials() const;
+    void SetRememberPatternMaterials(bool value);
+
+    // settings for the tiled PDFs
+    QMarginsF GetTiledPDFMargins(const Unit &unit) const;
+    void      SetTiledPDFMargins(const QMarginsF &value, const Unit &unit);
+
+    qreal GetTiledPDFPaperHeight(const Unit &unit) const;
+    void  SetTiledPDFPaperHeight(qreal value, const Unit &unit);
+
+    qreal GetTiledPDFPaperWidth(const Unit &unit) const;
+    void  SetTiledPDFPaperWidth(qreal value, const Unit &unit);
+
+    PageOrientation GetTiledPDFOrientation() const;
+    void            SetTiledPDFOrientation(PageOrientation value);
+
+    static const int defaultScrollingDuration;
+    static const int scrollingDurationMin;
+    static const int scrollingDurationMax;
+    int GetScrollingDuration() const;
+    void SetScrollingDuration(int duration);
+
+    static const int defaultScrollingUpdateInterval;
+    static const int scrollingUpdateIntervalMin;
+    static const int scrollingUpdateIntervalMax;
+    int GetScrollingUpdateInterval() const;
+    void SetScrollingUpdateInterval(int updateInterval);
+
+    static const qreal defaultSensorMouseScale;
+    static const qreal sensorMouseScaleMin;
+    static const qreal sensorMouseScaleMax;
+    qreal GetSensorMouseScale() const;
+    void SetSensorMouseScale(qreal scale);
+
+    static const qreal defaultWheelMouseScale;
+    static const qreal wheelMouseScaleMin;
+    static const qreal wheelMouseScaleMax;
+    qreal GetWheelMouseScale() const;
+    void SetWheelMouseScale(qreal scale);
+
+    static const qreal defaultScrollingAcceleration;
+    static const qreal scrollingAccelerationMin;
+    static const qreal scrollingAccelerationMax;
+    qreal GetScrollingAcceleration() const;
+    void SetScrollingAcceleration(qreal acceleration);
+
 private:
     Q_DISABLE_COPY(VSettings)
+
+    template <typename T>
+    T GetCachedValue(T &cache, const QString &setting, T defValue, T valueMin, T valueMax) const;
 };
 
 #endif // VSETTINGS_H

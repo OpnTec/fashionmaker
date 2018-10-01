@@ -6,7 +6,7 @@
  **
  **  @brief
  **  @copyright
- **  This source code is part of the Valentine project, a pattern making
+ **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2015 Valentina project
  **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
@@ -38,10 +38,10 @@ public:
     explicit TST_VMeasurements(QObject *parent = nullptr);
 
 private slots:
-    void CreateEmptyStandardFile();
+    void CreateEmptyMultisizeFile();
     void CreateEmptyIndividualFile();
 
-    void ValidPMCodesStandardFile();
+    void ValidPMCodesMultisizeFile();
     void ValidPMCodesIndividualFile();
 };
 

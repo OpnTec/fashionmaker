@@ -82,5 +82,9 @@
         <file>toolicon/32x32/pin@2x.png</file>
         <file>toolicon/32x32/insert_node.png</file>
         <file>toolicon/32x32/insert_node@2x.png</file>
+        <file>toolicon/32x32/place_label@2x.png</file>
+        <file>toolicon/32x32/place_label.png</file>
+        <file>toolicon/32x32/duplicate_detail.png</file>
+        <file>toolicon/32x32/duplicate_detail@2x.png</file>
     </qresource>
 </RCC>

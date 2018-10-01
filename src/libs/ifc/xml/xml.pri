@@ -9,7 +9,8 @@ HEADERS += \
     $$PWD/vabstractpattern.h \
     $$PWD/vvstconverter.h \
     $$PWD//vvitconverter.h \
-    $$PWD//vabstractmconverter.h
+    $$PWD//vabstractmconverter.h \
+    $$PWD/vlabeltemplateconverter.h
 
 SOURCES += \
     $$PWD/vabstractconverter.cpp \
@@ -19,4 +20,5 @@ SOURCES += \
     $$PWD/vabstractpattern.cpp \
     $$PWD/vvstconverter.cpp \
     $$PWD//vvitconverter.cpp \
-    $$PWD//vabstractmconverter.cpp
+    $$PWD//vabstractmconverter.cpp \
+    $$PWD/vlabeltemplateconverter.cpp

@@ -6,7 +6,7 @@
  **
  **  @brief
  **  @copyright
- **  This source code is part of the Valentine project, a pattern making
+ **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2013-2015 Valentina project
  **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
@@ -51,7 +51,7 @@ class DialogUnionDetails : public DialogTool
     Q_OBJECT
 public:
     DialogUnionDetails(const VContainer *data, const quint32 &toolId, QWidget *parent = nullptr);
-    virtual ~DialogUnionDetails() Q_DECL_OVERRIDE;
+    virtual ~DialogUnionDetails() override;
 
     quint32          getD1() const;
     quint32          getD2() const;
@@ -60,7 +60,7 @@ public:
 
     bool RetainPieces() const;
 public slots:
-    virtual void ChosenObject(quint32 id, const SceneObject &type) Q_DECL_OVERRIDE;
+    virtual void ChosenObject(quint32 id, const SceneObject &type) override;
 private:
     Q_DISABLE_COPY(DialogUnionDetails)
 

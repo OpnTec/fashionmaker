@@ -6,7 +6,7 @@
  **
  **  @brief
  **  @copyright
- **  This source code is part of the Valentine project, a pattern making
+ **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2013-2015 Valentina project
  **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
@@ -45,8 +45,14 @@
 //VFormula
 //---------------------------------------------------------------------------------------------------------------------
 VFormula::VFormula()
-    :formula(QString()), value(tr("Error")), checkZero(true), data(nullptr), toolId(NULL_ID),
-      postfix(QString()), _error(true), dValue(0)
+    : formula(QString()),
+      value(tr("Error")),
+      checkZero(true),
+      data(nullptr),
+      toolId(NULL_ID),
+      postfix(QString()),
+      _error(true),
+      dValue(0)
 {}
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -59,10 +65,7 @@ VFormula::VFormula(const QString &formula, const VContainer *container)
       postfix(QString()),
       _error(true),
       dValue(0)
-{
-    this->formula.replace("\n", " ");// Replace line return with spaces for calc if exist
-    Eval();
-}
+{}
 
 //---------------------------------------------------------------------------------------------------------------------
 VFormula &VFormula::operator=(const VFormula &formula)
@@ -71,22 +74,27 @@ VFormula &VFormula::operator=(const VFormula &formula)
     {
         return *this;
     }
-    this->formula = formula.GetFormula();
-    this->value = formula.getStringValue();
-    this->checkZero = formula.getCheckZero();
-    this->data = formula.getData();
-    this->toolId = formula.getToolId();
-    this->postfix = formula.getPostfix();
-    this->_error = formula.error();
-    this->dValue = formula.getDoubleValue();
+    this->formula = formula.formula;
+    this->value = formula.value;
+    this->checkZero = formula.checkZero;
+    this->data = formula.data;
+    this->toolId = formula.toolId;
+    this->postfix = formula.postfix;
+    this->_error = formula._error;
+    this->dValue = formula.dValue;
     return *this;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 VFormula::VFormula(const VFormula &formula)
-    :formula(formula.GetFormula()), value(formula.getStringValue()), checkZero(formula.getCheckZero()),
-      data(formula.getData()), toolId(formula.getToolId()), postfix(formula.getPostfix()), _error(formula.error()),
-      dValue(formula.getDoubleValue())
+    : formula(formula.formula),
+      value(formula.value),
+      checkZero(formula.checkZero),
+      data(formula.getData()),
+      toolId(formula.toolId),
+      postfix(formula.postfix),
+      _error(formula._error),
+      dValue(formula.dValue)
 {}
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -103,6 +111,7 @@ bool VFormula::operator==(const VFormula &formula) const
     return isEqual;
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 bool VFormula::operator!=(const VFormula &formula) const
 {
     return !VFormula::operator==(formula);
@@ -134,8 +143,6 @@ void VFormula::SetFormula(const QString &value, FormulaType type)
         {
             formula = value;
         }
-        formula.replace("\n", " ");// Replace line return with spaces for calc if exist
-        Eval();
     }
 }
 
@@ -163,7 +170,6 @@ void VFormula::setCheckZero(bool value)
     if (checkZero != value)
     {
         checkZero = value;
-        Eval();
     }
 }
 
@@ -179,7 +185,6 @@ void VFormula::setData(const VContainer *value)
     if (data != value && value != nullptr)
     {
         data = value;
-        Eval();
     }
 }
 
@@ -207,7 +212,6 @@ void VFormula::setPostfix(const QString &value)
     if (postfix != value)
     {
         postfix = value;
-        Eval();
     }
 }
 
@@ -230,53 +234,35 @@ void VFormula::Eval()
     {
         return;
     }
-    if (formula.isEmpty())
-    {
-        value = tr("Error");
-        _error = true;
-        dValue = 0;
-    }
-    else
+
+    value = tr("Error");
+    _error = true;
+    dValue = 0;
+    qreal result = 0;
+
+    if (not formula.isEmpty())
     {
         try
         {
             QScopedPointer<Calculator> cal(new Calculator());
-            QString expression = qApp->TrVars()->FormulaFromUser(formula, qApp->Settings()->GetOsSeparator());
-            const qreal result = cal->EvalFormula(data->PlainVariables(), expression);
-
-            if (qIsInf(result) || qIsNaN(result))
-            {
-                value = tr("Error");
-                _error = true;
-                dValue = 0;
-            }
-            else
-            {
-                //if result equal 0
-                if (checkZero && qFuzzyIsNull(result))
-                {
-                    value = QString("0");
-                    _error = true;
-                    dValue = 0;
-                }
-                else
-                {
-                    dValue = result;
-                    value = QString(qApp->LocaleToString(result) + " " + postfix);
-                    _error = false;
-                }
-            }
+            const QString expression = qApp->TrVars()->FormulaFromUser(formula, qApp->Settings()->GetOsSeparator());
+            result = cal->EvalFormula(data->DataVariables(), expression);
         }
         catch (qmu::QmuParserError &e)
         {
-            value = tr("Error");
-            _error = true;
-            dValue = 0;
             qDebug() << "\nMath parser error:\n"
                      << "--------------------------------------\n"
                      << "Message:     " << e.GetMsg()  << "\n"
                      << "Expression:  " << e.GetExpr() << "\n"
                      << "--------------------------------------";
+            return;
+        }
+
+        if (not qIsInf(result) && not qIsNaN(result) && not (checkZero && qFuzzyIsNull(result)))
+        {
+            dValue = result;
+            value = qApp->LocaleToString(result) + QLatin1Char(' ') + postfix;
+            _error = false;
         }
     }
 }

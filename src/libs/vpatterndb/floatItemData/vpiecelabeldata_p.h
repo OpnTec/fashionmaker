@@ -6,7 +6,7 @@
  **
  **  @brief
  **  @copyright
- **  This source code is part of the Valentine project, a pattern making
+ **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2017 Valentina project
  **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
@@ -31,33 +31,58 @@
 
 #include <QSharedData>
 #include <QString>
+#include <QVector>
 
 #include "../vmisc/diagnostic.h"
 #include "floatitemdef.h"
+#include "../ifc/ifcdef.h"
 
 QT_WARNING_PUSH
 QT_WARNING_DISABLE_GCC("-Weffc++")
+QT_WARNING_DISABLE_GCC("-Wnon-virtual-dtor")
 
 class VPieceLabelDataPrivate : public QSharedData
 {
 public:
     VPieceLabelDataPrivate()
         : m_qsLetter(),
-          m_conMCP()
+          m_annotation(),
+          m_orientation(),
+          m_rotationWay(),
+          m_tilt(),
+          m_foldPosition(),
+          m_quantity(1),
+          m_onFold(false),
+          m_lines()
     {}
 
     VPieceLabelDataPrivate(const VPieceLabelDataPrivate &data)
         : QSharedData(data),
           m_qsLetter(data.m_qsLetter),
-          m_conMCP(data.m_conMCP)
+          m_annotation(data.m_annotation),
+          m_orientation(data.m_orientation),
+          m_rotationWay(data.m_rotationWay),
+          m_tilt(data.m_tilt),
+          m_foldPosition(data.m_foldPosition),
+          m_quantity(data.m_quantity),
+          m_onFold(data.m_onFold),
+          m_lines(data.m_lines)
     {}
 
     ~VPieceLabelDataPrivate() Q_DECL_EQ_DEFAULT;
 
     /** @brief m_qsLetter Detail letter (should be no more than 3 characters) */
-    QString      m_qsLetter;
-    /** @brief m_conMCP List of material, cut, placement tuples */
-    MCPContainer m_conMCP;
+    QString m_qsLetter;
+    QString m_annotation;
+    QString m_orientation;
+    QString m_rotationWay;
+    QString m_tilt;
+    QString m_foldPosition;
+
+    int  m_quantity;
+    bool m_onFold;
+
+    QVector<VLabelTemplateLine> m_lines;
 
 private:
     VPieceLabelDataPrivate &operator=(const VPieceLabelDataPrivate &) Q_DECL_EQ_DELETE;

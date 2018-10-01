@@ -16,8 +16,26 @@ include(../../../common.pri)
 # CONFIG += testcase adds a  'make check' which is great. But by default it also
 # adds a 'make install' that installs the test cases, which we do not want.
 # Can configure it not to do that with 'no_testcase_installs'
-# We use C++11 standard
-CONFIG += c++11 testcase no_testcase_installs
+CONFIG += testcase no_testcase_installs
+
+# The following define makes your compiler emit warnings if you use
+# any feature of Qt which has been marked as deprecated (the exact warnings
+# depend on your compiler). Please consult the documentation of the
+# deprecated API in order to know how to port your code away from it.
+DEFINES += QT_DEPRECATED_WARNINGS
+
+# You can also make your code fail to compile if you use deprecated APIs.
+# In order to do so, uncomment the following line.
+# You can also select to disable deprecated APIs only up to a certain version of Qt.
+#DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
+
+# Since Q5.4 available support C++14
+greaterThan(QT_MAJOR_VERSION, 4):greaterThan(QT_MINOR_VERSION, 3) {
+    CONFIG += c++14
+} else {
+    # We use C++11 standard
+    CONFIG += c++11
+}
 
 # Use out-of-source builds (shadow builds)
 CONFIG -= app_bundle debug_and_release debug_and_release_target
@@ -41,9 +59,11 @@ SOURCES += \
     tst_qmuparsererrormsg.cpp \
     tst_tstranslation.cpp \
     tst_buitinregexp.cpp \
-    tst_abstractregexp.cpp
+    tst_abstractregexp.cpp \
+    tst_tslocaletranslation.cpp \
+    tst_abstracttranslation.cpp
 
-win32-msvc*:SOURCES += stable.cpp
+*msvc*:SOURCES += stable.cpp
 
 HEADERS += \
     stable.h \
@@ -51,7 +71,9 @@ HEADERS += \
     tst_qmuparsererrormsg.h \
     tst_tstranslation.h \
     tst_buitinregexp.h \
-    tst_abstractregexp.h
+    tst_abstractregexp.h \
+    tst_tslocaletranslation.h \
+    tst_abstracttranslation.h
 
 # Set using ccache. Function enable_ccache() defined in common.pri.
 $$enable_ccache()
@@ -62,9 +84,9 @@ include(warnings.pri)
 
 CONFIG(release, debug|release){
     # Release mode
-    !win32-msvc*:CONFIG += silent
+    !*msvc*:CONFIG += silent
     DEFINES += V_NO_ASSERT
-    !unix:*-g++{
+    !unix:*g++*{
         QMAKE_CXXFLAGS += -fno-omit-frame-pointer # Need for exchndl.dll
     }
 
@@ -73,7 +95,7 @@ CONFIG(release, debug|release){
     } else {
         # Turn on debug symbols in release mode on Unix systems.
         # On Mac OS X temporarily disabled. Need find way how to strip binary file.
-        !macx:!win32-msvc*{
+        !macx:!*msvc*{
             QMAKE_CXXFLAGS_RELEASE += -g -gdwarf-3
             QMAKE_CFLAGS_RELEASE += -g -gdwarf-3
             QMAKE_LFLAGS_RELEASE =
@@ -117,6 +139,15 @@ DEPENDPATH += $$PWD/../../libs/vpatterndb
 win32:!win32-g++: PRE_TARGETDEPS += $$OUT_PWD/../../libs/vpatterndb/$${DESTDIR}/vpatterndb.lib
 else:unix|win32-g++: PRE_TARGETDEPS += $$OUT_PWD/../../libs/vpatterndb/$${DESTDIR}/libvpatterndb.a
 
+#VTest static library (depend on VGeometry)
+unix|win32: LIBS += -L$$OUT_PWD/../../libs/vtest/$${DESTDIR} -lvtest
+
+INCLUDEPATH += $$PWD/../../libs/vtest
+DEPENDPATH += $$PWD/../../libs/vtest
+
+win32:!win32-g++: PRE_TARGETDEPS += $$OUT_PWD/../../libs/vtest/$${DESTDIR}/vtest.lib
+else:unix|win32-g++: PRE_TARGETDEPS += $$OUT_PWD/../../libs/vtest/$${DESTDIR}/libvtest.a
+
 #VMisc static library
 unix|win32: LIBS += -L$$OUT_PWD/../../libs/vmisc/$${DESTDIR} -lvmisc
 
@@ -127,13 +158,13 @@ win32:!win32-g++: PRE_TARGETDEPS += $$OUT_PWD/../../libs/vmisc/$${DESTDIR}/vmisc
 else:unix|win32-g++: PRE_TARGETDEPS += $$OUT_PWD/../../libs/vmisc/$${DESTDIR}/libvmisc.a
 
 ## VGeometry static library (depend on ifc)
-#unix|win32: LIBS += -L$$OUT_PWD/../../libs/vgeometry/$${DESTDIR} -lvgeometry
+unix|win32: LIBS += -L$$OUT_PWD/../../libs/vgeometry/$${DESTDIR} -lvgeometry
 
-#INCLUDEPATH += $$PWD/../../libs/vgeometry
-#DEPENDPATH += $$PWD/../../libs/vgeometry
+INCLUDEPATH += $$PWD/../../libs/vgeometry
+DEPENDPATH += $$PWD/../../libs/vgeometry
 
-#win32:!win32-g++: PRE_TARGETDEPS += $$OUT_PWD/../../libs/vgeometry/$${DESTDIR}/vgeometry.lib
-#else:unix|win32-g++: PRE_TARGETDEPS += $$OUT_PWD/../../libs/vgeometry/$${DESTDIR}/libvgeometry.a
+win32:!win32-g++: PRE_TARGETDEPS += $$OUT_PWD/../../libs/vgeometry/$${DESTDIR}/vgeometry.lib
+else:unix|win32-g++: PRE_TARGETDEPS += $$OUT_PWD/../../libs/vgeometry/$${DESTDIR}/libvgeometry.a
 
 # IFC static library (depend on QMuParser)
 unix|win32: LIBS += -L$$OUT_PWD/../../libs/ifc/$${DESTDIR}/ -lifc

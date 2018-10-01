@@ -6,7 +6,7 @@
  **
  **  @brief
  **  @copyright
- **  This source code is part of the Valentine project, a pattern making
+ **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2013-2015 Valentina project
  **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
@@ -34,6 +34,8 @@
 #include <QGraphicsLineItem>
 #include <QGraphicsScene>
 #include <QGraphicsSceneMouseEvent>
+#include <QIcon>
+#include <QMenu>
 #include <QPen>
 #include <QPoint>
 #include <QRectF>
@@ -50,95 +52,78 @@
 #include "../ifc/ifcdef.h"
 #include "../vmisc/vabstractapplication.h"
 #include "../vpatterndb/vcontainer.h"
+#include "../vpatterndb/vpiecenode.h"
 #include "../vwidgets/vmaingraphicsscene.h"
+#include "../vwidgets/vmaingraphicsview.h"
 #include "../vabstracttool.h"
 #include "../vdatatool.h"
 #include "vabstractnode.h"
+#include "../../undocommands/label/movelabel.h"
+#include "../../undocommands/label/showlabel.h"
+#include "../vtoolseamallowance.h"
 
 const QString VNodePoint::ToolType = QStringLiteral("modeling");
 
 //---------------------------------------------------------------------------------------------------------------------
 /**
  * @brief VNodePoint constructor.
- * @param doc dom document container.
- * @param data container with variables.
- * @param id object id in container.
- * @param idPoint object id in containerPoint.
- * @param typeCreation way we create this tool.
- * @param idTool tool id.
- * @param qoParent QObject parent
+ * @param initData init data.
  * @param parent parent object.
  */
-VNodePoint::VNodePoint(VAbstractPattern *doc, VContainer *data, quint32 id, quint32 idPoint, const Source &typeCreation,
-                       const QString &drawName, const quint32 &idTool, QObject *qoParent, QGraphicsItem *parent)
-    :VAbstractNode(doc, data, id, idPoint, drawName, idTool, qoParent), QGraphicsEllipseItem(parent), radius(0),
-      namePoint(nullptr), lineName(nullptr)
+VNodePoint::VNodePoint(const VAbstractNodeInitData &initData, QObject *qoParent, QGraphicsItem *parent)
+    : VAbstractNode(initData.doc, initData.data, initData.id, initData.idObject, initData.drawName, initData.idTool,
+                    qoParent),
+      VScenePoint(parent)
 {
-    radius = ToPixel(DefPointRadius/*mm*/, Unit::Mm);
-    namePoint = new VGraphicsSimpleTextItem(this);
-    connect(namePoint, &VGraphicsSimpleTextItem::PointChoosed, this, &VNodePoint::PointChoosed);
-    lineName = new QGraphicsLineItem(this);
-    connect(namePoint, &VGraphicsSimpleTextItem::NameChangePosition, this,
-            &VNodePoint::NameChangePosition);
-    connect(namePoint, &VGraphicsSimpleTextItem::ShowContextMenu,
-            RECEIVER(this)[this](QGraphicsSceneContextMenuEvent *event)
+    connect(m_namePoint, &VGraphicsSimpleTextItem::PointChoosed, this, &VNodePoint::PointChoosed);
+    connect(m_namePoint, &VGraphicsSimpleTextItem::NameChangePosition, this, &VNodePoint::NameChangePosition);
+    connect(m_namePoint, &VGraphicsSimpleTextItem::ShowContextMenu,
+            this, [this](QGraphicsSceneContextMenuEvent *event)
     {
-        emit ShowContextMenu(event);
+        contextMenuEvent(event);
     });
-    this->setPen(QPen(Qt::black, qApp->toPixel(WidthHairLine(*VAbstractTool::data.GetPatternUnit()))));
-    this->setBrush(QBrush(Qt::NoBrush));
-    this->setFlag(QGraphicsItem::ItemIsSelectable, true);
-    this->setAcceptHoverEvents(true);
-    RefreshPointGeometry(*VAbstractTool::data.GeometricObject<VPointF>(id));
-    ToolCreation(typeCreation);
+    RefreshPointGeometry(*VAbstractTool::data.GeometricObject<VPointF>(initData.id));
+    ToolCreation(initData.typeCreation);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 /**
  * @brief Create help create tool.
- * @param doc dom document container.
- * @param data container with variables.
- * @param id object id in container.
- * @param idPoint object id in containerPoint.
- * @param parse parser file mode.
- * @param typeCreation way we create this tool.
- * @param idTool tool id.
+ * @param initData init data.
  */
-void VNodePoint::Create(VAbstractPattern *doc, VContainer *data, VMainGraphicsScene *scene,
-                        quint32 id, quint32 idPoint, const Document &parse,
-                        const Source &typeCreation, const QString &drawName, const quint32 &idTool)
+void VNodePoint::Create(const VAbstractNodeInitData &initData)
 {
-    if (parse == Document::FullParse)
+    if (initData.parse == Document::FullParse)
     {
-        VAbstractTool::AddRecord(id, Tool::NodePoint, doc);
+        VAbstractTool::AddRecord(initData.id, Tool::NodePoint, initData.doc);
         //TODO Need create garbage collector and remove all nodes, what we don't use.
         //Better check garbage before each saving file. Check only modeling tags.
-        VNodePoint *point = new VNodePoint(doc, data, id, idPoint, typeCreation, drawName, idTool, doc);
+        VNodePoint *point = new VNodePoint(initData);
 
-        connect(scene, &VMainGraphicsScene::EnableToolMove, point, &VNodePoint::EnableToolMove);
-        connect(scene, &VMainGraphicsScene::EnablePointItemHover, point, &VNodePoint::AllowHover);
-        connect(scene, &VMainGraphicsScene::EnablePointItemSelection, point, &VNodePoint::AllowSelecting);
-        connect(scene, &VMainGraphicsScene::EnableLabelItemHover, point, &VNodePoint::AllowLabelHover);
-        connect(scene, &VMainGraphicsScene::EnableLabelItemSelection, point, &VNodePoint::AllowLabelSelecting);
-        VAbstractPattern::AddTool(id, point);
-        if (idTool != NULL_ID)
+        connect(initData.scene, &VMainGraphicsScene::EnableToolMove, point, &VNodePoint::EnableToolMove);
+        connect(initData.scene, &VMainGraphicsScene::EnablePointItemHover, point, &VNodePoint::AllowHover);
+        connect(initData.scene, &VMainGraphicsScene::EnablePointItemSelection, point, &VNodePoint::AllowSelecting);
+        connect(initData.scene, &VMainGraphicsScene::EnableLabelItemHover, point, &VNodePoint::AllowLabelHover);
+        connect(initData.scene, &VMainGraphicsScene::EnableLabelItemSelection, point, &VNodePoint::AllowLabelSelecting);
+        VAbstractPattern::AddTool(initData.id, point);
+        if (initData.idTool != NULL_ID)
         {
             //Some nodes we don't show on scene. Tool that create this nodes must free memory.
-            VDataTool *tool = VAbstractPattern::getTool(idTool);
+            VDataTool *tool = VAbstractPattern::getTool(initData.idTool);
             SCASSERT(tool != nullptr)
             point->setParent(tool);// Adopted by a tool
         }
         else
         {
             // Try to prevent memory leak
-            scene->addItem(point);// First adopted by scene
+            initData.scene->addItem(point);// First adopted by scene
             point->hide();// If no one will use node, it will stay hidden
             point->SetParentType(ParentType::Scene);
         }
     }
     else
     {
-        doc->UpdateToolData(id, data);
+        initData.doc->UpdateToolData(initData.id, initData.data);
     }
 }
 
@@ -149,9 +134,43 @@ QString VNodePoint::getTagName() const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void VNodePoint::ChangeLabelPosition(quint32 id, const QPointF &pos)
+{
+    if (id == m_id)
+    {
+        QSharedPointer<VPointF> point = VAbstractTool::data.GeometricObject<VPointF>(id);
+        point->setMx(pos.x());
+        point->setMy(pos.y());
+        m_namePoint->blockSignals(true);
+        m_namePoint->setPos(pos);
+        m_namePoint->blockSignals(false);
+        RefreshLine();
+        if (QGraphicsScene *sc = scene())
+        {
+            VMainGraphicsView::NewSceneRect(sc, qApp->getSceneView(), this);
+        }
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VNodePoint::SetLabelVisible(quint32 id, bool visible)
+{
+    if (m_id == id)
+    {
+        const QSharedPointer<VPointF> point = VAbstractTool::data.GeometricObject<VPointF>(id);
+        point->SetShowLabel(visible);
+        RefreshPointGeometry(*point);
+        if (QGraphicsScene *sc = scene())
+        {
+            VMainGraphicsView::NewSceneRect(sc, qApp->getSceneView(), this);
+        }
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 void VNodePoint::PointChoosed()
 {
-    emit ChoosedTool(id, SceneObject::Point);
+    emit ChoosedTool(m_id, SceneObject::Point);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -160,7 +179,14 @@ void VNodePoint::PointChoosed()
  */
 void VNodePoint::FullUpdateFromFile()
 {
-    RefreshPointGeometry(*VAbstractTool::data.GeometricObject<VPointF>(id));
+    try
+    {
+        RefreshPointGeometry(*VAbstractTool::data.GeometricObject<VPointF>(m_id));
+    }
+    catch (const VExceptionBadId &)
+    {
+        // ignore
+    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -169,14 +195,15 @@ void VNodePoint::FullUpdateFromFile()
  */
 void VNodePoint::AddToFile()
 {
-    const QSharedPointer<VPointF> point = VAbstractTool::data.GeometricObject<VPointF>(id);
+    const QSharedPointer<VPointF> point = VAbstractTool::data.GeometricObject<VPointF>(m_id);
     QDomElement domElement = doc->createElement(getTagName());
 
-    doc->SetAttribute(domElement, VDomDocument::AttrId, id);
+    doc->SetAttribute(domElement, VDomDocument::AttrId, m_id);
     doc->SetAttribute(domElement, AttrType, ToolType);
     doc->SetAttribute(domElement, AttrIdObject, idNode);
     doc->SetAttribute(domElement, AttrMx, qApp->fromPixel(point->mx()));
     doc->SetAttribute(domElement, AttrMy, qApp->fromPixel(point->my()));
+    doc->SetAttribute<bool>(domElement, AttrShowLabel, point->IsShowLabel());
     if (idTool != NULL_ID)
     {
         doc->SetAttribute(domElement, AttrIdTool, idTool);
@@ -186,30 +213,10 @@ void VNodePoint::AddToFile()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-/**
- * @brief RefreshDataInFile refresh attributes in file. If attributes don't exist create them.
- */
-void VNodePoint::RefreshDataInFile()
-{
-    const QSharedPointer<VPointF> point = VAbstractTool::data.GeometricObject<VPointF>(id);
-    QDomElement domElement = doc->elementById(id);
-    if (domElement.isElement())
-    {
-        doc->SetAttribute(domElement, AttrIdObject, idNode);
-        doc->SetAttribute(domElement, AttrMx, qApp->fromPixel(point->mx()));
-        doc->SetAttribute(domElement, AttrMy, qApp->fromPixel(point->my()));
-        if (idTool != NULL_ID)
-        {
-            doc->SetAttribute(domElement, AttrIdTool, idTool);
-        }
-    }
-}
-
-//---------------------------------------------------------------------------------------------------------------------
 void VNodePoint::mousePressEvent(QGraphicsSceneMouseEvent *event)
 {
     // Special for not selectable item first need to call standard mousePressEvent then accept event
-    QGraphicsEllipseItem::mousePressEvent(event);
+    VScenePoint::mousePressEvent(event);
 
     // Somehow clicking on notselectable object do not clean previous selections.
     if (not (flags() & ItemIsSelectable) && scene())
@@ -227,33 +234,11 @@ void VNodePoint::mousePressEvent(QGraphicsSceneMouseEvent *event)
  */
 void VNodePoint::mouseReleaseEvent(QGraphicsSceneMouseEvent *event)
 {
-    if (event->button() == Qt::LeftButton)
+    if (IsSelectedByReleaseEvent(this, event))
     {
-        emit ChoosedTool(id, SceneObject::Point);
+        emit ChoosedTool(m_id, SceneObject::Point);
     }
-    QGraphicsEllipseItem::mouseReleaseEvent(event);
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-/**
- * @brief hoverMoveEvent handle hover move events.
- * @param event hover move event.
- */
-void VNodePoint::hoverMoveEvent(QGraphicsSceneHoverEvent *event)
-{
-    Q_UNUSED(event)
-    this->setPen(QPen(currentColor, qApp->toPixel(WidthMainLine(*VAbstractTool::data.GetPatternUnit()))));
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-/**
- * @brief hoverLeaveEvent handle hover leave events.
- * @param event hover leave event.
- */
-void VNodePoint::hoverLeaveEvent(QGraphicsSceneHoverEvent *event)
-{
-    Q_UNUSED(event)
-    this->setPen(QPen(currentColor, qApp->toPixel(WidthHairLine(*VAbstractTool::data.GetPatternUnit()))));
+    VScenePoint::mouseReleaseEvent(event);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -263,59 +248,7 @@ void VNodePoint::hoverLeaveEvent(QGraphicsSceneHoverEvent *event)
  */
 void VNodePoint::NameChangePosition(const QPointF &pos)
 {
-    VPointF *point = new VPointF(*VAbstractTool::data.GeometricObject<VPointF>(id));
-    QPointF p = pos - this->pos();
-    point->setMx(p.x());
-    point->setMy(p.y());
-    RefreshLine();
-    UpdateNamePosition(point->mx(), point->my());
-    VAbstractTool::data.UpdateGObject(id, point);
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-/**
- * @brief UpdateNamePosition update label position in file.
- * @param mx label bias x axis.
- * @param my label bias y axis.
- */
-void VNodePoint::UpdateNamePosition(qreal mx, qreal my)
-{
-    QDomElement domElement = doc->elementById(id);
-    if (domElement.isElement())
-    {
-        doc->SetAttribute(domElement, AttrMx, QString().setNum(qApp->fromPixel(mx)));
-        doc->SetAttribute(domElement, AttrMy, QString().setNum(qApp->fromPixel(my)));
-        emit toolhaveChange();
-    }
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-/**
- * @brief RefreshPointGeometry refresh point on scene.
- * @param point point position.
- */
-void VNodePoint::RefreshPointGeometry(const VPointF &point)
-{
-    QRectF rec = QRectF(0, 0, radius*2, radius*2);
-    rec.translate(-rec.center().x(), -rec.center().y());
-    this->setRect(rec);
-    this->setPos(static_cast<QPointF>(point));
-
-    namePoint->blockSignals(true);
-    namePoint->setText(point.name());
-    namePoint->setPos(QPointF(point.mx(), point.my()));
-    namePoint->blockSignals(false);
-
-    RefreshLine();
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-/**
- * @brief RefreshLine refresh label line on scene.
- */
-void VNodePoint::RefreshLine()
-{
-    VAbstractTool::RefreshLine(this, namePoint, lineName, radius);
+    qApp->getUndoStack()->push(new MoveLabel(doc, pos - this->pos(), m_id));
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -334,9 +267,165 @@ void VNodePoint::HideNode()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void VNodePoint::contextMenuEvent(QGraphicsSceneContextMenuEvent *event)
+{
+    if (m_suppressContextMenu)
+    {
+        return;
+    }
+
+    if (VToolSeamAllowance *piece = qgraphicsitem_cast<VToolSeamAllowance *>(parentItem()))
+    {
+        QMenu menu;
+        QAction *actionShowLabel = menu.addAction(tr("Show label"));
+        actionShowLabel->setCheckable(true);
+        actionShowLabel->setChecked(VAbstractTool::data.GeometricObject<VPointF>(m_id)->IsShowLabel());
+
+        QAction *actionExclude = menu.addAction(tr("Exclude"));
+
+        QMenu *angleTypeMenu = menu.addMenu(tr("Angle"));
+        PieceNodeAngle curType = PieceNodeAngle::ByLength;
+
+        const VPiece detail = VAbstractTool::data.GetPiece(piece->getId());
+        const int nodeIndex = detail.GetPath().indexOfNode(m_id);
+        if (nodeIndex != -1)
+        {
+            const VPieceNode &node = detail.GetPath().at(nodeIndex);
+            curType = node.GetAngleType();
+        }
+        else
+        {
+            angleTypeMenu->setVisible(false);
+        }
+
+        auto InitAngleAction = [angleTypeMenu, curType](const QString &name, PieceNodeAngle checkType)
+        {
+            QAction *action = angleTypeMenu->addAction(name);
+            action->setCheckable(true);
+            action->setChecked(curType == checkType);
+            return action;
+        };
+
+        QAction *actionByLength = InitAngleAction(tr("by length"), PieceNodeAngle::ByLength);
+        QAction *actionByPointsIntersection = InitAngleAction(tr("by points intersetions"),
+                                                              PieceNodeAngle::ByPointsIntersection);
+        QAction *actionByFirstEdgeSymmetry = InitAngleAction(tr("by first edge symmetry"),
+                                                             PieceNodeAngle::ByFirstEdgeSymmetry);
+        QAction *actionBySecondEdgeSymmetry = InitAngleAction(tr("by second edge symmetry"),
+                                                              PieceNodeAngle::BySecondEdgeSymmetry);
+        QAction *actionByFirstEdgeRightAngle = InitAngleAction(tr("by first edge right angle"),
+                                                               PieceNodeAngle::ByFirstEdgeRightAngle);
+        QAction *actionBySecondEdgeRightAngle = InitAngleAction(tr("by second edge right angle"),
+                                                                PieceNodeAngle::BySecondEdgeRightAngle);
+
+        QAction *separatorAct = new QAction(this);
+        separatorAct->setSeparator(true);
+        menu.addAction(separatorAct);
+
+        QAction *actionOption = menu.addAction(QIcon::fromTheme("preferences-other"), tr("Options"));
+
+        QAction *inLayoutOption = menu.addAction(tr("In layout"));
+        inLayoutOption->setCheckable(true);
+        inLayoutOption->setChecked(detail.IsInLayout());
+
+        QAction *forbidFlippingOption = menu.addAction(tr("Forbid flipping"));
+        forbidFlippingOption->setCheckable(true);
+        forbidFlippingOption->setChecked(detail.IsForbidFlipping());
+
+        QAction *forceFlippingOption = menu.addAction(tr("Force flipping"));
+        forceFlippingOption->setCheckable(true);
+        forceFlippingOption->setChecked(detail.IsForceFlipping());
+
+        QAction *actionRemove = menu.addAction(QIcon::fromTheme("edit-delete"), tr("Delete"));
+        piece->referens() > 1 ? actionRemove->setEnabled(false) : actionRemove->setEnabled(true);
+
+        QAction *selectedAction = menu.exec(event->screenPos());
+        if (selectedAction == actionOption)
+        {
+            emit ShowOptions();
+        }
+        else if (selectedAction == inLayoutOption)
+        {
+            emit ToggleInLayout(selectedAction->isChecked());
+        }
+        else if (selectedAction == forbidFlippingOption)
+        {
+            emit ToggleForbidFlipping(selectedAction->isChecked());
+        }
+        else if (selectedAction == forceFlippingOption)
+        {
+            emit ToggleForceFlipping(selectedAction->isChecked());
+        }
+        else if (selectedAction == actionRemove)
+        {
+            try
+            {
+                emit Delete();
+            }
+            catch(const VExceptionToolWasDeleted &e)
+            {
+                Q_UNUSED(e);
+                return;//Leave this method immediately!!!
+            }
+            //Leave this method immediately after call!!!
+        }
+        else if (selectedAction == actionShowLabel)
+        {
+            qApp->getUndoStack()->push(new ShowLabel(doc, m_id, selectedAction->isChecked()));
+        }
+        else if (selectedAction == actionExclude)
+        {
+            emit ToggleExcludeState(m_id);
+        }
+        else if (selectedAction == actionByLength)
+        {
+            if (curType != PieceNodeAngle::ByLength)
+            {
+                emit ToggleAngleType(m_id, PieceNodeAngle::ByLength);
+            }
+        }
+        else if (selectedAction == actionByPointsIntersection)
+        {
+            if (curType != PieceNodeAngle::ByPointsIntersection)
+            {
+                emit ToggleAngleType(m_id, PieceNodeAngle::ByPointsIntersection);
+            }
+        }
+        else if (selectedAction == actionByFirstEdgeSymmetry)
+        {
+            if (curType != PieceNodeAngle::ByFirstEdgeSymmetry)
+            {
+                emit ToggleAngleType(m_id, PieceNodeAngle::ByFirstEdgeSymmetry);
+            }
+        }
+        else if (selectedAction == actionBySecondEdgeSymmetry)
+        {
+            if (curType != PieceNodeAngle::BySecondEdgeSymmetry)
+            {
+                emit ToggleAngleType(m_id, PieceNodeAngle::BySecondEdgeSymmetry);
+            }
+        }
+        else if (selectedAction == actionByFirstEdgeRightAngle)
+        {
+            if (curType != PieceNodeAngle::ByFirstEdgeRightAngle)
+            {
+                emit ToggleAngleType(m_id, PieceNodeAngle::ByFirstEdgeRightAngle);
+            }
+        }
+        else if (selectedAction == actionBySecondEdgeRightAngle)
+        {
+            if (curType != PieceNodeAngle::BySecondEdgeRightAngle)
+            {
+                emit ToggleAngleType(m_id, PieceNodeAngle::BySecondEdgeRightAngle);
+            }
+        }
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 void VNodePoint::EnableToolMove(bool move)
 {
-    namePoint->setFlag(QGraphicsItem::ItemIsMovable, move);
+    m_namePoint->setFlag(QGraphicsItem::ItemIsMovable, move);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -354,11 +443,11 @@ void VNodePoint::AllowSelecting(bool enabled)
 //---------------------------------------------------------------------------------------------------------------------
 void VNodePoint::AllowLabelHover(bool enabled)
 {
-    namePoint->setAcceptHoverEvents(enabled);
+    m_namePoint->setAcceptHoverEvents(enabled);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void VNodePoint::AllowLabelSelecting(bool enabled)
 {
-    namePoint->setFlag(QGraphicsItem::ItemIsSelectable, enabled);
+    m_namePoint->setFlag(QGraphicsItem::ItemIsSelectable, enabled);
 }

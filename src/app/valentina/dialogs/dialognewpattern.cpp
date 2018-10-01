@@ -6,7 +6,7 @@
  **
  **  @brief
  **  @copyright
- **  This source code is part of the Valentine project, a pattern making
+ **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2013-2015 Valentina project
  **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
@@ -31,13 +31,12 @@
 #include "../core/vapplication.h"
 #include "../vmisc/vsettings.h"
 #include "../vpatterndb/vcontainer.h"
-#include "../ifc/xml/vdomdocument.h"
 
 #include <QFileDialog>
 #include <QMessageBox>
 #include <QPushButton>
 #include <QSettings>
-#include <QDesktopWidget>
+#include <QScreen>
 
 //---------------------------------------------------------------------------------------------------------------------
 DialogNewPattern::DialogNewPattern(VContainer *data, const QString &patternPieceName, QWidget *parent)
@@ -45,14 +44,12 @@ DialogNewPattern::DialogNewPattern(VContainer *data, const QString &patternPiece
 {
     ui->setupUi(this);
 
-#if QT_VERSION >= QT_VERSION_CHECK(5, 2, 0)
     ui->lineEditName->setClearButtonEnabled(true);
-#endif
 
     qApp->ValentinaSettings()->GetOsSeparator() ? setLocale(QLocale()) : setLocale(QLocale::c());
 
     QRect position = this->frameGeometry();
-    position.moveCenter(QDesktopWidget().availableGeometry().center());
+    position.moveCenter(QGuiApplication::primaryScreen()->availableGeometry().center());
     move(position.topLeft());
 
     ui->lineEditName->setText(patternPieceName);
@@ -72,7 +69,7 @@ DialogNewPattern::~DialogNewPattern()
 Unit DialogNewPattern::PatternUnit() const
 {
     const qint32 index = ui->comboBoxUnits->currentIndex();
-    return VDomDocument::StrToUnits(ui->comboBoxUnits->itemData(index).toString());
+    return StrToUnits(ui->comboBoxUnits->itemData(index).toString());
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -113,9 +110,9 @@ void DialogNewPattern::showEvent(QShowEvent *event)
 //---------------------------------------------------------------------------------------------------------------------
 void DialogNewPattern::InitUnits()
 {
-    ui->comboBoxUnits->addItem(tr("Centimeters"), QVariant(VDomDocument::UnitsToStr(Unit::Cm)));
-    ui->comboBoxUnits->addItem(tr("Millimiters"), QVariant(VDomDocument::UnitsToStr(Unit::Mm)));
-    ui->comboBoxUnits->addItem(tr("Inches"), QVariant(VDomDocument::UnitsToStr(Unit::Inch)));
+    ui->comboBoxUnits->addItem(tr("Centimeters"), QVariant(UnitsToStr(Unit::Cm)));
+    ui->comboBoxUnits->addItem(tr("Millimiters"), QVariant(UnitsToStr(Unit::Mm)));
+    ui->comboBoxUnits->addItem(tr("Inches"), QVariant(UnitsToStr(Unit::Inch)));
 
     // set default unit
     const qint32 indexUnit = ui->comboBoxUnits->findData(qApp->ValentinaSettings()->GetUnit());

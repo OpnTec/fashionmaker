@@ -6,7 +6,7 @@
  **
  **  @brief
  **  @copyright
- **  This source code is part of the Valentine project, a pattern making
+ **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2016 Valentina project
  **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
@@ -47,6 +47,21 @@ struct DestinationItem
     quint32 id;
     qreal mx;
     qreal my;
+    bool showLabel;
+};
+
+struct VAbstractOperationInitData : VAbstractToolInitData
+{
+    VAbstractOperationInitData()
+        : VAbstractToolInitData(),
+          suffix(),
+          source(),
+          destination()
+    {}
+
+    QString suffix;
+    QVector<quint32> source;
+    QVector<DestinationItem> destination;
 };
 
 // FIXME. I don't know how to use QGraphicsItem properly, so just took first available finished class.
@@ -65,25 +80,25 @@ public:
     static const QString TagSource;
     static const QString TagDestination;
 
-    virtual QString getTagName() const Q_DECL_OVERRIDE;
-
-    void SetEnabled(bool enabled);
+    virtual QString getTagName() const override;
 
     QString Suffix() const;
     void    SetSuffix(const QString &suffix);
 
-    virtual void GroupVisibility(quint32 object, bool visible) Q_DECL_OVERRIDE;
-    virtual void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget) Q_DECL_OVERRIDE;
+    virtual void GroupVisibility(quint32 object, bool visible) override;
+    virtual void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget) override;
+    virtual void ChangeLabelPosition(quint32 id, const QPointF &pos) override;
 
-    static void ExtractData(const QDomElement &domElement, QVector<quint32> &source,
-                            QVector<DestinationItem> &destination);
+    virtual bool IsLabelVisible(quint32 id) const override;
+    virtual void SetLabelVisible(quint32 id, bool visible) override;
+
+    static void ExtractData(const QDomElement &domElement, VAbstractOperationInitData &initData);
 public slots:
-    virtual void FullUpdateFromFile() Q_DECL_OVERRIDE;
-    virtual void SetFactor(qreal factor) Q_DECL_OVERRIDE;
+    virtual void FullUpdateFromFile() override;
 
-    virtual void AllowHover(bool enabled) Q_DECL_OVERRIDE;
-    virtual void AllowSelecting(bool enabled) Q_DECL_OVERRIDE;
-    virtual void EnableToolMove(bool move) Q_DECL_OVERRIDE;
+    virtual void AllowHover(bool enabled) override;
+    virtual void AllowSelecting(bool enabled) override;
+    virtual void EnableToolMove(bool move) override;
 
     void         AllowPointHover(bool enabled);
     void         AllowPointSelecting(bool enabled);
@@ -103,8 +118,8 @@ public slots:
     void         AllowElArcHover(bool enabled);
     void         AllowElArcSelecting(bool enabled);
 
-    virtual void ToolSelectionType(const SelectionType &type) Q_DECL_OVERRIDE;
-    virtual void Disable(bool disable, const QString &namePP) Q_DECL_OVERRIDE;
+    virtual void ToolSelectionType(const SelectionType &type) override;
+    virtual void Disable(bool disable, const QString &namePP) override;
     void         ObjectSelected(bool selected, quint32 objId);
     void         DeleteFromLabel();
     void         LabelChangePosition(const QPointF &pos, quint32 labelId);
@@ -120,30 +135,29 @@ protected:
                        const QVector<quint32> &source, const QVector<DestinationItem> &destination,
                        QGraphicsItem *parent = nullptr);
 
-    virtual void AddToFile() Q_DECL_OVERRIDE;
-    virtual void RefreshDataInFile() Q_DECL_OVERRIDE;
+    virtual void AddToFile() override;
+    virtual void ChangeLabelVisibility(quint32 id, bool visible) override;
 
-    void UpdateNamePosition(quint32 id);
+    void UpdateNamePosition(quint32 id, const QPointF &pos);
     void SaveSourceDestination(QDomElement &tag);
 
     template <typename T>
     void ShowToolVisualization(bool show);
 
-    VSimpleCurve *InitCurve(quint32 id, VContainer *data, GOType curveType);
+    void InitCurve(quint32 id, VContainer *data, GOType curveType, SceneObject sceneType);
 
     template <typename T>
     static void InitOperationToolConnections(VMainGraphicsScene *scene, T *tool);
 
     void InitOperatedObjects();
-protected slots:
-    void DoChangePosition(quint32 id, qreal mx, qreal my);
+
+    QString ComplexPointToolTip(quint32 itemId) const;
+    QString ComplexCurveToolTip(quint32 itemId) const;
 private:
     Q_DISABLE_COPY(VAbstractOperation)
 
     void AllowCurveHover(bool enabled, GOType type);
     void AllowCurveSelecting(bool enabled, GOType type);
-
-    void ChangePosition(QGraphicsItem *item, quint32 id, const QPointF &pos);
 };
 
 //---------------------------------------------------------------------------------------------------------------------

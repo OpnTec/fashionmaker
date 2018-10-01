@@ -6,7 +6,7 @@
  **
  **  @brief
  **  @copyright
- **  This source code is part of the Valentine project, a pattern making
+ **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2016 Valentina project
  **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
@@ -50,21 +50,21 @@ public:
     explicit VisToolRotation(const VContainer *data, QGraphicsItem *parent = nullptr);
     virtual ~VisToolRotation();
 
-    virtual void RefreshGeometry() Q_DECL_OVERRIDE;
+    virtual void   RefreshGeometry() override;
 
     void SetOriginPointId(quint32 value);
 
     QString Angle() const;
     void    SetAngle(const QString &expression);
 
-    virtual int type() const Q_DECL_OVERRIDE {return Type;}
+    virtual int type() const override {return Type;}
     enum { Type = UserType + static_cast<int>(Vis::ToolRotation)};
 private:
     Q_DISABLE_COPY(VisToolRotation)
-    qreal                angle;
-    QGraphicsEllipseItem *point;
-    QGraphicsPathItem    *angleArc;
-    QGraphicsLineItem    *xAxis;
+    qreal           angle;
+    VScaledEllipse *point;
+    VCurvePathItem *angleArc;
+    VScaledLine    *xAxis;
 
     template <class Item>
     int AddCurve(qreal angle, const QPointF &origin, quint32 id, int i);

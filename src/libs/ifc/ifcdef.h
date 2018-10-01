@@ -6,7 +6,7 @@
  **
  **  @brief
  **  @copyright
- **  This source code is part of the Valentine project, a pattern making
+ **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2013-2015 Valentina project
  **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
@@ -34,6 +34,7 @@
 #include <QtGlobal>
 
 #include "../vmisc/def.h"
+#include "../vmisc/diagnostic.h"
 
 extern const QString CustomMSign;
 extern const QString CustomIncrSign;
@@ -46,7 +47,7 @@ extern const QString CustomIncrSign;
 static const quint32 null_id = 0;
 
 #define NULL_ID null_id//use this value for initialization variables that keeps id values. 0 mean uknown id value.
-#define NULL_ID_STR "0"
+#define NULL_ID_STR QChar('0')
 
 // Detect whether the compiler supports C++11 noexcept exception specifications.
 #  if   defined(__clang__)
@@ -62,9 +63,6 @@ static const quint32 null_id = 0;
 #  else
 #    define V_NOEXCEPT_EXPR(x)
 #  endif
-
-qreal WidthMainLine(Unit patternUnit);
-qreal WidthHairLine(Unit patternUnit);
 
 extern const QString AttrType;
 extern const QString AttrMx;
@@ -84,6 +82,7 @@ extern const QString AttrDartP3;
 extern const QString AttrX;
 extern const QString AttrY;
 extern const QString AttrTypeLine;
+extern const QString AttrCut;
 extern const QString AttrLength;
 extern const QString AttrBasePoint;
 extern const QString AttrFirstPoint;
@@ -114,6 +113,7 @@ extern const QString AttrKAsm1;// TODO. Delete if minimal supported version is 0
 extern const QString AttrKAsm2;// TODO. Delete if minimal supported version is 0.2.7
 extern const QString AttrKCurve;// TODO. Delete if minimal supported version is 0.2.7
 extern const QString AttrDuplicate;
+extern const QString AttrAScale;
 extern const QString AttrPathPoint;
 extern const QString AttrPSpline;
 extern const QString AttrAxisP1;
@@ -123,6 +123,7 @@ extern const QString AttrCurve1;
 extern const QString AttrCurve2;
 extern const QString AttrLineColor;
 extern const QString AttrColor;
+extern const QString AttrPenStyle;
 extern const QString AttrFirstArc;
 extern const QString AttrSecondArc;
 extern const QString AttrCrossPoint;
@@ -140,7 +141,18 @@ extern const QString AttrArc;
 extern const QString AttrSuffix;
 extern const QString AttrIdObject;
 extern const QString AttrInLayout;
+extern const QString AttrForbidFlipping;
+extern const QString AttrForceFlipping;
 extern const QString AttrClosed;
+extern const QString AttrShowLabel;
+extern const QString AttrShowLabel1;
+extern const QString AttrShowLabel2;
+extern const QString AttrWidth;
+extern const QString AttrHeight;
+extern const QString AttrPlaceLabelType;
+extern const QString AttrVersion;
+extern const QString AttrFirstToCountour;
+extern const QString AttrLastToCountour;
 
 extern const QString TypeLineNone;
 extern const QString TypeLineLine;
@@ -148,6 +160,12 @@ extern const QString TypeLineDashLine;
 extern const QString TypeLineDotLine;
 extern const QString TypeLineDashDotLine;
 extern const QString TypeLineDashDotDotLine;
+
+QStringList          StylesList();
+Qt::PenStyle         LineStyleToPenStyle(const QString &typeLine);
+QString              PenStyleToLineStyle(Qt::PenStyle penStyle);
+QMap<QString, QIcon> LineStylesPics();
+QMap<QString, QIcon> CurvePenStylesPics();
 
 extern const QString ColorBlack;
 extern const QString ColorGreen;
@@ -172,17 +190,20 @@ extern const QString ColorCornFlowerBlue;
 // Hacks for avoiding the linker error "undefined reference to"
 #define SPL_ "Spl_"
 #define ARC_ "Arc_"
-#define EARC_ "ElArc_"
+#define ELARC_ "ElArc_"
 
 extern const QString measurement_;
 extern const QString increment_;
 extern const QString line_;
 extern const QString angleLine_;
 extern const QString arc_;
+extern const QString elarc_;
 extern const QString spl_;
 extern const QString splPath;
 extern const QString radius_V;
 extern const QString radiusArc_;
+extern const QString radius1ElArc_;
+extern const QString radius2ElArc_;
 extern const QString angle1_V;
 extern const QString angle2_V;
 extern const QString c1Length_V;
@@ -193,6 +214,8 @@ extern const QString c1LengthSplPath;
 extern const QString c2LengthSplPath;
 extern const QString angle1Arc_;
 extern const QString angle2Arc_;
+extern const QString angle1ElArc_;
+extern const QString angle2ElArc_;
 extern const QString angle1Spl_;
 extern const QString angle2Spl_;
 extern const QString angle1SplPath;
@@ -200,7 +223,23 @@ extern const QString angle2SplPath;
 extern const QString seg_;
 extern const QString currentLength;
 extern const QString currentSeamAllowance;
+extern const QString rotation_V;
+extern const QString rotationElArc_;
 
 extern const QStringList builInVariables;
+
+QT_WARNING_PUSH
+QT_WARNING_DISABLE_GCC("-Weffc++")
+
+struct VLabelTemplateLine
+{
+    QString line;
+    bool    bold;
+    bool    italic;
+    int     alignment;
+    int     fontSizeIncrement;
+};
+
+QT_WARNING_POP
 
 #endif // IFCDEF_H

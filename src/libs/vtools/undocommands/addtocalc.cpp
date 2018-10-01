@@ -6,7 +6,7 @@
  **
  **  @brief
  **  @copyright
- **  This source code is part of the Valentine project, a pattern making
+ **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2013-2015 Valentina project
  **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
@@ -35,6 +35,7 @@
 #include "../ifc/ifcdef.h"
 #include "../vmisc/logging.h"
 #include "../vmisc/vabstractapplication.h"
+#include "../vmisc/customevents.h"
 #include "vundocommand.h"
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -44,10 +45,6 @@ AddToCalc::AddToCalc(const QDomElement &xml, VAbstractPattern *doc, QUndoCommand
     setText(tr("add object"));
     nodeId = doc->GetParametrId(xml);
 }
-
-//---------------------------------------------------------------------------------------------------------------------
-AddToCalc::~AddToCalc()
-{}
 
 //---------------------------------------------------------------------------------------------------------------------
 void AddToCalc::undo()
@@ -81,7 +78,10 @@ void AddToCalc::undo()
     }
     emit NeedFullParsing();
     VMainGraphicsView::NewSceneRect(qApp->getCurrentScene(), qApp->getSceneView());
-    doc->SetCurrentPP(nameActivDraw);//Return current pattern piece after undo
+    if (qApp->GetDrawMode() == Draw::Calculation)
+    {
+        emit doc->SetCurrentPP(nameActivDraw);//Return current pattern piece after undo
+    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -128,7 +128,14 @@ void AddToCalc::RedoFullParsing()
     if (redoFlag)
     {
         emit NeedFullParsing();
-        doc->SetCurrentPP(nameActivDraw);//Return current pattern piece after undo
+        if (qApp->GetDrawMode() == Draw::Calculation)
+        {
+            emit doc->SetCurrentPP(nameActivDraw);//Return current pattern piece after undo
+        }
+    }
+    else
+    {
+        QApplication::postEvent(doc, new LiteParseEvent());
     }
     redoFlag = true;
 }

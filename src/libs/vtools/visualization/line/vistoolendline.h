@@ -6,7 +6,7 @@
  **
  **  @brief
  **  @copyright
- **  This source code is part of the Valentine project, a pattern making
+ **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2013-2015 Valentina project
  **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
@@ -43,10 +43,10 @@ class VisToolEndLine : public VisLine
 {
     Q_OBJECT
 public:
-    explicit VisToolEndLine(const VContainer *data, QGraphicsItem *parent = 0);
-    virtual ~VisToolEndLine() Q_DECL_OVERRIDE;
+    explicit VisToolEndLine(const VContainer *data, QGraphicsItem *parent = nullptr);
+    virtual ~VisToolEndLine() = default;
 
-    virtual void RefreshGeometry() Q_DECL_OVERRIDE;
+    virtual void RefreshGeometry() override;
 
     QString      Angle() const;
     void         SetAngle(const QString &expression);
@@ -54,13 +54,13 @@ public:
     QString      Length() const;
     void         setLength(const QString &expression);
 
-    virtual int  type() const Q_DECL_OVERRIDE {return Type;}
+    virtual int  type() const override {return Type;}
     enum { Type = UserType + static_cast<int>(Vis::ToolEndLine)};
 private:
     Q_DISABLE_COPY(VisToolEndLine)
-    qreal                length;
-    qreal                angle;
-    QGraphicsEllipseItem *point;
+    qreal           length;
+    qreal           angle;
+    VScaledEllipse *point;
 };
 
 #endif // VISTOOLENDLINE_H

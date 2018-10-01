@@ -26,6 +26,17 @@ CONFIG   += console c++11
 # Can configure it not to do that with 'no_testcase_installs'
 CONFIG += testcase no_testcase_installs
 
+# The following define makes your compiler emit warnings if you use
+# any feature of Qt which has been marked as deprecated (the exact warnings
+# depend on your compiler). Please consult the documentation of the
+# deprecated API in order to know how to port your code away from it.
+DEFINES += QT_DEPRECATED_WARNINGS
+
+# You can also make your code fail to compile if you use deprecated APIs.
+# In order to do so, uncomment the following line.
+# You can also select to disable deprecated APIs only up to a certain version of Qt.
+#DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
+
 # Use out-of-source builds (shadow builds)
 CONFIG   -= app_bundle debug_and_release debug_and_release_target
 
@@ -44,7 +55,7 @@ HEADERS += \
 SOURCES += \
     main.cpp
 
-win32-msvc*:SOURCES += stable.cpp
+*msvc*:SOURCES += stable.cpp
 
 # Set using ccache. Function enable_ccache() defined in common.pri.
 $$enable_ccache()
@@ -53,7 +64,7 @@ include(warnings.pri)
 
 CONFIG(release, debug|release){
     # Release mode
-    !win32-msvc*:CONFIG += silent
+    !*msvc*:CONFIG += silent
     DEFINES += QT_NO_DEBUG_OUTPUT
 
     noDebugSymbols{ # For enable run qmake with CONFIG+=noDebugSymbols
@@ -61,7 +72,7 @@ CONFIG(release, debug|release){
     } else {
         # Turn on debug symbols in release mode on Unix systems.
         # On Mac OS X temporarily disabled. Need find way how to strip binary file.
-        !macx:!win32-msvc*:QMAKE_CXXFLAGS_RELEASE += -g -gdwarf-3
+        !macx:!*msvc*:QMAKE_CXXFLAGS_RELEASE += -g -gdwarf-3
     }
 }
 

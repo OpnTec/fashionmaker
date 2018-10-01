@@ -6,7 +6,7 @@
  **
  **  @brief
  **  @copyright
- **  This source code is part of the Valentine project, a pattern making
+ **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2016 Valentina project
  **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
@@ -56,20 +56,22 @@ public:
 
     QPointF CutSpline ( qreal length, QPointF &spl1p2, QPointF &spl1p3, QPointF &spl2p2, QPointF &spl2p3) const;
 
-    virtual QString NameForHistory(const QString &toolName) const Q_DECL_OVERRIDE;
+    virtual QString NameForHistory(const QString &toolName) const override;
 
     qreal GetParmT(qreal length) const;
     qreal LengthT(qreal t) const;
 
 protected:
-    virtual void CreateName() Q_DECL_OVERRIDE;
+    virtual void CreateName() override;
 
     static qreal            CalcSqDistance(qreal x1, qreal y1, qreal x2, qreal y2);
     static void             PointBezier_r(qreal x1, qreal y1, qreal x2, qreal y2, qreal x3, qreal y3, qreal x4,
-                                          qreal y4, qint16 level, QVector<qreal> &px, QVector<qreal> &py);
+                                          qreal y4, qint16 level, QVector<qreal> &px, QVector<qreal> &py,
+                                          qreal approximationScale);
     static QVector<QPointF> GetCubicBezierPoints(const QPointF &p1, const QPointF &p2, const QPointF &p3,
-                                                 const QPointF &p4);
-    static qreal            LengthBezier(const QPointF &p1, const QPointF &p2, const QPointF &p3, const QPointF &p4);
+                                                 const QPointF &p4, qreal approximationScale);
+    static qreal            LengthBezier(const QPointF &p1, const QPointF &p2, const QPointF &p3, const QPointF &p4,
+                                         qreal approximationScale);
 
     virtual QPointF GetControlPoint1() const =0;
     virtual QPointF GetControlPoint2() const =0;

@@ -6,7 +6,7 @@
  **
  **  @brief
  **  @copyright
- **  This source code is part of the Valentine project, a pattern making
+ **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2013-2015 Valentina project
  **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
@@ -45,36 +45,22 @@ class VVariable :public VInternalVariable
 {
 public:
     VVariable();
-    VVariable(const QString &name, qreal baseSize, qreal baseHeight, const qreal &base, const qreal &ksize = 0,
-              const qreal &kheight = 0, const QString &description = QString());
-    VVariable(const QString &name, const qreal &base, const QString &description = QString());
+    VVariable(const QString &name, const QString &description = QString());
     VVariable(const VVariable &var);
 
-    virtual ~VVariable() Q_DECL_OVERRIDE;
+    virtual ~VVariable() override;
 
     VVariable &operator=(const VVariable &var);
 #ifdef Q_COMPILER_RVALUE_REFS
     VVariable &operator=(VVariable &&var) Q_DECL_NOTHROW { Swap(var); return *this; }
 #endif
 
-    void Swap(VVariable &var) Q_DECL_NOTHROW
+    inline void Swap(VVariable &var) Q_DECL_NOTHROW
     { VInternalVariable::Swap(var); std::swap(d, var.d); }
-
-    qreal   GetBase() const;
-    void    SetBase(const qreal &value);
-
-    qreal   GetKsize() const;
-    void    SetKsize(const qreal &value);
-
-    qreal   GetKheight() const;
-    void    SetKheight(const qreal &value);
 
     QString GetDescription() const;
     void    SetDescription(const QString &desc);
 
-    void    SetValue(const qreal &size, const qreal &height, Unit patternUnit);
-
-    virtual bool IsNotUsed() const Q_DECL_OVERRIDE;
 private:
     QSharedDataPointer<VVariableData> d;
 };

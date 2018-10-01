@@ -6,7 +6,7 @@
  **
  **  @brief
  **  @copyright
- **  This source code is part of the Valentine project, a pattern making
+ **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2013-2015 Valentina project
  **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
@@ -45,7 +45,7 @@ class VPosition : public QRunnable
 public:
     VPosition(const VContour &gContour, int j, const VLayoutPiece &detail, int i, std::atomic_bool *stop, bool rotate,
               int rotationIncrease, bool saveLength);
-    virtual ~VPosition() Q_DECL_OVERRIDE{}
+    virtual ~VPosition() override{}
 
     quint32 getPaperIndex() const;
     void setPaperIndex(const quint32 &value);
@@ -98,7 +98,7 @@ private:
         EdgeError = 2
     };
 
-    virtual void run() Q_DECL_OVERRIDE;
+    virtual void run() override;
 
     void SaveCandidate(VBestSquare &bestResult, const VLayoutPiece &detail, int globalI, int detJ, BestFrom type);
 

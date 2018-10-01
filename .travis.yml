@@ -15,6 +15,7 @@ matrix:
   - os: osx
     compiler: clang
     env: DEPLOY=true
+    osx_image: xcode9
 before_install:
 - |
   if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then
@@ -66,9 +67,11 @@ script:
 - $CXX --version
 - |
   if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then
-    make -j$(nproc);
+    build-wrapper-linux-x86-64 --out-dir ../bw-outputs make -j$(nproc);
     export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:"$TRAVIS_BUILD_DIR/build/src/libs/vpropertyexplorer/bin:$TRAVIS_BUILD_DIR/build/src/libs/qmuparser/bin";
     xvfb-run -a make --silent check TESTARGS="-silent";
+    cd ..;
+    sonar-scanner;
   else
     make -j1;
   fi  
@@ -76,27 +79,28 @@ notifications:
   email:
     recipients:
     - dismine@gmail.com
-    - susan.spencer@gmail.com
     on_success: change
     on_failure: always
 before_deploy:
 - |
   if [[ "$DEPLOY" == "true" ]]; then
     ../scripts/macfixqtdylibrpath.py $TRAVIS_BUILD_DIR/build/src/app/valentina/bin/Valentina.app;
-    tar --exclude "*.DS_Store" -cvzf valentina-osx-${TRAVIS_COMMIT}.tar.gz $TRAVIS_BUILD_DIR/build/src/app/valentina/bin/Valentina.app/;
+    tar -C $TRAVIS_BUILD_DIR/build/src/app/valentina/bin --exclude "*.DS_Store" -cvzf valentina-osx-${TRAVIS_COMMIT}.tar.gz Valentina.app/;
   fi
 deploy:
+  edge:
+    branch: v1.8.47
   provider: bintray
   skip_cleanup: true
   file: ../share/bintray.json
   user: dismine
   key:
-    secure: iVSPhWX6DiHu2RVMkR2LwnnyX5CvsJDcN6wakDVQ3TKnthCuTLiW1XGHAqdWZpY3TqZz+0/KcFcn8afVohxLMLsNB6h71APvsyjiGusM+VtPpIIbQagWxViNcadE/gNSiQszCe1eMUp5EFaLrNXoDj1Zu1OJcy3misrt0NxOXRuYX4uupl1dWNxl38j8CFycNwh89N5vNi/XEboFwzaGZLrYIAClyeUuXYDGFBUuWOvSGgPUXycBvsb37qkYQmiNk+LOx6327KLbnTapAkisqO+jvJuYyUHByBZ2a1moUCyP8vWY243kpXLdcoZljOWZ4af7+SBdpAFe7h0e32+MKA6DbnuVUZ8ElA7WKNmLaPxuJo7jfdfZukVSSPvP0Bcz+cthoRKVSvYr0ejKppofi8pQ23/JgShuMgG1QXTis//7o4AL4qrJkF09+SrfVAjRPV57iDY8Bllj/g2BAK6Xh+XK2byjHQQ1+HKjPV3ESsRL2g0S/2xp77jd1wik9yRWBUb3sZCFnwxi8/m7G/WXqLu16VccbkckiBeyt8I6P++hLDMUc1Jb+S3CuHWB5/Obz4KrxMUMgNBfCEgud5ic/RAsmnJdzuzT364pm1spF3P+iOiffCPHcbFncdarFNPNrW2Kza7julLSDeMXqP4b78cPxt0eCymbr8Uae67c2RM=
+    secure: uffn23TzTrsW053VN7HbcURs6w16zRbM1RUUF579uRMOu+DxwiFQlOVcNifzK/CAARDSgi0xvNzGPlePXBXTkzA5r3KSWnHGbw0DJTllFIBNwkWPoDzCwAONK3ZtCq+FI3iJy+fLh2rhqXpJXD713O09PmO+TTiNBRdLCyO5BP1ndykLFdhdCR0knDpyaIYYLGvGS4SR4/LqtuHniDT9ydkhhkcmms/Bw+k8hcdrDhhk1v6jPv4qAm8QfydDeh+X9AVNrJjB0Oz2rtvYpBdY6hqVnrb77V1mdc4dU3WKxw+IkMYTTH1oq6ywdMv/Y+S9sch5h/af6O8su4ipGEp240cc7sVB+k4FE9fDVqXuOgl0LLFVqf2XbzRFAQbShmxIJ64XS43TM7s98qTCacAaiMfQvKPNSHCmCKRM3e5f5ASBcwn6UtFqdREZO/lsl+Bgdah3KCn8hw9PBTloLSnRpUQGheh/xnWwV5LTHVlSDu0FiyC6ncTI+xghNSDJWAhH2dZNX+yIjVolJ27/5qS5m3BG1x0yMGEP5Fok15sX2tP70s8FklqNtn2+xqUGEz+YJMGW0GbmFuFFhnCu2ls0BhyT68Pvz4YQWvG30SaO8EkZtYx7RNy3muuq1O2TXcctcK8xX7DNJTlFFCzCDSz6xqiO4IiQIQE1F2Td6Hru8cs=
   dry-run: false
   on:
     all_branches: true
     condition: $DEPLOY = true
-#addons:
-#  sonarqube:
-#    token:
-#      secure: qYgcPp4yCkv6lA2IQjRZInsI9mHWSVjSQw+veI1v5Tg4VnoGSN8II2zh3syruNrfZ2uc5Sy3NlTpqZXB8BN/Sbaw0KP0ylnI8UHjmXazuVdY7P/0hnGrb3be/x47xWSNKIm6jRwbDgYVeNHhF3rW2RxXkBbfqXX8/fe8GIyYWIgy9ls/v1tadfzALg6RO4NpqUNQvA5xn5qlyRZnduruemAQ7WyweaNAWrQ5NOMDkxJ4VC4rB+L62E4aZEsW8uaSFuK8NKpe07cnpfIJ+ceUNJx9r2PGCHKd/U1zY/cl9nPjAzw2z70xBUUBZcqMluA52ZSE0bM1LlzNsGVAyOJmOUYbhuLN3wSNv0av4TbhGQtPN5ePZm4hxIZMkgYl2wLh8Rg3r7veKwGhuJGLEmn6uFSOgP1rgd3pOrEjWyjKpZI3iNHyWQJPh96VSbNnsxp/gfcJR7rxCcaU6xhdEjxHWlBqpSCFw0zLqgbl2evN1vveNcoh3lF04Oh6Rc4S4oZRX6M16cEKDKaLyl/HzoFm7xUviG7iVqKb4yrj2ZTM3VLPBtW4Sh0UoY9DXiiS/SZ5HVn2r+vGIm7AxYz0Eg9gO3scV38nsk0RRP/IOJdb2DFZVH9vVP7dS76rucufzMt/yhn0ZiuPST56Ic41VA2PnnNv7QevgY8g7jzpyTgHGMk=
+addons:
+  sonarqube:
+    token:
+      secure: Et0JMrRcVfmlNs+pwqUY1fJx49/SSwss0NMe46nSv8D6Tnv9zlPZyA8KPmOq3jIc9zsoa40dcrp3eXd3jBZrULSb2gD8KkAJAWuTFmBH7Hu18t8LGEnorh0puHK8S2jV5Ueowig67PF8hh20KjErDo7Wo0FDc14lLxCsm20Jt0WKzHU50aqWxAGY3f5f8po/o/6ClcuqPNfqXy4i93YIjgdsYsN2+PUoCSkm92yE7iA2Ggyx5Np93DajkEd75QtInhcbiP8OmNV0BMCMT41+evSnwgUhmyzzEgICrYwKwij0igsxPWkqiwI/jLC5qAOjp9KZqfK556c3FwsQY8hKEIdGKozXgcDMlBlIivQPF/zeo17LugifXjuie6lhC+e7stresxZSYmLhNFbrcKC98JF1GvBZj6xQnKoqp3+M+JAgP+LskyHVJABLHqbnYG+ubmIsTaTr6CsvRiq/9GoaODJIfkBATkPRb/WvLkPEuoJk3h+mW3oPlUbFVYs+6WPm9/+5WkKcEU7HS2nT1XM94TZh+7Adsd47vLzJ7KQ1vGK6pHChMcAK+MkZshSslvcn4H7is8sFkOSyZdMj/f+dnpTllpmU2AArPPVK6P2bQqGl8n16JY6lBw10KBkodpUd1D6JWXkNQIAyPUGGGjlqeqm1wetfad0hoHqrnQJ7HE0=

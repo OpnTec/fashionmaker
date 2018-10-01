@@ -6,7 +6,7 @@
  **
  **  @brief
  **  @copyright
- **  This source code is part of the Valentine project, a pattern making
+ **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2013-2015 Valentina project
  **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
@@ -41,6 +41,20 @@
 
 enum class ParentType : bool {Scene, Item};
 
+struct VAbstractNodeInitData : VAbstractToolInitData
+{
+    VAbstractNodeInitData()
+        : VAbstractToolInitData(),
+          idObject(NULL_ID),
+          drawName(),
+          idTool(NULL_ID)
+    {}
+
+    quint32 idObject;
+    QString drawName;
+    quint32 idTool;
+};
+
 /**
  * @brief The VAbstractNode class parent class for all detail node.
  */
@@ -52,14 +66,16 @@ public:
                   const QString &drawName = QString(), const quint32 &idTool = 0, QObject *parent = nullptr);
     virtual      ~VAbstractNode() Q_DECL_EQ_DEFAULT;
     static const QString AttrIdTool;
-    virtual void ShowVisualization(bool show) Q_DECL_OVERRIDE;
-    virtual void incrementReferens() Q_DECL_OVERRIDE;
-    virtual void decrementReferens() Q_DECL_OVERRIDE;
+    virtual void ShowVisualization(bool show) override;
+    virtual void incrementReferens() override;
+    virtual void decrementReferens() override;
 
     ParentType GetParentType() const;
     void       SetParentType(const ParentType &value);
 
-    virtual void GroupVisibility(quint32 object, bool visible) Q_DECL_OVERRIDE;
+    quint32 GetIdTool() const;
+
+    virtual void GroupVisibility(quint32 object, bool visible) override;
 
     bool IsExluded() const;
     void SetExluded(bool exluded);
@@ -73,21 +89,24 @@ protected:
     /** @brief idTool id tool. */
     quint32       idTool;
 
-    /** @brief currentColor current tool color. */
-    QColor        currentColor;
-
     QString       m_drawName;
 
     bool          m_exluded;
 
     void         AddToModeling(const QDomElement &domElement);
-    virtual void ToolCreation(const Source &typeCreation) Q_DECL_OVERRIDE;
-    virtual void SetVisualization() Q_DECL_OVERRIDE {}
+    virtual void ToolCreation(const Source &typeCreation) override;
+    virtual void SetVisualization() override {}
 
     virtual void ShowNode()=0;
     virtual void HideNode()=0;
 private:
     Q_DISABLE_COPY(VAbstractNode)
 };
+
+//---------------------------------------------------------------------------------------------------------------------
+inline quint32 VAbstractNode::GetIdTool() const
+{
+    return idTool;
+}
 
 #endif // VABSTRACTNODE_H

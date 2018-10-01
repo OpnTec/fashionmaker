@@ -6,7 +6,7 @@
  **
  **  @brief
  **  @copyright
- **  This source code is part of the Valentine project, a pattern making
+ **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2016 Valentina project
  **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
@@ -35,45 +35,53 @@
 
 class DialogTool;
 
+struct VToolPiecePathInitData : VAbstractNodeInitData
+{
+    VToolPiecePathInitData()
+        : VAbstractNodeInitData(),
+          path()
+    {}
+
+    VPiecePath path;
+};
+
 class VToolPiecePath : public VAbstractNode, public QGraphicsPathItem
 {
     Q_OBJECT
 public:
-    static VToolPiecePath* Create(QSharedPointer<DialogTool> dialog, VMainGraphicsScene *scene, VAbstractPattern *doc,
+    static VToolPiecePath* Create(const QPointer<DialogTool> &dialog, VMainGraphicsScene *scene, VAbstractPattern *doc,
                                   VContainer *data);
-    static VToolPiecePath *Create(quint32 _id, const VPiecePath &path, quint32 pieceId, VMainGraphicsScene *scene,
-                                  VAbstractPattern *doc, VContainer *data, const Document &parse,
-                                  const Source &typeCreation, const QString &drawName = QString(),
-                                  const quint32 &idTool = 0);
+    static VToolPiecePath *Create(VToolPiecePathInitData initData);
 
-    virtual int  type() const Q_DECL_OVERRIDE {return Type;}
+    virtual int  type() const override {return Type;}
     enum { Type = UserType + static_cast<int>(Tool::PiecePath)};
-    virtual QString getTagName() const Q_DECL_OVERRIDE;
+    virtual QString getTagName() const override;
 
-    virtual void incrementReferens() Q_DECL_OVERRIDE;
-    virtual void decrementReferens() Q_DECL_OVERRIDE;
+    virtual void paint(QPainter *painter, const QStyleOptionGraphicsItem *option,
+                       QWidget *widget = nullptr) override;
+
+    virtual void incrementReferens() override;
+    virtual void decrementReferens() override;
+
+    void RefreshGeometry();
 
     static void AddAttributes(VAbstractPattern *doc, QDomElement &domElement, quint32 id, const VPiecePath &path);
 public slots:
-    virtual void FullUpdateFromFile () Q_DECL_OVERRIDE;
-    virtual void AllowHover(bool enabled) Q_DECL_OVERRIDE;
-    virtual void AllowSelecting(bool enabled) Q_DECL_OVERRIDE;
+    virtual void FullUpdateFromFile () override;
+    virtual void AllowHover(bool enabled) override;
+    virtual void AllowSelecting(bool enabled) override;
 protected:
-    virtual void AddToFile() Q_DECL_OVERRIDE;
-    virtual void RefreshDataInFile() Q_DECL_OVERRIDE;
-    virtual void ShowNode() Q_DECL_OVERRIDE;
-    virtual void HideNode() Q_DECL_OVERRIDE;
-    virtual void ToolCreation(const Source &typeCreation) Q_DECL_OVERRIDE;
+    virtual void AddToFile() override;
+    virtual void ShowNode() override;
+    virtual void HideNode() override;
+    virtual void ToolCreation(const Source &typeCreation) override;
 private:
     Q_DISABLE_COPY(VToolPiecePath)
 
     quint32 m_pieceId;
 
-    VToolPiecePath(VAbstractPattern *doc, VContainer *data, quint32 id, quint32 pieceId,  const Source &typeCreation,
-                   const QString &drawName = QString(), const quint32 &idTool = 0, QObject *qoParent = nullptr,
-                   QGraphicsItem * parent = nullptr );
-
-    void RefreshGeometry();
+    VToolPiecePath(const VToolPiecePathInitData &initData, QObject *qoParent = nullptr,
+                   QGraphicsItem *parent = nullptr);
 
     void IncrementNodes(const VPiecePath &path) const;
     void DecrementNodes(const VPiecePath &path) const;

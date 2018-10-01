@@ -6,7 +6,7 @@
  **
  **  @brief
  **  @copyright
- **  This source code is part of the Valentine project, a pattern making
+ **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2017 Valentina project
  **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
@@ -32,6 +32,8 @@
 #include <QtCore/qglobal.h>
 #include <QGraphicsObject>
 
+#include "../vmisc/def.h"
+
 class VPieceItem : public QGraphicsObject
 {
     Q_OBJECT
@@ -50,7 +52,7 @@ public:
     explicit VPieceItem(QGraphicsItem* pParent = nullptr);
     virtual ~VPieceItem();
 
-    virtual QRectF boundingRect() const Q_DECL_OVERRIDE;
+    virtual QRectF boundingRect() const override;
 
     virtual void Update() =0;
 
@@ -59,6 +61,9 @@ public:
 
     VPieceItem::MoveTypes GetMoveType() const;
     void                  SetMoveType(const VPieceItem::MoveTypes &moveType);
+
+    virtual int  type() const override {return Type;}
+    enum { Type = UserType + static_cast<int>(Vis::PieceItem)};
 
 signals:
     void SignalMoved(const QPointF &ptPos);

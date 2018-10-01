@@ -6,7 +6,7 @@
  **
  **  @brief
  **  @copyright
- **  This source code is part of the Valentine project, a pattern making
+ **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2013-2015 Valentina project
  **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
@@ -42,29 +42,28 @@
 #include "../vgeometry/vsplinepoint.h"
 #include "../vpatterndb/vcontainer.h"
 #include "../vwidgets/vcontrolpointspline.h"
+#include "../vwidgets/scalesceneitems.h"
 #include "../visualization.h"
 #include "vispath.h"
 
 //---------------------------------------------------------------------------------------------------------------------
 VisToolSplinePath::VisToolSplinePath(const VContainer *data, QGraphicsItem *parent)
     : VisPath(data, parent),
-      points(QVector<QGraphicsEllipseItem *>()),
-      ctrlPoints(QVector<VControlPointSpline *>()),
+      points(),
+      ctrlPoints(),
       newCurveSegment(nullptr),
-      path(VSplinePath()),
+      path(),
       isLeftMousePressed(false),
       pointSelected(false),
       ctrlPoint()
 {
-    newCurveSegment = InitItem<QGraphicsPathItem>(mainColor, this);
+    newCurveSegment = InitItem<VCurvePathItem>(mainColor, this);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 VisToolSplinePath::~VisToolSplinePath()
 {
-    qDeleteAll(ctrlPoints);
-    qDeleteAll(points);
-    emit ToolTip("");
+    emit ToolTip(QString());
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -77,7 +76,7 @@ void VisToolSplinePath::RefreshGeometry()
 
         for (int i = 0; i < size; ++i)
         {
-            QGraphicsEllipseItem *point = this->getPoint(static_cast<unsigned>(i));
+            VScaledEllipse *point = this->getPoint(static_cast<unsigned>(i));
             DrawPoint(point, static_cast<QPointF>(pathPoints.at(i).P()), supportColor);
         }
 
@@ -106,7 +105,7 @@ void VisToolSplinePath::RefreshGeometry()
 
         if (size > 1)
         {
-            DrawPath(this, path.GetPath(PathDirection::Show), mainColor, Qt::SolidLine, Qt::RoundCap);
+            DrawPath(this, path.GetPath(), path.DirectionArrows(), mainColor, lineStyle, Qt::RoundCap);
         }
 
         if (path.CountPoints() < 3)
@@ -159,7 +158,7 @@ void VisToolSplinePath::MouseLeftReleased()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QGraphicsEllipseItem *VisToolSplinePath::getPoint(quint32 i)
+VScaledEllipse *VisToolSplinePath::getPoint(quint32 i)
 {
     if (static_cast<quint32>(points.size() - 1) >= i && points.isEmpty() == false)
     {
@@ -174,23 +173,17 @@ QGraphicsEllipseItem *VisToolSplinePath::getPoint(quint32 i)
 
         if (points.size() == 1)
         {
-            auto *controlPoint1 = new VControlPointSpline(points.size(), SplinePointPosition::FirstPoint,
-                                                          *Visualization::data->GetPatternUnit(),
-                                                          this);
+            auto *controlPoint1 = new VControlPointSpline(points.size(), SplinePointPosition::FirstPoint, this);
             controlPoint1->hide();
             ctrlPoints.append(controlPoint1);
         }
         else
         {
-            auto *controlPoint1 = new VControlPointSpline(points.size()-1, SplinePointPosition::LastPoint,
-                                                          *Visualization::data->GetPatternUnit(),
-                                                          this);
+            auto *controlPoint1 = new VControlPointSpline(points.size()-1, SplinePointPosition::LastPoint, this);
             controlPoint1->hide();
             ctrlPoints.append(controlPoint1);
 
-            auto *controlPoint2 = new VControlPointSpline(points.size(), SplinePointPosition::FirstPoint,
-                                                          *Visualization::data->GetPatternUnit(),
-                                                          this);
+            auto *controlPoint2 = new VControlPointSpline(points.size(), SplinePointPosition::FirstPoint, this);
             controlPoint2->hide();
             ctrlPoints.append(controlPoint2);
         }
@@ -203,9 +196,6 @@ QGraphicsEllipseItem *VisToolSplinePath::getPoint(quint32 i)
 //---------------------------------------------------------------------------------------------------------------------
 void VisToolSplinePath::Creating(const QPointF &pSpl, int size)
 {
-    //Radius of point circle, but little bigger. Need handle with hover sizes.
-    const static qreal radius = ToPixel(DefPointRadius/*mm*/, Unit::Mm)*1.5;
-
     int lastPoint = 0;
     int preLastPoint = 0;
 
@@ -223,7 +213,8 @@ void VisToolSplinePath::Creating(const QPointF &pSpl, int size)
 
         if (not ctrlPoints[lastPoint]->isVisible())
         {
-            if (QLineF(pSpl, ctrlPoint).length() > radius)
+            //Radius of point circle, but little bigger. Need handle with hover sizes.
+            if (QLineF(pSpl, ctrlPoint).length() > ScaledRadius(SceneScale(qApp->getCurrentScene()))*1.5)
             {
                 if (size == 1)
                 {
@@ -265,7 +256,7 @@ void VisToolSplinePath::Creating(const QPointF &pSpl, int size)
             }
             else
             {
-                path[size-1].SetLength2(0, "0");
+                path[size-1].SetLength2(0, QChar('0'));
             }
             emit PathChanged(path);
         }
@@ -282,8 +273,8 @@ void VisToolSplinePath::Creating(const QPointF &pSpl, int size)
             }
             else
             {
-                path[size-1].SetLength1(0, "0");
-                path[size-1].SetLength2(0, "0");
+                path[size-1].SetLength1(0, QChar('0'));
+                path[size-1].SetLength2(0, QChar('0'));
             }
             emit PathChanged(path);
         }
@@ -302,10 +293,10 @@ void VisToolSplinePath::Creating(const QPointF &pSpl, int size)
         }
         else
         {
-            path[size-1].SetLength2(0, "0");
+            path[size-1].SetLength2(0, QChar('0'));
         }
         emit PathChanged(path);
 
-        DrawPath(newCurveSegment, spline.GetPath(PathDirection::Hide), mainColor, Qt::SolidLine, Qt::RoundCap);
+        DrawPath(newCurveSegment, spline.GetPath(), mainColor, Qt::SolidLine, Qt::RoundCap);
     }
 }

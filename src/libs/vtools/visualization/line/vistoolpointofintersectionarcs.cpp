@@ -6,7 +6,7 @@
  **
  **  @brief
  **  @copyright
- **  This source code is part of the Valentine project, a pattern making
+ **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2015 Valentina project
  **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
@@ -55,9 +55,9 @@ VisToolPointOfIntersectionArcs::VisToolPointOfIntersectionArcs(const VContainer 
 {
     this->setPen(QPen(Qt::NoPen)); // don't use parent this time
 
-    arc1Path = InitItem<QGraphicsPathItem>(Qt::darkGreen, this);
+    arc1Path = InitItem<VCurvePathItem>(Qt::darkGreen, this);
     arc1Path->setFlag(QGraphicsItem::ItemStacksBehindParent, false);
-    arc2Path = InitItem<QGraphicsPathItem>(Qt::darkRed, this);
+    arc2Path = InitItem<VCurvePathItem>(Qt::darkRed, this);
     arc2Path->setFlag(QGraphicsItem::ItemStacksBehindParent, false);
 
     point = InitPoint(mainColor, this);
@@ -66,23 +66,20 @@ VisToolPointOfIntersectionArcs::VisToolPointOfIntersectionArcs(const VContainer 
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-VisToolPointOfIntersectionArcs::~VisToolPointOfIntersectionArcs()
-{}
-
-//---------------------------------------------------------------------------------------------------------------------
 void VisToolPointOfIntersectionArcs::RefreshGeometry()
 {
     if (arc1Id > NULL_ID)
     {
         const QSharedPointer<VArc> arc1 = Visualization::data->GeometricObject<VArc>(arc1Id);
-        DrawPath(arc1Path, arc1->GetPath(PathDirection::Show), Qt::darkGreen, Qt::SolidLine, Qt::RoundCap);
+        DrawPath(arc1Path, arc1->GetPath(), arc1->DirectionArrows(), Qt::darkGreen, Qt::SolidLine, Qt::RoundCap);
 
         if (arc2Id > NULL_ID)
         {
             const QSharedPointer<VArc> arc2 = Visualization::data->GeometricObject<VArc>(arc2Id);
-            DrawPath(arc2Path, arc2->GetPath(PathDirection::Show), Qt::darkRed, Qt::SolidLine, Qt::RoundCap);
+            DrawPath(arc2Path, arc2->GetPath(), arc2->DirectionArrows(), Qt::darkRed, Qt::SolidLine, Qt::RoundCap);
 
-            const QPointF fPoint = VToolPointOfIntersectionArcs::FindPoint(arc1.data(), arc2.data(), crossPoint);
+            QPointF fPoint;
+            VToolPointOfIntersectionArcs::FindPoint(arc1.data(), arc2.data(), crossPoint, &fPoint);
             DrawPoint(point, fPoint, mainColor);
         }
     }

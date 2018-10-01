@@ -77,6 +77,8 @@ static QChar EatWhiteSpace(const QString &formula, int &index)
 static int CheckChar(QChar &c, const QLocale &locale, const QChar &decimal, const QChar &thousand)
 {
     INIT_LOCALE_VARIABLES(locale);
+    Q_UNUSED(decimalPoint)
+    Q_UNUSED(groupSeparator)
 
     if (c == positiveSign)
     {
@@ -175,22 +177,26 @@ int ReadVal(const QString &formula, qreal &val, const QLocale &locale, const QCh
     }
 
     INIT_LOCALE_VARIABLES(locale);
+    Q_UNUSED(decimalPoint)
+    Q_UNUSED(groupSeparator)
 
-    QSet<QChar> reserved;
-    reserved << positiveSign
-             << negativeSign
-             << sign0
-             << sign1
-             << sign2
-             << sign3
-             << sign4
-             << sign5
-             << sign6
-             << sign7
-             << sign8
-             << sign9
-             << expUpper
-             << expLower;
+    QSet<QChar> reserved
+    {
+                positiveSign,
+                negativeSign,
+                sign0,
+                sign1,
+                sign2,
+                sign3,
+                sign4,
+                sign5,
+                sign6,
+                sign7,
+                sign8,
+                sign9,
+                expUpper,
+                expLower
+    };
 
     if (reserved.contains(decimal) || reserved.contains(thousand))
     {
@@ -240,7 +246,7 @@ int ReadVal(const QString &formula, qreal &val, const QLocale &locale, const QCh
             {
                 if (decimal == cThousand)
                 {// Handle reverse to C locale case: thousand '.', decimal ','
-                    const QChar tmpThousand = '@';
+                    const QChar tmpThousand = QLatin1Char('@');
                     buf.replace(thousand, tmpThousand);
                     buf.replace(decimal, cDecimal);
                     buf.replace(tmpThousand, cThousand);
@@ -268,6 +274,77 @@ int ReadVal(const QString &formula, qreal &val, const QLocale &locale, const QCh
 
         buf.append(c);
         c = GetChar(formula, index);
+    }
+
+    return -1;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QString NameRegExp()
+{
+    static QString regex;
+
+    if (regex.isEmpty())
+    {
+        const QList<QLocale> allLocales =
+                QLocale::matchingLocales(QLocale::AnyLanguage, QLocale::AnyScript, QLocale::AnyCountry);
+
+        QString positiveSigns;
+        QString negativeSigns;
+        QString decimalPoints;
+        QString groupSeparators;
+
+        for(auto &locale : allLocales)
+        {
+            if (not positiveSigns.contains(locale.positiveSign()))
+            {
+                positiveSigns.append(locale.positiveSign());
+            }
+
+            if (not negativeSigns.contains(locale.negativeSign()))
+            {
+                negativeSigns.append(locale.negativeSign());
+            }
+
+            if (not decimalPoints.contains(locale.decimalPoint()))
+            {
+                decimalPoints.append(locale.decimalPoint());
+            }
+
+            if (not groupSeparators.contains(locale.groupSeparator()))
+            {
+                groupSeparators.append(locale.groupSeparator());
+            }
+        }
+
+        negativeSigns.replace('-', "\\-");
+        groupSeparators.remove('\'');
+
+        //Same regexp in pattern.xsd shema file. Don't forget to synchronize.
+        // \p{Nd} - \p{Decimal_Digit_Number}
+        // \p{Zs} - \p{Space_Separator}
+        regex = QString("^([^\\p{Nd}\\p{Zs}*/&|!<>^\\()%1%2%3%4=?:;'\"]){1,1}"
+                        "([^\\p{Zs}*/&|!<>^\\()%1%2%3%4=?:;\"]){0,}$")
+                .arg(negativeSigns, positiveSigns, decimalPoints, groupSeparators);
+    }
+
+    return regex;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+int FindFirstNotOf(const QString &string, const QString &chars, int pos)
+{
+    int chPos = pos;
+    QString::const_iterator it = string.constBegin() + pos;
+    QString::const_iterator end = string.constEnd();
+    while (it != end)
+    {
+        if (not chars.contains(*it))
+        {
+            return chPos;
+        }
+        ++it;
+        ++chPos;
     }
 
     return -1;

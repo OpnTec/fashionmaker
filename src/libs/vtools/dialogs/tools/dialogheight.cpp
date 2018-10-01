@@ -6,7 +6,7 @@
  **
  **  @brief
  **  @copyright
- **  This source code is part of the Valentine project, a pattern making
+ **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2013-2015 Valentina project
  **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
@@ -40,7 +40,6 @@
 #include <QSharedPointer>
 #include <new>
 
-#include "../../tools/vabstracttool.h"
 #include "../../visualization/line/vistoolheight.h"
 #include "../../visualization/visualization.h"
 #include "../../visualization/line/visline.h"
@@ -63,9 +62,7 @@ DialogHeight::DialogHeight(const VContainer *data, const quint32 &toolId, QWidge
 {
     ui->setupUi(this);
 
-#if QT_VERSION >= QT_VERSION_CHECK(5, 2, 0)
     ui->lineEditNamePoint->setClearButtonEnabled(true);
-#endif
 
     ui->lineEditNamePoint->setText(qApp->getCurrentDocument()->GenerateLabel(LabelType::NewLabel));
     labelEditNamePoint = ui->labelEditNamePoint;
@@ -75,15 +72,15 @@ DialogHeight::DialogHeight(const VContainer *data, const quint32 &toolId, QWidge
     FillComboBoxPoints(ui->comboBoxBasePoint);
     FillComboBoxPoints(ui->comboBoxP1Line);
     FillComboBoxPoints(ui->comboBoxP2Line);
-    FillComboBoxTypeLine(ui->comboBoxLineType, VAbstractTool::LineStylesPics());
+    FillComboBoxTypeLine(ui->comboBoxLineType, LineStylesPics());
     FillComboBoxLineColors(ui->comboBoxLineColor);
 
     connect(ui->lineEditNamePoint, &QLineEdit::textChanged, this, &DialogHeight::NamePointChanged);
-    connect(ui->comboBoxBasePoint, static_cast<void (QComboBox::*)(const QString &)>(&QComboBox::currentIndexChanged),
+    connect(ui->comboBoxBasePoint, QOverload<const QString &>::of(&QComboBox::currentIndexChanged),
             this, &DialogHeight::PointNameChanged);
-    connect(ui->comboBoxP1Line, static_cast<void (QComboBox::*)(const QString &)>(&QComboBox::currentIndexChanged),
+    connect(ui->comboBoxP1Line, QOverload<const QString &>::of(&QComboBox::currentIndexChanged),
             this, &DialogHeight::PointNameChanged);
-    connect(ui->comboBoxP2Line, static_cast<void (QComboBox::*)(const QString &)>(&QComboBox::currentIndexChanged),
+    connect(ui->comboBoxP2Line, QOverload<const QString &>::of(&QComboBox::currentIndexChanged),
             this, &DialogHeight::PointNameChanged);
 
     vis = new VisToolHeight(data);
@@ -114,7 +111,7 @@ void DialogHeight::SetPointName(const QString &value)
 void DialogHeight::SetTypeLine(const QString &value)
 {
     ChangeCurrentData(ui->comboBoxLineType, value);
-    vis->setLineStyle(VAbstractTool::LineStyleToPenStyle(value));
+    vis->setLineStyle(LineStyleToPenStyle(value));
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -215,7 +212,7 @@ void DialogHeight::ChosenObject(quint32 id, const SceneObject &type)
 
                     if (set.size() == 3)
                     {
-                        if (SetObject(id, ui->comboBoxP2Line, ""))
+                        if (SetObject(id, ui->comboBoxP2Line, QString()))
                         {
                             line->setLineP2Id(id);
                             line->RefreshGeometry();
@@ -243,7 +240,7 @@ void DialogHeight::SaveData()
     line->setObject1Id(GetBasePointId());
     line->setLineP1Id(GetP1LineId());
     line->setLineP2Id(GetP2LineId());
-    line->setLineStyle(VAbstractTool::LineStyleToPenStyle(GetTypeLine()));
+    line->setLineStyle(LineStyleToPenStyle(GetTypeLine()));
     line->RefreshGeometry();
 }
 

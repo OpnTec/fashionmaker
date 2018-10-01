@@ -6,7 +6,7 @@
  **
  **  @brief
  **  @copyright
- **  This source code is part of the Valentine project, a pattern making
+ **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2015 Valentina project
  **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
@@ -29,7 +29,7 @@
 #ifndef TST_VSPLINE_H
 #define TST_VSPLINE_H
 
-#include "../vmisc/abstracttest.h"
+#include "../vtest/abstracttest.h"
 
 class VSpline;
 
@@ -47,6 +47,7 @@ private slots:
     void GetSegmentPoints_TestPuzzle();
     void GetSegmentPoints_NullSegment();
     void GetSegmentPoints_RotateTool();
+    void GetSegmentPoints_issue767();
     void CompareThreeWays();
     void TestParametrT();
     void TestLengthByPoint_data();

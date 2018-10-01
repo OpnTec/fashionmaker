@@ -21,12 +21,17 @@
 #include "vpropertyformwidget.h"
 
 #include <QEvent>
-#include <QForeachContainer>
 #include <QFormLayout>
 #include <QKeyEvent>
 #include <QLayout>
 #include <QLayoutItem>
-#include <QMargins>
+
+#if QT_VERSION < QT_VERSION_CHECK(5, 3, 0)
+#   include "../vmisc/backport/qmarginsf.h"
+#else
+#   include <QMargins>
+#endif
+
 #include <QStyleOptionViewItem>
 #include <QVariant>
 #include <QWidget>
@@ -80,7 +85,7 @@ void VPE::VPropertyFormWidget::build()
     if (layout())
     {
         QLayoutItem *child;
-        while (layout()->count() > 0 && (child = layout()->takeAt(0)) != 0)
+        while (layout()->count() > 0 && (child = layout()->takeAt(0)) != nullptr)
         {
             if (child->widget())
             {
@@ -98,6 +103,7 @@ void VPE::VPropertyFormWidget::build()
     }
 
     QFormLayout* tmpFormLayout = new QFormLayout(this);
+    tmpFormLayout->setFieldGrowthPolicy(QFormLayout::ExpandingFieldsGrow);
     setLayout(tmpFormLayout);
 
     for (int i = 0; i < d_ptr->Properties.count(); ++i)
@@ -118,9 +124,11 @@ void VPE::VPropertyFormWidget::build()
                 tmpFormLayout->addRow(group);
 
                 QFormLayout* subFormLayout = new QFormLayout(group);
+                subFormLayout->setFieldGrowthPolicy(QFormLayout::ExpandingFieldsGrow);
                 QMargins margins = subFormLayout->contentsMargins();
                 margins.setTop(0);
-                margins.setLeft(14);
+                margins.setLeft(18);
+                margins.setRight(0);
                 subFormLayout->setContentsMargins(margins);
 
                 group->setLayout(subFormLayout);
@@ -263,8 +271,8 @@ void VPE::VPropertyFormWidget::setCommitBehaviour(bool auto_commit)
 {
     d_ptr->UpdateEditors = auto_commit;
 
-    QList<VPropertyFormWidget*> tmpChildFormWidgets = getChildPropertyFormWidgets();
-    foreach(VPropertyFormWidget* tmpChild, tmpChildFormWidgets)
+    const QList<VPropertyFormWidget*> tmpChildFormWidgets = getChildPropertyFormWidgets();
+    for (auto tmpChild : tmpChildFormWidgets)
     {
         if (tmpChild)
         {
@@ -276,7 +284,7 @@ void VPE::VPropertyFormWidget::setCommitBehaviour(bool auto_commit)
 QList<VPE::VPropertyFormWidget *> VPE::VPropertyFormWidget::getChildPropertyFormWidgets() const
 {
     QList<VPropertyFormWidget *> tmpResult;
-    foreach(const VPropertyFormWidgetPrivate::SEditorWidget& tmpEditorWidget, d_ptr->EditorWidgets)
+    for (auto &tmpEditorWidget : d_ptr->EditorWidgets)
     {
         if (tmpEditorWidget.FormWidget)
         {

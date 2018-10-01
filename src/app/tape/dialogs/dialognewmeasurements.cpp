@@ -6,7 +6,7 @@
  **
  **  @brief
  **  @copyright
- **  This source code is part of the Valentine project, a pattern making
+ **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2015 Valentina project
  **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
@@ -64,10 +64,10 @@ DialogNewMeasurements::DialogNewMeasurements(QWidget *parent)
         ui->comboBoxBaseSize->setCurrentIndex(index);
     }
 
-    connect(ui->comboBoxMType, static_cast<void (QComboBox::*)(int)>(&QComboBox::currentIndexChanged), this,
+    connect(ui->comboBoxMType, QOverload<int>::of(&QComboBox::currentIndexChanged), this,
             &DialogNewMeasurements::CurrentTypeChanged);
 
-    connect(ui->comboBoxUnit, static_cast<void (QComboBox::*)(int)>(&QComboBox::currentIndexChanged), this,
+    connect(ui->comboBoxUnit, QOverload<int>::of(&QComboBox::currentIndexChanged), this,
             &DialogNewMeasurements::CurrentUnitChanged);
 }
 
@@ -80,13 +80,13 @@ DialogNewMeasurements::~DialogNewMeasurements()
 //---------------------------------------------------------------------------------------------------------------------
 MeasurementsType DialogNewMeasurements::Type() const
 {
-    return static_cast<MeasurementsType>(CURRENT_DATA(ui->comboBoxMType).toInt());
+    return static_cast<MeasurementsType>(ui->comboBoxMType->currentData().toInt());
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 Unit DialogNewMeasurements::MUnit() const
 {
-    return static_cast<Unit>(CURRENT_DATA(ui->comboBoxUnit).toInt());
+    return static_cast<Unit>(ui->comboBoxUnit->currentData().toInt());
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -109,7 +109,7 @@ void DialogNewMeasurements::changeEvent(QEvent *event)
         // retranslate designer form (single inheritance approach)
         ui->retranslateUi(this);
         InitMTypes();
-        InitUnits(static_cast<MeasurementsType>(CURRENT_DATA(ui->comboBoxMType).toInt()));
+        InitUnits(static_cast<MeasurementsType>(ui->comboBoxMType->currentData().toInt()));
     }
 
     // remember to call base class implementation
@@ -141,7 +141,7 @@ void DialogNewMeasurements::showEvent(QShowEvent *event)
 void DialogNewMeasurements::CurrentTypeChanged(int index)
 {
     const MeasurementsType type = static_cast<MeasurementsType>(ui->comboBoxMType->itemData(index).toInt());
-    if (type == MeasurementsType::Standard)
+    if (type == MeasurementsType::Multisize)
     {
         ui->comboBoxBaseSize->setEnabled(true);
         ui->comboBoxBaseHeight->setEnabled(true);
@@ -177,13 +177,13 @@ void DialogNewMeasurements::InitMTypes()
     int val = static_cast<int>(MeasurementsType::Unknown);
     if (ui->comboBoxMType->currentIndex() != -1)
     {
-        val = CURRENT_DATA(ui->comboBoxMType).toInt();
+        val = ui->comboBoxMType->currentData().toInt();
     }
 
     ui->comboBoxMType->blockSignals(true);
     ui->comboBoxMType->clear();
     ui->comboBoxMType->addItem(tr("Individual"), static_cast<int>(MeasurementsType::Individual));
-    ui->comboBoxMType->addItem(tr("Standard"), static_cast<int>(MeasurementsType::Standard));
+    ui->comboBoxMType->addItem(tr("Multisize"), static_cast<int>(MeasurementsType::Multisize));
     ui->comboBoxMType->blockSignals(false);
 
     int index = ui->comboBoxMType->findData(val);
@@ -215,7 +215,7 @@ void DialogNewMeasurements::InitUnits(const MeasurementsType &type)
     int val = static_cast<int>(Unit::Cm);
     if (ui->comboBoxUnit->currentIndex() != -1)
     {
-        val = CURRENT_DATA(ui->comboBoxUnit).toInt();
+        val = ui->comboBoxUnit->currentData().toInt();
     }
 
     ui->comboBoxUnit->blockSignals(true);

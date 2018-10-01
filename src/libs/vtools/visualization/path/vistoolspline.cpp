@@ -6,7 +6,7 @@
  **
  **  @brief
  **  @copyright
- **  This source code is part of the Valentine project, a pattern making
+ **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2013-2015 Valentina project
  **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
@@ -41,6 +41,7 @@
 #include "../vgeometry/vspline.h"
 #include "../vpatterndb/vcontainer.h"
 #include "../vwidgets/vcontrolpointspline.h"
+#include "../vwidgets/scalesceneitems.h"
 #include "../visualization.h"
 #include "vispath.h"
 
@@ -67,11 +68,11 @@ VisToolSpline::VisToolSpline(const VContainer *data, QGraphicsItem *parent)
     point1 = InitPoint(supportColor, this);
     point4 = InitPoint(supportColor, this); //-V656
 
-    auto *controlPoint1 = new VControlPointSpline(1, SplinePointPosition::FirstPoint, *data->GetPatternUnit(), this);
+    auto *controlPoint1 = new VControlPointSpline(1, SplinePointPosition::FirstPoint, this);
     controlPoint1->hide();
     controlPoints.append(controlPoint1);
 
-    auto *controlPoint2 = new VControlPointSpline(1, SplinePointPosition::LastPoint, *data->GetPatternUnit(), this);
+    auto *controlPoint2 = new VControlPointSpline(1, SplinePointPosition::LastPoint, this);
     controlPoint2->hide();
     controlPoints.append(controlPoint2);
 }
@@ -79,14 +80,14 @@ VisToolSpline::VisToolSpline(const VContainer *data, QGraphicsItem *parent)
 //---------------------------------------------------------------------------------------------------------------------
 VisToolSpline::~VisToolSpline()
 {
-    emit ToolTip("");
+    emit ToolTip(QString());
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void VisToolSpline::RefreshGeometry()
 {
     //Radius of point circle, but little bigger. Need handle with hover sizes.
-    const static qreal radius = ToPixel(DefPointRadius/*mm*/, Unit::Mm)*1.5;
+    const static qreal radius = ScaledRadius(SceneScale(qApp->getCurrentScene()))*1.5;
 
     if (object1Id > NULL_ID)
     {
@@ -122,7 +123,8 @@ void VisToolSpline::RefreshGeometry()
         if (object4Id <= NULL_ID)
         {
             VSpline spline(*first, p2, Visualization::scenePos, VPointF(Visualization::scenePos));
-            DrawPath(this, spline.GetPath(PathDirection::Hide), mainColor, Qt::SolidLine, Qt::RoundCap);
+            spline.SetApproximationScale(m_approximationScale);
+            DrawPath(this, spline.GetPath(), mainColor, lineStyle, Qt::RoundCap);
         }
         else
         {
@@ -160,12 +162,14 @@ void VisToolSpline::RefreshGeometry()
             if (VFuzzyComparePossibleNulls(angle1, EMPTY_ANGLE) || VFuzzyComparePossibleNulls(angle2, EMPTY_ANGLE))
             {
                 VSpline spline(*first, p2, p3, *second);
-                DrawPath(this, spline.GetPath(PathDirection::Hide), mainColor, Qt::SolidLine, Qt::RoundCap);
+                spline.SetApproximationScale(m_approximationScale);
+                DrawPath(this, spline.GetPath(), mainColor, lineStyle, Qt::RoundCap);
             }
             else
             {
                 VSpline spline(*first, *second, angle1, angle2, kAsm1, kAsm2, kCurve);
-                DrawPath(this, spline.GetPath(PathDirection::Show), mainColor, Qt::SolidLine, Qt::RoundCap);
+                spline.SetApproximationScale(m_approximationScale);
+                DrawPath(this, spline.GetPath(), spline.DirectionArrows(), mainColor, lineStyle, Qt::RoundCap);
                 Visualization::toolTip = tr("Use <b>Shift</b> for sticking angle!");
                 emit ToolTip(Visualization::toolTip);
             }

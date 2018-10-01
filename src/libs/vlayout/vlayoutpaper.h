@@ -6,7 +6,7 @@
  **
  **  @brief
  **  @copyright
- **  This source code is part of the Valentine project, a pattern making
+ **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2013-2015 Valentina project
  **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
@@ -60,7 +60,7 @@ public:
     VLayoutPaper &operator=(VLayoutPaper &&paper) Q_DECL_NOTHROW { Swap(paper); return *this; }
 #endif
 
-    void Swap(VLayoutPaper &paper) Q_DECL_NOTHROW
+    inline void Swap(VLayoutPaper &paper) Q_DECL_NOTHROW
     { std::swap(d, paper.d); }
 
     int  GetHeight() const;
@@ -88,8 +88,8 @@ public:
 
     bool ArrangeDetail(const VLayoutPiece &detail, std::atomic_bool &stop);
     int  Count() const;
-    QGraphicsRectItem *GetPaperItem(bool autoCrop) const Q_REQUIRED_RESULT;
-    QList<QGraphicsItem *> GetItemDetails() const Q_REQUIRED_RESULT;
+    Q_REQUIRED_RESULT QGraphicsRectItem *GetPaperItem(bool autoCrop, bool textAsPaths) const;
+    Q_REQUIRED_RESULT QList<QGraphicsItem *> GetItemDetails(bool textAsPaths) const;
 
     QVector<VLayoutPiece> GetDetails() const;
     void                   SetDetails(const QList<VLayoutPiece>& details);

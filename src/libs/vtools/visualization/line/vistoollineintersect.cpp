@@ -6,7 +6,7 @@
  **
  **  @brief
  **  @copyright
- **  This source code is part of the Valentine project, a pattern making
+ **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2013-2015 Valentina project
  **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
@@ -48,17 +48,13 @@ VisToolLineIntersect::VisToolLineIntersect(const VContainer *data, QGraphicsItem
 {
     line1P1 = InitPoint(supportColor, this);
     line1P2 = InitPoint(supportColor, this);
-    line1 = InitItem<QGraphicsLineItem>(supportColor, this);
+    line1 = InitItem<VScaledLine>(supportColor, this);
 
     line2P1 = InitPoint(supportColor, this);
     line2P2 = InitPoint(supportColor, this);
 
     point = InitPoint(mainColor, this);
 }
-
-//---------------------------------------------------------------------------------------------------------------------
-VisToolLineIntersect::~VisToolLineIntersect()
-{}
 
 //---------------------------------------------------------------------------------------------------------------------
 void VisToolLineIntersect::RefreshGeometry()
@@ -79,11 +75,7 @@ void VisToolLineIntersect::RefreshGeometry()
 
             DrawLine(line1, QLineF(static_cast<QPointF>(*first), static_cast<QPointF>(*second)), supportColor);
 
-            if (line2P1Id <= NULL_ID)
-            {
-                return;
-            }
-            else
+            if (line2P1Id > NULL_ID)
             {
                 const QSharedPointer<VPointF> third = Visualization::data->GeometricObject<VPointF>(line2P1Id);
                 DrawPoint(line2P1, static_cast<QPointF>(*third), supportColor);

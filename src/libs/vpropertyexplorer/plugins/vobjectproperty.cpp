@@ -67,7 +67,7 @@ QWidget* VPE::VObjectProperty::createEditor(QWidget * parent, const QStyleOption
     tmpEditor->setLocale(parent->locale());
     FillList(tmpEditor, objects);
     tmpEditor->setCurrentIndex(tmpEditor->findData(VProperty::d_ptr->VariantValue.toUInt()));
-    connect(tmpEditor, static_cast<void (QComboBox::*)(int)>(&QComboBox::currentIndexChanged), this,
+    connect(tmpEditor, QOverload<int>::of(&QComboBox::currentIndexChanged), this,
                      &VObjectProperty::currentIndexChanged);
 
     VProperty::d_ptr->editor = tmpEditor;

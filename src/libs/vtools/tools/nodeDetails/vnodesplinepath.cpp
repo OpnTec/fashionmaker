@@ -6,7 +6,7 @@
  **
  **  @brief
  **  @copyright
- **  This source code is part of the Valentine project, a pattern making
+ **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2013-2015 Valentina project
  **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
@@ -44,59 +44,45 @@ const QString VNodeSplinePath::ToolType = QStringLiteral("modelingPath");
 //---------------------------------------------------------------------------------------------------------------------
 /**
  * @brief VNodeSplinePath constructor.
- * @param doc dom document container.
- * @param data container with variables.
- * @param id object id in container.
- * @param idSpline object id in containerSpline.
- * @param typeCreation way we create this tool.
- * @param idTool tool id.
+ * @param initData init data.
  * @param qoParent QObject parent.
  */
-VNodeSplinePath::VNodeSplinePath(VAbstractPattern *doc, VContainer *data, quint32 id, quint32 idSpline,
-                                 const Source &typeCreation, const QString &drawName, const quint32 &idTool,
-                                 QObject *qoParent)
-    :VAbstractNode(doc, data, id, idSpline, drawName, idTool, qoParent)
+VNodeSplinePath::VNodeSplinePath(const VAbstractNodeInitData &initData, QObject *qoParent)
+    :VAbstractNode(initData.doc, initData.data, initData.id, initData.idObject, initData.drawName, initData.idTool,
+                   qoParent)
 {
-    ToolCreation(typeCreation);
+    ToolCreation(initData.typeCreation);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 /**
  * @brief Create help create tool.
- * @param doc dom document container.
- * @param data container with variables.
- * @param id object id in container.
- * @param idSpline object id in containerSpline.
- * @param parse parser file mode.
- * @param typeCreation way we create this tool.
- * @param idTool tool id.
+ * @param initData init data.
  */
-void VNodeSplinePath::Create(VAbstractPattern *doc, VContainer *data, quint32 id,
-                             quint32 idSpline, const Document &parse, const Source &typeCreation,
-                             const QString &drawName, const quint32 &idTool)
+void VNodeSplinePath::Create(const VAbstractNodeInitData &initData)
 {
-    if (parse == Document::FullParse)
+    if (initData.parse == Document::FullParse)
     {
-        VAbstractTool::AddRecord(id, Tool::NodeSplinePath, doc);
-        VNodeSplinePath *splPath = new VNodeSplinePath(doc, data, id, idSpline, typeCreation, drawName, idTool, doc);
+        VAbstractTool::AddRecord(initData.id, Tool::NodeSplinePath, initData.doc);
+        VNodeSplinePath *splPath = new VNodeSplinePath(initData);
 
-        VAbstractPattern::AddTool(id, splPath);
-        if (idTool != NULL_ID)
+        VAbstractPattern::AddTool(initData.id, splPath);
+        if (initData.idTool != NULL_ID)
         {
             //Some nodes we don't show on scene. Tool that create this nodes must free memory.
-            VDataTool *tool = VAbstractPattern::getTool(idTool);
+            VDataTool *tool = VAbstractPattern::getTool(initData.idTool);
             SCASSERT(tool != nullptr)
             splPath->setParent(tool);// Adopted by a tool
         }
         else
         {
             // Help to delete the node before each FullParse
-            doc->AddToolOnRemove(splPath);
+            initData.doc->AddToolOnRemove(splPath);
         }
     }
     else
     {
-        doc->UpdateToolData(id, data);
+        initData.doc->UpdateToolData(initData.id, initData.data);
     }
 }
 
@@ -128,7 +114,7 @@ void VNodeSplinePath::AddToFile()
 {
     QDomElement domElement = doc->createElement(getTagName());
 
-    doc->SetAttribute(domElement, VDomDocument::AttrId, id);
+    doc->SetAttribute(domElement, VDomDocument::AttrId, m_id);
     doc->SetAttribute(domElement, AttrType, ToolType);
     doc->SetAttribute(domElement, AttrIdObject, idNode);
     if (idTool != 0)
@@ -137,21 +123,4 @@ void VNodeSplinePath::AddToFile()
     }
 
     AddToModeling(domElement);
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-/**
- * @brief RefreshDataInFile refresh attributes in file. If attributes don't exist create them.
- */
-void VNodeSplinePath::RefreshDataInFile()
-{
-    QDomElement domElement = doc->elementById(id);
-    if (domElement.isElement())
-    {
-        doc->SetAttribute(domElement, AttrIdObject, QString().setNum(idNode));
-        if (idTool != 0)
-        {
-            doc->SetAttribute(domElement, AttrIdTool, idTool);
-        }
-    }
 }

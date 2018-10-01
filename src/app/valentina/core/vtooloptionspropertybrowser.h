@@ -6,7 +6,7 @@
  **
  **  @brief
  **  @copyright
- **  This source code is part of the Valentine project, a pattern making
+ **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2013-2015 Valentina project
  **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
@@ -121,9 +121,13 @@ private:
     void AddPropertyLineType(Tool *i, const QString &propertyName, const QMap<QString, QIcon> &styles);
 
     template<class Tool>
+    void AddPropertyCurvePenStyle(Tool *i, const QString &propertyName, const QMap<QString, QIcon> &styles);
+
+    template<class Tool>
     void AddPropertyLineColor(Tool *i, const QString &propertyName, const QMap<QString, QString> &colors,
                               const QString &id);
 
+    void AddPropertyApproximationScale(const QString &propertyName, qreal aScale);
     void AddPropertyFormula(const QString &propertyName, const VFormula &formula, const QString &attrName);
     void AddPropertyParentPointName(const QString &pointName, const QString &propertyName,
                                     const QString &propertyAttribure);

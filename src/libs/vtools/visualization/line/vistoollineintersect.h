@@ -6,7 +6,7 @@
  **
  **  @brief
  **  @copyright
- **  This source code is part of the Valentine project, a pattern making
+ **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2013-2015 Valentina project
  **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
@@ -43,27 +43,27 @@ class VisToolLineIntersect :public VisLine
 {
     Q_OBJECT
 public:
-    explicit VisToolLineIntersect(const VContainer *data, QGraphicsItem *parent = 0);
-    virtual ~VisToolLineIntersect() Q_DECL_OVERRIDE;
+    explicit VisToolLineIntersect(const VContainer *data, QGraphicsItem *parent = nullptr);
+    virtual ~VisToolLineIntersect() = default;
 
-    virtual void RefreshGeometry() Q_DECL_OVERRIDE;
+    virtual void RefreshGeometry() override;
 
     void         setLine1P2Id(const quint32 &value);
     void         setLine2P1Id(const quint32 &value);
     void         setLine2P2Id(const quint32 &value);
-    virtual int  type() const Q_DECL_OVERRIDE {return Type;}
+    virtual int  type() const override {return Type;}
     enum { Type = UserType + static_cast<int>(Vis::ToolLineIntersect)};
 private:
     Q_DISABLE_COPY(VisToolLineIntersect)
     quint32              line1P2Id;
     quint32              line2P1Id;
     quint32              line2P2Id;
-    QGraphicsEllipseItem *point;
-    QGraphicsEllipseItem *line1P1;
-    QGraphicsEllipseItem *line1P2;
-    QGraphicsLineItem    *line1;
-    QGraphicsEllipseItem *line2P1;
-    QGraphicsEllipseItem *line2P2;
+    VScaledEllipse *point;
+    VScaledEllipse *line1P1;
+    VScaledEllipse *line1P2;
+    VScaledLine    *line1;
+    VScaledEllipse *line2P1;
+    VScaledEllipse *line2P2;
 };
 
 #endif // VISTOOLLINEINTERSECT_H

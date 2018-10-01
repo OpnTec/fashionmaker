@@ -6,7 +6,7 @@
  **
  **  @brief
  **  @copyright
- **  This source code is part of the Valentine project, a pattern making
+ **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2013-2015 Valentina project
  **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
@@ -41,15 +41,11 @@
 
 //---------------------------------------------------------------------------------------------------------------------
 VisLine::VisLine(const VContainer *data, QGraphicsItem *parent)
-    :Visualization(data), QGraphicsLineItem(parent)
+    :Visualization(data), VScaledLine(parent)
 {
     this->setZValue(1);// Show on top real tool
     InitPen();
 }
-
-//---------------------------------------------------------------------------------------------------------------------
-VisLine::~VisLine()
-{}
 
 //---------------------------------------------------------------------------------------------------------------------
 qreal VisLine::CorrectAngle(const qreal &angle)
@@ -138,8 +134,11 @@ QLineF VisLine::Axis(const QPointF &p1, const QPointF &p2) const
 //---------------------------------------------------------------------------------------------------------------------
 void VisLine::InitPen()
 {
-    this->setPen(QPen(mainColor, qApp->toPixel(WidthHairLine(*Visualization::data->GetPatternUnit()))/factor,
-                      lineStyle));
+    QPen visPen = pen();
+    visPen.setColor(mainColor);
+    visPen.setStyle(lineStyle);
+
+    setPen(visPen);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -149,7 +148,7 @@ void VisLine::AddOnScene()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VisLine::DrawRay(QGraphicsLineItem *lineItem, const QPointF &p, const QPointF &pTangent, const QColor &color,
+void VisLine::DrawRay(VScaledLine *lineItem, const QPointF &p, const QPointF &pTangent, const QColor &color,
                       Qt::PenStyle style)
 {
     SCASSERT (lineItem != nullptr)

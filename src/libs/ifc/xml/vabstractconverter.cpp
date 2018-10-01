@@ -6,7 +6,7 @@
  **
  **  @brief
  **  @copyright
- **  This source code is part of the Valentine project, a pattern making
+ **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2013-2015 Valentina project
  **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
@@ -87,7 +87,7 @@ QString VAbstractConverter::Convert()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-int VAbstractConverter::GetCurrentFormatVarsion() const
+int VAbstractConverter::GetCurrentFormatVersion() const
 {
     return m_ver;
 }
@@ -125,7 +125,7 @@ int VAbstractConverter::GetVersion(const QString &version)
 {
     ValidateVersion(version);
 
-    const QStringList ver = version.split(".");
+    const QStringList ver = version.split(QChar('.'));
 
     bool ok = false;
     const int major = ver.at(0).toInt(&ok);
@@ -154,7 +154,8 @@ int VAbstractConverter::GetVersion(const QString &version)
 //---------------------------------------------------------------------------------------------------------------------
 void VAbstractConverter::ValidateVersion(const QString &version)
 {
-    const QRegularExpression rx(QStringLiteral("^(0|([1-9][0-9]*)).(0|([1-9][0-9]*)).(0|([1-9][0-9]*))$"));
+    const QRegularExpression rx(QStringLiteral("^([0-9]|[1-9][0-9]|[1-2][0-5][0-5]).([0-9]|[1-9][0-9]|[1-2][0-5][0-5])"
+                                               ".([0-9]|[1-9][0-9]|[1-2][0-5][0-5])$"));
 
     if (rx.match(version).hasMatch() == false)
     {
@@ -177,10 +178,7 @@ void VAbstractConverter::ReserveFile() const
     QString error;
     QFileInfo info(m_convertedFileName);
     const QString reserveFileName = QString("%1/%2(v%3).%4.bak")
-            .arg(info.absoluteDir().absolutePath())
-            .arg(info.baseName())
-            .arg(GetVersionStr())
-            .arg(info.completeSuffix());
+            .arg(info.absoluteDir().absolutePath(), info.baseName(), GetVersionStr(), info.completeSuffix());
     if (not SafeCopy(m_convertedFileName, reserveFileName, error))
     {
 #ifdef Q_OS_WIN32
@@ -243,13 +241,13 @@ Q_NORETURN void VAbstractConverter::InvalidVersion(int ver) const
 {
     if (ver < MinVer())
     {
-        const QString errorMsg(tr("Invalid version. Minimum supported version is %1").arg(MinVerStr()));
+        const QString errorMsg(tr("Invalid version. Minimum supported format version is %1").arg(MinVerStr()));
         throw VException(errorMsg);
     }
 
     if (ver > MaxVer())
     {
-        const QString errorMsg(tr("Invalid version. Maximum supported version is %1").arg(MaxVerStr()));
+        const QString errorMsg(tr("Invalid version. Maximum supported format version is %1").arg(MaxVerStr()));
         throw VException(errorMsg);
     }
 

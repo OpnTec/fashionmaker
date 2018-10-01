@@ -6,7 +6,7 @@
  **
  **  @brief
  **  @copyright
- **  This source code is part of the Valentine project, a pattern making
+ **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2013-2015 Valentina project
  **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
@@ -61,7 +61,8 @@ VLayoutGenerator::VLayoutGenerator(QObject *parent)
       unitePages(false),
       stripOptimizationEnabled(false),
       multiplier(1),
-      stripOptimization(false)
+      stripOptimization(false),
+      textAsPaths(false)
 {}
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -207,20 +208,31 @@ LayoutErrors VLayoutGenerator::State() const
 QList<QGraphicsItem *> VLayoutGenerator::GetPapersItems() const
 {
     QList<QGraphicsItem *> list;
-    for (int i=0; i < papers.count(); ++i)
+    for (auto &paper : papers)
     {
-        list.append(papers.at(i).GetPaperItem(autoCrop));
+        list.append(paper.GetPaperItem(autoCrop, IsTestAsPaths()));
     }
     return list;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QList<QList<QGraphicsItem *> > VLayoutGenerator::GetAllDetails() const
+QList<QList<QGraphicsItem *> > VLayoutGenerator::GetAllDetailsItems() const
 {
     QList<QList<QGraphicsItem *> > list;
-    for (int i=0; i < papers.count(); ++i)
+    for (auto &paper : papers)
     {
-        list.append(papers.at(i).GetItemDetails());
+        list.append(paper.GetItemDetails(IsTestAsPaths()));
+    }
+    return list;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QVector<QVector<VLayoutPiece> > VLayoutGenerator::GetAllDetails() const
+{
+    QVector<QVector<VLayoutPiece> > list;
+    for (auto &paper : papers)
+    {
+        list.append(paper.GetDetails());
     }
     return list;
 }
@@ -230,9 +242,7 @@ void VLayoutGenerator::Abort()
 {
     stopGeneration.store(true);
     state = LayoutErrors::ProcessStoped;
-#if QT_VERSION >= QT_VERSION_CHECK(5, 2, 0)
     QThreadPool::globalInstance()->clear();
-#endif
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -245,6 +255,18 @@ bool VLayoutGenerator::IsStripOptimization() const
 void VLayoutGenerator::SetStripOptimization(bool value)
 {
     stripOptimization = value;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+bool VLayoutGenerator::IsTestAsPaths() const
+{
+    return textAsPaths;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VLayoutGenerator::SetTestAsPaths(bool value)
+{
+    textAsPaths = value;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -436,9 +458,8 @@ QList<VLayoutPiece> VLayoutGenerator::MoveDetails(qreal length, const QVector<VL
     }
 
     QList<VLayoutPiece> newDetails;
-    for (int i = 0; i < details.size(); ++i)
+    for (auto d : details)
     {
-        VLayoutPiece d = details.at(i);
         d.Translate(0, length);
         newDetails.append(d);
     }

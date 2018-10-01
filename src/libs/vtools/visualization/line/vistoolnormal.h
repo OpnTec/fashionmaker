@@ -6,7 +6,7 @@
  **
  **  @brief
  **  @copyright
- **  This source code is part of the Valentine project, a pattern making
+ **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2013-2015 Valentina project
  **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
@@ -43,24 +43,25 @@ class VisToolNormal : public VisLine
 {
     Q_OBJECT
 public:
-    explicit VisToolNormal(const VContainer *data, QGraphicsItem *parent = 0);
-    virtual ~VisToolNormal() Q_DECL_OVERRIDE;
+    explicit VisToolNormal(const VContainer *data, QGraphicsItem *parent = nullptr);
+    virtual ~VisToolNormal() = default;
 
-    virtual void RefreshGeometry() Q_DECL_OVERRIDE;
+    virtual void RefreshGeometry() override;
 
     void         setObject2Id(const quint32 &value);
     void         setLength(const QString &expression);
     qreal        GetAngle() const;
     void         SetAngle(const qreal &value);
-    virtual int  type() const Q_DECL_OVERRIDE {return Type;}
+    virtual int  type() const override {return Type;}
     enum { Type = UserType + static_cast<int>(Vis::ToolNormal)};
+
 private:
     Q_DISABLE_COPY(VisToolNormal)
     quint32              object2Id;
-    QGraphicsEllipseItem *point;
-    QGraphicsEllipseItem *lineP1;
-    QGraphicsEllipseItem *lineP2;
-    QGraphicsLineItem    *line;
+    VScaledEllipse *point;
+    VScaledEllipse *lineP1;
+    VScaledEllipse *lineP2;
+    VScaledLine    *line;
     qreal                length;
     qreal                angle;
 

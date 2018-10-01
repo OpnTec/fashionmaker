@@ -6,7 +6,7 @@
  **
  **  @brief
  **  @copyright
- **  This source code is part of the Valentine project, a pattern making
+ **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2013-2015 Valentina project
  **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
@@ -47,31 +47,26 @@
 
 class DialogTool;
 
-struct VToolUnionDetailsInitData
+#define UNION_VERSSION 2
+
+struct VToolUnionDetailsInitData : VAbstractToolInitData
 {
     VToolUnionDetailsInitData()
-        : d1id(NULL_ID),
+        : VAbstractToolInitData(),
+          d1id(NULL_ID),
           d2id(NULL_ID),
           indexD1(NULL_ID),
           indexD2(NULL_ID),
-          scene(nullptr),
-          doc(nullptr),
-          data(nullptr),
-          parse(Document::FullParse),
-          typeCreation(Source::FromFile),
-          retainPieces(false)
+          retainPieces(false),
+          version(UNION_VERSSION)
     {}
 
     quint32 d1id;
     quint32 d2id;
     quint32 indexD1;
     quint32 indexD2;
-    VMainGraphicsScene *scene;
-    VAbstractPattern *doc;
-    VContainer *data;
-    Document parse;
-    Source typeCreation;
     bool retainPieces;
+    uint version;
 };
 
 /**
@@ -81,9 +76,9 @@ class VToolUnionDetails : public VAbstractTool
 {
     Q_OBJECT
 public:
-    static VToolUnionDetails *Create(QSharedPointer<DialogTool> dialog, VMainGraphicsScene *scene,
+    static VToolUnionDetails *Create(const QPointer<DialogTool> &dialog, VMainGraphicsScene *scene,
                                      VAbstractPattern *doc, VContainer *data);
-    static VToolUnionDetails *Create(const quint32 _id, const VToolUnionDetailsInitData &initData);
+    static VToolUnionDetails *Create(VToolUnionDetailsInitData initData);
 
     static const QString ToolType;
     static const QString TagDetail;
@@ -97,22 +92,26 @@ public:
     static const QString NodeTypeContour;
     static const QString NodeTypeModeling;
 
-    virtual QString getTagName() const Q_DECL_OVERRIDE;
-    virtual void ShowVisualization(bool show) Q_DECL_OVERRIDE;
-    virtual void incrementReferens() Q_DECL_OVERRIDE;
-    virtual void decrementReferens() Q_DECL_OVERRIDE;
-    virtual void GroupVisibility(quint32 object, bool visible) Q_DECL_OVERRIDE;
+    static const quint8 unionVersion;
+
+    virtual QString getTagName() const override;
+    virtual void ShowVisualization(bool show) override;
+    virtual void incrementReferens() override;
+    virtual void decrementReferens() override;
+    virtual void GroupVisibility(quint32 object, bool visible) override;
+
+    static QVector<QPair<bool, VPieceNode> > CalcUnitedPath(const VPiecePath &d1Path, const VPiecePath &d2Path,
+                                                            quint32 indexD2, quint32 pRotate);
 public slots:
     /**
      * @brief FullUpdateFromFile update tool data form file.
      */
-    virtual void FullUpdateFromFile () Q_DECL_OVERRIDE {}
-    virtual void AllowHover(bool) Q_DECL_OVERRIDE {}
-    virtual void AllowSelecting(bool) Q_DECL_OVERRIDE {}
+    virtual void FullUpdateFromFile () override {}
+    virtual void AllowHover(bool) override {}
+    virtual void AllowSelecting(bool) override {}
 protected:
-    virtual void AddToFile() Q_DECL_OVERRIDE;
-    virtual void RefreshDataInFile() Q_DECL_OVERRIDE;
-    virtual void SetVisualization() Q_DECL_OVERRIDE {}
+    virtual void AddToFile() override;
+    virtual void SetVisualization() override {}
 private:
     Q_DISABLE_COPY(VToolUnionDetails)
     /** @brief d1 first detail id. */
@@ -127,7 +126,9 @@ private:
     /** @brief indexD2 index edge in second detail. */
     quint32 indexD2;
 
-    VToolUnionDetails(quint32 id, const VToolUnionDetailsInitData &initData, QObject *parent = nullptr);
+    uint version;
+
+    VToolUnionDetails(const VToolUnionDetailsInitData &initData, QObject *parent = nullptr);
 
     void             AddDetail(QDomElement &domElement, const VPiece &d) const;
     void             AddToModeling(const QDomElement &domElement);

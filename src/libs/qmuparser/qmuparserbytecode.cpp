@@ -64,7 +64,10 @@ QmuParserByteCode::QmuParserByteCode(const QmuParserByteCode &a_ByteCode)
  */
 QmuParserByteCode& QmuParserByteCode::operator=(const QmuParserByteCode &a_ByteCode)
 {
-    Assign(a_ByteCode);
+    if (this != &a_ByteCode)
+    {
+        Assign(a_ByteCode);
+    }
     return *this;
 }
 
@@ -191,7 +194,7 @@ void QmuParserByteCode::ConstantFolding(ECmdCode a_Oprt)
         #if defined(MUP_MATH_EXCEPTIONS)
             if (y==0)
             {
-                throw qmuParserError(ecDIV_BY_ZERO, "0");
+                throw qmuParserError(ecDIV_BY_ZERO, QLatin1Char('0'));
             }
         #endif
             x = x / y;

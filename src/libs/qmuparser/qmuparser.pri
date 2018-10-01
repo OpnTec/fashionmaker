@@ -14,7 +14,7 @@ SOURCES += \
     $$PWD/qmutokenparser.cpp \
     $$PWD/qmudef.cpp
 
-win32-msvc*:SOURCES += $$PWD/stable.cpp
+*msvc*:SOURCES += $$PWD/stable.cpp
 
 HEADERS += \
     $$PWD/qmuparser.h\
@@ -32,4 +32,5 @@ HEADERS += \
     $$PWD/qmutranslation.h \
     $$PWD/qmudef.h \
     $$PWD/qmuformulabase.h \
-    $$PWD/qmutokenparser.h
+    $$PWD/qmutokenparser.h \
+    $$PWD/qmuparsercallback_p.h

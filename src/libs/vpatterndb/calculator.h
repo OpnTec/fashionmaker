@@ -6,7 +6,7 @@
  **
  **  @brief
  **  @copyright
- **  This source code is part of the Valentine project, a pattern making
+ **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2013-2015 Valentina project
  **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
@@ -37,6 +37,8 @@
 
 #include "../qmuparser/qmuformulabase.h"
 
+class VInternalVariable;
+
 /**
  * @brief The Calculator class for calculation formula.
  *
@@ -61,11 +63,13 @@ public:
     Calculator();
     virtual ~Calculator() Q_DECL_EQ_DEFAULT;
 
-    qreal EvalFormula(const QHash<QString, qreal *> &vars, const QString &formula);
+    qreal EvalFormula(const QHash<QString, QSharedPointer<VInternalVariable> > *vars, const QString &formula);
+protected:
+    static qreal* VarFactory(const QString &a_szName, void *a_pUserData);
 private:
     Q_DISABLE_COPY(Calculator)
-
-    void InitVariables(const QHash<QString, qreal *> &vars, const QMap<int, QString> &tokens, const QString &formula);
+    QVector<QSharedPointer<qreal>> m_varsValues;
+    const QHash<QString, QSharedPointer<VInternalVariable> > *m_vars;
 };
 
 #endif // CALCULATOR_H

@@ -6,7 +6,7 @@
  **
  **  @brief
  **  @copyright
- **  This source code is part of the Valentine project, a pattern making
+ **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2015 Valentina project
  **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
@@ -56,28 +56,19 @@ public:
     VAbstractPoint(VAbstractPattern *doc, VContainer *data, quint32 id);
     virtual ~VAbstractPoint() Q_DECL_EQ_DEFAULT;
 
-    virtual QString      getTagName() const Q_DECL_OVERRIDE;
+    virtual QString      getTagName() const override;
 
     template <typename T>
     void ShowToolVisualization(bool show);
 
 public slots:
-    virtual void ShowTool(quint32 id, bool enable) Q_DECL_OVERRIDE;
+    virtual void ShowTool(quint32 id, bool enable) override;
     void         DeleteFromLabel();
-    virtual void DoChangePosition(quint32 id, qreal mx, qreal my) =0;
 
 protected:
     void SetPointName(quint32 id, const QString &name);
 
-    template <typename T>
-    void ChangePosition(T *item, quint32 id, const QPointF &pos);
-
-
-    virtual void UpdateNamePosition(quint32 id)=0;
-    virtual void RefreshLine(quint32 id)=0;
-
-    template <typename T>
-    void SetToolEnabled(T *item, const QColor &color, bool enabled);
+    virtual void UpdateNamePosition(quint32 id, const QPointF &pos)=0;
 
     template <typename T>
     static void InitToolConnections(VMainGraphicsScene *scene, T *tool);
@@ -109,31 +100,6 @@ void VAbstractPoint::ShowToolVisualization(bool show)
     {
         delete vis;
     }
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-template <typename T>
-void VAbstractPoint::SetToolEnabled(T *item, const QColor &color, bool enabled)
-{
-    item->setEnabled(enabled);
-    if (enabled)
-    {
-        item->setPen(QPen(color,
-                          qApp->toPixel(WidthHairLine(*VAbstractTool::data.GetPatternUnit()))/factor));
-    }
-    else
-    {
-        item->setPen(QPen(Qt::gray, qApp->toPixel(WidthHairLine(*VAbstractTool::data.GetPatternUnit()))/factor));
-    }
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-template <typename T>
-void VAbstractPoint::ChangePosition(T *item, quint32 id, const QPointF &pos)
-{
-    const QPointF p = pos - item->pos();
-    DoChangePosition(id, p.x(), p.y());
-    UpdateNamePosition(id);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

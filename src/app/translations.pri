@@ -29,7 +29,8 @@ isEmpty(LOCALES){
         ro_RO \
         zh_CN \
         pt_BR \
-        el_GR
+        el_GR \
+        pl_PL
 } else {
     LANGUAGES = $${LOCALES}
 }
@@ -59,7 +60,7 @@ for(_translation_name, INSTALL_TRANSLATIONS) {
   _translation_name_ts = $$section(_translation_name_qm, ".", 0, 0).ts
 
     !exists($$_translation_name) {
-        system($$shell_path($$[QT_INSTALL_BINS]/$$LRELEASE) -silent $$shell_path($${TRANSLATIONS_PATH}/$$_translation_name_ts) -qm $$shell_path($$_translation_name))
+        system($$system_path($$[QT_INSTALL_BINS]/$$LRELEASE) -silent $$system_path($${TRANSLATIONS_PATH}/$$_translation_name_ts) -qm $$system_path($$_translation_name))
         unix {
             exists($${OUT_PWD}/$$DESTDIR/valentina) {
                 system(rm -fv $${OUT_PWD}/$$DESTDIR/valentina) # force to call linking
@@ -72,7 +73,11 @@ for(_translation_name, INSTALL_TRANSLATIONS) {
 }
 
 # Make possible run program even you do not install it. Seek files in local directory.
-forceCopyToDestdir($$INSTALL_TRANSLATIONS, $$shell_path($${OUT_PWD}/$$DESTDIR/translations))
+CONFIG(release, debug|release){
+    forceCopyToDestdir($$INSTALL_TRANSLATIONS, $$shell_path($${OUT_PWD}/$$DESTDIR/translations))
+} else {
+    copyToDestdir($$INSTALL_TRANSLATIONS, $$shell_path($${OUT_PWD}/$$DESTDIR/translations))
+}
 
 macx{
     RESOURCES_DIR = "Contents/Resources"
@@ -246,5 +251,14 @@ macx{
                 $${TRANSLATIONS_PATH}/Localizable.strings
             TRANSLATION_el_GR.path = "$$RESOURCES_DIR/translations/el_GR.lproj"
             QMAKE_BUNDLE_DATA += TRANSLATION_el_GR
+        }
+
+        exists($${TRANSLATIONS_PATH}/valentina_pl_PL.qm){
+            TRANSLATION_pl_PL.files += \
+                $$files($${TRANSLATIONS_PATH}/*_pl_PL.qm) \
+                $$[QT_INSTALL_TRANSLATIONS]/qt_pl.qm \
+                $${TRANSLATIONS_PATH}/Localizable.strings
+            TRANSLATION_pl_PL.path = "$$RESOURCES_DIR/translations/pl_PL.lproj"
+            QMAKE_BUNDLE_DATA += TRANSLATION_pl_PL
         }
 }

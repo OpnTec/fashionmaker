@@ -6,7 +6,7 @@
  **
  **  @brief
  **  @copyright
- **  This source code is part of the Valentine project, a pattern making
+ **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2015 Valentina project
  **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
@@ -41,7 +41,7 @@
 #include <QtGlobal>
 
 extern const int MAJOR_VERSION = 0;
-extern const int MINOR_VERSION = 5;
+extern const int MINOR_VERSION = 6;
 extern const int DEBUG_VERSION = 0;
 
 extern const QString APP_VERSION_STR(QStringLiteral("%1.%2.%3.%4").arg(MAJOR_VERSION).arg(MINOR_VERSION)
@@ -71,7 +71,7 @@ QString compilerString()
         iccVersion = QLatin1String(__INTEL_COMPILER);
     }
 #ifdef __INTEL_COMPILER_UPDATE
-    return QLatin1String("Intel(R) C++ ") + iccVersion + QLatin1String(".") + QLatin1String(__INTEL_COMPILER_UPDATE) +
+    return QLatin1String("Intel(R) C++ ") + iccVersion + QChar('.') + QLatin1String(__INTEL_COMPILER_UPDATE) +
            QLatin1String(" build ") + QLatin1String(__INTEL_COMPILER_BUILD_DATE) + QLatin1String(" [") +
            QLatin1String(iccCompact) + QLatin1String(" compatibility]");
 #else

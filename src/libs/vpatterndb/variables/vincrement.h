@@ -6,7 +6,7 @@
  **
  **  @brief
  **  @copyright
- **  This source code is part of the Valentine project, a pattern making
+ **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2013-2015 Valentina project
  **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
@@ -51,20 +51,23 @@ public:
                const QString &description = QString());
     VIncrement(const VIncrement &incr);
 
-    virtual ~VIncrement() Q_DECL_OVERRIDE;
+    virtual ~VIncrement() override;
 
     VIncrement &operator=(const VIncrement &incr);
 #ifdef Q_COMPILER_RVALUE_REFS
     VIncrement &operator=(VIncrement &&incr) Q_DECL_NOTHROW { Swap(incr); return *this; }
 #endif
 
-    void Swap(VIncrement &incr) Q_DECL_NOTHROW
+    inline void Swap(VIncrement &incr) Q_DECL_NOTHROW
     { VVariable::Swap(incr); std::swap(d, incr.d); }
 
     quint32     getIndex() const;
     QString     GetFormula() const;
     bool        IsFormulaOk() const;
     VContainer *GetData();
+
+    bool IsPreviewCalculation() const;
+    void SetPreviewCalculation(bool value);
 
 private:
     QSharedDataPointer<VIncrementData> d;

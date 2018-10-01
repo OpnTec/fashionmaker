@@ -6,7 +6,7 @@
  **
  **  @brief
  **  @copyright
- **  This source code is part of the Valentine project, a pattern making
+ **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2016 Valentina project
  **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
@@ -42,35 +42,34 @@
 
 QT_WARNING_PUSH
 QT_WARNING_DISABLE_GCC("-Weffc++")
+QT_WARNING_DISABLE_GCC("-Wnon-virtual-dtor")
 
 class VPieceData : public QSharedData
 {
 public:
     explicit VPieceData(PiecePathType type)
         : m_path(type),
-          m_mx(0),
-          m_my(0),
           m_inLayout(true),
           m_united(false),
           m_customSARecords(),
           m_internalPaths(),
           m_pins(),
+          m_placeLabels(),
           m_ppData(),
           m_piPatternInfo(),
           m_glGrainline(),
-          m_formulaWidth("0")
+          m_formulaWidth('0')
     {}
 
     VPieceData(const VPieceData &detail)
         : QSharedData(detail),
           m_path(detail.m_path),
-          m_mx(detail.m_mx),
-          m_my(detail.m_my),
           m_inLayout(detail.m_inLayout),
           m_united(detail.m_united),
           m_customSARecords(detail.m_customSARecords),
           m_internalPaths(detail.m_internalPaths),
           m_pins(detail.m_pins),
+          m_placeLabels(detail.m_placeLabels),
           m_ppData(detail.m_ppData),
           m_piPatternInfo(detail.m_piPatternInfo),
           m_glGrainline(detail.m_glGrainline),
@@ -82,15 +81,13 @@ public:
     /** @brief nodes list detail nodes. */
     VPiecePath m_path;
 
-    qreal m_mx;
-    qreal m_my;
-
     bool m_inLayout;
     bool m_united;
 
     QVector<CustomSARecord> m_customSARecords;
     QVector<quint32>        m_internalPaths;
     QVector<quint32>        m_pins;
+    QVector<quint32>        m_placeLabels;
 
     /** @brief Pattern piece data */
     VPieceLabelData m_ppData;

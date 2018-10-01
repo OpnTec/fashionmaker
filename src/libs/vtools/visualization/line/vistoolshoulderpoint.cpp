@@ -6,7 +6,7 @@
  **
  **  @brief
  **  @copyright
- **  This source code is part of the Valentine project, a pattern making
+ **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2013-2015 Valentina project
  **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
@@ -50,11 +50,11 @@ VisToolShoulderPoint::VisToolShoulderPoint(const VContainer *data, QGraphicsItem
 {
     line1P1 = InitPoint(supportColor, this);
     line1P2 = InitPoint(supportColor, this); //-V656
-    line1 = InitItem<QGraphicsLineItem>(supportColor, this);
+    line1 = InitItem<VScaledLine>(supportColor, this);
 
     line2P2 = InitPoint(supportColor, this);
-    line2 = InitItem<QGraphicsLineItem>(supportColor, this);
-    line3 = InitItem<QGraphicsLineItem>(supportColor, this); //-V656
+    line2 = InitItem<VScaledLine>(supportColor, this);
+    line3 = InitItem<VScaledLine>(supportColor, this); //-V656
 
     point = InitPoint(mainColor, this);
 }
@@ -129,5 +129,5 @@ void VisToolShoulderPoint::setLineP2Id(const quint32 &value)
 //---------------------------------------------------------------------------------------------------------------------
 void VisToolShoulderPoint::setLength(const QString &expression)
 {
-    length = FindLength(expression, Visualization::data->PlainVariables());
+    length = FindLengthFromUser(expression, Visualization::data->DataVariables());
 }

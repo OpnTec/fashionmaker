@@ -6,7 +6,7 @@
  **
  **  @brief
  **  @copyright
- **  This source code is part of the Valentine project, a pattern making
+ **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2013-2015 Valentina project
  **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
@@ -52,9 +52,9 @@ class VApplication : public VAbstractApplication
 public:
 
     VApplication(int &argc, char ** argv);
-    virtual ~VApplication() Q_DECL_OVERRIDE;
+    virtual ~VApplication() override;
     static void        NewValentina(const QString &fileName = QString());
-    virtual bool       notify(QObject * receiver, QEvent * event) Q_DECL_OVERRIDE;
+    virtual bool       notify(QObject * receiver, QEvent * event) override;
 
     void               InitOptions();
 
@@ -68,26 +68,18 @@ public:
     void               StartLogging();
     QTextStream       *LogFile();
 
-    virtual const VTranslateVars *TrVars() Q_DECL_OVERRIDE;
+    virtual const VTranslateVars *TrVars() override;
 
-#if defined(Q_OS_WIN) && defined(Q_CC_GNU)
-    static void        DrMingw();
-    void               CollectReports() const;
-#endif // defined(Q_OS_WIN) && defined(Q_CC_GNU)
     bool static IsGUIMode();
-    virtual bool IsAppInGUIMode() const Q_DECL_OVERRIDE;
+    virtual bool IsAppInGUIMode() const override;
+    virtual bool IsPedantic() const override;
 
-    virtual void OpenSettings() Q_DECL_OVERRIDE;
+    virtual void OpenSettings() override;
     VSettings *ValentinaSettings();
 
 protected:
-    virtual void       InitTrVars() Q_DECL_OVERRIDE;
-    virtual bool	   event(QEvent *e) Q_DECL_OVERRIDE;
-
-private slots:
-#if defined(Q_OS_WIN) && defined(Q_CC_GNU)
-    void               CleanGist() const;
-#endif // defined(Q_OS_WIN) && defined(Q_CC_GNU)
+    virtual void       InitTrVars() override;
+    virtual bool	   event(QEvent *e) override;
 
 private:
     Q_DISABLE_COPY(VApplication)
@@ -96,16 +88,6 @@ private:
 
     std::shared_ptr<VLockGuard<QFile>> lockLog;
     std::shared_ptr<QTextStream> out;
-
-#if defined(Q_OS_WIN) && defined(Q_CC_GNU)
-    static const QString GistFileName;
-
-    void               CollectReport(const QString &reportName) const;
-    void               SendReport(const QString &reportName) const;
-    QString            ReadFileForSending(QFile &file)const;
-    void               ClearOldReports()const;
-    void               GatherLogs()const;
-#endif // defined(Q_OS_WIN) && defined(Q_CC_GNU)
 
     QString            LogDirPath()const;
     QString            LogPath()const;

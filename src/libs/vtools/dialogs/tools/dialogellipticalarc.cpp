@@ -6,7 +6,7 @@
  **
  **  @brief
  **  @copyright
- **  This source code is part of the Valentine project, a pattern making
+ **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2016 Valentina project
  **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
@@ -38,6 +38,7 @@
 #include <QToolButton>
 #include <Qt>
 
+#include "../../tools/vabstracttool.h"
 #include "../ifc/xml/vdomdocument.h"
 #include "../vpatterndb/vtranslatevars.h"
 #include "../../visualization/path/vistoolellipticalarc.h"
@@ -113,6 +114,7 @@ DialogEllipticalArc::DialogEllipticalArc(const VContainer *data, const quint32 &
 
     FillComboBoxPoints(ui->comboBoxBasePoint);
     FillComboBoxLineColors(ui->comboBoxColor);
+    FillComboBoxTypeLine(ui->comboBoxPenStyle, CurvePenStylesPics());
 
     CheckState();
 
@@ -327,6 +329,18 @@ void DialogEllipticalArc::SetRotationAngle(const QString &value)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+QString DialogEllipticalArc::GetPenStyle() const
+{
+    return GetComboBoxCurrentData(ui->comboBoxPenStyle, TypeLineLine);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogEllipticalArc::SetPenStyle(const QString &value)
+{
+    ChangeCurrentData(ui->comboBoxPenStyle, value);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 /**
  * @brief GetColor return color of elliptical arc
  * @return formula
@@ -353,7 +367,7 @@ void DialogEllipticalArc::SetColor(const QString &value)
 void DialogEllipticalArc::EvalRadiuses()
 {
     labelEditFormula = ui->labelEditRadius1;
-    const QString postfix = VDomDocument::UnitsToStr(qApp->patternUnit(), true);
+    const QString postfix = UnitsToStr(qApp->patternUnit(), true);
     const qreal radius_1 = Eval(ui->plainTextEditRadius1->toPlainText(), flagRadius1, ui->labelResultRadius1, postfix);
 
     if (radius_1 < 0)
@@ -394,32 +408,6 @@ void DialogEllipticalArc::EvalAngles()
     labelEditFormula = ui->labelEditRotationAngle;
     angleRotation = Eval(ui->plainTextEditRotationAngle->toPlainText(), flagRotationAngle,
                          ui->labelResultRotationAngle, degreeSymbol, false);
-
-    CheckAngles();
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void DialogEllipticalArc::CheckAngles()
-{
-    if (static_cast<int>(angleF1) == INT_MIN || static_cast<int>(angleF2) == INT_MIN)
-    {
-        return;
-    }
-
-    if (VFuzzyComparePossibleNulls(angleF1, angleF2))
-    {
-        flagF1 = false;
-        ChangeColor(ui->labelEditF1, Qt::red);
-        ui->labelResultF1->setText(tr("Error"));
-        ui->labelResultF1->setToolTip(tr("Angles equal"));
-
-        flagF2 = false;
-        ChangeColor(ui->labelEditF2, Qt::red);
-        ui->labelResultF2->setText(tr("Error"));
-        ui->labelResultF2->setToolTip(tr("Angles equal"));
-    }
-
-    DialogEllipticalArc::CheckState();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -428,7 +416,7 @@ void DialogEllipticalArc::FXRadius1()
     DialogEditWrongFormula *dialog = new DialogEditWrongFormula(data, toolId, this);
     dialog->setWindowTitle(tr("Edit radius1"));
     dialog->SetFormula(GetRadius1());
-    dialog->setPostfix(VDomDocument::UnitsToStr(qApp->patternUnit(), true));
+    dialog->setPostfix(UnitsToStr(qApp->patternUnit(), true));
     if (dialog->exec() == QDialog::Accepted)
     {
         SetRadius1(dialog->GetFormula());
@@ -442,7 +430,7 @@ void DialogEllipticalArc::FXRadius2()
     DialogEditWrongFormula *dialog = new DialogEditWrongFormula(data, toolId, this);
     dialog->setWindowTitle(tr("Edit radius2"));
     dialog->SetFormula(GetRadius2());
-    dialog->setPostfix(VDomDocument::UnitsToStr(qApp->patternUnit(), true));
+    dialog->setPostfix(UnitsToStr(qApp->patternUnit(), true));
     if (dialog->exec() == QDialog::Accepted)
     {
         SetRadius2(dialog->GetFormula());
@@ -500,7 +488,7 @@ void DialogEllipticalArc::Radius1Changed()
 {
     labelEditFormula = ui->labelEditRadius1;
     labelResultCalculation = ui->labelResultRadius1;
-    const QString postfix = VDomDocument::UnitsToStr(qApp->patternUnit(), true);
+    const QString postfix = UnitsToStr(qApp->patternUnit(), true);
     ValFormulaChanged(flagRadius1, ui->plainTextEditRadius1, timerRadius1, postfix);
 }
 
@@ -512,7 +500,7 @@ void DialogEllipticalArc::Radius2Changed()
 {
     labelEditFormula = ui->labelEditRadius2;
     labelResultCalculation = ui->labelResultRadius2;
-    const QString postfix = VDomDocument::UnitsToStr(qApp->patternUnit(), true);
+    const QString postfix = UnitsToStr(qApp->patternUnit(), true);
     ValFormulaChanged(flagRadius2, ui->plainTextEditRadius2, timerRadius2, postfix);
 }
 
@@ -591,7 +579,7 @@ void DialogEllipticalArc::ChosenObject(quint32 id, const SceneObject &type)
     {
         if (type == SceneObject::Point)
         {
-            if (SetObject(id, ui->comboBoxBasePoint, ""))
+            if (SetObject(id, ui->comboBoxBasePoint, QString()))
             {
                 vis->VisualMode(id);
                 prepare = true;
@@ -624,15 +612,10 @@ void DialogEllipticalArc::ShowVisualization()
 void DialogEllipticalArc::SaveData()
 {
     radius1 = ui->plainTextEditRadius1->toPlainText();
-    radius1.replace("\n", " ");
     radius2 = ui->plainTextEditRadius2->toPlainText();
-    radius2.replace("\n", " ");
     f1 = ui->plainTextEditF1->toPlainText();
-    f1.replace("\n", " ");
     f2 = ui->plainTextEditF2->toPlainText();
-    f2.replace("\n", " ");
     rotationAngle = ui->plainTextEditRotationAngle->toPlainText();
-    rotationAngle.replace("\n", " ");
 
     VisToolEllipticalArc *path = qobject_cast<VisToolEllipticalArc *>(vis);
     SCASSERT(path != nullptr)

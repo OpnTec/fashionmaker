@@ -6,7 +6,7 @@
  **
  **  @brief
  **  @copyright
- **  This source code is part of the Valentine project, a pattern making
+ **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2016 Valentina project
  **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
@@ -38,6 +38,7 @@
 #include "../vgeometry/vpointf.h"
 #include "../vpatterndb/vcontainer.h"
 #include "../visualization.h"
+#include "../vwidgets/scalesceneitems.h"
 #include "vispath.h"
 
 VisToolEllipticalArc::VisToolEllipticalArc(const VContainer *data, QGraphicsItem *parent)
@@ -57,7 +58,7 @@ void VisToolEllipticalArc::RefreshGeometry()
         if (not qFuzzyIsNull(radius1) && not qFuzzyIsNull(radius2) && f1 >= 0 && f2 >= 0 && rotationAngle >= 0)
         {
             VEllipticalArc elArc = VEllipticalArc(*first, radius1, radius2, f1, f2, rotationAngle);
-            DrawPath(this, elArc.GetPath(PathDirection::Show), mainColor, Qt::SolidLine, Qt::RoundCap);
+            DrawPath(this, elArc.GetPath(), elArc.DirectionArrows(), mainColor, lineStyle, Qt::RoundCap);
         }
     }
 }
@@ -65,29 +66,29 @@ void VisToolEllipticalArc::RefreshGeometry()
 //---------------------------------------------------------------------------------------------------------------------
 void VisToolEllipticalArc::setRadius1(const QString &expression)
 {
-    radius1 = FindLength(expression, Visualization::data->PlainVariables());
+    radius1 = FindLengthFromUser(expression, Visualization::data->DataVariables());
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void VisToolEllipticalArc::setRadius2(const QString &expression)
 {
-    radius2 = FindLength(expression, Visualization::data->PlainVariables());
+    radius2 = FindLengthFromUser(expression, Visualization::data->DataVariables());
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void VisToolEllipticalArc::setF1(const QString &expression)
 {
-    f1 = FindVal(expression, Visualization::data->PlainVariables());
+    f1 = FindValFromUser(expression, Visualization::data->DataVariables());
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void VisToolEllipticalArc::setF2(const QString &expression)
 {
-    f2 = FindVal(expression, Visualization::data->PlainVariables());
+    f2 = FindValFromUser(expression, Visualization::data->DataVariables());
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void VisToolEllipticalArc::setRotationAngle(const QString &expression)
 {
-    rotationAngle = FindVal(expression, Visualization::data->PlainVariables());
+    rotationAngle = FindValFromUser(expression, Visualization::data->DataVariables());
 }

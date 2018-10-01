@@ -6,7 +6,7 @@
  **
  **  @brief
  **  @copyright
- **  This source code is part of the Valentine project, a pattern making
+ **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2013-2015 Valentina project
  **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
@@ -33,7 +33,6 @@
 #include <QToolButton>
 #include <QLineEdit>
 #include <QLabel>
-#include <QSpacerItem>
 
 #include "../vpatterndb/vformula.h"
 
@@ -52,7 +51,7 @@ public:
     VFormula GetFormula() const;
 
     //! Needed for proper event handling
-    virtual bool eventFilter(QObject *obj, QEvent *ev) Q_DECL_OVERRIDE;
+    virtual bool eventFilter(QObject *obj, QEvent *ev) override;
 
 signals:
     //! This is emitted, when the user changes the color
@@ -72,7 +71,6 @@ private:
     VFormula formula;
     QToolButton* ToolButton;
     QLabel* TextLabel;
-    QSpacerItem* Spacer;
 };
 
 

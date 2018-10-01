@@ -42,21 +42,21 @@ class VPROPERTYEXPLORERSHARED_EXPORT VPropertyFormView : public VPropertyFormWid
     Q_OBJECT
 public:
     //! Constructor
-    explicit VPropertyFormView(QWidget *parent = 0);
+    explicit VPropertyFormView(QWidget *parent = nullptr);
 
     //! Constructor
-    explicit VPropertyFormView(VPropertyModel* model, QWidget *parent = 0);
+    explicit VPropertyFormView(VPropertyModel* model, QWidget *parent = nullptr);
 
     //! Constructor
-    explicit VPropertyFormView(VPropertySet* property_set, QWidget *parent = 0);
+    explicit VPropertyFormView(VPropertySet* property_set, QWidget *parent = nullptr);
 
     //! Destructor
-    virtual ~VPropertyFormView() Q_DECL_OVERRIDE;
+    virtual ~VPropertyFormView() override;
 
 
 public slots:
     //! Rebuilds the whole form
-    virtual void build() Q_DECL_OVERRIDE;
+    virtual void build() override;
 
     //! Set the source model. Leads to the rebuild of the form
     //! \param model The model to use
@@ -88,7 +88,7 @@ private slots:
     void dataSubmitted(VProperty* property);
 
 protected:
-    virtual void showEvent(QShowEvent* event) Q_DECL_OVERRIDE;
+    virtual void showEvent(QShowEvent* event) override;
 
     //! Rebuilds the widegt only if it is visible
     void updatePropertyList();

@@ -6,7 +6,7 @@
  **
  **  @brief
  **  @copyright
- **  This source code is part of the Valentine project, a pattern making
+ **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2013-2015 Valentina project
  **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
@@ -46,7 +46,10 @@
 //---------------------------------------------------------------------------------------------------------------------
 VToolCut::VToolCut(VAbstractPattern *doc, VContainer *data, const quint32 &id, const QString &formula,
                    const quint32 &curveCutId, QGraphicsItem *parent)
-    :VToolSinglePoint(doc, data, id, parent), formula(formula), curveCutId(curveCutId), detailsMode(false)
+    : VToolSinglePoint(doc, data, id, parent),
+      formula(formula),
+      curveCutId(curveCutId),
+      detailsMode(qApp->Settings()->IsShowCurveDetails())
 {
     Q_ASSERT_X(curveCutId != 0, Q_FUNC_INFO, "curveCutId == 0"); //-V654 //-V712
 }
@@ -75,31 +78,13 @@ void VToolCut::FullUpdateFromFile()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-// cppcheck-suppress unusedFunction
-quint32 VToolCut::getCurveCutId() const
-{
-    return curveCutId;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-// cppcheck-suppress unusedFunction
-void VToolCut::setCurveCutId(const quint32 &value)
-{
-    if (value != NULL_ID)
-    {
-        curveCutId = value;
-        QSharedPointer<VGObject> obj = VAbstractTool::data.GetGObject(id);
-        SaveOption(obj);
-    }
-}
-
-//---------------------------------------------------------------------------------------------------------------------
 VFormula VToolCut::GetFormula() const
 {
     VFormula val(formula, getData());
     val.setCheckZero(true);
-    val.setToolId(id);
-    val.setPostfix(VDomDocument::UnitsToStr(qApp->patternUnit()));
+    val.setToolId(m_id);
+    val.setPostfix(UnitsToStr(qApp->patternUnit()));
+    val.Eval();
     return val;
 }
 
@@ -110,7 +95,7 @@ void VToolCut::SetFormula(const VFormula &value)
     {
         formula = value.GetFormula(FormulaType::FromUser);
 
-        QSharedPointer<VGObject> obj = VAbstractTool::data.GetGObject(id);
+        QSharedPointer<VGObject> obj = VAbstractTool::data.GetGObject(m_id);
         SaveOption(obj);
     }
 }
@@ -127,7 +112,7 @@ QString VToolCut::CurveName() const
  */
 void VToolCut::RefreshGeometry()
 {
-    VToolSinglePoint::RefreshPointGeometry(*VDrawTool::data.GeometricObject<VPointF>(id));
+    VToolSinglePoint::RefreshPointGeometry(*VDrawTool::data.GeometricObject<VPointF>(m_id));
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -139,18 +124,4 @@ void VToolCut::RemoveReferens()
     const auto curve = VAbstractTool::data.GetGObject(curveCutId);
 
     doc->DecrementReferens(curve->getIdTool());
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-// cppcheck-suppress unusedFunction
-void VToolCut::FullUpdateCurveFromFile(const QString &attrCurve)
-{
-    Q_ASSERT_X(not attrCurve.isEmpty(), Q_FUNC_INFO, "attribute name is empty");
-
-    QDomElement domElement = doc->elementById(id);
-    if (domElement.isElement())
-    {
-        formula = domElement.attribute(AttrLength, "");
-        curveCutId = domElement.attribute(attrCurve, "").toUInt();
-    }
 }

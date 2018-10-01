@@ -6,7 +6,7 @@
  **
  **  @brief
  **  @copyright
- **  This source code is part of the Valentine project, a pattern making
+ **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2013-2015 Valentina project
  **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
@@ -32,6 +32,7 @@
 #include <QDomNodeList>
 
 #include "../vmisc/logging.h"
+#include "../vmisc/vabstractapplication.h"
 #include "../ifc/xml/vabstractpattern.h"
 #include "vundocommand.h"
 
@@ -47,7 +48,7 @@ DeletePatternPiece::DeletePatternPiece(VAbstractPattern *doc, const QString &nam
     const QDomElement previousPP = patternP.previousSibling().toElement();//find previous pattern piece
     if (not previousPP.isNull() && previousPP.tagName() == VAbstractPattern::TagDraw)
     {
-        previousPPName = doc->GetParametrString(previousPP, VAbstractPattern::AttrName, "");
+        previousPPName = doc->GetParametrString(previousPP, VAbstractPattern::AttrName, QString());
     }
 }
 
@@ -82,7 +83,10 @@ void DeletePatternPiece::undo()
     }
 
     emit NeedFullParsing();
-    doc->ChangeActivPP(namePP);
+    if (qApp->GetDrawMode() == Draw::Calculation)
+    {
+        emit doc->SetCurrentPP(namePP);//Without this user will not see this change
+    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -90,6 +94,10 @@ void DeletePatternPiece::redo()
 {
     qCDebug(vUndo, "Redo.");
 
+    if (qApp->GetDrawMode() == Draw::Calculation)
+    {
+        emit doc->SetCurrentPP(namePP);//Without this user will not see this change
+    }
     QDomElement rootElement = doc->documentElement();
     const QDomElement patternPiece = doc->GetPPElement(namePP);
     rootElement.removeChild(patternPiece);

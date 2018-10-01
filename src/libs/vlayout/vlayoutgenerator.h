@@ -6,7 +6,7 @@
  **
  **  @brief
  **  @copyright
- **  This source code is part of the Valentine project, a pattern making
+ **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2013-2015 Valentina project
  **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
@@ -58,7 +58,7 @@ class VLayoutGenerator :public QObject
     Q_OBJECT
 public:
     explicit VLayoutGenerator(QObject *parent = nullptr);
-    virtual ~VLayoutGenerator() Q_DECL_OVERRIDE;
+    virtual ~VLayoutGenerator() override;
 
     void SetDetails(const QVector<VLayoutPiece> &details);
     void SetLayoutWidth(qreal width);
@@ -82,8 +82,10 @@ public:
 
     LayoutErrors State() const;
 
-    QList<QGraphicsItem *> GetPapersItems() const Q_REQUIRED_RESULT;
-    QList<QList<QGraphicsItem *>> GetAllDetails() const Q_REQUIRED_RESULT;
+    Q_REQUIRED_RESULT QList<QGraphicsItem *> GetPapersItems() const;
+    Q_REQUIRED_RESULT QList<QList<QGraphicsItem *>> GetAllDetailsItems() const;
+
+    QVector<QVector<VLayoutPiece>> GetAllDetails() const;
 
     bool GetRotate() const;
     void SetRotate(bool value);
@@ -105,6 +107,9 @@ public:
 
     bool IsStripOptimization() const;
     void SetStripOptimization(bool value);
+
+    bool IsTestAsPaths() const;
+    void SetTestAsPaths(bool value);
 
 signals:
     void Start();
@@ -134,6 +139,7 @@ private:
     bool stripOptimizationEnabled;
     quint8 multiplier;
     bool stripOptimization;
+    bool textAsPaths;
 
     int PageHeight() const;
     int PageWidth() const;

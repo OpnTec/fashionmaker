@@ -6,7 +6,7 @@
  **
  **  @brief
  **  @copyright
- **  This source code is part of the Valentine project, a pattern making
+ **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2017 Valentina project
  **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
@@ -30,6 +30,7 @@
 #include "../vmisc/logging.h"
 #include "../vpatterndb/vtranslatevars.h"
 #include "../qmuparser/qmuparsererror.h"
+#include "testvapplication.h"
 
 #include <QtTest>
 
@@ -45,6 +46,7 @@ TST_VTranslateVars::TST_VTranslateVars(QObject *parent)
 void TST_VTranslateVars::initTestCase()
 {
     m_trMs = new VTranslateVars();
+    qApp->SetTrVars(m_trMs);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -56,10 +58,10 @@ void TST_VTranslateVars::TestFormulaFromUser_data()
 
     const QList<QLocale> allLocales =
             QLocale::matchingLocales(QLocale::AnyLanguage, QLocale::AnyScript, QLocale::AnyCountry);
-    for(int i = 0; i < allLocales.size(); ++i)
+    for(auto &locale : allLocales)
     {
-        PrepareValFromUser(1000.5, allLocales.at(i));
-        PrepareValFromUser(-1000.5, allLocales.at(i));
+        PrepareValFromUser(1000.5, locale);
+        PrepareValFromUser(-1000.5, locale);
     }
 }
 
@@ -72,16 +74,7 @@ void TST_VTranslateVars::TestFormulaFromUser()
 
     QLocale::setDefault(locale);
 
-    QString result;
-    try
-    {
-        result = m_trMs->FormulaFromUser(input, true);
-    }
-    catch (qmu::QmuParserError &e)// In case something bad will happen
-    {
-        Q_UNUSED(e)
-        result = input;
-    }
+    const QString result = VTranslateVars::TryFormulaFromUser(input, true);
 
     QCOMPARE(result, output);
 }
@@ -95,10 +88,10 @@ void TST_VTranslateVars::TestFormulaToUser_data()
 
     const QList<QLocale> allLocales =
             QLocale::matchingLocales(QLocale::AnyLanguage, QLocale::AnyScript, QLocale::AnyCountry);
-    for(int i = 0; i < allLocales.size(); ++i)
+    for(auto &locale : allLocales)
     {
-        PrepareValToUser(1000.5, allLocales.at(i));
-        PrepareValToUser(-1000.5, allLocales.at(i));
+        PrepareValToUser(1000.5, locale);
+        PrepareValToUser(-1000.5, locale);
     }
 }
 
@@ -111,16 +104,7 @@ void TST_VTranslateVars::TestFormulaToUser()
 
     QLocale::setDefault(locale);
 
-    QString result;
-    try
-    {
-        result = m_trMs->FormulaToUser(input, true);
-    }
-    catch (qmu::QmuParserError &e)// In case something bad will happen
-    {
-        Q_UNUSED(e)
-        result = input;
-    }
+    const QString result = VTranslateVars::TryFormulaToUser(input, true);
 
     QCOMPARE(result, output);
 }
@@ -145,7 +129,11 @@ void TST_VTranslateVars::PrepareValFromUser(double d, const QLocale &locale)
 void TST_VTranslateVars::PrepareValToUser(double d, const QLocale &locale)
 {
     const QString formulaFromSystem = QLocale::c().toString(d);
-    const QString formulaToUser = locale.toString(d);
+    QString formulaToUser = locale.toString(d);
+    if (locale.groupSeparator().isSpace())
+    {
+        formulaToUser.replace(locale.groupSeparator(), QString());
+    }
 
     PrepareVal(formulaFromSystem, formulaToUser, locale);
 }
@@ -158,7 +146,7 @@ void TST_VTranslateVars::PrepareVal(const QString &inputFormula, const QString &
 
     auto PREPARE_CASE = [locale](const QString &inputString, const QString &outputString)
     {
-        QString tag = QString("%1. String '%2'").arg(locale.name()).arg(inputString);
+        QString tag = QString("%1. String '%2'").arg(locale.name(), inputString);
         QTest::newRow(qUtf8Printable(tag)) << inputString << outputString << locale;
     };
 

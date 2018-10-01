@@ -6,7 +6,7 @@
  **
  **  @brief
  **  @copyright
- **  This source code is part of the Valentine project, a pattern making
+ **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2013-2015 Valentina project
  **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
@@ -45,6 +45,10 @@
 
 #include "vmaingraphicsscene.h"
 #include "vmaingraphicsview.h"
+#include "global.h"
+#include "vscenepoint.h"
+#include "../vmisc/vmath.h"
+#include "../vmisc/vabstractapplication.h"
 
 //---------------------------------------------------------------------------------------------------------------------
 /**
@@ -52,17 +56,12 @@
  * @param parent parent object.
  */
 VGraphicsSimpleTextItem::VGraphicsSimpleTextItem(QGraphicsItem * parent)
-    :QGraphicsSimpleTextItem(parent), fontSize(0), selectionType(SelectionType::ByMouseRelease)
+    : QGraphicsSimpleTextItem(parent),
+      m_fontSize(0),
+      selectionType(SelectionType::ByMouseRelease),
+      m_oldScale(1)
 {
-    this->setFlag(QGraphicsItem::ItemIsMovable, true);
-    this->setFlag(QGraphicsItem::ItemIsSelectable, true);
-    this->setFlag(QGraphicsItem::ItemSendsGeometryChanges, true);
-    this->setFlag(QGraphicsItem::ItemIsFocusable, true);// For keyboard input focus
-    this->setAcceptHoverEvents(true);
-    QFont font = this->font();
-    font.setPointSize(font.pointSize()+20);
-    fontSize = font.pointSize();
-    this->setFont(font);
+    Init();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -72,19 +71,49 @@ VGraphicsSimpleTextItem::VGraphicsSimpleTextItem(QGraphicsItem * parent)
  * @param parent parent object.
  */
 VGraphicsSimpleTextItem::VGraphicsSimpleTextItem( const QString & text, QGraphicsItem * parent )
-    :QGraphicsSimpleTextItem(text, parent), fontSize(0), selectionType(SelectionType::ByMouseRelease)
+    : QGraphicsSimpleTextItem(text, parent),
+      m_fontSize(0),
+      selectionType(SelectionType::ByMouseRelease),
+      m_oldScale(1)
 {
-    this->setFlag(QGraphicsItem::ItemIsMovable, true);
-    this->setFlag(QGraphicsItem::ItemIsSelectable, true);
-    this->setFlag(QGraphicsItem::ItemSendsGeometryChanges, true);
-    this->setAcceptHoverEvents(true);
+    Init();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-VGraphicsSimpleTextItem::~VGraphicsSimpleTextItem()
+void VGraphicsSimpleTextItem::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
 {
-    //Disable cursor-arrow-openhand
-    RestoreOverrideCursor(cursorArrowOpenHand);
+    auto UpdateLine = [this]()
+    {
+        if (VScenePoint *parent = dynamic_cast<VScenePoint *>(parentItem()))
+        {
+            parent->RefreshLine();
+        }
+    };
+
+    QGraphicsScene *scene = this->scene();
+    const qreal scale = SceneScale(scene);
+    if (scale > 1 && not VFuzzyComparePossibleNulls(m_oldScale, scale))
+    {
+        const QRectF nameRec = boundingRect();
+        setTransformOriginPoint(nameRec.center());
+        setScale(1/scale);
+        UpdateLine();
+        m_oldScale = scale;
+    }
+    else if (scale <= 1 && not VFuzzyComparePossibleNulls(m_oldScale, 1.0))
+    {
+        const QRectF nameRec = boundingRect();
+        setTransformOriginPoint(nameRec.center());
+        setScale(1);
+        UpdateLine();
+        m_oldScale = 1;
+    }
+
+    if (QGraphicsView *view = scene->views().at(0))
+    {
+        VMainGraphicsView::NewSceneRect(scene, view, this);
+    }
+    PaintWithFixItemHighlightSelected<QGraphicsSimpleTextItem>(this, painter, option, widget);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -132,10 +161,11 @@ QVariant VGraphicsSimpleTextItem::itemChange(GraphicsItemChange change, const QV
                 const QList<QGraphicsView *> viewList = scene()->views();
                 if (not viewList.isEmpty())
                 {
-                    if (QGraphicsView *view = viewList.at(0))
+                    if (VMainGraphicsView *view = qobject_cast<VMainGraphicsView *>(viewList.at(0)))
                     {
-                        const int xmargin = 50;
-                        const int ymargin = 50;
+                        const qreal scale = SceneScale(scene());
+                        int xmargin = qCeil(50/scale);
+                        int ymargin = qCeil(50/scale);
 
                         const QRectF viewRect = VMainGraphicsView::SceneVisibleArea(view);
                         const QRectF itemRect = mapToScene(boundingRect()).boundingRect();
@@ -144,7 +174,7 @@ QVariant VGraphicsSimpleTextItem::itemChange(GraphicsItemChange change, const QV
                         if (itemRect.height() + 2*ymargin < viewRect.height() &&
                             itemRect.width() + 2*xmargin < viewRect.width())
                         {
-                             view->ensureVisible(itemRect, xmargin, ymargin);
+                            view->EnsureVisibleWithDelay(itemRect, VMainGraphicsView::scrollDelay, xmargin, ymargin);
                         }
                         else
                         {
@@ -152,7 +182,10 @@ QVariant VGraphicsSimpleTextItem::itemChange(GraphicsItemChange change, const QV
                             VMainGraphicsScene *currentScene = qobject_cast<VMainGraphicsScene *>(scene());
                             SCASSERT(currentScene)
                             const QPointF cursorPosition = currentScene->getScenePos();
-                            view->ensureVisible(QRectF(cursorPosition.x()-5, cursorPosition.y()-5, 10, 10));
+
+                            view->EnsureVisibleWithDelay(QRectF(cursorPosition.x()-5/scale, cursorPosition.y()-5/scale,
+                                                                10/scale, 10/scale),
+                                                         VMainGraphicsView::scrollDelay);
                         }
                     }
                 }
@@ -160,11 +193,12 @@ QVariant VGraphicsSimpleTextItem::itemChange(GraphicsItemChange change, const QV
             changeFinished = true;
          }
      }
-     if (change == QGraphicsItem::ItemSelectedChange)
+     if (change == QGraphicsItem::ItemSelectedHasChanged)
      {
+         setFlag(QGraphicsItem::ItemIsFocusable, value.toBool());
          emit PointSelected(value.toBool());
      }
-     return QGraphicsItem::itemChange(change, value);
+     return QGraphicsSimpleTextItem::itemChange(change, value);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -176,9 +210,20 @@ void VGraphicsSimpleTextItem::hoverEnterEvent(QGraphicsSceneHoverEvent *event)
 {
     if (flags() & QGraphicsItem::ItemIsMovable)
     {
-        SetOverrideCursor(cursorArrowOpenHand, 1, 1);
+        SetItemOverrideCursor(this, cursorArrowOpenHand, 1, 1);
     }
+    else
+    {
+        setCursor(qApp->getSceneView()->viewport()->cursor());
+    }
+
     this->setBrush(Qt::green);
+
+    if(QGraphicsItem *parent = parentItem())
+    {
+        setToolTip(parent->toolTip());
+    }
+
     QGraphicsSimpleTextItem::hoverEnterEvent(event);
 }
 
@@ -189,12 +234,6 @@ void VGraphicsSimpleTextItem::hoverEnterEvent(QGraphicsSceneHoverEvent *event)
  */
 void VGraphicsSimpleTextItem::hoverLeaveEvent(QGraphicsSceneHoverEvent *event)
 {
-    Q_UNUSED(event)
-    if (flags() & QGraphicsItem::ItemIsMovable)
-    {
-        //Disable cursor-arrow-openhand
-        RestoreOverrideCursor(cursorArrowOpenHand);
-    }
     this->setBrush(Qt::black);
     QGraphicsSimpleTextItem::hoverLeaveEvent(event);
 }
@@ -225,7 +264,8 @@ void VGraphicsSimpleTextItem::mousePressEvent(QGraphicsSceneMouseEvent *event)
     {
         if (event->button() == Qt::LeftButton && event->type() != QEvent::GraphicsSceneMouseDoubleClick)
         {
-            SetOverrideCursor(cursorArrowCloseHand, 1, 1);
+            SetItemOverrideCursor(this, cursorArrowCloseHand, 1, 1);
+            event->accept();
         }
     }
     if (selectionType == SelectionType::ByMouseRelease)
@@ -234,7 +274,11 @@ void VGraphicsSimpleTextItem::mousePressEvent(QGraphicsSceneMouseEvent *event)
     }
     else
     {
-        emit PointChoosed();
+        if (event->button() == Qt::LeftButton && event->type() != QEvent::GraphicsSceneMouseDoubleClick)
+        {
+            emit PointChoosed();
+            event->accept();
+        }
     }
 }
 
@@ -245,12 +289,11 @@ void VGraphicsSimpleTextItem::mouseReleaseEvent(QGraphicsSceneMouseEvent *event)
     {
         if (event->button() == Qt::LeftButton && event->type() != QEvent::GraphicsSceneMouseDoubleClick)
         {
-            //Disable cursor-arrow-closehand
-            RestoreOverrideCursor(cursorArrowCloseHand);
+            SetItemOverrideCursor(this, cursorArrowOpenHand, 1, 1);
         }
     }
 
-    if (selectionType == SelectionType::ByMouseRelease)
+    if (selectionType == SelectionType::ByMouseRelease && IsSelectedByReleaseEvent(this, event))
     {
         emit PointChoosed();
     }
@@ -270,4 +313,20 @@ void VGraphicsSimpleTextItem::keyReleaseEvent(QKeyEvent *event)
             break;
     }
     QGraphicsSimpleTextItem::keyReleaseEvent ( event );
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VGraphicsSimpleTextItem::Init()
+{
+    this->setFlag(QGraphicsItem::ItemIsMovable, true);
+    this->setFlag(QGraphicsItem::ItemIsSelectable, true);
+    this->setFlag(QGraphicsItem::ItemSendsGeometryChanges, true);
+    this->setFlag(QGraphicsItem::ItemIsFocusable, true);// For keyboard input focus
+    this->setAcceptHoverEvents(true);
+    QFont font = this->font();
+    font.setPointSize(font.pointSize()+20);
+    m_fontSize = font.pointSize();
+    this->setFont(font);
+    m_oldScale = minVisibleFontSize / m_fontSize;
+    setScale(m_oldScale);
 }

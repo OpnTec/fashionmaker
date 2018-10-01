@@ -6,7 +6,7 @@
  **
  **  @brief
  **  @copyright
- **  This source code is part of the Valentine project, a pattern making
+ **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2013-2015 Valentina project
  **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
@@ -43,6 +43,22 @@
 
 template <class T> class QSharedPointer;
 
+struct VToolLineIntersectInitData : VToolSinglePointInitData
+{
+    VToolLineIntersectInitData()
+        : VToolSinglePointInitData(),
+          p1Line1Id(NULL_ID),
+          p2Line1Id(NULL_ID),
+          p1Line2Id(NULL_ID),
+          p2Line2Id(NULL_ID)
+    {}
+
+    quint32 p1Line1Id;
+    quint32 p2Line1Id;
+    quint32 p1Line2Id;
+    quint32 p2Line2Id;
+};
+
 /**
  * @brief The VToolLineIntersect class help find point intersection lines.
  */
@@ -50,16 +66,12 @@ class VToolLineIntersect:public VToolSinglePoint
 {
     Q_OBJECT
 public:
-    virtual void setDialog() Q_DECL_OVERRIDE;
-    static VToolLineIntersect *Create(QSharedPointer<DialogTool> dialog, VMainGraphicsScene *scene,
+    virtual void setDialog() override;
+    static VToolLineIntersect *Create(const QPointer<DialogTool> &dialog, VMainGraphicsScene *scene,
                                       VAbstractPattern *doc, VContainer *data);
-    static VToolLineIntersect *Create(const quint32 _id, const quint32 &p1Line1Id, const quint32 &p2Line1Id,
-                                      const quint32 &p1Line2Id, const quint32 &p2Line2Id, const QString &pointName,
-                                      const qreal &mx, const qreal &my, VMainGraphicsScene  *scene,
-                                      VAbstractPattern *doc,
-                                      VContainer *data, const Document &parse, const Source &typeCreation);
+    static VToolLineIntersect *Create(VToolLineIntersectInitData initData);
     static const QString ToolType;
-    virtual int  type() const Q_DECL_OVERRIDE {return Type;}
+    virtual int  type() const override {return Type;}
     enum { Type = UserType + static_cast<int>(Tool::LineIntersect)};
 
     QString Line1P1Name() const;
@@ -67,28 +79,17 @@ public:
     QString Line2P1Name() const;
     QString Line2P2Name() const;
 
-    quint32 GetP1Line1() const;
-    void    SetP1Line1(const quint32 &value);
-
-    quint32 GetP2Line1() const;
-    void    SetP2Line1(const quint32 &value);
-
-    quint32 GetP1Line2() const;
-    void    SetP1Line2(const quint32 &value);
-
-    quint32 GetP2Line2() const;
-    void    SetP2Line2(const quint32 &value);
-
-    virtual void ShowVisualization(bool show) Q_DECL_OVERRIDE;
-public slots:
-    virtual void SetFactor(qreal factor) Q_DECL_OVERRIDE;
+    virtual void ShowVisualization(bool show) override;
+protected slots:
+    virtual void ShowContextMenu(QGraphicsSceneContextMenuEvent *event, quint32 id=NULL_ID) override;
 protected:
-    virtual void contextMenuEvent ( QGraphicsSceneContextMenuEvent * event ) Q_DECL_OVERRIDE;
-    virtual void RemoveReferens() Q_DECL_OVERRIDE;
-    virtual void SaveDialog(QDomElement &domElement) Q_DECL_OVERRIDE;
-    virtual void SaveOptions(QDomElement &tag, QSharedPointer<VGObject> &obj) Q_DECL_OVERRIDE;
-    virtual void ReadToolAttributes(const QDomElement &domElement) Q_DECL_OVERRIDE;
-    virtual void SetVisualization() Q_DECL_OVERRIDE;
+    virtual void    RemoveReferens() override;
+    virtual void    SaveDialog(QDomElement &domElement, QList<quint32> &oldDependencies,
+                               QList<quint32> &newDependencies) override;
+    virtual void    SaveOptions(QDomElement &tag, QSharedPointer<VGObject> &obj) override;
+    virtual void    ReadToolAttributes(const QDomElement &domElement) override;
+    virtual void    SetVisualization() override;
+    virtual QString MakeToolTip() const override;
 private:
     Q_DISABLE_COPY(VToolLineIntersect)
 
@@ -104,9 +105,7 @@ private:
     /** @brief p2Line2 id second point second line.*/
     quint32       p2Line2;
 
-    VToolLineIntersect(VAbstractPattern *doc, VContainer *data, const quint32 &id, const quint32 &p1Line1,
-                       const quint32 &p2Line1, const quint32 &p1Line2, const quint32 &p2Line2,
-                       const Source &typeCreation, QGraphicsItem * parent = nullptr);
+    VToolLineIntersect(const VToolLineIntersectInitData &initData, QGraphicsItem *parent = nullptr);
 };
 
 #endif // VTOOLLINEINTERSECT_H

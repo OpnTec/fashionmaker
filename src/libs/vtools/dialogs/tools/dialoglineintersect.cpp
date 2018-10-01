@@ -6,7 +6,7 @@
  **
  **  @brief
  **  @copyright
- **  This source code is part of the Valentine project, a pattern making
+ **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2013-2015 Valentina project
  **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
@@ -61,9 +61,7 @@ DialogLineIntersect::DialogLineIntersect(const VContainer *data, const quint32 &
 {
     ui->setupUi(this);
 
-#if QT_VERSION >= QT_VERSION_CHECK(5, 2, 0)
     ui->lineEditNamePoint->setClearButtonEnabled(true);
-#endif
 
     number = 0;
     InitOkCancelApply(ui);
@@ -76,13 +74,13 @@ DialogLineIntersect::DialogLineIntersect(const VContainer *data, const quint32 &
     FillComboBoxPoints(ui->comboBoxP2Line2);
 
     connect(ui->lineEditNamePoint, &QLineEdit::textChanged, this, &DialogLineIntersect::NamePointChanged);
-    connect(ui->comboBoxP1Line1, static_cast<void (QComboBox::*)(const QString &)>(&QComboBox::currentIndexChanged),
+    connect(ui->comboBoxP1Line1, QOverload<const QString &>::of(&QComboBox::currentIndexChanged),
             this, &DialogLineIntersect::PointNameChanged);
-    connect(ui->comboBoxP2Line1, static_cast<void (QComboBox::*)(const QString &)>(&QComboBox::currentIndexChanged),
+    connect(ui->comboBoxP2Line1, QOverload<const QString &>::of(&QComboBox::currentIndexChanged),
             this, &DialogLineIntersect::PointNameChanged);
-    connect(ui->comboBoxP1Line2, static_cast<void (QComboBox::*)(const QString &)>(&QComboBox::currentIndexChanged),
+    connect(ui->comboBoxP1Line2, QOverload<const QString &>::of(&QComboBox::currentIndexChanged),
             this, &DialogLineIntersect::PointNameChanged);
-    connect(ui->comboBoxP2Line2, static_cast<void (QComboBox::*)(const QString &)>(&QComboBox::currentIndexChanged),
+    connect(ui->comboBoxP2Line2, QOverload<const QString &>::of(&QComboBox::currentIndexChanged),
             this, &DialogLineIntersect::PointNameChanged);
 
     vis = new VisToolLineIntersect(data);
@@ -147,7 +145,7 @@ void DialogLineIntersect::ChosenObject(quint32 id, const SceneObject &type)
 
                     if (set.size() >= 3)
                     {
-                        if (SetObject(id, ui->comboBoxP2Line2, ""))
+                        if (SetObject(id, ui->comboBoxP2Line2, QString()))
                         {
                             line->setLine2P2Id(id);
                             line->RefreshGeometry();
@@ -162,17 +160,13 @@ void DialogLineIntersect::ChosenObject(quint32 id, const SceneObject &type)
                             {
                                 this->setModal(true);
                                 this->show();
-                                connect(ui->comboBoxP1Line1,
-                                        static_cast<void (QComboBox::*)(int)>(&QComboBox::currentIndexChanged), this,
+                                connect(ui->comboBoxP1Line1, QOverload<int>::of(&QComboBox::currentIndexChanged), this,
                                         &DialogLineIntersect::PointChanged);
-                                connect(ui->comboBoxP2Line1,
-                                        static_cast<void (QComboBox::*)(int)>(&QComboBox::currentIndexChanged), this,
+                                connect(ui->comboBoxP2Line1, QOverload<int>::of(&QComboBox::currentIndexChanged), this,
                                         &DialogLineIntersect::PointChanged);
-                                connect(ui->comboBoxP1Line2,
-                                        static_cast<void (QComboBox::*)(int)>(&QComboBox::currentIndexChanged), this,
+                                connect(ui->comboBoxP1Line2, QOverload<int>::of(&QComboBox::currentIndexChanged), this,
                                         &DialogLineIntersect::PointChanged);
-                                connect(ui->comboBoxP2Line2,
-                                        static_cast<void (QComboBox::*)(int)>(&QComboBox::currentIndexChanged), this,
+                                connect(ui->comboBoxP2Line2, QOverload<int>::of(&QComboBox::currentIndexChanged), this,
                                         &DialogLineIntersect::PointChanged);
                             }
                         }

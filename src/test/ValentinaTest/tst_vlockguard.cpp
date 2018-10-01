@@ -6,7 +6,7 @@
  **
  **  @brief
  **  @copyright
- **  This source code is part of the Valentine project, a pattern making
+ **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2015 Valentina project
  **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
@@ -44,13 +44,13 @@ TST_VLockGuard::TST_VLockGuard(QObject *parent)
 //---------------------------------------------------------------------------------------------------------------------
 void TST_VLockGuard::TryLock() const
 {
-    QString fileName(QApplication::applicationDirPath() + "/lockFile.txt");
+    QString fileName(QCoreApplication::applicationDirPath() + "/lockFile.txt");
     std::shared_ptr<VLockGuard<char>> lock;
     VlpCreateLock(lock, fileName);
 
     fileName = lock->GetLockFile();
-    QVERIFY2(QFileInfo(fileName).exists(), "Lock file doesn't exist!");
+    QVERIFY2(QFileInfo::exists(fileName), "Lock file doesn't exist!");
 
     lock.reset();
-    QVERIFY2(not QFileInfo(fileName).exists(), "Lock file still exists!");
+    QVERIFY2(not QFileInfo::exists(fileName), "Lock file still exists!");
 }

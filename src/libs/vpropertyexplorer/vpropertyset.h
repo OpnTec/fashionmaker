@@ -117,7 +117,7 @@ public:
     int getRootPropertyCount() const;
 
     //! Clones the property set
-    VPropertySet* clone() const Q_REQUIRED_RESULT;
+    Q_REQUIRED_RESULT VPropertySet* clone() const;
 
 protected:
     //! Checks whether a property belongs to this set and returns the result

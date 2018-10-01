@@ -6,7 +6,7 @@
  **
  **  @brief
  **  @copyright
- **  This source code is part of the Valentine project, a pattern making
+ **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2016 Valentina project
  **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
@@ -43,16 +43,21 @@ namespace Ui
     class TabGrainline;
     class TabPins;
     class TabPassmarks;
+    class TabPlaceLabels;
 }
 
-class VisPiecePins;
+class VisPieceSpecialPoints;
 class FancyTabBar;
+class VPlaceLabelItem;
+class QUndoCommand;
 
 class DialogSeamAllowance : public DialogTool
 {
     Q_OBJECT
 
 public:
+    DialogSeamAllowance(const VContainer *data, const VAbstractPattern *doc, const quint32 &toolId,
+                        QWidget *parent = nullptr);
     DialogSeamAllowance(const VContainer *data, const quint32 &toolId, QWidget *parent = nullptr);
     virtual ~DialogSeamAllowance();
 
@@ -63,30 +68,27 @@ public:
 
     QString GetFormulaSAWidth() const;
 
+    QVector<QUndoCommand*> &UndoStack();
+
 public slots:
-    virtual void ChosenObject(quint32 id, const SceneObject &type) Q_DECL_OVERRIDE;
-    virtual void ShowDialog(bool click) Q_DECL_OVERRIDE;
+    virtual void ChosenObject(quint32 id, const SceneObject &type) override;
+    virtual void ShowDialog(bool click) override;
 
 protected:
     /** @brief SaveData Put dialog data in local variables */
-    virtual void SaveData() Q_DECL_OVERRIDE;
-    virtual void CheckState() Q_DECL_FINAL;
-    virtual void closeEvent(QCloseEvent *event) Q_DECL_OVERRIDE;
-    virtual void showEvent( QShowEvent *event ) Q_DECL_OVERRIDE;
-
-protected slots:
-    void UpdateList();
-    void AddUpdate();
-    void Cancel();
-    void Remove();
+    virtual void SaveData() override;
+    virtual void CheckState() final;
+    virtual void closeEvent(QCloseEvent *event) override;
+    virtual void showEvent( QShowEvent *event ) override;
+    virtual void resizeEvent(QResizeEvent *event) override;
 
 private slots:
     void NameDetailChanged();
-    void MaterialChanged();
     void ShowMainPathContextMenu(const QPoint &pos);
     void ShowCustomSAContextMenu(const QPoint &pos);
     void ShowInternalPathsContextMenu(const QPoint &pos);
     void ShowPinsContextMenu(const QPoint &pos);
+    void ShowPlaceLabelsContextMenu(const QPoint &pos);
 
     void ListChanged();
     void EnableSeamAllowance(bool enable);
@@ -100,6 +102,7 @@ private slots:
     void ReturnDefAfter();
     void CustomSAChanged(int row);
     void PathDialogClosed(int result);
+    void PlaceLabelDialogClosed(int result);
     void FancyTabChanged(int index);
     void TabChanged(int index);
     void PassmarkLineTypeChanged(int id);
@@ -109,9 +112,6 @@ private slots:
     void UpdateGrainlineValues();
     void UpdateDetailLabelValues();
     void UpdatePatternLabelValues();
-
-    void SetAddMode();
-    void SetEditMode();
 
     void EditGrainlineFormula();
     void EditDLFormula();
@@ -155,6 +155,9 @@ private slots:
     void DetailPinPointChanged();
     void PatternPinPointChanged();
 
+    void EditLabel();
+    void SetMoveControls();
+
 private:
     Q_DISABLE_COPY(DialogSeamAllowance)
 
@@ -164,16 +167,17 @@ private:
     Ui::TabGrainline        *uiTabGrainline;
     Ui::TabPins             *uiTabPins;
     Ui::TabPassmarks        *uiTabPassmarks;
+    Ui::TabPlaceLabels      *uiTabPlaceLabels;
 
     QWidget *m_tabPaths;
     QWidget *m_tabLabels;
     QWidget *m_tabGrainline;
     QWidget *m_tabPins;
     QWidget *m_tabPassmarks;
+    QWidget *m_tabPlaceLabels;
 
     FancyTabBar* m_ftb;
 
-    bool   dialogIsInitialized;
     bool   applyAllowed;
     bool   flagGPin;
     bool   flagDPin;
@@ -183,21 +187,14 @@ private:
     bool   flagDLFormulas;
     bool   flagPLAngle;
     bool   flagPLFormulas;
+    bool   flagFormulaBefore;
+    bool   flagFormulaAfter;
+    bool   flagMainPathIsValid;
     bool   m_bAddMode;
-    qreal  m_mx;
-    qreal  m_my;
 
     QPointer<DialogTool>   m_dialog;
-    QPointer<VisPiecePins> m_visPins;
+    QPointer<VisPieceSpecialPoints> m_visSpecialPoints;
 
-    QStringList      m_qslMaterials;
-    QStringList      m_qslPlacements;
-    // temporary container for Material/Cut/Placement 3-tuples
-    MCPContainer m_conMCP;
-
-    VPieceLabelData    m_oldData;
-    VPatternLabelData m_oldGeom;
-    VGrainlineData   m_oldGrainline;
     int                  m_iRotBaseHeight;
     int                  m_iLenBaseHeight;
     int                  m_DLWidthBaseHeight;
@@ -215,19 +212,22 @@ private:
     QTimer *m_timerWidthAfter;
     qreal   m_saWidth;
 
+    QVector<VLabelTemplateLine> m_templateLines;
+
+    QVector<QUndoCommand*> m_undoStack;
+    QHash<quint32, VPlaceLabelItem> m_newPlaceLabels;
+    QHash<quint32, VPiecePath> m_newPaths;
+
     VPiece CreatePiece() const;
 
     void    NewMainPathItem(const VPieceNode &node);
-    void    NewCustomSA(const CustomSARecord &record);
-    void    NewInternalPath(quint32 path);
-    void    NewPin(quint32 pinPoint);
     QString GetPathName(quint32 path, bool reverse = false) const;
     bool    MainPathIsValid() const;
     void    ValidObjects(bool value);
     bool    MainPathIsClockwise() const;
     void    UpdateCurrentCustomSARecord();
     void    UpdateCurrentInternalPathRecord();
-    void    ClearFields();
+    void    UpdateCurrentPlaceLabelRecords();
 
     QListWidgetItem *GetItemById(quint32 id);
 
@@ -253,6 +253,7 @@ private:
     void InitGrainlineTab();
     void InitPinsTab();
     void InitPassmarksTab();
+    void InitPlaceLabelsTab();
     void InitAllPinComboboxes();
 
     void SetFormulaSAWidth(const QString &formula);
@@ -268,7 +269,13 @@ private:
     void SetPLHeight(QString heightFormula);
     void SetPLAngle(QString angleFormula);
 
-    void ShowPins();
+    QRectF CurrentRect() const;
+    void ShowPieceSpecialPointsWithRect(const QListWidget *list, bool showRect);
+
+    VPiecePath      CurrentPath(quint32 id) const;
+    VPlaceLabelItem CurrentPlaceLabel(quint32 id) const;
+
+    QString GetDefaultPieceName() const;
 };
 
 #endif // DIALOGSEAMALLOWANCE_H

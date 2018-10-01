@@ -6,7 +6,7 @@
  **
  **  @brief
  **  @copyright
- **  This source code is part of the Valentine project, a pattern making
+ **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2013-2015 Valentina project
  **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
@@ -51,7 +51,7 @@ class VToolCut : public VToolSinglePoint
 public:
     VToolCut(VAbstractPattern *doc, VContainer *data, const quint32 &id, const QString &formula,
              const quint32 &curveCutId, QGraphicsItem * parent = nullptr);
-    virtual int   type() const Q_DECL_OVERRIDE {return Type;}
+    virtual int   type() const override {return Type;}
     enum { Type = UserType + static_cast<int>(Tool::Cut)};
 
     VFormula GetFormula() const;
@@ -59,13 +59,10 @@ public:
 
     QString CurveName() const;
 
-    quint32 getCurveCutId() const;
-    void    setCurveCutId(const quint32 &value);
-
 public slots:
-    virtual void  Disable(bool disable, const QString &namePP) Q_DECL_OVERRIDE;
-    virtual void  DetailsMode(bool mode) Q_DECL_OVERRIDE;
-    virtual void  FullUpdateFromFile() Q_DECL_OVERRIDE;
+    virtual void    Disable(bool disable, const QString &namePP) override;
+    virtual void    DetailsMode(bool mode) override;
+    virtual void    FullUpdateFromFile() override;
 protected:
     /** @brief formula keep formula of length */
     QString       formula;
@@ -74,8 +71,7 @@ protected:
     bool          detailsMode;
 
     void          RefreshGeometry();
-    virtual void  RemoveReferens() Q_DECL_OVERRIDE;
-    void          FullUpdateCurveFromFile(const QString &attrCurve);
+    virtual void  RemoveReferens() override;
 
     template <typename T>
     void ShowToolVisualization(bool show);

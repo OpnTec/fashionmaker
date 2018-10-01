@@ -6,7 +6,7 @@
  **
  **  @brief
  **  @copyright
- **  This source code is part of the Valentine project, a pattern making
+ **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2013-2015 Valentina project
  **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
@@ -141,7 +141,6 @@ void VBank::Arranged(int i)
     if (small.contains(i))
     {
         small.remove(i);
-        return;
     }
 }
 
@@ -166,7 +165,6 @@ void VBank::NotArranged(int i)
     {
         unsorted.insert(i, small.value(i));
         small.remove(i);
-        return;
     }
 }
 
@@ -192,6 +190,11 @@ bool VBank::Prepare()
     {
         details[i].SetLayoutWidth(layoutWidth);
         details[i].SetLayoutAllowancePoints();
+        if (not details[i].IsLayoutAllowanceValid())
+        {
+            qWarning()<< QObject::tr("Piece '%1' may broke a layout. Please, check seam allowance to check how seam "
+                                     "allowance behave.").arg(details[i].GetName());
+        }
 
         const qreal d = details.at(i).Diagonal();
         if (d > diagonal)
@@ -202,7 +205,8 @@ bool VBank::Prepare()
         const qint64 square = details.at(i).Square();
         if (square <= 0)
         {
-            qCDebug(lBank, "Preparing data for layout error: Detail squere <= 0");
+            qCDebug(lBank, "Preparing data for layout error: Detail '%s' square <= 0",
+                    qUtf8Printable(details.at(i).GetName()));
             prepare = false;
             return prepare;
         }

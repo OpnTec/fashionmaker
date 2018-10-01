@@ -6,7 +6,7 @@
  **
  **  @brief
  **  @copyright
- **  This source code is part of the Valentine project, a pattern making
+ **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2016 Valentina project
  **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
@@ -30,8 +30,10 @@
 #include "vpiece_p.h"
 #include "../vgeometry/vpointf.h"
 #include "../vgeometry/vabstractcurve.h"
+#include "../vgeometry/vplacelabelitem.h"
 #include "vcontainer.h"
 #include "../vmisc/vabstractapplication.h"
+#include "../ifc/exception/vexceptioninvalidnotch.h"
 
 #include <QSharedPointer>
 #include <QDebug>
@@ -201,7 +203,13 @@ QVector<QLineF> CreatePassmarkLines(PassmarkLineType lineType, PassmarkAngleType
 {
     QVector<QLineF> passmarksLines;
 
-    if (angleType == PassmarkAngleType::Straightforward || angleType == PassmarkAngleType::Intersection)
+    if (angleType == PassmarkAngleType::Straightforward
+            || angleType == PassmarkAngleType::Intersection
+            || angleType == PassmarkAngleType::IntersectionOnlyLeft
+            || angleType == PassmarkAngleType::IntersectionOnlyRight
+            || angleType == PassmarkAngleType::Intersection2
+            || angleType == PassmarkAngleType::Intersection2OnlyLeft
+            || angleType == PassmarkAngleType::Intersection2OnlyRight)
     {
         switch (lineType)
         {
@@ -249,9 +257,8 @@ bool IsPassmarksPossible(const QVector<VPieceNode> &path)
     int countPointNodes = 0;
     int countOthers = 0;
 
-    for (int i = 0; i< path.size(); ++i)
+    for (auto &node : path)
     {
-        const VPieceNode &node = path.at(i);
         if (node.IsExcluded())
         {
             continue;// skip node
@@ -261,6 +268,56 @@ bool IsPassmarksPossible(const QVector<VPieceNode> &path)
     }
 
     return countPointNodes >= 3 || (countPointNodes >= 1 && countOthers >= 1);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+bool FixNotchPoint(const QVector<QPointF> &seamAllowance, const QPointF &notchBase, QPointF *notch)
+{
+    bool fixed = true;
+    if (not VAbstractCurve::IsPointOnCurve(seamAllowance, *notch))
+    {
+        fixed = false;
+        QLineF axis = QLineF(notchBase, *notch);
+        axis.setLength(ToPixel(50, Unit::Cm));
+        const QVector<QPointF> points = VAbstractCurve::CurveIntersectLine(seamAllowance, axis);
+
+        if (points.size() > 0)
+        {
+            if (points.size() == 1)
+            {
+                *notch = points.at(0);
+                fixed = true;
+            }
+            else
+            {
+                QMap<qreal, int> forward;
+
+                for ( qint32 i = 0; i < points.size(); ++i )
+                {
+                    if (points.at(i) == notchBase)
+                    { // Always seek unique intersection
+                        continue;
+                    }
+
+                    const QLineF length(notchBase, points.at(i));
+                    if (qAbs(length.angle() - axis.angle()) < 0.1)
+                    {
+                        forward.insert(length.length(), i);
+                    }
+                }
+
+
+                // Closest point is not always want we need. First return point in forward direction if exists.
+                if (not forward.isEmpty())
+                {
+                    *notch = points.at(forward.first());
+                    fixed = true;
+                }
+            }
+        }
+    }
+
+    return fixed;
 }
 }
 
@@ -410,7 +467,20 @@ QVector<QPointF> VPiece::SeamAllowancePoints(const VContainer *data) const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QVector<QLineF> VPiece::PassmarksLines(const VContainer *data) const
+QVector<QPointF> VPiece::CuttingPathPoints(const VContainer *data) const
+{
+    if (IsSeamAllowance() and not IsSeamAllowanceBuiltIn())
+    {
+        return SeamAllowancePoints(data);
+    }
+    else
+    {
+        return MainPathPoints(data);
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QVector<QLineF> VPiece::PassmarksLines(const VContainer *data, const QVector<QPointF> &seamAllowance) const
 {
     const QVector<VPieceNode> unitedPath = GetUnitedPath(data);
     if (not IsSeamAllowance() || not IsPassmarksPossible(unitedPath))
@@ -419,6 +489,10 @@ QVector<QLineF> VPiece::PassmarksLines(const VContainer *data) const
     }
 
     QVector<QLineF> passmarks;
+
+    QVector<QPointF> seamPoints;
+    seamAllowance.isEmpty() && not IsSeamAllowanceBuiltIn() ? seamPoints = SeamAllowancePoints(data) :
+            seamPoints = seamAllowance;
 
     for (int i = 0; i< unitedPath.size(); ++i)
     {
@@ -431,16 +505,49 @@ QVector<QLineF> VPiece::PassmarksLines(const VContainer *data) const
         const int previousIndex = VPiecePath::FindInLoopNotExcludedUp(i, unitedPath);
         const int nextIndex = VPiecePath::FindInLoopNotExcludedDown(i, unitedPath);
 
-        passmarks += CreatePassmark(unitedPath, previousIndex, i, nextIndex, data);
+        passmarks += CreatePassmark(unitedPath, previousIndex, i, nextIndex, data, seamPoints);
     }
 
     return passmarks;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+QVector<PlaceLabelImg> VPiece::PlaceLabelPoints(const VContainer *data) const
+{
+    QVector<PlaceLabelImg> points;
+    for(auto placeLabel : d->m_placeLabels)
+    {
+        try
+        {
+            const auto label = data->GeometricObject<VPlaceLabelItem>(placeLabel);
+            if (label->IsVisible())
+            {
+                points.append(label->LabelShape());
+            }
+        }
+        catch (const VExceptionBadId &e)
+        {
+            qWarning() << e.ErrorMessage();
+        }
+    }
+    return points;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QVector<QPainterPath> VPiece::CurvesPainterPath(const VContainer *data) const
+{
+    return GetPath().CurvesPainterPath(data);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 QPainterPath VPiece::MainPathPath(const VContainer *data) const
 {
-    const QVector<QPointF> points = MainPathPoints(data);
+    return VPiece::MainPathPath(MainPathPoints(data));
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QPainterPath VPiece::MainPathPath(const QVector<QPointF> &points)
+{
     QPainterPath path;
 
     if (not points.isEmpty())
@@ -460,18 +567,23 @@ QPainterPath VPiece::MainPathPath(const VContainer *data) const
 //---------------------------------------------------------------------------------------------------------------------
 QPainterPath VPiece::SeamAllowancePath(const VContainer *data) const
 {
-    const QVector<QPointF> pointsEkv = SeamAllowancePoints(data);
+    return SeamAllowancePath(SeamAllowancePoints(data));
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QPainterPath VPiece::SeamAllowancePath(const QVector<QPointF> &points) const
+{
     QPainterPath ekv;
 
     // seam allowence
     if (IsSeamAllowance() && not IsSeamAllowanceBuiltIn())
     {
-        if (not pointsEkv.isEmpty())
+        if (not points.isEmpty())
         {
-            ekv.moveTo(pointsEkv.at(0));
-            for (qint32 i = 1; i < pointsEkv.count(); ++i)
+            ekv.moveTo(points.at(0));
+            for (qint32 i = 1; i < points.count(); ++i)
             {
-                ekv.lineTo(pointsEkv.at(i));
+                ekv.lineTo(points.at(i));
             }
 
             ekv.setFillRule(Qt::WindingFill);
@@ -482,9 +594,9 @@ QPainterPath VPiece::SeamAllowancePath(const VContainer *data) const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QPainterPath VPiece::PassmarksPath(const VContainer *data) const
+QPainterPath VPiece::PassmarksPath(const VContainer *data, const QVector<QPointF> &seamAllowance) const
 {
-    const QVector<QLineF> passmarks = PassmarksLines(data);
+    const QVector<QLineF> passmarks = PassmarksLines(data, seamAllowance);
     QPainterPath path;
 
     // seam allowence
@@ -506,27 +618,22 @@ QPainterPath VPiece::PassmarksPath(const VContainer *data) const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-qreal VPiece::GetMx() const
+QPainterPath VPiece::PlaceLabelPath(const VContainer *data) const
 {
-    return d->m_mx;
-}
+    const QVector<PlaceLabelImg> points = PlaceLabelPoints(data);
+    QPainterPath path;
 
-//---------------------------------------------------------------------------------------------------------------------
-void VPiece::SetMx(qreal value)
-{
-    d->m_mx = value;
-}
+    if (not points.isEmpty())
+    {
+        for (qint32 i = 0; i < points.count(); ++i)
+        {
+            path.addPath(PlaceLabelImgPath(points.at(i)));
+        }
 
-//---------------------------------------------------------------------------------------------------------------------
-qreal VPiece::GetMy() const
-{
-    return d->m_my;
-}
+        path.setFillRule(Qt::WindingFill);
+    }
 
-//---------------------------------------------------------------------------------------------------------------------
-void VPiece::SetMy(qreal value)
-{
-    d->m_my = value;
+    return path;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -564,7 +671,7 @@ void VPiece::SetFormulaSAWidth(const QString &formula, qreal value)
 {
     SetSAWidth(value);
     const qreal width = GetSAWidth();
-    width >= 0 ? d->m_formulaWidth = formula : d->m_formulaWidth = QLatin1String("0");
+    width >= 0 ? d->m_formulaWidth = formula : d->m_formulaWidth = QLatin1Char('0');
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -622,6 +729,54 @@ void VPiece::SetPins(const QVector<quint32> &pins)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+QVector<quint32> VPiece::GetPlaceLabels() const
+{
+    return d->m_placeLabels;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QVector<quint32> &VPiece::GetPlaceLabels()
+{
+    return d->m_placeLabels;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VPiece::SetPlaceLabels(const QVector<quint32> &labels)
+{
+    d->m_placeLabels = labels;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QList<quint32> VPiece::Dependencies() const
+{
+    QList<quint32> list = d->m_path.Dependencies();
+    list.reserve(list.size() + d->m_customSARecords.size() + d->m_internalPaths.size() + d->m_pins.size() +
+                 d->m_placeLabels.size());
+
+    for (auto &record : d->m_customSARecords)
+    {
+        list.append(record.path);
+    }
+
+    for (auto &value : d->m_internalPaths)
+    {
+        list.append(value);
+    }
+
+    for (auto &value : d->m_pins)
+    {
+        list.append(value);
+    }
+
+    for (auto &value : d->m_placeLabels)
+    {
+        list.append(value);
+    }
+
+    return list;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 /**
  * @brief MissingNodes find missing nodes in detail. When we deleted object in detail and return this detail need
  * understand, what nodes need make invisible.
@@ -661,6 +816,12 @@ QVector<quint32> VPiece::MissingInternalPaths(const VPiece &det) const
 QVector<quint32> VPiece::MissingPins(const VPiece &det) const
 {
     return PieceMissingNodes(d->m_pins, det.GetPins());
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QVector<quint32> VPiece::MissingPlaceLabels(const VPiece &det) const
+{
+    return PieceMissingNodes(d->m_placeLabels, det.GetPlaceLabels());
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -716,6 +877,12 @@ const VPatternLabelData &VPiece::GetPatternInfo() const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void VPiece::SetGrainlineGeometry(const VGrainlineData &data)
+{
+    d->m_glGrainline = data;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 /**
  * @brief VDetail::GetGrainlineGeometry full access to the grainline geometry object
  * @return reference to grainline geometry object
@@ -762,7 +929,7 @@ QVector<VPieceNode> VPiece::GetUnitedPath(const VContainer *data) const
             }
 
             const QVector<VPieceNode> midBefore = united.mid(0, indexStartPoint+1);
-            const QVector<VPieceNode> midAfter = united.mid(indexEndPoint);
+            const QVector<VPieceNode> midAfter = united.mid(indexEndPoint, united.size() - midBefore.size());
 
             QVector<VPieceNode> customNodes = data->GetPiecePath(records.at(i).path).GetNodes();
             if (records.at(i).reverse)
@@ -800,9 +967,9 @@ QVector<VPieceNode> VPiece::GetUnitedPath(const VContainer *data) const
 QVector<CustomSARecord> VPiece::GetValidRecords() const
 {
     QVector<CustomSARecord> records;
-    for (int i = 0; i < d->m_customSARecords.size(); ++i)
+    records.reserve(d->m_customSARecords.size());
+    for (auto &record : d->m_customSARecords)
     {
-        const CustomSARecord &record = d->m_customSARecords.at(i);
         const int indexStartPoint = d->m_path.indexOfNode(record.startPoint);
         const int indexEndPoint = d->m_path.indexOfNode(record.endPoint);
 
@@ -812,8 +979,7 @@ QVector<CustomSARecord> VPiece::GetValidRecords() const
                 && indexStartPoint != -1
                 && not d->m_path.at(indexStartPoint).IsExcluded()
                 && indexEndPoint != -1
-                && not d->m_path.at(indexEndPoint).IsExcluded()
-                && indexStartPoint < indexEndPoint)
+                && not d->m_path.at(indexEndPoint).IsExcluded())
         {
             records.append(record);
         }
@@ -854,13 +1020,14 @@ QVector<CustomSARecord> VPiece::FilterRecords(QVector<CustomSARecord> records) c
     records.remove(startIndex);
 
     QVector<CustomSARecord> secondRound;
-    for (int i = 0; i < records.size(); ++i)
+    secondRound.reserve(records.size());
+    for (auto &record : records)
     {
-        const int indexStartPoint = d->m_path.indexOfNode(records.at(i).startPoint);
+        const int indexStartPoint = d->m_path.indexOfNode(record.startPoint);
         const int indexEndPoint = d->m_path.indexOfNode(filter.endPoint);
         if (indexStartPoint > indexEndPoint)
         {
-            secondRound.append(records.at(i));
+            secondRound.append(record);
         }
     }
 
@@ -918,7 +1085,7 @@ bool VPiece::GetPassmarkSAPoint(const QVector<VPieceNode> &path, int index, cons
 
 //---------------------------------------------------------------------------------------------------------------------
 bool VPiece::GetPassmarkPreviousSAPoints(const QVector<VPieceNode> &path, int index, const VSAPoint &passmarkSAPoint,
-                                         const VContainer *data, VSAPoint &point) const
+                                         const VContainer *data, VSAPoint &point, int passmarkIndex) const
 {
     SCASSERT(data != nullptr)
 
@@ -926,6 +1093,9 @@ bool VPiece::GetPassmarkPreviousSAPoints(const QVector<VPieceNode> &path, int in
 
     if (points.isEmpty())
     {
+        const QString errorMsg = QObject::tr("Cannot calculate a notch for point '%1' in piece '%2'.")
+                .arg(VPiecePath::NodeName(path, passmarkIndex, data), GetName());
+        qApp->IsPedantic() ? throw VExceptionInvalidNotch(errorMsg) : qWarning() << errorMsg;
         return false; // Something wrong
     }
 
@@ -944,6 +1114,7 @@ bool VPiece::GetPassmarkPreviousSAPoints(const QVector<VPieceNode> &path, int in
 
     if (not found)
     {
+        // No warning here because of valid case of passmark collapse
         return false; // Something wrong
     }
     return true;
@@ -951,7 +1122,7 @@ bool VPiece::GetPassmarkPreviousSAPoints(const QVector<VPieceNode> &path, int in
 
 //---------------------------------------------------------------------------------------------------------------------
 int VPiece::GetPassmarkNextSAPoints(const QVector<VPieceNode> &path, int index, const VSAPoint &passmarkSAPoint,
-                                    const VContainer *data, VSAPoint &point) const
+                                    const VContainer *data, VSAPoint &point, int passmarkIndex) const
 {
     SCASSERT(data != nullptr)
 
@@ -959,6 +1130,9 @@ int VPiece::GetPassmarkNextSAPoints(const QVector<VPieceNode> &path, int index, 
 
     if (points.isEmpty())
     {
+        const QString errorMsg = QObject::tr("Cannot calculate a notch for point '%1' in piece '%2'.")
+                .arg(VPiecePath::NodeName(path, passmarkIndex, data), GetName());
+        qApp->IsPedantic() ? throw VExceptionInvalidNotch(errorMsg) : qWarning() << errorMsg;
         return false; // Something wrong
     }
 
@@ -978,6 +1152,7 @@ int VPiece::GetPassmarkNextSAPoints(const QVector<VPieceNode> &path, int index, 
 
     if (not found)
     {
+        // No warning here because of valid case of passmark collapse
         return false; // Something wrong
     }
     return true;
@@ -999,17 +1174,16 @@ bool VPiece::GetSeamPassmarkSAPoint(const VSAPoint &previousSAPoint, const VSAPo
     if (IsEkvPointOnLine(passmarkSAPoint, previousSAPoint, nextSAPoint)// see issue #665
         || (IsEkvPointOnLine(static_cast<QPointF>(passmarkSAPoint), static_cast<QPointF>(previousSAPoint),
                              static_cast<QPointF>(nextSAPoint))
-            && qAbs(passmarkSAPoint.GetSABefore(width)
-                    - passmarkSAPoint.GetSAAfter(width)) < VGObject::accuracyPointOnLine))
+            && qAbs(passmarkSAPoint.GetSABefore(width) - passmarkSAPoint.GetSAAfter(width)) < accuracyPointOnLine))
     {
         QLineF line (passmarkSAPoint, nextSAPoint);
         line.setAngle(line.angle() + 90);
-        line.setLength(VAbstractPiece::MaxLocalSA(passmarkSAPoint, width));
+        line.setLength(passmarkSAPoint.MaxLocalSA(width));
         ekvPoints.append(line.p2());
     }
     else
     {
-        ekvPoints = EkvPoint(previousSAPoint, passmarkSAPoint, nextSAPoint, passmarkSAPoint, width);
+        ekvPoints = EkvPoint(ekvPoints, previousSAPoint, passmarkSAPoint, nextSAPoint, passmarkSAPoint, width);
     }
 
     if (ekvPoints.isEmpty())
@@ -1055,12 +1229,12 @@ bool VPiece::IsPassmarkVisible(const QVector<VPieceNode> &path, int passmarkInde
         return true;
     }
 
-    for (int i = 0; i < records.size(); ++i)
+    for (auto &record : records)
     {
-        if (records.at(i).includeType == PiecePathIncludeType::AsCustomSA)
+        if (record.includeType == PiecePathIncludeType::AsCustomSA)
         {
-            const int indexStartPoint = VPiecePath::indexOfNode(path, records.at(i).startPoint);
-            const int indexEndPoint = VPiecePath::indexOfNode(path, records.at(i).endPoint);
+            const int indexStartPoint = VPiecePath::indexOfNode(path, record.startPoint);
+            const int indexEndPoint = VPiecePath::indexOfNode(path, record.endPoint);
             if (passmarkIndex > indexStartPoint && passmarkIndex < indexEndPoint)
             {
                 return false;
@@ -1072,7 +1246,8 @@ bool VPiece::IsPassmarkVisible(const QVector<VPieceNode> &path, int passmarkInde
 
 //---------------------------------------------------------------------------------------------------------------------
 QVector<QLineF> VPiece::CreatePassmark(const QVector<VPieceNode> &path, int previousIndex, int passmarkIndex,
-                                       int nextIndex, const VContainer *data) const
+                                       int nextIndex, const VContainer *data,
+                                       const QVector<QPointF> &seamAllowance) const
 {
     SCASSERT(data != nullptr);
 
@@ -1084,29 +1259,39 @@ QVector<QLineF> VPiece::CreatePassmark(const QVector<VPieceNode> &path, int prev
     VSAPoint passmarkSAPoint;
     if (not GetPassmarkSAPoint(path, passmarkIndex, data, passmarkSAPoint))
     {
-        return QVector<QLineF>(); // Something wrong
+        const QString errorMsg = QObject::tr("Cannot calculate a notch for point '%1' in piece '%2'.")
+                .arg(VPiecePath::NodeName(path, passmarkIndex, data), GetName());
+        qApp->IsPedantic() ? throw VExceptionInvalidNotch(errorMsg) : qWarning() << errorMsg;
+        return QVector<QLineF>();
     }
 
     VSAPoint previousSAPoint;
-    if (not GetPassmarkPreviousSAPoints(path, previousIndex, passmarkSAPoint, data,
-                                        previousSAPoint))
+    if (not GetPassmarkPreviousSAPoints(path, previousIndex, passmarkSAPoint, data, previousSAPoint, passmarkIndex))
     {
+        // No check here because it will cover valid cases
         return QVector<QLineF>(); // Something wrong
     }
 
     VSAPoint nextSAPoint;
-    if (not GetPassmarkNextSAPoints(path, nextIndex, passmarkSAPoint, data, nextSAPoint))
+    if (not GetPassmarkNextSAPoints(path, nextIndex, passmarkSAPoint, data, nextSAPoint, passmarkIndex))
     {
+        // No check here because it will cover valid cases
         return QVector<QLineF>(); // Something wrong
     }
 
     if (not IsSeamAllowanceBuiltIn())
     {
         QVector<QLineF> lines;
-        lines += SAPassmark(path, previousSAPoint, passmarkSAPoint, nextSAPoint, data, passmarkIndex);
+        lines += SAPassmark(path, previousSAPoint, passmarkSAPoint, nextSAPoint, data, passmarkIndex, seamAllowance);
         if (qApp->Settings()->IsDoublePassmark()
+                && not IsHideMainPath()
                 && path.at(passmarkIndex).IsMainPathNode()
                 && path.at(passmarkIndex).GetPassmarkAngleType() != PassmarkAngleType::Intersection
+                && path.at(passmarkIndex).GetPassmarkAngleType() != PassmarkAngleType::IntersectionOnlyLeft
+                && path.at(passmarkIndex).GetPassmarkAngleType() != PassmarkAngleType::IntersectionOnlyRight
+                && path.at(passmarkIndex).GetPassmarkAngleType() != PassmarkAngleType::Intersection2
+                && path.at(passmarkIndex).GetPassmarkAngleType() != PassmarkAngleType::Intersection2OnlyLeft
+                && path.at(passmarkIndex).GetPassmarkAngleType() != PassmarkAngleType::Intersection2OnlyRight
                 && path.at(passmarkIndex).IsShowSecondPassmark())
         {
             lines += BuiltInSAPassmark(path, previousSAPoint, passmarkSAPoint, nextSAPoint, data, passmarkIndex);
@@ -1122,21 +1307,57 @@ QVector<QLineF> VPiece::CreatePassmark(const QVector<VPieceNode> &path, int prev
 //---------------------------------------------------------------------------------------------------------------------
 QVector<QLineF> VPiece::SAPassmark(const QVector<VPieceNode> &path, VSAPoint &previousSAPoint,
                                    const VSAPoint &passmarkSAPoint, VSAPoint &nextSAPoint, const VContainer *data,
-                                   int passmarkIndex) const
+                                   int passmarkIndex, const QVector<QPointF> &seamAllowance) const
 {
+    if (seamAllowance.size() < 2)
+    {
+        const QString errorMsg = QObject::tr("Cannot calculate a notch for point '%1' in piece '%2'. Seam allowance is "
+                                             "empty.").arg(VPiecePath::NodeName(path, passmarkIndex, data), GetName());
+        qApp->IsPedantic() ? throw VExceptionInvalidNotch(errorMsg) : qWarning() << errorMsg;
+        return QVector<QLineF>(); // Something wrong
+    }
+
     QPointF seamPassmarkSAPoint;
     if (not GetSeamPassmarkSAPoint(previousSAPoint, passmarkSAPoint, nextSAPoint, data, seamPassmarkSAPoint))
     {
+        const QString errorMsg = QObject::tr("Cannot calculate a notch for point '%1' in piece '%2'. Cannot find "
+                                             "position for a notch.")
+                .arg(VPiecePath::NodeName(path, passmarkIndex, data), GetName());
+        qApp->IsPedantic() ? throw VExceptionInvalidNotch(errorMsg) : qWarning() << errorMsg;
         return QVector<QLineF>(); // Something wrong
+    }
+
+    if (not FixNotchPoint(seamAllowance, passmarkSAPoint, &seamPassmarkSAPoint))
+    {
+        const QString errorMsg = QObject::tr("Cannot calculate a notch for point '%1' in piece '%2'. Unable to fix a "
+                                             "notch position.")
+                .arg(VPiecePath::NodeName(path, passmarkIndex, data), GetName());
+        qApp->IsPedantic() ? throw VExceptionInvalidNotch(errorMsg) : qWarning() << errorMsg;
     }
 
     const qreal width = ToPixel(GetSAWidth(), *data->GetPatternUnit());
 
     QVector<QLineF> passmarksLines;
 
-    qreal passmarkLength = VAbstractPiece::MaxLocalSA(passmarkSAPoint, width) * passmarkFactor;
+    qreal passmarkLength = passmarkSAPoint.MaxLocalSA(width) * passmarkFactor;
     passmarkLength = qMin(passmarkLength, maxPassmarkLength);
     const VPieceNode &node = path.at(passmarkIndex);
+
+    auto PassmarkIntersection = [&passmarksLines, passmarkSAPoint, node](QLineF line,
+            const QVector<QPointF> &seamPoints, qreal width)
+    {
+        line.setLength(line.length()*100); // Hope 100 is enough
+
+        const QVector<QPointF> intersections = VAbstractCurve::CurveIntersectLine(seamPoints, line);
+        if (not intersections.isEmpty())
+        {
+            line = QLineF(intersections.last(), passmarkSAPoint);
+            line.setLength(qMin(width * passmarkFactor, maxPassmarkLength));
+
+            passmarksLines += CreatePassmarkLines(node.GetPassmarkLineType(), node.GetPassmarkAngleType(), line);
+        }
+    };
+
     if (node.GetPassmarkAngleType() == PassmarkAngleType::Straightforward)
     {
         QLineF line = QLineF(seamPassmarkSAPoint, passmarkSAPoint);
@@ -1156,41 +1377,46 @@ QVector<QLineF> VPiece::SAPassmark(const QVector<VPieceNode> &path, VSAPoint &pr
 
         passmarksLines += CreatePassmarkLines(node.GetPassmarkLineType(), node.GetPassmarkAngleType(), edge1);
     }
-    else if (node.GetPassmarkAngleType() == PassmarkAngleType::Intersection)
+    else if (node.GetPassmarkAngleType() == PassmarkAngleType::Intersection
+             || node.GetPassmarkAngleType() == PassmarkAngleType::IntersectionOnlyLeft
+             || node.GetPassmarkAngleType() == PassmarkAngleType::IntersectionOnlyRight)
     {
+        if (node.GetPassmarkAngleType() == PassmarkAngleType::Intersection
+                || node.GetPassmarkAngleType() == PassmarkAngleType::IntersectionOnlyRight)
         {
             // first passmark
-            QLineF line(previousSAPoint, passmarkSAPoint);
-            line.setLength(line.length()*100); // Hope 100 is enough
-
-            const QVector<QPointF> intersections = VAbstractCurve::CurveIntersectLine(SeamAllowancePoints(data), line);
-            if (intersections.isEmpty())
-            {
-                return QVector<QLineF>(); // Something wrong
-            }
-
-            line = QLineF(intersections.first(), passmarkSAPoint);
-            line.setLength(qMin(passmarkSAPoint.GetSAAfter(width) * passmarkFactor, maxPassmarkLength));
-
-            passmarksLines += CreatePassmarkLines(node.GetPassmarkLineType(), node.GetPassmarkAngleType(), line);
+            PassmarkIntersection(QLineF(previousSAPoint, passmarkSAPoint), seamAllowance,
+                                 passmarkSAPoint.GetSAAfter(width));
         }
 
+        if (node.GetPassmarkAngleType() == PassmarkAngleType::Intersection
+                || node.GetPassmarkAngleType() == PassmarkAngleType::IntersectionOnlyLeft)
         {
             // second passmark
-            QLineF line(nextSAPoint, passmarkSAPoint);
-            line.setLength(line.length()*100); // Hope 100 is enough
+            PassmarkIntersection(QLineF(nextSAPoint, passmarkSAPoint), seamAllowance,
+                                 passmarkSAPoint.GetSABefore(width));
+        }
+    }
+    else if (node.GetPassmarkAngleType() == PassmarkAngleType::Intersection2
+             || node.GetPassmarkAngleType() == PassmarkAngleType::Intersection2OnlyLeft
+             || node.GetPassmarkAngleType() == PassmarkAngleType::Intersection2OnlyRight)
+    {
+        if (node.GetPassmarkAngleType() == PassmarkAngleType::Intersection2
+                || node.GetPassmarkAngleType() == PassmarkAngleType::Intersection2OnlyRight)
+        {
+            // first passmark
+            QLineF line(passmarkSAPoint, nextSAPoint);
+            line.setAngle(line.angle()+90);
+            PassmarkIntersection(line, seamAllowance, passmarkSAPoint.GetSAAfter(width));
+        }
 
-            const QVector<QPointF> intersections = VAbstractCurve::CurveIntersectLine(SeamAllowancePoints(data), line);
-
-            if (intersections.isEmpty())
-            {
-                return QVector<QLineF>(); // Something wrong
-            }
-
-            line = QLineF(intersections.last(), passmarkSAPoint);
-            line.setLength(qMin(passmarkSAPoint.GetSABefore(width) * passmarkFactor, maxPassmarkLength));
-
-            passmarksLines += CreatePassmarkLines(node.GetPassmarkLineType(), node.GetPassmarkAngleType(), line);
+        if (node.GetPassmarkAngleType() == PassmarkAngleType::Intersection2
+                || node.GetPassmarkAngleType() == PassmarkAngleType::Intersection2OnlyLeft)
+        {
+            // second passmark
+            QLineF line(passmarkSAPoint, previousSAPoint);
+            line.setAngle(line.angle()-90);
+            PassmarkIntersection(line, seamAllowance, passmarkSAPoint.GetSABefore(width));
         }
     }
 
@@ -1205,7 +1431,7 @@ QVector<QLineF> VPiece::BuiltInSAPassmark(const QVector<VPieceNode> &path, const
     QVector<QLineF> passmarksLines;
 
     const qreal width = ToPixel(GetSAWidth(), *data->GetPatternUnit());
-    qreal passmarkLength = VAbstractPiece::MaxLocalSA(passmarkSAPoint, width) * passmarkFactor;
+    qreal passmarkLength = passmarkSAPoint.MaxLocalSA(width) * passmarkFactor;
     passmarkLength = qMin(passmarkLength, maxPassmarkLength);
 
     QLineF edge1 = QLineF(passmarkSAPoint, previousSAPoint);

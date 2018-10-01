@@ -6,7 +6,7 @@
  **
  **  @brief
  **  @copyright
- **  This source code is part of the Valentine project, a pattern making
+ **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2016 Valentina project
  **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
@@ -45,23 +45,23 @@ public:
     explicit VisToolEllipticalArc(const VContainer *data, QGraphicsItem *parent = nullptr);
     virtual ~VisToolEllipticalArc() Q_DECL_EQ_DEFAULT;
 
-    virtual void RefreshGeometry() Q_DECL_OVERRIDE;
+    virtual void RefreshGeometry() override;
     void setRadius1(const QString &expression);
     void setRadius2(const QString &expression);
     void setF1(const QString &expression);
     void setF2(const QString &expression);
     void setRotationAngle(const QString &expression);
 
-    virtual int type() const Q_DECL_OVERRIDE {return Type;}
+    virtual int type() const override {return Type;}
     enum { Type = UserType + static_cast<int>(Vis::ToolEllipticalArc)};
 private:
     Q_DISABLE_COPY(VisToolEllipticalArc)
-    QGraphicsEllipseItem *arcCenter;
-    qreal                radius1;
-    qreal                radius2;
-    qreal                f1;
-    qreal                f2;
-    qreal                rotationAngle;
+    VScaledEllipse *arcCenter;
+    qreal           radius1;
+    qreal           radius2;
+    qreal           f1;
+    qreal           f2;
+    qreal           rotationAngle;
 };
 
 #endif // VISTOOLELLIPTICALARC_H

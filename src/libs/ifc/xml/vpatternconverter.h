@@ -6,7 +6,7 @@
  **
  **  @brief
  **  @copyright
- **  This source code is part of the Valentine project, a pattern making
+ **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2013-2015 Valentina project
  **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
@@ -52,30 +52,26 @@ public:
 
     static const QString PatternMaxVerStr;
     static const QString CurrentSchema;
-    static Q_DECL_CONSTEXPR const int PatternMinVer = CONVERTER_VERSION_CHECK(0, 1, 0);
-    static Q_DECL_CONSTEXPR const int PatternMaxVer = CONVERTER_VERSION_CHECK(0, 4, 8);
+    static Q_DECL_CONSTEXPR const int PatternMinVer = FORMAT_VERSION(0, 1, 4);
+    static Q_DECL_CONSTEXPR const int PatternMaxVer = FORMAT_VERSION(0, 7, 12);
 
 protected:
-    virtual int     MinVer() const Q_DECL_OVERRIDE;
-    virtual int     MaxVer() const Q_DECL_OVERRIDE;
+    virtual int     MinVer() const override;
+    virtual int     MaxVer() const override;
 
-    virtual QString MinVerStr() const Q_DECL_OVERRIDE;
-    virtual QString MaxVerStr() const Q_DECL_OVERRIDE;
+    virtual QString MinVerStr() const override;
+    virtual QString MaxVerStr() const override;
 
-    virtual QString XSDSchema(int ver) const Q_DECL_OVERRIDE;
-    virtual void    ApplyPatches() Q_DECL_OVERRIDE;
-    virtual void    DowngradeToCurrentMaxVersion() Q_DECL_OVERRIDE;
+    virtual QString XSDSchema(int ver) const override;
+    virtual void    ApplyPatches() override;
+    virtual void    DowngradeToCurrentMaxVersion() override;
 
-    virtual bool IsReadOnly() const Q_DECL_OVERRIDE;
+    virtual bool IsReadOnly() const override;
 
 private:
     Q_DISABLE_COPY(VPatternConverter)
     static const QString PatternMinVerStr;
 
-    void ToV0_1_1();
-    void ToV0_1_2();
-    void ToV0_1_3();
-    void ToV0_1_4();
     void ToV0_2_0();
     void ToV0_2_1();
     void ToV0_2_2();
@@ -103,6 +99,28 @@ private:
     void ToV0_4_6();
     void ToV0_4_7();
     void ToV0_4_8();
+    void ToV0_5_0();
+    void ToV0_5_1();
+    void ToV0_6_0();
+    void ToV0_6_1();
+    void ToV0_6_2();
+    void ToV0_6_3();
+    void ToV0_6_4();
+    void ToV0_6_5();
+    void ToV0_6_6();
+    void ToV0_7_0();
+    void ToV0_7_1();
+    void ToV0_7_2();
+    void ToV0_7_3();
+    void ToV0_7_4();
+    void ToV0_7_5();
+    void ToV0_7_6();
+    void ToV0_7_7();
+    void ToV0_7_8();
+    void ToV0_7_9();
+    void ToV0_7_10();
+    void ToV0_7_11();
+    void ToV0_7_12();
 
     void          TagUnitToV0_2_0();
     void          TagIncrementToV0_2_0();
@@ -145,6 +163,16 @@ private:
     QDomElement GetUnionChildrenNodesV0_4_0(const QDomElement &detail);
 
     void LabelTagToV0_4_4(const QString &tagName);
+
+    QDomElement AddTagPatternLabelV0_5_1();
+    void PortPatternLabeltoV0_6_0(QDomElement &label);
+    void AddLabelTemplateLineV0_6_0(QDomElement &label, const QString &text, bool bold, bool italic, int alignment,
+                                    int fontSizeIncrement);
+    void PortPieceLabelstoV0_6_0();
+    void RemoveUnusedTagsV0_6_0();
+    void RemoveUniqueTagV0_6_0(const QString &tag);
+
+    void AddTagPreviewCalculationsV0_6_2();
 };
 
 //---------------------------------------------------------------------------------------------------------------------

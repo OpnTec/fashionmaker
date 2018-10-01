@@ -6,7 +6,7 @@
  **
  **  @brief
  **  @copyright
- **  This source code is part of the Valentine project, a pattern making
+ **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2017 Valentina project
  **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
@@ -44,6 +44,10 @@ DialogTapePreferences::DialogTapePreferences(QWidget *parent)
      m_pathPage(new TapePreferencesPathPage)
 {
     ui->setupUi(this);
+
+#if defined(Q_OS_MAC)
+    setWindowFlags(Qt::Window);
+#endif
 
     qApp->Settings()->GetOsSeparator() ? setLocale(QLocale()) : setLocale(QLocale::c());
 
@@ -105,6 +109,18 @@ void DialogTapePreferences::resizeEvent(QResizeEvent *event)
     {
         qApp->Settings()->SetPreferenceDialogSize(size());
     }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogTapePreferences::changeEvent(QEvent *event)
+{
+    if (event->type() == QEvent::LanguageChange)
+    {
+        // retranslate designer form (single inheritance approach)
+        ui->retranslateUi(this);
+    }
+    // remember to call base class implementation
+    QDialog::changeEvent(event);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

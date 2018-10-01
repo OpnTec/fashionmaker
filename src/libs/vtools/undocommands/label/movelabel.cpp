@@ -6,7 +6,7 @@
  **
  **  @brief
  **  @copyright
- **  This source code is part of the Valentine project, a pattern making
+ **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2013-2015 Valentina project
  **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
@@ -37,32 +37,30 @@
 #include "../vmisc/vabstractapplication.h"
 #include "../vundocommand.h"
 #include "moveabstractlabel.h"
+#include "../vtools/tools/vabstracttool.h"
+#include "../vwidgets/vmaingraphicsview.h"
 
 //---------------------------------------------------------------------------------------------------------------------
-MoveLabel::MoveLabel(VAbstractPattern *doc, const double &x, const double &y, const quint32 &id, QUndoCommand *parent)
-    : MoveAbstractLabel(doc, id, x, y, parent)
+MoveLabel::MoveLabel(VAbstractPattern *doc, const QPointF &pos, const quint32 &id, QUndoCommand *parent)
+    : MoveAbstractLabel(doc, id, pos, parent),
+      m_scene(qApp->getCurrentScene())
 {
     setText(tr("move point label"));
 
-    QDomElement domElement = doc->elementById(nodeId);
+    QDomElement domElement = doc->elementById(nodeId, VAbstractPattern::TagPoint);
     if (domElement.isElement())
     {
-        m_oldMx = qApp->toPixel(doc->GetParametrDouble(domElement, AttrMx, "0.0"));
-        m_oldMy = qApp->toPixel(doc->GetParametrDouble(domElement, AttrMy, "0.0"));
+        m_oldPos.rx() = qApp->toPixel(doc->GetParametrDouble(domElement, AttrMx, "0.0"));
+        m_oldPos.ry() = qApp->toPixel(doc->GetParametrDouble(domElement, AttrMy, "0.0"));
 
-        qCDebug(vUndo, "Label old Mx %f", m_oldMx);
-        qCDebug(vUndo, "Label old My %f", m_oldMy);
+        qCDebug(vUndo, "Label old Mx %f", m_oldPos.x());
+        qCDebug(vUndo, "Label old My %f", m_oldPos.y());
     }
     else
     {
         qCDebug(vUndo, "Can't find point with id = %u.", nodeId);
-        return;
     }
 }
-
-//---------------------------------------------------------------------------------------------------------------------
-MoveLabel::~MoveLabel()
-{}
 
 //---------------------------------------------------------------------------------------------------------------------
 bool MoveLabel::mergeWith(const QUndoCommand *command)
@@ -76,10 +74,9 @@ bool MoveLabel::mergeWith(const QUndoCommand *command)
     }
 
     qCDebug(vUndo, "Mergin undo.");
-    m_newMx = moveCommand->GetNewMx();
-    m_newMy = moveCommand->GetNewMy();
-    qCDebug(vUndo, "Label new Mx %f", m_newMx);
-    qCDebug(vUndo, "Label new My %f", m_newMy);
+    m_newPos = moveCommand->GetNewPos();
+    qCDebug(vUndo, "Label new Mx %f", m_newPos.x());
+    qCDebug(vUndo, "Label new My %f", m_newPos.y());
     return true;
 }
 
@@ -90,20 +87,24 @@ int MoveLabel::id() const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void MoveLabel::Do(double mx, double my)
+void MoveLabel::Do(const QPointF &pos)
 {
-    qCDebug(vUndo, "New mx %f", mx);
-    qCDebug(vUndo, "New my %f", my);
+    qCDebug(vUndo, "New mx %f", pos.x());
+    qCDebug(vUndo, "New my %f", pos.y());
 
-    QDomElement domElement = doc->elementById(nodeId);
+    QDomElement domElement = doc->elementById(nodeId, VAbstractPattern::TagPoint);
     if (domElement.isElement())
     {
-        doc->SetAttribute(domElement, AttrMx, QString().setNum(qApp->fromPixel(mx)));
-        doc->SetAttribute(domElement, AttrMy, QString().setNum(qApp->fromPixel(my)));
+        doc->SetAttribute(domElement, AttrMx, QString().setNum(qApp->fromPixel(pos.x())));
+        doc->SetAttribute(domElement, AttrMy, QString().setNum(qApp->fromPixel(pos.y())));
+
+        if (VAbstractTool *tool = qobject_cast<VAbstractTool *>(VAbstractPattern::getTool(nodeId)))
+        {
+            tool->ChangeLabelPosition(nodeId, pos);
+        }
     }
     else
     {
         qCDebug(vUndo, "Can't find point with id = %u.", nodeId);
-        return;
     }
 }

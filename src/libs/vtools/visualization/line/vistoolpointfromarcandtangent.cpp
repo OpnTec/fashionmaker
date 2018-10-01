@@ -6,7 +6,7 @@
  **
  **  @brief
  **  @copyright
- **  This source code is part of the Valentine project, a pattern making
+ **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2015 Valentina project
  **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
@@ -51,15 +51,11 @@ VisToolPointFromArcAndTangent::VisToolPointFromArcAndTangent(const VContainer *d
     : VisLine(data, parent), arcId(NULL_ID), crossPoint(CrossCirclesPoint::FirstPoint),
       point(nullptr), tangent(nullptr), arcPath(nullptr), tangentLine2(nullptr)
 {
-    arcPath = InitItem<QGraphicsPathItem>(Qt::darkGreen, this);
+    arcPath = InitItem<VCurvePathItem>(Qt::darkGreen, this);
     point = InitPoint(mainColor, this);
     tangent = InitPoint(supportColor, this);
-    tangentLine2 = InitItem<QGraphicsLineItem>(supportColor, this);
+    tangentLine2 = InitItem<VScaledLine>(supportColor, this);
 }
-
-//---------------------------------------------------------------------------------------------------------------------
-VisToolPointFromArcAndTangent::~VisToolPointFromArcAndTangent()
-{}
 
 //---------------------------------------------------------------------------------------------------------------------
 void VisToolPointFromArcAndTangent::RefreshGeometry()
@@ -72,12 +68,12 @@ void VisToolPointFromArcAndTangent::RefreshGeometry()
         if (arcId > NULL_ID)// circle center
         {
             const QSharedPointer<VArc> arc = Visualization::data->GeometricObject<VArc>(arcId);
-            DrawPath(arcPath, arc->GetPath(PathDirection::Show), Qt::darkGreen, Qt::SolidLine, Qt::RoundCap);
+            DrawPath(arcPath, arc->GetPath(), arc->DirectionArrows(), Qt::darkGreen, Qt::SolidLine, Qt::RoundCap);
 
             FindRays(static_cast<QPointF>(*tan), arc.data());
 
-            const QPointF fPoint = VToolPointFromArcAndTangent::FindPoint(static_cast<QPointF>(*tan), arc.data(),
-                                                                          crossPoint);
+            QPointF fPoint;
+            VToolPointFromArcAndTangent::FindPoint(static_cast<QPointF>(*tan), arc.data(),  crossPoint, &fPoint);
             DrawPoint(point, fPoint, mainColor);
         }
     }

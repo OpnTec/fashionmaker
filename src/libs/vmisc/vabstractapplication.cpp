@@ -6,7 +6,7 @@
  **
  **  @brief
  **  @copyright
- **  This source code is part of the Valentine project, a pattern making
+ **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2015 Valentina project
  **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
@@ -35,6 +35,7 @@
 #include <QStringData>
 #include <QStringDataPtr>
 #include <QTranslator>
+#include <QUndoStack>
 #include <Qt>
 #include <QtDebug>
 
@@ -44,7 +45,7 @@
 //---------------------------------------------------------------------------------------------------------------------
 VAbstractApplication::VAbstractApplication(int &argc, char **argv)
     :QApplication(argc, argv),
-      undoStack(nullptr),
+      undoStack(new QUndoStack(this)),
       mainWindow(nullptr),
       settings(nullptr),
       qtTranslator(nullptr),
@@ -54,30 +55,24 @@ VAbstractApplication::VAbstractApplication(int &argc, char **argv)
       pmsTranslator(nullptr),
       _patternUnit(Unit::Cm),
       _patternType(MeasurementsType::Unknown),
+      patternFilePath(),
       currentScene(nullptr),
       sceneView(nullptr),
       doc(nullptr),
-      openingPattern(false)
+      m_customerName(),
+      m_userMaterials(),
+      openingPattern(false),
+      mode(Draw::Calculation)
 {
-#if QT_VERSION >= QT_VERSION_CHECK(5, 2, 0)
     QString rules;
-#endif // QT_VERSION >= QT_VERSION_CHECK(5, 2, 0)
 
 #if QT_VERSION < QT_VERSION_CHECK(5, 3, 0)
-
-#if QT_VERSION < QT_VERSION_CHECK(5, 2, 0)
-    // Qt < 5.2 didn't feature categorized logging
-    // Do nothing
-#else
-
     // In Qt 5.2 need manualy enable debug information for categories. This work
     // because Qt doesn't provide debug information for categories itself. And in this
     // case will show our messages. Another situation with Qt 5.3 that has many debug
     // messages itself. We don't need this information and can turn on later if need.
     // But here Qt already show our debug messages without enabling.
     rules += QLatin1String("*.debug=true\n");
-#endif // QT_VERSION < QT_VERSION_CHECK(5, 2, 0)
-
 #endif // QT_VERSION < QT_VERSION_CHECK(5, 3, 0)
 
 #if QT_VERSION >= QT_VERSION_CHECK(5, 4, 1)
@@ -91,12 +86,11 @@ VAbstractApplication::VAbstractApplication(int &argc, char **argv)
 #endif //defined(V_NO_ASSERT)
 #endif // QT_VERSION >= QT_VERSION_CHECK(5, 4, 1)
 
-#if QT_VERSION >= QT_VERSION_CHECK(5, 2, 0)
+    // cppcheck-suppress reademptycontainer
     if (not rules.isEmpty())
     {
         QLoggingCategory::setFilterRules(rules);
     }
-#endif // QT_VERSION >= QT_VERSION_CHECK(5, 2, 0)
 
 #if QT_VERSION >= QT_VERSION_CHECK(5, 6, 0)
     // Enable support for HiDPI bitmap resources
@@ -115,7 +109,7 @@ VAbstractApplication::VAbstractApplication(int &argc, char **argv)
     setAttribute(Qt::AA_UseHighDpiPixmaps);
 #endif
 
-    connect(this, &QApplication::aboutToQuit, RECEIVER(this)[this]()
+    connect(this, &QApplication::aboutToQuit, this, [this]()
     {
         // If try to use the method QApplication::exit program can't sync settings and show warning about QApplication
         // instance. Solution is to call sync() before quit.
@@ -140,16 +134,16 @@ QString VAbstractApplication::translationsPath(const QString &locale) const
     const QString trPath = QStringLiteral("/translations");
 #ifdef Q_OS_WIN
     Q_UNUSED(locale)
-    return QApplication::applicationDirPath() + trPath;
+    return QCoreApplication::applicationDirPath() + trPath;
 #elif defined(Q_OS_MAC)
     QString mainPath;
     if (locale.isEmpty())
     {
-        mainPath = QApplication::applicationDirPath() + QLatin1String("/../Resources") + trPath;
+        mainPath = QCoreApplication::applicationDirPath() + QLatin1String("/../Resources") + trPath;
     }
     else
     {
-        mainPath = QApplication::applicationDirPath() + QLatin1String("/../Resources") + trPath + QLatin1String("/")
+        mainPath = QCoreApplication::applicationDirPath() + QLatin1String("/../Resources") + trPath + QLatin1String("/")
                 + locale + QLatin1String(".lproj");
     }
     QDir dirBundle(mainPath);
@@ -175,7 +169,7 @@ QString VAbstractApplication::translationsPath(const QString &locale) const
     }
 #else // Unix
     Q_UNUSED(locale)
-    QDir dir(QApplication::applicationDirPath() + trPath);
+    QDir dir(QCoreApplication::applicationDirPath() + trPath);
     if (dir.exists())
     {
         return dir.absolutePath();
@@ -242,6 +236,61 @@ QUndoStack *VAbstractApplication::getUndoStack() const
 {
     return undoStack;
 }
+
+//---------------------------------------------------------------------------------------------------------------------
+bool VAbstractApplication::IsPedantic() const
+{
+    return false;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief ClearMessage helps to clear a message string from standard Qt function.
+ * @param msg the message that contains '"' at the start and at the end
+ * @return cleared string
+ */
+QString VAbstractApplication::ClearMessage(QString msg)
+{
+    if (msg.startsWith('"') && msg.endsWith('"'))
+    {
+        msg.remove(0, 1);
+        msg.chop(1);
+    }
+
+    return msg;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+const Draw &VAbstractApplication::GetDrawMode() const
+{
+    return mode;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VAbstractApplication::SetDrawMode(const Draw &value)
+{
+    mode = value;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+#if defined(Q_OS_WIN)
+void VAbstractApplication::WinAttachConsole()
+{
+    /* Windows does not really support dual mode applications.
+     * To see console output we need to attach console.
+     * For case of using pipeline we check std output handler.
+     * Original idea: https://stackoverflow.com/a/41701133/3045403
+     */
+    auto stdout_type = GetFileType(GetStdHandle(STD_OUTPUT_HANDLE));
+    if (stdout_type == FILE_TYPE_UNKNOWN && AttachConsole(ATTACH_PARENT_PROCESS))
+    {
+        // cppcheck-suppress ignoredReturnValue
+        freopen("CONOUT$", "w", stdout);
+        // cppcheck-suppress ignoredReturnValue
+        freopen("CONOUT$", "w", stderr);
+    }
+}
+#endif
 
 //---------------------------------------------------------------------------------------------------------------------
 Unit VAbstractApplication::patternUnit() const

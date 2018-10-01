@@ -6,7 +6,7 @@
  **
  **  @brief
  **  @copyright
- **  This source code is part of the Valentine project, a pattern making
+ **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2016 Valentina project
  **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
@@ -56,15 +56,12 @@ public:
 
     VCubicBezierPath GetPath() const;
     void             SetPath(const VCubicBezierPath &value);
-
-    QString GetColor() const;
-    void    SetColor(const QString &value);
 public slots:
-    virtual void ChosenObject(quint32 id, const SceneObject &type) Q_DECL_OVERRIDE;
-    virtual void ShowDialog(bool click) Q_DECL_OVERRIDE;
+    virtual void ChosenObject(quint32 id, const SceneObject &type) override;
+    virtual void ShowDialog(bool click) override;
 protected:
-    virtual void ShowVisualization() Q_DECL_OVERRIDE;
-    virtual void SaveData() Q_DECL_OVERRIDE;
+    virtual void ShowVisualization() override;
+    virtual void SaveData() override;
 private slots:
     void PointChanged(int row);
     void currentPointChanged(int index);

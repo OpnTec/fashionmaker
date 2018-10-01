@@ -6,7 +6,7 @@
  **
  **  @brief
  **  @copyright
- **  This source code is part of the Valentine project, a pattern making
+ **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2015 Valentina project
  **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
@@ -37,31 +37,32 @@
 
 #include "moveabstractlabel.h"
 
-enum class DoublePoint: char { FirstPoint, SecondPoint };
+enum class MoveDoublePoint: char { FirstPoint, SecondPoint };
 
 class MoveDoubleLabel : public MoveAbstractLabel
 {
-    Q_OBJECT
 public:
-    MoveDoubleLabel(VAbstractPattern *doc, const double &x, const double &y, DoublePoint type,
-                    quint32 toolId, quint32 pointId, QUndoCommand *parent = 0);
-    virtual ~MoveDoubleLabel() Q_DECL_OVERRIDE;
+    MoveDoubleLabel(VAbstractPattern *doc, const QPointF &pos, MoveDoublePoint type,
+                    quint32 toolId, quint32 pointId, QUndoCommand *parent = nullptr);
+    virtual ~MoveDoubleLabel()=default;
 
-    virtual bool mergeWith(const QUndoCommand *command) Q_DECL_OVERRIDE;
-    virtual int  id() const Q_DECL_OVERRIDE;
+    virtual bool mergeWith(const QUndoCommand *command) override;
+    virtual int  id() const override;
 
     quint32     GetToolId() const;
-    DoublePoint GetPointType() const;
+    MoveDoublePoint GetPointType() const;
 protected:
-    virtual void Do(double mx, double my) Q_DECL_OVERRIDE;
+    virtual void Do(const QPointF &pos) override;
 private:
     Q_DISABLE_COPY(MoveDoubleLabel)
-    DoublePoint m_type;
+    MoveDoublePoint m_type;
     quint32 m_idTool;
+    //Need for resizing scene rect
+    QGraphicsScene *m_scene;
 };
 
 //---------------------------------------------------------------------------------------------------------------------
-inline DoublePoint MoveDoubleLabel::GetPointType() const
+inline MoveDoublePoint MoveDoubleLabel::GetPointType() const
 {
     return m_type;
 }

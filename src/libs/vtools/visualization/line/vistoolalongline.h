@@ -6,7 +6,7 @@
  **
  **  @brief
  **  @copyright
- **  This source code is part of the Valentine project, a pattern making
+ **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2013-2015 Valentina project
  **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
@@ -43,22 +43,24 @@ class VisToolAlongLine :public VisLine
 {
     Q_OBJECT
 public:
-    explicit VisToolAlongLine(const VContainer *data, QGraphicsItem *parent = 0);
-    virtual ~VisToolAlongLine() Q_DECL_OVERRIDE;
+    explicit VisToolAlongLine(const VContainer *data, QGraphicsItem *parent = nullptr);
+    virtual ~VisToolAlongLine() = default;
 
-    virtual void RefreshGeometry() Q_DECL_OVERRIDE;
+    virtual void RefreshGeometry() override;
     void         setObject2Id(const quint32 &value);
     void         setLength(const QString &expression);
-    virtual int  type() const Q_DECL_OVERRIDE {return Type;}
+    void         setMidPointMode(bool midPointMode);
+    virtual int  type() const override {return Type;}
     enum { Type = UserType + static_cast<int>(Vis::ToolAlongLine)};
 private:
     Q_DISABLE_COPY(VisToolAlongLine)
-    quint32              object2Id;
-    QGraphicsEllipseItem *point;
-    QGraphicsEllipseItem *lineP1;
-    QGraphicsEllipseItem *lineP2;
-    QGraphicsLineItem    *line;
-    qreal                length;
+    quint32         object2Id;
+    VScaledEllipse *point;
+    VScaledEllipse *lineP1;
+    VScaledEllipse *lineP2;
+    VScaledLine    *line;
+    qreal           length;
+    bool            m_midPointMode;
 };
 
 #endif // VISTOOLALONGLINE_H

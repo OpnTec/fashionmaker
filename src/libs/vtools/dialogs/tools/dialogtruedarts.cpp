@@ -6,7 +6,7 @@
  **
  **  @brief
  **  @copyright
- **  This source code is part of the Valentine project, a pattern making
+ **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2015 Valentina project
  **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
@@ -56,10 +56,8 @@ DialogTrueDarts::DialogTrueDarts(const VContainer *data, const quint32 &toolId, 
 {
     ui->setupUi(this);
 
-#if QT_VERSION >= QT_VERSION_CHECK(5, 2, 0)
     ui->lineEditFirstNewDartPoint->setClearButtonEnabled(true);
     ui->lineEditSecondNewDartPoint->setClearButtonEnabled(true);
-#endif
 
     const QString name1 = qApp->getCurrentDocument()->GenerateLabel(LabelType::NewLabel);
     const QString name2 = qApp->getCurrentDocument()->GenerateLabel(LabelType::NewLabel, name1);
@@ -73,20 +71,15 @@ DialogTrueDarts::DialogTrueDarts(const VContainer *data, const quint32 &toolId, 
 
     connect(ui->lineEditFirstNewDartPoint, &QLineEdit::textChanged, this, &DialogTrueDarts::NameDartPoint1Changed);
     connect(ui->lineEditSecondNewDartPoint, &QLineEdit::textChanged, this, &DialogTrueDarts::NameDartPoint2Changed);
-    connect(ui->comboBoxFirstBasePoint,
-            static_cast<void (QComboBox::*)(const QString &)>(&QComboBox::currentIndexChanged),
+    connect(ui->comboBoxFirstBasePoint, QOverload<const QString &>::of(&QComboBox::currentIndexChanged),
             this, &DialogTrueDarts::PointNameChanged);
-    connect(ui->comboBoxSecondBasePoint,
-            static_cast<void (QComboBox::*)(const QString &)>(&QComboBox::currentIndexChanged),
+    connect(ui->comboBoxSecondBasePoint, QOverload<const QString &>::of(&QComboBox::currentIndexChanged),
             this, &DialogTrueDarts::PointNameChanged);
-    connect(ui->comboBoxFirstDartPoint,
-            static_cast<void (QComboBox::*)(const QString &)>(&QComboBox::currentIndexChanged),
+    connect(ui->comboBoxFirstDartPoint, QOverload<const QString &>::of(&QComboBox::currentIndexChanged),
             this, &DialogTrueDarts::PointNameChanged);
-    connect(ui->comboBoxSecondDartPoint,
-            static_cast<void (QComboBox::*)(const QString &)>(&QComboBox::currentIndexChanged),
+    connect(ui->comboBoxSecondDartPoint, QOverload<const QString &>::of(&QComboBox::currentIndexChanged),
             this, &DialogTrueDarts::PointNameChanged);
-    connect(ui->comboBoxThirdDartPoint,
-            static_cast<void (QComboBox::*)(const QString &)>(&QComboBox::currentIndexChanged),
+    connect(ui->comboBoxThirdDartPoint, QOverload<const QString &>::of(&QComboBox::currentIndexChanged),
             this, &DialogTrueDarts::PointNameChanged);
 
     vis = new VisToolTrueDarts(data);
@@ -297,7 +290,7 @@ void DialogTrueDarts::ChosenObject(quint32 id, const SceneObject &type)
 
                     if (set.size() == 5)
                     {
-                        if (SetObject(id, ui->comboBoxThirdDartPoint, ""))
+                        if (SetObject(id, ui->comboBoxThirdDartPoint, QString()))
                         {
                             points->setD3PointId(id);
                             points->RefreshGeometry();

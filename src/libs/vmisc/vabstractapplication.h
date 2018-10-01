@@ -6,7 +6,7 @@
  **
  **  @brief
  **  @copyright
- **  This source code is part of the Valentine project, a pattern making
+ **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2015 Valentina project
  **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
@@ -62,7 +62,7 @@ class VAbstractApplication : public QApplication
     Q_OBJECT
 public:
     VAbstractApplication(int &argc, char ** argv);
-    virtual ~VAbstractApplication() Q_DECL_OVERRIDE;
+    virtual ~VAbstractApplication() override;
 
     virtual const VTranslateVars *TrVars()=0;
 
@@ -76,6 +76,9 @@ public:
 
     MeasurementsType patternType() const;
     void             setPatternType(const MeasurementsType &patternType);
+
+    QString GetCustomerName() const;
+    void    SetCustomerName(const QString &name);
 
     virtual void     OpenSettings()=0;
     VCommonSettings *Settings();
@@ -104,6 +107,22 @@ public:
     QUndoStack      *getUndoStack() const;
 
     virtual bool     IsAppInGUIMode()const =0;
+    virtual bool     IsPedantic() const;
+
+    QString         GetPatternPath() const;
+    void            SetPatternPath(const QString &value);
+
+#if defined(Q_OS_WIN)
+    static void WinAttachConsole();
+#endif
+
+    static QString ClearMessage(QString msg);
+
+    QMap<int, QString> GetUserMaterials() const;
+    void               SetUserMaterials(const QMap<int, QString> &userMaterials);
+
+    const Draw &GetDrawMode() const;
+    void        SetDrawMode(const Draw &value);
 
 protected:
     QUndoStack         *undoStack;
@@ -131,12 +150,15 @@ private:
     Q_DISABLE_COPY(VAbstractApplication)
     Unit               _patternUnit;
     MeasurementsType   _patternType;
-
+    QString            patternFilePath;
 
     QGraphicsScene     **currentScene;
     VMainGraphicsView  *sceneView;
 
     VAbstractPattern   *doc;
+    QString            m_customerName;
+
+    QMap<int, QString> m_userMaterials;
 
     /**
      * @brief openingPattern true when we opening pattern. If something will be wrong in formula this help understand if
@@ -144,9 +166,47 @@ private:
      */
     bool               openingPattern;
 
+    /** @brief mode keep current draw mode. */
+    Draw               mode;
+
     void ClearTranslation();
 };
 
+//---------------------------------------------------------------------------------------------------------------------
+inline QString VAbstractApplication::GetCustomerName() const
+{
+    return m_customerName;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+inline void VAbstractApplication::SetCustomerName(const QString &name)
+{
+    m_customerName = name;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+inline QString VAbstractApplication::GetPatternPath() const
+{
+    return patternFilePath;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+inline void VAbstractApplication::SetPatternPath(const QString &value)
+{
+    patternFilePath = value;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+inline QMap<int, QString> VAbstractApplication::GetUserMaterials() const
+{
+    return m_userMaterials;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+inline void VAbstractApplication::SetUserMaterials(const QMap<int, QString> &userMaterials)
+{
+    m_userMaterials = userMaterials;
+}
 
 //---------------------------------------------------------------------------------------------------------------------
 template <typename T>

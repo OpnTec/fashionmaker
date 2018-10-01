@@ -6,7 +6,7 @@
  **
  **  @brief
  **  @copyright
- **  This source code is part of the Valentine project, a pattern making
+ **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2013-2015 Valentina project
  **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
@@ -49,16 +49,15 @@ class VisToolSplinePath : public VisPath
     Q_OBJECT
 public:
     explicit VisToolSplinePath(const VContainer *data, QGraphicsItem *parent = nullptr);
-    virtual ~VisToolSplinePath() Q_DECL_OVERRIDE;
+    virtual ~VisToolSplinePath();
 
-    virtual void RefreshGeometry() Q_DECL_OVERRIDE;
+    virtual void RefreshGeometry() override;
 
     void         setPath(const VSplinePath &value);
     VSplinePath  getPath();
 
-    virtual int  type() const Q_DECL_OVERRIDE {return Type;}
+    virtual int  type() const override {return Type;}
     enum { Type = UserType + static_cast<int>(Vis::ToolSplinePath)};
-
 signals:
     void PathChanged(const VSplinePath &path);
 
@@ -68,17 +67,17 @@ public slots:
 
 protected:
     Q_DISABLE_COPY(VisToolSplinePath)
-    QVector<QGraphicsEllipseItem *> points;
-    QVector<VControlPointSpline *>  ctrlPoints;
-    QGraphicsPathItem               *newCurveSegment;
-    VSplinePath                     path;
+    QVector<VScaledEllipse *>      points;
+    QVector<VControlPointSpline *> ctrlPoints;
+    VCurvePathItem                *newCurveSegment;
+    VSplinePath                    path;
 
     bool isLeftMousePressed;
     bool pointSelected;
 
     QPointF ctrlPoint;
 
-    QGraphicsEllipseItem * getPoint(quint32 i);
+    VScaledEllipse * getPoint(quint32 i);
     void Creating(const QPointF &pSpl, int size);
 };
 

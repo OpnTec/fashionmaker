@@ -6,7 +6,7 @@
  **
  **  @brief
  **  @copyright
- **  This source code is part of the Valentine project, a pattern making
+ **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2016 Valentina project
  **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
@@ -35,45 +35,52 @@
 #include "../ifc/xml/vabstractpattern.h"
 #include "../vmisc/logging.h"
 #include "../tools/nodeDetails/vtoolpiecepath.h"
+#include "../tools/vtoolseamallowance.h"
+#include "../vpatterndb/vpiecenode.h"
 
 //---------------------------------------------------------------------------------------------------------------------
-SavePiecePathOptions::SavePiecePathOptions(const VPiecePath &oldPath, const VPiecePath &newPath,
+SavePiecePathOptions::SavePiecePathOptions(quint32 pieceId, const VPiecePath &oldPath, const VPiecePath &newPath,
                                            VAbstractPattern *doc, VContainer *data, quint32 id,
                                            QUndoCommand *parent)
     : VUndoCommand(QDomElement(), doc, parent),
       m_oldPath(oldPath),
       m_newPath(newPath),
-      m_data(data)
+      m_data(data),
+      m_pieceId(pieceId)
 {
     setText(tr("save path options"));
     nodeId = id;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-SavePiecePathOptions::~SavePiecePathOptions()
-{}
-
-//---------------------------------------------------------------------------------------------------------------------
 void SavePiecePathOptions::undo()
 {
     qCDebug(vUndo, "Undo.");
 
-    QDomElement domElement = doc->elementById(nodeId);
+    QDomElement domElement = doc->elementById(nodeId, VAbstractPattern::TagPath);
     if (domElement.isElement())
     {
         VToolPiecePath::AddAttributes(doc, domElement, nodeId, m_oldPath);
         doc->RemoveAllChildren(domElement);//Very important to clear before rewrite
         VToolPiecePath::AddNodes(doc, domElement, m_oldPath);
 
+        DecrementReferences(m_newPath.MissingNodes(m_oldPath));
         IncrementReferences(m_oldPath.MissingNodes(m_newPath));
 
         SCASSERT(m_data);
         m_data->UpdatePiecePath(nodeId, m_oldPath);
+
+        if (m_pieceId != NULL_ID)
+        {
+            if (VToolSeamAllowance *tool = qobject_cast<VToolSeamAllowance *>(VAbstractPattern::getTool(m_pieceId)))
+            {
+                tool->RefreshGeometry();
+            }
+        }
     }
     else
     {
         qCDebug(vUndo, "Can't find path with id = %u.", nodeId);
-        return;
     }
 }
 
@@ -82,7 +89,7 @@ void SavePiecePathOptions::redo()
 {
     qCDebug(vUndo, "Redo.");
 
-    QDomElement domElement = doc->elementById(nodeId);
+    QDomElement domElement = doc->elementById(nodeId, VAbstractPattern::TagPath);
     if (domElement.isElement())
     {
         VToolPiecePath::AddAttributes(doc, domElement, nodeId, m_newPath);
@@ -90,14 +97,22 @@ void SavePiecePathOptions::redo()
         VToolPiecePath::AddNodes(doc, domElement, m_newPath);
 
         DecrementReferences(m_oldPath.MissingNodes(m_newPath));
+        IncrementReferences(m_newPath.MissingNodes(m_oldPath));
 
         SCASSERT(m_data);
         m_data->UpdatePiecePath(nodeId, m_newPath);
+
+        if (m_pieceId != NULL_ID)
+        {
+            if (VToolSeamAllowance *tool = qobject_cast<VToolSeamAllowance *>(VAbstractPattern::getTool(m_pieceId)))
+            {
+                tool->RefreshGeometry();
+            }
+        }
     }
     else
     {
         qCDebug(vUndo, "Can't find path with id = %u.", nodeId);
-        return;
     }
 }
 
@@ -106,31 +121,43 @@ bool SavePiecePathOptions::mergeWith(const QUndoCommand *command)
 {
     const SavePiecePathOptions *saveCommand = static_cast<const SavePiecePathOptions *>(command);
     SCASSERT(saveCommand != nullptr);
-    const quint32 id = saveCommand->PathId();
 
-    if (id != nodeId)
+    if (saveCommand->PathId() != nodeId)
     {
         return false;
+    }
+    else
+    {
+        const QSet<quint32> currentSet;
+        currentSet.fromList(m_newPath.Dependencies());
+
+        const VPiecePath candidate = saveCommand->NewPath();
+        const QSet<quint32> candidateSet;
+        candidateSet.fromList(candidate.Dependencies());
+
+        if (currentSet != candidateSet)
+        {
+            return false;
+        }
+
+        const QVector<VPieceNode> nodes = m_newPath.GetNodes();
+        const QVector<VPieceNode> candidateNodes = candidate.GetNodes();
+
+        if (nodes.size() == candidateNodes.size())
+        {
+            return false;
+        }
+
+        for (int i = 0; i < nodes.size(); ++i)
+        {
+            if (nodes.at(i).IsExcluded() != candidateNodes.at(i).IsExcluded()
+                    || nodes.at(i).IsCheckUniqueness() != candidateNodes.at(i).IsCheckUniqueness())
+            {
+                return false;
+            }
+        }
     }
 
     m_newPath = saveCommand->NewPath();
     return true;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-int SavePiecePathOptions::id() const
-{
-    return static_cast<int>(UndoCommand::SavePiecePathOptions);
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-quint32 SavePiecePathOptions::PathId() const
-{
-    return nodeId;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-VPiecePath SavePiecePathOptions::NewPath() const
-{
-    return m_newPath;
 }

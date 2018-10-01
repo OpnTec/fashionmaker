@@ -6,7 +6,7 @@
  **
  **  @brief
  **  @copyright
- **  This source code is part of the Valentine project, a pattern making
+ **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2015 Valentina project
  **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
@@ -41,7 +41,11 @@ int main(int argc, char *argv[])
     Q_INIT_RESOURCE(schema);
     Q_INIT_RESOURCE(flags);
 
-    QT_REQUIRE_VERSION(argc, argv, "5.2.0")
+    QT_REQUIRE_VERSION(argc, argv, "5.2.0")// clazy:exclude=qstring-arg
+
+#if defined(Q_OS_WIN)
+    VAbstractApplication::WinAttachConsole();
+#endif
 
 #ifndef Q_OS_MAC // supports natively
     InitHighDpiScaling(argc, argv);
@@ -50,7 +54,11 @@ int main(int argc, char *argv[])
     MApplication app(argc, argv);
     app.InitOptions();
 
+#if QT_VERSION >= QT_VERSION_CHECK(5, 4, 0)
+    QTimer::singleShot(0, &app, &MApplication::ProcessCMD);
+#else
     QTimer::singleShot(0, &app, SLOT(ProcessCMD()));
+#endif
 
     return app.exec();
 }

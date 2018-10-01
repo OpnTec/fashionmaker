@@ -6,7 +6,7 @@
  **
  **  @brief
  **  @copyright
- **  This source code is part of the Valentine project, a pattern making
+ **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2013-2015 Valentina project
  **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
@@ -42,20 +42,33 @@ class SaveToolOptions : public VUndoCommand
 {
     Q_OBJECT
 public:
-    SaveToolOptions(const QDomElement &oldXml, const QDomElement &newXml, VAbstractPattern *doc, const quint32 &id,
-                    QUndoCommand *parent = 0);
-    virtual ~SaveToolOptions() Q_DECL_OVERRIDE;
-    virtual void undo() Q_DECL_OVERRIDE;
-    virtual void redo() Q_DECL_OVERRIDE;
-    virtual bool mergeWith(const QUndoCommand *command) Q_DECL_OVERRIDE;
-    virtual int  id() const Q_DECL_OVERRIDE;
-    QDomElement  getNewXml() const;
-    quint32 getToolId() const;
+    SaveToolOptions(const QDomElement &oldXml, const QDomElement &newXml, const QList<quint32> &oldDependencies,
+                    const QList<quint32> &newDependencies, VAbstractPattern *doc, const quint32 &id,
+                    QUndoCommand *parent = nullptr);
+    virtual ~SaveToolOptions() = default;
+    virtual void undo() override;
+    virtual void redo() override;
+    virtual bool mergeWith(const QUndoCommand *command) override;
+    virtual int  id() const override;
+
+    QDomElement    getNewXml() const;
+    quint32        getToolId() const;
+    QList<quint32> NewDependencies() const;
 private:
     Q_DISABLE_COPY(SaveToolOptions)
-    const QDomElement oldXml;
-    QDomElement       newXml;
+    const QDomElement    oldXml;
+    QDomElement          newXml;
+    const QList<quint32> oldDependencies;
+    const QList<quint32> newDependencies;
+
+    QVector<quint32> Missing(const QList<quint32> &list1, const QList<quint32> &list2) const;
 };
+
+//---------------------------------------------------------------------------------------------------------------------
+inline int SaveToolOptions::id() const
+{
+    return static_cast<int>(UndoCommand::SaveToolOptions);
+}
 
 //---------------------------------------------------------------------------------------------------------------------
 inline QDomElement SaveToolOptions::getNewXml() const
@@ -67,6 +80,12 @@ inline QDomElement SaveToolOptions::getNewXml() const
 inline quint32 SaveToolOptions::getToolId() const
 {
     return nodeId;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+inline QList<quint32> SaveToolOptions::NewDependencies() const
+{
+    return newDependencies;
 }
 
 #endif // SAVETOOLOPTIONS_H

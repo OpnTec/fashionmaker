@@ -6,7 +6,7 @@
  **
  **  @brief
  **  @copyright
- **  This source code is part of the Valentine project, a pattern making
+ **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2013-2015 Valentina project
  **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
@@ -62,7 +62,7 @@ public:
     VSplinePath Rotate(const QPointF &originPoint, qreal degrees, const QString &prefix = QString()) const;
     VSplinePath Flip(const QLineF &axis, const QString &prefix = QString()) const;
     VSplinePath Move(qreal length, qreal angle, const QString &prefix = QString()) const;
-    virtual ~VSplinePath() Q_DECL_OVERRIDE;
+    virtual ~VSplinePath() override;
 
     VSplinePoint &operator[](int indx);
     VSplinePath  &operator=(const VSplinePath &path);
@@ -70,32 +70,32 @@ public:
     VSplinePath &operator=(VSplinePath &&path) Q_DECL_NOTHROW { Swap(path); return *this; }
 #endif
 
-    void Swap(VSplinePath &path) Q_DECL_NOTHROW
+    inline void Swap(VSplinePath &path) Q_DECL_NOTHROW
     { VAbstractCubicBezierPath::Swap(path); std::swap(d, path.d); }
 
     void   append(const VSplinePoint &point);
 
-    virtual qint32  CountSubSpl() const Q_DECL_OVERRIDE;
-    virtual qint32  CountPoints() const Q_DECL_OVERRIDE;
-    virtual void    Clear() Q_DECL_OVERRIDE;
-    virtual VSpline GetSpline(qint32 index) const Q_DECL_OVERRIDE;
+    virtual qint32  CountSubSpl() const override;
+    virtual qint32  CountPoints() const override;
+    virtual void    Clear() override;
+    virtual VSpline GetSpline(qint32 index) const override;
 
-    virtual QVector<VSplinePoint> GetSplinePath() const Q_DECL_OVERRIDE;
+    virtual QVector<VSplinePoint> GetSplinePath() const override;
     QVector<VFSplinePoint> GetFSplinePath() const;
 
-    virtual qreal GetStartAngle () const Q_DECL_OVERRIDE;
-    virtual qreal GetEndAngle () const Q_DECL_OVERRIDE;
+    virtual qreal GetStartAngle () const override;
+    virtual qreal GetEndAngle () const override;
 
-    virtual qreal GetC1Length() const Q_DECL_OVERRIDE;
-    virtual qreal GetC2Length() const Q_DECL_OVERRIDE;
+    virtual qreal GetC1Length() const override;
+    virtual qreal GetC2Length() const override;
 
     void         UpdatePoint(qint32 indexSpline, const SplinePointPosition &pos, const VSplinePoint &point);
     VSplinePoint GetSplinePoint(qint32 indexSpline, SplinePointPosition pos) const;
 
     const VSplinePoint &at(int indx) const;
 protected:
-    virtual VPointF FirstPoint() const  Q_DECL_OVERRIDE;
-    virtual VPointF LastPoint() const  Q_DECL_OVERRIDE;
+    virtual VPointF FirstPoint() const  override;
+    virtual VPointF LastPoint() const  override;
 private:
     QSharedDataPointer<VSplinePathData> d;
 };

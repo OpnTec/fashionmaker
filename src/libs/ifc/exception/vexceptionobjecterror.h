@@ -6,7 +6,7 @@
  **
  **  @brief
  **  @copyright
- **  This source code is part of the Valentine project, a pattern making
+ **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2013-2015 Valentina project
  **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
@@ -45,11 +45,12 @@ class VExceptionObjectError : public VException
 {
 public:
     VExceptionObjectError(const QString &what, const QDomElement &domElement);
+    explicit VExceptionObjectError(const QString &what);
     VExceptionObjectError(const VExceptionObjectError &e);
     VExceptionObjectError &operator=(const VExceptionObjectError &e);
     virtual ~VExceptionObjectError() V_NOEXCEPT_EXPR (true) Q_DECL_EQ_DEFAULT;
-    virtual QString ErrorMessage() const Q_DECL_OVERRIDE;
-    virtual QString DetailedInformation() const Q_DECL_OVERRIDE;
+    virtual QString ErrorMessage() const override;
+    virtual QString DetailedInformation() const override;
     QString         TagText() const;
     QString         TagName() const;
     qint32          LineNumber() const;

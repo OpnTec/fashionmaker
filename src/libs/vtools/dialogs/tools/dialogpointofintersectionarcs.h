@@ -6,7 +6,7 @@
  **
  **  @brief
  **  @copyright
- **  This source code is part of the Valentine project, a pattern making
+ **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2015 Valentina project
  **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
@@ -49,8 +49,8 @@ class DialogPointOfIntersectionArcs : public DialogTool
     Q_OBJECT
 
 public:
-    DialogPointOfIntersectionArcs(const VContainer *data, const quint32 &toolId, QWidget *parent = 0);
-    virtual ~DialogPointOfIntersectionArcs() Q_DECL_OVERRIDE;
+    DialogPointOfIntersectionArcs(const VContainer *data, const quint32 &toolId, QWidget *parent = nullptr);
+    virtual ~DialogPointOfIntersectionArcs() override;
 
     void           SetPointName(const QString &value);
 
@@ -64,15 +64,15 @@ public:
     void              SetCrossArcPoint(const CrossCirclesPoint &p);
 
 public slots:
-    virtual void   ChosenObject(quint32 id, const SceneObject &type) Q_DECL_OVERRIDE;
+    virtual void   ChosenObject(quint32 id, const SceneObject &type) override;
     virtual void   ArcChanged();
 
 protected:
-    virtual void   ShowVisualization() Q_DECL_OVERRIDE;
+    virtual void   ShowVisualization() override;
     /**
      * @brief SaveData Put dialog data in local variables
      */
-    virtual void   SaveData() Q_DECL_OVERRIDE;
+    virtual void   SaveData() override;
 
 private:
     Q_DISABLE_COPY(DialogPointOfIntersectionArcs)

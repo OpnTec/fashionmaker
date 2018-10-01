@@ -7,7 +7,7 @@ EAPI=5
 inherit mercurial qmake-utils gnome2-utils fdo-mime
 
 DESCRIPTION="Cloth patternmaking software"
-HOMEPAGE="http://www.valentina-project.org/"
+HOMEPAGE="https://valentinaproject.bitbucket.io/"
 SRC_URI=""
 EHG_REPO_URI="https://bitbucket.org/dismine/valentina"
 EHG_REVISION="develop"
@@ -34,6 +34,8 @@ CDEPEND="
 		dev-qt/qtxmlpatterns:5
 		dev-qt/qtprintsupport:5
 		dev-qt/qtnetwork:5
+		dev-qt/qtconcurrent:5
+        dev-qt/qtopengl:5
 		app-text/poppler"
 RDEPEND="${CDEPEND}"
 DEPEND="${CDEPEND}

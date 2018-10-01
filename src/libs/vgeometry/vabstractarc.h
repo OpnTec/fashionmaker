@@ -6,7 +6,7 @@
  **
  **  @brief
  **  @copyright
- **  This source code is part of the Valentine project, a pattern making
+ **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2016 Valentina project
  **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
@@ -61,25 +61,25 @@ public:
     VAbstractArc &operator=(VAbstractArc &&arc) Q_DECL_NOTHROW { Swap(arc); return *this; }
 #endif
 
-    void Swap(VAbstractArc &arc) Q_DECL_NOTHROW
+    inline void Swap(VAbstractArc &arc) Q_DECL_NOTHROW
     { VAbstractCurve::Swap(arc); std::swap(d, arc.d); }
 
     QString       GetFormulaF1 () const;
     void          SetFormulaF1 (const QString &formula, qreal value);
-    virtual qreal GetStartAngle () const Q_DECL_OVERRIDE;
+    virtual qreal GetStartAngle () const override;
 
     QString       GetFormulaF2 () const;
     void          SetFormulaF2 (const QString &formula, qreal value);
-    virtual qreal GetEndAngle () const Q_DECL_OVERRIDE;
+    virtual qreal GetEndAngle () const override;
 
-    VPointF GetCenter () const;
+    virtual VPointF GetCenter () const;
     void    SetCenter (const VPointF &point);
 
     QString GetFormulaLength () const;
     void    SetFormulaLength (const QString &formula, qreal value);
 
-    virtual void    setId(const quint32 &id) Q_DECL_OVERRIDE;
-    virtual QString NameForHistory(const QString &toolName) const Q_DECL_OVERRIDE;
+    virtual void    setId(const quint32 &id) override;
+    virtual QString NameForHistory(const QString &toolName) const override;
 
     bool IsFlipped() const;
     qreal AngleArc() const;

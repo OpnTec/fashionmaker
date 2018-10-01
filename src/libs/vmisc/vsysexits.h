@@ -6,7 +6,7 @@
  **
  **  @brief
  **  @copyright
- **  This source code is part of the Valentine project, a pattern making
+ **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2015 Valentina project
  **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
@@ -82,16 +82,16 @@ static const auto V_UNUSED V_EX_CONFIG = 78;      /*Something was found in an un
 //---------------------------------------------------------------------------------------------------------------------
 inline QTextStream& vStdErr()
 {
-    static QTextStream ts( stderr );
-    ts.flush();
+    static QTextStream ts(stderr, QIODevice::Unbuffered | QIODevice::WriteOnly);
+    ts.setCodec("UTF-8");
     return ts;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 inline QTextStream& vStdOut()
 {
-    static QTextStream ts( stdout );
-    ts.flush();
+    static QTextStream ts(stdout, QIODevice::Unbuffered | QIODevice::WriteOnly);
+    ts.setCodec("UTF-8");
     return ts;
 }
 

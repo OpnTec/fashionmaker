@@ -6,7 +6,7 @@
  **
  **  @brief
  **  @copyright
- **  This source code is part of the Valentine project, a pattern making
+ **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2013-2015 Valentina project
  **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
@@ -38,7 +38,9 @@
 
 //---------------------------------------------------------------------------------------------------------------------
 VisPath::VisPath(const VContainer *data, QGraphicsItem *parent)
-    :Visualization(data), QGraphicsPathItem(parent)
+    : Visualization(data),
+      VCurvePathItem(parent),
+      m_approximationScale(0)
 {
     this->setZValue(1);// Show on top real tool
     InitPen();
@@ -47,8 +49,11 @@ VisPath::VisPath(const VContainer *data, QGraphicsItem *parent)
 //---------------------------------------------------------------------------------------------------------------------
 void VisPath::InitPen()
 {
-    this->setPen(QPen(mainColor, qApp->toPixel(WidthHairLine(*Visualization::data->GetPatternUnit()))/factor,
-                      lineStyle));
+    QPen visPen = pen();
+    visPen.setColor(mainColor);
+    visPen.setStyle(lineStyle);
+
+    setPen(visPen);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -66,7 +71,7 @@ VSimplePoint *VisPath::GetPoint(QVector<VSimplePoint *> &points, quint32 i, cons
     }
     else
     {
-        VSimplePoint *point = new VSimplePoint(NULL_ID, color, *Visualization::data->GetPatternUnit(), &factor);
+        VSimplePoint *point = new VSimplePoint(NULL_ID, color);
         point->SetPointHighlight(true);
         point->setParentItem(this);
         point->SetVisualizationMode(true);
@@ -75,4 +80,10 @@ VSimplePoint *VisPath::GetPoint(QVector<VSimplePoint *> &points, quint32 i, cons
         return point;
     }
     return nullptr;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VisPath::setApproximationScale(qreal approximationScale)
+{
+    m_approximationScale = approximationScale;
 }

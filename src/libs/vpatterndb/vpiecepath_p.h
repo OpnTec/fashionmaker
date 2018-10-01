@@ -6,7 +6,7 @@
  **
  **  @brief
  **  @copyright
- **  This source code is part of the Valentine project, a pattern making
+ **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2016 Valentina project
  **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
@@ -37,6 +37,7 @@
 
 QT_WARNING_PUSH
 QT_WARNING_DISABLE_GCC("-Weffc++")
+QT_WARNING_DISABLE_GCC("-Wnon-virtual-dtor")
 
 class VPiecePathData : public QSharedData
 {
@@ -45,14 +46,22 @@ public:
         : m_nodes(),
           m_type(PiecePathType::Unknown),
           m_name(),
-          m_penType(Qt::SolidLine)
+          m_penType(Qt::SolidLine),
+          m_cut(false),
+          m_visibilityTrigger('1'),
+          m_firstToCuttingCountour(false),
+          m_lastToCuttingCountour(false)
     {}
 
     explicit VPiecePathData(PiecePathType type)
         : m_nodes(),
           m_type(type),
           m_name(),
-          m_penType(Qt::SolidLine)
+          m_penType(Qt::SolidLine),
+          m_cut(false),
+          m_visibilityTrigger('1'),
+          m_firstToCuttingCountour(false),
+          m_lastToCuttingCountour(false)
     {}
 
     VPiecePathData(const VPiecePathData &path)
@@ -60,7 +69,11 @@ public:
           m_nodes(path.m_nodes),
           m_type(path.m_type),
           m_name(path.m_name),
-          m_penType(path.m_penType)
+          m_penType(path.m_penType),
+          m_cut(path.m_cut),
+          m_visibilityTrigger(path.m_visibilityTrigger),
+          m_firstToCuttingCountour(path.m_firstToCuttingCountour),
+          m_lastToCuttingCountour(path.m_lastToCuttingCountour)
     {}
 
     ~VPiecePathData();
@@ -69,6 +82,10 @@ public:
     PiecePathType m_type;
     QString m_name;
     Qt::PenStyle m_penType;
+    bool m_cut;
+    QString m_visibilityTrigger;
+    bool m_firstToCuttingCountour;
+    bool m_lastToCuttingCountour;
 
 private:
     VPiecePathData &operator=(const VPiecePathData &) Q_DECL_EQ_DELETE;

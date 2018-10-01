@@ -6,7 +6,7 @@
  **
  **  @brief
  **  @copyright
- **  This source code is part of the Valentine project, a pattern making
+ **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2013-2015 Valentina project
  **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
@@ -44,14 +44,15 @@
 #include "../vpatterndb/vcontainer.h"
 #include "../visualization.h"
 #include "vispath.h"
+#include "../vwidgets/scalesceneitems.h"
 
 //---------------------------------------------------------------------------------------------------------------------
 VisToolCutSpline::VisToolCutSpline(const VContainer *data, QGraphicsItem *parent)
     :VisPath(data, parent), point(nullptr), spl1(nullptr), spl2(nullptr), length(0)
 {
-    spl1 = InitItem<QGraphicsPathItem>(Qt::darkGreen, this);
+    spl1 = InitItem<VCurvePathItem>(Qt::darkGreen, this);
     spl1->setFlag(QGraphicsItem::ItemStacksBehindParent, false);
-    spl2 = InitItem<QGraphicsPathItem>(Qt::darkRed, this);
+    spl2 = InitItem<VCurvePathItem>(Qt::darkRed, this);
     spl2->setFlag(QGraphicsItem::ItemStacksBehindParent, false);
 
     point = InitPoint(mainColor, this);
@@ -65,7 +66,7 @@ void VisToolCutSpline::RefreshGeometry()
     if (object1Id > NULL_ID)
     {
         const auto spl = Visualization::data->GeometricObject<VAbstractCubicBezier>(object1Id);
-        DrawPath(this, spl->GetPath(PathDirection::Show), supportColor, Qt::SolidLine, Qt::RoundCap);
+        DrawPath(this, spl->GetPath(), spl->DirectionArrows(), supportColor, lineStyle, Qt::RoundCap);
 
         if (not qFuzzyIsNull(length))
         {
@@ -75,13 +76,15 @@ void VisToolCutSpline::RefreshGeometry()
             QPointF spl2p3;
             const QPointF p = spl->CutSpline (length, spl1p2, spl1p3, spl2p2, spl2p3 );
 
-            const VSpline sp1 = VSpline(spl->GetP1(), spl1p2, spl1p3, VPointF(p));
-            const VSpline sp2 = VSpline(VPointF(p), spl2p2, spl2p3, spl->GetP4());
+            VSpline sp1 = VSpline(spl->GetP1(), spl1p2, spl1p3, VPointF(p));
+            sp1.SetApproximationScale(spl->GetApproximationScale());
+            VSpline sp2 = VSpline(VPointF(p), spl2p2, spl2p3, spl->GetP4());
+            sp2.SetApproximationScale(spl->GetApproximationScale());
 
             DrawPoint(point, p, mainColor);
 
-            DrawPath(spl1, sp1.GetPath(PathDirection::Show), Qt::darkGreen, Qt::SolidLine, Qt::RoundCap);
-            DrawPath(spl2, sp2.GetPath(PathDirection::Show), Qt::darkRed, Qt::SolidLine, Qt::RoundCap);
+            DrawPath(spl1, sp1.GetPath(), sp1.DirectionArrows(), Qt::darkGreen, lineStyle, Qt::RoundCap);
+            DrawPath(spl2, sp2.GetPath(), sp2.DirectionArrows(), Qt::darkRed, lineStyle, Qt::RoundCap);
         }
     }
 }
@@ -89,5 +92,5 @@ void VisToolCutSpline::RefreshGeometry()
 //---------------------------------------------------------------------------------------------------------------------
 void VisToolCutSpline::setLength(const QString &expression)
 {
-    length = FindLength(expression, Visualization::data->PlainVariables());
+    length = FindLengthFromUser(expression, Visualization::data->DataVariables());
 }

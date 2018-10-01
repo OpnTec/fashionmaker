@@ -6,7 +6,7 @@
  **
  **  @brief
  **  @copyright
- **  This source code is part of the Valentine project, a pattern making
+ **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2013-2015 Valentina project
  **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
@@ -39,6 +39,7 @@
 
 QT_WARNING_PUSH
 QT_WARNING_DISABLE_GCC("-Weffc++")
+QT_WARNING_DISABLE_GCC("-Wnon-virtual-dtor")
 
 class VFSplinePointData : public QSharedData
 {
@@ -61,7 +62,6 @@ public:
     {
         if (VFuzzyComparePossibleNulls(angle1, angle2) || not qFuzzyCompare(qAbs(angle1-angle2), 180) )
         {
-            qDebug()<<"Make angle1 and angle2 correct.";
             this->angle2 = this->angle1 + 180;
         }
     }
@@ -107,13 +107,13 @@ public:
     VSplinePointData()
         : pSpline(),
           angle1(0),
-          angle1F("0"),
+          angle1F('0'),
           angle2(180),
           angle2F("180"),
           length1(0),
-          length1F("0"),
+          length1F('0'),
           length2(0),
-          length2F("0")
+          length2F('0')
     {}
 
     VSplinePointData(VPointF pSpline, qreal angle1, const QString &angle1F, qreal angle2, const QString &angle2F,
@@ -173,8 +173,6 @@ VSplinePointData::VSplinePointData(VPointF pSpline, qreal angle1, const QString 
 {
     if (not VFuzzyComparePossibleNulls(qAbs(angle1-angle2), 180))
     {
-        qDebug()<<"Make angle1 and angle2 correct.";
-
         QLineF line (0, 0, 100, 0);
 
         if (not qmu::QmuTokenParser::IsSingle(angle1F) || qmu::QmuTokenParser::IsSingle(angle2F))

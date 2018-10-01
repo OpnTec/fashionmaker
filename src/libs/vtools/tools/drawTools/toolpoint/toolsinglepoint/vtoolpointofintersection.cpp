@@ -6,7 +6,7 @@
  **
  **  @brief
  **  @copyright
- **  This source code is part of the Valentine project, a pattern making
+ **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2013-2015 Valentina project
  **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
@@ -56,20 +56,16 @@ const QString VToolPointOfIntersection::ToolType = QStringLiteral("pointOfInters
 //---------------------------------------------------------------------------------------------------------------------
 /**
  * @brief VToolPointOfIntersection constructor.
- * @param doc dom document container.
- * @param data container with variables.
- * @param id object id in container.
- * @param firstPointId id first line point.
- * @param secondPointId id second line point.
- * @param typeCreation way we create this tool.
+ * @param initData init data.
  * @param parent parent object.
  */
-VToolPointOfIntersection::VToolPointOfIntersection(VAbstractPattern *doc, VContainer *data, const quint32 &id,
-                                                   const quint32 &firstPointId, const quint32 &secondPointId,
-                                                   const Source &typeCreation, QGraphicsItem *parent)
-    :VToolSinglePoint(doc, data, id, parent), firstPointId(firstPointId), secondPointId(secondPointId)
+VToolPointOfIntersection::VToolPointOfIntersection(const VToolPointOfIntersectionInitData &initData,
+                                                   QGraphicsItem *parent)
+    :VToolSinglePoint(initData.doc, initData.data, initData.id, parent),
+      firstPointId(initData.firstPointId),
+      secondPointId(initData.secondPointId)
 {
-    ToolCreation(typeCreation);
+    ToolCreation(initData.typeCreation);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -79,9 +75,9 @@ VToolPointOfIntersection::VToolPointOfIntersection(VAbstractPattern *doc, VConta
 void VToolPointOfIntersection::setDialog()
 {
     SCASSERT(not m_dialog.isNull())
-    QSharedPointer<DialogPointOfIntersection> dialogTool = m_dialog.objectCast<DialogPointOfIntersection>();
+    const QPointer<DialogPointOfIntersection> dialogTool = qobject_cast<DialogPointOfIntersection *>(m_dialog);
     SCASSERT(not dialogTool.isNull())
-    const QSharedPointer<VPointF> p = VAbstractTool::data.GeometricObject<VPointF>(id);
+    const QSharedPointer<VPointF> p = VAbstractTool::data.GeometricObject<VPointF>(m_id);
     dialogTool->SetFirstPointId(firstPointId);
     dialogTool->SetSecondPointId(secondPointId);
     dialogTool->SetPointName(p->name());
@@ -96,20 +92,28 @@ void VToolPointOfIntersection::setDialog()
  * @param data container with variables.
  * @return the created tool
  */
-VToolPointOfIntersection *VToolPointOfIntersection::Create(QSharedPointer<DialogTool> dialog, VMainGraphicsScene *scene,
-                                                           VAbstractPattern *doc, VContainer *data)
+VToolPointOfIntersection *VToolPointOfIntersection::Create(const QPointer<DialogTool> &dialog,
+                                                           VMainGraphicsScene *scene, VAbstractPattern *doc,
+                                                           VContainer *data)
 {
     SCASSERT(not dialog.isNull())
-    QSharedPointer<DialogPointOfIntersection> dialogTool = dialog.objectCast<DialogPointOfIntersection>();
+    const QPointer<DialogPointOfIntersection> dialogTool = qobject_cast<DialogPointOfIntersection *>(dialog);
     SCASSERT(not dialogTool.isNull())
-    const quint32 firstPointId = dialogTool->GetFirstPointId();
-    const quint32 secondPointId = dialogTool->GetSecondPointId();
-    const QString pointName = dialogTool->getPointName();
-    VToolPointOfIntersection *point = Create(0, pointName, firstPointId, secondPointId, 5, 10, scene, doc,
-                                             data, Document::FullParse, Source::FromGui);
+
+    VToolPointOfIntersectionInitData initData;
+    initData.firstPointId = dialogTool->GetFirstPointId();
+    initData.secondPointId = dialogTool->GetSecondPointId();
+    initData.name = dialogTool->getPointName();
+    initData.scene = scene;
+    initData.doc = doc;
+    initData.data = data;
+    initData.parse = Document::FullParse;
+    initData.typeCreation = Source::FromGui;
+
+    VToolPointOfIntersection *point = Create(initData);
     if (point != nullptr)
     {
-        point->m_dialog = dialogTool;
+        point->m_dialog = dialog;
     }
     return point;
 }
@@ -117,54 +121,41 @@ VToolPointOfIntersection *VToolPointOfIntersection::Create(QSharedPointer<Dialog
 //---------------------------------------------------------------------------------------------------------------------
 /**
  * @brief Create help create tool.
- * @param _id tool id, 0 if tool doesn't exist yet.
- * @param pointName point name.
- * @param firstPointId id first line point.
- * @param secondPointId id second line point.
- * @param mx label bias x axis.
- * @param my label bias y axis.
- * @param scene pointer to scene.
- * @param doc dom document container.
- * @param data container with variables.
- * @param parse parser file mode.
- * @param typeCreation way we create this tool.
+ * @param initData init data.
  * @return the created tool
  */
-VToolPointOfIntersection *VToolPointOfIntersection::Create(const quint32 _id, const QString &pointName,
-                                                           const quint32 &firstPointId, const quint32 &secondPointId,
-                                                           const qreal &mx, const qreal &my, VMainGraphicsScene *scene,
-                                                           VAbstractPattern *doc, VContainer *data,
-                                                           const Document &parse,
-                                                           const Source &typeCreation)
+VToolPointOfIntersection *VToolPointOfIntersection::Create(VToolPointOfIntersectionInitData initData)
 {
-    const QSharedPointer<VPointF> firstPoint = data->GeometricObject<VPointF>(firstPointId);
-    const QSharedPointer<VPointF> secondPoint = data->GeometricObject<VPointF>(secondPointId);
+    const QSharedPointer<VPointF> firstPoint = initData.data->GeometricObject<VPointF>(initData.firstPointId);
+    const QSharedPointer<VPointF> secondPoint = initData.data->GeometricObject<VPointF>(initData.secondPointId);
 
     QPointF point(firstPoint->x(), secondPoint->y());
-    quint32 id = _id;
-    if (typeCreation == Source::FromGui)
+
+    VPointF *p = new VPointF(point, initData.name, initData.mx, initData.my);
+    p->SetShowLabel(initData.showLabel);
+
+    if (initData.typeCreation == Source::FromGui)
     {
-        id = data->AddGObject(new VPointF(point, pointName, mx, my));
+        initData.id = initData.data->AddGObject(p);
     }
     else
     {
-        data->UpdateGObject(id, new VPointF(point, pointName, mx, my));
-        if (parse != Document::FullParse)
+        initData.data->UpdateGObject(initData.id, p);
+        if (initData.parse != Document::FullParse)
         {
-            doc->UpdateToolData(id, data);
+            initData.doc->UpdateToolData(initData.id, initData.data);
         }
     }
 
-    if (parse == Document::FullParse)
+    if (initData.parse == Document::FullParse)
     {
-        VDrawTool::AddRecord(id, Tool::PointOfIntersection, doc);
-        VToolPointOfIntersection *point = new VToolPointOfIntersection(doc, data, id, firstPointId,
-                                                                       secondPointId, typeCreation);
-        scene->addItem(point);
-        InitToolConnections(scene, point);
-        VAbstractPattern::AddTool(id, point);
-        doc->IncrementReferens(firstPoint->getIdTool());
-        doc->IncrementReferens(secondPoint->getIdTool());
+        VAbstractTool::AddRecord(initData.id, Tool::PointOfIntersection, initData.doc);
+        VToolPointOfIntersection *point = new VToolPointOfIntersection(initData);
+        initData.scene->addItem(point);
+        InitToolConnections(initData.scene, point);
+        VAbstractPattern::AddTool(initData.id, point);
+        initData.doc->IncrementReferens(firstPoint->getIdTool());
+        initData.doc->IncrementReferens(secondPoint->getIdTool());
         return point;
     }
     return nullptr;
@@ -197,31 +188,20 @@ void VToolPointOfIntersection::RemoveReferens()
 
 //---------------------------------------------------------------------------------------------------------------------
 /**
- * @brief contextMenuEvent handle context menu events.
- * @param event context menu event.
- */
-void VToolPointOfIntersection::contextMenuEvent(QGraphicsSceneContextMenuEvent *event)
-{
-    try
-    {
-        ContextMenu<DialogPointOfIntersection>(this, event);
-    }
-    catch(const VExceptionToolWasDeleted &e)
-    {
-        Q_UNUSED(e)
-        return;//Leave this method immediately!!!
-    }
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-/**
  * @brief SaveDialog save options into file after change in dialog.
  */
-void VToolPointOfIntersection::SaveDialog(QDomElement &domElement)
+void VToolPointOfIntersection::SaveDialog(QDomElement &domElement, QList<quint32> &oldDependencies,
+                                          QList<quint32> &newDependencies)
 {
     SCASSERT(not m_dialog.isNull())
-    QSharedPointer<DialogPointOfIntersection> dialogTool = m_dialog.objectCast<DialogPointOfIntersection>();
+    const QPointer<DialogPointOfIntersection> dialogTool = qobject_cast<DialogPointOfIntersection *>(m_dialog);
     SCASSERT(not dialogTool.isNull())
+
+    AddDependence(oldDependencies, firstPointId);
+    AddDependence(oldDependencies, secondPointId);
+    AddDependence(newDependencies, dialogTool->GetFirstPointId());
+    AddDependence(newDependencies, dialogTool->GetSecondPointId());
+
     doc->SetAttribute(domElement, AttrName, dialogTool->getPointName());
     doc->SetAttribute(domElement, AttrFirstPoint, QString().setNum(dialogTool->GetFirstPointId()));
     doc->SetAttribute(domElement, AttrSecondPoint, QString().setNum(dialogTool->GetSecondPointId()));
@@ -259,20 +239,16 @@ void VToolPointOfIntersection::SetVisualization()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-quint32 VToolPointOfIntersection::GetSecondPointId() const
+void VToolPointOfIntersection::ShowContextMenu(QGraphicsSceneContextMenuEvent *event, quint32 id)
 {
-    return secondPointId;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void VToolPointOfIntersection::SetSecondPointId(const quint32 &value)
-{
-    if (value != NULL_ID)
+    try
     {
-        secondPointId = value;
-
-        QSharedPointer<VGObject> obj = VAbstractTool::data.GetGObject(id);
-        SaveOption(obj);
+        ContextMenu<DialogPointOfIntersection>(event, id);
+    }
+    catch(const VExceptionToolWasDeleted &e)
+    {
+        Q_UNUSED(e)
+        return;//Leave this method immediately!!!
     }
 }
 
@@ -280,22 +256,4 @@ void VToolPointOfIntersection::SetSecondPointId(const quint32 &value)
 void VToolPointOfIntersection::ShowVisualization(bool show)
 {
     ShowToolVisualization<VisToolPointOfIntersection>(show);
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-quint32 VToolPointOfIntersection::GetFirstPointId() const
-{
-    return firstPointId;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void VToolPointOfIntersection::SetFirstPointId(const quint32 &value)
-{
-    if (value != NULL_ID)
-    {
-        firstPointId = value;
-
-        QSharedPointer<VGObject> obj = VAbstractTool::data.GetGObject(id);
-        SaveOption(obj);
-    }
 }

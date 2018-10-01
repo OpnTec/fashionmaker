@@ -6,7 +6,7 @@
  **
  **  @brief
  **  @copyright
- **  This source code is part of the Valentine project, a pattern making
+ **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2013-2015 Valentina project
  **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
@@ -39,17 +39,18 @@
 
 class MoveLabel : public MoveAbstractLabel
 {
-    Q_OBJECT
 public:
-    MoveLabel(VAbstractPattern *doc, const double &x, const double &y, const quint32 &id, QUndoCommand *parent = 0);
-    virtual ~MoveLabel();
+    MoveLabel(VAbstractPattern *doc, const QPointF &pos, const quint32 &id, QUndoCommand *parent = nullptr);
+    virtual ~MoveLabel()=default;
 
-    virtual bool mergeWith(const QUndoCommand *command) Q_DECL_OVERRIDE;
-    virtual int  id() const Q_DECL_OVERRIDE;
+    virtual bool mergeWith(const QUndoCommand *command) override;
+    virtual int  id() const override;
 protected:
-    virtual void Do(double mx, double my) Q_DECL_OVERRIDE;
+    virtual void Do(const QPointF &pos) override;
 private:
     Q_DISABLE_COPY(MoveLabel)
+    //Need for resizing scene rect
+    QGraphicsScene *m_scene;
 };
 
 #endif // MOVELABEL_H

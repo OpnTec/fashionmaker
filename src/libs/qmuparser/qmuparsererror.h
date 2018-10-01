@@ -126,7 +126,7 @@ inline const QmuParserErrorMsg& QmuParserErrorMsg::Instance()
 //---------------------------------------------------------------------------------------------------------------------
 inline QString QmuParserErrorMsg::operator[] ( int a_iIdx ) const
 {
-    return m_vErrMsg.value(a_iIdx).translate();
+    return m_vErrMsg.value(a_iIdx).translate(QString());
 }
 
 //---------------------------------------------------------------------------
@@ -146,7 +146,7 @@ public:
     QmuParserError ( const QString &szMsg, int iPos, const QString &sTok = QString() );
     QmuParserError ( const QmuParserError &a_Obj );
     QmuParserError& operator= ( const QmuParserError &a_Obj );
-    virtual ~QmuParserError() QMUP_NOEXCEPT_EXPR (true) Q_DECL_OVERRIDE {}
+    virtual ~QmuParserError() QMUP_NOEXCEPT_EXPR (true) override {}
 
     void           SetFormula ( const QString &a_strFormula );
     const QString& GetExpr() const;
@@ -154,8 +154,8 @@ public:
     int            GetPos() const;
     const QString& GetToken() const;
     EErrorCodes    GetCode() const;
-    Q_NORETURN virtual void   raise() const Q_DECL_OVERRIDE;
-    virtual QmuParserError *clone() const Q_DECL_OVERRIDE Q_REQUIRED_RESULT;
+    Q_NORETURN virtual void   raise() const override;
+    Q_REQUIRED_RESULT virtual QmuParserError *clone() const override;
 private:
     QString m_sMsg;      ///< The message string
     QString m_sExpr;     ///< Formula string

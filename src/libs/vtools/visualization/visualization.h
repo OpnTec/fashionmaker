@@ -6,7 +6,7 @@
  **
  **  @brief
  **  @copyright
- **  This source code is part of the Valentine project, a pattern making
+ **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2013-2015 Valentina project
  **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
@@ -37,10 +37,17 @@
 #include "../vmisc/def.h"
 #include "../vmisc/logging.h"
 #include "../vmisc/vabstractapplication.h"
-#include "../vpatterndb/vcontainer.h"
 #include "../vwidgets/vmaingraphicsscene.h"
+#include "../vwidgets/vcurvepathitem.h"
+#include "../vwidgets/global.h"
+#include "../vgeometry/vabstractcurve.h"
 
 Q_DECLARE_LOGGING_CATEGORY(vVis)
+
+class VScaledEllipse;
+class VScaledLine;
+class VContainer;
+class VInternalVariable;
 
 enum class Mode : char {Creation, Show};
 
@@ -65,16 +72,18 @@ public:
     Mode GetMode() const;
     void SetMode(const Mode &value);
 
-    static qreal FindLength(const QString &expression, const QHash<QString, qreal *> &vars);
-    static qreal FindVal(const QString &expression, const QHash<QString, qreal *> &vars);
+    static qreal FindLengthFromUser(const QString &expression, const QHash<QString,
+                                    QSharedPointer<VInternalVariable> > *vars, bool fromUser = true);
+    static qreal FindValFromUser(const QString &expression, const QHash<QString,
+                                 QSharedPointer<VInternalVariable> > *vars, bool fromUser = true);
+
+    QString CurrentToolTip() const {return toolTip;}
 signals:
     void         ToolTip(const QString &toolTip);
 public slots:
-    void         SetFactor(qreal factor);
     void         MousePos(const QPointF &scenePos);
 protected:
     const VContainer *data;
-    qreal            factor;
     QPointF          scenePos;
     QColor           mainColor;
     QColor           supportColor;
@@ -86,12 +95,15 @@ protected:
     virtual void InitPen()=0;
     virtual void AddOnScene()=0;
 
-    QGraphicsEllipseItem *InitPoint(const QColor &color, QGraphicsItem *parent, qreal z = 0) const;
+    VScaledEllipse *InitPoint(const QColor &color, QGraphicsItem *parent, qreal z = 0) const;
     void         DrawPoint(QGraphicsEllipseItem *point, const QPointF &pos, const QColor &color,
                            Qt::PenStyle style = Qt::SolidLine);
-    virtual void DrawLine(QGraphicsLineItem *lineItem, const QLineF &line, const QColor &color,
+    virtual void DrawLine(VScaledLine *lineItem, const QLineF &line, const QColor &color,
                           Qt::PenStyle style = Qt::SolidLine);
-    void         DrawPath(QGraphicsPathItem *pathItem, const QPainterPath &path, const QColor &color,
+    void         DrawPath(VCurvePathItem *pathItem, const QPainterPath &path, const QColor &color,
+                          Qt::PenStyle style = Qt::SolidLine, Qt::PenCapStyle cap = Qt::SquareCap);
+    void         DrawPath(VCurvePathItem *pathItem, const QPainterPath &path,
+                          const QVector<DirectionArrow> &directionArrows, const QColor &color,
                           Qt::PenStyle style = Qt::SolidLine, Qt::PenCapStyle cap = Qt::SquareCap);
 
     template <typename Item>
@@ -100,15 +112,12 @@ protected:
     template <class Item>
     Item         *InitItem(const QColor &color, QGraphicsItem *parent);
 
-    static QRectF                PointRect(qreal radius);
-    static QGraphicsEllipseItem* GetPointItem(const VContainer *data, qreal factor,
-                                              QVector<QGraphicsEllipseItem *> &points, quint32 i, const QColor &color,
-                                              QGraphicsItem *parent);
+    static VScaledEllipse *GetPointItem(QVector<VScaledEllipse *> &points, quint32 i, const QColor &color,
+                                        QGraphicsItem *parent);
+    static VCurvePathItem *GetCurveItem(QVector<VCurvePathItem *> &curves, quint32 i, const QColor &color,
+                                        QGraphicsItem *parent);
 private:
     Q_DISABLE_COPY(Visualization)
-
-    static QGraphicsEllipseItem* InitPointItem(const VContainer *data, qreal factor, const QColor &color,
-                                               QGraphicsItem *parent, qreal z = 0);
 };
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -120,7 +129,6 @@ inline void Visualization::AddItem(Item *item)
     SCASSERT(scene != nullptr)
 
     scene->addItem(item);
-    connect(scene, &VMainGraphicsScene::NewFactor, item, &Visualization::SetFactor);
     connect(scene, &VMainGraphicsScene::mouseMove, item, &Visualization::MousePos);
 }
 
@@ -129,7 +137,11 @@ template <class Item>
 inline Item *Visualization::InitItem(const QColor &color, QGraphicsItem *parent)
 {
     Item *item = new Item(parent);
-    item->setPen(QPen(color, qApp->toPixel(WidthHairLine(*data->GetPatternUnit()))/factor));
+
+    QPen visPen = item->pen();
+    visPen.setColor(color);
+
+    item->setPen(visPen);
     item->setZValue(1);
     item->setFlags(QGraphicsItem::ItemStacksBehindParent);
     item->setVisible(false);

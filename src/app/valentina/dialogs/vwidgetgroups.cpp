@@ -6,7 +6,7 @@
  **
  **  @brief
  **  @copyright
- **  This source code is part of the Valentine project, a pattern making
+ **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2016 Valentina project
  **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
@@ -30,6 +30,7 @@
 #include "ui_vwidgetgroups.h"
 #include "../vtools/dialogs/tools/dialoggroup.h"
 #include "../vtools/undocommands/delgroup.h"
+#include "../vpatterndb/vcontainer.h"
 
 #include <QMenu>
 
@@ -88,6 +89,8 @@ void VWidgetGroups::RenameGroup(int row, int column)
 
     const quint32 id = ui->tableWidget->item(row, 0)->data(Qt::UserRole).toUInt();
     doc->SetGroupName(id, ui->tableWidget->item(row, column)->text());
+
+    UpdateGroups();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -109,7 +112,9 @@ void VWidgetGroups::CtxMenu(const QPoint &pos)
     QAction *selectedAction = menu->exec(ui->tableWidget->viewport()->mapToGlobal(pos));
     if (selectedAction == actionRename)
     {
-        DialogGroup *dialog = new DialogGroup(new VContainer(qApp->TrVars(), qApp->patternUnitP()), NULL_ID, this);
+        DialogGroup *dialog = new DialogGroup(new VContainer(qApp->TrVars(), qApp->patternUnitP(),
+                                                             VContainer::UniqueNamespace()),
+                                              NULL_ID, this);
         dialog->SetName(doc->GetGroupName(id));
         const int result = dialog->exec();
 
@@ -171,9 +176,18 @@ void VWidgetGroups::FillTable(const QMap<quint32, QPair<QString, bool> > &groups
 
         item = new QTableWidgetItem(data.first);
         item->setTextAlignment(Qt::AlignLeft | Qt::AlignVCenter);
+
+        if(doc->GroupIsEmpty(i.key()))
+        {
+            QFont font = item->font();
+            font.setStrikeOut(true);
+            item->setFont(font);
+        }
+
         ui->tableWidget->setItem(currentRow, 1, item);
         ++i;
     }
+    ui->tableWidget->sortItems(1, Qt::AscendingOrder);
     ui->tableWidget->resizeColumnsToContents();
     ui->tableWidget->resizeRowsToContents();
     ui->tableWidget->blockSignals(false);

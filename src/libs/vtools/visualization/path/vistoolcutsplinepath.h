@@ -6,7 +6,7 @@
  **
  **  @brief
  **  @copyright
- **  This source code is part of the Valentine project, a pattern making
+ **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2013-2015 Valentina project
  **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
@@ -46,16 +46,16 @@ public:
     explicit VisToolCutSplinePath(const VContainer *data, QGraphicsItem *parent = nullptr);
     virtual ~VisToolCutSplinePath() Q_DECL_EQ_DEFAULT;
 
-    virtual void RefreshGeometry() Q_DECL_OVERRIDE;
+    virtual void RefreshGeometry() override;
     void         setLength(const QString &expression);
-    virtual int  type() const Q_DECL_OVERRIDE {return Type;}
+    virtual int  type() const override {return Type;}
     enum { Type = UserType + static_cast<int>(Vis::ToolCutSpline)};
 protected:
     Q_DISABLE_COPY(VisToolCutSplinePath)
-    QGraphicsEllipseItem *point;
-    QGraphicsPathItem    *splPath1;
-    QGraphicsPathItem    *splPath2;
-    qreal                length;
+    VScaledEllipse *point;
+    VCurvePathItem *splPath1;
+    VCurvePathItem *splPath2;
+    qreal           length;
 };
 
 #endif // VISTOOLCUTSPLINEPATH_H

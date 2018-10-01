@@ -112,10 +112,12 @@ __inline__ static void debug_break(void)
      * use builtin trap instead */
     HAVE_TRAP_INSTRUCTION ? trap_instruction() : __builtin_trap();
 #else
+    // cppcheck-suppress knownConditionTrueFalse
     if (HAVE_TRAP_INSTRUCTION)
     {
         trap_instruction();
     }
+    // cppcheck-suppress knownConditionTrueFalse
     else if (DEBUG_BREAK_PREFER_BUILTIN_TRAP_TO_SIGTRAP)
     {
          /* raises SIGILL on Linux x86{,-64}, to continue in gdb:

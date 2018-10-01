@@ -6,7 +6,7 @@
  **
  **  @brief
  **  @copyright
- **  This source code is part of the Valentine project, a pattern making
+ **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2013-2015 Valentina project
  **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
@@ -47,9 +47,12 @@ class QLabel;
 class DialogIncrements;
 class DialogTool;
 class DialogHistory;
+class DialogFinalMeasurements;
 class VWidgetGroups;
 class VWidgetDetails;
 class QToolButton;
+class QDoubleSpinBox;
+class QProgressBar;
 
 /**
  * @brief The MainWindow class main windows.
@@ -59,50 +62,55 @@ class MainWindow : public MainWindowsNoGUI
     Q_OBJECT
 public:
     explicit MainWindow(QWidget *parent = nullptr);
-    virtual ~MainWindow() Q_DECL_OVERRIDE;
+    virtual ~MainWindow() override;
 
-    bool LoadPattern(const QString &fileName, const QString &customMeasureFile = QString());
+    bool LoadPattern(QString fileName, const QString &customMeasureFile = QString());
 
 public slots:
     void ProcessCMD();
-
-    virtual void ShowToolTip(const QString &toolTip) Q_DECL_OVERRIDE;
+    virtual void ShowToolTip(const QString &toolTip) override;
+    virtual void UpdateVisibilityGroups() override;
+    virtual void UpdateDetailsList() override;
+    virtual void ZoomFitBestCurrent() override;
 
 signals:
     void RefreshHistory();
     void EnableItemMove(bool move);
-    void ItemsSelection(SelectionType type) const;
+    void ItemsSelection(SelectionType type);
 
-    void EnableLabelSelection(bool enable) const;
-    void EnablePointSelection(bool enable) const;
-    void EnableLineSelection(bool enable) const;
-    void EnableArcSelection(bool enable) const;
-    void EnableElArcSelection(bool enable) const;
-    void EnableSplineSelection(bool enable) const;
-    void EnableSplinePathSelection(bool enable) const;
-    void EnableNodeLabelSelection(bool enable) const;
-    void EnableNodePointSelection(bool enable) const;
-    void EnableDetailSelection(bool enable) const;
+    void EnableLabelSelection(bool enable);
+    void EnablePointSelection(bool enable);
+    void EnableLineSelection(bool enable);
+    void EnableArcSelection(bool enable);
+    void EnableElArcSelection(bool enable);
+    void EnableSplineSelection(bool enable);
+    void EnableSplinePathSelection(bool enable);
+    void EnableNodeLabelSelection(bool enable);
+    void EnableNodePointSelection(bool enable);
+    void EnableDetailSelection(bool enable);
 
-    void EnableLabelHover(bool enable) const;
-    void EnablePointHover(bool enable) const;
-    void EnableLineHover(bool enable) const;
-    void EnableArcHover(bool enable) const;
-    void EnableElArcHover(bool enable) const;
-    void EnableSplineHover(bool enable) const;
-    void EnableSplinePathHover(bool enable) const;
-    void EnableNodeLabelHover(bool enable) const;
-    void EnableNodePointHover(bool enable) const;
-    void EnableDetailHover(bool enable) const;
+    void EnableLabelHover(bool enable);
+    void EnablePointHover(bool enable);
+    void EnableLineHover(bool enable);
+    void EnableArcHover(bool enable);
+    void EnableElArcHover(bool enable);
+    void EnableSplineHover(bool enable);
+    void EnableSplinePathHover(bool enable);
+    void EnableNodeLabelHover(bool enable);
+    void EnableNodePointHover(bool enable);
+    void EnableDetailHover(bool enable);
 protected:
-    virtual void keyPressEvent(QKeyEvent *event) Q_DECL_OVERRIDE;
-    virtual void showEvent(QShowEvent *event) Q_DECL_OVERRIDE;
-    virtual void changeEvent(QEvent* event) Q_DECL_OVERRIDE;
-    virtual void closeEvent(QCloseEvent *event) Q_DECL_OVERRIDE;
-    virtual void customEvent(QEvent * event) Q_DECL_OVERRIDE;
-    virtual void CleanLayout() Q_DECL_OVERRIDE;
-    virtual void PrepareSceneList() Q_DECL_OVERRIDE;
+    virtual void keyPressEvent(QKeyEvent *event) override;
+    virtual void showEvent(QShowEvent *event) override;
+    virtual void changeEvent(QEvent* event) override;
+    virtual void closeEvent(QCloseEvent *event) override;
+    virtual void customEvent(QEvent * event) override;
+    virtual void CleanLayout() override;
+    virtual void PrepareSceneList() override;
+    virtual void ExportToCSVData(const QString &fileName, bool withHeader, int mib,
+                                 const QChar &separator) final;
 private slots:
+    void ScaleChanged(qreal scale);
     void MouseMove(const QPointF &scenePos);
     void Clear();
     void PatternChangesWereSaved(bool saved);
@@ -110,6 +118,8 @@ private slots:
     void FullParseFile();
     void SetEnabledGUI(bool enabled);
     void GlobalChangePP(const QString &patternPiece);
+    void PreviousPatternPiece();
+    void NextPatternPiece();
     void ToolBarStyles();
     void ShowPaper(int index);
     void Preferences();
@@ -117,8 +127,9 @@ private slots:
     void CreateMeasurements();
 #endif
     void ExportLayoutAs();
+    void ExportDetailsAs();
 
-    void ArrowTool();
+    void ArrowTool(bool checked);
     void ToolEndLine(bool checked);
     void ToolLine(bool checked);
     void ToolAlongLine(bool checked);
@@ -139,10 +150,12 @@ private slots:
     void ToolDetail(bool checked);
     void ToolPiecePath(bool checked);
     void ToolPin(bool checked);
+    void ToolPlaceLabel(bool checked);
     void ToolHeight(bool checked);
     void ToolTriangle(bool checked);
     void ToolPointOfIntersection(bool checked);
     void ToolUnionDetails(bool checked);
+    void ToolDuplicateDetail(bool checked);
     void ToolGroup(bool checked);
     void ToolRotation(bool checked);
     void ToolFlippingByLine(bool checked);
@@ -171,13 +184,15 @@ private slots:
     void Open();
 
     void ClosedDialogUnionDetails(int result);
+    void ClosedDialogDuplicateDetail(int result);
     void ClosedDialogGroup(int result);
     void ClosedDialogPiecePath(int result);
     void ClosedDialogPin(int result);
+    void ClosedDialogPlaceLabel(int result);
     void ClosedDialogInsertNode(int result);
 
     void LoadIndividual();
-    void LoadStandard();
+    void LoadMultisize();
     void UnloadMeasurements();
     void ShowMeasurements();
     void MeasurementsChanged(const QString &path);
@@ -188,6 +203,8 @@ private slots:
 
     void ChangedSize(const QString &text);
     void ChangedHeight(const QString &text);
+
+    void ShowProgress();
 
 private:
     Q_DISABLE_COPY(MainWindow)
@@ -211,9 +228,6 @@ private:
     /** @brief mouseCoordinate pointer to label who show mouse coordinate. */
     QPointer<QLabel>    mouseCoordinate;
 
-    /** @brief helpLabel help show tooltip. */
-    QLabel             *helpLabel;
-
     /** @brief isInitialized true after first show window. */
     bool               isInitialized;
 
@@ -223,16 +237,14 @@ private:
 
     bool               patternReadOnly;
 
-    QPointer<DialogIncrements> dialogTable;
-    QSharedPointer<DialogTool> dialogTool;
-    QPointer<DialogHistory>    dialogHistory;
+    QPointer<DialogIncrements>        dialogTable;
+    QPointer<DialogTool>              dialogTool;
+    QPointer<DialogHistory>           dialogHistory;
+    QPointer<DialogFinalMeasurements> dialogFMeasurements;
 
     /** @brief comboBoxDraws comboc who show name of pattern peaces. */
     QComboBox          *comboBoxDraws;
     QLabel             *patternPieceLabel;
-
-    /** @brief mode keep current draw mode. */
-    Draw               mode;
 
     /** @brief currentDrawIndex save current selected pattern peace. */
     qint32             currentDrawIndex;
@@ -257,12 +269,17 @@ private:
     QPointer<QComboBox> gradationSizes;
     QPointer<QLabel>   gradationHeightsLabel;
     QPointer<QLabel>   gradationSizesLabel;
+    QPointer<QLabel>   zoomScale;
+    QPointer<QDoubleSpinBox> doubleSpinBoxScale;
     VToolOptionsPropertyBrowser *toolOptions;
     VWidgetGroups *groupsWidget;
     VWidgetDetails *detailsWidget;
     std::shared_ptr<VLockGuard<char>> lock;
 
     QList<QToolButton*> toolButtonPointerList;
+
+    QProgressBar *m_progressBar;
+    QLabel       *m_statusLabel;
 
     void               SetDefaultHeight();
     void               SetDefaultSize();
@@ -339,13 +356,12 @@ private:
 
     void               InitScenes();
 
-    QSharedPointer<VMeasurements> OpenMeasurementFile(const QString &path);
     bool               LoadMeasurements(const QString &path);
     bool               UpdateMeasurements(const QString &path, int size, int height);
-    void               CheckRequiredMeasurements(const VMeasurements *m);
 
     void               ReopenFilesAfterCrash(QStringList &args);
-    void               DoExport(const VCommandLinePtr& expParams);
+    bool               DoExport(const VCommandLinePtr& expParams);
+    bool               DoFMExport(const VCommandLinePtr& expParams);
 
     bool               SetSize(const QString &text);
     bool               SetHeight(const QString & text);
@@ -357,18 +373,18 @@ private:
 
     bool               IgnoreLocking(int error, const QString &path);
 
-    void ToolSelectPoint() const;
-    void ToolSelectPointByPress() const;
-    void ToolSelectPointByRelease() const;
-    void ToolSelectSpline() const;
-    void ToolSelectSplinePath() const;
-    void ToolSelectArc() const;
-    void ToolSelectPointArc() const;
-    void ToolSelectCurve() const;
-    void ToolSelectAllDrawObjects() const;
-    void ToolSelectOperationObjects() const;
-    void ToolSelectGroupObjects() const;
-    void ToolSelectDetail() const;
+    void ToolSelectPoint();
+    void ToolSelectPointByPress();
+    void ToolSelectPointByRelease();
+    void ToolSelectSpline();
+    void ToolSelectSplinePath();
+    void ToolSelectArc();
+    void ToolSelectPointArc();
+    void ToolSelectCurve();
+    void ToolSelectAllDrawObjects();
+    void ToolSelectOperationObjects();
+    void ToolSelectGroupObjects();
+    void ToolSelectDetail();
 };
 
 #endif // MAINWINDOW_H

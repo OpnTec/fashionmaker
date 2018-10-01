@@ -17,9 +17,16 @@ SOURCES += \
     $$PWD/vpieceitem.cpp \
     $$PWD/fancytabbar/fancytab.cpp \
     $$PWD/fancytabbar/fancytabbar.cpp \
-    $$PWD/fancytabbar/stylehelper.cpp
+    $$PWD/fancytabbar/stylehelper.cpp \
+    $$PWD/vcurvepathitem.cpp \
+    $$PWD/global.cpp \
+    $$PWD/vscenepoint.cpp \
+    $$PWD/scalesceneitems.cpp \
+    $$PWD/vlineedit.cpp \
+    $$PWD/vplaintextedit.cpp \
+    $$PWD/vhighlighter.cpp
 
-win32-msvc*:SOURCES += $$PWD/stable.cpp
+*msvc*:SOURCES += $$PWD/stable.cpp
 
 HEADERS += \
     $$PWD/stable.h \
@@ -38,4 +45,11 @@ HEADERS += \
     $$PWD/vpieceitem.h \
     $$PWD/fancytabbar/fancytab.h \
     $$PWD/fancytabbar/fancytabbar.h \
-    $$PWD/fancytabbar/stylehelper.h
+    $$PWD/fancytabbar/stylehelper.h \
+    $$PWD/vcurvepathitem.h \
+    $$PWD/global.h \
+    $$PWD/vscenepoint.h \
+    $$PWD/scalesceneitems.h \
+    $$PWD/vlineedit.h \
+    $$PWD/vplaintextedit.h \
+    $$PWD/vhighlighter.h

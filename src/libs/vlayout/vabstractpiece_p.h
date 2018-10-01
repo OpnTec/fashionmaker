@@ -6,7 +6,7 @@
  **
  **  @brief
  **  @copyright
- **  This source code is part of the Valentine project, a pattern making
+ **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2016 Valentina project
  **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
@@ -37,6 +37,7 @@
 
 QT_WARNING_PUSH
 QT_WARNING_DISABLE_GCC("-Weffc++")
+QT_WARNING_DISABLE_GCC("-Wnon-virtual-dtor")
 
 class VAbstractPieceData : public QSharedData
 {
@@ -45,18 +46,26 @@ public:
     VAbstractPieceData()
         : m_name(tr("Detail")),
           m_forbidFlipping(false),
+          m_forceFlipping(false),
           m_seamAllowance(false),
           m_seamAllowanceBuiltIn(false),
-          m_width(0)
+          m_hideMainPath(false),
+          m_width(0),
+          m_mx(0),
+          m_my(0)
     {}
 
     VAbstractPieceData(const VAbstractPieceData &piece)
         : QSharedData(piece),
           m_name(piece.m_name),
           m_forbidFlipping(piece.m_forbidFlipping),
+          m_forceFlipping(piece.m_forceFlipping),
           m_seamAllowance(piece.m_seamAllowance),
           m_seamAllowanceBuiltIn(piece.m_seamAllowanceBuiltIn),
-          m_width(piece.m_width)
+          m_hideMainPath(piece.m_hideMainPath),
+          m_width(piece.m_width),
+          m_mx(piece.m_mx),
+          m_my(piece.m_my)
     {}
 
     ~VAbstractPieceData() Q_DECL_EQ_DEFAULT;
@@ -64,9 +73,13 @@ public:
     QString m_name;
     /** @brief forbidFlipping forbid piece be mirrored in a layout. */
     bool    m_forbidFlipping;
+    bool    m_forceFlipping;
     bool    m_seamAllowance;
     bool    m_seamAllowanceBuiltIn;
+    bool    m_hideMainPath;
     qreal   m_width;
+    qreal   m_mx;
+    qreal   m_my;
 
 private:
     VAbstractPieceData &operator=(const VAbstractPieceData &) Q_DECL_EQ_DELETE;

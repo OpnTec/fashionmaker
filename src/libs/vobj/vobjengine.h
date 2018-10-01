@@ -6,7 +6,7 @@
  **
  **  @brief
  **  @copyright
- **  This source code is part of the Valentine project, a pattern making
+ **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2013-2015 Valentina project
  **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
@@ -48,18 +48,18 @@ class VObjEngine : public QPaintEngine
 {
 public:
     VObjEngine();
-    virtual ~VObjEngine() Q_DECL_OVERRIDE;
+    virtual ~VObjEngine() override;
 
-    virtual bool begin(QPaintDevice *pdev) Q_DECL_OVERRIDE;
-    virtual bool end() Q_DECL_OVERRIDE;
-    virtual void updateState(const QPaintEngineState &state) Q_DECL_OVERRIDE;
-    virtual void drawPath(const QPainterPath &path) Q_DECL_OVERRIDE;
-    virtual Type type() const Q_DECL_OVERRIDE;
-    virtual void drawPoints(const QPointF *points, int pointCount) Q_DECL_OVERRIDE;
-    virtual void drawPoints(const QPoint *points, int pointCount) Q_DECL_OVERRIDE;
-    virtual void drawPixmap(const QRectF &r, const QPixmap &pm, const QRectF &sr) Q_DECL_OVERRIDE;
-    virtual void drawPolygon(const QPointF *points, int pointCount, PolygonDrawMode mode) Q_DECL_OVERRIDE;
-    virtual void drawPolygon(const QPoint *points, int pointCount, PolygonDrawMode mode) Q_DECL_OVERRIDE;
+    virtual bool begin(QPaintDevice *pdev) override;
+    virtual bool end() override;
+    virtual void updateState(const QPaintEngineState &state) override;
+    virtual void drawPath(const QPainterPath &path) override;
+    virtual Type type() const override;
+    virtual void drawPoints(const QPointF *points, int pointCount) override;
+    virtual void drawPoints(const QPoint *points, int pointCount) override;
+    virtual void drawPixmap(const QRectF &r, const QPixmap &pm, const QRectF &sr) override;
+    virtual void drawPolygon(const QPointF *points, int pointCount, PolygonDrawMode mode) override;
+    virtual void drawPolygon(const QPoint *points, int pointCount, PolygonDrawMode mode) override;
 
     QSize getSize() const;
     void setSize(const QSize &value);

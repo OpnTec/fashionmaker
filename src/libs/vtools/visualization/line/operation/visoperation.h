@@ -6,7 +6,7 @@
  **
  **  @brief
  **  @copyright
- **  This source code is part of the Valentine project, a pattern making
+ **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2016 Valentina project
  **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
@@ -32,6 +32,7 @@
 #include <QtGlobal>
 
 #include "../visline.h"
+#include "../vpatterndb/vcontainer.h"
 
 class VisOperation : public VisLine
 {
@@ -42,19 +43,20 @@ public:
 
     void SetObjects(QVector<quint32> objects);
 
-    virtual void VisualMode(const quint32 &pointId = NULL_ID) Q_DECL_OVERRIDE;
+    virtual void VisualMode(const quint32 &pointId = NULL_ID) override;
 
-    virtual int type() const Q_DECL_OVERRIDE {return Type;}
+    virtual int type() const override {return Type;}
     enum { Type = UserType + static_cast<int>(Vis::ToolRotation)};
 protected:
     QVector<quint32> objects;
     QColor           supportColor2;
+    QColor           supportColor3;
 
-    QVector<QGraphicsEllipseItem *> points;
-    QVector<QGraphicsPathItem *>    curves;
+    QVector<VScaledEllipse *> points;
+    QVector<VCurvePathItem *> curves;
 
-    QGraphicsEllipseItem * GetPoint(quint32 i, const QColor &color);
-    QGraphicsPathItem    * GetCurve(quint32 i, const QColor &color);
+    VScaledEllipse *GetPoint(quint32 i, const QColor &color);
+    VCurvePathItem *GetCurve(quint32 i, const QColor &color);
 
     template <class Item>
     int AddFlippedCurve(const QPointF &firstPoint, const QPointF &secondPoint, quint32 id, int i);
@@ -71,15 +73,15 @@ int VisOperation::AddFlippedCurve(const QPointF &firstPoint, const QPointF &seco
     const QSharedPointer<Item> curve = Visualization::data->template GeometricObject<Item>(id);
 
     ++i;
-    QGraphicsPathItem *path = GetCurve(static_cast<quint32>(i), supportColor2);
-    DrawPath(path, curve->GetPath(PathDirection::Show), supportColor2, Qt::SolidLine, Qt::RoundCap);
+    VCurvePathItem *path = GetCurve(static_cast<quint32>(i), supportColor2);
+    DrawPath(path, curve->GetPath(), curve->DirectionArrows(), supportColor2, Qt::SolidLine, Qt::RoundCap);
 
     ++i;
     path = GetCurve(static_cast<quint32>(i), supportColor);
     if (object1Id != NULL_ID)
     {
         const Item flipped = curve->Flip(QLineF(firstPoint, secondPoint));
-        DrawPath(path, flipped.GetPath(PathDirection::Show), supportColor, Qt::SolidLine, Qt::RoundCap);
+        DrawPath(path, flipped.GetPath(), flipped.DirectionArrows(), supportColor, Qt::SolidLine, Qt::RoundCap);
     }
 
     return i;

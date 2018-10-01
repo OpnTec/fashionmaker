@@ -6,7 +6,7 @@
  **
  **  @brief
  **  @copyright
- **  This source code is part of the Valentine project, a pattern making
+ **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2013-2015 Valentina project
  **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
@@ -70,6 +70,8 @@ public:
     bool error() const;
 
     static int FormulaTypeId();
+
+    void Eval();
 private:
     QString formula;
     QString value;
@@ -79,8 +81,6 @@ private:
     QString postfix;
     bool _error;
     qreal dValue;
-
-    void Eval();
 };
 Q_DECLARE_METATYPE(VFormula)
 

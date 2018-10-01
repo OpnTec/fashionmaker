@@ -6,7 +6,7 @@
  **
  **  @brief
  **  @copyright
- **  This source code is part of the Valentine project, a pattern making
+ **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2015 Valentina project
  **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
@@ -44,16 +44,16 @@ class VisToolTrueDarts :public VisLine
     Q_OBJECT
 public:
     explicit VisToolTrueDarts(const VContainer *data, QGraphicsItem *parent = nullptr);
-    virtual ~VisToolTrueDarts() Q_DECL_EQ_DEFAULT;
+    virtual ~VisToolTrueDarts() = default;
 
-    virtual void RefreshGeometry() Q_DECL_OVERRIDE;
+    virtual void RefreshGeometry() override;
 
     void setObject2Id(const quint32 &value);
     void setD1PointId(const quint32 &value);
     void setD2PointId(const quint32 &value);
     void setD3PointId(const quint32 &value);
 
-    virtual int  type() const Q_DECL_OVERRIDE {return Type;}
+    virtual int  type() const override {return Type;}
     enum { Type = UserType + static_cast<int>(Vis::ToolTrueDarts)};
 private:
     Q_DISABLE_COPY(VisToolTrueDarts)
@@ -62,18 +62,18 @@ private:
     quint32 dartP2Id;
     quint32 dartP3Id;
 
-    QGraphicsEllipseItem *point1;
-    QGraphicsEllipseItem *point2;
-    QGraphicsEllipseItem *baseLineP1;
-    QGraphicsEllipseItem *baseLineP2;
-    QGraphicsEllipseItem *dartP1;
-    QGraphicsEllipseItem *dartP2;
-    QGraphicsEllipseItem *dartP3;
+    VScaledEllipse *point1;
+    VScaledEllipse *point2;
+    VScaledEllipse *baseLineP1;
+    VScaledEllipse *baseLineP2;
+    VScaledEllipse *dartP1;
+    VScaledEllipse *dartP2;
+    VScaledEllipse *dartP3;
 
-    QGraphicsLineItem *lineblP1P1;
-    QGraphicsLineItem *lineblP2P2;
-    QGraphicsLineItem *p1d2;
-    QGraphicsLineItem *d2p2;
+    VScaledLine *lineblP1P1;
+    VScaledLine *lineblP2P2;
+    VScaledLine *p1d2;
+    VScaledLine *d2p2;
 };
 
 #endif // VISTOOLTRUEDARTS_H

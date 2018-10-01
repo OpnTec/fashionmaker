@@ -6,7 +6,7 @@
  **
  **  @brief
  **  @copyright
- **  This source code is part of the Valentine project, a pattern making
+ **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2016 Valentina project
  **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
@@ -43,6 +43,7 @@
 #include "../vpatterndb/vcontainer.h"
 #include "../visualization.h"
 #include "vispath.h"
+#include "../vwidgets/scalesceneitems.h"
 
 //---------------------------------------------------------------------------------------------------------------------
 VisToolCubicBezier::VisToolCubicBezier(const VContainer *data, QGraphicsItem *parent)
@@ -57,8 +58,8 @@ VisToolCubicBezier::VisToolCubicBezier(const VContainer *data, QGraphicsItem *pa
       helpLine1(nullptr),
       helpLine2(nullptr)
 {
-    helpLine1 = InitItem<QGraphicsLineItem>(mainColor, this);
-    helpLine2 = InitItem<QGraphicsLineItem>(mainColor, this);
+    helpLine1 = InitItem<VScaledLine>(mainColor, this);
+    helpLine2 = InitItem<VScaledLine>(mainColor, this);
 
     point1 = InitPoint(supportColor, this);
     point2 = InitPoint(supportColor, this); //-V656
@@ -89,7 +90,8 @@ void VisToolCubicBezier::RefreshGeometry()
             {
                 VCubicBezier spline(*first, *second, VPointF(Visualization::scenePos),
                                     VPointF(Visualization::scenePos));
-                DrawPath(this, spline.GetPath(PathDirection::Hide), mainColor, Qt::SolidLine, Qt::RoundCap);
+                spline.SetApproximationScale(m_approximationScale);
+                DrawPath(this, spline.GetPath(), mainColor, lineStyle, Qt::RoundCap);
             }
             else
             {
@@ -99,7 +101,8 @@ void VisToolCubicBezier::RefreshGeometry()
                 if (object4Id <= NULL_ID)
                 {
                     VCubicBezier spline(*first, *second, *third,  VPointF(Visualization::scenePos));
-                    DrawPath(this, spline.GetPath(PathDirection::Hide), mainColor, Qt::SolidLine, Qt::RoundCap);
+                    spline.SetApproximationScale(m_approximationScale);
+                    DrawPath(this, spline.GetPath(), mainColor, lineStyle, Qt::RoundCap);
                     DrawLine(helpLine2, QLineF(static_cast<QPointF>(*third), Visualization::scenePos), mainColor,
                              Qt::DashLine);
                 }
@@ -111,7 +114,8 @@ void VisToolCubicBezier::RefreshGeometry()
                              Qt::DashLine);
 
                     VCubicBezier spline(*first, *second, *third,  *fourth);
-                    DrawPath(this, spline.GetPath(PathDirection::Show), mainColor, Qt::SolidLine, Qt::RoundCap);
+                    spline.SetApproximationScale(m_approximationScale);
+                    DrawPath(this, spline.GetPath(), spline.DirectionArrows(), mainColor, lineStyle, Qt::RoundCap);
                 }
             }
         }

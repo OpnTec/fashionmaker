@@ -6,7 +6,7 @@
  **
  **  @brief
  **  @copyright
- **  This source code is part of the Valentine project, a pattern making
+ **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2013-2015 Valentina project
  **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
@@ -35,7 +35,6 @@
 #include <QUndoStack>
 #include <Qt>
 
-#include "../../undocommands/adddetnode.h"
 #include "../ifc/ifcdef.h"
 #include "../ifc/xml/vabstractpattern.h"
 #include "../vgeometry/vgobject.h"
@@ -62,7 +61,6 @@ VAbstractNode::VAbstractNode(VAbstractPattern *doc, VContainer *data, const quin
       parentType(ParentType::Item),
       idNode(idNode),
       idTool(idTool),
-      currentColor(Qt::black),
       m_drawName(drawName),
       m_exluded(false)
 {
@@ -91,7 +89,7 @@ void VAbstractNode::incrementReferens()
             doc->IncrementReferens(node->getIdTool());
         }
         ShowNode();
-        QDomElement domElement = doc->elementById(id);
+        QDomElement domElement = doc->elementById(m_id, getTagName());
         if (domElement.isElement())
         {
             doc->SetParametrUsage(domElement, AttrInUse, NodeUsage::InUse);
@@ -118,7 +116,7 @@ void VAbstractNode::decrementReferens()
             doc->DecrementReferens(node->getIdTool());
         }
         HideNode();
-        QDomElement domElement = doc->elementById(id);
+        QDomElement domElement = doc->elementById(m_id, getTagName());
         if (domElement.isElement())
         {
             doc->SetParametrUsage(domElement, AttrInUse, NodeUsage::NotInUse);
@@ -177,6 +175,14 @@ void VAbstractNode::ToolCreation(const Source &typeCreation)
  */
 void VAbstractNode::AddToModeling(const QDomElement &domElement)
 {
-    AddDetNode *addNode = new AddDetNode(domElement, doc, m_drawName);
-    qApp->getUndoStack()->push(addNode);
+    QDomElement modeling;
+    if (m_drawName.isEmpty())
+    {
+        doc->GetActivNodeElement(VAbstractPattern::TagModeling, modeling);
+    }
+    else
+    {
+        modeling = doc->GetDraw(m_drawName).firstChildElement(VAbstractPattern::TagModeling);
+    }
+    modeling.appendChild(domElement);
 }

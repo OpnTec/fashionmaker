@@ -6,7 +6,7 @@
  **
  **  @brief
  **  @copyright
- **  This source code is part of the Valentine project, a pattern making
+ **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2015 Valentina project
  **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
@@ -29,7 +29,8 @@
 #include "vtranslatemeasurements.h"
 
 #include "../qmuparser/qmutranslation.h"
-#include "../vmisc/def.h"
+#include "measurements.h"
+#include "../vmisc/vabstractapplication.h"
 
 //---------------------------------------------------------------------------------------------------------------------
 VTranslateMeasurements::VTranslateMeasurements()
@@ -61,7 +62,7 @@ bool VTranslateMeasurements::MeasurementsFromUser(QString &newFormula, int posit
     QMap<QString, qmu::QmuTranslation>::const_iterator i = measurements.constBegin();
     while (i != measurements.constEnd())
     {
-        if (token == i.value().translate())
+        if (token == i.value().translate(qApp->Settings()->GetLocale()))
         {
             newFormula.replace(position, token.length(), i.key());
             bias = token.length() - i.key().length();
@@ -73,11 +74,27 @@ bool VTranslateMeasurements::MeasurementsFromUser(QString &newFormula, int posit
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+QString VTranslateMeasurements::MFromUser(const QString &measurement) const
+{
+    QMap<QString, qmu::QmuTranslation>::const_iterator i = measurements.constBegin();
+    while (i != measurements.constEnd())
+    {
+        const QString translated = i.value().translate(qApp->Settings()->GetLocale());
+        if (measurement == translated)
+        {
+            return i.key();
+        }
+        ++i;
+    }
+    return measurement;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 QString VTranslateMeasurements::MToUser(const QString &measurement) const
 {
     if (measurements.contains(measurement))
     {
-        return measurements.value(measurement).translate();
+        return measurements.value(measurement).translate(qApp->Settings()->GetLocale());
     }
     else
     {
@@ -109,7 +126,7 @@ QString VTranslateMeasurements::GuiText(const QString &measurement) const
 {
     if (guiTexts.contains(measurement))
     {
-        return guiTexts.value(measurement).translate();
+        return guiTexts.value(measurement).translate(qApp->Settings()->GetLocale());
     }
     else
     {
@@ -122,7 +139,7 @@ QString VTranslateMeasurements::Description(const QString &measurement) const
 {
     if (descriptions.contains(measurement))
     {
-        return descriptions.value(measurement).translate();
+        return descriptions.value(measurement).translate(qApp->Settings()->GetLocale());
     }
     else
     {
@@ -668,6 +685,13 @@ void VTranslateMeasurements::InitGroupG()
     d = translate("VTranslateMeasurements", "From Bust Side to Bust Side across chest.",
                   "Full measurement description.");
     InitMeasurement(bustArcF_M, m, g, d, "G12");
+    //=================================================================================================================
+    m = translate("VTranslateMeasurements", "size",
+                  "Name in a formula. Don't use math symbols and space in name!!!!");
+    g = translate("VTranslateMeasurements", "Size", "Full measurement name.");
+    d = translate("VTranslateMeasurements", "Same as bust_arc_f.",
+                  "Full measurement description.");
+    InitMeasurement(size_M, m, g, d, "G12");
     //=================================================================================================================
     m = translate("VTranslateMeasurements", "lowbust_arc_f",
                   "Name in a formula. Don't use math symbols and space in name!!!!");

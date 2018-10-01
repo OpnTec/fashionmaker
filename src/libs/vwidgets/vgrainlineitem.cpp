@@ -6,7 +6,7 @@
  **
  **  @brief
  **  @copyright
- **  This source code is part of the Valentine project, a pattern making
+ **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2013-2015 Valentina project
  **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
@@ -271,13 +271,16 @@ bool VGrainlineItem::IsContained(const QPointF& pt, qreal dRot, qreal &dX, qreal
  */
 void VGrainlineItem::mousePressEvent(QGraphicsSceneMouseEvent* pME)
 {
-    if (pME->button() == Qt::LeftButton && pME->type() != QEvent::GraphicsSceneMouseDoubleClick)
+    if (pME->button() == Qt::LeftButton && pME->type() != QEvent::GraphicsSceneMouseDoubleClick
+            && (flags() & QGraphicsItem::ItemIsMovable))
     {
         if (m_moveType == NotMovable)
         {
             pME->ignore();
             return;
         }
+
+        pME->accept();
 
         m_ptStartPos = pos();
         m_ptStartMove = pME->scenePos();
@@ -305,7 +308,7 @@ void VGrainlineItem::mousePressEvent(QGraphicsSceneMouseEvent* pME)
             else
             {
                 m_eMode = mRotate;
-                SetOverrideCursor(cursorArrowCloseHand, 1, 1);
+                SetItemOverrideCursor(this, cursorArrowCloseHand, 1, 1);
             }
             setZValue(ACTIVE_Z);
             Update();
@@ -336,7 +339,7 @@ void VGrainlineItem::mousePressEvent(QGraphicsSceneMouseEvent* pME)
             else
             {
                 m_eMode = mMove;
-                SetOverrideCursor(cursorArrowCloseHand, 1, 1);
+                SetItemOverrideCursor(this, cursorArrowCloseHand, 1, 1);
             }
 
             setZValue(ACTIVE_Z);
@@ -345,7 +348,6 @@ void VGrainlineItem::mousePressEvent(QGraphicsSceneMouseEvent* pME)
         else
         {
             pME->ignore();
-            return;
         }
     }
 }
@@ -382,6 +384,12 @@ void VGrainlineItem::mouseMoveEvent(QGraphicsSceneMouseEvent* pME)
         {
             dLen *= 2;
         }
+
+        if (m_dStartLength + dLen < ToPixel(5, Unit::Mm))
+        {
+            return;
+        }
+
         m_dLength = m_dStartLength + dLen;
 
         QPointF pos;
@@ -458,13 +466,9 @@ void VGrainlineItem::mouseReleaseEvent(QGraphicsSceneMouseEvent* pME)
 {
     if (pME->button() == Qt::LeftButton)
     {
-        if (m_eMode == mMove || m_eMode == mRotate)
+        if ((m_eMode == mMove || m_eMode == mRotate || m_eMode == mResize) && (flags() & QGraphicsItem::ItemIsMovable))
         {
-            RestoreOverrideCursor(cursorArrowCloseHand);
-        }
-        else if (m_eMode == mResize)
-        {
-            RestoreOverrideCursor(Qt::SizeFDiagCursor);
+            SetItemOverrideCursor(this, cursorArrowOpenHand, 1, 1);
         }
 
         QPointF ptDiff = pME->scenePos() - m_ptStartMove;
@@ -513,14 +517,21 @@ void VGrainlineItem::mouseReleaseEvent(QGraphicsSceneMouseEvent* pME)
 //---------------------------------------------------------------------------------------------------------------------
 void VGrainlineItem::hoverEnterEvent(QGraphicsSceneHoverEvent *pME)
 {
-    m_penWidth = LINE_PEN_WIDTH + 1;
+    if (flags() & QGraphicsItem::ItemIsMovable)
+    {
+        SetItemOverrideCursor(this, cursorArrowOpenHand, 1, 1);
+        m_penWidth = LINE_PEN_WIDTH + 1;
+    }
     VPieceItem::hoverEnterEvent(pME);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void VGrainlineItem::hoverLeaveEvent(QGraphicsSceneHoverEvent *pME)
 {
-    m_penWidth = LINE_PEN_WIDTH;
+    if (flags() & QGraphicsItem::ItemIsMovable)
+    {
+        m_penWidth = LINE_PEN_WIDTH;
+    }
     VPieceItem::hoverLeaveEvent(pME);
 }
 
@@ -556,7 +567,7 @@ void VGrainlineItem::UpdateRectangle()
                            pt2.y() - RECT_WIDTH*sin(m_dRotation - M_PI/2));
     m_polyBound << QPointF(pt2.x() + RECT_WIDTH*cos(m_dRotation + M_PI/2),
                            pt2.y() - RECT_WIDTH*sin(m_dRotation + M_PI/2));
-    m_rectBoundingBox = m_polyBound.boundingRect();
+    m_rectBoundingBox = m_polyBound.boundingRect().adjusted(-2, -2, 2, 2);
     setTransformOriginPoint(m_rectBoundingBox.center());
 
     UpdatePolyResize();
@@ -617,14 +628,8 @@ qreal VGrainlineItem::GetScale() const
     {
         const QPoint pt0 = scene()->views().at(0)->mapFromScene(0, 0);
         const QPoint pt = scene()->views().at(0)->mapFromScene(0, 100);
-
         const QPoint p = pt - pt0;
-
-#if QT_VERSION >= QT_VERSION_CHECK(5, 1, 0)
         qreal dScale = qSqrt(QPoint::dotProduct(p, p));
-#else
-        qreal dScale = qSqrt(p.x() * p.x() + p.y() * p.y());
-#endif //QT_VERSION >= QT_VERSION_CHECK(5, 1, 0)
         dScale = 100.0/dScale;
         if (dScale < 1.0)
         {
@@ -715,7 +720,7 @@ void VGrainlineItem::AllUserModifications(const QPointF &pos)
     }
     else
     {
-        SetOverrideCursor(cursorArrowCloseHand, 1, 1);
+        SetItemOverrideCursor(this, cursorArrowCloseHand, 1, 1);
     }
 }
 
@@ -726,7 +731,7 @@ void VGrainlineItem::UserRotateAndMove()
     {
         m_eMode = mMove;
     }
-    SetOverrideCursor(cursorArrowCloseHand, 1, 1);
+    SetItemOverrideCursor(this, cursorArrowCloseHand, 1, 1);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -735,12 +740,12 @@ void VGrainlineItem::UserMoveAndResize(const QPointF &pos)
     if (m_polyResize.containsPoint(pos, Qt::OddEvenFill) == true)
     {
         m_eMode = mResize;
-        SetOverrideCursor(Qt::SizeFDiagCursor);
+        setCursor(Qt::SizeFDiagCursor);
     }
     else
     {
         m_eMode = mMove; // block later if need
-        SetOverrideCursor(cursorArrowCloseHand, 1, 1);
+        SetItemOverrideCursor(this, cursorArrowCloseHand, 1, 1);
     }
 }
 

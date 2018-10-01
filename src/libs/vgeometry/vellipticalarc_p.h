@@ -8,6 +8,7 @@
 
 QT_WARNING_PUSH
 QT_WARNING_DISABLE_GCC("-Weffc++")
+QT_WARNING_DISABLE_GCC("-Wnon-virtual-dtor")
 
 class VEllipticalArcData : public QSharedData
 {
@@ -32,6 +33,7 @@ public:
     qreal   rotationAngle;
     /** @brief formulaRotationAngle formula for rotationAngle. */
     QString formulaRotationAngle;
+    QTransform m_transform;
 
 private:
     VEllipticalArcData &operator=(const VEllipticalArcData &) Q_DECL_EQ_DELETE;
@@ -44,7 +46,8 @@ VEllipticalArcData::VEllipticalArcData()
       formulaRadius1(),
       formulaRadius2(),
       rotationAngle(0),
-      formulaRotationAngle()
+      formulaRotationAngle(),
+      m_transform()
 {}
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -56,7 +59,8 @@ VEllipticalArcData::VEllipticalArcData(qreal radius1, qreal radius2, const QStri
       formulaRadius1(formulaRadius1),
       formulaRadius2(formulaRadius2),
       rotationAngle(rotationAngle),
-      formulaRotationAngle(formulaRotationAngle)
+      formulaRotationAngle(formulaRotationAngle),
+      m_transform()
 {}
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -66,7 +70,8 @@ VEllipticalArcData::VEllipticalArcData(qreal radius1, qreal radius2, qreal rotat
       formulaRadius1(QString().number(qApp->fromPixel(radius1))),
       formulaRadius2(QString().number(qApp->fromPixel(radius2))),
       rotationAngle(rotationAngle),
-      formulaRotationAngle(QString().number(qApp->fromPixel(rotationAngle)))
+      formulaRotationAngle(QString().number(qApp->fromPixel(rotationAngle))),
+      m_transform()
 {}
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -77,7 +82,8 @@ VEllipticalArcData::VEllipticalArcData(const VEllipticalArcData &arc)
       formulaRadius1(arc.formulaRadius1),
       formulaRadius2(arc.formulaRadius2),
       rotationAngle(arc.rotationAngle),
-      formulaRotationAngle(arc.formulaRotationAngle)
+      formulaRotationAngle(arc.formulaRotationAngle),
+      m_transform(arc.m_transform)
 {}
 
 //---------------------------------------------------------------------------------------------------------------------

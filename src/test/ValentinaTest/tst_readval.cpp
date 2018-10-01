@@ -6,7 +6,7 @@
  **
  **  @brief
  **  @copyright
- **  This source code is part of the Valentine project, a pattern making
+ **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2016 Valentina project
  **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
@@ -50,9 +50,8 @@ void TST_ReadVal::TestReadVal_data()
 
     const QList<QLocale> allLocales =
             QLocale::matchingLocales(QLocale::AnyLanguage, QLocale::AnyScript, QLocale::AnyCountry);
-    for(int i = 0; i < allLocales.size(); ++i)
+    for(auto &locale : allLocales)
     {
-        const QLocale locale = allLocales.at(i);
         PrepareVal(1., locale);
         PrepareVal(1.0, locale);
         PrepareVal(-1.0, locale);
@@ -97,8 +96,8 @@ void TST_ReadVal::TestInvalidData_data()
     PrepareString(QString("1,0,00.5"), locale);
     PrepareString(QString("1,,000.5"), locale);
     PrepareString(QString(",5"), locale);
-    PrepareString(QString(","), locale);
-    PrepareString(QString("."), locale);
+    PrepareString(QChar(','), locale);
+    PrepareString(QChar('.'), locale);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -125,7 +124,7 @@ void TST_ReadVal::PrepareVal(qreal val, const QLocale &locale)
 //---------------------------------------------------------------------------------------------------------------------
 void TST_ReadVal::PrepareString(const QString &str, const QLocale &locale, qreal val,  int count)
 {
-    const QString tag = QString("%1. String '%2'").arg(locale.name()).arg(str);
+    const QString tag = QString("%1. String '%2'").arg(locale.name(), str);
     QTest::newRow(qUtf8Printable(tag)) << str << count << val << locale;
 }
 

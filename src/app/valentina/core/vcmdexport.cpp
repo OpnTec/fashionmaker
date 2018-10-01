@@ -6,7 +6,7 @@
  **
  **  @brief
  **  @copyright
- **  This source code is part of the Valentine project, a pattern making
+ **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2015 Valentina project
  **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
@@ -33,8 +33,10 @@
 #include "../vformat/vmeasurements.h"
 #include "../vmisc/commandoptions.h"
 #include "../vmisc/vsettings.h"
+#include "../vmisc/dialogs/dialogexporttocsv.h"
 #include "../vlayout/vlayoutgenerator.h"
 #include <QDebug>
+#include <QTextCodec>
 
 VCommandLinePtr VCommandLine::instance = nullptr;
 
@@ -98,31 +100,61 @@ void VCommandLine::InitOptions(VCommandLineOptions &options, QMap<QString, int> 
                                           translate("VCommandLine", "Number corresponding to output format (default = "
                                                                     "0, export mode):") +
                                                                     DialogSaveLayout::MakeHelpFormatList(),
-                                          translate("VCommandLine", "Format number"), "0"));
+                                          translate("VCommandLine", "Format number"), QChar('0')));
+
+    optionsIndex.insert(LONG_OPTION_BINARYDXF, index++);
+    options.append(new QCommandLineOption(QStringList() << LONG_OPTION_BINARYDXF,
+                                          translate("VCommandLine", "Export dxf in binary form.")));
+
+    optionsIndex.insert(LONG_OPTION_TEXT2PATHS, index++);
+    options.append(new QCommandLineOption(QStringList() << LONG_OPTION_TEXT2PATHS,
+                                          translate("VCommandLine", "Export text as paths.")));
+
+    optionsIndex.insert(LONG_OPTION_EXPORTONLYDETAILS, index++);
+    options.append(new QCommandLineOption(QStringList() << LONG_OPTION_EXPORTONLYDETAILS,
+                                          translate("VCommandLine", "Export only details. Export details as they "
+                                                                    "positioned in the details mode. Any layout related"
+                                                                    " options will be ignored.")));
+
+    optionsIndex.insert(LONG_OPTION_EXPORTSUCHDETAILS, index++);
+    options.append(new QCommandLineOption(QStringList() << LONG_OPTION_EXPORTSUCHDETAILS,
+                                          translate("VCommandLine", "Export only details that match a piece name "
+                                                                    "regex."),
+                                          translate("VCommandLine", "The name regex")));
 
     optionsIndex.insert(LONG_OPTION_GRADATIONSIZE, index++);
     options.append(new QCommandLineOption(QStringList() << SINGLE_OPTION_GRADATIONSIZE << LONG_OPTION_GRADATIONSIZE,
-                                          translate("VCommandLine", "Set size value a pattern file, that was opened "
-                                                                    "with standard measurements (export mode). Valid "
+                                          translate("VCommandLine", "Set size value for pattern file, that was opened "
+                                                                    "with multisize measurements (export mode). Valid "
                                                                     "values: %1cm.")
                                                                 .arg(VMeasurement::WholeListSizes(Unit::Cm).join(", ")),
                                           translate("VCommandLine", "The size value")));
 
     optionsIndex.insert(LONG_OPTION_GRADATIONHEIGHT, index++);
     options.append(new QCommandLineOption(QStringList() << SINGLE_OPTION_GRADATIONHEIGHT << LONG_OPTION_GRADATIONHEIGHT,
-                                          translate("VCommandLine", "Set height value a pattern file, that was opened "
-                                                                    "with standard measurements (export mode). Valid "
+                                          translate("VCommandLine", "Set height value for pattern file, that was opened"
+                                                                    " with multisize measurements (export mode). Valid "
                                                                     "values: %1cm.")
                                                               .arg(VMeasurement::WholeListHeights(Unit::Cm).join(", ")),
                                           translate("VCommandLine", "The height value")));
 
+    optionsIndex.insert(LONG_OPTION_USER_MATERIAL, index++);
+    options.append(new QCommandLineOption(QStringList() << LONG_OPTION_USER_MATERIAL,
+                                          translate("VCommandLine",
+                                                    "Use this option to override user material defined in pattern. The "
+                                                    "value must be in form <number>@<user matrial name>. The number "
+                                                    "should be in range from 1 to %1. For example, 1@Fabric2. The key "
+                                                    "can be used multiple times. Has no effect in GUI mode.")
+                                          .arg(userMaterialPlaceholdersQuantity),
+                                          translate("VCommandLine", "User material")));
+
     //=================================================================================================================
     optionsIndex.insert(LONG_OPTION_PAGETEMPLATE, index++);
     options.append(new QCommandLineOption(QStringList() << SINGLE_OPTION_PAGETEMPLATE << LONG_OPTION_PAGETEMPLATE,
-                                          translate("VCommandLine", "Number corresponding to page template (default = "
-                                                                    "0, export mode):") +
+                                          translate("VCommandLine", "Number corresponding to layout page template "
+                                                                    "(default = 0, export mode):") +
                                                                     DialogLayoutSettings::MakeHelpTemplateList(),
-                                          translate("VCommandLine", "Template number"), "0"));
+                                          translate("VCommandLine", "Template number"), QChar('0')));
 
     optionsIndex.insert(LONG_OPTION_PAGEW, index++);
     options.append(new QCommandLineOption(QStringList() << SINGLE_OPTION_PAGEW << LONG_OPTION_PAGEW,
@@ -140,26 +172,24 @@ void VCommandLine::InitOptions(VCommandLineOptions &options, QMap<QString, int> 
 
     optionsIndex.insert(LONG_OPTION_PAGEUNITS, index++);
     options.append(new QCommandLineOption(QStringList() << SINGLE_OPTION_PAGEUNITS << LONG_OPTION_PAGEUNITS,
-                                          translate("VCommandLine", "Page height/width measure units (cannot be used "
-                                                    "with \"%1\", export mode). Valid values: %2.")
-                                                    .arg(LONG_OPTION_PAGETEMPLATE).arg(VDomDocument::UnitsHelpString()),
+                                          translate("VCommandLine",
+                                                    "Page measure units (export mode). Valid values: %1.")
+                                                    .arg(VDomDocument::UnitsHelpString()),
                                           translate("VCommandLine", "The measure unit")));
 
     optionsIndex.insert(LONG_OPTION_IGNORE_MARGINS, index++);
     options.append(new QCommandLineOption(QStringList() << SINGLE_OPTION_IGNORE_MARGINS << LONG_OPTION_IGNORE_MARGINS,
                                           translate("VCommandLine",
-                                                    "Ignore margins printing (export mode). Disable value keys: "
-                                                    "\"%1\", \"%2\", \"%3\", \"%4\". Set all margins to 0.")
-                                          .arg(LONG_OPTION_LEFT_MARGIN).arg(LONG_OPTION_RIGHT_MARGIN)
-                                          .arg(LONG_OPTION_TOP_MARGIN).arg(LONG_OPTION_BOTTOM_MARGIN)));
+                                                    "Ignore printer margins (export mode). Use if need full paper "
+                                                    "space. In case of later printing you must account for the "
+                                                    "margins himself.")));
 
     optionsIndex.insert(LONG_OPTION_LEFT_MARGIN, index++);
     options.append(new QCommandLineOption(QStringList() << SINGLE_OPTION_LEFT_MARGIN << LONG_OPTION_LEFT_MARGIN,
                                           translate("VCommandLine",
                                                     "Page left margin in current units like 3.0 (export mode). If "
                                                     "not set will be used value from default printer. Or 0 if none "
-                                                    "printers was found. Value will be ignored if key \"%1\" is used.")
-                                          .arg(LONG_OPTION_IGNORE_MARGINS),
+                                                    "printers was found."),
                                           ("The left margin")));
 
     optionsIndex.insert(LONG_OPTION_RIGHT_MARGIN, index++);
@@ -167,8 +197,7 @@ void VCommandLine::InitOptions(VCommandLineOptions &options, QMap<QString, int> 
                                           translate("VCommandLine",
                                                     "Page right margin in current units like 3.0 (export mode). If "
                                                     "not set will be used value from default printer. Or 0 if none "
-                                                    "printers was found. Value will be ignored if key \"%1\" is used.")
-                                          .arg(LONG_OPTION_IGNORE_MARGINS),
+                                                    "printers was found."),
                                           ("The right margin")));
 
     optionsIndex.insert(LONG_OPTION_TOP_MARGIN, index++);
@@ -176,8 +205,7 @@ void VCommandLine::InitOptions(VCommandLineOptions &options, QMap<QString, int> 
                                           translate("VCommandLine",
                                                     "Page top margin in current units like 3.0 (export mode). If "
                                                     "not set will be used value from default printer. Or 0 if none "
-                                                    "printers was found. Value will be ignored if key \"%1\" is used.")
-                                          .arg(LONG_OPTION_IGNORE_MARGINS),
+                                                    "printers was found."),
                                           ("The top margin")));
 
     optionsIndex.insert(LONG_OPTION_BOTTOM_MARGIN, index++);
@@ -185,8 +213,7 @@ void VCommandLine::InitOptions(VCommandLineOptions &options, QMap<QString, int> 
                                           translate("VCommandLine",
                                                     "Page bottom margin in current units like 3.0 (export mode). If "
                                                     "not set will be used value from default printer. Or 0 if none "
-                                                    "printers was found. Value will be ignored if key \"%1\" is used.")
-                                          .arg(LONG_OPTION_IGNORE_MARGINS),
+                                                    "printers was found."),
                                           ("The bottom margin")));
 
     //=================================================================================================================
@@ -242,7 +269,7 @@ void VCommandLine::InitOptions(VCommandLineOptions &options, QMap<QString, int> 
     options.append(new QCommandLineOption(QStringList() << SINGLE_OPTION_GROUPPING << LONG_OPTION_GROUPPING,
                                           translate("VCommandLine", "Sets layout groupping cases (export mode): %1.")
                                           .arg(DialogLayoutSettings::MakeGroupsHelp()),
-                                          translate("VCommandLine", "Grouping type"), "2"));
+                                          translate("VCommandLine", "Grouping type"), QChar('2')));
 
     optionsIndex.insert(LONG_OPTION_TEST, index++);
     options.append(new QCommandLineOption(QStringList() << SINGLE_OPTION_TEST << LONG_OPTION_TEST,
@@ -251,6 +278,13 @@ void VCommandLine::InitOptions(VCommandLineOptions &options, QMap<QString, int> 
                                                     "showing the main window. The key have priority before key '%1'.")
                                                     .arg(LONG_OPTION_BASENAME)));
 
+    optionsIndex.insert(LONG_OPTION_PENDANTIC, index++);
+    options.append(new QCommandLineOption(QStringList() << LONG_OPTION_PENDANTIC,
+                                          translate("VCommandLine",
+                                                    "Make all parsing warnings into errors. Have effect only in "
+                                                    "console mode. Use to force Valentina to immediately terminate if "
+                                                    "a pattern contains a parsing warning.")));
+
     optionsIndex.insert(LONG_OPTION_NO_HDPI_SCALING, index++);
     options.append(new QCommandLineOption(QStringList() << LONG_OPTION_NO_HDPI_SCALING,
                                           translate("VCommandLine", "Disable high dpi scaling. Call this option if has "
@@ -258,9 +292,102 @@ void VCommandLine::InitOptions(VCommandLineOptions &options, QMap<QString, int> 
                                                                     "enabled). Alternatively you can use the "
                                                                     "%1 environment variable.")
                                           .arg("QT_AUTO_SCREEN_SCALE_FACTOR=0")));
+
+    //=================================================================================================================
+    optionsIndex.insert(LONG_OPTION_CSVWITHHEADER, index++);
+    options.append(new QCommandLineOption(QStringList() << LONG_OPTION_CSVWITHHEADER,
+                                          translate("VCommandLine", "Export to csv with header. By default "
+                                                                    "disabled.")));
+
+    optionsIndex.insert(LONG_OPTION_CSVCODEC, index++);
+    options.append(new QCommandLineOption(QStringList() << LONG_OPTION_CSVCODEC,
+                                          translate("VCommandLine", "Specify codec that will be used to save data. List"
+                                                                    " of supported codecs provided by Qt. Default "
+                                                                    "value depend from system. On Windows, the codec "
+                                                                    "will be based on a system locale. On Unix "
+                                                                    "systems, the codec will might fall back to using "
+                                                                    "the iconv library if no builtin codec for the "
+                                                                    "locale can be found. Valid values for this "
+                                                                    "installation:")
+                                          + DialogExportToCSV::MakeHelpCodecsList(),
+                                          translate("VCommandLine", "Codec name"), QString("%1")
+                                          .arg(QString(QTextCodec::codecForLocale()->name()))));
+
+    optionsIndex.insert(LONG_OPTION_CSVSEPARATOR, index++);
+    options.append(new QCommandLineOption(QStringList() << LONG_OPTION_CSVSEPARATOR,
+                                          translate("VCommandLine", "Specify csv separator character. Default value "
+                                                                    "is '%1'. Valid characters:")
+                                          .arg(VCommonSettings::GetDefCSVSeparator()) +
+                                          DialogExportToCSV::MakeHelpSeparatorList(),
+                                          translate("VCommandLine", "Separator character"), QString("%1")
+                                          .arg(VCommonSettings::GetDefCSVSeparator())));
+
+    optionsIndex.insert(LONG_OPTION_CSVEXPORTFM, index++);
+    options.append(new QCommandLineOption(QStringList() << LONG_OPTION_CSVEXPORTFM,
+                                          translate("VCommandLine", "Calling this command enable exporting final "
+                                                                    "measurements. Specify path to csv file with "
+                                                                    "final measurements. The path must contain path "
+                                                                    "to directory and name of file. It can be "
+                                                                    "absolute or relatetive. In case of "
+                                                                    "relative path will be used current working "
+                                                                    "directory to calc a destination path."),
+                                          translate("VCommandLine", "Path to csv file")));
+
+    //=================================================================================================================
+    optionsIndex.insert(LONG_OPTION_TILED_PDF_PAGE_TEMPLATE, index++);
+    options.append(new QCommandLineOption(QStringList() << LONG_OPTION_TILED_PDF_PAGE_TEMPLATE,
+                                          translate("VCommandLine", "Number corresponding to tiled pdf page template "
+                                                                    "(default = 0, export mode with tiled pdf "
+                                                                    "format):") +
+                                                                   DialogLayoutSettings::MakeHelpTiledPdfTemplateList(),
+                                          translate("VCommandLine", "Template number"), QChar('0')));
+
+    optionsIndex.insert(LONG_OPTION_TILED_PDF_LEFT_MARGIN, index++);
+    options.append(new QCommandLineOption(QStringList() << LONG_OPTION_TILED_PDF_LEFT_MARGIN,
+                                          translate("VCommandLine",
+                                                    "Tiled page left margin in current units like 3.0 (export mode). "
+                                                    "If not set will be used default value 1 cm."),
+                                          translate("VCommandLine", "The left margin")));
+
+    optionsIndex.insert(LONG_OPTION_TILED_PDF_RIGHT_MARGIN, index++);
+    options.append(new QCommandLineOption(QStringList() << LONG_OPTION_TILED_PDF_RIGHT_MARGIN,
+                                          translate("VCommandLine",
+                                                    "Tiled page right margin in current units like 3.0 (export mode). "
+                                                    "If not set will be used default value 1 cm."),
+                                          translate("VCommandLine", "The right margin")));
+
+    optionsIndex.insert(LONG_OPTION_TILED_PDF_TOP_MARGIN, index++);
+    options.append(new QCommandLineOption(QStringList() << LONG_OPTION_TILED_PDF_TOP_MARGIN,
+                                          translate("VCommandLine",
+                                                    "Tiled page top margin in current units like 3.0 (export mode). If "
+                                                    "not set will be used value default value 1 cm."),
+                                          translate("VCommandLine", "The top margin")));
+
+    optionsIndex.insert(LONG_OPTION_TILED_PDF_BOTTOM_MARGIN, index++);
+    options.append(new QCommandLineOption(QStringList() << LONG_OPTION_TILED_PDF_BOTTOM_MARGIN,
+                                          translate("VCommandLine",
+                                                    "Tiled page bottom margin in current units like 3.0 (export mode)."
+                                                    " If not set will be used value default value 1 cm."),
+                                          translate("VCommandLine", "The bottom margin")));
+
+    optionsIndex.insert(LONG_OPTION_TILED_PDF_LANDSCAPE, index++);
+    options.append(new QCommandLineOption(QStringList() << LONG_OPTION_TILED_PDF_LANDSCAPE,
+                                          translate("VCommandLine", "Set tiled page orienatation to landscape (export "
+                                                                    "mode). Default value if not set portrait.")));
 }
 
-//------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------
+VAbstractLayoutDialog::PaperSizeTemplate VCommandLine::FormatSize(const QString &key) const
+{
+    int ppsize = 0;
+    if (parser.isSet(*optionsUsed.value(optionsIndex.value(key))))
+    {
+        ppsize = parser.value(*optionsUsed.value(optionsIndex.value(key))).toInt();
+    }
+    return static_cast<VAbstractLayoutDialog::PaperSizeTemplate>(ppsize);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 VLayoutGeneratorPtr VCommandLine::DefaultGenerator() const
 {
     //this functions covers all options found into layout setup dialog, nothing to add here, unless dialog extended
@@ -276,9 +403,9 @@ VLayoutGeneratorPtr VCommandLine::DefaultGenerator() const
         bool b = parser.isSet(*optionsUsed.value(optionsIndex.value(LONG_OPTION_PAGEW)));
         bool c = parser.isSet(*optionsUsed.value(optionsIndex.value(LONG_OPTION_PAGEUNITS)));
 
-        if ((a || b || c) && x)
+        if ((a || b) && x)
         {
-            qCritical() << translate("VCommandLine", "Cannot use pageformat and page explicit size/units together.")
+            qCritical() << translate("VCommandLine", "Cannot use pageformat and page explicit size together.")
                         << "\n";
             const_cast<VCommandLine*>(this)->parser.showHelp(V_EX_USAGE);
         }
@@ -316,53 +443,33 @@ VLayoutGeneratorPtr VCommandLine::DefaultGenerator() const
         }
     }
 
+    auto CheckKey = [this](const QString &key, const QString &message)
     {
-        //just anonymous namespace ...don' like to have a,b,c,d everywhere defined
-        bool a = parser.isSet(*optionsUsed.value(optionsIndex.value(LONG_OPTION_LEFT_MARGIN)));
+        bool a = parser.isSet(*optionsUsed.value(optionsIndex.value(key)));
         bool b = parser.isSet(*optionsUsed.value(optionsIndex.value(LONG_OPTION_PAGEUNITS)));
 
         if ((a || b) && !(a && b))
         {
-            qCritical() << translate("VCommandLine", "Left margin must be used together with page units.") << "\n";
+            qCritical() << message << "\n";
             const_cast<VCommandLine*>(this)->parser.showHelp(V_EX_USAGE);
         }
-    }
+    };
 
-    {
-        //just anonymous namespace ...don' like to have a,b,c,d everywhere defined
-        bool a = parser.isSet(*optionsUsed.value(optionsIndex.value(LONG_OPTION_RIGHT_MARGIN)));
-        bool b = parser.isSet(*optionsUsed.value(optionsIndex.value(LONG_OPTION_PAGEUNITS)));
+    CheckKey(LONG_OPTION_LEFT_MARGIN, translate("VCommandLine", "Left margin must be used together with page units."));
+    CheckKey(LONG_OPTION_RIGHT_MARGIN,
+             translate("VCommandLine", "Right margin must be used together with page units."));
+    CheckKey(LONG_OPTION_TOP_MARGIN, translate("VCommandLine", "Top margin must be used together with page units."));
+    CheckKey(LONG_OPTION_BOTTOM_MARGIN,
+             translate("VCommandLine", "Bottom margin must be used together with page units."));
 
-        if ((a || b) && !(a && b))
-        {
-            qCritical() << translate("VCommandLine", "Right margin must be used together with page units.") << "\n";
-            const_cast<VCommandLine*>(this)->parser.showHelp(V_EX_USAGE);
-        }
-    }
-
-    {
-        //just anonymous namespace ...don' like to have a,b,c,d everywhere defined
-        bool a = parser.isSet(*optionsUsed.value(optionsIndex.value(LONG_OPTION_TOP_MARGIN)));
-        bool b = parser.isSet(*optionsUsed.value(optionsIndex.value(LONG_OPTION_PAGEUNITS)));
-
-        if ((a || b) && !(a && b))
-        {
-            qCritical() << translate("VCommandLine", "Top margin must be used together with page units.") << "\n";
-            const_cast<VCommandLine*>(this)->parser.showHelp(V_EX_USAGE);
-        }
-    }
-
-    {
-        //just anonymous namespace ...don' like to have a,b,c,d everywhere defined
-        bool a = parser.isSet(*optionsUsed.value(optionsIndex.value(LONG_OPTION_BOTTOM_MARGIN)));
-        bool b = parser.isSet(*optionsUsed.value(optionsIndex.value(LONG_OPTION_PAGEUNITS)));
-
-        if ((a || b) && !(a && b))
-        {
-            qCritical() << translate("VCommandLine", "Bottom margin must be used together with page units.") << "\n";
-            const_cast<VCommandLine*>(this)->parser.showHelp(V_EX_USAGE);
-        }
-    }
+    CheckKey(LONG_OPTION_TILED_PDF_LEFT_MARGIN,
+             translate("VCommandLine", "Tiled left margin must be used together with page units."));
+    CheckKey(LONG_OPTION_TILED_PDF_RIGHT_MARGIN,
+             translate("VCommandLine", "Tiled right margin must be used together with page units."));
+    CheckKey(LONG_OPTION_TILED_PDF_TOP_MARGIN,
+             translate("VCommandLine", "Tiled top margin must be used together with page units."));
+    CheckKey(LONG_OPTION_TILED_PDF_BOTTOM_MARGIN,
+             translate("VCommandLine", "Tiled bottom margin must be used together with page units."));
 
     const int rotateDegree = OptRotation();
     diag.SetRotate(rotateDegree != 0 ); // 0 disable rotation
@@ -426,43 +533,41 @@ VLayoutGeneratorPtr VCommandLine::DefaultGenerator() const
     {
         diag.SetIgnoreAllFields(true);
     }
-    else
+
+    QMarginsF margins = diag.GetFields();
+
     {
-        QMarginsF margins = diag.GetFields();
-
+        const QCommandLineOption *option = optionsUsed.value(optionsIndex.value(LONG_OPTION_LEFT_MARGIN));
+        if (parser.isSet(*option))
         {
-            const QCommandLineOption *option = optionsUsed.value(optionsIndex.value(LONG_OPTION_LEFT_MARGIN));
-            if (parser.isSet(*option))
-            {
-                margins.setLeft(Pg2Px(parser.value(*option), diag));
-            }
+            margins.setLeft(Pg2Px(parser.value(*option), diag));
         }
-
-        {
-            const QCommandLineOption *option = optionsUsed.value(optionsIndex.value(LONG_OPTION_RIGHT_MARGIN));
-            if (parser.isSet(*option))
-            {
-                margins.setRight(Pg2Px(parser.value(*option), diag));
-            }
-        }
-
-        {
-            const QCommandLineOption *option = optionsUsed.value(optionsIndex.value(LONG_OPTION_TOP_MARGIN));
-            if (parser.isSet(*option))
-            {
-                margins.setTop(Pg2Px(parser.value(*option), diag));
-            }
-        }
-
-        {
-            const QCommandLineOption *option = optionsUsed.value(optionsIndex.value(LONG_OPTION_BOTTOM_MARGIN));
-            if (parser.isSet(*option))
-            {
-                margins.setBottom(Pg2Px(parser.value(*option), diag));
-            }
-        }
-        diag.SetFields(margins);
     }
+
+    {
+        const QCommandLineOption *option = optionsUsed.value(optionsIndex.value(LONG_OPTION_RIGHT_MARGIN));
+        if (parser.isSet(*option))
+        {
+            margins.setRight(Pg2Px(parser.value(*option), diag));
+        }
+    }
+
+    {
+        const QCommandLineOption *option = optionsUsed.value(optionsIndex.value(LONG_OPTION_TOP_MARGIN));
+        if (parser.isSet(*option))
+        {
+            margins.setTop(Pg2Px(parser.value(*option), diag));
+        }
+    }
+
+    {
+        const QCommandLineOption *option = optionsUsed.value(optionsIndex.value(LONG_OPTION_BOTTOM_MARGIN));
+        if (parser.isSet(*option))
+        {
+            margins.setBottom(Pg2Px(parser.value(*option), diag));
+        }
+    }
+    diag.SetFields(margins);
 
     diag.DialogAccepted(); // filling VLayoutGenerator
 
@@ -479,7 +584,9 @@ VCommandLinePtr VCommandLine::Get(const QCoreApplication& app)
     instance->parser.process(app);
 
     //fixme: in case of additional options/modes which will need to disable GUI - add it here too
-    instance->isGuiEnabled = not (instance->IsExportEnabled() || instance->IsTestModeEnabled());
+    instance->isGuiEnabled = not (instance->IsExportEnabled()
+                                  || instance->IsTestModeEnabled()
+                                  || instance->IsExportFMEnabled());
 
     return instance;
 }
@@ -510,6 +617,19 @@ bool VCommandLine::IsTestModeEnabled() const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+bool VCommandLine::IsPedantic() const
+{
+    if (IsGuiEnabled())
+    {
+        return false; // Doesn't work in GUI mode
+    }
+    else
+    {
+        return parser.isSet(*optionsUsed.value(optionsIndex.value(LONG_OPTION_PENDANTIC)));
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 bool VCommandLine::IsNoScalingEnabled() const
 {
     return parser.isSet(*optionsUsed.value(optionsIndex.value(LONG_OPTION_NO_HDPI_SCALING)));
@@ -527,15 +647,22 @@ bool VCommandLine::IsExportEnabled() const
     return r;
 }
 
-//------------------------------------------------------------------------------------------------------
-DialogLayoutSettings::PaperSizeTemplate VCommandLine::OptPaperSize() const
+//---------------------------------------------------------------------------------------------------------------------
+bool VCommandLine::IsExportFMEnabled() const
 {
-    int ppsize = 0;
-    if (parser.isSet(*optionsUsed.value(optionsIndex.value(LONG_OPTION_PAGETEMPLATE))))
+    const bool r = parser.isSet(*optionsUsed.value(optionsIndex.value(LONG_OPTION_CSVEXPORTFM)));
+    if (r && parser.positionalArguments().size() != 1)
     {
-        ppsize = parser.value(*optionsUsed.value(optionsIndex.value(LONG_OPTION_PAGETEMPLATE))).toInt();
+        qCritical() << translate("VCommandLine", "Export options can be used with single input file only.") << "/n";
+        const_cast<VCommandLine*>(this)->parser.showHelp(V_EX_USAGE);
     }
-    return static_cast<DialogLayoutSettings::PaperSizeTemplate>(ppsize);
+    return r;
+}
+
+//------------------------------------------------------------------------------------------------------
+VAbstractLayoutDialog::PaperSizeTemplate VCommandLine::OptPaperSize() const
+{
+    return FormatSize(LONG_OPTION_PAGETEMPLATE);
 }
 
 //------------------------------------------------------------------------------------------------------
@@ -618,6 +745,99 @@ int VCommandLine::OptExportType() const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+int VCommandLine::IsBinaryDXF() const
+{
+    return parser.isSet(*optionsUsed.value(optionsIndex.value(LONG_OPTION_BINARYDXF)));
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+int VCommandLine::IsTextAsPaths() const
+{
+    return parser.isSet(*optionsUsed.value(optionsIndex.value(LONG_OPTION_TEXT2PATHS)));
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+int VCommandLine::IsExportOnlyDetails() const
+{
+    return parser.isSet(*optionsUsed.value(optionsIndex.value(LONG_OPTION_EXPORTONLYDETAILS)));
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+int VCommandLine::IsCSVWithHeader() const
+{
+    return parser.isSet(*optionsUsed.value(optionsIndex.value(LONG_OPTION_CSVWITHHEADER)));
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QString VCommandLine::OptExportSuchDetails() const
+{
+    QString path;
+    if (IsExportEnabled())
+    {
+        path = parser.value(*optionsUsed.value(optionsIndex.value(LONG_OPTION_EXPORTSUCHDETAILS)));
+    }
+
+    return path;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QString VCommandLine::OptCSVCodecName() const
+{
+    return parser.value(*optionsUsed.value(optionsIndex.value(LONG_OPTION_CSVCODEC)));
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QChar VCommandLine::OptCSVSeparator() const
+{
+    const QString value = parser.value(*optionsUsed.value(optionsIndex.value(LONG_OPTION_CSVSEPARATOR)));
+    if (not value.isEmpty())
+    {
+        return value.at(0);
+    }
+    else
+    {
+        return QChar();
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QString VCommandLine::OptExportFMTo() const
+{
+    return parser.value(*optionsUsed.value(optionsIndex.value(LONG_OPTION_CSVEXPORTFM)));
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QMap<int, QString> VCommandLine::OptUserMaterials() const
+{
+    QMap<int, QString> userMaterials;
+    const QStringList values = parser.values(*optionsUsed.value(optionsIndex.value(LONG_OPTION_USER_MATERIAL)));
+    for(auto &value : values)
+    {
+        const QStringList parts = value.split('@');
+        if (parts.size() != 2)
+        {
+            qCritical() << translate("VCommandLine", "Invalid user material '%1'. Separator is missing.").arg(value)
+                        << "\n";
+            const_cast<VCommandLine*>(this)->parser.showHelp(V_EX_USAGE);
+        }
+
+        bool ok = false;
+        const int number = parts.first().toInt(&ok);
+
+        if (not ok or number < 1 or number > userMaterialPlaceholdersQuantity)
+        {
+            qCritical() << translate("VCommandLine", "Invalid user material '%1'. Wrong material number.").arg(value)
+                        << "\n";
+            const_cast<VCommandLine*>(this)->parser.showHelp(V_EX_USAGE);
+        }
+
+        userMaterials.insert(number, parts.last());
+    }
+
+    return userMaterials;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 QStringList VCommandLine::OptInputFileNames() const
 {
     return parser.positionalArguments();
@@ -669,6 +889,74 @@ QString VCommandLine::OptGradationHeight() const
         qCritical() << translate("VCommandLine", "Invalid gradation height value.") << "\n";
         const_cast<VCommandLine*>(this)->parser.showHelp(V_EX_USAGE);
     }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QMarginsF VCommandLine::TiledPageMargins() const
+{
+    QMarginsF margins(10, 10, 10, 10); // mm
+
+    const QCommandLineOption *option = optionsUsed.value(optionsIndex.value(LONG_OPTION_LEFT_MARGIN));
+    if (not parser.isSet(*option))
+    {
+        return margins;
+    }
+
+    const QString value = parser.value(*option);
+    const QStringList supportedUnits = QStringList() << unitMM << unitCM << unitINCH;
+    if (not supportedUnits.contains(value))
+    {
+        qCritical() << translate("VCommandLine", "Unsupported paper units.") << "\n";
+        const_cast<VCommandLine*>(this)->parser.showHelp(V_EX_USAGE);
+    }
+    const Unit unit = StrToUnits(value);
+
+    {
+        const QCommandLineOption *option = optionsUsed.value(optionsIndex.value(LONG_OPTION_LEFT_MARGIN));
+        if (parser.isSet(*option))
+        {
+            margins.setLeft(UnitConvertor(parser.value(*option).toDouble(), unit, Unit::Mm));
+        }
+    }
+
+    {
+        const QCommandLineOption *option = optionsUsed.value(optionsIndex.value(LONG_OPTION_RIGHT_MARGIN));
+        if (parser.isSet(*option))
+        {
+            margins.setRight(UnitConvertor(parser.value(*option).toDouble(), unit, Unit::Mm));
+        }
+    }
+
+    {
+        const QCommandLineOption *option = optionsUsed.value(optionsIndex.value(LONG_OPTION_TOP_MARGIN));
+        if (parser.isSet(*option))
+        {
+            margins.setTop(UnitConvertor(parser.value(*option).toDouble(), unit, Unit::Mm));
+        }
+    }
+
+    {
+        const QCommandLineOption *option = optionsUsed.value(optionsIndex.value(LONG_OPTION_BOTTOM_MARGIN));
+        if (parser.isSet(*option))
+        {
+            margins.setBottom(UnitConvertor(parser.value(*option).toDouble(), unit, Unit::Mm));
+        }
+    }
+
+    return margins;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+VAbstractLayoutDialog::PaperSizeTemplate VCommandLine::OptTiledPaperSize() const
+{
+    return FormatSize(LONG_OPTION_TILED_PDF_PAGE_TEMPLATE);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+PageOrientation VCommandLine::OptTiledPageOrientation()
+{
+    const QString key = LONG_OPTION_TILED_PDF_LANDSCAPE;
+    return static_cast<PageOrientation>(not parser.isSet(*optionsUsed.value(optionsIndex.value(key))));
 }
 
 #undef translate

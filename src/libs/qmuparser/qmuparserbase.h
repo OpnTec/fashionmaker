@@ -134,12 +134,21 @@ public:
     void  setThousandsSeparator(const QChar &c);
 
 protected:
+    /**
+     * @brief Typedef for the token reader.
+     */
+    typedef QmuParserTokenReader token_reader_type;
+
     static const QStringList c_DefaultOprt;
     QLocale m_locale;///< The locale used by the parser
     QChar m_decimalPoint;
     QChar m_thousandsSeparator;
+    funmap_type  m_FunDef;         ///< Map of function names and pointers.
+    std::unique_ptr<token_reader_type> m_pTokenReader; ///< Managed pointer to the token reader object.
     static bool g_DbgDumpCmdCode;
     static bool g_DbgDumpStack;
+    void AddCallback(const QString &a_strName, const QmuParserCallback &a_Callback, funmap_type &a_Storage,
+                     const QString &a_szCharSet );
     void Init();
     virtual void InitCharSets() = 0;
     virtual void InitFun() = 0;
@@ -157,17 +166,17 @@ protected:
             :std::numpunct<TChar>(), m_nGroup(nGroup), m_cDecPoint(cDecSep), m_cThousandsSep(cThousandsSep)
             {}
         protected:
-            virtual char_type do_decimal_point() const Q_DECL_OVERRIDE
+            virtual char_type do_decimal_point() const override
             {
                 return m_cDecPoint;
             }
 
-            virtual char_type do_thousands_sep() const Q_DECL_OVERRIDE
+            virtual char_type do_thousands_sep() const override
             {
                 return m_cThousandsSep;
             }
 
-            virtual std::string do_grouping() const Q_DECL_OVERRIDE
+            virtual std::string do_grouping() const override
             {
                 // fix for issue 4: https://code.google.com/p/muparser/issues/detail?id=4
                 // courtesy of Jens Bartsch
@@ -202,11 +211,6 @@ private:
     typedef QVector<QString> stringbuf_type;
 
     /**
-     * @brief Typedef for the token reader.
-     */
-    typedef QmuParserTokenReader token_reader_type;
-
-    /**
      * @brief Type used for parser tokens.
      */
     typedef QmuParserToken<qreal, QString> token_type;
@@ -226,9 +230,6 @@ private:
     mutable stringbuf_type    m_vStringBuf; ///< String buffer, used for storing string function arguments
     stringbuf_type            m_vStringVarBuf;
 
-    std::unique_ptr<token_reader_type> m_pTokenReader; ///< Managed pointer to the token reader object.
-
-    funmap_type  m_FunDef;         ///< Map of function names and pointers.
     funmap_type  m_PostOprtDef;    ///< Postfix operator callbacks
     funmap_type  m_InfixOprtDef;   ///< unary infix operator.
     funmap_type  m_OprtDef;        ///< Binary operator callbacks
@@ -255,8 +256,6 @@ private:
     void               Assign(const QmuParserBase &a_Parser);
     void               InitTokenReader();
     void               ReInit() const;
-    void               AddCallback(const QString &a_strName, const QmuParserCallback &a_Callback,
-                                   funmap_type &a_Storage, const QString &a_szCharSet );
     void               ApplyRemainingOprt(QStack<token_type> &a_stOpt, QStack<token_type> &a_stVal) const;
     void               ApplyBinOprt(QStack<token_type> &a_stOpt, QStack<token_type> &a_stVal) const;
     void               ApplyIfElse(QStack<token_type> &a_stOpt, QStack<token_type> &a_stVal) const;

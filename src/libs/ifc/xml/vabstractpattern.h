@@ -6,7 +6,7 @@
  **
  **  @brief
  **  @copyright
- **  This source code is part of the Valentine project, a pattern making
+ **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2015 Valentina project
  **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
@@ -60,14 +60,35 @@ enum class AxisType : char {VerticalAxis = 1, HorizontalAxis = 2};
 class VContainer;
 class VDataTool;
 
-class VAbstractPattern : public QObject, public VDomDocument
+QT_WARNING_PUSH
+QT_WARNING_DISABLE_GCC("-Weffc++")
+
+struct VFormulaField
+{
+    QString     expression;
+    QDomElement element;
+    QString     attribute;
+};
+
+struct VFinalMeasurement
+{
+    QString name;
+    QString formula;
+    QString description;
+};
+
+QT_WARNING_POP
+
+class VAbstractPattern : public VDomDocument
 {
     Q_OBJECT
 public:
     explicit VAbstractPattern(QObject *parent = nullptr);
-    virtual ~VAbstractPattern() Q_DECL_EQ_DEFAULT;
+    virtual ~VAbstractPattern();
 
     QStringList    ListMeasurements() const;
+    QVector<VFormulaField> ListExpressions() const;
+    QVector<VFormulaField> ListIncrementExpressions() const;
 
     virtual void   CreateEmptyFile()=0;
 
@@ -99,7 +120,7 @@ public:
     static VPiecePath              ParsePieceNodes(const QDomElement &domElement);
     static QVector<CustomSARecord> ParsePieceCSARecords(const QDomElement &domElement);
     static QVector<quint32>        ParsePieceInternalPaths(const QDomElement &domElement);
-    static QVector<quint32>        ParsePiecePins(const QDomElement &domElement);
+    static QVector<quint32>        ParsePiecePointRecords(const QDomElement &domElement);
 
     void           AddToolOnRemove(VDataTool *tool);
 
@@ -107,7 +128,7 @@ public:
     QVector<VToolRecord> getLocalHistory() const;
 
     QString        MPath() const;
-    void           SetPath(const QString &path);
+    void           SetMPath(const QString &path);
 
     quint32        SiblingNodeId(const quint32 &nodeId) const;
 
@@ -127,18 +148,33 @@ public:
 
     QString        GetPatternName() const;
     void           SetPatternName(const QString& qsName);
+
     QString        GetCompanyName() const;
     void           SetCompanyName(const QString& qsName);
+
     QString        GetPatternNumber() const;
     void           SetPatternNumber(const QString &qsNum);
+
     QString        GetCustomerName() const;
     void           SetCustomerName(const QString& qsName);
-    QString        GetPatternSize() const;
-    void           SetPatternSize(const QString &qsSize);
-    bool           IsDateVisible() const;
-    void           SetDateVisible(bool bVisible);
-    bool           IsMeasurementsVisible() const;
-    void           SetMesurementsVisible(bool bVisible);
+
+    QString        GetLabelDateFormat() const;
+    void           SetLabelDateFormat(const QString &format);
+
+    QString        GetLabelTimeFormat() const;
+    void           SetLabelTimeFormat(const QString &format);
+
+    void                        SetPatternLabelTemplate(const QVector<VLabelTemplateLine> &lines);
+    QVector<VLabelTemplateLine> GetPatternLabelTemplate() const;
+
+    void               SetPatternMaterials(const QMap<int, QString> &materials);
+    QMap<int, QString> GetPatternMaterials() const;
+
+    QVector<VFinalMeasurement> GetFinalMeasurements() const;
+    void                       SetFinalMeasurements(const QVector<VFinalMeasurement> &measurements);
+
+    void SetPatternWasChanged(bool changed);
+    bool GetPatternWasChanged() const;
 
     QString        GetImage() const;
     QString        GetImageExtension() const;
@@ -159,27 +195,32 @@ public:
     QString        GetGroupName(quint32 id);
     void           SetGroupName(quint32 id, const QString &name);
     QMap<quint32, QPair<QString, bool> > GetGroups();
+    QMap<quint32, QString> GetGroupsContainingItem(quint32 toolId, quint32 objectId, bool containItem);
+    QDomElement           AddItemToGroup(quint32 toolId, quint32 objectId, quint32 groupId);
+    QDomElement           RemoveItemFromGroup(quint32 toolId, quint32 objectId, quint32 groupId);
+    bool           GroupIsEmpty(quint32 id);
     bool           GetGroupVisivility(quint32 id);
     void           SetGroupVisivility(quint32 id, bool visible);
+
+    QString PieceDrawName(quint32 id);
 
     static const QString TagPattern;
     static const QString TagCalculation;
     static const QString TagModeling;
     static const QString TagDetails;
     static const QString TagDetail;
-    static const QString TagAuthor;
     static const QString TagDescription;
     static const QString TagImage;
     static const QString TagNotes;
     static const QString TagMeasurements;
     static const QString TagIncrements;
+    static const QString TagPreviewCalculations;
     static const QString TagIncrement;
     static const QString TagDraw;
     static const QString TagGroups;
     static const QString TagGroup;
     static const QString TagGroupItem;
     static const QString TagPoint;
-    static const QString TagLine;
     static const QString TagSpline;
     static const QString TagArc;
     static const QString TagElArc;
@@ -190,14 +231,15 @@ public:
     static const QString TagSizes;
     static const QString TagData;
     static const QString TagPatternInfo;
-    static const QString TagMCP;
     static const QString TagPatternName;
     static const QString TagPatternNum;
     static const QString TagCompanyName;
     static const QString TagCustomerName;
-    static const QString TagSize;
-    static const QString TagShowDate;
-    static const QString TagShowMeasurements;
+    static const QString TagPatternLabel;
+    static const QString TagPatternMaterials;
+    static const QString TagFinalMeasurements;
+    static const QString TagMaterial;
+    static const QString TagFMeasurement;
     static const QString TagGrainline;
     static const QString TagPath;
     static const QString TagNodes;
@@ -209,10 +251,15 @@ public:
     static const QString AttrTool;
     static const QString AttrType;
     static const QString AttrLetter;
-    static const QString AttrMaterial;
-    static const QString AttrUserDefined;
-    static const QString AttrCutNumber;
-    static const QString AttrPlacement;
+    static const QString AttrAnnotation;
+    static const QString AttrOrientation;
+    static const QString AttrRotationWay;
+    static const QString AttrTilt;
+    static const QString AttrFoldPosition;
+    static const QString AttrQuantity;
+    static const QString AttrOnFold;
+    static const QString AttrDateFormat;
+    static const QString AttrTimeFormat;
     static const QString AttrArrows;
     static const QString AttrNodeReverse;
     static const QString AttrNodeExcluded;
@@ -226,8 +273,9 @@ public:
     static const QString AttrPath;
     static const QString AttrEnd;
     static const QString AttrIncludeAs;
-    static const QString AttrWidth;
     static const QString AttrRotation;
+    static const QString AttrNumber;
+    static const QString AttrCheckUniqueness;
 
     static const QString AttrAll;
 
@@ -290,9 +338,8 @@ public:
     static const QString AttrDefSize;
     static const QString AttrExtension;
 
-    static const QString IncrementName;
-    static const QString IncrementFormula;
-    static const QString IncrementDescription;
+    static const QString AttrFormula;
+    static const QString AttrDescription;
 
     static const QString NodeArc;
     static const QString NodeElArc;
@@ -327,6 +374,7 @@ signals:
      * @brief patternChanged emit if we have unsaved change.
      */
     void           patternChanged(bool saved);
+    void           UpdatePatternLabel();
     /**
      * @brief ShowTool highlight tool.
      * @param id tool id.
@@ -340,6 +388,11 @@ signals:
     void           UpdateInLayoutList();
     void           ShowDetail(quint32 id);
     void           SetCurrentPP(const QString &patterPiece);
+    void           MadeProgress();
+    /**
+     * @brief UpdateGroups emit if the groups have been updated
+     */
+    void            UpdateGroups();
 
 public slots:
     virtual void   LiteParseTree(const Document &parse)=0;
@@ -369,6 +422,11 @@ protected:
 
     /** @brief tools list with pointer on tools. */
     static QHash<quint32, VDataTool*> tools;
+    /** @brief patternLabelLines list to speed up reading a template by many pieces. */
+    static QVector<VLabelTemplateLine> patternLabelLines;
+    /** @brief patternMaterials list to speed up reading materials by many pieces. */
+    static QMap<int, QString> patternMaterials;
+    static bool patternLabelWasChanged;
 
     static void       ToolExists(const quint32 &id);
     static VPiecePath ParsePathNodes(const QDomElement &domElement);
@@ -383,29 +441,46 @@ protected:
 
     int  GetIndexActivPP() const;
     bool GetActivDrawElement(QDomElement &element) const;
+
+    QVector<VToolRecord> getLocalHistory(const QString &draw) const;
+
+   bool GroupHasItem(const QDomElement &groupDomElement, quint32 toolId, quint32 objectId);
 private:
     Q_DISABLE_COPY(VAbstractPattern)
 
     QStringList ListIncrements() const;
-    QStringList ListExpressions() const;
-    QStringList ListPointExpressions() const;
-    QStringList ListArcExpressions() const;
-    QStringList ListElArcExpressions() const;
-    QStringList ListSplineExpressions() const;
-    QStringList ListPathPointExpressions() const;
-    QStringList ListIncrementExpressions() const;
-    QStringList ListOperationExpressions() const;
-    QStringList ListNodesExpressions(const QDomElement &nodes) const;
-    QStringList ListPathExpressions() const;
-    QStringList ListGrainlineExpressions(const QDomElement &element) const;
-    QStringList ListPieceExpressions() const;
+    QVector<VFormulaField> ListPointExpressions() const;
+    QVector<VFormulaField> ListArcExpressions() const;
+    QVector<VFormulaField> ListElArcExpressions() const;
+    QVector<VFormulaField> ListSplineExpressions() const;
+    QVector<VFormulaField> ListPathPointExpressions() const;
+    QVector<VFormulaField> ListOperationExpressions() const;
+    QVector<VFormulaField> ListNodesExpressions(const QDomElement &nodes) const;
+    QVector<VFormulaField> ListPathExpressions() const;
+    QVector<VFormulaField> ListGrainlineExpressions(const QDomElement &element) const;
+    QVector<VFormulaField> ListPieceExpressions() const;
+    QVector<VFormulaField> ListFinalMeasurementsExpressions() const;
 
     bool IsVariable(const QString& token) const;
-    bool IsPostfixOperator(const QString& token) const;
     bool IsFunction(const QString& token) const;
 
     QPair<bool, QMap<quint32, quint32> > ParseItemElement(const QDomElement &domElement);
 
+    QMap<int, QString> GetMaterials(const QDomElement &element) const;
+    void               SetMaterials(QDomElement &element, const QMap<int, QString> &materials);
+
+    QVector<VFinalMeasurement> GetFMeasurements(const QDomElement &element) const;
+    void                       SetFMeasurements(QDomElement &element, const QVector<VFinalMeasurement> &measurements);
 };
+
+//---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief GetNameActivPP return current pattern piece name.
+ * @return pattern piece name.
+ */
+inline QString VAbstractPattern::GetNameActivPP() const
+{
+    return nameActivPP;
+}
 
 #endif // VABSTRACTPATTERN_H

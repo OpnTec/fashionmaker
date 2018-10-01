@@ -6,7 +6,7 @@
  **
  **  @brief
  **  @copyright
- **  This source code is part of the Valentine project, a pattern making
+ **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2013-2015 Valentina project
  **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
@@ -31,8 +31,6 @@
 
 #include <qcompilerdetection.h>
 #include <QDomElement>
-#include <QGraphicsItem>
-#include <QGraphicsLineItem>
 #include <QMetaObject>
 #include <QObject>
 #include <QString>
@@ -42,64 +40,77 @@
 #include "../ifc/xml/vabstractpattern.h"
 #include "../vmisc/def.h"
 #include "vdrawtool.h"
+#include "../vwidgets/scalesceneitems.h"
 
 template <class T> class QSharedPointer;
+
+struct VToolLineInitData : VAbstractToolInitData
+{
+    VToolLineInitData()
+        : VAbstractToolInitData(),
+          firstPoint(NULL_ID),
+          secondPoint(NULL_ID),
+          typeLine(TypeLineLine),
+          lineColor(ColorBlack)
+    {}
+
+    quint32 firstPoint;
+    quint32 secondPoint;
+    QString typeLine;
+    QString lineColor;
+};
 
 /**
  * @brief The VToolLine class tool for creation line.
  */
-class VToolLine: public VDrawTool, public QGraphicsLineItem
+class VToolLine: public VDrawTool, public VScaledLine
 {
     Q_OBJECT
 public:
-    virtual void     setDialog() Q_DECL_OVERRIDE;
-    static VToolLine *Create(QSharedPointer<DialogTool> dialog, VMainGraphicsScene  *scene, VAbstractPattern *doc,
+    virtual void     setDialog() override;
+    static VToolLine *Create(const QPointer<DialogTool> &dialog, VMainGraphicsScene  *scene, VAbstractPattern *doc,
                              VContainer *data);
-    static VToolLine *Create(const quint32 &_id, const quint32 &firstPoint, const quint32 &secondPoint,
-                             const QString &typeLine, const QString &lineColor, VMainGraphicsScene  *scene,
-                             VAbstractPattern *doc, VContainer *data, const Document &parse,
-                             const Source &typeCreation);
+    static VToolLine *Create(VToolLineInitData initData);
 
-    virtual int      type() const Q_DECL_OVERRIDE {return Type;}
+    virtual int      type() const override {return Type;}
     enum { Type = UserType + static_cast<int>(Tool::Line)};
-    virtual QString  getTagName() const Q_DECL_OVERRIDE;
+    virtual QString  getTagName() const override;
+
+    virtual void paint(QPainter *painter, const QStyleOptionGraphicsItem *option,
+                       QWidget *widget = nullptr) override;
 
     QString FirstPointName() const;
     QString SecondPointName() const;
 
-    quint32 GetFirstPoint() const;
-    void    SetFirstPoint(const quint32 &value);
-
-    quint32 GetSecondPoint() const;
-    void    SetSecondPoint(const quint32 &value);
-
     QString GetLineColor() const;
     void    SetLineColor(const QString &value);
 
-    virtual void     ShowVisualization(bool show) Q_DECL_OVERRIDE;
+    virtual void     ShowVisualization(bool show) override;
 
-    virtual void     SetTypeLine(const QString &value) Q_DECL_OVERRIDE;
-    virtual void     GroupVisibility(quint32 object, bool visible) Q_DECL_OVERRIDE;
+    virtual void     SetTypeLine(const QString &value) override;
+    virtual void     GroupVisibility(quint32 object, bool visible) override;
 public slots:
-    virtual void     FullUpdateFromFile() Q_DECL_OVERRIDE;
-    virtual void     ShowTool(quint32 id, bool enable) Q_DECL_OVERRIDE;
-    virtual void     SetFactor(qreal factor) Q_DECL_OVERRIDE;
-    virtual void     Disable(bool disable, const QString &namePP) Q_DECL_OVERRIDE;
-    virtual void     AllowHover(bool enabled) Q_DECL_OVERRIDE;
-    virtual void     AllowSelecting(bool enabled) Q_DECL_OVERRIDE;
+    virtual void     FullUpdateFromFile() override;
+    virtual void     ShowTool(quint32 id, bool enable) override;
+    virtual void     Disable(bool disable, const QString &namePP) override;
+    virtual void     AllowHover(bool enabled) override;
+    virtual void     AllowSelecting(bool enabled) override;
+protected slots:
+    virtual void ShowContextMenu(QGraphicsSceneContextMenuEvent *event, quint32 id=NULL_ID) override;
 protected:
-    virtual void     contextMenuEvent ( QGraphicsSceneContextMenuEvent * event ) Q_DECL_OVERRIDE;
-    virtual void     AddToFile() Q_DECL_OVERRIDE;
-    virtual void     RefreshDataInFile() Q_DECL_OVERRIDE;
-    virtual void     hoverEnterEvent ( QGraphicsSceneHoverEvent * event ) Q_DECL_OVERRIDE;
-    virtual void     hoverLeaveEvent ( QGraphicsSceneHoverEvent * event ) Q_DECL_OVERRIDE;
-    virtual void     RemoveReferens() Q_DECL_OVERRIDE;
-    virtual QVariant itemChange ( GraphicsItemChange change, const QVariant &value ) Q_DECL_OVERRIDE;
-    virtual void     keyReleaseEvent(QKeyEvent * event) Q_DECL_OVERRIDE;
-    virtual void     SaveDialog(QDomElement &domElement) Q_DECL_OVERRIDE;
-    virtual void     SaveOptions(QDomElement &tag, QSharedPointer<VGObject> &obj) Q_DECL_OVERRIDE;
-    virtual void     ReadToolAttributes(const QDomElement &domElement) Q_DECL_OVERRIDE;
-    virtual void     SetVisualization() Q_DECL_OVERRIDE;
+    virtual void     contextMenuEvent ( QGraphicsSceneContextMenuEvent * event ) override;
+    virtual void     AddToFile() override;
+    virtual void     hoverEnterEvent ( QGraphicsSceneHoverEvent * event ) override;
+    virtual void     hoverLeaveEvent ( QGraphicsSceneHoverEvent * event ) override;
+    virtual void     RemoveReferens() override;
+    virtual QVariant itemChange ( GraphicsItemChange change, const QVariant &value ) override;
+    virtual void     keyReleaseEvent(QKeyEvent * event) override;
+    virtual void     SaveDialog(QDomElement &domElement, QList<quint32> &oldDependencies,
+                                QList<quint32> &newDependencies) override;
+    virtual void     SaveOptions(QDomElement &tag, QSharedPointer<VGObject> &obj) override;
+    virtual void     ReadToolAttributes(const QDomElement &domElement) override;
+    virtual void     SetVisualization() override;
+    virtual QString  MakeToolTip() const override;
 private:
     Q_DISABLE_COPY(VToolLine)
 
@@ -112,11 +123,11 @@ private:
     /** @brief lineColor color of a line. */
     QString           lineColor;
 
-    VToolLine(VAbstractPattern *doc, VContainer *data, quint32 id, quint32 firstPoint, quint32 secondPoint,
-              const QString &typeLine, const QString &lineColor, const Source &typeCreation,
-              QGraphicsItem * parent = nullptr);
+    bool m_acceptHoverEvents;
 
-    void             RefreshGeometry();
+    VToolLine(const VToolLineInitData &initData, QGraphicsItem *parent = nullptr);
+
+    void RefreshGeometry();
 };
 
 #endif // VTOOLLINE_H

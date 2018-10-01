@@ -6,7 +6,7 @@
  **
  **  @brief
  **  @copyright
- **  This source code is part of the Valentine project, a pattern making
+ **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2013-2015 Valentina project
  **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
@@ -52,14 +52,10 @@ VisToolNormal::VisToolNormal(const VContainer *data, QGraphicsItem *parent)
 
     lineP1 = InitPoint(supportColor, this);
     lineP2 = InitPoint(supportColor, this); //-V656
-    line = InitItem<QGraphicsLineItem>(supportColor, this);
+    line = InitItem<VScaledLine>(supportColor, this);
 
     point = InitPoint(mainColor, this);
 }
-
-//---------------------------------------------------------------------------------------------------------------------
-VisToolNormal::~VisToolNormal()
-{}
 
 //---------------------------------------------------------------------------------------------------------------------
 void VisToolNormal::RefreshGeometry()
@@ -114,7 +110,7 @@ void VisToolNormal::setObject2Id(const quint32 &value)
 //---------------------------------------------------------------------------------------------------------------------
 void VisToolNormal::setLength(const QString &expression)
 {
-    length = FindLength(expression, Visualization::data->PlainVariables());
+    length = FindLengthFromUser(expression, Visualization::data->DataVariables());
 }
 
 //---------------------------------------------------------------------------------------------------------------------

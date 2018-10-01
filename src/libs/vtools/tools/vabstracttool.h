@@ -6,7 +6,7 @@
  **
  **  @brief
  **  @copyright
- **  This source code is part of the Valentine project, a pattern making
+ **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2013-2015 Valentina project
  **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
@@ -44,10 +44,39 @@
 #include "../vmisc/vabstractapplication.h"
 #include "../vmisc/def.h"
 #include "../vwidgets/vmaingraphicsscene.h"
+#include "../vmisc/diagnostic.h"
 #include "vdatatool.h"
 
 class VGraphicsSimpleTextItem;
 class VAbstractNode;
+
+QT_WARNING_PUSH
+QT_WARNING_DISABLE_GCC("-Weffc++")
+QT_WARNING_DISABLE_CLANG("-Wdeprecated")
+
+struct VAbstractToolInitData
+{
+    VAbstractToolInitData()
+        : id(NULL_ID),
+          scene(nullptr),
+          doc(nullptr),
+          data(nullptr),
+          parse(Document::FullParse),
+          typeCreation(Source::FromFile)
+    {}
+
+    virtual ~VAbstractToolInitData()=default;
+
+    /** @brief id tool id, 0 if tool doesn't exist yet.*/
+    quint32             id;
+    VMainGraphicsScene *scene;
+    VAbstractPattern   *doc;
+    VContainer         *data;
+    Document            parse;
+    Source              typeCreation;
+};
+
+QT_WARNING_POP
 
 /**
  * @brief The VAbstractTool abstract class for all tools.
@@ -57,21 +86,20 @@ class VAbstractTool: public VDataTool
     Q_OBJECT
 public:
     VAbstractTool(VAbstractPattern *doc, VContainer *data, quint32 id, QObject *parent = nullptr);
-    virtual ~VAbstractTool() Q_DECL_OVERRIDE;
+    virtual ~VAbstractTool() override;
     quint32                 getId() const;
 
+    static bool m_suppressContextMenu;
     static const QString AttrInUse;
 
     static qreal CheckFormula(const quint32 &toolId, QString &formula, VContainer *data);
 
-    static const QStringList    StylesList();
-    static Qt::PenStyle         LineStyleToPenStyle(const QString &typeLine);
-    static QString              PenStyleToLineStyle(Qt::PenStyle penStyle);
-    static QMap<QString, QIcon> LineStylesPics();
-
     static const QStringList      Colors();
     static QMap<QString, QString> ColorsList();
 
+    static VToolRecord GetRecord(const quint32 id, const Tool &toolType, VAbstractPattern *doc);
+    static void RemoveRecord(const VToolRecord &record, VAbstractPattern *doc);
+    static void AddRecord(const VToolRecord &record, VAbstractPattern *doc);
     static void AddRecord(const quint32 id, const Tool &toolType, VAbstractPattern *doc);
     static void AddNodes(VAbstractPattern *doc, QDomElement &domElement, const VPiecePath &path);
     static void AddNodes(VAbstractPattern *doc, QDomElement &domElement, const VPiece &piece);
@@ -81,9 +109,8 @@ public:
     QMap<QString, quint32>  PointsList() const;
     virtual QString         getTagName() const =0;
     virtual void            ShowVisualization(bool show) =0;
-
-    template<typename T>
-    static quint32 CreateNode(VContainer *data, quint32 id);
+    virtual void            ChangeLabelPosition(quint32 id, const QPointF &pos);
+    virtual void            SetLabelVisible(quint32 id, bool visible);
 public slots:
     /**
      * @brief FullUpdateFromFile update tool data form file.
@@ -114,10 +141,7 @@ protected:
     VAbstractPattern         *doc;
 
     /** @brief id object id. */
-    const quint32            id;
-
-    /** @brief baseColor base color for tool. */
-    Qt::GlobalColor         baseColor;
+    const quint32            m_id;
 
     QPointer<Visualization> vis;
     SelectionType           selectionType;
@@ -129,22 +153,25 @@ protected:
     /**
      * @brief RefreshDataInFile refresh attributes in file. If attributes don't exist create them.
      */
-    virtual void            RefreshDataInFile()=0;
+    virtual void            RefreshDataInFile();
     /**
      * @brief RemoveReferens decrement value of reference.
      */
     virtual void            RemoveReferens() {}
-    virtual void            DeleteTool(bool ask = true);
+    virtual void            DeleteToolWithConfirm(bool ask = true);
     static int              ConfirmDeletion();
+
+    template<typename T>
+    static quint32 CreateNode(VContainer *data, quint32 id);
+    static quint32 CreateNodeSpline(VContainer *data, quint32 id);
+    static quint32 CreateNodeSplinePath(VContainer *data, quint32 id);
+    static quint32 CreateNodePoint(VContainer *data, quint32 id, const QSharedPointer<VPointF> &point);
 
     template <typename T>
     void AddVisualization();
 
     virtual void SetVisualization()=0;
     virtual void ToolCreation(const Source &typeCreation);
-
-    static void RefreshLine(QGraphicsEllipseItem *point, VGraphicsSimpleTextItem *namePoint,
-                            QGraphicsLineItem *lineName, const qreal radius);
 
     static QDomElement AddSANode(VAbstractPattern *doc, const QString &tagName, const VPieceNode &node);
     static void        AddNode(VAbstractPattern *doc, QDomElement &domElement, const VPieceNode &node);
@@ -164,7 +191,7 @@ private:
  */
 inline quint32 VAbstractTool::getId() const
 {
-    return id;
+    return m_id;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -184,7 +211,6 @@ inline void VAbstractTool::AddVisualization()
     T *visual = new T(getData());
     VMainGraphicsScene *scene = qobject_cast<VMainGraphicsScene *>(qApp->getCurrentScene());
     SCASSERT(scene != nullptr)
-    connect(scene, &VMainGraphicsScene::NewFactor, visual, &Visualization::SetFactor);
     scene->addItem(visual);
 
     connect(visual, &Visualization::ToolTip, this, &VAbstractTool::ToolTip);
@@ -204,6 +230,7 @@ quint32 VAbstractTool::CreateNode(VContainer *data, quint32 id)
     //We can't use exist object. Need create new.
     T *node = new T(*data->GeometricObject<T>(id).data());
     node->setMode(Draw::Modeling);
+    node->setIdObject(id);
     return data->AddGObject(node);
 }
 

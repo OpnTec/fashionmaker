@@ -6,7 +6,7 @@
  **
  **  @brief
  **  @copyright
- **  This source code is part of the Valentine project, a pattern making
+ **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2015 Valentina project
  **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
@@ -37,18 +37,18 @@ class VLitePattern : public VAbstractPattern
 public:
     explicit VLitePattern(QObject *parent = nullptr);
 
-    virtual void    CreateEmptyFile() Q_DECL_OVERRIDE;
+    virtual void    CreateEmptyFile() override;
 
-    virtual void    IncrementReferens(quint32 id) const Q_DECL_OVERRIDE;
-    virtual void    DecrementReferens(quint32 id) const Q_DECL_OVERRIDE;
+    virtual void    IncrementReferens(quint32 id) const override;
+    virtual void    DecrementReferens(quint32 id) const override;
 
-    virtual QString GenerateLabel(const LabelType &type, const QString &reservedName = QString())const Q_DECL_OVERRIDE;
-    virtual QString GenerateSuffix() const Q_DECL_OVERRIDE;
+    virtual QString GenerateLabel(const LabelType &type, const QString &reservedName = QString())const override;
+    virtual QString GenerateSuffix() const override;
 
-    virtual void    UpdateToolData(const quint32 &id, VContainer *data) Q_DECL_OVERRIDE;
+    virtual void    UpdateToolData(const quint32 &id, VContainer *data) override;
 
 public slots:
-    virtual void    LiteParseTree(const Document &parse) Q_DECL_OVERRIDE;
+    virtual void    LiteParseTree(const Document &parse) override;
 
 private:
     Q_DISABLE_COPY(VLitePattern)

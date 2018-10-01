@@ -6,7 +6,7 @@
  **
  **  @brief
  **  @copyright
- **  This source code is part of the Valentine project, a pattern making
+ **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2013-2015 Valentina project
  **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
@@ -44,26 +44,26 @@ class VisToolShoulderPoint : public VisLine
     Q_OBJECT
 public:
     explicit VisToolShoulderPoint(const VContainer *data, QGraphicsItem *parent = nullptr);
-    virtual ~VisToolShoulderPoint() Q_DECL_EQ_DEFAULT;
+    virtual ~VisToolShoulderPoint() = default;
 
-    virtual void RefreshGeometry() Q_DECL_OVERRIDE;
+    virtual void RefreshGeometry() override;
     void         setLineP1Id(const quint32 &value);
     void         setLineP2Id(const quint32 &value);
     void         setLength(const QString &expression);
-    virtual int  type() const Q_DECL_OVERRIDE {return Type;}
+    virtual int  type() const override {return Type;}
     enum { Type = UserType + static_cast<int>(Vis::ToolShoulderPoint)};
 private:
     Q_DISABLE_COPY(VisToolShoulderPoint)
-    quint32              lineP1Id;
-    quint32              lineP2Id;
-    QGraphicsEllipseItem *point;
-    QGraphicsEllipseItem *line1P1;
-    QGraphicsEllipseItem *line1P2;
-    QGraphicsLineItem    *line1;
-    QGraphicsEllipseItem *line2P2;
-    QGraphicsLineItem    *line2;
-    QGraphicsLineItem    *line3;
-    qreal                length;
+    quint32         lineP1Id;
+    quint32         lineP2Id;
+    VScaledEllipse *point;
+    VScaledEllipse *line1P1;
+    VScaledEllipse *line1P2;
+    VScaledLine    *line1;
+    VScaledEllipse *line2P2;
+    VScaledLine    *line2;
+    VScaledLine    *line3;
+    qreal           length;
 };
 
 #endif // VISTOOLSHOULDERPOINT_H

@@ -6,7 +6,7 @@
  **
  **  @brief
  **  @copyright
- **  This source code is part of the Valentine project, a pattern making
+ **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2013-2015 Valentina project
  **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
@@ -36,6 +36,7 @@
 #include <QtGlobal>
 
 #include "vgeometrydef.h"
+#include "../vmisc/def.h"
 
 class QLineF;
 class QPoint;
@@ -61,7 +62,7 @@ public:
     VGObject &operator=(VGObject &&obj) Q_DECL_NOTHROW { Swap(obj); return *this; }
 #endif
 
-    void Swap(VGObject &obj) Q_DECL_NOTHROW
+    inline void Swap(VGObject &obj) Q_DECL_NOTHROW
     { std::swap(d, obj.d); }
 
     quint32         getIdObject() const;
@@ -101,8 +102,6 @@ public:
     template <typename T>
     static QVector<T> GetReversePoints(const QVector<T> &points);
     static int GetLengthContour(const QVector<QPointF> &contour, const QVector<QPointF> &newPoints);
-
-    static const double accuracyPointOnLine;
 protected:
     static QTransform FlippingMatrix(const QLineF &axis);
 private:

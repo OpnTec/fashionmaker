@@ -6,7 +6,7 @@
  **
  **  @brief
  **  @copyright
- **  This source code is part of the Valentine project, a pattern making
+ **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2015 Valentina project
  **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
@@ -46,6 +46,11 @@ extern const QString SINGLE_OPTION_PAGETEMPLATE;
 extern const QString LONG_OPTION_EXP2FORMAT;
 extern const QString SINGLE_OPTION_EXP2FORMAT;
 
+extern const QString LONG_OPTION_BINARYDXF;
+extern const QString LONG_OPTION_TEXT2PATHS;
+extern const QString LONG_OPTION_EXPORTONLYDETAILS;
+extern const QString LONG_OPTION_EXPORTSUCHDETAILS;
+
 extern const QString LONG_OPTION_ROTATE;
 extern const QString SINGLE_OPTION_ROTATE;
 
@@ -82,11 +87,15 @@ extern const QString SINGLE_OPTION_GROUPPING;
 extern const QString LONG_OPTION_TEST;
 extern const QString SINGLE_OPTION_TEST;
 
+extern const QString LONG_OPTION_PENDANTIC;
+
 extern const QString LONG_OPTION_GRADATIONSIZE;
 extern const QString SINGLE_OPTION_GRADATIONSIZE;
 
 extern const QString LONG_OPTION_GRADATIONHEIGHT;
 extern const QString SINGLE_OPTION_GRADATIONHEIGHT;
+
+extern const QString LONG_OPTION_USER_MATERIAL;
 
 extern const QString LONG_OPTION_IGNORE_MARGINS;
 extern const QString SINGLE_OPTION_IGNORE_MARGINS;
@@ -102,6 +111,18 @@ extern const QString SINGLE_OPTION_TOP_MARGIN;
 
 extern const QString LONG_OPTION_BOTTOM_MARGIN;
 extern const QString SINGLE_OPTION_BOTTOM_MARGIN;
+
+extern const QString LONG_OPTION_CSVWITHHEADER;
+extern const QString LONG_OPTION_CSVCODEC;
+extern const QString LONG_OPTION_CSVSEPARATOR;
+extern const QString LONG_OPTION_CSVEXPORTFM;
+
+extern const QString LONG_OPTION_TILED_PDF_PAGE_TEMPLATE;
+extern const QString LONG_OPTION_TILED_PDF_LEFT_MARGIN;
+extern const QString LONG_OPTION_TILED_PDF_RIGHT_MARGIN;
+extern const QString LONG_OPTION_TILED_PDF_TOP_MARGIN;
+extern const QString LONG_OPTION_TILED_PDF_BOTTOM_MARGIN;
+extern const QString LONG_OPTION_TILED_PDF_LANDSCAPE;
 
 QStringList AllKeys();
 

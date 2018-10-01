@@ -6,7 +6,7 @@
  **
  **  @brief
  **  @copyright
- **  This source code is part of the Valentine project, a pattern making
+ **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2015 Valentina project
  **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
@@ -49,6 +49,11 @@ const QString SINGLE_OPTION_PAGETEMPLATE    = QStringLiteral("p");
 const QString LONG_OPTION_EXP2FORMAT        = QStringLiteral("format");
 const QString SINGLE_OPTION_EXP2FORMAT      = QStringLiteral("f");
 
+const QString LONG_OPTION_BINARYDXF         = QStringLiteral("bdxf");
+const QString LONG_OPTION_TEXT2PATHS        = QStringLiteral("text2paths");
+const QString LONG_OPTION_EXPORTONLYDETAILS = QStringLiteral("exportOnlyDetails");
+const QString LONG_OPTION_EXPORTSUCHDETAILS = QStringLiteral("exportSuchDetails");
+
 const QString LONG_OPTION_ROTATE            = QStringLiteral("rotate");
 const QString SINGLE_OPTION_ROTATE          = QStringLiteral("r");
 
@@ -85,11 +90,15 @@ const QString SINGLE_OPTION_GROUPPING       = QStringLiteral("g");
 const QString LONG_OPTION_TEST              = QStringLiteral("test");
 const QString SINGLE_OPTION_TEST            = QStringLiteral("t");
 
+const QString LONG_OPTION_PENDANTIC         = QStringLiteral("pedantic");
+
 const QString LONG_OPTION_GRADATIONSIZE     = QStringLiteral("gsize");
 const QString SINGLE_OPTION_GRADATIONSIZE   = QStringLiteral("x");
 
 const QString LONG_OPTION_GRADATIONHEIGHT   = QStringLiteral("gheight");
 const QString SINGLE_OPTION_GRADATIONHEIGHT = QStringLiteral("e");
+
+const QString LONG_OPTION_USER_MATERIAL     = QStringLiteral("userMaterial");
 
 const QString LONG_OPTION_IGNORE_MARGINS    = QStringLiteral("ignoremargins");
 const QString SINGLE_OPTION_IGNORE_MARGINS  = QStringLiteral("i");
@@ -106,7 +115,23 @@ const QString SINGLE_OPTION_TOP_MARGIN      = QStringLiteral("T");
 const QString LONG_OPTION_BOTTOM_MARGIN     = QStringLiteral("bmargin");
 const QString SINGLE_OPTION_BOTTOM_MARGIN   = QStringLiteral("B");
 
+const QString LONG_OPTION_CSVWITHHEADER = QStringLiteral("csvWithHeader");
+const QString LONG_OPTION_CSVCODEC      = QStringLiteral("csvCodec");
+const QString LONG_OPTION_CSVSEPARATOR  = QStringLiteral("csvSeparator");
+const QString LONG_OPTION_CSVEXPORTFM   = QStringLiteral("csvExportFM");
+
+const QString LONG_OPTION_TILED_PDF_PAGE_TEMPLATE = QStringLiteral("tiledPageformat");
+const QString LONG_OPTION_TILED_PDF_LEFT_MARGIN   = QStringLiteral("tiledlmargin");
+const QString LONG_OPTION_TILED_PDF_RIGHT_MARGIN  = QStringLiteral("tiledrmargin");
+const QString LONG_OPTION_TILED_PDF_TOP_MARGIN    = QStringLiteral("tiledtmargin");
+const QString LONG_OPTION_TILED_PDF_BOTTOM_MARGIN = QStringLiteral("tiledbmargin");
+const QString LONG_OPTION_TILED_PDF_LANDSCAPE     = QStringLiteral("tiledLandscape");
+
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief AllKeys return list with all command line keys (short and long forms). Used for testing on conflicts.
+ * @return list with all command line keys
+ */
 QStringList AllKeys()
 {
     QStringList list;
@@ -115,6 +140,10 @@ QStringList AllKeys()
          << LONG_OPTION_MEASUREFILE << SINGLE_OPTION_MEASUREFILE
          << LONG_OPTION_PAGETEMPLATE << SINGLE_OPTION_PAGETEMPLATE
          << LONG_OPTION_EXP2FORMAT << SINGLE_OPTION_EXP2FORMAT
+         << LONG_OPTION_BINARYDXF
+         << LONG_OPTION_TEXT2PATHS
+         << LONG_OPTION_EXPORTONLYDETAILS
+         << LONG_OPTION_EXPORTSUCHDETAILS
          << LONG_OPTION_ROTATE << SINGLE_OPTION_ROTATE
          << LONG_OPTION_CROP << SINGLE_OPTION_CROP
          << LONG_OPTION_UNITE << SINGLE_OPTION_UNITE
@@ -127,14 +156,26 @@ QStringList AllKeys()
          << LONG_OPTION_GAPWIDTH << SINGLE_OPTION_GAPWIDTH
          << LONG_OPTION_GROUPPING << SINGLE_OPTION_GROUPPING
          << LONG_OPTION_TEST << SINGLE_OPTION_TEST
+         << LONG_OPTION_PENDANTIC
          << LONG_OPTION_GRADATIONSIZE << SINGLE_OPTION_GRADATIONSIZE
          << LONG_OPTION_GRADATIONHEIGHT << SINGLE_OPTION_GRADATIONHEIGHT
+         << LONG_OPTION_USER_MATERIAL
          << LONG_OPTION_IGNORE_MARGINS << SINGLE_OPTION_IGNORE_MARGINS
          << LONG_OPTION_LEFT_MARGIN << SINGLE_OPTION_LEFT_MARGIN
          << LONG_OPTION_RIGHT_MARGIN << SINGLE_OPTION_RIGHT_MARGIN
          << LONG_OPTION_TOP_MARGIN << SINGLE_OPTION_TOP_MARGIN
          << LONG_OPTION_BOTTOM_MARGIN << SINGLE_OPTION_BOTTOM_MARGIN
-         << LONG_OPTION_NO_HDPI_SCALING;
+         << LONG_OPTION_NO_HDPI_SCALING
+         << LONG_OPTION_CSVWITHHEADER
+         << LONG_OPTION_CSVCODEC
+         << LONG_OPTION_CSVSEPARATOR
+         << LONG_OPTION_CSVEXPORTFM
+         << LONG_OPTION_TILED_PDF_PAGE_TEMPLATE
+         << LONG_OPTION_TILED_PDF_LEFT_MARGIN
+         << LONG_OPTION_TILED_PDF_RIGHT_MARGIN
+         << LONG_OPTION_TILED_PDF_TOP_MARGIN
+         << LONG_OPTION_TILED_PDF_BOTTOM_MARGIN
+         << LONG_OPTION_TILED_PDF_LANDSCAPE;
 
     return list;
 }

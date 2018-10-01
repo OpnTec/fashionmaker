@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<pattern>
+    <!--Pattern created with Valentina v0.6.0.0b (https://valentinaproject.bitbucket.io/).-->
+    <version>0.7.10</version>
+    <unit>cm</unit>
+    <description/>
+    <notes/>
+    <measurements>Issue_#883_case1.vit</measurements>
+    <increments>
+        <increment description="Прибавка к талии" formula="1" name="#Пт"/>
+        <increment description="Прибавка к бедрам" formula="0.5" name="#Пб"/>
+    </increments>
+    <previewCalculations>
+        <increment description="Длина от низа юбки до пола." formula="@Дсб-@Дю" name="#Д_нп"/>
+        <increment description="Длина юбки спереди." formula="@Дсп-#Д_нп" name="#Дюп"/>
+        <increment description="Длина юбки сзади" formula="@Дсз-#Д_нп" name="#Дюз"/>
+        <increment description="Сумма всех вытачек юбки." formula="((hip_circ+#Пб)-(waist_circ+#Пт))/2" name="#СУМ_в"/>
+        <increment description="Раствор боковой вытачки" formula="1/2*#СУМ_в" name="#БВ"/>
+        <increment description="Раствор передней вытачки" formula="1/6*#СУМ_в" name="#ПВ"/>
+        <increment description="Раствор задней вытачки" formula="1/3*#СУМ_в" name="#ЗВ"/>
+    </previewCalculations>
+    <draw name="Прямая юбка">
+        <calculation>
+            <point id="1" mx="1.2745" my="-1.21331" name="Н" showLabel="true" type="single" x="7.3336" y="2.43036"/>
+            <point angle="90" basePoint="1" id="2" length="#Дюз" lineColor="black" mx="0.858873" my="-0.916111" name="Т" showLabel="true" type="endLine" typeLine="hair"/>
+            <point firstPoint="2" id="3" length="@Д_тб" lineColor="black" mx="-1.65003" my="-0.718767" name="Б" secondPoint="1" showLabel="true" type="alongLine" typeLine="none"/>
+            <point angle="180" firstPoint="3" id="4" length="(hip_circ+#Пб)/2" lineColor="black" mx="-1.84854" my="0.42139" name="Б1" secondPoint="2" showLabel="true" type="normal" typeLine="hair"/>
+            <point firstPoint="4" id="5" mx="-1.80362" my="0.432425" name="Н1" secondPoint="1" showLabel="true" type="pointOfIntersection"/>
+            <line firstPoint="1" id="6" lineColor="black" secondPoint="5" typeLine="hair"/>
+            <line firstPoint="4" id="7" lineColor="black" secondPoint="5" typeLine="hair"/>
+            <point firstPoint="3" id="8" length="Line_Б_Б1/2-0.5" lineColor="black" mx="0.707425" my="0.648005" name="Б2" secondPoint="4" showLabel="true" type="alongLine" typeLine="none"/>
+            <point basePoint="8" id="9" lineColor="black" mx="-0.762359" my="1.35095" name="Н2" p1Line="1" p2Line="5" showLabel="true" type="height" typeLine="hair"/>
+            <point firstPoint="9" id="10" length="@Дю" lineColor="black" mx="-0.570648" my="-2.22766" name="Т2" secondPoint="8" showLabel="true" type="alongLine" typeLine="hair"/>
+            <point firstPoint="5" id="11" length="#Дюп" lineColor="black" mx="0.899136" my="-0.949587" name="Т1" secondPoint="4" showLabel="true" type="alongLine" typeLine="hair"/>
+            <arc aScale="0" angle1="70" angle2="90" center="8" color="lime" id="12" penStyle="hair" radius="Line_Т2_Б2" type="simple"/>
+            <arc aScale="0" angle1="-30" angle2="30" center="10" color="deepskyblue" id="13" penStyle="hair" radius="#БВ/2" type="simple"/>
+            <point crossPoint="1" firstArc="12" id="14" mx="1.14054" my="-1.99197" name="Т3" secondArc="13" showLabel="true" type="pointOfIntersectionArcs"/>
+            <line firstPoint="14" id="15" lineColor="deeppink" secondPoint="8" typeLine="dashDotDotLine"/>
+            <point firstPoint="14" id="16" length="8" lineColor="black" mx="0.132292" my="0.264583" name="А1" secondPoint="8" showLabel="false" type="alongLine" typeLine="none"/>
+            <point angle="0" firstPoint="16" id="17" length="0.5" lineColor="deeppink" mx="-1.50011" my="-0.119511" name="А2" secondPoint="14" showLabel="true" type="normal" typeLine="dashDotDotLine"/>
+            <spline aScale="0" angle1="254.986" angle2="81.2596" color="black" id="18" length1="3.1425" length2="3.22366" penStyle="hair" point1="14" point4="17" type="simpleInteractive"/>
+            <spline aScale="0" angle1="259.668" angle2="89.4629" color="black" id="19" length1="4.60522" length2="3.98249" penStyle="hair" point1="17" point4="8" type="simpleInteractive"/>
+            <line firstPoint="14" id="20" lineColor="deeppink" secondPoint="11" typeLine="dashDotDotLine"/>
+            <arc aScale="0" angle1="90" angle2="115" center="8" color="deepskyblue" id="21" penStyle="hair" radius="Line_Т2_Б2" type="simple"/>
+            <point arc="21" id="22" length="#БВ/2" mx="-1.01999" my="-2.37606" name="Т4" showLabel="true" type="cutArc"/>
+            <line firstPoint="22" id="25" lineColor="deeppink" secondPoint="8" typeLine="dashDotDotLine"/>
+            <point firstPoint="22" id="26" length="8" lineColor="black" mx="-1.26005" my="0.360607" name="А3" secondPoint="8" showLabel="false" type="alongLine" typeLine="none"/>
+            <point angle="180" firstPoint="26" id="27" length="0.5" lineColor="black" mx="-0.251802" my="-2.23203" name="А4" secondPoint="22" showLabel="true" type="normal" typeLine="hair"/>
+            <spline aScale="0" color="black" id="28" penStyle="hair" type="pathInteractive">
+                <pathPoint angle1="106.618" angle2="286.618" length1="0" length2="4.4207" pSpline="22"/>
+                <pathPoint angle1="101.586" angle2="281.586" length1="1.67929" length2="3.25274" pSpline="27"/>
+                <pathPoint angle1="94.979" angle2="274.979" length1="2.88894" length2="1.80735" pSpline="8"/>
+            </spline>
+            <line firstPoint="22" id="29" lineColor="deeppink" secondPoint="2" typeLine="dotLine"/>
+            <point firstPoint="3" id="30" length="CurrentLength/2" lineColor="black" mx="-0.779932" my="0.792712" name="Б3" secondPoint="8" showLabel="true" type="alongLine" typeLine="none"/>
+            <point angle="90" basePoint="30" id="31" length="2" lineColor="black" mx="-1.88419" my="-0.695653" name="А5" showLabel="true" type="endLine" typeLine="hair"/>
+            <point id="32" mx="-0.73192" my="-2.23203" name="Т5" p1Line1="2" p1Line2="30" p2Line1="22" p2Line2="31" showLabel="true" type="lineIntersect"/>
+            <line firstPoint="31" id="33" lineColor="black" secondPoint="32" typeLine="dotLine"/>
+            <arc aScale="0" angle1="90" angle2="115" center="31" color="deepskyblue" id="34" penStyle="hair" radius="Line_А5_Т5" type="simple"/>
+            <arc aScale="0" angle1="130" angle2="200" center="32" color="deepskyblue" id="35" penStyle="hair" radius="#ЗВ/2" type="simple"/>
+            <point crossPoint="1" firstArc="34" id="36" mx="-1.94389" my="-1.61068" name="Т6" secondArc="35" showLabel="true" type="pointOfIntersectionArcs"/>
+            <spline aScale="0" angle1="271.659" angle2="100.774" color="black" id="37" length1="6.85181" length2="6.12695" penStyle="hair" point1="36" point4="31" type="simpleInteractive"/>
+            <operation id="38" p1Line="31" p2Line="32" suffix="а1" type="flippingByLine">
+                <source>
+                    <item idObject="36"/>
+                    <item idObject="37"/>
+                </source>
+                <destination>
+                    <item idObject="39" mx="-0.537444" my="-2.28041" showLabel="true"/>
+                    <item idObject="40"/>
+                </destination>
+            </operation>
+            <line firstPoint="2" id="41" lineColor="black" secondPoint="36" typeLine="hair"/>
+            <line firstPoint="39" id="42" lineColor="black" secondPoint="22" typeLine="hair"/>
+            <point firstPoint="8" id="43" length="CurrentLength/2-2" lineColor="black" mx="0.132292" my="0.264583" name="Б4" secondPoint="4" showLabel="true" type="alongLine" typeLine="none"/>
+            <point angle="0" basePoint="4" id="66" length="0.5" lineColor="black" mx="0.132292" my="0.264583" name="А6" showLabel="true" type="endLine" typeLine="none"/>
+            <point angle="0" basePoint="5" id="67" length="0.5" lineColor="black" mx="0.333213" my="-1.61068" name="А7" showLabel="true" type="endLine" typeLine="none"/>
+        </calculation>
+        <modeling>
+            <point id="44" idObject="1" inUse="false" mx="1.2745" my="-1.21331" showLabel="true" type="modeling"/>
+            <point id="45" idObject="3" inUse="false" mx="-1.65003" my="-0.718767" showLabel="true" type="modeling"/>
+            <point id="46" idObject="2" inUse="false" mx="0.858873" my="-0.916111" showLabel="true" type="modeling"/>
+            <point id="47" idObject="36" inUse="false" mx="-1.94389" my="-1.61068" showLabel="true" type="modeling"/>
+            <spline id="48" idObject="37" inUse="false" type="modelingSpline"/>
+            <point id="49" idObject="31" inUse="false" mx="-1.88419" my="-0.695653" showLabel="true" type="modeling"/>
+            <spline id="50" idObject="40" inUse="false" type="modelingSpline"/>
+            <point id="51" idObject="39" inUse="false" mx="-0.537444" my="-2.28041" showLabel="true" type="modeling"/>
+            <point id="52" idObject="22" inUse="false" mx="-1.01999" my="-2.37606" showLabel="true" type="modeling"/>
+            <spline id="53" idObject="28" inUse="false" type="modelingPath"/>
+            <point id="54" idObject="8" inUse="false" mx="0.707425" my="0.648005" showLabel="true" type="modeling"/>
+            <point id="55" idObject="9" inUse="false" mx="-0.762359" my="1.35095" showLabel="true" type="modeling"/>
+            <point id="57" idObject="9" inUse="false" mx="-0.762359" my="1.35095" showLabel="true" type="modeling"/>
+            <point id="58" idObject="8" inUse="false" mx="0.707425" my="0.648005" showLabel="true" type="modeling"/>
+            <spline id="59" idObject="19" inUse="false" type="modelingSpline"/>
+            <spline id="60" idObject="18" inUse="false" type="modelingSpline"/>
+            <point id="61" idObject="14" inUse="false" mx="1.14054" my="-1.99197" showLabel="true" type="modeling"/>
+            <point id="62" idObject="11" inUse="false" mx="-2.31842" my="-2.66805" showLabel="true" type="modeling"/>
+            <point id="63" idObject="4" inUse="false" mx="-2.04319" my="-0.914063" showLabel="true" type="modeling"/>
+            <point id="64" idObject="5" inUse="false" mx="0.942292" my="0.834266" showLabel="true" type="modeling"/>
+            <point id="68" idObject="9" inUse="true" mx="-0.762359" my="1.35095" showLabel="true" type="modeling"/>
+            <point id="69" idObject="8" inUse="true" mx="0.707425" my="0.648005" showLabel="true" type="modeling"/>
+            <spline id="70" idObject="19" inUse="true" type="modelingSpline"/>
+            <spline id="71" idObject="18" inUse="true" type="modelingSpline"/>
+            <point id="72" idObject="14" inUse="true" mx="1.14054" my="-1.99197" showLabel="true" type="modeling"/>
+            <point id="73" idObject="11" inUse="true" mx="0.899136" my="-0.949587" showLabel="true" type="modeling"/>
+            <point id="74" idObject="4" inUse="true" mx="-1.84854" my="0.42139" showLabel="true" type="modeling"/>
+            <point id="75" idObject="5" inUse="true" mx="-1.80362" my="0.432425" showLabel="true" type="modeling"/>
+        </modeling>
+        <details>
+            <detail forbidFlipping="true" forceFlipping="false" hideMainPath="false" id="65" inLayout="true" mx="5.94634" my="-0.668129" name="ledge" seamAllowance="true" united="false" version="2" width="1">
+                <data annotation="" foldPosition="" fontSize="0" height="1" letter="" mx="0" my="0" onFold="false" orientation="" quantity="1" rotation="0" rotationWay="" tilt="" visible="false" width="1"/>
+                <patternInfo fontSize="0" height="1" mx="0" my="0" rotation="0" visible="false" width="1"/>
+                <grainline arrows="0" length="1" mx="0" my="0" rotation="90" visible="false"/>
+                <nodes>
+                    <node angle="2" idObject="57" type="NodePoint"/>
+                    <node idObject="58" type="NodePoint"/>
+                    <node idObject="59" reverse="1" type="NodeSpline"/>
+                    <node idObject="60" reverse="1" type="NodeSpline"/>
+                    <node idObject="61" type="NodePoint"/>
+                    <node idObject="62" type="NodePoint"/>
+                    <node after="CurrentSeamAllowance+0.5" idObject="63" passmark="true" passmarkAngle="straightforward" passmarkLine="one" showSecondPassmark="false" type="NodePoint"/>
+                    <node before="CurrentSeamAllowance+0.5" idObject="64" type="NodePoint"/>
+                </nodes>
+            </detail>
+            <detail forbidFlipping="true" forceFlipping="false" hideMainPath="false" id="76" inLayout="true" mx="-24.0748" my="-1.45402" name="prong" seamAllowance="true" united="false" version="2" width="1">
+                <data annotation="" foldPosition="" fontSize="0" height="1" letter="" mx="0" my="0" onFold="false" orientation="" quantity="1" rotation="0" rotationWay="" tilt="" visible="false" width="1"/>
+                <patternInfo fontSize="0" height="1" mx="0" my="0" rotation="0" visible="false" width="1"/>
+                <grainline arrows="0" length="1" mx="0" my="0" rotation="90" visible="false"/>
+                <nodes>
+                    <node angle="2" idObject="68" type="NodePoint"/>
+                    <node idObject="69" type="NodePoint"/>
+                    <node idObject="70" reverse="1" type="NodeSpline"/>
+                    <node idObject="71" reverse="1" type="NodeSpline"/>
+                    <node idObject="72" type="NodePoint"/>
+                    <node idObject="73" type="NodePoint"/>
+                    <node after="CurrentSeamAllowance+0.5" idObject="74" passmark="true" passmarkAngle="straightforward" passmarkLine="one" showSecondPassmark="false" type="NodePoint"/>
+                    <node idObject="75" type="NodePoint"/>
+                </nodes>
+            </detail>
+        </details>
+        <groups/>
+    </draw>
+</pattern>

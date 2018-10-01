@@ -6,7 +6,7 @@
  **
  **  @brief
  **  @copyright
- **  This source code is part of the Valentine project, a pattern making
+ **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2016 Valentina project
  **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
@@ -36,17 +36,25 @@
 
 QT_WARNING_PUSH
 QT_WARNING_DISABLE_GCC("-Weffc++")
+QT_WARNING_DISABLE_GCC("-Wnon-virtual-dtor")
 
 class VAbstractCurveData : public QSharedData
 {
 public:
 
     VAbstractCurveData ()
-        : duplicate(0), color(ColorBlack)
+        : duplicate(0),
+          color(ColorBlack),
+          penStyle(TypeLineLine),
+          approximationScale(defCurveApproximationScale)
     {}
 
     VAbstractCurveData(const VAbstractCurveData &curve)
-        : QSharedData(curve), duplicate(curve.duplicate), color(curve.color)
+        : QSharedData(curve),
+          duplicate(curve.duplicate),
+          color(curve.color),
+          penStyle(curve.penStyle),
+          approximationScale(curve.approximationScale)
     {}
 
     virtual ~VAbstractCurveData();
@@ -55,6 +63,9 @@ public:
     quint32 duplicate;
 
     QString color;
+    QString penStyle;
+
+    qreal approximationScale;
 
 private:
     VAbstractCurveData &operator=(const VAbstractCurveData &) Q_DECL_EQ_DELETE;

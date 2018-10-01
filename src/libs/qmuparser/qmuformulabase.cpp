@@ -54,33 +54,42 @@ QmuFormulaBase::~QmuFormulaBase()
  */
 void QmuFormulaBase::InitCharSets()
 {
+    QString symbolsStr;
+    {
     //String with all unique symbols for supported alphabets.
     //See script alphabets.py for generation and more information.
     //Note. MSVC doesn't support normal string concatenation for long string. That's why we use QStringList in this
     //case.
-    const QStringList symbols = QStringList()
-                              << "ցЀĆЈVӧĎАғΕĖӅИқΝĞơРңњΥҔĦШҫ̆جگĮаҳѕεشԶиһνԾрÃυلՆӝшËՎїPÓՖXӛӟŞãզhëծpóӞնxßվāŁЃֆĉЋ"
-                              << "CŬđҐГΒęҘЛΚŘġҠУGاհЫدԱҰгβطԹõлκKՁÀуςهՉÈыvیՑÐSOřӘћաőcӐթèkàѓżűðsķչøӥӔĀփӣІĈЎ"
-                              << "ґĐΗЖҙĘȚΟОҡĠآΧЦتЮұİزηжԸغẽοоÁՀقχцÉՈيюÑՐђӋіәťӆўáŠĺѐfөըnñŰӤӨӹոľЁրăЉŭċБӸēłΔҖ"
-                              << "ЙŤěΜӜDСձģΤӰЩīņحҮбưԳصδHйԻŇμӲӴсՃمτƠщՋєLQŹՓŕÖYśÞaգĽæiŽիӓîqճöyջþĂօЄӦĊЌΑĒДҗј"
-                              << "ΙȘĚМΡéĵĢФūӚΩبĪЬүќαذԲдҷιظԺмρՂфÇωوՊьÏՒTŚĻJբdçժlïӪղtպӫAւąЇčŃЏĕӯЗΖEțŮĝПΞأĥ"
-                              << "ĹЧΦثÆӳЯIسŲԵзζԽпξكՅÄчφNMՍӌяӢՕÔWÎŝÜџёźեägխoӒյôwĶBžսüЂĄև̈ЊČƏљΓВҕĔӮΛКĜΣТҥĤک"
-                              << "ЪƯخγвŅԴŪضλкԼĴσтÅՄنъÍՌRӕՔZÝŜbåդﻩjíլļrӵմzýռپêЅքćچЍďӱҒЕůėژșΘØҚНğńءΠFҢХħΨҪ"
-                              << "ЭųįҶرҲеԷňعθҺнԿفπÂхՇψÊэšՏÒUəÚѝŻşҤӑâeէŐımկòuշÕúտŔ";
+    const QStringList symbols
+    {
+        QStringLiteral("ցЀĆЈVӧĎАғΕĖӅИқΝĞơРңњΥҔĦШҫ̆جگĮаҳѕεشԶиһνԾрÃυلՆӝшËՎїPÓՖXӛӟŞãզhëծpóӞնxßվāŁЃֆĉЋCŬđҐГΒęҘЛΚŘġҠУGاհ"),
+        QStringLiteral("ЫدԱҰгβطԹõлκKՁÀуςهՉÈыvیՑÐSOřӘћաőcӐթèkàѓżűðsķչøӥӔĀփӣІĈЎґĐΗЖҙĘȚΟОҡĠآΧЦتЮұİزηжԸغẽοоÁՀقχцÉՈيюÑՐђӋі"),
+        QStringLiteral("әťӆўáŠĺѐfөըnñŰӤӨӹոľЁրăЉŭċБӸēłΔҖЙŤěΜӜDСձģΤӰЩīņحҮбưԳصδHйԻŇμӲӴсՃمτƠщՋєLQŹՓŕÖYśÞaգĽæiŽիӓîqճöyջþĂ"),
+        QStringLiteral("օЄӦĊЌΑĒДҗјΙȘĚМΡéĵĢФūӚΩبĪЬүќαذԲдҷιظԺмρՂфÇωوՊьÏՒTŚĻJբdçժlïӪղtպӫAւąЇčŃЏĕӯЗΖEțŮĝПΞأĥĹЧΦثÆӳЯI"),
+        QStringLiteral("سŲԵзζԽпξكՅÄчφNMՍӌяӢՕÔWÎŝÜџёźեägխoӒյôwĶBžսüЂĄև̈ЊČƏљΓВҕĔӮΛКĜΣТҥĤکЪƯخγвŅԴŪضλкԼĴσтÅՄنъÍՌRӕՔZÝŜ"),
+        QStringLiteral("båդﻩjíլļrӵմzýռپêЅքćچЍďӱҒЕůėژșΘØҚНğńءΠFҢХħΨҪЭųįҶرҲеԷňعθҺнԿفπÂхՇψÊэšՏÒUəÚѝŻşҤӑâeէŐımկòuշÕúտŔ")
+    };
+
+    symbolsStr = symbols.join(QString());
+    }
 
     INIT_LOCALE_VARIABLES(m_locale);
     Q_UNUSED(expUpper)
     Q_UNUSED(expLower)
+    Q_UNUSED(decimalPoint)
+    Q_UNUSED(groupSeparator)
 
     // Defining identifier character sets
     const QString nameChars = QString() + sign0 + sign1 + sign2 + sign3 + sign4 + sign5 + sign6 + sign7 + sign8 +
-            sign9 + QLatin1String("_@#'") + symbols.join("");
+            sign9 + QStringLiteral("\\_@#'") + symbolsStr;
     DefineNameChars(nameChars);
 
-    const QString oprtChars = symbols.join("") + positiveSign + negativeSign + QLatin1String("*^/?<>=!$%&|~'_");
+    const QString opChars = QStringLiteral("*^/?<>=!$%&|~'_");
+
+    const QString oprtChars = symbolsStr + positiveSign + negativeSign + opChars;
     DefineOprtChars(oprtChars);
 
-    const QString infixOprtChars = QString() + positiveSign + negativeSign + QLatin1String("*^/?<>=!$%&|~'_");
+    const QString infixOprtChars = QString() + positiveSign + negativeSign + opChars;
     DefineInfixOprtChars(infixOprtChars);
 }
 
@@ -143,12 +152,9 @@ void QmuFormulaBase::SetSepForEval()
 void QmuFormulaBase::RemoveAll(QMap<int, QString> &map, const QString &val)
 {
     const QList<int> listKeys = map.keys(val);//Take all keys that contain token.
-    if (listKeys.size() > 0)
+    for (auto key : listKeys)
     {
-        for (int i = 0; i < listKeys.size(); ++i)
-        {
-            map.remove(listKeys.at(i));
-        }
+        map.remove(key);
     }
 }
 

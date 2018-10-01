@@ -6,7 +6,7 @@
  **
  **  @brief
  **  @copyright
- **  This source code is part of the Valentine project, a pattern making
+ **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2015 Valentina project
  **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
@@ -40,6 +40,7 @@
 #include "../vgeometry/vpointf.h"
 #include "../vpatterndb/vcontainer.h"
 #include "../visualization.h"
+#include "../vwidgets/scalesceneitems.h"
 #include "vispath.h"
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -60,7 +61,8 @@ void VisToolArcWithLength::RefreshGeometry()
         if (not qFuzzyIsNull(radius) && f1 >= 0 && not qFuzzyIsNull(length))
         {
             VArc arc = VArc (length, *first, radius, f1);
-            DrawPath(this, arc.GetPath(PathDirection::Show), mainColor, Qt::SolidLine, Qt::RoundCap);
+            arc.SetApproximationScale(m_approximationScale);
+            DrawPath(this, arc.GetPath(), arc.DirectionArrows(), mainColor, lineStyle, Qt::RoundCap);
         }
     }
 }
@@ -68,17 +70,17 @@ void VisToolArcWithLength::RefreshGeometry()
 //---------------------------------------------------------------------------------------------------------------------
 void VisToolArcWithLength::setRadius(const QString &expression)
 {
-    radius = FindLength(expression, Visualization::data->PlainVariables());
+    radius = FindLengthFromUser(expression, Visualization::data->DataVariables());
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void VisToolArcWithLength::setF1(const QString &expression)
 {
-    f1 = FindVal(expression, Visualization::data->PlainVariables());
+    f1 = FindValFromUser(expression, Visualization::data->DataVariables());
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void VisToolArcWithLength::setLength(const QString &expression)
 {
-    length = FindLength(expression, Visualization::data->PlainVariables());
+    length = FindLengthFromUser(expression, Visualization::data->DataVariables());
 }

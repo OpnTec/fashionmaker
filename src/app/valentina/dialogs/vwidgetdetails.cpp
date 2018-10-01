@@ -6,7 +6,7 @@
  **
  **  @brief
  **  @copyright
- **  This source code is part of the Valentine project, a pattern making
+ **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2016 Valentina project
  **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
@@ -31,7 +31,7 @@
 #include "../ifc/xml/vabstractpattern.h"
 #include "../vpatterndb/vcontainer.h"
 #include "../vmisc/vabstractapplication.h"
-#include "../vtools/undocommands/togglepieceinlayout.h"
+#include "../vtools/undocommands/togglepiecestate.h"
 
 #include <QMenu>
 #include <QUndoStack>
@@ -149,6 +149,7 @@ void VWidgetDetails::FillTable(const QHash<quint32, VPiece> *details)
         ui->tableWidget->setItem(currentRow, 1, item);
         ++i;
     }
+    ui->tableWidget->sortItems(1, Qt::AscendingOrder);
     ui->tableWidget->resizeColumnsToContents();
     ui->tableWidget->resizeRowsToContents();
 

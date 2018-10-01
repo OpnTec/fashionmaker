@@ -6,7 +6,7 @@
  **
  **  @brief
  **  @copyright
- **  This source code is part of the Valentine project, a pattern making
+ **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2015 Valentina project
  **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
@@ -40,21 +40,29 @@
 
 class QGraphicsScene;
 struct PosterData;
+class QGraphicsRectItem;
+class VMeasurements;
+
+#if defined(Q_OS_WIN32) && QT_VERSION >= QT_VERSION_CHECK(5, 7, 0)
+class QWinTaskbarButton;
+class QWinTaskbarProgress;
+#endif
 
 class MainWindowsNoGUI : public VAbstractMainWindow
 {
     Q_OBJECT
 public:
     explicit MainWindowsNoGUI(QWidget *parent = nullptr);
-    virtual ~MainWindowsNoGUI() Q_DECL_OVERRIDE;
+    virtual ~MainWindowsNoGUI() override;
 
 public slots:
     void ToolLayoutSettings(bool checked);
-    void SaveAsTiledPDF();
     void PrintPreviewOrigin();
     void PrintPreviewTiled();
     void PrintOrigin();
     void PrintTiled();
+protected slots:
+    void ExportFMeasurementsToCSV();
 protected:
     QVector<VLayoutPiece> listDetails;
 
@@ -74,13 +82,12 @@ protected:
     QList<QGraphicsScene *> scenes;
     QList<QList<QGraphicsItem *> > details;
 
+    QVector<QVector<VLayoutPiece> > detailsOnLayout;
+
     QAction *undoAction;
     QAction *redoAction;
     QAction *actionDockWidgetToolOptions;
     QAction *actionDockWidgetGroups;
-
-    /** @brief fileName name current pattern file. */
-    QString            curFile;
 
     bool isNoScaling;
     bool isLayoutStale;
@@ -88,8 +95,16 @@ protected:
     QMarginsF margins;
     QSizeF paperSize;
 
-    void PrepareDetailsForLayout(const QHash<quint32, VPiece> *details);
-    void ExportLayout(const DialogSaveLayout &dialog);
+    QSharedPointer<DialogSaveLayout> m_dialogSaveLayout;
+
+#if defined(Q_OS_WIN32) && QT_VERSION >= QT_VERSION_CHECK(5, 7, 0)
+    QWinTaskbarButton *m_taskbarButton;
+    QWinTaskbarProgress *m_taskbarProgress;
+#endif
+
+    static QVector<VLayoutPiece> PrepareDetailsForLayout(const QHash<quint32, VPiece> &details);
+
+    void ExportData(const QVector<VLayoutPiece> &listDetails);
 
     void InitTempLayoutScene();
     virtual void CleanLayout()=0;
@@ -98,6 +113,14 @@ protected:
     bool LayoutSettings(VLayoutGenerator& lGenerator);
     int ContinueIfLayoutStale();
     QString FileName() const;
+    void SetSizeHeightForIndividualM() const;
+
+    bool ExportFMeasurementsToCSVData(const QString &fileName,
+                                      bool withHeader, int mib, const QChar &separator) const;
+
+    QSharedPointer<VMeasurements> OpenMeasurementFile(const QString &path) const;
+
+    void CheckRequiredMeasurements(const VMeasurements *m) const;
 private slots:
     void PrintPages (QPrinter *printer);
     void ErrorConsoleMode(const LayoutErrors &state);
@@ -110,22 +133,33 @@ private:
 
     QString layoutPrinterName;
 
-    void CreateShadows();
-    void CreateScenes();
+    static QList<QGraphicsItem *> CreateShadows(const QList<QGraphicsItem *> &papers);
+    static QList<QGraphicsScene *> CreateScenes(const QList<QGraphicsItem *> &papers,
+                                                const QList<QGraphicsItem *> &shadows,
+                                                const QList<QList<QGraphicsItem *> > &details);
 
-    void SvgFile(const QString &name, int i)const;
-    void PngFile(const QString &name, int i)const;
-    void PdfFile(const QString &name, int i)const;
-    void EpsFile(const QString &name, int i)const;
-    void PsFile(const QString &name, int i)const;
+    void SvgFile(const QString &name, QGraphicsRectItem *paper, QGraphicsScene *scene)const;
+    void PngFile(const QString &name, QGraphicsRectItem *paper, QGraphicsScene *scene)const;
+    void PdfFile(const QString &name, QGraphicsRectItem *paper, QGraphicsScene *scene, bool ignorePrinterFields,
+                 const QMarginsF &margins)const;
+    void PdfTiledFile(const QString &name);
+    void EpsFile(const QString &name, QGraphicsRectItem *paper, QGraphicsScene *scene, bool ignorePrinterFields,
+                 const QMarginsF &margins)const;
+    void PsFile(const QString &name, QGraphicsRectItem *paper, QGraphicsScene *scene, bool ignorePrinterFields,
+                const QMarginsF &margins)const;
     void PdfToPs(const QStringList &params)const;
-    void ObjFile(const QString &name, int i)const;
-    void DxfFile(const QString &name, int i)const;
+    void ObjFile(const QString &name, QGraphicsRectItem *paper, QGraphicsScene *scene)const;
+    void FlatDxfFile(const QString &name, int version, bool binary, QGraphicsRectItem *paper, QGraphicsScene *scene,
+                 const QList<QList<QGraphicsItem *> > &details)const;
+    void AAMADxfFile(const QString &name, int version, bool binary, const QSize &size,
+                     const QVector<VLayoutPiece> &details) const;
 
     void PreparePaper(int index) const;
     void RestorePaper(int index) const;
 
-    void SaveLayoutAs();
+    void PrepareTextForDXF(const QString &placeholder, const QList<QList<QGraphicsItem *> > &details) const;
+    void RestoreTextAfterDXF(const QString &placeholder, const QList<QList<QGraphicsItem *> > &details) const;
+
     void PrintPreview();
     void LayoutPrint();
 
@@ -133,10 +167,28 @@ private:
 
     void SetPrinterSettings(QPrinter *printer, const PrintType &printType);
     bool IsLayoutGrayscale() const;
-    QPrinter::PaperSize FindTemplate(const QSizeF &size) const;
+    QPrinter::PaperSize FindQPrinterPageSize(const QSizeF &size) const;
 
     bool isPagesUniform() const;
     bool IsPagesFit(const QSizeF &printPaper) const;
+
+    void ExportScene(const QList<QGraphicsScene *> &scenes,
+                     const QList<QGraphicsItem *> &papers,
+                     const QList<QGraphicsItem *> &shadows,
+                     const QList<QList<QGraphicsItem *> > &details,
+                     bool ignorePrinterFields, const QMarginsF &margins) const;
+
+    void ExportApparelLayout(const QVector<VLayoutPiece> &details, const QString &name, const QSize &size) const;
+
+    void ExportDetailsAsApparelLayout(QVector<VLayoutPiece> listDetails);
+
+    void ExportFlatLayout(const QList<QGraphicsScene *> &scenes,
+                          const QList<QGraphicsItem *> &papers,
+                          const QList<QGraphicsItem *> &shadows,
+                          const QList<QList<QGraphicsItem *> > &details,
+                          bool ignorePrinterFields, const QMarginsF &margins);
+
+    void ExportDetailsAsFlatLayout(const QVector<VLayoutPiece> &listDetails);
 };
 
 #endif // MAINWINDOWSNOGUI_H

@@ -6,7 +6,7 @@
  **
  **  @brief
  **  @copyright
- **  This source code is part of the Valentine project, a pattern making
+ **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2013-2015 Valentina project
  **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
@@ -44,26 +44,26 @@ class VisToolHeight : public VisLine
 {
     Q_OBJECT
 public:
-    explicit VisToolHeight(const VContainer *data, QGraphicsItem *parent = 0);
-    virtual ~VisToolHeight() Q_DECL_OVERRIDE;
+    explicit VisToolHeight(const VContainer *data, QGraphicsItem *parent = nullptr);
+    virtual ~VisToolHeight() = default;
 
-    virtual void RefreshGeometry() Q_DECL_OVERRIDE;
+    virtual void RefreshGeometry() override;
 
     void         setLineP1Id(const quint32 &value);
     void         setLineP2Id(const quint32 &value);
-    virtual int  type() const Q_DECL_OVERRIDE {return Type;}
+    virtual int  type() const override {return Type;}
     enum { Type = UserType + static_cast<int>(Vis::ToolHeight)};
 private:
     Q_DISABLE_COPY(VisToolHeight)
     //base point in parent class
     quint32              lineP1Id;//first point of line
     quint32              lineP2Id;//second point of line
-    QGraphicsEllipseItem *point;
-    QGraphicsEllipseItem *base_point;
-    QGraphicsEllipseItem *lineP1;
-    QGraphicsEllipseItem *lineP2;
-    QGraphicsLineItem    *line;
-    QGraphicsLineItem    *line_intersection;
+    VScaledEllipse *point;
+    VScaledEllipse *base_point;
+    VScaledEllipse *lineP1;
+    VScaledEllipse *lineP2;
+    VScaledLine    *line;
+    VScaledLine    *line_intersection;
     void         ShowIntersection(const QLineF &height_line, const QLineF &base_line);
 };
 

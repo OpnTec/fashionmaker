@@ -6,7 +6,7 @@
  **
  **  @brief
  **  @copyright
- **  This source code is part of the Valentine project, a pattern making
+ **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2016 Valentina project
  **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
@@ -55,6 +55,7 @@
 #include "../vpatterndb/vcontainer.h"
 #include "../vwidgets/vabstractmainwindow.h"
 #include "../vwidgets/vmaingraphicsscene.h"
+#include "../vwidgets/vmaingraphicsview.h"
 #include "ui_dialogflippingbyline.h"
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -78,11 +79,9 @@ DialogFlippingByLine::DialogFlippingByLine(const VContainer *data, const quint32
     CheckState();
 
     connect(ui->lineEditSuffix, &QLineEdit::textChanged, this, &DialogFlippingByLine::SuffixChanged);
-    connect(ui->comboBoxFirstLinePoint,
-            static_cast<void (QComboBox::*)(const QString &)>(&QComboBox::currentIndexChanged),
+    connect(ui->comboBoxFirstLinePoint, QOverload<const QString &>::of(&QComboBox::currentIndexChanged),
             this, &DialogFlippingByLine::PointChanged);
-    connect(ui->comboBoxSecondLinePoint,
-            static_cast<void (QComboBox::*)(const QString &)>(&QComboBox::currentIndexChanged),
+    connect(ui->comboBoxSecondLinePoint, QOverload<const QString &>::of(&QComboBox::currentIndexChanged),
             this, &DialogFlippingByLine::PointChanged);
 
     vis = new VisToolFlippingByLine(data);
@@ -174,12 +173,14 @@ void DialogFlippingByLine::ShowDialog(bool click)
         scene->ToggleSplineHover(false);
         scene->ToggleSplinePathHover(false);
 
+        qApp->getSceneView()->AllowRubberBand(false);
+
         emit ToolTip(tr("Select first line point"));
     }
     else if (not stage1 && prepare && click)
     {
         setModal(true);
-        emit ToolTip("");
+        emit ToolTip(QString());
         show();
     }
 }
@@ -218,7 +219,7 @@ void DialogFlippingByLine::ChosenObject(quint32 id, const SceneObject &type)
 
                     if (getCurrentObjectId(ui->comboBoxFirstLinePoint) != id)
                     {
-                        if (SetObject(id, ui->comboBoxSecondLinePoint, ""))
+                        if (SetObject(id, ui->comboBoxSecondLinePoint, QString()))
                         {
                             if (flagError)
                             {
@@ -279,10 +280,10 @@ void DialogFlippingByLine::SuffixChanged()
             if (m_suffix != suffix)
             {
                 QRegularExpression rx(NameRegExp());
-                const QStringList uniqueNames = VContainer::AllUniqueNames();
-                for (int i=0; i < uniqueNames.size(); ++i)
+                const QStringList uniqueNames = data->AllUniqueNames();
+                for (auto &uniqueName : uniqueNames)
                 {
-                    const QString name = uniqueNames.at(i) + suffix;
+                    const QString name = uniqueName + suffix;
                     if (not rx.match(name).hasMatch() || not data->IsUnique(name))
                     {
                         flagName = false;

@@ -6,7 +6,7 @@
  **
  **  @brief
  **  @copyright
- **  This source code is part of the Valentine project, a pattern making
+ **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2015 Valentina project
  **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
@@ -28,8 +28,8 @@
 
 #include "tst_nameregexp.h"
 #include "../qmuparser/qmudef.h"
-#include "../vmisc/def.h"
 #include "../vmisc/logging.h"
+#include "../vpatterndb/measurements.h"
 
 #include <QtTest>
 
@@ -49,14 +49,14 @@ void TST_NameRegExp::TestNameRegExp_data()
     const QList<QLocale> allLocales =
             QLocale::matchingLocales(QLocale::AnyLanguage, QLocale::AnyScript, QLocale::AnyCountry);
 
-    for(int i = 0; i < allLocales.size(); ++i)
+    for(auto &locale : allLocales)
     {
-        INIT_LOCALE_VARIABLES(allLocales.at(i));
+        INIT_LOCALE_VARIABLES(locale);
         Q_UNUSED(positiveSign)
         Q_UNUSED(expUpper)
         Q_UNUSED(expLower)
 
-        const QString localeName = allLocales.at(i).name();
+        const QString localeName = locale.name();
         QString tag = localeName+QLatin1String(". First character can't be ")+sign0;
         QTest::newRow(qUtf8Printable(tag)) << sign0+QLatin1String("a") << false;
 
@@ -90,8 +90,23 @@ void TST_NameRegExp::TestNameRegExp_data()
         tag = localeName+QLatin1String(". First character can't be \"")+negativeSign+QLatin1String("\"");
         QTest::newRow(qUtf8Printable(tag)) << negativeSign+QLatin1String("a") << false;
 
+        tag = localeName+QLatin1String(". First character can't be \"")+decimalPoint+QLatin1String("\"");
+        QTest::newRow(qUtf8Printable(tag)) << decimalPoint+QLatin1String("a") << false;
+
+        tag = localeName+QLatin1String(". First character can't be \"")+groupSeparator+QLatin1String("\"");
+        QTest::newRow(qUtf8Printable(tag)) << groupSeparator+QLatin1String("a") << false;
+
         tag = localeName+QLatin1String(". Any next character can't be \"")+negativeSign+QLatin1String("\"");
         QTest::newRow(qUtf8Printable(tag)) << QLatin1String("a")+negativeSign << false;
+
+        tag = localeName+QLatin1String(". Any next character can't be \"")+decimalPoint+QLatin1String("\"");
+        QTest::newRow(qUtf8Printable(tag)) << QLatin1String("a")+decimalPoint << false;
+
+        if (groupSeparator != '\'')
+        {
+            tag = localeName+QLatin1String(". Any next character can't be \"")+groupSeparator+QLatin1String("\"");
+            QTest::newRow(qUtf8Printable(tag)) << QLatin1String("a")+groupSeparator << false;
+        }
     }
 
     QTest::newRow("First character can't be \"+\"") << "+a" << false;
@@ -113,6 +128,8 @@ void TST_NameRegExp::TestNameRegExp_data()
     QTest::newRow("First character can't be \"<\"") << "<a" << false;
     QTest::newRow("First character can't be \">\"") << ">a" << false;
 
+    QTest::newRow("First character can be \"\\\"") << "\\a" << true;
+
     QTest::newRow("Any next character can't be \"+\"") << "a+" << false;
     QTest::newRow("Any next character can't be \"*\"") << "a*" << false;
     QTest::newRow("Any next character can't be \"/\"") << "a/" << false;
@@ -130,6 +147,8 @@ void TST_NameRegExp::TestNameRegExp_data()
     QTest::newRow("Any next character can't be \"!\"") << "a!" << false;
     QTest::newRow("Any next character can't be \"<\"") << "a<" << false;
     QTest::newRow("Any next character can't be \">\"") << "a>" << false;
+
+    QTest::newRow("Any next character can be \"\\\"") << "a\\" << true;
 
     QTest::newRow("Good name \"p12\"") << "p12" << true;
     QTest::newRow("Good name \"height\"") << "height" << true;
@@ -154,7 +173,7 @@ void TST_NameRegExp::TestOriginalMeasurementNamesRegExp_data()
     QTest::addColumn<QString>("str");
 
     const QStringList originalNames = AllGroupNames();
-    foreach(const QString &str, originalNames)
+    for (auto &str : originalNames)
     {
         const QString name = QString("Measurement '%1'").arg(str);
         QTest::newRow(qUtf8Printable(name)) << str;
@@ -235,7 +254,11 @@ void TST_NameRegExp::TestCorrectOrderMeasurement_data()
     QTest::newRow("G09") << hipCirc_M << "hip_circ";
     QTest::newRow("G10") << neckArcF_M << "neck_arc_f";
     QTest::newRow("G11") << highbustArcF_M << "highbust_arc_f";
+
+    // size and bust_arc_f are synonyms
     QTest::newRow("G12") << bustArcF_M << "bust_arc_f";
+    QTest::newRow("G12") << size_M << "size";
+
     QTest::newRow("G13") << lowbustArcF_M << "lowbust_arc_f";
     QTest::newRow("G14") << ribArcF_M << "rib_arc_f";
     QTest::newRow("G15") << waistArcF_M << "waist_arc_f";

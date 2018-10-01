@@ -4,7 +4,7 @@
 #
 #-------------------------------------------------
 
-QT       += testlib widgets
+QT       += testlib widgets printsupport concurrent opengl
 
 QT       -= gui
 
@@ -18,8 +18,26 @@ TEMPLATE = app
 # CONFIG += testcase adds a  'make check' which is great. But by default it also
 # adds a 'make install' that installs the test cases, which we do not want.
 # Can configure it not to do that with 'no_testcase_installs'
-# We use C++11 standard
-CONFIG += c++11 testcase no_testcase_installs
+CONFIG += testcase no_testcase_installs
+
+# The following define makes your compiler emit warnings if you use
+# any feature of Qt which has been marked as deprecated (the exact warnings
+# depend on your compiler). Please consult the documentation of the
+# deprecated API in order to know how to port your code away from it.
+DEFINES += QT_DEPRECATED_WARNINGS
+
+# You can also make your code fail to compile if you use deprecated APIs.
+# In order to do so, uncomment the following line.
+# You can also select to disable deprecated APIs only up to a certain version of Qt.
+#DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
+
+# Since Q5.4 available support C++14
+greaterThan(QT_MAJOR_VERSION, 4):greaterThan(QT_MINOR_VERSION, 3) {
+    CONFIG += c++14
+} else {
+    # We use C++11 standard
+    CONFIG += c++11
+}
 
 # Use out-of-source builds (shadow builds)
 CONFIG -= app_bundle debug_and_release debug_and_release_target
@@ -40,7 +58,7 @@ SOURCES += \
     tst_tapecommandline.cpp \
     tst_valentinacommandline.cpp
 
-win32-msvc*:SOURCES += stable.cpp
+*msvc*:SOURCES += stable.cpp
 
 HEADERS += \
     stable.h \
@@ -54,9 +72,9 @@ include(warnings.pri)
 
 CONFIG(release, debug|release){
     # Release mode
-    !win32-msvc*:CONFIG += silent
+    !*msvc*:CONFIG += silent
     DEFINES += V_NO_ASSERT
-    !unix:*-g++{
+    !unix:*g++*{
         QMAKE_CXXFLAGS += -fno-omit-frame-pointer # Need for exchndl.dll
     }
 
@@ -65,7 +83,7 @@ CONFIG(release, debug|release){
     } else {
         # Turn on debug symbols in release mode on Unix systems.
         # On Mac OS X temporarily disabled. Need find way how to strip binary file.
-        !macx:!win32-msvc*{
+        !macx:!*msvc*{
             QMAKE_CXXFLAGS_RELEASE += -g -gdwarf-3
             QMAKE_CFLAGS_RELEASE += -g -gdwarf-3
             QMAKE_LFLAGS_RELEASE =
@@ -73,41 +91,68 @@ CONFIG(release, debug|release){
     }
 }
 
-##VTools static library (depend on VWidgets, VMisc, VPatternDB)
-#unix|win32: LIBS += -L$$OUT_PWD/../../libs/vtools/$${DESTDIR}/ -lvtools
+#VTools static library (depend on VWidgets, VMisc, VPatternDB)
+unix|win32: LIBS += -L$$OUT_PWD/../../libs/vtools/$${DESTDIR}/ -lvtools
 
-#INCLUDEPATH += $$PWD/../../libs/vtools
-#DEPENDPATH += $$PWD/../../libs/vtools
+INCLUDEPATH += $$PWD/../../libs/vtools
+DEPENDPATH += $$PWD/../../libs/vtools
 
-#win32:!win32-g++: PRE_TARGETDEPS += $$OUT_PWD/../../libs/vtools/$${DESTDIR}/vtools.lib
-#else:unix|win32-g++: PRE_TARGETDEPS += $$OUT_PWD/../../libs/vtools/$${DESTDIR}/libvtools.a
+win32:!win32-g++: PRE_TARGETDEPS += $$OUT_PWD/../../libs/vtools/$${DESTDIR}/vtools.lib
+else:unix|win32-g++: PRE_TARGETDEPS += $$OUT_PWD/../../libs/vtools/$${DESTDIR}/libvtools.a
 
-##VWidgets static library
-#unix|win32: LIBS += -L$$OUT_PWD/../../libs/vwidgets/$${DESTDIR}/ -lvwidgets
+#VWidgets static library
+unix|win32: LIBS += -L$$OUT_PWD/../../libs/vwidgets/$${DESTDIR}/ -lvwidgets
 
-#INCLUDEPATH += $$PWD/../../libs/vwidgets
-#DEPENDPATH += $$PWD/../../libs/vwidgets
+INCLUDEPATH += $$PWD/../../libs/vwidgets
+DEPENDPATH += $$PWD/../../libs/vwidgets
 
-#win32:!win32-g++: PRE_TARGETDEPS += $$OUT_PWD/../../libs/vwidgets/$${DESTDIR}/vwidgets.lib
-#else:unix|win32-g++: PRE_TARGETDEPS += $$OUT_PWD/../../libs/vwidgets/$${DESTDIR}/libvwidgets.a
+win32:!win32-g++: PRE_TARGETDEPS += $$OUT_PWD/../../libs/vwidgets/$${DESTDIR}/vwidgets.lib
+else:unix|win32-g++: PRE_TARGETDEPS += $$OUT_PWD/../../libs/vwidgets/$${DESTDIR}/libvwidgets.a
 
-## VFormat static library (depend on VPatternDB, IFC)
-#unix|win32: LIBS += -L$$OUT_PWD/../../libs/vformat/$${DESTDIR}/ -lvformat
+# VFormat static library (depend on VPatternDB, IFC)
+unix|win32: LIBS += -L$$OUT_PWD/../../libs/vformat/$${DESTDIR}/ -lvformat
 
-#INCLUDEPATH += $$PWD/../../libs/vformat
-#DEPENDPATH += $$PWD/../../libs/vformat
+INCLUDEPATH += $$PWD/../../libs/vformat
+DEPENDPATH += $$PWD/../../libs/vformat
 
-#win32:!win32-g++: PRE_TARGETDEPS += $$OUT_PWD/../../libs/vformat/$${DESTDIR}/vformat.lib
-#else:unix|win32-g++: PRE_TARGETDEPS += $$OUT_PWD/../../libs/vformat/$${DESTDIR}/libvformat.a
+win32:!win32-g++: PRE_TARGETDEPS += $$OUT_PWD/../../libs/vformat/$${DESTDIR}/vformat.lib
+else:unix|win32-g++: PRE_TARGETDEPS += $$OUT_PWD/../../libs/vformat/$${DESTDIR}/libvformat.a
 
 #VPatternDB static library (depend on vgeometry, vmisc, VLayout)
-#unix|win32: LIBS += -L$$OUT_PWD/../../libs/vpatterndb/$${DESTDIR} -lvpatterndb
+unix|win32: LIBS += -L$$OUT_PWD/../../libs/vpatterndb/$${DESTDIR} -lvpatterndb
 
-#INCLUDEPATH += $$PWD/../../libs/vpatterndb
-#DEPENDPATH += $$PWD/../../libs/vpatterndb
+INCLUDEPATH += $$PWD/../../libs/vpatterndb
+DEPENDPATH += $$PWD/../../libs/vpatterndb
 
-#win32:!win32-g++: PRE_TARGETDEPS += $$OUT_PWD/../../libs/vpatterndb/$${DESTDIR}/vpatterndb.lib
-#else:unix|win32-g++: PRE_TARGETDEPS += $$OUT_PWD/../../libs/vpatterndb/$${DESTDIR}/libvpatterndb.a
+win32:!win32-g++: PRE_TARGETDEPS += $$OUT_PWD/../../libs/vpatterndb/$${DESTDIR}/vpatterndb.lib
+else:unix|win32-g++: PRE_TARGETDEPS += $$OUT_PWD/../../libs/vpatterndb/$${DESTDIR}/libvpatterndb.a
+
+#VTest static library
+unix|win32: LIBS += -L$$OUT_PWD/../../libs/vtest/$${DESTDIR} -lvtest
+
+INCLUDEPATH += $$PWD/../../libs/vtest
+DEPENDPATH += $$PWD/../../libs/vtest
+
+win32:!win32-g++: PRE_TARGETDEPS += $$OUT_PWD/../../libs/vtest/$${DESTDIR}/vtest.lib
+else:unix|win32-g++: PRE_TARGETDEPS += $$OUT_PWD/../../libs/vtest/$${DESTDIR}/libvtest.a
+
+# VGeometry static library (depend on ifc)
+unix|win32: LIBS += -L$$OUT_PWD/../../libs/vgeometry/$${DESTDIR} -lvgeometry
+
+INCLUDEPATH += $$PWD/../../libs/vgeometry
+DEPENDPATH += $$PWD/../../libs/vgeometry
+
+win32:!win32-g++: PRE_TARGETDEPS += $$OUT_PWD/../../libs/vgeometry/$${DESTDIR}/vgeometry.lib
+else:unix|win32-g++: PRE_TARGETDEPS += $$OUT_PWD/../../libs/vgeometry/$${DESTDIR}/libvgeometry.a
+
+# IFC static library (depend on QMuParser)
+unix|win32: LIBS += -L$$OUT_PWD/../../libs/ifc/$${DESTDIR}/ -lifc
+
+INCLUDEPATH += $$PWD/../../libs/ifc
+DEPENDPATH += $$PWD/../../libs/ifc
+
+win32:!win32-g++: PRE_TARGETDEPS += $$OUT_PWD/../../libs/ifc/$${DESTDIR}/ifc.lib
+else:unix|win32-g++: PRE_TARGETDEPS += $$OUT_PWD/../../libs/ifc/$${DESTDIR}/libifc.a
 
 #VMisc static library
 unix|win32: LIBS += -L$$OUT_PWD/../../libs/vmisc/$${DESTDIR} -lvmisc
@@ -118,49 +163,31 @@ DEPENDPATH += $$PWD/../../libs/vmisc
 win32:!win32-g++: PRE_TARGETDEPS += $$OUT_PWD/../../libs/vmisc/$${DESTDIR}/vmisc.lib
 else:unix|win32-g++: PRE_TARGETDEPS += $$OUT_PWD/../../libs/vmisc/$${DESTDIR}/libvmisc.a
 
-## VGeometry static library (depend on ifc)
-#unix|win32: LIBS += -L$$OUT_PWD/../../libs/vgeometry/$${DESTDIR} -lvgeometry
+# VLayout static library
+unix|win32: LIBS += -L$$OUT_PWD/../../libs/vlayout/$${DESTDIR} -lvlayout
 
-#INCLUDEPATH += $$PWD/../../libs/vgeometry
-#DEPENDPATH += $$PWD/../../libs/vgeometry
+INCLUDEPATH += $$PWD/../../libs/vlayout
+DEPENDPATH += $$PWD/../../libs/vlayout
 
-#win32:!win32-g++: PRE_TARGETDEPS += $$OUT_PWD/../../libs/vgeometry/$${DESTDIR}/vgeometry.lib
-#else:unix|win32-g++: PRE_TARGETDEPS += $$OUT_PWD/../../libs/vgeometry/$${DESTDIR}/libvgeometry.a
-
-# IFC static library (depend on QMuParser)
-#unix|win32: LIBS += -L$$OUT_PWD/../../libs/ifc/$${DESTDIR}/ -lifc
-
-#INCLUDEPATH += $$PWD/../../libs/ifc
-#DEPENDPATH += $$PWD/../../libs/ifc
-
-#win32:!win32-g++: PRE_TARGETDEPS += $$OUT_PWD/../../libs/ifc/$${DESTDIR}/ifc.lib
-#else:unix|win32-g++: PRE_TARGETDEPS += $$OUT_PWD/../../libs/ifc/$${DESTDIR}/libifc.a
-
-## VLayout static library
-#unix|win32: LIBS += -L$$OUT_PWD/../../libs/vlayout/$${DESTDIR} -lvlayout
-
-#INCLUDEPATH += $$PWD/../../libs/vlayout
-#DEPENDPATH += $$PWD/../../libs/vlayout
-
-#win32:!win32-g++: PRE_TARGETDEPS += $$OUT_PWD/../../libs/vlayout/$${DESTDIR}/vlayout.lib
-#else:unix|win32-g++: PRE_TARGETDEPS += $$OUT_PWD/../../libs/vlayout/$${DESTDIR}/libvlayout.a
+win32:!win32-g++: PRE_TARGETDEPS += $$OUT_PWD/../../libs/vlayout/$${DESTDIR}/vlayout.lib
+else:unix|win32-g++: PRE_TARGETDEPS += $$OUT_PWD/../../libs/vlayout/$${DESTDIR}/libvlayout.a
 
 # QMuParser library
-#win32:CONFIG(release, debug|release): LIBS += -L$${OUT_PWD}/../../libs/qmuparser/$${DESTDIR} -lqmuparser2
-#else:win32:CONFIG(debug, debug|release): LIBS += -L$${OUT_PWD}/../../libs/qmuparser/$${DESTDIR} -lqmuparser2
-#else:unix: LIBS += -L$${OUT_PWD}/../../libs/qmuparser/$${DESTDIR} -lqmuparser
+win32:CONFIG(release, debug|release): LIBS += -L$${OUT_PWD}/../../libs/qmuparser/$${DESTDIR} -lqmuparser2
+else:win32:CONFIG(debug, debug|release): LIBS += -L$${OUT_PWD}/../../libs/qmuparser/$${DESTDIR} -lqmuparser2
+else:unix: LIBS += -L$${OUT_PWD}/../../libs/qmuparser/$${DESTDIR} -lqmuparser
 
-#INCLUDEPATH += $${PWD}/../../libs/qmuparser
-#DEPENDPATH += $${PWD}/../../libs/qmuparser
+INCLUDEPATH += $${PWD}/../../libs/qmuparser
+DEPENDPATH += $${PWD}/../../libs/qmuparser
 
-## Only for adding path to LD_LIBRARY_PATH
-## VPropertyExplorer library
-#win32:CONFIG(release, debug|release): LIBS += -L$${OUT_PWD}/../../libs/vpropertyexplorer/$${DESTDIR} -lvpropertyexplorer
-#else:win32:CONFIG(debug, debug|release): LIBS += -L$${OUT_PWD}/../../libs/vpropertyexplorer/$${DESTDIR} -lvpropertyexplorer
-#else:unix: LIBS += -L$${OUT_PWD}/../../libs/vpropertyexplorer/$${DESTDIR} -lvpropertyexplorer
+# Only for adding path to LD_LIBRARY_PATH
+# VPropertyExplorer library
+win32:CONFIG(release, debug|release): LIBS += -L$${OUT_PWD}/../../libs/vpropertyexplorer/$${DESTDIR} -lvpropertyexplorer
+else:win32:CONFIG(debug, debug|release): LIBS += -L$${OUT_PWD}/../../libs/vpropertyexplorer/$${DESTDIR} -lvpropertyexplorer
+else:unix: LIBS += -L$${OUT_PWD}/../../libs/vpropertyexplorer/$${DESTDIR} -lvpropertyexplorer
 
-#INCLUDEPATH += $${PWD}/../../libs/vpropertyexplorer
-#DEPENDPATH += $${PWD}/../../libs/vpropertyexplorer
+INCLUDEPATH += $${PWD}/../../libs/vpropertyexplorer
+DEPENDPATH += $${PWD}/../../libs/vpropertyexplorer
 
 TAPE_TEST_FILES += \
     tst_tape/keiko.vit \
@@ -194,10 +221,11 @@ VALENTINA_TEST_FILES += \
     tst_valentina/issue_256_wrong.vit \
     tst_valentina/issue_256_correct.vst \
     tst_valentina/issue_256_wrong.vit \
-    tst_valentina/wrong_formula.val
+    tst_valentina/wrong_formula.val \
+    tst_valentina/test_pedantic.val
 
 COLLECTION_FILES += \
-    $${PWD}/../../app/share/tables/standard/GOST_man_ru.vst \
+    $${PWD}/../../app/share/tables/multisize/GOST_man_ru.vst \
     $${PWD}/../../app/share/collection/bra.val \
     $${PWD}/../../app/share/collection/bra.vit \
     $${PWD}/../../app/share/collection/jacketМ1_52-176.val \

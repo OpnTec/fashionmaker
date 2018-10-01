@@ -6,7 +6,7 @@
  **
  **  @brief
  **  @copyright
- **  This source code is part of the Valentine project, a pattern making
+ **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2015 Valentina project
  **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
@@ -50,24 +50,24 @@ public:
     static const QString CurrentSchema;
 // GCC 4.6 doesn't allow constexpr and const together
 #if !defined(__INTEL_COMPILER) && !defined(__clang__) && defined(__GNUC__) && (__GNUC__ * 100 + __GNUC_MINOR__) <= 406
-    static Q_DECL_CONSTEXPR int MeasurementMinVer = CONVERTER_VERSION_CHECK(0, 3, 0);
-    static Q_DECL_CONSTEXPR int MeasurementMaxVer = CONVERTER_VERSION_CHECK(0, 4, 4);
+    static Q_DECL_CONSTEXPR int MeasurementMinVer = FORMAT_VERSION(0, 3, 0);
+    static Q_DECL_CONSTEXPR int MeasurementMaxVer = FORMAT_VERSION(0, 4, 4);
 #else
-    static Q_DECL_CONSTEXPR const int MeasurementMinVer = CONVERTER_VERSION_CHECK(0, 3, 0);
-    static Q_DECL_CONSTEXPR const int MeasurementMaxVer = CONVERTER_VERSION_CHECK(0, 4, 4);
+    static Q_DECL_CONSTEXPR const int MeasurementMinVer = FORMAT_VERSION(0, 3, 0);
+    static Q_DECL_CONSTEXPR const int MeasurementMaxVer = FORMAT_VERSION(0, 4, 4);
 #endif
 
 protected:
-    virtual int     MinVer() const Q_DECL_OVERRIDE;
-    virtual int     MaxVer() const Q_DECL_OVERRIDE;
+    virtual int     MinVer() const override;
+    virtual int     MaxVer() const override;
 
-    virtual QString MinVerStr() const Q_DECL_OVERRIDE;
-    virtual QString MaxVerStr() const Q_DECL_OVERRIDE;
+    virtual QString MinVerStr() const override;
+    virtual QString MaxVerStr() const override;
 
-    virtual QString XSDSchema(int ver) const Q_DECL_OVERRIDE;
-    virtual void    ApplyPatches() Q_DECL_OVERRIDE;
-    virtual void    DowngradeToCurrentMaxVersion() Q_DECL_OVERRIDE;
-    virtual bool    IsReadOnly() const Q_DECL_OVERRIDE;
+    virtual QString XSDSchema(int ver) const override;
+    virtual void    ApplyPatches() override;
+    virtual void    DowngradeToCurrentMaxVersion() override;
+    virtual bool    IsReadOnly() const override;
 
 private:
     Q_DISABLE_COPY(VVSTConverter)

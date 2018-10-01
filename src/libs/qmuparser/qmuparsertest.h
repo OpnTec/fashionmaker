@@ -30,6 +30,10 @@
 #include <QtGlobal>
 #include <locale>
 
+#if QT_VERSION >= QT_VERSION_CHECK(5, 10, 0)
+#   include <QRandomGenerator>
+#endif
+
 #include "../qmuparser/qmuparser_global.h"
 #include "qmuparser.h"
 #include "qmuparser_global.h"
@@ -62,7 +66,7 @@ public:
 
     explicit QmuParserTester(QObject *parent = nullptr);
 
-private slots:
+public slots:
     void Run();
 
 private:
@@ -234,12 +238,22 @@ private:
 
     static qreal Rnd ( qreal v )
     {
+#if QT_VERSION >= QT_VERSION_CHECK(5, 10, 0)
+        return static_cast<qreal>( ( 1 + ( v * QRandomGenerator().bounded(RAND_MAX) / ( RAND_MAX + 1.0 ) ) ) );
+#else
+        // cppcheck-suppress qrandCalled
         return static_cast<qreal>( ( 1 + ( v * qrand() / ( RAND_MAX + 1.0 ) ) ) );
+#endif
     }
 
     static qreal RndWithString ( const char_type* )
     {
+#if QT_VERSION >= QT_VERSION_CHECK(5, 10, 0)
+        return static_cast<qreal>( ( 1 + ( 1000.0f * QRandomGenerator().bounded(RAND_MAX) / ( RAND_MAX + 1.0 ) ) ) );
+#else
+        // cppcheck-suppress qrandCalled
         return static_cast<qreal>( ( 1 + ( 1000.0f * static_cast<qreal>(qrand()) / ( RAND_MAX + 1.0 ) ) ) );
+#endif
     }
 
     static qreal Ping()

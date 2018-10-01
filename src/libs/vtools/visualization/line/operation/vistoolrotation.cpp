@@ -6,7 +6,7 @@
  **
  **  @brief
  **  @copyright
- **  This source code is part of the Valentine project, a pattern making
+ **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2016 Valentina project
  **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
@@ -64,8 +64,8 @@ VisToolRotation::VisToolRotation(const VContainer *data, QGraphicsItem *parent)
       xAxis(nullptr)
 {
     point = InitPoint(supportColor2, this);
-    angleArc = InitItem<QGraphicsPathItem>(supportColor2, this);
-    xAxis = InitItem<QGraphicsLineItem>(supportColor2, this);
+    angleArc = InitItem<VCurvePathItem>(supportColor2, this);
+    xAxis = InitItem<VScaledLine>(supportColor2, this);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -116,8 +116,8 @@ void VisToolRotation::RefreshGeometry()
         DrawLine(xAxis, QLineF(static_cast<QPointF>(*origin), Ray(static_cast<QPointF>(*origin), 0)), supportColor2,
                  Qt::DashLine);
 
-        VArc arc(*origin, ToPixel(DefPointRadius/*mm*/*2, Unit::Mm), 0, tempAngle);
-        DrawPath(angleArc, arc.GetPath(PathDirection::Hide), supportColor2, Qt::SolidLine, Qt::RoundCap);
+        VArc arc(*origin, ScaledRadius(SceneScale(qApp->getCurrentScene()))*2, 0, tempAngle);
+        DrawPath(angleArc, arc.GetPath(), supportColor2, Qt::SolidLine, Qt::RoundCap);
 
         Visualization::toolTip = tr("Rotating angle = %1°, <b>Shift</b> - sticking angle, "
                                     "<b>Mouse click</b> - finish creation").arg(tempAngle);
@@ -125,13 +125,12 @@ void VisToolRotation::RefreshGeometry()
 
     int iPoint = -1;
     int iCurve = -1;
-    for (int i = 0; i < objects.size(); ++i)
+    for (auto id : qAsConst(objects))
     {
-        const quint32 id = objects.at(i);
         const QSharedPointer<VGObject> obj = Visualization::data->GetGObject(id);
 
         // This check helps to find missed objects in the switch
-        Q_STATIC_ASSERT_X(static_cast<int>(GOType::Unknown) == 7, "Not all objects was handled.");
+        Q_STATIC_ASSERT_X(static_cast<int>(GOType::Unknown) == 8, "Not all objects was handled.");
 
         switch(static_cast<GOType>(obj->getType()))
         {
@@ -140,7 +139,7 @@ void VisToolRotation::RefreshGeometry()
                 const QSharedPointer<VPointF> p = Visualization::data->GeometricObject<VPointF>(id);
 
                 ++iPoint;
-                QGraphicsEllipseItem *point = GetPoint(static_cast<quint32>(iPoint), supportColor2);
+                VScaledEllipse *point = GetPoint(static_cast<quint32>(iPoint), supportColor2);
                 DrawPoint(point, static_cast<QPointF>(*p), supportColor2);
 
                 ++iPoint;
@@ -184,11 +183,12 @@ void VisToolRotation::RefreshGeometry()
                 break;
             }
             case GOType::Unknown:
+            case GOType::PlaceLabel:
+                Q_UNREACHABLE();
                 break;
         }
     }
 }
-
 QT_WARNING_POP
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -206,7 +206,7 @@ QString VisToolRotation::Angle() const
 //---------------------------------------------------------------------------------------------------------------------
 void VisToolRotation::SetAngle(const QString &expression)
 {
-    angle = FindVal(expression, Visualization::data->PlainVariables());
+    angle = FindValFromUser(expression, Visualization::data->DataVariables());
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -216,15 +216,15 @@ int VisToolRotation::AddCurve(qreal angle, const QPointF &origin, quint32 id, in
     const QSharedPointer<Item> curve = Visualization::data->template GeometricObject<Item>(id);
 
     ++i;
-    QGraphicsPathItem *path = GetCurve(static_cast<quint32>(i), supportColor2);
-    DrawPath(path, curve->GetPath(PathDirection::Show), supportColor2, Qt::SolidLine, Qt::RoundCap);
+    VCurvePathItem *path = GetCurve(static_cast<quint32>(i), supportColor2);
+    DrawPath(path, curve->GetPath(), curve->DirectionArrows(), supportColor2, Qt::SolidLine, Qt::RoundCap);
 
     ++i;
     path = GetCurve(static_cast<quint32>(i), supportColor);
     if (object1Id != NULL_ID)
     {
         const Item rotated = curve->Rotate(origin, angle);
-        DrawPath(path, rotated.GetPath(PathDirection::Show), supportColor, Qt::SolidLine, Qt::RoundCap);
+        DrawPath(path, rotated.GetPath(), rotated.DirectionArrows(), supportColor, Qt::SolidLine, Qt::RoundCap);
     }
 
     return i;

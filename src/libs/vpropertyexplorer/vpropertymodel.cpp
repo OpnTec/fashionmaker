@@ -319,12 +319,12 @@ VPE::VPropertySet *VPE::VPropertyModel::takePropertySet(VPropertySet *new_proper
 
     if (emit_signals)
     {
-        emit beginResetModel();
+        beginResetModel();
     }
     d_ptr->Properties = new_property_set;
     if (emit_signals)
     {
-        emit endResetModel();
+        endResetModel();
     }
 
     return tmpOldPropertySet;

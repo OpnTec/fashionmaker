@@ -6,7 +6,7 @@
  **
  **  @brief
  **  @copyright
- **  This source code is part of the Valentine project, a pattern making
+ **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2013-2015 Valentina project
  **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
@@ -55,7 +55,7 @@ DialogLayoutProgress::DialogLayoutProgress(int count, QWidget *parent)
 
     QPushButton *bCancel = ui->buttonBox->button(QDialogButtonBox::Cancel);
     SCASSERT(bCancel != nullptr)
-    connect(bCancel, &QPushButton::clicked, RECEIVER(this)[this](){emit Abort();});
+    connect(bCancel, &QPushButton::clicked, this, [this](){emit Abort();});
     setModal(true);
 
     this->setWindowFlags(Qt::Dialog | Qt::WindowTitleHint | Qt::CustomizeWindowHint);
@@ -92,7 +92,8 @@ void DialogLayoutProgress::Error(const LayoutErrors &state)
             qCritical() << tr("Couldn't prepare data for creation layout");
             break;
         case LayoutErrors::EmptyPaperError:
-            qCritical() << tr("Several workpieces left not arranged, but none of them match for paper");
+            qCritical() << tr("One or more pattern pieces are bigger than the paper format you selected. Please, "
+                              "select a bigger paper format.");
             break;
         case LayoutErrors::ProcessStoped:
         default:

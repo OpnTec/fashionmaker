@@ -6,7 +6,7 @@
  **
  **  @brief
  **  @copyright
- **  This source code is part of the Valentine project, a pattern making
+ **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2013-2015 Valentina project
  **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
@@ -278,7 +278,7 @@ bool VPosition::CheckCombineEdges(VLayoutPiece &detail, int j, int &dEdge)
 #endif
 
     CrossingType type = CrossingType::Intersection;
-    if (SheetContains(detail.DetailBoundingRect()))
+    if (not detail.IsForceFlipping() && SheetContains(detail.DetailBoundingRect()))
     {
         if (not gContour.GetContour().isEmpty())
         {
@@ -355,6 +355,11 @@ bool VPosition::CheckRotationEdges(VLayoutPiece &detail, int j, int dEdge, int a
 {
     const QLineF globalEdge = gContour.GlobalEdge(j);
     bool flagSquare = false;
+
+    if (detail.IsForceFlipping())
+    {
+        detail.Mirror(globalEdge);
+    }
 
     RotateEdges(detail, globalEdge, dEdge, angle);
 
@@ -566,9 +571,9 @@ QPainterPath VPosition::DrawDetails(const QVector<VLayoutPiece> &details)
     path.setFillRule(Qt::WindingFill);
     if (details.count() > 0)
     {
-        for (int i = 0; i < details.size(); ++i)
+        for (auto &detail : details)
         {
-            path.addPath(details.at(i).ContourPath());
+            path.addPath(detail.ContourPath());
         }
     }
     return path;

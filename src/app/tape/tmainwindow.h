@@ -6,7 +6,7 @@
  **
  **  @brief
  **  @copyright
- **  This source code is part of the Valentine project, a pattern making
+ **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2015 Valentina project
  **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
@@ -43,6 +43,7 @@ namespace Ui
 }
 
 class QLabel;
+class QxtCsvModel;
 
 class TMainWindow : public VAbstractMainWindow
 {
@@ -50,7 +51,7 @@ class TMainWindow : public VAbstractMainWindow
 
 public:
     explicit TMainWindow(QWidget *parent = nullptr);
-    virtual ~TMainWindow() Q_DECL_OVERRIDE;
+    virtual ~TMainWindow() override;
 
     QString CurrentFile() const;
 
@@ -63,18 +64,20 @@ public:
     bool LoadFile(const QString &path);
 
 public slots:
-    virtual void ShowToolTip(const QString &toolTip) Q_DECL_OVERRIDE;
+    virtual void ShowToolTip(const QString &toolTip) override;
 
 protected:
-    virtual void closeEvent(QCloseEvent *event) Q_DECL_OVERRIDE;
-    virtual void changeEvent(QEvent* event) Q_DECL_OVERRIDE;
-    virtual void showEvent(QShowEvent *event) Q_DECL_OVERRIDE;
-    virtual bool eventFilter(QObject *object, QEvent *event) Q_DECL_OVERRIDE;
+    virtual void closeEvent(QCloseEvent *event) override;
+    virtual void changeEvent(QEvent* event) override;
+    virtual void showEvent(QShowEvent *event) override;
+    virtual bool eventFilter(QObject *object, QEvent *event) override;
+    virtual void ExportToCSVData(const QString &fileName, bool withHeader, int mib,
+                                 const QChar &separator) final;
 
 private slots:
     void FileNew();
     void OpenIndividual();
-    void OpenStandard();
+    void OpenMultisize();
     void OpenTemplate();
     void CreateFromExisting();
     void Preferences();
@@ -82,17 +85,16 @@ private slots:
 
     bool FileSave();
     bool FileSaveAs();
-    void ExportToCSV();
     void AboutToShowWindowMenu();
     void ShowWindow() const;
+    void ImportDataFromCSV();
 
 #if defined(Q_OS_MAC)
     void AboutToShowDockMenu();
     void OpenAt(QAction *where);
 #endif //defined(Q_OS_MAC)
 
-    void SaveGivenName();
-    void SaveFamilyName();
+    void SaveCustomerName();
     void SaveEmail();
     void SaveGender(int index);
     void SaveBirthDate(const QDate & date);
@@ -135,6 +137,8 @@ private:
     Unit             mUnit;
     Unit             pUnit;
     MeasurementsType mType;
+    qreal            currentSize;
+    qreal            currentHeight;
     QString          curFile;
     QComboBox       *gradationHeights;
     QComboBox       *gradationSizes;
@@ -162,11 +166,12 @@ private:
     void InitComboBoxUnits();
     void InitGender(QComboBox *gender);
 
+    void ShowNewMData(bool fresh);
     void ShowUnits();
     void ShowHeaderUnits(QTableWidget *table, int column, const QString &unit);
     void UpdateRecentFileActions();
 
-    void MeasurementsWasSaved(bool saved);
+    void MeasurementsWereSaved(bool saved);
     void SetCurrentFile(const QString &fileName);
     bool SaveMeasurements(const QString &fileName, QString &error);
 
@@ -174,7 +179,8 @@ private:
 
     QTableWidgetItem *AddCell(const QString &text, int row, int column, int aligment, bool ok = true);
 
-    QComboBox *SetGradationList(QLabel *label, const QStringList &list) Q_REQUIRED_RESULT;
+    Q_REQUIRED_RESULT QComboBox *SetGradationList(QLabel *label, const QStringList &list);
+
     void       SetDefaultHeight(int value);
     void       SetDefaultSize(int value);
 
@@ -209,6 +215,13 @@ private:
 
     template <class T>
     void HackWidget(T **widget);
+
+    QString CheckMName(const QString &name, const QSet<QString> &importedNames) const;
+    void ShowError(const QString &text);
+    void RefreshDataAfterImport();
+
+    void ImportIndividualMeasurements(const QxtCsvModel &csv);
+    void ImportMultisizeMeasurements(const QxtCsvModel &csv);
 };
 
 #endif // TMAINWINDOW_H

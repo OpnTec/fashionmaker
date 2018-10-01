@@ -6,7 +6,7 @@
  **
  **  @brief
  **  @copyright
- **  This source code is part of the Valentine project, a pattern making
+ **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2013-2015 Valentina project
  **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
@@ -41,6 +41,7 @@
 #include "../vpatterndb/vcontainer.h"
 #include "../visualization.h"
 #include "vispath.h"
+#include "../vwidgets/scalesceneitems.h"
 
 //---------------------------------------------------------------------------------------------------------------------
 VisToolArc::VisToolArc(const VContainer *data, QGraphicsItem *parent)
@@ -60,7 +61,8 @@ void VisToolArc::RefreshGeometry()
         if (not qFuzzyIsNull(radius) && f1 >= 0 && f2 >= 0)
         {
             VArc arc = VArc (*first, radius, f1, f2);
-            DrawPath(this, arc.GetPath(PathDirection::Show), mainColor, Qt::SolidLine, Qt::RoundCap);
+            arc.SetApproximationScale(m_approximationScale);
+            DrawPath(this, arc.GetPath(), arc.DirectionArrows(), mainColor, lineStyle, Qt::RoundCap);
         }
     }
 }
@@ -68,17 +70,17 @@ void VisToolArc::RefreshGeometry()
 //---------------------------------------------------------------------------------------------------------------------
 void VisToolArc::setRadius(const QString &expression)
 {
-    radius = FindLength(expression, Visualization::data->PlainVariables());
+    radius = FindLengthFromUser(expression, Visualization::data->DataVariables());
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void VisToolArc::setF1(const QString &expression)
 {
-    f1 = FindVal(expression, Visualization::data->PlainVariables());
+    f1 = FindValFromUser(expression, Visualization::data->DataVariables());
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void VisToolArc::setF2(const QString &expression)
 {
-    f2 = FindVal(expression, Visualization::data->PlainVariables());
+    f2 = FindValFromUser(expression, Visualization::data->DataVariables());
 }

@@ -55,8 +55,8 @@ public:
     FancyTabBar(const TabBarPosition position, QWidget *parent = nullptr);
     virtual ~FancyTabBar() Q_DECL_EQ_DEFAULT;
 
-    virtual QSize sizeHint() const Q_DECL_OVERRIDE;
-    virtual QSize minimumSizeHint() const Q_DECL_OVERRIDE;
+    virtual QSize sizeHint() const override;
+    virtual QSize minimumSizeHint() const override;
 
     void SetOrientation(const TabBarPosition p);
 
@@ -84,12 +84,12 @@ signals:
     void CurrentChanged(int);
 
 protected:
-    virtual bool event(QEvent *event) Q_DECL_OVERRIDE;
-    virtual void paintEvent(QPaintEvent *event) Q_DECL_OVERRIDE;
-    virtual void mousePressEvent(QMouseEvent *) Q_DECL_OVERRIDE;
-    virtual void mouseMoveEvent(QMouseEvent *) Q_DECL_OVERRIDE;
-    virtual void enterEvent(QEvent *) Q_DECL_OVERRIDE;
-    virtual void leaveEvent(QEvent *) Q_DECL_OVERRIDE;
+    virtual bool event(QEvent *event) override;
+    virtual void paintEvent(QPaintEvent *event) override;
+    virtual void mousePressEvent(QMouseEvent *) override;
+    virtual void mouseMoveEvent(QMouseEvent *) override;
+    virtual void enterEvent(QEvent *) override;
+    virtual void leaveEvent(QEvent *) override;
 
 private slots:
     void EmitCurrentIndex();

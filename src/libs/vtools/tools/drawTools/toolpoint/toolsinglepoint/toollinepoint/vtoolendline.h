@@ -6,7 +6,7 @@
  **
  **  @brief
  **  @copyright
- **  This source code is part of the Valentine project, a pattern making
+ **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2013-2015 Valentina project
  **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
@@ -44,6 +44,20 @@
 
 template <class T> class QSharedPointer;
 
+struct VToolEndLineInitData : VToolLinePointInitData
+{
+    VToolEndLineInitData()
+        : VToolLinePointInitData(),
+          formulaLength(),
+          formulaAngle(),
+          basePointId(NULL_ID)
+    {}
+
+    QString formulaLength;
+    QString formulaAngle;
+    quint32 basePointId;
+};
+
 /**
  * @brief The VToolEndLine class tool for creation point on the line end.
  */
@@ -52,37 +66,31 @@ class VToolEndLine : public VToolLinePoint
     Q_OBJECT
 public:
     virtual ~VToolEndLine() Q_DECL_EQ_DEFAULT;
-    virtual void setDialog() Q_DECL_OVERRIDE;
-    static VToolEndLine *Create(QSharedPointer<DialogTool> dialog, VMainGraphicsScene  *scene, VAbstractPattern *doc,
+    virtual void setDialog() override;
+    static VToolEndLine *Create(const QPointer<DialogTool> &dialog, VMainGraphicsScene  *scene, VAbstractPattern *doc,
                                 VContainer *data);
-    static VToolEndLine *Create(const quint32 _id, const QString &pointName, const QString &typeLine,
-                                const QString &lineColor, QString &formulaLength, QString &formulaAngle,
-                                const quint32 &basePointId, const qreal &mx, const qreal &my,
-                                VMainGraphicsScene  *scene, VAbstractPattern *doc, VContainer *data,
-                                const Document &parse,
-                                const Source &typeCreation);
+    static VToolEndLine *Create(VToolEndLineInitData &initData);
     static const QString ToolType;
-    virtual int  type() const Q_DECL_OVERRIDE {return Type;}
+    virtual int  type() const override {return Type;}
     enum { Type = UserType + static_cast<int>(Tool::EndLine)};
 
     VFormula     GetFormulaAngle() const;
     void         SetFormulaAngle(const VFormula &value);
-    virtual void ShowVisualization(bool show) Q_DECL_OVERRIDE;
+    virtual void ShowVisualization(bool show) override;
+protected slots:
+    virtual void ShowContextMenu(QGraphicsSceneContextMenuEvent *event, quint32 id=NULL_ID) override;
 protected:
-    virtual void contextMenuEvent ( QGraphicsSceneContextMenuEvent * event ) Q_DECL_OVERRIDE;
-    virtual void SaveDialog(QDomElement &domElement) Q_DECL_OVERRIDE;
-    virtual void SaveOptions(QDomElement &tag, QSharedPointer<VGObject> &obj) Q_DECL_OVERRIDE;
-    virtual void ReadToolAttributes(const QDomElement &domElement) Q_DECL_OVERRIDE;
-    virtual void SetVisualization() Q_DECL_OVERRIDE;
+    virtual void SaveDialog(QDomElement &domElement, QList<quint32> &oldDependencies,
+                            QList<quint32> &newDependencies) override;
+    virtual void SaveOptions(QDomElement &tag, QSharedPointer<VGObject> &obj) override;
+    virtual void ReadToolAttributes(const QDomElement &domElement) override;
+    virtual void SetVisualization() override;
 private:
     Q_DISABLE_COPY(VToolEndLine)
 
     QString formulaAngle;
 
-    VToolEndLine(VAbstractPattern *doc, VContainer *data, const quint32 &id, const QString &typeLine,
-                 const QString &lineColor,
-                 const QString &formulaLength, const QString &formulaAngle, const quint32 &basePointId,
-                 const Source &typeCreation, QGraphicsItem * parent = nullptr);
+    VToolEndLine(const VToolEndLineInitData &initData, QGraphicsItem *parent = nullptr);
 };
 
 #endif // VTOOLENDLINE_H

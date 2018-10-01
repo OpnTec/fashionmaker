@@ -6,7 +6,7 @@
  **
  **  @brief
  **  @copyright
- **  This source code is part of the Valentine project, a pattern making
+ **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2016 Valentina project
  **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
@@ -47,9 +47,34 @@ void TST_VAbstractPiece::EquidistantRemoveLoop_data()
     QTest::addColumn<QVector<QPointF>>("ekvOrig");
 
     // See file src/app/share/collection/test/seamtest1.val
-    QTest::newRow("Seam test 1") << InputPointsCase1()
-                                 << 37.795275590551185 // seam allowance width
-                                 << OutputPointsCase1();
+    QTest::newRow("Seam test 1. Piece. By angle.") << InputPointsSeamTest1PieceByAngle()
+                                                   << 37.795275590551185 // seam allowance width
+                                                   << OutputPointsSeamTest1PieceByAngle();
+
+    // See file src/app/share/collection/test/seamtest1.val
+    QTest::newRow("Seam test 1. Piece. By intersection.") << InputPointsSeamTest1PieceByIntersection()
+                                                          << 37.795275590551185 // seam allowance width
+                                                          << OutputPointsSeamTest1PieceByIntersection();
+
+    // See file src/app/share/collection/test/seamtest1.val
+    QTest::newRow("Seam test 1. Piece. By first edge symmetry.") << InputPointsSeamTest1PieceByFirstEdgeSymmerty()
+                                                                 << 37.795275590551185 // seam allowance width
+                                                                 << OutputPointsSeamTest1PieceByFirstEdgeSymmerty();
+
+    // See file src/app/share/collection/test/seamtest1.val
+    QTest::newRow("Seam test 1. Piece. By second edge symmetry.") << InputPointsSeamTest1PieceBySecondEdgeSymmerty()
+                                                                  << 37.795275590551185 // seam allowance width
+                                                                  << OutputPointsSeamTest1PieceBySecondEdgeSymmerty();
+
+    // See file src/app/share/collection/test/seamtest1.val
+    QTest::newRow("Seam test 1. Piece. By first right angle.") << InputPointsSeamTest1PieceByFirstRightAngle()
+                                                               << 37.795275590551185 // seam allowance width
+                                                               << OutputPointsSeamTest1PieceByFirstRightAngle();
+
+    // See file src/app/share/collection/test/seamtest1.val
+    QTest::newRow("Seam test 1. Piece. By second right angle.") << InputPointsSeamTest1PieceBySecondRightAngle()
+                                                                << 37.795275590551185 // seam allowance width
+                                                                << OutputPointsSeamTest1PieceBySecondRightAngle();
 
     // See file src/app/share/collection/test/seamtest2.val
     QTest::newRow("Seam test 2") << InputPointsCase2()
@@ -64,13 +89,14 @@ void TST_VAbstractPiece::EquidistantRemoveLoop_data()
     // These are two real cases where equdistant has loop.
     // See issue #298. Segmented Curve isn't selected in Seam Allowance tool.
     // https://bitbucket.org/dismine/valentina/issue/298/segmented-curve-isnt-selected-in-seam
+    // See file src/app/share/collection/TestPuzzle.val
     // Code should clean loops in path.
     QTest::newRow("Issue 298. Case1") << InputPointsIssue298Case1()
-                                      << 75.5906 // seam allowance width
+                                      << 75.59055118110237 // seam allowance width
                                       << OutputPointsIssue298Case1();
 
     QTest::newRow("Issue 298. Case2") << InputPointsIssue298Case2()
-                                      << 37.7953 // seam allowance width
+                                      << 37.795275590551185 // seam allowance width
                                       << OutputPointsIssue298Case2();
 
     // See issue #548. Bug Detail tool. Case when seam allowance is wrong.
@@ -82,8 +108,8 @@ void TST_VAbstractPiece::EquidistantRemoveLoop_data()
                                       << 11.338582677165354 // seam allowance width (0.3 cm)
                                       << OutputPointsIssue548Case1();
 
-#ifndef Q_OS_WIN // Disabled due to "undefined behavior" problem
-#ifndef Q_CC_CLANG
+    // Disabled due to "undefined behavior" problem
+#if !defined(Q_OS_WIN) && !defined(Q_CC_CLANG) && !defined(Q_PROCESSOR_X86_64)
     QTest::newRow("Issue 548. Case2") << InputPointsIssue548Case2()
                                       << 37.795275590551185 // seam allowance width (1.0 cm)
                                       << OutputPointsIssue548Case2();
@@ -92,10 +118,10 @@ void TST_VAbstractPiece::EquidistantRemoveLoop_data()
                                       << 75.59055118110237 // seam allowance width (2.0 cm)
                                       << OutputPointsIssue548Case3();
 #endif
-#endif
 
+    // See file src/app/share/collection/bugs/Issue_#646.val
     QTest::newRow("Issue 646.") << InputPointsIssue646()
-                                << 37.795275590551185 // seam allowance width (1.0 cm
+                                << 37.795275590551185 // seam allowance width (1.0 cm)
                                 << OutputPointsIssue646();
 }
 
@@ -113,525 +139,1932 @@ void TST_VAbstractPiece::EquidistantRemoveLoop() const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QVector<VSAPoint> TST_VAbstractPiece::InputPointsCase1() const
+QVector<VSAPoint> TST_VAbstractPiece::InputPointsSeamTest1PieceByAngle() const
 {
-
     QVector<VSAPoint> points;
 
     VSAPoint p = VSAPoint(30.0, 894.8030236220472);
-    p.SetSAAfter(0);
     p.SetSABefore(75.59055118110237);
+    p.SetSAAfter(0.0);
     points.append(p);
 
     p = VSAPoint(30.0, 39.999874015748034);
-    //////p.SetSAAfter(-1);
-    p.SetSABefore(0);
+    p.SetSABefore(0.0);
     points.append(p);
 
     p = VSAPoint(30.0, 39.999874015748034);
-    //////p.SetSAAfter(-1);
-    p.SetSABefore(0);
+    p.SetSABefore(0.0);
     points.append(p);
 
-    p = VSAPoint(47.64159471849116, 39.94788491648882);
-    //////p.SetSAAfter(-1);
-    //////p.SetSABefore(-1);
+    points.append(VSAPoint(47.53637144700478, 39.80977598775412));
+    points.append(VSAPoint(85.4092492068762, 37.36146293134895));
+    points.append(VSAPoint(125.57923134501877, 32.13056337758208));
+    points.append(VSAPoint(156.5108311435474, 26.074993549693005));
+    points.append(VSAPoint(177.21129897469388, 21.059222548891512));
+    points.append(VSAPoint(197.8216319874312, 15.159776113211533));
+    points.append(VSAPoint(218.19418331220902, 8.334870062533497));
+    points.append(VSAPoint(238.18130607947683, 0.5427202167378373));
+    points.append(VSAPoint(257.6353534196842, -8.258457604295018));
+    points.append(VSAPoint(276.4086784632808, -18.110447580684635));
+    points.append(VSAPoint(294.3536343407161, -29.055033892550586));
+    points.append(VSAPoint(311.32257418243984, -41.13400072001244));
+    points.append(VSAPoint(327.16785111890135, -54.389132243189756));
+
+    p = VSAPoint(334.5669291338582, -61.522435695538036);
+    p.SetSAAfter(0.3779527559055119);
     points.append(p);
 
-    p = VSAPoint(76.58589406160007, 39.22029871626823);
-    //////p.SetSAAfter(-1);
-    //////p.SetSABefore(-1);
+    p = VSAPoint(334.5669291338582, -61.522435695538036);
+    p.SetSAAfter(0.3779527559055119);
     points.append(p);
 
-    p = VSAPoint(96.8510955083063, 38.214779786537555);
-    //////p.SetSAAfter(-1);
-    //////p.SetSABefore(-1);
+    p = VSAPoint(519.4465667350105, -36.01405338211433);
+    p.SetSABefore(0.3779527559055119);
     points.append(p);
 
-    p = VSAPoint(117.72526111352542, 36.63514697516433);
-    //////p.SetSAAfter(-1);
-    //////p.SetSABefore(-1);
+    points.append(VSAPoint(460.3937007874016, 342.36207874015753));
+
+    p = VSAPoint(620.5290071875436, -5.506318761785565);
+    p.SetSAAfter(0.0);
     points.append(p);
 
-    p = VSAPoint(139.00155591749595, 34.36192982961571);
-    //////p.SetSAAfter(-1);
-    //////p.SetSABefore(-1);
+    p = VSAPoint(944.294593326342, 136.63905516701556);
+    p.SetSABefore(0.0);
+    p.SetSAAfter(188.9763779527559);
     points.append(p);
 
-    p = VSAPoint(160.47314496045635, 31.27565789735886);
-    //////p.SetSAAfter(-1);
-    //////p.SetSABefore(-1);
+    p = VSAPoint(944.294593326342, 136.63905516701556);
+    p.SetSABefore(0.0);
+    p.SetSAAfter(188.9763779527559);
     points.append(p);
 
-    p = VSAPoint(181.9331932826451, 27.25686072586095);
-    //////p.SetSAAfter(-1);
-    //////p.SetSABefore(-1);
+    p = VSAPoint(930.9115139455133, 164.2021651072791);
+    p.SetSABefore(188.9763779527559);
+    p.SetSAAfter(188.9763779527559);
     points.append(p);
 
-    p = VSAPoint(203.17486592430072, 22.18606786258914);
-    //////p.SetSAAfter(-1);
-    //////p.SetSABefore(-1);
+    p = VSAPoint(907.1077633892038, 216.20756088951924);
+    p.SetSABefore(188.9763779527559);
+    p.SetSAAfter(188.9763779527559);
     points.append(p);
 
-    p = VSAPoint(223.99132792566166, 15.943808855010598);
-    //////p.SetSAAfter(-1);
-    //////p.SetSABefore(-1);
+    p = VSAPoint(886.6420235246574, 264.5706340127217);
+    p.SetSABefore(188.9763779527559);
+    p.SetSAAfter(188.9763779527559);
     points.append(p);
 
-    p = VSAPoint(239.1756066691363, 10.378329140641144);
-    //////p.SetSAAfter(-1);
-    //////p.SetSABefore(-1);
+    p = VSAPoint(869.2733175133691, 309.4054580978941);
+    p.SetSABefore(188.9763779527559);
+    p.SetSAAfter(188.9763779527559);
     points.append(p);
 
-    p = VSAPoint(249.07102191481937, 6.266596479372291);
-    //////p.SetSAAfter(-1);
-    //////p.SetSABefore(-1);
+    p = VSAPoint(854.760668516834, 350.82610676604384);
+    p.SetSABefore(188.9763779527559);
+    p.SetSAAfter(188.9763779527559);
     points.append(p);
 
-    p = VSAPoint(258.7437898355629, 1.7947951524770347);
-    //////p.SetSAAfter(-1);
-    //////p.SetSABefore(-1);
+    p = VSAPoint(842.8630996965472, 388.9466536381784);
+    p.SetSABefore(188.9763779527559);
+    p.SetSAAfter(188.9763779527559);
     points.append(p);
 
-    p = VSAPoint(268.16805606139667, -3.0520086466112275);
-    //////p.SetSAAfter(-1);
-    //////p.SetSABefore(-1);
+    p = VSAPoint(833.3396342140039, 423.88117233530534);
+    p.SetSABefore(188.9763779527559);
+    p.SetSAAfter(188.9763779527559);
     points.append(p);
 
-    p = VSAPoint(277.3179662223507, -8.2887487244591);
-    //////p.SetSAAfter(-1);
-    //////p.SetSABefore(-1);
+    p = VSAPoint(825.9492952306991, 455.74373647843197);
+    p.SetSABefore(188.9763779527559);
+    p.SetSAAfter(188.9763779527559);
     points.append(p);
 
-    p = VSAPoint(286.16766594845456, -13.93035888763319);
-    //////p.SetSAAfter(-1);
-    //////p.SetSABefore(-1);
+    p = VSAPoint(820.451105908128, 484.6484196885659);
+    p.SetSABefore(188.9763779527559);
+    p.SetSAAfter(188.9763779527559);
     points.append(p);
 
-    p = VSAPoint(294.69130086973814, -19.991772942700095);
-    //////p.SetSAAfter(-1);
-    //////p.SetSABefore(-1);
+    p = VSAPoint(816.6040894077855, 510.7092955867147);
+    p.SetSABefore(188.9763779527559);
+    p.SetSAAfter(188.9763779527559);
     points.append(p);
 
-    p = VSAPoint(302.86301661623133, -26.48792469622643);
-    //////p.SetSAAfter(-1);
-    //////p.SetSABefore(-1);
+    p = VSAPoint(814.1672688911669, 534.0404377938855);
+    p.SetSABefore(188.9763779527559);
+    p.SetSAAfter(188.9763779527559);
     points.append(p);
 
-    p = VSAPoint(310.6569588179638, -33.433747954778795);
-    //////p.SetSAAfter(-1);
-    //////p.SetSABefore(-1);
+    p = VSAPoint(812.8996675197673, 554.7559199310863);
+    p.SetSABefore(188.9763779527559);
+    p.SetSAAfter(188.9763779527559);
     points.append(p);
 
-    p = VSAPoint(318.04727310496537, -40.84417652492378);
-    //////p.SetSAAfter(-1);
-    //////p.SetSABefore(-1);
-    points.append(p);
-
-    p = VSAPoint(325.00810510726603, -48.73414421322801);
-    //////p.SetSAAfter(-1);
-    //////p.SetSABefore(-1);
-    points.append(p);
-
-    p = VSAPoint(331.51360045489537, -57.118584826258086);
-    //////p.SetSAAfter(-1);
-    //////p.SetSABefore(-1);
-    points.append(p);
-
-    p = VSAPoint(334.56692913385825, -61.522435695538036);
-    p.SetSAAfter(0);
-    //////p.SetSABefore(-1);
-    points.append(p);
-
-    p = VSAPoint(334.56692913385825, -61.522435695538036);
-    p.SetSAAfter(0);
-    //////p.SetSABefore(-1);
-    points.append(p);
-
-    p = VSAPoint(519.4465667350105, -36.01405338211436);
-    //////p.SetSAAfter(-1);
-    p.SetSABefore(0);
-    points.append(p);
-
-    p = VSAPoint(460.3937007874016, 342.36207874015753);
-    //////p.SetSAAfter(-1);
-    //////p.SetSABefore(-1);
-    points.append(p);
-
-    p = VSAPoint(620.5290071875437, -5.50631876178551);
-    p.SetSAAfter(0);
-    //////p.SetSABefore(-1);
-    points.append(p);
-
-    p = VSAPoint(944.2945933263424, 136.63905516701567);
-    p.SetSAAfter(188.97637795275591);
-    p.SetSABefore(0);
-    points.append(p);
-
-    p = VSAPoint(944.2945933263424, 136.63905516701567);
-    p.SetSAAfter(188.97637795275591);
-    p.SetSABefore(0);
-    points.append(p);
-
-    p = VSAPoint(937.525981220313, 150.5000566598672);
-    p.SetSAAfter(188.97637795275591);
-    p.SetSABefore(188.97637795275591);
-    points.append(p);
-
-    p = VSAPoint(924.7444201119979, 177.43472401968558);
-    p.SetSAAfter(188.97637795275591);
-    p.SetSABefore(188.97637795275591);
-    points.append(p);
-
-    p = VSAPoint(912.8425448338431, 203.43742191080565);
-    p.SetSAAfter(188.97637795275591);
-    p.SetSABefore(188.97637795275591);
-    points.append(p);
-
-    p = VSAPoint(901.7902332810357, 228.52240953585334);
-    p.SetSAAfter(188.97637795275591);
-    p.SetSABefore(188.97637795275591);
-    points.append(p);
-
-    p = VSAPoint(891.5573633487625, 252.7039460974546);
-    p.SetSAAfter(188.97637795275591);
-    p.SetSABefore(188.97637795275591);
-    points.append(p);
-
-    p = VSAPoint(882.1138129322104, 275.99629079823535);
-    p.SetSAAfter(188.97637795275591);
-    p.SetSABefore(188.97637795275591);
-    points.append(p);
-
-    p = VSAPoint(869.2733175133695, 309.4054580978942);
-    p.SetSAAfter(188.97637795275591);
-    p.SetSABefore(188.97637795275591);
-    points.append(p);
-
-    p = VSAPoint(854.7606685168345, 350.82610676604395);
-    p.SetSAAfter(188.97637795275591);
-    p.SetSABefore(188.97637795275591);
-    points.append(p);
-
-    p = VSAPoint(842.8630996965477, 388.94665363817853);
-    p.SetSAAfter(188.97637795275591);
-    p.SetSABefore(188.97637795275591);
-    points.append(p);
-
-    p = VSAPoint(833.3396342140044, 423.88117233530545);
-    p.SetSAAfter(188.97637795275591);
-    p.SetSABefore(188.97637795275591);
-    points.append(p);
-
-    p = VSAPoint(825.9492952306994, 455.7437364784321);
-    p.SetSAAfter(188.97637795275591);
-    p.SetSABefore(188.97637795275591);
-    points.append(p);
-
-    p = VSAPoint(820.4511059081283, 484.6484196885659);
-    p.SetSAAfter(188.97637795275591);
-    p.SetSABefore(188.97637795275591);
-    points.append(p);
-
-    p = VSAPoint(816.6040894077858, 510.7092955867147);
-    p.SetSAAfter(188.97637795275591);
-    p.SetSABefore(188.97637795275591);
-    points.append(p);
-
-    p = VSAPoint(814.1672688911672, 534.0404377938855);
-    p.SetSAAfter(188.97637795275591);
-    p.SetSABefore(188.97637795275591);
-    points.append(p);
-
-    p = VSAPoint(812.8996675197675, 554.7559199310863);
-    p.SetSAAfter(188.97637795275591);
-    p.SetSABefore(188.97637795275591);
-    points.append(p);
-
-    p = VSAPoint(812.5603084550817, 572.9698156193242);
-    p.SetSAAfter(188.97637795275591);
-    p.SetSABefore(188.97637795275591);
-    points.append(p);
-
-    p = VSAPoint(812.9082148586052, 588.7961984796068);
-    p.SetSAAfter(188.97637795275591);
-    p.SetSABefore(188.97637795275591);
+    p = VSAPoint(812.5925673946043, 581.4656260538284);
+    p.SetSABefore(188.9763779527559);
+    p.SetSAAfter(188.9763779527559);
     points.append(p);
 
     p = VSAPoint(814.1809574610598, 608.5715133604979);
-    p.SetSAAfter(188.97637795275591);
-    p.SetSABefore(188.97637795275591);
+    p.SetSABefore(188.9763779527559);
+    p.SetSAAfter(188.9763779527559);
     points.append(p);
 
     p = VSAPoint(815.1968503937007, 618.5825511811024);
-    p.SetSAAfter(188.97637795275591);
-    p.SetSABefore(188.97637795275591);
+    p.SetSABefore(188.9763779527559);
+    p.SetSAAfter(188.9763779527559);
     points.append(p);
 
-    p = VSAPoint(815.1968503937007, 618.5825511811024);
-    p.SetSAAfter(188.97637795275591);
-    p.SetSABefore(188.97637795275591);
+    p = VSAPoint(816.3634787672067, 628.380932746632);
+    p.SetSABefore(188.9763779527559);
+    p.SetSAAfter(188.9763779527559);
     points.append(p);
 
-    p = VSAPoint(815.7375399808675, 623.4475087782134);
-    p.SetSAAfter(188.97637795275591);
-    p.SetSABefore(188.97637795275591);
+    p = VSAPoint(820.4053369940075, 649.1688436779486);
+    p.SetSABefore(188.9763779527559);
+    p.SetSAAfter(188.9763779527559);
     points.append(p);
 
-    p = VSAPoint(817.2456173381056, 633.4974833757362);
-    p.SetSAAfter(188.97637795275591);
-    p.SetSABefore(188.97637795275591);
+    p = VSAPoint(826.5040284899703, 671.0654086429722);
+    p.SetSABefore(188.9763779527559);
+    p.SetSAAfter(188.9763779527559);
     points.append(p);
 
-    p = VSAPoint(819.2665464515061, 643.8914388413946);
-    p.SetSAAfter(188.97637795275591);
-    p.SetSABefore(188.97637795275591);
+    p = VSAPoint(834.6667882477791, 693.7142683899226);
+    p.SetSABefore(188.9763779527559);
+    p.SetSAAfter(188.9763779527559);
     points.append(p);
 
-    p = VSAPoint(821.8012316951542, 654.584830268716);
-    p.SetSAAfter(188.97637795275591);
-    p.SetSABefore(188.97637795275591);
+    p = VSAPoint(844.9008512601183, 716.7590636670197);
+    p.SetSABefore(188.9763779527559);
+    p.SetSAAfter(188.9763779527559);
     points.append(p);
 
-    p = VSAPoint(824.8505774431355, 665.5331127512278);
-    p.SetSAAfter(188.97637795275591);
-    p.SetSABefore(188.97637795275591);
+    p = VSAPoint(857.2134525196718, 739.8434352224829);
+    p.SetSABefore(188.9763779527559);
+    p.SetSAAfter(188.9763779527559);
     points.append(p);
 
-    p = VSAPoint(828.4154880695357, 676.6917413824576);
-    p.SetSAAfter(188.97637795275591);
-    p.SetSABefore(188.97637795275591);
+    p = VSAPoint(871.6118270191237, 762.6110238045324);
+    p.SetSABefore(188.9763779527559);
+    p.SetSAAfter(188.9763779527559);
     points.append(p);
 
-    p = VSAPoint(832.4968679484402, 688.0161712559327);
-    p.SetSAAfter(188.97637795275591);
-    p.SetSABefore(188.97637795275591);
+    p = VSAPoint(888.1032097511581, 784.7054701613878);
+    p.SetSABefore(188.9763779527559);
+    p.SetSAAfter(188.9763779527559);
     points.append(p);
 
-    p = VSAPoint(837.0956214539344, 699.4618574651809);
-    p.SetSAAfter(188.97637795275591);
-    p.SetSABefore(188.97637795275591);
+    p = VSAPoint(906.6948357084594, 805.7704150412691);
+    p.SetSABefore(188.9763779527559);
+    p.SetSAAfter(188.9763779527559);
     points.append(p);
 
-    p = VSAPoint(842.212652960104, 710.9842551037295);
-    p.SetSAAfter(188.97637795275591);
-    p.SetSABefore(188.97637795275591);
+    p = VSAPoint(927.3939398837115, 825.4494991923958);
+    p.SetSABefore(188.9763779527559);
+    p.SetSAAfter(188.9763779527559);
     points.append(p);
 
-    p = VSAPoint(847.8488668410344, 722.5388192651058);
-    p.SetSAAfter(188.97637795275591);
-    p.SetSABefore(188.97637795275591);
-    points.append(p);
-
-    p = VSAPoint(854.0051674708111, 734.0810050428374);
-    p.SetSAAfter(188.97637795275591);
-    p.SetSABefore(188.97637795275591);
-    points.append(p);
-
-    p = VSAPoint(860.6824592235198, 745.5662675304518);
-    p.SetSAAfter(188.97637795275591);
-    p.SetSABefore(188.97637795275591);
-    points.append(p);
-
-    p = VSAPoint(867.8816464732456, 756.9500618214765);
-    p.SetSAAfter(188.97637795275591);
-    p.SetSABefore(188.97637795275591);
-    points.append(p);
-
-    p = VSAPoint(875.6036335940746, 768.187843009439);
-    p.SetSAAfter(188.97637795275591);
-    p.SetSABefore(188.97637795275591);
-    points.append(p);
-
-    p = VSAPoint(883.8493249600917, 779.2350661878667);
-    p.SetSAAfter(188.97637795275591);
-    p.SetSABefore(188.97637795275591);
-    points.append(p);
-
-    p = VSAPoint(892.6196249453828, 790.0471864502871);
-    p.SetSAAfter(188.97637795275591);
-    p.SetSABefore(188.97637795275591);
-    points.append(p);
-
-    p = VSAPoint(901.9154379240335, 800.5796588902277);
-    p.SetSAAfter(188.97637795275591);
-    p.SetSABefore(188.97637795275591);
-    points.append(p);
-
-    p = VSAPoint(911.7376682701291, 810.7879386012161);
-    p.SetSAAfter(188.97637795275591);
-    p.SetSABefore(188.97637795275591);
-    points.append(p);
-
-    p = VSAPoint(922.0872203577552, 820.6274806767794);
-    p.SetSAAfter(188.97637795275591);
-    p.SetSABefore(188.97637795275591);
-    points.append(p);
-
-    p = VSAPoint(932.9649985609971, 830.0537402104453);
-    p.SetSAAfter(188.97637795275591);
-    p.SetSABefore(188.97637795275591);
-    points.append(p);
-
-    p = VSAPoint(944.3719072539405, 839.0221722957415);
-    p.SetSAAfter(188.97637795275591);
-    p.SetSABefore(188.97637795275591);
-    points.append(p);
-
-    p = VSAPoint(956.3088508106711, 847.4882320261951);
-    p.SetSAAfter(188.97637795275591);
-    p.SetSABefore(188.97637795275591);
+    p = VSAPoint(950.2077572695983, 843.3863633629879);
+    p.SetSABefore(188.9763779527559);
+    p.SetSAAfter(188.9763779527559);
     points.append(p);
 
     p = VSAPoint(968.776733605274, 855.4073744953336);
-    p.SetSAAfter(188.97637795275591);
-    p.SetSABefore(188.97637795275591);
+    p.SetSABefore(188.9763779527559);
+    p.SetSAAfter(188.9763779527559);
     points.append(p);
 
     p = VSAPoint(981.7764600118351, 862.7350547966848);
-    p.SetSAAfter(188.97637795275591);
-    p.SetSABefore(188.97637795275591);
+    p.SetSABefore(188.9763779527559);
+    p.SetSAAfter(188.9763779527559);
     points.append(p);
 
     p = VSAPoint(995.3089344044396, 869.4267280237759);
-    p.SetSAAfter(188.97637795275591);
-    p.SetSABefore(188.97637795275591);
+    p.SetSABefore(188.9763779527559);
+    p.SetSAAfter(188.9763779527559);
     points.append(p);
 
     p = VSAPoint(1009.3750611571733, 875.4378492701345);
-    p.SetSAAfter(188.97637795275591);
-    p.SetSABefore(188.97637795275591);
+    p.SetSABefore(188.9763779527559);
+    p.SetSAAfter(188.9763779527559);
     points.append(p);
 
     p = VSAPoint(1023.9757446441214, 880.7238736292878);
-    p.SetSAAfter(188.97637795275591);
-    p.SetSABefore(188.97637795275591);
+    p.SetSABefore(188.9763779527559);
+    p.SetSAAfter(188.9763779527559);
     points.append(p);
 
     p = VSAPoint(1039.1118892393697, 885.2402561947638);
-    p.SetSAAfter(188.97637795275591);
-    p.SetSABefore(188.97637795275591);
+    p.SetSABefore(188.9763779527559);
+    p.SetSAAfter(188.9763779527559);
     points.append(p);
 
     p = VSAPoint(1054.784399317004, 888.9424520600894);
-    p.SetSAAfter(188.97637795275591);
-    p.SetSABefore(188.97637795275591);
+    p.SetSABefore(188.9763779527559);
+    p.SetSAAfter(188.9763779527559);
     points.append(p);
 
     p = VSAPoint(1070.994179251109, 891.7859163187926);
-    p.SetSAAfter(188.97637795275591);
-    p.SetSABefore(188.97637795275591);
+    p.SetSABefore(188.9763779527559);
+    p.SetSAAfter(188.9763779527559);
     points.append(p);
 
     p = VSAPoint(1087.7421334157707, 893.7261040644007);
-    p.SetSAAfter(188.97637795275591);
-    p.SetSABefore(188.97637795275591);
+    p.SetSABefore(188.9763779527559);
+    p.SetSAAfter(188.9763779527559);
     points.append(p);
 
     p = VSAPoint(1105.0291661850742, 894.7184703904409);
-    p.SetSAAfter(188.97637795275591);
-    p.SetSABefore(188.97637795275591);
+    p.SetSABefore(188.9763779527559);
+    p.SetSAAfter(188.9763779527559);
     points.append(p);
 
     p = VSAPoint(1113.8976377952758, 894.8030236220472);
-    p.SetSAAfter(0);
-    p.SetSABefore(188.97637795275591);
+    p.SetSABefore(188.9763779527559);
+    p.SetSAAfter(0.0);
     points.append(p);
 
     p = VSAPoint(1113.8976377952758, 894.8030236220472);
-    p.SetSAAfter(0);
-    p.SetSABefore(188.97637795275591);
+    p.SetSABefore(188.9763779527559);
+    p.SetSAAfter(0.0);
     points.append(p);
 
     return points;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QVector<QPointF> TST_VAbstractPiece::OutputPointsCase1() const
+QVector<QPointF> TST_VAbstractPiece::OutputPointsSeamTest1PieceByAngle() const
 {
     QVector<QPointF> points;
 
     points += QPointF(30.0, 970.3935748031496);
-    points += QPointF(30.0, 2.204434307474013);
-    points += QPointF(47.110950439162494, 2.154008996440882);
-    points += QPointF(75.17428353484098, 1.4485680510386028);
-    points += QPointF(94.48820285018608, 0.4902498458165696);
-    points += QPointF(114.29080866669788, -1.0082936883322242);
-    points += QPointF(134.30369213200785, -3.146524533710341);
-    points += QPointF(154.30324182399514, -6.0212092507409025);
-    points += QPointF(174.06202812984606, -9.721413151776975);
-    points += QPointF(193.35089649585723, -14.32603434620921);
-    points += QPointF(212.04908234619523, -19.93308318294329);
-    points += QPointF(225.4146962614004, -24.83196935145066);
-    points += QPointF(233.88383173589082, -28.35105572413872);
-    points += QPointF(242.16354279128632, -32.17883523742874);
-    points += QPointF(250.12919225691988, -36.27548734456109);
-    points += QPointF(257.76141086050376, -40.64361165848513);
-    points += QPointF(265.0438386703493, -45.28609897626606);
-    points += QPointF(271.9635110924753, -50.20688688697322);
-    points += QPointF(278.5110730948284, -55.4119084151831);
-    points += QPointF(284.68071875165725, -60.91018735939974);
-    points += QPointF(290.46975730117975, -66.71498198586181);
-    points += QPointF(295.87773947883056, -72.84482460043537);
-    points += QPointF(301.0311752209645, -79.48669791277798);
-    points += QPointF(292.5914051639158, -67.31392104851938);
-    points += QPointF(556.8930273120665, -30.847456102511416);
-    points += QPointF(539.6101141051189, 79.89131577778163);
-    points += QPointF(585.9167315845334, -20.702420721823447);
-    points += QPointF(1117.4712505569892, 212.6701769158142);
-    points += QPointF(1107.8013393916237, 232.47256047676322);
-    points += QPointF(1096.0328222042483, 257.2724337531229);
-    points += QPointF(1085.2347243947604, 280.86364678273935);
-    points += QPointF(1075.284743777034, 303.4467181585846);
-    points += QPointF(1066.1500107021461, 325.033221582634);
-    points += QPointF(1057.8916931702825, 345.40221101096097);
-    points += QPointF(1046.6844069650929, 374.5619971088514);
-    points += QPointF(1034.1843603449327, 410.2384638595294);
-    points += QPointF(1024.281900134066, 441.9665592645446);
-    points += QPointF(1016.6128103198599, 470.0987514791772);
-    points += QPointF(1010.8915481272591, 494.7652903217387);
-    points += QPointF(1006.8300406648394, 516.1171535751373);
-    points += QPointF(1004.140951447517, 534.3338730421456);
-    points += QPointF(1002.5429209641061, 549.6340874837038);
-    points += QPointF(1001.7684597861733, 562.2905401031172);
-    points += QPointF(1001.5753826870504, 572.6532694631434);
-    points += QPointF(1001.7511114738644, 580.6472328726268);
-    points += QPointF(1002.5434394846042, 592.958077085046);
-    points += QPointF(1003.1165308093626, 598.6055609315013);
-    points += QPointF(1003.1581157531632, 598.979729387987);
-    points += QPointF(1003.5253444923072, 601.4269775229475);
-    points += QPointF(1004.0349710465857, 604.0480668398186);
-    points += QPointF(1004.8346806929111, 607.4219012430418);
-    points += QPointF(1005.9446128953437, 611.4069696127774);
-    points += QPointF(1007.3734895026099, 615.879537116226);
-    points += QPointF(1009.1216689960736, 620.7301358517914);
-    points += QPointF(1011.1831553003773, 625.860901250618);
-    points += QPointF(1013.5469326629959, 631.1835932583286);
-    points += QPointF(1016.1978697144372, 636.6181674061058);
-    points += QPointF(1019.1173567112357, 642.0917891993197);
-    points += QPointF(1022.283791807397, 647.5382096308747);
-    points += QPointF(1025.6730034935645, 652.8974380139866);
-    points += QPointF(1029.258679857382, 658.1156604426072);
-    points += QPointF(1033.0128662502555, 663.1453581470851);
-    points += QPointF(1036.906587776057, 667.9455799725583);
-    points += QPointF(1040.910648783598, 672.4823173517011);
-    points += QPointF(1044.9966554234593, 676.7289189086724);
-    points += QPointF(1049.138296281844, 680.666466074281);
-    points += QPointF(1053.3128972071952, 684.2840128781046);
-    points += QPointF(1057.5032369521043, 687.5785757108713);
-    points += QPointF(1061.6995688685456, 690.5547476668297);
-    points += QPointF(1065.9017414956827, 693.2238137995831);
-    points += QPointF(1070.1212524492987, 695.6022659553563);
-    points += QPointF(1074.3830151134682, 697.7096649640421);
+    points += QPointF(30.0, 2.2023778242823937);
+    points += QPointF(46.111397855976776, 2.027726815668483);
+    points += QPointF(81.74605442368645, -0.2758951981748612);
+    points += QPointF(119.50208828052781, -5.192452541281906);
+    points += QPointF(148.42595722778273, -10.854963023883784);
+    points += QPointF(167.5566961450379, -15.490385095876569);
+    points += QPointF(186.61281642420556, -20.94495784777482);
+    points += QPointF(205.31950565747624, -27.21179180985321);
+    points += QPointF(223.51736443487215, -34.306381867523655);
+    points += QPointF(241.0503469884652, -42.23845350735769);
+    points += QPointF(257.76798751706616, -51.01164773556077);
+    points += QPointF(273.5285590176657, -60.62398316233916);
+    points += QPointF(284.94491218126115, -68.7504632158891);
+    points += QPointF(556.951317720607, -31.220946854728947);
+    points += QPointF(539.6101141051189, 79.89131577778124);
+    points += QPointF(585.9167315845332, -20.7024207218235);
+    points += QPointF(1117.4559101159903, 212.6634418802967);
+    points += QPointF(1101.8482040478996, 244.8082798528157);
+    points += QPointF(1080.077560308019, 292.3718325563429);
+    points += QPointF(1061.8089025447719, 335.54292908714797);
+    points += QPointF(1046.6013689355652, 374.7989965048928);
+    points += QPointF(1034.1843603449322, 410.2384638595293);
+    points += QPointF(1024.2819001340656, 441.96655926454446);
+    points += QPointF(1016.6128103198596, 470.0987514791764);
+    points += QPointF(1010.891548127259, 494.7652903217379);
+    points += QPointF(1006.8300406648392, 516.1171535751373);
+    points += QPointF(1004.1409514475167, 534.3338730421456);
+    points += QPointF(1002.5429209641059, 549.6340874837038);
+    points += QPointF(1001.8096437359794, 561.6175009318105);
+    points += QPointF(1001.632561636562, 577.0190278199144);
+    points += QPointF(1002.5982079396683, 593.4977885619218);
+    points += QPointF(1003.0419281414149, 597.870394747796);
+    points += QPointF(1003.1926540422378, 599.1363247745379);
+    points += QPointF(1004.4715714217981, 605.7139974891637);
+    points += QPointF(1006.6672239434022, 613.5972045855956);
+    points += QPointF(1010.1411052399322, 623.2360341722922);
+    points += QPointF(1014.8474980040493, 633.8337662374475);
+    points += QPointF(1020.6660121283516, 644.7426504865729);
+    points += QPointF(1027.4243046890665, 655.4292751847524);
+    points += QPointF(1034.913026324476, 665.4623428264111);
+    points += QPointF(1042.9029269068749, 674.5151720813944);
+    points += QPointF(1051.171411576988, 682.3761985416603);
+    points += QPointF(1060.1878101895825, 689.4651444417038);
+    points += QPointF(1066.6143341082677, 693.625487703081);
+    points += QPointF(1070.1212524493003, 695.6022659553572);
+    points += QPointF(1074.3830151134664, 697.7096649640414);
     points += QPointF(1078.7265805419665, 699.565875909043);
     points += QPointF(1083.206554246492, 701.1878034134409);
-    points += QPointF(1087.8919933013688, 702.5858632116882);
+    points += QPointF(1087.891993301369, 702.5858632116882);
     points += QPointF(1092.8646688655851, 703.7605199081748);
     points += QPointF(1098.2162239125396, 704.699271425244);
     points += QPointF(1104.0444208482252, 705.3744462055462);
-    points += QPointF(1111.3488014116317, 705.7937559506274);
-    points += QPointF(1290.2705536650083, 707.499620616225);
-    points += QPointF(1302.4161318705774, 881.6558256043734);
+    points += QPointF(1111.3488014116294, 705.7937559506272);
+    points += QPointF(1290.2705536650083, 707.4996206162249);
+    points += QPointF(1302.416131870577, 881.6558256043734);
+    points += QPointF(30.0, 970.3935748031496);
+
+    return points;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QVector<VSAPoint> TST_VAbstractPiece::InputPointsSeamTest1PieceByIntersection() const
+{
+    QVector<VSAPoint> points;
+
+    VSAPoint p = VSAPoint(30.0, 894.8030236220472);
+    p.SetSABefore(75.59055118110237);
+    p.SetSAAfter(0.0);
+    points.append(p);
+
+    p = VSAPoint(30.0, 39.999874015748034);
+    p.SetSABefore(0.0);
+    points.append(p);
+
+    p = VSAPoint(30.0, 39.999874015748034);
+    p.SetSABefore(0.0);
+    points.append(p);
+
+    points.append(VSAPoint(47.53637144700478, 39.80977598775412));
+    points.append(VSAPoint(85.4092492068762, 37.36146293134895));
+    points.append(VSAPoint(125.57923134501877, 32.13056337758208));
+    points.append(VSAPoint(156.5108311435474, 26.074993549693005));
+    points.append(VSAPoint(177.21129897469388, 21.059222548891512));
+    points.append(VSAPoint(197.8216319874312, 15.159776113211533));
+    points.append(VSAPoint(218.19418331220902, 8.334870062533497));
+    points.append(VSAPoint(238.18130607947683, 0.5427202167378373));
+    points.append(VSAPoint(257.6353534196842, -8.258457604295018));
+    points.append(VSAPoint(276.4086784632808, -18.110447580684635));
+    points.append(VSAPoint(294.3536343407161, -29.055033892550586));
+    points.append(VSAPoint(311.32257418243984, -41.13400072001244));
+    points.append(VSAPoint(327.16785111890135, -54.389132243189756));
+
+    p = VSAPoint(334.5669291338582, -61.522435695538036);
+    p.SetSAAfter(0.3779527559055119);
+    p.SetAngleType(PieceNodeAngle::ByPointsIntersection);
+    points.append(p);
+
+    p = VSAPoint(334.5669291338582, -61.522435695538036);
+    p.SetSAAfter(0.3779527559055119);
+    p.SetAngleType(PieceNodeAngle::ByPointsIntersection);
+    points.append(p);
+
+    p = VSAPoint(519.4465667350105, -36.01405338211433);
+    p.SetSABefore(0.3779527559055119);
+    points.append(p);
+
+    points.append(VSAPoint(460.3937007874016, 342.36207874015753));
+
+    p = VSAPoint(620.5290071875436, -5.506318761785565);
+    p.SetSAAfter(0.0);
+    points.append(p);
+
+    p = VSAPoint(944.294593326342, 136.63905516701556);
+    p.SetSABefore(0.0);
+    p.SetSAAfter(188.9763779527559);
+    points.append(p);
+
+    p = VSAPoint(944.294593326342, 136.63905516701556);
+    p.SetSABefore(0.0);
+    p.SetSAAfter(188.9763779527559);
+    points.append(p);
+
+    p = VSAPoint(930.9115139455133, 164.2021651072791);
+    p.SetSABefore(188.9763779527559);
+    p.SetSAAfter(188.9763779527559);
+    points.append(p);
+
+    p = VSAPoint(907.1077633892038, 216.20756088951924);
+    p.SetSABefore(188.9763779527559);
+    p.SetSAAfter(188.9763779527559);
+    points.append(p);
+
+    p = VSAPoint(886.6420235246574, 264.5706340127217);
+    p.SetSABefore(188.9763779527559);
+    p.SetSAAfter(188.9763779527559);
+    points.append(p);
+
+    p = VSAPoint(869.2733175133691, 309.4054580978941);
+    p.SetSABefore(188.9763779527559);
+    p.SetSAAfter(188.9763779527559);
+    points.append(p);
+
+    p = VSAPoint(854.760668516834, 350.82610676604384);
+    p.SetSABefore(188.9763779527559);
+    p.SetSAAfter(188.9763779527559);
+    points.append(p);
+
+    p = VSAPoint(842.8630996965472, 388.9466536381784);
+    p.SetSABefore(188.9763779527559);
+    p.SetSAAfter(188.9763779527559);
+    points.append(p);
+
+    p = VSAPoint(833.3396342140039, 423.88117233530534);
+    p.SetSABefore(188.9763779527559);
+    p.SetSAAfter(188.9763779527559);
+    points.append(p);
+
+    p = VSAPoint(825.9492952306991, 455.74373647843197);
+    p.SetSABefore(188.9763779527559);
+    p.SetSAAfter(188.9763779527559);
+    points.append(p);
+
+    p = VSAPoint(820.451105908128, 484.6484196885659);
+    p.SetSABefore(188.9763779527559);
+    p.SetSAAfter(188.9763779527559);
+    points.append(p);
+
+    p = VSAPoint(816.6040894077855, 510.7092955867147);
+    p.SetSABefore(188.9763779527559);
+    p.SetSAAfter(188.9763779527559);
+    points.append(p);
+
+    p = VSAPoint(814.1672688911669, 534.0404377938855);
+    p.SetSABefore(188.9763779527559);
+    p.SetSAAfter(188.9763779527559);
+    points.append(p);
+
+    p = VSAPoint(812.8996675197673, 554.7559199310863);
+    p.SetSABefore(188.9763779527559);
+    p.SetSAAfter(188.9763779527559);
+    points.append(p);
+
+    p = VSAPoint(812.5925673946043, 581.4656260538284);
+    p.SetSABefore(188.9763779527559);
+    p.SetSAAfter(188.9763779527559);
+    points.append(p);
+
+    p = VSAPoint(814.1809574610598, 608.5715133604979);
+    p.SetSABefore(188.9763779527559);
+    p.SetSAAfter(188.9763779527559);
+    points.append(p);
+
+    p = VSAPoint(815.1968503937007, 618.5825511811024);
+    p.SetSABefore(188.9763779527559);
+    p.SetSAAfter(188.9763779527559);
+    points.append(p);
+
+    p = VSAPoint(816.3634787672067, 628.380932746632);
+    p.SetSABefore(188.9763779527559);
+    p.SetSAAfter(188.9763779527559);
+    points.append(p);
+
+    p = VSAPoint(820.4053369940075, 649.1688436779486);
+    p.SetSABefore(188.9763779527559);
+    p.SetSAAfter(188.9763779527559);
+    points.append(p);
+
+    p = VSAPoint(826.5040284899703, 671.0654086429722);
+    p.SetSABefore(188.9763779527559);
+    p.SetSAAfter(188.9763779527559);
+    points.append(p);
+
+    p = VSAPoint(834.6667882477791, 693.7142683899226);
+    p.SetSABefore(188.9763779527559);
+    p.SetSAAfter(188.9763779527559);
+    points.append(p);
+
+    p = VSAPoint(844.9008512601183, 716.7590636670197);
+    p.SetSABefore(188.9763779527559);
+    p.SetSAAfter(188.9763779527559);
+    points.append(p);
+
+    p = VSAPoint(857.2134525196718, 739.8434352224829);
+    p.SetSABefore(188.9763779527559);
+    p.SetSAAfter(188.9763779527559);
+    points.append(p);
+
+    p = VSAPoint(871.6118270191237, 762.6110238045324);
+    p.SetSABefore(188.9763779527559);
+    p.SetSAAfter(188.9763779527559);
+    points.append(p);
+
+    p = VSAPoint(888.1032097511581, 784.7054701613878);
+    p.SetSABefore(188.9763779527559);
+    p.SetSAAfter(188.9763779527559);
+    points.append(p);
+
+    p = VSAPoint(906.6948357084594, 805.7704150412691);
+    p.SetSABefore(188.9763779527559);
+    p.SetSAAfter(188.9763779527559);
+    points.append(p);
+
+    p = VSAPoint(927.3939398837115, 825.4494991923958);
+    p.SetSABefore(188.9763779527559);
+    p.SetSAAfter(188.9763779527559);
+    points.append(p);
+
+    p = VSAPoint(950.2077572695983, 843.3863633629879);
+    p.SetSABefore(188.9763779527559);
+    p.SetSAAfter(188.9763779527559);
+    points.append(p);
+
+    p = VSAPoint(968.776733605274, 855.4073744953336);
+    p.SetSABefore(188.9763779527559);
+    p.SetSAAfter(188.9763779527559);
+    points.append(p);
+
+    p = VSAPoint(981.7764600118351, 862.7350547966848);
+    p.SetSABefore(188.9763779527559);
+    p.SetSAAfter(188.9763779527559);
+    points.append(p);
+
+    p = VSAPoint(995.3089344044396, 869.4267280237759);
+    p.SetSABefore(188.9763779527559);
+    p.SetSAAfter(188.9763779527559);
+    points.append(p);
+
+    p = VSAPoint(1009.3750611571733, 875.4378492701345);
+    p.SetSABefore(188.9763779527559);
+    p.SetSAAfter(188.9763779527559);
+    points.append(p);
+
+    p = VSAPoint(1023.9757446441214, 880.7238736292878);
+    p.SetSABefore(188.9763779527559);
+    p.SetSAAfter(188.9763779527559);
+    points.append(p);
+
+    p = VSAPoint(1039.1118892393697, 885.2402561947638);
+    p.SetSABefore(188.9763779527559);
+    p.SetSAAfter(188.9763779527559);
+    points.append(p);
+
+    p = VSAPoint(1054.784399317004, 888.9424520600894);
+    p.SetSABefore(188.9763779527559);
+    p.SetSAAfter(188.9763779527559);
+    points.append(p);
+
+    p = VSAPoint(1070.994179251109, 891.7859163187926);
+    p.SetSABefore(188.9763779527559);
+    p.SetSAAfter(188.9763779527559);
+    points.append(p);
+
+    p = VSAPoint(1087.7421334157707, 893.7261040644007);
+    p.SetSABefore(188.9763779527559);
+    p.SetSAAfter(188.9763779527559);
+    points.append(p);
+
+    p = VSAPoint(1105.0291661850742, 894.7184703904409);
+    p.SetSABefore(188.9763779527559);
+    p.SetSAAfter(188.9763779527559);
+    points.append(p);
+
+    p = VSAPoint(1113.8976377952758, 894.8030236220472);
+    p.SetSABefore(188.9763779527559);
+    p.SetSAAfter(0.0);
+    points.append(p);
+
+    p = VSAPoint(1113.8976377952758, 894.8030236220472);
+    p.SetSABefore(188.9763779527559);
+    p.SetSAAfter(0.0);
+    points.append(p);
+
+    return points;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QVector<QPointF> TST_VAbstractPiece::OutputPointsSeamTest1PieceByIntersection() const
+{
+    QVector<QPointF> points;
+
+    points += QPointF(30.0, 970.3935748031496);
+    points += QPointF(30.0, 2.2023778242823937);
+    points += QPointF(46.111397855976776, 2.027726815668483);
+    points += QPointF(81.74605442368645, -0.2758951981748612);
+    points += QPointF(119.50208828052781, -5.192452541281906);
+    points += QPointF(148.42595722778273, -10.854963023883784);
+    points += QPointF(167.5566961450379, -15.490385095876569);
+    points += QPointF(186.61281642420556, -20.94495784777482);
+    points += QPointF(205.31950565747624, -27.21179180985321);
+    points += QPointF(223.51736443487215, -34.306381867523655);
+    points += QPointF(241.0503469884652, -42.23845350735769);
+    points += QPointF(257.76798751706616, -51.01164773556077);
+    points += QPointF(273.5285590176657, -60.62398316233916);
+    points += QPointF(284.4959443876259, -68.4308753608727);
+    points += QPointF(334.91313141686754, -61.856202407499914);
+    points += QPointF(556.951317720607, -31.220946854728947);
+    points += QPointF(539.6101141051189, 79.89131577778124);
+    points += QPointF(585.9167315845332, -20.7024207218235);
+    points += QPointF(1117.4559101159903, 212.6634418802967);
+    points += QPointF(1101.8482040478996, 244.8082798528157);
+    points += QPointF(1080.077560308019, 292.3718325563429);
+    points += QPointF(1061.8089025447719, 335.54292908714797);
+    points += QPointF(1046.6013689355652, 374.7989965048928);
+    points += QPointF(1034.1843603449322, 410.2384638595293);
+    points += QPointF(1024.2819001340656, 441.96655926454446);
+    points += QPointF(1016.6128103198596, 470.0987514791764);
+    points += QPointF(1010.891548127259, 494.7652903217379);
+    points += QPointF(1006.8300406648392, 516.1171535751373);
+    points += QPointF(1004.1409514475167, 534.3338730421456);
+    points += QPointF(1002.5429209641059, 549.6340874837038);
+    points += QPointF(1001.8096437359794, 561.6175009318105);
+    points += QPointF(1001.632561636562, 577.0190278199144);
+    points += QPointF(1002.5982079396683, 593.4977885619218);
+    points += QPointF(1003.0419281414149, 597.870394747796);
+    points += QPointF(1003.1926540422378, 599.1363247745379);
+    points += QPointF(1004.4715714217981, 605.7139974891637);
+    points += QPointF(1006.6672239434022, 613.5972045855956);
+    points += QPointF(1010.1411052399322, 623.2360341722922);
+    points += QPointF(1014.8474980040493, 633.8337662374475);
+    points += QPointF(1020.6660121283516, 644.7426504865729);
+    points += QPointF(1027.4243046890665, 655.4292751847524);
+    points += QPointF(1034.913026324476, 665.4623428264111);
+    points += QPointF(1042.9029269068749, 674.5151720813944);
+    points += QPointF(1051.171411576988, 682.3761985416603);
+    points += QPointF(1060.1878101895825, 689.4651444417038);
+    points += QPointF(1066.6143341082677, 693.625487703081);
+    points += QPointF(1070.1212524493003, 695.6022659553572);
+    points += QPointF(1074.3830151134664, 697.7096649640414);
+    points += QPointF(1078.7265805419665, 699.565875909043);
+    points += QPointF(1083.206554246492, 701.1878034134409);
+    points += QPointF(1087.891993301369, 702.5858632116882);
+    points += QPointF(1092.8646688655851, 703.7605199081748);
+    points += QPointF(1098.2162239125396, 704.699271425244);
+    points += QPointF(1104.0444208482252, 705.3744462055462);
+    points += QPointF(1111.3488014116294, 705.7937559506272);
+    points += QPointF(1290.2705536650083, 707.4996206162249);
+    points += QPointF(1302.416131870577, 881.6558256043734);
+    points += QPointF(30.0, 970.3935748031496);
+
+    return points;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QVector<VSAPoint> TST_VAbstractPiece::InputPointsSeamTest1PieceByFirstEdgeSymmerty() const
+{
+    QVector<VSAPoint> points;
+
+    VSAPoint p = VSAPoint(30.0, 894.8030236220472);
+    p.SetSABefore(75.59055118110237);
+    p.SetSAAfter(0.0);
+    points.append(p);
+
+    p = VSAPoint(30.0, 39.999874015748034);
+    p.SetSABefore(0.0);
+    points.append(p);
+
+    p = VSAPoint(30.0, 39.999874015748034);
+    p.SetSABefore(0.0);
+    points.append(p);
+
+    points.append(VSAPoint(47.53637144700478, 39.80977598775412));
+    points.append(VSAPoint(85.4092492068762, 37.36146293134895));
+    points.append(VSAPoint(125.57923134501877, 32.13056337758208));
+    points.append(VSAPoint(156.5108311435474, 26.074993549693005));
+    points.append(VSAPoint(177.21129897469388, 21.059222548891512));
+    points.append(VSAPoint(197.8216319874312, 15.159776113211533));
+    points.append(VSAPoint(218.19418331220902, 8.334870062533497));
+    points.append(VSAPoint(238.18130607947683, 0.5427202167378373));
+    points.append(VSAPoint(257.6353534196842, -8.258457604295018));
+    points.append(VSAPoint(276.4086784632808, -18.110447580684635));
+    points.append(VSAPoint(294.3536343407161, -29.055033892550586));
+    points.append(VSAPoint(311.32257418243984, -41.13400072001244));
+    points.append(VSAPoint(327.16785111890135, -54.389132243189756));
+
+    p = VSAPoint(334.5669291338582, -61.522435695538036);
+    p.SetSAAfter(0.3779527559055119);
+    p.SetAngleType(PieceNodeAngle::ByFirstEdgeSymmetry);
+    points.append(p);
+
+    p = VSAPoint(334.5669291338582, -61.522435695538036);
+    p.SetSAAfter(0.3779527559055119);
+    p.SetAngleType(PieceNodeAngle::ByFirstEdgeSymmetry);
+    points.append(p);
+
+    p = VSAPoint(519.4465667350105, -36.01405338211433);
+    p.SetSABefore(0.3779527559055119);
+    points.append(p);
+
+    points.append(VSAPoint(460.3937007874016, 342.36207874015753));
+
+    p = VSAPoint(620.5290071875436, -5.506318761785565);
+    p.SetSAAfter(0.0);
+    points.append(p);
+
+    p = VSAPoint(944.294593326342, 136.63905516701556);
+    p.SetSABefore(0.0);
+    p.SetSAAfter(188.9763779527559);
+    points.append(p);
+
+    p = VSAPoint(944.294593326342, 136.63905516701556);
+    p.SetSABefore(0.0);
+    p.SetSAAfter(188.9763779527559);
+    points.append(p);
+
+    p = VSAPoint(930.9115139455133, 164.2021651072791);
+    p.SetSABefore(188.9763779527559);
+    p.SetSAAfter(188.9763779527559);
+    points.append(p);
+
+    p = VSAPoint(907.1077633892038, 216.20756088951924);
+    p.SetSABefore(188.9763779527559);
+    p.SetSAAfter(188.9763779527559);
+    points.append(p);
+
+    p = VSAPoint(886.6420235246574, 264.5706340127217);
+    p.SetSABefore(188.9763779527559);
+    p.SetSAAfter(188.9763779527559);
+    points.append(p);
+
+    p = VSAPoint(869.2733175133691, 309.4054580978941);
+    p.SetSABefore(188.9763779527559);
+    p.SetSAAfter(188.9763779527559);
+    points.append(p);
+
+    p = VSAPoint(854.760668516834, 350.82610676604384);
+    p.SetSABefore(188.9763779527559);
+    p.SetSAAfter(188.9763779527559);
+    points.append(p);
+
+    p = VSAPoint(842.8630996965472, 388.9466536381784);
+    p.SetSABefore(188.9763779527559);
+    p.SetSAAfter(188.9763779527559);
+    points.append(p);
+
+    p = VSAPoint(833.3396342140039, 423.88117233530534);
+    p.SetSABefore(188.9763779527559);
+    p.SetSAAfter(188.9763779527559);
+    points.append(p);
+
+    p = VSAPoint(825.9492952306991, 455.74373647843197);
+    p.SetSABefore(188.9763779527559);
+    p.SetSAAfter(188.9763779527559);
+    points.append(p);
+
+    p = VSAPoint(820.451105908128, 484.6484196885659);
+    p.SetSABefore(188.9763779527559);
+    p.SetSAAfter(188.9763779527559);
+    points.append(p);
+
+    p = VSAPoint(816.6040894077855, 510.7092955867147);
+    p.SetSABefore(188.9763779527559);
+    p.SetSAAfter(188.9763779527559);
+    points.append(p);
+
+    p = VSAPoint(814.1672688911669, 534.0404377938855);
+    p.SetSABefore(188.9763779527559);
+    p.SetSAAfter(188.9763779527559);
+    points.append(p);
+
+    p = VSAPoint(812.8996675197673, 554.7559199310863);
+    p.SetSABefore(188.9763779527559);
+    p.SetSAAfter(188.9763779527559);
+    points.append(p);
+
+    p = VSAPoint(812.5925673946043, 581.4656260538284);
+    p.SetSABefore(188.9763779527559);
+    p.SetSAAfter(188.9763779527559);
+    points.append(p);
+
+    p = VSAPoint(814.1809574610598, 608.5715133604979);
+    p.SetSABefore(188.9763779527559);
+    p.SetSAAfter(188.9763779527559);
+    points.append(p);
+
+    p = VSAPoint(815.1968503937007, 618.5825511811024);
+    p.SetSABefore(188.9763779527559);
+    p.SetSAAfter(188.9763779527559);
+    points.append(p);
+
+    p = VSAPoint(816.3634787672067, 628.380932746632);
+    p.SetSABefore(188.9763779527559);
+    p.SetSAAfter(188.9763779527559);
+    points.append(p);
+
+    p = VSAPoint(820.4053369940075, 649.1688436779486);
+    p.SetSABefore(188.9763779527559);
+    p.SetSAAfter(188.9763779527559);
+    points.append(p);
+
+    p = VSAPoint(826.5040284899703, 671.0654086429722);
+    p.SetSABefore(188.9763779527559);
+    p.SetSAAfter(188.9763779527559);
+    points.append(p);
+
+    p = VSAPoint(834.6667882477791, 693.7142683899226);
+    p.SetSABefore(188.9763779527559);
+    p.SetSAAfter(188.9763779527559);
+    points.append(p);
+
+    p = VSAPoint(844.9008512601183, 716.7590636670197);
+    p.SetSABefore(188.9763779527559);
+    p.SetSAAfter(188.9763779527559);
+    points.append(p);
+
+    p = VSAPoint(857.2134525196718, 739.8434352224829);
+    p.SetSABefore(188.9763779527559);
+    p.SetSAAfter(188.9763779527559);
+    points.append(p);
+
+    p = VSAPoint(871.6118270191237, 762.6110238045324);
+    p.SetSABefore(188.9763779527559);
+    p.SetSAAfter(188.9763779527559);
+    points.append(p);
+
+    p = VSAPoint(888.1032097511581, 784.7054701613878);
+    p.SetSABefore(188.9763779527559);
+    p.SetSAAfter(188.9763779527559);
+    points.append(p);
+
+    p = VSAPoint(906.6948357084594, 805.7704150412691);
+    p.SetSABefore(188.9763779527559);
+    p.SetSAAfter(188.9763779527559);
+    points.append(p);
+
+    p = VSAPoint(927.3939398837115, 825.4494991923958);
+    p.SetSABefore(188.9763779527559);
+    p.SetSAAfter(188.9763779527559);
+    points.append(p);
+
+    p = VSAPoint(950.2077572695983, 843.3863633629879);
+    p.SetSABefore(188.9763779527559);
+    p.SetSAAfter(188.9763779527559);
+    points.append(p);
+
+    p = VSAPoint(968.776733605274, 855.4073744953336);
+    p.SetSABefore(188.9763779527559);
+    p.SetSAAfter(188.9763779527559);
+    points.append(p);
+
+    p = VSAPoint(981.7764600118351, 862.7350547966848);
+    p.SetSABefore(188.9763779527559);
+    p.SetSAAfter(188.9763779527559);
+    points.append(p);
+
+    p = VSAPoint(995.3089344044396, 869.4267280237759);
+    p.SetSABefore(188.9763779527559);
+    p.SetSAAfter(188.9763779527559);
+    points.append(p);
+
+    p = VSAPoint(1009.3750611571733, 875.4378492701345);
+    p.SetSABefore(188.9763779527559);
+    p.SetSAAfter(188.9763779527559);
+    points.append(p);
+
+    p = VSAPoint(1023.9757446441214, 880.7238736292878);
+    p.SetSABefore(188.9763779527559);
+    p.SetSAAfter(188.9763779527559);
+    points.append(p);
+
+    p = VSAPoint(1039.1118892393697, 885.2402561947638);
+    p.SetSABefore(188.9763779527559);
+    p.SetSAAfter(188.9763779527559);
+    points.append(p);
+
+    p = VSAPoint(1054.784399317004, 888.9424520600894);
+    p.SetSABefore(188.9763779527559);
+    p.SetSAAfter(188.9763779527559);
+    points.append(p);
+
+    p = VSAPoint(1070.994179251109, 891.7859163187926);
+    p.SetSABefore(188.9763779527559);
+    p.SetSAAfter(188.9763779527559);
+    points.append(p);
+
+    p = VSAPoint(1087.7421334157707, 893.7261040644007);
+    p.SetSABefore(188.9763779527559);
+    p.SetSAAfter(188.9763779527559);
+    points.append(p);
+
+    p = VSAPoint(1105.0291661850742, 894.7184703904409);
+    p.SetSABefore(188.9763779527559);
+    p.SetSAAfter(188.9763779527559);
+    points.append(p);
+
+    p = VSAPoint(1113.8976377952758, 894.8030236220472);
+    p.SetSABefore(188.9763779527559);
+    p.SetSAAfter(0.0);
+    points.append(p);
+
+    p = VSAPoint(1113.8976377952758, 894.8030236220472);
+    p.SetSABefore(188.9763779527559);
+    p.SetSAAfter(0.0);
+    points.append(p);
+
+    return points;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QVector<QPointF> TST_VAbstractPiece::OutputPointsSeamTest1PieceByFirstEdgeSymmerty() const
+{
+    QVector<QPointF> points;
+
+    points += QPointF(30.0, 970.3935748031496);
+    points += QPointF(30.0, 2.2023778242823937);
+    points += QPointF(46.111397855976776, 2.027726815668483);
+    points += QPointF(81.74605442368645, -0.2758951981748612);
+    points += QPointF(119.50208828052781, -5.192452541281906);
+    points += QPointF(148.42595722778273, -10.854963023883784);
+    points += QPointF(167.5566961450379, -15.490385095876569);
+    points += QPointF(186.61281642420556, -20.94495784777482);
+    points += QPointF(205.31950565747624, -27.21179180985321);
+    points += QPointF(223.51736443487215, -34.306381867523655);
+    points += QPointF(241.0503469884652, -42.23845350735769);
+    points += QPointF(257.76798751706616, -51.01164773556077);
+    points += QPointF(273.5285590176657, -60.62398316233916);
+    points += QPointF(288.203122586733, -71.06974867341756);
+    points += QPointF(301.89505943185964, -82.52353546533966);
+    points += QPointF(315.2716370538558, -95.41962699710956);
+    points += QPointF(334.9131314168676, -61.85620240749991);
+    points += QPointF(556.951317720607, -31.220946854728947);
+    points += QPointF(539.6101141051189, 79.89131577778124);
+    points += QPointF(585.9167315845332, -20.7024207218235);
+    points += QPointF(1117.4559101159903, 212.6634418802967);
+    points += QPointF(1101.8482040478996, 244.8082798528157);
+    points += QPointF(1080.077560308019, 292.3718325563429);
+    points += QPointF(1061.8089025447719, 335.54292908714797);
+    points += QPointF(1046.6013689355652, 374.7989965048928);
+    points += QPointF(1034.1843603449322, 410.2384638595293);
+    points += QPointF(1024.2819001340656, 441.96655926454446);
+    points += QPointF(1016.6128103198596, 470.0987514791764);
+    points += QPointF(1010.891548127259, 494.7652903217379);
+    points += QPointF(1006.8300406648392, 516.1171535751373);
+    points += QPointF(1004.1409514475167, 534.3338730421456);
+    points += QPointF(1002.5429209641059, 549.6340874837038);
+    points += QPointF(1001.8096437359794, 561.6175009318105);
+    points += QPointF(1001.632561636562, 577.0190278199144);
+    points += QPointF(1002.5982079396683, 593.4977885619218);
+    points += QPointF(1003.0419281414149, 597.870394747796);
+    points += QPointF(1003.1926540422378, 599.1363247745379);
+    points += QPointF(1004.4715714217981, 605.7139974891637);
+    points += QPointF(1006.6672239434022, 613.5972045855956);
+    points += QPointF(1010.1411052399322, 623.2360341722922);
+    points += QPointF(1014.8474980040493, 633.8337662374475);
+    points += QPointF(1020.6660121283516, 644.7426504865729);
+    points += QPointF(1027.4243046890665, 655.4292751847524);
+    points += QPointF(1034.913026324476, 665.4623428264111);
+    points += QPointF(1042.9029269068749, 674.5151720813944);
+    points += QPointF(1051.171411576988, 682.3761985416603);
+    points += QPointF(1060.1878101895825, 689.4651444417038);
+    points += QPointF(1066.6143341082677, 693.625487703081);
+    points += QPointF(1070.1212524493003, 695.6022659553572);
+    points += QPointF(1074.3830151134664, 697.7096649640414);
+    points += QPointF(1078.7265805419665, 699.565875909043);
+    points += QPointF(1083.206554246492, 701.1878034134409);
+    points += QPointF(1087.891993301369, 702.5858632116882);
+    points += QPointF(1092.8646688655851, 703.7605199081748);
+    points += QPointF(1098.2162239125396, 704.699271425244);
+    points += QPointF(1104.0444208482252, 705.3744462055462);
+    points += QPointF(1111.3488014116294, 705.7937559506272);
+    points += QPointF(1290.2705536650083, 707.4996206162249);
+    points += QPointF(1302.416131870577, 881.6558256043734);
+    points += QPointF(30.0, 970.3935748031496);
+
+    return points;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QVector<VSAPoint> TST_VAbstractPiece::InputPointsSeamTest1PieceBySecondEdgeSymmerty() const
+{
+    QVector<VSAPoint> points;
+
+    VSAPoint p = VSAPoint(30.0, 894.8030236220472);
+    p.SetSABefore(75.59055118110237);
+    p.SetSAAfter(0.0);
+    points.append(p);
+
+    p = VSAPoint(30.0, 39.999874015748034);
+    p.SetSABefore(0.0);
+    points.append(p);
+
+    p = VSAPoint(30.0, 39.999874015748034);
+    p.SetSABefore(0.0);
+    points.append(p);
+
+    points.append(VSAPoint(47.53637144700478, 39.80977598775412));
+    points.append(VSAPoint(85.4092492068762, 37.36146293134895));
+    points.append(VSAPoint(125.57923134501877, 32.13056337758208));
+    points.append(VSAPoint(156.5108311435474, 26.074993549693005));
+    points.append(VSAPoint(177.21129897469388, 21.059222548891512));
+    points.append(VSAPoint(197.8216319874312, 15.159776113211533));
+    points.append(VSAPoint(218.19418331220902, 8.334870062533497));
+    points.append(VSAPoint(238.18130607947683, 0.5427202167378373));
+    points.append(VSAPoint(257.6353534196842, -8.258457604295018));
+    points.append(VSAPoint(276.4086784632808, -18.110447580684635));
+    points.append(VSAPoint(294.3536343407161, -29.055033892550586));
+    points.append(VSAPoint(311.32257418243984, -41.13400072001244));
+    points.append(VSAPoint(327.16785111890135, -54.389132243189756));
+
+    p = VSAPoint(334.5669291338582, -61.522435695538036);
+    p.SetSAAfter(0.3779527559055119);
+    p.SetAngleType(PieceNodeAngle::BySecondEdgeSymmetry);
+    points.append(p);
+
+    p = VSAPoint(334.5669291338582, -61.522435695538036);
+    p.SetSAAfter(0.3779527559055119);
+    p.SetAngleType(PieceNodeAngle::BySecondEdgeSymmetry);
+    points.append(p);
+
+    p = VSAPoint(519.4465667350105, -36.01405338211433);
+    p.SetSABefore(0.3779527559055119);
+    points.append(p);
+
+    points.append(VSAPoint(460.3937007874016, 342.36207874015753));
+
+    p = VSAPoint(620.5290071875436, -5.506318761785565);
+    p.SetSAAfter(0.0);
+    points.append(p);
+
+    p = VSAPoint(944.294593326342, 136.63905516701556);
+    p.SetSABefore(0.0);
+    p.SetSAAfter(188.9763779527559);
+    points.append(p);
+
+    p = VSAPoint(944.294593326342, 136.63905516701556);
+    p.SetSABefore(0.0);
+    p.SetSAAfter(188.9763779527559);
+    points.append(p);
+
+    p = VSAPoint(930.9115139455133, 164.2021651072791);
+    p.SetSABefore(188.9763779527559);
+    p.SetSAAfter(188.9763779527559);
+    points.append(p);
+
+    p = VSAPoint(907.1077633892038, 216.20756088951924);
+    p.SetSABefore(188.9763779527559);
+    p.SetSAAfter(188.9763779527559);
+    points.append(p);
+
+    p = VSAPoint(886.6420235246574, 264.5706340127217);
+    p.SetSABefore(188.9763779527559);
+    p.SetSAAfter(188.9763779527559);
+    points.append(p);
+
+    p = VSAPoint(869.2733175133691, 309.4054580978941);
+    p.SetSABefore(188.9763779527559);
+    p.SetSAAfter(188.9763779527559);
+    points.append(p);
+
+    p = VSAPoint(854.760668516834, 350.82610676604384);
+    p.SetSABefore(188.9763779527559);
+    p.SetSAAfter(188.9763779527559);
+    points.append(p);
+
+    p = VSAPoint(842.8630996965472, 388.9466536381784);
+    p.SetSABefore(188.9763779527559);
+    p.SetSAAfter(188.9763779527559);
+    points.append(p);
+
+    p = VSAPoint(833.3396342140039, 423.88117233530534);
+    p.SetSABefore(188.9763779527559);
+    p.SetSAAfter(188.9763779527559);
+    points.append(p);
+
+    p = VSAPoint(825.9492952306991, 455.74373647843197);
+    p.SetSABefore(188.9763779527559);
+    p.SetSAAfter(188.9763779527559);
+    points.append(p);
+
+    p = VSAPoint(820.451105908128, 484.6484196885659);
+    p.SetSABefore(188.9763779527559);
+    p.SetSAAfter(188.9763779527559);
+    points.append(p);
+
+    p = VSAPoint(816.6040894077855, 510.7092955867147);
+    p.SetSABefore(188.9763779527559);
+    p.SetSAAfter(188.9763779527559);
+    points.append(p);
+
+    p = VSAPoint(814.1672688911669, 534.0404377938855);
+    p.SetSABefore(188.9763779527559);
+    p.SetSAAfter(188.9763779527559);
+    points.append(p);
+
+    p = VSAPoint(812.8996675197673, 554.7559199310863);
+    p.SetSABefore(188.9763779527559);
+    p.SetSAAfter(188.9763779527559);
+    points.append(p);
+
+    p = VSAPoint(812.5925673946043, 581.4656260538284);
+    p.SetSABefore(188.9763779527559);
+    p.SetSAAfter(188.9763779527559);
+    points.append(p);
+
+    p = VSAPoint(814.1809574610598, 608.5715133604979);
+    p.SetSABefore(188.9763779527559);
+    p.SetSAAfter(188.9763779527559);
+    points.append(p);
+
+    p = VSAPoint(815.1968503937007, 618.5825511811024);
+    p.SetSABefore(188.9763779527559);
+    p.SetSAAfter(188.9763779527559);
+    points.append(p);
+
+    p = VSAPoint(816.3634787672067, 628.380932746632);
+    p.SetSABefore(188.9763779527559);
+    p.SetSAAfter(188.9763779527559);
+    points.append(p);
+
+    p = VSAPoint(820.4053369940075, 649.1688436779486);
+    p.SetSABefore(188.9763779527559);
+    p.SetSAAfter(188.9763779527559);
+    points.append(p);
+
+    p = VSAPoint(826.5040284899703, 671.0654086429722);
+    p.SetSABefore(188.9763779527559);
+    p.SetSAAfter(188.9763779527559);
+    points.append(p);
+
+    p = VSAPoint(834.6667882477791, 693.7142683899226);
+    p.SetSABefore(188.9763779527559);
+    p.SetSAAfter(188.9763779527559);
+    points.append(p);
+
+    p = VSAPoint(844.9008512601183, 716.7590636670197);
+    p.SetSABefore(188.9763779527559);
+    p.SetSAAfter(188.9763779527559);
+    points.append(p);
+
+    p = VSAPoint(857.2134525196718, 739.8434352224829);
+    p.SetSABefore(188.9763779527559);
+    p.SetSAAfter(188.9763779527559);
+    points.append(p);
+
+    p = VSAPoint(871.6118270191237, 762.6110238045324);
+    p.SetSABefore(188.9763779527559);
+    p.SetSAAfter(188.9763779527559);
+    points.append(p);
+
+    p = VSAPoint(888.1032097511581, 784.7054701613878);
+    p.SetSABefore(188.9763779527559);
+    p.SetSAAfter(188.9763779527559);
+    points.append(p);
+
+    p = VSAPoint(906.6948357084594, 805.7704150412691);
+    p.SetSABefore(188.9763779527559);
+    p.SetSAAfter(188.9763779527559);
+    points.append(p);
+
+    p = VSAPoint(927.3939398837115, 825.4494991923958);
+    p.SetSABefore(188.9763779527559);
+    p.SetSAAfter(188.9763779527559);
+    points.append(p);
+
+    p = VSAPoint(950.2077572695983, 843.3863633629879);
+    p.SetSABefore(188.9763779527559);
+    p.SetSAAfter(188.9763779527559);
+    points.append(p);
+
+    p = VSAPoint(968.776733605274, 855.4073744953336);
+    p.SetSABefore(188.9763779527559);
+    p.SetSAAfter(188.9763779527559);
+    points.append(p);
+
+    p = VSAPoint(981.7764600118351, 862.7350547966848);
+    p.SetSABefore(188.9763779527559);
+    p.SetSAAfter(188.9763779527559);
+    points.append(p);
+
+    p = VSAPoint(995.3089344044396, 869.4267280237759);
+    p.SetSABefore(188.9763779527559);
+    p.SetSAAfter(188.9763779527559);
+    points.append(p);
+
+    p = VSAPoint(1009.3750611571733, 875.4378492701345);
+    p.SetSABefore(188.9763779527559);
+    p.SetSAAfter(188.9763779527559);
+    points.append(p);
+
+    p = VSAPoint(1023.9757446441214, 880.7238736292878);
+    p.SetSABefore(188.9763779527559);
+    p.SetSAAfter(188.9763779527559);
+    points.append(p);
+
+    p = VSAPoint(1039.1118892393697, 885.2402561947638);
+    p.SetSABefore(188.9763779527559);
+    p.SetSAAfter(188.9763779527559);
+    points.append(p);
+
+    p = VSAPoint(1054.784399317004, 888.9424520600894);
+    p.SetSABefore(188.9763779527559);
+    p.SetSAAfter(188.9763779527559);
+    points.append(p);
+
+    p = VSAPoint(1070.994179251109, 891.7859163187926);
+    p.SetSABefore(188.9763779527559);
+    p.SetSAAfter(188.9763779527559);
+    points.append(p);
+
+    p = VSAPoint(1087.7421334157707, 893.7261040644007);
+    p.SetSABefore(188.9763779527559);
+    p.SetSAAfter(188.9763779527559);
+    points.append(p);
+
+    p = VSAPoint(1105.0291661850742, 894.7184703904409);
+    p.SetSABefore(188.9763779527559);
+    p.SetSAAfter(188.9763779527559);
+    points.append(p);
+
+    p = VSAPoint(1113.8976377952758, 894.8030236220472);
+    p.SetSABefore(188.9763779527559);
+    p.SetSAAfter(0.0);
+    points.append(p);
+
+    p = VSAPoint(1113.8976377952758, 894.8030236220472);
+    p.SetSABefore(188.9763779527559);
+    p.SetSAAfter(0.0);
+    points.append(p);
+
+    return points;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QVector<QPointF> TST_VAbstractPiece::OutputPointsSeamTest1PieceBySecondEdgeSymmerty() const
+{
+    QVector<QPointF> points;
+
+    points += QPointF(30.0, 970.3935748031496);
+    points += QPointF(30.0, 2.2023778242823937);
+    points += QPointF(46.111397855976776, 2.027726815668483);
+    points += QPointF(81.74605442368645, -0.2758951981748612);
+    points += QPointF(119.50208828052781, -5.192452541281906);
+    points += QPointF(148.42595722778273, -10.854963023883784);
+    points += QPointF(167.5566961450379, -15.490385095876569);
+    points += QPointF(186.61281642420556, -20.94495784777482);
+    points += QPointF(205.31950565747624, -27.21179180985321);
+    points += QPointF(223.51736443487215, -34.306381867523655);
+    points += QPointF(241.0503469884652, -42.23845350735769);
+    points += QPointF(257.76798751706616, -51.01164773556077);
+    points += QPointF(273.5285590176657, -60.62398316233916);
+    points += QPointF(284.94491218126115, -68.7504632158891);
+    points += QPointF(286.89008170747013, -68.48208250840415);
+    points += QPointF(556.951317720607, -31.220946854728947);
+    points += QPointF(539.6101141051189, 79.89131577778124);
+    points += QPointF(585.9167315845332, -20.7024207218235);
+    points += QPointF(1117.4559101159903, 212.6634418802967);
+    points += QPointF(1101.8482040478996, 244.8082798528157);
+    points += QPointF(1080.077560308019, 292.3718325563429);
+    points += QPointF(1061.8089025447719, 335.54292908714797);
+    points += QPointF(1046.6013689355652, 374.7989965048928);
+    points += QPointF(1034.1843603449322, 410.2384638595293);
+    points += QPointF(1024.2819001340656, 441.96655926454446);
+    points += QPointF(1016.6128103198596, 470.0987514791764);
+    points += QPointF(1010.891548127259, 494.7652903217379);
+    points += QPointF(1006.8300406648392, 516.1171535751373);
+    points += QPointF(1004.1409514475167, 534.3338730421456);
+    points += QPointF(1002.5429209641059, 549.6340874837038);
+    points += QPointF(1001.8096437359794, 561.6175009318105);
+    points += QPointF(1001.632561636562, 577.0190278199144);
+    points += QPointF(1002.5982079396683, 593.4977885619218);
+    points += QPointF(1003.0419281414149, 597.870394747796);
+    points += QPointF(1003.1926540422378, 599.1363247745379);
+    points += QPointF(1004.4715714217981, 605.7139974891637);
+    points += QPointF(1006.6672239434022, 613.5972045855956);
+    points += QPointF(1010.1411052399322, 623.2360341722922);
+    points += QPointF(1014.8474980040493, 633.8337662374475);
+    points += QPointF(1020.6660121283516, 644.7426504865729);
+    points += QPointF(1027.4243046890665, 655.4292751847524);
+    points += QPointF(1034.913026324476, 665.4623428264111);
+    points += QPointF(1042.9029269068749, 674.5151720813944);
+    points += QPointF(1051.171411576988, 682.3761985416603);
+    points += QPointF(1060.1878101895825, 689.4651444417038);
+    points += QPointF(1066.6143341082677, 693.625487703081);
+    points += QPointF(1070.1212524493003, 695.6022659553572);
+    points += QPointF(1074.3830151134664, 697.7096649640414);
+    points += QPointF(1078.7265805419665, 699.565875909043);
+    points += QPointF(1083.206554246492, 701.1878034134409);
+    points += QPointF(1087.891993301369, 702.5858632116882);
+    points += QPointF(1092.8646688655851, 703.7605199081748);
+    points += QPointF(1098.2162239125396, 704.699271425244);
+    points += QPointF(1104.0444208482252, 705.3744462055462);
+    points += QPointF(1111.3488014116294, 705.7937559506272);
+    points += QPointF(1290.2705536650083, 707.4996206162249);
+    points += QPointF(1302.416131870577, 881.6558256043734);
+    points += QPointF(30.0, 970.3935748031496);
+
+    return points;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QVector<VSAPoint> TST_VAbstractPiece::InputPointsSeamTest1PieceByFirstRightAngle() const
+{
+    QVector<VSAPoint> points;
+
+    VSAPoint p = VSAPoint(30.0, 894.8030236220472);
+    p.SetSABefore(75.59055118110237);
+    p.SetSAAfter(0.0);
+    points.append(p);
+
+    p = VSAPoint(30.0, 39.999874015748034);
+    p.SetSABefore(0.0);
+    points.append(p);
+
+    p = VSAPoint(30.0, 39.999874015748034);
+    p.SetSABefore(0.0);
+    points.append(p);
+
+    points.append(VSAPoint(47.53637144700478, 39.80977598775412));
+    points.append(VSAPoint(85.4092492068762, 37.36146293134895));
+    points.append(VSAPoint(125.57923134501877, 32.13056337758208));
+    points.append(VSAPoint(156.5108311435474, 26.074993549693005));
+    points.append(VSAPoint(177.21129897469388, 21.059222548891512));
+    points.append(VSAPoint(197.8216319874312, 15.159776113211533));
+    points.append(VSAPoint(218.19418331220902, 8.334870062533497));
+    points.append(VSAPoint(238.18130607947683, 0.5427202167378373));
+    points.append(VSAPoint(257.6353534196842, -8.258457604295018));
+    points.append(VSAPoint(276.4086784632808, -18.110447580684635));
+    points.append(VSAPoint(294.3536343407161, -29.055033892550586));
+    points.append(VSAPoint(311.32257418243984, -41.13400072001244));
+    points.append(VSAPoint(327.16785111890135, -54.389132243189756));
+
+    p = VSAPoint(334.5669291338582, -61.522435695538036);
+    p.SetSAAfter(0.3779527559055119);
+    p.SetAngleType(PieceNodeAngle::ByFirstEdgeRightAngle);
+    points.append(p);
+
+    p = VSAPoint(334.5669291338582, -61.522435695538036);
+    p.SetSAAfter(0.3779527559055119);
+    p.SetAngleType(PieceNodeAngle::ByFirstEdgeRightAngle);
+    points.append(p);
+
+    p = VSAPoint(519.4465667350105, -36.01405338211433);
+    p.SetSABefore(0.3779527559055119);
+    points.append(p);
+
+    points.append(VSAPoint(460.3937007874016, 342.36207874015753));
+
+    p = VSAPoint(620.5290071875436, -5.506318761785565);
+    p.SetSAAfter(0.0);
+    points.append(p);
+
+    p = VSAPoint(944.294593326342, 136.63905516701556);
+    p.SetSABefore(0.0);
+    p.SetSAAfter(188.9763779527559);
+    points.append(p);
+
+    p = VSAPoint(944.294593326342, 136.63905516701556);
+    p.SetSABefore(0.0);
+    p.SetSAAfter(188.9763779527559);
+    points.append(p);
+
+    p = VSAPoint(930.9115139455133, 164.2021651072791);
+    p.SetSABefore(188.9763779527559);
+    p.SetSAAfter(188.9763779527559);
+    points.append(p);
+
+    p = VSAPoint(907.1077633892038, 216.20756088951924);
+    p.SetSABefore(188.9763779527559);
+    p.SetSAAfter(188.9763779527559);
+    points.append(p);
+
+    p = VSAPoint(886.6420235246574, 264.5706340127217);
+    p.SetSABefore(188.9763779527559);
+    p.SetSAAfter(188.9763779527559);
+    points.append(p);
+
+    p = VSAPoint(869.2733175133691, 309.4054580978941);
+    p.SetSABefore(188.9763779527559);
+    p.SetSAAfter(188.9763779527559);
+    points.append(p);
+
+    p = VSAPoint(854.760668516834, 350.82610676604384);
+    p.SetSABefore(188.9763779527559);
+    p.SetSAAfter(188.9763779527559);
+    points.append(p);
+
+    p = VSAPoint(842.8630996965472, 388.9466536381784);
+    p.SetSABefore(188.9763779527559);
+    p.SetSAAfter(188.9763779527559);
+    points.append(p);
+
+    p = VSAPoint(833.3396342140039, 423.88117233530534);
+    p.SetSABefore(188.9763779527559);
+    p.SetSAAfter(188.9763779527559);
+    points.append(p);
+
+    p = VSAPoint(825.9492952306991, 455.74373647843197);
+    p.SetSABefore(188.9763779527559);
+    p.SetSAAfter(188.9763779527559);
+    points.append(p);
+
+    p = VSAPoint(820.451105908128, 484.6484196885659);
+    p.SetSABefore(188.9763779527559);
+    p.SetSAAfter(188.9763779527559);
+    points.append(p);
+
+    p = VSAPoint(816.6040894077855, 510.7092955867147);
+    p.SetSABefore(188.9763779527559);
+    p.SetSAAfter(188.9763779527559);
+    points.append(p);
+
+    p = VSAPoint(814.1672688911669, 534.0404377938855);
+    p.SetSABefore(188.9763779527559);
+    p.SetSAAfter(188.9763779527559);
+    points.append(p);
+
+    p = VSAPoint(812.8996675197673, 554.7559199310863);
+    p.SetSABefore(188.9763779527559);
+    p.SetSAAfter(188.9763779527559);
+    points.append(p);
+
+    p = VSAPoint(812.5925673946043, 581.4656260538284);
+    p.SetSABefore(188.9763779527559);
+    p.SetSAAfter(188.9763779527559);
+    points.append(p);
+
+    p = VSAPoint(814.1809574610598, 608.5715133604979);
+    p.SetSABefore(188.9763779527559);
+    p.SetSAAfter(188.9763779527559);
+    points.append(p);
+
+    p = VSAPoint(815.1968503937007, 618.5825511811024);
+    p.SetSABefore(188.9763779527559);
+    p.SetSAAfter(188.9763779527559);
+    points.append(p);
+
+    p = VSAPoint(816.3634787672067, 628.380932746632);
+    p.SetSABefore(188.9763779527559);
+    p.SetSAAfter(188.9763779527559);
+    points.append(p);
+
+    p = VSAPoint(820.4053369940075, 649.1688436779486);
+    p.SetSABefore(188.9763779527559);
+    p.SetSAAfter(188.9763779527559);
+    points.append(p);
+
+    p = VSAPoint(826.5040284899703, 671.0654086429722);
+    p.SetSABefore(188.9763779527559);
+    p.SetSAAfter(188.9763779527559);
+    points.append(p);
+
+    p = VSAPoint(834.6667882477791, 693.7142683899226);
+    p.SetSABefore(188.9763779527559);
+    p.SetSAAfter(188.9763779527559);
+    points.append(p);
+
+    p = VSAPoint(844.9008512601183, 716.7590636670197);
+    p.SetSABefore(188.9763779527559);
+    p.SetSAAfter(188.9763779527559);
+    points.append(p);
+
+    p = VSAPoint(857.2134525196718, 739.8434352224829);
+    p.SetSABefore(188.9763779527559);
+    p.SetSAAfter(188.9763779527559);
+    points.append(p);
+
+    p = VSAPoint(871.6118270191237, 762.6110238045324);
+    p.SetSABefore(188.9763779527559);
+    p.SetSAAfter(188.9763779527559);
+    points.append(p);
+
+    p = VSAPoint(888.1032097511581, 784.7054701613878);
+    p.SetSABefore(188.9763779527559);
+    p.SetSAAfter(188.9763779527559);
+    points.append(p);
+
+    p = VSAPoint(906.6948357084594, 805.7704150412691);
+    p.SetSABefore(188.9763779527559);
+    p.SetSAAfter(188.9763779527559);
+    points.append(p);
+
+    p = VSAPoint(927.3939398837115, 825.4494991923958);
+    p.SetSABefore(188.9763779527559);
+    p.SetSAAfter(188.9763779527559);
+    points.append(p);
+
+    p = VSAPoint(950.2077572695983, 843.3863633629879);
+    p.SetSABefore(188.9763779527559);
+    p.SetSAAfter(188.9763779527559);
+    points.append(p);
+
+    p = VSAPoint(968.776733605274, 855.4073744953336);
+    p.SetSABefore(188.9763779527559);
+    p.SetSAAfter(188.9763779527559);
+    points.append(p);
+
+    p = VSAPoint(981.7764600118351, 862.7350547966848);
+    p.SetSABefore(188.9763779527559);
+    p.SetSAAfter(188.9763779527559);
+    points.append(p);
+
+    p = VSAPoint(995.3089344044396, 869.4267280237759);
+    p.SetSABefore(188.9763779527559);
+    p.SetSAAfter(188.9763779527559);
+    points.append(p);
+
+    p = VSAPoint(1009.3750611571733, 875.4378492701345);
+    p.SetSABefore(188.9763779527559);
+    p.SetSAAfter(188.9763779527559);
+    points.append(p);
+
+    p = VSAPoint(1023.9757446441214, 880.7238736292878);
+    p.SetSABefore(188.9763779527559);
+    p.SetSAAfter(188.9763779527559);
+    points.append(p);
+
+    p = VSAPoint(1039.1118892393697, 885.2402561947638);
+    p.SetSABefore(188.9763779527559);
+    p.SetSAAfter(188.9763779527559);
+    points.append(p);
+
+    p = VSAPoint(1054.784399317004, 888.9424520600894);
+    p.SetSABefore(188.9763779527559);
+    p.SetSAAfter(188.9763779527559);
+    points.append(p);
+
+    p = VSAPoint(1070.994179251109, 891.7859163187926);
+    p.SetSABefore(188.9763779527559);
+    p.SetSAAfter(188.9763779527559);
+    points.append(p);
+
+    p = VSAPoint(1087.7421334157707, 893.7261040644007);
+    p.SetSABefore(188.9763779527559);
+    p.SetSAAfter(188.9763779527559);
+    points.append(p);
+
+    p = VSAPoint(1105.0291661850742, 894.7184703904409);
+    p.SetSABefore(188.9763779527559);
+    p.SetSAAfter(188.9763779527559);
+    points.append(p);
+
+    p = VSAPoint(1113.8976377952758, 894.8030236220472);
+    p.SetSABefore(188.9763779527559);
+    p.SetSAAfter(0.0);
+    points.append(p);
+
+    p = VSAPoint(1113.8976377952758, 894.8030236220472);
+    p.SetSABefore(188.9763779527559);
+    p.SetSAAfter(0.0);
+    points.append(p);
+
+    return points;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QVector<QPointF> TST_VAbstractPiece::OutputPointsSeamTest1PieceByFirstRightAngle() const
+{
+    QVector<QPointF> points;
+
+    points += QPointF(30.0, 970.3935748031496);
+    points += QPointF(30.0, 2.2023778242823937);
+    points += QPointF(46.111397855976776, 2.027726815668483);
+    points += QPointF(81.74605442368645, -0.2758951981748612);
+    points += QPointF(119.50208828052781, -5.192452541281906);
+    points += QPointF(148.42595722778273, -10.854963023883784);
+    points += QPointF(167.5566961450379, -15.490385095876569);
+    points += QPointF(186.61281642420556, -20.94495784777482);
+    points += QPointF(205.31950565747624, -27.21179180985321);
+    points += QPointF(223.51736443487215, -34.306381867523655);
+    points += QPointF(241.0503469884652, -42.23845350735769);
+    points += QPointF(257.76798751706616, -51.01164773556077);
+    points += QPointF(273.5285590176657, -60.62398316233916);
+    points += QPointF(288.203122586733, -71.06974867341756);
+    points += QPointF(301.89505943185964, -82.52353546533966);
+    points += QPointF(308.6809861986896, -89.06571203590164);
+    points += QPointF(334.91313141686754, -61.856202407499914);
+    points += QPointF(556.951317720607, -31.220946854728947);
+    points += QPointF(539.6101141051189, 79.89131577778124);
+    points += QPointF(585.9167315845332, -20.7024207218235);
+    points += QPointF(1117.4559101159903, 212.6634418802967);
+    points += QPointF(1101.8482040478996, 244.8082798528157);
+    points += QPointF(1080.077560308019, 292.3718325563429);
+    points += QPointF(1061.8089025447719, 335.54292908714797);
+    points += QPointF(1046.6013689355652, 374.7989965048928);
+    points += QPointF(1034.1843603449322, 410.2384638595293);
+    points += QPointF(1024.2819001340656, 441.96655926454446);
+    points += QPointF(1016.6128103198596, 470.0987514791764);
+    points += QPointF(1010.891548127259, 494.7652903217379);
+    points += QPointF(1006.8300406648392, 516.1171535751373);
+    points += QPointF(1004.1409514475167, 534.3338730421456);
+    points += QPointF(1002.5429209641059, 549.6340874837038);
+    points += QPointF(1001.8096437359794, 561.6175009318105);
+    points += QPointF(1001.632561636562, 577.0190278199144);
+    points += QPointF(1002.5982079396683, 593.4977885619218);
+    points += QPointF(1003.0419281414149, 597.870394747796);
+    points += QPointF(1003.1926540422378, 599.1363247745379);
+    points += QPointF(1004.4715714217981, 605.7139974891637);
+    points += QPointF(1006.6672239434022, 613.5972045855956);
+    points += QPointF(1010.1411052399322, 623.2360341722922);
+    points += QPointF(1014.8474980040493, 633.8337662374475);
+    points += QPointF(1020.6660121283516, 644.7426504865729);
+    points += QPointF(1027.4243046890665, 655.4292751847524);
+    points += QPointF(1034.913026324476, 665.4623428264111);
+    points += QPointF(1042.9029269068749, 674.5151720813944);
+    points += QPointF(1051.171411576988, 682.3761985416603);
+    points += QPointF(1060.1878101895825, 689.4651444417038);
+    points += QPointF(1066.6143341082677, 693.625487703081);
+    points += QPointF(1070.1212524493003, 695.6022659553572);
+    points += QPointF(1074.3830151134664, 697.7096649640414);
+    points += QPointF(1078.7265805419665, 699.565875909043);
+    points += QPointF(1083.206554246492, 701.1878034134409);
+    points += QPointF(1087.891993301369, 702.5858632116882);
+    points += QPointF(1092.8646688655851, 703.7605199081748);
+    points += QPointF(1098.2162239125396, 704.699271425244);
+    points += QPointF(1104.0444208482252, 705.3744462055462);
+    points += QPointF(1111.3488014116294, 705.7937559506272);
+    points += QPointF(1290.2705536650083, 707.4996206162249);
+    points += QPointF(1302.416131870577, 881.6558256043734);
+    points += QPointF(30.0, 970.3935748031496);
+
+    return points;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QVector<VSAPoint> TST_VAbstractPiece::InputPointsSeamTest1PieceBySecondRightAngle() const
+{
+    QVector<VSAPoint> points;
+
+    VSAPoint p = VSAPoint(30.0, 894.8030236220472);
+    p.SetSABefore(75.59055118110237);
+    p.SetSAAfter(0.0);
+    points.append(p);
+
+    p = VSAPoint(30.0, 39.999874015748034);
+    p.SetSABefore(0.0);
+    points.append(p);
+
+    p = VSAPoint(30.0, 39.999874015748034);
+    p.SetSABefore(0.0);
+    points.append(p);
+
+    points.append(VSAPoint(47.53637144700478, 39.80977598775412));
+    points.append(VSAPoint(85.4092492068762, 37.36146293134895));
+    points.append(VSAPoint(125.57923134501877, 32.13056337758208));
+    points.append(VSAPoint(156.5108311435474, 26.074993549693005));
+    points.append(VSAPoint(177.21129897469388, 21.059222548891512));
+    points.append(VSAPoint(197.8216319874312, 15.159776113211533));
+    points.append(VSAPoint(218.19418331220902, 8.334870062533497));
+    points.append(VSAPoint(238.18130607947683, 0.5427202167378373));
+    points.append(VSAPoint(257.6353534196842, -8.258457604295018));
+    points.append(VSAPoint(276.4086784632808, -18.110447580684635));
+    points.append(VSAPoint(294.3536343407161, -29.055033892550586));
+    points.append(VSAPoint(311.32257418243984, -41.13400072001244));
+    points.append(VSAPoint(327.16785111890135, -54.389132243189756));
+
+    p = VSAPoint(334.5669291338582, -61.522435695538036);
+    p.SetSAAfter(0.3779527559055119);
+    p.SetAngleType(PieceNodeAngle::BySecondEdgeRightAngle);
+    points.append(p);
+
+    p = VSAPoint(334.5669291338582, -61.522435695538036);
+    p.SetSAAfter(0.3779527559055119);
+    p.SetAngleType(PieceNodeAngle::BySecondEdgeRightAngle);
+    points.append(p);
+
+    p = VSAPoint(519.4465667350105, -36.01405338211433);
+    p.SetSABefore(0.3779527559055119);
+    points.append(p);
+
+    points.append(VSAPoint(460.3937007874016, 342.36207874015753));
+
+    p = VSAPoint(620.5290071875436, -5.506318761785565);
+    p.SetSAAfter(0.0);
+    points.append(p);
+
+    p = VSAPoint(944.294593326342, 136.63905516701556);
+    p.SetSABefore(0.0);
+    p.SetSAAfter(188.9763779527559);
+    points.append(p);
+
+    p = VSAPoint(944.294593326342, 136.63905516701556);
+    p.SetSABefore(0.0);
+    p.SetSAAfter(188.9763779527559);
+    points.append(p);
+
+    p = VSAPoint(930.9115139455133, 164.2021651072791);
+    p.SetSABefore(188.9763779527559);
+    p.SetSAAfter(188.9763779527559);
+    points.append(p);
+
+    p = VSAPoint(907.1077633892038, 216.20756088951924);
+    p.SetSABefore(188.9763779527559);
+    p.SetSAAfter(188.9763779527559);
+    points.append(p);
+
+    p = VSAPoint(886.6420235246574, 264.5706340127217);
+    p.SetSABefore(188.9763779527559);
+    p.SetSAAfter(188.9763779527559);
+    points.append(p);
+
+    p = VSAPoint(869.2733175133691, 309.4054580978941);
+    p.SetSABefore(188.9763779527559);
+    p.SetSAAfter(188.9763779527559);
+    points.append(p);
+
+    p = VSAPoint(854.760668516834, 350.82610676604384);
+    p.SetSABefore(188.9763779527559);
+    p.SetSAAfter(188.9763779527559);
+    points.append(p);
+
+    p = VSAPoint(842.8630996965472, 388.9466536381784);
+    p.SetSABefore(188.9763779527559);
+    p.SetSAAfter(188.9763779527559);
+    points.append(p);
+
+    p = VSAPoint(833.3396342140039, 423.88117233530534);
+    p.SetSABefore(188.9763779527559);
+    p.SetSAAfter(188.9763779527559);
+    points.append(p);
+
+    p = VSAPoint(825.9492952306991, 455.74373647843197);
+    p.SetSABefore(188.9763779527559);
+    p.SetSAAfter(188.9763779527559);
+    points.append(p);
+
+    p = VSAPoint(820.451105908128, 484.6484196885659);
+    p.SetSABefore(188.9763779527559);
+    p.SetSAAfter(188.9763779527559);
+    points.append(p);
+
+    p = VSAPoint(816.6040894077855, 510.7092955867147);
+    p.SetSABefore(188.9763779527559);
+    p.SetSAAfter(188.9763779527559);
+    points.append(p);
+
+    p = VSAPoint(814.1672688911669, 534.0404377938855);
+    p.SetSABefore(188.9763779527559);
+    p.SetSAAfter(188.9763779527559);
+    points.append(p);
+
+    p = VSAPoint(812.8996675197673, 554.7559199310863);
+    p.SetSABefore(188.9763779527559);
+    p.SetSAAfter(188.9763779527559);
+    points.append(p);
+
+    p = VSAPoint(812.5925673946043, 581.4656260538284);
+    p.SetSABefore(188.9763779527559);
+    p.SetSAAfter(188.9763779527559);
+    points.append(p);
+
+    p = VSAPoint(814.1809574610598, 608.5715133604979);
+    p.SetSABefore(188.9763779527559);
+    p.SetSAAfter(188.9763779527559);
+    points.append(p);
+
+    p = VSAPoint(815.1968503937007, 618.5825511811024);
+    p.SetSABefore(188.9763779527559);
+    p.SetSAAfter(188.9763779527559);
+    points.append(p);
+
+    p = VSAPoint(816.3634787672067, 628.380932746632);
+    p.SetSABefore(188.9763779527559);
+    p.SetSAAfter(188.9763779527559);
+    points.append(p);
+
+    p = VSAPoint(820.4053369940075, 649.1688436779486);
+    p.SetSABefore(188.9763779527559);
+    p.SetSAAfter(188.9763779527559);
+    points.append(p);
+
+    p = VSAPoint(826.5040284899703, 671.0654086429722);
+    p.SetSABefore(188.9763779527559);
+    p.SetSAAfter(188.9763779527559);
+    points.append(p);
+
+    p = VSAPoint(834.6667882477791, 693.7142683899226);
+    p.SetSABefore(188.9763779527559);
+    p.SetSAAfter(188.9763779527559);
+    points.append(p);
+
+    p = VSAPoint(844.9008512601183, 716.7590636670197);
+    p.SetSABefore(188.9763779527559);
+    p.SetSAAfter(188.9763779527559);
+    points.append(p);
+
+    p = VSAPoint(857.2134525196718, 739.8434352224829);
+    p.SetSABefore(188.9763779527559);
+    p.SetSAAfter(188.9763779527559);
+    points.append(p);
+
+    p = VSAPoint(871.6118270191237, 762.6110238045324);
+    p.SetSABefore(188.9763779527559);
+    p.SetSAAfter(188.9763779527559);
+    points.append(p);
+
+    p = VSAPoint(888.1032097511581, 784.7054701613878);
+    p.SetSABefore(188.9763779527559);
+    p.SetSAAfter(188.9763779527559);
+    points.append(p);
+
+    p = VSAPoint(906.6948357084594, 805.7704150412691);
+    p.SetSABefore(188.9763779527559);
+    p.SetSAAfter(188.9763779527559);
+    points.append(p);
+
+    p = VSAPoint(927.3939398837115, 825.4494991923958);
+    p.SetSABefore(188.9763779527559);
+    p.SetSAAfter(188.9763779527559);
+    points.append(p);
+
+    p = VSAPoint(950.2077572695983, 843.3863633629879);
+    p.SetSABefore(188.9763779527559);
+    p.SetSAAfter(188.9763779527559);
+    points.append(p);
+
+    p = VSAPoint(968.776733605274, 855.4073744953336);
+    p.SetSABefore(188.9763779527559);
+    p.SetSAAfter(188.9763779527559);
+    points.append(p);
+
+    p = VSAPoint(981.7764600118351, 862.7350547966848);
+    p.SetSABefore(188.9763779527559);
+    p.SetSAAfter(188.9763779527559);
+    points.append(p);
+
+    p = VSAPoint(995.3089344044396, 869.4267280237759);
+    p.SetSABefore(188.9763779527559);
+    p.SetSAAfter(188.9763779527559);
+    points.append(p);
+
+    p = VSAPoint(1009.3750611571733, 875.4378492701345);
+    p.SetSABefore(188.9763779527559);
+    p.SetSAAfter(188.9763779527559);
+    points.append(p);
+
+    p = VSAPoint(1023.9757446441214, 880.7238736292878);
+    p.SetSABefore(188.9763779527559);
+    p.SetSAAfter(188.9763779527559);
+    points.append(p);
+
+    p = VSAPoint(1039.1118892393697, 885.2402561947638);
+    p.SetSABefore(188.9763779527559);
+    p.SetSAAfter(188.9763779527559);
+    points.append(p);
+
+    p = VSAPoint(1054.784399317004, 888.9424520600894);
+    p.SetSABefore(188.9763779527559);
+    p.SetSAAfter(188.9763779527559);
+    points.append(p);
+
+    p = VSAPoint(1070.994179251109, 891.7859163187926);
+    p.SetSABefore(188.9763779527559);
+    p.SetSAAfter(188.9763779527559);
+    points.append(p);
+
+    p = VSAPoint(1087.7421334157707, 893.7261040644007);
+    p.SetSABefore(188.9763779527559);
+    p.SetSAAfter(188.9763779527559);
+    points.append(p);
+
+    p = VSAPoint(1105.0291661850742, 894.7184703904409);
+    p.SetSABefore(188.9763779527559);
+    p.SetSAAfter(188.9763779527559);
+    points.append(p);
+
+    p = VSAPoint(1113.8976377952758, 894.8030236220472);
+    p.SetSABefore(188.9763779527559);
+    p.SetSAAfter(0.0);
+    points.append(p);
+
+    p = VSAPoint(1113.8976377952758, 894.8030236220472);
+    p.SetSABefore(188.9763779527559);
+    p.SetSAAfter(0.0);
+    points.append(p);
+
+    return points;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QVector<QPointF> TST_VAbstractPiece::OutputPointsSeamTest1PieceBySecondRightAngle() const
+{
+    QVector<QPointF> points;
+
+    points += QPointF(30.0, 970.3935748031496);
+    points += QPointF(30.0, 2.2023778242823937);
+    points += QPointF(46.111397855976776, 2.027726815668483);
+    points += QPointF(81.74605442368645, -0.2758951981748612);
+    points += QPointF(119.50208828052781, -5.192452541281906);
+    points += QPointF(148.42595722778273, -10.854963023883784);
+    points += QPointF(167.5566961450379, -15.490385095876569);
+    points += QPointF(186.61281642420556, -20.94495784777482);
+    points += QPointF(205.31950565747624, -27.21179180985321);
+    points += QPointF(223.51736443487215, -34.306381867523655);
+    points += QPointF(241.0503469884652, -42.23845350735769);
+    points += QPointF(257.76798751706616, -51.01164773556077);
+    points += QPointF(273.5285590176657, -60.62398316233916);
+    points += QPointF(284.4959443876259, -68.4308753608727);
+    points += QPointF(556.951317720607, -31.220946854728947);
+    points += QPointF(539.6101141051189, 79.89131577778124);
+    points += QPointF(585.9167315845332, -20.7024207218235);
+    points += QPointF(1117.4559101159903, 212.6634418802967);
+    points += QPointF(1101.8482040478996, 244.8082798528157);
+    points += QPointF(1080.077560308019, 292.3718325563429);
+    points += QPointF(1061.8089025447719, 335.54292908714797);
+    points += QPointF(1046.6013689355652, 374.7989965048928);
+    points += QPointF(1034.1843603449322, 410.2384638595293);
+    points += QPointF(1024.2819001340656, 441.96655926454446);
+    points += QPointF(1016.6128103198596, 470.0987514791764);
+    points += QPointF(1010.891548127259, 494.7652903217379);
+    points += QPointF(1006.8300406648392, 516.1171535751373);
+    points += QPointF(1004.1409514475167, 534.3338730421456);
+    points += QPointF(1002.5429209641059, 549.6340874837038);
+    points += QPointF(1001.8096437359794, 561.6175009318105);
+    points += QPointF(1001.632561636562, 577.0190278199144);
+    points += QPointF(1002.5982079396683, 593.4977885619218);
+    points += QPointF(1003.0419281414149, 597.870394747796);
+    points += QPointF(1003.1926540422378, 599.1363247745379);
+    points += QPointF(1004.4715714217981, 605.7139974891637);
+    points += QPointF(1006.6672239434022, 613.5972045855956);
+    points += QPointF(1010.1411052399322, 623.2360341722922);
+    points += QPointF(1014.8474980040493, 633.8337662374475);
+    points += QPointF(1020.6660121283516, 644.7426504865729);
+    points += QPointF(1027.4243046890665, 655.4292751847524);
+    points += QPointF(1034.913026324476, 665.4623428264111);
+    points += QPointF(1042.9029269068749, 674.5151720813944);
+    points += QPointF(1051.171411576988, 682.3761985416603);
+    points += QPointF(1060.1878101895825, 689.4651444417038);
+    points += QPointF(1066.6143341082677, 693.625487703081);
+    points += QPointF(1070.1212524493003, 695.6022659553572);
+    points += QPointF(1074.3830151134664, 697.7096649640414);
+    points += QPointF(1078.7265805419665, 699.565875909043);
+    points += QPointF(1083.206554246492, 701.1878034134409);
+    points += QPointF(1087.891993301369, 702.5858632116882);
+    points += QPointF(1092.8646688655851, 703.7605199081748);
+    points += QPointF(1098.2162239125396, 704.699271425244);
+    points += QPointF(1104.0444208482252, 705.3744462055462);
+    points += QPointF(1111.3488014116294, 705.7937559506272);
+    points += QPointF(1290.2705536650083, 707.4996206162249);
+    points += QPointF(1302.416131870577, 881.6558256043734);
     points += QPointF(30.0, 970.3935748031496);
 
     return points;
@@ -643,365 +2076,252 @@ QVector<VSAPoint> TST_VAbstractPiece::InputPointsCase2() const
 
     QVector<VSAPoint> points;
 
-    VSAPoint p = VSAPoint(30.0, 39.999874015748034);
-    ////p.SetSAAfter(-1);
-    ////p.SetSABefore(-1);
-    points.append(p);
+//    VSAPoint p = VSAPoint(927.3939398837115, 825.4494991923958);
+//    p.SetSABefore(188.9763779527559);
+//    p.SetSAAfter(188.9763779527559);
+//    points.append(p);
 
-    p = VSAPoint(407.9527559055118, 39.999874015748034);
-    ////p.SetSAAfter(-1);
-    ////p.SetSABefore(-1);
-    points.append(p);
+    points.append(VSAPoint(30.0, 39.999874015748034));
+    points.append(VSAPoint(407.9527559055118, 39.999874015748034));
+    points.append(VSAPoint(407.9527559055118, 228.97625196850396));
+    points.append(VSAPoint(407.9527559055118, 228.97625196850396));
 
-    p = VSAPoint(407.9527559055118, 228.97625196850396);
-    ////p.SetSAAfter(-1);
-    ////p.SetSABefore(-1);
-    points.append(p);
-
-    p = VSAPoint(407.9527559055118, 228.97625196850396);
-    ////p.SetSAAfter(-1);
-    ////p.SetSABefore(-1);
-    points.append(p);
-
-    p = VSAPoint(403.3769166670402, 231.4465511704684);
-    p.SetSAAfter(37.803178025111038);
-    p.SetSABefore(37.803178025111038);
+    VSAPoint p = VSAPoint(403.3769166670402, 231.4465511704684);
+    p.SetSABefore(37.80317793023137);
+    p.SetSAAfter(37.80317793023137);
     points.append(p);
 
     p = VSAPoint(394.1607984354165, 235.58132461572228);
-    p.SetSAAfter(37.818528535007879);
-    p.SetSABefore(37.818528535007879);
+    p.SetSABefore(37.8185282558241);
+    p.SetSAAfter(37.8185282558241);
     points.append(p);
 
     p = VSAPoint(384.8923171505302, 238.7905285112787);
-    p.SetSAAfter(37.833434086432739);
-    p.SetSABefore(37.833434086432739);
+    p.SetSABefore(37.83343362828719);
+    p.SetSAAfter(37.83343362828719);
     points.append(p);
 
     p = VSAPoint(375.59921131499664, 241.12018552459608);
-    p.SetSAAfter(37.847993627262561);
-    p.SetSABefore(37.847993627262561);
+    p.SetSABefore(37.84799299430957);
+    p.SetSAAfter(37.84799299430957);
     points.append(p);
 
     p = VSAPoint(366.3092194314313, 242.61631832313287);
-    p.SetSAAfter(37.862293350550544);
-    p.SetSABefore(37.862293350550544);
+    p.SetSABefore(37.86229254590959);
+    p.SetSAAfter(37.86229254590959);
     points.append(p);
 
     p = VSAPoint(357.0500800024495, 243.3249495743475);
-    p.SetSAAfter(37.876405426208798);
-    p.SetSABefore(37.876405426208798);
+    p.SetSABefore(37.87640445213285);
+    p.SetSAAfter(37.87640445213285);
     points.append(p);
 
-    p = VSAPoint(347.8495315306667, 243.2921019456984);
-    p.SetSAAfter(37.890387402651413);
-    p.SetSABefore(37.890387402651413);
+    p = VSAPoint(343.267372346902, 243.09606124484026);
+    p.SetSABefore(37.897352390596396);
+    p.SetSAAfter(37.897352390596396);
     points.append(p);
 
-    p = VSAPoint(338.73531251869827, 242.56379810464406);
-    p.SetSAAfter(37.904282247411182);
-    p.SetSABefore(37.904282247411182);
+    p = VSAPoint(325.2670702478247, 240.34058647283786);
+    p.SetSABefore(37.92502540251962);
+    p.SetSAAfter(37.92502540251962);
     points.append(p);
 
-    p = VSAPoint(329.7351614691596, 241.18606071864286);
-    p.SetSAAfter(37.91811891950119);
-    p.SetSABefore(37.91811891950119);
+    p = VSAPoint(307.8894710141585, 235.26351352579883);
+    p.SetSABefore(37.952537472540754);
+    p.SetSAAfter(37.952537472540754);
     points.append(p);
 
-    p = VSAPoint(320.876816884666, 239.20491245515328);
-    p.SetSAAfter(37.931913327979281);
-    p.SetSABefore(37.931913327979281);
+    p = VSAPoint(291.35648266682676, 228.23302374339065);
+    p.SetSABefore(37.97983930259204);
+    p.SetSAAfter(37.97983930259204);
     points.append(p);
 
-    p = VSAPoint(312.18801726783295, 236.6663759816338);
-    p.SetSAAfter(37.945669528152067);
-    p.SetSABefore(37.945669528152067);
+    p = VSAPoint(275.89001322675244, 219.61729846528084);
+    p.SetSABefore(38.00674385290581);
+    p.SetSAAfter(38.00674385290581);
     points.append(p);
 
-    p = VSAPoint(303.6965011212758, 233.61647396554275);
-    p.SetSAAfter(37.959381027682795);
-    p.SetSABefore(37.959381027682795);
+    p = VSAPoint(261.71197071485875, 209.784519031137);
+    p.SetSABefore(38.032964089440014);
+    p.SetSAAfter(38.032964089440014);
     points.append(p);
 
-    p = VSAPoint(295.43000694760997, 230.10122907433865);
-    p.SetSAAfter(37.973032106608528);
-    p.SetSABefore(37.973032106608528);
+    p = VSAPoint(249.04426315206877, 199.10286678062653);
+    p.SetSABefore(38.058145046329095);
+    p.SetSAAfter(38.058145046329095);
     points.append(p);
 
-    p = VSAPoint(287.41627324945074, 226.16666397547993);
-    p.SetSAAfter(37.986599088053786);
-    p.SetSABefore(37.986599088053786);
+    p = VSAPoint(238.10879855930557, 187.94052305341705);
+    p.SetSABefore(38.081891784254736);
+    p.SetSAAfter(38.081891784254736);
     points.append(p);
 
-    p = VSAPoint(279.6830385294136, 221.85880133642502);
-    p.SetSAAfter(38.000051524725791);
-    p.SetSABefore(38.000051524725791);
+    p = VSAPoint(229.12748495749224, 176.66566918917607);
+    p.SetSABefore(38.10379739397839);
+    p.SetSAAfter(38.10379739397839);
     points.append(p);
 
-    p = VSAPoint(272.2580412901139, 217.2236638246324);
-    p.SetSAAfter(38.013353288194111);
-    p.SetSABefore(38.013353288194111);
+    p = VSAPoint(222.32223036755198, 165.64648652757114);
+    p.SetSABefore(38.12347885155327);
+    p.SetSAAfter(38.12347885155327);
     points.append(p);
 
-    p = VSAPoint(265.16902003416703, 212.3072741075605);
-    p.SetSAAfter(38.026463563868212);
-    p.SetSABefore(38.026463563868212);
+    p = VSAPoint(217.91494281040778, 155.2511564082697);
+    p.SetSABefore(38.140637376066095);
+    p.SetSAAfter(38.140637376066095);
     points.append(p);
 
-    p = VSAPoint(258.44371326418843, 207.15565485266765);
-    p.SetSAAfter(38.03933776597485);
-    p.SetSABefore(38.03933776597485);
-    points.append(p);
-
-    p = VSAPoint(252.1098594827934, 201.81482872741242);
-    p.SetSAAfter(38.051928395587325);
-    p.SetSABefore(38.051928395587325);
-    points.append(p);
-
-    p = VSAPoint(246.19519719259745, 196.33081839925325);
-    p.SetSAAfter(38.064185872874937);
-    p.SetSABefore(38.064185872874937);
-    points.append(p);
-
-    p = VSAPoint(240.72746489621585, 190.74964653564848);
-    p.SetSAAfter(38.076059384395691);
-    p.SetSABefore(38.076059384395691);
-    points.append(p);
-
-    p = VSAPoint(235.73440109626404, 185.11733580405664);
-    p.SetSAAfter(38.087497800100167);
-    p.SetSABefore(38.087497800100167);
-    points.append(p);
-
-    p = VSAPoint(231.24374429535737, 179.47990887193612);
-    p.SetSAAfter(38.098450736467157);
-    p.SetSABefore(38.098450736467157);
-    points.append(p);
-
-    p = VSAPoint(227.2832329961113, 173.88338840674544);
-    p.SetSAAfter(38.108869877607624);
-    p.SetSABefore(38.108869877607624);
-    points.append(p);
-
-    p = VSAPoint(223.88060570114112, 168.37379707594295);
-    p.SetSAAfter(38.118710724548052);
-    p.SetSABefore(38.118710724548052);
-    points.append(p);
-
-    p = VSAPoint(221.06360091306237, 162.99715754698713);
-    p.SetSAAfter(38.127935039089436);
-    p.SetSABefore(38.127935039089436);
-    points.append(p);
-
-    p = VSAPoint(218.8599571344903, 157.79949248733644);
-    p.SetSAAfter(38.136514404353001);
-    p.SetSABefore(38.136514404353001);
-    points.append(p);
-
-    p = VSAPoint(217.2974128680403, 152.82682456444928);
-    p.SetSAAfter(38.144435562325597);
-    p.SetSABefore(38.144435562325597);
-    points.append(p);
-
-    p = VSAPoint(216.40370661632784, 148.12517644578412);
-    p.SetSAAfter(38.15170849722444);
-    p.SetSABefore(38.15170849722444);
-    points.append(p);
-
-    p = VSAPoint(216.20657688196826, 143.7405707987994);
-    p.SetSAAfter(38.158378424653918);
-    p.SetSABefore(38.158378424653918);
+    p = VSAPoint(216.12753030698286, 145.84786017093933);
+    p.SetSABefore(38.15518307122048);
+    p.SetSAAfter(38.15518307122048);
     points.append(p);
 
     p = VSAPoint(216.7337621675769, 139.71903029095353);
-    p.SetSAAfter(38.164542166418755);
-    p.SetSABefore(38.164542166418755);
+    p.SetSABefore(38.16454227070837);
+    p.SetSAAfter(38.16454227070837);
     points.append(p);
 
-    p = VSAPoint(218.01300097576927, 136.10657758970495);
-    p.SetSAAfter(38.17036598425517);
-    p.SetSABefore(38.17036598425517);
+    p = VSAPoint(218.01300097576924, 136.10657758970495);
+    p.SetSABefore(38.17036601862179);
+    p.SetSAAfter(38.17036601862179);
     points.append(p);
 
-    p = VSAPoint(218.97637795275608, 134.48806299212646);
-    p.SetSAAfter(38.173228346456696);
+    p = VSAPoint(218.97637795275605, 134.48806299212646);
     p.SetSABefore(38.173228346456696);
+    p.SetSAAfter(38.173228346456696);
     points.append(p);
 
-    p = VSAPoint(218.97637795275608, 134.48806299212646);
-    p.SetSAAfter(38.173228346456696);
+    p = VSAPoint(218.97637795275605, 134.48806299212646);
     p.SetSABefore(38.173228346456696);
+    p.SetSAAfter(38.173228346456696);
     points.append(p);
 
-    p = VSAPoint(218.97637795275608, 134.48806299212646);
-    p.SetSAAfter(38.173228346456696);
+    p = VSAPoint(218.97637795275605, 134.48806299212646);
     p.SetSABefore(38.173228346456696);
+    p.SetSAAfter(38.173228346456696);
     points.append(p);
 
     p = VSAPoint(217.1202289172026, 137.73030103616844);
-    p.SetSAAfter(38.167995197589178);
-    p.SetSABefore(38.167995197589178);
+    p.SetSABefore(38.16799523335242);
+    p.SetSAAfter(38.16799523335242);
     points.append(p);
 
     p = VSAPoint(212.6973363405255, 143.4397404435662);
-    p.SetSAAfter(38.157878743288215);
-    p.SetSABefore(38.157878743288215);
+    p.SetSABefore(38.15787884818713);
+    p.SetSAAfter(38.15787884818713);
     points.append(p);
 
     p = VSAPoint(207.48487786706698, 148.24866810991395);
-    p.SetSAAfter(38.147944713012919);
-    p.SetSABefore(38.147944713012919);
+    p.SetSABefore(38.14794488580081);
+    p.SetSAAfter(38.14794488580081);
     points.append(p);
 
     p = VSAPoint(201.55301739671896, 152.18989767496004);
-    p.SetSAAfter(38.137968823998783);
-    p.SetSABefore(38.137968823998783);
+    p.SetSABefore(38.13796906496172);
+    p.SetSAAfter(38.13796906496172);
     points.append(p);
 
     p = VSAPoint(194.9719188293733, 155.29624277845284);
-    p.SetSAAfter(38.127775030254007);
-    p.SetSABefore(38.127775030254007);
+    p.SetSABefore(38.12777534088115);
+    p.SetSAAfter(38.12777534088115);
     points.append(p);
 
     p = VSAPoint(187.81174606492203, 157.6005170601407);
-    p.SetSAAfter(38.117238836985599);
-    p.SetSABefore(38.117238836985599);
+    p.SetSABefore(38.1172392196169);
+    p.SetSAAfter(38.1172392196169);
     points.append(p);
 
     p = VSAPoint(180.14266300325704, 159.13553415977202);
-    p.SetSAAfter(38.106283289982827);
-    p.SetSABefore(38.106283289982827);
+    p.SetSABefore(38.10628374748414);
+    p.SetSAAfter(38.10628374748414);
     points.append(p);
 
     p = VSAPoint(172.0348335442702, 159.93410771709506);
-    p.SetSAAfter(38.094871286509886);
-    p.SetSABefore(38.094871286509886);
+    p.SetSABefore(38.09487182200063);
+    p.SetSAAfter(38.09487182200063);
     points.append(p);
 
-    p = VSAPoint(163.55842158785353, 160.02905137185826);
-    p.SetSAAfter(38.082997200945435);
-    p.SetSABefore(38.082997200945435);
+    p = VSAPoint(159.23684047277425, 159.9047174285684);
+    p.SetSABefore(38.07694509829885);
+    p.SetSAAfter(38.07694509829885);
     points.append(p);
 
-    p = VSAPoint(154.78359103389897, 159.4531787638099);
-    p.SetSAAfter(38.070679409075119);
-    p.SetSABefore(38.070679409075119);
+    p = VSAPoint(141.23066996957303, 157.47696696634546);
+    p.SetSABefore(38.051494892780326);
+    p.SetSAAfter(38.051494892780326);
     points.append(p);
 
-    p = VSAPoint(145.78050578229832, 158.23930353269841);
-    p.SetSAAfter(38.057954219352141);
-    p.SetSABefore(38.057954219352141);
+    p = VSAPoint(122.73246407513939, 152.69408785036);
+    p.SetSABefore(38.02473158624051);
+    p.SetSAAfter(38.02473158624051);
     points.append(p);
 
-    p = VSAPoint(136.61932973294367, 156.42023931827214);
-    p.SetSAAfter(38.044871166362007);
-    p.SetSABefore(38.044871166362007);
+    p = VSAPoint(104.30353398860882, 145.81858919859886);
+    p.SetSABefore(37.99717939647611);
+    p.SetSAAfter(37.99717939647611);
     points.append(p);
 
-    p = VSAPoint(127.37022678572683, 154.0287997602794);
-    p.SetSAAfter(38.031489421641503);
-    p.SetSABefore(38.031489421641503);
+    p = VSAPoint(86.50519090911675, 137.11298012904894);
+    p.SetSABefore(37.969426027228295);
+    p.SetSAAfter(37.969426027228295);
     points.append(p);
 
-    p = VSAPoint(118.10336084053982, 151.09779849846862);
-    p.SetSAAfter(38.017875048227786);
-    p.SetSABefore(38.017875048227786);
+    p = VSAPoint(69.89874603579864, 126.83976975969698);
+    p.SetSABefore(37.94207342582994);
+    p.SetSAAfter(37.94207342582994);
     points.append(p);
 
-    p = VSAPoint(108.88889579727454, 147.66004917258803);
-    p.SetSAAfter(38.00409885919936);
-    p.SetSABefore(38.00409885919936);
+    p = VSAPoint(55.045510567789904, 115.26146720852991);
+    p.SetSABefore(37.91569349681988);
+    p.SetSAAfter(37.91569349681988);
     points.append(p);
 
-    p = VSAPoint(99.79699555582292, 143.7483654223861);
-    p.SetSAAfter(37.990234686678903);
-    p.SetSABefore(37.990234686678903);
+    p = VSAPoint(42.506795704226036, 102.64058159353453);
+    p.SetSABefore(37.890773443464376);
+    p.SetSAAfter(37.890773443464376);
     points.append(p);
 
-    p = VSAPoint(90.8978240160769, 139.3955608876111);
-    p.SetSAAfter(37.976357907221328);
-    p.SetSABefore(37.976357907221328);
+    p = VSAPoint(35.06235294654161, 92.63041313458488);
+    p.SetSABefore(37.87329933285639);
+    p.SetSAAfter(37.87329933285639);
     points.append(p);
 
-    p = VSAPoint(82.26154507792839, 134.63444920801146);
-    p.SetSAAfter(37.962544096747962);
-    p.SetSABefore(37.962544096747962);
-    points.append(p);
-
-    p = VSAPoint(73.95832264126932, 129.49784402333552);
-    p.SetSAAfter(37.94886770258455);
-    p.SetSABefore(37.94886770258455);
-    points.append(p);
-
-    p = VSAPoint(66.05832060599164, 124.01855897333157);
-    p.SetSAAfter(37.935400622146403);
-    p.SetSABefore(37.935400622146403);
-    points.append(p);
-
-    p = VSAPoint(58.63170287198729, 118.22940769774803);
-    p.SetSAAfter(37.922210567500777);
-    p.SetSABefore(37.922210567500777);
-    points.append(p);
-
-    p = VSAPoint(51.74863333914817, 112.16320383633325);
-    p.SetSAAfter(37.90935907207141);
-    p.SetSABefore(37.90935907207141);
-    points.append(p);
-
-    p = VSAPoint(45.47927590736623, 105.85276102883554);
-    p.SetSAAfter(37.896898960241472);
-    p.SetSABefore(37.896898960241472);
-    points.append(p);
-
-    p = VSAPoint(39.8937944765334, 99.33089291500332);
-    p.SetSAAfter(37.884871055952601);
-    p.SetSABefore(37.884871055952601);
-    points.append(p);
-
-    p = VSAPoint(35.062352946541615, 92.63041313458488);
-    p.SetSAAfter(37.873299866072891);
-    p.SetSABefore(37.873299866072891);
-    points.append(p);
-
-    p = VSAPoint(31.055115217282804, 85.78413532732864);
-    p.SetSAAfter(37.86218797621639);
-    p.SetSABefore(37.86218797621639);
+    p = VSAPoint(31.055115217282797, 85.78413532732864);
+    p.SetSABefore(37.86218751893835);
+    p.SetSAAfter(37.86218751893835);
     points.append(p);
 
     p = VSAPoint(27.94224518864889, 78.82487313298289);
-    p.SetSAAfter(37.851509027526909);
-    p.SetSABefore(37.851509027526909);
+    p.SetSABefore(37.851508643228605);
+    p.SetSAAfter(37.851508643228605);
     points.append(p);
 
     p = VSAPoint(25.793906760531815, 71.78544019129603);
-    p.SetSAAfter(37.841199561247805);
-    p.SetSABefore(37.841199561247805);
+    p.SetSABefore(37.84119924740421);
+    p.SetSAAfter(37.84119924740421);
     points.append(p);
 
     p = VSAPoint(24.68026383282351, 64.69865014201642);
-    p.SetSAAfter(37.831150915024352);
-    p.SetSABefore(37.831150915024352);
+    p.SetSABefore(37.83115066985303);
+    p.SetSAAfter(37.83115066985303);
     points.append(p);
 
     p = VSAPoint(24.671480305415898, 57.597316624892386);
-    p.SetSAAfter(37.821203708860601);
-    p.SetSABefore(37.821203708860601);
+    p.SetSABefore(37.8212035316683);
+    p.SetSAAfter(37.8212035316683);
     points.append(p);
 
     p = VSAPoint(25.837720078200917, 50.514253279672296);
-    p.SetSAAfter(37.811148513024627);
-    p.SetSABefore(37.811148513024627);
+    p.SetSABefore(37.81114840454936);
+    p.SetSAAfter(37.81114840454936);
     points.append(p);
 
     p = VSAPoint(28.2491470510705, 43.48227374610451);
-    p.SetSAAfter(37.800735391906976);
-    p.SetSABefore(37.800735391906976);
+    p.SetSABefore(37.80073535459479);
+    p.SetSAAfter(37.80073535459479);
     points.append(p);
 
-    p = VSAPoint(30.0, 39.999874015748034);
-    ////p.SetSAAfter(-1);
-    ////p.SetSABefore(-1);
-    points.append(p);
+    points.append(VSAPoint(30.0, 39.999874015748034));
 
     return points;
 }
@@ -1011,61 +2331,53 @@ QVector<QPointF> TST_VAbstractPiece::OutputPointsCase2() const
 {
     QVector<QPointF> points;
 
-    points += QPointF(6.735602739585184, 2.204598425196849);
-    points += QPointF(445.748031496063, 2.204598425196849);
-    points += QPointF(445.748031496063, 251.48446223243934);
-    points += QPointF(420.1672505436216, 265.34467354701);
-    points += QPointF(408.16868834563587, 270.74969811280204);
-    points += QPointF(395.75743565485675, 275.06821746196044);
-    points += QPointF(383.28015968092507, 278.216263983686);
-    points += QPointF(370.8288026520235, 280.2409452967658);
-    points += QPointF(358.4874104434599, 281.2043381226534);
-    points += QPointF(346.3281093878975, 281.1794055890767);
-    points += QPointF(334.4094715702431, 280.2452307190486);
-    points += QPointF(322.77695514341303, 278.48262025768446);
-    points += QPointF(311.46472096401544, 275.97070996938834);
-    points += QPointF(300.4980766475991, 272.78475431818316);
-    points += QPointF(289.8959627998986, 268.994968265893);
-    points += QPointF(279.67312801429796, 264.6661417252929);
-    points += QPointF(269.84184205634284, 259.8577269753623);
-    points += QPointF(260.4131332789275, 254.62414553625888);
-    points += QPointF(251.39760921382512, 249.0151257350064);
-    points += QPointF(242.80594716150756, 243.07593816151942);
-    points += QPointF(234.64914462550888, 236.84743207794344);
-    points += QPointF(226.93861367892654, 230.36578881474733);
-    points += QPointF(219.6862008839008, 223.6618981488572);
-    points += QPointF(212.90422632696564, 216.76022967199233);
-    points += QPointF(206.60567695694368, 209.67701009653408);
-    points += QPointF(200.8047886617048, 202.41742546763192);
-    points += QPointF(195.51846445950318, 194.97144814919497);
-    points += QPointF(195.49646472111115, 194.93594659378365);
-    points += QPointF(185.71068181674897, 196.88038239808796);
-    points += QPointF(174.06579870156523, 198.0108674081686);
-    points += QPointF(162.4698365016369, 198.12450807507133);
-    points += QPointF(150.93599464376967, 197.35134057907845);
-    points += QPointF(139.4731688630524, 195.78946993073865);
-    points += QPointF(128.09385198069478, 193.51339391764853);
-    points += QPointF(116.81695231109029, 190.58079085562875);
-    points += QPointF(105.66811291289228, 187.03735678012447);
-    points += QPointF(94.6789709925457, 182.91996300992662);
-    points += QPointF(83.88608373098256, 178.2585220934185);
-    points += QPointF(73.32986575781915, 173.07687844159756);
-    points += QPointF(63.05370660182625, 167.39293026852914);
-    points += QPointF(53.10337911388009, 161.21809122399117);
-    points += QPointF(43.52687054865665, 154.55612780781823);
-    points += QPointF(34.37485617471233, 147.40137397927876);
-    points += QPointF(25.702201154685437, 139.73635741878132);
-    points += QPointF(17.571137619050678, 131.52904674063026);
-    points += QPointF(10.057109595108484, 122.7304016692299);
-    points += QPointF(3.2585649313074336, 113.27395345986065);
-    points += QPointF(-2.688329688884947, 103.08109119247632);
-    points += QPointF(-7.591302782642628, 92.07847647311537);
-    points += QPointF(-11.187498579572614, 80.23547322967522);
-    points += QPointF(-13.151329717912063, 67.62324223181253);
-    points += QPointF(-13.149175120030888, 54.474729701833986);
-    points += QPointF(-10.94337542157982, 41.194055939258014);
-    points += QPointF(-6.654890183208465, 28.745230608885407);
-    points += QPointF(6.735602739585184, 2.204598425196849);
+    points += QPointF(6.735602489575015, 2.204598425196849);
+    points += QPointF(445.74803149606305, 2.204598425196849);
+    points += QPointF(445.748031496063, 251.4844627007215);
+    points += QPointF(421.3353745697487, 264.71175899157447);
+    points += QPointF(418.8511557813181, 265.9375381882219);
+    points += QPointF(409.64132100578746, 270.0863170137037);
+    points += QPointF(406.534680371908, 271.3182540481497);
+    points += QPointF(397.2710759906872, 274.5415428980511);
+    points += QPointF(394.0919849710222, 275.48841417378816);
+    points += QPointF(384.8024194256035, 277.83219356243256);
+    points += QPointF(381.6170070948525, 278.48670406257685);
+    points += QPointF(372.3292888267279, 279.99695450428766);
+    points += QPointF(369.1984911888747, 280.3682097399039);
+    points += QPointF(358.2408334277008, 281.22358539078493);
+    points += QPointF(340.1284056058474, 280.95032539874563);
+    points += QPointF(317.1003672226287, 277.46101449907337);
+    points += QPointF(295.1519528906243, 271.0847085461394);
+    points += QPointF(274.68871290802866, 262.4196148903778);
+    points += QPointF(255.81310453620574, 251.94235440791147);
+    points += QPointF(238.61081765006833, 240.0508703303418);
+    points += QPointF(223.16837814314113, 227.06961282699527);
+    points += QPointF(209.5774971397173, 213.23886816257252);
+    points += QPointF(197.93811921404816, 198.6726417606856);
+    points += QPointF(195.59837660985662, 194.8969375402249);
+    points += QPointF(195.2927772651506, 194.97641969682226);
+    points += QPointF(187.62154404176044, 196.50069439568804);
+    points += QPointF(183.8778341349861, 197.05831567247884);
+    points += QPointF(173.80935665477787, 198.03576335366748);
+    points += QPointF(156.58462346404755, 197.97207956246808);
+    points += QPointF(133.84749301666088, 194.8740254865072);
+    points += QPointF(111.24564892141993, 188.99632536164253);
+    points += QPointF(89.23016638120879, 180.74760051351964);
+    points += QPointF(68.08422273452526, 170.36786581256206);
+    points += QPointF(48.14786227034436, 157.9960303610079);
+    points += QPointF(29.800888286137585, 143.65294976668383);
+    points += QPointF(13.683525778751441, 127.38445078151254);
+    points += QPointF(3.3994938238576147, 113.51550175712616);
+    points += QPointF(-1.6212069307357524, 104.9101180366734);
+    points += QPointF(-3.5070767733614048, 101.24376431773773);
+    points += QPointF(-7.59130229548195, 92.07847667888365);
+    points += QPointF(-11.18749819246625, 80.23547351371789);
+    points += QPointF(-13.151329445248951, 67.6232425750484);
+    points += QPointF(-13.149174973239838, 54.47473007846592);
+    points += QPointF(-10.943375405772395, 41.194056317965945);
+    points += QPointF(-7.507583651313517, 31.220471153284027);
+    points += QPointF(-5.523329117990919, 26.502419601905103);
+    points += QPointF(6.735602489575015, 2.204598425196849);
 
     return points;
 }
@@ -1075,670 +2387,324 @@ QVector<VSAPoint> TST_VAbstractPiece::InputPointsCase3() const
 {
     QVector<VSAPoint> points;
 
-    VSAPoint p = VSAPoint(30.0, 39.999874015748034);
-    //p.SetSAAfter(-1);
-    //p.SetSABefore(-1);
+//    p = VSAPoint(25.837720078200917, 50.514253279672296);
+//    p.SetSABefore(37.81114840454936);
+//    p.SetSAAfter(37.81114840454936);
+//    points.append(p);
+
+    points.append(VSAPoint(30.0, 39.999874015748034));
+    points.append(VSAPoint(407.9527559055118, 39.999874015748034));
+    points.append(VSAPoint(407.9527559055118, 228.97625196850396));
+    points.append(VSAPoint(407.9527559055118, 228.97625196850396));
+
+    VSAPoint p = VSAPoint(404.6723012992244, 235.65623431697782);
+    p.SetSABefore(36.977845511186636);
+    p.SetSAAfter(36.977845511186636);
     points.append(p);
 
-    p = VSAPoint(407.9527559055118, 39.999874015748034);
-    //p.SetSAAfter(-1);
-    //p.SetSABefore(-1);
+    p = VSAPoint(397.22283300301126, 246.53269098046195);
+    p.SetSABefore(35.52982410231174);
+    p.SetSAAfter(35.52982410231174);
     points.append(p);
 
-    p = VSAPoint(407.9527559055118, 228.97625196850396);
-    //p.SetSAAfter(-1);
-    //p.SetSABefore(-1);
+    p = VSAPoint(388.92062499630856, 254.5956376373514);
+    p.SetSABefore(34.258630321759945);
+    p.SetSAAfter(34.258630321759945);
     points.append(p);
 
-    p = VSAPoint(407.9527559055118, 228.97625196850396);
-    //p.SetSAAfter(-1);
-    //p.SetSABefore(-1);
+    p = VSAPoint(380.0029341567567, 260.0302961027146);
+    p.SetSABefore(33.111548444754845);
+    p.SetSAAfter(33.111548444754845);
     points.append(p);
 
-    p = VSAPoint(406.33770829042953, 232.38064611626584);
-    p.SetSAAfter(37.381380099110068);
-    p.SetSABefore(37.381380099110068);
+    p = VSAPoint(370.70701736199624, 263.02188819161995);
+    p.SetSABefore(32.03891394371319);
+    p.SetSAAfter(32.03891394371319);
     points.append(p);
 
-    p = VSAPoint(402.870644734503, 238.5569810399819);
-    p.SetSAAfter(36.603370955765051);
-    p.SetSABefore(36.603370955765051);
+    p = VSAPoint(361.27013148966773, 263.75563571913585);
+    p.SetSABefore(30.99923856743404);
+    p.SetSAAfter(30.99923856743404);
     points.append(p);
 
-    p = VSAPoint(399.14591058639644, 243.99520937172397);
-    p.SetSAAfter(35.879339211886929);
-    p.SetSABefore(35.879339211886929);
+    p = VSAPoint(351.9295334174118, 262.41676050033084);
+    p.SetSABefore(29.962781670363757);
+    p.SetSAAfter(29.962781670363757);
     points.append(p);
 
-    p = VSAPoint(395.19316295581496, 248.71848383837556);
-    p.SetSAAfter(35.202813177025682);
-    p.SetSABefore(35.202813177025682);
+    p = VSAPoint(342.92248002286897, 259.19048435027327);
+    p.SetSABefore(28.91189499226486);
+    p.SetSAAfter(28.91189499226486);
     points.append(p);
 
-    p = VSAPoint(391.04205895246355, 252.7499571668203);
-    p.SetSAAfter(34.56719781657663);
-    p.SetSABefore(34.56719781657663);
+    p = VSAPoint(334.48622818367966, 254.26202908403155);
+    p.SetSABefore(27.838718909311048);
+    p.SetSAAfter(27.838718909311048);
     points.append(p);
 
-    p = VSAPoint(386.72225568604733, 256.1127820839417);
-    p.SetSAAfter(33.965870279175178);
-    p.SetSABefore(33.965870279175178);
+    p = VSAPoint(326.8580347774845, 247.81661651667417);
+    p.SetSABefore(26.741788760884347);
+    p.SetSAAfter(26.741788760884347);
     points.append(p);
 
-    p = VSAPoint(382.2634102662714, 258.8301113166233);
-    p.SetSAAfter(33.392312673818843);
-    p.SetSABefore(33.392312673818843);
+    p = VSAPoint(320.27515668192393, 240.0394684632695);
+    p.SetSABefore(25.622615764841164);
+    p.SetSAAfter(25.622615764841164);
     points.append(p);
 
-    p = VSAPoint(377.6951798028408, 260.9250975917487);
-    p.SetSAAfter(32.840273714828662);
-    p.SetSABefore(32.840273714828662);
+    p = VSAPoint(314.97485077463864, 231.11580673888602);
+    p.SetSABefore(24.482580077336745);
+    p.SetSAAfter(24.482580077336745);
     points.append(p);
 
-    p = VSAPoint(373.0472214054606, 262.4208936362013);
-    p.SetSAAfter(32.303940879158468);
-    p.SetSABefore(32.303940879158468);
+    p = VSAPoint(311.19437393326905, 221.2308531585922);
+    p.SetSABefore(23.320121181910643);
+    p.SetSAAfter(23.320121181910643);
     points.append(p);
 
-    p = VSAPoint(368.34919218383584, 263.34065217686486);
-    p.SetSAAfter(31.778098176885351);
-    p.SetSABefore(31.778098176885351);
+    p = VSAPoint(309.1709830354557, 210.56982953745637);
+    p.SetSABefore(22.12821102042642);
+    p.SetSAAfter(22.12821102042642);
     points.append(p);
 
-    p = VSAPoint(363.6307492476716, 263.7075259406228);
-    p.SetSAAfter(31.25824538248542);
-    p.SetSABefore(31.25824538248542);
+    p = VSAPoint(309.14193495883904, 199.31795769054702);
+    p.SetSABefore(20.89230212706225);
+    p.SetSAAfter(20.89230212706225);
     points.append(p);
 
-    p = VSAPoint(358.921549706673, 263.5446676543588);
-    p.SetSAAfter(30.740662987580134);
-    p.SetSABefore(30.740662987580134);
-    points.append(p);
-
-    p = VSAPoint(354.251250670545, 262.87523004495625);
-    p.SetSAAfter(30.222419479548449);
-    p.SetSABefore(30.222419479548449);
-    points.append(p);
-
-    p = VSAPoint(349.6495092489928, 261.72236583929885);
-    p.SetSAAfter(29.701328542831337);
-    p.SetSABefore(29.701328542831337);
-    points.append(p);
-
-    p = VSAPoint(345.1459825517213, 260.1092277642701);
-    p.SetSAAfter(29.175869934623716);
-    p.SetSABefore(29.175869934623716);
-    points.append(p);
-
-    p = VSAPoint(340.7703276884358, 258.0589685467535);
-    p.SetSAAfter(28.645088729374258);
-    p.SetSABefore(28.645088729374258);
-    points.append(p);
-
-    p = VSAPoint(336.5522017688411, 255.59474091363262);
-    p.SetSAAfter(28.108485094878901);
-    p.SetSABefore(28.108485094878901);
-    points.append(p);
-
-    p = VSAPoint(332.52126190264244, 252.73969759179104);
-    p.SetSAAfter(27.565902911541084);
-    p.SetSABefore(27.565902911541084);
-    points.append(p);
-
-    p = VSAPoint(328.7071651995449, 249.51699130811238);
-    p.SetSAAfter(27.017421899167815);
-    p.SetSABefore(27.017421899167815);
-    points.append(p);
-
-    p = VSAPoint(325.1395687692534, 245.94977478948007);
-    p.SetSAAfter(26.463255170503039);
-    p.SetSABefore(26.463255170503039);
-    points.append(p);
-
-    p = VSAPoint(321.84812972147313, 242.06120076277773);
-    p.SetSAAfter(25.903652411137717);
-    p.SetSABefore(25.903652411137717);
-    points.append(p);
-
-    p = VSAPoint(318.86250516590917, 237.87442195488893);
-    p.SetSAAfter(25.338808050829666);
-    p.SetSABefore(25.338808050829666);
-    points.append(p);
-
-    p = VSAPoint(316.2123522122665, 233.4125910926972);
-    p.SetSAAfter(24.768773642603289);
-    p.SetSABefore(24.768773642603289);
-    points.append(p);
-
-    p = VSAPoint(313.9273279702502, 228.69886090308609);
-    p.SetSAAfter(24.19337403613525);
-    p.SetSABefore(24.19337403613525);
-    points.append(p);
-
-    p = VSAPoint(312.03708954956545, 223.75638411293914);
-    p.SetSAAfter(23.612127698143627);
-    p.SetSABefore(23.612127698143627);
-    points.append(p);
-
-    p = VSAPoint(310.57129405991714, 218.60831344913998);
-    p.SetSAAfter(23.024172586797707);
-    p.SetSABefore(23.024172586797707);
-    points.append(p);
-
-    p = VSAPoint(309.55959861101053, 213.27780163857204);
-    p.SetSAAfter(22.42820018785644);
-    p.SetSABefore(22.42820018785644);
-    points.append(p);
-
-    p = VSAPoint(309.03166031255046, 207.788001408119);
-    p.SetSAAfter(21.822401444747854);
-    p.SetSABefore(21.822401444747854);
-    points.append(p);
-
-    p = VSAPoint(309.01713627424215, 202.1620654846643);
-    p.SetSAAfter(21.204429040574471);
-    p.SetSABefore(21.204429040574471);
-    points.append(p);
-
-    p = VSAPoint(309.5456836057906, 196.42314659509157);
-    p.SetSAAfter(20.57138043760828);
-    p.SetSABefore(20.57138043760828);
-    points.append(p);
-
-    p = VSAPoint(310.64695941690104, 190.59439746628436);
-    p.SetSAAfter(19.919804940549692);
-    p.SetSABefore(19.919804940549692);
-    points.append(p);
-
-    p = VSAPoint(312.35062081727835, 184.6989708251262);
-    p.SetSAAfter(19.24573577317911);
-    p.SetSABefore(19.24573577317911);
+    p = VSAPoint(311.34448658105987, 187.66045943293258);
+    p.SetSABefore(19.58918900085386);
+    p.SetSAAfter(19.58918900085386);
     points.append(p);
 
     p = VSAPoint(313.4645669291343, 181.73215748031558);
-    p.SetSAAfter(18.897637795275593);
     p.SetSABefore(18.897637795275593);
+    p.SetSAAfter(18.897637795275593);
     points.append(p);
 
     p = VSAPoint(313.4645669291343, 181.73215748031558);
-    p.SetSAAfter(18.897637795275593);
     p.SetSABefore(18.897637795275593);
+    p.SetSAAfter(18.897637795275593);
     points.append(p);
 
     p = VSAPoint(313.4645669291343, 181.73215748031558);
-    p.SetSAAfter(18.897637795275593);
     p.SetSABefore(18.897637795275593);
-    points.append(p);
-
-    p = VSAPoint(313.4645669291343, 181.73215748031558);
     p.SetSAAfter(18.897637795275593);
-    p.SetSABefore(18.897637795275593);
     points.append(p);
 
-    p = VSAPoint(313.4645669291343, 181.73215748031558);
-    p.SetSAAfter(18.897637795275593);
-    p.SetSABefore(18.897637795275593);
+    p = VSAPoint(316.591345021592, 173.28443556543095);
+    p.SetSABefore(19.976796375788812);
+    p.SetSAAfter(19.976796375788812);
     points.append(p);
 
-    p = VSAPoint(313.4645669291343, 181.73215748031558);
-    p.SetSAAfter(18.897637795275593);
-    p.SetSABefore(18.897637795275593);
+    p = VSAPoint(320.1426384331089, 158.63568876958243);
+    p.SetSABefore(21.782587487730186);
+    p.SetSAAfter(21.782587487730186);
     points.append(p);
 
-    p = VSAPoint(313.4645669291343, 181.73215748031558);
-    p.SetSAAfter(18.897637795275593);
-    p.SetSABefore(18.897637795275593);
+    p = VSAPoint(320.76512297484294, 146.51286504020334);
+    p.SetSABefore(23.23684508842329);
+    p.SetSAAfter(23.23684508842329);
     points.append(p);
 
-    p = VSAPoint(315.0998723566189, 177.44976641127198);
-    p.SetSAAfter(19.446824166328746);
-    p.SetSABefore(19.446824166328746);
+    p = VSAPoint(318.80758360045513, 136.72694951703215);
+    p.SetSABefore(24.432447936360937);
+    p.SetSAAfter(24.432447936360937);
     points.append(p);
 
-    p = VSAPoint(317.6731184586346, 169.45847196043132);
-    p.SetSAAfter(20.452631980165769);
-    p.SetSABefore(20.452631980165769);
+    p = VSAPoint(314.618805263607, 129.08892733980727);
+    p.SetSABefore(25.476072862288163);
+    p.SetSAAfter(25.476072862288163);
     points.append(p);
 
-    p = VSAPoint(319.4487651643931, 162.13409856250706);
-    p.SetSAAfter(21.355546141728666);
-    p.SetSABefore(21.355546141728666);
+    p = VSAPoint(308.54757291795954, 123.40978364826717);
+    p.SetSABefore(26.47203809949214);
+    p.SetSAAfter(26.47203809949214);
     points.append(p);
 
-    p = VSAPoint(320.470410593102, 155.4530193599665);
-    p.SetSAAfter(22.165276674578177);
-    p.SetSABefore(22.165276674578177);
+    p = VSAPoint(300.9426715171743, 119.50050358215026);
+    p.SetSABefore(27.49645076170011);
+    p.SetSAAfter(27.49645076170011);
     points.append(p);
 
-    p = VSAPoint(320.78165286396893, 149.39160749527696);
-    p.SetSAAfter(22.892420458564697);
-    p.SetSABefore(22.892420458564697);
-    points.append(p);
-
-    p = VSAPoint(320.4260900962016, 143.92623611090573);
-    p.SetSAAfter(23.548583135932272);
-    p.SetSABefore(23.548583135932272);
-    points.append(p);
-
-    p = VSAPoint(319.44732040900783, 139.03327834932014);
-    p.SetSAAfter(24.146396878545747);
-    p.SetSABefore(24.146396878545747);
-    points.append(p);
-
-    p = VSAPoint(317.88894192159495, 134.68910735298743);
-    p.SetSAAfter(24.699324443869902);
-    p.SetSABefore(24.699324443869902);
-    points.append(p);
-
-    p = VSAPoint(315.79455275317093, 130.870096264375);
-    p.SetSAAfter(25.221147659605332);
-    p.SetSABefore(25.221147659605332);
-    points.append(p);
-
-    p = VSAPoint(313.2077510229431, 127.55261822595011);
-    p.SetSAAfter(25.725143604791594);
-    p.SetSABefore(25.725143604791594);
-    points.append(p);
-
-    p = VSAPoint(310.1721348501194, 124.71304638018006);
-    p.SetSAAfter(26.223136485113741);
-    p.SetSABefore(26.223136485113741);
-    points.append(p);
-
-    p = VSAPoint(306.73130235390744, 122.32775386953216);
-    p.SetSAAfter(26.724730852906816);
-    p.SetSABefore(26.724730852906816);
-    points.append(p);
-
-    p = VSAPoint(302.9288516535148, 120.3731138364737);
-    p.SetSAAfter(27.236947738833074);
-    p.SetSABefore(27.236947738833074);
-    points.append(p);
-
-    p = VSAPoint(298.80838086814924, 118.82549942347202);
-    p.SetSAAfter(27.764271724915222);
-    p.SetSABefore(27.764271724915222);
-    points.append(p);
-
-    p = VSAPoint(294.41348811701835, 117.66128377299438);
-    p.SetSAAfter(28.308962477298437);
-    p.SetSABefore(28.308962477298437);
-    points.append(p);
-
-    p = VSAPoint(289.7877715193297, 116.85684002750813);
-    p.SetSAAfter(28.871463995346204);
-    p.SetSABefore(28.871463995346204);
+    p = VSAPoint(292.1528860149125, 117.172072281195);
+    p.SetSABefore(28.585809818498724);
+    p.SetSAAfter(28.585809818498724);
     points.append(p);
 
     p = VSAPoint(282.5270013648352, 116.23547488513984);
-    p.SetSAAfter(29.744519639698659);
-    p.SetSABefore(29.744519639698659);
+    p.SetSABefore(29.74446055333082);
+    p.SetSAAfter(29.74446055333082);
     points.append(p);
 
     p = VSAPoint(272.4138025206039, 116.50169653372318);
-    p.SetSAAfter(30.956550523683344);
-    p.SetSABefore(30.956550523683344);
+    p.SetSABefore(30.95646646201516);
+    p.SetSAAfter(30.95646646201516);
     points.append(p);
 
     p = VSAPoint(262.16207443587984, 117.7817223666835);
-    p.SetSAAfter(32.194294958045219);
-    p.SetSABefore(32.194294958045219);
+    p.SetSABefore(32.19418539121919);
+    p.SetSAAfter(32.19418539121919);
     points.append(p);
 
     p = VSAPoint(252.12060206432426, 119.88653752375922);
-    p.SetSAAfter(33.423457501774081);
-    p.SetSABefore(33.423457501774081);
+    p.SetSABefore(33.42332260663002);
+    p.SetSAAfter(33.42332260663002);
     points.append(p);
 
-    p = VSAPoint(242.63817035959835, 122.62712714468876);
-    p.SetSAAfter(34.605995611034089);
-    p.SetSABefore(34.605995611034089);
-    points.append(p);
-
-    p = VSAPoint(234.06356427536352, 125.81447636921058);
-    p.SetSAAfter(35.70195258686585);
-    p.SetSABefore(35.70195258686585);
+    p = VSAPoint(238.08031279315054, 124.1327387135843);
+    p.SetSABefore(35.18062492767001);
+    p.SetSAAfter(35.18062492767001);
     points.append(p);
 
     p = VSAPoint(226.74556876528095, 129.25957033706317);
-    p.SetSAAfter(36.670979260736637);
-    p.SetSABefore(36.670979260736637);
+    p.SetSABefore(36.67100242816486);
+    p.SetSAAfter(36.67100242816486);
     points.append(p);
 
-    p = VSAPoint(221.03296878301197, 132.77339418798488);
-    p.SetSAAfter(37.474483357433364);
-    p.SetSABefore(37.474483357433364);
+    p = VSAPoint(221.03296878301194, 132.77339418798488);
+    p.SetSABefore(37.47448996772893);
+    p.SetSAAfter(37.47448996772893);
     points.append(p);
 
-    p = VSAPoint(218.97637795275608, 134.48806299212646);
-    p.SetSAAfter(37.795275590551185);
-    p.SetSABefore(37.795275590551185);
-    points.append(p);
-
-    p = VSAPoint(218.97637795275608, 134.48806299212646);
-    p.SetSAAfter(37.795275590551185);
-    p.SetSABefore(37.795275590551185);
-    points.append(p);
-
-    p = VSAPoint(218.97637795275608, 134.48806299212646);
-    //p.SetSAAfter(-1);
-    //p.SetSABefore(-1);
-    points.append(p);
-
-    p = VSAPoint(218.97637795275608, 134.48806299212646);
-    //p.SetSAAfter(-1);
-    //p.SetSABefore(-1);
-    points.append(p);
-
-    p = VSAPoint(218.97637795275608, 134.48806299212646);
-    //p.SetSAAfter(-1);
-    //p.SetSABefore(-1);
-    points.append(p);
-
-    p = VSAPoint(218.97637795275608, 134.48806299212646);
-    p.SetSAAfter(37.795275590551185);
-    p.SetSABefore(37.795275590551185);
-    points.append(p);
-
-    p = VSAPoint(218.97637795275608, 134.48806299212646);
-    p.SetSAAfter(37.795275590551185);
-    p.SetSABefore(37.795275590551185);
-    points.append(p);
-
-    p = VSAPoint(214.11186185064025, 138.80795875858354);
-    p.SetSAAfter(36.653502722568419);
-    p.SetSABefore(36.653502722568419);
-    points.append(p);
-
-    p = VSAPoint(205.18536816471078, 146.02812964687715);
-    p.SetSAAfter(34.638570080274732);
-    p.SetSABefore(34.638570080274732);
-    points.append(p);
-
-    p = VSAPoint(197.17461091794695, 151.63888788459965);
-    p.SetSAAfter(32.922124316374287);
-    p.SetSABefore(32.922124316374287);
-    points.append(p);
-
-    p = VSAPoint(190.02702368501878, 155.74482471949955);
-    p.SetSAAfter(31.475467886854414);
-    p.SetSABefore(31.475467886854414);
-    points.append(p);
-
-    p = VSAPoint(183.69004004059613, 158.45053139932526);
-    p.SetSAAfter(30.266183845834068);
-    p.SetSABefore(30.266183845834068);
-    points.append(p);
-
-    p = VSAPoint(178.11109355934906, 159.86059917182507);
-    p.SetSAAfter(29.256280085066027);
-    p.SetSABefore(29.256280085066027);
-    points.append(p);
-
-    p = VSAPoint(173.23761781594754, 160.07961928474754);
-    p.SetSAAfter(28.400113855274189);
-    p.SetSABefore(28.400113855274189);
-    points.append(p);
-
-    p = VSAPoint(169.01704638506152, 159.21218298584108);
-    p.SetSAAfter(27.643914239586497);
-    p.SetSABefore(27.643914239586497);
-    points.append(p);
-
-    p = VSAPoint(165.396812841361, 157.36288152285397);
-    p.SetSAAfter(26.930461655777069);
-    p.SetSABefore(26.930461655777069);
-    points.append(p);
-
-    p = VSAPoint(162.32435075951594, 154.63630614353477);
-    p.SetSAAfter(26.20953145720112);
-    p.SetSABefore(26.20953145720112);
-    points.append(p);
-
-    p = VSAPoint(159.7470937141963, 151.13704809563185);
-    p.SetSAAfter(25.44681460859611);
-    p.SetSABefore(25.44681460859611);
-    points.append(p);
-
-    p = VSAPoint(157.61247528007215, 146.96969862689363);
-    p.SetSAAfter(24.625073374270738);
-    p.SetSABefore(24.625073374270738);
-    points.append(p);
-
-    p = VSAPoint(155.86792903181333, 142.23884898506853);
-    p.SetSAAfter(23.740148635253075);
-    p.SetSABefore(23.740148635253075);
-    points.append(p);
-
-    p = VSAPoint(154.46088854408993, 137.049090417905);
-    p.SetSAAfter(22.796456338245449);
-    p.SetSABefore(22.796456338245449);
-    points.append(p);
+    points.append(VSAPoint(218.97637795275605, 134.48806299212646));
+    points.append(VSAPoint(218.97637795275605, 134.48806299212646));
+    points.append(VSAPoint(218.97637795275605, 134.48806299212646));
 
-    p = VSAPoint(152.84240084594785, 128.65747053734566);
-    p.SetSAAfter(21.296571460906105);
-    p.SetSABefore(21.296571460906105);
+    p = VSAPoint(209.4131100947178, 142.83347127134166);
+    p.SetSABefore(35.567798456628196);
+    p.SetSAAfter(35.567798456628196);
     points.append(p);
 
-    p = VSAPoint(150.86615884353574, 110.74781740906135);
-    p.SetSAAfter(18.134320368513631);
-    p.SetSABefore(18.134320368513631);
+    p = VSAPoint(197.1746109179469, 151.63888788459965);
+    p.SetSABefore(32.921869998532244);
+    p.SetSAAfter(32.921869998532244);
     points.append(p);
 
-    p = VSAPoint(149.37382105332603, 94.00159365355543);
-    p.SetSAAfter(15.183683963183684);
-    p.SetSABefore(15.183683963183684);
+    p = VSAPoint(190.02702368501872, 155.74482471949955);
+    p.SetSABefore(31.47527442778118);
+    p.SetSAAfter(31.47527442778118);
     points.append(p);
 
-    p = VSAPoint(147.90386548781373, 84.77492816049366);
-    p.SetSAAfter(13.543967770207646);
-    p.SetSABefore(13.543967770207646);
+    p = VSAPoint(183.69004004059607, 158.45053139932526);
+    p.SetSABefore(30.26604125961245);
+    p.SetSAAfter(30.26604125961245);
     points.append(p);
 
-    p = VSAPoint(146.22482573007983, 79.58685396281504);
-    p.SetSAAfter(12.586956110891197);
-    p.SetSABefore(12.586956110891197);
+    p = VSAPoint(178.111093559349, 159.86059917182507);
+    p.SetSABefore(29.256179984052537);
+    p.SetSAAfter(29.256179984052537);
     points.append(p);
 
-    p = VSAPoint(144.767673193039, 77.0483056159666);
-    p.SetSAAfter(12.073257080584666);
-    p.SetSABefore(12.073257080584666);
+    p = VSAPoint(173.2376178159475, 160.07961928474754);
+    p.SetSABefore(28.40004977195057);
+    p.SetSAAfter(28.40004977195057);
     points.append(p);
 
-    p = VSAPoint(142.9646628872432, 75.4105345645091);
-    p.SetSAAfter(11.645769545279848);
-    p.SetSABefore(11.645769545279848);
+    p = VSAPoint(169.01704638506146, 159.21218298584103);
+    p.SetSABefore(27.643881968500146);
+    p.SetSAAfter(27.643881968500146);
     points.append(p);
 
-    p = VSAPoint(140.76322838736246, 74.77813205619103);
-    p.SetSAAfter(11.243788560650403);
-    p.SetSABefore(11.243788560650403);
+    p = VSAPoint(165.39681284136094, 157.3628815228539);
+    p.SetSABefore(26.930459398621437);
+    p.SetSAAfter(26.930459398621437);
     points.append(p);
 
-    p = VSAPoint(138.11080326806675, 75.25568933876076);
-    p.SetSAAfter(10.77079881073082);
-    p.SetSABefore(10.77079881073082);
+    p = VSAPoint(162.32435075951588, 154.6363061435347);
+    p.SetSABefore(26.20955952854878);
+    p.SetSAAfter(26.20955952854878);
     points.append(p);
 
-    p = VSAPoint(134.95482110402602, 76.94779765996674);
-    p.SetSAAfter(10.142330100270035);
-    p.SetSABefore(10.142330100270035);
+    p = VSAPoint(158.57569564750156, 149.20732231050295);
+    p.SetSABefore(25.05174589376139);
+    p.SetSAAfter(25.05174589376139);
     points.append(p);
 
-    p = VSAPoint(131.24271546991025, 79.95904826755734);
-    p.SetSAAfter(9.3034514353721871);
-    p.SetSABefore(9.3034514353721871);
+    p = VSAPoint(155.086603150984, 139.74562302685277);
+    p.SetSABefore(23.28197087076461);
+    p.SetSAAfter(23.28197087076461);
     points.append(p);
 
-    p = VSAPoint(126.92191994038947, 84.39403240928104);
-    p.SetSAAfter(8.216780859744869);
-    p.SetSABefore(8.216780859744869);
+    p = VSAPoint(152.8424008459478, 128.6574705373456);
+    p.SetSABefore(21.29660756707718);
+    p.SetSAAfter(21.29660756707718);
     points.append(p);
 
-    p = VSAPoint(124.4881889763782, 87.24396850393732);
-    p.SetSAAfter(7.559055118110237);
-    p.SetSABefore(7.559055118110237);
+    p = VSAPoint(150.86615884353571, 110.7478174090613);
+    p.SetSABefore(18.1344895060695);
+    p.SetSAAfter(18.1344895060695);
     points.append(p);
 
-    p = VSAPoint(124.4881889763782, 87.24396850393732);
-    p.SetSAAfter(7.559055118110237);
-    p.SetSABefore(7.559055118110237);
+    p = VSAPoint(149.37382105332603, 94.00159365355537);
+    p.SetSABefore(15.183977229796845);
+    p.SetSAAfter(15.183977229796845);
     points.append(p);
 
-    p = VSAPoint(124.4881889763782, 87.24396850393732);
-    //p.SetSAAfter(-1);
-    p.SetSABefore(7.559055118110237);
+    p = VSAPoint(147.90386548781373, 84.77492816049363);
+    p.SetSABefore(13.544330017337995);
+    p.SetSAAfter(13.544330017337995);
     points.append(p);
 
-    p = VSAPoint(124.4881889763782, 87.24396850393732);
-    //p.SetSAAfter(-1);
-    p.SetSABefore(7.559055118110237);
+    p = VSAPoint(145.57614310058185, 78.10545937151159);
+    p.SetSABefore(12.304638548569304);
+    p.SetSAAfter(12.304638548569304);
     points.append(p);
 
-    p = VSAPoint(124.4881889763782, 87.24396850393732);
-    //p.SetSAAfter(-1);
-    p.SetSABefore(7.559055118110237);
+    p = VSAPoint(142.96466288724318, 75.41053456450908);
+    p.SetSABefore(11.646068510270936);
+    p.SetSAAfter(11.646068510270936);
     points.append(p);
 
-    p = VSAPoint(124.4881889763782, 87.24396850393732);
-    //p.SetSAAfter(-1);
-    //p.SetSABefore(-1);
+    p = VSAPoint(140.76322838736246, 74.778132056191);
+    p.SetSABefore(11.244104436407117);
+    p.SetSAAfter(11.244104436407117);
     points.append(p);
 
-    p = VSAPoint(124.4881889763782, 87.24396850393732);
-    //p.SetSAAfter(-1);
-    //p.SetSABefore(-1);
+    p = VSAPoint(138.11080326806675, 75.25568933876073);
+    p.SetSABefore(10.771134584490436);
+    p.SetSAAfter(10.771134584490436);
     points.append(p);
 
-    p = VSAPoint(121.4053345233613, 90.85541892105327);
-    //p.SetSAAfter(-1);
-    //p.SetSABefore(-1);
+    p = VSAPoint(134.95482110402602, 76.94779765996671);
+    p.SetSABefore(10.142692312810262);
+    p.SetSAAfter(10.142692312810262);
     points.append(p);
 
-    p = VSAPoint(115.36650087404239, 97.1700051724747);
-    //p.SetSAAfter(-1);
-    //p.SetSABefore(-1);
+    p = VSAPoint(129.24106098216737, 81.80753304891735);
+    p.SetSABefore(8.826320717353354);
+    p.SetSAAfter(8.826320717353354);
     points.append(p);
 
-    p = VSAPoint(109.48439793077911, 102.44240810316538);
-    //p.SetSAAfter(-1);
-    //p.SetSABefore(-1);
+    p = VSAPoint(124.48818897637818, 87.24396850393731);
+    p.SetSABefore(7.559055118110236);
     points.append(p);
 
-    p = VSAPoint(103.76400391356904, 106.72573235606063);
-    //p.SetSAAfter(-1);
-    //p.SetSABefore(-1);
+    p = VSAPoint(124.48818897637818, 87.24396850393731);
+    p.SetSABefore(7.559055118110236);
     points.append(p);
 
-    p = VSAPoint(98.2102970424097, 110.0730825740958);
-    //p.SetSAAfter(-1);
-    //p.SetSABefore(-1);
+    p = VSAPoint(124.48818897637818, 87.24396850393731);
+    p.SetSABefore(7.559055118110236);
     points.append(p);
 
-    p = VSAPoint(92.8282555372987, 112.53756340020624);
-    //p.SetSAAfter(-1);
-    //p.SetSABefore(-1);
-    points.append(p);
-
-    p = VSAPoint(87.62285761823352, 114.17227947732721);
-    //p.SetSAAfter(-1);
-    //p.SetSABefore(-1);
-    points.append(p);
-
-    p = VSAPoint(82.59908150521179, 115.03033544839411);
-    //p.SetSAAfter(-1);
-    //p.SetSABefore(-1);
-    points.append(p);
-
-    p = VSAPoint(77.76190541823104, 115.16483595634224);
-    //p.SetSAAfter(-1);
-    //p.SetSABefore(-1);
-    points.append(p);
-
-    p = VSAPoint(73.11630757728881, 114.62888564410696);
-    //p.SetSAAfter(-1);
-    //p.SetSABefore(-1);
-    points.append(p);
-
-    p = VSAPoint(68.66726620238268, 113.47558915462355);
-    //p.SetSAAfter(-1);
-    //p.SetSABefore(-1);
-    points.append(p);
-
-    p = VSAPoint(64.41975951351019, 111.7580511308274);
-    //p.SetSAAfter(-1);
-    //p.SetSABefore(-1);
-    points.append(p);
-
-    p = VSAPoint(60.3787657306689, 109.52937621565376);
-    //p.SetSAAfter(-1);
-    //p.SetSABefore(-1);
-    points.append(p);
-
-    p = VSAPoint(56.54926307385639, 106.84266905203805);
-    //p.SetSAAfter(-1);
-    //p.SetSABefore(-1);
-    points.append(p);
-
-    p = VSAPoint(52.93622976307019, 103.75103428291555);
-    //p.SetSAAfter(-1);
-    //p.SetSABefore(-1);
-    points.append(p);
-
-    p = VSAPoint(49.54464401830785, 100.30757655122164);
-    //p.SetSAAfter(-1);
-    //p.SetSABefore(-1);
-    points.append(p);
-
-    p = VSAPoint(44.854132804201555, 94.62627097468447);
-    //p.SetSAAfter(-1);
-    //p.SetSABefore(-1);
-    points.append(p);
-
-    p = VSAPoint(39.45938535079082, 86.2656734510919);
-    //p.SetSAAfter(-1);
-    //p.SetSABefore(-1);
-    points.append(p);
-
-    p = VSAPoint(35.040036121431584, 77.45366765004954);
-    //p.SetSAAfter(-1);
-    //p.SetSABefore(-1);
-    points.append(p);
-
-    p = VSAPoint(31.635910876104337, 68.61509071504);
-    //p.SetSAAfter(-1);
-    //p.SetSABefore(-1);
-    points.append(p);
-
-    p = VSAPoint(29.28683537478949, 60.17477978954592);
-    //p.SetSAAfter(-1);
-    //p.SetSABefore(-1);
-    points.append(p);
-
-    p = VSAPoint(28.03263537746753, 52.55757201704999);
-    //p.SetSAAfter(-1);
-    //p.SetSABefore(-1);
-    points.append(p);
-
-    p = VSAPoint(27.913136644118886, 46.188304541034846);
-    //p.SetSAAfter(-1);
-    //p.SetSABefore(-1);
-    points.append(p);
-
-    p = VSAPoint(28.62975536807624, 42.54811226326452);
-    //p.SetSAAfter(-1);
-    //p.SetSABefore(-1);
-    points.append(p);
-
-    p = VSAPoint(29.458368599363588, 40.697718569632514);
-    //p.SetSAAfter(-1);
-    //p.SetSABefore(-1);
-    points.append(p);
-
-    p = VSAPoint(30.0, 39.999874015748034);
-    //p.SetSAAfter(-1);
-    //p.SetSABefore(-1);
-    points.append(p);
+    points.append(VSAPoint(118.34735729968762, 94.27989595731356));
+    points.append(VSAPoint(106.58315141316105, 104.8247018186949));
+    points.append(VSAPoint(95.47573767084238, 111.51940225476525));
+    points.append(VSAPoint(85.06494183271205, 114.78883440900722));
+    points.append(VSAPoint(75.39058965875054, 115.05783542490349));
+    points.append(VSAPoint(66.49250690893827, 112.7512424459367));
+    points.append(VSAPoint(58.410519343255714, 108.29389261558948));
+    points.append(VSAPoint(51.184452721683314, 102.11062307734451));
+    points.append(VSAPoint(44.85413280420151, 94.62627097468442));
+    points.append(VSAPoint(39.45938535079078, 86.26567345109187));
+    points.append(VSAPoint(35.04003612143157, 77.45366765004948));
+    points.append(VSAPoint(31.63591087610432, 68.61509071503997));
+    points.append(VSAPoint(29.286835374789483, 60.17477978954592));
+    points.append(VSAPoint(28.032635377467525, 52.55757201704999));
+    points.append(VSAPoint(27.913136644118886, 46.188304541034846));
+    points.append(VSAPoint(28.968164934724022, 41.49181450498314));
+    points.append(VSAPoint(30.0, 39.999874015748034));
 
     return points;
 }
@@ -1748,105 +2714,1273 @@ QVector<QPointF> TST_VAbstractPiece::OutputPointsCase3() const
 {
     QVector<QPointF> points;
 
-    points += QPointF(11.491153250328935, 2.204598425196849);
-    points += QPointF(445.748031496063, 2.204598425196849);
-    points += QPointF(445.748031496063, 239.25772323190495);
-    points += QPointF(437.3011718875349, 252.9620940028659);
-    points += QPointF(431.5210396453687, 261.04286502132345);
-    points += QPointF(425.0742362286929, 268.54423500057675);
-    points += QPointF(418.11166285006243, 275.22268157509825);
-    points += QPointF(410.66293904201643, 281.0200956238725);
-    points += QPointF(402.78657384181963, 285.87157614021027);
-    points += QPointF(394.5732042205309, 289.71737969963584);
-    points += QPointF(386.1419584708077, 292.51680859777775);
-    points += QPointF(377.62937764888807, 294.2596521460023);
-    points += QPointF(369.17363576502424, 294.9709765895621);
-    points += QPointF(360.89908762820056, 294.7076951308071);
-    points += QPointF(352.90578450956633, 293.54885121734077);
-    points += QPointF(345.2659401705694, 291.58363457828597);
-    points += QPointF(338.02638381419206, 288.9008829382743);
-    points += QPointF(331.214452254774, 285.58206377611566);
-    points += QPointF(324.8447893417784, 281.69791760615396);
-    points += QPointF(318.92540323684557, 277.307901893045);
-    points += QPointF(313.4622927999198, 272.4613294067597);
-    points += QPointF(308.4626029358523, 267.199302528306);
-    points += QPointF(303.93656720661477, 261.5568795640949);
-    points += QPointF(299.8985555961715, 255.5651950634023);
-    points += QPointF(296.3674859139379, 249.25344082283073);
-    points += QPointF(293.36675891047514, 242.65070430384247);
-    points += QPointF(290.9237823363554, 235.7876787648548);
-    points += QPointF(289.0690799250026, 228.6982245333719);
-    points += QPointF(287.8349531366277, 221.42069049439027);
-    points += QPointF(287.2536910795491, 213.9988201772971);
-    points += QPointF(287.3554164994589, 206.48200110960104);
-    points += QPointF(288.165803158891, 198.9246157503596);
-    points += QPointF(289.7040578703973, 191.38436170566055);
-    points += QPointF(291.98164916416846, 183.91963819443603);
-    points += QPointF(294.9455451728963, 176.72393356713948);
-    points += QPointF(295.79237435003455, 175.03780734840188);
-    points += QPointF(296.245263052401, 173.2550222963373);
-    points += QPointF(297.59693481965496, 166.31235205234043);
-    points += QPointF(298.2857333094973, 160.53208953533525);
-    points += QPointF(298.43819035278193, 155.84335424804448);
-    points += QPointF(298.1940021729857, 152.25436961670644);
-    points += QPointF(297.7243212024687, 149.73346552056378);
-    points += QPointF(297.2141642634996, 148.17665975044923);
-    points += QPointF(296.81807124385705, 147.38451061538373);
-    points += QPointF(296.5985303999919, 147.07754941478083);
-    points += QPointF(296.486859378041, 146.96500596407506);
-    points += QPointF(296.30769954702157, 146.83360641173047);
-    points += QPointF(295.85745446032604, 146.59522243594577);
-    points += QPointF(294.9800374980412, 146.2693748418327);
-    points += QPointF(293.59863859999393, 145.93124637657365);
-    points += QPointF(291.70740855306775, 145.66527555041208);
-    points += QPointF(289.51401190033005, 145.54903057599236);
-    points += QPointF(285.1770288005626, 145.6959639947203);
-    points += QPointF(278.3617236899766, 146.6950293230864);
-    points += QPointF(271.14652259400714, 148.48714038237037);
-    points += QPointF(263.9194864200908, 150.92917578435245);
-    points += QPointF(257.2170705229372, 153.76755541765795);
-    points += QPointF(251.60582957396716, 156.6541701343772);
-    points += QPointF(247.78435692308207, 159.04593361720316);
-    points += QPointF(246.25434386618122, 160.2598011722792);
-    points += QPointF(243.67170607597288, 162.99575598015517);
-    points += QPointF(232.3489004893592, 169.9758475438662);
-    points += QPointF(220.7012128062336, 176.43583903855628);
-    points += QPointF(209.5894888372958, 181.6299305429989);
-    points += QPointF(198.8701621522812, 185.51474135189684);
-    points += QPointF(188.2122212804039, 188.0080506184889);
-    points += QPointF(177.3148127107667, 188.81408257358973);
-    points += QPointF(166.19194469464537, 187.37324105698534);
-    points += QPointF(155.57420181410697, 183.17620217869953);
-    points += QPointF(146.72912660379956, 176.5077748886884);
-    points += QPointF(140.4165418057526, 168.5601760939351);
-    points += QPointF(136.398647544906, 160.4725908270882);
-    points += QPointF(134.00844184248987, 152.736031987575);
-    points += QPointF(132.67609691771358, 145.39573210082384);
-    points += QPointF(132.02477039749073, 138.2597894386109);
-    points += QPointF(131.93387537548404, 132.84913141002448);
-    points += QPointF(124.89904457045232, 138.11668139199287);
-    points += QPointF(115.8895831399309, 143.54689645077573);
-    points += QPointF(106.4111230253516, 147.88716086368487);
-    points += QPointF(96.50699490577813, 150.99747783054613);
-    points += QPointF(86.32454442321412, 152.7366302609282);
-    points += QPointF(76.11298204383012, 153.0205687205323);
-    points += QPointF(66.1751535607697, 151.8740677833447);
-    points += QPointF(56.79043276012441, 149.44132674047353);
-    points += QPointF(48.150859730789605, 145.94779600016403);
-    points += QPointF(40.340747704632996, 141.64039002708367);
-    points += QPointF(33.35598458760446, 136.7400113658245);
-    points += QPointF(27.139387101639755, 131.42053399597268);
-    points += QPointF(21.454249077112927, 125.64844566928473);
-    points += QPointF(14.297732218982075, 116.98023078208763);
-    points += QPointF(6.592092174102573, 105.03828991585031);
-    points += QPointF(0.43109819620648937, 92.75351406859683);
-    points += QPointF(-4.287700865002457, 80.50147704363812);
-    points += QPointF(-7.673598677574605, 68.33582707450634);
-    points += QPointF(-9.704701735666333, 56.0002075290815);
-    points += QPointF(-9.95133102840429, 42.85489720779573);
-    points += QPointF(-7.622895431362345, 31.027194419301413);
-    points += QPointF(-3.18150493921823, 21.10903158131186);
-    points += QPointF(11.491153250328935, 2.204598425196849);
+    points += QPointF(10.185624773347756, 2.204598425196849);
+    points += QPointF(445.74803149606305, 2.204598425196849);
+    points += QPointF(445.748031496063, 239.54370877454926);
+    points += QPointF(434.2772499516588, 257.60252755179886);
+    points += QPointF(421.70410911168364, 272.23247310841623);
+    points += QPointF(406.8215280616999, 283.81580578394335);
+    points += QPointF(390.4268690095888, 291.4924548133903);
+    points += QPointF(373.43168069161504, 294.97206109652825);
+    points += QPointF(356.88925393255363, 294.44576261629163);
+    points += QPointF(341.59261122311955, 290.5110196449043);
+    points += QPointF(327.9415795488323, 283.8601978892787);
+    points += QPointF(316.0766275069774, 275.06080862168557);
+    points += QPointF(306.0568354718494, 264.51533811547125);
+    points += QPointF(297.96706395968476, 252.511650805464);
+    points += QPointF(291.95795669012034, 239.28944839897594);
+    points += QPointF(288.2457014751128, 225.09982730403647);
+    points += QPointF(287.08291204680114, 210.25330053220583);
+    points += QPointF(288.70312350739385, 195.14331998915887);
+    points += QPointF(293.1661864923215, 180.51562637269953);
+    points += QPointF(295.67056116540294, 175.36866212621038);
+    points += QPointF(297.03278914138764, 169.78727745627393);
+    points += QPointF(298.4272653364355, 158.08534773323754);
+    points += QPointF(297.94225297413215, 150.9565650350354);
+    points += QPointF(296.9126887137917, 147.81469899066454);
+    points += QPointF(296.3972469066644, 147.0940064443774);
+    points += QPointF(294.21114346945865, 146.12370067508155);
+    points += QPointF(290.48115362247165, 145.59912885424706);
+    points += QPointF(285.00652997672506, 145.7209025858372);
+    points += QPointF(278.36163578883384, 146.69497061341855);
+    points += QPointF(266.15085284299454, 149.72785233297387);
+    points += QPointF(268.76683081190356, 149.29112994946044);
+    points += QPointF(264.11356456471754, 150.8634687956155);
+    points += QPointF(254.1976334991026, 155.20769360077045);
+    points += QPointF(247.5665032053911, 159.21880811798434);
+    points += QPointF(240.66667729218545, 164.69290058326322);
+    points += QPointF(245.03051571796473, 161.55629083592723);
+    points += QPointF(243.53306498622524, 163.14262925675627);
+    points += QPointF(226.1305060641393, 173.66370879502696);
+    points += QPointF(209.78346359977252, 181.5593960732169);
+    points += QPointF(205.70527201989748, 183.03741399670108);
+    points += QPointF(202.38658536147173, 184.69191672318945);
+    points += QPointF(188.21241736536905, 188.00791613383734);
+    points += QPointF(177.31502181326212, 188.81402560575697);
+    points += QPointF(166.19214722698052, 187.3732642424327);
+    points += QPointF(155.57437225205163, 183.1763006101058);
+    points += QPointF(146.72924182900442, 176.50793105628702);
+    points += QPointF(140.1685902867883, 168.24813556221721);
+    points += QPointF(134.85380559162166, 156.67751165744627);
+    points += QPointF(132.20863928510303, 142.1050670962771);
+    points += QPointF(131.96761370902018, 132.827500480644);
+    points += QPointF(129.15133677704625, 135.35186071252022);
+    points += QPointF(111.11355282491606, 146.22365885487164);
+    points += QPointF(91.37199519960252, 152.42334659042638);
+    points += QPointF(71.0892515601446, 152.98732013057335);
+    points += QPointF(52.404520155294485, 148.14379692629467);
+    points += QPointF(36.77389835731295, 139.5232504514038);
+    points += QPointF(24.295634363907766, 128.84573062197663);
+    points += QPointF(14.420075278530305, 117.169833926539);
+    points += QPointF(6.592092174103988, 105.03828991585254);
+    points += QPointF(0.43109819620662115, 92.75351406859714);
+    points += QPointF(-3.633892542136806, 82.1990453602945);
+    points += QPointF(-4.775453591602712, 78.74896433599663);
+    points += QPointF(-7.124529092917548, 70.30865341050259);
+    points += QPointF(-8.006297887627618, 66.31522508588391);
+    points += QPointF(-9.70470173566634, 56.00020752908148);
+    points += QPointF(-9.960881193587724, 42.34587460321338);
+    points += QPointF(-6.297329478268652, 26.037464411020956);
+    points += QPointF(10.185624773347756, 2.204598425196849);
+
+    return points;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QVector<VSAPoint> TST_VAbstractPiece::InputPointsIssue627() const
+{
+    QVector<VSAPoint> points;
+
+    VSAPoint p = VSAPoint(11565.008125001965, -71.44488549419933);
+    p.SetSAAfter(0);
+    points.append(p);
+
+    p = VSAPoint(11774.053467225081, -3376.8303371353477);
+    p.SetSABefore(0);
+    points.append(p);
+
+    p = VSAPoint(11774.053467225081, -3376.8303371353477);
+    p.SetSABefore(0);
+    points.append(p);
+
+    points.append(VSAPoint(11821.637653562488, -3457.444047544761));
+    points.append(VSAPoint(11916.506852253828, -3619.698047174161));
+    points.append(VSAPoint(12011.687139013728, -3784.3170132645946));
+    points.append(VSAPoint(12107.923065894336, -3952.559914581168));
+    points.append(VSAPoint(12205.959184947797, -4125.685719888987));
+    points.append(VSAPoint(12306.540048226263, -4304.953397953153));
+    points.append(VSAPoint(12463.260680635496, -4586.963758807588));
+    points.append(VSAPoint(12688.625497168217, -4997.457976655285));
+    points.append(VSAPoint(12937.571227539614, -5455.181123300274));
+    points.append(VSAPoint(13363.424703096609, -6243.3010001396));
+
+    p = VSAPoint(13704.042216387523, -6875.648082494775);
+    p.SetSAAfter(0);
+    points.append(p);
+
+    p = VSAPoint(13704.042216387523, -6875.648082494775);
+    p.SetSAAfter(0);
+    points.append(p);
+
+    p = VSAPoint(13493.259591532773, -71.4448854942045);
+    p.SetSABefore(0);
+    points.append(p);
+
+    p = VSAPoint(13493.259591532773, -71.4448854942045);
+    p.SetSABefore(0);
+    points.append(p);
+
+    points.append(VSAPoint(13227.96813484252, -78.38238188976378));
+    points.append(VSAPoint(12939.963705708662, -83.80364173228347));
+    points.append(VSAPoint(12664.66535433071, -86.51427165354332));
+    points.append(VSAPoint(12393.602362204725, -86.51427165354332));
+    points.append(VSAPoint(12118.304010826774, -83.80364173228347));
+    points.append(VSAPoint(11830.299581692912, -78.38238188976378));
+
+    p = VSAPoint(11565.008125001965, -71.44488549419933);
+    p.SetSAAfter(0);
+    points.append(p);
+
+    return points;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QVector<QPointF> TST_VAbstractPiece::OutputPointsIssue627() const
+{
+    QVector<QPointF> points;
+
+    points += QPointF(11561.41547872419, -14.638641388671703);
+    points += QPointF(11760.258895120205, -3158.7131695287526);
+    points += QPointF(11781.963967565265, -3501.9096738073645);
+    points += QPointF(11867.496139886349, -3648.1946350753437);
+    points += QPointF(11962.541506347354, -3812.580249902983);
+    points += QPointF(12058.65110785104, -3980.602304924286);
+    points += QPointF(12156.571541308, -4153.523816526403);
+    points += QPointF(12257.041160881332, -4332.593222274458);
+    points += QPointF(12413.634876614758, -4614.375203387231);
+    points += QPointF(12638.875580780275, -5024.643354851167);
+    points += QPointF(12887.730780405262, -5482.200047474014);
+    points += QPointF(13313.529827372417, -6270.219194236017);
+    points += QPointF(13707.971545534987, -7002.489438444618);
+    points += QPointF(13491.504163312642, -14.778496052733317);
+    points += QPointF(13226.693612049832, -21.703416545128476);
+    points += QPointF(12939.151113441983, -27.11598122480561);
+    points += QPointF(12664.386257521342, -29.82135826771654);
+    points += QPointF(12393.881459014092, -29.82135826771654);
+    points += QPointF(12119.116603093453, -27.11598122480561);
+    points += QPointF(11831.5741044856, -21.70341654512845);
+    points += QPointF(11561.41547872419, -14.638641388671703);
+
+    return points;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QVector<VSAPoint> TST_VAbstractPiece::InputPointsIssue767_Fabric_TopCollar() const
+{
+    QVector<VSAPoint> points;
+
+    //    VSAPoint p = VSAPoint(-2845.8986453348375, -956.881848270395);
+    //    p.SetSAAfter(43.46456692913386);
+    //    points.append(p);
+
+    points.append(VSAPoint(-2956.503052984476, -931.8887725360864));
+
+    VSAPoint p = VSAPoint(-2845.8999353737872, -956.8546710275792);
+    p.SetSAAfter(43.46456692913386);
+    points.append(p);
+
+    p = VSAPoint(-2845.8999353737872, -956.8546710275792);
+    p.SetSAAfter(43.46456692913386);
+    points.append(p);
+
+    p = VSAPoint(-2836.2633663612596, -967.4426562856014);
+    p.SetSABefore(43.975870702724364);
+    p.SetSAAfter(43.975870702724364);
+    points.append(p);
+
+    p = VSAPoint(-2816.781399798798, -990.3120607327689);
+    p.SetSABefore(45.04880285928504);
+    p.SetSAAfter(45.04880285928504);
+    points.append(p);
+
+    p = VSAPoint(-2797.0552023132714, -1015.1078931004015);
+    p.SetSABefore(46.18040144375942);
+    p.SetSAAfter(46.18040144375942);
+    points.append(p);
+
+    p = VSAPoint(-2777.0918442622597, -1041.7127169475177);
+    p.SetSABefore(47.36830653518281);
+    p.SetSAAfter(47.36830653518281);
+    points.append(p);
+
+    p = VSAPoint(-2746.7450331166083, -1084.5654944804478);
+    p.SetSABefore(49.243630059870085);
+    p.SetSAAfter(49.243630059870085);
+    points.append(p);
+
+    p = VSAPoint(-2705.4801979126455, -1147.2198537598051);
+    p.SetSABefore(51.9229573891882);
+    p.SetSAAfter(51.9229573891882);
+    points.append(p);
+
+    p = VSAPoint(-2690.741587315989, -1170.7115882155053);
+    p.SetSABefore(52.91338582677166);
+    p.SetSAAfter(52.91338582677166);
+    points.append(p);
+
+    p = VSAPoint(-2690.741587315989, -1170.7115882155053);
+    p.SetSABefore(52.91338582677166);
+    p.SetSAAfter(52.91338582677166);
+    points.append(p);
+
+    p = VSAPoint(-2690.741587315989, -1170.7115882155053);
+    p.SetSABefore(52.91338582677166);
+    p.SetSAAfter(52.91338582677166);
+    points.append(p);
+
+    p = VSAPoint(-2663.393986883198, -1214.996323019432);
+    p.SetSABefore(53.464106209918555);
+    p.SetSAAfter(53.464106209918555);
+    points.append(p);
+
+    p = VSAPoint(-2620.5429628889106, -1286.9554107314775);
+    p.SetSABefore(54.35027638570753);
+    p.SetSAAfter(54.35027638570753);
+    points.append(p);
+
+    p = VSAPoint(-2555.034059572721, -1400.452077976559);
+    p.SetSABefore(55.73686065985781);
+    p.SetSAAfter(55.73686065985781);
+    points.append(p);
+
+    p = VSAPoint(-2510.4169214986496, -1479.023939177109);
+    p.SetSABefore(56.69291338582678);
+    p.SetSAAfter(56.69291338582678);
+    points.append(p);
+
+    p = VSAPoint(-2510.4169214986496, -1479.023939177109);
+    p.SetSABefore(56.69291338582678);
+    p.SetSAAfter(56.69291338582678);
+    points.append(p);
+
+    p = VSAPoint(-2510.41692149865, -1479.0239391771088);
+    p.SetSABefore(56.69291338582678);
+    p.SetSAAfter(56.69291338582678);
+    points.append(p);
+
+    p = VSAPoint(-2465.770203618369, -1557.5789960796274);
+    p.SetSABefore(55.73686065985781);
+    p.SetSAAfter(55.73686065985781);
+    points.append(p);
+
+    p = VSAPoint(-2401.820804615958, -1671.9616182591394);
+    p.SetSABefore(54.35027638570753);
+    p.SetSAAfter(54.35027638570753);
+    points.append(p);
+
+    p = VSAPoint(-2361.950025594169, -1745.613784160113);
+    p.SetSABefore(53.464106209918555);
+    p.SetSAAfter(53.464106209918555);
+    points.append(p);
+
+    p = VSAPoint(-2337.912872786133, -1791.7791853927329);
+    p.SetSABefore(52.91338582677166);
+    p.SetSAAfter(52.91338582677166);
+    points.append(p);
+
+    p = VSAPoint(-2337.912872786133, -1791.7791853927329);
+    p.SetSABefore(52.91338582677166);
+    p.SetSAAfter(52.91338582677166);
+    points.append(p);
+
+    p = VSAPoint(-2337.912872786133, -1791.7791853927329);
+    p.SetSABefore(52.91338582677166);
+    p.SetSAAfter(52.91338582677166);
+    points.append(p);
+
+    p = VSAPoint(-2325.280421100769, -1816.4674294468161);
+    p.SetSABefore(51.92295738918819);
+    p.SetSAAfter(51.92295738918819);
+    points.append(p);
+
+    p = VSAPoint(-2292.590031111732, -1883.9929339875566);
+    p.SetSABefore(49.24363005987009);
+    p.SetSAAfter(49.24363005987009);
+    points.append(p);
+
+    p = VSAPoint(-2271.318537325938, -1932.0014024188404);
+    p.SetSABefore(47.36830653518281);
+    p.SetSAAfter(47.36830653518281);
+    points.append(p);
+
+    p = VSAPoint(-2258.687165687168, -1962.7715302562779);
+    p.SetSABefore(46.18040144375943);
+    p.SetSAAfter(46.18040144375943);
+    points.append(p);
+
+    p = VSAPoint(-2247.488245160975, -1992.4117115831486);
+    p.SetSABefore(45.048802859285026);
+    p.SetSAAfter(45.048802859285026);
+    points.append(p);
+
+    p = VSAPoint(-2237.8190307443556, -2020.8557438829903);
+    p.SetSABefore(43.97587070272435);
+    p.SetSAAfter(43.97587070272435);
+    points.append(p);
+
+    p = VSAPoint(-2233.6582717055753, -2034.5545386613094);
+    p.SetSABefore(43.46456692913386);
+    points.append(p);
+
+    p = VSAPoint(-2233.6582717055753, -2034.5545386613094);
+    p.SetSABefore(43.46456692913386);
+    points.append(p);
+
+    points.append(VSAPoint(-2268.843635583417, -2142.3429233856164));
+    points.append(VSAPoint(-2142.3122611221115, -2153.915659267329));
+    points.append(VSAPoint(-2102.05157470339, -2047.9183817466978));
+    points.append(VSAPoint(-1984.1456543967456, -1869.9284917765406));
+
+    p = VSAPoint(-1957.540323165074, -1829.765289335082);
+    p.SetSAAfter(22.67716535433071);
+    points.append(p);
+
+    p = VSAPoint(-2074.675746476508, -1711.446016505495);
+    p.SetSABefore(22.67716535433071);
+    p.SetSAAfter(22.67716535433071);
+    points.append(p);
+
+    p = VSAPoint(-2074.675746476508, -1711.446016505495);
+    p.SetSABefore(22.67716535433071);
+    p.SetSAAfter(22.67716535433071);
+    points.append(p);
+
+    p = VSAPoint(-2104.9501005136362, -1680.2660923950884);
+    p.SetSABefore(22.67716535433071);
+    p.SetSAAfter(22.67716535433071);
+    points.append(p);
+
+    p = VSAPoint(-2157.060300446018, -1624.0358190720049);
+    p.SetSABefore(22.67716535433071);
+    p.SetSAAfter(22.67716535433071);
+    points.append(p);
+
+    p = VSAPoint(-2193.427447844697, -1582.9264609829493);
+    p.SetSABefore(22.67716535433071);
+    p.SetSAAfter(22.67716535433071);
+    points.append(p);
+
+    p = VSAPoint(-2229.9021223993304, -1539.6063550266792);
+    p.SetSABefore(22.67716535433071);
+    p.SetSAAfter(22.67716535433071);
+    points.append(p);
+
+    p = VSAPoint(-2265.283071500467, -1494.9101438927273);
+    p.SetSABefore(22.67716535433071);
+    p.SetSAAfter(22.67716535433071);
+    points.append(p);
+
+    p = VSAPoint(-2298.369042538657, -1449.6724702706276);
+    p.SetSABefore(22.67716535433071);
+    p.SetSAAfter(22.67716535433071);
+    points.append(p);
+
+    p = VSAPoint(-2320.8174013740727, -1415.9196938584569);
+    p.SetSABefore(22.67716535433071);
+    p.SetSAAfter(22.67716535433071);
+    points.append(p);
+
+    p = VSAPoint(-2334.512979024599, -1393.6772377027328);
+    p.SetSABefore(22.67716535433071);
+    p.SetSAAfter(22.67716535433071);
+    points.append(p);
+
+    p = VSAPoint(-2340.8464205786395, -1382.6908795653735);
+    p.SetSABefore(22.67716535433071);
+    p.SetSAAfter(22.67716535433071);
+    points.append(p);
+
+    p = VSAPoint(-2340.8464205786395, -1382.690879565374);
+    p.SetSABefore(22.67716535433071);
+    p.SetSAAfter(22.67716535433071);
+    points.append(p);
+
+    p = VSAPoint(-2340.8464205786395, -1382.690879565374);
+    p.SetSABefore(22.67716535433071);
+    p.SetSAAfter(22.67716535433071);
+    points.append(p);
+
+    p = VSAPoint(-2347.0406240734856, -1371.625420238929);
+    p.SetSABefore(22.67716535433071);
+    p.SetSAAfter(22.67716535433071);
+    points.append(p);
+
+    p = VSAPoint(-2359.1340239739197, -1348.4727663549988);
+    p.SetSABefore(22.67716535433071);
+    p.SetSAAfter(22.67716535433071);
+    points.append(p);
+
+    p = VSAPoint(-2376.632959709957, -1311.9082209860264);
+    p.SetSABefore(22.67716535433071);
+    p.SetSAAfter(22.67716535433071);
+    points.append(p);
+
+    p = VSAPoint(-2398.5505312977116, -1260.3257758135142);
+    p.SetSABefore(22.67716535433071);
+    p.SetSAAfter(22.67716535433071);
+    points.append(p);
+
+    p = VSAPoint(-2418.8279356815838, -1207.049235756178);
+    p.SetSABefore(22.67716535433071);
+    p.SetSAAfter(22.67716535433071);
+    points.append(p);
+
+    p = VSAPoint(-2437.3632941454625, -1153.5377981886413);
+    p.SetSABefore(22.67716535433071);
+    p.SetSAAfter(22.67716535433071);
+    points.append(p);
+
+    p = VSAPoint(-2454.0547279732336, -1101.2506604855253);
+    p.SetSABefore(22.67716535433071);
+    p.SetSAAfter(22.67716535433071);
+    points.append(p);
+
+    p = VSAPoint(-2475.6739880089963, -1027.6984737710059);
+    p.SetSABefore(22.67716535433071);
+    p.SetSAAfter(22.67716535433071);
+    points.append(p);
+
+    p = VSAPoint(-2486.9558756792776, -985.7289230170218);
+    p.SetSABefore(22.67716535433071);
+    p.SetSAAfter(22.67716535433071);
+    points.append(p);
+
+    p = VSAPoint(-2486.9558756792776, -985.7289230170218);
+    p.SetSABefore(22.67716535433071);
+    p.SetSAAfter(22.67716535433071);
+    points.append(p);
+
+    p = VSAPoint(-2528.6142143955344, -824.5310925952923);
+    p.SetSABefore(22.67716535433071);
+    points.append(p);
+
+    points.append(VSAPoint(-2576.735791027546, -826.8202720880508));
+    points.append(VSAPoint(-2789.994527521454, -836.9651369943699));
+    points.append(VSAPoint(-2901.6577688078787, -817.2758948021979));
+
+    return points;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QVector<QPointF> TST_VAbstractPiece::OutputPointsIssue767_Fabric_TopCollar() const
+{
+    QVector<QPointF> points;
+
+    points += QPointF(-3011.0517548790103, -958.3219444006113);
+    points += QPointF(-2875.704655596311, -988.873180340486);
+    points += QPointF(-2868.785856897648, -997.0427375924612);
+    points += QPointF(-2869.7392507631107, -995.9600609286653);
+    points += QPointF(-2852.5415024022873, -1017.6725348741263);
+    points += QPointF(-2834.5617365102394, -1042.0076837341114);
+    points += QPointF(-2816.318152801347, -1068.2197024431434);
+    points += QPointF(-2788.3520303679693, -1110.8598835568037);
+    points += QPointF(-2748.84326164774, -1175.7792341372995);
+    points += QPointF(-2749.463357194371, -1174.8146939231094);
+    points += QPointF(-2735.5637236883463, -1198.8327989055008);
+    points += QPointF(-2709.3979303070278, -1242.234412525294);
+    points += QPointF(-2667.7155430266657, -1313.9462711856888);
+    points += QPointF(-2603.3069903890537, -1428.3146296654857);
+    points += QPointF(-2559.7159427255197, -1507.0184553230588);
+    points += QPointF(-2514.227494695693, -1585.1196674161204);
+    points += QPointF(-2449.1583954294993, -1698.6620182726447);
+    points += QPointF(-2408.901620525935, -1771.183767809588);
+    points += QPointF(-2384.8455512861474, -1816.21584000147);
+    points += QPointF(-2371.503784159133, -1840.1189454999956);
+    points += QPointF(-2372.0148030467776, -1839.0924387985017);
+    points += QPointF(-2336.479706267199, -1906.2692337682788);
+    points += QPointF(-2314.171878902582, -1952.123894247254);
+    points += QPointF(-2300.9973669393667, -1981.2156543505293);
+    points += QPointF(-2289.299963085879, -2009.1198152343736);
+    points += QPointF(-2279.45497012318, -2035.0093920383335);
+    points += QPointF(-2279.8968116139968, -2033.636102295412);
+    points += QPointF(-2276.4218852914523, -2043.7621246230262);
+    points += QPointF(-2319.4788717575434, -2175.664782739319);
+    points += QPointF(-2117.1714492551437, -2194.168101599941);
+    points += QPointF(-2068.2154029909548, -2065.2779091126845);
+    points += QPointF(-1952.6366140283867, -1890.801039106245);
+    points += QPointF(-1917.5866708240478, -1837.8899156844163);
+    points += QPointF(-2058.482716230266, -1695.5698799023787);
+    points += QPointF(-2088.4965443596293, -1664.6582745816295);
+    points += QPointF(-2140.249137288814, -1608.8138823251727);
+    points += QPointF(-2176.2589010959327, -1568.108510006008);
+    points += QPointF(-2212.3342540344497, -1525.2626688631194);
+    points += QPointF(-2247.2342025287544, -1481.1740984291687);
+    points += QPointF(-2279.7666296737902, -1436.6932724131166);
+    points += QPointF(-2301.7153187064755, -1403.691786696855);
+    points += QPointF(-2315.030637739082, -1382.066893805181);
+    points += QPointF(-2321.1285274245947, -1371.4891377154586);
+    points += QPointF(-2327.0923575597108, -1360.8352223500915);
+    points += QPointF(-2338.84998341349, -1338.3254034298122);
+    points += QPointF(-2355.95941674385, -1302.57473489304);
+    points += QPointF(-2377.5102970264106, -1251.8552883456102);
+    points += QPointF(-2397.5120320442174, -1199.3030377360624);
+    points += QPointF(-2415.8444669892974, -1146.3774388092156);
+    points += QPointF(-2432.371872429092, -1094.6041320326606);
+    points += QPointF(-2453.842769979148, -1021.5566982667648);
+    points += QPointF(-2465.02757138208, -979.9483164185621);
+    points += QPointF(-2515.136197939205, -786.0519169140614);
+    points += QPointF(-2578.5317097224242, -789.0676889577924);
+    points += QPointF(-2787.581316069137, -799.0123226453655);
+    points += QPointF(-2923.36118702248, -775.0706679591581);
+    points += QPointF(-3011.0517548790103, -958.3219444006113);
+
+    return points;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QVector<VSAPoint> TST_VAbstractPiece::InputPointsIssue767_SkinFusing_TopCollar_Notch() const
+{
+    QVector<VSAPoint> points;
+
+    //    VSAPoint p = VSAPoint(-2956.4986596431745, -931.902205605136);
+    //    p.SetSAAfter(0.0);
+    //    p.SetSABefore(0.0);
+    //    points.append(p);
+
+    VSAPoint p = VSAPoint(-2956.503052984476, -931.8887725360864);
+    p.SetSABefore(0.0);
+    p.SetSAAfter(0.0);
+    points.append(p);
+
+    p = VSAPoint(-2845.8999353737872, -956.8546710275792);
+    p.SetSABefore(0.0);
+    p.SetSAAfter(0.0);
+    points.append(p);
+
+    p = VSAPoint(-2845.8999353737872, -956.8546710275792);
+    p.SetSABefore(0.0);
+    p.SetSAAfter(0.0);
+    points.append(p);
+
+    p = VSAPoint(-2836.2633663612596, -967.4426562856014);
+    p.SetSABefore(0.43513121779510383);
+    p.SetSAAfter(0.43513121779510383);
+    points.append(p);
+
+    p = VSAPoint(-2816.781399798798, -990.3120607327689);
+    p.SetSABefore(1.3482210481660497);
+    p.SetSAAfter(1.3482210481660497);
+    points.append(p);
+
+    p = VSAPoint(-2797.0552023132714, -1015.1078931004015);
+    p.SetSABefore(2.3112373518788916);
+    p.SetSAAfter(2.3112373518788916);
+    points.append(p);
+
+    p = VSAPoint(-2777.0918442622597, -1041.7127169475177);
+    p.SetSABefore(3.3221717821615027);
+    p.SetSAAfter(3.3221717821615027);
+    points.append(p);
+
+    p = VSAPoint(-2746.7450331166083, -1084.5654944804478);
+    p.SetSABefore(4.918115037824846);
+    p.SetSAAfter(4.918115037824846);
+    points.append(p);
+
+    p = VSAPoint(-2705.4801979126455, -1147.2198537598051);
+    p.SetSABefore(7.1982839391629785);
+    p.SetSAAfter(7.1982839391629785);
+    points.append(p);
+
+    p = VSAPoint(-2663.393986883198, -1214.996323019432);
+    p.SetSABefore(9.623062142943597);
+    p.SetSAAfter(9.623062142943597);
+    points.append(p);
+
+    p = VSAPoint(-2620.5429628889106, -1286.9554107314775);
+    p.SetSABefore(12.168538502609866);
+    p.SetSAAfter(12.168538502609866);
+    points.append(p);
+
+    p = VSAPoint(-2555.034059572721, -1400.452077976559);
+    p.SetSABefore(16.151427553679724);
+    p.SetSAAfter(16.151427553679724);
+    points.append(p);
+
+    p = VSAPoint(-2510.4169214986496, -1479.023939177109);
+    p.SetSABefore(18.897637795275593);
+    p.SetSAAfter(18.897637795275593);
+    points.append(p);
+
+    p = VSAPoint(-2510.4169214986496, -1479.023939177109);
+    p.SetSABefore(18.897637795275593);
+    p.SetSAAfter(18.897637795275593);
+    points.append(p);
+
+    p = VSAPoint(-2510.41692149865, -1479.0239391771088);
+    p.SetSABefore(18.897637795275593);
+    p.SetSAAfter(18.897637795275593);
+    points.append(p);
+
+    p = VSAPoint(-2465.770203618369, -1557.5789960796274);
+    p.SetSABefore(16.15142755367971);
+    p.SetSAAfter(16.15142755367971);
+    points.append(p);
+
+    p = VSAPoint(-2401.820804615958, -1671.9616182591394);
+    p.SetSABefore(12.168538502609852);
+    p.SetSAAfter(12.168538502609852);
+    points.append(p);
+
+    p = VSAPoint(-2361.950025594169, -1745.613784160113);
+    p.SetSABefore(9.62306214294358);
+    p.SetSAAfter(9.62306214294358);
+    points.append(p);
+
+    p = VSAPoint(-2325.280421100769, -1816.4674294468161);
+    p.SetSABefore(7.198283939162968);
+    p.SetSAAfter(7.198283939162968);
+    points.append(p);
+
+    p = VSAPoint(-2292.590031111732, -1883.9929339875566);
+    p.SetSABefore(4.918115037824851);
+    p.SetSAAfter(4.918115037824851);
+    points.append(p);
+
+    p = VSAPoint(-2271.318537325938, -1932.0014024188404);
+    p.SetSABefore(3.3221717821615044);
+    p.SetSAAfter(3.3221717821615044);
+    points.append(p);
+
+    p = VSAPoint(-2258.687165687168, -1962.7715302562779);
+    p.SetSABefore(2.3112373518789013);
+    p.SetSAAfter(2.3112373518789013);
+    points.append(p);
+
+    p = VSAPoint(-2247.488245160975, -1992.4117115831486);
+    p.SetSABefore(1.3482210481660388);
+    p.SetSAAfter(1.3482210481660388);
+    points.append(p);
+
+    p = VSAPoint(-2237.8190307443556, -2020.8557438829903);
+    p.SetSABefore(0.4351312177950959);
+    p.SetSAAfter(0.4351312177950959);
+    points.append(p);
+
+    p = VSAPoint(-2233.6582717055753, -2034.5545386613094);
+    p.SetSABefore(0.0);
+    p.SetSAAfter(0.0);
+    points.append(p);
+
+    p = VSAPoint(-2233.6582717055753, -2034.5545386613094);
+    p.SetSABefore(0.0);
+    p.SetSAAfter(0.0);
+    points.append(p);
+
+    p = VSAPoint(-2268.843635583417, -2142.3429233856164);
+    p.SetSABefore(0.0);
+    p.SetSAAfter(0.0);
+    points.append(p);
+
+    p = VSAPoint(-2142.3122611221115, -2153.915659267329);
+    p.SetSABefore(0.0);
+    p.SetSAAfter(0.0);
+    points.append(p);
+
+    p = VSAPoint(-2102.05157470339, -2047.9183817466978);
+    p.SetSABefore(0.0);
+    p.SetSAAfter(0.0);
+    points.append(p);
+
+    p = VSAPoint(-1957.540323165074, -1829.765289335082);
+    p.SetSABefore(0.0);
+    p.SetSAAfter(0.0);
+    points.append(p);
+
+    p = VSAPoint(-2074.675746476508, -1711.446016505495);
+    p.SetSABefore(0.0);
+    p.SetSAAfter(0.0);
+    points.append(p);
+
+    p = VSAPoint(-2074.675746476508, -1711.446016505495);
+    p.SetSABefore(0.0);
+    p.SetSAAfter(0.0);
+    points.append(p);
+
+    p = VSAPoint(-2104.9501005136362, -1680.2660923950884);
+    p.SetSABefore(0.0);
+    p.SetSAAfter(0.0);
+    points.append(p);
+
+    p = VSAPoint(-2157.060300446018, -1624.0358190720049);
+    p.SetSABefore(0.0);
+    p.SetSAAfter(0.0);
+    points.append(p);
+
+    p = VSAPoint(-2193.427447844697, -1582.9264609829493);
+    p.SetSABefore(0.0);
+    p.SetSAAfter(0.0);
+    points.append(p);
+
+    p = VSAPoint(-2229.9021223993304, -1539.6063550266792);
+    p.SetSABefore(0.0);
+    p.SetSAAfter(0.0);
+    points.append(p);
+
+    p = VSAPoint(-2265.283071500467, -1494.9101438927273);
+    p.SetSABefore(0.0);
+    p.SetSAAfter(0.0);
+    points.append(p);
+
+    p = VSAPoint(-2298.369042538657, -1449.6724702706276);
+    p.SetSABefore(0.0);
+    p.SetSAAfter(0.0);
+    points.append(p);
+
+    p = VSAPoint(-2320.8174013740727, -1415.9196938584569);
+    p.SetSABefore(0.0);
+    p.SetSAAfter(0.0);
+    points.append(p);
+
+    p = VSAPoint(-2334.512979024599, -1393.6772377027328);
+    p.SetSABefore(0.0);
+    p.SetSAAfter(0.0);
+    points.append(p);
+
+    p = VSAPoint(-2340.8464205786395, -1382.6908795653735);
+    p.SetSABefore(0.0);
+    p.SetSAAfter(0.0);
+    points.append(p);
+
+    p = VSAPoint(-2340.8464205786395, -1382.690879565374);
+    p.SetSABefore(0.0);
+    p.SetSAAfter(0.0);
+    points.append(p);
+
+    p = VSAPoint(-2340.8464205786395, -1382.690879565374);
+    p.SetSABefore(0.0);
+    p.SetSAAfter(0.0);
+    points.append(p);
+
+    p = VSAPoint(-2347.0406240734856, -1371.625420238929);
+    p.SetSABefore(0.0);
+    p.SetSAAfter(0.0);
+    points.append(p);
+
+    p = VSAPoint(-2359.1340239739197, -1348.4727663549988);
+    p.SetSABefore(0.0);
+    p.SetSAAfter(0.0);
+    points.append(p);
+
+    p = VSAPoint(-2376.632959709957, -1311.9082209860264);
+    p.SetSABefore(0.0);
+    p.SetSAAfter(0.0);
+    points.append(p);
+
+    p = VSAPoint(-2398.5505312977116, -1260.3257758135142);
+    p.SetSABefore(0.0);
+    p.SetSAAfter(0.0);
+    points.append(p);
+
+    p = VSAPoint(-2418.8279356815838, -1207.049235756178);
+    p.SetSABefore(0.0);
+    p.SetSAAfter(0.0);
+    points.append(p);
+
+    p = VSAPoint(-2437.3632941454625, -1153.5377981886413);
+    p.SetSABefore(0.0);
+    p.SetSAAfter(0.0);
+    points.append(p);
+
+    p = VSAPoint(-2454.0547279732336, -1101.2506604855253);
+    p.SetSABefore(0.0);
+    p.SetSAAfter(0.0);
+    points.append(p);
+
+    p = VSAPoint(-2475.6739880089963, -1027.6984737710059);
+    p.SetSABefore(0.0);
+    p.SetSAAfter(0.0);
+    points.append(p);
+
+    p = VSAPoint(-2486.9558756792776, -985.7289230170218);
+    p.SetSABefore(0.0);
+    p.SetSAAfter(0.0);
+    points.append(p);
+
+    p = VSAPoint(-2486.9558756792776, -985.7289230170218);
+    p.SetSABefore(0.0);
+    p.SetSAAfter(0.0);
+    points.append(p);
+
+    p = VSAPoint(-2528.6142143955344, -824.5310925952923);
+    p.SetSABefore(0.0);
+    p.SetSAAfter(0.0);
+    points.append(p);
+
+    p = VSAPoint(-2789.994527521454, -836.9651369943699);
+    p.SetSABefore(0.0);
+    p.SetSAAfter(0.0);
+    points.append(p);
+
+    p = VSAPoint(-2901.6577688078787, -817.2758948021979);
+    p.SetSABefore(0.0);
+    p.SetSAAfter(0.0);
+    points.append(p);
+
+    return points;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QVector<QPointF> TST_VAbstractPiece::OutputPointsIssue767_SkinFusing_TopCollar_Notch() const
+{
+    QVector<QPointF> points;
+
+    points += QPointF(-2956.503052984476, -931.8887725360864);
+    points += QPointF(-2845.8999353737872, -956.8546710275792);
+    points += QPointF(-2836.5851689927185, -967.7355423437981);
+    points += QPointF(-2817.8474487692724, -991.136726507766);
+    points += QPointF(-2798.925476794025, -1016.4643697746903);
+    points += QPointF(-2779.83354016522, -1043.5867062304706);
+    points += QPointF(-2750.887165791067, -1087.2141100776162);
+    points += QPointF(-2711.65687579555, -1150.9111085764941);
+    points += QPointF(-2671.760583609897, -1219.7424702384794);
+    points += QPointF(-2631.217741006335, -1292.785732104274);
+    points += QPointF(-2569.022589526747, -1408.5260882408015);
+    points += QPointF(-2526.849928574273, -1488.3554445590923);
+    points += QPointF(-2479.8121574890624, -1565.559731854928);
+    points += QPointF(-2412.2945618796525, -1678.145787075361);
+    points += QPointF(-2370.3106788529753, -1750.3703933828758);
+    points += QPointF(-2331.6136749119755, -1819.8830711074306);
+    points += QPointF(-2296.985964337713, -1886.194796550727);
+    points += QPointF(-2274.3320398964784, -1933.3969433585041);
+    points += QPointF(-2260.809956115591, -1963.683515123611);
+    points += QPointF(-2248.7424468838362, -1992.9051810211831);
+    points += QPointF(-2238.2310088750087, -2020.9957910056432);
+    points += QPointF(-2233.6582717055753, -2034.5545386613094);
+    points += QPointF(-2268.843635583417, -2142.3429233856164);
+    points += QPointF(-2142.3122611221115, -2153.915659267329);
+    points += QPointF(-2102.05157470339, -2047.9183817466978);
+    points += QPointF(-1957.540323165074, -1829.765289335082);
+    points += QPointF(-2074.675746476508, -1711.446016505495);
+    points += QPointF(-2104.9501005136362, -1680.2660923950884);
+    points += QPointF(-2157.060300446018, -1624.0358190720049);
+    points += QPointF(-2193.427447844697, -1582.9264609829493);
+    points += QPointF(-2229.9021223993304, -1539.6063550266792);
+    points += QPointF(-2265.283071500467, -1494.9101438927273);
+    points += QPointF(-2298.369042538657, -1449.6724702706276);
+    points += QPointF(-2320.8174013740727, -1415.9196938584569);
+    points += QPointF(-2334.512979024599, -1393.6772377027328);
+    points += QPointF(-2340.8464205786395, -1382.6908795653735);
+    points += QPointF(-2347.0406240734856, -1371.625420238929);
+    points += QPointF(-2359.1340239739197, -1348.4727663549988);
+    points += QPointF(-2376.632959709957, -1311.9082209860264);
+    points += QPointF(-2398.5505312977116, -1260.3257758135142);
+    points += QPointF(-2418.8279356815838, -1207.049235756178);
+    points += QPointF(-2437.3632941454625, -1153.5377981886413);
+    points += QPointF(-2454.0547279732336, -1101.2506604855253);
+    points += QPointF(-2475.6739880089963, -1027.6984737710059);
+    points += QPointF(-2486.9558756792776, -985.7289230170218);
+    points += QPointF(-2528.6142143955344, -824.5310925952923);
+    points += QPointF(-2789.994527521454, -836.9651369943699);
+    points += QPointF(-2901.6577688078787, -817.2758948021979);
+    points += QPointF(-2956.503052984476, -931.8887725360864);
+
+    return points;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QVector<VSAPoint> TST_VAbstractPiece::InputPointsIssue880_Piece_Detail() const
+{
+    QVector<VSAPoint> points;
+
+    points += VSAPoint(239.15935115817035, 1727.8772840128854);
+    points += VSAPoint(239.15935115817035, 1727.8772840128854);
+    points += VSAPoint(229.26906627866828, 1672.003934630032);
+    points += VSAPoint(210.32230605803002, 1561.0565494697453);
+    points += VSAPoint(192.34933775540307, 1451.038491596672);
+    points += VSAPoint(175.3204063396455, 1341.9165954116006);
+    points += VSAPoint(151.37328308463964, 1179.739848589476);
+    points += VSAPoint(122.62258120063842, 966.4750391568086);
+    points += VSAPoint(97.11243630356083, 756.1978956903439);
+    points += VSAPoint(74.60480814427176, 548.64309339639);
+    points += VSAPoint(54.861656473636025, 343.5453074812554);
+    points += VSAPoint(37.64494104251851, 140.6392131512489);
+
+    VSAPoint p = VSAPoint(30.0, 39.999874015748034);
+    p.SetAngleType(PieceNodeAngle::ByFirstEdgeRightAngle);
+    points.append(p);
+
+    p = VSAPoint(30.0, 39.999874015748034);
+    p.SetAngleType(PieceNodeAngle::ByFirstEdgeRightAngle);
+    points.append(p);
+
+    p = VSAPoint(30.0, 39.999874015748034);
+    p.SetAngleType(PieceNodeAngle::ByFirstEdgeRightAngle);
+    points.append(p);
+
+    points.append(VSAPoint(45.17616605845943, 17.610441101076585));
+    points.append(VSAPoint(75.44740737398081, -23.822072592206776));
+    points.append(VSAPoint(105.6438731200462, -61.349018284438976));
+    points.append(VSAPoint(135.79060039912326, -95.09267882253144));
+    points.append(VSAPoint(165.91262631367965, -125.1753370533956));
+    points.append(VSAPoint(196.03498796618314, -151.71927582394284));
+    points.append(VSAPoint(226.1827224591014, -174.84677798108459));
+    points.append(VSAPoint(256.3808668949021, -194.68012637173229));
+    points.append(VSAPoint(286.65445837605307, -211.3416038427973));
+    points.append(VSAPoint(317.0285340050218, -224.9534932411911));
+    points.append(VSAPoint(347.52813088427615, -235.63807741382516));
+    points.append(VSAPoint(378.17828611628374, -243.51763920761078));
+    points.append(VSAPoint(409.00403680351224, -248.71446146945948));
+    points.append(VSAPoint(440.0304200484296, -251.35082704628257));
+    points.append(VSAPoint(471.2824729535032, -251.54901878499163));
+    points.append(VSAPoint(502.78523262120086, -249.43131953249798));
+    points.append(VSAPoint(518.6504625195685, -247.45337139417512));
+    points.append(VSAPoint(518.6504625195685, -247.45337139417512));
+    points.append(VSAPoint(518.6504625195685, -247.45337139417512));
+    points.append(VSAPoint(530.2610383503521, -245.74288092468555));
+    points.append(VSAPoint(552.1872278041676, -241.18301269150965));
+    points.append(VSAPoint(572.6437092641386, -235.3144676119963));
+    points.append(VSAPoint(591.7240901252175, -228.20167669358835));
+    points.append(VSAPoint(609.5219777823567, -219.9090709437288));
+    points.append(VSAPoint(626.130979630509, -210.50108136986046));
+    points.append(VSAPoint(641.6447030646272, -200.04213897942634));
+    points.append(VSAPoint(656.1567554796634, -188.59667477986926));
+    points.append(VSAPoint(669.7607442705705, -176.2291197786322));
+    points.append(VSAPoint(682.5502768323008, -163.00390498315804));
+    points.append(VSAPoint(694.6189605598073, -148.98546140088973));
+    points.append(VSAPoint(706.060402848042, -134.2382200392702));
+    points.append(VSAPoint(722.300407627205, -110.96277002193168));
+    points.append(VSAPoint(742.5431323074765, -77.86867271190005));
+    points.append(VSAPoint(771.5587695889417, -25.219950033288583));
+    points.append(VSAPoint(801.3225470991345, 29.88442488061677));
+    points.append(VSAPoint(822.7622961453703, 66.90756576711863));
+    points.append(VSAPoint(846.3734491821488, 103.62434739887975));
+    points.append(VSAPoint(866.0660930267316, 130.61304884599105));
+    points.append(VSAPoint(880.202278000172, 148.25843766499418));
+    points.append(VSAPoint(895.3025472485346, 165.537297136819));
+    points.append(VSAPoint(911.4605081667719, 182.38519625402265));
+    points.append(VSAPoint(928.7697681498366, 198.73770400916214));
+    points.append(VSAPoint(947.3239345926813, 214.5303893947946));
+
+    p = VSAPoint(957.1548316121191, 222.1693111391918);
+    p.SetAngleType(PieceNodeAngle::BySecondEdgeRightAngle);
+    points.append(p);
+
+    p = VSAPoint(957.1548316121191, 222.1693111391918);
+    p.SetAngleType(PieceNodeAngle::BySecondEdgeRightAngle);
+    points.append(p);
+
+    p = VSAPoint(957.1548316121191, 222.1693111391918);
+    p.SetAngleType(PieceNodeAngle::BySecondEdgeRightAngle);
+    points.append(p);
+
+    points.append(VSAPoint(952.3136401198107, 240.982134772638));
+    points.append(VSAPoint(940.9881447982464, 288.3639167749205));
+    points.append(VSAPoint(928.1711209417526, 346.5350481212475));
+    points.append(VSAPoint(914.3961310718933, 414.47551510225964));
+    points.append(VSAPoint(900.1967377102318, 491.1653040085978));
+    points.append(VSAPoint(886.1065033783323, 575.5844011309023));
+    points.append(VSAPoint(872.6589905977585, 666.712792759814));
+    points.append(VSAPoint(860.3877618900742, 763.5304651859733));
+    points.append(VSAPoint(849.8263797768434, 865.017404700021));
+    points.append(VSAPoint(841.5084067796297, 970.1535975925977));
+    points.append(VSAPoint(837.1624212037573, 1050.8452199630021));
+    points.append(VSAPoint(835.1862064061293, 1105.1939935906626));
+    points.append(VSAPoint(834.0709728058853, 1159.8813228514407));
+    points.append(VSAPoint(833.8834157182207, 1214.7797060316668));
+    points.append(VSAPoint(834.6902304583309, 1269.7616414176705));
+    points.append(VSAPoint(836.5581123414115, 1324.699627295782));
+    points.append(VSAPoint(839.5537566826579, 1379.4661619523315));
+    points.append(VSAPoint(843.7438587972656, 1433.933743673649));
+    points.append(VSAPoint(849.1951140004301, 1487.9748707460644));
+    points.append(VSAPoint(855.9742176073469, 1541.462041455908));
+    points.append(VSAPoint(864.1478649332113, 1594.2677540895102));
+    points.append(VSAPoint(873.782751293219, 1646.2645069332007));
+    points.append(VSAPoint(879.2340548139807, 1671.8780036332896));
+    points.append(VSAPoint(879.2340548139807, 1671.8780036332896));
+
+    return points;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QVector<QPointF> TST_VAbstractPiece::OutputPointsIssue880_Piece_Detail() const
+{
+    QVector<QPointF> points;
+
+    points += QPointF(207.97524435031346, 1768.5451872439698);
+    points += QPointF(192.0523574292865, 1678.5917597177247);
+    points += QPointF(173.06637823139368, 1567.4188366954345);
+    points += QPointF(155.04852197223198, 1457.1320947077754);
+    points += QPointF(137.95319893013118, 1347.5909857555691);
+    points += QPointF(113.94865296170948, 1185.0253559450243);
+    points += QPointF(85.13262246004243, 971.2759567707533);
+    points += QPointF(59.56333814296166, 760.5113339757822);
+    points += QPointF(37.00526380453169, 552.491340651304);
+    points += QPointF(17.2197909125064, 346.95390918468786);
+    points += QPointF(-0.029116486330288183, 143.66841923390743);
+    points += QPointF(-12.288070724611142, -17.710595485938104);
+    points += QPointF(26.31665967166907, -20.64315536140112);
+    points += QPointF(45.449182757960564, -46.830007644639885);
+    points += QPointF(76.80902542176231, -85.80275109276256);
+    points += QPointF(108.32184223768654, -121.07549507561193);
+    points += QPointF(140.03960977826148, -152.7518093937674);
+    points += QPointF(172.0109643794434, -180.92508772882493);
+    points += QPointF(204.27687396752606, -205.6775245587238);
+    points += QPointF(236.86536116641804, -227.0807873159393);
+    points += QPointF(269.7862380601783, -245.1992338515816);
+    points += QPointF(303.02747320804565, -260.09601694470166);
+    points += QPointF(336.55504181349585, -271.8413567367945);
+    points += QPointF(370.3174391861959, -280.5210157594255);
+    points += QPointF(404.25444394855236, -286.242355156443);
+    points += QPointF(438.30793239230167, -289.13593911030426);
+    points += QPointF(472.43167053063326, -289.3523422699121);
+    points += QPointF(506.39354740949744, -287.06933462111243);
+    points += QPointF(523.3262726926384, -284.95829981953244);
+    points += QPointF(524.1590713325393, -284.84505611031716);
+    points += QPointF(535.7696471633229, -283.1345656408276);
+    points += QPointF(537.9564634081299, -282.7464387285754);
+    points += QPointF(561.2586117828608, -277.9004199361857);
+    points += QPointF(584.4735176539314, -271.2405394534338);
+    points += QPointF(606.3291152578626, -263.09320228624324);
+    points += QPointF(626.8443757152221, -253.53448553817316);
+    points += QPointF(646.0388521585816, -242.66198182567126);
+    points += QPointF(663.9421664899236, -230.592040397069);
+    points += QPointF(680.6014176242785, -217.45310890781045);
+    points += QPointF(696.0845837791157, -203.37717044914066);
+    points += QPointF(710.4796074150597, -188.49177267151234);
+    points += QPointF(723.8903257348999, -172.9144816918925);
+    points += QPointF(736.5088929791715, -156.65000627864362);
+    points += QPointF(753.9481523879648, -131.65576420615508);
+    points += QPointF(775.2314496504125, -96.86047247508529);
+    points += QPointF(804.6599580426928, -43.46259731691744);
+    points += QPointF(834.3104997062314, 11.42928555575623);
+    points += QPointF(855.028099173095, 47.20538546427957);
+    points += QPointF(877.5611048277024, 82.24558222378279);
+    points += QPointF(896.0956388425119, 107.64709808599238);
+    points += QPointF(909.1935793406782, 123.99650588254744);
+    points += QPointF(923.186035221142, 140.00772229515948);
+    points += QPointF(938.0932990305748, 155.55152005811772);
+    points += QPointF(954.0130809543497, 170.5913517795987);
+    points += QPointF(967.4782824078412, 182.05248051659785);
+    points += QPointF(1004.0810458391544, 191.4716400415735);
+    points += QPointF(988.9976255298626, 250.08566646847305);
+    points += QPointF(977.8259070734451, 296.82410160649124);
+    points += QPointF(965.149517480306, 354.35695262370325);
+    points += QPointF(951.5014069310696, 421.6716303754821);
+    points += QPointF(937.4212488890727, 497.7174388481253);
+    points += QPointF(923.444794947317, 581.4548412888578);
+    points += QPointF(910.1057337999374, 671.8482997696264);
+    points += QPointF(897.9362480985484, 767.8632391288859);
+    points += QPointF(887.4670427019098, 868.4644297171681);
+    points += QPointF(879.2234261603584, 972.6607837009217);
+    points += QPointF(874.9207445088272, 1052.5483850157796);
+    points += QPointF(872.9674776789623, 1106.266056241682);
+    points += QPointF(871.8649319396666, 1160.3312151973862);
+    points += QPointF(871.6796386709575, 1214.5669734562434);
+    points += QPointF(872.4760820545193, 1268.8421328907752);
+    points += QPointF(874.3182959750076, 1323.025174797752);
+    points += QPointF(877.269773413631, 1376.984247710642);
+    points += QPointF(881.3933583565541, 1430.5871656635104);
+    points += QPointF(886.7511179913885, 1483.701422556393);
+    points += QPointF(893.4041934667935, 1536.1942305045375);
+    points += QPointF(901.4126286647522, 1587.9325929330282);
+    points += QPointF(910.8542351538612, 1638.8862690551816);
+    points += QPointF(925.0965474653889, 1705.8052028484663);
+    points += QPointF(207.97524435031346, 1768.5451872439698);
+
+    return points;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QVector<VSAPoint> TST_VAbstractPiece::InputPointsIssue880_Piece_Detail_1() const
+{
+    QVector<VSAPoint> points;
+
+    //    VSAPoint p = VSAPoint(124.48818897637796, 39.999874015748034);
+    //    p.SetAngleType(PieceNodeAngle::ByFirstEdgeRightAngle);
+    //    points.append(p);
+
+    points += VSAPoint(239.15935115817035, 1727.8772840128854);
+    points += VSAPoint(239.15935115817035, 1727.8772840128854);
+    points += VSAPoint(228.38870291910868, 1665.145749022502);
+    points += VSAPoint(208.68143263818018, 1537.8520195183164);
+    points += VSAPoint(191.107067165158, 1409.242825317507);
+    points += VSAPoint(175.590132468123, 1280.2974183439387);
+    points += VSAPoint(162.05515451515572, 1151.9950505214774);
+    points += VSAPoint(150.42665927433694, 1025.314973773988);
+    points += VSAPoint(140.62917271374727, 901.2364400253355);
+    points += VSAPoint(132.58722080146742, 780.7387011993851);
+    points += VSAPoint(126.22532950557809, 664.801009220002);
+    points += VSAPoint(121.46802479415996, 554.4026160110516);
+    points += VSAPoint(118.23983263529368, 450.5227734963987);
+    points += VSAPoint(116.46527899705998, 354.1407335999088);
+    points += VSAPoint(116.06888984753957, 266.235748245447);
+    points += VSAPoint(116.97519115481305, 187.78706935687848);
+    points += VSAPoint(119.10870888696115, 119.77394885806838);
+    points += VSAPoint(122.39396901206462, 63.17563867288196);
+
+    VSAPoint p = VSAPoint(124.48818897637796, 39.999874015748034);
+    p.SetAngleType(PieceNodeAngle::ByFirstEdgeRightAngle);
+    points.append(p);
+
+    p = VSAPoint(124.48818897637796, 39.999874015748034);
+    p.SetAngleType(PieceNodeAngle::ByFirstEdgeRightAngle);
+    points.append(p);
+
+    p = VSAPoint(124.48818897637796, 39.999874015748034);
+    p.SetAngleType(PieceNodeAngle::ByFirstEdgeRightAngle);
+    points.append(p);
+
+    points += VSAPoint(131.17745572117823, 59.19926080571054);
+    points += VSAPoint(145.42358161389507, 95.6473363798392);
+    points += VSAPoint(160.66298139295492, 129.7789066433697);
+    points += VSAPoint(176.84250283902833, 161.62100748114375);
+    points += VSAPoint(193.90899373278594, 191.2006747780029);
+    points += VSAPoint(211.80930185489825, 218.54494441878893);
+    points += VSAPoint(230.49027498603584, 243.68085228834343);
+    points += VSAPoint(249.8987609068692, 266.6354342715081);
+    points += VSAPoint(269.98160739806895, 287.4357262531245);
+    points += VSAPoint(290.68566224030565, 306.1087641180344);
+    points += VSAPoint(311.95777321424987, 322.6815837510794);
+    points += VSAPoint(333.7447881005721, 337.1812210371011);
+    points += VSAPoint(355.99355467994303, 349.6347118609412);
+    points += VSAPoint(378.650920733033, 360.06909210744146);
+    points += VSAPoint(401.66373404051285, 368.5113976614434);
+    points += VSAPoint(424.9788423830528, 374.98866440778875);
+    points += VSAPoint(448.5430935413237, 379.52792823131904);
+    points += VSAPoint(472.3033352959959, 382.1562250168761);
+    points += VSAPoint(496.2064154277402, 382.9005906493014);
+    points += VSAPoint(520.1991817172269, 381.7880610134368);
+    points += VSAPoint(544.2284819451269, 378.8456719941238);
+    points += VSAPoint(568.2411638921103, 374.10045947620404);
+    points += VSAPoint(592.1840753388481, 367.57945934451936);
+    points += VSAPoint(616.0040640660104, 359.3097074839112);
+    points += VSAPoint(639.647977854268, 349.31823977922147);
+    points += VSAPoint(663.0626644842916, 337.6320921152916);
+    points += VSAPoint(686.1949717367515, 324.27830037696316);
+    points += VSAPoint(708.9917473923185, 309.2839004490781);
+    points += VSAPoint(731.399839231663, 292.67592821647787);
+    points += VSAPoint(753.3660950354556, 274.48141956400417);
+    points += VSAPoint(774.8373625843669, 254.72741037649877);
+    points += VSAPoint(795.7604896590673, 233.4409365388032);
+
+    p = VSAPoint(805.9737292499144, 222.1693111391918);
+    p.SetAngleType(PieceNodeAngle::BySecondEdgeRightAngle);
+    points.append(p);
+
+    p = VSAPoint(805.9737292499144, 222.1693111391918);
+    p.SetAngleType(PieceNodeAngle::BySecondEdgeRightAngle);
+    points.append(p);
+
+    p = VSAPoint(805.9737292499144, 222.1693111391918);
+    p.SetAngleType(PieceNodeAngle::BySecondEdgeRightAngle);
+    points.append(p);
+
+    points += VSAPoint(801.1024217701829, 252.56710912274912);
+    points += VSAPoint(783.4393334619424, 355.5003208404381);
+    points += VSAPoint(766.2212290655575, 462.42427627224754);
+    points += VSAPoint(754.024845322645, 544.4163414513537);
+    points += VSAPoint(741.7977429994414, 634.4390974603281);
+    points += VSAPoint(730.0853694039338, 731.420313160728);
+    points += VSAPoint(719.4331718441081, 834.2877574141107);
+    points += VSAPoint(710.3865976279511, 941.9691990820332);
+    points += VSAPoint(703.4910940634496, 1053.3924070260528);
+    points += VSAPoint(700.1562772589527, 1138.828625614281);
+    points += VSAPoint(698.833185316681, 1196.3413376010737);
+    points += VSAPoint(698.3546751480656, 1254.1863611415165);
+    points += VSAPoint(698.7889276666046, 1312.2296673433043);
+    points += VSAPoint(700.2041237857968, 1370.3372273141313);
+    points += VSAPoint(702.6684444191402, 1428.3750121616927);
+    points += VSAPoint(706.2500704801332, 1486.2089929936824);
+    points += VSAPoint(711.0171828822739, 1543.7051409177961);
+    points += VSAPoint(717.037962539061, 1600.7294270417278);
+    points += VSAPoint(724.3805903639925, 1657.1478224731723);
+    points += VSAPoint(728.6282421890804, 1685.0543048990771);
+    points += VSAPoint(728.6282421890804, 1685.0543048990771);
+
+    return points;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QVector<QPointF> TST_VAbstractPiece::OutputPointsIssue880_Piece_Detail_1() const
+{
+    QVector<QPointF> points;
+
+    points += QPointF(176.43300321313995, 1809.2444231688892);
+    points += QPointF(153.78313541824667, 1677.3246962809667);
+    points += QPointF(133.87793658475465, 1548.7525013540196);
+    points += QPointF(116.13042064136965, 1418.8761921325834);
+    points += QPointF(100.47483551040597, 1288.7786029156107);
+    points += QPointF(86.82794509892291, 1159.4153812471877);
+    points += QPointF(75.10856636006955, 1031.7452255369717);
+    points += QPointF(65.2370069141379, 906.7286088476662);
+    points += QPointF(57.13470030186313, 785.3265367259893);
+    points += QPointF(50.723988203508114, 668.4991453010994);
+    points += QPointF(45.92803421919151, 557.203853977457);
+    points += QPointF(42.670896438097856, 452.3925716567163);
+    points += QPointF(40.87786536674168, 355.006959561548);
+    points += QPointF(40.47636977532461, 265.9695473970137);
+    points += QPointF(41.39833199038787, 186.1652735021885);
+    points += QPointF(43.58687052785413, 116.39817805128028);
+    points += QPointF(47.000830659421496, 57.582630079953006);
+    points += QPointF(65.68957312272546, -149.23704714976648);
+    points += QPointF(140.97338867071443, -142.43421359312867);
+    points += QPointF(202.09509240490257, 32.99596074790383);
+    points += QPointF(215.1760179357478, 66.46292333957582);
+    points += QPointF(228.91247186136482, 97.22835696106226);
+    points += QPointF(243.32162407629943, 125.58628332767515);
+    points += QPointF(258.3193167174947, 151.58030642877873);
+    points += QPointF(273.82133547133117, 175.26098152608563);
+    points += QPointF(289.7450120582673, 196.68684969815953);
+    points += QPointF(306.0113435768183, 215.92517884608725);
+    points += QPointF(322.54758976689817, 233.05217073860985);
+    points += QPointF(339.2901947112362, 248.1523672201739);
+    points += QPointF(356.187735703955, 261.31701737912283);
+    points += QPointF(373.20345965213, 272.6412775724043);
+    points += QPointF(390.3168780918559, 282.22031642578816);
+    points += QPointF(407.5239155726528, 290.1446608341238);
+    points += QPointF(424.8352834117022, 296.495377493676);
+    points += QPointF(442.27307072936014, 301.3398413607568);
+    points += QPointF(459.86592925304035, 304.7288150104031);
+    points += QPointF(477.6435530680066, 306.6953299983464);
+    points += QPointF(495.63130278250605, 307.2554863722674);
+    points += QPointF(513.8457455201286, 306.4108940021393);
+    points += QPointF(532.2916184779821, 304.1521959323631);
+    points += QPointF(550.9603800691451, 300.4630103015354);
+    points += QPointF(569.8302035956763, 295.3236970657534);
+    points += QPointF(588.8670691430791, 288.71453548788656);
+    points += QPointF(608.0265381189225, 280.6181087615205);
+    points += QPointF(627.2558255674835, 271.02087194401406);
+    points += QPointF(646.49587350226, 259.9139991901456);
+    points += QPointF(665.6832327130836, 247.2936645466005);
+    points += QPointF(684.7516535483287, 233.16092151690435);
+    points += QPointF(703.6333557352625, 217.52132882153552);
+    points += QPointF(722.2599918458167, 200.3844392540231);
+    points += QPointF(740.775593812871, 181.5472991146096);
+    points += QPointF(827.8905206609868, 85.40475654403389);
+    points += QPointF(902.5287659069734, 97.36568353412399);
+    points += QPointF(875.7406670161695, 264.52803611283815);
+    points += QPointF(875.6040535669327, 265.3514075972125);
+    points += QPointF(858.0066884529067, 367.9016115788377);
+    points += QPointF(840.9224284397759, 473.9943970664766);
+    points += QPointF(828.8632024485165, 555.064398169016);
+    points += QPointF(816.7758887510091, 644.0579522451663);
+    points += QPointF(805.2076743624673, 739.845495712356);
+    points += QPointF(794.6970759283694, 841.3455282095892);
+    points += QPointF(785.7814316001975, 947.4685104254818);
+    points += QPointF(778.9905248854037, 1057.2015565957809);
+    points += QPointF(775.7129148747653, 1141.1721677964533);
+    points += QPointF(774.4165452653767, 1197.5233022801074);
+    points += QPointF(773.9475654146959, 1254.2162469276998);
+    points += QPointF(774.3725935699175, 1311.0266010527719);
+    points += QPointF(775.7556236491987, 1367.8134323501624);
+    points += QPointF(778.1598154813046, 1424.435109901397);
+    points += QPointF(781.6473200844314, 1480.7492730591212);
+    points += QPointF(786.2790701026621, 1536.6128151220523);
+    points += QPointF(792.1145299697872, 1591.8818919022567);
+    points += QPointF(799.2334640707138, 1646.5814965577908);
+    points += QPointF(815.4824145904547, 1753.3348442404624);
+    points += QPointF(176.43300321313995, 1809.2444231688892);
 
     return points;
 }
@@ -1876,11 +4010,8 @@ void TST_VAbstractPiece::PathRemoveLoop_data() const
     path << QPointF(10, 10);
     QTest::newRow("Correct closed a path (four unique points)") << path << path;
 
-#if QT_VERSION < QT_VERSION_CHECK(5, 1, 0)
-    path.remove(path.size() - 1);
-#else
     path.removeLast();
-#endif
+
     QTest::newRow("Correct unclosed a path (four unique points)") << path << path;
 
     path.clear();
@@ -1893,11 +4024,8 @@ void TST_VAbstractPiece::PathRemoveLoop_data() const
     path << QPointF(0, 10);
     QTest::newRow("Correct closed a path (six unique points)") << path << path;
 
-#if QT_VERSION < QT_VERSION_CHECK(5, 1, 0)
-    path.remove(path.size() - 1);
-#else
     path.removeLast();
-#endif
+
     QTest::newRow("Correct unclosed a path (six unique points)") << path << path;
 
     path.clear();
@@ -1914,13 +4042,9 @@ void TST_VAbstractPiece::PathRemoveLoop_data() const
     res << QPointF(20, 10);
     QTest::newRow("One loop, closed a path (four unique points)") << path << res;
 
-#if QT_VERSION < QT_VERSION_CHECK(5, 1, 0)
-    path.remove(path.size() - 1);
-    res.remove(res.size() - 1);
-#else
     path.removeLast();
     res.removeLast();
-#endif
+
     QTest::newRow("One loop, unclosed a path (four unique points)") << path << res;
 
     path.clear();
@@ -1939,13 +4063,9 @@ void TST_VAbstractPiece::PathRemoveLoop_data() const
     res << QPointF(20, 10);
     QTest::newRow("Two loops, closed a path (six unique points)") << path << res;
 
-#if QT_VERSION < QT_VERSION_CHECK(5, 1, 0)
-    path.remove(path.size() - 1);
-    res.remove(res.size() - 1);
-#else
     path.removeLast();
     res.removeLast();
-#endif
+
     QTest::newRow("Two loops, unclosed a path (six unique points)") << path << res;
 
     path.clear();
@@ -1991,13 +4111,9 @@ void TST_VAbstractPiece::PathRemoveLoop_data() const
     res << QPointF(20, 10);
     QTest::newRow("One loop, the second loop, closed a path (six unique points)") << path << res;
 
-#if QT_VERSION < QT_VERSION_CHECK(5, 1, 0)
-    path.remove(path.size() - 1);
-    res.remove(res.size() - 1);
-#else
     path.removeLast();
     res.removeLast();
-#endif
+
     QTest::newRow("One loop, the second loop, unclosed a path (six unique points)") << path << res;
 
     path.clear();
@@ -2009,11 +4125,8 @@ void TST_VAbstractPiece::PathRemoveLoop_data() const
     path << QPointF(20, 10);
     QTest::newRow("Correct closed a path, point on line (four unique points)") << path << path;
 
-#if QT_VERSION < QT_VERSION_CHECK(5, 1, 0)
-    path.remove(path.size() - 1);
-#else
     path.removeLast();
-#endif
+
     QTest::newRow("Corect unclosed a path, point on line (four unique points)") << path << path;
 
     path.clear();
@@ -2029,11 +4142,8 @@ void TST_VAbstractPiece::PathRemoveLoop_data() const
 
     QTest::newRow("Correct closed a path, point on line (six unique points)") << path << path;
 
-#if QT_VERSION < QT_VERSION_CHECK(5, 1, 0)
-    path.remove(path.size() - 1);
-#else
     path.removeLast();
-#endif
+
     QTest::newRow("Corect unclosed a path, point on line (six unique points)") << path << path;
 
     path.clear();
@@ -2432,15 +4542,15 @@ void TST_VAbstractPiece::BrokenDetailEquidistant_data() const
     // The test check an open equdistant of correct detail.
     QVector<VSAPoint> points;// Input points.
 
-    VSAPoint point = VSAPoint(787.5835464566929, 1701.3138897637796);
-    point.SetSAAfter(-1);
-    point.SetSABefore(0);
-    points.append(point);
+    VSAPoint p = VSAPoint(787.5835464566929, 1701.3138897637796);
+    p.SetSAAfter(-1);
+    p.SetSABefore(0);
+    points.append(p);
 
-    point = VSAPoint(863.1740976377953, 1701.3138897637796);
-    point.SetSAAfter(-1);
-    point.SetSAAfter(-1);
-    points.append(point);
+    p = VSAPoint(863.1740976377953, 1701.3138897637796);
+    p.SetSAAfter(-1);
+    p.SetSAAfter(-1);
+    points.append(p);
 
     points.append(VSAPoint(938.7646488188976, 1701.3138897637796));
     points.append(VSAPoint(928.6149944255945, 1732.4440762118775));
@@ -2478,10 +4588,10 @@ void TST_VAbstractPiece::BrokenDetailEquidistant_data() const
     points.append(VSAPoint(798.7585835291225, 1734.548100679404));
     points.append(VSAPoint(787.5835464566929, 1701.3138897637796));
 
-    point = VSAPoint(797.0323653543306, 2608.4005039370077);
-    point.SetSAAfter(0);
-    point.SetSABefore(-1);
-    points.append(point);
+    p = VSAPoint(797.0323653543306, 2608.4005039370077);
+    p.SetSAAfter(0);
+    p.SetSABefore(-1);
+    points.append(p);
 
     QVector<QPointF> ekvOrig;
     ekvOrig.append(QPointF(787.1898456692913, 1663.5186141732283));
@@ -2506,32 +4616,31 @@ void TST_VAbstractPiece::BrokenDetailEquidistant_data() const
     ekvOrig.append(QPointF(796.554931640625, 2597.28125));
     ekvOrig.append(QPointF(787.1898456692913, 1663.5186141732283));
 
-#ifndef Q_OS_WIN // Disabled due to "undefined behavior" problem
-#ifndef Q_CC_CLANG
+    // Disabled due to "undefined behavior" problem
+#if !defined(Q_OS_WIN) && !defined(Q_CC_CLANG) && !defined(Q_PROCESSOR_X86_64)
     QTest::newRow("GAVAUDAN Laure.") << points << 37.795275590551185 << ekvOrig;
-#endif
 #endif
 
     points.clear();
-    point = VSAPoint(97.33089106412862, -223.03306117556497);
-    point.SetSAAfter(-1);
-    point.SetSABefore(0);
-    points.append(point);
+    p = VSAPoint(97.33089106412862, -223.03306117556497);
+    p.SetSAAfter(-1);
+    p.SetSABefore(0);
+    points.append(p);
 
-    point = VSAPoint(990.7494050554426, 2.819093995045);
-    point.SetSAAfter(-1);
-    point.SetSABefore(-1);
-    points.append(point);
+    p = VSAPoint(990.7494050554426, 2.819093995045);
+    p.SetSAAfter(-1);
+    p.SetSABefore(-1);
+    points.append(p);
 
-    point = VSAPoint(908.3966357321774, 379.5839357215547);
-    point.SetSAAfter(-1);
-    point.SetSABefore(-1);
-    points.append(point);
+    p = VSAPoint(908.3966357321774, 379.5839357215547);
+    p.SetSAAfter(-1);
+    p.SetSABefore(-1);
+    points.append(p);
 
-    point = VSAPoint(-135.41154226686143, 697.6417881399819);
-    point.SetSAAfter(0);
-    point.SetSABefore(-1);
-    points.append(point);
+    p = VSAPoint(-135.41154226686143, 697.6417881399819);
+    p.SetSAAfter(0);
+    p.SetSABefore(-1);
+    points.append(p);
 
     ekvOrig.clear();
     ekvOrig.append(QPointF(100.10981413873267, -234.02583351343978));
@@ -2543,109 +4652,231 @@ void TST_VAbstractPiece::BrokenDetailEquidistant_data() const
     // See the file "collection/bugs/Issue_#604.val" (since 0.5.0)
     QTest::newRow("Issue #604.") << points << 11.338582677165354 << ekvOrig;
 
+    // See the file "collection/bugs/Issue_#627.val"
+    QTest::newRow("Issue #627.") << InputPointsIssue627() << 56.692913385826778 << OutputPointsIssue627();
+
     points.clear();
-
-    point = VSAPoint(11565.008125001967, -71.44488549419934);
-    point.SetSAAfter(0);
-    points.append(point);
-
-    point = VSAPoint(11774.053467225081, -3376.8303371353477);
-    point.SetSABefore(0);
-    points.append(point);
-
-    point = VSAPoint(11774.053467225081, -3376.8303371353477);
-    point.SetSABefore(0);
-    points.append(point);
-
-    points.append(VSAPoint(11821.637653562488, -3457.444047544761));
-    points.append(VSAPoint(11916.506852253828, -3619.698047174161));
-    points.append(VSAPoint(12011.687139013728, -3784.3170132645946));
-    points.append(VSAPoint(12107.923065894336, -3952.559914581168));
-    points.append(VSAPoint(12205.959184947797, -4125.685719888987));
-    points.append(VSAPoint(12306.540048226263, -4304.953397953153));
-    points.append(VSAPoint(12410.410207781879, -4491.621917538776));
-    points.append(VSAPoint(12518.314215666796, -4686.950247410959));
-    points.append(VSAPoint(12630.996623933155, -4892.197356334806));
-    points.append(VSAPoint(12749.201984633113, -5108.622213075425));
-    points.append(VSAPoint(12937.571227539614, -5455.181123300274));
-    points.append(VSAPoint(13216.05428816687, -5970.204948863398));
-    points.append(VSAPoint(13530.031095467164, -6552.6012034655));
-
-    point = VSAPoint(13704.042216387523, -6875.648082494774);
-    point.SetSAAfter(0);
-    points.append(point);
-
-    point = VSAPoint(13704.042216387523, -6875.648082494774);
-    point.SetSAAfter(0);
-    points.append(point);
-
-    point = VSAPoint(13493.259591532773, -71.44488549420451);
-    point.SetSABefore(0);
-    points.append(point);
-
-    point = VSAPoint(13493.259591532773, -71.44488549420451);
-    point.SetSABefore(0);
-    points.append(point);
-
-    points.append(VSAPoint(13458.265794168308, -72.45287893700785));
-    points.append(VSAPoint(13303.675181471457, -76.51882381889763));
-    points.append(VSAPoint(13154.908187746063, -79.90711122047243));
-    points.append(VSAPoint(13010.905973179135, -82.6177411417323));
-    points.append(VSAPoint(12870.60969795768, -84.65071358267716));
-    points.append(VSAPoint(12732.9605222687, -86.0060285433071));
-    points.append(VSAPoint(12596.899606299212, -86.68368602362204));
-    points.append(VSAPoint(12461.36811023622, -86.68368602362204));
-    points.append(VSAPoint(12325.307194266732, -86.0060285433071));
-    points.append(VSAPoint(12187.658018577757, -84.65071358267716));
-    points.append(VSAPoint(12047.361743356301, -82.6177411417323));
-    points.append(VSAPoint(11903.35952878937, -79.90711122047243));
-    points.append(VSAPoint(11754.592535063975, -76.51882381889763));
-    points.append(VSAPoint(11600.001922367124, -72.45287893700785));
-
-    point = VSAPoint(11565.008125001967, -71.44488549419934);
-    point.SetSAAfter(0);
-    points.append(point);
+    points.append(VSAPoint(-3139.2651132139254, 2368.0698020087843));
+    points.append(VSAPoint(-3120.18086167807, 3642.1607394538896));
+    points.append(VSAPoint(-3800.4958223079916, 3642.1607394538896));
+    points.append(VSAPoint(-3838.2910978985424, 2357.1213693751492));
+    points.append(VSAPoint(-3838.2910978985424, 2357.1213693751492));
+    points.append(VSAPoint(-3842.1333590068875, 2294.1227800112047));
+    points.append(VSAPoint(-3847.641880263068, 2206.284811917889));
+    points.append(VSAPoint(-3852.504240762188, 2136.1966065393));
+    points.append(VSAPoint(-3858.4130229769607, 2058.523232892052));
+    points.append(VSAPoint(-3865.3928767793295, 1975.408848578495));
+    points.append(VSAPoint(-3873.4684520412366, 1888.9976112009829));
+    points.append(VSAPoint(-3882.664398634626, 1801.4336783618676));
+    points.append(VSAPoint(-3890.3477903485245, 1736.3753540292228));
+    points.append(VSAPoint(-3895.8091513987765, 1693.739013765668));
+    points.append(VSAPoint(-3901.5644708348673, 1652.020588288036));
+    points.append(VSAPoint(-3907.616829890789, 1611.4880972966203));
+    points.append(VSAPoint(-3913.9693098005355, 1572.4095604917156));
+    points.append(VSAPoint(-3920.6249917980986, 1535.0529975736154));
+    points.append(VSAPoint(-3927.5869571174717, 1499.6864282426134));
+    points.append(VSAPoint(-3934.8582869926468, 1466.5778721990046));
+    points.append(VSAPoint(-3942.4420626576175, 1435.9953491430822));
+    points.append(VSAPoint(-3950.341365346377, 1408.206878775141));
+    points.append(VSAPoint(-3958.559276292918, 1383.4804807954743));
+    points.append(VSAPoint(-3964.943774739856, 1367.2167450059815));
+    points.append(VSAPoint(-3969.294575063331, 1357.40136877638));
+    points.append(VSAPoint(-3971.5038697013774, 1352.8740677166752));
 
     ekvOrig.clear();
-    ekvOrig.append(QPointF(11561.414612602906, -14.624946442565701));
-    ekvOrig.append(QPointF(11781.95342513335, -3501.7429788659483));
-    ekvOrig.append(QPointF(11772.755890703675, -3486.161176715607));
-    ekvOrig.append(QPointF(11867.496139886347, -3648.194635075343));
-    ekvOrig.append(QPointF(11962.541506347354, -3812.5802499029824));
-    ekvOrig.append(QPointF(12058.651107851038, -3980.6023049242845));
-    ekvOrig.append(QPointF(12156.571541308, -4153.523816526403));
-    ekvOrig.append(QPointF(12257.048738448357, -4332.606727953389));
-    ekvOrig.append(QPointF(12360.827974888123, -4519.11184658243));
-    ekvOrig.append(QPointF(12468.653939048814, -4714.298901347144));
-    ekvOrig.append(QPointF(12581.270838581826, -4919.426688379175));
-    ekvOrig.append(QPointF(12699.418991549643, -5135.746802194771));
-    ekvOrig.append(QPointF(12887.73123714858, -5482.200849627318));
-    ekvOrig.append(QPointF(13166.168107919768, -5997.139252126215));
-    ekvOrig.append(QPointF(13480.123425536643, -6579.495645468361));
-    ekvOrig.append(QPointF(13707.971545534987, -7002.489438444617));
-    ekvOrig.append(QPointF(13491.50417959835, -14.779021766203327));
-    ekvOrig.append(QPointF(13456.704320007799, -15.781428847446987));
-    ekvOrig.append(QPointF(13302.284438389732, -19.842883268086513));
-    ekvOrig.append(QPointF(13153.729251428536, -23.226346601010544));
-    ekvOrig.append(QPointF(13009.961769808971, -25.932558019731804));
-    ekvOrig.append(QPointF(12869.919891108724, -27.961844111086332));
-    ekvOrig.append(QPointF(12732.540250691125, -29.3145051859673));
-    ekvOrig.append(QPointF(12596.758426378788, -29.990772637795267));
-    ekvOrig.append(QPointF(12461.509290156644, -29.990772637795267));
-    ekvOrig.append(QPointF(12325.727465844308, -29.3145051859673));
-    ekvOrig.append(QPointF(12188.347825426712, -27.961844111086332));
-    ekvOrig.append(QPointF(12048.305946726465, -25.9325580197318));
-    ekvOrig.append(QPointF(11904.538465106896, -23.226346601010544));
-    ekvOrig.append(QPointF(11755.9832781457, -19.842883268086513));
-    ekvOrig.append(QPointF(11601.563396526772, -15.78142884742432));
-    ekvOrig.append(QPointF(11561.414612602906, -14.624946442565701));
+    ekvOrig.append(QPointF(-3101.671677349305, 2354.311657146295));
+    ekvOrig.append(QPointF(-3081.815221558208, 3679.956015044441));
+    ekvOrig.append(QPointF(-3837.1958160496015, 3679.956015044441));
+    ekvOrig.append(QPointF(-3876.0525286101615, 2358.8277879853945));
+    ekvOrig.append(QPointF(-3879.856561637429, 2296.4559949567497));
+    ekvOrig.append(QPointF(-3885.3552068987756, 2208.77550784222));
+    ekvOrig.append(QPointF(-3890.2001782461225, 2138.9379573546207));
+    ekvOrig.append(QPointF(-3896.088149066635, 2061.538158048703));
+    ekvOrig.append(QPointF(-3903.0407093929557, 1978.7487777426454));
+    ekvOrig.append(QPointF(-3911.079614345216, 1892.7299244032736));
+    ekvOrig.append(QPointF(-3920.2274574737066, 1805.6240334336896));
+    ekvOrig.append(QPointF(-3927.860399345099, 1740.9928879223924));
+    ekvOrig.append(QPointF(-3933.274855194803, 1698.7227322183812));
+    ekvOrig.append(QPointF(-3938.9763839040743, 1657.3942181006862));
+    ekvOrig.append(QPointF(-3944.9616042037396, 1617.3113536115984));
+    ekvOrig.append(QPointF(-3951.228909124134, 1578.7567876029068));
+    ekvOrig.append(QPointF(-3957.774475984356, 1542.0182714992184));
+    ekvOrig.append(QPointF(-3964.590902808316, 1507.3910332410135));
+    ekvOrig.append(QPointF(-3971.664775737263, 1475.1815581746985));
+    ekvOrig.append(QPointF(-3978.9721167358443, 1445.7137924549359));
+    ekvOrig.append(QPointF(-3986.4693843470664, 1419.339616522746));
+    ekvOrig.append(QPointF(-3994.1083479844083, 1396.355179689852));
+    ekvOrig.append(QPointF(-3999.8272408176463, 1381.7869935087092));
+    ekvOrig.append(QPointF(-4003.5659287794874, 1373.352538644726));
+    ekvOrig.append(QPointF(-4020.22165565684, 1339.2215139079456));
+    ekvOrig.append(QPointF(-3963.5989171180895, 1302.9008086818892));
+    ekvOrig.append(QPointF(-3101.671677349305, 2354.311657146295));
 
-    // See the file "collection/bugs/Issue_#627.val"
-    QTest::newRow("Issue #627.") << points << 56.692913385826778 << ekvOrig;
+    // See the file "collection/bugs/Issue_#687.val"
+    QTest::newRow("Issue #687.") << points << 37.795275590551185 << ekvOrig;
+
+    // See private test cases in file jacket_issue_#767.val, piece "Fabric_TopCollar"
+    // Curve approximation scale 0.5
+    QTest::newRow("Issue #767.") << InputPointsIssue767_Fabric_TopCollar() << 37.795275590551185
+                                 << OutputPointsIssue767_Fabric_TopCollar();
+
+    // See private test cases in file jacket_issue_#767.val, piece "SkinFusing_TopCollar_Notch"
+    // Curve approximation scale 0.5
+    QTest::newRow("Issue #767.") << InputPointsIssue767_SkinFusing_TopCollar_Notch() << 37.795275590551185
+                                 << OutputPointsIssue767_SkinFusing_TopCollar_Notch();
+
+    points.clear();
+    p = VSAPoint(1122.8447244094489, 91.85612598425197);
+    p.SetAngleType(PieceNodeAngle::ByFirstEdgeSymmetry);
+    points.append(p);
+
+    points.append(VSAPoint(1122.8447244094489, -664.0493858267716));
+    points.append(VSAPoint(1122.8447244094489, -664.0493858267716));
+    points.append(VSAPoint(1123.2605071010314, -692.1027566151841));
+    points.append(VSAPoint(1125.5521344988651, -746.904953834852));
+    points.append(VSAPoint(1129.5018897097445, -800.813185020781));
+    points.append(VSAPoint(1135.005387617497, -854.573547056137));
+    points.append(VSAPoint(1141.9582431059482, -908.9321368240863));
+    points.append(VSAPoint(1150.2560710589246, -964.635051207795));
+    points.append(VSAPoint(1164.860792708483, -1051.9409225168733));
+    points.append(VSAPoint(1176.2406858386873, -1114.83483747791));
+    points.append(VSAPoint(1176.2406858386873, -1114.83483747791));
+    points.append(VSAPoint(1179.7035125223924, -1136.9452686438185));
+    points.append(VSAPoint(1186.627664934387, -1177.145289266175));
+    points.append(VSAPoint(1197.298845134993, -1231.2802973446833));
+    points.append(VSAPoint(1213.068331853193, -1298.0112723855073));
+    points.append(VSAPoint(1231.8133334949034, -1369.0339174169235));
+    points.append(VSAPoint(1242.934050298766, -1410.35475));
+    points.append(VSAPoint(1242.934050298766, -1410.35475));
+    points.append(VSAPoint(2006.3092913385829, -1344.3643464566928));
+
+    p = VSAPoint(2006.3092913385829, -664.0493858267716);
+    p.SetSAAfter(56.69291338582678);
+    points.append(p);
+
+    p = VSAPoint(2006.3092913385829, 91.85612598425197);
+    p.SetSABefore(56.69291338582678);
+    points.append(p);
+
+    ekvOrig.clear();
+    ekvOrig.append(QPointF(1085.0494488188979, 129.65140157480317));
+    ekvOrig.append(QPointF(1085.0494488188976, -664.0493858267716));
+    ekvOrig.append(QPointF(1085.0535993023548, -664.60949305358));
+    ekvOrig.append(QPointF(1085.4769360432513, -693.172544862023));
+    ekvOrig.append(QPointF(1087.8146106807237, -749.0759201835479));
+    ekvOrig.append(QPointF(1091.8475344926537, -804.1192779617469));
+    ekvOrig.append(QPointF(1097.4551144472157, -858.8963549321579));
+    ekvOrig.append(QPointF(1104.5179360066466, -914.1146778774624));
+    ekvOrig.append(QPointF(1112.9230524620698, -970.5378147459013));
+    ekvOrig.append(QPointF(1127.6248148552152, -1058.4237879476814));
+    ekvOrig.append(QPointF(1138.969731038904, -1121.1243937910851));
+    ekvOrig.append(QPointF(1142.3634069799264, -1142.7932918177955));
+    ekvOrig.append(QPointF(1142.4567081704688, -1143.360751675907));
+    ekvOrig.append(QPointF(1149.4580345095278, -1184.0088261935134));
+    ekvOrig.append(QPointF(1160.3539624659516, -1239.2839819734102));
+    ekvOrig.append(QPointF(1176.3990996347318, -1307.1814137078704));
+    ekvOrig.append(QPointF(1195.269438012279, -1378.6789451473478));
+    ekvOrig.append(QPointF(1214.661499217333, -1450.7350183203587));
+    ekvOrig.append(QPointF(2044.1045669291343, -1379.0333442132135));
+    ekvOrig.append(QPointF(2044.104566929134, -664.0493858267716));
+    ekvOrig.append(QPointF(2063.0022047244097, -664.0493858267716));
+    ekvOrig.append(QPointF(2063.0022047244097, 129.651401574803));
+    ekvOrig.append(QPointF(1085.0494488188979, 129.65140157480317));
+
+    // See private test cases in file collection/bugs/Issue_#883_case1.val, piece "ledge"
+    QTest::newRow("Issue #883. Piece 'ledge'") << points << 37.795275590551185 << ekvOrig;
+
+    points.clear();
+    p = VSAPoint(1122.8447244094489, 91.85612598425197);
+    p.SetAngleType(PieceNodeAngle::ByFirstEdgeSymmetry);
+    points.append(p);
+
+    points.append(VSAPoint(1122.8447244094489, -664.0493858267716));
+    points.append(VSAPoint(1122.8447244094489, -664.0493858267716));
+    points.append(VSAPoint(1123.2605071010314, -692.1027566151841));
+    points.append(VSAPoint(1125.5521344988651, -746.904953834852));
+    points.append(VSAPoint(1129.5018897097445, -800.813185020781));
+    points.append(VSAPoint(1135.005387617497, -854.573547056137));
+    points.append(VSAPoint(1141.9582431059482, -908.9321368240863));
+    points.append(VSAPoint(1150.2560710589246, -964.635051207795));
+    points.append(VSAPoint(1164.860792708483, -1051.9409225168733));
+    points.append(VSAPoint(1176.2406858386873, -1114.83483747791));
+    points.append(VSAPoint(1176.2406858386873, -1114.83483747791));
+    points.append(VSAPoint(1179.7035125223924, -1136.9452686438185));
+    points.append(VSAPoint(1186.627664934387, -1177.145289266175));
+    points.append(VSAPoint(1197.298845134993, -1231.2802973446833));
+    points.append(VSAPoint(1213.068331853193, -1298.0112723855073));
+    points.append(VSAPoint(1231.8133334949034, -1369.0339174169235));
+    points.append(VSAPoint(1242.934050298766, -1410.35475));
+    points.append(VSAPoint(1242.934050298766, -1410.35475));
+    points.append(VSAPoint(2006.3092913385829, -1344.3643464566928));
+
+    p = VSAPoint(2006.3092913385829, -664.0493858267716);
+    p.SetSAAfter(56.69291338582678);
+    points.append(p);
+
+    points.append(VSAPoint(2006.3092913385829, 91.85612598425197));
+
+    ekvOrig.clear();
+    ekvOrig.append(QPointF(1085.0494488188979, 129.65140157480317));
+    ekvOrig.append(QPointF(1085.0494488188976, -664.0493858267716));
+    ekvOrig.append(QPointF(1085.0535993023548, -664.60949305358));
+    ekvOrig.append(QPointF(1085.4769360432513, -693.172544862023));
+    ekvOrig.append(QPointF(1087.8146106807237, -749.0759201835479));
+    ekvOrig.append(QPointF(1091.8475344926537, -804.1192779617469));
+    ekvOrig.append(QPointF(1097.4551144472157, -858.8963549321579));
+    ekvOrig.append(QPointF(1104.5179360066466, -914.1146778774624));
+    ekvOrig.append(QPointF(1112.9230524620698, -970.5378147459013));
+    ekvOrig.append(QPointF(1127.6248148552152, -1058.4237879476814));
+    ekvOrig.append(QPointF(1138.969731038904, -1121.1243937910851));
+    ekvOrig.append(QPointF(1142.3634069799264, -1142.7932918177955));
+    ekvOrig.append(QPointF(1142.4567081704688, -1143.360751675907));
+    ekvOrig.append(QPointF(1149.4580345095278, -1184.0088261935134));
+    ekvOrig.append(QPointF(1160.3539624659516, -1239.2839819734102));
+    ekvOrig.append(QPointF(1176.3990996347318, -1307.1814137078704));
+    ekvOrig.append(QPointF(1195.269438012279, -1378.6789451473478));
+    ekvOrig.append(QPointF(1214.661499217333, -1450.7350183203587));
+    ekvOrig.append(QPointF(2044.1045669291343, -1379.0333442132135));
+    ekvOrig.append(QPointF(2044.104566929134, -664.0493858267716));
+    ekvOrig.append(QPointF(2063.0022047244097, -664.0493858267716));
+    ekvOrig.append(QPointF(2043.1596850393703, 129.651401574803));
+    ekvOrig.append(QPointF(1085.0494488188979, 129.65140157480317));
+
+    // See private test cases in file collection/bugs/Issue_#883_case1.val, piece "prong"
+    QTest::newRow("Issue #883. Piece 'prong'") << points << 37.795275590551185 << ekvOrig;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void TST_VAbstractPiece::BrokenDetailEquidistant() const
+{
+    QFETCH(QVector<VSAPoint>, points);
+    QFETCH(qreal, width);
+    QFETCH(QVector<QPointF>, ekvOrig);
+
+    const QVector<QPointF> ekv = VAbstractPiece::Equidistant(points, width);// Take result
+
+    // Begin comparison
+    Comparison(ekv, ekvOrig);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void TST_VAbstractPiece::EquidistantAngleType_data() const
+{
+    QTest::addColumn<QVector<VSAPoint>>("points");
+    QTest::addColumn<qreal>("width");
+    QTest::addColumn<QVector<QPointF>>("ekvOrig");
+
+    // See the file "collection/bugs/Issue_#880.val"
+    QTest::newRow("Issue #880. Piece: Detail.") << InputPointsIssue880_Piece_Detail() << 37.795275590551185
+                                                << OutputPointsIssue880_Piece_Detail();
+
+    // See the file "collection/bugs/Issue_#880.val"
+    QTest::newRow("Issue #880. Piece: Detail_1.") << InputPointsIssue880_Piece_Detail_1() << 75.59055118110237
+                                                  << OutputPointsIssue880_Piece_Detail_1();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void TST_VAbstractPiece::EquidistantAngleType() const
 {
     QFETCH(QVector<VSAPoint>, points);
     QFETCH(qreal, width);
@@ -2696,6 +4927,42 @@ void TST_VAbstractPiece::CorrectEquidistantPoints_data() const
     expect.append(QPointF(-283.4579031023758, 1039.1940357173805));
 
     QTest::newRow("Clearing bad main path.") << points << expect << true;
+
+    points.clear();
+    points.append(VSAPoint(1710.822186539242, -337.9528818897638));
+    points.append(VSAPoint(2241.0236220472443, -337.9528818897638));
+    points.append(VSAPoint(2241.0236220472443, -73.38595275590546));
+    points.append(VSAPoint(1756.74661444881, -77.4022977175182));
+    points.append(VSAPoint(1458.7808499813127, 33.04551440097044));
+    points.append(VSAPoint(1458.7808499813127, 33.04551440097044));
+    points.append(VSAPoint(1452.5774742317267, 17.66797799862358));
+    points.append(VSAPoint(1443.6033514625851, -2.685141373445197));
+    points.append(VSAPoint(1432.9463842425444, -25.199242282717215));
+    points.append(VSAPoint(1420.460146989685, -50.18887828170325));
+    points.append(VSAPoint(1405.9982141220862, -77.96860292291412));
+    points.append(VSAPoint(1389.4141600578282, -108.85296975886055));
+    points.append(VSAPoint(1360.549818901188, -161.20243176452524));
+    points.append(VSAPoint(1337.599051333226, -201.88618662356873));
+    points.append(VSAPoint(1337.599051333226, -201.88618662356873));
+    points.append(VSAPoint(1710.8221865392422, -337.95288188976184));
+
+    expect.clear();
+    expect.append(VSAPoint(1710.822186539242, -337.9528818897638));
+    expect.append(VSAPoint(2241.0236220472443, -337.9528818897638));
+    expect.append(VSAPoint(2241.0236220472443, -73.38595275590546));
+    expect.append(VSAPoint(1756.74661444881, -77.4022977175182));
+    expect.append(VSAPoint(1458.7808499813127, 33.04551440097044));
+    expect.append(VSAPoint(1452.5774742317267, 17.66797799862358));
+    expect.append(VSAPoint(1443.6033514625851, -2.685141373445197));
+    expect.append(VSAPoint(1432.9463842425444, -25.199242282717215));
+    expect.append(VSAPoint(1420.460146989685, -50.18887828170325));
+    expect.append(VSAPoint(1405.9982141220862, -77.96860292291412));
+    expect.append(VSAPoint(1389.4141600578282, -108.85296975886055));
+    expect.append(VSAPoint(1360.549818901188, -161.20243176452524));
+    expect.append(VSAPoint(1337.599051333226, -201.88618662356873));
+
+    // See the file "collection/bugs/Issue_#686.val"
+    QTest::newRow("Issue #686.") << points << expect << true;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -2828,7 +5095,6 @@ void TST_VAbstractPiece::TestCorrectEquidistantPoints_data()
     expect << QPointF(2431.567845112944, 650.353473841431);
     expect << QPointF(2430.8388882820395, 551.3113535235192);
     expect << QPointF(2521.6176598985803, 672.644700521423);
-    expect << QPointF(2521.6176454460388, 672.6446812044021);
     expect << QPointF(2524.825194988043, 676.8586168908913);
     expect << QPointF(2531.556290527688, 684.9826746886265);
     expect << QPointF(2538.6519462028364, 692.7334672321138);
@@ -2860,7 +5126,6 @@ void TST_VAbstractPiece::TestCorrectEquidistantPoints_data()
     expect << QPointF(2792.78632430596, 716.4869857232671);
     expect << QPointF(2795.193441837398, 714.0407970608542);
     expect << QPointF(2797.5205646867075, 711.5183868986292);
-    expect << QPointF(2797.55905511811, 711.5533198040212);
     expect << QPointF(2797.5653033070657, 778.3129219994751);
     expect << QPointF(2798.042165185835, 888.6599947271147);
     expect << QPointF(2799.2551263764, 959.1215703859448);
@@ -2897,129 +5162,541 @@ void TST_VAbstractPiece::PossibleInfiniteClearLoops_data() const
     QTest::addColumn<QVector<QPointF>>("expect");
 
     QVector<QPointF> path;
-    path << QPointF(-670.6449010946802, 4046.36220472441);
-    path << QPointF(-1025.9051277126944, 4046.36220472441);
-    path << QPointF(-1026.4460203880594, 4010.5247429150854);
-    path << QPointF(-1027.2972172274538, 3924.202328582098);
-    path << QPointF(-1028.1383921346433, 3768.5948526129496);
-    path << QPointF(-1028.5065585022217, 3521.575730066707);
-    path << QPointF(-1028.2712136539103, 3252.2436039362233);
-    path << QPointF(-1027.2910122410117, 2850.1024469719814);
-    path << QPointF(-1025.9446023682538, 2439.350819630564);
-    path << QPointF(-1025.8983315247287, 2338.629525677473);
-    path << QPointF(-1025.3536572186458, 2309.970015878699);
-    path << QPointF(-1024.2100836932389, 2281.714612342931);
-    path << QPointF(-1022.5102766116828, 2253.846781520112);
-    path << QPointF(-1020.2969016371525, 2226.349989860186);
-    path << QPointF(-1017.6126244328227, 2199.207703813094);
-    path << QPointF(-1014.5001106618688, 2172.403389828782);
-    path << QPointF(-1011.0020259874652, 2145.9205143571917);
-    path << QPointF(-1005.1601480132764, 2106.7277181407126);
-    path << QPointF(-996.3625412018714, 2055.4921956731814);
-    path << QPointF(-986.7906327138169, 2005.2448233555149);
-    path << QPointF(-976.785747854512, 1955.8533327872588);
-    path << QPointF(-961.6606968634906, 1883.0158867454916);
-    path << QPointF(-947.5864881030896, 1811.4914675744105);
-    path << QPointF(-939.2629508127773, 1764.2008199992524);
-    path << QPointF(-933.8852659113251, 1728.8707137815559);
-    path << QPointF(-930.742733377741, 1705.3464944792456);
-    path << QPointF(-928.0252775410311, 1681.829576238578);
-    path << QPointF(-925.7755640643697, 1658.3034255094963);
-    path << QPointF(-924.036258610932, 1634.7515087419433);
-    path << QPointF(-922.850026843893, 1611.1572923858625);
-    path << QPointF(-922.2595344264276, 1587.504242891197);
-    path << QPointF(-922.3074470217107, 1563.7758267078902);
-    path << QPointF(-922.613405031688, 1551.8740157480315);
-    path << QPointF(-960.4086806222392, 841.3228346456693);
-    path << QPointF(-954.9336313684444, 841.5464781141166);
-    path << QPointF(-944.0363771538431, 841.3102753632543);
-    path << QPointF(-933.2160856340209, 840.291423017261);
-    path << QPointF(-922.4878118569704, 838.5316299985567);
-    path << QPointF(-911.8666108706839, 836.0726052295611);
-    path << QPointF(-901.3675377231535, 832.9560576326933);
-    path << QPointF(-891.005647462372, 829.2236961303737);
-    path << QPointF(-880.7959951363317, 824.9172296450213);
-    path << QPointF(-870.7536357930251, 820.0783670990559);
-    path << QPointF(-860.893624480444, 814.7488174148973);
-    path << QPointF(-851.2310162465817, 808.9702895149649);
-    path << QPointF(-841.7808661394299, 802.7844923216785);
-    path << QPointF(-832.5582292069812, 796.2331347574575);
-    path << QPointF(-823.578160497228, 789.3579257447218);
-    path << QPointF(-810.5607800373014, 778.5565764202543);
-    path << QPointF(-794.2367125298769, 763.3635567727296);
-    path << QPointF(-779.1539087770976, 747.6258919346988);
-    path << QPointF(-765.4328091629026, 731.6772532855191);
-    path << QPointF(-753.193854071231, 715.8513122045474);
-    path << QPointF(-742.557483886022, 700.4817400711408);
-    path << QPointF(-733.644138991215, 685.9022082646563);
-    path << QPointF(-726.5742597707488, 672.446388164451);
-    path << QPointF(-721.4682866085625, 660.447951149882);
-    path << QPointF(-718.6229063234249, 651.1532303788147);
-    path << QPointF(-716.6036430255488, 642.9038041285014);
-    path << QPointF(-714.137568179324, 630.1235656609365);
-    path << QPointF(-711.8605525364693, 612.2344502588126);
-    path << QPointF(-710.4560555432737, 593.4222205889721);
-    path << QPointF(-709.4234847119759, 563.5940176156308);
-    path << QPointF(-708.952111561728, 520.4666582691573);
-    path << QPointF(-708.4401766852314, 497.3858267716535);
-    path << QPointF(-400.92922424489655, 469.03937007874015);
-    path << QPointF(-708.4401766852314, 440.6929133858268);
-    path << QPointF(-708.7078446526739, 341.66122584661264);
-    path << QPointF(-709.3427685457568, 299.60322373665383);
-    path << QPointF(-710.6909230403871, 257.048095841136);
-    path << QPointF(-713.0251717477311, 214.57984397612822);
-    path << QPointF(-715.632864794307, 183.1716335401434);
-    path << QPointF(-717.7953694429818, 162.55016633308693);
-    path << QPointF(-720.3578834261159, 142.27891915519677);
-    path << QPointF(-723.3545146951046, 122.43089223348173);
-    path << QPointF(-725.0465030138121, 112.71059563115871);
-    path << QPointF(-219.59055118110237, -35.52755905511811);
-    path << QPointF(-218.99352387527398, -33.21125072212394);
-    path << QPointF(-217.35724543521775, -28.699086141666157);
-    path << QPointF(-215.20035586903225, -24.33136255454731);
-    path << QPointF(-212.53403014110648, -20.10796717265881);
-    path << QPointF(-209.36944321582945, -16.02878720789205);
-    path << QPointF(-205.71777005759026, -12.093709872138447);
-    path << QPointF(-201.59018563077785, -8.302622377289406);
-    path << QPointF(-196.99786489978123, -4.65541193523633);
-    path << QPointF(-189.3170483291933, 0.5638303631539586);
-    path << QPointF(-177.47808861476295, 6.996342387787443);
-    path << QPointF(-163.981333042598, 12.855376387191757);
-    path << QPointF(-148.91618132781048, 18.141834666235646);
-    path << QPointF(-132.37203318551252, 22.856619529787864);
-    path << QPointF(-114.43828833081622, 27.00063328271716);
-    path << QPointF(-95.20434647883366, 30.574778229892296);
-    path << QPointF(-74.75960734467688, 33.57995667618201);
-    path << QPointF(-53.193470643458, 36.01707092645505);
-    path << QPointF(-30.595336090289106, 37.887023285580185);
-    path << QPointF(-7.0546034002822875, 39.19071605842615);
-    path << QPointF(17.339327711450373, 39.929051549861704);
-    path << QPointF(29.858267716535437, 40.06299212598426);
-    path << QPointF(-45.73228346456693, 1589.6692913385828);
-    path << QPointF(-45.73228346456693, 4046.36220472441);
-    path << QPointF(-297.70078740157487, 4046.36220472441);
-    path << QPointF(-297.70078740157487, 2118.8031496062995);
-    path << QPointF(-222.1102362204725, 1589.6692913385828);
-    path << QPointF(-297.70078740157487, 1060.535433070866);
-    path << QPointF(-373.2913385826772, 1589.6692913385828);
-    path << QPointF(-297.70078740157487, 2118.8031496062995);
-    path << QPointF(-297.70078740157487, 4046.36220472441);
-    path << QPointF(-670.6449010946802, 4046.36220472441);
-    path << QPointF(-670.6449010946802, 2024.3149606299214);
-    path << QPointF(-622.7555214134819, 1570.7716535433071);
-    path << QPointF(-670.6449010946802, 1117.2283464566929);
-    path << QPointF(-718.5342807758785, 1570.7716535433071);
-    path << QPointF(-670.6449010946802, 2024.3149606299214);
+    path << QPointF(-632.849625504129, 4084.1574803149606);
+    path << QPointF(-1063.1826742777307, 4084.157480314961);
+    path << QPointF(-1064.731669053407, 3971.857538662673);
+    path << QPointF(-1065.9335577016843, 3768.725259939178);
+    path << QPointF(-1066.3064907565738, 3389.730086730216);
+    path << QPointF(-1064.2157605861642, 2590.593584914368);
+    path << QPointF(-1063.7002274798474, 2353.011824334406);
+    path << QPointF(-1063.5730500368766, 2323.3511600791016);
+    path << QPointF(-1061.2277890821085, 2265.404475234159);
+    path << QPointF(-1056.6870752377622, 2208.99511667452);
+    path << QPointF(-1050.3195580618494, 2154.1593979456843);
+    path << QPointF(-1042.4881941434103, 2100.7853411906426);
+    path << QPointF(-1033.5464923745499, 2048.7106381836265);
+    path << QPointF(-1018.9140925348769, 1972.9298208633923);
+    path << QPointF(-998.7073870145719, 1875.5283486595902);
+    path << QPointF(-984.743852909139, 1804.5663725038373);
+    path << QPointF(-976.5700399899772, 1758.126392406043);
+    path << QPointF(-969.6857320440495, 1712.1364207718836);
+    path << QPointF(-964.4132563582218, 1666.50830864049);
+    path << QPointF(-961.0600449902615, 1621.1025089368645);
+    path << QPointF(-959.9236450523174, 1575.5823241167095);
+    path << QPointF(-960.3877919929658, 1553.2712054750111);
+    path << QPointF(-1000.3562458795624, 801.8642724069981);
+    path << QPointF(-954.5715133777537, 803.7344759255401);
+    path << QPointF(-946.442743379301, 803.5582812808202);
+    path << QPointF(-934.1053985018102, 802.2501117597377);
+    path << QPointF(-917.288618935481, 798.3566841198939);
+    path << QPointF(-900.5071817401116, 792.3119964649148);
+    path << QPointF(-883.7147885675736, 784.220662585902);
+    path << QPointF(-867.1260743218684, 774.3001167278098);
+    path << QPointF(-850.9648599763401, 762.8198974992881);
+    path << QPointF(-835.447350962678, 750.0867405201303);
+    path << QPointF(-820.7766612220335, 736.4325408317882);
+    path << QPointF(-807.1431378915719, 722.2070808806341);
+    path << QPointF(-794.7272455389146, 707.7755421404892);
+    path << QPointF(-783.7035642522673, 693.5210466193306);
+    path << QPointF(-774.2455412061727, 679.8541880091894);
+    path << QPointF(-766.5311200750891, 667.2357322468891);
+    path << QPointF(-760.7485749482415, 656.23004395692);
+    path << QPointF(-756.9262152588784, 647.247947787771);
+    path << QPointF(-755.9943940773794, 644.3431344612932);
+    path << QPointF(-754.3168933441153, 638.3087537000382);
+    path << QPointF(-751.4615751472361, 624.0253762908213);
+    path << QPointF(-749.4776362727711, 608.4387853126539);
+    path << QPointF(-748.2151911179384, 591.5292381129454);
+    path << QPointF(-746.9479910213331, 542.1593888936636);
+    path << QPointF(-745.6944329547541, 462.8644227516688);
+    path << QPointF(-746.1883646034397, 475.16878663047623);
+    path << QPointF(-746.2871460461391, 402.8988101963411);
+    path << QPointF(-746.6738371191002, 321.4553283654042);
+    path << QPointF(-748.4567648247277, 258.62151802315526);
+    path << QPointF(-750.7314894991164, 217.2362191509505);
+    path << QPointF(-754.2100293185232, 176.77268647996522);
+    path << QPointF(-759.1411805604763, 137.7638902918793);
+    path << QPointF(-767.9139385171914, 85.8954360711639);
+    path << QPointF(-193.4615393890781, -82.57772819388018);
+    path << QPointF(-182.84881484970134, -44.475315462966144);
+    path << QPointF(-181.7932001092176, -42.33768474083549);
+    path << QPointF(-179.7528132464526, -39.70760839675285);
+    path << QPointF(-175.73839974706917, -36.02046568979708);
+    path << QPointF(-169.4580785677048, -31.6599263589561);
+    path << QPointF(-160.89874469571305, -27.009347306192694);
+    path << QPointF(-150.1810493329971, -22.35672237054398);
+    path << QPointF(-137.46941549286484, -17.896128595814076);
+    path << QPointF(-122.93209920666818, -13.753254741366646);
+    path << QPointF(-106.85016673407813, -10.037145814867706);
+    path << QPointF(-79.81702769536884, -5.199728384059749);
+    path << QPointF(-38.971630241556646, -0.5839317964807336);
+    path << QPointF(6.260161746717735, 1.9210182870405856);
+    path << QPointF(69.51425695996898, 2.8396504979139623);
+    path << QPointF(-7.937007874015748, 1590.5905795945973);
+    path << QPointF(-7.937007874015748, 2353.1338582677163);
+    path << QPointF(-7.937007874015748, 4084.157480314961);
+    path << QPointF(-335.49606299212604, 4084.157480314961);
+    path << QPointF(-335.49606299212604, 2116.117122071213);
+    path << QPointF(-260.2892300303194, 1589.6692913385828);
+    path << QPointF(-297.70078740157464, 1327.7883897398);
+    path << QPointF(-335.11234477282926, 1589.6692913385828);
+    path << QPointF(-259.9055118110237, 2116.1171220712135);
+    path << QPointF(-259.9055118110237, 4084.1574803149606);
+    path << QPointF(-708.4401766852314, 4084.157480314961);
+    path << QPointF(-708.4401766852314, 2022.3251007369636);
+    path << QPointF(-660.76090517769, 1570.7716535433071);
+    path << QPointF(-670.6449010946802, 1477.1638385065562);
+    path << QPointF(-680.5288970116704, 1570.7716535433071);
+    path << QPointF(-632.849625504129, 2022.3251007369636);
+    path << QPointF(-632.849625504129, 4084.1574803149606);
 
     QVector<QPointF> expect;
-    expect << QPointF(-670.6449010946802, 4046.36220472441);
-    expect << QPointF(-670.6449010946802, 4046.36220472441);
-    expect << QPointF(-670.6449010946802, 2024.3149606299214);
-    expect << QPointF(-670.6449010946802, 2024.3149606299214);
-    expect << QPointF(-670.6449010946802, 2024.3149606299214);
+    expect << QPointF(-632.849625504129, 4084.1574803149606);
+    expect << QPointF(-708.4401766852314, 4084.1574803149606);
+    expect << QPointF(-708.4401766852314, 2022.3251007369636);
+    expect << QPointF(-670.6449010946802, 1664.3794685800578);
+    expect << QPointF(-632.849625504129, 2022.3251007369636);
+    expect << QPointF(-632.849625504129, 4084.1574803149606);
 
     // See the file "collection/bugs/possible_inf_loop.val"
     QTest::newRow("Possible infinite loop") << path << expect;
+
+    path.clear();
+    path << QPointF(-3289.176398074803, 40.766068311507865);
+    path << QPointF(-3279.1328092842814, 44.06682404485686);
+    path << QPointF(-3243.351504267316, 53.60167948872853);
+    path << QPointF(-3161.3876778623217, 73.60874477474869);
+    path << QPointF(-3008.115647695134, 110.74574486101676);
+    path << QPointF(-2873.894366307849, 145.10523784601025);
+    path << QPointF(-2781.1049285829295, 170.2972871433074);
+    path << QPointF(-2688.4201916276343, 197.16160944863682);
+    path << QPointF(-2598.5847429336654, 225.43041639032083);
+    path << QPointF(-2534.9681776342786, 247.42186866516417);
+    path << QPointF(-2494.760470256757, 262.35858401482426);
+    path << QPointF(-2456.8089154086483, 277.4957895645043);
+    path << QPointF(-2421.456586526415, 292.80001176774465);
+    path << QPointF(-2389.0465570465194, 308.2377770780854);
+    path << QPointF(-2359.921900405425, 323.77561194906696);
+    path << QPointF(-2343.699902721956, 333.52460494453004);
+    path << QPointF(-2334.425690039593, 339.3800428342297);
+    path << QPointF(-2312.900999385486, 355.0175961871137);
+    path << QPointF(-2299.713043139396, 366.746565883471);
+    path << QPointF(-2292.2509689428207, 374.5588029608982);
+    path << QPointF(-2285.9747534821863, 382.360491785372);
+    path << QPointF(-2280.9272809370514, 390.1474481635852);
+    path << QPointF(-2277.151435486974, 397.91548790223015);
+    path << QPointF(-2274.690101311511, 405.6604268079995);
+    path << QPointF(-2273.5861625902216, 413.37808068758574);
+    path << QPointF(-2273.882503502662, 421.06426534768144);
+    path << QPointF(-2274.6302053736044, 424.8926764304512);
+    path << QPointF(-2309.0574148331825, 416.983936602572);
+    path << QPointF(-2348.386009272143, 408.01259973815553);
+    path << QPointF(-2274.6302053736044, 424.8926764304512);
+    path << QPointF(-2309.0574148331825, 416.983936602572);
+    path << QPointF(-2433.4520429888726, 388.9054430736358);
+    path << QPointF(-2559.7817761868337, 362.0219130711671);
+    path << QPointF(-2653.193005658679, 343.24683221834414);
+    path << QPointF(-2751.5676350679787, 324.7189598281001);
+    path << QPointF(-2852.1850451511273, 307.35120581311685);
+    path << QPointF(-2952.3246166445188, 292.0564800860765);
+    path << QPointF(-3025.315374842363, 282.6097398689543);
+    path << QPointF(-3072.47620108711, 277.37300126453033);
+    path << QPointF(-3117.98721934864, 273.1680315579757);
+    path << QPointF(-3161.5083522190007, 270.1089444883756);
+    path << QPointF(-3202.6995222902424, 268.3098537948152);
+    path << QPointF(-3241.220652154415, 267.8848732163797);
+    path << QPointF(-3276.7316644035664, 268.94811649215455);
+    path << QPointF(-3308.8924816297463, 271.6136973612248);
+    path << QPointF(-3337.3630264250037, 275.9957295626757);
+    path << QPointF(-3355.9556969262208, 280.5372011460504);
+    path << QPointF(-3367.1044424307042, 284.1225373764538);
+    path << QPointF(-3377.139326285485, 288.2011754181878);
+    path << QPointF(-3386.017838814569, 292.7873794886382);
+    path << QPointF(-3393.697470341963, 297.8954138051904);
+    path << QPointF(-3400.135711191672, 303.53954258523015);
+    path << QPointF(-3405.2900516877025, 309.7340300461432);
+    path << QPointF(-3409.117982154061, 316.49314040531516);
+    path << QPointF(-3411.5769929147536, 323.8311378801317);
+    path << QPointF(-3412.624574293787, 331.7622866879784);
+    path << QPointF(-3412.5443282791143, 335.98035656218394);
+    path << QPointF(-3412.0938304049364, 344.2251941754913);
+    path << QPointF(-3410.765527360113, 357.87225607730386);
+    path << QPointF(-3408.9498259459265, 368.2785594139036);
+    path << QPointF(-3406.6749154805993, 375.6334124347902);
+    path << QPointF(-3403.9689852823512, 380.1261233894636);
+    path << QPointF(-3400.8602246694027, 381.9460005274235);
+    path << QPointF(-3397.376822959974, 381.28235209816967);
+    path << QPointF(-3393.546969472286, 378.3244863512019);
+    path << QPointF(-3387.2487536004646, 370.2277603925629);
+    path << QPointF(-3377.848607774182, 352.8184239863409);
+    path << QPointF(-3367.5700625628333, 329.63976680025917);
+    path << QPointF(-3356.6386325121834, 302.20625483031586);
+    path << QPointF(-3339.521778740742, 256.44961474613956);
+    path << QPointF(-3316.447784152815, 194.2270540550615);
+    path << QPointF(-3300.0812187711917, 154.2221830826118);
+    path << QPointF(-3289.9682851457983, 133.06332832546101);
+    path << QPointF(-3283.0129680216724, 121.51001513705947);
+    path << QPointF(-3278.693072922096, 115.97435552382811);
+    path << QPointF(-3274.675080363335, 112.49856833137764);
+    path << QPointF(-3270.987179663609, 111.27196180920784);
+    path << QPointF(-3269.2913385826773, 111.6668077543023);
+    path << QPointF(-2348.386009272143, 408.01259973815553);
+    path << QPointF(-2403.6231556871917, 395.59097294992216);
+    path << QPointF(-2433.4520429888726, 388.9054430736358);
+    path << QPointF(-2458.895984464084, 383.4393884984055);
+    path << QPointF(-2514.4918458536054, 371.5235994548911);
+    path << QPointF(-2559.7817761868337, 362.0219130711671);
+    path << QPointF(-2653.193005658679, 343.24683221834414);
+    path << QPointF(-2751.5676350679787, 324.7189598281001);
+    path << QPointF(-2852.1850451511273, 307.35120581311685);
+    path << QPointF(-2952.3246166445188, 292.0564800860765);
+    path << QPointF(-3025.315374842363, 282.6097398689543);
+    path << QPointF(-3072.47620108711, 277.37300126453033);
+    path << QPointF(-3117.98721934864, 273.1680315579757);
+    path << QPointF(-3161.5083522190007, 270.1089444883756);
+    path << QPointF(-3202.6995222902424, 268.3098537948152);
+    path << QPointF(-3241.220652154415, 267.8848732163797);
+    path << QPointF(-3276.7316644035664, 268.94811649215455);
+    path << QPointF(-3308.8924816297463, 271.6136973612248);
+    path << QPointF(-3337.3630264250037, 275.9957295626757);
+    path << QPointF(-3355.9556969262208, 280.5372011460504);
+    path << QPointF(-3367.1044424307042, 284.1225373764538);
+    path << QPointF(-3377.139326285485, 288.2011754181878);
+    path << QPointF(-3386.017838814569, 292.7873794886382);
+    path << QPointF(-3393.697470341963, 297.8954138051904);
+    path << QPointF(-3400.135711191672, 303.53954258523015);
+    path << QPointF(-3405.2900516877025, 309.7340300461432);
+    path << QPointF(-3409.117982154061, 316.49314040531516);
+    path << QPointF(-3411.5769929147536, 323.8311378801317);
+    path << QPointF(-3412.624574293787, 331.7622866879784);
+    path << QPointF(-3412.5443282791143, 335.98035656218394);
+    path << QPointF(-3412.0938304049364, 344.2251941754913);
+    path << QPointF(-3410.765527360113, 357.87225607730386);
+    path << QPointF(-3408.9498259459265, 368.2785594139036);
+    path << QPointF(-3406.6749154805993, 375.6334124347902);
+    path << QPointF(-3403.9689852823512, 380.1261233894636);
+    path << QPointF(-3400.8602246694027, 381.9460005274235);
+    path << QPointF(-3397.376822959974, 381.28235209816967);
+    path << QPointF(-3393.546969472286, 378.3244863512019);
+    path << QPointF(-3387.2487536004646, 370.2277603925629);
+    path << QPointF(-3377.848607774182, 352.8184239863409);
+    path << QPointF(-3367.5700625628333, 329.63976680025917);
+    path << QPointF(-3356.6386325121834, 302.20625483031586);
+    path << QPointF(-3339.521778740742, 256.44961474613956);
+    path << QPointF(-3316.447784152815, 194.2270540550615);
+    path << QPointF(-3300.0812187711917, 154.2221830826118);
+    path << QPointF(-3289.9682851457983, 133.06332832546101);
+    path << QPointF(-3283.0129680216724, 121.51001513705947);
+    path << QPointF(-3278.693072922096, 115.97435552382811);
+    path << QPointF(-3274.675080363335, 112.49856833137764);
+    path << QPointF(-3270.987179663609, 111.27196180920784);
+    path << QPointF(-3269.2913385826773, 111.6668077543023);
+    path << QPointF(0.0, 0.0);
+    path << QPointF(-2274.6302053736044, 424.8926764304512);
+    path << QPointF(-2309.0574148331825, 416.983936602572);
+    path << QPointF(-2433.4520429888726, 388.9054430736358);
+    path << QPointF(-2559.7817761868337, 362.0219130711671);
+    path << QPointF(-2653.193005658679, 343.24683221834414);
+    path << QPointF(-2751.5676350679787, 324.7189598281001);
+    path << QPointF(-2852.1850451511273, 307.35120581311685);
+    path << QPointF(-2952.3246166445188, 292.0564800860765);
+    path << QPointF(-3025.315374842363, 282.6097398689543);
+    path << QPointF(-3072.47620108711, 277.37300126453033);
+    path << QPointF(-3117.98721934864, 273.1680315579757);
+    path << QPointF(-3161.5083522190007, 270.1089444883756);
+    path << QPointF(-3202.6995222902424, 268.3098537948152);
+    path << QPointF(-3241.220652154415, 267.8848732163797);
+    path << QPointF(-3276.7316644035664, 268.94811649215455);
+    path << QPointF(-3308.8924816297463, 271.6136973612248);
+    path << QPointF(-3337.3630264250037, 275.9957295626757);
+    path << QPointF(-3355.9556969262208, 280.5372011460504);
+    path << QPointF(-3367.1044424307042, 284.1225373764538);
+    path << QPointF(-3377.139326285485, 288.2011754181878);
+    path << QPointF(-3386.017838814569, 292.7873794886382);
+    path << QPointF(-3393.697470341963, 297.8954138051904);
+    path << QPointF(-3400.135711191672, 303.53954258523015);
+    path << QPointF(-3405.2900516877025, 309.7340300461432);
+    path << QPointF(-3409.117982154061, 316.49314040531516);
+    path << QPointF(-3411.5769929147536, 323.8311378801317);
+    path << QPointF(-3412.624574293787, 331.7622866879784);
+    path << QPointF(-3412.5443282791143, 335.98035656218394);
+    path << QPointF(-3412.0938304049364, 344.2251941754913);
+    path << QPointF(-3410.765527360113, 357.87225607730386);
+    path << QPointF(-3408.9498259459265, 368.2785594139036);
+    path << QPointF(-3406.6749154805993, 375.6334124347902);
+    path << QPointF(-3403.9689852823512, 380.1261233894636);
+    path << QPointF(-3400.8602246694027, 381.9460005274235);
+    path << QPointF(-3397.376822959974, 381.28235209816967);
+    path << QPointF(-3393.546969472286, 378.3244863512019);
+    path << QPointF(-3387.2487536004646, 370.2277603925629);
+    path << QPointF(-3377.848607774182, 352.8184239863409);
+    path << QPointF(-3367.5700625628333, 329.63976680025917);
+    path << QPointF(-3356.6386325121834, 302.20625483031586);
+    path << QPointF(-3339.521778740742, 256.44961474613956);
+    path << QPointF(-3316.447784152815, 194.2270540550615);
+    path << QPointF(-3300.7674537894027, 155.9181480771437);
+    path << QPointF(-3300.0812187711917, 154.2221830826118);
+    path << QPointF(-3289.9682851457983, 133.06332832546101);
+    path << QPointF(-3283.0129680216724, 121.51001513705947);
+    path << QPointF(-3278.693072922096, 115.97435552382811);
+    path << QPointF(-3274.675080363335, 112.49856833137764);
+    path << QPointF(-3270.987179663609, 111.27196180920784);
+    path << QPointF(-3269.2913385826773, 111.6668077543023);
+    path << QPointF(-3311.8508415297547, 110.88125437102264);
+    path << QPointF(-3685.6514075461932, 107.5655498368449);
+    path << QPointF(-4814.263342905703, 99.20635184924856);
+    path << QPointF(-7383.401022460118, 81.87816887323245);
+    path << QPointF(-10941.483518468456, 59.05418050192678);
+    path << QPointF(-15308.1805254157, 32.04268850318564);
+    path << QPointF(-20303.161737786842, 2.15199464486304);
+    path << QPointF(-25746.09685006686, -29.30959930518696);
+    path << QPointF(-31456.65555674075, -61.033791579110314);
+    path << QPointF(-37254.50755229348, -91.71228040905298);
+    path << QPointF(-42959.322531210055, -120.03676402716093);
+    path << QPointF(-47055.629053465884, -138.8031751224513);
+    path << QPointF(-49669.199119026714, -149.97338011526602);
+    path << QPointF(-52158.074133576316, -159.81916406070422);
+    path << QPointF(-54499.712808925295, -168.17698923778406);
+    path << QPointF(-56671.57385688429, -174.8833179255238);
+    path << QPointF(-58651.11598926391, -179.77461240294173);
+    path << QPointF(-60415.79791787479, -182.68733494905598);
+    path << QPointF(-61943.07835452756, -183.45794784288492);
+    path << QPointF(-62910.53243592165, -182.4558854979162);
+    path << QPointF(-63474.98907760189, -181.08129309219626);
+    path << QPointF(-63967.41587168608, -179.07918330535267);
+    path << QPointF(-64384.99515715055, -176.4291139222629);
+    path << QPointF(-64724.90927297162, -173.11064272780402);
+    path << QPointF(-64984.340558125616, -169.10332750685347);
+    path << QPointF(-65121.73298586071, -165.61084561925315);
+    path << QPointF(-65188.44494822773, -163.07139041223155);
+    path << QPointF(-65233.45126860215, -160.34822545258044);
+    path << QPointF(-65252.05224375721, -158.17787437745008);
+    path << QPointF(-65257.945977798765, -156.67611401106774);
+    path << QPointF(-65258.55112619724, -155.90551181102362);
+    path << QPointF(0.0, 0.0);
+    path << QPointF(-3278.855552452029, 0.0);
+    path << QPointF(-3297.926352438392, 0.0667852955320001);
+    path << QPointF(-3333.3540289999983, 0.8343743582029102);
+    path << QPointF(-3365.6017560461587, 2.3018835161185054);
+    path << QPointF(-3394.7548208856488, 4.401643801852556);
+    path << QPointF(-3420.8985108272445, 7.065986247978833);
+    path << QPointF(-3444.1181131797193, 10.227241887071106);
+    path << QPointF(-3464.4989152518488, 13.817741751703146);
+    path << QPointF(-3482.1262043524084, 17.769816874448722);
+    path << QPointF(-3497.0852677901735, 22.0157982878816);
+    path << QPointF(-3509.461392873918, 26.48801702457557);
+    path << QPointF(-3519.3398669124185, 31.118804117104382);
+    path << QPointF(-3526.805977214449, 35.84049059804182);
+    path << QPointF(-3531.9450110887838, 40.58540749996163);
+    path << QPointF(-3534.8422558442003, 45.28588585543761);
+    path << QPointF(-3535.582998789472, 49.87425669704352);
+    path << QPointF(-3534.252527233375, 54.28285105735314);
+    path << QPointF(-3530.9361284846827, 58.44399996894022);
+    path << QPointF(-3525.7190898521712, 62.29003446437855);
+    path << QPointF(-3518.6866986446166, 65.75328557624188);
+    path << QPointF(-3509.9242421707922, 68.76608433710399);
+    path << QPointF(-3499.517007739474, 71.26076177953868);
+    path << QPointF(-3487.5502826594366, 73.16964893611967);
+    path << QPointF(-3474.109354239456, 74.42507683942075);
+    path << QPointF(-3459.2795097883068, 74.9593765220157);
+    path << QPointF(-3443.1460366147635, 74.70487901647832);
+    path << QPointF(-3425.794222027602, 73.59391535538228);
+    path << QPointF(-3407.309353335596, 71.55881657130146);
+    path << QPointF(-3387.7767178475224, 68.53191369680957);
+    path << QPointF(-3367.281602872156, 64.4455377644804);
+    path << QPointF(-3345.909295718271, 59.23201980688771);
+    path << QPointF(-3323.7450836946427, 52.82369085660529);
+    path << QPointF(-3300.8742541100464, 45.15288194620689);
+    path << QPointF(-3289.176398074803, 40.766068311507865);
+    path << QPointF(-2433.84144243598, 1.1920928955078125e-07);
+    path << QPointF(-3278.855552452029, 0.0);
+    path << QPointF(-3297.926352438392, 0.0667852955320001);
+    path << QPointF(-3333.3540289999983, 0.8343743582029102);
+    path << QPointF(-3365.6017560461587, 2.3018835161185054);
+    path << QPointF(-3394.7548208856488, 4.401643801852556);
+    path << QPointF(-3420.8985108272445, 7.065986247978833);
+    path << QPointF(-3444.1181131797193, 10.227241887071106);
+    path << QPointF(-3464.4989152518488, 13.817741751703146);
+    path << QPointF(-3482.1262043524084, 17.769816874448722);
+    path << QPointF(-3497.0852677901735, 22.0157982878816);
+    path << QPointF(-3509.461392873918, 26.48801702457557);
+    path << QPointF(-3519.3398669124185, 31.118804117104382);
+    path << QPointF(-3526.805977214449, 35.84049059804182);
+    path << QPointF(-3531.9450110887838, 40.58540749996163);
+    path << QPointF(-3534.8422558442003, 45.28588585543761);
+    path << QPointF(-3535.582998789472, 49.87425669704352);
+    path << QPointF(-3534.252527233375, 54.28285105735314);
+    path << QPointF(-3530.9361284846827, 58.44399996894022);
+    path << QPointF(-3525.7190898521712, 62.29003446437855);
+    path << QPointF(-3518.6866986446166, 65.75328557624188);
+    path << QPointF(-3509.9242421707922, 68.76608433710399);
+    path << QPointF(-3499.517007739474, 71.26076177953868);
+    path << QPointF(-3487.5502826594366, 73.16964893611967);
+    path << QPointF(-3474.109354239456, 74.42507683942075);
+    path << QPointF(-3459.2795097883068, 74.9593765220157);
+    path << QPointF(-3443.1460366147635, 74.70487901647832);
+    path << QPointF(-3425.794222027602, 73.59391535538228);
+    path << QPointF(-3407.309353335596, 71.55881657130146);
+    path << QPointF(-3387.7767178475224, 68.53191369680957);
+    path << QPointF(-3367.281602872156, 64.4455377644804);
+    path << QPointF(-3345.909295718271, 59.23201980688771);
+    path << QPointF(-3323.7450836946427, 52.82369085660529);
+    path << QPointF(-3300.8742541100464, 45.15288194620689);
+    path << QPointF(-3289.176398074803, 40.766068311507865);
+    path << QPointF(-2375.6588995456696, -1.1920928955078125e-07);
+    path << QPointF(-3278.855552452029, 0.0);
+    path << QPointF(-3297.926352438392, 0.0667852955320001);
+    path << QPointF(-3333.3540289999983, 0.8343743582029102);
+    path << QPointF(-3365.6017560461587, 2.3018835161185054);
+    path << QPointF(-3394.7548208856488, 4.401643801852556);
+    path << QPointF(-3420.8985108272445, 7.065986247978833);
+    path << QPointF(-3444.1181131797193, 10.227241887071106);
+    path << QPointF(-3464.4989152518488, 13.817741751703146);
+    path << QPointF(-3482.1262043524084, 17.769816874448722);
+    path << QPointF(-3497.0852677901735, 22.0157982878816);
+    path << QPointF(-3509.461392873918, 26.48801702457557);
+    path << QPointF(-3519.3398669124185, 31.118804117104382);
+    path << QPointF(-3526.805977214449, 35.84049059804182);
+    path << QPointF(-3531.9450110887838, 40.58540749996163);
+    path << QPointF(-3534.8422558442003, 45.28588585543761);
+    path << QPointF(-3535.582998789472, 49.87425669704352);
+    path << QPointF(-3534.252527233375, 54.28285105735314);
+    path << QPointF(-3530.9361284846827, 58.44399996894022);
+    path << QPointF(-3525.7190898521712, 62.29003446437855);
+    path << QPointF(-3518.6866986446166, 65.75328557624188);
+    path << QPointF(-3509.9242421707922, 68.76608433710399);
+    path << QPointF(-3499.517007739474, 71.26076177953868);
+    path << QPointF(-3487.5502826594366, 73.16964893611967);
+    path << QPointF(-3474.109354239456, 74.42507683942075);
+    path << QPointF(-3459.2795097883068, 74.9593765220157);
+    path << QPointF(-3443.1460366147635, 74.70487901647832);
+    path << QPointF(-3425.794222027602, 73.59391535538228);
+    path << QPointF(-3407.309353335596, 71.55881657130146);
+    path << QPointF(-3387.7767178475224, 68.53191369680957);
+    path << QPointF(-3367.281602872156, 64.4455377644804);
+    path << QPointF(-3345.909295718271, 59.23201980688771);
+    path << QPointF(-3323.7450836946427, 52.82369085660529);
+    path << QPointF(-3300.8742541100464, 45.15288194620689);
+    path << QPointF(-3289.176398074803, 40.766068311507865);
+    path << QPointF(-2317.7482029497623, 1.1920928955078125e-07);
+    path << QPointF(-3159.9587076218127, -3.0211712963817957e-16);
+    path << QPointF(-3278.855552452029, 0.0);
+    path << QPointF(-3297.926352438392, 0.0667852955320001);
+    path << QPointF(-3333.3540289999983, 0.8343743582029102);
+    path << QPointF(-3365.6017560461587, 2.3018835161185054);
+    path << QPointF(-3394.7548208856488, 4.401643801852556);
+    path << QPointF(-3420.8985108272445, 7.065986247978833);
+    path << QPointF(-3444.1181131797193, 10.227241887071106);
+    path << QPointF(-3464.4989152518488, 13.817741751703146);
+    path << QPointF(-3482.1262043524084, 17.769816874448722);
+    path << QPointF(-3497.0852677901735, 22.0157982878816);
+    path << QPointF(-3509.461392873918, 26.48801702457557);
+    path << QPointF(-3519.3398669124185, 31.118804117104382);
+    path << QPointF(-3526.805977214449, 35.84049059804182);
+    path << QPointF(-3531.9450110887838, 40.58540749996163);
+    path << QPointF(-3534.8422558442003, 45.28588585543761);
+    path << QPointF(-3535.582998789472, 49.87425669704352);
+    path << QPointF(-3534.252527233375, 54.28285105735314);
+    path << QPointF(-3530.9361284846827, 58.44399996894022);
+    path << QPointF(-3525.7190898521712, 62.29003446437855);
+    path << QPointF(-3518.6866986446166, 65.75328557624188);
+    path << QPointF(-3509.9242421707922, 68.76608433710399);
+    path << QPointF(-3499.517007739474, 71.26076177953868);
+    path << QPointF(-3487.5502826594366, 73.16964893611967);
+    path << QPointF(-3474.109354239456, 74.42507683942075);
+    path << QPointF(-3459.2795097883068, 74.9593765220157);
+    path << QPointF(-3443.1460366147635, 74.70487901647832);
+    path << QPointF(-3425.794222027602, 73.59391535538228);
+    path << QPointF(-3407.309353335596, 71.55881657130146);
+    path << QPointF(-3387.7767178475224, 68.53191369680957);
+    path << QPointF(-3367.281602872156, 64.4455377644804);
+    path << QPointF(-3345.909295718271, 59.23201980688771);
+    path << QPointF(-3323.7450836946427, 52.82369085660529);
+    path << QPointF(-3300.8742541100464, 45.15288194620689);
+
+    expect.clear();
+    expect << QPointF(-3289.176398074803, 40.766068311507865);
+    expect << QPointF(-3279.1328092842814, 44.06682404485686);
+    expect << QPointF(-3243.351504267316, 53.60167948872853);
+    expect << QPointF(-3161.3876778623217, 73.60874477474869);
+    expect << QPointF(-3037.0528777920667, 103.7344074667516);
+    expect << QPointF(0.0, 0.0);
+    expect << QPointF(-2274.6302053736044, 424.8926764304512);
+    expect << QPointF(-2309.0574148331825, 416.983936602572);
+    expect << QPointF(-2433.4520429888726, 388.9054430736358);
+    expect << QPointF(-2559.7817761868337, 362.0219130711671);
+    expect << QPointF(-2653.193005658679, 343.24683221834414);
+    expect << QPointF(-2751.5676350679787, 324.7189598281001);
+    expect << QPointF(-2852.1850451511273, 307.35120581311685);
+    expect << QPointF(-2952.3246166445188, 292.0564800860765);
+    expect << QPointF(-3025.315374842363, 282.6097398689543);
+    expect << QPointF(-3072.47620108711, 277.37300126453033);
+    expect << QPointF(-3117.98721934864, 273.1680315579757);
+    expect << QPointF(-3161.5083522190007, 270.1089444883756);
+    expect << QPointF(-3202.6995222902424, 268.3098537948152);
+    expect << QPointF(-3241.220652154415, 267.8848732163797);
+    expect << QPointF(-3276.7316644035664, 268.94811649215455);
+    expect << QPointF(-3308.8924816297463, 271.6136973612248);
+    expect << QPointF(-3337.3630264250037, 275.9957295626757);
+    expect << QPointF(-3347.7860794585613, 278.5416790087658);
+    expect << QPointF(-3339.521778740742, 256.44961474613956);
+    expect << QPointF(-3316.447784152815, 194.2270540550615);
+    expect << QPointF(-3300.7674537894027, 155.9181480771437);
+    expect << QPointF(-3300.0812187711917, 154.2221830826118);
+    expect << QPointF(-3289.9682851457983, 133.06332832546101);
+    expect << QPointF(-3283.0129680216724, 121.51001513705947);
+    expect << QPointF(-3278.693072922096, 115.97435552382811);
+    expect << QPointF(-3274.675080363335, 112.49856833137764);
+    expect << QPointF(-3272.0227399663845, 111.61639218434759);
+    expect << QPointF(-3311.8508415297547, 110.88125437102264);
+    expect << QPointF(-3685.6514075461932, 107.5655498368449);
+    expect << QPointF(-4814.263342905703, 99.20635184924856);
+    expect << QPointF(-7383.401022460118, 81.87816887323245);
+    expect << QPointF(-10941.483518468456, 59.05418050192678);
+    expect << QPointF(-15308.1805254157, 32.04268850318564);
+    expect << QPointF(-20303.161737786842, 2.15199464486304);
+    expect << QPointF(-25746.09685006686, -29.30959930518696);
+    expect << QPointF(-31456.65555674075, -61.033791579110314);
+    expect << QPointF(-36320.89133149458, -86.77218624604188);
+    expect << QPointF(0.0, 0.0);
+    expect << QPointF(-3159.958705487363, 0.0);
+    expect << QPointF(-3159.9587076218127, -3.0211712963817957e-16);
+    expect << QPointF(-3278.855552452029, 0.0);
+    expect << QPointF(-3297.926352438392, 0.0667852955320001);
+    expect << QPointF(-3333.3540289999983, 0.8343743582029102);
+    expect << QPointF(-3365.6017560461587, 2.3018835161185054);
+    expect << QPointF(-3394.7548208856488, 4.401643801852556);
+    expect << QPointF(-3420.8985108272445, 7.065986247978833);
+    expect << QPointF(-3444.1181131797193, 10.227241887071106);
+    expect << QPointF(-3464.4989152518488, 13.817741751703146);
+    expect << QPointF(-3482.1262043524084, 17.769816874448722);
+    expect << QPointF(-3497.0852677901735, 22.0157982878816);
+    expect << QPointF(-3509.461392873918, 26.48801702457557);
+    expect << QPointF(-3519.3398669124185, 31.118804117104382);
+    expect << QPointF(-3526.805977214449, 35.84049059804182);
+    expect << QPointF(-3531.9450110887838, 40.58540749996163);
+    expect << QPointF(-3534.8422558442003, 45.28588585543761);
+    expect << QPointF(-3535.582998789472, 49.87425669704352);
+    expect << QPointF(-3534.252527233375, 54.28285105735314);
+    expect << QPointF(-3530.9361284846827, 58.44399996894022);
+    expect << QPointF(-3525.7190898521712, 62.29003446437855);
+    expect << QPointF(-3518.6866986446166, 65.75328557624188);
+    expect << QPointF(-3509.9242421707922, 68.76608433710399);
+    expect << QPointF(-3499.517007739474, 71.26076177953868);
+    expect << QPointF(-3487.5502826594366, 73.16964893611967);
+    expect << QPointF(-3474.109354239456, 74.42507683942075);
+    expect << QPointF(-3459.2795097883068, 74.9593765220157);
+    expect << QPointF(-3443.1460366147635, 74.70487901647832);
+    expect << QPointF(-3425.794222027602, 73.59391535538228);
+    expect << QPointF(-3407.309353335596, 71.55881657130146);
+    expect << QPointF(-3387.7767178475224, 68.53191369680957);
+    expect << QPointF(-3367.281602872156, 64.4455377644804);
+    expect << QPointF(-3345.909295718271, 59.23201980688771);
+    expect << QPointF(-3323.7450836946427, 52.82369085660529);
+    expect << QPointF(-3300.8742541100464, 45.15288194620689);
+
+    // See the file "collection/bugs/Issue_#861.val from private collection"
+    QTest::newRow("Check if hangs") << path << expect;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -3065,71 +5742,33 @@ QVector<VSAPoint> TST_VAbstractPiece::InputPointsIssue298Case1() const
 {
     QVector<VSAPoint> points;
 
-    points += VSAPoint(35, 39.9999);
-    points += VSAPoint(412.953, 39.9999);
-    points += VSAPoint(417.135, 417.929);
-    points += VSAPoint(417.135, 417.929);
-    points += VSAPoint(408.797, 405.589);
-    points += VSAPoint(390.909, 377.669);
-    points += VSAPoint(362.315, 330.86);
-    points += VSAPoint(323.075, 264.247);
-    points += VSAPoint(286.15, 201.448);
-    points += VSAPoint(262.477, 162.745);
-    points += VSAPoint(249.22, 142.455);
-    points += VSAPoint(241.092, 131.261);
-    points += VSAPoint(236.545, 125.75);
-    points += VSAPoint(232.808, 122.058);
-    points += VSAPoint(230.6, 120.629);
-    points += VSAPoint(229.393, 120.277);
-    points += VSAPoint(228.421, 120.456);
-    points += VSAPoint(227.69, 121.185);
-    points += VSAPoint(227.033, 123.272);
-    points += VSAPoint(227.112, 128.232);
-    points += VSAPoint(228.29, 135.699);
-    points += VSAPoint(230.625, 145.81);
-    points += VSAPoint(234.173, 158.703);
-    points += VSAPoint(241.73, 183.168);
-    points += VSAPoint(248.796, 204.144);
-    points += VSAPoint(248.796, 204.144);
-    points += VSAPoint(251.528, 212.406);
-    points += VSAPoint(255.482, 227.075);
-    points += VSAPoint(257.717, 239.591);
-    points += VSAPoint(258.279, 247.554);
-    points += VSAPoint(258.203, 252.278);
-    points += VSAPoint(257.756, 256.51);
-    points += VSAPoint(256.949, 260.264);
-    points += VSAPoint(255.795, 263.547);
-    points += VSAPoint(254.308, 266.372);
-    points += VSAPoint(252.501, 268.749);
-    points += VSAPoint(250.385, 270.688);
-    points += VSAPoint(247.974, 272.201);
-    points += VSAPoint(245.281, 273.296);
-    points += VSAPoint(242.319, 273.986);
-    points += VSAPoint(239.1, 274.28);
-    points += VSAPoint(233.846, 274.05);
-    points += VSAPoint(226.022, 272.393);
-    points += VSAPoint(217.402, 269.345);
-    points += VSAPoint(208.09, 264.991);
-    points += VSAPoint(198.186, 259.414);
-    points += VSAPoint(187.795, 252.7);
-    points += VSAPoint(177.019, 244.933);
-    points += VSAPoint(165.96, 236.197);
-    points += VSAPoint(154.721, 226.576);
-    points += VSAPoint(143.405, 216.157);
-    points += VSAPoint(132.113, 205.022);
-    points += VSAPoint(120.95, 193.257);
-    points += VSAPoint(110.017, 180.946);
-    points += VSAPoint(99.4167, 168.174);
-    points += VSAPoint(89.2522, 155.024);
-    points += VSAPoint(79.626, 141.582);
-    points += VSAPoint(70.6405, 127.933);
-    points += VSAPoint(62.3985, 114.16);
-    points += VSAPoint(55.0025, 100.348);
-    points += VSAPoint(48.5551, 86.5823);
-    points += VSAPoint(43.159, 72.9466);
-    points += VSAPoint(38.9167, 59.5258);
-    points += VSAPoint(35.9309, 46.4042);
-    points += VSAPoint(35, 39.9999);
+    points += VSAPoint(1168.8582803149607, 39.999874015748034);
+    points += VSAPoint(1168.8582803149607, 39.999874015748034);
+    points += VSAPoint(1158.4080212626877, 52.34979612030506);
+    points += VSAPoint(1138.6467679457483, 77.34433043475516);
+    points += VSAPoint(1120.211621843451, 102.68135735665871);
+    points += VSAPoint(1103.0570156997037, 128.3485040871826);
+    points += VSAPoint(1087.1373822584126, 154.33339782749366);
+    points += VSAPoint(1072.4071542634842, 180.62366577875878);
+    points += VSAPoint(1058.8207644588258, 207.20693514214486);
+    points += VSAPoint(1046.3326455883434, 234.07083311881877);
+    points += VSAPoint(1034.8972303959442, 261.2029869099473);
+    points += VSAPoint(1024.4689516255348, 288.5910237166974);
+    points += VSAPoint(1015.0022420210217, 316.22257074023594);
+    points += VSAPoint(1006.451534326312, 344.08525518172974);
+    points += VSAPoint(998.7712612853122, 372.16670424234576);
+    points += VSAPoint(991.9158556419289, 400.4545451232507);
+    points += VSAPoint(982.9908265175081, 443.2242931323019);
+    points += VSAPoint(973.6824125433218, 500.88985222984854);
+    points += VSAPoint(966.8532575499223, 559.1582682295549);
+    points += VSAPoint(962.1388234885637, 617.9305587407562);
+    points += VSAPoint(959.1745723104998, 677.107741372787);
+    points += VSAPoint(957.5959659669836, 736.5908337349825);
+    points += VSAPoint(957.0384664092692, 796.2808534366778);
+    points += VSAPoint(957.3056451064515, 885.992413850848);
+    points += VSAPoint(957.688768266514, 942.023249737111);
+    points += VSAPoint(957.688768266514, 942.023249737111);
+    points += VSAPoint(496.34439043247056, 491.011561876428);
 
     return points;
 }
@@ -3138,41 +5777,35 @@ QVector<VSAPoint> TST_VAbstractPiece::InputPointsIssue298Case1() const
 QVector<QPointF> TST_VAbstractPiece::OutputPointsIssue298Case1() const
 {
     QVector<QPointF> points;
-    points += QPointF(-52.3724798442221, -35.5907);
-    points += QPointF(487.7117748779425, -35.5907);
-    points += QPointF(493.3432017362585, 473.32371517914754);
-    points += QPointF(385.98559977345093, 506.8445742667132);
-    points += QPointF(345.64704646524604, 447.1446764706891);
-    points += QPointF(326.82411403464874, 417.76541252489994);
-    points += QPointF(297.4844355409708, 369.73572061014266);
-    points += QPointF(280.35686644039447, 340.63425704493835);
-    points += QPointF(268.2336759982877, 345.56366422433183);
-    points += QPointF(254.38869069377708, 348.78886336684104);
-    points += QPointF(240.8928242225697, 350.0214774527481);
-    points += QPointF(224.29748398011193, 349.2949970081793);
-    points += QPointF(205.50330859478322, 345.31468660256957);
-    points += QPointF(188.72568121178054, 339.38217984347546);
-    points += QPointF(173.487571907339, 332.2573164509149);
-    points += QPointF(159.09346043909582, 324.15190856941325);
-    points += QPointF(145.1562378134811, 315.1465661857729);
-    points += QPointF(131.46917217609203, 305.28136213922494);
-    points += QPointF(117.9345600633141, 294.589765121662);
-    points += QPointF(104.5254725457231, 283.11108988305153);
-    points += QPointF(91.25156649455745, 270.88938370179534);
-    points += QPointF(78.14294517511125, 257.9630200468154);
-    points += QPointF(65.25722328495372, 244.3823949426573);
-    points += QPointF(52.65759889494496, 230.19470850111355);
-    points += QPointF(40.412239584772514, 215.4406233233806);
-    points += QPointF(28.600027181043494, 200.15894757848054);
-    points += QPointF(17.304913602921047, 184.38648111018338);
-    points += QPointF(6.6105681133211736, 168.14173996194046);
-    points += QPointF(-3.3897319816688407, 151.43048866270516);
-    points += QPointF(-12.592267484961765, 134.24479093805914);
-    points += QPointF(-20.880547263016442, 116.54866956498358);
-    points += QPointF(-28.111192294561146, 98.27715746242171);
-    points += QPointF(-34.098213657706594, 79.33681465062016);
-    points += QPointF(-38.441724866417594, 60.24852451858777);
-    points += QPointF(-52.3724798442221, -35.5907);
+
+    points += QPointF(1181.3702112033552, -59.406362870594705);
+    points += QPointF(1269.0394640469171, 38.62919078337234);
+    points += QPointF(1216.9245192058738, 100.21766491121537);
+    points += QPointF(1198.8808131327262, 123.03980191699638);
+    points += QPointF(1182.221067861894, 145.9367408453258);
+    points += QPointF(1166.7329413673538, 169.11045943642068);
+    points += QPointF(1152.3625684065119, 192.56656574522466);
+    points += QPointF(1139.0585460343918, 216.3113654260635);
+    points += QPointF(1126.7720261028358, 240.35129609014484);
+    points += QPointF(1115.456677001793, 264.6923827640837);
+    points += QPointF(1105.0685270464996, 289.3397503891491);
+    points += QPointF(1095.5657115675733, 314.29722092044074);
+    points += QPointF(1086.9081516638566, 339.5670119653025);
+    points += QPointF(1079.05719443133, 365.14954287895875);
+    points += QPointF(1071.975242726908, 391.04334443729294);
+    points += QPointF(1065.6650892202777, 417.08128115689766);
+    points += QPointF(1057.3401968224273, 456.97510616238503);
+    points += QPointF(1048.5682451589698, 511.3172850182788);
+    points += QPointF(1042.0910863010336, 566.5823635228949);
+    points += QPointF(1037.5780007657413, 622.8445512489122);
+    points += QPointF(1034.7149371280923, 680.0016643255938);
+    points += QPointF(1033.1771512850767, 737.9466090605974);
+    points += QPointF(1032.63006888955, 796.5212904492478);
+    points += QPointF(1032.8954266362925, 885.6214237282716);
+    points += QPointF(1033.62206579804, 991.8906443458876);
+    points += QPointF(940.8759712878797, 1031.2978406173477);
+    points += QPointF(376.98902117953776, 480.04021757016505);
+    points += QPointF(1181.3702112033552, -59.406362870594705);
 
     return points;
 }
@@ -3182,71 +5815,36 @@ QVector<VSAPoint> TST_VAbstractPiece::InputPointsIssue298Case2() const
 {
     QVector<VSAPoint> points;
 
-    points += VSAPoint(35, 39.9999);
-    points += VSAPoint(35, 39.9999);
-    points += VSAPoint(35.9309, 46.4042);
-    points += VSAPoint(38.9167, 59.5258);
-    points += VSAPoint(43.159, 72.9466);
-    points += VSAPoint(48.5551, 86.5823);
-    points += VSAPoint(55.0025, 100.348);
-    points += VSAPoint(62.3985, 114.16);
-    points += VSAPoint(70.6405, 127.933);
-    points += VSAPoint(79.626, 141.582);
-    points += VSAPoint(89.2522, 155.024);
-    points += VSAPoint(99.4167, 168.174);
-    points += VSAPoint(110.017, 180.946);
-    points += VSAPoint(120.95, 193.257);
-    points += VSAPoint(132.113, 205.022);
-    points += VSAPoint(143.405, 216.157);
-    points += VSAPoint(154.721, 226.576);
-    points += VSAPoint(165.96, 236.197);
-    points += VSAPoint(177.019, 244.933);
-    points += VSAPoint(187.795, 252.7);
-    points += VSAPoint(198.186, 259.414);
-    points += VSAPoint(208.09, 264.991);
-    points += VSAPoint(217.402, 269.345);
-    points += VSAPoint(226.022, 272.393);
-    points += VSAPoint(233.846, 274.05);
-    points += VSAPoint(239.1, 274.28);
-    points += VSAPoint(242.319, 273.986);
-    points += VSAPoint(245.281, 273.296);
-    points += VSAPoint(247.974, 272.201);
-    points += VSAPoint(250.385, 270.688);
-    points += VSAPoint(252.501, 268.749);
-    points += VSAPoint(254.308, 266.372);
-    points += VSAPoint(255.795, 263.547);
-    points += VSAPoint(256.949, 260.264);
-    points += VSAPoint(257.756, 256.51);
-    points += VSAPoint(258.203, 252.278);
-    points += VSAPoint(258.279, 247.554);
-    points += VSAPoint(257.717, 239.591);
-    points += VSAPoint(255.482, 227.075);
-    points += VSAPoint(251.528, 212.406);
-    points += VSAPoint(248.796, 204.144);
-    points += VSAPoint(248.796, 204.144);
-    points += VSAPoint(241.73, 183.168);
-    points += VSAPoint(234.173, 158.703);
-    points += VSAPoint(230.625, 145.81);
-    points += VSAPoint(228.29, 135.699);
-    points += VSAPoint(227.112, 128.232);
-    points += VSAPoint(227.033, 123.272);
-    points += VSAPoint(227.69, 121.185);
-    points += VSAPoint(228.421, 120.456);
-    points += VSAPoint(229.393, 120.277);
-    points += VSAPoint(230.6, 120.629);
-    points += VSAPoint(232.808, 122.058);
-    points += VSAPoint(236.545, 125.75);
-    points += VSAPoint(241.092, 131.261);
-    points += VSAPoint(249.22, 142.455);
-    points += VSAPoint(262.477, 162.745);
-    points += VSAPoint(286.15, 201.448);
-    points += VSAPoint(323.075, 264.247);
-    points += VSAPoint(362.315, 330.86);
-    points += VSAPoint(390.909, 377.669);
-    points += VSAPoint(408.797, 405.589);
-    points += VSAPoint(417.135, 417.929);
-    points += VSAPoint(417.135, 417.929);
-    points += VSAPoint(35, 417.953);
+    points += VSAPoint(35.0000125984252, 39.999874015748034);
+    points += VSAPoint(957.688768266514, 942.023249737111);
+    points += VSAPoint(957.688768266514, 942.023249737111);
+    points += VSAPoint(957.9428301208773, 1005.4262286032558);
+    points += VSAPoint(956.808738701602, 1094.3704783643723);
+    points += VSAPoint(954.7225808350249, 1153.2234318990995);
+    points += VSAPoint(951.1057634130252, 1211.5904360386712);
+    points += VSAPoint(945.5937483868565, 1269.3725083924223);
+    points += VSAPoint(937.8219977077727, 1326.4706665696876);
+    points += VSAPoint(930.2003883425905, 1368.7591370124287);
+    points += VSAPoint(924.2779568426622, 1396.7024844774487);
+    points += VSAPoint(917.5855387770855, 1424.4191758035984);
+    points += VSAPoint(910.0775668897668, 1451.896838192044);
+    points += VSAPoint(901.7084739246127, 1479.1230988439531);
+    points += VSAPoint(892.4326926255303, 1506.0855849604923);
+    points += VSAPoint(882.2046557364258, 1532.7719237428282);
+    points += VSAPoint(870.9787960012063, 1559.1697423921285);
+    points += VSAPoint(858.7095461637784, 1585.266668109559);
+    points += VSAPoint(845.3513389680488, 1611.0503280962876);
+    points += VSAPoint(830.8586071579242, 1636.5083495534805);
+    points += VSAPoint(815.1857834773112, 1661.6283596823046);
+    points += VSAPoint(798.2873006701168, 1686.397985683927);
+    points += VSAPoint(780.1175914802475, 1710.8048547595142);
+    points += VSAPoint(760.6310886516098, 1734.8365941102336);
+    points += VSAPoint(739.7822249281108, 1758.4808309372515);
+    points += VSAPoint(717.5254330536571, 1781.725192441735);
+    points += VSAPoint(693.8151457721555, 1804.5573058248515);
+    points += VSAPoint(681.3372913240995, 1815.7969526662778);
+    points += VSAPoint(681.3372913240995, 1815.7969526662778);
+    points += VSAPoint(35.0000125984252, 39.999874015748034);
 
     return points;
 }
@@ -3256,52 +5854,39 @@ QVector<QPointF> TST_VAbstractPiece::OutputPointsIssue298Case2() const
 {
     QVector<QPointF> points;
 
-    points += QPointF(-2.7952999999999975, 4.838469950598078);
-    points += QPointF(67.34448942068963, -0.2324858268916558);
-    points += QPointF(73.11721243320879, 39.48203774070609);
-    points += QPointF(75.42415682885321, 49.62029267468959);
-    points += QPointF(78.79409614728041, 60.281321268788744);
-    points += QPointF(83.27292363150828, 71.59911521750833);
-    points += QPointF(88.79988374248082, 83.39960453097031);
-    points += QPointF(95.2926159908344, 95.5247556686474);
-    points += QPointF(102.65546594334339, 107.82863001903641);
-    points += QPointF(110.78654319853989, 120.17975944490887);
-    points += QPointF(119.5782864094781, 132.4565262107595);
-    points += QPointF(128.91893020761376, 144.54068833830968);
-    points += QPointF(138.69670055252752, 156.3216457494432);
-    points += QPointF(148.79638835752286, 167.69430252867102);
-    points += QPointF(159.09802741244354, 178.55148997659143);
-    points += QPointF(169.48171675272164, 188.79080814910267);
-    points += QPointF(179.81876372713828, 198.30845505847407);
-    points += QPointF(189.9727199683426, 207.00061743916868);
-    points += QPointF(199.7939139119543, 214.75881893038778);
-    points += QPointF(209.1143810932559, 221.476716907111);
-    points += QPointF(216.03386663545683, 225.9476461661168);
-    points += QPointF(215.3109698947021, 223.26576141899216);
-    points += QPointF(212.94471478165408, 216.10983179087987);
-    points += QPointF(205.75950336032207, 194.7799429182702);
-    points += QPointF(197.88802785264718, 169.29686123304236);
-    points += QPointF(193.97579117825833, 155.08026950731082);
-    points += QPointF(191.1640933645057, 142.90507610480435);
-    points += QPointF(189.3638602852325, 131.49392126360493);
-    points += QPointF(189.14507682295456, 117.75764312564759);
-    points += QPointF(194.42693552963567, 100.97950138920423);
-    points += QPointF(210.03879336533757, 85.41035725481989);
-    points += QPointF(231.36634627769158, 81.48275234606332);
-    points += QPointF(246.4916615881645, 85.89378050620131);
-    points += QPointF(256.60614755001956, 92.43979519799973);
-    points += QPointF(264.4750900046005, 100.21398185636762);
-    points += QPointF(270.9888544453203, 108.1087159300009);
-    points += QPointF(280.35077918473866, 121.00209505562212);
-    points += QPointF(294.42535276480356, 142.5434013797918);
-    points += QPointF(318.5638508136392, 182.00744438169633);
-    points += QPointF(355.64786176301806, 245.0768771131813);
-    points += QPointF(394.7264228866019, 311.415821866629);
-    points += QPointF(422.9514429826756, 357.62079373755);
-    points += QPointF(440.37197676737753, 384.8111617646563);
-    points += QPointF(488.2841719585649, 455.71983154868764);
-    points += QPointF(-2.795300000000013, 455.7506738094777);
-    points += QPointF(-2.7952999999999975, 4.838469950598078);
+    points += QPointF(-10.830702765714818, 24.587011512350955);
+    points += QPointF(39.855615789834275, -8.108689868294974);
+    points += QPointF(995.4203583783104, 926.0543521489114);
+    points += QPointF(995.7390712145076, 1005.5914525468322);
+    points += QPointF(994.5954771294847, 1095.2809750974982);
+    points += QPointF(992.4764226198034, 1155.061981412451);
+    points += QPointF(988.7898546287646, 1214.554597181484);
+    points += QPointF(983.1461162030054, 1273.7175168242372);
+    points += QPointF(975.1622593873819, 1332.3739943859748);
+    points += QPointF(967.2940111839067, 1376.0309394806493);
+    points += QPointF(961.2519128953934, 1404.5389014377904);
+    points += QPointF(961.0174119331466, 1405.5735214303666);
+    points += QPointF(954.3249938675699, 1433.2902127565162);
+    points += QPointF(954.0443121744452, 1434.3811384277756);
+    points += QPointF(946.5363402871264, 1461.8588008162212);
+    points += QPointF(946.2045616347446, 1463.0019319630142);
+    points += QPointF(937.6515558315413, 1490.8264962646508);
+    points += QPointF(927.9590662522897, 1519.0002540634812);
+    points += QPointF(917.2525136214659, 1546.9351054719114);
+    points += QPointF(905.4832013554212, 1574.6108628886288);
+    points += QPointF(892.6034200213376, 1602.0064006098492);
+    points += QPointF(878.5666407075367, 1629.0998226411741);
+    points += QPointF(863.3276693496916, 1655.8686930581748);
+    points += QPointF(846.8427441486504, 1682.2903192093897);
+    points += QPointF(829.0695617338297, 1708.3420710912978);
+    points += QPointF(809.967223824731, 1734.001714595386);
+    points += QPointF(789.4961040754649, 1759.2477332554781);
+    points += QPointF(767.6176433472375, 1784.0596133526062);
+    points += QPointF(744.2940893691135, 1808.418070909965);
+    points += QPointF(720.0315154937306, 1831.7820154759668);
+    points += QPointF(719.1107590616128, 1832.6395921505045);
+    points += QPointF(664.9901879624223, 1881.3896483836077);
+    points += QPointF(-10.830702765714818, 24.587011512350955);
 
     return points;
 }
@@ -3435,466 +6020,295 @@ QVector<VSAPoint> TST_VAbstractPiece::InputPointsIssue646() const
 {
     QVector<VSAPoint> points;
 
-    points += VSAPoint(1352.8346456692914, 1173.8581417322835);
-
-    VSAPoint point = VSAPoint(1352.8346456692914, 1362.8345196850394);
-    point.SetSAAfter(0);
-    point.SetSABefore(0);
-    points.append(point);
-
-    point = VSAPoint(1352.8346456692914, 1362.8345196850394);
-    point.SetSAAfter(0);
-    point.SetSABefore(0);
-    points.append(point);
-
-    point = VSAPoint(1351.7927746622177, 1365.3174895470343);
-    point.SetSAAfter(0);
-    point.SetSABefore(0);
-    points.append(point);
-
-    point = VSAPoint(1349.2904293989368, 1370.0604466887874);
-    point.SetSAAfter(0);
-    point.SetSABefore(0);
-    points.append(point);
-
-    point = VSAPoint(1346.2962576995217, 1374.5430452326066);
-    point.SetSAAfter(0);
-    point.SetSABefore(0);
-    points.append(point);
-
-    point = VSAPoint(1342.8219234115563, 1378.7733079571037);
-    point.SetSAAfter(0);
-    point.SetSABefore(0);
-    points.append(point);
-
-    point = VSAPoint(1338.8790903826243, 1382.7592576408904);
-    point.SetSAAfter(0);
-    point.SetSABefore(0);
-    points.append(point);
-
-    point = VSAPoint(1334.4794224603097, 1386.5089170625781);
-    point.SetSAAfter(0);
-    point.SetSABefore(0);
-    points.append(point);
-
-    point = VSAPoint(1329.6345834921963, 1390.0303090007792);
-    point.SetSAAfter(0);
-    point.SetSABefore(0);
-    points.append(point);
-
-    point = VSAPoint(1324.356237325868, 1393.3314562341047);
-    point.SetSAAfter(0);
-    point.SetSABefore(0);
-    points.append(point);
-
-    point = VSAPoint(1315.7019501937195, 1397.9127915604581);
-    point.SetSAAfter(0);
-    point.SetSABefore(0);
-    points.append(point);
-
-    point = VSAPoint(1302.6841808427803, 1403.289891141198);
-    point.SetSAAfter(0);
-    point.SetSABefore(0);
-    points.append(point);
-
-    point = VSAPoint(1288.142331955491, 1407.930421917447);
-    point.SetSAAfter(0);
-    point.SetSABefore(0);
-    points.append(point);
-
-    point = VSAPoint(1272.169714312523, 1411.8985661180982);
-    point.SetSAAfter(0);
-    point.SetSABefore(0);
-    points.append(point);
-
-    point = VSAPoint(1254.8596386945478, 1415.2585059720464);
-    point.SetSAAfter(0);
-    point.SetSABefore(0);
-    points.append(point);
-
-    point = VSAPoint(1236.3054158822356, 1418.074423708184);
-    point.SetSAAfter(0);
-    point.SetSABefore(0);
-    points.append(point);
-
-    point = VSAPoint(1216.6003566562576, 1420.4105015554055);
-    point.SetSAAfter(0);
-    point.SetSABefore(0);
-    points.append(point);
-
-    point = VSAPoint(1195.8377717972853, 1422.3309217426045);
-    point.SetSAAfter(0);
-    point.SetSABefore(0);
-    points.append(point);
-
-    point = VSAPoint(1163.0181823648445, 1424.6044927975377);
-    point.SetSAAfter(0);
-    point.SetSABefore(0);
-    points.append(point);
-
-    point = VSAPoint(1116.2675882169847, 1426.7215739585208);
-    point.SetSAAfter(0);
-    point.SetSABefore(0);
-    points.append(point);
-
-    point = VSAPoint(1041.771617936041, 1429.0735145188771);
-    point.SetSAAfter(0);
-    point.SetSABefore(0);
-    points.append(point);
-
-    point = VSAPoint(963.6986998754783, 1432.082545646023);
-    point.SetSAAfter(0);
-    point.SetSABefore(0);
-    points.append(point);
-
-    point = VSAPoint(924.3395298428601, 1434.378255703845);
-    point.SetSAAfter(0);
-    point.SetSABefore(0);
-    points.append(point);
-
-    point = VSAPoint(898.1648782802928, 1436.3169978244687);
-    point.SetSAAfter(0);
-    point.SetSABefore(0);
-    points.append(point);
-
-    point = VSAPoint(872.1457412334543, 1438.6744512606858);
-    point.SetSAAfter(0);
-    point.SetSABefore(0);
-    points.append(point);
-
-    point = VSAPoint(846.3754294830155, 1441.5147982413903);
-    point.SetSAAfter(0);
-    point.SetSABefore(0);
-    points.append(point);
-
-    point = VSAPoint(820.9472538096477, 1444.9022209954755);
-    point.SetSAAfter(0);
-    point.SetSABefore(0);
-    points.append(point);
-
-    point = VSAPoint(795.9545249940218, 1448.9009017518354);
-    point.SetSAAfter(0);
-    point.SetSABefore(0);
-    points.append(point);
-
-    point = VSAPoint(771.4905538168089, 1453.5750227393632);
-    point.SetSAAfter(0);
-    point.SetSABefore(0);
-    points.append(point);
-
-    point = VSAPoint(747.6486510586797, 1458.9887661869527);
-    point.SetSAAfter(0);
-    point.SetSABefore(0);
-    points.append(point);
-
-    point = VSAPoint(724.5221275003055, 1465.2063143234973);
-    point.SetSAAfter(0);
-    point.SetSABefore(0);
-    points.append(point);
-
-    point = VSAPoint(702.2042939223572, 1472.2918493778907);
-    point.SetSAAfter(0);
-    point.SetSABefore(0);
-    points.append(point);
-
-    point = VSAPoint(691.4173228346457, 1476.2203464566928);
-    point.SetSAAfter(0);
-    point.SetSABefore(0);
-    points.append(point);
-
-    point = VSAPoint(691.4173228346457, 1476.2203464566928);
-    point.SetSAAfter(0);
-    point.SetSABefore(0);
-    points.append(point);
-
-    point = VSAPoint(691.4173228346457, 1476.2203464566928);
-    point.SetSAAfter(0);
-    point.SetSABefore(0);
-    points.append(point);
-
-    point = VSAPoint(691.4173228346457, 1476.2203464566928);
-    point.SetSAAfter(0);
-    point.SetSABefore(0);
-    points.append(point);
-
-    point = VSAPoint(691.4173228346457, 1476.2203464566928);
-    point.SetSAAfter(0);
-    point.SetSABefore(0);
-    points.append(point);
-
-    point = VSAPoint(691.4173228346457, 1476.2203464566928);
-    point.SetSAAfter(0);
-    point.SetSABefore(0);
-    points.append(point);
-
-    point = VSAPoint(691.4173228346457, 1476.2203464566928);
-    point.SetSAAfter(0);
-    point.SetSABefore(0);
-    points.append(point);
-
-    point = VSAPoint(682.8822388593928, 1479.3575289855721);
-    point.SetSAAfter(0);
-    point.SetSABefore(0);
-    points.append(point);
-
-    point = VSAPoint(665.6479146239083, 1485.1110371155814);
-    point.SetSAAfter(0);
-    point.SetSABefore(0);
-    points.append(point);
-
-    point = VSAPoint(648.2139215316024, 1490.2399559097548);
-    point.SetSAAfter(0);
-    point.SetSABefore(0);
-    points.append(point);
-
-    point = VSAPoint(630.5772803437565, 1494.74477312083);
-    point.SetSAAfter(0);
-    point.SetSABefore(0);
-    points.append(point);
-
-    point = VSAPoint(612.7350118216522, 1498.6259765015448);
-    point.SetSAAfter(0);
-    point.SetSABefore(0);
-    points.append(point);
-
-    point = VSAPoint(594.6841367265706, 1501.884053804636);
-    point.SetSAAfter(0);
-    point.SetSABefore(0);
-    points.append(point);
-
-    point = VSAPoint(576.4216758197934, 1504.5194927828425);
-    point.SetSAAfter(0);
-    point.SetSABefore(0);
-    points.append(point);
-
-    point = VSAPoint(557.9446498626021, 1506.5327811889006);
-    point.SetSAAfter(0);
-    point.SetSABefore(0);
-    points.append(point);
-
-    point = VSAPoint(539.2500796162778, 1507.9244067755485);
-    point.SetSAAfter(0);
-    point.SetSABefore(0);
-    points.append(point);
-
-    point = VSAPoint(520.334985842102, 1508.6948572955234);
-    point.SetSAAfter(0);
-    point.SetSABefore(0);
-    points.append(point);
-
-    point = VSAPoint(501.1963893013563, 1508.844620501563);
-    point.SetSAAfter(0);
-    point.SetSABefore(0);
-    points.append(point);
-
-    point = VSAPoint(481.8313107553219, 1508.3741841464052);
-    point.SetSAAfter(0);
-    point.SetSABefore(0);
-    points.append(point);
-
-    point = VSAPoint(462.23677096528036, 1507.2840359827874);
-    point.SetSAAfter(0);
-    point.SetSABefore(0);
-    points.append(point);
-
-    point = VSAPoint(442.40979069251296, 1505.5746637634468);
-    point.SetSAAfter(0);
-    point.SetSABefore(0);
-    points.append(point);
-
-    point = VSAPoint(422.3473906983012, 1503.2465552411209);
-    point.SetSAAfter(0);
-    point.SetSABefore(0);
-    points.append(point);
-
-    point = VSAPoint(402.0465917439264, 1500.300198168548);
-    point.SetSAAfter(0);
-    point.SetSABefore(0);
-    points.append(point);
-
-    point = VSAPoint(381.50441459067014, 1496.7360802984645);
-    point.SetSAAfter(0);
-    point.SetSABefore(0);
-    points.append(point);
-
-    point = VSAPoint(360.7178799998137, 1492.554689383609);
-    point.SetSAAfter(0);
-    point.SetSABefore(0);
-    points.append(point);
-
-    point = VSAPoint(339.6840087326385, 1487.7565131767187);
-    point.SetSAAfter(0);
-    point.SetSABefore(0);
-    points.append(point);
-
-    point = VSAPoint(318.399821550426, 1482.3420394305313);
-    point.SetSAAfter(0);
-    point.SetSABefore(0);
-    points.append(point);
-
-    point = VSAPoint(296.8623392144576, 1476.3117558977842);
-    point.SetSAAfter(0);
-    point.SetSABefore(0);
-    points.append(point);
-
-    point = VSAPoint(275.06858248601475, 1469.6661503312146);
-    point.SetSAAfter(0);
-    point.SetSABefore(0);
-    points.append(point);
-
-    point = VSAPoint(253.01557212637874, 1462.4057104835604);
-    point.SetSAAfter(0);
-    point.SetSABefore(0);
-    points.append(point);
-
-    point = VSAPoint(230.70032889683108, 1454.530924107559);
-    point.SetSAAfter(0);
-    point.SetSABefore(0);
-    points.append(point);
-
-    point = VSAPoint(208.11987355865324, 1446.0422789559484);
-    point.SetSAAfter(0);
-    point.SetSABefore(0);
-    points.append(point);
-
-    point = VSAPoint(185.27122687312647, 1436.9402627814657);
-    point.SetSAAfter(0);
-    point.SetSABefore(0);
-    points.append(point);
-
-    point = VSAPoint(162.15140960153235, 1427.2253633368487);
-    point.SetSAAfter(0);
-    point.SetSABefore(0);
-    points.append(point);
-
-    point = VSAPoint(138.7574425051522, 1416.8980683748348);
-    point.SetSAAfter(0);
-    point.SetSABefore(0);
-    points.append(point);
-
-    point = VSAPoint(115.08634634526746, 1405.9588656481617);
-    point.SetSAAfter(0);
-    point.SetSABefore(0);
-    points.append(point);
-
-    point = VSAPoint(91.13514188315949, 1394.4082429095668);
-    point.SetSAAfter(0);
-    point.SetSABefore(0);
-    points.append(point);
-
-    point = VSAPoint(66.90084988010975, 1382.2466879117876);
-    point.SetSAAfter(0);
-    point.SetSABefore(0);
-    points.append(point);
-
-    point = VSAPoint(42.38049109739966, 1369.4746884075616);
-    point.SetSAAfter(0);
-    point.SetSABefore(0);
-    points.append(point);
-
-    point = VSAPoint(30.0, 1362.8345196850394);
-    point.SetSAAfter(0);
-    point.SetSABefore(0);
-    points.append(point);
-
-    point = VSAPoint(30.0, 1362.8345196850394);
-    point.SetSAAfter(0);
-    point.SetSABefore(0);
-    points.append(point);
-
-    points += VSAPoint(30.0, 1173.8581417322835);
-    points += VSAPoint(30.0, 39.999874015748034);
-    points += VSAPoint(30.0, 39.999874015748034);
-    points += VSAPoint(31.836416744798022, 50.53779899603764);
-    points += VSAPoint(35.952598805592906, 71.21252386912929);
-    points += VSAPoint(40.586864315463195, 91.4101105071633);
-    points += VSAPoint(45.72373012289418, 111.13523876561466);
-    points += VSAPoint(51.347713076371164, 130.39258849995826);
-    points += VSAPoint(57.44333002437946, 149.186839565669);
-    points += VSAPoint(63.995097815404385, 167.52267181822185);
-    points += VSAPoint(70.98753329793121, 185.40476511309168);
-    points += VSAPoint(78.4051533204453, 202.83779930575355);
-    points += VSAPoint(86.23247473143188, 219.82645425168224);
-    points += VSAPoint(94.4540143793763, 236.37540980635274);
-    points += VSAPoint(103.05428911276391, 252.48934582523998);
-    points += VSAPoint(112.01781578007993, 268.17294216381885);
-    points += VSAPoint(121.32911122980973, 283.43087867756435);
-    points += VSAPoint(130.97269231043856, 298.2678352219515);
-    points += VSAPoint(140.93307587045177, 312.688491652455);
-    points += VSAPoint(151.19477875833468, 326.69752782454987);
-    points += VSAPoint(161.74231782257255, 340.2996235937111);
-    points += VSAPoint(172.5602099116507, 353.4994588154136);
-    points += VSAPoint(183.63297187405442, 366.30171334513216);
-    points += VSAPoint(194.94512055826902, 378.7110670383419);
-    points += VSAPoint(206.4811728127799, 390.7321997505177);
-    points += VSAPoint(218.22564548607224, 402.3697913371344);
-    points += VSAPoint(230.1630554266314, 413.62852165366695);
-    points += VSAPoint(242.27791948294265, 424.51307055559033);
-    points += VSAPoint(254.55475450349132, 435.02811789837943);
-    points += VSAPoint(273.2244253126398, 450.16283591309366);
-    points += VSAPoint(298.5641233209854, 469.0320795095655);
-    points += VSAPoint(324.2730084590162, 486.5075542680491);
-    points += VSAPoint(350.2272155146146, 502.6266990323438);
-    points += VSAPoint(376.30287927566314, 517.426952646249);
-    points += VSAPoint(402.37613453004406, 530.9457539535642);
-    points += VSAPoint(428.3231160656401, 543.220541798089);
-    points += VSAPoint(454.0199586703335, 554.2887550236223);
-    points += VSAPoint(479.34279713200675, 564.1878324739641);
-    points += VSAPoint(504.1677662385423, 572.9552129929135);
-    points += VSAPoint(528.3710007778225, 580.62833542427);
-    points += VSAPoint(551.8286355377302, 587.2446386118332);
-    points += VSAPoint(574.4168053061474, 592.8415613994023);
-    points += VSAPoint(596.0116448709566, 597.4565426307768);
-    points += VSAPoint(616.4892890200404, 601.127021149756);
-    points += VSAPoint(635.725872541281, 603.8904358001398);
-    points += VSAPoint(653.5975302225612, 605.7842254257271);
-    points += VSAPoint(669.9803968517632, 606.8458288703175);
-    points += VSAPoint(684.7506072167696, 607.1126849777106);
-    points += VSAPoint(691.417322834647, 606.9290078739997);
-    points += VSAPoint(691.417322834647, 606.9290078739997);
-    points += VSAPoint(691.417322834647, 606.9290078739997);
-    points += VSAPoint(691.417322834647, 606.9290078739997);
-    points += VSAPoint(691.417322834647, 606.9290078739997);
-    points += VSAPoint(691.417322834647, 606.9290078739997);
-    points += VSAPoint(691.417322834647, 606.9290078739997);
-    points += VSAPoint(698.4117938885747, 606.70357708988);
-    points += VSAPoint(712.3872092557954, 606.6270580415836);
-    points += VSAPoint(726.3421370199347, 606.9929810221732);
-    points += VSAPoint(740.2718488317498, 607.7938249260419);
-    points += VSAPoint(754.1716163419968, 609.0220686475833);
-    points += VSAPoint(768.0367112014326, 610.6701910811905);
-    points += VSAPoint(781.8624050608131, 612.7306711212568);
-    points += VSAPoint(795.6439695708956, 615.1959876621759);
-    points += VSAPoint(809.3766763824362, 618.0586195983409);
-    points += VSAPoint(823.0557971461919, 621.3110458241451);
-    points += VSAPoint(843.4718370533695, 626.8577230967079);
-    points += VSAPoint(870.4518221032482, 635.6110880188724);
-    points += VSAPoint(897.1323526756041, 645.7882501986742);
-    points += VSAPoint(923.4756019764898, 657.3290407912602);
-    points += VSAPoint(949.4437432119576, 670.1732909517772);
-    points += VSAPoint(974.99894958806, 684.2608318353717);
-    points += VSAPoint(1000.1033943108496, 699.5314945971908);
-    points += VSAPoint(1024.7192505863786, 715.9251103923807);
-    points += VSAPoint(1048.8086916206998, 733.381510376089);
-    points += VSAPoint(1072.333890619865, 751.8405257034619);
-    points += VSAPoint(1095.257020789927, 771.2419875296464);
-    points += VSAPoint(1117.5402553369386, 791.5257270097889);
-    points += VSAPoint(1139.1457674669518, 812.6315752990365);
-    points += VSAPoint(1160.0357303860196, 834.499363552536);
-    points += VSAPoint(1180.1723173001938, 857.0689229254342);
-    points += VSAPoint(1199.517701415527, 880.2800845728775);
-    points += VSAPoint(1218.0340559380716, 904.072679650013);
-    points += VSAPoint(1235.6835540738803, 928.3865393119875);
-    points += VSAPoint(1252.4283690290056, 953.1614947139476);
-    points += VSAPoint(1268.2306740094996, 978.33737701104);
-    points += VSAPoint(1283.0526422214152, 1003.8540173584115);
-    points += VSAPoint(1296.8564468708046, 1029.651246911209);
-    points += VSAPoint(1309.60426116372, 1055.6688968245794);
-    points += VSAPoint(1321.258258306214, 1081.846798253669);
-    points += VSAPoint(1331.780611504339, 1108.1247823536248);
-    points += VSAPoint(1341.1334939641479, 1134.4426802795938);
-    points += VSAPoint(1349.2790788916927, 1160.7403231867224);
-    points += VSAPoint(1352.8346456692914, 1173.8581417322835);
+    points.append(VSAPoint(1352.8346456692914, 1173.8581417322835));
+
+    VSAPoint p = VSAPoint(1352.8346456692914, 1362.8345196850394);
+    p.SetSABefore(0.0);
+    p.SetSAAfter(0.0);
+    points.append(p);
+
+    p = VSAPoint(1352.8346456692914, 1362.8345196850394);
+    p.SetSABefore(0.0);
+    p.SetSAAfter(0.0);
+    points.append(p);
+
+    p = VSAPoint(1350.6660166205588, 1367.7550606147208);
+    p.SetSABefore(0.0);
+    p.SetSAAfter(0.0);
+    points.append(p);
+
+    p = VSAPoint(1344.6776732217286, 1376.7202577023593);
+    p.SetSABefore(0.0);
+    p.SetSAAfter(0.0);
+    points.append(p);
+
+    p = VSAPoint(1336.7920071638646, 1384.6921570699324);
+    p.SetSABefore(0.0);
+    p.SetSAAfter(0.0);
+    points.append(p);
+
+    p = VSAPoint(1327.102329227638, 1391.7349409463345);
+    p.SetSABefore(0.0);
+    p.SetSAAfter(0.0);
+    points.append(p);
+
+    p = VSAPoint(1315.7019501937195, 1397.9127915604581);
+    p.SetSABefore(0.0);
+    p.SetSAAfter(0.0);
+    points.append(p);
+
+    p = VSAPoint(1302.6841808427803, 1403.289891141198);
+    p.SetSABefore(0.0);
+    p.SetSAAfter(0.0);
+    points.append(p);
+
+    p = VSAPoint(1288.142331955491, 1407.930421917447);
+    p.SetSABefore(0.0);
+    p.SetSAAfter(0.0);
+    points.append(p);
+
+    p = VSAPoint(1272.169714312523, 1411.8985661180982);
+    p.SetSABefore(0.0);
+    p.SetSAAfter(0.0);
+    points.append(p);
+
+    p = VSAPoint(1245.881900239392, 1416.7944475909562);
+    p.SetSABefore(0.0);
+    p.SetSAAfter(0.0);
+    points.append(p);
+
+    p = VSAPoint(1206.4717817874364, 1421.4666032853988);
+    p.SetSABefore(0.0);
+    p.SetSAAfter(0.0);
+    points.append(p);
+
+    p = VSAPoint(1163.0181823648445, 1424.6044927975377);
+    p.SetSABefore(0.0);
+    p.SetSAAfter(0.0);
+    points.append(p);
+
+    p = VSAPoint(1116.2675882169847, 1426.7215739585208);
+    p.SetSABefore(0.0);
+    p.SetSAAfter(0.0);
+    points.append(p);
+
+    p = VSAPoint(1041.771617936041, 1429.0735145188771);
+    p.SetSABefore(0.0);
+    p.SetSAAfter(0.0);
+    points.append(p);
+
+    p = VSAPoint(963.6986998754783, 1432.082545646023);
+    p.SetSABefore(0.0);
+    p.SetSAAfter(0.0);
+    points.append(p);
+
+    p = VSAPoint(911.2249892802281, 1435.25097171387);
+    p.SetSABefore(0.0);
+    p.SetSAAfter(0.0);
+    points.append(p);
+
+    p = VSAPoint(859.186715186551, 1439.9658785863046);
+    p.SetSABefore(0.0);
+    p.SetSAAfter(0.0);
+    points.append(p);
+
+    p = VSAPoint(808.3303638398154, 1446.7407240944754);
+    p.SetSABefore(0.0);
+    p.SetSAAfter(0.0);
+    points.append(p);
+
+    p = VSAPoint(771.4905538168089, 1453.5750227393632);
+    p.SetSABefore(0.0);
+    p.SetSAAfter(0.0);
+    points.append(p);
+
+    p = VSAPoint(747.6486510586797, 1458.9887661869527);
+    p.SetSABefore(0.0);
+    p.SetSAAfter(0.0);
+    points.append(p);
+
+    p = VSAPoint(724.5221275003055, 1465.2063143234973);
+    p.SetSABefore(0.0);
+    p.SetSAAfter(0.0);
+    points.append(p);
+
+    p = VSAPoint(702.2042939223572, 1472.2918493778907);
+    p.SetSABefore(0.0);
+    p.SetSAAfter(0.0);
+    points.append(p);
+
+    p = VSAPoint(691.4173228346457, 1476.2203464566928);
+    p.SetSABefore(0.0);
+    p.SetSAAfter(0.0);
+    points.append(p);
+
+    p = VSAPoint(691.4173228346457, 1476.2203464566928);
+    p.SetSABefore(0.0);
+    p.SetSAAfter(0.0);
+    points.append(p);
+
+    p = VSAPoint(691.4173228346457, 1476.2203464566928);
+    p.SetSABefore(0.0);
+    p.SetSAAfter(0.0);
+    points.append(p);
+
+    p = VSAPoint(674.314621551016, 1482.390491353628);
+    p.SetSABefore(0.0);
+    p.SetSAAfter(0.0);
+    points.append(p);
+
+    p = VSAPoint(639.4466353664043, 1492.6483289419746);
+    p.SetSABefore(0.0);
+    p.SetSAAfter(0.0);
+    points.append(p);
+
+    p = VSAPoint(603.7620983221955, 1500.410735703404);
+    p.SetSABefore(0.0);
+    p.SetSAAfter(0.0);
+    points.append(p);
+
+    p = VSAPoint(567.2371765086411, 1505.6816136598163);
+    p.SetSABefore(0.0);
+    p.SetSAAfter(0.0);
+    points.append(p);
+
+    p = VSAPoint(529.8480360159926, 1508.4648648331117);
+    p.SetSABefore(0.0);
+    p.SetSAAfter(0.0);
+    points.append(p);
+
+    p = VSAPoint(491.5708429345011, 1508.7643912451913);
+    p.SetSABefore(0.0);
+    p.SetSAAfter(0.0);
+    points.append(p);
+
+    p = VSAPoint(452.3817633544179, 1506.5840949179556);
+    p.SetSABefore(0.0);
+    p.SetSAAfter(0.0);
+    points.append(p);
+
+    p = VSAPoint(412.2569633659944, 1501.9278778733042);
+    p.SetSABefore(0.0);
+    p.SetSAAfter(0.0);
+    points.append(p);
+
+    p = VSAPoint(371.1726090594818, 1494.7996421331377);
+    p.SetSABefore(0.0);
+    p.SetSAAfter(0.0);
+    points.append(p);
+
+    p = VSAPoint(329.10486652513146, 1485.2032897193571);
+    p.SetSABefore(0.0);
+    p.SetSAAfter(0.0);
+    points.append(p);
+
+    p = VSAPoint(286.0299018531947, 1473.1427226538626);
+    p.SetSABefore(0.0);
+    p.SetSAAfter(0.0);
+    points.append(p);
+
+    p = VSAPoint(241.92388113392275, 1458.6218429585542);
+    p.SetSABefore(0.0);
+    p.SetSAAfter(0.0);
+    points.append(p);
+
+    p = VSAPoint(196.762970457567, 1441.644552655333);
+    p.SetSABefore(0.0);
+    p.SetSAAfter(0.0);
+    points.append(p);
+
+    p = VSAPoint(150.52333591437866, 1422.2147537660987);
+    p.SetSABefore(0.0);
+    p.SetSAAfter(0.0);
+    points.append(p);
+
+    p = VSAPoint(103.18114359460913, 1400.3363483127525);
+    p.SetSABefore(0.0);
+    p.SetSAAfter(0.0);
+    points.append(p);
+
+    p = VSAPoint(54.712559588509635, 1376.013238317194);
+    p.SetSABefore(0.0);
+    p.SetSAAfter(0.0);
+    points.append(p);
+
+    p = VSAPoint(30.0, 1362.8345196850394);
+    p.SetSABefore(0.0);
+    p.SetSAAfter(0.0);
+    points.append(p);
+
+    p = VSAPoint(30.0, 1362.8345196850394);
+    p.SetSABefore(0.0);
+    p.SetSAAfter(0.0);
+    points.append(p);
+
+    points.append(VSAPoint(30.0, 1173.8581417322835));
+    points.append(VSAPoint(30.0, 39.999874015748034));
+    points.append(VSAPoint(30.0, 39.999874015748034));
+    points.append(VSAPoint(33.76305151898726, 60.995030973282226));
+    points.append(VSAPoint(43.0315825387278, 101.39020424935029));
+    points.append(VSAPoint(54.27954844568175, 139.90490371803747));
+    points.append(VSAPoint(67.38308402773156, 176.57656822314317));
+    points.append(VSAPoint(82.21832407275966, 211.44263660846684));
+    points.append(VSAPoint(98.66140336864854, 244.5405477178079));
+    points.append(VSAPoint(116.58845670328057, 275.9077403949657));
+    points.append(VSAPoint(135.87561886453827, 305.58165348373984));
+    points.append(VSAPoint(156.39902464030405, 333.59972582792955));
+    points.append(VSAPoint(178.03480881846033, 359.9993962713345));
+    points.append(VSAPoint(200.65910618688957, 384.8181036577539));
+    points.append(VSAPoint(224.1480515334743, 408.0932868309873));
+    points.append(VSAPoint(248.37777964609688, 429.8623846348342));
+    points.append(VSAPoint(273.2244253126397, 450.1628359130938));
+    points.append(VSAPoint(298.5641233209853, 469.03207950956573));
+    points.append(VSAPoint(324.27300845901607, 486.50755426804926));
+    points.append(VSAPoint(350.2272155146145, 502.62669903234394));
+    points.append(VSAPoint(376.30287927566303, 517.4269526462492));
+    points.append(VSAPoint(402.37613453004406, 530.9457539535643));
+    points.append(VSAPoint(428.3231160656401, 543.220541798089));
+    points.append(VSAPoint(454.0199586703335, 554.2887550236226));
+    points.append(VSAPoint(479.34279713200675, 564.1878324739644));
+    points.append(VSAPoint(504.1677662385423, 572.9552129929136));
+    points.append(VSAPoint(528.3710007778225, 580.6283354242702));
+    points.append(VSAPoint(563.3555698213261, 590.2932652501413));
+    points.append(VSAPoint(606.5452489509445, 599.5232277128903));
+    points.append(VSAPoint(645.018415993426, 605.0500570136577));
+    points.append(VSAPoint(677.7841492518301, 607.1732639028387));
+    points.append(VSAPoint(691.4173228346472, 606.9290078739998));
+    points.append(VSAPoint(691.4173228346472, 606.9290078739998));
+    points.append(VSAPoint(691.4173228346472, 606.9290078739998));
+    points.append(VSAPoint(705.4040324293001, 606.5537669203095));
+    points.append(VSAPoint(733.313887957579, 607.2856128814886));
+    points.append(VSAPoint(761.113422978073, 609.7421003245712));
+    points.append(VSAPoint(788.7648106968343, 613.8630604047041));
+    points.append(VSAPoint(816.2302243199158, 619.5883242770342));
+    points.append(VSAPoint(843.4718370533695, 626.8577230967081));
+    points.append(VSAPoint(870.4518221032482, 635.6110880188726));
+    points.append(VSAPoint(897.1323526756041, 645.7882501986744));
+    points.append(VSAPoint(923.4756019764898, 657.3290407912602));
+    points.append(VSAPoint(949.4437432119576, 670.1732909517772));
+    points.append(VSAPoint(974.99894958806, 684.2608318353717));
+    points.append(VSAPoint(1000.1033943108496, 699.5314945971908));
+    points.append(VSAPoint(1024.7192505863786, 715.9251103923807));
+    points.append(VSAPoint(1048.8086916206998, 733.381510376089));
+    points.append(VSAPoint(1072.333890619865, 751.8405257034619));
+    points.append(VSAPoint(1095.257020789927, 771.2419875296464));
+    points.append(VSAPoint(1117.5402553369386, 791.5257270097891));
+    points.append(VSAPoint(1139.1457674669518, 812.6315752990367));
+    points.append(VSAPoint(1160.0357303860196, 834.4993635525362));
+    points.append(VSAPoint(1180.1723173001938, 857.0689229254342));
+    points.append(VSAPoint(1199.517701415527, 880.2800845728777));
+    points.append(VSAPoint(1218.0340559380716, 904.0726796500132));
+    points.append(VSAPoint(1235.6835540738803, 928.3865393119877));
+    points.append(VSAPoint(1252.4283690290056, 953.1614947139476));
+    points.append(VSAPoint(1268.2306740094996, 978.3373770110402));
+    points.append(VSAPoint(1283.0526422214152, 1003.8540173584116));
+    points.append(VSAPoint(1296.8564468708046, 1029.651246911209));
+    points.append(VSAPoint(1309.60426116372, 1055.6688968245794));
+    points.append(VSAPoint(1321.258258306214, 1081.846798253669));
+    points.append(VSAPoint(1331.780611504339, 1108.1247823536248));
+    points.append(VSAPoint(1341.1334939641479, 1134.4426802795938));
+    points.append(VSAPoint(1349.2790788916927, 1160.7403231867224));
+    points.append(VSAPoint(1352.8346456692914, 1173.8581417322835));
 
     return points;
 }
@@ -3906,156 +6320,111 @@ QVector<QPointF> TST_VAbstractPiece::OutputPointsIssue646() const
 
     points += QPointF(1391.2089508950362, 1170.962993556315);
     points += QPointF(1352.8346456692914, 1362.8345196850394);
-    points += QPointF(1351.7927746622177, 1365.3174895470343);
-    points += QPointF(1349.2904293989368, 1370.0604466887874);
-    points += QPointF(1346.2962576995217, 1374.5430452326066);
-    points += QPointF(1342.8219234115563, 1378.7733079571037);
-    points += QPointF(1338.8790903826243, 1382.7592576408904);
-    points += QPointF(1334.4794224603097, 1386.5089170625781);
-    points += QPointF(1329.6345834921963, 1390.0303090007792);
-    points += QPointF(1324.356237325868, 1393.3314562341047);
+    points += QPointF(1350.6660166205588, 1367.7550606147208);
+    points += QPointF(1344.6776732217286, 1376.7202577023593);
+    points += QPointF(1336.7920071638646, 1384.6921570699324);
+    points += QPointF(1327.102329227638, 1391.7349409463345);
     points += QPointF(1315.7019501937195, 1397.9127915604581);
     points += QPointF(1302.6841808427803, 1403.289891141198);
     points += QPointF(1288.142331955491, 1407.930421917447);
     points += QPointF(1272.169714312523, 1411.8985661180982);
-    points += QPointF(1254.8596386945478, 1415.2585059720464);
-    points += QPointF(1236.3054158822356, 1418.074423708184);
-    points += QPointF(1216.6003566562576, 1420.4105015554055);
-    points += QPointF(1195.8377717972853, 1422.3309217426045);
+    points += QPointF(1245.881900239392, 1416.7944475909562);
+    points += QPointF(1206.4717817874364, 1421.4666032853988);
     points += QPointF(1163.0181823648445, 1424.6044927975377);
     points += QPointF(1116.2675882169847, 1426.7215739585208);
     points += QPointF(1041.771617936041, 1429.0735145188771);
     points += QPointF(963.6986998754783, 1432.082545646023);
-    points += QPointF(924.3395298428601, 1434.378255703845);
-    points += QPointF(898.1648782802928, 1436.3169978244687);
-    points += QPointF(872.1457412334543, 1438.6744512606858);
-    points += QPointF(846.3754294830155, 1441.5147982413903);
-    points += QPointF(820.9472538096477, 1444.9022209954755);
-    points += QPointF(795.9545249940218, 1448.9009017518354);
+    points += QPointF(911.2249892802281, 1435.25097171387);
+    points += QPointF(859.186715186551, 1439.9658785863046);
+    points += QPointF(808.3303638398154, 1446.7407240944754);
     points += QPointF(771.4905538168089, 1453.5750227393632);
     points += QPointF(747.6486510586797, 1458.9887661869527);
     points += QPointF(724.5221275003055, 1465.2063143234973);
     points += QPointF(702.2042939223572, 1472.2918493778907);
     points += QPointF(691.4173228346457, 1476.2203464566928);
-    points += QPointF(682.8822388593928, 1479.3575289855721);
-    points += QPointF(665.6479146239083, 1485.1110371155814);
-    points += QPointF(648.2139215316024, 1490.2399559097548);
-    points += QPointF(630.5772803437565, 1494.74477312083);
-    points += QPointF(612.7350118216522, 1498.6259765015448);
-    points += QPointF(594.6841367265706, 1501.884053804636);
-    points += QPointF(576.4216758197934, 1504.5194927828425);
-    points += QPointF(557.9446498626021, 1506.5327811889006);
-    points += QPointF(539.2500796162778, 1507.9244067755485);
-    points += QPointF(520.334985842102, 1508.6948572955234);
-    points += QPointF(501.1963893013563, 1508.844620501563);
-    points += QPointF(481.8313107553219, 1508.3741841464052);
-    points += QPointF(462.23677096528036, 1507.2840359827874);
-    points += QPointF(442.40979069251296, 1505.5746637634468);
-    points += QPointF(422.3473906983012, 1503.2465552411209);
-    points += QPointF(402.0465917439264, 1500.300198168548);
-    points += QPointF(381.50441459067014, 1496.7360802984645);
-    points += QPointF(360.7178799998137, 1492.554689383609);
-    points += QPointF(339.6840087326385, 1487.7565131767187);
-    points += QPointF(318.399821550426, 1482.3420394305313);
-    points += QPointF(296.8623392144576, 1476.3117558977842);
-    points += QPointF(275.06858248601475, 1469.6661503312146);
-    points += QPointF(253.01557212637874, 1462.4057104835604);
-    points += QPointF(230.70032889683108, 1454.530924107559);
-    points += QPointF(208.11987355865324, 1446.0422789559484);
-    points += QPointF(185.27122687312647, 1436.9402627814657);
-    points += QPointF(162.15140960153235, 1427.2253633368487);
-    points += QPointF(138.7574425051522, 1416.8980683748348);
-    points += QPointF(115.08634634526746, 1405.9588656481617);
-    points += QPointF(91.13514188315949, 1394.4082429095668);
-    points += QPointF(66.90084988010975, 1382.2466879117876);
-    points += QPointF(42.38049109739966, 1369.4746884075616);
+    points += QPointF(674.314621551016, 1482.390491353628);
+    points += QPointF(639.4466353664043, 1492.6483289419746);
+    points += QPointF(603.7620983221955, 1500.410735703404);
+    points += QPointF(567.2371765086411, 1505.6816136598163);
+    points += QPointF(529.8480360159926, 1508.4648648331117);
+    points += QPointF(491.5708429345011, 1508.7643912451913);
+    points += QPointF(452.3817633544179, 1506.5840949179556);
+    points += QPointF(412.2569633659944, 1501.9278778733042);
+    points += QPointF(371.1726090594818, 1494.7996421331377);
+    points += QPointF(329.10486652513146, 1485.2032897193571);
+    points += QPointF(286.0299018531947, 1473.1427226538626);
+    points += QPointF(241.92388113392275, 1458.6218429585542);
+    points += QPointF(196.762970457567, 1441.644552655333);
+    points += QPointF(150.52333591437866, 1422.2147537660987);
+    points += QPointF(103.18114359460913, 1400.3363483127525);
+    points += QPointF(54.712559588509635, 1376.013238317194);
     points += QPointF(30.0, 1362.8345196850394);
     points += QPointF(-7.795275590551185, 1173.8581417322835);
-    points += QPointF(-7.795275590551185, 5.332135175169643);
-    points += QPointF(61.282362682462484, -0.6418380334156654);
-    points += QPointF(68.99270783774104, 43.602497599341376);
-    points += QPointF(72.9132813035755, 63.2947212555562);
-    points += QPointF(77.3013929112068, 82.41949176853801);
-    points += QPointF(82.1591612486953, 101.07290945528996);
-    points += QPointF(87.47127192119272, 119.26236235620561);
-    points += QPointF(93.22265002333297, 136.995242382529);
-    points += QPointF(99.39845834352354, 154.27891130896086);
-    points += QPointF(105.98409057569768, 171.12066698560935);
-    points += QPointF(112.96515967796651, 187.5277107532596);
-    points += QPointF(120.3274817141749, 203.50711700306462);
-    points += QPointF(128.05705569238026, 219.06580572797276);
-    points += QPointF(136.140040064258, 234.21051878050557);
-    points += QPointF(144.56272665980467, 248.94780038335693);
-    points += QPointF(153.31151289915712, 263.28398225332904);
-    points += QPointF(162.37287314390684, 277.2251735037908);
-    points += QPointF(171.7333300269448, 290.7772553015979);
-    points += QPointF(181.37942653744733, 303.94588008167347);
-    points += QPointF(191.29769954207885, 316.73647497324424);
-    points += QPointF(201.4746553074722, 329.15424897723653);
-    points += QPointF(211.8967474561181, 341.2042033492513);
-    points += QPointF(222.55035765443486, 352.89114459720207);
-    points += QPointF(233.42177919919385, 364.21969948550475);
-    points += QPointF(244.49720354953487, 375.1943314526637);
-    points += QPointF(255.7627097438719, 385.81935788241924);
-    points += QPointF(267.20425655639707, 396.09896772498274);
-    points += QPointF(278.75265348524636, 405.99011151219827);
-    points += QPointF(296.42128624929416, 420.3133300264941);
-    points += QPointF(320.48452011994203, 438.2320527150828);
-    points += QPointF(344.87558321732604, 454.8117451133493);
-    points += QPointF(369.53320753519137, 470.12563295711334);
-    points += QPointF(394.3361710694346, 484.20351622969935);
-    points += QPointF(419.16155857757707, 497.07530679920615);
-    points += QPointF(443.88487919291146, 508.77121504768843);
-    points += QPointF(468.38014199617356, 519.321880586359);
-    points += QPointF(492.51986728337727, 528.7584613476223);
-    points += QPointF(516.1750084818626, 537.1126962804665);
-    points += QPointF(539.2147513582057, 544.4169583447066);
-    points += QPointF(561.5061404146093, 550.7043180882887);
-    points += QPointF(582.9134517220549, 556.0086464028718);
-    points += QPointF(603.297176144298, 560.3648031296603);
-    points += QPointF(622.512375480477, 563.8089969972691);
-    points += QPointF(640.4059816430324, 566.3794874049449);
-    points += QPointF(656.8122283884328, 568.1179931683923);
-    points += QPointF(671.5446156432315, 569.0726461855179);
-    points += QPointF(684.5714272485307, 569.308003986851);
-    points += QPointF(690.2881064563063, 569.1505016813809);
-    points += QPointF(697.6994465521921, 568.9116352687084);
-    points += QPointF(712.7791990595856, 568.829069686213);
-    points += QPointF(727.9225489586405, 569.2261552050226);
-    points += QPointF(743.0205601588, 570.0941667183644);
-    points += QPointF(758.0665280331999, 571.4236936735902);
-    points += QPointF(773.0540417864709, 573.2052363093372);
-    points += QPointF(787.9769792031311, 575.4292414839725);
-    points += QPointF(802.8294963913348, 578.0861355014533);
-    points += QPointF(817.6060134704758, 581.1663534276446);
-    points += QPointF(832.3840681765656, 584.6800684918327);
-    points += QPointF(854.2646050023646, 590.6246236981764);
-    points += QPointF(883.0268449918112, 599.956221997473);
-    points += QPointF(911.458987786853, 610.8015283739599);
-    points += QPointF(939.4455853403952, 623.0622581751827);
+    points += QPointF(-7.795275590551185, 5.415841095792075);
+    points += QPointF(61.10102183090257, -0.7096412239110919);
+    points += QPointF(70.80478764466314, 53.4304855617782);
+    points += QPointF(79.62189394925582, 91.85820794938732);
+    points += QPointF(90.24647240417782, 128.2383365484458);
+    points += QPointF(102.59852571928553, 162.80689648286);
+    points += QPointF(116.56115662664025, 195.6221419778608);
+    points += QPointF(132.02082032795917, 226.74055755921066);
+    points += QPointF(148.86669418977533, 256.2159967948307);
+    points += QPointF(166.98986206810577, 284.0990676177162);
+    points += QPointF(186.28241554481536, 310.43680926354347);
+    points += QPointF(206.63657487261227, 335.2726596298501);
+    points += QPointF(227.94391425163948, 358.6466726486652);
+    points += QPointF(250.09474647931083, 380.59592025988565);
+    points += QPointF(272.9776896673481, 401.15500478550797);
+    points += QPointF(296.4794106724578, 420.3566124641626);
+    points += QPointF(320.484520119942, 438.23205271508306);
+    points += QPointF(344.8755832173259, 454.8117451133494);
+    points += QPointF(369.5332075351913, 470.1256329571135);
+    points += QPointF(394.3361710694345, 484.2035162296996);
+    points += QPointF(419.16155857757695, 497.0753067992062);
+    points += QPointF(443.88487919288957, 508.7712150476781);
+    points += QPointF(468.38014199619704, 519.3218805863685);
+    points += QPointF(492.51986728337727, 528.7584613476225);
+    points += QPointF(516.1750084818626, 537.1126962804666);
+    points += QPointF(539.1179506668893, 544.3862697375826);
+    points += QPointF(572.3449900777376, 553.5656597660253);
+    points += QPointF(613.1894237885367, 562.2944254702461);
+    points += QPointF(648.9334985308346, 567.4292093937121);
+    points += QPointF(678.66913409911, 569.356067120192);
+    points += QPointF(690.5719737333277, 569.1428122736005);
+    points += QPointF(705.3925728033803, 568.7451994046356);
+    points += QPointF(735.4747135391233, 569.5340065404794);
+    points += QPointF(765.5663997881065, 572.1930384040452);
+    points += QPointF(795.4123023513292, 576.6410528859776);
+    points += QPointF(824.965602108301, 582.8015441033587);
+    points += QPointF(854.1835470423481, 590.5983253180048);
+    points += QPointF(883.0268449918112, 599.9562219974732);
+    points += QPointF(911.4589877868528, 610.8015283739601);
+    points += QPointF(939.445585340395, 623.0622581751827);
     points += QPointF(966.9537607342976, 636.6682333974711);
     points += QPointF(993.9516330911679, 651.551057077312);
-    points += QPointF(1020.4078966730023, 667.6440112755474);
+    points += QPointF(1020.4078966730021, 667.6440112755474);
     points += QPointF(1046.2914925169705, 684.8819135818707);
     points += QPointF(1071.5713620583545, 703.2009569179793);
     points += QPointF(1096.216269205861, 722.5385497176682);
     points += QPointF(1120.1946768785947, 742.8331673228507);
-    points += QPointF(1143.4746649906992, 764.024220756791);
-    points += QPointF(1166.0238785179056, 786.0519457597054);
-    points += QPointF(1187.8094960863832, 808.8573128063047);
+    points += QPointF(1143.4746649906995, 764.0242207567912);
+    points += QPointF(1166.0238785179056, 786.0519457597056);
+    points += QPointF(1187.809496086383, 808.8573128063048);
     points += QPointF(1208.7982112227505, 832.3819574965946);
-    points += QPointF(1228.9562198237943, 856.5681299364858);
-    points += QPointF(1248.2492085181873, 881.3586613164372);
-    points += QPointF(1266.6423393728558, 906.6969456633109);
+    points += QPointF(1228.9562198237943, 856.5681299364861);
+    points += QPointF(1248.2492085181873, 881.3586613164374);
+    points += QPointF(1266.6423393728555, 906.696945663311);
     points += QPointF(1284.1002268781353, 932.5269345592678);
-    points += QPointF(1300.5869033558602, 958.7931423679255);
+    points += QPointF(1300.5869033558602, 958.7931423679257);
     points += QPointF(1316.065768928307, 985.4406590911037);
     points += QPointF(1330.4995219936793, 1012.4151672497809);
     points += QPointF(1343.850065889632, 1039.6629580676176);
     points += QPointF(1356.0783871611402, 1067.1309405095865);
     points += QPointF(1367.1444008135065, 1094.7666342875323);
     points += QPointF(1377.006758382479, 1122.5181345255592);
-    points += QPointF(1385.5816561538945, 1150.2017940249868);
+    points += QPointF(1385.3821076646018, 1149.5575609882246);
+    points += QPointF(1385.7580931557095, 1150.8527362570703);
     points += QPointF(1391.2089508950362, 1170.962993556315);
+
     return points;
 }

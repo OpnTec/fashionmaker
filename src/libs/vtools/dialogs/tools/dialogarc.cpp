@@ -6,7 +6,7 @@
  **
  **  @brief
  **  @copyright
- **  This source code is part of the Valentine project, a pattern making
+ **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2013-2015 Valentina project
  **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
@@ -60,6 +60,8 @@ DialogArc::DialogArc(const VContainer *data, const quint32 &toolId, QWidget *par
 {
     ui->setupUi(this);
 
+    ui->doubleSpinBoxApproximationScale->setMaximum(maxCurveApproximationScale);
+
     plainTextEditFormula = ui->plainTextEditFormula;
     this->formulaBaseHeight = ui->plainTextEditFormula->height();
     this->formulaBaseHeightF1 = ui->plainTextEditF1->height();
@@ -82,6 +84,7 @@ DialogArc::DialogArc(const VContainer *data, const quint32 &toolId, QWidget *par
 
     FillComboBoxPoints(ui->comboBoxBasePoint);
     FillComboBoxLineColors(ui->comboBoxColor);
+    FillComboBoxTypeLine(ui->comboBoxPenStyle, CurvePenStylesPics());
 
     CheckState();
 
@@ -158,6 +161,18 @@ void DialogArc::SetF2(const QString &value)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+QString DialogArc::GetPenStyle() const
+{
+    return GetComboBoxCurrentData(ui->comboBoxPenStyle, TypeLineLine);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogArc::SetPenStyle(const QString &value)
+{
+    ChangeCurrentData(ui->comboBoxPenStyle, value);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 QString DialogArc::GetColor() const
 {
     return GetComboBoxCurrentData(ui->comboBoxColor, ColorBlack);
@@ -167,6 +182,22 @@ QString DialogArc::GetColor() const
 void DialogArc::SetColor(const QString &value)
 {
     ChangeCurrentData(ui->comboBoxColor, value);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+qreal DialogArc::GetApproximationScale() const
+{
+    return ui->doubleSpinBoxApproximationScale->value();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogArc::SetApproximationScale(qreal value)
+{
+    ui->doubleSpinBoxApproximationScale->setValue(value);
+
+    VisToolArc *path = qobject_cast<VisToolArc *>(vis);
+    SCASSERT(path != nullptr)
+    path->setApproximationScale(value);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -225,7 +256,7 @@ void DialogArc::ChosenObject(quint32 id, const SceneObject &type)
     {
         if (type == SceneObject::Point)
         {
-            if (SetObject(id, ui->comboBoxBasePoint, ""))
+            if (SetObject(id, ui->comboBoxBasePoint, QString()))
             {
                 vis->VisualMode(id);
                 prepare = true;
@@ -246,11 +277,8 @@ void DialogArc::ShowVisualization()
 void DialogArc::SaveData()
 {
     radius = ui->plainTextEditFormula->toPlainText();
-    radius.replace("\n", " ");
     f1 = ui->plainTextEditF1->toPlainText();
-    f1.replace("\n", " ");
     f2 = ui->plainTextEditF2->toPlainText();
-    f2.replace("\n", " ");
 
     VisToolArc *path = qobject_cast<VisToolArc *>(vis);
     SCASSERT(path != nullptr)
@@ -259,6 +287,7 @@ void DialogArc::SaveData()
     path->setRadius(radius);
     path->setF1(f1);
     path->setF2(f2);
+    path->setApproximationScale(ui->doubleSpinBoxApproximationScale->value());
     path->RefreshGeometry();
 }
 
@@ -279,7 +308,7 @@ void DialogArc::RadiusChanged()
 {
     labelEditFormula = ui->labelEditRadius;
     labelResultCalculation = ui->labelResultRadius;
-    const QString postfix = VDomDocument::UnitsToStr(qApp->patternUnit(), true);
+    const QString postfix = UnitsToStr(qApp->patternUnit(), true);
     ValFormulaChanged(flagRadius, ui->plainTextEditFormula, timerRadius, postfix);
 }
 
@@ -311,7 +340,7 @@ void DialogArc::FXRadius()
     DialogEditWrongFormula *dialog = new DialogEditWrongFormula(data, toolId, this);
     dialog->setWindowTitle(tr("Edit radius"));
     dialog->SetFormula(GetRadius());
-    dialog->setPostfix(VDomDocument::UnitsToStr(qApp->patternUnit(), true));
+    dialog->setPostfix(UnitsToStr(qApp->patternUnit(), true));
     if (dialog->exec() == QDialog::Accepted)
     {
         SetRadius(dialog->GetFormula());
@@ -366,7 +395,7 @@ void DialogArc::CheckState()
 void DialogArc::EvalRadius()
 {
     labelEditFormula = ui->labelEditRadius;
-    const QString postfix = VDomDocument::UnitsToStr(qApp->patternUnit(), true);
+    const QString postfix = UnitsToStr(qApp->patternUnit(), true);
     const qreal radius = Eval(ui->plainTextEditFormula->toPlainText(), flagRadius, ui->labelResultRadius, postfix);
 
     if (radius < 0)
@@ -391,32 +420,6 @@ void DialogArc::EvalF()
 
     labelEditFormula = ui->labelEditF2;
     angleF2 = Eval(ui->plainTextEditF2->toPlainText(), flagF2, ui->labelResultF2, degreeSymbol, false);
-
-    CheckAngles();
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void DialogArc::CheckAngles()
-{
-    if (static_cast<int>(angleF1) == INT_MIN || static_cast<int>(angleF2) == INT_MIN)
-    {
-        return;
-    }
-
-    if (VFuzzyComparePossibleNulls(angleF1, angleF2))
-    {
-        flagF1 = false;
-        ChangeColor(ui->labelEditF1, Qt::red);
-        ui->labelResultF1->setText(tr("Error"));
-        ui->labelResultF1->setToolTip(tr("Angles equal"));
-
-        flagF2 = false;
-        ChangeColor(ui->labelEditF2, Qt::red);
-        ui->labelResultF2->setText(tr("Error"));
-        ui->labelResultF2->setToolTip(tr("Angles equal"));
-    }
-
-    DialogArc::CheckState();
 }
 
 //---------------------------------------------------------------------------------------------------------------------

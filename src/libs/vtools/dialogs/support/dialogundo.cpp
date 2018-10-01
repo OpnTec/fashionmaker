@@ -6,7 +6,7 @@
  **
  **  @brief
  **  @copyright
- **  This source code is part of the Valentine project, a pattern making
+ **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2013-2015 Valentina project
  **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
@@ -52,13 +52,13 @@ DialogUndo::DialogUndo(QWidget *parent)
     }
     else
     {
-        connect(ui->pushButtonUndo, &QPushButton::clicked, RECEIVER(this)[this]()
+        connect(ui->pushButtonUndo, &QPushButton::clicked, this, [this]()
         {
             result = UndoButton::Undo;
             accept();
         });
     }
-    connect(ui->pushButtonFix, &QPushButton::clicked, RECEIVER(this)[this]()
+    connect(ui->pushButtonFix, &QPushButton::clicked, this, [this]()
     {
         result = UndoButton::Fix;
         accept();

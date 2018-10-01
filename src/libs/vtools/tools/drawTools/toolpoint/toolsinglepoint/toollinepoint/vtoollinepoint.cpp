@@ -6,7 +6,7 @@
  **
  **  @brief
  **  @copyright
- **  This source code is part of the Valentine project, a pattern making
+ **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2013-2015 Valentina project
  **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
@@ -48,6 +48,7 @@
 #include "../../../../vabstracttool.h"
 #include "../../../vdrawtool.h"
 #include "../vtoolsinglepoint.h"
+#include "../vwidgets/scalesceneitems.h"
 
 template <class T> class QSharedPointer;
 
@@ -70,14 +71,12 @@ VToolLinePoint::VToolLinePoint(VAbstractPattern *doc, VContainer *data, const qu
     :VToolSinglePoint(doc, data, id, parent), formulaLength(formula), angle(angle), basePointId(basePointId),
       mainLine(nullptr), lineColor(lineColor)
 {
-    this->typeLine = typeLine;
+    this->m_lineType = typeLine;
     Q_ASSERT_X(basePointId != 0, Q_FUNC_INFO, "basePointId == 0"); //-V654 //-V712
     QPointF point1 = static_cast<QPointF>(*data->GeometricObject<VPointF>(basePointId));
     QPointF point2 = static_cast<QPointF>(*data->GeometricObject<VPointF>(id));
-    mainLine = new QGraphicsLineItem(QLineF(point1 - point2, QPointF()), this);
-    mainLine->setPen(QPen(CorrectColor(lineColor),
-                          qApp->toPixel(WidthHairLine(*VAbstractTool::data.GetPatternUnit()))/factor,
-                          LineStyleToPenStyle(typeLine)));
+    mainLine = new VScaledLine(QLineF(point1 - point2, QPointF()), this);
+    mainLine->SetBoldLine(false);
     mainLine->setFlag(QGraphicsItem::ItemStacksBehindParent, true);
 }
 
@@ -88,16 +87,25 @@ VToolLinePoint::~VToolLinePoint()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void VToolLinePoint::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
+{
+    QPen mPen = mainLine->pen();
+    mPen.setColor(CorrectColor(this, lineColor));
+    mPen.setStyle(LineStyleToPenStyle(m_lineType));
+
+    mainLine->setPen(mPen);
+
+    VToolSinglePoint::paint(painter, option, widget);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 /**
  * @brief RefreshGeometry  refresh item on scene.
  */
 void VToolLinePoint::RefreshGeometry()
 {
-    mainLine->setPen(QPen(CorrectColor(lineColor),
-                          qApp->toPixel(WidthHairLine(*VAbstractTool::data.GetPatternUnit()))/factor,
-                          LineStyleToPenStyle(typeLine)));
-    VToolSinglePoint::RefreshPointGeometry(*VDrawTool::data.GeometricObject<VPointF>(id));
-    QPointF point = static_cast<QPointF>(*VDrawTool::data.GeometricObject<VPointF>(id));
+    VToolSinglePoint::RefreshPointGeometry(*VDrawTool::data.GeometricObject<VPointF>(m_id));
+    QPointF point = static_cast<QPointF>(*VDrawTool::data.GeometricObject<VPointF>(m_id));
     QPointF basePoint = static_cast<QPointF>(*VDrawTool::data.GeometricObject<VPointF>(basePointId));
     mainLine->setLine(QLineF(basePoint - point, QPointF()));
 }
@@ -117,29 +125,50 @@ void VToolLinePoint::SaveOptions(QDomElement &tag, QSharedPointer<VGObject> &obj
 {
     VToolSinglePoint::SaveOptions(tag, obj);
 
-    doc->SetAttribute(tag, AttrTypeLine, typeLine);
+    doc->SetAttribute(tag, AttrTypeLine, m_lineType);
     doc->SetAttribute(tag, AttrLineColor, lineColor);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-/**
- * @brief SetFactor set current scale factor of scene.
- * @param factor scene scale factor.
- */
-void VToolLinePoint::SetFactor(qreal factor)
+void VToolLinePoint::hoverEnterEvent(QGraphicsSceneHoverEvent *event)
 {
-    VDrawTool::SetFactor(factor);
-    RefreshGeometry();
+    mainLine->SetBoldLine(true);
+    VToolSinglePoint::hoverEnterEvent(event);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VToolLinePoint::hoverLeaveEvent(QGraphicsSceneHoverEvent *event)
+{
+    mainLine->SetBoldLine(false);
+    VToolSinglePoint::hoverLeaveEvent(event);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QString VToolLinePoint::MakeToolTip() const
+{
+    const QSharedPointer<VPointF> first = VAbstractTool::data.GeometricObject<VPointF>(basePointId);
+    const QSharedPointer<VPointF> second = VAbstractTool::data.GeometricObject<VPointF>(m_id);
+
+    const QLineF line(static_cast<QPointF>(*first), static_cast<QPointF>(*second));
+
+    const QString toolTip = QString("<table>"
+                                    "<tr> <td><b>%6:</b> %7</td> </tr>"
+                                    "<tr> <td><b>%1:</b> %2 %3</td> </tr>"
+                                    "<tr> <td><b>%4:</b> %5°</td> </tr>"
+                                    "</table>")
+            .arg(tr("Length"))
+            .arg(qApp->fromPixel(line.length()))
+            .arg(UnitsToStr(qApp->patternUnit(), true), tr("Angle"))
+            .arg(line.angle())
+            .arg(tr("Label"), second->name());
+    return toolTip;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void VToolLinePoint::Disable(bool disable, const QString &namePP)
 {
     VToolSinglePoint::Disable(disable, namePP);
-    mainLine->setPen(QPen(CorrectColor(lineColor),
-                          qApp->toPixel(WidthHairLine(*VAbstractTool::data.GetPatternUnit()))/factor,
-                          LineStyleToPenStyle(typeLine)));
-    mainLine->setEnabled(enabled);
+    mainLine->setEnabled(isEnabled());
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -163,7 +192,7 @@ qreal VToolLinePoint::GetAngle() const
 void VToolLinePoint::SetAngle(const qreal &value)
 {
     angle = value;
-    QSharedPointer<VGObject> obj = VAbstractTool::data.GetGObject(id);
+    QSharedPointer<VGObject> obj = VAbstractTool::data.GetGObject(m_id);
     SaveOption(obj);
 }
 
@@ -178,35 +207,18 @@ void VToolLinePoint::SetLineColor(const QString &value)
 {
     lineColor = value;
 
-    QSharedPointer<VGObject> obj = VAbstractTool::data.GetGObject(id);
+    QSharedPointer<VGObject> obj = VAbstractTool::data.GetGObject(m_id);
     SaveOption(obj);
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-quint32 VToolLinePoint::GetBasePointId() const
-{
-    return basePointId;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void VToolLinePoint::SetBasePointId(const quint32 &value)
-{
-    if (value != NULL_ID)
-    {
-        basePointId = value;
-
-        QSharedPointer<VGObject> obj = VAbstractTool::data.GetGObject(id);
-        SaveOption(obj);
-    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 VFormula VToolLinePoint::GetFormulaLength() const
 {
     VFormula fLength(formulaLength, this->getData());
-    fLength.setCheckZero(true);
-    fLength.setToolId(id);
-    fLength.setPostfix(VDomDocument::UnitsToStr(qApp->patternUnit()));
+    fLength.setCheckZero(false);
+    fLength.setToolId(m_id);
+    fLength.setPostfix(UnitsToStr(qApp->patternUnit()));
+    fLength.Eval();
 
     return fLength;
 }
@@ -218,7 +230,7 @@ void VToolLinePoint::SetFormulaLength(const VFormula &value)
     {
         formulaLength = value.GetFormula(FormulaType::FromUser);
 
-        QSharedPointer<VGObject> obj = VAbstractTool::data.GetGObject(id);
+        QSharedPointer<VGObject> obj = VAbstractTool::data.GetGObject(m_id);
         SaveOption(obj);
     }
 }

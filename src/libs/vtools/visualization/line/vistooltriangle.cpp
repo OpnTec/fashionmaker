@@ -6,7 +6,7 @@
  **
  **  @brief
  **  @copyright
- **  This source code is part of the Valentine project, a pattern making
+ **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2013-2015 Valentina project
  **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
@@ -53,11 +53,11 @@ VisToolTriangle::VisToolTriangle(const VContainer *data, QGraphicsItem *parent)
 {
     axisP1 = InitPoint(supportColor, this);
     axisP2 = InitPoint(supportColor, this);
-    axis = InitItem<QGraphicsPathItem>(supportColor, this);
+    axis = InitItem<VCurvePathItem>(supportColor, this);
     hypotenuseP1 = InitPoint(supportColor, this);
     hypotenuseP2 = InitPoint(supportColor, this);
-    foot1 = InitItem<QGraphicsLineItem>(supportColor, this);
-    foot2 = InitItem<QGraphicsLineItem>(supportColor, this); //-V656
+    foot1 = InitItem<VScaledLine>(supportColor, this);
+    foot2 = InitItem<VScaledLine>(supportColor, this); //-V656
 
     point = InitPoint(mainColor, this);
 }
@@ -81,11 +81,7 @@ void VisToolTriangle::RefreshGeometry()
 
             DrawAimedAxis(axis, QLineF(static_cast<QPointF>(*first), static_cast<QPointF>(*second)), supportColor);
 
-            if (hypotenuseP1Id <= NULL_ID)
-            {
-                return;
-            }
-            else
+            if (hypotenuseP1Id > NULL_ID)
             {
                 const QSharedPointer<VPointF> third = Visualization::data->GeometricObject<VPointF>(hypotenuseP1Id);
                 DrawPoint(hypotenuseP1, static_cast<QPointF>(*third), supportColor);
@@ -95,9 +91,9 @@ void VisToolTriangle::RefreshGeometry()
                     DrawLine(this, QLineF(static_cast<QPointF>(*third), Visualization::scenePos), supportColor,
                              Qt::DashLine);
 
-                    QPointF trPoint = VToolTriangle::FindPoint(static_cast<QPointF>(*first),
-                                                               static_cast<QPointF>(*second),
-                                                               static_cast<QPointF>(*third), Visualization::scenePos);
+                    QPointF trPoint;
+                    VToolTriangle::FindPoint(static_cast<QPointF>(*first), static_cast<QPointF>(*second),
+                                             static_cast<QPointF>(*third), Visualization::scenePos, &trPoint);
                     DrawPoint(point, trPoint, mainColor);
 
                     DrawLine(foot1, QLineF(static_cast<QPointF>(*third), trPoint), supportColor, Qt::DashLine);
@@ -111,10 +107,9 @@ void VisToolTriangle::RefreshGeometry()
                     DrawLine(this, QLineF(static_cast<QPointF>(*third), static_cast<QPointF>(*forth)), supportColor,
                                           Qt::DashLine);
 
-                    QPointF trPoint = VToolTriangle::FindPoint(static_cast<QPointF>(*first),
-                                                               static_cast<QPointF>(*second),
-                                                               static_cast<QPointF>(*third),
-                                                               static_cast<QPointF>(*forth));
+                    QPointF trPoint;
+                    VToolTriangle::FindPoint(static_cast<QPointF>(*first), static_cast<QPointF>(*second),
+                                             static_cast<QPointF>(*third), static_cast<QPointF>(*forth), &trPoint);
                     DrawPoint(point, trPoint, mainColor);
 
                     DrawLine(foot1, QLineF(static_cast<QPointF>(*third), trPoint), supportColor, Qt::DashLine);
@@ -144,19 +139,23 @@ void VisToolTriangle::setHypotenuseP2Id(const quint32 &value)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VisToolTriangle::DrawAimedAxis(QGraphicsPathItem *item, const QLineF &line, const QColor &color,
+void VisToolTriangle::DrawAimedAxis(VCurvePathItem *item, const QLineF &line, const QColor &color,
                                     Qt::PenStyle style)
 {
     SCASSERT (item != nullptr)
 
-    item->setPen(QPen(color, qApp->toPixel(WidthHairLine(*Visualization::data->GetPatternUnit()))/factor, style));
+    QPen visPen = item->pen();
+    visPen.setColor(color);
+    visPen.setStyle(style);
+
+    item->setPen(visPen);
 
     QPainterPath path;
     path.moveTo(line.p1());
     path.lineTo(line.p2());
 
-    qreal arrow_step = 60/factor;
-    qreal arrow_size = 10/factor;
+    qreal arrow_step = 60;
+    qreal arrow_size = 10;
 
     if (line.length() < arrow_step)
     {

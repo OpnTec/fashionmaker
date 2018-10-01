@@ -6,7 +6,7 @@
  **
  **  @brief
  **  @copyright
- **  This source code is part of the Valentine project, a pattern making
+ **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2013-2015 Valentina project
  **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
@@ -50,11 +50,14 @@ class VGraphicsSimpleTextItem : public QObject, public QGraphicsSimpleTextItem
 public:
     explicit VGraphicsSimpleTextItem(QGraphicsItem *parent = nullptr);
     explicit VGraphicsSimpleTextItem( const QString & text, QGraphicsItem *parent = nullptr );
-    virtual ~VGraphicsSimpleTextItem() Q_DECL_OVERRIDE;
+    virtual ~VGraphicsSimpleTextItem() =default;
 
-    qint32       FontSize()const;
-    virtual int  type() const Q_DECL_OVERRIDE {return Type;}
+    qint32       BaseFontSize()const;
+    virtual int  type() const override {return Type;}
     enum { Type = UserType + static_cast<int>(Vis::GraphicsSimpleTextItem)};
+
+    virtual void paint(QPainter *painter, const QStyleOptionGraphicsItem *option,
+                       QWidget *widget = nullptr) override;
 
     void setEnabled(bool enabled);
     void LabelSelectionType(const SelectionType &type);
@@ -73,17 +76,20 @@ signals:
     void         PointChoosed();
     void         PointSelected(bool selected);
 protected:
-    virtual QVariant itemChange ( GraphicsItemChange change, const QVariant &value ) Q_DECL_OVERRIDE;
-    virtual void hoverEnterEvent ( QGraphicsSceneHoverEvent *event ) Q_DECL_OVERRIDE;
-    virtual void hoverLeaveEvent ( QGraphicsSceneHoverEvent *event ) Q_DECL_OVERRIDE;
-    virtual void contextMenuEvent ( QGraphicsSceneContextMenuEvent *event ) Q_DECL_OVERRIDE;
-    virtual void mousePressEvent( QGraphicsSceneMouseEvent * event ) Q_DECL_OVERRIDE;
-    virtual void mouseReleaseEvent ( QGraphicsSceneMouseEvent * event ) Q_DECL_OVERRIDE;
-    virtual void keyReleaseEvent ( QKeyEvent * event ) Q_DECL_OVERRIDE;
+    virtual QVariant itemChange ( GraphicsItemChange change, const QVariant &value ) override;
+    virtual void hoverEnterEvent ( QGraphicsSceneHoverEvent *event ) override;
+    virtual void hoverLeaveEvent ( QGraphicsSceneHoverEvent *event ) override;
+    virtual void contextMenuEvent ( QGraphicsSceneContextMenuEvent *event ) override;
+    virtual void mousePressEvent( QGraphicsSceneMouseEvent * event ) override;
+    virtual void mouseReleaseEvent ( QGraphicsSceneMouseEvent * event ) override;
+    virtual void keyReleaseEvent ( QKeyEvent * event ) override;
 private:
     /** @brief fontSize label font size. */
-    qint32        fontSize;
+    qint32        m_fontSize;
     SelectionType selectionType;
+    qreal         m_oldScale;
+
+    void Init();
 };
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -91,9 +97,9 @@ private:
  * @brief FontSize return label font size.
  * @return font size.
  */
-inline qint32 VGraphicsSimpleTextItem::FontSize() const
+inline qint32 VGraphicsSimpleTextItem::BaseFontSize() const
 {
-    return fontSize;
+    return m_fontSize;
 }
 
 #endif // VGRAPHICSSIMPLETEXTITEM_H

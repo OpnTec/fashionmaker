@@ -6,7 +6,7 @@
  **
  **  @brief
  **  @copyright
- **  This source code is part of the Valentine project, a pattern making
+ **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2016 Valentina project
  **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
@@ -44,6 +44,7 @@
 #include <Qt>
 #include <new>
 
+#include "../../tools/vabstracttool.h"
 #include "../../visualization/path/vistoolcubicbezierpath.h"
 #include "../../visualization/visualization.h"
 #include "../ifc/ifcdef.h"
@@ -70,9 +71,12 @@ DialogCubicBezierPath::DialogCubicBezierPath(const VContainer *data, const quint
 
     FillComboBoxPoints(ui->comboBoxPoint);
     FillComboBoxLineColors(ui->comboBoxColor);
+    FillComboBoxTypeLine(ui->comboBoxPenStyle, CurvePenStylesPics());
+
+    ui->doubleSpinBoxApproximationScale->setMaximum(maxCurveApproximationScale);
 
     connect(ui->listWidget, &QListWidget::currentRowChanged, this, &DialogCubicBezierPath::PointChanged);
-    connect(ui->comboBoxPoint,  static_cast<void (QComboBox::*)(int)>(&QComboBox::currentIndexChanged),
+    connect(ui->comboBoxPoint, QOverload<int>::of(&QComboBox::currentIndexChanged),
             this, &DialogCubicBezierPath::currentPointChanged);
 
     vis = new VisToolCubicBezierPath(data);
@@ -102,6 +106,10 @@ void DialogCubicBezierPath::SetPath(const VCubicBezierPath &value)
     }
     ui->listWidget->setFocus(Qt::OtherFocusReason);
     ui->lineEditSplPathName->setText(qApp->TrVars()->VarToUser(path.name()));
+    ui->doubleSpinBoxApproximationScale->setValue(path.GetApproximationScale());
+
+    ChangeCurrentData(ui->comboBoxPenStyle, path.GetPenStyle());
+    ChangeCurrentData(ui->comboBoxColor, path.GetColor());
 
     auto visPath = qobject_cast<VisToolCubicBezierPath *>(vis);
     SCASSERT(visPath != nullptr)
@@ -112,18 +120,6 @@ void DialogCubicBezierPath::SetPath(const VCubicBezierPath &value)
     {
         ui->listWidget->setCurrentRow(0);
     }
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-QString DialogCubicBezierPath::GetColor() const
-{
-    return GetComboBoxCurrentData(ui->comboBoxColor, ColorBlack);
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void DialogCubicBezierPath::SetColor(const QString &value)
-{
-    ChangeCurrentData(ui->comboBoxColor, value);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -169,7 +165,7 @@ void DialogCubicBezierPath::ShowDialog(bool click)
         {
             if (size - VCubicBezierPath::SubSplPointsCount(path.CountSubSpl()) == 0)
             {// Accept only if all subpaths are completed
-                emit ToolTip("");
+                emit ToolTip(QString());
 
                 if (not data->IsUnique(path.name()))
                 {
@@ -194,6 +190,10 @@ void DialogCubicBezierPath::SaveData()
     const quint32 d = path.GetDuplicate();//Save previous value
     SavePath();
     newDuplicate <= -1 ? path.SetDuplicate(d) : path.SetDuplicate(static_cast<quint32>(newDuplicate));
+
+    path.SetPenStyle(GetComboBoxCurrentData(ui->comboBoxPenStyle, TypeLineLine));
+    path.SetColor(GetComboBoxCurrentData(ui->comboBoxColor, ColorBlack));
+    path.SetApproximationScale(ui->doubleSpinBoxApproximationScale->value());
 
     auto visPath = qobject_cast<VisToolCubicBezierPath *>(vis);
     SCASSERT(visPath != nullptr)
@@ -265,8 +265,8 @@ void DialogCubicBezierPath::currentPointChanged(int index)
 //---------------------------------------------------------------------------------------------------------------------
 void DialogCubicBezierPath::NewItem(const VPointF &point)
 {
-    auto item = new QListWidgetItem(point.name());
-    item->setFont(QFont("Times", 12, QFont::Bold));
+    auto* item = new QListWidgetItem(point.name());
+    item->setFont(NodeFont(item->font()));
     item->setData(Qt::UserRole, QVariant::fromValue(point));
 
     ui->listWidget->addItem(item);

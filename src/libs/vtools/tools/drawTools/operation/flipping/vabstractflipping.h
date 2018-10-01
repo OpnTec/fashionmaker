@@ -6,7 +6,7 @@
  **
  **  @brief
  **  @copyright
- **  This source code is part of the Valentine project, a pattern making
+ **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2016 Valentina project
  **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
@@ -43,10 +43,7 @@ protected:
                       const QVector<quint32> &source, const QVector<DestinationItem> &destination,
                       QGraphicsItem *parent = nullptr);
 
-    static void CreateDestination(Source typeCreation, quint32 &id, QVector<DestinationItem> &dest,
-                                  const QVector<quint32> &source, const QPointF &fPoint, const QPointF &sPoint,
-                                  const QString &suffix, VAbstractPattern *doc, VContainer *data,
-                                  const Document &parse);
+    static void CreateDestination(VAbstractOperationInitData &initData, const QPointF &fPoint, const QPointF &sPoint);
 
     static DestinationItem CreatePoint(quint32 idTool, quint32 idItem, const QPointF &firstPoint,
                                        const QPointF &secondPoint, const QString &suffix, VContainer *data);
@@ -65,7 +62,7 @@ protected:
                                                    const QPointF &secondPoint, const QString &suffix, VContainer *data);
 
     static void UpdatePoint(quint32 idTool, quint32 idItem, const QPointF &firstPoint, const QPointF &secondPoint,
-                            const QString &suffix, VContainer *data, quint32 id, qreal mx, qreal my);
+                            const QString &suffix, VContainer *data, const DestinationItem &item);
     template <class Item>
     static void UpdateItem(quint32 idTool, quint32 idItem, const QPointF &firstPoint, const QPointF &secondPoint,
                            const QString &suffix, VContainer *data, quint32 id);

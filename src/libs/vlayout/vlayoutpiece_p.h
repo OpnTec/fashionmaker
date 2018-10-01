@@ -6,7 +6,7 @@
  **
  **  @brief
  **  @copyright
- **  This source code is part of the Valentine project, a pattern making
+ **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2013-2015 Valentina project
  **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
@@ -39,11 +39,12 @@
 #include "../vpatterndb/floatItemData/vgrainlinedata.h"
 #include "../vmisc/diagnostic.h"
 #include "vlayoutpiecepath.h"
-
+#include "../vgeometry/vgeometrydef.h"
 #include "vtextmanager.h"
 
 QT_WARNING_PUSH
 QT_WARNING_DISABLE_GCC("-Weffc++")
+QT_WARNING_DISABLE_GCC("-Wnon-virtual-dtor")
 
 class VLayoutPieceData : public QSharedData
 {
@@ -61,7 +62,8 @@ public:
           patternInfo(),
           grainlinePoints(),
           m_tmDetail(),
-          m_tmPattern()
+          m_tmPattern(),
+          m_placeLabels()
     {}
 
     VLayoutPieceData(const VLayoutPieceData &detail)
@@ -78,7 +80,8 @@ public:
           patternInfo(detail.patternInfo),
           grainlinePoints(detail.grainlinePoints),
           m_tmDetail(detail.m_tmDetail),
-          m_tmPattern(detail.m_tmPattern)
+          m_tmPattern(detail.m_tmPattern),
+          m_placeLabels(detail.m_placeLabels)
     {}
 
     ~VLayoutPieceData() {}
@@ -120,6 +123,9 @@ public:
 
     /** @brief m_tmPattern text manager for laying out pattern info */
     VTextManager              m_tmPattern;
+
+    /** @brief m_placeLabels list of place labels. */
+    QVector<VLayoutPlaceLabel> m_placeLabels;
 
 private:
     VLayoutPieceData &operator=(const VLayoutPieceData &) Q_DECL_EQ_DELETE;

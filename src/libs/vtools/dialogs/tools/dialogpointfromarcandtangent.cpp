@@ -6,7 +6,7 @@
  **
  **  @brief
  **  @copyright
- **  This source code is part of the Valentine project, a pattern making
+ **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2015 Valentina project
  **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
@@ -45,9 +45,7 @@ DialogPointFromArcAndTangent::DialogPointFromArcAndTangent(const VContainer *dat
 {
     ui->setupUi(this);
 
-#if QT_VERSION >= QT_VERSION_CHECK(5, 2, 0)
     ui->lineEditNamePoint->setClearButtonEnabled(true);
-#endif
 
     ui->lineEditNamePoint->setText(qApp->getCurrentDocument()->GenerateLabel(LabelType::NewLabel));
     labelEditNamePoint = ui->labelEditNamePoint;
@@ -154,7 +152,7 @@ void DialogPointFromArcAndTangent::ChosenObject(quint32 id, const SceneObject &t
                 case 1:
                     if (type == SceneObject::Arc)
                     {
-                        if (SetObject(id, ui->comboBoxArc, ""))
+                        if (SetObject(id, ui->comboBoxArc, QString()))
                         {
                             number = 0;
                             point->setArcId(id);

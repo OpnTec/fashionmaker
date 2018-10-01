@@ -6,7 +6,7 @@
  **
  **  @brief
  **  @copyright
- **  This source code is part of the Valentine project, a pattern making
+ **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2013-2015 Valentina project
  **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
@@ -51,7 +51,7 @@ class DialogSinglePoint : public DialogTool
     Q_OBJECT
 public:
     DialogSinglePoint(const VContainer *data, const quint32 &toolId, QWidget *parent = nullptr);
-    virtual ~DialogSinglePoint() Q_DECL_OVERRIDE;
+    virtual ~DialogSinglePoint() override;
 
     void           SetData(const QString &name, const QPointF &point);
     QPointF        GetPoint()const;
@@ -62,7 +62,7 @@ protected:
     /**
      * @brief SaveData Put dialog data in local variables
      */
-    virtual void   SaveData() Q_DECL_OVERRIDE;
+    virtual void   SaveData() override;
 private:
     Q_DISABLE_COPY(DialogSinglePoint)
 

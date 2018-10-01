@@ -6,7 +6,7 @@
  **
  **  @brief
  **  @copyright
- **  This source code is part of the Valentine project, a pattern making
+ **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2013-2015 Valentina project
  **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
@@ -40,6 +40,7 @@
 #include <QStringData>
 #include <QStringDataPtr>
 #include <algorithm>
+#include <QGlobalStatic>
 
 #include "../exception/vexception.h"
 #include "../exception/vexceptionemptyparameter.h"
@@ -57,84 +58,114 @@ class QDomElement;
  * 4. patch - little change.
  */
 
-const QString VPatternConverter::PatternMinVerStr = QStringLiteral("0.1.0");
-const QString VPatternConverter::PatternMaxVerStr = QStringLiteral("0.4.8");
-const QString VPatternConverter::CurrentSchema    = QStringLiteral("://schema/pattern/v0.4.8.xsd");
+const QString VPatternConverter::PatternMinVerStr = QStringLiteral("0.1.4");
+const QString VPatternConverter::PatternMaxVerStr = QStringLiteral("0.7.12");
+const QString VPatternConverter::CurrentSchema    = QStringLiteral("://schema/pattern/v0.7.12.xsd");
 
 //VPatternConverter::PatternMinVer; // <== DON'T FORGET TO UPDATE TOO!!!!
 //VPatternConverter::PatternMaxVer; // <== DON'T FORGET TO UPDATE TOO!!!!
 
+namespace
+{
 // The list of all string we use for conversion
 // Better to use global variables because repeating QStringLiteral blows up code size
-static const QString strUnit                      = QStringLiteral("unit");
-static const QString strVersion                   = QStringLiteral("version");
-static const QString strName                      = QStringLiteral("name");
-static const QString strBase                      = QStringLiteral("base");
-static const QString strFormula                   = QStringLiteral("formula");
-static const QString strId                        = QStringLiteral("id");
-static const QString strKGrowth                   = QStringLiteral("kgrowth");
-static const QString strKSize                     = QStringLiteral("ksize");
-static const QString strPoint                     = QStringLiteral("point");
-static const QString strLength                    = QStringLiteral("length");
-static const QString strAngle                     = QStringLiteral("angle");
-static const QString strC1Radius                  = QStringLiteral("c1Radius");
-static const QString strC2Radius                  = QStringLiteral("c2Radius");
-static const QString strCRadius                   = QStringLiteral("cRadius");
-static const QString strArc                       = QStringLiteral("arc");
-static const QString strAngle1                    = QStringLiteral("angle1");
-static const QString strAngle2                    = QStringLiteral("angle2");
-static const QString strRadius                    = QStringLiteral("radius");
-static const QString strPathPoint                 = QStringLiteral("pathPoint");
-static const QString strKAsm1                     = QStringLiteral("kAsm1");
-static const QString strKAsm2                     = QStringLiteral("kAsm2");
-static const QString strPath                      = QStringLiteral("path");
-static const QString strType                      = QStringLiteral("type");
-static const QString strCutArc                    = QStringLiteral("cutArc");
-static const QString strSpline                    = QStringLiteral("spline");
-static const QString strSplinePath                = QStringLiteral("splinePath");
-static const QString strCutSpline                 = QStringLiteral("cutSpline");
-static const QString strCutSplinePath             = QStringLiteral("cutSplinePath");
-static const QString strColor                     = QStringLiteral("color");
-static const QString strMeasurements              = QStringLiteral("measurements");
-static const QString strIncrement                 = QStringLiteral("increment");
-static const QString strIncrements                = QStringLiteral("increments");
-static const QString strModeling                  = QStringLiteral("modeling");
-static const QString strTools                     = QStringLiteral("tools");
-static const QString strIdTool                    = QStringLiteral("idTool");
-static const QString strIdObject                  = QStringLiteral("idObject");
-static const QString strChildren                  = QStringLiteral("children");
-static const QString strChild                     = QStringLiteral("child");
-static const QString strPointOfIntersectionCurves = QStringLiteral("pointOfIntersectionCurves");
-static const QString strCurveIntersectAxis        = QStringLiteral("curveIntersectAxis");
-static const QString strCurve                     = QStringLiteral("curve");
-static const QString strCurve1                    = QStringLiteral("curve1");
-static const QString strCurve2                    = QStringLiteral("curve2");
-static const QString strModelingPath              = QStringLiteral("modelingPath");
-static const QString strModelingSpline            = QStringLiteral("modelingSpline");
-static const QString strPointFromArcAndTangent    = QStringLiteral("pointFromArcAndTangent");
-static const QString strPointOfIntersectionArcs   = QStringLiteral("pointOfIntersectionArcs");
-static const QString strFirstArc                  = QStringLiteral("firstArc");
-static const QString strSecondArc                 = QStringLiteral("secondArc");
-static const QString strDetail                    = QStringLiteral("detail");
-static const QString strSupplement                = QStringLiteral("supplement");
-static const QString strClosed                    = QStringLiteral("closed");
-static const QString strWidth                     = QStringLiteral("width");
-static const QString strHeight                    = QStringLiteral("height");
-static const QString strNode                      = QStringLiteral("node");
-static const QString strNodes                     = QStringLiteral("nodes");
-static const QString strData                      = QStringLiteral("data");
-static const QString strPatternInfo               = QStringLiteral("patternInfo");
-static const QString strGrainline                 = QStringLiteral("grainline");
-static const QString strReverse                   = QStringLiteral("reverse");
-static const QString strMx                        = QStringLiteral("mx");
-static const QString strMy                        = QStringLiteral("my");
-static const QString strForbidFlipping            = QStringLiteral("forbidFlipping");
-static const QString strInLayout                  = QStringLiteral("inLayout");
-static const QString strSeamAllowance             = QStringLiteral("seamAllowance");
-static const QString strNodeType                  = QStringLiteral("nodeType");
-static const QString strDet                       = QStringLiteral("det");
-static const QString strTypeObject                = QStringLiteral("typeObject");
-static const QString strReadOnly                  = QStringLiteral("readOnly");
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, strUnit, (QLatin1String("unit")))
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, strVersion, (QLatin1String("version")))
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, strName, (QLatin1String("name")))
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, strBase, (QLatin1String("base")))
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, strFormula, (QLatin1String("formula")))
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, strId, (QLatin1String("id")))
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, strKGrowth , (QLatin1String("kgrowth")))
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, strKSize, (QLatin1String("ksize")))
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, strPoint, (QLatin1String("point")))
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, strLength, (QLatin1String("length")))
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, strAngle, (QLatin1String("angle")))
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, strC1Radius, (QLatin1String("c1Radius")))
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, strC2Radius, (QLatin1String("c2Radius")))
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, strCRadius, (QLatin1String("cRadius")))
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, strArc, (QLatin1String("arc")))
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, strAngle1, (QLatin1String("angle1")))
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, strAngle2, (QLatin1String("angle2")))
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, strRadius, (QLatin1String("radius")))
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, strPathPoint, (QLatin1String("pathPoint")))
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, strKAsm1, (QLatin1String("kAsm1")))
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, strKAsm2, (QLatin1String("kAsm2")))
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, strPath, (QLatin1String("path")))
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, strType, (QLatin1String("type")))
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, strCutArc, (QLatin1String("cutArc")))
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, strSpline, (QLatin1String("spline")))
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, strSplinePath, (QLatin1String("splinePath")))
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, strCutSpline, (QLatin1String("cutSpline")))
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, strCutSplinePath, (QLatin1String("cutSplinePath")))
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, strColor, (QLatin1String("color")))
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, strMeasurements, (QLatin1String("measurements")))
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, strIncrement, (QLatin1String("increment")))
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, strIncrements, (QLatin1String("increments")))
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, strPreviewCalculations, (QLatin1String("previewCalculations")))
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, strModeling, (QLatin1String("modeling")))
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, strTools, (QLatin1String("tools")))
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, strIdTool, (QLatin1String("idTool")))
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, strIdObject, (QLatin1String("idObject")))
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, strChildren, (QLatin1String("children")))
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, strChild, (QLatin1String("child")))
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, strPointOfIntersectionCurves, (QLatin1String("pointOfIntersectionCurves")))
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, strCurveIntersectAxis, (QLatin1String("curveIntersectAxis")))
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, strCurve, (QLatin1String("curve")))
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, strCurve1, (QLatin1String("curve1")))
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, strCurve2, (QLatin1String("curve2")))
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, strModelingPath, (QLatin1String("modelingPath")))
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, strModelingSpline, (QLatin1String("modelingSpline")))
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, strPointFromArcAndTangent, (QLatin1String("pointFromArcAndTangent")))
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, strPointOfIntersectionArcs, (QLatin1String("pointOfIntersectionArcs")))
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, strFirstArc, (QLatin1String("firstArc")))
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, strSecondArc, (QLatin1String("secondArc")))
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, strDetail, (QLatin1String("detail")))
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, strSupplement, (QLatin1String("supplement")))
+//Q_GLOBAL_STATIC_WITH_ARGS(const QString, strClosed, (QLatin1String("closed")))
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, strWidth, (QLatin1String("width")))
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, strHeight, (QLatin1String("height")))
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, strNode, (QLatin1String("node")))
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, strNodes, (QLatin1String("nodes")))
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, strData, (QLatin1String("data")))
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, strPatternInfo, (QLatin1String("patternInfo")))
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, strGrainline, (QLatin1String("grainline")))
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, strReverse, (QLatin1String("reverse")))
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, strMx, (QLatin1String("mx")))
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, strMy, (QLatin1String("my")))
+//Q_GLOBAL_STATIC_WITH_ARGS(const QString, strForbidFlipping, (QLatin1String("forbidFlipping")))
+//Q_GLOBAL_STATIC_WITH_ARGS(const QString, strInLayout, (QLatin1String("inLayout")))
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, strSeamAllowance, (QLatin1String("seamAllowance")))
+//Q_GLOBAL_STATIC_WITH_ARGS(const QString, strNodeType, (QLatin1String("nodeType")))
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, strDet, (QLatin1String("det")))
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, strTypeObject, (QLatin1String("typeObject")))
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, strReadOnly, (QLatin1String("readOnly")))
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, strPatternLabel, (QLatin1String("patternLabel")))
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, strImage, (QLatin1String("image")))
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, strAuthor, (QLatin1String("author")))
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, strDescription, (QLatin1String("description")))
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, strNotes, (QLatin1String("notes")))
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, strGradation, (QLatin1String("gradation")))
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, strPatternName, (QLatin1String("patternName")))
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, strPatternNum, (QLatin1String("patternNumber")))
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, strCompanyName, (QLatin1String("company")))
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, strCustomerName, (QLatin1String("customer")))
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, strLine, (QLatin1String("line")))
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, strText, (QLatin1String("text")))
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, strBold, (QLatin1String("bold")))
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, strItalic, (QLatin1String("italic")))
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, strAlignment, (QLatin1String("alignment")))
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, strFSIncrement, (QLatin1String("sfIncrement")))
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, strShowDate, (QLatin1String("showDate")))
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, strShowMeasurements, (QLatin1String("showMeasurements")))
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, strSize, (QLatin1String("size")))
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, strMCP, (QLatin1String("mcp")))
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, strLetter, (QLatin1String("letter")))
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, strMaterial , (QLatin1String("material")))
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, strUserDefined, (QLatin1String("userDef")))
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, strPlacement, (QLatin1String("placement")))
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, strCutNumber, (QLatin1String("cutNumber")))
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, strQuantity, (QLatin1String("quantity")))
+}
 
 //---------------------------------------------------------------------------------------------------------------------
 VPatternConverter::VPatternConverter(const QString &fileName)
@@ -146,77 +177,68 @@ VPatternConverter::VPatternConverter(const QString &fileName)
 //---------------------------------------------------------------------------------------------------------------------
 QString VPatternConverter::XSDSchema(int ver) const
 {
-    switch (ver)
+    QHash <int, QString> schemas =
     {
-        case (0x000100):
-            return QStringLiteral("://schema/pattern/v0.1.0.xsd");
-        case (0x000101):
-            return QStringLiteral("://schema/pattern/v0.1.1.xsd");
-        case (0x000102):
-            return QStringLiteral("://schema/pattern/v0.1.2.xsd");
-        case (0x000103):
-            return QStringLiteral("://schema/pattern/v0.1.3.xsd");
-        case (0x000104):
-            return QStringLiteral("://schema/pattern/v0.1.4.xsd");
-        case (0x000200):
-            return QStringLiteral("://schema/pattern/v0.2.0.xsd");
-        case (0x000201):
-            return QStringLiteral("://schema/pattern/v0.2.1.xsd");
-        case (0x000202):
-            return QStringLiteral("://schema/pattern/v0.2.2.xsd");
-        case (0x000203):
-            return QStringLiteral("://schema/pattern/v0.2.3.xsd");
-        case (0x000204):
-            return QStringLiteral("://schema/pattern/v0.2.4.xsd");
-        case (0x000205):
-            return QStringLiteral("://schema/pattern/v0.2.5.xsd");
-        case (0x000206):
-            return QStringLiteral("://schema/pattern/v0.2.6.xsd");
-        case (0x000207):
-            return QStringLiteral("://schema/pattern/v0.2.7.xsd");
-        case (0x000300):
-            return QStringLiteral("://schema/pattern/v0.3.0.xsd");
-        case (0x000301):
-            return QStringLiteral("://schema/pattern/v0.3.1.xsd");
-        case (0x000302):
-            return QStringLiteral("://schema/pattern/v0.3.2.xsd");
-        case (0x000303):
-            return QStringLiteral("://schema/pattern/v0.3.3.xsd");
-        case (0x000304):
-            return QStringLiteral("://schema/pattern/v0.3.4.xsd");
-        case (0x000305):
-            return QStringLiteral("://schema/pattern/v0.3.5.xsd");
-        case (0x000306):
-            return QStringLiteral("://schema/pattern/v0.3.6.xsd");
-        case (0x000307):
-            return QStringLiteral("://schema/pattern/v0.3.7.xsd");
-        case (0x000308):
-            return QStringLiteral("://schema/pattern/v0.3.8.xsd");
-        case (0x000309):
-            return QStringLiteral("://schema/pattern/v0.3.9.xsd");
-        case (0x000400):
-            return QStringLiteral("://schema/pattern/v0.4.0.xsd");
-        case (0x000401):
-            return QStringLiteral("://schema/pattern/v0.4.1.xsd");
-        case (0x000402):
-            return QStringLiteral("://schema/pattern/v0.4.2.xsd");
-        case (0x000403):
-            return QStringLiteral("://schema/pattern/v0.4.3.xsd");
-        case (0x000404):
-            return QStringLiteral("://schema/pattern/v0.4.4.xsd");
-        case (0x000405):
-            return QStringLiteral("://schema/pattern/v0.4.5.xsd");
-        case (0x000406):
-            return QStringLiteral("://schema/pattern/v0.4.6.xsd");
-        case (0x000407):
-            return QStringLiteral("://schema/pattern/v0.4.8.xsd");
-        case (0x000408):
-            return CurrentSchema;
-        default:
-            InvalidVersion(ver);
-            break;
+        std::make_pair(FORMAT_VERSION(0, 1, 4), QStringLiteral("://schema/pattern/v0.1.4.xsd")),
+        std::make_pair(FORMAT_VERSION(0, 2, 0), QStringLiteral("://schema/pattern/v0.2.0.xsd")),
+        std::make_pair(FORMAT_VERSION(0, 2, 1), QStringLiteral("://schema/pattern/v0.2.1.xsd")),
+        std::make_pair(FORMAT_VERSION(0, 2, 2), QStringLiteral("://schema/pattern/v0.2.2.xsd")),
+        std::make_pair(FORMAT_VERSION(0, 2, 3), QStringLiteral("://schema/pattern/v0.2.3.xsd")),
+        std::make_pair(FORMAT_VERSION(0, 2, 4), QStringLiteral("://schema/pattern/v0.2.4.xsd")),
+        std::make_pair(FORMAT_VERSION(0, 2, 5), QStringLiteral("://schema/pattern/v0.2.5.xsd")),
+        std::make_pair(FORMAT_VERSION(0, 2, 6), QStringLiteral("://schema/pattern/v0.2.6.xsd")),
+        std::make_pair(FORMAT_VERSION(0, 2, 7), QStringLiteral("://schema/pattern/v0.2.7.xsd")),
+        std::make_pair(FORMAT_VERSION(0, 3, 0), QStringLiteral("://schema/pattern/v0.3.0.xsd")),
+        std::make_pair(FORMAT_VERSION(0, 3, 1), QStringLiteral("://schema/pattern/v0.3.1.xsd")),
+        std::make_pair(FORMAT_VERSION(0, 3, 2), QStringLiteral("://schema/pattern/v0.3.2.xsd")),
+        std::make_pair(FORMAT_VERSION(0, 3, 3), QStringLiteral("://schema/pattern/v0.3.3.xsd")),
+        std::make_pair(FORMAT_VERSION(0, 3, 4), QStringLiteral("://schema/pattern/v0.3.4.xsd")),
+        std::make_pair(FORMAT_VERSION(0, 3, 5), QStringLiteral("://schema/pattern/v0.3.5.xsd")),
+        std::make_pair(FORMAT_VERSION(0, 3, 6), QStringLiteral("://schema/pattern/v0.3.6.xsd")),
+        std::make_pair(FORMAT_VERSION(0, 3, 7), QStringLiteral("://schema/pattern/v0.3.7.xsd")),
+        std::make_pair(FORMAT_VERSION(0, 3, 8), QStringLiteral("://schema/pattern/v0.3.8.xsd")),
+        std::make_pair(FORMAT_VERSION(0, 3, 9), QStringLiteral("://schema/pattern/v0.3.9.xsd")),
+        std::make_pair(FORMAT_VERSION(0, 4, 0), QStringLiteral("://schema/pattern/v0.4.0.xsd")),
+        std::make_pair(FORMAT_VERSION(0, 4, 1), QStringLiteral("://schema/pattern/v0.4.1.xsd")),
+        std::make_pair(FORMAT_VERSION(0, 4, 2), QStringLiteral("://schema/pattern/v0.4.2.xsd")),
+        std::make_pair(FORMAT_VERSION(0, 4, 3), QStringLiteral("://schema/pattern/v0.4.3.xsd")),
+        std::make_pair(FORMAT_VERSION(0, 4, 4), QStringLiteral("://schema/pattern/v0.4.4.xsd")),
+        std::make_pair(FORMAT_VERSION(0, 4, 5), QStringLiteral("://schema/pattern/v0.4.5.xsd")),
+        std::make_pair(FORMAT_VERSION(0, 4, 6), QStringLiteral("://schema/pattern/v0.4.6.xsd")),
+        std::make_pair(FORMAT_VERSION(0, 4, 7), QStringLiteral("://schema/pattern/v0.4.7.xsd")),
+        std::make_pair(FORMAT_VERSION(0, 4, 8), QStringLiteral("://schema/pattern/v0.4.8.xsd")),
+        std::make_pair(FORMAT_VERSION(0, 5, 0), QStringLiteral("://schema/pattern/v0.5.0.xsd")),
+        std::make_pair(FORMAT_VERSION(0, 5, 1), QStringLiteral("://schema/pattern/v0.5.1.xsd")),
+        std::make_pair(FORMAT_VERSION(0, 6, 0), QStringLiteral("://schema/pattern/v0.6.0.xsd")),
+        std::make_pair(FORMAT_VERSION(0, 6, 1), QStringLiteral("://schema/pattern/v0.6.1.xsd")),
+        std::make_pair(FORMAT_VERSION(0, 6, 2), QStringLiteral("://schema/pattern/v0.6.2.xsd")),
+        std::make_pair(FORMAT_VERSION(0, 6, 3), QStringLiteral("://schema/pattern/v0.6.3.xsd")),
+        std::make_pair(FORMAT_VERSION(0, 6, 4), QStringLiteral("://schema/pattern/v0.6.4.xsd")),
+        std::make_pair(FORMAT_VERSION(0, 6, 5), QStringLiteral("://schema/pattern/v0.6.5.xsd")),
+        std::make_pair(FORMAT_VERSION(0, 6, 6), QStringLiteral("://schema/pattern/v0.6.6.xsd")),
+        std::make_pair(FORMAT_VERSION(0, 7, 0), QStringLiteral("://schema/pattern/v0.7.0.xsd")),
+        std::make_pair(FORMAT_VERSION(0, 7, 1), QStringLiteral("://schema/pattern/v0.7.1.xsd")),
+        std::make_pair(FORMAT_VERSION(0, 7, 2), QStringLiteral("://schema/pattern/v0.7.2.xsd")),
+        std::make_pair(FORMAT_VERSION(0, 7, 3), QStringLiteral("://schema/pattern/v0.7.3.xsd")),
+        std::make_pair(FORMAT_VERSION(0, 7, 4), QStringLiteral("://schema/pattern/v0.7.4.xsd")),
+        std::make_pair(FORMAT_VERSION(0, 7, 5), QStringLiteral("://schema/pattern/v0.7.5.xsd")),
+        std::make_pair(FORMAT_VERSION(0, 7, 6), QStringLiteral("://schema/pattern/v0.7.6.xsd")),
+        std::make_pair(FORMAT_VERSION(0, 7, 7), QStringLiteral("://schema/pattern/v0.7.7.xsd")),
+        std::make_pair(FORMAT_VERSION(0, 7, 8), QStringLiteral("://schema/pattern/v0.7.8.xsd")),
+        std::make_pair(FORMAT_VERSION(0, 7, 9), QStringLiteral("://schema/pattern/v0.7.9.xsd")),
+        std::make_pair(FORMAT_VERSION(0, 7, 10), QStringLiteral("://schema/pattern/v0.7.10.xsd")),
+        std::make_pair(FORMAT_VERSION(0, 7, 11), QStringLiteral("://schema/pattern/v0.7.11.xsd")),
+        std::make_pair(FORMAT_VERSION(0, 7, 12), CurrentSchema)
+    };
+
+    if (schemas.contains(ver))
+    {
+        return schemas.value(ver);
     }
-    return QString();//unreachable code
+    else
+    {
+        InvalidVersion(ver);
+    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -224,135 +246,206 @@ void VPatternConverter::ApplyPatches()
 {
     switch (m_ver)
     {
-        case (0x000100):
-            ToV0_1_1();
-            ValidateXML(XSDSchema(0x000101), m_convertedFileName);
-            V_FALLTHROUGH
-        case (0x000101):
-            ToV0_1_2();
-            ValidateXML(XSDSchema(0x000102), m_convertedFileName);
-            V_FALLTHROUGH
-        case (0x000102):
-            ToV0_1_3();
-            ValidateXML(XSDSchema(0x000103), m_convertedFileName);
-            V_FALLTHROUGH
-        case (0x000103):
-            ToV0_1_4();
-            ValidateXML(XSDSchema(0x000104), m_convertedFileName);
-            V_FALLTHROUGH
-        case (0x000104):
+        case (FORMAT_VERSION(0, 1, 4)):
             ToV0_2_0();
-            ValidateXML(XSDSchema(0x000200), m_convertedFileName);
+            ValidateXML(XSDSchema(FORMAT_VERSION(0, 2, 0)), m_convertedFileName);
             V_FALLTHROUGH
-        case (0x000200):
+        case (FORMAT_VERSION(0, 2, 0)):
             ToV0_2_1();
-            ValidateXML(XSDSchema(0x000201), m_convertedFileName);
+            ValidateXML(XSDSchema(FORMAT_VERSION(0, 2, 1)), m_convertedFileName);
             V_FALLTHROUGH
-        case (0x000201):
+        case (FORMAT_VERSION(0, 2, 1)):
             ToV0_2_2();
-            ValidateXML(XSDSchema(0x000202), m_convertedFileName);
+            ValidateXML(XSDSchema(FORMAT_VERSION(0, 2, 2)), m_convertedFileName);
             V_FALLTHROUGH
-        case (0x000202):
+        case (FORMAT_VERSION(0, 2, 2)):
             ToV0_2_3();
-            ValidateXML(XSDSchema(0x000203), m_convertedFileName);
+            ValidateXML(XSDSchema(FORMAT_VERSION(0, 2, 3)), m_convertedFileName);
             V_FALLTHROUGH
-        case (0x000203):
+        case (FORMAT_VERSION(0, 2, 3)):
             ToV0_2_4();
-            ValidateXML(XSDSchema(0x000204), m_convertedFileName);
+            ValidateXML(XSDSchema(FORMAT_VERSION(0, 2, 4)), m_convertedFileName);
             V_FALLTHROUGH
-        case (0x000204):
+        case (FORMAT_VERSION(0, 2, 4)):
             ToV0_2_5();
-            ValidateXML(XSDSchema(0x000205), m_convertedFileName);
+            ValidateXML(XSDSchema(FORMAT_VERSION(0, 2, 5)), m_convertedFileName);
             V_FALLTHROUGH
-        case (0x000205):
+        case (FORMAT_VERSION(0, 2, 5)):
             ToV0_2_6();
-            ValidateXML(XSDSchema(0x000206), m_convertedFileName);
+            ValidateXML(XSDSchema(FORMAT_VERSION(0, 2, 6)), m_convertedFileName);
             V_FALLTHROUGH
-        case (0x000206):
+        case (FORMAT_VERSION(0, 2, 6)):
             ToV0_2_7();
-            ValidateXML(XSDSchema(0x000207), m_convertedFileName);
+            ValidateXML(XSDSchema(FORMAT_VERSION(0, 2, 7)), m_convertedFileName);
             V_FALLTHROUGH
-        case (0x000207):
+        case (FORMAT_VERSION(0, 2, 7)):
             ToV0_3_0();
-            ValidateXML(XSDSchema(0x000300), m_convertedFileName);
+            ValidateXML(XSDSchema(FORMAT_VERSION(0, 3, 0)), m_convertedFileName);
             V_FALLTHROUGH
-        case (0x000300):
+        case (FORMAT_VERSION(0, 3, 0)):
             ToV0_3_1();
-            ValidateXML(XSDSchema(0x000301), m_convertedFileName);
+            ValidateXML(XSDSchema(FORMAT_VERSION(0, 3, 1)), m_convertedFileName);
             V_FALLTHROUGH
-        case (0x000301):
+        case (FORMAT_VERSION(0, 3, 1)):
             ToV0_3_2();
-            ValidateXML(XSDSchema(0x000302), m_convertedFileName);
+            ValidateXML(XSDSchema(FORMAT_VERSION(0, 3, 2)), m_convertedFileName);
             V_FALLTHROUGH
-        case (0x000302):
+        case (FORMAT_VERSION(0, 3, 2)):
             ToV0_3_3();
-            ValidateXML(XSDSchema(0x000303), m_convertedFileName);
+            ValidateXML(XSDSchema(FORMAT_VERSION(0, 3, 3)), m_convertedFileName);
             V_FALLTHROUGH
-        case (0x000303):
+        case (FORMAT_VERSION(0, 3, 3)):
             ToV0_3_4();
-            ValidateXML(XSDSchema(0x000304), m_convertedFileName);
+            ValidateXML(XSDSchema(FORMAT_VERSION(0, 3, 4)), m_convertedFileName);
             V_FALLTHROUGH
-        case (0x000304):
+        case (FORMAT_VERSION(0, 3, 4)):
             ToV0_3_5();
-            ValidateXML(XSDSchema(0x000305), m_convertedFileName);
+            ValidateXML(XSDSchema(FORMAT_VERSION(0, 3, 5)), m_convertedFileName);
             V_FALLTHROUGH
-        case (0x000305):
+        case (FORMAT_VERSION(0, 3, 5)):
             ToV0_3_6();
-            ValidateXML(XSDSchema(0x000306), m_convertedFileName);
+            ValidateXML(XSDSchema(FORMAT_VERSION(0, 3, 6)), m_convertedFileName);
             V_FALLTHROUGH
-        case (0x000306):
+        case (FORMAT_VERSION(0, 3, 6)):
             ToV0_3_7();
-            ValidateXML(XSDSchema(0x000307), m_convertedFileName);
+            ValidateXML(XSDSchema(FORMAT_VERSION(0, 3, 7)), m_convertedFileName);
             V_FALLTHROUGH
-        case (0x000307):
+        case (FORMAT_VERSION(0, 3, 7)):
             ToV0_3_8();
-            ValidateXML(XSDSchema(0x000308), m_convertedFileName);
+            ValidateXML(XSDSchema(FORMAT_VERSION(0, 3, 8)), m_convertedFileName);
             V_FALLTHROUGH
-        case (0x000308):
+        case (FORMAT_VERSION(0, 3, 8)):
             ToV0_3_9();
-            ValidateXML(XSDSchema(0x000309), m_convertedFileName);
+            ValidateXML(XSDSchema(FORMAT_VERSION(0, 3, 9)), m_convertedFileName);
             V_FALLTHROUGH
-        case (0x000309):
+        case (FORMAT_VERSION(0, 3, 9)):
             ToV0_4_0();
-            ValidateXML(XSDSchema(0x000400), m_convertedFileName);
+            ValidateXML(XSDSchema(FORMAT_VERSION(0, 4, 0)), m_convertedFileName);
             V_FALLTHROUGH
-        case (0x000400):
+        case (FORMAT_VERSION(0, 4, 0)):
             ToV0_4_1();
-            ValidateXML(XSDSchema(0x000401), m_convertedFileName);
+            ValidateXML(XSDSchema(FORMAT_VERSION(0, 4, 1)), m_convertedFileName);
             V_FALLTHROUGH
-        case (0x000401):
+        case (FORMAT_VERSION(0, 4, 1)):
             ToV0_4_2();
-            ValidateXML(XSDSchema(0x000402), m_convertedFileName);
+            ValidateXML(XSDSchema(FORMAT_VERSION(0, 4, 2)), m_convertedFileName);
             V_FALLTHROUGH
-        case (0x000402):
+        case (FORMAT_VERSION(0, 4, 2)):
             ToV0_4_3();
-            ValidateXML(XSDSchema(0x000403), m_convertedFileName);
+            ValidateXML(XSDSchema(FORMAT_VERSION(0, 4, 3)), m_convertedFileName);
             V_FALLTHROUGH
-        case (0x000403):
+        case (FORMAT_VERSION(0, 4, 3)):
             ToV0_4_4();
-            ValidateXML(XSDSchema(0x000404), m_convertedFileName);
+            ValidateXML(XSDSchema(FORMAT_VERSION(0, 4, 4)), m_convertedFileName);
             V_FALLTHROUGH
-        case (0x000404):
+        case (FORMAT_VERSION(0, 4, 4)):
             ToV0_4_5();
-            ValidateXML(XSDSchema(0x000405), m_convertedFileName);
+            ValidateXML(XSDSchema(FORMAT_VERSION(0, 4, 5)), m_convertedFileName);
             V_FALLTHROUGH
-        case (0x000405):
+        case (FORMAT_VERSION(0, 4, 5)):
             ToV0_4_6();
-            ValidateXML(XSDSchema(0x000406), m_convertedFileName);
+            ValidateXML(XSDSchema(FORMAT_VERSION(0, 4, 6)), m_convertedFileName);
             V_FALLTHROUGH
-        case (0x000406):
+        case (FORMAT_VERSION(0, 4, 6)):
             ToV0_4_7();
-            ValidateXML(XSDSchema(0x000407), m_convertedFileName);
+            ValidateXML(XSDSchema(FORMAT_VERSION(0, 4, 7)), m_convertedFileName);
             V_FALLTHROUGH
-        case (0x000407):
+        case (FORMAT_VERSION(0, 4, 7)):
             ToV0_4_8();
-            ValidateXML(XSDSchema(0x000408), m_convertedFileName);
+            ValidateXML(XSDSchema(FORMAT_VERSION(0, 4, 8)), m_convertedFileName);
             V_FALLTHROUGH
-        case (0x000408):
+        case (FORMAT_VERSION(0, 4, 8)):
+            ToV0_5_0();
+            ValidateXML(XSDSchema(FORMAT_VERSION(0, 5, 0)), m_convertedFileName);
+            V_FALLTHROUGH
+        case (FORMAT_VERSION(0, 5, 0)):
+            ToV0_5_1();
+            ValidateXML(XSDSchema(FORMAT_VERSION(0, 5, 1)), m_convertedFileName);
+            V_FALLTHROUGH
+        case (FORMAT_VERSION(0, 5, 1)):
+            ToV0_6_0();
+            ValidateXML(XSDSchema(FORMAT_VERSION(0, 6, 0)), m_convertedFileName);
+            V_FALLTHROUGH
+        case (FORMAT_VERSION(0, 6, 0)):
+            ToV0_6_1();
+            ValidateXML(XSDSchema(FORMAT_VERSION(0, 6, 1)), m_convertedFileName);
+            V_FALLTHROUGH
+        case (FORMAT_VERSION(0, 6, 1)):
+            ToV0_6_2();
+            ValidateXML(XSDSchema(FORMAT_VERSION(0, 6, 2)), m_convertedFileName);
+            V_FALLTHROUGH
+        case (FORMAT_VERSION(0, 6, 2)):
+            ToV0_6_3();
+            ValidateXML(XSDSchema(FORMAT_VERSION(0, 6, 3)), m_convertedFileName);
+            V_FALLTHROUGH
+        case (FORMAT_VERSION(0, 6, 3)):
+            ToV0_6_4();
+            ValidateXML(XSDSchema(FORMAT_VERSION(0, 6, 4)), m_convertedFileName);
+            V_FALLTHROUGH
+        case (FORMAT_VERSION(0, 6, 4)):
+            ToV0_6_5();
+            ValidateXML(XSDSchema(FORMAT_VERSION(0, 6, 5)), m_convertedFileName);
+            V_FALLTHROUGH
+        case (FORMAT_VERSION(0, 6, 5)):
+            ToV0_6_6();
+            ValidateXML(XSDSchema(FORMAT_VERSION(0, 6, 6)), m_convertedFileName);
+            V_FALLTHROUGH
+        case (FORMAT_VERSION(0, 6, 6)):
+            ToV0_7_0();
+            ValidateXML(XSDSchema(FORMAT_VERSION(0, 7, 0)), m_convertedFileName);
+            V_FALLTHROUGH
+        case (FORMAT_VERSION(0, 7, 0)):
+            ToV0_7_1();
+            ValidateXML(XSDSchema(FORMAT_VERSION(0, 7, 1)), m_convertedFileName);
+            V_FALLTHROUGH
+        case (FORMAT_VERSION(0, 7, 1)):
+            ToV0_7_2();
+            ValidateXML(XSDSchema(FORMAT_VERSION(0, 7, 2)), m_convertedFileName);
+            V_FALLTHROUGH
+        case (FORMAT_VERSION(0, 7, 2)):
+            ToV0_7_3();
+            ValidateXML(XSDSchema(FORMAT_VERSION(0, 7, 3)), m_convertedFileName);
+            V_FALLTHROUGH
+        case (FORMAT_VERSION(0, 7, 3)):
+            ToV0_7_4();
+            ValidateXML(XSDSchema(FORMAT_VERSION(0, 7, 4)), m_convertedFileName);
+            V_FALLTHROUGH
+        case (FORMAT_VERSION(0, 7, 4)):
+            ToV0_7_5();
+            ValidateXML(XSDSchema(FORMAT_VERSION(0, 7, 5)), m_convertedFileName);
+            V_FALLTHROUGH
+        case (FORMAT_VERSION(0, 7, 5)):
+            ToV0_7_6();
+            ValidateXML(XSDSchema(FORMAT_VERSION(0, 7, 6)), m_convertedFileName);
+            V_FALLTHROUGH
+        case (FORMAT_VERSION(0, 7, 6)):
+            ToV0_7_7();
+            ValidateXML(XSDSchema(FORMAT_VERSION(0, 7, 7)), m_convertedFileName);
+            V_FALLTHROUGH
+        case (FORMAT_VERSION(0, 7, 7)):
+            ToV0_7_8();
+            ValidateXML(XSDSchema(FORMAT_VERSION(0, 7, 8)), m_convertedFileName);
+            V_FALLTHROUGH
+        case (FORMAT_VERSION(0, 7, 8)):
+            ToV0_7_9();
+            ValidateXML(XSDSchema(FORMAT_VERSION(0, 7, 9)), m_convertedFileName);
+            V_FALLTHROUGH
+        case (FORMAT_VERSION(0, 7, 9)):
+            ToV0_7_10();
+            ValidateXML(XSDSchema(FORMAT_VERSION(0, 7, 10)), m_convertedFileName);
+            V_FALLTHROUGH
+        case (FORMAT_VERSION(0, 7, 10)):
+            ToV0_7_11();
+            ValidateXML(XSDSchema(FORMAT_VERSION(0, 7, 11)), m_convertedFileName);
+            V_FALLTHROUGH
+        case (FORMAT_VERSION(0, 7, 11)):
+            ToV0_7_12();
+            ValidateXML(XSDSchema(FORMAT_VERSION(0, 7, 12)), m_convertedFileName);
+            V_FALLTHROUGH
+        case (FORMAT_VERSION(0, 7, 12)):
             break;
         default:
             InvalidVersion(m_ver);
-            break;
     }
 }
 
@@ -367,7 +460,7 @@ void VPatternConverter::DowngradeToCurrentMaxVersion()
 bool VPatternConverter::IsReadOnly() const
 {
     // Check if attribute readOnly was not changed in file format
-    Q_STATIC_ASSERT_X(VPatternConverter::PatternMaxVer == CONVERTER_VERSION_CHECK(0, 4, 8),
+    Q_STATIC_ASSERT_X(VPatternConverter::PatternMaxVer == FORMAT_VERSION(0, 7, 12),
                       "Check attribute readOnly.");
 
     // Possibly in future attribute readOnly will change position etc.
@@ -381,58 +474,14 @@ bool VPatternConverter::IsReadOnly() const
         return false;
     }
 
-    return GetParametrBool(pattern, strReadOnly, falseStr);
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void VPatternConverter::ToV0_1_1()
-{
-    // TODO. Delete if minimal supported version is 0.1.1
-    Q_STATIC_ASSERT_X(VPatternConverter::PatternMinVer < CONVERTER_VERSION_CHECK(0, 1, 1),
-                      "Time to refactor the code.");
-
-    SetVersion(QStringLiteral("0.1.1"));
-    Save();
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void VPatternConverter::ToV0_1_2()
-{
-    // TODO. Delete if minimal supported version is 0.1.2
-    Q_STATIC_ASSERT_X(VPatternConverter::PatternMinVer < CONVERTER_VERSION_CHECK(0, 1, 2),
-                      "Time to refactor the code.");
-
-    SetVersion(QStringLiteral("0.1.2"));
-    Save();
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void VPatternConverter::ToV0_1_3()
-{
-    // TODO. Delete if minimal supported version is 0.1.3
-    Q_STATIC_ASSERT_X(VPatternConverter::PatternMinVer < CONVERTER_VERSION_CHECK(0, 1, 3),
-                      "Time to refactor the code.");
-
-    SetVersion(QStringLiteral("0.1.3"));
-    Save();
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void VPatternConverter::ToV0_1_4()
-{
-    // TODO. Delete if minimal supported version is 0.1.4
-    Q_STATIC_ASSERT_X(VPatternConverter::PatternMinVer < CONVERTER_VERSION_CHECK(0, 1, 4),
-                      "Time to refactor the code.");
-
-    SetVersion(QStringLiteral("0.1.4"));
-    Save();
+    return GetParametrBool(pattern, *strReadOnly, falseStr);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void VPatternConverter::ToV0_2_0()
 {
     // TODO. Delete if minimal supported version is 0.2.0
-    Q_STATIC_ASSERT_X(VPatternConverter::PatternMinVer < CONVERTER_VERSION_CHECK(0, 2, 0),
+    Q_STATIC_ASSERT_X(VPatternConverter::PatternMinVer < FORMAT_VERSION(0, 2, 0),
                       "Time to refactor the code.");
 
     SetVersion(QStringLiteral("0.2.0"));
@@ -447,7 +496,7 @@ void VPatternConverter::ToV0_2_0()
 void VPatternConverter::ToV0_2_1()
 {
     // TODO. Delete if minimal supported version is 0.2.1
-    Q_STATIC_ASSERT_X(VPatternConverter::PatternMinVer < CONVERTER_VERSION_CHECK(0, 2, 1),
+    Q_STATIC_ASSERT_X(VPatternConverter::PatternMinVer < FORMAT_VERSION(0, 2, 1),
                       "Time to refactor the code.");
 
     SetVersion(QStringLiteral("0.2.1"));
@@ -459,7 +508,7 @@ void VPatternConverter::ToV0_2_1()
 void VPatternConverter::ToV0_2_2()
 {
     // TODO. Delete if minimal supported version is 0.2.2
-    Q_STATIC_ASSERT_X(VPatternConverter::PatternMinVer < CONVERTER_VERSION_CHECK(0, 2, 2),
+    Q_STATIC_ASSERT_X(VPatternConverter::PatternMinVer < FORMAT_VERSION(0, 2, 2),
                       "Time to refactor the code.");
 
     SetVersion(QStringLiteral("0.2.2"));
@@ -470,7 +519,7 @@ void VPatternConverter::ToV0_2_2()
 void VPatternConverter::ToV0_2_3()
 {
     // TODO. Delete if minimal supported version is 0.2.3
-    Q_STATIC_ASSERT_X(VPatternConverter::PatternMinVer < CONVERTER_VERSION_CHECK(0, 2, 3),
+    Q_STATIC_ASSERT_X(VPatternConverter::PatternMinVer < FORMAT_VERSION(0, 2, 3),
                       "Time to refactor the code.");
 
     SetVersion(QStringLiteral("0.2.3"));
@@ -481,7 +530,7 @@ void VPatternConverter::ToV0_2_3()
 void VPatternConverter::ToV0_2_4()
 {
     // TODO. Delete if minimal supported version is 0.2.4
-    Q_STATIC_ASSERT_X(VPatternConverter::PatternMinVer < CONVERTER_VERSION_CHECK(0, 2, 4),
+    Q_STATIC_ASSERT_X(VPatternConverter::PatternMinVer < FORMAT_VERSION(0, 2, 4),
                       "Time to refactor the code.");
 
     FixToolUnionToV0_2_4();
@@ -493,7 +542,7 @@ void VPatternConverter::ToV0_2_4()
 void VPatternConverter::ToV0_2_5()
 {
     // TODO. Delete if minimal supported version is 0.2.5
-    Q_STATIC_ASSERT_X(VPatternConverter::PatternMinVer < CONVERTER_VERSION_CHECK(0, 2, 5),
+    Q_STATIC_ASSERT_X(VPatternConverter::PatternMinVer < FORMAT_VERSION(0, 2, 5),
                       "Time to refactor the code.");
 
     SetVersion(QStringLiteral("0.2.5"));
@@ -504,7 +553,7 @@ void VPatternConverter::ToV0_2_5()
 void VPatternConverter::ToV0_2_6()
 {
     // TODO. Delete if minimal supported version is 0.2.6
-    Q_STATIC_ASSERT_X(VPatternConverter::PatternMinVer < CONVERTER_VERSION_CHECK(0, 2, 6),
+    Q_STATIC_ASSERT_X(VPatternConverter::PatternMinVer < FORMAT_VERSION(0, 2, 6),
                       "Time to refactor the code.");
 
     SetVersion(QStringLiteral("0.2.6"));
@@ -515,7 +564,7 @@ void VPatternConverter::ToV0_2_6()
 void VPatternConverter::ToV0_2_7()
 {
     // TODO. Delete if minimal supported version is 0.2.7
-    Q_STATIC_ASSERT_X(VPatternConverter::PatternMinVer < CONVERTER_VERSION_CHECK(0, 2, 7),
+    Q_STATIC_ASSERT_X(VPatternConverter::PatternMinVer < FORMAT_VERSION(0, 2, 7),
                       "Time to refactor the code.");
 
     SetVersion(QStringLiteral("0.2.7"));
@@ -526,7 +575,7 @@ void VPatternConverter::ToV0_2_7()
 void VPatternConverter::ToV0_3_0()
 {
     // TODO. Delete if minimal supported version is 0.3.0
-    Q_STATIC_ASSERT_X(VPatternConverter::PatternMinVer < CONVERTER_VERSION_CHECK(0, 3, 0),
+    Q_STATIC_ASSERT_X(VPatternConverter::PatternMinVer < FORMAT_VERSION(0, 3, 0),
                       "Time to refactor the code.");
 
     //Cutting path do not create anymore subpaths
@@ -540,7 +589,7 @@ void VPatternConverter::ToV0_3_0()
 void VPatternConverter::ToV0_3_1()
 {
     // TODO. Delete if minimal supported version is 0.3.1
-    Q_STATIC_ASSERT_X(VPatternConverter::PatternMinVer < CONVERTER_VERSION_CHECK(0, 3, 1),
+    Q_STATIC_ASSERT_X(VPatternConverter::PatternMinVer < FORMAT_VERSION(0, 3, 1),
                       "Time to refactor the code.");
 
     SetVersion(QStringLiteral("0.3.1"));
@@ -552,7 +601,7 @@ void VPatternConverter::ToV0_3_1()
 void VPatternConverter::ToV0_3_2()
 {
     // TODO. Delete if minimal supported version is 0.3.2
-    Q_STATIC_ASSERT_X(VPatternConverter::PatternMinVer < CONVERTER_VERSION_CHECK(0, 3, 2),
+    Q_STATIC_ASSERT_X(VPatternConverter::PatternMinVer < FORMAT_VERSION(0, 3, 2),
                       "Time to refactor the code.");
 
     SetVersion(QStringLiteral("0.3.2"));
@@ -563,7 +612,7 @@ void VPatternConverter::ToV0_3_2()
 void VPatternConverter::ToV0_3_3()
 {
     // TODO. Delete if minimal supported version is 0.3.3
-    Q_STATIC_ASSERT_X(VPatternConverter::PatternMinVer < CONVERTER_VERSION_CHECK(0, 3, 3),
+    Q_STATIC_ASSERT_X(VPatternConverter::PatternMinVer < FORMAT_VERSION(0, 3, 3),
                       "Time to refactor the code.");
 
     SetVersion(QStringLiteral("0.3.3"));
@@ -574,7 +623,7 @@ void VPatternConverter::ToV0_3_3()
 void VPatternConverter::ToV0_3_4()
 {
     // TODO. Delete if minimal supported version is 0.3.4
-    Q_STATIC_ASSERT_X(VPatternConverter::PatternMinVer < CONVERTER_VERSION_CHECK(0, 3, 4),
+    Q_STATIC_ASSERT_X(VPatternConverter::PatternMinVer < FORMAT_VERSION(0, 3, 4),
                       "Time to refactor the code.");
 
     SetVersion(QStringLiteral("0.3.4"));
@@ -585,7 +634,7 @@ void VPatternConverter::ToV0_3_4()
 void VPatternConverter::ToV0_3_5()
 {
     // TODO. Delete if minimal supported version is 0.3.5
-    Q_STATIC_ASSERT_X(VPatternConverter::PatternMinVer < CONVERTER_VERSION_CHECK(0, 3, 5),
+    Q_STATIC_ASSERT_X(VPatternConverter::PatternMinVer < FORMAT_VERSION(0, 3, 5),
                       "Time to refactor the code.");
 
     SetVersion(QStringLiteral("0.3.5"));
@@ -596,7 +645,7 @@ void VPatternConverter::ToV0_3_5()
 void VPatternConverter::ToV0_3_6()
 {
     // TODO. Delete if minimal supported version is 0.3.6
-    Q_STATIC_ASSERT_X(VPatternConverter::PatternMinVer < CONVERTER_VERSION_CHECK(0, 3, 6),
+    Q_STATIC_ASSERT_X(VPatternConverter::PatternMinVer < FORMAT_VERSION(0, 3, 6),
                       "Time to refactor the code.");
 
     SetVersion(QStringLiteral("0.3.6"));
@@ -607,7 +656,7 @@ void VPatternConverter::ToV0_3_6()
 void VPatternConverter::ToV0_3_7()
 {
     // TODO. Delete if minimal supported version is 0.3.7
-    Q_STATIC_ASSERT_X(VPatternConverter::PatternMinVer < CONVERTER_VERSION_CHECK(0, 3, 7),
+    Q_STATIC_ASSERT_X(VPatternConverter::PatternMinVer < FORMAT_VERSION(0, 3, 7),
                       "Time to refactor the code.");
 
     SetVersion(QStringLiteral("0.3.7"));
@@ -618,7 +667,7 @@ void VPatternConverter::ToV0_3_7()
 void VPatternConverter::ToV0_3_8()
 {
     // TODO. Delete if minimal supported version is 0.3.8
-    Q_STATIC_ASSERT_X(VPatternConverter::PatternMinVer < CONVERTER_VERSION_CHECK(0, 3, 8),
+    Q_STATIC_ASSERT_X(VPatternConverter::PatternMinVer < FORMAT_VERSION(0, 3, 8),
                       "Time to refactor the code.");
 
     SetVersion(QStringLiteral("0.3.8"));
@@ -629,7 +678,7 @@ void VPatternConverter::ToV0_3_8()
 void VPatternConverter::ToV0_3_9()
 {
     // TODO. Delete if minimal supported version is 0.3.9
-    Q_STATIC_ASSERT_X(VPatternConverter::PatternMinVer < CONVERTER_VERSION_CHECK(0, 3, 9),
+    Q_STATIC_ASSERT_X(VPatternConverter::PatternMinVer < FORMAT_VERSION(0, 3, 9),
                       "Time to refactor the code.");
 
     SetVersion(QStringLiteral("0.3.9"));
@@ -640,7 +689,7 @@ void VPatternConverter::ToV0_3_9()
 void VPatternConverter::ToV0_4_0()
 {
     // TODO. Delete if minimal supported version is 0.4.0
-    Q_STATIC_ASSERT_X(VPatternConverter::PatternMinVer < CONVERTER_VERSION_CHECK(0, 4, 0),
+    Q_STATIC_ASSERT_X(VPatternConverter::PatternMinVer < FORMAT_VERSION(0, 4, 0),
                       "Time to refactor the code.");
 
     SetVersion(QStringLiteral("0.4.0"));
@@ -654,7 +703,7 @@ void VPatternConverter::ToV0_4_0()
 void VPatternConverter::ToV0_4_1()
 {
     // TODO. Delete if minimal supported version is 0.4.1
-    Q_STATIC_ASSERT_X(VPatternConverter::PatternMinVer < CONVERTER_VERSION_CHECK(0, 4, 1),
+    Q_STATIC_ASSERT_X(VPatternConverter::PatternMinVer < FORMAT_VERSION(0, 4, 1),
                       "Time to refactor the code.");
 
     SetVersion(QStringLiteral("0.4.1"));
@@ -665,7 +714,7 @@ void VPatternConverter::ToV0_4_1()
 void VPatternConverter::ToV0_4_2()
 {
     // TODO. Delete if minimal supported version is 0.4.2
-    Q_STATIC_ASSERT_X(VPatternConverter::PatternMinVer < CONVERTER_VERSION_CHECK(0, 4, 2),
+    Q_STATIC_ASSERT_X(VPatternConverter::PatternMinVer < FORMAT_VERSION(0, 4, 2),
                       "Time to refactor the code.");
 
     SetVersion(QStringLiteral("0.4.2"));
@@ -676,7 +725,7 @@ void VPatternConverter::ToV0_4_2()
 void VPatternConverter::ToV0_4_3()
 {
     // TODO. Delete if minimal supported version is 0.4.3
-    Q_STATIC_ASSERT_X(VPatternConverter::PatternMinVer < CONVERTER_VERSION_CHECK(0, 4, 3),
+    Q_STATIC_ASSERT_X(VPatternConverter::PatternMinVer < FORMAT_VERSION(0, 4, 3),
                       "Time to refactor the code.");
 
     SetVersion(QStringLiteral("0.4.3"));
@@ -687,12 +736,12 @@ void VPatternConverter::ToV0_4_3()
 void VPatternConverter::ToV0_4_4()
 {
     // TODO. Delete if minimal supported version is 0.4.4
-    Q_STATIC_ASSERT_X(VPatternConverter::PatternMinVer < CONVERTER_VERSION_CHECK(0, 4, 4),
+    Q_STATIC_ASSERT_X(VPatternConverter::PatternMinVer < FORMAT_VERSION(0, 4, 4),
                       "Time to refactor the code.");
 
     SetVersion(QStringLiteral("0.4.4"));
-    LabelTagToV0_4_4(strData);
-    LabelTagToV0_4_4(strPatternInfo);
+    LabelTagToV0_4_4(*strData);
+    LabelTagToV0_4_4(*strPatternInfo);
     Save();
 }
 
@@ -700,7 +749,7 @@ void VPatternConverter::ToV0_4_4()
 void VPatternConverter::ToV0_4_5()
 {
     // TODO. Delete if minimal supported version is 0.4.5
-    Q_STATIC_ASSERT_X(VPatternConverter::PatternMinVer < CONVERTER_VERSION_CHECK(0, 4, 5),
+    Q_STATIC_ASSERT_X(VPatternConverter::PatternMinVer < FORMAT_VERSION(0, 4, 5),
                       "Time to refactor the code.");
     SetVersion(QStringLiteral("0.4.5"));
     Save();
@@ -710,7 +759,7 @@ void VPatternConverter::ToV0_4_5()
 void VPatternConverter::ToV0_4_6()
 {
     // TODO. Delete if minimal supported version is 0.4.6
-    Q_STATIC_ASSERT_X(VPatternConverter::PatternMinVer < CONVERTER_VERSION_CHECK(0, 4, 6),
+    Q_STATIC_ASSERT_X(VPatternConverter::PatternMinVer < FORMAT_VERSION(0, 4, 6),
                       "Time to refactor the code.");
     SetVersion(QStringLiteral("0.4.6"));
     Save();
@@ -720,7 +769,7 @@ void VPatternConverter::ToV0_4_6()
 void VPatternConverter::ToV0_4_7()
 {
     // TODO. Delete if minimal supported version is 0.4.7
-    Q_STATIC_ASSERT_X(VPatternConverter::PatternMinVer < CONVERTER_VERSION_CHECK(0, 4, 7),
+    Q_STATIC_ASSERT_X(VPatternConverter::PatternMinVer < FORMAT_VERSION(0, 4, 7),
                       "Time to refactor the code.");
     SetVersion(QStringLiteral("0.4.7"));
     Save();
@@ -730,9 +779,234 @@ void VPatternConverter::ToV0_4_7()
 void VPatternConverter::ToV0_4_8()
 {
     // TODO. Delete if minimal supported version is 0.4.8
-    Q_STATIC_ASSERT_X(VPatternConverter::PatternMinVer < CONVERTER_VERSION_CHECK(0, 4, 8),
+    Q_STATIC_ASSERT_X(VPatternConverter::PatternMinVer < FORMAT_VERSION(0, 4, 8),
                       "Time to refactor the code.");
     SetVersion(QStringLiteral("0.4.8"));
+    Save();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VPatternConverter::ToV0_5_0()
+{
+    // TODO. Delete if minimal supported version is 0.5.0
+    Q_STATIC_ASSERT_X(VPatternConverter::PatternMinVer < FORMAT_VERSION(0, 5, 0),
+                      "Time to refactor the code.");
+    SetVersion(QStringLiteral("0.5.0"));
+    Save();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VPatternConverter::ToV0_5_1()
+{
+    // TODO. Delete if minimal supported version is 0.5.1
+    Q_STATIC_ASSERT_X(VPatternConverter::PatternMinVer < FORMAT_VERSION(0, 5, 1),
+                      "Time to refactor the code.");
+    SetVersion(QStringLiteral("0.5.1"));
+    Save();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VPatternConverter::ToV0_6_0()
+{
+    // TODO. Delete if minimal supported version is 0.6.0
+    Q_STATIC_ASSERT_X(VPatternConverter::PatternMinVer < FORMAT_VERSION(0, 6, 0),
+                      "Time to refactor the code.");
+    SetVersion(QStringLiteral("0.6.0"));
+    QDomElement label = AddTagPatternLabelV0_5_1();
+    PortPatternLabeltoV0_6_0(label);
+    PortPieceLabelstoV0_6_0();
+    RemoveUnusedTagsV0_6_0();
+    Save();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VPatternConverter::ToV0_6_1()
+{
+    // TODO. Delete if minimal supported version is 0.6.1
+    Q_STATIC_ASSERT_X(VPatternConverter::PatternMinVer < FORMAT_VERSION(0, 6, 1),
+                      "Time to refactor the code.");
+    SetVersion(QStringLiteral("0.6.1"));
+    Save();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VPatternConverter::ToV0_6_2()
+{
+    // TODO. Delete if minimal supported version is 0.6.2
+    Q_STATIC_ASSERT_X(VPatternConverter::PatternMinVer < FORMAT_VERSION(0, 6, 2),
+                      "Time to refactor the code.");
+    SetVersion(QStringLiteral("0.6.2"));
+    AddTagPreviewCalculationsV0_6_2();
+    Save();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VPatternConverter::ToV0_6_3()
+{
+    // TODO. Delete if minimal supported version is 0.6.3
+    Q_STATIC_ASSERT_X(VPatternConverter::PatternMinVer < FORMAT_VERSION(0, 6, 3),
+                      "Time to refactor the code.");
+    SetVersion(QStringLiteral("0.6.3"));
+    Save();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VPatternConverter::ToV0_6_4()
+{
+    // TODO. Delete if minimal supported version is 0.6.4
+    Q_STATIC_ASSERT_X(VPatternConverter::PatternMinVer < FORMAT_VERSION(0, 6, 4),
+                      "Time to refactor the code.");
+    SetVersion(QStringLiteral("0.6.4"));
+    Save();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VPatternConverter::ToV0_6_5()
+{
+    // TODO. Delete if minimal supported version is 0.6.5
+    Q_STATIC_ASSERT_X(VPatternConverter::PatternMinVer < FORMAT_VERSION(0, 6, 5),
+                      "Time to refactor the code.");
+    SetVersion(QStringLiteral("0.6.5"));
+    Save();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VPatternConverter::ToV0_6_6()
+{
+    // TODO. Delete if minimal supported version is 0.6.6
+    Q_STATIC_ASSERT_X(VPatternConverter::PatternMinVer < FORMAT_VERSION(0, 6, 6),
+                      "Time to refactor the code.");
+    SetVersion(QStringLiteral("0.6.6"));
+    Save();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VPatternConverter::ToV0_7_0()
+{
+    // TODO. Delete if minimal supported version is 0.7.0
+    Q_STATIC_ASSERT_X(VPatternConverter::PatternMinVer < FORMAT_VERSION(0, 7, 0),
+                      "Time to refactor the code.");
+    SetVersion(QStringLiteral("0.7.0"));
+    Save();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VPatternConverter::ToV0_7_1()
+{
+    // TODO. Delete if minimal supported version is 0.7.1
+    Q_STATIC_ASSERT_X(VPatternConverter::PatternMinVer < FORMAT_VERSION(0, 7, 1),
+                      "Time to refactor the code.");
+    SetVersion(QStringLiteral("0.7.1"));
+    Save();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VPatternConverter::ToV0_7_2()
+{
+    // TODO. Delete if minimal supported version is 0.7.2
+    Q_STATIC_ASSERT_X(VPatternConverter::PatternMinVer < FORMAT_VERSION(0, 7, 2),
+                      "Time to refactor the code.");
+    SetVersion(QStringLiteral("0.7.2"));
+    Save();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VPatternConverter::ToV0_7_3()
+{
+    // TODO. Delete if minimal supported version is 0.7.3
+    Q_STATIC_ASSERT_X(VPatternConverter::PatternMinVer < FORMAT_VERSION(0, 7, 3),
+                      "Time to refactor the code.");
+    SetVersion(QStringLiteral("0.7.3"));
+    Save();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VPatternConverter::ToV0_7_4()
+{
+    // TODO. Delete if minimal supported version is 0.7.4
+    Q_STATIC_ASSERT_X(VPatternConverter::PatternMinVer < FORMAT_VERSION(0, 7, 4),
+                      "Time to refactor the code.");
+    SetVersion(QStringLiteral("0.7.4"));
+    Save();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VPatternConverter::ToV0_7_5()
+{
+    // TODO. Delete if minimal supported version is 0.7.5
+    Q_STATIC_ASSERT_X(VPatternConverter::PatternMinVer < FORMAT_VERSION(0, 7, 5),
+                      "Time to refactor the code.");
+    SetVersion(QStringLiteral("0.7.5"));
+    Save();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VPatternConverter::ToV0_7_6()
+{
+    // TODO. Delete if minimal supported version is 0.7.6
+    Q_STATIC_ASSERT_X(VPatternConverter::PatternMinVer < FORMAT_VERSION(0, 7, 6),
+                      "Time to refactor the code.");
+    SetVersion(QStringLiteral("0.7.6"));
+    Save();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VPatternConverter::ToV0_7_7()
+{
+    // TODO. Delete if minimal supported version is 0.7.7
+    Q_STATIC_ASSERT_X(VPatternConverter::PatternMinVer < FORMAT_VERSION(0, 7, 7),
+                      "Time to refactor the code.");
+    SetVersion(QStringLiteral("0.7.7"));
+    Save();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VPatternConverter::ToV0_7_8()
+{
+    // TODO. Delete if minimal supported version is 0.7.8
+    Q_STATIC_ASSERT_X(VPatternConverter::PatternMinVer < FORMAT_VERSION(0, 7, 8),
+                      "Time to refactor the code.");
+    SetVersion(QStringLiteral("0.7.8"));
+    Save();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VPatternConverter::ToV0_7_9()
+{
+    // TODO. Delete if minimal supported version is 0.7.9
+    Q_STATIC_ASSERT_X(VPatternConverter::PatternMinVer < FORMAT_VERSION(0, 7, 9),
+                      "Time to refactor the code.");
+    SetVersion(QStringLiteral("0.7.9"));
+    Save();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VPatternConverter::ToV0_7_10()
+{
+    // TODO. Delete if minimal supported version is 0.7.10
+    Q_STATIC_ASSERT_X(VPatternConverter::PatternMinVer < FORMAT_VERSION(0, 7, 10),
+                      "Time to refactor the code.");
+    SetVersion(QStringLiteral("0.7.10"));
+    Save();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VPatternConverter::ToV0_7_11()
+{
+    // TODO. Delete if minimal supported version is 0.7.11
+    Q_STATIC_ASSERT_X(VPatternConverter::PatternMinVer < FORMAT_VERSION(0, 7, 11),
+                      "Time to refactor the code.");
+    SetVersion(QStringLiteral("0.7.11"));
+    Save();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VPatternConverter::ToV0_7_12()
+{
+    // TODO. Delete if minimal supported version is 0.7.12
+    Q_STATIC_ASSERT_X(VPatternConverter::PatternMinVer < FORMAT_VERSION(0, 7, 12),
+                      "Time to refactor the code.");
+    SetVersion(QStringLiteral("0.7.12"));
     Save();
 }
 
@@ -740,22 +1014,22 @@ void VPatternConverter::ToV0_4_8()
 void VPatternConverter::TagUnitToV0_2_0()
 {
     // TODO. Delete if minimal supported version is 0.2.0
-    Q_STATIC_ASSERT_X(VPatternConverter::PatternMinVer < CONVERTER_VERSION_CHECK(0, 2, 0),
+    Q_STATIC_ASSERT_X(VPatternConverter::PatternMinVer < FORMAT_VERSION(0, 2, 0),
                       "Time to refactor the code.");
 
-    QDomElement unit = createElement(strUnit);
+    QDomElement unit = createElement(*strUnit);
     QDomText newNodeText = createTextNode(MUnitV0_1_4());
     unit.appendChild(newNodeText);
 
     QDomElement patternElement = documentElement();
-    patternElement.insertAfter(unit, patternElement.firstChildElement(strVersion));
+    patternElement.insertAfter(unit, patternElement.firstChildElement(*strVersion));
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void VPatternConverter::TagIncrementToV0_2_0()
 {
     // TODO. Delete if minimal supported version is 0.2.0
-    Q_STATIC_ASSERT_X(VPatternConverter::PatternMinVer < CONVERTER_VERSION_CHECK(0, 2, 0),
+    Q_STATIC_ASSERT_X(VPatternConverter::PatternMinVer < FORMAT_VERSION(0, 2, 0),
                       "Time to refactor the code.");
 
     const QSet<QString> names = FixIncrementsToV0_2_0();
@@ -769,7 +1043,7 @@ void VPatternConverter::TagIncrementToV0_2_0()
 void VPatternConverter::ConvertMeasurementsToV0_2_0()
 {
     // TODO. Delete if minimal supported version is 0.2.0
-    Q_STATIC_ASSERT_X(VPatternConverter::PatternMinVer < CONVERTER_VERSION_CHECK(0, 2, 0),
+    Q_STATIC_ASSERT_X(VPatternConverter::PatternMinVer < FORMAT_VERSION(0, 2, 0),
                       "Time to refactor the code.");
 
     const QMap<QString, QString> names = OldNamesToNewNames_InV0_2_0();
@@ -782,7 +1056,7 @@ void VPatternConverter::ConvertMeasurementsToV0_2_0()
 QSet<QString> VPatternConverter::FixIncrementsToV0_2_0()
 {
     // TODO. Delete if minimal supported version is 0.2.0
-    Q_STATIC_ASSERT_X(VPatternConverter::PatternMinVer < CONVERTER_VERSION_CHECK(0, 2, 0),
+    Q_STATIC_ASSERT_X(VPatternConverter::PatternMinVer < FORMAT_VERSION(0, 2, 0),
                       "Time to refactor the code.");
 
     QSet<QString> names;
@@ -795,16 +1069,16 @@ QSet<QString> VPatternConverter::FixIncrementsToV0_2_0()
             QDomElement domElement = domNode.toElement();
             if (domElement.isNull() == false)
             {
-                if (domElement.tagName() == strIncrement)
+                if (domElement.tagName() == *strIncrement)
                 {
                     try
                     {
-                        const QString name = GetParametrString(domElement, strName);
+                        const QString name = GetParametrString(domElement, *strName);
                         names.insert(name);
-                        domElement.setAttribute(strName, QLatin1String("#")+name);
+                        domElement.setAttribute(*strName, QLatin1String("#")+name);
 
-                        const QString base = GetParametrString(domElement, strBase);
-                        domElement.setAttribute(strFormula, base);
+                        const QString base = GetParametrString(domElement, *strBase);
+                        domElement.setAttribute(*strFormula, base);
                     }
                     catch (VExceptionEmptyParameter &e)
                     {
@@ -812,10 +1086,10 @@ QSet<QString> VPatternConverter::FixIncrementsToV0_2_0()
                         excep.AddMoreInformation(e.ErrorMessage());
                         throw excep;
                     }
-                    domElement.removeAttribute(strId);
-                    domElement.removeAttribute(strKGrowth);
-                    domElement.removeAttribute(strKSize);
-                    domElement.removeAttribute(strBase);
+                    domElement.removeAttribute(*strId);
+                    domElement.removeAttribute(*strKGrowth);
+                    domElement.removeAttribute(*strKSize);
+                    domElement.removeAttribute(*strBase);
                 }
             }
         }
@@ -828,19 +1102,19 @@ QSet<QString> VPatternConverter::FixIncrementsToV0_2_0()
 void VPatternConverter::FixPointExpressionsToV0_2_0(const QSet<QString> &names)
 {
     // TODO. Delete if minimal supported version is 0.2.0
-    Q_STATIC_ASSERT_X(VPatternConverter::PatternMinVer < CONVERTER_VERSION_CHECK(0, 2, 0),
+    Q_STATIC_ASSERT_X(VPatternConverter::PatternMinVer < FORMAT_VERSION(0, 2, 0),
                       "Time to refactor the code.");
 
     QString formula;
-    const QDomNodeList list = elementsByTagName(strPoint);
+    const QDomNodeList list = elementsByTagName(*strPoint);
     for (int i=0; i < list.size(); ++i)
     {
         QDomElement dom = list.at(i).toElement();
 
         try
         {
-            formula = GetParametrString(dom, strLength);
-            dom.setAttribute(strLength, FixIncrementInFormulaToV0_2_0(formula, names));
+            formula = GetParametrString(dom, *strLength);
+            dom.setAttribute(*strLength, FixIncrementInFormulaToV0_2_0(formula, names));
         }
         catch (VExceptionEmptyParameter &e)
         {
@@ -849,8 +1123,8 @@ void VPatternConverter::FixPointExpressionsToV0_2_0(const QSet<QString> &names)
 
         try
         {
-            formula = GetParametrString(dom, strAngle);
-            dom.setAttribute(strAngle, FixIncrementInFormulaToV0_2_0(formula, names));
+            formula = GetParametrString(dom, *strAngle);
+            dom.setAttribute(*strAngle, FixIncrementInFormulaToV0_2_0(formula, names));
         }
         catch (VExceptionEmptyParameter &e)
         {
@@ -858,18 +1132,8 @@ void VPatternConverter::FixPointExpressionsToV0_2_0(const QSet<QString> &names)
         }
         try
         {
-            formula = GetParametrString(dom, strC1Radius);
-            dom.setAttribute(strC1Radius, FixIncrementInFormulaToV0_2_0(formula, names));
-        }
-        catch (VExceptionEmptyParameter &e)
-        {
-            Q_UNUSED(e)
-        }
-
-        try
-        {
-            formula = GetParametrString(dom, strC2Radius);
-            dom.setAttribute(strC2Radius, FixIncrementInFormulaToV0_2_0(formula, names));
+            formula = GetParametrString(dom, *strC1Radius);
+            dom.setAttribute(*strC1Radius, FixIncrementInFormulaToV0_2_0(formula, names));
         }
         catch (VExceptionEmptyParameter &e)
         {
@@ -878,8 +1142,18 @@ void VPatternConverter::FixPointExpressionsToV0_2_0(const QSet<QString> &names)
 
         try
         {
-            formula = GetParametrString(dom, strCRadius);
-            dom.setAttribute(strCRadius, FixIncrementInFormulaToV0_2_0(formula, names));
+            formula = GetParametrString(dom, *strC2Radius);
+            dom.setAttribute(*strC2Radius, FixIncrementInFormulaToV0_2_0(formula, names));
+        }
+        catch (VExceptionEmptyParameter &e)
+        {
+            Q_UNUSED(e)
+        }
+
+        try
+        {
+            formula = GetParametrString(dom, *strCRadius);
+            dom.setAttribute(*strCRadius, FixIncrementInFormulaToV0_2_0(formula, names));
         }
         catch (VExceptionEmptyParameter &e)
         {
@@ -892,19 +1166,19 @@ void VPatternConverter::FixPointExpressionsToV0_2_0(const QSet<QString> &names)
 void VPatternConverter::FixArcExpressionsToV0_2_0(const QSet<QString> &names)
 {
     // TODO. Delete if minimal supported version is 0.2.0
-    Q_STATIC_ASSERT_X(VPatternConverter::PatternMinVer < CONVERTER_VERSION_CHECK(0, 2, 0),
+    Q_STATIC_ASSERT_X(VPatternConverter::PatternMinVer < FORMAT_VERSION(0, 2, 0),
                       "Time to refactor the code.");
 
     QString formula;
-    const QDomNodeList list = elementsByTagName(strArc);
+    const QDomNodeList list = elementsByTagName(*strArc);
     for (int i=0; i < list.size(); ++i)
     {
         QDomElement dom = list.at(i).toElement();
 
         try
         {
-            formula = GetParametrString(dom, strAngle1);
-            dom.setAttribute(strAngle1, FixIncrementInFormulaToV0_2_0(formula, names));
+            formula = GetParametrString(dom, *strAngle1);
+            dom.setAttribute(*strAngle1, FixIncrementInFormulaToV0_2_0(formula, names));
         }
         catch (VExceptionEmptyParameter &e)
         {
@@ -913,8 +1187,8 @@ void VPatternConverter::FixArcExpressionsToV0_2_0(const QSet<QString> &names)
 
         try
         {
-            formula = GetParametrString(dom, strAngle2);
-            dom.setAttribute(strAngle2, FixIncrementInFormulaToV0_2_0(formula, names));
+            formula = GetParametrString(dom, *strAngle2);
+            dom.setAttribute(*strAngle2, FixIncrementInFormulaToV0_2_0(formula, names));
         }
         catch (VExceptionEmptyParameter &e)
         {
@@ -923,8 +1197,8 @@ void VPatternConverter::FixArcExpressionsToV0_2_0(const QSet<QString> &names)
 
         try
         {
-            formula = GetParametrString(dom, strRadius);
-            dom.setAttribute(strRadius, FixIncrementInFormulaToV0_2_0(formula, names));
+            formula = GetParametrString(dom, *strRadius);
+            dom.setAttribute(*strRadius, FixIncrementInFormulaToV0_2_0(formula, names));
         }
         catch (VExceptionEmptyParameter &e)
         {
@@ -933,8 +1207,8 @@ void VPatternConverter::FixArcExpressionsToV0_2_0(const QSet<QString> &names)
 
         try
         {
-            formula = GetParametrString(dom, strLength);
-            dom.setAttribute(strLength, FixIncrementInFormulaToV0_2_0(formula, names));
+            formula = GetParametrString(dom, *strLength);
+            dom.setAttribute(*strLength, FixIncrementInFormulaToV0_2_0(formula, names));
         }
         catch (VExceptionEmptyParameter &e)
         {
@@ -947,19 +1221,19 @@ void VPatternConverter::FixArcExpressionsToV0_2_0(const QSet<QString> &names)
 void VPatternConverter::FixPathPointExpressionsToV0_2_0(const QSet<QString> &names)
 {
     // TODO. Delete if minimal supported version is 0.2.0
-    Q_STATIC_ASSERT_X(VPatternConverter::PatternMinVer < CONVERTER_VERSION_CHECK(0, 2, 0),
+    Q_STATIC_ASSERT_X(VPatternConverter::PatternMinVer < FORMAT_VERSION(0, 2, 0),
                       "Time to refactor the code.");
 
     QString formula;
-    const QDomNodeList list = elementsByTagName(strPathPoint);
+    const QDomNodeList list = elementsByTagName(*strPathPoint);
     for (int i=0; i < list.size(); ++i)
     {
         QDomElement dom = list.at(i).toElement();
 
         try
         {
-            formula = GetParametrString(dom, strKAsm1);
-            dom.setAttribute(strKAsm1, FixIncrementInFormulaToV0_2_0(formula, names));
+            formula = GetParametrString(dom, *strKAsm1);
+            dom.setAttribute(*strKAsm1, FixIncrementInFormulaToV0_2_0(formula, names));
         }
         catch (VExceptionEmptyParameter &e)
         {
@@ -968,8 +1242,8 @@ void VPatternConverter::FixPathPointExpressionsToV0_2_0(const QSet<QString> &nam
 
         try
         {
-            formula = GetParametrString(dom, strKAsm2);
-            dom.setAttribute(strKAsm2, FixIncrementInFormulaToV0_2_0(formula, names));
+            formula = GetParametrString(dom, *strKAsm2);
+            dom.setAttribute(*strKAsm2, FixIncrementInFormulaToV0_2_0(formula, names));
         }
         catch (VExceptionEmptyParameter &e)
         {
@@ -978,8 +1252,8 @@ void VPatternConverter::FixPathPointExpressionsToV0_2_0(const QSet<QString> &nam
 
         try
         {
-            formula = GetParametrString(dom, strAngle);
-            dom.setAttribute(strAngle, FixIncrementInFormulaToV0_2_0(formula, names));
+            formula = GetParametrString(dom, *strAngle);
+            dom.setAttribute(*strAngle, FixIncrementInFormulaToV0_2_0(formula, names));
         }
         catch (VExceptionEmptyParameter &e)
         {
@@ -992,19 +1266,19 @@ void VPatternConverter::FixPathPointExpressionsToV0_2_0(const QSet<QString> &nam
 void VPatternConverter::ConvertPointExpressionsToV0_2_0(const QMap<QString, QString> &names)
 {
     // TODO. Delete if minimal supported version is 0.2.0
-    Q_STATIC_ASSERT_X(VPatternConverter::PatternMinVer < CONVERTER_VERSION_CHECK(0, 2, 0),
+    Q_STATIC_ASSERT_X(VPatternConverter::PatternMinVer < FORMAT_VERSION(0, 2, 0),
                       "Time to refactor the code.");
 
     QString formula;
-    const QDomNodeList list = elementsByTagName(strPoint);
+    const QDomNodeList list = elementsByTagName(*strPoint);
     for (int i=0; i < list.size(); ++i)
     {
         QDomElement dom = list.at(i).toElement();
 
         try
         {
-            formula = GetParametrString(dom, strLength);
-            dom.setAttribute(strLength, FixMeasurementInFormulaToV0_2_0(formula, names));
+            formula = GetParametrString(dom, *strLength);
+            dom.setAttribute(*strLength, FixMeasurementInFormulaToV0_2_0(formula, names));
         }
         catch (VExceptionEmptyParameter &e)
         {
@@ -1013,8 +1287,8 @@ void VPatternConverter::ConvertPointExpressionsToV0_2_0(const QMap<QString, QStr
 
         try
         {
-            formula = GetParametrString(dom, strAngle);
-            dom.setAttribute(strAngle, FixMeasurementInFormulaToV0_2_0(formula, names));
+            formula = GetParametrString(dom, *strAngle);
+            dom.setAttribute(*strAngle, FixMeasurementInFormulaToV0_2_0(formula, names));
         }
         catch (VExceptionEmptyParameter &e)
         {
@@ -1022,18 +1296,8 @@ void VPatternConverter::ConvertPointExpressionsToV0_2_0(const QMap<QString, QStr
         }
         try
         {
-            formula = GetParametrString(dom, strC1Radius);
-            dom.setAttribute(strC1Radius, FixMeasurementInFormulaToV0_2_0(formula, names));
-        }
-        catch (VExceptionEmptyParameter &e)
-        {
-            Q_UNUSED(e)
-        }
-
-        try
-        {
-            formula = GetParametrString(dom, strC2Radius);
-            dom.setAttribute(strC2Radius, FixMeasurementInFormulaToV0_2_0(formula, names));
+            formula = GetParametrString(dom, *strC1Radius);
+            dom.setAttribute(*strC1Radius, FixMeasurementInFormulaToV0_2_0(formula, names));
         }
         catch (VExceptionEmptyParameter &e)
         {
@@ -1042,8 +1306,18 @@ void VPatternConverter::ConvertPointExpressionsToV0_2_0(const QMap<QString, QStr
 
         try
         {
-            formula = GetParametrString(dom, strCRadius);
-            dom.setAttribute(strCRadius, FixMeasurementInFormulaToV0_2_0(formula, names));
+            formula = GetParametrString(dom, *strC2Radius);
+            dom.setAttribute(*strC2Radius, FixMeasurementInFormulaToV0_2_0(formula, names));
+        }
+        catch (VExceptionEmptyParameter &e)
+        {
+            Q_UNUSED(e)
+        }
+
+        try
+        {
+            formula = GetParametrString(dom, *strCRadius);
+            dom.setAttribute(*strCRadius, FixMeasurementInFormulaToV0_2_0(formula, names));
         }
         catch (VExceptionEmptyParameter &e)
         {
@@ -1056,19 +1330,19 @@ void VPatternConverter::ConvertPointExpressionsToV0_2_0(const QMap<QString, QStr
 void VPatternConverter::ConvertArcExpressionsToV0_2_0(const QMap<QString, QString> &names)
 {
     // TODO. Delete if minimal supported version is 0.2.0
-    Q_STATIC_ASSERT_X(VPatternConverter::PatternMinVer < CONVERTER_VERSION_CHECK(0, 2, 0),
+    Q_STATIC_ASSERT_X(VPatternConverter::PatternMinVer < FORMAT_VERSION(0, 2, 0),
                       "Time to refactor the code.");
 
     QString formula;
-    const QDomNodeList list = elementsByTagName(strArc);
+    const QDomNodeList list = elementsByTagName(*strArc);
     for (int i=0; i < list.size(); ++i)
     {
         QDomElement dom = list.at(i).toElement();
 
         try
         {
-            formula = GetParametrString(dom, strAngle1);
-            dom.setAttribute(strAngle1, FixMeasurementInFormulaToV0_2_0(formula, names));
+            formula = GetParametrString(dom, *strAngle1);
+            dom.setAttribute(*strAngle1, FixMeasurementInFormulaToV0_2_0(formula, names));
         }
         catch (VExceptionEmptyParameter &e)
         {
@@ -1077,8 +1351,8 @@ void VPatternConverter::ConvertArcExpressionsToV0_2_0(const QMap<QString, QStrin
 
         try
         {
-            formula = GetParametrString(dom, strAngle2);
-            dom.setAttribute(strAngle2, FixMeasurementInFormulaToV0_2_0(formula, names));
+            formula = GetParametrString(dom, *strAngle2);
+            dom.setAttribute(*strAngle2, FixMeasurementInFormulaToV0_2_0(formula, names));
         }
         catch (VExceptionEmptyParameter &e)
         {
@@ -1087,8 +1361,8 @@ void VPatternConverter::ConvertArcExpressionsToV0_2_0(const QMap<QString, QStrin
 
         try
         {
-            formula = GetParametrString(dom, strRadius);
-            dom.setAttribute(strRadius, FixMeasurementInFormulaToV0_2_0(formula, names));
+            formula = GetParametrString(dom, *strRadius);
+            dom.setAttribute(*strRadius, FixMeasurementInFormulaToV0_2_0(formula, names));
         }
         catch (VExceptionEmptyParameter &e)
         {
@@ -1097,8 +1371,8 @@ void VPatternConverter::ConvertArcExpressionsToV0_2_0(const QMap<QString, QStrin
 
         try
         {
-            formula = GetParametrString(dom, strLength);
-            dom.setAttribute(strLength, FixMeasurementInFormulaToV0_2_0(formula, names));
+            formula = GetParametrString(dom, *strLength);
+            dom.setAttribute(*strLength, FixMeasurementInFormulaToV0_2_0(formula, names));
         }
         catch (VExceptionEmptyParameter &e)
         {
@@ -1111,19 +1385,19 @@ void VPatternConverter::ConvertArcExpressionsToV0_2_0(const QMap<QString, QStrin
 void VPatternConverter::ConvertPathPointExpressionsToV0_2_0(const QMap<QString, QString> &names)
 {
     // TODO. Delete if minimal supported version is 0.2.0
-    Q_STATIC_ASSERT_X(VPatternConverter::PatternMinVer < CONVERTER_VERSION_CHECK(0, 2, 0),
+    Q_STATIC_ASSERT_X(VPatternConverter::PatternMinVer < FORMAT_VERSION(0, 2, 0),
                       "Time to refactor the code.");
 
     QString formula;
-    const QDomNodeList list = elementsByTagName(strPathPoint);
+    const QDomNodeList list = elementsByTagName(*strPathPoint);
     for (int i=0; i < list.size(); ++i)
     {
         QDomElement dom = list.at(i).toElement();
 
         try
         {
-            formula = GetParametrString(dom, strKAsm1);
-            dom.setAttribute(strKAsm1, FixMeasurementInFormulaToV0_2_0(formula, names));
+            formula = GetParametrString(dom, *strKAsm1);
+            dom.setAttribute(*strKAsm1, FixMeasurementInFormulaToV0_2_0(formula, names));
         }
         catch (VExceptionEmptyParameter &e)
         {
@@ -1132,8 +1406,8 @@ void VPatternConverter::ConvertPathPointExpressionsToV0_2_0(const QMap<QString, 
 
         try
         {
-            formula = GetParametrString(dom, strKAsm2);
-            dom.setAttribute(strKAsm2, FixMeasurementInFormulaToV0_2_0(formula, names));
+            formula = GetParametrString(dom, *strKAsm2);
+            dom.setAttribute(*strKAsm2, FixMeasurementInFormulaToV0_2_0(formula, names));
         }
         catch (VExceptionEmptyParameter &e)
         {
@@ -1142,8 +1416,8 @@ void VPatternConverter::ConvertPathPointExpressionsToV0_2_0(const QMap<QString, 
 
         try
         {
-            formula = GetParametrString(dom, strAngle);
-            dom.setAttribute(strAngle, FixMeasurementInFormulaToV0_2_0(formula, names));
+            formula = GetParametrString(dom, *strAngle);
+            dom.setAttribute(*strAngle, FixMeasurementInFormulaToV0_2_0(formula, names));
         }
         catch (VExceptionEmptyParameter &e)
         {
@@ -1156,7 +1430,7 @@ void VPatternConverter::ConvertPathPointExpressionsToV0_2_0(const QMap<QString, 
 QString VPatternConverter::FixMeasurementInFormulaToV0_2_0(const QString &formula, const QMap<QString, QString> &names)
 {
     // TODO. Delete if minimal supported version is 0.2.0
-    Q_STATIC_ASSERT_X(VPatternConverter::PatternMinVer < CONVERTER_VERSION_CHECK(0, 2, 0),
+    Q_STATIC_ASSERT_X(VPatternConverter::PatternMinVer < FORMAT_VERSION(0, 2, 0),
                       "Time to refactor the code.");
 
     QScopedPointer<qmu::QmuTokenParser> cal(new qmu::QmuTokenParser(formula, false, false));// Eval formula
@@ -1190,7 +1464,7 @@ QString VPatternConverter::FixMeasurementInFormulaToV0_2_0(const QString &formul
 QString VPatternConverter::FixIncrementInFormulaToV0_2_0(const QString &formula, const QSet<QString> &names)
 {
     // TODO. Delete if minimal supported version is 0.2.0
-    Q_STATIC_ASSERT_X(VPatternConverter::PatternMinVer < CONVERTER_VERSION_CHECK(0, 2, 0),
+    Q_STATIC_ASSERT_X(VPatternConverter::PatternMinVer < FORMAT_VERSION(0, 2, 0),
                       "Time to refactor the code.");
 
     qmu::QmuTokenParser *cal = new qmu::QmuTokenParser(formula, false, false);// Eval formula
@@ -1224,15 +1498,15 @@ QString VPatternConverter::FixIncrementInFormulaToV0_2_0(const QString &formula,
 void VPatternConverter::TagMeasurementsToV0_2_0()
 {
     // TODO. Delete if minimal supported version is 0.2.0
-    Q_STATIC_ASSERT_X(VPatternConverter::PatternMinVer < CONVERTER_VERSION_CHECK(0, 2, 0),
+    Q_STATIC_ASSERT_X(VPatternConverter::PatternMinVer < FORMAT_VERSION(0, 2, 0),
                       "Time to refactor the code.");
 
     QDomElement ms = TagMeasurementsV0_1_4();
-    const QString path = GetParametrString(ms, strPath);
+    const QString path = GetParametrString(ms, *strPath);
 
-    ms.removeAttribute(strUnit);
-    ms.removeAttribute(strType);
-    ms.removeAttribute(strPath);
+    ms.removeAttribute(*strUnit);
+    ms.removeAttribute(*strType);
+    ms.removeAttribute(*strPath);
 
     QDomText newNodeText = createTextNode(QFileInfo(m_convertedFileName).absoluteDir().relativeFilePath(path));
     ms.appendChild(newNodeText);
@@ -1242,7 +1516,7 @@ void VPatternConverter::TagMeasurementsToV0_2_0()
 void VPatternConverter::ConvertMeasurementsToV0_2_1()
 {
     // TODO. Delete if minimal supported version is 0.2.1
-    Q_STATIC_ASSERT_X(VPatternConverter::PatternMinVer < CONVERTER_VERSION_CHECK(0, 2, 1),
+    Q_STATIC_ASSERT_X(VPatternConverter::PatternMinVer < FORMAT_VERSION(0, 2, 1),
                       "Time to refactor the code.");
 
     const QMap<QString, QString> names = OldNamesToNewNames_InV0_2_1();
@@ -1257,19 +1531,19 @@ void VPatternConverter::ConvertMeasurementsToV0_2_1()
 void VPatternConverter::RemoveColorToolCutV0_3_1()
 {
     // TODO. Delete if minimal supported version is 0.3.1
-    Q_STATIC_ASSERT_X(VPatternConverter::PatternMinVer < CONVERTER_VERSION_CHECK(0, 3, 1),
+    Q_STATIC_ASSERT_X(VPatternConverter::PatternMinVer < FORMAT_VERSION(0, 3, 1),
                       "Time to refactor the code.");
 
-    const QDomNodeList list = elementsByTagName(strPoint);
+    const QDomNodeList list = elementsByTagName(*strPoint);
     for (int i=0; i < list.size(); ++i)
     {
         QDomElement element = list.at(i).toElement();
         if (not element.isNull())
         {
-            const QString type = element.attribute(strType);
-            if (type == strCutArc || type == strCutSpline || type == strCutSplinePath)
+            const QString type = element.attribute(*strType);
+            if (type == *strCutArc || type == *strCutSpline || type == *strCutSplinePath)
             {
-                element.removeAttribute(strColor);
+                element.removeAttribute(*strColor);
             }
         }
     }
@@ -1278,14 +1552,14 @@ void VPatternConverter::RemoveColorToolCutV0_3_1()
 //---------------------------------------------------------------------------------------------------------------------
 QString VPatternConverter::MUnitV0_1_4() const
 {
-    // TODO. Delete if minimal supported version is 0.1.4
-    Q_STATIC_ASSERT_X(VPatternConverter::PatternMinVer < CONVERTER_VERSION_CHECK(0, 1, 4),
+    // TODO. Delete if minimal supported version is 0.2.0
+    Q_STATIC_ASSERT_X(VPatternConverter::PatternMinVer < FORMAT_VERSION(0, 2, 0),
                       "Time to refactor the code.");
 
     const QDomElement element = TagMeasurementsV0_1_4();
     try
     {
-        return GetParametrString(element, strUnit);
+        return GetParametrString(element, *strUnit);
     }
     catch (VExceptionEmptyParameter &e)
     {
@@ -1298,11 +1572,11 @@ QString VPatternConverter::MUnitV0_1_4() const
 //---------------------------------------------------------------------------------------------------------------------
 QDomElement VPatternConverter::TagMeasurementsV0_1_4() const
 {
-    // TODO. Delete if minimal supported version is 0.1.4
-    Q_STATIC_ASSERT_X(VPatternConverter::PatternMinVer < CONVERTER_VERSION_CHECK(0, 1, 4),
+    // TODO. Delete if minimal supported version is 0.2.0
+    Q_STATIC_ASSERT_X(VPatternConverter::PatternMinVer < FORMAT_VERSION(0, 2, 0),
                       "Time to refactor the code.");
 
-    const QDomNodeList list = elementsByTagName(strMeasurements);
+    const QDomNodeList list = elementsByTagName(*strMeasurements);
     const QDomElement element = list.at(0).toElement();
     if (not element.isElement())
     {
@@ -1315,11 +1589,11 @@ QDomElement VPatternConverter::TagMeasurementsV0_1_4() const
 //---------------------------------------------------------------------------------------------------------------------
 QDomElement VPatternConverter::TagIncrementsV0_1_4() const
 {
-    // TODO. Delete if minimal supported version is 0.1.4
-    Q_STATIC_ASSERT_X(VPatternConverter::PatternMinVer < CONVERTER_VERSION_CHECK(0, 1, 4),
+    // TODO. Delete if minimal supported version is 0.2.0
+    Q_STATIC_ASSERT_X(VPatternConverter::PatternMinVer < FORMAT_VERSION(0, 2, 0),
                       "Time to refactor the code.");
 
-    const QDomNodeList list = elementsByTagName(strIncrements);
+    const QDomNodeList list = elementsByTagName(*strIncrements);
     const QDomElement element = list.at(0).toElement();
     if (not element.isElement())
     {
@@ -1333,11 +1607,11 @@ QDomElement VPatternConverter::TagIncrementsV0_1_4() const
 void VPatternConverter::FixToolUnionToV0_2_4()
 {
     // TODO. Delete if minimal supported version is 0.2.4
-    Q_STATIC_ASSERT_X(VPatternConverter::PatternMinVer < CONVERTER_VERSION_CHECK(0, 2, 4),
+    Q_STATIC_ASSERT_X(VPatternConverter::PatternMinVer < FORMAT_VERSION(0, 2, 4),
                       "Time to refactor the code.");
 
     QDomElement root = documentElement();
-    const QDomNodeList modelings = root.elementsByTagName(strModeling);
+    const QDomNodeList modelings = root.elementsByTagName(*strModeling);
     for (int i=0; i<modelings.size(); ++i)
     {
         ParseModelingToV0_2_4(modelings.at(i).toElement());
@@ -1348,22 +1622,22 @@ void VPatternConverter::FixToolUnionToV0_2_4()
 void VPatternConverter::ParseModelingToV0_2_4(const QDomElement &modeling)
 {
     // TODO. Delete if minimal supported version is 0.2.4
-    Q_STATIC_ASSERT_X(VPatternConverter::PatternMinVer < CONVERTER_VERSION_CHECK(0, 2, 4),
+    Q_STATIC_ASSERT_X(VPatternConverter::PatternMinVer < FORMAT_VERSION(0, 2, 4),
                       "Time to refactor the code.");
 
     QDomElement node = modeling.firstChild().toElement();
     while (not node.isNull())
     {
-        if (node.tagName() == strTools)
+        if (node.tagName() == *strTools)
         {
-            const quint32 toolId = node.attribute(strId).toUInt();
+            const quint32 toolId = node.attribute(*strId).toUInt();
             QVector<quint32> children;
             QDomElement childNode = node.nextSibling().toElement();
             while (not childNode.isNull())
             {
-                if (childNode.hasAttribute(strIdTool) && childNode.attribute(strIdTool).toUInt() == toolId)
+                if (childNode.hasAttribute(*strIdTool) && childNode.attribute(*strIdTool).toUInt() == toolId)
                 {
-                    children.append(childNode.attribute(strIdObject).toUInt());
+                    children.append(childNode.attribute(*strIdObject).toUInt());
                 }
                 else
                 {
@@ -1387,7 +1661,7 @@ void VPatternConverter::ParseModelingToV0_2_4(const QDomElement &modeling)
 void VPatternConverter::SaveChildrenToolUnionToV0_2_4(quint32 id, const QVector<quint32> &children)
 {
     // TODO. Delete if minimal supported version is 0.2.4
-    Q_STATIC_ASSERT_X(VPatternConverter::PatternMinVer < CONVERTER_VERSION_CHECK(0, 2, 4),
+    Q_STATIC_ASSERT_X(VPatternConverter::PatternMinVer < FORMAT_VERSION(0, 2, 4),
                       "Time to refactor the code.");
 
     QDomElement toolUnion = elementById(id);
@@ -1396,12 +1670,12 @@ void VPatternConverter::SaveChildrenToolUnionToV0_2_4(quint32 id, const QVector<
         return;
     }
 
-    QDomElement tagChildren = createElement(strChildren);
+    QDomElement tagChildren = createElement(*strChildren);
 
-    for (int i=0; i<children.size(); ++i)
+    for (auto child : children)
     {
-        QDomElement tagChild = createElement(strChild);
-        tagChild.appendChild(createTextNode(QString().setNum(children.at(i))));
+        QDomElement tagChild = createElement(*strChild);
+        tagChild.appendChild(createTextNode(QString().setNum(child)));
         tagChildren.appendChild(tagChild);
     }
 
@@ -1412,7 +1686,7 @@ void VPatternConverter::SaveChildrenToolUnionToV0_2_4(quint32 id, const QVector<
 QMap<QString, QString> VPatternConverter::OldNamesToNewNames_InV0_2_0()
 {
     // TODO. Delete if minimal supported version is 0.2.0
-    Q_STATIC_ASSERT_X(VPatternConverter::PatternMinVer < CONVERTER_VERSION_CHECK(0, 2, 0),
+    Q_STATIC_ASSERT_X(VPatternConverter::PatternMinVer < FORMAT_VERSION(0, 2, 0),
                       "Time to refactor the code.");
 
     // old name, new name
@@ -1592,7 +1866,7 @@ QMap<QString, QString> VPatternConverter::OldNamesToNewNames_InV0_2_0()
 QMap<QString, QString> VPatternConverter::OldNamesToNewNames_InV0_2_1()
 {
     // TODO. Delete if minimal supported version is 0.2.1
-    Q_STATIC_ASSERT_X(VPatternConverter::PatternMinVer < CONVERTER_VERSION_CHECK(0, 2, 1),
+    Q_STATIC_ASSERT_X(VPatternConverter::PatternMinVer < FORMAT_VERSION(0, 2, 1),
                       "Time to refactor the code.");
 
     // old name, new name
@@ -1607,37 +1881,37 @@ QMap<QString, QString> VPatternConverter::OldNamesToNewNames_InV0_2_1()
 //---------------------------------------------------------------------------------------------------------------------
 void VPatternConverter::FixCutPoint()
 {
-    const QStringList types = QStringList() << strCutSplinePath
-                                            << strCutSpline
-                                            << strCutArc;
+    const QStringList types = QStringList() << *strCutSplinePath
+                                            << *strCutSpline
+                                            << *strCutArc;
 
-    const QDomNodeList list = elementsByTagName(strPoint);
+    const QDomNodeList list = elementsByTagName(*strPoint);
     for (int i=0; i < list.size(); ++i)
     {
         QDomElement element = list.at(i).toElement();
         if (not element.isNull())
         {
-            const QString type = element.attribute(strType);
+            const QString type = element.attribute(*strType);
             switch(types.indexOf(type))
             {
                 case 0: //strCutSplinePath
                 {
-                    const quint32 id = element.attribute(strId).toUInt();
-                    quint32 curve = element.attribute(strSplinePath).toUInt();
+                    const quint32 id = element.attribute(*strId).toUInt();
+                    quint32 curve = element.attribute(*strSplinePath).toUInt();
                     FixSubPaths(i, id, curve);
                     break;
                 }
                 case 1: //strCutSpline
                 {
-                    const quint32 id = element.attribute(strId).toUInt();
-                    quint32 curve = element.attribute(strSpline).toUInt();
+                    const quint32 id = element.attribute(*strId).toUInt();
+                    quint32 curve = element.attribute(*strSpline).toUInt();
                     FixSubPaths(i, id, curve);
                     break;
                 }
                 case 2: //strCutArc
                 {
-                    const quint32 id = element.attribute(strId).toUInt();
-                    quint32 curve = element.attribute(strArc).toUInt();
+                    const quint32 id = element.attribute(*strId).toUInt();
+                    quint32 curve = element.attribute(*strArc).toUInt();
                     FixSubPaths(i, id, curve);
                     break;
                 }
@@ -1651,85 +1925,85 @@ void VPatternConverter::FixCutPoint()
 //---------------------------------------------------------------------------------------------------------------------
 void VPatternConverter::FixSubPaths(int i, quint32 id, quint32 baseCurve)
 {
-    const QStringList pointTypes = QStringList() << strCutSplinePath
-                                                 << strCutSpline
-                                                 << strPointOfIntersectionCurves
-                                                 << strCurveIntersectAxis
-                                                 << strPointFromArcAndTangent
-                                                 << strPointOfIntersectionArcs;
+    const QStringList pointTypes = QStringList() << *strCutSplinePath
+                                                 << *strCutSpline
+                                                 << *strPointOfIntersectionCurves
+                                                 << *strCurveIntersectAxis
+                                                 << *strPointFromArcAndTangent
+                                                 << *strPointOfIntersectionArcs;
 
-    const QDomNodeList listPoints = elementsByTagName(strPoint);
+    const QDomNodeList listPoints = elementsByTagName(*strPoint);
     for (int j = i+1; j < listPoints.size(); ++j)
     {
         QDomElement element = listPoints.at(j).toElement();
         if (not element.isNull())
         {
-            const QString type = element.attribute(strType);
+            const QString type = element.attribute(*strType);
             switch(pointTypes.indexOf(type))
             {
                 case 0: //strCutSplinePath
                 {
-                    const quint32 spl = element.attribute(strSplinePath).toUInt();
+                    const quint32 spl = element.attribute(*strSplinePath).toUInt();
                     if (spl == id+1 || spl == id+2)
                     {
-                        element.setAttribute(strSplinePath, baseCurve);
+                        element.setAttribute(*strSplinePath, baseCurve);
                     }
                     break;
                 }
                 case 1: //strCutSpline
                 {
-                    const quint32 spl = element.attribute(strSpline).toUInt();
+                    const quint32 spl = element.attribute(*strSpline).toUInt();
                     if (spl == id+1 || spl == id+2)
                     {
-                        element.setAttribute(strSpline, baseCurve);
+                        element.setAttribute(*strSpline, baseCurve);
                     }
                     break;
                 }
                 case 2: //strPointOfIntersectionCurves
                 {
-                    quint32 spl = element.attribute(strCurve1).toUInt();
+                    quint32 spl = element.attribute(*strCurve1).toUInt();
                     if (spl == id+1 || spl == id+2)
                     {
-                        element.setAttribute(strCurve1, baseCurve);
+                        element.setAttribute(*strCurve1, baseCurve);
                     }
 
-                    spl = element.attribute(strCurve2).toUInt();
+                    spl = element.attribute(*strCurve2).toUInt();
                     if (spl == id+1 || spl == id+2)
                     {
-                        element.setAttribute(strCurve2, baseCurve);
+                        element.setAttribute(*strCurve2, baseCurve);
                     }
                     break;
                 }
                 case 3: //strCurveIntersectAxis
                 {
-                    const quint32 spl = element.attribute(strCurve).toUInt();
+                    const quint32 spl = element.attribute(*strCurve).toUInt();
                     if (spl == id+1 || spl == id+2)
                     {
-                        element.setAttribute(strCurve, baseCurve);
+                        element.setAttribute(*strCurve, baseCurve);
                     }
                     break;
                 }
                 case 4: //strPointFromArcAndTangent
                 {
-                    const quint32 spl = element.attribute(strArc).toUInt();
+                    const quint32 spl = element.attribute(*strArc).toUInt();
                     if (spl == id+1 || spl == id+2)
                     {
-                        element.setAttribute(strArc, baseCurve);
+                        element.setAttribute(*strArc, baseCurve);
                     }
                     break;
                 }
                 case 5: //strPointOfIntersectionArcs
                 {
-                    quint32 arc = element.attribute(strFirstArc).toUInt();
+                    quint32 arc = element.attribute(*strFirstArc).toUInt();
                     if (arc == id+1 || arc == id+2)
                     {
-                        element.setAttribute(strFirstArc, baseCurve);
+                        element.setAttribute(*strFirstArc, baseCurve);
                     }
 
-                    arc = element.attribute(strSecondArc).toUInt();
+                    arc = element.attribute(*strSecondArc).toUInt();
                     if (arc == id+1 || arc == id+2)
                     {
-                        element.setAttribute(strSecondArc, baseCurve);
+                        element.setAttribute(*strSecondArc, baseCurve);
                     }
                     break;
                 }
@@ -1739,25 +2013,25 @@ void VPatternConverter::FixSubPaths(int i, quint32 id, quint32 baseCurve)
         }
     }
 
-    const QStringList splTypes = QStringList() << strModelingPath
-                                               << strModelingSpline;
+    const QStringList splTypes = QStringList() << *strModelingPath
+                                               << *strModelingSpline;
 
-    const QDomNodeList listSplines = elementsByTagName(strSpline);
+    const QDomNodeList listSplines = elementsByTagName(*strSpline);
     for (int j = 0; j < listSplines.size(); ++j)
     {
         QDomElement element = listSplines.at(j).toElement();
         if (not element.isNull())
         {
-            const QString type = element.attribute(strType);
+            const QString type = element.attribute(*strType);
             switch(splTypes.indexOf(type))
             {
                 case 0: //strModelingPath
                 case 1: //strModelingSpline
                 {
-                    const quint32 spl = element.attribute(strIdObject).toUInt();
+                    const quint32 spl = element.attribute(*strIdObject).toUInt();
                     if (spl == id+1 || spl == id+2)
                     {
-                        element.setAttribute(strIdObject, baseCurve);
+                        element.setAttribute(*strIdObject, baseCurve);
                     }
                     break;
                 }
@@ -1767,19 +2041,19 @@ void VPatternConverter::FixSubPaths(int i, quint32 id, quint32 baseCurve)
         }
     }
 
-    const QDomNodeList listArcs = elementsByTagName(strArc);
+    const QDomNodeList listArcs = elementsByTagName(*strArc);
     for (int j = 0; j < listArcs.size(); ++j)
     {
         QDomElement element = listArcs.at(j).toElement();
         if (not element.isNull())
         {
-            const QString type = element.attribute(strType);
-            if (type == strModeling)
+            const QString type = element.attribute(*strType);
+            if (type == *strModeling)
             {
-                const quint32 arc = element.attribute(strIdObject).toUInt();
+                const quint32 arc = element.attribute(*strIdObject).toUInt();
                 if (arc == id+1 || arc == id+2)
                 {
-                    element.setAttribute(strIdObject, baseCurve);
+                    element.setAttribute(*strIdObject, baseCurve);
                 }
             }
         }
@@ -1790,10 +2064,10 @@ void VPatternConverter::FixSubPaths(int i, quint32 id, quint32 baseCurve)
 void VPatternConverter::TagRemoveAttributeTypeObjectInV0_4_0()
 {
     // TODO. Delete if minimal supported version is 0.4.0
-    Q_STATIC_ASSERT_X(VPatternConverter::PatternMinVer < CONVERTER_VERSION_CHECK(0, 4, 0),
+    Q_STATIC_ASSERT_X(VPatternConverter::PatternMinVer < FORMAT_VERSION(0, 4, 0),
                       "Time to refactor the code.");
 
-    const QDomNodeList list = elementsByTagName(strModeling);
+    const QDomNodeList list = elementsByTagName(*strModeling);
     for (int i = 0; i < list.size(); ++i)
     {
         QDomElement modeling = list.at(i).toElement();
@@ -1805,9 +2079,9 @@ void VPatternConverter::TagRemoveAttributeTypeObjectInV0_4_0()
                 QDomElement domElement = domNode.toElement();
                 if (not domElement.isNull())
                 {
-                    if (domElement.hasAttribute(strTypeObject))
+                    if (domElement.hasAttribute(*strTypeObject))
                     {
-                        domElement.removeAttribute(strTypeObject);
+                        domElement.removeAttribute(*strTypeObject);
                     }
                 }
                 domNode = domNode.nextSibling();
@@ -1820,27 +2094,27 @@ void VPatternConverter::TagRemoveAttributeTypeObjectInV0_4_0()
 void VPatternConverter::TagDetailToV0_4_0()
 {
     // TODO. Delete if minimal supported version is 0.4.0
-    Q_STATIC_ASSERT_X(VPatternConverter::PatternMinVer < CONVERTER_VERSION_CHECK(0, 4, 0),
+    Q_STATIC_ASSERT_X(VPatternConverter::PatternMinVer < FORMAT_VERSION(0, 4, 0),
                       "Time to refactor the code.");
 
-    const QDomNodeList list = elementsByTagName(strDetail);
+    const QDomNodeList list = elementsByTagName(*strDetail);
     for (int i=0; i < list.size(); ++i)
     {
         QDomElement dom = list.at(i).toElement();
 
         if (not dom.isNull())
         {
-            dom.setAttribute(strSeamAllowance, dom.attribute(strSupplement, "0"));
-            dom.removeAttribute(strSupplement);
+            dom.setAttribute(*strSeamAllowance, dom.attribute(*strSupplement, QChar('0')));
+            dom.removeAttribute(*strSupplement);
 
-            dom.setAttribute(strVersion, "1");
+            dom.setAttribute(*strVersion, QChar('1'));
 
-            const QStringList tags = QStringList() << strNode << strData << strPatternInfo << strGrainline;
+            const QStringList tags = QStringList() << *strNode << *strData << *strPatternInfo << *strGrainline;
 
             QDomElement tagData;
             QDomElement tagPatternInfo;
             QDomElement tagGrainline;
-            QDomElement tagNodes = createElement(strNodes);
+            QDomElement tagNodes = createElement(*strNodes);
 
             const QDomNodeList childList = dom.childNodes();
             for (qint32 i = 0; i < childList.size(); ++i)
@@ -1852,26 +2126,26 @@ void VPatternConverter::TagDetailToV0_4_0()
                     {
                         case 0://strNode
                         {
-                            QDomElement tagNode = createElement(strNode);
+                            QDomElement tagNode = createElement(*strNode);
 
-                            tagNode.setAttribute(strIdObject, element.attribute(strIdObject, NULL_ID_STR));
+                            tagNode.setAttribute(*strIdObject, element.attribute(*strIdObject, NULL_ID_STR));
 
-                            if (element.hasAttribute(strReverse))
+                            if (element.hasAttribute(*strReverse))
                             {
-                                tagNode.setAttribute(strReverse, element.attribute(strReverse, "0"));
+                                tagNode.setAttribute(*strReverse, element.attribute(*strReverse, QChar('0')));
                             }
 
-                            if (element.hasAttribute(strMx))
+                            if (element.hasAttribute(*strMx))
                             {
-                                tagNode.setAttribute(strMx, element.attribute(strMx, "0"));
+                                tagNode.setAttribute(*strMx, element.attribute(*strMx, QChar('0')));
                             }
 
-                            if (element.hasAttribute(strMy))
+                            if (element.hasAttribute(*strMy))
                             {
-                                tagNode.setAttribute(strMy, element.attribute(strMy, "0"));
+                                tagNode.setAttribute(*strMy, element.attribute(*strMy, QChar('0')));
                             }
 
-                            tagNode.setAttribute(strType, element.attribute(strType, ""));
+                            tagNode.setAttribute(*strType, element.attribute(*strType, QString()));
 
                             tagNodes.appendChild(tagNode);
 
@@ -1905,7 +2179,7 @@ void VPatternConverter::TagDetailToV0_4_0()
 //---------------------------------------------------------------------------------------------------------------------
 QDomElement VPatternConverter::GetUnionDetailNodesV0_4_0(const QDomElement &detail)
 {
-    QDomElement tagNodes = createElement(strNodes);
+    QDomElement tagNodes = createElement(*strNodes);
 
     if (not detail.isNull())
     {
@@ -1915,16 +2189,16 @@ QDomElement VPatternConverter::GetUnionDetailNodesV0_4_0(const QDomElement &deta
             const QDomElement node = childList.at(i).toElement();
             if (not node.isNull())
             {
-                QDomElement tagNode = createElement(strNode);
+                QDomElement tagNode = createElement(*strNode);
 
-                tagNode.setAttribute(strIdObject, node.attribute(strIdObject, NULL_ID_STR));
+                tagNode.setAttribute(*strIdObject, node.attribute(*strIdObject, NULL_ID_STR));
 
-                if (node.hasAttribute(strReverse))
+                if (node.hasAttribute(*strReverse))
                 {
-                    tagNode.setAttribute(strReverse, node.attribute(strReverse, "0"));
+                    tagNode.setAttribute(*strReverse, node.attribute(*strReverse, QChar('0')));
                 }
 
-                tagNode.setAttribute(strType, node.attribute(strType, ""));
+                tagNode.setAttribute(*strType, node.attribute(*strType, QString()));
 
                 tagNodes.appendChild(tagNode);
             }
@@ -1937,7 +2211,7 @@ QDomElement VPatternConverter::GetUnionDetailNodesV0_4_0(const QDomElement &deta
 //---------------------------------------------------------------------------------------------------------------------
 QDomElement VPatternConverter::GetUnionChildrenNodesV0_4_0(const QDomElement &detail)
 {
-    QDomElement tagNodes = createElement(strNodes);
+    QDomElement tagNodes = createElement(*strNodes);
 
     if (not detail.isNull())
     {
@@ -1960,12 +2234,12 @@ QDomElement VPatternConverter::GetUnionChildrenNodesV0_4_0(const QDomElement &de
 void VPatternConverter::LabelTagToV0_4_4(const QString &tagName)
 {
     // TODO. Delete if minimal supported version is 0.4.4
-    Q_STATIC_ASSERT_X(VPatternConverter::PatternMinVer < CONVERTER_VERSION_CHECK(0, 4, 4),
+    Q_STATIC_ASSERT_X(VPatternConverter::PatternMinVer < FORMAT_VERSION(0, 4, 4),
                       "Time to refactor the code.");
 
     Unit unit = Unit::Cm;
     const QStringList units = QStringList() << "mm" << "cm" << "inch";
-    switch (units.indexOf(UniqueTagText(strUnit)))
+    switch (units.indexOf(UniqueTagText(*strUnit)))
     {
         case 0:// mm
             unit = Unit::Mm;
@@ -1984,7 +2258,7 @@ void VPatternConverter::LabelTagToV0_4_4(const QString &tagName)
     {
         if (dom.hasAttribute(attribute))
         {
-            QString valStr = dom.attribute(attribute, "1");
+            QString valStr = dom.attribute(attribute, QChar('1'));
             bool ok = false;
             qreal val = valStr.toDouble(&ok);
             if (not ok)
@@ -2002,9 +2276,262 @@ void VPatternConverter::LabelTagToV0_4_4(const QString &tagName)
 
         if (not dom.isNull())
         {
-            ConvertData(dom, strWidth);
-            ConvertData(dom, strHeight);
+            ConvertData(dom, *strWidth);
+            ConvertData(dom, *strHeight);
         }
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QDomElement VPatternConverter::AddTagPatternLabelV0_5_1()
+{
+    // TODO. Delete if minimal supported version is 0.6.0
+    Q_STATIC_ASSERT_X(VPatternConverter::PatternMinVer < FORMAT_VERSION(0, 6, 0),
+                      "Time to refactor the code.");
+
+    const QDomNodeList list = elementsByTagName(*strPatternLabel);
+    if (list.isEmpty())
+    {
+        const QStringList tags = QStringList() << *strUnit
+                                               << *strImage
+                                               << *strAuthor
+                                               << *strDescription
+                                               << *strNotes
+                                               << *strGradation
+                                               << *strPatternName
+                                               << *strPatternNum
+                                               << *strCompanyName
+                                               << *strCustomerName
+                                               << *strPatternLabel;
+
+        QDomElement element = createElement(*strPatternLabel);
+        QDomElement pattern = documentElement();
+        for (int i = tags.indexOf(element.tagName())-1; i >= 0; --i)
+        {
+            const QDomNodeList list = elementsByTagName(tags.at(i));
+            if (not list.isEmpty())
+            {
+                pattern.insertAfter(element, list.at(0));
+                break;
+            }
+        }
+        return element;
+    }
+    return list.at(0).toElement();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VPatternConverter::PortPatternLabeltoV0_6_0(QDomElement &label)
+{
+    // TODO. Delete if minimal supported version is 0.6.0
+    Q_STATIC_ASSERT_X(VPatternConverter::PatternMinVer < FORMAT_VERSION(0, 6, 0),
+                      "Time to refactor the code.");
+
+    if (not UniqueTagText(*strCompanyName).isEmpty())
+    {
+        AddLabelTemplateLineV0_6_0(label, "%author%", true, false, 0, 4);
+    }
+    else
+    {
+        const QString author = UniqueTagText(*strAuthor);
+        if (not author.isEmpty())
+        {
+            AddLabelTemplateLineV0_6_0(label, author, true, false, 0, 4);
+        }
+    }
+
+    if (not UniqueTagText(*strPatternName).isEmpty())
+    {
+        AddLabelTemplateLineV0_6_0(label, "%patternName%", false, false, 0, 2);
+    }
+
+    if (not UniqueTagText(*strPatternNum).isEmpty())
+    {
+        AddLabelTemplateLineV0_6_0(label, "%patternNumber%", false, false, 0, 0);
+    }
+
+    if (not UniqueTagText(*strCustomerName).isEmpty())
+    {
+        AddLabelTemplateLineV0_6_0(label, "%customer%", false, true, 0, 0);
+    }
+
+    const QString sizeField = UniqueTagText(*strSize);
+    if (not sizeField.isEmpty())
+    {
+        AddLabelTemplateLineV0_6_0(label, sizeField, false, false, 0, 0);
+    }
+
+    if (UniqueTagText(*strShowMeasurements) == trueStr)
+    {
+        AddLabelTemplateLineV0_6_0(label, "%mFileName%.%mExt%", false, false, 0, 0);
+    }
+
+    if (UniqueTagText(*strShowDate) == trueStr)
+    {
+        AddLabelTemplateLineV0_6_0(label, "%date%", false, true, 0, 0);
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VPatternConverter::AddLabelTemplateLineV0_6_0(QDomElement &label, const QString &text, bool bold, bool italic,
+                                                   int alignment, int fontSizeIncrement)
+{
+    // TODO. Delete if minimal supported version is 0.6.0
+    Q_STATIC_ASSERT_X(VPatternConverter::PatternMinVer < FORMAT_VERSION(0, 6, 0),
+                      "Time to refactor the code.");
+
+    QDomElement tagLine = createElement(*strLine);
+
+    SetAttribute(tagLine, *strText, text);
+    SetAttribute(tagLine, *strBold, bold);
+    SetAttribute(tagLine, *strItalic, italic);
+    SetAttribute(tagLine, *strAlignment, alignment);
+    SetAttribute(tagLine, *strFSIncrement, fontSizeIncrement);
+
+    label.appendChild(tagLine);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VPatternConverter::PortPieceLabelstoV0_6_0()
+{
+    // TODO. Delete if minimal supported version is 0.6.0
+    Q_STATIC_ASSERT_X(VPatternConverter::PatternMinVer < FORMAT_VERSION(0, 6, 0),
+                      "Time to refactor the code.");
+
+    const QDomNodeList nodeList = elementsByTagName(*strData);
+    for (int i = 0; i < nodeList.size(); ++i)
+    {
+        QDomElement dataTag = nodeList.at(i).toElement();
+        QDomNodeList nodeListMCP = dataTag.childNodes();
+        const int count = nodeListMCP.count();
+        try
+        {
+            if (not GetParametrString(dataTag, *strLetter, QString()).isEmpty())
+            {
+                AddLabelTemplateLineV0_6_0(dataTag, "%pLetter%", true, false, Qt::AlignHCenter, 6);
+            }
+        }
+        catch(const VExceptionEmptyParameter &)
+        {}
+
+        AddLabelTemplateLineV0_6_0(dataTag, "%pName%", true, false, Qt::AlignHCenter, 2);
+
+        int firstLineCutNumber = 1;
+        bool firstLine = true;
+
+        for (int iMCP = 0; iMCP < count; ++iMCP)
+        {
+            QDomElement domMCP = nodeListMCP.at(iMCP).toElement();
+
+            QString line;
+
+            const int material = static_cast<int>(GetParametrUInt(domMCP, *strMaterial, QChar('0')));
+            switch(material)
+            {
+                case 0:
+                    line.append("%mFabric%");
+                    break;
+                case 1:
+                    line.append("%mLining%");
+                    break;
+                case 2:
+                    line.append("%mInterfacing%");
+                    break;
+                case 3:
+                    line.append("%mInterlining%");
+                    break;
+                case 4:
+                default:
+                    line.append(GetParametrString(domMCP, *strUserDefined, "User material"));
+                    break;
+            }
+
+            line.append(", %wCut% ");
+
+            const int cutNumber = static_cast<int>(GetParametrUInt(domMCP, *strCutNumber, QChar('1')));
+
+            if (firstLine)
+            {
+                firstLineCutNumber = cutNumber;
+                dataTag.setAttribute(*strQuantity, cutNumber);
+                line.append("%pQuantity%");
+                firstLine = false;
+            }
+            else
+            {
+                if (firstLineCutNumber != cutNumber)
+                {
+                    line.append(QString::number(cutNumber));
+                }
+                else
+                {
+                    line.append("%pQuantity%");
+                }
+            }
+
+            if (GetParametrUInt(domMCP, *strPlacement, QChar('0')) == 1)
+            {
+                line.append(" %wOnFold%");
+            }
+
+            AddLabelTemplateLineV0_6_0(dataTag, line, false, false, Qt::AlignHCenter, 0);
+        }
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VPatternConverter::RemoveUnusedTagsV0_6_0()
+{
+    // TODO. Delete if minimal supported version is 0.6.0
+    Q_STATIC_ASSERT_X(VPatternConverter::PatternMinVer < FORMAT_VERSION(0, 6, 0),
+                      "Time to refactor the code.");
+
+    RemoveUniqueTagV0_6_0(*strAuthor);
+    RemoveUniqueTagV0_6_0(*strSize);
+    RemoveUniqueTagV0_6_0(*strShowDate);
+    RemoveUniqueTagV0_6_0(*strShowMeasurements);
+
+    QDomNodeList nodeList = elementsByTagName(*strData);
+    for (int i = 0; i < nodeList.size(); ++i)
+    {
+        QDomElement child = nodeList.at(i).firstChildElement(*strMCP);
+        while (not child.isNull())
+        {
+            nodeList.at(i).removeChild(child);
+            child = nodeList.at(i).firstChildElement(*strMCP);
+        }
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VPatternConverter::RemoveUniqueTagV0_6_0(const QString &tag)
+{
+    // TODO. Delete if minimal supported version is 0.6.0
+    Q_STATIC_ASSERT_X(VPatternConverter::PatternMinVer < FORMAT_VERSION(0, 6, 0),
+                      "Time to refactor the code.");
+
+    const QDomNodeList nodeList = elementsByTagName(tag);
+    if (nodeList.isEmpty())
+    {
+        return;
+    }
+
+    QDomElement pattern = documentElement();
+    pattern.removeChild(nodeList.at(0));
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VPatternConverter::AddTagPreviewCalculationsV0_6_2()
+{
+    // TODO. Delete if minimal supported version is 0.6.2
+    Q_STATIC_ASSERT_X(VPatternConverter::PatternMinVer < FORMAT_VERSION(0, 6, 2),
+                      "Time to refactor the code.");
+
+    const QDomNodeList list = elementsByTagName(*strIncrements);
+    if (not list.isEmpty())
+    {
+        QDomElement pattern = documentElement();
+        pattern.insertAfter(createElement(*strPreviewCalculations), list.at(0));
     }
 }
 
@@ -2012,20 +2539,20 @@ void VPatternConverter::LabelTagToV0_4_4(const QString &tagName)
 void VPatternConverter::TagUnionDetailsToV0_4_0()
 {
     // TODO. Delete if minimal supported version is 0.4.0
-    Q_STATIC_ASSERT_X(VPatternConverter::PatternMinVer < CONVERTER_VERSION_CHECK(0, 4, 0),
+    Q_STATIC_ASSERT_X(VPatternConverter::PatternMinVer < FORMAT_VERSION(0, 4, 0),
                       "Time to refactor the code.");
 
-    const QDomNodeList list = elementsByTagName(strTools);
+    const QDomNodeList list = elementsByTagName(*strTools);
     for (int i=0; i < list.size(); ++i)
     {
         // Tag 'tools' used only for union details, so no need to check any additional attributes
         QDomElement toolDOM = list.at(i).toElement();
         if (not toolDOM.isNull())
         {
-            const QStringList tags = QStringList() << strDet << strChildren;
+            const QStringList tags = QStringList() << *strDet << *strChildren;
 
             QVector<QDomElement> nodes;
-            QDomElement tagChildrenNodes = createElement(strChildren);
+            QDomElement tagChildrenNodes = createElement(*strChildren);
 
             const QDomNodeList childList = toolDOM.childNodes();
             for (qint32 i = 0; i < childList.size(); ++i)
@@ -2049,10 +2576,10 @@ void VPatternConverter::TagUnionDetailsToV0_4_0()
 
             RemoveAllChildren(toolDOM);
 
-            for (int i = 0; i < nodes.size(); ++i)
+            for (auto &node : nodes)
             {
-                QDomElement tagDet = createElement(strDet);
-                tagDet.appendChild(nodes.at(i));
+                QDomElement tagDet = createElement(*strDet);
+                tagDet.appendChild(node);
                 toolDOM.appendChild(tagDet);
             }
             toolDOM.appendChild(tagChildrenNodes);

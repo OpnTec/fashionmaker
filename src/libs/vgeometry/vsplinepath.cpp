@@ -6,7 +6,7 @@
  **
  **  @brief
  **  @copyright
- **  This source code is part of the Valentine project, a pattern making
+ **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2013-2015 Valentina project
  **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
@@ -119,6 +119,9 @@ VSplinePath VSplinePath::Rotate(const QPointF &originPoint, qreal degrees, const
 
     VSplinePath splPath(newPoints);
     splPath.setName(name() + prefix);
+    splPath.SetColor(GetColor());
+    splPath.SetPenStyle(GetPenStyle());
+    splPath.SetApproximationScale(GetApproximationScale());
     return splPath;
 }
 
@@ -141,6 +144,9 @@ VSplinePath VSplinePath::Flip(const QLineF &axis, const QString &prefix) const
 
     VSplinePath splPath(newPoints);
     splPath.setName(name() + prefix);
+    splPath.SetColor(GetColor());
+    splPath.SetPenStyle(GetPenStyle());
+    splPath.SetApproximationScale(GetApproximationScale());
     return splPath;
 }
 
@@ -163,6 +169,9 @@ VSplinePath VSplinePath::Move(qreal length, qreal angle, const QString &prefix) 
 
     VSplinePath splPath(newPoints);
     splPath.setName(name() + prefix);
+    splPath.SetColor(GetColor());
+    splPath.SetPenStyle(GetPenStyle());
+    splPath.SetApproximationScale(GetApproximationScale());
     return splPath;
 }
 
@@ -225,6 +234,7 @@ VSpline VSplinePath::GetSpline(qint32 index) const
     const VSplinePoint &p2 = d->path.at(index);
     VSpline spl(p1.P(), p2.P(), p1.Angle2(), p1.Angle2Formula(), p2.Angle1(), p2.Angle1Formula(), p1.Length2(),
                 p1.Length2Formula(), p2.Length1(), p2.Length1Formula(), 1);
+    spl.SetApproximationScale(GetApproximationScale());
     return spl;
 }
 
@@ -286,7 +296,7 @@ VSplinePath &VSplinePath::operator =(const VSplinePath &path)
     {
         return *this;
     }
-    VAbstractCurve::operator=(path);
+    VAbstractCubicBezierPath::operator=(path);
     d = path.d;
     return *this;
 }
@@ -318,7 +328,11 @@ qreal VSplinePath::GetStartAngle() const
 {
     if (CountPoints() > 0)
     {
-        return GetSplinePath().first().Angle2();
+#if QT_VERSION >= QT_VERSION_CHECK(5, 6, 0)
+        return GetSplinePath().constFirst().Angle2();
+#else
+        return GetSplinePath().first().Angle2(); // clazy:exclude=detaching-temporary
+#endif
     }
     else
     {
@@ -331,7 +345,11 @@ qreal VSplinePath::GetEndAngle() const
 {
     if (CountPoints() > 0)
     {
-        return GetSplinePath().last().Angle1();
+#if QT_VERSION >= QT_VERSION_CHECK(5, 6, 0)
+        return GetSplinePath().constLast().Angle1();
+#else
+        return GetSplinePath().last().Angle1(); // clazy:exclude=detaching-temporary
+#endif
     }
     else
     {
@@ -344,7 +362,11 @@ qreal VSplinePath::GetC1Length() const
 {
     if (CountPoints() > 0)
     {
-        return GetSplinePath().first().Length2();
+#if QT_VERSION >= QT_VERSION_CHECK(5, 6, 0)
+        return GetSplinePath().constFirst().Length2();
+#else
+        return GetSplinePath().first().Length2(); // clazy:exclude=detaching-temporary
+#endif
     }
     else
     {
@@ -357,7 +379,11 @@ qreal VSplinePath::GetC2Length() const
 {
     if (CountPoints() > 0)
     {
-        return GetSplinePath().last().Length1();
+#if QT_VERSION >= QT_VERSION_CHECK(5, 6, 0)
+        return GetSplinePath().constLast().Length1();
+#else
+        return GetSplinePath().last().Length1(); // clazy:exclude=detaching-temporary
+#endif
     }
     else
     {
@@ -370,7 +396,11 @@ VPointF VSplinePath::FirstPoint() const
 {
     if (not d->path.isEmpty())
     {
-        return d->path.first().P();
+#if QT_VERSION >= QT_VERSION_CHECK(5, 6, 0)
+        return d->path.constFirst().P();
+#else
+        return d->path.first().P(); // clazy:exclude=detaching-temporary
+#endif
     }
     else
     {

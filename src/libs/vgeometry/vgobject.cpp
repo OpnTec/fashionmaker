@@ -6,7 +6,7 @@
  **
  **  @brief
  **  @copyright
- **  This source code is part of the Valentine project, a pattern making
+ **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2013-2015 Valentina project
  **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
@@ -39,8 +39,6 @@
 #include "../vmisc/vmath.h"
 #include "../ifc/ifcdef.h"
 #include "vgobject_p.h"
-
-const double VGObject::accuracyPointOnLine = (0.031/*mm*/ / 25.4) * PrintDPI;
 
 //---------------------------------------------------------------------------------------------------------------------
 /**
@@ -454,23 +452,20 @@ void VGObject::LineCoefficients(const QLineF &line, qreal *a, qreal *b, qreal *c
  */
 bool VGObject::IsPointOnLineSegment(const QPointF &t, const QPointF &p1, const QPointF &p2)
 {
-    // The test point must lie inside the bounding box spanned by the two line points.
-    if (not ( (p1.x() <= t.x() && t.x() <= p2.x()) || (p2.x() <= t.x() && t.x() <= p1.x()) ))
+    auto InsideRange = [](qreal p1, qreal p2, qreal t)
+    {        
+        return not ( not ((p1 <= t && t <= p2) || (p2 <= t && t <= p1))
+                     && not (qAbs(p1 - t) <= accuracyPointOnLine) && not (qAbs(p2 - t) <= accuracyPointOnLine));
+    };
+
+    if (not InsideRange(p1.x(), p2.x(), t.x()))
     {
-        if (not (qAbs(p1.x() - t.x()) <= accuracyPointOnLine) && not (qAbs(p2.x() - t.x()) <= accuracyPointOnLine))
-        {
-            // test point not in x-range
-            return false;
-        }
+        return false; // test point not in x-range
     }
 
-    if (not ( (p1.y() <= t.y() && t.y() <= p2.y()) || (p2.y() <= t.y() && t.y() <= p1.y()) ))
+    if (not InsideRange(p1.y(), p2.y(), t.y()))
     {
-        if (not (qAbs(p1.y() - t.y()) <= accuracyPointOnLine) && not (qAbs(p2.y() - t.y()) <= accuracyPointOnLine))
-        {
-            // test point not in y-range
-            return false;
-        }
+        return false; // test point not in y-range
     }
 
     // Test via the perp dot product (PDP)

@@ -6,7 +6,7 @@
  **
  **  @brief
  **  @copyright
- **  This source code is part of the Valentine project, a pattern making
+ **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2015 Valentina project
  **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
@@ -49,8 +49,8 @@ class DialogPointOfIntersectionCircles : public DialogTool
     Q_OBJECT
 
 public:
-    DialogPointOfIntersectionCircles(const VContainer *data, const quint32 &toolId, QWidget *parent = 0);
-    virtual ~DialogPointOfIntersectionCircles() Q_DECL_OVERRIDE;
+    DialogPointOfIntersectionCircles(const VContainer *data, const quint32 &toolId, QWidget *parent = nullptr);
+    virtual ~DialogPointOfIntersectionCircles() override;
 
     void           SetPointName(const QString &value);
 
@@ -70,7 +70,7 @@ public:
     void              SetCrossCirclesPoint(const CrossCirclesPoint &p);
 
 public slots:
-    virtual void   ChosenObject(quint32 id, const SceneObject &type) Q_DECL_OVERRIDE;
+    virtual void   ChosenObject(quint32 id, const SceneObject &type) override;
     void           PointChanged();
 
     void           DeployCircle1RadiusTextEdit();
@@ -86,13 +86,13 @@ public slots:
     void           EvalCircle2Radius();
 
 protected:
-    virtual void   ShowVisualization() Q_DECL_OVERRIDE;
+    virtual void   ShowVisualization() override;
     /**
      * @brief SaveData Put dialog data in local variables
      */
-    virtual void   SaveData() Q_DECL_OVERRIDE;
-    virtual void   closeEvent(QCloseEvent *event) Q_DECL_OVERRIDE;
-    virtual void   CheckState() Q_DECL_FINAL;
+    virtual void   SaveData() override;
+    virtual void   closeEvent(QCloseEvent *event) override;
+    virtual void   CheckState() final;
 
 private:
     Q_DISABLE_COPY(DialogPointOfIntersectionCircles)

@@ -6,7 +6,7 @@
  **
  **  @brief
  **  @copyright
- **  This source code is part of the Valentine project, a pattern making
+ **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2013-2015 Valentina project
  **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
@@ -53,15 +53,11 @@ VisToolLineIntersectAxis::VisToolLineIntersectAxis(const VContainer *data, QGrap
     lineP1 = InitPoint(supportColor, this);
     lineP2 = InitPoint(supportColor, this);
     basePoint = InitPoint(supportColor, this);
-    baseLine = InitItem<QGraphicsLineItem>(supportColor, this);
-    axisLine = InitItem<QGraphicsLineItem>(supportColor, this);
-    line_intersection = InitItem<QGraphicsLineItem>(supportColor, this);
+    baseLine = InitItem<VScaledLine>(supportColor, this);
+    axisLine = InitItem<VScaledLine>(supportColor, this);
+    line_intersection = InitItem<VScaledLine>(supportColor, this);
     point = InitPoint(mainColor, this);
 }
-
-//---------------------------------------------------------------------------------------------------------------------
-VisToolLineIntersectAxis::~VisToolLineIntersectAxis()
-{}
 
 //---------------------------------------------------------------------------------------------------------------------
 void VisToolLineIntersectAxis::RefreshGeometry()
@@ -98,7 +94,8 @@ void VisToolLineIntersectAxis::RefreshGeometry()
                 DrawPoint(basePoint, static_cast<QPointF>(*third), mainColor);
                 DrawLine(axisLine, axis, supportColor, Qt::DashLine);
 
-                QPointF p = VToolLineIntersectAxis::FindPoint(axis, base_line);
+                QPointF p;
+                VToolLineIntersectAxis::FindPoint(axis, base_line, &p);
                 QLineF axis_line(static_cast<QPointF>(*third), p);
                 DrawLine(this, axis_line, mainColor, lineStyle);
 
@@ -122,7 +119,7 @@ QString VisToolLineIntersectAxis::Angle() const
 //---------------------------------------------------------------------------------------------------------------------
 void VisToolLineIntersectAxis::SetAngle(const QString &expression)
 {
-    angle = FindVal(expression, Visualization::data->PlainVariables());
+    angle = FindValFromUser(expression, Visualization::data->DataVariables());
 }
 
 //---------------------------------------------------------------------------------------------------------------------

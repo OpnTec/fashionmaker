@@ -6,7 +6,7 @@
  **
  **  @brief
  **  @copyright
- **  This source code is part of the Valentine project, a pattern making
+ **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2016 Valentina project
  **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
@@ -38,20 +38,20 @@ class VisToolFlippingByLine : public VisOperation
     Q_OBJECT
 public:
     explicit VisToolFlippingByLine(const VContainer *data, QGraphicsItem *parent = nullptr);
-    virtual ~VisToolFlippingByLine();
+    virtual ~VisToolFlippingByLine() = default;
 
-    virtual void RefreshGeometry() Q_DECL_OVERRIDE;
+    virtual void   RefreshGeometry() override;
 
     void SetFirstLinePointId(quint32 value);
     void SetSecondLinePointId(quint32 value);
 
-    virtual int type() const Q_DECL_OVERRIDE {return Type;}
+    virtual int type() const override {return Type;}
     enum { Type = UserType + static_cast<int>(Vis::ToolFlippingByLine)};
 private:
     Q_DISABLE_COPY(VisToolFlippingByLine)
-    quint32               object2Id;
-    QGraphicsEllipseItem *point1;
-    QGraphicsEllipseItem *point2;
+    quint32         object2Id;
+    VScaledEllipse *point1;
+    VScaledEllipse *point2;
 };
 
 #endif // VISTOOLFLIPPINGBYLINE_H

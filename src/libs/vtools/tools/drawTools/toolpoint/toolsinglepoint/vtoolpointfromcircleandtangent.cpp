@@ -6,7 +6,7 @@
  **
  **  @brief
  **  @copyright
- **  This source code is part of the Valentine project, a pattern making
+ **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2015 Valentina project
  **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
@@ -39,6 +39,7 @@
 #include "../../../../visualization/visualization.h"
 #include "../../../../visualization/line/vistoolpointfromcircleandtangent.h"
 #include "../ifc/exception/vexception.h"
+#include "../ifc/exception/vexceptionobjecterror.h"
 #include "../ifc/xml/vdomdocument.h"
 #include "../ifc/ifcdef.h"
 #include "../vgeometry/vgobject.h"
@@ -56,24 +57,25 @@ template <class T> class QSharedPointer;
 const QString VToolPointFromCircleAndTangent::ToolType = QStringLiteral("pointFromCircleAndTangent");
 
 //---------------------------------------------------------------------------------------------------------------------
-VToolPointFromCircleAndTangent::VToolPointFromCircleAndTangent(VAbstractPattern *doc, VContainer *data,
-                                                               const quint32 &id,
-                                                               quint32 circleCenterId, const QString &circleRadius,
-                                                               quint32 tangentPointId, CrossCirclesPoint crossPoint,
-                                                               const Source &typeCreation, QGraphicsItem *parent)
-    :VToolSinglePoint(doc, data, id, parent), circleCenterId(circleCenterId), tangentPointId(tangentPointId),
-      circleRadius(circleRadius), crossPoint(crossPoint)
+VToolPointFromCircleAndTangent::VToolPointFromCircleAndTangent(const VToolPointFromCircleAndTangentInitData &initData,
+                                                               QGraphicsItem *parent)
+    :VToolSinglePoint(initData.doc, initData.data, initData.id, parent),
+      circleCenterId(initData.circleCenterId),
+      tangentPointId(initData.tangentPointId),
+      circleRadius(initData.circleRadius),
+      crossPoint(initData.crossPoint)
 {
-    ToolCreation(typeCreation);
+    ToolCreation(initData.typeCreation);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void VToolPointFromCircleAndTangent::setDialog()
 {
     SCASSERT(not m_dialog.isNull())
-    QSharedPointer<DialogPointFromCircleAndTangent> dialogTool = m_dialog.objectCast<DialogPointFromCircleAndTangent>();
+    const QPointer<DialogPointFromCircleAndTangent> dialogTool =
+            qobject_cast<DialogPointFromCircleAndTangent *>(m_dialog);
     SCASSERT(not dialogTool.isNull())
-    const QSharedPointer<VPointF> p = VAbstractTool::data.GeometricObject<VPointF>(id);
+    const QSharedPointer<VPointF> p = VAbstractTool::data.GeometricObject<VPointF>(m_id);
     dialogTool->SetCircleCenterId(circleCenterId);
     dialogTool->SetCircleRadius(circleRadius);
     dialogTool->SetCrossCirclesPoint(crossPoint);
@@ -82,97 +84,106 @@ void VToolPointFromCircleAndTangent::setDialog()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-VToolPointFromCircleAndTangent *VToolPointFromCircleAndTangent::Create(QSharedPointer<DialogTool> dialog,
+VToolPointFromCircleAndTangent *VToolPointFromCircleAndTangent::Create(const QPointer<DialogTool> &dialog,
                                                                        VMainGraphicsScene *scene,
                                                                        VAbstractPattern *doc, VContainer *data)
 {
     SCASSERT(not dialog.isNull())
-    QSharedPointer<DialogPointFromCircleAndTangent> dialogTool = dialog.objectCast<DialogPointFromCircleAndTangent>();
+    const QPointer<DialogPointFromCircleAndTangent> dialogTool =
+            qobject_cast<DialogPointFromCircleAndTangent *>(dialog);
     SCASSERT(not dialogTool.isNull())
-    const quint32 circleCenterId = dialogTool->GetCircleCenterId();
-    QString circleRadius = dialogTool->GetCircleRadius();
-    const quint32 tangentPointId = dialogTool->GetTangentPointId();
-    const CrossCirclesPoint pType = dialogTool->GetCrossCirclesPoint();
-    const QString pointName = dialogTool->getPointName();
-    VToolPointFromCircleAndTangent *point = Create(0, pointName, circleCenterId, circleRadius, tangentPointId, pType,
-                                                   5, 10, scene, doc, data, Document::FullParse, Source::FromGui);
+
+    VToolPointFromCircleAndTangentInitData initData;
+    initData.circleCenterId = dialogTool->GetCircleCenterId();
+    initData.circleRadius = dialogTool->GetCircleRadius();
+    initData.tangentPointId = dialogTool->GetTangentPointId();
+    initData.crossPoint = dialogTool->GetCrossCirclesPoint();
+    initData.name = dialogTool->getPointName();
+    initData.scene = scene;
+    initData.doc = doc;
+    initData.data = data;
+    initData.parse = Document::FullParse;
+    initData.typeCreation = Source::FromGui;
+
+    VToolPointFromCircleAndTangent *point = Create(initData);
     if (point != nullptr)
     {
-        point->m_dialog = dialogTool;
+        point->m_dialog = dialog;
     }
     return point;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-VToolPointFromCircleAndTangent *VToolPointFromCircleAndTangent::Create(const quint32 _id, const QString &pointName,
-                                                                       quint32 circleCenterId, QString &circleRadius,
-                                                                       quint32 tangentPointId,
-                                                                       CrossCirclesPoint crossPoint, const qreal &mx,
-                                                                       const qreal &my, VMainGraphicsScene *scene,
-                                                                       VAbstractPattern *doc, VContainer *data,
-                                                                       const Document &parse,
-                                                                       const Source &typeCreation)
+VToolPointFromCircleAndTangent *VToolPointFromCircleAndTangent::Create(VToolPointFromCircleAndTangentInitData &initData)
 {
-    const qreal radius = qApp->toPixel(CheckFormula(_id, circleRadius, data));
-    const VPointF cPoint = *data->GeometricObject<VPointF>(circleCenterId);
-    const VPointF tPoint = *data->GeometricObject<VPointF>(tangentPointId);
+    const qreal radius = qApp->toPixel(CheckFormula(initData.id, initData.circleRadius, initData.data));
+    const VPointF cPoint = *initData.data->GeometricObject<VPointF>(initData.circleCenterId);
+    const VPointF tPoint = *initData.data->GeometricObject<VPointF>(initData.tangentPointId);
 
-    const QPointF point = VToolPointFromCircleAndTangent::FindPoint(static_cast<QPointF>(tPoint),
-                                                                    static_cast<QPointF>(cPoint), radius, crossPoint);
-    quint32 id = _id;
-    if (typeCreation == Source::FromGui)
+    QPointF point;
+    const bool success = VToolPointFromCircleAndTangent::FindPoint(static_cast<QPointF>(tPoint),
+                                                                   static_cast<QPointF>(cPoint), radius,
+                                                                   initData.crossPoint, &point);
+    if (not success)
     {
-        id = data->AddGObject(new VPointF(point, pointName, mx, my));
+        const QString errorMsg = tr("Error calculating point '%1'. Tangent to circle with center '%2' and radius '%3' "
+                                    "from point '%4' cannot be found")
+                .arg(initData.name, cPoint.name()).arg(radius).arg(tPoint.name());
+
+        qApp->IsPedantic() ? throw VExceptionObjectError(errorMsg) : qWarning() << errorMsg;
+    }
+
+    VPointF *p = new VPointF(point, initData.name, initData.mx, initData.my);
+    p->SetShowLabel(initData.showLabel);
+
+    if (initData.typeCreation == Source::FromGui)
+    {
+        initData.id = initData.data->AddGObject(p);
     }
     else
     {
-        data->UpdateGObject(id, new VPointF(point, pointName, mx, my));
-        if (parse != Document::FullParse)
+        initData.data->UpdateGObject(initData.id, p);
+        if (initData.parse != Document::FullParse)
         {
-            doc->UpdateToolData(id, data);
+            initData.doc->UpdateToolData(initData.id, initData.data);
         }
     }
 
-    if (parse == Document::FullParse)
+    if (initData.parse == Document::FullParse)
     {
-        VDrawTool::AddRecord(id, Tool::PointFromCircleAndTangent, doc);
-        VToolPointFromCircleAndTangent *point = new VToolPointFromCircleAndTangent(doc, data, id, circleCenterId,
-                                                                                   circleRadius, tangentPointId,
-                                                                                   crossPoint, typeCreation);
-        scene->addItem(point);
-        InitToolConnections(scene, point);
-        VAbstractPattern::AddTool(id, point);
-        doc->IncrementReferens(cPoint.getIdTool());
-        doc->IncrementReferens(tPoint.getIdTool());
+        VAbstractTool::AddRecord(initData.id, Tool::PointFromCircleAndTangent, initData.doc);
+        VToolPointFromCircleAndTangent *point = new VToolPointFromCircleAndTangent(initData);
+        initData.scene->addItem(point);
+        InitToolConnections(initData.scene, point);
+        VAbstractPattern::AddTool(initData.id, point);
+        initData.doc->IncrementReferens(cPoint.getIdTool());
+        initData.doc->IncrementReferens(tPoint.getIdTool());
         return point;
     }
     return nullptr;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QPointF VToolPointFromCircleAndTangent::FindPoint(const QPointF &p, const QPointF &center, qreal radius,
-                                                  const CrossCirclesPoint crossPoint)
+bool VToolPointFromCircleAndTangent::FindPoint(const QPointF &p, const QPointF &center, qreal radius,
+                                               const CrossCirclesPoint crossPoint, QPointF *intersectionPoint)
 {
+    SCASSERT(intersectionPoint != nullptr)
+
     QPointF p1, p2;
     const int res = VGObject::ContactPoints (p, center, radius, p1, p2);
 
     switch(res)
     {
         case 2:
-            if (crossPoint == CrossCirclesPoint::FirstPoint)
-            {
-                return p1;
-            }
-            else
-            {
-                return p2;
-            }
+            *intersectionPoint = (crossPoint == CrossCirclesPoint::FirstPoint ? p1 : p2);
+            return true;
         case 1:
-            return p1;
+            *intersectionPoint = p1;
+            return true;
         case 3:
         case 0:
         default:
-            return QPointF();
+            return false;
     }
 }
 
@@ -189,48 +200,13 @@ QString VToolPointFromCircleAndTangent::CircleCenterPointName() const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-quint32 VToolPointFromCircleAndTangent::GetTangentPointId() const
-{
-    return tangentPointId;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void VToolPointFromCircleAndTangent::SetTangentPointId(const quint32 &value)
-{
-    if (value != NULL_ID)
-    {
-        tangentPointId = value;
-
-        QSharedPointer<VGObject> obj = VAbstractTool::data.GetGObject(id);
-        SaveOption(obj);
-    }
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-quint32 VToolPointFromCircleAndTangent::GetCircleCenterId() const
-{
-    return circleCenterId;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void VToolPointFromCircleAndTangent::SetCircleCenterId(const quint32 &value)
-{
-    if (value != NULL_ID)
-    {
-        circleCenterId = value;
-
-        QSharedPointer<VGObject> obj = VAbstractTool::data.GetGObject(id);
-        SaveOption(obj);
-    }
-}
-
-//---------------------------------------------------------------------------------------------------------------------
 VFormula VToolPointFromCircleAndTangent::GetCircleRadius() const
 {
     VFormula radius(circleRadius, getData());
     radius.setCheckZero(true);
-    radius.setToolId(id);
-    radius.setPostfix(VDomDocument::UnitsToStr(qApp->patternUnit()));
+    radius.setToolId(m_id);
+    radius.setPostfix(UnitsToStr(qApp->patternUnit()));
+    radius.Eval();
     return radius;
 }
 
@@ -242,7 +218,7 @@ void VToolPointFromCircleAndTangent::SetCircleRadius(const VFormula &value)
         if (value.getDoubleValue() > 0)// Formula don't check this, but radius can't be 0 or negative
         {
             circleRadius = value.GetFormula(FormulaType::FromUser);
-            QSharedPointer<VGObject> obj = VAbstractTool::data.GetGObject(id);
+            QSharedPointer<VGObject> obj = VAbstractTool::data.GetGObject(m_id);
             SaveOption(obj);
         }
     }
@@ -259,7 +235,7 @@ void VToolPointFromCircleAndTangent::SetCrossCirclesPoint(const CrossCirclesPoin
 {
     crossPoint = value;
 
-    QSharedPointer<VGObject> obj = VAbstractTool::data.GetGObject(id);
+    QSharedPointer<VGObject> obj = VAbstractTool::data.GetGObject(m_id);
     SaveOption(obj);
 }
 
@@ -267,6 +243,20 @@ void VToolPointFromCircleAndTangent::SetCrossCirclesPoint(const CrossCirclesPoin
 void VToolPointFromCircleAndTangent::ShowVisualization(bool show)
 {
     ShowToolVisualization<VisToolPointFromCircleAndTangent>(show);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VToolPointFromCircleAndTangent::ShowContextMenu(QGraphicsSceneContextMenuEvent *event, quint32 id)
+{
+    try
+    {
+        ContextMenu<DialogPointFromCircleAndTangent>(event, id);
+    }
+    catch(const VExceptionToolWasDeleted &e)
+    {
+        Q_UNUSED(e)
+        return;//Leave this method immediately!!!
+    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -280,25 +270,19 @@ void VToolPointFromCircleAndTangent::RemoveReferens()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VToolPointFromCircleAndTangent::contextMenuEvent(QGraphicsSceneContextMenuEvent *event)
-{
-    try
-    {
-        ContextMenu<DialogPointFromCircleAndTangent>(this, event);
-    }
-    catch(const VExceptionToolWasDeleted &e)
-    {
-        Q_UNUSED(e)
-        return;//Leave this method immediately!!!
-    }
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void VToolPointFromCircleAndTangent::SaveDialog(QDomElement &domElement)
+void VToolPointFromCircleAndTangent::SaveDialog(QDomElement &domElement, QList<quint32> &oldDependencies,
+                                                QList<quint32> &newDependencies)
 {
     SCASSERT(not m_dialog.isNull())
-    QSharedPointer<DialogPointFromCircleAndTangent> dialogTool = m_dialog.objectCast<DialogPointFromCircleAndTangent>();
+    const QPointer<DialogPointFromCircleAndTangent> dialogTool =
+            qobject_cast<DialogPointFromCircleAndTangent *>(m_dialog);
     SCASSERT(not dialogTool.isNull())
+
+    AddDependence(oldDependencies, circleCenterId);
+    AddDependence(oldDependencies, tangentPointId);
+    AddDependence(newDependencies, dialogTool->GetTangentPointId());
+    AddDependence(newDependencies, dialogTool->GetCircleCenterId());
+
     doc->SetAttribute(domElement, AttrName, dialogTool->getPointName());
     doc->SetAttribute(domElement, AttrCCenter, QString().setNum(dialogTool->GetCircleCenterId()));
     doc->SetAttribute(domElement, AttrTangent, QString().setNum(dialogTool->GetTangentPointId()));
@@ -325,7 +309,7 @@ void VToolPointFromCircleAndTangent::ReadToolAttributes(const QDomElement &domEl
     circleCenterId = doc->GetParametrUInt(domElement, AttrCCenter, NULL_ID_STR);
     tangentPointId = doc->GetParametrUInt(domElement, AttrTangent, NULL_ID_STR);
     circleRadius = doc->GetParametrString(domElement, AttrCRadius);
-    crossPoint = static_cast<CrossCirclesPoint>(doc->GetParametrUInt(domElement, AttrCrossPoint, "1"));
+    crossPoint = static_cast<CrossCirclesPoint>(doc->GetParametrUInt(domElement, AttrCrossPoint, QChar('1')));
 }
 
 //---------------------------------------------------------------------------------------------------------------------

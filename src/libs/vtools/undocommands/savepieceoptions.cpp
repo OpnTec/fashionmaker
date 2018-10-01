@@ -6,7 +6,7 @@
  **
  **  @brief
  **  @copyright
- **  This source code is part of the Valentine project, a pattern making
+ **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2016 Valentina project
  **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
@@ -51,20 +51,16 @@ SavePieceOptions::SavePieceOptions(const VPiece &oldDet, const VPiece &newDet, V
       m_oldDet(oldDet),
       m_newDet(newDet)
 {
-    setText(tr("save detail option"));
+    setText(tr("save detail options"));
     nodeId = id;
 }
-
-//---------------------------------------------------------------------------------------------------------------------
-SavePieceOptions::~SavePieceOptions()
-{}
 
 //---------------------------------------------------------------------------------------------------------------------
 void SavePieceOptions::undo()
 {
     qCDebug(vUndo, "Undo.");
 
-    QDomElement domElement = doc->elementById(nodeId);
+    QDomElement domElement = doc->elementById(nodeId, VAbstractPattern::TagDetail);
     if (domElement.isElement())
     {
         VToolSeamAllowance::AddAttributes(doc, domElement, nodeId, m_oldDet);
@@ -76,17 +72,33 @@ void SavePieceOptions::undo()
         VToolSeamAllowance::AddCSARecords(doc, domElement, m_oldDet.GetCustomSARecords());
         VToolSeamAllowance::AddInternalPaths(doc, domElement, m_oldDet.GetInternalPaths());
         VToolSeamAllowance::AddPins(doc, domElement, m_oldDet.GetPins());
+        VToolSeamAllowance::AddPlaceLabels(doc, domElement, m_oldDet.GetPlaceLabels());
 
+        DecrementReferences(m_newDet.MissingNodes(m_oldDet));
         IncrementReferences(m_oldDet.MissingNodes(m_newDet));
+
+        DecrementReferences(m_newDet.MissingCSAPath(m_oldDet));
         IncrementReferences(m_oldDet.MissingCSAPath(m_newDet));
+
+        DecrementReferences(m_newDet.MissingInternalPaths(m_oldDet));
         IncrementReferences(m_oldDet.MissingInternalPaths(m_newDet));
+
+        DecrementReferences(m_newDet.MissingPins(m_oldDet));
         IncrementReferences(m_oldDet.MissingPins(m_newDet));
-        emit NeedLiteParsing(Document::LiteParse);
+
+        DecrementReferences(m_newDet.MissingPlaceLabels(m_oldDet));
+        IncrementReferences(m_oldDet.MissingPlaceLabels(m_newDet));
+        
+        if (VToolSeamAllowance *tool = qobject_cast<VToolSeamAllowance *>(VAbstractPattern::getTool(nodeId)))
+        {
+            tool->Update(m_oldDet);
+        }
+
+        emit UpdateGroups();
     }
     else
     {
         qCDebug(vUndo, "Can't find detail with id = %u.", nodeId);
-        return;
     }
 }
 
@@ -95,7 +107,7 @@ void SavePieceOptions::redo()
 {
     qCDebug(vUndo, "Redo.");
 
-    QDomElement domElement = doc->elementById(nodeId);
+    QDomElement domElement = doc->elementById(nodeId, VAbstractPattern::TagDetail);
     if (domElement.isElement())
     {
         VToolSeamAllowance::AddAttributes(doc, domElement, nodeId, m_newDet);
@@ -107,18 +119,33 @@ void SavePieceOptions::redo()
         VToolSeamAllowance::AddCSARecords(doc, domElement, m_newDet.GetCustomSARecords());
         VToolSeamAllowance::AddInternalPaths(doc, domElement, m_newDet.GetInternalPaths());
         VToolSeamAllowance::AddPins(doc, domElement, m_newDet.GetPins());
+        VToolSeamAllowance::AddPlaceLabels(doc, domElement, m_newDet.GetPlaceLabels());
 
         DecrementReferences(m_oldDet.MissingNodes(m_newDet));
-        DecrementReferences(m_oldDet.MissingCSAPath(m_newDet));
-        DecrementReferences(m_oldDet.MissingInternalPaths(m_newDet));
-        DecrementReferences(m_oldDet.MissingPins(m_newDet));
+        IncrementReferences(m_newDet.MissingNodes(m_oldDet));
 
-        emit NeedLiteParsing(Document::LiteParse);
+        DecrementReferences(m_oldDet.MissingCSAPath(m_newDet));
+        IncrementReferences(m_newDet.MissingCSAPath(m_oldDet));
+
+        DecrementReferences(m_oldDet.MissingInternalPaths(m_newDet));
+        IncrementReferences(m_newDet.MissingInternalPaths(m_oldDet));
+
+        DecrementReferences(m_oldDet.MissingPins(m_newDet));
+        IncrementReferences(m_newDet.MissingPins(m_oldDet));
+
+        DecrementReferences(m_oldDet.MissingPlaceLabels(m_newDet));
+        IncrementReferences(m_newDet.MissingPlaceLabels(m_oldDet));
+
+        if (VToolSeamAllowance *tool = qobject_cast<VToolSeamAllowance *>(VAbstractPattern::getTool(nodeId)))
+        {
+            tool->Update(m_newDet);
+        }
+
+        emit UpdateGroups();
     }
     else
     {
         qCDebug(vUndo, "Can't find detail with id = %u.", nodeId);
-        return;
     }
 }
 
@@ -127,11 +154,41 @@ bool SavePieceOptions::mergeWith(const QUndoCommand *command)
 {
     const SavePieceOptions *saveCommand = static_cast<const SavePieceOptions *>(command);
     SCASSERT(saveCommand != nullptr);
-    const quint32 id = saveCommand->DetId();
 
-    if (id != nodeId)
+    if (saveCommand->DetId() != nodeId)
     {
         return false;
+    }
+    else
+    {
+        const QSet<quint32> currentSet;
+        currentSet.fromList(m_newDet.Dependencies());
+
+        const VPiece candidate = saveCommand->NewDet();
+        const QSet<quint32> candidateSet;
+        candidateSet.fromList(candidate.Dependencies());
+
+        if (currentSet != candidateSet)
+        {
+            return false;
+        }
+
+        const QVector<VPieceNode> nodes = m_newDet.GetPath().GetNodes();
+        const QVector<VPieceNode> candidateNodes = candidate.GetPath().GetNodes();
+
+        if (nodes.size() != candidateNodes.size())
+        {
+            return false;
+        }
+
+        for (int i = 0; i < nodes.size(); ++i)
+        {
+            if (nodes.at(i).IsExcluded() != candidateNodes.at(i).IsExcluded()
+                    || nodes.at(i).IsCheckUniqueness() != candidateNodes.at(i).IsCheckUniqueness())
+            {
+                return false;
+            }
+        }
     }
 
     m_newDet = saveCommand->NewDet();

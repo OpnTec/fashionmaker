@@ -6,7 +6,7 @@
  **
  **  @brief
  **  @copyright
- **  This source code is part of the Valentine project, a pattern making
+ **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2015 Valentina project
  **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
@@ -45,27 +45,27 @@ class VisToolPointFromCircleAndTangent : public VisLine
 {
     Q_OBJECT
 public:
-    explicit VisToolPointFromCircleAndTangent(const VContainer *data, QGraphicsItem *parent = 0);
-    virtual ~VisToolPointFromCircleAndTangent() Q_DECL_OVERRIDE;
+    explicit VisToolPointFromCircleAndTangent(const VContainer *data, QGraphicsItem *parent = nullptr);
+    virtual ~VisToolPointFromCircleAndTangent() = default;
 
-    virtual void RefreshGeometry() Q_DECL_OVERRIDE;
+    virtual void RefreshGeometry() override;
 
     void         setObject2Id(const quint32 &value);
     void         setCRadius(const QString &value);
     void         setCrossPoint(const CrossCirclesPoint &value);
 
-    virtual int  type() const Q_DECL_OVERRIDE {return Type;}
+    virtual int  type() const override {return Type;}
     enum { Type = UserType + static_cast<int>(Vis::ToolPointFromCircleAndTangent)};
 private:
     Q_DISABLE_COPY(VisToolPointFromCircleAndTangent)
-    quint32              object2Id;
-    qreal                cRadius;
-    CrossCirclesPoint    crossPoint;
-    QGraphicsEllipseItem *point;
-    QGraphicsEllipseItem *tangent;
-    QGraphicsEllipseItem *cCenter;
+    quint32               object2Id;
+    qreal                 cRadius;
+    CrossCirclesPoint     crossPoint;
+    VScaledEllipse       *point;
+    VScaledEllipse       *tangent;
+    VScaledEllipse       *cCenter;
     QGraphicsEllipseItem *cPath;
-    QGraphicsLineItem    *tangent2;
+    VScaledLine          *tangent2;
 
     void FindRays(const QPointF &p, const QPointF &center, qreal radius);
 };

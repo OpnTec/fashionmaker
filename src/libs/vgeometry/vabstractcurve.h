@@ -6,7 +6,7 @@
  **
  **  @brief
  **  @copyright
- **  This source code is part of the Valentine project, a pattern making
+ **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2013-2015 Valentina project
  **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
@@ -42,7 +42,7 @@
 #include "vgeometrydef.h"
 #include "vgobject.h"
 
-enum class PathDirection : char { Hide, Show };
+typedef QPair<QLineF, QLineF> DirectionArrow;
 
 class QPainterPath;
 class VAbstractCurveData;
@@ -53,14 +53,14 @@ public:
     explicit VAbstractCurve(const GOType &type, const quint32 &idObject = NULL_ID,
                             const Draw &mode = Draw::Calculation);
     explicit VAbstractCurve(const VAbstractCurve &curve);
-    virtual ~VAbstractCurve() Q_DECL_OVERRIDE;
+    virtual ~VAbstractCurve() override;
 
     VAbstractCurve& operator= (const VAbstractCurve &curve);
 #ifdef Q_COMPILER_RVALUE_REFS
     VAbstractCurve &operator=(VAbstractCurve &&curve) Q_DECL_NOTHROW { Swap(curve); return *this; }
 #endif
 
-    void Swap(VAbstractCurve &curve) Q_DECL_NOTHROW
+    inline void Swap(VAbstractCurve &curve) Q_DECL_NOTHROW
     { VGObject::Swap(curve); std::swap(d, curve.d); }
 
     virtual QVector<QPointF> GetPoints() const =0;
@@ -68,7 +68,7 @@ public:
                                               bool reverse = false);
     QVector<QPointF>         GetSegmentPoints(const QPointF &begin, const QPointF &end, bool reverse = false) const;
 
-    virtual QPainterPath     GetPath(PathDirection direction = PathDirection::Hide) const;
+    virtual QPainterPath     GetPath() const;
     virtual qreal            GetLength() const =0;
     qreal                    GetLengthByPoint(const QPointF &point) const;
     virtual QVector<QPointF> IntersectLine(const QLineF &line) const;
@@ -86,13 +86,24 @@ public:
     QString                  GetColor() const;
     void                     SetColor(const QString &color);
 
+    QString                  GetPenStyle() const;
+    void                     SetPenStyle(const QString &penStyle);
+
+    qreal                    GetApproximationScale() const;
+    void                     SetApproximationScale(qreal value);
+
     static qreal             PathLength(const QVector<QPointF> &path);
 
     static QVector<QPointF>  CurveIntersectLine(const QVector<QPointF> &points, const QLineF &line);
+    static bool              CurveIntersectAxis(const QPointF &point, qreal angle, const QVector<QPointF> &curvePoints,
+                                                QPointF *intersectionPoint);
 
     virtual QString          NameForHistory(const QString &toolName) const=0;
+    virtual QVector<DirectionArrow> DirectionArrows() const;
+    static QPainterPath      ShowDirection(const QVector<DirectionArrow> &arrows, qreal width);
+
+    static qreal LengthCurveDirectionArrow();
 protected:
-    QPainterPath             ShowDirection(const QVector<QPointF> &points) const;
     virtual void             CreateName() =0;
 private:
     QSharedDataPointer<VAbstractCurveData> d;

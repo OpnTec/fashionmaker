@@ -6,7 +6,7 @@
  **
  **  @brief
  **  @copyright
- **  This source code is part of the Valentine project, a pattern making
+ **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2013-2015 Valentina project
  **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
@@ -35,6 +35,7 @@
 #include <QColorDialog>
 #include <QDebug>
 #include <QRegularExpression>
+#include <QSpacerItem>
 
 #include "../vpropertyexplorer/vproperty.h"
 #include "../vtools/dialogs/support/dialogeditwrongformula.h"
@@ -42,7 +43,7 @@
 // VFormulaPropertyEditor
 //---------------------------------------------------------------------------------------------------------------------
 VFormulaPropertyEditor::VFormulaPropertyEditor(QWidget *parent)
-    : QWidget(parent), formula(VFormula()), ToolButton(nullptr), TextLabel(nullptr), Spacer(nullptr)
+    : QWidget(parent), formula(VFormula()), ToolButton(nullptr), TextLabel(nullptr)
 {
     setAutoFillBackground(true);
 
@@ -61,15 +62,13 @@ VFormulaPropertyEditor::VFormulaPropertyEditor(QWidget *parent)
     TextLabel = new QLabel(this);
     TextLabel->setText(formula.getStringValue());
 
-    // Spacer (this is needed for proper display of the label and button)
-    Spacer = new QSpacerItem(1, 0, QSizePolicy::Expanding, QSizePolicy::Ignored);
-
     // The layout (a horizontal layout)
     QHBoxLayout* layout = new QHBoxLayout(this);
     layout->setSpacing(3);
     layout->setMargin(0);
     layout->addWidget(TextLabel);
-    layout->addItem(Spacer);
+    // Spacer (this is needed for proper display of the label and button)
+    layout->addSpacerItem(new QSpacerItem(1000000000, 0, QSizePolicy::Expanding, QSizePolicy::Expanding));
     layout->addWidget(ToolButton);
 }
 

@@ -6,7 +6,7 @@
  **
  **  @brief
  **  @copyright
- **  This source code is part of the Valentine project, a pattern making
+ **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2013-2015 Valentina project
  **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
@@ -42,12 +42,12 @@ class AddToCalc : public VUndoCommand
 {
     Q_OBJECT
 public:
-    AddToCalc(const QDomElement &xml, VAbstractPattern *doc, QUndoCommand *parent = 0);
-    virtual ~AddToCalc() Q_DECL_OVERRIDE;
-    virtual void undo() Q_DECL_OVERRIDE;
-    virtual void redo() Q_DECL_OVERRIDE;
+    AddToCalc(const QDomElement &xml, VAbstractPattern *doc, QUndoCommand *parent = nullptr);
+    virtual ~AddToCalc() =default;
+    virtual void undo() override;
+    virtual void redo() override;
 protected:
-    virtual void RedoFullParsing() Q_DECL_OVERRIDE;
+    virtual void RedoFullParsing() override;
 private:
     Q_DISABLE_COPY(AddToCalc)
     const QString     nameActivDraw;

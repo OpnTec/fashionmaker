@@ -6,7 +6,7 @@
  **
  **  @brief
  **  @copyright
- **  This source code is part of the Valentine project, a pattern making
+ **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2016 Valentina project
  **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
@@ -44,19 +44,23 @@ class AddPiece : public VUndoCommand
 {
     Q_OBJECT
 public:
-    AddPiece(const QDomElement &xml, VAbstractPattern *doc, const VPiece &detail, const QString &drawName = QString(),
-             QUndoCommand *parent = nullptr);
+    AddPiece(const QDomElement &xml, VAbstractPattern *doc, VContainer data, VMainGraphicsScene *scene,
+             const QString &drawName = QString(), QUndoCommand *parent = nullptr);
     virtual ~AddPiece();
 
     // cppcheck-suppress unusedFunction
-    virtual void undo() Q_DECL_OVERRIDE;
+    virtual void undo() override;
     // cppcheck-suppress unusedFunction
-    virtual void redo() Q_DECL_OVERRIDE;
+    virtual void redo() override;
 private:
     Q_DISABLE_COPY(AddPiece)
 
     VPiece m_detail;
     QString m_drawName;
+    QPointer<VToolSeamAllowance> m_tool;
+    VToolRecord                  m_record;
+    VMainGraphicsScene          *m_scene;
+    VContainer                   m_data;
 
     QDomElement GetDetailsSection() const;
 };

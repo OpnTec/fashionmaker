@@ -6,7 +6,7 @@
  **
  **  @brief
  **  @copyright
- **  This source code is part of the Valentine project, a pattern making
+ **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2013-2015 Valentina project
  **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
@@ -40,6 +40,7 @@
 #include "../tools/dialogtool.h"
 
 template <class T> class QSharedPointer;
+class VMeasurement;
 
 namespace Ui
 {
@@ -59,21 +60,20 @@ class DialogEditWrongFormula : public DialogTool
     Q_OBJECT
 public:
     DialogEditWrongFormula(const VContainer *data, const quint32 &toolId, QWidget *parent = nullptr);
-    virtual ~DialogEditWrongFormula() Q_DECL_OVERRIDE;
+    virtual ~DialogEditWrongFormula() override;
 
     QString      GetFormula() const;
     void         SetFormula(const QString &value);
     void         setCheckZero(bool value);
     void         setCheckLessThanZero(bool value);
     void         setPostfix(const QString &value);
+    void         SetMeasurementsMode();
+    void         SetIncrementsMode();
+    void         SetPreviewCalculationsMode();
 public slots:
-    virtual void DialogAccepted() Q_DECL_OVERRIDE;
-    virtual void DialogRejected() Q_DECL_OVERRIDE;
-    /**
-     * @brief DeployFormulaTextEdit grow or shrink formula input
-     */
-    void         DeployFormulaTextEdit();
-    virtual void EvalFormula() Q_DECL_OVERRIDE;
+    virtual void DialogAccepted() override;
+    virtual void DialogRejected() override;
+    virtual void EvalFormula() override;
     void         ValChanged(int row);
     void         PutHere();
     void         PutVal(QTableWidgetItem * item);
@@ -86,11 +86,13 @@ public slots:
     void         CurvesCLength();
     void         AngleLines();
     void         Increments();
+    void         PreviewCalculations();
     void         Functions();
 protected:
-    virtual void CheckState() Q_DECL_FINAL;
-    virtual void closeEvent(QCloseEvent *event) Q_DECL_OVERRIDE;
-    virtual void showEvent( QShowEvent *event ) Q_DECL_OVERRIDE;
+    virtual void CheckState() final;
+    virtual void closeEvent(QCloseEvent *event) override;
+    virtual void showEvent( QShowEvent *event ) override;
+    virtual void resizeEvent(QResizeEvent *event) override;
 private slots:
     void FilterVariablesEdited(const QString &filter);
 private:
@@ -114,6 +116,7 @@ private:
     void ShowVariable(const QMap<key, val> &var);
     void ShowMeasurements(const QMap<QString, QSharedPointer<VMeasurement> > &var);
     void ShowFunctions();
+    void ShowIncrementsInPreviewCalculation(bool show);
 
     void SetDescription(const QString &name, qreal value, const QString &unit, const QString &description);
 };

@@ -6,7 +6,7 @@
  **
  **  @brief
  **  @copyright
- **  This source code is part of the Valentine project, a pattern making
+ **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2015 Valentina project
  **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
@@ -28,11 +28,15 @@
 
 #include "tst_tapecommandline.h"
 #include "../vmisc/vsysexits.h"
-#include "logging.h"
+#include "../vmisc/logging.h"
 
 #include <QtTest>
+#include <QGlobalStatic>
 
-const QString tmpTestFolder = QStringLiteral("tst_tape_tmp");
+namespace
+{
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, tmpTestFolder, (QLatin1String("tst_tape_tmp")))
+}
 
 //---------------------------------------------------------------------------------------------------------------------
 TST_TapeCommandLine::TST_TapeCommandLine(QObject *parent)
@@ -43,14 +47,14 @@ TST_TapeCommandLine::TST_TapeCommandLine(QObject *parent)
 //---------------------------------------------------------------------------------------------------------------------
 void TST_TapeCommandLine::initTestCase()
 {
-    QDir tmpDir(tmpTestFolder);
+    QDir tmpDir(*tmpTestFolder);
     if (not tmpDir.removeRecursively())
     {
         QFAIL("Fail to remove temp directory.");
     }
 
-    if (not CopyRecursively(QApplication::applicationDirPath() + QDir::separator() + QStringLiteral("tst_tape"),
-                            QApplication::applicationDirPath() + QDir::separator() + tmpTestFolder))
+    if (not CopyRecursively(QCoreApplication::applicationDirPath() + QDir::separator() + QStringLiteral("tst_tape"),
+                            QCoreApplication::applicationDirPath() + QDir::separator() + *tmpTestFolder))
     {
         QFAIL("Fail to prepare files for testing.");
     }
@@ -117,8 +121,8 @@ void TST_TapeCommandLine::OpenMeasurements()
 
     QString error;
     const int exit = Run(exitCode, TapePath(), QStringList() << "--test"
-                         << QApplication::applicationDirPath() + QDir::separator() + tmpTestFolder + QDir::separator() +
-                         file, error);
+                         << QCoreApplication::applicationDirPath() + QDir::separator() + *tmpTestFolder +
+                         QDir::separator() + file, error);
 
     QVERIFY2(exit == exitCode, qUtf8Printable(error));
 }
@@ -126,7 +130,7 @@ void TST_TapeCommandLine::OpenMeasurements()
 //---------------------------------------------------------------------------------------------------------------------
 void TST_TapeCommandLine::cleanupTestCase()
 {
-    QDir tmpDir(tmpTestFolder);
+    QDir tmpDir(*tmpTestFolder);
     if (not tmpDir.removeRecursively())
     {
         QWARN("Fail to remove temp directory.");

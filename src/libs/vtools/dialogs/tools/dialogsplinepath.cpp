@@ -6,7 +6,7 @@
  **
  **  @brief
  **  @copyright
- **  This source code is part of the Valentine project, a pattern making
+ **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2013-2015 Valentina project
  **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
@@ -47,6 +47,7 @@
 #include <Qt>
 #include <new>
 
+#include "../../tools/vabstracttool.h"
 #include "../../visualization/visualization.h"
 #include "../../visualization/path/vistoolsplinepath.h"
 #include "../ifc/xml/vdomdocument.h"
@@ -102,9 +103,12 @@ DialogSplinePath::DialogSplinePath(const VContainer *data, const quint32 &toolId
 
     FillComboBoxPoints(ui->comboBoxPoint);
     FillComboBoxLineColors(ui->comboBoxColor);
+    FillComboBoxTypeLine(ui->comboBoxPenStyle, CurvePenStylesPics());
+
+    ui->doubleSpinBoxApproximationScale->setMaximum(maxCurveApproximationScale);
 
     connect(ui->listWidget, &QListWidget::currentRowChanged, this, &DialogSplinePath::PointChanged);
-    connect(ui->comboBoxPoint,  static_cast<void (QComboBox::*)(int)>(&QComboBox::currentIndexChanged),
+    connect(ui->comboBoxPoint, QOverload<int>::of(&QComboBox::currentIndexChanged),
             this, &DialogSplinePath::currentPointChanged);
 
     connect(ui->toolButtonExprAngle1, &QPushButton::clicked, this, &DialogSplinePath::FXAngle1);
@@ -159,23 +163,15 @@ void DialogSplinePath::SetPath(const VSplinePath &value)
     }
     ui->listWidget->setFocus(Qt::OtherFocusReason);
     ui->lineEditSplPathName->setText(qApp->TrVars()->VarToUser(path.name()));
+    ui->doubleSpinBoxApproximationScale->setValue(path.GetApproximationScale());
+
+    ChangeCurrentData(ui->comboBoxPenStyle, path.GetPenStyle());
+    ChangeCurrentData(ui->comboBoxColor, path.GetColor());
 
     auto visPath = qobject_cast<VisToolSplinePath *>(vis);
     SCASSERT(visPath != nullptr)
     visPath->setPath(path);
     ui->listWidget->blockSignals(false);
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-QString DialogSplinePath::GetColor() const
-{
-    return GetComboBoxCurrentData(ui->comboBoxColor, ColorBlack);
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void DialogSplinePath::SetColor(const QString &value)
-{
-    ChangeCurrentData(ui->comboBoxColor, value);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -310,18 +306,9 @@ void DialogSplinePath::Angle1Changed()
         SCASSERT(item != nullptr)
         VSplinePoint p = qvariant_cast<VSplinePoint>(item->data(Qt::UserRole));
 
-        const QString angle1F = ui->plainTextEditAngle1F->toPlainText().replace("\n", " ");
-        const qreal angle1 = Visualization::FindVal(angle1F, data->PlainVariables());
-
-        try
-        {
-            p.SetAngle1(angle1, qApp->TrVars()->FormulaFromUser(angle1F, qApp->Settings()->GetOsSeparator()));
-        }
-        catch (qmu::QmuParserError &e)
-        {
-            Q_UNUSED(e)
-            p.SetAngle1(angle1, angle1F);
-        }
+        const QString angle1F = ui->plainTextEditAngle1F->toPlainText();
+        const qreal angle1 = Visualization::FindValFromUser(angle1F, data->DataVariables());
+        p.SetAngle1(angle1, VTranslateVars::TryFormulaFromUser(angle1F, qApp->Settings()->GetOsSeparator()));
 
         item->setData(Qt::UserRole, QVariant::fromValue(p));
 
@@ -353,18 +340,9 @@ void DialogSplinePath::Angle2Changed()
         SCASSERT(item != nullptr)
         VSplinePoint p = qvariant_cast<VSplinePoint>(item->data(Qt::UserRole));
 
-        const QString angle2F = ui->plainTextEditAngle2F->toPlainText().replace("\n", " ");
-        const qreal angle2 = Visualization::FindVal(angle2F, data->PlainVariables());
-
-        try
-        {
-            p.SetAngle2(angle2, qApp->TrVars()->FormulaFromUser(angle2F, qApp->Settings()->GetOsSeparator()));
-        }
-        catch (qmu::QmuParserError &e)
-        {
-            Q_UNUSED(e)
-            p.SetAngle2(angle2, angle2F);
-        }
+        const QString angle2F = ui->plainTextEditAngle2F->toPlainText();
+        const qreal angle2 = Visualization::FindValFromUser(angle2F, data->DataVariables());
+        p.SetAngle2(angle2, VTranslateVars::TryFormulaFromUser(angle2F, qApp->Settings()->GetOsSeparator()));
 
         item->setData(Qt::UserRole, QVariant::fromValue(p));
 
@@ -396,18 +374,9 @@ void DialogSplinePath::Length1Changed()
         SCASSERT(item != nullptr)
         VSplinePoint p = qvariant_cast<VSplinePoint>(item->data(Qt::UserRole));
 
-        const QString length1F = ui->plainTextEditLength1F->toPlainText().replace("\n", " ");
-        const qreal length1 = Visualization::FindLength(length1F, data->PlainVariables());
-
-        try
-        {
-            p.SetLength1(length1, qApp->TrVars()->FormulaFromUser(length1F, qApp->Settings()->GetOsSeparator()));
-        }
-        catch (qmu::QmuParserError &e)
-        {
-            Q_UNUSED(e)
-            p.SetLength1(length1, length1F);
-        }
+        const QString length1F = ui->plainTextEditLength1F->toPlainText();
+        const qreal length1 = Visualization::FindLengthFromUser(length1F, data->DataVariables());
+        p.SetLength1(length1, VTranslateVars::TryFormulaFromUser(length1F, qApp->Settings()->GetOsSeparator()));
 
         item->setData(Qt::UserRole, QVariant::fromValue(p));
 
@@ -430,18 +399,9 @@ void DialogSplinePath::Length2Changed()
         SCASSERT(item != nullptr)
         VSplinePoint p = qvariant_cast<VSplinePoint>(item->data(Qt::UserRole));
 
-        const QString length2F = ui->plainTextEditLength2F->toPlainText().replace("\n", " ");
-        const qreal length2 = Visualization::FindLength(length2F, data->PlainVariables());
-
-        try
-        {
-            p.SetLength2(length2, qApp->TrVars()->FormulaFromUser(length2F, qApp->Settings()->GetOsSeparator()));
-        }
-        catch (qmu::QmuParserError &e)
-        {
-            Q_UNUSED(e)
-            p.SetLength2(length2, length2F);
-        }
+        const QString length2F = ui->plainTextEditLength2F->toPlainText();
+        const qreal length2 = Visualization::FindLengthFromUser(length2F, data->DataVariables());
+        p.SetLength2(length2, VTranslateVars::TryFormulaFromUser(length2F, qApp->Settings()->GetOsSeparator()));
 
         item->setData(Qt::UserRole, QVariant::fromValue(p));
 
@@ -452,17 +412,17 @@ void DialogSplinePath::Length2Changed()
 //---------------------------------------------------------------------------------------------------------------------
 void DialogSplinePath::FXAngle1()
 {
-    auto dialog = new DialogEditWrongFormula(data, toolId, this);
+    auto* dialog = new DialogEditWrongFormula(data, toolId, this);
     dialog->setWindowTitle(tr("Edit first control point angle"));
 
-    QString angle1F = qApp->TrVars()->TryFormulaFromUser(ui->plainTextEditAngle1F->toPlainText().replace("\n", " "),
+    QString angle1F = VTranslateVars::TryFormulaFromUser(ui->plainTextEditAngle1F->toPlainText(),
                                                          qApp->Settings()->GetOsSeparator());
 
     dialog->SetFormula(angle1F);
     dialog->setPostfix(degreeSymbol);
     if (dialog->exec() == QDialog::Accepted)
     {
-        angle1F = qApp->TrVars()->FormulaToUser(dialog->GetFormula(), qApp->Settings()->GetOsSeparator());
+        angle1F = VTranslateVars::TryFormulaToUser(dialog->GetFormula(), qApp->Settings()->GetOsSeparator());
         // increase height if needed.
         if (angle1F.length() > 80)
         {
@@ -477,17 +437,17 @@ void DialogSplinePath::FXAngle1()
 //---------------------------------------------------------------------------------------------------------------------
 void DialogSplinePath::FXAngle2()
 {
-    auto dialog = new DialogEditWrongFormula(data, toolId, this);
+    auto* dialog = new DialogEditWrongFormula(data, toolId, this);
     dialog->setWindowTitle(tr("Edit second control point angle"));
 
-    QString angle2F = qApp->TrVars()->TryFormulaFromUser(ui->plainTextEditAngle2F->toPlainText().replace("\n", " "),
+    QString angle2F = VTranslateVars::TryFormulaFromUser(ui->plainTextEditAngle2F->toPlainText(),
                                                          qApp->Settings()->GetOsSeparator());
 
     dialog->SetFormula(angle2F);
     dialog->setPostfix(degreeSymbol);
     if (dialog->exec() == QDialog::Accepted)
     {
-        angle2F = qApp->TrVars()->FormulaToUser(dialog->GetFormula(), qApp->Settings()->GetOsSeparator());
+        angle2F = VTranslateVars::TryFormulaToUser(dialog->GetFormula(), qApp->Settings()->GetOsSeparator());
         // increase height if needed.
         if (angle2F.length() > 80)
         {
@@ -502,17 +462,17 @@ void DialogSplinePath::FXAngle2()
 //---------------------------------------------------------------------------------------------------------------------
 void DialogSplinePath::FXLength1()
 {
-    auto dialog = new DialogEditWrongFormula(data, toolId, this);
+    auto* dialog = new DialogEditWrongFormula(data, toolId, this);
     dialog->setWindowTitle(tr("Edit first control point length"));
 
-    QString length1F = qApp->TrVars()->TryFormulaFromUser(ui->plainTextEditLength1F->toPlainText().replace("\n", " "),
+    QString length1F = VTranslateVars::TryFormulaFromUser(ui->plainTextEditLength1F->toPlainText(),
                                                           qApp->Settings()->GetOsSeparator());
 
     dialog->SetFormula(length1F);
-    dialog->setPostfix(VDomDocument::UnitsToStr(qApp->patternUnit(), true));
+    dialog->setPostfix(UnitsToStr(qApp->patternUnit(), true));
     if (dialog->exec() == QDialog::Accepted)
     {
-        length1F = qApp->TrVars()->FormulaToUser(dialog->GetFormula(), qApp->Settings()->GetOsSeparator());
+        length1F = VTranslateVars::TryFormulaToUser(dialog->GetFormula(), qApp->Settings()->GetOsSeparator());
         // increase height if needed.
         if (length1F.length() > 80)
         {
@@ -527,17 +487,17 @@ void DialogSplinePath::FXLength1()
 //---------------------------------------------------------------------------------------------------------------------
 void DialogSplinePath::FXLength2()
 {
-    auto dialog = new DialogEditWrongFormula(data, toolId, this);
+    auto* dialog = new DialogEditWrongFormula(data, toolId, this);
     dialog->setWindowTitle(tr("Edit second control point length"));
 
-    QString length2F = qApp->TrVars()->TryFormulaFromUser(ui->plainTextEditLength2F->toPlainText().replace("\n", " "),
+    QString length2F = VTranslateVars::TryFormulaFromUser(ui->plainTextEditLength2F->toPlainText(),
                                                           qApp->Settings()->GetOsSeparator());
 
     dialog->SetFormula(length2F);
-    dialog->setPostfix(VDomDocument::UnitsToStr(qApp->patternUnit(), true));
+    dialog->setPostfix(UnitsToStr(qApp->patternUnit(), true));
     if (dialog->exec() == QDialog::Accepted)
     {
-        length2F = qApp->TrVars()->FormulaToUser(dialog->GetFormula(), qApp->Settings()->GetOsSeparator());
+        length2F = VTranslateVars::TryFormulaToUser(dialog->GetFormula(), qApp->Settings()->GetOsSeparator());
         // increase height if needed.
         if (length2F.length() > 80)
         {
@@ -597,7 +557,7 @@ void DialogSplinePath::EvalLength1()
     }
 
     labelEditFormula = ui->labelEditLength1;
-    const QString postfix = VDomDocument::UnitsToStr(qApp->patternUnit(), true);
+    const QString postfix = UnitsToStr(qApp->patternUnit(), true);
     const qreal length1 = Eval(ui->plainTextEditLength1F->toPlainText(), flagLength1[row], ui->labelResultLength1,
                                postfix, false);
 
@@ -628,7 +588,7 @@ void DialogSplinePath::EvalLength2()
     }
 
     labelEditFormula = ui->labelEditLength2;
-    const QString postfix = VDomDocument::UnitsToStr(qApp->patternUnit(), true);
+    const QString postfix = UnitsToStr(qApp->patternUnit(), true);
     const qreal length2 = Eval(ui->plainTextEditLength2F->toPlainText(), flagLength2[row], ui->labelResultLength2,
                                postfix, false);
 
@@ -727,7 +687,7 @@ void DialogSplinePath::ShowDialog(bool click)
     {
         if (path.CountPoints() >= 3)
         {
-            emit ToolTip("");
+            emit ToolTip(QString());
 
             if (not data->IsUnique(path.name()))
             {
@@ -763,8 +723,8 @@ void DialogSplinePath::NewItem(const VSplinePoint &point)
     flagAngle2.append(true);
     flagLength2.append(true);
 
-    auto item = new QListWidgetItem(point.P().name());
-    item->setFont(QFont("Times", 12, QFont::Bold));
+    auto* item = new QListWidgetItem(point.P().name());
+    item->setFont(NodeFont(item->font()));
     item->setData(Qt::UserRole, QVariant::fromValue(point));
 
     ui->listWidget->addItem(item);
@@ -910,6 +870,9 @@ void DialogSplinePath::SavePath()
 {
     path.Clear();
     path = ExtractPath();
+    path.SetApproximationScale(ui->doubleSpinBoxApproximationScale->value());
+    path.SetPenStyle(GetComboBoxCurrentData(ui->comboBoxPenStyle, TypeLineLine));
+    path.SetColor(GetComboBoxCurrentData(ui->comboBoxColor, ColorBlack));
 }
 
 //---------------------------------------------------------------------------------------------------------------------

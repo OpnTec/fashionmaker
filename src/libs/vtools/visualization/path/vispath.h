@@ -6,7 +6,7 @@
  **
  **  @brief
  **  @copyright
- **  This source code is part of the Valentine project, a pattern making
+ **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2013-2015 Valentina project
  **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
@@ -31,7 +31,6 @@
 
 #include <qcompilerdetection.h>
 #include <QGraphicsItem>
-#include <QGraphicsPathItem>
 #include <QMetaObject>
 #include <QObject>
 #include <QString>
@@ -39,21 +38,26 @@
 
 #include "../visualization.h"
 #include "../vmisc/def.h"
+#include "../vwidgets/vcurvepathitem.h"
 
 class VSimplePoint;
 
-class VisPath : public Visualization, public QGraphicsPathItem
+class VisPath : public Visualization, public VCurvePathItem
 {
     Q_OBJECT
 public:
     explicit VisPath(const VContainer *data, QGraphicsItem *parent = nullptr);
-    virtual ~VisPath() Q_DECL_EQ_DEFAULT;
+    virtual ~VisPath() = default;
 
-    virtual int  type() const Q_DECL_OVERRIDE {return Type;}
+    void setApproximationScale(qreal approximationScale);
+
+    virtual int  type() const override {return Type;}
     enum { Type = UserType + static_cast<int>(Vis::Path)};
 protected:
-    virtual void InitPen() Q_DECL_OVERRIDE;
-    virtual void AddOnScene() Q_DECL_OVERRIDE;
+    qreal m_approximationScale;
+
+    virtual void InitPen() override;
+    virtual void AddOnScene() override;
 
     VSimplePoint *GetPoint(QVector<VSimplePoint *> &points, quint32 i, const QColor &color);
 private:

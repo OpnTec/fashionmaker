@@ -6,7 +6,7 @@
  **
  **  @brief
  **  @copyright
- **  This source code is part of the Valentine project, a pattern making
+ **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2016 Valentina project
  **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
@@ -37,14 +37,14 @@
 class SavePiecePathOptions : public VUndoCommand
 {
 public:
-    SavePiecePathOptions(const VPiecePath &oldPath, const VPiecePath &newPath, VAbstractPattern *doc,
+    SavePiecePathOptions(quint32 pieceId, const VPiecePath &oldPath, const VPiecePath &newPath, VAbstractPattern *doc,
                          VContainer *data, quint32 id, QUndoCommand *parent = nullptr);
-    virtual ~SavePiecePathOptions();
+    virtual ~SavePiecePathOptions() = default;
 
-    virtual void undo() Q_DECL_OVERRIDE;
-    virtual void redo() Q_DECL_OVERRIDE;
-    virtual bool mergeWith(const QUndoCommand *command) Q_DECL_OVERRIDE;
-    virtual int  id() const Q_DECL_OVERRIDE;
+    virtual void undo() override;
+    virtual void redo() override;
+    virtual bool mergeWith(const QUndoCommand *command) override;
+    virtual int  id() const override;
     quint32      PathId() const;
     VPiecePath   NewPath() const;
 private:
@@ -54,6 +54,25 @@ private:
     VPiecePath       m_newPath;
 
     VContainer *m_data;
+    quint32 m_pieceId;
 };
+
+//---------------------------------------------------------------------------------------------------------------------
+inline int SavePiecePathOptions::id() const
+{
+    return static_cast<int>(UndoCommand::SavePiecePathOptions);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+inline quint32 SavePiecePathOptions::PathId() const
+{
+    return nodeId;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+inline VPiecePath SavePiecePathOptions::NewPath() const
+{
+    return m_newPath;
+}
 
 #endif // SAVEPIECEPATHOPTIONS_H

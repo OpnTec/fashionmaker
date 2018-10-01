@@ -6,7 +6,7 @@
  **
  **  @brief
  **  @copyright
- **  This source code is part of the Valentine project, a pattern making
+ **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2013-2015 Valentina project
  **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
@@ -34,7 +34,6 @@
 #include <QGraphicsEllipseItem>
 #include <QGraphicsItem>
 #include <QGraphicsLineItem>
-#include <QGraphicsPathItem>
 #include <QLineF>
 #include <QMessageLogger>
 #include <QPen>
@@ -53,16 +52,55 @@
 #include "../vmisc/vcommonsettings.h"
 #include "../vpatterndb/vcontainer.h"
 #include "../vwidgets/vmaingraphicsscene.h"
+#include "../vwidgets/vcurvepathitem.h"
+#include "../vwidgets/scalesceneitems.h"
 
 template <class K, class V> class QHash;
 
 Q_LOGGING_CATEGORY(vVis, "v.visualization")
 
+namespace
+{
+//---------------------------------------------------------------------------------------------------------------------
+VScaledEllipse *InitPointItem(const QColor &color, QGraphicsItem *parent, qreal z = 0)
+{
+    VScaledEllipse *point = new VScaledEllipse(parent);
+    point->setZValue(1);
+    point->setBrush(QBrush(Qt::NoBrush));
+
+    QPen visPen = point->pen();
+    visPen.setColor(color);
+
+    point->setPen(visPen);
+    point->setRect(PointRect(ScaledRadius(SceneScale(qApp->getCurrentScene()))));
+    point->setPos(QPointF());
+    point->setFlags(QGraphicsItem::ItemStacksBehindParent);
+    point->setZValue(z);
+    point->setVisible(false);
+    return point;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+VCurvePathItem *InitCurveItem(const QColor &color, QGraphicsItem *parent, qreal z = 0)
+{
+    VCurvePathItem *curve = new VCurvePathItem(parent);
+    curve->setBrush(QBrush(Qt::NoBrush));
+
+    QPen visPen = curve->pen();
+    visPen.setColor(color);
+    curve->setPen(visPen);
+
+    curve->setFlags(QGraphicsItem::ItemStacksBehindParent);
+    curve->setZValue(z);
+    curve->setVisible(false);
+    return curve;
+}
+}
+
 //---------------------------------------------------------------------------------------------------------------------
 Visualization::Visualization(const VContainer *data)
     :QObject(),
       data(data),
-      factor(VDrawTool::factor),
       scenePos(QPointF()),
       mainColor(Qt::red),
       supportColor(Qt::magenta),
@@ -126,13 +164,6 @@ void Visualization::SetData(const VContainer *data)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void Visualization::SetFactor(qreal factor)
-{
-    CheckFactor(this->factor, factor);
-    RefreshGeometry();
-}
-
-//---------------------------------------------------------------------------------------------------------------------
 void Visualization::MousePos(const QPointF &scenePos)
 {
     this->scenePos = scenePos;
@@ -144,27 +175,21 @@ void Visualization::MousePos(const QPointF &scenePos)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QGraphicsEllipseItem *Visualization::InitPoint(const QColor &color, QGraphicsItem *parent, qreal z) const
+VScaledEllipse *Visualization::InitPoint(const QColor &color, QGraphicsItem *parent, qreal z) const
 {
-    return InitPointItem(Visualization::data, factor, color, parent, z);
+    return InitPointItem(color, parent, z);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QRectF Visualization::PointRect(qreal radius)
+qreal Visualization::FindLengthFromUser(const QString &expression,
+                                        const QHash<QString, QSharedPointer<VInternalVariable> > *vars, bool fromUser)
 {
-    QRectF rec = QRectF(0, 0, radius*2, radius*2);
-    rec.translate(-rec.center().x(), -rec.center().y());
-    return rec;
+    return qApp->toPixel(FindValFromUser(expression, vars, fromUser));
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-qreal Visualization::FindLength(const QString &expression, const QHash<QString, qreal *> &vars)
-{
-    return qApp->toPixel(FindVal(expression, vars));
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-qreal Visualization::FindVal(const QString &expression, const QHash<QString, qreal *> &vars)
+qreal Visualization::FindValFromUser(const QString &expression,
+                                     const QHash<QString, QSharedPointer<VInternalVariable> > *vars, bool fromUser)
 {
     qreal val = 0;
     if (expression.isEmpty())
@@ -177,8 +202,11 @@ qreal Visualization::FindVal(const QString &expression, const QHash<QString, qre
         {
             // Replace line return with spaces for calc if exist
             QString formula = expression;
-            formula.replace("\n", " ");
-            formula = qApp->TrVars()->FormulaFromUser(formula, qApp->Settings()->GetOsSeparator());
+            if (fromUser)
+            {
+                formula = qApp->TrVars()->FormulaFromUser(formula, qApp->Settings()->GetOsSeparator());
+            }
+
             QScopedPointer<Calculator> cal(new Calculator());
             val = cal->EvalFormula(vars, formula);
 
@@ -206,36 +234,57 @@ void Visualization::DrawPoint(QGraphicsEllipseItem *point, const QPointF &pos, c
     SCASSERT (point != nullptr)
 
     point->setPos(pos);
-    point->setPen(QPen(color, qApp->toPixel(WidthMainLine(*Visualization::data->GetPatternUnit()))/factor, style));
+
+    QPen visPen = point->pen();
+    visPen.setColor(color);
+    visPen.setStyle(style);
+
+    point->setPen(visPen);
     point->setVisible(true);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void Visualization::DrawLine(QGraphicsLineItem *lineItem, const QLineF &line, const QColor &color, Qt::PenStyle style)
+void Visualization::DrawLine(VScaledLine *lineItem, const QLineF &line, const QColor &color, Qt::PenStyle style)
 {
     SCASSERT (lineItem != nullptr)
 
-    lineItem->setPen(QPen(color, qApp->toPixel(WidthHairLine(*Visualization::data->GetPatternUnit()))/factor, style));
+    QPen visPen = lineItem->pen();
+    visPen.setColor(color);
+    visPen.setStyle(style);
+
+    lineItem->setPen(visPen);
     lineItem->setLine(line);
     lineItem->setVisible(true);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void Visualization::DrawPath(QGraphicsPathItem *pathItem, const QPainterPath &path, const QColor &color,
+void Visualization::DrawPath(VCurvePathItem *pathItem, const QPainterPath &path, const QColor &color,
                              Qt::PenStyle style, Qt::PenCapStyle cap)
+{
+    DrawPath(pathItem, path, QVector<DirectionArrow>(), color, style, cap);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void Visualization::DrawPath(VCurvePathItem *pathItem, const QPainterPath &path,
+                             const QVector<DirectionArrow> &directionArrows, const QColor &color, Qt::PenStyle style,
+                             Qt::PenCapStyle cap)
 {
     SCASSERT (pathItem != nullptr)
 
-    pathItem->setPen(QPen(color, qApp->toPixel(WidthMainLine(*Visualization::data->GetPatternUnit()))/factor, style,
-                          cap));
+    QPen visPen = pathItem->pen();
+    visPen.setColor(color);
+    visPen.setStyle(style);
+    visPen.setCapStyle(cap);
+
+    pathItem->setPen(visPen);
     pathItem->setPath(path);
+    pathItem->SetDirectionArrows(directionArrows);
     pathItem->setVisible(true);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QGraphicsEllipseItem *Visualization::GetPointItem(const VContainer *data, qreal factor,
-                                                  QVector<QGraphicsEllipseItem *> &points, quint32 i,
-                                                  const QColor &color, QGraphicsItem *parent)
+VScaledEllipse *Visualization::GetPointItem(QVector<VScaledEllipse *> &points, quint32 i,
+                                            const QColor &color, QGraphicsItem *parent)
 {
     if (not points.isEmpty() && static_cast<quint32>(points.size() - 1) >= i)
     {
@@ -243,27 +292,26 @@ QGraphicsEllipseItem *Visualization::GetPointItem(const VContainer *data, qreal 
     }
     else
     {
-        auto point = InitPointItem(data, factor, color, parent);
+        auto point = InitPointItem(color, parent);
         points.append(point);
         return point;
     }
-    return nullptr;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QGraphicsEllipseItem *Visualization::InitPointItem(const VContainer *data, qreal factor, const QColor &color,
-                                                   QGraphicsItem *parent, qreal z)
+VCurvePathItem *Visualization::GetCurveItem(QVector<VCurvePathItem *> &curves, quint32 i, const QColor &color,
+                                            QGraphicsItem *parent)
 {
-    QGraphicsEllipseItem *point = new QGraphicsEllipseItem(parent);
-    point->setZValue(1);
-    point->setBrush(QBrush(Qt::NoBrush));
-    point->setPen(QPen(color, qApp->toPixel(WidthMainLine(*data->GetPatternUnit()))/factor));
-    point->setRect(PointRect(ToPixel(DefPointRadius/*mm*/, Unit::Mm)));
-    point->setPos(QPointF());
-    point->setFlags(QGraphicsItem::ItemStacksBehindParent);
-    point->setZValue(z);
-    point->setVisible(false);
-    return point;
+    if (not curves.isEmpty() && static_cast<quint32>(curves.size() - 1) >= i)
+    {
+        return curves.at(static_cast<int>(i));
+    }
+    else
+    {
+        auto point = InitCurveItem(color, parent);
+        curves.append(point);
+        return point;
+    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------

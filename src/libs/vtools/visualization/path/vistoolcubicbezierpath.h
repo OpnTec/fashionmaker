@@ -6,7 +6,7 @@
  **
  **  @brief
  **  @copyright
- **  This source code is part of the Valentine project, a pattern making
+ **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2016 Valentina project
  **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
@@ -48,27 +48,26 @@ public:
     explicit VisToolCubicBezierPath(const VContainer *data, QGraphicsItem *parent = nullptr);
     virtual ~VisToolCubicBezierPath();
 
-    virtual void RefreshGeometry() Q_DECL_OVERRIDE;
+    virtual void RefreshGeometry() override;
 
     void              setPath(const VCubicBezierPath &value);
     VCubicBezierPath  getPath();
 
-    virtual int  type() const Q_DECL_OVERRIDE {return Type;}
+    virtual int  type() const override {return Type;}
     enum { Type = UserType + static_cast<int>(Vis::ToolCubicBezierPath)};
-
 protected:
     Q_DISABLE_COPY(VisToolCubicBezierPath)
-    QVector<QGraphicsEllipseItem *> mainPoints;
-    QVector<QGraphicsEllipseItem *> ctrlPoints;
-    QVector<QGraphicsLineItem *>    lines;
-    QGraphicsPathItem               *newCurveSegment;
-    VCubicBezierPath                path;
-    QGraphicsLineItem               *helpLine1;
-    QGraphicsLineItem               *helpLine2;
+    QVector<VScaledEllipse *> mainPoints;
+    QVector<VScaledEllipse *> ctrlPoints;
+    QVector<VScaledLine *>    lines;
+    VCurvePathItem           *newCurveSegment;
+    VCubicBezierPath          path;
+    VScaledLine              *helpLine1;
+    VScaledLine              *helpLine2;
 
 private:
-    QGraphicsEllipseItem *getPoint(QVector<QGraphicsEllipseItem *> &points, quint32 i, qreal z = 0);
-    QGraphicsLineItem    *getLine(quint32 i);
+    VScaledEllipse *getPoint(QVector<VScaledEllipse *> &points, quint32 i, qreal z = 0);
+    VScaledLine    *getLine(quint32 i);
     void Creating(const QVector<VPointF> &pathPoints , int pointsLeft);
     void RefreshToolTip();
 };

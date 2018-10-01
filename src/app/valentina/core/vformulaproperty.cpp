@@ -6,7 +6,7 @@
  **
  **  @brief
  **  @copyright
- **  This source code is part of the Valentine project, a pattern making
+ **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2013-2015 Valentina project
  **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
@@ -47,7 +47,8 @@ VFormulaProperty::VFormulaProperty(const QString &name)
     tmpFormula->setUpdateBehaviour(true, false);
     tmpFormula->setOsSeparator(qApp->Settings()->GetOsSeparator());
 
-    setValue(0);
+    // Cannot use virtual function setValue in constructor
+    SetFormula(QVariant(0).value<VFormula>());
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -139,8 +140,8 @@ VPE::VProperty *VFormulaProperty::clone(bool include_children, VProperty *contai
 
         if (!include_children)
         {
-            QList<VProperty*> tmpChildren = container->getChildren();
-            foreach (VProperty* tmpChild, tmpChildren)
+            const QList<VProperty*> tmpChildren = container->getChildren();
+            for (auto tmpChild : tmpChildren)
             {
                 container->removeChild(tmpChild);
                 delete tmpChild;
@@ -198,10 +199,12 @@ void VFormulaProperty::SetFormula(const VFormula &formula)
     }
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void VFormulaProperty::ValueChildChanged(const QVariant &value, int typeForParent)
 {
     Q_UNUSED(typeForParent)
     VFormula newFormula = GetFormula();
     newFormula.SetFormula(value.toString(), FormulaType::FromUser);
+    newFormula.Eval();
     SetFormula(newFormula);
 }

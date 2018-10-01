@@ -6,7 +6,7 @@
  **
  **  @brief
  **  @copyright
- **  This source code is part of the Valentine project, a pattern making
+ **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2017 Valentina project
  **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
@@ -30,11 +30,14 @@
 #define PREFERENCESPATTERNPAGE_H
 
 #include <QWidget>
+#include "../vmisc/def.h"
 
 namespace Ui
 {
     class PreferencesPatternPage;
 }
+
+class QComboBox;
 
 class PreferencesPatternPage : public QWidget
 {
@@ -44,11 +47,30 @@ public:
     explicit PreferencesPatternPage(QWidget *parent = nullptr);
     virtual ~PreferencesPatternPage();
 
-    void Apply();
+    QStringList Apply();
+    void InitDefaultSeamAllowance();
+
+protected:
+    virtual void changeEvent(QEvent* event) override;
+
+private slots:
+    void EditDateTimeFormats();
+    void ManageKnownMaterials();
 
 private:
     Q_DISABLE_COPY(PreferencesPatternPage)
     Ui::PreferencesPatternPage *ui;
+    QStringList m_knownMaterials;
+    Unit m_oldLineUnit;
+
+    void InitLabelDateTimeFormats();
+    void InitComboBoxFormats(QComboBox *box, const QStringList &items, const QString &currentFormat);
+    void InitUnits();
+    void RetranslateUi();
+
+    template <typename T>
+    void CallDateTimeFormatEditor(const T &type, const QStringList &predefinedFormats,
+                                  const QStringList &userDefinedFormats, QComboBox *box);
 };
 
 #endif // PREFERENCESPATTERNPAGE_H

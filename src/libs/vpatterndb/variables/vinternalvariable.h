@@ -6,7 +6,7 @@
  **
  **  @brief
  **  @copyright
- **  This source code is part of the Valentine project, a pattern making
+ **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2013-2015 Valentina project
  **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
@@ -51,12 +51,11 @@ public:
     VInternalVariable &operator=(VInternalVariable &&var) Q_DECL_NOTHROW { Swap(var); return *this; }
 #endif
 
-    void Swap(VInternalVariable &var) Q_DECL_NOTHROW
+    inline void Swap(VInternalVariable &var) Q_DECL_NOTHROW
     { std::swap(d, var.d); }
 
-    qreal        GetValue() const;
-    qreal*       GetValue();
-    void         SetValue(const qreal &value);
+    virtual qreal  GetValue() const;
+    virtual qreal* GetValue();
 
     QString      GetName() const;
     void         SetName(const QString &name);
@@ -67,6 +66,8 @@ public:
     virtual bool Filter(quint32 id);
 
     virtual bool IsNotUsed() const;
+protected:
+    void SetValue(const qreal &value);
 private:
     QSharedDataPointer<VInternalVariableData> d;
 };

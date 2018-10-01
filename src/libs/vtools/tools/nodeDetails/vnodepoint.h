@@ -6,7 +6,7 @@
  **
  **  @brief
  **  @copyright
- **  This source code is part of the Valentine project, a pattern making
+ **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2013-2015 Valentina project
  **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
@@ -41,66 +41,52 @@
 #include "../ifc/xml/vabstractpattern.h"
 #include "../vmisc/def.h"
 #include "vabstractnode.h"
+#include "../vwidgets/vscenepoint.h"
 
 /**
  * @brief The VNodePoint class point detail node.
  */
-class VNodePoint: public VAbstractNode, public QGraphicsEllipseItem
+class VNodePoint: public VAbstractNode, public VScenePoint
 {
     Q_OBJECT
 public:
-    static void  Create(VAbstractPattern *doc, VContainer *data, VMainGraphicsScene *scene,
-                        quint32 id, quint32 idPoint, const Document &parse,
-                        const Source &typeCreation, const QString &drawName = QString(), const quint32 &idTool = 0);
+    static void Create(const VAbstractNodeInitData &initData);
 
     static const QString ToolType;
-    virtual int  type() const Q_DECL_OVERRIDE {return Type;}
+    virtual int  type() const override {return Type;}
     enum { Type = UserType + static_cast<int>(Tool::NodePoint)};
-    virtual QString getTagName() const Q_DECL_OVERRIDE;
+    virtual QString getTagName() const override;
 
+    virtual void ChangeLabelPosition(quint32 id, const QPointF &pos) override;
+    virtual void SetLabelVisible(quint32 id, bool visible) override;
 signals:
-    /**
-     * @brief ShowContextMenu emit when need show tool context menu.
-     * @param event context menu event.
-     */
-    void         ShowContextMenu(QGraphicsSceneContextMenuEvent *event);
-
+    void ShowOptions();
+    void ToggleInLayout(bool checked);
+    void ToggleForbidFlipping(bool checked);
+    void ToggleForceFlipping(bool checked);
+    void Delete();
+    void ToggleExcludeState(quint32 id);
+    void ToggleAngleType(quint32 id, PieceNodeAngle type);
 public slots:
-    virtual void FullUpdateFromFile() Q_DECL_OVERRIDE;
+    virtual void FullUpdateFromFile() override;
     void         NameChangePosition(const QPointF &pos);
     void         PointChoosed();
     void         EnableToolMove(bool move);
-    virtual void AllowHover(bool enabled) Q_DECL_OVERRIDE;
-    virtual void AllowSelecting(bool enabled) Q_DECL_OVERRIDE;
+    virtual void AllowHover(bool enabled) override;
+    virtual void AllowSelecting(bool enabled) override;
     void         AllowLabelHover(bool enabled);
     void         AllowLabelSelecting(bool enabled);
 protected:
-    /** @brief radius radius circle. */
-    qreal        radius;
-
-    /** @brief namePoint label name. */
-    VGraphicsSimpleTextItem *namePoint;
-
-    /** @brief lineName pointer to label line. */
-    QGraphicsLineItem       *lineName;
-
-    virtual void AddToFile() Q_DECL_OVERRIDE;
-    virtual void RefreshDataInFile() Q_DECL_OVERRIDE;
-    virtual void mousePressEvent(QGraphicsSceneMouseEvent *event) Q_DECL_OVERRIDE;
-    virtual void mouseReleaseEvent ( QGraphicsSceneMouseEvent * event ) Q_DECL_OVERRIDE;
-    virtual void hoverMoveEvent ( QGraphicsSceneHoverEvent * event ) Q_DECL_OVERRIDE;
-    virtual void hoverLeaveEvent ( QGraphicsSceneHoverEvent * event ) Q_DECL_OVERRIDE;
-    virtual void UpdateNamePosition(qreal mx, qreal my);
-    virtual void RefreshPointGeometry(const VPointF &point);
-    void         RefreshLine();
-    virtual void ShowNode() Q_DECL_OVERRIDE;
-    virtual void HideNode() Q_DECL_OVERRIDE;
+    virtual void AddToFile() override;
+    virtual void mousePressEvent(QGraphicsSceneMouseEvent *event) override;
+    virtual void mouseReleaseEvent ( QGraphicsSceneMouseEvent * event ) override;
+    virtual void ShowNode() override;
+    virtual void HideNode() override;
+    virtual void contextMenuEvent(QGraphicsSceneContextMenuEvent *event) override;
 private:
     Q_DISABLE_COPY(VNodePoint)
 
-    VNodePoint(VAbstractPattern *doc, VContainer *data, quint32 id, quint32 idPoint,  const Source &typeCreation,
-               const QString &drawName = QString(), const quint32 &idTool = 0,  QObject *qoParent = nullptr,
-               QGraphicsItem * parent = nullptr );
+    VNodePoint(const VAbstractNodeInitData &initData, QObject *qoParent = nullptr, QGraphicsItem *parent = nullptr);
 };
 
 #endif // VNODEPOINT_H

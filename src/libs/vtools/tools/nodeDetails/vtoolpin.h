@@ -6,7 +6,7 @@
  **
  **  @brief
  **  @copyright
- **  This source code is part of the Valentine project, a pattern making
+ **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2017 Valentina project
  **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
@@ -35,34 +35,39 @@
 
 class DialogTool;
 
+struct VToolPinInitData : VAbstractNodeInitData
+{
+    VToolPinInitData()
+        : VAbstractNodeInitData(),
+          pointId(NULL_ID)
+    {}
+
+    quint32 pointId;
+};
+
 class VToolPin : public VAbstractNode
 {
     Q_OBJECT
 public:
-    static VToolPin* Create(QSharedPointer<DialogTool> dialog, VAbstractPattern *doc, VContainer *data);
-    static VToolPin *Create(quint32 _id, quint32 pointId, quint32 pieceId, VAbstractPattern *doc, VContainer *data,
-                            const Document &parse, const Source &typeCreation, const QString &drawName = QString(),
-                            const quint32 &idTool = 0);
+    static VToolPin* Create(const QPointer<DialogTool> &dialog, VAbstractPattern *doc, VContainer *data);
+    static VToolPin *Create(VToolPinInitData initData);
 
     static const QString ToolType;
-    virtual QString getTagName() const Q_DECL_OVERRIDE;
+    virtual QString getTagName() const override;
 public slots:
-    virtual void FullUpdateFromFile () Q_DECL_OVERRIDE {}
-    virtual void AllowHover(bool enabled) Q_DECL_OVERRIDE;
-    virtual void AllowSelecting(bool enabled) Q_DECL_OVERRIDE;
+    virtual void FullUpdateFromFile () override {}
+    virtual void AllowHover(bool enabled) override;
+    virtual void AllowSelecting(bool enabled) override;
 protected:
-    virtual void AddToFile() Q_DECL_OVERRIDE;
-    virtual void RefreshDataInFile() Q_DECL_OVERRIDE;
-    virtual void ShowNode() Q_DECL_OVERRIDE {}
-    virtual void HideNode() Q_DECL_OVERRIDE {}
+    virtual void AddToFile() override;
+    virtual void ShowNode() override {}
+    virtual void HideNode() override {}
 private:
     Q_DISABLE_COPY(VToolPin)
 
     quint32 m_pieceId;
 
-    VToolPin(VAbstractPattern *doc, VContainer *data, quint32 id, quint32 pointId, quint32 pieceId,
-             const Source &typeCreation, const QString &drawName = QString(), const quint32 &idTool = 0,
-             QObject *qoParent = nullptr);
+    VToolPin(const VToolPinInitData &initData, QObject *qoParent = nullptr);
 };
 
 #endif // VTOOLPIN_H

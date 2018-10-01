@@ -6,7 +6,7 @@
  **
  **  @brief
  **  @copyright
- **  This source code is part of the Valentine project, a pattern making
+ **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2015 Valentina project
  **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
@@ -43,6 +43,7 @@
 #include "../vmisc/def.h"
 #include "../vmisc/vabstractapplication.h"
 #include "vtranslatemeasurements.h"
+#include "pmsystems.h"
 
 //---------------------------------------------------------------------------------------------------------------------
 VTranslateVars::VTranslateVars()
@@ -52,20 +53,17 @@ VTranslateVars::VTranslateVars()
       PMSystemBooks(QMap<QString, qmu::QmuTranslation>()),
       variables(QMap<QString, qmu::QmuTranslation>()),
       functions(QMap<QString, qmu::QmuTranslation>()),
-      postfixOperators(QMap<QString, qmu::QmuTranslation>()),
       placeholders(QMap<QString, qmu::QmuTranslation>()),
-      stDescriptions(QMap<QString, qmu::QmuTranslation>())
+      stDescriptions(QMap<QString, qmu::QmuTranslation>()),
+      translatedFunctions(QMap<QString, QString>())
 {
     InitPatternMakingSystems();
     InitVariables();
     InitFunctions();
-    InitPostfixOperators();
     InitPlaceholder();
-}
 
-//---------------------------------------------------------------------------------------------------------------------
-VTranslateVars::~VTranslateVars()
-{}
+    PrepareFunctionTranslations();
+}
 
 #define translate(context, source, disambiguation) qmu::QmuTranslation::translate((context), (source), (disambiguation))
 
@@ -377,11 +375,16 @@ void VTranslateVars::InitVariables()
     variables.insert(line_, translate("VTranslateVars", "Line_", "Left symbol _ in the name"));
     variables.insert(angleLine_, translate("VTranslateVars", "AngleLine_", "Left symbol _ in the name"));
     variables.insert(arc_, translate("VTranslateVars", "Arc_", "Left symbol _ in the name"));
+    variables.insert(elarc_, translate("VTranslateVars", "ElArc_", "Left symbol _ in the name"));
     variables.insert(spl_, translate("VTranslateVars", "Spl_", "Left symbol _ in the name"));
     variables.insert(splPath, translate("VTranslateVars", "SplPath", "Do not add symbol _ to the end of the name"));
     variables.insert(radiusArc_, translate("VTranslateVars", "RadiusArc_", "Left symbol _ in the name"));
+    variables.insert(radius1ElArc_, translate("VTranslateVars", "Radius1ElArc_", "Left symbol _ in the name"));
+    variables.insert(radius2ElArc_, translate("VTranslateVars", "Radius2ElArc_", "Left symbol _ in the name"));
     variables.insert(angle1Arc_, translate("VTranslateVars", "Angle1Arc_", "Left symbol _ in the name"));
     variables.insert(angle2Arc_, translate("VTranslateVars", "Angle2Arc_", "Left symbol _ in the name"));
+    variables.insert(angle1ElArc_, translate("VTranslateVars", "Angle1ElArc_", "Left symbol _ in the name"));
+    variables.insert(angle2ElArc_, translate("VTranslateVars", "Angle2ElArc_", "Left symbol _ in the name"));
     variables.insert(angle1Spl_, translate("VTranslateVars", "Angle1Spl_", "Left symbol _ in the name"));
     variables.insert(angle2Spl_, translate("VTranslateVars", "Angle2Spl_", "Left symbol _ in the name"));
     variables.insert(angle1SplPath, translate("VTranslateVars", "Angle1SplPath",
@@ -398,6 +401,7 @@ void VTranslateVars::InitVariables()
                                                 "Do not add symbol _ to the end of the name"));
     variables.insert(c2LengthSplPath, translate("VTranslateVars", "C2LengthSplPath",
                                                 "Do not add symbol _ to the end of the name"));
+    variables.insert(rotationElArc_, translate("VTranslateVars", "RotationElArc_", "Left symbol _ in the name"));
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -431,6 +435,11 @@ void VTranslateVars::InitFunctions()
     functions.insert(sqrt_F, translate("VTranslateVars", "sqrt", "square root of a value"));
     functions.insert(sign_F, translate("VTranslateVars", "sign", "sign function -1 if x<0; 1 if x>0"));
     functions.insert(rint_F, translate("VTranslateVars", "rint", "round to nearest integer"));
+    functions.insert(r2cm_F, translate("VTranslateVars", "r2cm", "round to up to 1 decimal"));
+    functions.insert(csrCm_F, translate("VTranslateVars", "csrCm", "cut, split and rotate modeling operation. Takes"
+                                                                   " cm units."));
+    functions.insert(csrInch_F, translate("VTranslateVars", "csrInch", "cut, split and rotate modeling operation. Takes"
+                                                                   " inch units."));
     functions.insert(abs_F, translate("VTranslateVars", "abs", "absolute value"));
     functions.insert(min_F, translate("VTranslateVars", "min", "min of all arguments"));
     functions.insert(max_F, translate("VTranslateVars", "max", "max of all arguments"));
@@ -441,21 +450,54 @@ void VTranslateVars::InitFunctions()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VTranslateVars::InitPostfixOperators()
-{
-    postfixOperators.insert(cm_Oprt, translate("VTranslateVars", "cm", "centimeter"));
-    postfixOperators.insert(mm_Oprt, translate("VTranslateVars", "mm", "millimeter"));
-    postfixOperators.insert(in_Oprt, translate("VTranslateVars", "in", "inch"));
-}
-
-//---------------------------------------------------------------------------------------------------------------------
 void VTranslateVars::InitPlaceholder()
 {
-    placeholders.insert(pl_size, translate("VTranslateVars", "size", "placeholder"));
-    placeholders.insert(pl_height, translate("VTranslateVars", "height", "placeholder"));
+    placeholders.insert(pl_size,          translate("VTranslateVars", "size",          "placeholder"));
+    placeholders.insert(pl_height,        translate("VTranslateVars", "height",        "placeholder"));
+    placeholders.insert(pl_date,          translate("VTranslateVars", "date",          "placeholder"));
+    placeholders.insert(pl_time,          translate("VTranslateVars", "time",          "placeholder"));
+    placeholders.insert(pl_patternName,   translate("VTranslateVars", "patternName",   "placeholder"));
+    placeholders.insert(pl_patternNumber, translate("VTranslateVars", "patternNumber", "placeholder"));
+    placeholders.insert(pl_author,        translate("VTranslateVars", "author",        "placeholder"));
+    placeholders.insert(pl_customer,      translate("VTranslateVars", "customer",      "placeholder"));
+    placeholders.insert(pl_userMaterial,  translate("VTranslateVars", "userMaterial",  "placeholder"));
+    placeholders.insert(pl_pExt,          translate("VTranslateVars", "pExt",          "placeholder"));
+    placeholders.insert(pl_pFileName,     translate("VTranslateVars", "pFileName",     "placeholder"));
+    placeholders.insert(pl_mFileName,     translate("VTranslateVars", "mFileName",     "placeholder"));
+    placeholders.insert(pl_mExt,          translate("VTranslateVars", "mExt",          "placeholder"));
+    placeholders.insert(pl_pLetter,       translate("VTranslateVars", "pLetter",       "placeholder"));
+    placeholders.insert(pl_pAnnotation,   translate("VTranslateVars", "pAnnotation",   "placeholder"));
+    placeholders.insert(pl_pOrientation,  translate("VTranslateVars", "pOrientation",  "placeholder"));
+    placeholders.insert(pl_pRotation,     translate("VTranslateVars", "pRotation",     "placeholder"));
+    placeholders.insert(pl_pTilt,         translate("VTranslateVars", "pTilt",         "placeholder"));
+    placeholders.insert(pl_pFoldPosition, translate("VTranslateVars", "pFoldPosition", "placeholder"));
+    placeholders.insert(pl_pName,         translate("VTranslateVars", "pName",         "placeholder"));
+    placeholders.insert(pl_pQuantity,     translate("VTranslateVars", "pQuantity",     "placeholder"));
+    placeholders.insert(pl_mFabric,       translate("VTranslateVars", "mFabric",       "placeholder"));
+    placeholders.insert(pl_mLining,       translate("VTranslateVars", "mLining",       "placeholder"));
+    placeholders.insert(pl_mInterfacing,  translate("VTranslateVars", "mInterfacing",  "placeholder"));
+    placeholders.insert(pl_mInterlining,  translate("VTranslateVars", "mInterlining",  "placeholder"));
+    placeholders.insert(pl_wCut,          translate("VTranslateVars", "wCut",          "placeholder"));
+    placeholders.insert(pl_wOnFold,       translate("VTranslateVars", "wOnFold",       "placeholder"));
 }
 
 #undef translate
+
+//---------------------------------------------------------------------------------------------------------------------
+void VTranslateVars::PrepareFunctionTranslations()
+{
+    translatedFunctions.clear();
+    QMap<QString, qmu::QmuTranslation>::const_iterator i = functions.constBegin();
+    while (i != functions.constEnd())
+    {
+        const QString translated = i.value().translate(qApp->Settings()->GetLocale());
+        if (i.key() != translated)
+        {
+            translatedFunctions.insert(translated, i.key());
+        }
+        ++i;
+    }
+}
 
 //---------------------------------------------------------------------------------------------------------------------
 void VTranslateVars::InitSystem(const QString &code, const qmu::QmuTranslation &name, const qmu::QmuTranslation &author,
@@ -529,41 +571,28 @@ void VTranslateVars::BiasTokens(int position, int bias, QMap<int, QString> &toke
  */
 bool VTranslateVars::VariablesFromUser(QString &newFormula, int position, const QString &token, int &bias) const
 {
+    const QString currentLengthTr = variables.value(currentLength).translate(qApp->Settings()->GetLocale());
+    const QString currentSeamAllowanceTr = variables.value(currentSeamAllowance)
+            .translate(qApp->Settings()->GetLocale());
+
     QMap<QString, qmu::QmuTranslation>::const_iterator i = variables.constBegin();
     while (i != variables.constEnd())
     {
         const qmu::QmuTranslation &var = i.value();
-        if (token.indexOf( var.translate() ) == 0)
-        {
-            newFormula.replace(position, var.translate().length(), i.key());
-            QString newToken = token;
-            newToken.replace(0, var.translate().length(), i.key());
-            bias = token.length() - newToken.length();
-            return true;
-        }
-        ++i;
-    }
-    return false;
-}
+        const QString varTr = var.translate(qApp->Settings()->GetLocale());
 
-//---------------------------------------------------------------------------------------------------------------------
-/**
- * @brief PostfixOperatorsFromUser translate postfix operator to internal look.
- * @param newFormula [in|out] expression to translate
- * @param position token position
- * @param token token to translate
- * @param bias hold change of length between translated and origin token string
- * @return true if was found postfix operator with same name.
- */
-bool VTranslateVars::PostfixOperatorsFromUser(QString &newFormula, int position, const QString &token, int &bias) const
-{
-    QMap<QString, qmu::QmuTranslation>::const_iterator i = postfixOperators.constBegin();
-    while (i != postfixOperators.constEnd())
-    {
-        if (token == i.value().translate())
+        if (token.indexOf(varTr) == 0)
         {
-            newFormula.replace(position, token.length(), i.key());
-            bias = token.length() - i.key().length();
+            if ((varTr == currentLengthTr || varTr == currentSeamAllowanceTr) && token != varTr)
+            {
+                ++i;
+                continue;
+            }
+
+            newFormula.replace(position, varTr.length(), i.key());
+            QString newToken = token;
+            newToken.replace(0, varTr.length(), i.key());
+            bias = token.length() - newToken.length();
             return true;
         }
         ++i;
@@ -585,7 +614,7 @@ bool VTranslateVars::FunctionsFromUser(QString &newFormula, int position, const 
     QMap<QString, qmu::QmuTranslation>::const_iterator i = functions.constBegin();
     while (i != functions.constEnd())
     {
-        if (token == i.value().translate())
+        if (token == i.value().translate(qApp->Settings()->GetLocale()))
         {
             newFormula.replace(position, token.length(), i.key());
             bias = token.length() - i.key().length();
@@ -612,10 +641,16 @@ bool VTranslateVars::VariablesToUser(QString &newFormula, int position, const QS
     {
         if (token.indexOf( i.key() ) == 0)
         {
-            newFormula.replace(position, i.key().length(), i.value().translate());
+            if ((i.key() == currentLength || i.key() == currentSeamAllowance) && token != i.key())
+            {
+                ++i;
+                continue;
+            }
+
+            newFormula.replace(position, i.key().length(), i.value().translate(qApp->Settings()->GetLocale()));
 
             QString newToken = token;
-            newToken.replace(0, i.key().length(), i.value().translate());
+            newToken.replace(0, i.key().length(), i.value().translate(qApp->Settings()->GetLocale()));
             bias = token.length() - newToken.length();
             return true;
         }
@@ -640,14 +675,98 @@ QString VTranslateVars::InternalVarToUser(const QString &var) const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QString VTranslateVars::PlaceholderToUser(const QString &var) const
+QString VTranslateVars::PlaceholderToUser(QString var) const
 {
+    QString number;
+    if (var.startsWith(pl_userMaterial) && var.length() > pl_userMaterial.length())
+    {
+        number = var.right(var.length() - pl_userMaterial.length());
+        var = pl_userMaterial;
+    }
+
     if (placeholders.contains(var))
     {
-        return placeholders.value(var).translate();
+        return placeholders.value(var).translate(qApp->Settings()->GetLocale()) + number;
     }
 
     return var;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QString VTranslateVars::PlaceholderToUserText(QString text) const
+{
+    QChar per('%');
+    auto i = placeholders.constBegin();
+    while (i != placeholders.constEnd())
+    {
+        if (i.key() != pl_userMaterial)
+        {
+            const QString translated = per + i.value().translate(qApp->Settings()->GetLocale()) + per;
+            const QString original = per + i.key() + per;
+
+            if (translated != original)
+            {
+                text.replace(original, translated);
+            }
+        }
+        else
+        {
+            const QString material_translated = i.value().translate(qApp->Settings()->GetLocale());
+            if (text.indexOf(i.key()) != -1)
+            {
+                for (int n = 0; n < userMaterialPlaceholdersQuantity; ++n)
+                {
+                    const QString number = QString::number(n + 1);
+                    const QString original = per + i.key() + number + per;
+                    const QString translated = per + material_translated + number + per;
+                    if (translated != original)
+                    {
+                        text.replace(original, translated);
+                    }
+                }
+            }
+        }
+        ++i;
+    }
+    return text;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QString VTranslateVars::PlaceholderFromUserText(QString text) const
+{
+    QChar per('%');
+    auto i = placeholders.constBegin();
+    while (i != placeholders.constEnd())
+    {
+        if (i.key() != pl_userMaterial)
+        {
+            const QString original = per + i.key() + per;
+            const QString translated = per + i.value().translate(qApp->Settings()->GetLocale()) + per;
+            if (translated != original)
+            {
+                text.replace(translated, original);
+            }
+        }
+        else
+        {
+            const QString material_translated = i.value().translate(qApp->Settings()->GetLocale());
+            if (text.indexOf(material_translated) != -1)
+            {
+                for (int n = 0; n < userMaterialPlaceholdersQuantity; ++n)
+                {
+                    const QString number = QString::number(n + 1);
+                    const QString original = per + i.key() + number + per;
+                    const QString translated = per + material_translated + number + per;
+                    if (translated != original)
+                    {
+                        text.replace(translated, original);
+                    }
+                }
+            }
+        }
+        ++i;
+    }
+    return text;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -655,17 +774,12 @@ QString VTranslateVars::VarToUser(const QString &var) const
 {
     if (measurements.contains(var))
     {
-        return measurements.value(var).translate();
+        return measurements.value(var).translate(qApp->Settings()->GetLocale());
     }
 
     if (functions.contains(var))
     {
-        return functions.value(var).translate();
-    }
-
-    if (postfixOperators.contains(var))
-    {
-        return postfixOperators.value(var).translate();
+        return functions.value(var).translate(qApp->Settings()->GetLocale());
     }
 
     return InternalVarToUser(var);
@@ -686,11 +800,6 @@ QString VTranslateVars::VarFromUser(const QString &var) const
         return newVar;
     }
 
-    if (PostfixOperatorsFromUser(newVar, 0, var, bias))
-    {
-        return newVar;
-    }
-
     if (FunctionsFromUser(newVar, 0, var, bias))
     {
         return newVar;
@@ -701,26 +810,19 @@ QString VTranslateVars::VarFromUser(const QString &var) const
 //---------------------------------------------------------------------------------------------------------------------
 QString VTranslateVars::PMSystemName(const QString &code) const
 {
-    return PMSystemNames.value(code).translate();
+    return PMSystemNames.value(code).translate(qApp->Settings()->GetLocale());
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 QString VTranslateVars::PMSystemAuthor(const QString &code) const
 {
-    return PMSystemAuthors.value(code).translate();
+    return PMSystemAuthors.value(code).translate(qApp->Settings()->GetLocale());
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 QString VTranslateVars::PMSystemBook(const QString &code) const
 {
-    return PMSystemBooks.value(code).translate();
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-// cppcheck-suppress unusedFunction
-QString VTranslateVars::PostfixOperator(const QString &name) const
-{
-    return postfixOperators.value(name).translate();
+    return PMSystemBooks.value(code).translate(qApp->Settings()->GetLocale());
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -739,7 +841,8 @@ QString VTranslateVars::FormulaFromUser(const QString &formula, bool osSeparator
     }
     QString newFormula = formula;// Local copy for making changes
 
-    QScopedPointer<qmu::QmuTokenParser> cal(new qmu::QmuTokenParser(formula, osSeparator));// Eval formula
+    // Eval formula
+    QScopedPointer<qmu::QmuTokenParser> cal(new qmu::QmuTokenParser(formula, osSeparator, true, GetTranslatedFunctions()));
     QMap<int, QString> tokens = cal->GetTokens();// Tokens (variables, measurements)
     QMap<int, QString> numbers = cal->GetNumbers();// All numbers in expression for changing decimal separator
     delete cal.take();
@@ -761,17 +864,6 @@ QString VTranslateVars::FormulaFromUser(const QString &formula, bool osSeparator
         }
 
         if (VariablesFromUser(newFormula, tKeys.at(i), tValues.at(i), bias))
-        {
-            if (bias != 0)
-            {// Translated token has different length than original. Position next tokens need to be corrected.
-                CorrectionsPositions(tKeys.at(i), bias, tokens, numbers);
-                tKeys = tokens.keys();
-                tValues = tokens.values();
-            }
-            continue;
-        }
-
-        if (PostfixOperatorsFromUser(newFormula, tKeys.at(i), tValues.at(i), bias))
         {
             if (bias != 0)
             {// Translated token has different length than original. Position next tokens need to be corrected.
@@ -836,6 +928,7 @@ QString VTranslateVars::TryFormulaFromUser(const QString &formula, bool osSepara
 {
     try
     {
+        SCASSERT(qApp->TrVars() != nullptr)
         return qApp->TrVars()->FormulaFromUser(formula, osSeparator);
     }
     catch (qmu::QmuParserError &e)// In case something bad will happen
@@ -885,8 +978,10 @@ QString VTranslateVars::FormulaToUser(const QString &formula, bool osSeparator) 
     {
         if (measurements.contains(tValues.at(i)))
         {
-            newFormula.replace(tKeys.at(i), tValues.at(i).length(), measurements.value(tValues.at(i)).translate());
-            int bias = tValues.at(i).length() - measurements.value(tValues.at(i)).translate().length();
+            newFormula.replace(tKeys.at(i), tValues.at(i).length(),
+                               measurements.value(tValues.at(i)).translate(qApp->Settings()->GetLocale()));
+            int bias = tValues.at(i).length() - measurements.value(tValues.at(i))
+                    .translate(qApp->Settings()->GetLocale()).length();
             if (bias != 0)
             {// Translated token has different length than original. Position next tokens need to be corrected.
                 CorrectionsPositions(tKeys.at(i), bias, tokens, numbers);
@@ -898,21 +993,10 @@ QString VTranslateVars::FormulaToUser(const QString &formula, bool osSeparator) 
 
         if (functions.contains(tValues.at(i)))
         {
-            newFormula.replace(tKeys.at(i), tValues.at(i).length(), functions.value(tValues.at(i)).translate());
-            int bias = tValues.at(i).length() - functions.value(tValues.at(i)).translate().length();
-            if (bias != 0)
-            {// Translated token has different length than original. Position next tokens need to be corrected.
-                CorrectionsPositions(tKeys.at(i), bias, tokens, numbers);
-                tKeys = tokens.keys();
-                tValues = tokens.values();
-            }
-            continue;
-        }
-
-        if (postfixOperators.contains(tValues.at(i)))
-        {
-            newFormula.replace(tKeys.at(i), tValues.at(i).length(), postfixOperators.value(tValues.at(i)).translate());
-            int bias = tValues.at(i).length() - postfixOperators.value(tValues.at(i)).translate().length();
+            newFormula.replace(tKeys.at(i), tValues.at(i).length(),
+                               functions.value(tValues.at(i)).translate(qApp->Settings()->GetLocale()));
+            int bias = tValues.at(i).length() - functions.value(tValues.at(i))
+                    .translate(qApp->Settings()->GetLocale()).length();
             if (bias != 0)
             {// Translated token has different length than original. Position next tokens need to be corrected.
                 CorrectionsPositions(tKeys.at(i), bias, tokens, numbers);
@@ -958,6 +1042,10 @@ QString VTranslateVars::FormulaToUser(const QString &formula, bool osSeparator) 
 
             loc = QLocale();// To user locale
             QString dStr = loc.toString(d);// Number string in user locale
+            if (loc.groupSeparator().isSpace())
+            {
+                dStr.replace(loc.groupSeparator(), QString());
+            }
             newFormula.replace(nKeys.at(i), nValues.at(i).length(), dStr);
             const int bias = nValues.at(i).length() - dStr.length();
             if (bias != 0)
@@ -973,6 +1061,20 @@ QString VTranslateVars::FormulaToUser(const QString &formula, bool osSeparator) 
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+QString VTranslateVars::TryFormulaToUser(const QString &formula, bool osSeparator)
+{
+    try
+    {
+        return qApp->TrVars()->FormulaToUser(formula, osSeparator);
+    }
+    catch (qmu::QmuParserError &e)// In case something bad will happen
+    {
+        Q_UNUSED(e)
+        return formula;
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 void VTranslateVars::Retranslate()
 {
     VTranslateMeasurements::Retranslate();
@@ -982,14 +1084,20 @@ void VTranslateVars::Retranslate()
     PMSystemBooks.clear();
     variables.clear();
     functions.clear();
-    postfixOperators.clear();
     stDescriptions.clear();
 
     InitPatternMakingSystems();
     InitVariables();
     InitFunctions();
-    InitPostfixOperators();
     InitPlaceholder();
+
+    PrepareFunctionTranslations();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QMap<QString, QString> VTranslateVars::GetTranslatedFunctions() const
+{
+    return translatedFunctions;
 }
 
 //---------------------------------------------------------------------------------------------------------------------

@@ -6,7 +6,7 @@
  **
  **  @brief
  **  @copyright
- **  This source code is part of the Valentine project, a pattern making
+ **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2015 Valentina project
  **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
@@ -44,7 +44,7 @@ class VTapeSettings : public VCommonSettings
     Q_OBJECT
 public:
     VTapeSettings(Format format, Scope scope, const QString &organization, const QString &application = QString(),
-                  QObject *parent = 0);
+                  QObject *parent = nullptr);
 
     QByteArray GetDataBaseGeometry() const;
     void SetDataBaseGeometry(const QByteArray &value);
@@ -54,18 +54,6 @@ public:
 
     void SetDefSize(int value);
     int  GetDefSize() const;
-
-    void SetCSVWithHeader(bool withHeader);
-    bool GetCSVWithHeader() const;
-    bool GetDefCSVWithHeader() const;
-
-    void SetCSVCodec(int mib);
-    int  GetCSVCodec() const;
-    int  GetDefCSVCodec() const;
-
-    void  SetCSVSeparator(const QChar &separator);
-    QChar GetCSVSeparator() const;
-    QChar GetDefCSVSeparator() const;
 
 private:
     Q_DISABLE_COPY(VTapeSettings)

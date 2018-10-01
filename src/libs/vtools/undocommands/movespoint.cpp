@@ -6,7 +6,7 @@
  **
  **  @brief
  **  @copyright
- **  This source code is part of the Valentine project, a pattern making
+ **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2013-2015 Valentina project
  **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
@@ -50,7 +50,7 @@ MoveSPoint::MoveSPoint(VAbstractPattern *doc, const double &x, const double &y, 
     qCDebug(vUndo, "SPoint newY %f", newY);
 
     SCASSERT(scene != nullptr)
-    QDomElement domElement = doc->elementById(id);
+    QDomElement domElement = doc->elementById(id, VAbstractPattern::TagPoint);
     if (domElement.isElement())
     {
         oldX = qApp->toPixel(doc->GetParametrDouble(domElement, AttrX, "0.0"));
@@ -62,7 +62,6 @@ MoveSPoint::MoveSPoint(VAbstractPattern *doc, const double &x, const double &y, 
     else
     {
         qCDebug(vUndo, "Can't find spoint with id = %u.", nodeId);
-        return;
     }
 }
 
@@ -120,7 +119,7 @@ void MoveSPoint::Do(double x, double y)
     qCDebug(vUndo, "Move to x %f", x);
     qCDebug(vUndo, "Move to y %f", y);
 
-    QDomElement domElement = doc->elementById(nodeId);
+    QDomElement domElement = doc->elementById(nodeId, VAbstractPattern::TagPoint);
     if (domElement.isElement())
     {
         doc->SetAttribute(domElement, AttrX, QString().setNum(qApp->fromPixel(x)));
@@ -131,6 +130,5 @@ void MoveSPoint::Do(double x, double y)
     else
     {
         qCDebug(vUndo, "Can't find spoint with id = %u.", nodeId);
-        return;
     }
 }

@@ -6,7 +6,7 @@
  **
  **  @brief
  **  @copyright
- **  This source code is part of the Valentine project, a pattern making
+ **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2015 Valentina project
  **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
@@ -30,6 +30,7 @@
 #include "../vformat/vmeasurements.h"
 #include "../ifc/xml/vvstconverter.h"
 #include "../ifc/xml/vvitconverter.h"
+#include "../vpatterndb/pmsystems.h"
 
 #include <QtTest>
 
@@ -41,17 +42,18 @@ TST_VMeasurements::TST_VMeasurements(QObject *parent) :
 
 //---------------------------------------------------------------------------------------------------------------------
 /**
- * @brief CreateEmptyStandardFile check if empty standard measurement file is valid.
+ * @brief CreateEmptyMultisizeFile check if empty multisize measurement file is valid.
  */
-void TST_VMeasurements::CreateEmptyStandardFile()
+void TST_VMeasurements::CreateEmptyMultisizeFile()
 {
     Unit mUnit = Unit::Cm;
     const int height = 176;
     const int size = 50;
 
-    QSharedPointer<VContainer> data = QSharedPointer<VContainer>(new VContainer(nullptr, &mUnit));
-    VContainer::SetHeight(height);
-    VContainer::SetSize(size);
+    QSharedPointer<VContainer> data = QSharedPointer<VContainer>(new VContainer(nullptr, &mUnit,
+                                                                                VContainer::UniqueNamespace()));
+    data->SetHeight(height);
+    data->SetSize(size);
 
     QSharedPointer<VMeasurements> m =
             QSharedPointer<VMeasurements>(new VMeasurements(mUnit, size, height, data.data()));
@@ -94,7 +96,8 @@ void TST_VMeasurements::CreateEmptyIndividualFile()
 {
     Unit mUnit = Unit::Cm;
 
-    QSharedPointer<VContainer> data = QSharedPointer<VContainer>(new VContainer(nullptr, &mUnit));
+    QSharedPointer<VContainer> data = QSharedPointer<VContainer>(new VContainer(nullptr, &mUnit,
+                                                                                VContainer::UniqueNamespace()));
 
     QSharedPointer<VMeasurements> m =
             QSharedPointer<VMeasurements>(new VMeasurements(mUnit, data.data()));
@@ -128,18 +131,19 @@ void TST_VMeasurements::CreateEmptyIndividualFile()
 
 //---------------------------------------------------------------------------------------------------------------------
 /**
- * @brief ValidPMCodesStandardFile helps to check that all current pattern making systems match pattern inside XSD
+ * @brief ValidPMCodesMultisizeFile helps to check that all current pattern making systems match pattern inside XSD
  * scheme.
  */
-void TST_VMeasurements::ValidPMCodesStandardFile()
+void TST_VMeasurements::ValidPMCodesMultisizeFile()
 {
     Unit mUnit = Unit::Cm;
     const int height = 176;
     const int size = 50;
 
-    QSharedPointer<VContainer> data = QSharedPointer<VContainer>(new VContainer(nullptr, &mUnit));
-    VContainer::SetHeight(height);
-    VContainer::SetSize(size);
+    QSharedPointer<VContainer> data = QSharedPointer<VContainer>(new VContainer(nullptr, &mUnit,
+                                                                                VContainer::UniqueNamespace()));
+    data->SetHeight(height);
+    data->SetSize(size);
 
     QSharedPointer<VMeasurements> m =
             QSharedPointer<VMeasurements>(new VMeasurements(mUnit, size, height, data.data()));
@@ -161,7 +165,7 @@ void TST_VMeasurements::ValidPMCodesStandardFile()
             QString error;
             const bool result = m->SaveDocument(fileName, error);
 
-            const QString message = QString("Error: %1 for code=%2").arg(error).arg(listSystems.at(i));
+            const QString message = QString("Error: %1 for code=%2").arg(error, listSystems.at(i));
             QVERIFY2(result, qUtf8Printable(message));
         }
         else
@@ -175,7 +179,7 @@ void TST_VMeasurements::ValidPMCodesStandardFile()
         }
         catch (VException &e)
         {
-            const QString message = QString("Error: %1 for code=%2").arg(e.ErrorMessage()).arg(listSystems.at(i));
+            const QString message = QString("Error: %1 for code=%2").arg(e.ErrorMessage(), listSystems.at(i));
             QFAIL(qUtf8Printable(message));
         }
     }
@@ -190,7 +194,8 @@ void TST_VMeasurements::ValidPMCodesIndividualFile()
 {
     Unit mUnit = Unit::Cm;
 
-    QSharedPointer<VContainer> data = QSharedPointer<VContainer>(new VContainer(nullptr, &mUnit));
+    QSharedPointer<VContainer> data = QSharedPointer<VContainer>(new VContainer(nullptr, &mUnit,
+                                                                                VContainer::UniqueNamespace()));
 
     QSharedPointer<VMeasurements> m =
             QSharedPointer<VMeasurements>(new VMeasurements(mUnit, data.data()));
@@ -212,7 +217,7 @@ void TST_VMeasurements::ValidPMCodesIndividualFile()
             QString error;
             const bool result = m->SaveDocument(fileName, error);
 
-            const QString message = QString("Error: %1 for code=%2").arg(error).arg(listSystems.at(i));
+            const QString message = QString("Error: %1 for code=%2").arg(error, listSystems.at(i));
             QVERIFY2(result, qUtf8Printable(message));
         }
         else
@@ -226,7 +231,7 @@ void TST_VMeasurements::ValidPMCodesIndividualFile()
         }
         catch (VException &e)
         {
-            const QString message = QString("Error: %1 for code=%2").arg(e.ErrorMessage()).arg(listSystems.at(i));
+            const QString message = QString("Error: %1 for code=%2").arg(e.ErrorMessage(), listSystems.at(i));
             QFAIL(qUtf8Printable(message));
         }
     }

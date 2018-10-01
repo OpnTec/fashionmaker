@@ -6,7 +6,7 @@
  **
  **  @brief
  **  @copyright
- **  This source code is part of the Valentine project, a pattern making
+ **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2013-2015 Valentina project
  **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
@@ -43,6 +43,10 @@
 
 #ifdef QT_GUI_LIB
 #   include <QtGui>
+#endif
+
+#ifdef QT_GUI_LIB
+#   include <QtWidgets>
 #endif
 
 #endif/*__cplusplus*/

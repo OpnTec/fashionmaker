@@ -22,6 +22,7 @@
 #include "qmuparser.h"
 
 #include <QCoreApplication>
+#include <QLineF>
 #include <QStaticStringData>
 #include <QStringData>
 #include <QStringDataPtr>
@@ -32,11 +33,93 @@
 #include "qmuparserdef.h"
 #include "qmuparsererror.h"
 #include "../vmisc/vmath.h"
+#include "../vmisc/defglobal.h"
 
 /**
  * @file
  * @brief Implementation of the standard floating point QmuParser.
  */
+
+namespace
+{
+//---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief CSR calcs special modeling case.
+ * According to case we cut a piece with @p length, split up on distance @p split and rotate splited piece on
+ * angle that will create arc with length @p arcLength.
+ * @param length length of cut line
+ * @param split distance between two pieces
+ * @param arcLength length of arc that create two pieces after rotation
+ * @return an angle the second piece should be rotated
+ */
+qreal CSR(qreal length, qreal split, qreal arcLength)
+{
+    length = qAbs(length);
+    arcLength = qAbs(arcLength);
+
+    if (qFuzzyIsNull(length) || qFuzzyIsNull(split) || qFuzzyIsNull(arcLength))
+    {
+        return 0;
+    }
+    const qreal sign = std::copysign(1.0, split);
+
+    const QLineF line(QPointF(0, 0), QPointF(0, length));
+
+    QLineF tmp = line;
+    tmp.setAngle(tmp.angle()+90.0*sign);
+    tmp.setLength(split);
+
+    QPointF p1 = tmp.p2();
+
+    tmp = QLineF(QPointF(0, length), QPointF(0, 0));
+    tmp.setAngle(tmp.angle()-90.0*sign);
+    tmp.setLength(split);
+
+    QPointF p2 = tmp.p2();
+
+    const QLineF line2(p1, p2);
+
+    qreal angle = 180;
+    qreal arcL = INT_MAX;
+    do
+    {
+        if (arcL > arcLength)
+        {
+            angle = angle - angle/2.0;
+        }
+        else if (arcL < arcLength)
+        {
+            angle = angle + angle/2.0;
+        }
+        else
+        {
+            return angle;
+        }
+
+        if (angle < 0.00001 || angle >= 360)
+        {
+            return 0;
+        }
+
+        tmp = line2;
+        tmp.setAngle(tmp.angle()+angle*sign);
+
+        QPointF crosPoint;
+        const auto type = line.intersect(tmp, &crosPoint);
+        if (type == QLineF::NoIntersection)
+        {
+            return 0;
+        }
+
+        QLineF radius(crosPoint, tmp.p2());
+        const qreal arcAngle = sign > 0 ? line.angleTo(radius): radius.angleTo(line);
+        arcL = (M_PI*radius.length())/180.0 * arcAngle;
+    }
+    while(qAbs(arcL - arcLength) > (0.5/*mm*/ / 25.4) * PrintDPI);
+
+    return angle;
+}
+}
 
 /**
  * @brief Namespace for mathematical applications.
@@ -168,6 +251,32 @@ qreal QmuParser::Abs(qreal v)
 qreal QmuParser::Rint(qreal v)
 {
     return qFloor(v + 0.5);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+qreal QmuParser::R2CM(qreal v)
+{
+    return Rint(v*10.0)/10.0;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+qreal QmuParser::CSRCm(qreal length, qreal split, qreal arcLength)
+{
+    length = ((length * 10.0) / 25.4) * PrintDPI;
+    split = ((split * 10.0) / 25.4) * PrintDPI;
+    arcLength = ((arcLength * 10.0) / 25.4) * PrintDPI;
+
+    return CSR(length, split, arcLength);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+qreal QmuParser::CSRInch(qreal length, qreal split, qreal arcLength)
+{
+    length = length * PrintDPI;
+    split = split * PrintDPI;
+    arcLength = arcLength * PrintDPI;
+
+    return CSR(length, split, arcLength);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -329,49 +438,52 @@ void QmuParser::InitCharSets()
 void QmuParser::InitFun()
 {
     // trigonometric helper functions
-    DefineFun("degTorad",   DegreeToRadian);
-    DefineFun("radTodeg",   RadianToDegree);
+    DefineFun(QStringLiteral("degTorad"),   DegreeToRadian);
+    DefineFun(QStringLiteral("radTodeg"),   RadianToDegree);
 
     // trigonometric functions
-    DefineFun("sin",   qSin);
-    DefineFun("cos",   qCos);
-    DefineFun("tan",   qTan);
-    DefineFun("sinD",   SinD);
-    DefineFun("cosD",   CosD);
-    DefineFun("tanD",   TanD);
+    DefineFun(QStringLiteral("sin"),   qSin);
+    DefineFun(QStringLiteral("cos"),   qCos);
+    DefineFun(QStringLiteral("tan"),   qTan);
+    DefineFun(QStringLiteral("sinD"),   SinD);
+    DefineFun(QStringLiteral("cosD"),   CosD);
+    DefineFun(QStringLiteral("tanD"),   TanD);
     // arcus functions
-    DefineFun("asin",  qAsin);
-    DefineFun("acos",  qAcos);
-    DefineFun("atan",  qAtan);
-    DefineFun("atan2", qAtan2);
-    DefineFun("asinD",  ASinD);
-    DefineFun("acosD",  ACosD);
-    DefineFun("atanD",  ATanD);
+    DefineFun(QStringLiteral("asin"),  qAsin);
+    DefineFun(QStringLiteral("acos"),  qAcos);
+    DefineFun(QStringLiteral("atan"),  qAtan);
+    DefineFun(QStringLiteral("atan2"), qAtan2);
+    DefineFun(QStringLiteral("asinD"),  ASinD);
+    DefineFun(QStringLiteral("acosD"),  ACosD);
+    DefineFun(QStringLiteral("atanD"),  ATanD);
     // hyperbolic functions
-    DefineFun("sinh",  Sinh);
-    DefineFun("cosh",  Cosh);
-    DefineFun("tanh",  Tanh);
+    DefineFun(QStringLiteral("sinh"),  Sinh);
+    DefineFun(QStringLiteral("cosh"),  Cosh);
+    DefineFun(QStringLiteral("tanh"),  Tanh);
     // arcus hyperbolic functions
-    DefineFun("asinh", ASinh);
-    DefineFun("acosh", ACosh);
-    DefineFun("atanh", ATanh);
+    DefineFun(QStringLiteral("asinh"), ASinh);
+    DefineFun(QStringLiteral("acosh"), ACosh);
+    DefineFun(QStringLiteral("atanh"), ATanh);
     // Logarithm functions
-    DefineFun("log2",  Log2);
-    DefineFun("log10", Log10);
-    DefineFun("log",   Log10);
-    DefineFun("ln",    qLn);
+    DefineFun(QStringLiteral("log2"),  Log2);
+    DefineFun(QStringLiteral("log10"), Log10);
+    DefineFun(QStringLiteral("log"),   Log10);
+    DefineFun(QStringLiteral("ln"),    qLn);
     // misc
-    DefineFun("exp",   qExp);
-    DefineFun("sqrt",  qSqrt);
-    DefineFun("sign",  Sign);
-    DefineFun("rint",  Rint);
-    DefineFun("abs",   Abs);
-    DefineFun("fmod",  FMod);
+    DefineFun(QStringLiteral("exp"),   qExp);
+    DefineFun(QStringLiteral("sqrt"),  qSqrt);
+    DefineFun(QStringLiteral("sign"),  Sign);
+    DefineFun(QStringLiteral("rint"),  Rint);
+    DefineFun(QStringLiteral("r2cm"),  R2CM);
+    DefineFun(QStringLiteral("csrCm"), CSRCm);
+    DefineFun(QStringLiteral("csrInch"), CSRInch);
+    DefineFun(QStringLiteral("abs"),   Abs);
+    DefineFun(QStringLiteral("fmod"),  FMod);
     // Functions with variable number of arguments
-    DefineFun("sum",   Sum);
-    DefineFun("avg",   Avg);
-    DefineFun("min",   Min);
-    DefineFun("max",   Max);
+    DefineFun(QStringLiteral("sum"),   Sum);
+    DefineFun(QStringLiteral("avg"),   Avg);
+    DefineFun(QStringLiteral("min"),   Min);
+    DefineFun(QStringLiteral("max"),   Max);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

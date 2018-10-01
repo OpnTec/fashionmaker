@@ -6,7 +6,7 @@
  **
  **  @brief
  **  @copyright
- **  This source code is part of the Valentine project, a pattern making
+ **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2013-2015 Valentina project
  **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
@@ -65,20 +65,13 @@ const QString VToolCutSplinePath::AttrSplinePath = QStringLiteral("splinePath");
 //---------------------------------------------------------------------------------------------------------------------
 /**
  * @brief VToolCutSplinePath constructor.
- * @param doc dom document container.
- * @param data container with variables.
- * @param id object id in container.
- * @param formula string with formula length first splinePath.
- * @param splinePathId id splinePath (we cut this splinePath) in data container.
- * @param typeCreation way we create this tool.
+ * @param initData init data.
  * @param parent parent object.
  */
-VToolCutSplinePath::VToolCutSplinePath(VAbstractPattern *doc, VContainer *data, const quint32 &id,
-                                       const QString &formula, const quint32 &splinePathId,
-                                       const Source &typeCreation, QGraphicsItem *parent)
-    :VToolCut(doc, data, id, formula, splinePathId, parent)
+VToolCutSplinePath::VToolCutSplinePath(const VToolCutSplinePathInitData &initData, QGraphicsItem *parent)
+    :VToolCut(initData.doc, initData.data, initData.id, initData.formula, initData.splinePathId, parent)
 {
-    ToolCreation(typeCreation);
+    ToolCreation(initData.typeCreation);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -88,9 +81,9 @@ VToolCutSplinePath::VToolCutSplinePath(VAbstractPattern *doc, VContainer *data, 
 void VToolCutSplinePath::setDialog()
 {
     SCASSERT(not m_dialog.isNull())
-    QSharedPointer<DialogCutSplinePath> dialogTool = m_dialog.objectCast<DialogCutSplinePath>();
+    const QPointer<DialogCutSplinePath> dialogTool = qobject_cast<DialogCutSplinePath *>(m_dialog);
     SCASSERT(not dialogTool.isNull())
-    const QSharedPointer<VPointF> point = VAbstractTool::data.GeometricObject<VPointF>(id);
+    const QSharedPointer<VPointF> point = VAbstractTool::data.GeometricObject<VPointF>(m_id);
     dialogTool->SetFormula(formula);
     dialogTool->setSplinePathId(curveCutId);
     dialogTool->SetPointName(point->name());
@@ -104,20 +97,27 @@ void VToolCutSplinePath::setDialog()
  * @param doc dom document container.
  * @param data container with variables.
  */
-VToolCutSplinePath* VToolCutSplinePath::Create(QSharedPointer<DialogTool> dialog, VMainGraphicsScene *scene,
+VToolCutSplinePath* VToolCutSplinePath::Create(const QPointer<DialogTool> &dialog, VMainGraphicsScene *scene,
                                                VAbstractPattern *doc, VContainer *data)
 {
     SCASSERT(not dialog.isNull())
-    QSharedPointer<DialogCutSplinePath> dialogTool = dialog.objectCast<DialogCutSplinePath>();
+    const QPointer<DialogCutSplinePath> dialogTool = qobject_cast<DialogCutSplinePath *>(dialog);
     SCASSERT(not dialogTool.isNull())
-    const QString pointName = dialogTool->getPointName();
-    QString formula = dialogTool->GetFormula();
-    const quint32 splinePathId = dialogTool->getSplinePathId();
-    VToolCutSplinePath* point = Create(0, pointName, formula, splinePathId, 5, 10, scene, doc, data,
-                                       Document::FullParse, Source::FromGui);
+
+    VToolCutSplinePathInitData initData;
+    initData.formula = dialogTool->GetFormula();
+    initData.splinePathId = dialogTool->getSplinePathId();
+    initData.name = dialogTool->getPointName();
+    initData.scene = scene;
+    initData.doc = doc;
+    initData.data = data;
+    initData.parse = Document::FullParse;
+    initData.typeCreation = Source::FromGui;
+
+    VToolCutSplinePath* point = Create(initData);
     if (point != nullptr)
     {
-        point->m_dialog = dialogTool;
+        point->m_dialog = dialog;
     }
     return point;
 }
@@ -125,68 +125,55 @@ VToolCutSplinePath* VToolCutSplinePath::Create(QSharedPointer<DialogTool> dialog
 //---------------------------------------------------------------------------------------------------------------------
 /**
  * @brief Create help create tool.
- * @param _id tool id, 0 if tool doesn't exist yet.
- * @param pointName point name.
- * @param formula string with formula length first splinePath.
- * @param splinePathId id of splinePath in data container.
- * @param mx label bias x axis.
- * @param my label bias y axis.
- * @param scene pointer to scene.
- * @param doc dom document container.
- * @param data container with variables.
- * @param parse parser file mode.
- * @param typeCreation way we create this tool.
+ * @param initData init data.
  */
-VToolCutSplinePath* VToolCutSplinePath::Create(const quint32 _id, const QString &pointName, QString &formula,
-                                               const quint32 &splinePathId, const qreal &mx, const qreal &my,
-                                               VMainGraphicsScene *scene, VAbstractPattern *doc,
-                                               VContainer *data, const Document &parse, const Source &typeCreation)
+VToolCutSplinePath* VToolCutSplinePath::Create(VToolCutSplinePathInitData &initData)
 {
-    const auto splPath = data->GeometricObject<VAbstractCubicBezierPath>(splinePathId);
+    const auto splPath = initData.data->GeometricObject<VAbstractCubicBezierPath>(initData.splinePathId);
     SCASSERT(splPath != nullptr)
 
-    const qreal result = CheckFormula(_id, formula, data);
+    const qreal result = CheckFormula(initData.id, initData.formula, initData.data);
 
-    quint32 id = _id;
     VSplinePath *splPath1 = nullptr;
     VSplinePath *splPath2 = nullptr;
-    VPointF *p = VToolCutSplinePath::CutSplinePath(qApp->toPixel(result), splPath, pointName, &splPath1, &splPath2);
+    VPointF *p = VToolCutSplinePath::CutSplinePath(qApp->toPixel(result), splPath, initData.name, &splPath1, &splPath2);
 
     SCASSERT(splPath1 != nullptr)
     SCASSERT(splPath2 != nullptr)
     SCASSERT(p != nullptr)
 
-    p->setMx(mx);
-    p->setMy(my);
+    p->setMx(initData.mx);
+    p->setMy(initData.my);
+    p->SetShowLabel(initData.showLabel);
 
-    if (typeCreation == Source::FromGui)
+    if (initData.typeCreation == Source::FromGui)
     {
-        id = data->AddGObject(p);
+        initData.id = initData.data->AddGObject(p);
 
-        data->AddSpline(QSharedPointer<VAbstractBezier>(splPath1), NULL_ID, id);
-        data->AddSpline(QSharedPointer<VAbstractBezier>(splPath2), NULL_ID, id);
+        initData.data->AddSpline(QSharedPointer<VAbstractBezier>(splPath1), NULL_ID, initData.id);
+        initData.data->AddSpline(QSharedPointer<VAbstractBezier>(splPath2), NULL_ID, initData.id);
     }
     else
     {
-        data->UpdateGObject(id, p);
+        initData.data->UpdateGObject(initData.id, p);
 
-        data->AddSpline(QSharedPointer<VAbstractBezier>(splPath1), NULL_ID, id);
-        data->AddSpline(QSharedPointer<VAbstractBezier>(splPath2), NULL_ID, id);
+        initData.data->AddSpline(QSharedPointer<VAbstractBezier>(splPath1), NULL_ID, initData.id);
+        initData.data->AddSpline(QSharedPointer<VAbstractBezier>(splPath2), NULL_ID, initData.id);
 
-        if (parse != Document::FullParse)
+        if (initData.parse != Document::FullParse)
         {
-            doc->UpdateToolData(id, data);
+            initData.doc->UpdateToolData(initData.id, initData.data);
         }
     }
 
-    if (parse == Document::FullParse)
+    if (initData.parse == Document::FullParse)
     {
-        VDrawTool::AddRecord(id, Tool::CutSplinePath, doc);
-        VToolCutSplinePath *point = new VToolCutSplinePath(doc, data, id, formula, splinePathId, typeCreation);
-        scene->addItem(point);
-        InitToolConnections(scene, point);
-        VAbstractPattern::AddTool(id, point);
-        doc->IncrementReferens(splPath->getIdTool());
+        VAbstractTool::AddRecord(initData.id, Tool::CutSplinePath, initData.doc);
+        VToolCutSplinePath *point = new VToolCutSplinePath(initData);
+        initData.scene->addItem(point);
+        InitToolConnections(initData.scene, point);
+        VAbstractPattern::AddTool(initData.id, point);
+        initData.doc->IncrementReferens(splPath->getIdTool());
         return point;
     }
     return nullptr;
@@ -215,11 +202,17 @@ VPointF *VToolCutSplinePath::CutSplinePath(qreal length, const QSharedPointer<VA
 
     const VSplinePoint splP1 = points.at(p1);
     const VSplinePoint splP2 = points.at(p2);
-    const VSpline spl1 = VSpline(splP1.P(), spl1p2, spl1p3, *p);
-    const VSpline spl2 = VSpline(*p, spl2p2, spl2p3, splP2.P());
+
+    VSpline spl1 = VSpline(splP1.P(), spl1p2, spl1p3, *p);
+    spl1.SetApproximationScale(splPath->GetApproximationScale());
+
+    VSpline spl2 = VSpline(*p, spl2p2, spl2p3, splP2.P());
+    spl2.SetApproximationScale(splPath->GetApproximationScale());
 
     *splPath1 = new VSplinePath();
+    (*splPath1)->SetApproximationScale(splPath->GetApproximationScale());
     *splPath2 = new VSplinePath();
+    (*splPath2)->SetApproximationScale(splPath->GetApproximationScale());
 
     for (qint32 i = 0; i < points.size(); i++)
     {
@@ -275,15 +268,11 @@ VPointF *VToolCutSplinePath::CutSplinePath(qreal length, const QSharedPointer<VA
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-/**
- * @brief contextMenuEvent handle context menu events.
- * @param event context menu event.
- */
-void VToolCutSplinePath::contextMenuEvent(QGraphicsSceneContextMenuEvent *event)
+void VToolCutSplinePath::ShowContextMenu(QGraphicsSceneContextMenuEvent *event, quint32 id)
 {
     try
     {
-        ContextMenu<DialogCutSplinePath>(this, event);
+        ContextMenu<DialogCutSplinePath>(event, id);
     }
     catch(const VExceptionToolWasDeleted &e)
     {
@@ -296,11 +285,16 @@ void VToolCutSplinePath::contextMenuEvent(QGraphicsSceneContextMenuEvent *event)
 /**
  * @brief SaveDialog save options into file after change in dialog.
  */
-void VToolCutSplinePath::SaveDialog(QDomElement &domElement)
+void VToolCutSplinePath::SaveDialog(QDomElement &domElement, QList<quint32> &oldDependencies,
+                                    QList<quint32> &newDependencies)
 {
     SCASSERT(not m_dialog.isNull())
-    QSharedPointer<DialogCutSplinePath> dialogTool = m_dialog.objectCast<DialogCutSplinePath>();
+    const QPointer<DialogCutSplinePath> dialogTool = qobject_cast<DialogCutSplinePath *>(m_dialog);
     SCASSERT(not dialogTool.isNull())
+
+    AddDependence(oldDependencies, curveCutId);
+    AddDependence(newDependencies, dialogTool->getSplinePathId());
+
     doc->SetAttribute(domElement, AttrName, dialogTool->getPointName());
     doc->SetAttribute(domElement, AttrLength, dialogTool->GetFormula());
     doc->SetAttribute(domElement, AttrSplinePath, QString().setNum(dialogTool->getSplinePathId()));
@@ -319,7 +313,7 @@ void VToolCutSplinePath::SaveOptions(QDomElement &tag, QSharedPointer<VGObject> 
 //---------------------------------------------------------------------------------------------------------------------
 void VToolCutSplinePath::ReadToolAttributes(const QDomElement &domElement)
 {
-    formula = doc->GetParametrString(domElement, AttrLength, "");
+    formula = doc->GetParametrString(domElement, AttrLength, QString());
     curveCutId = doc->GetParametrUInt(domElement, AttrSplinePath, NULL_ID_STR);
 }
 
@@ -333,6 +327,45 @@ void VToolCutSplinePath::SetVisualization()
 
         visual->setObject1Id(curveCutId);
         visual->setLength(qApp->TrVars()->FormulaToUser(formula, qApp->Settings()->GetOsSeparator()));
+
+        const QSharedPointer<VAbstractCurve> curve = VAbstractTool::data.GeometricObject<VAbstractCurve>(curveCutId);
+        visual->setLineStyle(LineStyleToPenStyle(curve->GetPenStyle()));
+
         visual->RefreshGeometry();
     }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QString VToolCutSplinePath::MakeToolTip() const
+{
+    const auto splPath = VAbstractTool::data.GeometricObject<VAbstractCubicBezierPath>(curveCutId);
+
+    const QString expression = qApp->TrVars()->FormulaToUser(formula, qApp->Settings()->GetOsSeparator());
+    const qreal length = Visualization::FindValFromUser(expression, VAbstractTool::data.DataVariables());
+
+    VSplinePath *splPath1 = nullptr;
+    VSplinePath *splPath2 = nullptr;
+    VPointF *p = VToolCutSplinePath::CutSplinePath(qApp->toPixel(length), splPath, "X", &splPath1, &splPath2);
+    delete p; // Don't need this point
+
+    const QString curveStr = tr("Curve");
+    const QString lengthStr = tr("length");
+
+    const QString toolTip = QString("<table>"
+                                    "<tr> <td><b>%6:</b> %7</td> </tr>"
+                                    "<tr> <td><b>%1:</b> %2 %3</td> </tr>"
+                                    "<tr> <td><b>%8:</b> %9</td> </tr>"
+                                    "<tr> <td><b>%4:</b> %5 %3</td> </tr>"
+                                    "</table>")
+            .arg(curveStr + QLatin1String("1 ") + lengthStr)
+            .arg(qApp->fromPixel(splPath1->GetLength()))
+            .arg(UnitsToStr(qApp->patternUnit(), true), curveStr + QLatin1String("2 ") + lengthStr)
+            .arg(qApp->fromPixel(splPath2->GetLength()))
+            .arg(curveStr + QLatin1String(" 1") + tr("label"), splPath1->name(),
+                 curveStr + QLatin1String(" 2") + tr("label"), splPath2->name());
+
+    delete splPath1;
+    delete splPath2;
+
+    return toolTip;
 }

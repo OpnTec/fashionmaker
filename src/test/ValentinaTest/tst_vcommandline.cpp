@@ -6,7 +6,7 @@
  **
  **  @brief
  **  @copyright
- **  This source code is part of the Valentine project, a pattern making
+ **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2015 Valentina project
  **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
@@ -48,7 +48,7 @@ void TST_VCommandLine::UniqueKeys()
     const QStringList options = AllKeys();
     QSet<QString> unique;
 
-    foreach(const QString &str, options)
+    for (auto &str : options)
     {
         const QString message = QString("Options '%1' is not unique!").arg(str);
         QVERIFY2(not unique.contains(str), qUtf8Printable(message));

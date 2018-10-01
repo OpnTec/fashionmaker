@@ -6,7 +6,7 @@
  **
  **  @brief
  **  @copyright
- **  This source code is part of the Valentine project, a pattern making
+ **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2016 Valentina project
  **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
@@ -43,8 +43,8 @@ class DelGroup : public VUndoCommand
 public:
     DelGroup(VAbstractPattern *doc, quint32 id, QUndoCommand *parent = nullptr);
     virtual ~DelGroup();
-    virtual void undo() Q_DECL_OVERRIDE;
-    virtual void redo() Q_DECL_OVERRIDE;
+    virtual void undo() override;
+    virtual void redo() override;
 signals:
     void UpdateGroups();
 private:

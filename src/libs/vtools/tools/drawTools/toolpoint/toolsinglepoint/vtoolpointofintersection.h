@@ -6,7 +6,7 @@
  **
  **  @brief
  **  @copyright
- **  This source code is part of the Valentine project, a pattern making
+ **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2013-2015 Valentina project
  **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
@@ -43,6 +43,18 @@
 
 template <class T> class QSharedPointer;
 
+struct VToolPointOfIntersectionInitData : VToolSinglePointInitData
+{
+    VToolPointOfIntersectionInitData()
+        : VToolSinglePointInitData(),
+          firstPointId(NULL_ID),
+          secondPointId(NULL_ID)
+    {}
+
+    quint32 firstPointId;
+    quint32 secondPointId;
+};
+
 /**
  * @brief The VToolPointOfIntersection class tool for creation point intersection two lines.
  */
@@ -50,34 +62,27 @@ class VToolPointOfIntersection : public VToolSinglePoint
 {
     Q_OBJECT
 public:
-    virtual void setDialog() Q_DECL_OVERRIDE;
-    static VToolPointOfIntersection *Create(QSharedPointer<DialogTool> dialog, VMainGraphicsScene  *scene,
+    virtual void setDialog() override;
+    static VToolPointOfIntersection *Create(const QPointer<DialogTool> &dialog, VMainGraphicsScene  *scene,
                                             VAbstractPattern *doc, VContainer *data);
-    static VToolPointOfIntersection *Create(const quint32 _id, const QString &pointName, const quint32 &firstPointId,
-                                            const quint32 &secondPointId, const qreal &mx, const qreal &my,
-                                            VMainGraphicsScene *scene, VAbstractPattern *doc, VContainer *data,
-                                            const Document &parse, const Source &typeCreation);
+    static VToolPointOfIntersection *Create(VToolPointOfIntersectionInitData initData);
     static const QString ToolType;
-    virtual int  type() const Q_DECL_OVERRIDE {return Type;}
+    virtual int  type() const override {return Type;}
     enum { Type = UserType + static_cast<int>(Tool::PointOfIntersection) };
 
     QString FirstPointName() const;
     QString SecondPointName() const;
 
-    quint32 GetFirstPointId() const;
-    void    SetFirstPointId(const quint32 &value);
-
-    quint32 GetSecondPointId() const;
-    void    SetSecondPointId(const quint32 &value);
-
-    virtual void ShowVisualization(bool show) Q_DECL_OVERRIDE;
+    virtual void ShowVisualization(bool show) override;
 protected:
-    virtual void RemoveReferens() Q_DECL_OVERRIDE;
-    virtual void contextMenuEvent ( QGraphicsSceneContextMenuEvent * event ) Q_DECL_OVERRIDE;
-    virtual void SaveDialog(QDomElement &domElement) Q_DECL_OVERRIDE;
-    virtual void SaveOptions(QDomElement &tag, QSharedPointer<VGObject> &obj) Q_DECL_OVERRIDE;
-    virtual void ReadToolAttributes(const QDomElement &domElement) Q_DECL_OVERRIDE;
-    virtual void SetVisualization() Q_DECL_OVERRIDE;
+    virtual void RemoveReferens() override;
+    virtual void SaveDialog(QDomElement &domElement, QList<quint32> &oldDependencies,
+                            QList<quint32> &newDependencies) override;
+    virtual void SaveOptions(QDomElement &tag, QSharedPointer<VGObject> &obj) override;
+    virtual void ReadToolAttributes(const QDomElement &domElement) override;
+    virtual void SetVisualization() override;
+private slots:
+    virtual void ShowContextMenu(QGraphicsSceneContextMenuEvent *event, quint32 id=NULL_ID) override;
 private:
     Q_DISABLE_COPY(VToolPointOfIntersection)
 
@@ -87,9 +92,7 @@ private:
     /** @brief secondPointId id second line point. */
     quint32       secondPointId;
 
-    VToolPointOfIntersection(VAbstractPattern *doc, VContainer *data, const quint32 &id, const quint32 &firstPointId,
-                             const quint32 &secondPointId, const Source &typeCreation,
-                             QGraphicsItem * parent = nullptr);
+    VToolPointOfIntersection(const VToolPointOfIntersectionInitData &initData, QGraphicsItem *parent = nullptr);
 };
 
 #endif // VTOOLPOINTOFINTERSECTION_H

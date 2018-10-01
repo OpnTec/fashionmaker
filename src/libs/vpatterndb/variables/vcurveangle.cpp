@@ -6,7 +6,7 @@
  **
  **  @brief
  **  @copyright
- **  This source code is part of the Valentine project, a pattern making
+ **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2015 Valentina project
  **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
@@ -35,11 +35,19 @@
 #include "../ifc/ifcdef.h"
 #include "../vgeometry/vabstractcurve.h"
 #include "../vgeometry/vspline.h"
+#include "../vgeometry/vellipticalarc.h"
 #include "vcurvevariable.h"
 
 //---------------------------------------------------------------------------------------------------------------------
 VCurveAngle::VCurveAngle()
     :VCurveVariable()
+{
+    SetType(VarType::CurveAngle);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+VCurveAngle::VCurveAngle(const quint32 &id, const quint32 &parentId)
+    :VCurveVariable(id, parentId)
 {
     SetType(VarType::CurveAngle);
 }
@@ -81,21 +89,18 @@ VCurveAngle::VCurveAngle(const quint32 &id, const quint32 &parentId, const QStri
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-VCurveAngle::VCurveAngle(const VCurveAngle &var)
-    :VCurveVariable(var)
-{}
-
-//---------------------------------------------------------------------------------------------------------------------
-VCurveAngle &VCurveAngle::operator=(const VCurveAngle &var)
+VEllipticalArcRotation::VEllipticalArcRotation()
+    : VCurveAngle()
 {
-    if ( &var == this )
-    {
-        return *this;
-    }
-    VCurveVariable::operator=(var);
-    return *this;
+    SetType(VarType::CurveAngle);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-VCurveAngle::~VCurveAngle()
-{}
+VEllipticalArcRotation::VEllipticalArcRotation(const quint32 &id, const quint32 &parentId, const VEllipticalArc *elArc)
+    : VCurveAngle(id, parentId)
+{
+    SetType(VarType::CurveAngle);
+    SCASSERT(elArc != nullptr)
+    SetValue(elArc->GetRotationAngle());
+    SetName(rotation_V + elArc->name());
+}

@@ -21,7 +21,6 @@
 #include "vpropertyset.h"
 
 #include <stddef.h>
-#include <QForeachContainer>
 #include <QList>
 #include <QMap>
 
@@ -51,7 +50,7 @@ bool VPE::VPropertySet::addProperty(VProperty *property, const QString &id, cons
         return false;
     }
 
-    VProperty* tmpParent = parentid.isEmpty() ? NULL : getProperty(parentid);
+    VProperty* tmpParent = parentid.isEmpty() ? nullptr : getProperty(parentid);
     return addProperty(property, id, tmpParent);
 }
 
@@ -97,12 +96,12 @@ bool VPE::VPropertySet::hasProperty(VProperty *property) const
         return false;
     }
 
-    return hasProperty(property, NULL);
+    return hasProperty(property, nullptr);
 }
 
 VPE::VProperty *VPE::VPropertySet::getProperty(const QString &id) const
 {
-    return d_ptr->Properties.value(id, NULL);
+    return d_ptr->Properties.value(id, nullptr);
 }
 
 VPE::VProperty *VPE::VPropertySet::takeProperty(const QString &id)
@@ -126,7 +125,7 @@ void VPE::VPropertySet::removeProperty(VProperty* prop, bool delete_property)
     removePropertyFromSet(prop);
 
     // Remove from parent and optionally delete
-    prop->setParent(NULL);
+    prop->setParent(nullptr);
 
     if (delete_property)
     {
@@ -154,10 +153,10 @@ void VPE::VPropertySet::clear(bool delete_properties)
 
 QString VPE::VPropertySet::getPropertyID(const VProperty *prop, bool look_for_parent_id) const
 {
-    QString tmpResult;
+//    QString tmpResult;
     const VProperty* tmpCurrentProp = prop;
 
-    while (tmpCurrentProp && (look_for_parent_id || prop == tmpCurrentProp) && tmpResult.isEmpty())
+    while (tmpCurrentProp && (look_for_parent_id || prop == tmpCurrentProp) /*&& tmpResult.isEmpty()*/)
     {
 
         // todo: The following code doesn't work, because .key() doesn't accept a const VProperty* pointer ...
@@ -176,7 +175,8 @@ QString VPE::VPropertySet::getPropertyID(const VProperty *prop, bool look_for_pa
         tmpCurrentProp = tmpCurrentProp->getParent();
     }
 
-    return tmpResult;
+//    return tmpResult;
+    return QString();
 }
 
 // cppcheck-suppress unusedFunction
@@ -192,7 +192,7 @@ const QList<VPE::VProperty *> &VPE::VPropertySet::getRootProperties() const
 
 VPE::VProperty *VPE::VPropertySet::getRootProperty(int row) const
 {
-    return d_ptr->RootProperties.value(row, NULL);
+    return d_ptr->RootProperties.value(row, nullptr);
 }
 
 int VPE::VPropertySet::getRootPropertyCount() const
@@ -204,9 +204,11 @@ VPE::VPropertySet* VPE::VPropertySet::clone() const
 {
     VPropertySet* tmpResult = new VPropertySet();
 
-    foreach(VProperty* tmpProperty, d_ptr->RootProperties)
-        cloneProperty(tmpProperty, NULL, tmpResult);
-
+    const QList<VProperty*> rootProperties = d_ptr->RootProperties;
+    for (auto tmpProperty : rootProperties)
+    {
+        cloneProperty(tmpProperty, nullptr, tmpResult);
+    }
 
     return tmpResult;
 }
@@ -218,14 +220,10 @@ bool VPE::VPropertySet::hasProperty(VProperty *property, VProperty *parent) cons
         return false;
     }
 
-    const QList<VProperty*>& tmpChildrenList = (parent != NULL ? parent->getChildren() : d_ptr->RootProperties);
-    foreach(VProperty* tmpProp, tmpChildrenList)
+    const QList<VProperty*>& tmpChildrenList = (parent != nullptr ? parent->getChildren() : d_ptr->RootProperties);
+    for(auto tmpProp : tmpChildrenList)
     {
-        if (!tmpProp)
-        {
-            continue;
-        }
-        else if (tmpProp == property || hasProperty(property, tmpProp))
+        if (tmpProp && (tmpProp == property || hasProperty(property, tmpProp)))
         {
             return true;
         }
@@ -257,13 +255,17 @@ void VPE::VPropertySet::cloneProperty(VProperty* property_to_clone, VProperty *p
 void VPE::VPropertySet::removePropertyFromSet(VProperty *prop)
 {
     // Remove all the children
-    foreach(VProperty* tmpChild, prop->getChildren())
+    const QList<VPE::VProperty*>& children = prop->getChildren();
+    for (auto tmpChild : children)
+    {
         removeProperty(tmpChild);
+    }
 
-
-    QList<QString> tmpKeys = d_ptr->Properties.keys(prop);
-    foreach(const QString& tmpID, tmpKeys)
+    const QList<QString> tmpKeys = d_ptr->Properties.keys(prop);
+    for (auto &tmpID : tmpKeys)
+    {
         d_ptr->Properties.remove(tmpID);
+    }
 
     // Remove from list
     d_ptr->RootProperties.removeAll(prop);

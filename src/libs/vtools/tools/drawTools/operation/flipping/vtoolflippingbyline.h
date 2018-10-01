@@ -6,7 +6,7 @@
  **
  **  @brief
  **  @copyright
- **  This source code is part of the Valentine project, a pattern making
+ **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2016 Valentina project
  **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
@@ -33,45 +33,54 @@
 
 #include "vabstractflipping.h"
 
+struct VToolFlippingByLineInitData : VAbstractOperationInitData
+{
+    VToolFlippingByLineInitData()
+        : VAbstractOperationInitData(),
+          firstLinePointId(NULL_ID),
+          secondLinePointId(NULL_ID)
+    {}
+
+    quint32 firstLinePointId;
+    quint32 secondLinePointId;
+};
+
+
 class VToolFlippingByLine : public VAbstractFlipping
 {
     Q_OBJECT
 public:
     virtual ~VToolFlippingByLine() Q_DECL_EQ_DEFAULT;
-    virtual void setDialog() Q_DECL_OVERRIDE;
-    static VToolFlippingByLine* Create(QSharedPointer<DialogTool> dialog, VMainGraphicsScene *scene,
+    virtual void setDialog() override;
+    static VToolFlippingByLine* Create(const QPointer<DialogTool> &dialog, VMainGraphicsScene *scene,
                                        VAbstractPattern *doc, VContainer *data);
-    static VToolFlippingByLine* Create(const quint32 _id, quint32 firstLinePointId, quint32 secondLinePointId,
-                                       const QString &suffix, const QVector<quint32> &source,
-                                       const QVector<DestinationItem> &destination, VMainGraphicsScene *scene,
-                                       VAbstractPattern *doc, VContainer *data, const Document &parse,
-                                       const Source &typeCreation);
+    static VToolFlippingByLine* Create(VToolFlippingByLineInitData initData);
 
     static const QString ToolType;
 
-    virtual int type() const Q_DECL_OVERRIDE {return Type;}
+    virtual int type() const override {return Type;}
     enum { Type = UserType + static_cast<int>(Tool::FlippingByLine)};
 
     QString FirstLinePointName() const;
     QString SecondLinePointName() const;
 
-    virtual void ShowVisualization(bool show) Q_DECL_OVERRIDE;
+    virtual void ShowVisualization(bool show) override;
+protected slots:
+    virtual void ShowContextMenu(QGraphicsSceneContextMenuEvent *event, quint32 id=NULL_ID) override;
 protected:
-    virtual void SetVisualization() Q_DECL_OVERRIDE;
-    virtual void SaveDialog(QDomElement &domElement) Q_DECL_OVERRIDE;
-    virtual void ReadToolAttributes(const QDomElement &domElement) Q_DECL_OVERRIDE;
-    virtual void SaveOptions(QDomElement &tag, QSharedPointer<VGObject> &obj) Q_DECL_OVERRIDE;
-    virtual void contextMenuEvent ( QGraphicsSceneContextMenuEvent * event ) Q_DECL_OVERRIDE;
+    virtual void    SetVisualization() override;
+    virtual void    SaveDialog(QDomElement &domElement, QList<quint32> &oldDependencies,
+                               QList<quint32> &newDependencies) override;
+    virtual void    ReadToolAttributes(const QDomElement &domElement) override;
+    virtual void    SaveOptions(QDomElement &tag, QSharedPointer<VGObject> &obj) override;
+    virtual QString MakeToolTip() const override;
 private:
     Q_DISABLE_COPY(VToolFlippingByLine)
 
     quint32 m_firstLinePointId;
     quint32 m_secondLinePointId;
 
-    VToolFlippingByLine(VAbstractPattern *doc, VContainer *data, quint32 id, quint32 firstLinePointId,
-                        quint32 secondLinePointId, const QString &suffix, const QVector<quint32> &source,
-                        const QVector<DestinationItem> &destination, const Source &typeCreation,
-                        QGraphicsItem *parent = nullptr);
+    VToolFlippingByLine(const VToolFlippingByLineInitData &initData, QGraphicsItem *parent = nullptr);
 };
 
 #endif // VTOOLFLIPPINGBYLINE_H

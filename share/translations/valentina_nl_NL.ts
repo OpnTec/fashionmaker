@@ -5,7 +5,7 @@
     <name>AddDet</name>
     <message>
         <source>add detail</source>
-        <translation type="vanished">voeg detail toe</translation>
+        <translation type="vanished">voeg werkstuk toe</translation>
     </message>
 </context>
 <context>
@@ -16,17 +16,24 @@
     </message>
 </context>
 <context>
+    <name>AddItemToGroup</name>
+    <message>
+        <source>Add item to group</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>AddPatternPiece</name>
     <message>
         <source>add pattern piece %1</source>
-        <translation>voeg patroonderdeel %1 toe</translation>
+        <translation>voeg patroondeel %1 toe</translation>
     </message>
 </context>
 <context>
     <name>AddPiece</name>
     <message>
         <source>add detail</source>
-        <translation>voeg detail toe</translation>
+        <translation>voeg werkstuk toe</translation>
     </message>
 </context>
 <context>
@@ -55,7 +62,7 @@
     </message>
     <message>
         <source>Secure connection</source>
-        <translation type="vanished">Maak connectie</translation>
+        <translation type="vanished">Beveiligde verbinding</translation>
     </message>
     <message>
         <source>Proxy settings</source>
@@ -79,11 +86,11 @@
     </message>
     <message>
         <source>Proxy pass</source>
-        <translation type="vanished">Proxy pass</translation>
+        <translation type="vanished">Proxy wachtwoord</translation>
     </message>
     <message>
         <source>User settings</source>
-        <translation type="vanished">Gebruikers instellingen</translation>
+        <translation type="vanished">Instellingen</translation>
     </message>
     <message>
         <source>User Name</source>
@@ -91,11 +98,11 @@
     </message>
     <message>
         <source>Save password</source>
-        <translation type="vanished">Opslaan paswoord</translation>
+        <translation type="vanished">Sla wachtwoord op</translation>
     </message>
     <message>
         <source>Password</source>
-        <translation type="vanished">Paswoord</translation>
+        <translation type="vanished">Wachtwoord</translation>
     </message>
     <message>
         <source>Server name/IP:</source>
@@ -115,7 +122,7 @@
     </message>
     <message>
         <source>Proxy pass:</source>
-        <translation type="vanished">Proxy pas:</translation>
+        <translation type="vanished">Proxy wachtwoord:</translation>
     </message>
     <message>
         <source>User Name:</source>
@@ -123,18 +130,18 @@
     </message>
     <message>
         <source>Password:</source>
-        <translation type="vanished">Paswoord:</translation>
+        <translation type="vanished">Wachtwoord:</translation>
     </message>
 </context>
 <context>
     <name>ConfigDialog</name>
     <message>
         <source>Apply</source>
-        <translation type="vanished">Pas toe</translation>
+        <translation type="vanished">Toepassen</translation>
     </message>
     <message>
         <source>&amp;Cancel</source>
-        <translation type="vanished">&amp;Stoppen</translation>
+        <translation type="vanished">&amp;Annuleren</translation>
     </message>
     <message>
         <source>&amp;Ok</source>
@@ -142,11 +149,11 @@
     </message>
     <message>
         <source>Config Dialog</source>
-        <translation type="vanished">Configureer Dialoog</translation>
+        <translation type="vanished">Instellingen Dialoog</translation>
     </message>
     <message>
         <source>Configuration</source>
-        <translation type="vanished">Configuratie</translation>
+        <translation type="vanished">Instellingen</translation>
     </message>
     <message>
         <source>Pattern</source>
@@ -165,11 +172,11 @@
     <name>ConfigurationPage</name>
     <message>
         <source>Setup user interface language updated and will be used the next time start</source>
-        <translation type="vanished">De taal van de setup gebruikers interface is opgewaardeerd en zal gebruikt worden bij de volgende start</translation>
+        <translation type="vanished">De taal van de gebruikers interface van de installatie is bijgewerkt en zal gebruikt worden bij de volgende keer dat je het programma opstart.</translation>
     </message>
     <message>
         <source>Default unit updated and will be used the next pattern creation</source>
-        <translation type="vanished">De standaardwaarde van de eenheid is opgewaardeerd en zal worden gebruikt voor de volgende patrooncreatie</translation>
+        <translation type="vanished">De standaardwaarde van de eenheid is bijgewerkt en zal worden gebruikt voor de volgende keer dat je een patroon aanmaakt.</translation>
     </message>
     <message>
         <source>Save</source>
@@ -177,7 +184,7 @@
     </message>
     <message>
         <source>Auto-save modified pattern</source>
-        <translation type="vanished">Automatisch opslaan van veranderd patroon</translation>
+        <translation type="vanished">Automatisch opslaan na aanpassing patroon</translation>
     </message>
     <message>
         <source>min</source>
@@ -197,15 +204,15 @@
     </message>
     <message>
         <source>Decimal separator parts</source>
-        <translation type="vanished">Decimale gescheiden delen</translation>
+        <translation type="vanished">Decimaal scheidingsteken</translation>
     </message>
     <message>
         <source>With OS options (%1)</source>
-        <translation type="vanished">Met OS opties (%1)</translation>
+        <translation type="vanished">Volgens besturingssysteem (%1)</translation>
     </message>
     <message>
         <source>Default unit</source>
-        <translation type="vanished">Standaardwaarde eenheid</translation>
+        <translation type="vanished">Standaard eenheid</translation>
     </message>
     <message>
         <source>Centimeters</source>
@@ -225,19 +232,19 @@
     </message>
     <message>
         <source>Send crash reports</source>
-        <translation type="vanished">Verzend crash rapport</translation>
+        <translation type="vanished">Verzend crashrapport</translation>
     </message>
     <message>
         <source>Send crash reports (recommended)</source>
-        <translation type="vanished">Verzend crash rapport (aanbevolen)</translation>
+        <translation type="vanished">Verzend crashrapport (aanbevolen)</translation>
     </message>
     <message>
         <source>After each crash Valentina collect information that may help us fix a problem. We do not collect any personal information. Find more about what &lt;a href=&quot;https://bitbucket.org/dismine/valentina/wiki/manual/Crash_reports&quot;&gt;kind of information&lt;/a&gt; we collect.</source>
-        <translation type="vanished">Na elke crash zal Valentina informatie verzamelen dat ons kan helpen het probleem op te lossen. Wij verzamelen geen persoonlijke informatie. Hier vind u wat wij aan informatie verzamelen :&lt;ahref=&quot;https://bitbucket.org/dismine/valentina/wiki/manual/Crash_reports&quot;&gt;&quot;.</translation>
+        <translation type="vanished">Na elke crash zal Valentina informatie verzamelen die ons kan helpen het probleem op te lossen. Wij verzamelen geen persoonlijke informatie. Hier vind u wat wij aan &lt;a href=&quot;https://bitbucket.org/dismine/valentina/wiki/manual/Crash_reports&quot;&gt;informatie&lt;/a&gt; verzamelen :</translation>
     </message>
     <message>
         <source>Pattern Editing</source>
-        <translation type="vanished">Patroon Verandering</translation>
+        <translation type="vanished">Patroon Bewerking</translation>
     </message>
     <message>
         <source>Confirm item deletion</source>
@@ -339,19 +346,19 @@
     <name>Detail</name>
     <message>
         <source>Fabric</source>
-        <translation>Stof</translation>
+        <translation type="vanished">Stof</translation>
     </message>
     <message>
         <source>Lining</source>
-        <translation>Voering</translation>
+        <translation type="vanished">Voering</translation>
     </message>
     <message>
         <source>Interfacing</source>
-        <translation>Vlieseline</translation>
+        <translation type="vanished">Vlieseline</translation>
     </message>
     <message>
         <source>Interlining</source>
-        <translation>Tussenvoering</translation>
+        <translation type="vanished">Tussenvoering</translation>
     </message>
 </context>
 <context>
@@ -599,7 +606,7 @@
     </message>
     <message>
         <source>Angles equal</source>
-        <translation>Gelijke zijden</translation>
+        <translation type="vanished">Gelijke zijden</translation>
     </message>
     <message>
         <source>Color</source>
@@ -656,6 +663,18 @@
     <message>
         <source>Color:</source>
         <translation>Kleur:</translation>
+    </message>
+    <message>
+        <source>Pen style:</source>
+        <translation>Pen stijl:</translation>
+    </message>
+    <message>
+        <source>Approximation scale:</source>
+        <translation>Schaal bij benadering:</translation>
+    </message>
+    <message>
+        <source>Set approximation scale for this curve, 0 - use global value</source>
+        <translation>Bepaal de schaal bij benadering voor deze kromming, 0 - gebruik algemene waarde</translation>
     </message>
 </context>
 <context>
@@ -759,6 +778,18 @@
     <message>
         <source>Color:</source>
         <translation>Kleur:</translation>
+    </message>
+    <message>
+        <source>Pen style:</source>
+        <translation>Pen stijl:</translation>
+    </message>
+    <message>
+        <source>Approximation scale:</source>
+        <translation>Schaal bij benadering:</translation>
+    </message>
+    <message>
+        <source>Set approximation scale for this curve, 0 - use global value</source>
+        <translation>Bepaal de schaal bij benadering voor deze kromming, 0 - gebruik algemene waarde</translation>
     </message>
 </context>
 <context>
@@ -930,6 +961,18 @@
         <source>Tool cubic bezier</source>
         <translation>Kubisachtige bezier gereedschap</translation>
     </message>
+    <message>
+        <source>Pen Style:</source>
+        <translation>Pen stijl:</translation>
+    </message>
+    <message>
+        <source>Approximation Scale:</source>
+        <translation>Schaal bij benadering:</translation>
+    </message>
+    <message>
+        <source>Set approximation scale for this curve, 0 - use global value</source>
+        <translation>Bepaal de schaal bij benadering voor deze kromming, 0 - gebruik algemene waarde</translation>
+    </message>
 </context>
 <context>
     <name>DialogCubicBezierPath</name>
@@ -960,6 +1003,18 @@
     <message>
         <source>Tool cubic bezier path</source>
         <translation>Kubisachtige bezier gereedschaps pad</translation>
+    </message>
+    <message>
+        <source>Pen style:</source>
+        <translation>Pen stijl:</translation>
+    </message>
+    <message>
+        <source>Approximation scale:</source>
+        <translation>Schaal bij benadering:</translation>
+    </message>
+    <message>
+        <source>Set approximation scale for this curve, 0 - use global value</source>
+        <translation>Bepaal de schaal bij benadering voor deze kromming, 0 - gebruik algemene waarde</translation>
     </message>
 </context>
 <context>
@@ -1287,6 +1342,25 @@
     </message>
 </context>
 <context>
+    <name>DialogDateTimeFormats</name>
+    <message>
+        <source>Label date time editor</source>
+        <translation>Label datum tijd bewerker</translation>
+    </message>
+    <message>
+        <source>Format:</source>
+        <translation>Indeling:</translation>
+    </message>
+    <message>
+        <source>Insert a format</source>
+        <translation>Voeg formaat toe</translation>
+    </message>
+    <message>
+        <source>&lt;empty&gt;</source>
+        <translation>&lt;empty&gt;</translation>
+    </message>
+</context>
+<context>
     <name>DialogDetail</name>
     <message>
         <source>Detail</source>
@@ -1490,7 +1564,7 @@
     </message>
     <message>
         <source>Forbid piece be mirrored in a layout.</source>
-        <translation type="vanished">Het deel spiegelen is in de opmaak modus niet toegestaan</translation>
+        <translation type="vanished">Het deel spiegelen is in de opmaak modus niet toegestaan.</translation>
     </message>
     <message>
         <source>Forbid flipping</source>
@@ -1562,6 +1636,274 @@
     </message>
 </context>
 <context>
+    <name>DialogDuplicateDetail</name>
+    <message>
+        <source>Dialog duplicate detail</source>
+        <translation>Dialoog dupliceer detail</translation>
+    </message>
+    <message>
+        <source>Click to place duplicate</source>
+        <translation>Klik om gedupliceerde te plaatsen</translation>
+    </message>
+</context>
+<context>
+    <name>DialogEditLabel</name>
+    <message>
+        <source>Edit label template</source>
+        <translation>Verander label sjabloon</translation>
+    </message>
+    <message>
+        <source>Clear current and begin new label</source>
+        <translation>Maak recente schoon en begin een nieuw label</translation>
+    </message>
+    <message>
+        <source>Import from label template</source>
+        <translation>Invoeren vanaf label sjabloon</translation>
+    </message>
+    <message>
+        <source>Export label as template</source>
+        <translation>Exporteer label als een sjabloon</translation>
+    </message>
+    <message>
+        <source>Edit</source>
+        <translation>Verander</translation>
+    </message>
+    <message>
+        <source>Bold</source>
+        <comment>Font formating</comment>
+        <translation>Vet</translation>
+    </message>
+    <message>
+        <source>Italic</source>
+        <comment>Font formating</comment>
+        <translation>Schuin</translation>
+    </message>
+    <message>
+        <source>Aligns with the left edge</source>
+        <translation>Uitgelijnd op de linkerrand</translation>
+    </message>
+    <message>
+        <source>Centers horizontally in the available space</source>
+        <translation>Horizontaal gecentreerd in de beschikbare ruimte</translation>
+    </message>
+    <message>
+        <source>Aligns with the right edge</source>
+        <translation>Uitgelijnd op de rechterrand</translation>
+    </message>
+    <message>
+        <source>Additional font size. Use to make a line bigger.</source>
+        <translation>Extra lettertype grootte. Gebruik om een lijn groter te maken.</translation>
+    </message>
+    <message>
+        <source>Text:</source>
+        <translation>Tekst:</translation>
+    </message>
+    <message>
+        <source>Line of text</source>
+        <translation>Tekstlijn</translation>
+    </message>
+    <message>
+        <source>Insert placeholders</source>
+        <translation>Voeg tijdelijke aanduidingen toe</translation>
+    </message>
+    <message>
+        <source>Preview</source>
+        <translation>Voorbeeld</translation>
+    </message>
+    <message>
+        <source>&lt;empty&gt;</source>
+        <translation>&lt;empty&gt;</translation>
+    </message>
+    <message>
+        <source>Create new template</source>
+        <translation>Maak een nieuw sjabloon</translation>
+    </message>
+    <message>
+        <source>Creating new template will overwrite the current, do you want to continue?</source>
+        <translation>Door een nieuw sjabloon te maken zal je de recente overschrijven, wil je doorgaan?</translation>
+    </message>
+    <message>
+        <source>Label template</source>
+        <translation>Label sjabloon</translation>
+    </message>
+    <message>
+        <source>Export label template</source>
+        <translation>Exporteer label sjabloon</translation>
+    </message>
+    <message>
+        <source>template</source>
+        <translation>sjabloon</translation>
+    </message>
+    <message>
+        <source>Could not save file</source>
+        <translation>Kon bestand niet opslaan</translation>
+    </message>
+    <message>
+        <source>Import template</source>
+        <translation>Voer sjabloon in</translation>
+    </message>
+    <message>
+        <source>Import template will overwrite the current, do you want to continue?</source>
+        <translation>Door een sjabloon te in te voeren zal je de recente overschrijven, wil je doorgaan?</translation>
+    </message>
+    <message>
+        <source>File error.</source>
+        <translation>Bestandsfout.</translation>
+    </message>
+    <message>
+        <source>Date</source>
+        <translation>Datum</translation>
+    </message>
+    <message>
+        <source>Time</source>
+        <translation>Tijd</translation>
+    </message>
+    <message>
+        <source>Pattern name</source>
+        <translation>Patroon naam</translation>
+    </message>
+    <message>
+        <source>Pattern number</source>
+        <translation>Patroon nummer</translation>
+    </message>
+    <message>
+        <source>Company name or designer name</source>
+        <translation>Bedrijfsnaam of ontwerpersnaam</translation>
+    </message>
+    <message>
+        <source>Customer name</source>
+        <translation>Klant naam</translation>
+    </message>
+    <message>
+        <source>Pattern extension</source>
+        <translation>Patroon uitbreiding</translation>
+    </message>
+    <message>
+        <source>Pattern file name</source>
+        <translation>Patroon bestandsnaam</translation>
+    </message>
+    <message>
+        <source>Measurments file name</source>
+        <translation>Maten bestandsnaam</translation>
+    </message>
+    <message>
+        <source>Size</source>
+        <translation>Maat</translation>
+    </message>
+    <message>
+        <source>Height</source>
+        <translation>Hoogte</translation>
+    </message>
+    <message>
+        <source>Measurments extension</source>
+        <translation>Maten uitbreiding</translation>
+    </message>
+    <message>
+        <source>Piece letter</source>
+        <translation>Onderdeel letter</translation>
+    </message>
+    <message>
+        <source>Piece annotation</source>
+        <translation>Onderdeel aantekening</translation>
+    </message>
+    <message>
+        <source>Piece orientation</source>
+        <translation>Onderdeel orientatie</translation>
+    </message>
+    <message>
+        <source>Piece rotation</source>
+        <translation>Onderdeel rotatie</translation>
+    </message>
+    <message>
+        <source>Piece tilt</source>
+        <translation>Onderdeel tillen</translation>
+    </message>
+    <message>
+        <source>Piece fold position</source>
+        <translation>Onderdeel vouw postie</translation>
+    </message>
+    <message>
+        <source>Piece name</source>
+        <translation>Onderdeel naam</translation>
+    </message>
+    <message>
+        <source>Quantity</source>
+        <translation>Kwantiteit</translation>
+    </message>
+    <message>
+        <source>Material: Fabric</source>
+        <translation>Materiaal: Stof</translation>
+    </message>
+    <message>
+        <source>Fabric</source>
+        <translation>Stof</translation>
+    </message>
+    <message>
+        <source>Material: Lining</source>
+        <translation>Materiaal: Voering</translation>
+    </message>
+    <message>
+        <source>Lining</source>
+        <translation>Voering</translation>
+    </message>
+    <message>
+        <source>Material: Interfacing</source>
+        <translation>Materiaal: Vlieseline</translation>
+    </message>
+    <message>
+        <source>Interfacing</source>
+        <translation>Vlieseline</translation>
+    </message>
+    <message>
+        <source>Material: Interlining</source>
+        <translation>Materiaal: Tussenvoering</translation>
+    </message>
+    <message>
+        <source>Interlining</source>
+        <translation>Tussenvoering</translation>
+    </message>
+    <message>
+        <source>Word: Cut</source>
+        <translation>Woord: knippen</translation>
+    </message>
+    <message>
+        <source>Cut</source>
+        <translation>Knippen</translation>
+    </message>
+    <message>
+        <source>Word: on fold</source>
+        <translation>Woord:  op vouw</translation>
+    </message>
+    <message>
+        <source>on fold</source>
+        <translation>op vouw</translation>
+    </message>
+    <message>
+        <source>User material</source>
+        <translation>Gebruikers materiaal</translation>
+    </message>
+    <message>
+        <source>Insert…</source>
+        <translation>Voeg in…</translation>
+    </message>
+    <message>
+        <source>Move on top</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Move up</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Move down</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Move on bottom</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>DialogEditWrongFormula</name>
     <message>
         <source>Edit formula</source>
@@ -1581,7 +1923,7 @@
     </message>
     <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Toont volledige berekening in berichten box &lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+        <translation type="vanished">&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Toont volledige berekening in berichten box &lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <source>Input data</source>
@@ -1703,6 +2045,10 @@
         <source>Filter list by keyword</source>
         <translation>Filter de lijst met een sleutelwoord</translation>
     </message>
+    <message>
+        <source>Preview calculations</source>
+        <translation>Voorbeeld berekeningen</translation>
+    </message>
 </context>
 <context>
     <name>DialogEllipticalArc</name>
@@ -1767,10 +2113,6 @@
         <translation>Straal mag niet negatief zijn</translation>
     </message>
     <message>
-        <source>Angles equal</source>
-        <translation>Gelijke hoeken</translation>
-    </message>
-    <message>
         <source>Edit radius1</source>
         <translation>Bewerk straal1</translation>
     </message>
@@ -1793,6 +2135,10 @@
     <message>
         <source>Elliptical arc</source>
         <translation>Ellipsvormige boog</translation>
+    </message>
+    <message>
+        <source>Pen style:</source>
+        <translation>Pen stijl:</translation>
     </message>
 </context>
 <context>
@@ -1902,11 +2248,11 @@
     <name>DialogExportToCSV</name>
     <message>
         <source>Export options</source>
-        <translation>Export opties</translation>
+        <translation type="vanished">Export opties</translation>
     </message>
     <message>
         <source>Export</source>
-        <translation>Export</translation>
+        <translation type="vanished">Export</translation>
     </message>
     <message>
         <source>With header</source>
@@ -1935,6 +2281,118 @@
     <message>
         <source>Space</source>
         <translation>Spatie</translation>
+    </message>
+    <message>
+        <source>Options</source>
+        <translation>Opties</translation>
+    </message>
+    <message>
+        <source>Preview</source>
+        <translation>Voorbeeld</translation>
+    </message>
+    <message>
+        <source>Global</source>
+        <comment>Options</comment>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>DialogFinalMeasurements</name>
+    <message>
+        <source>Final measurements</source>
+        <translation>Uiteindelijke maten</translation>
+    </message>
+    <message>
+        <source>Find:</source>
+        <translation>Vind:</translation>
+    </message>
+    <message>
+        <source>Search</source>
+        <translation>Zoek</translation>
+    </message>
+    <message>
+        <source>Name</source>
+        <translation>Naam</translation>
+    </message>
+    <message>
+        <source>The calculated value</source>
+        <translation>De berekende waarde</translation>
+    </message>
+    <message>
+        <source>Formula</source>
+        <translation>Formule</translation>
+    </message>
+    <message>
+        <source>Details</source>
+        <translation>Details</translation>
+    </message>
+    <message>
+        <source>Name:</source>
+        <translation>Naam:</translation>
+    </message>
+    <message>
+        <source>Calculated value:</source>
+        <translation>Berekende waarde:</translation>
+    </message>
+    <message>
+        <source>Formula:</source>
+        <translation>`Formule:</translation>
+    </message>
+    <message>
+        <source>Calculation</source>
+        <translation>Berekening</translation>
+    </message>
+    <message>
+        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt; Toon volledige berekening in berichten box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+    </message>
+    <message>
+        <source>Formula wizard</source>
+        <translation>Formule wizard</translation>
+    </message>
+    <message>
+        <source>Description:</source>
+        <translation>Beschrijving:</translation>
+    </message>
+    <message>
+        <source>Move measurement up</source>
+        <translation>Verplaats maten omhoog</translation>
+    </message>
+    <message>
+        <source>Move measurement down</source>
+        <translation>Verplaats maten omlaag</translation>
+    </message>
+    <message>
+        <source>measurement</source>
+        <translation>Maten</translation>
+    </message>
+    <message>
+        <source>Error</source>
+        <translation>Error</translation>
+    </message>
+    <message>
+        <source>Empty field.</source>
+        <translation>Leeg veld.</translation>
+    </message>
+    <message>
+        <source>Edit measurement</source>
+        <translation>Verander maten</translation>
+    </message>
+    <message>
+        <source>Empty field</source>
+        <translation>Leeg veld</translation>
+    </message>
+    <message>
+        <source>Invalid result. Value is infinite or NaN. Please, check your calculations.</source>
+        <translation>Ongeldig resultaat. Waarde is oneindig of NaN. Controleer uw berekeningen.</translation>
+    </message>
+    <message>
+        <source>Value</source>
+        <translation>Waarde</translation>
+    </message>
+    <message>
+        <source>Parser error: %1</source>
+        <translation>Fout bij uitpakken: %1</translation>
     </message>
 </context>
 <context>
@@ -2446,6 +2904,22 @@
         <source>Invalid result. Value is infinite or NaN. Please, check your calculations.</source>
         <translation>Ongeldig resultaat. Waarde is oneindig of NaN. Controleer uw berekeningen.</translation>
     </message>
+    <message>
+        <source>Refresh a pattern with all changes you made</source>
+        <translation>Herstel een patroon met alle veranderingen welke je gemaakt hebt</translation>
+    </message>
+    <message>
+        <source>Refresh</source>
+        <translation>Herstel</translation>
+    </message>
+    <message>
+        <source>Preview calculations</source>
+        <translation>Voorbeeld berekeningen</translation>
+    </message>
+    <message>
+        <source>Unique variable name</source>
+        <translation>Unieke variabele naam</translation>
+    </message>
 </context>
 <context>
     <name>DialogInsertNode</name>
@@ -2465,6 +2939,29 @@
         <source>Uknown</source>
         <translation>Onbekend</translation>
     </message>
+    <message>
+        <source>The list of pieces is empty. Please, first create at least one piece for current pattern piece.</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>DialogKnownMaterials</name>
+    <message>
+        <source>Known materials</source>
+        <translation>Bekende materialen</translation>
+    </message>
+    <message>
+        <source>Material:</source>
+        <translation>Materiaal:</translation>
+    </message>
+    <message>
+        <source>Name of material</source>
+        <translation>Naam van het materiaal</translation>
+    </message>
+    <message>
+        <source>User material</source>
+        <translation>Gebruikers materiaal</translation>
+    </message>
 </context>
 <context>
     <name>DialogLayoutProgress</name>
@@ -2474,7 +2971,7 @@
     </message>
     <message>
         <source>Several workpieces left not arranged, but none of them match for paper</source>
-        <translation>Verscheidene werkstukken zijn niet geordend en geen daarvan past op een papierformaat</translation>
+        <translation type="vanished">Verscheidene werkstukken zijn niet geordend en geen daarvan past op een papierformaat</translation>
     </message>
     <message>
         <source>Create a Layout</source>
@@ -2482,11 +2979,19 @@
     </message>
     <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Finding best position for worpieces. Please, wait.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Zoekend naar de beste positie voor werkstuk. Even wachten, aub.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+        <translation type="vanished">&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Zoekend naar de beste positie voor werkstuk. Even wachten, aub.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <source>Arranged workpieces: %1 from %2</source>
         <translation>Gerangschikte werkstukken: %1 van %2</translation>
+    </message>
+    <message>
+        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Finding best position for workpieces. Please, wait.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Beste positie zoeken voor de werkstukken. Een moment geduld a.u.b.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+    </message>
+    <message>
+        <source>One or more pattern pieces are bigger than the paper format you selected. Please, select a bigger paper format.</source>
+        <translation>Een of meer patroon delen zijn groter dan het papierformaat welke je hebt geselecteerd. Kies a.u.b. een groter formaat papier.</translation>
     </message>
 </context>
 <context>
@@ -2581,31 +3086,31 @@
     </message>
     <message>
         <source>Letter</source>
-        <translation>Letter</translation>
+        <translation type="vanished">Letter</translation>
     </message>
     <message>
         <source>Legal</source>
-        <translation>Legaal</translation>
+        <translation type="vanished">Legaal</translation>
     </message>
     <message>
         <source>Roll 24in</source>
-        <translation>Papierrol van 24 inches = 60,96 cm</translation>
+        <translation type="vanished">Papierrol van 24 inches = 60,96 cm</translation>
     </message>
     <message>
         <source>Roll 30in</source>
-        <translation>Papierrol van 30 inches = 76,20 cm</translation>
+        <translation type="vanished">Papierrol van 30 inches = 76,20 cm</translation>
     </message>
     <message>
         <source>Roll 36in</source>
-        <translation>Papierrol 36 inches = 91,44 cm</translation>
+        <translation type="vanished">Papierrol 36 inches = 91,44 cm</translation>
     </message>
     <message>
         <source>Roll 42in</source>
-        <translation>Papierrol 42 inches = 106,68 cm</translation>
+        <translation type="vanished">Papierrol 42 inches = 106,68 cm</translation>
     </message>
     <message>
         <source>Roll 44in</source>
-        <translation>Papierrol 44 inches = 111,76 cm</translation>
+        <translation type="vanished">Papierrol 44 inches = 111,76 cm</translation>
     </message>
     <message>
         <source>
@@ -2625,7 +3130,7 @@
     </message>
     <message>
         <source>Fields</source>
-        <translation>Velden</translation>
+        <translation type="vanished">Velden</translation>
     </message>
     <message>
         <source>Left:</source>
@@ -2645,11 +3150,11 @@
     </message>
     <message>
         <source>Ignore fileds</source>
-        <translation>Negeer velden</translation>
+        <translation type="vanished">Negeer velden</translation>
     </message>
     <message>
         <source>Custom</source>
-        <translation>Op maat</translation>
+        <translation type="vanished">Op maat</translation>
     </message>
     <message>
         <source>Wrong fields.</source>
@@ -2659,7 +3164,7 @@
         <source>Fields go beyond printing. 
 
 Apply settings anyway?</source>
-        <translation>Velden zijn groter dan het afdrukkbereik. 
+        <translation type="vanished">Velden zijn groter dan het afdrukkbereik. 
 
 Toch de instellingen aanpassen?</translation>
     </message>
@@ -2717,6 +3222,34 @@ Toch de instellingen aanpassen?</translation>
         <source>None</source>
         <comment>Printer</comment>
         <translation>Geen</translation>
+    </message>
+    <message>
+        <source>Text</source>
+        <translation>Tekst</translation>
+    </message>
+    <message>
+        <source>Text will be converted to paths</source>
+        <translation>tekst zal omgezet worden naar paden</translation>
+    </message>
+    <message>
+        <source>Export text as paths</source>
+        <translation>Exporteer tekst als paden</translation>
+    </message>
+    <message>
+        <source>Margins</source>
+        <translation>Marges</translation>
+    </message>
+    <message>
+        <source>Ignore margins</source>
+        <translation>Neger marges</translation>
+    </message>
+    <message>
+        <source>Margins go beyond printing. 
+
+Apply settings anyway?</source>
+        <translation>Marges gaan voorbij afdrukbereik. 
+
+Toch de instellingen aanpassen?</translation>
     </message>
 </context>
 <context>
@@ -3055,6 +3588,18 @@ Toch de instellingen aanpassen?</translation>
         <source>Uncheck all</source>
         <translation>Alles uitvinken</translation>
     </message>
+    <message>
+        <source>Search:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Search</source>
+        <translation>Zoek</translation>
+    </message>
+    <message>
+        <source>Select measurement</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>DialogMove</name>
@@ -3102,6 +3647,22 @@ Toch de instellingen aanpassen?</translation>
         <source>Move</source>
         <translation>Verplaast</translation>
     </message>
+    <message>
+        <source>Rotation angle:</source>
+        <translation>Hoek van draaiing:</translation>
+    </message>
+    <message>
+        <source>Edit rotation angle</source>
+        <translation>Bewerk de grootte van de hoek</translation>
+    </message>
+    <message>
+        <source>Rotation origin point:</source>
+        <translation>Rotatie originele punt:</translation>
+    </message>
+    <message>
+        <source>Center point</source>
+        <translation>Middelste punt</translation>
+    </message>
 </context>
 <context>
     <name>DialogNewMeasurements</name>
@@ -3131,7 +3692,7 @@ Toch de instellingen aanpassen?</translation>
     </message>
     <message>
         <source>Standard</source>
-        <translation>Standaard</translation>
+        <translation type="vanished">Standaard</translation>
     </message>
     <message>
         <source>Centimeters</source>
@@ -3144,6 +3705,10 @@ Toch de instellingen aanpassen?</translation>
     <message>
         <source>Inches</source>
         <translation>Inches</translation>
+    </message>
+    <message>
+        <source>Multisize</source>
+        <translation>Meerdere maten</translation>
     </message>
 </context>
 <context>
@@ -3301,6 +3866,21 @@ Toch de instellingen aanpassen?</translation>
     </message>
 </context>
 <context>
+    <name>DialogPatternMaterials</name>
+    <message>
+        <source>Dialog</source>
+        <translation>Dialoog</translation>
+    </message>
+    <message>
+        <source>Placeholder</source>
+        <translation>Tijdelijke aanduidingen</translation>
+    </message>
+    <message>
+        <source>Value</source>
+        <translation>Waarde</translation>
+    </message>
+</context>
+<context>
     <name>DialogPatternProperties</name>
     <message>
         <source>Pattern properties</source>
@@ -3308,11 +3888,11 @@ Toch de instellingen aanpassen?</translation>
     </message>
     <message>
         <source>Description</source>
-        <translation>Beschrijving</translation>
+        <translation type="vanished">Beschrijving</translation>
     </message>
     <message>
         <source>Author name</source>
-        <translation>Auteursnaam</translation>
+        <translation type="vanished">Auteursnaam</translation>
     </message>
     <message>
         <source>Pattern description</source>
@@ -3320,7 +3900,7 @@ Toch de instellingen aanpassen?</translation>
     </message>
     <message>
         <source>For technical notes.</source>
-        <translation>Voor technische aantekeningen.</translation>
+        <translation type="vanished">Voor technische aantekeningen.</translation>
     </message>
     <message>
         <source>Heights and Sizes</source>
@@ -3340,7 +3920,7 @@ Toch de instellingen aanpassen?</translation>
     </message>
     <message>
         <source>From standard measurements</source>
-        <translation>Van standaard maten</translation>
+        <translation type="vanished">Van standaard maten</translation>
     </message>
     <message>
         <source>Custom</source>
@@ -3428,7 +4008,7 @@ Toch de instellingen aanpassen?</translation>
     </message>
     <message>
         <source>General info</source>
-        <translation>Algemene informatie</translation>
+        <translation type="vanished">Algemene informatie</translation>
     </message>
     <message>
         <source>Pattern name:</source>
@@ -3452,7 +4032,7 @@ Toch de instellingen aanpassen?</translation>
     </message>
     <message>
         <source>Pattern size:</source>
-        <translation>Patroon maat:</translation>
+        <translation type="vanished">Patroon maat:</translation>
     </message>
     <message>
         <source>Show measurements</source>
@@ -3464,15 +4044,79 @@ Toch de instellingen aanpassen?</translation>
     </message>
     <message>
         <source>Use %1 and %2 to insert pattern size and height</source>
-        <translation>Gebruik %1 en %2 om maat en hoogte van patroon in te voegen</translation>
+        <translation type="vanished">Gebruik %1 en %2 om maat en hoogte van patroon in te voegen</translation>
     </message>
     <message>
         <source>Show date of layout creation (%1)</source>
-        <translation>Toon de datum van de creatie-opmaak (%1)</translation>
+        <translation type="vanished">Toon de datum van de creatie-opmaak (%1)</translation>
     </message>
     <message>
         <source>Show measurements file</source>
-        <translation>Toon matenbestand</translation>
+        <translation type="vanished">Toon matenbestand</translation>
+    </message>
+    <message>
+        <source>From multisize measurements</source>
+        <translation>Van meerdere maten metingen</translation>
+    </message>
+    <message>
+        <source>Pattern</source>
+        <translation>Patroon</translation>
+    </message>
+    <message>
+        <source>For technical notes</source>
+        <translation>Voor technische aantekeningen</translation>
+    </message>
+    <message>
+        <source>Label data</source>
+        <translation>Gegevens label</translation>
+    </message>
+    <message>
+        <source>Label template:</source>
+        <translation>Sjabloon label:</translation>
+    </message>
+    <message>
+        <source>Edit pattern label</source>
+        <translation>Verander patroon label</translation>
+    </message>
+    <message>
+        <source>Edit template</source>
+        <translation>Verander sjabloon</translation>
+    </message>
+    <message>
+        <source>Date format:</source>
+        <translation>Datum indeling:</translation>
+    </message>
+    <message>
+        <source>Time format:</source>
+        <translation>Tijdsindeling:</translation>
+    </message>
+    <message>
+        <source>Save label data.</source>
+        <translation>Sla gegevens label op.</translation>
+    </message>
+    <message>
+        <source>Label data were changed. Do you want to save them before editing label template?</source>
+        <translation>Gegevens label is veranderd. Wil je deze eerst opslaan voordat u het sjabloon label veranderd?</translation>
+    </message>
+    <message>
+        <source>Materials</source>
+        <translation>Materialen</translation>
+    </message>
+    <message>
+        <source>Pattern materials:</source>
+        <translation>Patroon materialen:</translation>
+    </message>
+    <message>
+        <source>Manage list of pattern materials</source>
+        <translation>Beheren van patroon materiaallijst</translation>
+    </message>
+    <message>
+        <source>Manage</source>
+        <translation>Beheren</translation>
+    </message>
+    <message>
+        <source>The customer name from individual measurements</source>
+        <translation>De naam van de klant van individuele maten</translation>
     </message>
 </context>
 <context>
@@ -3797,10 +4441,6 @@ Toch de instellingen aanpassen?</translation>
         <translation>Pasmarkering</translation>
     </message>
     <message>
-        <source>Each point in the path must be unique!</source>
-        <translation>Elk punt in het pad moet uniek zijn!</translation>
-    </message>
-    <message>
         <source>Marks</source>
         <translation>Markeringen</translation>
     </message>
@@ -3828,6 +4468,110 @@ Toch de instellingen aanpassen?</translation>
         <source>Intersection</source>
         <translation>Kruispunt van lijnen</translation>
     </message>
+    <message>
+        <source>Each point in the &lt;b&gt;custom seam allowance&lt;/b&gt; path must be unique!</source>
+        <translation>Elk punt in de &lt;b&gt; aangepaste naadtoeslag&lt;/b&gt;  pad moet uniek zijn!</translation>
+    </message>
+    <message>
+        <source>Cut on fabric</source>
+        <translation>Knip in stof</translation>
+    </message>
+    <message>
+        <source>Select if need designate the corner point as a passmark. Show only left passmark.</source>
+        <translation>Selecteer en wanneer nodig, wijs de hoek punt aan als een pas markering. Toon alleen de linker pas markering.</translation>
+    </message>
+    <message>
+        <source>Intersection (only left)</source>
+        <translation>Kruispunt ( alleen links)</translation>
+    </message>
+    <message>
+        <source>Select if need designate the corner point as a passmark. Show only right passmark.</source>
+        <translation>Selecteer en wanneer nodig, wijs de hoek punt aan als een pas markering. Toon alleen de rechter pas markering.</translation>
+    </message>
+    <message>
+        <source>Intersection (only right)</source>
+        <translation>Kruispunt ( alleen rechts)</translation>
+    </message>
+    <message>
+        <source>Control</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Visible</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Create a formula that regulates visibility. Values different from &quot;0&quot; make a path visible.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>1</source>
+        <translation type="unfinished">1</translation>
+    </message>
+    <message>
+        <source>Control visibility</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Intersection 2</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Intersection 2 (only left)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Intersection 2 (only right)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Check uniqueness</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Move on top</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Move up</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Move down</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Move on bottom</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Continue the first point to the cutting contour</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Continue the last point to the cutting contour</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>The path is a cut contour. Use to control export to DXF-AAMA</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>The list of pieces is empty. Please, first create at least one piece for current pattern piece.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>This option has effect only if the second passmark on seam line enabled in global preferences. The option helps disable the second passmark for this passmark only.</source>
+        <translation type="unfinished">Deze optie heeft alleen effect als de optie om een tweede knipje te laten zien op de zoomlijn aangevinkt is in de algemene opties. Deze optie staat het vervolgens toe om het tweede knipje voor dit specifieke knipje, uit te zetten.</translation>
+    </message>
+    <message>
+        <source>Show the second passmark on seam line</source>
+        <translation type="unfinished">Toon de tweede pasmarkering op de naadlijn</translation>
+    </message>
+    <message>
+        <source>Excluded</source>
+        <translation type="unfinished">Uitgezonderd</translation>
+    </message>
 </context>
 <context>
     <name>DialogPin</name>
@@ -3846,6 +4590,129 @@ Toch de instellingen aanpassen?</translation>
     <message>
         <source>Pin</source>
         <translation>Pin</translation>
+    </message>
+    <message>
+        <source>The list of pieces is empty. Please, first create at least one piece for current pattern piece.</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>DialogPlaceLabel</name>
+    <message>
+        <source>Width:</source>
+        <translation>Breedte:</translation>
+    </message>
+    <message>
+        <source>Formula wizard</source>
+        <translation>Formule wizard</translation>
+    </message>
+    <message>
+        <source>Value</source>
+        <translation>Waarde</translation>
+    </message>
+    <message>
+        <source>Calculation</source>
+        <translation>Berekening</translation>
+    </message>
+    <message>
+        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt; Toon volledige berekening in berichten box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+    </message>
+    <message>
+        <source>Height:</source>
+        <translation>Hoogte:</translation>
+    </message>
+    <message>
+        <source>Angle:</source>
+        <translation>Hoek:</translation>
+    </message>
+    <message>
+        <source>0</source>
+        <translation>0</translation>
+    </message>
+    <message>
+        <source>Point:</source>
+        <translation>Punt:</translation>
+    </message>
+    <message>
+        <source>Piece:</source>
+        <translation>Onderdeel:</translation>
+    </message>
+    <message>
+        <source>Type:</source>
+        <translation>Type:</translation>
+    </message>
+    <message>
+        <source>Edit rectangle width</source>
+        <translation>Verander rechthoek breedte</translation>
+    </message>
+    <message>
+        <source>Edit angle</source>
+        <translation>Verander de hoek</translation>
+    </message>
+    <message>
+        <source>Segment</source>
+        <translation>Segment</translation>
+    </message>
+    <message>
+        <source>Rectangle</source>
+        <translation>Rechthoek</translation>
+    </message>
+    <message>
+        <source>Cross</source>
+        <translation>Kruis</translation>
+    </message>
+    <message>
+        <source>T-shaped</source>
+        <translation>T-vorm</translation>
+    </message>
+    <message>
+        <source>Doubletree</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Corner</source>
+        <translation>Hoek</translation>
+    </message>
+    <message>
+        <source>Triangle</source>
+        <translation>Driehoek</translation>
+    </message>
+    <message>
+        <source>H-shaped</source>
+        <translation>H-vorm</translation>
+    </message>
+    <message>
+        <source>Button</source>
+        <translation>Knop</translation>
+    </message>
+    <message>
+        <source>Place label</source>
+        <translation>Plaats label</translation>
+    </message>
+    <message>
+        <source>Control</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Visible</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Create a formula that regulates visibility. Values different from &quot;0&quot; make a path visible.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>1</source>
+        <translation type="unfinished">1</translation>
+    </message>
+    <message>
+        <source>The list of pieces is empty. Please, first create at least one piece for current pattern piece.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Control visibility</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -4355,6 +5222,13 @@ Toch de instellingen aanpassen?</translation>
         <source>Paths</source>
         <translation>Paden</translation>
     </message>
+    <message numerus="yes">
+        <source>Followed %n option(s) require restart to take effect: %1.</source>
+        <translation type="unfinished">
+            <numerusform></numerusform>
+            <numerusform></numerusform>
+        </translation>
+    </message>
 </context>
 <context>
     <name>DialogRotation</name>
@@ -4400,7 +5274,7 @@ Toch de instellingen aanpassen?</translation>
     </message>
     <message>
         <source>Select origin point that is not part of the list of objects</source>
-        <translation>Selecteer een draaipunt dat geen onderdeel is van de gekozen objecten</translation>
+        <translation type="vanished">Selecteer een draaipunt dat geen onderdeel is van de gekozen objecten</translation>
     </message>
     <message>
         <source>Calculation</source>
@@ -4427,7 +5301,7 @@ Toch de instellingen aanpassen?</translation>
     </message>
     <message>
         <source>Browse...</source>
-        <translation>Browse..</translation>
+        <translation type="vanished">Browse..</translation>
     </message>
     <message>
         <source>TextLabel</source>
@@ -4460,6 +5334,54 @@ Toch de instellingen aanpassen?</translation>
     <message>
         <source>Path to destination folder</source>
         <translation>Pad naar doelmap</translation>
+    </message>
+    <message>
+        <source>Binary form</source>
+        <translation>Binary formulier</translation>
+    </message>
+    <message>
+        <source>Text as paths</source>
+        <translation>Tekst als paden</translation>
+    </message>
+    <message>
+        <source>Margins</source>
+        <translation>Marges</translation>
+    </message>
+    <message>
+        <source>Right:</source>
+        <translation>Rechts:</translation>
+    </message>
+    <message>
+        <source>Left:</source>
+        <translation>Links:</translation>
+    </message>
+    <message>
+        <source>Top:</source>
+        <translation>Bovenaan:</translation>
+    </message>
+    <message>
+        <source>Bottom:</source>
+        <translation>Onderaan:</translation>
+    </message>
+    <message>
+        <source>Paper format</source>
+        <translation>Papier formaat</translation>
+    </message>
+    <message>
+        <source>Browse…</source>
+        <translation>Doorbladeren…</translation>
+    </message>
+    <message>
+        <source>cm</source>
+        <translation>cm</translation>
+    </message>
+    <message>
+        <source>Templates:</source>
+        <translation>Sjablonen:</translation>
+    </message>
+    <message>
+        <source>Orientation:</source>
+        <translation>Orientatie:</translation>
     </message>
 </context>
 <context>
@@ -4532,13 +5454,17 @@ Toch de instellingen aanpassen?</translation>
         <source>files</source>
         <translation>bestanden</translation>
     </message>
+    <message>
+        <source>(flat) files</source>
+        <translation>(platte)bestanden</translation>
+    </message>
+    <message>
+        <source>Image files</source>
+        <translation>Afbeelding bestanden</translation>
+    </message>
 </context>
 <context>
     <name>DialogSeamAllowance</name>
-    <message>
-        <source>Seam allowance tool</source>
-        <translation>Naadtoeslag gereedschap</translation>
-    </message>
     <message>
         <source>Ready!</source>
         <translation>Klaar!</translation>
@@ -4548,8 +5474,8 @@ Toch de instellingen aanpassen?</translation>
         <translation>Waarde</translation>
     </message>
     <message>
-        <source>Add</source>
-        <translation>Voeg toe</translation>
+        <source>Detail</source>
+        <translation>Detail</translation>
     </message>
     <message>
         <source>Grainline</source>
@@ -4558,14 +5484,6 @@ Toch de instellingen aanpassen?</translation>
     <message>
         <source>Select main path objects clockwise, &lt;b&gt;Shift&lt;/b&gt; - reverse direction curve, &lt;b&gt;Enter&lt;/b&gt; - finish creation</source>
         <translation>Selecteer hoofdpad-objecten met de klok mee,&lt;b&gt;Shift&lt;/b&gt; - draai richting kromming om, &lt;b&gt;Enter&lt;/b&gt; - einde creatie</translation>
-    </message>
-    <message>
-        <source>Cut %1 of %2%3</source>
-        <translation>Knip %1 of %2%3</translation>
-    </message>
-    <message>
-        <source>on Fold</source>
-        <translation>Op vouw</translation>
     </message>
     <message>
         <source>Reverse</source>
@@ -4594,10 +5512,6 @@ Toch de instellingen aanpassen?</translation>
     <message>
         <source>Parser error: %1</source>
         <translation>Verwerkingsfout: %1</translation>
-    </message>
-    <message>
-        <source>Update</source>
-        <translation>Opwaardering</translation>
     </message>
     <message>
         <source>Current seam allowance</source>
@@ -4642,14 +5556,6 @@ Toch de instellingen aanpassen?</translation>
     <message>
         <source>custom seam allowance</source>
         <translation>aangepaste naadtoeslag</translation>
-    </message>
-    <message>
-        <source>None</source>
-        <translation>Geen</translation>
-    </message>
-    <message>
-        <source>Cut on fold</source>
-        <translation>Knip op de vouw</translation>
     </message>
     <message>
         <source>Both</source>
@@ -4716,8 +5622,56 @@ Toch de instellingen aanpassen?</translation>
         <translation>Pasmarkeringen</translation>
     </message>
     <message>
-        <source>To open all detail&apos;s features complete creating the main path.</source>
-        <translation>Om alle functie details te openen maak het hoofdpad volledig af.</translation>
+        <source>Workpiece tool</source>
+        <translation>Werkstuk gereedschap</translation>
+    </message>
+    <message>
+        <source>Segment</source>
+        <translation>Segment</translation>
+    </message>
+    <message>
+        <source>Rectangle</source>
+        <translation>Rechthoek</translation>
+    </message>
+    <message>
+        <source>Cross</source>
+        <translation>Kruis</translation>
+    </message>
+    <message>
+        <source>T-shaped</source>
+        <translation>T-vorm</translation>
+    </message>
+    <message>
+        <source>Doubletree</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Corner</source>
+        <translation>Hoek</translation>
+    </message>
+    <message>
+        <source>Triangle</source>
+        <translation>Driehoek</translation>
+    </message>
+    <message>
+        <source>H-shaped</source>
+        <translation>H-vorm</translation>
+    </message>
+    <message>
+        <source>Button</source>
+        <translation>Knop</translation>
+    </message>
+    <message>
+        <source>Place label</source>
+        <translation>Plaats label</translation>
+    </message>
+    <message>
+        <source>Check uniqueness</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>To open all detail&apos;s features complete creating the main path. Please, press OK.</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -4988,6 +5942,18 @@ Toch de instellingen aanpassen?</translation>
         <source>Calculation</source>
         <translation>Berekening</translation>
     </message>
+    <message>
+        <source>Pen style:</source>
+        <translation>Pen stijl:</translation>
+    </message>
+    <message>
+        <source>Approximation scale:</source>
+        <translation>Schaal bij benadering:</translation>
+    </message>
+    <message>
+        <source>Set approximation scale for this curve, 0 - use global value</source>
+        <translation>Bepaal de schaal bij benadering voor deze kromming, 0 - gebruik algemene waarde</translation>
+    </message>
 </context>
 <context>
     <name>DialogSplinePath</name>
@@ -5118,6 +6084,18 @@ Toch de instellingen aanpassen?</translation>
     <message>
         <source>Calculation</source>
         <translation>Berekening</translation>
+    </message>
+    <message>
+        <source>Pen style:</source>
+        <translation>Pen stijl:</translation>
+    </message>
+    <message>
+        <source>Approximation scale:</source>
+        <translation>Schaal bij benadering:</translation>
+    </message>
+    <message>
+        <source>Set approximation scale for this curve, 0 - use global value</source>
+        <translation>Bepaal de schaal bij benadering voor deze kromming, 0 - gebruik algemene waarde</translation>
     </message>
 </context>
 <context>
@@ -5482,7 +6460,7 @@ Toch de instellingen aanpassen?</translation>
     </message>
     <message>
         <source>A new version of %1 is available!</source>
-        <translation>Een nieuwe versie van %1 is verkrijgbaar!</translation>
+        <translation type="vanished">Een nieuwe versie van %1 is verkrijgbaar!</translation>
     </message>
     <message>
         <source>%1 %2 is now available - you have %3. Would you like to download it now?</source>
@@ -5499,6 +6477,10 @@ Toch de instellingen aanpassen?</translation>
     <message>
         <source>Get Update</source>
         <translation>Krijg opwaardering</translation>
+    </message>
+    <message>
+        <source>%1 update is available!</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -5525,11 +6507,11 @@ Toch de instellingen aanpassen?</translation>
     </message>
     <message>
         <source>Error</source>
-        <translation>Fout</translation>
+        <translation type="vanished">Fout</translation>
     </message>
     <message>
         <source>Information</source>
-        <translation>Informatie</translation>
+        <translation type="vanished">Informatie</translation>
     </message>
 </context>
 <context>
@@ -5798,7 +6780,7 @@ Toch de instellingen aanpassen?</translation>
     </message>
     <message>
         <source>Save &amp;As...</source>
-        <translation>Opslaan &amp;als...</translation>
+        <translation type="vanished">Opslaan &amp;als...</translation>
     </message>
     <message>
         <source>Save not yet saved pattern</source>
@@ -5918,7 +6900,7 @@ Toch de instellingen aanpassen?</translation>
     </message>
     <message>
         <source>Show online help</source>
-        <translation>Toon online help</translation>
+        <translation type="vanished">Toon online help</translation>
     </message>
     <message>
         <source>Pattern piece %1</source>
@@ -6006,7 +6988,7 @@ Toch de instellingen aanpassen?</translation>
     </message>
     <message>
         <source>Pattern files (*.val)</source>
-        <translation>Patroon bestanden (*.val)</translation>
+        <translation type="vanished">Patroon bestanden (*.val)</translation>
     </message>
     <message>
         <source>pattern</source>
@@ -6083,11 +7065,11 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Wrong units.</source>
-        <translation>Verkeerde eenheden.</translation>
+        <translation type="vanished">Verkeerde eenheden.</translation>
     </message>
     <message>
         <source>Application doesn&apos;t support standard table with inches.</source>
-        <translation>Applicatie ondersteunt het standaard tabel niet met inches.</translation>
+        <translation type="vanished">Applicatie ondersteunt het standaard tabel niet met inches.</translation>
     </message>
     <message>
         <source>File error.</source>
@@ -6095,7 +7077,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>File loaded</source>
-        <translation>Bestand geladen</translation>
+        <translation type="vanished">Bestand geladen</translation>
     </message>
     <message>
         <source>Valentina didn&apos;t shut down correctly. Do you want reopen files (%1) you had open?</source>
@@ -6123,7 +7105,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Point at intersection of arc and line</source>
-        <translation>Kruispunt van boog en lijn</translation>
+        <translation type="vanished">Kruispunt van boog en lijn</translation>
     </message>
     <message>
         <source>Point from X and Y of two other points</source>
@@ -6163,7 +7145,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Seam allowance tool</source>
-        <translation>Naadtoeslag gereedschap</translation>
+        <translation type="vanished">Naadtoeslag gereedschap</translation>
     </message>
     <message>
         <source>Union tool</source>
@@ -6211,7 +7193,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Tools</source>
-        <translation>Gereedschap</translation>
+        <translation type="vanished">Gereedschap</translation>
     </message>
     <message>
         <source>Point of intersection arcs</source>
@@ -6251,11 +7233,11 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Save as tiled PDF</source>
-        <translation>Sla op als papierformaat indeling PDF</translation>
+        <translation type="vanished">Sla op als papierformaat indeling PDF</translation>
     </message>
     <message>
         <source>Split and save a layout into smaller pages</source>
-        <translation>Verdeel en sla een opmaak op in kleinere pagina&apos;s</translation>
+        <translation type="vanished">Verdeel en sla een opmaak op in kleinere pagina&apos;s</translation>
     </message>
     <message>
         <source>Print</source>
@@ -6279,7 +7261,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Export As...</source>
-        <translation>Export als...</translation>
+        <translation type="vanished">Export als...</translation>
     </message>
     <message>
         <source>Export original layout</source>
@@ -6311,7 +7293,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>You can&apos;t use now the Detail mode. Please, create at least one workpiece.</source>
-        <translation>U kunt de Detail modus nu niet gebruiken. Alstublieft, creëer tenminste éen werkstuk.</translation>
+        <translation type="vanished">U kunt de Detail modus nu niet gebruiken. Alstublieft, creëer tenminste éen werkstuk.</translation>
     </message>
     <message>
         <source>Layout mode</source>
@@ -6319,7 +7301,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>You can&apos;t use now the Layout mode. Please, create at least one workpiece.</source>
-        <translation>U kunt de Opmaak modus nu niet gebruiken. Alstublieft, creëer tenminste éen werkstuk.</translation>
+        <translation type="vanished">U kunt de Opmaak modus nu niet gebruiken. Alstublieft, creëer tenminste éen werkstuk.</translation>
     </message>
     <message>
         <source>Unsaved changes</source>
@@ -6396,11 +7378,11 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Measurement file doesn&apos;t include all required measurements.</source>
-        <translation>Maten bestand bevat niet alle benodigde maten.</translation>
+        <translation type="vanished">Maten bestand bevat niet alle benodigde maten.</translation>
     </message>
     <message>
         <source>Please, additionaly provide: %1</source>
-        <translation>Alstublieft, extra voorzien van: %1</translation>
+        <translation type="vanished">Alstublieft, extra voorzien van: %1</translation>
     </message>
     <message>
         <source>Measurement files types have not match.</source>
@@ -6436,7 +7418,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Couldn&apos;t set size. Need a file with standard measurements.</source>
-        <translation>Kon maat niet instellen. Heb een bestand nodig met standaard maten.</translation>
+        <translation type="vanished">Kon maat niet instellen. Heb een bestand nodig met standaard maten.</translation>
     </message>
     <message>
         <source>Couldn&apos;t set size. File wasn&apos;t opened.</source>
@@ -6452,7 +7434,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Couldn&apos;t set height. Need a file with standard measurements.</source>
-        <translation>Kon hoogte niet instellen. Heb een bestand nodig met standaard maten.</translation>
+        <translation type="vanished">Kon hoogte niet instellen. Heb een bestand nodig met standaard maten.</translation>
     </message>
     <message>
         <source>Couldn&apos;t set height. File wasn&apos;t opened.</source>
@@ -6524,7 +7506,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Save...</source>
-        <translation>Sla op...</translation>
+        <translation type="vanished">Sla op...</translation>
     </message>
     <message>
         <source>Don&apos;t Save</source>
@@ -6556,7 +7538,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Report Bug...</source>
-        <translation>Rapporteer fout...</translation>
+        <translation type="vanished">Rapporteer fout...</translation>
     </message>
     <message>
         <source>Point intersection curves</source>
@@ -6640,7 +7622,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>You can&apos;t use now the Layout mode. Please, include at least one detail in layout.</source>
-        <translation>U kunt de Opmaak modus nu niet gebruiken. Alstublieft, zorg dat er minimaal een detail is in de opmaak.</translation>
+        <translation type="vanished">U kunt de Opmaak modus nu niet gebruiken. Alstublieft, zorg dat er minimaal een detail is in de opmaak.</translation>
     </message>
     <message>
         <source>Original zoom</source>
@@ -6705,10 +7687,6 @@ Do you want to save your changes?</source>
     <message>
         <source>Select point of center of elliptical arc</source>
         <translation>Selecteer het middelpunt van de ellipsvormige boog</translation>
-    </message>
-    <message>
-        <source>Piece path tool</source>
-        <translation>Gereedschap om pad van onderdeel te bepalen</translation>
     </message>
     <message>
         <source>Select main path objects clockwise.</source>
@@ -6819,10 +7797,6 @@ Do you want to save your changes?</source>
         <translation>Selecteer een item om in te voegen</translation>
     </message>
     <message>
-        <source>Wiki</source>
-        <translation>Wiki</translation>
-    </message>
-    <message>
         <source>Forum</source>
         <translation>Forum</translation>
     </message>
@@ -6835,12 +7809,180 @@ Do you want to save your changes?</source>
         <translation>Selecteer een of meer objecten, houd &lt;b&gt;%1&lt;/b&gt; vast - voor meerdere selecties, &lt;b&gt;Enter&lt;/b&gt; - bevestig selectie</translation>
     </message>
     <message>
-        <source>You can&apos;t use now the Layout mode.</source>
-        <translation>Je kunt de opmaak-modus nu niet gebruiken.</translation>
-    </message>
-    <message>
         <source>Open Tape app for creating or editing measurements file</source>
         <translation>Open de Tape app om een matenbestand te wijzigen of aan te maken</translation>
+    </message>
+    <message>
+        <source>Export increments to CSV</source>
+        <translation>Exporteer verkleining/vergroting naar CSV</translation>
+    </message>
+    <message>
+        <source>Name</source>
+        <translation>Naam</translation>
+    </message>
+    <message>
+        <source>The calculated value</source>
+        <translation>De berekende waarde</translation>
+    </message>
+    <message>
+        <source>Formula</source>
+        <translation>Formule</translation>
+    </message>
+    <message>
+        <source>You can&apos;t use Detail mode yet. Please, create at least one workpiece.</source>
+        <translation>Je kunt Detail mode nog niet gebruiken. Creëer alsjeblieft eerst één werkstuk.</translation>
+    </message>
+    <message>
+        <source>You can&apos;t use Layout mode yet. Please, create at least one workpiece.</source>
+        <translation>Je kunt Layout mode nog niet gebruiken. Creëer alsjeblieft eerst één werkstuk.</translation>
+    </message>
+    <message>
+        <source>You can&apos;t use Layout mode yet. Please, include at least one detail in layout.</source>
+        <translation>Je kunt Layout mode nog niet gebruiken. Voeg eerst één werkstuk toe aan de layout.</translation>
+    </message>
+    <message>
+        <source>You can&apos;t use Layout mode yet.</source>
+        <translation>Je kunt Layout mode nog niet gebruiken.</translation>
+    </message>
+    <message>
+        <source>Zoom fit best current</source>
+        <translation>Actuele best passend zoom</translation>
+    </message>
+    <message>
+        <source>zoom fit best current pattern piece</source>
+        <translation>Actuele patroon deel best passend zoom</translation>
+    </message>
+    <message>
+        <source>Export details skiping the Layout stage</source>
+        <translation>Exporteer de details van het overgeslagen Opmaak stadium</translation>
+    </message>
+    <message>
+        <source>You don&apos;t have enough details to export. Please, include at least one detail in layout.</source>
+        <translation>Er zijn te weinig details om te exporteren. Alstublieft, zorg dat er ten minste een detail in Opmaak bevat.</translation>
+    </message>
+    <message>
+        <source>Export details</source>
+        <translation>Exporteer details</translation>
+    </message>
+    <message>
+        <source>Can&apos;t export details.</source>
+        <translation>Kan geen details exporteren.</translation>
+    </message>
+    <message>
+        <source>Couldn&apos;t set size. Need a file with multisize measurements.</source>
+        <translation>Kon de maat niet vaststellen. Heb een bestand nodig met meerdere maten metingen.</translation>
+    </message>
+    <message>
+        <source>Couldn&apos;t set height. Need a file with multisize measurements.</source>
+        <translation>Kon de hoogte niet vaststellen. Heb een bestand nodig met meerdere maten metingen.</translation>
+    </message>
+    <message>
+        <source>Label template editor</source>
+        <translation>Label sjabloon bewerker</translation>
+    </message>
+    <message>
+        <source>Workpiece tool</source>
+        <translation>Werkstuk gereedschap</translation>
+    </message>
+    <message>
+        <source>Internal path tool</source>
+        <translation>Ingesloten paden gereedschap</translation>
+    </message>
+    <message>
+        <source>Save &amp;As…</source>
+        <translation>Sla op &amp; als…</translation>
+    </message>
+    <message>
+        <source>Report Bug…</source>
+        <translation>Rapporteer fout…</translation>
+    </message>
+    <message>
+        <source>Export As…</source>
+        <translation>Exporteer als…</translation>
+    </message>
+    <message>
+        <source>Save…</source>
+        <translation>Opslaan…</translation>
+    </message>
+    <message>
+        <source>Final measurements</source>
+        <translation>Uiteindelijke maten</translation>
+    </message>
+    <message>
+        <source>Export Final Measurements to CSV</source>
+        <translation>Exporteer uiteindelijke maten naar CSV</translation>
+    </message>
+    <message>
+        <source>You can&apos;t export empty scene. Please, include at least one detail in layout.</source>
+        <translation>U kunt geen lege scenes exporteren. A.u.b, betrek tenminste een detail in de opmaak.</translation>
+    </message>
+    <message>
+        <source>Export final measurements error.</source>
+        <translation>Exporteer uiteindelijke maten fout.</translation>
+    </message>
+    <message>
+        <source>Destination path is empty.</source>
+        <translation>Bestemmings pad is leeg.</translation>
+    </message>
+    <message>
+        <source>Next pattern piece</source>
+        <translation>Volgende patroon deel</translation>
+    </message>
+    <message>
+        <source>Ctrl+PgDown</source>
+        <translation>Ctrl+PgDown</translation>
+    </message>
+    <message>
+        <source>Previous pattern piece</source>
+        <translation>Vorige patroon deel</translation>
+    </message>
+    <message>
+        <source>Ctrl+PgUp</source>
+        <translation>Ctrl+PgUp</translation>
+    </message>
+    <message>
+        <source>Point from tangent circle and segment</source>
+        <translation>Punt van raaklijn cirkel en segment</translation>
+    </message>
+    <message>
+        <source>Place label tool</source>
+        <translation>Plaats label gereedschap</translation>
+    </message>
+    <message>
+        <source>Duplicate detail tool</source>
+        <translation>Dupliceer detail gereedschap</translation>
+    </message>
+    <message>
+        <source>Select placelabel center point</source>
+        <translation>Selecteer middenpunt labelplaats</translation>
+    </message>
+    <message>
+        <source>The measurements file &apos;%1&apos; could not be found or provides not enough information.</source>
+        <translation>Het maten bestand &apos;%1&apos; kon niet gevonden worden of geeft niet genoeg informatie.</translation>
+    </message>
+    <message>
+        <source>Use these tools to create a pattern</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Scale:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Create new pattern piece to start working.</source>
+        <translation>Maak een nieuw patroon deel om te gaan werken.</translation>
+    </message>
+    <message>
+        <source>Changes applied.</source>
+        <translation>Wijzigingen zijn toegepast.</translation>
+    </message>
+    <message>
+        <source>Cannot read settings from a malformed INI file.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Cannot save settings. Access denied.</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -6867,11 +8009,11 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Print to pdf</source>
-        <translation>Druk af naar PDF</translation>
+        <translation type="vanished">Druk af naar PDF</translation>
     </message>
     <message>
         <source>PDF file (*.pdf)</source>
-        <translation>PDF file (*.pdf)</translation>
+        <translation type="vanished">PDF file (*.pdf)</translation>
     </message>
     <message>
         <source>Print error</source>
@@ -6899,7 +8041,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Several workpieces left not arranged, but none of them match for paper</source>
-        <translation>Verscheidene werkstukken zijn niet geordend en geen enkele past op papier</translation>
+        <translation type="vanished">Verscheidene werkstukken zijn niet geordend en geen enkele past op papier</translation>
     </message>
     <message>
         <source>Can&apos;t open printer %1</source>
@@ -6927,11 +8069,79 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Can&apos;t create path</source>
-        <translation>Kan het pad niet maken</translation>
+        <translation type="vanished">Kan het pad niet maken</translation>
     </message>
     <message>
         <source>Cannot set printer margins</source>
         <translation>Kan de printer marges niet bepalen</translation>
+    </message>
+    <message>
+        <source>Can&apos;t create a path</source>
+        <translation>Kan geen pad maken</translation>
+    </message>
+    <message>
+        <source>Pattern</source>
+        <translation>Patroon</translation>
+    </message>
+    <message>
+        <source>Name</source>
+        <translation>Naam</translation>
+    </message>
+    <message>
+        <source>Value</source>
+        <translation>Waarde</translation>
+    </message>
+    <message>
+        <source>Export final measurements error.</source>
+        <translation>Exporteer uiteindelijke maten fout.</translation>
+    </message>
+    <message>
+        <source>Value in line %1 is infinite or NaN. Please, check your calculations.</source>
+        <translation>Waarde in lijn %1 is oneindig of NaN.  A.u.b., controleer uw berekeningen.</translation>
+    </message>
+    <message>
+        <source>Parser error at line %1: %2.</source>
+        <translation>Verwerkingsfout op lijn %1: %2.</translation>
+    </message>
+    <message>
+        <source>File error %1.</source>
+        <translation>Bestandsfout %1.</translation>
+    </message>
+    <message>
+        <source>One or more pattern pieces are bigger than the paper format you selected. Please, select a bigger paper format.</source>
+        <translation>Een of meer patroon delen zijn groter dan het papierformaat welke je hebt geselecteerd. Kies a.u.b. een groter formaat papier.</translation>
+    </message>
+    <message>
+        <source>Description</source>
+        <translation>Beschrijving</translation>
+    </message>
+    <message>
+        <source>Measurement file has unknown format.</source>
+        <translation>Maten bestand heeft een onbekende indeling.</translation>
+    </message>
+    <message>
+        <source>Measurement file contains invalid known measurement(s).</source>
+        <translation>Maten bestand bevat ongeldige bekende ma(a)t(en).</translation>
+    </message>
+    <message>
+        <source>Wrong units.</source>
+        <translation>Verkeerde eenheden.</translation>
+    </message>
+    <message>
+        <source>Application doesn&apos;t support multisize table with inches.</source>
+        <translation>Applicatie ondersteunt niet het meerdere maten tabel met inches.</translation>
+    </message>
+    <message>
+        <source>File error.</source>
+        <translation>Bestandsfout.</translation>
+    </message>
+    <message>
+        <source>Measurement file doesn&apos;t include all required measurements.</source>
+        <translation>Maten bestand bevat niet alle benodigde maten.</translation>
+    </message>
+    <message>
+        <source>Please, additionally provide: %1</source>
+        <translation>Alstublieft, verstrek extra: %1</translation>
     </message>
 </context>
 <context>
@@ -6978,6 +8188,13 @@ Do you want to save your changes?</source>
     <message>
         <source>move point label</source>
         <translation>verzet punt label</translation>
+    </message>
+</context>
+<context>
+    <name>OperationShowLabel</name>
+    <message>
+        <source>toggle label</source>
+        <translation>schakel label</translation>
     </message>
 </context>
 <context>
@@ -7145,14 +8362,6 @@ Do you want to save your changes?</source>
         <translation>Boek:</translation>
     </message>
     <message>
-        <source>Send crash reports</source>
-        <translation>Verzend crash rapport</translation>
-    </message>
-    <message>
-        <source>Send crash reports (recommended)</source>
-        <translation>Verzend crash rapporten (aanbevolen)</translation>
-    </message>
-    <message>
         <source>Pattern editing</source>
         <translation>Patroon verandering</translation>
     </message>
@@ -7173,14 +8382,6 @@ Do you want to save your changes?</source>
         <translation>Met OS optiies</translation>
     </message>
     <message>
-        <source>After each crash Valentina collects information that may help us fix the problem. We do not collect any personal information. Find more about what %1kind of information%2 we collect.</source>
-        <translation>Na iedere crash verzamelt Valentina informatie die mogelijk kunnen bijdragen het probleem te verhelpen. Wij verzamelen geen persoonlijke informatie. Voor meer informatie zie %1soort informatie%2.</translation>
-    </message>
-    <message>
-        <source>The Default unit has been updated and will be used as the default for the next pattern you create.</source>
-        <translation>De standaardwaarde van de eenheid is opgewaardeerd en zal worden gebruikt  als de standaardbasis voor uw volgende patrooncreatie.</translation>
-    </message>
-    <message>
         <source>Centimeters</source>
         <translation>Centimeters</translation>
     </message>
@@ -7191,6 +8392,81 @@ Do you want to save your changes?</source>
     <message>
         <source>Inches</source>
         <translation>Inches</translation>
+    </message>
+    <message>
+        <source>Update a pattern only after a curve release</source>
+        <translation>Werk een patroon alleen bij na het vrijgeven van een kromming</translation>
+    </message>
+    <message>
+        <source>Free curve mode</source>
+        <translation>Laat krommings mode los</translation>
+    </message>
+    <message>
+        <source>default unit</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>General</source>
+        <translation>Algemeen</translation>
+    </message>
+    <message>
+        <source>Double click calls Zoom fit best for current pattern piece</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Scrolling</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Animation</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Duration:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Scrolling animation duration</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>ms</source>
+        <comment>milliseconds</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Update interval:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Time in milliseconds between each animation update</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Mouse scale</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Sensor:</source>
+        <comment>sensor mouse</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Scale scrolling sensitivity for mouse with sensor</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Wheel:</source>
+        <comment>mouse wheel</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Scale scrolling sensitivity for mouse with wheel</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Acceleration:</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -7239,17 +8515,13 @@ Do you want to save your changes?</source>
         <source>My Templates</source>
         <translation>Mijn Sjablonen</translation>
     </message>
+    <message>
+        <source>My label templates</source>
+        <translation>Mijn label sjablonen</translation>
+    </message>
 </context>
 <context>
     <name>PreferencesPatternPage</name>
-    <message>
-        <source>User</source>
-        <translation>Gebruiker</translation>
-    </message>
-    <message>
-        <source>User name:</source>
-        <translation>Gebruikers naam:</translation>
-    </message>
     <message>
         <source>Graphical output</source>
         <translation>Grafische voltooiing</translation>
@@ -7265,14 +8537,6 @@ Do you want to save your changes?</source>
     <message>
         <source>Count steps (0 - no limit):</source>
         <translation>Tel stappen (0 - geen limiet):</translation>
-    </message>
-    <message>
-        <source>User defined materials</source>
-        <translation>Door gebruiker gedefinieerde materialen</translation>
-    </message>
-    <message>
-        <source>Delete all</source>
-        <translation>Verwijder alles</translation>
     </message>
     <message>
         <source>Workpiece</source>
@@ -7291,12 +8555,109 @@ Do you want to save your changes?</source>
         <translation>Toon tweede pasmarkering op de naadlijn</translation>
     </message>
     <message>
-        <source>All user defined materials have been deleted!</source>
-        <translation>Alle door de gebruiker gedefinieerde materialen zijn verwijderd!</translation>
-    </message>
-    <message>
         <source>By default forbid flipping for all new created workpieces</source>
         <translation>Standaard is het kantelen voor alle nieuwe werkstukken uitgeschakeld</translation>
+    </message>
+    <message>
+        <source>By default hide the main path if the seam allowance was enabled</source>
+        <translation>Verberg standaard  de hoofdpad als de naadtoeslag is ingeschakeld</translation>
+    </message>
+    <message>
+        <source>Hide main path</source>
+        <translation>Verberg hoofdpad</translation>
+    </message>
+    <message>
+        <source>Label font:</source>
+        <translation>Label voorkant:</translation>
+    </message>
+    <message>
+        <source>Seam allowance</source>
+        <translation>Naad toeslag</translation>
+    </message>
+    <message>
+        <source>Default value:</source>
+        <translation>Standaard waarde:</translation>
+    </message>
+    <message>
+        <source>Label data/time format</source>
+        <translation>Label datum/tijd indeling</translation>
+    </message>
+    <message>
+        <source>Date:</source>
+        <translation>Datum:</translation>
+    </message>
+    <message>
+        <source>Edit formats</source>
+        <translation>Verander indelingen</translation>
+    </message>
+    <message>
+        <source>Time:</source>
+        <translation>Tijd:</translation>
+    </message>
+    <message>
+        <source>Materials</source>
+        <translation>Materialen</translation>
+    </message>
+    <message>
+        <source>Known materials:</source>
+        <translation>Bekende materialen:</translation>
+    </message>
+    <message>
+        <source>Manage list of known materials</source>
+        <translation>Beheren van bekende materialen llijst</translation>
+    </message>
+    <message>
+        <source>Manage</source>
+        <translation>Beheren</translation>
+    </message>
+    <message>
+        <source>When manage pattern materials save them to known materials list</source>
+        <translation>Wanneer beheren van patroon materialen sla deze op bij bekende materialen lijst</translation>
+    </message>
+    <message>
+        <source>Remeber pattern materials</source>
+        <translation>Herinner patroon materialen</translation>
+    </message>
+    <message>
+        <source>Curve approximation:</source>
+        <translation>Krommings benadering:</translation>
+    </message>
+    <message>
+        <source>Set default curve approximation scale</source>
+        <translation>Stel standaard krommingsbenadering schaal in</translation>
+    </message>
+    <message>
+        <source>Bold line width</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Line width:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Millimiters</source>
+        <translation>Millimeters</translation>
+    </message>
+    <message>
+        <source>Inches</source>
+        <translation>Inches</translation>
+    </message>
+    <message>
+        <source>Use OpenGL to render a scene.
+This option will take an affect after restart.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Use OpenGL render</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>antialiasing</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>scene render</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -7314,43 +8675,43 @@ Do you want to save your changes?</source>
     <name>QCommandLineParser</name>
     <message>
         <source>Displays version information.</source>
-        <translation>Toont versie informatie.</translation>
+        <translation type="vanished">Toont versie informatie.</translation>
     </message>
     <message>
         <source>Displays this help.</source>
-        <translation>Toont deze Help.</translation>
+        <translation type="vanished">Toont deze Help.</translation>
     </message>
     <message>
         <source>Unknown option &apos;%1&apos;.</source>
-        <translation>Onbekende optie &apos;%1&apos;.</translation>
+        <translation type="vanished">Onbekende optie &apos;%1&apos;.</translation>
     </message>
     <message>
         <source>Unknown options: %1.</source>
-        <translation>Onbekende opties: %1.</translation>
+        <translation type="vanished">Onbekende opties: %1.</translation>
     </message>
     <message>
         <source>Missing value after &apos;%1&apos;.</source>
-        <translation>Ontbrekende waarde na &apos;%1&apos;.</translation>
+        <translation type="vanished">Ontbrekende waarde na &apos;%1&apos;.</translation>
     </message>
     <message>
         <source>Unexpected value after &apos;%1&apos;.</source>
-        <translation>Onverwachte waarde na &apos;%1&apos;.</translation>
+        <translation type="vanished">Onverwachte waarde na &apos;%1&apos;.</translation>
     </message>
     <message>
         <source>[options]</source>
-        <translation>[opties]</translation>
+        <translation type="vanished">[opties]</translation>
     </message>
     <message>
         <source>Usage: %1</source>
-        <translation>Verbruik: %1</translation>
+        <translation type="vanished">Verbruik: %1</translation>
     </message>
     <message>
         <source>Options:</source>
-        <translation>Opties:</translation>
+        <translation type="vanished">Opties:</translation>
     </message>
     <message>
         <source>Arguments:</source>
-        <translation>Argumenten:</translation>
+        <translation type="vanished">Argumenten:</translation>
     </message>
 </context>
 <context>
@@ -7364,7 +8725,7 @@ Do you want to save your changes?</source>
     <name>QObject</name>
     <message>
         <source>Create new pattern piece to start working.</source>
-        <translation>Maak een nieuw patroon deel om te gaan werken.</translation>
+        <translation type="vanished">Maak een nieuw patroon deel om te gaan werken.</translation>
     </message>
     <message>
         <source>mm</source>
@@ -7394,7 +8755,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>add node</source>
-        <translation>voeg kernpunt toe</translation>
+        <translation type="vanished">voeg kernpunt toe</translation>
     </message>
     <message>
         <source>move detail</source>
@@ -7402,7 +8763,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Changes applied.</source>
-        <translation>Wijzigingen zijn toegepast.</translation>
+        <translation type="vanished">Wijzigingen zijn toegepast.</translation>
     </message>
     <message>
         <source>Wrong tag name &apos;%1&apos;.</source>
@@ -7431,6 +8792,66 @@ Do you want to save your changes?</source>
     <message>
         <source>United detail</source>
         <translation>Samengevoegd detail</translation>
+    </message>
+    <message>
+        <source>Fabric</source>
+        <translation>Stof</translation>
+    </message>
+    <message>
+        <source>Lining</source>
+        <translation>Voering</translation>
+    </message>
+    <message>
+        <source>Interfacing</source>
+        <translation>Vlieseline</translation>
+    </message>
+    <message>
+        <source>Interlining</source>
+        <translation>Tussenvoering</translation>
+    </message>
+    <message>
+        <source>Cut</source>
+        <translation>Knippen</translation>
+    </message>
+    <message>
+        <source>on fold</source>
+        <translation>op vouw</translation>
+    </message>
+    <message>
+        <source>Piece &apos;%1&apos; may broke a layout. Please, check seam allowance to check how seam allowance behave.</source>
+        <translation>Deel &apos;%1&quot; heeft een opmaak afgebroken. A.u.b., controlleer naadtoeslag om te kijken hoe de naadtoeslag zich verhoudt.</translation>
+    </message>
+    <message>
+        <source>Visibility trigger contains error and will be ignored</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>User material number %1 was not defined in this pattern.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Error in internal path &apos;%1&apos;. There is no intersection of first point with cutting countour</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Error in internal path &apos;%1&apos;. There is no intersection of last point with cutting countour</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Cannot calculate a notch for point &apos;%1&apos; in piece &apos;%2&apos;.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Cannot calculate a notch for point &apos;%1&apos; in piece &apos;%2&apos;. Seam allowance is empty.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Cannot calculate a notch for point &apos;%1&apos; in piece &apos;%2&apos;. Cannot find position for a notch.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Cannot calculate a notch for point &apos;%1&apos; in piece &apos;%2&apos;. Unable to fix a notch position.</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -7645,6 +9066,13 @@ Do you want to save your changes?</source>
     </message>
 </context>
 <context>
+    <name>RemoveItemFromGroup</name>
+    <message>
+        <source>Remove item from group</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>RenamePP</name>
     <message>
         <source>rename pattern piece</source>
@@ -7668,8 +9096,8 @@ Do you want to save your changes?</source>
 <context>
     <name>SavePieceOptions</name>
     <message>
-        <source>save detail option</source>
-        <translation>bewaar opties van detail</translation>
+        <source>save detail options</source>
+        <translation>sla details optie op</translation>
     </message>
 </context>
 <context>
@@ -7680,10 +9108,35 @@ Do you want to save your changes?</source>
     </message>
 </context>
 <context>
+    <name>SavePlaceLabelOptions</name>
+    <message>
+        <source>save place label options</source>
+        <translation>sla plaats-label-opties op</translation>
+    </message>
+</context>
+<context>
     <name>SaveToolOptions</name>
     <message>
         <source>save tool option</source>
         <translation>sla gereedschap optie op</translation>
+    </message>
+</context>
+<context>
+    <name>ShowDoubleLabel</name>
+    <message>
+        <source>toggle the first dart label</source>
+        <translation>sluit de eerste figuurnaad label</translation>
+    </message>
+    <message>
+        <source>togggle the second dart label</source>
+        <translation>sluit de tweede figuurnaad label</translation>
+    </message>
+</context>
+<context>
+    <name>ShowLabel</name>
+    <message>
+        <source>toggle label</source>
+        <translation>sluit label</translation>
     </message>
 </context>
 <context>
@@ -7806,11 +9259,11 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Given name:</source>
-        <translation>Voornaam:</translation>
+        <translation type="vanished">Voornaam:</translation>
     </message>
     <message>
         <source>Family name:</source>
-        <translation>Achternaam:</translation>
+        <translation type="vanished">Achternaam:</translation>
     </message>
     <message>
         <source>Birth date:</source>
@@ -7854,7 +9307,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Open individual ...</source>
-        <translation>Open individueel ...</translation>
+        <translation type="vanished">Open individueel ...</translation>
     </message>
     <message>
         <source>Save</source>
@@ -7862,7 +9315,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Save As ...</source>
-        <translation>Opslaan als ...</translation>
+        <translation type="vanished">Opslaan als ...</translation>
     </message>
     <message>
         <source>Quit</source>
@@ -7894,7 +9347,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Open standard ...</source>
-        <translation>Open standaard ...</translation>
+        <translation type="vanished">Open standaard ...</translation>
     </message>
     <message>
         <source>Open template</source>
@@ -8151,7 +9604,7 @@ Wil je deze veranderingen opslaan?</translation>
     </message>
     <message>
         <source>Create from existing ...</source>
-        <translation>Creëer vanuit bestaande ...</translation>
+        <translation type="vanished">Creëer vanuit bestaande ...</translation>
     </message>
     <message>
         <source>Create from existing file</source>
@@ -8215,7 +9668,7 @@ Wil je deze veranderingen opslaan?</translation>
     </message>
     <message>
         <source>Save...</source>
-        <translation>Sla op...</translation>
+        <translation type="vanished">Sla op...</translation>
     </message>
     <message>
         <source>Don&apos;t Save</source>
@@ -8271,7 +9724,7 @@ Wil je deze veranderingen opslaan?</translation>
     </message>
     <message>
         <source>Customer&apos;s family name</source>
-        <translation>Klant&apos;s family naam</translation>
+        <translation type="vanished">Klant&apos;s family naam</translation>
     </message>
     <message>
         <source>Customer&apos;s email address</source>
@@ -8318,12 +9771,96 @@ Wil je deze veranderingen opslaan?</translation>
         <translation>Ongeldig resultaat. Waarde is oneindig of NaN. Controleer uw berekeningen.</translation>
     </message>
     <message>
-        <source>Export from standard measurements is not supported.</source>
-        <translation>Export van standaard maten wordt niet ondersteunt.</translation>
-    </message>
-    <message>
         <source>Empty</source>
         <translation>Leeg</translation>
+    </message>
+    <message>
+        <source>Export from multisize measurements is not supported.</source>
+        <translation>Exporteren van meerdere maten metingen wordt niet ondersteunt.</translation>
+    </message>
+    <message>
+        <source>Customer name:</source>
+        <translation>Klant naam:</translation>
+    </message>
+    <message>
+        <source>Open individual …</source>
+        <translation>Open individueel …</translation>
+    </message>
+    <message>
+        <source>Save As …</source>
+        <translation>Opslaan als …</translation>
+    </message>
+    <message>
+        <source>Open multisize …</source>
+        <translation>Open multimaten …</translation>
+    </message>
+    <message>
+        <source>Create from existing …</source>
+        <translation>Creer van bestaande …</translation>
+    </message>
+    <message>
+        <source>Save…</source>
+        <translation>Opslaan…</translation>
+    </message>
+    <message>
+        <source>Import from CSV</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Measurement name in is empty.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Merasurement &apos;%1&apos; doesn&apos;t match regex pattern.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Merasurement &apos;%1&apos; already used in file.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Measurement &apos;%1&apos; is not one of known measurements.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Individual measurements require at least 2 columns.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Error in row %1.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Multisize measurements require at least 4 columns.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Cannot convert base size value to double in column 2.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Cannot convert height increase value to double in column 3.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Cannot convert size increase value to double in column 4.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Imported file must not contain the same name twice.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Error in row %1. Measurement name is empty.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Cannot read settings from a malformed INI file.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Cannot save settings. Access denied.</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -8388,48 +9925,8 @@ Wil je deze veranderingen opslaan?</translation>
         <translation>Letter van patroondeel</translation>
     </message>
     <message>
-        <source>Name of detail:</source>
-        <translation>Detailnaam:</translation>
-    </message>
-    <message>
-        <source>Detail</source>
-        <translation>Detail</translation>
-    </message>
-    <message>
-        <source>Name can&apos;t be empty</source>
-        <translation>Naam mag niet leeg zijn</translation>
-    </message>
-    <message>
-        <source>Material/Cut number/Placement</source>
-        <translation>Materiaal/Snijnummer/Positie</translation>
-    </message>
-    <message>
-        <source>Cut number:</source>
-        <translation>Snijnummer:</translation>
-    </message>
-    <message>
-        <source>Material type:</source>
-        <translation>Materiaalsoort:</translation>
-    </message>
-    <message>
-        <source>You can choose one of the predefined materials or enter a new one</source>
-        <translation>U kunt kiezen uit een van de voorgedefinieerde materialen of voeg een nieuwe toe</translation>
-    </message>
-    <message>
         <source>Placement:</source>
         <translation>Positie:</translation>
-    </message>
-    <message>
-        <source>Add</source>
-        <translation>Voeg toe</translation>
-    </message>
-    <message>
-        <source>Cancel</source>
-        <translation>Stop</translation>
-    </message>
-    <message>
-        <source>Remove</source>
-        <translation>Verwijder</translation>
     </message>
     <message>
         <source>Labels</source>
@@ -8482,6 +9979,62 @@ Wil je deze veranderingen opslaan?</translation>
     <message>
         <source>Pattern label visible</source>
         <translation>Patroonlabel zichtbaar</translation>
+    </message>
+    <message>
+        <source>Label template:</source>
+        <translation>Sjabloon label:</translation>
+    </message>
+    <message>
+        <source>Edit template</source>
+        <translation>Verander sjabloon</translation>
+    </message>
+    <message>
+        <source>Label data</source>
+        <translation>Gegevens label</translation>
+    </message>
+    <message>
+        <source>Quantity:</source>
+        <translation>Kwantiteit:</translation>
+    </message>
+    <message>
+        <source>on fold</source>
+        <translation>op vouw</translation>
+    </message>
+    <message>
+        <source>Annotation:</source>
+        <translation>Aantekening:</translation>
+    </message>
+    <message>
+        <source>A text field to add comments in</source>
+        <translation>Een tekstveld om opmerkingen in te voegen</translation>
+    </message>
+    <message>
+        <source>Orientation:</source>
+        <translation>Orientatie:</translation>
+    </message>
+    <message>
+        <source>Rotation:</source>
+        <translation>Draaiing:</translation>
+    </message>
+    <message>
+        <source>Tilt:</source>
+        <translation>Tillen:</translation>
+    </message>
+    <message>
+        <source>Fold position:</source>
+        <translation>Vouw positie:</translation>
+    </message>
+    <message>
+        <source>Edit piece label template</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Options to control position a detail label. &lt;b&gt;Not available if a detail label template is empty&lt;/b&gt;.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Options to control position a pattern label. &lt;b&gt;Not available if a pattern label template is empty&lt;/b&gt;.</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -8537,6 +10090,38 @@ Wil je deze veranderingen opslaan?</translation>
     <message>
         <source>Show the second passmark on seam line</source>
         <translation>Toon de tweede pasmarkering op de naadlijn</translation>
+    </message>
+    <message>
+        <source>This option has effect only if the second passmark on seam line enabled in global preferences. The option helps disable the second passmark for this passmark only.</source>
+        <translation>Deze optie heeft alleen effect als de optie om een tweede knipje te laten zien op de zoomlijn aangevinkt is in de algemene opties. Deze optie staat het vervolgens toe om het tweede knipje voor dit specifieke knipje, uit te zetten.</translation>
+    </message>
+    <message>
+        <source>Select if need designate the corner point as a passmark. Show only left passmark.</source>
+        <translation>Selecteer en wanneer nodig, wijs de hoek punt aan als een pas markering. Toon alleen de linker pas markering.</translation>
+    </message>
+    <message>
+        <source>Intersection (only left)</source>
+        <translation>Kruispunt ( alleen links)</translation>
+    </message>
+    <message>
+        <source>Select if need designate the corner point as a passmark. Show only right passmark.</source>
+        <translation>Selecteer en wanneer nodig, wijs de hoek punt aan als een pas markering. Toon alleen de rechter pas markering.</translation>
+    </message>
+    <message>
+        <source>Intersection (only right)</source>
+        <translation>Kruispunt ( alleen rechts)</translation>
+    </message>
+    <message>
+        <source>Intersection 2</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Intersection 2 (only left)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Intersection 2 (only right)</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -8644,6 +10229,57 @@ Wil je deze veranderingen opslaan?</translation>
     <message>
         <source>Built in</source>
         <translation>Ingebouwd</translation>
+    </message>
+    <message>
+        <source>Hide the main path if the seam allowance is enabled</source>
+        <translation>Verberg de hoofdpad wanneer naadtoeslag is ingeschakeld</translation>
+    </message>
+    <message>
+        <source>Hide main path</source>
+        <translation>Verberg hoofdpad</translation>
+    </message>
+    <message>
+        <source>Name of detail:</source>
+        <translation>Detailnaam:</translation>
+    </message>
+    <message>
+        <source>Detail</source>
+        <translation>Detail</translation>
+    </message>
+    <message>
+        <source>Name can&apos;t be empty</source>
+        <translation>Naam mag niet leeg zijn</translation>
+    </message>
+    <message>
+        <source>Force piece to be always flipped in a layout.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Force flipping</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Move on top</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Move up</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Move down</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Move on bottom</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>TabPlaceLabels</name>
+    <message>
+        <source>Dialog</source>
+        <translation>Dialoog</translation>
     </message>
 </context>
 <context>
@@ -8877,10 +10513,52 @@ Wil je deze veranderingen opslaan?</translation>
     </message>
 </context>
 <context>
+    <name>TogglePieceForceForbidFlipping</name>
+    <message>
+        <source>piece flipping</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>TogglePieceInLayout</name>
     <message>
         <source>detail in layout list</source>
         <translation>detail in de opmaak-lijst</translation>
+    </message>
+</context>
+<context>
+    <name>Tool</name>
+    <message>
+        <source>First point</source>
+        <translation>Eerste punt</translation>
+    </message>
+    <message>
+        <source>Second point</source>
+        <translation>Tweede punt</translation>
+    </message>
+    <message>
+        <source>Highest point</source>
+        <translation>Hoogste punt</translation>
+    </message>
+    <message>
+        <source>Lowest point</source>
+        <translation>Laagste punt</translation>
+    </message>
+    <message>
+        <source>Leftmost point</source>
+        <translation>Uiterst linkerpunt</translation>
+    </message>
+    <message>
+        <source>Rightmost point</source>
+        <translation>Uiterst rechterpunt</translation>
+    </message>
+    <message>
+        <source>Vertical axis</source>
+        <translation>Verticale as</translation>
+    </message>
+    <message>
+        <source>Horizontal axis</source>
+        <translation>Horizontale as</translation>
     </message>
 </context>
 <context>
@@ -8918,11 +10596,11 @@ Wil je deze veranderingen opslaan?</translation>
     </message>
     <message>
         <source>Invalid version. Minimum supported version is %1</source>
-        <translation>Ongeldige versie. Minimale ondersteunde versie is %1</translation>
+        <translation type="vanished">Ongeldige versie. Minimale ondersteunde versie is %1</translation>
     </message>
     <message>
         <source>Invalid version. Maximum supported version is %1</source>
-        <translation>Ongeldige versie. Maximale ondersteunde versie is %1</translation>
+        <translation type="vanished">Ongeldige versie. Maximale ondersteunde versie is %1</translation>
     </message>
     <message>
         <source>Error no unique id.</source>
@@ -8952,12 +10630,78 @@ Wil je deze veranderingen opslaan?</translation>
         <source>Error openning a temp file: %1.</source>
         <translation>Fout bij het openen van een tijdelijk bestand: %1.</translation>
     </message>
+    <message>
+        <source>Invalid version. Minimum supported format version is %1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Invalid version. Maximum supported format version is %1</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>VAbstractCubicBezierPath</name>
     <message>
         <source>Can&apos;t cut this spline</source>
         <translation>Kan deze vrijevormkromming niet knippen</translation>
+    </message>
+</context>
+<context>
+    <name>VAbstractLayoutDialog</name>
+    <message>
+        <source>Letter</source>
+        <translation>Letter</translation>
+    </message>
+    <message>
+        <source>Legal</source>
+        <translation>Legaal</translation>
+    </message>
+    <message>
+        <source>Roll 24in</source>
+        <translation>Roll 24Inch</translation>
+    </message>
+    <message>
+        <source>Roll 30in</source>
+        <translation>Roll 30inch</translation>
+    </message>
+    <message>
+        <source>Roll 36in</source>
+        <translation>Roll 36inch</translation>
+    </message>
+    <message>
+        <source>Roll 42in</source>
+        <translation>Roll 42inch</translation>
+    </message>
+    <message>
+        <source>Roll 44in</source>
+        <translation>Roll 44inch</translation>
+    </message>
+    <message>
+        <source>Custom</source>
+        <translation>Op maat</translation>
+    </message>
+    <message>
+        <source>Roll 48in</source>
+        <translation>Roll 44inch {48inch?}</translation>
+    </message>
+    <message>
+        <source>Roll 62in</source>
+        <translation>Roll 44inch {62inch?}</translation>
+    </message>
+    <message>
+        <source>Roll 72in</source>
+        <translation>Roll 44inch {72inch?}</translation>
+    </message>
+</context>
+<context>
+    <name>VAbstractOperation</name>
+    <message>
+        <source>Label</source>
+        <translation>Label</translation>
+    </message>
+    <message>
+        <source>Length</source>
+        <translation>Lengte</translation>
     </message>
 </context>
 <context>
@@ -8974,12 +10718,27 @@ Wil je deze veranderingen opslaan?</translation>
         <source>New group</source>
         <translation>Nieuwe naam</translation>
     </message>
+    <message>
+        <source>measurement</source>
+        <translation>maten</translation>
+    </message>
 </context>
 <context>
     <name>VAbstractPieceData</name>
     <message>
         <source>Detail</source>
         <translation>Detail</translation>
+    </message>
+</context>
+<context>
+    <name>VAbstractSpline</name>
+    <message>
+        <source>Length</source>
+        <translation>Lengte</translation>
+    </message>
+    <message>
+        <source>Label</source>
+        <translation>Label</translation>
     </message>
 </context>
 <context>
@@ -9103,6 +10862,17 @@ Wil je deze veranderingen opslaan?</translation>
         <source>Exception thrown: %1. Program will be terminated.</source>
         <translation>Uitgeworpen uitzondering: %1. Programma wordt beëindigd.</translation>
     </message>
+    <message>
+        <source>Invalid notch.</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>VComboBoxDelegate</name>
+    <message>
+        <source>Select material</source>
+        <translation>Selecteer materiaal</translation>
+    </message>
 </context>
 <context>
     <name>VCommandLine</name>
@@ -9192,7 +10962,7 @@ Wil je deze veranderingen opslaan?</translation>
     </message>
     <message>
         <source>Cannot use pageformat and page explicit size/units together.</source>
-        <translation>Kan papierformaat en expliciete paginagrootte/eenheden niet tegelijkertijd gebruiken.</translation>
+        <translation type="vanished">Kan papierformaat en expliciete paginagrootte/eenheden niet tegelijkertijd gebruiken.</translation>
     </message>
     <message>
         <source>Page height, width, units must be used all 3 at once.</source>
@@ -9244,7 +11014,7 @@ Wil je deze veranderingen opslaan?</translation>
     </message>
     <message>
         <source>Set size value a pattern file, that was opened with standard measurements (export mode). Valid values: %1cm.</source>
-        <translation>Stel grootte waarde van een patroonbestand in, welke is geopend met standaard maten (export modus). Geldige waardes: %1cm.</translation>
+        <translation type="vanished">Stel grootte waarde van een patroonbestand in, welke is geopend met standaard maten (export modus). Geldige waardes: %1cm.</translation>
     </message>
     <message>
         <source>The size value</source>
@@ -9252,7 +11022,7 @@ Wil je deze veranderingen opslaan?</translation>
     </message>
     <message>
         <source>Set height value a pattern file, that was opened with standard measurements (export mode). Valid values: %1cm.</source>
-        <translation>Stel hoogte waarde van een patroon bestand in, welke is geopend met standaard maten (export modus). Geldige waarde: %1 cm.</translation>
+        <translation type="vanished">Stel hoogte waarde van een patroon bestand in, welke is geopend met standaard maten (export modus). Geldige waarde: %1 cm.</translation>
     </message>
     <message>
         <source>The height value</source>
@@ -9292,19 +11062,19 @@ Wil je deze veranderingen opslaan?</translation>
     </message>
     <message>
         <source>Page left margin in current units like 3.0 (export mode). If not set will be used value from default printer. Or 0 if none printers was found.</source>
-        <translation type="vanished">Linker pagina marge in huidige eenheden zoals 3.0 (export modus). Wanneer dat niet ingesteld is wordt de waarde gebruikt van de standaard printer. Of 0 als er geen printers gevonden zijn.</translation>
+        <translation>Linker pagina marge in huidige eenheden zoals 3.0 (export modus). Wanneer dat niet ingesteld is wordt de waarde gebruikt van de standaard printer. Of 0 als er geen printers gevonden zijn.</translation>
     </message>
     <message>
         <source>Page right margin in current units like 3.0 (export mode). If not set will be used value from default printer. Or 0 if none printers was found.</source>
-        <translation type="vanished">Rechter pagina marge in huidige eenheden zoals 3.0 ( export modus). Wanneer dat niet ingesteld is wordt de waarde gebruikt van de standaard printer. Of 0 als er geen printers gevonden zijn.</translation>
+        <translation>Rechter pagina marge in huidige eenheden zoals 3.0 ( export modus). Wanneer dat niet ingesteld is wordt de waarde gebruikt van de standaard printer. Of 0 als er geen printers gevonden zijn.</translation>
     </message>
     <message>
         <source>Page top margin in current units like 3.0 (export mode). If not set will be used value from default printer. Or 0 if none printers was found.</source>
-        <translation type="vanished">Top pagina marge in huidige eenheden zoals 3.0 (export modus). Wanneer dat niet ingesteld is wordt de waarde gebruikt van de standaard printer. Of 0 als er geen printers gevonden zijn.</translation>
+        <translation>Top pagina marge in huidige eenheden zoals 3.0 (export modus). Wanneer dat niet ingesteld is wordt de waarde gebruikt van de standaard printer. Of 0 als er geen printers gevonden zijn.</translation>
     </message>
     <message>
         <source>Page bottom margin in current units like 3.0 (export mode). If not set will be used value from default printer. Or 0 if none printers was found.</source>
-        <translation type="vanished">Onderste pagina marge in huidige eenheden zoals 3.0 (export modus). Wanneer dat niet ingesteld is wordt de waarde gebruikt van de standaard printer. Of 0 als er geen printers gevonden zijn.</translation>
+        <translation>Onderste pagina marge in huidige eenheden zoals 3.0 (export modus). Wanneer dat niet ingesteld is wordt de waarde gebruikt van de standaard printer. Of 0 als er geen printers gevonden zijn.</translation>
     </message>
     <message>
         <source>Shift length must be used together with shift units.</source>
@@ -9336,27 +11106,27 @@ Wil je deze veranderingen opslaan?</translation>
     </message>
     <message>
         <source>Page height/width measure units (cannot be used with &quot;%1&quot;, export mode). Valid values: %2.</source>
-        <translation>Hoogte/breedte pagina maten eenheden (kan niet worden gebruikt met &quot;%1&quot;, export-modus). Geldige waarden: %2.</translation>
+        <translation type="vanished">Hoogte/breedte pagina maten eenheden (kan niet worden gebruikt met &quot;%1&quot;, export-modus). Geldige waarden: %2.</translation>
     </message>
     <message>
         <source>Ignore margins printing (export mode). Disable value keys: &quot;%1&quot;, &quot;%2&quot;, &quot;%3&quot;, &quot;%4&quot;. Set all margins to 0.</source>
-        <translation>Negeer afdrukmarges (export modus). Maak de waarde sleutels onbruikbaar: &quot;%1&quot;, &quot;%2&quot;, &quot;%3&quot;, &quot;%4&quot;. Stel alle marges in op 0.</translation>
+        <translation type="vanished">Negeer afdrukmarges (export modus). Maak de waarde sleutels onbruikbaar: &quot;%1&quot;, &quot;%2&quot;, &quot;%3&quot;, &quot;%4&quot;. Stel alle marges in op 0.</translation>
     </message>
     <message>
         <source>Page left margin in current units like 3.0 (export mode). If not set will be used value from default printer. Or 0 if none printers was found. Value will be ignored if key &quot;%1&quot; is used.</source>
-        <translation>Linker pagina marge in huidige eenheden zoals 3.0 (export modus). Wanneer dat niet ingesteld is wordt de waarde gebruikt van de standaard printer. Of 0 als er geen printers gevonden zijn. Waarde wordt genegeerd als sleutel &quot;%1&quot; wordt gebruikt.</translation>
+        <translation type="vanished">Linker pagina marge in huidige eenheden zoals 3.0 (export modus). Wanneer dat niet ingesteld is wordt de waarde gebruikt van de standaard printer. Of 0 als er geen printers gevonden zijn. Waarde wordt genegeerd als sleutel &quot;%1&quot; wordt gebruikt.</translation>
     </message>
     <message>
         <source>Page right margin in current units like 3.0 (export mode). If not set will be used value from default printer. Or 0 if none printers was found. Value will be ignored if key &quot;%1&quot; is used.</source>
-        <translation>Rechter pagina marge in huidige eenheden zoals 3.0 ( export modus). Wanneer dat niet ingesteld is wordt de waarde gebruikt van de standaard printer. Of 0 als er geen printers gevonden zijn. Waarde wordt genegeerd als sleutel &quot;%1&quot; wordt gebruikt.</translation>
+        <translation type="vanished">Rechter pagina marge in huidige eenheden zoals 3.0 ( export modus). Wanneer dat niet ingesteld is wordt de waarde gebruikt van de standaard printer. Of 0 als er geen printers gevonden zijn. Waarde wordt genegeerd als sleutel &quot;%1&quot; wordt gebruikt.</translation>
     </message>
     <message>
         <source>Page top margin in current units like 3.0 (export mode). If not set will be used value from default printer. Or 0 if none printers was found. Value will be ignored if key &quot;%1&quot; is used.</source>
-        <translation>Bovenste pagina marge in huidige eenheden zoals 3.0 (export modus). Wanneer dat niet ingesteld is wordt de waarde gebruikt van de standaard printer. Of 0 als er geen printers gevonden zijn. Waarde wordt genegeerd als sleutel &quot;%1&quot; wordt gebruikt.</translation>
+        <translation type="vanished">Bovenste pagina marge in huidige eenheden zoals 3.0 (export modus). Wanneer dat niet ingesteld is wordt de waarde gebruikt van de standaard printer. Of 0 als er geen printers gevonden zijn. Waarde wordt genegeerd als sleutel &quot;%1&quot; wordt gebruikt.</translation>
     </message>
     <message>
         <source>Page bottom margin in current units like 3.0 (export mode). If not set will be used value from default printer. Or 0 if none printers was found. Value will be ignored if key &quot;%1&quot; is used.</source>
-        <translation>Onderste pagina marge in huidige eenheden zoals 3.0 (export modus). Wanneer dat niet ingesteld is wordt de waarde gebruikt van de standaard printer. Of 0 als er geen printers gevonden zijn. Waarde wordt genegeerd als sleutel &quot;%1&quot; wordt gebruikt.</translation>
+        <translation type="vanished">Onderste pagina marge in huidige eenheden zoals 3.0 (export modus). Wanneer dat niet ingesteld is wordt de waarde gebruikt van de standaard printer. Of 0 als er geen printers gevonden zijn. Waarde wordt genegeerd als sleutel &quot;%1&quot; wordt gebruikt.</translation>
     </message>
     <message>
         <source>Rotation in degrees (one of predefined, export mode). Default value is 180. 0 is no-rotate. Valid values: %1. Each value show how many times details will be rotated. For example 180 mean two times (360/180=2) by 180 degree.</source>
@@ -9404,11 +11174,159 @@ Wil je deze veranderingen opslaan?</translation>
     </message>
     <message>
         <source>Number corresponding to page template (default = 0, export mode):</source>
-        <translation>Nummer behorende bij de pagina sjabloon( standaardinstelling = 0, export modus):</translation>
+        <translation type="vanished">Nummer behorende bij de pagina sjabloon( standaardinstelling = 0, export modus):</translation>
     </message>
     <message>
         <source>Disable high dpi scaling. Call this option if has problem with scaling (by default scaling enabled). Alternatively you can use the %1 environment variable.</source>
         <translation>Schakel hoog-dpi-schaling uit. Gebruik deze optie als je problemen hebt met schaalverandering (als default is uitgeschakeld). Als alternatief kun je %1 omgevingsvariabele gebruiken.</translation>
+    </message>
+    <message>
+        <source>Export dxf in binary form.</source>
+        <translation>Exporteer DXF in binary vorm.</translation>
+    </message>
+    <message>
+        <source>Export text as paths.</source>
+        <translation>Exporteer tekst als paden.</translation>
+    </message>
+    <message>
+        <source>Export only details. Export details as they positioned in the details mode. Any layout related options will be ignored.</source>
+        <translation>Exporteer alleen details. Exporteer details zoals wanneer ze gepositioneerd in de details modus. Elke opmaak gerelateerde opties zullen worden genegeerd.</translation>
+    </message>
+    <message>
+        <source>Export only details that match a piece name regex.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>The name regex</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Export to csv with header. By default disabled.</source>
+        <translation>Exporteer naar CSV met kopschrift. Staat uit in de standaard instellingen.</translation>
+    </message>
+    <message>
+        <source>Specify codec that will be used to save data. List of supported codecs provided by Qt. Default value depend from system. On Windows, the codec will be based on a system locale. On Unix systems, the codec will might fall back to using the iconv library if no builtin codec for the locale can be found. Valid values for this installation:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Codec name</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Specify csv separator character. Default value is &apos;%1&apos;. Valid characters:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Separator character</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Calling this command enable exporting final measurements. Specify path to csv file with final measurements. The path must contain path to directory and name of file. It can be absolute or relatetive. In case of relative path will be used current working directory to calc a destination path.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Path to csv file</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Number corresponding to layout page template (default = 0, export mode):</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Ignore printer margins (export mode). Use if need full paper space. In case of later printing you must account for the margins himself.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Number corresponding to tiled pdf page template (default = 0, export mode with tiled pdf format):</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Tiled page left margin in current units like 3.0 (export mode). If not set will be used default value 1 cm.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>The left margin</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Tiled page right margin in current units like 3.0 (export mode). If not set will be used default value 1 cm.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>The right margin</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Tiled page top margin in current units like 3.0 (export mode). If not set will be used value default value 1 cm.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>The top margin</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Tiled page bottom margin in current units like 3.0 (export mode). If not set will be used value default value 1 cm.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>The bottom margin</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Set tiled page orienatation to landscape (export mode). Default value if not set portrait.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Cannot use pageformat and page explicit size together.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Tiled left margin must be used together with page units.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Tiled right margin must be used together with page units.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Tiled top margin must be used together with page units.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Tiled bottom margin must be used together with page units.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Page measure units (export mode). Valid values: %1.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Set size value for pattern file, that was opened with multisize measurements (export mode). Valid values: %1cm.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Set height value for pattern file, that was opened with multisize measurements (export mode). Valid values: %1cm.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Use this option to override user material defined in pattern. The value must be in form &lt;number&gt;@&lt;user matrial name&gt;. The number should be in range from 1 to %1. For example, 1@Fabric2. The key can be used multiple times. Has no effect in GUI mode.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>User material</source>
+        <translation>Gebruikers materiaal</translation>
+    </message>
+    <message>
+        <source>Make all parsing warnings into errors. Have effect only in console mode. Use to force Valentina to immediately terminate if a pattern contains a parsing warning.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Invalid user material &apos;%1&apos;. Separator is missing.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Invalid user material &apos;%1&apos;. Wrong material number.</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -9428,6 +11346,10 @@ Wil je deze veranderingen opslaan?</translation>
     <message>
         <source>templates</source>
         <translation>sjablonen</translation>
+    </message>
+    <message>
+        <source>label templates</source>
+        <translation>Label sjablonen</translation>
     </message>
 </context>
 <context>
@@ -9451,6 +11373,10 @@ Wil je deze veranderingen opslaan?</translation>
     <message>
         <source>Can&apos;t create a curve with type &apos;%1&apos;</source>
         <translation>Kan geen kromming maken met soort &apos;%1&apos;</translation>
+    </message>
+    <message>
+        <source>Can&apos;t cast object.</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -9516,7 +11442,7 @@ Wil je deze veranderingen opslaan?</translation>
     </message>
     <message>
         <source>This id is not unique.</source>
-        <translation>Deze ID is niet uniek.</translation>
+        <translation type="vanished">Deze ID is niet uniek.</translation>
     </message>
     <message>
         <source>Could not copy temp file to document file</source>
@@ -9534,6 +11460,10 @@ Wil je deze veranderingen opslaan?</translation>
         <source>Fail to write Canonical XML.</source>
         <translation>Het is mislukt om Conanical XML te schrijven.</translation>
     </message>
+    <message>
+        <source>&lt;empty&gt;</source>
+        <translation>&lt;empty&gt;</translation>
+    </message>
 </context>
 <context>
     <name>VDrawTool</name>
@@ -9548,6 +11478,18 @@ Wil je deze veranderingen opslaan?</translation>
     <message>
         <source>Delete</source>
         <translation>Verwijderen</translation>
+    </message>
+    <message>
+        <source>Show label</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Add to group</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Remove from group</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -9591,6 +11533,65 @@ Wil je deze veranderingen opslaan?</translation>
     <message>
         <source>The measurement name is empty!</source>
         <translation>De maten naam is leeg!</translation>
+    </message>
+</context>
+<context>
+    <name>VNodePoint</name>
+    <message>
+        <source>Options</source>
+        <translation type="unfinished">Opties</translation>
+    </message>
+    <message>
+        <source>In layout</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Show label</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Exclude</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Delete</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Forbid flipping</source>
+        <translation>Kantelen niet toegestaan</translation>
+    </message>
+    <message>
+        <source>Force flipping</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Angle</source>
+        <translation>Hoek</translation>
+    </message>
+    <message>
+        <source>by length</source>
+        <translation>op lengte</translation>
+    </message>
+    <message>
+        <source>by points intersetions</source>
+        <translation>op snijpunten</translation>
+    </message>
+    <message>
+        <source>by first edge symmetry</source>
+        <translation>op eerste lijn symmetrie-as</translation>
+    </message>
+    <message>
+        <source>by second edge symmetry</source>
+        <translation>op tweede lijn symmetrie-as</translation>
+    </message>
+    <message>
+        <source>by first edge right angle</source>
+        <translation>op eerste lijn rechte hoek</translation>
+    </message>
+    <message>
+        <source>by second edge right angle</source>
+        <translation>op tweede lijn rechte hoek</translation>
     </message>
 </context>
 <context>
@@ -9861,6 +11862,10 @@ Wil je deze veranderingen opslaan?</translation>
         <source>Error creating or updating pin point</source>
         <translation>Fout bij het maken of bijwerken van een pin punt</translation>
     </message>
+    <message>
+        <source>Error creating or updating place lavel</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>VPatternConverter</name>
@@ -9934,11 +11939,143 @@ Wil je deze veranderingen opslaan?</translation>
     </message>
     <message>
         <source>cut</source>
-        <translation>knip</translation>
+        <translation type="vanished">knip</translation>
     </message>
     <message>
         <source>on fold</source>
-        <translation>op vouw</translation>
+        <translation type="vanished">op vouw</translation>
+    </message>
+</context>
+<context>
+    <name>VToolAlongLine</name>
+    <message>
+        <source>Length</source>
+        <translation>Lengte</translation>
+    </message>
+    <message>
+        <source>Angle</source>
+        <translation>Hoek</translation>
+    </message>
+    <message>
+        <source>Label</source>
+        <translation>Label</translation>
+    </message>
+</context>
+<context>
+    <name>VToolArc</name>
+    <message>
+        <source>Length</source>
+        <translation>Lengte</translation>
+    </message>
+    <message>
+        <source>Radius</source>
+        <translation>Straal</translation>
+    </message>
+    <message>
+        <source>Start angle</source>
+        <translation>Start hoek</translation>
+    </message>
+    <message>
+        <source>End angle</source>
+        <translation>Einde straal</translation>
+    </message>
+    <message>
+        <source>Label</source>
+        <translation>Label</translation>
+    </message>
+</context>
+<context>
+    <name>VToolArcWithLength</name>
+    <message>
+        <source>Length</source>
+        <translation>Lengte</translation>
+    </message>
+    <message>
+        <source>Radius</source>
+        <translation>Straal</translation>
+    </message>
+    <message>
+        <source>Start angle</source>
+        <translation>Start hoek</translation>
+    </message>
+    <message>
+        <source>End angle</source>
+        <translation>Einde straal</translation>
+    </message>
+    <message>
+        <source>Label</source>
+        <translation>Label</translation>
+    </message>
+</context>
+<context>
+    <name>VToolBasePoint</name>
+    <message>
+        <source>Label</source>
+        <translation>Label</translation>
+    </message>
+</context>
+<context>
+    <name>VToolCurveIntersectAxis</name>
+    <message>
+        <source>Error calculating point &apos;%1&apos;. There is no intersection with curve &apos;%2&apos; and axis through point &apos;%3&apos; with angle %4°</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>VToolCutArc</name>
+    <message>
+        <source>Arc</source>
+        <translation>Boog</translation>
+    </message>
+    <message>
+        <source>length</source>
+        <translation>lengte</translation>
+    </message>
+    <message>
+        <source>start angle</source>
+        <translation>start hoek</translation>
+    </message>
+    <message>
+        <source>end angle</source>
+        <translation>einde hoek</translation>
+    </message>
+    <message>
+        <source>radius</source>
+        <translation>straal</translation>
+    </message>
+    <message>
+        <source>label</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>VToolCutSpline</name>
+    <message>
+        <source>Curve</source>
+        <translation>Kromming</translation>
+    </message>
+    <message>
+        <source>length</source>
+        <translation>lengte</translation>
+    </message>
+    <message>
+        <source>label</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>VToolCutSplinePath</name>
+    <message>
+        <source>Curve</source>
+        <translation>Kromming</translation>
+    </message>
+    <message>
+        <source>length</source>
+        <translation>lengte</translation>
+    </message>
+    <message>
+        <source>label</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -9990,6 +12127,152 @@ Wil je deze veranderingen opslaan?</translation>
     <message>
         <source>rotate grainline</source>
         <translation type="vanished">draai de recht-van-draad</translation>
+    </message>
+</context>
+<context>
+    <name>VToolDoublePoint</name>
+    <message>
+        <source>Label</source>
+        <translation>Label</translation>
+    </message>
+</context>
+<context>
+    <name>VToolEllipticalArc</name>
+    <message>
+        <source>Length</source>
+        <translation>Lengte</translation>
+    </message>
+    <message>
+        <source>Radius</source>
+        <translation>Straal</translation>
+    </message>
+    <message>
+        <source>Start angle</source>
+        <translation>Start hoek</translation>
+    </message>
+    <message>
+        <source>End angle</source>
+        <translation>Einde straal</translation>
+    </message>
+    <message>
+        <source>Label</source>
+        <translation>Label</translation>
+    </message>
+    <message>
+        <source>Rotation</source>
+        <translation>Rotatie</translation>
+    </message>
+</context>
+<context>
+    <name>VToolFlippingByAxis</name>
+    <message>
+        <source>Origin point</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>VToolFlippingByLine</name>
+    <message>
+        <source>First line point</source>
+        <translation type="unfinished">Eerste lijnpunt</translation>
+    </message>
+    <message>
+        <source>Second line point</source>
+        <translation type="unfinished">Tweede lijnpunt</translation>
+    </message>
+</context>
+<context>
+    <name>VToolHeight</name>
+    <message>
+        <source>Length</source>
+        <translation>Lengte</translation>
+    </message>
+    <message>
+        <source>Angle</source>
+        <translation>Hoek</translation>
+    </message>
+    <message>
+        <source>Label</source>
+        <translation>Label</translation>
+    </message>
+</context>
+<context>
+    <name>VToolLine</name>
+    <message>
+        <source>Length</source>
+        <translation>Lengte</translation>
+    </message>
+    <message>
+        <source>Angle</source>
+        <translation>Hoek</translation>
+    </message>
+</context>
+<context>
+    <name>VToolLineIntersect</name>
+    <message>
+        <source>Label</source>
+        <translation>Label</translation>
+    </message>
+    <message>
+        <source>Error calculating point &apos;%1&apos;. Lines (%2;%3) and (%4;%5) have no point of intersection</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>VToolLineIntersectAxis</name>
+    <message>
+        <source>Length</source>
+        <translation>Lengte</translation>
+    </message>
+    <message>
+        <source>Angle</source>
+        <translation>Hoek</translation>
+    </message>
+    <message>
+        <source>Label</source>
+        <translation>Label</translation>
+    </message>
+    <message>
+        <source>Error calculating point &apos;%1&apos;. Line (%2;%3) doesn&apos;t have intersection with axis through point &apos;%4&apos; and angle %5°</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>VToolLinePoint</name>
+    <message>
+        <source>Length</source>
+        <translation>Lengte</translation>
+    </message>
+    <message>
+        <source>Angle</source>
+        <translation>Hoek</translation>
+    </message>
+    <message>
+        <source>Label</source>
+        <translation>Label</translation>
+    </message>
+</context>
+<context>
+    <name>VToolMove</name>
+    <message>
+        <source>Rotation angle</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Length</source>
+        <translation>Lengte</translation>
+    </message>
+    <message>
+        <source>Center point</source>
+        <translation>Middelste punt</translation>
+    </message>
+    <message>
+        <source>Angle</source>
+        <translation>Hoek</translation>
+    </message>
+    <message>
+        <source>Rotation origin point</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -10124,11 +12407,11 @@ Wil je deze veranderingen opslaan?</translation>
     </message>
     <message>
         <source>First point</source>
-        <translation>Eerste punt</translation>
+        <translation type="vanished">Eerste punt</translation>
     </message>
     <message>
         <source>Second point</source>
-        <translation>Tweede punt</translation>
+        <translation type="vanished">Tweede punt</translation>
     </message>
     <message>
         <source>Arc with given length</source>
@@ -10180,19 +12463,19 @@ Wil je deze veranderingen opslaan?</translation>
     </message>
     <message>
         <source>Highest point</source>
-        <translation>Hoogste punt</translation>
+        <translation type="vanished">Hoogste punt</translation>
     </message>
     <message>
         <source>Lowest point</source>
-        <translation>Laagste punt</translation>
+        <translation type="vanished">Laagste punt</translation>
     </message>
     <message>
         <source>Leftmost point</source>
-        <translation>Uiterst linkerpunt</translation>
+        <translation type="vanished">Uiterst linkerpunt</translation>
     </message>
     <message>
         <source>Rightmost point</source>
-        <translation>Uiterst rechterpunt</translation>
+        <translation type="vanished">Uiterst rechterpunt</translation>
     </message>
     <message>
         <source>Tool to make point from intersection two curves</source>
@@ -10244,11 +12527,11 @@ Wil je deze veranderingen opslaan?</translation>
     </message>
     <message>
         <source>Vertical axis</source>
-        <translation>Verticale as</translation>
+        <translation type="vanished">Verticale as</translation>
     </message>
     <message>
         <source>Horizontal axis</source>
-        <translation>Horizontale as</translation>
+        <translation type="vanished">Horizontale as</translation>
     </message>
     <message>
         <source>Tool move</source>
@@ -10514,6 +12797,83 @@ Wil je deze veranderingen opslaan?</translation>
         <source>Fourth point:</source>
         <translation>Vierde punt:</translation>
     </message>
+    <message>
+        <source>Pen style:</source>
+        <translation>Pen stijl:</translation>
+    </message>
+    <message>
+        <source>Approximation scale:</source>
+        <translation>Schaal bij benadering:</translation>
+    </message>
+    <message>
+        <source>Rotation origin point:</source>
+        <translation>Rotatie originele punt:</translation>
+    </message>
+</context>
+<context>
+    <name>VToolPointFromArcAndTangent</name>
+    <message>
+        <source>Error calculating point &apos;%1&apos;. Tangent to arc &apos;%2&apos; from point &apos;%3&apos; cannot be found</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>VToolPointFromCircleAndTangent</name>
+    <message>
+        <source>Error calculating point &apos;%1&apos;. Tangent to circle with center &apos;%2&apos; and radius &apos;%3&apos; from point &apos;%4&apos; cannot be found</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>VToolPointOfContact</name>
+    <message>
+        <source>Length</source>
+        <translation>Lengte</translation>
+    </message>
+    <message>
+        <source>Angle</source>
+        <translation>Hoek</translation>
+    </message>
+    <message>
+        <source>Label</source>
+        <translation>Label</translation>
+    </message>
+    <message>
+        <source>Error calculating point &apos;%1&apos;. Circle with center &apos;%2&apos; and radius &apos;%3&apos; doesn&apos;t have intersection with line (%4;%5)</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>VToolPointOfIntersectionArcs</name>
+    <message>
+        <source>Error calculating point &apos;%1&apos;. Arcs &apos;%2&apos; and &apos;%3&apos; have no point of intersection</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>VToolPointOfIntersectionCircles</name>
+    <message>
+        <source>Error calculating point &apos;%1&apos;. Circles with centers in points &apos;%2&apos; and &apos;%3&apos; have no point of intersection</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>VToolPointOfIntersectionCurves</name>
+    <message>
+        <source>Error calculating point &apos;%1&apos;. Curves &apos;%2&apos; and &apos;%3&apos; have no point of intersection</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>VToolRotation</name>
+    <message>
+        <source>Origin point</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Rotation angle</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>VToolSeamAllowance</name>
@@ -10568,6 +12928,44 @@ Wil je deze veranderingen opslaan?</translation>
     <message>
         <source>Delete</source>
         <translation>Verwijder</translation>
+    </message>
+    <message>
+        <source>apply save detail options</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>multi deletion</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Forbid flipping</source>
+        <translation>Kantelen niet toegestaan</translation>
+    </message>
+    <message>
+        <source>Force flipping</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>VToolShoulderPoint</name>
+    <message>
+        <source>Length</source>
+        <translation>Lengte</translation>
+    </message>
+    <message>
+        <source>Angle</source>
+        <translation>Hoek</translation>
+    </message>
+    <message>
+        <source>Label</source>
+        <translation>Label</translation>
+    </message>
+</context>
+<context>
+    <name>VToolTriangle</name>
+    <message>
+        <source>Error calculating point &apos;%1&apos;. Point of intersection cannot be found</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -11591,17 +13989,17 @@ Wil je deze veranderingen opslaan?</translation>
     <message>
         <source>cm</source>
         <comment>centimeter</comment>
-        <translation>cm</translation>
+        <translation type="vanished">cm</translation>
     </message>
     <message>
         <source>mm</source>
         <comment>millimeter</comment>
-        <translation>mm</translation>
+        <translation type="vanished">mm</translation>
     </message>
     <message>
         <source>in</source>
         <comment>inch</comment>
-        <translation>in</translation>
+        <translation type="vanished">in</translation>
     </message>
     <message>
         <source>Line_</source>
@@ -11793,6 +14191,176 @@ Wil je deze veranderingen opslaan?</translation>
         <comment>Left symbol _ in the name</comment>
         <translation>Toenemen_</translation>
     </message>
+    <message>
+        <source>ElArc_</source>
+        <comment>Left symbol _ in the name</comment>
+        <translation>ElHoek_</translation>
+    </message>
+    <message>
+        <source>Radius1ElArc_</source>
+        <comment>Left symbol _ in the name</comment>
+        <translation>Straal1ElHoek_</translation>
+    </message>
+    <message>
+        <source>Radius2ElArc_</source>
+        <comment>Left symbol _ in the name</comment>
+        <translation>Straal2ElHoek_</translation>
+    </message>
+    <message>
+        <source>Angle1ElArc_</source>
+        <comment>Left symbol _ in the name</comment>
+        <translation>HoekEl1Hoek_</translation>
+    </message>
+    <message>
+        <source>Angle2ElArc_</source>
+        <comment>Left symbol _ in the name</comment>
+        <translation>Hoek2ElHoek_</translation>
+    </message>
+    <message>
+        <source>date</source>
+        <comment>placeholder</comment>
+        <translation>datum</translation>
+    </message>
+    <message>
+        <source>time</source>
+        <comment>placeholder</comment>
+        <translation>tijd</translation>
+    </message>
+    <message>
+        <source>patternName</source>
+        <comment>placeholder</comment>
+        <translation>patroonNaam</translation>
+    </message>
+    <message>
+        <source>patternNumber</source>
+        <comment>placeholder</comment>
+        <translation>patroonNummer</translation>
+    </message>
+    <message>
+        <source>author</source>
+        <comment>placeholder</comment>
+        <translation>auteur</translation>
+    </message>
+    <message>
+        <source>customer</source>
+        <comment>placeholder</comment>
+        <translation>klant</translation>
+    </message>
+    <message>
+        <source>pExt</source>
+        <comment>placeholder</comment>
+        <translation>pExt</translation>
+    </message>
+    <message>
+        <source>pFileName</source>
+        <comment>placeholder</comment>
+        <translation>pBestandsNaam</translation>
+    </message>
+    <message>
+        <source>mFileName</source>
+        <comment>placeholder</comment>
+        <translation>mBestandsNaam</translation>
+    </message>
+    <message>
+        <source>mExt</source>
+        <comment>placeholder</comment>
+        <translation>mExt</translation>
+    </message>
+    <message>
+        <source>pLetter</source>
+        <comment>placeholder</comment>
+        <translation>pLetter</translation>
+    </message>
+    <message>
+        <source>pAnnotation</source>
+        <comment>placeholder</comment>
+        <translation>pAantekening</translation>
+    </message>
+    <message>
+        <source>pOrientation</source>
+        <comment>placeholder</comment>
+        <translation>pOrientatie</translation>
+    </message>
+    <message>
+        <source>pRotation</source>
+        <comment>placeholder</comment>
+        <translation>pDraaiing</translation>
+    </message>
+    <message>
+        <source>pTilt</source>
+        <comment>placeholder</comment>
+        <translation>pTillen</translation>
+    </message>
+    <message>
+        <source>pFoldPosition</source>
+        <comment>placeholder</comment>
+        <translation>pVouwPostie</translation>
+    </message>
+    <message>
+        <source>pName</source>
+        <comment>placeholder</comment>
+        <translation>pNaam</translation>
+    </message>
+    <message>
+        <source>pQuantity</source>
+        <comment>placeholder</comment>
+        <translation>pKwantiteit</translation>
+    </message>
+    <message>
+        <source>mFabric</source>
+        <comment>placeholder</comment>
+        <translation>mStof</translation>
+    </message>
+    <message>
+        <source>mLining</source>
+        <comment>placeholder</comment>
+        <translation>mVoering</translation>
+    </message>
+    <message>
+        <source>mInterfacing</source>
+        <comment>placeholder</comment>
+        <translation>mVlieseline</translation>
+    </message>
+    <message>
+        <source>mInterlining</source>
+        <comment>placeholder</comment>
+        <translation>mTussenvoering</translation>
+    </message>
+    <message>
+        <source>wCut</source>
+        <comment>placeholder</comment>
+        <translation>wKnippen</translation>
+    </message>
+    <message>
+        <source>wOnFold</source>
+        <comment>placeholder</comment>
+        <translation>wOpVouw</translation>
+    </message>
+    <message>
+        <source>userMaterial</source>
+        <comment>placeholder</comment>
+        <translation>gebruikersMateriaal</translation>
+    </message>
+    <message>
+        <source>r2cm</source>
+        <comment>round to up to 1 decimal</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>csrCm</source>
+        <comment>cut, split and rotate modeling operation. Takes cm units.</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>csrInch</source>
+        <comment>cut, split and rotate modeling operation. Takes inch units.</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>RotationElArc_</source>
+        <comment>Left symbol _ in the name</comment>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>VVITConverter</name>
@@ -11910,7 +14478,15 @@ Wil je deze veranderingen opslaan?</translation>
     <name>VisToolMove</name>
     <message>
         <source>Length = %1%2, angle = %3°, &lt;b&gt;Shift&lt;/b&gt; - sticking angle, &lt;b&gt;Mouse click&lt;/b&gt; - finish creation</source>
-        <translation>Lengte = %1%2, hoek = %3°, &lt;b&gt;Shift&lt;/b&gt; - steekhoek, &lt;b&gt;Muis klik&lt;/b&gt; -voltooi creatie</translation>
+        <translation type="vanished">Lengte = %1%2, hoek = %3°, &lt;b&gt;Shift&lt;/b&gt; - steekhoek, &lt;b&gt;Muis klik&lt;/b&gt; -voltooi creatie</translation>
+    </message>
+    <message>
+        <source>Length = %1%2, angle = %3°, &lt;b&gt;Shift&lt;/b&gt; - sticking angle, &lt;b&gt;Mouse click&lt;/b&gt; - finish selecting a position</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Length = %1%2, angle = %3°, rotation angle = %4°, &lt;b&gt;Shift&lt;/b&gt; - sticking angle, &lt;b&gt;%5&lt;/b&gt; - change rotation origin point, &lt;b&gt;Mouse click&lt;/b&gt; - finish creating</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -12021,19 +14597,35 @@ Wil je deze veranderingen opslaan?</translation>
     </message>
     <message>
         <source>Warning.</source>
-        <translation>Waarschuwing.</translation>
+        <translation type="vanished">Waarschuwing.</translation>
     </message>
     <message>
         <source>Critical error.</source>
-        <translation>Cruciale fout.</translation>
+        <translation type="vanished">Cruciale fout.</translation>
     </message>
     <message>
         <source>Fatal error.</source>
-        <translation>Fatale fout.</translation>
+        <translation type="vanished">Fatale fout.</translation>
     </message>
     <message>
         <source>Information.</source>
-        <translation>Informatie.</translation>
+        <translation type="vanished">Informatie.</translation>
+    </message>
+    <message>
+        <source>Warning</source>
+        <translation>Waarschuwing</translation>
+    </message>
+    <message>
+        <source>Critical error</source>
+        <translation>Cruciale fout</translation>
+    </message>
+    <message>
+        <source>Fatal error</source>
+        <translation>Fatale fout</translation>
+    </message>
+    <message>
+        <source>Information</source>
+        <translation>Informatie</translation>
     </message>
 </context>
 </TS>

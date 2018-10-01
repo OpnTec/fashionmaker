@@ -10,7 +10,7 @@
         <heights h116="false" h176="true" h104="false" h164="true" h152="false" h92="false" h140="false" h98="false" h158="false" h146="false" h134="false" h194="true" all="false" h122="false" h182="true" h110="false" h170="true" h128="false" h188="true"/>
         <sizes s34="false" s36="false" s22="false" s38="false" s24="false" s26="false" s28="false" s50="true" s52="true" s54="true" s40="false" s56="true" all="false" s42="true" s44="true" s30="false" s46="true" s48="true" s32="false"/>
     </gradation>
-    <measurements>../../../../../build-Valentina-Desktop-Debug/src/app/valentina/bin/tables/standard/GOST_man_ru.vst</measurements>
+    <measurements>../../../../../build-Valentina-Desktop-Debug/src/app/valentina/bin/tables/multisize/GOST_man_ru.vst</measurements>
     <!--Valentina pattern format.-->
     <increments>
         <increment name="#Диз" description="Длина брюк" formula="1120"/>

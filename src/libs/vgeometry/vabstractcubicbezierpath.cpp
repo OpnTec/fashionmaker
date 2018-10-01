@@ -6,7 +6,7 @@
  **
  **  @brief
  **  @copyright
- **  This source code is part of the Valentine project, a pattern making
+ **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2016 Valentina project
  **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
@@ -69,12 +69,12 @@ VAbstractCubicBezierPath::~VAbstractCubicBezierPath()
  * @brief GetPath return QPainterPath which reprezent spline path.
  * @return path.
  */
-QPainterPath VAbstractCubicBezierPath::GetPath(PathDirection direction) const
+QPainterPath VAbstractCubicBezierPath::GetPath() const
 {
     QPainterPath painterPath;
     for (qint32 i = 1; i <= CountSubSpl(); ++i)
     {
-        painterPath.addPath(GetSpline(i).GetPath(direction));
+        painterPath.addPath(GetSpline(i).GetPath());
     }
     return painterPath;
 }
@@ -89,6 +89,11 @@ QVector<QPointF> VAbstractCubicBezierPath::GetPoints() const
     QVector<QPointF> pathPoints;
     for (qint32 i = 1; i <= CountSubSpl(); ++i)
     {
+        if (not pathPoints.isEmpty())
+        {
+            pathPoints.removeLast();
+        }
+
         pathPoints += GetSpline(i).GetPoints();
     }
     return pathPoints;
@@ -110,17 +115,24 @@ qreal VAbstractCubicBezierPath::GetLength() const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+QVector<DirectionArrow> VAbstractCubicBezierPath::DirectionArrows() const
+{
+    QVector<DirectionArrow> arrows;
+    for (qint32 i = 1; i <= CountSubSpl(); ++i)
+    {
+        arrows += GetSpline(i).DirectionArrows();
+    }
+    return arrows;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 int VAbstractCubicBezierPath::Segment(const QPointF &p) const
 {
     int index = -1;
     for (qint32 i = 1; i <= CountSubSpl(); ++i)
     {
         const qreal t = GetSpline(i).ParamT(p);
-        if (not qFuzzyIsNull(t) && qFuzzyCompare(t, -1))
-        {
-            continue;
-        }
-        else
+        if (qFuzzyIsNull(t) || not qFuzzyCompare(t, -1))
         {
             index = i;
             break;

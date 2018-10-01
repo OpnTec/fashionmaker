@@ -9,5 +9,5 @@ include(undocommands/undocommands.pri)
 HEADERS += \
     $$PWD/stable.h
 
-win32-msvc*:SOURCES += $$PWD/stable.cpp
+*msvc*:SOURCES += $$PWD/stable.cpp
 

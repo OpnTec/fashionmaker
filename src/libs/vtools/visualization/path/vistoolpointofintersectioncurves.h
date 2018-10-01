@@ -6,7 +6,7 @@
  **
  **  @brief
  **  @copyright
- **  This source code is part of the Valentine project, a pattern making
+ **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2016 Valentina project
  **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
@@ -47,23 +47,22 @@ public:
     explicit VisToolPointOfIntersectionCurves(const VContainer *data, QGraphicsItem *parent = nullptr);
     virtual ~VisToolPointOfIntersectionCurves() Q_DECL_EQ_DEFAULT;
 
-    virtual void RefreshGeometry() Q_DECL_OVERRIDE;
-    virtual void VisualMode(const quint32 &id) Q_DECL_OVERRIDE;
+    virtual void RefreshGeometry() override;
+    virtual void VisualMode(const quint32 &id) override;
 
     void setObject2Id(const quint32 &value);
     void setVCrossPoint(const VCrossCurvesPoint &value);
     void setHCrossPoint(const HCrossCurvesPoint &value);
 
-    virtual int  type() const Q_DECL_OVERRIDE {return Type;}
+    virtual int  type() const override {return Type;}
     enum { Type = UserType + static_cast<int>(Vis::ToolPointOfIntersectionCurves)};
 private:
     Q_DISABLE_COPY(VisToolPointOfIntersectionCurves)
-    quint32              object2Id;
-    VCrossCurvesPoint    vCrossPoint;
-    HCrossCurvesPoint    hCrossPoint;
-
-    QGraphicsEllipseItem *point;
-    QGraphicsPathItem    *visCurve2;
+    quint32            object2Id;
+    VCrossCurvesPoint  vCrossPoint;
+    HCrossCurvesPoint  hCrossPoint;
+    VScaledEllipse    *point;
+    VCurvePathItem    *visCurve2;
 
 };
 

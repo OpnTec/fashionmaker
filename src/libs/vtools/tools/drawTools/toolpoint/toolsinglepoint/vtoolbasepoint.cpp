@@ -6,7 +6,7 @@
  **
  **  @brief
  **  @copyright
- **  This source code is part of the Valentine project, a pattern making
+ **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2013-2015 Valentina project
  **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
@@ -73,29 +73,17 @@ const QString VToolBasePoint::ToolType = QStringLiteral("single");
 //---------------------------------------------------------------------------------------------------------------------
 /**
  * @brief VToolBasePoint constructor.
- * @param doc dom document container.
- * @param data container with variables.
- * @param id object id in container.
- * @param typeCreation way we create this tool.
+ * @param initData init data.
  * @param parent parent object.
  */
-VToolBasePoint::VToolBasePoint (VAbstractPattern *doc, VContainer *data, quint32 id, const Source &typeCreation,
-                                const QString &namePP, QGraphicsItem * parent )
-    :VToolSinglePoint(doc, data, id, parent), namePP(namePP)
+VToolBasePoint::VToolBasePoint (const VToolBasePointInitData &initData, QGraphicsItem * parent )
+    :VToolSinglePoint(initData.doc, initData.data, initData.id, parent), namePP(initData.nameActivPP)
 {
-    baseColor = Qt::red;
-    this->setPen(QPen(baseColor, qApp->toPixel(WidthHairLine(*VAbstractTool::data.GetPatternUnit()))/factor));
+    m_baseColor = Qt::red;
     this->setFlag(QGraphicsItem::ItemIsMovable, true);
     this->setFlag(QGraphicsItem::ItemSendsGeometryChanges, true);
-    SetColorLabel(Qt::black);
-    ToolCreation(typeCreation);
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-VToolBasePoint::~VToolBasePoint()
-{
-    //Disable cursor-arrow-openhand
-    RestoreOverrideCursor(cursorArrowOpenHand);
+    m_namePoint->setBrush(Qt::black);
+    ToolCreation(initData.typeCreation);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -105,40 +93,38 @@ VToolBasePoint::~VToolBasePoint()
 void VToolBasePoint::setDialog()
 {
     SCASSERT(not m_dialog.isNull())
-    QSharedPointer<DialogSinglePoint> dialogTool = m_dialog.objectCast<DialogSinglePoint>();
+    const QPointer<DialogSinglePoint> dialogTool = qobject_cast<DialogSinglePoint *>(m_dialog);
     SCASSERT(not dialogTool.isNull())
-    const QSharedPointer<VPointF> p = VAbstractTool::data.GeometricObject<VPointF>(id);
+    const QSharedPointer<VPointF> p = VAbstractTool::data.GeometricObject<VPointF>(m_id);
     dialogTool->SetData(p->name(), static_cast<QPointF>(*p));
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-VToolBasePoint *VToolBasePoint::Create(quint32 _id, const QString &nameActivPP, VPointF *point,
-                                       VMainGraphicsScene *scene, VAbstractPattern *doc, VContainer *data,
-                                       const Document &parse, const Source &typeCreation)
+VToolBasePoint *VToolBasePoint::Create(VToolBasePointInitData initData)
 {
-    SCASSERT(point != nullptr)
+    VPointF *point = new VPointF(initData.x, initData.y, initData.name, initData.mx, initData.my);
+    point->SetShowLabel(initData.showLabel);
 
-    quint32 id = _id;
-    if (typeCreation == Source::FromGui)
+    if (initData.typeCreation == Source::FromGui)
     {
-        id = data->AddGObject(point);
+        initData.id = initData.data->AddGObject(point);
     }
     else
     {
-        data->UpdateGObject(id, point);
-        if (parse != Document::FullParse)
+        initData.data->UpdateGObject(initData.id, point);
+        if (initData.parse != Document::FullParse)
         {
-            doc->UpdateToolData(id, data);
+            initData.doc->UpdateToolData(initData.id, initData.data);
         }
     }
 
-    if (parse == Document::FullParse)
+    if (initData.parse == Document::FullParse)
     {
-        VDrawTool::AddRecord(id, Tool::BasePoint, doc);
-        VToolBasePoint *spoint = new VToolBasePoint(doc, data, id, typeCreation, nameActivPP);
-        scene->addItem(spoint);
-        InitToolConnections(scene, spoint);
-        VAbstractPattern::AddTool(id, spoint);
+        VAbstractTool::AddRecord(initData.id, Tool::BasePoint, initData.doc);
+        VToolBasePoint *spoint = new VToolBasePoint(initData);
+        initData.scene->addItem(spoint);
+        InitToolConnections(initData.scene, spoint);
+        VAbstractPattern::AddTool(initData.id, spoint);
         return spoint;
     }
     return nullptr;
@@ -161,7 +147,7 @@ void VToolBasePoint::AddToFile()
     QDomElement sPoint = doc->createElement(getTagName());
 
     // Create SPoint tag
-    QSharedPointer<VGObject> obj = VAbstractTool::data.GetGObject(id);
+    QSharedPointer<VGObject> obj = VAbstractTool::data.GetGObject(m_id);
     SaveOptions(sPoint, obj);
 
     //Create pattern piece structure
@@ -201,16 +187,17 @@ QVariant VToolBasePoint::itemChange(QGraphicsItem::GraphicsItemChange change, co
             // value - this is new position.
             QPointF newPos = value.toPointF();
 
-            MoveSPoint *moveSP = new MoveSPoint(doc, newPos.x(), newPos.y(), id, this->scene());
+            MoveSPoint *moveSP = new MoveSPoint(doc, newPos.x(), newPos.y(), m_id, this->scene());
             connect(moveSP, &MoveSPoint::NeedLiteParsing, doc, &VAbstractPattern::LiteParseTree);
             qApp->getUndoStack()->push(moveSP);
             const QList<QGraphicsView *> viewList = scene()->views();
             if (not viewList.isEmpty())
             {
-                if (QGraphicsView *view = viewList.at(0))
+                if (VMainGraphicsView *view = qobject_cast<VMainGraphicsView *>(viewList.at(0)))
                 {
-                    const int xmargin = 50;
-                    const int ymargin = 50;
+                    const qreal scale = SceneScale(scene());
+                    const int xmargin = qCeil(50/scale);
+                    const int ymargin = qCeil(50/scale);
 
                     const QRectF viewRect = VMainGraphicsView::SceneVisibleArea(view);
                     const QRectF itemRect = mapToScene(boundingRect()).boundingRect();
@@ -219,7 +206,7 @@ QVariant VToolBasePoint::itemChange(QGraphicsItem::GraphicsItemChange change, co
                     if (itemRect.height() + 2*ymargin < viewRect.height() &&
                         itemRect.width() + 2*xmargin < viewRect.width())
                     {
-                         view->ensureVisible(itemRect, xmargin, ymargin);
+                         view->EnsureVisibleWithDelay(itemRect, VMainGraphicsView::scrollDelay, xmargin, ymargin);
                     }
                     else
                     {
@@ -227,7 +214,9 @@ QVariant VToolBasePoint::itemChange(QGraphicsItem::GraphicsItemChange change, co
                         VMainGraphicsScene *currentScene = qobject_cast<VMainGraphicsScene *>(scene());
                         SCASSERT(currentScene)
                         const QPointF cursorPosition = currentScene->getScenePos();
-                        view->ensureVisible(QRectF(cursorPosition.x()-5, cursorPosition.y()-5, 10, 10));
+                        view->EnsureVisibleWithDelay(QRectF(cursorPosition.x()-5/scale, cursorPosition.y()-5/scale,
+                                                            10/scale, 10/scale),
+                                                     VMainGraphicsView::scrollDelay);
                     }
                 }
             }
@@ -250,10 +239,30 @@ void VToolBasePoint::decrementReferens()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VToolBasePoint::DeleteTool(bool ask)
+QPointF VToolBasePoint::GetBasePointPos() const
+{
+    const QSharedPointer<VPointF> p = VAbstractTool::data.GeometricObject<VPointF>(m_id);
+    QPointF pos(qApp->fromPixel(p->x()), qApp->fromPixel(p->y()));
+    return pos;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VToolBasePoint::SetBasePointPos(const QPointF &pos)
+{
+    QSharedPointer<VPointF> p = VAbstractTool::data.GeometricObject<VPointF>(m_id);
+    p->setX(qApp->toPixel(pos.x()));
+    p->setY(qApp->toPixel(pos.y()));
+
+    QSharedPointer<VGObject> obj = qSharedPointerCast<VGObject>(p);
+
+    SaveOption(obj);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VToolBasePoint::DeleteToolWithConfirm(bool ask)
 {
     qCDebug(vTool, "Deleting base point.");
-    qApp->getSceneView()->itemClicked(nullptr);
+    emit qApp->getSceneView()->itemClicked(nullptr);
     if (ask)
     {
         qCDebug(vTool, "Asking.");
@@ -278,11 +287,16 @@ void VToolBasePoint::DeleteTool(bool ask)
 /**
  * @brief SaveDialog save options into file after change in dialog.
  */
-void VToolBasePoint::SaveDialog(QDomElement &domElement)
+void VToolBasePoint::SaveDialog(QDomElement &domElement, QList<quint32> &oldDependencies,
+                                QList<quint32> &newDependencies)
 {
     SCASSERT(not m_dialog.isNull())
-    QSharedPointer<DialogSinglePoint> dialogTool = m_dialog.objectCast<DialogSinglePoint>();
+    const QPointer<DialogSinglePoint> dialogTool = qobject_cast<DialogSinglePoint *>(m_dialog);
     SCASSERT(not dialogTool.isNull())
+
+    Q_UNUSED(oldDependencies)
+    Q_UNUSED(newDependencies)
+
     const QPointF p = dialogTool->GetPoint();
     const QString name = dialogTool->getPointName();
     doc->SetAttribute(domElement, AttrName, name);
@@ -297,19 +311,7 @@ void VToolBasePoint::hoverEnterEvent(QGraphicsSceneHoverEvent *event)
 
     if (flags() & QGraphicsItem::ItemIsMovable)
     {
-        SetOverrideCursor(cursorArrowOpenHand, 1, 1);
-    }
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void VToolBasePoint::hoverLeaveEvent(QGraphicsSceneHoverEvent *event)
-{
-    VToolSinglePoint::hoverLeaveEvent(event);
-
-    if (flags() & QGraphicsItem::ItemIsMovable)
-    {
-        //Disable cursor-arrow-openhand
-        RestoreOverrideCursor(cursorArrowOpenHand);
+        SetItemOverrideCursor(this, cursorArrowOpenHand, 1, 1);
     }
 }
 
@@ -320,7 +322,8 @@ void VToolBasePoint::mousePressEvent(QGraphicsSceneMouseEvent *event)
     {
         if (event->button() == Qt::LeftButton && event->type() != QEvent::GraphicsSceneMouseDoubleClick)
         {
-            SetOverrideCursor(cursorArrowCloseHand, 1, 1);
+            SetItemOverrideCursor(this, cursorArrowCloseHand, 1, 1);
+            event->accept();
         }
     }
     VToolSinglePoint::mousePressEvent(event);
@@ -333,22 +336,10 @@ void VToolBasePoint::mouseReleaseEvent(QGraphicsSceneMouseEvent *event)
     {
         if (event->button() == Qt::LeftButton && event->type() != QEvent::GraphicsSceneMouseDoubleClick)
         {
-            //Disable cursor-arrow-closehand
-            RestoreOverrideCursor(cursorArrowCloseHand);
+            SetItemOverrideCursor(this, cursorArrowOpenHand, 1, 1);
         }
     }
     VToolSinglePoint::mouseReleaseEvent(event);
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-/**
- * @brief SetColorLabel change color for label and label line.
- * @param color new color.
- */
-void VToolBasePoint::SetColorLabel(const Qt::GlobalColor &color)
-{
-    namePoint->setBrush(color);
-    lineName->setPen(QPen(color, qApp->toPixel(WidthHairLine(*VAbstractTool::data.GetPatternUnit()))/factor));
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -372,15 +363,23 @@ void VToolBasePoint::ReadToolAttributes(const QDomElement &domElement)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-/**
- * @brief contextMenuEvent handle context menu events.
- * @param event context menu event.
- */
-void VToolBasePoint::contextMenuEvent ( QGraphicsSceneContextMenuEvent * event )
+QString VToolBasePoint::MakeToolTip() const
+{
+    const QSharedPointer<VPointF> point = VAbstractTool::data.GeometricObject<VPointF>(m_id);
+
+    const QString toolTip = QString("<table>"
+                                    "<tr> <td><b>%1:</b> %2</td> </tr>"
+                                    "</table>")
+            .arg(tr("Label"), point->name());
+    return toolTip;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VToolBasePoint::ShowContextMenu(QGraphicsSceneContextMenuEvent *event, quint32 id)
 {
     qCDebug(vTool, "Context menu base point");
 #ifndef QT_NO_CURSOR
-    QApplication::restoreOverrideCursor();
+    QGuiApplication::restoreOverrideCursor();
     qCDebug(vTool, "Restored overriden cursor");
 #endif
 
@@ -389,12 +388,12 @@ void VToolBasePoint::contextMenuEvent ( QGraphicsSceneContextMenuEvent * event )
         if (doc->CountPP() > 1)
         {
             qCDebug(vTool, "PP count > 1");
-            ContextMenu<DialogSinglePoint>(this, event, RemoveOption::Enable, Referens::Ignore);
+            ContextMenu<DialogSinglePoint>(event, id, RemoveOption::Enable, Referens::Ignore);
         }
         else
         {
             qCDebug(vTool, "PP count = 1");
-            ContextMenu<DialogSinglePoint>(this, event, RemoveOption::Disable);
+            ContextMenu<DialogSinglePoint>(event, id, RemoveOption::Disable);
         }
     }
     catch(const VExceptionToolWasDeleted &e)
@@ -412,18 +411,7 @@ void VToolBasePoint::contextMenuEvent ( QGraphicsSceneContextMenuEvent * event )
  */
 void  VToolBasePoint::FullUpdateFromFile()
 {
-    RefreshPointGeometry(*VAbstractTool::data.GeometricObject<VPointF>(id));
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-/**
- * @brief SetFactor set current scale factor of scene.
- * @param factor scene scale factor.
- */
-void VToolBasePoint::SetFactor(qreal factor)
-{
-    VDrawTool::SetFactor(factor);
-    RefreshPointGeometry(*(VAbstractTool::data.GeometricObject<VPointF>(id)));
+    RefreshPointGeometry(*VAbstractTool::data.GeometricObject<VPointF>(m_id));
 }
 
 //---------------------------------------------------------------------------------------------------------------------

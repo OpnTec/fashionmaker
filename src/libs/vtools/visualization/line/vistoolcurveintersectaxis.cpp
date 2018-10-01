@@ -6,7 +6,7 @@
  **
  **  @brief
  **  @copyright
- **  This source code is part of the Valentine project, a pattern making
+ **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2013-2015 Valentina project
  **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
@@ -53,16 +53,12 @@ VisToolCurveIntersectAxis::VisToolCurveIntersectAxis(const VContainer *data, QGr
 {
     this->mainColor = Qt::red;
 
-    visCurve = InitItem<QGraphicsPathItem>(Qt::darkGreen, this);
+    visCurve = InitItem<VCurvePathItem>(Qt::darkGreen, this);
     basePoint = InitPoint(supportColor, this);
-    baseLine = InitItem<QGraphicsLineItem>(supportColor, this);
-    axisLine = InitItem<QGraphicsLineItem>(supportColor, this); //-V656
+    baseLine = InitItem<VScaledLine>(supportColor, this);
+    axisLine = InitItem<VScaledLine>(supportColor, this); //-V656
     point = InitPoint(mainColor, this);
 }
-
-//---------------------------------------------------------------------------------------------------------------------
-VisToolCurveIntersectAxis::~VisToolCurveIntersectAxis()
-{}
 
 //---------------------------------------------------------------------------------------------------------------------
 void VisToolCurveIntersectAxis::RefreshGeometry()
@@ -70,7 +66,7 @@ void VisToolCurveIntersectAxis::RefreshGeometry()
     if (object1Id > NULL_ID)
     {
         const QSharedPointer<VAbstractCurve> curve = Visualization::data->GeometricObject<VAbstractCurve>(object1Id);
-        DrawPath(visCurve, curve->GetPath(PathDirection::Show), supportColor, Qt::SolidLine, Qt::RoundCap);
+        DrawPath(visCurve, curve->GetPath(), curve->DirectionArrows(), supportColor, Qt::SolidLine, Qt::RoundCap);
 
         if (axisPointId > NULL_ID)
         {
@@ -87,7 +83,8 @@ void VisToolCurveIntersectAxis::RefreshGeometry()
             DrawPoint(basePoint, static_cast<QPointF>(*first), mainColor);
             DrawLine(axisLine, axis, supportColor, Qt::DashLine);
 
-            QPointF p = VToolCurveIntersectAxis::FindPoint(static_cast<QPointF>(*first), axis.angle(), curve);
+            QPointF p;
+            VToolCurveIntersectAxis::FindPoint(static_cast<QPointF>(*first), axis.angle(), curve->GetPoints(), &p);
             QLineF axis_line(static_cast<QPointF>(*first), p);
             DrawLine(this, axis_line, mainColor, lineStyle);
 
@@ -109,7 +106,7 @@ QString VisToolCurveIntersectAxis::Angle() const
 //---------------------------------------------------------------------------------------------------------------------
 void VisToolCurveIntersectAxis::SetAngle(const QString &expression)
 {
-    angle = FindVal(expression, Visualization::data->PlainVariables());
+    angle = FindValFromUser(expression, Visualization::data->DataVariables());
 }
 
 //---------------------------------------------------------------------------------------------------------------------

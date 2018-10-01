@@ -28,7 +28,6 @@
 #include <QFile>
 #include <QFileDialog>
 #include <QFileInfo>
-#include <QForeachContainer>
 #include <QHBoxLayout>
 #include <QLineEdit>
 #include <QList>
@@ -112,9 +111,18 @@ QString VPE::VFileEditWidget::getFile() const
 
 void VPE::VFileEditWidget::onToolButtonClicked()
 {
-    QString filepath = (Directory ? QFileDialog::getExistingDirectory(0, tr("Directory"), CurrentFilePath)
-                                  : QFileDialog::getOpenFileName(0, tr("Open File"), CurrentFilePath,
-                                                                 FileDialogFilter));
+    QString filepath = (Directory ? QFileDialog::getExistingDirectory(nullptr, tr("Directory"), CurrentFilePath,
+                                                                      QFileDialog::ShowDirsOnly
+#ifdef Q_OS_LINUX
+                                                                      | QFileDialog::DontUseNativeDialog
+#endif
+                                                                      )
+                                  : QFileDialog::getOpenFileName(nullptr, tr("Open File"), CurrentFilePath,
+                                                                 FileDialogFilter, nullptr
+#ifdef Q_OS_LINUX
+                                                                 , QFileDialog::DontUseNativeDialog
+#endif
+                                                                 ));
     if (filepath.isNull() == false)
     {
         setFile(filepath, true);
@@ -211,11 +219,13 @@ bool VPE::VFileEditWidget::checkMimeData(const QMimeData* data, QString& file) c
         QList<QUrl> tmpUrlList = data->urls();
         QFileInfo tmpFileInfo;
 
-        foreach(QUrl tmpUrl, tmpUrlList)
+        for(const QUrl &tmpUrl : tmpUrlList)
+        {
             if (QFile::exists(tmpUrl.toLocalFile()))
             {
                 tmpFileInfo = QFileInfo(tmpUrl.toLocalFile()); break;
             }
+        }
 
         if (checkFileFilter(tmpFileInfo.fileName()))
         {
@@ -241,7 +251,7 @@ bool VPE::VFileEditWidget::checkFileFilter(const QString& file) const
         return false;
     }
 
-    foreach(QString tmpFilter, FilterList)
+    for (auto &tmpFilter : FilterList)
     {
         QRegExp tmpRegExpFilter(tmpFilter, Qt::CaseInsensitive, QRegExp::Wildcard);
         if (tmpRegExpFilter.exactMatch(file))

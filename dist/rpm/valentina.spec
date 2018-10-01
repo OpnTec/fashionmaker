@@ -6,8 +6,9 @@ Requires(postun): /sbin/ldconfig
 Requires(post): desktop-file-utils
 Requires(postun): desktop-file-utils
 
-# Fedora specifics
-%if 0%{?fedora_version} > 0 
+Conflicts: seamly2d
+
+%if 0%{?fedora_version} > 0 || 0%{?rhel_version} >= 700 || 0%{?centos_version} >= 700
 BuildRequires: qt5-qtbase-devel >= 5.2.0
 BuildRequires: pkgconfig(Qt5Svg)
 BuildRequires: pkgconfig(Qt5Core)
@@ -16,6 +17,9 @@ BuildRequires: pkgconfig(Qt5Network)
 BuildRequires: pkgconfig(Qt5PrintSupport)
 BuildRequires: pkgconfig(Qt5Widgets)
 BuildRequires: pkgconfig(Qt5Xml)
+BuildRequires: pkgconfig(Qt5Concurrent)
+BuildRequires: pkgconfig(Qt5OpenGL)
+BuildRequires: pkgconfig(Qt5XmlPatterns)
 BuildRequires: qt5-qtxmlpatterns-devel  >= 5.2.0
 BuildRequires: qt5-qtsvg-devel >= 5.2.0
 BuildRequires: qt5-qttools-devel >= 5.2.0
@@ -23,6 +27,30 @@ BuildRequires: qt5-qttools-devel >= 5.2.0
 Requires:      qt5-qtsvg >= 5.2.0
 Requires:      qt5-qtbase-gui >= 5.2.0
 Requires:      qt5-qtxmlpatterns >= 5.2.0
+%endif
+
+%if 0%{?mageia} > 0
+BuildRequires: libqt5-devel >= 5.2.0
+BuildRequires: pkgconfig(Qt5Svg)
+BuildRequires: pkgconfig(Qt5Core)
+BuildRequires: pkgconfig(Qt5Gui)
+BuildRequires: pkgconfig(Qt5Network)
+BuildRequires: pkgconfig(Qt5PrintSupport)
+BuildRequires: pkgconfig(Qt5Widgets)
+BuildRequires: pkgconfig(Qt5Xml)
+BuildRequires: pkgconfig(Qt5Concurrent)
+BuildRequires: pkgconfig(Qt5OpenGL)
+BuildRequires: pkgconfig(Qt5XmlPatterns)
+BuildRequires: libproxy-pacrunner
+BuildRequires: qttools5
+BuildRequires: qtbase5-common-devel >= 5.2.0
+
+%if 0%{?mageia} == 6
+BuildRequires: pkgconfig(openssl)
+%else
+BuildRequires: openssl-devel
+%endif
+
 %endif
 
 # SUSE Specifics
@@ -41,11 +69,11 @@ BuildRequires: libqt5-linguist-devel
 BuildRequires: libqt5-qtxmlpatterns-devel
 %endif
 
-%endif
+%endif # %if 0%{?suse_version} > 0
 
 Requires:   poppler-utils
 
-Version:	0.5.0
+Version:	0.6.0
 Release:	0
 URL:		https://bitbucket.org/dismine/valentina
 License:	GPL-3.0+
@@ -79,8 +107,15 @@ a unique pattern making tool.
 %if 0%{?suse_version} >= 1315
 qmake-qt5 PREFIX=%{_prefix} LRELEASE=lrelease-qt5 Valentina.pro -r "CONFIG += noTests noRunPath no_ccache noDebugSymbols"
 %else
+
+%if 0%{?mageia} >= 6
+qmake PREFIX=%{_prefix} Valentina.pro -r "CONFIG += noTests noRunPath no_ccache noDebugSymbols"
+%else
 qmake-qt5 PREFIX=%{_prefix} Valentina.pro -r "CONFIG += noTests noRunPath no_ccache noDebugSymbols"
 %endif
+
+%endif
+
 %{__make} %{?jobs:-j %jobs}
 
 %install
@@ -128,8 +163,8 @@ fi
 %files
 %defattr(-,root,root,-)
 %doc README.txt LICENSE_GPL.txt 
-%doc %{_mandir}/man1/%{name}.1.gz
-%doc %{_mandir}/man1/tape.1.gz
+%doc %{_mandir}/man1/%{name}.1*
+%doc %{_mandir}/man1/tape.1*
 %{_bindir}/valentina
 %{_bindir}/tape
 %{_libdir}/libvpropertyexplorer.so
@@ -150,10 +185,12 @@ fi
 %dir %{_datadir}/%{name}/translations
 %{_datadir}/%{name}/translations/*.qm
 %dir %{_datadir}/%{name}/tables
-%dir %{_datadir}/%{name}/tables/standard
-%{_datadir}/%{name}/tables/standard/*.vst
+%dir %{_datadir}/%{name}/tables/multisize
+%{_datadir}/%{name}/tables/multisize/*.vst
 %dir %{_datadir}/%{name}/tables/templates
 %{_datadir}/%{name}/tables/templates/*.vit
+%dir %{_datadir}/%{name}/labels
+%{_datadir}/%{name}/labels/*.xml
 
 %clean
 rm -f dist/debian/%{name}.1.gz dist/debian/tape.1.gz dist/debian/%{name}.xml dist/debian/%{name}
@@ -161,6 +198,6 @@ rm -f dist/debian/%{name}.1.gz dist/debian/tape.1.gz dist/debian/%{name}.xml dis
 
 
 %changelog
-* Fri Nov 27 2015 Roman Telezhynskyi
+* Mon Jun 11 2018 Roman Telezhynskyi
  - Auto build
 

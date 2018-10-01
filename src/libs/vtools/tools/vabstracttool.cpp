@@ -6,7 +6,7 @@
  **
  **  @brief
  **  @copyright
- **  This source code is part of the Valentine project, a pattern making
+ **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2013-2015 Valentina project
  **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
@@ -81,36 +81,8 @@
 
 template <class T> class QSharedPointer;
 
+bool VAbstractTool::m_suppressContextMenu = false;
 const QString VAbstractTool::AttrInUse = QStringLiteral("inUse");
-
-namespace
-{
-//---------------------------------------------------------------------------------------------------------------------
-quint32 CreateNodeSpline(VContainer *data, quint32 id)
-{
-    if (data->GetGObject(id)->getType() == GOType::Spline)
-    {
-        return VAbstractTool::CreateNode<VSpline>(data, id);
-    }
-    else
-    {
-        return VAbstractTool::CreateNode<VCubicBezier>(data, id);
-    }
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-quint32 CreateNodeSplinePath(VContainer *data, quint32 id)
-{
-    if (data->GetGObject(id)->getType() == GOType::SplinePath)
-    {
-        return VAbstractTool::CreateNode<VSplinePath>(data, id);
-    }
-    else
-    {
-        return VAbstractTool::CreateNode<VCubicBezierPath>(data, id);
-    }
-}
-}//static functions
 
 //---------------------------------------------------------------------------------------------------------------------
 /**
@@ -121,7 +93,10 @@ quint32 CreateNodeSplinePath(VContainer *data, quint32 id)
  * @param parent parent object.
  */
 VAbstractTool::VAbstractTool(VAbstractPattern *doc, VContainer *data, quint32 id, QObject *parent)
-    :VDataTool(data, parent), doc(doc), id(id), baseColor(Qt::black), vis(),
+    :VDataTool(data, parent),
+      doc(doc),
+      m_id(id),
+      vis(),
       selectionType(SelectionType::ByMouseRelease)
 {
     SCASSERT(doc != nullptr)
@@ -159,7 +134,7 @@ qreal VAbstractTool::CheckFormula(const quint32 &toolId, QString &formula, VCont
     try
     {
         QScopedPointer<Calculator> cal(new Calculator());
-        result = cal->EvalFormula(data->PlainVariables(), formula);
+        result = cal->EvalFormula(data->DataVariables(), formula);
 
         if (qIsInf(result) || qIsNaN(result))
         {
@@ -195,7 +170,7 @@ qreal VAbstractTool::CheckFormula(const quint32 &toolId, QString &formula, VCont
                              * parsing here. */
                             delete dialog;
                             QScopedPointer<Calculator> cal1(new Calculator());
-                            result = cal1->EvalFormula(data->PlainVariables(), formula);
+                            result = cal1->EvalFormula(data->DataVariables(), formula);
 
                             if (qIsInf(result) || qIsNaN(result))
                             {
@@ -233,13 +208,13 @@ qreal VAbstractTool::CheckFormula(const quint32 &toolId, QString &formula, VCont
 /**
  * @brief DeleteTool full delete object form scene and file.
  */
-void VAbstractTool::DeleteTool(bool ask)
+void VAbstractTool::DeleteToolWithConfirm(bool ask)
 {
     qCDebug(vTool, "Deleting abstract tool.");
     if (_referens <= 1)
     {
         qCDebug(vTool, "No children.");
-        qApp->getSceneView()->itemClicked(nullptr);
+        emit qApp->getSceneView()->itemClicked(nullptr);
         if (ask)
         {
             qCDebug(vTool, "Asking.");
@@ -251,7 +226,7 @@ void VAbstractTool::DeleteTool(bool ask)
         }
 
         qCDebug(vTool, "Begin deleting.");
-        DelTool *delTool = new DelTool(doc, id);
+        DelTool *delTool = new DelTool(doc, m_id);
         connect(delTool, &DelTool::NeedFullParsing, doc, &VAbstractPattern::NeedFullParsing);
         qApp->getUndoStack()->push(delTool);
 
@@ -288,85 +263,6 @@ int VAbstractTool::ConfirmDeletion()
     }
 
     return dialogResult == QDialog::Accepted ? QMessageBox::Yes : QMessageBox::No;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-/**
- * @brief LineStyle return pen style for current line style.
- * @return pen style.
- */
-Qt::PenStyle VAbstractTool::LineStyleToPenStyle(const QString &typeLine)
-{
-    const QStringList styles = StylesList();
-    switch (styles.indexOf(typeLine))
-    {
-        case 0: // TypeLineNone
-            return Qt::NoPen;
-        case 2: // TypeLineDashLine
-            return Qt::DashLine;
-        case 3: // TypeLineDotLine
-            return Qt::DotLine;
-        case 4: // TypeLineDashDotLine
-            return Qt::DashDotLine;
-        case 5: // TypeLineDashDotDotLine
-            return Qt::DashDotDotLine;
-        case 1: // TypeLineLine
-        default:
-            return Qt::SolidLine;
-    }
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-QString VAbstractTool::PenStyleToLineStyle(Qt::PenStyle penStyle)
-{
-    QT_WARNING_PUSH
-    QT_WARNING_DISABLE_GCC("-Wswitch-default")
-
-    switch (penStyle)
-    {
-        case Qt::NoPen:
-            return TypeLineNone;
-        case Qt::DashLine:
-            return TypeLineDashLine;
-        case Qt::DotLine:
-            return TypeLineDotLine;
-        case Qt::DashDotLine:
-            return TypeLineDashDotLine;
-        case Qt::DashDotDotLine:
-            return TypeLineDashDotDotLine;
-        case Qt::SolidLine:
-        case Qt::CustomDashLine:
-        default:
-            break;
-    }
-
-    QT_WARNING_POP
-
-    return TypeLineLine;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-QMap<QString, QIcon> VAbstractTool::LineStylesPics()
-{
-    QMap<QString, QIcon> map;
-    const QStringList styles = StylesList();
-
-    for (int i=0; i < styles.size(); ++i)
-    {
-        const Qt::PenStyle style = LineStyleToPenStyle(styles.at(i));
-        QPixmap pix(80, 14);
-        pix.fill(Qt::white);
-
-        QBrush brush(Qt::black);
-        QPen pen(brush, 2.5, style);
-
-        QPainter painter(&pix);
-        painter.setPen(pen);
-        painter.drawLine(2, 7, 78, 7);
-
-        map.insert(styles.at(i), QIcon(pix));
-    }
-    return map;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -455,15 +351,15 @@ QMap<QString, QString> VAbstractTool::ColorsList()
 // cppcheck-suppress unusedFunction
 QMap<QString, quint32> VAbstractTool::PointsList() const
 {
-    const QHash<quint32, QSharedPointer<VGObject> > *objs = data.DataGObjects();
+    const QHash<quint32, QSharedPointer<VGObject> > *objs = data.CalculationGObjects();
     QMap<QString, quint32> list;
     QHash<quint32, QSharedPointer<VGObject> >::const_iterator i;
     for (i = objs->constBegin(); i != objs->constEnd(); ++i)
     {
-        if (i.key() != id)
+        if (i.key() != m_id)
         {
             QSharedPointer<VGObject> obj = i.value();
-            if (obj->getType() == GOType::Point && obj->getMode() == Draw::Calculation)
+            if (obj->getType() == GOType::Point)
             {
                 const QSharedPointer<VPointF> point = data.GeometricObject<VPointF>(i.key());
                 list[point->name()] = i.key();
@@ -474,9 +370,29 @@ QMap<QString, quint32> VAbstractTool::PointsList() const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void VAbstractTool::ChangeLabelPosition(quint32 id, const QPointF &pos)
+{
+    Q_UNUSED(id)
+    Q_UNUSED(pos)
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VAbstractTool::SetLabelVisible(quint32 id, bool visible)
+{
+    Q_UNUSED(id)
+    Q_UNUSED(visible)
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 void VAbstractTool::ToolSelectionType(const SelectionType &type)
 {
     selectionType = type;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VAbstractTool::RefreshDataInFile()
+{
+    // do nothing
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -493,29 +409,37 @@ void VAbstractTool::ToolCreation(const Source &typeCreation)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-/**
- * @brief Styles return list of all line styles.
- * @return list of all line styles.
- */
-const QStringList VAbstractTool::StylesList()
+VToolRecord VAbstractTool::GetRecord(const quint32 id, const Tool &toolType, VAbstractPattern *doc)
 {
-    const QStringList styles = QStringList() << TypeLineNone    << TypeLineLine << TypeLineDashLine
-                                             << TypeLineDotLine << TypeLineDashDotLine
-                                             << TypeLineDashDotDotLine;
-    return styles;
+    const QVector<VToolRecord> *history = doc->getHistory();
+    for(auto &record : *history)
+    {
+        if (record.getId() == id && record.getTypeTool() == toolType)
+        {
+            return record;
+        }
+    }
+    return VToolRecord();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-/**
- * @brief AddRecord add record about tool in history.
- * @param id object id in container
- * @param toolType tool type
- * @param doc dom document container
- */
-void VAbstractTool::AddRecord(const quint32 id, const Tool &toolType, VAbstractPattern *doc)
+void VAbstractTool::RemoveRecord(const VToolRecord &record, VAbstractPattern *doc)
 {
     QVector<VToolRecord> *history = doc->getHistory();
-    VToolRecord record = VToolRecord(id, toolType, doc->GetNameActivPP());
+    for(int i = 0; i < history->size(); ++i)
+    {
+        if (history->at(i) == record)
+        {
+            history->remove(i);
+            return;
+        }
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VAbstractTool::AddRecord(const VToolRecord &record, VAbstractPattern *doc)
+{
+    QVector<VToolRecord> *history = doc->getHistory();
     if (history->contains(record))
     {
         return;
@@ -543,6 +467,18 @@ void VAbstractTool::AddRecord(const quint32 id, const Tool &toolType, VAbstractP
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief AddRecord add record about tool in history.
+ * @param id object id in container
+ * @param toolType tool type
+ * @param doc dom document container
+ */
+void VAbstractTool::AddRecord(const quint32 id, const Tool &toolType, VAbstractPattern *doc)
+{
+    AddRecord(VToolRecord(id, toolType, doc->GetNameActivPP()), doc);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 void VAbstractTool::AddNodes(VAbstractPattern *doc, QDomElement &domElement, const VPiecePath &path)
 {
     if (path.CountNodes() > 0)
@@ -560,43 +496,6 @@ void VAbstractTool::AddNodes(VAbstractPattern *doc, QDomElement &domElement, con
 void VAbstractTool::AddNodes(VAbstractPattern *doc, QDomElement &domElement, const VPiece &piece)
 {
     AddNodes(doc, domElement, piece.GetPath());
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-/**
- * @brief RefreshLine refresh line to label on scene.
- */
-void VAbstractTool::RefreshLine(QGraphicsEllipseItem *point, VGraphicsSimpleTextItem *namePoint,
-                                QGraphicsLineItem *lineName, const qreal radius)
-{
-    SCASSERT(point != nullptr)
-    SCASSERT(namePoint != nullptr)
-    SCASSERT(lineName != nullptr)
-
-    QRectF nRec = namePoint->sceneBoundingRect();
-    nRec.translate(- point->scenePos());
-    if (point->rect().intersects(nRec) == false)
-    {
-        const QRectF nameRec = namePoint->sceneBoundingRect();
-        QPointF p1, p2;
-        VGObject::LineIntersectCircle(QPointF(), radius, QLineF(QPointF(), nameRec.center() - point->scenePos()), p1,
-                                      p2);
-        const QPointF pRec = VGObject::LineIntersectRect(nameRec, QLineF(point->scenePos(), nameRec.center()));
-        lineName->setLine(QLineF(p1, pRec - point->scenePos()));
-
-        if (QLineF(p1, pRec - point->scenePos()).length() <= ToPixel(4, Unit::Mm))
-        {
-            lineName->setVisible(false);
-        }
-        else
-        {
-            lineName->setVisible(true);
-        }
-    }
-    else
-    {
-        lineName->setVisible(false);
-    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -633,6 +532,18 @@ QDomElement VAbstractTool::AddSANode(VAbstractPattern *doc, const QString &tagNa
         else
         { // For backward compatebility.
             nod.removeAttribute(VAbstractPattern::AttrNodeExcluded);
+        }
+    }
+
+    {
+        const bool uniqueness = node.IsCheckUniqueness();
+        if (not uniqueness)
+        {
+            doc->SetAttribute(nod, VAbstractPattern::AttrCheckUniqueness, uniqueness);
+        }
+        else
+        { // For backward compatebility.
+            nod.removeAttribute(VAbstractPattern::AttrCheckUniqueness);
         }
     }
 
@@ -731,39 +642,84 @@ QVector<VPieceNode> VAbstractTool::PrepareNodes(const VPiecePath &path, VMainGra
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-quint32 VAbstractTool::PrepareNode(const VPieceNode &node, VMainGraphicsScene *scene,
-                                   VAbstractPattern *doc, VContainer *data)
+quint32 VAbstractTool::PrepareNode(const VPieceNode &node, VMainGraphicsScene *scene, VAbstractPattern *doc,
+                                   VContainer *data)
 {
     SCASSERT(scene != nullptr)
     SCASSERT(doc != nullptr)
     SCASSERT(data != nullptr)
 
-    quint32 id = NULL_ID;
+    VAbstractNodeInitData initData;
+    initData.idObject = node.GetId();
+    initData.doc = doc;
+    initData.data = data;
+    initData.parse = Document::FullParse;
+    initData.typeCreation = Source::FromGui;
+    initData.scene = scene;
+
     switch (node.GetTypeTool())
     {
         case (Tool::NodePoint):
-            id = CreateNode<VPointF>(data, node.GetId());
-            VNodePoint::Create(doc, data, scene, id, node.GetId(), Document::FullParse, Source::FromGui);
+            initData.id = CreateNode<VPointF>(data, node.GetId());
+            VNodePoint::Create(initData);
             break;
         case (Tool::NodeArc):
-            id = CreateNode<VArc>(data, node.GetId());
-            VNodeArc::Create(doc, data, id, node.GetId(), Document::FullParse, Source::FromGui);
+            initData.id = CreateNode<VArc>(data, node.GetId());
+            VNodeArc::Create(initData);
             break;
         case (Tool::NodeElArc):
-            id = CreateNode<VEllipticalArc>(data, node.GetId());
-            VNodeEllipticalArc::Create(doc, data, id, node.GetId(), Document::FullParse, Source::FromGui);
+            initData.id = CreateNode<VEllipticalArc>(data, node.GetId());
+            VNodeEllipticalArc::Create(initData);
             break;
         case (Tool::NodeSpline):
-            id = CreateNodeSpline(data, node.GetId());
-            VNodeSpline::Create(doc, data, id, node.GetId(), Document::FullParse, Source::FromGui);
+            initData.id = CreateNodeSpline(data, node.GetId());
+            VNodeSpline::Create(initData);
             break;
         case (Tool::NodeSplinePath):
-            id = CreateNodeSplinePath(data, node.GetId());
-            VNodeSplinePath::Create(doc, data, id, node.GetId(), Document::FullParse, Source::FromGui);
+            initData.id = CreateNodeSplinePath(data, node.GetId());
+            VNodeSplinePath::Create(initData);
             break;
         default:
             qDebug()<<"May be wrong tool type!!! Ignoring."<<Q_FUNC_INFO;
             break;
     }
-    return id;
+    return initData.id;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+quint32 VAbstractTool::CreateNodeSpline(VContainer *data, quint32 id)
+{
+    if (data->GetGObject(id)->getType() == GOType::Spline)
+    {
+        return VAbstractTool::CreateNode<VSpline>(data, id);
+    }
+    else
+    {
+        return VAbstractTool::CreateNode<VCubicBezier>(data, id);
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+quint32 VAbstractTool::CreateNodeSplinePath(VContainer *data, quint32 id)
+{
+    if (data->GetGObject(id)->getType() == GOType::SplinePath)
+    {
+        return VAbstractTool::CreateNode<VSplinePath>(data, id);
+    }
+    else
+    {
+        return VAbstractTool::CreateNode<VCubicBezierPath>(data, id);
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+quint32 VAbstractTool::CreateNodePoint(VContainer *data, quint32 id, const QSharedPointer<VPointF> &point)
+{
+    const quint32 pointId = CreateNode<VPointF>(data, id);
+    QSharedPointer<VPointF> p = data->GeometricObject<VPointF>(pointId);
+    p->SetShowLabel(point->IsShowLabel());
+    p->setMx(point->mx());
+    p->setMy(point->my());
+    data->UpdateGObject(pointId, point);
+    return pointId;
 }

@@ -6,7 +6,7 @@
  **
  **  @brief
  **  @copyright
- **  This source code is part of the Valentine project, a pattern making
+ **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2016 Valentina project
  **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
@@ -35,6 +35,8 @@
 #include <QObject>
 #include <QString>
 
+struct VFinalMeasurement;
+
 class VAbstractMainWindow : public QMainWindow
 {
     Q_OBJECT
@@ -44,9 +46,13 @@ public:
 
 public slots:
     virtual void ShowToolTip(const QString &toolTip)=0;
+    virtual void UpdateVisibilityGroups();
+    virtual void UpdateDetailsList();
+    virtual void ZoomFitBestCurrent();
 
 protected slots:
     void WindowsLocale();
+    void ExportDataToCSV();
 
 protected:
     int     m_curFileFormatVersion;
@@ -54,6 +60,11 @@ protected:
 
     bool ContinueFormatRewrite(const QString &currentFormatVersion, const QString &maxFormatVersion);
     void ToolBarStyle(QToolBar *bar);
+
+    QString CSVFilePath();
+
+    virtual void ExportToCSVData(const QString &fileName, bool withHeader, int mib, const QChar &separator)=0;
+
 private:
     Q_DISABLE_COPY(VAbstractMainWindow)
 };

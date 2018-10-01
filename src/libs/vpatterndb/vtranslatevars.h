@@ -6,7 +6,7 @@
  **
  **  @brief
  **  @copyright
- **  This source code is part of the Valentine project, a pattern making
+ **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2015 Valentina project
  **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
@@ -38,15 +38,17 @@ class VTranslateVars : public VTranslateMeasurements
 {
 public:
     explicit VTranslateVars();
-    virtual ~VTranslateVars() Q_DECL_OVERRIDE;
+    virtual ~VTranslateVars() = default;
 
     bool VariablesFromUser(QString &newFormula, int position, const QString &token, int &bias) const;
-    bool PostfixOperatorsFromUser(QString &newFormula, int position, const QString &token, int &bias) const;
     bool FunctionsFromUser(QString &newFormula, int position, const QString &token, int &bias) const;
     bool VariablesToUser(QString &newFormula, int position, const QString &token, int &bias) const;
 
     QString InternalVarToUser(const QString &var) const;
-    QString PlaceholderToUser(const QString &var) const;
+    QString PlaceholderToUser(QString var) const;
+
+    QString PlaceholderToUserText(QString text) const;
+    QString PlaceholderFromUserText(QString text) const;
 
     QString VarToUser(const QString &var) const;
     QString VarFromUser(const QString &var) const;
@@ -55,15 +57,18 @@ public:
     QString PMSystemAuthor(const QString &code) const;
     QString PMSystemBook(const QString &code) const;
 
-    QString PostfixOperator(const QString &name) const;
-
     QString FormulaFromUser(const QString &formula, bool osSeparator) const;
     static QString TryFormulaFromUser(const QString &formula, bool osSeparator);
+
     QString FormulaToUser(const QString &formula, bool osSeparator) const;
+    static QString TryFormulaToUser(const QString &formula, bool osSeparator);
 
-    virtual void Retranslate() Q_DECL_OVERRIDE;
+    virtual void Retranslate() override;
 
+    QMap<QString, QString> GetTranslatedFunctions() const;
     QMap<QString, qmu::QmuTranslation> GetFunctions() const;
+
+    static void BiasTokens(int position, int bias, QMap<int, QString> &tokens);
 
 private:
     Q_DISABLE_COPY(VTranslateVars)
@@ -72,21 +77,22 @@ private:
     QMap<QString, qmu::QmuTranslation> PMSystemBooks;
     QMap<QString, qmu::QmuTranslation> variables;
     QMap<QString, qmu::QmuTranslation> functions;
-    QMap<QString, qmu::QmuTranslation> postfixOperators;
     QMap<QString, qmu::QmuTranslation> placeholders;
     QMap<QString, qmu::QmuTranslation> stDescriptions;
+    QMap<QString, QString> translatedFunctions;
 
     void InitPatternMakingSystems();
     void InitVariables();
     void InitFunctions();
-    void InitPostfixOperators();
     void InitPlaceholder();
+
+    void PrepareFunctionTranslations();
 
     void InitSystem(const QString &code, const qmu::QmuTranslation &name, const qmu::QmuTranslation &author,
                     const qmu::QmuTranslation &book);
 
     void CorrectionsPositions(int position, int bias, QMap<int, QString> &tokens, QMap<int, QString> &numbers) const;
-    static void BiasTokens(int position, int bias, QMap<int, QString> &tokens);
+
 };
 
 #endif // VTRANSLATEVARS_H

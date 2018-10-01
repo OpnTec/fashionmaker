@@ -76,13 +76,13 @@ class VPROPERTYEXPLORERSHARED_EXPORT QVector3DProperty : public VProperty
 public:
     explicit QVector3DProperty(const QString& name);
 
-    virtual ~QVector3DProperty() Q_DECL_OVERRIDE {}
+    virtual ~QVector3DProperty() override {}
 
     //! Get the data how it should be displayed
-    virtual QVariant data (int column = DPC_Name, int role = Qt::DisplayRole) const Q_DECL_OVERRIDE;
+    virtual QVariant data (int column = DPC_Name, int role = Qt::DisplayRole) const override;
 
     //! Returns item flags
-    virtual Qt::ItemFlags flags(int column = DPC_Name) const Q_DECL_OVERRIDE;
+    virtual Qt::ItemFlags flags(int column = DPC_Name) const override;
 
     //! Returns the Vector3d
     virtual Vector3D getVector() const;
@@ -94,20 +94,20 @@ public:
     virtual void setVector(double x, double y, double z);
 
     //! Returns a string containing the type of the property
-    virtual QString type() const Q_DECL_OVERRIDE;
+    virtual QString type() const override;
 
     //! Clones this property
     //! \param include_children Indicates whether to also clone the children
     //! \param container If a property is being passed here, no new VProperty is being created but instead it is tried
     //! to fill all the data into container. This can also be used when subclassing this function.
     //! \return Returns the newly created property (or container, if it was not NULL)
-    virtual VProperty* clone(bool include_children = true, VProperty* container = NULL) const Q_DECL_OVERRIDE;
+    virtual VProperty* clone(bool include_children = true, VProperty* container = NULL) const override;
 
     //! Sets the value of the property
-    virtual void setValue(const QVariant& value) Q_DECL_OVERRIDE;
+    virtual void setValue(const QVariant& value) override;
 
     //! Returns the value of the property as a QVariant
-    virtual QVariant getValue() const Q_DECL_OVERRIDE;
+    virtual QVariant getValue() const override;
 
 private:
     Q_DISABLE_COPY(QVector3DProperty)

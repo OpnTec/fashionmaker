@@ -6,7 +6,7 @@
  **
  **  @brief
  **  @copyright
- **  This source code is part of the Valentine project, a pattern making
+ **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2015 Valentina project
  **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
@@ -38,6 +38,7 @@
 #include <QString>
 #include <QVector>
 #include <Qt>
+#include <QDebug>
 
 #include "../vmisc/vmath.h"
 #include "../vmisc/def.h"
@@ -49,7 +50,7 @@ VPoster::VPoster(const QPrinter *printer)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QVector<PosterData> VPoster::Calc(const QRect &imageRect, int page) const
+QVector<PosterData> VPoster::Calc(const QRect &imageRect, int page, PageOrientation orientation) const
 {
     QVector<PosterData> poster;
 
@@ -58,14 +59,14 @@ QVector<PosterData> VPoster::Calc(const QRect &imageRect, int page) const
         return poster;
     }
 
-    const int rows = CountRows(imageRect.height());
-    const int columns = CountColumns(imageRect.width());
+    const int rows = CountRows(imageRect.height(), orientation);
+    const int columns = CountColumns(imageRect.width(), orientation);
 
     for (int i=0; i < rows; i++)
     {
         for (int j=0; j< columns; j++)
         {
-            PosterData data = Cut(i, j, imageRect);
+            PosterData data = Cut(i, j, imageRect, orientation);
             data.index = static_cast<quint32>(page);
             data.rows = static_cast<quint32>(rows);
             data.columns = static_cast<quint32>(columns);
@@ -82,6 +83,11 @@ QVector<QGraphicsItem *> VPoster::Borders(QGraphicsItem *parent, const PosterDat
     QVector<QGraphicsItem *> data;
     QPen pen(Qt::NoBrush, 1, Qt::DashLine);
     pen.setColor(Qt::black);
+
+    if (img.columns == 1 && img.rows == 1)
+    {
+        return data;
+    }
 
     const QRect rec = img.rect;
     if (img.column != 0)
@@ -165,89 +171,75 @@ QVector<QGraphicsItem *> VPoster::Borders(QGraphicsItem *parent, const PosterDat
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-int VPoster::CountRows(int height) const
+int VPoster::CountRows(int height, PageOrientation orientation) const
 {
     const qreal imgLength = height;
-    const qreal pageLength = PageRect().height();
+    qreal pageLength = 0;
 
-    // Example
-    // ― ―
-    // * *
-    // * *
-    // * *
-    // * * ―
-    // ― ― *
-    // *   *
-    // *   *
-    // *   * ―
-    // *   ― *
-    // —     *
-    // *     *
-    // *     * ―
-    // *     ― *
-    // *       *
-    // —       *
-    // *       * ―
-    // *       ― * <-(2)
-    // *       + *
-    // *       + *
-    // —       + * ― <-(4)
-    // ^       ^ ― *
-    //(3)     (1)  *
-    //             *
-    //             *
-    //             ―
+    if(orientation == PageOrientation::Landscape)
+    {
+        pageLength = PageRect().width();
+    }
+    else
+    {
+        pageLength = PageRect().height();
+    }
 
-    const int pCount = qCeil(imgLength/pageLength);// Pages count without allowance (or allowance = 0) (3)
-
-    // Calculate how many pages will be after using allowance.
-    // We know start pages count. This number not enought because
-    // each n-1 pages add (n-1)*allowance length to page (1).
-    const qreal addionalLength = (pCount-1)*static_cast<int>(allowance); //-V636
-
-    // Calculate additional length form pages that will cover this length (2).
-    // In the end add page length (3).
-    // Bottom page have mandatory border (4)
-    return qCeil((addionalLength +
-                         qCeil(addionalLength/pageLength)*static_cast<int>(allowance) + static_cast<int>(allowance) +
-                  imgLength)/pageLength);
+    if (pageLength >= imgLength)
+    {
+        return 1;
+    }
+    else
+    {
+        return qCeil(imgLength/(pageLength - static_cast<int>(allowance)));
+    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-int VPoster::CountColumns(int width) const
+int VPoster::CountColumns(int width, PageOrientation orientation) const
 {
     const qreal imgLength = width;
-    const qreal pageLength = PageRect().width();
+    qreal pageLength = 0;
 
-    // Example
-    // |----|----|----|----| <- (3)
-    // |----|+++++++++++++++
-    //     |----|+++++++++++
-    //         |----|+++++++
-    //             |----|+++ <- (1)
-    //                 |----|
-    //                  ^
-    //                 (2)
-    const int pCount = qCeil(imgLength/pageLength);// Pages count without allowance (or allowance = 0) (3)
+    if(orientation == PageOrientation::Landscape)
+    {
+        pageLength = PageRect().height();
+    }
+    else
+    {
+        pageLength = PageRect().width();
+    }
 
-    // Calculate how many pages will be after using allowance.
-    // We know start pages count. This number not enought because
-    // each n-1 pages add (n-1)*allowance length to page (1).
-    const qreal addionalLength = (pCount-1)*static_cast<int>(allowance); //-V636
-
-    // Calculate additional length form pages that will cover this length (2).
-    // In the end add page length (3).
-    return qCeil((addionalLength + qCeil(addionalLength/pageLength)*static_cast<int>(allowance) +
-                  imgLength)/pageLength);
+    if (pageLength >= imgLength)
+    {
+        return 1;
+    }
+    else
+    {
+        return qCeil(imgLength/(pageLength-static_cast<int>(allowance)));
+    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-PosterData VPoster::Cut(int i, int j, const QRect &imageRect) const
+PosterData VPoster::Cut(int i, int j, const QRect &imageRect, PageOrientation orientation) const
 {
     Q_UNUSED(imageRect)
 
-    const int x = j*PageRect().width()  - j*static_cast<int>(allowance);
-    const int y = i*PageRect().height() - i*static_cast<int>(allowance);
+    int pageLengthX, pageLengthY;
+
+    if(orientation == PageOrientation::Landscape)
+    {
+        pageLengthX = PageRect().height();
+        pageLengthY = PageRect().width();
+    }
+    else
+    {
+        pageLengthX = PageRect().width();
+        pageLengthY = PageRect().height();
+    }
+
+    const int x = j*pageLengthX - j*static_cast<int>(allowance);
+    const int y = i*pageLengthY - i*static_cast<int>(allowance);
 
     SCASSERT(x <= imageRect.width())
     SCASSERT(y <= imageRect.height())
@@ -255,7 +247,7 @@ PosterData VPoster::Cut(int i, int j, const QRect &imageRect) const
     PosterData data;
     data.row = static_cast<quint32>(i);
     data.column = static_cast<quint32>(j);
-    data.rect = QRect(x, y, PageRect().width(), PageRect().height());
+    data.rect = QRect(x, y, pageLengthX, pageLengthY);
 
     return data;
 }

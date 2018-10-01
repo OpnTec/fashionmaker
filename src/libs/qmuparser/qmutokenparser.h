@@ -36,8 +36,9 @@ namespace qmu
 class QMUPARSERSHARED_EXPORT QmuTokenParser : public QmuFormulaBase
 {
 public:
-    QmuTokenParser(const QString &formula, bool osSeparator, bool fromUser = true);
-    virtual ~QmuTokenParser() Q_DECL_OVERRIDE;
+    QmuTokenParser(const QString &formula, bool osSeparator, bool fromUser = true,
+                   const QMap<QString, QString> &translatedFunctions = QMap<QString, QString>());
+    virtual ~QmuTokenParser() = default;
 
     static bool IsSingle(const QString &formula);
 

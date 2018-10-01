@@ -6,7 +6,7 @@
  **
  **  @brief
  **  @copyright
- **  This source code is part of the Valentine project, a pattern making
+ **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2017 Valentina project
  **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
@@ -47,7 +47,7 @@ public:
     VAbstractFloatItemData &operator=(VAbstractFloatItemData &&data) Q_DECL_NOTHROW { Swap(data); return *this; }
 #endif
 
-    void Swap(VAbstractFloatItemData &data) Q_DECL_NOTHROW
+    inline void Swap(VAbstractFloatItemData &data) Q_DECL_NOTHROW
     { std::swap(d, data.d); }
 
     // methods, which set and return values of different parameters

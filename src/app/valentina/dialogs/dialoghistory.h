@@ -6,7 +6,7 @@
  **
  **  @brief
  **  @copyright
- **  This source code is part of the Valentine project, a pattern making
+ **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2013-2015 Valentina project
  **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
@@ -48,13 +48,13 @@ class DialogHistory : public DialogTool
     Q_OBJECT
 public:
     DialogHistory(VContainer *data, VPattern *doc, QWidget *parent = nullptr);
-    virtual ~DialogHistory() Q_DECL_OVERRIDE;
+    virtual ~DialogHistory() override;
 public slots:
-    virtual void      DialogAccepted() Q_DECL_OVERRIDE;
+    virtual void      DialogAccepted() override;
     /** TODO ISSUE 79 : create real function
     * @brief DialogApply apply data and emit signal about applied dialog.
     */
-    virtual void      DialogApply() Q_DECL_OVERRIDE {}
+    virtual void      DialogApply() override {}
     void              cellClicked(int row, int column);
     void              ChangedCursor(quint32 id);
     void              UpdateHistory();
@@ -66,8 +66,8 @@ signals:
      */
     void              ShowHistoryTool(quint32 id, bool enable);
 protected:
-    virtual void      closeEvent ( QCloseEvent * event ) Q_DECL_OVERRIDE;
-    virtual void      changeEvent(QEvent* event) Q_DECL_OVERRIDE;
+    virtual void      closeEvent ( QCloseEvent * event ) override;
+    virtual void      changeEvent(QEvent* event) override;
 private:
     Q_DISABLE_COPY(DialogHistory)
 

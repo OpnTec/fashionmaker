@@ -6,7 +6,7 @@
  **
  **  @brief
  **  @copyright
- **  This source code is part of the Valentine project, a pattern making
+ **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2015 Valentina project
  **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
@@ -49,51 +49,11 @@
 #include "tst_vpointf.h"
 #include "tst_readval.h"
 #include "tst_vtranslatevars.h"
+#include "tst_vtooluniondetails.h"
 
 #include "../vmisc/def.h"
 #include "../qmuparser/qmudef.h"
-#include "../vmisc/vabstractapplication.h"
-
-class TestVApplication : public VAbstractApplication
-{
-public:
-
-    TestVApplication(int &argc, char ** argv);
-    virtual ~TestVApplication() Q_DECL_EQ_DEFAULT;
-
-    virtual const VTranslateVars *TrVars();
-    virtual void                  OpenSettings();
-    virtual bool                  IsAppInGUIMode() const;
-    virtual void                  InitTrVars();
-};
-
-//---------------------------------------------------------------------------------------------------------------------
-TestVApplication::TestVApplication(int &argc, char **argv)
-    : VAbstractApplication(argc, argv)
-{
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-const VTranslateVars *TestVApplication::TrVars()
-{
-    return nullptr;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void TestVApplication::OpenSettings()
-{
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-bool TestVApplication::IsAppInGUIMode() const
-{
-    return false;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void TestVApplication::InitTrVars()
-{
-}
+#include "../vmisc/testvapplication.h"
 
 //---------------------------------------------------------------------------------------------------------------------
 int main(int argc, char** argv)
@@ -130,6 +90,7 @@ int main(int argc, char** argv)
     ASSERT_TEST(new TST_VPointF());
     ASSERT_TEST(new TST_ReadVal());
     ASSERT_TEST(new TST_VTranslateVars());
+    ASSERT_TEST(new TST_VToolUnionDetails());
 
     return status;
 }

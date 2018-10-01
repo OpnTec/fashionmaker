@@ -6,7 +6,7 @@
  **
  **  @brief
  **  @copyright
- **  This source code is part of the Valentine project, a pattern making
+ **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2015 Valentina project
  **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
@@ -51,12 +51,8 @@ VisToolPointFromCircleAndTangent::VisToolPointFromCircleAndTangent(const VContai
     point = InitPoint(mainColor, this);
     tangent = InitPoint(supportColor, this);
     cCenter = InitPoint(supportColor, this); //-V656
-    tangent2 = InitItem<QGraphicsLineItem>(supportColor, this);
+    tangent2 = InitItem<VScaledLine>(supportColor, this);
 }
-
-//---------------------------------------------------------------------------------------------------------------------
-VisToolPointFromCircleAndTangent::~VisToolPointFromCircleAndTangent()
-{}
 
 //---------------------------------------------------------------------------------------------------------------------
 void VisToolPointFromCircleAndTangent::RefreshGeometry()
@@ -78,9 +74,9 @@ void VisToolPointFromCircleAndTangent::RefreshGeometry()
 
                 FindRays(static_cast<QPointF>(*tan), static_cast<QPointF>(*center), cRadius);
 
-                const QPointF fPoint = VToolPointFromCircleAndTangent::FindPoint(static_cast<QPointF>(*tan),
-                                                                                 static_cast<QPointF>(*center),
-                                                                                 cRadius, crossPoint);
+                QPointF fPoint;
+                VToolPointFromCircleAndTangent::FindPoint(static_cast<QPointF>(*tan), static_cast<QPointF>(*center),
+                                                          cRadius, crossPoint, &fPoint);
                 DrawPoint(point, fPoint, mainColor);
             }
         }
@@ -96,7 +92,7 @@ void VisToolPointFromCircleAndTangent::setObject2Id(const quint32 &value)
 //---------------------------------------------------------------------------------------------------------------------
 void VisToolPointFromCircleAndTangent::setCRadius(const QString &value)
 {
-    cRadius = FindLength(value, Visualization::data->PlainVariables());
+    cRadius = FindLengthFromUser(value, Visualization::data->DataVariables());
 }
 
 //---------------------------------------------------------------------------------------------------------------------

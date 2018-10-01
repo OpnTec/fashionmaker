@@ -1,9 +1,5 @@
 <RCC>
     <qresource prefix="/">
-        <file>schema/pattern/v0.1.0.xsd</file>
-        <file>schema/pattern/v0.1.1.xsd</file>
-        <file>schema/pattern/v0.1.2.xsd</file>
-        <file>schema/pattern/v0.1.3.xsd</file>
         <file>schema/pattern/v0.1.4.xsd</file>
         <file>schema/pattern/v0.2.0.xsd</file>
         <file>schema/pattern/v0.2.1.xsd</file>
@@ -32,6 +28,28 @@
         <file>schema/pattern/v0.4.6.xsd</file>
         <file>schema/pattern/v0.4.7.xsd</file>
         <file>schema/pattern/v0.4.8.xsd</file>
+        <file>schema/pattern/v0.5.0.xsd</file>
+        <file>schema/pattern/v0.5.1.xsd</file>
+        <file>schema/pattern/v0.6.0.xsd</file>
+        <file>schema/pattern/v0.6.1.xsd</file>
+        <file>schema/pattern/v0.6.2.xsd</file>
+        <file>schema/pattern/v0.6.3.xsd</file>
+        <file>schema/pattern/v0.6.4.xsd</file>
+        <file>schema/pattern/v0.6.5.xsd</file>
+        <file>schema/pattern/v0.6.6.xsd</file>
+        <file>schema/pattern/v0.7.0.xsd</file>
+        <file>schema/pattern/v0.7.1.xsd</file>
+        <file>schema/pattern/v0.7.2.xsd</file>
+        <file>schema/pattern/v0.7.3.xsd</file>
+        <file>schema/pattern/v0.7.4.xsd</file>
+        <file>schema/pattern/v0.7.5.xsd</file>
+        <file>schema/pattern/v0.7.6.xsd</file>
+        <file>schema/pattern/v0.7.7.xsd</file>
+        <file>schema/pattern/v0.7.8.xsd</file>
+        <file>schema/pattern/v0.7.9.xsd</file>
+        <file>schema/pattern/v0.7.10.xsd</file>
+        <file>schema/pattern/v0.7.11.xsd</file>
+        <file>schema/pattern/v0.7.12.xsd</file>
         <file>schema/standard_measurements/v0.3.0.xsd</file>
         <file>schema/standard_measurements/v0.4.0.xsd</file>
         <file>schema/standard_measurements/v0.4.1.xsd</file>
@@ -43,5 +61,8 @@
         <file>schema/individual_measurements/v0.3.1.xsd</file>
         <file>schema/individual_measurements/v0.3.2.xsd</file>
         <file>schema/individual_measurements/v0.3.3.xsd</file>
+        <file>schema/individual_measurements/v0.4.0.xsd</file>
+        <file>schema/individual_measurements/v0.5.0.xsd</file>
+        <file>schema/label_template/v1.0.0.xsd</file>
     </qresource>
 </RCC>

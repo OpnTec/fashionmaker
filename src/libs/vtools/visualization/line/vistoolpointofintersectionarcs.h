@@ -6,7 +6,7 @@
  **
  **  @brief
  **  @copyright
- **  This source code is part of the Valentine project, a pattern making
+ **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2015 Valentina project
  **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
@@ -44,26 +44,26 @@ class VisToolPointOfIntersectionArcs : public VisLine
 {
     Q_OBJECT
 public:
-    explicit VisToolPointOfIntersectionArcs(const VContainer *data, QGraphicsItem *parent = 0);
-    virtual ~VisToolPointOfIntersectionArcs() Q_DECL_OVERRIDE;
+    explicit VisToolPointOfIntersectionArcs(const VContainer *data, QGraphicsItem *parent = nullptr);
+    virtual ~VisToolPointOfIntersectionArcs() = default;
 
-    virtual void RefreshGeometry() Q_DECL_OVERRIDE;
-    virtual void VisualMode(const quint32 &id) Q_DECL_OVERRIDE;
+    virtual void RefreshGeometry() override;
+    virtual void VisualMode(const quint32 &id) override;
 
     void         setArc1Id(const quint32 &value);
     void         setArc2Id(const quint32 &value);
     void         setCrossPoint(const CrossCirclesPoint &value);
 
-    virtual int  type() const Q_DECL_OVERRIDE {return Type;}
+    virtual int  type() const override {return Type;}
     enum { Type = UserType + static_cast<int>(Vis::ToolPointOfIntersectionArcs)};
 private:
     Q_DISABLE_COPY(VisToolPointOfIntersectionArcs)
-    quint32              arc1Id;
-    quint32              arc2Id;
-    CrossCirclesPoint    crossPoint;
-    QGraphicsEllipseItem *point;
-    QGraphicsPathItem    *arc1Path;
-    QGraphicsPathItem    *arc2Path;
+    quint32            arc1Id;
+    quint32            arc2Id;
+    CrossCirclesPoint  crossPoint;
+    VScaledEllipse    *point;
+    VCurvePathItem    *arc1Path;
+    VCurvePathItem    *arc2Path;
 };
 
 #endif // VISTOOLPOINTOFINTERSECTIONARCS_H

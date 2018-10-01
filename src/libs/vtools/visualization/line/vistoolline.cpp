@@ -6,7 +6,7 @@
  **
  **  @brief
  **  @copyright
- **  This source code is part of the Valentine project, a pattern making
+ **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2013-2015 Valentina project
  **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
@@ -49,10 +49,6 @@ VisToolLine::VisToolLine(const VContainer *data, QGraphicsItem *parent)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-VisToolLine::~VisToolLine()
-{}
-
-//---------------------------------------------------------------------------------------------------------------------
 void VisToolLine::RefreshGeometry()
 {
     QLineF line;
@@ -76,10 +72,14 @@ void VisToolLine::setPoint2Id(const quint32 &value)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VisToolLine::DrawLine(QGraphicsLineItem *lineItem, const QLineF &line, const QColor &color, Qt::PenStyle style)
+void VisToolLine::DrawLine(VScaledLine *lineItem, const QLineF &line, const QColor &color, Qt::PenStyle style)
 {
     SCASSERT (lineItem != nullptr)
 
-    lineItem->setPen(QPen(color, qApp->toPixel(WidthMainLine(*Visualization::data->GetPatternUnit()))/factor, style));
+    QPen visPen = lineItem->pen();
+    visPen.setColor(color);
+    visPen.setStyle(style);
+
+    lineItem->setPen(visPen);
     lineItem->setLine(line);
 }

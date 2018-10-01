@@ -6,7 +6,7 @@
  **
  **  @brief
  **  @copyright
- **  This source code is part of the Valentine project, a pattern making
+ **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2013-2015 Valentina project
  **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
@@ -31,6 +31,7 @@
 #include <limits.h>
 #include <QVector>
 #include <QtDebug>
+#include <QUuid>
 
 #include "../ifc/exception/vexception.h"
 #include "../vgeometry/vabstractcubicbezierpath.h"
@@ -63,18 +64,54 @@ Q_LOGGING_CATEGORY(vCon, "v.container")
 
 QT_WARNING_POP
 
-quint32 VContainer::_id = NULL_ID;
-qreal VContainer::_size = 50;
-qreal VContainer::_height = 176;
-QSet<QString> VContainer::uniqueNames = QSet<QString>();
+QMap<QString, quint32> VContainer::_id = QMap<QString, quint32>();
+QMap<QString, qreal> VContainer::_size = QMap<QString, qreal>();
+QMap<QString, qreal> VContainer::_height = QMap<QString, qreal>();
+QMap<QString, QSet<QString>> VContainer::uniqueNames = QMap<QString, QSet<QString>>();
+QMap<QString, quint32> VContainer::copyCounter = QMap<QString, quint32>();
 
 //---------------------------------------------------------------------------------------------------------------------
 /**
  * @brief VContainer create empty container
  */
-VContainer::VContainer(const VTranslateVars *trVars, const Unit *patternUnit)
-    :d(new VContainerData(trVars, patternUnit))
-{}
+VContainer::VContainer(const VTranslateVars *trVars, const Unit *patternUnit, const QString &nspace)
+    :d(new VContainerData(trVars, patternUnit, nspace))
+{
+    if (nspace.isEmpty())
+    {
+        qFatal("Namesapce is empty.");
+    }
+
+    if (VContainer::_id.contains(nspace))
+    {
+        qFatal("Namespace is not unique.");
+    }
+
+    if (not _id.contains(d->nspace))
+    {
+        _id[d->nspace] = NULL_ID;
+    }
+
+    if (not _size.contains(d->nspace))
+    {
+        _size[d->nspace] = 50;
+    }
+
+    if (not _height.contains(d->nspace))
+    {
+        _height[d->nspace] = 176;
+    }
+
+    if (not uniqueNames.contains(d->nspace))
+    {
+        uniqueNames[d->nspace] = QSet<QString>();
+    }
+
+    if (not copyCounter.contains(d->nspace))
+    {
+        copyCounter[d->nspace] = 1;
+    }
+}
 
 //---------------------------------------------------------------------------------------------------------------------
 /**
@@ -89,6 +126,7 @@ VContainer &VContainer::operator =(const VContainer &data)
         return *this;
     }
     d = data.d;
+    ++copyCounter[d->nspace];
     return *this;
 }
 
@@ -99,13 +137,34 @@ VContainer &VContainer::operator =(const VContainer &data)
  */
 VContainer::VContainer(const VContainer &data)
     :d(data.d)
-{}
+{
+    ++copyCounter[d->nspace];
+}
 
 //---------------------------------------------------------------------------------------------------------------------
 VContainer::~VContainer()
+{}
+
+//---------------------------------------------------------------------------------------------------------------------
+QString VContainer::UniqueNamespace()
 {
-    ClearGObjects();
-    ClearVariables();
+    QString candidate;
+    do
+    {
+        candidate = QUuid::createUuid().toString();
+    }
+    while(_size.contains(candidate));
+
+    return candidate;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VContainer::ClearNamespace(const QString &nspace)
+{
+    _id.remove(nspace);
+    _size.remove(nspace);
+    _height.remove(nspace);
+    uniqueNames.remove(nspace);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -115,9 +174,20 @@ VContainer::~VContainer()
  * @return point
  */
 // cppcheck-suppress unusedFunction
-const QSharedPointer<VGObject> VContainer::GetGObject(quint32 id)const
+const QSharedPointer<VGObject> VContainer::GetGObject(quint32 id) const
 {
-    return GetObject(d->gObjects, id);
+    if (d->calculationObjects.contains(id))
+    {
+        return d->calculationObjects.value(id);
+    }
+    else if (d->modelingObjects->contains(id))
+    {
+        return d->modelingObjects->value(id);
+    }
+    else
+    {
+        throw VExceptionBadId(tr("Can't find object"), id);
+    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -127,26 +197,6 @@ const QSharedPointer<VGObject> VContainer::GetFakeGObject(quint32 id)
     obj->setId(id);
     QSharedPointer<VGObject> pointer(obj);
     return pointer;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-/**
- * @brief GetObject return object from container
- * @param obj container
- * @param id id of object
- * @return Object
- */
-template <typename key, typename val>
-const val VContainer::GetObject(const QHash<key, val> &obj, key id) const
-{
-    if (obj.contains(id))
-    {
-        return obj.value(id);
-    }
-    else
-    {
-        throw VExceptionBadId(tr("Can't find object"), id);
-    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -176,6 +226,22 @@ VPiecePath VContainer::GetPiecePath(quint32 id) const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+quint32 VContainer::GetPieceForPiecePath(quint32 id) const
+{
+    auto i = d->pieces->constBegin();
+    while (i != d->pieces->constEnd())
+    {
+        if (i.value().GetInternalPaths().contains(id))
+        {
+            return i.key();
+        }
+        ++i;
+    }
+
+    return NULL_ID;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 /**
  * @brief AddGObject add new GObject to container
  * @param obj new object
@@ -185,8 +251,34 @@ quint32 VContainer::AddGObject(VGObject *obj)
 {
     SCASSERT(obj != nullptr)
     QSharedPointer<VGObject> pointer(obj);
-    uniqueNames.insert(obj->name());
-    return AddObject(d->gObjects, pointer);
+    return AddGObject(pointer);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+quint32 VContainer::AddGObject(const QSharedPointer<VGObject> &obj)
+{
+    SCASSERT(not obj.isNull())
+
+    if (obj->getMode() == Draw::Layout)
+    {
+        qWarning("Can't add an object with mode 'Layout'");
+        return NULL_ID;
+    }
+
+    uniqueNames[d->nspace].insert(obj->name());
+    const quint32 id = getNextId();
+    obj->setId(id);
+
+    if (obj->getMode() == Draw::Calculation)
+    {
+        d->calculationObjects.insert(id, obj);
+    }
+    else if (obj->getMode() == Draw::Modeling)
+    {
+        d->modelingObjects->insert(id, obj);
+    }
+
+    return id;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -206,9 +298,9 @@ quint32 VContainer::AddPiecePath(const VPiecePath &path)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-quint32 VContainer::getId()
+quint32 VContainer::getId() const
 {
-    return _id;
+    return _id.value(d->nspace);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -216,17 +308,33 @@ quint32 VContainer::getId()
  * @brief getNextId generate next unique id
  * @return next unique id
  */
-quint32 VContainer::getNextId()
+quint32 VContainer::getNextId() const
 {
     //TODO. Current count of ids are very big and allow us save time before someone will reach its max value.
     //Better way, of cource, is to seek free ids inside the set of values and reuse them.
     //But for now better to keep it as it is now.
-    if (_id == UINT_MAX)
+    if (_id.value(d->nspace) == UINT_MAX)
     {
         qCritical()<<(tr("Number of free id exhausted."));
     }
-    _id++;
-    return _id;
+    _id[d->nspace]++;
+    return _id.value(d->nspace);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VContainer::UpdateId(quint32 newId, const QString &nspace)
+{
+    if (_id.contains(nspace))
+    {
+        if (newId > _id.value(nspace))
+        {
+           _id[nspace] = newId;
+        }
+    }
+    else
+    {
+        throw VException(QStringLiteral("Unknown namespace"));
+    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -234,33 +342,9 @@ quint32 VContainer::getNextId()
  * @brief UpdateId update id. If new id bigger when current save new like current.
  * @param newId id
  */
-void VContainer::UpdateId(quint32 newId)
+void VContainer::UpdateId(quint32 newId) const
 {
-    if (newId > _id)
-    {
-       _id = newId;
-    }
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-/**
- * @brief UpdateObject update object in container
- * @param obj container
- * @param id id of existing object
- * @param point object
- */
-template <typename val>
-void VContainer::UpdateObject(QHash<quint32, val> &obj, const quint32 &id, val point)
-{
-    Q_ASSERT_X(id != NULL_ID, Q_FUNC_INFO, "id == 0"); //-V654 //-V712
-    SCASSERT(point.isNull() == false)
-    point->setId(id);
-    if (d->gObjects.contains(id))
-    {
-        d->gObjects[id].clear();
-    }
-    obj[id] = point;
-    UpdateId(id);
+    VContainer::UpdateId(newId, d->nspace);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -270,7 +354,7 @@ void VContainer::UpdateObject(QHash<quint32, val> &obj, const quint32 &id, val p
 void VContainer::Clear()
 {
     qCDebug(vCon, "Clearing container data.");
-    _id = NULL_ID;
+    _id[d->nspace] = NULL_ID;
 
     d->pieces->clear();
     d->piecePaths->clear();
@@ -283,17 +367,18 @@ void VContainer::Clear()
 void VContainer::ClearForFullParse()
 {
     qCDebug(vCon, "Clearing container data for full parse.");
-    _id = NULL_ID;
+    _id[d->nspace] = NULL_ID;
 
     d->pieces->clear();
     d->piecePaths->clear();
-    ClearVariables(VarType::Increment);
-    ClearVariables(VarType::LineAngle);
-    ClearVariables(VarType::LineLength);
-    ClearVariables(VarType::CurveLength);
-    ClearVariables(VarType::CurveCLength);
-    ClearVariables(VarType::ArcRadius);
-    ClearVariables(VarType::CurveAngle);
+    Q_STATIC_ASSERT_X(static_cast<int>(VarType::Unknown) == 8, "Check that you used all types");
+    ClearVariables(QVector<VarType>({VarType::Increment,
+                                     VarType::LineAngle,
+                                     VarType::LineLength,
+                                     VarType::CurveLength,
+                                     VarType::CurveCLength,
+                                     VarType::ArcRadius,
+                                     VarType::CurveAngle}));
     ClearGObjects();
     ClearUniqueNames();
 }
@@ -304,71 +389,43 @@ void VContainer::ClearForFullParse()
  */
 void VContainer::ClearGObjects()
 {
-    QHash<quint32, QSharedPointer<VGObject> >::iterator i;
-    for (i = d->gObjects.begin(); i != d->gObjects.end(); ++i) //-V807
-    {
-        i.value().clear();
-    }
-    d->gObjects.clear();
+    d->calculationObjects.clear();
+    d->modelingObjects->clear();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void VContainer::ClearCalculationGObjects()
 {
-    if (not d->gObjects.isEmpty()) //-V807
-    {
-        QVector<quint32> keys;
-        QHash<quint32, QSharedPointer<VGObject> >::iterator i;
-        for (i = d->gObjects.begin(); i != d->gObjects.end(); ++i)
-        {
-            if (i.value()->getMode() == Draw::Calculation)
-            {
-                i.value().clear();
-                keys.append(i.key());
-            }
-        }
-        // We can't delete objects in previous loop it will destroy the iterator.
-        if (not keys.isEmpty())
-        {
-            for (int i = 0; i < keys.size(); ++i)
-            {
-                d->gObjects.remove(keys.at(i));
-            }
-        }
-    }
+    d->calculationObjects.clear();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void VContainer::ClearVariables(const VarType &type)
 {
-    if (d->variables.size()>0) //-V807
+    ClearVariables(QVector<VarType>({type}));
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VContainer::ClearVariables(const QVector<VarType> &types)
+{
+    if (not d->variables.isEmpty()) //-V807
     {
-        if (type == VarType::Unknown)
+        if (types.isEmpty() || types.contains(VarType::Unknown))
         {
-            QHash<QString, QSharedPointer<VInternalVariable> >::iterator i;
-            for (i = d->variables.begin(); i != d->variables.end(); ++i)
-            {
-                i.value().clear();
-            }
             d->variables.clear();
         }
         else
         {
-            QVector<QString> keys;
             QHash<QString, QSharedPointer<VInternalVariable> >::iterator i;
-            for (i = d->variables.begin(); i != d->variables.end(); ++i)
+            for (i = d->variables.begin(); i != d->variables.end();)
             {
-                if (i.value()->GetType() == type)
+                if (types.contains(i.value()->GetType()))
                 {
-                    i.value().clear();
-                    keys.append(i.key());
+                    i = d->variables.erase(i);
                 }
-            }
-            if (keys.size()>0)
-            {
-                for (int i = 0; i < keys.size(); ++i)
+                else
                 {
-                    d->variables.remove(keys.at(i));
+                    ++i;
                 }
             }
         }
@@ -414,6 +471,9 @@ void VContainer::AddArc(const QSharedPointer<VAbstractCurve> &arc, const quint32
 
         VArcRadius *radius2 = new VArcRadius(id, parentId, casted.data(), 2, *GetPatternUnit());
         AddVariable(radius2->GetName(), radius2);
+
+        VEllipticalArcRotation *rotation = new VEllipticalArcRotation(id, parentId, casted.data());
+        AddVariable(rotation->GetName(), rotation);
     }
 }
 
@@ -492,37 +552,6 @@ void VContainer::RemovePiece(quint32 id)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-/**
- * @brief AddObject add object to container
- * @param obj container
- * @param value object
- * @return id of object in container
- */
-template <typename key, typename val>
-quint32 VContainer::AddObject(QHash<key, val> &obj, val value)
-{
-    SCASSERT(value != nullptr)
-    const quint32 id = getNextId();
-    value->setId(id);
-    obj[id] = value;
-    return id;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-/**
- * @brief UpdateGObject update GObject by id
- * @param id id of existing GObject
- * @param obj object
- */
-void VContainer::UpdateGObject(quint32 id, VGObject* obj)
-{
-    SCASSERT(obj != nullptr)
-    QSharedPointer<VGObject> pointer(obj);
-    UpdateObject(d->gObjects, id, pointer);
-    uniqueNames.insert(obj->name());
-}
-
-//---------------------------------------------------------------------------------------------------------------------
 void VContainer::UpdatePiece(quint32 id, const VPiece &detail)
 {
     Q_ASSERT_X(id != NULL_ID, Q_FUNC_INFO, "id == 0"); //-V654 //-V712
@@ -536,17 +565,6 @@ void VContainer::UpdatePiecePath(quint32 id, const VPiecePath &path)
     Q_ASSERT_X(id != NULL_ID, Q_FUNC_INFO, "id == 0"); //-V654 //-V712
     d->piecePaths->insert(id, path);
     UpdateId(id);
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-qreal VContainer::GetTableValue(const QString &name, MeasurementsType patternType) const
-{
-    QSharedPointer<VVariable> m = GetVariable<VVariable>(name);
-    if (patternType == MeasurementsType::Standard)
-    {
-        m->SetValue(size(), height(), *GetPatternUnit());
-    }
-    return *m->GetValue();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -609,40 +627,43 @@ const QMap<QString, QSharedPointer<VCurveAngle> > VContainer::DataAnglesCurves()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-const QHash<QString, qreal *> VContainer::PlainVariables() const
+bool VContainer::IsUnique(const QString &name) const
 {
-    QHash<QString, qreal *> vars;
+    return VContainer::IsUnique(name, d->nspace);
+}
 
-    auto i = d->variables.constBegin();
-    while (i != d->variables.constEnd())
+//---------------------------------------------------------------------------------------------------------------------
+bool VContainer::IsUnique(const QString &name, const QString &nspace)
+{
+    if (uniqueNames.contains(nspace))
     {
-        QSharedPointer<VInternalVariable> var = i.value();
-        if ((qApp->patternType() == MeasurementsType::Standard) &&
-            (var->GetType() == VarType::Measurement || var->GetType() == VarType::Increment))
-        {
-            QSharedPointer<VVariable> m = GetVariable<VVariable>(i.key());
-            m->SetValue(size(), height(), qApp->patternUnit());
-        }
-        vars.insert(i.key(), var->GetValue());
-
-        ++i;
+        return (!uniqueNames.value(nspace).contains(name) && !builInFunctions.contains(name));
     }
-
-    return vars;
+    else
+    {
+        throw VException(QStringLiteral("Unknown namespace"));
+    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-bool VContainer::IsUnique(const QString &name)
+QStringList VContainer::AllUniqueNames() const
 {
-    return (!uniqueNames.contains(name) && !builInFunctions.contains(name));
+    return AllUniqueNames(d->nspace);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QStringList VContainer::AllUniqueNames()
+QStringList VContainer::AllUniqueNames(const QString &nspace)
 {
-    QStringList names = builInFunctions;
-    names.append(uniqueNames.toList());
-    return names;
+    if (uniqueNames.contains(nspace))
+    {
+        QStringList names = builInFunctions;
+        names.append(uniqueNames.value(nspace).toList());
+        return names;
+    }
+    else
+    {
+        throw VException(QStringLiteral("Unknown namespace"));
+    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -655,18 +676,6 @@ const Unit *VContainer::GetPatternUnit() const
 const VTranslateVars *VContainer::GetTrVars() const
 {
     return d->trVars;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-/**
- * @brief VariableExist check if exist variable this same name.
- * @param name name of row
- * @return true if contains
- */
-// cppcheck-suppress unusedFunction
-bool VContainer::VariableExist(const QString &name)
-{
-    return d->variables.contains(name);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -688,9 +697,24 @@ const QMap<QString, QSharedPointer<T> > VContainer::DataVar(const VarType &type)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VContainer::ClearUniqueNames()
+void VContainer::ClearUniqueNames() const
 {
-    uniqueNames.clear();
+    uniqueNames[d->nspace].clear();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VContainer::ClearUniqueIncrementNames() const
+{
+    const QList<QString> list = uniqueNames.value(d->nspace).toList();
+    ClearUniqueNames();
+
+    for(auto &name : list)
+    {
+        if (not name.startsWith('#'))
+        {
+            uniqueNames[d->nspace].insert(name);
+        }
+    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -698,9 +722,9 @@ void VContainer::ClearUniqueNames()
  * @brief SetSize set value of size
  * @param size value of size
  */
-void VContainer::SetSize(qreal size)
+void VContainer::SetSize(qreal size) const
 {
-    _size = size;
+    _size[d->nspace] = size;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -708,9 +732,9 @@ void VContainer::SetSize(qreal size)
  * @brief SetGrowth set value of growth
  * @param height value of height
  */
-void VContainer::SetHeight(qreal height)
+void VContainer::SetHeight(qreal height) const
 {
-    _height = height;
+    _height[d->nspace] = height;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -718,15 +742,22 @@ void VContainer::SetHeight(qreal height)
  * @brief size return size
  * @return size in mm
  */
-qreal VContainer::size()
+qreal VContainer::size() const
 {
-    return _size;
+    return VContainer::size(d->nspace);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-qreal *VContainer::rsize()
+qreal VContainer::size(const QString &nspace)
 {
-    return &_size;
+    if (_size.contains(nspace))
+    {
+        return _size.value(nspace);
+    }
+    else
+    {
+        throw VException(QStringLiteral("Unknown namespace"));
+    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -734,15 +765,22 @@ qreal *VContainer::rsize()
  * @brief height return height
  * @return height in pattern units
  */
-qreal VContainer::height()
+qreal VContainer::height() const
 {
-    return _height;
+    return VContainer::height(d->nspace);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-qreal *VContainer::rheight()
+qreal VContainer::height(const QString &nspace)
 {
-    return &_height;
+    if (_height.contains(nspace))
+    {
+        return _height.value(nspace);
+    }
+    else
+    {
+        throw VException(QStringLiteral("Unknown namespace"));
+    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -750,9 +788,9 @@ qreal *VContainer::rheight()
  * @brief data container with datagObjects return container of gObjects
  * @return pointer on container of gObjects
  */
-const QHash<quint32, QSharedPointer<VGObject> > *VContainer::DataGObjects() const
+const QHash<quint32, QSharedPointer<VGObject> > *VContainer::CalculationGObjects() const
 {
-    return &d->gObjects;
+    return &d->calculationObjects;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -769,4 +807,14 @@ const QHash<QString, QSharedPointer<VInternalVariable> > *VContainer::DataVariab
 
 //---------------------------------------------------------------------------------------------------------------------
 VContainerData::~VContainerData()
-{}
+{
+    if (ref.load() == 0)
+    {
+        --VContainer::copyCounter[nspace];
+    }
+
+    if (VContainer::copyCounter.value(nspace) == 0)
+    {
+        VContainer::ClearNamespace(nspace);
+    }
+}

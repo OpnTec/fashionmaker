@@ -6,7 +6,7 @@
  **
  **  @brief
  **  @copyright
- **  This source code is part of the Valentine project, a pattern making
+ **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2015 Valentina project
  **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
@@ -60,10 +60,6 @@ VisToolPointOfIntersectionCircles::VisToolPointOfIntersectionCircles(const VCont
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-VisToolPointOfIntersectionCircles::~VisToolPointOfIntersectionCircles()
-{}
-
-//---------------------------------------------------------------------------------------------------------------------
 void VisToolPointOfIntersectionCircles::RefreshGeometry()
 {
     if (object1Id > NULL_ID)
@@ -84,9 +80,10 @@ void VisToolPointOfIntersectionCircles::RefreshGeometry()
                 c2Path->setRect(PointRect(c2Radius));
                 DrawPoint(c2Path, static_cast<QPointF>(*second), Qt::darkRed, Qt::DashLine);
 
-                const QPointF fPoint = VToolPointOfIntersectionCircles::FindPoint(static_cast<QPointF>(*first),
-                                                                                  static_cast<QPointF>(*second),
-                                                                                  c1Radius, c2Radius, crossPoint);
+                QPointF fPoint;
+                VToolPointOfIntersectionCircles::FindPoint(static_cast<QPointF>(*first),
+                                                           static_cast<QPointF>(*second),
+                                                           c1Radius, c2Radius, crossPoint, &fPoint);
                 DrawPoint(point, fPoint, mainColor);
             }
         }
@@ -115,13 +112,13 @@ void VisToolPointOfIntersectionCircles::setObject2Id(const quint32 &value)
 //---------------------------------------------------------------------------------------------------------------------
 void VisToolPointOfIntersectionCircles::setC1Radius(const QString &value)
 {
-    c1Radius = FindLength(value, Visualization::data->PlainVariables());
+    c1Radius = FindLengthFromUser(value, Visualization::data->DataVariables());
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void VisToolPointOfIntersectionCircles::setC2Radius(const QString &value)
 {
-    c2Radius = FindLength(value, Visualization::data->PlainVariables());
+    c2Radius = FindLengthFromUser(value, Visualization::data->DataVariables());
 }
 
 //---------------------------------------------------------------------------------------------------------------------

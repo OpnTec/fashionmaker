@@ -6,7 +6,7 @@
  **
  **  @brief
  **  @copyright
- **  This source code is part of the Valentine project, a pattern making
+ **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2013-2015 Valentina project
  **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
@@ -51,9 +51,10 @@ VIncrement::VIncrement()
  */
 VIncrement::VIncrement(VContainer *data, const QString &name, quint32 index, qreal base, const QString &formula,
                        bool ok, const QString &description)
-    :VVariable(name, base, description), d(new VIncrementData(data, index, formula, ok))
+    :VVariable(name, description), d(new VIncrementData(data, index, formula, ok))
 {
     SetType(VarType::Increment);
+    VInternalVariable::SetValue(base);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -79,7 +80,8 @@ VIncrement::~VIncrement()
 
 //---------------------------------------------------------------------------------------------------------------------
 /**
- * @brief getIndex return index of row
+ * @brief getIndex return index of row. Row index for increments and preview calucalations is unique. Check type before
+ * using.
  * @return index
  */
 quint32 VIncrement::getIndex() const
@@ -102,5 +104,17 @@ bool VIncrement::IsFormulaOk() const
 //---------------------------------------------------------------------------------------------------------------------
 VContainer *VIncrement::GetData()
 {
-    return &d->data;
+    return d->data.data();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+bool VIncrement::IsPreviewCalculation() const
+{
+    return d->previewCalculation;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VIncrement::SetPreviewCalculation(bool value)
+{
+    d->previewCalculation = value;
 }

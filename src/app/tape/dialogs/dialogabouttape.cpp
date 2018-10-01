@@ -6,7 +6,7 @@
  **
  **  @brief
  **  @copyright
- **  This source code is part of the Valentine project, a pattern making
+ **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2015 Valentina project
  **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
@@ -50,7 +50,7 @@ DialogAboutTape::DialogAboutTape(QWidget *parent)
     //mApp->Settings()->GetOsSeparator() ? setLocale(QLocale()) : setLocale(QLocale::c());
 
     RetranslateUi();
-    connect(ui->pushButton_Web_Site, &QPushButton::clicked, RECEIVER(this)[this]()
+    connect(ui->pushButton_Web_Site, &QPushButton::clicked, this, [this]()
     {
         if ( QDesktopServices::openUrl(QUrl(VER_COMPANYDOMAIN_STR)) == false)
         {
@@ -61,7 +61,7 @@ DialogAboutTape::DialogAboutTape(QWidget *parent)
     connect(ui->pushButtonCheckUpdate, &QPushButton::clicked, []()
     {
         // Set feed URL before doing anything else
-        FvUpdater::sharedUpdater()->SetFeedURL(defaultFeedURL);
+        FvUpdater::sharedUpdater()->SetFeedURL(FvUpdater::CurrentFeedURL());
         FvUpdater::sharedUpdater()->CheckForUpdatesNotSilent();
     });
 
@@ -130,7 +130,7 @@ void DialogAboutTape::RetranslateUi()
     ui->label_QT_Version->setText(buildCompatibilityString());
 
     const QDate date = QLocale::c().toDate(QString(__DATE__).simplified(), QLatin1String("MMM d yyyy"));
-    ui->label_Tape_Built->setText(tr("Built on %1 at %2").arg(date.toString()).arg(__TIME__));
+    ui->label_Tape_Built->setText(tr("Built on %1 at %2").arg(date.toString(), __TIME__));
 
     ui->label_Legal_Stuff->setText(QApplication::translate("InternalStrings",
                                                            "The program is provided AS IS with NO WARRANTY OF ANY "

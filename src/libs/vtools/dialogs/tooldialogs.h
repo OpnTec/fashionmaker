@@ -6,7 +6,7 @@
  **
  **  @brief
  **  @copyright
- **  This source code is part of the Valentine project, a pattern making
+ **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
  **  Copyright (C) 2015 Valentina project
  **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
@@ -66,9 +66,11 @@
 #include "tools/dialogflippingbyaxis.h"
 #include "tools/dialogmove.h"
 #include "tools/dialogellipticalarc.h"
-#include "tools/dialogpiecepath.h"
-#include "tools/dialogpin.h"
-#include "tools/dialoginsertnode.h"
+#include "tools/piece/dialogpiecepath.h"
+#include "tools/piece/dialogpin.h"
+#include "tools/piece/dialoginsertnode.h"
+#include "tools/piece/dialogplacelabel.h"
+#include "tools/piece/dialogduplicatedetail.h"
 
 #include "support/dialogeditwrongformula.h"
 #include "support/dialogundo.h"

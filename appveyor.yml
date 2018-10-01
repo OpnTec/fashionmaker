@@ -12,8 +12,6 @@
 # version format
 version: '{build}-{branch}'
 
-os: Visual Studio 2015
-
 # branches to build
 branches:
   # whitelist
@@ -40,64 +38,70 @@ shallow_clone: false                 # default is "false"
 
 environment:
   matrix:
-  - QT5: Qt\5.8\mingw53_32
+  - QT5: Qt\5.11\mingw53_32
+    QT_VERSION: Qt5.11
     QMAKE_GENERATOR: "MinGW Makefiles"
     MINGW_PATH: C:\Qt\Tools\mingw530_32\bin
     PLATFORM: x86
-    DEPLOY: true
-  - QT5: Qt\5.8\msvc2015_64
-    QMAKE_GENERATOR: "NMake Makefiles JOM"
-    VSVER: 14
-    PLATFORM: x64
-    DEPLOY: false
-  - QT5: Qt\5.8\msvc2015
-    QMAKE_GENERATOR: "NMake Makefiles JOM"
-    VSVER: 14
-    PLATFORM: x86
-    DEPLOY: false
-  - QT5: Qt\5.7\mingw53_32
-    QMAKE_GENERATOR: "MinGW Makefiles"
-    MINGW_PATH: C:\Qt\Tools\mingw530_32\bin
-    PLATFORM: x86
-    DEPLOY: false
-  - QT5: Qt\5.7\msvc2015_64
-    QMAKE_GENERATOR: "NMake Makefiles JOM"
-    VSVER: 14
-    PLATFORM: x64
-    DEPLOY: false
-  - QT5: Qt\5.7\msvc2015
-    QMAKE_GENERATOR: "NMake Makefiles JOM"
-    VSVER: 14
-    PLATFORM: x86
-    DEPLOY: false
+    DEPLOY: true  
   - QT5: Qt\5.6\mingw49_32
+    QT_VERSION: Qt5.6
     QMAKE_GENERATOR: "MinGW Makefiles"
     MINGW_PATH: C:\Qt\Tools\mingw492_32\bin
     PLATFORM: x86
+    DEPLOY: true
+  - QT5: Qt\5.11\msvc2015_64
+    QMAKE_GENERATOR: "NMake Makefiles JOM"
+    VSVER: 14
+    PLATFORM: x64
+    DEPLOY: false
+  - QT5: Qt\5.11\msvc2015
+    QMAKE_GENERATOR: "NMake Makefiles JOM"
+    VSVER: 14
+    PLATFORM: x86
+    DEPLOY: false 
+  - QT5: Qt\5.10\mingw53_32
+    QT_VERSION: Qt5.10
+    QMAKE_GENERATOR: "MinGW Makefiles"
+    MINGW_PATH: C:\Qt\Tools\mingw530_32\bin
+    PLATFORM: x86
+    DEPLOY: false
+  - QT5: Qt\5.10\msvc2015_64
+    QMAKE_GENERATOR: "NMake Makefiles JOM"
+    VSVER: 14
+    PLATFORM: x64
+    DEPLOY: false
+  - QT5: Qt\5.10\msvc2015
+    QMAKE_GENERATOR: "NMake Makefiles JOM"
+    VSVER: 14
+    PLATFORM: x86
+    DEPLOY: false
+  - QT5: Qt\5.9\mingw53_32
+    QT_VERSION: Qt5.9
+    QMAKE_GENERATOR: "MinGW Makefiles"
+    MINGW_PATH: C:\Qt\Tools\mingw530_32\bin
+    PLATFORM: x86
+    DEPLOY: false
+  - QT5: Qt\5.9\msvc2015_64
+    QMAKE_GENERATOR: "NMake Makefiles JOM"
+    VSVER: 14
+    PLATFORM: x64
+    DEPLOY: false
+  - QT5: Qt\5.9\msvc2015
+    QMAKE_GENERATOR: "NMake Makefiles JOM"
+    VSVER: 14
+    PLATFORM: x86
     DEPLOY: false
   - QT5: Qt\5.6\msvc2015_64
+    QT_VERSION: Qt5.6
     QMAKE_GENERATOR: "NMake Makefiles JOM"
     VSVER: 14
     PLATFORM: x64
     DEPLOY: false
   - QT5: Qt\5.6\msvc2015
+    QT_VERSION: Qt5.6
     QMAKE_GENERATOR: "NMake Makefiles JOM"
     VSVER: 14
-    PLATFORM: x86
-    DEPLOY: false
-  - QT5: Qt\5.5\mingw492_32
-    QMAKE_GENERATOR: "MinGW Makefiles"
-    MINGW_PATH: C:\Qt\Tools\mingw492_32\bin
-    PLATFORM: x86
-    DEPLOY: false
-  - QT5: Qt\5.4\mingw491_32
-    QMAKE_GENERATOR: "MinGW Makefiles"
-    MINGW_PATH: C:\Qt\Tools\mingw491_32\bin
-    PLATFORM: x86
-    DEPLOY: false
-  - QT5: Qt\5.3\mingw482_32
-    QMAKE_GENERATOR: "MinGW Makefiles"
-    MINGW_PATH: C:\Qt\Tools\mingw482_32\bin
     PLATFORM: x86
     DEPLOY: false
 
@@ -134,7 +138,7 @@ before_build:
 # to run your custom scripts instead of automatic MSBuild
 build_script:
   - cd build
-  - if "%DEPLOY%" == "true" (qmake ..\Valentina.pro -r CONFIG+=no_ccache CONFIG+=checkWarnings) else (qmake ..\Valentina.pro -r CONFIG+=noDebugSymbols CONFIG+=no_ccache CONFIG+=checkWarnings)
+  - if "%DEPLOY%" == "true" (qmake ..\Valentina.pro -r CONFIG+=no_ccache CONFIG+=checkWarnings CONFIG+=noDebugSymbols CONFIG+=noWindowsInstaller) else (qmake ..\Valentina.pro -r CONFIG+=noDebugSymbols CONFIG+=no_ccache CONFIG+=checkWarnings)
   - if not "%QMAKE_GENERATOR%" == "MinGW Makefiles" (nmake -s) else (mingw32-make -j%NUMBER_OF_PROCESSORS%)
 
 # to run your custom scripts instead of automatic tests
@@ -156,7 +160,6 @@ notifications:
   - provider: Email
     to:
       - dismine@gmail.com
-      - susan.spencer@gmail.com
     on_build_success: false
     on_build_failure: true
     on_build_status_changed: true
@@ -171,19 +174,19 @@ after_test:
 
 artifacts:
   - path: build/package/valentina
-    name: valentina-win-$(APPVEYOR_REPO_COMMIT)
+    name: valentina-win-$(QT_VERSION)-$(APPVEYOR_REPO_BRANCH)-$(APPVEYOR_REPO_COMMIT)
 
 deploy:
 - provider: BinTray
   username: dismine
   api_key:
-    secure: J653yvPpcHqZ9hrPgXcgtRUz8a3tB/gqYseyQrE4LggyApcAm5fCtLF8wtw2my+m
+    secure: b55+5q3/BfyGUkOKlrZmMGGlpfVNuezh0+f2+UYGll8NHPpXehIOOt4qKYsNMk5/
   subject: dismine
   repo: Valentina
   package: valentina-win_auto-upload
   publish: true
   override: true
-  version: 0.5
+  version: 0.6a
   on:
     DEPLOY: true
-  artifact: valentina-win-$(APPVEYOR_REPO_COMMIT)
+  artifact: valentina-win-$(QT_VERSION)-$(APPVEYOR_REPO_BRANCH)-$(APPVEYOR_REPO_COMMIT)
