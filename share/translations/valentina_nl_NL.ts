@@ -4473,10 +4473,6 @@ Toch de instellingen aanpassen?</translation>
         <translation>Elk punt in de &lt;b&gt; aangepaste naadtoeslag&lt;/b&gt;  pad moet uniek zijn!</translation>
     </message>
     <message>
-        <source>The path is a cut contour</source>
-        <translation type="vanished">Het pad is een gesneden lijn</translation>
-    </message>
-    <message>
         <source>Cut on fabric</source>
         <translation>Knip in stof</translation>
     </message>
@@ -4564,6 +4560,18 @@ Toch de instellingen aanpassen?</translation>
         <source>The list of pieces is empty. Please, first create at least one piece for current pattern piece.</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>This option has effect only if the second passmark on seam line enabled in global preferences. The option helps disable the second passmark for this passmark only.</source>
+        <translation type="unfinished">Deze optie heeft alleen effect als de optie om een tweede knipje te laten zien op de zoomlijn aangevinkt is in de algemene opties. Deze optie staat het vervolgens toe om het tweede knipje voor dit specifieke knipje, uit te zetten.</translation>
+    </message>
+    <message>
+        <source>Show the second passmark on seam line</source>
+        <translation type="unfinished">Toon de tweede pasmarkering op de naadlijn</translation>
+    </message>
+    <message>
+        <source>Excluded</source>
+        <translation type="unfinished">Uitgezonderd</translation>
+    </message>
 </context>
 <context>
     <name>DialogPin</name>
@@ -4590,10 +4598,6 @@ Toch de instellingen aanpassen?</translation>
 </context>
 <context>
     <name>DialogPlaceLabel</name>
-    <message>
-        <source>Dialog</source>
-        <translation type="vanished">Dialoog</translation>
-    </message>
     <message>
         <source>Width:</source>
         <translation>Breedte:</translation>
@@ -4684,7 +4688,7 @@ Toch de instellingen aanpassen?</translation>
     </message>
     <message>
         <source>Place label</source>
-        <translation type="unfinished">Plaats label</translation>
+        <translation>Plaats label</translation>
     </message>
     <message>
         <source>Control</source>
@@ -5616,10 +5620,6 @@ Toch de instellingen aanpassen?</translation>
     <message>
         <source>Passmarks</source>
         <translation>Pasmarkeringen</translation>
-    </message>
-    <message>
-        <source>To open all detail&apos;s features complete creating the main path.</source>
-        <translation type="vanished">Om alle functie details te openen maak het hoofdpad volledig af.</translation>
     </message>
     <message>
         <source>Workpiece tool</source>
@@ -7857,10 +7857,6 @@ Do you want to save your changes?</source>
         <translation>Exporteer de details van het overgeslagen Opmaak stadium</translation>
     </message>
     <message>
-        <source>Application doesn&apos;t support multisize table with inches.</source>
-        <translation type="vanished">Applicatie ondersteunt niet het meerdere maten tabel met inches.</translation>
-    </message>
-    <message>
         <source>You don&apos;t have enough details to export. Please, include at least one detail in layout.</source>
         <translation>Er zijn te weinig details om te exporteren. Alstublieft, zorg dat er ten minste een detail in Opmaak bevat.</translation>
     </message>
@@ -7879,10 +7875,6 @@ Do you want to save your changes?</source>
     <message>
         <source>Couldn&apos;t set height. Need a file with multisize measurements.</source>
         <translation>Kon de hoogte niet vaststellen. Heb een bestand nodig met meerdere maten metingen.</translation>
-    </message>
-    <message>
-        <source>Please, additionally provide: %1</source>
-        <translation type="vanished">Alstublieft, verstrek extra: %1</translation>
     </message>
     <message>
         <source>Label template editor</source>
@@ -7983,6 +7975,14 @@ Do you want to save your changes?</source>
     <message>
         <source>Changes applied.</source>
         <translation>Wijzigingen zijn toegepast.</translation>
+    </message>
+    <message>
+        <source>Cannot read settings from a malformed INI file.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Cannot save settings. Access denied.</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -8117,31 +8117,31 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Measurement file has unknown format.</source>
-        <translation type="unfinished">Maten bestand heeft een onbekende indeling.</translation>
+        <translation>Maten bestand heeft een onbekende indeling.</translation>
     </message>
     <message>
         <source>Measurement file contains invalid known measurement(s).</source>
-        <translation type="unfinished">Maten bestand bevat ongeldige bekende ma(a)t(en).</translation>
+        <translation>Maten bestand bevat ongeldige bekende ma(a)t(en).</translation>
     </message>
     <message>
         <source>Wrong units.</source>
-        <translation type="unfinished">Verkeerde eenheden.</translation>
+        <translation>Verkeerde eenheden.</translation>
     </message>
     <message>
         <source>Application doesn&apos;t support multisize table with inches.</source>
-        <translation type="unfinished">Applicatie ondersteunt niet het meerdere maten tabel met inches.</translation>
+        <translation>Applicatie ondersteunt niet het meerdere maten tabel met inches.</translation>
     </message>
     <message>
         <source>File error.</source>
-        <translation type="unfinished">Bestandsfout.</translation>
+        <translation>Bestandsfout.</translation>
     </message>
     <message>
         <source>Measurement file doesn&apos;t include all required measurements.</source>
-        <translation type="unfinished">Maten bestand bevat niet alle benodigde maten.</translation>
+        <translation>Maten bestand bevat niet alle benodigde maten.</translation>
     </message>
     <message>
         <source>Please, additionally provide: %1</source>
-        <translation type="unfinished">Alstublieft, verstrek extra: %1</translation>
+        <translation>Alstublieft, verstrek extra: %1</translation>
     </message>
 </context>
 <context>
@@ -8835,6 +8835,22 @@ This option will take an affect after restart.</source>
     </message>
     <message>
         <source>Error in internal path &apos;%1&apos;. There is no intersection of last point with cutting countour</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Cannot calculate a notch for point &apos;%1&apos; in piece &apos;%2&apos;.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Cannot calculate a notch for point &apos;%1&apos; in piece &apos;%2&apos;. Seam allowance is empty.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Cannot calculate a notch for point &apos;%1&apos; in piece &apos;%2&apos;. Cannot find position for a notch.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Cannot calculate a notch for point &apos;%1&apos; in piece &apos;%2&apos;. Unable to fix a notch position.</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -9838,6 +9854,14 @@ Wil je deze veranderingen opslaan?</translation>
         <source>Error in row %1. Measurement name is empty.</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Cannot read settings from a malformed INI file.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Cannot save settings. Access denied.</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>TabGrainline</name>
@@ -10506,35 +10530,35 @@ Wil je deze veranderingen opslaan?</translation>
     <name>Tool</name>
     <message>
         <source>First point</source>
-        <translation type="unfinished">Eerste punt</translation>
+        <translation>Eerste punt</translation>
     </message>
     <message>
         <source>Second point</source>
-        <translation type="unfinished">Tweede punt</translation>
+        <translation>Tweede punt</translation>
     </message>
     <message>
         <source>Highest point</source>
-        <translation type="unfinished">Hoogste punt</translation>
+        <translation>Hoogste punt</translation>
     </message>
     <message>
         <source>Lowest point</source>
-        <translation type="unfinished">Laagste punt</translation>
+        <translation>Laagste punt</translation>
     </message>
     <message>
         <source>Leftmost point</source>
-        <translation type="unfinished">Uiterst linkerpunt</translation>
+        <translation>Uiterst linkerpunt</translation>
     </message>
     <message>
         <source>Rightmost point</source>
-        <translation type="unfinished">Uiterst rechterpunt</translation>
+        <translation>Uiterst rechterpunt</translation>
     </message>
     <message>
         <source>Vertical axis</source>
-        <translation type="unfinished"></translation>
+        <translation>Verticale as</translation>
     </message>
     <message>
         <source>Horizontal axis</source>
-        <translation type="unfinished">Horizontale as</translation>
+        <translation>Horizontale as</translation>
     </message>
 </context>
 <context>
@@ -10837,6 +10861,10 @@ Wil je deze veranderingen opslaan?</translation>
     <message>
         <source>Exception thrown: %1. Program will be terminated.</source>
         <translation>Uitgeworpen uitzondering: %1. Programma wordt beëindigd.</translation>
+    </message>
+    <message>
+        <source>Invalid notch.</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -11286,7 +11314,7 @@ Wil je deze veranderingen opslaan?</translation>
     </message>
     <message>
         <source>User material</source>
-        <translation type="unfinished">Gebruikers materiaal</translation>
+        <translation>Gebruikers materiaal</translation>
     </message>
     <message>
         <source>Make all parsing warnings into errors. Have effect only in console mode. Use to force Valentina to immediately terminate if a pattern contains a parsing warning.</source>
@@ -11539,31 +11567,31 @@ Wil je deze veranderingen opslaan?</translation>
     </message>
     <message>
         <source>Angle</source>
-        <translation type="unfinished">Hoek</translation>
+        <translation>Hoek</translation>
     </message>
     <message>
         <source>by length</source>
-        <translation type="unfinished">op lengte</translation>
+        <translation>op lengte</translation>
     </message>
     <message>
         <source>by points intersetions</source>
-        <translation type="unfinished">op snijpunten</translation>
+        <translation>op snijpunten</translation>
     </message>
     <message>
         <source>by first edge symmetry</source>
-        <translation type="unfinished">op eerste lijn symmetrie-as</translation>
+        <translation>op eerste lijn symmetrie-as</translation>
     </message>
     <message>
         <source>by second edge symmetry</source>
-        <translation type="unfinished">op tweede lijn symmetrie-as</translation>
+        <translation>op tweede lijn symmetrie-as</translation>
     </message>
     <message>
         <source>by first edge right angle</source>
-        <translation type="unfinished">op eerste lijn rechte hoek</translation>
+        <translation>op eerste lijn rechte hoek</translation>
     </message>
     <message>
         <source>by second edge right angle</source>
-        <translation type="unfinished">op tweede lijn rechte hoek</translation>
+        <translation>op tweede lijn rechte hoek</translation>
     </message>
 </context>
 <context>

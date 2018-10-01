@@ -4096,6 +4096,18 @@ Apply settings anyway?</source>
         <source>The list of pieces is empty. Please, first create at least one piece for current pattern piece.</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>This option has effect only if the second passmark on seam line enabled in global preferences. The option helps disable the second passmark for this passmark only.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Show the second passmark on seam line</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Excluded</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>DialogPin</name>
@@ -7132,6 +7144,14 @@ Do you want to save your changes?</source>
         <source>Changes applied.</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Cannot read settings from a malformed INI file.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Cannot save settings. Access denied.</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>MainWindowsNoGUI</name>
@@ -7241,7 +7261,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Wrong units.</source>
-        <translation type="unfinished">Unități de măsură greșite.</translation>
+        <translation>Unități de măsură greșite.</translation>
     </message>
     <message>
         <source>Application doesn&apos;t support multisize table with inches.</source>
@@ -7249,7 +7269,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>File error.</source>
-        <translation type="unfinished">Eroare de fișier.</translation>
+        <translation>Eroare de fișier.</translation>
     </message>
     <message>
         <source>Measurement file doesn&apos;t include all required measurements.</source>
@@ -7782,6 +7802,22 @@ This option will take an affect after restart.</source>
     </message>
     <message>
         <source>Error in internal path &apos;%1&apos;. There is no intersection of last point with cutting countour</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Cannot calculate a notch for point &apos;%1&apos; in piece &apos;%2&apos;.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Cannot calculate a notch for point &apos;%1&apos; in piece &apos;%2&apos;. Seam allowance is empty.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Cannot calculate a notch for point &apos;%1&apos; in piece &apos;%2&apos;. Cannot find position for a notch.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Cannot calculate a notch for point &apos;%1&apos; in piece &apos;%2&apos;. Unable to fix a notch position.</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -8655,6 +8691,14 @@ Do you want to save your changes?</source>
         <source>Error in row %1. Measurement name is empty.</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Cannot read settings from a malformed INI file.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Cannot save settings. Access denied.</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>TabGrainline</name>
@@ -9272,11 +9316,11 @@ Do you want to save your changes?</source>
     <name>Tool</name>
     <message>
         <source>First point</source>
-        <translation type="unfinished">Primul Punct</translation>
+        <translation>Primul punct</translation>
     </message>
     <message>
         <source>Second point</source>
-        <translation type="unfinished">Al doilea punct</translation>
+        <translation>Al doilea punct</translation>
     </message>
     <message>
         <source>Highest point</source>
@@ -9582,6 +9626,10 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Exception thrown: %1. Program will be terminated.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Invalid notch.</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -10143,7 +10191,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Angle</source>
-        <translation type="unfinished">Unghi</translation>
+        <translation>Unghi</translation>
     </message>
     <message>
         <source>by length</source>

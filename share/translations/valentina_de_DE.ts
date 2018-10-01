@@ -4545,6 +4545,18 @@ Apply settings anyway?</source>
         <source>The list of pieces is empty. Please, first create at least one piece for current pattern piece.</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>This option has effect only if the second passmark on seam line enabled in global preferences. The option helps disable the second passmark for this passmark only.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Show the second passmark on seam line</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Excluded</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>DialogPin</name>
@@ -7938,6 +7950,14 @@ Sollen die Änderungen gespeichert werden?</translation>
         <source>Changes applied.</source>
         <translation>Änderungen angewendet.</translation>
     </message>
+    <message>
+        <source>Cannot read settings from a malformed INI file.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Cannot save settings. Access denied.</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>MainWindowsNoGUI</name>
@@ -8071,15 +8091,15 @@ Sollen die Änderungen gespeichert werden?</translation>
     </message>
     <message>
         <source>Measurement file has unknown format.</source>
-        <translation type="unfinished">Maßdatei hat ein unbekanntes Format.</translation>
+        <translation>Maßdatei hat ein unbekanntes Format.</translation>
     </message>
     <message>
         <source>Measurement file contains invalid known measurement(s).</source>
-        <translation type="unfinished">Maßdatei enthält ungültiges Maß(e).</translation>
+        <translation>Maßdatei enthält ungültiges Maß(e).</translation>
     </message>
     <message>
         <source>Wrong units.</source>
-        <translation type="unfinished">Falsche Maßeinheiten.</translation>
+        <translation>Falsche Maßeinheiten.</translation>
     </message>
     <message>
         <source>Application doesn&apos;t support multisize table with inches.</source>
@@ -8087,11 +8107,11 @@ Sollen die Änderungen gespeichert werden?</translation>
     </message>
     <message>
         <source>File error.</source>
-        <translation type="unfinished">Dateifehler.</translation>
+        <translation>Dateifehler.</translation>
     </message>
     <message>
         <source>Measurement file doesn&apos;t include all required measurements.</source>
-        <translation type="unfinished">Maßdatei beinhaltet nicht alle erforderlichen Maße.</translation>
+        <translation>Maßdatei beinhaltet nicht alle erforderlichen Maße.</translation>
     </message>
     <message>
         <source>Please, additionally provide: %1</source>
@@ -8777,6 +8797,22 @@ This option will take an affect after restart.</source>
     </message>
     <message>
         <source>Error in internal path &apos;%1&apos;. There is no intersection of last point with cutting countour</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Cannot calculate a notch for point &apos;%1&apos; in piece &apos;%2&apos;.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Cannot calculate a notch for point &apos;%1&apos; in piece &apos;%2&apos;. Seam allowance is empty.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Cannot calculate a notch for point &apos;%1&apos; in piece &apos;%2&apos;. Cannot find position for a notch.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Cannot calculate a notch for point &apos;%1&apos; in piece &apos;%2&apos;. Unable to fix a notch position.</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -9768,6 +9804,14 @@ Do you want to save your changes?</source>
         <source>Error in row %1. Measurement name is empty.</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Cannot read settings from a malformed INI file.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Cannot save settings. Access denied.</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>TabGrainline</name>
@@ -10429,35 +10473,35 @@ Do you want to save your changes?</source>
     <name>Tool</name>
     <message>
         <source>First point</source>
-        <translation type="unfinished">Erster Punkt</translation>
+        <translation>Erster Punkt</translation>
     </message>
     <message>
         <source>Second point</source>
-        <translation type="unfinished">Zweiter Punkt</translation>
+        <translation>Zweiter Punkt</translation>
     </message>
     <message>
         <source>Highest point</source>
-        <translation type="unfinished">Höchster Punkt</translation>
+        <translation>Höchster Punkt</translation>
     </message>
     <message>
         <source>Lowest point</source>
-        <translation type="unfinished">Unterster Punkt</translation>
+        <translation>Unterster Punkt</translation>
     </message>
     <message>
         <source>Leftmost point</source>
-        <translation type="unfinished">Punkt ganz links</translation>
+        <translation>Punkt ganz links</translation>
     </message>
     <message>
         <source>Rightmost point</source>
-        <translation type="unfinished">Punkt ganz rechts</translation>
+        <translation>Punkt ganz rechts</translation>
     </message>
     <message>
         <source>Vertical axis</source>
-        <translation type="unfinished">Vertikale Achse</translation>
+        <translation>Vertikale Achse</translation>
     </message>
     <message>
         <source>Horizontal axis</source>
-        <translation type="unfinished">Horizontale Achse</translation>
+        <translation>Horizontale Achse</translation>
     </message>
 </context>
 <context>
@@ -10752,6 +10796,10 @@ Do you want to save your changes?</source>
     <message>
         <source>Exception thrown: %1. Program will be terminated.</source>
         <translation>Ausnahme ausgelöst: %1. Programm wird beendet.</translation>
+    </message>
+    <message>
+        <source>Invalid notch.</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -11449,7 +11497,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Angle</source>
-        <translation type="unfinished">Winkel</translation>
+        <translation>Winkel</translation>
     </message>
     <message>
         <source>by length</source>

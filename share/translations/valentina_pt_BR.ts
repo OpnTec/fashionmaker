@@ -4473,10 +4473,6 @@ Aplicar configurações de qualquer forma?</translation>
         <translation>Cada ponto na &lt;b&gt;margem de costura personalizada&lt;/b&gt; deve ser único!</translation>
     </message>
     <message>
-        <source>The path is a cut contour</source>
-        <translation type="vanished">O caminho é um contorno de corte</translation>
-    </message>
-    <message>
         <source>Cut on fabric</source>
         <translation>Cortar no tecido</translation>
     </message>
@@ -4564,6 +4560,18 @@ Aplicar configurações de qualquer forma?</translation>
         <source>The list of pieces is empty. Please, first create at least one piece for current pattern piece.</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>This option has effect only if the second passmark on seam line enabled in global preferences. The option helps disable the second passmark for this passmark only.</source>
+        <translation type="unfinished">Esta opção terá efeito somente se o segundo pique na linha de costura for ativado nas preferências globais. A opção ajuda a desativar o segundo pique somente para este pique.</translation>
+    </message>
+    <message>
+        <source>Show the second passmark on seam line</source>
+        <translation type="unfinished">Mostrar segundo pique na linha de costura</translation>
+    </message>
+    <message>
+        <source>Excluded</source>
+        <translation type="unfinished">Excluído</translation>
+    </message>
 </context>
 <context>
     <name>DialogPin</name>
@@ -4590,10 +4598,6 @@ Aplicar configurações de qualquer forma?</translation>
 </context>
 <context>
     <name>DialogPlaceLabel</name>
-    <message>
-        <source>Dialog</source>
-        <translation type="vanished">Caixa de diálogo</translation>
-    </message>
     <message>
         <source>Width:</source>
         <translation>Largura:</translation>
@@ -4684,23 +4688,23 @@ Aplicar configurações de qualquer forma?</translation>
     </message>
     <message>
         <source>Place label</source>
-        <translation type="unfinished">Colocar rótulo</translation>
+        <translation>Colocar rótulo</translation>
     </message>
     <message>
         <source>Control</source>
-        <translation type="unfinished">Controle</translation>
+        <translation>Controle</translation>
     </message>
     <message>
         <source>Visible</source>
-        <translation type="unfinished">Visibilidade</translation>
+        <translation>Visibilidade</translation>
     </message>
     <message>
         <source>Create a formula that regulates visibility. Values different from &quot;0&quot; make a path visible.</source>
-        <translation type="unfinished">Crie uma fórmula que regule a visibilidade. Valores diferentes de &quot;0&quot; tornam visível um caminho.</translation>
+        <translation>Crie uma fórmula que regule a visibilidade. Valores diferentes de &quot;0&quot; tornam visível um caminho.</translation>
     </message>
     <message>
         <source>1</source>
-        <translation type="unfinished">1</translation>
+        <translation>1</translation>
     </message>
     <message>
         <source>The list of pieces is empty. Please, first create at least one piece for current pattern piece.</source>
@@ -4708,7 +4712,7 @@ Aplicar configurações de qualquer forma?</translation>
     </message>
     <message>
         <source>Control visibility</source>
-        <translation type="unfinished">Controle de visibilidade</translation>
+        <translation>Controle de visibilidade</translation>
     </message>
 </context>
 <context>
@@ -5612,10 +5616,6 @@ Aplicar configurações de qualquer forma?</translation>
     <message>
         <source>Passmarks</source>
         <translation>Piques</translation>
-    </message>
-    <message>
-        <source>To open all detail&apos;s features complete creating the main path.</source>
-        <translation type="vanished">Para abrir todos os recursos detalhados complete a criação do caminho principal.</translation>
     </message>
     <message>
         <source>Workpiece tool</source>
@@ -7854,10 +7854,6 @@ Você quer salvar suas mudanças?</translation>
         <translation>Exportar detalhes ignorando o estágio de Layout</translation>
     </message>
     <message>
-        <source>Application doesn&apos;t support multisize table with inches.</source>
-        <translation type="vanished">A aplicação não suporta tabela multisize com polegadas.</translation>
-    </message>
-    <message>
         <source>You don&apos;t have enough details to export. Please, include at least one detail in layout.</source>
         <translation>Você não tem detalhes suficientes para exportar. Por favor, inclua pelo menos um detalhe no layout.</translation>
     </message>
@@ -7876,10 +7872,6 @@ Você quer salvar suas mudanças?</translation>
     <message>
         <source>Couldn&apos;t set height. Need a file with multisize measurements.</source>
         <translation>Não foi possível definir a altura. Precisa de um arquivo com medidas multisize.</translation>
-    </message>
-    <message>
-        <source>Please, additionally provide: %1</source>
-        <translation type="vanished">Por favor, forneça adicionalmente: %1</translation>
     </message>
     <message>
         <source>Label template editor</source>
@@ -7980,6 +7972,14 @@ Você quer salvar suas mudanças?</translation>
     <message>
         <source>Changes applied.</source>
         <translation>Mudanças aplicadas.</translation>
+    </message>
+    <message>
+        <source>Cannot read settings from a malformed INI file.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Cannot save settings. Access denied.</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -8102,31 +8102,31 @@ Você quer salvar suas mudanças?</translation>
     </message>
     <message>
         <source>Measurement file has unknown format.</source>
-        <translation type="unfinished">Arquivo de medidas tem formato desconhecido.</translation>
+        <translation>Arquivo de medidas tem formato desconhecido.</translation>
     </message>
     <message>
         <source>Measurement file contains invalid known measurement(s).</source>
-        <translation type="unfinished">O arquivo de medidas contém medida(s) conhecidas inválidas.</translation>
+        <translation>O arquivo de medidas contém medida(s) conhecidas inválidas.</translation>
     </message>
     <message>
         <source>Wrong units.</source>
-        <translation type="unfinished">Unidades erradas.</translation>
+        <translation>Unidades erradas.</translation>
     </message>
     <message>
         <source>Application doesn&apos;t support multisize table with inches.</source>
-        <translation type="unfinished">A aplicação não suporta tabela multisize com polegadas.</translation>
+        <translation>A aplicação não suporta tabela multisize com polegadas.</translation>
     </message>
     <message>
         <source>File error.</source>
-        <translation type="unfinished">Erro de arquivo.</translation>
+        <translation>Erro de arquivo.</translation>
     </message>
     <message>
         <source>Measurement file doesn&apos;t include all required measurements.</source>
-        <translation type="unfinished">O arquivo de medidas não inclui todas as medidas necessárias.</translation>
+        <translation>O arquivo de medidas não inclui todas as medidas necessárias.</translation>
     </message>
     <message>
         <source>Please, additionally provide: %1</source>
-        <translation type="unfinished">Por favor, forneça adicionalmente: %1</translation>
+        <translation>Por favor, forneça adicionalmente: %1</translation>
     </message>
 </context>
 <context>
@@ -8821,6 +8821,22 @@ Esta opção terá um efeito após o reinício.</translation>
     </message>
     <message>
         <source>Error in internal path &apos;%1&apos;. There is no intersection of last point with cutting countour</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Cannot calculate a notch for point &apos;%1&apos; in piece &apos;%2&apos;.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Cannot calculate a notch for point &apos;%1&apos; in piece &apos;%2&apos;. Seam allowance is empty.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Cannot calculate a notch for point &apos;%1&apos; in piece &apos;%2&apos;. Cannot find position for a notch.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Cannot calculate a notch for point &apos;%1&apos; in piece &apos;%2&apos;. Unable to fix a notch position.</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -9824,6 +9840,14 @@ Deseja salvar suas mudanças?</translation>
         <source>Error in row %1. Measurement name is empty.</source>
         <translation>Erro na linha %1. O nome da medida está vazio.</translation>
     </message>
+    <message>
+        <source>Cannot read settings from a malformed INI file.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Cannot save settings. Access denied.</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>TabGrainline</name>
@@ -10475,20 +10499,6 @@ Deseja salvar suas mudanças?</translation>
     </message>
 </context>
 <context>
-    <name>TogglePieceForbidFlipping</name>
-    <message>
-        <source>forbid flipping</source>
-        <translation type="vanished">proibido girar</translation>
-    </message>
-</context>
-<context>
-    <name>TogglePieceForceFlipping</name>
-    <message>
-        <source>force flipping</source>
-        <translation type="vanished">forçar giro</translation>
-    </message>
-</context>
-<context>
     <name>TogglePieceForceForbidFlipping</name>
     <message>
         <source>piece flipping</source>
@@ -10506,35 +10516,35 @@ Deseja salvar suas mudanças?</translation>
     <name>Tool</name>
     <message>
         <source>First point</source>
-        <translation type="unfinished">Primeiro ponto</translation>
+        <translation>Primeiro ponto</translation>
     </message>
     <message>
         <source>Second point</source>
-        <translation type="unfinished">Segundo ponto</translation>
+        <translation>Segundo ponto</translation>
     </message>
     <message>
         <source>Highest point</source>
-        <translation type="unfinished">Ponto mais alto</translation>
+        <translation>Ponto mais alto</translation>
     </message>
     <message>
         <source>Lowest point</source>
-        <translation type="unfinished">Ponto mais baixo</translation>
+        <translation>Ponto mais baixo</translation>
     </message>
     <message>
         <source>Leftmost point</source>
-        <translation type="unfinished"></translation>
+        <translation>Ponto mais à esquerda</translation>
     </message>
     <message>
         <source>Rightmost point</source>
-        <translation type="unfinished">Ponto mais à direita</translation>
+        <translation>Ponto mais à direita</translation>
     </message>
     <message>
         <source>Vertical axis</source>
-        <translation type="unfinished">Eixo vertical</translation>
+        <translation>Eixo vertical</translation>
     </message>
     <message>
         <source>Horizontal axis</source>
-        <translation type="unfinished">Eixo horizontal</translation>
+        <translation>Eixo horizontal</translation>
     </message>
 </context>
 <context>
@@ -10833,6 +10843,10 @@ Deseja salvar suas mudanças?</translation>
     <message>
         <source>Exception thrown: %1. Program will be terminated.</source>
         <translation>Exceção jogada: %1. O programa será encerrado.</translation>
+    </message>
+    <message>
+        <source>Invalid notch.</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -11262,7 +11276,7 @@ Deseja salvar suas mudanças?</translation>
     </message>
     <message>
         <source>User material</source>
-        <translation type="unfinished">Material do usuário</translation>
+        <translation>Material do usuário</translation>
     </message>
     <message>
         <source>Make all parsing warnings into errors. Have effect only in console mode. Use to force Valentina to immediately terminate if a pattern contains a parsing warning.</source>
@@ -11503,31 +11517,31 @@ Deseja salvar suas mudanças?</translation>
     </message>
     <message>
         <source>Angle</source>
-        <translation type="unfinished">Ângulo</translation>
+        <translation>Ângulo</translation>
     </message>
     <message>
         <source>by length</source>
-        <translation type="unfinished">por comprimento</translation>
+        <translation>por comprimento</translation>
     </message>
     <message>
         <source>by points intersetions</source>
-        <translation type="unfinished">por pontos interseções</translation>
+        <translation>por pontos interseções</translation>
     </message>
     <message>
         <source>by first edge symmetry</source>
-        <translation type="unfinished">pela simetria da primeira aresta</translation>
+        <translation>pela simetria da primeira aresta</translation>
     </message>
     <message>
         <source>by second edge symmetry</source>
-        <translation type="unfinished">pela simetria da segunda aresta</translation>
+        <translation>pela simetria da segunda aresta</translation>
     </message>
     <message>
         <source>by first edge right angle</source>
-        <translation type="unfinished">pelo ângulo reto da primeira aresta</translation>
+        <translation>pelo ângulo reto da primeira aresta</translation>
     </message>
     <message>
         <source>by second edge right angle</source>
-        <translation type="unfinished">pelo ângulo reto da segunda aresta</translation>
+        <translation>pelo ângulo reto da segunda aresta</translation>
     </message>
 </context>
 <context>

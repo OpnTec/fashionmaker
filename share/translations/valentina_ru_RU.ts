@@ -2941,7 +2941,7 @@
     </message>
     <message>
         <source>The list of pieces is empty. Please, first create at least one piece for current pattern piece.</source>
-        <translation type="unfinished"></translation>
+        <translation>Список пуст. Пожалуйста, создайте хотя бы одну фигуру для текущей детали выкройки.</translation>
     </message>
 </context>
 <context>
@@ -4473,10 +4473,6 @@ Apply settings anyway?</source>
         <translation>Каждая точка &lt;b&gt;пользовательского припуска на швы&lt;/b&gt; должна быть уникальной!</translation>
     </message>
     <message>
-        <source>The path is a cut contour</source>
-        <translation type="vanished">Данный контур - это контур раскроя</translation>
-    </message>
-    <message>
         <source>Cut on fabric</source>
         <translation>Раскрой на ткани</translation>
     </message>
@@ -4550,19 +4546,31 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Continue the first point to the cutting contour</source>
-        <translation type="unfinished"></translation>
+        <translation>Введите первую точку области вырезания</translation>
     </message>
     <message>
         <source>Continue the last point to the cutting contour</source>
-        <translation type="unfinished"></translation>
+        <translation>Введите последнюю точку области вырезания</translation>
     </message>
     <message>
         <source>The path is a cut contour. Use to control export to DXF-AAMA</source>
-        <translation type="unfinished"></translation>
+        <translation>Путь к области вырезания. Используйте экспортирование в формат DXF-AAMA</translation>
     </message>
     <message>
         <source>The list of pieces is empty. Please, first create at least one piece for current pattern piece.</source>
-        <translation type="unfinished"></translation>
+        <translation>Список пуст. Пожалуйста, сначала создайте хотя бы одну фигуру для текущей детали выкройки.</translation>
+    </message>
+    <message>
+        <source>This option has effect only if the second passmark on seam line enabled in global preferences. The option helps disable the second passmark for this passmark only.</source>
+        <translation type="unfinished">Эта опция имеет эффект только если вторая надсечка на линии шва включена в глобальных настройках. Опция позволяет отключать вторую надсечку только для этой надсечки.</translation>
+    </message>
+    <message>
+        <source>Show the second passmark on seam line</source>
+        <translation type="unfinished">Показать вторую надсечку на линии шва</translation>
+    </message>
+    <message>
+        <source>Excluded</source>
+        <translation type="unfinished">Исключенный</translation>
     </message>
 </context>
 <context>
@@ -4585,15 +4593,11 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>The list of pieces is empty. Please, first create at least one piece for current pattern piece.</source>
-        <translation type="unfinished"></translation>
+        <translation>Список пуст. Пожалуйста, сначала создайте хотя бы одну фигуру для текущей детали выкройки.</translation>
     </message>
 </context>
 <context>
     <name>DialogPlaceLabel</name>
-    <message>
-        <source>Dialog</source>
-        <translation type="vanished">Диалог</translation>
-    </message>
     <message>
         <source>Width:</source>
         <translation>Ширина:</translation>
@@ -4684,31 +4688,31 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Place label</source>
-        <translation type="unfinished">Метка места</translation>
+        <translation>Метка места</translation>
     </message>
     <message>
         <source>Control</source>
-        <translation type="unfinished">Контроль</translation>
+        <translation>Контроль</translation>
     </message>
     <message>
         <source>Visible</source>
-        <translation type="unfinished">Видимый</translation>
+        <translation>Видимый</translation>
     </message>
     <message>
         <source>Create a formula that regulates visibility. Values different from &quot;0&quot; make a path visible.</source>
-        <translation type="unfinished">Создать формулу, которая регулирует видимость. Значения, отличные от &quot;0&quot;, делают контур видимым.</translation>
+        <translation>Создать формулу, которая регулирует видимость. Значения, отличные от &quot;0&quot;, делают контур видимым.</translation>
     </message>
     <message>
         <source>1</source>
-        <translation type="unfinished">1</translation>
+        <translation>1</translation>
     </message>
     <message>
         <source>The list of pieces is empty. Please, first create at least one piece for current pattern piece.</source>
-        <translation type="unfinished"></translation>
+        <translation>Список пуст. Пожалуйста, сначала создайте хотя бы одну фигуру для текущей детали выкройки.</translation>
     </message>
     <message>
         <source>Control visibility</source>
-        <translation type="unfinished">Контроль видимости</translation>
+        <translation>Контроль видимости</translation>
     </message>
 </context>
 <context>
@@ -5619,10 +5623,6 @@ Apply settings anyway?</source>
         <translation>Надсечки</translation>
     </message>
     <message>
-        <source>To open all detail&apos;s features complete creating the main path.</source>
-        <translation type="vanished">Для открытия всех функций детали закончите создание главного контура.</translation>
-    </message>
-    <message>
         <source>Workpiece tool</source>
         <translation>Инструмент Деталь</translation>
     </message>
@@ -5672,7 +5672,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>To open all detail&apos;s features complete creating the main path. Please, press OK.</source>
-        <translation type="unfinished"></translation>
+        <translation>Для открытия всех функций детали закончите создание главного контура. Пожалуйста, нажмите ОК.</translation>
     </message>
 </context>
 <context>
@@ -7859,10 +7859,6 @@ Do you want to save your changes?</source>
         <translation>Экспортировать детали, пропустив этап раскладки</translation>
     </message>
     <message>
-        <source>Application doesn&apos;t support multisize table with inches.</source>
-        <translation type="vanished">Приложение не поддерживает мультиразмерную таблицу в дюймах.</translation>
-    </message>
-    <message>
         <source>You don&apos;t have enough details to export. Please, include at least one detail in layout.</source>
         <translation>Недостаточно деталей для экспорта. Пожалуйста, создайте хотя бы одну деталь.</translation>
     </message>
@@ -7881,10 +7877,6 @@ Do you want to save your changes?</source>
     <message>
         <source>Couldn&apos;t set height. Need a file with multisize measurements.</source>
         <translation>Невозможно установить рост. Необходим файл мультиразмерных мерок.</translation>
-    </message>
-    <message>
-        <source>Please, additionally provide: %1</source>
-        <translation type="vanished">Пожалуйста, дополнительно представьте: %1</translation>
     </message>
     <message>
         <source>Label template editor</source>
@@ -7985,6 +7977,14 @@ Do you want to save your changes?</source>
     <message>
         <source>Changes applied.</source>
         <translation>Изменения применены.</translation>
+    </message>
+    <message>
+        <source>Cannot read settings from a malformed INI file.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Cannot save settings. Access denied.</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -8119,31 +8119,31 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Measurement file has unknown format.</source>
-        <translation type="unfinished">Неизвестный формат файла мерок.</translation>
+        <translation>Неизвестный формат файла мерок.</translation>
     </message>
     <message>
         <source>Measurement file contains invalid known measurement(s).</source>
-        <translation type="unfinished">Файл мерок содержит неправильные мерки.</translation>
+        <translation>Файл мерок содержит неправильные мерки.</translation>
     </message>
     <message>
         <source>Wrong units.</source>
-        <translation type="unfinished">Неправильные единицы измерения.</translation>
+        <translation>Неправильные единицы измерения.</translation>
     </message>
     <message>
         <source>Application doesn&apos;t support multisize table with inches.</source>
-        <translation type="unfinished">Приложение не поддерживает мультиразмерную таблицу в дюймах.</translation>
+        <translation>Приложение не поддерживает мультиразмерную таблицу в дюймах.</translation>
     </message>
     <message>
         <source>File error.</source>
-        <translation type="unfinished">Ошибка файла.</translation>
+        <translation>Ошибка файла.</translation>
     </message>
     <message>
         <source>Measurement file doesn&apos;t include all required measurements.</source>
-        <translation type="unfinished">Файл мерок содержит не все требуемые мерки.</translation>
+        <translation>Файл мерок содержит не все требуемые мерки.</translation>
     </message>
     <message>
         <source>Please, additionally provide: %1</source>
-        <translation type="unfinished">Пожалуйста, дополнительно представьте: %1</translation>
+        <translation>Пожалуйста, дополнительно представьте: %1</translation>
     </message>
 </context>
 <context>
@@ -8830,14 +8830,30 @@ This option will take an affect after restart.</source>
     </message>
     <message>
         <source>User material number %1 was not defined in this pattern.</source>
-        <translation type="unfinished"></translation>
+        <translation>Номер %1 пользовательского материала не задан в данной выкройке.</translation>
     </message>
     <message>
         <source>Error in internal path &apos;%1&apos;. There is no intersection of first point with cutting countour</source>
-        <translation type="unfinished"></translation>
+        <translation>Ошибка внутреннего пути  &apos;%1&apos;. Между первой точкой и областью вырезания нет пересечений</translation>
     </message>
     <message>
         <source>Error in internal path &apos;%1&apos;. There is no intersection of last point with cutting countour</source>
+        <translation>Ошибка внутреннего пути  &apos;%1&apos;. Между последней точкой и областью вырезания нет пересечений</translation>
+    </message>
+    <message>
+        <source>Cannot calculate a notch for point &apos;%1&apos; in piece &apos;%2&apos;.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Cannot calculate a notch for point &apos;%1&apos; in piece &apos;%2&apos;. Seam allowance is empty.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Cannot calculate a notch for point &apos;%1&apos; in piece &apos;%2&apos;. Cannot find position for a notch.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Cannot calculate a notch for point &apos;%1&apos; in piece &apos;%2&apos;. Unable to fix a notch position.</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -9841,6 +9857,14 @@ Do you want to save your changes?</source>
         <source>Error in row %1. Measurement name is empty.</source>
         <translation>Ошибка в строке %1. Имя мерки пустое.</translation>
     </message>
+    <message>
+        <source>Cannot read settings from a malformed INI file.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Cannot save settings. Access denied.</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>TabGrainline</name>
@@ -10492,24 +10516,10 @@ Do you want to save your changes?</source>
     </message>
 </context>
 <context>
-    <name>TogglePieceForbidFlipping</name>
-    <message>
-        <source>forbid flipping</source>
-        <translation type="vanished">запретить переворачивание</translation>
-    </message>
-</context>
-<context>
-    <name>TogglePieceForceFlipping</name>
-    <message>
-        <source>force flipping</source>
-        <translation type="vanished">форсировать переворачивание</translation>
-    </message>
-</context>
-<context>
     <name>TogglePieceForceForbidFlipping</name>
     <message>
         <source>piece flipping</source>
-        <translation type="unfinished"></translation>
+        <translation>перелистывание части</translation>
     </message>
 </context>
 <context>
@@ -10523,35 +10533,35 @@ Do you want to save your changes?</source>
     <name>Tool</name>
     <message>
         <source>First point</source>
-        <translation type="unfinished">Первая точка</translation>
+        <translation>Первая точка</translation>
     </message>
     <message>
         <source>Second point</source>
-        <translation type="unfinished">Вторая точка</translation>
+        <translation>Вторая точка</translation>
     </message>
     <message>
         <source>Highest point</source>
-        <translation type="unfinished">Самая высокая точка</translation>
+        <translation>Самая высокая точка</translation>
     </message>
     <message>
         <source>Lowest point</source>
-        <translation type="unfinished">Самая низкая точка</translation>
+        <translation>Самая низкая точка</translation>
     </message>
     <message>
         <source>Leftmost point</source>
-        <translation type="unfinished">Самая левая точка</translation>
+        <translation>Самая левая точка</translation>
     </message>
     <message>
         <source>Rightmost point</source>
-        <translation type="unfinished">Самая правая точка</translation>
+        <translation>Самая правая точка</translation>
     </message>
     <message>
         <source>Vertical axis</source>
-        <translation type="unfinished">Вертикальные оси</translation>
+        <translation>Вертикальные оси</translation>
     </message>
     <message>
         <source>Horizontal axis</source>
-        <translation type="unfinished">Горизонтальные оси</translation>
+        <translation>Горизонтальные оси</translation>
     </message>
 </context>
 <context>
@@ -10854,6 +10864,10 @@ Do you want to save your changes?</source>
     <message>
         <source>Exception thrown: %1. Program will be terminated.</source>
         <translation>Программное исключение: %1. Работа программы будет завершена.</translation>
+    </message>
+    <message>
+        <source>Invalid notch.</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -11299,23 +11313,23 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Use this option to override user material defined in pattern. The value must be in form &lt;number&gt;@&lt;user matrial name&gt;. The number should be in range from 1 to %1. For example, 1@Fabric2. The key can be used multiple times. Has no effect in GUI mode.</source>
-        <translation type="unfinished"></translation>
+        <translation>Используйте этот параметр для переопределения пользовательского материала, заданного в выкройке. Значение должно быть в форме &lt;number&gt;@&lt;user matrial name&gt;. Число должно быть в диапазоне от 1 до %1. Например, 1@Fabric2. Ключ может использоваться несколько раз. Не действует в графическом режиме.</translation>
     </message>
     <message>
         <source>User material</source>
-        <translation type="unfinished">Материал пользователя</translation>
+        <translation>Материал пользователя</translation>
     </message>
     <message>
         <source>Make all parsing warnings into errors. Have effect only in console mode. Use to force Valentina to immediately terminate if a pattern contains a parsing warning.</source>
-        <translation type="unfinished"></translation>
+        <translation>Превращает все предупреждения разбора в ошибки. Действует только в консольном режиме. Используется для принудительного завершения Valentina, если выкройка содержит предупреждения разбора.</translation>
     </message>
     <message>
         <source>Invalid user material &apos;%1&apos;. Separator is missing.</source>
-        <translation type="unfinished"></translation>
+        <translation>Неверный пользовательский материал &apos;%1&apos;. Пропущен разделитель строки.</translation>
     </message>
     <message>
         <source>Invalid user material &apos;%1&apos;. Wrong material number.</source>
-        <translation type="unfinished"></translation>
+        <translation>Неверный пользовательский материал &apos;%1&apos;. Неправильный номер материала.</translation>
     </message>
 </context>
 <context>
@@ -11556,31 +11570,31 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Angle</source>
-        <translation type="unfinished">Угол</translation>
+        <translation>Угол</translation>
     </message>
     <message>
         <source>by length</source>
-        <translation type="unfinished">по длине</translation>
+        <translation>по длине</translation>
     </message>
     <message>
         <source>by points intersetions</source>
-        <translation type="unfinished">по точкам пересечения</translation>
+        <translation>по точкам пересечения</translation>
     </message>
     <message>
         <source>by first edge symmetry</source>
-        <translation type="unfinished">по симметрии первого ребра</translation>
+        <translation>по симметрии первого ребра</translation>
     </message>
     <message>
         <source>by second edge symmetry</source>
-        <translation type="unfinished">по симметрии второго ребра</translation>
+        <translation>по симметрии второго ребра</translation>
     </message>
     <message>
         <source>by first edge right angle</source>
-        <translation type="unfinished">по прямому углу первого ребра</translation>
+        <translation>по прямому углу первого ребра</translation>
     </message>
     <message>
         <source>by second edge right angle</source>
-        <translation type="unfinished">по прямому углу второго ребра</translation>
+        <translation>по прямому углу второго ребра</translation>
     </message>
 </context>
 <context>
@@ -12953,12 +12967,8 @@ Do you want to save your changes?</source>
 <context>
     <name>VToolTriangle</name>
     <message>
-        <source>Error calculating point &apos;%1&apos;. Point of intersection cannot be finded</source>
-        <translation type="vanished">Ошибка при вычислении точки &apos;%1&apos;. Точка пересечения не может быть найдена (!found!).</translation>
-    </message>
-    <message>
         <source>Error calculating point &apos;%1&apos;. Point of intersection cannot be found</source>
-        <translation type="unfinished"></translation>
+        <translation>Ошибка при вычислении точки &apos;%1&apos;. Точка пересечения не может быть найдена</translation>
     </message>
 </context>
 <context>

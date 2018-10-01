@@ -4522,6 +4522,18 @@ Apply settings anyway?</source>
         <source>The list of pieces is empty. Please, first create at least one piece for current pattern piece.</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>This option has effect only if the second passmark on seam line enabled in global preferences. The option helps disable the second passmark for this passmark only.</source>
+        <translation type="unfinished">Questa opzione è valida solo se la seconda tacca sulla linea di cucitura è disabilitata dalle preferenze generali. L&apos;opzione aiuta a disabilitare la seconda tacca solo per questa tacca.</translation>
+    </message>
+    <message>
+        <source>Show the second passmark on seam line</source>
+        <translation type="unfinished">Visualizza la seconda tacca nella linea di cucitura</translation>
+    </message>
+    <message>
+        <source>Excluded</source>
+        <translation type="unfinished">Escluse</translation>
+    </message>
 </context>
 <context>
     <name>DialogPin</name>
@@ -5570,10 +5582,6 @@ Apply settings anyway?</source>
     <message>
         <source>Passmarks</source>
         <translation>Tacche</translation>
-    </message>
-    <message>
-        <source>To open all detail&apos;s features complete creating the main path.</source>
-        <translation type="vanished">Per aprire tutte le funzionalità del dettaglio completare la creazione del percorso principale.</translation>
     </message>
     <message>
         <source>Workpiece tool</source>
@@ -7931,6 +7939,14 @@ Vuoi salvare i cambiamenti?</translation>
         <source>Changes applied.</source>
         <translation>Modifiche applicate.</translation>
     </message>
+    <message>
+        <source>Cannot read settings from a malformed INI file.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Cannot save settings. Access denied.</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>MainWindowsNoGUI</name>
@@ -8064,15 +8080,15 @@ Vuoi salvare i cambiamenti?</translation>
     </message>
     <message>
         <source>Measurement file has unknown format.</source>
-        <translation type="unfinished">Il file delle misure ha un formato sconosciuto.</translation>
+        <translation>Il file delle misure ha un formato sconosciuto.</translation>
     </message>
     <message>
         <source>Measurement file contains invalid known measurement(s).</source>
-        <translation type="unfinished">Il file delle misure contiene misura(e) note come invalide.</translation>
+        <translation>Il file delle misure contiene misura(e) note come invalide.</translation>
     </message>
     <message>
         <source>Wrong units.</source>
-        <translation type="unfinished">Unità sbagliate.</translation>
+        <translation>Unità sbagliate.</translation>
     </message>
     <message>
         <source>Application doesn&apos;t support multisize table with inches.</source>
@@ -8080,11 +8096,11 @@ Vuoi salvare i cambiamenti?</translation>
     </message>
     <message>
         <source>File error.</source>
-        <translation type="unfinished">Errore nel file.</translation>
+        <translation>Errore nel file.</translation>
     </message>
     <message>
         <source>Measurement file doesn&apos;t include all required measurements.</source>
-        <translation type="unfinished">Il file delle misure non include tutte le misure richieste.</translation>
+        <translation>Il file delle misure non include tutte le misure richieste.</translation>
     </message>
     <message>
         <source>Please, additionally provide: %1</source>
@@ -8782,6 +8798,22 @@ This option will take an affect after restart.</source>
     </message>
     <message>
         <source>Error in internal path &apos;%1&apos;. There is no intersection of last point with cutting countour</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Cannot calculate a notch for point &apos;%1&apos; in piece &apos;%2&apos;.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Cannot calculate a notch for point &apos;%1&apos; in piece &apos;%2&apos;. Seam allowance is empty.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Cannot calculate a notch for point &apos;%1&apos; in piece &apos;%2&apos;. Cannot find position for a notch.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Cannot calculate a notch for point &apos;%1&apos; in piece &apos;%2&apos;. Unable to fix a notch position.</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -9785,6 +9817,14 @@ Vuoi salvare le tue modifiche?</translation>
         <source>Error in row %1. Measurement name is empty.</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Cannot read settings from a malformed INI file.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Cannot save settings. Access denied.</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>TabGrainline</name>
@@ -10453,35 +10493,35 @@ Vuoi salvare le tue modifiche?</translation>
     <name>Tool</name>
     <message>
         <source>First point</source>
-        <translation type="unfinished">Primo punto</translation>
+        <translation>Primo punto</translation>
     </message>
     <message>
         <source>Second point</source>
-        <translation type="unfinished">Secondo punto</translation>
+        <translation>Secondo punto</translation>
     </message>
     <message>
         <source>Highest point</source>
-        <translation type="unfinished">Punto più alto</translation>
+        <translation>Punto più alto</translation>
     </message>
     <message>
         <source>Lowest point</source>
-        <translation type="unfinished">Punto più basso</translation>
+        <translation>Punto più basso</translation>
     </message>
     <message>
         <source>Leftmost point</source>
-        <translation type="unfinished">Punto più a sinistra</translation>
+        <translation>Punto più a sinistra</translation>
     </message>
     <message>
         <source>Rightmost point</source>
-        <translation type="unfinished">Punto più a destra</translation>
+        <translation>Punto più a destra</translation>
     </message>
     <message>
         <source>Vertical axis</source>
-        <translation type="unfinished">Asse verticale</translation>
+        <translation>Asse verticale</translation>
     </message>
     <message>
         <source>Horizontal axis</source>
-        <translation type="unfinished">Asse orizzontale</translation>
+        <translation>Asse orizzontale</translation>
     </message>
 </context>
 <context>
@@ -10780,6 +10820,10 @@ Vuoi salvare le tue modifiche?</translation>
     <message>
         <source>Exception thrown: %1. Program will be terminated.</source>
         <translation>Eccezione generata:%1. Il programma verrà terminato.</translation>
+    </message>
+    <message>
+        <source>Invalid notch.</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -11441,15 +11485,15 @@ Vuoi salvare le tue modifiche?</translation>
     </message>
     <message>
         <source>Angle</source>
-        <translation type="unfinished"></translation>
+        <translation>Angol</translation>
     </message>
     <message>
         <source>by length</source>
-        <translation type="unfinished">per lunghezza</translation>
+        <translation>per lunghezza</translation>
     </message>
     <message>
         <source>by points intersetions</source>
-        <translation type="unfinished">per punto di intersezione</translation>
+        <translation>per punto di intersezione</translation>
     </message>
     <message>
         <source>by first edge symmetry</source>

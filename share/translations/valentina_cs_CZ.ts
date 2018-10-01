@@ -4491,6 +4491,18 @@ Apply settings anyway?</source>
         <source>The list of pieces is empty. Please, first create at least one piece for current pattern piece.</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>This option has effect only if the second passmark on seam line enabled in global preferences. The option helps disable the second passmark for this passmark only.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Show the second passmark on seam line</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Excluded</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>DialogPin</name>
@@ -4517,10 +4529,6 @@ Apply settings anyway?</source>
 </context>
 <context>
     <name>DialogPlaceLabel</name>
-    <message>
-        <source>Dialog</source>
-        <translation type="vanished">Dialog</translation>
-    </message>
     <message>
         <source>Width:</source>
         <translation>Šířka:</translation>
@@ -7672,6 +7680,14 @@ Chcete uložit své změny?</translation>
         <source>Changes applied.</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Cannot read settings from a malformed INI file.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Cannot save settings. Access denied.</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>MainWindowsNoGUI</name>
@@ -7785,7 +7801,7 @@ Chcete uložit své změny?</translation>
     </message>
     <message>
         <source>Wrong units.</source>
-        <translation type="unfinished">Nesprávné jednotky.</translation>
+        <translation>Nesprávné jednotky.</translation>
     </message>
     <message>
         <source>Application doesn&apos;t support multisize table with inches.</source>
@@ -7793,7 +7809,7 @@ Chcete uložit své změny?</translation>
     </message>
     <message>
         <source>File error.</source>
-        <translation type="unfinished">Chyba souboru.</translation>
+        <translation>Chyba souboru.</translation>
     </message>
     <message>
         <source>Measurement file doesn&apos;t include all required measurements.</source>
@@ -8452,6 +8468,22 @@ This option will take an affect after restart.</source>
     </message>
     <message>
         <source>Error in internal path &apos;%1&apos;. There is no intersection of last point with cutting countour</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Cannot calculate a notch for point &apos;%1&apos; in piece &apos;%2&apos;.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Cannot calculate a notch for point &apos;%1&apos; in piece &apos;%2&apos;. Seam allowance is empty.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Cannot calculate a notch for point &apos;%1&apos; in piece &apos;%2&apos;. Cannot find position for a notch.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Cannot calculate a notch for point &apos;%1&apos; in piece &apos;%2&apos;. Unable to fix a notch position.</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -9357,6 +9389,14 @@ Do you want to save your changes?</source>
         <source>Error in row %1. Measurement name is empty.</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Cannot read settings from a malformed INI file.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Cannot save settings. Access denied.</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>TabGrainline</name>
@@ -10018,35 +10058,35 @@ Do you want to save your changes?</source>
     <name>Tool</name>
     <message>
         <source>First point</source>
-        <translation type="unfinished">První bod</translation>
+        <translation>První bod</translation>
     </message>
     <message>
         <source>Second point</source>
-        <translation type="unfinished">Druhý bod</translation>
+        <translation>Druhý bod</translation>
     </message>
     <message>
         <source>Highest point</source>
-        <translation type="unfinished">Nejvyšší bod</translation>
+        <translation>Nejvyšší bod</translation>
     </message>
     <message>
         <source>Lowest point</source>
-        <translation type="unfinished">Nejnižší bod</translation>
+        <translation>Nejnižší bod</translation>
     </message>
     <message>
         <source>Leftmost point</source>
-        <translation type="unfinished">Bod nejvíce vlevo</translation>
+        <translation>Bod nejvíce vlevo</translation>
     </message>
     <message>
         <source>Rightmost point</source>
-        <translation type="unfinished">Bod nejvíce vpravo</translation>
+        <translation>Bod nejvíce vpravo</translation>
     </message>
     <message>
         <source>Vertical axis</source>
-        <translation type="unfinished">Svislá osa</translation>
+        <translation>Svislá osa</translation>
     </message>
     <message>
         <source>Horizontal axis</source>
-        <translation type="unfinished">Vodorovná osa</translation>
+        <translation>Vodorovná osa</translation>
     </message>
 </context>
 <context>
@@ -10336,6 +10376,10 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Exception thrown: %1. Program will be terminated.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Invalid notch.</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -10686,7 +10730,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>User material</source>
-        <translation type="unfinished">Uživatelský materiál</translation>
+        <translation>Uživatelský materiál</translation>
     </message>
     <message>
         <source>Make all parsing warnings into errors. Have effect only in console mode. Use to force Valentina to immediately terminate if a pattern contains a parsing warning.</source>
@@ -10939,7 +10983,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Angle</source>
-        <translation type="unfinished">Úhel</translation>
+        <translation>Úhel</translation>
     </message>
     <message>
         <source>by length</source>

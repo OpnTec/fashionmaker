@@ -4475,6 +4475,18 @@ Apply settings anyway?</source>
         <source>The list of pieces is empty. Please, first create at least one piece for current pattern piece.</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>This option has effect only if the second passmark on seam line enabled in global preferences. The option helps disable the second passmark for this passmark only.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Show the second passmark on seam line</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Excluded</source>
+        <translation type="unfinished">Εξαιρούμενο</translation>
+    </message>
 </context>
 <context>
     <name>DialogPin</name>
@@ -7844,6 +7856,14 @@ Do you want to save your changes?</source>
         <source>Changes applied.</source>
         <translation>Οι αλλαγές εφαρμόστηκαν.</translation>
     </message>
+    <message>
+        <source>Cannot read settings from a malformed INI file.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Cannot save settings. Access denied.</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>MainWindowsNoGUI</name>
@@ -7977,15 +7997,15 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Measurement file has unknown format.</source>
-        <translation type="unfinished">Το αρχείο μετρήσεων είναι άγνωστης μορφής.</translation>
+        <translation>Το αρχείο μετρήσεων είναι άγνωστης μορφής.</translation>
     </message>
     <message>
         <source>Measurement file contains invalid known measurement(s).</source>
-        <translation type="unfinished">Το αρχείο μετρήσεων περιλαμβάνει μη έγκυρες γνωστές μετρήσεις.</translation>
+        <translation>Το αρχείο μετρήσεων περιλαμβάνει μη έγκυρες γνωστές μετρήσεις.</translation>
     </message>
     <message>
         <source>Wrong units.</source>
-        <translation type="unfinished">Λανθασμένες μονάδες.</translation>
+        <translation>Λανθασμένες μονάδες.</translation>
     </message>
     <message>
         <source>Application doesn&apos;t support multisize table with inches.</source>
@@ -7993,11 +8013,11 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>File error.</source>
-        <translation type="unfinished">Σφάλμα στο αρχείο.</translation>
+        <translation>Σφάλμα στο αρχείο.</translation>
     </message>
     <message>
         <source>Measurement file doesn&apos;t include all required measurements.</source>
-        <translation type="unfinished">Το αρχείο μετρήσεων δεν περιλαμβάνει όλες τις απιτούμενες μετρήσεις.</translation>
+        <translation>Το αρχείο μετρήσεων δεν περιλαμβάνει όλες τις απιτούμενες μετρήσεις.</translation>
     </message>
     <message>
         <source>Please, additionally provide: %1</source>
@@ -8636,6 +8656,22 @@ This option will take an affect after restart.</source>
     </message>
     <message>
         <source>Error in internal path &apos;%1&apos;. There is no intersection of last point with cutting countour</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Cannot calculate a notch for point &apos;%1&apos; in piece &apos;%2&apos;.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Cannot calculate a notch for point &apos;%1&apos; in piece &apos;%2&apos;. Seam allowance is empty.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Cannot calculate a notch for point &apos;%1&apos; in piece &apos;%2&apos;. Cannot find position for a notch.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Cannot calculate a notch for point &apos;%1&apos; in piece &apos;%2&apos;. Unable to fix a notch position.</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -9593,6 +9629,14 @@ Do you want to save your changes?</source>
         <source>Error in row %1. Measurement name is empty.</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Cannot read settings from a malformed INI file.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Cannot save settings. Access denied.</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>TabGrainline</name>
@@ -10250,35 +10294,35 @@ Do you want to save your changes?</source>
     <name>Tool</name>
     <message>
         <source>First point</source>
-        <translation type="unfinished">Πρώτο σημείο</translation>
+        <translation>Πρώτο σημείο</translation>
     </message>
     <message>
         <source>Second point</source>
-        <translation type="unfinished">Δεύτερο σημείο</translation>
+        <translation>Δεύτερο σημείο</translation>
     </message>
     <message>
         <source>Highest point</source>
-        <translation type="unfinished">Ψηλότερο σημείο</translation>
+        <translation>Ψηλότερο σημείο</translation>
     </message>
     <message>
         <source>Lowest point</source>
-        <translation type="unfinished">Χαμηλότερο σημείο</translation>
+        <translation>Χαμηλότερο σημείο</translation>
     </message>
     <message>
         <source>Leftmost point</source>
-        <translation type="unfinished">Σημείο στην αριστερή ακρη</translation>
+        <translation>Σημείο στην αριστερή ακρη</translation>
     </message>
     <message>
         <source>Rightmost point</source>
-        <translation type="unfinished">Σημείο στη δεξιά άκρη</translation>
+        <translation>Σημείο στη δεξιά άκρη</translation>
     </message>
     <message>
         <source>Vertical axis</source>
-        <translation type="unfinished">Κάθετος άξονας</translation>
+        <translation>Κάθετος άξονας</translation>
     </message>
     <message>
         <source>Horizontal axis</source>
-        <translation type="unfinished">Οριζόντιος άξονας</translation>
+        <translation>Οριζόντιος άξονας</translation>
     </message>
 </context>
 <context>
@@ -10568,6 +10612,10 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Exception thrown: %1. Program will be terminated.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Invalid notch.</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -11145,11 +11193,11 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Angle</source>
-        <translation type="unfinished">Γωνία</translation>
+        <translation>Γωνία</translation>
     </message>
     <message>
         <source>by length</source>
-        <translation type="unfinished">κατά μήκος</translation>
+        <translation>κατά μήκος</translation>
     </message>
     <message>
         <source>by points intersetions</source>
