@@ -7,6 +7,33 @@ VS_VERSION_INFO VERSIONINFO
 FILEVERSION     VER_FILEVERSION
 PRODUCTVERSION  VER_PRODUCTVERSION
 
+// normally found in <winver.h> included by <windows.h>
+// FILEFLAGS
+#define VS_FF_NORMAL            0x00000000L  // ok I made this one up
+#ifndef VS_FF_DEBUG
+#define VS_FF_DEBUG             0x00000001L
+#endif
+#ifndef VS_FF_PRERELEASE
+#define VS_FF_PRERELEASE        0x00000002L
+#endif
+// FILEOS
+#ifndef VOS_NT
+#define VOS_NT                  0x00040000L
+#endif
+#ifndef VOS__WINDOWS32
+#define VOS__WINDOWS32          0x00000004L
+#endif
+#ifndef VOS_NT_WINDOWS32
+#define VOS_NT_WINDOWS32        0x00040004L
+#endif
+// FILETYPE
+#ifndef VFT_APP
+#define VFT_APP                 0x00000001L
+#endif
+#ifndef VFT_DLL
+#define VFT_DLL                 0x00000002L
+#endif
+
 #ifdef V_PRERELEASE
 
 #ifdef V_NO_DEBUG
@@ -25,7 +52,7 @@ PRODUCTVERSION  VER_PRODUCTVERSION
 
 #endif
 
-FILEOS         	VOS__WINDOWS32
+FILEOS         	VOS_NT_WINDOWS32
 FILETYPE       	VFT_APP
 FILESUBTYPE    	VFT2_UNKNOWN
 BEGIN
