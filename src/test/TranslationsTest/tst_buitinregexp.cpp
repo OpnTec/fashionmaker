@@ -240,7 +240,15 @@ void TST_BuitInRegExp::TestTemplatePlaceholders()
         const QRegularExpression re(QLatin1String("^[^\\s]+$"));
         if (re.match(translated).hasMatch())
         {
-            translations.insert(translated);
+            if (not translations.contains(translated))
+            {
+                translations.insert(translated);
+            }
+            else
+            {
+                issue << QString("Duplicate translation '%1' for placeholder '%2' in locale '%3'.\n")
+                         .arg(translated, placeholder, m_locale);
+            }
         }
         else
         {
