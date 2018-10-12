@@ -87,6 +87,9 @@ public:
 
     VContainer *GetData();
 
+    void SetSize(qreal size);
+    void SetHeight(qreal height);
+
     void SetUnit(const Unit *unit);
 
     qreal   GetBase() const;

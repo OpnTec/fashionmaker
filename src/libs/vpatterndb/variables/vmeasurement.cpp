@@ -219,7 +219,7 @@ bool VMeasurement::IsGradationHeightValid(const QString &height)
 //---------------------------------------------------------------------------------------------------------------------
 qreal VMeasurement::CalcValue() const
 {
-    if (d->currentUnit == nullptr || d->currentSize == nullptr || d->currentHeight == nullptr)
+    if (d->currentUnit == nullptr || qFuzzyIsNull(d->currentSize) || qFuzzyIsNull(d->currentHeight))
     {
         return VInternalVariable::GetValue();
     }
@@ -234,8 +234,8 @@ qreal VMeasurement::CalcValue() const
     const qreal heightIncrement = UnitConvertor(6.0, Unit::Cm, *d->currentUnit);
 
     // Formula for calculation gradation
-    const qreal k_size    = ( *d->currentSize - d->baseSize ) / sizeIncrement;
-    const qreal k_height  = ( *d->currentHeight - d->baseHeight ) / heightIncrement;
+    const qreal k_size    = ( d->currentSize - d->baseSize ) / sizeIncrement;
+    const qreal k_height  = ( d->currentHeight - d->baseHeight ) / heightIncrement;
     return d->base + k_size * d->ksize + k_height * d->kheight;
 }
 
@@ -308,6 +308,18 @@ qreal *VMeasurement::GetValue()
 VContainer *VMeasurement::GetData()
 {
     return d->data.data();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VMeasurement::SetSize(qreal size)
+{
+    d->currentSize = size;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VMeasurement::SetHeight(qreal height)
+{
+    d->currentHeight = height;
 }
 
 //---------------------------------------------------------------------------------------------------------------------

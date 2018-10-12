@@ -2429,7 +2429,7 @@ void TMainWindow::RefreshData(bool freshCall)
 {
     data->ClearUniqueNames();
     data->ClearVariables(VarType::Measurement);
-    m->ReadMeasurements();
+    m->ReadMeasurements(currentHeight, currentSize);
 
     RefreshTable(freshCall);
 }

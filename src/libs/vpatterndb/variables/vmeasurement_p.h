@@ -50,8 +50,8 @@ public:
           gui_text(gui_text),
           _tagName(tagName),
           formulaOk(true),
-          currentSize(nullptr),
-          currentHeight(nullptr),
+          currentSize(0),
+          currentHeight(0),
           currentUnit(nullptr),
           base(base),
           ksize(ksize),
@@ -68,8 +68,8 @@ public:
           gui_text(gui_text),
           _tagName(tagName),
           formulaOk(ok),
-          currentSize(nullptr),
-          currentHeight(nullptr),
+          currentSize(0),
+          currentHeight(0),
           currentUnit(nullptr),
           base(base),
           ksize(0),
@@ -105,8 +105,8 @@ public:
     QString _tagName;
     bool formulaOk;
 
-    qreal *currentSize;
-    qreal *currentHeight;
+    qreal currentSize;
+    qreal currentHeight;
     const Unit *currentUnit;
 
     /** @brief base value in base size and height */

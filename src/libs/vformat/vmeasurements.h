@@ -62,7 +62,7 @@ public:
     void MoveDown(const QString &name);
     void MoveBottom(const QString &name);
 
-    void ReadMeasurements() const;
+    void ReadMeasurements(qreal height, qreal size) const;
     void ClearForExport();
 
     MeasurementsType Type() const;

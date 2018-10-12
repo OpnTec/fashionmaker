@@ -250,7 +250,7 @@ void VMeasurements::MoveBottom(const QString &name)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VMeasurements::ReadMeasurements() const
+void VMeasurements::ReadMeasurements(qreal height, qreal size) const
 {
     // For conversion values we must first calculate all data in measurement file's unit.
     // That's why we need two containers: one for converted values, second for real data.
@@ -278,6 +278,8 @@ void VMeasurements::ReadMeasurements() const
 
             tempMeash = QSharedPointer<VMeasurement>(new VMeasurement(static_cast<quint32>(i), name, BaseSize(),
                                                                       BaseHeight(), base, ksize, kheight));
+            tempMeash->SetSize(size);
+            tempMeash->SetHeight(height);
             tempMeash->SetUnit(data->GetPatternUnit());
 
             base = UnitConvertor(base, MUnit(), *data->GetPatternUnit());
@@ -289,6 +291,8 @@ void VMeasurements::ReadMeasurements() const
 
             meash = QSharedPointer<VMeasurement>(new VMeasurement(static_cast<quint32>(i), name, baseSize, baseHeight,
                                                                   base, ksize, kheight, fullName, description));
+            meash->SetSize(size);
+            meash->SetHeight(height);
             meash->SetUnit(data->GetPatternUnit());
         }
         else

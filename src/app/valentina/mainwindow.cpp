@@ -420,6 +420,9 @@ bool MainWindow::LoadMeasurements(const QString &path)
         return false;
     }
 
+    const qreal size = UnitConvertor(m->BaseSize(), m->MUnit(), *m->GetData()->GetPatternUnit());
+    const qreal height = UnitConvertor(m->BaseHeight(), m->MUnit(), *m->GetData()->GetPatternUnit());
+
     try
     {
         qApp->setPatternType(m->Type());
@@ -429,7 +432,7 @@ bool MainWindow::LoadMeasurements(const QString &path)
         }
         ToolBarOption();
         pattern->ClearVariables(VarType::Measurement);
-        m->ReadMeasurements();
+        m->ReadMeasurements(height, size);
     }
     catch (VExceptionEmptyParameter &e)
     {
@@ -444,8 +447,8 @@ bool MainWindow::LoadMeasurements(const QString &path)
 
     if (m->Type() == MeasurementsType::Multisize)
     {
-        pattern->SetSize(UnitConvertor(m->BaseSize(), m->MUnit(), *m->GetData()->GetPatternUnit()));
-        pattern->SetHeight(UnitConvertor(m->BaseHeight(), m->MUnit(), *m->GetData()->GetPatternUnit()));
+        pattern->SetSize(size);
+        pattern->SetHeight(height);
 
         doc->SetPatternWasChanged(true);
         emit doc->UpdatePatternLabel();
@@ -481,7 +484,7 @@ bool MainWindow::UpdateMeasurements(const QString &path, int size, int height)
     try
     {
         pattern->ClearVariables(VarType::Measurement);
-        m->ReadMeasurements();
+        m->ReadMeasurements(height, size);
         if (m->Type() == MeasurementsType::Individual)
         {
             qApp->SetCustomerName(m->Customer());

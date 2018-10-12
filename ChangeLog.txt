@@ -1,3 +1,6 @@
+# Version 0.6.1 (unreleased)
+- [#885] Regression. Broken support for multi size measurements.
+
 # Version 0.6.0 October 1, 2018
 - [#682] New feature. Export increments to Excel .csv.
 - [#681] Enhance feature: Dashed line options for curves, arcs, etc.
