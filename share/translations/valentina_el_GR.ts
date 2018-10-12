@@ -4485,7 +4485,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Excluded</source>
-        <translation type="unfinished">Εξαιρούμενο</translation>
+        <translation>Εξαιρούμενο</translation>
     </message>
 </context>
 <context>

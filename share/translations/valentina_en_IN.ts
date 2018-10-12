@@ -4560,15 +4560,15 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>This option has effect only if the second passmark on seam line enabled in global preferences. The option helps disable the second passmark for this passmark only.</source>
-        <translation type="unfinished">This option has effect only if the second passmark on seam line enabled in global preferences. The option helps disable the second passmark for this passmark only.</translation>
+        <translation>This option has effect only if the second passmark on seam line enabled in global preferences. The option helps disable the second passmark for this passmark only.</translation>
     </message>
     <message>
         <source>Show the second passmark on seam line</source>
-        <translation type="unfinished">Show the second passmark on seam line</translation>
+        <translation>Show the second passmark on seam line</translation>
     </message>
     <message>
         <source>Excluded</source>
-        <translation type="unfinished">Excluded</translation>
+        <translation>Excluded</translation>
     </message>
 </context>
 <context>

@@ -4562,15 +4562,15 @@ Aplicar configurações de qualquer forma?</translation>
     </message>
     <message>
         <source>This option has effect only if the second passmark on seam line enabled in global preferences. The option helps disable the second passmark for this passmark only.</source>
-        <translation type="unfinished">Esta opção terá efeito somente se o segundo pique na linha de costura for ativado nas preferências globais. A opção ajuda a desativar o segundo pique somente para este pique.</translation>
+        <translation>Esta opção terá efeito somente se o segundo pique na linha de costura for ativado nas preferências globais. A opção ajuda a desativar o segundo pique somente para este pique.</translation>
     </message>
     <message>
         <source>Show the second passmark on seam line</source>
-        <translation type="unfinished">Mostrar segundo pique na linha de costura</translation>
+        <translation>Mostrar segundo pique na linha de costura</translation>
     </message>
     <message>
         <source>Excluded</source>
-        <translation type="unfinished">Excluído</translation>
+        <translation>Excluído</translation>
     </message>
 </context>
 <context>

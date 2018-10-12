@@ -14043,7 +14043,7 @@ Voulez-vous enregistrer les changements?</translation>
     <message>
         <source>height</source>
         <comment>placeholder</comment>
-        <translation>stature</translation>
+        <translation>hauteur</translation>
     </message>
     <message>
         <source>C1LengthSpl_</source>

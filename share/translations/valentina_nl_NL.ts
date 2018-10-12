@@ -4562,15 +4562,15 @@ Toch de instellingen aanpassen?</translation>
     </message>
     <message>
         <source>This option has effect only if the second passmark on seam line enabled in global preferences. The option helps disable the second passmark for this passmark only.</source>
-        <translation type="unfinished">Deze optie heeft alleen effect als de optie om een tweede knipje te laten zien op de zoomlijn aangevinkt is in de algemene opties. Deze optie staat het vervolgens toe om het tweede knipje voor dit specifieke knipje, uit te zetten.</translation>
+        <translation>Deze optie heeft alleen effect als de optie om een tweede knipje te laten zien op de zoomlijn aangevinkt is in de algemene opties. Deze optie staat het vervolgens toe om het tweede knipje voor dit specifieke knipje, uit te zetten.</translation>
     </message>
     <message>
         <source>Show the second passmark on seam line</source>
-        <translation type="unfinished">Toon de tweede pasmarkering op de naadlijn</translation>
+        <translation>Toon de tweede pasmarkering op de naadlijn</translation>
     </message>
     <message>
         <source>Excluded</source>
-        <translation type="unfinished">Uitgezonderd</translation>
+        <translation>Uitgezonderd</translation>
     </message>
 </context>
 <context>

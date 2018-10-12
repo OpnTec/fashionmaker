@@ -4560,15 +4560,15 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>This option has effect only if the second passmark on seam line enabled in global preferences. The option helps disable the second passmark for this passmark only.</source>
-        <translation type="unfinished">Ця опція має ефект тільки коли друга надсічка на лінії шву включена в глобальних налаштуваннях. Ця опція допомагає віключати другу надсічку для цієї надсічки.</translation>
+        <translation>Ця опція має ефект тільки коли друга надсічка на лінії шву включена в глобальних налаштуваннях. Ця опція допомагає віключати другу надсічку для цієї надсічки.</translation>
     </message>
     <message>
         <source>Show the second passmark on seam line</source>
-        <translation type="unfinished">Показати другу надсічку на лінії шва</translation>
+        <translation>Показати другу надсічку на лінії шва</translation>
     </message>
     <message>
         <source>Excluded</source>
-        <translation type="unfinished">Виключений</translation>
+        <translation>Виключений</translation>
     </message>
 </context>
 <context>

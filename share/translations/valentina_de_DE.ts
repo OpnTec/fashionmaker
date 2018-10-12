@@ -19,7 +19,7 @@
     <name>AddItemToGroup</name>
     <message>
         <source>Add item to group</source>
-        <translation type="unfinished"></translation>
+        <translation>Element zur Gruppe hinzufügen</translation>
     </message>
 </context>
 <context>
@@ -1662,7 +1662,7 @@
     </message>
     <message>
         <source>Export label as template</source>
-        <translation type="unfinished"></translation>
+        <translation>Label als Vorlage exportieren</translation>
     </message>
     <message>
         <source>Edit</source>
@@ -1684,15 +1684,15 @@
     </message>
     <message>
         <source>Centers horizontally in the available space</source>
-        <translation type="unfinished"></translation>
+        <translation>Zentriert horizontal im verfügbaren Bereich</translation>
     </message>
     <message>
         <source>Aligns with the right edge</source>
-        <translation type="unfinished"></translation>
+        <translation>An der rechten Kante ausrichten</translation>
     </message>
     <message>
         <source>Additional font size. Use to make a line bigger.</source>
-        <translation type="unfinished"></translation>
+        <translation>Zusätzliche Schriftgröße. Verwenden Sie diese Option, um eine Linie zu vergrößern.</translation>
     </message>
     <message>
         <source>Text:</source>
@@ -1704,7 +1704,7 @@
     </message>
     <message>
         <source>Insert placeholders</source>
-        <translation type="unfinished"></translation>
+        <translation>Platzhalter einfügen</translation>
     </message>
     <message>
         <source>Preview</source>
@@ -1720,15 +1720,15 @@
     </message>
     <message>
         <source>Creating new template will overwrite the current, do you want to continue?</source>
-        <translation type="unfinished"></translation>
+        <translation>das Erstellen einer neuen Vorlage überschreibt die aktuelle, möchten Sie fortfahren?</translation>
     </message>
     <message>
         <source>Label template</source>
-        <translation type="unfinished"></translation>
+        <translation>Labelvorlage</translation>
     </message>
     <message>
         <source>Export label template</source>
-        <translation type="unfinished"></translation>
+        <translation>Labelvorlage exportieren</translation>
     </message>
     <message>
         <source>template</source>
@@ -1740,11 +1740,11 @@
     </message>
     <message>
         <source>Import template</source>
-        <translation type="unfinished"></translation>
+        <translation>Vorlage  importieren</translation>
     </message>
     <message>
         <source>Import template will overwrite the current, do you want to continue?</source>
-        <translation type="unfinished"></translation>
+        <translation>Die importierte Vorlage überschreibt die aktuelle, möchten Sie fortfahren?</translation>
     </message>
     <message>
         <source>File error.</source>
@@ -1796,19 +1796,19 @@
     </message>
     <message>
         <source>Measurments extension</source>
-        <translation type="unfinished"></translation>
+        <translation>Messwerterweiterung</translation>
     </message>
     <message>
         <source>Piece letter</source>
-        <translation type="unfinished"></translation>
+        <translation>Stückbuchstabe</translation>
     </message>
     <message>
         <source>Piece annotation</source>
-        <translation type="unfinished"></translation>
+        <translation>Schnitteilbeschriftung</translation>
     </message>
     <message>
         <source>Piece orientation</source>
-        <translation type="unfinished"></translation>
+        <translation>Schnitteilausrichtung</translation>
     </message>
     <message>
         <source>Piece rotation</source>
@@ -1816,11 +1816,11 @@
     </message>
     <message>
         <source>Piece tilt</source>
-        <translation type="unfinished"></translation>
+        <translation>Schnitteilneigung</translation>
     </message>
     <message>
         <source>Piece fold position</source>
-        <translation type="unfinished"></translation>
+        <translation>Schnitteilfalzposition</translation>
     </message>
     <message>
         <source>Piece name</source>

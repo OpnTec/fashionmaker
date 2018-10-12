@@ -4524,15 +4524,15 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>This option has effect only if the second passmark on seam line enabled in global preferences. The option helps disable the second passmark for this passmark only.</source>
-        <translation type="unfinished">Questa opzione è valida solo se la seconda tacca sulla linea di cucitura è disabilitata dalle preferenze generali. L&apos;opzione aiuta a disabilitare la seconda tacca solo per questa tacca.</translation>
+        <translation>Questa opzione è valida solo se la seconda tacca sulla linea di cucitura è disabilitata dalle preferenze generali. L&apos;opzione aiuta a disabilitare la seconda tacca solo per questa tacca.</translation>
     </message>
     <message>
         <source>Show the second passmark on seam line</source>
-        <translation type="unfinished">Visualizza la seconda tacca nella linea di cucitura</translation>
+        <translation>Visualizza la seconda tacca nella linea di cucitura</translation>
     </message>
     <message>
         <source>Excluded</source>
-        <translation type="unfinished">Escluse</translation>
+        <translation>Escluse</translation>
     </message>
 </context>
 <context>

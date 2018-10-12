@@ -4561,15 +4561,15 @@ Aplicar características de todos modos?</translation>
     </message>
     <message>
         <source>This option has effect only if the second passmark on seam line enabled in global preferences. The option helps disable the second passmark for this passmark only.</source>
-        <translation type="unfinished">Esta opción tiene efecto solo si el segundo pique en la línea de costura esta habilitado en las preferencias globales. La opción ayuda a deshabilitar el segundo pique para este pique solamente.</translation>
+        <translation>Esta opción tiene efecto solo si el segundo pique en la línea de costura esta habilitado en las preferencias globales. La opción ayuda a deshabilitar el segundo pique para este pique solamente.</translation>
     </message>
     <message>
         <source>Show the second passmark on seam line</source>
-        <translation type="unfinished">Muestra el segundo pique en la línea de costura</translation>
+        <translation>Muestra el segundo pique en la línea de costura</translation>
     </message>
     <message>
         <source>Excluded</source>
-        <translation type="unfinished">Excluido</translation>
+        <translation>Excluido</translation>
     </message>
 </context>
 <context>
