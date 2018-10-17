@@ -619,7 +619,7 @@ void DumpVector(const QVector<QPointF> &points)
 
         for(auto point : points)
         {
-            out << QString("points += QPointF(%1, %2);").arg(point.x()).arg(point.y()) << endl;
+            out << QString("points += QPointF(%1, %2);").arg(point.x(), 0, 'f', 15).arg(point.y(), 0, 'f', 15) << endl;
         }
 
         out << endl << "return points;";
@@ -653,7 +653,8 @@ void DumpVector(const QVector<VSAPoint> &points)
                     out << endl;
                 }
                 type = Default;
-                out << QString("points += VSAPoint(%1, %2);").arg(point.x()).arg(point.y()) << endl;
+                out << QString("points += VSAPoint(%1, %2);").arg(point.x(), 0, 'f', 15).arg(point.y(), 0, 'f', 15)
+                    << endl;
             }
             else
             {
@@ -665,7 +666,7 @@ void DumpVector(const QVector<VSAPoint> &points)
                     out << "VSAPoint ";
                     firstPoint = false;
                 }
-                out << QString("p = VSAPoint(%1, %2);").arg(point.x()).arg(point.y()) << endl;
+                out << QString("p = VSAPoint(%1, %2);").arg(point.x(), 0, 'f', 15).arg(point.y(), 0, 'f', 15) << endl;
 
                 if (not VFuzzyComparePossibleNulls(point.GetSABefore(), -1))
                 {
