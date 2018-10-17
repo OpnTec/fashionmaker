@@ -980,13 +980,13 @@
       <xs:enumeration value="1"/>
       <!--by points intersections-->
       <xs:enumeration value="2"/>
-      <!--by second edge symmetry-->
-      <xs:enumeration value="3"/>
       <!--by first edge symmetry-->
+      <xs:enumeration value="3"/>
+      <!--by second edge symmetry-->
       <xs:enumeration value="4"/>
       <!--by first edge right angle-->
       <xs:enumeration value="5"/>
-      <!--by first edge right angle-->
+      <!--by second edge right angle-->
     </xs:restriction>
   </xs:simpleType>
   <xs:simpleType name="piecePathType">
