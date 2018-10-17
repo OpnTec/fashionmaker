@@ -73,11 +73,12 @@ enum class Draw : char { Calculation, Modeling, Layout };
 enum class PieceNodeAngle : unsigned char
 {
     ByLength = 0,
-    ByPointsIntersection,
-    ByFirstEdgeSymmetry,
-    BySecondEdgeSymmetry,
-    ByFirstEdgeRightAngle,
-    BySecondEdgeRightAngle,
+    ByPointsIntersection = 1,
+    ByFirstEdgeSymmetry = 2,
+    BySecondEdgeSymmetry = 3,
+    ByFirstEdgeRightAngle = 4,
+    BySecondEdgeRightAngle = 5,
+    ByLengthCurve = 6, // used only in runtime
     LAST_ONE_DO_NOT_USE
 };
 

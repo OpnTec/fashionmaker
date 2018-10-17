@@ -1120,6 +1120,7 @@ QVector<VSAPoint> VPiecePath::CurveSeamAllowanceSegment(const VContainer *data, 
         for(int i = 0; i < points.size(); ++i)
         {
             VSAPoint p(points.at(i));
+            p.SetAngleType(PieceNodeAngle::ByLengthCurve);
             if (i == 0)
             { // first point
                 p.SetSAAfter(begin.GetSAAfter());
@@ -1175,7 +1176,7 @@ QVector<VSAPoint> VPiecePath::CurveSeamAllowanceSegment(const VContainer *data, 
 
                 p.SetSAAfter(localWidth);
                 p.SetSABefore(localWidth);
-                // curve points have angle type by default
+                p.SetAngleType(PieceNodeAngle::ByLengthCurve);
             }
 
             pointsEkv.append(p);

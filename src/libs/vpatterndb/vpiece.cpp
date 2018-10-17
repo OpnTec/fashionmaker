@@ -423,7 +423,7 @@ QVector<QPointF> VPiece::SeamAllowancePoints(const VContainer *data) const
 
                         for (int j = 0; j < r.size(); ++j)
                         {
-                            r[j].SetAngleType(PieceNodeAngle::ByLength);
+                            r[j].SetAngleType(PieceNodeAngle::ByLengthCurve);
                             r[j].SetSABefore(0);
                             r[j].SetSAAfter(0);
                         }

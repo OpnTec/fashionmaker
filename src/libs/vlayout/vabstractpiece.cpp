@@ -268,16 +268,23 @@ QVector<QPointF> AngleByLength(QVector<QPointF> points, QPointF p2, const QLineF
         }
         else
         {
-            // Need to create artificial loop
-            QLineF loop1(sp2, sp1);
-            loop1.setLength(loop1.length()*0.1);
+            if (p.GetAngleType() != PieceNodeAngle::ByLengthCurve)
+            {
+                // Need to create artificial loop
+                QLineF loop1(sp2, sp1);
+                loop1.setLength(loop1.length()*0.1);
 
-            points.append(loop1.p2()); // Nedd for the main path rule
+                points.append(loop1.p2()); // Nedd for the main path rule
 
-            loop1.setAngle(loop1.angle() + 180);
-            loop1.setLength(localWidth * 3.);
-            points.append(loop1.p2());
-            points.append(bigLine2.p1());
+                loop1.setAngle(loop1.angle() + 180);
+                loop1.setLength(localWidth);
+                points.append(loop1.p2());
+                points.append(bigLine2.p1());
+            }
+            else
+            {
+                points.append(sp2);
+            }
         }
     }
     return points;
@@ -683,7 +690,7 @@ void DumpVector(const QVector<VSAPoint> &points)
 QT_WARNING_PUSH
 QT_WARNING_DISABLE_GCC("-Wswitch-default")
                     // This check helps to find missed angle types in the switch
-                    Q_STATIC_ASSERT_X(static_cast<int>(PieceNodeAngle::LAST_ONE_DO_NOT_USE) == 6,
+                    Q_STATIC_ASSERT_X(static_cast<int>(PieceNodeAngle::LAST_ONE_DO_NOT_USE) == 7,
                                       "Not all types were handled.");
 
                     QString typeStr;
@@ -707,6 +714,9 @@ QT_WARNING_DISABLE_GCC("-Wswitch-default")
                             break;
                         case PieceNodeAngle::BySecondEdgeRightAngle:
                             typeStr = "BySecondEdgeRightAngle";
+                            break;
+                        case PieceNodeAngle::ByLengthCurve:
+                            typeStr = "ByLengthCurve";
                             break;
                     }
 QT_WARNING_POP
@@ -889,6 +899,7 @@ QVector<QPointF> VAbstractPiece::Equidistant(QVector<VSAPoint> points, qreal wid
     }
 
     const bool removeFirstAndLast = false;
+    ekvPoints = CheckLoops(CorrectEquidistantPoints(ekvPoints, removeFirstAndLast));//Result path can contain loops
     ekvPoints = CheckLoops(CorrectEquidistantPoints(ekvPoints, removeFirstAndLast));//Result path can contain loops
 //    DumpVector(ekvPoints); // Uncomment for dumping test data
     return ekvPoints;
@@ -1077,8 +1088,8 @@ QVector<QPointF> VAbstractPiece::CheckLoops(const QVector<QPointF> &points)
  * @param width global seam allowance width.
  * @return seam aloowance points.
  */
-QVector<QPointF> VAbstractPiece::EkvPoint(QVector<QPointF> points, const VSAPoint &p1Line1, const VSAPoint &p2Line1,
-                                          const VSAPoint &p1Line2, const VSAPoint &p2Line2, qreal width)
+QVector<QPointF> VAbstractPiece::EkvPoint(QVector<QPointF> points, const VSAPoint &p1Line1, VSAPoint p2Line1,
+                                          const VSAPoint &p1Line2, VSAPoint p2Line2, qreal width)
 {
     if (width < 0)
     { // width can't be < 0
@@ -1089,6 +1100,19 @@ QVector<QPointF> VAbstractPiece::EkvPoint(QVector<QPointF> points, const VSAPoin
     {
         qDebug()<<"Last points of two lines must be equal.";
         return QVector<QPointF>(); // Wrong edges
+    }
+
+    // Correct distorsion
+    if (VGObject::IsPointOnLineSegment(p2Line1, p1Line1, p1Line2))
+    {
+        QLineF line = QLineF(p1Line1, p1Line2);
+        line.setLength(QLineF(p1Line1, p2Line1).length());
+
+        p2Line1.setX(line.p2().x());
+        p2Line1.setY(line.p2().y());
+
+        p2Line2.setX(line.p2().x());
+        p2Line2.setY(line.p2().y());
     }
 
     const QLineF bigLine1 = ParallelLine(p1Line1, p2Line1, width );
@@ -1105,7 +1129,8 @@ QVector<QPointF> VAbstractPiece::EkvPoint(QVector<QPointF> points, const VSAPoin
         { // Most common case
             /* Case when a path has point on line (both segments lie on the same line) and seam allowance creates
              * prong. */
-            if (VGObject::IsPointOnLineSegment(p2Line1, p1Line1, p1Line2))
+            if (VGObject::IsPointOnLineSegment(p2Line1, p1Line1, p1Line2)
+                    && qAbs(QLineF(p2Line1, bigLine1.p2()).angle() - QLineF(p2Line1, bigLine2.p1()).angle()) < 0.001)
             {
                 points.append(bigLine1.p2());
                 points.append(bigLine2.p1());
@@ -1128,7 +1153,7 @@ QVector<QPointF> VAbstractPiece::EkvPoint(QVector<QPointF> points, const VSAPoin
 QT_WARNING_PUSH
 QT_WARNING_DISABLE_GCC("-Wswitch-default")
                 // This check helps to find missed angle types in the switch
-                Q_STATIC_ASSERT_X(static_cast<int>(PieceNodeAngle::LAST_ONE_DO_NOT_USE) == 6,
+                Q_STATIC_ASSERT_X(static_cast<int>(PieceNodeAngle::LAST_ONE_DO_NOT_USE) == 7,
                                   "Not all types were handled.");
                 switch (p2Line1.GetAngleType())
                 {
@@ -1136,6 +1161,7 @@ QT_WARNING_DISABLE_GCC("-Wswitch-default")
                         Q_UNREACHABLE(); //-V501
                         break;
                     case PieceNodeAngle::ByLength:
+                    case PieceNodeAngle::ByLengthCurve:
                         return AngleByLength(points, p2Line1, bigLine1, crosPoint, bigLine2, p2Line1, width);
                     case PieceNodeAngle::ByPointsIntersection:
                         return AngleByIntersection(points, p1Line1, p2Line1, p1Line2, bigLine1, crosPoint, bigLine2,

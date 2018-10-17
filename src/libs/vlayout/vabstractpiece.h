@@ -186,8 +186,8 @@ public:
     static QVector<QPointF> Equidistant(QVector<VSAPoint> points, qreal width);
     static qreal            SumTrapezoids(const QVector<QPointF> &points);
     static QVector<QPointF> CheckLoops(const QVector<QPointF> &points);
-    static QVector<QPointF> EkvPoint(QVector<QPointF> points, const VSAPoint &p1Line1, const VSAPoint &p2Line1,
-                                     const VSAPoint &p1Line2, const VSAPoint &p2Line2, qreal width);
+    static QVector<QPointF> EkvPoint(QVector<QPointF> points, const VSAPoint &p1Line1, VSAPoint p2Line1,
+                                     const VSAPoint &p1Line2, VSAPoint p2Line2, qreal width);
     static QLineF           ParallelLine(const VSAPoint &p1, const VSAPoint &p2, qreal width);
 
     template <class T>

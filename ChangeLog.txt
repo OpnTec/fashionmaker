@@ -1,5 +1,6 @@
 # Version 0.6.1 (unreleased)
 - [#885] Regression. Broken support for multi size measurements.
+- Fixed issues with seam allowance.
 
 # Version 0.6.0 October 1, 2018
 - [#682] New feature. Export increments to Excel .csv.
