@@ -477,9 +477,7 @@ QPointF VGObject::CorrectDistortion(const QPointF &t, const QPointF &p1, const Q
 {
     if (not VFuzzyComparePoints(p1, p2))
     {
-        QLineF line = QLineF(p1, p2);
-        line.setLength(QLineF(p1, VGObject::ClosestPoint(QLineF(p1, p2), t)).length());
-        return line.p2();
+        return VGObject::ClosestPoint(QLineF(p1, p2), t);
     }
     else
     {
