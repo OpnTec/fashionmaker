@@ -97,6 +97,7 @@ public:
     static QPointF addVector (const QPointF &p, const QPointF &p1, const QPointF &p2, qreal k);
     static void    LineCoefficients(const QLineF &line, qreal *a, qreal *b, qreal *c);
     static bool    IsPointOnLineSegment (const QPointF &t, const QPointF &p1, const QPointF &p2);
+    static QPointF CorrectDistortion(const QPointF &t, const QPointF &p1, const QPointF &p2);
     static bool    IsPointOnLineviaPDP(const QPointF &t, const QPointF &p1, const QPointF &p2);
 
     template <typename T>

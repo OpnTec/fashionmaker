@@ -263,8 +263,15 @@ QVector<QPointF> AngleByLength(QVector<QPointF> points, QPointF p2, const QLineF
     {
         if (not IsOutsidePoint(bigLine1.p1(), bigLine1.p2(), sp2))
         {
-            bool success = false;
-            points = RollbackSeamAllowance(points, bigLine2, &success);
+            if (p.GetAngleType() != PieceNodeAngle::ByLengthCurve)
+            {
+                bool success = false;
+                points = RollbackSeamAllowance(points, bigLine2, &success);
+            }
+            else
+            {
+                points.append(sp2);
+            }
         }
         else
         {
@@ -871,6 +878,9 @@ QVector<QPointF> VAbstractPiece::Equidistant(QVector<VSAPoint> points, qreal wid
         return QVector<QPointF>();
     }
 
+    // Fix distorsion
+    points = CorrectPathDistortion(points);
+
     if (points.last().toPoint() != points.first().toPoint())
     {
         points.append(points.at(0));// Should be always closed
@@ -1102,21 +1112,15 @@ QVector<QPointF> VAbstractPiece::EkvPoint(QVector<QPointF> points, const VSAPoin
         return QVector<QPointF>(); // Wrong edges
     }
 
-    // Correct distorsion
-    if (VGObject::IsPointOnLineSegment(p2Line1, p1Line1, p1Line2))
-    {
-        QLineF line = QLineF(p1Line1, p1Line2);
-        line.setLength(QLineF(p1Line1, p2Line1).length());
-
-        p2Line1.setX(line.p2().x());
-        p2Line1.setY(line.p2().y());
-
-        p2Line2.setX(line.p2().x());
-        p2Line2.setY(line.p2().y());
-    }
-
     const QLineF bigLine1 = ParallelLine(p1Line1, p2Line1, width );
     const QLineF bigLine2 = ParallelLine(p2Line2, p1Line2, width );
+
+    if (VFuzzyComparePoints(bigLine1.p2(), bigLine2.p1()))
+    {
+        points.append(bigLine1.p2());
+        return points;
+    }
+
     QPointF crosPoint;
     const QLineF::IntersectType type = bigLine1.intersect( bigLine2, &crosPoint );
     switch (type)
@@ -1129,8 +1133,21 @@ QVector<QPointF> VAbstractPiece::EkvPoint(QVector<QPointF> points, const VSAPoin
         { // Most common case
             /* Case when a path has point on line (both segments lie on the same line) and seam allowance creates
              * prong. */
+            auto IsOnLine = [](const QPointF &base, const QPointF &sp1, const QPointF &sp2)
+            {
+                if (not VFuzzyComparePoints(base, sp1))
+                {
+                    return VGObject::IsPointOnLineviaPDP(sp2, base, sp1);
+                }
+
+                if (not VFuzzyComparePoints(base, sp2))
+                {
+                    return VGObject::IsPointOnLineviaPDP(sp1, base, sp2);
+                }
+                return true;
+            };
             if (VGObject::IsPointOnLineSegment(p2Line1, p1Line1, p1Line2)
-                    && qAbs(QLineF(p2Line1, bigLine1.p2()).angle() - QLineF(p2Line1, bigLine2.p1()).angle()) < 0.001)
+                    && IsOnLine(p2Line1, bigLine1.p2(), bigLine2.p1()))
             {
                 points.append(bigLine1.p2());
                 points.append(bigLine2.p1());

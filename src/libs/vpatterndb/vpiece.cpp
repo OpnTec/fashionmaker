@@ -1104,7 +1104,7 @@ bool VPiece::GetPassmarkPreviousSAPoints(const QVector<VPieceNode> &path, int in
     do
     {
         const VSAPoint previous = points.at(nodeIndex);
-        if (passmarkSAPoint.toPoint() != previous.toPoint())
+        if (not VFuzzyComparePoints(passmarkSAPoint, previous))
         {
             point = previous;
             found = true;
@@ -1141,7 +1141,7 @@ int VPiece::GetPassmarkNextSAPoints(const QVector<VPieceNode> &path, int index, 
     do
     {
         const VSAPoint next = points.at(nodeIndex);
-        if (passmarkSAPoint.toPoint() != next.toPoint())
+        if (not VFuzzyComparePoints(passmarkSAPoint, next))
         {
             point = next;
             found = true;
@@ -1159,32 +1159,22 @@ int VPiece::GetPassmarkNextSAPoints(const QVector<VPieceNode> &path, int index, 
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-bool VPiece::GetSeamPassmarkSAPoint(const VSAPoint &previousSAPoint, const VSAPoint &passmarkSAPoint,
+bool VPiece::GetSeamPassmarkSAPoint(const VSAPoint &previousSAPoint, VSAPoint passmarkSAPoint,
                                     const VSAPoint &nextSAPoint, const VContainer *data, QPointF &point) const
 {
     SCASSERT(data != nullptr)
 
-    QVector<QPointF> ekvPoints;
-    const qreal width = ToPixel(GetSAWidth(), *data->GetPatternUnit());
+    // Correct distorsion
+    if (VGObject::IsPointOnLineSegment(passmarkSAPoint, previousSAPoint, nextSAPoint))
+    {
+        const QPointF p = VGObject::CorrectDistortion(passmarkSAPoint, previousSAPoint, nextSAPoint);
+        passmarkSAPoint.setX(p.x());
+        passmarkSAPoint.setY(p.y());
+    }
 
-    /* Because method VAbstractPiece::EkvPoint has troubles with edges on a same line we should specially treat such
-       cases.
-       First check if two edges and seam alowance create paralell lines.
-       Second case check if two edges are on a same line geometrically and a passmark point has equal SA width.*/
-    if (IsEkvPointOnLine(passmarkSAPoint, previousSAPoint, nextSAPoint)// see issue #665
-        || (IsEkvPointOnLine(static_cast<QPointF>(passmarkSAPoint), static_cast<QPointF>(previousSAPoint),
-                             static_cast<QPointF>(nextSAPoint))
-            && qAbs(passmarkSAPoint.GetSABefore(width) - passmarkSAPoint.GetSAAfter(width)) < accuracyPointOnLine))
-    {
-        QLineF line (passmarkSAPoint, nextSAPoint);
-        line.setAngle(line.angle() + 90);
-        line.setLength(passmarkSAPoint.MaxLocalSA(width));
-        ekvPoints.append(line.p2());
-    }
-    else
-    {
-        ekvPoints = EkvPoint(ekvPoints, previousSAPoint, passmarkSAPoint, nextSAPoint, passmarkSAPoint, width);
-    }
+    QVector<QPointF> ekvPoints;
+    ekvPoints = EkvPoint(ekvPoints, previousSAPoint, passmarkSAPoint, nextSAPoint, passmarkSAPoint,
+                         ToPixel(GetSAWidth(), *data->GetPatternUnit()));
 
     if (ekvPoints.isEmpty())
     { // Just in case

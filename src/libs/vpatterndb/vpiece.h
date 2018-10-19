@@ -145,7 +145,7 @@ private:
                                      const VContainer *data, VSAPoint &point, int passmarkIndex) const;
     int GetPassmarkNextSAPoints(const QVector<VPieceNode> &path, int index, const VSAPoint &passmarkSAPoint,
                                 const VContainer *data, VSAPoint &point, int passmarkIndex) const;
-    bool GetSeamPassmarkSAPoint(const VSAPoint &previousSAPoint, const VSAPoint &passmarkSAPoint,
+    bool GetSeamPassmarkSAPoint(const VSAPoint &previousSAPoint, VSAPoint passmarkSAPoint,
                                 const VSAPoint &nextSAPoint, const VContainer *data, QPointF &point) const;
 
     bool IsPassmarkVisible(const QVector<VPieceNode> &path, int passmarkIndex) const;

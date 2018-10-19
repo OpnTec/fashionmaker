@@ -191,6 +191,9 @@ public:
     static QLineF           ParallelLine(const VSAPoint &p1, const VSAPoint &p2, qreal width);
 
     template <class T>
+    static QVector<T> CorrectPathDistortion(QVector<T> path);
+
+    template <class T>
     static QVector<T> CorrectEquidistantPoints(const QVector<T> &points, bool removeFirstAndLast = true);
 
 protected:
@@ -206,6 +209,44 @@ private:
 };
 
 Q_DECLARE_TYPEINFO(VAbstractPiece, Q_MOVABLE_TYPE);
+
+//---------------------------------------------------------------------------------------------------------------------
+template<class T>
+QVector<T> VAbstractPiece::CorrectPathDistortion(QVector<T> path)
+{
+    if (path.size() < 3)
+    {
+        return path;
+    }
+
+    int prev = -1;
+    for (qint32 i = 0; i < path.size(); ++i)
+    {
+        if (prev == -1)
+        {
+            i == 0 ? prev = path.size() - 1 : prev = i-1;
+        }
+
+        int next = i+1;
+        if (i == path.size() - 1)
+        {
+            next = 0;
+        }
+
+        const QPointF &iPoint = path.at(i);
+        const QPointF &prevPoint = path.at(prev);
+        const QPointF &nextPoint = path.at(next);
+
+        if (VGObject::IsPointOnLineSegment(iPoint, prevPoint, nextPoint))
+        {
+            const QPointF p = VGObject::CorrectDistortion(iPoint, prevPoint, nextPoint);
+            path[i].setX(p.x());
+            path[i].setY(p.y());
+        }
+    }
+
+    return path;
+}
 
 //---------------------------------------------------------------------------------------------------------------------
 /**
