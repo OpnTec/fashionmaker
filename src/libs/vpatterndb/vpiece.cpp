@@ -316,6 +316,16 @@ bool FixNotchPoint(const QVector<QPointF> &seamAllowance, const QPointF &notchBa
             }
         }
     }
+    else
+    { // Fixing distortion
+        QLineF axis = QLineF(notchBase, *notch);
+        axis.setLength(axis.length() + accuracyPointOnLine * 10);
+        const QVector<QPointF> points = VAbstractCurve::CurveIntersectLine(seamAllowance, axis);
+        if (points.size() == 1)
+        {
+            *notch = points.first();
+        }
+    }
 
     return fixed;
 }
