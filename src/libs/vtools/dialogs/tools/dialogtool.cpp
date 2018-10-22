@@ -129,6 +129,22 @@ bool DoublePoint(const VPieceNode &firstNode, const VPieceNode &secondNode, cons
 
     return false;
 }
+
+//---------------------------------------------------------------------------------------------------------------------
+bool DoubleCurve(const VPieceNode &firstNode, const VPieceNode &secondNode, const VContainer *data)
+{
+    if (firstNode.GetTypeTool() != Tool::NodePoint && not (firstNode.GetId() == NULL_ID)
+            && secondNode.GetTypeTool() != Tool::NodePoint && not (secondNode.GetId() == NULL_ID))
+    {
+        // don't ignore the same curve twice
+        if (data->GetGObject(firstNode.GetId())->getIdObject() == data->GetGObject(secondNode.GetId())->getIdObject())
+        {
+            return true;
+        }
+    }
+
+    return false;
+}
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -572,6 +588,24 @@ bool DialogTool::DoublePoints(QListWidget *listWidget, const VContainer *data)
         const VPieceNode secondNode = RowNode(listWidget, FindNotExcludedNodeDown(listWidget, firstIndex+1));
 
         if (DoublePoint(firstNode, secondNode, data))
+        {
+            return true;
+        }
+    }
+    return false;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+bool DialogTool::DoubleCurves(QListWidget *listWidget, const VContainer *data)
+{
+    SCASSERT(listWidget != nullptr);
+    for (int i=0, sz = listWidget->count()-1; i<sz; ++i)
+    {
+        const int firstIndex = FindNotExcludedNodeDown(listWidget, i);
+        const VPieceNode firstNode = RowNode(listWidget, firstIndex);
+        const VPieceNode secondNode = RowNode(listWidget, FindNotExcludedNodeDown(listWidget, firstIndex+1));
+
+        if (DoubleCurve(firstNode, secondNode, data))
         {
             return true;
         }

@@ -1428,6 +1428,12 @@ bool DialogPiecePath::PathIsValid() const
             ui->helpLabel->setText(url);
             return false;
         }
+        else if (DoubleCurves(ui->listWidget, data))
+        {
+            url += tr("The same curve repeats twice!");
+            ui->helpLabel->setText(url);
+            return false;
+        }
         else if (GetType() == PiecePathType::CustomSeamAllowance && not EachPointLabelIsUnique(ui->listWidget))
         {
             url += tr("Each point in the <b>custom seam allowance</b> path must be unique!");
