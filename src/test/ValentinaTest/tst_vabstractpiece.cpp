@@ -132,7 +132,7 @@ void TST_VAbstractPiece::EquidistantRemoveLoop() const
     QFETCH(qreal, width);
     QFETCH(QVector<QPointF>, ekvOrig);
 
-    const QVector<QPointF> ekv = VAbstractPiece::Equidistant(points, width);
+    const QVector<QPointF> ekv = VAbstractPiece::Equidistant(points, width, QString());
 
     // Begin comparison
     Comparison(ekv, ekvOrig);
@@ -4922,7 +4922,7 @@ void TST_VAbstractPiece::BrokenDetailEquidistant() const
     QFETCH(qreal, width);
     QFETCH(QVector<QPointF>, ekvOrig);
 
-    const QVector<QPointF> ekv = VAbstractPiece::Equidistant(points, width);// Take result
+    const QVector<QPointF> ekv = VAbstractPiece::Equidistant(points, width, QString());// Take result
 
     // Begin comparison
     Comparison(ekv, ekvOrig);
@@ -4951,7 +4951,7 @@ void TST_VAbstractPiece::EquidistantAngleType() const
     QFETCH(qreal, width);
     QFETCH(QVector<QPointF>, ekvOrig);
 
-    const QVector<QPointF> ekv = VAbstractPiece::Equidistant(points, width);// Take result
+    const QVector<QPointF> ekv = VAbstractPiece::Equidistant(points, width, QString());// Take result
 
     // Begin comparison
     Comparison(ekv, ekvOrig);

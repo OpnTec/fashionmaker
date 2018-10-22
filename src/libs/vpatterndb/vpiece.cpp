@@ -473,7 +473,7 @@ QVector<QPointF> VPiece::SeamAllowancePoints(const VContainer *data) const
         }
     }
 
-    return Equidistant(pointsEkv, width);
+    return Equidistant(pointsEkv, width, GetName());
 }
 
 //---------------------------------------------------------------------------------------------------------------------

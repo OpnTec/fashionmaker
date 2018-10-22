@@ -902,7 +902,7 @@ void VLayoutPiece::SetLayoutAllowancePoints()
     {
         if (IsSeamAllowance() && not IsSeamAllowanceBuiltIn())
         {
-            d->layoutAllowance = Equidistant(PrepareAllowance(GetSeamAllowancePoints()), d->layoutWidth);
+            d->layoutAllowance = Equidistant(PrepareAllowance(GetSeamAllowancePoints()), d->layoutWidth, GetName());
             if (d->layoutAllowance.isEmpty() == false)
             {
                 d->layoutAllowance.removeLast();
@@ -910,7 +910,7 @@ void VLayoutPiece::SetLayoutAllowancePoints()
         }
         else
         {
-            d->layoutAllowance = Equidistant(PrepareAllowance(GetContourPoints()), d->layoutWidth);
+            d->layoutAllowance = Equidistant(PrepareAllowance(GetContourPoints()), d->layoutWidth, GetName());
             if (d->layoutAllowance.isEmpty() == false)
             {
                 d->layoutAllowance.removeLast();

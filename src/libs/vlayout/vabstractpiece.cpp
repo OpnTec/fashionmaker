@@ -30,6 +30,7 @@
 #include "vabstractpiece_p.h"
 #include "../vmisc/vabstractapplication.h"
 #include "../vgeometry/vpointf.h"
+#include "../ifc/exception/vexception.h"
 
 #include <QLineF>
 #include <QSet>
@@ -861,7 +862,7 @@ void VAbstractPiece::SetSAWidth(qreal value)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QVector<QPointF> VAbstractPiece::Equidistant(QVector<VSAPoint> points, qreal width)
+QVector<QPointF> VAbstractPiece::Equidistant(QVector<VSAPoint> points, qreal width, const QString &name)
 {
     if (width < 0)
     {
@@ -874,7 +875,8 @@ QVector<QPointF> VAbstractPiece::Equidistant(QVector<VSAPoint> points, qreal wid
     points = CorrectEquidistantPoints(points);
     if ( points.size() < 3 )
     {
-        qDebug()<<"Not enough points for building the equidistant.";
+        const QString errorMsg = QObject::tr("Piece '%1'. Not enough points to build seam allowance.").arg(name);
+        qApp->IsPedantic() ? throw VException(errorMsg) : qWarning() << errorMsg;
         return QVector<QPointF>();
     }
 
