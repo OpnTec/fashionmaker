@@ -306,6 +306,7 @@ QVector<QPointF> CorrectPosition(const QRectF &parentBoundingRect, QVector<QPoin
 QVector<VSAPoint> PrepareAllowance(const QVector<QPointF> &points)
 {
     QVector<VSAPoint> allowancePoints;
+    allowancePoints.reserve(points.size());
     for(auto point : points)
     {
         allowancePoints.append(VSAPoint(point));
@@ -474,6 +475,7 @@ template <>
 QVector<VLayoutPlaceLabel> VLayoutPiece::Map<VLayoutPlaceLabel>(const QVector<VLayoutPlaceLabel> &points) const
 {
     QVector<VLayoutPlaceLabel> p;
+    p.reserve(points.size());
     for (auto &label : points)
     {
         VLayoutPlaceLabel mappedLabel;
@@ -726,7 +728,7 @@ qreal VLayoutPiece::GetLayoutWidth() const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VLayoutPiece::SetLayoutWidth(const qreal &value)
+void VLayoutPiece::SetLayoutWidth(qreal value)
 {
     d->layoutWidth = value;
 }

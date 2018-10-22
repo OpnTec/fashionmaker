@@ -109,7 +109,7 @@ public:
     void    SetMatrix(const QTransform &matrix);
 
     qreal GetLayoutWidth() const;
-    void  SetLayoutWidth(const qreal &value);
+    void  SetLayoutWidth(qreal value);
 
     bool IsMirror() const;
     void SetMirror(bool value);
