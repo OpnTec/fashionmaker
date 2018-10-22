@@ -2671,6 +2671,7 @@ void MainWindow::ActionLayout(bool checked)
  */
 bool MainWindow::SaveAs()
 {
+    const QString oldFilePath = qApp->GetPatternPath();
     QString filters(tr("Pattern files") + QLatin1String("(*.val)"));
     QString dir;
     if (qApp->GetPatternPath().isEmpty())
@@ -2755,6 +2756,14 @@ bool MainWindow::SaveAs()
 
         RemoveTempDir();
         return result;
+    }
+    else if (not oldFilePath.isEmpty())
+    {
+        qCDebug(vMainWindow, "Updating restore file list.");
+        QStringList restoreFiles = qApp->ValentinaSettings()->GetRestoreFileList();
+        restoreFiles.removeAll(oldFilePath);
+        qApp->ValentinaSettings()->SetRestoreFileList(restoreFiles);
+        QFile::remove(oldFilePath + *autosavePrefix);
     }
 
     patternReadOnly = false;

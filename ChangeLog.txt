@@ -2,6 +2,7 @@
 - [#885] Regression. Broken support for multi size measurements.
 - Fixed issues with seam allowance.
 - [#890] Menu Windows->Close pattern doesn't clear "Group of visibility" list.
+- [#891] Valentina claims that file was incorrectly saved when used Save as option.
 
 # Version 0.6.0 October 1, 2018
 - [#682] New feature. Export increments to Excel .csv.
