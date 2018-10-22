@@ -167,6 +167,7 @@ private slots:
     void DeleteFromMenu();
     void ToggleExcludeState(quint32 id);
     void ToggleNodePointAngleType(quint32 id, PieceNodeAngle type);
+    void ToggleNodePointPassmark(quint32 id, bool toggle);
 
 private:
     Q_DISABLE_COPY(VToolSeamAllowance)

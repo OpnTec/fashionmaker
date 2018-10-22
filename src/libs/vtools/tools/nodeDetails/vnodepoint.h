@@ -67,6 +67,7 @@ signals:
     void Delete();
     void ToggleExcludeState(quint32 id);
     void ToggleAngleType(quint32 id, PieceNodeAngle type);
+    void TogglePassmark(quint32 id, bool toggle);
 public slots:
     virtual void FullUpdateFromFile() override;
     void         NameChangePosition(const QPointF &pos);

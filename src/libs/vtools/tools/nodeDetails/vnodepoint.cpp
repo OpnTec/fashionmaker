@@ -283,6 +283,9 @@ void VNodePoint::contextMenuEvent(QGraphicsSceneContextMenuEvent *event)
         actionShowLabel->setCheckable(true);
         actionShowLabel->setChecked(VAbstractTool::data.GeometricObject<VPointF>(m_id)->IsShowLabel());
 
+        QAction *actionPassmark = menu.addAction(tr("Passmark"));
+        actionPassmark->setCheckable(true);
+
         QAction *actionExclude = menu.addAction(tr("Exclude"));
 
         QMenu *angleTypeMenu = menu.addMenu(tr("Angle"));
@@ -294,10 +297,14 @@ void VNodePoint::contextMenuEvent(QGraphicsSceneContextMenuEvent *event)
         {
             const VPieceNode &node = detail.GetPath().at(nodeIndex);
             curType = node.GetAngleType();
+
+            actionPassmark->setChecked(node.IsPassmark());
+            actionPassmark->setVisible(node.IsPassmark());
         }
         else
         {
             angleTypeMenu->setVisible(false);
+            actionPassmark->setVisible(false);
         }
 
         auto InitAngleAction = [angleTypeMenu, curType](const QString &name, PieceNodeAngle checkType)
@@ -420,6 +427,10 @@ void VNodePoint::contextMenuEvent(QGraphicsSceneContextMenuEvent *event)
             {
                 emit ToggleAngleType(m_id, PieceNodeAngle::BySecondEdgeRightAngle);
             }
+        }
+        else if (selectedAction == actionPassmark)
+        {
+            emit TogglePassmark(m_id, false);
         }
     }
 }
