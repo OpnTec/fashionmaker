@@ -59,7 +59,8 @@ VGraphicsSimpleTextItem::VGraphicsSimpleTextItem(QGraphicsItem * parent)
     : QGraphicsSimpleTextItem(parent),
       m_fontSize(0),
       selectionType(SelectionType::ByMouseRelease),
-      m_oldScale(1)
+      m_oldScale(1),
+      m_showParentTooltip(true)
 {
     Init();
 }
@@ -74,7 +75,8 @@ VGraphicsSimpleTextItem::VGraphicsSimpleTextItem( const QString & text, QGraphic
     : QGraphicsSimpleTextItem(text, parent),
       m_fontSize(0),
       selectionType(SelectionType::ByMouseRelease),
-      m_oldScale(1)
+      m_oldScale(1),
+      m_showParentTooltip(true)
 {
     Init();
 }
@@ -135,6 +137,12 @@ void VGraphicsSimpleTextItem::setEnabled(bool enabled)
 void VGraphicsSimpleTextItem::LabelSelectionType(const SelectionType &type)
 {
     selectionType = type;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VGraphicsSimpleTextItem::SetShowParentTooltip(bool show)
+{
+    m_showParentTooltip = show;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -219,7 +227,8 @@ void VGraphicsSimpleTextItem::hoverEnterEvent(QGraphicsSceneHoverEvent *event)
 
     this->setBrush(Qt::green);
 
-    if(QGraphicsItem *parent = parentItem())
+    QGraphicsItem *parent = parentItem();
+    if(parent && m_showParentTooltip)
     {
         setToolTip(parent->toolTip());
     }

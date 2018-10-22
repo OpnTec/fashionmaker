@@ -75,6 +75,7 @@ VNodePoint::VNodePoint(const VAbstractNodeInitData &initData, QObject *qoParent,
                     qoParent),
       VScenePoint(parent)
 {
+    m_namePoint->SetShowParentTooltip(false);
     connect(m_namePoint, &VGraphicsSimpleTextItem::PointChoosed, this, &VNodePoint::PointChoosed);
     connect(m_namePoint, &VGraphicsSimpleTextItem::NameChangePosition, this, &VNodePoint::NameChangePosition);
     connect(m_namePoint, &VGraphicsSimpleTextItem::ShowContextMenu,
@@ -84,6 +85,7 @@ VNodePoint::VNodePoint(const VAbstractNodeInitData &initData, QObject *qoParent,
     });
     RefreshPointGeometry(*VAbstractTool::data.GeometricObject<VPointF>(initData.id));
     ToolCreation(initData.typeCreation);
+    setCursor(Qt::ArrowCursor);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -420,6 +422,13 @@ void VNodePoint::contextMenuEvent(QGraphicsSceneContextMenuEvent *event)
             }
         }
     }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VNodePoint::hoverEnterEvent(QGraphicsSceneHoverEvent *event)
+{
+    setToolTip(VAbstractTool::data.GetGObject(m_id)->name());
+    VScenePoint::hoverEnterEvent(event);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

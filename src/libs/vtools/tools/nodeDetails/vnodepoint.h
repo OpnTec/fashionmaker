@@ -83,6 +83,7 @@ protected:
     virtual void ShowNode() override;
     virtual void HideNode() override;
     virtual void contextMenuEvent(QGraphicsSceneContextMenuEvent *event) override;
+    virtual void hoverEnterEvent(QGraphicsSceneHoverEvent *event) override;
 private:
     Q_DISABLE_COPY(VNodePoint)
 

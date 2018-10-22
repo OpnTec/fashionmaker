@@ -1,3 +1,6 @@
+# Version 0.7.0 (unreleased)
+- [#892] Show tooltip for piece node point.
+
 # Version 0.6.1 (unreleased)
 - [#885] Regression. Broken support for multi size measurements.
 - Fixed issues with seam allowance.

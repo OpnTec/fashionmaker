@@ -61,6 +61,8 @@ public:
 
     void setEnabled(bool enabled);
     void LabelSelectionType(const SelectionType &type);
+
+    void SetShowParentTooltip(bool show);
 signals:
     /**
      * @brief NameChangePosition emit when label change position.
@@ -88,6 +90,7 @@ private:
     qint32        m_fontSize;
     SelectionType selectionType;
     qreal         m_oldScale;
+    bool          m_showParentTooltip;
 
     void Init();
 };
