@@ -3,7 +3,7 @@
 - [#894] Quick way to disable a passmark.
 - [#895] Improve path validation. Do not allow repeat the same curve twice.
 
-# Version 0.6.1 (unreleased)
+# Version 0.6.1 October 23, 2018
 - [#885] Regression. Broken support for multi size measurements.
 - Fixed issues with seam allowance.
 - [#890] Menu Windows->Close pattern doesn't clear "Group of visibility" list.
