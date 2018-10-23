@@ -13,7 +13,7 @@
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="209"/>
         <source>Height: Total</source>
         <comment>Full measurement name.</comment>
-        <translation>Wzrost</translation>
+        <translation>wzrost</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="210"/>

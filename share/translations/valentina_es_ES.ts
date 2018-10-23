@@ -1792,7 +1792,7 @@
     </message>
     <message>
         <source>Height</source>
-        <translation>Estatura</translation>
+        <translation>Altura</translation>
     </message>
     <message>
         <source>Measurments extension</source>
@@ -1931,7 +1931,7 @@
     </message>
     <message>
         <source>Size and height</source>
-        <translation type="vanished">Alto y ancho</translation>
+        <translation type="vanished">Talla y altura</translation>
     </message>
     <message>
         <source>Measurements</source>
@@ -4571,6 +4571,10 @@ Aplicar características de todos modos?</translation>
         <source>Excluded</source>
         <translation>Excluido</translation>
     </message>
+    <message>
+        <source>The same curve repeats twice!</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>DialogPin</name>
@@ -4619,7 +4623,7 @@ Aplicar características de todos modos?</translation>
     </message>
     <message>
         <source>Height:</source>
-        <translation>Estatura:</translation>
+        <translation>Altura:</translation>
     </message>
     <message>
         <source>Angle:</source>
@@ -5671,6 +5675,10 @@ Aplicar características de todos modos?</translation>
     <message>
         <source>To open all detail&apos;s features complete creating the main path. Please, press OK.</source>
         <translation>Para abrir todas las características de detalles complete creando la ruta principal, Por favor, presione OK.</translation>
+    </message>
+    <message>
+        <source>The same curve repeats twice!</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -7979,11 +7987,11 @@ el patrón.</translation>
     </message>
     <message>
         <source>Cannot read settings from a malformed INI file.</source>
-        <translation type="unfinished"></translation>
+        <translation>No se puede leer configuración desde un archivo INI malformado.</translation>
     </message>
     <message>
         <source>Cannot save settings. Access denied.</source>
-        <translation type="unfinished"></translation>
+        <translation>No se puede guardar configuración. Acceso denegado.</translation>
     </message>
 </context>
 <context>
@@ -8841,18 +8849,22 @@ Esta opción surtirá efecto después de reiniciar.</translation>
     </message>
     <message>
         <source>Cannot calculate a notch for point &apos;%1&apos; in piece &apos;%2&apos;.</source>
-        <translation type="unfinished"></translation>
+        <translation>No se puede calcular un pique para un punto &apos;%1&apos; en pieza &apos;%2&apos;.</translation>
     </message>
     <message>
         <source>Cannot calculate a notch for point &apos;%1&apos; in piece &apos;%2&apos;. Seam allowance is empty.</source>
-        <translation type="unfinished"></translation>
+        <translation>No se puede calcular un pique para un punto &apos;%1&apos; en pieza &apos;%2&apos;. Margen de costura esta vacío.</translation>
     </message>
     <message>
         <source>Cannot calculate a notch for point &apos;%1&apos; in piece &apos;%2&apos;. Cannot find position for a notch.</source>
-        <translation type="unfinished"></translation>
+        <translation>No se puede calcular un pique para un punto &apos;%1&apos; en pieza &apos;%2&apos;. No se puede encontrar posición para un pique.</translation>
     </message>
     <message>
         <source>Cannot calculate a notch for point &apos;%1&apos; in piece &apos;%2&apos;. Unable to fix a notch position.</source>
+        <translation>No se puede calcular un pique para un punto &apos;%1&apos; en pieza &apos;%2&apos;. Imposible reparar una posición de pique.</translation>
+    </message>
+    <message>
+        <source>Piece &apos;%1&apos;. Not enough points to build seam allowance.</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -9858,11 +9870,11 @@ Quieres guardar los cambios?</translation>
     </message>
     <message>
         <source>Cannot read settings from a malformed INI file.</source>
-        <translation type="unfinished"></translation>
+        <translation>No se puede leer configuración desde un archivo INI malformado.</translation>
     </message>
     <message>
         <source>Cannot save settings. Access denied.</source>
-        <translation type="unfinished"></translation>
+        <translation>No se puede guardar configuración. Acceso denegado.</translation>
     </message>
 </context>
 <context>
@@ -9960,7 +9972,7 @@ Quieres guardar los cambios?</translation>
     </message>
     <message>
         <source>Height:</source>
-        <translation>Estatura:</translation>
+        <translation>Altura:</translation>
     </message>
     <message>
         <source>Center pin:</source>
@@ -10866,7 +10878,7 @@ Quieres guardar los cambios?</translation>
     </message>
     <message>
         <source>Invalid notch.</source>
-        <translation type="unfinished"></translation>
+        <translation>Pique invalido.</translation>
     </message>
 </context>
 <context>
@@ -11594,6 +11606,10 @@ Quieres guardar los cambios?</translation>
     <message>
         <source>by second edge right angle</source>
         <translation>por el segundo ángulo recto del borde</translation>
+    </message>
+    <message>
+        <source>Passmark</source>
+        <translation type="unfinished">Pique</translation>
     </message>
 </context>
 <context>

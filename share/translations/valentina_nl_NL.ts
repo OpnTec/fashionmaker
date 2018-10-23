@@ -4572,6 +4572,10 @@ Toch de instellingen aanpassen?</translation>
         <source>Excluded</source>
         <translation>Uitgezonderd</translation>
     </message>
+    <message>
+        <source>The same curve repeats twice!</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>DialogPin</name>
@@ -5671,6 +5675,10 @@ Toch de instellingen aanpassen?</translation>
     </message>
     <message>
         <source>To open all detail&apos;s features complete creating the main path. Please, press OK.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>The same curve repeats twice!</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -8853,6 +8861,10 @@ This option will take an affect after restart.</source>
         <source>Cannot calculate a notch for point &apos;%1&apos; in piece &apos;%2&apos;. Unable to fix a notch position.</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Piece &apos;%1&apos;. Not enough points to build seam allowance.</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>QSaveFile</name>
@@ -11592,6 +11604,10 @@ Wil je deze veranderingen opslaan?</translation>
     <message>
         <source>by second edge right angle</source>
         <translation>op tweede lijn rechte hoek</translation>
+    </message>
+    <message>
+        <source>Passmark</source>
+        <translation type="unfinished">Pasmarkering</translation>
     </message>
 </context>
 <context>

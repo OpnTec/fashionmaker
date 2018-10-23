@@ -4572,6 +4572,10 @@ Aplicar configurações de qualquer forma?</translation>
         <source>Excluded</source>
         <translation>Excluído</translation>
     </message>
+    <message>
+        <source>The same curve repeats twice!</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>DialogPin</name>
@@ -5667,6 +5671,10 @@ Aplicar configurações de qualquer forma?</translation>
     </message>
     <message>
         <source>To open all detail&apos;s features complete creating the main path. Please, press OK.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>The same curve repeats twice!</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -8839,6 +8847,10 @@ Esta opção terá um efeito após o reinício.</translation>
         <source>Cannot calculate a notch for point &apos;%1&apos; in piece &apos;%2&apos;. Unable to fix a notch position.</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Piece &apos;%1&apos;. Not enough points to build seam allowance.</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>QSaveFile</name>
@@ -11542,6 +11554,10 @@ Deseja salvar suas mudanças?</translation>
     <message>
         <source>by second edge right angle</source>
         <translation>pelo ângulo reto da segunda aresta</translation>
+    </message>
+    <message>
+        <source>Passmark</source>
+        <translation type="unfinished">Pique</translation>
     </message>
 </context>
 <context>
