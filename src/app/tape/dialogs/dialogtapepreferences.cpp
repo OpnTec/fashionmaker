@@ -87,8 +87,6 @@ void DialogTapePreferences::showEvent(QShowEvent *event)
     }
     // do your init stuff here
 
-    setMinimumSize(size());
-
     QSize sz = qApp->Settings()->GetPreferenceDialogSize();
     if (sz.isEmpty() == false)
     {
