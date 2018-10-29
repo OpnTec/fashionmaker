@@ -276,7 +276,6 @@ VApplication::VApplication(int &argc, char **argv)
     setOrganizationDomain(VER_COMPANYDOMAIN_STR);
     // Setting the Application version
     setApplicationVersion(APP_VERSION_STR);
-
     // making sure will create new instance...just in case we will ever do 2 objects of VApplication
     VCommandLine::Reset();
     VCommandLine::Get(*this);
@@ -406,6 +405,27 @@ bool VApplication::notify(QObject *receiver, QEvent *event)
     }
     return false;
 }
+
+void VApplication::ActivateDarkMode()
+{
+     VSettings *settings = qApp->ValentinaSettings();
+     if (settings->GetDarkMode())
+     {
+         QFile f(":qdarkstyle/style.qss");
+         if (!f.exists())
+         {
+             qDebug()<<"Unable to set stylesheet, file not found\n";
+         }
+         else
+         {
+             f.open(QFile::ReadOnly | QFile::Text);
+             QTextStream ts(&f);
+             qApp->setStyleSheet(ts.readAll());
+         }
+
+     }
+}
+
 
 //---------------------------------------------------------------------------------------------------------------------
 QString VApplication::TapeFilePath() const
@@ -596,6 +616,7 @@ void VApplication::InitOptions()
         //This does not happen under GNOME or KDE
         QIcon::setThemeName("win.icon.theme");
     }
+    ActivateDarkMode();
 }
 
 //---------------------------------------------------------------------------------------------------------------------

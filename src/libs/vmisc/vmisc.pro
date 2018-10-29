@@ -49,7 +49,8 @@ include(vmisc.pri)
 RESOURCES += \
     share/resources/theme.qrc \ # Windows theme icons.
     share/resources/icon.qrc \ # All other icons except cursors and Windows theme.
-    share/resources/flags.qrc
+    share/resources/flags.qrc \
+    share/resources/qdarkstyle/style.qrc
 
 # This is static library so no need in "make install"
 

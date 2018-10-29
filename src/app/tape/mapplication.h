@@ -68,6 +68,7 @@ public:
 
     virtual void  OpenSettings() override;
     VTapeSettings *TapeSettings();
+    void               ActivateDarkMode();
 
     QString diagramsPath() const;
 

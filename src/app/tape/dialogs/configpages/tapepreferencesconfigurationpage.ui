@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>501</width>
-    <height>550</height>
+    <height>726</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -156,10 +156,10 @@
       <string>Default height and size</string>
      </property>
      <layout class="QGridLayout" name="gridLayout">
-      <item row="0" column="2">
-       <widget class="QLabel" name="labelHeightUnit">
+      <item row="0" column="0">
+       <widget class="QLabel" name="label">
         <property name="text">
-         <string notr="true">Height unit</string>
+         <string>Default height:</string>
         </property>
        </widget>
       </item>
@@ -173,10 +173,10 @@
         </property>
        </widget>
       </item>
-      <item row="0" column="0">
-       <widget class="QLabel" name="label">
+      <item row="0" column="2">
+       <widget class="QLabel" name="labelHeightUnit">
         <property name="text">
-         <string>Default height:</string>
+         <string notr="true">Height unit</string>
         </property>
        </widget>
       </item>
@@ -234,17 +234,24 @@
     </widget>
    </item>
    <item>
-    <spacer name="verticalSpacer">
-     <property name="orientation">
-      <enum>Qt::Vertical</enum>
+    <widget class="QGroupBox" name="groupBox_4">
+     <property name="title">
+      <string>User Interface</string>
      </property>
-     <property name="sizeHint" stdset="0">
-      <size>
-       <width>20</width>
-       <height>40</height>
-      </size>
-     </property>
-    </spacer>
+     <widget class="QCheckBox" name="darkModeCheck">
+      <property name="geometry">
+       <rect>
+        <x>20</x>
+        <y>30</y>
+        <width>351</width>
+        <height>20</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Activate dark mode(Restart required)</string>
+      </property>
+     </widget>
+    </widget>
    </item>
   </layout>
  </widget>

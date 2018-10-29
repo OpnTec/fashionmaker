@@ -53,6 +53,9 @@ TapePreferencesConfigurationPage::TapePreferencesConfigurationPage(QWidget *pare
     //-------------------- Decimal separator setup
     ui->osOptionCheck->setChecked(qApp->TapeSettings()->GetOsSeparator());
 
+    // Theme
+     ui->darkModeCheck->setChecked(qApp->TapeSettings()->GetDarkMode());
+
     //---------------------- Pattern making system
     ui->systemBookValueLabel->setFixedHeight(4 * QFontMetrics(ui->systemBookValueLabel->font()).lineSpacing());
     connect(ui->systemCombo, QOverload<int>::of(&QComboBox::currentIndexChanged), this, [this]()
@@ -121,6 +124,8 @@ void TapePreferencesConfigurationPage::Apply()
     settings->SetOsSeparator(ui->osOptionCheck->isChecked());
 
     settings->SetToolBarStyle(ui->toolBarStyleCheck->isChecked());
+
+    settings->SetDarkMode(ui->darkModeCheck->isChecked());
 
     if (m_langChanged || m_systemChanged)
     {

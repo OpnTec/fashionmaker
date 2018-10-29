@@ -99,6 +99,9 @@ public:
     bool GetToolBarStyle() const;
     void SetToolBarStyle(const bool &value);
 
+    bool GetDarkMode() const;
+    void SetDarkMode(const bool &value);
+
     bool IsFreeCurveMode() const;
     void SetFreeCurveMode(bool value);
 

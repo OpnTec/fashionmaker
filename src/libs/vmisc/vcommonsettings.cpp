@@ -81,6 +81,7 @@ Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingGeneralRestoreFileList, (QLatin1
 Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingGeneralGeometry, (QLatin1String("geometry")))
 Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingGeneralWindowState, (QLatin1String("windowState")))
 Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingGeneralToolbarsState, (QLatin1String("toolbarsState")))
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingConfigurationDarkMode, (QLatin1String("configuration/dark_mode")))
 Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingPreferenceDialogSize, (QLatin1String("preferenceDialogSize")))
 Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingToolSeamAllowanceDialogSize, (QLatin1String("toolSeamAllowanceDialogSize")))
 Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingIncrementsDialogSize, (QLatin1String("toolIncrementsDialogSize")))
@@ -512,6 +513,19 @@ void VCommonSettings::SetToolBarStyle(const bool &value)
 {
     setValue(*settingConfigurationToolBarStyle, value);
 }
+
+//---------------------------------------------------------------------------------------------------------------------
+bool VCommonSettings::GetDarkMode() const
+{
+    return value(*settingConfigurationDarkMode, 1).toBool();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VCommonSettings::SetDarkMode(const bool &value)
+{
+    setValue(*settingConfigurationDarkMode, value);
+}
+
 
 //---------------------------------------------------------------------------------------------------------------------
 bool VCommonSettings::IsFreeCurveMode() const

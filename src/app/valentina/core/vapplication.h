@@ -66,6 +66,7 @@ public:
     static QStringList LabelLanguages();
 
     void               StartLogging();
+    void               ActivateDarkMode();
     QTextStream       *LogFile();
 
     virtual const VTranslateVars *TrVars() override;

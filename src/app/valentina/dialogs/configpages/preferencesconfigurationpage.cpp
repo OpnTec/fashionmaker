@@ -124,6 +124,9 @@ PreferencesConfigurationPage::PreferencesConfigurationPage(QWidget *parent)
     //----------------------- Toolbar
     ui->toolBarStyleCheck->setChecked(settings->GetToolBarStyle());
 
+    // Theme
+    ui->darkModeCheck->setChecked(settings->GetDarkMode());
+
     // Tab Scrolling
     ui->spinBoxDuration->setMinimum(VSettings::scrollingDurationMin);
     ui->spinBoxDuration->setMaximum(VSettings::scrollingDurationMax);
@@ -168,6 +171,7 @@ QStringList PreferencesConfigurationPage::Apply()
 
     settings->SetOsSeparator(ui->osOptionCheck->isChecked());
     settings->SetToolBarStyle(ui->toolBarStyleCheck->isChecked());
+    settings->SetDarkMode(ui->darkModeCheck->isChecked());
     settings->SetFreeCurveMode(ui->checkBoxFreeCurve->isChecked());
     settings->SetDoubleClickZoomFitBestCurrentPP(ui->checkBoxZoomFitBestCurrentPP->isChecked());
 

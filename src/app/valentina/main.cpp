@@ -45,6 +45,7 @@ int main(int argc, char *argv[])
     Q_INIT_RESOURCE(flags);
     Q_INIT_RESOURCE(icons);
     Q_INIT_RESOURCE(toolicon);
+    Q_INIT_RESOURCE(style);
 
     QT_REQUIRE_VERSION(argc, argv, "5.2.0")// clazy:exclude=qstring-arg,qstring-allocations
 

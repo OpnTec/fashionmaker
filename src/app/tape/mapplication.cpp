@@ -409,8 +409,29 @@ void MApplication::InitOptions()
        //This does not happen under GNOME or KDE
        QIcon::setThemeName("win.icon.theme");
     }
-
+    ActivateDarkMode();
     QResource::registerResource(diagramsPath());
+}
+// Dark mode
+
+void MApplication::ActivateDarkMode()
+{
+    VTapeSettings *settings = qApp->TapeSettings();
+     if (settings->GetDarkMode())
+     {
+         QFile f(":qdarkstyle/style.qss");
+         if (!f.exists())
+         {
+             qDebug()<<"Unable to set stylesheet, file not found\n";
+         }
+         else
+         {
+             f.open(QFile::ReadOnly | QFile::Text);
+             QTextStream ts(&f);
+             qApp->setStyleSheet(ts.readAll());
+         }
+
+     }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
