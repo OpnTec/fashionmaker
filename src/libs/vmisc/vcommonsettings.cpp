@@ -517,7 +517,7 @@ void VCommonSettings::SetToolBarStyle(const bool &value)
 //---------------------------------------------------------------------------------------------------------------------
 bool VCommonSettings::GetDarkMode() const
 {
-    return value(*settingConfigurationDarkMode, 1).toBool();
+    return value(*settingConfigurationDarkMode, 0).toBool();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
