@@ -263,7 +263,7 @@
            </rect>
           </property>
           <property name="text">
-           <string>Activate dark mode(Restart required)</string>
+           <string>Activate dark mode</string>
           </property>
          </widget>
         </widget>

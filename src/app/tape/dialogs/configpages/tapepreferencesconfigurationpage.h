@@ -44,7 +44,7 @@ public:
     explicit TapePreferencesConfigurationPage(QWidget *parent = nullptr);
     virtual ~TapePreferencesConfigurationPage();
 
-    void Apply();
+    QStringList Apply();
 protected:
     virtual void changeEvent(QEvent* event) override;
 private:

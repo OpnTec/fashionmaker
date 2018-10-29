@@ -33,7 +33,7 @@
           <property name="geometry">
            <rect>
             <x>0</x>
-            <y>0</y>
+            <y>-152</y>
             <width>624</width>
             <height>707</height>
            </rect>
@@ -266,7 +266,7 @@
               <item>
                <widget class="QCheckBox" name="darkModeCheck">
                 <property name="text">
-                 <string>Activate dark mode(Restart required)</string>
+                 <string>Activate dark mode</string>
                 </property>
                 <property name="checked">
                  <bool>true</bool>

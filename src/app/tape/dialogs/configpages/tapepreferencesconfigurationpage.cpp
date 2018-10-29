@@ -118,14 +118,19 @@ TapePreferencesConfigurationPage::~TapePreferencesConfigurationPage()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void TapePreferencesConfigurationPage::Apply()
+QStringList TapePreferencesConfigurationPage::Apply()
 {
+    QStringList preferences;
     VTapeSettings *settings = qApp->TapeSettings();
     settings->SetOsSeparator(ui->osOptionCheck->isChecked());
 
     settings->SetToolBarStyle(ui->toolBarStyleCheck->isChecked());
 
-    settings->SetDarkMode(ui->darkModeCheck->isChecked());
+    if (settings->GetDarkMode() != ui->darkModeCheck->isChecked())
+    {
+        settings->SetDarkMode(ui->darkModeCheck->isChecked());
+        preferences.append(tr("dark mode"));
+    }
 
     if (m_langChanged || m_systemChanged)
     {
@@ -151,6 +156,8 @@ void TapePreferencesConfigurationPage::Apply()
         settings->SetDefSize(ui->defSizeCombo->currentText().toInt());
         m_defGradationChanged = false;
     }
+
+    return preferences;
 }
 
 //---------------------------------------------------------------------------------------------------------------------

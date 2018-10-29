@@ -32,6 +32,7 @@
 #include "configpages/tapepreferencesconfigurationpage.h"
 #include "configpages/tapepreferencespathpage.h"
 
+#include <QMessageBox>
 #include <QPushButton>
 #include <QShowEvent>
 
@@ -124,8 +125,17 @@ void DialogTapePreferences::changeEvent(QEvent *event)
 //---------------------------------------------------------------------------------------------------------------------
 void DialogTapePreferences::Apply()
 {
-    m_configurationPage->Apply();
+    QStringList preferences;
+
+    preferences += m_configurationPage->Apply();
     m_pathPage->Apply();
+
+    if (not preferences.isEmpty())
+    {
+        const QString text = tr("Followed %n option(s) require restart to take effect: %1.", "",
+                                preferences.size()).arg(preferences.join(QStringLiteral(", ")));
+        QMessageBox::information(this, QCoreApplication::applicationName(), text);
+    }
 
     qApp->TapeSettings()->GetOsSeparator() ? setLocale(QLocale()) : setLocale(QLocale::c());
     emit UpdateProperties();

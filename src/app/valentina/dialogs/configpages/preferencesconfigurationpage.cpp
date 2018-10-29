@@ -171,7 +171,13 @@ QStringList PreferencesConfigurationPage::Apply()
 
     settings->SetOsSeparator(ui->osOptionCheck->isChecked());
     settings->SetToolBarStyle(ui->toolBarStyleCheck->isChecked());
-    settings->SetDarkMode(ui->darkModeCheck->isChecked());
+
+    if (settings->GetDarkMode() != ui->darkModeCheck->isChecked())
+    {
+        settings->SetDarkMode(ui->darkModeCheck->isChecked());
+        preferences.append(tr("dark mode"));
+    }
+
     settings->SetFreeCurveMode(ui->checkBoxFreeCurve->isChecked());
     settings->SetDoubleClickZoomFitBestCurrentPP(ui->checkBoxZoomFitBestCurrentPP->isChecked());
 
