@@ -3,6 +3,9 @@
 - [#894] Quick way to disable a passmark.
 - [#895] Improve path validation. Do not allow repeat the same curve twice.
 
+# Version 0.6.2 (unreleased)
+- [#903] Bug in tool Cut Spline path.
+
 # Version 0.6.1 October 23, 2018
 - [#885] Regression. Broken support for multi size measurements.
 - Fixed issues with seam allowance.
