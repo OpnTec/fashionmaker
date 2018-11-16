@@ -971,6 +971,10 @@ QVector<QPointF> VAbstractPiece::CheckLoops(const QVector<QPointF> &points)
     const bool pathClosed = (points.first() == points.last());
 
     QVector<QPointF> ekvPoints;
+    ekvPoints.reserve(points.size());
+
+    QVector<qint32> uniqueVertices;
+    uniqueVertices.reserve(4);
 
     qint32 i, j, jNext = 0;
     for (i = 0; i < count; ++i)
@@ -1000,7 +1004,7 @@ QVector<QPointF> VAbstractPiece::CheckLoops(const QVector<QPointF> &points)
                 continue;
             }
 
-            QVector<qint32> uniqueVertices;
+            uniqueVertices.clear();
 
             auto AddUniqueIndex = [&uniqueVertices](qint32 i)
             {

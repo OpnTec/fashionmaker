@@ -64,10 +64,6 @@ public:
 protected:
     virtual void CreateName() override;
 
-    static qreal            CalcSqDistance(qreal x1, qreal y1, qreal x2, qreal y2);
-    static void             PointBezier_r(qreal x1, qreal y1, qreal x2, qreal y2, qreal x3, qreal y3, qreal x4,
-                                          qreal y4, qint16 level, QVector<qreal> &px, QVector<qreal> &py,
-                                          qreal approximationScale);
     static QVector<QPointF> GetCubicBezierPoints(const QPointF &p1, const QPointF &p2, const QPointF &p3,
                                                  const QPointF &p4, qreal approximationScale);
     static qreal            LengthBezier(const QPointF &p1, const QPointF &p2, const QPointF &p3, const QPointF &p4,
