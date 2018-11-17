@@ -134,12 +134,12 @@ public:
     QVector<VLabelTemplateLine> GetLabelTemplate(const QDomElement &element) const;
     void                        SetLabelTemplate(QDomElement &element, const QVector<VLabelTemplateLine> &lines);
 
+    void           TestUniqueId() const;
+
 protected:
     bool           setTagText(const QString &tag, const QString &text);
     bool           setTagText(const QDomElement &domElement, const QString &text);
     QString        UniqueTagText(const QString &tagName, const QString &defVal = QString()) const;
-
-    void           TestUniqueId() const;
     void           CollectId(const QDomElement &node, QVector<quint32> &vector)const;
 
 protected slots:

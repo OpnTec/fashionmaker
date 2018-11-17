@@ -88,6 +88,8 @@
 #include <QDoubleSpinBox>
 #include <QProgressBar>
 #include <QGlobalStatic>
+#include <QFuture>
+#include <QtConcurrent>
 
 #if defined(Q_OS_WIN32) && QT_VERSION >= QT_VERSION_CHECK(5, 7, 0)
 #include <QWinTaskbarButton>
@@ -3003,16 +3005,58 @@ void MainWindow::FullParseFile()
     qCDebug(vMainWindow, "Full parsing file");
 
     toolOptions->ClearPropertyBrowser();
+    QFuture<void> futureTestUniqueId;
+
+    auto WaitForFutureFinish = [](QFuture<void> &futureTestUniqueId)
+    {
+        try
+        {
+            futureTestUniqueId.waitForFinished();
+        }
+        catch (...)
+        {
+            // ignore
+        }
+    };
+
     try
     {
+        if (qApp->getOpeningPattern())
+        {
+            futureTestUniqueId = QtConcurrent::run(static_cast<VDomDocument *>(doc), &VDomDocument::TestUniqueId);
+        }
+
         SetEnabledGUI(true);
         doc->Parse(Document::FullParse);
+
+        if (qApp->getOpeningPattern())
+        {
+            futureTestUniqueId.waitForFinished();
+        }
     }
     catch (const VExceptionUndo &e)
     {
         Q_UNUSED(e)
         /* If user want undo last operation before undo we need finish broken redo operation. For those we post event
          * myself. Later in method customEvent call undo.*/
+        if (qApp->getOpeningPattern())
+        {
+            try
+            {
+                futureTestUniqueId.waitForFinished();
+            }
+            catch (const VExceptionWrongId &e)
+            {
+                qCCritical(vMainWindow, "%s\n\n%s\n\n%s", qUtf8Printable(tr("Error wrong id.")),
+                                       qUtf8Printable(e.ErrorMessage()), qUtf8Printable(e.DetailedInformation()));
+                SetEnabledGUI(false);
+                if (not VApplication::IsGUIMode())
+                {
+                    qApp->exit(V_EX_DATAERR);
+                }
+                return;
+            }
+        }
         QApplication::postEvent(this, new UndoEvent());
         return;
     }
@@ -3021,6 +3065,10 @@ void MainWindow::FullParseFile()
         qCCritical(vMainWindow, "%s\n\n%s\n\n%s", qUtf8Printable(tr("Error parsing file.")), //-V807
                                qUtf8Printable(e.ErrorMessage()), qUtf8Printable(e.DetailedInformation()));
         SetEnabledGUI(false);
+        if (qApp->getOpeningPattern())
+        {
+            WaitForFutureFinish(futureTestUniqueId);
+        }
         if (not VApplication::IsGUIMode())
         {
             qApp->exit(V_EX_DATAERR);
@@ -3032,6 +3080,10 @@ void MainWindow::FullParseFile()
         qCCritical(vMainWindow, "%s\n\n%s\n\n%s", qUtf8Printable(tr("Error can't convert value.")),
                                qUtf8Printable(e.ErrorMessage()), qUtf8Printable(e.DetailedInformation()));
         SetEnabledGUI(false);
+        if (qApp->getOpeningPattern())
+        {
+            WaitForFutureFinish(futureTestUniqueId);
+        }
         if (not VApplication::IsGUIMode())
         {
             qApp->exit(V_EX_DATAERR);
@@ -3043,6 +3095,10 @@ void MainWindow::FullParseFile()
         qCCritical(vMainWindow, "%s\n\n%s\n\n%s", qUtf8Printable(tr("Error empty parameter.")),
                                qUtf8Printable(e.ErrorMessage()), qUtf8Printable(e.DetailedInformation()));
         SetEnabledGUI(false);
+        if (qApp->getOpeningPattern())
+        {
+            WaitForFutureFinish(futureTestUniqueId);
+        }
         if (not VApplication::IsGUIMode())
         {
             qApp->exit(V_EX_DATAERR);
@@ -3054,6 +3110,10 @@ void MainWindow::FullParseFile()
         qCCritical(vMainWindow, "%s\n\n%s\n\n%s", qUtf8Printable(tr("Error wrong id.")),
                                qUtf8Printable(e.ErrorMessage()), qUtf8Printable(e.DetailedInformation()));
         SetEnabledGUI(false);
+        if (qApp->getOpeningPattern())
+        {
+            WaitForFutureFinish(futureTestUniqueId);
+        }
         if (not VApplication::IsGUIMode())
         {
             qApp->exit(V_EX_DATAERR);
@@ -3065,6 +3125,10 @@ void MainWindow::FullParseFile()
         qCCritical(vMainWindow, "%s\n\n%s\n\n%s", qUtf8Printable(tr("Error parsing file.")),
                                qUtf8Printable(e.ErrorMessage()), qUtf8Printable(e.DetailedInformation()));
         SetEnabledGUI(false);
+        if (qApp->getOpeningPattern())
+        {
+            WaitForFutureFinish(futureTestUniqueId);
+        }
         if (not VApplication::IsGUIMode())
         {
             qApp->exit(V_EX_DATAERR);
@@ -3075,6 +3139,10 @@ void MainWindow::FullParseFile()
     {
         qCCritical(vMainWindow, "%s", qUtf8Printable(tr("Error parsing file (std::bad_alloc).")));
         SetEnabledGUI(false);
+        if (qApp->getOpeningPattern())
+        {
+            WaitForFutureFinish(futureTestUniqueId);
+        }
         if (not VApplication::IsGUIMode())
         {
             qApp->exit(V_EX_DATAERR);
@@ -4566,9 +4634,6 @@ bool MainWindow::LoadPattern(QString fileName, const QString& customMeasureFile)
 #endif
     
     FullParseFile();
-    /* Collect garbage only after successfully parse. This way wrongly accused items have one more time to restore
-     * a reference. */
-    doc->GarbageCollector(true);
 
     m_progressBar->setVisible(false);
 #if defined(Q_OS_WIN32) && QT_VERSION >= QT_VERSION_CHECK(5, 7, 0)
@@ -4578,6 +4643,10 @@ bool MainWindow::LoadPattern(QString fileName, const QString& customMeasureFile)
 
     if (guiEnabled)
     { // No errors occurred
+        /* Collect garbage only after successfully parse. This way wrongly accused items have one more time to restore
+         * a reference. */
+        doc->GarbageCollector(true);
+
         patternReadOnly = doc->IsReadOnly();
         SetEnableWidgets(true);
         setCurrentFile(fileName);

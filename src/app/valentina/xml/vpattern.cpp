@@ -4239,7 +4239,6 @@ void VPattern::PrepareForParse(const Document &parse)
     SCASSERT(sceneDetail != nullptr)
     if (parse == Document::FullParse)
     {
-        TestUniqueId();
         RefreshElementIdCache();
         sceneDraw->clear();
         sceneDraw->InitOrigins();
