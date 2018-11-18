@@ -267,14 +267,14 @@ bool TMainWindow::LoadFile(const QString &path)
             {
                 VVSTConverter converter(path);
                 m_curFileFormatVersion = converter.GetCurrentFormatVersion();
-                m_curFileFormatVersionStr = converter.GetVersionStr();
+                m_curFileFormatVersionStr = converter.GetFormatVersionStr();
                 m->setXMLContent(converter.Convert());// Read again after conversion
             }
             else
             {
                 VVITConverter converter(path);
                 m_curFileFormatVersion = converter.GetCurrentFormatVersion();
-                m_curFileFormatVersionStr = converter.GetVersionStr();
+                m_curFileFormatVersionStr = converter.GetFormatVersionStr();
                 m->setXMLContent(converter.Convert());// Read again after conversion
             }
 
@@ -2910,7 +2910,7 @@ bool TMainWindow::LoadFromExistingFile(const QString &path)
             {
                 VVITConverter converter(path);
                 m_curFileFormatVersion = converter.GetCurrentFormatVersion();
-                m_curFileFormatVersionStr = converter.GetVersionStr();
+                m_curFileFormatVersionStr = converter.GetFormatVersionStr();
                 m->setXMLContent(converter.Convert());// Read again after conversion
             }
 

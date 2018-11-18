@@ -55,7 +55,7 @@ VAbstractConverter::VAbstractConverter(const QString &fileName)
       m_tmpFile()
 {
     setXMLContent(m_convertedFileName);// Throw an exception on error
-    m_ver = GetVersion(GetVersionStr());
+    m_ver = GetFormatVersion(GetFormatVersionStr());
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -93,84 +93,6 @@ int VAbstractConverter::GetCurrentFormatVersion() const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QString VAbstractConverter::GetVersionStr() const
-{
-    const QDomNodeList nodeList = this->elementsByTagName(TagVersion);
-    if (nodeList.isEmpty())
-    {
-        const QString errorMsg(tr("Couldn't get version information."));
-        throw VException(errorMsg);
-    }
-
-    if (nodeList.count() > 1)
-    {
-        const QString errorMsg(tr("Too many tags <%1> in file.").arg(TagVersion));
-        throw VException(errorMsg);
-    }
-
-    const QDomNode domNode = nodeList.at(0);
-    if (domNode.isNull() == false && domNode.isElement())
-    {
-        const QDomElement domElement = domNode.toElement();
-        if (domElement.isNull() == false)
-        {
-            return domElement.text();
-        }
-    }
-    return QString(QStringLiteral("0.0.0"));
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-int VAbstractConverter::GetVersion(const QString &version)
-{
-    ValidateVersion(version);
-
-    const QStringList ver = version.split(QChar('.'));
-
-    bool ok = false;
-    const int major = ver.at(0).toInt(&ok);
-    if (not ok)
-    {
-        return 0x0;
-    }
-
-    ok = false;
-    const int minor = ver.at(1).toInt(&ok);
-    if (not ok)
-    {
-        return 0x0;
-    }
-
-    ok = false;
-    const int patch = ver.at(2).toInt(&ok);
-    if (not ok)
-    {
-        return 0x0;
-    }
-
-    return (major<<16)|(minor<<8)|(patch);
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void VAbstractConverter::ValidateVersion(const QString &version)
-{
-    const QRegularExpression rx(QStringLiteral("^([0-9]|[1-9][0-9]|[1-2][0-5][0-5]).([0-9]|[1-9][0-9]|[1-2][0-5][0-5])"
-                                               ".([0-9]|[1-9][0-9]|[1-2][0-5][0-5])$"));
-
-    if (rx.match(version).hasMatch() == false)
-    {
-        const QString errorMsg(tr("Version \"%1\" invalid.").arg(version));
-        throw VException(errorMsg);
-    }
-
-    if (version == QLatin1String("0.0.0"))
-    {
-        const QString errorMsg(tr("Version \"0.0.0\" invalid."));
-        throw VException(errorMsg);
-    }
-}
-
-//---------------------------------------------------------------------------------------------------------------------
 void VAbstractConverter::ReserveFile() const
 {
     //It's not possible in all cases make conversion without lose data.
@@ -178,7 +100,7 @@ void VAbstractConverter::ReserveFile() const
     QString error;
     QFileInfo info(m_convertedFileName);
     const QString reserveFileName = QString("%1/%2(v%3).%4.bak")
-            .arg(info.absoluteDir().absolutePath(), info.baseName(), GetVersionStr(), info.completeSuffix());
+            .arg(info.absoluteDir().absolutePath(), info.baseName(), GetFormatVersionStr(), info.completeSuffix());
     if (not SafeCopy(m_convertedFileName, reserveFileName, error))
     {
 #ifdef Q_OS_WIN32

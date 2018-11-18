@@ -132,7 +132,7 @@ void VPattern::CreateEmptyFile()
 //---------------------------------------------------------------------------------------------------------------------
 void VPattern::setXMLContent(const QString &fileName)
 {
-    VDomDocument::setXMLContent(fileName);
+    VAbstractPattern::setXMLContent(fileName);
     GarbageCollector();
 }
 

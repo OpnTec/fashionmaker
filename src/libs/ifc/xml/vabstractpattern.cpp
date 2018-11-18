@@ -208,6 +208,13 @@ bool VAbstractPattern::patternLabelWasChanged = false;
 
 namespace
 {
+// Need to be reinited in setXMLContent as well
+Q_GLOBAL_STATIC_WITH_ARGS(QString, patternNumberCached, (unknownCharacter))
+Q_GLOBAL_STATIC_WITH_ARGS(QString, labelDateFormatCached, (unknownCharacter))
+Q_GLOBAL_STATIC_WITH_ARGS(QString, patternNameCached, (unknownCharacter))
+Q_GLOBAL_STATIC_WITH_ARGS(QString, MPathCached, (unknownCharacter))
+Q_GLOBAL_STATIC_WITH_ARGS(QString, companyNameCached, (unknownCharacter))
+
 void ReadExpressionAttribute(QVector<VFormulaField> &expressions, const QDomElement &element, const QString &attribute)
 {
     VFormulaField formula;
@@ -602,6 +609,18 @@ void VAbstractPattern::setCursor(const quint32 &value)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void VAbstractPattern::setXMLContent(const QString &fileName)
+{
+    VDomDocument::setXMLContent(fileName);
+
+    *patternNumberCached = unknownCharacter;
+    *labelDateFormatCached = unknownCharacter;
+    *patternNameCached = unknownCharacter;
+    *MPathCached = unknownCharacter;
+    *companyNameCached = unknownCharacter;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 /**
  * @brief getTool return tool from tool list.
  * @param id tool id.
@@ -807,7 +826,11 @@ QVector<VToolRecord> VAbstractPattern::getLocalHistory() const
 //---------------------------------------------------------------------------------------------------------------------
 QString VAbstractPattern::MPath() const
 {
-    return UniqueTagText(TagMeasurements);
+    if (*MPathCached == unknownCharacter)
+    {
+        *MPathCached = UniqueTagText(TagMeasurements);
+    }
+    return *MPathCached;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -817,6 +840,7 @@ void VAbstractPattern::SetMPath(const QString &path)
     {
         emit patternChanged(false);
         patternLabelWasChanged = true;
+        *MPathCached = path;
     }
     else
     {
@@ -1303,14 +1327,19 @@ void VAbstractPattern::SetNotes(const QString &text)
 //---------------------------------------------------------------------------------------------------------------------
 QString VAbstractPattern::GetPatternName() const
 {
-    return UniqueTagText(TagPatternName);
+    if (*patternNameCached == unknownCharacter)
+    {
+        *patternNameCached = UniqueTagText(TagPatternName);
+    }
+    return *patternNameCached;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void VAbstractPattern::SetPatternName(const QString &qsName)
 {
+    *patternNameCached = qsName;
     CheckTagExists(TagPatternName);
-    setTagText(TagPatternName, qsName);
+    setTagText(TagPatternName, *patternNameCached);
     patternLabelWasChanged = true;
     modified = true;
     emit patternChanged(false);
@@ -1319,14 +1348,19 @@ void VAbstractPattern::SetPatternName(const QString &qsName)
 //---------------------------------------------------------------------------------------------------------------------
 QString VAbstractPattern::GetCompanyName() const
 {
-    return UniqueTagText(TagCompanyName);
+    if (*companyNameCached == unknownCharacter)
+    {
+        *companyNameCached = UniqueTagText(TagCompanyName);
+    }
+    return *companyNameCached;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void VAbstractPattern::SetCompanyName(const QString& qsName)
 {
+    *companyNameCached = qsName;
     CheckTagExists(TagCompanyName);
-    setTagText(TagCompanyName, qsName);
+    setTagText(TagCompanyName, *companyNameCached);
     patternLabelWasChanged = true;
     modified = true;
     emit patternChanged(false);
@@ -1335,14 +1369,19 @@ void VAbstractPattern::SetCompanyName(const QString& qsName)
 //---------------------------------------------------------------------------------------------------------------------
 QString VAbstractPattern::GetPatternNumber() const
 {
-    return UniqueTagText(TagPatternNum);
+    if (*patternNumberCached == unknownCharacter)
+    {
+        *patternNumberCached = UniqueTagText(TagPatternNum);
+    }
+    return *patternNumberCached;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void VAbstractPattern::SetPatternNumber(const QString& qsNum)
 {
+    *patternNumberCached = qsNum;
     CheckTagExists(TagPatternNum);
-    setTagText(TagPatternNum, qsNum);
+    setTagText(TagPatternNum, *patternNumberCached);
     patternLabelWasChanged = true;
     modified = true;
     emit patternChanged(false);
@@ -1367,23 +1406,34 @@ void VAbstractPattern::SetCustomerName(const QString& qsName)
 //---------------------------------------------------------------------------------------------------------------------
 QString VAbstractPattern::GetLabelDateFormat() const
 {
-    QString globalLabelDateFormat = qApp->Settings()->GetLabelDateFormat();
-
-    const QDomNodeList list = elementsByTagName(TagPatternLabel);
-    if (list.isEmpty())
+    if (*labelDateFormatCached == unknownCharacter)
     {
-        return globalLabelDateFormat;
-    }
+        const QString globalLabelDateFormat = qApp->Settings()->GetLabelDateFormat();
 
-    QDomElement tag = list.at(0).toElement();
-    return GetParametrString(tag, AttrDateFormat, globalLabelDateFormat);
+        const QDomNodeList list = elementsByTagName(TagPatternLabel);
+        if (list.isEmpty())
+        {
+            return globalLabelDateFormat;
+        }
+
+        try
+        {
+            *labelDateFormatCached = GetParametrString(list.at(0).toElement(), AttrDateFormat);
+        }
+        catch (const VExceptionEmptyParameter &)
+        {
+            return globalLabelDateFormat;
+        }
+    }
+    return *labelDateFormatCached;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void VAbstractPattern::SetLabelDateFormat(const QString &format)
 {
+    *labelDateFormatCached = format;
     QDomElement tag = CheckTagExists(TagPatternLabel);
-    SetAttribute(tag, AttrDateFormat, format);
+    SetAttribute(tag, AttrDateFormat, *labelDateFormatCached);
     patternLabelWasChanged = true;
     modified = true;
     emit patternChanged(false);

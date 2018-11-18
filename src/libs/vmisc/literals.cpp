@@ -34,3 +34,4 @@ const QString preferencesOtherIcon = QStringLiteral("preferences-other");
 const QString degreeSymbol = QStringLiteral("°");
 const QString trueStr = QStringLiteral("true");
 const QString falseStr = QStringLiteral("false");
+const QString unknownCharacter = QStringLiteral("�");

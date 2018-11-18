@@ -123,6 +123,8 @@ public:
     QString        Major() const;
     QString        Minor() const;
     QString        Patch() const;
+    QString        GetFormatVersionStr() const;
+    static int     GetFormatVersion(const QString &version);
     static void    RemoveAllChildren(QDomElement &domElement);
 
     QDomNode       ParentNodeById(const quint32 &nodeId);
@@ -141,6 +143,8 @@ protected:
     bool           setTagText(const QDomElement &domElement, const QString &text);
     QString        UniqueTagText(const QString &tagName, const QString &defVal = QString()) const;
     void           CollectId(const QDomElement &node, QVector<quint32> &vector)const;
+
+    static void    ValidateVersion(const QString &version);
 
 protected slots:
     void RefreshElementIdCache();

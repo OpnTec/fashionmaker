@@ -4487,6 +4487,12 @@ bool MainWindow::LoadPattern(QString fileName, const QString& customMeasureFile)
         }
     }
 
+    QFuture<VPatternConverter *> futureConverter = QtConcurrent::run([fileName]()
+    {
+        QScopedPointer<VPatternConverter> converter(new VPatternConverter(fileName));
+        return converter.take();
+    });
+
     //We have unsaved changes or load more then one file per time
     if (OpenNewValentina(fileName))
     {
@@ -4557,15 +4563,30 @@ bool MainWindow::LoadPattern(QString fileName, const QString& customMeasureFile)
     qApp->setOpeningPattern();//Begin opening file
     try
     {
-        VPatternConverter converter(fileName);
-        m_curFileFormatVersion = converter.GetCurrentFormatVersion();
-        m_curFileFormatVersionStr = converter.GetVersionStr();
-        doc->setXMLContent(converter.Convert());
-        if (!customMeasureFile.isEmpty())
-        {
-            doc->SetMPath(RelativeMPath(fileName, customMeasureFile));
+        // Quick reading measurements
+        doc->setXMLContent(fileName);
+        const int currentFormatVersion = doc->GetFormatVersion(doc->GetFormatVersionStr());
+        if (currentFormatVersion != VPatternConverter::PatternMaxVer)
+        { // Because we rely on the fact that we know where is path to measurements optimization available only for
+          // the latest format version
+            QScopedPointer<VPatternConverter> converter(futureConverter.result());
+            m_curFileFormatVersion = converter->GetCurrentFormatVersion();
+            m_curFileFormatVersionStr = converter->GetFormatVersionStr();
+            doc->setXMLContent(converter->Convert());
+            if (!customMeasureFile.isEmpty())
+            {
+                doc->SetMPath(RelativeMPath(fileName, customMeasureFile));
+            }
+            qApp->setPatternUnit(doc->MUnit());
         }
-        qApp->setPatternUnit(doc->MUnit());
+        else
+        {
+            if (!customMeasureFile.isEmpty())
+            {
+                doc->SetMPath(RelativeMPath(fileName, customMeasureFile));
+            }
+            qApp->setPatternUnit(doc->MUnit());
+        }
         const QString path = AbsoluteMPath(fileName, doc->MPath());
 
         if (not path.isEmpty())
@@ -4609,6 +4630,20 @@ bool MainWindow::LoadPattern(QString fileName, const QString& customMeasureFile)
         if (qApp->patternType() == MeasurementsType::Unknown)
         {// Show toolbar only if was not uploaded any measurements.
             ToolBarOption();
+        }
+
+        if (currentFormatVersion == VPatternConverter::PatternMaxVer)
+        {
+            // Real read
+            QScopedPointer<VPatternConverter> converter(futureConverter.result());
+            m_curFileFormatVersion = converter->GetCurrentFormatVersion();
+            m_curFileFormatVersionStr = converter->GetFormatVersionStr();
+            doc->setXMLContent(converter->Convert());
+            if (!customMeasureFile.isEmpty())
+            {
+                doc->SetMPath(RelativeMPath(fileName, customMeasureFile));
+            }
+            qApp->setPatternUnit(doc->MUnit());
         }
     }
     catch (VException &e)

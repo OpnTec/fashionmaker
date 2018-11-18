@@ -105,6 +105,8 @@ public:
     quint32        getCursor() const;
     void           setCursor(const quint32 &value);
 
+    virtual void   setXMLContent(const QString &fileName) override;
+
     virtual void   IncrementReferens(quint32 id) const=0;
     virtual void   DecrementReferens(quint32 id) const=0;
 

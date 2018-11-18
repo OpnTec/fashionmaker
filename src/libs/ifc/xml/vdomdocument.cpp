@@ -62,6 +62,7 @@
 #include <QTimer>
 #include <QtConcurrentRun>
 #include <QFutureWatcher>
+#include <QRegularExpression>
 
 namespace
 {
@@ -796,6 +797,65 @@ QString VDomDocument::Patch() const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+QString VDomDocument::GetFormatVersionStr() const
+{
+    const QDomNodeList nodeList = this->elementsByTagName(TagVersion);
+    if (nodeList.isEmpty())
+    {
+        const QString errorMsg(tr("Couldn't get version information."));
+        throw VException(errorMsg);
+    }
+
+    if (nodeList.count() > 1)
+    {
+        const QString errorMsg(tr("Too many tags <%1> in file.").arg(TagVersion));
+        throw VException(errorMsg);
+    }
+
+    const QDomNode domNode = nodeList.at(0);
+    if (domNode.isNull() == false && domNode.isElement())
+    {
+        const QDomElement domElement = domNode.toElement();
+        if (domElement.isNull() == false)
+        {
+            return domElement.text();
+        }
+    }
+    return QString(QStringLiteral("0.0.0"));
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+int VDomDocument::GetFormatVersion(const QString &version)
+{
+    ValidateVersion(version);
+
+    const QStringList ver = version.split(QChar('.'));
+
+    bool ok = false;
+    const int major = ver.at(0).toInt(&ok);
+    if (not ok)
+    {
+        return 0x0;
+    }
+
+    ok = false;
+    const int minor = ver.at(1).toInt(&ok);
+    if (not ok)
+    {
+        return 0x0;
+    }
+
+    ok = false;
+    const int patch = ver.at(2).toInt(&ok);
+    if (not ok)
+    {
+        return 0x0;
+    }
+
+    return (major<<16)|(minor<<8)|(patch);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 bool VDomDocument::setTagText(const QString &tag, const QString &text)
 {
     const QDomNodeList nodeList = this->elementsByTagName(tag);
@@ -990,5 +1050,24 @@ void VDomDocument::SetLabelTemplate(QDomElement &element, const QVector<VLabelTe
 
             element.appendChild(tagLine);
         }
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VDomDocument::ValidateVersion(const QString &version)
+{
+    const QRegularExpression rx(QStringLiteral("^([0-9]|[1-9][0-9]|[1-2][0-5][0-5]).([0-9]|[1-9][0-9]|[1-2][0-5][0-5])"
+                                               ".([0-9]|[1-9][0-9]|[1-2][0-5][0-5])$"));
+
+    if (rx.match(version).hasMatch() == false)
+    {
+        const QString errorMsg(tr("Version \"%1\" invalid.").arg(version));
+        throw VException(errorMsg);
+    }
+
+    if (version == QLatin1String("0.0.0"))
+    {
+        const QString errorMsg(tr("Version \"0.0.0\" invalid."));
+        throw VException(errorMsg);
     }
 }

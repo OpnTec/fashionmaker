@@ -112,7 +112,7 @@ int FvUpdater::CurrentVersion()
         QTextStream in(&file);
         try
         {
-            return VAbstractConverter::GetVersion(in.read(15));
+            return VAbstractConverter::GetFormatVersion(in.read(15));
         }
         catch(const VException &)
         {
@@ -569,7 +569,7 @@ bool FvUpdater::VersionIsIgnored(const QString &version)
     int decVersion = 0x0;
     try
     {
-        decVersion = VAbstractConverter::GetVersion(version);
+        decVersion = VAbstractConverter::GetFormatVersion(version);
     }
     catch (const VException &e)
     {
@@ -608,7 +608,7 @@ void FvUpdater::IgnoreVersion(const QString &version)
     int decVersion = 0x0;
     try
     {
-        decVersion = VAbstractConverter::GetVersion(version);
+        decVersion = VAbstractConverter::GetFormatVersion(version);
     }
     catch (const VException &e)
     {
