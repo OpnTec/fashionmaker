@@ -67,6 +67,7 @@
 #include <QtConcurrentMap>
 #include <QFuture>
 #include <QtConcurrentRun>
+#include <QTimer>
 
 #ifdef Q_CC_MSVC
     #include <functional>
@@ -91,7 +92,7 @@ void GatherCount(int &count, const int nodes)
 
 //---------------------------------------------------------------------------------------------------------------------
 VPattern::VPattern(VContainer *data, VMainGraphicsScene *sceneDraw, VMainGraphicsScene *sceneDetail, QObject *parent)
-    : VAbstractPattern(parent), data(data), sceneDraw(sceneDraw), sceneDetail(sceneDetail)
+    : VAbstractPattern(parent), data(data), sceneDraw(sceneDraw), sceneDetail(sceneDetail), updatePieces()
 {
     SCASSERT(sceneDraw != nullptr)
     SCASSERT(sceneDetail != nullptr)
@@ -255,6 +256,7 @@ void VPattern::Parse(const Document &parse)
         }
         domNode = domNode.nextSibling();
     }
+    QTimer::singleShot(2000, Qt::VeryCoarseTimer, this, SLOT(RefreshPieceGeometry()));
     emit CheckLayout();
 }
 
@@ -877,7 +879,11 @@ void VPattern::ParseDetailElement(QDomElement &domElement, const Document &parse
         initData.parse = parse;
         initData.typeCreation = Source::FromFile;
 
-        VToolSeamAllowance::Create(initData);
+        VToolSeamAllowance *piece = VToolSeamAllowance::Create(initData);
+        if (parse == Document::FullParse)
+        {
+            updatePieces.append(piece);
+        }
         //Rewrite attribute formula. Need for situation when we have wrong formula.
         if (w != initData.width)
         {
@@ -3505,6 +3511,17 @@ quint32 VPattern::LastToolId() const
     const QVector<VToolRecord> localHistory = getLocalHistory(name);
 
     return (not localHistory.isEmpty() ? localHistory.last().getId() : NULL_ID);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VPattern::RefreshPieceGeometry()
+{
+    for(auto piece : qAsConst(updatePieces))
+    {
+        piece->RefreshGeometry(true); // Refresh internal paths
+    }
+    updatePieces.clear();
+    VMainGraphicsView::NewSceneRect(sceneDetail, qApp->getSceneView());
 }
 
 //---------------------------------------------------------------------------------------------------------------------

@@ -38,6 +38,7 @@ class VMainGraphicsScene;
 class VNodeDetail;
 struct VToolSinglePointInitData;
 struct VToolLinePointInitData;
+class VToolSeamAllowance;
 
 /**
  * @brief The VPattern class working with pattern file.
@@ -119,6 +120,9 @@ public slots:
 protected:
     virtual void   customEvent(QEvent * event) override;
 
+private slots:
+    void RefreshPieceGeometry();
+
 private:
     Q_DISABLE_COPY(VPattern)
 
@@ -127,6 +131,7 @@ private:
 
     VMainGraphicsScene *sceneDraw;
     VMainGraphicsScene *sceneDetail;
+    QVector<VToolSeamAllowance *> updatePieces;
 
     VNodeDetail    ParseDetailNode(const QDomElement &domElement) const;
 

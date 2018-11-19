@@ -145,7 +145,6 @@ VToolSeamAllowance *VToolSeamAllowance::Create(VToolSeamAllowanceInitData &initD
         initData.scene->addItem(piece);
         VMainGraphicsView::NewSceneRect(initData.scene, qApp->getSceneView(), piece);
         VAbstractPattern::AddTool(initData.id, piece);
-        piece->RefreshGeometry(true); // Refresh internal paths
     }
     //Very important to delete it. Only this tool need this special variable.
     initData.data->RemoveVariable(currentSeamAllowance);
