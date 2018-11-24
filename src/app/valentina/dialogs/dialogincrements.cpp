@@ -736,7 +736,7 @@ void DialogIncrements::RefreshPattern()
         const int row = ui->tableWidgetIncrement->currentRow();
         const int rowPC = ui->tableWidgetPC->currentRow();
 
-        doc->LiteParseTree(Document::LiteParse);
+        doc->LiteParseTree(Document::FullLiteParse);
 
         ui->tableWidgetIncrement->blockSignals(true);
         ui->tableWidgetIncrement->selectRow(row);

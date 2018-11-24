@@ -338,9 +338,8 @@ void VContainer::AddVariable(const QString& name, const QSharedPointer<T> &var)
     else
     {
         d->variables.insert(name, var);
+        uniqueNames[d->nspace].insert(name);
     }
-
-    uniqueNames[d->nspace].insert(name);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

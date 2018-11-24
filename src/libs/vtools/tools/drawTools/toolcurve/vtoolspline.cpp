@@ -216,7 +216,7 @@ VToolSpline *VToolSpline::Create(VToolSplineInitData &initData)
     auto p4 = initData.data->GeometricObject<VPointF>(initData.point4);
 
     auto* spline = new VSpline(*p1, *p4, calcAngle1, initData.a1, calcAngle2, initData.a2, calcLength1, initData.l1,
-                              calcLength2, initData.l2);
+                               calcLength2, initData.l2);
     if (initData.duplicate > 0)
     {
         spline->SetDuplicate(initData.duplicate);

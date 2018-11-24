@@ -153,6 +153,9 @@ void VPattern::Parse(const Document &parse)
         case Document::LiteParse:
             qCDebug(vXML, "Lite parse.");
             break;
+        case Document::FullLiteParse:
+            qCDebug(vXML, "Full lite parse.");
+            break;
         case Document::LitePPParse:
             qCDebug(vXML, "Lite pattern piece parse.");
             break;
@@ -162,12 +165,9 @@ void VPattern::Parse(const Document &parse)
 
     SCASSERT(sceneDraw != nullptr)
     SCASSERT(sceneDetail != nullptr)
-    QStringList tags = QStringList() << TagDraw << TagIncrements << TagDescription << TagNotes
-                                     << TagMeasurements << TagVersion << TagGradation << TagImage << TagUnit
-                                     << TagPatternName << TagPatternNum << TagCompanyName << TagCustomerName
-                                     << TagPatternLabel << TagPatternMaterials << TagPreviewCalculations
-                                     << TagFinalMeasurements;
+    static const QStringList tags({TagDraw, TagIncrements, TagPreviewCalculations});
     PrepareForParse(parse);
+
     QDomNode domNode = documentElement().firstChild();
     while (domNode.isNull() == false)
     {
@@ -199,57 +199,21 @@ void VPattern::Parse(const Document &parse)
                         ParseDrawElement(domElement, parse);
                         break;
                     case 1: // TagIncrements
-                        qCDebug(vXML, "Tag increments.");
-                        ParseIncrementsElement(domElement, parse);
+                        if (parse != Document::LiteParse)
+                        {
+                            qCDebug(vXML, "Tag increments.");
+                            ParseIncrementsElement(domElement, parse);
+                        }
                         break;
-                    case 2: // TagDescription
-                        qCDebug(vXML, "Tag description.");
-                        break;
-                    case 3: // TagNotes
-                        qCDebug(vXML, "Tag notes.");
-                        break;
-                    case 4: // TagMeasurements
-                        qCDebug(vXML, "Tag measurements.");
-                        break;
-                    case 5: // TagVersion
-                        qCDebug(vXML, "Tag version.");
-                        break;
-                    case 6: // TagGradation
-                        qCDebug(vXML, "Tag gradation.");
-                        break;
-                    case 7: // TagImage
-                        qCDebug(vXML, "Tag image.");
-                        break;
-                    case 8: // TagUnit
-                        qCDebug(vXML, "Tag unit.");
-                        break;
-                    case 9: // TagPatternName
-                        qCDebug(vXML, "Pattern name.");
-                        break;
-                    case 10: // TagPatternNumber
-                        qCDebug(vXML, "Pattern number.");
-                        break;
-                    case 11: // TagCompanyName
-                        qCDebug(vXML, "Company name.");
-                        break;
-                    case 12: // TagCustomerName
-                        qCDebug(vXML, "Customer name.");
-                        break;
-                    case 13: // TagPatternLabel
-                        qCDebug(vXML, "Pattern label.");
-                        break;
-                    case 14: // TagPatternMaterials
-                        qCDebug(vXML, "Pattern materials.");
-                        break;
-                    case 15: // TagPreviewCalculations
-                        qCDebug(vXML, "Tag prewiew calculations.");
-                        ParseIncrementsElement(domElement, parse);
-                        break;
-                    case 16: // TagFinalMeasurements
-                        qCDebug(vXML, "Tag final measurements.");
+                    case 2: // TagPreviewCalculations
+                        if (parse != Document::LiteParse)
+                        {
+                            qCDebug(vXML, "Tag prewiew calculations.");
+                            ParseIncrementsElement(domElement, parse);
+                        }
                         break;
                     default:
-                        qCDebug(vXML, "Wrong tag name %s", qUtf8Printable(domElement.tagName()));
+                        qCDebug(vXML, "Ignoring tag %s", qUtf8Printable(domElement.tagName()));
                         break;
                 }
             }
@@ -561,6 +525,7 @@ void VPattern::LiteParseTree(const Document &parse)
             case Document::LitePPParse:
                 ParseCurrentPP();
                 break;
+            case Document::FullLiteParse:
             case Document::LiteParse:
                 Parse(parse);
                 break;
@@ -768,23 +733,15 @@ void VPattern::ParseDrawMode(const QDomNode &node, const Document &parse, const 
 {
     SCASSERT(sceneDraw != nullptr)
     SCASSERT(sceneDetail != nullptr)
-    VMainGraphicsScene *scene = nullptr;
-    if (mode == Draw::Calculation)
-    {
-        scene = sceneDraw;
-    }
-    else
-    {
-        scene = sceneDetail;
-    }
-    const QStringList tags = QStringList() << TagPoint
-                                           << TagLine
-                                           << TagSpline
-                                           << TagArc
-                                           << TagTools
-                                           << TagOperation
-                                           << TagElArc
-                                           << TagPath;
+    VMainGraphicsScene *scene = mode == Draw::Calculation ? sceneDraw : sceneDetail;
+    static const QStringList tags({TagPoint,
+                                   TagLine,
+                                   TagSpline,
+                                   TagArc,
+                                   TagTools,
+                                   TagOperation,
+                                   TagElArc,
+                                   TagPath});
     const QDomNodeList nodeList = node.childNodes();
     const qint32 num = nodeList.size();
     for (qint32 i = 0; i < num; ++i)
@@ -1167,31 +1124,31 @@ void VPattern::ParsePointElement(VMainGraphicsScene *scene, QDomElement &domElem
     Q_ASSERT_X(not domElement.isNull(), Q_FUNC_INFO, "domElement is null");
     Q_ASSERT_X(not type.isEmpty(), Q_FUNC_INFO, "type of point is empty");
 
-    QStringList points = QStringList() << VToolBasePoint::ToolType                  /*0*/
-                                       << VToolEndLine::ToolType                    /*1*/
-                                       << VToolAlongLine::ToolType                  /*2*/
-                                       << VToolShoulderPoint::ToolType              /*3*/
-                                       << VToolNormal::ToolType                     /*4*/
-                                       << VToolBisector::ToolType                   /*5*/
-                                       << VToolLineIntersect::ToolType              /*6*/
-                                       << VToolPointOfContact::ToolType             /*7*/
-                                       << VNodePoint::ToolType                      /*8*/
-                                       << VToolHeight::ToolType                     /*9*/
-                                       << VToolTriangle::ToolType                   /*10*/
-                                       << VToolPointOfIntersection::ToolType        /*11*/
-                                       << VToolCutSpline::ToolType                  /*12*/
-                                       << VToolCutSplinePath::ToolType              /*13*/
-                                       << VToolCutArc::ToolType                     /*14*/
-                                       << VToolLineIntersectAxis::ToolType          /*15*/
-                                       << VToolCurveIntersectAxis::ToolType         /*16*/
-                                       << VToolPointOfIntersectionArcs::ToolType    /*17*/
-                                       << VToolPointOfIntersectionCircles::ToolType /*18*/
-                                       << VToolPointFromCircleAndTangent::ToolType  /*19*/
-                                       << VToolPointFromArcAndTangent::ToolType     /*20*/
-                                       << VToolTrueDarts::ToolType                  /*21*/
-                                       << VToolPointOfIntersectionCurves::ToolType  /*22*/
-                                       << VToolPin::ToolType                        /*23*/
-                                       << VToolPlaceLabel::ToolType;                /*24*/
+    static const QStringList points({VToolBasePoint::ToolType,                  /*0*/
+                                     VToolEndLine::ToolType,                    /*1*/
+                                     VToolAlongLine::ToolType,                  /*2*/
+                                     VToolShoulderPoint::ToolType,              /*3*/
+                                     VToolNormal::ToolType,                     /*4*/
+                                     VToolBisector::ToolType,                   /*5*/
+                                     VToolLineIntersect::ToolType,              /*6*/
+                                     VToolPointOfContact::ToolType,             /*7*/
+                                     VNodePoint::ToolType,                      /*8*/
+                                     VToolHeight::ToolType,                     /*9*/
+                                     VToolTriangle::ToolType,                   /*10*/
+                                     VToolPointOfIntersection::ToolType,        /*11*/
+                                     VToolCutSpline::ToolType,                  /*12*/
+                                     VToolCutSplinePath::ToolType,              /*13*/
+                                     VToolCutArc::ToolType,                     /*14*/
+                                     VToolLineIntersectAxis::ToolType,          /*15*/
+                                     VToolCurveIntersectAxis::ToolType,         /*16*/
+                                     VToolPointOfIntersectionArcs::ToolType,    /*17*/
+                                     VToolPointOfIntersectionCircles::ToolType, /*18*/
+                                     VToolPointFromCircleAndTangent::ToolType,  /*19*/
+                                     VToolPointFromArcAndTangent::ToolType,     /*20*/
+                                     VToolTrueDarts::ToolType,                  /*21*/
+                                     VToolPointOfIntersectionCurves::ToolType,  /*22*/
+                                     VToolPin::ToolType,                        /*23*/
+                                     VToolPlaceLabel::ToolType});               /*24*/
     switch (points.indexOf(type))
     {
         case 0: //VToolBasePoint::ToolType
@@ -3539,14 +3496,14 @@ void VPattern::ParseSplineElement(VMainGraphicsScene *scene, QDomElement &domEle
     Q_ASSERT_X(domElement.isNull() == false, Q_FUNC_INFO, "domElement is null");
     Q_ASSERT_X(type.isEmpty() == false, Q_FUNC_INFO, "type of spline is empty");
 
-    QStringList splines = QStringList() << VToolSpline::OldToolType        /*0*/
-                                        << VToolSpline::ToolType           /*1*/
-                                        << VToolSplinePath::OldToolType    /*2*/
-                                        << VToolSplinePath::ToolType       /*3*/
-                                        << VNodeSpline::ToolType           /*4*/
-                                        << VNodeSplinePath::ToolType       /*5*/
-                                        << VToolCubicBezier::ToolType      /*6*/
-                                        << VToolCubicBezierPath::ToolType; /*7*/
+    static const QStringList splines({VToolSpline::OldToolType,        /*0*/
+                                      VToolSpline::ToolType,           /*1*/
+                                      VToolSplinePath::OldToolType,    /*2*/
+                                      VToolSplinePath::ToolType,       /*3*/
+                                      VNodeSpline::ToolType,           /*4*/
+                                      VNodeSplinePath::ToolType,       /*5*/
+                                      VToolCubicBezier::ToolType,      /*6*/
+                                      VToolCubicBezierPath::ToolType});/*7*/
     switch (splines.indexOf(type))
     {
         case 0: //VToolSpline::OldToolType
@@ -4272,17 +4229,21 @@ void VPattern::PrepareForParse(const Document &parse)
         cursor = 0;
         history.clear();
     }
-    else if (parse == Document::LiteParse)
+    else if (parse == Document::LiteParse || parse == Document::FullLiteParse)
     {
-        data->ClearUniqueNames();
         Q_STATIC_ASSERT_X(static_cast<int>(VarType::Unknown) == 8, "Check that you used all types");
-        data->ClearVariables(QVector<VarType>({VarType::Increment,
-                                               VarType::LineAngle,
-                                               VarType::LineLength,
-                                               VarType::CurveLength,
-                                               VarType::CurveCLength,
-                                               VarType::ArcRadius,
-                                               VarType::CurveAngle}));
+        QVector<VarType> types({VarType::LineAngle,
+                                VarType::LineLength,
+                                VarType::CurveLength,
+                                VarType::CurveCLength,
+                                VarType::ArcRadius,
+                                VarType::CurveAngle});
+        if (parse == Document::FullLiteParse)
+        {
+            types.append(VarType::Increment);
+        }
+
+        data->ClearVariables(types);
     }
 }
 

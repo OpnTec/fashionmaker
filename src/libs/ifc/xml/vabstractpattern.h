@@ -48,7 +48,7 @@ class QDomElement;
 class VPiecePath;
 class VPieceNode;
 
-enum class Document : char { LiteParse, LitePPParse, FullParse };
+enum class Document : char { FullLiteParse, LiteParse, LitePPParse, FullParse };
 enum class LabelType : char {NewPatternPiece, NewLabel};
 
 // Don't touch values!!!. Same values stored in xml.
