@@ -125,6 +125,7 @@ MainWindowsNoGUI::MainWindowsNoGUI(QWidget *parent)
       actionDockWidgetGroups(nullptr),
       isNoScaling(false),
       isLayoutStale(true),
+      isNeedAutosave(false),
       ignorePrinterFields(false),
       margins(),
       paperSize(),

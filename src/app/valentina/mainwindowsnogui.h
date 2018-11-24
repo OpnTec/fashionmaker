@@ -91,6 +91,7 @@ protected:
 
     bool isNoScaling;
     bool isLayoutStale;
+    bool isNeedAutosave;
     bool ignorePrinterFields;
     QMarginsF margins;
     QSizeF paperSize;

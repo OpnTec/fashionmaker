@@ -3450,6 +3450,7 @@ void MainWindow::PatternChangesWereSaved(bool saved)
         setWindowModified(state);
         not patternReadOnly ? ui->actionSave->setEnabled(state): ui->actionSave->setEnabled(false);
         isLayoutStale = true;
+        isNeedAutosave = not saved;
     }
 }
 
@@ -3725,13 +3726,14 @@ bool MainWindow::SavePattern(const QString &fileName, QString &error)
  */
 void MainWindow::AutoSavePattern()
 {
-    qCDebug(vMainWindow, "Autosaving pattern.");
-
-    if (qApp->GetPatternPath().isEmpty() == false && this->isWindowModified() == true)
+    if (not qApp->GetPatternPath().isEmpty() && isWindowModified() && isNeedAutosave)
     {
-        QString autofile = qApp->GetPatternPath() + *autosavePrefix;
+        qCDebug(vMainWindow, "Autosaving pattern.");
         QString error;
-        SavePattern(autofile, error);
+        if (SavePattern(qApp->GetPatternPath() + *autosavePrefix, error))
+        {
+            isNeedAutosave = false;
+        }
     }
 }
 
