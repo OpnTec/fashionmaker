@@ -44,6 +44,7 @@
 #include "../vgeometry/vsplinepath.h"
 #include "../vgeometry/vplacelabelitem.h"
 #include "../ifc/xml/vpatternconverter.h"
+#include "../ifc/exception/vexceptionwrongid.h"
 #include "../undocommands/addpiece.h"
 #include "../undocommands/deletepiece.h"
 #include "../undocommands/movepiece.h"
@@ -961,6 +962,12 @@ void VToolSeamAllowance::FullUpdateFromGuiApply()
 //---------------------------------------------------------------------------------------------------------------------
 void VToolSeamAllowance::AddToFile()
 {
+    const QDomElement duplicate = doc->elementById(m_id);
+    if (not duplicate.isNull())
+    {
+        throw VExceptionWrongId(tr("This id (%1) is not unique.").arg(m_id), duplicate);
+    }
+
     const VPiece piece = VAbstractTool::data.GetPiece(m_id);
 
     QDomElement domElement = doc->createElement(getTagName());

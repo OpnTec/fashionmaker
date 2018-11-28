@@ -40,6 +40,7 @@
 #include "../ifc/ifcdef.h"
 #include "../ifc/xml/vdomdocument.h"
 #include "../ifc/xml/vabstractpattern.h"
+#include "../ifc/exception/vexceptionwrongid.h"
 #include "../../undocommands/addtocalc.h"
 #include "../../undocommands/savetooloptions.h"
 #include "../qmuparser/qmuparsererror.h"
@@ -229,6 +230,12 @@ void VDrawTool::ChangeLabelVisibility(quint32 id, bool visible)
  */
 void VDrawTool::AddToCalculation(const QDomElement &domElement)
 {
+    const QDomElement duplicate = doc->elementById(m_id);
+    if (not duplicate.isNull())
+    {
+        throw VExceptionWrongId(tr("This id (%1) is not unique.").arg(m_id), duplicate);
+    }
+
     AddToCalc *addToCal = new AddToCalc(domElement, doc);
     connect(addToCal, &AddToCalc::NeedFullParsing, doc, &VAbstractPattern::NeedFullParsing);
     qApp->getUndoStack()->push(addToCal);

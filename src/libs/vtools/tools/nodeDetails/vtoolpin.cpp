@@ -69,6 +69,7 @@ VToolPin *VToolPin::Create(VToolPinInitData initData)
         catch (const VExceptionBadId &e)
         { // Possible case. Parent was deleted, but the node object is still here.
             Q_UNUSED(e)
+            initData.data->UpdateId(initData.id);
             return nullptr;// Just ignore
         }
         VPointF *pinPoint = new VPointF(*point);

@@ -273,6 +273,11 @@ bool VDomDocument::find(QHash<quint32, QDomElement> &cache, const QDomElement &n
     {
         const quint32 elementId = GetParametrUInt(node, AttrId, NULL_ID_STR);
 
+        if (cache.contains(elementId))
+        {
+            qWarning() << tr("Not unique id (%1)").arg(elementId);
+        }
+
         cache.insert(elementId, node);
         if (elementId == id)
         {
@@ -597,7 +602,7 @@ void VDomDocument::CollectId(const QDomElement &node, QVector<quint32> &vector) 
         const quint32 id = GetParametrId(node);
         if (vector.contains(id))
         {
-            throw VExceptionWrongId(QString("This id (%1) is not unique.").arg(id), node);
+            throw VExceptionWrongId(tr("This id (%1) is not unique.").arg(id), node);
         }
         vector.append(id);
     }

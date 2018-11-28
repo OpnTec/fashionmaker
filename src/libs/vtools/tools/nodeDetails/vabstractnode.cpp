@@ -37,6 +37,7 @@
 
 #include "../ifc/ifcdef.h"
 #include "../ifc/xml/vabstractpattern.h"
+#include "../ifc/exception/vexceptionwrongid.h"
 #include "../vgeometry/vgobject.h"
 #include "../vmisc/vabstractapplication.h"
 #include "../vmisc/def.h"
@@ -175,6 +176,12 @@ void VAbstractNode::ToolCreation(const Source &typeCreation)
  */
 void VAbstractNode::AddToModeling(const QDomElement &domElement)
 {
+    const QDomElement duplicate = doc->elementById(m_id);
+    if (not duplicate.isNull())
+    {
+        throw VExceptionWrongId(tr("This id (%1) is not unique.").arg(m_id), duplicate);
+    }
+
     QDomElement modeling;
     if (m_drawName.isEmpty())
     {

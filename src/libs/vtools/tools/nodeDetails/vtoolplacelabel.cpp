@@ -97,6 +97,7 @@ VToolPlaceLabel *VToolPlaceLabel::Create(VToolPlaceLabelInitData &initData)
         catch (const VExceptionBadId &e)
         { // Possible case. Parent was deleted, but the node object is still here.
             Q_UNUSED(e)
+            initData.data->UpdateId(initData.id);
             return nullptr;// Just ignore
         }
         node->setName(point->name());

@@ -45,6 +45,7 @@
 #include "../ifc/xml/vabstractconverter.h"
 #include "../ifc/xml/vdomdocument.h"
 #include "../ifc/xml/vpatternconverter.h"
+#include "../ifc/exception/vexceptionwrongid.h"
 #include "../vgeometry/varc.h"
 #include "../vgeometry/vellipticalarc.h"
 #include "../vgeometry/vsplinepath.h"
@@ -1835,6 +1836,12 @@ void VToolUnionDetails::AddDetail(QDomElement &domElement, const VPiece &d) cons
  */
 void VToolUnionDetails::AddToModeling(const QDomElement &domElement)
 {
+    const QDomElement duplicate = doc->elementById(m_id);
+    if (not duplicate.isNull())
+    {
+        throw VExceptionWrongId(tr("This id (%1) is not unique.").arg(m_id), duplicate);
+    }
+
     const QString drawName = DrawName(doc, d1id, d2id);
     SCASSERT(not drawName.isEmpty())
 
