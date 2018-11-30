@@ -81,6 +81,7 @@ DialogEditLabel::DialogEditLabel(VAbstractPattern *doc, QWidget *parent)
     InitPlaceholders();
     InitPlaceholdersMenu();
 
+    m_placeholdersMenu->setStyleSheet("QMenu { menu-scrollable: 1; }");
     ui->pushButtonInsert->setMenu(m_placeholdersMenu);
 }
 

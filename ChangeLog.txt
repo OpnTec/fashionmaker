@@ -2,6 +2,7 @@
 - [#892] Show tooltip for piece node point.
 - [#894] Quick way to disable a passmark.
 - [#895] Improve path validation. Do not allow repeat the same curve twice.
+- Improve UI. Make placeholder menu scrollable.
 
 # Version 0.6.2 (unreleased)
 - [#903] Bug in tool Cut Spline path.
