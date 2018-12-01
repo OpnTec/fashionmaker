@@ -414,6 +414,7 @@
                                       <xs:attribute name="reverse" type="xs:unsignedInt"/>
                                       <xs:attribute name="excluded" type="xs:boolean"/>
                                       <xs:attribute name="softExcluded" type="xs:boolean"/>
+                                      <xs:attribute name="bufferSoftExcluded" type="xs:boolean"/>
                                       <xs:attribute name="checkUniqueness" type="xs:boolean"/>
                                       <xs:attribute name="before" type="xs:double"/>
                                       <xs:attribute name="after" type="xs:double"/>
@@ -457,6 +458,7 @@
                                             <xs:attribute name="reverse" type="xs:unsignedInt"/>
                                             <xs:attribute name="excluded" type="xs:boolean"/>
                                             <xs:attribute name="softExcluded" type="xs:boolean"/>
+                                            <xs:attribute name="bufferSoftExcluded" type="xs:boolean"/>
                                             <xs:attribute name="checkUniqueness" type="xs:boolean"/>
                                             <xs:attribute name="before" type="xs:string"/>
                                             <xs:attribute name="after" type="xs:string"/>
@@ -647,6 +649,7 @@
                                     <xs:attribute name="reverse" type="xs:unsignedInt"/>
                                     <xs:attribute name="excluded" type="xs:boolean"/>
                                     <xs:attribute name="softExcluded" type="xs:boolean"/>
+                                    <xs:attribute name="bufferSoftExcluded" type="xs:boolean"/>
                                     <xs:attribute name="checkUniqueness" type="xs:boolean"/>
                                     <xs:attribute name="before" type="xs:string"/>
                                     <xs:attribute name="after" type="xs:string"/>
