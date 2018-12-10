@@ -1618,7 +1618,7 @@ void MainWindow::LoadIndividual()
             PatternChangesWereSaved(false);
             ui->actionEditCurrent->setEnabled(true);
             statusBar()->showMessage(tr("Measurements loaded"), 5000);
-            doc->LiteParseTree(Document::LiteParse);
+            doc->LiteParseTree(Document::FullLiteParse);
 
             UpdateWindowTitle();
         }
@@ -1670,7 +1670,7 @@ void MainWindow::LoadMultisize()
             PatternChangesWereSaved(false);
             ui->actionEditCurrent->setEnabled(true);
             statusBar()->showMessage(tr("Measurements loaded"), 5000);
-            doc->LiteParseTree(Document::LiteParse);
+            doc->LiteParseTree(Document::FullLiteParse);
 
             UpdateWindowTitle();
 
@@ -1811,7 +1811,7 @@ void MainWindow::SyncMeasurements()
             qCDebug(vMainWindow, "%s", qUtf8Printable(msg));
             statusBar()->showMessage(msg, 5000);
             VWidgetPopup::PopupMessage(this, msg);
-            doc->LiteParseTree(Document::LiteParse);
+            doc->LiteParseTree(Document::FullLiteParse);
             mChanges = false;
             mChangesAsked = true;
             UpdateWindowTitle();
