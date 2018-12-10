@@ -3476,6 +3476,7 @@ void VPattern::RefreshPieceGeometry()
     for(auto piece : qAsConst(updatePieces))
     {
         piece->RefreshGeometry(true); // Refresh internal paths
+        QApplication::processEvents();
     }
     updatePieces.clear();
     VMainGraphicsView::NewSceneRect(sceneDetail, qApp->getSceneView());
