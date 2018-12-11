@@ -30,7 +30,7 @@
 #include "../vpatterndb/vcontainer.h"
 #include "varc.h"
 
-#include <QtGlobal>
+#include <qnumeric.h>
 #include <QPolygonF>
 #include <QTransform>
 

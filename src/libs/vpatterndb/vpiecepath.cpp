@@ -35,7 +35,7 @@
 #include "../vmisc/vabstractapplication.h"
 #include "../ifc/exception/vexceptionobjecterror.h"
 
-#include <QtGlobal>
+#include <qnumeric.h>
 #include <QPainterPath>
 
 namespace
