@@ -49,6 +49,7 @@ before_install:
     if [[ "$LEGACY" = false ]]; then
       brew install qt5;
     else
+      unset SSL_CERT_FILE;
       brew unlink qt5;
       brew install https://raw.githubusercontent.com/Homebrew/homebrew-core/106d0878ee812cb8f5c403f717bdebe836445aee/Formula/qt5.rb;
     fi
