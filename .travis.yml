@@ -23,7 +23,7 @@ matrix:
     env: 
     - DEPLOY=true
     - LEGACY=true
-    osx_image: xcode9
+    osx_image: xcode8
 before_install:
 - |
   if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then
