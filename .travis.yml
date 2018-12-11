@@ -14,7 +14,15 @@ matrix:
       - '$HOME/.sonar/cache'
   - os: osx
     compiler: clang
-    env: DEPLOY=true
+    env: 
+    - DEPLOY=true
+    - LEGACY=false
+    osx_image: xcode10
+  - os: osx
+    compiler: clang
+    env: 
+    - DEPLOY=true
+    - LEGACY=true
     osx_image: xcode9
 before_install:
 - |
@@ -38,7 +46,12 @@ before_install:
     sudo dpkg -i ccache_3.3.4-1_amd64.deb;
   else
     brew update > /dev/null;
-    brew install qt5;
+    if [[ "$LEGACY" = false ]]; then
+      brew install qt5;
+    else
+      brew unlink qt5;
+      brew install https://raw.githubusercontent.com/Homebrew/homebrew-core/3c4eff9a60c51514d1896f0ea4ebe00069b2fa9a/Formula/qt5.rb
+    fi
     chmod -R 755 /usr/local/opt/qt5/*
   fi
 before_script:
@@ -85,7 +98,11 @@ before_deploy:
 - |
   if [[ "$DEPLOY" == "true" ]]; then
     ../scripts/macfixqtdylibrpath.py $TRAVIS_BUILD_DIR/build/src/app/valentina/bin/Valentina.app;
-    tar -C $TRAVIS_BUILD_DIR/build/src/app/valentina/bin --exclude "*.DS_Store" -cvzf valentina-osx-${TRAVIS_COMMIT}.tar.gz Valentina.app/;
+    if [[ "$LEGACY" = false ]]; then
+      tar -C $TRAVIS_BUILD_DIR/build/src/app/valentina/bin --exclude "*.DS_Store" -cvzf valentina-osx-${TRAVIS_COMMIT}.tar.gz Valentina.app/;
+    else
+      tar -C $TRAVIS_BUILD_DIR/build/src/app/valentina/bin --exclude "*.DS_Store" -cvzf valentina-osx-${TRAVIS_COMMIT}-legacy.tar.gz Valentina.app/;
+    fi
   fi
 deploy:
   edge:
