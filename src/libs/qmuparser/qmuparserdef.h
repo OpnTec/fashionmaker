@@ -25,10 +25,7 @@
 #include <QMap>
 #include <QString>
 #include <locale>
-
-#ifdef Q_CC_MSVC
-    #include <ciso646>
-#endif /* Q_CC_MSVC */
+#include <ciso646>
 
 #include "qmuparserfixes.h"
 

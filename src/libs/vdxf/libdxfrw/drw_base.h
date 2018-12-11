@@ -19,10 +19,7 @@
 #include <list>
 #include <cmath>
 #include <QtGlobal>
-
-#ifdef Q_CC_MSVC
-    #include <ciso646>
-#endif /* Q_CC_MSVC */
+#include <ciso646>
 
 #ifdef DRW_ASSERTS
 # define drw_assert(a) assert(a)

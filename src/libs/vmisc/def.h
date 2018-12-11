@@ -46,9 +46,7 @@
 
 template <class T> class QSharedPointer;
 
-#ifdef Q_CC_MSVC
-    #include <ciso646>
-#endif /* Q_CC_MSVC */
+#include <ciso646>
 
 class QComboBox;
 class QMarginsF;

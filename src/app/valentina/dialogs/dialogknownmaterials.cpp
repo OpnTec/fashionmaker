@@ -28,10 +28,7 @@
 
 #include "dialogknownmaterials.h"
 #include "ui_dialogknownmaterials.h"
-
-#ifdef Q_CC_MSVC
-    #include <ciso646>
-#endif /* Q_CC_MSVC */
+#include <ciso646>
 
 //---------------------------------------------------------------------------------------------------------------------
 DialogKnownMaterials::DialogKnownMaterials(QWidget *parent)

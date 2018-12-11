@@ -30,10 +30,7 @@
 #include "../vmisc/vlockguard.h"
 
 #include <QtTest>
-
-#ifdef Q_CC_MSVC
-    #include <ciso646>
-#endif /* Q_CC_MSVC */
+#include <ciso646>
 
 //---------------------------------------------------------------------------------------------------------------------
 TST_VLockGuard::TST_VLockGuard(QObject *parent)

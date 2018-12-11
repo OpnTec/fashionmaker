@@ -31,10 +31,8 @@
 #include "../vmisc/logging.h"
 
 #include <QtTest>
+#include <ciso646>
 
-#ifdef Q_CC_MSVC
-    #include <ciso646>
-#endif /* Q_CC_MSVC */
 //---------------------------------------------------------------------------------------------------------------------
 TST_VCommandLine::TST_VCommandLine(QObject *parent)
     :QObject(parent)

@@ -85,9 +85,7 @@
 QT_WARNING_PUSH
 QT_WARNING_DISABLE_GCC("-Wattributes")
 
-#ifdef Q_CC_MSVC
-    #include <ciso646>
-#endif /* Q_CC_MSVC */
+#include <ciso646>
 
 class QLocale;
 class QChar;

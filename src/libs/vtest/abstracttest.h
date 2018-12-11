@@ -35,9 +35,7 @@
 
 template <class T> class QVector;
 
-#ifdef Q_CC_MSVC
 #include <ciso646>
-#endif /* Q_CC_MSVC */
 
 #ifdef __GNUC__
 #define V_UNUSED __attribute__ ((unused))

@@ -52,9 +52,7 @@ class QPointF;
 class QPolygonF;
 class QRectF;
 
-#ifdef Q_CC_MSVC
-    #include <ciso646>
-#endif /* Q_CC_MSVC */
+#include <ciso646>
 
 //---------------------------------------------------------------------------------------------------------------------
 static inline QPaintEngine::PaintEngineFeatures svgEngineFeatures()
