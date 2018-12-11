@@ -96,12 +96,10 @@ QString VPE::VColorPropertyEditor::GetColorString(const QColor& color)
 
 void VPE::VColorPropertyEditor::onToolButtonClicked()
 {
-    bool ok = false;
-    QRgb oldRgba = Color.rgba();
-    QRgb newRgba = QColorDialog::getRgba(oldRgba, &ok, this);
-    if (ok && newRgba != oldRgba)
+    const QColor newColor = QColorDialog::getColor(Color, this, QString(), QColorDialog::ShowAlphaChannel);
+    if (newColor.isValid() && newColor != Color)
     {
-        SetColor(QColor::fromRgba(newRgba));
+        SetColor(newColor);
         emit dataChangedByUser(Color, this);
         UserChangeEvent *event = new UserChangeEvent();
         QCoreApplication::postEvent ( this, event );
