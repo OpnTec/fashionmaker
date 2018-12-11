@@ -50,7 +50,7 @@ before_install:
       brew install qt5;
     else
       brew unlink qt5;
-      brew install https://raw.githubusercontent.com/Homebrew/homebrew-core/3c4eff9a60c51514d1896f0ea4ebe00069b2fa9a/Formula/qt5.rb
+      brew install https://raw.githubusercontent.com/Homebrew/homebrew-core/106d0878ee812cb8f5c403f717bdebe836445aee/Formula/qt5.rb
     fi
     chmod -R 755 /usr/local/opt/qt5/*
   fi
