@@ -7,7 +7,7 @@
 # File with common stuff for whole project
 include(../../../common.pri)
 
-QT += widgets printsupport concurrent
+QT += core widgets printsupport concurrent
 
 # Name of library
 TARGET = vgeometry
