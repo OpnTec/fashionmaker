@@ -34,6 +34,7 @@
 #include "../vpatterndb/vtranslatevars.h"
 #include "../vpatterndb/calculator.h"
 #include "../vtools/dialogs/support/dialogeditwrongformula.h"
+#include <qnumeric.h>
 
 #define DIALOG_MAX_FORMULA_HEIGHT 64
 
