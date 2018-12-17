@@ -118,6 +118,6 @@ deploy:
     all_branches: true
     condition: $DEPLOY = true
 addons:
-  sonarcloud:
+  sonarqube:
     token:
       secure: "re+Ddh0uhun8Sj4ibGR4D9wTQlIMyl3UaXvoWtn4TTkuKQpiOPjbqDbNRuPLkwjFk+5GqVKeCMkBBPx7o3aJ6dYaurJpNpVKLG3e3cMWmCEqP3O38JRVa8EZQ1R0hIz6eJS2BNAwF8aOR5zHmQQ2lPrKQzawMsry4TK22jpxNs8g4WEOrxEVVH/oJh8q/cB/k3nKUvy47EHVQ/jLj6Sq5821Ktm3KjAGsw/wuYWy7GTG1tKL4/N7C0IeUsRu3022kN8w1LJf7WXXLGDON3k+Ui6G4nqwbFH+Jftx3oMqY4hauz4PXUx6Nx3zCvv6BqC83qm8p5yovuHy1IOqPbKiaDPDp9VmbQxtLVe1me6Z0smNPoqmxwtUvub+cKAymZ5SVfhpZT1PcIB0xuHPi/FOWvKoqXhiyBoQxF8cGerSfCruWJKChQgY0ysTbIRqT4MM7seYib7AW68QCle61/q6vPjEm5tdCzvmJvZURtb+Q4qVLzuOEL/QqTN1lNO2b4HBMPOGj0MGG4dMYZ8XTEITFnETeF7O2wZ+HvvLi/TExI+Wfhm28mofXBAHwvdSXqNTSynPfC1H26xHf09ApumjixbZBcZUaaDc6K2ne3i/DU/ZgoovOIyduxmF/HFp836yKIvcJr+18j42rcUyTq2qSOQHdsttM4fy7ZnK8b7sQc8="
