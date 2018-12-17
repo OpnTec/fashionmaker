@@ -87,7 +87,10 @@ script:
     sonar-scanner;
   else
     make -j1;
-  fi  
+  fi
+after_failure:
+  - if [ -f /home/travis/build/dismine/Valentina_git/bw-outputs/build-wrapper-dump.json ]; then cat /home/travis/build/dismine/Valentina_git/bw-outputs/build-wrapper-dump.json; fi  
+  - if [ -f /home/travis/build/dismine/Valentina_git/bw-outputs/build-wrapper.log ]; then cat /home/travis/build/dismine/Valentina_git/bw-outputs/build-wrapper.log; fi 
 notifications:
   email:
     recipients:
