@@ -7,6 +7,7 @@
 # Version 0.6.2 (unreleased)
 - [#903] Bug in tool Cut Spline path.
 - [#905] Valentina crashes with error: This id is not unique.
+- [#909] Valentina produces wrong united path.
 
 # Version 0.6.1 October 23, 2018
 - [#885] Regression. Broken support for multi size measurements.

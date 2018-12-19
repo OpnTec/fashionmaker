@@ -938,8 +938,17 @@ QVector<VPieceNode> VPiece::GetUnitedPath(const VContainer *data) const
                 continue;
             }
 
-            const QVector<VPieceNode> midBefore = united.mid(0, indexStartPoint+1);
-            const QVector<VPieceNode> midAfter = united.mid(indexEndPoint, united.size() - midBefore.size());
+            QVector<VPieceNode> midBefore;
+            QVector<VPieceNode> midAfter;
+            if (indexStartPoint <= indexEndPoint)
+            {
+                midBefore = united.mid(0, indexStartPoint+1);
+                midAfter = united.mid(indexEndPoint, united.size() - midBefore.size());
+            }
+            else
+            {
+                midBefore = united.mid(indexEndPoint, indexStartPoint+1);
+            }
 
             QVector<VPieceNode> customNodes = data->GetPiecePath(records.at(i).path).GetNodes();
             if (records.at(i).reverse)
