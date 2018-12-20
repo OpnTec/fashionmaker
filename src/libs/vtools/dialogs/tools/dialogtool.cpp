@@ -1219,6 +1219,7 @@ void DialogTool::ChangeColor(QWidget *widget, const QColor &color)
     SCASSERT(widget != nullptr)
     QPalette palette = widget->palette();
     palette.setColor(QPalette::Active, widget->foregroundRole(), color);
+    palette.setColor(QPalette::Inactive, widget->foregroundRole(), color);
     widget->setPalette(palette);
 }
 
