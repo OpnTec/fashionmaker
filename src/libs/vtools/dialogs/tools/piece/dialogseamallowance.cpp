@@ -2079,13 +2079,22 @@ void DialogSeamAllowance::EvalWidthBefore()
     if (uiTabPaths->checkBoxSeams->isChecked())
     {
         labelEditFormula = uiTabPaths->labelEditBefore;
-        const QString postfix = UnitsToStr(qApp->patternUnit(), true);
-        const QString formula = uiTabPaths->plainTextEditFormulaWidthBefore->toPlainText();
-        Eval(formula, flagFormulaBefore, uiTabPaths->labelResultBefore, postfix, false, true);
+        if (uiTabPaths->comboBoxNodes->count() > 0)
+        {
+            const QString postfix = UnitsToStr(qApp->patternUnit(), true);
+            const QString formula = uiTabPaths->plainTextEditFormulaWidthBefore->toPlainText();
+            Eval(formula, flagFormulaBefore, uiTabPaths->labelResultBefore, postfix, false, true);
 
-        const QString formulaSABefore = GetFormulaFromUser(uiTabPaths->plainTextEditFormulaWidthBefore);
-        UpdateNodeSABefore(formulaSABefore);
-        EnableDefButton(uiTabPaths->pushButtonDefBefore, formulaSABefore);
+            const QString formulaSABefore = GetFormulaFromUser(uiTabPaths->plainTextEditFormulaWidthBefore);
+            UpdateNodeSABefore(formulaSABefore);
+            EnableDefButton(uiTabPaths->pushButtonDefBefore, formulaSABefore);
+        }
+        else
+        {
+            ChangeColor(labelEditFormula, okColor);
+            uiTabPaths->labelResultBefore->setText(tr("<Empty>"));
+            flagFormulaBefore = true;
+        }
     }
 }
 
@@ -2095,13 +2104,22 @@ void DialogSeamAllowance::EvalWidthAfter()
     if (uiTabPaths->checkBoxSeams->isChecked())
     {
         labelEditFormula = uiTabPaths->labelEditAfter;
-        const QString postfix = UnitsToStr(qApp->patternUnit(), true);
-        const QString formula = uiTabPaths->plainTextEditFormulaWidthAfter->toPlainText();
-        Eval(formula, flagFormulaAfter, uiTabPaths->labelResultAfter, postfix, false, true);
+        if (uiTabPaths->comboBoxNodes->count() > 0)
+        {
+            const QString postfix = UnitsToStr(qApp->patternUnit(), true);
+            const QString formula = uiTabPaths->plainTextEditFormulaWidthAfter->toPlainText();
+            Eval(formula, flagFormulaAfter, uiTabPaths->labelResultAfter, postfix, false, true);
 
-        const QString formulaSAAfter = GetFormulaFromUser(uiTabPaths->plainTextEditFormulaWidthAfter);
-        UpdateNodeSAAfter(formulaSAAfter);
-        EnableDefButton(uiTabPaths->pushButtonDefAfter, formulaSAAfter);
+            const QString formulaSAAfter = GetFormulaFromUser(uiTabPaths->plainTextEditFormulaWidthAfter);
+            UpdateNodeSAAfter(formulaSAAfter);
+            EnableDefButton(uiTabPaths->pushButtonDefAfter, formulaSAAfter);
+        }
+        else
+        {
+            ChangeColor(labelEditFormula, okColor);
+            uiTabPaths->labelResultAfter->setText(tr("<Empty>"));
+            flagFormulaAfter = true;
+        }
     }
 }
 

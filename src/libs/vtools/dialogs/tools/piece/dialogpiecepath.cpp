@@ -748,34 +748,52 @@ void DialogPiecePath::EvalWidth()
 void DialogPiecePath::EvalWidthBefore()
 {
     labelEditFormula = ui->labelEditBefore;
-    const QString postfix = UnitsToStr(qApp->patternUnit(), true);
-    QString formula = ui->plainTextEditFormulaWidthBefore->toPlainText();
-    Eval(formula, m_flagFormulaBefore, ui->labelResultBefore, postfix, false, true);
-
-    formula = GetFormulaSAWidthBefore();
-    if (formula != currentSeamAllowance)
+    if (ui->comboBoxNodes->count() > 0)
     {
-        ui->pushButtonDefBefore->setEnabled(true);
-    }
+        const QString postfix = UnitsToStr(qApp->patternUnit(), true);
+        QString formula = ui->plainTextEditFormulaWidthBefore->toPlainText();
+        Eval(formula, m_flagFormulaBefore, ui->labelResultBefore, postfix, false, true);
 
-    UpdateNodeSABefore(formula);
+        formula = GetFormulaSAWidthBefore();
+        if (formula != currentSeamAllowance)
+        {
+            ui->pushButtonDefBefore->setEnabled(true);
+        }
+
+        UpdateNodeSABefore(formula);
+    }
+    else
+    {
+        ChangeColor(labelEditFormula, okColor);
+        ui->labelResultBefore->setText(tr("<Empty>"));
+        m_flagFormulaBefore = true;
+    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void DialogPiecePath::EvalWidthAfter()
 {
     labelEditFormula = ui->labelEditAfter;
-    const QString postfix = UnitsToStr(qApp->patternUnit(), true);
-    QString formula = ui->plainTextEditFormulaWidthAfter->toPlainText();
-    Eval(formula, m_flagFormulaAfter, ui->labelResultAfter, postfix, false, true);
-
-    formula = GetFormulaSAWidthAfter();
-    if (formula != currentSeamAllowance)
+    if (ui->comboBoxNodes->count() > 0)
     {
-        ui->pushButtonDefAfter->setEnabled(true);
-    }
+        const QString postfix = UnitsToStr(qApp->patternUnit(), true);
+        QString formula = ui->plainTextEditFormulaWidthAfter->toPlainText();
+        Eval(formula, m_flagFormulaAfter, ui->labelResultAfter, postfix, false, true);
 
-    UpdateNodeSAAfter(formula);
+        formula = GetFormulaSAWidthAfter();
+        if (formula != currentSeamAllowance)
+        {
+            ui->pushButtonDefAfter->setEnabled(true);
+        }
+
+        UpdateNodeSAAfter(formula);
+    }
+    else
+    {
+        ChangeColor(labelEditFormula, okColor);
+        ui->labelResultAfter->setText(tr("<Empty>"));
+        m_flagFormulaAfter = true;
+    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------

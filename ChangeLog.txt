@@ -9,6 +9,7 @@
 - [#905] Valentina crashes with error: This id is not unique.
 - [#909] Valentina produces wrong united path.
 - [#912] Labels in inactive state return to initial color.
+- [#913] Unable to save changes for piece path if it doesn't contain a point.
 
 # Version 0.6.1 October 23, 2018
 - [#885] Regression. Broken support for multi size measurements.
