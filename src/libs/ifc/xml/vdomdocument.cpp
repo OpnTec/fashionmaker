@@ -232,10 +232,14 @@ QDomElement VDomDocument::elementById(quint32 id, const QString &tagName)
 
     if (tagName.isEmpty())
     {
-        if (VDomDocument::find(m_elementIdCache, this->documentElement(), id))
+        // Because VDomDocument::find checks for unique id we must use temp cache
+        QHash<quint32, QDomElement> tmpCache;
+        if (VDomDocument::find(tmpCache, this->documentElement(), id))
         {
-           return m_elementIdCache.value(id);
+            m_elementIdCache = tmpCache;
+            return m_elementIdCache.value(id);
         }
+        m_elementIdCache = tmpCache;
     }
     else
     {
