@@ -56,6 +56,7 @@
 #include <QGlobalStatic>
 
 #include "vabstractapplication.h"
+#include "vdatastreamenum.h"
 
 const qreal   defCurveApproximationScale = 0.5;
 const qreal   minCurveApproximationScale = 0.1;
@@ -843,4 +844,27 @@ void InitLanguages(QComboBox *combobox)
     {
         combobox->setCurrentIndex(index);
     }
+}
+
+// Friend functions
+//---------------------------------------------------------------------------------------------------------------------
+QDataStream &operator<<(QDataStream &out, const CustomSARecord &record)
+{
+    out << record.startPoint;
+    out << record.path;
+    out << record.endPoint;
+    out << record.reverse;
+    out << record.includeType;
+    return out;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QDataStream &operator>>(QDataStream &in, CustomSARecord &record)
+{
+    in >> record.startPoint;
+    in >> record.path;
+    in >> record.endPoint;
+    in >> record.reverse;
+    in >> record.includeType;
+    return in;
 }

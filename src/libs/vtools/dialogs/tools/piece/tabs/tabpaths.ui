@@ -1015,6 +1015,9 @@
                    <height>0</height>
                   </size>
                  </property>
+                 <property name="dragDropMode">
+                  <enum>QAbstractItemView::InternalMove</enum>
+                 </property>
                 </widget>
                </widget>
               </item>

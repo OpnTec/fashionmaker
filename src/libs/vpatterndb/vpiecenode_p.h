@@ -33,6 +33,7 @@
 #include <QDataStream>
 #include "../ifc/ifcdef.h"
 #include "../vmisc/diagnostic.h"
+#include "../vmisc/vdatastreamenum.h"
 
 QT_WARNING_PUSH
 QT_WARNING_DISABLE_GCC("-Weffc++")
@@ -143,15 +144,15 @@ private:
 QDataStream &operator<<(QDataStream &out, const VPieceNodeData &p)
 {
     out << p.m_id
-        << static_cast<int>(p.m_typeTool)
+        << p.m_typeTool
         << p.m_reverse
         << p.m_excluded
         << p.m_isPassmark
         << p.m_formulaWidthBefore
         << p.m_formulaWidthAfter
-        << static_cast<int>(p.m_angleType)
-        << static_cast<int>(p.m_passmarkLineType)
-        << static_cast<int>(p.m_passmarkAngleType)
+        << p.m_angleType
+        << p.m_passmarkLineType
+        << p.m_passmarkAngleType
         << p.m_isShowSecondPassmark;
     return out;
 }
@@ -159,28 +160,17 @@ QDataStream &operator<<(QDataStream &out, const VPieceNodeData &p)
 //---------------------------------------------------------------------------------------------------------------------
 QDataStream &operator>>(QDataStream &in, VPieceNodeData &p)
 {
-    int typeTool = 0;
-    int angleType = 0;
-    int passmarkLineType = 0;
-    int passmarkAngleType = 0;
-
     in >> p.m_id
-       >> typeTool
+       >> p.m_typeTool
        >> p.m_reverse
        >> p.m_excluded
        >> p.m_isPassmark
        >> p.m_formulaWidthBefore
        >> p.m_formulaWidthAfter
-       >> angleType
-       >> passmarkLineType
-       >> passmarkAngleType
+       >> p.m_angleType
+       >> p.m_passmarkLineType
+       >> p.m_passmarkAngleType
        >> p.m_isShowSecondPassmark;
-
-    p.m_typeTool = static_cast<Tool>(typeTool);
-    p.m_angleType = static_cast<PieceNodeAngle>(angleType);
-    p.m_passmarkLineType = static_cast<PassmarkLineType>(passmarkLineType);
-    p.m_passmarkAngleType = static_cast<PassmarkAngleType>(passmarkAngleType);
-
     return in;
 }
 

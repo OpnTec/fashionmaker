@@ -1014,48 +1014,35 @@ QVector<CustomSARecord> VPiece::FilterRecords(QVector<CustomSARecord> records) c
         return records;
     }
 
-    // cppcheck-suppress variableScope
-    bool foundFilter = false;// Need in case "filter" will stay empty.
-    CustomSARecord filter;
-    int startIndex = d->m_path.CountNodes()-1;
-
-    for (int i = 0; i < records.size(); ++i)
+    QVector<VPieceNode> path = d->m_path.GetNodes();
+    QVector<CustomSARecord> filteredRecords;
+    for (auto record : qAsConst(records))
     {
-        const int indexStartPoint = d->m_path.indexOfNode(records.at(i).startPoint);
-        if (indexStartPoint < startIndex)
+        const int indexStartPoint = VPiecePath::indexOfNode(path, record.startPoint);
+        const int indexEndPoint = VPiecePath::indexOfNode(path, record.endPoint);
+
+        if (indexStartPoint == -1 || indexEndPoint == -1)
         {
-            startIndex = i;
-            filter = records.at(i);
-            // cppcheck-suppress unreadVariable
-            foundFilter = true;
+            continue;
         }
-    }
 
-    if (not foundFilter)
-    {
-        return records; // return as is
-    }
-
-    records.remove(startIndex);
-
-    QVector<CustomSARecord> secondRound;
-    secondRound.reserve(records.size());
-    for (auto &record : records)
-    {
-        const int indexStartPoint = d->m_path.indexOfNode(record.startPoint);
-        const int indexEndPoint = d->m_path.indexOfNode(filter.endPoint);
-        if (indexStartPoint > indexEndPoint)
+        QVector<VPieceNode> midBefore;
+        QVector<VPieceNode> midAfter;
+        if (indexStartPoint <= indexEndPoint)
         {
-            secondRound.append(record);
+            midBefore = path.mid(0, indexStartPoint+1);
+            midAfter = path.mid(indexEndPoint, path.size() - midBefore.size());
         }
+        else
+        {
+            midBefore = path.mid(indexEndPoint, indexStartPoint+1);
+        }
+
+        path = midBefore + midAfter;
+        filteredRecords.append(record);
     }
 
-    QVector<CustomSARecord> filtered;
-    filtered.append(filter);
-
-    filtered += FilterRecords(secondRound);
-
-    return filtered;
+    return filteredRecords;
 }
 
 //---------------------------------------------------------------------------------------------------------------------

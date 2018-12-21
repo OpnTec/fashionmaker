@@ -483,6 +483,9 @@ struct CustomSARecord
           includeType(PiecePathIncludeType::AsCustomSA)
     {}
 
+    friend QDataStream& operator<<(QDataStream& out, const CustomSARecord& record);
+    friend QDataStream& operator>>(QDataStream& in, CustomSARecord& record);
+
     quint32 startPoint;
     quint32 path;
     quint32 endPoint;

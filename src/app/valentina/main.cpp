@@ -55,6 +55,8 @@ int main(int argc, char *argv[])
 
     // Need to internally move a node inside a piece main path
     qRegisterMetaTypeStreamOperators<VPieceNode>("VPieceNode");
+    // Need to internally move a node inside a custom seam allowance path
+    qRegisterMetaTypeStreamOperators<CustomSARecord>("CustomSARecord");
 
 #ifndef Q_OS_MAC // supports natively
     InitHighDpiScaling(argc, argv);
