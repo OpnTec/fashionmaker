@@ -44,6 +44,12 @@
 #include "debugbreak.h"
 #include "defglobal.h"
 
+#if QT_VERSION < QT_VERSION_CHECK(5, 3, 0)
+#   include "backport/qmarginsf.h"
+#else
+#   include <QMargins>
+#endif
+
 template <class T> class QSharedPointer;
 
 #include <ciso646>
