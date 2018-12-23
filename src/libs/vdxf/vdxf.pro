@@ -15,10 +15,9 @@ TARGET = vdxf
 # We want create a library
 TEMPLATE = lib
 
-CONFIG += \
-    staticlib # Making static library
+CONFIG += staticlib # Making static library
 
-# Since Qt5.4 available support C++14
+# Since Q5.4 available support C++14
 greaterThan(QT_MAJOR_VERSION, 4):greaterThan(QT_MINOR_VERSION, 3) {
     CONFIG += c++14
 } else {
