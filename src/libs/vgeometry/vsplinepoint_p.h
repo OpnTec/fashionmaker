@@ -110,9 +110,9 @@ public:
           angle1F('0'),
           angle2(180),
           angle2F("180"),
-          length1(0),
+          length1(ToPixel(0.01, Unit::Mm)),
           length1F('0'),
-          length2(0),
+          length2(ToPixel(0.01, Unit::Mm)),
           length2F('0')
     {}
 
@@ -130,7 +130,17 @@ public:
           length1F(point.length1F),
           length2(point.length2),
           length2F(point.length2F)
-    {}
+    {
+        if (qFuzzyIsNull(this->length1))
+        {
+            this->length1 = ToPixel(0.01, Unit::Mm);
+        }
+
+        if (qFuzzyIsNull(this->length2))
+        {
+            this->length2 = ToPixel(0.01, Unit::Mm);
+        }
+    }
 
     virtual ~VSplinePointData();
 
@@ -187,6 +197,16 @@ VSplinePointData::VSplinePointData(VPointF pSpline, qreal angle1, const QString 
             this->angle1 = line.angle();
             this->angle1F = QString().number(line.angle());
         }
+    }
+
+    if (qFuzzyIsNull(this->length1))
+    {
+        this->length1 = ToPixel(0.01, Unit::Mm);
+    }
+
+    if (qFuzzyIsNull(this->length2))
+    {
+        this->length2 = ToPixel(0.01, Unit::Mm);
     }
 }
 

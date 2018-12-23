@@ -11,6 +11,7 @@
 - [#912] Labels in inactive state return to initial color.
 - [#913] Unable to save changes for piece path if it doesn't contain a point.
 - [#914] Filtering custom seam allowance paths prevent including more than one.
+- [#915] Valentina produces wrong seam allowance for acute angle.
 
 # Version 0.6.1 October 23, 2018
 - [#885] Regression. Broken support for multi size measurements.

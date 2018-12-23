@@ -125,6 +125,9 @@ private:
 
     QVector<VSAPoint> InputPointsIssue646() const;
     QVector<QPointF>  OutputPointsIssue646() const;
+
+    QVector<VSAPoint> InputPointsIssue915() const;
+    QVector<QPointF>  OutputPointsIssue915() const;
 };
 
 #endif // TST_VABSTRACTPIECE_H

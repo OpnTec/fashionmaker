@@ -235,7 +235,7 @@ QVector<QPointF> AngleByLength(QVector<QPointF> points, QPointF p2, const QLineF
         { // Cutting too long acut angle
             line.setLength(localWidth);
             QLineF cutLine(line.p2(), sp2); // Cut line is a perpendicular
-            cutLine.setLength(length); // Decided take this length
+            cutLine.setLength(length); // Decided to take this length
 
             // We do not check intersection type because intersection must alwayse exist
             QPointF px;
@@ -245,6 +245,7 @@ QVector<QPointF> AngleByLength(QVector<QPointF> points, QPointF p2, const QLineF
             {
                 qDebug()<<"Couldn't find intersection with cut line.";
             }
+            points.append(sp1);
             points.append(px);
 
             cutLine.setAngle(cutLine.angle()-180);
@@ -254,6 +255,7 @@ QVector<QPointF> AngleByLength(QVector<QPointF> points, QPointF p2, const QLineF
                 qDebug()<<"Couldn't find intersection with cut line.";
             }
             points.append(px);
+            points.append(sp3);
         }
         else
         {// The point just fine
