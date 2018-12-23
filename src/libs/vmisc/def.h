@@ -48,6 +48,22 @@ template <class T> class QSharedPointer;
 
 #include <ciso646>
 
+// Backport of relaxed constexpr
+#if QT_VERSION < QT_VERSION_CHECK(5, 5, 0)
+#if defined Q_COMPILER_CONSTEXPR
+# if defined(__cpp_constexpr) && __cpp_constexpr-0 >= 201304
+#  define Q_DECL_RELAXED_CONSTEXPR constexpr
+#  define Q_RELAXED_CONSTEXPR constexpr
+# else
+#  define Q_DECL_RELAXED_CONSTEXPR
+#  define Q_RELAXED_CONSTEXPR const
+# endif
+#else
+# define Q_DECL_RELAXED_CONSTEXPR
+# define Q_RELAXED_CONSTEXPR const
+#endif
+#endif
+
 class QComboBox;
 class QMarginsF;
 class VTranslateMeasurements;
@@ -422,11 +438,129 @@ extern const QString valentinaNamespace;
 QPixmap QPixmapFromCache(const QString &pixmapPath);
 void SetItemOverrideCursor(QGraphicsItem *item, const QString & pixmapPath, int hotX = -1, int hotY = -1);
 
-Q_REQUIRED_RESULT double ToPixel(double val, const Unit &unit);
-Q_REQUIRED_RESULT double FromPixel(double pix, const Unit &unit);
+//---------------------------------------------------------------------------------------------------------------------
+Q_DECL_RELAXED_CONSTEXPR inline double ToPixel(double val, const Unit &unit)
+{
+    switch (unit)
+    {
+        case Unit::Mm:
+            return (val / 25.4) * PrintDPI;
+        case Unit::Cm:
+            return ((val * 10.0) / 25.4) * PrintDPI;
+        case Unit::Inch:
+            return val * PrintDPI;
+        case Unit::Px:
+            return val;
+        default:
+            break;
+    }
+    return 0;
+}
 
-Q_REQUIRED_RESULT qreal UnitConvertor(qreal value, const Unit &from, const Unit &to);
-Q_REQUIRED_RESULT QMarginsF UnitConvertor(const QMarginsF &margins, const Unit &from, const Unit &to);
+//---------------------------------------------------------------------------------------------------------------------
+Q_DECL_RELAXED_CONSTEXPR inline double FromPixel(double pix, const Unit &unit)
+{
+    switch (unit)
+    {
+        case Unit::Mm:
+            return (pix / PrintDPI) * 25.4;
+        case Unit::Cm:
+            return ((pix / PrintDPI) * 25.4) / 10.0;
+        case Unit::Inch:
+            return pix / PrintDPI;
+        case Unit::Px:
+            return pix;
+        default:
+            break;
+    }
+    return 0;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+Q_DECL_RELAXED_CONSTEXPR inline qreal UnitConvertor(qreal value, const Unit &from, const Unit &to)
+{
+    switch (from)
+    {
+        case Unit::Mm:
+            switch (to)
+            {
+                case Unit::Mm:
+                    return value;
+                case Unit::Cm:
+                    return value / 10.0;
+                case Unit::Inch:
+                    return value / 25.4;
+                case Unit::Px:
+                    return (value / 25.4) * PrintDPI;
+                default:
+                    break;
+            }
+            break;
+        case Unit::Cm:
+            switch (to)
+            {
+                case Unit::Mm:
+                    return value * 10.0;
+                case Unit::Cm:
+                    return value;
+                case Unit::Inch:
+                    return value / 2.54;
+                case Unit::Px:
+                    return ((value * 10.0) / 25.4) * PrintDPI;
+                default:
+                    break;
+            }
+            break;
+        case Unit::Inch:
+            switch (to)
+            {
+                case Unit::Mm:
+                    return value * 25.4;
+                case Unit::Cm:
+                    return value * 2.54;
+                case Unit::Inch:
+                    return value;
+                case Unit::Px:
+                    return value * PrintDPI;
+                default:
+                    break;
+            }
+            break;
+        case Unit::Px:
+            switch (to)
+            {
+                case Unit::Mm:
+                    return (value / PrintDPI) * 25.4;
+                case Unit::Cm:
+                    return ((value / PrintDPI) * 25.4) / 10.0;
+                case Unit::Inch:
+                    return value / PrintDPI;
+                case Unit::Px:
+                    return value;
+                default:
+                    break;
+            }
+            break;
+        default:
+            break;
+    }
+    return 0;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief UnitConvertor Converts the values of the given margin from given unit to the new unit.
+ * returns a new instand of QMarginsF.
+ */
+Q_DECL_RELAXED_CONSTEXPR inline QMarginsF UnitConvertor(const QMarginsF &margins, const Unit &from, const Unit &to)
+{
+    const qreal left = UnitConvertor(margins.left(), from, to);
+    const qreal top = UnitConvertor(margins.top(), from, to);
+    const qreal right = UnitConvertor(margins.right(), from, to);
+    const qreal bottom = UnitConvertor(margins.bottom(), from, to);
+
+    return QMarginsF(left, top, right, bottom);
+}
 
 void InitLanguages(QComboBox *combobox);
 Q_REQUIRED_RESULT QStringList SupportedLocales();
@@ -445,8 +579,8 @@ Q_REQUIRED_RESULT QPixmap darkenPixmap(const QPixmap &pixmap);
 
 void ShowInGraphicalShell(const QString &filePath);
 
-Q_REQUIRED_RESULT static inline bool VFuzzyComparePossibleNulls(double p1, double p2);
-static inline bool VFuzzyComparePossibleNulls(double p1, double p2)
+Q_REQUIRED_RESULT Q_DECL_RELAXED_CONSTEXPR static inline bool VFuzzyComparePossibleNulls(double p1, double p2);
+Q_DECL_RELAXED_CONSTEXPR static inline bool VFuzzyComparePossibleNulls(double p1, double p2)
 {
     if(qFuzzyIsNull(p1))
     {
