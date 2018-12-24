@@ -111,7 +111,7 @@ qmake-qt5 PREFIX=%{_prefix} LRELEASE=lrelease-qt5 Valentina.pro -r "CONFIG += no
 %if 0%{?mageia} >= 6
 qmake PREFIX=%{_prefix} Valentina.pro -r "CONFIG += noTests noRunPath no_ccache noDebugSymbols"
 %else
-qmake-qt5 PREFIX=%{_prefix} Valentina.pro -r "CONFIG += noTests noRunPath no_ccache noDebugSymbols"
+qmake-qt5 PREFIX=%{_prefix} PREFIX_LIB=%{_prefix}/%{_lib} Valentina.pro -r "CONFIG += noTests noRunPath no_ccache noDebugSymbols"
 %endif
 
 %endif
