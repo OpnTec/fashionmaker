@@ -42,6 +42,12 @@ class VCommandLine;
 using VCommandLinePtr = std::shared_ptr<VCommandLine>;
 using VLayoutGeneratorPtr = std::shared_ptr<VLayoutGenerator>;
 
+QT_WARNING_PUSH
+QT_WARNING_DISABLE_GCC("-Weffc++")
+
+/**
+ * @brief The VCommandLineOption class wrapper for class QCommandLineOption. Add support for containers.
+ */
 class VCommandLineOption : public QCommandLineOption
 {
 public:
@@ -56,6 +62,8 @@ public:
                        const QString &defaultValue = QString())
         : QCommandLineOption(names, description, valueName, defaultValue) {}
 };
+
+QT_WARNING_POP
 
 //@brief: class used to install export command line options and parse their values
 //QCommandLineParser* object must exists until this object alive
