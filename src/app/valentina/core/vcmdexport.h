@@ -39,16 +39,30 @@
 #include "../vmisc/vsysexits.h"
 
 class VCommandLine;
-typedef std::shared_ptr<VCommandLine> VCommandLinePtr;
-typedef QList<QCommandLineOption *> VCommandLineOptions;
-typedef std::shared_ptr<VLayoutGenerator> VLayoutGeneratorPtr;
+using VCommandLinePtr = std::shared_ptr<VCommandLine>;
+using VLayoutGeneratorPtr = std::shared_ptr<VLayoutGenerator>;
+
+class VCommandLineOption : public QCommandLineOption
+{
+public:
+    VCommandLineOption()
+        : QCommandLineOption(QStringLiteral("fakeOption")) {}
+
+    VCommandLineOption(const QString &name, const QString &description, const QString &valueName = QString(),
+                       const QString &defaultValue = QString())
+        : QCommandLineOption(name, description, valueName, defaultValue) {}
+
+    VCommandLineOption(const QStringList &names, const QString &description, const QString &valueName = QString(),
+                       const QString &defaultValue = QString())
+        : QCommandLineOption(names, description, valueName, defaultValue) {}
+};
 
 //@brief: class used to install export command line options and parse their values
 //QCommandLineParser* object must exists until this object alive
 class VCommandLine
 {
 public:
-    virtual ~VCommandLine();
+    virtual ~VCommandLine() = default;
 
     //@brief creates object and applies export related options to parser
 
@@ -83,10 +97,10 @@ public:
     //@brief returns export type set, defaults 0 - svg
     int OptExportType() const;
 
-    int IsBinaryDXF() const;
-    int IsTextAsPaths() const;
-    int IsExportOnlyDetails() const;
-    int IsCSVWithHeader() const;
+    bool IsBinaryDXF() const;
+    bool IsTextAsPaths() const;
+    bool IsExportOnlyDetails() const;
+    bool IsCSVWithHeader() const;
 
     //@brief returns the piece name regex or empty string if not set
     QString OptExportSuchDetails() const;
@@ -143,17 +157,16 @@ private:
     Q_DISABLE_COPY(VCommandLine)
     static VCommandLinePtr instance;
     QCommandLineParser parser;
-    VCommandLineOptions optionsUsed;
-    QMap<QString, int> optionsIndex;
+    QMap<QString, VCommandLineOption> optionsUsed;
     bool isGuiEnabled;
     friend class VApplication;
-
-    static qreal Lo2Px(const QString& src, const DialogLayoutSettings& converter);
-    static qreal Pg2Px(const QString& src, const DialogLayoutSettings& converter);
-
-    static void InitOptions(VCommandLineOptions &options, QMap<QString, int> &optionsIndex);
     
     VAbstractLayoutDialog::PaperSizeTemplate FormatSize(const QString &key) const;
+
+    void InitCommandLineOptions();
+    bool IsOptionSet(const QString &option) const;
+    QString OptionValue(const QString &option) const;
+    QStringList OptionValues(const QString &option) const;
 };
 
 #endif // VCMDEXPORT_H
