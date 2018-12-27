@@ -144,6 +144,18 @@ void VLayoutPaper::SetRotate(bool value)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+bool VLayoutPaper::GetFollowGrainline() const
+{
+    return d->followGrainline;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VLayoutPaper::SetFollowGrainline(bool value)
+{
+    d->followGrainline = value;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 int VLayoutPaper::GetRotationIncrease() const
 {
     return d->globalRotationIncrease;
@@ -242,8 +254,7 @@ bool VLayoutPaper::AddToSheet(const VLayoutPiece &detail, std::atomic_bool &stop
         for (int i=1; i<= detailEdgesCount; ++i)
         {
             VPosition *thread = new VPosition(d->globalContour, j, detail, i, &stop, d->localRotate,
-                                              d->localRotationIncrease,
-                                              d->saveLength);
+                                              d->localRotationIncrease, d->saveLength, d->followGrainline);
             //Info for debug
             #ifdef LAYOUT_DEBUG
                 thread->setPaperIndex(d->paperIndex);

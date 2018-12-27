@@ -233,6 +233,18 @@ void DialogLayoutSettings::SetRotate(bool state)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+bool DialogLayoutSettings::GetFollowGrainline() const
+{
+    return ui->checkBoxFollowGrainline->isChecked();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogLayoutSettings::SetFollowGrainline(bool state)
+{
+    ui->checkBoxFollowGrainline->setChecked(state);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 int DialogLayoutSettings::GetIncrease() const
 {
     return ui->comboBoxIncrease->currentText().toInt();
@@ -564,6 +576,7 @@ void DialogLayoutSettings::DialogAccepted()
     generator->SetPaperWidth(GetPaperWidth());
     generator->SetShift(static_cast<quint32>(qFloor(GetShift())));
     generator->SetRotate(GetRotate());
+    generator->SetFollowGrainline(GetFollowGrainline());
     generator->SetRotationIncrease(GetIncrease());
     generator->SetAutoCrop(GetAutoCrop());
     generator->SetSaveLength(IsSaveLength());
@@ -655,6 +668,7 @@ void DialogLayoutSettings::RestoreDefaults()
     SetShift(VSettings::GetDefLayoutShift());
     SetGroup(VSettings::GetDefLayoutGroup());
     SetRotate(VSettings::GetDefLayoutRotate());
+    SetFollowGrainline(VSettings::GetDefLayoutFollowGrainline());
     SetIncrease(VSettings::GetDefLayoutRotationIncrease());
     SetFields(GetDefPrinterFields());
     SetIgnoreAllFields(VSettings::GetDefIgnoreAllFields());
@@ -1004,6 +1018,7 @@ void DialogLayoutSettings::ReadSettings()
     const qreal height = UnitConvertor(settings->GetLayoutPaperHeight(), Unit::Px, LayoutUnit());
     SheetSize(QSizeF(width, height));
     SetGroup(settings->GetLayoutGroup());
+    SetFollowGrainline(settings->GetLayoutFollowGrainline());
     SetRotate(settings->GetLayoutRotate());
     SetIncrease(settings->GetLayoutRotationIncrease());
     SetAutoCrop(settings->GetLayoutAutoCrop());
@@ -1031,6 +1046,7 @@ void DialogLayoutSettings::WriteSettings() const
     settings->SetLayoutPaperWidth(GetPaperWidth());
     settings->SetLayoutShift(GetShift());
     settings->SetLayoutRotate(GetRotate());
+    settings->SetLayoutFollowGrainline(GetFollowGrainline());
     settings->SetLayoutRotationIncrease(GetIncrease());
     settings->SetLayoutAutoCrop(GetAutoCrop());
     settings->SetLayoutSaveLength(IsSaveLength());

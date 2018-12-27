@@ -44,7 +44,7 @@ class VPosition : public QRunnable
 {
 public:
     VPosition(const VContour &gContour, int j, const VLayoutPiece &detail, int i, std::atomic_bool *stop, bool rotate,
-              int rotationIncrease, bool saveLength);
+              int rotationIncrease, bool saveLength, bool followGainline);
     virtual ~VPosition() override{}
 
     quint32 getPaperIndex() const;
@@ -83,6 +83,7 @@ private:
      * @brief angle_between keep angle between global edge and detail edge. Need for optimization rotation.
      */
     qreal angle_between;
+    bool followGrainline;
 
     enum class CrossingType : char
     {
@@ -103,19 +104,34 @@ private:
     void SaveCandidate(VBestSquare &bestResult, const VLayoutPiece &detail, int globalI, int detJ, BestFrom type);
 
     bool CheckCombineEdges(VLayoutPiece &detail, int j, int &dEdge);
-    bool CheckRotationEdges(VLayoutPiece &detail, int j, int dEdge, int angle) const;
+    bool CheckRotationEdges(VLayoutPiece &detail, int j, int dEdge, qreal angle) const;
+
+    void RotateOnAngle(qreal angle);
 
     CrossingType Crossing(const VLayoutPiece &detail) const;
     bool         SheetContains(const QRectF &rect) const;
 
     void CombineEdges(VLayoutPiece &detail, const QLineF &globalEdge, const int &dEdge);
-    void RotateEdges(VLayoutPiece &detail, const QLineF &globalEdge, int dEdge, int angle) const;
+    void RotateEdges(VLayoutPiece &detail, const QLineF &globalEdge, int dEdge, qreal angle) const;
 
     static QPainterPath ShowDirection(const QLineF &edge);
     static QPainterPath DrawContour(const QVector<QPointF> &points);
     static QPainterPath DrawDetails(const QVector<VLayoutPiece> &details);
 
     void Rotate(int increase);
+    void FollowGrainline();
+
+    QLineF FabricGrainline() const;
 };
+
+//---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief VPosition::FabricGrainline return fabric gainline accoding to paper orientation
+ * @return fabric gainline line
+ */
+inline QLineF VPosition::FabricGrainline() const
+{
+    return gContour.GetHeight() >= gContour.GetWidth() ? QLineF(10, 10, 10, 100) : QLineF(10, 10, 100, 10);
+}
 
 #endif // VPOSITION_H

@@ -227,6 +227,11 @@ void VCommandLine::InitOptions(VCommandLineOptions &options, QMap<QString, int> 
                                                "60, 72, 90, 180"),
                                           translate("VCommandLine", "Angle")));
 
+    optionsIndex.insert(LONG_OPTION_FOLLOW_GRAINLINE, index++);
+    options.append(new QCommandLineOption(QStringList() << LONG_OPTION_FOLLOW_GRAINLINE,
+                                          translate("VCommandLine",
+                                                    "Order detail to follow grainline direction (export mode).")));
+
     optionsIndex.insert(LONG_OPTION_CROP, index++);
     options.append(new QCommandLineOption(QStringList() << SINGLE_OPTION_CROP << LONG_OPTION_CROP,
                                           translate("VCommandLine", "Auto crop unused length (export mode).")));
@@ -568,6 +573,7 @@ VLayoutGeneratorPtr VCommandLine::DefaultGenerator() const
         }
     }
     diag.SetFields(margins);
+    diag.SetFollowGrainline(parser.isSet(*optionsUsed.value(optionsIndex.value(LONG_OPTION_FOLLOW_GRAINLINE))));
 
     diag.DialogAccepted(); // filling VLayoutGenerator
 

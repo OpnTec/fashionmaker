@@ -51,7 +51,7 @@
 
 //---------------------------------------------------------------------------------------------------------------------
 VPosition::VPosition(const VContour &gContour, int j, const VLayoutPiece &detail, int i, std::atomic_bool *stop,
-                     bool rotate, int rotationIncrease, bool saveLength)
+                     bool rotate, int rotationIncrease, bool saveLength, bool followGainline)
     : QRunnable(),
       bestResult(VBestSquare(gContour.GetSize(), saveLength)),
       gContour(gContour),
@@ -65,7 +65,8 @@ VPosition::VPosition(const VContour &gContour, int j, const VLayoutPiece &detail
       stop(stop),
       rotate(rotate),
       rotationIncrease(rotationIncrease),
-      angle_between(0)
+      angle_between(0),
+      followGrainline(followGainline)
 {
     if ((rotationIncrease >= 1 && rotationIncrease <= 180 && 360 % rotationIncrease == 0) == false)
     {
@@ -81,32 +82,39 @@ void VPosition::run()
         return;
     }
 
-    // We should use copy of the detail.
-    VLayoutPiece workDetail = detail;
-
-    int dEdge = i;// For mirror detail edge will be different
-    if (CheckCombineEdges(workDetail, j, dEdge))
+    if (not followGrainline || not detail.IsGrainlineEnabled())
     {
-        #ifdef LAYOUT_DEBUG
-        #   ifdef SHOW_CANDIDATE_BEST
-                DrawDebug(gContour, workDetail, frame+2, paperIndex, detailsCount, details);
-        #   endif
-        #endif
+        // We should use copy of the detail.
+        VLayoutPiece workDetail = detail;
 
-        SaveCandidate(bestResult, workDetail, j, dEdge, BestFrom::Combine);
-    }
-    frame = frame + 3;
+        int dEdge = i;// For mirror detail edge will be different
+        if (CheckCombineEdges(workDetail, j, dEdge))
+        {
+            #ifdef LAYOUT_DEBUG
+            #   ifdef SHOW_CANDIDATE_BEST
+                    DrawDebug(gContour, workDetail, frame+2, paperIndex, detailsCount, details);
+            #   endif
+            #endif
 
-    if (rotate)
-    {
-        Rotate(rotationIncrease);
-    }
-    else
-    {
-        if (gContour.GetContour().isEmpty())
+            SaveCandidate(bestResult, workDetail, j, dEdge, BestFrom::Combine);
+        }
+        frame = frame + 3;
+
+        if (rotate)
         {
             Rotate(rotationIncrease);
         }
+        else
+        {
+            if (gContour.GetContour().isEmpty())
+            {
+                Rotate(rotationIncrease);
+            }
+        }
+    }
+    else
+    {
+        FollowGrainline();
     }
 }
 
@@ -351,14 +359,14 @@ bool VPosition::CheckCombineEdges(VLayoutPiece &detail, int j, int &dEdge)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-bool VPosition::CheckRotationEdges(VLayoutPiece &detail, int j, int dEdge, int angle) const
+bool VPosition::CheckRotationEdges(VLayoutPiece &detail, int j, int dEdge, qreal angle) const
 {
     const QLineF globalEdge = gContour.GlobalEdge(j);
     bool flagSquare = false;
 
     if (detail.IsForceFlipping())
     {
-        detail.Mirror(globalEdge);
+        detail.Mirror(not followGrainline ? globalEdge : QLineF(10, 10, 10, 100));
     }
 
     RotateEdges(detail, globalEdge, dEdge, angle);
@@ -389,6 +397,26 @@ bool VPosition::CheckRotationEdges(VLayoutPiece &detail, int j, int dEdge, int a
             break;
     }
     return flagSquare;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VPosition::RotateOnAngle(qreal angle)
+{
+    // We should use copy of the detail.
+    VLayoutPiece workDetail = detail;
+
+    if (CheckRotationEdges(workDetail, j, i, angle))
+    {
+        #ifdef LAYOUT_DEBUG
+        #   ifdef SHOW_CANDIDATE_BEST
+                ++frame;
+                DrawDebug(gContour, workDetail, frame, paperIndex, detailsCount, details);
+        #   endif
+        #endif
+
+        SaveCandidate(bestResult, workDetail, j, i, BestFrom::Rotation);
+    }
+    ++frame;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -449,7 +477,7 @@ void VPosition::CombineEdges(VLayoutPiece &detail, const QLineF &globalEdge, con
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VPosition::RotateEdges(VLayoutPiece &detail, const QLineF &globalEdge, int dEdge, int angle) const
+void VPosition::RotateEdges(VLayoutPiece &detail, const QLineF &globalEdge, int dEdge, qreal angle) const
 {
     QLineF detailEdge;
     if (gContour.GetContour().isEmpty())
@@ -487,21 +515,31 @@ void VPosition::Rotate(int increase)
             return;
         }
 
-        // We should use copy of the detail.
-        VLayoutPiece workDetail = detail;
+        RotateOnAngle(angle);
+    }
+}
 
-        if (CheckRotationEdges(workDetail, j, i, angle))
-        {
-            #ifdef LAYOUT_DEBUG
-            #   ifdef SHOW_CANDIDATE_BEST
-                    ++frame;
-                    DrawDebug(gContour, workDetail, frame, paperIndex, detailsCount, details);
-            #   endif
-            #endif
+//---------------------------------------------------------------------------------------------------------------------
+void VPosition::FollowGrainline()
+{
+    if (stop->load())
+    {
+        return;
+    }
 
-            SaveCandidate(bestResult, workDetail, j, i, BestFrom::Rotation);
-        }
-        ++frame;
+    QLineF detailGrainline(10, 10, 100, 10);
+    detailGrainline.setAngle(detail.GrainlineAngle());
+
+    const qreal angle = detailGrainline.angleTo(FabricGrainline());
+
+    if (detail.GrainlineArrowType() == ArrowType::atFront)
+    {
+        RotateOnAngle(angle);
+    }
+
+    if (detail.GrainlineArrowType() == ArrowType::atRear)
+    {
+        RotateOnAngle(angle+180);
     }
 }
 

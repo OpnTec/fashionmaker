@@ -97,6 +97,10 @@ public:
     static bool GetDefLayoutRotate();
     void SetLayoutRotate(bool value);
 
+    bool GetLayoutFollowGrainline() const;
+    static bool GetDefLayoutFollowGrainline();
+    void SetLayoutFollowGrainline(bool value);
+
     int GetLayoutRotationIncrease() const;
     static int GetDefLayoutRotationIncrease();
     void SetLayoutRotationIncrease(int value);

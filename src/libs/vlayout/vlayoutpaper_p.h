@@ -53,7 +53,8 @@ public:
           localRotate(true),
           globalRotationIncrease(180),
           localRotationIncrease(180),
-          saveLength(false)
+          saveLength(false),
+          followGrainline(false)
     {}
 
     VLayoutPaperData(int height,
@@ -67,7 +68,8 @@ public:
           localRotate(true),
           globalRotationIncrease(180),
           localRotationIncrease(180),
-          saveLength(false)
+          saveLength(false),
+          followGrainline(false)
     {}
 
     VLayoutPaperData(const VLayoutPaperData &paper)
@@ -81,7 +83,8 @@ public:
           localRotate(paper.localRotate),
           globalRotationIncrease(paper.globalRotationIncrease),
           localRotationIncrease(paper.localRotationIncrease),
-          saveLength(paper.saveLength)
+          saveLength(paper.saveLength),
+          followGrainline(paper.followGrainline)
     {}
 
     ~VLayoutPaperData() {}
@@ -100,6 +103,7 @@ public:
     int globalRotationIncrease;
     int localRotationIncrease;
     bool saveLength;
+    bool followGrainline;
 
 private:
     VLayoutPaperData& operator=(const VLayoutPaperData&) Q_DECL_EQ_DELETE;

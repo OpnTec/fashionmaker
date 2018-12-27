@@ -55,6 +55,7 @@ VLayoutGenerator::VLayoutGenerator(QObject *parent)
       state(LayoutErrors::NoError),
       shift(0),
       rotate(true),
+      followGrainline(false),
       rotationIncrease(180),
       autoCrop(false),
       saveLength(false),
@@ -140,6 +141,7 @@ void VLayoutGenerator::Generate()
             paper.SetLayoutWidth(bank->GetLayoutWidth());
             paper.SetPaperIndex(static_cast<quint32>(papers.count()));
             paper.SetRotate(rotate);
+            paper.SetFollowGrainline(followGrainline);
             paper.SetRotationIncrease(rotationIncrease);
             paper.SetSaveLength(saveLength);
             do
@@ -347,6 +349,7 @@ void VLayoutGenerator::GatherPages()
         paper.SetLayoutWidth(bank->GetLayoutWidth());
         paper.SetPaperIndex(static_cast<quint32>(i));
         paper.SetRotate(rotate);
+        paper.SetFollowGrainline(followGrainline);
         paper.SetRotationIncrease(rotationIncrease);
         paper.SetSaveLength(saveLength);
         paper.SetDetails(nDetails.at(i));
@@ -412,6 +415,7 @@ void VLayoutGenerator::UnitePages()
         paper.SetLayoutWidth(bank->GetLayoutWidth());
         paper.SetPaperIndex(static_cast<quint32>(i));
         paper.SetRotate(rotate);
+        paper.SetFollowGrainline(followGrainline);
         paper.SetRotationIncrease(rotationIncrease);
         paper.SetSaveLength(saveLength);
         paper.SetDetails(nDetails.at(i));
@@ -531,6 +535,18 @@ bool VLayoutGenerator::GetRotate() const
 void VLayoutGenerator::SetRotate(bool value)
 {
     rotate = value;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+bool VLayoutGenerator::GetFollowGrainline() const
+{
+    return followGrainline;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VLayoutGenerator::SetFollowGrainline(bool value)
+{
+    followGrainline = value;
 }
 
 //---------------------------------------------------------------------------------------------------------------------

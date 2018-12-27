@@ -61,6 +61,9 @@ public:
           detailLabel(),
           patternInfo(),
           grainlinePoints(),
+          grainlineArrowType(ArrowType::atFront),
+          grainlineAngle(0),
+          grainlineEnabled(false),
           m_tmDetail(),
           m_tmPattern(),
           m_placeLabels()
@@ -79,6 +82,9 @@ public:
           detailLabel(detail.detailLabel),
           patternInfo(detail.patternInfo),
           grainlinePoints(detail.grainlinePoints),
+          grainlineArrowType(detail.grainlineArrowType),
+          grainlineAngle(detail.grainlineAngle),
+          grainlineEnabled(detail.grainlineEnabled),
           m_tmDetail(detail.m_tmDetail),
           m_tmPattern(detail.m_tmPattern),
           m_placeLabels(detail.m_placeLabels)
@@ -117,6 +123,10 @@ public:
 
     /** @brief grainlineInfo line */
     QVector<QPointF>          grainlinePoints;
+
+    ArrowType                 grainlineArrowType;
+    qreal                     grainlineAngle;
+    bool                      grainlineEnabled;
 
     /** @brief m_tmDetail text manager for laying out detail info */
     VTextManager              m_tmDetail;

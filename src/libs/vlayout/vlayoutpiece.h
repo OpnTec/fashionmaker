@@ -104,6 +104,9 @@ public:
 
     void SetGrainline(const VGrainlineData& geom, const VContainer *pattern);
     QVector<QPointF> GetGrainline() const;
+    bool  IsGrainlineEnabled() const;
+    qreal GrainlineAngle() const;
+    ArrowType GrainlineArrowType() const;
 
     QTransform GetMatrix() const;
     void    SetMatrix(const QTransform &matrix);

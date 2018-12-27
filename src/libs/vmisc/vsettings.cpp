@@ -85,6 +85,7 @@ Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingLayoutPaperHeight, (QLatin1Strin
 Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingLayoutPaperWidth, (QLatin1String("layout/paperWidth")))
 Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingLayoutShift, (QLatin1String("layout/shift")))
 Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingLayoutRotate, (QLatin1String("layout/Rotate")))
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingLayoutFollowGrainline, (QLatin1String("layout/followGrainline")))
 Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingLayoutRotationIncrease, (QLatin1String("layout/rotationIncrease")))
 Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingLayoutAutoCrop, (QLatin1String("layout/autoCrop")))
 Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingLayoutSaveLength, (QLatin1String("layout/saveLength")))
@@ -368,6 +369,24 @@ bool VSettings::GetDefLayoutRotate()
 void VSettings::SetLayoutRotate(bool value)
 {
     setValue(*settingLayoutRotate, value);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+bool VSettings::GetLayoutFollowGrainline() const
+{
+    return value(*settingLayoutFollowGrainline, GetDefLayoutFollowGrainline()).toBool();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+bool VSettings::GetDefLayoutFollowGrainline()
+{
+    return false;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VSettings::SetLayoutFollowGrainline(bool value)
+{
+    setValue(*settingLayoutFollowGrainline, value);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

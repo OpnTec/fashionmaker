@@ -673,6 +673,10 @@ void VLayoutPiece::SetGrainline(const VGrainlineData& geom, const VContainer* pa
         return;
     }
 
+    d->grainlineEnabled = true;
+    d->grainlineArrowType = geom.GetArrowType();
+    d->grainlineAngle = qRadiansToDegrees(dAng);
+
     QPointF pt2(pt1.x() + dLen * qCos(dAng), pt1.y() - dLen * qSin(dAng));
 
     const qreal dArrowLen = ToPixel(0.5, *pattern->GetPatternUnit());
@@ -707,6 +711,24 @@ void VLayoutPiece::SetGrainline(const VGrainlineData& geom, const VContainer* pa
 QVector<QPointF> VLayoutPiece::GetGrainline() const
 {
     return Map(d->grainlinePoints);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+bool VLayoutPiece::IsGrainlineEnabled() const
+{
+    return d->grainlineEnabled;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+qreal VLayoutPiece::GrainlineAngle() const
+{
+    return d->grainlineAngle;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+ArrowType VLayoutPiece::GrainlineArrowType() const
+{
+    return d->grainlineArrowType;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -1195,7 +1217,7 @@ void VLayoutPiece::CreateGrainlineItem(QGraphicsItem *parent) const
 {
     SCASSERT(parent != nullptr)
 
-    if (d->grainlinePoints.count() < 2)
+    if (not d->grainlineEnabled || d->grainlinePoints.count() < 2)
     {
         return;
     }

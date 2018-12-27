@@ -90,6 +90,9 @@ public:
     bool GetRotate() const;
     void SetRotate(bool value);
 
+    bool GetFollowGrainline() const;
+    void SetFollowGrainline(bool value);
+
     int GetRotationIncrease() const;
     void SetRotationIncrease(int value);
 
@@ -132,6 +135,7 @@ private:
     LayoutErrors state;
     quint32 shift;
     bool rotate;
+    bool followGrainline;
     int rotationIncrease;
     bool autoCrop;
     bool saveLength;

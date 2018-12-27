@@ -76,6 +76,9 @@ public:
     bool GetRotate() const;
     void SetRotate(bool state);
 
+    bool GetFollowGrainline() const;
+    void SetFollowGrainline(bool state);
+
     int GetIncrease() const;
     bool SetIncrease(int increase);
 
