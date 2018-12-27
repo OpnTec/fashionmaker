@@ -604,7 +604,7 @@ VAbstractLayoutDialog::PaperSizeTemplate VCommandLine::OptTiledPaperSize() const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-PageOrientation VCommandLine::OptTiledPageOrientation()
+PageOrientation VCommandLine::OptTiledPageOrientation() const
 {
     return static_cast<PageOrientation>(not IsOptionSet(LONG_OPTION_TILED_PDF_LANDSCAPE));
 }

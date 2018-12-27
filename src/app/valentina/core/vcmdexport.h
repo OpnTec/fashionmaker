@@ -134,7 +134,7 @@ public:
     
     QMarginsF TiledPageMargins() const;
     VAbstractLayoutDialog::PaperSizeTemplate OptTiledPaperSize() const;
-    PageOrientation OptTiledPageOrientation();
+    PageOrientation OptTiledPageOrientation() const;
 
 protected:
 
