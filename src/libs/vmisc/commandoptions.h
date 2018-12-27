@@ -124,6 +124,7 @@ extern const QString LONG_OPTION_TILED_PDF_TOP_MARGIN;
 extern const QString LONG_OPTION_TILED_PDF_BOTTOM_MARGIN;
 extern const QString LONG_OPTION_TILED_PDF_LANDSCAPE;
 extern const QString LONG_OPTION_FOLLOW_GRAINLINE;
+extern const QString LONG_OPTION_LANDSCAPE_ORIENTATION;
 
 QStringList AllKeys();
 

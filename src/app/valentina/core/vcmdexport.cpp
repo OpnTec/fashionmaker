@@ -156,6 +156,12 @@ void VCommandLine::InitOptions(VCommandLineOptions &options, QMap<QString, int> 
                                                                     DialogLayoutSettings::MakeHelpTemplateList(),
                                           translate("VCommandLine", "Template number"), QChar('0')));
 
+    optionsIndex.insert(LONG_OPTION_LANDSCAPE_ORIENTATION, index++);
+    options.append(new QCommandLineOption(QStringList() << LONG_OPTION_LANDSCAPE_ORIENTATION,
+                                          translate("VCommandLine",
+                                                    "Switch page template orientation to landscape (export mode). This "
+                                                    "option has effect only for one of predefined page templates.")));
+
     optionsIndex.insert(LONG_OPTION_PAGEW, index++);
     options.append(new QCommandLineOption(QStringList() << SINGLE_OPTION_PAGEW << LONG_OPTION_PAGEW,
                                           translate("VCommandLine", "Page width in current units like 12.0 (cannot be "
@@ -508,6 +514,13 @@ VLayoutGeneratorPtr VCommandLine::DefaultGenerator() const
         diag.SetPaperHeight (Pg2Px(parser.value(*optionsUsed.value(optionsIndex.value(LONG_OPTION_PAGEH))), diag));
         diag.SetPaperWidth  (Pg2Px(parser.value(*optionsUsed.value(optionsIndex.value(LONG_OPTION_PAGEW))), diag));
     }
+    else
+    { // Not explicit page size
+        if (parser.isSet(*optionsUsed.value(optionsIndex.value(LONG_OPTION_LANDSCAPE_ORIENTATION))))
+        {
+            diag.EnableLandscapeOrientation();
+        }
+    }
 
     if (parser.isSet(*optionsUsed.value(optionsIndex.value(LONG_OPTION_SHIFTUNITS))))
     {
@@ -520,7 +533,6 @@ VLayoutGeneratorPtr VCommandLine::DefaultGenerator() const
 
     if (parser.isSet(*optionsUsed.value(optionsIndex.value(LONG_OPTION_SHIFTLENGTH))))
     {
-
         diag.SetShift(Lo2Px(parser.value(*optionsUsed.value(optionsIndex.value(LONG_OPTION_SHIFTLENGTH))), diag));
     }
 

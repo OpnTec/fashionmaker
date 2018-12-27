@@ -357,6 +357,15 @@ QString DialogLayoutSettings::SelectedPrinter() const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void DialogLayoutSettings::EnableLandscapeOrientation()
+{
+    if (static_cast<PaperSizeTemplate>(ui->comboBoxTemplates->currentData().toInt()) != PaperSizeTemplate::Custom)
+    { // Force landscape only for not custom page format
+        ui->toolButtonLandscape->setChecked(true);
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 void DialogLayoutSettings::TemplateSelected()
 {
     SheetSize(Template());
@@ -847,8 +856,7 @@ QString DialogLayoutSettings::MakeHelpTiledPdfTemplateList()
 //---------------------------------------------------------------------------------------------------------------------
 QSizeF DialogLayoutSettings::Template()
 {
-    PaperSizeTemplate temp;
-    temp = static_cast<PaperSizeTemplate>(ui->comboBoxTemplates->currentData().toInt());
+    const PaperSizeTemplate temp = static_cast<PaperSizeTemplate>(ui->comboBoxTemplates->currentData().toInt());
 
     const Unit paperUnit = PaperUnit();
 

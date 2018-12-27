@@ -105,6 +105,8 @@ public:
 
     QString SelectedPrinter() const;
 
+    void EnableLandscapeOrientation();
+
     //support functions for the command line parser which uses invisible dialog to properly build layout generator
     bool SelectTemplate(const PaperSizeTemplate& id);
     static QString MakeHelpTemplateList();

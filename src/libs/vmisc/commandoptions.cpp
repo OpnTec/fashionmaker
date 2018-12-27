@@ -129,6 +129,8 @@ const QString LONG_OPTION_TILED_PDF_LANDSCAPE     = QStringLiteral("tiledLandsca
 
 const QString LONG_OPTION_FOLLOW_GRAINLINE = QStringLiteral("followGrainline");
 
+const QString LONG_OPTION_LANDSCAPE_ORIENTATION = QStringLiteral("landscapeOrientation");
+
 //---------------------------------------------------------------------------------------------------------------------
 /**
  * @brief AllKeys return list with all command line keys (short and long forms). Used for testing on conflicts.
@@ -178,7 +180,8 @@ QStringList AllKeys()
          << LONG_OPTION_TILED_PDF_TOP_MARGIN
          << LONG_OPTION_TILED_PDF_BOTTOM_MARGIN
          << LONG_OPTION_TILED_PDF_LANDSCAPE
-         << LONG_OPTION_FOLLOW_GRAINLINE;
+         << LONG_OPTION_FOLLOW_GRAINLINE
+         << LONG_OPTION_LANDSCAPE_ORIENTATION;
 
     return list;
 }
