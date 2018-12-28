@@ -211,27 +211,30 @@ int VContour::GlobalEdgesCount() const
     int count = 0;
     if (not d->globalContour.isEmpty())
     {
-        return 10;
+        count = d->globalContour.count();
     }
     else
     {
-        return d->globalContour.count();
+        const qreal shift = d->shift == 0 ? ToPixel(0.5, Unit::Cm) : d->shift;
+        count = qFloor(EmptySheetEdge().length()/shift);
     }
+    return count;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 QLineF VContour::GlobalEdge(int i) const
 {
+    QLineF edge;
     if (d->globalContour.isEmpty()) //-V807
     {
-        // Because sheet is blank we have one global edge for all cases - Ox axis.
+        // Because sheet is blank we have one global edge for all cases.
         if (i < 1 || i > GlobalEdgesCount())
         { // Doesn't exist such edge
             return EmptySheetEdge();
         }
 
         const qreal nShift = EmptySheetEdge().length()/GlobalEdgesCount();
-        return QLineF(nShift*(i-1), 0, nShift*i, 0);
+        edge = IsPortrait() ? QLineF(nShift*(i-1), 0, nShift*i, 0) : QLineF(0, nShift*(i-1), 0, nShift*i);
     }
     else
     {
@@ -239,7 +242,7 @@ QLineF VContour::GlobalEdge(int i) const
         { // Doesn't exist such edge
             return QLineF();
         }
-        QLineF edge;
+
         if (i < GlobalEdgesCount())
         {
             edge = QLineF(d->globalContour.at(i-1), d->globalContour.at(i));
@@ -248,8 +251,8 @@ QLineF VContour::GlobalEdge(int i) const
         { // Closed countour
             edge = QLineF(d->globalContour.at(GlobalEdgesCount()-1), d->globalContour.at(0));
         }
-        return edge;
     }
+    return edge;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -356,7 +359,13 @@ void VContour::AppendWhole(QVector<QPointF> &contour, const VLayoutPiece &detail
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+bool VContour::IsPortrait() const
+{
+    return d->paperHeight >= d->paperWidth;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 QLineF VContour::EmptySheetEdge() const
 {
-    return QLineF(0, 0, d->paperWidth - 5, 0);
+    return IsPortrait() ? QLineF(0, 0, d->paperWidth, 0) : QLineF(0, 0, 0, d->paperHeight);
 }

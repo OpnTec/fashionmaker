@@ -93,6 +93,8 @@ private:
     QSharedDataPointer<VContourData> d;
 
     void AppendWhole(QVector<QPointF> &contour, const VLayoutPiece &detail, int detJ) const;
+
+    bool IsPortrait() const;
 };
 
 Q_DECLARE_TYPEINFO(VContour, Q_MOVABLE_TYPE);
