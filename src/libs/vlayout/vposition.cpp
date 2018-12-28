@@ -49,6 +49,94 @@
 #include "../vmisc/def.h"
 #include "../vmisc/vmath.h"
 
+namespace
+{
+//---------------------------------------------------------------------------------------------------------------------
+QT_WARNING_PUSH
+QT_WARNING_DISABLE_GCC("-Wunused-function")
+
+QPainterPath ShowDirection(const QLineF &edge)
+{
+    const int arrowLength = 14;
+    QPainterPath path;
+    if (edge.length()/arrowLength < 5)
+    {
+        return  path;
+    }
+
+    QLineF arrow = edge;
+    arrow.setLength(edge.length()/2.0);
+
+    //Reverse line because we want start arrow from this point
+    arrow = QLineF(arrow.p2(), arrow.p1());
+    const qreal angle = arrow.angle();//we each time change line angle, better save original angle value
+    arrow.setLength(arrowLength);//arrow length in pixels
+
+    arrow.setAngle(angle-35);
+    path.moveTo(arrow.p1());
+    path.lineTo(arrow.p2());
+
+    arrow.setAngle(angle+35);
+    path.moveTo(arrow.p1());
+    path.lineTo(arrow.p2());
+    return path;
+}
+
+QT_WARNING_POP
+
+//---------------------------------------------------------------------------------------------------------------------
+QPainterPath DrawContour(const QVector<QPointF> &points)
+{
+    QPainterPath path;
+    path.setFillRule(Qt::WindingFill);
+    if (points.count() >= 2)
+    {
+        for (qint32 i = 0; i < points.count()-1; ++i)
+        {
+            path.moveTo(points.at(i));
+            path.lineTo(points.at(i+1));
+        }
+        path.lineTo(points.at(0));
+
+#ifdef SHOW_DIRECTION
+        for (qint32 i = 0; i < points.count()-1; ++i)
+        {
+            path.addPath(ShowDirection(QLineF(points.at(i), points.at(i+1))));
+        }
+#endif
+
+#ifdef SHOW_VERTICES
+        for (qint32 i = 0; i < points.count(); ++i)
+        {
+            path.addRect(points.at(i).x()-3, points.at(i).y()-3, 6, 6);
+        }
+#endif
+    }
+    return path;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QT_WARNING_PUSH
+QT_WARNING_DISABLE_GCC("-Wunused-function")
+
+QPainterPath DrawDetails(const QVector<VLayoutPiece> &details)
+{
+    QPainterPath path;
+    path.setFillRule(Qt::WindingFill);
+    if (details.count() > 0)
+    {
+        for (auto &detail : details)
+        {
+            path.addPath(detail.ContourPath());
+        }
+    }
+    return path;
+}
+
+QT_WARNING_POP
+
+} //anonymous namespace
+
 //---------------------------------------------------------------------------------------------------------------------
 VPosition::VPosition(const VContour &gContour, int j, const VLayoutPiece &detail, int i, std::atomic_bool *stop,
                      bool rotate, int rotationIncrease, bool saveLength, bool followGainline)
@@ -536,78 +624,4 @@ void VPosition::FollowGrainline()
     {
         RotateOnAngle(angle+180);
     }
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-QPainterPath VPosition::ShowDirection(const QLineF &edge)
-{
-    const int arrowLength = 14;
-    QPainterPath path;
-    if (edge.length()/arrowLength < 5)
-    {
-        return  path;
-    }
-
-    QLineF arrow = edge;
-    arrow.setLength(edge.length()/2.0);
-
-    //Reverse line because we want start arrow from this point
-    arrow = QLineF(arrow.p2(), arrow.p1());
-    const qreal angle = arrow.angle();//we each time change line angle, better save original angle value
-    arrow.setLength(arrowLength);//arrow length in pixels
-
-    arrow.setAngle(angle-35);
-    path.moveTo(arrow.p1());
-    path.lineTo(arrow.p2());
-
-    arrow.setAngle(angle+35);
-    path.moveTo(arrow.p1());
-    path.lineTo(arrow.p2());
-    return path;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-QPainterPath VPosition::DrawContour(const QVector<QPointF> &points)
-{
-    QPainterPath path;
-    path.setFillRule(Qt::WindingFill);
-    if (points.count() >= 2)
-    {
-        for (qint32 i = 0; i < points.count()-1; ++i)
-        {
-            path.moveTo(points.at(i));
-            path.lineTo(points.at(i+1));
-        }
-        path.lineTo(points.at(0));
-
-#ifdef SHOW_DIRECTION
-        for (qint32 i = 0; i < points.count()-1; ++i)
-        {
-            path.addPath(ShowDirection(QLineF(points.at(i), points.at(i+1))));
-        }
-#endif
-
-#ifdef SHOW_VERTICES
-        for (qint32 i = 0; i < points.count(); ++i)
-        {
-            path.addRect(points.at(i).x()-3, points.at(i).y()-3, 6, 6);
-        }
-#endif
-    }
-    return path;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-QPainterPath VPosition::DrawDetails(const QVector<VLayoutPiece> &details)
-{
-    QPainterPath path;
-    path.setFillRule(Qt::WindingFill);
-    if (details.count() > 0)
-    {
-        for (auto &detail : details)
-        {
-            path.addPath(detail.ContourPath());
-        }
-    }
-    return path;
 }

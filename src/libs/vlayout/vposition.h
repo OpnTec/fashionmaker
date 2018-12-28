@@ -114,10 +114,6 @@ private:
     void CombineEdges(VLayoutPiece &detail, const QLineF &globalEdge, int dEdge);
     void RotateEdges(VLayoutPiece &detail, const QLineF &globalEdge, int dEdge, qreal angle) const;
 
-    static QPainterPath ShowDirection(const QLineF &edge);
-    static QPainterPath DrawContour(const QVector<QPointF> &points);
-    static QPainterPath DrawDetails(const QVector<VLayoutPiece> &details);
-
     void Rotate(int increase);
     void FollowGrainline();
 
