@@ -45,16 +45,16 @@ class VPosition : public QRunnable
 public:
     VPosition(const VContour &gContour, int j, const VLayoutPiece &detail, int i, std::atomic_bool *stop, bool rotate,
               int rotationIncrease, bool saveLength, bool followGainline);
-    virtual ~VPosition() override{}
+    virtual ~VPosition() override = default;
 
     quint32 getPaperIndex() const;
-    void setPaperIndex(const quint32 &value);
+    void setPaperIndex(quint32 value);
 
     quint32 getFrame() const;
-    void setFrame(const quint32 &value);
+    void setFrame(quint32 value);
 
     quint32 getDetailsCount() const;
-    void setDetailsCount(const quint32 &value);
+    void setDetailsCount(quint32 value);
 
     void setDetails(const QVector<VLayoutPiece> &details);
 
@@ -111,7 +111,7 @@ private:
     CrossingType Crossing(const VLayoutPiece &detail) const;
     bool         SheetContains(const QRectF &rect) const;
 
-    void CombineEdges(VLayoutPiece &detail, const QLineF &globalEdge, const int &dEdge);
+    void CombineEdges(VLayoutPiece &detail, const QLineF &globalEdge, int dEdge);
     void RotateEdges(VLayoutPiece &detail, const QLineF &globalEdge, int dEdge, qreal angle) const;
 
     static QPainterPath ShowDirection(const QLineF &edge);

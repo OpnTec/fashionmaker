@@ -68,7 +68,7 @@ VPosition::VPosition(const VContour &gContour, int j, const VLayoutPiece &detail
       angle_between(0),
       followGrainline(followGainline)
 {
-    if ((rotationIncrease >= 1 && rotationIncrease <= 180 && 360 % rotationIncrease == 0) == false)
+    if (not (rotationIncrease >= 1 && rotationIncrease <= 180 && 360 % rotationIncrease == 0))
     {
         this->rotationIncrease = 180;
     }
@@ -126,7 +126,7 @@ quint32 VPosition::getPaperIndex() const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VPosition::setPaperIndex(const quint32 &value)
+void VPosition::setPaperIndex(quint32 value)
 {
     paperIndex = value;
 }
@@ -139,7 +139,7 @@ quint32 VPosition::getFrame() const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VPosition::setFrame(const quint32 &value)
+void VPosition::setFrame(quint32 value)
 {
     frame = value;
 }
@@ -152,7 +152,7 @@ quint32 VPosition::getDetailsCount() const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VPosition::setDetailsCount(const quint32 &value)
+void VPosition::setDetailsCount(quint32 value)
 {
     detailsCount = value;
 }
@@ -242,7 +242,7 @@ void VPosition::DrawDebug(const VContour &contour, const VLayoutPiece &detail, i
     paintFrameImage.drawPicture(0, 0, picture);
     paintFrameImage.end();
 
-    const QString path = QDir::homePath()+QStringLiteral("/LayoutDebug/")+QString("%1_%2_%3.png").arg(paperIndex)
+    const QString path = QDir::homePath()+QStringLiteral("/LayoutDebug/%1_%2_%3.png").arg(paperIndex)
             .arg(detailsCount).arg(frame);
     frameImage.save (path);
 }
@@ -250,14 +250,7 @@ void VPosition::DrawDebug(const VContour &contour, const VLayoutPiece &detail, i
 //---------------------------------------------------------------------------------------------------------------------
 int VPosition::Bias(int length, int maxLength)
 {
-    if (length < maxLength && length*2 < maxLength)
-    {
-        return length;
-    }
-    else
-    {
-        return maxLength-length;
-    }
+    return length < maxLength && length*2 < maxLength ? length : maxLength-length;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -430,14 +423,16 @@ VPosition::CrossingType VPosition::Crossing(const VLayoutPiece &detail) const
     }
 
     const QPainterPath gPath = gContour.ContourPath();
+    CrossingType crossing = CrossingType::EdgeError;
     if (not gPath.intersects(detail.LayoutAllowancePath()) && not gPath.contains(detail.ContourPath()))
     {
-        return CrossingType::NoIntersection;
+        crossing = CrossingType::NoIntersection;
     }
     else
     {
-        return CrossingType::Intersection;
+        crossing = CrossingType::Intersection;
     }
+    return crossing;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -448,7 +443,7 @@ bool VPosition::SheetContains(const QRectF &rect) const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VPosition::CombineEdges(VLayoutPiece &detail, const QLineF &globalEdge, const int &dEdge)
+void VPosition::CombineEdges(VLayoutPiece &detail, const QLineF &globalEdge, int dEdge)
 {
     QLineF detailEdge;
     if (gContour.GetContour().isEmpty())
