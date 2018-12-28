@@ -52,9 +52,7 @@
 namespace
 {
 //---------------------------------------------------------------------------------------------------------------------
-QT_WARNING_PUSH
-QT_WARNING_DISABLE_GCC("-Wunused-function")
-
+#ifdef SHOW_DIRECTION
 QPainterPath ShowDirection(const QLineF &edge)
 {
     const int arrowLength = 14;
@@ -81,8 +79,7 @@ QPainterPath ShowDirection(const QLineF &edge)
     path.lineTo(arrow.p2());
     return path;
 }
-
-QT_WARNING_POP
+#endif
 
 //---------------------------------------------------------------------------------------------------------------------
 QPainterPath DrawContour(const QVector<QPointF> &points)
@@ -116,9 +113,7 @@ QPainterPath DrawContour(const QVector<QPointF> &points)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QT_WARNING_PUSH
-QT_WARNING_DISABLE_GCC("-Wunused-function")
-
+#ifdef ARRANGED_DETAILS
 QPainterPath DrawDetails(const QVector<VLayoutPiece> &details)
 {
     QPainterPath path;
@@ -132,8 +127,7 @@ QPainterPath DrawDetails(const QVector<VLayoutPiece> &details)
     }
     return path;
 }
-
-QT_WARNING_POP
+#endif
 
 } //anonymous namespace
 
