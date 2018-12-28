@@ -59,7 +59,7 @@ private:
     int resJ; // Edge of detail
     QTransform resMatrix; // Matrix for rotation and translation detail
     QSizeF bestSize;
-    qreal sheetWidth;
+    QSizeF sheetSize;
     bool valideResult;
     bool resMirror;
     BestFrom type;

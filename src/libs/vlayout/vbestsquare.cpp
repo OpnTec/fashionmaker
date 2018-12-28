@@ -33,7 +33,7 @@
 //---------------------------------------------------------------------------------------------------------------------
 VBestSquare::VBestSquare(const QSizeF &sheetSize, bool saveLength)
     :resI(0), resJ(0), resMatrix(QMatrix()), bestSize(QSizeF(sheetSize.width()+10, sheetSize.height()+10)),
-      sheetWidth(sheetSize.width()), valideResult(false), resMirror(false), type (BestFrom::Rotation),
+      sheetSize(sheetSize), valideResult(false), resMirror(false), type (BestFrom::Rotation),
       saveLength(saveLength)
 {}
 
@@ -42,10 +42,17 @@ void VBestSquare::NewResult(const QSizeF &candidate, int i, int j, const QTransf
 {
     if (saveLength)
     {
-        const QSizeF saveLengthSize(sheetWidth, candidate.height());
-        if (Square(saveLengthSize) <= Square(bestSize) && Square(saveLengthSize) > 0 && type >= this->type)
+        const bool isPortrait = sheetSize.height() >= sheetSize.width();
+        const QSizeF saveSpaceSize = isPortrait ? QSizeF(sheetSize.width(), candidate.height()) :
+                                                  QSizeF(candidate.width(), sheetSize.height());
+
+        const QSizeF saveSpaceBestSize = isPortrait ? QSizeF(sheetSize.width(), bestSize.height()) :
+                                                      QSizeF(bestSize.width(), sheetSize.height());
+
+        if (Square(saveSpaceSize) <= Square(saveSpaceBestSize) && Square(candidate) <= Square(bestSize)
+                && Square(saveSpaceSize) > 0 && Square(saveSpaceBestSize) > 0 && type >= this->type)
         {
-            bestSize = saveLengthSize;
+            bestSize = candidate;
         }
         else
         {
