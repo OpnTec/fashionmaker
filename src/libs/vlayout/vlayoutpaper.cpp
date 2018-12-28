@@ -166,9 +166,9 @@ void VLayoutPaper::SetRotationIncrease(int value)
 {
     d->globalRotationIncrease = value;
 
-    if ((d->globalRotationIncrease >= 1
+    if (not (d->globalRotationIncrease >= 1
          && d->globalRotationIncrease <= 180
-         && 360 % d->globalRotationIncrease == 0) == false)
+         && 360 % d->globalRotationIncrease == 0))
     {
         d->globalRotationIncrease = 180;
     }
@@ -253,8 +253,8 @@ bool VLayoutPaper::AddToSheet(const VLayoutPiece &detail, std::atomic_bool &stop
     {
         for (int i=1; i<= detailEdgesCount; ++i)
         {
-            VPosition *thread = new VPosition(d->globalContour, j, detail, i, &stop, d->localRotate,
-                                              d->localRotationIncrease, d->saveLength, d->followGrainline);
+            auto *thread = new VPosition(d->globalContour, j, detail, i, &stop, d->localRotate,
+                                         d->localRotationIncrease, d->saveLength, d->followGrainline);
             //Info for debug
             #ifdef LAYOUT_DEBUG
                 thread->setPaperIndex(d->paperIndex);

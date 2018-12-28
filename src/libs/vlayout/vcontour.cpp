@@ -188,7 +188,7 @@ QVector<QPointF> VContour::UniteWithContour(const VLayoutPiece &detail, int glob
                 }
             }
 
-            if (newContour.isEmpty() == false)
+            if (not newContour.isEmpty())
             {
                 if (newContour.last() != d->globalContour.at(i))
                 {
@@ -208,7 +208,8 @@ QVector<QPointF> VContour::UniteWithContour(const VLayoutPiece &detail, int glob
 //---------------------------------------------------------------------------------------------------------------------
 int VContour::GlobalEdgesCount() const
 {
-    if (d->globalContour.isEmpty())
+    int count = 0;
+    if (not d->globalContour.isEmpty())
     {
         return 10;
     }
