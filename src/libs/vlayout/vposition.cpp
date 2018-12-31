@@ -607,6 +607,13 @@ void VPosition::FollowGrainline()
     QLineF detailGrainline(10, 10, 100, 10);
     detailGrainline.setAngle(detail.GrainlineAngle());
 
+    if (detail.IsForceFlipping())
+    {
+        VLayoutPiece workDetail = detail; // We need copy for temp change
+        workDetail.Mirror(not followGrainline ? gContour.GlobalEdge(j) : QLineF(10, 10, 10, 100));
+        detailGrainline = workDetail.GetMatrix().map(detailGrainline);
+    }
+
     const qreal angle = detailGrainline.angleTo(FabricGrainline());
 
     if (detail.GrainlineArrowType() == ArrowType::atFront)
