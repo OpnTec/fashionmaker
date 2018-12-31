@@ -30,16 +30,45 @@
 
 #include <QMatrix>
 
+namespace
+{
+//---------------------------------------------------------------------------------------------------------------------
+qint64 Square(const QSizeF &size)
+{
+    return static_cast<qint64>(size.width()*size.height());
+}
+} // anonymous namespace
+
 //---------------------------------------------------------------------------------------------------------------------
 VBestSquare::VBestSquare(const QSizeF &sheetSize, bool saveLength)
-    :resI(0), resJ(0), resMatrix(QMatrix()), bestSize(QSizeF(sheetSize.width()+10, sheetSize.height()+10)),
-      sheetSize(sheetSize), valideResult(false), resMirror(false), type (BestFrom::Rotation),
-      saveLength(saveLength)
+    : resI(0),
+      resJ(0),
+      resMatrix(),
+      bestSize(QSizeF(sheetSize.width()+10, sheetSize.height()+10)),
+      sheetSize(sheetSize),
+      valideResult(false),
+      resMirror(false),
+      type(BestFrom::Rotation),
+      saveLength(saveLength),
+      position(INT_MAX)
 {}
 
 //---------------------------------------------------------------------------------------------------------------------
-void VBestSquare::NewResult(const QSizeF &candidate, int i, int j, const QTransform &matrix, bool mirror, BestFrom type)
+void VBestSquare::NewResult(const QSizeF &candidate, int i, int j, const QTransform &matrix, bool mirror,
+                            qreal position, BestFrom type)
 {
+    auto SaveResult = [this, candidate, i, j, matrix, mirror, type, position]()
+    {
+        bestSize = candidate;
+        resI = i;
+        resJ = j;
+        resMatrix = matrix;
+        valideResult = true;
+        resMirror = mirror;
+        this->type = type;
+        this->position = position;
+    };
+
     if (saveLength)
     {
         const bool isPortrait = sheetSize.height() >= sheetSize.width();
@@ -50,33 +79,20 @@ void VBestSquare::NewResult(const QSizeF &candidate, int i, int j, const QTransf
                                                       QSizeF(bestSize.width(), sheetSize.height());
 
         if (Square(saveSpaceSize) <= Square(saveSpaceBestSize) && Square(candidate) <= Square(bestSize)
-                && Square(saveSpaceSize) > 0 && Square(saveSpaceBestSize) > 0 && type >= this->type)
+                && position <= this->position && Square(saveSpaceSize) > 0 && Square(saveSpaceBestSize) > 0
+                && type >= this->type)
         {
-            bestSize = candidate;
-        }
-        else
-        {
-            return;
+            SaveResult();
         }
     }
     else
     {
-        if (Square(candidate) <= Square(bestSize) && Square(candidate) > 0 && type >= this->type)
+        if (Square(candidate) <= Square(bestSize) && Square(candidate) > 0 && position <= this->position
+                && type >= this->type)
         {
-            bestSize = candidate;
-        }
-        else
-        {
-            return;
+            SaveResult();
         }
     }
-
-    resI = i;
-    resJ = j;
-    resMatrix = matrix;
-    valideResult = true;
-    resMirror = mirror;
-    this->type = type;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -84,60 +100,7 @@ void VBestSquare::NewResult(const VBestSquare &best)
 {
     if (best.ValidResult() && saveLength == best.IsSaveLength())
     {
-        NewResult(best.BestSize(), best.GContourEdge(), best.DetailEdge(), best.Matrix(), best.Mirror(), best.Type());
+        NewResult(best.BestSize(), best.GContourEdge(), best.DetailEdge(), best.Matrix(), best.Mirror(),
+                  best.Position(), best.Type());
     }
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-QSizeF VBestSquare::BestSize() const
-{
-    return bestSize;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-int VBestSquare::GContourEdge() const
-{
-    return resI;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-int VBestSquare::DetailEdge() const
-{
-    return resJ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-QTransform VBestSquare::Matrix() const
-{
-    return resMatrix;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-bool VBestSquare::ValidResult() const
-{
-    return valideResult;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-bool VBestSquare::Mirror() const
-{
-    return resMirror;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-BestFrom VBestSquare::Type() const
-{
-    return type;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-bool VBestSquare::IsSaveLength() const
-{
-    return saveLength;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-qint64 VBestSquare::Square(const QSizeF &size)
-{
-    return static_cast<qint64>(size.width()*size.height());
 }

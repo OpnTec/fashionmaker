@@ -40,7 +40,8 @@ class VBestSquare
 public:
     VBestSquare(const QSizeF &sheetSize, bool saveLength);
 
-    void NewResult(const QSizeF &candidate, int i, int j, const QTransform &matrix, bool mirror, BestFrom type);
+    void NewResult(const QSizeF &candidate, int i, int j, const QTransform &matrix, bool mirror, qreal position,
+                   BestFrom type);
     void NewResult(const VBestSquare &best);
 
     QSizeF     BestSize() const;
@@ -50,6 +51,7 @@ public:
     bool       ValidResult() const;
     bool       Mirror() const;
     BestFrom   Type() const;
+    qreal      Position() const;
 
     bool IsSaveLength() const;
 
@@ -64,8 +66,61 @@ private:
     bool resMirror;
     BestFrom type;
     bool saveLength;
-
-    static qint64 Square(const QSizeF &size);
+    qreal position;
 };
+
+//---------------------------------------------------------------------------------------------------------------------
+inline QSizeF VBestSquare::BestSize() const
+{
+    return bestSize;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+inline int VBestSquare::GContourEdge() const
+{
+    return resI;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+inline int VBestSquare::DetailEdge() const
+{
+    return resJ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+inline QTransform VBestSquare::Matrix() const
+{
+    return resMatrix;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+inline bool VBestSquare::ValidResult() const
+{
+    return valideResult;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+inline bool VBestSquare::Mirror() const
+{
+    return resMirror;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+inline BestFrom VBestSquare::Type() const
+{
+    return type;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+inline qreal VBestSquare::Position() const
+{
+    return position;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+inline bool VBestSquare::IsSaveLength() const
+{
+    return saveLength;
+}
 
 #endif // VBESTSQUARE_H

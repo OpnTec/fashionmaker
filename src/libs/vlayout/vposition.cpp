@@ -342,7 +342,11 @@ void VPosition::SaveCandidate(VBestSquare &bestResult, const VLayoutPiece &detai
     QVector<QPointF> newGContour = gContour.UniteWithContour(detail, globalI, detJ, type);
     newGContour.append(newGContour.first());
     const QSizeF size = QPolygonF(newGContour).boundingRect().size();
-    bestResult.NewResult(size, globalI, detJ, detail.GetMatrix(), detail.IsMirror(), type);
+
+    const bool isPortrait = gContour.GetSize().height() >= gContour.GetSize().width();
+    const qreal position = isPortrait ? detail.DetailBoundingRect().y() : detail.DetailBoundingRect().x();
+
+    bestResult.NewResult(size, globalI, detJ, detail.GetMatrix(), detail.IsMirror(), position, type);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
