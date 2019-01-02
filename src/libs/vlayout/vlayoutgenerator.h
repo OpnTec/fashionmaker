@@ -147,6 +147,7 @@ private:
 
     int PageHeight() const;
     int PageWidth() const;
+    bool IsPortrait() const;
 
     void GatherPages();
     void UnitePages();

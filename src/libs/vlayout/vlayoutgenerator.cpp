@@ -115,18 +115,23 @@ void VLayoutGenerator::Generate()
 
     if (bank->Prepare())
     {
-        const int width = PageWidth();
+        int width = PageWidth();
         int height = PageHeight();
 
         if (stripOptimization)
         {
             const qreal b = bank->GetBiggestDiagonal() * multiplier + bank->GetLayoutWidth();
 
-            if (height >= b*2)
+            auto SetStrip = [this, b](int &side)
             {
-                stripOptimizationEnabled = true;
-                height = qFloor(height / qFloor(height/b));
-            }
+                if (side >= b*2)
+                {
+                    stripOptimizationEnabled = true;
+                    side = qFloor(side / qFloor(side/b));
+                }
+            };
+
+            IsPortrait() ? SetStrip(height) : SetStrip(width);
         }
 
         while (bank->AllDetailsCount() > 0)
@@ -304,6 +309,12 @@ int VLayoutGenerator::PageHeight() const
 int VLayoutGenerator::PageWidth() const
 {
     return static_cast<int>(paperWidth - (margins.left() + margins.right()));
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+bool VLayoutGenerator::IsPortrait() const
+{
+    return PageHeight() >= PageWidth();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
