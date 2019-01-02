@@ -620,12 +620,12 @@ void VPosition::FollowGrainline()
 
     const qreal angle = detailGrainline.angleTo(FabricGrainline());
 
-    if (detail.GrainlineArrowType() == ArrowType::atFront)
+    if (detail.GrainlineArrowType() == ArrowType::atBoth || detail.GrainlineArrowType() == ArrowType::atFront)
     {
         RotateOnAngle(angle);
     }
 
-    if (detail.GrainlineArrowType() == ArrowType::atRear)
+    if (detail.GrainlineArrowType() == ArrowType::atBoth || detail.GrainlineArrowType() == ArrowType::atRear)
     {
         RotateOnAngle(angle+180);
     }
