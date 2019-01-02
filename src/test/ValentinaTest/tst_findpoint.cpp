@@ -37,8 +37,8 @@
 #include <QtTest>
 
 //---------------------------------------------------------------------------------------------------------------------
-TST_FindPoint::TST_FindPoint(QObject *parent) :
-    QObject(parent)
+TST_FindPoint::TST_FindPoint(QObject *parent)
+    : AbstractTest(parent)
 {
 }
 
@@ -169,7 +169,8 @@ void TST_FindPoint::TestPointOfIntersectionCurves()
     VToolPointOfIntersectionCurves::FindPoint(curve1Points, curve2Points,
                                               static_cast<VCrossCurvesPoint>(vCross),
                                               static_cast<HCrossCurvesPoint>(hCross), &result);
-    QCOMPARE(result.toPoint(), expect.toPoint());
+
+    Comparison(result, expect);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -210,8 +211,8 @@ void TST_FindPoint::TestTrueDarts()
 
     VToolTrueDarts::FindPoint(baseLineP1, baseLineP2, dartP1, dartP2, dartP3, p1, p2);
 
-    QCOMPARE(p1.toPoint(), expectP1.toPoint());
-    QCOMPARE(p2.toPoint(), expectP2.toPoint());
+    Comparison(p1, expectP1);
+    Comparison(p2, expectP2);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -237,7 +238,8 @@ void TST_FindPoint::TestLineIntersectAxis()
 
     QPointF resultPoint;
     VToolLineIntersectAxis::FindPoint(axis, line, &resultPoint);
-    QCOMPARE(point, resultPoint);
+
+    Comparison(resultPoint, point);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -269,7 +271,8 @@ void TST_FindPoint::TestTriangle()
 
     QPointF resultPoint;
     VToolTriangle::FindPoint(axisP1, axisP2, firstPoint, secondPoint, &resultPoint);
-    QCOMPARE(point, resultPoint);
+
+    Comparison(point, resultPoint);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -309,7 +312,7 @@ void TST_FindPoint::TestShoulderPoint()
 
     QPointF resultPoint = VToolShoulderPoint::FindPoint(p1, p2, pShoulder, length);
 
-    QCOMPARE(point, resultPoint);
+    Comparison(point, resultPoint);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -549,5 +552,5 @@ void TST_FindPoint::TestCurveIntersectAxis()
     QPointF resultPoint;
     VToolCurveIntersectAxis::FindPoint(basePoint, angle, curvePoints, &resultPoint);
 
-    QCOMPARE(result, resultPoint);
+    Comparison(resultPoint, result);
 }

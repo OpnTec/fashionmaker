@@ -74,6 +74,15 @@ void AbstractTest::Comparison(const QVector<QPointF> &ekv, const QVector<QPointF
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void AbstractTest::Comparison(const QPointF &result, const QPointF &expected) const
+{
+    const QString msg = QStringLiteral("Got '%2;%3', Expected '%4;%5'.")
+            .arg(result.x()).arg(result.y()).arg(expected.x()).arg(expected.y());
+    // Check each point. Don't use comparison float values
+    QVERIFY2(VFuzzyComparePoints(result, expected), qUtf8Printable(msg));
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 QString AbstractTest::ValentinaPath() const
 {
     const QString path = QStringLiteral("/../../../app/valentina/bin/valentina");

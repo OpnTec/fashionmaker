@@ -29,9 +29,9 @@
 #ifndef TST_FINDPOINT_H
 #define TST_FINDPOINT_H
 
-#include <QObject>
+#include "../vtest/abstracttest.h"
 
-class TST_FindPoint : public QObject
+class TST_FindPoint : public AbstractTest
 {
     Q_OBJECT
 public:
