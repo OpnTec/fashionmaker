@@ -128,14 +128,16 @@ int AbstractTest::Run(int exit, const QString &program, const QStringList &argum
 
     if (not process->waitForStarted(msecs))
     {
-        error = QStringLiteral("The start operation timed out or an error occurred.\n%1").arg(parameters);
+        error = QStringLiteral("The start operation timed out or an error occurred.\n%1\n%2")
+                .arg(parameters, QString(process->readAllStandardError()));
         process->kill();
         return TST_EX_START_TIME_OUT;
     }
 
     if (not process->waitForFinished(msecs))
     {
-        error = QStringLiteral("The finish operation timed out or an error occurred.\n%1").arg(parameters);
+        error = QStringLiteral("The finish operation timed out or an error occurred.\n%1\n%2")
+                .arg(parameters, QString(process->readAllStandardError()));
         process->kill();
         return TST_EX_FINISH_TIME_OUT;
     }
