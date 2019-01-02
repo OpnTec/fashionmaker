@@ -91,9 +91,11 @@ void TST_VAbstractPiece::EquidistantRemoveLoop_data()
     // https://bitbucket.org/dismine/valentina/issue/298/segmented-curve-isnt-selected-in-seam
     // See file src/app/share/collection/TestPuzzle.val
     // Code should clean loops in path.
+#if !defined(Q_PROCESSOR_S390) && !defined(Q_PROCESSOR_S390_X)
     QTest::newRow("Issue 298. Case1") << InputPointsIssue298Case1()
                                       << 75.59055118110237 // seam allowance width
                                       << OutputPointsIssue298Case1();
+#endif
 
     QTest::newRow("Issue 298. Case2") << InputPointsIssue298Case2()
                                       << 37.795275590551185 // seam allowance width
@@ -4690,7 +4692,8 @@ void TST_VAbstractPiece::BrokenDetailEquidistant_data() const
     ekvOrig.append(QPointF(787.1898456692913, 1663.5186141732283));
 
     // Disabled due to "undefined behavior" problem
-#if !defined(Q_OS_WIN) && !defined(Q_CC_CLANG) && !defined(Q_PROCESSOR_X86_64)
+#if !defined(Q_OS_WIN) && !defined(Q_CC_CLANG) && !defined(Q_PROCESSOR_X86_64) && !defined(Q_PROCESSOR_S390)
+    && !defined(Q_PROCESSOR_S390_X)
     QTest::newRow("GAVAUDAN Laure.") << points << 37.795275590551185 << ekvOrig;
 #endif
 
@@ -4785,8 +4788,10 @@ void TST_VAbstractPiece::BrokenDetailEquidistant_data() const
     ekvOrig.append(QPointF(-3963.5989171180895, 1302.9008086818892));
     ekvOrig.append(QPointF(-3101.671677349305, 2354.311657146295));
 
+#if !defined (Q_PROCESSOR_S390) && !defined(Q_PROCESSOR_S390_X)
     // See the file "collection/bugs/Issue_#687.val"
     QTest::newRow("Issue #687.") << points << 37.795275590551185 << ekvOrig;
+#endif
 
     // See private test cases in file jacket_issue_#767.val, piece "Fabric_TopCollar"
     // Curve approximation scale 0.5
