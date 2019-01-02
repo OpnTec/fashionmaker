@@ -106,7 +106,7 @@ public:
     void SetUnitePages(bool value);
 
     quint8 GetMultiplier() const;
-    void   SetMultiplier(const quint8 &value);
+    void   SetMultiplier(quint8 value);
 
     bool IsStripOptimization() const;
     void SetStripOptimization(bool value);

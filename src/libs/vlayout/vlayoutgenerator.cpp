@@ -283,7 +283,7 @@ quint8 VLayoutGenerator::GetMultiplier() const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VLayoutGenerator::SetMultiplier(const quint8 &value)
+void VLayoutGenerator::SetMultiplier(quint8 value)
 {
     if (value > 10)
     {
@@ -530,7 +530,7 @@ void VLayoutGenerator::SetRotationIncrease(int value)
 {
     rotationIncrease = value;
 
-    if ((rotationIncrease >= 1 && rotationIncrease <= 180 && 360 % rotationIncrease == 0) == false)
+    if (not (rotationIncrease >= 1 && rotationIncrease <= 180 && 360 % rotationIncrease == 0))
     {
         rotationIncrease = 180;
     }
