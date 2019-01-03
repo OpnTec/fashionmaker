@@ -3246,6 +3246,10 @@ Appliquer les réglages quand-même ?</translation>
 Apply settings anyway?</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Follow grainline</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>DialogLine</name>
@@ -4568,6 +4572,10 @@ Apply settings anyway?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <source>&lt;Empty&gt;</source>
+        <translation type="unfinished">&lt;vide&gt;</translation>
+    </message>
+    <message>
         <source>The same curve repeats twice!</source>
         <translation type="unfinished"></translation>
     </message>
@@ -5673,6 +5681,10 @@ Apply settings anyway?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <source>&lt;Empty&gt;</source>
+        <translation type="unfinished">&lt;vide&gt;</translation>
+    </message>
+    <message>
         <source>The same curve repeats twice!</source>
         <translation type="unfinished"></translation>
     </message>
@@ -6114,6 +6126,13 @@ Apply settings anyway?</source>
     <message>
         <source>Paths</source>
         <translation type="unfinished">Chemins</translation>
+    </message>
+    <message numerus="yes">
+        <source>Followed %n option(s) require restart to take effect: %1.</source>
+        <translation type="unfinished">
+            <numerusform></numerusform>
+            <numerusform></numerusform>
+        </translation>
     </message>
 </context>
 <context>
@@ -8460,6 +8479,18 @@ Voulez-vous sauvegarder les changements?</translation>
         <source>Acceleration:</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>User Interface</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Activate dark mode</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>dark mode</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>PreferencesPathPage</name>
@@ -9279,15 +9310,15 @@ This option will take an affect after restart.</source>
     </message>
     <message>
         <source>File</source>
-        <translation>Fichier</translation>
+        <translation type="vanished">Fichier</translation>
     </message>
     <message>
         <source>Window</source>
-        <translation>Fenêtre</translation>
+        <translation type="vanished">Fenêtre</translation>
     </message>
     <message>
         <source>Help</source>
-        <translation>Aide</translation>
+        <translation type="vanished">Aide</translation>
     </message>
     <message>
         <source>Measurements</source>
@@ -9315,7 +9346,7 @@ This option will take an affect after restart.</source>
     </message>
     <message>
         <source>Quit</source>
-        <translation>Quitter</translation>
+        <translation type="vanished">Quitter</translation>
     </message>
     <message>
         <source>About &amp;Qt</source>
@@ -9323,11 +9354,11 @@ This option will take an affect after restart.</source>
     </message>
     <message>
         <source>About Tape</source>
-        <translation>A propos de Tape</translation>
+        <translation type="vanished">A propos de Tape</translation>
     </message>
     <message>
         <source>New</source>
-        <translation>Nouveau</translation>
+        <translation type="vanished">Nouveau</translation>
     </message>
     <message>
         <source>Add known</source>
@@ -9779,14 +9810,6 @@ Voulez-vous enregistrer les changements?</translation>
         <translation type="unfinished">Nom du client :</translation>
     </message>
     <message>
-        <source>Open individual …</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Save As …</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Open multisize …</source>
         <translation type="unfinished"></translation>
     </message>
@@ -9857,6 +9880,46 @@ Voulez-vous enregistrer les changements?</translation>
     <message>
         <source>Cannot save settings. Access denied.</source>
         <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;File</source>
+        <translation type="unfinished">&amp;Fichier</translation>
+    </message>
+    <message>
+        <source>&amp;Window</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;Help</source>
+        <translation type="unfinished">Aid&amp;e</translation>
+    </message>
+    <message>
+        <source>&amp;Measurements</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;Open individual …</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;Save</source>
+        <translation type="unfinished">&amp;Sauver</translation>
+    </message>
+    <message>
+        <source>Save &amp;As …</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;Quit</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;About Tape</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;New</source>
+        <translation type="unfinished">&amp;Nouveau</translation>
     </message>
 </context>
 <context>
@@ -10461,6 +10524,18 @@ Voulez-vous enregistrer les changements?</translation>
         <source>With OS options</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>User Interface</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Activate dark mode</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>dark mode</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>TapePreferencesPathPage</name>
@@ -10576,19 +10651,19 @@ Voulez-vous enregistrer les changements?</translation>
     <name>VAbstractConverter</name>
     <message>
         <source>Couldn&apos;t get version information.</source>
-        <translation>Impossible d&apos;obtenir les informations de version.</translation>
+        <translation type="vanished">Impossible d&apos;obtenir les informations de version.</translation>
     </message>
     <message>
         <source>Too many tags &lt;%1&gt; in file.</source>
-        <translation>Trop d&apos;étiquettes &lt;%1&gt; dans le fichier.</translation>
+        <translation type="vanished">Trop d&apos;étiquettes &lt;%1&gt; dans le fichier.</translation>
     </message>
     <message>
         <source>Version &quot;%1&quot; invalid.</source>
-        <translation>Version &quot;%1&quot; invalide.</translation>
+        <translation type="vanished">Version &quot;%1&quot; invalide.</translation>
     </message>
     <message>
         <source>Version &quot;0.0.0&quot; invalid.</source>
-        <translation>Version &quot;0.0.0&quot; invalide.</translation>
+        <translation type="vanished">Version &quot;0.0.0&quot; invalide.</translation>
     </message>
     <message>
         <source>Invalid version. Minimum supported version is %1</source>
@@ -10683,6 +10758,13 @@ Voulez-vous enregistrer les changements?</translation>
     <message>
         <source>Roll 72in</source>
         <translation type="unfinished">Rouleau de 44po {72i?}</translation>
+    </message>
+</context>
+<context>
+    <name>VAbstractNode</name>
+    <message>
+        <source>This id (%1) is not unique.</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -11316,6 +11398,18 @@ Voulez-vous enregistrer les changements?</translation>
         <source>Invalid user material &apos;%1&apos;. Wrong material number.</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Switch page template orientation to landscape (export mode). This option has effect only for one of predefined page templates.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>The page height</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Order detail to follow grainline direction (export mode).</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>VCommonSettings</name>
@@ -11451,6 +11545,30 @@ Voulez-vous enregistrer les changements?</translation>
         <source>&lt;empty&gt;</source>
         <translation>&lt;empty&gt;</translation>
     </message>
+    <message>
+        <source>Not unique id (%1)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>This id (%1) is not unique.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Couldn&apos;t get version information.</source>
+        <translation type="unfinished">Impossible d&apos;obtenir les informations de version.</translation>
+    </message>
+    <message>
+        <source>Too many tags &lt;%1&gt; in file.</source>
+        <translation type="unfinished">Trop d&apos;étiquettes &lt;%1&gt; dans le fichier.</translation>
+    </message>
+    <message>
+        <source>Version &quot;%1&quot; invalid.</source>
+        <translation type="unfinished">Version &quot;%1&quot; invalide.</translation>
+    </message>
+    <message>
+        <source>Version &quot;0.0.0&quot; invalid.</source>
+        <translation type="unfinished">Version &quot;0.0.0&quot; invalide.</translation>
+    </message>
 </context>
 <context>
     <name>VDrawTool</name>
@@ -11476,6 +11594,10 @@ Voulez-vous enregistrer les changements?</translation>
     </message>
     <message>
         <source>Remove from group</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>This id (%1) is not unique.</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -12920,6 +13042,10 @@ Voulez-vous enregistrer les changements?</translation>
         <source>Force flipping</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>This id (%1) is not unique.</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>VToolShoulderPoint</name>
@@ -12952,6 +13078,10 @@ Voulez-vous enregistrer les changements?</translation>
     <message>
         <source>United detail</source>
         <translation type="vanished">Pièces de patron fusionnées</translation>
+    </message>
+    <message>
+        <source>This id (%1) is not unique.</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

@@ -3249,6 +3249,10 @@ Apply settings anyway?</translation>
 Apply settings anyway?</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Follow grainline</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>DialogLine</name>
@@ -4571,6 +4575,10 @@ Apply settings anyway?</source>
         <translation>Excluded</translation>
     </message>
     <message>
+        <source>&lt;Empty&gt;</source>
+        <translation type="unfinished">&lt;Empty&gt;</translation>
+    </message>
+    <message>
         <source>The same curve repeats twice!</source>
         <translation type="unfinished"></translation>
     </message>
@@ -5676,6 +5684,10 @@ Apply settings anyway?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <source>&lt;Empty&gt;</source>
+        <translation type="unfinished">&lt;Empty&gt;</translation>
+    </message>
+    <message>
         <source>The same curve repeats twice!</source>
         <translation type="unfinished"></translation>
     </message>
@@ -6117,6 +6129,13 @@ Apply settings anyway?</source>
     <message>
         <source>Paths</source>
         <translation>Paths</translation>
+    </message>
+    <message numerus="yes">
+        <source>Followed %n option(s) require restart to take effect: %1.</source>
+        <translation type="unfinished">
+            <numerusform></numerusform>
+            <numerusform></numerusform>
+        </translation>
     </message>
 </context>
 <context>
@@ -8475,6 +8494,18 @@ Do you want to save your changes?</translation>
         <source>Acceleration:</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>User Interface</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Activate dark mode</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>dark mode</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>PreferencesPathPage</name>
@@ -9294,15 +9325,15 @@ This option will take an affect after restart.</source>
     </message>
     <message>
         <source>File</source>
-        <translation>File</translation>
+        <translation type="vanished">File</translation>
     </message>
     <message>
         <source>Window</source>
-        <translation>Window</translation>
+        <translation type="vanished">Window</translation>
     </message>
     <message>
         <source>Help</source>
-        <translation>Help</translation>
+        <translation type="vanished">Help</translation>
     </message>
     <message>
         <source>Measurements</source>
@@ -9330,7 +9361,7 @@ This option will take an affect after restart.</source>
     </message>
     <message>
         <source>Quit</source>
-        <translation>Quit</translation>
+        <translation type="vanished">Quit</translation>
     </message>
     <message>
         <source>About &amp;Qt</source>
@@ -9338,11 +9369,11 @@ This option will take an affect after restart.</source>
     </message>
     <message>
         <source>About Tape</source>
-        <translation>About Tape</translation>
+        <translation type="vanished">About Tape</translation>
     </message>
     <message>
         <source>New</source>
-        <translation>New</translation>
+        <translation type="vanished">New</translation>
     </message>
     <message>
         <source>Add known</source>
@@ -9794,14 +9825,6 @@ Do you want to save your changes?</translation>
         <translation type="unfinished">Customer name:</translation>
     </message>
     <message>
-        <source>Open individual …</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Save As …</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Open multisize …</source>
         <translation type="unfinished"></translation>
     </message>
@@ -9872,6 +9895,46 @@ Do you want to save your changes?</translation>
     <message>
         <source>Cannot save settings. Access denied.</source>
         <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;File</source>
+        <translation type="unfinished">&amp;File</translation>
+    </message>
+    <message>
+        <source>&amp;Window</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;Help</source>
+        <translation type="unfinished">&amp;Help</translation>
+    </message>
+    <message>
+        <source>&amp;Measurements</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;Open individual …</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;Save</source>
+        <translation type="unfinished">&amp;Save</translation>
+    </message>
+    <message>
+        <source>Save &amp;As …</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;Quit</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;About Tape</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;New</source>
+        <translation type="unfinished">&amp;New</translation>
     </message>
 </context>
 <context>
@@ -10476,6 +10539,18 @@ Do you want to save your changes?</translation>
         <source>With OS options</source>
         <translation>With OS options</translation>
     </message>
+    <message>
+        <source>User Interface</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Activate dark mode</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>dark mode</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>TapePreferencesPathPage</name>
@@ -10591,19 +10666,19 @@ Do you want to save your changes?</translation>
     <name>VAbstractConverter</name>
     <message>
         <source>Couldn&apos;t get version information.</source>
-        <translation>Couldn&apos;t get version information.</translation>
+        <translation type="vanished">Couldn&apos;t get version information.</translation>
     </message>
     <message>
         <source>Too many tags &lt;%1&gt; in file.</source>
-        <translation>Too many tags &lt;%1&gt; in file.</translation>
+        <translation type="vanished">Too many tags &lt;%1&gt; in file.</translation>
     </message>
     <message>
         <source>Version &quot;%1&quot; invalid.</source>
-        <translation>Version &quot;%1&quot; invalid.</translation>
+        <translation type="vanished">Version &quot;%1&quot; invalid.</translation>
     </message>
     <message>
         <source>Version &quot;0.0.0&quot; invalid.</source>
-        <translation>Version &quot;0.0.0&quot; invalid.</translation>
+        <translation type="vanished">Version &quot;0.0.0&quot; invalid.</translation>
     </message>
     <message>
         <source>Invalid version. Minimum supported version is %1</source>
@@ -10702,6 +10777,13 @@ Do you want to save your changes?</translation>
     <message>
         <source>Roll 72in</source>
         <translation type="unfinished">Roll 44in {72i?}</translation>
+    </message>
+</context>
+<context>
+    <name>VAbstractNode</name>
+    <message>
+        <source>This id (%1) is not unique.</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -11339,6 +11421,18 @@ Do you want to save your changes?</translation>
         <source>Invalid user material &apos;%1&apos;. Wrong material number.</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Switch page template orientation to landscape (export mode). This option has effect only for one of predefined page templates.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>The page height</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Order detail to follow grainline direction (export mode).</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>VCommonSettings</name>
@@ -11475,6 +11569,30 @@ Do you want to save your changes?</translation>
         <source>&lt;empty&gt;</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Not unique id (%1)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>This id (%1) is not unique.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Couldn&apos;t get version information.</source>
+        <translation type="unfinished">Couldn&apos;t get version information.</translation>
+    </message>
+    <message>
+        <source>Too many tags &lt;%1&gt; in file.</source>
+        <translation type="unfinished">Too many tags &lt;%1&gt; in file.</translation>
+    </message>
+    <message>
+        <source>Version &quot;%1&quot; invalid.</source>
+        <translation type="unfinished">Version &quot;%1&quot; invalid.</translation>
+    </message>
+    <message>
+        <source>Version &quot;0.0.0&quot; invalid.</source>
+        <translation type="unfinished">Version &quot;0.0.0&quot; invalid.</translation>
+    </message>
 </context>
 <context>
     <name>VDrawTool</name>
@@ -11500,6 +11618,10 @@ Do you want to save your changes?</translation>
     </message>
     <message>
         <source>Remove from group</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>This id (%1) is not unique.</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -12960,6 +13082,10 @@ Do you want to save your changes?</translation>
         <source>Force flipping</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>This id (%1) is not unique.</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>VToolShoulderPoint</name>
@@ -12992,6 +13118,10 @@ Do you want to save your changes?</translation>
     <message>
         <source>United detail</source>
         <translation type="vanished">United detail</translation>
+    </message>
+    <message>
+        <source>This id (%1) is not unique.</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

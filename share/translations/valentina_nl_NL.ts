@@ -3251,6 +3251,10 @@ Apply settings anyway?</source>
 
 Toch de instellingen aanpassen?</translation>
     </message>
+    <message>
+        <source>Follow grainline</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>DialogLine</name>
@@ -4573,6 +4577,10 @@ Toch de instellingen aanpassen?</translation>
         <translation>Uitgezonderd</translation>
     </message>
     <message>
+        <source>&lt;Empty&gt;</source>
+        <translation type="unfinished">&lt;Leeg&gt;</translation>
+    </message>
+    <message>
         <source>The same curve repeats twice!</source>
         <translation type="unfinished"></translation>
     </message>
@@ -5678,6 +5686,10 @@ Toch de instellingen aanpassen?</translation>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <source>&lt;Empty&gt;</source>
+        <translation type="unfinished">&lt;Leeg&gt;</translation>
+    </message>
+    <message>
         <source>The same curve repeats twice!</source>
         <translation type="unfinished"></translation>
     </message>
@@ -6119,6 +6131,13 @@ Toch de instellingen aanpassen?</translation>
     <message>
         <source>Paths</source>
         <translation>Paden</translation>
+    </message>
+    <message numerus="yes">
+        <source>Followed %n option(s) require restart to take effect: %1.</source>
+        <translation type="unfinished">
+            <numerusform></numerusform>
+            <numerusform></numerusform>
+        </translation>
     </message>
 </context>
 <context>
@@ -8476,6 +8495,18 @@ Do you want to save your changes?</source>
         <source>Acceleration:</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>User Interface</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Activate dark mode</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>dark mode</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>PreferencesPathPage</name>
@@ -9295,15 +9326,15 @@ This option will take an affect after restart.</source>
     </message>
     <message>
         <source>File</source>
-        <translation>Bestand</translation>
+        <translation type="vanished">Bestand</translation>
     </message>
     <message>
         <source>Window</source>
-        <translation>Raamwerk</translation>
+        <translation type="vanished">Raamwerk</translation>
     </message>
     <message>
         <source>Help</source>
-        <translation>Help</translation>
+        <translation type="vanished">Help</translation>
     </message>
     <message>
         <source>Measurements</source>
@@ -9331,7 +9362,7 @@ This option will take an affect after restart.</source>
     </message>
     <message>
         <source>Quit</source>
-        <translation>Afsluiten</translation>
+        <translation type="vanished">Afsluiten</translation>
     </message>
     <message>
         <source>About &amp;Qt</source>
@@ -9339,11 +9370,11 @@ This option will take an affect after restart.</source>
     </message>
     <message>
         <source>About Tape</source>
-        <translation>Over het programma Tape</translation>
+        <translation type="vanished">Over het programma Tape</translation>
     </message>
     <message>
         <source>New</source>
-        <translation>Nieuw</translation>
+        <translation type="vanished">Nieuw</translation>
     </message>
     <message>
         <source>Add known</source>
@@ -9796,11 +9827,11 @@ Wil je deze veranderingen opslaan?</translation>
     </message>
     <message>
         <source>Open individual …</source>
-        <translation>Open individueel …</translation>
+        <translation type="vanished">Open individueel …</translation>
     </message>
     <message>
         <source>Save As …</source>
-        <translation>Opslaan als …</translation>
+        <translation type="vanished">Opslaan als …</translation>
     </message>
     <message>
         <source>Open multisize …</source>
@@ -9873,6 +9904,46 @@ Wil je deze veranderingen opslaan?</translation>
     <message>
         <source>Cannot save settings. Access denied.</source>
         <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;File</source>
+        <translation type="unfinished">&amp;Bestand</translation>
+    </message>
+    <message>
+        <source>&amp;Window</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;Help</source>
+        <translation type="unfinished">&amp;Help</translation>
+    </message>
+    <message>
+        <source>&amp;Measurements</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;Open individual …</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;Save</source>
+        <translation type="unfinished">&amp;Opslaan</translation>
+    </message>
+    <message>
+        <source>Save &amp;As …</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;Quit</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;About Tape</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;New</source>
+        <translation type="unfinished">&amp;Nieuw</translation>
     </message>
 </context>
 <context>
@@ -10477,6 +10548,18 @@ Wil je deze veranderingen opslaan?</translation>
         <source>With OS options</source>
         <translation>Met OS optiies</translation>
     </message>
+    <message>
+        <source>User Interface</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Activate dark mode</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>dark mode</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>TapePreferencesPathPage</name>
@@ -10592,19 +10675,19 @@ Wil je deze veranderingen opslaan?</translation>
     <name>VAbstractConverter</name>
     <message>
         <source>Couldn&apos;t get version information.</source>
-        <translation>Kon geen versie informatie krijgen.</translation>
+        <translation type="vanished">Kon geen versie informatie krijgen.</translation>
     </message>
     <message>
         <source>Too many tags &lt;%1&gt; in file.</source>
-        <translation>Te veel etiketten &lt;%1&gt; in bestand.</translation>
+        <translation type="vanished">Te veel etiketten &lt;%1&gt; in bestand.</translation>
     </message>
     <message>
         <source>Version &quot;%1&quot; invalid.</source>
-        <translation>Versie &quot;%1&quot; ongeldig.</translation>
+        <translation type="vanished">Versie &quot;%1&quot; ongeldig.</translation>
     </message>
     <message>
         <source>Version &quot;0.0.0&quot; invalid.</source>
-        <translation>Versie &quot;0.0.0&quot; ongeldig.</translation>
+        <translation type="vanished">Versie &quot;0.0.0&quot; ongeldig.</translation>
     </message>
     <message>
         <source>Invalid version. Minimum supported version is %1</source>
@@ -10703,6 +10786,13 @@ Wil je deze veranderingen opslaan?</translation>
     <message>
         <source>Roll 72in</source>
         <translation>Roll 44inch {72inch?}</translation>
+    </message>
+</context>
+<context>
+    <name>VAbstractNode</name>
+    <message>
+        <source>This id (%1) is not unique.</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -11340,6 +11430,18 @@ Wil je deze veranderingen opslaan?</translation>
         <source>Invalid user material &apos;%1&apos;. Wrong material number.</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Switch page template orientation to landscape (export mode). This option has effect only for one of predefined page templates.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>The page height</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Order detail to follow grainline direction (export mode).</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>VCommonSettings</name>
@@ -11476,6 +11578,30 @@ Wil je deze veranderingen opslaan?</translation>
         <source>&lt;empty&gt;</source>
         <translation>&lt;empty&gt;</translation>
     </message>
+    <message>
+        <source>Not unique id (%1)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>This id (%1) is not unique.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Couldn&apos;t get version information.</source>
+        <translation type="unfinished">Kon geen versie informatie krijgen.</translation>
+    </message>
+    <message>
+        <source>Too many tags &lt;%1&gt; in file.</source>
+        <translation type="unfinished">Te veel etiketten &lt;%1&gt; in bestand.</translation>
+    </message>
+    <message>
+        <source>Version &quot;%1&quot; invalid.</source>
+        <translation type="unfinished">Versie &quot;%1&quot; ongeldig.</translation>
+    </message>
+    <message>
+        <source>Version &quot;0.0.0&quot; invalid.</source>
+        <translation type="unfinished">Versie &quot;0.0.0&quot; ongeldig.</translation>
+    </message>
 </context>
 <context>
     <name>VDrawTool</name>
@@ -11501,6 +11627,10 @@ Wil je deze veranderingen opslaan?</translation>
     </message>
     <message>
         <source>Remove from group</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>This id (%1) is not unique.</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -12961,6 +13091,10 @@ Wil je deze veranderingen opslaan?</translation>
         <source>Force flipping</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>This id (%1) is not unique.</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>VToolShoulderPoint</name>
@@ -12993,6 +13127,10 @@ Wil je deze veranderingen opslaan?</translation>
     <message>
         <source>United detail</source>
         <translation type="vanished">Samenvoegend detail</translation>
+    </message>
+    <message>
+        <source>This id (%1) is not unique.</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
