@@ -841,7 +841,7 @@
    </property>
    <widget class="QMenu" name="menuFile">
     <property name="title">
-     <string>File</string>
+     <string>&amp;File</string>
     </property>
     <addaction name="actionNew"/>
     <addaction name="separator"/>
@@ -863,19 +863,19 @@
    </widget>
    <widget class="QMenu" name="menuWindow">
     <property name="title">
-     <string>Window</string>
+     <string>&amp;Window</string>
     </property>
    </widget>
    <widget class="QMenu" name="menuHelp">
     <property name="title">
-     <string>Help</string>
+     <string>&amp;Help</string>
     </property>
     <addaction name="actionAboutQt"/>
     <addaction name="actionAboutTape"/>
    </widget>
    <widget class="QMenu" name="menuMeasurements">
     <property name="title">
-     <string>Measurements</string>
+     <string>&amp;Measurements</string>
     </property>
     <addaction name="actionAddKnown"/>
     <addaction name="actionAddCustom"/>
@@ -985,7 +985,7 @@
      <normaloff>.</normaloff>.</iconset>
    </property>
    <property name="text">
-    <string>Open individual …</string>
+    <string>&amp;Open individual …</string>
    </property>
    <property name="menuRole">
     <enum>QAction::NoRole</enum>
@@ -1000,7 +1000,7 @@
      <normaloff>.</normaloff>.</iconset>
    </property>
    <property name="text">
-    <string>Save</string>
+    <string>&amp;Save</string>
    </property>
    <property name="menuRole">
     <enum>QAction::NoRole</enum>
@@ -1015,7 +1015,7 @@
      <normaloff>.</normaloff>.</iconset>
    </property>
    <property name="text">
-    <string>Save As …</string>
+    <string>Save &amp;As …</string>
    </property>
    <property name="menuRole">
     <enum>QAction::NoRole</enum>
@@ -1027,7 +1027,7 @@
      <normaloff>.</normaloff>.</iconset>
    </property>
    <property name="text">
-    <string>Quit</string>
+    <string>&amp;Quit</string>
    </property>
    <property name="menuRole">
     <enum>QAction::QuitRole</enum>
@@ -1047,7 +1047,7 @@
      <normaloff>.</normaloff>.</iconset>
    </property>
    <property name="text">
-    <string>About Tape</string>
+    <string>&amp;About Tape</string>
    </property>
    <property name="menuRole">
     <enum>QAction::AboutRole</enum>
@@ -1059,7 +1059,7 @@
      <normaloff>.</normaloff>.</iconset>
    </property>
    <property name="text">
-    <string>New</string>
+    <string>&amp;New</string>
    </property>
    <property name="menuRole">
     <enum>QAction::NoRole</enum>
