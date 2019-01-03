@@ -139,8 +139,8 @@ private:
                                                 const QList<QGraphicsItem *> &shadows,
                                                 const QList<QList<QGraphicsItem *> > &details);
 
-    void SvgFile(const QString &name, QGraphicsRectItem *paper, QGraphicsScene *scene)const;
-    void PngFile(const QString &name, QGraphicsRectItem *paper, QGraphicsScene *scene)const;
+    void SvgFile(const QString &name, QGraphicsRectItem *paper, QGraphicsScene *scene, const QMarginsF &margins)const;
+    void PngFile(const QString &name, QGraphicsRectItem *paper, QGraphicsScene *scene, const QMarginsF &margins)const;
     void PdfFile(const QString &name, QGraphicsRectItem *paper, QGraphicsScene *scene, bool ignorePrinterFields,
                  const QMarginsF &margins)const;
     void PdfTiledFile(const QString &name);

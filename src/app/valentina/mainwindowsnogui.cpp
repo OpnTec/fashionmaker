@@ -913,22 +913,26 @@ QList<QGraphicsScene *> MainWindowsNoGUI::CreateScenes(const QList<QGraphicsItem
  * @brief SvgFile save layout to svg file.
  * @param name name layout file.
  */
-void MainWindowsNoGUI::SvgFile(const QString &name, QGraphicsRectItem *paper, QGraphicsScene *scene) const
+void MainWindowsNoGUI::SvgFile(const QString &name, QGraphicsRectItem *paper, QGraphicsScene *scene,
+                               const QMarginsF &margins) const
 {
+    const QRectF r = paper->rect();
     QSvgGenerator generator;
     generator.setFileName(name);
-    generator.setSize(paper->rect().size().toSize());
-    generator.setViewBox(paper->rect());
+    generator.setSize(QSize(qFloor(r.width() + margins.left() + margins.right()),
+                            qFloor(r.height() + margins.top() + margins.bottom())));
+    generator.setViewBox(QRectF(0, 0, r.width() + margins.left() + margins.right(),
+                                r.height() + margins.top() + margins.bottom()));
     generator.setTitle(tr("Pattern"));
     generator.setDescription(doc->GetDescription().toHtmlEscaped());
     generator.setResolution(static_cast<int>(PrintDPI));
     QPainter painter;
     painter.begin(&generator);
-    painter.setFont( QFont( "Arial", 8, QFont::Normal ) );
+    painter.translate(margins.left(), margins.top());
     painter.setRenderHint(QPainter::Antialiasing, true);
     painter.setPen(QPen(Qt::black, qApp->Settings()->WidthHairLine(), Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin));
     painter.setBrush ( QBrush ( Qt::NoBrush ) );
-    scene->render(&painter, paper->rect(), paper->rect(), Qt::IgnoreAspectRatio);
+    scene->render(&painter, r, r, Qt::IgnoreAspectRatio);
     painter.end();
 }
 
@@ -937,14 +941,17 @@ void MainWindowsNoGUI::SvgFile(const QString &name, QGraphicsRectItem *paper, QG
  * @brief PngFile save layout to png file.
  * @param name name layout file.
  */
-void MainWindowsNoGUI::PngFile(const QString &name, QGraphicsRectItem *paper, QGraphicsScene *scene) const
+void MainWindowsNoGUI::PngFile(const QString &name, QGraphicsRectItem *paper, QGraphicsScene *scene,
+                               const QMarginsF &margins) const
 {
     const QRectF r = paper->rect();
     // Create the image with the exact size of the shrunk scene
-    QImage image(r.size().toSize(), QImage::Format_ARGB32);
-    image.fill(Qt::transparent);                                              // Start all pixels transparent
+    QImage image(QSize(qFloor(r.width() + margins.left() + margins.right()),
+                       qFloor(r.height() + margins.top() + margins.bottom())),
+                 QImage::Format_ARGB32);
+    image.fill(Qt::white);
     QPainter painter(&image);
-    painter.setFont( QFont( "Arial", 8, QFont::Normal ) );
+    painter.translate(margins.left(), margins.top());
     painter.setRenderHint(QPainter::Antialiasing, true);
     painter.setPen(QPen(Qt::black, qApp->Settings()->WidthMainLine(), Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin));
     painter.setBrush ( QBrush ( Qt::NoBrush ) );
@@ -1572,14 +1579,14 @@ void MainWindowsNoGUI::ExportScene(const QList<QGraphicsScene *> &scenes,
             {
                 case LayoutExportFormats::SVG:
                     paper->setVisible(false);
-                    SvgFile(name, paper, scene);
+                    SvgFile(name, paper, scene, margins);
                     paper->setVisible(true);
                     break;
                 case LayoutExportFormats::PDF:
                     PdfFile(name, paper, scene, ignorePrinterFields, margins);
                     break;
                 case LayoutExportFormats::PNG:
-                    PngFile(name, paper, scene);
+                    PngFile(name, paper, scene, margins);
                     break;
                 case LayoutExportFormats::OBJ:
                     paper->setVisible(false);
