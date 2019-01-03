@@ -4590,12 +4590,13 @@ bool MainWindow::LoadPattern(QString fileName, const QString& customMeasureFile)
             qApp->setPatternUnit(doc->MUnit());
         }
         const QString path = AbsoluteMPath(fileName, doc->MPath());
+        QString fixedMPath;
 
         if (not path.isEmpty())
         {
             // Check if exist
-            const QString newPath = CheckPathToMeasurements(fileName, path);
-            if (newPath.isEmpty())
+            fixedMPath = CheckPathToMeasurements(fileName, path);
+            if (fixedMPath.isEmpty())
             {
                 qApp->setOpeningPattern();// End opening file
                 Clear();
@@ -4608,11 +4609,11 @@ bool MainWindow::LoadPattern(QString fileName, const QString& customMeasureFile)
                 return false;
             }
 
-            if (not LoadMeasurements(newPath))
+            if (not LoadMeasurements(fixedMPath))
             {
                 qCCritical(vMainWindow, "%s", qUtf8Printable(tr("The measurements file '%1' could not be found or "
                                                                 "provides not enough information.")
-                                                             .arg(newPath)));
+                                                             .arg(fixedMPath)));
                 qApp->setOpeningPattern();// End opening file
                 Clear();
                 if (not VApplication::IsGUIMode())
@@ -4624,7 +4625,7 @@ bool MainWindow::LoadPattern(QString fileName, const QString& customMeasureFile)
             else
             {
                 ui->actionUnloadMeasurements->setEnabled(true);
-                watcher->addPath(newPath);
+                watcher->addPath(fixedMPath);
                 ui->actionEditCurrent->setEnabled(true);
             }
         }
@@ -4644,6 +4645,10 @@ bool MainWindow::LoadPattern(QString fileName, const QString& customMeasureFile)
             if (!customMeasureFile.isEmpty())
             {
                 doc->SetMPath(RelativeMPath(fileName, customMeasureFile));
+            }
+            else if (not path.isEmpty() && fixedMPath != path)
+            {
+                doc->SetMPath(RelativeMPath(fileName, fixedMPath));
             }
             qApp->setPatternUnit(doc->MUnit());
         }
@@ -4995,8 +5000,7 @@ QString MainWindow::CheckPathToMeasurements(const QString &patternPath, const QS
 
         if (usedNotExistedDir)
         {
-            QDir directory(dirPath);
-            directory.rmpath(QChar('.'));
+            QDir(dirPath).rmpath(QChar('.'));
         }
 
         return mPath;
@@ -5109,7 +5113,6 @@ QString MainWindow::CheckPathToMeasurements(const QString &patternPath, const QS
 
                     qApp->setPatternType(patternType);
                     doc->SetMPath(RelativeMPath(patternPath, mPath));
-                    PatternChangesWereSaved(false);
                     return mPath;
                 }
             }
