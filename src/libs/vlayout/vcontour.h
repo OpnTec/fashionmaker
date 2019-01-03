@@ -73,6 +73,8 @@ public:
     int  GetWidth() const;
     void SetWidth(int width);
 
+    bool IsPortrait() const;
+
     QSizeF GetSize() const;
 
     QVector<QPointF> UniteWithContour(const VLayoutPiece &detail, int globalI, int detJ, BestFrom type) const;
@@ -93,8 +95,6 @@ private:
     QSharedDataPointer<VContourData> d;
 
     void AppendWhole(QVector<QPointF> &contour, const VLayoutPiece &detail, int detJ) const;
-
-    bool IsPortrait() const;
 };
 
 Q_DECLARE_TYPEINFO(VContour, Q_MOVABLE_TYPE);

@@ -331,24 +331,49 @@ void VLayoutGenerator::GatherPages()
 
     for (int i = 0; i < papers.size(); ++i)
     {
-        int paperHeight = qRound(papers.at(i).DetailsBoundingRect().height());
-
-        if (i != papers.size()-1)
+        if (IsPortrait())
         {
-            paperHeight += qRound(bank->GetLayoutWidth()*2);
-        }
+            int paperHeight = qRound(papers.at(i).DetailsBoundingRect().height());
 
-        if (length + paperHeight <= PageHeight())
-        {
-            UniteDetails(j, nDetails, length, i);
-            length += paperHeight;
+            if (i != papers.size()-1)
+            {
+                paperHeight += qRound(bank->GetLayoutWidth()*2);
+            }
+
+            if (length + paperHeight <= PageHeight())
+            {
+                UniteDetails(j, nDetails, length, i);
+                length += paperHeight;
+            }
+            else
+            {
+                length = 0; // Start new paper
+                ++j;// New paper
+                UniteDetails(j, nDetails, length, i);
+                length += paperHeight;
+            }
         }
         else
         {
-            length = 0; // Start new paper
-            ++j;// New paper
-            UniteDetails(j, nDetails, length, i);
-            length += paperHeight;
+            int paperWidth = qRound(papers.at(i).DetailsBoundingRect().width());
+
+            if (i != papers.size()-1)
+            {
+                paperWidth += qRound(bank->GetLayoutWidth()*2);
+            }
+
+            if (length + paperWidth <= PageWidth())
+            {
+                UniteDetails(j, nDetails, length, i);
+                length += paperWidth;
+            }
+            else
+            {
+                length = 0; // Start new paper
+                ++j;// New paper
+                UniteDetails(j, nDetails, length, i);
+                length += paperWidth;
+            }
         }
     }
 
@@ -387,41 +412,79 @@ void VLayoutGenerator::UnitePages()
 
     for (int i = 0; i < papers.size(); ++i)
     {
-        int paperHeight = 0;
-        if (autoCrop)
+        if (IsPortrait())
         {
-            paperHeight = qRound(papers.at(i).DetailsBoundingRect().height());
+            int paperHeight = 0;
+            if (autoCrop)
+            {
+                paperHeight = qRound(papers.at(i).DetailsBoundingRect().height());
+            }
+            else
+            {
+                paperHeight = papers.at(i).GetHeight();
+            }
+
+            if (i != papers.size()-1)
+            {
+                paperHeight = qRound(paperHeight + bank->GetLayoutWidth()*2);
+            }
+
+            if (length + paperHeight <= QIMAGE_MAX)
+            {
+                UniteDetails(j, nDetails, length, i);
+                length += paperHeight;
+                UnitePapers(j, papersLength, length);
+            }
+            else
+            {
+                length = 0; // Start new paper
+                ++j;// New paper
+                UniteDetails(j, nDetails, length, i);
+                length += paperHeight;
+                UnitePapers(j, papersLength, length);
+            }
         }
         else
         {
-            paperHeight = papers.at(i).GetHeight();
-        }
+            int paperWidth = 0;
+            if (autoCrop)
+            {
+                paperWidth = qRound(papers.at(i).DetailsBoundingRect().width());
+            }
+            else
+            {
+                paperWidth = papers.at(i).GetWidth();
+            }
 
-        if (i != papers.size()-1)
-        {
-            paperHeight = qRound(paperHeight + bank->GetLayoutWidth()*2);
-        }
+            if (i != papers.size()-1)
+            {
+                paperWidth = qRound(paperWidth + bank->GetLayoutWidth()*2);
+            }
 
-        if (length + paperHeight <= QIMAGE_MAX)
-        {
-            UniteDetails(j, nDetails, length, i);
-            length += paperHeight;
-            UnitePapers(j, papersLength, length);
-        }
-        else
-        {
-            length = 0; // Start new paper
-            ++j;// New paper
-            UniteDetails(j, nDetails, length, i);
-            length += paperHeight;
-            UnitePapers(j, papersLength, length);
+            if (length + paperWidth <= QIMAGE_MAX)
+            {
+                UniteDetails(j, nDetails, length, i);
+                length += paperWidth;
+                UnitePapers(j, papersLength, length);
+            }
+            else
+            {
+                length = 0; // Start new paper
+                ++j;// New paper
+                UniteDetails(j, nDetails, length, i);
+                length += paperWidth;
+                UnitePapers(j, papersLength, length);
+            }
         }
     }
 
     QVector<VLayoutPaper> nPapers;
     for (int i = 0; i < nDetails.size(); ++i)
     {
-        VLayoutPaper paper(qFloor(papersLength.at(i)), PageWidth());
+        const int height = IsPortrait() ? qFloor(papersLength.at(i)) : PageHeight();
+        const int width = IsPortrait() ? PageWidth() : qFloor(papersLength.at(i));
+
+        VLayoutPaper paper(height, width);
         paper.SetShift(shift);
         paper.SetLayoutWidth(bank->GetLayoutWidth());
         paper.SetPaperIndex(static_cast<quint32>(i));
@@ -475,7 +538,7 @@ QList<VLayoutPiece> VLayoutGenerator::MoveDetails(qreal length, const QVector<VL
     QList<VLayoutPiece> newDetails;
     for (auto d : details)
     {
-        d.Translate(0, length);
+        IsPortrait() ? d.Translate(0, length) : d.Translate(length, 0);
         newDetails.append(d);
     }
 
