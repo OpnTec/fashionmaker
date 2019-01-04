@@ -138,5 +138,7 @@
 			</dict>
 		</dict>
 	</array>
+	<key>NSRequiresAquaSystemAppearance</key>
+	<true/>
 </dict>	
 </plist>
