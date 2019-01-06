@@ -40,7 +40,7 @@
  * @brief VException constructor exception
  * @param error string with error
  */
-VException::VException(const QString &error)
+VException::VException(const QString &error) V_NOEXCEPT_EXPR (true)
     :QException(), error(error), moreInfo(QString())
 {
     Q_ASSERT_X(not error.isEmpty(), Q_FUNC_INFO, "Error message is empty");
@@ -51,11 +51,12 @@ VException::VException(const QString &error)
  * @brief VException copy constructor
  * @param e exception
  */
-VException::VException(const VException &e):error(e.WhatUtf8()), moreInfo(e.MoreInformation())
+VException::VException(const VException &e) V_NOEXCEPT_EXPR (true)
+    :error(e.WhatUtf8()), moreInfo(e.MoreInformation())
 {}
 
 //---------------------------------------------------------------------------------------------------------------------
-VException &VException::operator=(const VException &e)
+VException &VException::operator=(const VException &e) V_NOEXCEPT_EXPR (true)
 {
     if ( &e == this )
     {
@@ -87,20 +88,19 @@ void VException::AddMoreInformation(const QString &info)
     {
         return;
     }
-    moreInfo = QString("%1\n%2").arg(moreInfo, info);
+
+    moreInfo = QStringLiteral("%1\n%2").arg(moreInfo, info);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 QString VException::MoreInfo(const QString &detInfo) const
 {
-    if (moreInfo.isEmpty() == false)
+    if (not moreInfo.isEmpty())
     {
-        return QString("%1\n%2").arg(moreInfo, detInfo);
+        return QStringLiteral("%1\n%2").arg(moreInfo, detInfo);
     }
-    else
-    {
-        return detInfo;
-    }
+
+    return detInfo;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -135,19 +135,19 @@ Q_NORETURN void VException::raise() const
 }
 
 //-----------------------------------------VExceptionToolWasDeleted----------------------------------------------------
-VExceptionToolWasDeleted::VExceptionToolWasDeleted(const QString &error)
+VExceptionToolWasDeleted::VExceptionToolWasDeleted(const QString &error) V_NOEXCEPT_EXPR (true)
     :VException(error)
 {
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-VExceptionToolWasDeleted::VExceptionToolWasDeleted(const VExceptionToolWasDeleted &e)
+VExceptionToolWasDeleted::VExceptionToolWasDeleted(const VExceptionToolWasDeleted &e) V_NOEXCEPT_EXPR (true)
     :VException(e)
 {
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-VExceptionToolWasDeleted &VExceptionToolWasDeleted::operator=(const VExceptionToolWasDeleted &e)
+VExceptionToolWasDeleted &VExceptionToolWasDeleted::operator=(const VExceptionToolWasDeleted &e) V_NOEXCEPT_EXPR (true)
 {
     if ( &e == this )
     {

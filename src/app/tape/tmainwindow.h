@@ -154,7 +154,7 @@ private:
     bool isInitialized;
     bool mIsReadOnly;
     enum { MaxRecentFiles = 5 };
-    QAction            *recentFileActs[MaxRecentFiles];
+    QVector<QAction *> recentFileActs;
     QAction            *separatorAct;
     QVector<QObject *> hackedWidgets;
 

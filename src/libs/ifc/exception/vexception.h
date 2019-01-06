@@ -43,9 +43,9 @@ class VException : public QException
 {
     Q_DECLARE_TR_FUNCTIONS(VException)
 public:
-    explicit VException(const QString &error);
-    VException(const VException &e);
-    VException &operator=(const VException &e);
+    explicit VException(const QString &error) V_NOEXCEPT_EXPR (true);
+    VException(const VException &e) V_NOEXCEPT_EXPR (true);
+    VException &operator=(const VException &e) V_NOEXCEPT_EXPR (true);
     virtual ~VException() V_NOEXCEPT_EXPR (true) Q_DECL_EQ_DEFAULT;
 
     Q_NORETURN virtual void raise() const override;
@@ -94,9 +94,9 @@ class VExceptionToolWasDeleted : public VException
 {
     Q_DECLARE_TR_FUNCTIONS(VExceptionToolDeleted)
 public:
-    explicit VExceptionToolWasDeleted(const QString &error);
-    VExceptionToolWasDeleted(const VExceptionToolWasDeleted &e);
-    VExceptionToolWasDeleted &operator=(const VExceptionToolWasDeleted &e);
+    explicit VExceptionToolWasDeleted(const QString &error) V_NOEXCEPT_EXPR (true);
+    VExceptionToolWasDeleted(const VExceptionToolWasDeleted &e) V_NOEXCEPT_EXPR (true);
+    VExceptionToolWasDeleted &operator=(const VExceptionToolWasDeleted &e) V_NOEXCEPT_EXPR (true);
     virtual ~VExceptionToolWasDeleted() V_NOEXCEPT_EXPR (true) Q_DECL_EQ_DEFAULT;
 
     Q_NORETURN virtual void raise() const override;
