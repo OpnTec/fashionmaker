@@ -57,10 +57,6 @@ public:
     QString GetLabelLanguage() const;
     void SetLabelLanguage(const QString &value);
 
-    static QString GetDefPathPattern();
-    QString GetPathPattern() const;
-    void SetPathPattern(const QString &value);
-
     static QString GetDefPathLayout();
     QString GetPathLayout() const;
     void SetPathLayout(const QString &value);

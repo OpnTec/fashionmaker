@@ -1410,8 +1410,7 @@ void TMainWindow::ImportFromPattern()
 
     const QString filter(tr("Pattern files (*.val)"));
     //Use standard path to individual measurements
-    QString pathTo = qApp->TapeSettings()->GetPathTemplate();
-    pathTo = VCommonSettings::PrepareStandardTemplates(pathTo);
+    QString pathTo = qApp->TapeSettings()->GetPathPattern();
 
     const QString mPath = QFileDialog::getOpenFileName(this, tr("Import from a pattern"), pathTo, filter);
     if (mPath.isEmpty())

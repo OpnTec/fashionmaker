@@ -50,6 +50,7 @@ namespace
 {
 Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingPathsIndividualMeasurements, (QLatin1String("paths/individual_measurements")))
 Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingPathsMultisizeMeasurements, (QLatin1String("paths/standard_measurements")))
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingPathsPattern, (QLatin1String("paths/pattern")))
 Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingPathsTemplates, (QLatin1String("paths/templates")))
 Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingPathsLabelTemplate, (QLatin1String("paths/labels")))
 
@@ -350,6 +351,27 @@ void VCommonSettings::SetPathMultisizeMeasurements(const QString &value)
 {
     QSettings settings(this->format(), this->scope(), this->organizationName(), *commonIniFilename);
     settings.setValue(*settingPathsMultisizeMeasurements, value);
+    settings.sync();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QString VCommonSettings::GetDefPathPattern()
+{
+    return QDir::homePath() + QLatin1String("/valentina/") + tr("patterns");
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QString VCommonSettings::GetPathPattern() const
+{
+    QSettings settings(this->format(), this->scope(), this->organizationName(), *commonIniFilename);
+    return settings.value(*settingPathsPattern, GetDefPathPattern()).toString();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VCommonSettings::SetPathPattern(const QString &value)
+{
+    QSettings settings(this->format(), this->scope(), this->organizationName(), *commonIniFilename);
+    settings.setValue(*settingPathsPattern, value);
     settings.sync();
 }
 

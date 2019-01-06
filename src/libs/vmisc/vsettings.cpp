@@ -71,7 +71,6 @@ namespace
 Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingConfigurationLabelLanguage,
                           (QLatin1String("configuration/label_language")))
 
-Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingPathsPattern, (QLatin1String("paths/pattern")))
 Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingPathsLayout, (QLatin1String("paths/layout")))
 
 Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingPatternGraphicalOutput, (QLatin1String("pattern/graphicalOutput")))
@@ -133,27 +132,6 @@ QString VSettings::GetLabelLanguage() const
 void VSettings::SetLabelLanguage(const QString &value)
 {
     setValue(*settingConfigurationLabelLanguage, value);
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-QString VSettings::GetDefPathPattern()
-{
-    return QDir::homePath() + QLatin1String("/valentina/") + tr("patterns");
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-QString VSettings::GetPathPattern() const
-{
-    QSettings settings(this->format(), this->scope(), this->organizationName(), this->applicationName());
-    return settings.value(*settingPathsPattern, GetDefPathPattern()).toString();
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void VSettings::SetPathPattern(const QString &value)
-{
-    QSettings settings(this->format(), this->scope(), this->organizationName(), this->applicationName());
-    settings.setValue(*settingPathsPattern, value);
-    settings.sync();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
