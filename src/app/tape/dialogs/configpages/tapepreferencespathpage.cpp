@@ -68,7 +68,8 @@ void TapePreferencesPathPage::Apply()
     VTapeSettings *settings = qApp->TapeSettings();
     settings->SetPathIndividualMeasurements(ui->pathTable->item(0, 1)->text());
     settings->SetPathMultisizeMeasurements(ui->pathTable->item(1, 1)->text());
-    settings->SetPathTemplate(ui->pathTable->item(2, 1)->text());
+    settings->SetPathPattern(ui->pathTable->item(2, 1)->text());
+    settings->SetPathTemplate(ui->pathTable->item(3, 1)->text());
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -100,7 +101,10 @@ void TapePreferencesPathPage::DefaultPath()
         case 1: // multisize measurements
             path = VCommonSettings::GetDefPathMultisizeMeasurements();
             break;
-        case 2: // templates
+        case 2: // pattern path
+            path = VCommonSettings::GetDefPathPattern();
+            break;
+        case 3: // templates
             path = VCommonSettings::GetDefPathTemplate();
             break;
         default:
@@ -128,7 +132,10 @@ void TapePreferencesPathPage::EditPath()
             path = qApp->TapeSettings()->GetPathMultisizeMeasurements();
             path = VCommonSettings::PrepareMultisizeTables(path);
             break;
-        case 2: // templates
+        case 2: // pattern path
+            path = qApp->TapeSettings()->GetPathPattern();
+            break;
+        case 3: // templates
             path = qApp->TapeSettings()->GetPathTemplate();
             break;
         default:
@@ -164,7 +171,7 @@ void TapePreferencesPathPage::EditPath()
 void TapePreferencesPathPage::InitTable()
 {
     ui->pathTable->clearContents();
-    ui->pathTable->setRowCount(3);
+    ui->pathTable->setRowCount(4);
     ui->pathTable->setColumnCount(2);
 
     const VTapeSettings *settings = qApp->TapeSettings();
@@ -184,10 +191,17 @@ void TapePreferencesPathPage::InitTable()
     }
 
     {
-        ui->pathTable->setItem(2, 0, new QTableWidgetItem(tr("My Templates")));
+        ui->pathTable->setItem(2, 0, new QTableWidgetItem(tr("My Patterns")));
+        QTableWidgetItem *item = new QTableWidgetItem(settings->GetPathPattern());
+        item->setToolTip(settings->GetPathPattern());
+        ui->pathTable->setItem(2, 1, item);
+    }
+
+    {
+        ui->pathTable->setItem(3, 0, new QTableWidgetItem(tr("My Templates")));
         QTableWidgetItem *item = new QTableWidgetItem(settings->GetPathTemplate());
         item->setToolTip(settings->GetPathTemplate());
-        ui->pathTable->setItem(2, 1, item);
+        ui->pathTable->setItem(3, 1, item);
     }
 
     ui->pathTable->verticalHeader()->setDefaultSectionSize(20);
