@@ -155,8 +155,7 @@ void TapePreferencesPathPage::EditPath()
     {
         if (usedNotExistedDir)
         {
-            QDir directory(path);
-            directory.rmpath(QChar('.'));
+            QDir(path).rmpath(QChar('.'));
         }
 
         DefaultPath();

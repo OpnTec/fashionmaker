@@ -178,8 +178,7 @@ void PreferencesPathPage::EditPath()
     {
         if (usedNotExistedDir)
         {
-            QDir directory(path);
-            directory.rmpath(QChar('.'));
+            QDir(path).rmpath(QChar('.'));
         }
         DefaultPath();
         return;
@@ -190,8 +189,7 @@ void PreferencesPathPage::EditPath()
 
     if (usedNotExistedDir)
     {
-        QDir directory(path);
-        directory.rmpath(QChar('.'));
+        QDir(path).rmpath(QChar('.'));
     }
 }
 
