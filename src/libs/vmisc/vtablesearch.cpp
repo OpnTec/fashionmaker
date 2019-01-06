@@ -93,38 +93,35 @@ void VTableSearch::ShowNext(int newIndex)
     }
 }
 
-QList<QTableWidgetItem *> VTableSearch::FindTableItems(QString term)
+//---------------------------------------------------------------------------------------------------------------------
+QList<QTableWidgetItem *> VTableSearch::FindTableItems(const QString& term)
 {
     if (term.isEmpty())
     {
         return QList<QTableWidgetItem *>();
     }
 
-    if (term.startsWith("/"))
+    if (term.startsWith(QChar('/')))
     {
-        QRegularExpression qre("^/(?<searchType>[^/]+)/(?<searchString>.+)$");
+        QRegularExpression qre(QStringLiteral("^/(?<searchType>[^/]+)/(?<searchString>.+)$"));
         QScopedPointer<QRegularExpressionMatch> match(new QRegularExpressionMatch());
         if (!term.contains(qre, match.data()))
         {
             return QList<QTableWidgetItem *>();
         }
 
-        auto searchType = match->capturedRef("searchType");
-        auto searchString = match->capturedRef("searchString");
-        if (searchType == "r")
+        auto searchType = match->capturedRef(QStringLiteral("searchType"));
+        auto searchString = match->capturedRef(QStringLiteral("searchString"));
+        if (searchType == QChar('r'))
         {
             QString reSearchString = ".*" % searchString % ".*";
             return table->findItems(reSearchString, Qt::MatchRegExp);
         }
-        else
-        {
-            return QList<QTableWidgetItem *>();
-        }
+
+        return QList<QTableWidgetItem *>();
     }
-    else
-    {
-        return table->findItems(term, Qt::MatchContains);
-    }
+
+    return table->findItems(term, Qt::MatchContains);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

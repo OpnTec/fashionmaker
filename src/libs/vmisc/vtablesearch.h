@@ -60,7 +60,7 @@ private:
 
     void Clear();
     void ShowNext(int newIndex);
-    QList<QTableWidgetItem *> FindTableItems(QString term);
+    QList<QTableWidgetItem *> FindTableItems(const QString& term);
 };
 
 #endif // VTABLESEARCH_H
