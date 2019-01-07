@@ -125,6 +125,42 @@ private:
 
     QVector<VSAPoint> InputPointsIssue646() const;
     QVector<QPointF>  OutputPointsIssue646() const;
+
+    QVector<VSAPoint> InputPointsIssue923Test1();
+    QVector<QPointF>  OutputPointsIssue923Test1();
+
+    QVector<VSAPoint> InputPointsIssue923Test2();
+    QVector<QPointF>  OutputPointsIssue923Test2();
+
+    QVector<VSAPoint> InputPointsIssue923Test3();
+    QVector<QPointF>  OutputPointsIssue923Test3();
+
+    QVector<VSAPoint> InputPointsIssue923Test4();
+    QVector<QPointF>  OutputPointsIssue923Test4();
+
+    QVector<VSAPoint> InputPointsIssue923Test5();
+    QVector<QPointF>  OutputPointsIssue923Test5();
+
+    QVector<VSAPoint> InputPointsIssue923Test6();
+    QVector<QPointF>  OutputPointsIssue923Test6();
+
+    QVector<VSAPoint> InputPointsIssue923Test1_1();
+    QVector<QPointF>  OutputPointsIssue923Test1_1();
+
+    QVector<VSAPoint> InputPointsIssue923Test2_2();
+    QVector<QPointF>  OutputPointsIssue923Test2_2();
+
+    QVector<VSAPoint> InputPointsIssue923Test3_3();
+    QVector<QPointF>  OutputPointsIssue923Test3_3();
+
+    QVector<VSAPoint> InputPointsIssue923Test4_4();
+    QVector<QPointF>  OutputPointsIssue923Test4_4();
+
+    QVector<VSAPoint> InputPointsIssue923Test5_5();
+    QVector<QPointF>  OutputPointsIssue923Test5_5();
+
+    QVector<VSAPoint> InputPointsIssue923Test6_6();
+    QVector<QPointF>  OutputPointsIssue923Test6_6();
 };
 
 #endif // TST_VABSTRACTPIECE_H

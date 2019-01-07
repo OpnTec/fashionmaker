@@ -187,7 +187,8 @@ public:
     static qreal            SumTrapezoids(const QVector<QPointF> &points);
     static QVector<QPointF> CheckLoops(const QVector<QPointF> &points);
     static QVector<QPointF> EkvPoint(QVector<QPointF> points, const VSAPoint &p1Line1, VSAPoint p2Line1,
-                                     const VSAPoint &p1Line2, VSAPoint p2Line2, qreal width);
+                                     const VSAPoint &p1Line2, VSAPoint p2Line2, qreal width,
+                                     int *needRollback = nullptr);
     static QLineF           ParallelLine(const VSAPoint &p1, const VSAPoint &p2, qreal width);
 
     template <class T>

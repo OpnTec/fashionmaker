@@ -125,6 +125,66 @@ void TST_VAbstractPiece::EquidistantRemoveLoop_data()
     QTest::newRow("Issue 646.") << InputPointsIssue646()
                                 << 37.795275590551185 // seam allowance width (1.0 cm)
                                 << OutputPointsIssue646();
+
+    // See file src/app/share/collection/bugs/Issue_#923.val
+    QTest::newRow("Issue 923. Test 1") << InputPointsIssue923Test1()
+                                       << 37.795275590551185 // seam allowance width (1.0 cm)
+                                       << OutputPointsIssue923Test1();
+
+    // See file src/app/share/collection/bugs/Issue_#923.val
+    QTest::newRow("Issue 923. Test 2") << InputPointsIssue923Test2()
+                                       << 37.795275590551185 // seam allowance width (1.0 cm)
+                                       << OutputPointsIssue923Test2();
+
+    // See file src/app/share/collection/bugs/Issue_#923.val
+    QTest::newRow("Issue 923. Test 3") << InputPointsIssue923Test3()
+                                       << 37.795275590551185 // seam allowance width (1.0 cm)
+                                       << OutputPointsIssue923Test3();
+
+    // See file src/app/share/collection/bugs/Issue_#923.val
+    QTest::newRow("Issue 923. Test 4") << InputPointsIssue923Test4()
+                                       << 37.795275590551185 // seam allowance width (1.0 cm)
+                                       << OutputPointsIssue923Test4();
+
+    // See file src/app/share/collection/bugs/Issue_#923.val
+    QTest::newRow("Issue 923. Test 5") << InputPointsIssue923Test5()
+                                       << 37.795275590551185 // seam allowance width (1.0 cm)
+                                       << OutputPointsIssue923Test5();
+
+    // See file src/app/share/collection/bugs/Issue_#923.val
+    QTest::newRow("Issue 923. Test 6") << InputPointsIssue923Test6()
+                                       << 37.795275590551185 // seam allowance width (1.0 cm)
+                                       << OutputPointsIssue923Test6();
+
+    // See file src/app/share/collection/bugs/Issue_#923.val
+    QTest::newRow("Issue 923. Test 1.1") << InputPointsIssue923Test1_1()
+                                         << 37.795275590551185 // seam allowance width (1.0 cm)
+                                         << OutputPointsIssue923Test1_1();
+
+    // See file src/app/share/collection/bugs/Issue_#923.val
+    QTest::newRow("Issue 923. Test 2.2") << InputPointsIssue923Test2_2()
+                                         << 37.795275590551185 // seam allowance width (1.0 cm)
+                                         << OutputPointsIssue923Test2_2();
+
+    // See file src/app/share/collection/bugs/Issue_#923.val
+    QTest::newRow("Issue 923. Test 3.3") << InputPointsIssue923Test3_3()
+                                         << 37.795275590551185 // seam allowance width (1.0 cm)
+                                         << OutputPointsIssue923Test3_3();
+
+    // See file src/app/share/collection/bugs/Issue_#923.val
+    QTest::newRow("Issue 923. Test 4.4") << InputPointsIssue923Test4_4()
+                                         << 37.795275590551185 // seam allowance width (1.0 cm)
+                                         << OutputPointsIssue923Test4_4();
+
+    // See file src/app/share/collection/bugs/Issue_#923.val
+    QTest::newRow("Issue 923. Test 5.5") << InputPointsIssue923Test5_5()
+                                         << 37.795275590551185 // seam allowance width (1.0 cm)
+                                         << OutputPointsIssue923Test5_5();
+
+    // See file src/app/share/collection/bugs/Issue_#923.val
+    QTest::newRow("Issue 923. Test 6.6") << InputPointsIssue923Test6_6()
+                                         << 37.795275590551185 // seam allowance width (1.0 cm)
+                                         << OutputPointsIssue923Test6_6();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -1379,7 +1439,6 @@ QVector<QPointF> TST_VAbstractPiece::OutputPointsSeamTest1PieceBySecondEdgeSymme
     points += QPointF(257.767987517066160, -51.011647735560771);
     points += QPointF(273.528559017665714, -60.623983162339158);
     points += QPointF(284.944912181261145, -68.750463215889098);
-    points += QPointF(286.890081707470131, -68.482082508404147);
     points += QPointF(556.951317720606994, -31.220946854728947);
     points += QPointF(539.610114105118896, 79.891315777781244);
     points += QPointF(585.916731584533181, -20.702420721823501);
@@ -6494,6 +6553,4909 @@ QVector<QPointF> TST_VAbstractPiece::OutputPointsIssue646() const
     points += QPointF(1377.006758382478893, 1122.518134525559162);
     points += QPointF(1385.200774121173936, 1150.078352724689012);
     points += QPointF(1391.208950895036196, 1170.962993556315041);
+
+    return points;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QVector<VSAPoint> TST_VAbstractPiece::InputPointsIssue923Test1()
+{
+    QVector<VSAPoint> points;
+
+    VSAPoint p = VSAPoint(-814.714960629921279, 331.313196850393751);
+    p.SetSABefore(37.7953);
+    p.SetSAAfter(0);
+    points += p;
+
+    p = VSAPoint(-814.714960629921279, -8.844283464566928);
+    p.SetSABefore(0);
+    p.SetSAAfter(37.7953);
+    points += p;
+
+    p = VSAPoint(-814.714960629921279, -8.844283464566928);
+    p.SetSABefore(0);
+    p.SetSAAfter(37.7953);
+    points += p;
+
+    p = VSAPoint(-810.914791391285917, -9.118915311803084);
+    p.SetSABefore(37.7953);
+    p.SetSAAfter(37.7953);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    p = VSAPoint(-773.697565712941014, -13.057776517652679);
+    p.SetSABefore(37.7953);
+    p.SetSAAfter(37.7953);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    p = VSAPoint(-731.369396039071717, -19.564193239769612);
+    p.SetSABefore(37.7953);
+    p.SetSAAfter(37.7953);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    p = VSAPoint(-700.813861852517789, -25.693917945236084);
+    p.SetSABefore(37.7953);
+    p.SetSAAfter(37.7953);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    p = VSAPoint(-670.539289284542633, -33.532046871057645);
+    p.SetSABefore(37.7953);
+    p.SetSAAfter(37.7953);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    p = VSAPoint(-649.425406024800168, -40.690709434256448);
+    p.SetSABefore(37.7953);
+    p.SetSAAfter(37.7953);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    p = VSAPoint(-636.497248173983621, -46.041845587202857);
+    p.SetSABefore(37.7953);
+    p.SetSAAfter(37.7953);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    p = VSAPoint(-630.550935626324190, -48.932226964906654);
+    p.SetSABefore(37.7953);
+    p.SetSAAfter(37.7953);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    p = VSAPoint(-612.770937464562508, -58.178811938993192);
+    p.SetSABefore(37.7953);
+    p.SetSAAfter(37.7953);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    p = VSAPoint(-595.504209442756292, -69.042252656202692);
+    p.SetSABefore(37.7953);
+    p.SetSAAfter(37.7953);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    points += VSAPoint(-590.462992125984215, -72.529322834645669);
+    points += VSAPoint(-590.462992125984215, -72.529322834645669);
+    points += VSAPoint(-231.118006951984967, 95.879158575193841);
+    points += VSAPoint(-231.118006951984967, 95.879158575193841);
+
+    p = VSAPoint(-238.402815433872661, 116.441912166387880);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    p = VSAPoint(-251.054901827475362, 155.855307076335350);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    p = VSAPoint(-261.519858253217421, 193.398201754121601);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    p = VSAPoint(-269.924247729261879, 229.275078971710684);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    p = VSAPoint(-276.394633273771547, 263.690421501066567);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    p = VSAPoint(-281.057577904909294, 296.848712114153273);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    p = VSAPoint(-284.039644640838333, 328.954433582934655);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    points += VSAPoint(-284.147385597229004, 331.313196850393751);
+    points += VSAPoint(-284.147385597229004, 331.313196850393751);
+    points += VSAPoint(-284.147385597229004, 331.313196850393751);
+
+    p = VSAPoint(-285.555799865587915, 332.073678193884462);
+    p.SetSABefore(37.7953);
+    p.SetSAAfter(37.7953);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    p = VSAPoint(-288.834524762284673, 333.546028373225568);
+    p.SetSABefore(37.7953);
+    p.SetSAAfter(37.7953);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    p = VSAPoint(-292.651017475591800, 334.960499310104979);
+    p.SetSABefore(37.7953);
+    p.SetSAAfter(37.7953);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    p = VSAPoint(-296.986935988437835, 336.317597411974702);
+    p.SetSABefore(37.7953);
+    p.SetSAAfter(37.7953);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    p = VSAPoint(-304.365417624891165, 338.253791617484694);
+    p.SetSABefore(37.7953);
+    p.SetSAAfter(37.7953);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    p = VSAPoint(-315.933705242960059, 340.629827700589658);
+    p.SetSABefore(37.7953);
+    p.SetSAAfter(37.7953);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    p = VSAPoint(-329.249539751899079, 342.785487777791332);
+    p.SetSABefore(37.7953);
+    p.SetSAAfter(37.7953);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    p = VSAPoint(-344.166185015137103, 344.724823108705550);
+    p.SetSABefore(37.7953);
+    p.SetSAAfter(37.7953);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    p = VSAPoint(-360.536904896102669, 346.451884952948035);
+    p.SetSABefore(37.7953);
+    p.SetSAAfter(37.7953);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    p = VSAPoint(-378.214963258224429, 347.970724570134507);
+    p.SetSABefore(37.7953);
+    p.SetSAAfter(37.7953);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    p = VSAPoint(-397.053623964930921, 349.285393219880916);
+    p.SetSABefore(37.7953);
+    p.SetSAAfter(37.7953);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    p = VSAPoint(-416.906150879651022, 350.399942161802983);
+    p.SetSABefore(37.7953);
+    p.SetSAAfter(37.7953);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    p = VSAPoint(-437.625807865813101, 351.318422655516372);
+    p.SetSABefore(37.7953);
+    p.SetSAAfter(37.7953);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    p = VSAPoint(-459.065858786846093, 352.044885960637032);
+    p.SetSABefore(37.7953);
+    p.SetSAAfter(37.7953);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    p = VSAPoint(-481.079567506178364, 352.583383336780628);
+    p.SetSABefore(37.7953);
+    p.SetSAAfter(37.7953);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    p = VSAPoint(-503.520197887238680, 352.937966043563051);
+    p.SetSABefore(37.7953);
+    p.SetSAAfter(37.7953);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    p = VSAPoint(-526.241013793455750, 353.112685340600024);
+    p.SetSABefore(37.7953);
+    p.SetSAAfter(37.7953);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    p = VSAPoint(-549.095279088258053, 353.111592487507210);
+    p.SetSABefore(37.7953);
+    p.SetSAAfter(37.7953);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    p = VSAPoint(-571.936257635074298, 352.938738743900558);
+    p.SetSABefore(37.7953);
+    p.SetSAAfter(37.7953);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    p = VSAPoint(-594.617213297333365, 352.598175369395790);
+    p.SetSABefore(37.7953);
+    p.SetSAAfter(37.7953);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    p = VSAPoint(-616.991409938463448, 352.093953623608741);
+    p.SetSABefore(37.7953);
+    p.SetSAAfter(37.7953);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    p = VSAPoint(-638.912111421893314, 351.430124766155018);
+    p.SetSABefore(37.7953);
+    p.SetSAAfter(37.7953);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    p = VSAPoint(-660.232581611051955, 350.610740056650570);
+    p.SetSABefore(37.7953);
+    p.SetSAAfter(37.7953);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    p = VSAPoint(-680.806084369367682, 349.639850754711119);
+    p.SetSABefore(37.7953);
+    p.SetSAAfter(37.7953);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    p = VSAPoint(-700.485883560269031, 348.521508119952557);
+    p.SetSABefore(37.7953);
+    p.SetSAAfter(37.7953);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    p = VSAPoint(-719.125243047185108, 347.259763411990377);
+    p.SetSABefore(37.7953);
+    p.SetSAAfter(37.7953);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    p = VSAPoint(-736.577426693544112, 345.858667890440699);
+    p.SetSABefore(37.7953);
+    p.SetSAAfter(37.7953);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    p = VSAPoint(-752.695698362774920, 344.322272814919074);
+    p.SetSABefore(37.7953);
+    p.SetSAAfter(37.7953);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    p = VSAPoint(-767.333321918305955, 342.654629445041451);
+    p.SetSABefore(37.7953);
+    p.SetSAAfter(37.7953);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    p = VSAPoint(-780.343561223566212, 340.859789040423379);
+    p.SetSABefore(37.7953);
+    p.SetSAAfter(37.7953);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    p = VSAPoint(-791.579680141983886, 338.941802860680923);
+    p.SetSABefore(37.7953);
+    p.SetSAAfter(37.7953);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    p = VSAPoint(-800.894942536987969, 336.904722165429632);
+    p.SetSABefore(37.7953);
+    p.SetSAAfter(37.7953);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    p = VSAPoint(-806.464504883768996, 335.297692803701807);
+    p.SetSABefore(37.7953);
+    p.SetSAAfter(37.7953);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    p = VSAPoint(-809.543928560675113, 334.193629625334438);
+    p.SetSABefore(37.7953);
+    p.SetSAAfter(37.7953);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    p = VSAPoint(-812.060599029906371, 333.062071651623739);
+    p.SetSABefore(37.7953);
+    p.SetSAAfter(37.7953);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    p = VSAPoint(-813.996174274391478, 331.903525290021662);
+    p.SetSABefore(37.7953);
+    p.SetSAAfter(37.7953);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    p = VSAPoint(-814.714960629921279, 331.313196850393751);
+    p.SetSABefore(37.7953);
+    p.SetSAAfter(0);
+    points += p;
+
+    return points;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QVector<QPointF> TST_VAbstractPiece::OutputPointsIssue923Test1()
+{
+    QVector<QPointF> points;
+
+    points += QPointF(-814.714960629921279, -46.738127408018386);
+    points += QPointF(-778.560274683193597, -50.549491761193529);
+    points += QPointF(-737.960891197081651, -56.790170478391879);
+    points += QPointF(-709.273784936183347, -62.545071142283753);
+    points += QPointF(-681.358329676571884, -69.772421317304676);
+    points += QPointF(-662.734996979773655, -76.086662659765864);
+    points += QPointF(-652.000013358218780, -80.530014885308333);
+    points += QPointF(-647.534742107878174, -82.700492263504771);
+    points += QPointF(-631.585239468780856, -90.995118061836052);
+    points += QPointF(-616.328020233970847, -100.594267156991847);
+    points += QPointF(-594.096383910663576, -115.972155307751649);
+    points += QPointF(-184.048650148745537, 76.198374399107223);
+    points += QPointF(-202.588712626694274, 128.531217087733864);
+    points += QPointF(-214.844352980142077, 166.709615345349164);
+    points += QPointF(-224.900721916665105, 202.786707734969326);
+    points += QPointF(-232.934347140993879, 237.080856834901624);
+    points += QPointF(-239.089037151700012, 269.817045957384835);
+    points += QPointF(-243.506611386394923, 301.230502874877175);
+    points += QPointF(-246.324245680472586, 331.565901059170528);
+    points += QPointF(-247.367542640672326, 354.406709505752815);
+    points += QPointF(-268.813396242720216, 365.986520876589054);
+    points += QPointF(-274.509592479190928, 368.544465142904016);
+    points += QPointF(-280.430827138279028, 370.738996867416517);
+    points += QPointF(-286.539948778692178, 372.651089393540587);
+    points += QPointF(-295.760523769485246, 375.070669023642552);
+    points += QPointF(-309.108660665237892, 377.812272271559323);
+    points += QPointF(-323.791841306461833, 380.189287868544909);
+    points += QPointF(-339.746492379944868, 382.263575885265993);
+    points += QPointF(-356.936262185776172, 384.077045039880318);
+    points += QPointF(-375.281527662442841, 385.653208859628023);
+    points += QPointF(-394.678657394273387, 387.006850647147644);
+    points += QPointF(-414.787606696514558, 388.135795504608552);
+    points += QPointF(-435.952026976937020, 389.076617984501581);
+    points += QPointF(-457.785958239726995, 389.818484035948188);
+    points += QPointF(-480.155299343825106, 390.367355935354340);
+    points += QPointF(-502.923072127811622, 390.728524359010180);
+    points += QPointF(-525.950383000425973, 390.906843496429246);
+    points += QPointF(-549.097086395700558, 390.906868034847378);
+    points += QPointF(-572.222272868468281, 390.732932110765603);
+    points += QPointF(-595.184660101380132, 390.389190982770685);
+    points += QPointF(-617.842942744172888, 389.879635420374768);
+    points += QPointF(-640.056148626075128, 389.208081776045162);
+    points += QPointF(-661.684051740050222, 388.378134611085102);
+    points += QPointF(-682.587707903001387, 387.393111203977753);
+    points += QPointF(-702.630213610816895, 386.255904969512756);
+    points += QPointF(-721.913933492959586, 384.952760768153212);
+    points += QPointF(-739.883081019170959, 383.510162372720174);
+    points += QPointF(-756.628370632600195, 381.913999891517676);
+    points += QPointF(-772.055707410166860, 380.156385631636169);
+    points += QPointF(-786.107417616341536, 378.217868080938274);
+    points += QPointF(-798.800506212061464, 376.051179682426266);
+    points += QPointF(-810.181063245406790, 373.562456117723798);
+    points += QPointF(-814.714960629921279, 372.254255263452592);
+    points += QPointF(-814.714960629921279, -46.738127408018386);
+
+    return points;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QVector<VSAPoint> TST_VAbstractPiece::InputPointsIssue923Test2()
+{
+    QVector<VSAPoint> points;
+
+    VSAPoint p = VSAPoint(-814.714960629921279, 331.313196850393751);
+    p.SetSABefore(37.7953);
+    p.SetSAAfter(0);
+    p.SetAngleType(PieceNodeAngle::ByPointsIntersection);
+    points += p;
+
+    p = VSAPoint(-814.714960629921279, -8.844283464566928);
+    p.SetSABefore(0);
+    p.SetSAAfter(37.7953);
+    points += p;
+
+    p = VSAPoint(-814.714960629921279, -8.844283464566928);
+    p.SetSABefore(0);
+    p.SetSAAfter(37.7953);
+    points += p;
+
+    p = VSAPoint(-810.914791391285917, -9.118915311803084);
+    p.SetSABefore(37.7953);
+    p.SetSAAfter(37.7953);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    p = VSAPoint(-773.697565712941014, -13.057776517652679);
+    p.SetSABefore(37.7953);
+    p.SetSAAfter(37.7953);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    p = VSAPoint(-731.369396039071717, -19.564193239769612);
+    p.SetSABefore(37.7953);
+    p.SetSAAfter(37.7953);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    p = VSAPoint(-700.813861852517789, -25.693917945236084);
+    p.SetSABefore(37.7953);
+    p.SetSAAfter(37.7953);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    p = VSAPoint(-670.539289284542633, -33.532046871057645);
+    p.SetSABefore(37.7953);
+    p.SetSAAfter(37.7953);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    p = VSAPoint(-649.425406024800168, -40.690709434256448);
+    p.SetSABefore(37.7953);
+    p.SetSAAfter(37.7953);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    p = VSAPoint(-636.497248173983621, -46.041845587202857);
+    p.SetSABefore(37.7953);
+    p.SetSAAfter(37.7953);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    p = VSAPoint(-630.550935626324190, -48.932226964906654);
+    p.SetSABefore(37.7953);
+    p.SetSAAfter(37.7953);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    p = VSAPoint(-612.770937464562508, -58.178811938993192);
+    p.SetSABefore(37.7953);
+    p.SetSAAfter(37.7953);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    p = VSAPoint(-595.504209442756292, -69.042252656202692);
+    p.SetSABefore(37.7953);
+    p.SetSAAfter(37.7953);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    points += VSAPoint(-590.462992125984215, -72.529322834645669);
+    points += VSAPoint(-590.462992125984215, -72.529322834645669);
+    points += VSAPoint(-231.118006951984967, 95.879158575193841);
+    points += VSAPoint(-231.118006951984967, 95.879158575193841);
+
+    p = VSAPoint(-238.402815433872661, 116.441912166387880);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    p = VSAPoint(-251.054901827475362, 155.855307076335350);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    p = VSAPoint(-261.519858253217421, 193.398201754121601);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    p = VSAPoint(-269.924247729261879, 229.275078971710684);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    p = VSAPoint(-276.394633273771547, 263.690421501066567);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    p = VSAPoint(-281.057577904909294, 296.848712114153273);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    p = VSAPoint(-284.039644640838333, 328.954433582934655);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    points += VSAPoint(-284.147385597229004, 331.313196850393751);
+    points += VSAPoint(-284.147385597229004, 331.313196850393751);
+    points += VSAPoint(-284.147385597229004, 331.313196850393751);
+
+    p = VSAPoint(-285.555799865587915, 332.073678193884462);
+    p.SetSABefore(37.7953);
+    p.SetSAAfter(37.7953);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    p = VSAPoint(-288.834524762284673, 333.546028373225568);
+    p.SetSABefore(37.7953);
+    p.SetSAAfter(37.7953);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    p = VSAPoint(-292.651017475591800, 334.960499310104979);
+    p.SetSABefore(37.7953);
+    p.SetSAAfter(37.7953);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    p = VSAPoint(-296.986935988437835, 336.317597411974702);
+    p.SetSABefore(37.7953);
+    p.SetSAAfter(37.7953);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    p = VSAPoint(-304.365417624891165, 338.253791617484694);
+    p.SetSABefore(37.7953);
+    p.SetSAAfter(37.7953);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    p = VSAPoint(-315.933705242960059, 340.629827700589658);
+    p.SetSABefore(37.7953);
+    p.SetSAAfter(37.7953);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    p = VSAPoint(-329.249539751899079, 342.785487777791332);
+    p.SetSABefore(37.7953);
+    p.SetSAAfter(37.7953);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    p = VSAPoint(-344.166185015137103, 344.724823108705550);
+    p.SetSABefore(37.7953);
+    p.SetSAAfter(37.7953);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    p = VSAPoint(-360.536904896102669, 346.451884952948035);
+    p.SetSABefore(37.7953);
+    p.SetSAAfter(37.7953);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    p = VSAPoint(-378.214963258224429, 347.970724570134507);
+    p.SetSABefore(37.7953);
+    p.SetSAAfter(37.7953);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    p = VSAPoint(-397.053623964930921, 349.285393219880916);
+    p.SetSABefore(37.7953);
+    p.SetSAAfter(37.7953);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    p = VSAPoint(-416.906150879651022, 350.399942161802983);
+    p.SetSABefore(37.7953);
+    p.SetSAAfter(37.7953);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    p = VSAPoint(-437.625807865813101, 351.318422655516372);
+    p.SetSABefore(37.7953);
+    p.SetSAAfter(37.7953);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    p = VSAPoint(-459.065858786846093, 352.044885960637032);
+    p.SetSABefore(37.7953);
+    p.SetSAAfter(37.7953);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    p = VSAPoint(-481.079567506178364, 352.583383336780628);
+    p.SetSABefore(37.7953);
+    p.SetSAAfter(37.7953);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    p = VSAPoint(-503.520197887238680, 352.937966043563051);
+    p.SetSABefore(37.7953);
+    p.SetSAAfter(37.7953);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    p = VSAPoint(-526.241013793455750, 353.112685340600024);
+    p.SetSABefore(37.7953);
+    p.SetSAAfter(37.7953);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    p = VSAPoint(-549.095279088258053, 353.111592487507210);
+    p.SetSABefore(37.7953);
+    p.SetSAAfter(37.7953);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    p = VSAPoint(-571.936257635074298, 352.938738743900558);
+    p.SetSABefore(37.7953);
+    p.SetSAAfter(37.7953);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    p = VSAPoint(-594.617213297333365, 352.598175369395790);
+    p.SetSABefore(37.7953);
+    p.SetSAAfter(37.7953);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    p = VSAPoint(-616.991409938463448, 352.093953623608741);
+    p.SetSABefore(37.7953);
+    p.SetSAAfter(37.7953);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    p = VSAPoint(-638.912111421893314, 351.430124766155018);
+    p.SetSABefore(37.7953);
+    p.SetSAAfter(37.7953);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    p = VSAPoint(-660.232581611051955, 350.610740056650570);
+    p.SetSABefore(37.7953);
+    p.SetSAAfter(37.7953);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    p = VSAPoint(-680.806084369367682, 349.639850754711119);
+    p.SetSABefore(37.7953);
+    p.SetSAAfter(37.7953);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    p = VSAPoint(-700.485883560269031, 348.521508119952557);
+    p.SetSABefore(37.7953);
+    p.SetSAAfter(37.7953);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    p = VSAPoint(-719.125243047185108, 347.259763411990377);
+    p.SetSABefore(37.7953);
+    p.SetSAAfter(37.7953);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    p = VSAPoint(-736.577426693544112, 345.858667890440699);
+    p.SetSABefore(37.7953);
+    p.SetSAAfter(37.7953);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    p = VSAPoint(-752.695698362774920, 344.322272814919074);
+    p.SetSABefore(37.7953);
+    p.SetSAAfter(37.7953);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    p = VSAPoint(-767.333321918305955, 342.654629445041451);
+    p.SetSABefore(37.7953);
+    p.SetSAAfter(37.7953);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    p = VSAPoint(-780.343561223566212, 340.859789040423379);
+    p.SetSABefore(37.7953);
+    p.SetSAAfter(37.7953);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    p = VSAPoint(-791.579680141983886, 338.941802860680923);
+    p.SetSABefore(37.7953);
+    p.SetSAAfter(37.7953);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    p = VSAPoint(-800.894942536987969, 336.904722165429632);
+    p.SetSABefore(37.7953);
+    p.SetSAAfter(37.7953);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    p = VSAPoint(-806.464504883768996, 335.297692803701807);
+    p.SetSABefore(37.7953);
+    p.SetSAAfter(37.7953);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    p = VSAPoint(-809.543928560675113, 334.193629625334438);
+    p.SetSABefore(37.7953);
+    p.SetSAAfter(37.7953);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    p = VSAPoint(-812.060599029906371, 333.062071651623739);
+    p.SetSABefore(37.7953);
+    p.SetSAAfter(37.7953);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    p = VSAPoint(-813.996174274391478, 331.903525290021662);
+    p.SetSABefore(37.7953);
+    p.SetSAAfter(37.7953);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    p = VSAPoint(-814.714960629921279, 331.313196850393751);
+    p.SetSABefore(37.7953);
+    p.SetSAAfter(0);
+    p.SetAngleType(PieceNodeAngle::ByPointsIntersection);
+    points += p;
+
+    return points;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QVector<QPointF> TST_VAbstractPiece::OutputPointsIssue923Test2()
+{
+    QVector<QPointF> points;
+
+    points += QPointF(-814.714960629921279, 331.313196850393751);
+    points += QPointF(-814.714960629921279, -46.738127408018386);
+    points += QPointF(-778.560274683193597, -50.549491761193529);
+    points += QPointF(-737.960891197081651, -56.790170478391879);
+    points += QPointF(-709.273784936183347, -62.545071142283753);
+    points += QPointF(-681.358329676571884, -69.772421317304676);
+    points += QPointF(-662.734996979773655, -76.086662659765864);
+    points += QPointF(-652.000013358218780, -80.530014885308333);
+    points += QPointF(-647.534742107878174, -82.700492263504771);
+    points += QPointF(-631.585239468780856, -90.995118061836052);
+    points += QPointF(-616.328020233970847, -100.594267156991847);
+    points += QPointF(-594.096383910663576, -115.972155307751649);
+    points += QPointF(-184.048650148745537, 76.198374399107223);
+    points += QPointF(-202.588712626694274, 128.531217087733864);
+    points += QPointF(-214.844352980142077, 166.709615345349164);
+    points += QPointF(-224.900721916665105, 202.786707734969326);
+    points += QPointF(-232.934347140993879, 237.080856834901624);
+    points += QPointF(-239.089037151700012, 269.817045957384835);
+    points += QPointF(-243.506611386394923, 301.230502874877175);
+    points += QPointF(-246.324245680472586, 331.565901059170528);
+    points += QPointF(-247.367542640672326, 354.406709505752815);
+    points += QPointF(-268.813396242720216, 365.986520876589054);
+    points += QPointF(-274.509592479190928, 368.544465142904016);
+    points += QPointF(-280.430827138279028, 370.738996867416517);
+    points += QPointF(-286.539948778692178, 372.651089393540587);
+    points += QPointF(-295.760523769485246, 375.070669023642552);
+    points += QPointF(-309.108660665237892, 377.812272271559323);
+    points += QPointF(-323.791841306461833, 380.189287868544909);
+    points += QPointF(-339.746492379944868, 382.263575885265993);
+    points += QPointF(-356.936262185776172, 384.077045039880318);
+    points += QPointF(-375.281527662442841, 385.653208859628023);
+    points += QPointF(-394.678657394273387, 387.006850647147644);
+    points += QPointF(-414.787606696514558, 388.135795504608552);
+    points += QPointF(-435.952026976937020, 389.076617984501581);
+    points += QPointF(-457.785958239726995, 389.818484035948188);
+    points += QPointF(-480.155299343825106, 390.367355935354340);
+    points += QPointF(-502.923072127811622, 390.728524359010180);
+    points += QPointF(-525.950383000425973, 390.906843496429246);
+    points += QPointF(-549.097086395700558, 390.906868034847378);
+    points += QPointF(-572.222272868468281, 390.732932110765603);
+    points += QPointF(-595.184660101380132, 390.389190982770685);
+    points += QPointF(-617.842942744172888, 389.879635420374768);
+    points += QPointF(-640.056148626075128, 389.208081776045162);
+    points += QPointF(-661.684051740050222, 388.378134611085102);
+    points += QPointF(-682.587707903001387, 387.393111203977753);
+    points += QPointF(-702.630213610816895, 386.255904969512756);
+    points += QPointF(-721.913933492959586, 384.952760768153212);
+    points += QPointF(-739.883081019170959, 383.510162372720174);
+    points += QPointF(-756.628370632600195, 381.913999891517676);
+    points += QPointF(-772.055707410166860, 380.156385631636169);
+    points += QPointF(-786.107417616341536, 378.217868080938274);
+    points += QPointF(-798.800506212061464, 376.051179682426266);
+    points += QPointF(-810.181063245406790, 373.562456117723798);
+    points += QPointF(-814.714960629921279, 372.254255263452592);
+    points += QPointF(-814.714960629921279, 331.313196850393751);
+
+    return points;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QVector<VSAPoint> TST_VAbstractPiece::InputPointsIssue923Test3()
+{
+    QVector<VSAPoint> points;
+
+    VSAPoint p = VSAPoint(-814.714960629921279, 331.313196850393751);
+    p.SetSABefore(37.7953);
+    p.SetSAAfter(0);
+    p.SetAngleType(PieceNodeAngle::ByFirstEdgeSymmetry);
+    points += p;
+
+    p = VSAPoint(-814.714960629921279, -8.844283464566928);
+    p.SetSABefore(0);
+    p.SetSAAfter(37.7953);
+    points += p;
+
+    p = VSAPoint(-814.714960629921279, -8.844283464566928);
+    p.SetSABefore(0);
+    p.SetSAAfter(37.7953);
+    points += p;
+
+    p = VSAPoint(-810.914791391285917, -9.118915311803084);
+    p.SetSABefore(37.7953);
+    p.SetSAAfter(37.7953);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    p = VSAPoint(-773.697565712941014, -13.057776517652679);
+    p.SetSABefore(37.7953);
+    p.SetSAAfter(37.7953);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    p = VSAPoint(-731.369396039071717, -19.564193239769612);
+    p.SetSABefore(37.7953);
+    p.SetSAAfter(37.7953);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    p = VSAPoint(-700.813861852517789, -25.693917945236084);
+    p.SetSABefore(37.7953);
+    p.SetSAAfter(37.7953);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    p = VSAPoint(-670.539289284542633, -33.532046871057645);
+    p.SetSABefore(37.7953);
+    p.SetSAAfter(37.7953);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    p = VSAPoint(-649.425406024800168, -40.690709434256448);
+    p.SetSABefore(37.7953);
+    p.SetSAAfter(37.7953);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    p = VSAPoint(-636.497248173983621, -46.041845587202857);
+    p.SetSABefore(37.7953);
+    p.SetSAAfter(37.7953);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    p = VSAPoint(-630.550935626324190, -48.932226964906654);
+    p.SetSABefore(37.7953);
+    p.SetSAAfter(37.7953);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    p = VSAPoint(-612.770937464562508, -58.178811938993192);
+    p.SetSABefore(37.7953);
+    p.SetSAAfter(37.7953);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    p = VSAPoint(-595.504209442756292, -69.042252656202692);
+    p.SetSABefore(37.7953);
+    p.SetSAAfter(37.7953);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    points += VSAPoint(-590.462992125984215, -72.529322834645669);
+    points += VSAPoint(-590.462992125984215, -72.529322834645669);
+    points += VSAPoint(-231.118006951984967, 95.879158575193841);
+    points += VSAPoint(-231.118006951984967, 95.879158575193841);
+
+    p = VSAPoint(-238.402815433872661, 116.441912166387880);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    p = VSAPoint(-251.054901827475362, 155.855307076335350);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    p = VSAPoint(-261.519858253217421, 193.398201754121601);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    p = VSAPoint(-269.924247729261879, 229.275078971710684);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    p = VSAPoint(-276.394633273771547, 263.690421501066567);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    p = VSAPoint(-281.057577904909294, 296.848712114153273);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    p = VSAPoint(-284.039644640838333, 328.954433582934655);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    points += VSAPoint(-284.147385597229004, 331.313196850393751);
+    points += VSAPoint(-284.147385597229004, 331.313196850393751);
+    points += VSAPoint(-284.147385597229004, 331.313196850393751);
+
+    p = VSAPoint(-285.555799865587915, 332.073678193884462);
+    p.SetSABefore(37.7953);
+    p.SetSAAfter(37.7953);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    p = VSAPoint(-288.834524762284673, 333.546028373225568);
+    p.SetSABefore(37.7953);
+    p.SetSAAfter(37.7953);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    p = VSAPoint(-292.651017475591800, 334.960499310104979);
+    p.SetSABefore(37.7953);
+    p.SetSAAfter(37.7953);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    p = VSAPoint(-296.986935988437835, 336.317597411974702);
+    p.SetSABefore(37.7953);
+    p.SetSAAfter(37.7953);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    p = VSAPoint(-304.365417624891165, 338.253791617484694);
+    p.SetSABefore(37.7953);
+    p.SetSAAfter(37.7953);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    p = VSAPoint(-315.933705242960059, 340.629827700589658);
+    p.SetSABefore(37.7953);
+    p.SetSAAfter(37.7953);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    p = VSAPoint(-329.249539751899079, 342.785487777791332);
+    p.SetSABefore(37.7953);
+    p.SetSAAfter(37.7953);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    p = VSAPoint(-344.166185015137103, 344.724823108705550);
+    p.SetSABefore(37.7953);
+    p.SetSAAfter(37.7953);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    p = VSAPoint(-360.536904896102669, 346.451884952948035);
+    p.SetSABefore(37.7953);
+    p.SetSAAfter(37.7953);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    p = VSAPoint(-378.214963258224429, 347.970724570134507);
+    p.SetSABefore(37.7953);
+    p.SetSAAfter(37.7953);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    p = VSAPoint(-397.053623964930921, 349.285393219880916);
+    p.SetSABefore(37.7953);
+    p.SetSAAfter(37.7953);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    p = VSAPoint(-416.906150879651022, 350.399942161802983);
+    p.SetSABefore(37.7953);
+    p.SetSAAfter(37.7953);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    p = VSAPoint(-437.625807865813101, 351.318422655516372);
+    p.SetSABefore(37.7953);
+    p.SetSAAfter(37.7953);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    p = VSAPoint(-459.065858786846093, 352.044885960637032);
+    p.SetSABefore(37.7953);
+    p.SetSAAfter(37.7953);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    p = VSAPoint(-481.079567506178364, 352.583383336780628);
+    p.SetSABefore(37.7953);
+    p.SetSAAfter(37.7953);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    p = VSAPoint(-503.520197887238680, 352.937966043563051);
+    p.SetSABefore(37.7953);
+    p.SetSAAfter(37.7953);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    p = VSAPoint(-526.241013793455750, 353.112685340600024);
+    p.SetSABefore(37.7953);
+    p.SetSAAfter(37.7953);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    p = VSAPoint(-549.095279088258053, 353.111592487507210);
+    p.SetSABefore(37.7953);
+    p.SetSAAfter(37.7953);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    p = VSAPoint(-571.936257635074298, 352.938738743900558);
+    p.SetSABefore(37.7953);
+    p.SetSAAfter(37.7953);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    p = VSAPoint(-594.617213297333365, 352.598175369395790);
+    p.SetSABefore(37.7953);
+    p.SetSAAfter(37.7953);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    p = VSAPoint(-616.991409938463448, 352.093953623608741);
+    p.SetSABefore(37.7953);
+    p.SetSAAfter(37.7953);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    p = VSAPoint(-638.912111421893314, 351.430124766155018);
+    p.SetSABefore(37.7953);
+    p.SetSAAfter(37.7953);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    p = VSAPoint(-660.232581611051955, 350.610740056650570);
+    p.SetSABefore(37.7953);
+    p.SetSAAfter(37.7953);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    p = VSAPoint(-680.806084369367682, 349.639850754711119);
+    p.SetSABefore(37.7953);
+    p.SetSAAfter(37.7953);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    p = VSAPoint(-700.485883560269031, 348.521508119952557);
+    p.SetSABefore(37.7953);
+    p.SetSAAfter(37.7953);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    p = VSAPoint(-719.125243047185108, 347.259763411990377);
+    p.SetSABefore(37.7953);
+    p.SetSAAfter(37.7953);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    p = VSAPoint(-736.577426693544112, 345.858667890440699);
+    p.SetSABefore(37.7953);
+    p.SetSAAfter(37.7953);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    p = VSAPoint(-752.695698362774920, 344.322272814919074);
+    p.SetSABefore(37.7953);
+    p.SetSAAfter(37.7953);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    p = VSAPoint(-767.333321918305955, 342.654629445041451);
+    p.SetSABefore(37.7953);
+    p.SetSAAfter(37.7953);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    p = VSAPoint(-780.343561223566212, 340.859789040423379);
+    p.SetSABefore(37.7953);
+    p.SetSAAfter(37.7953);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    p = VSAPoint(-791.579680141983886, 338.941802860680923);
+    p.SetSABefore(37.7953);
+    p.SetSAAfter(37.7953);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    p = VSAPoint(-800.894942536987969, 336.904722165429632);
+    p.SetSABefore(37.7953);
+    p.SetSAAfter(37.7953);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    p = VSAPoint(-806.464504883768996, 335.297692803701807);
+    p.SetSABefore(37.7953);
+    p.SetSAAfter(37.7953);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    p = VSAPoint(-809.543928560675113, 334.193629625334438);
+    p.SetSABefore(37.7953);
+    p.SetSAAfter(37.7953);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    p = VSAPoint(-812.060599029906371, 333.062071651623739);
+    p.SetSABefore(37.7953);
+    p.SetSAAfter(37.7953);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    p = VSAPoint(-813.996174274391478, 331.903525290021662);
+    p.SetSABefore(37.7953);
+    p.SetSAAfter(37.7953);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    p = VSAPoint(-814.714960629921279, 331.313196850393751);
+    p.SetSABefore(37.7953);
+    p.SetSAAfter(0);
+    p.SetAngleType(PieceNodeAngle::ByFirstEdgeSymmetry);
+    points += p;
+
+    return points;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QVector<QPointF> TST_VAbstractPiece::OutputPointsIssue923Test3()
+{
+    QVector<QPointF> points;
+
+    points += QPointF(-844.490345580522785, 355.767273366986956);
+    points += QPointF(-814.714960629921279, 331.313196850393751);
+    points += QPointF(-814.714960629921279, -46.738127408018386);
+    points += QPointF(-778.560274683193597, -50.549491761193529);
+    points += QPointF(-737.960891197081651, -56.790170478391879);
+    points += QPointF(-709.273784936183347, -62.545071142283753);
+    points += QPointF(-681.358329676571884, -69.772421317304676);
+    points += QPointF(-662.734996979773655, -76.086662659765864);
+    points += QPointF(-652.000013358218780, -80.530014885308333);
+    points += QPointF(-647.534742107878174, -82.700492263504771);
+    points += QPointF(-631.585239468780856, -90.995118061836052);
+    points += QPointF(-616.328020233970847, -100.594267156991847);
+    points += QPointF(-594.096383910663576, -115.972155307751649);
+    points += QPointF(-184.048650148745537, 76.198374399107223);
+    points += QPointF(-202.588712626694274, 128.531217087733864);
+    points += QPointF(-214.844352980142077, 166.709615345349164);
+    points += QPointF(-224.900721916665105, 202.786707734969326);
+    points += QPointF(-232.934347140993879, 237.080856834901624);
+    points += QPointF(-239.089037151700012, 269.817045957384835);
+    points += QPointF(-243.506611386394923, 301.230502874877175);
+    points += QPointF(-246.324245680472586, 331.565901059170528);
+    points += QPointF(-247.367542640672326, 354.406709505752815);
+    points += QPointF(-268.813396242720216, 365.986520876589054);
+    points += QPointF(-274.509592479190928, 368.544465142904016);
+    points += QPointF(-280.430827138279028, 370.738996867416517);
+    points += QPointF(-286.539948778692178, 372.651089393540587);
+    points += QPointF(-295.760523769485246, 375.070669023642552);
+    points += QPointF(-309.108660665237892, 377.812272271559323);
+    points += QPointF(-323.791841306461833, 380.189287868544909);
+    points += QPointF(-339.746492379944868, 382.263575885265993);
+    points += QPointF(-356.936262185776172, 384.077045039880318);
+    points += QPointF(-375.281527662442841, 385.653208859628023);
+    points += QPointF(-394.678657394273387, 387.006850647147644);
+    points += QPointF(-414.787606696514558, 388.135795504608552);
+    points += QPointF(-435.952026976937020, 389.076617984501581);
+    points += QPointF(-457.785958239726995, 389.818484035948188);
+    points += QPointF(-480.155299343825106, 390.367355935354340);
+    points += QPointF(-502.923072127811622, 390.728524359010180);
+    points += QPointF(-525.950383000425973, 390.906843496429246);
+    points += QPointF(-549.097086395700558, 390.906868034847378);
+    points += QPointF(-572.222272868468281, 390.732932110765603);
+    points += QPointF(-595.184660101380132, 390.389190982770685);
+    points += QPointF(-617.842942744172888, 389.879635420374768);
+    points += QPointF(-640.056148626075128, 389.208081776045162);
+    points += QPointF(-661.684051740050222, 388.378134611085102);
+    points += QPointF(-682.587707903001387, 387.393111203977753);
+    points += QPointF(-702.630213610816895, 386.255904969512756);
+    points += QPointF(-721.913933492959586, 384.952760768153212);
+    points += QPointF(-739.883081019170959, 383.510162372720174);
+    points += QPointF(-756.628370632600195, 381.913999891517676);
+    points += QPointF(-772.055707410166860, 380.156385631636169);
+    points += QPointF(-786.107417616341536, 378.217868080938274);
+    points += QPointF(-798.800506212061464, 376.051179682426266);
+    points += QPointF(-810.181063245406790, 373.562456117723798);
+    points += QPointF(-818.092955780502393, 371.279575916538420);
+    points += QPointF(-823.692975528084730, 369.271805550997954);
+    points += QPointF(-829.575336882823422, 366.626948794191208);
+    points += QPointF(-835.815139714856855, 362.892089667033019);
+    points += QPointF(-844.490345580522785, 355.767273366986956);
+
+    return points;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QVector<VSAPoint> TST_VAbstractPiece::InputPointsIssue923Test4()
+{
+    QVector<VSAPoint> points;
+
+    VSAPoint p = VSAPoint(-814.714960629921279, 331.313196850393751);
+    p.SetSABefore(37.7953);
+    p.SetSAAfter(0);
+    points += p;
+
+    p = VSAPoint(-814.714960629921279, -8.844283464566928);
+    p.SetSABefore(0);
+    p.SetSAAfter(37.7953);
+    points += p;
+
+    p = VSAPoint(-814.714960629921279, -8.844283464566928);
+    p.SetSABefore(0);
+    p.SetSAAfter(37.7953);
+    points += p;
+
+    p = VSAPoint(-810.914791391285917, -9.118915311803084);
+    p.SetSABefore(37.7953);
+    p.SetSAAfter(37.7953);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    p = VSAPoint(-773.697565712941014, -13.057776517652679);
+    p.SetSABefore(37.7953);
+    p.SetSAAfter(37.7953);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    p = VSAPoint(-731.369396039071717, -19.564193239769612);
+    p.SetSABefore(37.7953);
+    p.SetSAAfter(37.7953);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    p = VSAPoint(-700.813861852517789, -25.693917945236084);
+    p.SetSABefore(37.7953);
+    p.SetSAAfter(37.7953);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    p = VSAPoint(-670.539289284542633, -33.532046871057645);
+    p.SetSABefore(37.7953);
+    p.SetSAAfter(37.7953);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    p = VSAPoint(-649.425406024800168, -40.690709434256448);
+    p.SetSABefore(37.7953);
+    p.SetSAAfter(37.7953);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    p = VSAPoint(-636.497248173983621, -46.041845587202857);
+    p.SetSABefore(37.7953);
+    p.SetSAAfter(37.7953);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    p = VSAPoint(-630.550935626324190, -48.932226964906654);
+    p.SetSABefore(37.7953);
+    p.SetSAAfter(37.7953);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    p = VSAPoint(-612.770937464562508, -58.178811938993192);
+    p.SetSABefore(37.7953);
+    p.SetSAAfter(37.7953);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    p = VSAPoint(-595.504209442756292, -69.042252656202692);
+    p.SetSABefore(37.7953);
+    p.SetSAAfter(37.7953);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    points += VSAPoint(-590.462992125984215, -72.529322834645669);
+    points += VSAPoint(-590.462992125984215, -72.529322834645669);
+    points += VSAPoint(-231.118006951984967, 95.879158575193841);
+    points += VSAPoint(-231.118006951984967, 95.879158575193841);
+
+    p = VSAPoint(-238.402815433872661, 116.441912166387880);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    p = VSAPoint(-251.054901827475362, 155.855307076335350);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    p = VSAPoint(-261.519858253217421, 193.398201754121601);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    p = VSAPoint(-269.924247729261879, 229.275078971710684);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    p = VSAPoint(-276.394633273771547, 263.690421501066567);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    p = VSAPoint(-281.057577904909294, 296.848712114153273);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    p = VSAPoint(-284.039644640838333, 328.954433582934655);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    points += VSAPoint(-284.147385597229004, 331.313196850393751);
+    points += VSAPoint(-284.147385597229004, 331.313196850393751);
+    points += VSAPoint(-284.147385597229004, 331.313196850393751);
+
+    p = VSAPoint(-285.555799865587915, 332.073678193884462);
+    p.SetSABefore(37.7953);
+    p.SetSAAfter(37.7953);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    p = VSAPoint(-288.834524762284673, 333.546028373225568);
+    p.SetSABefore(37.7953);
+    p.SetSAAfter(37.7953);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    p = VSAPoint(-292.651017475591800, 334.960499310104979);
+    p.SetSABefore(37.7953);
+    p.SetSAAfter(37.7953);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    p = VSAPoint(-296.986935988437835, 336.317597411974702);
+    p.SetSABefore(37.7953);
+    p.SetSAAfter(37.7953);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    p = VSAPoint(-304.365417624891165, 338.253791617484694);
+    p.SetSABefore(37.7953);
+    p.SetSAAfter(37.7953);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    p = VSAPoint(-315.933705242960059, 340.629827700589658);
+    p.SetSABefore(37.7953);
+    p.SetSAAfter(37.7953);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    p = VSAPoint(-329.249539751899079, 342.785487777791332);
+    p.SetSABefore(37.7953);
+    p.SetSAAfter(37.7953);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    p = VSAPoint(-344.166185015137103, 344.724823108705550);
+    p.SetSABefore(37.7953);
+    p.SetSAAfter(37.7953);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    p = VSAPoint(-360.536904896102669, 346.451884952948035);
+    p.SetSABefore(37.7953);
+    p.SetSAAfter(37.7953);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    p = VSAPoint(-378.214963258224429, 347.970724570134507);
+    p.SetSABefore(37.7953);
+    p.SetSAAfter(37.7953);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    p = VSAPoint(-397.053623964930921, 349.285393219880916);
+    p.SetSABefore(37.7953);
+    p.SetSAAfter(37.7953);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    p = VSAPoint(-416.906150879651022, 350.399942161802983);
+    p.SetSABefore(37.7953);
+    p.SetSAAfter(37.7953);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    p = VSAPoint(-437.625807865813101, 351.318422655516372);
+    p.SetSABefore(37.7953);
+    p.SetSAAfter(37.7953);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    p = VSAPoint(-459.065858786846093, 352.044885960637032);
+    p.SetSABefore(37.7953);
+    p.SetSAAfter(37.7953);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    p = VSAPoint(-481.079567506178364, 352.583383336780628);
+    p.SetSABefore(37.7953);
+    p.SetSAAfter(37.7953);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    p = VSAPoint(-503.520197887238680, 352.937966043563051);
+    p.SetSABefore(37.7953);
+    p.SetSAAfter(37.7953);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    p = VSAPoint(-526.241013793455750, 353.112685340600024);
+    p.SetSABefore(37.7953);
+    p.SetSAAfter(37.7953);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    p = VSAPoint(-549.095279088258053, 353.111592487507210);
+    p.SetSABefore(37.7953);
+    p.SetSAAfter(37.7953);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    p = VSAPoint(-571.936257635074298, 352.938738743900558);
+    p.SetSABefore(37.7953);
+    p.SetSAAfter(37.7953);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    p = VSAPoint(-594.617213297333365, 352.598175369395790);
+    p.SetSABefore(37.7953);
+    p.SetSAAfter(37.7953);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    p = VSAPoint(-616.991409938463448, 352.093953623608741);
+    p.SetSABefore(37.7953);
+    p.SetSAAfter(37.7953);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    p = VSAPoint(-638.912111421893314, 351.430124766155018);
+    p.SetSABefore(37.7953);
+    p.SetSAAfter(37.7953);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    p = VSAPoint(-660.232581611051955, 350.610740056650570);
+    p.SetSABefore(37.7953);
+    p.SetSAAfter(37.7953);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    p = VSAPoint(-680.806084369367682, 349.639850754711119);
+    p.SetSABefore(37.7953);
+    p.SetSAAfter(37.7953);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    p = VSAPoint(-700.485883560269031, 348.521508119952557);
+    p.SetSABefore(37.7953);
+    p.SetSAAfter(37.7953);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    p = VSAPoint(-719.125243047185108, 347.259763411990377);
+    p.SetSABefore(37.7953);
+    p.SetSAAfter(37.7953);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    p = VSAPoint(-736.577426693544112, 345.858667890440699);
+    p.SetSABefore(37.7953);
+    p.SetSAAfter(37.7953);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    p = VSAPoint(-752.695698362774920, 344.322272814919074);
+    p.SetSABefore(37.7953);
+    p.SetSAAfter(37.7953);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    p = VSAPoint(-767.333321918305955, 342.654629445041451);
+    p.SetSABefore(37.7953);
+    p.SetSAAfter(37.7953);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    p = VSAPoint(-780.343561223566212, 340.859789040423379);
+    p.SetSABefore(37.7953);
+    p.SetSAAfter(37.7953);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    p = VSAPoint(-791.579680141983886, 338.941802860680923);
+    p.SetSABefore(37.7953);
+    p.SetSAAfter(37.7953);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    p = VSAPoint(-800.894942536987969, 336.904722165429632);
+    p.SetSABefore(37.7953);
+    p.SetSAAfter(37.7953);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    p = VSAPoint(-806.464504883768996, 335.297692803701807);
+    p.SetSABefore(37.7953);
+    p.SetSAAfter(37.7953);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    p = VSAPoint(-809.543928560675113, 334.193629625334438);
+    p.SetSABefore(37.7953);
+    p.SetSAAfter(37.7953);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    p = VSAPoint(-812.060599029906371, 333.062071651623739);
+    p.SetSABefore(37.7953);
+    p.SetSAAfter(37.7953);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    p = VSAPoint(-813.996174274391478, 331.903525290021662);
+    p.SetSABefore(37.7953);
+    p.SetSAAfter(37.7953);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    p = VSAPoint(-814.714960629921279, 331.313196850393751);
+    p.SetSABefore(37.7953);
+    p.SetSAAfter(0);
+    points += p;
+
+    return points;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QVector<QPointF> TST_VAbstractPiece::OutputPointsIssue923Test4()
+{
+    QVector<QPointF> points;
+
+    points += QPointF(-814.714960629921279, -46.738127408018386);
+    points += QPointF(-778.560274683193597, -50.549491761193529);
+    points += QPointF(-737.960891197081651, -56.790170478391879);
+    points += QPointF(-709.273784936183347, -62.545071142283753);
+    points += QPointF(-681.358329676571884, -69.772421317304676);
+    points += QPointF(-662.734996979773655, -76.086662659765864);
+    points += QPointF(-652.000013358218780, -80.530014885308333);
+    points += QPointF(-647.534742107878174, -82.700492263504771);
+    points += QPointF(-631.585239468780856, -90.995118061836052);
+    points += QPointF(-616.328020233970847, -100.594267156991847);
+    points += QPointF(-594.096383910663576, -115.972155307751649);
+    points += QPointF(-184.048650148745537, 76.198374399107223);
+    points += QPointF(-202.588712626694274, 128.531217087733864);
+    points += QPointF(-214.844352980142077, 166.709615345349164);
+    points += QPointF(-224.900721916665105, 202.786707734969326);
+    points += QPointF(-232.934347140993879, 237.080856834901624);
+    points += QPointF(-239.089037151700012, 269.817045957384835);
+    points += QPointF(-243.506611386394923, 301.230502874877175);
+    points += QPointF(-246.324245680472586, 331.565901059170528);
+    points += QPointF(-247.367542640672326, 354.406709505752815);
+    points += QPointF(-268.813396242720216, 365.986520876589054);
+    points += QPointF(-274.509592479190928, 368.544465142904016);
+    points += QPointF(-280.430827138279028, 370.738996867416517);
+    points += QPointF(-286.539948778692178, 372.651089393540587);
+    points += QPointF(-295.760523769485246, 375.070669023642552);
+    points += QPointF(-309.108660665237892, 377.812272271559323);
+    points += QPointF(-323.791841306461833, 380.189287868544909);
+    points += QPointF(-339.746492379944868, 382.263575885265993);
+    points += QPointF(-356.936262185776172, 384.077045039880318);
+    points += QPointF(-375.281527662442841, 385.653208859628023);
+    points += QPointF(-394.678657394273387, 387.006850647147644);
+    points += QPointF(-414.787606696514558, 388.135795504608552);
+    points += QPointF(-435.952026976937020, 389.076617984501581);
+    points += QPointF(-457.785958239726995, 389.818484035948188);
+    points += QPointF(-480.155299343825106, 390.367355935354340);
+    points += QPointF(-502.923072127811622, 390.728524359010180);
+    points += QPointF(-525.950383000425973, 390.906843496429246);
+    points += QPointF(-549.097086395700558, 390.906868034847378);
+    points += QPointF(-572.222272868468281, 390.732932110765603);
+    points += QPointF(-595.184660101380132, 390.389190982770685);
+    points += QPointF(-617.842942744172888, 389.879635420374768);
+    points += QPointF(-640.056148626075128, 389.208081776045162);
+    points += QPointF(-661.684051740050222, 388.378134611085102);
+    points += QPointF(-682.587707903001387, 387.393111203977753);
+    points += QPointF(-702.630213610816895, 386.255904969512756);
+    points += QPointF(-721.913933492959586, 384.952760768153212);
+    points += QPointF(-739.883081019170959, 383.510162372720174);
+    points += QPointF(-756.628370632600195, 381.913999891517676);
+    points += QPointF(-772.055707410166860, 380.156385631636169);
+    points += QPointF(-786.107417616341536, 378.217868080938274);
+    points += QPointF(-798.800506212061464, 376.051179682426266);
+    points += QPointF(-810.181063245406790, 373.562456117723798);
+    points += QPointF(-814.714960629921279, 372.254255263452592);
+    points += QPointF(-814.714960629921279, -46.738127408018386);
+
+    return points;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QVector<VSAPoint> TST_VAbstractPiece::InputPointsIssue923Test5()
+{
+    QVector<VSAPoint> points;
+
+    VSAPoint p = VSAPoint(-814.714960629921279, 331.313196850393751);
+    p.SetSABefore(37.7953);
+    p.SetSAAfter(0);
+    p.SetAngleType(PieceNodeAngle::ByFirstEdgeRightAngle);
+    points += p;
+
+    p = VSAPoint(-814.714960629921279, -8.844283464566928);
+    p.SetSABefore(0);
+    p.SetSAAfter(37.7953);
+    points += p;
+
+    p = VSAPoint(-814.714960629921279, -8.844283464566928);
+    p.SetSABefore(0);
+    p.SetSAAfter(37.7953);
+    points += p;
+
+    p = VSAPoint(-810.914791391285917, -9.118915311803084);
+    p.SetSABefore(37.7953);
+    p.SetSAAfter(37.7953);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    p = VSAPoint(-773.697565712941014, -13.057776517652679);
+    p.SetSABefore(37.7953);
+    p.SetSAAfter(37.7953);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    p = VSAPoint(-731.369396039071717, -19.564193239769612);
+    p.SetSABefore(37.7953);
+    p.SetSAAfter(37.7953);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    p = VSAPoint(-700.813861852517789, -25.693917945236084);
+    p.SetSABefore(37.7953);
+    p.SetSAAfter(37.7953);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    p = VSAPoint(-670.539289284542633, -33.532046871057645);
+    p.SetSABefore(37.7953);
+    p.SetSAAfter(37.7953);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    p = VSAPoint(-649.425406024800168, -40.690709434256448);
+    p.SetSABefore(37.7953);
+    p.SetSAAfter(37.7953);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    p = VSAPoint(-636.497248173983621, -46.041845587202857);
+    p.SetSABefore(37.7953);
+    p.SetSAAfter(37.7953);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    p = VSAPoint(-630.550935626324190, -48.932226964906654);
+    p.SetSABefore(37.7953);
+    p.SetSAAfter(37.7953);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    p = VSAPoint(-612.770937464562508, -58.178811938993192);
+    p.SetSABefore(37.7953);
+    p.SetSAAfter(37.7953);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    p = VSAPoint(-595.504209442756292, -69.042252656202692);
+    p.SetSABefore(37.7953);
+    p.SetSAAfter(37.7953);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    points += VSAPoint(-590.462992125984215, -72.529322834645669);
+    points += VSAPoint(-590.462992125984215, -72.529322834645669);
+    points += VSAPoint(-231.118006951984967, 95.879158575193841);
+    points += VSAPoint(-231.118006951984967, 95.879158575193841);
+
+    p = VSAPoint(-238.402815433872661, 116.441912166387880);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    p = VSAPoint(-251.054901827475362, 155.855307076335350);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    p = VSAPoint(-261.519858253217421, 193.398201754121601);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    p = VSAPoint(-269.924247729261879, 229.275078971710684);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    p = VSAPoint(-276.394633273771547, 263.690421501066567);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    p = VSAPoint(-281.057577904909294, 296.848712114153273);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    p = VSAPoint(-284.039644640838333, 328.954433582934655);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    points += VSAPoint(-284.147385597229004, 331.313196850393751);
+    points += VSAPoint(-284.147385597229004, 331.313196850393751);
+    points += VSAPoint(-284.147385597229004, 331.313196850393751);
+
+    p = VSAPoint(-285.555799865587915, 332.073678193884462);
+    p.SetSABefore(37.7953);
+    p.SetSAAfter(37.7953);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    p = VSAPoint(-288.834524762284673, 333.546028373225568);
+    p.SetSABefore(37.7953);
+    p.SetSAAfter(37.7953);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    p = VSAPoint(-292.651017475591800, 334.960499310104979);
+    p.SetSABefore(37.7953);
+    p.SetSAAfter(37.7953);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    p = VSAPoint(-296.986935988437835, 336.317597411974702);
+    p.SetSABefore(37.7953);
+    p.SetSAAfter(37.7953);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    p = VSAPoint(-304.365417624891165, 338.253791617484694);
+    p.SetSABefore(37.7953);
+    p.SetSAAfter(37.7953);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    p = VSAPoint(-315.933705242960059, 340.629827700589658);
+    p.SetSABefore(37.7953);
+    p.SetSAAfter(37.7953);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    p = VSAPoint(-329.249539751899079, 342.785487777791332);
+    p.SetSABefore(37.7953);
+    p.SetSAAfter(37.7953);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    p = VSAPoint(-344.166185015137103, 344.724823108705550);
+    p.SetSABefore(37.7953);
+    p.SetSAAfter(37.7953);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    p = VSAPoint(-360.536904896102669, 346.451884952948035);
+    p.SetSABefore(37.7953);
+    p.SetSAAfter(37.7953);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    p = VSAPoint(-378.214963258224429, 347.970724570134507);
+    p.SetSABefore(37.7953);
+    p.SetSAAfter(37.7953);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    p = VSAPoint(-397.053623964930921, 349.285393219880916);
+    p.SetSABefore(37.7953);
+    p.SetSAAfter(37.7953);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    p = VSAPoint(-416.906150879651022, 350.399942161802983);
+    p.SetSABefore(37.7953);
+    p.SetSAAfter(37.7953);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    p = VSAPoint(-437.625807865813101, 351.318422655516372);
+    p.SetSABefore(37.7953);
+    p.SetSAAfter(37.7953);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    p = VSAPoint(-459.065858786846093, 352.044885960637032);
+    p.SetSABefore(37.7953);
+    p.SetSAAfter(37.7953);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    p = VSAPoint(-481.079567506178364, 352.583383336780628);
+    p.SetSABefore(37.7953);
+    p.SetSAAfter(37.7953);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    p = VSAPoint(-503.520197887238680, 352.937966043563051);
+    p.SetSABefore(37.7953);
+    p.SetSAAfter(37.7953);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    p = VSAPoint(-526.241013793455750, 353.112685340600024);
+    p.SetSABefore(37.7953);
+    p.SetSAAfter(37.7953);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    p = VSAPoint(-549.095279088258053, 353.111592487507210);
+    p.SetSABefore(37.7953);
+    p.SetSAAfter(37.7953);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    p = VSAPoint(-571.936257635074298, 352.938738743900558);
+    p.SetSABefore(37.7953);
+    p.SetSAAfter(37.7953);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    p = VSAPoint(-594.617213297333365, 352.598175369395790);
+    p.SetSABefore(37.7953);
+    p.SetSAAfter(37.7953);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    p = VSAPoint(-616.991409938463448, 352.093953623608741);
+    p.SetSABefore(37.7953);
+    p.SetSAAfter(37.7953);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    p = VSAPoint(-638.912111421893314, 351.430124766155018);
+    p.SetSABefore(37.7953);
+    p.SetSAAfter(37.7953);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    p = VSAPoint(-660.232581611051955, 350.610740056650570);
+    p.SetSABefore(37.7953);
+    p.SetSAAfter(37.7953);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    p = VSAPoint(-680.806084369367682, 349.639850754711119);
+    p.SetSABefore(37.7953);
+    p.SetSAAfter(37.7953);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    p = VSAPoint(-700.485883560269031, 348.521508119952557);
+    p.SetSABefore(37.7953);
+    p.SetSAAfter(37.7953);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    p = VSAPoint(-719.125243047185108, 347.259763411990377);
+    p.SetSABefore(37.7953);
+    p.SetSAAfter(37.7953);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    p = VSAPoint(-736.577426693544112, 345.858667890440699);
+    p.SetSABefore(37.7953);
+    p.SetSAAfter(37.7953);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    p = VSAPoint(-752.695698362774920, 344.322272814919074);
+    p.SetSABefore(37.7953);
+    p.SetSAAfter(37.7953);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    p = VSAPoint(-767.333321918305955, 342.654629445041451);
+    p.SetSABefore(37.7953);
+    p.SetSAAfter(37.7953);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    p = VSAPoint(-780.343561223566212, 340.859789040423379);
+    p.SetSABefore(37.7953);
+    p.SetSAAfter(37.7953);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    p = VSAPoint(-791.579680141983886, 338.941802860680923);
+    p.SetSABefore(37.7953);
+    p.SetSAAfter(37.7953);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    p = VSAPoint(-800.894942536987969, 336.904722165429632);
+    p.SetSABefore(37.7953);
+    p.SetSAAfter(37.7953);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    p = VSAPoint(-806.464504883768996, 335.297692803701807);
+    p.SetSABefore(37.7953);
+    p.SetSAAfter(37.7953);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    p = VSAPoint(-809.543928560675113, 334.193629625334438);
+    p.SetSABefore(37.7953);
+    p.SetSAAfter(37.7953);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    p = VSAPoint(-812.060599029906371, 333.062071651623739);
+    p.SetSABefore(37.7953);
+    p.SetSAAfter(37.7953);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    p = VSAPoint(-813.996174274391478, 331.903525290021662);
+    p.SetSABefore(37.7953);
+    p.SetSAAfter(37.7953);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    p = VSAPoint(-814.714960629921279, 331.313196850393751);
+    p.SetSABefore(37.7953);
+    p.SetSAAfter(0);
+    p.SetAngleType(PieceNodeAngle::ByFirstEdgeRightAngle);
+    points += p;
+
+    return points;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QVector<QPointF> TST_VAbstractPiece::OutputPointsIssue923Test5()
+{
+    QVector<QPointF> points;
+
+    points += QPointF(-838.702607797801647, 360.520655492237381);
+    points += QPointF(-814.714960629921279, 331.313196850393751);
+    points += QPointF(-814.714960629921279, -46.738127408018386);
+    points += QPointF(-778.560274683193597, -50.549491761193529);
+    points += QPointF(-737.960891197081651, -56.790170478391879);
+    points += QPointF(-709.273784936183347, -62.545071142283753);
+    points += QPointF(-681.358329676571884, -69.772421317304676);
+    points += QPointF(-662.734996979773655, -76.086662659765864);
+    points += QPointF(-652.000013358218780, -80.530014885308333);
+    points += QPointF(-647.534742107878174, -82.700492263504771);
+    points += QPointF(-631.585239468780856, -90.995118061836052);
+    points += QPointF(-616.328020233970847, -100.594267156991847);
+    points += QPointF(-594.096383910663576, -115.972155307751649);
+    points += QPointF(-184.048650148745537, 76.198374399107223);
+    points += QPointF(-202.588712626694274, 128.531217087733864);
+    points += QPointF(-214.844352980142077, 166.709615345349164);
+    points += QPointF(-224.900721916665105, 202.786707734969326);
+    points += QPointF(-232.934347140993879, 237.080856834901624);
+    points += QPointF(-239.089037151700012, 269.817045957384835);
+    points += QPointF(-243.506611386394923, 301.230502874877175);
+    points += QPointF(-246.324245680472586, 331.565901059170528);
+    points += QPointF(-247.367542640672326, 354.406709505752815);
+    points += QPointF(-268.813396242720216, 365.986520876589054);
+    points += QPointF(-274.509592479190928, 368.544465142904016);
+    points += QPointF(-280.430827138279028, 370.738996867416517);
+    points += QPointF(-286.539948778692178, 372.651089393540587);
+    points += QPointF(-295.760523769485246, 375.070669023642552);
+    points += QPointF(-309.108660665237892, 377.812272271559323);
+    points += QPointF(-323.791841306461833, 380.189287868544909);
+    points += QPointF(-339.746492379944868, 382.263575885265993);
+    points += QPointF(-356.936262185776172, 384.077045039880318);
+    points += QPointF(-375.281527662442841, 385.653208859628023);
+    points += QPointF(-394.678657394273387, 387.006850647147644);
+    points += QPointF(-414.787606696514558, 388.135795504608552);
+    points += QPointF(-435.952026976937020, 389.076617984501581);
+    points += QPointF(-457.785958239726995, 389.818484035948188);
+    points += QPointF(-480.155299343825106, 390.367355935354340);
+    points += QPointF(-502.923072127811622, 390.728524359010180);
+    points += QPointF(-525.950383000425973, 390.906843496429246);
+    points += QPointF(-549.097086395700558, 390.906868034847378);
+    points += QPointF(-572.222272868468281, 390.732932110765603);
+    points += QPointF(-595.184660101380132, 390.389190982770685);
+    points += QPointF(-617.842942744172888, 389.879635420374768);
+    points += QPointF(-640.056148626075128, 389.208081776045162);
+    points += QPointF(-661.684051740050222, 388.378134611085102);
+    points += QPointF(-682.587707903001387, 387.393111203977753);
+    points += QPointF(-702.630213610816895, 386.255904969512756);
+    points += QPointF(-721.913933492959586, 384.952760768153212);
+    points += QPointF(-739.883081019170959, 383.510162372720174);
+    points += QPointF(-756.628370632600195, 381.913999891517676);
+    points += QPointF(-772.055707410166860, 380.156385631636169);
+    points += QPointF(-786.107417616341536, 378.217868080938274);
+    points += QPointF(-798.800506212061464, 376.051179682426266);
+    points += QPointF(-810.181063245406790, 373.562456117723798);
+    points += QPointF(-818.092955780502393, 371.279575916538420);
+    points += QPointF(-823.692975528084730, 369.271805550997954);
+    points += QPointF(-829.575336882823422, 366.626948794191208);
+    points += QPointF(-835.815139714856855, 362.892089667033019);
+    points += QPointF(-838.702607797801647, 360.520655492237381);
+
+    return points;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QVector<VSAPoint> TST_VAbstractPiece::InputPointsIssue923Test6()
+{
+    QVector<VSAPoint> points;
+
+    VSAPoint p = VSAPoint(-814.714960629921279, 331.313196850393751);
+    p.SetSABefore(37.7953);
+    p.SetSAAfter(0);
+    p.SetAngleType(PieceNodeAngle::BySecondEdgeRightAngle);
+    points += p;
+
+    p = VSAPoint(-814.714960629921279, -8.844283464566928);
+    p.SetSABefore(0);
+    p.SetSAAfter(37.7953);
+    points += p;
+
+    p = VSAPoint(-814.714960629921279, -8.844283464566928);
+    p.SetSABefore(0);
+    p.SetSAAfter(37.7953);
+    points += p;
+
+    p = VSAPoint(-810.914791391285917, -9.118915311803084);
+    p.SetSABefore(37.7953);
+    p.SetSAAfter(37.7953);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    p = VSAPoint(-773.697565712941014, -13.057776517652679);
+    p.SetSABefore(37.7953);
+    p.SetSAAfter(37.7953);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    p = VSAPoint(-731.369396039071717, -19.564193239769612);
+    p.SetSABefore(37.7953);
+    p.SetSAAfter(37.7953);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    p = VSAPoint(-700.813861852517789, -25.693917945236084);
+    p.SetSABefore(37.7953);
+    p.SetSAAfter(37.7953);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    p = VSAPoint(-670.539289284542633, -33.532046871057645);
+    p.SetSABefore(37.7953);
+    p.SetSAAfter(37.7953);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    p = VSAPoint(-649.425406024800168, -40.690709434256448);
+    p.SetSABefore(37.7953);
+    p.SetSAAfter(37.7953);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    p = VSAPoint(-636.497248173983621, -46.041845587202857);
+    p.SetSABefore(37.7953);
+    p.SetSAAfter(37.7953);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    p = VSAPoint(-630.550935626324190, -48.932226964906654);
+    p.SetSABefore(37.7953);
+    p.SetSAAfter(37.7953);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    p = VSAPoint(-612.770937464562508, -58.178811938993192);
+    p.SetSABefore(37.7953);
+    p.SetSAAfter(37.7953);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    p = VSAPoint(-595.504209442756292, -69.042252656202692);
+    p.SetSABefore(37.7953);
+    p.SetSAAfter(37.7953);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    points += VSAPoint(-590.462992125984215, -72.529322834645669);
+    points += VSAPoint(-590.462992125984215, -72.529322834645669);
+    points += VSAPoint(-231.118006951984967, 95.879158575193841);
+    points += VSAPoint(-231.118006951984967, 95.879158575193841);
+
+    p = VSAPoint(-238.402815433872661, 116.441912166387880);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    p = VSAPoint(-251.054901827475362, 155.855307076335350);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    p = VSAPoint(-261.519858253217421, 193.398201754121601);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    p = VSAPoint(-269.924247729261879, 229.275078971710684);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    p = VSAPoint(-276.394633273771547, 263.690421501066567);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    p = VSAPoint(-281.057577904909294, 296.848712114153273);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    p = VSAPoint(-284.039644640838333, 328.954433582934655);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    points += VSAPoint(-284.147385597229004, 331.313196850393751);
+    points += VSAPoint(-284.147385597229004, 331.313196850393751);
+    points += VSAPoint(-284.147385597229004, 331.313196850393751);
+
+    p = VSAPoint(-285.555799865587915, 332.073678193884462);
+    p.SetSABefore(37.7953);
+    p.SetSAAfter(37.7953);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    p = VSAPoint(-288.834524762284673, 333.546028373225568);
+    p.SetSABefore(37.7953);
+    p.SetSAAfter(37.7953);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    p = VSAPoint(-292.651017475591800, 334.960499310104979);
+    p.SetSABefore(37.7953);
+    p.SetSAAfter(37.7953);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    p = VSAPoint(-296.986935988437835, 336.317597411974702);
+    p.SetSABefore(37.7953);
+    p.SetSAAfter(37.7953);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    p = VSAPoint(-304.365417624891165, 338.253791617484694);
+    p.SetSABefore(37.7953);
+    p.SetSAAfter(37.7953);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    p = VSAPoint(-315.933705242960059, 340.629827700589658);
+    p.SetSABefore(37.7953);
+    p.SetSAAfter(37.7953);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    p = VSAPoint(-329.249539751899079, 342.785487777791332);
+    p.SetSABefore(37.7953);
+    p.SetSAAfter(37.7953);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    p = VSAPoint(-344.166185015137103, 344.724823108705550);
+    p.SetSABefore(37.7953);
+    p.SetSAAfter(37.7953);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    p = VSAPoint(-360.536904896102669, 346.451884952948035);
+    p.SetSABefore(37.7953);
+    p.SetSAAfter(37.7953);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    p = VSAPoint(-378.214963258224429, 347.970724570134507);
+    p.SetSABefore(37.7953);
+    p.SetSAAfter(37.7953);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    p = VSAPoint(-397.053623964930921, 349.285393219880916);
+    p.SetSABefore(37.7953);
+    p.SetSAAfter(37.7953);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    p = VSAPoint(-416.906150879651022, 350.399942161802983);
+    p.SetSABefore(37.7953);
+    p.SetSAAfter(37.7953);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    p = VSAPoint(-437.625807865813101, 351.318422655516372);
+    p.SetSABefore(37.7953);
+    p.SetSAAfter(37.7953);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    p = VSAPoint(-459.065858786846093, 352.044885960637032);
+    p.SetSABefore(37.7953);
+    p.SetSAAfter(37.7953);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    p = VSAPoint(-481.079567506178364, 352.583383336780628);
+    p.SetSABefore(37.7953);
+    p.SetSAAfter(37.7953);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    p = VSAPoint(-503.520197887238680, 352.937966043563051);
+    p.SetSABefore(37.7953);
+    p.SetSAAfter(37.7953);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    p = VSAPoint(-526.241013793455750, 353.112685340600024);
+    p.SetSABefore(37.7953);
+    p.SetSAAfter(37.7953);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    p = VSAPoint(-549.095279088258053, 353.111592487507210);
+    p.SetSABefore(37.7953);
+    p.SetSAAfter(37.7953);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    p = VSAPoint(-571.936257635074298, 352.938738743900558);
+    p.SetSABefore(37.7953);
+    p.SetSAAfter(37.7953);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    p = VSAPoint(-594.617213297333365, 352.598175369395790);
+    p.SetSABefore(37.7953);
+    p.SetSAAfter(37.7953);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    p = VSAPoint(-616.991409938463448, 352.093953623608741);
+    p.SetSABefore(37.7953);
+    p.SetSAAfter(37.7953);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    p = VSAPoint(-638.912111421893314, 351.430124766155018);
+    p.SetSABefore(37.7953);
+    p.SetSAAfter(37.7953);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    p = VSAPoint(-660.232581611051955, 350.610740056650570);
+    p.SetSABefore(37.7953);
+    p.SetSAAfter(37.7953);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    p = VSAPoint(-680.806084369367682, 349.639850754711119);
+    p.SetSABefore(37.7953);
+    p.SetSAAfter(37.7953);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    p = VSAPoint(-700.485883560269031, 348.521508119952557);
+    p.SetSABefore(37.7953);
+    p.SetSAAfter(37.7953);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    p = VSAPoint(-719.125243047185108, 347.259763411990377);
+    p.SetSABefore(37.7953);
+    p.SetSAAfter(37.7953);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    p = VSAPoint(-736.577426693544112, 345.858667890440699);
+    p.SetSABefore(37.7953);
+    p.SetSAAfter(37.7953);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    p = VSAPoint(-752.695698362774920, 344.322272814919074);
+    p.SetSABefore(37.7953);
+    p.SetSAAfter(37.7953);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    p = VSAPoint(-767.333321918305955, 342.654629445041451);
+    p.SetSABefore(37.7953);
+    p.SetSAAfter(37.7953);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    p = VSAPoint(-780.343561223566212, 340.859789040423379);
+    p.SetSABefore(37.7953);
+    p.SetSAAfter(37.7953);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    p = VSAPoint(-791.579680141983886, 338.941802860680923);
+    p.SetSABefore(37.7953);
+    p.SetSAAfter(37.7953);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    p = VSAPoint(-800.894942536987969, 336.904722165429632);
+    p.SetSABefore(37.7953);
+    p.SetSAAfter(37.7953);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    p = VSAPoint(-806.464504883768996, 335.297692803701807);
+    p.SetSABefore(37.7953);
+    p.SetSAAfter(37.7953);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    p = VSAPoint(-809.543928560675113, 334.193629625334438);
+    p.SetSABefore(37.7953);
+    p.SetSAAfter(37.7953);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    p = VSAPoint(-812.060599029906371, 333.062071651623739);
+    p.SetSABefore(37.7953);
+    p.SetSAAfter(37.7953);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    p = VSAPoint(-813.996174274391478, 331.903525290021662);
+    p.SetSABefore(37.7953);
+    p.SetSAAfter(37.7953);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    p = VSAPoint(-814.714960629921279, 331.313196850393751);
+    p.SetSABefore(37.7953);
+    p.SetSAAfter(0);
+    p.SetAngleType(PieceNodeAngle::BySecondEdgeRightAngle);
+    points += p;
+
+    return points;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QVector<QPointF> TST_VAbstractPiece::OutputPointsIssue923Test6()
+{
+    QVector<QPointF> points;
+
+    points += QPointF(-814.714960629921279, -46.738127408018386);
+    points += QPointF(-778.560274683193597, -50.549491761193529);
+    points += QPointF(-737.960891197081651, -56.790170478391879);
+    points += QPointF(-709.273784936183347, -62.545071142283753);
+    points += QPointF(-681.358329676571884, -69.772421317304676);
+    points += QPointF(-662.734996979773655, -76.086662659765864);
+    points += QPointF(-652.000013358218780, -80.530014885308333);
+    points += QPointF(-647.534742107878174, -82.700492263504771);
+    points += QPointF(-631.585239468780856, -90.995118061836052);
+    points += QPointF(-616.328020233970847, -100.594267156991847);
+    points += QPointF(-594.096383910663576, -115.972155307751649);
+    points += QPointF(-184.048650148745537, 76.198374399107223);
+    points += QPointF(-202.588712626694274, 128.531217087733864);
+    points += QPointF(-214.844352980142077, 166.709615345349164);
+    points += QPointF(-224.900721916665105, 202.786707734969326);
+    points += QPointF(-232.934347140993879, 237.080856834901624);
+    points += QPointF(-239.089037151700012, 269.817045957384835);
+    points += QPointF(-243.506611386394923, 301.230502874877175);
+    points += QPointF(-246.324245680472586, 331.565901059170528);
+    points += QPointF(-247.367542640672326, 354.406709505752815);
+    points += QPointF(-268.813396242720216, 365.986520876589054);
+    points += QPointF(-274.509592479190928, 368.544465142904016);
+    points += QPointF(-280.430827138279028, 370.738996867416517);
+    points += QPointF(-286.539948778692178, 372.651089393540587);
+    points += QPointF(-295.760523769485246, 375.070669023642552);
+    points += QPointF(-309.108660665237892, 377.812272271559323);
+    points += QPointF(-323.791841306461833, 380.189287868544909);
+    points += QPointF(-339.746492379944868, 382.263575885265993);
+    points += QPointF(-356.936262185776172, 384.077045039880318);
+    points += QPointF(-375.281527662442841, 385.653208859628023);
+    points += QPointF(-394.678657394273387, 387.006850647147644);
+    points += QPointF(-414.787606696514558, 388.135795504608552);
+    points += QPointF(-435.952026976937020, 389.076617984501581);
+    points += QPointF(-457.785958239726995, 389.818484035948188);
+    points += QPointF(-480.155299343825106, 390.367355935354340);
+    points += QPointF(-502.923072127811622, 390.728524359010180);
+    points += QPointF(-525.950383000425973, 390.906843496429246);
+    points += QPointF(-549.097086395700558, 390.906868034847378);
+    points += QPointF(-572.222272868468281, 390.732932110765603);
+    points += QPointF(-595.184660101380132, 390.389190982770685);
+    points += QPointF(-617.842942744172888, 389.879635420374768);
+    points += QPointF(-640.056148626075128, 389.208081776045162);
+    points += QPointF(-661.684051740050222, 388.378134611085102);
+    points += QPointF(-682.587707903001387, 387.393111203977753);
+    points += QPointF(-702.630213610816895, 386.255904969512756);
+    points += QPointF(-721.913933492959586, 384.952760768153212);
+    points += QPointF(-739.883081019170959, 383.510162372720174);
+    points += QPointF(-756.628370632600195, 381.913999891517676);
+    points += QPointF(-772.055707410166860, 380.156385631636169);
+    points += QPointF(-786.107417616341536, 378.217868080938274);
+    points += QPointF(-798.800506212061464, 376.051179682426266);
+    points += QPointF(-810.181063245406790, 373.562456117723798);
+    points += QPointF(-814.714960629921279, 372.254255263452592);
+    points += QPointF(-814.714960629921279, -46.738127408018386);
+
+    return points;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QVector<VSAPoint> TST_VAbstractPiece::InputPointsIssue923Test1_1()
+{
+    QVector<VSAPoint> points;
+
+    VSAPoint p = VSAPoint(-814.714960629921279, 331.313196850393751);
+    p.SetSABefore(37.7953);
+    p.SetSAAfter(151.181);
+    points += p;
+
+    p = VSAPoint(-814.714960629921279, -8.844283464566928);
+    p.SetSABefore(0);
+    p.SetSAAfter(37.7953);
+    points += p;
+
+    p = VSAPoint(-814.714960629921279, -8.844283464566928);
+    p.SetSABefore(0);
+    p.SetSAAfter(37.7953);
+    points += p;
+
+    p = VSAPoint(-810.914791391285917, -9.118915311803084);
+    p.SetSABefore(37.7953);
+    p.SetSAAfter(37.7953);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    p = VSAPoint(-773.697565712941014, -13.057776517652679);
+    p.SetSABefore(37.7953);
+    p.SetSAAfter(37.7953);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    p = VSAPoint(-731.369396039071717, -19.564193239769612);
+    p.SetSABefore(37.7953);
+    p.SetSAAfter(37.7953);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    p = VSAPoint(-700.813861852517789, -25.693917945236084);
+    p.SetSABefore(37.7953);
+    p.SetSAAfter(37.7953);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    p = VSAPoint(-670.539289284542633, -33.532046871057645);
+    p.SetSABefore(37.7953);
+    p.SetSAAfter(37.7953);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    p = VSAPoint(-649.425406024800168, -40.690709434256448);
+    p.SetSABefore(37.7953);
+    p.SetSAAfter(37.7953);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    p = VSAPoint(-636.497248173983621, -46.041845587202857);
+    p.SetSABefore(37.7953);
+    p.SetSAAfter(37.7953);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    p = VSAPoint(-630.550935626324190, -48.932226964906654);
+    p.SetSABefore(37.7953);
+    p.SetSAAfter(37.7953);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    p = VSAPoint(-612.770937464562508, -58.178811938993192);
+    p.SetSABefore(37.7953);
+    p.SetSAAfter(37.7953);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    p = VSAPoint(-595.504209442756292, -69.042252656202692);
+    p.SetSABefore(37.7953);
+    p.SetSAAfter(37.7953);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    points += VSAPoint(-590.462992125984215, -72.529322834645669);
+    points += VSAPoint(-590.462992125984215, -72.529322834645669);
+    points += VSAPoint(-231.118006951984967, 95.879158575193841);
+    points += VSAPoint(-231.118006951984967, 95.879158575193841);
+
+    p = VSAPoint(-238.402815433872661, 116.441912166387880);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    p = VSAPoint(-251.054901827475362, 155.855307076335350);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    p = VSAPoint(-261.519858253217421, 193.398201754121601);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    p = VSAPoint(-269.924247729261879, 229.275078971710684);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    p = VSAPoint(-276.394633273771547, 263.690421501066567);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    p = VSAPoint(-281.057577904909294, 296.848712114153273);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    p = VSAPoint(-284.039644640838333, 328.954433582934655);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    points += VSAPoint(-284.147385597229004, 331.313196850393751);
+    points += VSAPoint(-284.147385597229004, 331.313196850393751);
+    points += VSAPoint(-284.147385597229004, 331.313196850393751);
+
+    p = VSAPoint(-285.555799865587915, 332.073678193884462);
+    p.SetSABefore(37.7953);
+    p.SetSAAfter(37.7953);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    p = VSAPoint(-288.834524762284673, 333.546028373225568);
+    p.SetSABefore(37.7953);
+    p.SetSAAfter(37.7953);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    p = VSAPoint(-292.651017475591800, 334.960499310104979);
+    p.SetSABefore(37.7953);
+    p.SetSAAfter(37.7953);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    p = VSAPoint(-296.986935988437835, 336.317597411974702);
+    p.SetSABefore(37.7953);
+    p.SetSAAfter(37.7953);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    p = VSAPoint(-304.365417624891165, 338.253791617484694);
+    p.SetSABefore(37.7953);
+    p.SetSAAfter(37.7953);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    p = VSAPoint(-315.933705242960059, 340.629827700589658);
+    p.SetSABefore(37.7953);
+    p.SetSAAfter(37.7953);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    p = VSAPoint(-329.249539751899079, 342.785487777791332);
+    p.SetSABefore(37.7953);
+    p.SetSAAfter(37.7953);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    p = VSAPoint(-344.166185015137103, 344.724823108705550);
+    p.SetSABefore(37.7953);
+    p.SetSAAfter(37.7953);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    p = VSAPoint(-360.536904896102669, 346.451884952948035);
+    p.SetSABefore(37.7953);
+    p.SetSAAfter(37.7953);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    p = VSAPoint(-378.214963258224429, 347.970724570134507);
+    p.SetSABefore(37.7953);
+    p.SetSAAfter(37.7953);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    p = VSAPoint(-397.053623964930921, 349.285393219880916);
+    p.SetSABefore(37.7953);
+    p.SetSAAfter(37.7953);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    p = VSAPoint(-416.906150879651022, 350.399942161802983);
+    p.SetSABefore(37.7953);
+    p.SetSAAfter(37.7953);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    p = VSAPoint(-437.625807865813101, 351.318422655516372);
+    p.SetSABefore(37.7953);
+    p.SetSAAfter(37.7953);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    p = VSAPoint(-459.065858786846093, 352.044885960637032);
+    p.SetSABefore(37.7953);
+    p.SetSAAfter(37.7953);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    p = VSAPoint(-481.079567506178364, 352.583383336780628);
+    p.SetSABefore(37.7953);
+    p.SetSAAfter(37.7953);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    p = VSAPoint(-503.520197887238680, 352.937966043563051);
+    p.SetSABefore(37.7953);
+    p.SetSAAfter(37.7953);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    p = VSAPoint(-526.241013793455750, 353.112685340600024);
+    p.SetSABefore(37.7953);
+    p.SetSAAfter(37.7953);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    p = VSAPoint(-549.095279088258053, 353.111592487507210);
+    p.SetSABefore(37.7953);
+    p.SetSAAfter(37.7953);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    p = VSAPoint(-571.936257635074298, 352.938738743900558);
+    p.SetSABefore(37.7953);
+    p.SetSAAfter(37.7953);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    p = VSAPoint(-594.617213297333365, 352.598175369395790);
+    p.SetSABefore(37.7953);
+    p.SetSAAfter(37.7953);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    p = VSAPoint(-616.991409938463448, 352.093953623608741);
+    p.SetSABefore(37.7953);
+    p.SetSAAfter(37.7953);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    p = VSAPoint(-638.912111421893314, 351.430124766155018);
+    p.SetSABefore(37.7953);
+    p.SetSAAfter(37.7953);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    p = VSAPoint(-660.232581611051955, 350.610740056650570);
+    p.SetSABefore(37.7953);
+    p.SetSAAfter(37.7953);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    p = VSAPoint(-680.806084369367682, 349.639850754711119);
+    p.SetSABefore(37.7953);
+    p.SetSAAfter(37.7953);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    p = VSAPoint(-700.485883560269031, 348.521508119952557);
+    p.SetSABefore(37.7953);
+    p.SetSAAfter(37.7953);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    p = VSAPoint(-719.125243047185108, 347.259763411990377);
+    p.SetSABefore(37.7953);
+    p.SetSAAfter(37.7953);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    p = VSAPoint(-736.577426693544112, 345.858667890440699);
+    p.SetSABefore(37.7953);
+    p.SetSAAfter(37.7953);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    p = VSAPoint(-752.695698362774920, 344.322272814919074);
+    p.SetSABefore(37.7953);
+    p.SetSAAfter(37.7953);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    p = VSAPoint(-767.333321918305955, 342.654629445041451);
+    p.SetSABefore(37.7953);
+    p.SetSAAfter(37.7953);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    p = VSAPoint(-780.343561223566212, 340.859789040423379);
+    p.SetSABefore(37.7953);
+    p.SetSAAfter(37.7953);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    p = VSAPoint(-791.579680141983886, 338.941802860680923);
+    p.SetSABefore(37.7953);
+    p.SetSAAfter(37.7953);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    p = VSAPoint(-800.894942536987969, 336.904722165429632);
+    p.SetSABefore(37.7953);
+    p.SetSAAfter(37.7953);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    p = VSAPoint(-806.464504883768996, 335.297692803701807);
+    p.SetSABefore(37.7953);
+    p.SetSAAfter(37.7953);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    p = VSAPoint(-809.543928560675113, 334.193629625334438);
+    p.SetSABefore(37.7953);
+    p.SetSAAfter(37.7953);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    p = VSAPoint(-812.060599029906371, 333.062071651623739);
+    p.SetSABefore(37.7953);
+    p.SetSAAfter(37.7953);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    p = VSAPoint(-813.996174274391478, 331.903525290021662);
+    p.SetSABefore(37.7953);
+    p.SetSAAfter(37.7953);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    p = VSAPoint(-814.714960629921279, 331.313196850393751);
+    p.SetSABefore(37.7953);
+    p.SetSAAfter(151.181);
+    points += p;
+
+    return points;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QVector<QPointF> TST_VAbstractPiece::OutputPointsIssue923Test1_1()
+{
+    QVector<QPointF> points;
+
+    points += QPointF(-941.393414608898865, 276.182237988132670);
+    points += QPointF(-814.172528355339296, -10.064756082376469);
+    points += QPointF(-797.048974584331063, -48.592752067144829);
+    points += QPointF(-778.560274683193597, -50.549491761193529);
+    points += QPointF(-737.960891197081651, -56.790170478391879);
+    points += QPointF(-709.273784936183347, -62.545071142283753);
+    points += QPointF(-681.358329676571884, -69.772421317304676);
+    points += QPointF(-662.734996979773655, -76.086662659765864);
+    points += QPointF(-652.000013358218780, -80.530014885308333);
+    points += QPointF(-647.534742107878174, -82.700492263504771);
+    points += QPointF(-631.585239468780856, -90.995118061836052);
+    points += QPointF(-616.328020233970847, -100.594267156991847);
+    points += QPointF(-594.096383910663576, -115.972155307751649);
+    points += QPointF(-184.048650148745537, 76.198374399107223);
+    points += QPointF(-202.588712626694274, 128.531217087733864);
+    points += QPointF(-214.844352980142077, 166.709615345349164);
+    points += QPointF(-224.900721916665105, 202.786707734969326);
+    points += QPointF(-232.934347140993879, 237.080856834901624);
+    points += QPointF(-239.089037151700012, 269.817045957384835);
+    points += QPointF(-243.506611386394923, 301.230502874877175);
+    points += QPointF(-246.324245680472586, 331.565901059170528);
+    points += QPointF(-247.367542640672326, 354.406709505752815);
+    points += QPointF(-268.813396242720216, 365.986520876589054);
+    points += QPointF(-274.509592479190928, 368.544465142904016);
+    points += QPointF(-280.430827138279028, 370.738996867416517);
+    points += QPointF(-286.539948778692178, 372.651089393540587);
+    points += QPointF(-295.760523769485246, 375.070669023642552);
+    points += QPointF(-309.108660665237892, 377.812272271559323);
+    points += QPointF(-323.791841306461833, 380.189287868544909);
+    points += QPointF(-339.746492379944868, 382.263575885265993);
+    points += QPointF(-356.936262185776172, 384.077045039880318);
+    points += QPointF(-375.281527662442841, 385.653208859628023);
+    points += QPointF(-394.678657394273387, 387.006850647147644);
+    points += QPointF(-414.787606696514558, 388.135795504608552);
+    points += QPointF(-435.952026976937020, 389.076617984501581);
+    points += QPointF(-457.785958239726995, 389.818484035948188);
+    points += QPointF(-480.155299343825106, 390.367355935354340);
+    points += QPointF(-502.923072127811622, 390.728524359010180);
+    points += QPointF(-525.950383000425973, 390.906843496429246);
+    points += QPointF(-549.097086395700558, 390.906868034847378);
+    points += QPointF(-572.222272868468281, 390.732932110765603);
+    points += QPointF(-595.184660101380132, 390.389190982770685);
+    points += QPointF(-617.842942744172888, 389.879635420374768);
+    points += QPointF(-640.056148626075128, 389.208081776045162);
+    points += QPointF(-661.684051740050222, 388.378134611085102);
+    points += QPointF(-682.587707903001387, 387.393111203977753);
+    points += QPointF(-702.630213610816895, 386.255904969512756);
+    points += QPointF(-721.913933492959586, 384.952760768153212);
+    points += QPointF(-739.883081019170959, 383.510162372720174);
+    points += QPointF(-756.628370632600195, 381.913999891517676);
+    points += QPointF(-772.055707410166860, 380.156385631636169);
+    points += QPointF(-786.107417616341536, 378.217868080938274);
+    points += QPointF(-798.800506212061464, 376.051179682426266);
+    points += QPointF(-810.181063245406790, 373.562456117723798);
+    points += QPointF(-818.092955780502393, 371.279575916538420);
+    points += QPointF(-823.692975528084730, 369.271805550997954);
+    points += QPointF(-829.575336882823422, 366.626948794191208);
+    points += QPointF(-835.815139714856855, 362.892089667033019);
+    points += QPointF(-941.393414608898865, 276.182237988132670);
+
+    return points;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QVector<VSAPoint> TST_VAbstractPiece::InputPointsIssue923Test2_2()
+{
+    QVector<VSAPoint> points;
+
+    VSAPoint p = VSAPoint(-814.714960629921279, 331.313196850393751);
+    p.SetSABefore(37.7953);
+    p.SetSAAfter(151.181);
+    p.SetAngleType(PieceNodeAngle::ByPointsIntersection);
+    points += p;
+
+    p = VSAPoint(-814.714960629921279, -8.844283464566928);
+    p.SetSABefore(0);
+    p.SetSAAfter(37.7953);
+    points += p;
+
+    p = VSAPoint(-814.714960629921279, -8.844283464566928);
+    p.SetSABefore(0);
+    p.SetSAAfter(37.7953);
+    points += p;
+
+    p = VSAPoint(-810.914791391285917, -9.118915311803084);
+    p.SetSABefore(37.7953);
+    p.SetSAAfter(37.7953);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    p = VSAPoint(-773.697565712941014, -13.057776517652679);
+    p.SetSABefore(37.7953);
+    p.SetSAAfter(37.7953);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    p = VSAPoint(-731.369396039071717, -19.564193239769612);
+    p.SetSABefore(37.7953);
+    p.SetSAAfter(37.7953);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    p = VSAPoint(-700.813861852517789, -25.693917945236084);
+    p.SetSABefore(37.7953);
+    p.SetSAAfter(37.7953);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    p = VSAPoint(-670.539289284542633, -33.532046871057645);
+    p.SetSABefore(37.7953);
+    p.SetSAAfter(37.7953);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    p = VSAPoint(-649.425406024800168, -40.690709434256448);
+    p.SetSABefore(37.7953);
+    p.SetSAAfter(37.7953);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    p = VSAPoint(-636.497248173983621, -46.041845587202857);
+    p.SetSABefore(37.7953);
+    p.SetSAAfter(37.7953);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    p = VSAPoint(-630.550935626324190, -48.932226964906654);
+    p.SetSABefore(37.7953);
+    p.SetSAAfter(37.7953);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    p = VSAPoint(-612.770937464562508, -58.178811938993192);
+    p.SetSABefore(37.7953);
+    p.SetSAAfter(37.7953);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    p = VSAPoint(-595.504209442756292, -69.042252656202692);
+    p.SetSABefore(37.7953);
+    p.SetSAAfter(37.7953);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    points += VSAPoint(-590.462992125984215, -72.529322834645669);
+    points += VSAPoint(-590.462992125984215, -72.529322834645669);
+    points += VSAPoint(-231.118006951984967, 95.879158575193841);
+    points += VSAPoint(-231.118006951984967, 95.879158575193841);
+
+    p = VSAPoint(-238.402815433872661, 116.441912166387880);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    p = VSAPoint(-251.054901827475362, 155.855307076335350);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    p = VSAPoint(-261.519858253217421, 193.398201754121601);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    p = VSAPoint(-269.924247729261879, 229.275078971710684);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    p = VSAPoint(-276.394633273771547, 263.690421501066567);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    p = VSAPoint(-281.057577904909294, 296.848712114153273);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    p = VSAPoint(-284.039644640838333, 328.954433582934655);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    points += VSAPoint(-284.147385597229004, 331.313196850393751);
+    points += VSAPoint(-284.147385597229004, 331.313196850393751);
+    points += VSAPoint(-284.147385597229004, 331.313196850393751);
+
+    p = VSAPoint(-285.555799865587915, 332.073678193884462);
+    p.SetSABefore(37.7953);
+    p.SetSAAfter(37.7953);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    p = VSAPoint(-288.834524762284673, 333.546028373225568);
+    p.SetSABefore(37.7953);
+    p.SetSAAfter(37.7953);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    p = VSAPoint(-292.651017475591800, 334.960499310104979);
+    p.SetSABefore(37.7953);
+    p.SetSAAfter(37.7953);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    p = VSAPoint(-296.986935988437835, 336.317597411974702);
+    p.SetSABefore(37.7953);
+    p.SetSAAfter(37.7953);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    p = VSAPoint(-304.365417624891165, 338.253791617484694);
+    p.SetSABefore(37.7953);
+    p.SetSAAfter(37.7953);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    p = VSAPoint(-315.933705242960059, 340.629827700589658);
+    p.SetSABefore(37.7953);
+    p.SetSAAfter(37.7953);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    p = VSAPoint(-329.249539751899079, 342.785487777791332);
+    p.SetSABefore(37.7953);
+    p.SetSAAfter(37.7953);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    p = VSAPoint(-344.166185015137103, 344.724823108705550);
+    p.SetSABefore(37.7953);
+    p.SetSAAfter(37.7953);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    p = VSAPoint(-360.536904896102669, 346.451884952948035);
+    p.SetSABefore(37.7953);
+    p.SetSAAfter(37.7953);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    p = VSAPoint(-378.214963258224429, 347.970724570134507);
+    p.SetSABefore(37.7953);
+    p.SetSAAfter(37.7953);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    p = VSAPoint(-397.053623964930921, 349.285393219880916);
+    p.SetSABefore(37.7953);
+    p.SetSAAfter(37.7953);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    p = VSAPoint(-416.906150879651022, 350.399942161802983);
+    p.SetSABefore(37.7953);
+    p.SetSAAfter(37.7953);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    p = VSAPoint(-437.625807865813101, 351.318422655516372);
+    p.SetSABefore(37.7953);
+    p.SetSAAfter(37.7953);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    p = VSAPoint(-459.065858786846093, 352.044885960637032);
+    p.SetSABefore(37.7953);
+    p.SetSAAfter(37.7953);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    p = VSAPoint(-481.079567506178364, 352.583383336780628);
+    p.SetSABefore(37.7953);
+    p.SetSAAfter(37.7953);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    p = VSAPoint(-503.520197887238680, 352.937966043563051);
+    p.SetSABefore(37.7953);
+    p.SetSAAfter(37.7953);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    p = VSAPoint(-526.241013793455750, 353.112685340600024);
+    p.SetSABefore(37.7953);
+    p.SetSAAfter(37.7953);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    p = VSAPoint(-549.095279088258053, 353.111592487507210);
+    p.SetSABefore(37.7953);
+    p.SetSAAfter(37.7953);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    p = VSAPoint(-571.936257635074298, 352.938738743900558);
+    p.SetSABefore(37.7953);
+    p.SetSAAfter(37.7953);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    p = VSAPoint(-594.617213297333365, 352.598175369395790);
+    p.SetSABefore(37.7953);
+    p.SetSAAfter(37.7953);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    p = VSAPoint(-616.991409938463448, 352.093953623608741);
+    p.SetSABefore(37.7953);
+    p.SetSAAfter(37.7953);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    p = VSAPoint(-638.912111421893314, 351.430124766155018);
+    p.SetSABefore(37.7953);
+    p.SetSAAfter(37.7953);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    p = VSAPoint(-660.232581611051955, 350.610740056650570);
+    p.SetSABefore(37.7953);
+    p.SetSAAfter(37.7953);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    p = VSAPoint(-680.806084369367682, 349.639850754711119);
+    p.SetSABefore(37.7953);
+    p.SetSAAfter(37.7953);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    p = VSAPoint(-700.485883560269031, 348.521508119952557);
+    p.SetSABefore(37.7953);
+    p.SetSAAfter(37.7953);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    p = VSAPoint(-719.125243047185108, 347.259763411990377);
+    p.SetSABefore(37.7953);
+    p.SetSAAfter(37.7953);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    p = VSAPoint(-736.577426693544112, 345.858667890440699);
+    p.SetSABefore(37.7953);
+    p.SetSAAfter(37.7953);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    p = VSAPoint(-752.695698362774920, 344.322272814919074);
+    p.SetSABefore(37.7953);
+    p.SetSAAfter(37.7953);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    p = VSAPoint(-767.333321918305955, 342.654629445041451);
+    p.SetSABefore(37.7953);
+    p.SetSAAfter(37.7953);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    p = VSAPoint(-780.343561223566212, 340.859789040423379);
+    p.SetSABefore(37.7953);
+    p.SetSAAfter(37.7953);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    p = VSAPoint(-791.579680141983886, 338.941802860680923);
+    p.SetSABefore(37.7953);
+    p.SetSAAfter(37.7953);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    p = VSAPoint(-800.894942536987969, 336.904722165429632);
+    p.SetSABefore(37.7953);
+    p.SetSAAfter(37.7953);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    p = VSAPoint(-806.464504883768996, 335.297692803701807);
+    p.SetSABefore(37.7953);
+    p.SetSAAfter(37.7953);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    p = VSAPoint(-809.543928560675113, 334.193629625334438);
+    p.SetSABefore(37.7953);
+    p.SetSAAfter(37.7953);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    p = VSAPoint(-812.060599029906371, 333.062071651623739);
+    p.SetSABefore(37.7953);
+    p.SetSAAfter(37.7953);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    p = VSAPoint(-813.996174274391478, 331.903525290021662);
+    p.SetSABefore(37.7953);
+    p.SetSAAfter(37.7953);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    p = VSAPoint(-814.714960629921279, 331.313196850393751);
+    p.SetSABefore(37.7953);
+    p.SetSAAfter(151.181);
+    p.SetAngleType(PieceNodeAngle::ByPointsIntersection);
+    points += p;
+
+    return points;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QVector<QPointF> TST_VAbstractPiece::OutputPointsIssue923Test2_2()
+{
+    QVector<QPointF> points;
+
+    points += QPointF(-925.469085441364086, 240.352497361179360);
+    points += QPointF(-814.172528355339296, -10.064756082376469);
+    points += QPointF(-797.048974584331063, -48.592752067144829);
+    points += QPointF(-778.560274683193597, -50.549491761193529);
+    points += QPointF(-737.960891197081651, -56.790170478391879);
+    points += QPointF(-709.273784936183347, -62.545071142283753);
+    points += QPointF(-681.358329676571884, -69.772421317304676);
+    points += QPointF(-662.734996979773655, -76.086662659765864);
+    points += QPointF(-652.000013358218780, -80.530014885308333);
+    points += QPointF(-647.534742107878174, -82.700492263504771);
+    points += QPointF(-631.585239468780856, -90.995118061836052);
+    points += QPointF(-616.328020233970847, -100.594267156991847);
+    points += QPointF(-594.096383910663576, -115.972155307751649);
+    points += QPointF(-184.048650148745537, 76.198374399107223);
+    points += QPointF(-202.588712626694274, 128.531217087733864);
+    points += QPointF(-214.844352980142077, 166.709615345349164);
+    points += QPointF(-224.900721916665105, 202.786707734969326);
+    points += QPointF(-232.934347140993879, 237.080856834901624);
+    points += QPointF(-239.089037151700012, 269.817045957384835);
+    points += QPointF(-243.506611386394923, 301.230502874877175);
+    points += QPointF(-246.324245680472586, 331.565901059170528);
+    points += QPointF(-247.367542640672326, 354.406709505752815);
+    points += QPointF(-268.813396242720216, 365.986520876589054);
+    points += QPointF(-274.509592479190928, 368.544465142904016);
+    points += QPointF(-280.430827138279028, 370.738996867416517);
+    points += QPointF(-286.539948778692178, 372.651089393540587);
+    points += QPointF(-295.760523769485246, 375.070669023642552);
+    points += QPointF(-309.108660665237892, 377.812272271559323);
+    points += QPointF(-323.791841306461833, 380.189287868544909);
+    points += QPointF(-339.746492379944868, 382.263575885265993);
+    points += QPointF(-356.936262185776172, 384.077045039880318);
+    points += QPointF(-375.281527662442841, 385.653208859628023);
+    points += QPointF(-394.678657394273387, 387.006850647147644);
+    points += QPointF(-414.787606696514558, 388.135795504608552);
+    points += QPointF(-435.952026976937020, 389.076617984501581);
+    points += QPointF(-457.785958239726995, 389.818484035948188);
+    points += QPointF(-480.155299343825106, 390.367355935354340);
+    points += QPointF(-502.923072127811622, 390.728524359010180);
+    points += QPointF(-525.950383000425973, 390.906843496429246);
+    points += QPointF(-549.097086395700558, 390.906868034847378);
+    points += QPointF(-572.222272868468281, 390.732932110765603);
+    points += QPointF(-595.184660101380132, 390.389190982770685);
+    points += QPointF(-617.842942744172888, 389.879635420374768);
+    points += QPointF(-640.056148626075128, 389.208081776045162);
+    points += QPointF(-661.684051740050222, 388.378134611085102);
+    points += QPointF(-682.587707903001387, 387.393111203977753);
+    points += QPointF(-702.630213610816895, 386.255904969512756);
+    points += QPointF(-721.913933492959586, 384.952760768153212);
+    points += QPointF(-739.883081019170959, 383.510162372720174);
+    points += QPointF(-756.628370632600195, 381.913999891517676);
+    points += QPointF(-772.055707410166860, 380.156385631636169);
+    points += QPointF(-786.107417616341536, 378.217868080938274);
+    points += QPointF(-798.800506212061464, 376.051179682426266);
+    points += QPointF(-810.181063245406790, 373.562456117723798);
+    points += QPointF(-814.714960629921279, 372.254255263452592);
+    points += QPointF(-925.469085441364086, 240.352497361179360);
+
+    return points;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QVector<VSAPoint> TST_VAbstractPiece::InputPointsIssue923Test3_3()
+{
+    QVector<VSAPoint> points;
+
+    VSAPoint p = VSAPoint(-814.714960629921279, 331.313196850393751);
+    p.SetSABefore(37.7953);
+    p.SetSAAfter(151.181);
+    p.SetAngleType(PieceNodeAngle::ByFirstEdgeSymmetry);
+    points += p;
+
+    p = VSAPoint(-814.714960629921279, -8.844283464566928);
+    p.SetSABefore(0);
+    p.SetSAAfter(37.7953);
+    points += p;
+
+    p = VSAPoint(-814.714960629921279, -8.844283464566928);
+    p.SetSABefore(0);
+    p.SetSAAfter(37.7953);
+    points += p;
+
+    p = VSAPoint(-810.914791391285917, -9.118915311803084);
+    p.SetSABefore(37.7953);
+    p.SetSAAfter(37.7953);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    p = VSAPoint(-773.697565712941014, -13.057776517652679);
+    p.SetSABefore(37.7953);
+    p.SetSAAfter(37.7953);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    p = VSAPoint(-731.369396039071717, -19.564193239769612);
+    p.SetSABefore(37.7953);
+    p.SetSAAfter(37.7953);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    p = VSAPoint(-700.813861852517789, -25.693917945236084);
+    p.SetSABefore(37.7953);
+    p.SetSAAfter(37.7953);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    p = VSAPoint(-670.539289284542633, -33.532046871057645);
+    p.SetSABefore(37.7953);
+    p.SetSAAfter(37.7953);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    p = VSAPoint(-649.425406024800168, -40.690709434256448);
+    p.SetSABefore(37.7953);
+    p.SetSAAfter(37.7953);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    p = VSAPoint(-636.497248173983621, -46.041845587202857);
+    p.SetSABefore(37.7953);
+    p.SetSAAfter(37.7953);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    p = VSAPoint(-630.550935626324190, -48.932226964906654);
+    p.SetSABefore(37.7953);
+    p.SetSAAfter(37.7953);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    p = VSAPoint(-612.770937464562508, -58.178811938993192);
+    p.SetSABefore(37.7953);
+    p.SetSAAfter(37.7953);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    p = VSAPoint(-595.504209442756292, -69.042252656202692);
+    p.SetSABefore(37.7953);
+    p.SetSAAfter(37.7953);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    points += VSAPoint(-590.462992125984215, -72.529322834645669);
+    points += VSAPoint(-590.462992125984215, -72.529322834645669);
+    points += VSAPoint(-231.118006951984967, 95.879158575193841);
+    points += VSAPoint(-231.118006951984967, 95.879158575193841);
+
+    p = VSAPoint(-238.402815433872661, 116.441912166387880);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    p = VSAPoint(-251.054901827475362, 155.855307076335350);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    p = VSAPoint(-261.519858253217421, 193.398201754121601);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    p = VSAPoint(-269.924247729261879, 229.275078971710684);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    p = VSAPoint(-276.394633273771547, 263.690421501066567);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    p = VSAPoint(-281.057577904909294, 296.848712114153273);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    p = VSAPoint(-284.039644640838333, 328.954433582934655);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    points += VSAPoint(-284.147385597229004, 331.313196850393751);
+    points += VSAPoint(-284.147385597229004, 331.313196850393751);
+    points += VSAPoint(-284.147385597229004, 331.313196850393751);
+
+    p = VSAPoint(-285.555799865587915, 332.073678193884462);
+    p.SetSABefore(37.7953);
+    p.SetSAAfter(37.7953);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    p = VSAPoint(-288.834524762284673, 333.546028373225568);
+    p.SetSABefore(37.7953);
+    p.SetSAAfter(37.7953);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    p = VSAPoint(-292.651017475591800, 334.960499310104979);
+    p.SetSABefore(37.7953);
+    p.SetSAAfter(37.7953);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    p = VSAPoint(-296.986935988437835, 336.317597411974702);
+    p.SetSABefore(37.7953);
+    p.SetSAAfter(37.7953);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    p = VSAPoint(-304.365417624891165, 338.253791617484694);
+    p.SetSABefore(37.7953);
+    p.SetSAAfter(37.7953);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    p = VSAPoint(-315.933705242960059, 340.629827700589658);
+    p.SetSABefore(37.7953);
+    p.SetSAAfter(37.7953);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    p = VSAPoint(-329.249539751899079, 342.785487777791332);
+    p.SetSABefore(37.7953);
+    p.SetSAAfter(37.7953);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    p = VSAPoint(-344.166185015137103, 344.724823108705550);
+    p.SetSABefore(37.7953);
+    p.SetSAAfter(37.7953);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    p = VSAPoint(-360.536904896102669, 346.451884952948035);
+    p.SetSABefore(37.7953);
+    p.SetSAAfter(37.7953);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    p = VSAPoint(-378.214963258224429, 347.970724570134507);
+    p.SetSABefore(37.7953);
+    p.SetSAAfter(37.7953);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    p = VSAPoint(-397.053623964930921, 349.285393219880916);
+    p.SetSABefore(37.7953);
+    p.SetSAAfter(37.7953);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    p = VSAPoint(-416.906150879651022, 350.399942161802983);
+    p.SetSABefore(37.7953);
+    p.SetSAAfter(37.7953);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    p = VSAPoint(-437.625807865813101, 351.318422655516372);
+    p.SetSABefore(37.7953);
+    p.SetSAAfter(37.7953);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    p = VSAPoint(-459.065858786846093, 352.044885960637032);
+    p.SetSABefore(37.7953);
+    p.SetSAAfter(37.7953);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    p = VSAPoint(-481.079567506178364, 352.583383336780628);
+    p.SetSABefore(37.7953);
+    p.SetSAAfter(37.7953);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    p = VSAPoint(-503.520197887238680, 352.937966043563051);
+    p.SetSABefore(37.7953);
+    p.SetSAAfter(37.7953);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    p = VSAPoint(-526.241013793455750, 353.112685340600024);
+    p.SetSABefore(37.7953);
+    p.SetSAAfter(37.7953);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    p = VSAPoint(-549.095279088258053, 353.111592487507210);
+    p.SetSABefore(37.7953);
+    p.SetSAAfter(37.7953);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    p = VSAPoint(-571.936257635074298, 352.938738743900558);
+    p.SetSABefore(37.7953);
+    p.SetSAAfter(37.7953);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    p = VSAPoint(-594.617213297333365, 352.598175369395790);
+    p.SetSABefore(37.7953);
+    p.SetSAAfter(37.7953);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    p = VSAPoint(-616.991409938463448, 352.093953623608741);
+    p.SetSABefore(37.7953);
+    p.SetSAAfter(37.7953);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    p = VSAPoint(-638.912111421893314, 351.430124766155018);
+    p.SetSABefore(37.7953);
+    p.SetSAAfter(37.7953);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    p = VSAPoint(-660.232581611051955, 350.610740056650570);
+    p.SetSABefore(37.7953);
+    p.SetSAAfter(37.7953);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    p = VSAPoint(-680.806084369367682, 349.639850754711119);
+    p.SetSABefore(37.7953);
+    p.SetSAAfter(37.7953);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    p = VSAPoint(-700.485883560269031, 348.521508119952557);
+    p.SetSABefore(37.7953);
+    p.SetSAAfter(37.7953);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    p = VSAPoint(-719.125243047185108, 347.259763411990377);
+    p.SetSABefore(37.7953);
+    p.SetSAAfter(37.7953);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    p = VSAPoint(-736.577426693544112, 345.858667890440699);
+    p.SetSABefore(37.7953);
+    p.SetSAAfter(37.7953);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    p = VSAPoint(-752.695698362774920, 344.322272814919074);
+    p.SetSABefore(37.7953);
+    p.SetSAAfter(37.7953);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    p = VSAPoint(-767.333321918305955, 342.654629445041451);
+    p.SetSABefore(37.7953);
+    p.SetSAAfter(37.7953);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    p = VSAPoint(-780.343561223566212, 340.859789040423379);
+    p.SetSABefore(37.7953);
+    p.SetSAAfter(37.7953);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    p = VSAPoint(-791.579680141983886, 338.941802860680923);
+    p.SetSABefore(37.7953);
+    p.SetSAAfter(37.7953);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    p = VSAPoint(-800.894942536987969, 336.904722165429632);
+    p.SetSABefore(37.7953);
+    p.SetSAAfter(37.7953);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    p = VSAPoint(-806.464504883768996, 335.297692803701807);
+    p.SetSABefore(37.7953);
+    p.SetSAAfter(37.7953);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    p = VSAPoint(-809.543928560675113, 334.193629625334438);
+    p.SetSABefore(37.7953);
+    p.SetSAAfter(37.7953);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    p = VSAPoint(-812.060599029906371, 333.062071651623739);
+    p.SetSABefore(37.7953);
+    p.SetSAAfter(37.7953);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    p = VSAPoint(-813.996174274391478, 331.903525290021662);
+    p.SetSABefore(37.7953);
+    p.SetSAAfter(37.7953);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    p = VSAPoint(-814.714960629921279, 331.313196850393751);
+    p.SetSABefore(37.7953);
+    p.SetSAAfter(151.181);
+    p.SetAngleType(PieceNodeAngle::ByFirstEdgeSymmetry);
+    points += p;
+
+    return points;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QVector<QPointF> TST_VAbstractPiece::OutputPointsIssue923Test3_3()
+{
+    QVector<QPointF> points;
+
+    points += QPointF(-998.323622337918891, 229.426313313416387);
+    points += QPointF(-925.469085441362722, 240.352497361176461);
+    points += QPointF(-814.172528355339296, -10.064756082376469);
+    points += QPointF(-797.048974584331063, -48.592752067144829);
+    points += QPointF(-778.560274683193597, -50.549491761193529);
+    points += QPointF(-737.960891197081651, -56.790170478391879);
+    points += QPointF(-709.273784936183347, -62.545071142283753);
+    points += QPointF(-681.358329676571884, -69.772421317304676);
+    points += QPointF(-662.734996979773655, -76.086662659765864);
+    points += QPointF(-652.000013358218780, -80.530014885308333);
+    points += QPointF(-647.534742107878174, -82.700492263504771);
+    points += QPointF(-631.585239468780856, -90.995118061836052);
+    points += QPointF(-616.328020233970847, -100.594267156991847);
+    points += QPointF(-594.096383910663576, -115.972155307751649);
+    points += QPointF(-184.048650148745537, 76.198374399107223);
+    points += QPointF(-202.588712626694274, 128.531217087733864);
+    points += QPointF(-214.844352980142077, 166.709615345349164);
+    points += QPointF(-224.900721916665105, 202.786707734969326);
+    points += QPointF(-232.934347140993879, 237.080856834901624);
+    points += QPointF(-239.089037151700012, 269.817045957384835);
+    points += QPointF(-243.506611386394923, 301.230502874877175);
+    points += QPointF(-246.324245680472586, 331.565901059170528);
+    points += QPointF(-247.367542640672326, 354.406709505752815);
+    points += QPointF(-268.813396242720216, 365.986520876589054);
+    points += QPointF(-274.509592479190928, 368.544465142904016);
+    points += QPointF(-280.430827138279028, 370.738996867416517);
+    points += QPointF(-286.539948778692178, 372.651089393540587);
+    points += QPointF(-295.760523769485246, 375.070669023642552);
+    points += QPointF(-309.108660665237892, 377.812272271559323);
+    points += QPointF(-323.791841306461833, 380.189287868544909);
+    points += QPointF(-339.746492379944868, 382.263575885265993);
+    points += QPointF(-356.936262185776172, 384.077045039880318);
+    points += QPointF(-375.281527662442841, 385.653208859628023);
+    points += QPointF(-394.678657394273387, 387.006850647147644);
+    points += QPointF(-414.787606696514558, 388.135795504608552);
+    points += QPointF(-435.952026976937020, 389.076617984501581);
+    points += QPointF(-457.785958239726995, 389.818484035948188);
+    points += QPointF(-480.155299343825106, 390.367355935354340);
+    points += QPointF(-502.923072127811622, 390.728524359010180);
+    points += QPointF(-525.950383000425973, 390.906843496429246);
+    points += QPointF(-549.097086395700558, 390.906868034847378);
+    points += QPointF(-572.222272868468281, 390.732932110765603);
+    points += QPointF(-595.184660101380132, 390.389190982770685);
+    points += QPointF(-617.842942744172888, 389.879635420374768);
+    points += QPointF(-640.056148626075128, 389.208081776045162);
+    points += QPointF(-661.684051740050222, 388.378134611085102);
+    points += QPointF(-682.587707903001387, 387.393111203977753);
+    points += QPointF(-702.630213610816895, 386.255904969512756);
+    points += QPointF(-721.913933492959586, 384.952760768153212);
+    points += QPointF(-739.883081019170959, 383.510162372720174);
+    points += QPointF(-756.628370632600195, 381.913999891517676);
+    points += QPointF(-772.055707410166860, 380.156385631636169);
+    points += QPointF(-786.107417616341536, 378.217868080938274);
+    points += QPointF(-798.800506212061464, 376.051179682426266);
+    points += QPointF(-810.181063245406790, 373.562456117723798);
+    points += QPointF(-818.092955780502393, 371.279575916538420);
+    points += QPointF(-823.692975528084730, 369.271805550997954);
+    points += QPointF(-829.575336882823422, 366.626948794191208);
+    points += QPointF(-835.815139714856855, 362.892089667033019);
+    points += QPointF(-998.323622337918891, 229.426313313416387);
+
+    return points;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QVector<VSAPoint> TST_VAbstractPiece::InputPointsIssue923Test4_4()
+{
+    QVector<VSAPoint> points;
+
+    VSAPoint p = VSAPoint(-814.714960629921279, 331.313196850393751);
+    p.SetSABefore(37.7953);
+    p.SetSAAfter(151.181);
+    p.SetAngleType(PieceNodeAngle::BySecondEdgeSymmetry);
+    points += p;
+
+    p = VSAPoint(-814.714960629921279, -8.844283464566928);
+    p.SetSABefore(0);
+    p.SetSAAfter(37.7953);
+    points += p;
+
+    p = VSAPoint(-814.714960629921279, -8.844283464566928);
+    p.SetSABefore(0);
+    p.SetSAAfter(37.7953);
+    points += p;
+
+    p = VSAPoint(-810.914791391285917, -9.118915311803084);
+    p.SetSABefore(37.7953);
+    p.SetSAAfter(37.7953);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    p = VSAPoint(-773.697565712941014, -13.057776517652679);
+    p.SetSABefore(37.7953);
+    p.SetSAAfter(37.7953);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    p = VSAPoint(-731.369396039071717, -19.564193239769612);
+    p.SetSABefore(37.7953);
+    p.SetSAAfter(37.7953);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    p = VSAPoint(-700.813861852517789, -25.693917945236084);
+    p.SetSABefore(37.7953);
+    p.SetSAAfter(37.7953);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    p = VSAPoint(-670.539289284542633, -33.532046871057645);
+    p.SetSABefore(37.7953);
+    p.SetSAAfter(37.7953);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    p = VSAPoint(-649.425406024800168, -40.690709434256448);
+    p.SetSABefore(37.7953);
+    p.SetSAAfter(37.7953);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    p = VSAPoint(-636.497248173983621, -46.041845587202857);
+    p.SetSABefore(37.7953);
+    p.SetSAAfter(37.7953);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    p = VSAPoint(-630.550935626324190, -48.932226964906654);
+    p.SetSABefore(37.7953);
+    p.SetSAAfter(37.7953);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    p = VSAPoint(-612.770937464562508, -58.178811938993192);
+    p.SetSABefore(37.7953);
+    p.SetSAAfter(37.7953);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    p = VSAPoint(-595.504209442756292, -69.042252656202692);
+    p.SetSABefore(37.7953);
+    p.SetSAAfter(37.7953);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    points += VSAPoint(-590.462992125984215, -72.529322834645669);
+    points += VSAPoint(-590.462992125984215, -72.529322834645669);
+    points += VSAPoint(-231.118006951984967, 95.879158575193841);
+    points += VSAPoint(-231.118006951984967, 95.879158575193841);
+
+    p = VSAPoint(-238.402815433872661, 116.441912166387880);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    p = VSAPoint(-251.054901827475362, 155.855307076335350);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    p = VSAPoint(-261.519858253217421, 193.398201754121601);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    p = VSAPoint(-269.924247729261879, 229.275078971710684);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    p = VSAPoint(-276.394633273771547, 263.690421501066567);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    p = VSAPoint(-281.057577904909294, 296.848712114153273);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    p = VSAPoint(-284.039644640838333, 328.954433582934655);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    points += VSAPoint(-284.147385597229004, 331.313196850393751);
+    points += VSAPoint(-284.147385597229004, 331.313196850393751);
+    points += VSAPoint(-284.147385597229004, 331.313196850393751);
+
+    p = VSAPoint(-285.555799865587915, 332.073678193884462);
+    p.SetSABefore(37.7953);
+    p.SetSAAfter(37.7953);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    p = VSAPoint(-288.834524762284673, 333.546028373225568);
+    p.SetSABefore(37.7953);
+    p.SetSAAfter(37.7953);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    p = VSAPoint(-292.651017475591800, 334.960499310104979);
+    p.SetSABefore(37.7953);
+    p.SetSAAfter(37.7953);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    p = VSAPoint(-296.986935988437835, 336.317597411974702);
+    p.SetSABefore(37.7953);
+    p.SetSAAfter(37.7953);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    p = VSAPoint(-304.365417624891165, 338.253791617484694);
+    p.SetSABefore(37.7953);
+    p.SetSAAfter(37.7953);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    p = VSAPoint(-315.933705242960059, 340.629827700589658);
+    p.SetSABefore(37.7953);
+    p.SetSAAfter(37.7953);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    p = VSAPoint(-329.249539751899079, 342.785487777791332);
+    p.SetSABefore(37.7953);
+    p.SetSAAfter(37.7953);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    p = VSAPoint(-344.166185015137103, 344.724823108705550);
+    p.SetSABefore(37.7953);
+    p.SetSAAfter(37.7953);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    p = VSAPoint(-360.536904896102669, 346.451884952948035);
+    p.SetSABefore(37.7953);
+    p.SetSAAfter(37.7953);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    p = VSAPoint(-378.214963258224429, 347.970724570134507);
+    p.SetSABefore(37.7953);
+    p.SetSAAfter(37.7953);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    p = VSAPoint(-397.053623964930921, 349.285393219880916);
+    p.SetSABefore(37.7953);
+    p.SetSAAfter(37.7953);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    p = VSAPoint(-416.906150879651022, 350.399942161802983);
+    p.SetSABefore(37.7953);
+    p.SetSAAfter(37.7953);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    p = VSAPoint(-437.625807865813101, 351.318422655516372);
+    p.SetSABefore(37.7953);
+    p.SetSAAfter(37.7953);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    p = VSAPoint(-459.065858786846093, 352.044885960637032);
+    p.SetSABefore(37.7953);
+    p.SetSAAfter(37.7953);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    p = VSAPoint(-481.079567506178364, 352.583383336780628);
+    p.SetSABefore(37.7953);
+    p.SetSAAfter(37.7953);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    p = VSAPoint(-503.520197887238680, 352.937966043563051);
+    p.SetSABefore(37.7953);
+    p.SetSAAfter(37.7953);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    p = VSAPoint(-526.241013793455750, 353.112685340600024);
+    p.SetSABefore(37.7953);
+    p.SetSAAfter(37.7953);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    p = VSAPoint(-549.095279088258053, 353.111592487507210);
+    p.SetSABefore(37.7953);
+    p.SetSAAfter(37.7953);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    p = VSAPoint(-571.936257635074298, 352.938738743900558);
+    p.SetSABefore(37.7953);
+    p.SetSAAfter(37.7953);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    p = VSAPoint(-594.617213297333365, 352.598175369395790);
+    p.SetSABefore(37.7953);
+    p.SetSAAfter(37.7953);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    p = VSAPoint(-616.991409938463448, 352.093953623608741);
+    p.SetSABefore(37.7953);
+    p.SetSAAfter(37.7953);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    p = VSAPoint(-638.912111421893314, 351.430124766155018);
+    p.SetSABefore(37.7953);
+    p.SetSAAfter(37.7953);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    p = VSAPoint(-660.232581611051955, 350.610740056650570);
+    p.SetSABefore(37.7953);
+    p.SetSAAfter(37.7953);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    p = VSAPoint(-680.806084369367682, 349.639850754711119);
+    p.SetSABefore(37.7953);
+    p.SetSAAfter(37.7953);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    p = VSAPoint(-700.485883560269031, 348.521508119952557);
+    p.SetSABefore(37.7953);
+    p.SetSAAfter(37.7953);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    p = VSAPoint(-719.125243047185108, 347.259763411990377);
+    p.SetSABefore(37.7953);
+    p.SetSAAfter(37.7953);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    p = VSAPoint(-736.577426693544112, 345.858667890440699);
+    p.SetSABefore(37.7953);
+    p.SetSAAfter(37.7953);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    p = VSAPoint(-752.695698362774920, 344.322272814919074);
+    p.SetSABefore(37.7953);
+    p.SetSAAfter(37.7953);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    p = VSAPoint(-767.333321918305955, 342.654629445041451);
+    p.SetSABefore(37.7953);
+    p.SetSAAfter(37.7953);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    p = VSAPoint(-780.343561223566212, 340.859789040423379);
+    p.SetSABefore(37.7953);
+    p.SetSAAfter(37.7953);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    p = VSAPoint(-791.579680141983886, 338.941802860680923);
+    p.SetSABefore(37.7953);
+    p.SetSAAfter(37.7953);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    p = VSAPoint(-800.894942536987969, 336.904722165429632);
+    p.SetSABefore(37.7953);
+    p.SetSAAfter(37.7953);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    p = VSAPoint(-806.464504883768996, 335.297692803701807);
+    p.SetSABefore(37.7953);
+    p.SetSAAfter(37.7953);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    p = VSAPoint(-809.543928560675113, 334.193629625334438);
+    p.SetSABefore(37.7953);
+    p.SetSAAfter(37.7953);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    p = VSAPoint(-812.060599029906371, 333.062071651623739);
+    p.SetSABefore(37.7953);
+    p.SetSAAfter(37.7953);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    p = VSAPoint(-813.996174274391478, 331.903525290021662);
+    p.SetSABefore(37.7953);
+    p.SetSAAfter(37.7953);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    p = VSAPoint(-814.714960629921279, 331.313196850393751);
+    p.SetSABefore(37.7953);
+    p.SetSAAfter(151.181);
+    p.SetAngleType(PieceNodeAngle::BySecondEdgeSymmetry);
+    points += p;
+
+    return points;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QVector<QPointF> TST_VAbstractPiece::OutputPointsIssue923Test4_4()
+{
+    QVector<QPointF> points;
+
+    points += QPointF(-814.172528355339296, -10.064756082376469);
+    points += QPointF(-797.048974584331063, -48.592752067144829);
+    points += QPointF(-778.560274683193597, -50.549491761193529);
+    points += QPointF(-737.960891197081651, -56.790170478391879);
+    points += QPointF(-709.273784936183347, -62.545071142283753);
+    points += QPointF(-681.358329676571884, -69.772421317304676);
+    points += QPointF(-662.734996979773655, -76.086662659765864);
+    points += QPointF(-652.000013358218780, -80.530014885308333);
+    points += QPointF(-647.534742107878174, -82.700492263504771);
+    points += QPointF(-631.585239468780856, -90.995118061836052);
+    points += QPointF(-616.328020233970847, -100.594267156991847);
+    points += QPointF(-594.096383910663576, -115.972155307751649);
+    points += QPointF(-184.048650148745537, 76.198374399107223);
+    points += QPointF(-202.588712626694274, 128.531217087733864);
+    points += QPointF(-214.844352980142077, 166.709615345349164);
+    points += QPointF(-224.900721916665105, 202.786707734969326);
+    points += QPointF(-232.934347140993879, 237.080856834901624);
+    points += QPointF(-239.089037151700012, 269.817045957384835);
+    points += QPointF(-243.506611386394923, 301.230502874877175);
+    points += QPointF(-246.324245680472586, 331.565901059170528);
+    points += QPointF(-247.367542640672326, 354.406709505752815);
+    points += QPointF(-268.813396242720216, 365.986520876589054);
+    points += QPointF(-274.509592479190928, 368.544465142904016);
+    points += QPointF(-280.430827138279028, 370.738996867416517);
+    points += QPointF(-286.539948778692178, 372.651089393540587);
+    points += QPointF(-295.760523769485246, 375.070669023642552);
+    points += QPointF(-309.108660665237892, 377.812272271559323);
+    points += QPointF(-323.791841306461833, 380.189287868544909);
+    points += QPointF(-339.746492379944868, 382.263575885265993);
+    points += QPointF(-356.936262185776172, 384.077045039880318);
+    points += QPointF(-375.281527662442841, 385.653208859628023);
+    points += QPointF(-394.678657394273387, 387.006850647147644);
+    points += QPointF(-414.787606696514558, 388.135795504608552);
+    points += QPointF(-435.952026976937020, 389.076617984501581);
+    points += QPointF(-457.785958239726995, 389.818484035948188);
+    points += QPointF(-480.155299343825106, 390.367355935354340);
+    points += QPointF(-502.923072127811622, 390.728524359010180);
+    points += QPointF(-525.950383000425973, 390.906843496429246);
+    points += QPointF(-549.097086395700558, 390.906868034847378);
+    points += QPointF(-572.222272868468281, 390.732932110765603);
+    points += QPointF(-595.184660101380132, 390.389190982770685);
+    points += QPointF(-617.842942744172888, 389.879635420374768);
+    points += QPointF(-640.056148626075128, 389.208081776045162);
+    points += QPointF(-661.684051740050222, 388.378134611085102);
+    points += QPointF(-682.587707903001387, 387.393111203977753);
+    points += QPointF(-702.630213610816895, 386.255904969512756);
+    points += QPointF(-721.913933492959586, 384.952760768153212);
+    points += QPointF(-739.883081019170959, 383.510162372720174);
+    points += QPointF(-756.628370632600195, 381.913999891517676);
+    points += QPointF(-772.055707410166860, 380.156385631636169);
+    points += QPointF(-786.107417616341536, 378.217868080938274);
+    points += QPointF(-798.800506212061464, 376.051179682426266);
+    points += QPointF(-810.181063245406790, 373.562456117723798);
+    points += QPointF(-818.092955780502393, 371.279575916538420);
+    points += QPointF(-823.692975528084730, 369.271805550997954);
+    points += QPointF(-829.575336882823422, 366.626948794191208);
+    points += QPointF(-835.815139714856855, 362.892089667033019);
+    points += QPointF(-949.648673098827885, 294.756569590472964);
+    points += QPointF(-814.172528355339296, -10.064756082376469);
+
+    return points;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QVector<VSAPoint> TST_VAbstractPiece::InputPointsIssue923Test5_5()
+{
+    QVector<VSAPoint> points;
+
+    VSAPoint p = VSAPoint(-814.714960629921279, 331.313196850393751);
+    p.SetSABefore(37.7953);
+    p.SetSAAfter(151.181);
+    p.SetAngleType(PieceNodeAngle::ByFirstEdgeRightAngle);
+    points += p;
+
+    p = VSAPoint(-814.714960629921279, -8.844283464566928);
+    p.SetSABefore(0);
+    p.SetSAAfter(37.7953);
+    points += p;
+
+    p = VSAPoint(-814.714960629921279, -8.844283464566928);
+    p.SetSABefore(0);
+    p.SetSAAfter(37.7953);
+    points += p;
+
+    p = VSAPoint(-810.914791391285917, -9.118915311803084);
+    p.SetSABefore(37.7953);
+    p.SetSAAfter(37.7953);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    p = VSAPoint(-773.697565712941014, -13.057776517652679);
+    p.SetSABefore(37.7953);
+    p.SetSAAfter(37.7953);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    p = VSAPoint(-731.369396039071717, -19.564193239769612);
+    p.SetSABefore(37.7953);
+    p.SetSAAfter(37.7953);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    p = VSAPoint(-700.813861852517789, -25.693917945236084);
+    p.SetSABefore(37.7953);
+    p.SetSAAfter(37.7953);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    p = VSAPoint(-670.539289284542633, -33.532046871057645);
+    p.SetSABefore(37.7953);
+    p.SetSAAfter(37.7953);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    p = VSAPoint(-649.425406024800168, -40.690709434256448);
+    p.SetSABefore(37.7953);
+    p.SetSAAfter(37.7953);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    p = VSAPoint(-636.497248173983621, -46.041845587202857);
+    p.SetSABefore(37.7953);
+    p.SetSAAfter(37.7953);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    p = VSAPoint(-630.550935626324190, -48.932226964906654);
+    p.SetSABefore(37.7953);
+    p.SetSAAfter(37.7953);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    p = VSAPoint(-612.770937464562508, -58.178811938993192);
+    p.SetSABefore(37.7953);
+    p.SetSAAfter(37.7953);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    p = VSAPoint(-595.504209442756292, -69.042252656202692);
+    p.SetSABefore(37.7953);
+    p.SetSAAfter(37.7953);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    points += VSAPoint(-590.462992125984215, -72.529322834645669);
+    points += VSAPoint(-590.462992125984215, -72.529322834645669);
+    points += VSAPoint(-231.118006951984967, 95.879158575193841);
+    points += VSAPoint(-231.118006951984967, 95.879158575193841);
+
+    p = VSAPoint(-238.402815433872661, 116.441912166387880);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    p = VSAPoint(-251.054901827475362, 155.855307076335350);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    p = VSAPoint(-261.519858253217421, 193.398201754121601);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    p = VSAPoint(-269.924247729261879, 229.275078971710684);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    p = VSAPoint(-276.394633273771547, 263.690421501066567);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    p = VSAPoint(-281.057577904909294, 296.848712114153273);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    p = VSAPoint(-284.039644640838333, 328.954433582934655);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    points += VSAPoint(-284.147385597229004, 331.313196850393751);
+    points += VSAPoint(-284.147385597229004, 331.313196850393751);
+    points += VSAPoint(-284.147385597229004, 331.313196850393751);
+
+    p = VSAPoint(-285.555799865587915, 332.073678193884462);
+    p.SetSABefore(37.7953);
+    p.SetSAAfter(37.7953);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    p = VSAPoint(-288.834524762284673, 333.546028373225568);
+    p.SetSABefore(37.7953);
+    p.SetSAAfter(37.7953);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    p = VSAPoint(-292.651017475591800, 334.960499310104979);
+    p.SetSABefore(37.7953);
+    p.SetSAAfter(37.7953);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    p = VSAPoint(-296.986935988437835, 336.317597411974702);
+    p.SetSABefore(37.7953);
+    p.SetSAAfter(37.7953);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    p = VSAPoint(-304.365417624891165, 338.253791617484694);
+    p.SetSABefore(37.7953);
+    p.SetSAAfter(37.7953);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    p = VSAPoint(-315.933705242960059, 340.629827700589658);
+    p.SetSABefore(37.7953);
+    p.SetSAAfter(37.7953);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    p = VSAPoint(-329.249539751899079, 342.785487777791332);
+    p.SetSABefore(37.7953);
+    p.SetSAAfter(37.7953);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    p = VSAPoint(-344.166185015137103, 344.724823108705550);
+    p.SetSABefore(37.7953);
+    p.SetSAAfter(37.7953);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    p = VSAPoint(-360.536904896102669, 346.451884952948035);
+    p.SetSABefore(37.7953);
+    p.SetSAAfter(37.7953);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    p = VSAPoint(-378.214963258224429, 347.970724570134507);
+    p.SetSABefore(37.7953);
+    p.SetSAAfter(37.7953);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    p = VSAPoint(-397.053623964930921, 349.285393219880916);
+    p.SetSABefore(37.7953);
+    p.SetSAAfter(37.7953);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    p = VSAPoint(-416.906150879651022, 350.399942161802983);
+    p.SetSABefore(37.7953);
+    p.SetSAAfter(37.7953);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    p = VSAPoint(-437.625807865813101, 351.318422655516372);
+    p.SetSABefore(37.7953);
+    p.SetSAAfter(37.7953);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    p = VSAPoint(-459.065858786846093, 352.044885960637032);
+    p.SetSABefore(37.7953);
+    p.SetSAAfter(37.7953);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    p = VSAPoint(-481.079567506178364, 352.583383336780628);
+    p.SetSABefore(37.7953);
+    p.SetSAAfter(37.7953);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    p = VSAPoint(-503.520197887238680, 352.937966043563051);
+    p.SetSABefore(37.7953);
+    p.SetSAAfter(37.7953);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    p = VSAPoint(-526.241013793455750, 353.112685340600024);
+    p.SetSABefore(37.7953);
+    p.SetSAAfter(37.7953);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    p = VSAPoint(-549.095279088258053, 353.111592487507210);
+    p.SetSABefore(37.7953);
+    p.SetSAAfter(37.7953);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    p = VSAPoint(-571.936257635074298, 352.938738743900558);
+    p.SetSABefore(37.7953);
+    p.SetSAAfter(37.7953);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    p = VSAPoint(-594.617213297333365, 352.598175369395790);
+    p.SetSABefore(37.7953);
+    p.SetSAAfter(37.7953);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    p = VSAPoint(-616.991409938463448, 352.093953623608741);
+    p.SetSABefore(37.7953);
+    p.SetSAAfter(37.7953);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    p = VSAPoint(-638.912111421893314, 351.430124766155018);
+    p.SetSABefore(37.7953);
+    p.SetSAAfter(37.7953);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    p = VSAPoint(-660.232581611051955, 350.610740056650570);
+    p.SetSABefore(37.7953);
+    p.SetSAAfter(37.7953);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    p = VSAPoint(-680.806084369367682, 349.639850754711119);
+    p.SetSABefore(37.7953);
+    p.SetSAAfter(37.7953);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    p = VSAPoint(-700.485883560269031, 348.521508119952557);
+    p.SetSABefore(37.7953);
+    p.SetSAAfter(37.7953);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    p = VSAPoint(-719.125243047185108, 347.259763411990377);
+    p.SetSABefore(37.7953);
+    p.SetSAAfter(37.7953);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    p = VSAPoint(-736.577426693544112, 345.858667890440699);
+    p.SetSABefore(37.7953);
+    p.SetSAAfter(37.7953);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    p = VSAPoint(-752.695698362774920, 344.322272814919074);
+    p.SetSABefore(37.7953);
+    p.SetSAAfter(37.7953);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    p = VSAPoint(-767.333321918305955, 342.654629445041451);
+    p.SetSABefore(37.7953);
+    p.SetSAAfter(37.7953);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    p = VSAPoint(-780.343561223566212, 340.859789040423379);
+    p.SetSABefore(37.7953);
+    p.SetSAAfter(37.7953);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    p = VSAPoint(-791.579680141983886, 338.941802860680923);
+    p.SetSABefore(37.7953);
+    p.SetSAAfter(37.7953);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    p = VSAPoint(-800.894942536987969, 336.904722165429632);
+    p.SetSABefore(37.7953);
+    p.SetSAAfter(37.7953);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    p = VSAPoint(-806.464504883768996, 335.297692803701807);
+    p.SetSABefore(37.7953);
+    p.SetSAAfter(37.7953);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    p = VSAPoint(-809.543928560675113, 334.193629625334438);
+    p.SetSABefore(37.7953);
+    p.SetSAAfter(37.7953);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    p = VSAPoint(-812.060599029906371, 333.062071651623739);
+    p.SetSABefore(37.7953);
+    p.SetSAAfter(37.7953);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    p = VSAPoint(-813.996174274391478, 331.903525290021662);
+    p.SetSABefore(37.7953);
+    p.SetSAAfter(37.7953);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    p = VSAPoint(-814.714960629921279, 331.313196850393751);
+    p.SetSABefore(37.7953);
+    p.SetSAAfter(151.181);
+    p.SetAngleType(PieceNodeAngle::ByFirstEdgeRightAngle);
+    points += p;
+
+    return points;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QVector<QPointF> TST_VAbstractPiece::OutputPointsIssue923Test5_5()
+{
+    QVector<QPointF> points;
+
+    points += QPointF(-949.456732609244455, 269.559956003021910);
+    points += QPointF(-925.469085441364086, 240.352497361179360);
+    points += QPointF(-814.172528355339296, -10.064756082376469);
+    points += QPointF(-797.048974584331063, -48.592752067144829);
+    points += QPointF(-778.560274683193597, -50.549491761193529);
+    points += QPointF(-737.960891197081651, -56.790170478391879);
+    points += QPointF(-709.273784936183347, -62.545071142283753);
+    points += QPointF(-681.358329676571884, -69.772421317304676);
+    points += QPointF(-662.734996979773655, -76.086662659765864);
+    points += QPointF(-652.000013358218780, -80.530014885308333);
+    points += QPointF(-647.534742107878174, -82.700492263504771);
+    points += QPointF(-631.585239468780856, -90.995118061836052);
+    points += QPointF(-616.328020233970847, -100.594267156991847);
+    points += QPointF(-594.096383910663576, -115.972155307751649);
+    points += QPointF(-184.048650148745537, 76.198374399107223);
+    points += QPointF(-202.588712626694274, 128.531217087733864);
+    points += QPointF(-214.844352980142077, 166.709615345349164);
+    points += QPointF(-224.900721916665105, 202.786707734969326);
+    points += QPointF(-232.934347140993879, 237.080856834901624);
+    points += QPointF(-239.089037151700012, 269.817045957384835);
+    points += QPointF(-243.506611386394923, 301.230502874877175);
+    points += QPointF(-246.324245680472586, 331.565901059170528);
+    points += QPointF(-247.367542640672326, 354.406709505752815);
+    points += QPointF(-268.813396242720216, 365.986520876589054);
+    points += QPointF(-274.509592479190928, 368.544465142904016);
+    points += QPointF(-280.430827138279028, 370.738996867416517);
+    points += QPointF(-286.539948778692178, 372.651089393540587);
+    points += QPointF(-295.760523769485246, 375.070669023642552);
+    points += QPointF(-309.108660665237892, 377.812272271559323);
+    points += QPointF(-323.791841306461833, 380.189287868544909);
+    points += QPointF(-339.746492379944868, 382.263575885265993);
+    points += QPointF(-356.936262185776172, 384.077045039880318);
+    points += QPointF(-375.281527662442841, 385.653208859628023);
+    points += QPointF(-394.678657394273387, 387.006850647147644);
+    points += QPointF(-414.787606696514558, 388.135795504608552);
+    points += QPointF(-435.952026976937020, 389.076617984501581);
+    points += QPointF(-457.785958239726995, 389.818484035948188);
+    points += QPointF(-480.155299343825106, 390.367355935354340);
+    points += QPointF(-502.923072127811622, 390.728524359010180);
+    points += QPointF(-525.950383000425973, 390.906843496429246);
+    points += QPointF(-549.097086395700558, 390.906868034847378);
+    points += QPointF(-572.222272868468281, 390.732932110765603);
+    points += QPointF(-595.184660101380132, 390.389190982770685);
+    points += QPointF(-617.842942744172888, 389.879635420374768);
+    points += QPointF(-640.056148626075128, 389.208081776045162);
+    points += QPointF(-661.684051740050222, 388.378134611085102);
+    points += QPointF(-682.587707903001387, 387.393111203977753);
+    points += QPointF(-702.630213610816895, 386.255904969512756);
+    points += QPointF(-721.913933492959586, 384.952760768153212);
+    points += QPointF(-739.883081019170959, 383.510162372720174);
+    points += QPointF(-756.628370632600195, 381.913999891517676);
+    points += QPointF(-772.055707410166860, 380.156385631636169);
+    points += QPointF(-786.107417616341536, 378.217868080938274);
+    points += QPointF(-798.800506212061464, 376.051179682426266);
+    points += QPointF(-810.181063245406790, 373.562456117723798);
+    points += QPointF(-818.092955780502393, 371.279575916538420);
+    points += QPointF(-823.692975528084730, 369.271805550997954);
+    points += QPointF(-829.575336882823422, 366.626948794191208);
+    points += QPointF(-835.815139714856855, 362.892089667033019);
+    points += QPointF(-949.456732609244455, 269.559956003021910);
+
+    return points;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QVector<VSAPoint> TST_VAbstractPiece::InputPointsIssue923Test6_6()
+{
+    QVector<VSAPoint> points;
+
+    VSAPoint p = VSAPoint(-814.714960629921279, 331.313196850393751);
+    p.SetSABefore(37.7953);
+    p.SetSAAfter(151.181);
+    p.SetAngleType(PieceNodeAngle::BySecondEdgeRightAngle);
+    points += p;
+
+    p = VSAPoint(-814.714960629921279, -8.844283464566928);
+    p.SetSABefore(0);
+    p.SetSAAfter(37.7953);
+    points += p;
+
+    p = VSAPoint(-814.714960629921279, -8.844283464566928);
+    p.SetSABefore(0);
+    p.SetSAAfter(37.7953);
+    points += p;
+
+    p = VSAPoint(-810.914791391285917, -9.118915311803084);
+    p.SetSABefore(37.7953);
+    p.SetSAAfter(37.7953);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    p = VSAPoint(-773.697565712941014, -13.057776517652679);
+    p.SetSABefore(37.7953);
+    p.SetSAAfter(37.7953);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    p = VSAPoint(-731.369396039071717, -19.564193239769612);
+    p.SetSABefore(37.7953);
+    p.SetSAAfter(37.7953);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    p = VSAPoint(-700.813861852517789, -25.693917945236084);
+    p.SetSABefore(37.7953);
+    p.SetSAAfter(37.7953);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    p = VSAPoint(-670.539289284542633, -33.532046871057645);
+    p.SetSABefore(37.7953);
+    p.SetSAAfter(37.7953);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    p = VSAPoint(-649.425406024800168, -40.690709434256448);
+    p.SetSABefore(37.7953);
+    p.SetSAAfter(37.7953);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    p = VSAPoint(-636.497248173983621, -46.041845587202857);
+    p.SetSABefore(37.7953);
+    p.SetSAAfter(37.7953);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    p = VSAPoint(-630.550935626324190, -48.932226964906654);
+    p.SetSABefore(37.7953);
+    p.SetSAAfter(37.7953);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    p = VSAPoint(-612.770937464562508, -58.178811938993192);
+    p.SetSABefore(37.7953);
+    p.SetSAAfter(37.7953);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    p = VSAPoint(-595.504209442756292, -69.042252656202692);
+    p.SetSABefore(37.7953);
+    p.SetSAAfter(37.7953);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    points += VSAPoint(-590.462992125984215, -72.529322834645669);
+    points += VSAPoint(-590.462992125984215, -72.529322834645669);
+    points += VSAPoint(-231.118006951984967, 95.879158575193841);
+    points += VSAPoint(-231.118006951984967, 95.879158575193841);
+
+    p = VSAPoint(-238.402815433872661, 116.441912166387880);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    p = VSAPoint(-251.054901827475362, 155.855307076335350);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    p = VSAPoint(-261.519858253217421, 193.398201754121601);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    p = VSAPoint(-269.924247729261879, 229.275078971710684);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    p = VSAPoint(-276.394633273771547, 263.690421501066567);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    p = VSAPoint(-281.057577904909294, 296.848712114153273);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    p = VSAPoint(-284.039644640838333, 328.954433582934655);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    points += VSAPoint(-284.147385597229004, 331.313196850393751);
+    points += VSAPoint(-284.147385597229004, 331.313196850393751);
+    points += VSAPoint(-284.147385597229004, 331.313196850393751);
+
+    p = VSAPoint(-285.555799865587915, 332.073678193884462);
+    p.SetSABefore(37.7953);
+    p.SetSAAfter(37.7953);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    p = VSAPoint(-288.834524762284673, 333.546028373225568);
+    p.SetSABefore(37.7953);
+    p.SetSAAfter(37.7953);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    p = VSAPoint(-292.651017475591800, 334.960499310104979);
+    p.SetSABefore(37.7953);
+    p.SetSAAfter(37.7953);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    p = VSAPoint(-296.986935988437835, 336.317597411974702);
+    p.SetSABefore(37.7953);
+    p.SetSAAfter(37.7953);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    p = VSAPoint(-304.365417624891165, 338.253791617484694);
+    p.SetSABefore(37.7953);
+    p.SetSAAfter(37.7953);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    p = VSAPoint(-315.933705242960059, 340.629827700589658);
+    p.SetSABefore(37.7953);
+    p.SetSAAfter(37.7953);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    p = VSAPoint(-329.249539751899079, 342.785487777791332);
+    p.SetSABefore(37.7953);
+    p.SetSAAfter(37.7953);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    p = VSAPoint(-344.166185015137103, 344.724823108705550);
+    p.SetSABefore(37.7953);
+    p.SetSAAfter(37.7953);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    p = VSAPoint(-360.536904896102669, 346.451884952948035);
+    p.SetSABefore(37.7953);
+    p.SetSAAfter(37.7953);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    p = VSAPoint(-378.214963258224429, 347.970724570134507);
+    p.SetSABefore(37.7953);
+    p.SetSAAfter(37.7953);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    p = VSAPoint(-397.053623964930921, 349.285393219880916);
+    p.SetSABefore(37.7953);
+    p.SetSAAfter(37.7953);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    p = VSAPoint(-416.906150879651022, 350.399942161802983);
+    p.SetSABefore(37.7953);
+    p.SetSAAfter(37.7953);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    p = VSAPoint(-437.625807865813101, 351.318422655516372);
+    p.SetSABefore(37.7953);
+    p.SetSAAfter(37.7953);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    p = VSAPoint(-459.065858786846093, 352.044885960637032);
+    p.SetSABefore(37.7953);
+    p.SetSAAfter(37.7953);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    p = VSAPoint(-481.079567506178364, 352.583383336780628);
+    p.SetSABefore(37.7953);
+    p.SetSAAfter(37.7953);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    p = VSAPoint(-503.520197887238680, 352.937966043563051);
+    p.SetSABefore(37.7953);
+    p.SetSAAfter(37.7953);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    p = VSAPoint(-526.241013793455750, 353.112685340600024);
+    p.SetSABefore(37.7953);
+    p.SetSAAfter(37.7953);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    p = VSAPoint(-549.095279088258053, 353.111592487507210);
+    p.SetSABefore(37.7953);
+    p.SetSAAfter(37.7953);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    p = VSAPoint(-571.936257635074298, 352.938738743900558);
+    p.SetSABefore(37.7953);
+    p.SetSAAfter(37.7953);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    p = VSAPoint(-594.617213297333365, 352.598175369395790);
+    p.SetSABefore(37.7953);
+    p.SetSAAfter(37.7953);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    p = VSAPoint(-616.991409938463448, 352.093953623608741);
+    p.SetSABefore(37.7953);
+    p.SetSAAfter(37.7953);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    p = VSAPoint(-638.912111421893314, 351.430124766155018);
+    p.SetSABefore(37.7953);
+    p.SetSAAfter(37.7953);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    p = VSAPoint(-660.232581611051955, 350.610740056650570);
+    p.SetSABefore(37.7953);
+    p.SetSAAfter(37.7953);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    p = VSAPoint(-680.806084369367682, 349.639850754711119);
+    p.SetSABefore(37.7953);
+    p.SetSAAfter(37.7953);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    p = VSAPoint(-700.485883560269031, 348.521508119952557);
+    p.SetSABefore(37.7953);
+    p.SetSAAfter(37.7953);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    p = VSAPoint(-719.125243047185108, 347.259763411990377);
+    p.SetSABefore(37.7953);
+    p.SetSAAfter(37.7953);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    p = VSAPoint(-736.577426693544112, 345.858667890440699);
+    p.SetSABefore(37.7953);
+    p.SetSAAfter(37.7953);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    p = VSAPoint(-752.695698362774920, 344.322272814919074);
+    p.SetSABefore(37.7953);
+    p.SetSAAfter(37.7953);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    p = VSAPoint(-767.333321918305955, 342.654629445041451);
+    p.SetSABefore(37.7953);
+    p.SetSAAfter(37.7953);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    p = VSAPoint(-780.343561223566212, 340.859789040423379);
+    p.SetSABefore(37.7953);
+    p.SetSAAfter(37.7953);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    p = VSAPoint(-791.579680141983886, 338.941802860680923);
+    p.SetSABefore(37.7953);
+    p.SetSAAfter(37.7953);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    p = VSAPoint(-800.894942536987969, 336.904722165429632);
+    p.SetSABefore(37.7953);
+    p.SetSAAfter(37.7953);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    p = VSAPoint(-806.464504883768996, 335.297692803701807);
+    p.SetSABefore(37.7953);
+    p.SetSAAfter(37.7953);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    p = VSAPoint(-809.543928560675113, 334.193629625334438);
+    p.SetSABefore(37.7953);
+    p.SetSAAfter(37.7953);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    p = VSAPoint(-812.060599029906371, 333.062071651623739);
+    p.SetSABefore(37.7953);
+    p.SetSAAfter(37.7953);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    p = VSAPoint(-813.996174274391478, 331.903525290021662);
+    p.SetSABefore(37.7953);
+    p.SetSAAfter(37.7953);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    p = VSAPoint(-814.714960629921279, 331.313196850393751);
+    p.SetSABefore(37.7953);
+    p.SetSAAfter(151.181);
+    p.SetAngleType(PieceNodeAngle::BySecondEdgeRightAngle);
+    points += p;
+
+    return points;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QVector<QPointF> TST_VAbstractPiece::OutputPointsIssue923Test6_6()
+{
+    QVector<QPointF> points;
+
+    points += QPointF(-814.172528355339296, -10.064756082376469);
+    points += QPointF(-797.048974584331063, -48.592752067144829);
+    points += QPointF(-778.560274683193597, -50.549491761193529);
+    points += QPointF(-737.960891197081651, -56.790170478391879);
+    points += QPointF(-709.273784936183347, -62.545071142283753);
+    points += QPointF(-681.358329676571884, -69.772421317304676);
+    points += QPointF(-662.734996979773655, -76.086662659765864);
+    points += QPointF(-652.000013358218780, -80.530014885308333);
+    points += QPointF(-647.534742107878174, -82.700492263504771);
+    points += QPointF(-631.585239468780856, -90.995118061836052);
+    points += QPointF(-616.328020233970847, -100.594267156991847);
+    points += QPointF(-594.096383910663576, -115.972155307751649);
+    points += QPointF(-184.048650148745537, 76.198374399107223);
+    points += QPointF(-202.588712626694274, 128.531217087733864);
+    points += QPointF(-214.844352980142077, 166.709615345349164);
+    points += QPointF(-224.900721916665105, 202.786707734969326);
+    points += QPointF(-232.934347140993879, 237.080856834901624);
+    points += QPointF(-239.089037151700012, 269.817045957384835);
+    points += QPointF(-243.506611386394923, 301.230502874877175);
+    points += QPointF(-246.324245680472586, 331.565901059170528);
+    points += QPointF(-247.367542640672326, 354.406709505752815);
+    points += QPointF(-268.813396242720216, 365.986520876589054);
+    points += QPointF(-274.509592479190928, 368.544465142904016);
+    points += QPointF(-280.430827138279028, 370.738996867416517);
+    points += QPointF(-286.539948778692178, 372.651089393540587);
+    points += QPointF(-295.760523769485246, 375.070669023642552);
+    points += QPointF(-309.108660665237892, 377.812272271559323);
+    points += QPointF(-323.791841306461833, 380.189287868544909);
+    points += QPointF(-339.746492379944868, 382.263575885265993);
+    points += QPointF(-356.936262185776172, 384.077045039880318);
+    points += QPointF(-375.281527662442841, 385.653208859628023);
+    points += QPointF(-394.678657394273387, 387.006850647147644);
+    points += QPointF(-414.787606696514558, 388.135795504608552);
+    points += QPointF(-435.952026976937020, 389.076617984501581);
+    points += QPointF(-457.785958239726995, 389.818484035948188);
+    points += QPointF(-480.155299343825106, 390.367355935354340);
+    points += QPointF(-502.923072127811622, 390.728524359010180);
+    points += QPointF(-525.950383000425973, 390.906843496429246);
+    points += QPointF(-549.097086395700558, 390.906868034847378);
+    points += QPointF(-572.222272868468281, 390.732932110765603);
+    points += QPointF(-595.184660101380132, 390.389190982770685);
+    points += QPointF(-617.842942744172888, 389.879635420374768);
+    points += QPointF(-640.056148626075128, 389.208081776045162);
+    points += QPointF(-661.684051740050222, 388.378134611085102);
+    points += QPointF(-682.587707903001387, 387.393111203977753);
+    points += QPointF(-702.630213610816895, 386.255904969512756);
+    points += QPointF(-721.913933492959586, 384.952760768153212);
+    points += QPointF(-739.883081019170959, 383.510162372720174);
+    points += QPointF(-756.628370632600195, 381.913999891517676);
+    points += QPointF(-772.055707410166860, 380.156385631636169);
+    points += QPointF(-786.107417616341536, 378.217868080938274);
+    points += QPointF(-798.800506212061464, 376.051179682426266);
+    points += QPointF(-810.181063245406790, 373.562456117723798);
+    points += QPointF(-814.714960629921279, 372.254255263452592);
+    points += QPointF(-965.896062992125962, 372.254255263452592);
+    points += QPointF(-814.172528355339296, -10.064756082376469);
 
     return points;
 }
