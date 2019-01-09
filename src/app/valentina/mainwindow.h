@@ -178,10 +178,10 @@ private slots:
     void ActionDetails(bool checked);
     void ActionLayout(bool checked);
 
-    void New();
-    bool SaveAs();
-    bool Save();
-    void Open();
+    void on_actionNew_triggered();
+    bool on_actionSaveAs_triggered();
+    bool on_actionSave_triggered();
+    void on_actionOpen_triggered();
 
     void ClosedDialogUnionDetails(int result);
     void ClosedDialogDuplicateDetail(int result);

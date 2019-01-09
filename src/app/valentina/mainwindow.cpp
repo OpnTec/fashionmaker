@@ -2668,10 +2668,10 @@ void MainWindow::ActionLayout(bool checked)
 
 //---------------------------------------------------------------------------------------------------------------------
 /**
- * @brief SaveAs save as pattern file.
+ * @brief on_actionSaveAs_triggered save as pattern file.
  * @return true for successes saving.
  */
-bool MainWindow::SaveAs()
+bool MainWindow::on_actionSaveAs_triggered()
 {
     const QString oldFilePath = qApp->GetPatternPath();
     QString filters(tr("Pattern files") + QLatin1String("(*.val)"));
@@ -2792,14 +2792,14 @@ bool MainWindow::SaveAs()
 
 //---------------------------------------------------------------------------------------------------------------------
 /**
- * @brief Save save pattern file.
+ * @brief on_actionSave_triggered save pattern file.
  * @return true for successes saving.
  */
-bool MainWindow::Save()
+bool MainWindow::on_actionSave_triggered()
 {
     if (qApp->GetPatternPath().isEmpty() || patternReadOnly)
     {
-        return SaveAs();
+        return on_actionSaveAs_triggered();
     }
     else
     {
@@ -2878,9 +2878,9 @@ bool MainWindow::Save()
 
 //---------------------------------------------------------------------------------------------------------------------
 /**
- * @brief Open ask user select pattern file.
+ * @brief on_actionOpen_triggered ask user select pattern file.
  */
-void MainWindow::Open()
+void MainWindow::on_actionOpen_triggered()
 {
     qCDebug(vMainWindow, "Openning new file.");
     const QString filter(tr("Pattern files") + QLatin1String(" (*.val)"));
@@ -3394,9 +3394,9 @@ void MainWindow::UpdateSizesList(const QStringList &list)
 
 //---------------------------------------------------------------------------------------------------------------------
 /**
- * @brief NewPattern create new empty pattern.
+ * @brief on_actionNew_triggered create new empty pattern.
  */
-void MainWindow::New()
+void MainWindow::on_actionNew_triggered()
 {
     if (comboBoxDraws->count() == 0)
     {
@@ -3859,11 +3859,11 @@ bool MainWindow::MaybeSave()
             case QMessageBox::Yes:
                 if (patternReadOnly)
                 {
-                    return SaveAs();
+                    return on_actionSaveAs_triggered();
                 }
                 else
                 {
-                    return Save();
+                    return on_actionSave_triggered();
                 }
             case QMessageBox::No:
                 return true;
@@ -4253,10 +4253,6 @@ void MainWindow::CreateActions()
         AddPP(patternPieceName);
     });
 
-    connect(ui->actionSaveAs, &QAction::triggered, this, &MainWindow::SaveAs);
-    connect(ui->actionSave, &QAction::triggered, this, &MainWindow::Save);
-    connect(ui->actionOpen, &QAction::triggered, this, &MainWindow::Open);
-    connect(ui->actionNew, &QAction::triggered, this, &MainWindow::New);
     connect(ui->actionExportIncrementsToCSV, &QAction::triggered, this, &MainWindow::ExportDataToCSV);
     connect(ui->actionExportFinalMeasurementsToCSV, &QAction::triggered, this, &MainWindow::ExportFMeasurementsToCSV);
 

@@ -2036,7 +2036,7 @@
     <string>Open file with pattern</string>
    </property>
    <property name="shortcut">
-    <string notr="true"/>
+    <string>Ctrl+O</string>
    </property>
    <property name="menuRole">
     <enum>QAction::NoRole</enum>
