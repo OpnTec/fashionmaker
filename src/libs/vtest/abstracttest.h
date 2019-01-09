@@ -62,6 +62,7 @@ public:
 protected:
     void Comparison(const QVector<QPointF> &ekv, const QVector<QPointF> &ekvOrig) const;
     void Comparison(const QPointF &result, const QPointF &expected) const;
+    void Comparison(const QVector<QLineF> &result, const QVector<QLineF> &expected) const;
 
     QString ValentinaPath() const;
     QString TapePath() const;

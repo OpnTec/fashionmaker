@@ -47,6 +47,33 @@ class VContainer;
 class QPainterPath;
 class VPointF;
 
+QT_WARNING_PUSH
+QT_WARNING_DISABLE_GCC("-Weffc++")
+
+enum class PassmarkStatus: char
+{
+    Error = 0,
+    Common = 1,
+    Rollback = -1
+};
+
+struct VPiecePassmarkData
+{
+    VSAPoint previousSAPoint;
+    VSAPoint passmarkSAPoint;
+    VSAPoint nextSAPoint;
+    qreal saWidth;
+    QString nodeName;
+    QString pieceName;
+    PassmarkLineType passmarkLineType;
+    PassmarkAngleType passmarkAngleType;
+};
+
+Q_DECLARE_METATYPE(VPiecePassmarkData)
+Q_DECLARE_TYPEINFO(VPiecePassmarkData, Q_MOVABLE_TYPE);
+
+QT_WARNING_POP
+
 class VPiece : public VAbstractPiece
 {
 public:
@@ -71,8 +98,7 @@ public:
     QVector<VPointF>       MainPathNodePoints(const VContainer *data, bool showExcluded = false) const;
     QVector<QPointF>       SeamAllowancePoints(const VContainer *data) const;
     QVector<QPointF>       CuttingPathPoints(const VContainer *data) const;
-    QVector<QLineF>        PassmarksLines(const VContainer *data,
-                                          const QVector<QPointF> &seamAllowance = QVector<QPointF>()) const;
+    QVector<QLineF>        PassmarksLines(const VContainer *data) const;
     QVector<PlaceLabelImg> PlaceLabelPoints(const VContainer *data) const;
 
     QVector<QPainterPath> CurvesPainterPath(const VContainer *data) const;
@@ -82,8 +108,7 @@ public:
 
     QPainterPath SeamAllowancePath(const VContainer *data) const;
     QPainterPath SeamAllowancePath(const QVector<QPointF> &points) const;
-    QPainterPath PassmarksPath(const VContainer *data,
-                               const QVector<QPointF> &seamAllowance = QVector<QPointF>()) const;
+    QPainterPath PassmarksPath(const VContainer *data) const;
     QPainterPath PlaceLabelPath(const VContainer *data) const;
 
     bool IsInLayout() const;
@@ -130,6 +155,9 @@ public:
     VGrainlineData&         GetGrainlineGeometry();
     const VGrainlineData&   GetGrainlineGeometry() const;
 
+    static QVector<QLineF> SAPassmark(const VPiecePassmarkData &passmarkData, const QVector<QPointF> &seamAllowance);
+protected:
+    QVector<QPointF> SeamAllowancePointsWithRotation(const VContainer *data, int makeFirst) const;
 private:
     QSharedDataPointer<VPieceData> d;
 
@@ -143,22 +171,19 @@ private:
     bool GetPassmarkSAPoint(const QVector<VPieceNode> &path, int index, const VContainer *data, VSAPoint &point) const;
     bool GetPassmarkPreviousSAPoints(const QVector<VPieceNode> &path, int index, const VSAPoint &passmarkSAPoint,
                                      const VContainer *data, VSAPoint &point, int passmarkIndex) const;
-    int GetPassmarkNextSAPoints(const QVector<VPieceNode> &path, int index, const VSAPoint &passmarkSAPoint,
-                                const VContainer *data, VSAPoint &point, int passmarkIndex) const;
-    bool GetSeamPassmarkSAPoint(const VSAPoint &previousSAPoint, VSAPoint passmarkSAPoint,
-                                const VSAPoint &nextSAPoint, const VContainer *data, QPointF &point) const;
+    bool GetPassmarkNextSAPoints(const QVector<VPieceNode> &path, int index, const VSAPoint &passmarkSAPoint,
+                                 const VContainer *data, VSAPoint &point, int passmarkIndex) const;
+    static PassmarkStatus GetSeamPassmarkSAPoint(VPiecePassmarkData passmarkData,
+                                                   const QVector<QPointF> &seamAllowance, QPointF &point);
 
     bool IsPassmarkVisible(const QVector<VPieceNode> &path, int passmarkIndex) const;
 
     QVector<QLineF> CreatePassmark(const QVector<VPieceNode> &path, int previousIndex, int passmarkIndex, int nextIndex,
-                                   const VContainer *data,
-                                   const QVector<QPointF> &seamAllowance = QVector<QPointF>()) const;
-    QVector<QLineF> SAPassmark(const QVector<VPieceNode> &path, VSAPoint &previousSAPoint,
-                               const VSAPoint &passmarkSAPoint, VSAPoint &nextSAPoint, const VContainer *data,
-                               int passmarkIndex, const QVector<QPointF> &seamAllowance = QVector<QPointF>()) const;
-    QVector<QLineF> BuiltInSAPassmark(const QVector<VPieceNode> &path, const VSAPoint &previousSAPoint,
-                                      const VSAPoint &passmarkSAPoint, const VSAPoint &nextSAPoint,
-                                      const VContainer *data, int passmarkIndex) const;
+                                   const VContainer *data) const;
+
+    static QVector<QLineF> BuiltInSAPassmark(const VPiecePassmarkData &passmarkData);
+    static QVector<QLineF> PassmarkBisector(PassmarkStatus seamPassmarkType, const VPiecePassmarkData &passmarkData,
+                                            const QPointF &seamPassmarkSAPoint, const QVector<QPointF>& seamAllowance);
 
     static int IsCSAStart(const QVector<CustomSARecord> &records, quint32 id);
 

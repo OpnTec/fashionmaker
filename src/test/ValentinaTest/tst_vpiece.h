@@ -40,6 +40,8 @@ public:
 private slots:
     void ClearLoop();
     void Issue620();
+    void TestSAPassmark_data();
+    void TestSAPassmark();
 
 private:
     Q_DISABLE_COPY(TST_VPiece)

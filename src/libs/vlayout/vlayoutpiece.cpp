@@ -399,8 +399,7 @@ VLayoutPiece VLayoutPiece::Create(const VPiece &piece, const VContainer *pattern
     QFuture<QVector<QPointF> > futureSeamAllowance = QtConcurrent::run(piece, &VPiece::SeamAllowancePoints, pattern);
     QFuture<QVector<QPointF> > futureMainPath = QtConcurrent::run(piece, &VPiece::MainPathPoints, pattern);
     QFuture<QVector<VLayoutPiecePath> > futureInternalPaths = QtConcurrent::run(ConvertInternalPaths, piece, pattern);
-    QFuture<QVector<QLineF> > futurePassmarksLines = QtConcurrent::run(piece, &VPiece::PassmarksLines, pattern,
-                                                                       QVector<QPointF>());
+    QFuture<QVector<QLineF> > futurePassmarksLines = QtConcurrent::run(piece, &VPiece::PassmarksLines, pattern);
     QFuture<QVector<VLayoutPlaceLabel> > futurePlaceLabels = QtConcurrent::run(ConvertPlaceLabels, piece, pattern);
 
     VLayoutPiece det;

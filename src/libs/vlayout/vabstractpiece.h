@@ -69,6 +69,10 @@ public:
                      void           SetAngleType(PieceNodeAngle value);
 
     qreal MaxLocalSA(qreal width) const;
+    qreal PassmarkLength(qreal width) const;
+
+    static const qreal passmarkFactor;
+    static const qreal maxPassmarkLength;
 
 private:
     qreal          m_before;
@@ -188,7 +192,7 @@ public:
     static QVector<QPointF> CheckLoops(const QVector<QPointF> &points);
     static QVector<QPointF> EkvPoint(QVector<QPointF> points, const VSAPoint &p1Line1, VSAPoint p2Line1,
                                      const VSAPoint &p1Line2, VSAPoint p2Line2, qreal width,
-                                     int *needRollback = nullptr);
+                                     bool *needRollback = nullptr);
     static QLineF           ParallelLine(const VSAPoint &p1, const VSAPoint &p2, qreal width);
 
     template <class T>
@@ -197,6 +201,8 @@ public:
     template <class T>
     static QVector<T> CorrectEquidistantPoints(const QVector<T> &points, bool removeFirstAndLast = true);
 
+    static QVector<QPointF> RollbackSeamAllowance(QVector<QPointF> points, const QLineF &cuttingEdge, bool *success);
+
 protected:
     template <class T>
     static QVector<T> RemoveDublicates(const QVector<T> &points, bool removeFirstAndLast = true);
@@ -204,7 +210,6 @@ protected:
     static bool       IsEkvPointOnLine(const VSAPoint &iPoint, const VSAPoint &prevPoint, const VSAPoint &nextPoint);
 
     static QPainterPath PlaceLabelImgPath(const PlaceLabelImg &img);
-
 private:
     QSharedDataPointer<VAbstractPieceData> d;
 };

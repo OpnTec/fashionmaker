@@ -45,6 +45,7 @@
 #include <QStringList>
 #include <QVector>
 #include <QtGlobal>
+#include <QLineF>
 
 #include "logging.h"
 #include "vsysexits.h"
@@ -80,6 +81,35 @@ void AbstractTest::Comparison(const QPointF &result, const QPointF &expected) co
             .arg(result.x()).arg(result.y()).arg(expected.x()).arg(expected.y());
     // Check each point. Don't use comparison float values
     QVERIFY2(VFuzzyComparePoints(result, expected), qUtf8Printable(msg));
+}
+
+
+//---------------------------------------------------------------------------------------------------------------------
+void AbstractTest::Comparison(const QVector<QLineF> &result, const QVector<QLineF> &expected) const
+{
+    // Begin comparison
+    QCOMPARE(result.size(), expected.size());// First check if sizes equal
+
+    for (int i=0; i < result.size(); i++)
+    {
+        const QLineF &line1 = result.at(i);
+        const QLineF &line2 = expected.at(i);
+        // Check each point. Don't use comparison float values
+        QVERIFY2(VFuzzyComparePoints(line1.p1(), line2.p1()) && VFuzzyComparePoints(line1.p2(), line2.p2()),
+                 qUtf8Printable(
+                     QStringLiteral("Index: %1. Got line '(%2;%3):(%4;%5)', Expected line '(%6;%7):(%8;%9)'.")
+                     .arg(i)
+                     .arg(line1.p1().x())
+                     .arg(line1.p1().y())
+                     .arg(line1.p2().x())
+                     .arg(line1.p2().y())
+                     .arg(line2.p1().x())
+                     .arg(line2.p1().y())
+                     .arg(line2.p2().x())
+                     .arg(line2.p2().y())
+                     )
+                 );
+    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
