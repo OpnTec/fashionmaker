@@ -32,6 +32,9 @@
      </item>
      <item>
       <widget class="QLineEdit" name="lineEditFind">
+       <property name="toolTip">
+        <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Search final measurements by term. &lt;/p&gt;&lt;p&gt;Prepend &amp;quot;/r/&amp;quot; to the front of the search string to search final measurements by regex.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+       </property>
        <property name="placeholderText">
         <string>Search</string>
        </property>
@@ -446,8 +449,8 @@
   </customwidget>
  </customwidgets>
  <resources>
-  <include location="../../../libs/vmisc/share/resources/theme.qrc"/>
   <include location="../../../libs/vmisc/share/resources/icon.qrc"/>
+  <include location="../../../libs/vmisc/share/resources/theme.qrc"/>
  </resources>
  <connections>
   <connection>
