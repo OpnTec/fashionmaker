@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<vit>
+    <!--Measurements created with Valentina v0.6.0.433a (https://valentinaproject.bitbucket.io/).-->
+    <version>0.4.0</version>
+    <read-only>false</read-only>
+    <notes/>
+    <unit>cm</unit>
+    <pm_system>998</pm_system>
+    <personal>
+        <customer/>
+        <birth-date>1800-01-01</birth-date>
+        <gender>unknown</gender>
+        <email/>
+    </personal>
+    <body-measurements>
+        <m full_name="Полуобхват шеи" name="@Сш" value="13.9"/>
+        <m full_name="Полуобхват груди третий" name="@СгІІІ" value="28"/>
+        <m full_name="Полуобхват талии" name="@Ст" value="25.8"/>
+        <m full_name="Полуобхват бедер" name="@Сб" value="30.5"/>
+        <m full_name="Длина спины до талии" name="@Дтс" value="27.2"/>
+        <m full_name="Высота плеча косая" name="@Впк" value="28.9"/>
+        <m full_name="Ширина спины" name="@Шс" value="12.6"/>
+        <m full_name="Ширина плечевого ската" name="@Шп" value="8.6"/>
+        <m full_name="Ширина груди" name="@Шг" value="11"/>
+        <m full_name="Обхват плеча" name="@Оп" value="17.6"/>
+        <m full_name="Расстояние от линии талии до пола сбоку" name="@Дсб" value="65.5"/>
+        <m full_name="Высота подъягодичной складки" name="@Впс" value="45.9"/>
+        <m full_name="Длина рукава" name="@Др" value="14.5"/>
+        <m description=" По шкале длин или по модели." full_name="Длина изделия (блуза)" name="@Ди" value="42"/>
+        <m name="@Шр" value="26"/>
+        <m name="@Дрлок" value="15"/>
+        <m name="@Вк" value="28.7"/>
+        <m full_name="Длина изделия (штаны)" name="@Диш" value="22"/>
+    </body-measurements>
+</vit>
