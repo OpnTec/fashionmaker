@@ -322,7 +322,7 @@ enum class GSizes : unsigned char { ALL,
 # define __has_cpp_attribute(x) 0
 #endif
 
-#if __cplusplus > 201402L && __has_cpp_attribute(fallthrough)
+#if __cplusplus >= 201703L && __has_cpp_attribute(fallthrough)
 #   define V_FALLTHROUGH [[fallthrough]];
 #elif defined(Q_CC_CLANG) && __cplusplus >= 201103L
     /* clang's fallthrough annotations are only available starting in C++11. */

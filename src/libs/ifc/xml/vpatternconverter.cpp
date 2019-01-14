@@ -165,7 +165,7 @@ Q_GLOBAL_STATIC_WITH_ARGS(const QString, strUserDefined, (QLatin1String("userDef
 Q_GLOBAL_STATIC_WITH_ARGS(const QString, strPlacement, (QLatin1String("placement")))
 Q_GLOBAL_STATIC_WITH_ARGS(const QString, strCutNumber, (QLatin1String("cutNumber")))
 Q_GLOBAL_STATIC_WITH_ARGS(const QString, strQuantity, (QLatin1String("quantity")))
-}
+} // anonymous namespace
 
 //---------------------------------------------------------------------------------------------------------------------
 VPatternConverter::VPatternConverter(const QString &fileName)
@@ -1090,12 +1090,12 @@ QSet<QString> VPatternConverter::FixIncrementsToV0_2_0()
     QSet<QString> names;
     const QDomElement incr = TagIncrementsV0_1_4();
     QDomNode domNode = incr.firstChild();
-    while (domNode.isNull() == false)
+    while (not domNode.isNull())
     {
         if (domNode.isElement())
         {
             QDomElement domElement = domNode.toElement();
-            if (domElement.isNull() == false)
+            if (not domElement.isNull())
             {
                 if (domElement.tagName() == *strIncrement)
                 {
