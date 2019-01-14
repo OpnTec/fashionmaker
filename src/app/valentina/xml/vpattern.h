@@ -108,9 +108,13 @@ public:
     bool IsReadOnly() const;
     void SetReadOnly(bool rOnly);
 
+    QString GetLabelPrefix() const;
+    void    SetLabelPrefix(const QString &prefix);
+
     void LiteParseIncrements();
 
     static const QString AttrReadOnly;
+    static const QString AttrLabelPrefix;
 
     int ElementsToParse() const;
 

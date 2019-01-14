@@ -108,6 +108,21 @@ DialogPatternProperties::DialogPatternProperties(VPattern *doc,  VContainer *pat
     ui->pushButtonShowInExplorer->setText(tr("Show in Finder"));
 #endif //defined(Q_OS_MAC)
 
+    //----------------------- Label language
+    for (auto &name : VApplication::LabelLanguages())
+    {
+        ui->comboBoxLabelLanguage->addItem(QLocale(name).nativeLanguageName(), name);
+    }
+
+    int index = ui->comboBoxLabelLanguage->findData(qApp->ValentinaSettings()->GetLabelLanguage());
+    if (index != -1)
+    {
+        ui->comboBoxLabelLanguage->setCurrentIndex(index);
+    }
+
+    connect(ui->comboBoxLabelLanguage, QOverload<int>::of(&QComboBox::currentIndexChanged), this,
+            &DialogPatternProperties::DescEdited);
+
     ui->plainTextEditDescription->setPlainText(doc->GetDescription());
     connect(ui->plainTextEditDescription, &QPlainTextEdit::textChanged, this, &DialogPatternProperties::DescEdited);
 
@@ -568,6 +583,7 @@ void DialogPatternProperties::SaveDescription()
     {
         doc->SetNotes(ui->plainTextEditTechNotes->document()->toPlainText());
         doc->SetDescription(ui->plainTextEditDescription->document()->toPlainText());
+        doc->SetLabelPrefix(qvariant_cast<QString>(ui->comboBoxLabelLanguage->currentData()));
 
         descriptionChanged = false;
     }

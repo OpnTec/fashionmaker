@@ -622,14 +622,14 @@ void VApplication::InitOptions()
 //---------------------------------------------------------------------------------------------------------------------
 QStringList VApplication::LabelLanguages()
 {
-    QStringList list = QStringList() << "de" // German
-                                     << "en" // English
-                                     << "fr" // French
-                                     << "ru" // Russian
-                                     << "uk" // Ukrainian
-                                     << "hr" // Croatian
-                                     << "sr" // Serbian
-                                     << "bs"; // Bosnian
+    QStringList list {"de",  // German
+                      "en",  // English
+                      "fr",  // French
+                      "ru",  // Russian
+                      "uk",  // Ukrainian
+                      "hr",  // Croatian
+                      "sr",  // Serbian
+                      "bs"}; // Bosnian
     return list;
 }
 

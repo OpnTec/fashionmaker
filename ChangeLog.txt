@@ -6,6 +6,7 @@
 - [#651] Improve feature: Layout orientation according to grainline.
 - New command line option --landscapeOrientation.
 - Added ability to search measurements by regex.
+- [#927] Freeze prefix language on pattern/project creation.
 
 # Version 0.6.2 (unreleased)
 - [#903] Bug in tool Cut Spline path.

@@ -73,14 +73,16 @@
     #include <functional>
 #endif /* Q_CC_MSVC */
 
-const QString VPattern::AttrReadOnly = QStringLiteral("readOnly");
+const QString VPattern::AttrReadOnly    = QStringLiteral("readOnly");
+const QString VPattern::AttrLabelPrefix = QStringLiteral("labelPrefix");
 
 namespace
 {
 //---------------------------------------------------------------------------------------------------------------------
 QString FileComment()
 {
-    return QString("Pattern created with Valentina v%1 (https://valentinaproject.bitbucket.io/).").arg(APP_VERSION_STR);
+    return QStringLiteral("Pattern created with Valentina v%1 (https://valentinaproject.bitbucket.io/).")
+            .arg(APP_VERSION_STR);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -88,7 +90,18 @@ void GatherCount(int &count, const int nodes)
 {
     count += nodes;
 }
+
+//---------------------------------------------------------------------------------------------------------------------
+QString DefLabelLanguage()
+{
+    QString def = qApp->ValentinaSettings()->GetLabelLanguage();
+    if (not VApplication::LabelLanguages().toSet().contains(def))
+    {
+        def = QStringLiteral("en");
+    }
+    return def;
 }
+} // anonymous namespace
 
 //---------------------------------------------------------------------------------------------------------------------
 VPattern::VPattern(VContainer *data, VMainGraphicsScene *sceneDraw, VMainGraphicsScene *sceneDetail, QObject *parent)
@@ -106,6 +119,7 @@ void VPattern::CreateEmptyFile()
 {
     this->clear();
     QDomElement patternElement = this->createElement(TagPattern);
+    SetAttribute(patternElement, AttrLabelPrefix, DefLabelLanguage());
 
     patternElement.appendChild(createComment(FileComment()));
 
@@ -1290,10 +1304,8 @@ void VPattern::ParseCurrentPP()
 //---------------------------------------------------------------------------------------------------------------------
 QString VPattern::GetLabelBase(quint32 index) const
 {
-    const QStringList list = VApplication::LabelLanguages();
-    const QString def = QStringLiteral("A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,U,V,W,X,Y,Z");
     QStringList alphabet;
-    switch (list.indexOf(qApp->ValentinaSettings()->GetLabelLanguage()))
+    switch (VApplication::LabelLanguages().indexOf(GetLabelPrefix()))
     {
         case 0: // de
         {
@@ -1335,7 +1347,8 @@ QString VPattern::GetLabelBase(quint32 index) const
         case 1: // en
         default: // en
         {
-            alphabet = def.split(QChar(','));
+            const QString al = QStringLiteral("A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,U,V,W,X,Y,Z");
+            alphabet = al.split(QChar(','));
             break;
         }
     }
@@ -4204,6 +4217,34 @@ void VPattern::SetReadOnly(bool rOnly)
             pattern.removeAttribute(AttrReadOnly);
         }
         modified = true;
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QString VPattern::GetLabelPrefix() const
+{
+    const QDomElement pattern = documentElement();
+
+    if (pattern.isNull())
+    {
+        return DefLabelLanguage();
+    }
+
+    return GetParametrString(pattern, AttrLabelPrefix, DefLabelLanguage());
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VPattern::SetLabelPrefix(const QString &prefix)
+{
+    QDomElement pattern = documentElement();
+
+    if (not pattern.isNull())
+    {
+        if (VApplication::LabelLanguages().toSet().contains(prefix))
+        {
+            SetAttribute(pattern, AttrLabelPrefix, prefix);
+            modified = true;
+        }
     }
 }
 
