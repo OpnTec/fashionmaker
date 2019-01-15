@@ -1076,6 +1076,7 @@ void TMainWindow::SavePMSystem(int index)
 //---------------------------------------------------------------------------------------------------------------------
 void TMainWindow::Remove()
 {
+    ShowMDiagram("");
     const int row = ui->tableWidget->currentRow();
 
     if (row == -1)
