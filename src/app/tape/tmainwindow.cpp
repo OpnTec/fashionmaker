@@ -96,7 +96,6 @@ TMainWindow::TMainWindow(QWidget *parent)
       labelGradationHeights(nullptr),
       labelGradationSizes(nullptr),
       labelPatternUnit(nullptr),
-      dockDiagramVisible(true),
       isInitialized(false),
       mIsReadOnly(false),
       recentFileActs(QVector<QAction *>(MaxRecentFiles)),
@@ -585,27 +584,6 @@ void TMainWindow::changeEvent(QEvent *event)
 
     // remember to call base class implementation
     QMainWindow::changeEvent(event);
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void TMainWindow::showEvent(QShowEvent *event)
-{
-    QMainWindow::showEvent( event );
-    if ( event->spontaneous() )
-    {
-        return;
-    }
-
-    if (isInitialized)
-    {
-        return;
-    }
-    // do your init stuff here
-
-    dockDiagramVisible = ui->dockWidgetDiagram->isVisible();
-    ui->dockWidgetDiagram->setVisible(false);
-
-    isInitialized = true;//first show windows are held
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -2024,7 +2002,6 @@ void TMainWindow::InitWindow()
     SCASSERT(m != nullptr)
     ui->labelToolTip->setVisible(false);
     ui->tabWidget->setVisible(true);
-    ui->actionMeasurementDiagram->setEnabled(true);
     ui->tabWidget->setCurrentIndex(0);
 
     ui->plainTextEditNotes->setEnabled(true);

@@ -40,7 +40,7 @@
 namespace Ui
 {
     class TMainWindow;
-}
+} // namespace Ui
 
 class QLabel;
 class QxtCsvModel;
@@ -69,7 +69,6 @@ public slots:
 protected:
     virtual void closeEvent(QCloseEvent *event) override;
     virtual void changeEvent(QEvent* event) override;
-    virtual void showEvent(QShowEvent *event) override;
     virtual bool eventFilter(QObject *object, QEvent *event) override;
     virtual void ExportToCSVData(const QString &fileName, bool withHeader, int mib,
                                  const QChar &separator) final;
@@ -149,8 +148,6 @@ private:
     QLabel *labelGradationHeights;
     QLabel *labelGradationSizes;
     QLabel *labelPatternUnit;
-    QAction *actionDockDiagram;
-    bool dockDiagramVisible;
     bool isInitialized;
     bool mIsReadOnly;
     enum { MaxRecentFiles = 5 };

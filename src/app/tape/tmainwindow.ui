@@ -839,7 +839,7 @@
      <x>0</x>
      <y>0</y>
      <width>835</width>
-     <height>18</height>
+     <height>22</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuFile">
@@ -1213,7 +1213,7 @@
     <bool>true</bool>
    </property>
    <property name="enabled">
-    <bool>false</bool>
+    <bool>true</bool>
    </property>
    <property name="icon">
     <iconset resource="share/resources/tapeicon.qrc">
@@ -1221,6 +1221,9 @@
    </property>
    <property name="text">
     <string>Measurement diagram</string>
+   </property>
+   <property name="menuRole">
+    <enum>QAction::NoRole</enum>
    </property>
   </action>
  </widget>
@@ -1243,12 +1246,28 @@
    <slot>setVisible(bool)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>764</x>
-     <y>377</y>
+     <x>-1</x>
+     <y>-1</y>
     </hint>
     <hint type="destinationlabel">
      <x>764</x>
      <y>377</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>dockWidgetDiagram</sender>
+   <signal>visibilityChanged(bool)</signal>
+   <receiver>actionMeasurementDiagram</receiver>
+   <slot>setChecked(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>734</x>
+     <y>384</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>-1</x>
+     <y>-1</y>
     </hint>
    </hints>
   </connection>
