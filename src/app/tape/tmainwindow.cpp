@@ -2935,11 +2935,6 @@ void TMainWindow::UpdateRecentFileActions()
         recentFileActs.at(i)->setVisible(true);
     }
 
-    for(auto &recentFileAct : recentFileActs)
-    {
-        recentFileAct->setVisible(false);
-    }
-
     separatorAct->setVisible(numRecentFiles>0);
 }
 
