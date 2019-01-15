@@ -96,7 +96,6 @@ TMainWindow::TMainWindow(QWidget *parent)
       labelGradationHeights(nullptr),
       labelGradationSizes(nullptr),
       labelPatternUnit(nullptr),
-      actionDockDiagram(nullptr),
       dockDiagramVisible(true),
       isInitialized(false),
       mIsReadOnly(false),
@@ -1997,12 +1996,6 @@ void TMainWindow::SetupMenu()
     connect(ui->actionAddKnown, &QAction::triggered, this, &TMainWindow::AddKnown);
     connect(ui->actionDatabase, &QAction::triggered, qApp, &MApplication::ShowDataBase);
     connect(ui->actionImportFromPattern, &QAction::triggered, this, &TMainWindow::ImportFromPattern);
-    actionDockDiagram = ui->dockWidgetDiagram->toggleViewAction();
-    actionDockDiagram->setMenuRole(QAction::NoRole);
-    ui->menuMeasurements->addAction(actionDockDiagram);
-    ui->mainToolBar->addAction(actionDockDiagram);
-    actionDockDiagram->setEnabled(false);
-    actionDockDiagram->setIcon(QIcon("://tapeicon/24x24/mannequin.png"));
 
     // Window
     connect(ui->menuWindow, &QMenu::aboutToShow, this, &TMainWindow::AboutToShowWindowMenu);
@@ -2031,8 +2024,7 @@ void TMainWindow::InitWindow()
     SCASSERT(m != nullptr)
     ui->labelToolTip->setVisible(false);
     ui->tabWidget->setVisible(true);
-    ui->dockWidgetDiagram->setVisible(dockDiagramVisible);
-    actionDockDiagram->setEnabled(true);
+    ui->actionMeasurementDiagram->setEnabled(true);
     ui->tabWidget->setCurrentIndex(0);
 
     ui->plainTextEditNotes->setEnabled(true);

@@ -839,7 +839,7 @@
      <x>0</x>
      <y>0</y>
      <width>835</width>
-     <height>22</height>
+     <height>18</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuFile">
@@ -884,6 +884,7 @@
     <addaction name="actionAddCustom"/>
     <addaction name="actionDatabase"/>
     <addaction name="actionImportFromPattern"/>
+    <addaction name="actionMeasurementDiagram"/>
    </widget>
    <addaction name="menuFile"/>
    <addaction name="menuMeasurements"/>
@@ -914,6 +915,7 @@
    <addaction name="actionSave"/>
    <addaction name="actionAddKnown"/>
    <addaction name="actionAddCustom"/>
+   <addaction name="actionMeasurementDiagram"/>
   </widget>
   <widget class="QStatusBar" name="statusBar"/>
   <widget class="QToolBar" name="toolBarGradation">
@@ -1206,6 +1208,21 @@
     <string>Import from CSV</string>
    </property>
   </action>
+  <action name="actionMeasurementDiagram">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
+   <property name="icon">
+    <iconset resource="share/resources/tapeicon.qrc">
+     <normaloff>:/tapeicon/24x24/mannequin.png</normaloff>:/tapeicon/24x24/mannequin.png</iconset>
+   </property>
+   <property name="text">
+    <string>Measurement diagram</string>
+   </property>
+  </action>
  </widget>
  <layoutdefault spacing="6" margin="11"/>
  <customwidgets>
@@ -1218,5 +1235,22 @@
  <resources>
   <include location="share/resources/tapeicon.qrc"/>
  </resources>
- <connections/>
+ <connections>
+  <connection>
+   <sender>actionMeasurementDiagram</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>dockWidgetDiagram</receiver>
+   <slot>setVisible(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>764</x>
+     <y>377</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>764</x>
+     <y>377</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
 </ui>
