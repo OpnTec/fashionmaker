@@ -116,10 +116,11 @@ VToolSeamAllowance *VToolSeamAllowance::Create(VToolSeamAllowanceInitData &initD
 {
     if (initData.typeCreation == Source::FromGui || initData.typeCreation == Source::FromTool)
     {
-        initData.data->AddVariable(currentSeamAllowance, new VIncrement(initData.data, currentSeamAllowance, 0,
-                                                                        initData.detail.GetSAWidth(),
-                                                                        initData.width, true,
-                                                                        tr("Current seam allowance")));
+        auto currentSA = new VIncrement(initData.data, currentSeamAllowance);
+        currentSA->SetFormula(initData.detail.GetSAWidth(), initData.width, true);
+        currentSA->SetDescription(tr("Current seam allowance"));
+
+        initData.data->AddVariable(currentSeamAllowance, currentSA);
         initData.id = initData.data->AddPiece(initData.detail);
     }
     else
@@ -127,9 +128,11 @@ VToolSeamAllowance *VToolSeamAllowance::Create(VToolSeamAllowanceInitData &initD
         const qreal calcWidth = CheckFormula(initData.id, initData.width, initData.data);
         initData.detail.SetFormulaSAWidth(initData.width, calcWidth);
 
-        initData.data->AddVariable(currentSeamAllowance, new VIncrement(initData.data, currentSeamAllowance, 0,
-                                                                        calcWidth, initData.width, true,
-                                                                        tr("Current seam allowance")));
+        auto currentSA = new VIncrement(initData.data, currentSeamAllowance);
+        currentSA->SetFormula(calcWidth, initData.width, true);
+        currentSA->SetDescription(tr("Current seam allowance"));
+
+        initData.data->AddVariable(currentSeamAllowance, currentSA);
 
         initData.data->UpdatePiece(initData.id, initData.detail);
         if (initData.parse != Document::FullParse)

@@ -44,29 +44,24 @@ class VIncrementData : public QSharedData
 public:
 
     VIncrementData()
-        : index(NULL_ID),
-          formula(QString()),
-          formulaOk(false),
-          previewCalculation(false),
-          data()
+        : index(NULL_ID)
     {}
 
-    VIncrementData(VContainer *data, quint32 index, const QString &formula, bool ok)
-        : index(index),
-          formula(formula),
-          formulaOk(ok),
-          previewCalculation(false),
-          data(QSharedPointer<VContainer>(new VContainer(*data)))
+    VIncrementData(VContainer *data, IncrementType incrType)
+        : data(QSharedPointer<VContainer>(new VContainer(*data))),
+          incrType(incrType)
     {
         // When we create an increment in the dialog it will get neccesary data. Such data must be removed because will
         // confuse a user. Increment should not know nothing about internal variables.
-        Q_STATIC_ASSERT_X(static_cast<int>(VarType::Unknown) == 8, "Check that you used all types");
+        Q_STATIC_ASSERT_X(static_cast<int>(VarType::Unknown) == 9, "Check that you used all types");
         this->data->ClearVariables(QVector<VarType>({VarType::LineAngle,
                                                      VarType::LineLength,
                                                      VarType::CurveLength,
                                                      VarType::CurveCLength,
                                                      VarType::ArcRadius,
-                                                     VarType::CurveAngle}));
+                                                     VarType::CurveAngle,
+                                                     VarType::IncrementSeparator
+                                                    }));
     }
 
     VIncrementData(const VIncrementData &incr)
@@ -75,7 +70,8 @@ public:
           formula(incr.formula),
           formulaOk(incr.formulaOk),
           previewCalculation(incr.previewCalculation),
-          data(incr.data)
+          data(incr.data),
+          incrType(incr.incrType)
     {}
 
     virtual  ~VIncrementData();
@@ -83,9 +79,10 @@ public:
     /** @brief id each increment have unique identificator */
     quint32 index;
     QString formula;
-    bool    formulaOk;
-    bool    previewCalculation;
+    bool    formulaOk{false};
+    bool    previewCalculation{false};
     QSharedPointer<VContainer> data;
+    IncrementType incrType{IncrementType::Increment};
 
 private:
     VIncrementData &operator=(const VIncrementData &) Q_DECL_EQ_DELETE;

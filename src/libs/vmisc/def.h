@@ -262,8 +262,13 @@ enum class Vis : ToolVisHolderType
     LAST_ONE_DO_NOT_USE //add new stuffs above this, this constant must be last and never used
 };
 
-enum class VarType : char { Measurement, Increment, LineLength, CurveLength, CurveCLength, LineAngle, CurveAngle,
-                            ArcRadius, Unknown };
+enum class VarType : char { Measurement, Increment, IncrementSeparator, LineLength, CurveLength, CurveCLength,
+                            LineAngle, CurveAngle, ArcRadius, Unknown };
+
+enum class IncrementType : char { Increment, Separator };
+
+QString       IncrementTypeToString(IncrementType type);
+IncrementType StringToIncrementType(const QString &value);
 
 static const int heightStep = 6;
 enum class GHeights : unsigned char { ALL,
@@ -433,6 +438,8 @@ extern const QString strIntersectionOnlyRight;
 extern const QString strIntersection2;
 extern const QString strIntersection2OnlyLeft;
 extern const QString strIntersection2OnlyRight;
+extern const QString strTypeIncrement;
+extern const QString strTypeSeparator;
 
 extern const QString unitMM;
 extern const QString unitCM;

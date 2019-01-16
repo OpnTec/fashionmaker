@@ -47,8 +47,7 @@ class VIncrement :public VVariable
 {
 public:
     VIncrement();
-    VIncrement(VContainer *data, const QString &name, quint32 index, qreal base, const QString &formula, bool ok,
-               const QString &description = QString());
+    VIncrement(VContainer *data, const QString &name, IncrementType incrType = IncrementType::Increment);
     VIncrement(const VIncrement &incr);
 
     virtual ~VIncrement() override;
@@ -61,10 +60,15 @@ public:
     inline void Swap(VIncrement &incr) Q_DECL_NOTHROW
     { VVariable::Swap(incr); std::swap(d, incr.d); }
 
-    quint32     getIndex() const;
-    QString     GetFormula() const;
-    bool        IsFormulaOk() const;
-    VContainer *GetData();
+    void    SetFormula(qreal base, const QString &formula, bool ok);
+    QString GetFormula() const;
+    bool    IsFormulaOk() const;
+
+    void    SetIndex(quint32 index);
+    quint32 GetIndex() const;
+
+    VContainer   *GetData();
+    IncrementType GetIncrementType() const;
 
     bool IsPreviewCalculation() const;
     void SetPreviewCalculation(bool value);

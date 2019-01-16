@@ -541,14 +541,16 @@ PassmarkLineType StringToPassmarkLineType(const QString &value)
     return PassmarkLineType::OneLine;
 }
 
-const QString strStraightforward       = QStringLiteral("straightforward");
-const QString strBisector              = QStringLiteral("bisector");
-const QString strIntersection          = QStringLiteral("intersection");
-const QString strIntersectionOnlyLeft  = QStringLiteral("intersectionLeft");
-const QString strIntersectionOnlyRight = QStringLiteral("intersectionRight");
+const QString strStraightforward        = QStringLiteral("straightforward");
+const QString strBisector               = QStringLiteral("bisector");
+const QString strIntersection           = QStringLiteral("intersection");
+const QString strIntersectionOnlyLeft   = QStringLiteral("intersectionLeft");
+const QString strIntersectionOnlyRight  = QStringLiteral("intersectionRight");
 const QString strIntersection2          = QStringLiteral("intersection2");
 const QString strIntersection2OnlyLeft  = QStringLiteral("intersection2Left");
 const QString strIntersection2OnlyRight = QStringLiteral("intersection2Right");
+const QString strTypeIncrement          = QStringLiteral("increment");
+const QString strTypeSeparator          = QStringLiteral("separator");
 
 //---------------------------------------------------------------------------------------------------------------------
 QString PassmarkAngleTypeToString(PassmarkAngleType type)
@@ -742,4 +744,37 @@ QDataStream &operator>>(QDataStream &in, CustomSARecord &record)
     in >> record.reverse;
     in >> record.includeType;
     return in;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QString IncrementTypeToString(IncrementType type)
+{
+    switch(type)
+    {
+        case IncrementType::Increment:
+            return strTypeIncrement;
+        case IncrementType::Separator:
+            return strTypeSeparator;
+        default:
+            break;
+    }
+
+    return strTypeIncrement;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+IncrementType StringToIncrementType(const QString &value)
+{
+    const QStringList values { strTypeIncrement, strTypeSeparator };
+
+    switch(values.indexOf(value))
+    {
+        case 0:
+            return IncrementType::Increment;
+        case 1:
+            return IncrementType::Separator;
+        default:
+            break;
+    }
+    return IncrementType::Increment;
 }

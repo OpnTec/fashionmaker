@@ -69,6 +69,7 @@ protected:
 private slots:
     void ShowIncrementDetails();
     void AddIncrement();
+    void AddSeparator();
     void RemoveIncrement();
     void MoveUp();
     void MoveDown();
@@ -139,6 +140,9 @@ private:
     void CacheRename(const QString &name, const QString &newName);
 
     void ShowTableIncrementDetails(QTableWidget *table);
+
+    void InitIncrementVarTypeMenu();
+    void InitPreviewCalculationVarTypeMenu();
 };
 
 #endif // DIALOGINCREMENTS_H

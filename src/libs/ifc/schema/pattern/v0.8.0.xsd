@@ -140,9 +140,10 @@
             <xs:sequence minOccurs="0" maxOccurs="unbounded">
               <xs:element name="increment" minOccurs="0" maxOccurs="unbounded">
                 <xs:complexType>
-                  <xs:attribute name="description" type="xs:string" use="required"/>
+                  <xs:attribute name="description" type="xs:string"/>
                   <xs:attribute name="name" type="shortName" use="required"/>
-                  <xs:attribute name="formula" type="xs:string" use="required"/>
+                  <xs:attribute name="formula" type="xs:string"/>
+                  <xs:attribute name="type" type="incrementType"/>
                 </xs:complexType>
               </xs:element>
             </xs:sequence>
@@ -153,9 +154,10 @@
             <xs:sequence minOccurs="0" maxOccurs="unbounded">
               <xs:element name="increment" minOccurs="0" maxOccurs="unbounded">
                 <xs:complexType>
-                  <xs:attribute name="description" type="xs:string" use="required"/>
+                  <xs:attribute name="description" type="xs:string"/>
                   <xs:attribute name="name" type="shortName" use="required"/>
-                  <xs:attribute name="formula" type="xs:string" use="required"/>
+                  <xs:attribute name="formula" type="xs:string"/>
+                  <xs:attribute name="type" type="incrementType"/>
                 </xs:complexType>
               </xs:element>
             </xs:sequence>
@@ -1094,6 +1096,12 @@
       <xs:enumeration value="hr"/>
       <xs:enumeration value="sr"/>
       <xs:enumeration value="bs"/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="incrementType">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="increment"/>
+      <xs:enumeration value="separator"/>
     </xs:restriction>
   </xs:simpleType>
 </xs:schema>

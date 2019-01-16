@@ -735,9 +735,12 @@ void DialogPiecePath::EvalWidth()
     if (m_saWidth >= 0)
     {
         VContainer *locData = const_cast<VContainer *> (data);
-        locData->AddVariable(currentSeamAllowance, new VIncrement(locData, currentSeamAllowance, 0, m_saWidth,
-                                                                  QString().setNum(m_saWidth), true,
-                                                                  tr("Current seam aloowance")));
+
+        auto currentSA = new VIncrement(locData, currentSeamAllowance);
+        currentSA->SetFormula(m_saWidth, QString().setNum(m_saWidth), true);
+        currentSA->SetDescription(tr("Current seam allowance"));
+
+        locData->AddVariable(currentSeamAllowance, currentSA);
 
         EvalWidthBefore();
         EvalWidthAfter();

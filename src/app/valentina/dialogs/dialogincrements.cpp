@@ -44,6 +44,7 @@
 #include <QSettings>
 #include <QTableWidgetItem>
 #include <QtNumeric>
+#include <QMenu>
 
 #define DIALOG_MAX_FORMULA_HEIGHT 64
 
@@ -107,15 +108,17 @@ DialogIncrements::DialogIncrements(VContainer *data, VPattern *doc, QWidget *par
     connect(this->doc, &VPattern::FullUpdateFromFile, this, &DialogIncrements::FullUpdateFromFile);
 
     ui->tabWidget->setCurrentIndex(0);
-    ui->lineEditName->setValidator( new QRegularExpressionValidator(QRegularExpression(
-                                                                        QLatin1String("^$|")+NameRegExp()), this));
-    ui->lineEditNamePC->setValidator( new QRegularExpressionValidator(QRegularExpression(
-                                                                        QLatin1String("^$|")+NameRegExp()), this));
+    auto validator = new QRegularExpressionValidator(QRegularExpression(QStringLiteral("^$|")+NameRegExp()), this);
+    ui->lineEditName->setValidator(validator);
+    ui->lineEditNamePC->setValidator(validator);
 
     connect(ui->tableWidgetIncrement, &QTableWidget::itemSelectionChanged, this,
             &DialogIncrements::ShowIncrementDetails);
     connect(ui->tableWidgetPC, &QTableWidget::itemSelectionChanged, this,
             &DialogIncrements::ShowIncrementDetails);
+
+    InitIncrementVarTypeMenu();
+    InitPreviewCalculationVarTypeMenu();
 
     connect(ui->toolButtonAdd, &QToolButton::clicked, this, &DialogIncrements::AddIncrement);
     connect(ui->toolButtonAddPC, &QToolButton::clicked, this, &DialogIncrements::AddIncrement);
@@ -181,13 +184,13 @@ DialogIncrements::DialogIncrements(VContainer *data, VPattern *doc, QWidget *par
  */
 void DialogIncrements::FillIncrements(bool freshCall)
 {
-    FillIncrementsTable(ui->tableWidgetIncrement, data->DataIncrements(), false, freshCall);
+    FillIncrementsTable(ui->tableWidgetIncrement, data->DataIncrementsWithSeparators(), false, freshCall);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void DialogIncrements::FillPreviewCalculations(bool freshCall)
 {
-    FillIncrementsTable(ui->tableWidgetPC, data->DataIncrements(), true, freshCall);
+    FillIncrementsTable(ui->tableWidgetPC, data->DataIncrementsWithSeparators(), true, freshCall);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -553,6 +556,33 @@ void DialogIncrements::EnableDetails(QTableWidget *table, bool enabled)
         ui->plainTextEditDescriptionPC->setEnabled(enabled);
         ui->plainTextEditFormulaPC->setEnabled(enabled);
     }
+
+    if (table->rowCount() > 0)
+    {
+        const QTableWidgetItem *nameField = table->item(table->currentRow(), 0);
+        SCASSERT(nameField != nullptr)
+        QSharedPointer<VIncrement> incr = data->GetVariable<VIncrement>(nameField->text());
+        const bool isSeparator = incr->GetIncrementType() == IncrementType::Separator;
+
+        if (table == ui->tableWidgetIncrement)
+        {
+            ui->labelCalculated->setVisible(not isSeparator);
+            ui->labelCalculatedValue->setVisible(not isSeparator);
+            ui->labelFormula->setVisible(not isSeparator);
+            ui->plainTextEditFormula->setVisible(not isSeparator);
+            ui->pushButtonGrow->setVisible(not isSeparator);
+            ui->toolButtonExpr->setVisible(not isSeparator);
+        }
+        else if (table == ui->tableWidgetPC)
+        {
+            ui->labelCalculatedPC->setVisible(not isSeparator);
+            ui->labelCalculatedValuePC->setVisible(not isSeparator);
+            ui->labelFormulaPC->setVisible(not isSeparator);
+            ui->plainTextEditFormulaPC->setVisible(not isSeparator);
+            ui->pushButtonGrowPC->setVisible(not isSeparator);
+            ui->toolButtonExprPC->setVisible(not isSeparator);
+        }
+    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -693,6 +723,54 @@ void DialogIncrements::ShowTableIncrementDetails(QTableWidget *table)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void DialogIncrements::InitIncrementVarTypeMenu()
+{
+    auto varTypeMenu = ui->toolButtonAdd->menu();
+    if (varTypeMenu == nullptr)
+    {
+        varTypeMenu = new QMenu(this);
+    }
+    else
+    {
+        varTypeMenu->clear();
+    }
+
+    QAction *action = varTypeMenu->addAction(tr("Increment"));
+    action->setData(true); // Increments tab
+    connect(action, &QAction::triggered, this, &DialogIncrements::AddIncrement);
+
+    action = varTypeMenu->addAction(tr("Separator"));
+    action->setData(true); // Increments tab
+    connect(action, &QAction::triggered, this, &DialogIncrements::AddSeparator);
+
+    ui->toolButtonAdd->setMenu(varTypeMenu);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogIncrements::InitPreviewCalculationVarTypeMenu()
+{
+    auto varTypeMenu = ui->toolButtonAddPC->menu();
+    if (varTypeMenu == nullptr)
+    {
+        varTypeMenu = new QMenu(this);
+    }
+    else
+    {
+        varTypeMenu->clear();
+    }
+
+    QAction *action = varTypeMenu->addAction(tr("Preview calculation"));
+    action->setData(false); // Preview calculation tab
+    connect(action, &QAction::triggered, this, &DialogIncrements::AddIncrement);
+
+    action = varTypeMenu->addAction(tr("Separator"));
+    action->setData(false); // Preview calculation tab
+    connect(action, &QAction::triggered, this, &DialogIncrements::AddSeparator);
+
+    ui->toolButtonAddPC->setMenu(varTypeMenu);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 /**
  * @brief FullUpdateFromFile update information in tables form file
  */
@@ -765,10 +843,10 @@ void DialogIncrements::FillIncrementsTable(QTableWidget *table,
     //Sorting QHash by id
     for (i = increments.constBegin(); i != increments.constEnd(); ++i)
     {
-        QSharedPointer<VIncrement> incr = i.value();
+        const QSharedPointer<VIncrement>& incr = i.value();
         if (takePreviewCalculations == incr->IsPreviewCalculation())
         {
-            map.insert(incr->getIndex(), i.key());
+            map.insert(incr->GetIndex(), i.key());
         }
     }
 
@@ -778,16 +856,30 @@ void DialogIncrements::FillIncrementsTable(QTableWidget *table,
     while (iMap.hasNext())
     {
         iMap.next();
-        QSharedPointer<VIncrement> incr = increments.value(iMap.value());
-        currentRow++;
+        const QSharedPointer<VIncrement> &incr = increments.value(iMap.value());
+        ++currentRow;
 
-        AddCell(table, incr->GetName(), currentRow, 0, Qt::AlignVCenter); // name
-        AddCell(table, qApp->LocaleToString(*incr->GetValue()), currentRow, 1,
-                Qt::AlignHCenter | Qt::AlignVCenter, incr->IsFormulaOk()); // calculated value
+        if (incr->GetType() == VarType::Increment)
+        {
+            AddCell(table, incr->GetName(), currentRow, 0, Qt::AlignVCenter); // name
+            AddCell(table, qApp->LocaleToString(*incr->GetValue()), currentRow, 1, Qt::AlignCenter,
+                    incr->IsFormulaOk()); // calculated value
 
-        QString formula = VTranslateVars::TryFormulaToUser(incr->GetFormula(), qApp->Settings()->GetOsSeparator());
+            QString formula = VTranslateVars::TryFormulaToUser(incr->GetFormula(), qApp->Settings()->GetOsSeparator());
 
-        AddCell(table, formula, currentRow, 2, Qt::AlignVCenter); // formula
+            AddCell(table, formula, currentRow, 2, Qt::AlignVCenter); // formula
+
+            if (table->columnSpan(currentRow, 1) > 1)
+            {
+                table->setSpan(currentRow, 1, 1, 1);
+            }
+        }
+        else if (incr->GetType() == VarType::IncrementSeparator)
+        {
+            AddCell(table, incr->GetName(), currentRow, 0, Qt::AlignVCenter); // name
+            AddCell(table, incr->GetDescription(), currentRow, 1, Qt::AlignCenter); // name
+            table->setSpan(currentRow, 1, 1, 2);
+        }
     }
 
     if (freshCall)
@@ -807,21 +899,24 @@ void DialogIncrements::AddIncrement()
 {
     qCDebug(vDialog, "Add new increment");
 
-    QToolButton *button = qobject_cast<QToolButton *>(sender());
-    QTableWidget *table = nullptr;
+    auto *button = qobject_cast<QToolButton *>(sender());
+    auto *action = qobject_cast<QAction *>(sender());
+    bool incrementMode = true;
 
-    if (button == ui->toolButtonAdd)
+    if (button == ui->toolButtonAdd || ((action != nullptr) && action->data().toBool()))
     {
-        table = ui->tableWidgetIncrement;
+        incrementMode = true;
     }
-    else if (button == ui->toolButtonAddPC)
+    else if (button == ui->toolButtonAddPC || ((action != nullptr) && not action->data().toBool()))
     {
-        table = ui->tableWidgetPC;
+        incrementMode = false;
     }
     else
     {
         return;
     }
+
+    QTableWidget *table = incrementMode ? ui->tableWidgetIncrement : ui->tableWidgetPC;
 
     const QString name = GetCustomName();
     qint32 currentRow = -1;
@@ -829,29 +924,55 @@ void DialogIncrements::AddIncrement()
     if (table->currentRow() == -1)
     {
         currentRow = table->rowCount();
-
-        if (button == ui->toolButtonAdd)
-        {
-            doc->AddEmptyIncrement(name);
-        }
-        else if (button == ui->toolButtonAddPC)
-        {
-            doc->AddEmptyPreviewCalculation(name);
-        }
+        incrementMode ? doc->AddEmptyIncrement(name) : doc->AddEmptyPreviewCalculation(name);
     }
     else
     {
         currentRow  = table->currentRow()+1;
         const QTableWidgetItem *nameField = table->item(table->currentRow(), 0);
 
-        if (button == ui->toolButtonAdd)
-        {
-            doc->AddEmptyIncrementAfter(nameField->text(), name);
-        }
-        else if (button == ui->toolButtonAddPC)
-        {
-            doc->AddEmptyPreviewCalculationAfter(nameField->text(), name);
-        }
+        incrementMode ? doc->AddEmptyIncrementAfter(nameField->text(), name) :
+                        doc->AddEmptyPreviewCalculationAfter(nameField->text(), name);
+    }
+
+    hasChanges = true;
+    LocalUpdateTree();
+
+    table->selectRow(currentRow);
+    table->repaint(); // Force repain to fix paint artifacts on Mac OS X
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogIncrements::AddSeparator()
+{
+    qCDebug(vDialog, "Add new increment");
+
+    auto *action = qobject_cast<QAction *>(sender());
+    if (action == nullptr)
+    {
+        return;
+    }
+
+    const bool incrementMode = action->data().toBool();
+
+    QTableWidget *table = incrementMode ? ui->tableWidgetIncrement : ui->tableWidgetPC;
+
+    const QString name = GetCustomName();
+    qint32 currentRow = -1;
+    const IncrementType type = IncrementType::Separator;
+
+    if (table->currentRow() == -1)
+    {
+        currentRow = table->rowCount();
+        incrementMode ? doc->AddEmptyIncrement(name, type) : doc->AddEmptyPreviewCalculation(name, type);
+    }
+    else
+    {
+        currentRow  = table->currentRow()+1;
+        const QTableWidgetItem *nameField = table->item(table->currentRow(), 0);
+
+        incrementMode ? doc->AddEmptyIncrementAfter(nameField->text(), name, type) :
+                        doc->AddEmptyPreviewCalculationAfter(nameField->text(), name, type);
     }
 
     hasChanges = true;
@@ -905,22 +1026,14 @@ void DialogIncrements::RemoveIncrement()
     hasChanges = true;
     LocalUpdateTree();
 
-    if (table->rowCount() > 0)
-    {
-        table->selectRow(0);
-    }
-    else
-    {
-        EnableDetails(table, false);
-    }
-
+    table->rowCount() > 0 ? table->selectRow(0) : EnableDetails(table, false);
     table->repaint(); // Force repain to fix paint artifacts on Mac OS X
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void DialogIncrements::MoveUp()
 {
-    QToolButton *button = qobject_cast<QToolButton *>(sender());
+    auto *button = qobject_cast<QToolButton *>(sender());
 
     QTableWidget *table = nullptr;
 
@@ -1166,6 +1279,11 @@ void DialogIncrements::SaveIncrFormula()
     }
 
     QSharedPointer<VIncrement> incr = data->GetVariable<VIncrement>(nameField->text());
+    if (incr->GetIncrementType() == IncrementType::Separator)
+    {
+        return;
+    }
+
     if (not EvalIncrementFormula(text, true, incr->GetData(), labelCalculatedValue))
     {
         return;
@@ -1334,6 +1452,8 @@ void DialogIncrements::changeEvent(QEvent *event)
     {
         // retranslate designer form (single inheritance approach)
         ui->retranslateUi(this);
+        InitIncrementVarTypeMenu();
+        InitPreviewCalculationVarTypeMenu();
         FullUpdateFromFile();
     }
     // remember to call base class implementation

@@ -436,7 +436,10 @@ void VPattern::LiteParseIncrements()
         emit SetEnabledGUI(true);
 
         data->ClearUniqueIncrementNames();
+
+        Q_STATIC_ASSERT_X(static_cast<int>(VarType::Unknown) == 9, "Check that you used all types");
         data->ClearVariables(VarType::Increment);
+        data->ClearVariables(VarType::IncrementSeparator);
 
         QDomNodeList tags = elementsByTagName(TagIncrements);
         if (not tags.isEmpty())
@@ -3294,12 +3297,14 @@ qreal VPattern::EvalFormula(VContainer *data, const QString &formula, bool *ok) 
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QDomElement VPattern::MakeEmptyIncrement(const QString &name)
+QDomElement VPattern::MakeEmptyIncrement(const QString &name, IncrementType type)
 {
     QDomElement element = createElement(TagIncrement);
     SetAttribute(element, AttrName, name);
-    SetAttribute(element, AttrFormula, QChar('0'));
-    SetAttribute(element, AttrDescription, QString());
+    if (type != IncrementType::Increment)
+    {
+        SetAttribute(element, AttrType, IncrementTypeToString(type));
+    }
     return element;
 }
 
@@ -3311,7 +3316,7 @@ QDomElement VPattern::FindIncrement(const QString &name) const
     for (int i=0; i < list.size(); ++i)
     {
         const QDomElement domElement = list.at(i).toElement();
-        if (domElement.isNull() == false)
+        if (not domElement.isNull())
         {
             const QString parameter = domElement.attribute(AttrName);
             if (parameter == name)
@@ -3374,9 +3379,9 @@ void VPattern::GarbageCollector(bool commit)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VPattern::NewEmptyIncrement(const QString &type, const QString &name)
+void VPattern::NewEmptyIncrement(const QString &type, const QString &name, IncrementType varType)
 {
-    const QDomElement element = MakeEmptyIncrement(name);
+    const QDomElement element = MakeEmptyIncrement(name, varType);
 
     const QDomNodeList list = elementsByTagName(type);
     list.at(0).appendChild(element);
@@ -3384,9 +3389,10 @@ void VPattern::NewEmptyIncrement(const QString &type, const QString &name)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VPattern::NewEmptyIncrementAfter(const QString &type, const QString &after, const QString &name)
+void VPattern::NewEmptyIncrementAfter(const QString &type, const QString &after, const QString &name,
+                                      IncrementType varType)
 {
-    const QDomElement element = MakeEmptyIncrement(name);
+    const QDomElement element = MakeEmptyIncrement(name, varType);
     const QDomElement sibling = FindIncrement(after);
 
     const QDomNodeList list = elementsByTagName(type);
@@ -3763,26 +3769,31 @@ void VPattern::ParseIncrementsElement(const QDomNode &node, const Document &pars
 {
     int index = 0;
     QDomNode domNode = node.firstChild();
-    while (domNode.isNull() == false)
+    while (not domNode.isNull())
     {
         if (domNode.isElement())
         {
             const QDomElement domElement = domNode.toElement();
-            if (domElement.isNull() == false)
+            if (not domElement.isNull())
             {
                 if (domElement.tagName() == TagIncrement)
                 {
                     const QString name = GetParametrString(domElement, AttrName, QString());
                     const QString desc = GetParametrEmptyString(domElement, AttrDescription);
-                    const QString formula = GetParametrString(domElement, AttrFormula, QChar('0'));
+                    const IncrementType type = StringToIncrementType(GetParametrString(domElement, AttrType,
+                                                                                       strTypeIncrement));
+                    const QString formula = (type == IncrementType::Separator) ?
+                                QChar('0') : GetParametrString(domElement, AttrFormula, QChar('0'));
+
                     bool ok = false;
                     const qreal value = EvalFormula(data, formula, &ok);
 
-                    VIncrement *increment = new VIncrement(data, name, static_cast<quint32>(index), value, formula, ok,
-                                                           desc);
+                    VIncrement *increment = new VIncrement(data, name, type);
+                    increment->SetIndex(static_cast<quint32>(index++));
+                    increment->SetFormula(value, formula, ok);
+                    increment->SetDescription(desc);
                     increment->SetPreviewCalculation(node.toElement().tagName() == TagPreviewCalculations);
                     data->AddVariable(name, increment);
-                    ++index;
                 }
             }
         }
@@ -3796,27 +3807,27 @@ void VPattern::ParseIncrementsElement(const QDomNode &node, const Document &pars
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VPattern::AddEmptyIncrement(const QString &name)
+void VPattern::AddEmptyIncrement(const QString &name, IncrementType type)
 {
-    NewEmptyIncrement(TagIncrements, name);
+    NewEmptyIncrement(TagIncrements, name, type);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VPattern::AddEmptyPreviewCalculation(const QString &name)
+void VPattern::AddEmptyPreviewCalculation(const QString &name, IncrementType type)
 {
-    NewEmptyIncrement(TagPreviewCalculations, name);
+    NewEmptyIncrement(TagPreviewCalculations, name, type);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VPattern::AddEmptyIncrementAfter(const QString &after, const QString &name)
+void VPattern::AddEmptyIncrementAfter(const QString &after, const QString &name, IncrementType type)
 {
-    NewEmptyIncrementAfter(TagIncrements, after, name);
+    NewEmptyIncrementAfter(TagIncrements, after, name, type);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VPattern::AddEmptyPreviewCalculationAfter(const QString &after, const QString &name)
+void VPattern::AddEmptyPreviewCalculationAfter(const QString &after, const QString &name, IncrementType type)
 {
-    NewEmptyIncrementAfter(TagPreviewCalculations, after, name);
+    NewEmptyIncrementAfter(TagPreviewCalculations, after, name, type);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -4273,7 +4284,7 @@ void VPattern::PrepareForParse(const Document &parse)
     }
     else if (parse == Document::LiteParse || parse == Document::FullLiteParse)
     {
-        Q_STATIC_ASSERT_X(static_cast<int>(VarType::Unknown) == 8, "Check that you used all types");
+        Q_STATIC_ASSERT_X(static_cast<int>(VarType::Unknown) == 9, "Check that you used all types");
         QVector<VarType> types({VarType::LineAngle,
                                 VarType::LineLength,
                                 VarType::CurveLength,
@@ -4283,6 +4294,7 @@ void VPattern::PrepareForParse(const Document &parse)
         if (parse == Document::FullLiteParse)
         {
             types.append(VarType::Increment);
+            types.append(VarType::IncrementSeparator);
         }
 
         data->ClearVariables(types);

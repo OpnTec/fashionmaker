@@ -1541,7 +1541,7 @@ void MainWindow::ExportToCSVData(const QString &fileName, bool withHeader, int m
             const QSharedPointer<VIncrement> incr = i.value();
             if (incr->IsPreviewCalculation() == save)
             {
-                map.insert(incr->getIndex(), i.key());
+                map.insert(incr->GetIndex(), i.key());
             }
         }
 

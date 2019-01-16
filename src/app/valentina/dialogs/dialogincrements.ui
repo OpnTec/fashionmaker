@@ -35,9 +35,6 @@
        <verstretch>0</verstretch>
       </sizepolicy>
      </property>
-     <property name="toolTip">
-      <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Search preview calculations by term. &lt;/p&gt;&lt;p&gt;Prepend &amp;quot;/r/&amp;quot; to the front of the search string to search preview calculations by regex.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-     </property>
      <property name="tabPosition">
       <enum>QTabWidget::North</enum>
      </property>
@@ -278,6 +275,9 @@
                 <iconset theme="list-add">
                  <normaloff>.</normaloff>.</iconset>
                </property>
+               <property name="popupMode">
+                <enum>QToolButton::MenuButtonPopup</enum>
+               </property>
               </widget>
              </item>
              <item alignment="Qt::AlignLeft">
@@ -511,6 +511,9 @@
          </item>
          <item>
           <widget class="QLineEdit" name="lineEditFindPC">
+           <property name="toolTip">
+            <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Search preview calculations by term. &lt;/p&gt;&lt;p&gt;Prepend &amp;quot;/r/&amp;quot; to the front of the search string to search preview calculations by regex.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+           </property>
            <property name="placeholderText">
             <string>Search</string>
            </property>
@@ -720,6 +723,9 @@
                 <iconset theme="list-add">
                  <normaloff>.</normaloff>.</iconset>
                </property>
+               <property name="popupMode">
+                <enum>QToolButton::MenuButtonPopup</enum>
+               </property>
               </widget>
              </item>
              <item alignment="Qt::AlignLeft">
@@ -756,7 +762,7 @@
             </widget>
            </item>
            <item row="4" column="0">
-            <widget class="QLabel" name="labelCalculated_2">
+            <widget class="QLabel" name="labelCalculatedPC">
              <property name="text">
               <string>Calculated value:</string>
              </property>
@@ -770,7 +776,7 @@
             </widget>
            </item>
            <item row="5" column="0">
-            <widget class="QLabel" name="labelFormula_2">
+            <widget class="QLabel" name="labelFormulaPC">
              <property name="text">
               <string>Formula:</string>
              </property>
@@ -1202,8 +1208,8 @@
   <tabstop>tableWidgetSplines</tabstop>
  </tabstops>
  <resources>
-  <include location="../../../libs/vmisc/share/resources/icon.qrc"/>
   <include location="../../../libs/vmisc/share/resources/theme.qrc"/>
+  <include location="../../../libs/vmisc/share/resources/icon.qrc"/>
  </resources>
  <connections/>
 </ui>

@@ -46,15 +46,11 @@ VIncrement::VIncrement()
 /**
  * @brief VIncrementTableRow create increment
  * @param name increment's name
- * @param base value
- * @param description description of increment
  */
-VIncrement::VIncrement(VContainer *data, const QString &name, quint32 index, qreal base, const QString &formula,
-                       bool ok, const QString &description)
-    :VVariable(name, description), d(new VIncrementData(data, index, formula, ok))
+VIncrement::VIncrement(VContainer *data, const QString &name, IncrementType incrType)
+    :VVariable(name, QString()), d(new VIncrementData(data, incrType))
 {
-    SetType(VarType::Increment);
-    VInternalVariable::SetValue(base);
+    incrType == IncrementType::Separator ? SetType(VarType::IncrementSeparator) : SetType(VarType::Increment);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -84,9 +80,17 @@ VIncrement::~VIncrement()
  * using.
  * @return index
  */
-quint32 VIncrement::getIndex() const
+quint32 VIncrement::GetIndex() const
 {
     return d->index;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VIncrement::SetFormula(qreal base, const QString &formula, bool ok)
+{
+    VInternalVariable::SetValue(base);
+    d->formula = formula;
+    d->formulaOk = ok;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -102,9 +106,21 @@ bool VIncrement::IsFormulaOk() const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void VIncrement::SetIndex(quint32 index)
+{
+    d->index = index;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 VContainer *VIncrement::GetData()
 {
     return d->data.data();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+IncrementType VIncrement::GetIncrementType() const
+{
+    return d->incrType;
 }
 
 //---------------------------------------------------------------------------------------------------------------------

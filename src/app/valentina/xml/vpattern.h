@@ -72,11 +72,13 @@ public:
 
     QRectF         ActiveDrawBoundingRect() const;
 
-    void AddEmptyIncrement(const QString &name);
-    void AddEmptyPreviewCalculation(const QString &name);
+    void AddEmptyIncrement(const QString &name, IncrementType type = IncrementType::Increment);
+    void AddEmptyPreviewCalculation(const QString &name, IncrementType type = IncrementType::Increment);
 
-    void AddEmptyIncrementAfter(const QString &after, const QString &name);
-    void AddEmptyPreviewCalculationAfter(const QString &after, const QString &name);
+    void AddEmptyIncrementAfter(const QString &after, const QString &name,
+                                IncrementType type = IncrementType::Increment);
+    void AddEmptyPreviewCalculationAfter(const QString &after, const QString &name,
+                                         IncrementType type = IncrementType::Increment);
 
     void RemoveIncrement(const QString &name);
     void RemovePreviewCalculation(const QString &name);
@@ -240,11 +242,11 @@ private:
 
     qreal EvalFormula(VContainer *data, const QString &formula, bool *ok) const;
 
-    QDomElement MakeEmptyIncrement(const QString &name);
+    QDomElement MakeEmptyIncrement(const QString &name, IncrementType type);
     QDomElement FindIncrement(const QString &name) const;
 
-    void NewEmptyIncrement(const QString &type, const QString &name);
-    void NewEmptyIncrementAfter(const QString &type, const QString &after, const QString &name);
+    void NewEmptyIncrement(const QString &type, const QString &name, IncrementType varType);
+    void NewEmptyIncrementAfter(const QString &type, const QString &after, const QString &name, IncrementType varType);
     void RemoveIncrement(const QString &type, const QString &name);
     void MoveUpIncrement(const QString &type, const QString &name);
     void MoveDownIncrement(const QString &type, const QString &name);

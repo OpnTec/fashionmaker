@@ -7,6 +7,7 @@
 - New command line option --landscapeOrientation.
 - Added ability to search measurements by regex.
 - [#927] Freeze prefix language on pattern/project creation.
+- [#929] New variable type: Separator.
 
 # Version 0.6.2 (unreleased)
 - [#903] Bug in tool Cut Spline path.
