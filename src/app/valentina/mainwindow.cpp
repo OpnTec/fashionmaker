@@ -4432,7 +4432,7 @@ void MainWindow::InitAutoSave()
 //---------------------------------------------------------------------------------------------------------------------
 QString MainWindow::PatternPieceName(const QString &text)
 {
-    QInputDialog *dlg = new QInputDialog(this);
+    QScopedPointer<QInputDialog> dlg(new QInputDialog(this));
     dlg->setInputMode( QInputDialog::TextInput );
     dlg->setLabelText(tr("Pattern piece:"));
     dlg->setTextEchoMode(QLineEdit::Normal);
@@ -4444,17 +4444,16 @@ QString MainWindow::PatternPieceName(const QString &text)
     {
         const bool bOk = dlg->exec();
         nameDraw = dlg->textValue();
-        if (bOk == false || nameDraw.isEmpty())
+        if (bOk == false || nameDraw.isEmpty() || text == nameDraw)
         {
-            delete dlg;
             return QString();
         }
+
         if (comboBoxDraws->findText(nameDraw) == -1)
         {
             break;//repeate show dialog
         }
     }
-    delete dlg;
     return nameDraw;
 }
 
