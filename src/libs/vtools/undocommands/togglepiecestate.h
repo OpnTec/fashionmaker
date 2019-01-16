@@ -47,7 +47,7 @@ public:
     virtual void undo() override;
     virtual void redo() override;
 signals:
-    void UpdateList();
+    void Toggled(quint32 id);
 private:
     Q_DISABLE_COPY(TogglePieceInLayout)
     quint32     m_id;

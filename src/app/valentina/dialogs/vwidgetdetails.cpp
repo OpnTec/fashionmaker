@@ -82,6 +82,27 @@ void VWidgetDetails::SelectDetail(quint32 id)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void VWidgetDetails::ToggledPiece(quint32 id)
+{
+    const QHash<quint32, VPiece> *details = m_data->DataPieces();
+    const int rowCount = ui->tableWidget->rowCount();
+    for (int row = 0; row < rowCount; ++row)
+    {
+        QTableWidgetItem *item = ui->tableWidget->item(row, 0);
+
+        if (item->data(Qt::UserRole).toUInt() == id)
+        {
+            if (details->contains(id))
+            {
+                details->value(id).IsInLayout() ? item->setIcon(QIcon("://icon/16x16/allow_detail.png")) :
+                                                  item->setIcon(QIcon("://icon/16x16/forbid_detail.png"));
+            }
+            return;
+        }
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 void VWidgetDetails::InLayoutStateChanged(int row, int column)
 {
     QTableWidgetItem *item = ui->tableWidget->item(row, 0);
@@ -97,7 +118,7 @@ void VWidgetDetails::InLayoutStateChanged(int row, int column)
     const bool inLayout = not allDetails->value(id).IsInLayout();
 
     TogglePieceInLayout *togglePrint = new TogglePieceInLayout(id, inLayout, m_data, m_doc);
-    connect(togglePrint, &TogglePieceInLayout::UpdateList, this, &VWidgetDetails::UpdateList);
+    connect(togglePrint, &TogglePieceInLayout::Toggled, this, &VWidgetDetails::ToggledPiece);
     qApp->getUndoStack()->push(togglePrint);
 }
 
@@ -105,7 +126,7 @@ void VWidgetDetails::InLayoutStateChanged(int row, int column)
 void VWidgetDetails::FillTable(const QHash<quint32, VPiece> *details)
 {
     const int selectedRow = ui->tableWidget->currentRow();
-    ui->tableWidget->clear();
+    ui->tableWidget->clearContents();
 
     ui->tableWidget->setColumnCount(2);
     ui->tableWidget->setRowCount(details->size());
@@ -167,14 +188,13 @@ void VWidgetDetails::ToggleSectionDetails(bool select)
 
     for (int i = 0; i<ui->tableWidget->rowCount(); ++i)
     {
-        QTableWidgetItem *item = ui->tableWidget->item(i, 0);
-        const quint32 id = item->data(Qt::UserRole).toUInt();
+        const quint32 id = ui->tableWidget->item(i, 0)->data(Qt::UserRole).toUInt();
         if (allDetails->contains(id))
         {
             if (not (select == allDetails->value(id).IsInLayout()))
             {
                 TogglePieceInLayout *togglePrint = new TogglePieceInLayout(id, select, m_data, m_doc);
-                connect(togglePrint, &TogglePieceInLayout::UpdateList, this, &VWidgetDetails::UpdateList);
+                connect(togglePrint, &TogglePieceInLayout::Toggled, this, &VWidgetDetails::ToggledPiece);
                 qApp->getUndoStack()->push(togglePrint);
             }
         }
@@ -251,7 +271,7 @@ void VWidgetDetails::ShowContextMenu(const QPoint &pos)
                 select = not allDetails->value(id).IsInLayout();
 
                 TogglePieceInLayout *togglePrint = new TogglePieceInLayout(id, select, m_data, m_doc);
-                connect(togglePrint, &TogglePieceInLayout::UpdateList, this, &VWidgetDetails::UpdateList);
+                connect(togglePrint, &TogglePieceInLayout::Toggled, this, &VWidgetDetails::ToggledPiece);
                 qApp->getUndoStack()->push(togglePrint);
             }
         }

@@ -87,7 +87,7 @@ void TogglePieceInLayout::Do(bool state)
         VPiece det = m_data->DataPieces()->value(m_id);
         det.SetInLayout(state);
         m_data->UpdatePiece(m_id, det);
-        emit UpdateList();
+        emit Toggled(m_id);
     }
     else
     {
