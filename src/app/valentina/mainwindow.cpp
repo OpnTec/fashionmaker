@@ -250,11 +250,11 @@ MainWindow::MainWindow(QWidget *parent)
 
     QAction *actionNewPattern = menu->addAction(tr("New pattern"));
     actionNewPattern->setMenuRole(QAction::NoRole);
-    connect(actionNewPattern, &QAction::triggered, this, &MainWindow::New);
+    connect(actionNewPattern, &QAction::triggered, this, &MainWindow::on_actionNew_triggered);
 
     QAction *actionOpenPattern = menu->addAction(tr("Open pattern"));
     actionOpenPattern->setMenuRole(QAction::NoRole);
-    connect(actionOpenPattern, &QAction::triggered, this, &MainWindow::Open);
+    connect(actionOpenPattern, &QAction::triggered, this, &MainWindow::on_actionOpen_triggered);
 
     QAction *actionOpenTape = menu->addAction(tr("Create/Edit measurements"));
     actionOpenTape->setMenuRole(QAction::NoRole);
