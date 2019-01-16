@@ -44,7 +44,6 @@ class VIncrementData : public QSharedData
 public:
 
     VIncrementData()
-        : index(NULL_ID)
     {}
 
     VIncrementData(VContainer *data, IncrementType incrType)
@@ -77,7 +76,7 @@ public:
     virtual  ~VIncrementData();
 
     /** @brief id each increment have unique identificator */
-    quint32 index;
+    quint32 index{0};
     QString formula;
     bool    formulaOk{false};
     bool    previewCalculation{false};
