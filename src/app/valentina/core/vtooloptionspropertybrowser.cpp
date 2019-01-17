@@ -655,10 +655,10 @@ void VToolOptionsPropertyBrowser::AddPropertyLineColor(Tool *i, const QString &p
 void VToolOptionsPropertyBrowser::AddPropertyApproximationScale(const QString &propertyName, qreal aScale)
 {
     QMap<QString, QVariant> settings;
-    settings.insert(QString("Min"), 0);
-    settings.insert(QString("Max"), maxCurveApproximationScale);
-    settings.insert(QString("Step"), 0.1);
-    settings.insert(QString("Precision"), 1);
+    settings.insert(QStringLiteral("Min"), 0);
+    settings.insert(QStringLiteral("Max"), maxCurveApproximationScale);
+    settings.insert(QStringLiteral("Step"), 0.1);
+    settings.insert(QStringLiteral("Precision"), 1);
 
     VPE::VDoubleProperty *aScaleProperty = new VPE::VDoubleProperty(propertyName, settings);
     aScaleProperty->setValue(aScale);
@@ -1355,14 +1355,16 @@ void VToolOptionsPropertyBrowser::ChangeDataToolPointOfIntersectionArcs(VPE::VPr
 {
     SCASSERT(property != nullptr)
 
-    const QVariant value = property->data(VPE::VProperty::DPC_Data, Qt::DisplayRole);
     const QString id = propertyToId[property];
 
     switch (PropertiesList().indexOf(id))
     {
         case 0: // AttrName
+        {
+            const QVariant value = property->data(VPE::VProperty::DPC_Data, Qt::DisplayRole);
             SetPointName<VToolPointOfIntersectionArcs>(value.toString());
             break;
+        }
         case 28: // AttrCrossPoint
         {
             const QVariant value = property->data(VPE::VProperty::DPC_Data, Qt::EditRole);
@@ -1383,7 +1385,6 @@ void VToolOptionsPropertyBrowser::ChangeDataToolPointOfIntersectionCircles(VPE::
 {
     SCASSERT(property != nullptr)
 
-    const QVariant value = property->data(VPE::VProperty::DPC_Data, Qt::DisplayRole);
     const QString id = propertyToId[property];
 
     VToolPointOfIntersectionCircles *i = qgraphicsitem_cast<VToolPointOfIntersectionCircles *>(currentItem);
@@ -1391,8 +1392,11 @@ void VToolOptionsPropertyBrowser::ChangeDataToolPointOfIntersectionCircles(VPE::
     switch (PropertiesList().indexOf(id))
     {
         case 0: // AttrName
+        {
+            const QVariant value = property->data(VPE::VProperty::DPC_Data, Qt::DisplayRole);
             SetPointName<VToolPointOfIntersectionCircles>(value.toString());
             break;
+        }
         case 28: // AttrCrossPoint
         {
             const QVariant value = property->data(VPE::VProperty::DPC_Data, Qt::EditRole);
@@ -1400,10 +1404,10 @@ void VToolOptionsPropertyBrowser::ChangeDataToolPointOfIntersectionCircles(VPE::
             break;
         }
         case 29: // AttrC1Radius
-            i->SetFirstCircleRadius(value.value<VFormula>());
+            i->SetFirstCircleRadius(property->data(VPE::VProperty::DPC_Data, Qt::DisplayRole).value<VFormula>());
             break;
         case 30: // AttrC2Radius
-            i->SetSecondCircleRadius(value.value<VFormula>());
+            i->SetSecondCircleRadius(property->data(VPE::VProperty::DPC_Data, Qt::DisplayRole).value<VFormula>());
             break;
         case 49: // AttrC1Center (read only)
         case 50: // AttrC2Center (read only)
@@ -1419,14 +1423,16 @@ void VToolOptionsPropertyBrowser::ChangeDataToolPointOfIntersectionCurves(VPE::V
 {
     SCASSERT(property != nullptr)
 
-    const QVariant value = property->data(VPE::VProperty::DPC_Data, Qt::DisplayRole);
     const QString id = propertyToId[property];
 
     switch (PropertiesList().indexOf(id))
     {
         case 0: // AttrName
+        {
+            const QVariant value = property->data(VPE::VProperty::DPC_Data, Qt::DisplayRole);
             SetPointName<VToolPointOfIntersectionCurves>(value.toString());
             break;
+        }
         case 34: // AttrVCrossPoint
         {
             const QVariant value = property->data(VPE::VProperty::DPC_Data, Qt::EditRole);
@@ -1453,7 +1459,6 @@ void VToolOptionsPropertyBrowser::ChangeDataToolPointFromCircleAndTangent(VPE::V
 {
     SCASSERT(property != nullptr)
 
-    const QVariant value = property->data(VPE::VProperty::DPC_Data, Qt::DisplayRole);
     const QString id = propertyToId[property];
 
     VToolPointFromCircleAndTangent *i = qgraphicsitem_cast<VToolPointFromCircleAndTangent *>(currentItem);
@@ -1461,10 +1466,13 @@ void VToolOptionsPropertyBrowser::ChangeDataToolPointFromCircleAndTangent(VPE::V
     switch (PropertiesList().indexOf(id))
     {
         case 0: // AttrName
+        {
+            const QVariant value = property->data(VPE::VProperty::DPC_Data, Qt::DisplayRole);
             SetPointName<VToolPointFromCircleAndTangent>(value.toString());
             break;
+        }
         case 31: // AttrCRadius
-            i->SetCircleRadius(value.value<VFormula>());
+            i->SetCircleRadius(property->data(VPE::VProperty::DPC_Data, Qt::DisplayRole).value<VFormula>());
             break;
         case 28: // AttrCrossPoint
         {
@@ -1486,14 +1494,16 @@ void VToolOptionsPropertyBrowser::ChangeDataToolPointFromArcAndTangent(VPE::VPro
 {
     SCASSERT(property != nullptr)
 
-    const QVariant value = property->data(VPE::VProperty::DPC_Data, Qt::DisplayRole);
     const QString id = propertyToId[property];
 
     switch (PropertiesList().indexOf(id))
     {
         case 0: // AttrName
+        {
+            const QVariant value = property->data(VPE::VProperty::DPC_Data, Qt::DisplayRole);
             SetPointName<VToolPointFromArcAndTangent>(value.toString());
             break;
+        }
         case 28: // AttrCrossPoint
         {
             const QVariant value = property->data(VPE::VProperty::DPC_Data, Qt::EditRole);

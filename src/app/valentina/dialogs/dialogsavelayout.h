@@ -32,10 +32,12 @@
 #include "../vgeometry/vgeometrydef.h"
 #include "vabstractlayoutdialog.h"
 
+#ifndef PDFTOPS
 #ifdef Q_OS_WIN
-#   define PDFTOPS "pdftops.exe"
+#   define PDFTOPS QStringLiteral("pdftops.exe")
 #else
-#   define PDFTOPS "pdftops"
+#   define PDFTOPS QStringLiteral("pdftops")
+#endif
 #endif
 
 namespace Ui

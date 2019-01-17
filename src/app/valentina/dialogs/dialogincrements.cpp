@@ -210,7 +210,7 @@ void DialogIncrements::FillTable(const QMap<QString, T> &varTable, QTableWidget 
 
         QTableWidgetItem *item = new QTableWidgetItem(i.key());
         item->setTextAlignment(Qt::AlignLeft);
-        item->setFont(QFont("Times", 12, QFont::Bold));
+        item->setFont(QFont(QStringLiteral("Times"), 12, QFont::Bold));
         table->setItem(currentRow, 0, item);
 
         item = new QTableWidgetItem(qApp->LocaleToString(length));
@@ -288,7 +288,7 @@ void DialogIncrements::ShowHeaderUnits(QTableWidget *table, int column, const QS
     SCASSERT(table != nullptr)
 
     const QString header = table->horizontalHeaderItem(column)->text();
-    const QString unitHeader = QString("%1 (%2)").arg(header, unit);
+    const QString unitHeader = QStringLiteral("%1 (%2)").arg(header, unit);
     table->horizontalHeaderItem(column)->setText(unitHeader);
 }
 
@@ -615,7 +615,7 @@ bool DialogIncrements::IncrementUsed(const QString &name) const
 {
     const QVector<VFormulaField> expressions = doc->ListExpressions();
 
-    for(auto field : expressions)
+    for(auto &field : expressions)
     {
         if (field.expression.indexOf(name) != -1)
         {
@@ -1159,7 +1159,7 @@ void DialogIncrements::SaveIncrName(const QString &text)
         QString name = newName;
         do
         {
-            name = name + QLatin1String("_") + QString().number(num);
+            name = name + '_' + QString().number(num);
             num++;
         } while (not data->IsUnique(name));
         newName = name;
@@ -1348,15 +1348,15 @@ void DialogIncrements::DeployFormula()
     {
         plainTextEditFormula->setFixedHeight(DIALOG_MAX_FORMULA_HEIGHT);
         //Set icon from theme (internal for Windows system)
-        pushButtonGrow->setIcon(QIcon::fromTheme("go-next",
-                                                  QIcon(":/icons/win.icon.theme/16x16/actions/go-next.png")));
+        pushButtonGrow->setIcon(QIcon::fromTheme(QStringLiteral("go-next"),
+                                                 QIcon(":/icons/win.icon.theme/16x16/actions/go-next.png")));
     }
     else
     {
        plainTextEditFormula->setFixedHeight(baseHeight);
        //Set icon from theme (internal for Windows system)
-       pushButtonGrow->setIcon(QIcon::fromTheme("go-down",
-                                                 QIcon(":/icons/win.icon.theme/16x16/actions/go-down.png")));
+       pushButtonGrow->setIcon(QIcon::fromTheme(QStringLiteral("go-down"),
+                                                QIcon(":/icons/win.icon.theme/16x16/actions/go-down.png")));
     }
 
     // I found that after change size of formula field, it was filed for angle formula, field for formula became black.
@@ -1418,8 +1418,7 @@ void DialogIncrements::Fx()
     {
         // Fix the bug #492. https://bitbucket.org/dismine/valentina/issues/492/valentina-crashes-when-add-an-increment
         // Because of the bug need to take QTableWidgetItem twice time. Previous update "killed" the pointer.
-        const QTableWidgetItem *nameField = table->item(row, 0);
-        doc->SetIncrementFormula(nameField->text(), dialog->GetFormula());
+        doc->SetIncrementFormula(table->item(row, 0)->text(), dialog->GetFormula());
 
         hasChanges = true;
         LocalUpdateTree();
@@ -1482,12 +1481,9 @@ bool DialogIncrements::eventFilter(QObject *object, QEvent *event)
             }
         }
     }
-    else
-    {
-        // pass the event on to the parent class
-        return DialogTool::eventFilter(object, event);
-    }
-    return false;// pass the event to the widget
+
+    // pass the event on to the parent class
+    return DialogTool::eventFilter(object, event);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

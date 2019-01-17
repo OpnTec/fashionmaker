@@ -74,10 +74,12 @@ Q_LOGGING_CATEGORY(vMainNoGUIWindow, "v.mainnoguiwindow")
 
 QT_WARNING_POP
 
+#ifndef PDFTOPS
 #ifdef Q_OS_WIN
-#   define PDFTOPS "pdftops.exe"
+#   define PDFTOPS QStringLiteral("pdftops.exe")
 #else
-#   define PDFTOPS "pdftops"
+#   define PDFTOPS QStringLiteral("pdftops")
+#endif
 #endif
 
 namespace
@@ -314,9 +316,8 @@ void MainWindowsNoGUI::ExportData(const QVector<VLayoutPiece> &listDetails)
         {
             for (int i = 0; i < detailsOnLayout.size(); ++i)
             {
-                const QString name = m_dialogSaveLayout->Path() + QLatin1String("/") + m_dialogSaveLayout->FileName() +
-                        QString::number(i+1)
-                        + DialogSaveLayout::ExportFromatSuffix(m_dialogSaveLayout->Format());
+                const QString name = m_dialogSaveLayout->Path() + '/' + m_dialogSaveLayout->FileName() +
+                        QString::number(i+1) + DialogSaveLayout::ExportFromatSuffix(m_dialogSaveLayout->Format());
 
                 QGraphicsRectItem *paper = qgraphicsitem_cast<QGraphicsRectItem *>(papers.at(i));
                 SCASSERT(paper != nullptr)
@@ -361,7 +362,7 @@ void MainWindowsNoGUI::ExportFlatLayout(const QList<QGraphicsScene *> &scenes,
 
     if (format == LayoutExportFormats::PDFTiled && m_dialogSaveLayout->Mode() == Draw::Layout)
     {
-        const QString name = path + QLatin1String("/") + m_dialogSaveLayout->FileName() + QString::number(1)
+        const QString name = path + '/' + m_dialogSaveLayout->FileName() + QString::number(1)
                 + DialogSaveLayout::ExportFromatSuffix(m_dialogSaveLayout->Format());
         PdfTiledFile(name);
     }
@@ -582,7 +583,7 @@ void MainWindowsNoGUI::ExportDetailsAsApparelLayout(QVector<VLayoutPiece> listDe
         listDetails[i].SetMatrix(moveMatrix);
     }
 
-    const QString name = m_dialogSaveLayout->Path() + QLatin1String("/") + m_dialogSaveLayout->FileName() +
+    const QString name = m_dialogSaveLayout->Path() + '/' + m_dialogSaveLayout->FileName() +
             QString::number(1) + DialogSaveLayout::ExportFromatSuffix(m_dialogSaveLayout->Format());
 
     ExportApparelLayout(listDetails, name, rect.size());
@@ -606,7 +607,7 @@ void MainWindowsNoGUI::PrintPages(QPrinter *printer)
         return;
     }
 
-    painter.setFont( QFont( "Arial", 8, QFont::Normal ) );
+    painter.setFont( QFont( QStringLiteral("Arial"), 8, QFont::Normal ) );
     painter.setRenderHint(QPainter::Antialiasing, true);
     painter.setPen(QPen(Qt::black, qApp->Settings()->WidthMainLine(), Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin));
     painter.setBrush ( QBrush ( Qt::NoBrush ) );
@@ -838,7 +839,7 @@ QIcon MainWindowsNoGUI::ScenePreview(int i) const
         {
             image.fill(Qt::white);
             QPainter painter(&image);
-            painter.setFont( QFont( "Arial", 8, QFont::Normal ) );
+            painter.setFont( QFont( QStringLiteral("Arial"), 8, QFont::Normal ) );
             painter.setRenderHint(QPainter::Antialiasing, true);
             painter.setPen(QPen(Qt::black, qApp->Settings()->WidthMainLine(), Qt::SolidLine, Qt::RoundCap,
                                 Qt::RoundJoin));
@@ -1001,7 +1002,7 @@ void MainWindowsNoGUI::PdfFile(const QString &name, QGraphicsRectItem *paper, QG
         qCritical("%s", qUtf8Printable(tr("Can't open printer %1").arg(name)));
         return;
     }
-    painter.setFont( QFont( "Arial", 8, QFont::Normal ) );
+    painter.setFont( QFont( QStringLiteral("Arial"), 8, QFont::Normal ) );
     painter.setRenderHint(QPainter::Antialiasing, true);
     painter.setPen(QPen(Qt::black, qApp->Settings()->WidthMainLine(), Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin));
     painter.setBrush ( QBrush ( Qt::NoBrush ) );
@@ -1047,7 +1048,7 @@ void MainWindowsNoGUI::EpsFile(const QString &name, QGraphicsRectItem *paper, QG
     if (tmp.open())
     {
         PdfFile(tmp.fileName(), paper, scene, ignorePrinterFields, margins);
-        QStringList params = QStringList() << "-eps" << tmp.fileName() << name;
+        QStringList params = QStringList() << QStringLiteral("-eps") << tmp.fileName() << name;
         PdfToPs(params);
     }
 }
@@ -1415,7 +1416,7 @@ void MainWindowsNoGUI::SetPrinterSettings(QPrinter *printer, const PrintType &pr
             #ifdef Q_OS_WIN
             printer->setOutputFileName(outputFileName);
             #else
-            printer->setOutputFileName(outputFileName + QLatin1String(".pdf"));
+            printer->setOutputFileName(outputFileName + QStringLiteral(".pdf"));
             #endif
 
             #ifdef Q_OS_MAC
@@ -1566,7 +1567,7 @@ void MainWindowsNoGUI::ExportScene(const QList<QGraphicsScene *> &scenes,
         QGraphicsRectItem *paper = qgraphicsitem_cast<QGraphicsRectItem *>(papers.at(i));
         if (paper)
         {
-            const QString name = m_dialogSaveLayout->Path() + QLatin1String("/") + m_dialogSaveLayout->FileName() +
+            const QString name = m_dialogSaveLayout->Path() + '/' + m_dialogSaveLayout->FileName() +
                     QString::number(i+1) + DialogSaveLayout::ExportFromatSuffix(m_dialogSaveLayout->Format());
             QBrush *brush = new QBrush();
             brush->setColor( QColor( Qt::white ) );
@@ -1853,7 +1854,7 @@ void MainWindowsNoGUI::CheckRequiredMeasurements(const VMeasurements *m) const
         }
 
         VException e(tr("Measurement file doesn't include all required measurements."));
-        e.AddMoreInformation(tr("Please, additionally provide: %1").arg(QStringList(list).join(", ")));
+        e.AddMoreInformation(tr("Please, additionally provide: %1").arg(QStringList(list).join(QStringLiteral(", "))));
         throw e;
     }
 }

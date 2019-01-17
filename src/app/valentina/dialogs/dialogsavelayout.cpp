@@ -77,7 +77,7 @@ DialogSaveLayout::DialogSaveLayout(int count, Draw mode, const QString &fileName
 
     ui->lineEditFileName->setValidator( new QRegularExpressionValidator(QRegularExpression(*baseFilenameRegExp), this));
 
-    const QString mask = fileName+QLatin1String("_");
+    const QString mask = fileName + '_';
     if (VApplication::IsGUIMode())
     {
         ui->lineEditFileName->setText(mask);
@@ -301,11 +301,11 @@ bool DialogSaveLayout::IsBinaryDXFFormat() const
 //---------------------------------------------------------------------------------------------------------------------
 QString DialogSaveLayout::MakeHelpFormatList()
 {
-   QString out("\n");
+   QString out(QStringLiteral("\n"));
    const auto formats = InitFormats();
    for(int i = 0; i < formats.size(); ++i)
    {
-       out += QLatin1String("\t* ") + formats.at(i).first + QLatin1String(" = ")
+       out += QStringLiteral("\t* ") + formats.at(i).first + QStringLiteral(" = ")
                + QString::number(static_cast<int>(formats.at(i).second));
 
        if (i < formats.size() - 1)
@@ -363,73 +363,73 @@ QString DialogSaveLayout::ExportFormatDescription(LayoutExportFormats format)
     switch(format)
     {
         case LayoutExportFormats::SVG:
-            return QString("Svg %1 (*.svg)").arg(filesStr);
+            return QStringLiteral("Svg %1 (*.svg)").arg(filesStr);
         case LayoutExportFormats::PDF:
-            return QString("PDF %1 (*.pdf)").arg(filesStr);
+            return QStringLiteral("PDF %1 (*.pdf)").arg(filesStr);
         case LayoutExportFormats::PNG:
-            return tr("Image files") + QLatin1String(" (*.png)");
+            return tr("Image files") + QStringLiteral(" (*.png)");
         case LayoutExportFormats::OBJ:
-            return "Wavefront OBJ (*.obj)";
+            return QStringLiteral("Wavefront OBJ (*.obj)");
         case LayoutExportFormats::PS:
-            return QString("PS %1 (*.ps)").arg(filesStr);
+            return QStringLiteral("PS %1 (*.ps)").arg(filesStr);
         case LayoutExportFormats::EPS:
-            return QString("EPS %1 (*.eps)").arg(filesStr);
+            return QStringLiteral("EPS %1 (*.eps)").arg(filesStr);
         case LayoutExportFormats::DXF_AC1006_Flat:
-            return QString("AutoCAD DXF R10 %1 %2").arg(dxfFlatFilesStr, dxfSuffix);
+            return QStringLiteral("AutoCAD DXF R10 %1 %2").arg(dxfFlatFilesStr, dxfSuffix);
         case LayoutExportFormats::DXF_AC1009_Flat:
-            return QString("AutoCAD DXF R11/12 %1 %2").arg(dxfFlatFilesStr, dxfSuffix);
+            return QStringLiteral("AutoCAD DXF R11/12 %1 %2").arg(dxfFlatFilesStr, dxfSuffix);
         case LayoutExportFormats::DXF_AC1012_Flat:
-            return QString("AutoCAD DXF R13 %1 %2").arg(dxfFlatFilesStr, dxfSuffix);
+            return QStringLiteral("AutoCAD DXF R13 %1 %2").arg(dxfFlatFilesStr, dxfSuffix);
         case LayoutExportFormats::DXF_AC1014_Flat:
-            return QString("AutoCAD DXF R14 %1 %2").arg(dxfFlatFilesStr, dxfSuffix);
+            return QStringLiteral("AutoCAD DXF R14 %1 %2").arg(dxfFlatFilesStr, dxfSuffix);
         case LayoutExportFormats::DXF_AC1015_Flat:
-            return QString("AutoCAD DXF 2000 %1 %2").arg(dxfFlatFilesStr, dxfSuffix);
+            return QStringLiteral("AutoCAD DXF 2000 %1 %2").arg(dxfFlatFilesStr, dxfSuffix);
         case LayoutExportFormats::DXF_AC1018_Flat:
-            return QString("AutoCAD DXF 2004 %1 %2").arg(dxfFlatFilesStr, dxfSuffix);
+            return QStringLiteral("AutoCAD DXF 2004 %1 %2").arg(dxfFlatFilesStr, dxfSuffix);
         case LayoutExportFormats::DXF_AC1021_Flat:
-            return QString("AutoCAD DXF 2007 %1 %2").arg(dxfFlatFilesStr, dxfSuffix);
+            return QStringLiteral("AutoCAD DXF 2007 %1 %2").arg(dxfFlatFilesStr, dxfSuffix);
         case LayoutExportFormats::DXF_AC1024_Flat:
-            return QString("AutoCAD DXF 2010 %1 %2").arg(dxfFlatFilesStr, dxfSuffix);
+            return QStringLiteral("AutoCAD DXF 2010 %1 %2").arg(dxfFlatFilesStr, dxfSuffix);
         case LayoutExportFormats::DXF_AC1027_Flat:
-            return QString("AutoCAD DXF 2013 %1 %2").arg(dxfFlatFilesStr, dxfSuffix);
+            return QStringLiteral("AutoCAD DXF 2013 %1 %2").arg(dxfFlatFilesStr, dxfSuffix);
         case LayoutExportFormats::DXF_AC1006_AAMA:
-            return QString("AutoCAD DXF R10 AAMA %1 %2").arg(filesStr, dxfSuffix);
+            return QStringLiteral("AutoCAD DXF R10 AAMA %1 %2").arg(filesStr, dxfSuffix);
         case LayoutExportFormats::DXF_AC1009_AAMA:
-            return QString("AutoCAD DXF R11/12 AAMA %1 %2").arg(filesStr, dxfSuffix);
+            return QStringLiteral("AutoCAD DXF R11/12 AAMA %1 %2").arg(filesStr, dxfSuffix);
         case LayoutExportFormats::DXF_AC1012_AAMA:
-            return QString("AutoCAD DXF R13 AAMA %1 %2").arg(filesStr, dxfSuffix);
+            return QStringLiteral("AutoCAD DXF R13 AAMA %1 %2").arg(filesStr, dxfSuffix);
         case LayoutExportFormats::DXF_AC1014_AAMA:
-            return QString("AutoCAD DXF R14 AAMA %1 %2").arg(filesStr, dxfSuffix);
+            return QStringLiteral("AutoCAD DXF R14 AAMA %1 %2").arg(filesStr, dxfSuffix);
         case LayoutExportFormats::DXF_AC1015_AAMA:
-            return QString("AutoCAD DXF 2000 AAMA %1 %2").arg(filesStr, dxfSuffix);
+            return QStringLiteral("AutoCAD DXF 2000 AAMA %1 %2").arg(filesStr, dxfSuffix);
         case LayoutExportFormats::DXF_AC1018_AAMA:
-            return QString("AutoCAD DXF 2004 AAMA %1 %2").arg(filesStr, dxfSuffix);
+            return QStringLiteral("AutoCAD DXF 2004 AAMA %1 %2").arg(filesStr, dxfSuffix);
         case LayoutExportFormats::DXF_AC1021_AAMA:
-            return QString("AutoCAD DXF 2007 AAMA %1 %2").arg(filesStr, dxfSuffix);
+            return QStringLiteral("AutoCAD DXF 2007 AAMA %1 %2").arg(filesStr, dxfSuffix);
         case LayoutExportFormats::DXF_AC1024_AAMA:
-            return QString("AutoCAD DXF 2010 AAMA %1 %2").arg(filesStr, dxfSuffix);
+            return QStringLiteral("AutoCAD DXF 2010 AAMA %1 %2").arg(filesStr, dxfSuffix);
         case LayoutExportFormats::DXF_AC1027_AAMA:
-            return QString("AutoCAD DXF 2013 AAMA %1 %2").arg(filesStr, dxfSuffix);
+            return QStringLiteral("AutoCAD DXF 2013 AAMA %1 %2").arg(filesStr, dxfSuffix);
         case LayoutExportFormats::DXF_AC1006_ASTM:
-            return QString("AutoCAD DXF R10 ASTM %1 %2").arg(filesStr, dxfSuffix);
+            return QStringLiteral("AutoCAD DXF R10 ASTM %1 %2").arg(filesStr, dxfSuffix);
         case LayoutExportFormats::DXF_AC1009_ASTM:
-            return QString("AutoCAD DXF R11/12 ASTM %1 %2").arg(filesStr, dxfSuffix);
+            return QStringLiteral("AutoCAD DXF R11/12 ASTM %1 %2").arg(filesStr, dxfSuffix);
         case LayoutExportFormats::DXF_AC1012_ASTM:
-            return QString("AutoCAD DXF R13 ASTM %1 %2").arg(filesStr, dxfSuffix);
+            return QStringLiteral("AutoCAD DXF R13 ASTM %1 %2").arg(filesStr, dxfSuffix);
         case LayoutExportFormats::DXF_AC1014_ASTM:
-            return QString("AutoCAD DXF R14 ASTM %1 %2").arg(filesStr, dxfSuffix);
+            return QStringLiteral("AutoCAD DXF R14 ASTM %1 %2").arg(filesStr, dxfSuffix);
         case LayoutExportFormats::DXF_AC1015_ASTM:
-            return QString("AutoCAD DXF 2000 ASTM %1 %2").arg(filesStr, dxfSuffix);
+            return QStringLiteral("AutoCAD DXF 2000 ASTM %1 %2").arg(filesStr, dxfSuffix);
         case LayoutExportFormats::DXF_AC1018_ASTM:
-            return QString("AutoCAD DXF 2004 ASTM %1 %2").arg(filesStr, dxfSuffix);
+            return QStringLiteral("AutoCAD DXF 2004 ASTM %1 %2").arg(filesStr, dxfSuffix);
         case LayoutExportFormats::DXF_AC1021_ASTM:
-            return QString("AutoCAD DXF 2007 ASTM %1 %2").arg(filesStr, dxfSuffix);
+            return QStringLiteral("AutoCAD DXF 2007 ASTM %1 %2").arg(filesStr, dxfSuffix);
         case LayoutExportFormats::DXF_AC1024_ASTM:
-            return QString("AutoCAD DXF 2010 ASTM %1 %2").arg(filesStr, dxfSuffix);
+            return QStringLiteral("AutoCAD DXF 2010 ASTM %1 %2").arg(filesStr, dxfSuffix);
         case LayoutExportFormats::DXF_AC1027_ASTM:
-            return QString("AutoCAD DXF 2013 ASTM %1 %2").arg(filesStr, dxfSuffix);
+            return QStringLiteral("AutoCAD DXF 2013 ASTM %1 %2").arg(filesStr, dxfSuffix);
         case LayoutExportFormats::PDFTiled:
-            return QString("PDF tiled %1 (*.pdf)").arg(filesStr);
+            return QStringLiteral("PDF tiled %1 (*.pdf)").arg(filesStr);
         default:
             return QString();
     }
@@ -441,18 +441,18 @@ QString DialogSaveLayout::ExportFromatSuffix(LayoutExportFormats format)
     switch(format)
     {
         case LayoutExportFormats::SVG:
-            return ".svg";
+            return QStringLiteral(".svg");
         case LayoutExportFormats::PDF:
         case LayoutExportFormats::PDFTiled:
-            return ".pdf";
+            return QStringLiteral(".pdf");
         case LayoutExportFormats::PNG:
-            return ".png";
+            return QStringLiteral(".png");
         case LayoutExportFormats::OBJ:
-            return ".obj";
+            return QStringLiteral(".obj");
         case LayoutExportFormats::PS:
-            return ".ps";
+            return QStringLiteral(".ps");
         case LayoutExportFormats::EPS:
-            return ".eps";
+            return QStringLiteral(".eps");
         case LayoutExportFormats::DXF_AC1006_Flat:
         case LayoutExportFormats::DXF_AC1009_Flat:
         case LayoutExportFormats::DXF_AC1012_Flat:
@@ -480,7 +480,7 @@ QString DialogSaveLayout::ExportFromatSuffix(LayoutExportFormats format)
         case LayoutExportFormats::DXF_AC1021_ASTM:
         case LayoutExportFormats::DXF_AC1024_ASTM:
         case LayoutExportFormats::DXF_AC1027_ASTM:
-            return ".dxf";
+            return QStringLiteral(".dxf");
         default:
             return QString();
     }
@@ -515,7 +515,7 @@ void DialogSaveLayout::Save()
 {
     for (int i=0; i < count; ++i)
     {
-        const QString name = Path()+QLatin1Literal("/")+FileName()+QString::number(i+1)+ExportFromatSuffix(Format());
+        const QString name = Path()+'/'+FileName()+QString::number(i+1)+ExportFromatSuffix(Format());
         if (QFile::exists(name))
         {
             QMessageBox::StandardButton res = QMessageBox::question(this, tr("Name conflict"),
