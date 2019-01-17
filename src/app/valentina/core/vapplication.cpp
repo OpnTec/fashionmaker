@@ -658,7 +658,11 @@ const VTranslateVars *VApplication::TrVars()
 //---------------------------------------------------------------------------------------------------------------------
 void VApplication::InitTrVars()
 {
-    if (trVars == nullptr)
+    if (trVars != nullptr)
+    {
+        trVars->Retranslate();
+    }
+    else
     {
         trVars = new VTranslateVars();
     }
