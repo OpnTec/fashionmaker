@@ -772,6 +772,11 @@ QString VTranslateVars::PlaceholderFromUserText(QString text) const
 //---------------------------------------------------------------------------------------------------------------------
 QString VTranslateVars::VarToUser(const QString &var) const
 {
+    if (qApp->Settings()->GetLocale() == QStringLiteral("zh_CN"))
+    {
+        return var; // We do not support translation of variables for Chinese
+    }
+
     if (measurements.contains(var))
     {
         return measurements.value(var).translate(qApp->Settings()->GetLocale());
@@ -788,6 +793,11 @@ QString VTranslateVars::VarToUser(const QString &var) const
 //---------------------------------------------------------------------------------------------------------------------
 QString VTranslateVars::VarFromUser(const QString &var) const
 {
+    if (qApp->Settings()->GetLocale() == QStringLiteral("zh_CN"))
+    {
+        return var; // We do not support translation of variables for Chinese
+    }
+
     QString newVar = var;
     int bias = 0;
     if (MeasurementsFromUser(newVar, 0, var, bias))

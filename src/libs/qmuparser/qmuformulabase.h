@@ -43,11 +43,12 @@ public:
 
     virtual void InitCharSets() override;
 
+    void SetSepForTr(bool osSeparator, bool fromUser);
+
     static void RemoveAll(QMap<int, QString> &map, const QString &val);
 
 protected:
     static qreal* AddVariable(const QString &a_szName, void *a_pUserData);
-    void          SetSepForTr(bool osSeparator, bool fromUser);
     void          SetSepForEval();
 private:
     Q_DISABLE_COPY(QmuFormulaBase)

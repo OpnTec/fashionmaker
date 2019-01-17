@@ -59,6 +59,7 @@ protected:
     void CallTestCheckRegExpNames();
     void CallTestCheckIsNamesUnique();
     void CallTestCheckNoOriginalNamesInTranslation();
+    void CallTestForValidCharacters();
 
 private:
     Q_DISABLE_COPY(TST_AbstractRegExp)

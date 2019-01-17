@@ -92,6 +92,8 @@ void TST_MeasurementRegExp::initTestCase()
         QSKIP(qUtf8Printable(message));
     }
 
+    QLocale::setDefault(QLocale(m_locale));
+
     InitTrMs();//Very important do this after loading QM files.
 }
 
@@ -141,6 +143,18 @@ void TST_MeasurementRegExp::TestCheckNoOriginalNamesInTranslation_data()
 void TST_MeasurementRegExp::TestCheckNoOriginalNamesInTranslation()
 {
     CallTestCheckNoOriginalNamesInTranslation();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void TST_MeasurementRegExp::TestForValidChars_data()
+{
+    PrepareData();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void TST_MeasurementRegExp::TestForValidChars()
+{
+    CallTestForValidCharacters();
 }
 
 //---------------------------------------------------------------------------------------------------------------------

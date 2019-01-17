@@ -59,6 +59,8 @@ private slots:
     void TestCheckIsNamesUnique();
     void TestCheckNoOriginalNamesInTranslation_data();
     void TestCheckNoOriginalNamesInTranslation();
+    void TestForValidChars_data();
+    void TestForValidChars();
     void cleanupTestCase();
 
 private:

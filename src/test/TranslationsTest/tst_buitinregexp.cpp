@@ -63,6 +63,8 @@ void TST_BuitInRegExp::initTestCase()
         QSKIP(qUtf8Printable(message));
     }
 
+    QLocale::setDefault(QLocale(m_locale));
+
     InitTrMs();//Very important do this after loading QM files.
 }
 
@@ -260,6 +262,18 @@ void TST_BuitInRegExp::TestTemplatePlaceholders()
     QVERIFY2(issue.isEmpty(), qUtf8Printable(issue.join("")));
     QCOMPARE(originals.size(), labelTemplatePlaceholders.size()); // All tags are unique
     QCOMPARE(translations.size(), labelTemplatePlaceholders.size()); // All translated tags are unique
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void TST_BuitInRegExp::TestForValidChars_data()
+{
+    PrepareData();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void TST_BuitInRegExp::TestForValidChars()
+{
+    CallTestForValidCharacters();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
