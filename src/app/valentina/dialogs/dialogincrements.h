@@ -141,8 +141,9 @@ private:
 
     void ShowTableIncrementDetails(QTableWidget *table);
 
-    void InitIncrementVarTypeMenu();
-    void InitPreviewCalculationVarTypeMenu();
+    QMenu *InitVarTypeMenu(QMenu *menu, bool incrementTab);
+
+    void AddNewIncrement(IncrementType type);
 };
 
 #endif // DIALOGINCREMENTS_H

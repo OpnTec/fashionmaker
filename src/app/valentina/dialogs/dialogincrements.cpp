@@ -117,8 +117,8 @@ DialogIncrements::DialogIncrements(VContainer *data, VPattern *doc, QWidget *par
     connect(ui->tableWidgetPC, &QTableWidget::itemSelectionChanged, this,
             &DialogIncrements::ShowIncrementDetails);
 
-    InitIncrementVarTypeMenu();
-    InitPreviewCalculationVarTypeMenu();
+    ui->toolButtonAdd->setMenu(InitVarTypeMenu(ui->toolButtonAdd->menu(), true /*increments tab*/));
+    ui->toolButtonAddPC->setMenu(InitVarTypeMenu(ui->toolButtonAddPC->menu(), false /*preview calculations tab*/));
 
     connect(ui->toolButtonAdd, &QToolButton::clicked, this, &DialogIncrements::AddIncrement);
     connect(ui->toolButtonAddPC, &QToolButton::clicked, this, &DialogIncrements::AddIncrement);
@@ -723,51 +723,65 @@ void DialogIncrements::ShowTableIncrementDetails(QTableWidget *table)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void DialogIncrements::InitIncrementVarTypeMenu()
+QMenu *DialogIncrements::InitVarTypeMenu(QMenu *menu, bool incrementTab)
 {
-    auto varTypeMenu = ui->toolButtonAdd->menu();
-    if (varTypeMenu == nullptr)
+    if (menu == nullptr)
     {
-        varTypeMenu = new QMenu(this);
+        menu = new QMenu(this);
     }
     else
     {
-        varTypeMenu->clear();
+        menu->clear();
     }
 
-    QAction *action = varTypeMenu->addAction(tr("Increment"));
-    action->setData(true); // Increments tab
+    QAction *action = menu->addAction(tr("Increment"));
+    action->setData(incrementTab); // Increments tab
     connect(action, &QAction::triggered, this, &DialogIncrements::AddIncrement);
 
-    action = varTypeMenu->addAction(tr("Separator"));
-    action->setData(true); // Increments tab
+    action = menu->addAction(tr("Separator"));
+    action->setData(incrementTab); // Increments tab
     connect(action, &QAction::triggered, this, &DialogIncrements::AddSeparator);
 
-    ui->toolButtonAdd->setMenu(varTypeMenu);
+    return menu;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void DialogIncrements::InitPreviewCalculationVarTypeMenu()
+void DialogIncrements::AddNewIncrement(IncrementType type)
 {
-    auto varTypeMenu = ui->toolButtonAddPC->menu();
-    if (varTypeMenu == nullptr)
+    qCDebug(vDialog, "Add new increment");
+
+    auto *action = qobject_cast<QAction *>(sender());
+    if (action == nullptr)
     {
-        varTypeMenu = new QMenu(this);
+        return;
+    }
+
+    const bool incrementMode = action->data().toBool();
+
+    QTableWidget *table = incrementMode ? ui->tableWidgetIncrement : ui->tableWidgetPC;
+
+    const QString name = GetCustomName();
+    qint32 currentRow = -1;
+
+    if (table->currentRow() == -1)
+    {
+        currentRow = table->rowCount();
+        incrementMode ? doc->AddEmptyIncrement(name, type) : doc->AddEmptyPreviewCalculation(name, type);
     }
     else
     {
-        varTypeMenu->clear();
+        currentRow  = table->currentRow()+1;
+        const QTableWidgetItem *nameField = table->item(table->currentRow(), 0);
+
+        incrementMode ? doc->AddEmptyIncrementAfter(nameField->text(), name, type) :
+                        doc->AddEmptyPreviewCalculationAfter(nameField->text(), name, type);
     }
 
-    QAction *action = varTypeMenu->addAction(tr("Preview calculation"));
-    action->setData(false); // Preview calculation tab
-    connect(action, &QAction::triggered, this, &DialogIncrements::AddIncrement);
+    hasChanges = true;
+    LocalUpdateTree();
 
-    action = varTypeMenu->addAction(tr("Separator"));
-    action->setData(false); // Preview calculation tab
-    connect(action, &QAction::triggered, this, &DialogIncrements::AddSeparator);
-
-    ui->toolButtonAddPC->setMenu(varTypeMenu);
+    table->selectRow(currentRow);
+    table->repaint(); // Force repain to fix paint artifacts on Mac OS X
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -897,89 +911,13 @@ void DialogIncrements::FillIncrementsTable(QTableWidget *table,
  */
 void DialogIncrements::AddIncrement()
 {
-    qCDebug(vDialog, "Add new increment");
-
-    auto *button = qobject_cast<QToolButton *>(sender());
-    auto *action = qobject_cast<QAction *>(sender());
-    bool incrementMode = true;
-
-    if (button == ui->toolButtonAdd || ((action != nullptr) && action->data().toBool()))
-    {
-        incrementMode = true;
-    }
-    else if (button == ui->toolButtonAddPC || ((action != nullptr) && not action->data().toBool()))
-    {
-        incrementMode = false;
-    }
-    else
-    {
-        return;
-    }
-
-    QTableWidget *table = incrementMode ? ui->tableWidgetIncrement : ui->tableWidgetPC;
-
-    const QString name = GetCustomName();
-    qint32 currentRow = -1;
-
-    if (table->currentRow() == -1)
-    {
-        currentRow = table->rowCount();
-        incrementMode ? doc->AddEmptyIncrement(name) : doc->AddEmptyPreviewCalculation(name);
-    }
-    else
-    {
-        currentRow  = table->currentRow()+1;
-        const QTableWidgetItem *nameField = table->item(table->currentRow(), 0);
-
-        incrementMode ? doc->AddEmptyIncrementAfter(nameField->text(), name) :
-                        doc->AddEmptyPreviewCalculationAfter(nameField->text(), name);
-    }
-
-    hasChanges = true;
-    LocalUpdateTree();
-
-    table->selectRow(currentRow);
-    table->repaint(); // Force repain to fix paint artifacts on Mac OS X
+    AddNewIncrement(IncrementType::Increment);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void DialogIncrements::AddSeparator()
 {
-    qCDebug(vDialog, "Add new increment");
-
-    auto *action = qobject_cast<QAction *>(sender());
-    if (action == nullptr)
-    {
-        return;
-    }
-
-    const bool incrementMode = action->data().toBool();
-
-    QTableWidget *table = incrementMode ? ui->tableWidgetIncrement : ui->tableWidgetPC;
-
-    const QString name = GetCustomName();
-    qint32 currentRow = -1;
-    const IncrementType type = IncrementType::Separator;
-
-    if (table->currentRow() == -1)
-    {
-        currentRow = table->rowCount();
-        incrementMode ? doc->AddEmptyIncrement(name, type) : doc->AddEmptyPreviewCalculation(name, type);
-    }
-    else
-    {
-        currentRow  = table->currentRow()+1;
-        const QTableWidgetItem *nameField = table->item(table->currentRow(), 0);
-
-        incrementMode ? doc->AddEmptyIncrementAfter(nameField->text(), name, type) :
-                        doc->AddEmptyPreviewCalculationAfter(nameField->text(), name, type);
-    }
-
-    hasChanges = true;
-    LocalUpdateTree();
-
-    table->selectRow(currentRow);
-    table->repaint(); // Force repain to fix paint artifacts on Mac OS X
+    AddNewIncrement(IncrementType::Separator);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -1451,8 +1389,10 @@ void DialogIncrements::changeEvent(QEvent *event)
     {
         // retranslate designer form (single inheritance approach)
         ui->retranslateUi(this);
-        InitIncrementVarTypeMenu();
-        InitPreviewCalculationVarTypeMenu();
+
+        ui->toolButtonAdd->setMenu(InitVarTypeMenu(ui->toolButtonAdd->menu(), true /*increments tab*/));
+        ui->toolButtonAddPC->setMenu(InitVarTypeMenu(ui->toolButtonAddPC->menu(), false /*preview calculations tab*/));
+
         FullUpdateFromFile();
     }
     // remember to call base class implementation
