@@ -1102,6 +1102,8 @@
     <xs:restriction base="xs:string">
       <xs:enumeration value="increment"/>
       <xs:enumeration value="separator"/>
+      <xs:enumeration value="checkWidth"/>
+      <xs:enumeration value="checkHeight"/>
     </xs:restriction>
   </xs:simpleType>
 </xs:schema>
