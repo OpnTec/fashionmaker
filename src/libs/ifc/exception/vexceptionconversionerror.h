@@ -45,6 +45,12 @@ public:
     VExceptionConversionError(const VExceptionConversionError &e);
     VExceptionConversionError &operator=(const VExceptionConversionError &e);
     virtual         ~VExceptionConversionError() V_NOEXCEPT_EXPR (true) Q_DECL_EQ_DEFAULT;
+
+    Q_NORETURN virtual void raise() const override { throw *this; }
+
+    Q_REQUIRED_RESULT virtual VExceptionConversionError *clone() const override
+    { return new VExceptionConversionError(*this); }
+
     virtual QString ErrorMessage() const override;
     QString         String() const;
 protected:

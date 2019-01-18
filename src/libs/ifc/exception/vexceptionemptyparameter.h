@@ -48,6 +48,12 @@ public:
     VExceptionEmptyParameter(const VExceptionEmptyParameter &e);
     VExceptionEmptyParameter &operator=(const VExceptionEmptyParameter &e);
     virtual         ~VExceptionEmptyParameter() V_NOEXCEPT_EXPR (true) Q_DECL_EQ_DEFAULT;
+
+    Q_NORETURN virtual void raise() const override { throw *this; }
+
+    Q_REQUIRED_RESULT virtual VExceptionEmptyParameter *clone() const override
+    { return new VExceptionEmptyParameter(*this); }
+
     virtual QString ErrorMessage() const override;
     virtual QString DetailedInformation() const override;
     QString         Name() const;

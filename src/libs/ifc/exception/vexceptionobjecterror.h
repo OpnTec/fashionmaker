@@ -49,6 +49,11 @@ public:
     VExceptionObjectError(const VExceptionObjectError &e);
     VExceptionObjectError &operator=(const VExceptionObjectError &e);
     virtual ~VExceptionObjectError() V_NOEXCEPT_EXPR (true) Q_DECL_EQ_DEFAULT;
+
+    Q_NORETURN virtual void raise() const override { throw *this; }
+
+    Q_REQUIRED_RESULT virtual VExceptionObjectError *clone() const override { return new VExceptionObjectError(*this); }
+
     virtual QString ErrorMessage() const override;
     virtual QString DetailedInformation() const override;
     QString         TagText() const;

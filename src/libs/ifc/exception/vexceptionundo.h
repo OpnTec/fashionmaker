@@ -41,6 +41,10 @@ public:
     explicit VExceptionUndo(const QString &what);
     VExceptionUndo(const VExceptionUndo &e);
     virtual ~VExceptionUndo() V_NOEXCEPT_EXPR (true) Q_DECL_EQ_DEFAULT;
+
+    Q_NORETURN virtual void raise() const override { throw *this; }
+
+    Q_REQUIRED_RESULT virtual VExceptionUndo *clone() const override { return new VExceptionUndo(*this); }
 };
 
 #endif // VEXCEPTIONUNDO_H

@@ -37,6 +37,11 @@ public:
     VExceptionInvalidNotch(const VExceptionInvalidNotch &e);
     VExceptionInvalidNotch &operator=(const VExceptionInvalidNotch &e);
     virtual ~VExceptionInvalidNotch() V_NOEXCEPT_EXPR (true) Q_DECL_EQ_DEFAULT;
+
+    Q_NORETURN virtual void raise() const override { throw *this; }
+
+    Q_REQUIRED_RESULT virtual VExceptionInvalidNotch *clone() const override
+    { return new VExceptionInvalidNotch(*this); }
 };
 
 #endif // VEXCEPTIONINVALIDNOTCH_H

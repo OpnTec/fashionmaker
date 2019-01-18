@@ -48,6 +48,11 @@ public:
     VExceptionWrongId(const VExceptionWrongId &e);
     VExceptionWrongId &operator=(const VExceptionWrongId &e);
     virtual ~VExceptionWrongId() V_NOEXCEPT_EXPR (true) Q_DECL_EQ_DEFAULT;
+
+    Q_NORETURN virtual void raise() const override { throw *this; }
+
+    Q_REQUIRED_RESULT virtual VExceptionWrongId *clone() const override { return new VExceptionWrongId(*this); }
+
     virtual QString ErrorMessage() const override;
     virtual QString DetailedInformation() const override;
     QString         TagText() const;
