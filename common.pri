@@ -361,6 +361,12 @@ g++5:GCC_DEBUG_CXXFLAGS += \
 
 # Since GCC 6
 g++6:GCC_DEBUG_CXXFLAGS += \
+    -Wswitch-bool \
+    -Wlogical-not-parentheses \
+    -Wsizeof-array-argument \
+    -Wbool-compare \
+    -Wsuggest-final-types \
+    -Wsuggest-final-methods \
     -Wshift-negative-value \
     -Wshift-overflow \
     -Wshift-overflow=2 \
@@ -371,6 +377,19 @@ g++6:GCC_DEBUG_CXXFLAGS += \
 
 # Since GCC 7
 g++7:GCC_DEBUG_CXXFLAGS += \
+    -Wswitch-bool \
+    -Wlogical-not-parentheses \
+    -Wsizeof-array-argument \
+    -Wbool-compare \
+    -Wsuggest-final-types \
+    -Wsuggest-final-methods \
+    -Wshift-negative-value \
+    -Wshift-overflow \
+    -Wshift-overflow=2 \
+    -Wtautological-compare \
+    -Wnull-dereference \
+    -Wduplicated-cond \
+    -Wmisleading-indentation \
     -Wduplicated-branches \
     -Wrestrict \
     -Walloc-zero \
