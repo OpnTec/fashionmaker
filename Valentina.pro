@@ -20,7 +20,6 @@ unix {
             message( "g++ version 8.x found" )
             CONFIG += g++8
         } else {
-            GCC_VERSION = $$system("g++ -dumpversion")
             contains(GCC_VERSION, ^7.*$) {
                 message( "g++ version 7.x found" )
                 CONFIG += g++7
