@@ -61,6 +61,7 @@
 #include <QPrintDialog>
 #include <QPrinterInfo>
 #include <QtConcurrent>
+#include <functional>
 
 #if defined(Q_OS_WIN32) && QT_VERSION >= QT_VERSION_CHECK(5, 7, 0)
 #include <QWinTaskbarButton>
