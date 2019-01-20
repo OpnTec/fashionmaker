@@ -60,6 +60,7 @@
 #include <QPrintPreviewDialog>
 #include <QPrintDialog>
 #include <QPrinterInfo>
+#include <QtConcurrent>
 
 #if defined(Q_OS_WIN32) && QT_VERSION >= QT_VERSION_CHECK(5, 7, 0)
 #include <QWinTaskbarButton>
@@ -799,22 +800,50 @@ void MainWindowsNoGUI::PrintTiled()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QVector<VLayoutPiece> MainWindowsNoGUI::PrepareDetailsForLayout(const QHash<quint32, VPiece> &details)
+QVector<VLayoutPiece> MainWindowsNoGUI::PrepareDetailsForLayout(const QVector<DetailForLayout> &details)
 {
-    QVector<VLayoutPiece> listDetails;
-    if (not details.isEmpty())
+    if (details.isEmpty())
     {
-        QHash<quint32, VPiece>::const_iterator i = details.constBegin();
-        while (i != details.constEnd())
-        {
-            VAbstractTool *tool = qobject_cast<VAbstractTool*>(VAbstractPattern::getTool(i.key()));
-            SCASSERT(tool != nullptr)
-            listDetails.append(VLayoutPiece::Create(i.value(), tool->getData()));
-            ++i;
-        }
+        return QVector<VLayoutPiece>();
     }
 
-    return listDetails;
+    std::function<VLayoutPiece (const DetailForLayout &data)> PrepareDetail = [](const DetailForLayout &data)
+    {
+        VAbstractTool *tool = qobject_cast<VAbstractTool*>(VAbstractPattern::getTool(data.id));
+        SCASSERT(tool != nullptr)
+        return VLayoutPiece::Create(data.piece, tool->getData());
+    };
+
+    QProgressDialog progress(tr("Preparing details for layout"), QString(), 0, details.size());
+    progress.setWindowModality(Qt::ApplicationModal);
+
+    QFutureWatcher<VLayoutPiece> futureWatcher;
+    QObject::connect(&futureWatcher, &QFutureWatcher<VLayoutPiece>::finished, &progress, &QProgressDialog::reset);
+    QObject::connect(&futureWatcher,  &QFutureWatcher<VLayoutPiece>::progressRangeChanged, &progress,
+                     &QProgressDialog::setRange);
+    QObject::connect(&futureWatcher, &QFutureWatcher<VLayoutPiece>::progressValueChanged, &progress,
+                     &QProgressDialog::setValue);
+
+    futureWatcher.setFuture(QtConcurrent::mapped(details, PrepareDetail));
+
+    if (qApp->IsGUIMode())
+    {
+        progress.exec();
+    }
+
+    futureWatcher.waitForFinished();
+
+    QVector<VLayoutPiece> layautDetails;
+    layautDetails.resize(details.size());
+    const QFuture<VLayoutPiece> future = futureWatcher.future();
+
+    QFuture<VLayoutPiece>::const_iterator i;
+    for (i = future.constBegin(); i != future.constEnd(); ++i)
+    {
+        layautDetails.append(*i);
+    }
+
+    return layautDetails;
 }
 
 //---------------------------------------------------------------------------------------------------------------------

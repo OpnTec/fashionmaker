@@ -48,6 +48,22 @@ class QWinTaskbarButton;
 class QWinTaskbarProgress;
 #endif
 
+QT_WARNING_PUSH
+QT_WARNING_DISABLE_GCC("-Weffc++")
+
+struct DetailForLayout {
+    DetailForLayout() = default;
+
+    DetailForLayout(quint32 id, const VPiece &piece)
+        : id(id), piece(piece)
+    {}
+
+    quint32 id{NULL_ID};
+    VPiece piece;
+};
+
+QT_WARNING_POP
+
 class MainWindowsNoGUI : public VAbstractMainWindow
 {
     Q_OBJECT
@@ -103,7 +119,7 @@ protected:
     QWinTaskbarProgress *m_taskbarProgress;
 #endif
 
-    static QVector<VLayoutPiece> PrepareDetailsForLayout(const QHash<quint32, VPiece> &details);
+    static QVector<VLayoutPiece> PrepareDetailsForLayout(const QVector<DetailForLayout> &details);
 
     void ExportData(const QVector<VLayoutPiece> &listDetails);
 

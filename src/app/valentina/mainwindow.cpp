@@ -116,7 +116,44 @@ Q_GLOBAL_STATIC_WITH_ARGS(const QString, autosavePrefix, (QLatin1String(".autosa
 // String below need for getting translation for key Ctrl
 Q_GLOBAL_STATIC_WITH_ARGS(const QString, strQShortcut, (QLatin1String("QShortcut"))) // Context
 Q_GLOBAL_STATIC_WITH_ARGS(const QString, strCtrl, (QLatin1String("Ctrl"))) // String
+
+//---------------------------------------------------------------------------------------------------------------------
+QVector<DetailForLayout> SortDetailsForLayout(const QHash<quint32, VPiece> *allDetails,
+                                              const QString &nameRegex = QString())
+{
+    QVector<DetailForLayout> details;
+    QHash<quint32, VPiece>::const_iterator i = allDetails->constBegin();
+
+    if (nameRegex.isEmpty())
+    {
+        while (i != allDetails->constEnd())
+        {
+            if (i.value().IsInLayout())
+            {
+                details.append(DetailForLayout(i.key(), i.value()));
+            }
+
+            ++i;
+        }
+    }
+    else
+    {
+        QRegularExpression nameRe(nameRegex);
+        while (i != allDetails->constEnd())
+        {
+            if (nameRe.match(i.value().GetName()).hasMatch())
+            {
+                details.append(DetailForLayout(i.key(), i.value()));
+            }
+
+            ++i;
+        }
+    }
+
+    return details;
 }
+
+} // anonymous namespace
 
 //---------------------------------------------------------------------------------------------------------------------
 /**
@@ -2579,7 +2616,7 @@ void MainWindow::ActionLayout(bool checked)
         ui->actionDetails->setChecked(false);
         ui->actionLayout->setChecked(true);
 
-        QHash<quint32, VPiece> details;
+        QVector<DetailForLayout> details;
         if(not qApp->getOpeningPattern())
         {
             const QHash<quint32, VPiece> *allDetails = pattern->DataPieces();
@@ -2593,15 +2630,7 @@ void MainWindow::ActionLayout(bool checked)
             }
             else
             {
-                QHash<quint32, VPiece>::const_iterator i = allDetails->constBegin();
-                while (i != allDetails->constEnd())
-                {
-                    if (i.value().IsInLayout())
-                    {
-                        details.insert(i.key(), i.value());
-                    }
-                    ++i;
-                }
+                details = SortDetailsForLayout(allDetails);
 
                 if (details.count() == 0)
                 {
@@ -4867,17 +4896,7 @@ void MainWindow::ExportLayoutAs()
 //---------------------------------------------------------------------------------------------------------------------
 void MainWindow::ExportDetailsAs()
 {
-    const QHash<quint32, VPiece> *allDetails = pattern->DataPieces();
-    QHash<quint32, VPiece>::const_iterator i = allDetails->constBegin();
-    QHash<quint32, VPiece> detailsInLayout;
-    while (i != allDetails->constEnd())
-    {
-        if (i.value().IsInLayout())
-        {
-            detailsInLayout.insert(i.key(), i.value());
-        }
-        ++i;
-    }
+    QVector<DetailForLayout> detailsInLayout = SortDetailsForLayout(pattern->DataPieces());
 
     if (detailsInLayout.count() == 0)
     {
@@ -5199,7 +5218,7 @@ void MainWindow::ZoomFirstShow()
 //---------------------------------------------------------------------------------------------------------------------
 bool MainWindow::DoExport(const VCommandLinePtr &expParams)
 {
-    QHash<quint32, VPiece> details;
+    QVector<DetailForLayout> details;
     if(not qApp->getOpeningPattern())
     {
         const QHash<quint32, VPiece> *allDetails = pattern->DataPieces();
@@ -5211,32 +5230,7 @@ bool MainWindow::DoExport(const VCommandLinePtr &expParams)
         }
         else
         {
-            const QString nameRegex = expParams->OptExportSuchDetails();
-            if (nameRegex.isEmpty())
-            {
-                QHash<quint32, VPiece>::const_iterator i = allDetails->constBegin();
-                while (i != allDetails->constEnd())
-                {
-                    if (i.value().IsInLayout())
-                    {
-                        details.insert(i.key(), i.value());
-                    }
-                    ++i;
-                }
-            }
-            else
-            {
-                const QRegularExpression nameRe(nameRegex);
-                QHash<quint32, VPiece>::const_iterator i = allDetails->constBegin();
-                while (i != allDetails->constEnd())
-                {
-                    if (nameRe.match(i.value().GetName()).hasMatch())
-                    {
-                        details.insert(i.key(), i.value());
-                    }
-                    ++i;
-                }
-            }
+            details = SortDetailsForLayout(allDetails, expParams->OptExportSuchDetails());
 
             if (details.count() == 0)
             {
