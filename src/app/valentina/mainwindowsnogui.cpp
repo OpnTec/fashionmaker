@@ -833,17 +833,17 @@ QVector<VLayoutPiece> MainWindowsNoGUI::PrepareDetailsForLayout(const QVector<De
 
     futureWatcher.waitForFinished();
 
-    QVector<VLayoutPiece> layautDetails;
-    layautDetails.resize(details.size());
+    QVector<VLayoutPiece> layoutDetails;
+    layoutDetails.reserve(details.size());
     const QFuture<VLayoutPiece> future = futureWatcher.future();
 
     QFuture<VLayoutPiece>::const_iterator i;
     for (i = future.constBegin(); i != future.constEnd(); ++i)
     {
-        layautDetails.append(*i);
+        layoutDetails.append(*i);
     }
 
-    return layautDetails;
+    return layoutDetails;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
