@@ -50,7 +50,7 @@ class VPointF;
 QT_WARNING_PUSH
 QT_WARNING_DISABLE_GCC("-Weffc++")
 
-enum class PassmarkStatus: char
+enum class PassmarkStatus: qint8
 {
     Error = 0,
     Common = 1,
