@@ -963,7 +963,7 @@
     </message>
     <message>
         <source>Pen Style:</source>
-        <translation type="unfinished"></translation>
+        <translation>Stile tratto:</translation>
     </message>
     <message>
         <source>Approximation Scale:</source>
@@ -1647,24 +1647,24 @@
     <message>
         <source>Bold</source>
         <comment>Font formating</comment>
-        <translation type="unfinished"></translation>
+        <translation>Grassetto</translation>
     </message>
     <message>
         <source>Italic</source>
         <comment>Font formating</comment>
-        <translation type="unfinished"></translation>
+        <translation>Corsivo</translation>
     </message>
     <message>
         <source>Aligns with the left edge</source>
-        <translation type="unfinished"></translation>
+        <translation>Allinea al margine sinistro</translation>
     </message>
     <message>
         <source>Centers horizontally in the available space</source>
-        <translation type="unfinished"></translation>
+        <translation>Centra orizzontalmente nello spazio disponibile</translation>
     </message>
     <message>
         <source>Aligns with the right edge</source>
-        <translation type="unfinished"></translation>
+        <translation>Allinea al margine destro</translation>
     </message>
     <message>
         <source>Additional font size. Use to make a line bigger.</source>
@@ -1728,27 +1728,27 @@
     </message>
     <message>
         <source>Date</source>
-        <translation type="unfinished"></translation>
+        <translation>Data</translation>
     </message>
     <message>
         <source>Time</source>
-        <translation type="unfinished"></translation>
+        <translation>Ora</translation>
     </message>
     <message>
         <source>Pattern name</source>
-        <translation type="unfinished"></translation>
+        <translation>Nome Modello</translation>
     </message>
     <message>
         <source>Pattern number</source>
-        <translation type="unfinished"></translation>
+        <translation>Numero Modello</translation>
     </message>
     <message>
         <source>Company name or designer name</source>
-        <translation type="unfinished"></translation>
+        <translation>Nome azienda o Nome designer</translation>
     </message>
     <message>
         <source>Customer name</source>
-        <translation type="unfinished"></translation>
+        <translation>Nome Cliente</translation>
     </message>
     <message>
         <source>Pattern extension</source>
@@ -2370,6 +2370,10 @@
         <source>Parser error: %1</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Search final measurements by term. &lt;/p&gt;&lt;p&gt;Prepend &amp;quot;/r/&amp;quot; to the front of the search string to search final measurements by regex.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>DialogFlippingByAxis</name>
@@ -2887,6 +2891,22 @@
     <message>
         <source>Unique variable name</source>
         <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Search increments by term. &lt;/p&gt;&lt;p&gt;Prepend &amp;quot;/r/&amp;quot; to the front of the search string to search increments by regex.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Search preview calculations by term. &lt;/p&gt;&lt;p&gt;Prepend &amp;quot;/r/&amp;quot; to the front of the search string to search preview calculations by regex.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Increment</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Separator</source>
+        <translation type="unfinished">Separatore</translation>
     </message>
 </context>
 <context>
@@ -3560,7 +3580,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Search:</source>
-        <translation type="unfinished"></translation>
+        <translation>Cerca:</translation>
     </message>
     <message>
         <source>Search</source>
@@ -3674,7 +3694,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Multisize</source>
-        <translation type="unfinished"></translation>
+        <translation>Multitaglia</translation>
     </message>
 </context>
 <context>
@@ -4050,11 +4070,11 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Date format:</source>
-        <translation type="unfinished"></translation>
+        <translation>Formato Data:</translation>
     </message>
     <message>
         <source>Time format:</source>
-        <translation type="unfinished"></translation>
+        <translation>Formato Ora:</translation>
     </message>
     <message>
         <source>Save label data.</source>
@@ -4083,6 +4103,10 @@ Apply settings anyway?</source>
     <message>
         <source>The customer name from individual measurements</source>
         <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Label language:</source>
+        <translation type="unfinished">Lingua etichetta:</translation>
     </message>
 </context>
 <context>
@@ -4336,7 +4360,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Current seam aloowance</source>
-        <translation>Margini di cucitura correnti</translation>
+        <translation type="vanished">Margini di cucitura correnti</translation>
     </message>
     <message>
         <source>Edit seam allowance width</source>
@@ -4464,7 +4488,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Visible</source>
-        <translation type="unfinished"></translation>
+        <translation>Visibile</translation>
     </message>
     <message>
         <source>Create a formula that regulates visibility. Values different from &quot;0&quot; make a path visible.</source>
@@ -4537,6 +4561,10 @@ Apply settings anyway?</source>
     <message>
         <source>Excluded</source>
         <translation>Escluse</translation>
+    </message>
+    <message>
+        <source>Current seam allowance</source>
+        <translation type="unfinished">Margine di cucitura corrente</translation>
     </message>
     <message>
         <source>&lt;Empty&gt;</source>
@@ -4670,7 +4698,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Visible</source>
-        <translation type="unfinished"></translation>
+        <translation>Visibile</translation>
     </message>
     <message>
         <source>Create a formula that regulates visibility. Values different from &quot;0&quot; make a path visible.</source>
@@ -5343,7 +5371,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Browse…</source>
-        <translation type="unfinished"></translation>
+        <translation>Cerca…</translation>
     </message>
     <message>
         <source>cm</source>
@@ -5355,7 +5383,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Orientation:</source>
-        <translation type="unfinished"></translation>
+        <translation>Orientamento:</translation>
     </message>
 </context>
 <context>
@@ -7548,7 +7576,7 @@ Vuoi salvare i cambiamenti?</translation>
     </message>
     <message>
         <source>Curve tool which uses point as control handle</source>
-        <translation type="unfinished"></translation>
+        <translation>Curva con Controlli su Punti</translation>
     </message>
     <message>
         <source>Select first curve point</source>
@@ -7752,7 +7780,7 @@ Vuoi salvare i cambiamenti?</translation>
     </message>
     <message>
         <source>Unload Current</source>
-        <translation type="unfinished"></translation>
+        <translation>Rimuovi attuale</translation>
     </message>
     <message>
         <source>Unload measurements if they were not used in a pattern file</source>
@@ -7780,7 +7808,7 @@ Vuoi salvare i cambiamenti?</translation>
     </message>
     <message>
         <source>Insert node tool</source>
-        <translation type="unfinished"></translation>
+        <translation>Inserisci nodo</translation>
     </message>
     <message>
         <source>Select an item to insert</source>
@@ -7967,11 +7995,15 @@ Vuoi salvare i cambiamenti?</translation>
         <translation>Modifiche applicate.</translation>
     </message>
     <message>
-        <source>Cannot read settings from a malformed INI file.</source>
+        <source>Cannot save settings. Access denied.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Cannot save settings. Access denied.</source>
+        <source>Ctrl+O</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Cannot read settings from a malformed .INI file.</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -8067,7 +8099,7 @@ Vuoi salvare i cambiamenti?</translation>
     </message>
     <message>
         <source>Can&apos;t create a path</source>
-        <translation type="unfinished"></translation>
+        <translation>Impossibile creare tracciato</translation>
     </message>
     <message>
         <source>Pattern</source>
@@ -8131,6 +8163,10 @@ Vuoi salvare i cambiamenti?</translation>
     </message>
     <message>
         <source>Please, additionally provide: %1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Preparing details for layout</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -8859,6 +8895,14 @@ This option will take an affect after restart.</source>
         <source>Piece &apos;%1&apos;. Not enough points to build seam allowance.</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Cannot calculate a notch for point &apos;%1&apos; in piece &apos;%2&apos;. Notch collapse.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Cannot calculate a notch for point &apos;%1&apos; in piece &apos;%2&apos;. Cannot find intersection.</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>QSaveFile</name>
@@ -9103,7 +9147,7 @@ This option will take an affect after restart.</source>
     <name>SavePieceOptions</name>
     <message>
         <source>save detail options</source>
-        <translation type="unfinished"></translation>
+        <translation>Salva Opzioni Dettaglio</translation>
     </message>
 </context>
 <context>
@@ -9789,8 +9833,12 @@ Vuoi salvare le tue modifiche?</translation>
         <translation type="unfinished">Nome cliente:</translation>
     </message>
     <message>
+        <source>Open individual …</source>
+        <translation type="vanished">Apri &quot;Individuale&quot;</translation>
+    </message>
+    <message>
         <source>Open multisize …</source>
-        <translation type="unfinished"></translation>
+        <translation>Apri &quot;Multitaglia&quot;…</translation>
     </message>
     <message>
         <source>Create from existing …</source>
@@ -9853,11 +9901,11 @@ Vuoi salvare le tue modifiche?</translation>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Cannot read settings from a malformed INI file.</source>
+        <source>Cannot save settings. Access denied.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Cannot save settings. Access denied.</source>
+        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Search measurements by term. &lt;/p&gt;&lt;p&gt;Prepend &amp;quot;/r/&amp;quot; to the front of the search string to search measurements by regex.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -9899,6 +9947,14 @@ Vuoi salvare le tue modifiche?</translation>
     <message>
         <source>&amp;New</source>
         <translation type="unfinished">&amp;Nuovo</translation>
+    </message>
+    <message>
+        <source>Do you want to change the premissions?</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Cannot read settings from a malformed .INI file.</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -10048,7 +10104,7 @@ Vuoi salvare le tue modifiche?</translation>
     </message>
     <message>
         <source>Orientation:</source>
-        <translation type="unfinished"></translation>
+        <translation>Orientamento:</translation>
     </message>
     <message>
         <source>Rotation:</source>
@@ -10553,6 +10609,10 @@ Vuoi salvare le tue modifiche?</translation>
     <message>
         <source>My Templates</source>
         <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>My Patterns</source>
+        <translation type="unfinished">I miei modelli</translation>
     </message>
 </context>
 <context>
@@ -11400,6 +11460,10 @@ Vuoi salvare le tue modifiche?</translation>
         <source>label templates</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>patterns</source>
+        <translation type="unfinished">modelli</translation>
+    </message>
 </context>
 <context>
     <name>VContainer</name>
@@ -11949,7 +12013,7 @@ Vuoi salvare le tue modifiche?</translation>
     <name>VSettings</name>
     <message>
         <source>patterns</source>
-        <translation>modelli</translation>
+        <translation type="vanished">modelli</translation>
     </message>
     <message>
         <source>layouts</source>
@@ -12073,7 +12137,7 @@ Vuoi salvare le tue modifiche?</translation>
     </message>
     <message>
         <source>length</source>
-        <translation type="unfinished"></translation>
+        <translation>lunghezza</translation>
     </message>
     <message>
         <source>start angle</source>
@@ -12100,7 +12164,7 @@ Vuoi salvare le tue modifiche?</translation>
     </message>
     <message>
         <source>length</source>
-        <translation type="unfinished"></translation>
+        <translation>lunghezza</translation>
     </message>
     <message>
         <source>label</source>
@@ -12115,7 +12179,7 @@ Vuoi salvare le tue modifiche?</translation>
     </message>
     <message>
         <source>length</source>
-        <translation type="unfinished"></translation>
+        <translation>lunghezza</translation>
     </message>
     <message>
         <source>label</source>
@@ -12131,6 +12195,18 @@ Vuoi salvare le tue modifiche?</translation>
     <message>
         <source>Delete</source>
         <translation type="vanished">Elimina</translation>
+    </message>
+    <message>
+        <source>move grainline</source>
+        <translation type="vanished">Muovi drittofilo</translation>
+    </message>
+    <message>
+        <source>resize grainline</source>
+        <translation type="vanished">Ridimensiona drittofilo</translation>
+    </message>
+    <message>
+        <source>rotate grainline</source>
+        <translation type="vanished">Ruota drittofilo</translation>
     </message>
 </context>
 <context>
@@ -12875,15 +12951,15 @@ Vuoi salvare le tue modifiche?</translation>
     </message>
     <message>
         <source>move grainline</source>
-        <translation type="unfinished"></translation>
+        <translation>Muovi drittofilo</translation>
     </message>
     <message>
         <source>resize grainline</source>
-        <translation type="unfinished"></translation>
+        <translation>Ridimensiona drittofilo</translation>
     </message>
     <message>
         <source>rotate grainline</source>
-        <translation type="unfinished"></translation>
+        <translation>Ruota drittofilo</translation>
     </message>
     <message>
         <source>Options</source>
@@ -14000,7 +14076,7 @@ Vuoi salvare le tue modifiche?</translation>
     <message>
         <source>CurrentLength</source>
         <comment>Do not add space between words</comment>
-        <translation type="unfinished"></translation>
+        <translation>Lunghezza_selezionata</translation>
     </message>
     <message>
         <source>acosh</source>
@@ -14150,32 +14226,32 @@ Vuoi salvare le tue modifiche?</translation>
     <message>
         <source>date</source>
         <comment>placeholder</comment>
-        <translation type="unfinished"></translation>
+        <translation>data</translation>
     </message>
     <message>
         <source>time</source>
         <comment>placeholder</comment>
-        <translation type="unfinished"></translation>
+        <translation>ora</translation>
     </message>
     <message>
         <source>patternName</source>
         <comment>placeholder</comment>
-        <translation type="unfinished"></translation>
+        <translation>nomeModello</translation>
     </message>
     <message>
         <source>patternNumber</source>
         <comment>placeholder</comment>
-        <translation type="unfinished"></translation>
+        <translation>numeroModello</translation>
     </message>
     <message>
         <source>author</source>
         <comment>placeholder</comment>
-        <translation type="unfinished"></translation>
+        <translation>autore</translation>
     </message>
     <message>
         <source>customer</source>
         <comment>placeholder</comment>
-        <translation type="unfinished"></translation>
+        <translation>cliente</translation>
     </message>
     <message>
         <source>pExt</source>
@@ -14319,7 +14395,7 @@ Vuoi salvare le tue modifiche?</translation>
     </message>
     <message>
         <source>Select all</source>
-        <translation type="unfinished"></translation>
+        <translation>Seleziona tutto</translation>
     </message>
     <message>
         <source>Select none</source>
@@ -14335,18 +14411,18 @@ Vuoi salvare le tue modifiche?</translation>
     </message>
     <message>
         <source>Invert selection</source>
-        <translation type="unfinished"></translation>
+        <translation>Inverti selezione</translation>
     </message>
     <message>
         <source>invert selection</source>
-        <translation type="unfinished"></translation>
+        <translation>Inverti selezione</translation>
     </message>
 </context>
 <context>
     <name>VWidgetGroups</name>
     <message>
         <source>Rename</source>
-        <translation type="unfinished"></translation>
+        <translation>Rinomina</translation>
     </message>
     <message>
         <source>Delete</source>

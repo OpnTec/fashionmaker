@@ -2757,7 +2757,7 @@ void TMainWindow::ReadSettings()
     }
     else
     {
-        qWarning() << tr("Cannot read settings from a malformed INI file.");
+        qWarning() << tr("Cannot read settings from a malformed .INI file.");
     }
 }
 

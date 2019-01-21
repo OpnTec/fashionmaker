@@ -2394,6 +2394,10 @@
         <source>Parser error: %1</source>
         <translation>Erro de análise: %1</translation>
     </message>
+    <message>
+        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Search final measurements by term. &lt;/p&gt;&lt;p&gt;Prepend &amp;quot;/r/&amp;quot; to the front of the search string to search final measurements by regex.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>DialogFlippingByAxis</name>
@@ -2919,6 +2923,22 @@
     <message>
         <source>Unique variable name</source>
         <translation>Nome de variável único</translation>
+    </message>
+    <message>
+        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Search increments by term. &lt;/p&gt;&lt;p&gt;Prepend &amp;quot;/r/&amp;quot; to the front of the search string to search increments by regex.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Search preview calculations by term. &lt;/p&gt;&lt;p&gt;Prepend &amp;quot;/r/&amp;quot; to the front of the search string to search preview calculations by regex.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Increment</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Separator</source>
+        <translation type="unfinished">Separador</translation>
     </message>
 </context>
 <context>
@@ -4122,6 +4142,10 @@ Aplicar configurações de qualquer forma?</translation>
         <source>The customer name from individual measurements</source>
         <translation>O nome do cliente das medidas individuais</translation>
     </message>
+    <message>
+        <source>Label language:</source>
+        <translation type="unfinished">Idioma:</translation>
+    </message>
 </context>
 <context>
     <name>DialogPatternXmlEdit</name>
@@ -4374,7 +4398,7 @@ Aplicar configurações de qualquer forma?</translation>
     </message>
     <message>
         <source>Current seam aloowance</source>
-        <translation>Margem de costura atual</translation>
+        <translation type="vanished">Margem de costura atual</translation>
     </message>
     <message>
         <source>Edit seam allowance width</source>
@@ -4575,6 +4599,10 @@ Aplicar configurações de qualquer forma?</translation>
     <message>
         <source>Excluded</source>
         <translation>Excluído</translation>
+    </message>
+    <message>
+        <source>Current seam allowance</source>
+        <translation type="unfinished">Margem de costura atual</translation>
     </message>
     <message>
         <source>&lt;Empty&gt;</source>
@@ -8001,11 +8029,15 @@ Você quer salvar suas mudanças?</translation>
         <translation>Mudanças aplicadas.</translation>
     </message>
     <message>
-        <source>Cannot read settings from a malformed INI file.</source>
+        <source>Cannot save settings. Access denied.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Cannot save settings. Access denied.</source>
+        <source>Ctrl+O</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Cannot read settings from a malformed .INI file.</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -8154,6 +8186,10 @@ Você quer salvar suas mudanças?</translation>
     <message>
         <source>Please, additionally provide: %1</source>
         <translation>Por favor, forneça adicionalmente: %1</translation>
+    </message>
+    <message>
+        <source>Preparing details for layout</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -8880,6 +8916,14 @@ Esta opção terá um efeito após o reinício.</translation>
     </message>
     <message>
         <source>Piece &apos;%1&apos;. Not enough points to build seam allowance.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Cannot calculate a notch for point &apos;%1&apos; in piece &apos;%2&apos;. Notch collapse.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Cannot calculate a notch for point &apos;%1&apos; in piece &apos;%2&apos;. Cannot find intersection.</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -9884,11 +9928,11 @@ Deseja salvar suas mudanças?</translation>
         <translation>Erro na linha %1. O nome da medida está vazio.</translation>
     </message>
     <message>
-        <source>Cannot read settings from a malformed INI file.</source>
+        <source>Cannot save settings. Access denied.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Cannot save settings. Access denied.</source>
+        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Search measurements by term. &lt;/p&gt;&lt;p&gt;Prepend &amp;quot;/r/&amp;quot; to the front of the search string to search measurements by regex.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -9930,6 +9974,14 @@ Deseja salvar suas mudanças?</translation>
     <message>
         <source>&amp;New</source>
         <translation type="unfinished">&amp;Novo</translation>
+    </message>
+    <message>
+        <source>Do you want to change the premissions?</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Cannot read settings from a malformed .INI file.</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -10584,6 +10636,10 @@ Deseja salvar suas mudanças?</translation>
     <message>
         <source>My Templates</source>
         <translation>Meus modelos</translation>
+    </message>
+    <message>
+        <source>My Patterns</source>
+        <translation type="unfinished">Meus Moldes</translation>
     </message>
 </context>
 <context>
@@ -11427,6 +11483,10 @@ Deseja salvar suas mudanças?</translation>
         <source>label templates</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>patterns</source>
+        <translation type="unfinished">moldes</translation>
+    </message>
 </context>
 <context>
     <name>VContainer</name>
@@ -11993,7 +12053,7 @@ Deseja salvar suas mudanças?</translation>
     <name>VSettings</name>
     <message>
         <source>patterns</source>
-        <translation>moldes</translation>
+        <translation type="vanished">moldes</translation>
     </message>
     <message>
         <source>layouts</source>
