@@ -2013,12 +2013,11 @@ void MainWindow::ToolBarDraws()
     {
         const QString activDraw = doc->GetNameActivPP();
         const QString nameDraw = PatternPieceName(activDraw);
-        if (nameDraw.isEmpty())
+        if (nameDraw.isEmpty() || activDraw == nameDraw)
         {
             return;
         }
-        RenamePP *renamePP = new RenamePP(doc, nameDraw, comboBoxDraws);
-        qApp->getUndoStack()->push(renamePP);
+        qApp->getUndoStack()->push(new RenamePP(doc, nameDraw, comboBoxDraws));
     });
 }
 
@@ -4488,7 +4487,7 @@ QString MainWindow::PatternPieceName(const QString &text)
         nameDraw = dlg->textValue();
         if (bOk == false || nameDraw.isEmpty() || text == nameDraw)
         {
-            return QString();
+            return text;
         }
 
         if (comboBoxDraws->findText(nameDraw) == -1)
