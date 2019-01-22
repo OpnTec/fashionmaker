@@ -107,6 +107,7 @@ VToolSeamAllowance *VToolSeamAllowance::Create(const QPointer<DialogTool> &dialo
     if (piece != nullptr)
     {
         piece->m_dialog = dialog;
+        piece->RefreshGeometry(true); // Refresh internal paths
     }
     return piece;
 }
@@ -179,7 +180,12 @@ VToolSeamAllowance *VToolSeamAllowance::Duplicate(const QPointer<DialogTool> &di
     initData.detail = detail;
     initData.width = initData.detail.GetFormulaSAWidth();
 
-    return Duplicate(initData);
+    VToolSeamAllowance *piece = Duplicate(initData);
+    if (piece != nullptr)
+    {
+        piece->RefreshGeometry(true); // Refresh internal paths
+    }
+    return piece;
 }
 
 //---------------------------------------------------------------------------------------------------------------------

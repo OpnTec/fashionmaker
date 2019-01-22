@@ -1573,7 +1573,11 @@ void CreateUnitedDetail(const VToolUnionDetailsInitData &initData, qreal dx, qre
     pieceInitData.typeCreation = Source::FromTool;
     pieceInitData.drawName = drawName;
 
-    VToolSeamAllowance::Create(pieceInitData);
+    VToolSeamAllowance *piece = VToolSeamAllowance::Create(pieceInitData);
+    if (piece != nullptr)
+    {
+        piece->RefreshGeometry(true); // Refresh internal paths
+    }
 
     auto DuplicateDetail = [initData](quint32 id)
     {
@@ -1589,7 +1593,12 @@ void CreateUnitedDetail(const VToolUnionDetailsInitData &initData, qreal dx, qre
 
         initPieceData.detail = initData.data->GetPiece(id);
         initPieceData.width = initPieceData.detail.GetFormulaSAWidth();
-        VToolSeamAllowance::Duplicate(initPieceData);
+        VToolSeamAllowance *piece = VToolSeamAllowance::Duplicate(initPieceData);
+        if (piece != nullptr)
+        {
+            piece->RefreshGeometry(true); // Refresh internal paths
+        }
+
     };
 
     if (initData.retainPieces)
