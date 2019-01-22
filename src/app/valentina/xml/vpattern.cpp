@@ -236,7 +236,7 @@ void VPattern::Parse(const Document &parse)
         }
         domNode = domNode.nextSibling();
     }
-    QTimer::singleShot(2000, Qt::VeryCoarseTimer, this, SLOT(RefreshPieceGeometry()));
+    QTimer::singleShot(1000, Qt::VeryCoarseTimer, this, SLOT(RefreshPieceGeometry()));
     emit CheckLayout();
 }
 
