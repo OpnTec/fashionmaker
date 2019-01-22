@@ -3502,6 +3502,7 @@ void VPattern::RefreshPieceGeometry()
     }
     updatePieces.clear();
     VMainGraphicsView::NewSceneRect(sceneDetail, qApp->getSceneView());
+    qApp->getSceneView()->ZoomFitBest();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
