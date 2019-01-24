@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>352</width>
-    <height>567</height>
+    <height>594</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -25,7 +25,7 @@
         <x>0</x>
         <y>0</y>
         <width>332</width>
-        <height>547</height>
+        <height>574</height>
        </rect>
       </property>
       <layout class="QVBoxLayout" name="verticalLayout_3">
@@ -112,8 +112,27 @@
             <property name="enabled">
              <bool>false</bool>
             </property>
+            <property name="toolTip">
+             <string>Acute angle that looks intside of piece</string>
+            </property>
             <property name="text">
              <string>V mark</string>
+            </property>
+            <attribute name="buttonGroup">
+             <string notr="true">buttonGroupLineType</string>
+            </attribute>
+           </widget>
+          </item>
+          <item>
+           <widget class="QRadioButton" name="radioButtonVMark2">
+            <property name="enabled">
+             <bool>false</bool>
+            </property>
+            <property name="toolTip">
+             <string>Acute angle that looks outside of piece</string>
+            </property>
+            <property name="text">
+             <string>V mark 2</string>
             </property>
             <attribute name="buttonGroup">
              <string notr="true">buttonGroupLineType</string>
@@ -289,7 +308,7 @@
  <resources/>
  <connections/>
  <buttongroups>
-  <buttongroup name="buttonGroupAngleType"/>
   <buttongroup name="buttonGroupLineType"/>
+  <buttongroup name="buttonGroupAngleType"/>
  </buttongroups>
 </ui>

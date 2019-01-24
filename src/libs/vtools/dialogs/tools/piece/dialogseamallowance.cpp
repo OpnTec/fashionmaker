@@ -998,6 +998,7 @@ void DialogSeamAllowance::PassmarkChanged(int index)
     uiTabPassmarks->radioButtonThreeLines->setDisabled(true);
     uiTabPassmarks->radioButtonTMark->setDisabled(true);
     uiTabPassmarks->radioButtonVMark->setDisabled(true);
+    uiTabPassmarks->radioButtonVMark2->setDisabled(true);
 
     uiTabPassmarks->radioButtonStraightforward->setDisabled(true);
     uiTabPassmarks->radioButtonBisector->setDisabled(true);
@@ -1028,6 +1029,7 @@ void DialogSeamAllowance::PassmarkChanged(int index)
             uiTabPassmarks->radioButtonThreeLines->setEnabled(true);
             uiTabPassmarks->radioButtonTMark->setEnabled(true);
             uiTabPassmarks->radioButtonVMark->setEnabled(true);
+            uiTabPassmarks->radioButtonVMark2->setEnabled(true);
 
             switch(node.GetPassmarkLineType())
             {
@@ -1045,6 +1047,9 @@ void DialogSeamAllowance::PassmarkChanged(int index)
                     break;
                 case PassmarkLineType::VMark:
                     uiTabPassmarks->radioButtonVMark->setChecked(true);
+                    break;
+                case PassmarkLineType::VMark2:
+                    uiTabPassmarks->radioButtonVMark2->setChecked(true);
                     break;
                 default:
                     break;
@@ -1441,6 +1446,10 @@ void DialogSeamAllowance::PassmarkLineTypeChanged(int id)
             else if (id == uiTabPassmarks->buttonGroupLineType->id(uiTabPassmarks->radioButtonVMark))
             {
                 lineType = PassmarkLineType::VMark;
+            }
+            else if (id == uiTabPassmarks->buttonGroupLineType->id(uiTabPassmarks->radioButtonVMark2))
+            {
+                lineType = PassmarkLineType::VMark2;
             }
 
             rowNode.SetPassmarkLineType(lineType);

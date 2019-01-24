@@ -992,8 +992,27 @@
             <property name="enabled">
              <bool>false</bool>
             </property>
+            <property name="toolTip">
+             <string>Acute angle that looks inside of piece</string>
+            </property>
             <property name="text">
              <string>V mark</string>
+            </property>
+            <attribute name="buttonGroup">
+             <string notr="true">buttonGroupMarkType</string>
+            </attribute>
+           </widget>
+          </item>
+          <item>
+           <widget class="QRadioButton" name="radioButtonVMark2">
+            <property name="enabled">
+             <bool>false</bool>
+            </property>
+            <property name="toolTip">
+             <string>Acute angle that looks outside of piece</string>
+            </property>
+            <property name="text">
+             <string>V mark 2</string>
             </property>
             <attribute name="buttonGroup">
              <string notr="true">buttonGroupMarkType</string>
@@ -1430,7 +1449,7 @@
   </connection>
  </connections>
  <buttongroups>
-  <buttongroup name="buttonGroupAngleType"/>
   <buttongroup name="buttonGroupMarkType"/>
+  <buttongroup name="buttonGroupAngleType"/>
  </buttongroups>
 </ui>

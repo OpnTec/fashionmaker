@@ -486,6 +486,7 @@ void DialogPiecePath::PassmarkChanged(int index)
     ui->radioButtonThreeLines->setDisabled(true);
     ui->radioButtonTMark->setDisabled(true);
     ui->radioButtonVMark->setDisabled(true);
+    ui->radioButtonVMark2->setDisabled(true);
 
     ui->radioButtonStraightforward->setDisabled(true);
     ui->radioButtonBisector->setDisabled(true);
@@ -516,6 +517,7 @@ void DialogPiecePath::PassmarkChanged(int index)
             ui->radioButtonThreeLines->setEnabled(true);
             ui->radioButtonTMark->setEnabled(true);
             ui->radioButtonVMark->setEnabled(true);
+            ui->radioButtonVMark2->setEnabled(true);
 
             switch(node.GetPassmarkLineType())
             {
@@ -533,6 +535,9 @@ void DialogPiecePath::PassmarkChanged(int index)
                     break;
                 case PassmarkLineType::VMark:
                     ui->radioButtonVMark->setChecked(true);
+                    break;
+                case PassmarkLineType::VMark2:
+                    ui->radioButtonVMark2->setChecked(true);
                     break;
                 default:
                     break;
@@ -641,6 +646,10 @@ void DialogPiecePath::PassmarkLineTypeChanged(int id)
             else if (id == ui->buttonGroupMarkType->id(ui->radioButtonVMark))
             {
                 lineType = PassmarkLineType::VMark;
+            }
+            else if (id == ui->buttonGroupMarkType->id(ui->radioButtonVMark2))
+            {
+                lineType = PassmarkLineType::VMark2;
             }
 
             rowNode.SetPassmarkLineType(lineType);

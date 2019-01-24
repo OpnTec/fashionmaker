@@ -196,7 +196,36 @@ QVector<QLineF> CreateVMarkPassmark(const QLineF &line)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QVector<QLineF> CreatePassmarkLines(PassmarkLineType lineType, PassmarkAngleType angleType, const QLineF &line)
+QVector<QLineF> CreateVMark2Passmark(const QLineF &line, const QVector<QPointF> &seamAllowance)
+{
+    QLineF l1 = QLineF(line.p2(), line.p1());
+    l1.setAngle(l1.angle() + 35);
+
+    QLineF l2 = QLineF(line.p2(), line.p1());
+    l2.setAngle(l2.angle() - 35);
+
+    auto FindIntersection = [seamAllowance](const QLineF &line)
+    {
+        QLineF testLine = line;
+        testLine.setLength(testLine.length()*10);
+        QVector<QPointF> intersections = VAbstractCurve::CurveIntersectLine(seamAllowance, testLine);
+        if (not intersections.isEmpty())
+        {
+            return QLineF(line.p1(), intersections.last());
+        }
+
+        return line;
+    };
+
+    QVector<QLineF> lines;
+    lines.append(FindIntersection(l1));
+    lines.append(FindIntersection(l2));
+    return lines;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QVector<QLineF> CreatePassmarkLines(PassmarkLineType lineType, PassmarkAngleType angleType, const QLineF &line,
+                                    const QVector<QPointF> &seamAllowance)
 {
     QVector<QLineF> passmarksLines;
 
@@ -222,6 +251,9 @@ QVector<QLineF> CreatePassmarkLines(PassmarkLineType lineType, PassmarkAngleType
             case PassmarkLineType::VMark:
                 passmarksLines += CreateVMarkPassmark(line);
                 break;
+            case PassmarkLineType::VMark2:
+                passmarksLines += CreateVMark2Passmark(line, seamAllowance);
+                break;
             case PassmarkLineType::OneLine:
             default:
                 passmarksLines.append(line);
@@ -239,6 +271,7 @@ QVector<QLineF> CreatePassmarkLines(PassmarkLineType lineType, PassmarkAngleType
             case PassmarkLineType::TwoLines:
             case PassmarkLineType::ThreeLines:
             case PassmarkLineType::VMark:
+            case PassmarkLineType::VMark2:
             default:
                 passmarksLines.append(line);
                 break;
@@ -1309,6 +1342,8 @@ QVector<QLineF> VPiece::CreatePassmark(const QVector<VPieceNode> &path, int prev
     passmarkData.passmarkLineType = path.at(passmarkIndex).GetPassmarkLineType();
     passmarkData.passmarkAngleType = path.at(passmarkIndex).GetPassmarkAngleType();
 
+    const QVector<QPointF> mainPath = MainPathPoints(data);
+
     if (not IsSeamAllowanceBuiltIn())
     {
         // Because rollback cannot be calulated if passmark is not first point in main path we rotate it.
@@ -1327,12 +1362,12 @@ QVector<QLineF> VPiece::CreatePassmark(const QVector<VPieceNode> &path, int prev
                 && path.at(passmarkIndex).GetPassmarkAngleType() != PassmarkAngleType::Intersection2OnlyRight
                 && path.at(passmarkIndex).IsShowSecondPassmark())
         {
-            lines += BuiltInSAPassmark(passmarkData);
+            lines += BuiltInSAPassmark(passmarkData, mainPath);
         }
         return lines;
     }
 
-    return BuiltInSAPassmark(passmarkData);
+    return BuiltInSAPassmark(passmarkData, mainPath);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -1381,7 +1416,7 @@ QVector<QLineF> VPiece::SAPassmark(const VPiecePassmarkData &passmarkData, const
                 line.setLength(qMin(width * VSAPoint::passmarkFactor, VSAPoint::maxPassmarkLength));
 
                 passmarksLines += CreatePassmarkLines(passmarkData.passmarkLineType, passmarkData.passmarkAngleType,
-                                                      line);
+                                                      line, seamAllowance);
             }
             else
             {
@@ -1404,7 +1439,8 @@ QVector<QLineF> VPiece::SAPassmark(const VPiecePassmarkData &passmarkData, const
     {
         QLineF line = QLineF(seamPassmarkSAPoint, passmarkData.passmarkSAPoint);
         line.setLength(passmarkData.passmarkSAPoint.PassmarkLength(passmarkData.saWidth));
-        passmarksLines += CreatePassmarkLines(passmarkData.passmarkLineType, passmarkData.passmarkAngleType, line);
+        passmarksLines += CreatePassmarkLines(passmarkData.passmarkLineType, passmarkData.passmarkAngleType, line,
+                                              seamAllowance);
     }
     else if (passmarkData.passmarkAngleType == PassmarkAngleType::Bisector)
     {
@@ -1457,7 +1493,7 @@ QVector<QLineF> VPiece::SAPassmark(const VPiecePassmarkData &passmarkData, const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QVector<QLineF> VPiece::BuiltInSAPassmark(const VPiecePassmarkData &passmarkData)
+QVector<QLineF> VPiece::BuiltInSAPassmark(const VPiecePassmarkData &passmarkData, const QVector<QPointF> &mainPath)
 {
     QVector<QLineF> passmarksLines;
 
@@ -1467,7 +1503,8 @@ QVector<QLineF> VPiece::BuiltInSAPassmark(const VPiecePassmarkData &passmarkData
     edge1.setAngle(edge1.angle() + edge1.angleTo(edge2)/2.);
     edge1.setLength(passmarkData.passmarkSAPoint.PassmarkLength(passmarkData.saWidth));
 
-    passmarksLines += CreatePassmarkLines(passmarkData.passmarkLineType, passmarkData.passmarkAngleType, edge1);
+    passmarksLines += CreatePassmarkLines(passmarkData.passmarkLineType, passmarkData.passmarkAngleType, edge1,
+                                          mainPath);
 
     return passmarksLines;
 }
@@ -1524,5 +1561,5 @@ QVector<QLineF> VPiece::PassmarkBisector(PassmarkStatus seamPassmarkType, const 
     edge1.setAngle(edge1.angle() + edge1.angleTo(edge2)/2.);
     edge1.setLength(passmarkData.passmarkSAPoint.PassmarkLength(passmarkData.saWidth));
 
-    return CreatePassmarkLines(passmarkData.passmarkLineType, passmarkData.passmarkAngleType, edge1);
+    return CreatePassmarkLines(passmarkData.passmarkLineType, passmarkData.passmarkAngleType, edge1, seamAllowance);
 }

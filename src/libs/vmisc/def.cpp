@@ -495,6 +495,7 @@ const QString strThree = QStringLiteral("three");
 
 Q_GLOBAL_STATIC_WITH_ARGS(const QString, strTMark, (QLatin1String("tMark")))
 Q_GLOBAL_STATIC_WITH_ARGS(const QString, strVMark, (QLatin1String("vMark")))
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, strVMark2, (QLatin1String("vMark2")))
 
 //---------------------------------------------------------------------------------------------------------------------
 QString PassmarkLineTypeToString(PassmarkLineType type)
@@ -511,6 +512,8 @@ QString PassmarkLineTypeToString(PassmarkLineType type)
             return *strTMark;
         case PassmarkLineType::VMark:
             return *strVMark;
+        case PassmarkLineType::VMark2:
+            return *strVMark2;
         default:
             break;
     }
@@ -521,7 +524,7 @@ QString PassmarkLineTypeToString(PassmarkLineType type)
 //---------------------------------------------------------------------------------------------------------------------
 PassmarkLineType StringToPassmarkLineType(const QString &value)
 {
-    const QStringList values = QStringList() << strOne << strTwo << strThree << *strTMark << *strVMark;
+    const QStringList values{strOne, strTwo, strThree, *strTMark, *strVMark, *strVMark2};
 
     switch(values.indexOf(value))
     {
@@ -535,6 +538,8 @@ PassmarkLineType StringToPassmarkLineType(const QString &value)
             return PassmarkLineType::TMark;
         case 4: // strVMark
             return PassmarkLineType::VMark;
+        case 5: // strVMark2
+            return PassmarkLineType::VMark2;
         default:
             break;
     }
