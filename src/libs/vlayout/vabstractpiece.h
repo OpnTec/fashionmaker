@@ -42,6 +42,8 @@ template <class T> class QVector;
 
 class VAbstractPieceData;
 class QPainterPath;
+class VGrainlineData;
+class VContainer;
 
 QT_WARNING_PUSH
 QT_WARNING_DISABLE_GCC("-Weffc++")
@@ -203,13 +205,21 @@ public:
 
     static QVector<QPointF> RollbackSeamAllowance(QVector<QPointF> points, const QLineF &cuttingEdge, bool *success);
 
+    static QVector<QPointF> GrainlinePoints(const VGrainlineData &geom, const VContainer *pattern,
+                                            const QRectF &boundingRect, qreal &dAng);
+
 protected:
     template <class T>
     static QVector<T> RemoveDublicates(const QVector<T> &points, bool removeFirstAndLast = true);
     static bool       IsEkvPointOnLine(const QPointF &iPoint, const QPointF &prevPoint, const QPointF &nextPoint);
     static bool       IsEkvPointOnLine(const VSAPoint &iPoint, const VSAPoint &prevPoint, const VSAPoint &nextPoint);
 
-    static QPainterPath PlaceLabelImgPath(const PlaceLabelImg &img);
+    static QPainterPath     PlaceLabelImgPath(const PlaceLabelImg &img);
+    static bool             IsItemContained(const QRectF &parentBoundingRect, const QVector<QPointF> &shape, qreal &dX,
+                                        qreal &dY);
+    static QVector<QPointF> CorrectPosition(const QRectF &parentBoundingRect, QVector<QPointF> points);
+    static bool             FindGrainlineGeometry(const VGrainlineData& geom, const VContainer *pattern, qreal &length,
+                                                  qreal &rotationAngle, QPointF &pos);
 private:
     QSharedDataPointer<VAbstractPieceData> d;
 };

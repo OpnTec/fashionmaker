@@ -160,149 +160,6 @@ bool FindLabelGeometry(const VPatternLabelData &labelData, const VContainer *pat
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-bool FindGrainlineGeometry(const VGrainlineData& geom, const VContainer *pattern, qreal &length, qreal &rotationAngle,
-                           QPointF &pos)
-{
-    SCASSERT(pattern != nullptr)
-
-    const quint32 topPin = geom.TopPin();
-    const quint32 bottomPin = geom.BottomPin();
-
-    if (topPin != NULL_ID && bottomPin != NULL_ID)
-    {
-        try
-        {
-            const auto topPinPoint = pattern->GeometricObject<VPointF>(topPin);
-            const auto bottomPinPoint = pattern->GeometricObject<VPointF>(bottomPin);
-
-            QLineF grainline(static_cast<QPointF>(*bottomPinPoint), static_cast<QPointF>(*topPinPoint));
-            length = grainline.length();
-            rotationAngle = grainline.angle();
-
-            if (not VFuzzyComparePossibleNulls(rotationAngle, 0))
-            {
-                grainline.setAngle(0);
-            }
-
-            pos = grainline.p1();
-            rotationAngle = qDegreesToRadians(rotationAngle);
-
-            return true;
-        }
-        catch(const VExceptionBadId &)
-        {
-            // do nothing.
-        }
-    }
-
-    try
-    {
-        Calculator cal1;
-        rotationAngle = cal1.EvalFormula(pattern->DataVariables(), geom.GetRotation());
-        rotationAngle = qDegreesToRadians(rotationAngle);
-
-        Calculator cal2;
-        length = cal2.EvalFormula(pattern->DataVariables(), geom.GetLength());
-        length = ToPixel(length, *pattern->GetPatternUnit());
-    }
-    catch(qmu::QmuParserError &e)
-    {
-        Q_UNUSED(e);
-        return false;
-    }
-
-    const quint32 centerPin = geom.CenterPin();
-    if (centerPin != NULL_ID)
-    {
-        try
-        {
-            const auto centerPinPoint = pattern->GeometricObject<VPointF>(centerPin);
-
-            QLineF grainline(centerPinPoint->x(), centerPinPoint->y(),
-                             centerPinPoint->x() + length / 2.0, centerPinPoint->y());
-
-            grainline.setAngle(qRadiansToDegrees(rotationAngle));
-            grainline = QLineF(grainline.p2(), grainline.p1());
-            grainline.setLength(length);
-
-            pos = grainline.p2();
-        }
-        catch(const VExceptionBadId &)
-        {
-            pos = geom.GetPos();
-        }
-    }
-    else
-    {
-        pos = geom.GetPos();
-    }
-    return true;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-bool IsItemContained(const QRectF &parentBoundingRect, const QVector<QPointF> &shape, qreal &dX, qreal &dY)
-{
-    dX = 0;
-    dY = 0;
-    // single point differences
-    bool bInside = true;
-
-    for (auto p : shape)
-    {
-        qreal dPtX = 0;
-        qreal dPtY = 0;
-        if (not parentBoundingRect.contains(p))
-        {
-            if (p.x() < parentBoundingRect.left())
-            {
-                dPtX = parentBoundingRect.left() - p.x();
-            }
-            else if (p.x() > parentBoundingRect.right())
-            {
-                dPtX = parentBoundingRect.right() - p.x();
-            }
-
-            if (p.y() < parentBoundingRect.top())
-            {
-                dPtY = parentBoundingRect.top() - p.y();
-            }
-            else if (p.y() > parentBoundingRect.bottom())
-            {
-                dPtY = parentBoundingRect.bottom() - p.y();
-            }
-
-            if (fabs(dPtX) > fabs(dX))
-            {
-                dX = dPtX;
-            }
-
-            if (fabs(dPtY) > fabs(dY))
-            {
-                dY = dPtY;
-            }
-
-            bInside = false;
-        }
-    }
-    return bInside;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-QVector<QPointF> CorrectPosition(const QRectF &parentBoundingRect, QVector<QPointF> points)
-{
-    qreal dX = 0;
-    qreal dY = 0;
-    if (not IsItemContained(parentBoundingRect, points, dX, dY))
-    {
-        for (int i =0; i < points.size(); ++i)
-        {
-            points[i] = QPointF(points.at(i).x() + dX, points.at(i).y() + dY);
-        }
-    }
-    return points;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
 QVector<VSAPoint> PrepareAllowance(const QVector<QPointF> &points)
 {
     QVector<VSAPoint> allowancePoints;
@@ -662,12 +519,12 @@ void VLayoutPiece::SetPatternInfo(VAbstractPattern* pDoc, const VPatternLabelDat
 //---------------------------------------------------------------------------------------------------------------------
 void VLayoutPiece::SetGrainline(const VGrainlineData& geom, const VContainer* pattern)
 {
-    SCASSERT(pattern != nullptr)
-
-    QPointF pt1;
     qreal dAng = 0;
-    qreal dLen = 0;
-    if ( not FindGrainlineGeometry(geom, pattern, dLen, dAng, pt1))
+
+    QScopedPointer<QGraphicsItem> item(GetMainPathItem());
+    const QVector<QPointF> v = GrainlinePoints(geom, pattern, item->boundingRect(), dAng);
+
+    if (v.isEmpty())
     {
         return;
     }
@@ -675,35 +532,7 @@ void VLayoutPiece::SetGrainline(const VGrainlineData& geom, const VContainer* pa
     d->grainlineEnabled = true;
     d->grainlineArrowType = geom.GetArrowType();
     d->grainlineAngle = qRadiansToDegrees(dAng);
-
-    QPointF pt2(pt1.x() + dLen * qCos(dAng), pt1.y() - dLen * qSin(dAng));
-
-    const qreal dArrowLen = ToPixel(0.5, *pattern->GetPatternUnit());
-    const qreal dArrowAng = M_PI/9;
-
-    QVector<QPointF> v;
-    v << pt1;
-
-    if (geom.GetArrowType() != ArrowType::atFront)
-    {
-        v << QPointF(pt1.x() + dArrowLen * qCos(dAng + dArrowAng), pt1.y() - dArrowLen * qSin(dAng + dArrowAng));
-        v << QPointF(pt1.x() + dArrowLen * qCos(dAng - dArrowAng), pt1.y() - dArrowLen * qSin(dAng - dArrowAng));
-        v << pt1;
-    }
-
-    v << pt2;
-
-    if (geom.GetArrowType() != ArrowType::atRear)
-    {
-        dAng += M_PI;
-
-        v << QPointF(pt2.x() + dArrowLen * qCos(dAng + dArrowAng), pt2.y() - dArrowLen * qSin(dAng + dArrowAng));
-        v << QPointF(pt2.x() + dArrowLen * qCos(dAng - dArrowAng), pt2.y() - dArrowLen * qSin(dAng - dArrowAng));
-        v << pt2;
-    }
-
-    QScopedPointer<QGraphicsItem> item(GetMainPathItem());
-    d->grainlinePoints = CorrectPosition(item->boundingRect(), v);
+    d->grainlinePoints = v;
 }
 
 //---------------------------------------------------------------------------------------------------------------------

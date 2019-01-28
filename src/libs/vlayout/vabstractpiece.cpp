@@ -31,6 +31,10 @@
 #include "../vmisc/vabstractapplication.h"
 #include "../vgeometry/vpointf.h"
 #include "../ifc/exception/vexception.h"
+#include "../vmisc/vmath.h"
+#include "../vpatterndb/floatItemData/vgrainlinedata.h"
+#include "../vpatterndb/vcontainer.h"
+#include "../vpatterndb/calculator.h"
 
 #include <QLineF>
 #include <QSet>
@@ -1539,4 +1543,197 @@ QVector<QPointF> VAbstractPiece::RollbackSeamAllowance(QVector<QPointF> points, 
     }
 
     return points;
+}
+
+
+//---------------------------------------------------------------------------------------------------------------------
+bool VAbstractPiece::IsItemContained(const QRectF &parentBoundingRect, const QVector<QPointF> &shape, qreal &dX,
+                                     qreal &dY)
+{
+    dX = 0;
+    dY = 0;
+    // single point differences
+    bool bInside = true;
+
+    for (auto p : shape)
+    {
+        qreal dPtX = 0;
+        qreal dPtY = 0;
+        if (not parentBoundingRect.contains(p))
+        {
+            if (p.x() < parentBoundingRect.left())
+            {
+                dPtX = parentBoundingRect.left() - p.x();
+            }
+            else if (p.x() > parentBoundingRect.right())
+            {
+                dPtX = parentBoundingRect.right() - p.x();
+            }
+
+            if (p.y() < parentBoundingRect.top())
+            {
+                dPtY = parentBoundingRect.top() - p.y();
+            }
+            else if (p.y() > parentBoundingRect.bottom())
+            {
+                dPtY = parentBoundingRect.bottom() - p.y();
+            }
+
+            if (qAbs(dPtX) > qAbs(dX))
+            {
+                dX = dPtX;
+            }
+
+            if (qAbs(dPtY) > qAbs(dY))
+            {
+                dY = dPtY;
+            }
+
+            bInside = false;
+        }
+    }
+    return bInside;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QVector<QPointF> VAbstractPiece::CorrectPosition(const QRectF &parentBoundingRect, QVector<QPointF> points)
+{
+    qreal dX = 0;
+    qreal dY = 0;
+    if (not IsItemContained(parentBoundingRect, points, dX, dY))
+    {
+        for (int i =0; i < points.size(); ++i)
+        {
+            points[i] = QPointF(points.at(i).x() + dX, points.at(i).y() + dY);
+        }
+    }
+    return points;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+bool VAbstractPiece::FindGrainlineGeometry(const VGrainlineData& geom, const VContainer *pattern, qreal &length,
+                                           qreal &rotationAngle, QPointF &pos)
+{
+    SCASSERT(pattern != nullptr)
+
+    const quint32 topPin = geom.TopPin();
+    const quint32 bottomPin = geom.BottomPin();
+
+    if (topPin != NULL_ID && bottomPin != NULL_ID)
+    {
+        try
+        {
+            const auto topPinPoint = pattern->GeometricObject<VPointF>(topPin);
+            const auto bottomPinPoint = pattern->GeometricObject<VPointF>(bottomPin);
+
+            QLineF grainline(static_cast<QPointF>(*bottomPinPoint), static_cast<QPointF>(*topPinPoint));
+            length = grainline.length();
+            rotationAngle = grainline.angle();
+
+            if (not VFuzzyComparePossibleNulls(rotationAngle, 0))
+            {
+                grainline.setAngle(0);
+            }
+
+            pos = grainline.p1();
+            rotationAngle = qDegreesToRadians(rotationAngle);
+
+            return true;
+        }
+        catch(const VExceptionBadId &)
+        {
+            // do nothing.
+        }
+    }
+
+    try
+    {
+        Calculator cal1;
+        rotationAngle = cal1.EvalFormula(pattern->DataVariables(), geom.GetRotation());
+        rotationAngle = qDegreesToRadians(rotationAngle);
+
+        Calculator cal2;
+        length = cal2.EvalFormula(pattern->DataVariables(), geom.GetLength());
+        length = ToPixel(length, *pattern->GetPatternUnit());
+    }
+    catch(qmu::QmuParserError &e)
+    {
+        Q_UNUSED(e);
+        return false;
+    }
+
+    const quint32 centerPin = geom.CenterPin();
+    if (centerPin != NULL_ID)
+    {
+        try
+        {
+            const auto centerPinPoint = pattern->GeometricObject<VPointF>(centerPin);
+
+            QLineF grainline(centerPinPoint->x(), centerPinPoint->y(),
+                             centerPinPoint->x() + length / 2.0, centerPinPoint->y());
+
+            grainline.setAngle(qRadiansToDegrees(rotationAngle));
+            grainline = QLineF(grainline.p2(), grainline.p1());
+            grainline.setLength(length);
+
+            pos = grainline.p2();
+        }
+        catch(const VExceptionBadId &)
+        {
+            pos = geom.GetPos();
+        }
+    }
+    else
+    {
+        pos = geom.GetPos();
+    }
+    return true;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QVector<QPointF> VAbstractPiece::GrainlinePoints(const VGrainlineData &geom, const VContainer *pattern,
+                                                 const QRectF &boundingRect, qreal &dAng)
+{
+    SCASSERT(pattern != nullptr)
+
+    QPointF pt1;
+    qreal dLen = 0;
+    if ( not FindGrainlineGeometry(geom, pattern, dLen, dAng, pt1))
+    {
+        return QVector<QPointF>();
+    }
+
+    qreal rotation = dAng;
+
+    QPointF pt2(pt1.x() + dLen * qCos(rotation), pt1.y() - dLen * qSin(rotation));
+
+    const qreal dArrowLen = ToPixel(0.5, *pattern->GetPatternUnit());
+    const qreal dArrowAng = M_PI/9;
+
+    QVector<QPointF> v;
+    v << pt1;
+
+    if (geom.GetArrowType() != ArrowType::atFront)
+    {
+        v << QPointF(pt1.x() + dArrowLen * qCos(rotation + dArrowAng),
+                     pt1.y() - dArrowLen * qSin(rotation + dArrowAng));
+        v << QPointF(pt1.x() + dArrowLen * qCos(rotation - dArrowAng),
+                     pt1.y() - dArrowLen * qSin(rotation - dArrowAng));
+        v << pt1;
+    }
+
+    v << pt2;
+
+    if (geom.GetArrowType() != ArrowType::atRear)
+    {
+        rotation += M_PI;
+
+        v << QPointF(pt2.x() + dArrowLen * qCos(rotation + dArrowAng),
+                     pt2.y() - dArrowLen * qSin(rotation + dArrowAng));
+        v << QPointF(pt2.x() + dArrowLen * qCos(rotation - dArrowAng),
+                     pt2.y() - dArrowLen * qSin(rotation - dArrowAng));
+        v << pt2;
+    }
+
+    return CorrectPosition(boundingRect, v);
 }
