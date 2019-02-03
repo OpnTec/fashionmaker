@@ -1343,7 +1343,7 @@ void UpdateUnitedNodes(const VToolUnionDetailsInitData &initData, qreal dx, qrea
         {
             const auto unitedPath = VToolUnionDetails::CalcUnitedPath(d1REPath, d2REPath, initData.indexD2, pRotate);
 
-            for (auto path : unitedPath)
+            for (auto &path : unitedPath)
             {
                 if (path.first)
                 {// first piece
