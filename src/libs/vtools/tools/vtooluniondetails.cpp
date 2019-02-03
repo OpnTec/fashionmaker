@@ -1593,10 +1593,9 @@ void CreateUnitedDetail(const VToolUnionDetailsInitData &initData, qreal dx, qre
 
         initPieceData.detail = initData.data->GetPiece(id);
         initPieceData.width = initPieceData.detail.GetFormulaSAWidth();
-        VToolSeamAllowance *piece = VToolSeamAllowance::Duplicate(initPieceData);
-        if (piece != nullptr)
+        if (VToolSeamAllowance *duplicate = VToolSeamAllowance::Duplicate(initPieceData))
         {
-            piece->RefreshGeometry(true); // Refresh internal paths
+            duplicate->RefreshGeometry(true); // Refresh internal paths
         }
 
     };
@@ -1907,9 +1906,9 @@ QVector<quint32> VToolUnionDetails::GetReferenceObjects() const
                         case 4://VToolSeamAllowance::TagPlaceLabels
                         {
                             const QDomNodeList children = element.childNodes();
-                            for (qint32 i = 0; i < children.size(); ++i)
+                            for (qint32 index = 0; index < children.size(); ++index)
                             {
-                                const QDomElement record = children.at(i).toElement();
+                                const QDomElement record = children.at(index).toElement();
                                 if (not record.isNull() && record.tagName() == VToolSeamAllowance::TagRecord)
                                 {
                                     list.append(record.text().toUInt());
