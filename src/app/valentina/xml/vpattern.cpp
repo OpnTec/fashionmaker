@@ -1030,13 +1030,29 @@ VPieceLabelData VPattern::ParsePieceDataTag(const QDomElement &domElement, VPiec
     ppData.SetOnFold(GetParametrBool(domElement, AttrOnFold, falseStr));
     ppData.SetPos(QPointF(GetParametrDouble(domElement, AttrMx, QChar('0')),
                           GetParametrDouble(domElement, AttrMy, QChar('0'))));
-    ppData.SetLabelWidth(GetParametrString(domElement, AttrWidth, QChar('1')));
-    ppData.SetLabelHeight(GetParametrString(domElement, AttrHeight, QChar('1')));
     ppData.SetFontSize(static_cast<int>(GetParametrUInt(domElement, VToolSeamAllowance::AttrFont, QChar('0'))));
     ppData.SetRotation(GetParametrString(domElement, AttrRotation, QChar('0')));
-    ppData.SetCenterPin(GetParametrUInt(domElement, VToolSeamAllowance::AttrCenterPin, NULL_ID_STR));
-    ppData.SetTopLeftPin(GetParametrUInt(domElement, VToolSeamAllowance::AttrTopLeftPin, NULL_ID_STR));
-    ppData.SetBottomRightPin(GetParametrUInt(domElement, VToolSeamAllowance::AttrBottomRightPin, NULL_ID_STR));
+
+    const quint32 topLeftPin = GetParametrUInt(domElement, VToolSeamAllowance::AttrTopLeftPin, NULL_ID_STR);
+    const quint32 bottomRightPin = GetParametrUInt(domElement, VToolSeamAllowance::AttrBottomRightPin, NULL_ID_STR);
+
+    if (topLeftPin != NULL_ID && bottomRightPin != NULL_ID && topLeftPin != bottomRightPin)
+    {
+        ppData.SetTopLeftPin(topLeftPin);
+        ppData.SetBottomRightPin(bottomRightPin);
+        ppData.SetCenterPin(NULL_ID);
+        ppData.SetLabelWidth(QChar('1'));
+        ppData.SetLabelHeight(QChar('1'));
+    }
+    else
+    {
+        ppData.SetTopLeftPin(NULL_ID);
+        ppData.SetBottomRightPin(NULL_ID);
+        ppData.SetCenterPin(GetParametrUInt(domElement, VToolSeamAllowance::AttrCenterPin, NULL_ID_STR));
+        ppData.SetLabelWidth(GetParametrString(domElement, AttrWidth, QChar('1')));
+        ppData.SetLabelHeight(GetParametrString(domElement, AttrHeight, QChar('1')));
+    }
+
     ppData.SetLabelTemplate(GetLabelTemplate(domElement));
     return ppData;
 }
@@ -1047,13 +1063,29 @@ VPatternLabelData VPattern::ParsePiecePatternInfo(const QDomElement &domElement,
     patternInfo.SetVisible(GetParametrBool(domElement, AttrVisible, trueStr));
     patternInfo.SetPos(QPointF(GetParametrDouble(domElement, AttrMx, QChar('0')),
                                GetParametrDouble(domElement, AttrMy, QChar('0'))));
-    patternInfo.SetLabelWidth(GetParametrString(domElement, AttrWidth, QChar('1')));
-    patternInfo.SetLabelHeight(GetParametrString(domElement, AttrHeight, QChar('1')));
     patternInfo.SetFontSize(static_cast<int>(GetParametrUInt(domElement, VToolSeamAllowance::AttrFont, QChar('0'))));
     patternInfo.SetRotation(GetParametrString(domElement, AttrRotation, QChar('0')));
-    patternInfo.SetCenterPin(GetParametrUInt(domElement, VToolSeamAllowance::AttrCenterPin, NULL_ID_STR));
-    patternInfo.SetTopLeftPin(GetParametrUInt(domElement, VToolSeamAllowance::AttrTopLeftPin, NULL_ID_STR));
-    patternInfo.SetBottomRightPin(GetParametrUInt(domElement, VToolSeamAllowance::AttrBottomRightPin, NULL_ID_STR));
+
+    const quint32 topLeftPin = GetParametrUInt(domElement, VToolSeamAllowance::AttrTopLeftPin, NULL_ID_STR);
+    const quint32 bottomRightPin = GetParametrUInt(domElement, VToolSeamAllowance::AttrBottomRightPin, NULL_ID_STR);
+
+    if (topLeftPin != NULL_ID && bottomRightPin != NULL_ID && topLeftPin != bottomRightPin)
+    {
+        patternInfo.SetTopLeftPin(topLeftPin);
+        patternInfo.SetBottomRightPin(bottomRightPin);
+        patternInfo.SetCenterPin(NULL_ID);
+        patternInfo.SetLabelWidth(QChar('1'));
+        patternInfo.SetLabelHeight(QChar('1'));
+    }
+    else
+    {
+        patternInfo.SetTopLeftPin(NULL_ID);
+        patternInfo.SetBottomRightPin(NULL_ID);
+        patternInfo.SetCenterPin(GetParametrUInt(domElement, VToolSeamAllowance::AttrCenterPin, NULL_ID_STR));
+        patternInfo.SetLabelWidth(GetParametrString(domElement, AttrWidth, QChar('1')));
+        patternInfo.SetLabelHeight(GetParametrString(domElement, AttrHeight, QChar('1')));
+    }
+
     return patternInfo;
 }
 
@@ -1063,12 +1095,30 @@ VGrainlineData VPattern::ParsePieceGrainline(const QDomElement &domElement, VGra
     gGeometry.SetVisible(GetParametrBool(domElement, AttrVisible, falseStr));
     gGeometry.SetPos(QPointF(GetParametrDouble(domElement, AttrMx, QChar('0')),
                              GetParametrDouble(domElement, AttrMy, QChar('0'))));
-    gGeometry.SetLength(GetParametrString(domElement, AttrLength, QChar('1')));
-    gGeometry.SetRotation(GetParametrString(domElement, AttrRotation, QStringLiteral("90")));
     gGeometry.SetArrowType(static_cast<ArrowType>(GetParametrUInt(domElement, AttrArrows, QChar('0'))));
-    gGeometry.SetCenterPin(GetParametrUInt(domElement, VToolSeamAllowance::AttrCenterPin, NULL_ID_STR));
-    gGeometry.SetTopPin(GetParametrUInt(domElement, VToolSeamAllowance::AttrTopPin, NULL_ID_STR));
-    gGeometry.SetBottomPin(GetParametrUInt(domElement, VToolSeamAllowance::AttrBottomPin, NULL_ID_STR));
+
+    const quint32 topPin = GetParametrUInt(domElement, VToolSeamAllowance::AttrTopPin, NULL_ID_STR);
+    const quint32 bottomPin = GetParametrUInt(domElement, VToolSeamAllowance::AttrBottomPin, NULL_ID_STR);
+
+    if (topPin != NULL_ID && bottomPin != NULL_ID && topPin != bottomPin)
+    {
+        gGeometry.SetTopPin(topPin);
+        gGeometry.SetBottomPin(bottomPin);
+
+        gGeometry.SetLength(QChar('1'));
+        gGeometry.SetRotation(QString::number(90));
+        gGeometry.SetCenterPin(NULL_ID);
+    }
+    else
+    {
+        gGeometry.SetTopPin(NULL_ID);
+        gGeometry.SetBottomPin(NULL_ID);
+
+        gGeometry.SetLength(GetParametrString(domElement, AttrLength, QChar('1')));
+        gGeometry.SetRotation(GetParametrString(domElement, AttrRotation, QString::number(90)));
+        gGeometry.SetCenterPin(GetParametrUInt(domElement, VToolSeamAllowance::AttrCenterPin, NULL_ID_STR));
+    }
+
     return gGeometry;
 }
 

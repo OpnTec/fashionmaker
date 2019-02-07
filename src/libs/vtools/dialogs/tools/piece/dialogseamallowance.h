@@ -1,4 +1,4 @@
-/************************************************************************
+﻿/************************************************************************
  **
  **  @file   dialogseamallowance.h
  **  @author Roman Telezhynskyi <dismine(at)gmail.com>
@@ -276,6 +276,10 @@ private:
     VPlaceLabelItem CurrentPlaceLabel(quint32 id) const;
 
     QString GetDefaultPieceName() const;
+
+    void EnableGrainlineFormulaControls(bool enable);
+    void EnableDetailLabelFormulaControls(bool enable);
+    void EnablePatternLabelFormulaControls(bool enable);
 };
 
 #endif // DIALOGSEAMALLOWANCE_H

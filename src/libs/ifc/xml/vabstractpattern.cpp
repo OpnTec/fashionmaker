@@ -234,8 +234,17 @@ void ReadExpressionAttribute(QVector<VFormulaField> &expressions, const QDomElem
 //---------------------------------------------------------------------------------------------------------------------
 QList<QString> GetTokens(const VFormulaField &formula)
 {
-    QScopedPointer<qmu::QmuTokenParser> cal(new qmu::QmuTokenParser(formula.expression, false, false));
-    return cal->GetTokens().values();
+    try
+    {
+        QScopedPointer<qmu::QmuTokenParser> cal(new qmu::QmuTokenParser(formula.expression, false, false));
+        return cal->GetTokens().values();
+    }
+    catch (const qmu::QmuParserError &e)
+    {
+        qWarning() << QObject::tr("Cannot get tokens from formula '%1'. Parser error: %2.")
+                      .arg(formula.expression, e.GetMsg());
+        return QList<QString>();
+    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------

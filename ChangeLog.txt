@@ -23,6 +23,7 @@
 - [#924] Valentina produces wrong passmark for rollback case.
 - [#930] Valentina doesn't update translation for variables after dynamic language switch.
 - [#931] Variable translation for Greek and Chinese are broken.
+- [#938] Dialog Seam Allowance doesn't block user from saving broken formula.
 
 # Version 0.6.1 October 23, 2018
 - [#885] Regression. Broken support for multi size measurements.
