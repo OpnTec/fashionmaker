@@ -85,8 +85,8 @@ void VFormulaPropertyEditor::SetFormula(const VFormula& formula)
 //---------------------------------------------------------------------------------------------------------------------
 void VFormulaPropertyEditor::onToolButtonClicked()
 {
-    DialogEditWrongFormula* tmpWidget = new DialogEditWrongFormula(formula.getData(), formula.getToolId(),
-                                                                   qApp->getMainWindow());
+    QScopedPointer<DialogEditWrongFormula> tmpWidget(new DialogEditWrongFormula(formula.getData(), formula.getToolId(),
+                                                                                qApp->getMainWindow()));
     tmpWidget->setCheckZero(formula.getCheckZero());
     tmpWidget->setPostfix(formula.getPostfix());
     tmpWidget->SetFormula(formula.GetFormula(FormulaType::FromUser));
@@ -94,11 +94,10 @@ void VFormulaPropertyEditor::onToolButtonClicked()
     if (tmpWidget->exec() == QDialog::Accepted)
     {
         formula.SetFormula(tmpWidget->GetFormula(), FormulaType::ToUser);
+        formula.Eval();
         TextLabel->setText(formula.getStringValue());
-        delete tmpWidget;
         emit dataChangedByUser(formula, this);
-        VPE::UserChangeEvent *event = new VPE::UserChangeEvent();
-        QCoreApplication::postEvent ( this, event );
+        QCoreApplication::postEvent(this, new VPE::UserChangeEvent());
     }
 }
 
