@@ -95,6 +95,7 @@ public:
     void       SetPath(const VPiecePath &path);
 
     QVector<QPointF>       MainPathPoints(const VContainer *data) const;
+    QVector<QPointF>       UniteMainPathPoints(const VContainer *data) const;
     QVector<VPointF>       MainPathNodePoints(const VContainer *data, bool showExcluded = false) const;
     QVector<QPointF>       SeamAllowancePoints(const VContainer *data) const;
     QVector<QPointF>       CuttingPathPoints(const VContainer *data) const;
@@ -155,13 +156,13 @@ public:
     VGrainlineData&         GetGrainlineGeometry();
     const VGrainlineData&   GetGrainlineGeometry() const;
 
+    QVector<VPieceNode> GetUnitedPath(const VContainer *data) const;
+
     static QVector<QLineF> SAPassmark(const VPiecePassmarkData &passmarkData, const QVector<QPointF> &seamAllowance);
 protected:
     QVector<QPointF> SeamAllowancePointsWithRotation(const VContainer *data, int makeFirst) const;
 private:
     QSharedDataPointer<VPieceData> d;
-
-    QVector<VPieceNode> GetUnitedPath(const VContainer *data) const;
 
     QVector<CustomSARecord> GetValidRecords() const;
     QVector<CustomSARecord> FilterRecords(QVector<CustomSARecord> records) const;

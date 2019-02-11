@@ -425,6 +425,14 @@ QVector<QPointF> VPiece::MainPathPoints(const VContainer *data) const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+QVector<QPointF> VPiece::UniteMainPathPoints(const VContainer *data) const
+{
+    QVector<QPointF> points = VPiecePath::NodesToPoints(data, GetUnitedPath(data));
+    points = CheckLoops(CorrectEquidistantPoints(points));//A path can contains loops
+    return points;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 QVector<VPointF> VPiece::MainPathNodePoints(const VContainer *data, bool showExcluded) const
 {
     return GetPath().PathNodePoints(data, showExcluded);

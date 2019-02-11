@@ -139,6 +139,8 @@ public:
 
     static QString NodeName(const QVector<VPieceNode> &nodes, int nodeIndex, const VContainer *data);
 
+    static QVector<QPointF> NodesToPoints(const VContainer *data, const QVector<VPieceNode> &nodes);
+
 private:
     QSharedDataPointer<VPiecePathData> d;
 };

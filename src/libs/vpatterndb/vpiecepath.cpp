@@ -351,40 +351,7 @@ bool VPiecePath::IsLastToCuttingCountour() const
 //---------------------------------------------------------------------------------------------------------------------
 QVector<QPointF> VPiecePath::PathPoints(const VContainer *data, const QVector<QPointF> &cuttingPath) const
 {
-    QVector<QPointF> points;
-    for (int i = 0; i < CountNodes(); ++i)
-    {
-        if (at(i).IsExcluded())
-        {
-            continue;// skip excluded node
-        }
-
-        switch (at(i).GetTypeTool())
-        {
-            case (Tool::NodePoint):
-            {
-                const QSharedPointer<VPointF> point = data->GeometricObject<VPointF>(at(i).GetId());
-                points.append(static_cast<QPointF>(*point));
-            }
-            break;
-            case (Tool::NodeArc):
-            case (Tool::NodeElArc):
-            case (Tool::NodeSpline):
-            case (Tool::NodeSplinePath):
-            {
-                const QSharedPointer<VAbstractCurve> curve = data->GeometricObject<VAbstractCurve>(at(i).GetId());
-
-                const QPointF begin = StartSegment(data, i, at(i).GetReverse());
-                const QPointF end = EndSegment(data, i, at(i).GetReverse());
-
-                points << curve->GetSegmentPoints(begin, end, at(i).GetReverse());
-            }
-            break;
-            default:
-                qDebug()<<"Get wrong tool type. Ignore."<< static_cast<char>(at(i).GetTypeTool());
-                break;
-        }
-    }
+    QVector<QPointF> points = NodesToPoints(data, d->m_nodes);
 
     if (GetType() == PiecePathType::InternalPath && not cuttingPath.isEmpty() && points.size() > 1)
     {
@@ -1204,4 +1171,47 @@ QString VPiecePath::NodeName(const QVector<VPieceNode> &nodes, int nodeIndex, co
         // ignore
     }
     return QString();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QVector<QPointF> VPiecePath::NodesToPoints(const VContainer *data, const QVector<VPieceNode> &nodes)
+{
+    QVector<QPointF> points;
+    for (int i = 0; i < nodes.size(); ++i)
+    {
+        const VPieceNode &node = nodes.at(i);
+        if (node.IsExcluded())
+        {
+            continue;// skip excluded node
+        }
+
+        switch (node.GetTypeTool())
+        {
+            case (Tool::NodePoint):
+            {
+                const QSharedPointer<VPointF> point = data->GeometricObject<VPointF>(node.GetId());
+                points.append(static_cast<QPointF>(*point));
+            }
+            break;
+            case (Tool::NodeArc):
+            case (Tool::NodeElArc):
+            case (Tool::NodeSpline):
+            case (Tool::NodeSplinePath):
+            {
+                const QSharedPointer<VAbstractCurve> curve = data->GeometricObject<VAbstractCurve>(node.GetId());
+
+
+                const QPointF begin = StartSegment(data, nodes, i, node.GetReverse());
+                const QPointF end = EndSegment(data, nodes, i, node.GetReverse());
+
+                points << curve->GetSegmentPoints(begin, end, node.GetReverse());
+            }
+            break;
+            default:
+                qDebug()<<"Get wrong tool type. Ignore."<< static_cast<char>(node.GetTypeTool());
+                break;
+        }
+    }
+
+    return points;
 }
