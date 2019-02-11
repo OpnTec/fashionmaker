@@ -101,6 +101,9 @@ public:
     template <typename T>
     void SetAttribute(QDomElement &domElement, const QString &name, const T &value) const;
 
+    template <typename T>
+    void SetAttributeOrRemoveIf(QDomElement &domElement, const QString &name, const T &value, const T &condition) const;
+
     static quint32 GetParametrUInt(const QDomElement& domElement, const QString &name, const QString &defValue);
     static bool    GetParametrBool(const QDomElement& domElement, const QString &name, const QString &defValue);
 
@@ -208,6 +211,14 @@ inline void VDomDocument::SetAttribute<MeasurementsType>(QDomElement &domElement
 {
     domElement.setAttribute(name, value == MeasurementsType::Multisize ? QStringLiteral("multisize") :
                                                                         QStringLiteral("individual"));
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+template <typename T>
+inline void VDomDocument::SetAttributeOrRemoveIf(QDomElement &domElement, const QString &name, const T &value,
+                                                 const T &condition) const
+{
+    value != condition ? domElement.setAttribute(name, value) : domElement.removeAttribute(name);
 }
 
 QT_WARNING_POP
