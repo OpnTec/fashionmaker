@@ -43,24 +43,26 @@
 
 Q_DECLARE_LOGGING_CATEGORY(vUndo)
 
-enum class UndoCommand: char { AddPatternPiece,
-                               AddToCalc,
-                               MoveSpline,
-                               MoveSplinePath,
-                               MoveSPoint,
-                               SaveToolOptions,
-                               SaveDetailOptions,
-                               SavePieceOptions,
-                               SavePiecePathOptions,
-                               SavePlaceLabelOptions,
-                               MovePiece,
-                               DeleteTool,
-                               DeletePatternPiece,
-                               RenamePP,
-                               MoveLabel,
-                               MoveDoubleLabel,
-                               RotationMoveLabel
-                             };
+enum class UndoCommand: char
+{
+    AddPatternPiece,
+    AddToCalc,
+    MoveSpline,
+    MoveSplinePath,
+    MoveSPoint,
+    SaveToolOptions,
+    SaveDetailOptions,
+    SavePieceOptions,
+    SavePiecePathOptions,
+    SavePlaceLabelOptions,
+    MovePiece,
+    DeleteTool,
+    DeletePatternPiece,
+    RenamePP,
+    MoveLabel,
+    MoveDoubleLabel,
+    RotationMoveLabel
+ };
 
 class VPattern;
 

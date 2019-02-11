@@ -115,18 +115,9 @@ bool SavePlaceLabelOptions::mergeWith(const QUndoCommand *command)
     const SavePlaceLabelOptions *saveCommand = static_cast<const SavePlaceLabelOptions *>(command);
     SCASSERT(saveCommand != nullptr);
 
-    if (saveCommand->LabelId() != nodeId)
+    if (saveCommand->LabelId() != nodeId || m_newLabel.GetCenterPoint() != saveCommand->NewLabel().GetCenterPoint())
     {
         return false;
-    }
-    else
-    {
-        const VPlaceLabelItem candidate = saveCommand->NewLabel();
-
-        if (m_newLabel.GetCenterPoint() != candidate.GetCenterPoint())
-        {
-            return false;
-        }
     }
 
     m_newLabel = saveCommand->NewLabel();

@@ -768,11 +768,14 @@ VPieceNode VAbstractPattern::ParseSANode(const QDomElement &domElement)
     const QString t = VDomDocument::GetParametrString(domElement, AttrType, VAbstractPattern::NodePoint);
     Tool tool;
 
-    const QStringList types = QStringList() << VAbstractPattern::NodePoint
-                                            << VAbstractPattern::NodeArc
-                                            << VAbstractPattern::NodeSpline
-                                            << VAbstractPattern::NodeSplinePath
-                                            << VAbstractPattern::NodeElArc;
+    const QStringList types
+    {
+        VAbstractPattern::NodePoint,
+        VAbstractPattern::NodeArc,
+        VAbstractPattern::NodeSpline,
+        VAbstractPattern::NodeSplinePath,
+        VAbstractPattern::NodeElArc
+    };
 
     switch (types.indexOf(t))
     {

@@ -1428,7 +1428,7 @@ void VToolSeamAllowance::ShowOptions()
 //---------------------------------------------------------------------------------------------------------------------
 void VToolSeamAllowance::ToggleInLayout(bool checked)
 {
-    TogglePieceInLayout *togglePrint = new TogglePieceInLayout(m_id, checked, &(VAbstractTool::data), doc);
+    auto togglePrint = new TogglePieceInLayout(m_id, checked, &(VAbstractTool::data), doc);
     connect(togglePrint, &TogglePieceInLayout::Toggled, doc, &VAbstractPattern::CheckInLayoutList);
     qApp->getUndoStack()->push(togglePrint);
 }

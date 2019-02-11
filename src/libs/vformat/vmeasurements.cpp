@@ -462,14 +462,7 @@ bool VMeasurements::IsReadOnly() const
 //---------------------------------------------------------------------------------------------------------------------
 void VMeasurements::SetReadOnly(bool ro)
 {
-    if (ro)
-    {
-        setTagText(TagReadOnly, trueStr);
-    }
-    else
-    {
-        setTagText(TagReadOnly, falseStr);
-    }
+    setTagText(TagReadOnly, ro ? trueStr : falseStr);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
