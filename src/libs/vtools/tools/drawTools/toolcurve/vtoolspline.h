@@ -117,7 +117,7 @@ private:
     QSharedPointer<VSpline> oldMoveSpline;
     QSharedPointer<VSpline> newMoveSpline;
 
-    VToolSpline (VToolSplineInitData initData, QGraphicsItem *parent = nullptr );
+    VToolSpline (const VToolSplineInitData &initData, QGraphicsItem *parent = nullptr );
 
     bool IsMovable() const;
     void SetSplineAttributes(QDomElement &domElement, const VSpline &spl);

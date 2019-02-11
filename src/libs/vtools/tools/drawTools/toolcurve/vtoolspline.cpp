@@ -76,7 +76,7 @@ const QString VToolSpline::OldToolType = QStringLiteral("simple");
  * @param initData init data.
  * @param parent parent object.
  */
-VToolSpline::VToolSpline(VToolSplineInitData initData, QGraphicsItem *parent)
+VToolSpline::VToolSpline(const VToolSplineInitData &initData, QGraphicsItem *parent)
     : VAbstractSpline(initData.doc, initData.data, initData.id, parent),
       oldPosition(),
       moved(false),
