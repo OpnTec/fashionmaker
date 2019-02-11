@@ -418,8 +418,8 @@
                                       <xs:attribute name="softExcluded" type="xs:boolean"/>
                                       <xs:attribute name="bufferSoftExcluded" type="xs:boolean"/>
                                       <xs:attribute name="checkUniqueness" type="xs:boolean"/>
-                                      <xs:attribute name="before" type="xs:double"/>
-                                      <xs:attribute name="after" type="xs:double"/>
+                                      <xs:attribute name="before" type="xs:string"/>
+                                      <xs:attribute name="after" type="xs:string"/>
                                       <xs:attribute name="angle" type="nodeAngle"/>
                                       <xs:attribute name="passmark" type="xs:boolean"/>
                                       <xs:attribute name="passmarkLine" type="passmarkLineType"/>

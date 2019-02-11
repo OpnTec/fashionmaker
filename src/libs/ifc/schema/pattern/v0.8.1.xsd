@@ -373,7 +373,12 @@
                           <xs:attribute name="height" type="xs:string"/>
                           <xs:attribute name="placeLabelType" type="placeLabelType"/>
                           <xs:attribute name="showLabel" type="xs:boolean"/>
-                          <xs:attribute name="visible" type="xs:string"/>  
+                          <xs:attribute name="visible" type="xs:string"/>
+                          <xs:attribute name="checkWidth" type="xs:string"/>
+                          <xs:attribute name="checkHeight" type="xs:string"/>
+                          <xs:attribute name="checkWidthReference" type="checkReference"/>
+                          <xs:attribute name="checkHeightReference" type="checkReference"/> 
+                          <xs:attribute name="checkStop" type="checkStop"/> 
                         </xs:complexType>
                       </xs:element>
                       <xs:element name="arc" minOccurs="0" maxOccurs="unbounded">
@@ -418,14 +423,19 @@
                                       <xs:attribute name="softExcluded" type="xs:boolean"/>
                                       <xs:attribute name="bufferSoftExcluded" type="xs:boolean"/>
                                       <xs:attribute name="checkUniqueness" type="xs:boolean"/>
-                                      <xs:attribute name="before" type="xs:double"/>
-                                      <xs:attribute name="after" type="xs:double"/>
+                                      <xs:attribute name="before" type="xs:string"/>
+                                      <xs:attribute name="after" type="xs:string"/>
                                       <xs:attribute name="angle" type="nodeAngle"/>
                                       <xs:attribute name="passmark" type="xs:boolean"/>
                                       <xs:attribute name="passmarkLine" type="passmarkLineType"/>
                                       <xs:attribute name="passmarkAngle" type="passmarkAngleType"/>
                                       <xs:attribute name="showSecondPassmark" type="xs:boolean"/>
                                       <xs:attribute name="allowCollapse" type="xs:boolean"/>
+                                      <xs:attribute name="checkWidth" type="xs:string"/>
+                                      <xs:attribute name="checkHeight" type="xs:string"/>
+                                      <xs:attribute name="checkWidthReference" type="checkReference"/>
+                                      <xs:attribute name="checkHeightReference" type="checkReference"/> 
+                                      <xs:attribute name="checkStop" type="checkStop"/>
                                     </xs:complexType>
                                   </xs:element>
                                 </xs:sequence>
@@ -663,6 +673,11 @@
                                     <xs:attribute name="passmarkAngle" type="passmarkAngleType"/>
                                     <xs:attribute name="showSecondPassmark" type="xs:boolean"/>
                                     <xs:attribute name="allowCollapse" type="xs:boolean"/>
+                                    <xs:attribute name="checkWidth" type="xs:string"/>
+                                    <xs:attribute name="checkHeight" type="xs:string"/>
+                                    <xs:attribute name="checkWidthReference" type="checkReference"/>
+                                    <xs:attribute name="checkHeightReference" type="checkReference"/>
+                                    <xs:attribute name="checkStop" type="checkStop"/>
                                   </xs:complexType>
                                 </xs:element>
                               </xs:sequence>
@@ -1105,6 +1120,21 @@
       <xs:enumeration value="separator"/>
       <xs:enumeration value="checkWidth"/>
       <xs:enumeration value="checkHeight"/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="checkReference">
+    <xs:restriction base="xs:string">
+      <xs:pattern value="[1-9]+[0-9]*&lt;\*&gt;[1-9]+[0-9]*"/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="checkStop">
+    <xs:restriction base="xs:unsignedInt">
+      <xs:enumeration value="0"/>
+      <!--No-->
+      <xs:enumeration value="1"/>
+      <!--Yes-->
+      <xs:enumeration value="2"/>
+      <!--With Confirmation-->
     </xs:restriction>
   </xs:simpleType>
 </xs:schema>
